@@ -4,70 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEBD2C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:04:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8089BC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BC2988976;
-	Fri, 14 Jun 2024 08:04:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C668E8897A;
+	Fri, 14 Jun 2024 08:12:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IvVJrccE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uFyOY2lF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FF5D87DD3; Fri, 14 Jun 2024 08:04:42 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1D7C58897B; Fri, 14 Jun 2024 08:12:50 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8C878897E
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:04:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E896B88315
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:12:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45E64bMS075287;
- Fri, 14 Jun 2024 01:04:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718345077;
- bh=SyzuxRi3Fb0rDizoYlYr+2qqTnTitkxEtm7JnfKtZH4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=IvVJrccExQw5GxMC1H5fp7frmafb20WPMkn2mWFKJr/zQNTfdIV35+7Y5YyLbbeRG
- RXuRXl7ANr/8FdMud8c6idZGhu6v0DerLLcaW9zWSuO2f1gITy5EM4PNzN4wVQcIEn
- nBjjZRY8Esfgmf3F9GcgqDTydyal/uUgJGdr0MXA=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45E64bhj019984
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Jun 2024 01:04:37 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Jun 2024 01:04:37 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Jun 2024 01:04:36 -0500
-Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45E64aYE011361;
- Fri, 14 Jun 2024 01:04:36 -0500
-Date: Fri, 14 Jun 2024 11:34:35 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Robert Nelson <robertcnelson@gmail.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vibhore Vardhan
- <vibhore@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Nishant Menon
- <nm@ti.com>, <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>,
- Judith Mendez <jm@ti.com>
-Subject: Re: [PATCH] board: beagleplay: Fix the bootpart to pick from root
- partition
-Message-ID: <20240614060435.ema3wczc7r7tgetu@dhruva>
-References: <20240613080604.3828083-1-d-gole@ti.com>
- <CAOCHtYjAFE0sbyYRXnbsv9EohNfH99vsuVYiZbi2Ami_xdoxWw@mail.gmail.com>
- <CAOCHtYi7vjHeCcUzgDBkayGx9W3gR6MT==8ASf+7524pu21Vbw@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1f700e4cb92so16419495ad.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:12:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718345565; x=1718950365; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ako4YZ9l/7j0W0fC5qO4KU++9BbsAhYOrEzYGMuDRRE=;
+ b=uFyOY2lFuhW/4Zj53HFrCtpvxs08yRdCBUcb6nbcOSkGMHZIrHuaYnFkFlHFXPsFv3
+ dWKmHiJtfVcTnmZb7N1E2Yk/X+SHNssmETDE2aBDQgvssPVDcR64R3xzZvERgz/9clEX
+ MoylLGLCXQwRafP/CGs2jwWsA2oxyDrGasu7AauW1W+OT43IHY+ARvO5p/Rm7iXUcyeq
+ MWA29obOl2o9hJwxFhp4vi208xkLup2gY9ZT0jJKS3PBDfO2ALQlzwQpdURpeTGY8i6u
+ kklEox/tPulLCvTtZa6RmeNMc7jhSYK21UXWOWt9YVjPPsDIOXlBy2KidOTfpcGuuV36
+ pDBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718345565; x=1718950365;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ako4YZ9l/7j0W0fC5qO4KU++9BbsAhYOrEzYGMuDRRE=;
+ b=CVd3wmiKEOcwImezECm7p4HKwJrvb9YauP3BTDT/oOe3ghGVdscH/8EkW2xpJZDInB
+ ipEl+uSoH8JzQPPyk6g+7mY8FtcIJDDPbx7D6LExhtTnkOht+Swe0DGYlC+NKWP/1T51
+ rf/Gzlbt5JlTFKdwwRhOea/qpUE2ObRTzSLT0TwrgSNNMUSwq3nY8l+rrkuR1jH7yO65
+ wfc/Fu/BsBoICGnRM5ojpq4mFTp/t1iso8XTUcW/pf0G7m4m2Zh3LGeRePYX+/wed39A
+ QPGFjTVSvQlZBjsOeJFqDh/yGMxr+GhRakBHBu93b4jx2D1XdpPI7+ijKYsb6xho+wzx
+ U11g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXpSxDgBFaZLvuJ3D2Tu15ROVLwSV53tgksEpyb4gmlF7iqQY/QsIY//8osUXUdI7ISntZPpNvV8bTHPLiRXInX49GQZA==
+X-Gm-Message-State: AOJu0YwUIo0KS9NocQnkufXZAyrtGqkPbuPkZEZws3F9ZcpDZmcaab6y
+ ycK5vCGKnHqG3gjgL2Pi0MbcWKQx+E9bBAp/ojKASsBVhNknm2lCZYg+lLKENdoqtv1OKC+9Ysu
+ u/2L3HxC1dl/39O+vAi+QQ+a3M73TBlKdYTPY0g==
+X-Google-Smtp-Source: AGHT+IGdDUYNFYyfVsgWRFYQjrB3RWSSy3nycfH5MYWdey0RUaC7kLV+rfchJ/bPa9Rbt9fuVQ94MCJ9MQ9hXxPi638=
+X-Received: by 2002:a17:902:ced0:b0:1f4:b9d3:adce with SMTP id
+ d9443c01a7336-1f8625d39abmr23109445ad.27.1718345565420; Thu, 13 Jun 2024
+ 23:12:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOCHtYi7vjHeCcUzgDBkayGx9W3gR6MT==8ASf+7524pu21Vbw@mail.gmail.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240613202753.2528889-1-j-humphreys@ti.com>
+In-Reply-To: <20240613202753.2528889-1-j-humphreys@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 14 Jun 2024 09:12:09 +0300
+Message-ID: <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] scripts/Makefile.lib: EFI: Use capsule CRT instead
+ of ESL
+To: Jonathan Humphreys <j-humphreys@ti.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Wei Ming Chen <jj251510319013@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Joshua Watt <jpewhacker@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Sean Anderson <seanga2@gmail.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,38 +101,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Robert,
+Hi Jonathan
 
-On Jun 13, 2024 at 16:51:24 -0500, Robert Nelson wrote:
-> On Thu, Jun 13, 2024 at 4:47 PM Robert Nelson <robertcnelson@gmail.com> wrote:
-> >
-> > On Thu, Jun 13, 2024 at 3:06 AM Dhruva Gole <d-gole@ti.com> wrote:
-> > >
-> > > The Kernel Image and DTB files are supposed to be picked from the rootfs
-> > > of the SD Card, this fails in legacy boot flow because bootpart is set
-> > > to 1:1. Fix it.
-> >
-> > and where is that rule defined?
-> >
-> > Production boards ship with Kernel Image and DTB's in the 1st fat partition..
-> 
-> Besides, u-boot should scan for extlinux.conf on "any" partition.
+On Thu, 13 Jun 2024 at 23:28, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+>
+> Use the capsule's public key certificate rather than a prebuilt ESL
+> generated from the certificate. The ESL is now generated as part of the
+> build.
 
-I can see where you come from, and I agree on the above points when it
-comes to stdboot.
-However when a user wishes to use legacy boot, and in the case there
-isn't extlinux.conf in such a case u-boot will rely on information in
-the env file (please correct me if my understanding is wrong).
+Is there a reason to do this? I understand that the .crt extension
+might be well known while the .esl is not, but OTOH the system you
+build on after this change *needs* to have cert-to-efi-sig-list
+installed
 
-The env file says:
-bootdir=/boot
-
-Thus u-boot ends up looking for Image and dtb in /boot/Image under BOOT
-partition, and ultimately fails, because the /boot/Image path is
-generally found inside the root partition ie. 1:2
-
-The idea of this patch is to keep support for such legacy boot alive, if
-you feel there's another way to do this feel free to suggest.
-
---
-Dhruva
+Thanks
+/Ilias
+>
+> Changes from v1:
+> - Converted the single patch to a series to include a bug fix found during
+>   development.
+> - Created an explicit rule for creating the ESL file for proper makefile
+>   dependency tracking.  v1 had combined creating the ESL file and
+>   generating the .dtsi include in a single command.
+>
+> Jonathan Humphreys (2):
+>   scripts/Makefile.lib: fixes: Embed capsule public key in platform's
+>     dtb
+>   scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file
+>
+>  board/sandbox/capsule_pub_esl_good.esl | Bin 831 -> 0 bytes
+>  configs/sandbox_defconfig              |   2 +-
+>  configs/sandbox_flattree_defconfig     |   2 +-
+>  doc/develop/uefi/uefi.rst              |   8 ++++----
+>  lib/efi_loader/Kconfig                 |  12 +++++++-----
+>  scripts/Makefile.lib                   |  24 +++++++++++++++---------
+>  6 files changed, 28 insertions(+), 20 deletions(-)
+>  delete mode 100644 board/sandbox/capsule_pub_esl_good.esl
+>
+> --
+> 2.34.1
+>
