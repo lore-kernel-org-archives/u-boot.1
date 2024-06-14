@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34F7C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:38:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42874C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:38:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4719788A50;
+	by phobos.denx.de (Postfix) with ESMTP id B573188A5B;
 	Fri, 14 Jun 2024 18:36:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nB2aDSdl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TZqjIH3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3694D88A6B; Fri, 14 Jun 2024 18:36:13 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 966E488A6B; Fri, 14 Jun 2024 18:36:13 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC5B088A2F
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EB2988A30
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsP2058032;
- Fri, 14 Jun 2024 11:35:54 -0500
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrnL008057;
+ Fri, 14 Jun 2024 11:35:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718382954;
- bh=0GtHQGA2kUXktpFxTlinblTpTJbwdC8gOsqDp8qAUVo=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=nB2aDSdlsYIlQWzRDAlX6UCPEFgl8zZApDzal9DbULAR+CT2qOgAII1l785j8agml
- UFsgBtUbQxOP/isvu0hWMt7yAsHm/hB4uVLlndlBB2SOZEdbhckJwVSMHw9WOjs3hP
- tsDxC1rsZlkQw1Zdrw5ot+Uaf0/170YWzPAG8k3A=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZsbT061985
+ s=ti-com-17Q1; t=1718382953;
+ bh=H2Lb/V/vNVdhZd3YHXlP/yRM+G0Ft9Y8cBbQZqYsfTY=;
+ h=From:To:CC:Subject:Date;
+ b=TZqjIH3PGrU8YKnVZ5RcZPetSioW1otVdxsmBQ3WUBe379IPpANbch0444qSmX9GN
+ lc9w8N8Hv6vypURMs1/avLZlPmoRHecym62AyRsCOqhgen9DNcVQoPHDUW/BZ0YoZE
+ hp05rLzMfMeYirMVt8J3chUTlgNi2pJDHlPW6uc8=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZrYR061982
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Jun 2024 11:35:54 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 14 Jun 2024 11:35:53 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
  Jun 2024 11:35:53 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 14 Jun 2024 11:35:53 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrdu124096;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrg4124087;
  Fri, 14 Jun 2024 11:35:53 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,12 +67,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v7 07/24] board: j721e: Define capsule update firmware info
-Date: Fri, 14 Jun 2024 11:35:34 -0500
-Message-ID: <20240614163551.2610212-8-j-humphreys@ti.com>
+Subject: [PATCH v7 00/24] EFI: ti: Enable EFI capsule updates
+Date: Fri, 14 Jun 2024 11:35:27 -0500
+Message-ID: <20240614163551.2610212-1-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240614163551.2610212-1-j-humphreys@ti.com>
-References: <20240614163551.2610212-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -93,115 +91,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Define the firmware components updatable via EFI capsule update, including
-defining capsule GUIDs for the various firmware components for the
-SK-TDA4VM.
+Enable on disk capsule updates, which includes defining the firmware
+components (tiboot3, spl, u-boot) and enabling processing of raw capsule
+updates.
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- board/ti/j721e/evm.c        | 40 +++++++++++++++++++++++++++++++++++++
- include/configs/j721e_evm.h | 29 +++++++++++++++++++++++++++
- 2 files changed, 69 insertions(+)
+This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
+AM69, BeaglePlay, J7, and BeagleboneAI. The configs to enable this are in a
+single base config file. This will make it more scalable to add additional
+EFI capsule features (like authentication) across all TI boards that have
+capsules enabled.
 
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 539eaf47186..f3452ff0a8f 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -7,6 +7,7 @@
-  *
-  */
- 
-+#include <efi_loader.h>
- #include <generic-phy.h>
- #include <image.h>
- #include <net.h>
-@@ -32,6 +33,45 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+struct efi_fw_image fw_images[] = {
-+	{
-+		.image_type_id = J721E_SK_TIBOOT3_IMAGE_GUID,
-+		.fw_name = u"J721E_SK_TIBOOT3",
-+		.image_index = 1,
-+	},
-+	{
-+		.image_type_id = J721E_SK_SPL_IMAGE_GUID,
-+		.fw_name = u"J721E_SK_SPL",
-+		.image_index = 2,
-+	},
-+	{
-+		.image_type_id = J721E_SK_UBOOT_IMAGE_GUID,
-+		.fw_name = u"J721E_SK_UBOOT",
-+		.image_index = 3,
-+	},
-+	{
-+		.image_type_id = J721E_SK_SYSFW_IMAGE_GUID,
-+		.fw_name = u"J721E_SK_SYSFW",
-+		.image_index = 4,
-+	}
-+};
-+
-+struct efi_capsule_update_info update_info = {
-+	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
-+	"tispl.bin raw 80000 200000;u-boot.img raw 280000 400000;"
-+	"sysfw.itb raw 6C0000 100000",
-+	.num_images = ARRAY_SIZE(fw_images),
-+	.images = fw_images,
-+};
-+
-+#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
-+void set_dfu_alt_info(char *interface, char *devstr)
-+{
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		env_set("dfu_alt_info", update_info.dfu_string);
-+}
-+#endif
-+
- int board_init(void)
- {
- 	return 0;
-diff --git a/include/configs/j721e_evm.h b/include/configs/j721e_evm.h
-index c26438c8684..a5140ea6a11 100644
---- a/include/configs/j721e_evm.h
-+++ b/include/configs/j721e_evm.h
-@@ -22,6 +22,35 @@
- #define CFG_SYS_UBOOT_BASE		0x50080000
- #endif
- 
-+/**
-+ * define J721E_SK_TIBOOT3_IMAGE_GUID - firmware GUID for J721e sk tiboot3.bin
-+ * define J721E_SK_SPL_IMAGE_GUID     - firmware GUID for J721e sk SPL
-+ * define J721E_SK_UBOOT_IMAGE_GUID   - firmware GUID for J721e sk UBOOT
-+ * define J721E_SK_SYSFW_IMAGE_GUID   - firmware GUID for J721e sk SYSFW
-+ *
-+ * These GUIDs are used in capsules updates to identify the corresponding
-+ * firmware object.
-+ *
-+ * Board developers using this as a starting reference should
-+ * define their own GUIDs to ensure that firmware repositories (like
-+ * LVFS) do not confuse them.
-+ */
-+#define J721E_SK_TIBOOT3_IMAGE_GUID \
-+	EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
-+		 0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
-+
-+#define J721E_SK_SPL_IMAGE_GUID \
-+	EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
-+		 0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
-+
-+#define J721E_SK_UBOOT_IMAGE_GUID \
-+	EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
-+		 0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
-+
-+#define J721E_SK_SYSFW_IMAGE_GUID \
-+	EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
-+		 0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
-+
- /* Now for the remaining common defines */
- #include <configs/ti_armv7_common.h>
- 
+This series also includes enabling serial flash DFU for AM62 and MMC DFU
+for beagleplay.
+
+Changes from v1:
+- Added sysfw.itb capsule definition to beagleboneai64
+- removed extra commas in structure definitions
+
+Changes from v2:
+- Added documentation on OSPI flash layouts
+- Improved comments for capsule GUIDs definitions
+- Defined board unique capsule GUIDs and put definitions in board specific
+  files
+- Added a Capsule Update porting section to the documentation
+
+Changes from v3:
+- Added better commit messages based upon checkpatch warnings.
+- Remove conditional inclusion of capsule update firmware info
+- Converted OSPI layout diagram to svg format
+Link to v3: https://lore.kernel.org/r/20240419205701.163821-1-j-humphreys@ti.com
+
+Changes from v4:
+- Added am69 SK board
+- Corrected a few spelling mistakes and clarity improvements in k3 docs
+  section
+- Added CONFIG_SET_DFU_ALT_INFO guard around set_dfu_alt_info()
+Link to v4: https://lore.kernel.org/r/20240509164123.1753050-1-j-humphreys@ti.com
+
+Changes from v5:
+- Created an EFI capsule base config for TI boards, making adding
+  additional capsule features on TI boards more scalable.
+Link to v5: https://lore.kernel.org/r/20240531222118.2618041-1-j-humphreys@ti.com
+
+Changes from v6:
+ - Rebased on latest -next
+ - added tags
+ Link to v6: https://lore.kernel.org/r/20240607223858.1971290-1-j-humphreys@ti.com
+
+Jonathan Humphreys (24):
+  doc: uefi: capsules: Add Capsule Update porting section
+  doc: ti: k3: Correct spelling mistakes and improve clarity
+  configs: ti: Create base EFI capsule configs for TI K3 devices
+  board: am64x: Define capsule update firmware info
+  configs: am64x: Enable EFI capsule update
+  doc: board: ti: am64x: document OSPI layout
+  board: j721e: Define capsule update firmware info
+  configs: j721e: Enable EFI capsule update
+  doc: board: ti: j721e: document OSPI layout
+  board: beagleplay: Define capsule update firmware info
+  configs: beagleplay: Enable DFU for MMC
+  configs: beagleplay: Enable EFI capsule update
+  board: am62x: Define capsule update firmware info
+  configs: am62x: Enable EFI capsule update
+  doc: board: ti: am62x: document OSPI layout
+  board: am62px: Define capsule update firmware info
+  configs: am62px: Enable EFI capsule update
+  doc: board: ti: am62px: document OSPI layout
+  board: beagleboneai64: Define capsule update firmware info
+  configs: beagleboneai64: Enable EFI capsule update
+  configs: j784s4_evm: Enable serial flash DFU support
+  board: sk-am69: Define capsule update firmware info
+  configs: j784s4: Enable EFI capsule update
+  doc: board: ti: j784s4: document OSPI NOR layout
+
+ board/beagle/beagleboneai64/Kconfig          |    4 +-
+ board/beagle/beagleboneai64/beagleboneai64.c |   39 +
+ board/beagle/beagleplay/Kconfig              |    4 +-
+ board/beagle/beagleplay/beagleplay.c         |   34 +
+ board/ti/am62px/evm.c                        |   34 +
+ board/ti/am62x/evm.c                         |   34 +
+ board/ti/am64x/evm.c                         |   34 +
+ board/ti/j721e/evm.c                         |   40 +
+ board/ti/j784s4/evm.c                        |   34 +
+ configs/am62px_evm_a53_defconfig             |    2 +
+ configs/am62x_beagleplay_a53_defconfig       |    4 +
+ configs/am62x_evm_a53_defconfig              |    1 +
+ configs/am64x_evm_a53_defconfig              |    2 +
+ configs/j721e_beagleboneai64_a72_defconfig   |    2 +
+ configs/j721e_evm_a72_defconfig              |    2 +
+ configs/j784s4_evm_a72_defconfig             |    5 +
+ configs/k3_efi_capsule.config                |    2 +
+ doc/board/ti/am62px_sk.rst                   |   24 +
+ doc/board/ti/am62x_sk.rst                    |   24 +
+ doc/board/ti/am64x_evm.rst                   |   24 +
+ doc/board/ti/img/ospi_sysfw-am64.svg         |  802 ++++++++++
+ doc/board/ti/img/ospi_sysfw.svg              | 1464 ++++++++++--------
+ doc/board/ti/img/ospi_sysfw2.svg             |  802 ++++++++++
+ doc/board/ti/img/ospi_sysfw3.svg             |  802 ++++++++++
+ doc/board/ti/j721e_evm.rst                   |   58 +-
+ doc/board/ti/j784s4_evm.rst                  |   28 +
+ doc/board/ti/k3.rst                          |   10 +-
+ doc/develop/uefi/uefi.rst                    |   12 +
+ include/configs/am62px_evm.h                 |   24 +
+ include/configs/am62x_evm.h                  |   24 +
+ include/configs/am64x_evm.h                  |   24 +
+ include/configs/beagleboneai64.h             |   55 +
+ include/configs/beagleplay.h                 |   41 +
+ include/configs/j721e_evm.h                  |   29 +
+ include/configs/j784s4_evm.h                 |   24 +
+ 35 files changed, 3864 insertions(+), 684 deletions(-)
+ create mode 100644 configs/k3_efi_capsule.config
+ create mode 100644 doc/board/ti/img/ospi_sysfw-am64.svg
+ create mode 100644 doc/board/ti/img/ospi_sysfw2.svg
+ create mode 100644 doc/board/ti/img/ospi_sysfw3.svg
+ create mode 100644 include/configs/beagleboneai64.h
+ create mode 100644 include/configs/beagleplay.h
+
 -- 
 2.34.1
 
