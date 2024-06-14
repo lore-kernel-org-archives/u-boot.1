@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B0EC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8B0C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:18:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD08888897;
-	Fri, 14 Jun 2024 14:14:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AFFCA87D4F;
+	Fri, 14 Jun 2024 14:18:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZqrcZ8nS";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gdiVW/DN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D32F8891B; Fri, 14 Jun 2024 14:14:17 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7044287D6B; Fri, 14 Jun 2024 14:18:37 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AABE881BF
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:14:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6612686784
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:18:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4218180a122so15280655e9.1
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 05:14:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718367254; x=1718972054; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xK7vL0jPjFD9RiwkpQoc1PmvMEUlR7DyBTLQ20rsSc4=;
- b=ZqrcZ8nSqaOyVAaf4vSgTZLlU5IwZVYXweZNaDYemPrGlbULsYKTw/buYa3yXTj24U
- sX4RRJufgfDyYrti6GAyhu7jAjlv+4gOoCqR97WMbwrP411rO/FAgVupXOtR37kYOcgA
- MTSC4Adxlzs077q6SWcuW5x+8GcyErdGlFzM/4tm+KJ5XeRH1sBK9Er9Ag/GSuefKf9v
- WfwFHS0S6vN9bQzPJ+CTB3r3OXohWC1070qwj1Vdoi3lSdWL3FKkX4NGmZLl02L6QF1L
- KGS9oBWPqhFH0rzSEaB2As7N8sLuf8Slxr7me7aF+BjkKKNqCdGZlBIjHdaQero8M3JH
- t7dQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718367254; x=1718972054;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xK7vL0jPjFD9RiwkpQoc1PmvMEUlR7DyBTLQ20rsSc4=;
- b=Z6wrNHOTeHFi3w4WnCskQIXLCZUufVb0v1DQNnxJie9+KVy+A7glufvIMz2THnW03D
- pMzQkV1hcG4lCmA0xxtnuEYbwCE8/TW+nS0t1DzZ/ARIqX2TUB6MC21siTWdYgIrjMBX
- LsR2T6/sTqbwlkoeQKCT0yT0RduIFY4hezv+9OytKvv/M90viWw/jppXnSvM1JjXddw+
- chpQzgnBLujyogAKW9FfGf8TZzQbWZX7ZXF0AzOCdHE23FO+x3z/rGW+aKJWBnSQK5jF
- FXfEc5IYW3LCeOW9ZiYKKw9hBtKVh1r+aubNHBB8y2CGbkAdBzwl4Ql9jvzsis1kZo3B
- L/JQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlq2gWblz/v4cFlPpeNZzIfCJ4uprlNc7lxB2+bwaCiEc6nVNXWSPJTp9WpWN6emtKNVnoIrFcGUxWfxzaV95t4r1X0Q==
-X-Gm-Message-State: AOJu0YzLsG4c1CM7y9NyosFQ2YoaCYaXNL1xaqptRKjRSpuNKklMcdwt
- 48d5xF8v9WvIDDZvCXVATiyjAw3IVFe5s32PmZgqZZspD/KCPJBj7r6naKyb7Aw=
-X-Google-Smtp-Source: AGHT+IEc4thnlFng1pzrZ2LDXKRMjYUF/5N5q2LGSyHlHhxhokGJgu5d6+uxYeEgQJ6O5oJb9TAvRQ==
-X-Received: by 2002:a05:600c:33a2:b0:421:5597:ea27 with SMTP id
- 5b1f17b1804b1-42304828e19mr26842485e9.22.1718367254486; 
- Fri, 14 Jun 2024 05:14:14 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
- [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f61280f6sm59261255e9.27.2024.06.14.05.14.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 05:14:13 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
-Subject: [PATCH v2] doc: describe UEFI measured boot
-Date: Fri, 14 Jun 2024 15:14:03 +0300
-Message-ID: <20240614121404.16952-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718367510; x=1718972310; i=xypron.glpk@gmx.de;
+ bh=vLHopmAh2dQW/EVksFa0F3oj13SSTpZn+jedBQPeTdE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=gdiVW/DN+ti4ghRX7bebVzC70ZvI2P/XYyVoEmkJAhuZQDKmcJFol0uEgUTyligy
+ mm6Pmt9e9Bd9S8V9h8rcq/X3okBrLA46yvy88lxDAcboqAoC+I6KCywLicT/w562s
+ zm1UP6ffjKPJi6dIjWDBiJ676pMzS8N8bh8LHxSEtup7QuZJbgdT3qyNVykTlKs+/
+ zwXfWt6wDR3wDktyapmbtuhOA0RD4pSG7tt59eXxN6Ku8XgI+VSX5Pw0qiEjAaDKq
+ 48lWaQB6xe78KPInQkritqCx8+tBVX8iPoWvNwWHGvBLH9R4Sb6vw7cFjO4ea1Dhq
+ MPeqF08sB7YpLB0sOw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mi2Nv-1sw5Op05Mf-00fdy4; Fri, 14
+ Jun 2024 14:18:30 +0200
+Message-ID: <b9d80a2f-0fb9-4219-9c86-aa818d7707e2@gmx.de>
+Date: Fri, 14 Jun 2024 14:18:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: describe UEFI measured boot
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ heinrich.schuchardt@canonical.com
+References: <20240614094031.6013-1-ilias.apalodimas@linaro.org>
+ <ab7c6516-8d03-4561-b4e7-f619799416ba@gmx.de>
+ <CAC_iWj+GiFYktbALOd+mZGqPLwe+-+tD_e3MC4E1W=3=mXqz9Q@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWj+GiFYktbALOd+mZGqPLwe+-+tD_e3MC4E1W=3=mXqz9Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:w0GcIGARIoVAAW+FP+kWrBHsyqQgQkyfLg6opCTyqUJ4833TIfe
+ ft6gYrgCgFdfr21P1gnuhFGGZD/xu6bi1HmSIyJI2KxLlDgxwc6cPYG6y5sKDV427WaZtl9
+ OMLUWFifMj21eHnvg7PJb4fBpZnD7dC9tTQhjXtqfPUPziLo+zl8D/70WEfs9RiEZBfPH20
+ suFaBcAzIayJX26ag/THw==
+UI-OutboundReport: notjunk:1;M01:P0:nMgw9YRXiPU=;l09H0vggnpJ4hKMrvCezwZcQve9
+ KBw9NvijitdVxJKwMQuNO5pCtIWGxIo+5b6MaEWA07SMhoeINs75gf4CXWKelH5u0mbp24t9N
+ 9yp0/V0rBYPsC1rUI5Gzk6Hf74RajnbgzB6Ek10pZ8tGsvVPYAybnFPJ2ByLbssE+08Jl3AEX
+ xo9HKob8BKEPHmpx1bDtevn0D12JBygM9H3RoUo5YaXPLlP3YTW4cXdQhK13zabTGXoEXuOVe
+ H+HOUxOAFKvL14SlbMWCH3YHiKC+lezKuf+zzFNsxN83b4GWSFdA+nmjDEsIKFvAG5sDPWQqE
+ kdXZoOBS//GC8BSR/Nbr4P2I3ibtpxJqLUsnpOqDY5WBQ9cCgKCnqsTfKy9RH3Kugn/m3+LN0
+ EiT7b+/if8rBoivSWAOkhu/++uK6/rLM1Utm5NfacWw3ORe3N1bimdxUtx/00/JgP1Ggay/zn
+ sn+FJ+lsSl2CUkYatKX8+9mFqbm5RoDaslXcC5Y4sOgOVoRg/tmhmYrpAp/3lDThBqDoiQUCt
+ qohpEq85RqTtIrtqgd3VgJh+pkLRtidZW8VrKQV4s0//64Cy80FRVuH6cIuYZLvpaoM2IaUb1
+ 3jUkqJ1ThymCATiQ8aOZxi2ni/LtD2m97OIz9A/t6aQqajovY+vFIZ2xCxQP+pPUX5o0Q9dDj
+ UH1/c1WApEQscu/FczHaiHhKNriI0ntI2MZzWLNAdvREmhf1ihZQgAYg4ENDIVrP8lNhq1rIA
+ sSSXS8nlDfEI8R8Cnyg/IyDfEymSBblJpZofBu2PLo8KJgs5cd0/fDvt26Hc1E7OL3cDRQXJN
+ 0DSdhujgLpuDnd4xWSlFUwMUBBKE5okW2LVKk4CNrGVYI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,64 +93,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We currently only describe the process to enable measured boot using
-bootm. Describe the UEFI requirements as well which predate bootm.
+On 14.06.24 12:47, Ilias Apalodimas wrote:
+> [...]
+>
+>>
+>>> +
+>>> +UEFI requirements
+>>> +~~~~~~~~~~~~~~~~~
+>>> +* A hardware TPM 2.0 supported by the U-Boot drivers
+>>
+>> by an enabled U-Boot driver.
+>>
+>>> +* CONFIG_EFI_TCG2_PROTOCOL=3Dy
+>>> +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=3Dy
+>>> +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=3Dy will measure the =
+loaded DTB in PCR 0
+>>
+>> Why does this setting not default to yes?
+>>
+>> Should EFI_TCG2_PROTOCOL_MEASURE_DTB depend on !GENERATE_ACPI_TABLE as
+>> we won't load the device-tree in this case?
+>>
+>> I can't find any reference to device-trees in `TCG PC Client Platform
+>> Firmware Profile Specification`.
+>
+> It's not and I've already pointed this out to Arm. We followed what
+> ACPI does there and used "DTB DATA" instead of "ACPI DATA" as the
+> event string.
+>
+>>   Where is PCR 0 for the device-tree specified?
+>
+> As I said DT is missing from the spec but look below
+>
+>> I read:
+>>
+>> "In general, the platform firmware measures into PCR[1] the
+>> configuration data that is associated with the code that measured into
+>> PCR[0]".
+>>
+>> This looks like PCR 1 should be the target for the device-tree.
+>
+> There is a description for ACPI in 3.3.4.1 PCR[0] =E2=80=93 SRTM, POST B=
+IOS,
+> and Embedded Drivers and they explicitly mention ACPI in there.
+> There's no mention of ACPI in 3.3.4.2 PCR[1] =E2=80=93 Host Platform
+> Configuration.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes since v1:
-- fixed remarks from Heinrich on titling and DTB measured PCR
- doc/usage/measured_boot.rst | 28 ++++++++++++++++++++++++----
- 1 file changed, 24 insertions(+), 4 deletions(-)
+3.3.4.1 "PCR[0] =E2=80=93 SRTM, POST BIOS, and Embedded Driver" covers usa=
+ge of
+EV_POST_CODEs for different PCRs.
 
-diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-index 9691904a9d8a..b5f7b05aeb02 100644
---- a/doc/usage/measured_boot.rst
-+++ b/doc/usage/measured_boot.rst
-@@ -7,19 +7,39 @@ U-Boot can perform a measured boot, the process of hashing various components
- of the boot process, extending the results in the TPM and logging the
- component's measurement in memory for the operating system to consume.
+EV_POST_CODE is deprecated. That one could be used for ACPI_DATA.
 
-+The functionality is available when booting via the EFI subsystem or 'bootm'
-+command.
-+
-+UEFI measured boot
-+------------------
-+The EFI subsystem implements the `EFI TCG protocol
-+<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/>`_
-+and the `TCG PC Client Specific Platform Firmware Profile Specification
-+<https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/>`_
-+which defines the binaries to be measured and the corresponding PCRs to be used.
-+
-+Requirements
-+~~~~~~~~~~~~
-+* A hardware TPM 2.0 supported by an enabled U-Boot driver
-+* CONFIG_EFI_TCG2_PROTOCOL=y
-+* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
-+* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB in PCR 1
-+
-+Measured legacy boot with bootm command
-+----------------------------------------
- By default, U-Boot will measure the operating system (linux) image, the
- initrd image, and the "bootargs" environment variable. By enabling
--CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image.
-+CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image in PCR1.
+EDK II:
 
- The operating system typically would verify that the hashes found in the
- TPM PCRs match the contents of the event log. This can further be checked
- against the hash results of previous boots.
+SecurityPkg/Tcg/Tcg2Acpi/Tcg2Acpi.c:660,
+SecurityPkg/Tcg/TcgSmm/TcgSmm.c:379,
+UefiCpuPkg/Library/SmmCpuFeaturesLib/SmmStm.c:1226 measure with
+deprecated EV_POST_CODE, EV_POSTCODE_INFO_ACPI_DATA to PCR[0]. This
+seems to include a measurement of the ACPI TPM2 table.
 
- Requirements
--------------
-+~~~~~~~~~~~~
+OvmfPkg/AcpiPlatformDxe/QemuFwCfgAcpi.c:426 measures with
+EV_PLATFORM_CONFIG_FLAGS, EV_POSTCODE_INFO_ACPI_DATA to PCR[1].
 
--* A hardware TPM 2.0 supported by the U-Boot drivers
--* CONFIG_TPM=y
-+* A hardware TPM 2.0 supported by an enabled U-Boot driver
-+* CONFIG_TPMv2=y
- * CONFIG_MEASURED_BOOT=y
- * Device-tree configuration of the TPM device to specify the memory area
-   for event logging. The TPM device node must either contain a phandle to
---
-2.45.1
+MdeModulePkg/Universal/SmbiosMeasurementDxe/SmbiosMeasurementDxe.c:630
+measures SMBIOS with EV_EFI_HANDOFF_TABLES to PCR[1].
+
+>
+> However ..... In Figure 6 PCR Mapping of UEFI Components ACPI is shown
+> in PCR1 .....
+> I am not sure if we should use PCR0 or 1, if anyone has a strong
+> opinion we can easily change the measured PCR.
+
+According to the cited sentence PCR 1 would make most sense.
+
+>
+>>
+>> Do we already measure ACPI and SMBIOS tables into PCR1 as required by
+>> the specification.
+>
+> We do measure SMBIOS in PCR1. I don't think we do anything for ACPI.
+
+I guess the ACPI TPM2 table would be needed to access the TCG2 device
+(see TCG ACPI Specification).
+
+>
+>>
+>>> +
+>>> +bootm
+>>
+>> Measured legacy boot with bootm command
+>>
+>> Please, consider in your description that the bootm command may be used
+>> to load a FIT image with an EFI binary.
+>
+> I am not entirely sure how this works, someone who has used that needs
+> to update it. What happens in that case? Does bootm end up calling
+> bootefi ? That means we are measuring things twice?
+
+We measure only once:
+
+boot/bootm.c:925:
+
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Skip measurement if EF=
+I is going to do it */
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (images->os.os =3D=3D =
+IH_OS_EFI &&
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0    IS_ENABLED(CONFIG_EFI=
+_TCG2_PROTOCOL) &&
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0    IS_ENABLED(CONFIG_BOO=
+TM_EFI))
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0return ret;
+
+
+do_bootm_efi() calls efi_binary_run().
+
+Best regards
+
+Heinrich
+
+>
+>>
+>>> +-----
+>>>    By default, U-Boot will measure the operating system (linux) image,=
+ the
+>>>    initrd image, and the "bootargs" environment variable. By enabling
+>>>    CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree =
+image.
+>>> @@ -15,8 +35,8 @@ The operating system typically would verify that the=
+ hashes found in the
+>>>    TPM PCRs match the contents of the event log. This can further be c=
+hecked
+>>>    against the hash results of previous boots.
+>>>
+>>> -Requirements
+>>> -------------
+>>> +bootm requirements
+>>
+>> This is already a sub-section of bootm. No need to repeat it.
+>>
+>>> +~~~~~~~~~~~~~~~~~~
+>>>
+>>>    * A hardware TPM 2.0 supported by the U-Boot drivers
+>>
+>> by an enabled U-Boot driver.
+>>
+>>>    * CONFIG_TPM=3Dy
+>>
+>> CONFIG_TPM_V2=3Dy is required?
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>
+>
+> Thanks
+> /Ilias
+>>
 
