@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF51C27C75
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8341C41513
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:46:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDC3F889AB;
-	Fri, 14 Jun 2024 11:40:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 8821188996;
+	Fri, 14 Jun 2024 11:46:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4kYxOJf7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AnczyP2R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAA29889A7; Fri, 14 Jun 2024 11:40:38 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id A771187B30; Fri, 14 Jun 2024 11:46:36 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C50F18899F
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:40:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76C608899F
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:46:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E6IoPg010033;
- Fri, 14 Jun 2024 11:39:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- zWfTjPZseeHvFhTzLtyiqf9pGCoGPd3saR5Mkh5TfSI=; b=4kYxOJf7Vjbx/G22
- Zbs9T/e4kSwlBRwhzu0BnwLYL9lotiOtQuY1TOp7AGrkEa/jLM3qDIW8HTmNC3VU
- Tkq87A3gi19LU8GoHABYmx1ek1TlyjkbcIsnueaHQxUiJ2A2ZXouZxO/xZ0ZX6zD
- x8buOnmNmllFHlTWbrcYfqBZuiPkBvhnUC/MyGaogi+BExLe7yFw5VPwUiWTBkyI
- AnKDkgOYQPnsvtFNHD8L1T7U4AA/Af8VfyKEzUSsT0w9zZsxyrp61ZoNGcIwGJsZ
- U4k0Uvjggv/V813ZMiQie3xvUD1tqmxVEaUbc5/Iu0Je2RreZVg63zDhoRA1PzEx
- 0s7Z2A==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4fug1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 11:39:58 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 92BE840044;
- Fri, 14 Jun 2024 11:39:52 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D1B432115F9;
- Fri, 14 Jun 2024 11:39:26 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 11:39:26 +0200
-Message-ID: <52616208-fb42-479c-a9c5-4164c11d6d2c@foss.st.com>
-Date: Fri, 14 Jun 2024 11:39:25 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45E9kWKW081163;
+ Fri, 14 Jun 2024 04:46:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718358392;
+ bh=oBLNKJnLWCL8AwxZ9c9aVz1S3a1sLiYk6VWlCGrUZZk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=AnczyP2RZ+AdQT2k7kTRUeoMo1Gvc2ARjTe8wJsnOrm6u4KWBE63Xgd4/pzkhzGVw
+ BbodEkL55FteQb4YeoNbWJ3mw6OFtPHgV6vCioYtdogCkHcAbUggTh0hPYRPrPSaJA
+ QwS2XxZg7+zyYuxJe+4qkeaHAkTeCovembcbzv2U=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45E9kWdH043602
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 04:46:32 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 04:46:31 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 04:46:31 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45E9kV1M020233;
+ Fri, 14 Jun 2024 04:46:31 -0500
+Date: Fri, 14 Jun 2024 15:16:30 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Dhruva Gole <d-gole@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
+ <n-francis@ti.com>, Nishant Menon <nm@ti.com>,
+ <c-shilwant@ti.com>, <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>
+Subject: Re: [PATCH] arm: dts: k3-am625-beagleplay: Add symlinks for tiboot3
+ and tispl
+Message-ID: <20240614094630.pbkujnh6glttdu6d@uda0497581>
+References: <20240614084052.4029849-1-d-gole@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Fix livetree conversion on STM32MP15xx DHSOM
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240606130305.24563-1-marex@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240606130305.24563-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240614084052.4029849-1-d-gole@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,68 +82,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dhruva,
 
-
-On 6/6/24 15:02, Marek Vasut wrote:
-> Unlike fdt_node_check_compatible() which returns 0 if node is compatible,
-> ofnode_device_is_compatible() return true which is non-zero if node is
-> compatible. The intention of the code is to exit from the function in
-> case the node is not compatible with "micrel,ks8851-mll". Add the missing
-> invert into the conditional to reinstate original behavior.
+On 14:10-20240614, Dhruva Gole wrote:
+> Add symlinks for both tiboot3.bin and tispl.bin because a user has to
+> anyway rename these files to get the platform to boot up.
+> This just makes it more intuitive and convenient.
 > 
-> This exposes a follow up problem caused by conversion to DM based FMC2 EBI
-> driver, where the FMC2 EBI is not configured when accessed by this code.
-> Probe the KS8851 MAC, which also configures the FMC2 EBI as a dependency,
-> so that the KS8851 MAC CCR register can be accessed over the FMC2 EBI bus
-> and checked for EEPROM present bit.
-> 
-> Fixes: 5a605b7c8615 ("board: dhelectronics: stm32mp1: convert to livetree")
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Dhruva Gole <d-gole@ti.com>
 > ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  board/dhelectronics/dh_stm32mp1/board.c | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 1 +
+>  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 1 +
+>  2 files changed, 2 insertions(+)
 > 
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index ebd45f9053f..4f4f537fee5 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -76,14 +76,25 @@
+> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> index fb2032068d1c..bd48af8d186a 100644
+> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> @@ -71,6 +71,7 @@
 >  
->  static bool dh_stm32_mac_is_in_ks8851(void)
->  {
-> -	ofnode node;
-> +	struct udevice *udev;
->  	u32 reg, cider, ccr;
-> +	char path[256];
-> +	ofnode node;
-> +	int ret;
+>  	ti-spl_unsigned {
+>  		filename = "tispl.bin_unsigned";
+> +		symlink = "tispl.bin";
+>  		pad-byte = <0xff>;
 >  
->  	node = ofnode_path("ethernet1");
->  	if (!ofnode_valid(node))
->  		return false;
->  
-> -	if (ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
-> +	ret = ofnode_get_path(node, path, sizeof(path));
-> +	if (ret)
-> +		return false;
-> +
-> +	ret = uclass_get_device_by_of_path(UCLASS_ETH, path, &udev);
-> +	if (ret)
-> +		return false;
-> +
-> +	if (!ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
->  		return false;
->  
->  	/*
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>  		fit {
+> diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
+> index 9db58f093c8c..da6746e009d5 100644
+> --- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
+> +++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
+> @@ -79,6 +79,7 @@
+>  &binman {
+>  	tiboot3-am62x-gp-evm.bin {
+>  		filename = "tiboot3-am62x-gp-evm.bin";
+> +		symlink = "tiboot3.bin";
+>  		ti-secure-rom {
+>  			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
+>  				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
 
-Thanks
-Patrice
+Maybe do it for u-boot.img_unsigned as well, I see that also doesn't have a
+symlink.
+
+Regards,
+Manorit
+
+> 
+> base-commit: 1ebd659cf020843fd8e8ef90d85a66941cbab6ec
+> -- 
+> 2.34.1
+> 
