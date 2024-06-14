@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BD29C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:04:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFCCCC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:36:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C09FE88A11;
-	Fri, 14 Jun 2024 18:04:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EAD1B88A24;
+	Fri, 14 Jun 2024 18:36:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HriMjwmC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EA0BfMbz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97BC488A1A; Fri, 14 Jun 2024 18:04:55 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 24EA888A05; Fri, 14 Jun 2024 18:36:06 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B7D9889FB
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:04:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28B4C889AE
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-6fed6e899cfso22295a12.3
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 09:04:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718381092; x=1718985892; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WfvDqBgq45MSE/U/XZPikqIIbPMdseivuCznFA9F2yk=;
- b=HriMjwmCbP4NdXkwYr4pZH2QpLLiTYK66nnOTk/PQoz6K2XuuMyt0gQ7XFcUvxMMw5
- DkqwrsZTlLKBxycPD5U4XN9/5y8lXQUsiZQt+eH6HXwj6ynFO9vPmu62c8mb+xVo2DN/
- 9TlB0fAK9P2c1beGgM3Gv1Qs54fz+8NTtsKxbRtdIZ5FUJ4ROwTaUNeBZUhn3Gb4uOdM
- GTEa0m2q0MysXirl5bzRcI5q404+cjDSA2xa35MEU95+QLvgPOIjdINWHIpwfqHzV27K
- 2BcPgAnzQm7LbBhGbsfU/ugGHoSEX8F4F1hvOoLGTyYtUTqBsnEh+Pf6pN7SescXPt1c
- yfSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718381092; x=1718985892;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WfvDqBgq45MSE/U/XZPikqIIbPMdseivuCznFA9F2yk=;
- b=qlSYZZZUFBX06nQ5vq6Gq0V8MCIV57/UZAMsXu/+MOdbCurPl7ObWsjBRPSKLJgfmo
- lcy3xqs71tizOp6vYf9YXaq+S5ujpJnUNGDRfQ6Zs226L0p9ZsE9HpW5U0b1Y/QdnDtU
- o2AG34f6rNwxtB+bjziqZXiLyQVQq5YnYpA41kSCYM9MbZD3FKNli58KNxuikqXozkfA
- rod9bRvGyESKBMeddqN5oNy1YeIp8xA5giuRnUqdTP+r4QAGfS4mmczugywnb6mVXev9
- QaAzQTdwWcmv2uKTYuF2jBkr80A7lWV6a1+wQ5/vtNJrxDdZC3o+wU7j5WSQj+2Jg/i/
- sw8A==
-X-Gm-Message-State: AOJu0YwdQvh7DL4aiVjThfBIwnijsANWAskR6jZ6LK9RK9BmRiMHwbmM
- U/5hBIxeCmERe5UiLx9l4H3+78HFFotN29X4lQZXepNQGx09egbqq8VQsA==
-X-Google-Smtp-Source: AGHT+IF3X+5xhwP0R56VVCjkzwRDEOFiWsCoC1p63ChEcR6YhANHZwZLyAYf+Epbx2h6q/nqivlTSw==
-X-Received: by 2002:a05:6a21:32a5:b0:1b6:fadd:8862 with SMTP id
- adf61e73a8af0-1bae84aaef3mr3418611637.6.1718381091520; 
- Fri, 14 Jun 2024 09:04:51 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5aac:3864:3a80:46b4])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-705cc922643sm3219531b3a.31.2024.06.14.09.04.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 09:04:51 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20240614
-Date: Fri, 14 Jun 2024 13:04:47 -0300
-Message-Id: <20240614160447.2087616-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsa0013670;
+ Fri, 14 Jun 2024 11:35:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718382954;
+ bh=YFudej1lwXvmTv0CgCOQEc/bN1Pdz5BVdOWauUA/ZpI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=EA0BfMbzczWgtJAv0DjxKWQARKLLP2yKIUw9uzyaVNotJjdP1A22docLdgKLXCntt
+ GMibIIA7rWr/uZTl8jqi6Ug5bE/dn53hau5aaGxas9sxedlSZ+SM0DvbsTEWETEjnt
+ UB8zaCxI/sB69qABa/s3y75p+KWtqb8W2BYtqPMM=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZsiX030303
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 11:35:54 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 11:35:53 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 11:35:53 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrLf027189;
+ Fri, 14 Jun 2024 11:35:53 -0500
+From: Jonathan Humphreys <j-humphreys@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: [PATCH v7 04/24] board: am64x: Define capsule update firmware info
+Date: Fri, 14 Jun 2024 11:35:31 -0500
+Message-ID: <20240614163551.2610212-5-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240614163551.2610212-1-j-humphreys@ti.com>
+References: <20240614163551.2610212-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,32 +93,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Define the firmware components updatable via EFI capsule update, including
+defining capsule GUIDs for the various firmware components for the AM64x
+SK.
 
-Please pull this single fix from u-boot-imx/master, thanks.
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
+ board/ti/am64x/evm.c        | 34 ++++++++++++++++++++++++++++++++++
+ include/configs/am64x_evm.h | 24 ++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-The following changes since commit ca6a992e09441d6cca73439c63c3735f86b36ea4:
+diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+index b8de69da06c..609e5cf6d51 100644
+--- a/board/ti/am64x/evm.c
++++ b/board/ti/am64x/evm.c
+@@ -7,6 +7,7 @@
+  *
+  */
+ 
++#include <efi_loader.h>
+ #include <asm/io.h>
+ #include <dm/uclass.h>
+ #include <k3-ddrss.h>
+@@ -27,6 +28,39 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = AM64X_SK_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"AM64X_SK_TIBOOT3",
++		.image_index = 1,
++	},
++	{
++		.image_type_id = AM64X_SK_SPL_IMAGE_GUID,
++		.fw_name = u"AM64X_SK_SPL",
++		.image_index = 2,
++	},
++	{
++		.image_type_id = AM64X_SK_UBOOT_IMAGE_GUID,
++		.fw_name = u"AM64X_SK_UBOOT",
++		.image_index = 3,
++	}
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "sf 0:0=tiboot3.bin raw 0 100000;"
++	"tispl.bin raw 100000 200000;u-boot.img raw 300000 400000",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
++		env_set("dfu_alt_info", update_info.dfu_string);
++}
++#endif
++
+ int board_init(void)
+ {
+ 	return 0;
+diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
+index f9f8c7bc2f6..9db83621ea8 100644
+--- a/include/configs/am64x_evm.h
++++ b/include/configs/am64x_evm.h
+@@ -9,6 +9,30 @@
+ #ifndef __CONFIG_AM642_EVM_H
+ #define __CONFIG_AM642_EVM_H
+ 
++/**
++ * define AM64X_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM64X sk tiboot3.bin
++ * define AM64X_SK_SPL_IMAGE_GUID     - firmware GUID for AM64X sk SPL
++ * define AM64X_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM64X sk UBOOT
++ *
++ * These GUIDs are used in capsules updates to identify the corresponding
++ * firmware object.
++ *
++ * Board developers using this as a starting reference should
++ * define their own GUIDs to ensure that firmware repositories (like
++ * LVFS) do not confuse them.
++ */
++#define AM64X_SK_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xede0a0d5, 0x9116, 0x4bfb, 0xaa, 0x54, \
++		0x09, 0xe9, 0x7b, 0x5a, 0xfe, 0x1a)
++
++#define AM64X_SK_SPL_IMAGE_GUID \
++	EFI_GUID(0x77678f5c, 0x64d4, 0x4910, 0xad, 0x75, \
++		0x52, 0xc9, 0xd9, 0x5c, 0xdb, 0x1d)
++
++#define AM64X_SK_UBOOT_IMAGE_GUID \
++	EFI_GUID(0xc6ad43a9, 0x7d31, 0x4f5d, 0x83, 0xe9, \
++		0xb8, 0xef, 0xec, 0xae, 0x05, 0xbf)
++
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
+ 
+-- 
+2.34.1
 
-  cmd: sound: fix help text (2024-06-13 09:31:56 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240614
-
-for you to fetch changes up to 09d63e647a0eee024b493ad1d0e0d4a7a65ae500:
-
-  board: imx8mn_s2: Update timing with production one (2024-06-14 11:42:19 -0300)
-
-u-boot-imx-master-20240614
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/21125
-
-- Update imx8mn_s2 DDR initialization to fix USB boot.
-----------------------------------------------------------------
-Michael Trimarchi (1):
-      board: imx8mn_s2: Update timing with production one
-
- board/bsh/imx8mn_smm_s2/ddr3l_timing_256m.c | 23 +++++++++++++----------
- board/bsh/imx8mn_smm_s2/ddr3l_timing_512m.c | 14 ++++++++------
- 2 files changed, 21 insertions(+), 16 deletions(-)
