@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21EBC27C77
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:54:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF22EC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB97988081;
-	Fri, 14 Jun 2024 08:54:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2335A88980;
+	Fri, 14 Jun 2024 08:59:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jEjhcxKZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jEzQ6TX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8104E87E96; Fri, 14 Jun 2024 08:54:10 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F09A88988; Fri, 14 Jun 2024 08:59:50 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C6588897B
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:54:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E6688934
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-52c32d934c2so2000694e87.2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:54:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718348047; x=1718952847; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tXyC2hSxrSy8HIszYxHGrY3fviY0Db+JHvksS1U04QU=;
- b=jEjhcxKZxr+IWMBezOVorDtx/Z6UvQNMG/F2Iso4SybkRRGwyftQeiWhWd47h4UHeW
- GFNg0TAgp6T9cC7jPStUnylYApVbx91zoXLili4oAetQU0jSHOYxEnJpjLMQu+Ne6svm
- f4OHyXG4Se31p5W5hlTPtEKORYHUvO1bTvplZyq7Qx7E//j3wZrczwfjsYjTa81aX2ID
- Hkz7BtDcHZ9Jb5f3g2zq6tMdZvRJHQU1zl/JPqHfk4/fTXH1dSxNneStgpEjdKZusHG/
- 1+XlLPhMHqCX4u7XPmGbi3yfYCp83zyFgYlj9WyoWTw9wqIzcCNJYmCym5yLkCChYEVz
- ZQKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718348047; x=1718952847;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tXyC2hSxrSy8HIszYxHGrY3fviY0Db+JHvksS1U04QU=;
- b=C9NSY1m3H8rhi6fSSfJFTvy7QmmTooCGsdLeiTGTQr1Une+i6axmEf1jBOARo0VMYC
- nMdCIEl4rUd8H9ov42KISGTMOF7TRi9UzONInT9CbhMxYPciqdSC5sc/krcIKvGAxm9w
- 6uTBpgLg8UuEdmqDuDSCdv73UW92LRyn6iScELCC+UXhdT7wH5y3m6bbrJu5TGCxdn//
- hhNlBtyZvz5y3+csSVS48/ezcwP2pBs3sE3cLiGaUOxbzNcMWjtLjVljOrTPXI6MfbQl
- tr28JVGEV15fhpx0M8cm7NHZE3sQUm+I6Q3bTaLh2CqULaSqTIe6K+vK/nkfrYHrAxIZ
- 83Xg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7jQdO7YRxQoaSxPLh9PqUqbCwD/DtE6neC6WQj0PjRQQTQhQ+nWPVPRizXMl1zIAjL9yLgTkldTdHe9ikyBTBIoXp8w==
-X-Gm-Message-State: AOJu0YxfUfrtZJuJLwSrFTL6dTW4eErVmlm/IqFJzyT0KRVEoZnNbP8G
- UE1Qbu1816aeqL7qsYZygEMgUq7mUt4JXrlSEEXMkX1pWUrYnjVIqxk18jdUq5s=
-X-Google-Smtp-Source: AGHT+IFk2ePj/Nfnwz9NbVYcOJuYUO8eAaSFlC/8h98tDRAsbRpe6T0Vk83M0RAJNS4qbK0kCYcRlQ==
-X-Received: by 2002:ac2:4db9:0:b0:52c:5252:55c2 with SMTP id
- 2adb3069b0e04-52ca6e9a0d4mr982108e87.64.1718348047517; 
- Thu, 13 Jun 2024 23:54:07 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
- [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36074e0e5adsm3531579f8f.0.2024.06.13.23.54.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 23:54:06 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: sjg@chromium.org
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Angelo Dureghello <angelo@kernel-space.org>, u-boot@lists.denx.de
-Subject: [PATCH] sandbox: cleanup linker scripts and sections
-Date: Fri, 14 Jun 2024 09:53:56 +0300
-Message-ID: <20240614065357.182446-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718348376; x=1718953176; i=xypron.glpk@gmx.de;
+ bh=5jeSZi30KNkIKkDsEyu5vdkw+LgGHypPMg+A7E60shk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=jEzQ6TX12Ce4FM6yTJCY+niftuOMAeQ7tf2Ggjd+fQDjLBJMBEbukt2gGI5+atqM
+ pzL8dhctHG1iZQZ9DbJuaAHnf1V53gqcK3B7TDkB/IevqiaK9Yu6E7kU5J1+i2V87
+ xbWXNnsbMIfcDO9aNGOQty795y17CrsSSrGzE9jCjymM5MUQz0Vr7+CyOpZwdTiPr
+ 5RXxysN3nNyJJeJgBJRkQhPnzmICc9ZnKTSLi2/ZWVnJaD1nu55qI3ckcuuefSwU4
+ s76LF3bIyxMzekEpI7NwTNZ2Z4Bc4vSvr1QwJUiPN7zG/CeTmG598cZHzhQ1f9sBd
+ FQg+7sQZ+Eh/ft9V5Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.41.25]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTRR0-1rqPLn3iv6-00NjBq; Fri, 14
+ Jun 2024 08:59:35 +0200
+Message-ID: <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
+Date: Fri, 14 Jun 2024 08:59:27 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>
+References: <20240610145920.3302001-1-sjg@chromium.org>
+ <20240610145920.3302001-3-sjg@chromium.org>
+ <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:oR9uv/ygHdAcS7u8lcU4zAjdpU/ESrsApIRbLC3Eu0Aa6WhjBpi
+ nI63Rvpury9aSEYXb/7xmwVTRBJN7CPuaaay8b2QYvx9BFn4WcQebTIlNKdCoh/Mr0tHUsp
+ DdP60+vvOB9Yb36qgzmBB6gufWqzK0IxM1B8hZLf+UaUVOoFsk8dWyWXyh4a5ymluxExIy5
+ poDedkIUKRX11utF99csw==
+UI-OutboundReport: notjunk:1;M01:P0:3bHExnHm0dg=;uIIJDfxSlXRk1eUY/DWXrztz7xN
+ OlUJZVzl/h7OCsOQJJZyKe2UYezvYYMJqijkydMIixacj1U/swZqwPfr5vERh8tv1JDE7lC9L
+ iGDk+O/K1yFySrX1lNbiU50PNVuSVQ0vEdyNQAgst98eF65/2qIH2qdVHNWanG51wTtbaiVvv
+ C4Z0YxHvbFxfP7vHYyugGENf1KLYI4fzZ+lKFJKIKhQ/92wfZ6d16Oejv6XZGHB43CQD9zEjP
+ 48trwWCGbSRkjO0yDo6t7JALQKcbG2zPXcVViNx7aS48HDb1nrVgchUtyvDS+Lqo8ODvGp+ax
+ s5usTxjFXEdWX7hHyO4mAQhBnKxu02avpl6iXS6YsFYMyFog4+bQvyIoUiPRSKMMGe98Lre1i
+ qHfiqciURGq+qMLmoNAgiwa1R1mStxCno8IKIPz6xh7yuMj7NewS83GLP4xYJep7jprnujh2n
+ XK9Nf405o0i0MWqgGAGtHUcPBo/A8u5Jth96IbjNIHaJzWxXhYnXTn+LS14pypsK9MhI0eLiS
+ SjHP645+t3JtZOyD+fsyxtK1tYNbeNHgj2K73ubNToO8i60vae79u96P5vS3Gv8/li+aR0A64
+ ISB//mBKfnavRdlwltyVNV+oWyDo4dCa+iXB+KbhmWw5y/28axRGVH+K0gS9FvYv3M++jElim
+ BV0bNgr4I7tM+seGEJ0H6zQJtWmHJq5P7tE1qIF1VEP/enOk/KOchwMaOVLne98Mxhfa0RzSS
+ +ejX0eAvItKyEybMVCgEBRWFvloU8afJfvH+MOEdMBBDvclEpQ+qatzm4zK2GkeIzJNllC9b+
+ hd6kXzKa66/BRYI5qc8zazMTHWhjzh5Dyoaz7NOhBziPQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,129 +97,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 6e2228fb052b ("Merge patch series "Clean up arm linker scripts"")
-was cleaning up linker scripts for armv7 and v8 in a similar fashion.
+On 6/14/24 08:03, Ilias Apalodimas wrote:
+> Hi Simon,
+>
+> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> It does not make sense to enable all SHA algorithms unless they are
+>> needed. It bloats the code and in this case, causes chromebook_link to
+>> fail to build. That board does use the TPM, but not with measured boot,
+>> nor EFI.
+>>
+>> Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+>> add them to MEASURED_BOOT as well.
+>>
+>> Note that the original commit combines refactoring and new features,
+>> which makes it hard to see what is going on.
+>>
+>> Fixes: 97707f12fda tpm: Support boot measurements
+>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>> ---
+>>
+>> Changes in v2:
+>> - Put the conditions under EFI_TCG2_PROTOCOL
+>> - Consider MEASURED_BOOT too
+>>
+>>   boot/Kconfig | 4 ++++
+>>   lib/Kconfig  | 4 ----
+>>   2 files changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/boot/Kconfig b/boot/Kconfig
+>> index 6f3096c15a6..b061891e109 100644
+>> --- a/boot/Kconfig
+>> +++ b/boot/Kconfig
+>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
+>>   config MEASURED_BOOT
+>>          bool "Measure boot images and configuration when booting witho=
+ut EFI"
+>>          depends on HASH && TPM_V2
+>> +       select SHA1
+>> +       select SHA256
+>> +       select SHA384
+>> +       select SHA512
+>>          help
+>>            This option enables measurement of the boot process when boo=
+ting
+>>            without UEFI . Measurement involves creating cryptographic h=
+ashes
+>> diff --git a/lib/Kconfig b/lib/Kconfig
+>> index 189e6eb31aa..568892fce44 100644
+>> --- a/lib/Kconfig
+>> +++ b/lib/Kconfig
+>> @@ -438,10 +438,6 @@ config TPM
+>>          bool "Trusted Platform Module (TPM) Support"
+>>          depends on DM
+>>          imply DM_RNG
+>> -       select SHA1
+>> -       select SHA256
+>> -       select SHA384
+>> -       select SHA512
+>
+> I am not sure this is the right way to deal with your problem.
+> The TPM main functionality is to measure and extend PCRs, so shaXXXX
+> is really required. To make things even worse, you don't know the PCR
+> banks that are enabled beforehand. This is a runtime config of the
+> TPM.
 
-Several commits in the past -- e.g
-commit d0b5d9da5de2 ("arm: make _end compiler-generated")
-was moving symbols to be compiler generated. They were defined as c
-variables in its own section to force the compiler emit relative a
-reference. However, defining those in the linker script will do the
-same thing since [0].
+If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is selected, U-Boot
+cannot extend PCRs. So it seems fine to let these two select the
+complete set of hashing algorithms. As Simon pointed out for
+EFI_TCG2_PROTOCOL this is already done in lib/efi_loader/Kconfig.
 
-So let's remove the special sections from the linker scripts, the
-variable definitions from sections.c, and define them as a symbols.
-It's worth noting that the linker was discarding the symbols in the
-older binary completely.
+Even if U-Boot does not support measured boot (EFI or non-EFI) we might
+still be using the TPMs RNG.
 
-- new binary
-$~ aarch64-linux-gnu-readelf -sW u-boot | grep efi_runtim
-   246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_runtime_rand
-  3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_mmio
-  6359: 00000000000dedff   217 FUNC    LOCAL  DEFAULT   14 efi_runtime_relocate
-  7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_services
-  8869: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_rel_stop
-  9159: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_stop
-  9410: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_start
- 10137: 00000000005981bd     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.c.de5bed54
- 10470: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_rel_start
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-- old binary
-$~ aarch64-linux-gnu-readelf -sW u-boot.old | grep efi_runtim
-   246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_runtime_rand
-  3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_mmio
-  6359: 00000000000dedff   221 FUNC    LOCAL  DEFAULT   14 efi_runtime_relocate
-  7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_services
- 10135: 0000000000598320     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.c.de5bed54
-
-$~ bloat-o-meter u-bool.old u-boot
-add/remove: 0/0 grow/shrink: 1/1 up/down: 7/-4 (3)
-Function                                     old     new   delta
-efi_memory_init                              343     350      +7
-efi_runtime_relocate                         221     217      -4
-Total: Before=2009902, After=2009905, chg +0.00%
-
-[0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- arch/sandbox/cpu/u-boot.lds | 20 ++++----------------
- arch/sandbox/lib/Makefile   |  2 +-
- arch/sandbox/lib/sections.c | 13 -------------
- 3 files changed, 5 insertions(+), 30 deletions(-)
- delete mode 100644 arch/sandbox/lib/sections.c
-
-diff --git a/arch/sandbox/cpu/u-boot.lds b/arch/sandbox/cpu/u-boot.lds
-index 52f13af3742f..6ee8095b6cbb 100644
---- a/arch/sandbox/cpu/u-boot.lds
-+++ b/arch/sandbox/cpu/u-boot.lds
-@@ -19,30 +19,18 @@ SECTIONS
- 		*(_u_boot_sandbox_getopt_end)
- 	}
-
--	efi_runtime_start : {
--		*(___efi_runtime_start)
--	}
--
- 	efi_runtime : {
-+                __efi_runtime_start = .;
- 		*(efi_runtime_text)
- 		*(efi_runtime_data)
--	}
--
--	efi_runtime_stop : {
--		*(___efi_runtime_stop)
--	}
--
--	efi_runtime_rel_start : {
--		*(___efi_runtime_rel_start)
-+                __efi_runtime_stop = .;
- 	}
-
- 	efi_runtime_rel : {
-+                __efi_runtime_rel_start = .;
- 		*(.relefi_runtime_text)
- 		*(.relefi_runtime_data)
--	}
--
--	efi_runtime_rel_stop : {
--		*(___efi_runtime_rel_stop)
-+                __efi_runtime_rel_stop = .;
- 	}
-
- 	.dynsym :
-diff --git a/arch/sandbox/lib/Makefile b/arch/sandbox/lib/Makefile
-index a2bc5a7ee60f..d7d15a50bb6c 100644
---- a/arch/sandbox/lib/Makefile
-+++ b/arch/sandbox/lib/Makefile
-@@ -5,7 +5,7 @@
- # (C) Copyright 2002-2006
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-
--obj-y	+= fdt_fixup.o interrupts.o sections.o
-+obj-y			+= fdt_fixup.o interrupts.o
- obj-$(CONFIG_PCI)	+= pci_io.o
- obj-$(CONFIG_CMD_BOOTM) += bootm.o
- obj-$(CONFIG_CMD_BOOTZ) += bootm.o
-diff --git a/arch/sandbox/lib/sections.c b/arch/sandbox/lib/sections.c
-deleted file mode 100644
-index 2f2f3fbfdb86..000000000000
---- a/arch/sandbox/lib/sections.c
-+++ /dev/null
-@@ -1,13 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright 2013 Albert ARIBAUD <albert.u.boot@aribaud.net>
-- *
-- */
--#include <linux/compiler.h>
--
--char __efi_runtime_start[0] __section("___efi_runtime_start");
--char __efi_runtime_stop[0] __section("___efi_runtime_stop");
--char __efi_runtime_rel_start[0]
--		__section("___efi_runtime_rel_start");
--char __efi_runtime_rel_stop[0]
--		__section("___efi_runtime_rel_stop");
---
-2.45.1
+>
+>   So this would make the TPM pretty useless. Can't you remove something
+> that doesn't break functionality?
+>
+> Thanks
+> /Ilias
+>>          help
+>>            This enables support for TPMs which can be used to provide s=
+ecurity
+>>            features for your board. The TPM can be connected via LPC or=
+ I2C
+>> --
+>> 2.34.1
+>>
 
