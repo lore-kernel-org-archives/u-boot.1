@@ -4,60 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A40C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 08:59:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA64AC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:01:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F56388754;
-	Fri, 14 Jun 2024 10:59:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6ED8C87FC8;
+	Fri, 14 Jun 2024 11:01:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kdSK0Upk";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BzTwjOT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E4548896F; Fri, 14 Jun 2024 10:59:45 +0200 (CEST)
-Received: from mail-m32105.qiye.163.com (mail-m32105.qiye.163.com
- [220.197.32.105])
+ id EC01187FC8; Fri, 14 Jun 2024 11:01:34 +0200 (CEST)
+Received: from mail-m49223.qiye.163.com (mail-m49223.qiye.163.com
+ [45.254.49.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4B6488093
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 10:59:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1724787D9B
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:01:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=kdSK0UpkCRq6O/ST+c6R2m0YeqrcYvWdBtqR2Y0rPUn4mfzN+ZcFjhs7G5Q+mvyyNFVIcGOqk8KakMNbmOjxJWcIcQiWELrnF6CGTbyJ1ufWcQ8z2DGrxQSa2BhU49F8ATGhTDl07QItxCOAQV+qiJbhNmVB7TNv2tgiAPRm5ZA=;
+ b=BzTwjOT1Sj8m3B5XleJDo7uTZRDNNJFrk4Voyb/SIQIn0XQYK7ZTmd+4LL6DIoq7hBPE9K9k0Ksw9njjpPtRMA6OmyBiGCutTUsXk3HEOKOODjoa71YfpZWJeLRnt7HJwPENobiLgS/YboBnSFsrcteDYzEq+n8mh9tciRp92jg=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=5zzvvw2BNG8xKFCtVWO+At/gQwkQyL4C9nNZ2uHXzNo=;
+ bh=BhtKcwyJ/DnrkXdH9HfkbfxhFgVT+e87RmTNaIqWAOU=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id F3D11900154;
- Fri, 14 Jun 2024 16:58:50 +0800 (CST)
-Message-ID: <d088430e-6b49-4d8f-9271-5273566a703c@rock-chips.com>
-Date: Fri, 14 Jun 2024 16:58:50 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id E1E649006F2;
+ Fri, 14 Jun 2024 17:00:47 +0800 (CST)
+Message-ID: <ca562976-c1ca-4409-9b52-ab5362dc6a23@rock-chips.com>
+Date: Fri, 14 Jun 2024 17:00:47 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] board: rockchip: Add FriendlyElec NanoPi R6S
-To: Sebastian Kropatsch <seb-dev@mail.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20240607202111.453943-1-seb-dev@mail.de>
- <20240607202111.453943-2-seb-dev@mail.de>
+Subject: Re: [PATCH next v3 3/8] arm64: dts: rockchip: correct gpio_pwrctrl1
+ typos on rk3588(s) boards
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Klaus Goger <klaus.goger@cherry.de>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
+ Jing Luo <jing@jing.rocks>, Heiko Stuebner <heiko@sntech.de>
+References: <20240610-tiger-v3-0-2b4731f95757@cherry.de>
+ <20240610-tiger-v3-3-2b4731f95757@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240607202111.453943-2-seb-dev@mail.de>
+In-Reply-To: <20240610-tiger-v3-3-2b4731f95757@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR9NSlYfSR5KHU4YQxkfTk9WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkwaTVZCSxgeSUtLTU8eTh9WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9015f895f503a9kunmf3d11900154
+X-HM-Tid: 0a9015fa60e203a9kunme1e649006f2
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MAg6OQw5AjNCKBQ6MVY*NysY
- MzJPFBlVSlVKTEpDSE5OTkhKTE9NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0tMSzcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MBw6PCo5GjNKFhQ1MDkVPkk2
+ CCIwCihVSlVKTEpDSE5OTU9CSEhDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFMQktJNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,237 +80,153 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/6/8 04:17, Sebastian Kropatsch wrote:
-> The NanoPi R6S is a SBC by FriendlyElec based on the Rockchip RK3588s.
-> It comes with 4GB or 8GB of RAM, a microSD card slot, 32GB eMMC storage,
-> one RTL8211F 1GbE and two RTL8125 2.5GbE Ethernet ports, one USB 2.0
-> Type-A and one USB 3.0 Type-A port, a HDMI port, a 12-pin GPIO FPC
-> connector, a fan connector, IR receiver as well as some buttons and LEDs.
+On 2024/6/10 21:13, Quentin Schulz wrote:
+> From: Jing Luo <jing@jing.rocks>
 >
-> Add initial support for this board using the upstream devicetree sources.
+> gpio_pwrctrl2 gets duplicated by both rk806_dvs1_null and rk806_dvs2_null
+> gpio_pwrctrl1 is unset. This typo appears in multiple files. Let's fix them.
 >
-> Kernel commit:
-> f1b11f43b3e9 ("arm64: dts: rockchip: Add support for NanoPi R6S")
+> Note: I haven't had the chance to test them all because I don't own all
+> of these boards (obviously). Please test if it's needed.
 >
-> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+> Signed-off-by: Jing Luo <jing@jing.rocks>
+> Link: https://lore.kernel.org/r/20240420130355.639406-1-jing@jing.rocks
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
+>
+> [ upstream commit: d7f2039e5321636069baa77ef2f1e5d22cb69a88 ]
+>
+> (cherry picked from commit cb2b6d1d19ed10fcaec5f5859c08a3355d1c66e0)
 > ---
+>   dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5.dtsi           | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588-edgeble-neu6a-common.dtsi | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts                | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi                | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588-turing-rk1.dtsi           | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588s-coolpi-4b.dts            | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588s-indiedroid-nova.dts      | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5.dts           | 2 +-
+>   dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts              | 2 +-
+>   9 files changed, 9 insertions(+), 9 deletions(-)
 >
-> The R6S is very similar to the R6C, the major difference being that
-> instead of the M.2 NVMe socket on the R6C, the R6S has a second RTL8125BG
-> Ethernet chip, which uses the same PCIe lanes that the R6C uses for its
-> M.2 socket. Other minor differences include:
-> - 12-pin GPIO FPC instead of 30-pin header
-> - IR receiver (pwm-based)
-> - 5V fan connector
-> Other than that, they are the same, which is why the difference in
-> U-Boot is only the missing NVME config option in the R6S defconfig.
->
-> Please note that I was not able to test this device. I only chose to
-> add it due to it being a very similar implementation to the R6C, like the
-> NanoPi R5C and R5S are similar. It should however boot just fine and even
-> both RTL8125 Ethernet ports should work in U-Boot since RTL8125 is the
-> same chip used in the R6C, using the rtl8169 driver.
->
-> If this is not how things should be done in U-Boot, please disregard
-> and drop this patch :) Thanks!
->
-> ---
->   arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi   |  3 +
->   arch/arm/mach-rockchip/rk3588/Kconfig         | 12 +++
->   board/friendlyelec/nanopi-r6s-rk3588s/Kconfig | 12 +++
->   .../nanopi-r6s-rk3588s/MAINTAINERS            |  7 ++
->   configs/nanopi-r6s-rk3588s_defconfig          | 82 +++++++++++++++++++
->   doc/board/rockchip/rockchip.rst               |  1 +
->   include/configs/nanopi-r6s-rk3588s.h          | 12 +++
->   7 files changed, 129 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
->   create mode 100644 board/friendlyelec/nanopi-r6s-rk3588s/Kconfig
->   create mode 100644 board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS
->   create mode 100644 configs/nanopi-r6s-rk3588s_defconfig
->   create mode 100644 include/configs/nanopi-r6s-rk3588s.h
->
-> diff --git a/arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi b/arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..853ed58cfe
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
-> @@ -0,0 +1,3 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588s-u-boot.dtsi"
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index 4b7d751c6f..a9e400861a 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -90,6 +90,18 @@ config TARGET_NANOPI_R6C_RK3588S
->   	  Type-A port, a HDMI port, a 30-pin GPIO header as well as some
->   	  buttons and LEDs.
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5.dtsi
+> index 94ecb9b4f98..170501a879d 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5.dtsi
+> @@ -357,7 +357,7 @@
+>   		vcca-supply = <&vcc5v0_sys>;
 >   
-> +config TARGET_NANOPI_R6S_RK3588S
-> +	bool "FriendlyElec NanoPi R6S"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  The NanoPi R6S is a SBC by FriendlyElec based on the Rockchip
-> +	  RK3588s.
-> +	  It comes with 4GB or 8GB of RAM, a microSD card slot, 32GB eMMC
-> +	  storage, one RTL8211F 1GbE and two RTL8125 2.5GbE Ethernet ports,
-> +	  one USB 2.0 Type-A and one USB 3.0 Type-A port, a HDMI port, a
-> +	  12-pin GPIO FPC connector, a fan connector, IR receiver as well
-> +	  as some buttons and LEDs.
-> +
->   config TARGET_NOVA_RK3588
->   	bool "Indiedroid Nova RK3588"
->   	select BOARD_LATE_INIT
-> diff --git a/board/friendlyelec/nanopi-r6s-rk3588s/Kconfig b/board/friendlyelec/nanopi-r6s-rk3588s/Kconfig
-> new file mode 100644
-> index 0000000000..4d579816b1
-> --- /dev/null
-> +++ b/board/friendlyelec/nanopi-r6s-rk3588s/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_NANOPI_R6S_RK3588S
-> +
-> +config SYS_BOARD
-> +	default "nanopi-r6s-rk3588s"
-> +
-> +config SYS_VENDOR
-> +	default "friendlyelec"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "nanopi-r6s-rk3588s"
-> +
-> +endif
-> diff --git a/board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS b/board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS
-> new file mode 100644
-> index 0000000000..76288b4320
-> --- /dev/null
-> +++ b/board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS
-> @@ -0,0 +1,7 @@
-> +NANOPI-R6S
-> +M:	Sebastian Kropatsch <seb-dev@mail.de>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
-> +F:	board/friendlyelec/nanopi-r6s-rk3588s
-> +F:	configs/nanopi-r6s-rk3588s_defconfig
-> +F:	include/configs/nanopi-r6s-rk3588s.h
-> diff --git a/configs/nanopi-r6s-rk3588s_defconfig b/configs/nanopi-r6s-rk3588s_defconfig
-> new file mode 100644
-> index 0000000000..f7b364655f
-> --- /dev/null
-> +++ b/configs/nanopi-r6s-rk3588s_defconfig
-> @@ -0,0 +1,82 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-nanopi-r6s"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_NANOPI_R6S_RK3588S=y
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-nanopi-r6s.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_PWM=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +# CONFIG_SPI_FLASH is not set
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_RTL8169=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index a3d9837dda..0b58086f06 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -124,6 +124,7 @@ List of mainline supported Rockchip boards:
->        - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
->        - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
->        - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-> +     - FriendlyElec NanoPi R6S (nanopi-r6s-rk3588s)
->        - Generic RK3588S/RK3588 (generic-rk3588)
->        - Indiedroid Nova (nova-rk3588s)
->        - Pine64 QuartzPro64 (quartzpro64-rk3588)
-> diff --git a/include/configs/nanopi-r6s-rk3588s.h b/include/configs/nanopi-r6s-rk3588s.h
-> new file mode 100644
-> index 0000000000..a1b19783c5
-> --- /dev/null
-> +++ b/include/configs/nanopi-r6s-rk3588s.h
-> @@ -0,0 +1,12 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#ifndef __NANOPI_R6S_RK3588S_H
-> +#define __NANOPI_R6S_RK3588S_H
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +#include <configs/rk3588_common.h>
-> +
-> +#endif /* __NANOPI_R6S_RK3588S_H */
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-edgeble-neu6a-common.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-edgeble-neu6a-common.dtsi
+> index c0d4a15323e..d9bf67525e8 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-edgeble-neu6a-common.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-edgeble-neu6a-common.dtsi
+> @@ -182,7 +182,7 @@
+>   		#gpio-cells = <2>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts b/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
+> index 39d65002add..7d7303f8ecb 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
+> @@ -452,7 +452,7 @@
+>   		vcca-supply = <&vcc5v0_sys>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
+> index 4984e36a8c2..29f8e536de1 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
+> @@ -401,7 +401,7 @@
+>   		vcca-supply = <&vcc5v0_sys>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-turing-rk1.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-turing-rk1.dtsi
+> index dc08da518a7..6b9206ce4a0 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-turing-rk1.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-turing-rk1.dtsi
+> @@ -318,7 +318,7 @@
+>   		#gpio-cells = <2>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-coolpi-4b.dts b/dts/upstream/src/arm64/rockchip/rk3588s-coolpi-4b.dts
+> index e037bf9db75..7f4d7bb9a07 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588s-coolpi-4b.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588s-coolpi-4b.dts
+> @@ -479,7 +479,7 @@
+>   		vcca-supply = <&vcc5v0_sys>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-indiedroid-nova.dts b/dts/upstream/src/arm64/rockchip/rk3588s-indiedroid-nova.dts
+> index ce8119cbb82..a5b76e24ceb 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588s-indiedroid-nova.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588s-indiedroid-nova.dts
+> @@ -528,7 +528,7 @@
+>   		vcca-supply = <&vcc5v0_sys>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5.dts b/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5.dts
+> index 25de4362af3..73700d77eed 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588s-orangepi-5.dts
+> @@ -336,7 +336,7 @@
+>   		#gpio-cells = <2>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+> index 00afb90d4eb..5c99636a1d0 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+> @@ -414,7 +414,7 @@
+>   		#gpio-cells = <2>;
+>   
+>   		rk806_dvs1_null: dvs1-null-pins {
+> -			pins = "gpio_pwrctrl2";
+> +			pins = "gpio_pwrctrl1";
+>   			function = "pin_fun0";
+>   		};
+>   
+>
