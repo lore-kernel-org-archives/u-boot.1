@@ -4,78 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7FA5C27C75
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 00:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1272BC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 01:37:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1E4988986;
-	Fri, 14 Jun 2024 02:53:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 52F218896B;
+	Fri, 14 Jun 2024 03:37:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="w8WiJeJi";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="j0Pnq3aR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 76F9D8898D; Fri, 14 Jun 2024 02:53:54 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1718329038;
+	bh=luV3MsfuhQqublYI366/0YoMw33rUbwPL3nnFb2Ycto=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FCh9TVa5DsrQWq4KnHVGUunPRa/QH/HPp6IDRyaP6Dy90DafYxOT7l7Ii0QUOeV5z
+	 8ms41N1QA4gH1H2Af6BT7/i9FwlkkROokR0MCYLihqoVqX36J31KpGS1WTaXfc7r6w
+	 jHO44Cn5QOO0QBvwoBCT/g+j3YJGwFs6IYnCFfN3RIg6XROatNlhk1/XB/ftJbvIIU
+	 N2aHS+Su/KUMMKdp8/E/JtLKR3Oy26TcU/FuAVyMsEvNnUD00lAybhRdqZfv7sRYj5
+	 Tp7ZF4KFuLQ7SWKsPj6f6NH9WJZYbAbn/3WQsnhWx8pewc5wVdgmzx1kmP1/qSxWTU
+	 bSmSvP1uz1hXQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CEC588986
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 02:53:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4W0gl275kVz9srV;
- Fri, 14 Jun 2024 02:53:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1718326431;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eOEuURXysTTfVpOu57GNPz3XmimVXmUMD+NjWA/RRXs=;
- b=w8WiJeJiTpRaLL9AMGO/BIZwjqKOh+SHggset2DmKWB45+Ru/B1AxEN1xdo9y4jVloTs04
- nWHPmMTeCBMYeGbSS7tjr7oghE/U+DkxpckxHioSYQi7nmVyZIiIcM0DleTLWmJs5VrjJ8
- FcPhQDWUHSV5GHxx3JrGd8OfjGGPG3hMSAf7PYOxJViMyFHk73I+yasU1Ib2vVcryOCRJ/
- PlXJMNx29t1Ev8jSuRXVR0uhDRNwoLXjmP8ikf6SVq9Pn3V0UvNGzAPFaU1ZrdDjyslwAf
- EHmQlx8mw8Xijtgx67rxIDDAz5VS4Ji1BKsD8qLXO8uuNS7pAzWser8SEiBIkA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1718326429;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eOEuURXysTTfVpOu57GNPz3XmimVXmUMD+NjWA/RRXs=;
- b=j0Pnq3aRoxnM0wXxR0RCr7nPKvkvkKSbhJdxNBLBkO9ANo6TW3NGbQkVFbU6bvJha9moEJ
- vSDM8CaHWkRpXY1gz7liB9+ZVW7/lr8XVhaDWYqluwx2BiEB7Eu2l4N9FsCFHGgi2ePoVZ
- /fdzZdYWmMWe/33i9WKn7pCM1QqUX9XtDP0C3XBzJzlFYaiwZJgDSZMrGbo3d31K2795Db
- 3P2ot/YRJGPzncSTWGbP9rQ6/plX/kpZIuYiqaXsaF4OvVaF5RS6/neXuFSfoi8R8piE4U
- s7qlwySJ1D5HpqWMilUm4tmx3aOsgv4kszQ1f/XwOT827YbBnVDl/yjKQl1AYw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Felipe Balbi <felipe.balbi@linux.intel.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>,
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/11] usb: gadget: Mark dm_usb_gadget_handle_interrupts as
- non-weak for DM_USB_GADGET
-Date: Fri, 14 Jun 2024 02:51:26 +0200
-Message-ID: <20240614005309.34433-12-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
-References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 26E7387EED;
+ Fri, 14 Jun 2024 03:37:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1718329036;
+ bh=luV3MsfuhQqublYI366/0YoMw33rUbwPL3nnFb2Ycto=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=CQV6REFOaTCb5D1q3m3gpO2QVQsbt6L9HantfUY+/d6m6FHqwxVNVM2AghwbyNOCI
+ sBjsd/6YN3fxNTFN1IprBs0xMdROOSNSHj6gNIaQp7d3KRJ2jvTHYwEg2dXN6e3dgm
+ sEJr3Glfkopj4VYPdG5UL1KSkCWed5+ekpHkbFRpsLvkZJ7ztcwc5Dpoh0LwWZZX34
+ mPpTnIFkDGcN5jar93ppTqfY1SrcuBqGicD1dQEXWX1nMLrxmFe0GhXFTYJ74Km5yK
+ pjla7JJf1dGW0PxpPX1dgsDkuqlpMaY/rUq3CRIdFEYSZycH8ywnjz3cYpZ4eXC0e/
+ IuMbCgzbg29nw==
+Message-ID: <9b4e1e28-bb9b-4b6d-a0d8-b8fe161acff4@denx.de>
+Date: Fri, 14 Jun 2024 02:33:10 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: Shutting down of the git-daemon (git protocol, https and ssh
+ still remain)
+To: Claudius Heine <ch@denx.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Stefano Babic <sbabic@denx.de>
+References: <323dbb9c-42bd-4664-b660-0ba24c819bec@denx.de>
+ <94d1e571-6051-4a1a-b15a-ab5147ada833@cherry.de>
+ <814d2716-bc77-494a-871e-1bf3ee466d6b@denx.de>
+ <ea1f5d07-aaba-42a6-96f7-e90b370ff4ae@denx.de>
+ <da7fac68-6684-4932-89c1-594913832fb9@denx.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <da7fac68-6684-4932-89c1-594913832fb9@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: b4197wmqcbe5daudzxtjzfdcy73qqjya
-X-MBO-RS-ID: f13c0df56a04d2ccd44
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,38 +74,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The dm_usb_gadget_handle_interrupts() is not implemented by any USB
-gadget controller drivers which do enable DM_USB_GADGET anymore. Set
-the symbol as non-weak.
+On 6/13/24 4:13 PM, Claudius Heine wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Nishanth Menon <nm@ti.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/usb/gadget/udc/udc-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi,
 
-diff --git a/drivers/usb/gadget/udc/udc-uclass.c b/drivers/usb/gadget/udc/udc-uclass.c
-index 2320039fe3b..fbe62bbce47 100644
---- a/drivers/usb/gadget/udc/udc-uclass.c
-+++ b/drivers/usb/gadget/udc/udc-uclass.c
-@@ -18,7 +18,7 @@ usb_gadget_generic_dev_ops(struct udevice *dev)
- 	return (const struct usb_gadget_generic_ops *)dev->driver->ops;
- }
- 
--__weak int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-+int dm_usb_gadget_handle_interrupts(struct udevice *dev)
- {
- 	const struct usb_gadget_generic_ops *ops;
- 
--- 
-2.43.0
+>> I suspect the following patch to oe-core (or local.conf equivalent) 
+>> might also entirely mitigate the issue by providing https fallback 
+>> automatically, without the need to modify the legacy layer/recipe ?
+>>
+>> If so, maybe this could be added to OE LTS releases at least ?
+>>
+>> "
+>> diff --git a/meta/classes-global/mirrors.bbclass 
+>> b/meta/classes-global/mirrors.bbclass
+>> index 862648eec5..50a14c5881 100644
+>> --- a/meta/classes-global/mirrors.bbclass
+>> +++ b/meta/classes-global/mirrors.bbclass
+>> @@ -77,6 +77,7 @@ https?://downloads.yoctoproject.org/mirror/sources/ 
+>> https://mirrors.kernel.org/y
+>>
+>>   MIRRORS += "\
+>>   git://salsa.debian.org/.* git://salsa.debian.org/PATH;protocol=https \
+>> +git://git.denx.de/.*          git://git.denx.de/PATH;protocol=https \
+> 
+> Well the path will change a bit as well:
+> 
+> git://git.denx.de/u-boot.git -> https://source.denx.de/u-boot/u-boot.git
+> git://git.denx.de/u-boot-efi.git -> 
+> https://source.denx.de/u-boot/custodians/u-boot-efi.git
 
+Better avoid custodian trees in OE builds unless this is a test build.
+
+> git://git.denx.de/xenomai.git -> https://source.denx.de/xenomai/xenomai.git
+> git://git.denx.de/mxssb.git -> https://source.denx.de/denx/mxssb.git
+
+mxssb is I think long superseded by U-Boot mkimage integration, so this 
+can also be dropped.
+
+The remaining two, u-boot and xenomai, yeah, those would likely need to 
+be separate.
+
+> If we want to make it perfect, it will be more difficult than that.
+> 
+>>   git://git.gnome.org/.* 
+>> git://gitlab.gnome.org/GNOME/PATH;protocol=https \
+>>   git://git.infradead.org/.* git://git.infraroot.at/PATH;protocol=https \
+>>   git://.*/.*                   git://HOST/PATH;protocol=https \
+>> "
+>>
+>>> Anyway, I fixed it yesterday, and it doesn't make much sense to stop 
+>>> it now. So I will leave it in place until it breaks again, then I 
+>>> just remove it.
+>>
+>> Do you know how long it was actually broken ? (i.e. how long nobody 
+>> noticed and complained about it?)
+> 
+> So since 3rd of June, so about 5-8 days or so until someone noticed.
+
+Hum, since it works now again, I think we can wrap this discussion up.
+
+However, maybe this can serve as a wake up call for people to switch to 
+https cloning ?
