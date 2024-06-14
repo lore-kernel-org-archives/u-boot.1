@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C463C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E23C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 20:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59A3488A38;
-	Fri, 14 Jun 2024 18:54:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 58CB2889EC;
+	Fri, 14 Jun 2024 22:26:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E4Vg6ETD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R4tYD3xn";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OkyyRci/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AC55889DC; Fri, 14 Jun 2024 18:54:56 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F3D7188A00; Fri, 14 Jun 2024 22:26:25 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9721B889F7
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:54:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08996889EC
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 22:26:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGsg5f061824;
- Fri, 14 Jun 2024 11:54:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718384082;
- bh=l4eBneDUoTa971BK4+SuX9TQkS4I84HzMfA7Y3usao4=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=E4Vg6ETDte5gUf61lKKt1c+7xjh7MYK468dK1jzF7O4ynYuOi59WcoM+NGmCE7FC6
- hXBENupK4xkoP4kwUvYK4fNi49shx8U6cTDCIDu6qnRFfYdy8OKT9NN19BPuYPUGT8
- GmAid/0jDPORF+vHh6e4BvJqSlgA5B/OxZ2F2MtI=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGsgRr007756
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Jun 2024 11:54:42 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Jun 2024 11:54:41 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Jun 2024 11:54:41 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGsfPs050703;
- Fri, 14 Jun 2024 11:54:41 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: Sumit Garg <sumit.garg@linaro.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Wei Ming Chen <jj251510319013@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Joshua Watt <jpewhacker@gmail.com>, "Caleb
- Connolly" <caleb.connolly@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, Sean Anderson <seanga2@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
- Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 0/2] scripts/Makefile.lib: EFI: Use capsule CRT
- instead of ESL
-In-Reply-To: <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
-References: <20240613202753.2528889-1-j-humphreys@ti.com>
- <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
-Date: Fri, 14 Jun 2024 11:54:41 -0500
-Message-ID: <86le37ihwu.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4W19lz6N40z9scL;
+ Fri, 14 Jun 2024 22:26:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718396783;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JilIVDJcavGoyQI6dnN3FlJvSflBPQdVrdijbp1c5GM=;
+ b=R4tYD3xnXAi7b4B6zyDEAHk02NcC3ZGBhSGpEFJRUwWX49uP/dn45XXxFZqUpU31oKAn+B
+ x77MVXaFJ5qz15ofdy3ty/ffY2e+OHMqw3nJ8E427x2Q9Y5KaVCNyaOeqleH4gvksYgjCX
+ djVeDKvF56ybfkMOISZmeT72yhgDl7ZDDgMJgN7EUL0+aQ8CQ+m7lxRiUKdKxfr/gwl4Hw
+ a/i3ExF4PfC1/nYMu1661w+KZXxv4kGk+OTwXgYYwdI2PRiwUiLVYGCDi2/g0XymajmUMQ
+ Zocrg+TvJFYu1Uf1TN9e4ravjg+7dFyRopRjNMv/y+Z/VnJFwNQBzUDL5Ub/ug==
+Message-ID: <663b950b-11cc-4598-bf6c-75644d613859@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718396782;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JilIVDJcavGoyQI6dnN3FlJvSflBPQdVrdijbp1c5GM=;
+ b=OkyyRci/GXoTdd5Ob087QuB2CbrcRod/PH7WXKOtFxpF47eDo1RcfPzpkc0DK3UAk+qyqs
+ MrwBPUIwUWj7U+90wdaWxMxmveVEqBUehO48nSnjjY3IfDLkruf0V9xEv4XoUwVZm6rJVV
+ aSdF4iLIoCrHwk+zM1jaNVkd0HIMWUYRgJjbvqJ4zt5fQSNJeCLDZXTLn8PfvXagShbFFd
+ 4s6E2Z8QudrTYxHdS2/7QP+TOpMhpI9oMZJzKwsyPhTxUUys82tmSQ3Jx0gOwmI61BHh7c
+ qBkTKEXR/kXTrcwkOKCiH3/A33Q1QMyS1NQrkgoPZ+4xmskaxl35q7a/5h5yBA==
+Date: Fri, 14 Jun 2024 22:26:20 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: Re: [PATCH 1/2] net: phy: Turn default auto-negotiation timeout into
+ Kconfig symbol
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+References: <20240531164733.192105-1-marek.vasut+renesas@mailbox.org>
+ <171837686047.2655592.885719495890320459.b4-ty@konsulko.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <171837686047.2655592.885719495890320459.b4-ty@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: e67z3qoethfao3rchq3zmcboeb55dqbr
+X-MBO-RS-ID: bafaf7fac8121f472e2
+X-Rspamd-Queue-Id: 4W19lz6N40z9scL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,59 +93,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
-
-> Hi Jonathan
->
-> On Thu, 13 Jun 2024 at 23:28, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+On 6/14/24 4:54 PM, Tom Rini wrote:
+> On Fri, 31 May 2024 18:47:16 +0200, Marek Vasut wrote:
+> 
+>> Let users configure default auto-negotiation timeout via Kconfig
+>> instead of specifying it in board configuration headers. This is
+>> the first step toward converting this to Kconfig fully, so far the
+>> legacy PHY_ANEG_TIMEOUT in configuration headers takes precedence.
 >>
->> Use the capsule's public key certificate rather than a prebuilt ESL
->> generated from the certificate. The ESL is now generated as part of the
->> build.
->
-> Is there a reason to do this? I understand that the .crt extension
-> might be well known while the .esl is not, but OTOH the system you
-> build on after this change *needs* to have cert-to-efi-sig-list
-> installed
->
-Hi Ilias,
-
-In general, I am following the principle that it is better to not include
-in your source repo derived binaries that can be built at buildtime.
-
-As far as the need to have cert-to-efi-sig-list, it is part of efitools and
-that is already documented as a requirement for the build host ([0] and
-[1]), and our baseline Docker file also includes it.
-
-[0] https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#enabling-capsule-authentication
-[1] https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#configuring-uefi-secure-boot
-
-Jon
-
-> Thanks
-> /Ilias
 >>
->> Changes from v1:
->> - Converted the single patch to a series to include a bug fix found during
->>   development.
->> - Created an explicit rule for creating the ESL file for proper makefile
->>   dependency tracking.  v1 had combined creating the ESL file and
->>   generating the .dtsi include in a single command.
->>
->> Jonathan Humphreys (2):
->>   scripts/Makefile.lib: fixes: Embed capsule public key in platform's
->>     dtb
->>   scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file
->>
->>  board/sandbox/capsule_pub_esl_good.esl | Bin 831 -> 0 bytes
->>  configs/sandbox_defconfig              |   2 +-
->>  configs/sandbox_flattree_defconfig     |   2 +-
->>  doc/develop/uefi/uefi.rst              |   8 ++++----
->>  lib/efi_loader/Kconfig                 |  12 +++++++-----
->>  scripts/Makefile.lib                   |  24 +++++++++++++++---------
->>  6 files changed, 28 insertions(+), 20 deletions(-)
->>  delete mode 100644 board/sandbox/capsule_pub_esl_good.esl
->>
->> --
->> 2.34.1
->>
+> 
+> Applied to u-boot/master, thanks!
+
+next, right ?
