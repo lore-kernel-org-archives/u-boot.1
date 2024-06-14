@@ -4,80 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA58CC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 20:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78D4C27C4F
+	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 04:24:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 252AC88A04;
-	Fri, 14 Jun 2024 22:30:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ADEBD87C7F;
+	Sat, 15 Jun 2024 06:24:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sfXbCMMC";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="KXG4o9P+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF65488A08; Fri, 14 Jun 2024 22:30:29 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5EB1C87C7E; Fri, 14 Jun 2024 23:31:56 +0200 (CEST)
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9716B88176
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 22:30:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE72D8780A
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 23:31:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6f980c89db8so1394182a34.1
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:30:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718397026; x=1719001826; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wQi9tnm8TNsCUMjJWccAbOBXKAJxxOxdPdIN2vO4Hdc=;
- b=sfXbCMMCNikEnx9EtukFdk1btjtgydFC/RAQqxxlyky3TCT60kqQ0nQ6WdmgoGHAwt
- ZCieNjc6S4dRpCY35C29tP2edO0Kk1NyEd3st/zHRo0xwt8MOaTVY1yHZaQz8ktPsFL5
- g7WZFrZTO8JBCT8YwSf9bLQPUEp+XD8Dqwkrc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718397026; x=1719001826;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wQi9tnm8TNsCUMjJWccAbOBXKAJxxOxdPdIN2vO4Hdc=;
- b=V/Z2mw9hKwLT/tYHLbuwxXTy6k9uN4drF5+eyjVWjKD7c5BZYSknvu0dhw5hRm7v1H
- uuyY3Rtj1G1Cl75a5mkcv+2U4XtRl0qeW8TmJfNMhFh9VLBXyMYsvN5MZDDS9ImirJuQ
- kc+c6pymg2vX3gc6pjMeWdJ2HRJVh0YLFRZhwiq/5PjZtEAOq0L8X21lEUjBq2Xt3DF4
- l05g9IJl/1Awd+cvQx/1KzuaoHhBOEPKsDiEv3DJ134H5RcnyM6LK5T6eApsh/W+H5Nm
- H+qjGEEkvAPjQVPJ0aVYTa/CU5B8GeCm4PhX7lVUNLfcH29EjPbrQ3KHlZhQ9469mpF1
- NY9g==
-X-Gm-Message-State: AOJu0Yz0HO9GP2lBvWQXDfpwAsCY2qlBRjKMAzZdd7BAJ2ZmKKYhU9AS
- XlyoEDDv4K2ra1ATKRZHLJ8sQCGGvk9KJpX9UYEdmoDaDrIfrK4I/IsFYQmTiFk=
-X-Google-Smtp-Source: AGHT+IGr33qbvfvuDUnKhdh6hdQvOovKghkaog611GrhpclX3R8UxRK9PgDOV57ZnSqbuEjpFV8HZw==
-X-Received: by 2002:a05:6871:14a:b0:24c:b0ca:9650 with SMTP id
- 586e51a60fabf-258428b6fe0mr4371502fac.1.1718397026115; 
- Fri, 14 Jun 2024 13:30:26 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567a94a1d4sm1137510fac.1.2024.06.14.13.30.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 13:30:25 -0700 (PDT)
-Date: Fri, 14 Jun 2024 14:30:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH 1/2] net: phy: Turn default auto-negotiation timeout into
- Kconfig symbol
-Message-ID: <20240614203022.GS68077@bill-the-cat>
-References: <20240531164733.192105-1-marek.vasut+renesas@mailbox.org>
- <171837686047.2655592.885719495890320459.b4-ty@konsulko.com>
- <663b950b-11cc-4598-bf6c-75644d613859@mailbox.org>
+ spf=pass smtp.mailfrom=eajames@linux.ibm.com
+Received: from pps.filterd (m0353727.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EKv4iJ007862;
+ Fri, 14 Jun 2024 21:31:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=
+ message-id:date:subject:to:cc:references:from:in-reply-to
+ :content-type:content-transfer-encoding:mime-version; s=pp1; bh=
+ 2UPQJkmtqfAmJH5xG0Bp49TLJBJpfZNCMJNxC2Jg83s=; b=KXG4o9P+cmWx6NT6
+ Qy0RWb2sbFNG4yMSWyPXrxsTMWUED5ac3jB/WnIiffviEHuX40Jzlshzj5Vjlhji
+ A9QintbSIp37vAixHoQ2zdjYB1ssQ8QCXt+Ulvj3pYMZjaSB8NIe68Ym5vk9J0he
+ s4NOjuC2YFKl7sIKrRzGOi+IZ/kC1KAkEhK2fuDHbgodHq/1ujFvhI9Qih1iyBKA
+ IPJI87YVCiS4mVpy6fOrdDtJ/gjdP+VYM2uGZTs8QB8Oq1yoySC0rTtrr4g68gbL
+ lZKev910oPz6GiHKFSWOP8u1VDgFRlJP16D4ufAPf+t5wWviVMEhrCzIirsaLLCG
+ PLud/Q==
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3yrvg7r605-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 21:31:49 +0000 (GMT)
+Received: from m0353727.ppops.net (m0353727.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 45ELVmj3030871;
+ Fri, 14 Jun 2024 21:31:48 GMT
+Received: from ppma12.dal12v.mail.ibm.com
+ (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3yrvg7r604-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 21:31:48 +0000 (GMT)
+Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma12.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 45EL02iF028651; Fri, 14 Jun 2024 21:31:47 GMT
+Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
+ by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 3yn1mv59ya-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 21:31:47 +0000
+Received: from smtpav01.dal12v.mail.ibm.com (smtpav01.dal12v.mail.ibm.com
+ [10.241.53.100])
+ by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 45ELViNw14222064
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 14 Jun 2024 21:31:46 GMT
+Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 833C258057;
+ Fri, 14 Jun 2024 21:31:44 +0000 (GMT)
+Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 45A1858062;
+ Fri, 14 Jun 2024 21:31:44 +0000 (GMT)
+Received: from [9.61.43.162] (unknown [9.61.43.162])
+ by smtpav01.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Fri, 14 Jun 2024 21:31:44 +0000 (GMT)
+Message-ID: <8b18f131-4e9d-4706-9a43-9ceb35f14d51@linux.ibm.com>
+Date: Fri, 14 Jun 2024 16:31:44 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tpm: measure DTB in PCR1 instead of PCR0
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+References: <20240614120951.16158-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Eddie James <eajames@linux.ibm.com>
+In-Reply-To: <20240614120951.16158-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: mhQGXjWQtH43W_JVtMsxprk41F6cmf0S
+X-Proofpoint-GUID: uauplMCqToLu53AM8cTTHJ1j0pUgE7MI
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-UnRewURL: 0 URL was un-rewritten
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m4Xzi+itj2AQWavZ"
-Content-Disposition: inline
-In-Reply-To: <663b950b-11cc-4598-bf6c-75644d613859@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-14_17,2024-06-14_03,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0
+ impostorscore=0 lowpriorityscore=0 clxscore=1011 spamscore=0
+ priorityscore=1501 mlxscore=0 suspectscore=0 malwarescore=0
+ mlxlogscore=999 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2405170001 definitions=main-2406140149
+X-Mailman-Approved-At: Sat, 15 Jun 2024 06:24:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,49 +119,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---m4Xzi+itj2AQWavZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jun 14, 2024 at 10:26:20PM +0200, Marek Vasut wrote:
-> On 6/14/24 4:54 PM, Tom Rini wrote:
-> > On Fri, 31 May 2024 18:47:16 +0200, Marek Vasut wrote:
-> >=20
-> > > Let users configure default auto-negotiation timeout via Kconfig
-> > > instead of specifying it in board configuration headers. This is
-> > > the first step toward converting this to Kconfig fully, so far the
-> > > legacy PHY_ANEG_TIMEOUT in configuration headers takes precedence.
-> > >=20
-> > >=20
-> >=20
-> > Applied to u-boot/master, thanks!
->=20
-> next, right ?
+On 6/14/24 07:09, Ilias Apalodimas wrote:
+> The PC client spec [0], doesn't describe measurements for DTBs. It does
+> describe what do to for ACPI tables though.
+>
+> There is a description for ACPI in 3.3.4.1 PCR[0] – SRTM, POST BIOS,
+> and Embedded Drivers and they explicitly mention ACPI in there. There's
+> no mention of ACPI in 3.3.4.2 PCR[1] – Host Platform Configuration.
+>
+> However, in Figure 6 --  PCR Mapping of UEFI Components ACPI is shown
+> in PCR1. The general description also mentions PCR0 is for code and PCR1
+> is for data such as ACPI and SMBIOS.
 
 
-Yes, next, sigh, b4 was a bit funny on all of those patches since I was
-in "master" not "next" at the time.
+Thanks, looks correct.
 
---=20
-Tom
+Reviewed-by: Eddie James <eajames@linux.ibm.com>
 
---m4Xzi+itj2AQWavZ
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZsqFsACgkQFHw5/5Y0
-tyyGnQv8CfwM8dmh5LRYFNa+veMdwWVi2sqJgl9+YS2fcEognf0nEmE/li4qWIOm
-e1yAJTGWVmrAPrVfzxGH67NZX3VXii+aCYBrGV/JqpGepLmVYGoKrE6AzVbORNJD
-EjmsxfDJs+OAxoPdO7OFmm/oRDN/CGuDNGCAFoCUdhpazaU5FCn9QevvcVJrgOay
-pUjXJrRSNRLt/qwtuStDbd0YV+CrdnDgf8P+K/s8fRcpH+MXrNn6LHesTvkbPXL8
-NoXSghr6gB/OnFH9BmfRjQcC6uiD8uXWxjsABuPdwRS6lD1mnpfm4lnJ6pVYAlCE
-FQTMc8hBG9v66gM1fWF4atmIEYTXhoLRz7srs6FQuZq8dxL9ozqwJpyAlWnVAGJ6
-YGHuuFo3XRxU/Il09sPznWI8DaccXeuTRttT7OaqHLpI2DkMe0zKc8I5B6JRBVm6
-FzqecJX0ZPx8rChPz656tWmUyzTVfCpB/Su9u6UselLso2iB2Jb/cndskUUs9XxO
-6UxUujYW
-=qceU
------END PGP SIGNATURE-----
-
---m4Xzi+itj2AQWavZ--
+>
+> So let's switch over the DTB measurements to PCR1 which seems a better
+> fit.
+>
+> [0] https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification
+>
+> Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   boot/bootm.c              | 2 +-
+>   lib/efi_loader/efi_tcg2.c | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index 6fa8edab021e..3de87eb185d7 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -963,7 +963,7 @@ int bootm_measure(struct bootm_headers *images)
+>   			goto unmap_initrd;
+>
+>   		if (IS_ENABLED(CONFIG_MEASURE_DEVICETREE)) {
+> -			ret = tcg2_measure_data(dev, &elog, 0, images->ft_len,
+> +			ret = tcg2_measure_data(dev, &elog, 1, images->ft_len,
+>   						(u8 *)images->ft_addr,
+>   						EV_TABLE_OF_DEVICES,
+>   						strlen("dts") + 1,
+> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> index 51264c1b998c..a8a54c9f131d 100644
+> --- a/lib/efi_loader/efi_tcg2.c
+> +++ b/lib/efi_loader/efi_tcg2.c
+> @@ -1328,7 +1328,7 @@ efi_status_t efi_tcg2_measure_dtb(void *dtb)
+>   	sha256_update(&hash_ctx, (u8 *)dtb + fdt_off_mem_rsvmap(dtb), rsvmap_size);
+>   	sha256_finish(&hash_ctx, blob->data + blob->blob_description_size);
+>
+> -	ret = measure_event(dev, 0, EV_POST_CODE, event_size, (u8 *)blob);
+> +	ret = measure_event(dev, 1, EV_POST_CODE, event_size, (u8 *)blob);
+>
+>   	free(blob);
+>   	return ret;
+> --
+> 2.45.1
+>
