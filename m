@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB84C27C79
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A9FC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:54:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E0E1889BB;
-	Fri, 14 Jun 2024 18:54:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05B9488A0C;
+	Fri, 14 Jun 2024 18:54:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CD1A88A08; Fri, 14 Jun 2024 18:54:34 +0200 (CEST)
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [45.157.188.8])
+ id E9F52889B7; Fri, 14 Jun 2024 18:54:34 +0200 (CEST)
+Received: from smtp-1908.mail.infomaniak.ch (smtp-1908.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::1908])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EE9F889B7
+ by phobos.denx.de (Postfix) with ESMTPS id AB7A8889D5
  for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:54:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,20 +25,19 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W153W63PRzhv9;
- Fri, 14 Jun 2024 18:54:31 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W153X1wvLzhGp;
+ Fri, 14 Jun 2024 18:54:32 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4W153V3fmjzK4n; Fri, 14 Jun 2024 18:54:30 +0200 (CEST)
+ id 4W153W5xKczL60; Fri, 14 Jun 2024 18:54:31 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH next 0/3] rockchip: px30: add IO domain driver
-Date: Fri, 14 Jun 2024 18:54:11 +0200
-Message-Id: <20240614-px30-io-domain-v1-0-9552966d3911@cherry.de>
+Date: Fri, 14 Jun 2024 18:54:12 +0200
+Subject: [PATCH next 1/3] rockchip: px30: bind sub-nodes for GRF (syscon)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALN1bGYC/x3MQQqAIBBA0avErBsYU6K6SrSwnGoWaWiEEN09a
- fkW/z+QOAonGKoHIt+SJPgCVVew7NZvjOKKoaHGUKsMnlkTSkAXDiseqW81z50zpBWU6Iy8Sv6
- HI3jOF0zv+wHqp7E9ZgAAAA==
+Message-Id: <20240614-px30-io-domain-v1-1-9552966d3911@cherry.de>
+References: <20240614-px30-io-domain-v1-0-9552966d3911@cherry.de>
+In-Reply-To: <20240614-px30-io-domain-v1-0-9552966d3911@cherry.de>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, 
@@ -63,31 +62,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the IO domain driver for PX30 by importing the appropriate
-bits from the Linux kernel driver, similarly to what's been done for
-RK3399 in the past.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-However for this driver to probe, syscon_px30 driver needs to be fixed
-to probe children of its syscon DT nodes, so this is fixed as well.
+There are some sub-nodes under the grf DT nodes, so add bind callback
+function in syscon_px30 driver to scan them recursively.
 
-Finally, enable this on PX30 Ringneck.
-
+Fixes: e9ccb2f526ed ("rockchip: add px30 architecture core")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (3):
-      rockchip: px30: bind sub-nodes for GRF (syscon)
-      rockchip: io-domain: add support for PX30
-      rockchip: ringneck-px30: enable IO domain
+ arch/arm/mach-rockchip/px30/syscon_px30.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
- arch/arm/mach-rockchip/px30/syscon_px30.c |  3 ++
- configs/ringneck-px30_defconfig           |  1 +
- drivers/misc/rockchip-io-domain.c         | 66 +++++++++++++++++++++++++++++++
- 3 files changed, 70 insertions(+)
----
-base-commit: 0f4e1025ad2ff19095b754229ffec4527380dae1
-change-id: 20240614-px30-io-domain-0963eb8d4031
+diff --git a/arch/arm/mach-rockchip/px30/syscon_px30.c b/arch/arm/mach-rockchip/px30/syscon_px30.c
+index c9de57493d8..893a5234baa 100644
+--- a/arch/arm/mach-rockchip/px30/syscon_px30.c
++++ b/arch/arm/mach-rockchip/px30/syscon_px30.c
+@@ -18,6 +18,9 @@ static const struct udevice_id px30_syscon_ids[] = {
+ U_BOOT_DRIVER(syscon_px30) = {
+ 	.id = UCLASS_SYSCON,
+ 	.name = "px30_syscon",
++#if CONFIG_IS_ENABLED(OF_REAL)
++	.bind = dm_scan_fdt_dev,
++#endif
+ 	.of_match = px30_syscon_ids,
+ };
+ 
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.45.2
 
