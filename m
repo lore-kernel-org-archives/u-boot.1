@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8089BC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21EBC27C77
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C668E8897A;
-	Fri, 14 Jun 2024 08:12:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB97988081;
+	Fri, 14 Jun 2024 08:54:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uFyOY2lF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jEjhcxKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D7C58897B; Fri, 14 Jun 2024 08:12:50 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 8104E87E96; Fri, 14 Jun 2024 08:54:10 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E896B88315
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:12:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C6588897B
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1f700e4cb92so16419495ad.2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:12:46 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-52c32d934c2so2000694e87.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:54:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718345565; x=1718950365; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ako4YZ9l/7j0W0fC5qO4KU++9BbsAhYOrEzYGMuDRRE=;
- b=uFyOY2lFuhW/4Zj53HFrCtpvxs08yRdCBUcb6nbcOSkGMHZIrHuaYnFkFlHFXPsFv3
- dWKmHiJtfVcTnmZb7N1E2Yk/X+SHNssmETDE2aBDQgvssPVDcR64R3xzZvERgz/9clEX
- MoylLGLCXQwRafP/CGs2jwWsA2oxyDrGasu7AauW1W+OT43IHY+ARvO5p/Rm7iXUcyeq
- MWA29obOl2o9hJwxFhp4vi208xkLup2gY9ZT0jJKS3PBDfO2ALQlzwQpdURpeTGY8i6u
- kklEox/tPulLCvTtZa6RmeNMc7jhSYK21UXWOWt9YVjPPsDIOXlBy2KidOTfpcGuuV36
- pDBg==
+ d=linaro.org; s=google; t=1718348047; x=1718952847; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tXyC2hSxrSy8HIszYxHGrY3fviY0Db+JHvksS1U04QU=;
+ b=jEjhcxKZxr+IWMBezOVorDtx/Z6UvQNMG/F2Iso4SybkRRGwyftQeiWhWd47h4UHeW
+ GFNg0TAgp6T9cC7jPStUnylYApVbx91zoXLili4oAetQU0jSHOYxEnJpjLMQu+Ne6svm
+ f4OHyXG4Se31p5W5hlTPtEKORYHUvO1bTvplZyq7Qx7E//j3wZrczwfjsYjTa81aX2ID
+ Hkz7BtDcHZ9Jb5f3g2zq6tMdZvRJHQU1zl/JPqHfk4/fTXH1dSxNneStgpEjdKZusHG/
+ 1+XlLPhMHqCX4u7XPmGbi3yfYCp83zyFgYlj9WyoWTw9wqIzcCNJYmCym5yLkCChYEVz
+ ZQKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718345565; x=1718950365;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1718348047; x=1718952847;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ako4YZ9l/7j0W0fC5qO4KU++9BbsAhYOrEzYGMuDRRE=;
- b=CVd3wmiKEOcwImezECm7p4HKwJrvb9YauP3BTDT/oOe3ghGVdscH/8EkW2xpJZDInB
- ipEl+uSoH8JzQPPyk6g+7mY8FtcIJDDPbx7D6LExhtTnkOht+Swe0DGYlC+NKWP/1T51
- rf/Gzlbt5JlTFKdwwRhOea/qpUE2ObRTzSLT0TwrgSNNMUSwq3nY8l+rrkuR1jH7yO65
- wfc/Fu/BsBoICGnRM5ojpq4mFTp/t1iso8XTUcW/pf0G7m4m2Zh3LGeRePYX+/wed39A
- QPGFjTVSvQlZBjsOeJFqDh/yGMxr+GhRakBHBu93b4jx2D1XdpPI7+ijKYsb6xho+wzx
- U11g==
+ bh=tXyC2hSxrSy8HIszYxHGrY3fviY0Db+JHvksS1U04QU=;
+ b=C9NSY1m3H8rhi6fSSfJFTvy7QmmTooCGsdLeiTGTQr1Une+i6axmEf1jBOARo0VMYC
+ nMdCIEl4rUd8H9ov42KISGTMOF7TRi9UzONInT9CbhMxYPciqdSC5sc/krcIKvGAxm9w
+ 6uTBpgLg8UuEdmqDuDSCdv73UW92LRyn6iScELCC+UXhdT7wH5y3m6bbrJu5TGCxdn//
+ hhNlBtyZvz5y3+csSVS48/ezcwP2pBs3sE3cLiGaUOxbzNcMWjtLjVljOrTPXI6MfbQl
+ tr28JVGEV15fhpx0M8cm7NHZE3sQUm+I6Q3bTaLh2CqULaSqTIe6K+vK/nkfrYHrAxIZ
+ 83Xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpSxDgBFaZLvuJ3D2Tu15ROVLwSV53tgksEpyb4gmlF7iqQY/QsIY//8osUXUdI7ISntZPpNvV8bTHPLiRXInX49GQZA==
-X-Gm-Message-State: AOJu0YwUIo0KS9NocQnkufXZAyrtGqkPbuPkZEZws3F9ZcpDZmcaab6y
- ycK5vCGKnHqG3gjgL2Pi0MbcWKQx+E9bBAp/ojKASsBVhNknm2lCZYg+lLKENdoqtv1OKC+9Ysu
- u/2L3HxC1dl/39O+vAi+QQ+a3M73TBlKdYTPY0g==
-X-Google-Smtp-Source: AGHT+IGdDUYNFYyfVsgWRFYQjrB3RWSSy3nycfH5MYWdey0RUaC7kLV+rfchJ/bPa9Rbt9fuVQ94MCJ9MQ9hXxPi638=
-X-Received: by 2002:a17:902:ced0:b0:1f4:b9d3:adce with SMTP id
- d9443c01a7336-1f8625d39abmr23109445ad.27.1718345565420; Thu, 13 Jun 2024
- 23:12:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240613202753.2528889-1-j-humphreys@ti.com>
-In-Reply-To: <20240613202753.2528889-1-j-humphreys@ti.com>
+ AJvYcCW7jQdO7YRxQoaSxPLh9PqUqbCwD/DtE6neC6WQj0PjRQQTQhQ+nWPVPRizXMl1zIAjL9yLgTkldTdHe9ikyBTBIoXp8w==
+X-Gm-Message-State: AOJu0YxfUfrtZJuJLwSrFTL6dTW4eErVmlm/IqFJzyT0KRVEoZnNbP8G
+ UE1Qbu1816aeqL7qsYZygEMgUq7mUt4JXrlSEEXMkX1pWUrYnjVIqxk18jdUq5s=
+X-Google-Smtp-Source: AGHT+IFk2ePj/Nfnwz9NbVYcOJuYUO8eAaSFlC/8h98tDRAsbRpe6T0Vk83M0RAJNS4qbK0kCYcRlQ==
+X-Received: by 2002:ac2:4db9:0:b0:52c:5252:55c2 with SMTP id
+ 2adb3069b0e04-52ca6e9a0d4mr982108e87.64.1718348047517; 
+ Thu, 13 Jun 2024 23:54:07 -0700 (PDT)
+Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
+ [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36074e0e5adsm3531579f8f.0.2024.06.13.23.54.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Jun 2024 23:54:06 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Jun 2024 09:12:09 +0300
-Message-ID: <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] scripts/Makefile.lib: EFI: Use capsule CRT instead
- of ESL
-To: Jonathan Humphreys <j-humphreys@ti.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Wei Ming Chen <jj251510319013@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Joshua Watt <jpewhacker@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, 
- Sean Anderson <seanga2@gmail.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: sjg@chromium.org
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>, u-boot@lists.denx.de
+Subject: [PATCH] sandbox: cleanup linker scripts and sections
+Date: Fri, 14 Jun 2024 09:53:56 +0300
+Message-ID: <20240614065357.182446-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,43 +92,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonathan
+commit 6e2228fb052b ("Merge patch series "Clean up arm linker scripts"")
+was cleaning up linker scripts for armv7 and v8 in a similar fashion.
 
-On Thu, 13 Jun 2024 at 23:28, Jonathan Humphreys <j-humphreys@ti.com> wrote:
->
-> Use the capsule's public key certificate rather than a prebuilt ESL
-> generated from the certificate. The ESL is now generated as part of the
-> build.
+Several commits in the past -- e.g
+commit d0b5d9da5de2 ("arm: make _end compiler-generated")
+was moving symbols to be compiler generated. They were defined as c
+variables in its own section to force the compiler emit relative a
+reference. However, defining those in the linker script will do the
+same thing since [0].
 
-Is there a reason to do this? I understand that the .crt extension
-might be well known while the .esl is not, but OTOH the system you
-build on after this change *needs* to have cert-to-efi-sig-list
-installed
+So let's remove the special sections from the linker scripts, the
+variable definitions from sections.c, and define them as a symbols.
+It's worth noting that the linker was discarding the symbols in the
+older binary completely.
 
-Thanks
-/Ilias
->
-> Changes from v1:
-> - Converted the single patch to a series to include a bug fix found during
->   development.
-> - Created an explicit rule for creating the ESL file for proper makefile
->   dependency tracking.  v1 had combined creating the ESL file and
->   generating the .dtsi include in a single command.
->
-> Jonathan Humphreys (2):
->   scripts/Makefile.lib: fixes: Embed capsule public key in platform's
->     dtb
->   scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file
->
->  board/sandbox/capsule_pub_esl_good.esl | Bin 831 -> 0 bytes
->  configs/sandbox_defconfig              |   2 +-
->  configs/sandbox_flattree_defconfig     |   2 +-
->  doc/develop/uefi/uefi.rst              |   8 ++++----
->  lib/efi_loader/Kconfig                 |  12 +++++++-----
->  scripts/Makefile.lib                   |  24 +++++++++++++++---------
->  6 files changed, 28 insertions(+), 20 deletions(-)
->  delete mode 100644 board/sandbox/capsule_pub_esl_good.esl
->
-> --
-> 2.34.1
->
+- new binary
+$~ aarch64-linux-gnu-readelf -sW u-boot | grep efi_runtim
+   246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_runtime_rand
+  3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_mmio
+  6359: 00000000000dedff   217 FUNC    LOCAL  DEFAULT   14 efi_runtime_relocate
+  7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_services
+  8869: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_rel_stop
+  9159: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_stop
+  9410: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_start
+ 10137: 00000000005981bd     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.c.de5bed54
+ 10470: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_rel_start
+
+- old binary
+$~ aarch64-linux-gnu-readelf -sW u-boot.old | grep efi_runtim
+   246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_runtime_rand
+  3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_mmio
+  6359: 00000000000dedff   221 FUNC    LOCAL  DEFAULT   14 efi_runtime_relocate
+  7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_services
+ 10135: 0000000000598320     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.c.de5bed54
+
+$~ bloat-o-meter u-bool.old u-boot
+add/remove: 0/0 grow/shrink: 1/1 up/down: 7/-4 (3)
+Function                                     old     new   delta
+efi_memory_init                              343     350      +7
+efi_runtime_relocate                         221     217      -4
+Total: Before=2009902, After=2009905, chg +0.00%
+
+[0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/sandbox/cpu/u-boot.lds | 20 ++++----------------
+ arch/sandbox/lib/Makefile   |  2 +-
+ arch/sandbox/lib/sections.c | 13 -------------
+ 3 files changed, 5 insertions(+), 30 deletions(-)
+ delete mode 100644 arch/sandbox/lib/sections.c
+
+diff --git a/arch/sandbox/cpu/u-boot.lds b/arch/sandbox/cpu/u-boot.lds
+index 52f13af3742f..6ee8095b6cbb 100644
+--- a/arch/sandbox/cpu/u-boot.lds
++++ b/arch/sandbox/cpu/u-boot.lds
+@@ -19,30 +19,18 @@ SECTIONS
+ 		*(_u_boot_sandbox_getopt_end)
+ 	}
+
+-	efi_runtime_start : {
+-		*(___efi_runtime_start)
+-	}
+-
+ 	efi_runtime : {
++                __efi_runtime_start = .;
+ 		*(efi_runtime_text)
+ 		*(efi_runtime_data)
+-	}
+-
+-	efi_runtime_stop : {
+-		*(___efi_runtime_stop)
+-	}
+-
+-	efi_runtime_rel_start : {
+-		*(___efi_runtime_rel_start)
++                __efi_runtime_stop = .;
+ 	}
+
+ 	efi_runtime_rel : {
++                __efi_runtime_rel_start = .;
+ 		*(.relefi_runtime_text)
+ 		*(.relefi_runtime_data)
+-	}
+-
+-	efi_runtime_rel_stop : {
+-		*(___efi_runtime_rel_stop)
++                __efi_runtime_rel_stop = .;
+ 	}
+
+ 	.dynsym :
+diff --git a/arch/sandbox/lib/Makefile b/arch/sandbox/lib/Makefile
+index a2bc5a7ee60f..d7d15a50bb6c 100644
+--- a/arch/sandbox/lib/Makefile
++++ b/arch/sandbox/lib/Makefile
+@@ -5,7 +5,7 @@
+ # (C) Copyright 2002-2006
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+
+-obj-y	+= fdt_fixup.o interrupts.o sections.o
++obj-y			+= fdt_fixup.o interrupts.o
+ obj-$(CONFIG_PCI)	+= pci_io.o
+ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_BOOTZ) += bootm.o
+diff --git a/arch/sandbox/lib/sections.c b/arch/sandbox/lib/sections.c
+deleted file mode 100644
+index 2f2f3fbfdb86..000000000000
+--- a/arch/sandbox/lib/sections.c
++++ /dev/null
+@@ -1,13 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2013 Albert ARIBAUD <albert.u.boot@aribaud.net>
+- *
+- */
+-#include <linux/compiler.h>
+-
+-char __efi_runtime_start[0] __section("___efi_runtime_start");
+-char __efi_runtime_stop[0] __section("___efi_runtime_stop");
+-char __efi_runtime_rel_start[0]
+-		__section("___efi_runtime_rel_start");
+-char __efi_runtime_rel_stop[0]
+-		__section("___efi_runtime_rel_stop");
+--
+2.45.1
+
