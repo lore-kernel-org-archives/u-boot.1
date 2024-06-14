@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8B0C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FEFC27C75
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:19:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFFCA87D4F;
-	Fri, 14 Jun 2024 14:18:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 79C5588047;
+	Fri, 14 Jun 2024 14:19:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gdiVW/DN";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="pKnpBZWl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7044287D6B; Fri, 14 Jun 2024 14:18:37 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 6B664889C4; Fri, 14 Jun 2024 14:19:29 +0200 (CEST)
+Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com
+ [91.218.175.179])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6612686784
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:18:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 715B388047
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:19:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718367510; x=1718972310; i=xypron.glpk@gmx.de;
- bh=vLHopmAh2dQW/EVksFa0F3oj13SSTpZn+jedBQPeTdE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=gdiVW/DN+ti4ghRX7bebVzC70ZvI2P/XYyVoEmkJAhuZQDKmcJFol0uEgUTyligy
- mm6Pmt9e9Bd9S8V9h8rcq/X3okBrLA46yvy88lxDAcboqAoC+I6KCywLicT/w562s
- zm1UP6ffjKPJi6dIjWDBiJ676pMzS8N8bh8LHxSEtup7QuZJbgdT3qyNVykTlKs+/
- zwXfWt6wDR3wDktyapmbtuhOA0RD4pSG7tt59eXxN6Ku8XgI+VSX5Pw0qiEjAaDKq
- 48lWaQB6xe78KPInQkritqCx8+tBVX8iPoWvNwWHGvBLH9R4Sb6vw7cFjO4ea1Dhq
- MPeqF08sB7YpLB0sOw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mi2Nv-1sw5Op05Mf-00fdy4; Fri, 14
- Jun 2024 14:18:30 +0200
-Message-ID: <b9d80a2f-0fb9-4219-9c86-aa818d7707e2@gmx.de>
-Date: Fri, 14 Jun 2024 14:18:29 +0200
+ spf=pass smtp.mailfrom=contact@jookia.org
+X-Envelope-To: jagan@amarulasolutions.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1718367565;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=D9hQ6WlvU0vFeeW2pR5wUjKIkVZ6J2mPIVmX/jQharo=;
+ b=pKnpBZWlVRgIJpRbnAiSqCPZocUgFQj8rVX7DsjJVxR1vAEBAt0cl4mrbLuG1+q7SwA4J0
+ o5tZi4Azv960bq7/25BjbpuPb/zP/qzsAyxVdw8G/0lmd20pUx1INhMk5B+MfWOeHLBX7i
+ lyFPUL+0dF8H9X07iwqyRYkAAFImatsVYhRyWDZov+DLTE3ZckjHuVFxXy48THBQrIOxRy
+ HhRSnhpTAIeOlKCgMh6ep0RPNuMpuoeokLP9ZggaXgZIYc3xOT1lLw9CV9y3SZkYj0OxTu
+ Jg2apxqMYiI0JZDvB4iU7ZPmgxFOYme76B6trqSxdLtroFomu4EwHqvYloxP0g==
+X-Envelope-To: agust@denx.de
+X-Envelope-To: u-boot@lists.denx.de
+X-Envelope-To: trini@konsulko.com
+X-Envelope-To: contact@jookia.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: John Watts <contact@jookia.org>
+Subject: [PATCH 0/5] video: add support for MIPI DBI interface
+Date: Fri, 14 Jun 2024 22:18:40 +1000
+Message-Id: <20240614-mipi_dbi-v1-0-946eb82f8533@jookia.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: describe UEFI measured boot
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- heinrich.schuchardt@canonical.com
-References: <20240614094031.6013-1-ilias.apalodimas@linaro.org>
- <ab7c6516-8d03-4561-b4e7-f619799416ba@gmx.de>
- <CAC_iWj+GiFYktbALOd+mZGqPLwe+-+tD_e3MC4E1W=3=mXqz9Q@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWj+GiFYktbALOd+mZGqPLwe+-+tD_e3MC4E1W=3=mXqz9Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:w0GcIGARIoVAAW+FP+kWrBHsyqQgQkyfLg6opCTyqUJ4833TIfe
- ft6gYrgCgFdfr21P1gnuhFGGZD/xu6bi1HmSIyJI2KxLlDgxwc6cPYG6y5sKDV427WaZtl9
- OMLUWFifMj21eHnvg7PJb4fBpZnD7dC9tTQhjXtqfPUPziLo+zl8D/70WEfs9RiEZBfPH20
- suFaBcAzIayJX26ag/THw==
-UI-OutboundReport: notjunk:1;M01:P0:nMgw9YRXiPU=;l09H0vggnpJ4hKMrvCezwZcQve9
- KBw9NvijitdVxJKwMQuNO5pCtIWGxIo+5b6MaEWA07SMhoeINs75gf4CXWKelH5u0mbp24t9N
- 9yp0/V0rBYPsC1rUI5Gzk6Hf74RajnbgzB6Ek10pZ8tGsvVPYAybnFPJ2ByLbssE+08Jl3AEX
- xo9HKob8BKEPHmpx1bDtevn0D12JBygM9H3RoUo5YaXPLlP3YTW4cXdQhK13zabTGXoEXuOVe
- H+HOUxOAFKvL14SlbMWCH3YHiKC+lezKuf+zzFNsxN83b4GWSFdA+nmjDEsIKFvAG5sDPWQqE
- kdXZoOBS//GC8BSR/Nbr4P2I3ibtpxJqLUsnpOqDY5WBQ9cCgKCnqsTfKy9RH3Kugn/m3+LN0
- EiT7b+/if8rBoivSWAOkhu/++uK6/rLM1Utm5NfacWw3ORe3N1bimdxUtx/00/JgP1Ggay/zn
- sn+FJ+lsSl2CUkYatKX8+9mFqbm5RoDaslXcC5Y4sOgOVoRg/tmhmYrpAp/3lDThBqDoiQUCt
- qohpEq85RqTtIrtqgd3VgJh+pkLRtidZW8VrKQV4s0//64Cy80FRVuH6cIuYZLvpaoM2IaUb1
- 3jUkqJ1ThymCATiQ8aOZxi2ni/LtD2m97OIz9A/t6aQqajovY+vFIZ2xCxQP+pPUX5o0Q9dDj
- UH1/c1WApEQscu/FczHaiHhKNriI0ntI2MZzWLNAdvREmhf1ihZQgAYg4ENDIVrP8lNhq1rIA
- sSSXS8nlDfEI8R8Cnyg/IyDfEymSBblJpZofBu2PLo8KJgs5cd0/fDvt26Hc1E7OL3cDRQXJN
- 0DSdhujgLpuDnd4xWSlFUwMUBBKE5okW2LVKk4CNrGVYI=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACA1bGYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDMwND3dzMgsz4lKRM3cTUlERLizSjNMsUUyWg8oKi1LTMCrBR0bG1tQC
+ C2TBuWgAAAA==
+To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de, John Watts <contact@jookia.org>
+X-Developer-Signature: v=1; a=openssh-sha256; t=1718367525; l=1871;
+ i=contact@jookia.org; h=from:subject:message-id;
+ bh=wf8ezQ7BQ2JOtkNtEbc5qEz6ic/6/FSDrH6lCOewNlY=;
+ b=U1NIU0lHAAAAAQAAAEoAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAAAgPs7MDd2XR
+ g2uRE9caV1lPPPeu0VzIG9fPrrVmYyAhLcAAAAEc3NoOgAAAAZwYXRhdHQAAAAAAAAABnNoYTUx
+ MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAss1Qs2DkOx6RHaTW+I4WDPt
+ UfiL4NRDYeMkw24WhU25imGr09asYiHQ7oGMPdmjU1aH6aPI5MKUob3NuDoivDQUAAP+F
+X-Developer-Key: i=contact@jookia.org; a=openssh;
+ fpr=SHA256:/gEvgms/9HpbgpcH+K7O4GYXmqkP7siJx9zHeEWRZTg
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,163 +83,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.06.24 12:47, Ilias Apalodimas wrote:
-> [...]
->
->>
->>> +
->>> +UEFI requirements
->>> +~~~~~~~~~~~~~~~~~
->>> +* A hardware TPM 2.0 supported by the U-Boot drivers
->>
->> by an enabled U-Boot driver.
->>
->>> +* CONFIG_EFI_TCG2_PROTOCOL=3Dy
->>> +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=3Dy
->>> +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=3Dy will measure the =
-loaded DTB in PCR 0
->>
->> Why does this setting not default to yes?
->>
->> Should EFI_TCG2_PROTOCOL_MEASURE_DTB depend on !GENERATE_ACPI_TABLE as
->> we won't load the device-tree in this case?
->>
->> I can't find any reference to device-trees in `TCG PC Client Platform
->> Firmware Profile Specification`.
->
-> It's not and I've already pointed this out to Arm. We followed what
-> ACPI does there and used "DTB DATA" instead of "ACPI DATA" as the
-> event string.
->
->>   Where is PCR 0 for the device-tree specified?
->
-> As I said DT is missing from the spec but look below
->
->> I read:
->>
->> "In general, the platform firmware measures into PCR[1] the
->> configuration data that is associated with the code that measured into
->> PCR[0]".
->>
->> This looks like PCR 1 should be the target for the device-tree.
->
-> There is a description for ACPI in 3.3.4.1 PCR[0] =E2=80=93 SRTM, POST B=
-IOS,
-> and Embedded Drivers and they explicitly mention ACPI in there.
-> There's no mention of ACPI in 3.3.4.2 PCR[1] =E2=80=93 Host Platform
-> Configuration.
+Many simple RGB panels use a MIPI DBI interface over SPI, so this patch
+adds support for this interface using an API compatible with Linux.
 
-3.3.4.1 "PCR[0] =E2=80=93 SRTM, POST BIOS, and Embedded Driver" covers usa=
-ge of
-EV_POST_CODEs for different PCRs.
+The MIPI DBI interface works similar to SPI using 8-bit words in the
+format of: COMMAND DATA1 DATA2 ...
+However the interface has two variations on this.
 
-EV_POST_CODE is deprecated. That one could be used for ACPI_DATA.
+The first variation is implemented by this patch series: Using 9-bit
+words, with the first bit signalling whether the word is a COMMAND or
+DATA.
 
-EDK II:
+The second variation is not implemented by this series: A GPIO is held
+at a value during an 8-bit word to indicate if it's a COMMAND or WORD.
+Adding support for this wouldn't be too hard, but I don't have any
+hardware to test it on.
 
-SecurityPkg/Tcg/Tcg2Acpi/Tcg2Acpi.c:660,
-SecurityPkg/Tcg/TcgSmm/TcgSmm.c:379,
-UefiCpuPkg/Library/SmmCpuFeaturesLib/SmmStm.c:1226 measure with
-deprecated EV_POST_CODE, EV_POSTCODE_INFO_ACPI_DATA to PCR[0]. This
-seems to include a measurement of the ACPI TPM2 table.
+Linux seems to not implement the specification correctly: It sets CS
+inactive between words instead of keeping it active for the entire
+transaction. I'm copying this behaviour to keep compatibility in porting
+panels across from the kernel.
 
-OvmfPkg/AcpiPlatformDxe/QemuFwCfgAcpi.c:426 measures with
-EV_PLATFORM_CONFIG_FLAGS, EV_POSTCODE_INFO_ACPI_DATA to PCR[1].
+Signed-off-by: John Watts <contact@jookia.org>
+---
+John Watts (5):
+      spi: Return old wordlen in spit_set_wordlen
+      spi: Limit spi_set_wordlen to SPI_DEFAULT_WORDLEN
+      spi: Implement spi_set_wordlen for driver model
+      spi: softspi: Support setting wordlen
+      video: add support for MIPI DBI interface
 
-MdeModulePkg/Universal/SmbiosMeasurementDxe/SmbiosMeasurementDxe.c:630
-measures SMBIOS with EV_EFI_HANDOFF_TABLES to PCR[1].
+ drivers/spi/soft_spi.c   |  7 +++++
+ drivers/spi/spi-uclass.c | 29 +++++++++++++++++++
+ drivers/spi/spi.c        |  6 ++--
+ drivers/video/Kconfig    |  6 ++++
+ drivers/video/Makefile   |  1 +
+ drivers/video/mipi_dbi.c | 70 ++++++++++++++++++++++++++++++++++++++++++++++
+ include/mipi_dbi.h       | 73 ++++++++++++++++++++++++++++++++++++++++++++++++
+ include/spi.h            |  2 +-
+ 8 files changed, 191 insertions(+), 3 deletions(-)
+---
+base-commit: c0ea27bccfb7d2d37fd36806ac2a2f7389099420
+change-id: 20240601-mipi_dbi-aeda98f2f9d5
 
->
-> However ..... In Figure 6 PCR Mapping of UEFI Components ACPI is shown
-> in PCR1 .....
-> I am not sure if we should use PCR0 or 1, if anyone has a strong
-> opinion we can easily change the measured PCR.
-
-According to the cited sentence PCR 1 would make most sense.
-
->
->>
->> Do we already measure ACPI and SMBIOS tables into PCR1 as required by
->> the specification.
->
-> We do measure SMBIOS in PCR1. I don't think we do anything for ACPI.
-
-I guess the ACPI TPM2 table would be needed to access the TCG2 device
-(see TCG ACPI Specification).
-
->
->>
->>> +
->>> +bootm
->>
->> Measured legacy boot with bootm command
->>
->> Please, consider in your description that the bootm command may be used
->> to load a FIT image with an EFI binary.
->
-> I am not entirely sure how this works, someone who has used that needs
-> to update it. What happens in that case? Does bootm end up calling
-> bootefi ? That means we are measuring things twice?
-
-We measure only once:
-
-boot/bootm.c:925:
-
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Skip measurement if EF=
-I is going to do it */
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (images->os.os =3D=3D =
-IH_OS_EFI &&
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0    IS_ENABLED(CONFIG_EFI=
-_TCG2_PROTOCOL) &&
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0    IS_ENABLED(CONFIG_BOO=
-TM_EFI))
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0return ret;
-
-
-do_bootm_efi() calls efi_binary_run().
-
-Best regards
-
-Heinrich
-
->
->>
->>> +-----
->>>    By default, U-Boot will measure the operating system (linux) image,=
- the
->>>    initrd image, and the "bootargs" environment variable. By enabling
->>>    CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree =
-image.
->>> @@ -15,8 +35,8 @@ The operating system typically would verify that the=
- hashes found in the
->>>    TPM PCRs match the contents of the event log. This can further be c=
-hecked
->>>    against the hash results of previous boots.
->>>
->>> -Requirements
->>> -------------
->>> +bootm requirements
->>
->> This is already a sub-section of bootm. No need to repeat it.
->>
->>> +~~~~~~~~~~~~~~~~~~
->>>
->>>    * A hardware TPM 2.0 supported by the U-Boot drivers
->>
->> by an enabled U-Boot driver.
->>
->>>    * CONFIG_TPM=3Dy
->>
->> CONFIG_TPM_V2=3Dy is required?
->>
->> Best regards
->>
->> Heinrich
->>
->>
->
-> Thanks
-> /Ilias
->>
+Best regards,
+-- 
+John Watts <contact@jookia.org>
 
