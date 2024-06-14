@@ -4,62 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A31FC27C75
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 208C3C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:33:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD20C88998;
-	Fri, 14 Jun 2024 11:30:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 7144A88995;
+	Fri, 14 Jun 2024 11:33:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PCvglxkp";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="jJJFltBx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0567C88962; Fri, 14 Jun 2024 11:30:57 +0200 (CEST)
-Received: from mail-m127224.xmail.ntesmail.com
- (mail-m127224.xmail.ntesmail.com [115.236.127.224])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 399B788996; Fri, 14 Jun 2024 11:33:54 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54F7B88993
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:30:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 46DAC88991
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:33:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=PCvglxkpmQUeJNQ/FcDobV4vfV8tS28RfVYVpprH9H9Z16xhv/83KtEgfXbKMfe8YMbYKL3dy3wpe+FyovZjaYOhqKBuPwbdOsvAIhvwkiV2dyv4stYDpF/HeO+z6LnYeFVEnKbjTeTd9iFjxGm1XPoB2nZ9CLYLMMgUEnoPMP8=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=RJE2hHwLQLgPP+NIpXzyGyFNirn077bRwxBd5PjAseM=;
- h=date:mime-version:subject:message-id:from;
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 8D748900720;
- Fri, 14 Jun 2024 17:30:13 +0800 (CST)
-Message-ID: <9595fb4f-0d79-49a9-8c5e-014051c1b778@rock-chips.com>
-Date: Fri, 14 Jun 2024 17:30:13 +0800
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E7uqHt014919;
+ Fri, 14 Jun 2024 11:33:51 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ Rxn50EVHSTMPLDkZzQ0R08E+8Wuw78OUmsqWkaRQVNw=; b=jJJFltBxApob9WML
+ NWgB/B4Ao0jHMbSaShw7af8pGGVloColN0iU7oUZNV7epVRtaH4IIa9KTydpaOEH
+ IoCkasGVrAzLbMG6183Pgj38Mpoyn5N9o9w0h+W6QzVi3B79AsPDk12SAx+Cj9C+
+ YEZRBiRcfLAqDnqfgLW5EXEEtIHI0X9eNgIT3FijCdBHbRCJO2nRmQwbJoxHq17H
+ KZFfpfSi2ao4+PgNIlKDz9KIa+B6pgjRG+13H0xDzPK5RKrK0NUoqdnSsJTqnAcM
+ Nyzvf3jysRtVGG6YxBA07DRM0tciFab2OjuVRLRg7YEazYl8KUXpcgQ6WvSEzbQh
+ scvQFg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp502rr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 11:33:51 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CE39640045;
+ Fri, 14 Jun 2024 11:33:46 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E215C2115E8;
+ Fri, 14 Jun 2024 11:33:34 +0200 (CEST)
+Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
+ 2024 11:33:34 +0200
+Message-ID: <d7b11fc6-41af-4056-a506-73546464eb80@foss.st.com>
+Date: Fri, 14 Jun 2024 11:33:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] rockchip: puma-rk3399: get closer to other Theobroma
- defconfigs
-To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Klaus Goger <klaus.goger@cherry.de>
-Cc: u-boot@lists.denx.de, heiko@sntech.de
-References: <20240612-ringneck-bootd-v1-0-f0bc3816b822@cherry.de>
- <20240612-ringneck-bootd-v1-2-f0bc3816b822@cherry.de>
+Subject: Re: [PATCH 2/2] stm32mp1: spl: Update optee_get_reserved_memory()
+ return value
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
+ <trini@konsulko.com>
+References: <20240611095239.16026-1-patrice.chotard@foss.st.com>
+ <20240611095239.16026-2-patrice.chotard@foss.st.com>
+ <53f4d52c-0b87-4bae-91f4-9529321cc549@foss.st.com>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240612-ringneck-bootd-v1-2-f0bc3816b822@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGRlKVk5ITEpKTBpNT0oaSVYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a90161552bd03a9kunm8d748900720
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MSI6SCo5FDNOGhQrGA0hURMy
- ITVPFA9VSlVKTEpDSE5MT0pOS05MVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhLTk43Bg++
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <53f4d52c-0b87-4bae-91f4-9529321cc549@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.252.18.60]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,55 +93,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/6/12 22:40, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->
-> Disable support for unused OSes as Linux is the primary target.
->
-> Disable support for bootz as zImage isn't a format compatible with
-> Aarch64 machines so it should never be attempted to be booted.
->
-> Enable a bunch of commands:
->   - erofs
->   - gpio
->   - squashfs
->
-> that could be useful and are also found in Jaguar and Tiger defconfigs.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Thanks,
-- Kever
-> ---
->   configs/puma-rk3399_defconfig | 9 ++++++++-
->   1 file changed, 8 insertions(+), 1 deletion(-)
->
-> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-> index 34a0b575991..3196b5e24b1 100644
-> --- a/configs/puma-rk3399_defconfig
-> +++ b/configs/puma-rk3399_defconfig
-> @@ -29,7 +29,12 @@ CONFIG_SPL_I2C=y
->   CONFIG_SPL_POWER=y
->   CONFIG_SPL_SPI_LOAD=y
->   CONFIG_TPL=y
-> -CONFIG_CMD_BOOTZ=y
-> +# CONFIG_BOOTM_NETBSD is not set
-> +# CONFIG_BOOTM_PLAN9 is not set
-> +# CONFIG_BOOTM_RTEMS is not set
-> +# CONFIG_CMD_VBE is not set
-> +# CONFIG_BOOTM_VXWORKS is not set
-> +CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_I2C=y
->   CONFIG_CMD_MMC=y
-> @@ -41,6 +46,8 @@ CONFIG_CMD_CACHE=y
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_PMIC=y
->   CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_EROFS=y
-> +CONFIG_CMD_SQUASHFS=y
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->   CONFIG_ENV_OVERWRITE=y
->
+On 6/14/24 09:59, Patrick DELAUNAY wrote:
+> Hi Patrice
+> 
+> On 6/11/24 11:52, Patrice Chotard wrote:
+>> In case node "/reserved-memory/optee" is not found, return -ENOENT
+>> instead of 0.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>   arch/arm/mach-stm32mp/stm32mp1/spl.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>> index 10abbed87f0..beda69f3359 100644
+>> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>> @@ -118,7 +118,7 @@ static int optee_get_reserved_memory(uint32_t *start, uint32_t *size)
+>>         node = ofnode_path("/reserved-memory/optee");
+>>       if (!ofnode_valid(node))
+>> -        return 0;
+>> +        return -ENOENT;
+>>         fdt_start = ofnode_get_addr_size(node, "reg", &fdt_mem_size);
+>>       *start = fdt_start;
+> 
+> 
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> Thanks
+> Patrick
+> 
+> 
+> 
+Applied to u-boot-stm32/master
+
+Thanks
+Patrice
