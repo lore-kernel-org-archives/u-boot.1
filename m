@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646DAC27C75
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C5EC27C75
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA47888997;
-	Fri, 14 Jun 2024 11:05:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7981388932;
+	Fri, 14 Jun 2024 11:07:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NNuW5PzI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DZae7bkl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27E4088998; Fri, 14 Jun 2024 11:05:03 +0200 (CEST)
+ id 5A28E88995; Fri, 14 Jun 2024 11:07:03 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D302587E3F
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:04:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 484068892B
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:07:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718355881; x=1718960681; i=xypron.glpk@gmx.de;
- bh=xdjCHpOrfn2BzbUC0OjxnURLWjJyEgrTpwL4G41PKRk=;
+ s=s31663417; t=1718356019; x=1718960819; i=xypron.glpk@gmx.de;
+ bh=XFQx5rp2mL0Y2JyFen8NbnJliT7+wdmvw16KPuLozTc=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=NNuW5PzIaTdwITMSmv5dJVkCsML/7r3CqwEEFqI5lyljzJWO2uYQxo7LRk9uo69T
- jKSFmrliSgmJLJI1H56mCm1+ODj0o/UTnj52WuUAksoh6O2rFJcgCAAmrcuCGd8zV
- zqDLZTNxvIwoZtG0SsVB4R9WkLDx+/3FPvYYR2uFSHx8BwsaQFW+a4uQYKYlfoRaB
- lz3BbnH3aCA6cBYuL3T+NQN5vd0kSxUCY6ZcVeLVfwfTk5Q1u1Jk4QZlQd4T65/Et
- kFVC5gaFPGTZmro7qGq7pq2OU+rsnu+X46rE/tp3wtRaYbvsniE9JJHJCb3hB0znH
- XXJODJiifJwuQ3rljg==
+ b=DZae7bklPRiQSq5wvIJyLEVmsez4rmSGSsL1ar+9dPMmutmjlmwhL+F0TkCwUizF
+ FRs2iorNMRNa7z1NN9KloGoT6viJWJeqTlrY232Of8E+HJZ5VAlZKAXEphROEebyB
+ Ov4XutgYEF7QfJeYnAnlhIvaIvOQTiV81N4opU5ZG5Qm3JmypcFrbGI+qezEdbxq8
+ /fZzQolbVeQqOioq11qdkCMli8L18/N0mPbBOjTSUbUvEWM26eAtdnjd4nPlIsxeP
+ 0/rDtEjZcJtnwG/HHttXkqZIi99Zf0fOZj+UJWKT7fqj1v7jIJUYq4oP0CrPgntSC
+ D+mvzjvqCmHkhXyjFg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MjS9I-1sgyH502m2-00dkRY; Fri, 14
- Jun 2024 11:04:41 +0200
-Message-ID: <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
-Date: Fri, 14 Jun 2024 11:04:32 +0200
+Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N0X8o-1sdAmN2yay-00vnpq; Fri, 14
+ Jun 2024 11:06:59 +0200
+Message-ID: <973ea069-0524-4c32-8f44-77278521a368@gmx.de>
+Date: Fri, 14 Jun 2024 11:06:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
+Subject: Re: [PATCH] sandbox: cleanup linker scripts and sections
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>
-References: <20240610145920.3302001-1-sjg@chromium.org>
- <20240610145920.3302001-3-sjg@chromium.org>
- <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
- <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
- <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Angelo Dureghello
+ <angelo@kernel-space.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+References: <20240614065357.182446-1-ilias.apalodimas@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
+In-Reply-To: <20240614065357.182446-1-ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:VsB2TF9YXxHJ8VkjdzpaJydczVjCoMR9MbAjkQ7FV/bNaGENfpz
- OXZOaDy7eHVwKXPbVip918ltwB7BZhRRL1PbOsWkutqXHd/qpmakHwESTxph+qFaBsCVdNA
- MMKo1dXqGScTU0GeAL+kpn/EQRZ5l8b8niy9grB92q99TZYkegjA81lWipQwatQlY1j4tNT
- wDbfC/1VhMb15/eVLomvg==
-UI-OutboundReport: notjunk:1;M01:P0:EgkEwSQC6KM=;hezyGKOgC1deatHOtKDz/n9AJhQ
- vZXaUeZd/svG5T95lW79lR/K6moMIMSPotAlluvUmRRnZqpA4jP3yS69jf84oYDM7LmiZoTTb
- UfGcM8ws4Q6K4uYpvVkj7I2v1Ows6kacanrRxFWC1RWUxzdPJPklyjFItnreTKmR71FVZwdwK
- h5hLe4RIe6JyKIF8lWSlj4w+PwdRr0T0RulBEftNeFqCscfxmuGZeyIF5Khu0S6Yq8gFPOGsF
- tMDsRDxRwQM8Px7np0d9i757yk+cOaXYF5kO9RB+1Xy+YfpgUVj4e653ottLpKFKduleoJEgz
- pavQmBH3LxREnUNh0lQlCgcim336C6pttKuUEL3OdRggjM8cDb7UQ6/Cdf0Wi4HHqYYXVNDYV
- I8Xj8KMb0KSfLm6/pOlTakfyQCfZYBBhPMx0exIyy/FgljsMCHjIvFs77amME3E/EGDD52CgW
- H+tJlDDHFO3bvSc/Ixv5Xrgf7Cp/eo/3O0FMxAAery5ZIhbC+zMFWLcaUEgx9PHGm4+f9JD6m
- WM0H6k5t98/jEFH3gNEld/KxURBJYntXbuwknI+o3QqChxuPQt0IpvqhVkJ4xDV9JDc1PxZRt
- bD1Ertv4Sn7KAShYfmvDBkwNgVfw7q6pw9nTVR5sx8R3r4rXqf/UKdG4ZpIaqcbLrByHmz3p8
- V4tX+vZCZgWCuKloq2+77b/iSeH2/UxaQy3eruYMxnyqrmwuHbKm30YN27eGXF4my7F5K/EvL
- seR0Tyxto+b1J8TFrl0B61IJ/WZiNMatTWStKcx0M4NaJt1vJS6SBCX4b0pwKZsd828fgzldy
- uaV9aGnAfeuwp6cHDkv0WK3ochZFf0J6AGD9JlOikZYKs=
+X-Provags-ID: V03:K1:FX0ccuS6Ju5pcv/iu0xmVosD6kOxF1tC9lnhBqhfAHlJzkm84Z7
+ 7x9ggPXaq/mk1dx/6JpWg4E2tehiL1KBLspaz8qRCi5Gv+C3zWLz4uk4Zk72cXEmGQLK9Y4
+ SZQ7STHCADgXLbrk1ma1qE4uXNqBnyh9s/0oafp8gf0aOmBPFvO2+9kJU/16KIKkJ3kVE7d
+ NHycQDog+vEFGzwecHV5g==
+UI-OutboundReport: notjunk:1;M01:P0:4o0MTnbXbrw=;Etwy4jETfj2hD44cdOsPDJSlJoP
+ tmd7lH9uAiXvejk6gAu4dGM4cIFZDBf92NiDUAXtAw8HIVoG2LWrP/9oeh5SaYlMk7p7vtryc
+ Ev+h8AG7d75anpBmQ3+qkzzsnmrFxxX4dAA0SwR7XS9qTebps34PEeXa4Zc6ejWGDtFrVuhbR
+ Nv2uGtXUO+tvLPSZ/fYPWvxy7KkZXZDkHptbm5gmIEUTrj7Ae80e7/MX6wkqO7OYXXfukt90H
+ aWBWfxGViCLI9M4VzcIYfxizTPhwfj63vSdgl8Di0qFHlWr8BeO16fX6R07IOsxV5dhPO7kZ/
+ oN+hznLtEwaAYJYf5TcEas8uBvMVlCrQyie9NqNKyyDnJUQa+7evmIsq5/TzNuvi+IA9AjSe4
+ tOcZLL9rC4ZwrW3iOWgelmGE1Ow1HbrD2SDZWvnTQMs9v6wNBrpw7Y4lu+xsBPiKB3Yk6WBBl
+ ZcUicxgOLLEXUAI3s1i0Pg18pUeA8KUu5Sc3VBAWb9o+yyRoevTpflsLOBMcW/mH5H3x3Hk54
+ F7NRSV1oal73AZro5YfFTEUEA725yB+b/gQKsfToGxqLJYh0EO6v+OYxNODOfKi/S7OlNzJFI
+ nUSXIVd7ea579+sTsJmOzzf6c5Xt7YxCJC6TYKQeZQmnfe7gz/VlCRBqRVP3Q/v4dUzkmrPjm
+ X6d05PJghlZndN/LnEengvBSyULbyRkbuQo1XAhrMVFkkpYcs45UHk3HRFVX19xt4hld33tP9
+ 8/M2SP/V5bex7tPimgD/s/CfQegosID7cWXERSI6fnxso422xVJRpFTwmDJy4HTpULE+IcAWY
+ w/4U9lem7DQAXPZc335xG5tpMnS8Ai6xDmeEUM010MuTw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,121 +91,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.06.24 09:01, Ilias Apalodimas wrote:
-> On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
->>
->> On 6/14/24 08:03, Ilias Apalodimas wrote:
->>> Hi Simon,
->>>
->>> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
->>>>
->>>> It does not make sense to enable all SHA algorithms unless they are
->>>> needed. It bloats the code and in this case, causes chromebook_link t=
-o
->>>> fail to build. That board does use the TPM, but not with measured boo=
-t,
->>>> nor EFI.
->>>>
->>>> Since EFI_TCG2_PROTOCOL already selects these options, we just need t=
-o
->>>> add them to MEASURED_BOOT as well.
->>>>
->>>> Note that the original commit combines refactoring and new features,
->>>> which makes it hard to see what is going on.
->>>>
->>>> Fixes: 97707f12fda tpm: Support boot measurements
->>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>> ---
->>>>
->>>> Changes in v2:
->>>> - Put the conditions under EFI_TCG2_PROTOCOL
->>>> - Consider MEASURED_BOOT too
->>>>
->>>>    boot/Kconfig | 4 ++++
->>>>    lib/Kconfig  | 4 ----
->>>>    2 files changed, 4 insertions(+), 4 deletions(-)
->>>>
->>>> diff --git a/boot/Kconfig b/boot/Kconfig
->>>> index 6f3096c15a6..b061891e109 100644
->>>> --- a/boot/Kconfig
->>>> +++ b/boot/Kconfig
->>>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
->>>>    config MEASURED_BOOT
->>>>           bool "Measure boot images and configuration when booting wi=
-thout EFI"
->>>>           depends on HASH && TPM_V2
->>>> +       select SHA1
->>>> +       select SHA256
->>>> +       select SHA384
->>>> +       select SHA512
->>>>           help
->>>>             This option enables measurement of the boot process when =
-booting
->>>>             without UEFI . Measurement involves creating cryptographi=
-c hashes
->>>> diff --git a/lib/Kconfig b/lib/Kconfig
->>>> index 189e6eb31aa..568892fce44 100644
->>>> --- a/lib/Kconfig
->>>> +++ b/lib/Kconfig
->>>> @@ -438,10 +438,6 @@ config TPM
->>>>           bool "Trusted Platform Module (TPM) Support"
->>>>           depends on DM
->>>>           imply DM_RNG
->>>> -       select SHA1
->>>> -       select SHA256
->>>> -       select SHA384
->>>> -       select SHA512
->>>
->>> I am not sure this is the right way to deal with your problem.
->>> The TPM main functionality is to measure and extend PCRs, so shaXXXX
->>> is really required. To make things even worse, you don't know the PCR
->>> banks that are enabled beforehand. This is a runtime config of the
->>> TPM.
->>
->> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is selected, U-Boot
->> cannot extend PCRs. So it seems fine to let these two select the
->> complete set of hashing algorithms. As Simon pointed out for
->> EFI_TCG2_PROTOCOL this is already done in lib/efi_loader/Kconfig.
+On 14.06.24 08:53, Ilias Apalodimas wrote:
+> commit 6e2228fb052b ("Merge patch series "Clean up arm linker scripts"")
+> was cleaning up linker scripts for armv7 and v8 in a similar fashion.
 >
-> It can. The cmd we have can extend those pcrs -- e.g tpm2 pcr_extend 8
-> 0xb0000000
-
-So this patch should also consider CMD_TPM_V2 and CMD_TPM_V1.
-
-TPM v1 only needs SHA-1.
-
-In cmd/tpm-v2.c do_tpm2_pcr_extend() and do_tpm_pcr_read() assume
-SHA256. Function tpm_pcr_extend() shows the same limitation. This bug
-should be fixed. But as is CMD_TPM_V2 seems only to require CONFIG_SHA256.
-
-Best regards
-
-Heinrich
-
+> Several commits in the past -- e.g
+> commit d0b5d9da5de2 ("arm: make _end compiler-generated")
+> was moving symbols to be compiler generated. They were defined as c
+> variables in its own section to force the compiler emit relative a
+> reference. However, defining those in the linker script will do the
+> same thing since [0].
 >
-> Regards
-> /Ilias
->>
->> Even if U-Boot does not support measured boot (EFI or non-EFI) we might
->> still be using the TPMs RNG.
->>
->> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>
->>>
->>>    So this would make the TPM pretty useless. Can't you remove somethi=
-ng
->>> that doesn't break functionality?
->>>
->>> Thanks
->>> /Ilias
->>>>           help
->>>>             This enables support for TPMs which can be used to provid=
-e security
->>>>             features for your board. The TPM can be connected via LPC=
- or I2C
->>>> --
->>>> 2.34.1
->>>>
->>
+> So let's remove the special sections from the linker scripts, the
+> variable definitions from sections.c, and define them as a symbols.
+> It's worth noting that the linker was discarding the symbols in the
+> older binary completely.
+>
+> - new binary
+> $~ aarch64-linux-gnu-readelf -sW u-boot | grep efi_runtim
+>     246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_=
+runtime_rand
+>    3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_=
+mmio
+>    6359: 00000000000dedff   217 FUNC    LOCAL  DEFAULT   14 efi_runtime_=
+relocate
+>    7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_=
+services
+>    8869: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtim=
+e_rel_stop
+>    9159: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtim=
+e_stop
+>    9410: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtim=
+e_start
+>   10137: 00000000005981bd     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.=
+c.de5bed54
+>   10470: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtim=
+e_rel_start
+>
+> - old binary
+> $~ aarch64-linux-gnu-readelf -sW u-boot.old | grep efi_runtim
+>     246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_=
+runtime_rand
+>    3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_=
+mmio
+>    6359: 00000000000dedff   221 FUNC    LOCAL  DEFAULT   14 efi_runtime_=
+relocate
+>    7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_=
+services
+>   10135: 0000000000598320     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.=
+c.de5bed54
+>
+> $~ bloat-o-meter u-bool.old u-boot
+> add/remove: 0/0 grow/shrink: 1/1 up/down: 7/-4 (3)
+> Function                                     old     new   delta
+> efi_memory_init                              343     350      +7
+> efi_runtime_relocate                         221     217      -4
+> Total: Before=3D2009902, After=3D2009905, chg +0.00%
+>
+> [0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic o=
+nly for shared object")
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+Tested with sandbox_defconfig on amd64, arm64, riscv64.
+
+Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> ---
+>   arch/sandbox/cpu/u-boot.lds | 20 ++++----------------
+>   arch/sandbox/lib/Makefile   |  2 +-
+>   arch/sandbox/lib/sections.c | 13 -------------
+>   3 files changed, 5 insertions(+), 30 deletions(-)
+>   delete mode 100644 arch/sandbox/lib/sections.c
+>
+> diff --git a/arch/sandbox/cpu/u-boot.lds b/arch/sandbox/cpu/u-boot.lds
+> index 52f13af3742f..6ee8095b6cbb 100644
+> --- a/arch/sandbox/cpu/u-boot.lds
+> +++ b/arch/sandbox/cpu/u-boot.lds
+> @@ -19,30 +19,18 @@ SECTIONS
+>   		*(_u_boot_sandbox_getopt_end)
+>   	}
+>
+> -	efi_runtime_start : {
+> -		*(___efi_runtime_start)
+> -	}
+> -
+>   	efi_runtime : {
+> +                __efi_runtime_start =3D .;
+>   		*(efi_runtime_text)
+>   		*(efi_runtime_data)
+> -	}
+> -
+> -	efi_runtime_stop : {
+> -		*(___efi_runtime_stop)
+> -	}
+> -
+> -	efi_runtime_rel_start : {
+> -		*(___efi_runtime_rel_start)
+> +                __efi_runtime_stop =3D .;
+>   	}
+>
+>   	efi_runtime_rel : {
+> +                __efi_runtime_rel_start =3D .;
+>   		*(.relefi_runtime_text)
+>   		*(.relefi_runtime_data)
+> -	}
+> -
+> -	efi_runtime_rel_stop : {
+> -		*(___efi_runtime_rel_stop)
+> +                __efi_runtime_rel_stop =3D .;
+>   	}
+>
+>   	.dynsym :
+> diff --git a/arch/sandbox/lib/Makefile b/arch/sandbox/lib/Makefile
+> index a2bc5a7ee60f..d7d15a50bb6c 100644
+> --- a/arch/sandbox/lib/Makefile
+> +++ b/arch/sandbox/lib/Makefile
+> @@ -5,7 +5,7 @@
+>   # (C) Copyright 2002-2006
+>   # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>
+> -obj-y	+=3D fdt_fixup.o interrupts.o sections.o
+> +obj-y			+=3D fdt_fixup.o interrupts.o
+>   obj-$(CONFIG_PCI)	+=3D pci_io.o
+>   obj-$(CONFIG_CMD_BOOTM) +=3D bootm.o
+>   obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o
+> diff --git a/arch/sandbox/lib/sections.c b/arch/sandbox/lib/sections.c
+> deleted file mode 100644
+> index 2f2f3fbfdb86..000000000000
+> --- a/arch/sandbox/lib/sections.c
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Copyright 2013 Albert ARIBAUD <albert.u.boot@aribaud.net>
+> - *
+> - */
+> -#include <linux/compiler.h>
+> -
+> -char __efi_runtime_start[0] __section("___efi_runtime_start");
+> -char __efi_runtime_stop[0] __section("___efi_runtime_stop");
+> -char __efi_runtime_rel_start[0]
+> -		__section("___efi_runtime_rel_start");
+> -char __efi_runtime_rel_stop[0]
+> -		__section("___efi_runtime_rel_stop");
+> --
+> 2.45.1
+>
 
