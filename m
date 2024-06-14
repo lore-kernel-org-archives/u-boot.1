@@ -4,133 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF233C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75837C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E5FA88A07;
-	Fri, 14 Jun 2024 14:48:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id D6D8788926;
+	Fri, 14 Jun 2024 14:51:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="opOcD6uV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FkGy5SQK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21D6F889D5; Fri, 14 Jun 2024 14:48:34 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D4A59886B9; Fri, 14 Jun 2024 14:51:05 +0200 (CEST)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01C9D8857B
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:48:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3635C88926
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Sybor0VQ4vgw7TBVmbAHptT5LqE22yfpsLNp6mfcMkjbNrD2iCtoRs4745uv9S4hkYCFXMonkUqXVogREicZCVnliz6igOvJ/ifR9Zyo/f542O+c9/qMjEpeJkPRcuMDlmgvob5GXcn5M8nyyRh8MdtKpG1V0FmnWK8dYlsFNB18VgZyHL/jCDOXQB49231NiLauwEHP9HHOq5YIhZ2IuqTMPy0SXYsj+LA214AHcq7CtPPQVeHODZUZ+JdrXtb0JsAWHJiaAZWt7f6pIliwfAGhcj5IX2uyy/Pm0G7//2LpPim/uqhULMkh931nBIVAQdxoC6K7TIzgds4joVfqGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=imK9kvLWPKiuSP2A5A2ydUhTVpspA7BYlIynY7Uu5HY=;
- b=eQYkwxMNhHNSNE6wrmIX6bM9tPSHFxgwUnuerrP2A/korEzbhXIYuKsEpOJFJYNY/5Sl8UVfhBZ1M3pTSbjeO7sTfm/jVZVGiKHewj6MIHdSgNwKVZe5/Fr48mu904OwDt1aZTusKZxBGxu9Ux63xupxAC9LF+4M9zynk2JWEBPZ3oNFvhKSllip63BSq37wKasJkLcFm/GjDiWEpOch97lLzLCy9i0e/pZC4iFRmQc8SovBMu5IM53KXP+QxR76R2q/whDJrdVlUBw8tlqEZ3HM/1P0LYA31k20Wj1FnteyDyMSL4fgoTVHxD+SuHmf3X9Fqda6tLOVDiQcai20Sg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=imK9kvLWPKiuSP2A5A2ydUhTVpspA7BYlIynY7Uu5HY=;
- b=opOcD6uVEBMov7SPB4Z/4RMorJlEQfUftEulwBYcX/mCFXoDT9hVG9KThgJE3i1O0eefil16e8dYYuIfiWrQN7/qagxT2gsCKyJdWbPAK++6HKiy6pelPf8R4DzENsiaYMSw5JtzzebkJJdVXFMUhbZF2kW1p0Kw85OQ2EpubNs=
-Received: from MW4PR03CA0095.namprd03.prod.outlook.com (2603:10b6:303:b7::10)
- by DS0PR12MB6415.namprd12.prod.outlook.com (2603:10b6:8:cc::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.20; Fri, 14 Jun
- 2024 12:48:26 +0000
-Received: from MWH0EPF000A6732.namprd04.prod.outlook.com
- (2603:10b6:303:b7:cafe::2a) by MW4PR03CA0095.outlook.office365.com
- (2603:10b6:303:b7::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.25 via Frontend
- Transport; Fri, 14 Jun 2024 12:48:26 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MWH0EPF000A6732.mail.protection.outlook.com (10.167.249.24) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7677.15 via Frontend Transport; Fri, 14 Jun 2024 12:48:25 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 14 Jun
- 2024 07:48:24 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 14 Jun 2024 07:48:22 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>,
- <trini@konsulko.com>, <vigneshr@ti.com>, <git@amd.com>
-Subject: [PATCH 2/2] xilinx: versal-net: Handle spi seq number based on boot
- device
-Date: Fri, 14 Jun 2024 18:18:11 +0530
-Message-ID: <20240614124811.22945-3-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240614124811.22945-1-venkatesh.abbarapu@amd.com>
-References: <20240614124811.22945-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1f70131063cso18638205ad.2
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 05:51:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718369462; x=1718974262; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HvbmoQJTnu2qe9MnT9Zma1kl2qdGSn7UK7FyjepGIcA=;
+ b=FkGy5SQKVepzHT6/z2aXYZpD2At9DdQ2R13eCaV5+TqHB4WfWtfrZen71heYF+EF/z
+ bY+Ry0kZPjC4gtk22ayEgvYPJqpqBYDvo4oJbFSVy/qxwWgnnzZazU/wnyWnbGQiLkdd
+ UF7Q7lh+FpdRrxf0nm4x07RQiVQGumlqG98or9o39BIzOfhatcON/ZiPlBA4oja2eJgS
+ 6b4o7PdeKtdas/Jvy/vYfqQkYH2mzeWpqSqIuVKofLu6mGEvupbmlYEa2DKblaXKbZ32
+ zD+70zG9BXC/+WAt/NBLvfIsbyYcFfLiLg4OWR7eRV1FuHzgwV1DEpl16qr5Su7gELGq
+ JI+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718369462; x=1718974262;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HvbmoQJTnu2qe9MnT9Zma1kl2qdGSn7UK7FyjepGIcA=;
+ b=TGlvUYwl8BzZsMCuk/pZvKeMgaayKAkcmo0i9aYUnotd6eSssa/GTxyu9Bk+C3yPk4
+ vEOdC9riABJtnU73UhnOfLK5h8URwEGpL+Aeema+ws02q+cEX3KwUATeRoU8Ohq9l2K9
+ e0La6QU2+91hI+t1hplvHdDE2VhT+B4BkLtG9GLyoZwfJiNzn2vBcIVxRAIjEB0UTJPT
+ Vpp7xeGKO/zevZ88GJTFIfWmIBozBRV2zHKQZmLf6Eb/sM/7IAQANS61OjLcoUlnTNTr
+ 2KOt7ztVzVLiXqpMlMt9yxdTilWA7JUfk127fxdbHe+1Xm2v4ARHSgO4TjaTRgvmMKAr
+ H6kA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUAm5p+t8rY4IVJRooBXsPB+6GKSlURQkxwGbedfRn1W834ggXTQZxDNLw+IW5+Re2h4GOohA/Nn6ZTPBvK1oKT47bxmg==
+X-Gm-Message-State: AOJu0YxkO/IagyzigyRhWH6etAmQMDHTuf7KJzc0gx9/+ifI32MYQY3b
+ r+xLmwFZguHb4n+2zYIxYgf0IePxqWVES3Iy6C04ebdKq4XixYkpkUKFMY8Ad5rufAA1tLH6vDy
+ ItFXQEXeeV/1oWpQMRYq2FTI1Yq95MvYdrUJXdA==
+X-Google-Smtp-Source: AGHT+IGTaMQ9hX7j39POIEGgkMnzIkVWmYy5s2pTZ6tHY2GqZM2lk6RfnjMNJqekqDpBPx/dUv25FHSiBv9thspFJrg=
+X-Received: by 2002:a17:903:32cc:b0:1f6:e1ba:221d with SMTP id
+ d9443c01a7336-1f8625ce83fmr31807035ad.1.1718369461679; Fri, 14 Jun 2024
+ 05:51:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A6732:EE_|DS0PR12MB6415:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7901ce36-9459-43d9-a6e1-08dc8c70488d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230037|376011|36860700010|1800799021|82310400023; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?NGzuZ/VNI+SK6EKtWM5hTfexXDXRK5CoA/ZckVJx4siLWFMJ5Y5xTs6EGqVS?=
- =?us-ascii?Q?beuYdb9Zb97b5o3eYimwBq6M0OCHOrK6fyMfYUkXtDQprULiTCl/TdJ4xjzU?=
- =?us-ascii?Q?j7J5Irrd2RncjwnH6JasY/e2HwCLADPlJ4pnO5ey4T68fWjx2eGpK+Zb5vbh?=
- =?us-ascii?Q?mSYdMUa9KZ5RlFjkGkpKLbzSw6xtxkmtAG7hkiG11q9FnJdfqIM/MhBzQujT?=
- =?us-ascii?Q?uLzq1Lh0dMRYZjzsBeK6YBgszDrn1KffCAh3wqiYN780ze0uMrHJtx+g4SfX?=
- =?us-ascii?Q?pXcbvAjk2O98xPn5uYWbSydyz2ESiKrgxgkZLt5RHebqNEemBqUvDzcx/PuY?=
- =?us-ascii?Q?E6VnAYZSAaAQEswqvR4s2xuXKemGzYyucScEBCDp43brF6oMnAHRfdK5a+2s?=
- =?us-ascii?Q?mAkqDa1KO4w6i5V7n+Wr29H+vakvF2xMaWDanUaIfBlRQD38pdqbhzIclqyD?=
- =?us-ascii?Q?glkeeydUmep8soq64t2Y6dHGtiTv7v+OxjS7A/Qu1zC9tNVug1tiSVw5yPfc?=
- =?us-ascii?Q?SN3E1WmfbNXgD45yvubKq4RFRjGz4pDWyGo1fM6Tj3u6Nj/5vhuiYDBfp9zQ?=
- =?us-ascii?Q?6z4QB0l8Wa/8ZcMkgKSUjt24U3mGG0EcAbuDAL0NuYO8fOnwp5tiTPMcM8bM?=
- =?us-ascii?Q?IOuDOqG1X93LwZ9cuBH9SKQvU2WCdEeTQgS8lh04cAgcVqjrwCBKUZugnkkg?=
- =?us-ascii?Q?R8mH8On74u7nisfiPAmQk7kP4rML91E609g3oit/J/Og195RiqmRcE6y88ml?=
- =?us-ascii?Q?3UJq8wrBy83JQfVTckyB1zF8oCmnZQR3Dj1HzxwA3YaXdjvzZdtf++hi1YxK?=
- =?us-ascii?Q?drYKKM1/1TlpJJ7HCEhXZ/mOEUyRHVEJTG3fEWkdft5mgxymTeW6EpxzO6br?=
- =?us-ascii?Q?evsX9aeJCGW+UCYg7ZHwkuP/HhxuI5dpfLBwoveK2Y6HoPY+VXE3I+ixeY70?=
- =?us-ascii?Q?QjVhbU0hW4jqM7BPgGyLe/+0fodcREC69yvaWwQ3tHjGm/2cFLvyO9n7swO3?=
- =?us-ascii?Q?mCy2lx2QhCr/g84aGSTuTQuAScRUMucJHzGzZEAZsZG3RYz6OICHnakPnZs9?=
- =?us-ascii?Q?BYQ9kg1m8vqbpasL9YA25sra6CV36tuNkpOM8Qe8Jfvf3DGB4yzXI9a0YQvB?=
- =?us-ascii?Q?YFDJfe4E/z6fnEb3nh0SYuRZ5swSvdGhj+MggwzfZ5TJ8B8C/BYWQ3iyM9Ys?=
- =?us-ascii?Q?28sGLYcmAjZyO1K8TJm/xP0Iv2FbbQdbfu1G/axZaHJkXGItfwawTFAgTc0z?=
- =?us-ascii?Q?xUFUhGRlCJDmXtugo4OU89Fb0Wmlfnqq2GG3xn2U/pfE5KKpsbqnDG7OqzSL?=
- =?us-ascii?Q?9DCcRoc8gMouxTQodBwNXigDe9mrEoJmiw69dP080MRD9dn1MCrvCrSVUC49?=
- =?us-ascii?Q?s3yAWKCNZ0oKfV3xMnIM6EW6hThLhUKWr7dkb6cSQrbTG9DBEw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230037)(376011)(36860700010)(1800799021)(82310400023); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jun 2024 12:48:25.7955 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7901ce36-9459-43d9-a6e1-08dc8c70488d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A6732.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6415
+References: <20240614121404.16952-1-ilias.apalodimas@linaro.org>
+ <b9307a87-5c4b-4ef3-b635-86879b2a9742@gmx.de>
+In-Reply-To: <b9307a87-5c4b-4ef3-b635-86879b2a9742@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 14 Jun 2024 15:50:25 +0300
+Message-ID: <CAC_iWjLKETAM+0BsnTf+fMvdu4JbbcX+Ts3-bqL79+964NwmLw@mail.gmail.com>
+Subject: Re: [PATCH v2] doc: describe UEFI measured boot
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,73 +89,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Versal NET boards has QSPI and OSPI and default bus set to 0
-is not working when system is booting out of OSPI which is
-controller 1, as fixed aliases are set for all the boards
-i.e., QSPI to 0 and OSPI to 1. Add controller autodetection
-via spi_get_env_dev().
+On Fri, 14 Jun 2024 at 15:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 14.06.24 14:14, Ilias Apalodimas wrote:
+> > We currently only describe the process to enable measured boot using
+> > bootm. Describe the UEFI requirements as well which predate bootm.
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> > Changes since v1:
+> > - fixed remarks from Heinrich on titling and DTB measured PCR
+> >   doc/usage/measured_boot.rst | 28 ++++++++++++++++++++++++----
+> >   1 file changed, 24 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+> > index 9691904a9d8a..b5f7b05aeb02 100644
+> > --- a/doc/usage/measured_boot.rst
+> > +++ b/doc/usage/measured_boot.rst
+> > @@ -7,19 +7,39 @@ U-Boot can perform a measured boot, the process of hashing various components
+> >   of the boot process, extending the results in the TPM and logging the
+> >   component's measurement in memory for the operating system to consume.
+> >
+> > +The functionality is available when booting via the EFI subsystem or 'bootm'
+> > +command.
+> > +
+> > +UEFI measured boot
+> > +------------------
+> > +The EFI subsystem implements the `EFI TCG protocol
+> > +<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/>`_
+> > +and the `TCG PC Client Specific Platform Firmware Profile Specification
+> > +<https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/>`_
+> > +which defines the binaries to be measured and the corresponding PCRs to be used.
+> > +
+> > +Requirements
+> > +~~~~~~~~~~~~
+> > +* A hardware TPM 2.0 supported by an enabled U-Boot driver
+> > +* CONFIG_EFI_TCG2_PROTOCOL=y
+> > +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
+> > +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB in PCR 1
+> > +
+> > +Measured legacy boot with bootm command
+> > +----------------------------------------
+>
+> nits:
+> The length of the underline should match.
+>
+> All of bootm, booti, and bootz invoke bootm_run_states() which calls
+> bootm_measure():
+>
+>    Measured legacy boot
+>    --------------------
+>
+>    The commands booti, bootm, and bootz can be used for measured boot
+>    using the legacy entry point of the Linux kernel.
+>
+> Otherwise looks good to me.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- board/xilinx/versal-net/board.c | 45 +++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+Thanks Heinrich, I'll send a v3
 
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index da03024e16..5a93cb29c0 100644
---- a/board/xilinx/versal-net/board.c
-+++ b/board/xilinx/versal-net/board.c
-@@ -194,6 +194,51 @@ static u8 versal_net_get_bootmode(void)
- 	return bootmode;
- }
- 
-+int spi_get_env_dev(void)
-+{
-+	struct udevice *dev;
-+	const char *mode = NULL;
-+	int bootseq = -1;
-+
-+	switch (versal_net_get_bootmode()) {
-+	case QSPI_MODE_24BIT:
-+		puts("QSPI_MODE_24\n");
-+		if (uclass_get_device_by_name(UCLASS_SPI,
-+					      "spi@f1030000", &dev)) {
-+			debug("QSPI driver for QSPI device is not present\n");
-+			break;
-+		}
-+		mode = "xspi";
-+		bootseq = dev_seq(dev);
-+		break;
-+	case QSPI_MODE_32BIT:
-+		puts("QSPI_MODE_32\n");
-+		if (uclass_get_device_by_name(UCLASS_SPI,
-+					      "spi@f1030000", &dev)) {
-+			debug("QSPI driver for QSPI device is not present\n");
-+			break;
-+		}
-+		mode = "xspi";
-+		bootseq = dev_seq(dev);
-+		break;
-+	case OSPI_MODE:
-+		puts("OSPI_MODE\n");
-+		if (uclass_get_device_by_name(UCLASS_SPI,
-+					      "spi@f1010000", &dev)) {
-+			debug("OSPI driver for OSPI device is not present\n");
-+			break;
-+		}
-+		mode = "xspi";
-+		bootseq = dev_seq(dev);
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	debug("bootseq %d\n", bootseq);
-+	return bootseq;
-+}
-+
- static int boot_targets_setup(void)
- {
- 	u8 bootmode;
--- 
-2.17.1
-
+Cheers
+/Ilias
+>
+> Best regards
+>
+> Heinrich
+>
+> >   By default, U-Boot will measure the operating system (linux) image, the
+> >   initrd image, and the "bootargs" environment variable. By enabling
+> > -CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image.
+> > +CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image in PCR1.
+> >
+> >   The operating system typically would verify that the hashes found in the
+> >   TPM PCRs match the contents of the event log. This can further be checked
+> >   against the hash results of previous boots.
+> >
+> >   Requirements
+> > -------------
+> > +~~~~~~~~~~~~
+> >
+> > -* A hardware TPM 2.0 supported by the U-Boot drivers
+> > -* CONFIG_TPM=y
+> > +* A hardware TPM 2.0 supported by an enabled U-Boot driver
+> > +* CONFIG_TPMv2=y
+> >   * CONFIG_MEASURED_BOOT=y
+> >   * Device-tree configuration of the TPM device to specify the memory area
+> >     for event logging. The TPM device node must either contain a phandle to
+> > --
+> > 2.45.1
+> >
+>
