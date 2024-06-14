@@ -4,75 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 096F5C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 15:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E61DEC27C77
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 15:43:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 528BC80E9A;
-	Fri, 14 Jun 2024 17:36:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2764A889F1;
+	Fri, 14 Jun 2024 17:43:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QEdNmqtL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dVkXIqf3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61A2087E96; Fri, 14 Jun 2024 17:36:31 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E678E889FB; Fri, 14 Jun 2024 17:43:02 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6591D801BA
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 17:36:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C62A5889EA
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 17:43:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718379378; x=1718984178; i=xypron.glpk@gmx.de;
- bh=u2O70ndDJ2ctkMNZslpMFoQsOmTHiefUsAps3ylZAxU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=QEdNmqtLpK8Mc+m/+VjbHFlEFNtAdiSrQOPKrSbu67Xei6M1dblFYzFTLY8BCqCX
- 2ITQbeExiOG1PFk2B+kPc8FwwsSzd09RARSKCKMPhsiiYgdnf7cJ3u+PA3kvT+c7a
- ojizOOG3d8Uaxb/T99j7hRMsYphiIc1S6lecsO9ATizn0X2d8SR0AA7DaaMi7Vzti
- 0/UVFAz5XxSN/F3k9tgcC1HMmo5aO2ZrtJsB2ua1GXPnBG0fXmT8rqeTCXdvJkw/N
- P5/BP3sv1dMUEmcg7L2HgyvfEnFfNVN5JL0aZNgd2yo/Vflaf6kimgenzLpIR/wHK
- dHDoliFFfBsPyron6w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MzhnH-1seVD11YYL-00x8VP; Fri, 14
- Jun 2024 17:36:18 +0200
-Message-ID: <251427a8-06b8-4443-adc9-04fc5287e3f6@gmx.de>
-Date: Fri, 14 Jun 2024 17:36:16 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-24c9f6338a4so1078409fac.1
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:43:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718379779; x=1718984579; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/Bl6/59m2Gzdu6t+2qDCDEoQidh/Z683f2lbrruL24M=;
+ b=dVkXIqf3GFGpZEEGtmfUTTYqNHkihaHd90J9mVL2mzrP0ZIr8EdyidFXTAdmslQAYv
+ GeHBJwKvjK4jeyupqBalgMfcdHyChhUbO5KFxJwu6M+qEtA0lE5JVpBdBleiLBkB4hHU
+ xFaPFc+MBz1e5ofqQRv1TQEbMvl7+L1tkalgU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718379779; x=1718984579;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/Bl6/59m2Gzdu6t+2qDCDEoQidh/Z683f2lbrruL24M=;
+ b=Y7nYLT2OCI1K0MEqXqocsxzARymHPg5tL09/9TrrENupgoN76FstYVyjOY7Qrb9nkY
+ D04g288JBSy0I8Gfee4Wg2NBUYKNNTODlW4wMA3lBfWKSMeEqSGGmt92iBRss9BQJeVP
+ O0T0rSfBY0FHbxiAGu1al6Wnbpi9XGjuUp/Bd9A+1IpNb//6vxPAtVGluMmPeJ5A+xL4
+ QaTS4CG+gZl1rNKiUBfEZ6cVMC7QmehtmUG8f1b7NOmlkJfQsrin08n/FKI//4PG/omk
+ fzUg41HlKzSEdPx9y1PG21qG/IEDHae4PABcTlvppH1LoQz/Wz7GUZc/K19QIrj3vn6T
+ M2aQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+Dq6n8JZzihBsiVQpOBLHjLA9FJf3is0nXDTGWnvOGnXFDYD2o/BHQi2Soo5gr1M0nE/axK/KfwBMuXuQ+w2aSCObaA==
+X-Gm-Message-State: AOJu0YxQnK2DA3TGTwUIENq5OdToLBLjykRACJgZYAnhwkxhRVC074d/
+ 46+A1Vz8At93CW5Ka+Jnir8B6FEhWC+pNZMt4yFGStyPIzLOplKoZ1uJObJxMU0=
+X-Google-Smtp-Source: AGHT+IEt5OmPtuwbpwv4TwrTlkyo5/i4uobh9mo1g7Ec4QAqTrGEKxd5V9LvTwx5e9/dYILmZNAqag==
+X-Received: by 2002:a05:6870:f712:b0:254:7211:424b with SMTP id
+ 586e51a60fabf-258428b4dc7mr3616550fac.6.1718379779479; 
+ Fri, 14 Jun 2024 08:42:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6fb5afab83esm623593a34.1.2024.06.14.08.42.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Jun 2024 08:42:58 -0700 (PDT)
+Date: Fri, 14 Jun 2024 09:42:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v6 00/24] EFI: ti: Enable EFI capsule updates
+Message-ID: <20240614154255.GA2659731@bill-the-cat>
+References: <20240607223858.1971290-1-j-humphreys@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: v2024.07-rc4 issues on VisionFive v2
-To: Conor Dooley <conor.dooley@microchip.com>
-Cc: Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-References: <20240614-condense-hastiness-8163da268f60@wendy>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240614-condense-hastiness-8163da268f60@wendy>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:N37ehnTuMR6LICdEODarV/n4WChOKOk2kqR+wvMbQTaQBKb3+5F
- K8x1l0wJZqBztZqFJJyUY5ftH1Uyfurwa7Vg7XPOMYSL2wOd2sY66RJ4EDY3XQSbg25LZ05
- QHk3hLMp5XI2uUFDhpNTXl4Hk0Qm6TjXuR6QGW3XRUTXkFrMOI55nxW+e/jOuHACcO12d1t
- ON68QT4taFzG2Znl5HGpw==
-UI-OutboundReport: notjunk:1;M01:P0:/Fh4E3W2jtQ=;3TQjy5Xlz7DZjP7rd7fkXZs37b2
- Do/YSOhqnuCs+7MGcsL4R3tAhhrHC6WT1y3RyKC9dAePgX/zHa6DdkixdCw50d5fiYvipTC2G
- GA/M5yD750hRW6eGG1xMBvXtIdTghd4KG6r7+jucFysXYlTPnbnDzMZ9Otz3rVAXMHYp1nrr6
- fZ5hsCdPR1xyyNmhZwWlNNpVjh9D0iR4hQniY5tOMbHDjMj0C20WzHn6cGxacMgdc1xRv379r
- Zo+HnJTfYs2yEP5A1ikXhFx9U2DUWTgyzVrdfDrATUjOz4hg7m/pvY9j7AT5pqVTsPY+Fg0Wu
- adN2TK5dQjjinygImE2Y5YgZeYOjzuku7RKK7VXEAd6wZqFnbTPNNi9GOWEBnVjrfYeHmp1sb
- B0nDYHiZMkQD0SD3FoZEBwupJXDWEFuy/cRnbPqBWRfm0ZVj9O79EopPzs/6tXdkFCELy1Sux
- x/3BjVGKqkzwlL6OF2r0E+HGiM8rM/hJfJzPZX8JeJ46DIRfoeSocnkc2NSY0AIj9hYTFxSS8
- JVvmf9phIAhJqpV8EvlwzyEN++M2cWuVqFplJS7sT0p+wj/GHrQGlW47KRaA049QyYCOZ6eig
- A+TL8XaT4vqM1A7Om3D4RLvA3egk2bt95cTqhyPXVBsbaV3WkcBG5wU8KZtTHxoO9dWcGHNdb
- eGudprPgO5fN3Sw72JsCfKvyXUmqhnWIbXE7P/6Vc2eMPkEGverQHmCRrjNhiSDGEZkUmUnxa
- m2dFhD4iEv7UFIaghDWSaxd+/4dmyN2WNe8l9mZrofNfdJJ3g91HGOQSeZFKUVWBg2VCjMt8L
- /e6ECIF1SBafT158hIFmbSkyG/aXB4v88zvUVCwcWPjT8=
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aQgBEciwcvZ7f0e+"
+Content-Disposition: inline
+In-Reply-To: <20240607223858.1971290-1-j-humphreys@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,94 +106,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.06.24 13:14, Conor Dooley wrote:
-> Hey,
->
-> After going from Vendor SPL/OpenSBI/U-Boot to OpenSBI v1.4++ plus
-> v2024.07-rc4 SPL/U-Boot I ran into a boot loop problem relating to
-> PCI:
-> 	U-Boot 2024.07-rc4 (Jun 13 2024 - 15:09:34 +0100)
->
-> 	CPU:   sifive,u74-mc
-> 	Model: StarFive VisionFive 2 v1.2A
-> 	DRAM:  4 GiB
-> 	Core:  136 devices, 26 uclasses, devicetree: board
-> 	WDT:   Not starting watchdog@13070000
-> 	MMC:   mmc@16010000: 0, mmc@16020000: 1
-> 	Loading Environment from SPIFlash... SF: Detected gd25lq128 with page s=
-ize 256 Bytes, erase size 4 KiB, total 16 MiB
-> 	OK
-> 	StarFive EEPROM format v2
->
-> 	--------EEPROM INFO--------
-> 	Vendor : StarFive Technology Co., Ltd.
-> 	Product full SN: VF7110A1-2249-D004E000-00000540
-> 	data version: 0x2
-> 	PCB revision: 0xa1
-> 	BOM revision: A
-> 	Ethernet MAC0 address: 6c:cf:39:00:17:95
-> 	Ethernet MAC1 address: 6c:cf:39:00:17:96
-> 	--------EEPROM INFO--------
->
-> 	starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
-> 	starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
-> 	In:    serial@10000000
-> 	Out:   serial@10000000
-> 	Err:   serial@10000000
-> 	Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
-> 	starting USB...
-> 	Bus xhci_pci: Register 5000420 NbrPorts 5
-> 	Starting the controller
-> 	USB XHCI 1.00
-> 	scanning bus xhci_pci for devices...
-> 	U-Boot SPL 2024.07-rc4 (Jun 13 2024 - 15:09:34 +0100)
-> 	DDR version: dc2e84f0.
-> 	Trying to boot from SPI
->
-> This only appeared after I refreshed the environment by running.
-> `env default -a -f; env save`. Before that things worked "fine", I
-> suppose because nothing actually touched PCI. I've just disabled
-> PCI for now and things are working once more. I've not attempted
-> to bisect/debug this, cos that's not the fastest process while
-> running U-Boot out of flash.
 
-You could boot from SD-card to read the SPI flash and checksum it.
+--aQgBEciwcvZ7f0e+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> In case it is relevant, the board I have is one of the "super early
-> bird" ones.
->
-> Cheers,
-> Conor.
+On Fri, Jun 07, 2024 at 05:38:34PM -0500, Jonathan Humphreys wrote:
 
-I am not able to reproduce this on my v1.2A board. (1.2B according to
-silk screen).
+> Enable on disk capsule updates, which includes defining the firmware
+> components (tiboot3, spl, u-boot) and enabling processing of raw capsule
+> updates.
+>=20
+> This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
+> AM69, BeaglePlay, J7, and BeagleboneAI. The configs to enable this are in=
+ a
+> single base config file. This will make it more scalable to add additional
+> EFI capsule features (like authentication) across all TI boards that have
+> capsules enabled.
+>=20
+> This series also includes enabling serial flash DFU for AM62 and MMC DFU
+> for beagleplay.
 
-starting USB...
-Bus xhci_pci: Register 5000420 NbrPorts 5
-Starting the controller
-USB XHCI 1.00
-scanning bus xhci_pci for devices... 2 USB Device(s) found
-        scanning usb for storage devices... 0 Storage Device(s) found
+Please collect Ilias' tags and rebase on top of current -next, thanks.
 
-StarFive # usb tree
-USB device tree:
-   1  Hub (5 Gb/s, 0mA)
-   |  U-Boot XHCI Host Controller
-   |
-   +-2  Hub (480 Mb/s, 100mA)
-         USB2.0 Hub
+--=20
+Tom
 
-StarFive # pci
-BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
-_____________________________________________________________
-00.00.00   0x1556     0x1111     Bridge device           0x04
-01.00.00   0x1106     0x3483     Serial bus controller   0x03
-02.00.00   0x1556     0x1111     Bridge device           0x04
-03.00.00   0x15b7     0x5009     Mass storage controller 0x08
+--aQgBEciwcvZ7f0e+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I tested both with and without NVMe drive while booting from SD-card.
+-----BEGIN PGP SIGNATURE-----
 
-Best regards
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZsZPUACgkQFHw5/5Y0
+tyy/0gv/aXn4eMHeKAZRYwaOwzzm969emlsJjNjCqoFAF7Tksa5SBFcE3woPlgEt
+C3hJF+omVZO/1C3+XpPdqyz1xc2Eh4cuvFkOR26PsEuXoJYgxKLtfMYsI06jKxMK
+b90RhgFdMi02Gg2OHqbD/BagXbF+B9gmfHG1bTM4nwgsYQd5gSzYSjvf8XXvw2h7
+KvqLunTM9TLH/dSn3mNVaLTtEn4j0/X4ri8lp5VHjSW0+4QaKbI/A6yoLWDNOE8u
+Ohekqw1rjT8s36ZoZqRuJq1cIg8ehoixj33GBruZVCwTEC1nO8J/ACscs0BHuwjI
+yk6CGWOkFsMFAue4ImlBO0wPKYdaTZvTKTKBaEFMePKLNpakmMKCXUfSgB8we4FF
+7B21zrjugqDDXFjVP4mLpFUYw1dyV84GHUWBVExIQdJFUEJuXhRQ7cFxAO6nJiBE
+TMOkhZ5xsgiUOIK42Ud0qy8fYZXxy6ldIFPuj1rzLU1jhrEeh4qHKdPjFR1a5oih
+QWr8gGao
+=YlcP
+-----END PGP SIGNATURE-----
 
-Heinrich
+--aQgBEciwcvZ7f0e+--
