@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC02C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:09:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D440C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39C64882DA;
-	Fri, 14 Jun 2024 14:09:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id BB39F889B3;
+	Fri, 14 Jun 2024 14:09:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Qe/UfIDo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DJ3hVu+W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD283882DA; Fri, 14 Jun 2024 14:09:10 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 34BC4889B3; Fri, 14 Jun 2024 14:09:58 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCC58880F5
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:09:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B84A68867C
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:09:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EBDmrZ010033;
- Fri, 14 Jun 2024 14:09:06 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- VcXE6vdYW/UjjU3X9Hdmet8N+RKsbzhMkhxULh1bHsc=; b=Qe/UfIDoNMC3qI8i
- 3L/zELfEAJ0VhQlfb3RrtU7w5Evs8qUuAFbgYsal5h6EXUspvU0s7iFKRZ4o8LiX
- 0COwR/J6eRKzjokBPjoczyAqfB/Ey15DZZgPNVyEBvf1jymRec+90XE5n1f5f0cH
- /oJV5br6CzhrSkUOnLI+b/SzpQbIYke0eTL2H/54QPZuJMEWfvZbI3uILhj9tMm6
- /ttXq3XeYw3X7xFOiPeE3vkXefdjUkC9M2BI+evZmJXzsKWnky3AGJpESB48Q+Fj
- IRqni69uWjINJ2Oo7J67a4ktMSBvUgDYAQdxJ9Rv0/vYMs6btd4Mnt3CtoPL8VUD
- IWNyQA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4gewp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 14:09:06 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 10A804002D;
- Fri, 14 Jun 2024 14:09:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4D2E52138E1;
- Fri, 14 Jun 2024 14:08:53 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 14:08:52 +0200
-Message-ID: <04d07015-f97d-4423-b9b7-f5c57f4f0b23@foss.st.com>
-Date: Fri, 14 Jun 2024 14:08:52 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2ebe40673e8so20169191fa.3
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 05:09:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718366995; x=1718971795; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2IbHdPhio2c3ZIp2NyqYCLKFfMQNvG8zl2EuDFuifuY=;
+ b=DJ3hVu+WDJb8kMm5EZC7muQAV4oW94TUkDQWx2sNpiO4nQT3W2x/Exh1lQyF6TFtBk
+ ZbMC8peb3dMmyK8PhKiagzSoN4Z9CKuTIcJffAPJR3xSoyjSxMRzFKuqDh1HHCrScMcB
+ miRNOTTS8oY78B+4sXFU4rA88xl0twleU4HAfGhrLMMLRxf+pYo/yUaWddurh7qTVJIO
+ YCOVuwa9v0fhue3Fp/JDpyoGjIm3UyN1OYkBtvLthZDrgpjpZIWTHatX9Gw5z5EZ/Gm8
+ v3SptpWHKG1Qnm6NXkxX5pwi0vhnFy0d2TJd5avUL01pY86qikzMN7Ssm/jlPx+tDLWM
+ Ucdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718366995; x=1718971795;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2IbHdPhio2c3ZIp2NyqYCLKFfMQNvG8zl2EuDFuifuY=;
+ b=miCH6SBdC25LuXuPz+tCUjGIVGlqf1jnPbf85igonO+TAtAkObEltQQUjG6xmvqBYq
+ t85qzdmzud/ibT5AqIjgyjkb6ghdoNOdSxhTxlTIqiZnzI0wiTuL5AxfWTBjMDZAyjjt
+ NeXVhQPjqJfNVa9STWn5WxbCcBg5pQE7stzoZ1Y1qWRGZTUdsX/hRwPQmUmxGCDeOn8u
+ hx4KeOWseYGouU8+sqmi/VzSYtKHX52Y1L+WU0Ws4T9JU333pPNUeL0j67aaC0PN9Yym
+ ARpNLiPLmjeGRXRysIEB7s7Mydc/TEXG8XLSkktBZukE7QSKJ5ld4mmGJ68JWNbWO1Z+
+ u/jg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZC9sSfmoaISIPvFQQtHa227wwK+NCQEP6kt2yA/Suzza+Syx+sjF3y82GGHIWxS8jinZfaK7rTWVoefmouQB++JPiGw==
+X-Gm-Message-State: AOJu0YxqJSJZOAzKYsDVKygi/bkhuIXZpG8MpnKnINxXv5T3BHKr8wge
+ V3mn2580T/bFNaa5d36FZq92wIWnRzmL/i7n3a4szmPR++AXKp1X5ZydOfwAvKE=
+X-Google-Smtp-Source: AGHT+IEJdjjzAHOOzSjzJ3ZnXaVm2GHKhzsjrx6esPM9OgJQNg8FlHe7rzBRUqfyj8fbUdNWj/iq8Q==
+X-Received: by 2002:a2e:a17a:0:b0:2ec:16a6:edc3 with SMTP id
+ 38308e7fff4ca-2ec16a6f04fmr10854641fa.22.1718366994995; 
+ Fri, 14 Jun 2024 05:09:54 -0700 (PDT)
+Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
+ [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-360750f23cdsm4235595f8f.77.2024.06.14.05.09.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Jun 2024 05:09:54 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Subject: [PATCH] tpm: measure DTB in PCR1 instead of PCR0
+Date: Fri, 14 Jun 2024 15:09:50 +0300
+Message-ID: <20240614120951.16158-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] dts: stm32mp157c-odyssey: add phy-reset-gpios
- property to ethernet node
-To: Heesub Shin <heesub@gmail.com>, <u-boot@lists.denx.de>
-References: <20240428142406.28445-1-heesub@gmail.com>
- <20240428142406.28445-5-heesub@gmail.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240428142406.28445-5-heesub@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_09,2024-06-14_03,2024-05-17_01
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,29 +95,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The PC client spec [0], doesn't describe measurements for DTBs. It does
+describe what do to for ACPI tables though.
 
+There is a description for ACPI in 3.3.4.1 PCR[0] – SRTM, POST BIOS,
+and Embedded Drivers and they explicitly mention ACPI in there. There's
+no mention of ACPI in 3.3.4.2 PCR[1] – Host Platform Configuration.
 
-On 4/28/24 16:24, Heesub Shin wrote:
-> In Odyssey board, we should reset the PHY chipset, toggling G0 pin.
-> 
-> Signed-off-by: Heesub Shin <heesub@gmail.com>
-> ---
->  arch/arm/dts/stm32mp157c-odyssey.dts | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/arm/dts/stm32mp157c-odyssey.dts b/arch/arm/dts/stm32mp157c-odyssey.dts
-> index b6210cf8b2..4cc5e07683 100644
-> --- a/arch/arm/dts/stm32mp157c-odyssey.dts
-> +++ b/arch/arm/dts/stm32mp157c-odyssey.dts
-> @@ -75,6 +75,7 @@
->  	phy-mode = "rgmii-id";
->  	max-speed = <1000>;
->  	phy-handle = <&phy0>;
-> +	phy-reset-gpios = <&gpiog 0 GPIO_ACTIVE_LOW>;
->  	st,ext-phyclk;
->  
->  	mdio0 {
-Applied to u-boot-stm32/next
+However, in Figure 6 --  PCR Mapping of UEFI Components ACPI is shown
+in PCR1. The general description also mentions PCR0 is for code and PCR1
+is for data such as ACPI and SMBIOS.
 
-Thanks
-Patrice
+So let's switch over the DTB measurements to PCR1 which seems a better
+fit.
+
+[0] https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification
+
+Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ boot/bootm.c              | 2 +-
+ lib/efi_loader/efi_tcg2.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 6fa8edab021e..3de87eb185d7 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -963,7 +963,7 @@ int bootm_measure(struct bootm_headers *images)
+ 			goto unmap_initrd;
+
+ 		if (IS_ENABLED(CONFIG_MEASURE_DEVICETREE)) {
+-			ret = tcg2_measure_data(dev, &elog, 0, images->ft_len,
++			ret = tcg2_measure_data(dev, &elog, 1, images->ft_len,
+ 						(u8 *)images->ft_addr,
+ 						EV_TABLE_OF_DEVICES,
+ 						strlen("dts") + 1,
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 51264c1b998c..a8a54c9f131d 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -1328,7 +1328,7 @@ efi_status_t efi_tcg2_measure_dtb(void *dtb)
+ 	sha256_update(&hash_ctx, (u8 *)dtb + fdt_off_mem_rsvmap(dtb), rsvmap_size);
+ 	sha256_finish(&hash_ctx, blob->data + blob->blob_description_size);
+
+-	ret = measure_event(dev, 0, EV_POST_CODE, event_size, (u8 *)blob);
++	ret = measure_event(dev, 1, EV_POST_CODE, event_size, (u8 *)blob);
+
+ 	free(blob);
+ 	return ret;
+--
+2.45.1
+
