@@ -4,77 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68806C27C75
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 08:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CEAFC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 08:09:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C19A68898A;
-	Fri, 14 Jun 2024 09:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 72F3B888EC;
+	Fri, 14 Jun 2024 10:09:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="M6yBo3X2";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="LOBthru/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B07D888988; Fri, 14 Jun 2024 09:59:57 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6258C88926; Fri, 14 Jun 2024 10:09:42 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C307A88989
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 09:59:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ by phobos.denx.de (Postfix) with ESMTPS id CF59787ED0
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 10:09:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895de7ee8=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45DNAN1D015049;
- Fri, 14 Jun 2024 09:59:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- nNaQwBOb0xm0wIMFHkcPHDOT0yRdzzfg6+Pv72H207k=; b=M6yBo3X2YabNc/1N
- Vxjr+XE4G7ytfHerDYEMkQ22m+Bo7H9FA0FGBAieyC9VuKwfXEVOGDTrqMHM4HDx
- 7dZxj/M432eA7tNPlaQ6yTxH1jsqUpTWSLbijGtRTsHhcXs0ncfz8KG3VAxSqL2e
- h7oJd1tT+7dDwVwSzHDWXfE9dvOenFm38GnuzlKbiFjVV2OnvGRXgKlXjd0U2cmR
- I02Ng6KVunknKaxNMh/9pChWUK2zV5DfUHGotRh6ev+QrT17V/OHyR6gzKHY/pnz
- +Uhq2m58dzGJaOl3kpXkvDVfxg1AlMnOs4LwDMh77h4dlcwtn9qGfzgv7uBNKHEe
- fmpzFw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4ykxb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 09:59:54 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7755B40049;
- Fri, 14 Jun 2024 09:59:48 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1CD4B20F2A5;
- Fri, 14 Jun 2024 09:59:36 +0200 (CEST)
-Received: from [10.48.87.205] (10.48.87.205) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 09:59:35 +0200
-Message-ID: <53f4d52c-0b87-4bae-91f4-9529321cc549@foss.st.com>
-Date: Fri, 14 Jun 2024 09:59:33 +0200
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-6312f1f83d9so13876067b3.2
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 01:09:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1718352578; x=1718957378;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=30kXg9/7Oliw9Td6EGAG6X74aqjZWrMWvNGdPTDtkvw=;
+ b=LOBthru/x4CDaQts5pTs9sGi6a5ZxPloMvqHBn2qAk+GsK0/lPRpSrQXosAScX1wQZ
+ 8NlQ/nKztcWLXOAKp40Z3rYjqNcurj8XrI1cvR/XQ4pcSobsRN2sw5wS0OKjKKE4sRJx
+ o7T1GTWS5U2XJi23ZCT4CrB5PasHk/zAmeYug=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718352578; x=1718957378;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=30kXg9/7Oliw9Td6EGAG6X74aqjZWrMWvNGdPTDtkvw=;
+ b=iOKhWt4Y2cSu4FVqWrJ6GvG4wPyTeBVSHq44OSpxyvbTwoWqoVyLi5XzDcv4BUGyl+
+ GxLUGCVdGU20n3pQNv4jDvYBhP/OA0bweT7ZNJVqsRN4jz1ffRiZFFL+xbEyRmck3Cxs
+ GPVh8uNLPs/13bGco2+cVZXHLl4nJkQNr1N458Ybo1OPtNVlyfA71Zudnvd4xuKXEiDj
+ Q2JxWQXkJ4eeazQBFvkGd2fHBtnN2YRFEbax7EsgtxXLE6/tkBqFJxq6u8J3eQoBiWA8
+ IJre+G+6JoUkf0sGbSZs+vKgCrDMgzRCQoar4LJa0qj9NKErKBKDoJ0qwOcEw5sqYd6v
+ k0Rw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWuuLRARp/a7Fs5sm7dT766LKmI0HdHeIKICygFKEzL0UL4Djx4Q9r/F5kxcCvHPoRctsoA44CMBUYGrmDL3BxHgz5j3Q==
+X-Gm-Message-State: AOJu0Yw0KdzvHVUs1RTo4UlLwifrUx81SvVBeuSf0pjr6tdD+q4sGVwE
+ rY3XeU0XEIXwsPJ1ENtm+VmB1t+FZtXka61npBePqww86f55U1/ID/H7iS11onbdxAFTwhCfHyd
+ 4VZ8Wo3fR9Z82ZSOPLNgP8QUhYhoGze8PbFEPFQ==
+X-Google-Smtp-Source: AGHT+IEZRp0Yg88Tr3t3WJ5svhCv7AccSx2UyAiv/9qD9S6oErCfayMai/stcB2CCfvJ9py05PqgVCDpeSQgpkEfPw0=
+X-Received: by 2002:a05:690c:a13:b0:631:fd1c:78d2 with SMTP id
+ 00721157ae682-63222a56e73mr17516257b3.18.1718352578475; Fri, 14 Jun 2024
+ 01:09:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] stm32mp1: spl: Update optee_get_reserved_memory()
- return value
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>
-References: <20240611095239.16026-1-patrice.chotard@foss.st.com>
- <20240611095239.16026-2-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20240611095239.16026-2-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.205]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
+References: <20240603155702.1840464-1-avromanov@salutedevices.com>
+ <CAFLszTi+ONdb2P5gtSX_OMUD162G7OtRMD-LbmzO7xuNLRX_HQ@mail.gmail.com>
+ <20240605100922.er7xwi5wadaa5dlk@cab-wsm-0029881>
+ <CAFLszThCaA72+3H_vvrvB3o0euEUEGq-V7Tpj55bk99Vc1j5=w@mail.gmail.com>
+In-Reply-To: <CAFLszThCaA72+3H_vvrvB3o0euEUEGq-V7Tpj55bk99Vc1j5=w@mail.gmail.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Fri, 14 Jun 2024 10:09:27 +0200
+Message-ID: <CABGWkvoui1sChNiTa_ukc2dceK+foJQ5r-ejThvE1mKuKWWiXg@mail.gmail.com>
+Subject: Re: [PATCH v5 0/3] Introduce mtdblock device
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
+ Tobias Waldekranz <tobias@waldekranz.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, kernel <kernel@sberdevices.ru>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,38 +101,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice
+Hi Alexey,
 
-On 6/11/24 11:52, Patrice Chotard wrote:
-> In case node "/reserved-memory/optee" is not found, return -ENOENT
-> instead of 0.
+I'm still encountering errors raised by the CI:
+
+$ tools/buildman/buildman -o ${UBOOT_TRAVIS_BUILD_DIR} -w -E -W -e
+--board ${TEST_PY_BD} ${OVERRIDE}
+34Building current source for 1 boards (1 thread, 32 jobs per thread)
+35 arm: + evb-ast2500
+36+In file included from include/nand.h:19,
+37+ from cmd/bootm.c:17:
+38+include/linux/mtd/mtd.h:430:55: error: 'struct blk_desc' declared
+inside parameter list will not be visible outside of this definition
+or declaration [-Werror]
+39+ 430 | static inline struct mtd_info *blk_desc_to_mtd(struct blk_desc *b=
+desc)
+
+Thanks and regards,
+Dario
+
+On Wed, Jun 5, 2024 at 3:17=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
+:
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
+> Hi Alexey,
 >
->   arch/arm/mach-stm32mp/stm32mp1/spl.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> On Wed, 5 Jun 2024 at 04:09, Alexey Romanov <avromanov@salutedevices.com>=
+ wrote:
+> >
+> > Hi Simon,
+> > your message is empty.
+> >
+> > On Tue, Jun 04, 2024 at 08:13:34PM -0600, Simon Glass wrote:
+> > > Hi Alexey,
+> > >
+> > > On Mon, Jun 3, 2024, 09:57 Alexey Romanov <avromanov@salutedevices.co=
+m>
+> > > wrote:
+> > >
+> > > > Hello!
+> > > >
+> > > > This series adds support for the mtdblock device, which
+> > > > allows to read/write data block by block. For example,
+> > > > it can now be used for BCB or Android AB command:
+> > > >
+> > > >   $ bcb load mtd 0 part_name
+> > > >
+> > > > Tested only on SPI NAND, so bind is made only for
+> > > > SPI NAND drivers.
+> > > >
+> > > > ---
+> > > >
+> > > > Changes V1 -> V2 [1]:
+> > > >
+> > > >   - Drop patch [2].
+> > > >   - Add warning if bind NAND mtdblock device.
+> > > >   - Move documentation of mtdblock implementation
+> > > >     from commit message to the source code.
+> > > >   - Remove __maybe_unused from mtd partition functions
+> > > >     description.
+> > > >   - Use blk_enabled() instead of #ifdefs.
+> > > >
+> > > > Changes V2 -> V3 [2]:
+> > > >
+> > > >   - Rebased over [3].
+> > > >   - Rename mtd_bread/bwrite -> mtd_blk_read/write.
+> > > >   - Fix GPL-2.0 license short name definiton in headers.
+> > > >   - Add empty line after MTD_ENTRY_NUMBERS define.
+> > > >
+> > > > Changes V3 -> V4 [4]:
+> > > >
+> > > >   - Fix build warnings: use LBAF printf format string for lbaint_t =
+types.
+> > > >
+> > > > Changes V4 -> V5 [5]:
+> > > >
+> > > >   - Rebased over u-boot/master.
+> > > >   - Fix build errors and warnings if CONFIG_BLK isn't enabled.
+> > > >   - Fix failed tests in cases is mtdblock device isn't binded.
+> > > >
+> > > > Links:
+> > > >
+> > > >   - [1]
+> > > > https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salu=
+tedevices.com/
+> > > >   - [2]
+> > > > https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@salu=
+tedevices.com/
+> > > >   - [3]
+> > > > https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schu=
+chardt@canonical.com/T/#u
+> > > >   - [4]
+> > > > https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@salu=
+tedevices.com/
+> > > >   - [5]
+> > > > https://lore.kernel.org/all/20240524102920.2631731-1-avromanov@salu=
+tedevices.com/
+> > > >
+> > > > Alexey Romanov (3):
+> > > >   disk: support MTD partitions
+> > > >   drivers: introduce mtdblock abstraction
+> > > >   spinand: bind mtdblock
+> > > >
+> > > >  disk/part.c                 |   3 +-
+> > > >  drivers/block/blk-uclass.c  |   1 +
+> > > >  drivers/mtd/Kconfig         |   1 +
+> > > >  drivers/mtd/Makefile        |   1 +
+> > > >  drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++=
+++++
+> > > >  drivers/mtd/mtdpart.c       |  76 ++++++++++++
+> > > >  drivers/mtd/nand/spi/core.c |  20 ++++
+> > > >  include/linux/mtd/mtd.h     |  21 ++++
+> > > >  include/part.h              |   3 +
+> > > >  9 files changed, 352 insertions(+), 1 deletion(-)
+> > > >  create mode 100644 drivers/mtd/mtdblock.c
+> > > >
+> > > > --
+> > > > 2.34.1
+> > > >
+> > > >
+> >
 >
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> index 10abbed87f0..beda69f3359 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> @@ -118,7 +118,7 @@ static int optee_get_reserved_memory(uint32_t *start, uint32_t *size)
->   
->   	node = ofnode_path("/reserved-memory/optee");
->   	if (!ofnode_valid(node))
-> -		return 0;
-> +		return -ENOENT;
->   
->   	fdt_start = ofnode_get_addr_size(node, "reg", &fdt_mem_size);
->   	*start = fdt_start;
+> Are you able to add a sandbox test for this code?
+>
+> Regards,
+> Simon
 
 
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+--=20
 
-Thanks
-Patrick
+Dario Binacchi
+
+Senior Embedded Linux Developer
+
+dario.binacchi@amarulasolutions.com
+
+__________________________________
 
 
+Amarula Solutions SRL
 
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
+
+T. +39 042 243 5310
+info@amarulasolutions.com
+
+www.amarulasolutions.com
