@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B1AC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61987C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:11:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45C64889BD;
-	Fri, 14 Jun 2024 14:10:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4F2F88261;
+	Fri, 14 Jun 2024 14:11:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zxH1Doyq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0NOdi4BL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CBE6889C9; Fri, 14 Jun 2024 14:10:43 +0200 (CEST)
+ id 73D118844D; Fri, 14 Jun 2024 14:11:48 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B630C8867C
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:10:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7033A881BF
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:11:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E850nd015049
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:10:41 +0200
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EC1lkN017638;
+ Fri, 14 Jun 2024 14:11:37 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- XGZez/gfgnZUChu5yFmMWK5vF0iTnvtClEUeCB9iPUU=; b=zxH1DoyqnqFSZMIb
- D5m4p5G+wHa7NqLTrBY7Mc9G2G88/1EMQDDc2YPnKfAJdvcymvEuXl1ZRgOe7hKI
- d/roNeHdz9YGZYmaB/c49YJ/0XkkJCvVkj78eIvMavTo/hl9ok+3rTGEUxLb8e6Q
- vrK11u5HQJMfuc7WcrRJHyy0CxpBCxAT8cMwI6T45P7FtHMZ3CaJpExttqorXKpp
- 6dgAIGtX1RaLxbYkC9IdAGR06R8tZOCNoxjn2TxDPyrPD+tVvUV4TpdGOqz51m7Y
- qMMPCHO5Hu+hMe2BuP+nnksCtlLw3ONPaGg1K5qXCpk40x5h3SKu2ZGZIbkWSBJR
- IgU/fA==
+ z2NwmJBgONX8N4vOalNdLFUhrvblCiI7FaiYN+dXunA=; b=0NOdi4BLN5izzXBJ
+ 0UBtgLJW3a8nhXGNTTr7Mkmbl+r5GhyLNSXLUmSclpzT5tiMrLbUorcB8OqzzaOO
+ Kix3JWWYzEqe8OnBSJkz05LAoM0xiiXhO23GUQAHO4K24x9emcnb8HpBJky4iAmo
+ nKrDkel6me3cJzULQkt1U5tgos8QP9LrmJHSX+BA+rnHD5xNbjqyncsLGtrQmp9A
+ mH3gpms59SsGmT6qlPh0hodPpZ3W9QV2fmYsEkbp4fozVtzbtHmH7iD2IAuw9AYz
+ 4YCyxGWkM+66bw8zgpUspD3JTq2NOxL1Px9zNk4OYW6z7upY5yQf+i95fLSbjwd4
+ 3LCL5Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp50pr2-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:10:41 +0200 (MEST)
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp30vxh-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 14:11:36 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3D97940044
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:10:37 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8308440045;
+ Fri, 14 Jun 2024 14:11:32 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 52D5B214D09
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:10:12 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 240552138D0;
+ Fri, 14 Jun 2024 14:11:08 +0200 (CEST)
 Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 14:10:12 +0200
-Message-ID: <0f91d047-b164-4301-8af6-b1db9d1d82b2@foss.st.com>
-Date: Fri, 14 Jun 2024 14:10:11 +0200
+ 2024 14:11:07 +0200
+Message-ID: <61d4952b-d1cf-43bd-8bfd-0f96881f67b2@foss.st.com>
+Date: Fri, 14 Jun 2024 14:11:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] dts: stm32mp157c-odyssey: fix incorrect PHY address
-To: <u-boot@lists.denx.de>
-References: <20240428142406.28445-1-heesub@gmail.com>
- <20240428142406.28445-3-heesub@gmail.com>
+Subject: Re: [PATCH] ARM: dts: stm32: Add generic SoM compatible to
+ STM32MP15xx DH electronics DHSOM
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240516234737.201250-1-marex@denx.de>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240428142406.28445-3-heesub@gmail.com>
+In-Reply-To: <20240516234737.201250-1-marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.18.60]
@@ -90,30 +93,109 @@ X-Virus-Status: Clean
 
 
 
-On 4/28/24 16:24, Heesub Shin wrote:
-> In Odyssey board, KSZ9031 is at the PHY address 0x7, not 0x0. This
-> commit fixes it.
+On 5/17/24 01:47, Marek Vasut wrote:
+> Add generic SoM compatible string into machine compatible string
+> for all STM32MP15xx based DH electronics DHSOM. This way, common
+> board code can match on this compatible. No functional change.
 > 
-> Signed-off-by: Heesub Shin <heesub@gmail.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->  arch/arm/dts/stm32mp157c-odyssey.dts | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/dts/stm32mp15xx-dhcom-drc02.dts       | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts        | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts     | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts   | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcor-testbench.dts   | 4 +++-
+>  6 files changed, 18 insertions(+), 6 deletions(-)
 > 
-> diff --git a/arch/arm/dts/stm32mp157c-odyssey.dts b/arch/arm/dts/stm32mp157c-odyssey.dts
-> index 53ba018197..b6210cf8b2 100644
-> --- a/arch/arm/dts/stm32mp157c-odyssey.dts
-> +++ b/arch/arm/dts/stm32mp157c-odyssey.dts
-> @@ -81,8 +81,8 @@
->  		#address-cells = <1>;
->  		#size-cells = <0>;
->  		compatible = "snps,dwmac-mdio";
-> -		phy0: ethernet-phy@0 {
-> -			reg = <0>;
-> +		phy0: ethernet-phy@7 {
-> +			reg = <7>;
->  		};
->  	};
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+> index 1ef9ac29cea..90625bf6b60 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+> @@ -11,5 +11,7 @@
+>  
+>  / {
+>  	model = "DH Electronics STM32MP15xx DHCOM DRC02";
+> -	compatible = "dh,stm32mp15xx-dhcom-drc02", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcom-drc02",
+> +		     "dh,stm32mp15xx-dhcom-som",
+> +		     "st,stm32mp1xx";
 >  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+> index e2e01e2146c..b2e450aa13b 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+> @@ -11,5 +11,7 @@
+>  
+>  / {
+>  	model = "STMicroelectronics STM32MP15xx DHCOM Premium Developer Kit (2)";
+> -	compatible = "dh,stm32mp15xx-dhcom-pdk2", "st,stm32mp15x";
+> +	compatible = "dh,stm32mp15xx-dhcom-pdk2",
+> +		     "dh,stm32mp15xx-dhcom-som",
+> +		     "st,stm32mp15x";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+> index 06770b47873..3e908102f61 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+> @@ -11,5 +11,7 @@
+>  
+>  / {
+>  	model = "DH Electronics STM32MP15xx DHCOM PicoITX";
+> -	compatible = "dh,stm32mp15xx-dhcom-picoitx", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcom-picoitx",
+> +		     "dh,stm32mp15xx-dhcom-som",
+> +		     "st,stm32mp1xx";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+> index 76ac5a873c1..dd8fcecbca5 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+> @@ -14,5 +14,7 @@
+>  
+>  / {
+>  	model = "Arrow Electronics STM32MP15xx Avenger96 board";
+> -	compatible = "arrow,stm32mp15xx-avenger96", "st,stm32mp15x";
+> +	compatible = "arrow,stm32mp15xx-avenger96",
+> +		     "dh,stm32mp15xx-dhcor-som",
+> +		     "st,stm32mp15x";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+> index 77dd944ff53..c1f99c1685e 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+> @@ -12,5 +12,7 @@
+>  
+>  / {
+>  	model = "DH electronics STM32MP15xx DHCOR DRC Compact";
+> -	compatible = "dh,stm32mp15xx-dhcor-drc-compact", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcor-drc-compact",
+> +		     "dh,stm32mp15xx-dhcor-som",
+> +		     "st,stm32mp1xx";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+> index c9163e1c028..5fdd762ddbf 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+> @@ -9,7 +9,9 @@
+>  
+>  / {
+>  	model = "DH electronics STM32MP15xx DHCOR Testbench";
+> -	compatible = "dh,stm32mp15xx-dhcor-testbench", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcor-testbench",
+> +		     "dh,stm32mp15xx-dhcor-som",
+> +		     "st,stm32mp1xx";
+>  
+>  	aliases {
+>  		ethernet0 = &ethernet0;
 Applied to u-boot-stm32/next
 
 Thanks
