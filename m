@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9958C27C77
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEBD2C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:04:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAC508896C;
-	Fri, 14 Jun 2024 08:04:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4BC2988976;
+	Fri, 14 Jun 2024 08:04:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XtGilA58";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IvVJrccE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1807F87DD3; Fri, 14 Jun 2024 08:04:00 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0FF5D87DD3; Fri, 14 Jun 2024 08:04:42 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9A748896C
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:03:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8C878897E
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:04:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2c2d25b5432so1444325a91.2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:03:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718345036; x=1718949836; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NXvX3tSy7bS4bN3272Ma0e90QCgTzWRN1j+IlnKurrg=;
- b=XtGilA58DUBHP7NLX/hfWo+bbzU3u0Stx/Coyv/zMIOF3FNQCdTngayXiarcPMp2aA
- 4WogavT7IIWnFfqYSGFq4HPM9E3sGGUESBBm0jLIMf8Vcv651ommhhpYmZU4DnYPgXZd
- eMT+GF1SfSe6suT88j/2Wp95l2nxa+27uDIVTqhOnB7biAj+dLbmsgPiE/wZUEbA4fQO
- 2SMPbDKotYvSc+mRb/EtF/NeTU20IroRjRvHOJlWrYRlXYrGo7b3ygJepFQvq9kcZ8YA
- WMXfR1YLiF5mnVOTO+TxJxWu4MrJwPYGgzDAOhZXpNK053QcWGKp230HqXVB1pEavntv
- Hrvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718345036; x=1718949836;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NXvX3tSy7bS4bN3272Ma0e90QCgTzWRN1j+IlnKurrg=;
- b=UDTPTAxtvPMsKbgRvyMp6KVbHWYjJiiNg4yWDkXV5Ow9B9lKh5XCKNmZxs3H/wsRC0
- rH2t30SKw46bDTU5vCVs0x8x7dO7B3lvlsGkFG70ClBms4NYS5ZnH6KLOSaYliFI06ME
- I4cGJmaKlH69eMqT5GCZCxQqS6l2gXEpRLPtBH6+lOoLcRDwWCf0O1PDVJSfcPF8vYie
- 3YfJRX7DsQhEz5QWG3gPEoctLCduc3SZCv/8HJYQqFnIVkVza9ucq9/b6cvK82+ffumQ
- RoUC5TwOEZQ5wlhmxdpm2qJ2npdLYvJcSfSrsW2uv1HiEQHlzmkNgOfMdzy1M8eXNd1N
- uAkg==
-X-Gm-Message-State: AOJu0YzCX66vaJ3pl4sDyE0StaXm/9Rj3T6T1oL3GijXwC4Z5w4LklP1
- BDclJ6JwdE45Sk5Dlo6NbmSh6xBob02ABTTz6PF9xxg9fPxGwdZLp17+HfCsCvCFWlTAP/E7lZ4
- VZtghvClL360TTtDIO7k0hMUeZs4ysjiFdCRSUg==
-X-Google-Smtp-Source: AGHT+IEQWfgTJAX7P8RZ1ThFfiiBMKufMXiQuC4uufi7BdlNhw3gNdw9lShGvHL7PhxDXOuFhXt0Jbz88MNdbjKd2+4=
-X-Received: by 2002:a17:90a:a10a:b0:2c4:e2a6:dcdc with SMTP id
- 98e67ed59e1d1-2c4e2a6de95mr788430a91.13.1718345036149; Thu, 13 Jun 2024
- 23:03:56 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45E64bMS075287;
+ Fri, 14 Jun 2024 01:04:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718345077;
+ bh=SyzuxRi3Fb0rDizoYlYr+2qqTnTitkxEtm7JnfKtZH4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=IvVJrccExQw5GxMC1H5fp7frmafb20WPMkn2mWFKJr/zQNTfdIV35+7Y5YyLbbeRG
+ RXuRXl7ANr/8FdMud8c6idZGhu6v0DerLLcaW9zWSuO2f1gITy5EM4PNzN4wVQcIEn
+ nBjjZRY8Esfgmf3F9GcgqDTydyal/uUgJGdr0MXA=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45E64bhj019984
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 01:04:37 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 01:04:37 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 01:04:36 -0500
+Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45E64aYE011361;
+ Fri, 14 Jun 2024 01:04:36 -0500
+Date: Fri, 14 Jun 2024 11:34:35 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Robert Nelson <robertcnelson@gmail.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vibhore Vardhan
+ <vibhore@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Nishant Menon
+ <nm@ti.com>, <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>,
+ Judith Mendez <jm@ti.com>
+Subject: Re: [PATCH] board: beagleplay: Fix the bootpart to pick from root
+ partition
+Message-ID: <20240614060435.ema3wczc7r7tgetu@dhruva>
+References: <20240613080604.3828083-1-d-gole@ti.com>
+ <CAOCHtYjAFE0sbyYRXnbsv9EohNfH99vsuVYiZbi2Ami_xdoxWw@mail.gmail.com>
+ <CAOCHtYi7vjHeCcUzgDBkayGx9W3gR6MT==8ASf+7524pu21Vbw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240610145920.3302001-1-sjg@chromium.org>
- <20240610145920.3302001-3-sjg@chromium.org>
-In-Reply-To: <20240610145920.3302001-3-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Jun 2024 09:03:19 +0300
-Message-ID: <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOCHtYi7vjHeCcUzgDBkayGx9W3gR6MT==8ASf+7524pu21Vbw@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,75 +84,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Robert,
 
-On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
->
-> It does not make sense to enable all SHA algorithms unless they are
-> needed. It bloats the code and in this case, causes chromebook_link to
-> fail to build. That board does use the TPM, but not with measured boot,
-> nor EFI.
->
-> Since EFI_TCG2_PROTOCOL already selects these options, we just need to
-> add them to MEASURED_BOOT as well.
->
-> Note that the original commit combines refactoring and new features,
-> which makes it hard to see what is going on.
->
-> Fixes: 97707f12fda tpm: Support boot measurements
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v2:
-> - Put the conditions under EFI_TCG2_PROTOCOL
-> - Consider MEASURED_BOOT too
->
->  boot/Kconfig | 4 ++++
->  lib/Kconfig  | 4 ----
->  2 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 6f3096c15a6..b061891e109 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
->  config MEASURED_BOOT
->         bool "Measure boot images and configuration when booting without EFI"
->         depends on HASH && TPM_V2
-> +       select SHA1
-> +       select SHA256
-> +       select SHA384
-> +       select SHA512
->         help
->           This option enables measurement of the boot process when booting
->           without UEFI . Measurement involves creating cryptographic hashes
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 189e6eb31aa..568892fce44 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -438,10 +438,6 @@ config TPM
->         bool "Trusted Platform Module (TPM) Support"
->         depends on DM
->         imply DM_RNG
-> -       select SHA1
-> -       select SHA256
-> -       select SHA384
-> -       select SHA512
+On Jun 13, 2024 at 16:51:24 -0500, Robert Nelson wrote:
+> On Thu, Jun 13, 2024 at 4:47 PM Robert Nelson <robertcnelson@gmail.com> wrote:
+> >
+> > On Thu, Jun 13, 2024 at 3:06 AM Dhruva Gole <d-gole@ti.com> wrote:
+> > >
+> > > The Kernel Image and DTB files are supposed to be picked from the rootfs
+> > > of the SD Card, this fails in legacy boot flow because bootpart is set
+> > > to 1:1. Fix it.
+> >
+> > and where is that rule defined?
+> >
+> > Production boards ship with Kernel Image and DTB's in the 1st fat partition..
+> 
+> Besides, u-boot should scan for extlinux.conf on "any" partition.
 
-I am not sure this is the right way to deal with your problem.
-The TPM main functionality is to measure and extend PCRs, so shaXXXX
-is really required. To make things even worse, you don't know the PCR
-banks that are enabled beforehand. This is a runtime config of the
-TPM.
+I can see where you come from, and I agree on the above points when it
+comes to stdboot.
+However when a user wishes to use legacy boot, and in the case there
+isn't extlinux.conf in such a case u-boot will rely on information in
+the env file (please correct me if my understanding is wrong).
 
- So this would make the TPM pretty useless. Can't you remove something
-that doesn't break functionality?
+The env file says:
+bootdir=/boot
 
-Thanks
-/Ilias
->         help
->           This enables support for TPMs which can be used to provide security
->           features for your board. The TPM can be connected via LPC or I2C
-> --
-> 2.34.1
->
+Thus u-boot ends up looking for Image and dtb in /boot/Image under BOOT
+partition, and ultimately fails, because the /boot/Image path is
+generally found inside the root partition ie. 1:2
+
+The idea of this patch is to keep support for such legacy boot alive, if
+you feel there's another way to do this feel free to suggest.
+
+--
+Dhruva
