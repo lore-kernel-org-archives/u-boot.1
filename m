@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E80B7C27C4F
-	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 06:58:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CC75C27C4F
+	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 07:02:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0DC487BF4;
-	Sat, 15 Jun 2024 08:58:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A16A4879AF;
+	Sat, 15 Jun 2024 09:02:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JzKsiV/L";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QaTSNs1l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE0DD8796B; Sat, 15 Jun 2024 08:58:33 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 7150E87CF1; Sat, 15 Jun 2024 09:02:29 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B178796B
- for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 08:58:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 239648796B
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 09:02:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2c2ecd25e5aso2340442a91.2
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 23:58:31 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1f6a837e9a3so19216615ad.1
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 00:02:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718434710; x=1719039510; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QGIBd9beJy0rDLpAZ1l3K7Bd9SwUMtQdMsEaak48N/0=;
- b=JzKsiV/LwYpcAfvMt3brasb7LUfxVopK2pOJOEpO5hsKkS5TRrzo7nHw30KEptfTu1
- 19WuH8Cfi3MlAAjsN/kGKL66fGsuy7w9ttAlNMme5fxjidfx/O9gyvifkuFs2oGBPQfB
- q8Srp9v7DUDV6GtMJqnbAaVM7kBCv7l0yceVhpr3PVonUimiuXJYezpM87p90Qrt/CEh
- 4VV6s1y6aO6gZhqwf7UOUh5bwdQnKrOUPZXR57Vepm5qqWLkfVaAvWNVNkY3cILNOpnP
- yf5y2zZ8LKz9CVVWPV1UWNrZOLDGZS4LHElu19nGr+ZvwyU76/r+PAsqhHkqzd85wUo/
- ljAw==
+ d=linaro.org; s=google; t=1718434945; x=1719039745; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qN+QmmQSkNstkrKygkqmNx9awU3GWhtjT6q91bJsgqk=;
+ b=QaTSNs1lpG4oKMlIkO+kNG+N/xa/S1OMk54yrXzCoKAimlxR8v6BLMRI1ta4VPmczk
+ fi0FVRP3eW1TmkMAKMCHjLbrDGjcxDpoJE986CbIwTtYC2jcxzxIHZHvPEtnqJwLsjqQ
+ naIM0D8be7E8ffHxAWGQ5AxmYFlFZFGJqU9Rc2BkVQ0SihjhBTm+19Qsovv6OPRoUa0B
+ O04meqGE6Rf8CrvtN1dLBjesZX1jBZa6v7VvHigpgKYtZPB+O5R5AGvOk0nejlBO4Qw5
+ 16lL1PP5lmRHvx+wNCiHLKqYghZymihA36R7QtgT6qqeV3Xphg6EbJlqeNyDxNRmlu/Y
+ 3idQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718434710; x=1719039510;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QGIBd9beJy0rDLpAZ1l3K7Bd9SwUMtQdMsEaak48N/0=;
- b=aDBtoA0ZG8zR/5D4RDZActiiqmuLSu0UDMHL4mpz/Ewgt82Ou6qifW5Sgvrni9vT9t
- O/tvr7LRxQqGWFopIAmmXFbCZFhjtOOYRVSZm+o7A7rq+3nDMYOw0csfiUHd114fpJaS
- pLsRcwAF4msN+x+LPGIZYVc1mJyph4w5LGdle5kaTuygQWGtVFWggBXt602fYeE3EULZ
- BbhZRS4UtwuX9l8mk4QNR+j80SVLxTDKyszDqINwRFADqEiHfTgMwO7HLTYBZKE/SG81
- JIHQ1OQVP3v0+kz38eYRw613y9a7y5qrnIvvuwVq8NXH2r9B+00s4gckx7Loow/9upTQ
- Rmxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvqK7b5rvEuncKSOefiP75jJ7qo4Y4phqli3MXObPvIz0mLx0C7KZEfCpwW17kfIqrtU76KCpc4u/QMIgaQq2I3IKC2Q==
-X-Gm-Message-State: AOJu0YzsFccCfayY431obxJG/bA5BbEKsBLC+EBJRtkpwUae1BN6pNnG
- a22I0EVCaFHO1WH4IJm0+7xYlJWvF0YayA54SYR7YqT8JrVBh42L5UZvAwN1eZCyXWsXPb7Sgoc
- DjL7rYNB1KuOjA+zUgvmWniZ08QDR6zFJ0+Z+Iw==
-X-Google-Smtp-Source: AGHT+IHFPRORJF5d0YKxImqH+GV1w7yf3KXn3YDOrsjQ1Gv0YzWFO4BIyM0sBGqIlRt3c7yieSp7/o7GZ5oin281bzg=
-X-Received: by 2002:a17:90a:d805:b0:2c2:ce08:d0e4 with SMTP id
- 98e67ed59e1d1-2c4db44b5acmr5160384a91.23.1718434709572; Fri, 14 Jun 2024
- 23:58:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718434945; x=1719039745;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qN+QmmQSkNstkrKygkqmNx9awU3GWhtjT6q91bJsgqk=;
+ b=r+LwJg1sx4/0erGGuC95ZgGuwLgvnRte4jUFG7Q6qUqWmDgxL8PqmIXatUJ0r4x50j
+ WNmDT4ehUoMZLqjzHjVj38/nrMOZMJI+pdfxwe5ib2bTVZj4mfwHk/ZtAa2rqtG2izI2
+ 3Qq1++B4tlQZMaCAlFZ0gzrcHlp+G+Yb/W2+Sgxv1ASXU/DCxCibOLgShBLf/PhcpVzn
+ 3oDB1fhAI07dZKwlul2DwK1EHMgkiSsBtFsloM6YZf1IZP8HfNFTw4AxRU+OIiUt6S/H
+ X0tRfBIxlitnhKPbCK9RKSsw6WbQenx5auM7f1uyUyer4DqNcqW3bi3MkOmXYUwwGcPQ
+ n76Q==
+X-Gm-Message-State: AOJu0YxNKtr4FqZHJJ0z3gHG4kihcYRsYwYgjVyQLk6kADqiZWzruGYQ
+ aaj9WMZ0ElUtQ8uIKQg2o7oOiVsljfgsYM466XinnUOiVM6nk9idj47MDvg3M+qk5GIefmp3GSH
+ RlQwEsDq1du9tvSnP8D+Ak7BkFj5WBqnBg9bT4Q==
+X-Google-Smtp-Source: AGHT+IGz7JpyjIITnJRJFvN8YEZiGhQXlni4KkEh2hmpz9tARv6dUb1+bp/SFsjhaadWZSZgEWxukxOmWx0Y+9n2lYY=
+X-Received: by 2002:a17:902:f691:b0:1f7:c33:aa9d with SMTP id
+ d9443c01a7336-1f8627cac4amr51360295ad.34.1718434945387; Sat, 15 Jun 2024
+ 00:02:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240614120951.16158-1-ilias.apalodimas@linaro.org>
- <8b18f131-4e9d-4706-9a43-9ceb35f14d51@linux.ibm.com>
-In-Reply-To: <8b18f131-4e9d-4706-9a43-9ceb35f14d51@linux.ibm.com>
+References: <20240610145920.3302001-1-sjg@chromium.org>
+ <20240610145920.3302001-3-sjg@chromium.org>
+ <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
+ <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
+ <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
+ <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
+In-Reply-To: <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 15 Jun 2024 09:57:53 +0300
-Message-ID: <CAC_iWjJ0S5pZUfffop5dS_daopb-kpOWNeNF_pbOQLW-vPwtPg@mail.gmail.com>
-Subject: Re: [PATCH] tpm: measure DTB in PCR1 instead of PCR0
-To: Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Date: Sat, 15 Jun 2024 10:01:48 +0300
+Message-ID: <CAC_iWjJsMQqADGuETbYZdaB-+TiSCsjSV4CKFnit3Rjk9JVYBg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Eddie James <eajames@linux.ibm.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,84 +96,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Eddie,
+Hi Heinrich,
 
-On Sat, 15 Jun 2024 at 00:31, Eddie James <eajames@linux.ibm.com> wrote:
->
->
-> On 6/14/24 07:09, Ilias Apalodimas wrote:
-> > The PC client spec [0], doesn't describe measurements for DTBs. It does
-> > describe what do to for ACPI tables though.
-> >
-> > There is a description for ACPI in 3.3.4.1 PCR[0] =E2=80=93 SRTM, POST =
-BIOS,
-> > and Embedded Drivers and they explicitly mention ACPI in there. There's
-> > no mention of ACPI in 3.3.4.2 PCR[1] =E2=80=93 Host Platform Configurat=
-ion.
-> >
-> > However, in Figure 6 --  PCR Mapping of UEFI Components ACPI is shown
-> > in PCR1. The general description also mentions PCR0 is for code and PCR=
-1
-> > is for data such as ACPI and SMBIOS.
->
->
-> Thanks, looks correct.
->
-> Reviewed-by: Eddie James <eajames@linux.ibm.com>
 
-Heinrich, do you want to carry this on the EFI tree, or shall I send a
-PR via the TPM tree?
+On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 14.06.24 09:01, Ilias Apalodimas wrote:
+> > On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>
+> >> On 6/14/24 08:03, Ilias Apalodimas wrote:
+> >>> Hi Simon,
+> >>>
+> >>> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
+> >>>>
+> >>>> It does not make sense to enable all SHA algorithms unless they are
+> >>>> needed. It bloats the code and in this case, causes chromebook_link to
+> >>>> fail to build. That board does use the TPM, but not with measured boot,
+> >>>> nor EFI.
+> >>>>
+> >>>> Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+> >>>> add them to MEASURED_BOOT as well.
+> >>>>
+> >>>> Note that the original commit combines refactoring and new features,
+> >>>> which makes it hard to see what is going on.
+> >>>>
+> >>>> Fixes: 97707f12fda tpm: Support boot measurements
+> >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>>> ---
+> >>>>
+> >>>> Changes in v2:
+> >>>> - Put the conditions under EFI_TCG2_PROTOCOL
+> >>>> - Consider MEASURED_BOOT too
+> >>>>
+> >>>>    boot/Kconfig | 4 ++++
+> >>>>    lib/Kconfig  | 4 ----
+> >>>>    2 files changed, 4 insertions(+), 4 deletions(-)
+> >>>>
+> >>>> diff --git a/boot/Kconfig b/boot/Kconfig
+> >>>> index 6f3096c15a6..b061891e109 100644
+> >>>> --- a/boot/Kconfig
+> >>>> +++ b/boot/Kconfig
+> >>>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
+> >>>>    config MEASURED_BOOT
+> >>>>           bool "Measure boot images and configuration when booting without EFI"
+> >>>>           depends on HASH && TPM_V2
+> >>>> +       select SHA1
+> >>>> +       select SHA256
+> >>>> +       select SHA384
+> >>>> +       select SHA512
+> >>>>           help
+> >>>>             This option enables measurement of the boot process when booting
+> >>>>             without UEFI . Measurement involves creating cryptographic hashes
+> >>>> diff --git a/lib/Kconfig b/lib/Kconfig
+> >>>> index 189e6eb31aa..568892fce44 100644
+> >>>> --- a/lib/Kconfig
+> >>>> +++ b/lib/Kconfig
+> >>>> @@ -438,10 +438,6 @@ config TPM
+> >>>>           bool "Trusted Platform Module (TPM) Support"
+> >>>>           depends on DM
+> >>>>           imply DM_RNG
+> >>>> -       select SHA1
+> >>>> -       select SHA256
+> >>>> -       select SHA384
+> >>>> -       select SHA512
+> >>>
+> >>> I am not sure this is the right way to deal with your problem.
+> >>> The TPM main functionality is to measure and extend PCRs, so shaXXXX
+> >>> is really required. To make things even worse, you don't know the PCR
+> >>> banks that are enabled beforehand. This is a runtime config of the
+> >>> TPM.
+> >>
+> >> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is selected, U-Boot
+> >> cannot extend PCRs. So it seems fine to let these two select the
+> >> complete set of hashing algorithms. As Simon pointed out for
+> >> EFI_TCG2_PROTOCOL this is already done in lib/efi_loader/Kconfig.
+> >
+> > It can. The cmd we have can extend those pcrs -- e.g tpm2 pcr_extend 8
+> > 0xb0000000
+>
+> So this patch should also consider CMD_TPM_V2 and CMD_TPM_V1.
+>
+> TPM v1 only needs SHA-1.
 
-Thanks
-/Ilias
+I still prefer to leave the TPM in a working state tbh.
 >
+> In cmd/tpm-v2.c do_tpm2_pcr_extend() and do_tpm_pcr_read() assume
+> SHA256. Function tpm_pcr_extend() shows the same limitation. This bug
+> should be fixed. But as is CMD_TPM_V2 seems only to require CONFIG_SHA256.
+>
+> Best regards
+>
+> Heinrich
 >
 > >
-> > So let's switch over the DTB measurements to PCR1 which seems a better
-> > fit.
-> >
-> > [0] https://trustedcomputinggroup.org/resource/pc-client-specific-platf=
-orm-firmware-profile-specification
-> >
-> > Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   boot/bootm.c              | 2 +-
-> >   lib/efi_loader/efi_tcg2.c | 2 +-
-> >   2 files changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/boot/bootm.c b/boot/bootm.c
-> > index 6fa8edab021e..3de87eb185d7 100644
-> > --- a/boot/bootm.c
-> > +++ b/boot/bootm.c
-> > @@ -963,7 +963,7 @@ int bootm_measure(struct bootm_headers *images)
-> >                       goto unmap_initrd;
-> >
-> >               if (IS_ENABLED(CONFIG_MEASURE_DEVICETREE)) {
-> > -                     ret =3D tcg2_measure_data(dev, &elog, 0, images->=
-ft_len,
-> > +                     ret =3D tcg2_measure_data(dev, &elog, 1, images->=
-ft_len,
-> >                                               (u8 *)images->ft_addr,
-> >                                               EV_TABLE_OF_DEVICES,
-> >                                               strlen("dts") + 1,
-> > diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> > index 51264c1b998c..a8a54c9f131d 100644
-> > --- a/lib/efi_loader/efi_tcg2.c
-> > +++ b/lib/efi_loader/efi_tcg2.c
-> > @@ -1328,7 +1328,7 @@ efi_status_t efi_tcg2_measure_dtb(void *dtb)
-> >       sha256_update(&hash_ctx, (u8 *)dtb + fdt_off_mem_rsvmap(dtb), rsv=
-map_size);
-> >       sha256_finish(&hash_ctx, blob->data + blob->blob_description_size=
-);
-> >
-> > -     ret =3D measure_event(dev, 0, EV_POST_CODE, event_size, (u8 *)blo=
-b);
-> > +     ret =3D measure_event(dev, 1, EV_POST_CODE, event_size, (u8 *)blo=
-b);
-> >
-> >       free(blob);
-> >       return ret;
-> > --
-> > 2.45.1
-> >
+> > Regards
+> > /Ilias
+> >>
+> >> Even if U-Boot does not support measured boot (EFI or non-EFI) we might
+> >> still be using the TPMs RNG.
+> >>
+> >> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >>
+> >>>
+> >>>    So this would make the TPM pretty useless. Can't you remove something
+> >>> that doesn't break functionality?
+> >>>
+> >>> Thanks
+> >>> /Ilias
+> >>>>           help
+> >>>>             This enables support for TPMs which can be used to provide security
+> >>>>             features for your board. The TPM can be connected via LPC or I2C
+> >>>> --
+> >>>> 2.34.1
+> >>>>
+> >>
+>
