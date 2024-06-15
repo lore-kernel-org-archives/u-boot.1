@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C3BC27C4F
-	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 08:35:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43BF9C27C4F
+	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 09:20:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD11F87BCB;
-	Sat, 15 Jun 2024 10:35:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 06E8387D1A;
+	Sat, 15 Jun 2024 11:20:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="r6s3NVt3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IABIqcPs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BF1C87CF1; Sat, 15 Jun 2024 10:35:41 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1AF1587D2F; Sat, 15 Jun 2024 11:20:26 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AACD87ABC
- for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 10:35:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 1F1BE87ABC
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 11:20:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1718440537; x=1719045337; i=frank-w@public-files.de;
- bh=CscBUABiTIJld3eOacyaaV9RZXIOf/Y6+XvD9jeQM9o=;
- h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Cc:Subject:
- Content-Type:Date:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=r6s3NVt3RefIG8cudLjS/KY3I98gEfNK9dUQ18FnexVCK6/LAKdJ8yLsXf6ioRgB
- C73SBFPdE6zQEXa6Li6+OCBxVI32mDaBHhsp9SBshwa53u5AwZXQ66jrg0qwwIUTf
- RITwVlUdMEMO5BZmNnXcbUJXKWyaSI5dExwUywIkLF2ZIVT0Nat7Xhns3HUEDthb4
- X0zJHD96TVUg4wskX679xGIq5wbsCNTv2l8MfpxORo88Xs56OyXgc7OrANvf92b07
- JdBcRimcBGTb5tkMDKspt2tA5wTluUicnHv8+/IYuIIS9DE2rtA/KAonQzwDwotLy
- voczAr03FXeVZ5e4FA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [217.61.159.183] ([217.61.159.183]) by web-mail.gmx.net
- (3c-app-gmx-bap44.server.lan [172.19.172.114]) (via HTTP); Sat, 15 Jun 2024
- 10:35:37 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a63359aaaa6so437269066b.2
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 02:20:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718443223; x=1719048023; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=n5mg3jXSd9EnaIcWux3JAc87iOUYuQ64vJpe86IumEI=;
+ b=IABIqcPsOTiYm8B8rfN6mqHCFgYeEIXRTG3HdQDR20rT304LIKp09zt2fxn4/XAq2G
+ fPJJ57jFJkBdrKzXNtMV3Y9NbyoI9B/ZM+Ji0UgNzF0aSSAFuylV/qrjzzbrJYZqHCAJ
+ UFQBJEWnqWoJmKRIER0NSSeUL2r4M+RTaxdQbD/IDTOC3q8IGHzjcldzm0R5uQ2dSj5n
+ 4U8t1z6cwHpmvsU2MPBGryNQou0s4YEUos1bo+2DtvqY+3q7kciSQnAfkh+EhUozmqjM
+ fsqXKOfT4f/p3BCSoDRgmRg9yqaIPs3uS+ZFlq01K8EwxwZbHGO3SHbyKhvyIxLMtGUA
+ SlLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718443223; x=1719048023;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n5mg3jXSd9EnaIcWux3JAc87iOUYuQ64vJpe86IumEI=;
+ b=afKH7TDB3w26HupDtLIhBuCJ5c5FwF427Y6l8Hilwgp2yBgqc2cfq6Z8j0TD5W0eMm
+ pbJXZtrfmmFg9V3dbKxdEJsncNJ0pfYWX6IwR7OsAPnGr6rV+Sj39PqW/7h5SmKy7Iev
+ YliOG5nyCaqnOxKHnTUdK0awhTUGWLj8Rpopws6Zt/hEN3FY9U5UeaQSiWWYbMnQOvJo
+ iiqEuqzR9LlNCutABKfnIVkjCoRM0PFHKM1nrWFpbd12yWegSLu1a4SXu81aVlN0wWq6
+ QYicEpnb3RWpOaq9W+K2roBafB9l8PAx8WOrZpDcIO6sgoL6SzOJvJZZenNDN4425mmh
+ 2/vA==
+X-Gm-Message-State: AOJu0YyTYp3hGgl6N17iyjcS2Z9r8VfoqWf6GH+H9jHh/e6HatPAwJVc
+ wQQ54yezBXLpfc6i0Wh9L1SuVVC2eF2GJIBAsoKnX+psJi/tMe/t
+X-Google-Smtp-Source: AGHT+IGvoBY2Zk/x/yKsXhid83MMq1H8DeFSsSttXz1FzPYPQMB2trB6SklMggz31okbyLuIjPrEKg==
+X-Received: by 2002:a17:907:3f03:b0:a6f:5fe2:56e9 with SMTP id
+ a640c23a62f3a-a6f60d2b9a7mr413371566b.17.1718443223341; 
+ Sat, 15 Jun 2024 02:20:23 -0700 (PDT)
+Received: from xeon.. ([188.163.112.69]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6f63f7e9d8sm172367066b.182.2024.06.15.02.20.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Jun 2024 02:20:23 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/4] Initial support for new Tegra 2/3 devices
+Date: Sat, 15 Jun 2024 12:19:42 +0300
+Message-ID: <20240615091950.239610-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Message-ID: <trinity-e357a9ad-a974-44b8-9efc-a236a499c673-1718440537556@3c-app-gmx-bap44>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: u-boot@lists.denx.de, =?UTF-8?Q?S=C3=A9bastien_Szymanski?=
- <sebastien.szymanski@armadeus.com>
-Cc: Daniel Golle <daniel@makrotopia.org>, John Crispin <john@phrozen.org>,
- "Christian Marangi (Ansuel)" <ansuelsmth@gmail.com>
-Subject: uboot 2024.07 regression
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 15 Jun 2024 10:35:37 +0200
-Importance: normal
-Sensitivity: Normal
-X-Priority: 3
-X-Provags-ID: V03:K1:DixK8UVHJVbjM9edzn8D6EkxdrDjneulrso2OCYlnunggrn3T+j5S1+87/AIa0NDsNep/
- TpSaEqDjHq5GJjA8poJbi6nbm076V0q77FeQ57cxQcHhYQMBD1BUwe7/NEjWOnMAG1CoAtltTxyd
- dp4B9WBrAyCw3R33CBVm7VaTtgINkGWvHzcEeBJOKq1OOmK6y4X3ZAq14mTbYx3paOVKo5Ms6CFd
- mCYSxll3MBwqHV7kTViuOfbOcqpwPThFvcdvdHcS1t0liWyCLzKnLYHvR+RgQmTnzha7NAgIkp9/
- JA=
-UI-OutboundReport: notjunk:1;M01:P0:ukgM/ifsZxE=;lg3O18a0AqZhju9IGdIOkaxILZ2
- MNQIPS+CNbMMTtnTrLYNDKZ0d8/gxn/hxavdXkl/kbuMHftkVW+oiWvbwXD5ColI7z3Qry3I5
- 9oeKTxEmVeCZD2wCK4jB/WPFb/7ULTD7+jlf5lzz00utBvhSx6nie/q5I2mRz5BAeh/pC+KhD
- hG1EMV15irjKpvS37kFcw8gvMqG9rUIPwXlopRfO/8pLlzkXYPNvP3bXaW7Rcau22263wU18O
- LjRPwHyAYi1H56O9eejYs8obkiS+Mm+tdrvlEgG4C2VNQXRSDapWL3CYzMHeX3HsnQMko+F1s
- xDkbQpbe7hg1tKvhs1E1Tn6wlG6gk2L/LoGch3UjUvkXoqwEyVNHM28MkUja1qgWICCcGdX4c
- XusvMuB+S43aMTSGiUWOwT/BFzZ185yo/yuFJgXFgAPelf5yF4u25HbD+Y4GL006re/5lvzZa
- PgrYxluZVVIwR/U7dlX31tWPbgvU37Gvo5w3Q1xdIdP4oPiedafWLrKfoV5/iVGEY6FVWpYkZ
- Dp5e2pO7nPcZ7xfSmooxciJtRhQYdlK4KB/B/MbGfk6MPYvvvU7accESfoZKRIUUaTYhzB4x+
- T6bIV3ODTkgipyS8iDQnwEatTODxx7/IMnliWgRN+10RetIVtgIWAGQe5Mg7qbY65zUZW0ayk
- 5y6+x0aRuzclMppTyhNYVERDA3cJ2q/GvkxtzLMJr3qPFSDVLOYtZ3EVgqpNahw=
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,21 +91,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Patchset includes initial support bringup for 4 new Tegra 2 and
+Tegra 3 devices which include Asus Transformers with Tegra 2,
+Microfost Surface RT, Lenovo Ideapad Yoga 11 and Wexler Tab 7t.
+All setups are tested on real hardware and pass buildman.
 
-while testing clock-patches for mediatek as preparation for OF_upstream i'=
-ve noticed an issue on
-mt7623 based board (bananapi r2) with ethernet (no ping possible) in 2024.=
-07-rc1 where 2024.04 is good.
+Jonas Schwöbel (2):
+  board: microsoft: surface-rt: add Microsoft Surface RT support
+  board: lenovo: ideapad-yoga-11: Lenovo Ideapad Yoga 11
 
-i bisected it to this commit:
-ff3bcb17f436 2024-02-23 Makefile: pass -undef option to cmd_gen_envp
-and when reverting this commit in 2024.07 ethernet works
+Svyatoslav Ryhel (2):
+  board: asus: transformer: add ASUS Transformer T20 family support
+  board: wexler: qc750: add WEXLER Tab 7t support
 
-it seems not yet reported or reverted (till 2024.07-rc4).
+ arch/arm/dts/Makefile                         |    9 +-
+ arch/arm/dts/tegra20-asus-sl101.dts           |    9 +
+ arch/arm/dts/tegra20-asus-tf101.dts           |    9 +
+ arch/arm/dts/tegra20-asus-tf101g.dts          |    9 +
+ arch/arm/dts/tegra20-asus-transformer.dtsi    |  545 +++++++
+ .../dts/tegra30-lenovo-ideapad-yoga-11.dts    | 1266 +++++++++++++++++
+ arch/arm/dts/tegra30-microsoft-surface-rt.dts | 1083 ++++++++++++++
+ arch/arm/dts/tegra30-wexler-qc750.dts         | 1106 ++++++++++++++
+ arch/arm/mach-tegra/tegra20/Kconfig           |    5 +
+ arch/arm/mach-tegra/tegra30/Kconfig           |   15 +
+ board/asus/transformer-t20/Kconfig            |   12 +
+ board/asus/transformer-t20/MAINTAINERS        |    8 +
+ board/asus/transformer-t20/Makefile           |    9 +
+ .../asus/transformer-t20/configs/sl101.config |    1 +
+ .../asus/transformer-t20/configs/tf101.config |    1 +
+ .../transformer-t20/configs/tf101g.config     |    1 +
+ board/asus/transformer-t20/transformer-t20.c  |   57 +
+ board/lenovo/ideapad-yoga-11/Kconfig          |   12 +
+ board/lenovo/ideapad-yoga-11/MAINTAINERS      |    7 +
+ board/lenovo/ideapad-yoga-11/Makefile         |    6 +
+ .../ideapad-yoga-11/ideapad-yoga-11-spl.c     |   41 +
+ board/microsoft/surface-rt/Kconfig            |   12 +
+ board/microsoft/surface-rt/MAINTAINERS        |    7 +
+ board/microsoft/surface-rt/Makefile           |    6 +
+ board/microsoft/surface-rt/surface-rt-spl.c   |   41 +
+ board/wexler/qc750/Kconfig                    |   12 +
+ board/wexler/qc750/MAINTAINERS                |    7 +
+ board/wexler/qc750/Makefile                   |   11 +
+ board/wexler/qc750/qc750-spl.c                |   45 +
+ board/wexler/qc750/qc750.c                    |   21 +
+ configs/ideapad-yoga-11_defconfig             |   84 ++
+ configs/qc750_defconfig                       |   81 ++
+ configs/surface-rt_defconfig                  |   80 ++
+ configs/transformer_t20_defconfig             |   82 ++
+ doc/board/asus/index.rst                      |    1 +
+ doc/board/asus/transformer_t20.rst            |  129 ++
+ doc/board/index.rst                           |    3 +
+ doc/board/lenovo/ideapad-yoga-11.rst          |   41 +
+ doc/board/lenovo/index.rst                    |    9 +
+ doc/board/microsoft/index.rst                 |    9 +
+ doc/board/microsoft/surface-rt.rst            |   41 +
+ doc/board/wexler/index.rst                    |    9 +
+ doc/board/wexler/qc750.rst                    |  125 ++
+ include/configs/ideapad-yoga-11.h             |   79 +
+ include/configs/qc750.h                       |   67 +
+ include/configs/surface-rt.h                  |   41 +
+ include/configs/transformer-t20.h             |   23 +
+ 47 files changed, 5276 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/tegra20-asus-sl101.dts
+ create mode 100644 arch/arm/dts/tegra20-asus-tf101.dts
+ create mode 100644 arch/arm/dts/tegra20-asus-tf101g.dts
+ create mode 100644 arch/arm/dts/tegra20-asus-transformer.dtsi
+ create mode 100644 arch/arm/dts/tegra30-lenovo-ideapad-yoga-11.dts
+ create mode 100644 arch/arm/dts/tegra30-microsoft-surface-rt.dts
+ create mode 100644 arch/arm/dts/tegra30-wexler-qc750.dts
+ create mode 100644 board/asus/transformer-t20/Kconfig
+ create mode 100644 board/asus/transformer-t20/MAINTAINERS
+ create mode 100644 board/asus/transformer-t20/Makefile
+ create mode 100644 board/asus/transformer-t20/configs/sl101.config
+ create mode 100644 board/asus/transformer-t20/configs/tf101.config
+ create mode 100644 board/asus/transformer-t20/configs/tf101g.config
+ create mode 100644 board/asus/transformer-t20/transformer-t20.c
+ create mode 100644 board/lenovo/ideapad-yoga-11/Kconfig
+ create mode 100644 board/lenovo/ideapad-yoga-11/MAINTAINERS
+ create mode 100644 board/lenovo/ideapad-yoga-11/Makefile
+ create mode 100644 board/lenovo/ideapad-yoga-11/ideapad-yoga-11-spl.c
+ create mode 100644 board/microsoft/surface-rt/Kconfig
+ create mode 100644 board/microsoft/surface-rt/MAINTAINERS
+ create mode 100644 board/microsoft/surface-rt/Makefile
+ create mode 100644 board/microsoft/surface-rt/surface-rt-spl.c
+ create mode 100644 board/wexler/qc750/Kconfig
+ create mode 100644 board/wexler/qc750/MAINTAINERS
+ create mode 100644 board/wexler/qc750/Makefile
+ create mode 100644 board/wexler/qc750/qc750-spl.c
+ create mode 100644 board/wexler/qc750/qc750.c
+ create mode 100644 configs/ideapad-yoga-11_defconfig
+ create mode 100644 configs/qc750_defconfig
+ create mode 100644 configs/surface-rt_defconfig
+ create mode 100644 configs/transformer_t20_defconfig
+ create mode 100644 doc/board/asus/transformer_t20.rst
+ create mode 100644 doc/board/lenovo/ideapad-yoga-11.rst
+ create mode 100644 doc/board/lenovo/index.rst
+ create mode 100644 doc/board/microsoft/index.rst
+ create mode 100644 doc/board/microsoft/surface-rt.rst
+ create mode 100644 doc/board/wexler/index.rst
+ create mode 100644 doc/board/wexler/qc750.rst
+ create mode 100644 include/configs/ideapad-yoga-11.h
+ create mode 100644 include/configs/qc750.h
+ create mode 100644 include/configs/surface-rt.h
+ create mode 100644 include/configs/transformer-t20.h
 
-I'm not sure why this commit breaks network on this board, but revert conf=
-irms it...
-
-regards Frank
+-- 
+2.43.0
 
