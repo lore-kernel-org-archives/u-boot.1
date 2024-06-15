@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CC75C27C4F
-	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 07:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D5FC27C4F
+	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 07:03:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A16A4879AF;
-	Sat, 15 Jun 2024 09:02:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 58D4D879AF;
+	Sat, 15 Jun 2024 09:03:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QaTSNs1l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zgA36cuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7150E87CF1; Sat, 15 Jun 2024 09:02:29 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 072E087CF1; Sat, 15 Jun 2024 09:03:47 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 239648796B
- for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 09:02:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBED38796B
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 09:03:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1f6a837e9a3so19216615ad.1
- for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 00:02:27 -0700 (PDT)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2c2c6b27428so2315242a91.3
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 00:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718434945; x=1719039745; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718435022; x=1719039822; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qN+QmmQSkNstkrKygkqmNx9awU3GWhtjT6q91bJsgqk=;
- b=QaTSNs1lpG4oKMlIkO+kNG+N/xa/S1OMk54yrXzCoKAimlxR8v6BLMRI1ta4VPmczk
- fi0FVRP3eW1TmkMAKMCHjLbrDGjcxDpoJE986CbIwTtYC2jcxzxIHZHvPEtnqJwLsjqQ
- naIM0D8be7E8ffHxAWGQ5AxmYFlFZFGJqU9Rc2BkVQ0SihjhBTm+19Qsovv6OPRoUa0B
- O04meqGE6Rf8CrvtN1dLBjesZX1jBZa6v7VvHigpgKYtZPB+O5R5AGvOk0nejlBO4Qw5
- 16lL1PP5lmRHvx+wNCiHLKqYghZymihA36R7QtgT6qqeV3Xphg6EbJlqeNyDxNRmlu/Y
- 3idQ==
+ bh=3x07vKdObdf+7W2GaMsL5WpyFO2FtZAKkGaauzPw8bc=;
+ b=zgA36cuXaJFpgYqD3DazIXY69kV8S7/cNWMVTd7CuMyBZPpK/7C6mpOMXY33Y5tWAb
+ Kl1O+8wHOrIaA7EInx2cwJDGmc7x++VQ0aI7bHvh7w3rmfpMhpcIUStgC7M2hrVyUQVA
+ ebhD1uxXuzhRmKxEZl1rv4MYvtmBhbOaXTOPdER9ZWSf+Ih8/9YxcfrW+xPxDjzCjnkX
+ uxUPd8JLgiLugua9jZyTmsSxYG3A0hrEJxwPTiuwzHNQdNidupvBFwd/+sFsG8IycpAi
+ LRGvVPw8yC5JVrp8OylKLolf90kA9zTE9uxXFgNl02gybmg4DrSK+evvx4kRhcxe6P5j
+ EH3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718434945; x=1719039745;
+ d=1e100.net; s=20230601; t=1718435022; x=1719039822;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qN+QmmQSkNstkrKygkqmNx9awU3GWhtjT6q91bJsgqk=;
- b=r+LwJg1sx4/0erGGuC95ZgGuwLgvnRte4jUFG7Q6qUqWmDgxL8PqmIXatUJ0r4x50j
- WNmDT4ehUoMZLqjzHjVj38/nrMOZMJI+pdfxwe5ib2bTVZj4mfwHk/ZtAa2rqtG2izI2
- 3Qq1++B4tlQZMaCAlFZ0gzrcHlp+G+Yb/W2+Sgxv1ASXU/DCxCibOLgShBLf/PhcpVzn
- 3oDB1fhAI07dZKwlul2DwK1EHMgkiSsBtFsloM6YZf1IZP8HfNFTw4AxRU+OIiUt6S/H
- X0tRfBIxlitnhKPbCK9RKSsw6WbQenx5auM7f1uyUyer4DqNcqW3bi3MkOmXYUwwGcPQ
- n76Q==
-X-Gm-Message-State: AOJu0YxNKtr4FqZHJJ0z3gHG4kihcYRsYwYgjVyQLk6kADqiZWzruGYQ
- aaj9WMZ0ElUtQ8uIKQg2o7oOiVsljfgsYM466XinnUOiVM6nk9idj47MDvg3M+qk5GIefmp3GSH
- RlQwEsDq1du9tvSnP8D+Ak7BkFj5WBqnBg9bT4Q==
-X-Google-Smtp-Source: AGHT+IGz7JpyjIITnJRJFvN8YEZiGhQXlni4KkEh2hmpz9tARv6dUb1+bp/SFsjhaadWZSZgEWxukxOmWx0Y+9n2lYY=
-X-Received: by 2002:a17:902:f691:b0:1f7:c33:aa9d with SMTP id
- d9443c01a7336-1f8627cac4amr51360295ad.34.1718434945387; Sat, 15 Jun 2024
- 00:02:25 -0700 (PDT)
+ bh=3x07vKdObdf+7W2GaMsL5WpyFO2FtZAKkGaauzPw8bc=;
+ b=ZrGNaoaRwKv7+ph9fswlN5Wc3XjuWYlERLAG8QnMHQ1xiARSZuMgPL6VXb6fInvMg6
+ pSTSVm1aOSwOkyypAlvN1knlF9+kHrsmv5iSed4XHu+eqN7wCsqRTOcBcy11U0Ddz3L7
+ LcsRNnrVI2XIyH0ep5IBVpy309DDyek5Gd2dceEIGAZhRu33qV5i9u3OPReKMogCwOC8
+ OG4eQY13p6eoqOKp4v1BDNijacCQ9Dvf5XU2bnWbllvqXZzwLzzYHh4JQaSxK22BI7Ol
+ iS7YLJQZ76ZxanYGQdklYaH1dtpgZr0vb27X19aEOfoOgBy/285uW7fT+RiVlB968tp7
+ zDQA==
+X-Gm-Message-State: AOJu0Ywq+CI1drBJs7T6IDvj8bKWyvNURqgXMZqwEvQRPEc8mQcxt0Ox
+ dIFZeZs3FLE63uqVClt18sKEGBS5TenDYxCupK64JsdgWyqA/SNqYoYJvfUXwqOOJdECr0lkL5M
+ HKRP6FScyaXY9JQXdhZ+jJG9TaKeUQS7RjqfFXA==
+X-Google-Smtp-Source: AGHT+IGfLZsWIUYX5M6FlTQ1e041df2wZHqDVxfSKz1QET4MQKUBL+w4m3BH6oYx8v0AbPrPjw0l81s+D/Rnf66N6xw=
+X-Received: by 2002:a17:90b:f0c:b0:2c2:8a67:96e4 with SMTP id
+ 98e67ed59e1d1-2c4db12bb52mr4502250a91.7.1718435022290; Sat, 15 Jun 2024
+ 00:03:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240610145920.3302001-1-sjg@chromium.org>
  <20240610145920.3302001-3-sjg@chromium.org>
@@ -68,8 +68,8 @@ References: <20240610145920.3302001-1-sjg@chromium.org>
  <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
 In-Reply-To: <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 15 Jun 2024 10:01:48 +0300
-Message-ID: <CAC_iWjJsMQqADGuETbYZdaB-+TiSCsjSV4CKFnit3Rjk9JVYBg@mail.gmail.com>
+Date: Sat, 15 Jun 2024 10:03:06 +0300
+Message-ID: <CAC_iWjL-W604ne_O+U6B3_oGXJtQqZwak4N2qVRSnqdsAz=TbQ@mail.gmail.com>
 Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
  EFI_TCG2_PROTOCOL
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -96,8 +96,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Heinrich
 
+resending the reply, I accidentally sent half of the message...
 
 On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
@@ -178,11 +179,18 @@ On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > TPM v1 only needs SHA-1.
 
-I still prefer to leave the TPM in a working state tbh.
+I still prefer to imply all algos.
+
 >
 > In cmd/tpm-v2.c do_tpm2_pcr_extend() and do_tpm_pcr_read() assume
 > SHA256. Function tpm_pcr_extend() shows the same limitation. This bug
 > should be fixed. But as is CMD_TPM_V2 seems only to require CONFIG_SHA256.
+
+Isn't [0] fixing this?
+
+[0] https://source.denx.de/u-boot/u-boot/-/commit/89aa8463cdf3919ca4f04fc24ec8b154ff56d97e
+Thanks
+/Ilias
 >
 > Best regards
 >
