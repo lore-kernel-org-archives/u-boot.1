@@ -4,104 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78D4C27C4F
-	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 04:24:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 028B0C27C4F
+	for <u-boot@archiver.kernel.org>; Sat, 15 Jun 2024 06:22:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADEBD87C7F;
-	Sat, 15 Jun 2024 06:24:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
+	by phobos.denx.de (Postfix) with ESMTP id 208F9879AF;
+	Sat, 15 Jun 2024 08:22:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="KXG4o9P+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yrAT/3Ni";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EB1C87C7E; Fri, 14 Jun 2024 23:31:56 +0200 (CEST)
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2B4CE87C86; Sat, 15 Jun 2024 08:22:29 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE72D8780A
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 23:31:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78E138796B
+ for <u-boot@lists.denx.de>; Sat, 15 Jun 2024 08:22:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353727.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EKv4iJ007862;
- Fri, 14 Jun 2024 21:31:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=
- message-id:date:subject:to:cc:references:from:in-reply-to
- :content-type:content-transfer-encoding:mime-version; s=pp1; bh=
- 2UPQJkmtqfAmJH5xG0Bp49TLJBJpfZNCMJNxC2Jg83s=; b=KXG4o9P+cmWx6NT6
- Qy0RWb2sbFNG4yMSWyPXrxsTMWUED5ac3jB/WnIiffviEHuX40Jzlshzj5Vjlhji
- A9QintbSIp37vAixHoQ2zdjYB1ssQ8QCXt+Ulvj3pYMZjaSB8NIe68Ym5vk9J0he
- s4NOjuC2YFKl7sIKrRzGOi+IZ/kC1KAkEhK2fuDHbgodHq/1ujFvhI9Qih1iyBKA
- IPJI87YVCiS4mVpy6fOrdDtJ/gjdP+VYM2uGZTs8QB8Oq1yoySC0rTtrr4g68gbL
- lZKev910oPz6GiHKFSWOP8u1VDgFRlJP16D4ufAPf+t5wWviVMEhrCzIirsaLLCG
- PLud/Q==
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3yrvg7r605-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 21:31:49 +0000 (GMT)
-Received: from m0353727.ppops.net (m0353727.ppops.net [127.0.0.1])
- by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 45ELVmj3030871;
- Fri, 14 Jun 2024 21:31:48 GMT
-Received: from ppma12.dal12v.mail.ibm.com
- (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3yrvg7r604-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 21:31:48 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
- by ppma12.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 45EL02iF028651; Fri, 14 Jun 2024 21:31:47 GMT
-Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
- by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 3yn1mv59ya-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 21:31:47 +0000
-Received: from smtpav01.dal12v.mail.ibm.com (smtpav01.dal12v.mail.ibm.com
- [10.241.53.100])
- by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 45ELViNw14222064
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 14 Jun 2024 21:31:46 GMT
-Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 833C258057;
- Fri, 14 Jun 2024 21:31:44 +0000 (GMT)
-Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 45A1858062;
- Fri, 14 Jun 2024 21:31:44 +0000 (GMT)
-Received: from [9.61.43.162] (unknown [9.61.43.162])
- by smtpav01.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Fri, 14 Jun 2024 21:31:44 +0000 (GMT)
-Message-ID: <8b18f131-4e9d-4706-9a43-9ceb35f14d51@linux.ibm.com>
-Date: Fri, 14 Jun 2024 16:31:44 -0500
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tpm: measure DTB in PCR1 instead of PCR0
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-References: <20240614120951.16158-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Eddie James <eajames@linux.ibm.com>
-In-Reply-To: <20240614120951.16158-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: mhQGXjWQtH43W_JVtMsxprk41F6cmf0S
-X-Proofpoint-GUID: uauplMCqToLu53AM8cTTHJ1j0pUgE7MI
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-6f855b2499cso1519312a34.1
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 23:22:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718432545; x=1719037345; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GhM0TMNx23yGlvUGHQtMOm1YKrvpXyI1eq57dlD1KJU=;
+ b=yrAT/3Nism3E208ZzDnzEKeplG+WseI9l+lkOyJLvcNcYzl0GJ7vfOvWX56gefW0nL
+ gdzyYY0KtQN1GceVR6g5Q7P5pKiSSgDaDMpKQOIjY95B8xnX6Zbaw/3KpGZw3/Qdt35K
+ QMSpXQnRwPYDV/AEZxtVsD6J/NUgjPOokugZgvQ2gVuQ4WqWp2EyZErSV2ogXaPSz7RC
+ VGb+oK4zmEDQkqdz+WTcpnjRQpEgtGGY5YzI221LaSU96u3TcZOy4KHYKfg1A8qcqFv8
+ rLs1wNh5QJV+jg/qjMgLj5bUXG/aZs1fQqwBf/vazFmcMwEkAuhxzQUWTXvgjq5ik3Fe
+ IFZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718432545; x=1719037345;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GhM0TMNx23yGlvUGHQtMOm1YKrvpXyI1eq57dlD1KJU=;
+ b=UAEciJXF/ahj5YReIgUf06ALPdliC6cycdDT5PahVGBlCGU0ZEZzBtrnqD9k7YLx5Z
+ eIoFKx09GujJEmHhBq0VnL9g3bksp0kNWQnCxUWOlqbJX3JggrnJkYsknAHmEoNRggnm
+ XMGUcozLNeNYEZ/sS/zyk7DQtZJhkOk0ToXsKz/l0SYEVOA+/F57zbeK4LgzF+E8UZOP
+ evNHJFR+knq4s60B0lRS2hnTgBt4NnsF335NfPxil7UiaGbCVqRA1rbNIoJFAoiUZULo
+ 1hqBYL97IIr2jJo1IvkZEaShx/3NY8Au2GxzuzhvObOUgrwaJUzPUYZUUmgxXkvg/7YP
+ KrpQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXqrbPz0eO4kEVJhHujQ6a1wEAnBjEcQGZjYw08MoYHl0riSSQjQW75g9bth/H4QyTrJ9O/seSD9L2g3BrLpUsFfGO+VA==
+X-Gm-Message-State: AOJu0Yy7LIQBRzRsfOhXyM91Y0z9NdqlGT4G+gRjxB/peS4JzKhm9TB8
+ 2e/88Q15nL0rB98rxgXbFaSXclTXNq6YGgH+RzAOq87OGL02A9jVciSkyIziDgkvJuhIOfdrda7
+ hN9ADW9yaJf4xoZ4WHr1iobd/MveXRIHsz70EiQ==
+X-Google-Smtp-Source: AGHT+IF7YK62X+Lo47Zjs9YycI1pqz7Q7VbdUHM90nKYXgLI5UkBzjW9Pj7nm5JqcPtEQDfTxLORHb2WzWfBeMIRglM=
+X-Received: by 2002:a05:6359:4c98:b0:19f:4b80:39e with SMTP id
+ e5c5f4694b2df-19fb4ff995bmr542417155d.23.1718432544691; Fri, 14 Jun 2024
+ 23:22:24 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_17,2024-06-14_03,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0
- impostorscore=0 lowpriorityscore=0 clxscore=1011 spamscore=0
- priorityscore=1501 mlxscore=0 suspectscore=0 malwarescore=0
- mlxlogscore=999 phishscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2405170001 definitions=main-2406140149
-X-Mailman-Approved-At: Sat, 15 Jun 2024 06:24:46 +0200
+References: <20240614163551.2610212-1-j-humphreys@ti.com>
+ <20240614163551.2610212-20-j-humphreys@ti.com>
+In-Reply-To: <20240614163551.2610212-20-j-humphreys@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 15 Jun 2024 09:21:47 +0300
+Message-ID: <CAC_iWjLUrDcBWfhun23gpg=bVGwmXnw6K_EqBbEFdvZV3rfncg@mail.gmail.com>
+Subject: Re: [PATCH v7 19/24] board: beagleboneai64: Define capsule update
+ firmware info
+To: Jonathan Humphreys <j-humphreys@ti.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Judith Mendez <jm@ti.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Bryan Brattlof <bb@ti.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Nishanth Menon <nm@ti.com>, 
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,64 +104,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 6/14/24 07:09, Ilias Apalodimas wrote:
-> The PC client spec [0], doesn't describe measurements for DTBs. It does
-> describe what do to for ACPI tables though.
+On Fri, 14 Jun 2024 at 19:36, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 >
-> There is a description for ACPI in 3.3.4.1 PCR[0] – SRTM, POST BIOS,
-> and Embedded Drivers and they explicitly mention ACPI in there. There's
-> no mention of ACPI in 3.3.4.2 PCR[1] – Host Platform Configuration.
+> Define the firmware components updatable via EFI capsule update, including
+> defining capsule GUIDs for the various firmware components for the
+> BeagleBoneAI64.
 >
-> However, in Figure 6 --  PCR Mapping of UEFI Components ACPI is shown
-> in PCR1. The general description also mentions PCR0 is for code and PCR1
-> is for data such as ACPI and SMBIOS.
-
-
-Thanks, looks correct.
-
-Reviewed-by: Eddie James <eajames@linux.ibm.com>
-
-
+> Note this involved creating BeagleBoneAI64's own beagleboneai64.h board
+> header file instead of reusing j721e_evm's.
 >
-> So let's switch over the DTB measurements to PCR1 which seems a better
-> fit.
->
-> [0] https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification
->
-> Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 > ---
->   boot/bootm.c              | 2 +-
->   lib/efi_loader/efi_tcg2.c | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+>  board/beagle/beagleboneai64/Kconfig          |  4 +-
+>  board/beagle/beagleboneai64/beagleboneai64.c | 39 ++++++++++++++
+>  include/configs/beagleboneai64.h             | 55 ++++++++++++++++++++
+>  3 files changed, 96 insertions(+), 2 deletions(-)
+>  create mode 100644 include/configs/beagleboneai64.h
 >
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index 6fa8edab021e..3de87eb185d7 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -963,7 +963,7 @@ int bootm_measure(struct bootm_headers *images)
->   			goto unmap_initrd;
+> diff --git a/board/beagle/beagleboneai64/Kconfig b/board/beagle/beagleboneai64/Kconfig
+> index 7cfccf9baf0..0f21582614d 100644
+> --- a/board/beagle/beagleboneai64/Kconfig
+> +++ b/board/beagle/beagleboneai64/Kconfig
+> @@ -37,7 +37,7 @@ config SYS_VENDOR
+>         default "beagle"
 >
->   		if (IS_ENABLED(CONFIG_MEASURE_DEVICETREE)) {
-> -			ret = tcg2_measure_data(dev, &elog, 0, images->ft_len,
-> +			ret = tcg2_measure_data(dev, &elog, 1, images->ft_len,
->   						(u8 *)images->ft_addr,
->   						EV_TABLE_OF_DEVICES,
->   						strlen("dts") + 1,
-> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> index 51264c1b998c..a8a54c9f131d 100644
-> --- a/lib/efi_loader/efi_tcg2.c
-> +++ b/lib/efi_loader/efi_tcg2.c
-> @@ -1328,7 +1328,7 @@ efi_status_t efi_tcg2_measure_dtb(void *dtb)
->   	sha256_update(&hash_ctx, (u8 *)dtb + fdt_off_mem_rsvmap(dtb), rsvmap_size);
->   	sha256_finish(&hash_ctx, blob->data + blob->blob_description_size);
+>  config SYS_CONFIG_NAME
+> -       default "j721e_evm"
+> +       default "beagleboneai64"
 >
-> -	ret = measure_event(dev, 0, EV_POST_CODE, event_size, (u8 *)blob);
-> +	ret = measure_event(dev, 1, EV_POST_CODE, event_size, (u8 *)blob);
+>  source "board/ti/common/Kconfig"
 >
->   	free(blob);
->   	return ret;
+> @@ -52,7 +52,7 @@ config SYS_VENDOR
+>         default "beagle"
+>
+>  config SYS_CONFIG_NAME
+> -       default "j721e_evm"
+> +       default "beagleboneai64"
+>
+>  source "board/ti/common/Kconfig"
+>
+> diff --git a/board/beagle/beagleboneai64/beagleboneai64.c b/board/beagle/beagleboneai64/beagleboneai64.c
+> index c5b4ff7df47..1e43d1c1bd2 100644
+> --- a/board/beagle/beagleboneai64/beagleboneai64.c
+> +++ b/board/beagle/beagleboneai64/beagleboneai64.c
+> @@ -7,6 +7,7 @@
+>   * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
+>   */
+>
+> +#include <efi_loader.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+>  #include <fdt_support.h>
+> @@ -14,6 +15,44 @@
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+> +struct efi_fw_image fw_images[] = {
+> +       {
+> +               .image_type_id = BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEBONEAI64_TIBOOT3",
+> +               .image_index = 1,
+> +       },
+> +       {
+> +               .image_type_id = BEAGLEBONEAI64_SPL_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEBONEAI64_SPL",
+> +               .image_index = 2,
+> +       },
+> +       {
+> +               .image_type_id = BEAGLEBONEAI64_UBOOT_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEBONEAI64_UBOOT",
+> +               .image_index = 3,
+> +       },
+> +       {
+> +               .image_type_id = BEAGLEBONEAI64_SYSFW_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEBONEAI64_SYSFW",
+> +               .image_index = 4,
+> +       }
+> +};
+> +
+> +struct efi_capsule_update_info update_info = {
+> +       .dfu_string = "mmc 0=tiboot3.bin raw 0 2000 mmcpart 1;"
+> +       "tispl.bin fat 0 1;u-boot.img fat 0 1; sysfw.itb fat 0 1",
+> +       .num_images = ARRAY_SIZE(fw_images),
+> +       .images = fw_images,
+> +};
+> +
+> +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+> +void set_dfu_alt_info(char *interface, char *devstr)
+> +{
+> +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> +               env_set("dfu_alt_info", update_info.dfu_string);
+> +}
+> +#endif
+> +
+>  int board_init(void)
+>  {
+>         return 0;
+> diff --git a/include/configs/beagleboneai64.h b/include/configs/beagleboneai64.h
+> new file mode 100644
+> index 00000000000..85d57248bb6
+> --- /dev/null
+> +++ b/include/configs/beagleboneai64.h
+> @@ -0,0 +1,55 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Configuration header file for BeagleBoneAI64
+> + *
+> + * https://beagleboard.org/ai-64
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef __CONFIG_BEAGLEBONEAI64_H
+> +#define __CONFIG_BEAGLEBONEAI64_H
+> +
+> +/* FLASH Configuration */
+> +#define CFG_SYS_FLASH_BASE             0x000000000
+> +
+> +/* SPL Loader Configuration */
+> +#define CFG_SYS_UBOOT_BASE             0x50080000
+> +
+> +/**
+> + * define BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID - firmware GUID for BeagleBoneAI64
+> + *                                            tiboot3.bin
+> + * define BEAGLEBONEAI64_SPL_IMAGE_GUID     - firmware GUID for BeagleBoneAI64
+> + *                                            SPL
+> + * define BEAGLEBONEAI64_UBOOT_IMAGE_GUID   - firmware GUID for BeagleBoneAI64
+> + *                                            UBOOT
+> + * define BEAGLEBONEAI64_SYSFW_IMAGE_GUID   - firmware GUID for BeagleBoneAI64
+> + *                                            SYSFW
+> + *
+> + * These GUIDs are used in capsules updates to identify the corresponding
+> + * firmware object.
+> + *
+> + * Board developers using this as a starting reference should
+> + * define their own GUIDs to ensure that firmware repositories (like
+> + * LVFS) do not confuse them.
+> + */
+> +#define BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID \
+> +       EFI_GUID(0x772a4810, 0x2194, 0x4923, 0x87, 0x54, \
+> +               0x01, 0x15, 0x87, 0x0e, 0xf3, 0x67)
+> +
+> +#define BEAGLEBONEAI64_SPL_IMAGE_GUID \
+> +       EFI_GUID(0x83447222, 0x1e26, 0x40cd, 0xa3, 0x95, \
+> +               0xb7, 0xde, 0x09, 0x57, 0xe8, 0x75)
+> +
+> +#define BEAGLEBONEAI64_UBOOT_IMAGE_GUID \
+> +       EFI_GUID(0x4249ff77, 0xc17d, 0x4eb7, 0xa1, 0xdb, \
+> +               0x45, 0xaa, 0x98, 0x87, 0xd4, 0x9e)
+> +
+> +#define BEAGLEBONEAI64_SYSFW_IMAGE_GUID \
+> +       EFI_GUID(0xdfc9c683, 0x49b7, 0x46bd, 0xb3, 0xc1, \
+> +               0x3a, 0x3b, 0x2f, 0xdb, 0x13, 0x5b)
+> +
+> +/* Now for the remaining common defines */
+> +#include <configs/ti_armv7_common.h>
+> +
+> +#endif /* __CONFIG_BEAGLEBONEAI64_H */
 > --
-> 2.45.1
+> 2.34.1
 >
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
