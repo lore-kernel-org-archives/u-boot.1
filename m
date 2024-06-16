@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15771C27C6E
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 07:38:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD032C27C6E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 08:36:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35A0387FC2;
-	Sun, 16 Jun 2024 09:38:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBDEB88113;
+	Sun, 16 Jun 2024 10:35:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ag+BSqCI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="at0DOrUC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3919880AE; Sun, 16 Jun 2024 09:38:04 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 2EA28880C5; Sun, 16 Jun 2024 10:35:59 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85F2B87E0D
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 09:38:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A871B880F8
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 10:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718523479; x=1719128279; i=xypron.glpk@gmx.de;
- bh=xU8cuic2zHfSfxQQZoUfnEeTwQzCthQ4Ed0lvx1AQC8=;
+ s=s31663417; t=1718526938; x=1719131738; i=xypron.glpk@gmx.de;
+ bh=2mYjKy0lfN3Sg0bLmw2sIAiokk/ljUy3LyFErS2q4gQ=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=ag+BSqCItaZhtAOqnlZxvUHFU2hx9YnV/RHTucyry9802rrnuDLLCuAAts96XlUZ
- cWZ2k2TBe3dfrY8fdb8deqOQy50BXD9u8pqrHMKty1y2GuhrDhVu6I5NAUhLZOm5j
- bYR2JpjLKDCeU/+tSp7O0kJIKsKlL0PSNGWeT7+xx9ybO+ZxtANk0F1khfLk8docs
- IFlXfsMpTG3zqVhy9dHou4QZvyfW6XQ5i25hGMh2LL8O2OAzQc7rBT/nAIuvW08W6
- cdwhT16A4b/VjaOgNgsTKst8TsTHJP+Bbh1nTs/LhDO2IV+Ie+LiehCgZYCRtPoKi
- z3P2zQb0rbNbnELi2g==
+ b=at0DOrUCEeN1kfWUg3jE5R+dasUzI8883qHb8UInJi83C3Yf/kIUZOeim7c7cHp9
+ ioB2XrGramSCQvE7z5/qZnbEIB6nUiSG3P87WvAFL/k57mnXMux6ahAbOtB8bNNh1
+ EF68Tq+9ee1LPXHGo+LVuJwzsF9Fyi8hkXxiRIzE9PaUuuyDOuY1UuOfsqMyCLNot
+ LXIdwaPPEc/HQBg7jRkeROwOPw7BpzXc1Jqo6xGZq0/QoMlV7kCm4aog9Yol8pvO2
+ lqJkBL5rF6CPu/08I9GcvgtM526S3yTVBgbJPmkAVWT6BONZ0nMzmFKDfHZvDQJ2q
+ 97dUCGLu+QWbHjIl0Q==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.41.25]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPGW7-1s2a5K0kqD-00PEBD; Sun, 16
- Jun 2024 09:37:59 +0200
-Message-ID: <a7410171-c413-4815-8187-606d32b0c5b3@gmx.de>
-Date: Sun, 16 Jun 2024 09:38:00 +0200
+Received: from [192.168.123.161] ([178.202.41.25]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Msq6M-1sY6Jm2BuS-014mp2; Sun, 16
+ Jun 2024 10:35:38 +0200
+Message-ID: <df8b87cf-a7bf-4bc3-8c17-e3f655504f90@gmx.de>
+Date: Sun, 16 Jun 2024 10:35:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] bootstd: Replace bootmethod(s) -> bootmeth(s)
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Mario Six <mario.six@gdsys.cc>, Quentin Schulz
- <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20240604-bootmeth-typos-v2-0-821683a95aaf@baylibre.com>
- <20240604-bootmeth-typos-v2-2-821683a95aaf@baylibre.com>
+Subject: Re: [PATCH] efi: capsule: Improve capsule update porting to new boards
+To: Jon Humphreys <j-humphreys@ti.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Michal Simek <michal.simek@amd.com>, Wei Ming Chen
+ <jj251510319013@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240607234358.1991568-1-j-humphreys@ti.com>
+ <CAC_iWj+xOh2=xq23Jy1XudiNB_ruj1j9EqgtGdq4VGmLi9+mpQ@mail.gmail.com>
+ <86o784is0u.fsf@udb0321960.dhcp.ti.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240604-bootmeth-typos-v2-2-821683a95aaf@baylibre.com>
+In-Reply-To: <86o784is0u.fsf@udb0321960.dhcp.ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:XPDBOYx+LoGxE85chyzvDt+xdsDvo/jAKFRXdTsM3QDXHo82upK
- YLjjnf99PCeZRVbB39jW8ecEvqoXKDHT+B0FuDmaYOGR8fpyXuwFJsAHWTFH8k44SPx+iOc
- YYPan/kT4K77ca2TIrJ//3Ud33ztN0OwVrx5PmIIC3YYZ7JnwOO+R4KvuLdUTfXa0k6u1lT
- H2YrNS5HDaOoWV0jq/T8w==
-UI-OutboundReport: notjunk:1;M01:P0:cm8pcvh5yTU=;FkAv+Qk56kA4TJ6xG/O0jh3xe9l
- mEjh+i4HH7iDLiySxzIuOGj/KgzcIA14yTeISHgU/k6fAi01sJ82ZFP4Du5AlPbW09wCj65Qa
- U+aUiJz+SuPfiqmCRPnTpg6xk0FcNX1e+YSTBzrv10nkbztUJzCD8F5WWyl1DQb+ZSfrmTOh3
- fLNdYpbVQWkjTAo4J9+UBgz5arj9ESnQD5WFVzbdSCMawOyXZ88K9ltem+MHXDHBo0GryO5SG
- wXOUnUz1MDnF4NNYlqOoXbinIYNZ+X8BfBWgCuJntQGCMFH8TyrAAIzcrEq/DbXYdsFI4r3gO
- mLqoDifuXSa6xnmP06veu0f6Nm0S3CYZN/Ya0E7k30tQTo+ItFTUvqLY1mVUbU7OSYyTC2fv3
- XFa7hBaIJxeD5aznTdxsdF6Kfhfk9fD33JBY9Uo/LTfiIIgM9M6gFkGmp7tLYFfenjYPbhl6x
- w0bK1zEhnXec/1vHhhhlXwTcugzUZ5/UGNrAOufz8aSzhxCFuFtivd6YKVktzjFtYgLHe2qQG
- iuJXIEFK99cKQBy5/rsv4+mnCdZ6nsY2UBAzKU/6pl7RaF3/LDisyBJ48wZI7ZpxlIYkBA+UZ
- I170799H7/1SnJJslkcPYQwLIZem1fPo1CH31TbyyuVI3KJqF+9hMG7oUn2iOI5jfqagGijH4
- AWJTSHIqmwKp4jO9h4eKyqkgOwJnsUZpyhGV30ewhxB5ORYt7j2Xg5TK6nV4CTIR2p4zVgmVS
- 5kPMgc+1DWEhgt2nGE6PNpQgy19OMAQ/yttj3R177bG53sOVhnYDMFYapZHlv117tMn9JkBwC
- DGHn9bd37EvXfnZcwC6n6VlOXYvHgGSnI+/z0cI/gCawY=
+X-Provags-ID: V03:K1:cBB5nmjH9yIVbCtLHEU6DjQ6H9i0ETXOV/tLLtmtAlFzBis91PJ
+ qFcu+8lGeUaG7bEtLED66AJhyECwvGO0xGEox+NWGlBtU7f/fuiE/wFkF2sAjNUQHofMqM4
+ FFlQzM8ws4O86XXybq1LHNeVr8aiqvtlwkBkhIigeb2iMmzQuEwiYwMtKMXrnmX+KuTLPPw
+ 49kX1AbqHbPdBzUCX0QZA==
+UI-OutboundReport: notjunk:1;M01:P0:/33eLUFtqbc=;oGWlXg+vAAyUH/s4hAOjrEmMhqd
+ u0Tjqk56KyScr21yvFfCN5mYfgLE04rGyUltyt78oxd39tZ4ya8aJQ069LuLZV0MEHue5P3Xr
+ DfeuGUxSIFkDVsP0EFIGWfjRV46X/3eTUWW56KvmkPds7ife9gW8BHEdHWH/UW96cFsYwGqB+
+ eu9U3to4lgD6NfeGry4Mzrk2H0VCL5rr3Rpl60vLhnKVOR9Nw+bWWA4j4Zu4GOyvi4z6jZb7B
+ 6nLA3etean+4HhpmczUZFIhuti0scsrRSxY+dwTw2Wky1vsNkWFQEP5N8y20MRGNM8zXEEF6U
+ kZaS//DG7WZ92oZAlg/4q9bYz89xeFvTxGT7ar2No//86DfDr86bDix4T+nwPvYYF6rfDCPy9
+ 2No4mOjfo0PAuaPX9hAWbAefoz/cCIM4KC3sS3/CfNUjHhypWWlMxQSFZ0XiFOwrQcOYHEdZG
+ nKiZ/zhlnZs4sfxPbBFq8Xb47e8bmLwW4t23uONE0BEgc8Bd4iDaNgOZ3CFKdTuXLoWYjRr/V
+ mshVmvCOtCXx0JG9NqsGYredlYN8aWshPYNqHeTejk7VvNsJZoB+pVjKQV+yDnB3UaOjdaaya
+ sVXfE7205Z/LF+iaUvPEEahIVC+jCgo15l+7O4WVYAIx8YgHuUxFJzZWtXBjKLxO4NXODfZzT
+ p5oWuICjKUFHcMtaiBcgS5JByUVKB2ECZRhbU43ImALfuTwInqNrk9FnzZOoCcZJwrbOtd2jJ
+ KvZ3a5QMmUf7Age6nablW2QQpaVt0KXUas6vvkffV65rf4uvkC/e9Q4q+4n782ZdzstK+oif7
+ STSRnE/XTwWUBvtIL4jn+7AvJcYu5F4P0rodSuX9NZ3EQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,288 +99,237 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/4/24 17:15, Mattijs Korpershoek wrote:
-> According to [1], we should use bootmeth when describing the
-> struct bootmeth:
+On 6/13/24 21:04, Jon Humphreys wrote:
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
 >
-> """
-> For version 2, a new naming scheme is used as above:
->
->      - bootdev is used instead of bootdevice, because 'device' is overus=
-ed,
->          is everywhere in U-Boot, can be confused with udevice
+>> Hi Jon,
+>>
+>> On Sat, 8 Jun 2024 at 02:44, Jonathan Humphreys <j-humphreys@ti.com> wr=
+ote:
+>>>
+>>> Add to the capsule update porting documentation that when capsule
+>>> authentication is enabled (via EFI_CAPSULE_AUTHENTICATE), a public key
+>>> certificate corresponding to the capsule signing key must be specified=
+.
+>>>
+>>> Also add a config (EFI_CAPSULE_BOARD_INSECURE) that is set by default =
+and
+>>> causes a warning (info level) alerting a developer to consult this por=
+ting
+>>> section to ensure the capsule update capability is secure for the plat=
+form.
+>>> Once this section has been reviewed and confidence is established in t=
+he
+>>> security of the capsule update implementation for this board, deselect=
+ing
+>>> the EFI_CAPSULE_BOARD_INSECURE config will remove the warning.
+>>>
+>>> This config is to balance the desire to provide a reference implementa=
+tion
+>>> in upstream for capsule authentication but also provide some safeguard=
+s
+>>> to prevent developers from overlooking the need to properly secure the=
+ir
+>>> implementation.
+>>>
+>>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>>> ---
+>>>   doc/develop/uefi/uefi.rst    | 30 +++++++++++++++++++++++-------
+>>>   lib/efi_loader/Kconfig       | 13 +++++++++++++
+>>>   lib/efi_loader/efi_capsule.c |  5 +++++
+>>>   3 files changed, 41 insertions(+), 7 deletions(-)
+>>>
+>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+>>> index 985956ab85c..1c98c6e4ab4 100644
+>>> --- a/doc/develop/uefi/uefi.rst
+>>> +++ b/doc/develop/uefi/uefi.rst
+>>> @@ -526,6 +526,7 @@ following command can be issued
+>>>         --guid c1b629f1-ce0e-4894-82bf-f0a38387e630 \
+>>>         optee.bin optee.capsule
+>>>
+>>> +.. _Enabling Capsule Authentication:
+>>>
+>>>   Enabling Capsule Authentication
+>>>   *******************************
+>>> @@ -631,17 +632,32 @@ where version.dtso looks like::
+>>>   The properties of image-type-id and image-index must match the value
+>>>   defined in the efi_fw_image array as image_type_id and image_index.
+>>>
+>>> -Porting Capsule Updates to new boards
+>>> -*************************************
+>>> +Porting Capsule Update to new boards
+>>> +************************************
+>>>
+>>>   It is important, when using a reference board as a starting point fo=
+r a custom
+>>>   board, that certain steps are taken to properly support Capsule Upda=
+tes.
+>>>
+>>> -Capsule GUIDs need to be unique for each firmware and board. That is,=
+ if two
+>>> -firmwares are built from the same source but result in different bina=
+ries
+>>> -because they are built for different boards, they should have differe=
+nt GUIDs.
+>>> -Therefore it is important when creating support for a new board, new =
+GUIDs are
+>>> -defined in the board's header file.  *DO NOT* reuse capsule GUIDs.
+>>> +Capsule GUIDs need to be unique for each firmware and board. That is,=
+ even
+>>> +if two firmwares are built from the same source but result in differe=
+nt
+>>> +binaries because they are built for different boards, they should hav=
+e
+>>> +different GUIDs. Therefore it is important when creating support for =
+a new
+>>> +board, new GUIDs are defined in the board's header file. *DO NOT* reu=
+se
+>>> +capsule GUIDs.
+>>> +
+>>> +When capsule authentication is enabled (via EFI_CAPSULE_AUTHENTICATE)=
+, it
+>>> +is also very important to set the public key certificate correspondin=
+g to
+>>> +the capsule signing key. See :ref:`Enabling Capsule Authentication` f=
+or
+>>> +more information on signing capsules. *DO NOT* reuse the certificate =
+file
+>>> +from the reference board, which usually would be based on the develop=
+ment
+>>> +board keys.
+>>> +
+>>> +By default, the EFI_CAPSULE_BOARD_INSECURE config is set to true and =
+causes
+>>> +a warning (info level) alerting a developer to consult this section t=
+o
+>>> +ensure the capsule update capability is secure for the platform. Once=
+ this
+>>> +section has been reviewed and confidence is established in the securi=
+ty of
+>>> +the capsule update implementation for this board, deselecting
+>>> +EFI_CAPSULE_BOARD_INSECURE config will remove the warning.
+>>>
+>>>   Executing the boot manager
+>>>   ~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>>> index 23079a5709d..f4b1a20ee40 100644
+>>> --- a/lib/efi_loader/Kconfig
+>>> +++ b/lib/efi_loader/Kconfig
+>>> @@ -236,6 +236,19 @@ config EFI_CAPSULE_ON_DISK_EARLY
+>>>            executed as part of U-Boot initialisation so that they will
+>>>            surely take place whatever is set to distro_bootcmd.
+>>>
+>>> +config EFI_CAPSULE_BOARD_INSECURE
+>>> +       bool "Permit insecure capsule-on-disk support"
+>>> +       depends on EFI_HAVE_CAPSULE_SUPPORT
+>>> +       default y
+>>> +       help
+>>> +         Permit insecure capsule update support and emit a warning (i=
+nfo level)
+>>> +         when applying capsule updates, indicating that the configura=
+tion is
+>>> +         insecure and including a link to the capsule update porting =
+guide in
+>>> +         U-Boot docs. Disabling this option removes the warning. A de=
+veloper
+>>> +         configuration doesn't need to be secure, but before making a=
+ product
+>>> +         from the configuration, the intent is to developers alert of=
+ steps that
+>>> +         must be taken.
+>>> +
+>>>   config EFI_CAPSULE_FIRMWARE
+>>>          bool
+>>>
+>>> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule=
+.c
+>>> index 0937800e588..76ade2809d9 100644
+>>> --- a/lib/efi_loader/efi_capsule.c
+>>> +++ b/lib/efi_loader/efi_capsule.c
+>>> @@ -1329,6 +1329,11 @@ efi_status_t efi_launch_capsules(void)
+>>>          if (!nfiles)
+>>>                  return EFI_SUCCESS;
+>>>
+>>> +       if (IS_ENABLED(CONFIG_EFI_CAPSULE_BOARD_INSECURE)) {
+>>> +               log_info("WARNING: EFI Capsules might be insecure!\n")=
+;
 
-Boot devices are udevices though they don't relate to hardware but to an
-abstract concept.
+For warnings we use log_warning().
 
-bootdev is just an abbreviation. This does not make the meaning any cleare=
-r.
+A warning might be adequate if capsules signatures were not checked
+(EFI_CAPSULE_AUTHENTICATE=3Dn). We don't need a new Kconfig symbol here.
+Most users will not remark this message as it scrolls away when rebooting.
 
->      - bootmeth - because 'method' is too vanilla, appears 1300 times in
->          U-Boot
-> """
+In some cases it might make sense to require a manual confirmation
+before applying an unsigned capsule.
 
-Avoiding abbreviations like bootdev and bootmeth improved readability.
+Please, consider that capsule authentication only provides extra
+security if the same changes could not be done directly from the OS.
+
+Why would you show the new messages on all existing boards supporting
+capsule updates?
+
+corstone1000_defconfig
+imx8mm-cl-iot-gate-optee_defconfig
+imx8mm-cl-iot-gate_defconfig
+imx8mp_rsb3720a1_4G_defconfig
+imx8mp_rsb3720a1_6G_defconfig
+kontron-sl-mx8mm_defconfig
+rock-4c-plus-rk3399_defconfig
+rock-4se-rk3399_defconfig
+rock-pi-4-rk3399_defconfig
+rock-pi-4c-rk3399_defconfig
+sandbox_defconfig
+sandbox_flattree_defconfig
+synquacer_developerbox_defconfig
+xilinx_zynqmp_kria_defconfig
+xilinx_zynqmp_virt_defconfig
+
+>>> +               log_info("WARNING: Please check https://docs.u-boot.or=
+g/en/latest/develop/uefi/uefi.html#porting-capsule-update-to-new-boards\n"=
+);
+
+We can expect a developer to know where to find documentation.
 
 Best regards
 
 Heinrich
 
+
+>>> +       }
+>>
+>> I am fine with adding a warning on this, but why do we have to control
+>> it via a Kconfig option? We can detect the capsule-key is missing from
+>> the DT and print the same warning.
 >
-> Replace all occurences in various comments for consistency.
+> Hi Ilias.
 >
-> [1] https://lore.kernel.org/u-boot/20211023232635.9195-1-sjg@chromium.or=
-g/
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->   board/sandbox/sandbox.env |  2 +-
->   boot/bootmeth-uclass.c    |  2 +-
->   include/bootmeth.h        | 30 +++++++++++++++---------------
->   include/extlinux.h        |  2 +-
->   test/boot/bootflow.c      |  2 +-
->   test/boot/bootmeth.c      |  6 +++---
->   6 files changed, 22 insertions(+), 22 deletions(-)
+> The Kconfig option is not there to ensure a capsule key exists, but rath=
+er
+> to make sure a developer, that is porting uboot to their board and is
+> starting from a reference board in upstream, doesn't continue using the
+> development board dummy key and instead creates their own (private one).
 >
-> diff --git a/board/sandbox/sandbox.env b/board/sandbox/sandbox.env
-> index a2c19702d64d..564dce78a898 100644
-> --- a/board/sandbox/sandbox.env
-> +++ b/board/sandbox/sandbox.env
-> @@ -10,7 +10,7 @@ eth6addr=3D02:00:11:22:33:47
->   ipaddr=3D192.0.2.1
+> The Kconfig option is used to force a board developer to acknowledge the=
+y
+> have followed the board porting steps (which talks about creating your o=
+wn
+> key) with an explict action of disabling the config to remove the warnin=
+g
+> message.
 >
->   /*
-> - * These are used for distro boot which is not supported. But once boot=
-method
-> + * These are used for distro boot which is not supported. But once boot=
-meth
->    * is provided these will be used again.
->    */
->   bootm_size=3D0x10000000
-> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index 1d157d54dbdd..e3475f46b34c 100644
-> --- a/boot/bootmeth-uclass.c
-> +++ b/boot/bootmeth-uclass.c
-> @@ -167,7 +167,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *=
-iter, bool include_global)
->   			if (pass)
->   				iter->first_glob_method =3D upto;
->   			/*
-> -			 * Get a list of bootmethods, in seq order (i.e. using
-> +			 * Get a list of bootmeths, in seq order (i.e. using
->   			 * aliases). There may be gaps so try to count up high
->   			 * enough to find them all.
->   			 */
-> diff --git a/include/bootmeth.h b/include/bootmeth.h
-> index 529c4d813d82..2570d9593d49 100644
-> --- a/include/bootmeth.h
-> +++ b/include/bootmeth.h
-> @@ -47,7 +47,7 @@ struct bootmeth_ops {
->   	 * This may involve reading state from the system, e.g. some data in
->   	 * the firmware area.
->   	 *
-> -	 * @dev:	Bootmethod device to check
-> +	 * @dev:	Bootmeth device to check
->   	 * @buf:	Buffer to place the info in (terminator must fit)
->   	 * @maxsize:	Size of buffer
->   	 * Returns: 0 if OK, -ENOSPC is buffer is too small, other -ve error =
-if
-> @@ -74,7 +74,7 @@ struct bootmeth_ops {
->   	 *
->   	 * It may update only the flags in @iter
->   	 *
-> -	 * @dev:	Bootmethod device to check against
-> +	 * @dev:	Bootmeth device to check against
->   	 * @iter:	On entry, provides bootdev, hwpart, part
->   	 * Return: 0 if OK, -ENOTSUPP if this bootdev is not supported
->   	 */
-> @@ -83,7 +83,7 @@ struct bootmeth_ops {
->   	/**
->   	 * read_bootflow() - read a bootflow for a device
->   	 *
-> -	 * @dev:	Bootmethod device to use
-> +	 * @dev:	Bootmeth device to use
->   	 * @bflow:	On entry, provides dev, hwpart, part and method.
->   	 *	Returns updated bootflow if found
->   	 * Return: 0 if OK, -ve on error
-> @@ -96,7 +96,7 @@ struct bootmeth_ops {
->   	 * This provides a bootflow file to the bootmeth, to see if it is val=
-id.
->   	 * If it is, the bootflow is set up accordingly.
->   	 *
-> -	 * @dev:	Bootmethod device to use
-> +	 * @dev:	Bootmeth device to use
->   	 * @bflow:	On entry, provides bootdev.
->   	 *	Returns updated bootflow if found
->   	 * @buf:	Buffer containing the possible bootflow file
-> @@ -111,7 +111,7 @@ struct bootmeth_ops {
->   	 *
->   	 * Read a file from the same place as the bootflow came from
->   	 *
-> -	 * @dev:	Bootmethod device to use
-> +	 * @dev:	Bootmeth device to use
->   	 * @bflow:	Bootflow providing info on where to read from
->   	 * @file_path:	Path to file (may be absolute or relative)
->   	 * @addr:	Address to load file
-> @@ -126,7 +126,7 @@ struct bootmeth_ops {
->   	/**
->   	 * readall() - read all files for a bootflow
->   	 *
-> -	 * @dev:	Bootmethod device to boot
-> +	 * @dev:	Bootmeth device to boot
->   	 * @bflow:	Bootflow to read
->   	 * Return: 0 if OK, -EIO on I/O error, other -ve on other error
->   	 */
-> @@ -135,7 +135,7 @@ struct bootmeth_ops {
->   	/**
->   	 * boot() - boot a bootflow
->   	 *
-> -	 * @dev:	Bootmethod device to boot
-> +	 * @dev:	Bootmeth device to boot
->   	 * @bflow:	Bootflow to boot
->   	 * Return: does not return on success, since it should boot the
->   	 *	Operating System. Returns -EFAULT if that fails, -ENOTSUPP if
-> @@ -158,7 +158,7 @@ struct bootmeth_ops {
->    * This may involve reading state from the system, e.g. some data in
->    * the firmware area.
->    *
-> - * @dev:	Bootmethod device to check
-> + * @dev:	Bootmeth device to check
->    * @buf:	Buffer to place the info in (terminator must fit)
->    * @maxsize:	Size of buffer
->    * Returns: 0 if OK, -ENOSPC is buffer is too small, other -ve error i=
-f
-> @@ -185,7 +185,7 @@ int bootmeth_get_state_desc(struct udevice *dev, cha=
-r *buf, int maxsize);
->    *
->    * It may update only the flags in @iter
->    *
-> - * @dev:	Bootmethod device to check against
-> + * @dev:	Bootmeth device to check against
->    * @iter:	On entry, provides bootdev, hwpart, part
->    * Return: 0 if OK, -ENOTSUPP if this bootdev is not supported
->    */
-> @@ -194,7 +194,7 @@ int bootmeth_check(struct udevice *dev, struct bootf=
-low_iter *iter);
->   /**
->    * bootmeth_read_bootflow() - set up a bootflow for a device
->    *
-> - * @dev:	Bootmethod device to check
-> + * @dev:	Bootmeth device to check
->    * @bflow:	On entry, provides dev, hwpart, part and method.
->    *	Returns updated bootflow if found
->    * Return: 0 if OK, -ve on error
-> @@ -207,7 +207,7 @@ int bootmeth_read_bootflow(struct udevice *dev, stru=
-ct bootflow *bflow);
->    * This provides a bootflow file to the bootmeth, to see if it is vali=
-d.
->    * If it is, the bootflow is set up accordingly.
->    *
-> - * @dev:	Bootmethod device to use
-> + * @dev:	Bootmeth device to use
->    * @bflow:	On entry, provides bootdev.
->    *	Returns updated bootflow if found
->    * @buf:	Buffer containing the possible bootflow file (must be allocat=
-ed
-> @@ -223,7 +223,7 @@ int bootmeth_set_bootflow(struct udevice *dev, struc=
-t bootflow *bflow,
->    *
->    * Read a file from the same place as the bootflow came from
->    *
-> - * @dev:	Bootmethod device to use
-> + * @dev:	Bootmeth device to use
->    * @bflow:	Bootflow providing info on where to read from
->    * @file_path:	Path to file (may be absolute or relative)
->    * @addr:	Address to load file
-> @@ -241,7 +241,7 @@ int bootmeth_read_file(struct udevice *dev, struct b=
-ootflow *bflow,
->    * Some bootmeths delay reading of large files until booting is reques=
-ted. This
->    * causes those files to be read.
->    *
-> - * @dev:	Bootmethod device to use
-> + * @dev:	Bootmeth device to use
->    * @bflow:	Bootflow to read
->    * Return: does not return on success, since it should boot the
->    *	Operating System. Returns -EFAULT if that fails, other -ve on
-> @@ -252,7 +252,7 @@ int bootmeth_read_all(struct udevice *dev, struct bo=
-otflow *bflow);
->   /**
->    * bootmeth_boot() - boot a bootflow
->    *
-> - * @dev:	Bootmethod device to boot
-> + * @dev:	Bootmeth device to boot
->    * @bflow:	Bootflow to boot
->    * Return: does not return on success, since it should boot the
->    *	Operating System. Returns -EFAULT if that fails, other -ve on
-> @@ -265,7 +265,7 @@ int bootmeth_boot(struct udevice *dev, struct bootfl=
-ow *bflow);
->    *
->    * This sets up the ordering information in @iter, based on the select=
-ed
->    * ordering of the bootmeths in bootstd_priv->bootmeth_order. If there=
- is no
-> - * ordering there, then all bootmethods are added
-> + * ordering there, then all bootmeths are added
->    *
->    * @iter: Iterator to update with the order
->    * @include_global: true to add the global bootmeths, in which case th=
-ey appear
-> diff --git a/include/extlinux.h b/include/extlinux.h
-> index 721ba46371cc..4d26a0a8ab74 100644
-> --- a/include/extlinux.h
-> +++ b/include/extlinux.h
-> @@ -12,7 +12,7 @@
->   /**
->    * struct extlinux_info - useful information for extlinux_getfile()
->    *
-> - * @dev: bootmethod device being used to boot
-> + * @dev: bootmeth device being used to boot
->    * @bflow: bootflow being booted
->    */
->   struct extlinux_info {
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index 674d4c05f83f..24f3b5fbe109 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -400,7 +400,7 @@ BOOTSTD_TEST(bootflow_system, UT_TESTF_DM | UT_TESTF=
-_SCAN_PDATA |
->   	     UT_TESTF_SCAN_FDT);
->   #endif
+> Hope that helps.
 >
-> -/* Check disabling a bootmethod if it requests it */
-> +/* Check disabling a bootmeth if it requests it */
->   static int bootflow_iter_disable(struct unit_test_state *uts)
->   {
->   	struct udevice *bootstd, *dev;
-> diff --git a/test/boot/bootmeth.c b/test/boot/bootmeth.c
-> index e498eee036eb..b9a3f48a95ef 100644
-> --- a/test/boot/bootmeth.c
-> +++ b/test/boot/bootmeth.c
-> @@ -37,7 +37,7 @@ BOOTSTD_TEST(bootmeth_cmd_list, UT_TESTF_DM | UT_TESTF=
-_SCAN_FDT);
->   /* Check 'bootmeth order' command */
->   static int bootmeth_cmd_order(struct unit_test_state *uts)
->   {
-> -	/* Select just one bootmethod */
-> +	/* Select just one bootmeth */
->   	console_record_reset_enable();
->   	ut_assertok(run_command("bootmeth order extlinux", 0));
->   	ut_assert_console_end();
-> @@ -138,12 +138,12 @@ static int bootmeth_env(struct unit_test_state *ut=
-s)
+> Jon
 >
->   	ut_assertok(bootstd_get_priv(&std));
->
-> -	/* Select just one bootmethod */
-> +	/* Select just one bootmeth */
->   	console_record_reset_enable();
->   	ut_assertok(env_set("bootmeths", "extlinux"));
->   	ut_asserteq(1, std->bootmeth_count);
->
-> -	/* Select an invalid bootmethod */
-> +	/* Select an invalid bootmeth */
->   	ut_asserteq(1, run_command("setenv bootmeths fred", 0));
->   	ut_assert_nextline("Unknown bootmeth 'fred'");
->   	ut_assert_nextlinen("## Error inserting");
->
+>>
+>> Regards
+>> /Ilias
+>>> +
+>>>          /* Launch capsules */
+>>>          for (i =3D 0, ++index; i < nfiles; i++, index++) {
+>>>                  log_debug("Applying %ls\n", files[i]);
+>>> --
+>>> 2.34.1
+>>>
 
