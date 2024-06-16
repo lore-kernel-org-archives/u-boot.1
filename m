@@ -4,56 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06A25C27C77
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 08:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D43C27C6E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 09:24:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CCB08804F;
-	Sun, 16 Jun 2024 10:59:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 5192788054;
+	Sun, 16 Jun 2024 11:24:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pXhfhzaj";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="XlZUDwd8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86DE388054; Sun, 16 Jun 2024 10:59:55 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id DE1E6880CC; Sun, 16 Jun 2024 11:24:15 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84B3480C58
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 10:59:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DB058804F
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 11:24:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-041-025.um47.pools.vodafone-ip.de
- [178.202.41.25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6D42D40EE9; 
- Sun, 16 Jun 2024 08:59:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1718528392;
- bh=5BhJK7KCS11agOIzx3o2lSd5rYcz5v6TBiXBWHmHUiY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=pXhfhzaj/vzb1qzQ3akmr90x4HyQgh+TzNw0z2emKFFa5SE3n6ZR08kpWovXNoOg/
- MlreRQNx4/chKjLe4cQ/2yZT2DwE/0MHTsBdelA6HWY1PnojtED7QDWJMNZkpQHI1b
- 96jRM8mx2yAom01P/IRJkHm2nMcgprOtdP0lW9tGXhv8ZGX6jaQRCfcSxHj34M4s2z
- QuF3HiE+HvQHx2dUzYXWM1TgeT7uyPlD8A4JVoIBzlXu4c8TFmZuVoIv0yxCBo9iGV
- MydxlBP0N8YJF8uPv76nxjF7r3PIUVg0rxuqS+H2UwrIeXdeA3xCVjvewl5kv4yvpL
- 0fR5HwXfGZAzQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: update requirements.txt
-Date: Sun, 16 Jun 2024 10:59:48 +0200
-Message-ID: <20240616085948.16692-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ smtp.mailfrom=SRS0=e15e=NS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1718529845;
+ bh=TWwTn8xJKGMHn/u2VF07RrWKyXWO1b4R7WlOl5E1P0w=;
+ b=XlZUDwd8Wu6tQ7dBCSdOxpbwsr6EC+IpqAC6dywd5Hgm8jo2i3WHEwotrWcpxQ1fzZTG84X1w
+ CTxwq/7h36wXHAvDnjAeqSMwsPmEeyfaa2po0JnfITvbNB3hXIA6gDP1c/QVg6USdGKtnDnd9jn
+ wibaRQfpU9a3Na+T8qCr4TTuvqPwMeY2tXGEEEIBCV6HyNjqycXX0WN34uBrfHuTKMCasBZaOWu
+ JpyOm3NEJycpBjfSe6FqwbmUI+wzPFPmp2EXX2kIeYglBKNBEkv9mjSlyrxanSDGO8YsmSC9i8/
+ Tv/jWGCOJc5Kewjin1PKGW9xEeFPJzzEAKyGsZ0OB30g==
+Message-ID: <479eaab5-509a-4f30-97d3-e8fa60c8d117@kwiboo.se>
+Date: Sun, 16 Jun 2024 11:24:01 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] rockchip: rock-3a: rock5a: rock5b: add USB GADGET
+ related configs
+To: FUKAUMI Naoki <naoki@radxa.com>
+Cc: u-boot@lists.denx.de, eugen.hristev@collabora.com, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ gajjar04akash@gmail.com
+References: <20240615074639.1686-1-naoki@radxa.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240615074639.1686-1-naoki@radxa.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 666eaf3501f41f7e8a21dd71
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,49 +74,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update all required Python packages to current release.
+On 2024-06-15 09:46, FUKAUMI Naoki wrote:
+> add USB GADGET related configs for USB OTG port on ROCK 3A/5A/5B.
+> 
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+>  configs/rock-3a-rk3568_defconfig | 6 ++++++
+>  configs/rock5a-rk3588s_defconfig | 6 ++++++
+>  configs/rock5b-rk3588_defconfig  | 1 +
+>  3 files changed, 13 insertions(+)
+> 
+> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
+> index 66ac2f6d7a..0568a73038 100644
+> --- a/configs/rock-3a-rk3568_defconfig
+> +++ b/configs/rock-3a-rk3568_defconfig
+> @@ -37,6 +37,8 @@ CONFIG_CMD_MMC=y
+>  CONFIG_CMD_PCI=y
+>  CONFIG_CMD_POWEROFF=y
+>  CONFIG_CMD_USB=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_PMIC=y
+>  CONFIG_CMD_REGULATOR=y
+> @@ -50,6 +52,7 @@ CONFIG_SPL_SYSCON=y
+>  CONFIG_SCSI_AHCI=y
+>  CONFIG_AHCI_PCI=y
+>  CONFIG_SPL_CLK=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+>  CONFIG_MISC=y
+> @@ -90,4 +93,7 @@ CONFIG_USB_OHCI_HCD=y
+>  CONFIG_USB_OHCI_GENERIC=y
+>  CONFIG_USB_DWC3=y
+>  CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_USB_FUNCTION_ROCKUSB=y
+>  CONFIG_ERRNO_STR=y
+> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+> index c09e6655f0..e06052cd80 100644
+> --- a/configs/rock5a-rk3588s_defconfig
+> +++ b/configs/rock5a-rk3588s_defconfig
+> @@ -27,6 +27,8 @@ CONFIG_CMD_GPT=y
+>  CONFIG_CMD_I2C=y
+>  CONFIG_CMD_MMC=y
+>  CONFIG_CMD_USB=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_REGULATOR=y
+>  # CONFIG_SPL_DOS_PARTITION is not set
+> @@ -37,6 +39,7 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_SPL_REGMAP=y
+>  CONFIG_SPL_SYSCON=y
+>  CONFIG_SPL_CLK=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+>  CONFIG_MISC=y
+> @@ -67,4 +70,7 @@ CONFIG_USB_OHCI_HCD=y
+>  CONFIG_USB_OHCI_GENERIC=y
+>  CONFIG_USB_DWC3=y
+>  CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_USB_FUNCTION_ROCKUSB=y
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/sphinx/requirements.txt | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+I do not think there is any usb port that use dr_mode otg/peripheral,
+so enabling gadget support probably have no impact on ROCK 5A.
 
-diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
-index 54eb70aa92c..306b05a995e 100644
---- a/doc/sphinx/requirements.txt
-+++ b/doc/sphinx/requirements.txt
-@@ -1,18 +1,18 @@
- alabaster==0.7.16
--Babel==2.14.0
--certifi==2023.11.17
-+Babel==2.15.0
-+certifi==2024.6.2
- charset-normalizer==3.3.2
- docutils==0.20.1
- idna==3.7
- imagesize==1.4.1
- Jinja2==3.1.4
--MarkupSafe==2.1.3
--packaging==23.2
--Pygments==2.17.2
--requests==2.32.2
-+MarkupSafe==2.1.5
-+packaging==24.1
-+Pygments==2.18.0
-+requests==2.32.3
- six==1.16.0
- snowballstemmer==2.2.0
--Sphinx==7.2.6
-+Sphinx==7.3.7
- sphinx-prompt==1.8.0
- sphinx-rtd-theme==2.0.0
- sphinxcontrib-applehelp==1.0.8
-@@ -22,4 +22,4 @@ sphinxcontrib-jquery==4.1
- sphinxcontrib-jsmath==1.0.1
- sphinxcontrib-qthelp==1.0.7
- sphinxcontrib-serializinghtml==1.1.10
--urllib3==2.1.0
-+urllib3==2.2.1
--- 
-2.43.0
+Regards,
+Jonas
+
+>  CONFIG_ERRNO_STR=y
+> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+> index fc118cea7b..80a2f2fed5 100644
+> --- a/configs/rock5b-rk3588_defconfig
+> +++ b/configs/rock5b-rk3588_defconfig
+> @@ -39,6 +39,7 @@ CONFIG_CMD_MMC=y
+>  CONFIG_CMD_PCI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_REGULATOR=y
+>  # CONFIG_SPL_DOS_PARTITION is not set
 
