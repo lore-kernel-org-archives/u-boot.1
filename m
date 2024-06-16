@@ -4,66 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2885AC27C53
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 20:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA12C27C53
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 23:47:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF1CE880DB;
-	Sun, 16 Jun 2024 22:50:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id D8A398819D;
+	Mon, 17 Jun 2024 01:47:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zrEv98MX";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 860B18811A; Sun, 16 Jun 2024 22:50:30 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7DE19881BF; Mon, 17 Jun 2024 01:47:05 +0200 (CEST)
+Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47E0787AD2
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 22:50:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F231876D3
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:47:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5d3c=NT=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718570990;
- bh=GqfCrlDHLXT9BGTxb01TQd5NG81PrEciDasur8NYdXo=;
- b=zrEv98MXsSP1sXIVQmQ1AQGDnyWAvsfUuCXers1hy3eD0cQh6Cv/kfNSty7lNfvEGJPMlZ79Y
- yY7xTA15Mi+yf31j8MLZZyPbSvmtojB8I3xhiYKRy+DkFtvr37jgRdlUIuj7BgrDOGkKTIKGBnp
- t8fsIHUdnS0Z+k+L4X3neDMEPYIofmMY0StBJeSrYrpRrHb5BZAsoWLUKg2t8It+L7SvAH9cwe4
- Gc2MClknvgW8AdkFLhf5o6/OuEFgT4m/pEL1f3u3Ds4ctwWd4Kl4i+gKUTswlaIAY8bEXKuXx0a
- sKnesJcN49IJDQNc5KbEtKEff3bJREFAWSx6o5TEJtMA==
-Message-ID: <40658f45-445c-43ad-841f-afcdd3a565bc@kwiboo.se>
-Date: Sun, 16 Jun 2024 22:49:38 +0200
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp80t1718581575t5dcc1dc
+X-QQ-Originating-IP: iwp2QfX0UuK71bsYZ7hTT7Bu2TftmTom8VOQOlW089A=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Mon, 17 Jun 2024 07:46:12 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 11720346594292049734
+Message-ID: <725ABC7E5E2DE0B5+4be845bd-0f40-4719-8b84-90215a0b063b@radxa.com>
+Date: Mon, 17 Jun 2024 08:46:12 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] phy: Extend generic_setup_phy() with PHY mode and
- submode
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>, Fabio
- Estevam <festevam@gmail.com>, Fabrice Gasnier
- <fabrice.gasnier@foss.st.com>, Mathieu Othacehe <othacehe@gnu.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Sean Anderson <seanga2@gmail.com>, Simon Glass
- <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, Tim Harvey
- <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, Xavier Drudis
- Ferran <xdrudis@tinet.cat>, u-boot-qcom@groups.io
-References: <20240616150426.36338-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 1/3] rockchip: rock-3a: rock5a: rock5b: add USB GADGET
+ related configs
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, eugen.hristev@collabora.com, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com, gajjar04akash@gmail.com
+References: <20240615074639.1686-1-naoki@radxa.com>
+ <479eaab5-509a-4f30-97d3-e8fa60c8d117@kwiboo.se>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240616150426.36338-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <479eaab5-509a-4f30-97d3-e8fa60c8d117@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 666f4fe89b43c39ccd18ec6c
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz6a-0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,196 +63,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi,
 
-On 2024-06-16 17:04, Marek Vasut wrote:
-> Extend generic_setup_phy() parameter list with PHY mode and submode and
-> call generic_phy_set_mode() in generic_setup_phy(), so the generic PHY
-> setup function can configure the PHY into correct mode before powering
-> the PHY up.
+On 6/16/24 18:24, Jonas Karlman wrote:
+> On 2024-06-15 09:46, FUKAUMI Naoki wrote:
+>> add USB GADGET related configs for USB OTG port on ROCK 3A/5A/5B.
+>>
+>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+>> ---
+>>   configs/rock-3a-rk3568_defconfig | 6 ++++++
+>>   configs/rock5a-rk3588s_defconfig | 6 ++++++
+>>   configs/rock5b-rk3588_defconfig  | 1 +
+>>   3 files changed, 13 insertions(+)
+>>
+>> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
+>> index 66ac2f6d7a..0568a73038 100644
+>> --- a/configs/rock-3a-rk3568_defconfig
+>> +++ b/configs/rock-3a-rk3568_defconfig
+>> @@ -37,6 +37,8 @@ CONFIG_CMD_MMC=y
+>>   CONFIG_CMD_PCI=y
+>>   CONFIG_CMD_POWEROFF=y
+>>   CONFIG_CMD_USB=y
+>> +CONFIG_CMD_ROCKUSB=y
+>> +CONFIG_CMD_USB_MASS_STORAGE=y
+>>   # CONFIG_CMD_SETEXPR is not set
+>>   CONFIG_CMD_PMIC=y
+>>   CONFIG_CMD_REGULATOR=y
+>> @@ -50,6 +52,7 @@ CONFIG_SPL_SYSCON=y
+>>   CONFIG_SCSI_AHCI=y
+>>   CONFIG_AHCI_PCI=y
+>>   CONFIG_SPL_CLK=y
+>> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+>>   CONFIG_ROCKCHIP_GPIO=y
+>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>   CONFIG_MISC=y
+>> @@ -90,4 +93,7 @@ CONFIG_USB_OHCI_HCD=y
+>>   CONFIG_USB_OHCI_GENERIC=y
+>>   CONFIG_USB_DWC3=y
+>>   CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_USB_GADGET=y
+>> +CONFIG_USB_GADGET_DOWNLOAD=y
+>> +CONFIG_USB_FUNCTION_ROCKUSB=y
+>>   CONFIG_ERRNO_STR=y
+>> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+>> index c09e6655f0..e06052cd80 100644
+>> --- a/configs/rock5a-rk3588s_defconfig
+>> +++ b/configs/rock5a-rk3588s_defconfig
+>> @@ -27,6 +27,8 @@ CONFIG_CMD_GPT=y
+>>   CONFIG_CMD_I2C=y
+>>   CONFIG_CMD_MMC=y
+>>   CONFIG_CMD_USB=y
+>> +CONFIG_CMD_ROCKUSB=y
+>> +CONFIG_CMD_USB_MASS_STORAGE=y
+>>   # CONFIG_CMD_SETEXPR is not set
+>>   CONFIG_CMD_REGULATOR=y
+>>   # CONFIG_SPL_DOS_PARTITION is not set
+>> @@ -37,6 +39,7 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
+>>   CONFIG_SPL_REGMAP=y
+>>   CONFIG_SPL_SYSCON=y
+>>   CONFIG_SPL_CLK=y
+>> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+>>   CONFIG_ROCKCHIP_GPIO=y
+>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>   CONFIG_MISC=y
+>> @@ -67,4 +70,7 @@ CONFIG_USB_OHCI_HCD=y
+>>   CONFIG_USB_OHCI_GENERIC=y
+>>   CONFIG_USB_DWC3=y
+>>   CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_USB_GADGET=y
+>> +CONFIG_USB_GADGET_DOWNLOAD=y
+>> +CONFIG_USB_FUNCTION_ROCKUSB=y
 > 
-> Update all call sites of generic_setup_phy() as well, all of which are
-> USB host related, except for DM test which now behaves as a USB host
-> test.
+> I do not think there is any usb port that use dr_mode otg/peripheral,
+> so enabling gadget support probably have no impact on ROCK 5A.
 > 
-> Note that if the PHY driver does not implement the .set_mode callback,
-> generic_phy_set_mode() call returns 0 and does not error out, so this
-> should not break any existing systems.
+> Regards,
+> Jonas
+
+my patch 2/3 doesn't add "dr_mode = "host";", so it will be "otg".
+I may need to fix upstream dts first...
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
 > 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Mathieu Othacehe <othacehe@gnu.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
-> Cc: u-boot-qcom@groups.io
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/phy/phy-uclass.c        | 7 ++++++-
->  drivers/usb/host/ehci-generic.c | 2 +-
->  drivers/usb/host/ehci-msm.c     | 2 +-
->  drivers/usb/host/ehci-mx6.c     | 2 +-
->  drivers/usb/host/ehci-pci.c     | 2 +-
->  drivers/usb/host/ohci-generic.c | 2 +-
->  include/generic-phy.h           | 5 ++++-
->  test/dm/phy.c                   | 8 ++++----
->  8 files changed, 19 insertions(+), 11 deletions(-)
+>>   CONFIG_ERRNO_STR=y
+>> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+>> index fc118cea7b..80a2f2fed5 100644
+>> --- a/configs/rock5b-rk3588_defconfig
+>> +++ b/configs/rock5b-rk3588_defconfig
+>> @@ -39,6 +39,7 @@ CONFIG_CMD_MMC=y
+>>   CONFIG_CMD_PCI=y
+>>   CONFIG_CMD_USB=y
+>>   CONFIG_CMD_ROCKUSB=y
+>> +CONFIG_CMD_USB_MASS_STORAGE=y
+>>   # CONFIG_CMD_SETEXPR is not set
+>>   CONFIG_CMD_REGULATOR=y
+>>   # CONFIG_SPL_DOS_PARTITION is not set
 > 
-> diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
-> index acdcda15b5b..bbaf95112c5 100644
-> --- a/drivers/phy/phy-uclass.c
-> +++ b/drivers/phy/phy-uclass.c
-> @@ -508,7 +508,8 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk)
->  	return ret;
->  }
->  
-> -int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
-> +int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
-> +		      enum phy_mode mode, int submode)
->  {
->  	int ret;
->  
-> @@ -520,6 +521,10 @@ int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
->  	if (ret)
->  		return ret;
->  
-> +	ret = generic_phy_set_mode(phy, mode, submode);
-> +	if (ret)
-> +		generic_phy_exit(phy);
-
-This should probably also return ret and not continue with power_on.
-
-If possible please also add a test case for this scenario.
-
-Regards,
-Jonas
-
-> +
->  	ret = generic_phy_power_on(phy);
->  	if (ret)
->  		generic_phy_exit(phy);
-> diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
-> index 23c3ed25554..1ae3619ce25 100644
-> --- a/drivers/usb/host/ehci-generic.c
-> +++ b/drivers/usb/host/ehci-generic.c
-> @@ -94,7 +94,7 @@ static int ehci_usb_probe(struct udevice *dev)
->  	if (err)
->  		goto reset_err;
->  
-> -	err = generic_setup_phy(dev, &priv->phy, 0);
-> +	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
->  	if (err)
->  		goto regulator_err;
->  
-> diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-> index a081f71b187..b0c060b8173 100644
-> --- a/drivers/usb/host/ehci-msm.c
-> +++ b/drivers/usb/host/ehci-msm.c
-> @@ -56,7 +56,7 @@ static int ehci_usb_probe(struct udevice *dev)
->  	hcor = (struct ehci_hcor *)((phys_addr_t)hccr +
->  			HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
->  
-> -	ret = generic_setup_phy(dev, &p->phy, 0);
-> +	ret = generic_setup_phy(dev, &p->phy, 0, PHY_MODE_USB_HOST, 0);
->  	if (ret)
->  		return ret;
->  
-> diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
-> index 31cd8a50f4a..a93fa5d5455 100644
-> --- a/drivers/usb/host/ehci-mx6.c
-> +++ b/drivers/usb/host/ehci-mx6.c
-> @@ -703,7 +703,7 @@ static int ehci_usb_probe(struct udevice *dev)
->  	usb_phy_enable(ehci, priv->phy_addr);
->  #endif
->  #else
-> -	ret = generic_setup_phy(dev, &priv->phy, 0);
-> +	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
->  	if (ret)
->  		goto err_regulator;
->  #endif
-> diff --git a/drivers/usb/host/ehci-pci.c b/drivers/usb/host/ehci-pci.c
-> index 572686580cd..8d05b14e898 100644
-> --- a/drivers/usb/host/ehci-pci.c
-> +++ b/drivers/usb/host/ehci-pci.c
-> @@ -30,7 +30,7 @@ static int ehci_pci_init(struct udevice *dev, struct ehci_hccr **ret_hccr,
->  	int ret;
->  	u32 cmd;
->  
-> -	ret = generic_setup_phy(dev, &priv->phy, 0);
-> +	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
->  	if (ret)
->  		return ret;
->  
-> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
-> index f1325cd4953..cc44226f5e0 100644
-> --- a/drivers/usb/host/ohci-generic.c
-> +++ b/drivers/usb/host/ohci-generic.c
-> @@ -50,7 +50,7 @@ static int ohci_usb_probe(struct udevice *dev)
->  		goto reset_err;
->  	}
->  
-> -	err = generic_setup_phy(dev, &priv->phy, 0);
-> +	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
->  	if (err)
->  		goto reset_err;
->  
-> diff --git a/include/generic-phy.h b/include/generic-phy.h
-> index eaab7491660..47962023236 100644
-> --- a/include/generic-phy.h
-> +++ b/include/generic-phy.h
-> @@ -415,10 +415,13 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk);
->   * @dev:	The consumer device.
->   * @phy:	A pointer to the PHY port
->   * @index:	The index in the list of available PHYs
-> + * @mode:	PHY mode
-> + * @submode:	PHY submode
->   *
->   * Return: 0 if OK, or negative error code.
->   */
-> -int generic_setup_phy(struct udevice *dev, struct phy *phy, int index);
-> +int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
-> +		      enum phy_mode mode, int submode);
->  
->  /**
->   * generic_shutdown_phy() - Power off and de-initialize phy.
-> diff --git a/test/dm/phy.c b/test/dm/phy.c
-> index d14117f6f7a..a90881b12ab 100644
-> --- a/test/dm/phy.c
-> +++ b/test/dm/phy.c
-> @@ -243,20 +243,20 @@ static int dm_test_phy_setup(struct unit_test_state *uts)
->  					      "gen_phy_user", &parent));
->  
->  	/* normal */
-> -	ut_assertok(generic_setup_phy(parent, &phy, 0));
-> +	ut_assertok(generic_setup_phy(parent, &phy, 0, PHY_MODE_USB_HOST, 0));
->  	ut_assertok(generic_shutdown_phy(&phy));
->  
->  	/* power_off fail with -EIO */
-> -	ut_assertok(generic_setup_phy(parent, &phy, 1));
-> +	ut_assertok(generic_setup_phy(parent, &phy, 1, PHY_MODE_USB_HOST, 0));
->  	ut_asserteq(-EIO, generic_shutdown_phy(&phy));
->  
->  	/* power_on fail with -EIO */
-> -	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2));
-> +	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2, PHY_MODE_USB_HOST, 0));
->  	ut_assertok(generic_shutdown_phy(&phy));
->  
->  	/* generic_phy_get_by_index fail with -ENOENT */
->  	ut_asserteq(-ENOENT, generic_phy_get_by_index(parent, 3, &phy));
-> -	ut_assertok(generic_setup_phy(parent, &phy, 3));
-> +	ut_assertok(generic_setup_phy(parent, &phy, 3, PHY_MODE_USB_HOST, 0));
->  	ut_assertok(generic_shutdown_phy(&phy));
->  
->  	return 0;
-
+> 
