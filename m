@@ -4,60 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 882B5C27C53
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 09:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351C4C27C53
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 10:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1E1B86F6E;
-	Sun, 16 Jun 2024 11:45:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 46E4F8804F;
+	Sun, 16 Jun 2024 12:13:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="l9CdZ/mI";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1718532804;
+	bh=1Hz/hf1igegyoHHdpdtK6K9BUTlwKRHB899Xuufr5zw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=cjF2phP/hc6VqcULmhHpP62OEQj5WSa2HWY4RQtoRGnp9Uykn+olgkIA4IrXtFIse
+	 YegNGR80HA4910c1r0ZhBL9nJZEG7m9EXzWsX8A19WIaZQRY9yO/8OxlXF5smjAsjC
+	 NSu+tr5nkMI5syGnGdqm0El5MbUCrEYjWq7XCDhf993u0+P7VtUR9PORxfAvDbO+pk
+	 8EWPopFHRgfftzQ6inC39ytkmRWq7lF55gouMnK6CKhaPn6tjxrP+I3BaapHVdJkgu
+	 CLo1Jhw3lGirqK56oMqW+uL5RQUxV0y0skyhZycCdc5bU5oQxIw1Z4KalBjzYGChvz
+	 xnOSr9Eph7azg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F15E880CC; Sun, 16 Jun 2024 11:45:50 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 7488988054; Sun, 16 Jun 2024 12:13:23 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76B7A86784
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 11:45:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4451087FC2
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 12:13:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e15e=NS=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718531138;
- bh=0Vo8NiKrfGz8X4di4jQtnmRezTf/B3mNrxgOR0iaWO0=;
- b=l9CdZ/mIpwZ6l9+8f2P3eW6sS8NZgAbBgwnpORN+YJvfvT7OymC8SAiFaInSD3G4aDM1fbrKs
- iDvlpMisIm5A75Ti12EFXfm+o5y+KuNpvCVltpyVUIGraMpLVpr/bUCxQ8B7jGunfyNmFEGZDtx
- KUy4R07VZG9DT0/5vFeL+Ua+UCbB90z5I+Hvr9LfJoxn5RU6fFkDvrnZuNKiuY0TkXXqd0VOy/U
- cyfrPWrxx0PeJkQy/7NqJgeimJZrnQnTQw0Wrsa9WIqSiNpDsztnso/iGQWhC/IE+MO/moaIBNw
- pdUoHIV9i4dUXcegHoBu5xPs714YHopRtKvEvuSyjwFw==
-Message-ID: <ce5c5447-1b40-478e-9aea-34baefb14f4c@kwiboo.se>
-Date: Sun, 16 Jun 2024 11:34:55 +0200
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4W283g1Tggz9sZD;
+ Sun, 16 Jun 2024 12:13:19 +0200 (CEST)
+Message-ID: <99686e1b-c631-4484-96e3-5014d0f0659c@denx.de>
+Date: Sun, 16 Jun 2024 12:13:17 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] arm: dts: rockchip: rock-5a: enable USB3 OTG port
-To: FUKAUMI Naoki <naoki@radxa.com>
-Cc: u-boot@lists.denx.de, eugen.hristev@collabora.com, sjg@chromium.org,
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- gajjar04akash@gmail.com
-References: <20240615074639.1686-1-naoki@radxa.com>
- <20240615074639.1686-2-naoki@radxa.com>
+Subject: Re: [PATCH 0/7] watchdog_reset cleanup
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Angelo Dureghello
+ <angelo@kernel-space.org>, Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Huan Wang <alison.wang@nxp.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+References: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240615074639.1686-2-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 666eb1c3b23880544d1fe9a3
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,56 +69,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-06-15 09:46, FUKAUMI Naoki wrote:
-> enable USB3 OTG (upper) port for ums and rockusb commands on ROCK 5A.
+On 5/28/24 13:13, Rasmus Villemoes wrote:
+> watchdog_reset is no more. That is, it is no longer called from
+> anywhere, so any leftover definitions are just dead weight, and
+> references in comments need to be updated.
 > 
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
->  arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
+> I don't have access to any m68k, sh or powerpc boards. Only lightly
+> compile-tested.
 > 
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> index efba0c359b..5ae1a3cdd9 100644
-> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> @@ -9,3 +9,19 @@
->  	cap-mmc-highspeed;
->  	mmc-hs200-1_8v;
->  };
-> +
-> +&u2phy0 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy0_otg {
-> +	status = "okay";
-> +};
-> +
-> +&usbdp_phy0 {
-> +	status = "okay";
-> +};
-> +
-> +&usb_host0_xhci {
-> +	status = "okay";
-> +};
+> Apart from the two sh4 patches, these are independent of each other
+> and can be applied individually.
+> 
+> Cc: Angelo Dureghello <angelo@kernel-space.org>
+> Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
+> Cc: Huan Wang <alison.wang@nxp.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 
-Instead of adding new nodes to the u-boot.dtsi-file, please pick related
-commits for dts/upstream tree when possible and remove any merged nodes.
+Thanks for continuing the cleanup here:
 
-E.g do something like following:
-- base on u-boot-rockchip-next-20240615
-- run: dts/update-dts-subtree.sh pick c233f1327b04279454217b826ebf648bd4bc6b8f
-- run: dts/update-dts-subtree.sh pick 402af187821d4e38a6c687e868b26ba22cb82886
-- remove u2phy1/usbdp_phy1/usb_host1_xhci from rock-5b u-boot.dtsi
-and instead include those commits in a v2 :-)
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-Related devicetree-rebasing commits:
+Thanks,
+Stefan
 
-arm64: dts: rockchip: add upper USB3 port to rock-5a:
-https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/commit/?id=c233f1327b04279454217b826ebf648bd4bc6b8f
+> Rasmus Villemoes (7):
+>    m68k: remove dead code
+>    wdt-uclass: watchdog_reset cleanup
+>    serial: ns16550: fix comment to mention schedule instead of
+>      watchdog_reset
+>    sh4: move reset_cpu() from watchdog.c to cpu.c
+>    sh4: remove watchdog.c file
+>    powerpc: mpc83xx: remove unused watchdog_reset() function
+>    powerpc: mpc85xx: remove dead watchdog-related code
+> 
+>   arch/m68k/cpu/mcf52x2/cpu.c    | 108 ---------------------------------
+>   arch/powerpc/cpu/mpc83xx/cpu.c |  15 -----
+>   arch/powerpc/cpu/mpc85xx/cpu.c |  31 ----------
+>   arch/sh/cpu/sh4/Makefile       |   2 +-
+>   arch/sh/cpu/sh4/cpu.c          |  10 +++
+>   arch/sh/cpu/sh4/watchdog.c     |  61 -------------------
+>   drivers/serial/ns16550.c       |   8 +--
+>   drivers/watchdog/wdt-uclass.c  |  19 +-----
+>   include/watchdog.h             |   3 -
+>   9 files changed, 17 insertions(+), 240 deletions(-)
+>   delete mode 100644 arch/sh/cpu/sh4/watchdog.c
+> 
 
-arm64: dts: rockchip: add lower USB3 port to rock-5b
-https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/commit/?id=402af187821d4e38a6c687e868b26ba22cb82886
+Viele Grüße,
+Stefan Roese
 
-Regards,
-Jonas
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
