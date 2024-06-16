@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF0CC27C7B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 04:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9454BC27C7B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 04:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B46288263;
+	by phobos.denx.de (Postfix) with ESMTP id D0E9D88278;
 	Mon, 17 Jun 2024 06:48:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="uowKKRx9";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Uh5+hd/A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45E6D87B30; Sun, 16 Jun 2024 15:34:39 +0200 (CEST)
+ id 1798D87B30; Sun, 16 Jun 2024 15:34:41 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BEDB880F5
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 15:34:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D38F287DCA
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 15:34:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mmkurbanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 80FAD120007;
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 58816120006;
  Sun, 16 Jun 2024 16:34:36 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 80FAD120007
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 58816120006
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1718544876;
- bh=paMSZhOwobBj91r0W6Nmdl0CrMWK6S0yGobhzaD2NZw=;
+ bh=+Vdg/8pGgWsRfwxXPajqmOc5Iwo1vDWX9znKtpRDu68=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=uowKKRx9NyRrX08WDH4bgheD7Vg5eKPwp4vMDcfS39CRl/aj12+UvBHqbc6maXINt
- hFaaeZSp5Jq8IG9xJ8BymxaRq6EJx3bBTzGf8FDKTsB9uj5T0yaTuvgHBP6DeZ4i91
- nkmDyOq7uAZFMDPpAyj5PVoNEM9um5skmQMKGZst9TLuQdpIrRC6HLWP603KwWX0Rq
- HDGk76qdvTCmkxFvxgmzIFts017Doyx4KTi1upwpoCeY+AHchGJspPqKh4ihIFDZiw
- Zv0n1QAuqN4E2JtwHgRDZ2T7VqKfNk44WlGA4kfLEQ3MHHbHqAXY5vt8mKYtRVJhYW
- 6TvLBgxpDCOTA==
+ b=Uh5+hd/ASuJTvP5hyreDKWfi7iRpxnTgerq7AMPTrZyQ7sEBjGciPMxi60rIeBTo/
+ Lq8sQeE0usA/U6DoWBJgbGXWFdDofY0QojQISB/MXwpkVJcLvNZqrB0IvIGlmTWRL5
+ uCW9MUB7KQdirQ2jDNGA4JaznOoeTovJKH54RG50vQ4WW/+MW8/zQ6O0VeLNHkgsSY
+ q0oNujCYULtibwueJjaq4fA5qff0qlgOq8epkxPtMqdKbRqFFJq4F/QXGifA+eUAj4
+ Kdq7VsxAInPCQcxzo9f6bKcduYrHgbiF6Y+CdBsEt64s0TfJxCHMSSNynRLkTntCVH
+ ihGbSbaH/kdZQ==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
  [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
@@ -53,10 +53,9 @@ From: Martin Kurbanov <mmkurbanov@salutedevices.com>
 To: Tom Rini <trini@konsulko.com>, Dmitry Dunaev <dunaev@tecon.ru>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Martin Kurbanov
  <mmkurbanov@salutedevices.com>
-Subject: [PATCH v1 2/2] cmd: ubi: check 'updating' before calling
- ubi_more_update_data()
-Date: Sun, 16 Jun 2024 16:34:18 +0300
-Message-ID: <20240616133426.123299-3-mmkurbanov@salutedevices.com>
+Subject: [PATCH v1 1/2] cmd: ubi: remove redundant initializations
+Date: Sun, 16 Jun 2024 16:34:17 +0300
+Message-ID: <20240616133426.123299-2-mmkurbanov@salutedevices.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
 References: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
@@ -105,44 +104,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If 0 is passed to the 'bytes' parameter in the ubi_start_update(),
-there is no need to call the ubi_more_update_data(). Otherwise,
-there will be a double-free of 'vol->upd_buf'.
-
-Also check that the ubi_start_update() was called before calling
-the ubi_more_update_data().
-
 Signed-off-by: Martin Kurbanov <mmkurbanov@salutedevices.com>
 ---
- cmd/ubi.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ cmd/ubi.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/cmd/ubi.c b/cmd/ubi.c
-index a9c5560182..d252d6387f 100644
+index 0a6a80bdd1..a9c5560182 100644
 --- a/cmd/ubi.c
 +++ b/cmd/ubi.c
-@@ -363,6 +363,11 @@ static int ubi_volume_continue_write(char *volume, void *buf, size_t size)
- 	if (vol == NULL)
- 		return ENODEV;
+@@ -249,7 +249,7 @@ static int ubi_create_vol(char *volume, int64_t size, int dynamic, int vol_id,
  
-+	if (!vol->updating) {
-+		printf("UBI volume update was not initiated\n");
-+		return EINVAL;
-+	}
-+
- 	err = ubi_more_update_data(ubi, vol, buf, size);
- 	if (err < 0) {
- 		printf("Couldnt or partially wrote data\n");
-@@ -412,6 +417,10 @@ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
- 		return -err;
- 	}
+ static struct ubi_volume *ubi_find_volume(char *volume)
+ {
+-	struct ubi_volume *vol = NULL;
++	struct ubi_volume *vol;
+ 	int i;
  
-+	/* The volume is just wiped out */
-+	if (!full_size)
-+		return 0;
-+
- 	return ubi_volume_continue_write(volume, buf, size);
- }
+ 	for (i = 0; i < ubi->vtbl_slots; i++) {
+@@ -356,7 +356,7 @@ static int ubi_rename_vol(char *oldname, char *newname)
+ 
+ static int ubi_volume_continue_write(char *volume, void *buf, size_t size)
+ {
+-	int err = 1;
++	int err;
+ 	struct ubi_volume *vol;
+ 
+ 	vol = ubi_find_volume(volume);
+@@ -392,8 +392,8 @@ static int ubi_volume_continue_write(char *volume, void *buf, size_t size)
+ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
+ 	size_t full_size)
+ {
+-	int err = 1;
+-	int rsvd_bytes = 0;
++	int err;
++	int rsvd_bytes;
+ 	struct ubi_volume *vol;
+ 
+ 	vol = ubi_find_volume(volume);
+@@ -574,7 +574,7 @@ static int ubi_detach(void)
+ int ubi_part(char *part_name, const char *vid_header_offset)
+ {
+ 	struct mtd_info *mtd;
+-	int err = 0;
++	int err;
+ 
+ 	if (ubi && ubi->mtd && !strcmp(ubi->mtd->name, part_name)) {
+ 		printf("UBI partition '%s' already selected\n", part_name);
+@@ -605,7 +605,7 @@ int ubi_part(char *part_name, const char *vid_header_offset)
+ 
+ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+-	int64_t size = 0;
++	int64_t size;
+ 	ulong addr = 0;
+ 	bool skipcheck = false;
  
 -- 
 2.43.2
