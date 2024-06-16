@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6711C27C77
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 04:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF0CC27C7B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 04:48:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B70488246;
+	by phobos.denx.de (Postfix) with ESMTP id 6B46288263;
 	Mon, 17 Jun 2024 06:48:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NwdoOqGe";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="uowKKRx9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E39E8811C; Sun, 16 Jun 2024 15:34:39 +0200 (CEST)
+ id 45E6D87B30; Sun, 16 Jun 2024 15:34:39 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D38A587B30
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 15:34:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BEDB880F5
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 15:34:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mmkurbanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 20B94120005;
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 80FAD120007;
  Sun, 16 Jun 2024 16:34:36 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 20B94120005
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 80FAD120007
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1718544876;
- bh=ikTFzh5LoUO41F3dGTwePIf1Zua908UljOUUlKTSsts=;
+ bh=paMSZhOwobBj91r0W6Nmdl0CrMWK6S0yGobhzaD2NZw=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=NwdoOqGeESuqKQ/S99PhSpLXZDukfNvK2YO06G9AVO841EuCY38F+q7QGuXBmwXty
- XjUIFxXkBUeVFdr1STSoSugNvgR0N7b4nXYoCVY6ansUrADy+9JThLtSx25fTagfOe
- 9/6fJRfIlkZyi2I9s/uzxGNubXCQc6qiZPwcviaEiwL5L/L/VL58rSujlmJWN8HWTG
- cY8kB8OGrLpaSE5DgLEY55aTrs8PuEKBxBet90iIQpYUoMm3Di6p1ZhFiI45rQCdLT
- 4BgTFb80XccyNc+SYDdjGsm9Vxwbfi8hp5ayX58x02rBjk2bD7m5FEBIVpj5OiAy7d
- BIBGYHRXSvJRQ==
+ b=uowKKRx9NyRrX08WDH4bgheD7Vg5eKPwp4vMDcfS39CRl/aj12+UvBHqbc6maXINt
+ hFaaeZSp5Jq8IG9xJ8BymxaRq6EJx3bBTzGf8FDKTsB9uj5T0yaTuvgHBP6DeZ4i91
+ nkmDyOq7uAZFMDPpAyj5PVoNEM9um5skmQMKGZst9TLuQdpIrRC6HLWP603KwWX0Rq
+ HDGk76qdvTCmkxFvxgmzIFts017Doyx4KTi1upwpoCeY+AHchGJspPqKh4ihIFDZiw
+ Zv0n1QAuqN4E2JtwHgRDZ2T7VqKfNk44WlGA4kfLEQ3MHHbHqAXY5vt8mKYtRVJhYW
+ 6TvLBgxpDCOTA==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
  [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun, 16 Jun 2024 16:34:35 +0300 (MSK)
+ Sun, 16 Jun 2024 16:34:36 +0300 (MSK)
 Received: from CAB-WSD-0004828.sberdevices.ru (100.64.160.123) by
  p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
@@ -53,11 +53,13 @@ From: Martin Kurbanov <mmkurbanov@salutedevices.com>
 To: Tom Rini <trini@konsulko.com>, Dmitry Dunaev <dunaev@tecon.ru>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Martin Kurbanov
  <mmkurbanov@salutedevices.com>
-Subject: [PATCH v1 0/2] cmd: ubi: check 'updating' before calling
+Subject: [PATCH v1 2/2] cmd: ubi: check 'updating' before calling
  ubi_more_update_data()
-Date: Sun, 16 Jun 2024 16:34:16 +0300
-Message-ID: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
+Date: Sun, 16 Jun 2024 16:34:18 +0300
+Message-ID: <20240616133426.123299-3-mmkurbanov@salutedevices.com>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
+References: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -110,13 +112,38 @@ there will be a double-free of 'vol->upd_buf'.
 Also check that the ubi_start_update() was called before calling
 the ubi_more_update_data().
 
-Martin Kurbanov (2):
-  cmd: ubi: remove redundant initializations
-  cmd: ubi: check 'updating' before calling ubi_more_update_data()
+Signed-off-by: Martin Kurbanov <mmkurbanov@salutedevices.com>
+---
+ cmd/ubi.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
- cmd/ubi.c | 21 +++++++++++++++------
- 1 file changed, 15 insertions(+), 6 deletions(-)
-
+diff --git a/cmd/ubi.c b/cmd/ubi.c
+index a9c5560182..d252d6387f 100644
+--- a/cmd/ubi.c
++++ b/cmd/ubi.c
+@@ -363,6 +363,11 @@ static int ubi_volume_continue_write(char *volume, void *buf, size_t size)
+ 	if (vol == NULL)
+ 		return ENODEV;
+ 
++	if (!vol->updating) {
++		printf("UBI volume update was not initiated\n");
++		return EINVAL;
++	}
++
+ 	err = ubi_more_update_data(ubi, vol, buf, size);
+ 	if (err < 0) {
+ 		printf("Couldnt or partially wrote data\n");
+@@ -412,6 +417,10 @@ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
+ 		return -err;
+ 	}
+ 
++	/* The volume is just wiped out */
++	if (!full_size)
++		return 0;
++
+ 	return ubi_volume_continue_write(volume, buf, size);
+ }
+ 
 -- 
 2.43.2
 
