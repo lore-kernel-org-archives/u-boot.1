@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDCEC27C6E
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 10:18:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECAE9C27C6E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 10:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F72B8804F;
-	Sun, 16 Jun 2024 12:18:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C34488119;
+	Sun, 16 Jun 2024 12:18:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718533112;
-	bh=8UUWhh5whrOyiw9pv8tNIik3Q7OOX0KpVDyFl6XhqEM=;
+	s=phobos-20191101; t=1718533126;
+	bh=kScIjqKPG5lgNUHTmfzAPSXR+DdvDhb0JRDGNgZrGlI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CbNm2+S7+Weo4LQdLg2fYhiYjMoosK/7DrHoEY46CvaxQV5vjIWOyD4UAGEm8r/za
-	 CNIx/OfvH36xgfLFmrPSW5tBCuvEHKN8NU71UmAlqv1hbLKH282P67JxvYPfqWLiOo
-	 meXf6AjSv+svcraG8xGI9voA6BPjBZpRN3mGp10ZQNR4BEuPF1nOOjJfm52/VHo2dg
-	 1p7NRaxe9nx6qeCsmCHuW4bg2GGTmkdANCrSL1hmbjmmaT2m+nz0l8eEkaA8eMFz65
-	 bPF5zY7k7tvvf0Uw30JrqG9f6anwFonX4K3Mij1dtQ6f82dGyNVg/0SmtTT+OrJgue
-	 yoGueM1ixBAjw==
+	b=yYW1kG0aJnnOuCuPaD+WGahEhtFwmoV4rFiRq/kscgXZH06/hExjQZflfr0t8xb0l
+	 7E/CAajDdQ2t5WN2a9hPMxhIsj0Y+poZ8NxvArRjwUKUfirwsZVQhtW78XwcuUyOhc
+	 +MzWRVDW783ft6FSQ6JSFw7w+gjlVUdp9junjtrCPp1bqx031B+U9bCr/TJpUdmLs1
+	 y0pg23BGwAH7/tn4CzDUlJJCVRDxgoe7FOW8Lti7bJgDcm4HPQFeXiMQveICQ1niVS
+	 XUFJm4VRnUdMdDfVL4v7kyoDpxgVSare/HOTejyKNqHKDant9m3PGTvVJUS/5Y+BPU
+	 9zahiyfLXOZaQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D61C880E5; Sun, 16 Jun 2024 12:18:30 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 35CB98811A; Sun, 16 Jun 2024 12:18:45 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C01A87FC2
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 12:18:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A23B87FC2
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 12:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,19 +38,20 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4W289c1LwKz9ss5;
- Sun, 16 Jun 2024 12:18:28 +0200 (CEST)
-Message-ID: <b9b4e2a8-b624-461e-81ea-f9951ea5e898@denx.de>
-Date: Sun, 16 Jun 2024 12:18:24 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4W289s1KdDz9sSW;
+ Sun, 16 Jun 2024 12:18:41 +0200 (CEST)
+Message-ID: <bb903dc2-c995-4c05-9adc-2a37ccad361a@denx.de>
+Date: Sun, 16 Jun 2024 12:18:40 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 0/3] cyclic/watchdog patches
+Subject: Re: [PATCH 0/7] watchdog_reset cleanup
 Content-Language: en-US
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20240521084652.1726460-1-rasmus.villemoes@prevas.dk>
+Cc: Tom Rini <trini@konsulko.com>, Angelo Dureghello
+ <angelo@kernel-space.org>, Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Huan Wang <alison.wang@nxp.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+References: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240521084652.1726460-1-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,50 +70,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/21/24 10:46, Rasmus Villemoes wrote:
-> A bit of a mixed bag. I've been wanting to submit something like 3/3
-> for a while. So when I stumbled on Marek's patch
-> https://lore.kernel.org/u-boot/20240316201416.211480-1-marek.vasut+renesas@mailbox.org/
-> , I got reminded of that plan, and I think that patch could be more
-> readable if we adopt this model.
+On 5/28/24 13:13, Rasmus Villemoes wrote:
+> watchdog_reset is no more. That is, it is no longer called from
+> anywhere, so any leftover definitions are just dead weight, and
+> references in comments need to be updated.
 > 
-> While actually doing those mostly mechanical changes, I stumbled on
-> two separate issues that probably want fixing regardless of the fate
-> of 3/3.
+> I don't have access to any m68k, sh or powerpc boards. Only lightly
+> compile-tested.
 > 
-> Mostly just compile-tested, and now also checked that at least the
-> sandbox test runs succesfully, and that it builds both with and
-> without CONFIG_CYCLIC.
+> Apart from the two sh4 patches, these are independent of each other
+> and can be applied individually.
 > 
-> v4: Make sure there's only one definition of struct cyclic_info, previous
-> versions failed to move the full definition under #ifdef CONFIG_CYCLIC,
-> breaking builds with !CONFIG_CYCLIC.
-> 
-> v3: Also update the unit test according to the new API.
-> 
-> v2: Add R-bs from Stefan. Fixup whitespace in the doc/ part. Rebase
-> to current master (676903c1b97), fixing trivial conflict with
-> 301bac6047c8.
-> 
-> Rasmus Villemoes (3):
->    cyclic: stop strdup'ing name in cyclic_register()
->    wdt-uclass: prevent multiple cyclic_register calls
->    cyclic: make clients embed a struct cyclic_info in their own data
->      structure
+> Cc: Angelo Dureghello <angelo@kernel-space.org>
+> Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
+> Cc: Huan Wang <alison.wang@nxp.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 
 Applied to u-boot-watchdog/next
 
 Thanks,
 Stefan
 
->   board/Marvell/octeon_nic23/board.c |  9 ++++---
->   cmd/cyclic.c                       | 12 ++++------
->   common/cyclic.c                    | 24 +++++--------------
->   doc/develop/cyclic.rst             | 26 ++++++++++++--------
->   drivers/watchdog/wdt-uclass.c      | 38 ++++++++++++++++--------------
->   include/cyclic.h                   | 37 +++++++++++++++--------------
->   test/common/cyclic.c               | 19 +++++++++------
->   7 files changed, 84 insertions(+), 81 deletions(-)
+> Rasmus Villemoes (7):
+>    m68k: remove dead code
+>    wdt-uclass: watchdog_reset cleanup
+>    serial: ns16550: fix comment to mention schedule instead of
+>      watchdog_reset
+>    sh4: move reset_cpu() from watchdog.c to cpu.c
+>    sh4: remove watchdog.c file
+>    powerpc: mpc83xx: remove unused watchdog_reset() function
+>    powerpc: mpc85xx: remove dead watchdog-related code
+> 
+>   arch/m68k/cpu/mcf52x2/cpu.c    | 108 ---------------------------------
+>   arch/powerpc/cpu/mpc83xx/cpu.c |  15 -----
+>   arch/powerpc/cpu/mpc85xx/cpu.c |  31 ----------
+>   arch/sh/cpu/sh4/Makefile       |   2 +-
+>   arch/sh/cpu/sh4/cpu.c          |  10 +++
+>   arch/sh/cpu/sh4/watchdog.c     |  61 -------------------
+>   drivers/serial/ns16550.c       |   8 +--
+>   drivers/watchdog/wdt-uclass.c  |  19 +-----
+>   include/watchdog.h             |   3 -
+>   9 files changed, 17 insertions(+), 240 deletions(-)
+>   delete mode 100644 arch/sh/cpu/sh4/watchdog.c
 > 
 
 Viele Grüße,
