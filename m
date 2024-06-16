@@ -4,62 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12145C27C53
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 17:31:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2885AC27C53
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 20:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE2F7881BC;
-	Sun, 16 Jun 2024 19:31:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CF1CE880DB;
+	Sun, 16 Jun 2024 22:50:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Q1pRQqTX";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zrEv98MX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AABA87DCA; Sun, 16 Jun 2024 19:31:12 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 860B18811A; Sun, 16 Jun 2024 22:50:30 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 655C188189
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 19:31:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47E0787AD2
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 22:50:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-041-025.um47.pools.vodafone-ip.de
- [178.202.41.25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1293941FA9; 
- Sun, 16 Jun 2024 17:31:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1718559068;
- bh=CM4xTnbr/AUZS8Rffe5z0f1EQOCyRGHfbxHQrUK1WI8=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=Q1pRQqTXft8rKF5yq/IyAC4uy2yTM8WYKl8g/VCWaEZkmGFxghllrHz+9igKrpTkV
- R+0stnWFPFASijXZoGODAvDSjpPzo3WJnA2tqSXPlXKn800S/7im5ju/reTikXzp4S
- DMIlB9JggeQBiveq8Af3UZ8XDOvtKXm6/hVQELMSLwU7F2Ja+e72c5bfxdpC6ZeM/e
- 2YrYa05FV7iZNhjPtFbFF0uuacYzF5u2trWsBF4fsq0QRnX5wwS/BYZIQWmuqamEL/
- yO8ivjywoutrdC0wOz5f0SP0JCZOtCk28H6VuHc20v7+g4x02re7jPmjlyTZjMzg9w
- PD50X0KP6UT7w==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/3] efi_loader: avoid duplicate weak invalidate_icache_all()
-Date: Sun, 16 Jun 2024 19:31:05 +0200
-Message-ID: <20240616173105.7430-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
-References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
+ smtp.mailfrom=SRS0=5d3c=NT=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1718570990;
+ bh=GqfCrlDHLXT9BGTxb01TQd5NG81PrEciDasur8NYdXo=;
+ b=zrEv98MXsSP1sXIVQmQ1AQGDnyWAvsfUuCXers1hy3eD0cQh6Cv/kfNSty7lNfvEGJPMlZ79Y
+ yY7xTA15Mi+yf31j8MLZZyPbSvmtojB8I3xhiYKRy+DkFtvr37jgRdlUIuj7BgrDOGkKTIKGBnp
+ t8fsIHUdnS0Z+k+L4X3neDMEPYIofmMY0StBJeSrYrpRrHb5BZAsoWLUKg2t8It+L7SvAH9cwe4
+ Gc2MClknvgW8AdkFLhf5o6/OuEFgT4m/pEL1f3u3Ds4ctwWd4Kl4i+gKUTswlaIAY8bEXKuXx0a
+ sKnesJcN49IJDQNc5KbEtKEff3bJREFAWSx6o5TEJtMA==
+Message-ID: <40658f45-445c-43ad-841f-afcdd3a565bc@kwiboo.se>
+Date: Sun, 16 Jun 2024 22:49:38 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] phy: Extend generic_setup_phy() with PHY mode and
+ submode
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>, Fabio
+ Estevam <festevam@gmail.com>, Fabrice Gasnier
+ <fabrice.gasnier@foss.st.com>, Mathieu Othacehe <othacehe@gnu.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Sean Anderson <seanga2@gmail.com>, Simon Glass
+ <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, Tim Harvey
+ <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, Xavier Drudis
+ Ferran <xdrudis@tinet.cat>, u-boot-qcom@groups.io
+References: <20240616150426.36338-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240616150426.36338-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 666f4fe89b43c39ccd18ec6c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,68 +80,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If multiple weak implementations of a weak function exist, it is unclear
-which one the linker should chose. cmd/cache.c already defines a weak
-invalidate_icache_all().
+Hi Marek,
 
-We don't need a call to invalidate_icache_all() on x86.
-ARM, RISC-V, and Sandbox provide an implementation.
+On 2024-06-16 17:04, Marek Vasut wrote:
+> Extend generic_setup_phy() parameter list with PHY mode and submode and
+> call generic_phy_set_mode() in generic_setup_phy(), so the generic PHY
+> setup function can configure the PHY into correct mode before powering
+> the PHY up.
+> 
+> Update all call sites of generic_setup_phy() as well, all of which are
+> USB host related, except for DM test which now behaves as a USB host
+> test.
+> 
+> Note that if the PHY driver does not implement the .set_mode callback,
+> generic_phy_set_mode() call returns 0 and does not error out, so this
+> should not break any existing systems.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> Cc: Jonas Karlman <jonas@kwiboo.se>
+> Cc: Mathieu Othacehe <othacehe@gnu.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
+> Cc: u-boot-qcom@groups.io
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/phy/phy-uclass.c        | 7 ++++++-
+>  drivers/usb/host/ehci-generic.c | 2 +-
+>  drivers/usb/host/ehci-msm.c     | 2 +-
+>  drivers/usb/host/ehci-mx6.c     | 2 +-
+>  drivers/usb/host/ehci-pci.c     | 2 +-
+>  drivers/usb/host/ohci-generic.c | 2 +-
+>  include/generic-phy.h           | 5 ++++-
+>  test/dm/phy.c                   | 8 ++++----
+>  8 files changed, 19 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
+> index acdcda15b5b..bbaf95112c5 100644
+> --- a/drivers/phy/phy-uclass.c
+> +++ b/drivers/phy/phy-uclass.c
+> @@ -508,7 +508,8 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk)
+>  	return ret;
+>  }
+>  
+> -int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
+> +int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
+> +		      enum phy_mode mode, int submode)
+>  {
+>  	int ret;
+>  
+> @@ -520,6 +521,10 @@ int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
+>  	if (ret)
+>  		return ret;
+>  
+> +	ret = generic_phy_set_mode(phy, mode, submode);
+> +	if (ret)
+> +		generic_phy_exit(phy);
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/efi_image_loader.c | 13 +++++++------
- lib/efi_loader/efi_runtime.c      |  7 ++++++-
- 2 files changed, 13 insertions(+), 7 deletions(-)
+This should probably also return ret and not continue with power_on.
 
-diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-index 60424360328..45dc5b6b244 100644
---- a/lib/efi_loader/efi_image_loader.c
-+++ b/lib/efi_loader/efi_image_loader.c
-@@ -173,11 +173,6 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
- 	return EFI_SUCCESS;
- }
- 
--void __weak invalidate_icache_all(void)
--{
--	/* If the system doesn't support icache_all flush, cross our fingers */
--}
--
- /**
-  * efi_set_code_and_data_type() - determine the memory types to be used for code
-  *				  and data.
-@@ -986,7 +981,13 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
- 	/* Flush cache */
- 	flush_cache((ulong)efi_reloc,
- 		    ALIGN(virt_size, EFI_CACHELINE_SIZE));
--	invalidate_icache_all();
-+
-+	/*
-+	 * If on x86 a write affects a prefetched instruction,
-+	 * the prefetch queue is invalidated.
-+	 */
-+	if (!CONFIG_IS_ENABLED(X86))
-+		invalidate_icache_all();
- 
- 	/* Populate the loaded image interface bits */
- 	loaded_image_info->image_base = efi_reloc;
-diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 011bcd04836..05369c47b01 100644
---- a/lib/efi_loader/efi_runtime.c
-+++ b/lib/efi_loader/efi_runtime.c
-@@ -783,7 +783,12 @@ void efi_runtime_relocate(ulong offset, struct efi_mem_desc *map)
- 	lastoff = offset;
- #endif
- 
--        invalidate_icache_all();
-+	/*
-+	 * If on x86 a write affects a prefetched instruction,
-+	 * the prefetch queue is invalidated.
-+	 */
-+	if (!CONFIG_IS_ENABLED(X86))
-+		invalidate_icache_all();
- }
- 
- /**
--- 
-2.43.0
+If possible please also add a test case for this scenario.
+
+Regards,
+Jonas
+
+> +
+>  	ret = generic_phy_power_on(phy);
+>  	if (ret)
+>  		generic_phy_exit(phy);
+> diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
+> index 23c3ed25554..1ae3619ce25 100644
+> --- a/drivers/usb/host/ehci-generic.c
+> +++ b/drivers/usb/host/ehci-generic.c
+> @@ -94,7 +94,7 @@ static int ehci_usb_probe(struct udevice *dev)
+>  	if (err)
+>  		goto reset_err;
+>  
+> -	err = generic_setup_phy(dev, &priv->phy, 0);
+> +	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>  	if (err)
+>  		goto regulator_err;
+>  
+> diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
+> index a081f71b187..b0c060b8173 100644
+> --- a/drivers/usb/host/ehci-msm.c
+> +++ b/drivers/usb/host/ehci-msm.c
+> @@ -56,7 +56,7 @@ static int ehci_usb_probe(struct udevice *dev)
+>  	hcor = (struct ehci_hcor *)((phys_addr_t)hccr +
+>  			HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
+>  
+> -	ret = generic_setup_phy(dev, &p->phy, 0);
+> +	ret = generic_setup_phy(dev, &p->phy, 0, PHY_MODE_USB_HOST, 0);
+>  	if (ret)
+>  		return ret;
+>  
+> diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+> index 31cd8a50f4a..a93fa5d5455 100644
+> --- a/drivers/usb/host/ehci-mx6.c
+> +++ b/drivers/usb/host/ehci-mx6.c
+> @@ -703,7 +703,7 @@ static int ehci_usb_probe(struct udevice *dev)
+>  	usb_phy_enable(ehci, priv->phy_addr);
+>  #endif
+>  #else
+> -	ret = generic_setup_phy(dev, &priv->phy, 0);
+> +	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>  	if (ret)
+>  		goto err_regulator;
+>  #endif
+> diff --git a/drivers/usb/host/ehci-pci.c b/drivers/usb/host/ehci-pci.c
+> index 572686580cd..8d05b14e898 100644
+> --- a/drivers/usb/host/ehci-pci.c
+> +++ b/drivers/usb/host/ehci-pci.c
+> @@ -30,7 +30,7 @@ static int ehci_pci_init(struct udevice *dev, struct ehci_hccr **ret_hccr,
+>  	int ret;
+>  	u32 cmd;
+>  
+> -	ret = generic_setup_phy(dev, &priv->phy, 0);
+> +	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>  	if (ret)
+>  		return ret;
+>  
+> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
+> index f1325cd4953..cc44226f5e0 100644
+> --- a/drivers/usb/host/ohci-generic.c
+> +++ b/drivers/usb/host/ohci-generic.c
+> @@ -50,7 +50,7 @@ static int ohci_usb_probe(struct udevice *dev)
+>  		goto reset_err;
+>  	}
+>  
+> -	err = generic_setup_phy(dev, &priv->phy, 0);
+> +	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>  	if (err)
+>  		goto reset_err;
+>  
+> diff --git a/include/generic-phy.h b/include/generic-phy.h
+> index eaab7491660..47962023236 100644
+> --- a/include/generic-phy.h
+> +++ b/include/generic-phy.h
+> @@ -415,10 +415,13 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk);
+>   * @dev:	The consumer device.
+>   * @phy:	A pointer to the PHY port
+>   * @index:	The index in the list of available PHYs
+> + * @mode:	PHY mode
+> + * @submode:	PHY submode
+>   *
+>   * Return: 0 if OK, or negative error code.
+>   */
+> -int generic_setup_phy(struct udevice *dev, struct phy *phy, int index);
+> +int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
+> +		      enum phy_mode mode, int submode);
+>  
+>  /**
+>   * generic_shutdown_phy() - Power off and de-initialize phy.
+> diff --git a/test/dm/phy.c b/test/dm/phy.c
+> index d14117f6f7a..a90881b12ab 100644
+> --- a/test/dm/phy.c
+> +++ b/test/dm/phy.c
+> @@ -243,20 +243,20 @@ static int dm_test_phy_setup(struct unit_test_state *uts)
+>  					      "gen_phy_user", &parent));
+>  
+>  	/* normal */
+> -	ut_assertok(generic_setup_phy(parent, &phy, 0));
+> +	ut_assertok(generic_setup_phy(parent, &phy, 0, PHY_MODE_USB_HOST, 0));
+>  	ut_assertok(generic_shutdown_phy(&phy));
+>  
+>  	/* power_off fail with -EIO */
+> -	ut_assertok(generic_setup_phy(parent, &phy, 1));
+> +	ut_assertok(generic_setup_phy(parent, &phy, 1, PHY_MODE_USB_HOST, 0));
+>  	ut_asserteq(-EIO, generic_shutdown_phy(&phy));
+>  
+>  	/* power_on fail with -EIO */
+> -	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2));
+> +	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2, PHY_MODE_USB_HOST, 0));
+>  	ut_assertok(generic_shutdown_phy(&phy));
+>  
+>  	/* generic_phy_get_by_index fail with -ENOENT */
+>  	ut_asserteq(-ENOENT, generic_phy_get_by_index(parent, 3, &phy));
+> -	ut_assertok(generic_setup_phy(parent, &phy, 3));
+> +	ut_assertok(generic_setup_phy(parent, &phy, 3, PHY_MODE_USB_HOST, 0));
+>  	ut_assertok(generic_shutdown_phy(&phy));
+>  
+>  	return 0;
 
