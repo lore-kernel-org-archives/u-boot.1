@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C05C27C53
-	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 17:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A75C27C6E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Jun 2024 17:31:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74B23878ED;
+	by phobos.denx.de (Postfix) with ESMTP id D281888167;
 	Sun, 16 Jun 2024 19:31:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="wMiCtn2+";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZI+dRJGE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C2FE88122; Sun, 16 Jun 2024 19:31:09 +0200 (CEST)
+ id 1327D88131; Sun, 16 Jun 2024 19:31:10 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 639108812B
+ by phobos.denx.de (Postfix) with ESMTPS id 98FA988167
  for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 19:31:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-041-025.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 3EB5140F7C; 
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id CB6773F2E8; 
  Sun, 16 Jun 2024 17:31:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1718559066;
- bh=1eapSsFd5zDuuemIQfOOIZJOtVCHkhaQAjVR1UtTh84=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=wMiCtn2+uAZiXCHVMSbaWWSpJY8PtXebiTfS7p4ZWkhCVqm4vRqIlRy8A1chkI3u9
- /NPNZf67XnlDNbvrwEdPdyQBGERU9d26x6X/PdhBqUt1X31uLh7yDJbUtGFFidrcyA
- 3SmhZM8wjforKY9bLTmbiwJBDwdGHyREsIKBfcIxUkvs9YEO5Sg33DkpJs24CwYytl
- S0p06W6ZTHqjjKwKQgZiOei8rtSfpWaSplI3zUNQUZiJrH/9uKNrE3b20ZTO+gsN3M
- gdjZfMvNZke13QDYUpPJvibxhZfpz+sv8FnYWm14AEe3MmXSVLLcxBgnRlvOYTWcVv
- i3GtRQw0ZgYRg==
+ s=20210705; t=1718559067;
+ bh=oPyTy069VwLOb74GOipUcO/4wICa0Cr2EphXAg3D43I=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=ZI+dRJGE6JS5sZNtN2hkbCvs8erP+UKlOmpuOP4f0x9roUcvm7fH+FdYXzHgOI/hq
+ JQk0AsC3Tb21mJf38ATOEjTO6dhRrgHoHrmNgWTq//KBeKQ7k1RfTjF0rX1OVU58zW
+ wLt/7Rf9DV/rj9P5R4OPMorvPUYjPVOddLl38XLPNvJO0j5LtoDbeRoyw7OZatT9Yj
+ vlQ9dbz/ZC3coQuowf9EdPSYqjYWtC4CvXx1dRGB85K8jkQSWbq5fc7FO+aMy6qjh6
+ TT599btsxbUg+UNNn5GDX2SAoAXY4Ars2otoFhZN6KGDDxwngXxf4ZjGMidDgp+Lwj
+ Uw0cgZoElLXEA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -51,10 +52,12 @@ Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Sam Edwards <CFSworks@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/3] cmd: avoid duplicate weak functions
-Date: Sun, 16 Jun 2024 19:31:02 +0200
-Message-ID: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/3] cmd: avoid duplicate weak flush_dcache_all()
+Date: Sun, 16 Jun 2024 19:31:03 +0200
+Message-ID: <20240616173105.7430-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
+References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,30 +77,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 If we have multiple weak implementations of functions, the linker might
-choose any of these.
+choose any of these. ARM and RISC-V already provide a weak implementation
+of flush_dcache_all().
 
-ARM and RISC-V already provide a weak implementation of flush_dcache_all()
-but cmd/cache.c provides another implementation. Add an #ifdef to avoid
-the duplication.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/cache.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-The EFI sub-systems uses invalidate_icache_all() after loading binaries.
-Both the EFI sub-system and cmd/cache.c provide a weak
-invalidate_icache_all() function. Remove the EFI instance.
-
-For ARM11 functional implementation of invalidate_icache_all is missing.
-Add it.
-
-Heinrich Schuchardt (3):
-  cmd: avoid duplicate weak flush_dcache_all()
-  arm: implement invalidate_icache_all on ARM11
-  efi_loader: avoid duplicate weak invalidate_icache_all()
-
- arch/arm/cpu/arm11/cpu.c          | 12 ++++++++++++
- cmd/cache.c                       |  3 +++
- lib/efi_loader/efi_image_loader.c | 13 +++++++------
- lib/efi_loader/efi_runtime.c      |  7 ++++++-
- 4 files changed, 28 insertions(+), 7 deletions(-)
-
+diff --git a/cmd/cache.c b/cmd/cache.c
+index 0254ff17f9b..16fa0f7c652 100644
+--- a/cmd/cache.c
++++ b/cmd/cache.c
+@@ -52,11 +52,14 @@ static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return 0;
+ }
+ 
++/* ARM and RISC-V define a weak flush_dcache_all() themselves. */
++#if !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
+ void __weak flush_dcache_all(void)
+ {
+ 	puts("No arch specific flush_dcache_all available!\n");
+ 	/* please define arch specific flush_dcache_all */
+ }
++#endif
+ 
+ static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		     char *const argv[])
 -- 
 2.43.0
 
