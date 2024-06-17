@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49706C2BA15
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 14:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09631C27C79
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 14:44:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F95B88365;
-	Mon, 17 Jun 2024 16:40:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 55ECA88315;
+	Mon, 17 Jun 2024 16:44:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IZc69e/x";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qb5OH7ek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1484D88349; Mon, 17 Jun 2024 16:40:19 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 88AAC88315; Mon, 17 Jun 2024 16:44:40 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9DD888208
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 16:40:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25F8088283
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 16:44:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5bdbbc37664so1852174eaf.2
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 07:40:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6b2c6291038so13842266d6.0
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 07:44:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718635215; x=1719240015; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/DxtTYOw9GcJD97o97SCNtvhbKAScviwDaQWoEZq74c=;
- b=IZc69e/x81rHKb7+fsdgi2oLYLqBWvjc9YUSbIYOucJIF314hMC0H9WmsiKJctqumq
- Y7Mma0gLuURUs9xS2pB2+xan0uVG1fdbhFBIS+QIK5tqRep+q7b2rfrJPxY6nukzjYnD
- txyV8rPHY9bKpdO8AHAPCSVRylxy/XIMURHTw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718635215; x=1719240015;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1718635477; x=1719240277; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/DxtTYOw9GcJD97o97SCNtvhbKAScviwDaQWoEZq74c=;
- b=CY+BSLiSfYI229Tm6Seq7ejT3Qv2fBuvdESn3siTbX6z5Uyd5uwWU91bDZRhJVnM4w
- uKyz07P5vjwwf+eVSHq/OzUIx/R54iVAcLxARTQRXO5OClri2tubaYJxefJ4WuYy+nsy
- +YEuarbT+Y5BYEBiAbvnegCCCrUu81odBb/6RlCbRWC8MzAyXHa6+CTh8jI0qWW/ILY0
- OZn6VWjkCdEAUS/u/MYarkk5ytXu1ByZas4CZ/E5oiqt4ljHxoJ0svDM8T4+6wBoFshT
- jdLAvxb9NwK1BrL8jQUopmz8wfeckxySZrb9FhLf3aIlnci7Gox7kpL+d4TfgeBl+jqe
- gbIA==
-X-Gm-Message-State: AOJu0Yw2GCD4MDTJqjEqAeatz9qGOD2ucAE+Zy+yEcGdqhltvX0iLzbW
- 0hAr3pZUuWNLab/A5tsVsMJEsNS1MxVoD+Hr7LbvWAQXDqKzUxFEZRFA5UxaiNk=
-X-Google-Smtp-Source: AGHT+IGaJCZZbp3wtaSlhf9Rh9Mmy1+35OkSXw8X/mAmMAyKC+n0TRD81ZIOmFNA4POU/8Q1JExLjg==
-X-Received: by 2002:a4a:3107:0:b0:5bd:c3a0:cbff with SMTP id
- 006d021491bc7-5bdc3a0cc38mr4665221eaf.7.1718635215432; 
- Mon, 17 Jun 2024 07:40:15 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5bd5de7132csm1081180eaf.4.2024.06.17.07.40.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jun 2024 07:40:15 -0700 (PDT)
-Date: Mon, 17 Jun 2024 08:40:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Dahl <ada@thorsis.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Daniel Schultz <d.schultz@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: Pull request efi-2024-07-rc5-2
-Message-ID: <20240617144013.GX68077@bill-the-cat>
-References: <b7a5261b-f94f-4d72-a046-09b0e181ce4d@gmx.de>
+ bh=RO2ACAJ5P/tRU1JxhInJhKUXvFhGKWnQi/zX/3S8RyE=;
+ b=Qb5OH7ekTVzf0CnSC0EFdwvE5wYN26a+sTVilJmARpf33CsB0VUtlpz2rKDcZQW4Cl
+ Y/9N70D1aUoeZhL9Cz2XgNsO0C8i0efpLYOfrtTx4Rhr41kGkBKfJ3ewGSsLF85nTLYp
+ PSKcv+AlCIPNxuxDItsvVTFDg7i8V6yICAqp+LssBnN8NAG2sBM/LBRZCzxHdwZSyTIk
+ DL1BipgzUwCA0MQnTK5YNSpRo0gNiKOzgTiheZbP8GDBIsIjqmUZ2hVVyPYjCINZGdTG
+ RccQ1JdInRK40GH4o0bZwuvtU1A7EtMlAtMQfHjebiwK7WiYBU458GXnHZtJ3lWRbNrV
+ jPgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718635477; x=1719240277;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RO2ACAJ5P/tRU1JxhInJhKUXvFhGKWnQi/zX/3S8RyE=;
+ b=Wgvbfx5qj1UM7GvlgB+ZwyWM4N2cczEc/SrAsDSqiYgDsVxpbkDvfUYjL8BrlFHyOR
+ /gv9nlp5M62N77rdKNV1rmIOCzi+aeHBjcGfH2A7f0XD/8X9KHAQtPMDIPWqMvNUrMBt
+ r5E5/Zu9FlABQu8AMYCs8xJsN1Qv0E9yfxKJXxM3BRaeao6oCl+zZevslcDsMEKMqf/w
+ mgeTJKibFydQtOpCm6j9GygWu+Dfl/J66HxOZ0iEcjkQ9u7sXBW0W69a9G3n7yfjOBvy
+ k3pagzOBqrMLK9iwtugPn2mDfMerL4Q3IFqq42ZcaX3f6pU8e/on/xDZoY9hBB4fddWu
+ gUEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhCcMfgcn8KTBHFwJIzrkEfHPgwqQcGWr8EGnH4YS8L4kR6wZKD2hPizDatdY8Lu/Benx/C2ZCQfFyybCsODtFyrk+9Q==
+X-Gm-Message-State: AOJu0YxntQ9VgGVlsetKeLIk61qNww2sURK7isILSvmrmasUsvXnyPnm
+ 37j0OCG9/d9ZNO7tcIkJz14+N8qQWInr+BMHBTqtrRWzRmcFfjU1DdCz87JzjzOnVXOL3o2cs2U
+ mcnwthueYb2WkzefzqQYa3xPpS0Y=
+X-Google-Smtp-Source: AGHT+IEDyyuo1F57o1N96L79Ckw8Zn7qhAhrumjq1d9CYF1n1fHpx6KoJd3FKWFWeoS1BOVlfIejzBoW4LpWoNlaMtI=
+X-Received: by 2002:a05:6214:8c5:b0:6b0:6ad8:ebc0 with SMTP id
+ 6a1803df08f44-6b2af2ff4dcmr168762986d6.29.1718635476915; Mon, 17 Jun 2024
+ 07:44:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zE6+pW8H5LoGl5XH"
-Content-Disposition: inline
-In-Reply-To: <b7a5261b-f94f-4d72-a046-09b0e181ce4d@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240613080604.3828083-1-d-gole@ti.com>
+ <CAFLszTji3HoiGk46hRsAka=PT-zf5suC9iCei5SEsC8QJdE5Jg@mail.gmail.com>
+In-Reply-To: <CAFLszTji3HoiGk46hRsAka=PT-zf5suC9iCei5SEsC8QJdE5Jg@mail.gmail.com>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Mon, 17 Jun 2024 09:44:09 -0500
+Message-ID: <CAOCHtYhve9HNpB5kbdKrqQyHy5hVYLc1fWq_jHSeHQD7iCPPCA@mail.gmail.com>
+Subject: Re: [PATCH] board: beagleplay: Fix the bootpart to pick from root
+ partition
+To: Simon Glass <sjg@chromium.org>
+Cc: Dhruva Gole <d-gole@ti.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, 
+ Vibhore Vardhan <vibhore@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Nishant Menon <nm@ti.com>, c-shilwant@ti.com, 
+ m-chawdhry@ti.com, vigneshr@ti.com, Judith Mendez <jm@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +95,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Jun 17, 2024 at 8:53=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Dhruva,
+>
+> On Thu, 13 Jun 2024 at 02:06, Dhruva Gole <d-gole@ti.com> wrote:
+> >
+> > The Kernel Image and DTB files are supposed to be picked from the rootf=
+s
+> > of the SD Card, this fails in legacy boot flow because bootpart is set
+> > to 1:1. Fix it.
+> >
+> > Fixes: a200f428b5b21 ("board: ti: am62x: Add am62x_beagleplay_* defconf=
+igs and env file")
+> > Signed-off-by: Dhruva Gole <d-gole@ti.com>
+> > ---
+> >  board/beagle/beagleplay/beagleplay.env | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+>
+> What is the legacy boot flow?
 
---zE6+pW8H5LoGl5XH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Here's the fun part.  From BeagleBoard.org, all BeaglePlay's
+manufactured by Seeed has the eMMC booting via extlinux.conf.  All
+BeagleBoard.org images use extlinux.conf by default for this hardware.
 
-On Sun, Jun 16, 2024 at 12:22:32PM +0200, Heinrich Schuchardt wrote:
+Dhruva's just looking to make sure it works with TI's currently
+released sdk's. (So last year, and this quarter's releases..)
 
-> Dear Tom,
->=20
-> The following changes since commit 2248c96ea1cf0b65377040d9f87ce7d8cf534c=
-63:
->=20
->   Merge tag 'u-boot-stm32-20240614' of
-> https://source.denx.de/u-boot/custodians/u-boot-stm (2024-06-14 08:13:54
-> -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-07-rc5-2
->=20
-> for you to fetch changes up to d1499a8b3fa30e4d835a139e958fc7bec96af412:
->=20
->   doc: Fix link reference to general verified boot docs (2024-06-16
-> 10:37:10 +0200)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21141
->=20
-
-Applied to u-boot/master, thanks!
+Regards,
 
 --=20
-Tom
-
---zE6+pW8H5LoGl5XH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZwSs0ACgkQFHw5/5Y0
-tyxv5wv/RlNqosS/9aB9jQr5trHnxb5G1ZwyqbGaXEN/gYaSP707zy+sPUniVrIm
-5G4EPXnshOjgCDTpnFsjvzVJS8S7JX7qYrg+GwbXdxbdlRQ+o8kbgqT5bewvsJo6
-aEClRk3lfzELTxQKThNJzfuCODH8dU7LvGlnNJCVj5gVtvnD4P/WjvZliriOqM2S
-Qz3JXaoQ3K4eNUFDnhK/gXxhfOc4xySpsHchTDfUSglJW3htWx4c+Shxa3TWCKmm
-QpZ47lv3q7m24H9zOoHGWZ0wpxj4Y6mpr1LkWk6JomEeAZhyWViT16hOjkmknIwG
-FKeaO4TjZzNcJIhDSQ1g8bGrQrpcqbG7wh58hY4GlljswJ6SY/MZpnbx1X8vnsrk
-UAA7hFoqy9/ZV1QBzkadKknj6m13hTchkVan1tIkneypuOqLxH6vQ4tGR1ag1G7B
-xn/g2JjJ7yXhS/6Tifyj+Q/HfwPaVR41AxWiNgEp5ecAi0sQ6XcLAmEGOAj0yvML
-HcZqmExL
-=MMBG
------END PGP SIGNATURE-----
-
---zE6+pW8H5LoGl5XH--
+Robert Nelson
+https://rcn-ee.com/
