@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CB59C27C6E
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 08:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C87C27C6E
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 08:33:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B0FF882B7;
-	Mon, 17 Jun 2024 10:32:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C7F6882E2;
+	Mon, 17 Jun 2024 10:32:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="obGDa3RG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDZCtTnS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C91A98829B; Mon, 17 Jun 2024 10:32:55 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 3343787D14; Mon, 17 Jun 2024 10:32:56 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C501987D14
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:32:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B1E088025
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:32:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57c714a1e24so4531668a12.2
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:32:52 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-57c714a1e24so4531681a12.2
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:32:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718613172; x=1719217972; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718613173; x=1719217973; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=INgarZmOY2xfMWAQjWPZcWwdrhx2uuVjbFGM7zE7ESU=;
- b=obGDa3RGpKb+dIhOSlzEnYET+ZCSrwi8Pn8AkIMvyGY0wW6LnMOAi5XUHaZ8Bsqt4I
- EaAuiKA0zTS+y2ggxMpokzWY5/xezfoBy4h5uBIp/7eNVQQmS8SZUZGThmSkc6CtnzLC
- g8tp50t1pcGIFkHFK7M7jRX4GLM+URECVokYfUI71XYPDmRGkAuW0iXAU+MGDmAe4Xnz
- Gdk4PPei3HVlN5uQfIA0xgHCSUWXBZC6VNkSAV0WD0wc8oleSLNHL4DevJSLMLl6SSMH
- S+qNgrFyLhhCAs07kbB3uQFQObcLj43LnlsuTaBI/ycx98hTReP7fX3C+x5LkabfGDv6
- N9ew==
+ :reply-to; bh=3cLV3mftW+XrfPFRKKT2WxBzc4kXX/qxM8JFx7nKA+0=;
+ b=PDZCtTnSRy3/zE8tiMOGIzTW78bozLdsHcCBLxeG2pWZrRxqY7A1ezMY8Q7jLmFgfM
+ H/SacPgdCotMErLNF5D12jm8y77JppnJR2dX8u7+pFNYpXdlWkuasqF1vw5+pOJ0hdiN
+ kb7sas9ViHq2bwm8ptFT6jBgtoH56iseN+ohrgeclqNmySInHjZ2fznaeYxTKBTb+Tbt
+ /LYVIDVN859wrm9BxnqAlVk6gnoT6OHRL1QBzluOF3rj7NB67tG+v1E66KWXFuqZZ6Bc
+ iz9MFSQA+sReJN5D+NAV6cqsbBAnmD+d/eevRwrZvEAYCqRanSZ2XpvHkpgjxwkrQ1JM
+ MNzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718613172; x=1719217972;
+ d=1e100.net; s=20230601; t=1718613173; x=1719217973;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=INgarZmOY2xfMWAQjWPZcWwdrhx2uuVjbFGM7zE7ESU=;
- b=oVtKnAVbaYqSjxqHDCOUnaeq30kZasOub4HE3oboThUiljQ0Y/FEizkRpIHeJn++Xj
- 9Fi7PghjuQs0OremxkiU5Z5wE4CClxRp3Wz+R3wLZZWcP95qMgG/TZ3T7qWDHNyNqtM+
- vtMU0eotY3Ji1EqGwu4DAS4Tm8t7f+KBE9h0yE1fZqj4qZbW6Ph0NwGb96rlo9FjzCkO
- F+grXWshLg2gM/bHxwLw11IskiMvas6fZbOPhYgsPvf/UJJOzdf1VVT5kdqCFggIaU1d
- hHmjzT1+DSzN7f3CyRzaLTJu45xPeSX6bB9RDVaCI8GL2GUennQquzbm80SThE55YtiO
- KdPw==
-X-Gm-Message-State: AOJu0YykjwGGAd1WQv7m76UVtx3JPyrqPzkH503qi4KHulg+nro+xdGg
- WxJrEbfUS4qOoT6/YtY9Yz4CkwasgRJ3Ib1cP0v1Ez5VK5m1nkcw5KOsY5HcS0Q=
-X-Google-Smtp-Source: AGHT+IHl9U0WGR3MJQL2NrrBTEFp/s+TZMii2hn9vGldu3RTAWyiTL23ppqI1ICiuLdXnnzx69jxWw==
-X-Received: by 2002:a50:ab53:0:b0:57a:2ccb:b3e5 with SMTP id
- 4fb4d7f45d1cf-57cbd8e8c1dmr4440269a12.42.1718613171845; 
- Mon, 17 Jun 2024 01:32:51 -0700 (PDT)
+ bh=3cLV3mftW+XrfPFRKKT2WxBzc4kXX/qxM8JFx7nKA+0=;
+ b=YBnf2uxqrjMY29Y6S/8a5D/qeKLS3pJ6VD4UljCVAdx8MfqmnGajqQa/5XZNRMZC3U
+ iMt3WAqBfS7IYP2zlgLPSCfeePBxiO6/hO3B7d8xuycdzUvAUxvQsK8E/hJcK24PdMf6
+ tmERFSgCf8OUuaaZlgjCoP1iKOvefOdnHPTOfZ6FFVhoVe7HpIoAZMesduJ2WILM+ol/
+ Cn7kolOFx7DrvFA4YGrPKqSIG83vIGTb0+AzvCtXK0vW1av9l8FlYmgEeDcXWpvWCqv+
+ XFKEJGwM6dzVdY+FZwhVCThWaaidKKWMNwxgdyXahkMBocoScFAPOmjzjeE6e2FMng1Q
+ 0Khg==
+X-Gm-Message-State: AOJu0YzK+2OpfvAbkig1kM2hlM+EjzbCEFJWWDWeAfrbxXy5L3FimACa
+ YLwGriJU5jfN5A7wBvnrooKM1RPY5M10s8GoMlPzd5sCQH9WGalycNdWHuJEkf8peai91X1Mpp3
+ MhuiIQA==
+X-Google-Smtp-Source: AGHT+IG2XDAg8zjwmFYRG69nI8Ly8mwTGa+5U+fuB4oQnM+xSiokowueyXsfarjysRgMqCTY9OaUuw==
+X-Received: by 2002:a50:8d4c:0:b0:57c:bd49:9969 with SMTP id
+ 4fb4d7f45d1cf-57cbd8e73f4mr5884663a12.39.1718613172875; 
+ Mon, 17 Jun 2024 01:32:52 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::52af])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57cb72cdfd0sm6110031a12.5.2024.06.17.01.32.50
+ 4fb4d7f45d1cf-57cb72cdfd0sm6110031a12.5.2024.06.17.01.32.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jun 2024 01:32:51 -0700 (PDT)
+ Mon, 17 Jun 2024 01:32:52 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 17 Jun 2024 10:32:47 +0200
-Subject: [PATCH 2/3] soc: qcom: rpmh and cmd-db drivers
+Date: Mon, 17 Jun 2024 10:32:48 +0200
+Subject: [PATCH 3/3] power: regulator: add qcom-rpmh-regulator
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+Message-Id: <20240617-b4-qcom-rpmh-v1-3-bd2336923e0a@linaro.org>
 References: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
 In-Reply-To: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -78,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=44546;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=18195;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=e9QZNZFKh+999D8Wed87rNIrZ+A0RL9l+/delaBbi5I=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmb/Swu613iTrV34JPxp30bvijOlFMqPgWy2Bim
- kaWAuPHmCOJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZm/0sAAKCRAFgzErGV9k
- tnIAD/9s0nVqiGmr9bdEsagZrWnLAumJmBqUGfEkspVY6dDGd2RDWFkvmj20mzw8Oxvpkp/SmXk
- yj50NV/21aVDmEulJb1YlglEF/WS7SaJp1flo3lR/5yPDSTJmPbOZENq+d1TW/MC13zIn9sM10B
- GDC+eZ1l867WqRNoCP4L/7MXoJGUtJ1tugfbSD7auBYIJiYJVXRW6IFwXVGh1PMd6CQtUCgLXnr
- XD3LYCnukoQSpj6vFZHPG3kv1Uwp0sb5p+3SK9izhwL1RVm1wcVvXdA87SwknUVznQDa+x12b0C
- AmdPSQdDuwb1yRkepVC6WjiWXMYJvFWNLJhlR15GMMfMGr6ut80U9ZGom3A+hiizUWYqZC3NuiF
- Hqc2GIQmogPmdJwjbesaulijQ4kDyfRd6mOUtw/bGLuHRCxIYQHn/ewwIz/eF1vAcY0arTbL9k0
- JWdBzXA1j8akRVfq2UzBUdvnUqwg2atluQq5po+Gl7IS3bUEaTKH/sEbE1lXFpH5OUCSs5L9Y3y
- sukWbvkINTqVqTT5xs+DxR3P8xQ51WprK7Ljxx9T5Ll5Cb6lsTldyD1GS5m2Sn2q8cVF9FMwlVc
- 5dK/n1kn4PchwywZy3DoP4anBoEOzPl/c2eyfVWKAA7wG9isSKoCYG7q+P9i6rXJmGMhqNXnN4C
- hYTVC1GN/WHG1ww==
+ bh=6LUnUznz/+7qbhBkOR6GKNmeXqffzN0DFF9cMYDRxM4=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmb/SwVSQ0nZNdUbAd3jD6bXjtjjBl/sOsGFFKu
+ ObP0DewY56JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZm/0sAAKCRAFgzErGV9k
+ tivfEACNNdUfc2RtkRmB4fnZdpc1M5xUSTgL9HuehH0Gvw/3PZAFIZtWCkF9r1hsOb59rMkjaDk
+ wASLz0cZehyEmGUDH8s5zOOr1kkytMVwLkEZxA2uQqTAypOD/Q5YI2jdqXKf3YvCjaLOCRAJG5g
+ 4hffqjrJB2QfcutgedANtiL9xvWoLmKKwQUc+QUHMg3YeGrzEe26oDD6+s7WAtvOZ1US1Q+oIBP
+ hRuZrV9QpgVjvyCZR9V+U9q8DzbnM9y0AOWIe0sTTdNFZ3AWXrUhh4xmD8QEYYNm0rwnsepSTIm
+ KxsX2GAeVD2IvzNVZXDKNYQ8cWym0pYCwx/lrVppcr788DobOG7ZRjHviEagbfR7+FovTR2UyfP
+ zeecDTO+JX0uw5H2uS7ESRqr+0Xbpwik+0CaHLBsW0x5CV3Q4n7tv2YpDKUnaK52geHuNqfH3OD
+ 0HGkrro9nBGDDyQUvDsOjR9LrpR6vUh00Njbedr1aX9BlUhWcFIAdYTU+sxtXSbl7vCz4y6r68H
+ QTO76atuSpG/un1mLA23QrQ6fSsGd44s2g+qNjwVb9j4uukKmHq4H+1YlTu5U+66tZLip/7kV1i
+ 5+vSyQjgziZmQ3m+SvKU+XDSZb30/ZI4f/f/m8vNFoullYIH+WovalQiSGWeWGsJYCxZ8K0MjJI
+ 1mb2+lD2kK5dPJQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,1404 +112,592 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce two Qualcomm SoC drivers, the RPMh and cmd-db. RPMh is a the
-name for the second generation Resource Power Management hub on Qualcomm
-SoCs. Most core regulators have to be controlled via this hub.
-
-The cmd-db is a region of memory which contains offsets and data about
-how to communicate with the RPMh.
+Add a regulator driver for controlling the PMIC rails via the RPMh on
+Qualcomm platforms. This driver is restricted to only know about rails
+which are required by u-boot.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/soc/Kconfig              |   1 +
- drivers/soc/Makefile             |   1 +
- drivers/soc/qcom/Kconfig         |  25 ++
- drivers/soc/qcom/Makefile        |   4 +
- drivers/soc/qcom/cmd-db.c        | 246 ++++++++++++++++
- drivers/soc/qcom/rpmh-internal.h | 141 +++++++++
- drivers/soc/qcom/rpmh-rsc.c      | 619 +++++++++++++++++++++++++++++++++++++++
- drivers/soc/qcom/rpmh.c          | 110 +++++++
- include/soc/qcom/cmd-db.h        |  42 +++
- include/soc/qcom/rpmh.h          |  29 ++
- include/soc/qcom/tcs.h           |  78 +++++
- 11 files changed, 1296 insertions(+)
+ drivers/power/regulator/Kconfig               |   8 +
+ drivers/power/regulator/Makefile              |   1 +
+ drivers/power/regulator/qcom-rpmh-regulator.c | 534 ++++++++++++++++++++++++++
+ 3 files changed, 543 insertions(+)
 
-diff --git a/drivers/soc/Kconfig b/drivers/soc/Kconfig
-index 03433bc0e6d2..8ceca0cb1386 100644
---- a/drivers/soc/Kconfig
-+++ b/drivers/soc/Kconfig
-@@ -39,8 +39,9 @@ config SOC_XILINX_VERSAL_NET
- 	  Enable this option to select SoC device id driver for Xilinx Versal NET.
- 	  This allows other drivers to verify the SoC familiy & revision using
- 	  matching SoC attributes.
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 102ec7bc5f89..bc061c20d75e 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -215,8 +215,16 @@ config DM_REGULATOR_GPIO
+ 	This config enables implementation of driver-model regulator uclass
+ 	features for gpio regulators. The driver implements get/set for
+ 	voltage value.
  
-+source "drivers/soc/qcom/Kconfig"
- source "drivers/soc/samsung/Kconfig"
- source "drivers/soc/ti/Kconfig"
- 
- endmenu
-diff --git a/drivers/soc/Makefile b/drivers/soc/Makefile
-index 610bf816d40a..c3d484e5bf6c 100644
---- a/drivers/soc/Makefile
-+++ b/drivers/soc/Makefile
-@@ -3,8 +3,9 @@
- # Makefile for the U-Boot SOC specific device drivers.
- 
- obj-$(CONFIG_SOC_SAMSUNG) += samsung/
- obj-$(CONFIG_SOC_TI) += ti/
-+obj-$(CONFIG_SOC_QCOM) += qcom/
- obj-$(CONFIG_SOC_DEVICE) += soc-uclass.o
- obj-$(CONFIG_SOC_DEVICE_TI_K3) += soc_ti_k3.o
- obj-$(CONFIG_SANDBOX) += soc_sandbox.o
- obj-$(CONFIG_SOC_XILINX_ZYNQMP) += soc_xilinx_zynqmp.o
-diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
++config DM_REGULATOR_QCOM_RPMH
++	bool "Enable driver model for Qualcomm RPMh regulator"
++	depends on DM_REGULATOR && QCOM_RPMH
++	---help---
++	  Enable support for the Qualcomm RPMh regulator. The driver
++	  implements get/set api for a limited set of regulators used
++	  by u-boot.
++
+ config SPL_DM_REGULATOR_GPIO
+ 	bool "Enable Driver Model for GPIO REGULATOR in SPL"
+ 	depends on DM_REGULATOR_GPIO && SPL_GPIO
+ 	select SPL_DM_REGULATOR_COMMON
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index f79932d83307..56a527612b74 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -20,8 +20,9 @@ obj-$(CONFIG_$(SPL_)REGULATOR_PWM) += pwm_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_FAN53555) += fan53555.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_COMMON) += regulator_common.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_FIXED) += fixed.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_GPIO) += gpio-regulator.o
++obj-$(CONFIG_DM_REGULATOR_QCOM_RPMH) += qcom-rpmh-regulator.o
+ obj-$(CONFIG_$(SPL_TPL_)REGULATOR_RK8XX) += rk8xx.o
+ obj-$(CONFIG_DM_REGULATOR_S2MPS11) += s2mps11_regulator.o
+ obj-$(CONFIG_REGULATOR_S5M8767) += s5m8767.o
+ obj-$(CONFIG_DM_REGULATOR_SANDBOX) += sandbox.o
+diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
 new file mode 100644
-index 000000000000..a0872c5b3c83
+index 000000000000..51d8d493a3d5
 --- /dev/null
-+++ b/drivers/soc/qcom/Kconfig
-@@ -0,0 +1,25 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+menuconfig SOC_QCOM
-+	bool "Qualcomm SOC drivers support"
-+	help
-+	  Say Y here if you want to enable Qualcomm SOC drivers support.
-+
-+if SOC_QCOM
-+
-+config QCOM_COMMAND_DB
-+	bool "Qualcomm Command DB"
-+	help
-+	  Command DB queries shared memory by key string for shared system
-+	  resources. Platform drivers that require to set state of a shared
-+	  resource on a RPM-hardened platform must use this database to get
-+	  SoC specific identifier and information for the shared resources.
-+
-+config QCOM_RPMH
-+	bool "Qualcomm RPMh support"
-+	depends on QCOM_COMMAND_DB
-+	help
-+	  Say y here to support the Qualcomm RPMh (resource peripheral manager)
-+	  if you need to control regulators on Qualcomm platforms, say y here.
-+
-+endif # SOC_QCOM
-diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
-new file mode 100644
-index 000000000000..4fca569cfb77
---- /dev/null
-+++ b/drivers/soc/qcom/Makefile
-@@ -0,0 +1,4 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-$(CONFIG_QCOM_COMMAND_DB) += cmd-db.o
-+obj-$(CONFIG_QCOM_RPMH)	+= rpmh-rsc.o rpmh.o
-diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-new file mode 100644
-index 000000000000..7bfd72ae2f3f
---- /dev/null
-+++ b/drivers/soc/qcom/cmd-db.c
-@@ -0,0 +1,246 @@
++++ b/drivers/power/regulator/qcom-rpmh-regulator.c
+@@ -0,0 +1,534 @@
 +// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2016-2018, 2020, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2023, Linaro Ltd.
-+ */
-+
-+#include <dm/device.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <linux/kernel.h>
-+#include <linux/types.h>
-+#include <linux/ioport.h>
-+#include <linux/byteorder/generic.h>
-+
-+#include <soc/qcom/cmd-db.h>
-+
-+#define NUM_PRIORITY		2
-+#define MAX_SLV_ID		8
-+#define SLAVE_ID_MASK		0x7
-+#define SLAVE_ID_SHIFT		16
-+
-+/**
-+ * struct entry_header: header for each entry in cmddb
-+ *
-+ * @id: resource's identifier
-+ * @priority: unused
-+ * @addr: the address of the resource
-+ * @len: length of the data
-+ * @offset: offset from :@data_offset, start of the data
-+ */
-+struct entry_header {
-+	u8 id[8];
-+	__le32 priority[NUM_PRIORITY];
-+	__le32 addr;
-+	__le16 len;
-+	__le16 offset;
-+};
-+
-+/**
-+ * struct rsc_hdr: resource header information
-+ *
-+ * @slv_id: id for the resource
-+ * @header_offset: entry's header at offset from the end of the cmd_db_header
-+ * @data_offset: entry's data at offset from the end of the cmd_db_header
-+ * @cnt: number of entries for HW type
-+ * @version: MSB is major, LSB is minor
-+ * @reserved: reserved for future use.
-+ */
-+struct rsc_hdr {
-+	__le16 slv_id;
-+	__le16 header_offset;
-+	__le16 data_offset;
-+	__le16 cnt;
-+	__le16 version;
-+	__le16 reserved[3];
-+};
-+
-+/**
-+ * struct cmd_db_header: The DB header information
-+ *
-+ * @version: The cmd db version
-+ * @magic: constant expected in the database
-+ * @header: array of resources
-+ * @checksum: checksum for the header. Unused.
-+ * @reserved: reserved memory
-+ * @data: driver specific data
-+ */
-+struct cmd_db_header {
-+	__le32 version;
-+	u8 magic[4];
-+	struct rsc_hdr header[MAX_SLV_ID];
-+	__le32 checksum;
-+	__le32 reserved;
-+	u8 data[];
-+};
-+
-+/**
-+ * DOC: Description of the Command DB database.
-+ *
-+ * At the start of the command DB memory is the cmd_db_header structure.
-+ * The cmd_db_header holds the version, checksum, magic key as well as an
-+ * array for header for each slave (depicted by the rsc_header). Each h/w
-+ * based accelerator is a 'slave' (shared resource) and has slave id indicating
-+ * the type of accelerator. The rsc_header is the header for such individual
-+ * slaves of a given type. The entries for each of these slaves begin at the
-+ * rsc_hdr.header_offset. In addition each slave could have auxiliary data
-+ * that may be needed by the driver. The data for the slave starts at the
-+ * entry_header.offset to the location pointed to by the rsc_hdr.data_offset.
-+ *
-+ * Drivers have a stringified key to a slave/resource. They can query the slave
-+ * information and get the slave id and the auxiliary data and the length of the
-+ * data. Using this information, they can format the request to be sent to the
-+ * h/w accelerator and request a resource state.
-+ */
-+
-+static const u8 CMD_DB_MAGIC[] = { 0xdb, 0x30, 0x03, 0x0c };
-+
-+static bool cmd_db_magic_matches(const struct cmd_db_header *header)
-+{
-+	const u8 *magic = header->magic;
-+
-+	return memcmp(magic, CMD_DB_MAGIC, ARRAY_SIZE(CMD_DB_MAGIC)) == 0;
-+}
-+
-+static struct cmd_db_header *cmd_db_header;
-+
-+static inline const void *rsc_to_entry_header(const struct rsc_hdr *hdr)
-+{
-+	u16 offset = le16_to_cpu(hdr->header_offset);
-+
-+	return cmd_db_header->data + offset;
-+}
-+
-+static inline void *
-+rsc_offset(const struct rsc_hdr *hdr, const struct entry_header *ent)
-+{
-+	u16 offset = le16_to_cpu(hdr->data_offset);
-+	u16 loffset = le16_to_cpu(ent->offset);
-+
-+	return cmd_db_header->data + offset + loffset;
-+}
-+
-+static int cmd_db_get_header(const char *id, const struct entry_header **eh,
-+			     const struct rsc_hdr **rh)
-+{
-+	const struct rsc_hdr *rsc_hdr;
-+	const struct entry_header *ent;
-+	int i, j;
-+	u8 query[sizeof(ent->id)] __nonstring;
-+
-+	/*
-+	 * Pad out query string to same length as in DB. NOTE: the output
-+	 * query string is not necessarily '\0' terminated if it bumps up
-+	 * against the max size. That's OK and expected.
-+	 */
-+	strncpy(query, id, sizeof(query));
-+
-+	for (i = 0; i < MAX_SLV_ID; i++) {
-+		rsc_hdr = &cmd_db_header->header[i];
-+		if (!rsc_hdr->slv_id)
-+			break;
-+
-+		ent = rsc_to_entry_header(rsc_hdr);
-+		for (j = 0; j < le16_to_cpu(rsc_hdr->cnt); j++, ent++) {
-+			if (memcmp(ent->id, query, sizeof(ent->id)) == 0) {
-+				if (eh)
-+					*eh = ent;
-+				if (rh)
-+					*rh = rsc_hdr;
-+				return 0;
-+			}
-+		}
-+	}
-+
-+	return -ENODEV;
-+}
-+
-+/**
-+ * cmd_db_read_addr() - Query command db for resource id address.
-+ *
-+ * @id: resource id to query for address
-+ *
-+ * Return: resource address on success, 0 on error
-+ *
-+ * This is used to retrieve resource address based on resource
-+ * id.
-+ */
-+u32 cmd_db_read_addr(const char *id)
-+{
-+	int ret;
-+	const struct entry_header *ent;
-+
-+	ret = cmd_db_get_header(id, &ent, NULL);
-+
-+	return ret < 0 ? 0 : le32_to_cpu(ent->addr);
-+}
-+EXPORT_SYMBOL(cmd_db_read_addr);
-+
-+/**
-+ * cmd_db_read_aux_data() - Query command db for aux data.
-+ *
-+ *  @id: Resource to retrieve AUX Data on
-+ *  @len: size of data buffer returned
-+ *
-+ *  Return: pointer to data on success, error pointer otherwise
-+ */
-+const void *cmd_db_read_aux_data(const char *id, size_t *len)
-+{
-+	int ret;
-+	const struct entry_header *ent;
-+	const struct rsc_hdr *rsc_hdr;
-+
-+	ret = cmd_db_get_header(id, &ent, &rsc_hdr);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	if (len)
-+		*len = le16_to_cpu(ent->len);
-+
-+	return rsc_offset(rsc_hdr, ent);
-+}
-+EXPORT_SYMBOL(cmd_db_read_aux_data);
-+
-+/**
-+ * cmd_db_read_slave_id - Get the slave ID for a given resource address
-+ *
-+ * @id: Resource id to query the DB for version
-+ *
-+ * Return: cmd_db_hw_type enum on success, CMD_DB_HW_INVALID on error
-+ */
-+enum cmd_db_hw_type cmd_db_read_slave_id(const char *id)
-+{
-+	int ret;
-+	const struct entry_header *ent;
-+	u32 addr;
-+
-+	ret = cmd_db_get_header(id, &ent, NULL);
-+	if (ret < 0)
-+		return CMD_DB_HW_INVALID;
-+
-+	addr = le32_to_cpu(ent->addr);
-+	return (addr >> SLAVE_ID_SHIFT) & SLAVE_ID_MASK;
-+}
-+EXPORT_SYMBOL(cmd_db_read_slave_id);
-+
-+int cmd_db_init(ofnode node)
-+{
-+	void __iomem *base;
-+
-+	debug("%s(%s)\n", __func__, ofnode_get_name(node));
-+
-+	base = (void __iomem *)ofnode_get_addr(node);
-+	if ((fdt_addr_t)base == FDT_ADDR_T_NONE) {
-+		log_err("%s: Failed to read base address\n", __func__);
-+		return -ENOENT;
-+	}
-+
-+	cmd_db_header = base;
-+	if (!cmd_db_magic_matches(cmd_db_header)) {
-+		log_err("%s: Invalid Command DB Magic\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL(cmd_db_init);
-diff --git a/drivers/soc/qcom/rpmh-internal.h b/drivers/soc/qcom/rpmh-internal.h
-new file mode 100644
-index 000000000000..9dbb1c51cc35
---- /dev/null
-+++ b/drivers/soc/qcom/rpmh-internal.h
-@@ -0,0 +1,141 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef __RPM_INTERNAL_H__
-+#define __RPM_INTERNAL_H__
-+
-+#include <linux/bitmap.h>
-+#include <soc/qcom/tcs.h>
-+
-+#define TCS_TYPE_NR			4
-+#define MAX_CMDS_PER_TCS		16
-+#define MAX_TCS_PER_TYPE		3
-+#define MAX_TCS_NR			(MAX_TCS_PER_TYPE * TCS_TYPE_NR)
-+#define MAX_TCS_SLOTS			(MAX_CMDS_PER_TCS * MAX_TCS_PER_TYPE)
-+
-+#define USEC_PER_SEC           1000000UL
-+
-+struct rsc_drv;
-+
-+/**
-+ * struct tcs_group: group of Trigger Command Sets (TCS) to send state requests
-+ * to the controller
-+ *
-+ * @drv:       The controller.
-+ * @type:      Type of the TCS in this group - active, sleep, wake.
-+ * @mask:      Mask of the TCSes relative to all the TCSes in the RSC.
-+ * @offset:    Start of the TCS group relative to the TCSes in the RSC.
-+ * @num_tcs:   Number of TCSes in this type.
-+ * @ncpt:      Number of commands in each TCS.
-+ * @req:       Requests that are sent from the TCS; only used for ACTIVE_ONLY
-+ *             transfers (could be on a wake/sleep TCS if we are borrowing for
-+ *             an ACTIVE_ONLY transfer).
-+ *             Start: grab drv->lock, set req, set tcs_in_use, drop drv->lock,
-+ *                    trigger
-+ *             End: get irq, access req,
-+ *                  grab drv->lock, clear tcs_in_use, drop drv->lock
-+ * @slots:     Indicates which of @cmd_addr are occupied; only used for
-+ *             SLEEP / WAKE TCSs.  Things are tightly packed in the
-+ *             case that (ncpt < MAX_CMDS_PER_TCS).  That is if ncpt = 2 and
-+ *             MAX_CMDS_PER_TCS = 16 then bit[2] = the first bit in 2nd TCS.
-+ */
-+struct tcs_group {
-+	struct rsc_drv *drv;
-+	int type;
-+	u32 mask;
-+	u32 offset;
-+	int num_tcs;
-+	int ncpt;
-+	const struct tcs_request *req[MAX_TCS_PER_TYPE];
-+	DECLARE_BITMAP(slots, MAX_TCS_SLOTS);
-+};
-+
-+/**
-+ * struct rpmh_request: the message to be sent to rpmh-rsc
-+ *
-+ * @msg: the request
-+ * @cmd: the payload that will be part of the @msg
-+ * @completion: triggered when request is done
-+ * @dev: the device making the request
-+ * @needs_free: check to free dynamically allocated request object
-+ */
-+struct rpmh_request {
-+	struct tcs_request msg;
-+	struct tcs_cmd cmd[MAX_RPMH_PAYLOAD];
-+	const struct udevice *dev;
-+	bool needs_free;
-+};
-+
-+/**
-+ * struct rpmh_ctrlr: our representation of the controller
-+ *
-+ * @cache: the list of cached requests
-+ * @cache_lock: synchronize access to the cache data
-+ * @dirty: was the cache updated since flush
-+ * @batch_cache: Cache sleep and wake requests sent as batch
-+ */
-+struct rpmh_ctrlr {
-+	struct list_head cache;
-+	bool dirty;
-+	struct list_head batch_cache;
-+};
-+
-+struct rsc_ver {
-+	u32 major;
-+	u32 minor;
-+};
-+
-+/**
-+ * struct rsc_drv: the Direct Resource Voter (DRV) of the
-+ * Resource State Coordinator controller (RSC)
-+ *
-+ * @name:               Controller identifier.
-+ * @base:               Start address of the DRV registers in this controller.
-+ * @tcs_base:           Start address of the TCS registers in this controller.
-+ * @id:                 Instance id in the controller (Direct Resource Voter).
-+ * @num_tcs:            Number of TCSes in this DRV.
-+ * @rsc_pm:             CPU PM notifier for controller.
-+ *                      Used when solver mode is not present.
-+ * @cpus_in_pm:         Number of CPUs not in idle power collapse.
-+ *                      Used when solver mode and "power-domains" is not present.
-+ * @genpd_nb:           PM Domain notifier for cluster genpd notifications.
-+ * @tcs:                TCS groups.
-+ * @tcs_in_use:         S/W state of the TCS; only set for ACTIVE_ONLY
-+ *                      transfers, but might show a sleep/wake TCS in use if
-+ *                      it was borrowed for an active_only transfer.  You
-+ *                      must hold the lock in this struct (AKA drv->lock) in
-+ *                      order to update this.
-+ * @lock:               Synchronize state of the controller.  If RPMH's cache
-+ *                      lock will also be held, the order is: drv->lock then
-+ *                      cache_lock.
-+ * @tcs_wait:           Wait queue used to wait for @tcs_in_use to free up a
-+ *                      slot
-+ * @client:             Handle to the DRV's client.
-+ * @dev:                RSC device.
-+ */
-+struct rsc_drv {
-+	const char *name;
-+	void __iomem *base;
-+	void __iomem *tcs_base;
-+	int id;
-+	int num_tcs;
-+	struct tcs_group tcs[TCS_TYPE_NR];
-+	DECLARE_BITMAP(tcs_in_use, MAX_TCS_NR);
-+	struct rpmh_ctrlr client;
-+	struct udevice *dev;
-+	struct rsc_ver ver;
-+	u32 *regs;
-+};
-+
-+int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg);
-+int rpmh_rsc_write_ctrl_data(struct rsc_drv *drv,
-+			     const struct tcs_request *msg);
-+void rpmh_rsc_invalidate(struct rsc_drv *drv);
-+void rpmh_rsc_write_next_wakeup(struct rsc_drv *drv);
-+
-+int rpmh_rsc_wait_for_resp(struct rsc_drv *drv, int tcs_id);
-+int rpmh_flush(struct rpmh_ctrlr *ctrlr);
-+
-+#endif /* __RPM_INTERNAL_H__ */
-diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-new file mode 100644
-index 000000000000..3c73dc0ffe25
---- /dev/null
-+++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -0,0 +1,619 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2016-2018, 2020, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2023, Linaro Ltd.
-+ */
++// Copyright (c) 2018-2021, The Linux Foundation. All rights reserved.
 +
 +#include <linux/err.h>
-+#include <linux/types.h>
-+#include <dm.h>
-+#include <dm/ofnode.h>
-+#include <dm/devres.h>
 +#include <dm/device_compat.h>
-+#include <linux/delay.h>
++#include <dm/device.h>
++#include <dm/devres.h>
 +#include <dm/lists.h>
-+#include <errno.h>
-+#include <asm/io.h>
-+#include <asm/bitops.h>
-+#include <linux/bitmap.h>
++#include <power/regulator.h>
 +#include <log.h>
 +
-+#include <dt-bindings/soc/qcom,rpmh-rsc.h>
-+#include "rpmh-internal.h"
-+
-+#include <soc/qcom/rpmh.h>
 +#include <soc/qcom/cmd-db.h>
++#include <soc/qcom/rpmh.h>
 +
-+#define RSC_DRV_ID			0
++#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
 +
-+#define MAJOR_VER_MASK			0xFF
-+#define MAJOR_VER_SHIFT			16
-+#define MINOR_VER_MASK			0xFF
-+#define MINOR_VER_SHIFT			8
-+
-+enum {
-+	RSC_DRV_TCS_OFFSET,
-+	RSC_DRV_CMD_OFFSET,
-+	DRV_SOLVER_CONFIG,
-+	DRV_PRNT_CHLD_CONFIG,
-+	RSC_DRV_IRQ_ENABLE,
-+	RSC_DRV_IRQ_STATUS,
-+	RSC_DRV_IRQ_CLEAR,
-+	RSC_DRV_CMD_WAIT_FOR_CMPL,
-+	RSC_DRV_CONTROL,
-+	RSC_DRV_STATUS,
-+	RSC_DRV_CMD_ENABLE,
-+	RSC_DRV_CMD_MSGID,
-+	RSC_DRV_CMD_ADDR,
-+	RSC_DRV_CMD_DATA,
-+	RSC_DRV_CMD_STATUS,
-+	RSC_DRV_CMD_RESP_DATA,
-+};
-+
-+/* DRV HW Solver Configuration Information Register */
-+#define DRV_HW_SOLVER_MASK		1
-+#define DRV_HW_SOLVER_SHIFT		24
-+
-+/* DRV TCS Configuration Information Register */
-+#define DRV_NUM_TCS_MASK		0x3F
-+#define DRV_NUM_TCS_SHIFT		6
-+#define DRV_NCPT_MASK			0x1F
-+#define DRV_NCPT_SHIFT			27
-+
-+/* Offsets for CONTROL TCS Registers */
-+#define RSC_DRV_CTL_TCS_DATA_HI		0x38
-+#define RSC_DRV_CTL_TCS_DATA_HI_MASK	0xFFFFFF
-+#define RSC_DRV_CTL_TCS_DATA_HI_VALID	BIT(31)
-+#define RSC_DRV_CTL_TCS_DATA_LO		0x40
-+#define RSC_DRV_CTL_TCS_DATA_LO_MASK	0xFFFFFFFF
-+#define RSC_DRV_CTL_TCS_DATA_SIZE	32
-+
-+#define TCS_AMC_MODE_ENABLE		BIT(16)
-+#define TCS_AMC_MODE_TRIGGER		BIT(24)
-+
-+/* TCS CMD register bit mask */
-+#define CMD_MSGID_LEN			8
-+#define CMD_MSGID_RESP_REQ		BIT(8)
-+#define CMD_MSGID_WRITE			BIT(16)
-+#define CMD_STATUS_ISSUED		BIT(8)
-+#define CMD_STATUS_COMPL		BIT(16)
-+
-+/*
-+ * Here's a high level overview of how all the registers in RPMH work
-+ * together:
-+ *
-+ * - The main rpmh-rsc address is the base of a register space that can
-+ *   be used to find overall configuration of the hardware
-+ *   (DRV_PRNT_CHLD_CONFIG). Also found within the rpmh-rsc register
-+ *   space are all the TCS blocks. The offset of the TCS blocks is
-+ *   specified in the device tree by "qcom,tcs-offset" and used to
-+ *   compute tcs_base.
-+ * - TCS blocks come one after another. Type, count, and order are
-+ *   specified by the device tree as "qcom,tcs-config".
-+ * - Each TCS block has some registers, then space for up to 16 commands.
-+ *   Note that though address space is reserved for 16 commands, fewer
-+ *   might be present. See ncpt (num cmds per TCS).
-+ *
-+ * Here's a picture:
-+ *
-+ *  +---------------------------------------------------+
-+ *  |RSC                                                |
-+ *  | ctrl                                              |
-+ *  |                                                   |
-+ *  | Drvs:                                             |
-+ *  | +-----------------------------------------------+ |
-+ *  | |DRV0                                           | |
-+ *  | | ctrl/config                                   | |
-+ *  | | IRQ                                           | |
-+ *  | |                                               | |
-+ *  | | TCSes:                                        | |
-+ *  | | +------------------------------------------+  | |
-+ *  | | |TCS0  |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-+ *  | | | ctrl | 0| 1| 2| 3| 4| 5| .| .| .| .|14|15|  | |
-+ *  | | |      |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-+ *  | | +------------------------------------------+  | |
-+ *  | | +------------------------------------------+  | |
-+ *  | | |TCS1  |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-+ *  | | | ctrl | 0| 1| 2| 3| 4| 5| .| .| .| .|14|15|  | |
-+ *  | | |      |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-+ *  | | +------------------------------------------+  | |
-+ *  | | +------------------------------------------+  | |
-+ *  | | |TCS2  |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-+ *  | | | ctrl | 0| 1| 2| 3| 4| 5| .| .| .| .|14|15|  | |
-+ *  | | |      |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-+ *  | | +------------------------------------------+  | |
-+ *  | |                    ......                     | |
-+ *  | +-----------------------------------------------+ |
-+ *  | +-----------------------------------------------+ |
-+ *  | |DRV1                                           | |
-+ *  | | (same as DRV0)                                | |
-+ *  | +-----------------------------------------------+ |
-+ *  |                      ......                       |
-+ *  +---------------------------------------------------+
++/**
++ * enum rpmh_regulator_type - supported RPMh accelerator types
++ * @VRM:	RPMh VRM accelerator which supports voting on enable, voltage,
++ *		and mode of LDO, SMPS, and BOB type PMIC regulators.
++ * @XOB:	RPMh XOB accelerator which supports voting on the enable state
++ *		of PMIC regulators.
 + */
-+
-+static u32 rpmh_rsc_reg_offset_ver_2_7[] = {
-+	[RSC_DRV_TCS_OFFSET]		= 672,
-+	[RSC_DRV_CMD_OFFSET]		= 20,
-+	[DRV_SOLVER_CONFIG]		= 0x04,
-+	[DRV_PRNT_CHLD_CONFIG]		= 0x0C,
-+	[RSC_DRV_IRQ_ENABLE]		= 0x00,
-+	[RSC_DRV_IRQ_STATUS]		= 0x04,
-+	[RSC_DRV_IRQ_CLEAR]		= 0x08,
-+	[RSC_DRV_CMD_WAIT_FOR_CMPL]	= 0x10,
-+	[RSC_DRV_CONTROL]		= 0x14,
-+	[RSC_DRV_STATUS]		= 0x18,
-+	[RSC_DRV_CMD_ENABLE]		= 0x1C,
-+	[RSC_DRV_CMD_MSGID]		= 0x30,
-+	[RSC_DRV_CMD_ADDR]		= 0x34,
-+	[RSC_DRV_CMD_DATA]		= 0x38,
-+	[RSC_DRV_CMD_STATUS]		= 0x3C,
-+	[RSC_DRV_CMD_RESP_DATA]		= 0x40,
++enum rpmh_regulator_type {
++	VRM,
++	XOB,
 +};
 +
-+static inline void __iomem *
-+tcs_reg_addr(const struct rsc_drv *drv, int reg, int tcs_id)
-+{
-+	return drv->tcs_base + drv->regs[RSC_DRV_TCS_OFFSET] * tcs_id + reg;
++enum rpmh_regulator_mode {
++	REGULATOR_MODE_RETENTION,
++	REGULATOR_MODE_LPM,
++	REGULATOR_MODE_AUTO,
++	REGULATOR_MODE_HPM,
++};
++
++#define RPMH_REGULATOR_REG_VRM_VOLTAGE		0x0
++#define RPMH_REGULATOR_REG_ENABLE		0x4
++#define RPMH_REGULATOR_REG_VRM_MODE		0x8
++
++#define PMIC4_LDO_MODE_RETENTION		4
++#define PMIC4_LDO_MODE_LPM			5
++#define PMIC4_LDO_MODE_HPM			7
++
++#define PMIC4_SMPS_MODE_RETENTION		4
++#define PMIC4_SMPS_MODE_PFM			5
++#define PMIC4_SMPS_MODE_AUTO			6
++#define PMIC4_SMPS_MODE_PWM			7
++
++#define PMIC4_BOB_MODE_PASS			0
++#define PMIC4_BOB_MODE_PFM			1
++#define PMIC4_BOB_MODE_AUTO			2
++#define PMIC4_BOB_MODE_PWM			3
++
++#define PMIC5_LDO_MODE_RETENTION		3
++#define PMIC5_LDO_MODE_LPM			4
++#define PMIC5_LDO_MODE_HPM			7
++
++#define PMIC5_SMPS_MODE_RETENTION		3
++#define PMIC5_SMPS_MODE_PFM			4
++#define PMIC5_SMPS_MODE_AUTO			6
++#define PMIC5_SMPS_MODE_PWM			7
++
++#define PMIC5_BOB_MODE_PASS			2
++#define PMIC5_BOB_MODE_PFM			4
++#define PMIC5_BOB_MODE_AUTO			6
++#define PMIC5_BOB_MODE_PWM			7
++
++/**
++ * struct linear_range - table of selector - value pairs
++ *
++ * Define a lookup-table for range of values. Intended to help when looking
++ * for a register value matching certaing physical measure (like voltage).
++ * Usable when increment of one in register always results a constant increment
++ * of the physical measure (like voltage).
++ *
++ * @min:  Lowest value in range
++ * @min_sel: Lowest selector for range
++ * @max_sel: Highest selector for range
++ * @step: Value step size
++ */
++struct linear_range {
++	unsigned int min;
++	unsigned int min_sel;
++	unsigned int max_sel;
++	unsigned int step;
++};
++
++/* Initialize struct linear_range for regulators */
++#define REGULATOR_LINEAR_RANGE(_min_uV, _min_sel, _max_sel, _step_uV)	\
++{									\
++	.min		= _min_uV,					\
++	.min_sel	= _min_sel,					\
++	.max_sel	= _max_sel,					\
++	.step		= _step_uV,					\
 +}
 +
-+static inline void __iomem *
-+tcs_cmd_addr(const struct rsc_drv *drv, int reg, int tcs_id, int cmd_id)
++/**
++ * struct rpmh_vreg_hw_data - RPMh regulator hardware configurations
++ * @regulator_type:		RPMh accelerator type used to manage this
++ *				regulator
++ * @ops:			Pointer to regulator ops callback structure
++ * @voltage_range:		The single range of voltages supported by this
++ *				PMIC regulator type
++ * @n_voltages:			The number of unique voltage set points defined
++ *				by voltage_range
++ * @hpm_min_load_uA:		Minimum load current in microamps that requires
++ *				high power mode (HPM) operation.  This is used
++ *				for LDO hardware type regulators only.
++ * @pmic_mode_map:		Array indexed by regulator framework mode
++ *				containing PMIC hardware modes.  Must be large
++ *				enough to index all framework modes supported
++ *				by this regulator hardware type.
++ * @of_map_mode:		Maps an RPMH_REGULATOR_MODE_* mode value defined
++ *				in device tree to a regulator framework mode
++ */
++struct rpmh_vreg_hw_data {
++	enum rpmh_regulator_type		regulator_type;
++	const struct dm_regulator_ops		*ops;
++	struct linear_range			voltage_range;
++	int					n_voltages;
++	int					hpm_min_load_uA;
++	struct dm_regulator_mode		*pmic_mode_map;
++	int					n_modes;
++	unsigned int				(*of_map_mode)(unsigned int mode);
++};
++
++/**
++ * struct rpmh_vreg - individual RPMh regulator data structure encapsulating a
++ *		single regulator device
++ * @dev:			Device pointer for the top-level PMIC RPMh
++ *				regulator parent device.  This is used as a
++ *				handle in RPMh write requests.
++ * @addr:			Base address of the regulator resource within
++ *				an RPMh accelerator
++ * @rdesc:			Regulator descriptor
++ * @hw_data:			PMIC regulator configuration data for this RPMh
++ *				regulator
++ * @always_wait_for_ack:	Boolean flag indicating if a request must always
++ *				wait for an ACK from RPMh before continuing even
++ *				if it corresponds to a strictly lower power
++ *				state (e.g. enabled --> disabled).
++ * @enabled:			Flag indicating if the regulator is enabled or
++ *				not
++ * @bypassed:			Boolean indicating if the regulator is in
++ *				bypass (pass-through) mode or not.  This is
++ *				only used by BOB rpmh-regulator resources.
++ * @uv:				Selector used for get_voltage_sel() and
++ *				set_value() callbacks
++ * @mode:			RPMh VRM regulator current framework mode
++ */
++struct rpmh_vreg {
++	struct udevice			*dev;
++	u32				addr;
++	const struct rpmh_vreg_hw_data	*hw_data;
++	bool				always_wait_for_ack;
++
++	int				enabled;
++	bool				bypassed;
++	int				uv;
++	int			mode;
++};
++
++/**
++ * struct rpmh_vreg_init_data - initialization data for an RPMh regulator
++ * @name:			Name for the regulator which also corresponds
++ *				to the device tree subnode name of the regulator
++ * @resource_name:		RPMh regulator resource name format string.
++ *				This must include exactly one field: '%s' which
++ *				is filled at run-time with the PMIC ID provided
++ *				by device tree property qcom,pmic-id.  Example:
++ *				"ldo%s1" for RPMh resource "ldoa1".
++ * @supply_name:		Parent supply regulator name
++ * @hw_data:			Configuration data for this PMIC regulator type
++ */
++struct rpmh_vreg_init_data {
++	const char			*name;
++	const char			*resource_name;
++	const char			*supply_name;
++	const struct rpmh_vreg_hw_data	*hw_data;
++};
++
++/**
++ * rpmh_regulator_send_request() - send the request to RPMh
++ * @vreg:		Pointer to the RPMh regulator
++ * @cmd:		Pointer to the RPMh command to send
++ * @wait_for_ack:	Boolean indicating if execution must wait until the
++ *			request has been acknowledged as complete
++ *
++ * Return: 0 on success, errno on failure
++ */
++static int rpmh_regulator_send_request(struct rpmh_vreg *vreg,
++				       struct tcs_cmd *cmd, bool wait_for_ack)
 +{
-+	return tcs_reg_addr(drv, reg, tcs_id) + drv->regs[RSC_DRV_CMD_OFFSET] * cmd_id;
++	int ret;
++
++	if (wait_for_ack || vreg->always_wait_for_ack)
++		ret = rpmh_write(vreg->dev->parent, RPMH_ACTIVE_ONLY_STATE, cmd, 1);
++	else
++		ret = rpmh_write_async(vreg->dev->parent, RPMH_ACTIVE_ONLY_STATE, cmd, 1);
++
++	return ret;
 +}
 +
-+static u32 read_tcs_reg(const struct rsc_drv *drv, int reg, int tcs_id)
++static int _rpmh_regulator_vrm_set_value(struct udevice *rdev,
++					 int uv, bool wait_for_ack)
 +{
-+	return readl_relaxed(tcs_reg_addr(drv, reg, tcs_id));
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	struct tcs_cmd cmd = {
++		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_VOLTAGE,
++	};
++	int ret;
++
++	/* VRM voltage control register is set with voltage in millivolts. */
++	uv = (uv / vreg->hw_data->voltage_range.step) *
++		(vreg->hw_data->voltage_range.step / 1000);
++	cmd.data = uv; // XXX: CHECKME
++
++	ret = rpmh_regulator_send_request(vreg, &cmd, wait_for_ack);
++	if (!ret)
++		vreg->uv = uv;
++
++	return ret;
 +}
 +
-+static void write_tcs_cmd(const struct rsc_drv *drv, int reg, int tcs_id,
-+			  int cmd_id, u32 data)
++static int rpmh_regulator_vrm_set_value(struct udevice *rdev,
++					int uv)
 +{
-+	void __iomem *addr = tcs_cmd_addr(drv, reg, tcs_id, cmd_id);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
 +
-+	debug("%s: tcs(m): %d cmd(n): %d addr: %#x data: %#x\n", drv->name,
-+	      tcs_id, cmd_id, reg, data);
-+	writel_relaxed(data, addr);
-+}
++	debug("%s: set_value %d (current %d)\n", rdev->name, uv, vreg->uv);
 +
-+static void write_tcs_reg(const struct rsc_drv *drv, int reg, int tcs_id,
-+			  u32 data)
-+{
-+	void __iomem *addr = tcs_reg_addr(drv, reg, tcs_id);
-+
-+	debug("%s: tcs(m): %d addr: %#x data: %#x\n", drv->name,
-+	      tcs_id, reg, data);
-+	writel_relaxed(data, addr);
-+}
-+
-+static void write_tcs_reg_sync(const struct rsc_drv *drv, int reg, int tcs_id,
-+			       u32 data)
-+{
-+	int i;
-+	void __iomem *addr = tcs_reg_addr(drv, reg, tcs_id);
-+
-+	debug("%s: tcs(m): %d addr: %#x data: %#x\n", drv->name,
-+	      tcs_id, reg, data);
-+
-+	writel(data, addr);
-+
-+	/*
-+	 * Wait until we read back the same value.  Use a counter rather than
-+	 * ktime for timeout since this may be called after timekeeping stops.
-+	 */
-+	for (i = 0; i < USEC_PER_SEC; i++) {
-+		if (readl(addr) == data)
-+			return;
-+		udelay(1);
++	if (vreg->enabled == -EINVAL) {
++		/*
++		 * Cache the voltage and send it later when the regulator is
++		 * enabled or disabled.
++		 */
++		vreg->uv = uv;
++		return 0;
 +	}
-+	pr_err("%s: error writing %#x to %d:%#x\n", drv->name,
-+	       data, tcs_id, reg);
++
++	return _rpmh_regulator_vrm_set_value(rdev, uv,
++					uv > vreg->uv);
 +}
 +
-+/**
-+ * tcs_invalidate() - Invalidate all TCSes of the given type (sleep or wake).
-+ * @drv:  The RSC controller.
-+ * @type: SLEEP_TCS or WAKE_TCS
-+ *
-+ * This will clear the "slots" variable of the given tcs_group and also
-+ * tell the hardware to forget about all entries.
-+ *
-+ * The caller must ensure that no other RPMH actions are happening when this
-+ * function is called, since otherwise the device may immediately become
-+ * used again even before this function exits.
-+ */
-+static void tcs_invalidate(struct rsc_drv *drv, int type)
++static int rpmh_regulator_vrm_get_value(struct udevice *rdev)
 +{
-+	int m;
-+	struct tcs_group *tcs = &drv->tcs[type];
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
 +
-+	/* Caller ensures nobody else is running so no lock */
-+	if (bitmap_empty(tcs->slots, MAX_TCS_SLOTS))
-+		return;
++	debug("%s: get_value %d\n", rdev->name, vreg->uv);
 +
-+	for (m = tcs->offset; m < tcs->offset + tcs->num_tcs; m++)
-+		write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], m, 0);
-+
-+	bitmap_zero(tcs->slots, MAX_TCS_SLOTS);
++	return vreg->uv;
 +}
 +
-+/**
-+ * rpmh_rsc_invalidate() - Invalidate sleep and wake TCSes.
-+ * @drv: The RSC controller.
-+ *
-+ * The caller must ensure that no other RPMH actions are happening when this
-+ * function is called, since otherwise the device may immediately become
-+ * used again even before this function exits.
-+ */
-+void rpmh_rsc_invalidate(struct rsc_drv *drv)
++static int rpmh_regulator_is_enabled(struct udevice *rdev)
 +{
-+	tcs_invalidate(drv, SLEEP_TCS);
-+	tcs_invalidate(drv, WAKE_TCS);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++
++	debug("%s: is_enabled %d\n", rdev->name, vreg->enabled);
++
++	return vreg->enabled > 0;
 +}
 +
-+/**
-+ * rpmh_rsc_wait_for_resp() - Spin until we get a response from the rpmh
-+ * @drv:    The controller.
-+ * @tcs_id: The global ID of this TCS.
-+ *
-+ * This is for ACTIVE_ONLY transfers (which are the only ones we support in
-+ * u-boot). As we don't support interrupts, we just spin on the IRQ_STATUS
-+ * register until the bit is set to confirm that the TCS TX is done.
-+ */
-+int rpmh_rsc_wait_for_resp(struct rsc_drv *drv, int tcs_id)
++static int rpmh_regulator_set_enable_state(struct udevice *rdev,
++					   bool enable)
 +{
-+	u32 reg;
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	struct tcs_cmd cmd = {
++		.addr = vreg->addr + RPMH_REGULATOR_REG_ENABLE,
++		.data = enable,
++	};
++	int ret;
++
++	debug("%s: set_enable %d (current %d)\n", rdev->name, enable,
++	      vreg->enabled);
++
++	if (vreg->enabled == -EINVAL &&
++	    vreg->uv != -ENOTRECOVERABLE) {
++		ret = _rpmh_regulator_vrm_set_value(rdev,
++						    vreg->uv, true);
++		if (ret < 0)
++			return ret;
++	}
++
++	ret = rpmh_regulator_send_request(vreg, &cmd, enable);
++	if (!ret)
++		vreg->enabled = enable;
++
++	return ret;
++}
++
++static int rpmh_regulator_vrm_set_mode_bypass(struct rpmh_vreg *vreg,
++					      unsigned int mode, bool bypassed)
++{
++	struct tcs_cmd cmd = {
++		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_MODE,
++	};
++	struct dm_regulator_mode *pmic_mode;
 +	int i;
 +
-+	reg = drv->regs[RSC_DRV_IRQ_STATUS];
++	if (mode > REGULATOR_MODE_HPM)
++		return -EINVAL;
 +
-+	debug("%s: waiting for response on tcs %d\n", __func__, tcs_id);
-+
-+	for (i = 0; i < 5 * USEC_PER_SEC; i++) {
-+		if (readl(tcs_reg_addr(drv, reg, tcs_id)) & BIT(tcs_id))
++	for (i = 0; i < vreg->hw_data->n_modes; i++) {
++		pmic_mode = &vreg->hw_data->pmic_mode_map[i];
++		if (pmic_mode->id == mode)
 +			break;
-+		udelay(1);
++	}
++	if (pmic_mode->id != mode) {
++		printf("Invalid mode %d\n", mode);
++		return -EINVAL;
 +	}
 +
-+	if (i == 5 * USEC_PER_SEC) {
-+		printf("%s: timeout waiting for response\n", drv->name);
-+		return -ETIMEDOUT;
++	if (bypassed)
++		cmd.data = PMIC4_BOB_MODE_PASS;
++	else
++		cmd.data = pmic_mode->id;
++
++	return rpmh_regulator_send_request(vreg, &cmd, true);
++}
++
++static int rpmh_regulator_vrm_set_mode(struct udevice *rdev,
++				       int mode)
++{
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++	int ret;
++
++	debug("%s: set_mode %d (current %d)\n", rdev->name, mode, vreg->mode);
++
++	if (mode == vreg->mode)
++		return 0;
++
++	ret = rpmh_regulator_vrm_set_mode_bypass(vreg, mode, vreg->bypassed);
++	if (!ret)
++		vreg->mode = mode;
++
++	return ret;
++}
++
++static int rpmh_regulator_vrm_get_mode(struct udevice *rdev)
++{
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++
++	debug("%s: get_mode %d\n", rdev->name, vreg->mode);
++
++	return vreg->mode;
++}
++
++static const struct dm_regulator_ops rpmh_regulator_vrm_drms_ops = {
++	.get_value = rpmh_regulator_vrm_get_value,
++	.set_value = rpmh_regulator_vrm_set_value,
++	.set_enable = rpmh_regulator_set_enable_state,
++	.get_enable = rpmh_regulator_is_enabled,
++	.set_mode = rpmh_regulator_vrm_set_mode,
++	.get_mode = rpmh_regulator_vrm_get_mode,
++};
++
++static struct dm_regulator_mode pmic_mode_map_pmic5_ldo[] = {
++	{
++		.id = REGULATOR_MODE_RETENTION,
++		.register_value = PMIC5_LDO_MODE_RETENTION,
++		.name = "PMIC5_LDO_MODE_RETENTION"
++	}, {
++		.id = REGULATOR_MODE_LPM,
++		.register_value = PMIC5_LDO_MODE_LPM,
++		.name = "PMIC5_LDO_MODE_LPM"
++	}, {
++		.id = REGULATOR_MODE_HPM,
++		.register_value = PMIC5_LDO_MODE_HPM,
++		.name = "PMIC5_LDO_MODE_HPM"
++	},
++};
++
++static const struct rpmh_vreg_hw_data pmic5_pldo_lv = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(1504000, 0, 62, 8000),
++	.n_voltages = 63,
++	.hpm_min_load_uA = 10000,
++	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
++};
++
++static const struct rpmh_vreg_hw_data pmic5_pldo = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(1504000, 0, 255, 8000),
++	.n_voltages = 256,
++	.hpm_min_load_uA = 10000,
++	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
++};
++
++#define RPMH_VREG(_name, _resource_name, _hw_data, _supply_name) \
++{ \
++	.name		= _name, \
++	.resource_name	= _resource_name, \
++	.hw_data	= _hw_data, \
++	.supply_name	= _supply_name, \
++}
++
++static const struct rpmh_vreg_init_data pm8150_vreg_data[] = {
++	RPMH_VREG("ldo13",  "ldo%s13", &pmic5_pldo,      "vdd-l13-l16-l17"),
++};
++
++static const struct rpmh_vreg_init_data pm8150l_vreg_data[] = {
++	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_pldo_lv,   "vdd-l1-l8"),
++	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_pldo,      "vdd-l7-l11"),
++	{}
++};
++
++/* probe an individual regulator */
++static int rpmh_regulator_probe(struct udevice *dev)
++{
++	const struct rpmh_vreg_init_data *init_data;
++	struct rpmh_vreg *priv;
++	struct dm_regulator_uclass_plat *plat_data;
++
++	init_data = (const struct rpmh_vreg_init_data *)dev_get_driver_data(dev);
++	priv = dev_get_priv(dev);
++	plat_data = dev_get_uclass_plat(dev);
++
++	priv->dev = dev;
++	priv->addr = cmd_db_read_addr(dev->name);
++	if (!priv->addr) {
++		printf("Failed to read RPMh address for %s\n", dev->name);
++		return -ENODEV;
 +	}
 +
-+	writel_relaxed(BIT(tcs_id), drv->tcs_base + drv->regs[RSC_DRV_IRQ_CLEAR]);
++	priv->hw_data = init_data->hw_data;
++	priv->enabled = -EINVAL;
++	priv->uv = -ENOTRECOVERABLE;
++	if (ofnode_read_u32(dev_ofnode(dev), "regulator-initial-mode", &priv->mode))
++		priv->mode = -EINVAL;
++
++	// handle stepping
++	// almost there!!!
++	plat_data->mode = priv->hw_data->pmic_mode_map;
++	plat_data->mode_count = priv->hw_data->n_modes;
 +
 +	return 0;
 +}
 +
-+/**
-+ * __tcs_buffer_write() - Write to TCS hardware from a request; don't trigger.
-+ * @drv:    The controller.
-+ * @tcs_id: The global ID of this TCS.
-+ * @cmd_id: The index within the TCS to start writing.
-+ * @msg:    The message we want to send, which will contain several addr/data
-+ *          pairs to program (but few enough that they all fit in one TCS).
-+ *
-+ * This is used for all types of transfers (active, sleep, and wake).
++/* for non-drm, xob, or bypass regulators add additional driver definitions */
++U_BOOT_DRIVER(rpmh_regulator_drm) = {
++	.name = "rpmh_regulator_drm",
++	.id = UCLASS_REGULATOR,
++	.probe = rpmh_regulator_probe,
++	.priv_auto = sizeof(struct rpmh_vreg),
++	.ops = &rpmh_regulator_vrm_drms_ops,
++};
++
++/* This driver intentionally only supports a subset of the available regulators.
++ * This function checks to see if a given regulator node in DT matches a regulator
++ * defined in the driver.
 + */
-+static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
-+			       const struct tcs_request *msg)
++static const struct rpmh_vreg_init_data *
++vreg_get_init_data(const struct rpmh_vreg_init_data *init_data, ofnode node)
 +{
-+	u32 msgid;
-+	u32 cmd_msgid = CMD_MSGID_LEN | CMD_MSGID_WRITE;
-+	u32 cmd_enable = 0;
-+	struct tcs_cmd *cmd;
-+	int i, j;
++	const struct rpmh_vreg_init_data *data;
 +
-+	/* u-boot: get a response to ensure everything is golden before continuing */
-+	cmd_msgid |= CMD_MSGID_RESP_REQ;
-+
-+	for (i = 0, j = cmd_id; i < msg->num_cmds; i++, j++) {
-+		cmd = &msg->cmds[i];
-+		cmd_enable |= BIT(j);
-+		msgid = cmd_msgid;
-+		/*
-+		 * Additionally, if the cmd->wait is set, make the command
-+		 * response reqd even if the overall request was fire-n-forget.
-+		 */
-+		msgid |= cmd->wait ? CMD_MSGID_RESP_REQ : 0;
-+
-+		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, j, msgid);
-+		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, j, cmd->addr);
-+		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
-+		debug("%s: tcs(m): %d [%s] cmd(n): %d msgid: %#x addr: %#x data: %#x complete: %d\n",
-+		      drv->name, tcs_id, msg->state == RPMH_ACTIVE_ONLY_STATE ? "active" : "?", j, msgid,
-+		      cmd->addr, cmd->data, cmd->wait);
++	for (data = init_data; data->name; data++) {
++		if (!strcmp(data->name, ofnode_get_name(node)))
++			return data;
 +	}
 +
-+	cmd_enable |= read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id);
-+	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, cmd_enable);
++	return NULL;
 +}
 +
-+/**
-+ * __tcs_set_trigger() - Start xfer on a TCS or unset trigger on a borrowed TCS
-+ * @drv:     The controller.
-+ * @tcs_id:  The global ID of this TCS.
-+ * @trigger: If true then untrigger/retrigger. If false then just untrigger.
-+ *
-+ * In the normal case we only ever call with "trigger=true" to start a
-+ * transfer. That will un-trigger/disable the TCS from the last transfer
-+ * then trigger/enable for this transfer.
-+ *
-+ * If we borrowed a wake TCS for an active-only transfer we'll also call
-+ * this function with "trigger=false" to just do the un-trigger/disable
-+ * before using the TCS for wake purposes again.
-+ *
-+ * Note that the AP is only in charge of triggering active-only transfers.
-+ * The AP never triggers sleep/wake values using this function.
-+ */
-+static void __tcs_set_trigger(struct rsc_drv *drv, int tcs_id, bool trigger)
++static int rpmh_regulators_bind(struct udevice *dev)
 +{
-+	u32 enable;
-+	u32 reg = drv->regs[RSC_DRV_CONTROL];
++	const struct rpmh_vreg_init_data *init_data, *data;
++	const char *pmic_id;
++	char *name;
++	struct driver *drv;
++	ofnode node;
++	int ret;
++	size_t namelen;
 +
-+	/*
-+	 * HW req: Clear the DRV_CONTROL and enable TCS again
-+	 * While clearing ensure that the AMC mode trigger is cleared
-+	 * and then the mode enable is cleared.
-+	 */
-+	enable = read_tcs_reg(drv, reg, tcs_id);
-+	enable &= ~TCS_AMC_MODE_TRIGGER;
-+	write_tcs_reg_sync(drv, reg, tcs_id, enable);
-+	enable &= ~TCS_AMC_MODE_ENABLE;
-+	write_tcs_reg_sync(drv, reg, tcs_id, enable);
-+
-+	if (trigger) {
-+		/* Enable the AMC mode on the TCS and then trigger the TCS */
-+		enable = TCS_AMC_MODE_ENABLE;
-+		write_tcs_reg_sync(drv, reg, tcs_id, enable);
-+		enable |= TCS_AMC_MODE_TRIGGER;
-+		write_tcs_reg(drv, reg, tcs_id, enable);
-+	}
-+}
-+
-+/**
-+ * get_tcs_for_msg() - Get the tcs_group used to send the given message.
-+ * @drv: The RSC controller.
-+ * @msg: The message we want to send.
-+ *
-+ * This is normally pretty straightforward except if we are trying to send
-+ * an ACTIVE_ONLY message but don't have any active_only TCSes.
-+ *
-+ * Return: A pointer to a tcs_group or an ERR_PTR.
-+ */
-+static struct tcs_group *get_tcs_for_msg(struct rsc_drv *drv,
-+					 const struct tcs_request *msg)
-+{
-+	if (msg->state != RPMH_ACTIVE_ONLY_STATE) {
-+		printf("WARN: only ACTIVE_ONLY state supported\n");
-+		return ERR_PTR(-EINVAL);
++	init_data = (const struct rpmh_vreg_init_data *)dev_get_driver_data(dev);
++	if (!init_data) {
++		printf("No RPMh regulator init data\n");
++		return -ENODEV;
 +	}
 +
-+	return &drv->tcs[ACTIVE_TCS];
-+}
-+
-+/**
-+ * rpmh_rsc_send_data() - Write / trigger active-only message.
-+ * @drv: The controller.
-+ * @msg: The data to be sent.
-+ *
-+ * NOTES:
-+ * - This is only used for "ACTIVE_ONLY" since the limitations of this
-+ *   function don't make sense for sleep/wake cases.
-+ * - To do the transfer, we will grab a whole TCS for ourselves--we don't
-+ *   try to share. If there are none available we'll wait indefinitely
-+ *   for a free one.
-+ * - This function will not wait for the commands to be finished, only for
-+ *   data to be programmed into the RPMh. See rpmh_tx_done() which will
-+ *   be called when the transfer is fully complete.
-+ * - This function must be called with interrupts enabled. If the hardware
-+ *   is busy doing someone else's transfer we need that transfer to fully
-+ *   finish so that we can have the hardware, and to fully finish it needs
-+ *   the interrupt handler to run. If the interrupts is set to run on the
-+ *   active CPU this can never happen if interrupts are disabled.
-+ *
-+ * Return: 0 on success, -EINVAL on error.
-+ */
-+int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
-+{
-+	struct tcs_group *tcs;
-+	int tcs_id;
-+	unsigned long flags;
-+
-+	tcs = get_tcs_for_msg(drv, msg);
-+	if (IS_ERR(tcs))
-+		return PTR_ERR(tcs);
-+
-+	spin_lock_irqsave(&drv->lock, flags);
-+
-+	/* u-boot is single-threaded, always use the first TCS as we'll never conflict */
-+	tcs_id = tcs->offset;
-+
-+	tcs->req[tcs_id - tcs->offset] = msg;
-+	generic_set_bit(tcs_id, drv->tcs_in_use);
-+	if (msg->state == RPMH_ACTIVE_ONLY_STATE && tcs->type != ACTIVE_TCS) {
-+		/*
-+		 * Clear previously programmed WAKE commands in selected
-+		 * repurposed TCS to avoid triggering them. tcs->slots will be
-+		 * cleaned from rpmh_flush() by invoking rpmh_rsc_invalidate()
-+		 */
-+		write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, 0);
-+	}
-+	spin_unlock_irqrestore(&drv->lock, flags);
-+
-+	/*
-+	 * These two can be done after the lock is released because:
-+	 * - We marked "tcs_in_use" under lock.
-+	 * - Once "tcs_in_use" has been marked nobody else could be writing
-+	 *   to these registers until the interrupt goes off.
-+	 * - The interrupt can't go off until we trigger w/ the last line
-+	 *   of __tcs_set_trigger() below.
-+	 */
-+	__tcs_buffer_write(drv, tcs_id, 0, msg);
-+	__tcs_set_trigger(drv, tcs_id, true);
-+
-+	rpmh_rsc_wait_for_resp(drv, tcs_id);
-+
-+	return 0;
-+}
-+
-+static int rpmh_probe_tcs_config(struct udevice *dev, struct rsc_drv *drv)
-+{
-+	struct tcs_type_config {
-+		u32 type;
-+		u32 n;
-+	} tcs_cfg[TCS_TYPE_NR] = { { 0 } };
-+	ofnode dn = dev_ofnode(dev);
-+	u32 config, max_tcs, ncpt, offset;
-+	int i, ret, n, st = 0;
-+	struct tcs_group *tcs;
-+
-+	ret = ofnode_read_u32(dn, "qcom,tcs-offset", &offset);
-+	if (ret)
-+		return ret;
-+	drv->tcs_base = drv->base + offset;
-+
-+	config = readl_relaxed(drv->base + drv->regs[DRV_PRNT_CHLD_CONFIG]);
-+
-+	max_tcs = config;
-+	max_tcs &= DRV_NUM_TCS_MASK << (DRV_NUM_TCS_SHIFT * drv->id);
-+	max_tcs = max_tcs >> (DRV_NUM_TCS_SHIFT * drv->id);
-+
-+	ncpt = config & (DRV_NCPT_MASK << DRV_NCPT_SHIFT);
-+	ncpt = ncpt >> DRV_NCPT_SHIFT;
-+
-+	n = ofnode_read_u32_array(dn, "qcom,tcs-config", (u32 *)tcs_cfg, 2 * TCS_TYPE_NR);
-+	if (n < 0) {
-+		printf("RPMh: %s: error reading qcom,tcs-config %d\n", dev->name, n);
-+		return n;
++	pmic_id = ofnode_read_string(dev_ofnode(dev), "qcom,pmic-id");
++	if (!pmic_id) {
++		printf("No PMIC ID\n");
++		return -ENODEV;
 +	}
 +
-+	for (i = 0; i < TCS_TYPE_NR; i++) {
-+		if (tcs_cfg[i].n > MAX_TCS_PER_TYPE)
-+			return -EINVAL;
-+	}
++	drv = lists_driver_lookup_name("rpmh_regulator_drm");
 +
-+	for (i = 0; i < TCS_TYPE_NR; i++) {
-+		tcs = &drv->tcs[tcs_cfg[i].type];
-+		if (tcs->drv)
-+			return -EINVAL;
-+		tcs->drv = drv;
-+		tcs->type = tcs_cfg[i].type;
-+		tcs->num_tcs = tcs_cfg[i].n;
-+		tcs->ncpt = ncpt;
-+
-+		if (!tcs->num_tcs || tcs->type == CONTROL_TCS)
++	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
++		data = vreg_get_init_data(init_data, node);
++		if (!data)
 +			continue;
 +
-+		if (st + tcs->num_tcs > max_tcs ||
-+		    st + tcs->num_tcs >= BITS_PER_BYTE * sizeof(tcs->mask))
-+			return -EINVAL;
++		/* %s is replaced with pmic_id, so subtract 2, then add 1 for the null terminator */
++		namelen = strlen(data->resource_name) + strlen(pmic_id) - 1;
++		name = devm_kzalloc(dev, namelen, GFP_KERNEL);
++		ret = snprintf(name, namelen, data->resource_name, pmic_id);
++		if (ret < 0 || ret >= namelen) {
++			printf("Failed to create RPMh regulator name\n");
++			return -ENOMEM;
++		}
 +
-+		tcs->mask = ((1 << tcs->num_tcs) - 1) << st;
-+		tcs->offset = st;
-+		st += tcs->num_tcs;
++		ret = device_bind_with_driver_data(dev, drv, name, (ulong)data,
++						   node, NULL);
 +	}
-+
-+	drv->num_tcs = st;
 +
 +	return 0;
 +}
 +
-+static int rpmh_rsc_probe(struct udevice *dev)
-+{
-+	ofnode dn = dev_ofnode(dev);
-+	ofnode rmem, node;
-+	struct rsc_drv *drv;
-+	char drv_id[10] = {0};
-+	int ret;
-+	u32 rsc_id;
-+
-+	/*
-+	 * Even though RPMh doesn't directly use cmd-db, all of its children
-+	 * do. We init cmd-db here or bail out if we can't. All child devices
-+	 * can therefore safely assume that cmd-db is available.
-+	 */
-+	rmem = ofnode_path("/reserved-memory");
-+	ofnode_for_each_subnode(node, rmem) {
-+		if (ofnode_device_is_compatible(node, "qcom,cmd-db"))
-+			goto found;
-+	}
-+
-+	printf("Couldn't find qcom,cmd-db node!\n");
-+	return -ENODEV;
-+found:
-+	ret = cmd_db_init(node);
-+	if (ret < 0) {
-+		printf("Couldn't init cmd-db!\n");
-+		return ret;
-+	}
-+
-+	drv = dev_get_priv(dev);
-+
-+	ret = ofnode_read_u32(dn, "qcom,drv-id", &drv->id);
-+	if (ret)
-+		return ret;
-+
-+	drv->name = ofnode_get_property(dn, "label", NULL);
-+	if (!drv->name)
-+		drv->name = dev->name;
-+
-+	snprintf(drv_id, ARRAY_SIZE(drv_id), "drv-%d", drv->id);
-+	drv->base = (void __iomem*)dev_read_addr_name(dev, drv_id);
-+	if (IS_ERR(drv->base))
-+		return PTR_ERR(drv->base);
-+
-+	rsc_id = readl_relaxed(drv->base + RSC_DRV_ID);
-+	drv->ver.major = rsc_id & (MAJOR_VER_MASK << MAJOR_VER_SHIFT);
-+	drv->ver.major >>= MAJOR_VER_SHIFT;
-+	drv->ver.minor = rsc_id & (MINOR_VER_MASK << MINOR_VER_SHIFT);
-+	drv->ver.minor >>= MINOR_VER_SHIFT;
-+
-+	if (drv->ver.major == 3) {
-+		printf("RPMh v3 not supported\n");
-+		return -EOPNOTSUPP;
-+	} else {
-+		drv->regs = rpmh_rsc_reg_offset_ver_2_7;
-+	}
-+
-+	ret = rpmh_probe_tcs_config(dev, drv);
-+	if (ret)
-+		return ret;
-+
-+	spin_lock_init(&drv->lock);
-+	init_waitqueue_head(&drv->tcs_wait);
-+	bitmap_zero(drv->tcs_in_use, MAX_TCS_NR);
-+
-+	/* Enable the active TCS to send requests immediately */
-+	writel_relaxed(drv->tcs[ACTIVE_TCS].mask,
-+		       drv->tcs_base + drv->regs[RSC_DRV_IRQ_ENABLE]);
-+
-+	spin_lock_init(&drv->client.cache_lock);
-+	INIT_LIST_HEAD(&drv->client.cache);
-+	INIT_LIST_HEAD(&drv->client.batch_cache);
-+
-+	dev_set_drvdata(dev, drv);
-+	drv->dev = dev;
-+
-+	log_debug("RPMh: %s: v%d.%d\n", dev->name, drv->ver.major, drv->ver.minor);
-+
-+	return ret;
-+}
-+
-+static const struct udevice_id qcom_rpmh_ids[] = {
-+	{ .compatible = "qcom,rpmh-rsc" },
-+	{ }
++static const struct udevice_id rpmh_regulator_ids[] = {
++	{
++		.compatible = "qcom,pm8150-rpmh-regulators",
++		.data = (ulong)pm8150_vreg_data,
++	},
++	{
++		.compatible = "qcom,pm8150l-rpmh-regulators",
++		.data = (ulong)pm8150l_vreg_data,
++	},
++	{ /* sentinal */ },
 +};
 +
-+U_BOOT_DRIVER(qcom_rpmh_rsc) = {
-+	.name		= "qcom_rpmh_rsc",
-+	.id		= UCLASS_MISC,
-+	.priv_auto	= sizeof(struct rsc_drv),
-+	.probe		= rpmh_rsc_probe,
-+	.bind		= dm_scan_fdt_dev,
-+	.of_match	= qcom_rpmh_ids,
-+	/* rpmh is under CLUSTER_PD which we don't support */
-+	.flags		= DM_FLAG_DEFAULT_PD_CTRL_OFF,
++/* Driver for a 'bank' of regulators. This creates devices for each
++ * individual regulator
++ */
++U_BOOT_DRIVER(rpmh_regulators) = {
++	.name = "rpmh_regulators",
++	.id = UCLASS_MISC,
++	.bind = rpmh_regulators_bind,
++	.of_match = rpmh_regulator_ids,
++	.ops = &rpmh_regulator_vrm_drms_ops,
 +};
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-new file mode 100644
-index 000000000000..f00c241de373
---- /dev/null
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -0,0 +1,110 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
-+ */
-+
-+#include <linux/bug.h>
-+#include <linux/kernel.h>
-+#include <linux/list.h>
-+#include <linux/types.h>
-+#include <dm/device.h>
-+
-+#include <soc/qcom/rpmh.h>
-+
-+#include "rpmh-internal.h"
-+
-+#define RPMH_TIMEOUT_MS			msecs_to_jiffies(10000)
-+
-+#define DEFINE_RPMH_MSG_ONSTACK(device, s, name)	\
-+	struct rpmh_request name = {			\
-+		.msg = {				\
-+			.state = s,			\
-+			.cmds = name.cmd,		\
-+			.num_cmds = 0,			\
-+		},					\
-+		.cmd = { { 0 } },			\
-+		.dev = device,				\
-+		.needs_free = false,			\
-+	}
-+
-+#define ctrlr_to_drv(ctrlr) container_of(ctrlr, struct rsc_drv, client)
-+
-+static struct rpmh_ctrlr *get_rpmh_ctrlr(const struct udevice *dev)
-+{
-+	struct rsc_drv *drv = (struct rsc_drv *)dev_get_priv(dev->parent);
-+
-+	if (!drv) {
-+		printf("BUG: no RPMh driver for %s (parent %s)\n", dev->name, dev->parent->name);
-+		BUG();
-+	}
-+
-+	return &drv->client;
-+}
-+
-+/**
-+ * __rpmh_write: Cache and send the RPMH request
-+ *
-+ * @dev: The device making the request
-+ * @state: Active/Sleep request type
-+ * @rpm_msg: The data that needs to be sent (cmds).
-+ *
-+ * Cache the RPMH request and send if the state is ACTIVE_ONLY.
-+ * SLEEP/WAKE_ONLY requests are not sent to the controller at
-+ * this time. Use rpmh_flush() to send them to the controller.
-+ */
-+static int __rpmh_write(const struct udevice *dev, enum rpmh_state state,
-+			struct rpmh_request *rpm_msg)
-+{
-+	struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
-+
-+	debug("rpmh_write: %s, %d\n", dev->name, state);
-+
-+	if (state != RPMH_ACTIVE_ONLY_STATE) {
-+		printf("WARN: only ACTIVE_ONLY state supported\n");
-+		return -EINVAL;
-+	}
-+
-+	return rpmh_rsc_send_data(ctrlr_to_drv(ctrlr), &rpm_msg->msg);
-+}
-+
-+static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
-+			   const struct tcs_cmd *cmd, u32 n)
-+{
-+	if (!cmd || !n || n > MAX_RPMH_PAYLOAD)
-+		return -EINVAL;
-+
-+	memcpy(req->cmd, cmd, n * sizeof(*cmd));
-+
-+	req->msg.state = state;
-+	req->msg.cmds = req->cmd;
-+	req->msg.num_cmds = n;
-+
-+	debug("rpmh_msg: %d, %d cmds [first %#x/%#x]\n", state, n, cmd->addr, cmd->data);
-+
-+	return 0;
-+}
-+
-+/**
-+ * rpmh_write: Write a set of RPMH commands and block until response
-+ *
-+ * @dev: The device making the request
-+ * @state: Active/sleep set
-+ * @cmd: The payload data
-+ * @n: The number of elements in @cmd
-+ *
-+ * May sleep. Do not call from atomic contexts.
-+ */
-+int rpmh_write(const struct udevice *dev, enum rpmh_state state,
-+	       const struct tcs_cmd *cmd, u32 n)
-+{
-+	DEFINE_RPMH_MSG_ONSTACK(dev, state, rpm_msg);
-+	int ret;
-+
-+	ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n);
-+	if (ret)
-+		return ret;
-+
-+	ret = __rpmh_write(dev, state, &rpm_msg);
-+
-+	return ret;
-+}
-diff --git a/include/soc/qcom/cmd-db.h b/include/soc/qcom/cmd-db.h
-new file mode 100644
-index 000000000000..1e22d86c66c9
---- /dev/null
-+++ b/include/soc/qcom/cmd-db.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Copyright (c) 2016-2018, The Linux Foundation. All rights reserved. */
-+
-+#ifndef __QCOM_COMMAND_DB_H__
-+#define __QCOM_COMMAND_DB_H__
-+
-+#include <linux/err.h>
-+#include <dm/device.h>
-+
-+enum cmd_db_hw_type {
-+	CMD_DB_HW_INVALID = 0,
-+	CMD_DB_HW_MIN     = 3,
-+	CMD_DB_HW_ARC     = CMD_DB_HW_MIN,
-+	CMD_DB_HW_VRM     = 4,
-+	CMD_DB_HW_BCM     = 5,
-+	CMD_DB_HW_MAX     = CMD_DB_HW_BCM,
-+	CMD_DB_HW_ALL     = 0xff,
-+};
-+
-+#if IS_ENABLED(CONFIG_QCOM_COMMAND_DB)
-+u32 cmd_db_read_addr(const char *resource_id);
-+
-+const void *cmd_db_read_aux_data(const char *resource_id, size_t *len);
-+
-+enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id);
-+
-+int cmd_db_init(ofnode node);
-+
-+#else
-+static inline u32 cmd_db_read_addr(const char *resource_id)
-+{ return 0; }
-+
-+static inline const void *cmd_db_read_aux_data(const char *resource_id, size_t *len)
-+{ return ERR_PTR(-ENODEV); }
-+
-+static inline enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id)
-+{ return -ENODEV; }
-+
-+static inline int cmd_db_ready(void)
-+{ return -ENODEV; }
-+#endif /* CONFIG_QCOM_COMMAND_DB */
-+#endif /* __QCOM_COMMAND_DB_H__ */
-diff --git a/include/soc/qcom/rpmh.h b/include/soc/qcom/rpmh.h
-new file mode 100644
-index 000000000000..eb7c067cc5fd
---- /dev/null
-+++ b/include/soc/qcom/rpmh.h
-@@ -0,0 +1,29 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef __SOC_QCOM_RPMH_H__
-+#define __SOC_QCOM_RPMH_H__
-+
-+#include <linux/types.h>
-+#include <linux/errno.h>
-+#include <soc/qcom/tcs.h>
-+#include <dm/device-internal.h>
-+
-+#if IS_ENABLED(CONFIG_QCOM_RPMH)
-+int rpmh_write(const struct udevice *dev, enum rpmh_state state,
-+	       const struct tcs_cmd *cmd, u32 n);
-+
-+#else
-+
-+static inline int rpmh_write(const struct udevice *dev, enum rpmh_state state,
-+			     const struct tcs_cmd *cmd, u32 n)
-+{ return -ENODEV; }
-+
-+#endif /* CONFIG_QCOM_RPMH */
-+
-+/* u-boot: no multithreading */
-+#define rpmh_write_async(dev, state, cmd, n) rpmh_write(dev, state, cmd, n)
-+
-+#endif /* __SOC_QCOM_RPMH_H__ */
-diff --git a/include/soc/qcom/tcs.h b/include/soc/qcom/tcs.h
-new file mode 100644
-index 000000000000..c8d28b052f1d
---- /dev/null
-+++ b/include/soc/qcom/tcs.h
-@@ -0,0 +1,78 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2016-2019, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef __SOC_QCOM_TCS_H__
-+#define __SOC_QCOM_TCS_H__
-+
-+#define MAX_RPMH_PAYLOAD	16
-+
-+/**
-+ * rpmh_state: state for the request
-+ *
-+ * RPMH_SLEEP_STATE:       State of the resource when the processor subsystem
-+ *                         is powered down. There is no client using the
-+ *                         resource actively.
-+ * RPMH_WAKE_ONLY_STATE:   Resume resource state to the value previously
-+ *                         requested before the processor was powered down.
-+ * RPMH_ACTIVE_ONLY_STATE: Active or AMC mode requests. Resource state
-+ *                         is aggregated immediately.
-+ */
-+enum rpmh_state {
-+	RPMH_SLEEP_STATE,
-+	RPMH_WAKE_ONLY_STATE,
-+	RPMH_ACTIVE_ONLY_STATE,
-+};
-+
-+/**
-+ * struct tcs_cmd: an individual request to RPMH.
-+ *
-+ * @addr: the address of the resource slv_id:18:16 | offset:0:15
-+ * @data: the resource state request
-+ * @wait: ensure that this command is complete before returning.
-+ *        Setting "wait" here only makes sense during rpmh_write_batch() for
-+ *        active-only transfers, this is because:
-+ *        rpmh_write() - Always waits.
-+ *                       (DEFINE_RPMH_MSG_ONSTACK will set .wait_for_compl)
-+ *        rpmh_write_async() - Never waits.
-+ *                       (There's no request completion callback)
-+ */
-+struct tcs_cmd {
-+	u32 addr;
-+	u32 data;
-+	u32 wait;
-+};
-+
-+/**
-+ * struct tcs_request: A set of tcs_cmds sent together in a TCS
-+ *
-+ * @state:          state for the request.
-+ * @num_cmds:       the number of @cmds in this request
-+ * @cmds:           an array of tcs_cmds
-+ */
-+struct tcs_request {
-+	enum rpmh_state state;
-+	u32 num_cmds;
-+	struct tcs_cmd *cmds;
-+};
-+
-+#define BCM_TCS_CMD_COMMIT_SHFT		30
-+#define BCM_TCS_CMD_COMMIT_MASK		0x40000000
-+#define BCM_TCS_CMD_VALID_SHFT		29
-+#define BCM_TCS_CMD_VALID_MASK		0x20000000
-+#define BCM_TCS_CMD_VOTE_X_SHFT		14
-+#define BCM_TCS_CMD_VOTE_MASK		0x3fff
-+#define BCM_TCS_CMD_VOTE_Y_SHFT		0
-+#define BCM_TCS_CMD_VOTE_Y_MASK		0xfffc000
-+
-+/* Construct a Bus Clock Manager (BCM) specific TCS command */
-+#define BCM_TCS_CMD(commit, valid, vote_x, vote_y)		\
-+	(((commit) << BCM_TCS_CMD_COMMIT_SHFT) |		\
-+	((valid) << BCM_TCS_CMD_VALID_SHFT) |			\
-+	((cpu_to_le32(vote_x) &					\
-+	BCM_TCS_CMD_VOTE_MASK) << BCM_TCS_CMD_VOTE_X_SHFT) |	\
-+	((cpu_to_le32(vote_y) &					\
-+	BCM_TCS_CMD_VOTE_MASK) << BCM_TCS_CMD_VOTE_Y_SHFT))
-+
-+#endif /* __SOC_QCOM_TCS_H__ */
 
 -- 
 2.45.0
