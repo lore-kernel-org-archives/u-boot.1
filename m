@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CC8C2BA1A
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 22:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D31C27C79
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 22:35:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D93628824C;
-	Tue, 18 Jun 2024 00:35:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51C888841D;
+	Tue, 18 Jun 2024 00:35:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="dR5rcM/X";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h1Nuh2VG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 650A0883C3; Mon, 17 Jun 2024 22:21:07 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::600])
+ id B69DB883C3; Mon, 17 Jun 2024 22:21:11 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3969188398
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 22:21:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A16C488398
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 22:21:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Sam.Povilus@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dHXbwv6H50XdLTjrwTaEFGmf3s4u+fizPSu2OZ6pioXx/ISMsS407Y40Gwft4zGlxXbl1J2jtN7MZvOhrUvexMQhE/mcrVPGjHD6irU5EQWC6BkBiHsCQKoNRSlKuvuNopIUSrxKGgbB9eZqdhWI68/l6c8aMvNoIePll4iXY3ZR1yzSzlhVS81oCnqxze6ORcGTRuhcRmoTKOV8AERD8RvUoUKHyaVDzFcB9+y2E2DrfXI56ByG/6amcYyjln94KgT/Z1yN7d9s1g4qZJ7ivp2bMXw39kXfYaDCIQjcBs5IGRkbmq2eAh+OfeBW11sx4aG+oi9sQQb0WVgtJwbPJQ==
+ b=Ppusw96PN/acd6jhie9vGma6JVMO9/uqFolw/GAsFWtvI+mNzD66OdRcEiib44B+TUF3uZOC6MWuhXCDOA/eluGF0+Qg/w1JZ8EyhtZIItwm89/XtZoIRw00B0y4tpfll215rgPSHKBtlGV3d/wbnbIea6FETn4IZ3wesSDouWcCa2e+rV+0cc4d3Km1Mgl62kAgTlBBDDBwdaRzmU6v0XIlXfJAIq9IyBzHNx1IEClUsD2I2jMPYMrj6+7iY/BiCTgb2U5NuKnOH5PudzGAOiO/tD/FZ+BhIgSUyS1hjVNy4+0U4RiB2QG/sEDRYxmNvg3j2Yo1wjm08TRoDmI6+w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XHsBQrvrLzLdw9R9pSPqVJwS4Dj5JgDQR7sjZLQkhKE=;
- b=a4z016Qr6dmnNnOAcxkhg9JveLsserjz1d+cXoDb0gNK1mdiGD1S4BeUHtUg7P6P5y1ny9d1ZNOz8NTQNe18RSow/GS4fTPTT2qql+Q3u7n3wiRLZWuLsqtY01NgUmhE+a+HvyzSwrrMZqmblZuxlbXZOWKjC7crnhb0gkieR3HYThK8yFDzplsdvi9dwTgulZH/rFkSYxB2qJV/cKmAdeWxeFbFERuGLJNFfXFqzfR301pGbhqrRPqwWtlID7ZmkvQHTWY12b+V7TcNrUlJf7Onz6X4/R1puHJW2Wf9kCT4RGMRao+yowBJwtJdlXxESdAmoVdXO8uYnag1tBLMGQ==
+ bh=kWQ6szPbPUBkRyoLFcFMO/LXy3A8rZJ0hd0e+d7Ixpw=;
+ b=K4dDUa4osGG4jMN/JwMWQnDtr8WBZPLIvZGX2uuEWGRNDxsLgjX8GIRY6gBmH05AmFwpIRgTXRYRWko0Tc4S/xHyAWny/5Sd2ZOl788hYjVrMO9b+yqU5I0BMNOQ2f/m+bmvUrVmUvYFhS9KM+r0v+HKvNoTGfhBhjqZiy3kItQYmkgiY3eRuVmx+MCEPfJxQW0nLsIq244TTHbfRT8lzBJQBRM8c70b0RuJ2ELg19gENcyui3YQGWymiX9cBXAZv+yc3Uk4teq878QAxf6O19VT6H6kQlEZWlkEyNpsPT3OdxRjQCflH+ibyZHZUPsh7lQ0yffdH7OfREvnMO/HNQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XHsBQrvrLzLdw9R9pSPqVJwS4Dj5JgDQR7sjZLQkhKE=;
- b=dR5rcM/XBvbKzUf2/D47e0uu38/uNhTQhs9i0EW3+lV4+XJUTALK5KKszMdrrvfkTP3XPZSol6hiUqxMAZhHakE6A+iSoC2WKnqzUWbtA3KC5ndYHGDJn86eDcUknLyIsnieGFggxpLNTmqJXB+UlfiqdpTFl2fsE3UKBygMUI4=
-Received: from DS7PR03CA0112.namprd03.prod.outlook.com (2603:10b6:5:3b7::27)
- by PH7PR12MB6466.namprd12.prod.outlook.com (2603:10b6:510:1f6::22) with
+ bh=kWQ6szPbPUBkRyoLFcFMO/LXy3A8rZJ0hd0e+d7Ixpw=;
+ b=h1Nuh2VGBkR86UyHEwkLa6VIx5eETVo/SSMrr8qlAr4UreIHbRBwk7k0ZGCAIBr66Exj/cqPhMhHHftHmYqTkAJ9iKbW90DowV49UcKDl0rJq998L37ZtzG8R2HjJcD7M2/Mm7BOtRmEErtwj2Kx0j+17Djk48bs3IqOh7tj5VU=
+Received: from DM6PR18CA0012.namprd18.prod.outlook.com (2603:10b6:5:15b::25)
+ by MW5PR12MB5681.namprd12.prod.outlook.com (2603:10b6:303:19e::20) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30; Mon, 17 Jun
- 2024 20:21:00 +0000
-Received: from DS1PEPF00017095.namprd03.prod.outlook.com
- (2603:10b6:5:3b7:cafe::7a) by DS7PR03CA0112.outlook.office365.com
- (2603:10b6:5:3b7::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.31 via Frontend
- Transport; Mon, 17 Jun 2024 20:21:00 +0000
+ 2024 20:21:05 +0000
+Received: from DS1PEPF00017091.namprd03.prod.outlook.com
+ (2603:10b6:5:15b:cafe::98) by DM6PR18CA0012.outlook.office365.com
+ (2603:10b6:5:15b::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30 via Frontend
+ Transport; Mon, 17 Jun 2024 20:21:04 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,75 +59,86 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF00017095.mail.protection.outlook.com (10.167.17.138) with Microsoft
+ DS1PEPF00017091.mail.protection.outlook.com (10.167.17.133) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7677.15 via Frontend Transport; Mon, 17 Jun 2024 20:20:59 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ 15.20.7677.15 via Frontend Transport; Mon, 17 Jun 2024 20:21:04 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 17 Jun
- 2024 15:20:59 -0500
+ 2024 15:21:03 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 17 Jun
+ 2024 15:21:03 -0500
 Received: from xcoapps69.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 17 Jun 2024 15:20:58 -0500
+ Transport; Mon, 17 Jun 2024 15:21:02 -0500
 From: Sam Povilus <sam.povilus@amd.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <xypron.glpk@gmx.de>,
  <u-boot@lists.denx.de>
 CC: <sam.povilus@amd.com>, <git@amd.com>
-Subject: [RFC 0/1] FIT documentation link vs copy
-Date: Mon, 17 Jun 2024 14:20:40 -0600
-Message-ID: <20240617202041.3740154-1-sam.povilus@amd.com>
+Subject: [RFC 1/1] doc: Remove FIT documentation that is elsewhere
+Date: Mon, 17 Jun 2024 14:20:41 -0600
+Message-ID: <20240617202041.3740154-2-sam.povilus@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240617202041.3740154-1-sam.povilus@amd.com>
+References: <20240617202041.3740154-1-sam.povilus@amd.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: sam.povilus@amd.com does not designate
- permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017095:EE_|PH7PR12MB6466:EE_
-X-MS-Office365-Filtering-Correlation-Id: baaee926-efb1-4628-55f9-08dc8f0b0100
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017091:EE_|MW5PR12MB5681:EE_
+X-MS-Office365-Filtering-Correlation-Id: c1889325-220a-4691-f92b-08dc8f0b0380
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230037|36860700010|376011|82310400023|1800799021; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?uOTzoQgvTzOIq82QlACGBNw0WxIdmJfRBYTqRVFHQSUIgezUBdI4xVJ12r80?=
- =?us-ascii?Q?ZPbDk0KdeJrv93O/SfYr3LOao6qUgSAvBOT9rmO+jRlEzP+2SVlyp5UmgoYq?=
- =?us-ascii?Q?KPCrJTFQ13vebxQNImDVOllKg/U3+K730yGnmzQ+xRoJDT3em6nP8QUjT23n?=
- =?us-ascii?Q?81+u5iNJUcYbjD1ThmbX1Br+Fu2yLjZGRMZnTMqaHHuQ83DODPh+tPsUkVMa?=
- =?us-ascii?Q?6OMBsyKx1tKbbdll1hIBVGOLbYjW87+OQATrDH9jEe5da5lgbiMsHH0eR0V8?=
- =?us-ascii?Q?VaZnPHSDjvkwt1XOLnPjsogtPuD+oWWVC8mfH1gF1LZ2ByA6PSiGSRsyk09m?=
- =?us-ascii?Q?QuWE2v/2u3IMEAy6wi/zj/LT+u7ekoOrJ0O+TyckI63S7LUUms2hLsP6A6ZC?=
- =?us-ascii?Q?6fAZ7NVscpQG0TN03RdWELNmF97awIyR+Y5sQIsWs/Fp23BWq0htxB3/c0Bk?=
- =?us-ascii?Q?0KHffjlDenRegvfEo7AXQsN2bw7VkDcaKmaMtzeppqE6QjpwdDU4lFbU0btT?=
- =?us-ascii?Q?0D4nPNhMLEMB6eb2RQCeFk5y9CxiYLn5HzjjbJfObenOpRpxwKgjYTrOl3GY?=
- =?us-ascii?Q?Xp747zxFYHgVdY4CCdDOYi25hiuFJWXD1+TjxXQ6NN0WZQ9Ch5Ursr7+VB4n?=
- =?us-ascii?Q?r+ZaWYYSgkVGjVPHbIRYL7drA3dB+9/51qXKngUl0tc29WzbgMUTxPcrntDr?=
- =?us-ascii?Q?oyaPDytlVjrmB+z2cVRqS5aqat7uG7PikD/h+yDJ7UJxDBpGxgCzzJJWZrxf?=
- =?us-ascii?Q?B904oPVOQ0IUiJS5Xf6u6mvdINjZPGijDiw4hpCmEsJl90pP186lEjk0+Kep?=
- =?us-ascii?Q?5dAYMazR76pBhK+7Ji/yDleS4Kru6cno3K37Dq62y/60KYrXFrDfWCZxKPbH?=
- =?us-ascii?Q?NIfO+V5BOqnDefxc5KPTCkGPk3hV8ZvKfFUi0vkJSnxGD/jqwrtUeaMg+XDp?=
- =?us-ascii?Q?Tc+UjIXmFSgEBopzrZXhRu/XT/UDvp6v8a7wRXgdQdlGMsl8qWcCzF6glzXK?=
- =?us-ascii?Q?GQA+1eG0m5AOIoq6+PJGs2GRA4p+KL0d98AunHu4PB7n+cDu3AoI8I0pqW03?=
- =?us-ascii?Q?r4cklMLXt7IzW3BvcPuTIHjkjlftPHQlhFC7oY0/9PjZ6olNYwSsOv0Y/bCX?=
- =?us-ascii?Q?72uRhDQH24YM61qpZdPfIGiILCEu2h7vh1ZnFVCgicbyTNLDV2dDP4YleeRm?=
- =?us-ascii?Q?J2o7tZ9FchPwzGvayk0OL05IsHteS8M+1jfzfdmA4kXjCO7mTDaAa3+3Ok01?=
- =?us-ascii?Q?sEOv9Yk9xSBK2Zq9bcq2b31AOt77OJWTe9AM0WQjGrFF4r1InwfPC2BJENo5?=
- =?us-ascii?Q?jNfagsQGm7fn9wP8fFqaY/sJC7QUqLry+SxSttcDMf9dFpWGsjJaURAebPC1?=
- =?us-ascii?Q?anIxj2UrRpuIdLQi//Igro6KuAoD2XgaGPdvruSFUx5YZURchw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V2ZzR2pib1Q4bk1KK1JsTGRGdEZvK29lU3ZKbGtOQnl5a3lOQTlWQ2VyQ2dD?=
+ =?utf-8?B?MkQ5VHdhVXNPaGNBbk1lek91L1dwZVlrZEdtd0lLblFCSFJzVWlYQU5SSHVm?=
+ =?utf-8?B?SzEzdXNBYVlVUEROQ2dMQytxYmJ3V0EzMVlub3E5c3dFL0R5aWJJd01Vd09S?=
+ =?utf-8?B?NGZXbUFTaXE4b2E2Z0NmbldaQVVKdkp6dnlGeGhnUkF1Mit2b0hDNnNiUkha?=
+ =?utf-8?B?RUVneFRSRXdPb2wrc3d0MVlDenJPejhLNk1CaUI0eEcyb1Z2WkFUNGdMZHcz?=
+ =?utf-8?B?bG1tOVFlMjB2L3ZHN3hlZjBEVlI1dlpQT294aXFhTXR1MDBhNEd1ekxURXlN?=
+ =?utf-8?B?SnNBUERKbHZ3TFZQN21ad2pUbjNxWlBOSVNzc1dibmI4aWFNVXFjZHpGNXA5?=
+ =?utf-8?B?Tm5BdW5sR2Y3MzM2TDZNcXRQR2tUckx4LzQ4dm1paWFsZ29QTWcvR2thMnlj?=
+ =?utf-8?B?R2ZoM0wwUG5kUXhtbE1aYVkyZjAraXZaYiswN3ZGUGR0cDFBN1FJZEI5bU9O?=
+ =?utf-8?B?bUx2OElEdFlHUWhYZERlWGJHbkd3R2VBR0t3NmNhUkgxTGF6RHFCVEJ0ekJr?=
+ =?utf-8?B?cDN6NmFyR2RWQWQwK1VhSVpNdGg3dDZKWDhUT3pFM1Z3Wm5aVGhWWGNKSXpU?=
+ =?utf-8?B?ODdpbDhQajgrVDZXKzZRR24va3ZSTkVJVGM2RHhHNCtPUnJvcWVIZVJ5T3Iz?=
+ =?utf-8?B?ZkVMQUI2dzJlOHgyMVhJUWNYQXNaVTE4bThDcGI4TFo5ZitKSmVXcktVYkNq?=
+ =?utf-8?B?MnZ1aHRvRE1WTVZjODZzTWxWcmV0ajVPREovM2pnYk9sMXFkdWQvbzhQUXB0?=
+ =?utf-8?B?enBqeU9zeXEvWTVJZCtGMXNDaWRPZU9USm9XcWtVbWFJZDlFQWxjOHhtcTNa?=
+ =?utf-8?B?ZXFXNFc4WGJhODhmTjNuUXZaMERTSFFsby9OWDZNUkdyOGI5andKdHVBdlFm?=
+ =?utf-8?B?VVFPVnp6eWtWYkZOeHEwMVF6ajczYmJpRHJIRHFvVmM1Y1h0SnRhUkFyeE0r?=
+ =?utf-8?B?STVyZVZaMGNHSWw4YkF0NFlTM2pKRkNuV053NU5FcTVzbXhBQVUzcENJZ2VZ?=
+ =?utf-8?B?eUNoTnQ3WGdtcFU1NlMyOXJHMDVKK1RHZU5LY0lpMXZybGY3emNmQnlnVW10?=
+ =?utf-8?B?eXptN0hxckN1R25sN2o1RGZwclNyWkV2RWZ2SmRDTWliQnlQTTBwVmxXQnhB?=
+ =?utf-8?B?TjA4aGZEWjZUUHgzRlp6SUR1Zk5BZ0tVanl4akp5anVhY0xubThIWmlBa09Q?=
+ =?utf-8?B?OWh1dDdaRW5IMENnTmRGZ2lHZHpCVkFXdVgwMUZJM2Ric1ZCZnAyM013RHpO?=
+ =?utf-8?B?Y2wzdFQzU1Rkc3RSamE3SzlQMjlLTFBocjljOEYxdHNGK1ZtcEhERkJGWlc5?=
+ =?utf-8?B?VWFvKzVMci9yUkY1MkRYYUJMWllaVDgxdUZKYUdxNm1RUllYWG1tSjZxcXBi?=
+ =?utf-8?B?bm9vS3ZVc01tcmMzSkt6alk3NXR0RFlESGYzaTRsR1N5U0MzWC9SL1FBeWdt?=
+ =?utf-8?B?aEVyOElPclJoYXo5cCtxdit1MEx5d2FNbzc2ZC85RHZVMzBtNERQQy9XQUxo?=
+ =?utf-8?B?S1pwV3hKamlyYUdGNDExSnZUZkNQZW1xTkNOek9yWmh4TUM5OFhYbWFMbkpQ?=
+ =?utf-8?B?akdkbXM0STEzbXpYQS9PdUdOMXBLVUVBWVJWbFZpdEpzN1VOa3BsT2hseFR5?=
+ =?utf-8?B?QmtyMWtLYWhvQ3dYZXdiQ3pVUWlucy9UTmQxTjNhWXJWWmhUbFhOKzBDeFRH?=
+ =?utf-8?B?cHFrMlRnd2tubjJVVE05azY1dkdlY2t1R3FTYjdHbzVNSDc3Mm5qWTJSeUFE?=
+ =?utf-8?Q?e9o8gVkTkd3JUHO+ch/6hRGGvwPvFMmpr99Q8=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230037)(36860700010)(376011)(82310400023)(1800799021); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 20:20:59.8041 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: baaee926-efb1-4628-55f9-08dc8f0b0100
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 20:21:04.4868 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c1889325-220a-4691-f92b-08dc8f0b0380
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017095.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017091.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6466
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR12MB5681
 X-Mailman-Approved-At: Tue, 18 Jun 2024 00:35:09 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -145,17 +156,729 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm proposing linking the FIT documentation instead of double book keeping it, 
-it does have the disadvantage of making it more difficult to see the 
-documentation especially if offline. 
+FIT documentation is now a separate project, instead of having a
+duplicate, we should point at the other project.
 
-Sam Povilus (1):
-  doc: Remove FIT documentation that is elsewhere
-
+Signed-off-by: Sam Povilus <sam.povilus@amd.com>
+---
  doc/usage/fit/index.rst              |  14 +-
  doc/usage/fit/source_file_format.rst | 682 +--------------------------
  2 files changed, 5 insertions(+), 691 deletions(-)
 
+diff --git a/doc/usage/fit/index.rst b/doc/usage/fit/index.rst
+index bd25bd30b2..12a8c6fb16 100644
+--- a/doc/usage/fit/index.rst
++++ b/doc/usage/fit/index.rst
+@@ -4,16 +4,6 @@ Flat Image Tree (FIT)
+ =====================
+ 
+ U-Boot uses Flat Image Tree (FIT) as a standard file format for packaging
+-images that it it reads and boots. Documentation about FIT is available at
+-doc/uImage.FIT
++images that it it reads and boots. Documentation about FIT is available in 
++`the Flattened Image Tree project <https://fitspec.osfw.foundation/>`_.
+ 
+-.. toctree::
+-    :maxdepth: 1
+-
+-    source_file_format
+-    howto
+-    x86-fit-boot
+-    signature
+-    verified-boot
+-    beaglebone_vboot
+-    overlay-fdt-boot
+diff --git a/doc/usage/fit/source_file_format.rst b/doc/usage/fit/source_file_format.rst
+index b2b1e42bd7..0c44329a82 100644
+--- a/doc/usage/fit/source_file_format.rst
++++ b/doc/usage/fit/source_file_format.rst
+@@ -3,682 +3,6 @@
+ Flattened Image Tree (FIT) Format
+ =================================
+ 
+-Introduction
+-------------
+-
+-The number of elements playing a role in the kernel booting process has
+-increased over time and now typically includes the devicetree, kernel image and
+-possibly a ramdisk image. Generally, all must be placed in the system memory and
+-booted together.
+-
+-For firmware images a similar process has taken place, with various binaries
+-loaded at different addresses, such as ARM's ATF, OpenSBI, FPGA and U-Boot
+-itself.
+-
+-FIT provides a flexible and extensible format to deal with this complexity. It
+-provides support for multiple components. It also supports multiple
+-configurations, so that the same FIT can be used to boot multiple boards, with
+-some components in common (e.g. kernel) and some specific to that board (e.g.
+-devicetree).
+-
+-Terminology
+-~~~~~~~~~~~
+-
+-This document defines FIT by providing FDT (Flat Device Tree) bindings. These
+-describe the final form of the FIT at the moment when it is used. The user
+-perspective may be simpler, as some of the properties (like timestamps and
+-hashes) are filled in automatically by the U-Boot mkimage tool.
+-
+-To avoid confusion with the kernel FDT the following naming convention is used:
+-
+-FIT
+-    Flattened Image Tree
+-
+-FIT is formally a flattened devicetree (in the libfdt meaning), which conforms
+-to bindings defined in this document.
+-
+-.its
+-    image tree source
+-
+-.itb
+-    flattened image tree blob
+-
+-Image-building procedure
+-~~~~~~~~~~~~~~~~~~~~~~~~
+-
+-The following picture shows how the FIT is prepared. Input consists of
+-image source file (.its) and a set of data files. Image is created with the
+-help of standard U-Boot mkimage tool which in turn uses dtc (device tree
+-compiler) to produce image tree blob (.itb). The resulting .itb file is the
+-actual binary of a new FIT::
+-
+-    tqm5200.its
+-    +
+-    vmlinux.bin.gz     mkimage + dtc               xfer to target
+-    eldk-4.2-ramdisk  --------------> tqm5200.itb --------------> boot
+-    tqm5200.dtb                          /|\
+-                                          |
+-                                     'new FIT'
+-
+-Steps:
+-
+-#. Create .its file, automatically filled-in properties are omitted
+-
+-#. Call mkimage tool on a .its file
+-
+-#. mkimage calls dtc to create .itb image and assures that
+-   missing properties are added
+-
+-#. .itb (new FIT) is uploaded onto the target and used therein
+-
+-
+-Unique identifiers
+-~~~~~~~~~~~~~~~~~~
+-
+-To identify FIT sub-nodes representing images, hashes, configurations (which
+-are defined in the following sections), the "unit name" of the given sub-node
+-is used as it's identifier as it assures uniqueness without additional
+-checking required.
+-
+-
+-External data
+-~~~~~~~~~~~~~
+-
+-FIT is normally built initially with image data in the 'data' property of each
+-image node. It is also possible for this data to reside outside the FIT itself.
+-This allows the 'FDT' part of the FIT to be quite small, so that it can be
+-loaded and scanned without loading a large amount of data. Then when an image is
+-needed it can be loaded from an external source.
+-
+-External FITs use 'data-offset' or 'data-position' instead of 'data'.
+-
+-The mkimage tool can convert a FIT to use external data using the `-E` argument,
+-optionally using `-p` to specific a fixed position.
+-
+-It is often desirable to align each image to a block size or cache-line size
+-(e.g. 512 bytes), so that there is no need to copy it to an aligned address when
+-reading the image data. The mkimage tool provides a `-B` argument to support
+-this.
+-
+-Root-node properties
+---------------------
+-
+-The root node of the FIT should have the following layout::
+-
+-    / o image-tree
+-        |- description = "image description"
+-        |- timestamp = <12399321>
+-        |- #address-cells = <1>
+-        |
+-        o images
+-        | |
+-        | o image-1 {...}
+-        | o image-2 {...}
+-        | ...
+-        |
+-        o configurations
+-          |- default = "conf-1"
+-          |
+-          o conf-1 {...}
+-          o conf-2 {...}
+-          ...
+-
+-Optional property
+-~~~~~~~~~~~~~~~~~
+-
+-description
+-    Textual description of the FIT
+-
+-Mandatory property
+-~~~~~~~~~~~~~~~~~~
+-
+-timestamp
+-    Last image modification time being counted in seconds since
+-    1970-01-01 00:00:00 - to be automatically calculated by mkimage tool.
+-
+-Conditionally mandatory property
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+-#address-cells
+-    Number of 32bit cells required to represent entry and
+-    load addresses supplied within sub-image nodes. May be omitted when no
+-    entry or load addresses are used.
+-
+-Mandatory nodes
+-~~~~~~~~~~~~~~~
+-
+-images
+-    This node contains a set of sub-nodes, each of them representing
+-    single component sub-image (like kernel, ramdisk, etc.). At least one
+-    sub-image is required.
+-
+-configurations
+-    Contains a set of available configuration nodes and
+-    defines a default configuration.
+-
+-
+-'/images' node
+---------------
+-
+-This node is a container node for component sub-image nodes. Each sub-node of
+-the '/images' node should have the following layout::
+-
+-    o image-1
+-        |- description = "component sub-image description"
+-        |- data = /incbin/("path/to/data/file.bin")
+-        |- type = "sub-image type name"
+-        |- arch = "ARCH name"
+-        |- os = "OS name"
+-        |- compression = "compression name"
+-        |- load = <00000000>
+-        |- entry = <00000000>
+-        |
+-        o hash-1 {...}
+-        o hash-2 {...}
+-        ...
+-
+-Mandatory properties
+-~~~~~~~~~~~~~~~~~~~~
+-
+-description
+-    Textual description of the component sub-image
+-
+-type
+-    Name of component sub-image type. Supported types are:
+-
+-    ====================  ==================
+-    Sub-image type        Meaning
+-    ====================  ==================
+-    invalid               Invalid Image
+-    aisimage              Davinci AIS image
+-    atmelimage            ATMEL ROM-Boot Image
+-    copro                 Coprocessor Image}
+-    fdt_legacy            legacy Image with Flat Device Tree
+-    filesystem            Filesystem Image
+-    firmware              Firmware
+-    firmware_ivt          Firmware with HABv4 IVT }
+-    flat_dt               Flat Device Tree
+-    fpga                  FPGA Image }
+-    gpimage               TI Keystone SPL Image
+-    imx8image             NXP i.MX8 Boot Image
+-    imx8mimage            NXP i.MX8M Boot Image
+-    imximage              Freescale i.MX Boot Image
+-    kernel                Kernel Image
+-    kernel_noload         Kernel Image (no loading done)
+-    kwbimage              Kirkwood Boot Image
+-    lpc32xximage          LPC32XX Boot Image
+-    mtk_image             MediaTek BootROM loadable Image }
+-    multi                 Multi-File Image
+-    mxsimage              Freescale MXS Boot Image
+-    omapimage             TI OMAP SPL With GP CH
+-    pblimage              Freescale PBL Boot Image
+-    pmmc                  TI Power Management Micro-Controller Firmware
+-    ramdisk               RAMDisk Image
+-    rkimage               Rockchip Boot Image }
+-    rksd                  Rockchip SD Boot Image }
+-    rkspi                 Rockchip SPI Boot Image }
+-    script                Script
+-    socfpgaimage          Altera SoCFPGA CV/AV preloader
+-    socfpgaimage_v1       Altera SoCFPGA A10 preloader
+-    spkgimage             Renesas SPKG Image }
+-    standalone            Standalone Program
+-    stm32image            STMicroelectronics STM32 Image }
+-    sunxi_egon            Allwinner eGON Boot Image }
+-    sunxi_toc0            Allwinner TOC0 Boot Image }
+-    tee                   Trusted Execution Environment Image
+-    ublimage              Davinci UBL image
+-    vybridimage           Vybrid Boot Image
+-    x86_setup             x86 setup.bin
+-    zynqimage             Xilinx Zynq Boot Image }
+-    zynqmpbif             Xilinx ZynqMP Boot Image (bif) }
+-    zynqmpimage           Xilinx ZynqMP Boot Image }
+-    ====================  ==================
+-
+-compression
+-    Compression used by included data. If no compression is used, the
+-    compression property should be set to "none". If the data is compressed but
+-    it should not be uncompressed by the loader (e.g. compressed ramdisk), this
+-    should also be set to "none".
+-
+-    Supported compression types are:
+-
+-    ====================  ==================
+-    Compression type      Meaning
+-    ====================  ==================
+-    none                  uncompressed
+-    bzip2                 bzip2 compressed
+-    gzip                  gzip compressed
+-    lz4                   lz4 compressed
+-    lzma                  lzma compressed
+-    lzo                   lzo compressed
+-    zstd                  zstd compressed
+-    ====================  ==================
+-
+-data-size
+-    size of the data in bytes
+-
+-
+-Conditionally mandatory property
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+-data
+-    Path to the external file which contains this node's binary data. Within
+-    the FIT this is the contents of the file. This is mandatory unless
+-    external data is used.
+-
+-data-offset
+-    Offset of the data in a separate image store. The image store is placed
+-    immediately after the last byte of the device tree binary, aligned to a
+-    4-byte boundary. This is mandatory if external data is used, with an offset.
+-
+-data-position
+-    Machine address at which the data is to be found. This is a fixed address
+-    not relative to the loading of the FIT. This is mandatory if external data
+-    used with a fixed address.
+-
+-os
+-    OS name, mandatory for types "kernel". Valid OS names are:
+-
+-    ====================  ==================
+-    OS name               Meaning
+-    ====================  ==================
+-    invalid               Invalid OS
+-    4_4bsd                4_4BSD
+-    arm-trusted-firmware  ARM Trusted Firmware
+-    dell                  Dell
+-    efi                   EFI Firmware
+-    esix                  Esix
+-    freebsd               FreeBSD
+-    integrity             INTEGRITY
+-    irix                  Irix
+-    linux                 Linux
+-    ncr                   NCR
+-    netbsd                NetBSD
+-    openbsd               OpenBSD
+-    openrtos              OpenRTOS
+-    opensbi               RISC-V OpenSBI
+-    ose                   Enea OSE
+-    plan9                 Plan 9
+-    psos                  pSOS
+-    qnx                   QNX
+-    rtems                 RTEMS
+-    sco                   SCO
+-    solaris               Solaris
+-    svr4                  SVR4
+-    tee                   Trusted Execution Environment
+-    u-boot                U-Boot
+-    vxworks               VxWorks
+-    ====================  ==================
+-
+-arch
+-    Architecture name, mandatory for types: "standalone", "kernel",
+-    "firmware", "ramdisk" and "fdt". Valid architecture names are:
+-
+-    ====================  ==================
+-    Architecture type     Meaning
+-    ====================  ==================
+-    invalid               Invalid ARCH
+-    alpha                 Alpha
+-    arc                   ARC
+-    arm64                 AArch64
+-    arm                   ARM
+-    avr32                 AVR32
+-    blackfin              Blackfin
+-    ia64                  IA64
+-    m68k                  M68K
+-    microblaze            MicroBlaze
+-    mips64                MIPS 64 Bit
+-    mips                  MIPS
+-    nds32                 NDS32
+-    nios2                 NIOS II
+-    or1k                  OpenRISC 1000
+-    powerpc               PowerPC
+-    ppc                   PowerPC
+-    riscv                 RISC-V
+-    s390                  IBM S390
+-    sandbox               Sandbox
+-    sh                    SuperH
+-    sparc64               SPARC 64 Bit
+-    sparc                 SPARC
+-    x86_64                AMD x86_64
+-    x86                   Intel x86
+-    xtensa                Xtensa
+-    ====================  ==================
+-
+-entry
+-    entry point address, address size is determined by
+-    '#address-cells' property of the root node.
+-    Mandatory for types: "firmware", and "kernel".
+-
+-load
+-    load address, address size is determined by '#address-cells'
+-    property of the root node.
+-    Mandatory for types: "firmware", and "kernel".
+-
+-compatible
+-    compatible method for loading image.
+-    Mandatory for types: "fpga", and images that do not specify a load address.
+-    Supported compatible methods:
+-
+-    ==========================  =========================================
+-    Compatible string           Meaning
+-    ==========================  =========================================
+-    u-boot,fpga-legacy          Generic fpga loading routine.
+-    u-boot,zynqmp-fpga-ddrauth  Signed non-encrypted FPGA bitstream for
+-                                Xilinx Zynq UltraScale+ (ZymqMP) device.
+-    u-boot,zynqmp-fpga-enc      Encrypted FPGA bitstream for Xilinx Zynq
+-                                UltraScale+ (ZynqMP) device.
+-    ==========================  =========================================
+-
+-phase
+-    U-Boot phase for which the image is intended.
+-
+-    "spl"
+-        image is an SPL image
+-
+-    "u-boot"
+-        image is a U-Boot image
+-
+-Optional nodes:
+-
+-hash-1
+-    Each hash sub-node represents separate hash or checksum
+-    calculated for node's data according to specified algorithm.
+-
+-signature-1
+-    Each signature sub-node represents separate signature
+-    calculated for node's data according to specified algorithm.
+-
+-
+-Hash nodes
+-----------
+-
+-::
+-
+-    o hash-1
+-        |- algo = "hash or checksum algorithm name"
+-        |- value = [hash or checksum value]
+-
+-Mandatory properties
+-~~~~~~~~~~~~~~~~~~~~
+-
+-algo
+-    Algorithm name. Supported algoriths and their value sizes are:
+-
+-    ==================== ============ =========================================
+-    Sub-image type       Size (bytes) Meaning
+-    ==================== ============ =========================================
+-    crc16-ccitt          2            Cyclic Redundancy Check 16-bit
+-                                      (Consultative Committee for International
+-                                      Telegraphy and Telephony)
+-    crc32                4            Cyclic Redundancy Check 32-bit
+-    md5                  16           Message Digest 5 (MD5)
+-    sha1                 20           Secure Hash Algorithm 1 (SHA1)
+-    sha256               32           Secure Hash Algorithm 2 (SHA256)
+-    sha384               48           Secure Hash Algorithm 2 (SHA384)
+-    sha512               64           Secure Hash Algorithm 2 (SHA512)
+-    ==================== ============ =========================================
+-
+-value
+-    Actual checksum or hash value.
+-
+-Image-signature nodes
+----------------------
+-
+-::
+-
+-    o signature-1
+-        |- algo = "algorithm name"
+-        |- key-name-hint = "key name"
+-        |- value = [hash or checksum value]
+-
+-
+-Mandatory properties
+-~~~~~~~~~~~~~~~~~~~~
+-
+-_`FIT Algorithm`:
+-
+-algo
+-    Algorithm name. Supported algoriths and their value sizes are shown below.
+-    Note that the hash is specified separately from the signing algorithm, so
+-    it is possible to mix and match any SHA algorithm with any signing
+-    algorithm. The size of the signature relates to the signing algorithm, not
+-    the hash, since it is the hash that is signed.
+-
+-    ==================== ============ =========================================
+-    Sub-image type       Size (bytes) Meaning
+-    ==================== ============ =========================================
+-    sha1,rsa2048         256          SHA1 hash signed with 2048-bit
+-                                      Rivest–Shamir–Adleman algorithm
+-    sha1,rsa3072         384          SHA1 hash signed with 2048-bit RSA
+-    sha1,rsa4096         512          SHA1 hash signed with 2048-bit RSA
+-    sha1,ecdsa256        32           SHA1 hash signed with 256-bit  Elliptic
+-                                      Curve Digital Signature Algorithm
+-    sha256,...
+-    sha384,...
+-    sha512,...
+-    ==================== ============ =========================================
+-
+-key-name-hint
+-    Name of key to use for signing. The keys will normally be in
+-    a single directory (parameter -k to mkimage). For a given key <name>, its
+-    private key is stored in <name>.key and the certificate is stored in
+-    <name>.crt.
+-
+-sign-images
+-    A list of images to sign, each being a property of the conf
+-    node that contains then. The default is "kernel,fdt" which means that these
+-    two images will be looked up in the config and signed if present. This is
+-    used by mkimage to determine which images to sign.
+-
+-The following properies are added as part of signing, and are mandatory:
+-
+-value
+-    Actual signature value. This is added by mkimage.
+-
+-hashed-nodes
+-    A list of nodes which were hashed by the signer. Each is
+-    a string - the full path to node. A typical value might be::
+-
+-	hashed-nodes = "/", "/configurations/conf-1", "/images/kernel",
+-	    "/images/kernel/hash-1", "/images/fdt-1",
+-	    "/images/fdt-1/hash-1";
+-
+-hashed-strings
+-    The start and size of the string region of the FIT that was hashed. The
+-    start is normally 0, indicating the first byte of the string table. The size
+-    indicates the number of bytes hashed as part of signing.
+-
+-The following properies are added as part of signing, and are optional:
+-
+-timestamp
+-    Time when image was signed (standard Unix time_t format)
+-
+-signer-name
+-    Name of the signer (e.g. "mkimage")
+-
+-signer-version
+-    Version string of the signer (e.g. "2013.01")
+-
+-comment
+-    Additional information about the signer or image
+-
+-padding
+-    The padding algorithm, it may be pkcs-1.5 or pss,
+-    if no value is provided we assume pkcs-1.5
+-
+-
+-'/configurations' node
+-----------------------
+-
+-The 'configurations' node creates convenient, labeled boot configurations,
+-which combine together kernel images with their ramdisks and fdt blobs.
+-
+-The 'configurations' node has the following structure::
+-
+-    o configurations
+-        |- default = "default configuration sub-node unit name"
+-        |
+-        o config-1 {...}
+-        o config-2 {...}
+-        ...
+-
+-
+-Optional property
+-~~~~~~~~~~~~~~~~~
+-
+-default
+-    Selects one of the configuration sub-nodes as a default configuration.
+-
+-Mandatory nodes
+-~~~~~~~~~~~~~~~
+-
+-configuration-sub-node-unit-name
+-    At least one of the configuration sub-nodes is required.
+-
+-Optional nodes
+-~~~~~~~~~~~~~~
+-
+-signature-1
+-    Each signature sub-node represents separate signature
+-    calculated for the configuration according to specified algorithm.
+-
+-
+-Configuration nodes
+--------------------
+-
+-Each configuration has the following structure::
+-
+-    o config-1
+-        |- description = "configuration description"
+-        |- kernel = "kernel sub-node unit name"
+-        |- fdt = "fdt sub-node unit-name" [, "fdt overlay sub-node unit-name", ...]
+-        |- loadables = "loadables sub-node unit-name"
+-        |- script = "
+-        |- compatible = "vendor,board-style device tree compatible string"
+-        o signature-1 {...}
+-
+-Mandatory properties
+-~~~~~~~~~~~~~~~~~~~~
+-
+-description
+-    Textual configuration description.
+-
+-kernel or firmware
+-    Unit name of the corresponding kernel or firmware
+-    (u-boot, op-tee, etc) image. If both "kernel" and "firmware" are specified,
+-    control is passed to the firmware image.
+-
+-Optional properties
+-~~~~~~~~~~~~~~~~~~~
+-
+-fdt
+-    Unit name of the corresponding fdt blob (component image node of a
+-    "fdt type"). Additional fdt overlay nodes can be supplied which signify
+-    that the resulting device tree blob is generated by the first base fdt
+-    blob with all subsequent overlays applied.
+-
+-fpga
+-    Unit name of the corresponding fpga bitstream blob
+-    (component image node of a "fpga type").
+-
+-loadables
+-    Unit name containing a list of additional binaries to be
+-    loaded at their given locations.  "loadables" is a comma-separated list
+-    of strings. U-Boot will load each binary at its given start-address and
+-    may optionally invoke additional post-processing steps on this binary based
+-    on its component image node type.
+-
+-script
+-    The image to use when loading a U-Boot script (for use with the
+-    source command).
+-
+-compatible
+-    The root compatible string of the U-Boot device tree that
+-    this configuration shall automatically match when CONFIG_FIT_BEST_MATCH is
+-    enabled. If this property is not provided, the compatible string will be
+-    extracted from the fdt blob instead. This is only possible if the fdt is
+-    not compressed, so images with compressed fdts that want to use compatible
+-    string matching must always provide this property.
+-
+-The FDT blob is required to properly boot FDT based kernel, so the minimal
+-configuration for 2.6 FDT kernel is (kernel, fdt) pair.
+-
+-Older, 2.4 kernel and 2.6 non-FDT kernel do not use FDT blob, in such cases
+-'struct bd_info' must be passed instead of FDT blob, thus fdt property *must
+-not* be specified in a configuration node.
+-
+-Configuration-signature nodes
+------------------------------
+-
+-::
+-
+-    o signature-1
+-        |- algo = "algorithm name"
+-        |- key-name-hint = "key name"
+-        |- sign-images = "path1", "path2";
+-        |- value = [hash or checksum value]
+-        |- hashed-strings = <0 len>
+-
+-
+-Mandatory properties
+-~~~~~~~~~~~~~~~~~~~~
+-
+-algo
+-    See `FIT Algorithm`_.
+-
+-key-name-hint
+-    Name of key to use for signing. The keys will normally be in
+-    a single directory (parameter -k to mkimage). For a given key <name>, its
+-    private key is stored in <name>.key and the certificate is stored in
+-    <name>.crt.
+-
+-The following properies are added as part of signing, and are mandatory:
+-
+-value
+-    Actual signature value. This is added by mkimage.
+-
+-The following properies are added as part of signing, and are optional:
+-
+-timestamp
+-    Time when image was signed (standard Unix time_t format)
+-
+-signer-name
+-    Name of the signer (e.g. "mkimage")
+-
+-signer-version
+-    Version string of the signer (e.g. "2013.01")
+-
+-comment
+-    Additional information about the signer or image
+-
+-padding
+-    The padding algorithm, it may be pkcs-1.5 or pss,
+-    if no value is provided we assume pkcs-1.5
+-
+-
+-
+-Examples
+---------
+-
+-Some example files are available here, showing various scenarios
+-
+-.. toctree::
+-    :maxdepth: 1
+-
+-    kernel
+-    kernel_fdt
+-    kernel_fdts_compressed
+-    multi
+-    multi_spl
+-    multi-with-fpga
+-    multi-with-loadables
+-    sec_firmware_ppa
+-    sign-configs
+-    sign-images
+-    uefi
+-    update3
+-    update_uboot
+-
+-.. sectionauthor:: Marian Balakowicz <m8@semihalf.com>
+-.. sectionauthor:: External data additions, 25/1/16 Simon Glass <sjg@chromium.org>
++FIT format documentation has been moved to 
++`a separate project <https://fitspec.osfw.foundation/>`_. Updates to the 
++format/specification should be submitted there. 
+\ No newline at end of file
 -- 
 2.34.1
 
