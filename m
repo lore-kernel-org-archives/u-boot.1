@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30BF3C2BA15
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 13:54:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B7B1C41513
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 13:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0DA0882ED;
-	Mon, 17 Jun 2024 15:53:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0843A882FA;
+	Mon, 17 Jun 2024 15:53:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZD6kjWLT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RxKN8yGU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D87288348; Mon, 17 Jun 2024 15:53:42 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 9C118882F0; Mon, 17 Jun 2024 15:53:42 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E220882F0
+ by phobos.denx.de (Postfix) with ESMTPS id 16063882ED
  for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 15:53:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6f96445cfaeso2435388a34.2
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6b09072c9d9so34500316d6.1
  for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 06:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1718632419; x=1719237219; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FQW3TCcoTuFAFLFa49TmaGU6bmj4pRbLjz5Xl6paNG8=;
- b=ZD6kjWLT5KRkgzJJsIlHWMLirN1BNHU6Zycflg7j/9UnhfkE2nL+7HLSTaeuA7sz4S
- 00zPJZNCY8N08H8P2LzRn54+gGl8hAbIzRB7in0jCquiuaW0Lt4ipZ8rmwwk6rVcu9Fr
- TOUyiZFWjZCFwmYx5+havkxIcWTIDM0+O+ueQ=
+ bh=EEG07Sqbtra0lvRBurcJ7huJOOdOGTmH6E/uKKYVciw=;
+ b=RxKN8yGU2o5nOza6dFfDwQ7hTPvmNQGMUpQ76aWwZ5/BDKttzc/le74kIzi1nixq+G
+ lfNL5vV4vr1y1ei86y6wTbcKTdvu/MqrDKxX1N0zRMU0gZv7pOwPzlDCeBodAr32txbu
+ OnYRD4rEslfBVKGvjNh9gOTYGITBBiI9f+6jk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1718632419; x=1719237219;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FQW3TCcoTuFAFLFa49TmaGU6bmj4pRbLjz5Xl6paNG8=;
- b=FX8wITOx1TkPex7+on2Yk3nh+tsxEb9HEDXKyKaRjw6JvjZ0s4cxDZZTCGnZ4x7oDl
- dIh8aM6/R8iqkJw39zjRGe7eeOK86he5IvD4uKO20E03DyOA+26FIQClNFc/AFJ9jvjj
- Ani8xIEHKigc4TntXSxBSJyqeB4esOympDWV8U3lFuHmb5WlvHpTEsFdeBnmVNVMfFie
- sq5VYuqo+GbFWKZ6TWcoZgPYDRQBzEqcUCw/+vyaqy24DLY/ubpbPjCpf59AWhU2Rire
- DZdANihP006N7iSYF0yd+13LRilNBr25NjgPv3l9ljRdA8i8yxDphHu95xJ9O0GZjDOG
- pKeQ==
+ bh=EEG07Sqbtra0lvRBurcJ7huJOOdOGTmH6E/uKKYVciw=;
+ b=c83NA1rn5EqmPi87ID5s1QPWaDJ+ZHA3VPIs9tCqXRI92upj9pfXM+eVPzs5ZTvC92
+ 1Z3iM5JhLRLiYbdQf6uuyL3lf0FRMs8II59tCxuxcUqseGnSD15g4z9VRabhnmz2aGFY
+ pzCiCZS1zjOo/hktyraGLJ2AIJMyI+XoIhpCvuR/3eIppkcL2GNuaFaf8eJXZkSPr36f
+ f6Kdrg9qZeR9+bbxC/t+0KeDfkkTXKbBSo5GPY5lvKuhkM4Ibn0wkTXpiSZwQQQR/H5b
+ UyggyOZa/jt/K1l/6cr73gVGuVIDCtscazjVHp9CMFql9kAYgbEe3iejKwmiAIDFAEG9
+ 6bww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvI9nLpJe9KcXJ1A/m6GZ1sBKyg1e0L8DTDyqaEoIqiaPN4bu+mKkvziw9uHJNAk6amP16MFiSnP1v2zT7VAAx36eTNg==
-X-Gm-Message-State: AOJu0YzEZmujOijgiKmZgO6sJrDM0XNNpjPimp2xmw3SoMEx5awRHpfm
- 29/lzzz1gHD5yHTX33ZYXe5ZyTe2DNI6NTWp4arP3IfZN+OBebs5YxrYP6F/2IVMgs8aAaabPIV
- ScA7e9UCOPuRhOb59rHLI4sesHbeKr7gczgcx
-X-Google-Smtp-Source: AGHT+IEX5ICU5aYtzKjk1pitnc8exTxusqcLTUHs6U808NY/7bHoF9OimhxkwKI90PwoKWL7O4MIpkgQV/znM9zL3Pk=
-X-Received: by 2002:a05:6830:1e9b:b0:6fb:9652:f833 with SMTP id
- 46e09a7af769-6fb9652fcc1mr11558545a34.16.1718632418733; Mon, 17 Jun 2024
+ AJvYcCUxU2HcecUSE3HbNJnYLdoj6l6yKbBDF8tQo1EcZguu2Lowvo83B8FdHR53flHeEM+V/ITqK3gKSgZTqT7QAFi4U1Dd9Q==
+X-Gm-Message-State: AOJu0YwAtb1VDQTanHr9oKnXN7jjJulzn/zIj/24zJE2wRJYNAyW8xJA
+ tmlBvzVyFSyqBV5MmuHRjrDuKVGntVIFK5xCWKkZG6tzPtW+9nfY82Nb0dVwbEgDTpePKgwsH9Y
+ VE6ushWW90wP1ntPYed8fru3mV+2FJyRaCeh6NCLIreKDCgc=
+X-Google-Smtp-Source: AGHT+IG3VT9jN/FwDz8nkrN7m3S15BU01qA+e5r+AY21S0ZJjtyuwwIuFPOldoV5ORkbQKIBMJmqdoQXVY9a/BQb/LU=
+X-Received: by 2002:a05:6214:130d:b0:6ad:753d:45cb with SMTP id
+ 6a1803df08f44-6b2a343d2b7mr226941216d6.20.1718632418931; Mon, 17 Jun 2024
  06:53:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240614065357.182446-1-ilias.apalodimas@linaro.org>
- <CAC_iWjLEq6eL6j7FcRYk_aNLJNHyb0RjY=bykrXOS8mnSQrNtw@mail.gmail.com>
-In-Reply-To: <CAC_iWjLEq6eL6j7FcRYk_aNLJNHyb0RjY=bykrXOS8mnSQrNtw@mail.gmail.com>
+References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
+In-Reply-To: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Jun 2024 07:53:27 -0600
-Message-ID: <CAFLszThKLDR0ZXeQ2-ozrqwbpY7RF+Q19RP__TEyg04Trc-Q+A@mail.gmail.com>
-Subject: Re: [PATCH] sandbox: cleanup linker scripts and sections
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Angelo Dureghello <angelo@kernel-space.org>, u-boot@lists.denx.de
+Date: Mon, 17 Jun 2024 07:53:28 -0600
+Message-ID: <CAFLszThimpJyRFg2Dc8QKyin7=BF2Gwkez6ifWOYGnf-=15HWg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] bootstd: Add Android support
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>,
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,155 +87,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Mattijs,
 
-On Fri, 14 Jun 2024 at 01:01, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 13 Jun 2024 at 04:13, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
 >
-> Hi Simon,
+> Android boot flow is a bit different than a regular Linux distro.
+> Android relies on multiple partitions in order to boot.
 >
-> I just noticed that the sections in sandbox were discarded because
-> their definition was wrong to begin with.
-> They were defined with an extra _ -- ___efi_runtime_rel_start instead
-> of __efi_runtime_rel_start.
+> A typical boot flow would be:
+> 1. Parse the Bootloader Control Block (BCB, misc partition)
+> 2. If BCB requested bootonce-bootloader, start fastboot and wait.
+> 3. If BCB requested recovery or normal android, run the following:
+>    a. Get slot (A/B) from BCB
+>    b. Run AVB (Android Verified Boot) on boot partitions
+>    c. Load boot and vendor_boot partitions
+>    d. Load device-tree, ramdisk and boot
 >
-> Let me know if you want me to respin this with a Fixes tag
+> The AOSP documentation has more details at [1], [2], [3]
+>
+> This has been implemented via complex boot scripts such as [4].
+> However, these boot script are neither very maintainable nor generic.
+> Moreover, DISTRO_DEFAULTS is being deprecated [5].
+>
+> Add a generic Android bootflow implementation for bootstd.
+>
+> For this initial version, only boot image v4 is supported.
+>
+> This has been tested on sandbox using:
+> $ ./test/py/test.py --bd sandbox --build -k test_ut
+>
+> This has also been tested on the AM62X SK EVM using TI's Android SDK[6]
+> To test on TI board, the following (WIP) patch is needed as well:
+> https://gitlab.baylibre.com/baylibre/ti/ti-u-boot/-/commit/84cceb912bccd7cdd7f9dd69bca0e5d987a1fd04
+>
+> [1] https://source.android.com/docs/core/architecture/bootloader
+> [2] https://source.android.com/docs/core/architecture/partitions
+> [3] https://source.android.com/docs/core/architecture/partitions/generic-boot
+> [4] https://source.denx.de/u-boot/u-boot/-/blob/master/include/configs/meson64_android.h
+> [5] https://lore.kernel.org/r/all/20230914165615.1058529-17-sjg@chromium.org/
+> [6] https://software-dl.ti.com/processor-sdk-android/esd/AM62X/09_02_00/docs/android/Overview.html
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+> Changes in v2:
+> - Dropped patch 2/6 boot: android: Add image_android_get_version() (Igor)
+> - Fixed multi-line comment style (Igor, Simon)
+> - Added dependency on CMD_FASTBOOT for BOOTMETH_ANDROID (Igor)
+> - Fixed various resource leaks (Igor)
+> - Fixed bootmeth_priv dangling pointer on error cases (Igor)
+> - Updated test instructions in commit message for patch 6/6
+> - Added __weak impl of get_avendor_bootimg_addr() in patch 1 (dropped
+>   Igor's review because of this change)
+> - Added extra info in Kconfig to detail MMC limitation (Simon)
+> - Fixed typo Bootmethod->Bootmeth (Simon)
+> - Documented android_priv structure (Simon)
+> - Demoted various messages from printf() to log_debug (Simon)
+> - Fixed some lines too long (Simon)
+> - Added function documentation to read_slotted_partition() (Simon)
+> - Added some doc about avb extra_args being modified (Simon)
+> - Link to v1: https://lore.kernel.org/r/20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com
+>
+> ---
+> Mattijs Korpershoek (5):
+>       boot: android: Provide vendor_bootimg_addr in boot_get_fdt()
+>       bootstd: Add bootflow_iter_check_mmc() helper
+>       android: boot: Add set_abootimg_addr() and set_avendor_bootimg_addr()
+>       bootstd: Add a bootmeth for Android
+>       bootstd: Add test for bootmeth_android
+>
+>  MAINTAINERS               |   7 +
+>  arch/sandbox/dts/test.dts |   8 +
+>  boot/Kconfig              |  16 ++
+>  boot/Makefile             |   2 +
+>  boot/bootflow.c           |  12 +
+>  boot/bootmeth_android.c   | 553 ++++++++++++++++++++++++++++++++++++++++++++++
+>  boot/bootmeth_android.h   |  29 +++
+>  boot/image-android.c      |   5 +
+>  boot/image-fdt.c          |   2 +-
+>  cmd/abootimg.c            |  10 +
+>  configs/sandbox_defconfig |   2 +-
+>  doc/develop/bootstd.rst   |   6 +
+>  include/bootflow.h        |   9 +
+>  include/image.h           |  14 ++
+>  test/boot/bootflow.c      |  65 +++++-
+>  test/py/tests/test_ut.py  |  76 +++++++
+>  16 files changed, 811 insertions(+), 5 deletions(-)
+> ---
+> base-commit: f9886bc60f42d5bcfcfa4e474af7dc230400b6be
+> change-id: 20240605-bootmeth-android-bfc8596e9367
+>
+> Best regards,
+> --
+> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
 
-Yes please.
+Thinking about this, I believe we should start having docs about the
+individual bootmeths themselves.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Can you add a section about your new bootmeth? I will come up with a
+patch for the others that I know about. Perhaps
+doc/develop/bootstd.rst would be a suitable place for now?
 
-
->
-> Regards
-> /Ilias
->
-> On Fri, 14 Jun 2024 at 09:54, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > commit 6e2228fb052b ("Merge patch series "Clean up arm linker scripts"")
-> > was cleaning up linker scripts for armv7 and v8 in a similar fashion.
-> >
-> > Several commits in the past -- e.g
-> > commit d0b5d9da5de2 ("arm: make _end compiler-generated")
-> > was moving symbols to be compiler generated. They were defined as c
-> > variables in its own section to force the compiler emit relative a
-> > reference. However, defining those in the linker script will do the
-> > same thing since [0].
-> >
-> > So let's remove the special sections from the linker scripts, the
-> > variable definitions from sections.c, and define them as a symbols.
-> > It's worth noting that the linker was discarding the symbols in the
-> > older binary completely.
-> >
-> > - new binary
-> > $~ aarch64-linux-gnu-readelf -sW u-boot | grep efi_runtim
-> >    246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_runtime_rand
-> >   3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_mmio
-> >   6359: 00000000000dedff   217 FUNC    LOCAL  DEFAULT   14 efi_runtime_relocate
-> >   7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_services
-> >   8869: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_rel_stop
-> >   9159: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_stop
-> >   9410: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_start
-> >  10137: 00000000005981bd     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.c.de5bed54
-> >  10470: 0000000000305e20     0 NOTYPE  GLOBAL DEFAULT   27 __efi_runtime_rel_start
-> >
-> > - old binary
-> > $~ aarch64-linux-gnu-readelf -sW u-boot.old | grep efi_runtim
-> >    246: 000000000004acbe    13 FUNC    LOCAL  DEFAULT   14 vbe_req_efi_runtime_rand
-> >   3198: 0000000000318690    16 OBJECT  LOCAL  DEFAULT   29 efi_runtime_mmio
-> >   6359: 00000000000dedff   221 FUNC    LOCAL  DEFAULT   14 efi_runtime_relocate
-> >   7942: 00000000003074c0   136 OBJECT  GLOBAL HIDDEN    29 efi_runtime_services
-> >  10135: 0000000000598320     0 NOTYPE  WEAK   HIDDEN    33 efi_runtime.c.de5bed54
-> >
-> > $~ bloat-o-meter u-bool.old u-boot
-> > add/remove: 0/0 grow/shrink: 1/1 up/down: 7/-4 (3)
-> > Function                                     old     new   delta
-> > efi_memory_init                              343     350      +7
-> > efi_runtime_relocate                         221     217      -4
-> > Total: Before=2009902, After=2009905, chg +0.00%
-> >
-> > [0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  arch/sandbox/cpu/u-boot.lds | 20 ++++----------------
-> >  arch/sandbox/lib/Makefile   |  2 +-
-> >  arch/sandbox/lib/sections.c | 13 -------------
-> >  3 files changed, 5 insertions(+), 30 deletions(-)
-> >  delete mode 100644 arch/sandbox/lib/sections.c
-> >
-> > diff --git a/arch/sandbox/cpu/u-boot.lds b/arch/sandbox/cpu/u-boot.lds
-> > index 52f13af3742f..6ee8095b6cbb 100644
-> > --- a/arch/sandbox/cpu/u-boot.lds
-> > +++ b/arch/sandbox/cpu/u-boot.lds
-> > @@ -19,30 +19,18 @@ SECTIONS
-> >                 *(_u_boot_sandbox_getopt_end)
-> >         }
-> >
-> > -       efi_runtime_start : {
-> > -               *(___efi_runtime_start)
-> > -       }
-> > -
-> >         efi_runtime : {
-> > +                __efi_runtime_start = .;
-> >                 *(efi_runtime_text)
-> >                 *(efi_runtime_data)
-> > -       }
-> > -
-> > -       efi_runtime_stop : {
-> > -               *(___efi_runtime_stop)
-> > -       }
-> > -
-> > -       efi_runtime_rel_start : {
-> > -               *(___efi_runtime_rel_start)
-> > +                __efi_runtime_stop = .;
-> >         }
-> >
-> >         efi_runtime_rel : {
-> > +                __efi_runtime_rel_start = .;
-> >                 *(.relefi_runtime_text)
-> >                 *(.relefi_runtime_data)
-> > -       }
-> > -
-> > -       efi_runtime_rel_stop : {
-> > -               *(___efi_runtime_rel_stop)
-> > +                __efi_runtime_rel_stop = .;
-> >         }
-> >
-> >         .dynsym :
-> > diff --git a/arch/sandbox/lib/Makefile b/arch/sandbox/lib/Makefile
-> > index a2bc5a7ee60f..d7d15a50bb6c 100644
-> > --- a/arch/sandbox/lib/Makefile
-> > +++ b/arch/sandbox/lib/Makefile
-> > @@ -5,7 +5,7 @@
-> >  # (C) Copyright 2002-2006
-> >  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-> >
-> > -obj-y  += fdt_fixup.o interrupts.o sections.o
-> > +obj-y                  += fdt_fixup.o interrupts.o
-> >  obj-$(CONFIG_PCI)      += pci_io.o
-> >  obj-$(CONFIG_CMD_BOOTM) += bootm.o
-> >  obj-$(CONFIG_CMD_BOOTZ) += bootm.o
-> > diff --git a/arch/sandbox/lib/sections.c b/arch/sandbox/lib/sections.c
-> > deleted file mode 100644
-> > index 2f2f3fbfdb86..000000000000
-> > --- a/arch/sandbox/lib/sections.c
-> > +++ /dev/null
-> > @@ -1,13 +0,0 @@
-> > -// SPDX-License-Identifier: GPL-2.0+
-> > -/*
-> > - * Copyright 2013 Albert ARIBAUD <albert.u.boot@aribaud.net>
-> > - *
-> > - */
-> > -#include <linux/compiler.h>
-> > -
-> > -char __efi_runtime_start[0] __section("___efi_runtime_start");
-> > -char __efi_runtime_stop[0] __section("___efi_runtime_stop");
-> > -char __efi_runtime_rel_start[0]
-> > -               __section("___efi_runtime_rel_start");
-> > -char __efi_runtime_rel_stop[0]
-> > -               __section("___efi_runtime_rel_stop");
-> > --
-> > 2.45.1
-> >
+Regards,
+Simon
