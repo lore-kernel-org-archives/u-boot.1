@@ -4,166 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9BE8C27C79
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 16:54:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B1EC27C79
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 16:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F01AE88254;
-	Mon, 17 Jun 2024 18:54:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 6B48787572;
+	Mon, 17 Jun 2024 18:55:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="CPgJpggh";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bAx0QWYR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A55287837; Mon, 17 Jun 2024 18:54:08 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2600::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7ED0288307; Mon, 17 Jun 2024 18:55:12 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BDF4831A2
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 18:54:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 095D4831A2
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 18:55:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=irr5HJYXC2bMYUu6bE1VyxXvlB4PHSTX09pllXF5RNmoCa1npQsf40RYCqQ/ZgDWGPe6nM9CyDRIme7cZt/tuABsxrJjRzx1RLUhwjnqWHGT3dU5sVszZQqT110VjIHP7YFBn2DWCTYZyZFax8LIqVV4UOi4/2e9tya7o/9AWes2RyPdohkbzbFW41Bu83NHLsd7pCjm68bXWbl28xu1XMFOT5QMdh81iBy+agmJ9mHMi9dioE8iX0HX1dcC+5aSVecxU/Ya6LWDHkLvzZgVQJgyxwg89mct8pCHD/wiWX5QZZwtkM1dZ2EsSAzQbXmdG/r21Uon516SMaJ9uhlVBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YWJPBuQBgBXfYNWmlcWvD/YgYJzDJnh62YyKvhh7ff8=;
- b=YjhLhuCZOq6DudKamKg69MNFITVZfqAw40MBaYRKUZn8tITkw+XEBosDGeALsQJ8RKxTKwfMOtdpWPPBfTi+3cA8GlMSkiHSwgQ9iidmBEKouz7V1IvkYUdeFckU74Sg/XBSZ+jHPPz3QSfZAHDFdc/UK7X/DodmT6NboTl6erPmOOjlFzITa4O6SDiWbeQg+1zmABI8q8XzNV220nIXTBdTD4vHLK5W3R7EmlLzctEpphlCjh9Rw585SC3tp6DHCGKU/aV6aki0fNnmpACSC4fbU4CoxHEAiPsY2OVjMZbPUfmFz6pwnrAFRwNAj5UOCNWv1Y6ivoSsQVeP4zknXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YWJPBuQBgBXfYNWmlcWvD/YgYJzDJnh62YyKvhh7ff8=;
- b=CPgJpgghwa4JJrbaJpFFgB8illcSwSIZ9MlqbfsfR2chmQUBfai52mN6pvHygN8X1d4uNzvGnMDHDMkDsmHMkJvXGhqW8HlGubGegXfvrHqgTnIVwoHTO5c7+nqXAI0bgqll01/UoACJ4casK7l8/aImn3O057Xq67rNyIe07YQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by DB9PR04MB9379.eurprd04.prod.outlook.com (2603:10a6:10:369::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30; Mon, 17 Jun
- 2024 16:54:03 +0000
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7677.030; Mon, 17 Jun 2024
- 16:54:03 +0000
-Message-ID: <4c08d1d4-698e-4331-95f9-4accd91fb5e5@cherry.de>
-Date: Mon, 17 Jun 2024 18:54:00 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v3 5/6] power: rk8xx: properly print all supported
- PMICs name
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Quentin Schulz <foss+uboot@0leil.net>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-References: <20240606-misc-tsd-v3-0-728d721c464a@cherry.de>
- <20240606-misc-tsd-v3-5-728d721c464a@cherry.de>
- <46be03e2-c456-4842-9dc3-9a3f975d9980@cherry.de>
- <d6c3c6d65ce164e6a193f1f306c10c8b@manjaro.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <d6c3c6d65ce164e6a193f1f306c10c8b@manjaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA0P291CA0020.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::17) To PA4PR04MB7982.eurprd04.prod.outlook.com
- (2603:10a6:102:c4::9)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718643275; x=1719248075; i=xypron.glpk@gmx.de;
+ bh=UoCHZ57o4WbW98CK0duch8yfjdwDgODCXo42V7feB74=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=bAx0QWYRhmCFKWjcj9mcPwnLqvIVG508fLjHoiFVNsYnxW2Zu87DOmFNVT+0nDWa
+ fz81LVdLbSo/7OH+IMpKo4+CmABJolROSYCdxq/WxVoGMZBGOXOwd0dy4kynPjcBF
+ kfw55dqFhyQj4/xk1dHq8tEhWZXpR8cAjC8zqqGmuNFtbVF1SPbXyzKc5NR0kfFcW
+ B9QlSGWS3c169ehFyNbTEduX5MPjXgZpyFn32PwTFRVzv+wh8p3m+FsYH3YXoT86V
+ N/4CEcaVTmAzqF10BFdLk0fNVrkL32R0zKzpQsA+QMjL7Hue7YHe6X4+hZSgxqQnG
+ xX0CztN+tZoCYHRjDw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N5G9t-1sTSvO0FJF-00yKhy; Mon, 17
+ Jun 2024 18:54:35 +0200
+Message-ID: <4886f096-935a-4a61-b16c-245df8b30bd8@gmx.de>
+Date: Mon, 17 Jun 2024 18:54:30 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|DB9PR04MB9379:EE_
-X-MS-Office365-Filtering-Correlation-Id: c370de20-336a-445d-9ba3-08dc8eee17d2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|376011|1800799021;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dFFhV1J2aTlOLzVOU0xvTGltQVpiaU5MWVZVNzFZZTlvaWxqeTBSRlhmakhK?=
- =?utf-8?B?OUhGUlZMM1hSYWRyYnc5NENHVjhkdGFWQzdsRm9kNmZEeC9KeEl6YlBPRlls?=
- =?utf-8?B?S0paRGgwWFp3SFRoZW0reU1Vci9oL09zL3kwaW4xaTVuckoxZWU2NDVqRkRa?=
- =?utf-8?B?aG9GSHVJNGVkVS9FMEZMYVR1dnNwNXgwSjdvSWZuSkZRamRZYUZKN1hKUWhE?=
- =?utf-8?B?NkhrNmovemlWSlhtNkQ1L0JSTjdmVXpSdExRQ0dIRkh5TWhuUlhFclpCZ2RH?=
- =?utf-8?B?WDZORVhKU2VLU2ZmWEVGSDF6NHFuMk5MNEI2RFNBaTlvalIrZGplNVZyS2FK?=
- =?utf-8?B?QUJCc01Obk1ZN2RuWHdMK2c0MElEWWFxNXVMek95OXYxWTljYjVveG5JS0VD?=
- =?utf-8?B?cnBzMERKQ1FQRXJ0cTVjNXE0SWdoUTlHR2psVHpvSXF5OW9rREhYVEg0UzZS?=
- =?utf-8?B?YkdYZlhBeDlRb2FUS2JOc0kvbThTMTVxVllRNFVYSmZsWlpzOVJ2bkdwbERT?=
- =?utf-8?B?UmhXdVdmSnpuQkJkMktoeStqTmxLQ3UzQW1kNVU1SXM1d0FCNHBYS3lDUFpk?=
- =?utf-8?B?S1BBQmpRWCt0TU00ZllCb2s4ZHBlYXpXa1FwV0ZSRkNFbVhucDNlaW5FVERk?=
- =?utf-8?B?N0Q3cUphZU1iQ3dCWUN2WlplQWNoV2FmVmw2ZzdPMjJyRzJvK015cGNJNCts?=
- =?utf-8?B?R1Evb2ZRQUpvTERWeHB4czdLZEdsaFpLZWNiM0pWK292dG1sSStLekNrYVh2?=
- =?utf-8?B?Q1VSajFLY3VjdXgySVJyZXlHdHFPWHlyQzR4NmZQRklsUTBZZ0tETWg1QkJp?=
- =?utf-8?B?azJEVWc3dUxDenI2MXdxSEI2eGt2cVJUVERyQkFRRFc1ZkJXUXlBL2hCZXFK?=
- =?utf-8?B?NVNtZVpHUjZReXo2Y2hNa1JZMG43RGhIaUJGbGlTOFBheVVEYWFPV0dCK0gv?=
- =?utf-8?B?cUtOTXR4b2ZSd0llV2tzOXBwWGJWRkg1eUZJd3djWmhHcExrZ0FLVkFuME40?=
- =?utf-8?B?cVl5bS9mdXFvRTMveVUvMUJLS1BiWEhqbzFkci9jZlBSQjN4d2N5WTlUUnFt?=
- =?utf-8?B?VER5SSthNDhDLzZTVElDSHFZQjQxNEVpNzFlVVBQT3JQTE9FZCt1NXZtSldt?=
- =?utf-8?B?S2RGU0o3VUZuNmpmQWttcU1KYkgwTjZSMmJUaW9YYngvN0VWd3lzUnRDWUZk?=
- =?utf-8?B?Z1A0UUt5dlZBb1Bqd21XNStpN2hkM0xmd2NBRkhGbXErUmdvUGIxdFFiMk1k?=
- =?utf-8?B?K3QyYTlpNEwzVjZqemNNYU0wQjRBcTc4bTk5OEdWMzVvVVdiQWJ0bVl6NjF1?=
- =?utf-8?B?VlRGbENkTVduL2FTa1pZVENJdC9ka0xoVFk2ekZGTzRIQkVDSU5uQytRaEJV?=
- =?utf-8?B?ZkpmSE5YMm9VNzdiTnpIRjR1VE9SRU5sZStQWGNENEd0aW5xeWVDUmszeUsz?=
- =?utf-8?B?RDc4K1dsOGNYL0d4dnRxS1Q2bGhHRFAvK25BNVNWQTJqaWpIbFZkeVBkc1lE?=
- =?utf-8?B?ZmNYc1JydmhRbkdEWWlGaTVMUWtWZnpiVEtiZTI4UE9qcTNDWkg3aVFvZmsv?=
- =?utf-8?B?eXBtNHBDNjVBN0J1QWJQZWljMmNRQlROYkQyMGxjOHBuZ21BUHNCay9wc1VE?=
- =?utf-8?B?a2thOFl5L091RXA0VDkySEp3YmtobmhpRDY0blR6NE0vbi84cWgxclhtY1Rs?=
- =?utf-8?B?TVBCK09aVkFLbkJRNFpXbDRRUDY4RVpzWUpTYWJrUk55Ynl2M3N0NUw4Rzdk?=
- =?utf-8?Q?y2fDOn7aOM2DfL3I7xPq8aP5DPfTyZYZ1908t2Y?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230037)(366013)(376011)(1800799021); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RmNQMlRmWWRDeFJPNHQyNXp4SWQwUUttT3V3Y096RkFxS0tLSHUvbVpzVmMw?=
- =?utf-8?B?Wkc5RjhPVzhDbzZwdmtlWTUwZzBjTjNtS2l2aC8vemdJREpMS3VVSDF6K3pE?=
- =?utf-8?B?VlI1NFZiSEYzelBoYTk1RFRjZlVtVXFwZFJtN212WXJwZGtMbUhHTXVqYVN5?=
- =?utf-8?B?YXFpMThHVkxKSWtMNVVzZUlrU3RBQzNFazBqdW9sK0NFL2ZucHFrSU5FeVlk?=
- =?utf-8?B?M2VSaTVvTW4vblZpWE13dzVyTGZHMEN6eVpaVUsrbWo3R29kZXlaQ2IzQ1Ur?=
- =?utf-8?B?SGFRNXlYQ21ZUnh0QnFyTmplZ1F1eE1POUZiMW1TWldFaklhcXhLYzB4dFp4?=
- =?utf-8?B?RlA3d2w2ZEI4VlZZc1AvZGllQzB3eVdtQmJvT2xJaFJJUi9abkplcWVRd1NL?=
- =?utf-8?B?bXBKOWhscllKb0Q5bW45N1JHU1IyY1dQSU00bGw4ZnFQaVYzR0w2eFliVUxB?=
- =?utf-8?B?MUlLdHVTdnVIQldIZldZSzAvSFBES3dhVlNlNGpLTlBNLzNIdFFmVDlzRVhm?=
- =?utf-8?B?SXpkWFhBUDY5NXI5cGZaRlE0QWhaNUFQYjRqYU5iZ1Uwb0lyWnpGRFp3UDZk?=
- =?utf-8?B?RHA2YmEvaE0rVUVTbS9kN3Nvc2pmQVRkcCtsNU55dnNCYVArZ2paenI3Tnlh?=
- =?utf-8?B?eHB5Sktqd2hpTnB4MGM1UytZSU1MQVZQdE1JM1JENzN6Z0tOVDl5ZE9hVVZM?=
- =?utf-8?B?SnJwaFlpbGFCMU4yR3hHb2xxSUtSbHRmZmwrbCtqdjlKVCs0cktQdFRoZWdO?=
- =?utf-8?B?U2U1SjZaVGVHd1BnR2dySXptT2Y4bzhQQ0gzYUZqVXNUR3FWZGpHenRLQ1ZV?=
- =?utf-8?B?R3Y3cVJqTmwrQWpNeEhZTFJZekNkTkxZbk9DRnNKZTdUTUdWVWlrWmVoeVZB?=
- =?utf-8?B?Z0RVeGZKZjkvUUdTTFY3L0JHeE9jdGhZMnMrMDNFUWhTelI1NWVVRFI3SkZw?=
- =?utf-8?B?RmFmTDIvS3FWdzlxaTJxdEhWZXRQVk1xSC8ySzZTWDFQZGczNzVLd0t2YlQ5?=
- =?utf-8?B?MFBhb0NiNXFhemFJRkV6SENOK042Y3Z0b1hub3d0OWZVcVFvSEdReHZ0aXNW?=
- =?utf-8?B?dHJZRkQ1dzJQQzFmWlZGa3ZnSTZ5cUZrZGUyOTllWEYrbDhoWnp0RFlHV3o5?=
- =?utf-8?B?eS9idkt4ZEE5Y04yMVhBU29mMGxBdnd4ZElRVG9lOXUvNDZLbVZHcCtmZ3Vv?=
- =?utf-8?B?K1FuU1JZL0ZQK0Q4cnlva2lXTVFueVhCWk9HbWhCbUwwQlY0WmNlTFhKcHIv?=
- =?utf-8?B?ME1DckFGbVN2V3dDYlNsL0NSdmh0RlNHRXlYaXg3WEJqNXRGSDRhMUd3K0FU?=
- =?utf-8?B?WVRabEtrS09DUW1SQnQvUDVkNE9PUE5YamdIeGdNM0dyUEU3eFY2M3FZOEZE?=
- =?utf-8?B?L3hmc0lkRm5qL0RvVXpySTFzRGJ5d3JCOWlxTnc0cDFobnoxTDFveUp4Nkx4?=
- =?utf-8?B?ZER6RWFjT1VjTjYxUnBpVGxPTXpqUnEzVW1WZS9DYng5Rll5S2VVT3pXMzVW?=
- =?utf-8?B?aUJKRzBNK0R5WDJXeWQ0Zldoak9zRy9WMnVhaXkzdHR4M0NITEoxYURUZWY3?=
- =?utf-8?B?cGZBSVIyd1loenZvaEFXZkEzaUlsRW1hK2xCVm9zbE05RW5Wd2lzVjNtbDJT?=
- =?utf-8?B?YnVCYjFrQjhCVGpmRkpsU2J6eHZZb1RBYlYza25DVmJieDVRZlhURUY5dnB5?=
- =?utf-8?B?c1lxbm5GREY5bDBIS1JWckE5RjhCVG8zOVNYOFV0TWVhMFFOeG8yYzU4OXBp?=
- =?utf-8?B?OVlWQVNMYVV6ejU3czA0UGtCUTFvc2dWUkROazRXdFBQcjdSR1FrWEFrRkg2?=
- =?utf-8?B?N0NCSlgrY014TUgwajgwdllUK05OcWNTaTQzYlZKQWxoaSs1cmp0dXd2V0JO?=
- =?utf-8?B?RzdnZHlwVHczMmpvVVVLTnVIWGk0UWRCRGk3QW9Qb0UvNHZWTWV1c2tlY2Qx?=
- =?utf-8?B?Z3lVVmRqakxtMk5nTm02citKVGRBQnRtZ3FIdUtkVllHaEFhSjhXTTNkT2lY?=
- =?utf-8?B?RFFEckZiQmR2VVJCTEgzK2xZcXlsdzB0ZkhxZ005SXJVUitpaTNsMm1ReDhK?=
- =?utf-8?B?ckNCYk90cjdiTXNaQkdkNmFTUFQ2OStpSmVOVWR4ZDBNQXd2aWhHZitpM2w2?=
- =?utf-8?B?YWJpL0hOMlRHZEpBTEhLNTFKQ21NOHZwMyt2cUtxQ3N4SjRhcFdaNm5aZVpl?=
- =?utf-8?B?MFE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c370de20-336a-445d-9ba3-08dc8eee17d2
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 16:54:03.6206 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UO8yEUiqBvqOJfSmFOB/ScwaD/Elj3qQwYYEvOTzSIxz64MhCReTV1ME9dayH+e3UeJ768Vn9LAkdC1pgPu7ihXE/D6vKeC2BCY3uWupQog=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9379
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/14] net-lwip: add DHCP support and dhcp commmand
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Bryan Brattlof <bb@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Artur Rojek <artur@conclusive.pl>, Yang Xiwen <forbidden405@outlook.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Boon Khai Ng
+ <boon.khai.ng@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <1455663bf6d4f8537d3919b755ef5148b65975c5.1718638104.git.jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <1455663bf6d4f8537d3919b755ef5148b65975c5.1718638104.git.jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:unv+rL1xMrNb7xtOBimnlpkdtO4zb5OiBL1394CcvcChSNYDbBJ
+ B3UBSvLmG2gz6Svwm7gJ4Jok9WpmgkzKEpGtFXnTob5u7BHlcHUi/hxyntTgqyszcn/yZOV
+ 5/hMaKazSFcGzq8U8skCukZzU+vmIPY7vyRPjTQ9Rn41AoYygTb/d2omVasO0h2072ZpNjb
+ 2z+0j3s3rSt1ur9luZE7Q==
+UI-OutboundReport: notjunk:1;M01:P0:XUWxLCDOctg=;h2vnamW4aJ62STYAgHlC1E8+PhP
+ ASXQVT9VNntJrdnNfSs5KRjMLQFytz2Prn7ec3h3DoWF2c+WxEs61pnPM+EqgzRqS1vIy0IrT
+ t5DgEO+b6ozJvtS05uW33nP31qNlRknATYsTQVDgu36wMFvko7SqVhAdOmbk4WcOTuKjg41UG
+ k/b+vZ+QiYum9KrbE+5tRg3lGlbvhGhR+Q9/pyMLSsDTDWsUxlkNtrLEGrslf3HrHdmHT5tZ1
+ kv6tQHMlI8G+yRwbmPI2IyoNxEOVKSJdcWRil2enGJsyFJe54o3Xbr8StNUO9zLZ1TAHt26eB
+ EwjRMiOglG1FA3ojCIige7W6QsR8EH0RaZnoAq4yZpExHwuPlTknYCNf3+lKGwdukcHQHBJh2
+ JcC1rUgzb4/iJF0zg5870qin068fNA+yILYrRaOmf3dEoshYhUeOB3b7Ae1SVb7zJxnrqm3cB
+ dOFPqB9l8EgZh8m3/ZtcPb8zUNxH0riIg0lP8Y7qwax7ce9Kouc6oOesKB8e6sUGWjdxOl+tK
+ TADYGjYBVhzdmsXP+VVvKq+9XPz4PTb4dBFKWyvZsgwDDfEV5sTIff1J3rQFckUbYmfuMboMq
+ jY5jgOYdVvbv7ss7iEQdLycJ7tydJ/9MPaGHTmIz4fvOOD2y7eA+lJbGBJwqoPkaMi1XkCrmd
+ tf8CnOcwtTNoxCNwJjqgsrAN9IsWi1WO9uQlSY4WthHgdELCesh7M7J+kHC1t4MWc+iOGd77K
+ HbqP3O1fQoAA+8deiOzGltPcJlKscXn6S88W/UEBVLuO5/sF4+LkZa94gz3cxOtccOiCzFYJG
+ HejSe+dGnbVTH2yiabX2UcC8VdQR/ISim/IUGlqUXs8Vo=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,68 +109,684 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dragan,
+On 17.06.24 17:32, Jerome Forissier wrote:
+> Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP as
+> well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI due
+> to this code having an implicit dependency on do_tftpb().
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>   Makefile                |   6 +
+>   boot/Kconfig            |   3 +-
+>   cmd/Kconfig             |  26 ++++
+>   cmd/Makefile            |   4 +
+>   cmd/net-lwip.c          |  13 ++
+>   common/board_r.c        |   4 +-
+>   drivers/net/Kconfig     |   2 +-
+>   include/net-lwip.h      |   2 +
+>   net-lwip/Makefile       |  15 +++
+>   net-lwip/dhcp.c         |  99 +++++++++++++++
+>   net-lwip/eth_internal.h |  35 ++++++
+>   net-lwip/net-lwip.c     | 270 ++++++++++++++++++++++++++++++++++++++++
+>   net-lwip/tftp.c         |  11 ++
+>   13 files changed, 486 insertions(+), 4 deletions(-)
+>   create mode 100644 cmd/net-lwip.c
+>   create mode 100644 net-lwip/Makefile
+>   create mode 100644 net-lwip/dhcp.c
+>   create mode 100644 net-lwip/eth_internal.h
+>   create mode 100644 net-lwip/net-lwip.c
+>   create mode 100644 net-lwip/tftp.c
+>
+> diff --git a/Makefile b/Makefile
+> index 0fe1623c550..92a0ab770bb 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -862,6 +862,7 @@ libs-y +=3D env/
+>   libs-y +=3D lib/
+>   libs-y +=3D fs/
+>   libs-$(CONFIG_NET) +=3D net/
+> +libs-$(CONFIG_NET_LWIP) +=3D net-lwip/
+>   libs-y +=3D disk/
+>   libs-y +=3D drivers/
+>   libs-$(CONFIG_SYS_FSL_DDR) +=3D drivers/ddr/fsl/
+> @@ -2132,6 +2133,11 @@ etags:
+>   cscope:
+>   		$(FIND) $(FINDFLAGS) $(TAG_SUBDIRS) -name '*.[chS]' -print > \
+>   						cscope.files
+> +ifdef CONFIG_NET_LWIP
+> +		echo net/eth-uclass.c net/eth_common.c net/eth_bootdev.c \
+> +		     net/mdio-uclass.c net/mdio-mux-uclass.c >> \
+> +						cscope.files
+> +endif
+>   		@find $(TAG_SUBDIRS) -name '*.[chS]' -type l -print | \
+>   			grep -xvf - cscope.files > cscope.files.no-symlinks; \
+>   		mv cscope.files.no-symlinks cscope.files
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 6f3096c15a6..004e69dd92a 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -378,7 +378,7 @@ config BOOT_DEFAULTS_CMDS
+>   	select CMD_FAT
+>   	select CMD_FS_GENERIC
+>   	select CMD_PART if PARTITIONS
+> -	select CMD_DHCP if CMD_NET
+> +	select CMD_DHCP if CMD_NET || CMD_NET_LWIP
+>   	select CMD_PING if CMD_NET
+>   	select CMD_PXE if CMD_NET
+>   	select CMD_BOOTI if ARM64
+> @@ -540,6 +540,7 @@ config BOOTMETH_EXTLINUX_PXE
+>   config BOOTMETH_EFILOADER
+>   	bool "Bootdev support for EFI boot"
+>   	depends on EFI_BINARY_EXEC
+> +	select CMD_TFTPBOOT if CMD_NET_LWIP
+>   	default y
+>   	help
+>   	  Enables support for EFI boot using bootdevs. This makes the
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index b026439c773..1bfa528e945 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2084,6 +2084,32 @@ config CMD_WOL
+>
+>   endif
+>
+> +if NET_LWIP
+> +
+> +menuconfig CMD_NET_LWIP
+> +	bool "Network commands (lwIP)"
+> +	default y
+> +
+> +if CMD_NET_LWIP
+> +
+> +config CMD_DHCP
+> +	bool "dhcp"
+> +	select PROT_DHCP_LWIP
+> +	help
+> +	  Boot image via network using DHCP/TFTP protocol
+> +
+> +config CMD_TFTPBOOT
+> +	bool "tftp"
+> +	select PROT_UDP_LWIP
+> +	default n
+> +	help
+> +	  tftpboot - load file via network using TFTP protocol
+> +	  Currently a placeholder (not implemented)
+> +
+> +endif
+> +
+> +endif
+> +
+>   menu "Misc commands"
+>
+>   config CMD_2048
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 87133cc27a8..535b6838ca5 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -128,6 +128,10 @@ endif
+>   obj-$(CONFIG_CMD_MUX) +=3D mux.o
+>   obj-$(CONFIG_CMD_NAND) +=3D nand.o
+>   obj-$(CONFIG_CMD_NET) +=3D net.o
+> +obj-$(CONFIG_CMD_NET_LWIP) +=3D net-lwip.o
+> +ifdef CONFIG_CMD_NET_LWIP
+> +CFLAGS_net-lwip.o :=3D -I$(srctree)/lib/lwip/lwip/src/include -I$(srctr=
+ee)/lib/lwip/u-boot
+> +endif
+>   obj-$(CONFIG_ENV_SUPPORT) +=3D nvedit.o
+>   obj-$(CONFIG_CMD_NVEDIT_EFI) +=3D nvedit_efi.o
+>   obj-$(CONFIG_CMD_ONENAND) +=3D onenand.o
+> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+> new file mode 100644
+> index 00000000000..82edb5fd2e6
+> --- /dev/null
+> +++ b/cmd/net-lwip.c
+> @@ -0,0 +1,13 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* Copyright (C) 2024 Linaro Ltd. */
+> +
+> +#include <command.h>
+> +#include <net.h>
+> +
+> +#if defined(CONFIG_CMD_DHCP)
+> +U_BOOT_CMD(
+> +        dhcp,   3,      1,      do_dhcp,
+> +        "boot image via network using DHCP/TFTP protocol",
+> +        "[loadAddress] [[hostIPaddr:]bootfilename]"
+> +);
+> +#endif
+> diff --git a/common/board_r.c b/common/board_r.c
+> index da0b80f24ff..6548eb8fdd5 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -472,7 +472,7 @@ static int initr_status_led(void)
+>   }
+>   #endif
+>
+> -#ifdef CONFIG_CMD_NET
+> +#if defined(CONFIG_CMD_NET) || defined(CONFIG_CMD_NET_LWIP)
+>   static int initr_net(void)
+>   {
+>   	puts("Net:   ");
+> @@ -727,7 +727,7 @@ static init_fnc_t init_sequence_r[] =3D {
+>   #ifdef CONFIG_PCI_ENDPOINT
+>   	pci_ep_init,
+>   #endif
+> -#ifdef CONFIG_CMD_NET
+> +#if defined(CONFIG_CMD_NET) || defined(CONFIG_CMD_NET_LWIP)
+>   	INIT_FUNC_WATCHDOG_RESET
+>   	initr_net,
+>   #endif
+> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+> index efc55e45ca8..640c4218518 100644
+> --- a/drivers/net/Kconfig
+> +++ b/drivers/net/Kconfig
+> @@ -97,7 +97,7 @@ config DSA_SANDBOX
+>
+>   menuconfig NETDEVICES
+>   	bool "Network device support"
+> -	depends on NET
+> +	depends on NET || NET_LWIP
+>   	select DM_ETH
+>   	help
+>   	  You must select Y to enable any network device support
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index f5c743b8d11..46cf6875f7e 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -11,4 +11,6 @@ struct netif *net_lwip_new_netif_noip(void);
+>   void net_lwip_remove_netif(struct netif *netif);
+>   struct netif *net_lwip_get_netif(void);
+>
+> +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv=
+[]);
+> +
+>   #endif /* __NET_LWIP_H__ */
+> diff --git a/net-lwip/Makefile b/net-lwip/Makefile
+> new file mode 100644
+> index 00000000000..a56c32bfa74
+> --- /dev/null
+> +++ b/net-lwip/Makefile
+> @@ -0,0 +1,15 @@
+> +ccflags-y +=3D -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/=
+lwip/u-boot
+> +
+> +obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) +=3D ../net/eth_bootdev.o
+> +obj-$(CONFIG_DM_MDIO)  +=3D ../net/mdio-uclass.o
+> +obj-$(CONFIG_DM_MDIO_MUX) +=3D ../net/mdio-mux-uclass.o
+> +obj-$(CONFIG_$(SPL_)DM_ETH) +=3D ../net/eth_common.o
+> +obj-$(CONFIG_$(SPL_)DM_ETH) +=3D ../net/eth-uclass.o
+> +obj-$(CONFIG_$(SPL_)DM_ETH) +=3D net-lwip.o
+> +obj-$(CONFIG_CMD_DHCP) +=3D dhcp.o
+> +obj-$(CONFIG_CMD_TFTPBOOT) +=3D tftp.o
+> +
+> +# Disable this warning as it is triggered by:
+> +# sprintf(buf, index ? "foo%d" : "foo", index)
+> +# and this is intentional usage.
+> +CFLAGS_eth_common.o +=3D -Wno-format-extra-args
+> diff --git a/net-lwip/dhcp.c b/net-lwip/dhcp.c
+> new file mode 100644
+> index 00000000000..38ea565508f
+> --- /dev/null
+> +++ b/net-lwip/dhcp.c
+> @@ -0,0 +1,99 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* Copyright (C) 2024 Linaro Ltd. */
+> +
+> +#include <command.h>
+> +#include <console.h>
+> +#include <linux/delay.h>
+> +#include <linux/errno.h>
+> +#include <lwip/dhcp.h>
+> +#include <lwip/dns.h>
+> +#include <lwip/timeouts.h>
+> +#include <net.h>
+> +#include <time.h>
+> +
+> +#define DHCP_TIMEOUT_MS 10000
+> +
+> +#ifdef CONFIG_CMD_TFTPBOOT
+> +/* Boot file obtained from DHCP (if present) */
+> +static char boot_file_name[DHCP_BOOT_FILE_LEN];
+> +#endif
+> +
+> +static void call_lwip_dhcp_fine_tmr(void *ctx)
+> +{
+> +	dhcp_fine_tmr();
+> +	sys_timeout(10, call_lwip_dhcp_fine_tmr, NULL);
+> +}
+> +
+> +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv=
+[])
+> +{
+> +	unsigned long start;
+> +	struct netif *netif;
+> +	struct dhcp *dhcp;
+> +	bool bound;
+> +
+> +	netif =3D net_lwip_new_netif_noip();
+> +	if (!netif)
+> +		return CMD_RET_FAILURE;
+> +
+> +	start =3D get_timer(0);
+> +	dhcp_start(netif);
+> +	call_lwip_dhcp_fine_tmr(NULL);
+> +
+> +	/* Wait for DHCP to complete */
+> +	do {
+> +		eth_rx();
+> +		sys_check_timeouts();
+> +		bound =3D dhcp_supplied_address(netif);
+> +		if (bound)
+> +			break;
+> +		if (ctrlc()) {
+> +			printf("Abort\n");
+> +			break;
+> +		}
+> +		mdelay(1);
+> +	} while (get_timer(start) < DHCP_TIMEOUT_MS);
+> +
+> +	sys_untimeout(call_lwip_dhcp_fine_tmr, NULL);
+> +
+> +	if (!bound) {
+> +		net_lwip_remove_netif(netif);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	dhcp =3D netif_dhcp_data(netif);
+> +
+> +	env_set("bootfile", dhcp->boot_file_name);
+> +	if (dhcp->offered_gw_addr.addr !=3D 0)
+> +		env_set("gatewayip", ip4addr_ntoa(&dhcp->offered_gw_addr));
+> +	env_set("ipaddr", ip4addr_ntoa(&dhcp->offered_ip_addr));
+> +	env_set("netmask", ip4addr_ntoa(&dhcp->offered_sn_mask));
+> +	env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
+> +#ifdef CONFIG_PROT_DNS_LWIP
+> +	env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
+> +	env_set("dnsip2", ip4addr_ntoa(dns_getserver(1)));
+> +#endif
+> +#ifdef CONFIG_CMD_TFTPBOOT
+> +	if (dhcp->boot_file_name[0] !=3D '\0')
+> +		strncpy(boot_file_name, dhcp->boot_file_name,
+> +			sizeof(boot_file_name));
+> +#endif
+> +
+> +	printf("DHCP client bound to address %pI4 (%lu ms)\n",
+> +	       &dhcp->offered_ip_addr, get_timer(start));
+> +
+> +	net_lwip_remove_netif(netif);
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+> +int dhcp_run(ulong addr, const char *fname, bool autoload)
+> +{
+> +	char *dhcp_argv[] =3D {"dhcp", NULL, };
+> +	struct cmd_tbl cmdtp =3D {};	/* dummy */
+> +
+> +	if (autoload) {
+> +		/* Will be supported when TFTP is added */
+> +		return -EOPNOTSUPP;
+> +	}
+> +
+> +	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
+> +}
+> diff --git a/net-lwip/eth_internal.h b/net-lwip/eth_internal.h
+> new file mode 100644
+> index 00000000000..0b829a8d388
+> --- /dev/null
+> +++ b/net-lwip/eth_internal.h
+> @@ -0,0 +1,35 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * (C) Copyright 2001-2015
+> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+> + * Joe Hershberger, National Instruments
+> + */
+> +
+> +#ifndef __ETH_INTERNAL_H
+> +#define __ETH_INTERNAL_H
+> +
+> +/* Do init that is common to driver model and legacy networking */
+> +void eth_common_init(void);
+> +
+> +/**
+> + * eth_env_set_enetaddr_by_index() - set the MAC address environment va=
+riable
+> + *
+> + * This sets up an environment variable with the given MAC address (@en=
+etaddr).
+> + * The environment variable to be set is defined by <@base_name><@index=
+>addr.
+> + * If @index is 0 it is omitted. For common Ethernet this means ethaddr=
+,
+> + * eth1addr, etc.
+> + *
+> + * @base_name:	Base name for variable, typically "eth"
+> + * @index:	Index of interface being updated (>=3D0)
+> + * @enetaddr:	Pointer to MAC address to put into the variable
+> + * Return: 0 if OK, other value on error
+> + */
+> +int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+> +				 uchar *enetaddr);
+> +
+> +int eth_mac_skip(int index);
+> +void eth_current_changed(void);
+> +void eth_set_dev(struct udevice *dev);
+> +void eth_set_current_to_next(void);
+> +
+> +#endif
+> diff --git a/net-lwip/net-lwip.c b/net-lwip/net-lwip.c
+> new file mode 100644
+> index 00000000000..39e7e51e542
+> --- /dev/null
+> +++ b/net-lwip/net-lwip.c
+> @@ -0,0 +1,270 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +/* Copyright (C) 2024 Linaro Ltd. */
+> +
+> +#include <command.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+> +#include <lwip/ip4_addr.h>
+> +#include <lwip/err.h>
+> +#include <lwip/netif.h>
+> +#include <lwip/pbuf.h>
+> +#include <lwip/etharp.h>
+> +#include <lwip/prot/etharp.h>
+> +#include <net.h>
+> +
+> +/* xx:xx:xx:xx:xx:xx\0 */
+> +#define MAC_ADDR_STRLEN 18
+> +
+> +#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+> +void (*push_packet)(void *, int len) =3D 0;
+> +#endif
+> +int net_restart_wrap;
+> +static uchar net_pkt_buf[(PKTBUFSRX+1) * PKTSIZE_ALIGN + PKTALIGN];
+> +uchar *net_rx_packets[PKTBUFSRX];
+> +uchar *net_rx_packet;
+> +uchar *net_tx_packet;
+> +
+> +static err_t low_level_output(struct netif *netif, struct pbuf *p)
+> +{
+> +        int err;
+> +
+> +	/*
+> +	 * lwIP is alwys configured to use one device, the active one, so
+> +	 * there is no need to use the netif parameter.
+> +	 */
+> +
+> +        /* switch dev to active state */
+> +        eth_init_state_only();
+> +
+> +        err =3D eth_send(p->payload, p->len);
+> +        if (err) {
+> +                log_err("eth_send error %d\n", err);
+> +                return ERR_ABRT;
+> +        }
+> +        return ERR_OK;
+> +}
+> +
+> +static err_t net_lwip_if_init(struct netif *netif)
+> +{
+> +#if LWIP_IPV4
+> +	netif->output =3D etharp_output;
+> +#endif
+> +	netif->linkoutput =3D low_level_output;
+> +	netif->mtu =3D 1500;
+> +	netif->flags =3D NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG=
+_LINK_UP;
+> +
+> +	return ERR_OK;
+> +}
+> +
+> +static void eth_init_rings(void)
+> +{
+> +        static bool called;
+> +	int i;
+> +
+> +        if (called)
+> +		return;
+> +	called =3D true;
+> +
+> +	net_tx_packet =3D &net_pkt_buf[0] + (PKTALIGN - 1);
+> +	net_tx_packet -=3D (ulong)net_tx_packet % PKTALIGN;
+> +	for (i =3D 0; i < PKTBUFSRX; i++)
+> +		net_rx_packets[i] =3D net_tx_packet + (i + 1) * PKTSIZE_ALIGN;
+> +}
+> +
+> +struct netif *net_lwip_get_netif(void)
+> +{
+> +	struct netif *netif, *found =3D NULL;
+> +
+> +	NETIF_FOREACH(netif) {
+> +		if (!found)
+> +			found =3D netif;
+> +		else
+> +			printf("Error: more than one netif in lwIP\n");
+> +	}
+> +	return found;
+> +}
+> +
+> +static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+> +			      ip4_addr_t *mask, ip4_addr_t *gw)
+> +{
+> +	char ipstr[9] =3D { 'i', 'p', 'a' , 'd', 'd', 'r', };
+> +	char maskstr[10] =3D { 'n', 'e', 't', 'm', 'a', 's', 'k', };
+> +	char gwstr[12] =3D { 'g', 'a', 't', 'e', 'w', 'a', 'y', 'i', 'p', };
+> +	char *env;
+> +	int ret;
+> +
+> +	if (dev_seq(dev) > 0) {
+> +		ret =3D snprintf(ipstr, sizeof(ipstr), "ipaddr%d", dev_seq(dev));
+> +		if (ret < 0 || ret >=3D sizeof(ipstr))
+> +			return -1;
+> +		snprintf(maskstr, sizeof(maskstr), "netmask%d", dev_seq(dev));
+> +		if (ret < 0 || ret >=3D sizeof(maskstr))
+> +			return -1;
+> +		snprintf(gwstr, sizeof(gwstr), "gw%d", dev_seq(dev));
+> +		if (ret < 0 || ret >=3D sizeof(gwstr))
+> +			return -1;
+> +	}
+> +
+> +	ip4_addr_set_zero(ip);
+> +	ip4_addr_set_zero(mask);
+> +	ip4_addr_set_zero(gw);
+> +
+> +	env =3D env_get(ipstr);
+> +	if (env)
+> +		ipaddr_aton(env, ip);
+> +
+> +	env =3D env_get(maskstr);
+> +	if (env)
+> +		ipaddr_aton(env, mask);
+> +
+> +	env =3D env_get(gwstr);
+> +	if (env)
+> +		ipaddr_aton(env, gw);
+> +
+> +	return 0;
+> +}
+> +
+> +static struct netif *new_netif(bool with_ip)
+> +{
+> +	unsigned char enetaddr[ARP_HLEN];
+> +	char hwstr[MAC_ADDR_STRLEN];
+> +	ip4_addr_t ip, mask, gw;
+> +	struct udevice *dev;
+> +	struct netif *netif;
 
-On 6/17/24 4:58 PM, Dragan Simic wrote:
-> Hello Quentin,
-> 
-> On 2024-06-17 16:10, Quentin Schulz wrote:
->> On 6/6/24 10:45 AM, Quentin Schulz wrote:
->>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>
->>> The ID of the PMIC is stored in the 2 16b registers but the only part
->>> that matters right now is the 3 MSB, which make the 3 digits (in hex) of
->>> the part number.
->>>
->>> Right now, only RK808 was properly displayed, with this all currently
->>> supported PMICs should display the proper part number.
->>>
->>> Additionally, when the PMIC variant is not found, print that value
->>> instead of the masked unshifted value as all PMICs we support for now
->>> have their LSB ignored to represent the actual part number.
->>>
->>> Tested on RK806 (RK3588 Jaguar), RK808 (RK3399 Puma) and RK809 (PX30
->>> Ringneck).
->>>
->>> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
->>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->>> ---
->>>   drivers/power/pmic/rk8xx.c | 6 +++---
->>>   1 file changed, 3 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
->>> index 12ff26a0855..617bb511e4e 100644
->>> --- a/drivers/power/pmic/rk8xx.c
->>> +++ b/drivers/power/pmic/rk8xx.c
->>> @@ -6,6 +6,7 @@
->>>     #include <dm.h>
->>>   #include <dm/lists.h>
->>> +#include <bitfield.h>
->>>   #include <errno.h>
->>>   #include <log.h>
->>>   #include <linux/bitfield.h>
->>> @@ -277,10 +278,9 @@ static int rk8xx_probe(struct udevice *dev)
->>>           return ret;
->>>         priv->variant = ((msb << 8) | lsb) & RK8XX_ID_MSK;
->>> -    show_variant = priv->variant;
->>> +    show_variant = bitfield_extract_by_mask(priv->variant, 
->>> RK8XX_ID_MSK);
->>>       switch (priv->variant) {
->>>       case RK808_ID:
->>> -        show_variant = 0x808;    /* RK808 hardware ID is 0 */
->>
->> This line removal is actually incorrect, I should have left this in as
->> we cannot use the same logic as other PMICs for RK808 as it returns 0,
->> so 0 masked/shifted is still zero.
-> 
-> Thanks for catching this!  Moreover, I think we should skip reading
-> the msb and lsb values entirely for the RK808, because its datasheet
-> lists the default ID_MSB (0x17) and ID_LSB (0x18) registers as reserved,
-> and provides no information about gathering the chip variant.
-> 
+This does not fit into the driver model.
 
-We've been reading those registers on RK808 in our production lines for 
-probably what's half a decade now, I think it's probably safe to use :)
+In the EFI subsystem we want to implement network protocols like the
+EFI_DHCP4_PROTOCOL.
 
-Cheers,
-Quentin
+Please, carve out functions to which we can pass a UCLASS_ETH udevice to
+execute DHCP.
+
+> +	int ret;
+> +	static bool first_call =3D true;
+> +
+> +	eth_init_rings();
+> +
+> +	if (first_call) {
+> +		if (eth_init()) {
+> +			printf("eth_init() error\n");
+> +			return NULL;
+> +		}
+> +		first_call =3D false;
+> +	}
+> +
+> +	netif_remove(net_lwip_get_netif());
+> +
+> +	eth_set_current();
+> +
+> +	dev =3D eth_get_dev();
+> +	if (!dev)
+> +		return NULL;
+> +
+> +	ip4_addr_set_zero(&ip);
+> +	ip4_addr_set_zero(&mask);
+> +	ip4_addr_set_zero(&gw);
+> +
+> +	if (with_ip)
+> +		if (get_udev_ipv4_info(dev, &ip, &mask, &gw) < 0)
+> +			return NULL;
+> +
+> +	eth_env_get_enetaddr_by_index("eth", dev_seq(dev), enetaddr);
+> +	ret =3D snprintf(hwstr, MAC_ADDR_STRLEN, "%pM",  enetaddr);
+> +	if (ret < 0 || ret >=3D MAC_ADDR_STRLEN)
+> +		return NULL;
+> +
+> +	netif =3D calloc(1, sizeof(struct netif));
+> +	if (!netif)
+> +		return NULL;
+> +
+> +	netif->name[0] =3D 'e';
+> +	netif->name[1] =3D 't';
+> +
+> +	string_to_enetaddr(hwstr, netif->hwaddr);
+> +	netif->hwaddr_len =3D ETHARP_HWADDR_LEN;
+> +
+> +	if (!netif_add(netif, &ip, &mask, &gw, netif, net_lwip_if_init,
+> +		       netif_input)) {
+> +		printf("error: netif_add() failed\n");
+> +		free(netif);
+> +		return NULL;
+> +	}
+> +
+> +	netif_set_up(netif);
+> +	netif_set_link_up(netif);
+> +	/* Routing: use this interface to reach the default gateway */
+> +	netif_set_default(netif);
+> +
+> +	return netif;
+> +}
+> +
+> +/* Configure lwIP to use the currently active network device */
+> +struct netif *net_lwip_new_netif()
+> +{
+> +	return new_netif(true);
+> +}
+> +
+> +struct netif *net_lwip_new_netif_noip()
+> +{
+> +
+> +	return new_netif(false);
+> +}
+> +
+> +void net_lwip_remove_netif(struct netif *netif)
+> +{
+> +	netif_remove(netif);
+> +	free(netif);
+> +}
+> +
+> +int net_init(void)
+> +{
+> +	net_lwip_new_netif();
+> +
+> +	return 0;
+> +}
+> +
+> +static struct pbuf *alloc_pbuf_and_copy(uchar *data, int len)
+> +{
+> +        struct pbuf *p, *q;
+> +
+> +        /* We allocate a pbuf chain of pbufs from the pool. */
+> +        p =3D pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
+> +        if (!p) {
+> +                LINK_STATS_INC(link.memerr);
+> +                LINK_STATS_INC(link.drop);
+> +                return NULL;
+> +        }
+> +
+> +        for (q =3D p; q !=3D NULL; q =3D q->next) {
+> +                memcpy(q->payload, data, q->len);
+> +                data +=3D q->len;
+> +        }
+> +
+> +        LINK_STATS_INC(link.recv);
+> +
+> +        return p;
+> +}
+> +
+> +void net_process_received_packet(uchar *in_packet, int len)
+
+Library functions should take a udevice as an argument. Please, do not
+use the concept of "active device" in these library functions.
+
+The command line interface may implement such a concept for backwards
+compatibility.
+
+Best regards
+
+Heinrich
+
+> +{
+> +	struct netif *netif;
+> +	struct pbuf *pbuf;
+> +
+> +	if (len < ETHER_HDR_SIZE)
+> +		return;
+> +
+> +#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+> +	if (push_packet) {
+> +		(*push_packet)(in_packet, len);
+> +		return;
+> +	}
+> +#endif
+> +
+> +	netif =3D net_lwip_get_netif();
+> +	if (!netif)
+> +		return;
+> +
+> +	pbuf =3D alloc_pbuf_and_copy(in_packet, len);
+> +	if (!pbuf)
+> +		return;
+> +
+> +	netif->input(pbuf, netif);
+> +}
+> +
+> +u32_t sys_now(void)
+> +{
+> +	return get_timer(0);
+> +}
+> diff --git a/net-lwip/tftp.c b/net-lwip/tftp.c
+> new file mode 100644
+> index 00000000000..1fa246f55d9
+> --- /dev/null
+> +++ b/net-lwip/tftp.c
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* Copyright (C) 2024 Linaro Ltd. */
+> +
+> +#include <command.h>
+> +#include <net-lwip.h>
+> +
+> +int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const arg=
+v[])
+> +{
+> +	/* Not implemented */
+> +	return CMD_RET_FAILURE;
+> +}
+
