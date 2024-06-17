@@ -4,82 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20D0C27C6E
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 06:31:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD61CC27C6E
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 07:07:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E6818825E;
-	Mon, 17 Jun 2024 08:31:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B35838704E;
+	Mon, 17 Jun 2024 09:07:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PkcRmA2F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GuWUefbH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89C8388261; Mon, 17 Jun 2024 08:31:19 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id C462C871C7; Mon, 17 Jun 2024 09:07:22 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF26E86F6E
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 08:31:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51AE9831A1
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 09:07:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-42281d8cd2dso27951915e9.3
- for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 23:31:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a6267778b3aso365524266b.3
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 00:07:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718605876; x=1719210676;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=EpOb0Dz47jnW/D+1TH4T/fOSXjJYX91yeiBr5YsxGBo=;
- b=PkcRmA2FVFTtNlf00zWQ/6yFZEM36ZKwjFcd0UGBoFdsYEniYJ6Km+i556uWKitRxp
- E/wizlASlAOZdGfqWnZlsgr0B17B3Xis9GMaDqY0SZpwzVitBQ9umc1i8xaFn8Zwb7Ig
- AdnPxb6rTG4JUnCZEp8UiCxxQFYfiTyfx9SMQgu6PnR11OfRXUcgOR4Q0BdW/oHSOh9c
- aGXphJ1nRfvnwNFkfk1fGQnpixgsPlltJnRzCB6oIJBAguaM9z3d0fiYA8YLyUsjdl5K
- jz2CyxiMqh4P9EuzaC/3XyGsSQHPj292y3aXILmgjcR42sNR9mguD9as66EJUPezORvG
- f/kg==
+ d=linaro.org; s=google; t=1718608040; x=1719212840; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fbtEIxXMcRh6kfeD7CGmIWzJndsRVgVNG4kXLZD9+VA=;
+ b=GuWUefbHHGVIVTC1iILh6sDDl9KeiQ25uTTnfE7+aeazT3jAyd/qGok26gj2+rJNXP
+ SrFvcXBieUE5WxJ2rNaxN/6TepI1x1ncITAuEo70bHA1jqKi7ecIUzQFTkw2gdpG2jy4
+ yXFs3S4C5SxgDMTUPbCJtDTzEbMMgb+bH/kPM0lrT5vxg5GaS0XPwR5xNfefHkrE0BbA
+ pY0Cgl5vmqXJ3CqM4H49CWNYB/vJjfC7yJU07+eJAofCs6Xq87pow4f+gEKHWmbalWIP
+ iKxhwz8N9Bw9Bv2yxQLCxdQUtho8oUG6SO+7ItHhTTFKtUAw+oTdvoyhF2H7k0ZTR0X5
+ Hupg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718605876; x=1719210676;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EpOb0Dz47jnW/D+1TH4T/fOSXjJYX91yeiBr5YsxGBo=;
- b=Wteovbwt9uki+PVFAiBE469LpP8SeQGgVo8wJOQLVQIkHv7iuflI1ADYoC1N+rlBCf
- WHsX7pXPaeO8QI0a82KUzP4Fo1svnBmjBvcp4FK17W7Ptr0RwBN/x5pvA4QJc3WvTb3Z
- 58AJCYQPE0z1orpUWTUUZRSBW8Aw1PlhwT/oLVgHgIZuL0+uJw7hwropNb+vV0lO5szn
- iNFU/VVfBOrsEt6LQvXeympzMRAhyAKLHf3kWQj9Ww+R9MpCK2KnZki/+cT30hPVJFAo
- b/lCuU7NFQcv7DCkGchW4Q4GRytFBnygZyP7zCZHdby3S9vQ6O1Di+iOsFbfBHcXPGMJ
- 4CJQ==
+ d=1e100.net; s=20230601; t=1718608040; x=1719212840;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fbtEIxXMcRh6kfeD7CGmIWzJndsRVgVNG4kXLZD9+VA=;
+ b=D8e2eyTAPpg23jj0klXOSxDd5PTmCXPyXuaMcILr1lJF8jllvzEgHN4uDcG54zi6P5
+ FT1Y7JF4tQWmga+MmULt+wtIPMenpQyow7GL2g06HtvBgRKAZPuWtSNJFAcJhs9X8ynB
+ RU+FYY11B+FhRwuMRwXzpZkS3dkQC8YtCaJHpJbRpOWAuk5lvEhx1FKP0eehxkkoSXyI
+ 5QnE2RuA4Gk4rxXnAYsFdXa519GPuajT9Lpoxxv6IDJPe4UeZOkaIhhxAbO+GeBEQInk
+ xIQ42EnuHCaaS8V8oDYJlDq5svkSXH8Yp6ZhPjC6Lh0C4XzFFerxk+hGOBNu9mkmRHO3
+ aJqg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0iYf7UG3gGbWjGPie4wD4bWv9rF1g3dG22C06G8HibbFB6R0rwrw+BWTPy6GOg5wHsNXFmvaveVkzz3Prnv7JgxfrJw==
-X-Gm-Message-State: AOJu0YwP8BlD6lnHWMvbQeJYBfsyEgSQCGt4KgNdPFLflQqM/14SHLTm
- xNnUo0hF05P+BviIk/Ua1gN7IYP66fYPnWWuaodLVEu6F8Y1GJ4MgJi5BZTpwGV2lQFYku6AV/f
- 4
-X-Google-Smtp-Source: AGHT+IHCXPti4rHzTPLymnDz+sVsiNjRf/XCsphZSl0RFF7LbzitSO4nO1h+tcVr99po8naQ9olfAg==
-X-Received: by 2002:a7b:c8cb:0:b0:421:7c64:6f3d with SMTP id
- 5b1f17b1804b1-42304828f2amr101938015e9.16.1718605875770; 
- Sun, 16 Jun 2024 23:31:15 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ AJvYcCXdgARe++zU93fH5R6NCwmnySlRowqM1iQTzpBbXFtjoh3PoGQsl66ElG7T4wZZ2CM77Ud8hSouAzR3inZEV3bYYwFUxg==
+X-Gm-Message-State: AOJu0YyH8+4A5KcgkpAwWMc78EIpIthJPhPML/JE4FU9pLQdHT1kLfCV
+ rcnaBKoYSMvgBWCTfwojvG+xXB9nMMRRa7C5sbIPBxmrwvHpIkL6uW+99deAeTs=
+X-Google-Smtp-Source: AGHT+IHIQ7HQKUI6vt5ECRaYtPaQebzpG3OMImsFOncI47nspWaW5Qsn1Ef/CRFWLcdCxoKFeI9CKw==
+X-Received: by 2002:a17:906:6bcc:b0:a6f:27e6:8892 with SMTP id
+ a640c23a62f3a-a6f60dc1f53mr507598466b.60.1718608039496; 
+ Mon, 17 Jun 2024 00:07:19 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::52af? ([2a02:8109:aa0d:be00::52af])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f6127c1esm149201115e9.23.2024.06.16.23.31.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Jun 2024 23:31:14 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Mario Six <mario.six@gdsys.cc>, Quentin Schulz
- <quentin.schulz@cherry.de>, u-boot@lists.denx.de, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 2/2] bootstd: Replace bootmethod(s) -> bootmeth(s)
-In-Reply-To: <a7410171-c413-4815-8187-606d32b0c5b3@gmx.de>
-References: <20240604-bootmeth-typos-v2-0-821683a95aaf@baylibre.com>
- <20240604-bootmeth-typos-v2-2-821683a95aaf@baylibre.com>
- <a7410171-c413-4815-8187-606d32b0c5b3@gmx.de>
-Date: Mon, 17 Jun 2024 08:31:13 +0200
-Message-ID: <87r0cwaxn2.fsf@baylibre.com>
+ a640c23a62f3a-a6f56fa67besm481195266b.208.2024.06.17.00.07.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Jun 2024 00:07:18 -0700 (PDT)
+Message-ID: <1c0aa5da-468b-4d3f-9d90-6dba511afb69@linaro.org>
+Date: Mon, 17 Jun 2024 09:07:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] phy: Extend generic_setup_phy() with PHY mode and
+ submode
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Fabio Estevam <festevam@gmail.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Mathieu Othacehe <othacehe@gnu.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Xavier Drudis Ferran <xdrudis@tinet.cat>, u-boot-qcom@groups.io
+References: <20240616150426.36338-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240616150426.36338-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,291 +104,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-Thank you for your review.
-
-On dim., juin 16, 2024 at 09:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-
-> On 6/4/24 17:15, Mattijs Korpershoek wrote:
->> According to [1], we should use bootmeth when describing the
->> struct bootmeth:
->>
->> """
->> For version 2, a new naming scheme is used as above:
->>
->>      - bootdev is used instead of bootdevice, because 'device' is overused,
->>          is everywhere in U-Boot, can be confused with udevice
->
-> Boot devices are udevices though they don't relate to hardware but to an
-> abstract concept.
->
-> bootdev is just an abbreviation. This does not make the meaning any clearer.
-
-Per my understanding, the name for this concept is "bootdev", not
-"boot device", see:
-
-https://docs.u-boot.org/en/latest/develop/bootstd.html#introduction
-
->
->>      - bootmeth - because 'method' is too vanilla, appears 1300 times in
->>          U-Boot
->> """
->
-> Avoiding abbreviations like bootdev and bootmeth improved readability.
-
-The above paragraph is quoted from email [1].
-In this email, Simon made the choice to use bootmeth and bootdev
-when pushing the initial implementation.
-
-This patch just corrects the places where the older terminology
-(bootmethod, bootdevice) was still used.
-
-So i'm a bit confused on why this patch got rejected.
-Is it preferable to keep two terminologies for the same concept?
-
-Thanks
-Mattijs
 
 
-[1] https://lore.kernel.org/u-boot/20211023232635.9195-1-sjg@chromium.org/
+On 16/06/2024 17:04, Marek Vasut wrote:
+> Extend generic_setup_phy() parameter list with PHY mode and submode and
+> call generic_phy_set_mode() in generic_setup_phy(), so the generic PHY
+> setup function can configure the PHY into correct mode before powering
+> the PHY up.
+> 
+> Update all call sites of generic_setup_phy() as well, all of which are
+> USB host related, except for DM test which now behaves as a USB host
+> test.
+> 
+> Note that if the PHY driver does not implement the .set_mode callback,
+> generic_phy_set_mode() call returns 0 and does not error out, so this
+> should not break any existing systems.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
->
-> Best regards
->
-> Heinrich
->
->>
->> Replace all occurences in various comments for consistency.
->>
->> [1] https://lore.kernel.org/u-boot/20211023232635.9195-1-sjg@chromium.org/
->> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> ---
->>   board/sandbox/sandbox.env |  2 +-
->>   boot/bootmeth-uclass.c    |  2 +-
->>   include/bootmeth.h        | 30 +++++++++++++++---------------
->>   include/extlinux.h        |  2 +-
->>   test/boot/bootflow.c      |  2 +-
->>   test/boot/bootmeth.c      |  6 +++---
->>   6 files changed, 22 insertions(+), 22 deletions(-)
->>
->> diff --git a/board/sandbox/sandbox.env b/board/sandbox/sandbox.env
->> index a2c19702d64d..564dce78a898 100644
->> --- a/board/sandbox/sandbox.env
->> +++ b/board/sandbox/sandbox.env
->> @@ -10,7 +10,7 @@ eth6addr=02:00:11:22:33:47
->>   ipaddr=192.0.2.1
->>
->>   /*
->> - * These are used for distro boot which is not supported. But once bootmethod
->> + * These are used for distro boot which is not supported. But once bootmeth
->>    * is provided these will be used again.
->>    */
->>   bootm_size=0x10000000
->> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
->> index 1d157d54dbdd..e3475f46b34c 100644
->> --- a/boot/bootmeth-uclass.c
->> +++ b/boot/bootmeth-uclass.c
->> @@ -167,7 +167,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
->>   			if (pass)
->>   				iter->first_glob_method = upto;
->>   			/*
->> -			 * Get a list of bootmethods, in seq order (i.e. using
->> +			 * Get a list of bootmeths, in seq order (i.e. using
->>   			 * aliases). There may be gaps so try to count up high
->>   			 * enough to find them all.
->>   			 */
->> diff --git a/include/bootmeth.h b/include/bootmeth.h
->> index 529c4d813d82..2570d9593d49 100644
->> --- a/include/bootmeth.h
->> +++ b/include/bootmeth.h
->> @@ -47,7 +47,7 @@ struct bootmeth_ops {
->>   	 * This may involve reading state from the system, e.g. some data in
->>   	 * the firmware area.
->>   	 *
->> -	 * @dev:	Bootmethod device to check
->> +	 * @dev:	Bootmeth device to check
->>   	 * @buf:	Buffer to place the info in (terminator must fit)
->>   	 * @maxsize:	Size of buffer
->>   	 * Returns: 0 if OK, -ENOSPC is buffer is too small, other -ve error if
->> @@ -74,7 +74,7 @@ struct bootmeth_ops {
->>   	 *
->>   	 * It may update only the flags in @iter
->>   	 *
->> -	 * @dev:	Bootmethod device to check against
->> +	 * @dev:	Bootmeth device to check against
->>   	 * @iter:	On entry, provides bootdev, hwpart, part
->>   	 * Return: 0 if OK, -ENOTSUPP if this bootdev is not supported
->>   	 */
->> @@ -83,7 +83,7 @@ struct bootmeth_ops {
->>   	/**
->>   	 * read_bootflow() - read a bootflow for a device
->>   	 *
->> -	 * @dev:	Bootmethod device to use
->> +	 * @dev:	Bootmeth device to use
->>   	 * @bflow:	On entry, provides dev, hwpart, part and method.
->>   	 *	Returns updated bootflow if found
->>   	 * Return: 0 if OK, -ve on error
->> @@ -96,7 +96,7 @@ struct bootmeth_ops {
->>   	 * This provides a bootflow file to the bootmeth, to see if it is valid.
->>   	 * If it is, the bootflow is set up accordingly.
->>   	 *
->> -	 * @dev:	Bootmethod device to use
->> +	 * @dev:	Bootmeth device to use
->>   	 * @bflow:	On entry, provides bootdev.
->>   	 *	Returns updated bootflow if found
->>   	 * @buf:	Buffer containing the possible bootflow file
->> @@ -111,7 +111,7 @@ struct bootmeth_ops {
->>   	 *
->>   	 * Read a file from the same place as the bootflow came from
->>   	 *
->> -	 * @dev:	Bootmethod device to use
->> +	 * @dev:	Bootmeth device to use
->>   	 * @bflow:	Bootflow providing info on where to read from
->>   	 * @file_path:	Path to file (may be absolute or relative)
->>   	 * @addr:	Address to load file
->> @@ -126,7 +126,7 @@ struct bootmeth_ops {
->>   	/**
->>   	 * readall() - read all files for a bootflow
->>   	 *
->> -	 * @dev:	Bootmethod device to boot
->> +	 * @dev:	Bootmeth device to boot
->>   	 * @bflow:	Bootflow to read
->>   	 * Return: 0 if OK, -EIO on I/O error, other -ve on other error
->>   	 */
->> @@ -135,7 +135,7 @@ struct bootmeth_ops {
->>   	/**
->>   	 * boot() - boot a bootflow
->>   	 *
->> -	 * @dev:	Bootmethod device to boot
->> +	 * @dev:	Bootmeth device to boot
->>   	 * @bflow:	Bootflow to boot
->>   	 * Return: does not return on success, since it should boot the
->>   	 *	Operating System. Returns -EFAULT if that fails, -ENOTSUPP if
->> @@ -158,7 +158,7 @@ struct bootmeth_ops {
->>    * This may involve reading state from the system, e.g. some data in
->>    * the firmware area.
->>    *
->> - * @dev:	Bootmethod device to check
->> + * @dev:	Bootmeth device to check
->>    * @buf:	Buffer to place the info in (terminator must fit)
->>    * @maxsize:	Size of buffer
->>    * Returns: 0 if OK, -ENOSPC is buffer is too small, other -ve error if
->> @@ -185,7 +185,7 @@ int bootmeth_get_state_desc(struct udevice *dev, char *buf, int maxsize);
->>    *
->>    * It may update only the flags in @iter
->>    *
->> - * @dev:	Bootmethod device to check against
->> + * @dev:	Bootmeth device to check against
->>    * @iter:	On entry, provides bootdev, hwpart, part
->>    * Return: 0 if OK, -ENOTSUPP if this bootdev is not supported
->>    */
->> @@ -194,7 +194,7 @@ int bootmeth_check(struct udevice *dev, struct bootflow_iter *iter);
->>   /**
->>    * bootmeth_read_bootflow() - set up a bootflow for a device
->>    *
->> - * @dev:	Bootmethod device to check
->> + * @dev:	Bootmeth device to check
->>    * @bflow:	On entry, provides dev, hwpart, part and method.
->>    *	Returns updated bootflow if found
->>    * Return: 0 if OK, -ve on error
->> @@ -207,7 +207,7 @@ int bootmeth_read_bootflow(struct udevice *dev, struct bootflow *bflow);
->>    * This provides a bootflow file to the bootmeth, to see if it is valid.
->>    * If it is, the bootflow is set up accordingly.
->>    *
->> - * @dev:	Bootmethod device to use
->> + * @dev:	Bootmeth device to use
->>    * @bflow:	On entry, provides bootdev.
->>    *	Returns updated bootflow if found
->>    * @buf:	Buffer containing the possible bootflow file (must be allocated
->> @@ -223,7 +223,7 @@ int bootmeth_set_bootflow(struct udevice *dev, struct bootflow *bflow,
->>    *
->>    * Read a file from the same place as the bootflow came from
->>    *
->> - * @dev:	Bootmethod device to use
->> + * @dev:	Bootmeth device to use
->>    * @bflow:	Bootflow providing info on where to read from
->>    * @file_path:	Path to file (may be absolute or relative)
->>    * @addr:	Address to load file
->> @@ -241,7 +241,7 @@ int bootmeth_read_file(struct udevice *dev, struct bootflow *bflow,
->>    * Some bootmeths delay reading of large files until booting is requested. This
->>    * causes those files to be read.
->>    *
->> - * @dev:	Bootmethod device to use
->> + * @dev:	Bootmeth device to use
->>    * @bflow:	Bootflow to read
->>    * Return: does not return on success, since it should boot the
->>    *	Operating System. Returns -EFAULT if that fails, other -ve on
->> @@ -252,7 +252,7 @@ int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
->>   /**
->>    * bootmeth_boot() - boot a bootflow
->>    *
->> - * @dev:	Bootmethod device to boot
->> + * @dev:	Bootmeth device to boot
->>    * @bflow:	Bootflow to boot
->>    * Return: does not return on success, since it should boot the
->>    *	Operating System. Returns -EFAULT if that fails, other -ve on
->> @@ -265,7 +265,7 @@ int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
->>    *
->>    * This sets up the ordering information in @iter, based on the selected
->>    * ordering of the bootmeths in bootstd_priv->bootmeth_order. If there is no
->> - * ordering there, then all bootmethods are added
->> + * ordering there, then all bootmeths are added
->>    *
->>    * @iter: Iterator to update with the order
->>    * @include_global: true to add the global bootmeths, in which case they appear
->> diff --git a/include/extlinux.h b/include/extlinux.h
->> index 721ba46371cc..4d26a0a8ab74 100644
->> --- a/include/extlinux.h
->> +++ b/include/extlinux.h
->> @@ -12,7 +12,7 @@
->>   /**
->>    * struct extlinux_info - useful information for extlinux_getfile()
->>    *
->> - * @dev: bootmethod device being used to boot
->> + * @dev: bootmeth device being used to boot
->>    * @bflow: bootflow being booted
->>    */
->>   struct extlinux_info {
->> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
->> index 674d4c05f83f..24f3b5fbe109 100644
->> --- a/test/boot/bootflow.c
->> +++ b/test/boot/bootflow.c
->> @@ -400,7 +400,7 @@ BOOTSTD_TEST(bootflow_system, UT_TESTF_DM | UT_TESTF_SCAN_PDATA |
->>   	     UT_TESTF_SCAN_FDT);
->>   #endif
->>
->> -/* Check disabling a bootmethod if it requests it */
->> +/* Check disabling a bootmeth if it requests it */
->>   static int bootflow_iter_disable(struct unit_test_state *uts)
->>   {
->>   	struct udevice *bootstd, *dev;
->> diff --git a/test/boot/bootmeth.c b/test/boot/bootmeth.c
->> index e498eee036eb..b9a3f48a95ef 100644
->> --- a/test/boot/bootmeth.c
->> +++ b/test/boot/bootmeth.c
->> @@ -37,7 +37,7 @@ BOOTSTD_TEST(bootmeth_cmd_list, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
->>   /* Check 'bootmeth order' command */
->>   static int bootmeth_cmd_order(struct unit_test_state *uts)
->>   {
->> -	/* Select just one bootmethod */
->> +	/* Select just one bootmeth */
->>   	console_record_reset_enable();
->>   	ut_assertok(run_command("bootmeth order extlinux", 0));
->>   	ut_assert_console_end();
->> @@ -138,12 +138,12 @@ static int bootmeth_env(struct unit_test_state *uts)
->>
->>   	ut_assertok(bootstd_get_priv(&std));
->>
->> -	/* Select just one bootmethod */
->> +	/* Select just one bootmeth */
->>   	console_record_reset_enable();
->>   	ut_assertok(env_set("bootmeths", "extlinux"));
->>   	ut_asserteq(1, std->bootmeth_count);
->>
->> -	/* Select an invalid bootmethod */
->> +	/* Select an invalid bootmeth */
->>   	ut_asserteq(1, run_command("setenv bootmeths fred", 0));
->>   	ut_assert_nextline("Unknown bootmeth 'fred'");
->>   	ut_assert_nextlinen("## Error inserting");
->>
+Acked-by: Caleb Connolly <caleb.connolly@linaro.org> # ehci-msm
+> ---
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> Cc: Jonas Karlman <jonas@kwiboo.se>
+> Cc: Mathieu Othacehe <othacehe@gnu.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
+> Cc: u-boot-qcom@groups.io
+> Cc: u-boot@lists.denx.de
+> ---
+>   drivers/phy/phy-uclass.c        | 7 ++++++-
+>   drivers/usb/host/ehci-generic.c | 2 +-
+>   drivers/usb/host/ehci-msm.c     | 2 +-
+>   drivers/usb/host/ehci-mx6.c     | 2 +-
+>   drivers/usb/host/ehci-pci.c     | 2 +-
+>   drivers/usb/host/ohci-generic.c | 2 +-
+>   include/generic-phy.h           | 5 ++++-
+>   test/dm/phy.c                   | 8 ++++----
+>   8 files changed, 19 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
+> index acdcda15b5b..bbaf95112c5 100644
+> --- a/drivers/phy/phy-uclass.c
+> +++ b/drivers/phy/phy-uclass.c
+> @@ -508,7 +508,8 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk)
+>   	return ret;
+>   }
+>   
+> -int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
+> +int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
+> +		      enum phy_mode mode, int submode)
+>   {
+>   	int ret;
+>   
+> @@ -520,6 +521,10 @@ int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
+>   	if (ret)
+>   		return ret;
+>   
+> +	ret = generic_phy_set_mode(phy, mode, submode);
+> +	if (ret)
+> +		generic_phy_exit(phy);
+> +
+>   	ret = generic_phy_power_on(phy);
+>   	if (ret)
+>   		generic_phy_exit(phy);
+> diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
+> index 23c3ed25554..1ae3619ce25 100644
+> --- a/drivers/usb/host/ehci-generic.c
+> +++ b/drivers/usb/host/ehci-generic.c
+> @@ -94,7 +94,7 @@ static int ehci_usb_probe(struct udevice *dev)
+>   	if (err)
+>   		goto reset_err;
+>   
+> -	err = generic_setup_phy(dev, &priv->phy, 0);
+> +	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>   	if (err)
+>   		goto regulator_err;
+>   
+> diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
+> index a081f71b187..b0c060b8173 100644
+> --- a/drivers/usb/host/ehci-msm.c
+> +++ b/drivers/usb/host/ehci-msm.c
+> @@ -56,7 +56,7 @@ static int ehci_usb_probe(struct udevice *dev)
+>   	hcor = (struct ehci_hcor *)((phys_addr_t)hccr +
+>   			HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
+>   
+> -	ret = generic_setup_phy(dev, &p->phy, 0);
+> +	ret = generic_setup_phy(dev, &p->phy, 0, PHY_MODE_USB_HOST, 0);
+>   	if (ret)
+>   		return ret;
+>   
+> diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+> index 31cd8a50f4a..a93fa5d5455 100644
+> --- a/drivers/usb/host/ehci-mx6.c
+> +++ b/drivers/usb/host/ehci-mx6.c
+> @@ -703,7 +703,7 @@ static int ehci_usb_probe(struct udevice *dev)
+>   	usb_phy_enable(ehci, priv->phy_addr);
+>   #endif
+>   #else
+> -	ret = generic_setup_phy(dev, &priv->phy, 0);
+> +	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>   	if (ret)
+>   		goto err_regulator;
+>   #endif
+> diff --git a/drivers/usb/host/ehci-pci.c b/drivers/usb/host/ehci-pci.c
+> index 572686580cd..8d05b14e898 100644
+> --- a/drivers/usb/host/ehci-pci.c
+> +++ b/drivers/usb/host/ehci-pci.c
+> @@ -30,7 +30,7 @@ static int ehci_pci_init(struct udevice *dev, struct ehci_hccr **ret_hccr,
+>   	int ret;
+>   	u32 cmd;
+>   
+> -	ret = generic_setup_phy(dev, &priv->phy, 0);
+> +	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>   	if (ret)
+>   		return ret;
+>   
+> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
+> index f1325cd4953..cc44226f5e0 100644
+> --- a/drivers/usb/host/ohci-generic.c
+> +++ b/drivers/usb/host/ohci-generic.c
+> @@ -50,7 +50,7 @@ static int ohci_usb_probe(struct udevice *dev)
+>   		goto reset_err;
+>   	}
+>   
+> -	err = generic_setup_phy(dev, &priv->phy, 0);
+> +	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
+>   	if (err)
+>   		goto reset_err;
+>   
+> diff --git a/include/generic-phy.h b/include/generic-phy.h
+> index eaab7491660..47962023236 100644
+> --- a/include/generic-phy.h
+> +++ b/include/generic-phy.h
+> @@ -415,10 +415,13 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk);
+>    * @dev:	The consumer device.
+>    * @phy:	A pointer to the PHY port
+>    * @index:	The index in the list of available PHYs
+> + * @mode:	PHY mode
+> + * @submode:	PHY submode
+>    *
+>    * Return: 0 if OK, or negative error code.
+>    */
+> -int generic_setup_phy(struct udevice *dev, struct phy *phy, int index);
+> +int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
+> +		      enum phy_mode mode, int submode);
+>   
+>   /**
+>    * generic_shutdown_phy() - Power off and de-initialize phy.
+> diff --git a/test/dm/phy.c b/test/dm/phy.c
+> index d14117f6f7a..a90881b12ab 100644
+> --- a/test/dm/phy.c
+> +++ b/test/dm/phy.c
+> @@ -243,20 +243,20 @@ static int dm_test_phy_setup(struct unit_test_state *uts)
+>   					      "gen_phy_user", &parent));
+>   
+>   	/* normal */
+> -	ut_assertok(generic_setup_phy(parent, &phy, 0));
+> +	ut_assertok(generic_setup_phy(parent, &phy, 0, PHY_MODE_USB_HOST, 0));
+>   	ut_assertok(generic_shutdown_phy(&phy));
+>   
+>   	/* power_off fail with -EIO */
+> -	ut_assertok(generic_setup_phy(parent, &phy, 1));
+> +	ut_assertok(generic_setup_phy(parent, &phy, 1, PHY_MODE_USB_HOST, 0));
+>   	ut_asserteq(-EIO, generic_shutdown_phy(&phy));
+>   
+>   	/* power_on fail with -EIO */
+> -	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2));
+> +	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2, PHY_MODE_USB_HOST, 0));
+>   	ut_assertok(generic_shutdown_phy(&phy));
+>   
+>   	/* generic_phy_get_by_index fail with -ENOENT */
+>   	ut_asserteq(-ENOENT, generic_phy_get_by_index(parent, 3, &phy));
+> -	ut_assertok(generic_setup_phy(parent, &phy, 3));
+> +	ut_assertok(generic_setup_phy(parent, &phy, 3, PHY_MODE_USB_HOST, 0));
+>   	ut_assertok(generic_shutdown_phy(&phy));
+>   
+>   	return 0;
+
+-- 
+// Caleb (they/them)
