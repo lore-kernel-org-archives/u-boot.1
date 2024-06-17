@@ -4,65 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C5DFC27C6E
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 06:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20D0C27C6E
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 06:31:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8D3A88261;
-	Mon, 17 Jun 2024 08:28:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E6818825E;
+	Mon, 17 Jun 2024 08:31:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fcxKuuXw";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PkcRmA2F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F162E8825E; Mon, 17 Jun 2024 08:28:29 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 89C8388261; Mon, 17 Jun 2024 08:31:19 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8439286F6E
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 08:28:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF26E86F6E
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 08:31:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45H6SNZX018458;
- Mon, 17 Jun 2024 01:28:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718605703;
- bh=Bjh/XvVvJO7Dt+eB5qZREhz+Ro/miJSAJw91oDd2sbM=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=fcxKuuXw3QVqwlTeD+UHCL5eh7c7AUXuvfSUtdnD/GnwFwACGJ5Yk6ZIvpOSSMuy1
- lzc6VmVSk4h1DDHd/zB6FpLvP9pxSb/3/ousermZBmL9SYJAjE832Q2mfntiOZ6VO3
- LIEMmAmfPw1lNCTLLo8SArxZu5eI1M5QcXbtEqJ8=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45H6SN1j021649
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 17 Jun 2024 01:28:23 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 17
- Jun 2024 01:28:23 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 17 Jun 2024 01:28:23 -0500
-Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45H6SMjs089952;
- Mon, 17 Jun 2024 01:28:23 -0500
-Date: Mon, 17 Jun 2024 11:58:22 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Prasad Kummari <prasad.kummari@amd.com>
-CC: <u-boot@lists.denx.de>, <michal.simek@amd.com>,
- <venkatesh.abbarapu@amd.com>, <git@xilinx.com>,
- <jagan@amarulasolutions.com>, <n-francis@ti.com>
-Subject: Re: [PATCH] mtd: spi-nor: ids: Add IS25LP01GG flash support
-Message-ID: <20240617062822.474khxwuq4yxs5ra@dhruva>
-References: <20240617041841.1336632-1-prasad.kummari@amd.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42281d8cd2dso27951915e9.3
+ for <u-boot@lists.denx.de>; Sun, 16 Jun 2024 23:31:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718605876; x=1719210676;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EpOb0Dz47jnW/D+1TH4T/fOSXjJYX91yeiBr5YsxGBo=;
+ b=PkcRmA2FVFTtNlf00zWQ/6yFZEM36ZKwjFcd0UGBoFdsYEniYJ6Km+i556uWKitRxp
+ E/wizlASlAOZdGfqWnZlsgr0B17B3Xis9GMaDqY0SZpwzVitBQ9umc1i8xaFn8Zwb7Ig
+ AdnPxb6rTG4JUnCZEp8UiCxxQFYfiTyfx9SMQgu6PnR11OfRXUcgOR4Q0BdW/oHSOh9c
+ aGXphJ1nRfvnwNFkfk1fGQnpixgsPlltJnRzCB6oIJBAguaM9z3d0fiYA8YLyUsjdl5K
+ jz2CyxiMqh4P9EuzaC/3XyGsSQHPj292y3aXILmgjcR42sNR9mguD9as66EJUPezORvG
+ f/kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718605876; x=1719210676;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=EpOb0Dz47jnW/D+1TH4T/fOSXjJYX91yeiBr5YsxGBo=;
+ b=Wteovbwt9uki+PVFAiBE469LpP8SeQGgVo8wJOQLVQIkHv7iuflI1ADYoC1N+rlBCf
+ WHsX7pXPaeO8QI0a82KUzP4Fo1svnBmjBvcp4FK17W7Ptr0RwBN/x5pvA4QJc3WvTb3Z
+ 58AJCYQPE0z1orpUWTUUZRSBW8Aw1PlhwT/oLVgHgIZuL0+uJw7hwropNb+vV0lO5szn
+ iNFU/VVfBOrsEt6LQvXeympzMRAhyAKLHf3kWQj9Ww+R9MpCK2KnZki/+cT30hPVJFAo
+ b/lCuU7NFQcv7DCkGchW4Q4GRytFBnygZyP7zCZHdby3S9vQ6O1Di+iOsFbfBHcXPGMJ
+ 4CJQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU0iYf7UG3gGbWjGPie4wD4bWv9rF1g3dG22C06G8HibbFB6R0rwrw+BWTPy6GOg5wHsNXFmvaveVkzz3Prnv7JgxfrJw==
+X-Gm-Message-State: AOJu0YwP8BlD6lnHWMvbQeJYBfsyEgSQCGt4KgNdPFLflQqM/14SHLTm
+ xNnUo0hF05P+BviIk/Ua1gN7IYP66fYPnWWuaodLVEu6F8Y1GJ4MgJi5BZTpwGV2lQFYku6AV/f
+ 4
+X-Google-Smtp-Source: AGHT+IHCXPti4rHzTPLymnDz+sVsiNjRf/XCsphZSl0RFF7LbzitSO4nO1h+tcVr99po8naQ9olfAg==
+X-Received: by 2002:a7b:c8cb:0:b0:421:7c64:6f3d with SMTP id
+ 5b1f17b1804b1-42304828f2amr101938015e9.16.1718605875770; 
+ Sun, 16 Jun 2024 23:31:15 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-422f6127c1esm149201115e9.23.2024.06.16.23.31.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 16 Jun 2024 23:31:14 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Mario Six <mario.six@gdsys.cc>, Quentin Schulz
+ <quentin.schulz@cherry.de>, u-boot@lists.denx.de, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 2/2] bootstd: Replace bootmethod(s) -> bootmeth(s)
+In-Reply-To: <a7410171-c413-4815-8187-606d32b0c5b3@gmx.de>
+References: <20240604-bootmeth-typos-v2-0-821683a95aaf@baylibre.com>
+ <20240604-bootmeth-typos-v2-2-821683a95aaf@baylibre.com>
+ <a7410171-c413-4815-8187-606d32b0c5b3@gmx.de>
+Date: Mon, 17 Jun 2024 08:31:13 +0200
+Message-ID: <87r0cwaxn2.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240617041841.1336632-1-prasad.kummari@amd.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,38 +96,291 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Jun 17, 2024 at 09:48:42 +0530, Prasad Kummari wrote:
-> Add support for ISSI 128MB flash IS25LP01GG. This part
+Hi Heinrich,
 
-Can we have the datasheet link for this part?
-I am assuming it's this?
-https://www.issi.com/WW/pdf/25LP-WP01GG.pdf
+Thank you for your review.
 
-Better to add it to the commit message.
+On dim., juin 16, 2024 at 09:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 
-> supports 4byte opcodes. It also supports dual and quad
-> read.
-> 
-> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-> index 4e83b8c94c..8cad764237 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -242,6 +242,8 @@ const struct flash_info spi_nor_ids[] = {
->  			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES) },
->  	{ INFO("is25lx512",  0x9d5a1a, 0, 64 * 1024, 1024,
->  			SECT_4K | USE_FSR | SPI_NOR_4B_OPCODES | SPI_NOR_HAS_TB) },
-> +	{ INFO("is25lp01gg",  0x9d6021, 0, 64 * 1024, 2048,
-> +			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
+> On 6/4/24 17:15, Mattijs Korpershoek wrote:
+>> According to [1], we should use bootmeth when describing the
+>> struct bootmeth:
+>>
+>> """
+>> For version 2, a new naming scheme is used as above:
+>>
+>>      - bootdev is used instead of bootdevice, because 'device' is overused,
+>>          is everywhere in U-Boot, can be confused with udevice
+>
+> Boot devices are udevices though they don't relate to hardware but to an
+> abstract concept.
+>
+> bootdev is just an abbreviation. This does not make the meaning any clearer.
 
-Otherwise looks good to me,
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
+Per my understanding, the name for this concept is "bootdev", not
+"boot device", see:
+
+https://docs.u-boot.org/en/latest/develop/bootstd.html#introduction
+
+>
+>>      - bootmeth - because 'method' is too vanilla, appears 1300 times in
+>>          U-Boot
+>> """
+>
+> Avoiding abbreviations like bootdev and bootmeth improved readability.
+
+The above paragraph is quoted from email [1].
+In this email, Simon made the choice to use bootmeth and bootdev
+when pushing the initial implementation.
+
+This patch just corrects the places where the older terminology
+(bootmethod, bootdevice) was still used.
+
+So i'm a bit confused on why this patch got rejected.
+Is it preferable to keep two terminologies for the same concept?
+
+Thanks
+Mattijs
 
 
--- 
-Best regards,
-Dhruva
+[1] https://lore.kernel.org/u-boot/20211023232635.9195-1-sjg@chromium.org/
+
+>
+> Best regards
+>
+> Heinrich
+>
+>>
+>> Replace all occurences in various comments for consistency.
+>>
+>> [1] https://lore.kernel.org/u-boot/20211023232635.9195-1-sjg@chromium.org/
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> ---
+>>   board/sandbox/sandbox.env |  2 +-
+>>   boot/bootmeth-uclass.c    |  2 +-
+>>   include/bootmeth.h        | 30 +++++++++++++++---------------
+>>   include/extlinux.h        |  2 +-
+>>   test/boot/bootflow.c      |  2 +-
+>>   test/boot/bootmeth.c      |  6 +++---
+>>   6 files changed, 22 insertions(+), 22 deletions(-)
+>>
+>> diff --git a/board/sandbox/sandbox.env b/board/sandbox/sandbox.env
+>> index a2c19702d64d..564dce78a898 100644
+>> --- a/board/sandbox/sandbox.env
+>> +++ b/board/sandbox/sandbox.env
+>> @@ -10,7 +10,7 @@ eth6addr=02:00:11:22:33:47
+>>   ipaddr=192.0.2.1
+>>
+>>   /*
+>> - * These are used for distro boot which is not supported. But once bootmethod
+>> + * These are used for distro boot which is not supported. But once bootmeth
+>>    * is provided these will be used again.
+>>    */
+>>   bootm_size=0x10000000
+>> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+>> index 1d157d54dbdd..e3475f46b34c 100644
+>> --- a/boot/bootmeth-uclass.c
+>> +++ b/boot/bootmeth-uclass.c
+>> @@ -167,7 +167,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+>>   			if (pass)
+>>   				iter->first_glob_method = upto;
+>>   			/*
+>> -			 * Get a list of bootmethods, in seq order (i.e. using
+>> +			 * Get a list of bootmeths, in seq order (i.e. using
+>>   			 * aliases). There may be gaps so try to count up high
+>>   			 * enough to find them all.
+>>   			 */
+>> diff --git a/include/bootmeth.h b/include/bootmeth.h
+>> index 529c4d813d82..2570d9593d49 100644
+>> --- a/include/bootmeth.h
+>> +++ b/include/bootmeth.h
+>> @@ -47,7 +47,7 @@ struct bootmeth_ops {
+>>   	 * This may involve reading state from the system, e.g. some data in
+>>   	 * the firmware area.
+>>   	 *
+>> -	 * @dev:	Bootmethod device to check
+>> +	 * @dev:	Bootmeth device to check
+>>   	 * @buf:	Buffer to place the info in (terminator must fit)
+>>   	 * @maxsize:	Size of buffer
+>>   	 * Returns: 0 if OK, -ENOSPC is buffer is too small, other -ve error if
+>> @@ -74,7 +74,7 @@ struct bootmeth_ops {
+>>   	 *
+>>   	 * It may update only the flags in @iter
+>>   	 *
+>> -	 * @dev:	Bootmethod device to check against
+>> +	 * @dev:	Bootmeth device to check against
+>>   	 * @iter:	On entry, provides bootdev, hwpart, part
+>>   	 * Return: 0 if OK, -ENOTSUPP if this bootdev is not supported
+>>   	 */
+>> @@ -83,7 +83,7 @@ struct bootmeth_ops {
+>>   	/**
+>>   	 * read_bootflow() - read a bootflow for a device
+>>   	 *
+>> -	 * @dev:	Bootmethod device to use
+>> +	 * @dev:	Bootmeth device to use
+>>   	 * @bflow:	On entry, provides dev, hwpart, part and method.
+>>   	 *	Returns updated bootflow if found
+>>   	 * Return: 0 if OK, -ve on error
+>> @@ -96,7 +96,7 @@ struct bootmeth_ops {
+>>   	 * This provides a bootflow file to the bootmeth, to see if it is valid.
+>>   	 * If it is, the bootflow is set up accordingly.
+>>   	 *
+>> -	 * @dev:	Bootmethod device to use
+>> +	 * @dev:	Bootmeth device to use
+>>   	 * @bflow:	On entry, provides bootdev.
+>>   	 *	Returns updated bootflow if found
+>>   	 * @buf:	Buffer containing the possible bootflow file
+>> @@ -111,7 +111,7 @@ struct bootmeth_ops {
+>>   	 *
+>>   	 * Read a file from the same place as the bootflow came from
+>>   	 *
+>> -	 * @dev:	Bootmethod device to use
+>> +	 * @dev:	Bootmeth device to use
+>>   	 * @bflow:	Bootflow providing info on where to read from
+>>   	 * @file_path:	Path to file (may be absolute or relative)
+>>   	 * @addr:	Address to load file
+>> @@ -126,7 +126,7 @@ struct bootmeth_ops {
+>>   	/**
+>>   	 * readall() - read all files for a bootflow
+>>   	 *
+>> -	 * @dev:	Bootmethod device to boot
+>> +	 * @dev:	Bootmeth device to boot
+>>   	 * @bflow:	Bootflow to read
+>>   	 * Return: 0 if OK, -EIO on I/O error, other -ve on other error
+>>   	 */
+>> @@ -135,7 +135,7 @@ struct bootmeth_ops {
+>>   	/**
+>>   	 * boot() - boot a bootflow
+>>   	 *
+>> -	 * @dev:	Bootmethod device to boot
+>> +	 * @dev:	Bootmeth device to boot
+>>   	 * @bflow:	Bootflow to boot
+>>   	 * Return: does not return on success, since it should boot the
+>>   	 *	Operating System. Returns -EFAULT if that fails, -ENOTSUPP if
+>> @@ -158,7 +158,7 @@ struct bootmeth_ops {
+>>    * This may involve reading state from the system, e.g. some data in
+>>    * the firmware area.
+>>    *
+>> - * @dev:	Bootmethod device to check
+>> + * @dev:	Bootmeth device to check
+>>    * @buf:	Buffer to place the info in (terminator must fit)
+>>    * @maxsize:	Size of buffer
+>>    * Returns: 0 if OK, -ENOSPC is buffer is too small, other -ve error if
+>> @@ -185,7 +185,7 @@ int bootmeth_get_state_desc(struct udevice *dev, char *buf, int maxsize);
+>>    *
+>>    * It may update only the flags in @iter
+>>    *
+>> - * @dev:	Bootmethod device to check against
+>> + * @dev:	Bootmeth device to check against
+>>    * @iter:	On entry, provides bootdev, hwpart, part
+>>    * Return: 0 if OK, -ENOTSUPP if this bootdev is not supported
+>>    */
+>> @@ -194,7 +194,7 @@ int bootmeth_check(struct udevice *dev, struct bootflow_iter *iter);
+>>   /**
+>>    * bootmeth_read_bootflow() - set up a bootflow for a device
+>>    *
+>> - * @dev:	Bootmethod device to check
+>> + * @dev:	Bootmeth device to check
+>>    * @bflow:	On entry, provides dev, hwpart, part and method.
+>>    *	Returns updated bootflow if found
+>>    * Return: 0 if OK, -ve on error
+>> @@ -207,7 +207,7 @@ int bootmeth_read_bootflow(struct udevice *dev, struct bootflow *bflow);
+>>    * This provides a bootflow file to the bootmeth, to see if it is valid.
+>>    * If it is, the bootflow is set up accordingly.
+>>    *
+>> - * @dev:	Bootmethod device to use
+>> + * @dev:	Bootmeth device to use
+>>    * @bflow:	On entry, provides bootdev.
+>>    *	Returns updated bootflow if found
+>>    * @buf:	Buffer containing the possible bootflow file (must be allocated
+>> @@ -223,7 +223,7 @@ int bootmeth_set_bootflow(struct udevice *dev, struct bootflow *bflow,
+>>    *
+>>    * Read a file from the same place as the bootflow came from
+>>    *
+>> - * @dev:	Bootmethod device to use
+>> + * @dev:	Bootmeth device to use
+>>    * @bflow:	Bootflow providing info on where to read from
+>>    * @file_path:	Path to file (may be absolute or relative)
+>>    * @addr:	Address to load file
+>> @@ -241,7 +241,7 @@ int bootmeth_read_file(struct udevice *dev, struct bootflow *bflow,
+>>    * Some bootmeths delay reading of large files until booting is requested. This
+>>    * causes those files to be read.
+>>    *
+>> - * @dev:	Bootmethod device to use
+>> + * @dev:	Bootmeth device to use
+>>    * @bflow:	Bootflow to read
+>>    * Return: does not return on success, since it should boot the
+>>    *	Operating System. Returns -EFAULT if that fails, other -ve on
+>> @@ -252,7 +252,7 @@ int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
+>>   /**
+>>    * bootmeth_boot() - boot a bootflow
+>>    *
+>> - * @dev:	Bootmethod device to boot
+>> + * @dev:	Bootmeth device to boot
+>>    * @bflow:	Bootflow to boot
+>>    * Return: does not return on success, since it should boot the
+>>    *	Operating System. Returns -EFAULT if that fails, other -ve on
+>> @@ -265,7 +265,7 @@ int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
+>>    *
+>>    * This sets up the ordering information in @iter, based on the selected
+>>    * ordering of the bootmeths in bootstd_priv->bootmeth_order. If there is no
+>> - * ordering there, then all bootmethods are added
+>> + * ordering there, then all bootmeths are added
+>>    *
+>>    * @iter: Iterator to update with the order
+>>    * @include_global: true to add the global bootmeths, in which case they appear
+>> diff --git a/include/extlinux.h b/include/extlinux.h
+>> index 721ba46371cc..4d26a0a8ab74 100644
+>> --- a/include/extlinux.h
+>> +++ b/include/extlinux.h
+>> @@ -12,7 +12,7 @@
+>>   /**
+>>    * struct extlinux_info - useful information for extlinux_getfile()
+>>    *
+>> - * @dev: bootmethod device being used to boot
+>> + * @dev: bootmeth device being used to boot
+>>    * @bflow: bootflow being booted
+>>    */
+>>   struct extlinux_info {
+>> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+>> index 674d4c05f83f..24f3b5fbe109 100644
+>> --- a/test/boot/bootflow.c
+>> +++ b/test/boot/bootflow.c
+>> @@ -400,7 +400,7 @@ BOOTSTD_TEST(bootflow_system, UT_TESTF_DM | UT_TESTF_SCAN_PDATA |
+>>   	     UT_TESTF_SCAN_FDT);
+>>   #endif
+>>
+>> -/* Check disabling a bootmethod if it requests it */
+>> +/* Check disabling a bootmeth if it requests it */
+>>   static int bootflow_iter_disable(struct unit_test_state *uts)
+>>   {
+>>   	struct udevice *bootstd, *dev;
+>> diff --git a/test/boot/bootmeth.c b/test/boot/bootmeth.c
+>> index e498eee036eb..b9a3f48a95ef 100644
+>> --- a/test/boot/bootmeth.c
+>> +++ b/test/boot/bootmeth.c
+>> @@ -37,7 +37,7 @@ BOOTSTD_TEST(bootmeth_cmd_list, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
+>>   /* Check 'bootmeth order' command */
+>>   static int bootmeth_cmd_order(struct unit_test_state *uts)
+>>   {
+>> -	/* Select just one bootmethod */
+>> +	/* Select just one bootmeth */
+>>   	console_record_reset_enable();
+>>   	ut_assertok(run_command("bootmeth order extlinux", 0));
+>>   	ut_assert_console_end();
+>> @@ -138,12 +138,12 @@ static int bootmeth_env(struct unit_test_state *uts)
+>>
+>>   	ut_assertok(bootstd_get_priv(&std));
+>>
+>> -	/* Select just one bootmethod */
+>> +	/* Select just one bootmeth */
+>>   	console_record_reset_enable();
+>>   	ut_assertok(env_set("bootmeths", "extlinux"));
+>>   	ut_asserteq(1, std->bootmeth_count);
+>>
+>> -	/* Select an invalid bootmethod */
+>> +	/* Select an invalid bootmeth */
+>>   	ut_asserteq(1, run_command("setenv bootmeths fred", 0));
+>>   	ut_assert_nextline("Unknown bootmeth 'fred'");
+>>   	ut_assert_nextlinen("## Error inserting");
+>>
