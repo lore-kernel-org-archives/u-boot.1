@@ -4,75 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BC8C27C79
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 19:08:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BB2C2BA1A
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 19:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BCC7883A8;
-	Mon, 17 Jun 2024 21:08:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D6331883DB;
+	Mon, 17 Jun 2024 21:14:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qq+8PD0a";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B06BC882D4; Mon, 17 Jun 2024 21:08:04 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 77AD6883C3; Mon, 17 Jun 2024 21:14:23 +0200 (CEST)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9682B882E5
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 21:08:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFBB3883E0
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 21:14:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6f977acff19so2158699a34.3
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 12:08:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718651281; x=1719256081; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GI8OWcD3+VRZNRrKfVZj33MXjZY68TytO3Z8IMueJow=;
- b=qq+8PD0a5SF2uJ/cHGX6AmpTJkmiNtYB3wjAIpreSrwN68l4JQ86dvsndZInZGH8iA
- x8/xi9OJ3ZQ+Qm3nXYpUTRmU2ulDwDNdyhYqDCR/ELdw3HhYG6yRe9pgdQGVhkcZFgAo
- YWporkV16qExKs0xZ+VAGjG8nrFz/+jKCyyV8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718651281; x=1719256081;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GI8OWcD3+VRZNRrKfVZj33MXjZY68TytO3Z8IMueJow=;
- b=aNqHquDM6Xhs3dbpV/Y7GgCkD/zsmxbwJAur1vw5epkSjnhfyO5BnSQY+DnZmtEe6d
- uRUIoRNqP96A5qufospWfIxzR6qBGiVeNJcX0hxEbVwESCh53uuCZ4BReIWNIrYqIz2j
- VVhHHegIOPoJVq4vkRu9g0XXTO5+Ljm/CNHAQeRkS/O1rMPnMLs8OTB9tQt1cvv8EFmc
- TFZHyui7Vhlw45RnOHBVi9kMnarPKyVzNj+Rcd8Zigcztr+lgpFR8YWTsRvspqs8pImy
- itNC+6O32zrx54Z7NEfMNGMHI4FBAGce10JOE0bXtCzuvMlRBHVNQc2SARitYkULpbsP
- SW+Q==
-X-Gm-Message-State: AOJu0YybKaeXJI6ekp+1dAPXG9l04kjYuGKjUiqznAL3jdnmESglvHjJ
- VQHvZ0fT7XZChhIFXP9u9cqGD2ABwWqSZBLDQgS/tPtceIqTunzrRLy20M/OjsA=
-X-Google-Smtp-Source: AGHT+IGJ7Nzo3G6n2ZSaUyCfg5EJrx/txQBWD/cDjojf/OIccABqgirWhrDf6jU0fmbNWpKvCAliSw==
-X-Received: by 2002:a05:6870:a11d:b0:22b:5bc1:66f5 with SMTP id
- 586e51a60fabf-258429357f7mr11688775fac.16.1718651281241; 
- Mon, 17 Jun 2024 12:08:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567aa14d44sm2730939fac.25.2024.06.17.12.08.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jun 2024 12:08:00 -0700 (PDT)
-Date: Mon, 17 Jun 2024 13:07:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] xilinx patches for v2024.10-rc1
-Message-ID: <20240617190758.GI68077@bill-the-cat>
-References: <8a2e058d-5424-46de-bcf7-87ff574d25b2@amd.com>
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1sJHo2-00CFal-6K;
+ Mon, 17 Jun 2024 19:14:18 +0000
+From: Tim Harvey <tharvey@gateworks.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
+ Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v6 0/4] automatically add /chosen/kaslr-seed and deduplicate
+ code
+Date: Mon, 17 Jun 2024 12:14:12 -0700
+Message-Id: <20240617191416.1351790-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zN2KImm6eiWgorNA"
-Content-Disposition: inline
-In-Reply-To: <8a2e058d-5424-46de-bcf7-87ff574d25b2@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,63 +60,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series will automatically add /chosen/kaslr-seed to the dt if DM_RNG is enabled
+during the boot process.
 
---zN2KImm6eiWgorNA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+randomize the virtual address at which the kernel image is loaded, it
+expects entropy to be provided by the bootloader by populating
+/chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
 
-On Mon, Jun 17, 2024 at 06:12:06PM +0200, Michal Simek wrote:
+If we have DM_RNG enabled populate this value automatically when
+fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
+is enabled as its implementation uses a different source of entropy
+that is not yet implemented as DM_RNG. We also skip this if
+MEASURED_BOOT is enabled as in that case any modifications to the
+dt will cause measured boot to fail (although there are many other
+places the dt is altered).
 
-> Hi Tom,
->=20
-> please pull these patches to your tree. Gitlab CI is not showing any issu=
-e.
-> There are some alignments and improvements but overall nothing significan=
-t.
-> The biggest patchset is add support for new AMD Versal Gen 2 SoC.
->=20
-> Thanks,
-> Michal
->=20
->=20
-> The following changes since commit 0786dd573d0793417852e009dee3148ebdd163=
-f3:
->=20
->   test/py: net_boot: Add test cases for net boot (2024-06-13 16:31:24 -06=
-00)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2024.10-rc1
->=20
-> for you to fetch changes up to e4a11e984d11cf4bbe55385cbae03c08f27ecd02:
->=20
->   xilinx: Enable FF-A for all our arm64 SoCs (2024-06-17 16:02:30 +0200)
->=20
+As this fdt node is added elsewhere create a library function and
+use it to deduplicate code. We will provide a parameter to overwrite
+the node if present. 
 
-Applied to u-boot/next, thanks!
+For our automatic injection, we will use the first rng device and
+not overwrite if already present with a non-zero value (which may
+have been populated by an earlier boot stage). This way if a board
+specific ft_board_setup() function wants to customize this behavior
+it can call fdt_kaslrseed with a rng device index of its choosing and
+set overwrite true.
 
---=20
-Tom
+Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
+but left in place in case boot scripts exist that rely on this command
+existing and returning success. An informational message is printed to
+alert users of this command that it is likely no longer needed.
 
---zN2KImm6eiWgorNA
-Content-Type: application/pgp-signature; name="signature.asc"
+Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
+randomization and completely ignores the kaslr-seed for its own
+randomness needs (i.e the randomization of the physical placement of
+the kernel). It gets weeded out from the DTB that gets handed over via
+efi_install_fdt() as it would also mess up the measured boot DTB TPM
+measurements as well.
 
------BEGIN PGP SIGNATURE-----
+v6:
+ - collected tags
+ - add patch to fdt ut
+v5:
+ - fixed typo in commit message s/it's/its/
+ - use cmd_process_error per Michal's suggestion
+ - split into separate patches
+ - remove the rng device index noting it as a future enhancement
+v4:
+ - add missing /n to notice in kaslrseed cmd
+ - combine ints in declaration
+ - remove unused vars from board/xilinx/common/board.c ft_board_setup
+v3:
+ - skip if CONFIG_MEASURED_BOOT
+ - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+ - pass in rng index and bool to specify overwrite
+ - remove duplicate error strings printed outside of fdt_kaslrseed
+ - added note to commit log about how EFI STUB weeds out kalsr-seed
+v2:
+ - fix typo in commit msg
+ - use stack for seed to avoid unecessary malloc/free
+ - move to a library function and deduplicate code by using it
+   elsewhere
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZwiY4ACgkQFHw5/5Y0
-tywX6Qv/aRFAQWUiOqFtNiVqVNLP+XRvMqHChqXlrTZCnnP6002KxK9Jtc1zVCs9
-lNrLfarDeqh4LWxcsOYgFFlAtamJbos1P/4RGjj7jxCkeYC6SMaW2MLZeiathcP4
-FOdSLc6VDotTAyqCf4KyZVhThQY9xUFgcjrjJVeJsXtknRUbz/EA70G5RKJnatiC
-bYVDNodJu1y+OgO0nGNCaOkLvOkCA1MRfFWM+/TwJJ2eXq3U1KR3ULD2ap3yzo6S
-j4iIXfqV0oNpbqYf5KsQIdnIkgXnjsaWH1lRlsqc1O3C8i9JZat7rPE8wwhi/RMW
-t61VJGkvdx5pIgCgs5P9v5wz098ADCzHRpLHNvek7GDwZb3i/ENu7rFUhWXJBP72
-yrjPsEVcl3zU9lrBHKUKekjOl91MTiYd43cZeMfIFyMi8RlVuA3wRjfKtRcTTTEm
-bz9SHjMWX1zGhjooV0LWw5U7hd1DJ/en0fo4sN4VqfG9qpeHfxNJtZKHh/toqPI6
-OLmjMk3T
-=Ovtm
------END PGP SIGNATURE-----
+Tim Harvey (4):
+  Add fdt_kaslrseed function to add kaslr-seed to chosen node
+  fdt: automatically add /chosen/kaslr-seed if DM_RNG is enabled
+  use fdt_kaslrseed function to de-duplicate code
+  test: cmd: fdt: fix chosen test for DM_RNG
 
---zN2KImm6eiWgorNA--
+ board/xilinx/common/board.c | 40 ----------------------------
+ boot/fdt_support.c          | 53 +++++++++++++++++++++++++++++++++++++
+ boot/pxe_utils.c            | 34 +-----------------------
+ cmd/kaslrseed.c             | 49 +++++-----------------------------
+ include/fdt_support.h       | 10 +++++++
+ test/cmd/fdt.c              |  4 +++
+ 6 files changed, 75 insertions(+), 115 deletions(-)
+
+-- 
+2.25.1
+
