@@ -4,80 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB63C27C77
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 08:27:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3570C27C6E
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 08:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83D6D87D14;
-	Mon, 17 Jun 2024 10:27:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C0A2A88080;
+	Mon, 17 Jun 2024 10:32:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QkO+iNoF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a8yvBRyE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3073588131; Mon, 17 Jun 2024 10:27:53 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 46FC588137; Mon, 17 Jun 2024 10:32:52 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A48F0878ED
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:27:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4C55A87D14
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:32:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-57c7681ccf3so4693038a12.2
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:27:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-57c68682d1aso4558780a12.3
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:32:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1718612870; x=1719217670;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vCS0UBeBTAks7eLkg0XuFCssJMgL5g05nDpW6ApYrEE=;
- b=QkO+iNoFurZzu1pYEhhqJSJUPn9pi22H0UP/LforNM1Vq6js7iHc9TcTPz/1HeJR2e
- HN6Hx2IsQS2v4Lb9mBaXaAauZhmJIm2n8qD5qaINR/7coh1Q84yD+lwIDpVcM57LisM6
- YIWNiAImsoY5g9MS/c4Tkx9Z/BYAnyspxxnM8=
+ d=linaro.org; s=google; t=1718613170; x=1719217970; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=L1zRjJfa0EcaGV9o+2WbDXliIYl6jbUtMvwPkXQYSig=;
+ b=a8yvBRyEFnQY4K95p3s8FpF/QRdzl3aOgpFc9onfJt8aNUQbsRh2YKEPacU0Tdcqy6
+ bdeFLP4VczU9PYm62r1+q6XnKafo080gItj2KVXJzhQi8DQ1uYr7xPlwA1NLLroFlEWf
+ CmuHsSOx+ZhfAy+x4A2Hch2FdUCPnC0U3LWmWnZHGxJjvXk+uct/V26LspW6D6cKYhuG
+ zy42SW0ZvREgok96baXW67c2GBY8fSF74QR5YOku3i4iS4WQiUzwDB2KaDzgeVMC3E3h
+ VjwyVUd4gXYvtRn8mzME0TBvC8McqhKw/x8ctifsDYzS1hKOXY3pOCnFKPmtFgyI4qA7
+ 8YSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718612870; x=1719217670;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vCS0UBeBTAks7eLkg0XuFCssJMgL5g05nDpW6ApYrEE=;
- b=BOXuQhbxZekLDUgg2q46tWriWNCQa92iM1n9ZnJGq72r1ecCVHPXzKrl9TMYQOw+pw
- vyz3G1K15OquSsrVqIjmeT41e3ibCP558/KyT37cgCfKeykVsb+Vv4mxbsp1zwatpZG5
- g47Vo0UnXOwamR51cnEZeSaxSLX8YAxjSfQt9OBeikftfzRUvf8HLfqn0JnVSdLWeLel
- YN6+dti4/fJONgjVM5rpxOD3bRbL7nQ4oeW9ZrD3CLet+8g1tnUvmoj74xaAyD/FpchA
- zPnnBaMSfGvrXmzUT8Bz/kb0bGDBit3kvqHmsRNP7lU6LBw40HrzvaGZk472Swm6BP6P
- 60aQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoNT/f+K3FoO1nlcnqQVBj3xhIZfiLu/ddXg7QP7g+gM8FHJObcPyT2qCWZg/YAtGp9fhlx0Uv7Xyc4KiSttZ2TW5uKA==
-X-Gm-Message-State: AOJu0YwIFp7BQIeWoj6/5Rpr2UVV5t4YDPEJv7NZSKGxcVXFfmkpWNax
- IY6PIL6QfDYSPX7kPfJwvQWrW131dbnw5bxF+DL+tSkdBChQMjQLCQfNqfoLOuEbkCDCnCUbXKf
- 3sMFb/XQ8543UJv5OEcAam/J3erW5jWTvwt8JzA==
-X-Google-Smtp-Source: AGHT+IFbsYKldhMJetrwjKqbd3whfQsiaQZS2CrHwj8tm1nXFdck3nIY7JyeOvXVg+8FH1du74gNO0UmKt+fMpExha8=
-X-Received: by 2002:a50:ccc5:0:b0:57c:dbf6:931f with SMTP id
- 4fb4d7f45d1cf-57cdbf694e3mr2146401a12.5.1718612869928; Mon, 17 Jun 2024
- 01:27:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718613170; x=1719217970;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=L1zRjJfa0EcaGV9o+2WbDXliIYl6jbUtMvwPkXQYSig=;
+ b=W2fDr+GE9jhFIewJxJ0787+wXBaNI2iE4XoG2xkZEh2o/G0KZtBkIzXH6XCuVFG/Zh
+ egYUNjRyZfaVe+8V2v2V9kckyWBD3lau6bt3yDsnlref3e5H2Z0fV7HCxBwzPCygkJJZ
+ 7jy7bXtRIuZVuIZ9vvXmdkaVhoF0eMjH2wvWukwzpCRTm8G/jk+iayEvNXf7bkuTzvUS
+ gDF0GUfvZzhc04pLLbrLAL+IMHQd4GEJlIX9G2YZhaDv5AIIwud8QPzzh+m/GfjTaATt
+ cvLPfcl08Iup9CLYRlN0iWMFOwDpgdlR483cwbJiyzch9P25NVLCMMrRVqw/34YlKXbK
+ phMg==
+X-Gm-Message-State: AOJu0YwlAFMR25MRrc8A1JAssUtRo91AnUGPdTv/8S02mzAmdIqvYSWG
+ rM42Zh6j/hmoGa4NMGEwIjlB2kQDAaw5ptb3oBf9Ta9XUFRwCRZJEpD7cG+CjXE=
+X-Google-Smtp-Source: AGHT+IE7ezRjFvMZ2fvlkI76Faf6ikrWilksOj4VWVmCuVDruhFPUsuP4ofkw2C059KZBIb+sdtlTQ==
+X-Received: by 2002:a50:a457:0:b0:57c:7486:3f7d with SMTP id
+ 4fb4d7f45d1cf-57cbd67d440mr6192986a12.19.1718613169577; 
+ Mon, 17 Jun 2024 01:32:49 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::52af])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57cb72cdfd0sm6110031a12.5.2024.06.17.01.32.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jun 2024 01:32:49 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 0/3] qcom: rpmh core and regulator support
+Date: Mon, 17 Jun 2024 10:32:45 +0200
+Message-Id: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
 MIME-Version: 1.0
-References: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
- <CAFA6WYPB17=YNabDyGTqo3p=uYD=Vy+Ec2P2VepXT6P+75f+VQ@mail.gmail.com>
- <CAOf5uwneUKJXJqgBMOQHs+d8-GQ6nr+vBAZ4ek2au1kngs8mXA@mail.gmail.com>
- <CAFA6WYNt0-KBpYjo0eQM20s-eD4gRvkgT7WxoxvHgd6URTXGrg@mail.gmail.com>
-In-Reply-To: <CAFA6WYNt0-KBpYjo0eQM20s-eD4gRvkgT7WxoxvHgd6URTXGrg@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 17 Jun 2024 10:27:38 +0200
-Message-ID: <CAOf5uw=Uh6SRSo5LZ4xZxw5R+vh+8Cj3GjhMeuYmq20NgdFC7w@mail.gmail.com>
-Subject: Re: [PATCH v2] Makefile: Fix include directory for OF_UPSTREAM
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- u-boot@lists.denx.de, 
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, 
- marek.vasut+renesas@mailbox.org, afd@ti.com, bb@ti.com, 
- mr.bossman075@gmail.com, leon@georgemail.eu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAK30b2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDM0ND3SQT3cLk/FzdooLcDN205LQUY6PEZCNLEwMloJaCotS0zAqwcdG
+ xtbUA1qwHY14AAAA=
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3122;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=LRctNo1/qmwsN83Hr5EOo7CzcM86rrCU1Am7v89UQtY=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmb/SwwffLsleuwKUsW4Ml6715mCIJjEw1QG6ev
+ sp7sQ0ticCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZm/0sAAKCRAFgzErGV9k
+ tiV/D/4uj1oiHNbL+7xPvX9X/a8GQDLxh+gTWai8Vjl2ahGtM5GgnHnNn1JkDW701iub8/HZtLd
+ B2uWj1iMWIouhewlZv9KPyvbZo4sT8K6vHx0SfLCn662sHwfsWkMUsV/5olt8JWovqUB8r6S9cD
+ i/+ODl8enakTynVhzp96qdVZe/B9Z16iwcsuusCz4M5foDAb+gabdBnvZ8XX45WCK3tx7VngGXL
+ 1vh7oXtF/fCB1wBZw3/xocLBvb9puTT2Osg3KFTnMd5g+S6kyFZPZ4qZk9ifgc7j3tqdWXBdbv4
+ nts8SR+jOwgRqeh2RJd0S3KM71FhnIRUFKiPeGF3Bc8NLGE0fV3ArcYkVKHJj7OjByk0K6Px3ae
+ buac86MBEEDx8OXTUysLjUC1NwFwOejwNmf8OtW2RwC43CMMUCe+kcOx0Et4+ugT3XGg5xuBk2o
+ BkIXYsA4corZJ06MoQP7OFjhnFQ/v4QgifdPexzXyz2sIi+sy/5YFneUU/ENJjPr6Oo+2j9KT3V
+ aBJhww61ukqrgl1MpEQx/mKqxpZS2FfeZ+xKLRWwKZfSRQGLpQWpU9OnBpIDq9LfsWmkB1rfOl3
+ MmbBpHgBOugXkLiDPvlMeztTeHjIs51yvL+Iz3PXQP7nt85u3RsaeZJIrT7tWT2V3fJqOg3kDzO
+ 927RfQDkJGNdbXA==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,140 +112,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Sumit
+This series introduces support for the RPMh (Resource Power Manager
+(hardened)) co-processor and associated regulator driver found on most
+modern Qualcomm platforms (since ~2017).
 
-On Mon, Jun 17, 2024 at 10:22=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
- wrote:
->
-> Hi Michael,
->
-> Sorry for the delayed response as I had some health issues last week.
->
+Even though most regulators are controlled via SPMI, the specific
+regions on the PMICs for controlling the regulators are restricted and
+can't be accessed by the Applications Processor (AP/HLOS). Instead,
+these resources are proxied via the RPMh where they can be voted on by
+multiple subsystems (Linux, the modem, and the other DSPs). This is done
+for security (to protect clocks, power domains, and regulators that are
+specifically relevant for the trustzone) as well as to simplify the
+management of shared peripherals and to allow for handover of
+peripherals like the USB controller.
 
-We are not in a hurry and I think discussion has his own time. Glad that yo=
-u are
-getting better
+For U-Boot, our main concern is the regulators. Since all regulators on
+the system are controlled via the RPMh, it is necessary to support it to
+enable USB VBUS on some platforms, and may be needed for other
+peripherals in the future.
 
-> On Thu, 13 Jun 2024 at 12:44, Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
-> >
-> > Hi Sumit
-> >
-> > On Thu, Jun 13, 2024 at 9:02=E2=80=AFAM Sumit Garg <sumit.garg@linaro.o=
-rg> wrote:
-> > >
-> > > On Mon, 3 Jun 2024 at 20:38, Patrick Barsanti
-> > > <patrick.barsanti@amarulasolutions.com> wrote:
-> > > >
-> > > > Always prioritizing u-boot includes causes problems when trying to =
-migrate
-> > > > boards to OF_UPSTREAM that have different local devicetree files wi=
-th
-> > > > respect to the upstream ones, if local DT headers are not dropped.
-> > > > At the same time if local and upstream files are the same, migratio=
-ns
-> > > > can be, and have been, introduced without dropping local DT headers=
-.
-> > > > This also causes problems whenever upstream DTS and DT headers are =
-patched.
-> > > >
-> > > > For example, now migrating a board based on `imx6ul.dtsi` to OF_UPS=
-TREAM
-> > > > breaks it, as there are some missing defines in a local DT header f=
-ile
-> > > > (`imx6ul-clock.h`); the solution would be to drop it, which has not=
- always
-> > > > been done in previous OF_UPSTREAM migration patches for other board=
-s
-> > > > because most of the time the two are the same. This solution is als=
-o
-> > > > vulnerable to ABI breakage, although this has not yet happened sinc=
-e the
-> > > > introduction of OF_UPSTREAM support and is unlikely.
-> > > >
-> > > > Maintainers assure backwards compatibility for DT headers when sync=
-ing the
-> > > > upstream folder with the kernel.
-> > > > The problem is that, at the current state, all boards that have not=
- dropped
-> > > > their local headers when migrating to OF_UPSTREAM will break once t=
-he
-> > > > upstream devicetrees are patched, for example, to use any newly add=
-ed
-> > > > define which is not present in the local DT header file, even if th=
-ose
-> > > > changes are backwards compatible.
-> > > >
-> > > > This patch fixes these problems by prioritizing upstream includes w=
-hen
-> > > > `CONFIG_OF_UPSTREAM=3Dy`, while keeping current prioritization when=
- it is
-> > > > not.
-> > > >
-> > > > Also in case of ABI breakage in the kernel, keeping redundant heade=
-r files
-> > > > (only until strictly necessary, e.g. until all boards including the=
-m have
-> > > > been migrated to OF_UPSTREAM) together with this selective prioriti=
-zation
-> > > > of the include folder is a solution for keeping not-yet-migrated bo=
-ards
-> > > > from breaking.
-> > >
-> > > Let's just not try to make assumptions about DT ABI breakage due to
-> > > using upstream headers for not-yet-migrated boards but rather talk
-> > > about some real world examples. Have you come across any DT ABI
-> > > breakage with usage of upstream headers? The breakage you have
-> > > reported is due to usage of an old local copy of DT header.
-> > >
-> >
-> > The include priority is broken, and this a Makefile problem anyway.
-> > This patch fix
-> > anyway includes priorities.
->
-> The include priority only becomes an issue if you want to keep
-> redundant local copies of DT headers. And I have been advocating to
-> drop local copies from U-Boot as much as possible. Once we only have
-> upstream DT headers being used (Qcom platforms can be a good example
-> here), we don't need to care about trickier priorities.
+Communicating with the RPMh additional requires accessing the cmd-db
+shared memory region, this contains key/value maps to determine the
+address of specific resources on the RPMh.
 
-Yes but this is the case. All we build now can include the local
-redundant copy and we can
-not guarantee that already board builds are built using the latest
-version of the include.
+Introduce support for the cmd-db, the RPMh framework, and some of the
+regulators that are necessary to enable USB VBUS on the RB5 development
+board.
 
->
-> > The imx6 board migration for us does not work
->
-> Patrick did mention here [1] that dropping
-> include/dt-bindings/clock/imx6ul-clock.h fixes the problem...
->
+These drivers were originally taken from Linux, however they have been
+heavily modified and simplified for U-Boot. Since the original Linux
+drivers contained heavy optimisations related to multithreading and
+asynchronous probing, as well as support for idle and suspend states
+which we don't need to deal with here.
 
-Yes but suppose that the include was ok in the sense of compilation
-but not consistent
-in term of functionality. When you build using upstream headers you
-must use them
-to be consistent and it's not as it is for now. Anyway we can not drop
-for one board upstream
-that file, unless we force everyone to have broken board or all upstream no=
-w
+The U-Boot version of the driver supports a single TCS and always
+requests a response from the RPMh, since we don't need to worry about
+having multiple transactions in flight at once.
 
-> >
-> > > However, if this patch is only needed to address fear of DT ABI
-> > > breakage (which hasn't happened in the past) then I can live with it
-> > > such that it can help convince more people for OF_UPSTREAM migration.
-> > > We can drop local DT headers as and when people feel comfortable with
-> > > upstream.
-> >
-> > It's not abi breakage only but path inclusion order.
->
-> ...however it's the ABI breakage part that worries Patrick. So if this
-> patch only solves that worry then I can live with it in the hope that
-> people will start to gain confidence in DT ABI stability.
->
-> [1] https://lore.kernel.org/u-boot/CABxfhNfWdD0NjPNskaxZxDTg9pDoDx5vBHrN9=
-chvMh5Xo_7Kzg@mail.gmail.com/
->
-> -Sumit
+---
+Caleb Connolly (3):
+      linux/bitmap.h: add bitmap_empty helper
+      soc: qcom: rpmh and cmd-db drivers
+      power: regulator: add qcom-rpmh-regulator
 
-Michael
+ drivers/power/regulator/Kconfig               |   8 +
+ drivers/power/regulator/Makefile              |   1 +
+ drivers/power/regulator/qcom-rpmh-regulator.c | 534 ++++++++++++++++++++++
+ drivers/soc/Kconfig                           |   1 +
+ drivers/soc/Makefile                          |   1 +
+ drivers/soc/qcom/Kconfig                      |  25 ++
+ drivers/soc/qcom/Makefile                     |   4 +
+ drivers/soc/qcom/cmd-db.c                     | 246 ++++++++++
+ drivers/soc/qcom/rpmh-internal.h              | 141 ++++++
+ drivers/soc/qcom/rpmh-rsc.c                   | 619 ++++++++++++++++++++++++++
+ drivers/soc/qcom/rpmh.c                       | 110 +++++
+ include/linux/bitmap.h                        |   8 +
+ include/soc/qcom/cmd-db.h                     |  42 ++
+ include/soc/qcom/rpmh.h                       |  29 ++
+ include/soc/qcom/tcs.h                        |  78 ++++
+ 15 files changed, 1847 insertions(+)
+---
+change-id: 20240611-b4-qcom-rpmh-fcfd32ac2940
+base-commit: 65134a67bca5e11415e93262e530b1c91fee154f
+
+// Caleb (they/them)
+
