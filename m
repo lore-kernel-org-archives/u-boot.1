@@ -4,162 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B298AC2BA18
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 09:44:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1672C2BA18
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 09:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE79E87D70;
-	Mon, 17 Jun 2024 11:44:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id E897887D14;
+	Mon, 17 Jun 2024 11:53:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Ih1DShAQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="frGqwB3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A44FF88167; Mon, 17 Jun 2024 11:44:25 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2600::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 86E3587D70; Mon, 17 Jun 2024 11:53:32 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BBD387CDA
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 11:44:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7B54387CDA
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 11:53:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YJZtBjgOHrPiuqueU0jxEC5L07uaDStWf3/YmK3+7WPrCpXh5862YqRjxQ2Fu+HChMEODKqt1IYqNwT8SxJrX1Zk4Yxb29s5IWw9f4YhUM76QF58cOK4YfwhmRz7MF0Eh+PhrRUMxqAWjv/Ap4xABt1WZYa+77ttegBRpKqTbC7jjZOQpnhRJfhI+Rxgn9mVzzTZrbKC0+Umf8yrsgL7k8jz3Als8xZ70fuS5U1G/J/ZmIM3nIh52OHYLZaz/qPdHRB5NfCGwxIUtx1IPIha51p8q8xtaR6alGk5PQo2qXWKz+Pn/sfqyACUGzx7CaUxp4pMud09+D0ybTmpL25EGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Eo6NBLEdwYNle2YcQDEfNjcwSXNnN/bRoy0pYKKkQLk=;
- b=QymjaVJfhFHraLgKMJPM2KGJjTfOWRmEXWU6msm87ohNn2in7lStfTQPfEMEbVk/oZ83E60KzjxQVmZ3uFfvNQqjfy244hgG9q1G4RvqX5vcQBrSky6dI9XOSXqC8x37NBdX3v/GDAp1TfXJd8hScTKXUE9SlIcClS5wZSo73MCAO9VWAFYRP1UpqA/W47tXTmQiISjU+WmMaaSKP2s2nQ3x9g2XPqQW9Ts6zqs4jYQfoIwCfGtg/JuFv7IVwB+cNAexKwMPMlBNlmZB5rAmRym4eI3KjaVOHjn0phL2TcL607D18iwJGJsQ1LhLFWtA+VjOBBouKXPZRGXDCsgxlA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Eo6NBLEdwYNle2YcQDEfNjcwSXNnN/bRoy0pYKKkQLk=;
- b=Ih1DShAQXQ8ohHxHgSOzpbELqQIPFFZKeoVj/STSb8on8ifVtyXlS3Cyu/00tMtk9oOS/NqVJdhgjY/ce9SAxyQMQo7Lby6T8bv9+1srawwZaE0RUnF2O8+TeNMo8zbXYdVk/n5MrsNmFEFGyuMHrcIdHaIPn273sFH2gs0OrV8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by PA2PR04MB10213.eurprd04.prod.outlook.com (2603:10a6:102:401::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30; Mon, 17 Jun
- 2024 09:44:20 +0000
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7677.030; Mon, 17 Jun 2024
- 09:44:20 +0000
-Message-ID: <407cd11c-fcf5-4fc0-8015-f156ec183f79@cherry.de>
-Date: Mon, 17 Jun 2024 11:44:18 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] bootstd: Replace bootmethod(s) -> bootmeth(s)
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-References: <20240604-bootmeth-typos-v2-0-821683a95aaf@baylibre.com>
- <20240604-bootmeth-typos-v2-2-821683a95aaf@baylibre.com>
- <a7410171-c413-4815-8187-606d32b0c5b3@gmx.de> <87r0cwaxn2.fsf@baylibre.com>
- <cee89831-9ece-4dd7-b021-538c6fcacfae@cherry.de>
- <f7ef89cb-7753-4cc3-a287-aab1ee097e60@gmx.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <f7ef89cb-7753-4cc3-a287-aab1ee097e60@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA2P291CA0033.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::13) To PA4PR04MB7982.eurprd04.prod.outlook.com
- (2603:10a6:102:c4::9)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-52bc3130ae6so4680439e87.3
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 02:53:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718618010; x=1719222810; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=XqS0qLtOzE16tGVNPJdRipwsw2RXjBDc19fT5YiT8Rg=;
+ b=frGqwB3H8jKFyptJSOnHRGnUTITWlWbJG+pF+LZEoYfvx1SAKdAXhrbNYuzrj7m4Eg
+ aUOAqqnISktL06IqKXS2l6feo2CRFpomkU6mJ0yZbS1X2V2Egpl5/RDX/EjpAVO5AkZp
+ SZlMIxBLRKVX6QRdVMVz59IPI2NfzP0yIWGRvv7szE5jU8PCyqqtlRx9JZvyKEChGsZ/
+ xGWbQus+mrBkYgJQWroNSA/HVV/zqNEErx5pQzvZ5hbZyYrusl8+Myp+Ty1tiv/xgTWY
+ Q8tCpY9nes3dGDbX9YMZZr3gF4MhCgCihndUhBD/RnKZmko/qz69akDGMwxzdIDVBmeI
+ lPag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718618010; x=1719222810;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XqS0qLtOzE16tGVNPJdRipwsw2RXjBDc19fT5YiT8Rg=;
+ b=ea7l0p7B23wMsSNPMmzrGd2JjJK8XaKs0xR+zni9c/NfQajP+xT/6hc8+DbnKECQTe
+ pAVZ5hFpQpgqWegJCx3a6seA4/6xKA06dwJBewlwJF2gIGcHK+4iUWsuSXADJZzXeRTw
+ Xs6penNM8Gn7zZd2fi94uoZ5EyVtgSGx/z6YCrkVrE+oin8csmFibRVZGtJ3EWDwnCGf
+ CDfacR/FTTMWzN3S4ZnuEqY6TTFa+Z2LVZPfuBFopFUqzgrcSTtTjaNUCBmTKHO5uTkh
+ +djVixKreaTZ6wjyhYBkpjKNLDNDvPZ6n9qM23Y//WPzkeBZAQMkSUtZAw6sGLMZAjHJ
+ +94g==
+X-Gm-Message-State: AOJu0YzMQNgZUEjzFaaT48UhOmuuhgL2AmkzhgJX7iysKiL4leim0npM
+ 8AvC/DiQ2bsFIIswNrONa30Sq15NBOZqj46M6HTF56LsYTus/jo5H6kcLlXkLNY=
+X-Google-Smtp-Source: AGHT+IGro4HCOuB2wVxIyhk8XQ1AUBSYdOLzoEt8cmmzadH9UITM1ixqmF3qjmNjGMakv2RYDEGpTA==
+X-Received: by 2002:a05:6512:2353:b0:52c:a8a5:df38 with SMTP id
+ 2adb3069b0e04-52ca8a5e126mr7479515e87.68.1718618009641; 
+ Mon, 17 Jun 2024 02:53:29 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:7f86:d83c:9278:7757?
+ ([2a01:e0a:982:cbb0:7f86:d83c:9278:7757])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-422874e73bcsm186710405e9.41.2024.06.17.02.53.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Jun 2024 02:53:29 -0700 (PDT)
+Message-ID: <e007fc56-7b40-4517-901e-4062945c0f70@linaro.org>
+Date: Mon, 17 Jun 2024 11:53:28 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|PA2PR04MB10213:EE_
-X-MS-Office365-Filtering-Correlation-Id: 35f1f6e4-02f7-496f-217f-08dc8eb21033
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|376011|1800799021;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ykl1aVhWa08wdytxZkw5ZVJkL3dDbk5EeDVOYlI4TTNrNjV6R0pjK09lVHB2?=
- =?utf-8?B?c3ExL2s3d1FVMmVBdFF5aktwV3BOVWh0dW9OcHVTM3VCOG1iN3RwazBEMjRE?=
- =?utf-8?B?WkZHY0ZwYlJOS2ZQMUlsbWlZbTFLdG8ydUR5dWVIVEc3MUdldkkvZ2Y1eUM1?=
- =?utf-8?B?elV6R3dHVy96WXRQUzYrZG5NVnRwdzBnVnNjNEJpbEFFRktxYVVGeVVtZjFB?=
- =?utf-8?B?dmlJeVM0SG1jK0pHQTU4ZU1PT01iV0FKbkhRQ014YXdFNmRLd1hUdVR0Y2ht?=
- =?utf-8?B?Vi9vUGJyT0EvVG5xR3dTQWZDV2FCbmRRVEVzSy9Ud1VBOFFmQ1E5RW9YaEtz?=
- =?utf-8?B?bnJacnhOekpFQmJlZDdIL0F2aGJySWNMQjBHOFZITEV4UkFmMUFsbi9nY25a?=
- =?utf-8?B?azhaVjAyOFlKVmdibGVlSTdpa1lEb3hYdDMxSkluMzNPVy9hUEpCaitTbFBN?=
- =?utf-8?B?VmVzZDdZY0VaV1ZxT3FQTmltUTgzTGYyZHdxVjZZZzhZNVdGVWFOZmY1WS9D?=
- =?utf-8?B?MzV2MDZYbXA0L0cwcHRIMCtoYTZWeXFEZ2phcGZ4MmovTHVqOEF1MWYzbVNJ?=
- =?utf-8?B?dUN5NzJKUkgwZUtuYTNiMk1IOWh6QVZ5YUk5blB0ZkFaN0VWS0NIb0lQcjdO?=
- =?utf-8?B?MDE0QnJYVFQwaE80czQ2eWE4N3FybjZDS1Q5LzNDc21QVnU1TXVBSDB2WlRC?=
- =?utf-8?B?L2hOdFpwU2piZHpPc3ZZRkxWU1lFTkNpZWYrQjZ1R29aN3QxLzZhVFhBQzYy?=
- =?utf-8?B?elZ5WnFQMG53ZnNlOWJSVWxtK0RxUjN0UUVaSmZweStySHhFanNjNU5sSDBu?=
- =?utf-8?B?Q0JrOElDNmh3bExhSCszeUZVK3VhT2QvWlBtMk9PMEFGTk5xcEcwa1lIQTJ6?=
- =?utf-8?B?UGdxN3RKSFlQVVBKZ2NMVzlNYjR6bzNxM2Zoejl5dHZDclBienhWY2h2ZnM0?=
- =?utf-8?B?R2tHTEliUlE2b2FCQmtOZHV2M2gyeEt3cjN6SzROV1ZqTmI5V1ZQZGdYZWJy?=
- =?utf-8?B?RmVoVTJiK2FtR3QxT0ppYUFzcXlZbXZqYi9kWTd1UDRTSG5SL1JyZGNsUWtn?=
- =?utf-8?B?SWpRNUxHSGJRTnRCQmJJZTRkOVpBNmE4Y3BvVFJiR2RCNmVmcDhxWXRVdVg1?=
- =?utf-8?B?ZVlreHhPTWtJVzZabU4yWE50ZEV2bS9mbjNtRjAreEhZNHJnMUp1L1prZ0xk?=
- =?utf-8?B?N0RSNUYxUVZBeVBhc2p6MzNEbnIxSW1UK2V3RFM1Sm5BYVFJdjc5U3hNQW9t?=
- =?utf-8?B?Tm5QZVdJZlJrOEE5ZUt3Wk1icGpEVkFGd2xCTVEyQjMzK0RGYzRFdlBLSXRq?=
- =?utf-8?B?dXRMUCtsTVB6eTFpaTFXNXZUOTRhWjRCZ3ByV0VvNUR0ME1UN2xVRU9Pd3pn?=
- =?utf-8?B?R1cvWmhDbEZFU0s5RHBZQWZFakJRaWRQdEthVEVnWkMyU3JpOW96cmhhZG9Z?=
- =?utf-8?B?cForQzh6Nm5nVG1FVzluK2YvK0tGWlZOdWFTaE5TUW5IYTVGeENYRks2OGxv?=
- =?utf-8?B?czdzNUxXdkNrR2svaThRNXVMNVVyaXNueFFWTElCeGdzOWx4MkNuRnUvUnFL?=
- =?utf-8?B?aE5iZncvWFcxK1lsQ0pEVXdLeXc2ejlOckhMYUwxamdqbWtzSzM3QXQxQnJ4?=
- =?utf-8?B?Qm50UnhGc2JodlVYRjQ3NnJDb2dHUnVpWi8xL0svdWJaYlZzU09TV0kvTHVj?=
- =?utf-8?Q?7CFQW1jwF3USwk3QDb34?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230037)(366013)(376011)(1800799021); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T0RVa0hoVVZwTlNQWVJMZFdYNmkrRGhFT240NDBQVno4Y25UWjFsT0ZjWmxG?=
- =?utf-8?B?djczeERVMzRJUTBHMFV4K2MyVlhsS1Y1elY1TlhXUlBOS2I1Q3V3bzgwb0Y0?=
- =?utf-8?B?cmFWa09QQnRZcURzN281U1YzRWpuQnM4MWUxOTlxNTNKeGJWQ1YwL09UOHpx?=
- =?utf-8?B?NDJUZmRndEh6ajFTcTg4bk1pZVM1R1dYYkh2RUpZWGphV1kzT0dvRXVHUFVE?=
- =?utf-8?B?YVBWVVBhOHVwNFdZQk9WdkcxcEFsb0tKMlRCc1dEZDlQa1VZd2pKZWNpNFIv?=
- =?utf-8?B?Rkw1NDl0dm44U0RGYzZtRWZTbktQUkNwandDSWRkYnVRdk1hWTdKMDN2Q0c3?=
- =?utf-8?B?cGYvb1NrRTk0b2RkRllqdUJPUm1yTmYxQnF5NG81Qk0vWXlGZ0FMVHFjaXFG?=
- =?utf-8?B?NCtzZWpEaHFoSWpES3Y5QnRsNmxiK2w0ZDRPYlk4ZW5oaXlCc1ltYVdENUZh?=
- =?utf-8?B?bkZtblRaa0I3RHU4S1hhWU9CSzFDK0xsYjhNVFVDY044WjJnVUw5NUtvUzBY?=
- =?utf-8?B?dTdMSUR1ZGQ0d21INFQxY1gydHZMT2FXN1FDVXRmMmIzdVJscHRJeWF5L3hQ?=
- =?utf-8?B?eWNYanNtcnNWSlpxRm9ZalROZTJLaWZKZVc3L1R5YkVmVFZTL2FpWjFQZGlo?=
- =?utf-8?B?NUx4d0s3NlJzTFVNZmgreTJCTHlMckYxL3JFdEZnQmR0ckJ1S0dvTUx1Y0ts?=
- =?utf-8?B?dUJsT25Sck1leGx5Nk5DQjNCRzV3ZnJxRFFsUHY0dUtXeElrdU80QlVzN1Jp?=
- =?utf-8?B?OEZEMW1wZ1ZjQkVaVHNsQ2hKWTFrODBsckMrWjRGRk1ISkMzV2JSdlpwazBp?=
- =?utf-8?B?TXM5OFF4elRNWU5yQTZFdmRuTUtXdExFNFNYTXJkN0FlcEZGY1l1ZU9kSXY2?=
- =?utf-8?B?ZGZjTFJEMDdWWjdTeXQyL2podE1rWWR0VHloTC9rZ2ZzWUptUnVRT29oakor?=
- =?utf-8?B?eEdYRVlGQ0g0NDZkTWZ1R3VvSWxsY2RTQ2VsT3RESmFwbllhbkJkM2xlNmVZ?=
- =?utf-8?B?M0grelNJL2MydHFHb3NaYkVSSEFiWitaeVY5alN2dXRKWjk1NTdpRjdHT2c2?=
- =?utf-8?B?OXhUWUJrTWdqRWNad1ppQzBPVnR1T2xuQzExQ1dPSWpSNGxXRVFyRjl1Y1lz?=
- =?utf-8?B?bjBZUXVuRk9nY3BKMUY0UlN0WTFpdnIvOEdublM4Y09La2dCRU15UDZLZ0NC?=
- =?utf-8?B?SmRYZmw0bzNDZTVWRklEckpsN0RkVjdNajRpNG5qamxWVGltYkEvTmp3cDND?=
- =?utf-8?B?UXBYSE5Xem85MUVveW96azM3SitscHUwYUI2Y0xUeVV1Y2t0b24yR2lVa1hC?=
- =?utf-8?B?aFdrdUxWYzdEcklDSnJhTlYyNFYxL1B4UUtlWEhEdk5HMEE5bkFOMGlZS0xE?=
- =?utf-8?B?RWp4TEdML3NRVVVuWFVxaFpoKzdqR28zUTZtNWFHeHBPemZLdzNGbEsxTG13?=
- =?utf-8?B?dmZPcm1Cb1VkVkwxWWx4R2VtaUZKR2NLU1hvWjZKK05vRHpaZGJnTUp0YTlt?=
- =?utf-8?B?TjVzdWgwVUZqWG1jWWZFQVdqMmh1Zy9nbnphbVpUQy8zcHJ6UHp0TzdKakQ2?=
- =?utf-8?B?NkxwWnVXS05nTGNrNW1kK3lsUTB5S3dTLzdwSDZQaTl5dStBT1IzbWppREtz?=
- =?utf-8?B?S09PRTVKWkhDdWJaMG82TSt0d3UxN3kwSngzQW8yVkFnNnFsZ0FCdDFhY3dG?=
- =?utf-8?B?ZFpOQkVlMkZ0SHMwTzY2T21JTUZFN1hPL3NKdHF2VUcreFFDcHQ5VnBoMk1z?=
- =?utf-8?B?ZU5TckFTOE9qdmhvZ2svZFJkWnQzTzVYT2RqNHJYdUxMdmlCQzhlVHc0VlBk?=
- =?utf-8?B?SW5hb0xtMCtLZndVZlRCeXV2VGxkcEM4SVY4ZmxqM1VFeXl2THpSbitXZWtS?=
- =?utf-8?B?QXRqUS8zU1NBUmp1UEVneVZsdHNMWjdsTlVEUy92bjJvNnpLT1BuMVJLY2dn?=
- =?utf-8?B?ck16Wlc4SzcyNVR0QXNpd3V3K1k1d0dac0tFR3hQMGl0U3grRDd2WEJDUTBl?=
- =?utf-8?B?MVYvZDlMbXpLYXUyMUloWWcvdnNOZXJhZUhlOGliTXlLaGFPalFRWmp5WnRs?=
- =?utf-8?B?bzZKRThzZThKMzN0NVRLZFhGUElBMXFEenRDWlpPV0ZFZ1YyNFY0OTIwSGpC?=
- =?utf-8?B?TUMwemZQbWFRUVZnRzY3aU8rK01neHNnUC9nbnRGOTVqN2tpcVlCY2lQWlBB?=
- =?utf-8?B?b2c9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35f1f6e4-02f7-496f-217f-08dc8eb21033
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 09:44:20.8290 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YfFAJ3OpHA0EXwqFi3wS6Vv/KnLkEbMBCm9hxllUHCnbvMWqg2JK82sD8UgE2nqJX6perXaYpFQymNdoE8ygRjoIKY3wKTZVooV9S/1AwYw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10213
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/3] soc: qcom: rpmh and cmd-db drivers
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
+ <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,105 +118,98 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On 6/17/24 11:24 AM, Heinrich Schuchardt wrote:
-> On 17.06.24 11:00, Quentin Schulz wrote:
->> Hi all,
->>
->> On 6/17/24 8:31 AM, Mattijs Korpershoek wrote:
->>> Hi Heinrich,
->>>
->>> Thank you for your review.
->>>
->>> On dim., juin 16, 2024 at 09:38, Heinrich Schuchardt
->>> <xypron.glpk@gmx.de> wrote:
->>>
->>>> On 6/4/24 17:15, Mattijs Korpershoek wrote:
->>>>> According to [1], we should use bootmeth when describing the
->>>>> struct bootmeth:
->>>>>
->>>>> """
->>>>> For version 2, a new naming scheme is used as above:
->>>>>
->>>>>       - bootdev is used instead of bootdevice, because 'device' is
->>>>> overused,
->>>>>           is everywhere in U-Boot, can be confused with udevice
->>>>
->>>> Boot devices are udevices though they don't relate to hardware but 
->>>> to an
->>>> abstract concept.
->>>>
->>>> bootdev is just an abbreviation. This does not make the meaning any
->>>> clearer.
->>>
->>> Per my understanding, the name for this concept is "bootdev", not
->>> "boot device", see:
->>>
->>> https://docs.u-boot.org/en/latest/develop/bootstd.html#introduction
->>>
->>>>
->>>>>       - bootmeth - because 'method' is too vanilla, appears 1300
->>>>> times in
->>>>>           U-Boot
->>>>> """
->>>>
->>>> Avoiding abbreviations like bootdev and bootmeth improved readability.
->>>
->>> The above paragraph is quoted from email [1].
->>> In this email, Simon made the choice to use bootmeth and bootdev
->>> when pushing the initial implementation.
->>>
->>> This patch just corrects the places where the older terminology
->>> (bootmethod, bootdevice) was still used.
->>>
->>
->> The current wording is just incorrect, so it needs to be fixed. We have
->> two choices: use the struct/abbreviated name (bootdevice -> bootdev;
->> bootmethod -> bootmeth) or the full name (bootdevice -> boot device;
->> bootmethod -> boot method).
+On 17/06/2024 10:32, Caleb Connolly wrote:
+> Introduce two Qualcomm SoC drivers, the RPMh and cmd-db. RPMh is a the
+> name for the second generation Resource Power Management hub on Qualcomm
+> SoCs. Most core regulators have to be controlled via this hub.
 > 
-> The English languages has three types of compound words: solid,
-> hyphenated, open. bootmethod, boot-method, boot method all mean the same.
+> The cmd-db is a region of memory which contains offsets and data about
+> how to communicate with the RPMh.
 > 
-> According to 
-> https://www.merriam-webster.com/help/faq-compound-words:
-> "Compound nouns are usually written as one word."
-> 
-> See also "U.S. Government Publishing Office Style Manual", chapter 6,
-> "COMPOUNDING RULES",
-> https://www.govinfo.gov/content/pkg/GPO-STYLEMANUAL-2000/pdf/GPO-STYLEMANUAL-2000.pdf
-> 
-> We should avoid unnecessary abbreviations.
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   drivers/soc/Kconfig              |   1 +
+>   drivers/soc/Makefile             |   1 +
+>   drivers/soc/qcom/Kconfig         |  25 ++
+>   drivers/soc/qcom/Makefile        |   4 +
+>   drivers/soc/qcom/cmd-db.c        | 246 ++++++++++++++++
+>   drivers/soc/qcom/rpmh-internal.h | 141 +++++++++
+>   drivers/soc/qcom/rpmh-rsc.c      | 619 +++++++++++++++++++++++++++++++++++++++
+>   drivers/soc/qcom/rpmh.c          | 110 +++++++
+>   include/soc/qcom/cmd-db.h        |  42 +++
+>   include/soc/qcom/rpmh.h          |  29 ++
+>   include/soc/qcom/tcs.h           |  78 +++++
+>   11 files changed, 1296 insertions(+)
 > 
 
-It's too late, the abbreviations are used in code already.
+<snip>
 
-For documentation:
-https://docs.u-boot.org/en/latest/search.html?q=bootmethod&check_keywords=yes&area=default#
+> +
+> +	if (drv->ver.major == 3) {
+> +		printf("RPMh v3 not supported\n");
+> +		return -EOPNOTSUPP;
+> +	} else {
+> +		drv->regs = rpmh_rsc_reg_offset_ver_2_7;
+> +	}
 
-bootmethod returns no match.
 
-https://docs.u-boot.org/en/latest/develop/bootstd.html#bootmeth
-https://docs.u-boot.org/en/latest/develop/expo.html#motivation
-https://docs.u-boot.org/en/latest/usage/cmd/bootflow.html#bootflow-list
-use "boot method"
+I think you can safely add the v3 offsets:
 
-all other instances are of bootmeth/bootmeths instead. A little 
-consistency here wouldn't hurt. I don't think the current wording is 
-consistent. I am non-native, if I read bootmethod, I assume it is used 
-with this wording in the code, but it actually isn't, it's called 
-bootmeth. If I read "boot method" I understand a way of booting, and I 
-will likely not grep in the source code to find how that works.
+==========><======================================
+diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
+index 29fc0c2ed49..a4ff374675d 100644
+--- a/drivers/soc/qcom/rpmh-rsc.c
++++ b/drivers/soc/qcom/rpmh-rsc.c
+@@ -152,6 +152,24 @@ static u32 rpmh_rsc_reg_offset_ver_2_7[] = {
+  	[RSC_DRV_CMD_RESP_DATA]		= 0x40,
+  };
 
-If it's a NACK, please say so. Otherwise please provide clear 
-instructions so we know the wording we should be using for this to be 
-accepted.
++static u32 rpmh_rsc_reg_offset_ver_3_0[] = {
++	[RSC_DRV_TCS_OFFSET]		= 672,
++	[RSC_DRV_CMD_OFFSET]		= 24,
++	[DRV_SOLVER_CONFIG]		= 0x04,
++	[DRV_PRNT_CHLD_CONFIG]		= 0x0C,
++	[RSC_DRV_IRQ_ENABLE]		= 0x00,
++	[RSC_DRV_IRQ_STATUS]		= 0x04,
++	[RSC_DRV_IRQ_CLEAR]		= 0x08,
++	[RSC_DRV_CMD_WAIT_FOR_CMPL]	= 0x20,
++	[RSC_DRV_CONTROL]		= 0x24,
++	[RSC_DRV_STATUS]		= 0x28,
++	[RSC_DRV_CMD_ENABLE]		= 0x2C,
++	[RSC_DRV_CMD_MSGID]		= 0x34,
++	[RSC_DRV_CMD_ADDR]		= 0x38,
++	[RSC_DRV_CMD_DATA]		= 0x3C,
++	[RSC_DRV_CMD_STATUS]		= 0x40,
++	[RSC_DRV_CMD_RESP_DATA]		= 0x44,
++};
 
-Cheers,
-Quentin
+  static inline void __iomem *
+  tcs_reg_addr(const struct rsc_drv *drv, int reg, int tcs_id)
+@@ -573,10 +591,9 @@ found:
+  	drv->ver.minor = rsc_id & (MINOR_VER_MASK << MINOR_VER_SHIFT);
+  	drv->ver.minor >>= MINOR_VER_SHIFT;
+
+-	if (drv->ver.major == 3) {
+-		printf("RPMh v3 not supported\n");
+-		return -ENOTSUPP;
+-	} else
++	if (drv->ver.major == 3)
++		drv->regs = rpmh_rsc_reg_offset_ver_3_0;
++	else
+  		drv->regs = rpmh_rsc_reg_offset_ver_2_7;
+
+  	ret = rpmh_probe_tcs_config(dev, drv);
+==========><======================================
+
+And add my:
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550 & SM8^%)
+
+
+<snip>
+
