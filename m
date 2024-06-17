@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EA81C27C79
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 18:54:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BC8C27C79
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 19:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F27E883BB;
-	Mon, 17 Jun 2024 20:54:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7BCC7883A8;
+	Mon, 17 Jun 2024 21:08:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iHA51DkI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qq+8PD0a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D2C7883A8; Mon, 17 Jun 2024 20:54:26 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B06BC882D4; Mon, 17 Jun 2024 21:08:04 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DD8D8832D
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 20:54:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9682B882E5
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 21:08:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f7b9=NU=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718650442;
- bh=FTqYd2rGd535vLy0irL3xfJvd2Oc8ctJ3+BpTj4GrWQ=;
- b=iHA51DkIaEmLqJDTQhHZa0TGf81hEB7kCJ/B1pquh44yQ6ygaElCkpTfYU9+mgrYjrQ7QyaET
- pdpfTtZNiQtYP78Cdro03aRax1v9F2dHIwbZD0A1PZyrk0k1unkVBJV8zu14KdNTsR+yJZa709m
- idrliZVKFMY9ltVRVyIltmOcws32ngKT37mLkxS6KgbyQriUdToxUM3R3bhs73lfiFimvR5AVeS
- Pxc5MeIAM9PhpHWTTG/Qa9XFGxfgpLAEXGps5MxRbZi+XfRxnAQRGrC7WoohoWKeC551PSAfPWr
- 6WJVpewdG+NkMvuhPXUT6Gc7CxDfWjSvtuaTL7x9yyAw==
-Message-ID: <173e84c9-9c0e-4ab8-add2-1f493ca14fe3@kwiboo.se>
-Date: Mon, 17 Jun 2024 20:53:56 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6f977acff19so2158699a34.3
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 12:08:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718651281; x=1719256081; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GI8OWcD3+VRZNRrKfVZj33MXjZY68TytO3Z8IMueJow=;
+ b=qq+8PD0a5SF2uJ/cHGX6AmpTJkmiNtYB3wjAIpreSrwN68l4JQ86dvsndZInZGH8iA
+ x8/xi9OJ3ZQ+Qm3nXYpUTRmU2ulDwDNdyhYqDCR/ELdw3HhYG6yRe9pgdQGVhkcZFgAo
+ YWporkV16qExKs0xZ+VAGjG8nrFz/+jKCyyV8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718651281; x=1719256081;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GI8OWcD3+VRZNRrKfVZj33MXjZY68TytO3Z8IMueJow=;
+ b=aNqHquDM6Xhs3dbpV/Y7GgCkD/zsmxbwJAur1vw5epkSjnhfyO5BnSQY+DnZmtEe6d
+ uRUIoRNqP96A5qufospWfIxzR6qBGiVeNJcX0hxEbVwESCh53uuCZ4BReIWNIrYqIz2j
+ VVhHHegIOPoJVq4vkRu9g0XXTO5+Ljm/CNHAQeRkS/O1rMPnMLs8OTB9tQt1cvv8EFmc
+ TFZHyui7Vhlw45RnOHBVi9kMnarPKyVzNj+Rcd8Zigcztr+lgpFR8YWTsRvspqs8pImy
+ itNC+6O32zrx54Z7NEfMNGMHI4FBAGce10JOE0bXtCzuvMlRBHVNQc2SARitYkULpbsP
+ SW+Q==
+X-Gm-Message-State: AOJu0YybKaeXJI6ekp+1dAPXG9l04kjYuGKjUiqznAL3jdnmESglvHjJ
+ VQHvZ0fT7XZChhIFXP9u9cqGD2ABwWqSZBLDQgS/tPtceIqTunzrRLy20M/OjsA=
+X-Google-Smtp-Source: AGHT+IGJ7Nzo3G6n2ZSaUyCfg5EJrx/txQBWD/cDjojf/OIccABqgirWhrDf6jU0fmbNWpKvCAliSw==
+X-Received: by 2002:a05:6870:a11d:b0:22b:5bc1:66f5 with SMTP id
+ 586e51a60fabf-258429357f7mr11688775fac.16.1718651281241; 
+ Mon, 17 Jun 2024 12:08:01 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2567aa14d44sm2730939fac.25.2024.06.17.12.08.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jun 2024 12:08:00 -0700 (PDT)
+Date: Mon, 17 Jun 2024 13:07:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [GIT PULL] xilinx patches for v2024.10-rc1
+Message-ID: <20240617190758.GI68077@bill-the-cat>
+References: <8a2e058d-5424-46de-bcf7-87ff574d25b2@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH COVER] rockchip: rk3399: fix SPI-NOR flash not found in
- U-Boot pre-reloc
-To: Quentin Schulz <quentin.schulz@cherry.de>, Quentin Schulz
- <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Tom
- Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240617-rk3399-fix-v1-1-69af21c2baed@cherry.de>
- <233bf248-735a-4564-8559-236a10ea89be@kwiboo.se>
- <4a5cf733-68c5-405f-91df-f87583d9c6a5@cherry.de>
- <81133178-c476-49fb-ad49-dfc00d7a4adf@kwiboo.se>
- <f2183ce9-d7c3-4952-a585-be5138cad9a5@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <f2183ce9-d7c3-4952-a585-be5138cad9a5@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 6670864864ade33c9004c66e
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zN2KImm6eiWgorNA"
+Content-Disposition: inline
+In-Reply-To: <8a2e058d-5424-46de-bcf7-87ff574d25b2@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,103 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 2024-06-17 16:03, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 6/17/24 3:44 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2024-06-17 15:29, Quentin Schulz wrote:
->>> Hi Jonas,
->>>
->>> On 6/17/24 3:26 PM, Jonas Karlman wrote:
->>>> Hi Quentin,
->>>>
->>>> On 2024-06-17 15:10, Quentin Schulz wrote:
->>>>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>>>
->>>>> In commit 100f489f58a6 ("rockchip: rk3399: Fix loading FIT from SD-card
->>>>> when booting from eMMC"), the spi1 bootph properties were mistakenly
->>>>> removed meaning, so re-add them back to fix SPI-NOR flash not being
->>>>> found in U-Boot pre-reloc as required for RK3399 Puma.
->>>>
->>>> Good catch, for TPL/SPL the bootph props is propagated, something that
->>>> is not done for pre-reloc.
->>>>
->>>
->>> Can you tell us a bit more about this? I know that the pinctrl nodes
->>> marked for pre-reloc recursively apply the same to their parent, but
->>> couldn't find anything similar for other subsystems for example. What
->>> did I miss in my 5m search?
->>
->> v2024.04-rc1 added support to propagate bootph props using fdtgrep for
->> the u-boot-tpl/spl.dtb files, however pre-reloc the main u-boot.dtb (or
->> possible the FDT included in FIT) that is not processed by fdtgrep.
->>
->> fdtgrep: Allow propagating properties up to supernodes
->> https://source.denx.de/u-boot/u-boot/-/commit/7a06cc2027c0169c462da63a68fa269c0d59a950
->>
->> Makefile: Use the fdtgrep -u flag
->> https://source.denx.de/u-boot/u-boot/-/commit/aca95282c1b72c41d8e72984b1dceb15f396b2f8
->>
-> 
-> Thanks for the pointers!
-> 
-> I'm wondering if we shouldn't do the same for U-Boot proper DTB as well?
+--zN2KImm6eiWgorNA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I think that would be good, and should also remove the need for the
-recursive pinctrl lookup for bootph props during pre-reloc.
+On Mon, Jun 17, 2024 at 06:12:06PM +0200, Michal Simek wrote:
 
-> 
-> i.e.
-> 
-> cmd_fdt_rm_props = cat $< | $(objtree)/tools/fdtgrep -r -O dtb - -o $@
-> 
-> to
-> 
-> cmd_fdt_rm_props = $(objtree)/tools/fdtgrep $(fdtgrep_props) -u  $< | 
-> $(objtree)/tools/fdtgrep -r -O dtb - -o $@
-> 
-> I assume we need to add a bunch more options though.
-> 
-> But that would make sense to me, the fact that there's a pre-reloc stage 
-> in U-Boot proper is already a bit odd (to me), but if we have something 
-> that behaves differently than the pre-reloc stage in earlier stages... 
-> I'm not sure this is a good idea?
+> Hi Tom,
+>=20
+> please pull these patches to your tree. Gitlab CI is not showing any issu=
+e.
+> There are some alignments and improvements but overall nothing significan=
+t.
+> The biggest patchset is add support for new AMD Versal Gen 2 SoC.
+>=20
+> Thanks,
+> Michal
+>=20
+>=20
+> The following changes since commit 0786dd573d0793417852e009dee3148ebdd163=
+f3:
+>=20
+>   test/py: net_boot: Add test cases for net boot (2024-06-13 16:31:24 -06=
+00)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
+> tags/xilinx-for-v2024.10-rc1
+>=20
+> for you to fetch changes up to e4a11e984d11cf4bbe55385cbae03c08f27ecd02:
+>=20
+>   xilinx: Enable FF-A for all our arm64 SoCs (2024-06-17 16:02:30 +0200)
+>=20
 
-Fully agree that part of the pre-reloc stage make little sense at least
-on Rockchip platform where full memory is available before pre-reloc.
+Applied to u-boot/next, thanks!
 
-(I am hoping to get an initial series to remove time wasted during
-pre-reloc for Rockchip platform out in near future, e.g. ~250ms is
-currently wasted looking up e.g. CRU_BASE on rk3399, a constant that is
-known at compile time).
+--=20
+Tom
 
-> 
-> While at it, I'm wondering if we didn't miss the removal of 
-> bootph-some-ram in cmd_fdtgrep for the VPL/SPL/TPL?
+--zN2KImm6eiWgorNA
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I think so too, the bootph-some-ram should be safe to remove.
+-----BEGIN PGP SIGNATURE-----
 
-We can/should probably also extend fdtgrep to remove disabled nodes for
-the VPL/SPL/TPL.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZwiY4ACgkQFHw5/5Y0
+tywX6Qv/aRFAQWUiOqFtNiVqVNLP+XRvMqHChqXlrTZCnnP6002KxK9Jtc1zVCs9
+lNrLfarDeqh4LWxcsOYgFFlAtamJbos1P/4RGjj7jxCkeYC6SMaW2MLZeiathcP4
+FOdSLc6VDotTAyqCf4KyZVhThQY9xUFgcjrjJVeJsXtknRUbz/EA70G5RKJnatiC
+bYVDNodJu1y+OgO0nGNCaOkLvOkCA1MRfFWM+/TwJJ2eXq3U1KR3ULD2ap3yzo6S
+j4iIXfqV0oNpbqYf5KsQIdnIkgXnjsaWH1lRlsqc1O3C8i9JZat7rPE8wwhi/RMW
+t61VJGkvdx5pIgCgs5P9v5wz098ADCzHRpLHNvek7GDwZb3i/ENu7rFUhWXJBP72
+yrjPsEVcl3zU9lrBHKUKekjOl91MTiYd43cZeMfIFyMi8RlVuA3wRjfKtRcTTTEm
+bz9SHjMWX1zGhjooV0LWw5U7hd1DJ/en0fo4sN4VqfG9qpeHfxNJtZKHh/toqPI6
+OLmjMk3T
+=Ovtm
+-----END PGP SIGNATURE-----
 
-> 
-> Additionally, we should be able to remove bootph-pre-sram and 
-> bootph-pre-ram in U-Boot proper DT since those only apply to non-U-Boot 
-> proper stages, don't you think?
-
-I do not fully think we can remove them, due to the dual use of 
-ofnode_pre_reloc(). During pre-reloc it will return true if node is
-required, and after pre-reloc it return true if the node was required
-during any prior phase. Unsure if anything depend on this secondry use.
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+--zN2KImm6eiWgorNA--
