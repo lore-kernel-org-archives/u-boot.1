@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B24EC27C6E
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 08:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB63C27C77
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 08:27:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D48C87CF8;
-	Mon, 17 Jun 2024 10:22:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 83D6D87D14;
+	Mon, 17 Jun 2024 10:27:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="keH5g/cC";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QkO+iNoF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9563787E52; Mon, 17 Jun 2024 10:22:05 +0200 (CEST)
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
+ id 3073588131; Mon, 17 Jun 2024 10:27:53 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2730878ED
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:22:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A48F0878ED
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:27:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-48c3402e658so1476718137.0
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:22:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-57c7681ccf3so4693038a12.2
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 01:27:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718612521; x=1719217321; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1718612870; x=1719217670;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BJyXm4phaXru/XM/zKML8kJ4GXiDF857ZyGMJicT/W0=;
- b=keH5g/cCvWyYLdLQWkAOo3ISG5+TSYhCGCtbcG0Gj6IJZOX4fgC5DMuvIs8/MPwSSp
- NuX4nzaLNDpKkwzllKVSCvdQAvpbN97ce+RX8s0ptVxSmodG4XqhtHIdn3QllmXHOn9w
- 4T3xWMHsLvITuPGsuxRg+sA0/Nspt/fRz6GTqluyIxUCuNVBUG8ULWB/ry5rkliD2PME
- TJrrklNPFjr8rapJLYVQ3Tqwly9ej7q77yKKyh3k2hLEWpOf8CvDn+rD0pp3F4McnHZS
- 6R+ep+ip4MGAvhgacpYIWMgo7wQ07KEcfbiXd5Y18iqu710t8IL5gvF6lD34OuTiE0Vu
- 09lQ==
+ bh=vCS0UBeBTAks7eLkg0XuFCssJMgL5g05nDpW6ApYrEE=;
+ b=QkO+iNoFurZzu1pYEhhqJSJUPn9pi22H0UP/LforNM1Vq6js7iHc9TcTPz/1HeJR2e
+ HN6Hx2IsQS2v4Lb9mBaXaAauZhmJIm2n8qD5qaINR/7coh1Q84yD+lwIDpVcM57LisM6
+ YIWNiAImsoY5g9MS/c4Tkx9Z/BYAnyspxxnM8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718612521; x=1719217321;
+ d=1e100.net; s=20230601; t=1718612870; x=1719217670;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BJyXm4phaXru/XM/zKML8kJ4GXiDF857ZyGMJicT/W0=;
- b=FhTSX0hksrsxOlVCTnSCBZBUiLbj7Q4Nau2KFQcTnyILexWEPV2vu8Sz/SR6KxWQJa
- qnz0PcY1XijmUJCKfNqHuFPB7RS2dKaHNYLcfEgglR84PCzOeGRaK6wT6k1ZuGmjcXJR
- 6zAOLU5vXcIiUY3lqkxvprq5zO8RVDAimgRTsfSsg6a/PQ8jB3tkhNQacT9RtZZzkuul
- qMCN2HfrEXj9XuGjAVKVWaSTi6El3RdppnGpVx5Sv6w+xq+MyqF5XJz1j2Qz7h2a/A+1
- 6SBa7BPaHrKl1s+1KEWhI+5pUyiFCxdEab1GdOi5A6UJxyRSzgtcDXvcmXQ7vrYUiRQE
- fJVw==
+ bh=vCS0UBeBTAks7eLkg0XuFCssJMgL5g05nDpW6ApYrEE=;
+ b=BOXuQhbxZekLDUgg2q46tWriWNCQa92iM1n9ZnJGq72r1ecCVHPXzKrl9TMYQOw+pw
+ vyz3G1K15OquSsrVqIjmeT41e3ibCP558/KyT37cgCfKeykVsb+Vv4mxbsp1zwatpZG5
+ g47Vo0UnXOwamR51cnEZeSaxSLX8YAxjSfQt9OBeikftfzRUvf8HLfqn0JnVSdLWeLel
+ YN6+dti4/fJONgjVM5rpxOD3bRbL7nQ4oeW9ZrD3CLet+8g1tnUvmoj74xaAyD/FpchA
+ zPnnBaMSfGvrXmzUT8Bz/kb0bGDBit3kvqHmsRNP7lU6LBw40HrzvaGZk472Swm6BP6P
+ 60aQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWaDZh4+nXIyKExVnPuzuHLKvjvgtWQoJsa4twlmm8eERhc6QR2DmSG5804ljeDtIAVlNsWI2qNyOh0bk7bSFWNxKRtvA==
-X-Gm-Message-State: AOJu0YzSERjCPRkBfxzkhZff5QKO0yDcAzY0UuvATLSP8qBppMjkctyF
- GCXbhLuIGopb5u8D+9NLtOxMfmZ6oOIG9NHLfYn9QABFcNSEsCfwDIgYrkkIY8zKapWE314gJE1
- MNMsNH+lnf0wipM27FG+AiUrJluQJox5yKPtAaA==
-X-Google-Smtp-Source: AGHT+IFFRpzpjkvMm23DDsChRS51TCxKVSVwD7TyuwMmPQBG98oCJu88/EkzW9UEPi/fLdmm63pA/nRgHwYQMbdRMFg=
-X-Received: by 2002:a67:f94d:0:b0:48d:c47d:6478 with SMTP id
- ada2fe7eead31-48dc47d74e5mr5243084137.2.1718612521379; Mon, 17 Jun 2024
- 01:22:01 -0700 (PDT)
+ AJvYcCWoNT/f+K3FoO1nlcnqQVBj3xhIZfiLu/ddXg7QP7g+gM8FHJObcPyT2qCWZg/YAtGp9fhlx0Uv7Xyc4KiSttZ2TW5uKA==
+X-Gm-Message-State: AOJu0YwIFp7BQIeWoj6/5Rpr2UVV5t4YDPEJv7NZSKGxcVXFfmkpWNax
+ IY6PIL6QfDYSPX7kPfJwvQWrW131dbnw5bxF+DL+tSkdBChQMjQLCQfNqfoLOuEbkCDCnCUbXKf
+ 3sMFb/XQ8543UJv5OEcAam/J3erW5jWTvwt8JzA==
+X-Google-Smtp-Source: AGHT+IFbsYKldhMJetrwjKqbd3whfQsiaQZS2CrHwj8tm1nXFdck3nIY7JyeOvXVg+8FH1du74gNO0UmKt+fMpExha8=
+X-Received: by 2002:a50:ccc5:0:b0:57c:dbf6:931f with SMTP id
+ 4fb4d7f45d1cf-57cdbf694e3mr2146401a12.5.1718612869928; Mon, 17 Jun 2024
+ 01:27:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
  <CAFA6WYPB17=YNabDyGTqo3p=uYD=Vy+Ec2P2VepXT6P+75f+VQ@mail.gmail.com>
  <CAOf5uwneUKJXJqgBMOQHs+d8-GQ6nr+vBAZ4ek2au1kngs8mXA@mail.gmail.com>
-In-Reply-To: <CAOf5uwneUKJXJqgBMOQHs+d8-GQ6nr+vBAZ4ek2au1kngs8mXA@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 17 Jun 2024 13:51:49 +0530
-Message-ID: <CAFA6WYNt0-KBpYjo0eQM20s-eD4gRvkgT7WxoxvHgd6URTXGrg@mail.gmail.com>
+ <CAFA6WYNt0-KBpYjo0eQM20s-eD4gRvkgT7WxoxvHgd6URTXGrg@mail.gmail.com>
+In-Reply-To: <CAFA6WYNt0-KBpYjo0eQM20s-eD4gRvkgT7WxoxvHgd6URTXGrg@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 17 Jun 2024 10:27:38 +0200
+Message-ID: <CAOf5uw=Uh6SRSo5LZ4xZxw5R+vh+8Cj3GjhMeuYmq20NgdFC7w@mail.gmail.com>
 Subject: Re: [PATCH v2] Makefile: Fix include directory for OF_UPSTREAM
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+To: Sumit Garg <sumit.garg@linaro.org>
 Cc: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
  u-boot@lists.denx.de, 
  trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, 
@@ -95,105 +94,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+HI Sumit
 
-Sorry for the delayed response as I had some health issues last week.
+On Mon, Jun 17, 2024 at 10:22=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
+>
+> Hi Michael,
+>
+> Sorry for the delayed response as I had some health issues last week.
+>
 
-On Thu, 13 Jun 2024 at 12:44, Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi Sumit
->
-> On Thu, Jun 13, 2024 at 9:02=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org=
-> wrote:
+We are not in a hurry and I think discussion has his own time. Glad that yo=
+u are
+getting better
+
+> On Thu, 13 Jun 2024 at 12:44, Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
 > >
-> > On Mon, 3 Jun 2024 at 20:38, Patrick Barsanti
-> > <patrick.barsanti@amarulasolutions.com> wrote:
-> > >
-> > > Always prioritizing u-boot includes causes problems when trying to mi=
-grate
-> > > boards to OF_UPSTREAM that have different local devicetree files with
-> > > respect to the upstream ones, if local DT headers are not dropped.
-> > > At the same time if local and upstream files are the same, migrations
-> > > can be, and have been, introduced without dropping local DT headers.
-> > > This also causes problems whenever upstream DTS and DT headers are pa=
-tched.
-> > >
-> > > For example, now migrating a board based on `imx6ul.dtsi` to OF_UPSTR=
-EAM
-> > > breaks it, as there are some missing defines in a local DT header fil=
-e
-> > > (`imx6ul-clock.h`); the solution would be to drop it, which has not a=
-lways
-> > > been done in previous OF_UPSTREAM migration patches for other boards
-> > > because most of the time the two are the same. This solution is also
-> > > vulnerable to ABI breakage, although this has not yet happened since =
-the
-> > > introduction of OF_UPSTREAM support and is unlikely.
-> > >
-> > > Maintainers assure backwards compatibility for DT headers when syncin=
-g the
-> > > upstream folder with the kernel.
-> > > The problem is that, at the current state, all boards that have not d=
-ropped
-> > > their local headers when migrating to OF_UPSTREAM will break once the
-> > > upstream devicetrees are patched, for example, to use any newly added
-> > > define which is not present in the local DT header file, even if thos=
-e
-> > > changes are backwards compatible.
-> > >
-> > > This patch fixes these problems by prioritizing upstream includes whe=
-n
-> > > `CONFIG_OF_UPSTREAM=3Dy`, while keeping current prioritization when i=
-t is
-> > > not.
-> > >
-> > > Also in case of ABI breakage in the kernel, keeping redundant header =
-files
-> > > (only until strictly necessary, e.g. until all boards including them =
-have
-> > > been migrated to OF_UPSTREAM) together with this selective prioritiza=
-tion
-> > > of the include folder is a solution for keeping not-yet-migrated boar=
-ds
-> > > from breaking.
+> > Hi Sumit
 > >
-> > Let's just not try to make assumptions about DT ABI breakage due to
-> > using upstream headers for not-yet-migrated boards but rather talk
-> > about some real world examples. Have you come across any DT ABI
-> > breakage with usage of upstream headers? The breakage you have
-> > reported is due to usage of an old local copy of DT header.
+> > On Thu, Jun 13, 2024 at 9:02=E2=80=AFAM Sumit Garg <sumit.garg@linaro.o=
+rg> wrote:
+> > >
+> > > On Mon, 3 Jun 2024 at 20:38, Patrick Barsanti
+> > > <patrick.barsanti@amarulasolutions.com> wrote:
+> > > >
+> > > > Always prioritizing u-boot includes causes problems when trying to =
+migrate
+> > > > boards to OF_UPSTREAM that have different local devicetree files wi=
+th
+> > > > respect to the upstream ones, if local DT headers are not dropped.
+> > > > At the same time if local and upstream files are the same, migratio=
+ns
+> > > > can be, and have been, introduced without dropping local DT headers=
+.
+> > > > This also causes problems whenever upstream DTS and DT headers are =
+patched.
+> > > >
+> > > > For example, now migrating a board based on `imx6ul.dtsi` to OF_UPS=
+TREAM
+> > > > breaks it, as there are some missing defines in a local DT header f=
+ile
+> > > > (`imx6ul-clock.h`); the solution would be to drop it, which has not=
+ always
+> > > > been done in previous OF_UPSTREAM migration patches for other board=
+s
+> > > > because most of the time the two are the same. This solution is als=
+o
+> > > > vulnerable to ABI breakage, although this has not yet happened sinc=
+e the
+> > > > introduction of OF_UPSTREAM support and is unlikely.
+> > > >
+> > > > Maintainers assure backwards compatibility for DT headers when sync=
+ing the
+> > > > upstream folder with the kernel.
+> > > > The problem is that, at the current state, all boards that have not=
+ dropped
+> > > > their local headers when migrating to OF_UPSTREAM will break once t=
+he
+> > > > upstream devicetrees are patched, for example, to use any newly add=
+ed
+> > > > define which is not present in the local DT header file, even if th=
+ose
+> > > > changes are backwards compatible.
+> > > >
+> > > > This patch fixes these problems by prioritizing upstream includes w=
+hen
+> > > > `CONFIG_OF_UPSTREAM=3Dy`, while keeping current prioritization when=
+ it is
+> > > > not.
+> > > >
+> > > > Also in case of ABI breakage in the kernel, keeping redundant heade=
+r files
+> > > > (only until strictly necessary, e.g. until all boards including the=
+m have
+> > > > been migrated to OF_UPSTREAM) together with this selective prioriti=
+zation
+> > > > of the include folder is a solution for keeping not-yet-migrated bo=
+ards
+> > > > from breaking.
+> > >
+> > > Let's just not try to make assumptions about DT ABI breakage due to
+> > > using upstream headers for not-yet-migrated boards but rather talk
+> > > about some real world examples. Have you come across any DT ABI
+> > > breakage with usage of upstream headers? The breakage you have
+> > > reported is due to usage of an old local copy of DT header.
+> > >
 > >
+> > The include priority is broken, and this a Makefile problem anyway.
+> > This patch fix
+> > anyway includes priorities.
 >
-> The include priority is broken, and this a Makefile problem anyway.
-> This patch fix
-> anyway includes priorities.
+> The include priority only becomes an issue if you want to keep
+> redundant local copies of DT headers. And I have been advocating to
+> drop local copies from U-Boot as much as possible. Once we only have
+> upstream DT headers being used (Qcom platforms can be a good example
+> here), we don't need to care about trickier priorities.
 
-The include priority only becomes an issue if you want to keep
-redundant local copies of DT headers. And I have been advocating to
-drop local copies from U-Boot as much as possible. Once we only have
-upstream DT headers being used (Qcom platforms can be a good example
-here), we don't need to care about trickier priorities.
-
-> The imx6 board migration for us does not work
-
-Patrick did mention here [1] that dropping
-include/dt-bindings/clock/imx6ul-clock.h fixes the problem...
+Yes but this is the case. All we build now can include the local
+redundant copy and we can
+not guarantee that already board builds are built using the latest
+version of the include.
 
 >
-> > However, if this patch is only needed to address fear of DT ABI
-> > breakage (which hasn't happened in the past) then I can live with it
-> > such that it can help convince more people for OF_UPSTREAM migration.
-> > We can drop local DT headers as and when people feel comfortable with
-> > upstream.
+> > The imx6 board migration for us does not work
 >
-> It's not abi breakage only but path inclusion order.
+> Patrick did mention here [1] that dropping
+> include/dt-bindings/clock/imx6ul-clock.h fixes the problem...
+>
 
-...however it's the ABI breakage part that worries Patrick. So if this
-patch only solves that worry then I can live with it in the hope that
-people will start to gain confidence in DT ABI stability.
+Yes but suppose that the include was ok in the sense of compilation
+but not consistent
+in term of functionality. When you build using upstream headers you
+must use them
+to be consistent and it's not as it is for now. Anyway we can not drop
+for one board upstream
+that file, unless we force everyone to have broken board or all upstream no=
+w
 
-[1] https://lore.kernel.org/u-boot/CABxfhNfWdD0NjPNskaxZxDTg9pDoDx5vBHrN9ch=
-vMh5Xo_7Kzg@mail.gmail.com/
+> >
+> > > However, if this patch is only needed to address fear of DT ABI
+> > > breakage (which hasn't happened in the past) then I can live with it
+> > > such that it can help convince more people for OF_UPSTREAM migration.
+> > > We can drop local DT headers as and when people feel comfortable with
+> > > upstream.
+> >
+> > It's not abi breakage only but path inclusion order.
+>
+> ...however it's the ABI breakage part that worries Patrick. So if this
+> patch only solves that worry then I can live with it in the hope that
+> people will start to gain confidence in DT ABI stability.
+>
+> [1] https://lore.kernel.org/u-boot/CABxfhNfWdD0NjPNskaxZxDTg9pDoDx5vBHrN9=
+chvMh5Xo_7Kzg@mail.gmail.com/
+>
+> -Sumit
 
--Sumit
+Michael
