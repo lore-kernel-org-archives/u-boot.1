@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DDE3C27C79
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 17:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E0EAC27C79
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 17:38:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B065388323;
-	Mon, 17 Jun 2024 19:38:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 161E6883BB;
+	Mon, 17 Jun 2024 19:38:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lUlA3SaK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ib1vsnvw";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tFpEVOYz";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uPDN9ofV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB2CF8811A; Mon, 17 Jun 2024 19:38:05 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 301ED883B6; Mon, 17 Jun 2024 19:38:08 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65283882EF
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 19:38:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 042CF8811A
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 19:38:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,31 +30,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4W2xtM0JTpz9sTM;
- Mon, 17 Jun 2024 19:38:03 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4W2xtP5414z9sck;
+ Mon, 17 Jun 2024 19:38:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718645885;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Usdz/gIAoFcmuX7FqaBJNor+WDkJ4HoDhGwmvGbCf/U=;
+ b=tFpEVOYzwD+QTEMyeAirEJLuO3QD8LVRSK9540ZXTkOhGwyngu3pbwhmwLHXdMYf7gKgJ6
+ 8dQ9nYExBqGtbPv7KKWiICumqs0C5IYRKimSfmcAmQDU0OYha2jm+w6l+Z2yAmFRKzoXif
+ qM9eUJPBwZ7gL8TWZ5hZcDr909xHzGNDPqQvq5qjgFfoWdU5mmoiQ5KdwDM4lUgKP5Bvz1
+ zrXFSgDxvMAcx/NbIkCOUGG1QgMcRl7UHpUvstwLjEZAjTdbZ7B/y7kh7AJzz/yMiYxZBt
+ 8DwK+aqeLj7fRWeuMZEJijD559WkommdmYw0OAe44Bwb1wvDwvHAS5trU1kJUw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1718645883;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=xDnBDXpkgqqmhZnN+Aq7rEsTlvX1eDBvXjmNWWbpumU=;
- b=lUlA3SaK5B2QRFuDz+RaA0jk5OGGZ1fDnZrlvSyr0afIU4i4lZ8t74igO4ElMr8yJ6hWaB
- OsVBsUPJAEKVl4hlOIhhzHFrjFuddz7qDk9LRYlAzXXDaWWBluvX/eicrH9/Yh4s9BXN4R
- GWum+84Dbf+jk44PJqnP6eLDDLuqSNo6rrQVDgJS2X1laLJ4e1Eqxc0NBWKY1LiLc+n7Nj
- ZDX9X4Jmq2pNbpR7lf54sYWcSvQ89Pn+Lwbjbim0UrsxyGsWvYOEYWsAXFfcTI+TU8X1JS
- g0k5m2GX6jPoV/A70tl4XsUJSFqlzZp90uRAdyQgB7pganO6PipxhHBeE49R4w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1718645880;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=xDnBDXpkgqqmhZnN+Aq7rEsTlvX1eDBvXjmNWWbpumU=;
- b=ib1vsnvwlGbzbMOpITngaUE+kHt9L+yXjkwUQkGWndxSWoSCBUBxqVYpUKnQ+b9sVIR5TH
- uGVr72vdD4Ma9QDY9H/fsJwM8WNkVfUzWqXBV4gfKt6Q2cLQd57HXjoggygFIa1jFfb1nD
- i2AsAmIU7N9K+vhZvNkVJ0rDEBYeF4lSUE5z/pR1/OYZOvogrzxYnuN+c0so6Om4eVwZ1D
- MuRFB6i+c9ZbCCv3OOyrFXiHjOger22Ozy9jG25mJX/ZGvnwpu302Q7dYYH8QU+4nSJ5fp
- Vx5yRsQUU7mB25v6wuJoc2F2l7fGU24BR/nd1/CLq4GT/A2pSST9HumecaJ1rg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Usdz/gIAoFcmuX7FqaBJNor+WDkJ4HoDhGwmvGbCf/U=;
+ b=uPDN9ofVc4u99ou5HU8TOHjyOYUkWeYt6+DS+Eik2BEovHveQlxwMYPBpbKe3DGafxmrfY
+ 5phGbQfQNaDrYHSOrvjX3LDuDIbmtYD7qncLErDON5fDGIU0n3WNXnfYTm9hify8ZJSSTp
+ VekpjBX+z5brC00n9OXciTLm5zu8CXnkG++d/7MYYtscni+2qKaGKAq7gwSh9sCnDVPuJv
+ vRDp8eImjp0dawhfoxSSWzRhk2W+0tUvZjo5G/M9w5qc47aqC6oHyNjZIPAuWaOivyi55m
+ vWSIZbX0W5cqE3wMY6QgmVyYblFVE5NjtEjXxdZGBusTmLLGIRWwwm4TKnN77g==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Caleb Connolly <caleb.connolly@linaro.org>,
@@ -69,14 +70,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
  u-boot-qcom@groups.io
-Subject: [PATCH v2 1/3] phy: Extend generic_setup_phy() with PHY mode and
- submode
-Date: Mon, 17 Jun 2024 19:36:03 +0200
-Message-ID: <20240617173740.80822-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 2/3] phy: rcar: Split init and set_mode operations
+Date: Mon, 17 Jun 2024 19:36:04 +0200
+Message-ID: <20240617173740.80822-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240617173740.80822-1-marek.vasut+renesas@mailbox.org>
+References: <20240617173740.80822-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 54904fd03a6bb7a6391
-X-MBO-RS-META: t7abjnhybg4zbpqsft9333fgwsdxgmzm
+X-MBO-RS-ID: 4c3f091174a3fc77ed5
+X-MBO-RS-META: 87i9iwz3sit1ok4ahxoua3pctps7z9xj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,18 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend generic_setup_phy() parameter list with PHY mode and submode and
-call generic_phy_set_mode() in generic_setup_phy(), so the generic PHY
-setup function can configure the PHY into correct mode before powering
-the PHY up.
+The current init operation also sets the PHY into USB host mode.
+Split the mode configuration into set_mode callback instead and
+implement support for device and OTG modes as well.
 
-Update all call sites of generic_setup_phy() as well, all of which are
-USB host related, except for DM test which now behaves as a USB host
-test.
+The OTG mode performs auto-detection and selects either host or
+device mode. In case the OTG mode is configured, submode field
+can be used to select full PHY (re)initialization or only mode
+auto-detection. The full (re)initialization is only necessary
+once, on start up.
 
-Note that if the PHY driver does not implement the .set_mode callback,
-generic_phy_set_mode() call returns 0 and does not error out, so this
-should not break any existing systems.
+Since the OTG mode may enable IRQ generation in the PHY, disable
+that IRQ generation in the exit callback again.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -126,165 +128,152 @@ Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
 Cc: u-boot-qcom@groups.io
 Cc: u-boot@lists.denx.de
 ---
-V2: Add failpath to return errno from generic_phy_set_mode()
+V2: No change
 ---
- drivers/phy/phy-uclass.c        | 13 +++++++++++--
- drivers/usb/host/ehci-generic.c |  2 +-
- drivers/usb/host/ehci-msm.c     |  2 +-
- drivers/usb/host/ehci-mx6.c     |  2 +-
- drivers/usb/host/ehci-pci.c     |  2 +-
- drivers/usb/host/ohci-generic.c |  2 +-
- include/generic-phy.h           |  5 ++++-
- test/dm/phy.c                   |  8 ++++----
- 8 files changed, 24 insertions(+), 12 deletions(-)
+ drivers/phy/phy-rcar-gen3.c | 90 ++++++++++++++++++++++++++++++++++---
+ 1 file changed, 85 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
-index acdcda15b5b..777d952b041 100644
---- a/drivers/phy/phy-uclass.c
-+++ b/drivers/phy/phy-uclass.c
-@@ -508,7 +508,8 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk)
- 	return ret;
- }
+diff --git a/drivers/phy/phy-rcar-gen3.c b/drivers/phy/phy-rcar-gen3.c
+index 7c292cae0e2..b278f995f37 100644
+--- a/drivers/phy/phy-rcar-gen3.c
++++ b/drivers/phy/phy-rcar-gen3.c
+@@ -8,6 +8,7 @@
+ #include <clk.h>
+ #include <div64.h>
+ #include <dm.h>
++#include <dm/device_compat.h>
+ #include <fdtdec.h>
+ #include <generic-phy.h>
+ #include <malloc.h>
+@@ -31,8 +32,13 @@
+ #define USB2_LINECTRL1		0x610
+ #define USB2_ADPCTRL		0x630
  
--int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
-+int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
-+		      enum phy_mode mode, int submode)
- {
- 	int ret;
- 
-@@ -520,10 +521,18 @@ int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
- 	if (ret)
- 		return ret;
- 
-+	ret = generic_phy_set_mode(phy, mode, submode);
-+	if (ret)
-+		goto phys_mode_err;
++/* INT_ENABLE */
++#define USB2_INT_ENABLE_UCOM_INTEN	BIT(3)
++#define USB2_INT_ENABLE_USBH_INTB_EN	BIT(2)
++#define USB2_INT_ENABLE_USBH_INTA_EN	BIT(1)
 +
- 	ret = generic_phy_power_on(phy);
- 	if (ret)
--		generic_phy_exit(phy);
-+		goto phys_mode_err;
+ /* USBCTR */
+-#define USB2_USBCTR_PLL_RST	BIT(1)
++#define USB2_USBCTR_PLL_RST		BIT(1)
+ 
+ /* SPD_RSM_TIMSET */
+ #define USB2_SPD_RSM_TIMSET_INIT	0x014e029b
+@@ -43,11 +49,23 @@
+ /* COMMCTRL */
+ #define USB2_COMMCTRL_OTG_PERI		BIT(31)	/* 1 = Peripheral mode */
+ 
++/* OBINTSTA and OBINTEN */
++#define USB2_OBINT_SESSVLDCHG		BIT(12)
++#define USB2_OBINT_IDDIGCHG		BIT(11)
 +
++/* VBCTRL */
++#define USB2_VBCTRL_DRVVBUSSEL		BIT(8)
++
+ /* LINECTRL1 */
++#define USB2_LINECTRL1_DPRPD_EN		BIT(19)
+ #define USB2_LINECTRL1_DP_RPD		BIT(18)
++#define USB2_LINECTRL1_DMRPD_EN		BIT(17)
+ #define USB2_LINECTRL1_DM_RPD		BIT(16)
+ 
+ /* ADPCTRL */
++#define USB2_ADPCTRL_OTGSESSVLD		BIT(20)
++#define USB2_ADPCTRL_IDDIG		BIT(19)
++#define USB2_ADPCTRL_IDPULLUP		BIT(5)	/* 1 = ID sampling is enabled */
+ #define USB2_ADPCTRL_DRVVBUS		BIT(4)
+ 
+ struct rcar_gen3_phy {
+@@ -65,12 +83,14 @@ static int rcar_gen3_phy_phy_init(struct phy *phy)
+ 	writel(USB2_SPD_RSM_TIMSET_INIT, priv->regs + USB2_SPD_RSM_TIMSET);
+ 	writel(USB2_OC_TIMSET_INIT, priv->regs + USB2_OC_TIMSET);
+ 
+-	setbits_le32(priv->regs + USB2_LINECTRL1,
+-		     USB2_LINECTRL1_DP_RPD | USB2_LINECTRL1_DM_RPD);
 +	return 0;
++}
  
-+phys_mode_err:
-+	generic_phy_exit(phy);
- 	return ret;
- }
+-	clrbits_le32(priv->regs + USB2_COMMCTRL, USB2_COMMCTRL_OTG_PERI);
++static int rcar_gen3_phy_phy_exit(struct phy *phy)
++{
++	struct rcar_gen3_phy *priv = dev_get_priv(phy->dev);
  
-diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
-index 23c3ed25554..1ae3619ce25 100644
---- a/drivers/usb/host/ehci-generic.c
-+++ b/drivers/usb/host/ehci-generic.c
-@@ -94,7 +94,7 @@ static int ehci_usb_probe(struct udevice *dev)
- 	if (err)
- 		goto reset_err;
- 
--	err = generic_setup_phy(dev, &priv->phy, 0);
-+	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
- 	if (err)
- 		goto regulator_err;
- 
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index a081f71b187..b0c060b8173 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -56,7 +56,7 @@ static int ehci_usb_probe(struct udevice *dev)
- 	hcor = (struct ehci_hcor *)((phys_addr_t)hccr +
- 			HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
- 
--	ret = generic_setup_phy(dev, &p->phy, 0);
-+	ret = generic_setup_phy(dev, &p->phy, 0, PHY_MODE_USB_HOST, 0);
- 	if (ret)
- 		return ret;
- 
-diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
-index 31cd8a50f4a..a93fa5d5455 100644
---- a/drivers/usb/host/ehci-mx6.c
-+++ b/drivers/usb/host/ehci-mx6.c
-@@ -703,7 +703,7 @@ static int ehci_usb_probe(struct udevice *dev)
- 	usb_phy_enable(ehci, priv->phy_addr);
- #endif
- #else
--	ret = generic_setup_phy(dev, &priv->phy, 0);
-+	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
- 	if (ret)
- 		goto err_regulator;
- #endif
-diff --git a/drivers/usb/host/ehci-pci.c b/drivers/usb/host/ehci-pci.c
-index 572686580cd..8d05b14e898 100644
---- a/drivers/usb/host/ehci-pci.c
-+++ b/drivers/usb/host/ehci-pci.c
-@@ -30,7 +30,7 @@ static int ehci_pci_init(struct udevice *dev, struct ehci_hccr **ret_hccr,
- 	int ret;
- 	u32 cmd;
- 
--	ret = generic_setup_phy(dev, &priv->phy, 0);
-+	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
- 	if (ret)
- 		return ret;
- 
-diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
-index f1325cd4953..cc44226f5e0 100644
---- a/drivers/usb/host/ohci-generic.c
-+++ b/drivers/usb/host/ohci-generic.c
-@@ -50,7 +50,7 @@ static int ohci_usb_probe(struct udevice *dev)
- 		goto reset_err;
- 	}
- 
--	err = generic_setup_phy(dev, &priv->phy, 0);
-+	err = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_HOST, 0);
- 	if (err)
- 		goto reset_err;
- 
-diff --git a/include/generic-phy.h b/include/generic-phy.h
-index eaab7491660..47962023236 100644
---- a/include/generic-phy.h
-+++ b/include/generic-phy.h
-@@ -415,10 +415,13 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk);
-  * @dev:	The consumer device.
-  * @phy:	A pointer to the PHY port
-  * @index:	The index in the list of available PHYs
-+ * @mode:	PHY mode
-+ * @submode:	PHY submode
-  *
-  * Return: 0 if OK, or negative error code.
-  */
--int generic_setup_phy(struct udevice *dev, struct phy *phy, int index);
-+int generic_setup_phy(struct udevice *dev, struct phy *phy, int index,
-+		      enum phy_mode mode, int submode);
- 
- /**
-  * generic_shutdown_phy() - Power off and de-initialize phy.
-diff --git a/test/dm/phy.c b/test/dm/phy.c
-index d14117f6f7a..a90881b12ab 100644
---- a/test/dm/phy.c
-+++ b/test/dm/phy.c
-@@ -243,20 +243,20 @@ static int dm_test_phy_setup(struct unit_test_state *uts)
- 					      "gen_phy_user", &parent));
- 
- 	/* normal */
--	ut_assertok(generic_setup_phy(parent, &phy, 0));
-+	ut_assertok(generic_setup_phy(parent, &phy, 0, PHY_MODE_USB_HOST, 0));
- 	ut_assertok(generic_shutdown_phy(&phy));
- 
- 	/* power_off fail with -EIO */
--	ut_assertok(generic_setup_phy(parent, &phy, 1));
-+	ut_assertok(generic_setup_phy(parent, &phy, 1, PHY_MODE_USB_HOST, 0));
- 	ut_asserteq(-EIO, generic_shutdown_phy(&phy));
- 
- 	/* power_on fail with -EIO */
--	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2));
-+	ut_asserteq(-EIO, generic_setup_phy(parent, &phy, 2, PHY_MODE_USB_HOST, 0));
- 	ut_assertok(generic_shutdown_phy(&phy));
- 
- 	/* generic_phy_get_by_index fail with -ENOENT */
- 	ut_asserteq(-ENOENT, generic_phy_get_by_index(parent, 3, &phy));
--	ut_assertok(generic_setup_phy(parent, &phy, 3));
-+	ut_assertok(generic_setup_phy(parent, &phy, 3, PHY_MODE_USB_HOST, 0));
- 	ut_assertok(generic_shutdown_phy(&phy));
+-	setbits_le32(priv->regs + USB2_ADPCTRL, USB2_ADPCTRL_DRVVBUS);
++	writel(0, priv->regs + USB2_INT_ENABLE);
  
  	return 0;
+ }
+@@ -102,10 +122,70 @@ static int rcar_gen3_phy_phy_power_off(struct phy *phy)
+ 	return regulator_set_enable(priv->vbus_supply, false);
+ }
+ 
++static int rcar_gen3_phy_phy_set_mode(struct phy *phy, enum phy_mode mode,
++				      int submode)
++{
++	const u32 adpdevmask = USB2_ADPCTRL_IDDIG | USB2_ADPCTRL_OTGSESSVLD;
++	struct rcar_gen3_phy *priv = dev_get_priv(phy->dev);
++	u32 adpctrl;
++
++	if (mode == PHY_MODE_USB_OTG) {
++		if (submode) {
++			/* OTG submode is used as initialization indicator */
++			writel(USB2_INT_ENABLE_UCOM_INTEN |
++			       USB2_INT_ENABLE_USBH_INTB_EN |
++			       USB2_INT_ENABLE_USBH_INTA_EN,
++			       priv->regs + USB2_INT_ENABLE);
++			setbits_le32(priv->regs + USB2_VBCTRL,
++				     USB2_VBCTRL_DRVVBUSSEL);
++			writel(USB2_OBINT_SESSVLDCHG | USB2_OBINT_IDDIGCHG,
++			       priv->regs + USB2_OBINTSTA);
++			setbits_le32(priv->regs + USB2_OBINTEN,
++				     USB2_OBINT_SESSVLDCHG |
++				     USB2_OBINT_IDDIGCHG);
++			setbits_le32(priv->regs + USB2_ADPCTRL,
++				     USB2_ADPCTRL_IDPULLUP);
++			clrsetbits_le32(priv->regs + USB2_LINECTRL1,
++					USB2_LINECTRL1_DP_RPD |
++					USB2_LINECTRL1_DM_RPD |
++					USB2_LINECTRL1_DPRPD_EN |
++					USB2_LINECTRL1_DMRPD_EN,
++					USB2_LINECTRL1_DPRPD_EN |
++					USB2_LINECTRL1_DMRPD_EN);
++		}
++
++		adpctrl = readl(priv->regs + USB2_ADPCTRL);
++		if ((adpctrl & adpdevmask) == adpdevmask)
++			mode = PHY_MODE_USB_DEVICE;
++		else
++			mode = PHY_MODE_USB_HOST;
++	}
++
++	if (mode == PHY_MODE_USB_HOST) {
++		clrbits_le32(priv->regs + USB2_COMMCTRL, USB2_COMMCTRL_OTG_PERI);
++		setbits_le32(priv->regs + USB2_LINECTRL1,
++			     USB2_LINECTRL1_DP_RPD | USB2_LINECTRL1_DM_RPD);
++		setbits_le32(priv->regs + USB2_ADPCTRL, USB2_ADPCTRL_DRVVBUS);
++	} else if (mode == PHY_MODE_USB_DEVICE) {
++		setbits_le32(priv->regs + USB2_COMMCTRL, USB2_COMMCTRL_OTG_PERI);
++		clrsetbits_le32(priv->regs + USB2_LINECTRL1,
++				USB2_LINECTRL1_DP_RPD | USB2_LINECTRL1_DM_RPD,
++				USB2_LINECTRL1_DM_RPD);
++		clrbits_le32(priv->regs + USB2_ADPCTRL, USB2_ADPCTRL_DRVVBUS);
++	} else {
++		dev_err(phy->dev, "Unknown mode %d\n", mode);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
+ static const struct phy_ops rcar_gen3_phy_phy_ops = {
+ 	.init		= rcar_gen3_phy_phy_init,
++	.exit		= rcar_gen3_phy_phy_exit,
+ 	.power_on	= rcar_gen3_phy_phy_power_on,
+ 	.power_off	= rcar_gen3_phy_phy_power_off,
++	.set_mode	= rcar_gen3_phy_phy_set_mode,
+ };
+ 
+ static int rcar_gen3_phy_probe(struct udevice *dev)
 -- 
 2.43.0
 
