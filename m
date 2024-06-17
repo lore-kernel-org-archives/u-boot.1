@@ -4,63 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CA1C27C79
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 13:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FACFC41513
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 13:53:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98A1188271;
-	Mon, 17 Jun 2024 15:44:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 6171A882DB;
+	Mon, 17 Jun 2024 15:53:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UU10Obb1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZQ6IuEGT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 003F9882DA; Mon, 17 Jun 2024 15:44:53 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 17A40882CE; Mon, 17 Jun 2024 15:53:37 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4538687DC7
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 15:44:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CA878811A
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 15:53:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f7b9=NU=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718631882;
- bh=z5293sXJafD63PSSLAnzDKM7ZwimGO1qg4Z9B1QqrhU=;
- b=UU10Obb1kvljyyUTNhgbQCtxlW6zDKM7WXz/Uo+IBc23ZGLSak+AaopV4ZHh+HijuVXTtr4IM
- d2qP1T0N9/y4RLVgxcephW8jaeXZabJ6mK8+alJ3OpMM/9EB+BZspvB38AUy+1WgXQg9Ww7RSAx
- uINND3JrShKUkh1KTVxB4Z566WN2nJhQ32J4W0YiTAING56UADlXw2Z67QKNlayiqKVGagn5GU0
- EbYwRnbNE2BWQ2hZgvI3FWyRfMNAel5PX/7boN1Y49h1oV/m2U5Xt8F2VL5JIRvVzWNrFufAb+U
- TXxT3uPW1VIlpR0Jnv0B9KXxgp3B+nVtrkoOfZ3JczTA==
-Message-ID: <81133178-c476-49fb-ad49-dfc00d7a4adf@kwiboo.se>
-Date: Mon, 17 Jun 2024 15:44:35 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-633629c3471so20760697b3.1
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 06:53:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1718632413; x=1719237213; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=S1/TkD0R9igWkDfpnjZu3ZUNF+FATCmtK0eR7zW9d5g=;
+ b=ZQ6IuEGTVvYAEN7mkqiGbafuEtXz0pVs7gNl3Hj76z+2Wk4lji3KpKDBlSJk1D4h24
+ DATvN3bQTeL3+Vptr4IV8ohtgidjywvNyma6IEnnqXZp/dSvAwgWdvmUIusy9+Lv5xhf
+ Fn3+1Ra0S/iYj1Bg0ObwwIpEs5lCtmqAsLFsk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718632413; x=1719237213;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=S1/TkD0R9igWkDfpnjZu3ZUNF+FATCmtK0eR7zW9d5g=;
+ b=mombhC3ubyUZzJvrUUjZyG0u6Mv8qoPklIWjAZXCaF6sUXSKW2L+l/NY6YfqF12uCm
+ 0hEz9pH2CyvQhA2/GFOtIdqBdr7eDFTQnU+xpxKdpVWFGJ7q6RjpkWlIDMnrro1+wkM9
+ daZ75O0BWO86DoB7N3CpOsV18jopSyK/6Cdu3hST4KRwixzhB4mkY6b/UGE5jDQBOhGX
+ P7vpBZte5EnTbgF1Wy7HQfjG/CdxwK8oYKuEo2k6oNnAtdVmJ4N4DZf09kctDOWYDx/4
+ P8Bja4/ndt8t9mrA8WYpROLZJnTRgsbu1gFA1XjVMDjuFYI0AaLozGIVzOIXEdRC5JOZ
+ bKJw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJ9p0uFJeKdeeTRiX/o9Epi+S3b7KBeSHRjrNQVra+nfUqXSeu7qJTyN3M+baXsvw2ZdhMjBXyALx8z3KR79zH7pAd4Q==
+X-Gm-Message-State: AOJu0Yz+aTnfknkYWenDI3pEPqd0mo1g/wJh73FpwOfgqzA5k+cetyL2
+ u/9hQPeYdf9RZH4u8HhfUMrQd3UfXM17LPK2YtOcAbO7AN8vULdb1j1WYwtBi53nJ+i3rdX/NZU
+ So9EyCMLZ6JkuTYMZV0/pFfflKxHplxRgtWeO
+X-Google-Smtp-Source: AGHT+IG91zngHG8XjlN5DsmIYiCvIKqCZG9+IyuRGxtp16UQaOSpqcoRW3v2f1ZnixHZbggWmvCZPZQIwL9Ebwr8Dvc=
+X-Received: by 2002:a0d:c307:0:b0:62f:438b:b47 with SMTP id
+ 00721157ae682-6322235bca7mr85636947b3.12.1718632413162; Mon, 17 Jun 2024
+ 06:53:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH COVER] rockchip: rk3399: fix SPI-NOR flash not found in
- U-Boot pre-reloc
-To: Quentin Schulz <quentin.schulz@cherry.de>, Quentin Schulz
- <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Tom
- Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240617-rk3399-fix-v1-1-69af21c2baed@cherry.de>
- <233bf248-735a-4564-8559-236a10ea89be@kwiboo.se>
- <4a5cf733-68c5-405f-91df-f87583d9c6a5@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <4a5cf733-68c5-405f-91df-f87583d9c6a5@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66703dc8c9f2f712a5a194dc
+References: <20240610145920.3302001-1-sjg@chromium.org>
+ <20240610145920.3302001-3-sjg@chromium.org>
+ <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
+ <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
+ <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
+ <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
+ <CAC_iWjL-W604ne_O+U6B3_oGXJtQqZwak4N2qVRSnqdsAz=TbQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjL-W604ne_O+U6B3_oGXJtQqZwak4N2qVRSnqdsAz=TbQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 17 Jun 2024 07:53:22 -0600
+Message-ID: <CAFLszTigrcPCH3wwZUZAk75QttVS+cPMoj=hZJ9Ko9DqyN5vVA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sean Anderson <sean.anderson@seco.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,49 +96,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi,
 
-On 2024-06-17 15:29, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 6/17/24 3:26 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2024-06-17 15:10, Quentin Schulz wrote:
->>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>
->>> In commit 100f489f58a6 ("rockchip: rk3399: Fix loading FIT from SD-card
->>> when booting from eMMC"), the spi1 bootph properties were mistakenly
->>> removed meaning, so re-add them back to fix SPI-NOR flash not being
->>> found in U-Boot pre-reloc as required for RK3399 Puma.
->>
->> Good catch, for TPL/SPL the bootph props is propagated, something that
->> is not done for pre-reloc.
->>
-> 
-> Can you tell us a bit more about this? I know that the pinctrl nodes 
-> marked for pre-reloc recursively apply the same to their parent, but 
-> couldn't find anything similar for other subsystems for example. What 
-> did I miss in my 5m search?
+On Sat, 15 Jun 2024 at 01:03, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Heinrich
+>
+> resending the reply, I accidentally sent half of the message...
+>
+> On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 14.06.24 09:01, Ilias Apalodimas wrote:
+> > > On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >>
+> > >> On 6/14/24 08:03, Ilias Apalodimas wrote:
+> > >>> Hi Simon,
+> > >>>
+> > >>> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
+> > >>>>
+> > >>>> It does not make sense to enable all SHA algorithms unless they are
+> > >>>> needed. It bloats the code and in this case, causes chromebook_link to
+> > >>>> fail to build. That board does use the TPM, but not with measured boot,
+> > >>>> nor EFI.
+> > >>>>
+> > >>>> Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+> > >>>> add them to MEASURED_BOOT as well.
+> > >>>>
+> > >>>> Note that the original commit combines refactoring and new features,
+> > >>>> which makes it hard to see what is going on.
+> > >>>>
+> > >>>> Fixes: 97707f12fda tpm: Support boot measurements
+> > >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >>>> ---
+> > >>>>
+> > >>>> Changes in v2:
+> > >>>> - Put the conditions under EFI_TCG2_PROTOCOL
+> > >>>> - Consider MEASURED_BOOT too
+> > >>>>
+> > >>>>    boot/Kconfig | 4 ++++
+> > >>>>    lib/Kconfig  | 4 ----
+> > >>>>    2 files changed, 4 insertions(+), 4 deletions(-)
+> > >>>>
+> > >>>> diff --git a/boot/Kconfig b/boot/Kconfig
+> > >>>> index 6f3096c15a6..b061891e109 100644
+> > >>>> --- a/boot/Kconfig
+> > >>>> +++ b/boot/Kconfig
+> > >>>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
+> > >>>>    config MEASURED_BOOT
+> > >>>>           bool "Measure boot images and configuration when booting without EFI"
+> > >>>>           depends on HASH && TPM_V2
+> > >>>> +       select SHA1
+> > >>>> +       select SHA256
+> > >>>> +       select SHA384
+> > >>>> +       select SHA512
+> > >>>>           help
+> > >>>>             This option enables measurement of the boot process when booting
+> > >>>>             without UEFI . Measurement involves creating cryptographic hashes
+> > >>>> diff --git a/lib/Kconfig b/lib/Kconfig
+> > >>>> index 189e6eb31aa..568892fce44 100644
+> > >>>> --- a/lib/Kconfig
+> > >>>> +++ b/lib/Kconfig
+> > >>>> @@ -438,10 +438,6 @@ config TPM
+> > >>>>           bool "Trusted Platform Module (TPM) Support"
+> > >>>>           depends on DM
+> > >>>>           imply DM_RNG
+> > >>>> -       select SHA1
+> > >>>> -       select SHA256
+> > >>>> -       select SHA384
+> > >>>> -       select SHA512
+> > >>>
+> > >>> I am not sure this is the right way to deal with your problem.
+> > >>> The TPM main functionality is to measure and extend PCRs, so shaXXXX
+> > >>> is really required. To make things even worse, you don't know the PCR
+> > >>> banks that are enabled beforehand. This is a runtime config of the
+> > >>> TPM.
+> > >>
+> > >> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is selected, U-Boot
+> > >> cannot extend PCRs. So it seems fine to let these two select the
+> > >> complete set of hashing algorithms. As Simon pointed out for
+> > >> EFI_TCG2_PROTOCOL this is already done in lib/efi_loader/Kconfig.
+> > >
+> > > It can. The cmd we have can extend those pcrs -- e.g tpm2 pcr_extend 8
+> > > 0xb0000000
 
-v2024.04-rc1 added support to propagate bootph props using fdtgrep for
-the u-boot-tpl/spl.dtb files, however pre-reloc the main u-boot.dtb (or
-possible the FDT included in FIT) that is not processed by fdtgrep.
+That's pretty normal for U-Boot though, since we want to avoid lots of
+growth for things people might want control over. We can enable or
+disable the SHA for the board, if this functionality is used outside
+of measured boot and tcg2, but someone is enabling the tpm command.
 
-fdtgrep: Allow propagating properties up to supernodes
-https://source.denx.de/u-boot/u-boot/-/commit/7a06cc2027c0169c462da63a68fa269c0d59a950
+> >
+> > So this patch should also consider CMD_TPM_V2 and CMD_TPM_V1.
+> >
+> > TPM v1 only needs SHA-1.
+>
+> I still prefer to imply all algos.
 
-Makefile: Use the fdtgrep -u flag
-https://source.denx.de/u-boot/u-boot/-/commit/aca95282c1b72c41d8e72984b1dceb15f396b2f8
+'imply' would be OK in this case as I can disable it for that board. I
+don't think it is in the spirit of U-Boot though.
 
-I solely relied, wrongly, on this new propagation to justify the removal
-of the spi1 node, without ever thinking about that pre-reloc uses an
-unprocessed version of the device tree.
+isn't someone checking the growth in U-Boot? Or do so few boards have
+TPMs that it didn't register? The size growth was 3.2KB on
+chromebook_link.
+
+>
+> >
+> > In cmd/tpm-v2.c do_tpm2_pcr_extend() and do_tpm_pcr_read() assume
+> > SHA256. Function tpm_pcr_extend() shows the same limitation. This bug
+> > should be fixed. But as is CMD_TPM_V2 seems only to require CONFIG_SHA256.
+>
+> Isn't [0] fixing this?
+>
+> [0] https://source.denx.de/u-boot/u-boot/-/commit/89aa8463cdf3919ca4f04fc24ec8b154ff56d97e
+> Thanks
+> /Ilias
+> >
+> > Best regards
+> >
+> > Heinrich
+> >
+> > >
+> > > Regards
+> > > /Ilias
+> > >>
+> > >> Even if U-Boot does not support measured boot (EFI or non-EFI) we might
+> > >> still be using the TPMs RNG.
+> > >>
+> > >> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > >>
+> > >>>
+> > >>>    So this would make the TPM pretty useless. Can't you remove something
+> > >>> that doesn't break functionality?
+> > >>>
+> > >>> Thanks
+> > >>> /Ilias
+> > >>>>           help
+> > >>>>             This enables support for TPMs which can be used to provide security
+> > >>>>             features for your board. The TPM can be connected via LPC or I2C
+> > >>>> --
+> > >>>> 2.34.1
+> > >>>>
+> > >>
+> >
 
 Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+Simon
