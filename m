@@ -4,91 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ABDAC27C79
-	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 17:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BDF2C27C79
+	for <u-boot@archiver.kernel.org>; Mon, 17 Jun 2024 17:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B04358826E;
-	Mon, 17 Jun 2024 19:16:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71EBC883AB;
+	Mon, 17 Jun 2024 19:19:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N4LVAlKc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YAfOzdRd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA3BE8826E; Mon, 17 Jun 2024 19:16:31 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id CEBB6883AB; Mon, 17 Jun 2024 19:19:45 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 709208819D
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 19:16:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92F258837D
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 19:19:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3c9cc681e4fso2302173b6e.0
- for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:16:29 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3d4430b8591so275707b6e.2
+ for <u-boot@lists.denx.de>; Mon, 17 Jun 2024 10:19:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718644588; x=1719249388; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718644782; x=1719249582; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sV0ofEtPGmvrr+KPI8eV5dY5S82ECsdXlz5nNdDU6OI=;
- b=N4LVAlKcP7rnFJQSh5RGWenCfbAlkvKFjQQMmFtasC2fp9V1IVDb7TNyXk1XlWdz4M
- vtvYcUTOMhamf0hZg2wePuasDFxyQfVBNP9MW+XwHH83tM+0yV89YwFMK+7P/3hqko2d
- p+ykbc9XsxHVyn0gI4sht5oenNZrDxqMe1GsA=
+ bh=PYctsSTg6139TU6EZmRa8lEU5DJjAPFhhYbtx8tLv+k=;
+ b=YAfOzdRdK9Yh0gPAbKj5TcL0wO6gMmOQsAvp2LWMgv2IBOg7wulbYCeskk/yrB+Jwk
+ 6EpHJjXjDMv9UYOp+CWkrrLAGu79hutxQDJCCLCXn5O1T4Cp9RhILizu6vAIuVSIWXnV
+ fkFvy/NZnoBjeeX98VbzL0Onf/bQrwd4pZSrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718644588; x=1719249388;
+ d=1e100.net; s=20230601; t=1718644782; x=1719249582;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sV0ofEtPGmvrr+KPI8eV5dY5S82ECsdXlz5nNdDU6OI=;
- b=wYQ5uguRVBj4eABwTkEK520JnqkqXVjMCgZHyQzvZM0Untgg13E3gs+Vkp4T3LG5tM
- lM1btnI7D7nTJ9YMONMv4VS6Iyrn2p3zzFPz+h4L+hVW0ovkSXVv/vPbfBgR7lwjeUK6
- LyhqsaH4k4D9a03uswUYtz2xmjRa2dFyrybYI/LPqJEdumULU0Gpuano4yLijiOmHPyL
- emWCBzyQrIw9a0mlJr/cL+Fw1x6YL0uGvP03+yeP7QNogS4fus1g43tiROdfx48AABST
- QJnK+KsNcFnTTJS4lsSqMRqI199Q8m/lCnLi9z7hQrVTlKRPJwLUvgl8LD9GBXblXMEH
- BF2Q==
+ bh=PYctsSTg6139TU6EZmRa8lEU5DJjAPFhhYbtx8tLv+k=;
+ b=uihYJaxCtYIg+75x+9MXvczl0dAGLXh0l5+Ar6O3ga9xmc53SfjjIahiLK5N9/A/5R
+ xDy+VOik3T6DZ6CtJSI4Cbd/djBKcpXBcC4Zd5QgBz6n14E+tFQ7DDZxFHUM0zG08VcI
+ 7tNgJng1efaa16saIu4LWbixmkOg5146UvhJbIraBJm7koqzbJjcKZ7N9yq8R0zNBsHn
+ 5OqvA0IelKBeuK72FNlhTpvaYuZkDP2ncQQmatBUt/Ybdi7/BIt/3lXXKPdya0c3WBmg
+ 6xTLrfqf/FPkb5rNVtO5XCEMXvcMQlX4plAKQrGht2hgBeTM39Ueq4IA17N6X5YCtdo3
+ usyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJrxkxEi77wA2x90WZlKVt3xSpG4HEK5qD+s/2Syna/KIHP9LG0AHnX9VFNHAgodsZqc2z7JRffJrhrnHj5oHA8dX0OA==
-X-Gm-Message-State: AOJu0YyKm42SNe7Xjw6R0L8XdXANsR7qdTZP67IKR8k3KE7t6ehKg/ma
- v8AeRx2R2PnC6rzMaopFeP8cVpxwJgQIz6riqhIyrbFE9g4J90rTkyJ7p4wHJ/A=
-X-Google-Smtp-Source: AGHT+IFwvSijI9jnLr05dbXxOI3hKZ4cc/mVJtdr9chjzRJXKs9CxH0pbuMhpbfKzmTkaGLy6sEcjQ==
-X-Received: by 2002:a05:6808:23c1:b0:3d2:4667:171f with SMTP id
- 5614622812f47-3d24e8bff3bmr14933944b6e.11.1718644588099; 
- Mon, 17 Jun 2024 10:16:28 -0700 (PDT)
+ AJvYcCWU37aplRR3AhK8ceokANH+Jl+dEJoOOLKA62tov8U3fXo4vfD3HpLcGdO/snTNAOs60NAMgxhDLSU660ps6caOe9EQNQ==
+X-Gm-Message-State: AOJu0YycQ+OYrcoki6uywrSV9E6Ut8/IqPvJAcriAPyf+vyXXHkcvjQO
+ FVNjtsBWfc61fliSDhaS+vqNtjHSrmRujnmHNldBcWtmF8kWMbTMVIX79lzMWks=
+X-Google-Smtp-Source: AGHT+IFnSSiJ8v38qfvnmy0KH6J3+oZxAjsywhfbxzhPIFBOGoildLOkpvV1G+KUC5b1Ron64d7vLw==
+X-Received: by 2002:a05:6808:f15:b0:3d2:2003:983a with SMTP id
+ 5614622812f47-3d24ea2d010mr12883328b6e.59.1718644782209; 
+ Mon, 17 Jun 2024 10:19:42 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
  [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d2475e49absm1529465b6e.12.2024.06.17.10.16.26
+ 5614622812f47-3d2476c0a87sm1550999b6e.45.2024.06.17.10.19.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jun 2024 10:16:27 -0700 (PDT)
-Date: Mon, 17 Jun 2024 11:16:23 -0600
+ Mon, 17 Jun 2024 10:19:41 -0700 (PDT)
+Date: Mon, 17 Jun 2024 11:19:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-Message-ID: <20240617171623.GY68077@bill-the-cat>
-References: <20240610145920.3302001-1-sjg@chromium.org>
- <20240610145920.3302001-3-sjg@chromium.org>
- <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
- <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
- <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
- <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
- <CAC_iWjL-W604ne_O+U6B3_oGXJtQqZwak4N2qVRSnqdsAz=TbQ@mail.gmail.com>
- <CAFLszTigrcPCH3wwZUZAk75QttVS+cPMoj=hZJ9Ko9DqyN5vVA@mail.gmail.com>
+To: Vasileios Amoiridis <vassilisamir@gmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, hs@denx.de, pro@denx.de,
+ vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 2/2] doc: api: bootcount: Convert to rST documentation
+Message-ID: <20240617171939.GZ68077@bill-the-cat>
+References: <20240613220212.37078-1-vassilisamir@gmail.com>
+ <20240613220212.37078-3-vassilisamir@gmail.com>
+ <6cf18006-bed8-43cb-aff8-591781f8c3ac@cherry.de>
+ <20240616182053.GA4275@vamoiridPC>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yYg7OTj/UuG3tAmL"
+ protocol="application/pgp-signature"; boundary="HMCW/f9N5YGWfbN9"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTigrcPCH3wwZUZAk75QttVS+cPMoj=hZJ9Ko9DqyN5vVA@mail.gmail.com>
+In-Reply-To: <20240616182053.GA4275@vamoiridPC>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,154 +96,201 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yYg7OTj/UuG3tAmL
+--HMCW/f9N5YGWfbN9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 17, 2024 at 07:53:22AM -0600, Simon Glass wrote:
-> Hi,
+On Sun, Jun 16, 2024 at 08:20:53PM +0200, Vasileios Amoiridis wrote:
+> On Fri, Jun 14, 2024 at 10:43:09AM +0200, Quentin Schulz wrote:
+> > Hi Vasileios,
+> >=20
+> > On 6/14/24 12:02 AM, Vasileios Amoiridis wrote:
+> > > Move to the new documentation style with rST formatting.
+> > >=20
+> > > Signed-off-by: Vasileios Amoiridis <vassilisamir@gmail.com>
+> > > ---
+> > >   doc/README.bootcount  | 53 ---------------------------------------
+> > >   doc/api/bootcount.rst | 58 ++++++++++++++++++++++++++++++++++++++++=
++++
+> > >   2 files changed, 58 insertions(+), 53 deletions(-)
+> > >   delete mode 100644 doc/README.bootcount
+> > >   create mode 100644 doc/api/bootcount.rst
+> > >=20
+> > > diff --git a/doc/README.bootcount b/doc/README.bootcount
+> > > deleted file mode 100644
+> > > index 0f4ffb6828..0000000000
+> > > --- a/doc/README.bootcount
+> > > +++ /dev/null
+> > > @@ -1,53 +0,0 @@
+> > > -.. SPDX-License-Identifier: GPL-2.0+
+> > > -
+> > > -Boot Count Limit
+> > > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > -
+> > > -This is enabled by CONFIG_BOOTCOUNT_LIMIT.
+> > > -
+> > > -This allows to detect multiple failed attempts to boot Linux.
+> > > -
+> > > -After a power-on reset, the "bootcount" variable will be initialized=
+ to 1, and
+> > > -each reboot will increment the value by 1.
+> > > -
+> > > -If, after a reboot, the new value of "bootcount" exceeds the value of
+> > > -"bootlimit", then instead of the standard boot action (executing the=
+ contents of
+> > > -"bootcmd"), an alternate boot action will be performed, and the cont=
+ents of
+> > > -"altbootcmd" will be executed.
+> > > -
+> > > -If the variable "bootlimit" is not defined in the environment, the B=
+oot Count
+> > > -Limit feature is disabled. If it is enabled, but "altbootcmd" is not=
+ defined,
+> > > -then U-Boot will drop into interactive mode and remain there.
+> > > -
+> > > -It is the responsibility of some application code (typically a Linux
+> > > -application) to reset the variable "bootcount" to 0 when the system =
+booted
+> > > -successfully, thus allowing for more boot cycles.
+> > > -
+> > > -CONFIG_BOOTCOUNT_FS
+> > > ---------------------
+> > > -
+> > > -This adds support for maintaining boot count in a file on a filesyst=
+em.
+> > > -Supported filesystems are FAT and EXT. The file to use is defined by:
+> > > -
+> > > -CONFIG_SYS_BOOTCOUNT_FS_INTERFACE
+> > > -CONFIG_SYS_BOOTCOUNT_FS_DEVPART
+> > > -CONFIG_SYS_BOOTCOUNT_FS_NAME
+> > > -
+> > > -The format of the file is:
+> > > -
+> > > -=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > -type entry
+> > > -=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > -u8   magic
+> > > -u8   version
+> > > -u8   bootcount
+> > > -u8   upgrade_available
+> > > -=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > -
+> > > -To prevent unattended usage of "altbootcmd", the "upgrade_available"=
+ variable is
+> > > -used.
+> > > -If "upgrade_available" is 0, "bootcount" is not saved.
+> > > -If "upgrade_available" is 1, "bootcount" is saved.
+> > > -So a userspace application should take care of setting the "upgrade_=
+available"
+> > > -and "bootcount" variables to 0, if the system boots successfully.
+> > > -This also avoids writing the "bootcount" information on all reboots.
+> > > diff --git a/doc/api/bootcount.rst b/doc/api/bootcount.rst
+> > > new file mode 100644
+> > > index 0000000000..9435a7ef15
+> > > --- /dev/null
+> > > +++ b/doc/api/bootcount.rst
+> > > @@ -0,0 +1,58 @@
+> > > +.. SPDX-License-Identifier: GPL-2.0+
+> > > +
+> > > +Boot Count Limit
+> > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > +
+> > > +This is enabled by CONFIG_BOOTCOUNT_LIMIT.
+> > > +
+> > > +This allows to detect multiple failed attempts to boot Linux.
+> > > +
+> > > +After a power-on reset, the ``bootcount`` variable will be initializ=
+ed to 1, and
+> > > +each reboot will increment the value by 1.
+> > > +
+> > > +If, after a reboot, the new value of ``bootcount`` exceeds the value=
+ of
+> > > +``bootlimit``, then instead of the standard boot action (executing t=
+he contents
+> > > +of ``bootcmd``), an alternate boot action will be performed, and the=
+ contents of
+> > > +``altbootcmd`` will be executed.
+> > > +
+> > > +If the variable ``bootlimit`` is not defined in the environment, the=
+ Boot Count
+> > > +Limit feature is disabled. If it is enabled, but ``altbootcmd`` is n=
+ot defined,
+> > > +then U-Boot will drop into interactive mode and remain there.
+> > > +
+> > > +It is the responsibility of some application code (typically a Linux
+> > > +application) to reset the variable ``bootcount`` to 0 when the syste=
+m booted
+> > > +successfully, thus allowing for more boot cycles.
+> > > +
+> > > +CONFIG_BOOTCOUNT_FS
+> > > +--------------------
+> > > +
+> > > +This adds support for maintaining boot count in a file on a filesyst=
+em.
+> > > +Tested filesystems are FAT and EXT. The file to use is defined by:
+> > > +
+> > > +CONFIG_SYS_BOOTCOUNT_FS_INTERFACE
+> > > +CONFIG_SYS_BOOTCOUNT_FS_DEVPART
+> > > +CONFIG_SYS_BOOTCOUNT_FS_NAME
+> > > +
+> > > +The format of the file is:
+> > > +
+> > > +.. list-table::
+> > > +   :header-rows: 1
+> > > +
+> > > +   * - type
+> > > +     - entry
+> > > +   * - u8
+> > > +     - magic
+> > > +   * - u8
+> > > +     - version
+> > > +   * - u8
+> > > +     - bootcount
+> > > +   * - u8
+> > > +     - upgrade_available
+> > > +
+> > > +To prevent unattended usage of ``altbootcmd``, the ``upgrade_availab=
+le``
+> >=20
+> > I think what was meant here is likely "unintended" (not deliberate) rat=
+her
+> > than "unattended" (unsupervised)?
+> >=20
+> > I understand you didn't introduce this and just migrated it to rST, so =
+free
+> > patch to whoever feels like sending one :)
+> >=20
+> > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >=20
+> > Thanks!
+> > Quentin
 >=20
-> On Sat, 15 Jun 2024 at 01:03, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Heinrich
-> >
-> > resending the reply, I accidentally sent half of the message...
-> >
-> > On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypron.glpk@gmx.de> =
-wrote:
-> > >
-> > > On 14.06.24 09:01, Ilias Apalodimas wrote:
-> > > > On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <xypron.glpk@gmx.=
-de> wrote:
-> > > >>
-> > > >> On 6/14/24 08:03, Ilias Apalodimas wrote:
-> > > >>> Hi Simon,
-> > > >>>
-> > > >>> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrot=
-e:
-> > > >>>>
-> > > >>>> It does not make sense to enable all SHA algorithms unless they =
-are
-> > > >>>> needed. It bloats the code and in this case, causes chromebook_l=
-ink to
-> > > >>>> fail to build. That board does use the TPM, but not with measure=
-d boot,
-> > > >>>> nor EFI.
-> > > >>>>
-> > > >>>> Since EFI_TCG2_PROTOCOL already selects these options, we just n=
-eed to
-> > > >>>> add them to MEASURED_BOOT as well.
-> > > >>>>
-> > > >>>> Note that the original commit combines refactoring and new featu=
-res,
-> > > >>>> which makes it hard to see what is going on.
-> > > >>>>
-> > > >>>> Fixes: 97707f12fda tpm: Support boot measurements
-> > > >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >>>> ---
-> > > >>>>
-> > > >>>> Changes in v2:
-> > > >>>> - Put the conditions under EFI_TCG2_PROTOCOL
-> > > >>>> - Consider MEASURED_BOOT too
-> > > >>>>
-> > > >>>>    boot/Kconfig | 4 ++++
-> > > >>>>    lib/Kconfig  | 4 ----
-> > > >>>>    2 files changed, 4 insertions(+), 4 deletions(-)
-> > > >>>>
-> > > >>>> diff --git a/boot/Kconfig b/boot/Kconfig
-> > > >>>> index 6f3096c15a6..b061891e109 100644
-> > > >>>> --- a/boot/Kconfig
-> > > >>>> +++ b/boot/Kconfig
-> > > >>>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
-> > > >>>>    config MEASURED_BOOT
-> > > >>>>           bool "Measure boot images and configuration when booti=
-ng without EFI"
-> > > >>>>           depends on HASH && TPM_V2
-> > > >>>> +       select SHA1
-> > > >>>> +       select SHA256
-> > > >>>> +       select SHA384
-> > > >>>> +       select SHA512
-> > > >>>>           help
-> > > >>>>             This option enables measurement of the boot process =
-when booting
-> > > >>>>             without UEFI . Measurement involves creating cryptog=
-raphic hashes
-> > > >>>> diff --git a/lib/Kconfig b/lib/Kconfig
-> > > >>>> index 189e6eb31aa..568892fce44 100644
-> > > >>>> --- a/lib/Kconfig
-> > > >>>> +++ b/lib/Kconfig
-> > > >>>> @@ -438,10 +438,6 @@ config TPM
-> > > >>>>           bool "Trusted Platform Module (TPM) Support"
-> > > >>>>           depends on DM
-> > > >>>>           imply DM_RNG
-> > > >>>> -       select SHA1
-> > > >>>> -       select SHA256
-> > > >>>> -       select SHA384
-> > > >>>> -       select SHA512
-> > > >>>
-> > > >>> I am not sure this is the right way to deal with your problem.
-> > > >>> The TPM main functionality is to measure and extend PCRs, so shaX=
-XXX
-> > > >>> is really required. To make things even worse, you don't know the=
- PCR
-> > > >>> banks that are enabled beforehand. This is a runtime config of the
-> > > >>> TPM.
-> > > >>
-> > > >> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is selected, U-Boot
-> > > >> cannot extend PCRs. So it seems fine to let these two select the
-> > > >> complete set of hashing algorithms. As Simon pointed out for
-> > > >> EFI_TCG2_PROTOCOL this is already done in lib/efi_loader/Kconfig.
-> > > >
-> > > > It can. The cmd we have can extend those pcrs -- e.g tpm2 pcr_exten=
-d 8
-> > > > 0xb0000000
->=20
-> That's pretty normal for U-Boot though, since we want to avoid lots of
-> growth for things people might want control over. We can enable or
-> disable the SHA for the board, if this functionality is used outside
-> of measured boot and tcg2, but someone is enabling the tpm command.
->=20
-> > >
-> > > So this patch should also consider CMD_TPM_V2 and CMD_TPM_V1.
-> > >
-> > > TPM v1 only needs SHA-1.
-> >
-> > I still prefer to imply all algos.
->=20
-> 'imply' would be OK in this case as I can disable it for that board. I
-> don't think it is in the spirit of U-Boot though.
->=20
-> isn't someone checking the growth in U-Boot? Or do so few boards have
-> TPMs that it didn't register? The size growth was 3.2KB on
-> chromebook_link.
+> Well if Tom agrees also with the previous patch then maybe I can send a v4
+> correcting those 2 issues it's fine for me!
 
-As always, yes, nearly every PR (I don't check the ones that touch just
-a single board for example) gets a world build before/after. In this
-case I likely assumed that it was acceptable growth for enabling
-features. It sounds like some of the chromebook boards need to be
-setting the features to cause link failure if a size is exceeded?
+Yes, please do a v4 with that and adding this to the index in
+doc/api/index.rst so that CI will not fail.
 
 --=20
 Tom
 
---yYg7OTj/UuG3tAmL
+--HMCW/f9N5YGWfbN9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZwb2QACgkQFHw5/5Y0
-tywmqgwAmVEaKJ7GMucXyq1qC+YS5aFkA2TXS9WvZq1k8E7WEMw1vXGdE2F8ZBpa
-V7I74xr7wkXVUXKPGXIbPD5Iy1zlta5ha85YPFsoY5GcFiJr0RfvmXdPS9sGeoSI
-VMGjpbJDEIw1zRt0FZ7MF2lj64AxMFOUUXTugRkOT1IroxEyfG3Y6i2sx1YcT2my
-ULulqjDOS99BnnSWH5VLULPG0dlBBg3lePpW8xRuceJnr4uidKzTUK5XyJpWmf+d
-aK1XH+D256JYWD6bZJ8oyk+55UhuPKPo/QMTKAgX7uyuG8zh0Eb/KvKk3Etn0YFA
-nXEm0bVQLaG4PbDaSqVD0nxl5BSxJGrP2j6WnRpxTKLHWwAdKRBXPK6wgQpAolMF
-ehP7ISnZnruf8iC+XAaX11A52bjC3+DbBDnLpMfZoEXmSTm4UCCgHixL/6JJOCpD
-+GhoHOyieDph/S/B2JigQuJvTeFC3nSNNqzB5EY/z1AQ3Zxb1P+tvOhFqjAnDsh5
-yP+jdkQx
-=HWty
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZwcCsACgkQFHw5/5Y0
+tyxLLwv4qez2JD1D2YpWnqEmnjZTPIIi86aMkvwGOC/n0QCfeT8O5M/edqiPXwmP
+RM2z+3YLdfymDKUsqv5mRRUSyX55255WzRQip3l6SNb6ghxZkoPZRDWCGTlmsBZo
+7T4x8IqOsvrNdMudrxpFUzcEDnk+kQbdZZEVOJuRW1JoNrZvE78EuuvWzuzFNUog
+Qm8w8I41QFnMlf+c9HfqE9Oyo2ctJLuAQFIGTow2hsFDOcXjmY+/+TjXaf66p0sK
+Kr+fUl7F5LDTXS+ejSalp+GVRl4F/LVmURiGCGIAR4E9jxCW0oQdTfbRzCA9Tk7n
+Kd9D2M2Gl+PZa9eUxqFYWXQ+yLTvkxTMhkim0E2I5AfaPYBnhWLAGON/NUnAv4/y
+KXYKS+GyqxCfSoFi7yzi54OMkX/7Q9LW6DYQ3mxgc9DnC7VhbAuTIUH0xfElX+DN
+tIiDRmRKS+w+14lSWqC0nIWI4NnwrhGjFtHQFSFE0hpkfZjT8iNyoR0ZjXJRH4To
+PmvRLTI=
+=6GY4
 -----END PGP SIGNATURE-----
 
---yYg7OTj/UuG3tAmL--
+--HMCW/f9N5YGWfbN9--
