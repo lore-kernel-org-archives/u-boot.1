@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA154C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F52CC2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:54:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9769883DA;
-	Tue, 18 Jun 2024 16:53:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3728A883F2;
+	Tue, 18 Jun 2024 16:53:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QjNcHEce";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oLg3kEec";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 783DA88363; Tue, 18 Jun 2024 16:53:26 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 2C36188363; Tue, 18 Jun 2024 16:53:27 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B7F882D4
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:53:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1994A882DB
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:53:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-259884ef4ddso212621fac.2
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:53:24 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6f971cb3c9cso3086450a34.1
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:53:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718722403; x=1719327203; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718722404; x=1719327204; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CUzqRLp3JeiBioyH9ep4b0QCKidwEpTusAQ10yuFU2U=;
- b=QjNcHEceN4dMmsWBXL9V/DZAvTp0KlQ9c1UiGlfWr/kIe9PkXJcIDaY0eCDfi9cwKC
- O9x/dDilvIFZQTarOwfkPQJBj0NGXJk5vXfy1mpgBBtkW0JlVZhwFXSoMEZPm8OTs9kU
- 2pqwFUWJz25HLGZLTW7hiCpFUgkm/+JNWp0k4=
+ bh=byWyZlwXBjG7HNbWuL1FqmxWEaZ7uunP1r5D0HUyAjI=;
+ b=oLg3kEec7A9QeeVinMRyy7QVc4b07CJ92U4GVzjHxoOazxgYcR0UlWroejO2ijGvAO
+ siCAI6r96z2mpwTqmeH8pDZaA8ec7zV0WAqL4vSbhoCsLAOlaIRiwflcd89mr+NYX1tS
+ jTlQHfbNsAiWPnYrfW+Wf5rSVGOAc4KorV4Dc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718722403; x=1719327203;
+ d=1e100.net; s=20230601; t=1718722404; x=1719327204;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CUzqRLp3JeiBioyH9ep4b0QCKidwEpTusAQ10yuFU2U=;
- b=uQtJNF/JQups2OUOLG95gTp6Wj/HWem0E5zP7M6L/BgPg407hoa8EppQY/bz2xduHp
- VuiDsWJ6i1yA53TWxdPCKN3GGt5QT5Vyua+8yJz1/SMia2C70oXFAgGDG9HreEuOvz4H
- 5QkLb4xkBEiEP9lcB9BuHYH49ZxxxK9JYRX2YbbG+rZQdJHyEupsUw8FODJqD5DtcAeU
- gIDA2/vqHuKSBAQiXWSYxa2oGTox3b9WHHIimX+uXShdysQPeq61htRQCN9mb1X/zyRT
- dvaOXel0tuN+3r0YxFfzSBAhSfbM0dHaEbYIpnLCcb41cnOhfnnPR71uQwPeebi0BkUN
- YqYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXRmrEJ1n1tijB0+qfdHkf3TfOiKf60AoWWcvbIjhHgsOoHJBd9BTODpjl8TnWAr2p0b6RashVStEQ9We3nGy+hk+8fHA==
-X-Gm-Message-State: AOJu0YznZTfbe4DWCoCqieQ72rAkqQO/qi+Ah9as1PnwWo+11e+Ld3vi
- zJGyGBlVXYeBs1ZjiETHa69u2s1xmSwfwCe0ERXNbJuXLzCqty/wdiQQyGbgguYCV52HjyARZGm
- TO1OA5g==
-X-Google-Smtp-Source: AGHT+IHbs7a9x2Y1zwqSxSple6reEl6ALzinRGeEluSdAd1YhB6us3O0nDBKCjXUfYr0q+WQ1r8OCw==
-X-Received: by 2002:a05:6870:9706:b0:254:a624:3ada with SMTP id
- 586e51a60fabf-25c94998041mr13544fac.15.1718722403134; 
+ bh=byWyZlwXBjG7HNbWuL1FqmxWEaZ7uunP1r5D0HUyAjI=;
+ b=j+tfUUEtePli3N/TJVL8JMtEZJzNYekLlizb7tDTZFyXieqrGjhrZkMFSRxO1eGU8o
+ 0CtDzpTDY874rsr9sie1KjKsow7m4adW9ff9O1q22HWjSDalOAa2Z1cLyUgw+sdNOiNr
+ q/NrX/s/dlv/SMbqRdz/PwJGR/d3UDFIOC8q12nzbw5exKPbgAcePLQhe1HwIBkwiBRI
+ oEP86ZGFDoicECDNaZmm4joE1ZqYY5Mb214WF09aPFQHZxSNdA3R4h3OBmUUdA5MT7wq
+ FXbgCdtjpWaReQ10HifQjXw/ovWWF8cz9lPy7Y4MxSPg9tBaMQTy9DEfi4PSedxdHWhA
+ muCQ==
+X-Gm-Message-State: AOJu0YzSTorl1J+W5289VmrOlRullp2hfbN9FVzV/2HQrJ/ArbTxvl7S
+ vZNhGz7uFh2jPHz8FyHMo99o6/0TVqiKmmauBovKBbFoQga1KA9/wpGyI3Apjw+CYvA8qerjq/j
+ CrU8CVA==
+X-Google-Smtp-Source: AGHT+IFAP5JSPuQzC/LOg8iBo1ePH2coUwWQdcHQQAVS/2BEtn6S8vAyNLgsmqc3Iy/PPgvn3jUsMw==
+X-Received: by 2002:a05:6870:2252:b0:25a:6d14:f84a with SMTP id
+ 586e51a60fabf-25a6d14f8d0mr629162fac.42.1718722403896; 
  Tue, 18 Jun 2024 07:53:23 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-45.totalplay.net.
  [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567a94b7besm3202888fac.6.2024.06.18.07.53.22
+ 586e51a60fabf-2567a94b7besm3202888fac.6.2024.06.18.07.53.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 07:53:22 -0700 (PDT)
+ Tue, 18 Jun 2024 07:53:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: sjg@chromium.org, u-boot@lists.denx.de, xypron.glpk@gmx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Maxim.Moskalets@kaspersky.com
-In-Reply-To: <20240605184334.13973-1-Maxim.Moskalets@kaspersky.com>
-References: <20240605184334.13973-1-Maxim.Moskalets@kaspersky.com>
-Subject: Re: [PATCH v5] cmd: move ELF load and boot to lib/elf.c
-Message-Id: <171872240241.3307069.15041492101076975578.b4-ty@konsulko.com>
-Date: Tue, 18 Jun 2024 08:53:22 -0600
+To: Dhruva Gole <d-gole@ti.com>
+Cc: u-boot@lists.denx.de, Vibhore Vardhan <vibhore@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>
+In-Reply-To: <20240607085640.2900395-1-d-gole@ti.com>
+References: <20240607085640.2900395-1-d-gole@ti.com>
+Subject: Re: [PATCH 0/2] binman: am62a/62p: add support for signing
+ TIFSStub
+Message-Id: <171872240326.3307069.17243775213606021010.b4-ty@konsulko.com>
+Date: Tue, 18 Jun 2024 08:53:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,14 +92,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 05 Jun 2024 21:43:34 +0300, Maxim Moskalets wrote:
+On Fri, 07 Jun 2024 14:26:39 +0530, Dhruva Gole wrote:
 
-> Loading and running the ELF image is the responsibility of the
-> library and should not be associated with the command line interface.
+> Add support for signing of TIFSSTUB images for HSSE, HSFS and GP devices
+> and include them in tispl.bin and tispl.bin_unsigned in AM62A.
 > 
-> It is also required to run ELF images from FIT with the bootm command
-> so as not to depend on the command line interface.
+> AM62P doesn't have any GP support, hence not applicable.
 > 
+> These changes are required for Low Power Mode features to work on these
+> SoCs as this TIFS Stub gets used in the Low Power Exit sequences.
 > 
 > [...]
 
