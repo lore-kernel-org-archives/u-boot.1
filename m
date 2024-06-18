@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF68C2BB85
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 04:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CC0C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 04:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D664D88438;
-	Tue, 18 Jun 2024 06:50:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 456928844D;
+	Tue, 18 Jun 2024 06:50:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="juO+iIdT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="J65Bz+mg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D0B588431; Tue, 18 Jun 2024 06:50:29 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 459598832D; Tue, 18 Jun 2024 06:50:35 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2CBB88445
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 06:50:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E1538844D
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 06:50:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45I4oOKH100158;
- Mon, 17 Jun 2024 23:50:24 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45I4oVZ2123524;
+ Mon, 17 Jun 2024 23:50:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718686224;
- bh=zgPxri41CWIkDC1y8FfnDs5qvwpc37zVhLhw5Uo8mG4=;
+ s=ti-com-17Q1; t=1718686231;
+ bh=hMZfXkLVzQAdHJC2sKroojbi4dNba1cVgMbfIKd8qpY=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=juO+iIdTd+64CzJUZFwsCILu3dqeaf+NMQch4EbSSWxJi2+f0cZ7FXBpZ0EYlf9Uh
- CAbMzvUvxM5xcDCrVu+TkE2Zdp+fU3xIw/WdC0Ybf29FP2hHRceKce3YMkDRnACi6Z
- wPeJfwlz/c8geyO+dZIZrlDCNjeXUZPM/DrNhXeQ=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45I4oOd6119895
+ b=J65Bz+mga5DQfqgEPYQ3VmjrC1LwsQ2XOlMSnyTS89N3YYnC62pzZFKDbO0C7i4hi
+ sPdaX0q1xkucNUb/7VTvbdVfhENxDNqmNzY4txLNmmIW3mwm1uO/hJl+OCahB6pNa+
+ MzkbUNLNZt5DzC4zXApokKfXF7npmQ7Ufjn+QMWk=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45I4oUcR007029
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 17 Jun 2024 23:50:24 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 17 Jun 2024 23:50:31 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 17
- Jun 2024 23:50:24 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 23:50:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 17 Jun 2024 23:50:24 -0500
+ Frontend Transport; Mon, 17 Jun 2024 23:50:30 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45I4oAjJ078292;
- Mon, 17 Jun 2024 23:50:21 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45I4oAjK078292;
+ Mon, 17 Jun 2024 23:50:28 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
  Menon <nm@ti.com>, <c-shilwant@ti.com>, <m-chawdhry@ti.com>,
  <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Dhruva Gole
  <d-gole@ti.com>
-Subject: [PATCH v4 1/2] arm: dts: k3-am625-beagleplay: Add symlinks for
- tiboot3 and tispl
-Date: Tue, 18 Jun 2024 10:19:45 +0530
-Message-ID: <20240618044946.270299-2-d-gole@ti.com>
+Subject: [PATCH v4 2/2] doc: beagle: am62x_beagleplay: Rename the boot bins
+Date: Tue, 18 Jun 2024 10:19:46 +0530
+Message-ID: <20240618044946.270299-3-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240618044946.270299-1-d-gole@ti.com>
 References: <20240618044946.270299-1-d-gole@ti.com>
@@ -82,41 +81,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add symlinks for both tiboot3.bin and tispl.bin because a user has to
-anyway rename these files to get the platform to boot up.
-This just makes it more intuitive and convenient.
+Rename the boot bins as the _unsigned postfixes are not longer
+required. We have symlinks in place for having generic names for all the
+boot bins now.
 
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 1 +
- arch/arm/dts/k3-am625-r5-beagleplay.dts      | 1 +
- 2 files changed, 2 insertions(+)
+ doc/board/beagle/am62x_beagleplay.rst | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index fb2032068d1c..bd48af8d186a 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -71,6 +71,7 @@
+diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
+index 7784e62b0b71..f5a85dd1fb82 100644
+--- a/doc/board/beagle/am62x_beagleplay.rst
++++ b/doc/board/beagle/am62x_beagleplay.rst
+@@ -71,11 +71,10 @@ Set the variables corresponding to this platform:
  
- 	ti-spl_unsigned {
- 		filename = "tispl.bin_unsigned";
-+		symlink = "tispl.bin";
- 		pad-byte = <0xff>;
+ Target Images
+ -------------
+-Copy the below images to an SD card and boot:
++Copy these images to an SD card and boot:
  
- 		fit {
-diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-index 9db58f093c8c..da6746e009d5 100644
---- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
-+++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-@@ -79,6 +79,7 @@
- &binman {
- 	tiboot3-am62x-gp-evm.bin {
- 		filename = "tiboot3-am62x-gp-evm.bin";
-+		symlink = "tiboot3.bin";
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+-* tiboot3-am62x-gp-evm.bin from R5 build as tiboot3.bin
+-* tispl.bin_unsigned from Cortex-A build as tispl.bin
+-* u-boot.img_unsigned from Cortex-A build as u-boot.img
++* tiboot3.bin from Cortex-R5 build.
++* tispl.bin and u-boot.img from Cortex-A build
+ 
+ Image formats
+ -------------
 -- 
 2.34.1
 
