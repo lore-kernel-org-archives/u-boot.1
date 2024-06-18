@@ -4,76 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CD3C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 17:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69699C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 17:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E52BE8812C;
-	Tue, 18 Jun 2024 19:28:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B6FD58812C;
+	Tue, 18 Jun 2024 19:40:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cV4eIDcV";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="fvzt+bmq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F32888381; Tue, 18 Jun 2024 19:28:30 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4D32687F5C; Tue, 18 Jun 2024 19:40:44 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F3A28812C
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 19:28:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA2A1882D4
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 19:40:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-421757d217aso59341315e9.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 10:28:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718731708; x=1719336508; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lQiTLpYrIy8iCYWtlMhR+aG+H3xnvzSJaolirsptGa8=;
- b=cV4eIDcVSO217RAyqgbyMB5TrZeIAXJ1rSEvh71bGOc0vyHcs9eEv+pIwZCrh82u7+
- cyXNK8Uc+zgjMh2FdaRrc0bUGxUq3D69nTXZY935Mh7Y8Ylc4hV377JEwIwe36rXd3Ge
- tKzwPt/6n/jT8XlwSkroqp9mj4gAH5hokyv7Ce4USCKPY+Wtd75nJGoweu3UUCA85yAg
- vhT7rll4TzFZ4fJSSSsEqmMtoyC9Wc+6y8qstYfMrS2/xykSg8iPE7eHU/8rX+tm+uKZ
- KGV+zf9XGR3+RISdkohzkQ6BmdI/ROMk7AwD7wnV/eOKcKgyzTTff4n0BKTDohR+KW/C
- tcrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718731708; x=1719336508;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lQiTLpYrIy8iCYWtlMhR+aG+H3xnvzSJaolirsptGa8=;
- b=XN0GUzdSfq5X7lPgRwOyL+Lm6gl8zmXiFMD1j4pQYgMCm6L5rP7I8suDQb4S+mopkJ
- hqU7Jt59tqj3o/+BWi2tMdelTcUasaT1xB1rzhKUoBxkucDbQzOG4fk6z4QQLpRfILdQ
- SsQpq2K2VH42wCLUmuSsd8BL8gLmYlhPF3FeWThQtN4+8slFbZrsyx65LGgPncq8Tuza
- yA/Fnv6zqtS1sk55UF7sVgHx7J6lAUWU2032fwtSSmjPmFWzQCh7OSe983f29PijiNnz
- w2ZtUArVVDJyvc+JNSljGOGY7Z/hfiHsHIQRayzme5us6VmUhSqLW/S7Wpz+65RIBMiH
- +0vw==
-X-Gm-Message-State: AOJu0YztqD+fVjaenQs/kZYS2MPEG1qeCUrDdLmlE+WMQdO4Ecd1q7gO
- ATkT6rDHFmbibML74IdEobY3D54afEohUCBgNv/C0MjKKQs/uqn6aXJZh2mSl8w=
-X-Google-Smtp-Source: AGHT+IFaE4NwYo5U3Bd4215fq4ukKlpoyBOyW+Wn08XY7eNT+ApgMBz59IsfehdJqZVVtRne0SM/iQ==
-X-Received: by 2002:a05:600c:1d1c:b0:421:e7ae:955b with SMTP id
- 5b1f17b1804b1-42475180a2dmr1235745e9.21.1718731707769; 
- Tue, 18 Jun 2024 10:28:27 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
- [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f5f33bdasm197893745e9.8.2024.06.18.10.28.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 10:28:27 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: sjg@chromium.org,
-	heinrich.schuchardt@canonical.com
-Cc: u-boot@lists.denx.de,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH] configs: enable setvariable at runtime on sandbox
-Date: Tue, 18 Jun 2024 20:28:20 +0300
-Message-ID: <20240618172820.5570-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1718732440;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vqPvypzl1mcANIafztZp+8OeYABkvo12FCkG201h2BA=;
+ b=fvzt+bmqaPThAtQKHYt4LGRYlfIRuNvfvYXfKXdUVjjI4d2c/cJK26ice0S7OSeijQMbr1
+ hAMv5QpVv9LrTxc+fZ5TUwTnG+MVivPdJEeV3SGX42hRApzj+Q3IW9wuGbyNPe4NARzZZp
+ j/mxD4MsR9mblmurmhKM56l3TiW96P3s94/85M36h88BZHTDsbCJym5J2sinbOIQuKTgC5
+ AAaSeTJrBVtZi/22nDbn7jCD8UVBOsoPsTXcWG90tVsnY1gxsYfCh+8JxwF0Rlutw9Wxfy
+ YmFDcaA1U4oujocPOtNyQogoCal99+Esg6CnrJhaDDQNA2kMU6fb7/l4tpgndg==
+Date: Tue, 18 Jun 2024 19:40:39 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3 1/1] usb: informative message if no controller
+In-Reply-To: <0a7c5e5c0d75e1ce41227371c78e268e@manjaro.org>
+References: <20240618095857.58088-1-heinrich.schuchardt@canonical.com>
+ <0a7c5e5c0d75e1ce41227371c78e268e@manjaro.org>
+Message-ID: <7ddb7a8ffad9a4bc7b407b13948f944e@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,40 +72,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We currently don't have any boards enabling CONFIG_EFI_RT_VOLATILE_STORE.
-We do have EFI selftests testing the feature though, so enable it in
-all the sandbox platforms and test the functionality properly
+On 2024-06-18 12:04, Dragan Simic wrote:
+> On 2024-06-18 11:58, Heinrich Schuchardt wrote:
+>> The message 'No working controllers found' provides no clue that this
+>> refers to USB controllers.
+>> 
+>> Provide a message that refers to USB. Use log_info().
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- configs/sandbox64_defconfig | 1 +
- configs/sandbox_defconfig   | 1 +
- 2 files changed, 2 insertions(+)
+Huh, I missed the "use log_info()" part.  The patch description should
+be adjusted not to mention it, and there should be another patch that
+switches printf() to log_info().
 
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 2bd4eeaade9e..dd0582d2a0c0 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -267,6 +267,7 @@ CONFIG_CMD_DHRYSTONE=y
- CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
-+CONFIG_EFI_RT_VOLATILE_STORE=y
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_TEST_FDTDEC=y
- CONFIG_UNIT_TEST=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 93b52f2de5cf..da8c1976d7bd 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -348,6 +348,7 @@ CONFIG_ECDSA_VERIFY=y
- CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
-+CONFIG_EFI_RT_VOLATILE_STORE=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
--- 
-2.45.2
-
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
+> Thanks for rerolling this patch.  Looking good to me.
+> 
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> 
+>> ---
+>> v3:
+>> 	plural controllers
+>> v2:
+>> 	add 'found' at end of message
+>> 	keep printf
+>> ---
+>>  drivers/usb/host/usb-uclass.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>> 
+>> diff --git a/drivers/usb/host/usb-uclass.c 
+>> b/drivers/usb/host/usb-uclass.c
+>> index a1cd0ad2d66..e16432a1516 100644
+>> --- a/drivers/usb/host/usb-uclass.c
+>> +++ b/drivers/usb/host/usb-uclass.c
+>> @@ -388,7 +388,7 @@ int usb_init(void)
+>> 
+>>  	/* if we were not able to find at least one working bus, bail out */
+>>  	if (controllers_initialized == 0)
+>> -		printf("No working controllers found\n");
+>> +		printf("No USB controllers found\n");
+>> 
+>>  	return usb_started ? 0 : -ENOENT;
+>>  }
