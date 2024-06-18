@@ -4,82 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90E6C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:45:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F36A3C2BA15
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:46:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B11C884C9;
-	Tue, 18 Jun 2024 09:45:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id C0A8F884DD;
+	Tue, 18 Jun 2024 09:46:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="v17lrG+h";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LoMPp6NN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1D22884DB; Tue, 18 Jun 2024 09:45:13 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 325C4884E5; Tue, 18 Jun 2024 09:46:09 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BABCF884C9
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:45:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18091884CA
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:46:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-35f1dc4ab9aso4260121f8f.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:45:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718696711; x=1719301511;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=t0QGRpZGLlDg38g4XunIRYZrT/UQxM0xoybKPtshJA8=;
- b=v17lrG+hHRftklIGXRpgXTO7nbv0clc19UBbvNr7PBg5LDOpGgcu8m7gCzXTdB9xD6
- br/WqAVyDU+tP4EtFNcEt57yvagfJu02WASayf3IbDOX1PcJWNN7JJrtHVemvsLrnFmD
- pc81a/eUCEWOEtaX9K9Y+hDlC0lDcUzSOc51h3NPhIF9rWmWsY0TYpR3v01FLoqtFflZ
- KEetNlMGmszSVQ4QMhLl1S1JvpJaS5hl7goYdc3VxUwO8S6LyvMa0PirE9qThh0ajDLO
- G1yWg0oshZ2JNlt0phfoUe38YmNqtzNWqWlazzzvxYUnpxOJYUQC1oStSBLX1jaEhMwo
- hODQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718696711; x=1719301511;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t0QGRpZGLlDg38g4XunIRYZrT/UQxM0xoybKPtshJA8=;
- b=b29rWyw49wxtlMSCscsw/UMcQSqv9RM7sJju4ymIopE5kI77j6D6tZVrdWmbxjHa3P
- RFTAk1NdPFm4FqORSMoTu6BoSGWuRAZ5wt+IWE/wTawEdyfGKzYGTt3yq7GXpErsGdj7
- KNxySop59wjDniphnSemPA7OAjptL7p3nTjBUWpiej+9wt0B87LNbnPYU9exXpUQZCXe
- 38ZA1JXh8WwnqL4v/E1PF1lKQ0WSRrFjZ5GMNHWrSFTPI3ktUsoLNzhrlYvY+/l1YTee
- PjzJglSIWGZPPq64gKhcOQdwj9A9GoI0lirl5qRjugsXmrkU/L2bZg9dhQWFR2ALa+Sa
- 4GxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhwD/fJjSsLc+8e18nr0WTh8JmrDogGuZXNDsdo1NyuC+eROxLK0OCVRJ4wuDPhlSAveh3QR2JZ9zzbxMaw/gXa1vvgQ==
-X-Gm-Message-State: AOJu0YwWGeMiUtGWZQ508EhFS8lD2gTIbFa2UB5aOnH0ynUjwUzqxRcu
- C2p8j6LL8cXmyBw5GdlgCIzLKKQjB+TCaAhY9wnvdiANsUTrShsMhbYRTWyAYa4=
-X-Google-Smtp-Source: AGHT+IFGmIyhqTqI9yE1fUFfHjpUabzOHSXKFNB8uA5VCji8nXPWhGbAkMyrJMNRuJntv9kKTbtcyg==
-X-Received: by 2002:a5d:4a4c:0:b0:35f:1d29:db8d with SMTP id
- ffacd0b85a97d-3607a76374dmr6984446f8f.25.1718696711189; 
- Tue, 18 Jun 2024 00:45:11 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36075104b7fsm13469275f8f.103.2024.06.18.00.45.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 00:45:10 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>, Felipe Balbi
- <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
- Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
- <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 10/11] usb: gadget: sandbox: Drop
- dm_usb_gadget_handle_interrupts()
-In-Reply-To: <20240614005309.34433-11-marek.vasut+renesas@mailbox.org>
-References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
- <20240614005309.34433-11-marek.vasut+renesas@mailbox.org>
-Date: Tue, 18 Jun 2024 09:45:08 +0200
-Message-ID: <87jzimitiz.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 933BDCE1729;
+ Tue, 18 Jun 2024 07:46:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD666C4AF1C;
+ Tue, 18 Jun 2024 07:46:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1718696763;
+ bh=DV/ppMnM6w8D0EGHl0Ut2LmtyIDeugCMfIX0OdMygug=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=LoMPp6NNZ9RuM4LmdjUwzEY0Z6psA6rX12DXI7L/Pk3RFmLoIa1MFG5VlH3XU41M2
+ Nx0l1fZaCQgejq15bBrb33Bb5/cSgLuxO1HT3f9ewuwklX9bRhp0cFWTwxYmJWDwNt
+ BCtOrimcfMf6tjVBjnExUwCIUPD/cpyS3BNbepMFfa8h8bW6pvFhFZ54G5RX6g0INn
+ pinqg/DWIiJioIYw+vrCTqJOnQL2VW4SxZoBXCfWPraBk8FOT+ZS89IpPUFxKsQ5lN
+ p4t7IAMexaNN12mFnZpHgztRB+6a5TVshXVbpYdD55qvPgoNTUi+CwOBpeTX7SAC6t
+ MxFAEVtko+mMg==
+Date: Tue, 18 Jun 2024 09:45:53 +0200
+From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
+To: Alex Shumsky <alexthreed@gmail.com>
+Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>, Qu
+ Wenruo <wqu@suse.com>, Tom Rini <trini@konsulko.com>,
+ linux-btrfs@vger.kernel.org
+Subject: Re: [PATCH] fs: btrfs: fix out of bounds write
+Message-ID: <20240618094553.68a79daf@dellmb>
+In-Reply-To: <20240617194947.1928008-1-alexthreed@gmail.com>
+References: <20240617194947.1928008-1-alexthreed@gmail.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,50 +70,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On Mon, 17 Jun 2024 22:49:47 +0300
+Alex Shumsky <alexthreed@gmail.com> wrote:
 
-Thank you for the patch.
-
-On ven., juin 14, 2024 at 02:51, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-
-> Drop dm_usb_gadget_handle_interrupts() in favor of empty default
-> implementation of the same in drivers/usb/gadget/udc/udc-uclass.c .
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
+> Fix btrfs_read/read_and_truncate_page write out of bounds of destination
+> buffer. Old behavior break bootstd malloc'd buffers of exact file size.
+> Previously this OOB write have not been noticed because distroboot usually
+> read files into huge static memory areas.
+> 
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
 > ---
-> Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/usb/host/usb-sandbox.c | 7 +------
->  1 file changed, 1 insertion(+), 6 deletions(-)
->
-> diff --git a/drivers/usb/host/usb-sandbox.c b/drivers/usb/host/usb-sandbox.c
-> index e26f0b292ed..f687fe2c430 100644
-> --- a/drivers/usb/host/usb-sandbox.c
-> +++ b/drivers/usb/host/usb-sandbox.c
-> @@ -123,12 +123,7 @@ static int sandbox_submit_int(struct udevice *bus, struct usb_device *udev,
->  	return ret;
->  }
->  
-> -#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> -{
-> -	return 0;
-> -}
-> -#else
-> +#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
->  int usb_gadget_register_driver(struct usb_gadget_driver *driver)
->  {
->  	struct sandbox_udc *dev = this_controller;
-> -- 
-> 2.43.0
+> 
+>  fs/btrfs/inode.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index 4691612eda..b51f578b49 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -640,7 +640,7 @@ static int read_and_truncate_page(struct btrfs_path *path,
+>  	extent_type = btrfs_file_extent_type(leaf, fi);
+>  	if (extent_type == BTRFS_FILE_EXTENT_INLINE) {
+>  		ret = btrfs_read_extent_inline(path, fi, buf);
+> -		memcpy(dest, buf + page_off, min(page_len, ret));
+> +		memcpy(dest, buf + page_off, min(min(page_len, ret), len));
+
+Use min3() instead of min(min())
