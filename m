@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278D3C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 17:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CD3C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 17:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65410882D4;
-	Tue, 18 Jun 2024 19:26:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E52BE8812C;
+	Tue, 18 Jun 2024 19:28:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xYPRBSba";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cV4eIDcV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81644882F9; Tue, 18 Jun 2024 19:26:22 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 7F32888381; Tue, 18 Jun 2024 19:28:30 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53EE48812C
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 19:26:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F3A28812C
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 19:28:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1f862f7c7edso37872235ad.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 10:26:20 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-421757d217aso59341315e9.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 10:28:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718731579; x=1719336379; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e1ae6aAODTUheD5xSnAvT1mUBtURlEYXcJi4pA8nLvs=;
- b=xYPRBSban5V0vkLxsYQAFqiDaj44Cf48QlFqqosQ3Nw3IkCwlPNWH60BfPHdZo1wrt
- 56Bmy66MzCJluA/in1/jj8II/FfA177EHYuCTROQWOvqPHI9Nr4wV4E1/3ra35gR2TI7
- zL6SHJSTLfNqpkGAJWVBf0n5cOjwJ7tMM++zcEpwygfv5kZokBxpQVydccf/TCLTSeLq
- e/DjchD8InAejZmYeM8VgGFaNwHFnj2cpGfw9BiASMLUCnG29nYBlDTJ0dfZtPlMv9AM
- 62Nu1lMwJT/X+7OkdeExGBp9HNSNjvNdltw0hWjkaXYgDDvaL9MP4EGmp6a07x/3IhJ3
- pfjw==
+ d=linaro.org; s=google; t=1718731708; x=1719336508; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lQiTLpYrIy8iCYWtlMhR+aG+H3xnvzSJaolirsptGa8=;
+ b=cV4eIDcVSO217RAyqgbyMB5TrZeIAXJ1rSEvh71bGOc0vyHcs9eEv+pIwZCrh82u7+
+ cyXNK8Uc+zgjMh2FdaRrc0bUGxUq3D69nTXZY935Mh7Y8Ylc4hV377JEwIwe36rXd3Ge
+ tKzwPt/6n/jT8XlwSkroqp9mj4gAH5hokyv7Ce4USCKPY+Wtd75nJGoweu3UUCA85yAg
+ vhT7rll4TzFZ4fJSSSsEqmMtoyC9Wc+6y8qstYfMrS2/xykSg8iPE7eHU/8rX+tm+uKZ
+ KGV+zf9XGR3+RISdkohzkQ6BmdI/ROMk7AwD7wnV/eOKcKgyzTTff4n0BKTDohR+KW/C
+ tcrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718731579; x=1719336379;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1718731708; x=1719336508;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=e1ae6aAODTUheD5xSnAvT1mUBtURlEYXcJi4pA8nLvs=;
- b=tMtt7pGA1/gQGeZciQs9qOItYNcRvd+cGoMsB8UxyUbnSovR1YmkQJx1EM8xIKJ8GT
- ZJLcKxkSY/IGo/FPgIWU0AnnCevPI7lKZZmzo8iiiBMVAiu56S9qGE7USrbcqGW3K9LP
- cayuSB32CwUuMKPKWEGy2NhcmTdjkT1lCMgEc04VlxTJz53Fk/wHgum8TD6lqPHls+mS
- mSFRlagQd0kve8W79RUbWKZA9bRs0GlQPzPhChnxb2/ad3zZfounm4r1B9In5grU6bfp
- X5XuLbWsZIGzkO8t9yUFvmf7M+VuoRkz7ndDJ/zc/eNei7fvaa5IL+zu667PpSRY2ebV
- FU8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtcFbPtFdKo3cDOZjolSxcxv5GpOT0Lg0Mwoz9tllOqOabiK8SA99JHCH6yNFbaBaB9H5a1IN28RlXc1DWbsIulf95KQ==
-X-Gm-Message-State: AOJu0YzLxIBhd1KTJvfHnM7RF1zDgEz/+zMuJsdfN6Cx+BBP9YBislTm
- St9HLUafGv+g7EpRB9abOZMc5NmEtz8lpoIAnuPrAt8ClurSv8znNXq/7mBkgwSIbSJbhtBU0dW
- 7QYpjRB1v7rkP+qHjKB8ROnkUKY1WbVvhnzvEsB9MxzWHDS6rsUoKwQ==
-X-Google-Smtp-Source: AGHT+IGAOjKdFSS4Ie0PWVuXS24xX+89UCyb6XuizbO5bYezXvJ3rqY5/0pEP5qYSRCMHa7fh3FSvBtxrzhBGuAkzJQ=
-X-Received: by 2002:a17:902:eb49:b0:1f7:1ba5:85ff with SMTP id
- d9443c01a7336-1f9aa462935mr2347645ad.57.1718731578678; Tue, 18 Jun 2024
- 10:26:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240618154952.12314-1-ilias.apalodimas@linaro.org>
- <86iky6i4b9.fsf@udb0321960.dhcp.ti.com>
-In-Reply-To: <86iky6i4b9.fsf@udb0321960.dhcp.ti.com>
+ bh=lQiTLpYrIy8iCYWtlMhR+aG+H3xnvzSJaolirsptGa8=;
+ b=XN0GUzdSfq5X7lPgRwOyL+Lm6gl8zmXiFMD1j4pQYgMCm6L5rP7I8suDQb4S+mopkJ
+ hqU7Jt59tqj3o/+BWi2tMdelTcUasaT1xB1rzhKUoBxkucDbQzOG4fk6z4QQLpRfILdQ
+ SsQpq2K2VH42wCLUmuSsd8BL8gLmYlhPF3FeWThQtN4+8slFbZrsyx65LGgPncq8Tuza
+ yA/Fnv6zqtS1sk55UF7sVgHx7J6lAUWU2032fwtSSmjPmFWzQCh7OSe983f29PijiNnz
+ w2ZtUArVVDJyvc+JNSljGOGY7Z/hfiHsHIQRayzme5us6VmUhSqLW/S7Wpz+65RIBMiH
+ +0vw==
+X-Gm-Message-State: AOJu0YztqD+fVjaenQs/kZYS2MPEG1qeCUrDdLmlE+WMQdO4Ecd1q7gO
+ ATkT6rDHFmbibML74IdEobY3D54afEohUCBgNv/C0MjKKQs/uqn6aXJZh2mSl8w=
+X-Google-Smtp-Source: AGHT+IFaE4NwYo5U3Bd4215fq4ukKlpoyBOyW+Wn08XY7eNT+ApgMBz59IsfehdJqZVVtRne0SM/iQ==
+X-Received: by 2002:a05:600c:1d1c:b0:421:e7ae:955b with SMTP id
+ 5b1f17b1804b1-42475180a2dmr1235745e9.21.1718731707769; 
+ Tue, 18 Jun 2024 10:28:27 -0700 (PDT)
+Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
+ [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-422f5f33bdasm197893745e9.8.2024.06.18.10.28.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 10:28:27 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 18 Jun 2024 20:25:41 +0300
-Message-ID: <CAC_iWjJVSJCokmQsDVJphAVWX=vfwrDGmj=cqyiGHCvkPPbcug@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: adjust config options for capsule updates
-To: Jon Humphreys <jhumphreysti@gmail.com>
-Cc: xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: sjg@chromium.org,
+	heinrich.schuchardt@canonical.com
+Cc: u-boot@lists.denx.de,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] configs: enable setvariable at runtime on sandbox
+Date: Tue, 18 Jun 2024 20:28:20 +0300
+Message-ID: <20240618172820.5570-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,66 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jon,
+We currently don't have any boards enabling CONFIG_EFI_RT_VOLATILE_STORE.
+We do have EFI selftests testing the feature though, so enable it in
+all the sandbox platforms and test the functionality properly
 
-On Tue, 18 Jun 2024 at 19:49, Jon Humphreys <jhumphreysti@gmail.com> wrote:
->
-> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
->
-> > EFI_IGNORE_OSINDICATIONS is used to ignore OsIndications if setvariable
-> > at runtime is not supported and allow the platform to perform capsule
-> > updates on disk. With the recent changes boards can conditionally enable
-> > setvariable at runtime using EFI_RT_VOLATILE_STORE.
-> >
-> > So let's make the options depend on each other and clarify their
-> > functionality. When EFI_RT_VOLATILE_STORE, setvariable at runtime is
-> > supported and EFI_IGNORE_OSINDICATIONS, which also breaks the EFI spec, is
-> > not needed anymore.
->
-> Hi Ilias,
->
-> Is there a corresponding effort to update fwupdmgr to set OSIndications
-> (and set it correctly so the change persists a reboot)?
->
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ configs/sandbox64_defconfig | 1 +
+ configs/sandbox_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
-We are not trying to fix anything atm, we probably will in the future.
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 2bd4eeaade9e..dd0582d2a0c0 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -267,6 +267,7 @@ CONFIG_CMD_DHRYSTONE=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
+ CONFIG_GETOPT=y
++CONFIG_EFI_RT_VOLATILE_STORE=y
+ CONFIG_EFI_SECURE_BOOT=y
+ CONFIG_TEST_FDTDEC=y
+ CONFIG_UNIT_TEST=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 93b52f2de5cf..da8c1976d7bd 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -348,6 +348,7 @@ CONFIG_ECDSA_VERIFY=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
+ CONFIG_GETOPT=y
++CONFIG_EFI_RT_VOLATILE_STORE=y
+ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+-- 
+2.45.2
 
-> Otherwise, fwupdmgr provided capsules will now get ignored for boards that
-> enable setvariable at runtime.
-
-That goes beyond fwupd, EFI variable changes will be ignored in
-general unless you sync the file manually -- e.g. dd
-if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c
-of=/boot/efi/ubootefi.var skip=4 bs=1
-after every variable change. Unless you do that, enabling
-EFI_RT_VOLATILE_STORE makes little sense (and that's why it's not
-enabled by default).
-So, I prefer making EFI_IGNORE_OSINDICATIONS, which was a hack,
-mutually exclusive and start going in the right direction.
-
-Regards
-/Ilias
->
-> Jon
->
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  lib/efi_loader/Kconfig | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > index 430bb7f0f7dc..c84064de1366 100644
-> > --- a/lib/efi_loader/Kconfig
-> > +++ b/lib/efi_loader/Kconfig
-> > @@ -220,6 +220,8 @@ config EFI_CAPSULE_ON_DISK
-> >  config EFI_IGNORE_OSINDICATIONS
-> >       bool "Ignore OsIndications for CapsuleUpdate on-disk"
-> >       depends on EFI_CAPSULE_ON_DISK
-> > +     depends on !EFI_RT_VOLATILE_STORE
-> > +     default y
-> >       help
-> >         There are boards where U-Boot does not support SetVariable at runtime.
-> >         Select this option if you want to use the capsule-on-disk feature
-> > --
-> > 2.45.2
