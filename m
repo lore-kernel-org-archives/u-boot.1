@@ -4,65 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFAD7C2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 18:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 910F4C2BA15
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 18:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65FDB88263;
-	Tue, 18 Jun 2024 20:55:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 11D0C883A9;
+	Tue, 18 Jun 2024 20:57:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vuAodqU+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k3W5N0fU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85F108824C; Tue, 18 Jun 2024 20:55:18 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D420B8838E; Tue, 18 Jun 2024 20:57:53 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9163E88307
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 20:55:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A74B18824C
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 20:57:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45IItC0S065054;
- Tue, 18 Jun 2024 13:55:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718736912;
- bh=4P6rF5BwrgK2GCwzGl2R1/6ZmRJ5RzTtzVvWEuHLSF8=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=vuAodqU+1r8dMCQJayToNFHIupSYVEXCSueub8WSLvqtelFUPPxm1HvSsIKwOzTLV
- CtUSyW9SBFcxTKp3nZ06HLArInLpuucM4S27PtDKRq1UZ2ZC0gHjzsiK0IhdOAp4Ys
- 3orAnCXxBZNqstNZPgqlfbAsPUUfOPRXqBwZAtoc=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45IItCW4006957
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 18 Jun 2024 13:55:12 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
- Jun 2024 13:55:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 18 Jun 2024 13:55:12 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45IItCw6057894;
- Tue, 18 Jun 2024 13:55:12 -0500
-Date: Tue, 18 Jun 2024 13:55:12 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Hari Nagalla <hnagalla@ti.com>
-CC: <trini@konsulko.com>, <devarsht@ti.com>, <afd@ti.com>, <b-padhi@ti.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>
-Subject: Re: [PATCH 3/3] board: ti: am62x: Add remote proc env variables
-Message-ID: <20240618185512.p6hc2bbjxfbeftnk@trough>
-References: <20240618184636.30642-1-hnagalla@ti.com>
- <20240618184636.30642-4-hnagalla@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3d513eb6e56so531325b6e.0
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 11:57:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718737070; x=1719341870; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dbGPn7v3CcNBX2xttqbVe6gEDZNf3mSxegKMDIGNau0=;
+ b=k3W5N0fUTWAm3jmRkmeCdYZzWLHYd6Dr+ZHareEr7Hjnl+wqhM4WbdqpUthhagCdCY
+ 7lYZg7Xm7sXtylmF/YBaK31/+52Xp7CkhL7YsofblYxbO2+prgudIpsLOAR+qT4cMxKx
+ bKD1wqqznrCF4lBlyKstF1H8I+5dx6pFkPQT8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718737070; x=1719341870;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dbGPn7v3CcNBX2xttqbVe6gEDZNf3mSxegKMDIGNau0=;
+ b=AGt5H+Q217W8HlrPK+PNgRw2VSLnzzHh9YIOLFszbhtC6fS/UUEj0MFwV0VIC5IjQ4
+ K5iX+Rp99h/i4eZmL604vHZki+Q9CkXURJrYO3PWapdJ/gkwk/pVjaknwnBLaUWXwALs
+ m2lEDxmlwTIeRh+kfi9vJ3uTyzh8R4hEu6clRz4yUhxHoTlgziwCoLKOSsnC7BNb17ih
+ 4n+K7yHnfvLJhpHu16o8YgdZhWrIGZR/dItAHGh7jfOPfSbwHCpcqYZZYXf9aqhXBECs
+ ixtAm7t/KM16JvnrR87auV49q97kC1VD9ppcSxW8/ULDkhqUDL1XCKyc1xOVx4pMR9cd
+ J/UQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUAqqApbMnOVK4gi7+YPjlu0iGYlRI1RNXxxXg0x47WFXsB4/97K3SHWO/voe1lGCEKKbE9FSzzjB7fmXHm3XBfMDoeKw==
+X-Gm-Message-State: AOJu0YypQBlSD2d32pu+ixH6SVAVxPjoJtQhqL5Yrf7R8t2amopUGyuR
+ YT1zrK2FXhL02RE33lWrKBVzQmCNpBuU9VoBObKzLPWeaxrD7QquOxYp/RIdFS0=
+X-Google-Smtp-Source: AGHT+IF3nSN6ztqWEnbC3cnjPcK++Z2QijL7m1T57fUyxc1qINoDI7mRT0+KBpylRf0QYVcd0RTr2A==
+X-Received: by 2002:a05:6808:23c9:b0:3d2:1cfe:c2b3 with SMTP id
+ 5614622812f47-3d51b9957ffmr607563b6e.15.1718737070418; 
+ Tue, 18 Jun 2024 11:57:50 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d2476e31cbsm1875120b6e.50.2024.06.18.11.57.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 11:57:50 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.phytec.de, upstream@lists.phytec.de, u-boot@lists.denx.de, 
+ Wadim Egorov <w.egorov@phytec.de>
+Cc: d.schultz@phytec.de, nmorrisson@phytec.com
+In-Reply-To: <20240610133352.2473414-1-w.egorov@phytec.de>
+References: <20240610133352.2473414-1-w.egorov@phytec.de>
+Subject: Re: [PATCH 00/13] *** Various fixes & improvements for
+ phycore-AM6* SoMs ***
+Message-Id: <171873706946.3326390.2128092991598631936.b4-ty@konsulko.com>
+Date: Tue, 18 Jun 2024 12:57:49 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240618184636.30642-4-hnagalla@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,40 +93,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13:46-20240618, Hari Nagalla wrote:
-> Add remote proc support environment variables.
-> 
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-> ---
->  board/ti/am62x/am62x.env | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
-> index 9cb186c2a0..f8a73d4c47 100644
-> --- a/board/ti/am62x/am62x.env
-> +++ b/board/ti/am62x/am62x.env
-> @@ -1,5 +1,8 @@
->  #include <env/ti/ti_common.env>
->  #include <env/ti/mmc.env>
-> +#if CONFIG_CMD_REMOTEPROC
-> +#include <env/ti/k3_rproc.env>
-> +#endif
->  
->  name_kern=Image
->  console=ttyS2,115200n8
-> @@ -18,3 +21,4 @@ splashfile=ti_logo_414x97_32bpp.bmp.gz
->  splashimage=0x80200000
->  splashpos=m,m
->  splashsource=sf
-> +rproc_fw_binaries= 0 /lib/firmware/am62-mcu-m4f0_0-fw
-> -- 
-> 2.34.1
-> 
+On Mon, 10 Jun 2024 15:33:39 +0200, Wadim Egorov wrote:
 
-Grumble - instead of keeping on adding new SoCs, can we not spend some
-effort in trying to integrate to stdboot bootmethod?
+> This patch set is for u-boot/next.
+> It includes various fixes and improvements for phyCORE-AM62x and
+> phyCORE-AM64x SoMs. Notable is the last patch which prepares for use
+> with future ECC memory fixups.
+> 
+> Nathan Morrisson (2):
+>   arch: arm: dts: k3-am625-phyboard-lyra: Add fixed partitions
+>   arch: arm: dts: k3-am642-phyboard-electra: Add fixed partitions
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
 
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Tom
+
+
