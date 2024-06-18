@@ -4,61 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 813BDC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:56:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEBE5C2BA15
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 22:22:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDE6888381;
-	Tue, 18 Jun 2024 23:56:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EB77D8752A;
+	Wed, 19 Jun 2024 00:22:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="n8JQmWVV";
+	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="QS7aWKzi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56E0688335; Tue, 18 Jun 2024 23:56:06 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id C3D6F87B1A; Wed, 19 Jun 2024 00:22:02 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D719E883AD
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:56:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA12380E9A
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:22:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bf49=NV=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718747753;
- bh=CsJZui3W2OaO6fCHw44lMa47wvkQlQAsRjc97gkNGx4=;
- b=n8JQmWVVkZCY3AynthhdTUq6bmCgIa7TPsEL6AJej6P8OKq/BnPl1H3YCjzTlvXLlbg12Qls2
- JaPVR5RGISq2C5+ijywLifcYiTqps0unYkIAMtiXdk8niSqTlvzS+3zrgNhY5LuzHXTx8jZjqVr
- FxcO7AO005YRbHod3hl/15eqMg6beCldWsBiHyU850ppcx2fCpCbg/9Ji5Pq1zihEZ/3j3nsAey
- 8AMWT5SeR4wtGv6KLmK6qYwfZsQOaTa17kxiWdaHsup0iJijSnR+nAhXp617KqVyMxFJjadFnHg
- j7RcohdnzaQE/nknaTYP2pcl62deN0bVZ5sx6E4aaTjw==
-Message-ID: <879e9e9b-6d71-4ca1-b71b-262fa0cdb78f@kwiboo.se>
-Date: Tue, 18 Jun 2024 23:55:43 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
+ s=s31663417; t=1718749318; x=1719354118; i=quwenruo.btrfs@gmx.com;
+ bh=PLPfalnLls6leW3SlWjdM2CghETE/9IWaoFeS2MJFCE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=QS7aWKziGTmk6VGhbxsqicNGtST06920xRpHiRAC4CreystSBX7gqs6/DY+4FhT6
+ I93k9lqZFgZKZcMofgLM+23uRMkkF+0gNW4YZUPtajuQF2lcTa/lxsmA9QVO8XUYi
+ x3A8H6irrP7RvseqdhcIQAwMfbLqvQyUwKRijaIaBwL5Y+y32p/wDcZAiR2qt2S0T
+ pllqElqLFdTcR9UKxghZmnFjYfgQmzGA70t0jxnqbijVxujzlN9CWmuoNT0rstj1t
+ Q9gBhHyXlH6h8fiBh8qgtIt3Vuw0QOkLImPKULpOtBv3dBM17uuxTpAVgoQDPOhiz
+ jFENPudgv0ZpuoRjVA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.16.0.191] ([159.196.52.54]) by mail.gmx.net (mrgmx005
+ [212.227.17.184]) with ESMTPSA (Nemesis) id 1MJmGZ-1s4dKu2Gnx-00Vk4L; Wed, 19
+ Jun 2024 00:21:58 +0200
+Message-ID: <846975bf-1a75-4a07-ab63-764ca56cab98@gmx.com>
+Date: Wed, 19 Jun 2024 07:51:52 +0930
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: rk3328: Enable ARMv8 crypto extensions
-To: Jagan Teki <jagan@edgeble.ai>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Da Xue <da@libretech.co>
-References: <20240421200908.518855-1-jonas@kwiboo.se>
- <20240421200908.518855-3-jonas@kwiboo.se>
- <CA+VMnFwVMzVxq6A6Mxxug5y+=puq7=GFh8-J5hz9=c+E-8sYwQ@mail.gmail.com>
+Subject: Re: [PATCH v2] fs: btrfs: fix out of bounds write
+To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
+Cc: Dan Carpenter <dan.carpenter@linaro.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Qu Wenruo <wqu@suse.com>, Tom Rini <trini@konsulko.com>,
+ linux-btrfs@vger.kernel.org
+References: <20240618214138.3212175-1-alexthreed@gmail.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CA+VMnFwVMzVxq6A6Mxxug5y+=puq7=GFh8-J5hz9=c+E-8sYwQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66720265e82f966972441e2e
+From: Qu Wenruo <quwenruo.btrfs@gmx.com>
+Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
+ xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
+ 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
+ 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
+ 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
+ gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
+ AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
+ BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
+ pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
+ BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
+ XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
+ jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
+ LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
+ mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
+ CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
+ /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
+ GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
+ q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
+ ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
+ CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
+ tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
+ INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
+ DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
+ iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
+In-Reply-To: <20240618214138.3212175-1-alexthreed@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:n0MudmM7UipAHVyAbzfSpokRo6NdwL9G7QwU6hfLdfAlXuyjq0A
+ UBS69oc6ovFCWMaBr1q8Co8ygHYuNeKNQvC0wTxC9qMyutBBdFhhbeiVC2T1I9kVUmlLpMA
+ ewopLICihLV8LhwLP53JBs4KvvhMfOphia0a937SjIk2QIrWkBwJxcyk97PER8wfl1I+kEP
+ 9NmCBAmZYJt9KjnorwLFQ==
+UI-OutboundReport: notjunk:1;M01:P0:laf7TQJTeC4=;QYTJ6qaByVYyyPbFID1wGsjF5Ub
+ oomQArzxy3Mjc65wFh/A4pBOm8sWW1oQBV89ZqY7qYK4FdBFD4fnz3Cm0i4eF/nYO5p4h+gAz
+ sdbmyX+lR0iD0qZBEns9t98zk+OhdrvvFs+HoW9nkIfSl/hOgyEW8vKE9uzMHxxUDqDpwl1Dl
+ Mdk+XUTDeTOh2ecLoil1hEMyIEIJmQzKyrH6HZGCwg1tOHuNrXYQgZHjzW5zxPhv5JhDTuCP1
+ BkU67kXMuBv0jXyFTf9Eg2ALove7ugFaTGsyJqrNx4IiyE2gYOgKTCBig0yazXyfV5AnHVVmS
+ txkIOEdyXJq9Nh7slwxgFS0XRLYxl9f7Elpt/WHv75s/VebST93IvMtEJsjycVV/v0KGJBIJX
+ 99zBtcmXpjkhMn41folxsu9P5F25S+EU2aJbU6DkmBrCfSU9SvmK/OST3+zxFV5Bb+Af/uXpN
+ lRMHP+4NyPjOvaD709o1jxfFjgr/qM6/eihYArXyFy5vvY+7P0N1BqwimFO3CaAq+xiCTVIzw
+ 0W5d1y6JkFBL93YNVLvTyz5o9emhiUXp6MJn7C10PVZXPNHPUl9Q3OR2vS7R0vSKrCVMHPFcX
+ oz8/M+I9ys388a/+cEdPQTeK00f/72Gn2wQlcH8L9l9NnAjZJPLpjNh0C67zPhyYzwvilXp2a
+ 7V++KnD1rlqPMFyrtZvST6cXaye8HzhP90vEHNMeXfcoWHecmNRZgpL1Odyfn2K4+SjAcZExo
+ 5XtwYL4AXC9TCxS/8zAxom41ejknX6N47rR2j5IOgbqfzd10w2c2QchutchEQdRAimIQWQVrv
+ T9flK6AiNchZu2naOTz379oHOcU5Ene2OBK2C+mGn8uls=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,105 +115,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jagan,
 
-On 2024-06-18 21:18, Jagan Teki wrote:
-> On Mon, 22 Apr 2024 at 01:40, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> The RK3328 SoC support ARMv8 Cryptography Extensions and use of the
->> ARMv8 crypto extensions help speed up FIT checksum validation in SPL.
->>
->> Imply ARMV8_SET_SMPEN and ARMV8_CRYPTO to take advantage of the crypto
->> extensions for SHA256 when validating checksum of FIT images.
->>
->> Also imply OF_LIVE to help speed up init of U-Boot proper.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> v2: No change, rebase on latest master bransh
->> ---
->>  arch/arm/mach-rockchip/Kconfig | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
->> index ee0f338995b9..651ecfe9b8fd 100644
->> --- a/arch/arm/mach-rockchip/Kconfig
->> +++ b/arch/arm/mach-rockchip/Kconfig
->> @@ -180,8 +180,11 @@ config ROCKCHIP_RK3328
->>         select SUPPORT_TPL
->>         select TPL
->>         select TPL_NEEDS_SEPARATE_STACK if TPL
->> +       imply ARMV8_CRYPTO
->> +       imply ARMV8_SET_SMPEN
-> 
-> This blocks the access of PLL registers.
-> 
-> U-Boot 2024.07-rc4-00052-gfe2ce09a07-dirty (Jun 19 2024 - 00:43:40 +0530)
-> 
-> Model: Firefly roc-rk3328-cc
-> DRAM:  1 GiB (effective 1022 MiB)
-> PMIC:  RK8050 (on=0x40, off=0x00)
-> Core:  241 devices, 29 uclasses, devicetree: separate
-> MMC:   mmc@ff500000: 1, mmc@ff520000: 0
-> Loading Environment from MMC... Reading from MMC(1)... *** Warning -
-> bad CRC, using default environment
-> 
-> inno_hdmi_phy phy@ff430000: Pre-PLL locking failed
-> inno_hdmi_phy phy@ff430000: PHY: Failed to power on phy@ff430000: -110.
-> failed to power on phy (ret=-110)
-> inno_hdmi_phy phy@ff430000: Pre-PLL locking failed
-> inno_hdmi_phy phy@ff430000: PHY: Failed to power on phy@ff430000: -110.
-> failed to power on phy (ret=-110)
-> In:    serial,usbkbd
-> Out:   serial,vidconsole
-> Err:   serial,vidconsole
-> Model: Firefly roc-rk3328-cc
-> Net:   eth0: ethernet@ff540000
 
-I could reproduce this issue on my Rock64, and it looks like there is a
-bug in inno phy driver at inno_poll, it currently readl at wrong addr:
+=E5=9C=A8 2024/6/19 07:11, Alex Shumsky =E5=86=99=E9=81=93:
+> Fix btrfs_read/read_and_truncate_page write out of bounds of destination
+> buffer. Old behavior break bootstd malloc'd buffers of exact file size.
+> Previously this OOB write have not been noticed because distroboot usual=
+ly
+> read files into huge static memory areas.
+>
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> Fixes: e342718 ("fs: btrfs: Implement btrfs_file_read()")
 
----
-diff --git a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
-index 3bb1a254ffb5..7459779dffed 100644
---- a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
-+++ b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
-@@ -432,8 +432,8 @@ static inline void inno_update_bits(struct inno_hdmi_phy *inno, u8 reg,
- 	inno_write(inno, reg, tmp);
- }
- 
--#define inno_poll(reg, val, cond, sleep_us, timeout_us) \
--	readl_poll_sleep_timeout((reg) * 4, val, cond, sleep_us, timeout_us)
-+#define inno_poll(inno, reg, val, cond, sleep_us, timeout_us) \
-+	readl_poll_sleep_timeout((inno)->regs + ((reg) * 4), val, cond, sleep_us, timeout_us)
- 
- static unsigned long inno_hdmi_phy_get_tmdsclk(struct inno_hdmi_phy *inno,
- 					       unsigned long rate)
-@@ -575,7 +575,7 @@ inno_hdmi_phy_rk3328_clk_set_rate(struct phy *phy,
- 	inno_update_bits(inno, 0xa0, RK3328_PRE_PLL_POWER_DOWN, 0);
- 
- 	/* Wait for Pre-PLL lock */
--	ret = inno_poll(0xa9, val, val & RK3328_PRE_PLL_LOCK_STATUS,
-+	ret = inno_poll(inno, 0xa9, val, val & RK3328_PRE_PLL_LOCK_STATUS,
- 			1000, 10000);
- 	if (ret) {
- 		dev_err(phy->dev, "Pre-PLL locking failed\n");
-@@ -674,7 +674,7 @@ inno_hdmi_phy_rk3328_power_on(struct phy *phy,
- 			 RK3328_TMDS_DRIVER_ENABLE);
- 
- 	/* Wait for post PLL lock */
--	ret = inno_poll(0xaf, v, v & RK3328_POST_PLL_LOCK_STATUS,
-+	ret = inno_poll(inno, 0xaf, v, v & RK3328_POST_PLL_LOCK_STATUS,
- 			1000, 10000);
- 	if (ret) {
- 		dev_err(phy->dev, "Post-PLL locking failed\n");
----
+Reviewed-by: Qu Wenruo <wqu@suse.com>
 
-Please send a proper patch to fix inno_poll :-)
-
-Regards,
-Jonas
-
-> 
-> Jagan.
-
+Thanks,
+Qu
+> ---
+>
+> Changes in v2:
+> - fix error path handling
+> - add Fixes tag
+> - use min3
+>
+>   fs/btrfs/inode.c | 8 ++++++--
+>   1 file changed, 6 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index 4691612eda..3998ffc2c8 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -640,7 +640,11 @@ static int read_and_truncate_page(struct btrfs_path=
+ *path,
+>   	extent_type =3D btrfs_file_extent_type(leaf, fi);
+>   	if (extent_type =3D=3D BTRFS_FILE_EXTENT_INLINE) {
+>   		ret =3D btrfs_read_extent_inline(path, fi, buf);
+> -		memcpy(dest, buf + page_off, min(page_len, ret));
+> +		if (ret < 0) {
+> +			free(buf);
+> +			return ret;
+> +		}
+> +		memcpy(dest, buf + page_off, min3(page_len, ret, len));
+>   		free(buf);
+>   		return len;
+>   	}
+> @@ -652,7 +656,7 @@ static int read_and_truncate_page(struct btrfs_path =
+*path,
+>   		free(buf);
+>   		return ret;
+>   	}
+> -	memcpy(dest, buf + page_off, page_len);
+> +	memcpy(dest, buf + page_off, min(page_len, len));
+>   	free(buf);
+>   	return len;
+>   }
