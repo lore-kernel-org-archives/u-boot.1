@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E30C2BA1A
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 12:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2081C2BB85
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 12:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E0DD882EF;
-	Tue, 18 Jun 2024 14:24:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54989881D6;
+	Tue, 18 Jun 2024 14:29:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TtgPCXRB";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="F1jIWr7O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E44C88307; Tue, 18 Jun 2024 14:24:02 +0200 (CEST)
+ id 8BD2788271; Tue, 18 Jun 2024 14:29:20 +0200 (CEST)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D37B88137
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:24:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5AA888137
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72])
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id F15163F4BE
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 12:23:59 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C6EB43FE0F
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 12:29:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1718713439;
- bh=M1sVyfRU2E6OCF2w3soJnVjkUaRiqONkBNaJod4Xy/0=;
+ s=20210705; t=1718713756;
+ bh=Mg3T3XVUyri38CW0vnpjiZ07/sgNbkul9AEgl6bgtJg=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=TtgPCXRByoebSCKx2RV1RpcgUqgDUSS6seWqsXlJV6wI3c5V7EtpW8KhqE4ZKN0L/
- 99KdkGjInSJF2IDFshCMF9eX3owOYWNxMQhZhzjjB3tnz8RLpbCIfUXC//hAjJeGkO
- eEu2ZF4ey1ZWDRHWoLSOIJ+bY4eBXm5bKj+KVNXgtw+tmr+PxUXexuqsG7QnhNqW7Q
- QIK2+pVrB3wPBIyXvD2IQvlNiKOctFVWEtOFgvwpBsU2C1cZHHekzW/SC6CNTFriI4
- O836mmmziBSgpWIHKJqZebIp36CpuwY2WA9Yq04S9LlHNWniHGY4Aj49YmmaXIoSZu
- XxgL4ACf46p3w==
-Received: by mail-lf1-f72.google.com with SMTP id
- 2adb3069b0e04-52c893408b5so3601210e87.2
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 05:23:59 -0700 (PDT)
+ b=F1jIWr7OF3reJ4UZwjhynUYUElfCoo2OTbFORBYO8ZkW2LuebpoheF5DmYeGqBloB
+ mion8zlmLPQB3cfDett1L0H1nLgw628ZGStMEJqFifj0CtiLIN3oETshEJO6SeA54m
+ iKA5DNkPfEyvrj51D/gs5raSGzF4iP5PKcfjXglONqctKaPT+elxoABJH6nWld1Cxl
+ 3zkDOkcAyv2jKE6LK17AU7WOWxxbD7i3iBryiSwUdS6F/n/+MWomMno77P+qKHGQzB
+ 06/r4dyMsnYa9ltmaNZXiKq+R5qcAEhedZ26hWnUqxVV+CyGdOd5WlJHCcACee2XyR
+ h7Qnfgu9edc7Q==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-35f10585251so2828144f8f.1
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 05:29:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718713439; x=1719318239;
+ d=1e100.net; s=20230601; t=1718713755; x=1719318555;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M1sVyfRU2E6OCF2w3soJnVjkUaRiqONkBNaJod4Xy/0=;
- b=AD8S/kdihK4mVS0Fe0rJGO7zkUMTJEFJVIg/w2Sqn7e/xpUptxuJImrcpBoEBlE3EG
- ex5KDLBlax/lNZWnDCn0Iy25RUQqupkiwopICvQgAA/5ooMwJL5qbmYrjx9897sXwwlA
- RXJR7AgcRIGEunMlevDDJMgaoIqkO+KBfESPeiwTfoapRfd4VWc3gk7ftE+doMALrZUn
- 2Ai2PJDgq0kryH6FP97Zop1icudbqQS/f2xMdnSS5uhiNSOSp/AAQjtONQodeKI5JRWM
- 15fqdOe4OITEP8Y90/5heDNTtshNbNOPn1R6HxF9OuhSUQLv42gafbBzDYA3+CcucN4n
- jH7w==
+ bh=Mg3T3XVUyri38CW0vnpjiZ07/sgNbkul9AEgl6bgtJg=;
+ b=on4xbpLRXdW3MMa/Ph+e4ZnPUONoklml6xFgpY+FM3RWDXLWlpUTBy8MB2jWTRiD2Y
+ /YerY48kT33MLPGjd/lB/ElY7MIrB1SiQdxSxV1cwiVMCzGwOO+Z1lBCWiNTUVxvtlV4
+ L7D3u3SaWSmbktwjh8kWsGGAlpsvXNIP29PnT7Pg7tpCkJ/iNvNmddP/qU4AZ9F/1D80
+ ZqLsDFzoCH2wsRAZd3agFvBnssEdw/1ZhNULnuLY8n3NMQt6DuIRomhyMFZSJz7gd5m0
+ kbfPvFj5C2y23a+b6Xn6OKNrnlEcEolxdydaYuK+UJpjR+WlTO4X1aZ0MBNf7IgePYS2
+ XJEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwM69C4P7z8boQwyWhNXwarf+U7OkHhrh6R7QSzBJln3RA/lWfN8vGqh2OgkMmPq0rRllDXfuXxpaPY5NV8Mmq5PKldg==
-X-Gm-Message-State: AOJu0YwNK1JIYM105G54Xn8AJgcXSXfCg8Cwac7P6d2BcLSdOl5ozFqV
- kRQ3QUYh6y5I4NFWPplZYn6gYqpFa51hYWpPxGj7GIjqt63Tqa/rGlK//wJBnVk3YPa9DMplP+K
- 9P3IPT+gUk7MvK8qFi8EEK+Q9cAeB9LJHCfTbK/FFEiuhqJp+n0JHEJ5lK5D7ltmn9b0=
-X-Received: by 2002:ac2:4a85:0:b0:52c:93d6:9d68 with SMTP id
- 2adb3069b0e04-52ca6e5629fmr7027726e87.5.1718713439440; 
- Tue, 18 Jun 2024 05:23:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGwMdchUGYBw6c53BF2o6o6aS+mqFnP8D2sJs8jieFcz7qhFDBIcVbzxKIZiGLQH/wxM7SqKQ==
-X-Received: by 2002:ac2:4a85:0:b0:52c:93d6:9d68 with SMTP id
- 2adb3069b0e04-52ca6e5629fmr7027715e87.5.1718713439061; 
- Tue, 18 Jun 2024 05:23:59 -0700 (PDT)
+ AJvYcCVRf2+LDckKRvBQqx59CRofeT4+4oJ/iJB7zEvBWUQl2kXXoHdTBEV0OR+2dA1coZynXYT0ZH9WSCRuxMlcn8P1aAL7NA==
+X-Gm-Message-State: AOJu0Yzx3hmWT53E5VrEuBEVzCHwDzxmAsTwZWowpXyleK6NH2HVtswL
+ 5m9s7OhBWFQnEq6Pxa9HoEITX50pt4orLXWJ7/erJdSSr5Q0SjKVEy2HmUH+msM8/ihKKw6kW8f
+ c7jxvMUuOShqBeGry2kkKxHOi+Aqfc3GMRZumd/nGLm2l7/RryFIav+K38BMApy0z63M=
+X-Received: by 2002:a5d:4535:0:b0:35f:1c18:347d with SMTP id
+ ffacd0b85a97d-3607a78da32mr8584586f8f.63.1718713755753; 
+ Tue, 18 Jun 2024 05:29:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGfOU52QbhnPWQBFeUmTjtKLra+Hmsegudk6Lyc9tQ2Bf0h9x2Kg+Z0A0B8fg3z6jUVsfaZBQ==
+X-Received: by 2002:a5d:4535:0:b0:35f:1c18:347d with SMTP id
+ ffacd0b85a97d-3607a78da32mr8584572f8f.63.1718713755387; 
+ Tue, 18 Jun 2024 05:29:15 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-178-202-041-025.um47.pools.vodafone-ip.de. [178.202.41.25])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f5f33c2dsm187956545e9.10.2024.06.18.05.23.58
+ ffacd0b85a97d-3607509c785sm13962062f8f.34.2024.06.18.05.29.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 05:23:58 -0700 (PDT)
+ Tue, 18 Jun 2024 05:29:14 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de,
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>,
+ u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_selftest: can't have measured device-tree with
- kaslr-seed
-Date: Tue, 18 Jun 2024 14:23:48 +0200
-Message-ID: <20240618122348.126196-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] cmd: correct kaslrseed description
+Date: Tue, 18 Jun 2024 14:29:13 +0200
+Message-ID: <20240618122913.127692-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -103,32 +103,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test that we don't have a /chosen/kaslr-seed property if we measure the
-device-tree.
+The number of random bytes generated is hard coded as 8.
+The command takes no argument.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_selftest/efi_selftest_fdt.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ cmd/kaslrseed.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/efi_selftest/efi_selftest_fdt.c b/lib/efi_selftest/efi_selftest_fdt.c
-index aa3b13ae3ab..066d9581432 100644
---- a/lib/efi_selftest/efi_selftest_fdt.c
-+++ b/lib/efi_selftest/efi_selftest_fdt.c
-@@ -227,6 +227,13 @@ static int execute(void)
- 			return EFI_ST_FAILURE;
- 		}
- 	}
-+	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
-+		str = get_property(u"kaslr-seed", u"chosen");
-+		if (str) {
-+			efi_st_error("kaslr-seed with measured fdt\n");
-+			return EFI_ST_FAILURE;
-+		}
-+	}
- 	if (IS_ENABLED(CONFIG_RISCV)) {
- 		u32 fdt_hartid;
+diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
+index e0d3c7fe748..e9b0e3d5985 100644
+--- a/cmd/kaslrseed.c
++++ b/cmd/kaslrseed.c
+@@ -68,7 +68,7 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+ }
  
+ U_BOOT_LONGHELP(kaslrseed,
+-	"[n]\n"
++	"\n"
+ 	"  - append random bytes to chosen kaslr-seed node\n");
+ 
+ U_BOOT_CMD(
 -- 
 2.45.1
 
