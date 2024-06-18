@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C8CC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A37C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25DC388352;
-	Tue, 18 Jun 2024 15:56:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A90C8834B;
+	Tue, 18 Jun 2024 15:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="dxkfpq6Z";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="KFA//ZMK";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="XauZQ/Ef";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="TnRSoyOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F07686784; Tue, 18 Jun 2024 15:56:28 +0200 (CEST)
-Received: from wfout7-smtp.messagingengine.com
- (wfout7-smtp.messagingengine.com [64.147.123.150])
+ id 8849D88307; Tue, 18 Jun 2024 15:56:29 +0200 (CEST)
+Received: from wfhigh8-smtp.messagingengine.com
+ (wfhigh8-smtp.messagingengine.com [64.147.123.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F4163882ED
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:56:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0AFC8786C
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:56:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.west.internal (Postfix) with ESMTP id 73D491C00095;
- Tue, 18 Jun 2024 09:56:20 -0400 (EDT)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfhigh.west.internal (Postfix) with ESMTP id F1B1B18000E4;
+ Tue, 18 Jun 2024 09:56:24 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Tue, 18 Jun 2024 09:56:20 -0400
+ by compute7.internal (MEProxy); Tue, 18 Jun 2024 09:56:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1718718980;
- x=1718805380; bh=DDqQ7ITclzHzWovVIuW9En1uys38aox71jMS+LHnGlI=; b=
- dxkfpq6ZxkIGpU1FudU2ABsTWVeIqc6djvQL4oIMlo46uIduYoOCpsCYsYTwmT2L
- lks0mC9CmxGNvtI0HzOQA2XbQQDRhFAVJtjjHNn4FWcE5ebn5j4AND161URYiGhg
- T+mp+/mo12pRjJsndSCyHJgy7aJjTmWt7Lrid9FniV/NEXNAfu1ytPH5k1aXnKIy
- QsWziJ0fUjUxZLadA3bk/KiQsGCYmFVmBjiHw0D5/kx/1qvE721qKqN5nl293Gdw
- s06kk9/8bW4GrBNmOleNzy/1RZI/hm+qBmhile/aR/W/QwmObbgKk7mx/hKcF3nU
- B/kncHy8n7/VJe0WYDHHQQ==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1718718984;
+ x=1718805384; bh=HSd75T7nLaTJY/hAAlsehz59myiyl7wNtMcuOyrusPc=; b=
+ XauZQ/EfOKHsokQccK62zHh+7CzIsOKID3+0wRKTI1a6VNWSs2itECZTBIBtApWH
+ Eg65rdOQBY6ecM7Iobiscw2+NvlXGWuoXyuCIv7O/ozowZeUhCgp+f/VN/Zlx9WV
+ kJ/K+LGPtQjwkKuC4D1YMWCY7h9q6dw+/KQPqBOI3uu3DroEbcb/uCwqPDnzT74x
+ kDXz7iXCTyOfAzWXZZ5EKEECUW+WOUWbfg4QA/5DmWKs0UeJIRc6YT7VoLtw+uV7
+ amMGQ+lU7NcFHbfndr4+H607V20+IjAyEHFqXAHWhb2xTtsKlnADvr9ZrTZIZbSA
+ cMdryrUqkKr+IE62IeYFLA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718718980; x=
- 1718805380; bh=DDqQ7ITclzHzWovVIuW9En1uys38aox71jMS+LHnGlI=; b=K
- FA//ZMKgtSxyAk60eMTIRwsZicmXZcbo1cWtvzEen2jIjKtHVkjoOZCEdBNEi413
- yDKAVNLYexnXQDRoyWYYn3ZXxK5XOBFnNrBTIVppTO/CJRs8eduRnrDaO3/GhY00
- C+87YK8sUS1VQ3B3aTE0CouJC1mvN/6A8B/QMDh4/tT62v0vWd3zfHZGpWUVphkx
- sqjlBDrl+DTUsI8gHUwUgm7YZstt1vAzSjHyKF1v37jW2AgByLk4bbG/7oI8wivh
- Dhd3/g3Rzi/Yvl5KzhUl5aVx17MHA36sxT8BB+L0GKTdLd7U8Rz/T9qiAG0VOfzu
- H/ztMYp8VGvjFFYlZ2Mng==
-X-ME-Sender: <xms:A5JxZlK2oBglZcicAowapHEH77LE-u8vKMKmpMrATJqsG_QmWYdF8w>
- <xme:A5JxZhJpyVc-hrLjsr-T1sqlOS-UY5Q_EbRgBt4SZQ3YaneVacEiDar4_DLctO9-E
- 5rwNRRiLUktvFxhWlk>
-X-ME-Received: <xmr:A5JxZttAIMXoTRsysyrGh69cWlClBlyGUHvvaNbNoVoi8AWAe0kXd9o>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718718984; x=
+ 1718805384; bh=HSd75T7nLaTJY/hAAlsehz59myiyl7wNtMcuOyrusPc=; b=T
+ nRSoyOvKZGlU1GdEYd1vfIxAa1SD3LEYI2PI91ibBhopV+D4M6MPugg6ra03lM2x
+ 3QOxdp+R6Bpl8lSxD4mq/+CT2q/NZiUoUgNTzVOCGpRTSNM+Q7qYaBHg1D/jThyn
+ otUY97pJf4YMj8F0qeAdHgELu3w7KDkzWHtD2WIfbtyQlXG63ukbHFimrvSrOzPi
+ 5ZqU+pd6vLtj0Mm17gF7dnPJKqwRnetkaNgza7O7OI6GdMcWZLkY9G1qiMC3LOJd
+ HKzElV5zRHAFeuw+kpsrv6QlqDmuj/TwtVTZO1P06YZkEP6TUfxS3s09nwsTg3wK
+ BatmblW8DBPxAuAOqg9bA==
+X-ME-Sender: <xms:CJJxZqpccR4miw0ZhdNfjb887walPzsCjHa81OWlLdXCmujEiV6xwg>
+ <xme:CJJxZopMM_Aajeji6MbjGRcWVPFam4b1W-EWwF7quA8UkOLQ5sRce4k-hXEIGZ7Tg
+ KEgU7MBHKcxzdXX110>
+X-ME-Received: <xmr:CJJxZvPqM48H0w_XqJHWmqH6SrtD_sfmQSuQcq6iOi5QiB2ed-rRigo>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedvkedggeduucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,34 +68,35 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedvkedggeduucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:A5JxZmbLx-EoBEgTcD1Y5xivNape5PiDq6793UjqeocVnjvFSR8eWw>
- <xmx:A5JxZsYCG9WcLVHgQtH1U9iPDYuEBX1CsskVi9EOBzIAVQtuedi2Rw>
- <xmx:A5JxZqCubMR3zzU-5r_AWcBSxzY0734cw_RqJDmV-VCRkHye7ja_MQ>
- <xmx:A5JxZqarR3VML3sWZvdzsO7k40rA8NDlmiq5Q8vLjZ98AK_2czIHgg>
- <xmx:BJJxZhNU0IoMhNpg1nJb0jZP8OZz4eNB5GxJL-q5otIccQwweAjtzmdo>
+X-ME-Proxy: <xmx:CJJxZp7HGDW3VtvAjVa4w7TjfFqf7WaE0UgEVZvW3esNZBd-CEVyXw>
+ <xmx:CJJxZp620CR7ihBdRl8Y7691MyL_ZLahcqi2XIy1T1AQW_aSCnr4fA>
+ <xmx:CJJxZphRfg_tnDtNOVlxlbdIJMXx_Ba0TgGCwA5BN369mHNyr_qvCw>
+ <xmx:CJJxZj7f1JDV922SlkphdjOlu2kJhhJfdaNvCSlAfoUXI-i8he7iiQ>
+ <xmx:CJJxZmtA9wWG33QWJjHYgxwjI0TLCApkyl3Xz-3wDMlN0jvJuGCJiz8Q>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Jun 2024 09:56:18 -0400 (EDT)
+ 18 Jun 2024 09:56:23 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Tue, 18 Jun 2024 14:56:01 +0100
-Subject: [PATCH v3 01/12] xtensa: Move dram_init to xtfpga board file
+Date: Tue, 18 Jun 2024 14:56:03 +0100
+Subject: [PATCH v3 03/12] xtensa: Implement phys virt conversion for
+ PTP_MMU
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240618-qemu-xtensa-v3-1-f5af5e6fdd23@flygoat.com>
+Message-Id: <20240618-qemu-xtensa-v3-3-f5af5e6fdd23@flygoat.com>
 References: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
 In-Reply-To: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=976;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2051;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=bShfOQuXToDB+wXf0qzgm93+zCGpzXU6bN5JmlZZ19Y=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTCSYw9M95Ys3Omeoq6222yP5cfO0HoreF5QfeHHSHl/
- Ztbs150lLIwiHExyIopsoQIKPVtaLy44PqDrD8wc1iZQIYwcHEKwETc9BkZ+mRrBTiPfFxdOt++
- rPGmWeySU5khAlZlszTXlSSf8bEBavj5SLh49RTXHcF/vC4eWDXl/MTlZy+WOFt8OquzP/XUElU
- eAA==
+ bh=pCpFt4Od7VIN5VInTKC3EZ2MLltCnK6OVsxCbS0laaU=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTCSYyaoaIm6ustBe7G/HX9vny1zYwV3PuylKfofJa5t
+ uvm9O03OkpZGMS4GGTFFFlCBJT6NjReXHD9QdYfmDmsTCBDGLg4BWAiuxwY/icy2Tk4/LlmtiLO
+ c/msLze9dC2VLFTP2d7I2PFvjbW0tDcjw5WFZnsFglq943lKPe/fiDUS2F53XbrwSPTih3ZHXPj
+ y+QE=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -114,44 +115,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a board level stuff.
+For PTP_MMU our physical address is not directly mapped
+into virtual address space, we need to access physical
+memory from those fixed map segments.
+
+Implement phys_to_virt and virt_to_phys hook to reflect
+this setting.
 
 Tested-by: Max Filippov <jcmvbkbc@gmail.com>
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/xtensa/cpu/cpu.c         | 5 -----
- board/cadence/xtfpga/xtfpga.c | 5 +++++
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ arch/xtensa/include/asm/addrspace.h |  2 ++
+ arch/xtensa/include/asm/io.h        | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 34 insertions(+)
 
-diff --git a/arch/xtensa/cpu/cpu.c b/arch/xtensa/cpu/cpu.c
-index abcd8f7984fa..d2266812229c 100644
---- a/arch/xtensa/cpu/cpu.c
-+++ b/arch/xtensa/cpu/cpu.c
-@@ -48,8 +48,3 @@ int arch_cpu_init(void)
- 	gd->ram_size = CFG_SYS_SDRAM_SIZE;
- 	return 0;
- }
--
--int dram_init(void)
--{
--	return 0;
--}
-diff --git a/board/cadence/xtfpga/xtfpga.c b/board/cadence/xtfpga/xtfpga.c
-index 5110fed31194..6b92fe31c0e0 100644
---- a/board/cadence/xtfpga/xtfpga.c
-+++ b/board/cadence/xtfpga/xtfpga.c
-@@ -66,6 +66,11 @@ unsigned long get_board_sys_clk(void)
- #endif
+diff --git a/arch/xtensa/include/asm/addrspace.h b/arch/xtensa/include/asm/addrspace.h
+index 920b5fd26b20..c8bed8834b55 100644
+--- a/arch/xtensa/include/asm/addrspace.h
++++ b/arch/xtensa/include/asm/addrspace.h
+@@ -7,6 +7,8 @@
+ #ifndef _XTENSA_ADDRSPACE_H
+ #define _XTENSA_ADDRSPACE_H
+ 
++#include <config.h>
++
+ #include <asm/arch/core.h>
+ 
+ /*
+diff --git a/arch/xtensa/include/asm/io.h b/arch/xtensa/include/asm/io.h
+index 87ad9faa2995..ab2438b829ac 100644
+--- a/arch/xtensa/include/asm/io.h
++++ b/arch/xtensa/include/asm/io.h
+@@ -12,6 +12,8 @@
+ #include <linux/types.h>
+ #include <asm/byteorder.h>
+ 
++#include <asm/addrspace.h>
++
+ /*
+  * swap functions to change byte order from little-endian to big-endian and
+  * vice versa.
+@@ -127,6 +129,36 @@ static inline void sync(void)
+ {
  }
  
-+int dram_init(void)
++#if XCHAL_HAVE_PTP_MMU
++static inline void *phys_to_virt(phys_addr_t paddr)
 +{
++	if (paddr >= CFG_SYS_IO_BASE)
++		return (void *)(unsigned long)paddr;
++
++	if (paddr < CFG_MAX_MEM_MAPPED)
++		return (void *)(unsigned long)MEMADDR(paddr);
++
++	return NULL;
++}
++
++#define phys_to_virt phys_to_virt
++
++static inline phys_addr_t virt_to_phys(void *vaddr)
++{
++	unsigned long addr = (unsigned long)vaddr;
++
++	if (addr >= CFG_SYS_IO_BASE)
++		return addr;
++
++	if (addr >= CFG_SYS_SDRAM_BASE && addr < MEMADDR(CFG_MAX_MEM_MAPPED))
++		return PHYSADDR(addr);
++
 +	return 0;
 +}
 +
- int board_postclk_init(void)
- {
- 	gd->cpu_clk = get_board_sys_clk();
++#define virt_to_phys virt_to_phys
++#endif /* XCHAL_HAVE_PTP_MMU */
++
+ #include <asm-generic/io.h>
+ 
+ #endif	/* _XTENSA_IO_H */
 
 -- 
 2.43.0
