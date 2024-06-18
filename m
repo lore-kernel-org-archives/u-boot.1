@@ -4,70 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36C6C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:30:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3977C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:30:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E24F48839F;
-	Tue, 18 Jun 2024 17:30:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BF8E88381;
+	Tue, 18 Jun 2024 17:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718724616;
-	bh=dELBlyE7ZCLDwaVdHcJ7KVhxFhJmFIZEcurx9xkzCpE=;
+	s=phobos-20191101; t=1718724619;
+	bh=AoHAeZla5RpbiUp+QprbMDfbwPICrv7f7NbSCs6Dz4c=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AazRcj4gkn+V1KfzOO0wEUo5nZFykXHIwmS8LoNAK5dbKQpU9y+S3dv5SFxRSApzH
-	 VTVIPNfq7Ik+FfJPXitF1wTwTVis8BqT1mfuJuxKBtjszGyeZU7CVwr3AEANymI9O/
-	 SQrCkUPWRpRKHdI/ZVaPqNUdU27IUqKFP/4Pyxyb8EitCRitFVgZW5F2YtUfM5/0v1
-	 P1M96j/03+T1AmRrH/L99t8FZl8v7HGad8XJpcW2a6aUSenbxTMMxFqVzBSiB0bQ2m
-	 +cGh0aXnfVHL7bYTJ5Ip9jVkaby/Rje3duSpF3ITonajbvzclrFRaxkaIeWIfLHWWY
-	 KrINqb7zElkiA==
+	b=pIS1qWlbZwxcJSNRnhHt/bM7ZtCIlTUY9+Cvsv19RP7z+KQmfKm1FzAQOs4HKSkwC
+	 OGfZ7FBh1TXYvYNvv6UHjGbgByAyWcKmFpQtAGQKv1mMURIXj6HU21aZlP1PGHOuxM
+	 h+MLeWtVu3MCtforiGAlThEupXl/9plGn3CojgP5wqQrlX5W+nJZ3aVW3b3CGENchN
+	 eiQ/xFWMpumIUnRd+OIbKr8EZ0L3uN5r4QCWS/EfcVcyN/AolNPh4LeZsrzhsGL49I
+	 L/hYNpgRMHgFO2JvaWR0rp12AnzOCQcn+z+0hY5McW2eQ/JeACOwhbjL5YzVX+tRVK
+	 QDJSCixmsRarA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B7B1583334;
- Tue, 18 Jun 2024 17:30:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id ECBA78834B;
+ Tue, 18 Jun 2024 17:30:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1718724615;
- bh=dELBlyE7ZCLDwaVdHcJ7KVhxFhJmFIZEcurx9xkzCpE=;
+ s=phobos-20191101; t=1718724616;
+ bh=AoHAeZla5RpbiUp+QprbMDfbwPICrv7f7NbSCs6Dz4c=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=uaopK9vppGvP12mCAkKWTb0+N39f1LDOryopOyCNdab5vWBJnfCC6oCpXbJJ5t19d
- r50Pckbe72KRd69Z/6dRYz8kvxJCl5kQOjnPEyNL9TsoH5Nj06+ETm8pjCNiOBFMAP
- yKnxbyMPkRDOMKlMevgzimv0oo6AqQjTJpMT/sk9ZhxUZQsqlA9tj1N7XTVNvRWQ6M
- 5UEYpLq73mmYyUEmapfiXHAc4J87k8rTC9rNay0CLqXXihoeanXgbcPyKk2e/nipEv
- kOwLD4meiNPjHRmXapiz7pXk1l51YsugnNPJ7z5mdwHevWfehsZ05t7DT3tECu5hjB
- wU3nTeBCOdv+A==
-Message-ID: <d46433c5-f4a6-418a-bc23-1ae5ce6ba63a@denx.de>
-Date: Tue, 18 Jun 2024 16:26:21 +0200
+ b=Yo1icMn2CSoSaCPdYmXIKfHzzq+26MfN4eblpig+b5e2GnKydmSVfu0leUvwejNpL
+ bAROqEQt75dFv+q1G+XksJfHwfy21lRglBKvMWJgXUJAnSjGNwYTb+f6oOv8gZKbjh
+ D4U+uifSM00ft2X9Yav+E3Cc0bh5pDeRRaVsrF9x3m5JQZXhqp6sm9OyJI1jfOCahK
+ n4+cA4WJ1jdfjFgUwMvnVaKQ3EEAMOnwuaCdBNGCthARoqco1eLwL5EaE83o5J/rsj
+ PTJwB65r35LYYqHrCxM1gjzRGpvap1vaJfyZ5w1bZn99AiY8JP9DwtNvbdScvjGi+d
+ QYzJz2Bewd8Ow==
+Message-ID: <e52e6f28-94c7-4c2c-94d9-e1185829b6e7@denx.de>
+Date: Tue, 18 Jun 2024 16:54:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de,
- Tim Harvey <tharvey@gateworks.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm, u-boot@dh-electronics.com
-References: <20240521104834.11295-1-marex@denx.de>
- <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
- <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
- <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
+Subject: Re: [PATCH 1/5] phy: meson-gxl-usb2: add set_mode callback
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ u-boot-amlogic@groups.io, u-boot@lists.denx.de
+References: <20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org>
+ <20240618-u-boot-usb-gxl-phy-set-mode-v1-1-6b41efa46e35@linaro.org>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
+In-Reply-To: <20240618-u-boot-usb-gxl-phy-set-mode-v1-1-6b41efa46e35@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,40 +70,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/18/24 2:43 PM, Simon Glass wrote:
-> Hi again,
+On 6/18/24 9:55 AM, Neil Armstrong wrote:
+> Implement set_mode callback by calling the current public
+> function.
 > 
-> On Tue, 11 Jun 2024 at 12:51, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi,
->>
->> On Fri, 24 May 2024 at 10:26, Fabio Estevam <festevam@gmail.com> wrote:
->>>
->>> On Tue, May 21, 2024 at 7:48 AM Marek Vasut <marex@denx.de> wrote:
->>>>
->>>> Add new binman etype which allows signing both the SPL and fitImage sections
->>>> of i.MX8M flash.bin using CST. There are multiple DT properties which govern
->>>> the signing process, nxp,loader-address is the only mandatory one which sets
->>>> the SPL signature start address without the imx8mimage header, this should be
->>>> SPL text base. The key material can be configured using optional DT properties
->>>> nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
->>>> names generated by CST tool scripts. The nxp,unlock property can be used to
->>>> unlock CAAM access in SPL section.
->>>>
->>>> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
->>>> Signed-off-by: Marek Vasut <marex@denx.de>
->>>
->>> Applied the series, thanks.
->>
->> This lacks tests - can you please add sufficient tests in ftest.py to
->> get the cover coverage back to 100%? Please try 'binman test -T' to
->> see this.
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>   drivers/phy/meson-gxl-usb2.c | 25 ++++++++++++++++++++++++-
+>   1 file changed, 24 insertions(+), 1 deletion(-)
 > 
-> Any thoughts on this, please? At present -master is broken for one
-> file and -next has three problems.
+> diff --git a/drivers/phy/meson-gxl-usb2.c b/drivers/phy/meson-gxl-usb2.c
+> index 92c285103c..e051e66224 100644
+> --- a/drivers/phy/meson-gxl-usb2.c
+> +++ b/drivers/phy/meson-gxl-usb2.c
+> @@ -150,6 +150,28 @@ void phy_meson_gxl_usb2_set_mode(struct phy *phy, enum usb_dr_mode mode)
+>   	phy_meson_gxl_usb2_reset(priv);
+>   }
+>   
+> +static int _phy_meson_gxl_usb2_set_mode(struct phy *phy, enum phy_mode mode, int submode)
+> +{
+> +	if (submode)
+> +		return -EOPNOTSUPP;
+> +
+> +	switch (mode) {
+> +	case PHY_MODE_USB_DEVICE:
+> +		phy_meson_gxl_usb2_set_mode(phy, USB_DR_MODE_PERIPHERAL);
+> +		break;
+> +
+> +	case PHY_MODE_USB_HOST:
+> +	case PHY_MODE_USB_OTG:
+> +		phy_meson_gxl_usb2_set_mode(phy, USB_DR_MODE_HOST);
+> +		break;
+> +
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static int phy_meson_gxl_usb2_power_on(struct phy *phy)
+>   {
+>   	struct udevice *dev = phy->dev;
+> @@ -161,7 +183,7 @@ static int phy_meson_gxl_usb2_power_on(struct phy *phy)
+>   	val &= ~U2P_R0_POWER_ON_RESET;
+>   	regmap_write(priv->regmap, U2P_R0, val);
+>   
+> -	phy_meson_gxl_usb2_set_mode(phy, USB_DR_MODE_HOST);
 
-It is in the pipeline.
+Could you rename this ^ to some phy_meson_gxl_usb2_set_mode_inner() and ...
 
-What exactly is the error you observe ?
+> +	_phy_meson_gxl_usb2_set_mode(phy, PHY_MODE_USB_HOST, 0);
 
-When I run binman test -T , I get a lot of output, but no error reports?
+... remove the leading underscore here.
+
+>   	return 0;
+>   }
+> @@ -183,6 +205,7 @@ static int phy_meson_gxl_usb2_power_off(struct phy *phy)
+>   struct phy_ops meson_gxl_usb2_phy_ops = {
+>   	.power_on = phy_meson_gxl_usb2_power_on,
+>   	.power_off = phy_meson_gxl_usb2_power_off,
+> +	.set_mode = _phy_meson_gxl_usb2_set_mode,
+
+... and here ?
+
+[...]
