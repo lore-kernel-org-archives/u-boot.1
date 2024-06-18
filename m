@@ -4,48 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5265EC2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9301C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:41:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C4508842C;
-	Tue, 18 Jun 2024 23:06:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id E36A788307;
+	Tue, 18 Jun 2024 23:41:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DEv0Eohg";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81DB4883DE; Tue, 18 Jun 2024 23:06:19 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4D1128839A; Tue, 18 Jun 2024 23:41:46 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36C98883D2
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:06:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5383E8644E
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:41:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1sJg1u-00FAbj-1m;
- Tue, 18 Jun 2024 21:06:14 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
- Tim Harvey <tharvey@gateworks.com>, Michal Simek <michal.simek@amd.com>,
- Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH v7 3/4] use fdt_kaslrseed function to de-duplicate code
-Date: Tue, 18 Jun 2024 14:06:08 -0700
-Message-Id: <20240618210609.1744727-4-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240618210609.1744727-1-tharvey@gateworks.com>
-References: <20240618210609.1744727-1-tharvey@gateworks.com>
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-52c89d6b4adso5337347e87.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:41:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718746903; x=1719351703; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=g7k9BtTdjjzYpnnwqSx7jrcx8gt24jwN3T2Nm2RyPXk=;
+ b=DEv0EohglAOVvcchZX560FsU5S0DedS6Pa6hS36D7zqytagZLwL7+1CHjlN1D0yECC
+ CD7KVJf4QgJHLvEkjQ7uc/zpmWcLjTq70ZXjK5EQu6vt9Y09gG0zmNTnxi+vX7+7i0/5
+ 353SUkT3zO0PU/qcbNgqvYZuZ/d3o5lba1IhZQZ/5K8+UN/iGSEiecnopL0vIaQt+029
+ 3CvRkED0PnSr4jT+9wytUM+KPUxh8CYCMB5NWskVz/BSyO9gW8PMQW0IfiR2pfcoIk5M
+ O8P4PwpVpZg16zkXskEH+5DmpTzUYksfPC6lVqHVFed4VzsczYAQT1i8+18LYTzTKitO
+ NWvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718746903; x=1719351703;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g7k9BtTdjjzYpnnwqSx7jrcx8gt24jwN3T2Nm2RyPXk=;
+ b=nHm0+CyAxTEW7lS2t7YlcFq/sIxbI7tXLK6mGZP0xKCcETTBR8m2QIyHkA0nnmeL5F
+ lq/KilzLup0ko2RILdZJi4f7cyLY3qE/NzudFGnSoh5QpI3DOHXlYsO0zVhX3R2mALcI
+ IlMitD1HayMuqBjsmCBuKlfcvj28kKgRE8sh+6czV01+nODf2ODVN+cFZqYBBsAKoOQd
+ uZHUH79U3ZCtnd9e631pX6klMTJs2pCMX1EW7jakQJaXHdgcH7Y0j4qv9KH3lIQXnVzu
+ yUd/zbiUdIvtWqBXRRRCCTx9MgVrVfxJ215GeGc/BZPmJ+oKJSyYf8Nl+ALMtuA2iOUz
+ Ty4Q==
+X-Gm-Message-State: AOJu0YyjRetPDnT2ZfaEEibdUm0R5n5pHt5SQu1knVBip4C0OzS9rjDR
+ vL+kQi0NorIVN9B9RBD0AFoGIoI9m+1UBZYGdmoopimEESUuEwRWOPQOmPQvmpQ=
+X-Google-Smtp-Source: AGHT+IHZIL1z+wb+CAL98GpzdKi7cSRa4vsKIH9HNf7wWoP+CFLLlitthxQAj+Z2W2WWXfiIVWb82w==
+X-Received: by 2002:a19:5e19:0:b0:52c:814b:3ac2 with SMTP id
+ 2adb3069b0e04-52ccaaa8dcbmr356921e87.68.1718746902954; 
+ Tue, 18 Jun 2024 14:41:42 -0700 (PDT)
+Received: from alex3d.netup (team.netup.ru. [91.213.249.1])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52ca287263bsm1603006e87.165.2024.06.18.14.41.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 14:41:41 -0700 (PDT)
+From: Alex Shumsky <alexthreed@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Alex Shumsky <alexthreed@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Qu Wenruo <wqu@suse.com>, Tom Rini <trini@konsulko.com>,
+ linux-btrfs@vger.kernel.org
+Subject: [PATCH v2] fs: btrfs: fix out of bounds write
+Date: Wed, 19 Jun 2024 00:41:38 +0300
+Message-Id: <20240618214138.3212175-1-alexthreed@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -64,240 +92,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the fdt_kaslrseed function to deduplicate code doing the same thing.
+Fix btrfs_read/read_and_truncate_page write out of bounds of destination
+buffer. Old behavior break bootstd malloc'd buffers of exact file size.
+Previously this OOB write have not been noticed because distroboot usually
+read files into huge static memory areas.
 
-Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
-but left in place in case boot scripts exist that rely on this command
-existing and returning success. An informational message is printed to
-alert users of this command that it is likely no longer needed.
-
-Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
-randomization and completely ignores the kaslr-seed for its own
-randomness needs (i.e the randomization of the physical placement of
-the kernel). It gets weeded out from the DTB that gets handed over via
-efi_install_fdt() as it would also mess up the measured boot DTB TPM
-measurements as well.
-
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Andy Yan <andy.yan@rock-chips.com>
-Cc: Akash Gajjar <gajjar04akash@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Devarsh Thakkar <devarsht@ti.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Chris Morgan <macromorgan@hotmail.com>
+Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+Fixes: e342718 ("fs: btrfs: Implement btrfs_file_read()")
 ---
-v6:
- - collected tags
-v5:
- - fixed typo in commit message s/it's/its/
- - use cmd_process_error per Michal's suggestion
-v4:
- - add missing /n to notice in kaslrseed cmd
- - combine ints in declaration
- - remove unused vars from board/xilinx/common/board.c ft_board_setup
-v3:
- - skip if CONFIG_MEASURED_BOOT
- - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
- - pass in rng index and bool to specify overwrite
- - remove duplicate error strings printed outside of fdt_kaslrseed
- - added note to commit log about how EFI STUB weeds out kalsr-seed
-v2:
- - fix typo in commit msg
- - use stack for seed to avoid unecessary malloc/free
- - move to a library function and deduplicate code by using it
-   elsewhere
----
- board/xilinx/common/board.c | 40 ------------------------------
- boot/pxe_utils.c            | 34 +------------------------
- cmd/kaslrseed.c             | 49 ++++++-------------------------------
- 3 files changed, 8 insertions(+), 115 deletions(-)
 
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index b47d2d23f913..098738017bab 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -702,11 +702,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- #define MAX_RAND_SIZE 8
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
--	size_t n = MAX_RAND_SIZE;
--	struct udevice *dev;
--	u8 buf[MAX_RAND_SIZE];
--	int nodeoffset, ret;
--
- 	static const struct node_info nodes[] = {
- 		{ "arm,pl353-nand-r2p1", MTD_DEV_TYPE_NAND, },
- 	};
-@@ -714,41 +709,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_NAND_ZYNQ))
- 		fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
- 
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		debug("No RNG device\n");
--		return 0;
--	}
--
--	if (dm_rng_read(dev, buf, n)) {
--		debug("Reading RNG failed\n");
--		return 0;
--	}
--
--	if (!blob) {
--		debug("No FDT memory address configured. Please configure\n"
--		      "the FDT address via \"fdt addr <address>\" command.\n"
--		      "Aborting!\n");
--		return 0;
--	}
--
--	ret = fdt_check_header(blob);
--	if (ret < 0) {
--		debug("fdt_chosen: %s\n", fdt_strerror(ret));
--		return ret;
--	}
--
--	nodeoffset = fdt_find_or_add_subnode(blob, 0, "chosen");
--	if (nodeoffset < 0) {
--		debug("Reading chosen node failed\n");
--		return nodeoffset;
--	}
--
--	ret = fdt_setprop(blob, nodeoffset, "kaslr-seed", buf, sizeof(buf));
--	if (ret < 0) {
--		debug("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
--		return ret;
--	}
--
- 	return 0;
- }
- #endif
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 5c1c962ff4c1..38ca9b81a42d 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -324,10 +324,6 @@ static void label_boot_kaslrseed(void)
- #if CONFIG_IS_ENABLED(DM_RNG)
- 	ulong fdt_addr;
- 	struct fdt_header *working_fdt;
--	size_t n = 0x8;
--	struct udevice *dev;
--	u64 *buf;
--	int nodeoffset;
- 	int err;
- 
- 	/* Get the main fdt and map it */
-@@ -343,35 +339,7 @@ static void label_boot_kaslrseed(void)
- 	if (err <= 0)
- 		return;
- 
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		printf("No RNG device\n");
--		return;
--	}
--
--	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
--	if (nodeoffset < 0) {
--		printf("Reading chosen node failed\n");
--		return;
--	}
--
--	buf = malloc(n);
--	if (!buf) {
--		printf("Out of memory\n");
--		return;
--	}
--
--	if (dm_rng_read(dev, buf, n)) {
--		printf("Reading RNG failed\n");
--		goto err;
--	}
--
--	err = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
--	if (err < 0) {
--		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(err));
--		goto err;
--	}
--err:
--	free(buf);
-+	fdt_kaslrseed(working_fdt, true);
- #endif
- 	return;
- }
-diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-index 9acb8e163863..645cab2e74fd 100644
---- a/cmd/kaslrseed.c
-+++ b/cmd/kaslrseed.c
-@@ -16,56 +16,21 @@
- 
- static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	size_t n = 0x8;
--	struct udevice *dev;
--	u64 *buf;
--	int nodeoffset;
--	int ret = CMD_RET_SUCCESS;
-+	int err = CMD_RET_SUCCESS;
- 
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		printf("No RNG device\n");
--		return CMD_RET_FAILURE;
--	}
--
--	buf = malloc(n);
--	if (!buf) {
--		printf("Out of memory\n");
--		return CMD_RET_FAILURE;
--	}
--
--	if (dm_rng_read(dev, buf, n)) {
--		printf("Reading RNG failed\n");
--		return CMD_RET_FAILURE;
--	}
-+	printf("Notice: a /chosen/kaslr-seed is automatically added to the device-tree when booted via booti/bootm/bootz therefore using this command is likely no longer needed\n");
- 
- 	if (!working_fdt) {
- 		printf("No FDT memory address configured. Please configure\n"
- 		       "the FDT address via \"fdt addr <address>\" command.\n"
- 		       "Aborting!\n");
--		return CMD_RET_FAILURE;
--	}
--
--	ret = fdt_check_header(working_fdt);
--	if (ret < 0) {
--		printf("fdt_chosen: %s\n", fdt_strerror(ret));
--		return CMD_RET_FAILURE;
--	}
--
--	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
--	if (nodeoffset < 0) {
--		printf("Reading chosen node failed\n");
--		return CMD_RET_FAILURE;
-+		err = CMD_RET_FAILURE;
-+	} else {
-+		if (fdt_kaslrseed(working_fdt, true) < 0)
-+			err = CMD_RET_FAILURE;
+Changes in v2:
+- fix error path handling
+- add Fixes tag
+- use min3
+
+ fs/btrfs/inode.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+index 4691612eda..3998ffc2c8 100644
+--- a/fs/btrfs/inode.c
++++ b/fs/btrfs/inode.c
+@@ -640,7 +640,11 @@ static int read_and_truncate_page(struct btrfs_path *path,
+ 	extent_type = btrfs_file_extent_type(leaf, fi);
+ 	if (extent_type == BTRFS_FILE_EXTENT_INLINE) {
+ 		ret = btrfs_read_extent_inline(path, fi, buf);
+-		memcpy(dest, buf + page_off, min(page_len, ret));
++		if (ret < 0) {
++			free(buf);
++			return ret;
++		}
++		memcpy(dest, buf + page_off, min3(page_len, ret, len));
+ 		free(buf);
+ 		return len;
  	}
- 
--	ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
--	if (ret < 0) {
--		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
--		return CMD_RET_FAILURE;
--	}
--
--	free(buf);
--
--	return ret;
-+	return cmd_process_error(cmdtp, err);
+@@ -652,7 +656,7 @@ static int read_and_truncate_page(struct btrfs_path *path,
+ 		free(buf);
+ 		return ret;
+ 	}
+-	memcpy(dest, buf + page_off, page_len);
++	memcpy(dest, buf + page_off, min(page_len, len));
+ 	free(buf);
+ 	return len;
  }
- 
- U_BOOT_LONGHELP(kaslrseed,
 -- 
-2.25.1
+2.34.1
 
