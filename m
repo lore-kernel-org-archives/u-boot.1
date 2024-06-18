@@ -4,101 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEBE5C2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 22:22:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F61C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 22:55:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB77D8752A;
-	Wed, 19 Jun 2024 00:22:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+	by phobos.denx.de (Postfix) with ESMTP id C9CC487FA1;
+	Wed, 19 Jun 2024 00:55:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="QS7aWKzi";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eNpKmU/d";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="t+SjVT6o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3D6F87B1A; Wed, 19 Jun 2024 00:22:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id E03C487E2E; Wed, 19 Jun 2024 00:55:33 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA12380E9A
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:22:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0257881E7
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:55:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
- s=s31663417; t=1718749318; x=1719354118; i=quwenruo.btrfs@gmx.com;
- bh=PLPfalnLls6leW3SlWjdM2CghETE/9IWaoFeS2MJFCE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=QS7aWKziGTmk6VGhbxsqicNGtST06920xRpHiRAC4CreystSBX7gqs6/DY+4FhT6
- I93k9lqZFgZKZcMofgLM+23uRMkkF+0gNW4YZUPtajuQF2lcTa/lxsmA9QVO8XUYi
- x3A8H6irrP7RvseqdhcIQAwMfbLqvQyUwKRijaIaBwL5Y+y32p/wDcZAiR2qt2S0T
- pllqElqLFdTcR9UKxghZmnFjYfgQmzGA70t0jxnqbijVxujzlN9CWmuoNT0rstj1t
- Q9gBhHyXlH6h8fiBh8qgtIt3Vuw0QOkLImPKULpOtBv3dBM17uuxTpAVgoQDPOhiz
- jFENPudgv0ZpuoRjVA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [172.16.0.191] ([159.196.52.54]) by mail.gmx.net (mrgmx005
- [212.227.17.184]) with ESMTPSA (Nemesis) id 1MJmGZ-1s4dKu2Gnx-00Vk4L; Wed, 19
- Jun 2024 00:21:58 +0200
-Message-ID: <846975bf-1a75-4a07-ab63-764ca56cab98@gmx.com>
-Date: Wed, 19 Jun 2024 07:51:52 +0930
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4W3htC4X97z9sHh
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:55:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718751331;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=JouqAOx3yWTlhjdjBkTCmRxw8z0OzHac7TCEwDsjuyU=;
+ b=eNpKmU/dqdQWNwdy9flv4w9GBTO1QjDJ5W7QyEHTDlPaXcjMA9+HZpRPeNtxFUuk7DHcLu
+ HiXeAu+8rtm+FTCvwgh86R5ykgYWvJKE3AQxGGwyyaCe8Lnv/FoXM5cjK3PiJ5roEnnyMk
+ 0gDbATq6TXoMvQaEvbSV52SXXIR5PdXjp8g02yPn2NDvJBBFUl5zJSajHoh88B+C8iq/Xc
+ vjTZ55mbwRoHsN+FJMjD4SUIGD5vUfAl4MYSQt12V/5Q93mao1TIvQPWpVNGxJph1viOuV
+ yzMyE+/714mIPT6EOWRDOFCHTlyCpil2gJDlJCGPsSea4sb01WsO+fSnw2bT3Q==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718751329;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=JouqAOx3yWTlhjdjBkTCmRxw8z0OzHac7TCEwDsjuyU=;
+ b=t+SjVT6o3/7dn5r0dDjp276bOnQ2urEaJ2I1fk0t1IiwmFNiKKyivQS9BKLQfpktHqK0WS
+ E4rXNsYsaLn3RC4DcAwKovLYRCxmtk/ijNuXzIE1crLr47Ul5hh9pHRINOrgJHJNRTWRxl
+ k1bdA1wpCi+3qHwV0YL3BVwCfR4Fe3tibMhTr6LdcrLl6QSHUTfKl93GIquSDvGD7GYZ19
+ iEq2zHMauB2q7qDrreAo0qtvIKAdURXx0goqTck8oN6W1NVLHutTRmLflYp6s7S0T5pdZ6
+ +lpzbAh84UsinK+DkAsVMHXipItZH8nsl8yUL7Foqx+vaz9BJmkJz1DkSTKyuA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 1/6] clk: renesas: Synchronize R-Car R8A77951 H3 clock tables
+ with Linux 6.9.3
+Date: Wed, 19 Jun 2024 00:54:15 +0200
+Message-ID: <20240618225505.154437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] fs: btrfs: fix out of bounds write
-To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
-Cc: Dan Carpenter <dan.carpenter@linaro.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
- <kabel@kernel.org>, Qu Wenruo <wqu@suse.com>, Tom Rini <trini@konsulko.com>,
- linux-btrfs@vger.kernel.org
-References: <20240618214138.3212175-1-alexthreed@gmail.com>
-Content-Language: en-US
-From: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
- BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
- pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
- BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
- XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
- jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
- LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
- mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
- CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
- /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
- GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
- q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
- ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
- CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
- tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
- INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
- DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
- iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
-In-Reply-To: <20240618214138.3212175-1-alexthreed@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:n0MudmM7UipAHVyAbzfSpokRo6NdwL9G7QwU6hfLdfAlXuyjq0A
- UBS69oc6ovFCWMaBr1q8Co8ygHYuNeKNQvC0wTxC9qMyutBBdFhhbeiVC2T1I9kVUmlLpMA
- ewopLICihLV8LhwLP53JBs4KvvhMfOphia0a937SjIk2QIrWkBwJxcyk97PER8wfl1I+kEP
- 9NmCBAmZYJt9KjnorwLFQ==
-UI-OutboundReport: notjunk:1;M01:P0:laf7TQJTeC4=;QYTJ6qaByVYyyPbFID1wGsjF5Ub
- oomQArzxy3Mjc65wFh/A4pBOm8sWW1oQBV89ZqY7qYK4FdBFD4fnz3Cm0i4eF/nYO5p4h+gAz
- sdbmyX+lR0iD0qZBEns9t98zk+OhdrvvFs+HoW9nkIfSl/hOgyEW8vKE9uzMHxxUDqDpwl1Dl
- Mdk+XUTDeTOh2ecLoil1hEMyIEIJmQzKyrH6HZGCwg1tOHuNrXYQgZHjzW5zxPhv5JhDTuCP1
- BkU67kXMuBv0jXyFTf9Eg2ALove7ugFaTGsyJqrNx4IiyE2gYOgKTCBig0yazXyfV5AnHVVmS
- txkIOEdyXJq9Nh7slwxgFS0XRLYxl9f7Elpt/WHv75s/VebST93IvMtEJsjycVV/v0KGJBIJX
- 99zBtcmXpjkhMn41folxsu9P5F25S+EU2aJbU6DkmBrCfSU9SvmK/OST3+zxFV5Bb+Af/uXpN
- lRMHP+4NyPjOvaD709o1jxfFjgr/qM6/eihYArXyFy5vvY+7P0N1BqwimFO3CaAq+xiCTVIzw
- 0W5d1y6JkFBL93YNVLvTyz5o9emhiUXp6MJn7C10PVZXPNHPUl9Q3OR2vS7R0vSKrCVMHPFcX
- oz8/M+I9ys388a/+cEdPQTeK00f/72Gn2wQlcH8L9l9NnAjZJPLpjNh0C67zPhyYzwvilXp2a
- 7V++KnD1rlqPMFyrtZvST6cXaye8HzhP90vEHNMeXfcoWHecmNRZgpL1Odyfn2K4+SjAcZExo
- 5XtwYL4AXC9TCxS/8zAxom41ejknX6N47rR2j5IOgbqfzd10w2c2QchutchEQdRAimIQWQVrv
- T9flK6AiNchZu2naOTz379oHOcU5Ene2OBK2C+mGn8uls=
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: af7f94d0643929e08e7
+X-MBO-RS-META: jhdifnigq45gmrhhkoqjpgiztw4cu7jz
+X-Rspamd-Queue-Id: 4W3htC4X97z9sHh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,57 +84,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Synchronize R-Car R8A77951 H3 clock tables with Linux 6.9.3,
+commit 1b4861e32e461b6fae14dc49ed0f1c7f20af5146 .
 
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+ drivers/clk/renesas/r8a7795-cpg-mssr.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-=E5=9C=A8 2024/6/19 07:11, Alex Shumsky =E5=86=99=E9=81=93:
-> Fix btrfs_read/read_and_truncate_page write out of bounds of destination
-> buffer. Old behavior break bootstd malloc'd buffers of exact file size.
-> Previously this OOB write have not been noticed because distroboot usual=
-ly
-> read files into huge static memory areas.
->
-> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
-> Fixes: e342718 ("fs: btrfs: Implement btrfs_file_read()")
+diff --git a/drivers/clk/renesas/r8a7795-cpg-mssr.c b/drivers/clk/renesas/r8a7795-cpg-mssr.c
+index e511f74982b..4225036a1a9 100644
+--- a/drivers/clk/renesas/r8a7795-cpg-mssr.c
++++ b/drivers/clk/renesas/r8a7795-cpg-mssr.c
+@@ -77,6 +77,7 @@ static struct cpg_core_clk r8a7795_core_clks[] __initdata = {
+ 	/* Core Clock Outputs */
+ 	DEF_GEN3_Z("z",         R8A7795_CLK_Z,     CLK_TYPE_GEN3_Z,  CLK_PLL0, 2, 8),
+ 	DEF_GEN3_Z("z2",        R8A7795_CLK_Z2,    CLK_TYPE_GEN3_Z,  CLK_PLL2, 2, 0),
++	DEF_GEN3_Z("zg",        R8A7795_CLK_ZG,    CLK_TYPE_GEN3_ZG, CLK_PLL4, 4, 24),
+ 	DEF_FIXED("ztr",        R8A7795_CLK_ZTR,   CLK_PLL1_DIV2,  6, 1),
+ 	DEF_FIXED("ztrd2",      R8A7795_CLK_ZTRD2, CLK_PLL1_DIV2, 12, 1),
+ 	DEF_FIXED("zt",         R8A7795_CLK_ZT,    CLK_PLL1_DIV2,  4, 1),
+@@ -126,6 +127,7 @@ static struct cpg_core_clk r8a7795_core_clks[] __initdata = {
+ };
+ 
+ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
++	DEF_MOD("3dge",			 112,	R8A7795_CLK_ZG),
+ 	DEF_MOD("fdp1-1",		 118,	R8A7795_CLK_S0D1),
+ 	DEF_MOD("fdp1-0",		 119,	R8A7795_CLK_S0D1),
+ 	DEF_MOD("tmu4",			 121,	R8A7795_CLK_S0D6),
+@@ -249,6 +251,7 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("rpc-if",		 917,	R8A7795_CLK_RPCD2),
+ 	DEF_MOD("i2c6",			 918,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("i2c5",			 919,	R8A7795_CLK_S0D6),
++	DEF_MOD("adg",			 922,	R8A7795_CLK_S0D4),
+ 	DEF_MOD("i2c-dvfs",		 926,	R8A7795_CLK_CP),
+ 	DEF_MOD("i2c4",			 927,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("i2c3",			 928,	R8A7795_CLK_S0D6),
+-- 
+2.43.0
 
-Reviewed-by: Qu Wenruo <wqu@suse.com>
-
-Thanks,
-Qu
-> ---
->
-> Changes in v2:
-> - fix error path handling
-> - add Fixes tag
-> - use min3
->
->   fs/btrfs/inode.c | 8 ++++++--
->   1 file changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
-> index 4691612eda..3998ffc2c8 100644
-> --- a/fs/btrfs/inode.c
-> +++ b/fs/btrfs/inode.c
-> @@ -640,7 +640,11 @@ static int read_and_truncate_page(struct btrfs_path=
- *path,
->   	extent_type =3D btrfs_file_extent_type(leaf, fi);
->   	if (extent_type =3D=3D BTRFS_FILE_EXTENT_INLINE) {
->   		ret =3D btrfs_read_extent_inline(path, fi, buf);
-> -		memcpy(dest, buf + page_off, min(page_len, ret));
-> +		if (ret < 0) {
-> +			free(buf);
-> +			return ret;
-> +		}
-> +		memcpy(dest, buf + page_off, min3(page_len, ret, len));
->   		free(buf);
->   		return len;
->   	}
-> @@ -652,7 +656,7 @@ static int read_and_truncate_page(struct btrfs_path =
-*path,
->   		free(buf);
->   		return ret;
->   	}
-> -	memcpy(dest, buf + page_off, page_len);
-> +	memcpy(dest, buf + page_off, min(page_len, len));
->   	free(buf);
->   	return len;
->   }
