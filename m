@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3463C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC3BC2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70C9F883E5;
-	Tue, 18 Jun 2024 15:56:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D875188413;
+	Tue, 18 Jun 2024 15:56:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="oUJymRL3";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="FkPKetLu";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="nar2dnqe";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="rspzHiYz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88CD5883F2; Tue, 18 Jun 2024 15:56:45 +0200 (CEST)
+ id AB08187F5C; Tue, 18 Jun 2024 15:56:47 +0200 (CEST)
 Received: from wfhigh8-smtp.messagingengine.com
  (wfhigh8-smtp.messagingengine.com [64.147.123.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A72A883DA
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:56:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABF50883DA
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:56:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfhigh.west.internal (Postfix) with ESMTP id A8DAC18000CC;
- Tue, 18 Jun 2024 09:56:41 -0400 (EDT)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfhigh.west.internal (Postfix) with ESMTP id D9C5D18000D7;
+ Tue, 18 Jun 2024 09:56:43 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Tue, 18 Jun 2024 09:56:42 -0400
+ by compute7.internal (MEProxy); Tue, 18 Jun 2024 09:56:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1718719001;
- x=1718805401; bh=kqId2TZI8XjMmriwHcUQveX4AhQfv6mspgmzmUbnNlg=; b=
- oUJymRL3IrKx/vL9FffoQm+AQhYj/oT2YPJLrsd/+xvB843Th0YwIbZQHMrap+xy
- fVeDSpHUMUPTli3uMkArKP0bdesN5/4mhpvz1ZCUxyi7SYKZgktVx1FxTTNYeaFA
- brJkVDbowRRo1strN3cEDD5jcD66BtjPYHog+S0M8g7vRazF77/8DsMHMpL79Qfy
- Fm2fjW2ozSabj2qlBoH6zu6Rv5WlRbqXGZWvKvqkBldlcuZgugFWIRnBIPvTQ+EQ
- Fq/eKDxPwdZCqFIvFtkv65lMq3bJwzU0HLmh+AEQGaAjg2p+A98UC7p6SqqdqR+1
- aISbMQ0AZV59tvLtv/brMw==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1718719003;
+ x=1718805403; bh=A01cnMSFJgBVxMzE0hPHwkoESZYxD0PNvMhBF2hWkcI=; b=
+ nar2dnqexGzVodNREQ7itUJO7sxbEOHZ63fff2fOaAzjyMWQli4qlUzH3bzq+mCn
+ tKG83p6JsTshTdETihp252rgqq8mmfZ5M7zL+WGupzJfE3qEpLjnMNdErMvun0un
+ YWhq3KlUFqyJJnIAE0Lw4A7VLQzGdnJ0JFaujQgYxFnFFiQpwSsJylKtnzhl2zOE
+ wKs7PasX70/m32B7AEJMg3nxlP8/VjBgIrcOQ7DQNP9XplU93ZLWqBy9/DbRELAk
+ Rut0ovP+0/UmE21U/iT4wygvhnamOTKGN7/K4RhFGaX4H5p0k6PP+URj3sL3NtsY
+ caLV9UyPInvKg5qlENEXxQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718719001; x=
- 1718805401; bh=kqId2TZI8XjMmriwHcUQveX4AhQfv6mspgmzmUbnNlg=; b=F
- kPKetLuULGmx9Zmkts0ewm4b52cjPlmje3iOfZkbVSYKYi9hTXJPTG/rVT/JnWkN
- gSd7EvNi3cSrM2uqfq6IbgHA9jIN98x9UEjdpjxSnNsThXC2J83etuKrAJbP5tgG
- Cc/GBN2k7KmYAf6kCncTGb27ixneo87mGgrBe12RjSs2T+LDb1s70wEVA4aJ0rKb
- xsjG1WR3Qkm9jGsL/AI4JyUmOXz3z5QibpnPI3gojqIA+9gIRR3ifzpW7B+kVVZa
- CY4vTWvT2yAvHerP+BFTjBUey1TWDyCOj0HTENowzpq3yMrBzRaL8JSAEiLfQc1C
- mlwq5++Ct1ME1ocWIqpLQ==
-X-ME-Sender: <xms:GZJxZhrMHoS8xQKn-_oYBj9cfiB80OxIWfvbqEeXESu6gq2hCqFZ9g>
- <xme:GZJxZjpfaugn1_sdzNIVVhqR9pr81d2ctSCCSbAeWdpjAIWKv7fAN-v7AGzUUwJH2
- ZTGqsTVS31UP2Gnwfk>
-X-ME-Received: <xmr:GZJxZuP_sJOoFsA58iuCLnxVG238Q9HMOuT7E_x-ch64rmOKiidrQ4E>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718719003; x=
+ 1718805403; bh=A01cnMSFJgBVxMzE0hPHwkoESZYxD0PNvMhBF2hWkcI=; b=r
+ spzHiYz/plwU2TU6tWtEUnnCg2JKop2swYp8MFnR2BFA/WZtfLSqziHYjwl1GzR7
+ 0qea8o++qZ/zvZTYQIey/V4CTx1Zje8BJ8qgCPGkAId+sv+QFxM/ZLM4GrBxBHpX
+ H7Wg9bGbGosccSbcMHV+zVM6zTKsVLhKStX1PDnFKA5QuLr8giTa57Z+mVOaXhoJ
+ KH6DluAU3/AktkPfCYDTBc68AUEO6+CRTCWG7MmqCFjGJFdvbVAShZgsTTIMJhNl
+ sgAchrae3QvCvnhDhnPKBd4UG/cFwDQnNJB8B3br5BO/pzSMkKvZez6z8GsRnujX
+ uwtucFidIDtKrlqFozHwQ==
+X-ME-Sender: <xms:G5JxZmvoSiYGF9haMN5jejNWHRnCl8l6dX_1j8UUNARgIZr-T3iCFw>
+ <xme:G5JxZrczT-91h9XPEBGSpU6nckTe_ALwWrRLXsVrMtEeyNy7Dtu5aPXNsFXVxMQZ8
+ vdjAMtHVEgyk3dyatc>
+X-ME-Received: <xmr:G5JxZhzHQ2P6hOhqkdPJhdoKncIhRK3SExNBPYT6TBwJKh8cEStq21s>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedvkedggeduucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepvdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:GZJxZs5RauzGXisluf5O0rACNioRKNDssKbjq_K189z6EP_qFoZ7eA>
- <xmx:GZJxZg6t73icvzbPbKv5HYkQHoifMGfZOPBhAjJqoiAjXV_1DaDZhA>
- <xmx:GZJxZkjfVQE-ZSCxe9szAiUTcQShU9gCklmh6lkGfN44YzlufkmZpQ>
- <xmx:GZJxZi5TKHFmZ-WBYRdn0NZBMZXlpqNJ50MSFVEv9eiZ26sa8Azu8Q>
- <xmx:GZJxZttrn7BuEKw6dWqAW4FpZblUpkL4mRNS-6stiM3V7UyjP8Rxhca4>
+X-ME-Proxy: <xmx:G5JxZhNbckMxhoF2yPfCyhdMaf6vVuk_6ixSoFy3n0xw2Wv5WlCm2A>
+ <xmx:G5JxZm-dSyGzT1OF1yLVWWlPGK8kT9DlbkOzta0i8Mud3Fa5Be0Hiw>
+ <xmx:G5JxZpVe3gGPy596IqxjFgIJVyTadRBuH9a6jBoF0L0KgHg2hQH_EQ>
+ <xmx:G5JxZve0oW5w36_vUxxcWvBjgZwZcdUfmdGInvWjNYg8FBFZ6PnBDQ>
+ <xmx:G5JxZmw-v2o16qKNwZQNqwKvZ7sDnzu_LfMCb3VPQGsp5MOABRILGlNb>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Jun 2024 09:56:40 -0400 (EDT)
+ 18 Jun 2024 09:56:42 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Tue, 18 Jun 2024 14:56:10 +0100
-Subject: [PATCH v3 10/12] doc: New documentation for qemu-xtensa
+Date: Tue, 18 Jun 2024 14:56:11 +0100
+Subject: [PATCH v3 11/12] ci: Wire up qemu_xtensa_dc233c
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240618-qemu-xtensa-v3-10-f5af5e6fdd23@flygoat.com>
+Message-Id: <20240618-qemu-xtensa-v3-11-f5af5e6fdd23@flygoat.com>
 References: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
 In-Reply-To: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2099;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1185;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=s5vt7uL7mNfZWfN+8X+iKwKKTow3FxVKOFsorIdZ1xI=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTCSYzurw5Jfu/NnvMu0GB32kS/+ZfXzVl2nztSfZ3Wg
- 0XzHb7e7ChlYRDjYpAVU2QJEVDq29B4ccH1B1l/YOawMoEMYeDiFICJcGUzMsy48X7H9ekJXacj
- WIT5HaKEQ7exLGXf5Ps8SHsh65nPi/MYGTqOv+E9zvj7nfmTuPkbezYoRj5wZHARWLqRqWFenhl
- fLwcA
+ bh=VUxZL4V/YX1xSaAz/5vxbEi1O9K5mg2R57wFiFOJmoQ=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTCSYx7cm8L75E/uXpKX0BClnPeyoqdcfb+ttHntqRfc
+ J3+1bCxo5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACai6sHIcLj75tfeP0w32uu/
+ Sm3d4SetLvgqSK7M8tbBhpkRj602z2BkeLBbb67f9C9/Q1Yqz/qzLKv3iFi568NFC69bWpuFbY9
+ 05AIA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -114,64 +114,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the board and provide instructions on how to get
-it work.
-
-Tested-by: Max Filippov <jcmvbkbc@gmail.com>
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- doc/board/emulation/index.rst       |  1 +
- doc/board/emulation/qemu-xtensa.rst | 33 +++++++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+)
+ .azure-pipelines.yml | 3 +++
+ .gitlab-ci.yml       | 6 ++++++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-index d3d6b8f3d86b..98a0b26ad245 100644
---- a/doc/board/emulation/index.rst
-+++ b/doc/board/emulation/index.rst
-@@ -14,3 +14,4 @@ Emulation
-    qemu-ppce500
-    qemu-riscv
-    qemu-x86
-+   qemu-xtensa
-diff --git a/doc/board/emulation/qemu-xtensa.rst b/doc/board/emulation/qemu-xtensa.rst
-new file mode 100644
-index 000000000000..fff23c1a9b0e
---- /dev/null
-+++ b/doc/board/emulation/qemu-xtensa.rst
-@@ -0,0 +1,33 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 27f69583c655..b149db62798f 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -413,6 +413,9 @@ stages:
+         qemu_x86_64:
+           TEST_PY_BD: "qemu-x86_64"
+           TEST_PY_TEST_SPEC: "not sleep"
++        qemu_xtensa_dc233c:
++          TEST_PY_BD: "qemu-xtensa-dc233c"
++          TEST_PY_TEST_SPEC: "not sleep and not efi"
+         r2dplus_i82557c:
+           TEST_PY_BD: "r2dplus"
+           TEST_PY_ID: "--id i82557c_qemu"
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 165f765a8332..83dd07e26f4b 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -419,6 +419,12 @@ qemu-x86_64 test.py:
+     TEST_PY_TEST_SPEC: "not sleep"
+   <<: *buildman_and_testpy_dfn
+ 
++qemu-xtensa-dc233c test.py:
++  variables:
++    TEST_PY_BD: "qemu-xtensa-dc233c"
++    TEST_PY_TEST_SPEC: "not sleep and not efi"
++  <<: *buildman_and_testpy_dfn
 +
-+QEMU Xtensa
-+===========
-+
-+QEMU for Xtensa supports a special 'virt' machine designed for emulation and
-+virtualization purposes. This document describes how to run U-Boot under it.
-+
-+The QEMU virt machine models a generic Xtensa virtual machine with PCI Bus
-+and Xtensa ISS simcall semihosting support. It supports many different Xtensa
-+CPU configuration. Currently, only dc233c variant is tested against U-Boot.
-+
-+Building U-Boot
-+---------------
-+Set the CROSS_COMPILE environment variable as usual, and run:
-+
-+    make qemu-xtensa-dc233c_defconfig
-+    make
-+
-+Note that Xtensa's toolchain is bounded to CPU configuration, you must use
-+the toolchain built for exactly the same CPU configuration as you selected
-+in U-Boot.
-+
-+Running U-Boot
-+--------------
-+The minimal QEMU command line to get U-Boot up and running is:
-+
-+    qemu-system-xtensa -nographic -machine virt -cpu dc233c -semihosting -kernel ./u-boot.elf
-+
-+You many change cpu option to match your U-Boot CPU type configuration.
-+semihosting option is mandatory because this is the only way to interact
-+with U-Boot in command line.
+ r2dplus_i82557c test.py:
+   variables:
+     TEST_PY_BD: "r2dplus"
 
 -- 
 2.43.0
