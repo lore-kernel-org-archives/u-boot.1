@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 519B2C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 06:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606F3C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 06:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 211E888403;
-	Tue, 18 Jun 2024 08:05:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0EE888431;
+	Tue, 18 Jun 2024 08:16:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="t8iKc8fx";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cgtXX7e7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7755488445; Tue, 18 Jun 2024 08:05:51 +0200 (CEST)
+ id 6CA988843A; Tue, 18 Jun 2024 08:16:49 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AD3288422
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 08:05:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72E498840E
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 08:16:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,25 +31,25 @@ Received: from LT2ubnt.fritz.box (ip-178-202-041-025.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 545ED3FC08; 
- Tue, 18 Jun 2024 06:05:48 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id BD2AD3FC08; 
+ Tue, 18 Jun 2024 06:16:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1718690748;
- bh=mPupYyqYBmFM0EStQeTzdvPxO7+vCzk1eLleZfTHzLA=;
+ s=20210705; t=1718691406;
+ bh=96Jc42RfPZloS8EG6bkN99zEihaF1nh/J9MsDL2NZrE=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=t8iKc8fxpYMQbmWegP5kvrQs7hlN07TIhWPSxXEJMVZ5HHu87TDesl2YRJynRv9Hv
- OXIpQFpv8dpXVuJ6GboHlTLB/DKu5x00AKexa2w9ec+ZvIog7ou1dvbZEzByGZbO5r
- 0Txa23Svqq0jFtWM6iqWNFpVLuzlvC2WkXSHh06+u37LYjV6UXqMnLKnyhKkSSFauS
- Df6ZP1dRhXr7MBTzIlR738d0CWbJEUlTu46v+IBWY5BcQTF56+sU7U+ImO3kkrXiDI
- +vUrMV1JKt4GxX10G5XuUliFzqxAu+xWBcM8eQ3Eg8qhDufc6d0vN8DT7VZc+Hi5I9
- vIBviS2JY8Bdw==
+ b=cgtXX7e792q3JUqhfov1JiV8ydS/gtnlU6U3NEMoEBBICeBZeheVEbPMEZ/ATexZ2
+ 8mlpq3Oey+ROLlER0RiOkj40dRSYjfMg8/0IK9pJaG32wfNaY2jE1hGyUoNTxatHkQ
+ yVGWtrTXveqAJSjWIKf9r3YJBYwEAe1q9uP2SjawiKK9trBINRG65aEVuL2jSh73zH
+ HqpFfRBUvCtCihs/zX1KixACD3T1dQzVsappQvEvHs5k/jxIVDZKSFAPn94ExaZMbf
+ O46kzT6rltXAREXOjp8w3LV6EVTDN3ZbX/Y22Gg/t/Xn3LjV7JSwcum0hGo+utgzpk
+ pi2kNMpjvFW3Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: link to doc/usage/fit/x86-fit-boot.rst
-Date: Tue, 18 Jun 2024 08:05:46 +0200
-Message-ID: <20240618060546.9681-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: FIT links in develop/uefi/uefi.rst
+Date: Tue, 18 Jun 2024 08:16:44 +0200
+Message-ID: <20240618061644.11677-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,26 +69,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the outdated link.
+Correct the links to the FIT documentation.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- cmd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ doc/develop/uefi/uefi.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index ff0f5941ecc..9e4245a9702 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -622,7 +622,7 @@ config CMD_ZBOOT
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index 0389b269c01..ea70dcbda86 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -72,7 +72,7 @@ bootm command. This feature is available if U-Boot is configured with::
  
- 	  Consider using FIT in preference to this since it supports directly
- 	  booting both 32- and 64-bit kernels, as well as secure boot.
--	  Documentation is available in doc/uImage.FIT/x86-fit-boot.txt
-+	  Documentation is available in doc/usage/fit/x86-fit-boot.rst.
+     CONFIG_BOOTM_EFI=y
  
- endmenu
+-A sample configuration is provided as file doc/uImage.FIT/uefi.its.
++A sample configuration is provided in :doc:`../../usage/fit/uefi`.
  
+ Below you find the output of an example session starting GRUB::
+ 
+@@ -96,7 +96,7 @@ Below you find the output of an example session starting GRUB::
+     ## Transferring control to EFI (at address 404000d0) ...
+     Welcome to GRUB!
+ 
+-See doc/uImage.FIT/howto.txt for an introduction to FIT images.
++See :doc:`../../usage/fit/howto` for an introduction to FIT images.
+ 
+ Configuring UEFI secure boot
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- 
 2.43.0
 
