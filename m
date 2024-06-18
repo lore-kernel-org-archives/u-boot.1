@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D48C9C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:23:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36C6C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19A0F882F9;
-	Tue, 18 Jun 2024 17:23:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E24F48839F;
+	Tue, 18 Jun 2024 17:30:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cKlpislH";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 48A8688381; Tue, 18 Jun 2024 17:23:23 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1718724616;
+	bh=dELBlyE7ZCLDwaVdHcJ7KVhxFhJmFIZEcurx9xkzCpE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=AazRcj4gkn+V1KfzOO0wEUo5nZFykXHIwmS8LoNAK5dbKQpU9y+S3dv5SFxRSApzH
+	 VTVIPNfq7Ik+FfJPXitF1wTwTVis8BqT1mfuJuxKBtjszGyeZU7CVwr3AEANymI9O/
+	 SQrCkUPWRpRKHdI/ZVaPqNUdU27IUqKFP/4Pyxyb8EitCRitFVgZW5F2YtUfM5/0v1
+	 P1M96j/03+T1AmRrH/L99t8FZl8v7HGad8XJpcW2a6aUSenbxTMMxFqVzBSiB0bQ2m
+	 +cGh0aXnfVHL7bYTJ5Ip9jVkaby/Rje3duSpF3ITonajbvzclrFRaxkaIeWIfLHWWY
+	 KrINqb7zElkiA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8E5180245
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:23:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-52cc9b887f1so221821e87.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 08:23:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718724200; x=1719329000; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vBrQJT9urUhd8FrZqL5N4WyzQzPeSa05bfcPqluQjtc=;
- b=cKlpislHL3a4OFmQdO7mKGLluSMnM8qVGcyv3IYE62cPxptwRcbFMeqg6/6EtufCpK
- qtkhoD3L/PMYsfRm+twCfhwECU2juG4pr9nShRqMxFcv7cq0iuVyuCap3cRwXOr3MAEi
- kk2U85zG4CfHdKrJAogzbyQQokKVe1EFnZ89o47AYY+QXkTuoLn69SrYwSnRUeiqoKRy
- pFFk6el4i67c9FGXcwf+Kw6wEhWGAjuXRdv/1aq0/Qd7CkqIdSz+CPa92tHSaACHHJht
- ILQkhlS4lAL3j6ZUGZYk8Ecup8w6VE7VRM4M9iBEYv9AUQaxHjQ947deIv20XFFtJP38
- QgOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718724200; x=1719329000;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vBrQJT9urUhd8FrZqL5N4WyzQzPeSa05bfcPqluQjtc=;
- b=ghZNaydPIdt0PxS8adMHdBAOYwOQWbZJ8r+yXJAMgF5d8jADU4PbHalSKToV7jD3UR
- Och0hlbJstllIMbXdvMFpx+kBqdlLB3eJ/y6c2fzTuXZroMiMaJMoPDsJW+iTlr8Yf8u
- EvX4nUZY5Qslq9VQSH9XLDwYhDMftMpgCvdM9sjodgyKnDm8+GHCwHfbxZiq5LGGGUKz
- y1ZCQTjZmHUlxYJGlTe/U9cuZaY6Fy3seQBXzqbeMNn3waJL+zerbpntyTJLIz2bPAAa
- AYzjP2XIjzOk3VFMyQ/QoHPy3EATjALVkWVNTrrgtJTY51E5PVYLyi/9uTi9Yh+8Vkkg
- 6rlQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWOp53ARytSjv4SCO8Y5PH3C5Q/BmOkkyh1k6kiriLUbRabof5VxoVEVG0HB9YGTQm3EtggigpSCiFVqALX87wA0CxKKg==
-X-Gm-Message-State: AOJu0Yyet38VPva0LdCVp+oXF2o91Y3raB9x1J2k3byFv+RsNdYnaSz5
- K0hkKrlwvg5o42gdwHwj+83yWcWvWGPHG2n2+NGXkslKwIX+imMOc0/eG+Ohnh8=
-X-Google-Smtp-Source: AGHT+IF9nZTYLyxdfZVW+ObnfuDsvZdwbTP54bRzjna9UJWBCpY2kmzqweUlko70ZOoB58J6cAlVhA==
-X-Received: by 2002:ac2:5e22:0:b0:52c:99ed:4c9a with SMTP id
- 2adb3069b0e04-52ca6e99288mr7499448e87.59.1718724199599; 
- Tue, 18 Jun 2024 08:23:19 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
- [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42286eef9eesm230355265e9.9.2024.06.18.08.23.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 08:23:18 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
-Subject: [PATCH v3] doc: describe UEFI measured boot
-Date: Tue, 18 Jun 2024 18:23:13 +0300
-Message-ID: <20240618152314.10140-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id B7B1583334;
+ Tue, 18 Jun 2024 17:30:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1718724615;
+ bh=dELBlyE7ZCLDwaVdHcJ7KVhxFhJmFIZEcurx9xkzCpE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=uaopK9vppGvP12mCAkKWTb0+N39f1LDOryopOyCNdab5vWBJnfCC6oCpXbJJ5t19d
+ r50Pckbe72KRd69Z/6dRYz8kvxJCl5kQOjnPEyNL9TsoH5Nj06+ETm8pjCNiOBFMAP
+ yKnxbyMPkRDOMKlMevgzimv0oo6AqQjTJpMT/sk9ZhxUZQsqlA9tj1N7XTVNvRWQ6M
+ 5UEYpLq73mmYyUEmapfiXHAc4J87k8rTC9rNay0CLqXXihoeanXgbcPyKk2e/nipEv
+ kOwLD4meiNPjHRmXapiz7pXk1l51YsugnNPJ7z5mdwHevWfehsZ05t7DT3tECu5hjB
+ wU3nTeBCOdv+A==
+Message-ID: <d46433c5-f4a6-418a-bc23-1ae5ce6ba63a@denx.de>
+Date: Tue, 18 Jun 2024 16:26:21 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
+ flash.bin signing
+To: Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de,
+ Tim Harvey <tharvey@gateworks.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ kernel@puri.sm, u-boot@dh-electronics.com
+References: <20240521104834.11295-1-marex@denx.de>
+ <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
+ <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
+ <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,70 +84,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We currently only describe the process to enable measured boot using
-bootm. Describe the UEFI requirements as well which predate bootm.
+On 6/18/24 2:43 PM, Simon Glass wrote:
+> Hi again,
+> 
+> On Tue, 11 Jun 2024 at 12:51, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi,
+>>
+>> On Fri, 24 May 2024 at 10:26, Fabio Estevam <festevam@gmail.com> wrote:
+>>>
+>>> On Tue, May 21, 2024 at 7:48 AM Marek Vasut <marex@denx.de> wrote:
+>>>>
+>>>> Add new binman etype which allows signing both the SPL and fitImage sections
+>>>> of i.MX8M flash.bin using CST. There are multiple DT properties which govern
+>>>> the signing process, nxp,loader-address is the only mandatory one which sets
+>>>> the SPL signature start address without the imx8mimage header, this should be
+>>>> SPL text base. The key material can be configured using optional DT properties
+>>>> nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
+>>>> names generated by CST tool scripts. The nxp,unlock property can be used to
+>>>> unlock CAAM access in SPL section.
+>>>>
+>>>> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+>>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>>
+>>> Applied the series, thanks.
+>>
+>> This lacks tests - can you please add sufficient tests in ftest.py to
+>> get the cover coverage back to 100%? Please try 'binman test -T' to
+>> see this.
+> 
+> Any thoughts on this, please? At present -master is broken for one
+> file and -next has three problems.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes since v2:
-- add all bootX commands in the description instead of just bootm
-- Remove and extra _ from the header
-Changes since v1:
-- fixed remarks from Heinrich on titling and DTB measured PCR
- doc/usage/measured_boot.rst | 31 +++++++++++++++++++++++++++----
- 1 file changed, 27 insertions(+), 4 deletions(-)
+It is in the pipeline.
 
-diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-index 9691904a9d8a..d31cb05226cd 100644
---- a/doc/usage/measured_boot.rst
-+++ b/doc/usage/measured_boot.rst
-@@ -7,19 +7,42 @@ U-Boot can perform a measured boot, the process of hashing various components
- of the boot process, extending the results in the TPM and logging the
- component's measurement in memory for the operating system to consume.
+What exactly is the error you observe ?
 
-+The functionality is available when booting via the EFI subsystem or 'bootm'
-+command.
-+
-+UEFI measured boot
-+------------------
-+The EFI subsystem implements the `EFI TCG protocol
-+<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/>`_
-+and the `TCG PC Client Specific Platform Firmware Profile Specification
-+<https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/>`_
-+which defines the binaries to be measured and the corresponding PCRs to be used.
-+
-+Requirements
-+~~~~~~~~~~~~
-+* A hardware TPM 2.0 supported by an enabled U-Boot driver
-+* CONFIG_EFI_TCG2_PROTOCOL=y
-+* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
-+* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB in PCR 1
-+
-+Measured legacy boot with bootX command
-+---------------------------------------
-+The commands booti, bootm, and bootz can be used for measured boot
-+using the legacy entry point of the Linux kernel.
-+
- By default, U-Boot will measure the operating system (linux) image, the
- initrd image, and the "bootargs" environment variable. By enabling
--CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image.
-+CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image in PCR1.
-
- The operating system typically would verify that the hashes found in the
- TPM PCRs match the contents of the event log. This can further be checked
- against the hash results of previous boots.
-
- Requirements
--------------
-+~~~~~~~~~~~~
-
--* A hardware TPM 2.0 supported by the U-Boot drivers
--* CONFIG_TPM=y
-+* A hardware TPM 2.0 supported by an enabled U-Boot driver
-+* CONFIG_TPMv2=y
- * CONFIG_MEASURED_BOOT=y
- * Device-tree configuration of the TPM device to specify the memory area
-   for event logging. The TPM device node must either contain a phandle to
---
-2.45.2
-
+When I run binman test -T , I get a lot of output, but no error reports?
