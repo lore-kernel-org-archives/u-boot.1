@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7203C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:28:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6552AC2BA1A
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:28:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CA4488476;
-	Tue, 18 Jun 2024 09:28:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14F648842C;
+	Tue, 18 Jun 2024 09:28:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SpliSF09";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="b/dZuoyq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07B72882E5; Tue, 18 Jun 2024 09:27:59 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 024AF884BF; Tue, 18 Jun 2024 09:28:48 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4CF38842C
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:27:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E36B58839F
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:28:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2ebd95f136bso58316931fa.0
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:27:56 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-52bc035a7ccso5393687e87.2
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:28:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718695676; x=1719300476;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718695725; x=1719300525;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=2FA91q3w3IwDN1gxCzAXrzAia0/uLLLBxT/yEapIY8A=;
- b=SpliSF099ZqfLti0vleMPG6Iv1Q7er1HdtcMziH7dO7fSbStaUfI+1VurNltD5junf
- mrSMD3aKzwspFTM19e9jiRw14HZers+jXgUV6ACrWv2ioYqN+1n45X6NVKGUEP0r04Pu
- 8f+KKBz38+9cqgMgIVoacbWUxa0PM96J7YnL2/NkDt8lNUsQaxXSfOyeo82/EOu/vZND
- 7ec99hnD0wukK+aPvVwSy5El8VaikXr15lmFEzgi7lpBltzKHjWLHjKly1+4Z+tDOKtQ
- TWWnLtLZHgLDWjPyzIZAmYtzLgeaZlqJ9T83wwONEpyLoHxa3pZWA1hTKy2RU1kwnb02
- 47jw==
+ bh=NCaHdDIUGmqUI2TCURc64oXAdoX2jCoN+34JjMiecAY=;
+ b=b/dZuoyqAKru6HW+nsIVs4K+KYC+7gZU/rQl6a2SDftcDyXyJHq8/zZIvDWPOJKjpb
+ VVswWt5HCbvsqK2hpU8QrCr3tP+J3DQvcB4YVTEegY3UGBz+toPKZF1uY8UOXq8+SYdV
+ H8q86tf2enyP5tZRzMDsBrlMnPo6hun5tOwQwm4hPmps2SRnXm0OQfsKrzI1cWIT+hlt
+ 6nJvDji8N/fhu8zKpvN6ES81HZ/ibi4si0GMkcA4c5W6/C+S0YyMu6HGNQ0rKjSlV+ry
+ ZYfnVCO/FiWQAfLzUe2G9fTtWmS2/b7lFXGE44eDNnCsbdgXcuYzB3PRqkaAJF4LjBhG
+ gbMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718695676; x=1719300476;
+ d=1e100.net; s=20230601; t=1718695725; x=1719300525;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2FA91q3w3IwDN1gxCzAXrzAia0/uLLLBxT/yEapIY8A=;
- b=gqKMGrCwXbU8uIbYOqV5D5Ga26R4RLbVXBdyp+km/u7pUaRFCSYFl0C9FPj0JILjRk
- sQ69KiqaPNvNeJDfAsYxQopvGy4HIkmLx8VT69Mbthg3ybQvJCjXn0DrWbg6QZUELMK+
- rFtEhBi5iiVkoYUltPJJuau77pXa0rgUz0N2BCvXFo34btBgLCr4tB520JBzTItPlMlr
- liRK7dk1KBDHpATF6PusVVMCEPvnsQiS669yarwxfgbVwER8+5GdcR6ZwLgCnmbokNGp
- tpUcNP13aMfLVnBAwVJMUEMIR52jiqN56IxQlyskS3N228LhJCDYyG5ENLd49VN1CpLU
- i/wg==
+ bh=NCaHdDIUGmqUI2TCURc64oXAdoX2jCoN+34JjMiecAY=;
+ b=G+xEJ587Q9CxNfikBB9yaPGtsKD6Ckyxq4SC9rlwLOtMABQatyp8bkjnhbHWvrBbNC
+ ChtxkuaB3VW6bcvr4goqGs484Ek7rg+C5feBZDc+sAXffHVbtVVg9GtODDqgFI33wg7g
+ +fRSa6NagVWTf3QQWc3WDQ4Qp70K39iafk00oga9SYD2BqwoUPl3VkbWz8z8Q+rDXqnU
+ K10RCiyl1H94dUO/Ch+k4yVm2iIaw1cD1nJQo4eC0gKQBdqlEjXUBWSsMhF0kchLp7jz
+ xs0SuMoMoXOXQnTHeDXQ2/4snAQDYW5pbVG1kAf70A5Yk/JWt4pUTJUi4ucxaYUQsFNd
+ +URw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVgDYG9C/An1zjt4ls9WgrjM9DHFxHDEktDcSDwXPKlDe8mkJA48hFBJmhHrXctFH1HMW70AJh1W5L3tzWcxhH8M5jwSg==
-X-Gm-Message-State: AOJu0Yze2wd/mJfFWnhZrp2kLPJGKOLws9g/qNNOCtTdhwuwHcm1SIAz
- +mtDpOM704UZi/VoP/oOV5z2o1vfWMd69AXFoh1EmQXf3tLIMLuNU8HiVotPdJE=
-X-Google-Smtp-Source: AGHT+IFfOBZV4F8s3FDY7zagcVZtlaeBAMaLMf2sP+rboLoWcoC+8VfL0zcSpLIQWz15Q4/vnFHI9Q==
-X-Received: by 2002:a2e:350e:0:b0:2ec:2b25:3c8e with SMTP id
- 38308e7fff4ca-2ec2b253d64mr34407391fa.39.1718695676024; 
- Tue, 18 Jun 2024 00:27:56 -0700 (PDT)
+ AJvYcCWw9Bk6kY3oSxq0QgXbepI5tg3KmOlKJ/iYo7al/tiMKqDjqFNIks33V0u+k06zq0bxwQhdKDWEylbv3oWYi51+8EBLFQ==
+X-Gm-Message-State: AOJu0YxyW6GKYhSuG0R5DG74eWzeJuVvT26Ov1LpGNSDWe/svJSAHLiS
+ QQ3kYMqB2X4m8dMPcebz9OTBIlJ/ZQBRYjfwKfHFFyMxil5VxX2vnO4IwjB+O7UfuRpbgsnoA8E
+ u
+X-Google-Smtp-Source: AGHT+IHS1KKtGudLoVvDZHrsFKrR2McKdIX+khXFiWVNzmK5d/eXES2AXntUGcHuPMK2vVxx5XdW4Q==
+X-Received: by 2002:ac2:43d6:0:b0:52c:a9c2:d363 with SMTP id
+ 2adb3069b0e04-52ca9c316abmr6524795e87.10.1718695725189; 
+ Tue, 18 Jun 2024 00:28:45 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42286eefa07sm220393705e9.8.2024.06.18.00.27.55
+ 5b1f17b1804b1-42286eefa63sm218103825e9.1.2024.06.18.00.28.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 00:27:55 -0700 (PDT)
+ Tue, 18 Jun 2024 00:28:44 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
@@ -71,13 +72,13 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
  <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
  Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
  <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 04/11] usb: gadget: dwc3: Convert interrupt handling to
- usb_gadget_generic_ops
-In-Reply-To: <20240614005309.34433-5-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 05/11] usb: gadget: max3420: Convert interrupt handling
+ to usb_gadget_generic_ops
+In-Reply-To: <20240614005309.34433-6-marek.vasut+renesas@mailbox.org>
 References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
- <20240614005309.34433-5-marek.vasut+renesas@mailbox.org>
-Date: Tue, 18 Jun 2024 09:27:53 +0200
-Message-ID: <87y172iubq.fsf@baylibre.com>
+ <20240614005309.34433-6-marek.vasut+renesas@mailbox.org>
+Date: Tue, 18 Jun 2024 09:28:42 +0200
+Message-ID: <87v826iuad.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -123,113 +124,52 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  drivers/usb/dwc3/dwc3-generic.c    | 23 ++++++++++++++---------
->  drivers/usb/dwc3/dwc3-layerscape.c | 21 +++++++++++++--------
->  2 files changed, 27 insertions(+), 17 deletions(-)
+>  drivers/usb/gadget/max3420_udc.c | 19 ++++++++++++-------
+>  1 file changed, 12 insertions(+), 7 deletions(-)
 >
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 8db678eb85d..731ede2fead 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -194,34 +194,39 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
+> diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max3420_udc.c
+> index 5a227c0ffd9..557a1f0644e 100644
+> --- a/drivers/usb/gadget/max3420_udc.c
+> +++ b/drivers/usb/gadget/max3420_udc.c
+> @@ -808,13 +808,6 @@ static void max3420_setup_spi(struct max3420_udc *udc)
+>  	spi_wr8(udc, MAX3420_REG_PINCTL, bFDUPSPI);
 >  }
 >  
->  #if CONFIG_IS_ENABLED(DM_USB_GADGET)
 > -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> +static int dwc3_generic_peripheral_probe(struct udevice *dev)
->  {
->  	struct dwc3_generic_priv *priv = dev_get_priv(dev);
-> -	struct dwc3 *dwc3 = &priv->dwc3;
->  
-> -	dwc3_gadget_uboot_handle_interrupt(dwc3);
+> -{
+> -	struct max3420_udc *udc = dev_get_priv(dev);
 > -
-> -	return 0;
-> +	return dwc3_generic_probe(dev, priv);
+> -	return max3420_irq(udc);
+> -}
+> -
+>  static int max3420_udc_probe(struct udevice *dev)
+>  {
+>  	struct max3420_udc *udc = dev_get_priv(dev);
+> @@ -859,6 +852,17 @@ static int max3420_udc_remove(struct udevice *dev)
+>  	return 0;
 >  }
 >  
-> -static int dwc3_generic_peripheral_probe(struct udevice *dev)
-> +static int dwc3_generic_peripheral_remove(struct udevice *dev)
->  {
->  	struct dwc3_generic_priv *priv = dev_get_priv(dev);
->  
-> -	return dwc3_generic_probe(dev, priv);
-> +	return dwc3_generic_remove(dev, priv);
->  }
->  
-> -static int dwc3_generic_peripheral_remove(struct udevice *dev)
-> +static int dwc3_gadget_handle_interrupts(struct udevice *dev)
->  {
->  	struct dwc3_generic_priv *priv = dev_get_priv(dev);
-> +	struct dwc3 *dwc3 = &priv->dwc3;
->  
-> -	return dwc3_generic_remove(dev, priv);
-> +	dwc3_gadget_uboot_handle_interrupt(dwc3);
+> +static int max3420_gadget_handle_interrupts(struct udevice *dev)
+> +{
+> +	struct max3420_udc *udc = dev_get_priv(dev);
 > +
-> +	return 0;
->  }
->  
-> +static const struct usb_gadget_generic_ops dwc3_gadget_ops = {
-> +	.handle_interrupts	= dwc3_gadget_handle_interrupts,
+> +	return max3420_irq(udc);
+> +}
+> +
+> +static const struct usb_gadget_generic_ops max3420_gadget_ops = {
+> +	.handle_interrupts	= max3420_gadget_handle_interrupts,
 > +};
 > +
->  U_BOOT_DRIVER(dwc3_generic_peripheral) = {
->  	.name	= "dwc3-generic-peripheral",
->  	.id	= UCLASS_USB_GADGET_GENERIC,
->  	.of_to_plat = dwc3_generic_of_to_plat,
-> +	.ops	= &dwc3_gadget_ops,
->  	.probe = dwc3_generic_peripheral_probe,
->  	.remove = dwc3_generic_peripheral_remove,
->  	.priv_auto	= sizeof(struct dwc3_generic_priv),
-> diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-layerscape.c
-> index ff83bf71e89..108b44c67eb 100644
-> --- a/drivers/usb/dwc3/dwc3-layerscape.c
-> +++ b/drivers/usb/dwc3/dwc3-layerscape.c
-> @@ -99,33 +99,38 @@ static int dwc3_layerscape_of_to_plat(struct udevice *dev)
->  }
->  
->  #if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> +static int dwc3_layerscape_peripheral_probe(struct udevice *dev)
->  {
->  	struct dwc3_layerscape_priv *priv = dev_get_priv(dev);
->  
-> -	dwc3_gadget_uboot_handle_interrupt(&priv->dwc3);
-> -
-> -	return 0;
-> +	return dwc3_layerscape_probe(dev, priv);
->  }
->  
-> -static int dwc3_layerscape_peripheral_probe(struct udevice *dev)
-> +static int dwc3_layerscape_peripheral_remove(struct udevice *dev)
->  {
->  	struct dwc3_layerscape_priv *priv = dev_get_priv(dev);
->  
-> -	return dwc3_layerscape_probe(dev, priv);
-> +	return dwc3_layerscape_remove(dev, priv);
->  }
->  
-> -static int dwc3_layerscape_peripheral_remove(struct udevice *dev)
-> +static int dwc3_layerscape_gadget_handle_interrupts(struct udevice *dev)
->  {
->  	struct dwc3_layerscape_priv *priv = dev_get_priv(dev);
->  
-> -	return dwc3_layerscape_remove(dev, priv);
-> +	dwc3_gadget_uboot_handle_interrupt(&priv->dwc3);
-> +
-> +	return 0;
->  }
->  
-> +static const struct usb_gadget_generic_ops dwc3_layerscape_gadget_ops = {
-> +	.handle_interrupts	= dwc3_layerscape_gadget_handle_interrupts,
-> +};
-> +
->  U_BOOT_DRIVER(dwc3_layerscape_peripheral) = {
->  	.name	= "dwc3-layerscape-peripheral",
->  	.id	= UCLASS_USB_GADGET_GENERIC,
->  	.of_to_plat = dwc3_layerscape_of_to_plat,
-> +	.ops	= &dwc3_layerscape_gadget_ops,
->  	.probe = dwc3_layerscape_peripheral_probe,
->  	.remove = dwc3_layerscape_peripheral_remove,
->  	.priv_auto	= sizeof(struct dwc3_layerscape_priv),
+>  static const struct udevice_id max3420_ids[] = {
+>  	{ .compatible = "maxim,max3421-udc" },
+>  	{ }
+> @@ -868,6 +872,7 @@ U_BOOT_DRIVER(max3420_generic_udc) = {
+>  	.name = "max3420-udc",
+>  	.id = UCLASS_USB_GADGET_GENERIC,
+>  	.of_match = max3420_ids,
+> +	.ops = &max3420_gadget_ops,
+>  	.probe = max3420_udc_probe,
+>  	.remove = max3420_udc_remove,
+>  	.priv_auto	= sizeof(struct max3420_udc),
 > -- 
 > 2.43.0
