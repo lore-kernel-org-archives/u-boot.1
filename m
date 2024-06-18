@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69F50C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C24C2BB85
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:30:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFE6D883BB;
-	Tue, 18 Jun 2024 17:30:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3320688366;
+	Tue, 18 Jun 2024 17:30:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718724619;
-	bh=bnXSq4qgYCeDiG2el3QtpR29POX0rdfR6AvVfB7SxT8=;
+	s=phobos-20191101; t=1718724623;
+	bh=3o/ABsgflogiXLoPeLgRzNzZ1hceb86fOTvhqUUOZko=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GheQWBlgIENvvRmaeG/1kSyQWAOkcQz8o8ReVRJaGSPTnTKqTdMHO8OdOwpMGyCRx
-	 vrRYlJX4yqoi0p3jif0nSBQhuYTmeo8Qc7mAuMMuHkn1ZlHtmQTRlRkSd4yEy+0Qq+
-	 YsZnpV//Lprr9U614mQKCYG0YNxHEoEk996px/U9bvm6XUv5B7QVL0HqujR4nAaQSg
-	 U2DeX8Vjt7oT6LJ52J0XhtWEbNY7+8lUH1okJRh+pWuZSATe/jeIXt8he0hFpDiSUs
-	 /AZNdjOBRzhbX9S9sbynSqKy8ktj6QG98exDL9wRtXFcR76PHpZ5yL/+eG6jbC3SLY
-	 ApInESPMWvHXw==
+	b=sqA+8NOEPl+2oslTwLlsOxM59Qu5sUBKIvqdosPByXDs339b5kg9cDjeNbCg/eJha
+	 IaoUIC+tsgAkGQ9gbnTT2gSzBQrwAl7LMvp2XSxwNI9/CuTaZPrBK9Vu41f6xG+1gx
+	 YNkcyXb4B7On24GODTPoBJ753jkuZenBVEIIn/LZVVdCTcuZT8lpOhoqYixgLae3N0
+	 oIimFAADnAxid7ufNAfYW1TkOeoEsL9jGQcBwdEK7SU0UghfAmzgjPiQnfwL2awtZx
+	 rd+02EmnWMHMD5yuJ3tzCAJ5CqwNBTaG1kvILgxcGrAzNjgdqnvejzBwu6zT5qszKj
+	 DmS1A7JUMd0eg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9AE798838E;
- Tue, 18 Jun 2024 17:30:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3DF3A883E8;
+ Tue, 18 Jun 2024 17:30:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1718724617;
- bh=bnXSq4qgYCeDiG2el3QtpR29POX0rdfR6AvVfB7SxT8=;
+ s=phobos-20191101; t=1718724621;
+ bh=3o/ABsgflogiXLoPeLgRzNzZ1hceb86fOTvhqUUOZko=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=M6fNbCu3XgdMVPnc9P74vm88g6WAe69OE/3joYNIFLV+zfBNakExeX25bvbEIPq5X
- 5+7Vrcus2173zxvH4OxhP0Bn6YsAv8Hw4MF+aUMrpgsvxlAiprdU/kFU/0K3umEVF+
- lHivB+4FSNomwpw6+aFONIHFUnxifWyQvzX7rfjT7Bbpfjm4LSrLl3rD8u2YcR2R6l
- LtAdTlfFbHEzbTY0npyW96a0FEUGUIJDXCdf/pztPX9p7ycebEcEq5kJfjIy2SgraP
- h0pwgo5iKZqbu5KoJAsyMitKSCB7g/zjfiJpsQ6PJavXKVxv+1512fOl3vSFHPFV8d
- PBms30EO2TMWA==
-Message-ID: <54c7dcab-8925-4b20-b455-413a9bee8fda@denx.de>
-Date: Tue, 18 Jun 2024 16:56:32 +0200
+ b=oD40+bcodFcfaxirQHn7Cw2X+G9S7Flo1CREBAjttlKbFelfmDn4AnbkWt/Jg6Jxf
+ lC5h0kOVq2rsQ6LeYvALY4KDpiWRkET89hLUaKYQoL737jcUxykeraagA7F6hDhlK0
+ jzzFj4AacF7+ECOUDge3d2qUXF+JPafRvITVoktEKs42PsNpy1cRRLCxc9RpW0jRk+
+ QT8TEVC0sHPJaCDtcvs8nbBn1lO4N55DkBuKnuAxVc7BEjvDSAhN9XEM9P97t0snTO
+ tJ4cXTBwvim8M7BkhC4dSOHuSyHPFx7zd/O7ZO742+O5rvd5yDZ2XtqYjEjUL1+US6
+ SkmZ1i4eqa0ZQ==
+Message-ID: <1b2bcb6f-1b61-422c-9ee7-85479d9775be@denx.de>
+Date: Tue, 18 Jun 2024 17:17:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] phy: meson-gxl-usb2: remove
- phy_meson_gxl_usb2_set_mode
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org>
- <20240618-u-boot-usb-gxl-phy-set-mode-v1-3-6b41efa46e35@linaro.org>
+Subject: Re: [RESEND PATCH] usb: dwc3: add newlines to dev_vdbg calls in ep0
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240618150359.3306514-1-caleb.connolly@linaro.org>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240618-u-boot-usb-gxl-phy-set-mode-v1-3-6b41efa46e35@linaro.org>
+In-Reply-To: <20240618150359.3306514-1-caleb.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,17 +70,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/18/24 9:55 AM, Neil Armstrong wrote:
+On 6/18/24 5:03 PM, Caleb Connolly wrote:
+> For some reason none of these debug prints have newlines, resulting in a
+> "fun" surprise when attempting to debug this driver.
+> 
+> The other parts of the dwc3 driver have newlines, add them here too (and
+> fix some minor nearby indent issues to make checkpatch happy).
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+> Rebased on latest next, no changes
 
-[...]
-
-> @@ -205,7 +188,7 @@ static int phy_meson_gxl_usb2_power_off(struct phy *phy)
->   struct phy_ops meson_gxl_usb2_phy_ops = {
->   	.power_on = phy_meson_gxl_usb2_power_on,
->   	.power_off = phy_meson_gxl_usb2_power_off,
-> -	.set_mode = _phy_meson_gxl_usb2_set_mode,
-> +	.set_mode = phy_meson_gxl_usb2_set_mode,
-
-Oh, I see you did rename it here, so please ignore my comment on 1/5 . 
-Maybe just mention in the 1/5 commit message that the rename is 
-happening in follow up patch , if you are doing V2 at all .
+Reviewed-by: Marek Vasut <marex@denx.de>
