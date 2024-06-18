@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB09C2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13875C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:57:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3FE188535;
-	Tue, 18 Jun 2024 09:55:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3918B88538;
+	Tue, 18 Jun 2024 09:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kFP0019z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YGxDsr+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D960E88519; Tue, 18 Jun 2024 09:55:37 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id E9F4A88431; Tue, 18 Jun 2024 09:55:37 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160C188431
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:55:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 500A38851E
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-35f1c567ae4so4058109f8f.1
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:55:34 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-421bb51d81aso39044015e9.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718697333; x=1719302133; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718697335; x=1719302135; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=X/iQ5rHKQ6Qq2bKKIszSJByGXybAQV0e6TYGSJ5WwuU=;
- b=kFP0019zOTf3hb4k4ApC11Ood5jicfdLZrWRt83VRT/fOkAsW92qbW74TQI+LFYs+0
- TA3AwvqQb5W+JrowvZ6fySg8epz4NyqaehLB/d6IAuQ3AnWGEQHCDDPT2oVSlcBtvX+0
- MFmnbIntZpnBXJdXeFtTIPZZAvrmVy8OLjNfsT2qrCwh9YjouI6LbtZ6WM4EF2PGBc8d
- ZchLXLT78F9+iRjgp+6GlSRd4RxJqE6Kj59YqXc8Ex9pT+OfZI3gm1z9q3CCc0+TTDC0
- B6smDGYcSJOZ1WCrBnc6OmGivsRgYRpuymSiwmainQE7UU7M6KXE5Q83TJxoh3LUZszH
- RykA==
+ :reply-to; bh=RTli4tgWHlPQpIu9XQZ3uNdUE/50JrdH1m+AlYJrngI=;
+ b=YGxDsr+h+Q6k65UFHST2RMp3Y5V2a1aI4vA1PabpfuaOgzMxpKIU6eWnMjZiJW2Kkf
+ WUXN31kZFehVXwHm5V1DFG28PmrON+2ysODpnf9rJP4wHGIBPtZMkqcUCDbN4Xax4MQO
+ LIYH8rejgfHuWpLaA1MQXPGtc74CrJUusNFv8mP/aebwE9EoJgqkfq0aQf3Vn6XyC4wp
+ qZh8pBalEDzBf8Ru1cH7mqCnnImZRrecP0ayBruKkIA8x/xtULxVXlQft/ebTMBuA7Mb
+ poI3CbGdqKYGR+IOL6eveGzyWo5TTYuCGaKrTEsvL1gQ7uxkxuAr5kV6xnM6zZG4A7Ez
+ xnrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718697333; x=1719302133;
+ d=1e100.net; s=20230601; t=1718697335; x=1719302135;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X/iQ5rHKQ6Qq2bKKIszSJByGXybAQV0e6TYGSJ5WwuU=;
- b=tInCwwk3AwhlGk2myIKUUNhYplIUp4OQNsTcpmlTaghHUtUk7aWiIRRLjlmyvGLxRY
- vS8h0ioR35+SvKSWIrVjc0hRkmDC2uNTBGPrFl862ejjHuBV1ofMJjxg+B9JzOpWTC9z
- wqAmefzmEe1NE237ZKnQAixZ5LJ7Qw/+iFk2z5UXyDNLQqEVhS4+Q3PzpLhMaZqrJU0c
- GaBmpZawaBXbP0/S2cRzaHHg/nr/B8CQ+0Iy0HkGSb7jdMDpmgOC/ioir8BFGS2cANv9
- R/s4df72O5QMWCwVoyJKzvf3Wa8BpBOZTeWyZO1WCOc+qWbHSe7536ArSccnuJebZwNO
- MSKg==
+ bh=RTli4tgWHlPQpIu9XQZ3uNdUE/50JrdH1m+AlYJrngI=;
+ b=DLFCy2P+zOgCA90VyhhFamCRcKfbobizqgYiotwQsj65hmYNUpXHFJAw5BCJ15dW7H
+ 7WLFD5IFlDg/KMTQyiXett/F04c/6RxwlW2a7XHUpOkTk45MVrhXf63TFftPqOoNvN0t
+ /YkuneDsJr+HJPBMkS2g3Yr6Q2WruTms/MQH2bLeb2tjBb7AHPjkxlppasuz0L+FSTHU
+ aHMnxM55sQa2bIhVqVvZAWSLHpokdcuQj/vysHu9Ezt0nB9T52OaKkYD/8cY4/VPHiwD
+ M3ZLGzGzcn/ciJN0BmydpnvmcCy8rVFqaSK0ptrawlrFuvqWVUG1+x86VIcvql+6rQTe
+ igBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrrhTHBaOwhm8dkbipzIklNeSFF3FgNiiY5uwzsGVcC/43pBkxD2Q0nXRS3euhP4nruC0IhjqW1U4jsxHarqeLO3roSg==
-X-Gm-Message-State: AOJu0YwHmEBjiJVX4eV++Cyg0qCY0mvT/ngggZn5drZtzErbMuXHmPOo
- lX6ilOfHhZYHUCjOGs7nU8LN14DIKS3aG8hHMgLdhnyX6I1gAJ+LR4O2V04XpRQ=
-X-Google-Smtp-Source: AGHT+IFrFLoDUurw4xX1qIzO8jwkltBWyS76brXrifjeuGyIj9Xnh/P08PXQKPnS2iSQ5Xu+63F5aA==
-X-Received: by 2002:adf:f646:0:b0:35f:209e:21be with SMTP id
- ffacd0b85a97d-3607a747550mr7428576f8f.1.1718697333266; 
- Tue, 18 Jun 2024 00:55:33 -0700 (PDT)
+ AJvYcCWUwU+y5f0P90pkF+AxGkImPLPavFNch2r+YTaDzoIMMPS4J3WkY0BXB7XwEfnBrM0859KWarJaXiQLcxZ3AAWEb/hP0Q==
+X-Gm-Message-State: AOJu0Yy8hzNK1J0KtxX8TVwBs0BZ3FnC2XhxNJ+s5Xt1V6rjv28mFseV
+ Fo1RKhCvkTgsAfm1NyfHLfHtg8w1TIzGxTrtRJpMXndEkqhb8R01gU61fOEQq9UUNUYJOjvdgEL
+ eEBw=
+X-Google-Smtp-Source: AGHT+IGgqUG7sP8eLlYehvCK2UFjvdy2yFdExOWAWaCfWihj+2/4ZTMOcaZyEEwA9G6aPHlCx9ySPw==
+X-Received: by 2002:a05:600c:4213:b0:421:8188:d394 with SMTP id
+ 5b1f17b1804b1-42304827504mr96861035e9.12.1718697334722; 
+ Tue, 18 Jun 2024 00:55:34 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-360750934a4sm13523173f8f.10.2024.06.18.00.55.32
+ ffacd0b85a97d-360750934a4sm13523173f8f.10.2024.06.18.00.55.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 00:55:32 -0700 (PDT)
+ Tue, 18 Jun 2024 00:55:34 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 18 Jun 2024 09:55:27 +0200
-Subject: [PATCH 3/5] phy: meson-gxl-usb2: remove
- phy_meson_gxl_usb2_set_mode
+Date: Tue, 18 Jun 2024 09:55:29 +0200
+Subject: [PATCH 5/5] usb: dwc3: meson-g12a: drop usb.h and make
+ dwc3_meson_g12a_force_mode static
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240618-u-boot-usb-gxl-phy-set-mode-v1-3-6b41efa46e35@linaro.org>
+Message-Id: <20240618-u-boot-usb-gxl-phy-set-mode-v1-5-6b41efa46e35@linaro.org>
 References: <20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org>
 In-Reply-To: <20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
@@ -80,20 +81,20 @@ Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3507;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1436;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=3hRKRk6rCcuBEMaskR4Fabd3ekP9rmERjxPgzCepr+I=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmcT1xv5HZWG6Uy+enJg8x+wOL8NpmfHTDt57dm+04
- CUtvl/+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZnE9cQAKCRB33NvayMhJ0d/+D/
- oCzgBETPsi7H7UNs7Sinscau3l3wA8BQSamxQluuUKfiqnkdulcIQgVZIGMGe3eWjwjxzKk+Sh4DoT
- V4luk4LGpZeU06342w6pssgExOfBHm6BZwo9F6+L6JYZWi4se7hUkXRou3AnDbhV8EOos4CnPn75L4
- PZqYpGjZhILK8URoiWd8YsvwLAVYJfbMV7cGV3/qjg3a40XoxXxowwCs9HxdMKjq4CkAWqs65FGszN
- iPiHDmjIUsijBzGf+BxICg8iXutYcjOEef9BiGPJLfSnA5Wy/4+cpfiioFj3Ay65MzzUcM2wxeszxE
- GAAzlqiJLhRfHAtoZGWiEFYgVaRacMz/RJn8/f5/qKtnUuYhkuybJ0uVTH9dNvNvsyGYVZQI0cS937
- bAk5Q0eY6ZfNxrSe/WH68tv31EHt4o1sb+ZK4ZFMRmp82buc3+UgTAxqpwJTO5mE2wK9s24ZnmpC1o
- Zis+ZfpjJY7ke40yvoMMpbRMdqb52m6gKHD+yY1ANIC91CzYdFTWDqonImZ6bu4j7QcbrP4qSdS9n0
- cwj2GIObCARPkGxwHJbSKfZjDGx145nmuvryy/Jf56xcs0tU8gmASzisQ+5X3rSVZDpJk4mYJ33go1
- 65kR3lhxSavrhg3SHeu4tIooWH6gEsLNDi4xJIsXs97bNkmDH3RB+92JLxhg==
+ bh=PPsS7D8TEBBrAwE0wIAH2nzaqsk2E8ByOhmeHE8CZe0=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmcT1xcC3qXrhLwUmGIga3U/hl9c9wRXnwaefc1Gv3
+ uhiBmLSJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZnE9cQAKCRB33NvayMhJ0aLAD/
+ 9Fpl0hd9IOOyEtmNP8iTqTKddD3QniFiZsTNQt+83sj+OZgAZfb21yaiydD357FC5Dd+Sr7TrWyChC
+ mG3bQG/Nn4quioVjmmAANjV6pTv4yRavTt8UhXxLCB8WsKFqIy2D+BR7+lT4amYOc/fiYsvppBcN/L
+ pYQUk/roMFEEuHC5aEDuai9icGOPxXxEcfhRUcu0UpiLWlpLbaT2GcYGz/rPEV6dP6SYFZAZpcojTX
+ QTUhaAC/Ew4L/ENGaqeVhK7W4JISrrd4rK07C5pJicfxYLGnhGRCsz4GzDh3DD6GApgghgGhDgWUxz
+ 0/MIrtqqTXbyXQimKuLKIPiJn6frbNIYoTlCANJ9fvEi2tadBMQI4tTbH+X1sSgJQiLRYoJ1aXTN2q
+ y1Pi4eps694P2DFWLNA/GwPaHJ57rldoj5s1vmT+53lamXXea9H3OR6ucXDnQjID8nNxylYeUbqaZt
+ CtAAq1HDdF4+yMWpkUDL0YGBKEHAQlwZD9fouQiOmifEAm/B6w1AFMRWJZhRWd+rA4TQdMRNXEQpsv
+ iRRq9Cugnnibtr22jNacJuOR/J4qqZyhrD+4zZErWgeCx5oHdsM8pd2cA7l6fJhFJAzES5NCfGxiuD
+ Mg/w+rmSpTa2uJtooHjDs4axd/oKnFFpqmUFVkuh6yh3IZ7L6t/4dWF1PzVw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -112,127 +113,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the public phy_meson_gxl_usb2_set_mode and move
-the implementation in the the set_mode callback.
+Drop this useless usb.h and now make dwc3_meson_g12a_force_mode
+static since only used in the dwc3-meson-g12a.c file.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- arch/arm/include/asm/arch-meson/usb-gx.h |  3 ---
- drivers/phy/meson-gxl-usb2.c             | 45 ++++++++++----------------------
- 2 files changed, 14 insertions(+), 34 deletions(-)
+ arch/arm/include/asm/arch-meson/usb.h | 12 ------------
+ drivers/usb/dwc3/dwc3-meson-g12a.c    |  2 +-
+ 2 files changed, 1 insertion(+), 13 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-meson/usb-gx.h b/arch/arm/include/asm/arch-meson/usb-gx.h
-index 61f1809df9..966d401730 100644
---- a/arch/arm/include/asm/arch-meson/usb-gx.h
-+++ b/arch/arm/include/asm/arch-meson/usb-gx.h
-@@ -9,9 +9,6 @@
- #include <generic-phy.h>
- #include <linux/usb/otg.h>
- 
--/* TOFIX add set_mode to struct phy_ops */
--void phy_meson_gxl_usb2_set_mode(struct phy *phy, enum usb_dr_mode mode);
+diff --git a/arch/arm/include/asm/arch-meson/usb.h b/arch/arm/include/asm/arch-meson/usb.h
+deleted file mode 100644
+index b794b5ce77..0000000000
+--- a/arch/arm/include/asm/arch-meson/usb.h
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2019 BayLibre, SAS
+- * Author: Neil Armstrong <narmstrong@baylibre.com>
+- */
 -
- int dwc3_meson_gxl_force_mode(struct udevice *dev, enum usb_dr_mode mode);
- 
- #endif
-diff --git a/drivers/phy/meson-gxl-usb2.c b/drivers/phy/meson-gxl-usb2.c
-index e051e66224..140e936b47 100644
---- a/drivers/phy/meson-gxl-usb2.c
-+++ b/drivers/phy/meson-gxl-usb2.c
-@@ -19,8 +19,6 @@
- #include <linux/printk.h>
- #include <linux/usb/otg.h>
- 
--#include <asm/arch/usb-gx.h>
+-#ifndef __MESON_USB_H__
+-#define __MESON_USB_H__
 -
- #include <linux/bitops.h>
- #include <linux/compat.h>
- 
-@@ -121,54 +119,39 @@ static void phy_meson_gxl_usb2_reset(struct phy_meson_gxl_usb2_priv *priv)
- 	udelay(RESET_COMPLETE_TIME);
+-int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode);
+-
+-#endif /* __MESON_USB_H__ */
+diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
+index 21e4f637bb..41d15996e5 100644
+--- a/drivers/usb/dwc3/dwc3-meson-g12a.c
++++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
+@@ -270,7 +270,7 @@ static int dwc3_meson_g12a_usb_init(struct dwc3_meson_g12a *priv)
+ 	return 0;
  }
  
--void phy_meson_gxl_usb2_set_mode(struct phy *phy, enum usb_dr_mode mode)
-+static int phy_meson_gxl_usb2_set_mode(struct phy *phy, enum phy_mode mode, int submode)
+-int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode)
++static int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode)
  {
- 	struct udevice *dev = phy->dev;
- 	struct phy_meson_gxl_usb2_priv *priv = dev_get_priv(dev);
- 	uint val;
+ 	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
  
-+	if (submode)
-+		return -EOPNOTSUPP;
-+
- 	regmap_read(priv->regmap, U2P_R0, &val);
- 
- 	switch (mode) {
--	case USB_DR_MODE_UNKNOWN:
--	case USB_DR_MODE_HOST:
--	case USB_DR_MODE_OTG:
--		val |= U2P_R0_DM_PULLDOWN;
--		val |= U2P_R0_DP_PULLDOWN;
--		val &= ~U2P_R0_ID_PULLUP;
--		break;
--
--	case USB_DR_MODE_PERIPHERAL:
-+	case PHY_MODE_USB_DEVICE:
- 		val &= ~U2P_R0_DM_PULLDOWN;
- 		val &= ~U2P_R0_DP_PULLDOWN;
- 		val |= U2P_R0_ID_PULLUP;
- 		break;
--	}
--
--	regmap_write(priv->regmap, U2P_R0, val);
--
--	phy_meson_gxl_usb2_reset(priv);
--}
--
--static int _phy_meson_gxl_usb2_set_mode(struct phy *phy, enum phy_mode mode, int submode)
--{
--	if (submode)
--		return -EOPNOTSUPP;
--
--	switch (mode) {
--	case PHY_MODE_USB_DEVICE:
--		phy_meson_gxl_usb2_set_mode(phy, USB_DR_MODE_PERIPHERAL);
--		break;
- 
- 	case PHY_MODE_USB_HOST:
- 	case PHY_MODE_USB_OTG:
--		phy_meson_gxl_usb2_set_mode(phy, USB_DR_MODE_HOST);
-+		val |= U2P_R0_DM_PULLDOWN;
-+		val |= U2P_R0_DP_PULLDOWN;
-+		val &= ~U2P_R0_ID_PULLUP;
- 		break;
- 
- 	default:
- 		return -EINVAL;
- 	}
- 
-+	regmap_write(priv->regmap, U2P_R0, val);
-+
-+	phy_meson_gxl_usb2_reset(priv);
-+
- 	return 0;
- }
- 
-@@ -183,7 +166,7 @@ static int phy_meson_gxl_usb2_power_on(struct phy *phy)
- 	val &= ~U2P_R0_POWER_ON_RESET;
- 	regmap_write(priv->regmap, U2P_R0, val);
- 
--	_phy_meson_gxl_usb2_set_mode(phy, PHY_MODE_USB_HOST, 0);
-+	phy_meson_gxl_usb2_set_mode(phy, PHY_MODE_USB_HOST, 0);
- 
- 	return 0;
- }
-@@ -205,7 +188,7 @@ static int phy_meson_gxl_usb2_power_off(struct phy *phy)
- struct phy_ops meson_gxl_usb2_phy_ops = {
- 	.power_on = phy_meson_gxl_usb2_power_on,
- 	.power_off = phy_meson_gxl_usb2_power_off,
--	.set_mode = _phy_meson_gxl_usb2_set_mode,
-+	.set_mode = phy_meson_gxl_usb2_set_mode,
- };
- 
- int meson_gxl_usb2_phy_probe(struct udevice *dev)
 
 -- 
 2.34.1
