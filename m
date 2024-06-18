@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06270C2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:06:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB346C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:06:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC241883FA;
-	Tue, 18 Jun 2024 23:06:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B9D98841E;
+	Tue, 18 Jun 2024 23:06:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DA88883F6; Tue, 18 Jun 2024 23:06:17 +0200 (CEST)
+ id 29865883F6; Tue, 18 Jun 2024 23:06:18 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 406F787CDA
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:06:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 138E686784
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,8 +25,8 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1sJg1s-00FAbj-2z;
- Tue, 18 Jun 2024 21:06:12 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1sJg1t-00FAbj-2J;
+ Tue, 18 Jun 2024 21:06:13 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
@@ -40,10 +40,10 @@ Cc: Simon Glass <sjg@chromium.org>,
  Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar <gajjar04akash@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH v7 1/4] Add fdt_kaslrseed function to add kaslr-seed to chosen
- node
-Date: Tue, 18 Jun 2024 14:06:06 -0700
-Message-Id: <20240618210609.1744727-2-tharvey@gateworks.com>
+Subject: [PATCH v7 2/4] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
+ enabled
+Date: Tue, 18 Jun 2024 14:06:07 -0700
+Message-Id: <20240618210609.1744727-3-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240618210609.1744727-1-tharvey@gateworks.com>
 References: <20240618210609.1744727-1-tharvey@gateworks.com>
@@ -70,10 +70,20 @@ randomize the virtual address at which the kernel image is loaded, it
 expects entropy to be provided by the bootloader by populating
 /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
 
-Add a fdt_kaslrseed function to accommodate this allowing an existing
-node to be overwritten if present. For now use the first rng device
-but it would be good to enhance this in the future to allow some sort
-of selection or policy in choosing the rng device used.
+If we have DM_RNG enabled populate this value automatically when
+fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
+is enabled as its implementation uses a different source of entropy
+that is not yet implemented as DM_RNG. We also skip this if
+MEASURED_BOOT is enabled as in that case any modifications to the
+dt will cause measured boot to fail (although there are many other
+places the dt is altered).
+
+Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
+randomization and completely ignores the kaslr-seed for its own
+randomness needs (i.e the randomization of the physical placement of
+the kernel). It gets weeded out from the DTB that gets handed over via
+efi_install_fdt() as it would also mess up the measured boot DTB TPM
+measurements as well.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -94,11 +104,8 @@ Cc: Chris Morgan <macromorgan@hotmail.com>
 v6:
  - collected tags
 v5:
- - move function to boot/fdt_support.c
- - remove ability to select rng index and note in the commit log
-   something like this as a future enhancement.
  - fixed typo in commit message s/it's/its/
- - use cmd_process_error per Michal's suggestion
+ - split patch into 3 parts
 v4:
  - add missing /n to notice in kaslrseed cmd
  - combine ints in declaration
@@ -115,97 +122,29 @@ v2:
  - move to a library function and deduplicate code by using it
    elsewhere
 ---
- boot/fdt_support.c    | 44 +++++++++++++++++++++++++++++++++++++++++++
- include/fdt_support.h | 10 ++++++++++
- 2 files changed, 54 insertions(+)
+ boot/fdt_support.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 2bd80a9dfb18..b1b2679dea0c 100644
+index b1b2679dea0c..4559adcd5e2e 100644
 --- a/boot/fdt_support.c
 +++ b/boot/fdt_support.c
-@@ -7,12 +7,15 @@
-  */
+@@ -345,6 +345,15 @@ int fdt_chosen(void *fdt)
+ 	if (nodeoffset < 0)
+ 		return nodeoffset;
  
- #include <common.h>
-+#include <dm.h>
- #include <abuf.h>
- #include <env.h>
- #include <log.h>
- #include <mapmem.h>
- #include <net.h>
-+#include <rng.h>
- #include <stdio_dev.h>
-+#include <dm/device_compat.h>
- #include <dm/ofnode.h>
- #include <linux/ctype.h>
- #include <linux/types.h>
-@@ -274,6 +277,47 @@ int fdt_initrd(void *fdt, ulong initrd_start, ulong initrd_end)
- 	return 0;
- }
- 
-+int fdt_kaslrseed(void *fdt, bool overwrite)
-+{
-+	int len, err, nodeoffset;
-+	struct udevice *dev;
-+	const u64 *orig;
-+	u64 data = 0;
++	/* if DM_RNG enabled automatically inject kaslr-seed node unless:
++	 * CONFIG_MEASURED_BOOT enabled: as dt modifications break measured boot
++	 * CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT enabled: as that implementation does not use dm yet
++	 */
++	if (IS_ENABLED(CONFIG_DM_RNG) &&
++	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
++	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
++		fdt_kaslrseed(fdt, false);
 +
-+	err = fdt_check_header(fdt);
-+	if (err < 0)
-+		return err;
-+
-+	/* find or create "/chosen" node. */
-+	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
-+	if (nodeoffset < 0)
-+		return nodeoffset;
-+
-+	/* return without error if we are not overwriting and existing non-zero node */
-+	orig = fdt_getprop(fdt, nodeoffset, "kaslr-seed", &len);
-+	if (orig && len == sizeof(*orig))
-+		data = fdt64_to_cpu(*orig);
-+	if (data && !overwrite) {
-+		debug("not overwriting existing kaslr-seed\n");
-+		return 0;
-+	}
-+	err = uclass_get_device(UCLASS_RNG, 0, &dev);
-+	if (err) {
-+		printf("No RNG device\n");
-+		return err;
-+	}
-+	err = dm_rng_read(dev, &data, sizeof(data));
-+	if (err) {
-+		dev_err(dev, "dm_rng_read failed: %d\n", err);
-+		return err;
-+	}
-+	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
-+	if (err < 0)
-+		printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
-+
-+	return err;
-+}
-+
- /**
-  * board_fdt_chosen_bootargs - boards may override this function to use
-  *                             alternative kernel command line arguments
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index 4b71b8948d99..741e2360c224 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -463,4 +463,14 @@ void fdt_fixup_board_enet(void *blob);
- #ifdef CONFIG_CMD_PSTORE
- void fdt_fixup_pstore(void *blob);
- #endif
-+
-+/**
-+ * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
-+ *
-+ * @blob:	fdt blob
-+ * @overwrite:	do not overwrite existing non-zero node unless true
-+ * Return:	0 if OK, -ve on error
-+ */
-+int fdt_kaslrseed(void *blob, bool overwrite);
-+
- #endif /* ifndef __FDT_SUPPORT_H */
+ 	if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
+ 		err = fdt_setprop(fdt, nodeoffset, "rng-seed",
+ 				  abuf_data(&buf), abuf_size(&buf));
 -- 
 2.25.1
 
