@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB346C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40B59C2BA15
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B9D98841E;
+	by phobos.denx.de (Postfix) with ESMTP id 9554288427;
 	Tue, 18 Jun 2024 23:06:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29865883F6; Tue, 18 Jun 2024 23:06:18 +0200 (CEST)
+ id 6EFDA8840E; Tue, 18 Jun 2024 23:06:19 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 138E686784
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:06:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 453E8883DE
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:06:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,8 +25,8 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1sJg1t-00FAbj-2J;
- Tue, 18 Jun 2024 21:06:13 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1sJg1v-00FAbj-11;
+ Tue, 18 Jun 2024 21:06:15 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
@@ -40,10 +40,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar <gajjar04akash@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH v7 2/4] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
- enabled
-Date: Tue, 18 Jun 2024 14:06:07 -0700
-Message-Id: <20240618210609.1744727-3-tharvey@gateworks.com>
+Subject: [PATCH v7 4/4] test: cmd: fdt: fix chosen test for DM_RNG
+Date: Tue, 18 Jun 2024 14:06:09 -0700
+Message-Id: <20240618210609.1744727-5-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240618210609.1744727-1-tharvey@gateworks.com>
 References: <20240618210609.1744727-1-tharvey@gateworks.com>
@@ -65,28 +64,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
-randomize the virtual address at which the kernel image is loaded, it
-expects entropy to be provided by the bootloader by populating
-/chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+Now that kaslr-seed is automatically added to the chosen node if DM_RNG
+is enabled, adjust the test to expect this.
 
-If we have DM_RNG enabled populate this value automatically when
-fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
-is enabled as its implementation uses a different source of entropy
-that is not yet implemented as DM_RNG. We also skip this if
-MEASURED_BOOT is enabled as in that case any modifications to the
-dt will cause measured boot to fail (although there are many other
-places the dt is altered).
-
-Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
-randomization and completely ignores the kaslr-seed for its own
-randomness needs (i.e the randomization of the physical placement of
-the kernel). It gets weeded out from the DTB that gets handed over via
-efi_install_fdt() as it would also mess up the measured boot DTB TPM
-measurements as well.
+Take care not to expect kaslr-seed for CONFIG_MEASURED_BOOT and
+CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT as we do not add it for those.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Michal Simek <michal.simek@amd.com>
 Cc: Andy Yan <andy.yan@rock-chips.com>
 Cc: Akash Gajjar <gajjar04akash@gmail.com>
@@ -101,50 +85,39 @@ Cc: Marek Vasut <marex@denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Chris Morgan <macromorgan@hotmail.com>
 ---
-v6:
- - collected tags
-v5:
- - fixed typo in commit message s/it's/its/
- - split patch into 3 parts
-v4:
- - add missing /n to notice in kaslrseed cmd
- - combine ints in declaration
- - remove unused vars from board/xilinx/common/board.c ft_board_setup
-v3:
- - skip if CONFIG_MEASURED_BOOT
- - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
- - pass in rng index and bool to specify overwrite
- - remove duplicate error strings printed outside of fdt_kaslrseed
- - added note to commit log about how EFI STUB weeds out kalsr-seed
-v2:
- - fix typo in commit msg
- - use stack for seed to avoid unecessary malloc/free
- - move to a library function and deduplicate code by using it
-   elsewhere
+v7: fix fdt_test_chosen to not expect kaslr-seed for
+    CONFIG_MEASURED_BOOT and CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+v6: new patch
 ---
- boot/fdt_support.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ test/cmd/fdt.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index b1b2679dea0c..4559adcd5e2e 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -345,6 +345,15 @@ int fdt_chosen(void *fdt)
- 	if (nodeoffset < 0)
- 		return nodeoffset;
- 
-+	/* if DM_RNG enabled automatically inject kaslr-seed node unless:
-+	 * CONFIG_MEASURED_BOOT enabled: as dt modifications break measured boot
-+	 * CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT enabled: as that implementation does not use dm yet
-+	 */
+diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+index 547085521758..5cda1ef382a1 100644
+--- a/test/cmd/fdt.c
++++ b/test/cmd/fdt.c
+@@ -1347,6 +1347,10 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+ 	ut_assert_nextlinen("\tu-boot,version = "); /* Ignore the version string */
+ 	if (env_bootargs)
+ 		ut_assert_nextline("\tbootargs = \"%s\";", env_bootargs);
 +	if (IS_ENABLED(CONFIG_DM_RNG) &&
 +	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
 +	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
-+		fdt_kaslrseed(fdt, false);
-+
- 	if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
- 		err = fdt_setprop(fdt, nodeoffset, "rng-seed",
- 				  abuf_data(&buf), abuf_size(&buf));
++		ut_assert_nextlinen("\tkaslr-seed = ");
+ 	ut_assert_nextline("};");
+ 	ut_assertok(ut_check_console_end(uts));
+ 
+@@ -1363,6 +1367,10 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+ 	ut_assert_nextlinen("\tu-boot,version = "); /* Ignore the version string */
+ 	if (env_bootargs)
+ 		ut_assert_nextline("\tbootargs = \"%s\";", env_bootargs);
++	if (IS_ENABLED(CONFIG_DM_RNG) &&
++	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
++	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
++		ut_assert_nextlinen("\tkaslr-seed = ");
+ 	ut_assert_nextline("};");
+ 	ut_assertok(ut_check_console_end(uts));
+ 
 -- 
 2.25.1
 
