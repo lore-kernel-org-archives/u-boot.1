@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6552AC2BA1A
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:28:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4491C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:30:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F648842C;
-	Tue, 18 Jun 2024 09:28:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82747884BA;
+	Tue, 18 Jun 2024 09:30:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="b/dZuoyq";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Ovh66Wai";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 024AF884BF; Tue, 18 Jun 2024 09:28:48 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id E204A884C6; Tue, 18 Jun 2024 09:30:04 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E36B58839F
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:28:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3D75884BA
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:30:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-52bc035a7ccso5393687e87.2
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:28:45 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-424720e73e1so2251345e9.1
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:30:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718695725; x=1719300525;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718695802; x=1719300602;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=NCaHdDIUGmqUI2TCURc64oXAdoX2jCoN+34JjMiecAY=;
- b=b/dZuoyqAKru6HW+nsIVs4K+KYC+7gZU/rQl6a2SDftcDyXyJHq8/zZIvDWPOJKjpb
- VVswWt5HCbvsqK2hpU8QrCr3tP+J3DQvcB4YVTEegY3UGBz+toPKZF1uY8UOXq8+SYdV
- H8q86tf2enyP5tZRzMDsBrlMnPo6hun5tOwQwm4hPmps2SRnXm0OQfsKrzI1cWIT+hlt
- 6nJvDji8N/fhu8zKpvN6ES81HZ/ibi4si0GMkcA4c5W6/C+S0YyMu6HGNQ0rKjSlV+ry
- ZYfnVCO/FiWQAfLzUe2G9fTtWmS2/b7lFXGE44eDNnCsbdgXcuYzB3PRqkaAJF4LjBhG
- gbMg==
+ bh=rO8Y2qTYzsWtBUuXJIHqMG49GyRNFxTjs60LoSvvbpQ=;
+ b=Ovh66Wai+9RhQW67XDtjmnqEHK1rBllniL1Hd1PdHsxhb0jENxbBKjOf74s+jV2YHm
+ K38khSNQuej/pnrqmBBiJKFYh+JsiVs0m6NHIG09VOpZ8lfHVBJhsebBU1DrU/wHG15s
+ sG1s1cxAny86ZNdOs4dU7DhDQwfEnKtb8Q0mDdNnuGhymy3F3DEqJJIH6HK7tW95RuZJ
+ biSq4l3i3B44Ey4TLhA6fe3AYOMidpAiiCJ6zoXwDc8FMjqZJ9OuLkLDK2tf/HDmQ5MT
+ Si+dGfcaEwTcJsWNI4rXVQDtYGKwS5a/ui0ELjXsVObksi8BzYH58DvpdaZcEV6JCXp8
+ zoag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718695725; x=1719300525;
+ d=1e100.net; s=20230601; t=1718695802; x=1719300602;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NCaHdDIUGmqUI2TCURc64oXAdoX2jCoN+34JjMiecAY=;
- b=G+xEJ587Q9CxNfikBB9yaPGtsKD6Ckyxq4SC9rlwLOtMABQatyp8bkjnhbHWvrBbNC
- ChtxkuaB3VW6bcvr4goqGs484Ek7rg+C5feBZDc+sAXffHVbtVVg9GtODDqgFI33wg7g
- +fRSa6NagVWTf3QQWc3WDQ4Qp70K39iafk00oga9SYD2BqwoUPl3VkbWz8z8Q+rDXqnU
- K10RCiyl1H94dUO/Ch+k4yVm2iIaw1cD1nJQo4eC0gKQBdqlEjXUBWSsMhF0kchLp7jz
- xs0SuMoMoXOXQnTHeDXQ2/4snAQDYW5pbVG1kAf70A5Yk/JWt4pUTJUi4ucxaYUQsFNd
- +URw==
+ bh=rO8Y2qTYzsWtBUuXJIHqMG49GyRNFxTjs60LoSvvbpQ=;
+ b=ksLcpV5q8y1r4yjA5c/m3dyp/vxlUBuYAxNywT4fsI+mDO3HoGuRE5oO0rvx3Dcnnn
+ QX6qWlHaPvtwfaWyHHXy0rEWPM8DS2PmeZnbDiMC7Ke313XTeooKCYiYmW4yLabSkUlb
+ rotb3tO3+3ySVlsdJ6U0q4O41DXPKe7lbJpXzrYVFOGIJH2k91L0eQfOngh9ldjpNgNP
+ 8nNt7H3OPdhgHbapG4RJVzWFUH+N8iX0Iu+PuhC4inQJCZX3+jSkvCuazXI69Bu8L6vx
+ kItK2CBlSU4fpaHeicwAS9BDs18T1XrYLpd5NCP7r+gmKZlq0g7cDgQDDeNlW1aLiY5y
+ CXyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWw9Bk6kY3oSxq0QgXbepI5tg3KmOlKJ/iYo7al/tiMKqDjqFNIks33V0u+k06zq0bxwQhdKDWEylbv3oWYi51+8EBLFQ==
-X-Gm-Message-State: AOJu0YxyW6GKYhSuG0R5DG74eWzeJuVvT26Ov1LpGNSDWe/svJSAHLiS
- QQ3kYMqB2X4m8dMPcebz9OTBIlJ/ZQBRYjfwKfHFFyMxil5VxX2vnO4IwjB+O7UfuRpbgsnoA8E
- u
-X-Google-Smtp-Source: AGHT+IHS1KKtGudLoVvDZHrsFKrR2McKdIX+khXFiWVNzmK5d/eXES2AXntUGcHuPMK2vVxx5XdW4Q==
-X-Received: by 2002:ac2:43d6:0:b0:52c:a9c2:d363 with SMTP id
- 2adb3069b0e04-52ca9c316abmr6524795e87.10.1718695725189; 
- Tue, 18 Jun 2024 00:28:45 -0700 (PDT)
+ AJvYcCVE93nanGi1bXKoUelJdg/mv3L5q3G8KpChh62lZoJaTE+N1AkY5JarbYzRyADzvXLXJx5380MErDxgjv4ympVk+itXXQ==
+X-Gm-Message-State: AOJu0YxQqHtX9QB7ynTlIdhW+Es/nPbYSe9tniHjIpbo+3a5v//t8Agr
+ i4sAnV6GvFV914C5MTd0r8wViSPI35DdruzX/YGUkp50OPPxRcZGCOQMLN/N00o=
+X-Google-Smtp-Source: AGHT+IGnluWWGVoL2e9R2Zozc0LiECq3ImLZfYimnv3adiUjCBP1toV1fvvMy/DhhZ1uRdSlpUeKcQ==
+X-Received: by 2002:a05:600c:444a:b0:422:370a:ca57 with SMTP id
+ 5b1f17b1804b1-4230485a70amr99008185e9.36.1718695802136; 
+ Tue, 18 Jun 2024 00:30:02 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42286eefa63sm218103825e9.1.2024.06.18.00.28.44
+ ffacd0b85a97d-360917c264bsm6238523f8f.56.2024.06.18.00.30.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 00:28:44 -0700 (PDT)
+ Tue, 18 Jun 2024 00:30:01 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
@@ -72,13 +71,13 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
  <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
  Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
  <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 05/11] usb: gadget: max3420: Convert interrupt handling
- to usb_gadget_generic_ops
-In-Reply-To: <20240614005309.34433-6-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 06/11] usb: gadget: mtu3: Convert interrupt handling to
+ usb_gadget_generic_ops
+In-Reply-To: <20240614005309.34433-7-marek.vasut+renesas@mailbox.org>
 References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
- <20240614005309.34433-6-marek.vasut+renesas@mailbox.org>
-Date: Tue, 18 Jun 2024 09:28:42 +0200
-Message-ID: <87v826iuad.fsf@baylibre.com>
+ <20240614005309.34433-7-marek.vasut+renesas@mailbox.org>
+Date: Tue, 18 Jun 2024 09:29:59 +0200
+Message-ID: <87sexaiu88.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -124,52 +123,53 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  drivers/usb/gadget/max3420_udc.c | 19 ++++++++++++-------
->  1 file changed, 12 insertions(+), 7 deletions(-)
+>  drivers/usb/mtu3/mtu3_plat.c | 23 ++++++++++++++---------
+>  1 file changed, 14 insertions(+), 9 deletions(-)
 >
-> diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max3420_udc.c
-> index 5a227c0ffd9..557a1f0644e 100644
-> --- a/drivers/usb/gadget/max3420_udc.c
-> +++ b/drivers/usb/gadget/max3420_udc.c
-> @@ -808,13 +808,6 @@ static void max3420_setup_spi(struct max3420_udc *udc)
->  	spi_wr8(udc, MAX3420_REG_PINCTL, bFDUPSPI);
->  }
+> diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
+> index ca86b58dfcd..f8e14eabfb2 100644
+> --- a/drivers/usb/mtu3/mtu3_plat.c
+> +++ b/drivers/usb/mtu3/mtu3_plat.c
+> @@ -223,15 +223,6 @@ static const struct udevice_id ssusb_of_match[] = {
+>  };
 >  
+>  #if CONFIG_IS_ENABLED(DM_USB_GADGET)
 > -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
 > -{
-> -	struct max3420_udc *udc = dev_get_priv(dev);
+> -	struct mtu3 *mtu = dev_get_priv(dev);
 > -
-> -	return max3420_irq(udc);
+> -	mtu3_irq(0, mtu);
+> -
+> -	return 0;
 > -}
 > -
->  static int max3420_udc_probe(struct udevice *dev)
+>  static int mtu3_gadget_probe(struct udevice *dev)
 >  {
->  	struct max3420_udc *udc = dev_get_priv(dev);
-> @@ -859,6 +852,17 @@ static int max3420_udc_remove(struct udevice *dev)
+>  	struct ssusb_mtk *ssusb = dev_to_ssusb(dev->parent);
+> @@ -250,10 +241,24 @@ static int mtu3_gadget_remove(struct udevice *dev)
 >  	return 0;
 >  }
 >  
-> +static int max3420_gadget_handle_interrupts(struct udevice *dev)
+> +static int mtu3_gadget_handle_interrupts(struct udevice *dev)
 > +{
-> +	struct max3420_udc *udc = dev_get_priv(dev);
+> +	struct mtu3 *mtu = dev_get_priv(dev);
 > +
-> +	return max3420_irq(udc);
+> +	mtu3_irq(0, mtu);
+> +
+> +	return 0;
 > +}
 > +
-> +static const struct usb_gadget_generic_ops max3420_gadget_ops = {
-> +	.handle_interrupts	= max3420_gadget_handle_interrupts,
+> +static const struct usb_gadget_generic_ops mtu3_gadget_ops = {
+> +	.handle_interrupts	= mtu3_gadget_handle_interrupts,
 > +};
 > +
->  static const struct udevice_id max3420_ids[] = {
->  	{ .compatible = "maxim,max3421-udc" },
->  	{ }
-> @@ -868,6 +872,7 @@ U_BOOT_DRIVER(max3420_generic_udc) = {
->  	.name = "max3420-udc",
+>  U_BOOT_DRIVER(mtu3_peripheral) = {
+>  	.name = "mtu3-peripheral",
 >  	.id = UCLASS_USB_GADGET_GENERIC,
->  	.of_match = max3420_ids,
-> +	.ops = &max3420_gadget_ops,
->  	.probe = max3420_udc_probe,
->  	.remove = max3420_udc_remove,
->  	.priv_auto	= sizeof(struct max3420_udc),
+>  	.of_match = ssusb_of_match,
+> +	.ops = &mtu3_gadget_ops,
+>  	.probe = mtu3_gadget_probe,
+>  	.remove = mtu3_gadget_remove,
+>  	.priv_auto	= sizeof(struct mtu3),
 > -- 
 > 2.43.0
