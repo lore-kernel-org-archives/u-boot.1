@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBBCC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD6F0C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:18:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1B3188137;
-	Tue, 18 Jun 2024 16:18:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5982488315;
+	Tue, 18 Jun 2024 16:18:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FI5jacGF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O7exKGax";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6371F88204; Tue, 18 Jun 2024 16:18:46 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 174BD88356; Tue, 18 Jun 2024 16:18:56 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EC168812C
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:18:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB50F8839C
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:18:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3c9b94951cfso3327699b6e.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:18:44 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6f855b2499cso3025536a34.1
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:18:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718720323; x=1719325123; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sYDdpZjKgRkzuBXxNTCxQ69ftsG8FB9czvXkbDu4TkY=;
- b=FI5jacGFsD82AcX8bNEEY49Tdz4yOnhLu1lTvOc5w7R05yLqP8jlh6hrR7XF8dk+MM
- GsiD6x4fo5LEJqxERIPJ8TRmVFvIt2QGhNmgswFiwyn912GDGGG4jvd6uAEwPviimkqK
- kNxJDAvocTdVxYL+bCJS4dFB4aELrjgSZ5YpM=
+ d=konsulko.com; s=google; t=1718720332; x=1719325132; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mCs3UThhKT7zVvO8QZopGlP21s6srKizjKNVIUot+/M=;
+ b=O7exKGaxN+OJ6QADyhbbVQh4wxo3dapIh5KGkkM9qNo6jqQfczNn8sk38qT/bie9Ut
+ XfQSPeMr8f6TiPsnUKt3ns4WTIwhtO8ne+x7s/6zqWBzOjkrCRc6LtO5pKig9Mz/wD1g
+ V2W/51nV9w+5m88Btu2TOqPpRRAIuIlNISyYc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718720323; x=1719325123;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sYDdpZjKgRkzuBXxNTCxQ69ftsG8FB9czvXkbDu4TkY=;
- b=NtCz5VpV/2/jlgLtXFWI+FmhuIVV42DRFliumEyCD9Faf6+0M2su9ZCTYWFscMi0RZ
- oLJMr4TD8JbHLF4Aa72/UqI2xi6eCXXrwLIrEdu4UP553Y1w3/3TyPOpZjMsoq8iJ8pI
- OFQwYdIotqF3/8qlaOv9G9Z5ktXzM4GlLU6VS0nbYccZaVZoSa5cNB3YI3fThNF1zkDc
- MN6pdn4D9RF7L4H4lFFYd/Sjox9R7aDawM9imMe0JHi8fzI/I67zYBAHSjyUmqJvSWaT
- gXW7AVHvNESVbudBH0t6q/oyttDU55fmcYJB26+qvC78HQxP2uxZy2VEowd2SdJHbsBD
- peSQ==
-X-Gm-Message-State: AOJu0YwC9SIDnEMHgCtduwXWpVxXbkyxGWNxFUg2nX1KIbOikxjAf7/1
- RAlAByX5hbRmUueZtFbMzA0UzBdM8jq9gCJxVBkiCFBzBazxjOs/NrloqTnKewE=
-X-Google-Smtp-Source: AGHT+IHndA5CcCbdDI1kmJNzQb/ukHc+zsPEeHWfpD2dO6wx3pIus5ILf27Y8F8TegpVN4UwJVAiqQ==
-X-Received: by 2002:a05:6808:114b:b0:3d2:2833:73e6 with SMTP id
- 5614622812f47-3d24e980c66mr13218409b6e.46.1718720322698; 
- Tue, 18 Jun 2024 07:18:42 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d2476e31d8sm1797918b6e.53.2024.06.18.07.18.41
+ d=1e100.net; s=20230601; t=1718720332; x=1719325132;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mCs3UThhKT7zVvO8QZopGlP21s6srKizjKNVIUot+/M=;
+ b=Hp2RPFtzAL16R5wW9Xrvd7bW9p1+/LFwSFTufyIW6pHpJw7EgXacIA0KjmilmBBI98
+ bjAbM6KS9Phoz6YHydpHXghkb0zQiiyvM+D4L7sLEIeggd7UiR84JMVvgtce+vPTWOzL
+ cwoJMpE6VXSoFibAodscBx3kPwE3lPscRPPRHpAikLo9WUkUeU3oDzQdDp9wpZ0UCwp/
+ aKfOL/xKjJhArPvIHPLI3jjrKKhE0v2K+HyQKs3OVqDZj9WHbBHhM6Wz0uXfsy7ipWux
+ 3FRE5FCq7XkWjcBjh5odHrebehBUVwNmCpfhaPR8q7JmXTQzQ5e3G17CyF37StCjJ082
+ 8IQA==
+X-Gm-Message-State: AOJu0Yz+fJXTegjFwqWD06gDftmCiVpuijM1C6Z5OXgFEUMG/4z9u9Y+
+ zwo0Nc5IB4C1PCbK8/sM8OrCgNU7ad85My4GirfjW8QyJllNu/aKV+wJPx0+2zw4a6RI66yeHI1
+ RN9yDUg==
+X-Google-Smtp-Source: AGHT+IH0p8R+yJ9EKOJRWZNmMshYfNEfH/8Mx9QT6qXmSuW+ZLtesFmf1Hn3CU28v4pWvcPrFRQ+pg==
+X-Received: by 2002:a05:6830:a:b0:6f9:a91e:f0fd with SMTP id
+ 46e09a7af769-6fb932992e8mr14808263a34.2.1718720332518; 
+ Tue, 18 Jun 2024 07:18:52 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net
+ (fixed-187-190-205-45.totalplay.net. [187.190.205.45])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6fb5b1b0bd9sm1844183a34.27.2024.06.18.07.18.52
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 07:18:41 -0700 (PDT)
-Date: Tue, 18 Jun 2024 08:18:39 -0600
+ Tue, 18 Jun 2024 07:18:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com
-Subject: Re: [PATCH] amd: versal2: Use U_BOOT_LONGHELP macro
-Message-ID: <20240618141839.GP68077@bill-the-cat>
-References: <9fc5f9c3d92a45f0603e6e912394655f42e96173.1718716595.git.michal.simek@amd.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/5] Azure: Correct comment about the strategy in the world
+ matrix build
+Date: Tue, 18 Jun 2024 08:18:47 -0600
+Message-Id: <20240618141851.3303112-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LGcFcUWUN6O0A1qi"
-Content-Disposition: inline
-In-Reply-To: <9fc5f9c3d92a45f0603e6e912394655f42e96173.1718716595.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,69 +87,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+At this point noting that we have a split in our job similar to TravisCI
+(which we have not used in years) isn't helpful, and is also not true
+anymore either. Instead, explain that we split the world up in to 10
+jobs as that's the maximum we can have going in parallel on the free
+tier of Azure.
 
---LGcFcUWUN6O0A1qi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Tue, Jun 18, 2024 at 03:16:38PM +0200, Michal Simek wrote:
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 27f69583c655..f662f41872fd 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -473,8 +473,8 @@ stages:
+     pool:
+       vmImage: $(ubuntu_vm)
+     strategy:
+-      # Use almost the same target division in .travis.yml, only merged
+-      # 3 small build jobs (arc/microblaze/xtensa) into one.
++      # We split the world up in to 10 jobs as we can have at most 10
++      # parallel jobs going on the free tier of Azure.
+       matrix:
+         am33xx_at91_kirkwood_mvebu_omap:
+           BUILDMAN: "am33xx at91_kirkwood mvebu omap -x siemens"
+-- 
+2.34.1
 
-> It is defined as __maybe_unused variable which fix issue when long help is
-> disabled.
->=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
->=20
->  board/amd/versal2/cmds.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->=20
-> diff --git a/board/amd/versal2/cmds.c b/board/amd/versal2/cmds.c
-> index fbd99918a7f4..56ae39bc6a1e 100644
-> --- a/board/amd/versal2/cmds.c
-> +++ b/board/amd/versal2/cmds.c
-> @@ -71,10 +71,9 @@ static int do_versal2_load_pdi(struct cmd_tbl *cmdtp, =
-int flag, int argc,
->  	return cmd_process_error(cmdtp, ret);
->  }
-> =20
-> -static char versal2_help_text[] =3D
-> +U_BOOT_LONGHELP(versal2,
->  	"loadpdi addr len - Load pdi image\n"
-> -	"load pdi image at ddr address 'addr' with pdi image size 'len'\n"
-> -;
-> +	"load pdi image at ddr address 'addr' with pdi image size 'len'\n");
-> =20
->  U_BOOT_CMD_WITH_SUBCMDS(versal2, "Versal Gen 2 sub-system", versal2_help=
-_text,
->  			U_BOOT_SUBCMD_MKENT(loadpdi, 3, 1,
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
-Ah, any chance you can work up something to checkpatch to catch that? I
-had gone through a while ago and fixed up the cases which should have
-been using that macro but I see a few more have slipped in, again.
-
-
---=20
-Tom
-
---LGcFcUWUN6O0A1qi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZxlz8ACgkQFHw5/5Y0
-tyzFcAv/d4X8w7E0bn+8DBeao6Bh3fG8alTOr+pjHWwz8NUfkCZjsrVChery53uk
-iFpdhjD6b0sxMe9+pkU1N9JpM3MDRmwIhyGuCcxNUh15rGHybg3/Xpqis9YfVJUy
-ABMZWVLdVx+N11soIyWFomECzxLgyuCImATxC/Q/kKSDJ9GFZ5bvq/abksYR+nFO
-XON5pyYQtN6aHIyLLhM72Yn7pxs0m0L40Q7QMMB+5i0bd+i7OrN3M3Zhmtlk2mmA
-AKlpyyoA2y846KzCV2tX0/zAVA6JCnSJtyxU6uyyRIB3hxIP5J0DlKoZykRAWvPC
-e2aDdUwhueatHKxz5xdKowJrGftBefs06DGImUh70y4ZUmspTQG6zh7zffnGeEqH
-B5VS4bcZESVy0quq+98St3sSXyi97nDf7BgwcTCq790kNEXK5tr/YEWVUOxM5HXh
-3M6WZwqbcPfGTu6a/MYBhxg2rx9wHpEPB4MnZsWAdaQ0H16A1PNXo/NhNq7ggbtx
-AI+nD71n
-=pljm
------END PGP SIGNATURE-----
-
---LGcFcUWUN6O0A1qi--
