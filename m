@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3752C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 249F8C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:36:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CDC6883BA;
-	Tue, 18 Jun 2024 17:35:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1EED08842A;
+	Tue, 18 Jun 2024 17:35:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lEbzs87A";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="I4VRTBrL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7630888438; Tue, 18 Jun 2024 17:34:59 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 8B5328844C; Tue, 18 Jun 2024 17:35:00 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF3E5883BB
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:34:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53D62883BA
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:34:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 0EC82CE1A0B;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 360A76199A;
+ Tue, 18 Jun 2024 15:34:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CC56C3277B;
  Tue, 18 Jun 2024 15:34:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68792C3277B;
- Tue, 18 Jun 2024 15:34:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718724894;
- bh=EVb0XnfS/mt0ArpWnHZbPThh/VveSgImfLFfQbKJklE=;
+ s=k20201202; t=1718724896;
+ bh=Ep4flZGOVvlZlPR7Qu7CVKMrmFCnhW8WSDnXBckZ5Ss=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lEbzs87ATgbgymoGQlFbTRebYPw8Sl5cvt6M0eDVaVDvFfsSalX0KPQtli5W14cRw
- 4b3UeO9NK8DCsbDmEslMQkZokfG49CwiuJDI7OfKz0bMvFQHQFOUME5UeUCji3g1fR
- 6f1Pl6Ndo55qm2SpX6zlB+Ej6aJS3wuxxGsldL58pUa3nDPFctun+uizU+JpC/mGgh
- JDg6X9l75bvLyLrEJZs/08RQQE4obKoeK4RDAXeZ9QdGxLqYvM8oVEprxOG3gTBBed
- ybyt7+0wrqDTl317eJp3DDBJVvJRBF0R0nmmFUpg5GKIsa+BCihln8/yav67OjM3ft
- SegLXVaHIRuhQ==
+ b=I4VRTBrLbj/5Q3JiowItbRRAlB0VGRnK4RX3Nl3/+mNbJGpFWQ+5/MIL7uCjumD3b
+ Dz02x1iIbM777GsM10TIyuaZIJnDnnYD4jeKxvSFu7YjT+nMKOgIcqM5uy2WTUZK7Y
+ O/tRfYZ25B977IXPUWYgxO14WFFBbiH23BptMIwhbdG89V10rMZADR/9ijNf7UI+bq
+ +vSRGYM/MMog0zWf7AF19DeU0ZpJG+AxCBiogsSWK5THi5H3fDaA4qtuobJr4ujjLP
+ hYQcS7AoXHSBsw9ExhEmDDD9bsExM2e4crymTI6XYW6E8O/KPhpNtMr74057EkvP+j
+ US3kV9o5fPWew==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-marvell 08/16] arm: mvebu: turris_omnia: Implement
- EEPROM layout for the 'eeprom' command
-Date: Tue, 18 Jun 2024 17:34:31 +0200
-Message-ID: <20240618153439.9518-9-kabel@kernel.org>
+Subject: [PATCH u-boot-marvell 10/16] arm: mvebu: turris_omnia: Extend EEPROM
+ info structure
+Date: Tue, 18 Jun 2024 17:34:33 +0200
+Message-ID: <20240618153439.9518-11-kabel@kernel.org>
 X-Mailer: git-send-email 2.44.2
 In-Reply-To: <20240618153439.9518-1-kabel@kernel.org>
 References: <20240618153439.9518-1-kabel@kernel.org>
@@ -69,148 +69,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement Turris Omnia EEPROM layout for the 'eeprom' command.
-
-When the 'eeprom' command (with layout support) is enabled, we can now
-use the 'eeprom print' and 'eeprom update' commands, for example:
-
-  => eeprom print
-  Magic constant                34a04103
-  RAM size in GB                2
-  Wi-Fi Region
-  CRC32 checksum                cecbc2a1
+Extend the Omnia EEPROM information structure in preparation for more
+variables to be stored there.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- board/CZ.NIC/turris_omnia/Makefile |   1 +
- board/CZ.NIC/turris_omnia/eeprom.c | 109 +++++++++++++++++++++++++++++
- 2 files changed, 110 insertions(+)
- create mode 100644 board/CZ.NIC/turris_omnia/eeprom.c
+ board/CZ.NIC/turris_omnia/eeprom.c       | 11 ++++++-
+ board/CZ.NIC/turris_omnia/turris_omnia.c | 42 ++++++++++++++++++++----
+ 2 files changed, 46 insertions(+), 7 deletions(-)
 
-diff --git a/board/CZ.NIC/turris_omnia/Makefile b/board/CZ.NIC/turris_omnia/Makefile
-index 341378b4e5..216e11958a 100644
---- a/board/CZ.NIC/turris_omnia/Makefile
-+++ b/board/CZ.NIC/turris_omnia/Makefile
-@@ -3,3 +3,4 @@
- # Copyright (C) 2017 Marek Behún <kabel@kernel.org>
- 
- obj-y	:= turris_omnia.o ../turris_atsha_otp.o ../turris_common.o
-+obj-$(CONFIG_CMD_EEPROM_LAYOUT)	+= eeprom.o
 diff --git a/board/CZ.NIC/turris_omnia/eeprom.c b/board/CZ.NIC/turris_omnia/eeprom.c
-new file mode 100644
-index 0000000000..a4f1dab469
---- /dev/null
+index a4f1dab469..ea13e95b37 100644
+--- a/board/CZ.NIC/turris_omnia/eeprom.c
 +++ b/board/CZ.NIC/turris_omnia/eeprom.c
-@@ -0,0 +1,109 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Marek Behún <kabel@kernel.org>
-+ */
-+
-+#include <asm/unaligned.h>
-+#include <ctype.h>
-+#include <linux/compiler.h>
-+#include <linux/kernel.h>
-+#include <eeprom_field.h>
-+#include <eeprom_layout.h>
-+#include <u-boot/crc.h>
-+
-+#define _DEF_FIELD(_n, _s, _t) \
-+	{ _n, _s, NULL, eeprom_field_print_ ## _t, eeprom_field_update_ ## _t }
-+
-+static void eeprom_field_print_ramsz(const struct eeprom_field *field)
-+{
-+	printf(PRINT_FIELD_SEGMENT, field->name);
-+	printf("%u\n", get_unaligned_le32(field->buf));
-+}
-+
-+static int eeprom_field_update_ramsz(struct eeprom_field *field, char *value)
-+{
-+	u32 sz;
-+
-+	if (value[0] == '1' || value[0] == '2' || value[0] == '4')
-+		sz = value[0] - '0';
-+	else
-+		return -1;
-+
-+	if (value[1] != '\0')
-+		return -1;
-+
-+	put_unaligned_le32(sz, field->buf);
-+
-+	return 0;
-+}
-+
-+static void eeprom_field_print_region(const struct eeprom_field *field)
-+{
-+	eeprom_field_print_ascii(field);
-+}
-+
-+static int eeprom_field_update_region(struct eeprom_field *field, char *value)
-+{
-+	if (strlen(value) != 2) {
-+		printf("%s: has to be 2 characters\n", field->name);
-+		return -1;
+@@ -60,9 +60,13 @@ static struct eeprom_field omnia_layout[] = {
+ 	_DEF_FIELD("RAM size in GB", 4, ramsz),
+ 	_DEF_FIELD("Wi-Fi Region", 4, region),
+ 	_DEF_FIELD("CRC32 checksum", 4, bin),
++	_DEF_FIELD("Extended reserved fields", 44, reserved),
++	_DEF_FIELD("Extended CRC32 checksum", 4, bin),
+ };
+ 
+ static struct eeprom_field *crc_field = &omnia_layout[3];
++static struct eeprom_field *ext_crc_field =
++	&omnia_layout[ARRAY_SIZE(omnia_layout) - 1];
+ 
+ static int omnia_update_field(struct eeprom_layout *layout, char *field_name,
+ 			      char *new_data)
+@@ -91,6 +95,11 @@ static int omnia_update_field(struct eeprom_layout *layout, char *field_name,
+ 		put_unaligned_le32(crc, crc_field->buf);
+ 	}
+ 
++	if (field < ext_crc_field) {
++		u32 crc = crc32(0, layout->data, 44);
++		put_unaligned_le32(crc, ext_crc_field->buf);
 +	}
 +
-+	memcpy(field->buf, value, 2);
-+	memset(&field->buf[2], '\0', 2);
+ 	return 0;
+ }
+ 
+@@ -99,7 +108,7 @@ void eeprom_layout_assign(struct eeprom_layout *layout, int)
+ 	layout->fields = omnia_layout;
+ 	layout->num_of_fields = ARRAY_SIZE(omnia_layout);
+ 	layout->update = omnia_update_field;
+-	layout->data_size = 16;
++	layout->data_size = 64;
+ }
+ 
+ int eeprom_layout_detect(unsigned char *)
+diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
+index 100a991406..c2f91b762f 100644
+--- a/board/CZ.NIC/turris_omnia/turris_omnia.c
++++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
+@@ -429,12 +429,40 @@ struct omnia_eeprom {
+ 	u32 ramsize;
+ 	char region[4];
+ 	u32 crc;
 +
-+	return 0;
++	/* second part (only considered if crc2 is not all-ones) */
++	u8 reserved[44];
++	u32 crc2;
+ };
+ 
++static bool is_omnia_eeprom_second_part_valid(const struct omnia_eeprom *oep)
++{
++	return oep->crc2 != 0xffffffff;
 +}
 +
-+static struct eeprom_field omnia_layout[] = {
-+	_DEF_FIELD("Magic constant", 4, bin),
-+	_DEF_FIELD("RAM size in GB", 4, ramsz),
-+	_DEF_FIELD("Wi-Fi Region", 4, region),
-+	_DEF_FIELD("CRC32 checksum", 4, bin),
-+};
-+
-+static struct eeprom_field *crc_field = &omnia_layout[3];
-+
-+static int omnia_update_field(struct eeprom_layout *layout, char *field_name,
-+			      char *new_data)
++static void make_omnia_eeprom_second_part_invalid(struct omnia_eeprom *oep)
 +{
-+	struct eeprom_field *field;
-+	int err;
++	oep->crc2 = 0xffffffff;
++}
 +
-+	if (!new_data)
-+		return 0;
++static bool check_eeprom_crc(const void *buf, size_t size, u32 expected,
++			     const char *name)
++{
++	u32 crc;
 +
-+	if (!field_name)
-+		return -1;
-+
-+	field = eeprom_layout_find_field(layout, field_name, true);
-+	if (!field)
-+		return -1;
-+
-+	err = field->update(field, new_data);
-+	if (err) {
-+		printf("Invalid data for field %s\n", field_name);
-+		return err;
++	crc = crc32(0, buf, size);
++	if (crc != expected) {
++		printf("bad %s EEPROM CRC (stored %08x, computed %08x)\n",
++		       name, expected, crc);
++		return false;
 +	}
 +
-+	if (field < crc_field) {
-+		u32 crc = crc32(0, layout->data, 12);
-+		put_unaligned_le32(crc, crc_field->buf);
-+	}
-+
-+	return 0;
++	return true;
 +}
 +
-+void eeprom_layout_assign(struct eeprom_layout *layout, int)
-+{
-+	layout->fields = omnia_layout;
-+	layout->num_of_fields = ARRAY_SIZE(omnia_layout);
-+	layout->update = omnia_update_field;
-+	layout->data_size = 16;
-+}
+ static bool omnia_read_eeprom(struct omnia_eeprom *oep)
+ {
+ 	struct udevice *chip;
+-	u32 crc;
+ 	int ret;
+ 
+ 	chip = omnia_get_i2c_chip("EEPROM", OMNIA_I2C_EEPROM_CHIP_ADDR,
+@@ -455,12 +483,14 @@ static bool omnia_read_eeprom(struct omnia_eeprom *oep)
+ 		return false;
+ 	}
+ 
+-	crc = crc32(0, (void *)oep, sizeof(*oep) - 4);
+-	if (crc != oep->crc) {
+-		printf("bad EEPROM CRC (stored %08x, computed %08x)\n",
+-		       oep->crc, crc);
++	if (!check_eeprom_crc(oep, offsetof(struct omnia_eeprom, crc), oep->crc,
++			      "first"))
+ 		return false;
+-	}
 +
-+int eeprom_layout_detect(unsigned char *)
-+{
-+	/* Turris Omnia has only one version of EEPROM layout */
-+	return 0;
-+}
++	if (is_omnia_eeprom_second_part_valid(oep) &&
++	    !check_eeprom_crc(oep, offsetof(struct omnia_eeprom, crc2),
++			      oep->crc2, "second"))
++		make_omnia_eeprom_second_part_invalid(oep);
+ 
+ 	return true;
+ }
 -- 
 2.44.2
 
