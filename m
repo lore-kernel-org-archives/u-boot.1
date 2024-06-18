@@ -4,37 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A76C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 19:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9ABC27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 19:35:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8FC58839C;
-	Tue, 18 Jun 2024 21:31:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id BEBD288335;
+	Tue, 18 Jun 2024 21:35:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 34A558839C; Tue, 18 Jun 2024 21:31:10 +0200 (CEST)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4314B88363
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 21:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 45IJV0g5022321; Wed, 19 Jun 2024 04:31:01 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH] rockchip: include cru_rk3588.h and define rockchip_cru for
- RK3588
-Date: Wed, 19 Jun 2024 04:30:44 +0900
-Message-ID: <20240618193044.22666-1-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b3qXOKlw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1640A882DF; Tue, 18 Jun 2024 21:35:31 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C7A9688335
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 21:35:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2c2c1473f73so843024a91.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 12:35:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718739326; x=1719344126; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gE/r+WfnY+QAd+5/jzuFP4gTsG8i4Aqc0e3Dn5n61EY=;
+ b=b3qXOKlwZIwuuESkWmZ7bZOSZBUfFvFU75TPpEhhMKyWKLAjni03t1wIHftmulbTsB
+ 0r51PH+/36bcmqZClmLMzW/Wy7C+oeWRQYFVe7GnjuESpkVHRETFqahNwzvAsFi6775L
+ y+p+DlOcwmCK2rFxwpA3HPsAg8sh9j+xVSOZ+rfDSS1xucYw3V1jmpZWjFXIvmzffl3z
+ AvtFsszCQ3hrh6Nswt/7cWaGKbwPVZtSmwRNG1dqijqKyBPjaALDjaWeJrp/iwMXZ3gb
+ Cc2vZ3Rl3LbOxLeOq2Jd8pF3QGyf+2rpbPs2vjXI5N4x60X68CSIldypFuP7h/jcMBSO
+ Jj9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718739326; x=1719344126;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gE/r+WfnY+QAd+5/jzuFP4gTsG8i4Aqc0e3Dn5n61EY=;
+ b=LGIbcL6PCgdPSINtA3zw1SVTM5N/KXjdxnen3Nd4rG/ptT3JaNJ9FBj37TwOn/bwcM
+ ALy15y2TIHGF5/BCjXxUPSpdJCGjDgujtX0P7xK7ZrVEHu0UOOZmcnKDqR+W0fAJWI66
+ qquSsGvGxU7N5pJ3YDfe3fYPRvxUCYvByjDUWjDWu0zE5fIQjMc+k5b8je8wzYRiKiDw
+ Yk2Mnp57ErZMfFyw14GTGsHECqdYUmjvFfmXFHEDKuJ75R+//Dmg0rOL4BEmb+9d5G+5
+ 1CB5NyX39/SQIpfuT/F3CET/SyvY7LUzlI20x8xYn2IjJ4vvI/kHbOh733VDDQ3Q6PdG
+ NVkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW+nePYGvcjBLOeLD8AkmrbTWYLOaeOf4pVzXvvi+XTjV/4HWdknXB24kEj8WE+WO6+Qk1KFgPtkCy2z+Vxpv6Ttx6DyQ==
+X-Gm-Message-State: AOJu0YzZLJngA4+UjfHf6PlWwDabrdhyeIuZ62ITDZ7qCajn8cEF3FKP
+ TDurx5HADSmvJZI+iN9tZaZzakyGeY44mVh4851dqfrwiq3gHvxc3JDjhV73LungNcNFfGBarLg
+ 0A8qD3ydrTFENnYECjLIjQ3qIdPc=
+X-Google-Smtp-Source: AGHT+IHjGFsVnkMxuCBJz7ho2lKpTCe2LqLZmP0NjmjFemYLBJimFD8l5+ZYrOm7NOBNUZYS/Gicsc0j6oeYOuUljW4=
+X-Received: by 2002:a17:90a:fa01:b0:2c4:d63b:cdf with SMTP id
+ 98e67ed59e1d1-2c7b5c83afcmr652716a91.1.1718739326136; Tue, 18 Jun 2024
+ 12:35:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240617191416.1351790-1-tharvey@gateworks.com>
+ <20240617191416.1351790-5-tharvey@gateworks.com>
+ <626fe70e-ff61-46f6-84de-e9b8486ac5ed@gmx.de>
+ <CAJ+vNU3rtrGkL3gQwEZW0x=ivSPqv-jxsdUX59bCcYRofe7Wxw@mail.gmail.com>
+ <CAJ+vNU2KH8NgFkjWt5ZPKMauPjhLXwd-oNfGFy-+QHO6MWKARA@mail.gmail.com>
+ <CAJ+vNU02a0VASJzAghDpSWm6XuOseQj9T70eRn0bD9deiHo6dA@mail.gmail.com>
+In-Reply-To: <CAJ+vNU02a0VASJzAghDpSWm6XuOseQj9T70eRn0bD9deiHo6dA@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 18 Jun 2024 16:35:14 -0300
+Message-ID: <CAOMZO5Cs6xWs-PvMq1u91n1Jmt8BDsZFMUwK8hCx1LWN3VPSzA@mail.gmail.com>
+Subject: Re: [PATCH v6 4/4] test: cmd: fdt: fix chosen test for DM_RNG
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>, 
+ Akash Gajjar <gajjar04akash@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Chris Morgan <macromorgan@hotmail.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -51,49 +103,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fix following error found by clang:
+Hi Tim,
 
-  CC      arch/arm/mach-rockchip/cpu-info.o
-arch/arm/mach-rockchip/cpu-info.c:23:13: error: incomplete definition of type 'struct rockchip_cru'
-   23 |         switch (cru->glb_rst_st) {
-      |                 ~~~^
-./arch/arm/include/asm/arch-rockchip/clock.h:181:8: note: forward declaration of 'struct rockchip_cru'
-  181 | struct rockchip_cru;
-      |        ^
-1 error generated.
+On Tue, Jun 18, 2024 at 4:30=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
----
- arch/arm/include/asm/arch-rockchip/cru.h        | 2 ++
- arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 ++
- 2 files changed, 4 insertions(+)
+> This seems like something from test/dm/wdt.c and unrelated to my patchset=
+.
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
-index 9778790f34..c3259b8e7c 100644
---- a/arch/arm/include/asm/arch-rockchip/cru.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru.h
-@@ -17,6 +17,8 @@
- # include <asm/arch-rockchip/cru_rk3399.h>
- #elif defined(CONFIG_ROCKCHIP_RK3568)
- #include <asm/arch-rockchip/cru_rk3568.h>
-+#elif defined(CONFIG_ROCKCHIP_RK3588)
-+#include <asm/arch-rockchip/cru_rk3588.h>
- #endif
- 
- /* CRU_GLB_RST_ST */
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-index a0e54d3965..dad484813f 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-@@ -92,6 +92,8 @@ struct rk3588_cru {
- 	unsigned int pmuclkgate_con[9]; /* Address Offset: 0x0100 */
- };
- 
-+#define rockchip_cru rk3588_cru
-+
- check_member(rk3588_cru, mode_con00, 0x280);
- check_member(rk3588_cru, pmuclksel_con[1], 0x30304);
- 
--- 
-2.43.0
+Do you have this recent commit applied?
 
+https://github.com/u-boot/u-boot/commit/1fd754cebd38d7456caa82bef15225cbe77=
+960ec
