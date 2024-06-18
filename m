@@ -4,87 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88890C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0C6C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:06:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E44578752A;
-	Tue, 18 Jun 2024 23:04:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C15F883BA;
+	Tue, 18 Jun 2024 23:06:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="VAScksue";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE3DF8839F; Tue, 18 Jun 2024 23:04:03 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DD6F883B3; Tue, 18 Jun 2024 23:06:15 +0200 (CEST)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA3F88752A
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:04:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68B5086784
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:06:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a6efae34c83so723498066b.0
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:04:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1718744640; x=1719349440; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BkDzeJhcj6XpAtztbjL5d1LCtxnp8AYsNXhngwTtShY=;
- b=VAScksueMLmU24YYiIHPcMSROCT7VaglUima1TdH0+r78qNlzeSsFoR1Ez7NAO9Efv
- eThs+5pRgUwDl9i7A27IjE2Axhj5davrN04aCkF3f6aXYexEOIgaEuOouiERLIbyLe/m
- q7xQ+MHQkTCR5RQRIeHWu5WQq+p0uL/k12dFEi3eCkza+vXudMIOdLnZpVXOWE0eqMhZ
- Z4fitzC0ss8K0vbvAZc6j268oOcmS1OZyBbsmdCyzTGvP5LcJpZ4s2ivJw1poXUNrUyD
- oDTnCF5L6myHtXChWQxh7m3qULLuZYAfScpCWCpkd813cX1nBv24oNa9/7QymU77BX2P
- 0jXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718744640; x=1719349440;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BkDzeJhcj6XpAtztbjL5d1LCtxnp8AYsNXhngwTtShY=;
- b=quJ5pu7xHdlG/MD9QetMBOAUUl65l2b0JixRkykRkTqDpBdnmKvQbDg+im38pDDYEP
- 69X6zMWWEwrzbFl6OAuyFHHKVZvj3Ecy2lKYU9YmKhQ0npkvPCXkPpf/4B3AhPewoX0h
- j7IBA209OwPBCgdWyAfv17tZuU38bTppBxgqP571GFsBb2M0Ju1rjWaZFmGhrZE5u9L1
- Um2SpHgNimujpOwQ2muRaBN2kU83sxScsm0ft1U5ojYb0KtCprWpz+1nGGai8+n9zPVB
- lxG39FsxVapQgLJfCAQqzzSK7sTx1vlGUJN/XOaHVILoAiE7yT7Iqx5FD1jt3F+Yz8o9
- R1Dg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQvMCyMTre/u6bxdqCqcMZ6bdmxv59p8rBNDsAIz78ViWemYuOWmpUhZptur9qIPSOOcMbeLcnPa6GxYtwvepem02iVg==
-X-Gm-Message-State: AOJu0YzPyZjMAaBzI/4hNKX12bdDQNRvdQhc59Pbywsm4Nu3K6xs10an
- BC6RcC0Gl7gCtvPUdWi0ocEXeJ7kHmG/e6AfmN4X2g5DLNYfE2t1A5glkx48LViGccKFFUV/nzS
- puC55Jo/VrRDjjmthoNOVTQsmtzkfVnJxMgDEXA==
-X-Google-Smtp-Source: AGHT+IFJ0PgC2bPbrUnqZdzFu4fowGYTu8eYKpRdI7SWQHyPmq38+fiRiRi7LZ3kaIKdG2+fO1eFJCD/euqRPVLvxpU=
-X-Received: by 2002:a17:906:ee8c:b0:a6f:e19:6fb2 with SMTP id
- a640c23a62f3a-a6fab62f551mr40332866b.29.1718744640241; Tue, 18 Jun 2024
- 14:04:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
- <20240611-docker-image-v1-12-51472eb70357@flygoat.com>
- <20240612160053.GS68077@bill-the-cat>
- <49522625-8663-4102-82aa-cabc0f239afa@app.fastmail.com>
- <20240612165048.GD68077@bill-the-cat>
- <e94995af-f9dd-4262-8dfb-2c47ab817e61@denx.de>
- <20240617232904.GL68077@bill-the-cat>
- <c50b3dc0-0385-4548-80ed-ffdc8623bfcc@app.fastmail.com>
- <20240618143159.GR68077@bill-the-cat>
-In-Reply-To: <20240618143159.GR68077@bill-the-cat>
+Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1sJg1r-00FAbj-2k;
+ Tue, 18 Jun 2024 21:06:11 +0000
 From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 18 Jun 2024 14:03:48 -0700
-Message-ID: <CAJ+vNU1fifv8gi3MLV+qBk2-Q4aiZNG4Vwr=MgbfjZzMOAbvHA@mail.gmail.com>
-Subject: Re: [PATCH 12/20] cyclic: Rise default CYCLIC_MAX_CPU_TIME_US to 5000
-To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Aaron Williams <awilliams@marvell.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
+ Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v7 0/4] automatically add /chosen/kaslr-seed and deduplicate
+ code
+Date: Tue, 18 Jun 2024 14:06:05 -0700
+Message-Id: <20240618210609.1744727-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,42 +60,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 18, 2024 at 7:32=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Tue, Jun 18, 2024 at 03:00:50PM +0100, Jiaxun Yang wrote:
-> >
-> >
-> > =E5=9C=A82024=E5=B9=B46=E6=9C=8818=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8A=
-=E5=8D=8812:29=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
-> > [...]
-> > >> Acked-by: Stefan Roese <sr@denx.de>
-> > >
-> > > Can we please get either this, or
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20240524210817.19532=
-98-1-rasmus.villemoes@prevas.dk/
-> > > merged for master? The number of false negatives in CI due to this is
-> > > big issue for getting more contributors to use CI. Thanks.
-> >
-> > It seems like CYCLIC doesn't have it's own custodian tree.
-> > How are we going to handle it in this case?
->
-> Note that in U-Boot it's less important to have a tree per sub-section
-> and more important that custodians have a tree (and then use appropriate
-> tags when sending pull requests).
->
-> --
-> Tom
+This series will automatically add /chosen/kaslr-seed to the dt if
+DM_RNG is enabled
+during the boot process.
 
-Stefan and Tom,
+If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+randomize the virtual address at which the kernel image is loaded, it
+expects entropy to be provided by the bootloader by populating
+/chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
 
-I'm seeing CI issues here even with 5000us [1]:
-host bind 0 /tmp/sandbox/persistent-cyclic function wdt-gpio-level
-took too long: 5368us vs 5000us max
+If we have DM_RNG enabled populate this value automatically when
+fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
+is enabled as its implementation uses a different source of entropy
+that is not yet implemented as DM_RNG. We also skip this if
+MEASURED_BOOT is enabled as in that case any modifications to the
+dt will cause measured boot to fail (although there are many other
+places the dt is altered).
 
-Best Regards,
+As this fdt node is added elsewhere create a library function and
+use it to deduplicate code. We will provide a parameter to overwrite
+the node if present.
 
-Tim
-[1] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D8737&view=
-=3Dlogs&j=3Da1270dec-081b-5c65-5cd5-5e915a842596&t=3D69f6cf72-86f3-551a-807=
-d-f28f62a1426f&l=3D748
+For our automatic injection, we will use the first rng device and
+not overwrite if already present with a non-zero value (which may
+have been populated by an earlier boot stage). This way if a board
+specific ft_board_setup() function wants to customize this behavior
+it can call fdt_kaslrseed with a rng device index of its choosing and
+set overwrite true.
+
+Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
+but left in place in case boot scripts exist that rely on this command
+existing and returning success. An informational message is printed to
+alert users of this command that it is likely no longer needed.
+
+Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
+randomization and completely ignores the kaslr-seed for its own
+randomness needs (i.e the randomization of the physical placement of
+the kernel). It gets weeded out from the DTB that gets handed over via
+efi_install_fdt() as it would also mess up the measured boot DTB TPM
+measurements as well.
+
+v7:
+ - fix fdt_test_chosen to not expect kaslr-seed for
+   CONFIG_MEASURED_BOOT and CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+v6:
+ - collected tags
+ - add patch to fdt ut
+v5:
+ - fixed typo in commit message s/it's/its/
+ - use cmd_process_error per Michal's suggestion
+ - split into separate patches
+ - remove the rng device index noting it as a future enhancement
+v4:
+ - add missing /n to notice in kaslrseed cmd
+ - combine ints in declaration
+ - remove unused vars from board/xilinx/common/board.c ft_board_setup
+v3:
+ - skip if CONFIG_MEASURED_BOOT
+ - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+ - pass in rng index and bool to specify overwrite
+ - remove duplicate error strings printed outside of fdt_kaslrseed
+ - added note to commit log about how EFI STUB weeds out kalsr-seed
+v2:
+ - fix typo in commit msg
+ - use stack for seed to avoid unecessary malloc/free
+ - move to a library function and deduplicate code by using it
+   elsewhere
+
+Tim Harvey (4):
+  Add fdt_kaslrseed function to add kaslr-seed to chosen node
+  fdt: automatically add /chosen/kaslr-seed if DM_RNG is enabled
+  use fdt_kaslrseed function to de-duplicate code
+  test: cmd: fdt: fix chosen test for DM_RNG
+
+ board/xilinx/common/board.c | 40 ----------------------------
+ boot/fdt_support.c          | 53 +++++++++++++++++++++++++++++++++++++
+ boot/pxe_utils.c            | 34 +-----------------------
+ cmd/kaslrseed.c             | 49 +++++-----------------------------
+ include/fdt_support.h       | 10 +++++++
+ test/cmd/fdt.c              |  8 ++++++
+ 6 files changed, 79 insertions(+), 115 deletions(-)
+
+-- 
+2.25.1
+
