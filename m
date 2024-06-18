@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E610DC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19AEDC27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 16:22:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A00088356;
-	Tue, 18 Jun 2024 17:55:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 489458819D;
+	Tue, 18 Jun 2024 18:22:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fQ90A8wr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="as+0Qdhi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C618D88365; Tue, 18 Jun 2024 17:55:11 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 2DC54880F5; Tue, 18 Jun 2024 18:22:32 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D3778834B
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:55:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28B3D8819D
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 18:22:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2c4c7eb425fso4535851a91.1
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 08:55:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-6fa11ac8695so3153907a34.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:22:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718726108; x=1719330908; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0EjajZNRbnAqCFIdtvz3Q/piIRZrwRtJoEh2Pd1SUaQ=;
- b=fQ90A8wr5HYTwhtg6ZI2aKEbD3TZyz4JMMPSIKutVAeTfHzZ61Tsx29pnh+qVabcn2
- ob7lbopZ/DsUjHgbGFAhveR0BZyelK71xI6idExAUYkWFLdKmgn60g33JMf49FBPaaIB
- nQD4+XmFw4O+bw1brZNb3CVok7gcpeVUTfJpWQOsZNjvT/N6FXBOOXu9GR6X7XNtXgTF
- f1iXBUKIYawlQnYNb8WtnwgMMSLgnI3ATOG4HxLqzs+You5abs9dMa6MPZy3dq2xdxck
- PVDi1PTuWTWXKXSVbn0E9fmDjgn+gjc+5GyImEZ36Tbli0vo1VvVXMIDKYIWjXpL49FV
- nV5Q==
+ d=konsulko.com; s=google; t=1718727748; x=1719332548; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sGcH8EZfHe5R86gHm5OF4CiCoKW7VsVxIy3dXMrZpLE=;
+ b=as+0Qdhi/t6XppTeDbJHg3eq4lWz8YDVPGQM7My/SkNTAT342PVLKRFJXTNrmroLU5
+ AS0ce1X1uf2/l4gfhSuFkWLgbD61MiAUXc90cp/PfcgJ4O/26cHKz0T/D3buXGiNbQSN
+ tMudBYwDj+ZkKLGSfdKW0eHQV+aM/CFHgqtMw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718726108; x=1719330908;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0EjajZNRbnAqCFIdtvz3Q/piIRZrwRtJoEh2Pd1SUaQ=;
- b=tBrlEct7HplumN9xF5CMAOk7Fr6ZOCD9QU9ssae0IheQJVLkAuA7RTrDxhUcrtGTzL
- 0XbVrWKYAxPr4vgEwfwMIXBfeNsi4+rAstnG2Fla0mA/OY8qCqhw0sVVheGkauP/JOMR
- RgpyJVgmW76yM7aQdzq9/2iH1jMfYzVWXmQ/jkJlE+1qGwFogKyL1Oty6Eq11RFrz7Rp
- bsiAph6lrt1z+ygbMrHPajfunnbKkrmc/AUcPxIfWponj8X9zAG456BTpwzfVm9c+dTS
- 6SOXtsqOKms4oGh7I73eWzxFXSjnvk864QwqD9ZNBk1yPApI7+BEEKl9nVaRCHYklfIZ
- geqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVsx7/uL91wV01eEHnANUH1XbBKspUBqdE/eyM3dxEw7xS5yCKguc2QAbO+p9pxyYOVdvniF3ZdZGUr7PqBUy1vDhbacw==
-X-Gm-Message-State: AOJu0YzaWgemif+Pf5fBZlPEAsELsx5GnkVpshgmzjXARLZ+NGjIJ6DK
- myiSimy/EIzVwpZQ4CNgovK5tQhJc+TccGtRrDXj8mP+0ccKs+doS4tADnbUSkpNTYI5R3J3C0X
- RqzeIwBknXYc/ZCUsZEEsEv8gNvMhnt1e/azrtQ==
-X-Google-Smtp-Source: AGHT+IH17BcvVp8aps6aDDVv6a8OwzFnJT/u4jkYPaY7D2xjhvL/pGVBYO9gj2PRkZeOmXnFiM+yt+YIdSNkc0Sw8MI=
-X-Received: by 2002:a17:90a:be10:b0:2c4:b0f0:8013 with SMTP id
- 98e67ed59e1d1-2c7b5b42405mr112617a91.11.1718726107778; Tue, 18 Jun 2024
- 08:55:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718727748; x=1719332548;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sGcH8EZfHe5R86gHm5OF4CiCoKW7VsVxIy3dXMrZpLE=;
+ b=w4yy2o6DzKnKsYUMLocWOJfk+LJj4vwSGwn3awf6qoT6NVP5+EdtfMqJs1U+rtAOMj
+ FugpF8/hjfubkm7F+9uxizpaT+E+L0DXfPEMcQ9taZWwmMKuSZpyVNK2r2COVo5Ai641
+ kuWFclhZyItM8bZ7l6Wt2qFhrj0s6HohKMG+AtL9Mw1R3smv/9uEu98kv3ADjREX70o8
+ qJcn6Ll985FRkNEeINy2mAgplkrXUZ1n5HLoVa/UcrXkx9G8mFue3eTewTE85RIitnVd
+ j9WovE6mcuqNLdP7f65ZD4mFEqidGMM/LxSVllHuL+joXAg2SHHQDHk/hgGjKGrds3Ay
+ V2EQ==
+X-Gm-Message-State: AOJu0YzxBKTXf8HNekXOCQO7aChJxOsblj9qcRRhI3J6GwCw765njhcm
+ oVBorQScXTdGo2dnFmIweS+97Gblc0QK7VCL3nZtL2uw5g7YlkjmPft4DTa6jEg=
+X-Google-Smtp-Source: AGHT+IFpGymr07JfqEeMiXRiUEPBUB0m7EJz1R05ppLdSurluM/Fx1TlwJ5gkrHv1qkUmPw+kwngpQ==
+X-Received: by 2002:a9d:7a55:0:b0:6f9:6e0d:dfca with SMTP id
+ 46e09a7af769-70073b36ddcmr234548a34.14.1718727747816; 
+ Tue, 18 Jun 2024 09:22:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6fbed9e8154sm1535100a34.21.2024.06.18.09.22.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 09:22:27 -0700 (PDT)
+Date: Tue, 18 Jun 2024 10:22:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ TsiChung Liew <Tsi-Chung.Liew@nxp.com>, Stefan Roese <sr@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Jason Liu <jason.hui.liu@nxp.com>,
+ William Zhang <william.zhang@broadcom.com>
+Subject: Re: [PATCH v4 01/14] flash: prefix error codes with FL_
+Message-ID: <20240618162224.GS68077@bill-the-cat>
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <a8dc4451931828f757905d363b6d1bf368b829d5.1718638104.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-References: <20240618122348.126196-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240618122348.126196-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 18 Jun 2024 18:54:31 +0300
-Message-ID: <CAC_iWjJgFhAaDQU2TucwmG7rpwkT2CUnHg6zKrkaeEJNub4e-Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_selftest: can't have measured device-tree with
- kaslr-seed
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XbiW2EWhylRlfwYG"
+Content-Disposition: inline
+In-Reply-To: <a8dc4451931828f757905d363b6d1bf368b829d5.1718638104.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,42 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Jun 2024 at 15:24, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Test that we don't have a /chosen/kaslr-seed property if we measure the
-> device-tree.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_selftest/efi_selftest_fdt.c | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/lib/efi_selftest/efi_selftest_fdt.c b/lib/efi_selftest/efi_selftest_fdt.c
-> index aa3b13ae3ab..066d9581432 100644
-> --- a/lib/efi_selftest/efi_selftest_fdt.c
-> +++ b/lib/efi_selftest/efi_selftest_fdt.c
-> @@ -227,6 +227,13 @@ static int execute(void)
->                         return EFI_ST_FAILURE;
->                 }
->         }
-> +       if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
-> +               str = get_property(u"kaslr-seed", u"chosen");
-> +               if (str) {
-> +                       efi_st_error("kaslr-seed with measured fdt\n");
-> +                       return EFI_ST_FAILURE;
 
-When does this run? efi_try_purge_kaslr_seed() tries to remove the
-kaslr-seed before measuring a DT. Are we safe enavbling the check
-here?
+--XbiW2EWhylRlfwYG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
-/Ilias
-> +               }
-> +       }
->         if (IS_ENABLED(CONFIG_RISCV)) {
->                 u32 fdt_hartid;
->
-> --
-> 2.45.1
->
+On Mon, Jun 17, 2024 at 05:32:53PM +0200, Jerome Forissier wrote:
+
+> Prefix the flash status codes (ERR_*) with FL_ in order to avoid clashes
+> with third-party libraries. Case in point: including the lwIP library
+> header file <lwip/err.h> which defines err_enum_t as an enum with values
+> being ERR_*.
+>=20
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--XbiW2EWhylRlfwYG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZxtD0ACgkQFHw5/5Y0
+tyw/LQv9GkQYfuHYCf4bPXZ7NsXSTzTyDVoHh0hp0Fy90p8Ke/lWuADsfEN3O+3e
+Bh4bLB9nowTPYhQjoF6wvJgk2Dur2Q24F6OeqBiJF90MzW2UElGUtZBtTVBReyCX
+H6YxkdMV6MIgp5SXDoVt0m9qddNvZHi/KqvbjfDWNTDQLDqzJpckqPKj1EwwpCLQ
+p2QIXjVw6AlNcKmuck6BGpXUByfeDPUomMYKz4W4Y/rdepLejND6B8TsdDo0zlej
+Kw3Hebge67Ze2eR7M9Y9uEasH0OmDatzS9C648PJfKrmRAbHSdDNXMyCexVg/V46
+dWz9zfZltrWF+pNcF882qUgM9bcmreRP2rDXmOgwWycnpddCoGkBHA6BKMfaijkB
+YrTFfZYVDDLyeAL8kpsUr2+gseTXHHO5NPSfEOE5JzD0TrdxnSWY6QOpHWWELsF7
+9K/6BjYcFp2NBOS4fNKNcZ1h7HrfQ+WXAYBTXSHX4eI7IPGiMsX0ZcIQiH+YzRpU
+OyF5Mc3D
+=aQE5
+-----END PGP SIGNATURE-----
+
+--XbiW2EWhylRlfwYG--
