@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B97E3C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C93C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:35:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBC0188415;
-	Tue, 18 Jun 2024 17:34:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 684C4882D4;
+	Tue, 18 Jun 2024 17:34:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fvpaJnoi";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UC5yMcPl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86166883A8; Tue, 18 Jun 2024 17:34:51 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 9215A883BB; Tue, 18 Jun 2024 17:34:55 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B51B88354
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:34:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B3C3883DA
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:34:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4B70C617DF;
+ by sin.source.kernel.org (Postfix) with ESMTP id 12A16CE1A0B;
+ Tue, 18 Jun 2024 15:34:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EC07C3277B;
  Tue, 18 Jun 2024 15:34:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23F3BC4AF1C;
- Tue, 18 Jun 2024 15:34:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718724889;
- bh=Loks44TuMatVwM0xSmgQ+VzkAwUMu+itOqdL+NR+4Ec=;
+ s=k20201202; t=1718724890;
+ bh=PSNFG7oHBNWejUNKpunxtGdbLXVuGQ+lBqGlcH8hC9E=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fvpaJnoi3NQSJ1Sg+4j3FOw3vO92s+gYW2gJjwUNkdyiDA9wtUuLXR61EgqrPg4t4
- puKjoShAd0s5xpBMMocJDuMGz0OqsbOpCgy65WRD6c5L6Ayi+xP91g21tQPiHsn2l8
- uYuqZKqMvBoF0lPHPU9SxwNShRBN0lmX+ejlt6NugJKm8pCvJgDLDXf9dsJ8z3sSmJ
- Zt9fj/OxouyRD0mXRL7l9CA2j7GchOoatKwnjODEAFlDpaoto1LPPxngjGTd2b7lwV
- kyL7N+vzQbLK0vxY8UazAcdXGVImTq8Z6c83DN5eh/+LDZ6VakZfQCJlelSQXz4OcK
- apuxdK6B21gqg==
+ b=UC5yMcPlFxlp/u2Sv8+W8Tamyn9F+4zM3IzvjOLUx3l8VkZkfXwV90eyJtVpOOVA2
+ mrvcxKXTT56Ncumlx+gDr3oP7tNOWmlRUev7TREW/69+I30l0M9uSicAc6AHtcUAjr
+ 5lIDnj+UoqaOXC5CKK+knK77vkJp5URO4r6tFGw+iJ5trLy5Y5rzrOGOt+VS+oiVUH
+ uhTqKikGgPlP2rYcJo7ly2nX7RC91PThnQh3ZPsywUrNj0DRE31UBLmu8+0rr+9z8f
+ 5/VIX+Yra+5agRqtSsJo5rSHs6lwK+WY6Fk/jHlITO3sTfN+HUJI8JBL5OsVaHu0xy
+ yd9yAXqZj0bpg==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-marvell 04/16] ddr: marvell: a38x: debug: Define
- DDR_VIEWER_TOOL variables only if needed, and make them static
-Date: Tue, 18 Jun 2024 17:34:27 +0200
-Message-ID: <20240618153439.9518-5-kabel@kernel.org>
+Subject: [PATCH u-boot-marvell 05/16] ddr: marvell: a38x: debug: Allow
+ compiling with immutable debug settings to reduce binary size
+Date: Tue, 18 Jun 2024 17:34:28 +0200
+Message-ID: <20240618153439.9518-6-kabel@kernel.org>
 X-Mailer: git-send-email 2.44.2
 In-Reply-To: <20240618153439.9518-1-kabel@kernel.org>
 References: <20240618153439.9518-1-kabel@kernel.org>
@@ -69,39 +69,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The variables is_validate_window_per_if, is_validate_window_per_pup,
-sweep_cnt and is_run_leveling_sweep_tests are only used if
-DDR_VIEWER_TOOL macro is defined, so define them only in that case.
+Allow compiling with immutable debug settings:
+- DEBUG_LEVEL is always set to DEBUG_LEVEL_ERROR
+- register dumps are disabled
 
-Make them static since they are only used in ddr3_debug.c.
+This can save around 10 KiB of space in the resulting binary, which is a
+lot in U-Boot SPL.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- drivers/ddr/marvell/a38x/ddr3_debug.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ arch/arm/mach-mvebu/Kconfig           | 10 +++++++
+ drivers/ddr/marvell/a38x/ddr3_debug.c |  9 ++++--
+ drivers/ddr/marvell/a38x/ddr3_init.c  |  3 +-
+ drivers/ddr/marvell/a38x/ddr3_init.h  | 42 ++++++++++++++++++++++-----
+ 4 files changed, 53 insertions(+), 11 deletions(-)
 
+diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+index f15d3cc5ed..a320793a30 100644
+--- a/arch/arm/mach-mvebu/Kconfig
++++ b/arch/arm/mach-mvebu/Kconfig
+@@ -250,6 +250,16 @@ config DDR_LOG_LEVEL
+ 	  At level 3, rovides the windows margin of each DQ as a results of
+ 	  DQS centeralization.
+ 
++config DDR_IMMUTABLE_DEBUG_SETTINGS
++	bool "Immutable DDR debug level (always DEBUG_LEVEL_ERROR)"
++	depends on ARMADA_38X
++	help
++	  Makes the DDR training code debug level settings immutable.
++	  The debug level setting from board topology definition is ignored.
++	  The debug level is always set to DEBUG_LEVEL_ERROR and register
++	  dumps are disabled.
++	  This can save around 10 KiB of space in SPL binary.
++
+ config DDR_RESET_ON_TRAINING_FAILURE
+ 	bool "Reset the board on DDR training failure instead of hanging"
+ 	depends on ARMADA_38X || ARMADA_XP
 diff --git a/drivers/ddr/marvell/a38x/ddr3_debug.c b/drivers/ddr/marvell/a38x/ddr3_debug.c
-index c659ae92d8..d32d42c408 100644
+index d32d42c408..0b65168d82 100644
 --- a/drivers/ddr/marvell/a38x/ddr3_debug.c
 +++ b/drivers/ddr/marvell/a38x/ddr3_debug.c
-@@ -114,13 +114,14 @@ u32 ctrl_adll[MAX_CS_NUM * MAX_INTERFACE_NUM * MAX_BUS_NUM];
- u32 ctrl_adll1[MAX_CS_NUM * MAX_INTERFACE_NUM * MAX_BUS_NUM];
- u32 ctrl_level_phase[MAX_CS_NUM * MAX_INTERFACE_NUM * MAX_BUS_NUM];
- #endif /* EXCLUDE_SWITCH_DEBUG */
+@@ -7,18 +7,21 @@
+ #include "mv_ddr_training_db.h"
+ #include "mv_ddr_regs.h"
+ 
++#if !defined(CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS)
+ u8 is_reg_dump = 0;
+ u8 debug_pbs = DEBUG_LEVEL_ERROR;
++#endif
+ 
+ /*
+  * API to change flags outside of the lib
+  */
+-#if defined(SILENT_LIB)
++#if defined(SILENT_LIB) || defined(CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS)
+ void ddr3_hws_set_log_level(enum ddr_lib_debug_block block, u8 level)
+ {
+ 	/* do nothing */
+ }
+-#else /* SILENT_LIB */
++#else /* !SILENT_LIB && !CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS */
 +
-+static u8 is_validate_window_per_if = 0;
-+static u8 is_validate_window_per_pup = 0;
-+static u8 sweep_cnt = 1;
-+static u8 is_run_leveling_sweep_tests;
- #endif /* DDR_VIEWER_TOOL */
+ /* Debug flags for other Training modules */
+ u8 debug_training_static = DEBUG_LEVEL_ERROR;
+ u8 debug_training = DEBUG_LEVEL_ERROR;
+@@ -104,7 +107,7 @@ void ddr3_hws_set_log_level(enum ddr_lib_debug_block block, u8 level)
+ #endif /* CONFIG_DDR4 */
+ 	}
+ }
+-#endif /* SILENT_LIB */
++#endif /* !SILENT_LIB && !CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS */
  
- struct hws_tip_config_func_db config_func_info[MAX_DEVICE_NUM];
--u8 is_validate_window_per_if = 0;
--u8 is_validate_window_per_pup = 0;
--u8 sweep_cnt = 1;
--u8 is_run_leveling_sweep_tests;
+ #if defined(DDR_VIEWER_TOOL)
+ static char *convert_freq(enum mv_ddr_freq freq);
+diff --git a/drivers/ddr/marvell/a38x/ddr3_init.c b/drivers/ddr/marvell/a38x/ddr3_init.c
+index 27eb3ac173..7c5147f474 100644
+--- a/drivers/ddr/marvell/a38x/ddr3_init.c
++++ b/drivers/ddr/marvell/a38x/ddr3_init.c
+@@ -41,7 +41,8 @@ int ddr3_init(void)
+ 	mv_ddr_pre_training_soc_config(ddr_type);
  
- static struct hws_xsb_info xsb_info[MAX_DEVICE_NUM];
+ 	/* Set log level for training library */
+-	mv_ddr_user_log_level_set(DEBUG_BLOCK_ALL);
++	if (!IS_ENABLED(CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS))
++		mv_ddr_user_log_level_set(DEBUG_BLOCK_ALL);
+ 
+ 	mv_ddr_early_init();
+ 
+diff --git a/drivers/ddr/marvell/a38x/ddr3_init.h b/drivers/ddr/marvell/a38x/ddr3_init.h
+index 9288073a78..b513a13c53 100644
+--- a/drivers/ddr/marvell/a38x/ddr3_init.h
++++ b/drivers/ddr/marvell/a38x/ddr3_init.h
+@@ -45,15 +45,46 @@ enum log_level  {
+ #define MISL_PHY_ODT_N_OFFS	0x0
+ 
+ /* Globals */
+-extern u8 debug_training, debug_calibration, debug_ddr4_centralization,
+-	debug_tap_tuning, debug_dm_tuning;
++#if defined(CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS)
++static const u8 is_reg_dump = 0;
++static const u8 debug_training_static = DEBUG_LEVEL_ERROR;
++static const u8 debug_training = DEBUG_LEVEL_ERROR;
++static const u8 debug_leveling = DEBUG_LEVEL_ERROR;
++static const u8 debug_centralization = DEBUG_LEVEL_ERROR;
++static const u8 debug_training_ip = DEBUG_LEVEL_ERROR;
++static const u8 debug_training_bist = DEBUG_LEVEL_ERROR;
++static const u8 debug_training_hw_alg = DEBUG_LEVEL_ERROR;
++static const u8 debug_training_access = DEBUG_LEVEL_ERROR;
++static const u8 debug_training_device = DEBUG_LEVEL_ERROR;
++static const u8 debug_pbs = DEBUG_LEVEL_ERROR;
++
++static const u8 debug_tap_tuning = DEBUG_LEVEL_ERROR;
++static const u8 debug_calibration = DEBUG_LEVEL_ERROR;
++static const u8 debug_ddr4_centralization = DEBUG_LEVEL_ERROR;
++static const u8 debug_dm_tuning = DEBUG_LEVEL_ERROR;
++#else /* !CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS */
+ extern u8 is_reg_dump;
++extern u8 debug_training_static;
++extern u8 debug_training;
++extern u8 debug_leveling;
++extern u8 debug_centralization;
++extern u8 debug_training_ip;
++extern u8 debug_training_bist;
++extern u8 debug_training_hw_alg;
++extern u8 debug_training_access;
++extern u8 debug_training_device;
++extern u8 debug_pbs;
++
++extern u8 debug_tap_tuning;
++extern u8 debug_calibration;
++extern u8 debug_ddr4_centralization;
++extern u8 debug_dm_tuning;
++#endif /* !CONFIG_DDR_IMMUTABLE_DEBUG_SETTINGS */
++
+ extern u8 generic_init_controller;
+ /* list of allowed frequency listed in order of enum mv_ddr_freq */
+ extern u32 is_pll_old;
+ extern struct pattern_info pattern_table[];
+-extern u8 debug_centralization, debug_training_ip, debug_training_bist,
+-	debug_pbs, debug_training_static, debug_leveling;
+ extern struct hws_tip_config_func_db config_func_info[];
+ extern u8 twr_mask_table[];
+ extern u8 cl_mask_table[];
+@@ -76,7 +107,6 @@ extern u32 g_rtt_nom;
+ extern u32 g_rtt_wr;
+ extern u32 g_rtt_park;
+ 
+-extern u8 debug_training_access;
+ extern u32 first_active_if;
+ extern u32 delay_enable, ck_delay, ca_delay;
+ extern u32 mask_tune_func;
+@@ -122,8 +152,6 @@ extern u32 effective_cs;
+ extern int ddr3_tip_centr_skip_min_win_check;
+ extern u32 *dq_map_table;
+ 
+-extern u8 debug_training_hw_alg;
+-
+ extern u32 start_xsb_offset;
+ extern u32 odt_config;
  
 -- 
 2.44.2
