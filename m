@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D57C2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90E6C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79863884C9;
-	Tue, 18 Jun 2024 09:40:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B11C884C9;
+	Tue, 18 Jun 2024 09:45:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DPwOEAnD";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="v17lrG+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BECBB88477; Tue, 18 Jun 2024 09:40:40 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id D1D22884DB; Tue, 18 Jun 2024 09:45:13 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70C9C884C9
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:40:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BABCF884C9
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:45:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-421cd1e5f93so36646305e9.0
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:40:37 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-35f1dc4ab9aso4260121f8f.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718696437; x=1719301237;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718696711; x=1719301511;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=4OoRp/8dSAsqL7OuFkqSk6XliTO1+qLekm9XQPwW7/Q=;
- b=DPwOEAnDB91PlxlP/MAgELXcSY72kZf2NFN0NZRRpAyxZMsy4hATRU/5NokSKIeVGk
- lzq+BK4P7qyjR9PlW4WgdJkJE2bzsMi6y/sxrNd4W+ZVG55vYOYOS/3S6/wh/A/xjP+o
- CLVEy1U8OR7BBHO4yDEbrOg1U9KvpjixqjJui5yxbwTL4qOjDOVNKPPnGaK/pE8+xci9
- eWZ1Xni6RbrtvlANraqQ91p4AbBcpch9t+Myzq1RuDqUqw9SY6/zlkiCNH2xXxkXFzt9
- oICNeJDbSZ/Bis7+a0EZCTLwj2hp+aJOxTWeyAh7rAcn3wJ+At7Z7H4msx3t/H8Cv0cl
- PuPQ==
+ bh=t0QGRpZGLlDg38g4XunIRYZrT/UQxM0xoybKPtshJA8=;
+ b=v17lrG+hHRftklIGXRpgXTO7nbv0clc19UBbvNr7PBg5LDOpGgcu8m7gCzXTdB9xD6
+ br/WqAVyDU+tP4EtFNcEt57yvagfJu02WASayf3IbDOX1PcJWNN7JJrtHVemvsLrnFmD
+ pc81a/eUCEWOEtaX9K9Y+hDlC0lDcUzSOc51h3NPhIF9rWmWsY0TYpR3v01FLoqtFflZ
+ KEetNlMGmszSVQ4QMhLl1S1JvpJaS5hl7goYdc3VxUwO8S6LyvMa0PirE9qThh0ajDLO
+ G1yWg0oshZ2JNlt0phfoUe38YmNqtzNWqWlazzzvxYUnpxOJYUQC1oStSBLX1jaEhMwo
+ hODQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718696437; x=1719301237;
+ d=1e100.net; s=20230601; t=1718696711; x=1719301511;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4OoRp/8dSAsqL7OuFkqSk6XliTO1+qLekm9XQPwW7/Q=;
- b=cb/Qxgd6aGFW23eAox+NNlMdOGDKeZmSdERUa3kuGUXnRYiJ7tzk6WNreKn6c7qah8
- dEjdbBq8VIHpa3hnFlnqdYRbZhij21O8f09983FN8RwRUF/JT+fDmxtvaMDhzmTamPRJ
- /rgZRbP/jQQWOhuc8gMPDz7jpawf9ToisKtqNqyfwxYe+1YJK7XTHqrpcEoJR67q7x0i
- Jc6gN6M//6mYw9zESrJfTMdm4syx/gXmQBK0VjB5PH4kTnhUPAvoVr6FGyXUWIDFgaeA
- hUTSM1N+RPJ83s7k06rhNfUQSWiV9h0rcjdSy9B3Kc8u12Bv/MSj/E0UJlXsr0tHl0XA
- 31VA==
+ bh=t0QGRpZGLlDg38g4XunIRYZrT/UQxM0xoybKPtshJA8=;
+ b=b29rWyw49wxtlMSCscsw/UMcQSqv9RM7sJju4ymIopE5kI77j6D6tZVrdWmbxjHa3P
+ RFTAk1NdPFm4FqORSMoTu6BoSGWuRAZ5wt+IWE/wTawEdyfGKzYGTt3yq7GXpErsGdj7
+ KNxySop59wjDniphnSemPA7OAjptL7p3nTjBUWpiej+9wt0B87LNbnPYU9exXpUQZCXe
+ 38ZA1JXh8WwnqL4v/E1PF1lKQ0WSRrFjZ5GMNHWrSFTPI3ktUsoLNzhrlYvY+/l1YTee
+ PjzJglSIWGZPPq64gKhcOQdwj9A9GoI0lirl5qRjugsXmrkU/L2bZg9dhQWFR2ALa+Sa
+ 4GxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYomQ37NFLjeG53iHyPc9tDGQmZAfh+imzKpbhzLLtL5M4Qce/S2g73t6N72T1uMuj72drMF9ZJE2VnwE5Ti7j6ZP5ew==
-X-Gm-Message-State: AOJu0Yx1VjiecdfOMBnp/0NWnzGtS1OWgQ0QWTHrJ/lerUspZp3dIWA8
- 29urSk+aTTrNdL+SKKmHFC6FBkFetVmCckvWdKeVcBJ50oz7/YtPKgavHvatckQ=
-X-Google-Smtp-Source: AGHT+IFpRYUNzGnqqw8ebOefQ6Et+OALDqIPTFqEDU3jIO0tY2F0TUnARxBx5+VZmiRpcuvqr3PLog==
-X-Received: by 2002:adf:f902:0:b0:360:727b:8b47 with SMTP id
- ffacd0b85a97d-3607a7e7c15mr9830721f8f.63.1718696436907; 
- Tue, 18 Jun 2024 00:40:36 -0700 (PDT)
+ AJvYcCXhwD/fJjSsLc+8e18nr0WTh8JmrDogGuZXNDsdo1NyuC+eROxLK0OCVRJ4wuDPhlSAveh3QR2JZ9zzbxMaw/gXa1vvgQ==
+X-Gm-Message-State: AOJu0YwWGeMiUtGWZQ508EhFS8lD2gTIbFa2UB5aOnH0ynUjwUzqxRcu
+ C2p8j6LL8cXmyBw5GdlgCIzLKKQjB+TCaAhY9wnvdiANsUTrShsMhbYRTWyAYa4=
+X-Google-Smtp-Source: AGHT+IFGmIyhqTqI9yE1fUFfHjpUabzOHSXKFNB8uA5VCji8nXPWhGbAkMyrJMNRuJntv9kKTbtcyg==
+X-Received: by 2002:a5d:4a4c:0:b0:35f:1d29:db8d with SMTP id
+ ffacd0b85a97d-3607a76374dmr6984446f8f.25.1718696711189; 
+ Tue, 18 Jun 2024 00:45:11 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36075093a4asm13531278f8f.21.2024.06.18.00.40.36
+ ffacd0b85a97d-36075104b7fsm13469275f8f.103.2024.06.18.00.45.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 00:40:36 -0700 (PDT)
+ Tue, 18 Jun 2024 00:45:10 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
@@ -71,13 +71,13 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
  <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
  Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
  <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 09/11] usb: gadget: ux500: Convert interrupt handling to
- usb_gadget_generic_ops
-In-Reply-To: <20240614005309.34433-10-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 10/11] usb: gadget: sandbox: Drop
+ dm_usb_gadget_handle_interrupts()
+In-Reply-To: <20240614005309.34433-11-marek.vasut+renesas@mailbox.org>
 References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
- <20240614005309.34433-10-marek.vasut+renesas@mailbox.org>
-Date: Tue, 18 Jun 2024 09:40:34 +0200
-Message-ID: <87msniitql.fsf@baylibre.com>
+ <20240614005309.34433-11-marek.vasut+renesas@mailbox.org>
+Date: Tue, 18 Jun 2024 09:45:08 +0200
+Message-ID: <87jzimitiz.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -102,17 +102,12 @@ Thank you for the patch.
 
 On ven., juin 14, 2024 at 02:51, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
-> Implement .handle_interrupts callback as a replacement for deprecated
-> dm_usb_gadget_handle_interrupts() function. The new callback allows
-> for each DM capable USB gadget controller driver to define its own
-> IRQ handling implementation without colliding with other controller
-> drivers.
+> Drop dm_usb_gadget_handle_interrupts() in favor of empty default
+> implementation of the same in drivers/usb/gadget/udc/udc-uclass.c .
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-nitpick below (up to you if you want to fix it)
 
 > ---
 > Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
@@ -125,63 +120,26 @@ nitpick below (up to you if you want to fix it)
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  drivers/usb/musb-new/ux500.c | 22 ++++++++++++++--------
->  1 file changed, 14 insertions(+), 8 deletions(-)
+>  drivers/usb/host/usb-sandbox.c | 7 +------
+>  1 file changed, 1 insertion(+), 6 deletions(-)
 >
-> diff --git a/drivers/usb/musb-new/ux500.c b/drivers/usb/musb-new/ux500.c
-> index 6b4ef3c8578..89dd75b7d05 100644
-> --- a/drivers/usb/musb-new/ux500.c
-> +++ b/drivers/usb/musb-new/ux500.c
-> @@ -91,14 +91,6 @@ static const struct musb_platform_ops ux500_musb_ops = {
->  	.disable	= ux500_musb_disable,
->  };
->  
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> -{
-> -	struct ux500_glue *glue = dev_get_priv(dev);
-> -
-> -	glue->mdata.host->isr(0, glue->mdata.host);
-> -	return 0;
-> -}
-> -
->  static int ux500_musb_probe(struct udevice *dev)
->  {
->  #ifdef CONFIG_USB_MUSB_HOST
-> @@ -155,6 +147,19 @@ static int ux500_musb_remove(struct udevice *dev)
->  	return 0;
+> diff --git a/drivers/usb/host/usb-sandbox.c b/drivers/usb/host/usb-sandbox.c
+> index e26f0b292ed..f687fe2c430 100644
+> --- a/drivers/usb/host/usb-sandbox.c
+> +++ b/drivers/usb/host/usb-sandbox.c
+> @@ -123,12 +123,7 @@ static int sandbox_submit_int(struct udevice *bus, struct usb_device *udev,
+>  	return ret;
 >  }
 >  
-> +static int ux500_gadget_handle_interrupts(struct udevice *dev)
-> +{
-> +	struct ux500_glue *glue = dev_get_priv(dev);
-> +
-> +	glue->mdata.host->isr(0, glue->mdata.host);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct usb_gadget_generic_ops ux500_gadget_ops = {
-> +	.handle_interrupts	= ux500_gadget_handle_interrupts,
-> +};
-> +
->  static const struct udevice_id ux500_musb_ids[] = {
->  	{ .compatible = "stericsson,db8500-musb" },
->  	{ }
-> @@ -168,6 +173,7 @@ U_BOOT_DRIVER(ux500_musb) = {
->  	.id		= UCLASS_USB_GADGET_GENERIC,
->  #endif
->  	.of_match	= ux500_musb_ids,
-> +	.ops		= &ux500_gadget_ops,
-
-In case of CONFIG_USB_MUSB_HOST=y, ops gets redefined below.
-Can we move this assignment below
-```
-  	.id		= UCLASS_USB_GADGET_GENERIC,
-```
-?
-
->  	.probe		= ux500_musb_probe,
->  	.remove		= ux500_musb_remove,
->  #ifdef CONFIG_USB_MUSB_HOST
+> -#if CONFIG_IS_ENABLED(DM_USB_GADGET)
+> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
+> -{
+> -	return 0;
+> -}
+> -#else
+> +#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
+>  int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+>  {
+>  	struct sandbox_udc *dev = this_controller;
 > -- 
 > 2.43.0
