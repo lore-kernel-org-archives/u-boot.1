@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 095F0C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88890C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 21:04:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B36788263;
-	Tue, 18 Jun 2024 23:00:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E44578752A;
+	Tue, 18 Jun 2024 23:04:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="NYsSUx4C";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="VAScksue";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74A2B87CDA; Tue, 18 Jun 2024 23:00:57 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id CE3DF8839F; Tue, 18 Jun 2024 23:04:03 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CBEF88263
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:00:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA3F88752A
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 23:04:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a6f09eaf420so704312966b.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:00:55 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a6efae34c83so723498066b.0
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:04:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1718744455; x=1719349255; darn=lists.denx.de;
+ d=gateworks.com; s=google; t=1718744640; x=1719349440; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z3d41LaZAHlGaBxEq+cYbpI22Od25a1t85IFWSBvIO8=;
- b=NYsSUx4CGrjf0ZAdyekjfIgSA/2gxVojCeJi/dp0TdjWUAf6NncmaA1VwxU1fQIGlA
- 9w8dgj43btidcI2uOgXXB14rq7zggSzWpj7KF6ADlZi7BuC868+qSyVliDog/r4HrIMP
- Ktwq1PdcQ8gNc2HjyYwZ8gZhyVsPTJMAEX+Hpraa1JfusedWdG3MnFYhEEjNTr3Mnl/g
- wT2SLG9xqwklduDl1W7g9ofaPy8FehNXamrMPBjVG6rciMSInCNRZPmUQGSEcXMHjWl+
- T1S8/0jf+AcuGhTt2lvKUdaDo56fPgt4shn23/n5yGh+wfPMrbzBr1Lmmz4Pkmp+6iWd
- 9FBQ==
+ bh=BkDzeJhcj6XpAtztbjL5d1LCtxnp8AYsNXhngwTtShY=;
+ b=VAScksueMLmU24YYiIHPcMSROCT7VaglUima1TdH0+r78qNlzeSsFoR1Ez7NAO9Efv
+ eThs+5pRgUwDl9i7A27IjE2Axhj5davrN04aCkF3f6aXYexEOIgaEuOouiERLIbyLe/m
+ q7xQ+MHQkTCR5RQRIeHWu5WQq+p0uL/k12dFEi3eCkza+vXudMIOdLnZpVXOWE0eqMhZ
+ Z4fitzC0ss8K0vbvAZc6j268oOcmS1OZyBbsmdCyzTGvP5LcJpZ4s2ivJw1poXUNrUyD
+ oDTnCF5L6myHtXChWQxh7m3qULLuZYAfScpCWCpkd813cX1nBv24oNa9/7QymU77BX2P
+ 0jXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718744455; x=1719349255;
+ d=1e100.net; s=20230601; t=1718744640; x=1719349440;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z3d41LaZAHlGaBxEq+cYbpI22Od25a1t85IFWSBvIO8=;
- b=OcXKmH+mKxgzAxIixGxSQonT9SBDYVRfLc/uL3h6zk/Uf5co2AE50WZZSdbgtbMEiF
- otuydqaFGnM1dSpEDDSWi1jJPYiAeqI1Aiiu3QtYrx0V0Rjlorexp+xE7+0LWughRlFs
- IO5aglVdNoVEbrrCCnyKa+LixbDflDkitZxBZsRRZawo89eXeW7Khk5eTX2Zjg7mlQWE
- PALTpcqtRjU/t//YwujubsGG6uAbjvijTL/ZGBedrCo8wqWxQthsxEB3mdxTvK1/Es3E
- BVUw7YRc1JpBouGNMZelIPhMbeBIJtF+vmdO5GXYlg85hFJYG4RbWBbR/sKzYNpK9GKd
- g0WA==
+ bh=BkDzeJhcj6XpAtztbjL5d1LCtxnp8AYsNXhngwTtShY=;
+ b=quJ5pu7xHdlG/MD9QetMBOAUUl65l2b0JixRkykRkTqDpBdnmKvQbDg+im38pDDYEP
+ 69X6zMWWEwrzbFl6OAuyFHHKVZvj3Ecy2lKYU9YmKhQ0npkvPCXkPpf/4B3AhPewoX0h
+ j7IBA209OwPBCgdWyAfv17tZuU38bTppBxgqP571GFsBb2M0Ju1rjWaZFmGhrZE5u9L1
+ Um2SpHgNimujpOwQ2muRaBN2kU83sxScsm0ft1U5ojYb0KtCprWpz+1nGGai8+n9zPVB
+ lxG39FsxVapQgLJfCAQqzzSK7sTx1vlGUJN/XOaHVILoAiE7yT7Iqx5FD1jt3F+Yz8o9
+ R1Dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsgyyXyyaLNNRe++mESkX59vS49tDuGDjl5wbgOMI7QQd5tTA/RyLVjm8vlp/0aoV0S6tesUMJmZfzQtgK3dTVEtlzNA==
-X-Gm-Message-State: AOJu0YxOnn3bjvFe2vLMZ8865bSrINVCP+UyzfAFw5Kr1SMDfDilQ3mI
- WKdrB+pi2LSiyy6URcOLL/fgvH8vCiZFdzbWUO3KnfsvX21aRLZvm7+2Y9N/ikWDoS+YjHX0jIm
- KB+nXitbswl16ZK8YoEPD7Al2k32RearmClXxrA==
-X-Google-Smtp-Source: AGHT+IE4w1UDj8KlZuNzqjMRf9Y2R0Ucm1zGBKlejqkIA1Eb1sNXVy9xW/9MGTAIznszCNmByyX5ddBK3kiRY8fhJqk=
-X-Received: by 2002:a17:906:2555:b0:a6f:796d:c747 with SMTP id
- a640c23a62f3a-a6fab648bbbmr29426566b.39.1718744454538; Tue, 18 Jun 2024
- 14:00:54 -0700 (PDT)
+ AJvYcCXQvMCyMTre/u6bxdqCqcMZ6bdmxv59p8rBNDsAIz78ViWemYuOWmpUhZptur9qIPSOOcMbeLcnPa6GxYtwvepem02iVg==
+X-Gm-Message-State: AOJu0YzPyZjMAaBzI/4hNKX12bdDQNRvdQhc59Pbywsm4Nu3K6xs10an
+ BC6RcC0Gl7gCtvPUdWi0ocEXeJ7kHmG/e6AfmN4X2g5DLNYfE2t1A5glkx48LViGccKFFUV/nzS
+ puC55Jo/VrRDjjmthoNOVTQsmtzkfVnJxMgDEXA==
+X-Google-Smtp-Source: AGHT+IFJ0PgC2bPbrUnqZdzFu4fowGYTu8eYKpRdI7SWQHyPmq38+fiRiRi7LZ3kaIKdG2+fO1eFJCD/euqRPVLvxpU=
+X-Received: by 2002:a17:906:ee8c:b0:a6f:e19:6fb2 with SMTP id
+ a640c23a62f3a-a6fab62f551mr40332866b.29.1718744640241; Tue, 18 Jun 2024
+ 14:04:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240617191416.1351790-1-tharvey@gateworks.com>
- <20240617191416.1351790-5-tharvey@gateworks.com>
- <626fe70e-ff61-46f6-84de-e9b8486ac5ed@gmx.de>
- <CAJ+vNU3rtrGkL3gQwEZW0x=ivSPqv-jxsdUX59bCcYRofe7Wxw@mail.gmail.com>
- <CAJ+vNU2KH8NgFkjWt5ZPKMauPjhLXwd-oNfGFy-+QHO6MWKARA@mail.gmail.com>
- <CAJ+vNU02a0VASJzAghDpSWm6XuOseQj9T70eRn0bD9deiHo6dA@mail.gmail.com>
- <CAOMZO5Cs6xWs-PvMq1u91n1Jmt8BDsZFMUwK8hCx1LWN3VPSzA@mail.gmail.com>
- <CAJ+vNU0yoe8kNw6BmqpB_NjEoZE=efFGihTz=rQ5OOs5ZJNF3Q@mail.gmail.com>
-In-Reply-To: <CAJ+vNU0yoe8kNw6BmqpB_NjEoZE=efFGihTz=rQ5OOs5ZJNF3Q@mail.gmail.com>
+References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
+ <20240611-docker-image-v1-12-51472eb70357@flygoat.com>
+ <20240612160053.GS68077@bill-the-cat>
+ <49522625-8663-4102-82aa-cabc0f239afa@app.fastmail.com>
+ <20240612165048.GD68077@bill-the-cat>
+ <e94995af-f9dd-4262-8dfb-2c47ab817e61@denx.de>
+ <20240617232904.GL68077@bill-the-cat>
+ <c50b3dc0-0385-4548-80ed-ffdc8623bfcc@app.fastmail.com>
+ <20240618143159.GR68077@bill-the-cat>
+In-Reply-To: <20240618143159.GR68077@bill-the-cat>
 From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 18 Jun 2024 14:00:43 -0700
-Message-ID: <CAJ+vNU0j4CKtei5inR+Mobms7FsdO0oOJDttpx7svCbYBncATw@mail.gmail.com>
-Subject: Re: [PATCH v6 4/4] test: cmd: fdt: fix chosen test for DM_RNG
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>, 
- Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>, 
- Akash Gajjar <gajjar04akash@gmail.com>,
+Date: Tue, 18 Jun 2024 14:03:48 -0700
+Message-ID: <CAJ+vNU1fifv8gi3MLV+qBk2-Q4aiZNG4Vwr=MgbfjZzMOAbvHA@mail.gmail.com>
+Subject: Re: [PATCH 12/20] cyclic: Rise default CYCLIC_MAX_CPU_TIME_US to 5000
+To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Chris Morgan <macromorgan@hotmail.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Aaron Williams <awilliams@marvell.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -105,40 +101,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 18, 2024 at 12:51=E2=80=AFPM Tim Harvey <tharvey@gateworks.com>=
- wrote:
->
-> On Tue, Jun 18, 2024 at 12:35=E2=80=AFPM Fabio Estevam <festevam@gmail.co=
-m> wrote:
-> >
-> > Hi Tim,
-> >
-> > On Tue, Jun 18, 2024 at 4:30=E2=80=AFPM Tim Harvey <tharvey@gateworks.c=
-om> wrote:
-> >
-> > > This seems like something from test/dm/wdt.c and unrelated to my patc=
-hset.
-> >
-> > Do you have this recent commit applied?
-> >
-> > https://github.com/u-boot/u-boot/commit/1fd754cebd38d7456caa82bef15225c=
-be77960ec
->
-> Hi Fabio,
->
-> Nope - I'm 1 day behind :)
->
-> That would appear to be the issue... I'll rebase on todays
-> origin/master and try again.
->
-
-Fabio,
-
-That didn't quite do it... I'm seeing Azure pipeline timeouts beyond 5000us=
+On Tue, Jun 18, 2024 at 7:32=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
 :
+>
+> On Tue, Jun 18, 2024 at 03:00:50PM +0100, Jiaxun Yang wrote:
+> >
+> >
+> > =E5=9C=A82024=E5=B9=B46=E6=9C=8818=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8A=
+=E5=8D=8812:29=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
+> > [...]
+> > >> Acked-by: Stefan Roese <sr@denx.de>
+> > >
+> > > Can we please get either this, or
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20240524210817.19532=
+98-1-rasmus.villemoes@prevas.dk/
+> > > merged for master? The number of false negatives in CI due to this is
+> > > big issue for getting more contributors to use CI. Thanks.
+> >
+> > It seems like CYCLIC doesn't have it's own custodian tree.
+> > How are we going to handle it in this case?
+>
+> Note that in U-Boot it's less important to have a tree per sub-section
+> and more important that custodians have a tree (and then use appropriate
+> tags when sending pull requests).
+>
+> --
+> Tom
+
+Stefan and Tom,
+
+I'm seeing CI issues here even with 5000us [1]:
 host bind 0 /tmp/sandbox/persistent-cyclic function wdt-gpio-level
 took too long: 5368us vs 5000us max
 
-Seems silly to just keep bumping this default?
+Best Regards,
 
 Tim
+[1] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D8737&view=
+=3Dlogs&j=3Da1270dec-081b-5c65-5cd5-5e915a842596&t=3D69f6cf72-86f3-551a-807=
+d-f28f62a1426f&l=3D748
