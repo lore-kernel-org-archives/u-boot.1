@@ -4,86 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE64C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB834C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:53:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B664F88354;
-	Tue, 18 Jun 2024 16:53:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31A2788365;
+	Tue, 18 Jun 2024 16:53:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PUhVdTOm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a9JTVC3D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBA4C88335; Tue, 18 Jun 2024 16:53:21 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id CAC1688363; Tue, 18 Jun 2024 16:53:22 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3BC8882D4
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:53:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9D31880F5
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:53:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5ba090b0336so2670406eaf.1
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:53:19 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6f96f8489feso3122400a34.0
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:53:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718722398; x=1719327198; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718722399; x=1719327199; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mIBZ4lGmQNjCvhxDtP0rLJQBi2xqdGuIIMLGoMcj+XI=;
- b=PUhVdTOmGCQiFqijfOESDCisF8qS2hd8IUiXfJ67a/Iuvx28tewEFyVSHPdWcLKBg5
- NBav7Mj7Yy7qTTKKNLZZrnVnF+/20e4L8krCgZQxRaxAVYOkDMov/XxVCXCLWb3qWo0/
- 959laEi+FNandtkDexvplaqk7KLNaD+0AD+ZY=
+ bh=ih/2KKDGDoDzbe53aYoZcAkNzRSMUDOJFrP9DR0dFN8=;
+ b=a9JTVC3D1zCVBgDSG6CcCrNv2fI2pxS9FVljdu/cmdBxamTKSwNrzkgWkZksBeTR7o
+ rKmpAZITMcXVKSjFnb1IKrWNdHVJNrdL5nZeITKaCci73Yi089nITNV73aa+wD3Qxh6E
+ DY54k2A3wopbTbcj7HgWIPLU/67Ef+yQowXnI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718722398; x=1719327198;
+ d=1e100.net; s=20230601; t=1718722399; x=1719327199;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mIBZ4lGmQNjCvhxDtP0rLJQBi2xqdGuIIMLGoMcj+XI=;
- b=eZU1R4K9rVQGk7k54SReA2tjGxMN4Ry45uG0UF3L03Wns/Kq+oLKaDb+x6mGGigv1b
- T4Zi/+jPiKHbMLY+Cijy/HGYzZYQ88K+B1hqKMbcqucGcvFvbwBZdo7QTwIroWYTo2lg
- /Pyr4cDcKcubLLXmbD8vxK+7B5xV/nvqvE49eoabF/hKqVzAqOj7TrWB04hofXKGjZU+
- GoNbgv8n8fjsxRH+mYC2iLMPka8CCjzYoSi5WaZB9iQT2Zw92MopLzl9NfmoO+iDYd4v
- j73A3FRcwOexGTMPwSB6oGx8lB60lA87kDwjo7lu/uo39h+2cAaHu+h9CWMGcFD3NOJw
- mULA==
-X-Gm-Message-State: AOJu0YzJWEaAkrgfoO7w45m97Dc4OXo8EqrULoDjQZw19VfM7dLqZH1e
- j82kwz1Aum6yXt/q0xSm/QSm3OR3/zFgoSnO89N7WbqfrWMw4cUuX3E351JiMzI=
-X-Google-Smtp-Source: AGHT+IFIJyP3okwlhHF7ROQwX1sWfk6fVug3bSdolpAea42eCV7eaQtstkxdQUqtgrLls8tuqGmg3g==
-X-Received: by 2002:a05:6870:3908:b0:255:1819:b444 with SMTP id
- 586e51a60fabf-25c948f71c0mr19167fac.7.1718722398616; 
- Tue, 18 Jun 2024 07:53:18 -0700 (PDT)
+ bh=ih/2KKDGDoDzbe53aYoZcAkNzRSMUDOJFrP9DR0dFN8=;
+ b=oQdZojEkRItWXZJNi/CdfsZh1LRdVlhsyX43+BhHD35ERL4r5JNIMRHjZ+I841VBKV
+ NHr/BDkG222OEOj1QNxf6WiHrZRhbWqiNz3LJKx49C6H6gIySMfs+nZl1OPOoHLbToVS
+ iKayFdSEOPh2qpvilOMtroSY/HnkJQN5cP+tTevu92t4jfY2uFQlapcSLnsZeequXl9U
+ TdDqjfWjnAeg3NA6cKAbQTHzUhzTmGh1/pOfD9lJLSJwt2/+VCGIKLT9zgyIHYf6+2Wr
+ M18EA1BAOEPbOtX2kGCnwnF2xPmtXdDeE627f/MwRiElHQ+Lp5RFiOgDzwGUWOD6clIs
+ T16Q==
+X-Gm-Message-State: AOJu0YwJPGFEvvMQqLZdzi33K3UhsUhlveiX8C+X/NVwDqCAjfLzSPy/
+ V4NzD7EIM180tgRdtdUO0Kb08ZZlkj6JaHv/doG4Uh+ehDQK/an9FLmBkZF/3kg3DaUwJ7s64+p
+ NWFLHfg==
+X-Google-Smtp-Source: AGHT+IGqN6ypb+TQWFiGtcOVxQIdqjSFNcKlruVe48+yuv9rbsJ5M1wzB2dwV/ak5ctfau8qBmPD7g==
+X-Received: by 2002:a05:6870:1716:b0:254:9ec6:c8cd with SMTP id
+ 586e51a60fabf-25c948ec852mr20266fac.7.1718722399397; 
+ Tue, 18 Jun 2024 07:53:19 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-45.totalplay.net.
  [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567a94b7besm3202888fac.6.2024.06.18.07.53.16
+ 586e51a60fabf-2567a94b7besm3202888fac.6.2024.06.18.07.53.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 07:53:18 -0700 (PDT)
+ Tue, 18 Jun 2024 07:53:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>, 
- Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
- Andrew Davis <afd@ti.com>, Maxime Ripard <mripard@kernel.org>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, 
- Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jonathan Humphreys <j-humphreys@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20240531225110.2622239-1-j-humphreys@ti.com>
-References: <20240531225110.2622239-1-j-humphreys@ti.com>
-Subject: Re: [PATCH v3 0/9] binman: ti: create binman nodes for EFI
- capsules
-Message-Id: <171872239677.3307069.12905920590757359041.b4-ty@konsulko.com>
-Date: Tue, 18 Jun 2024 08:53:16 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240605013742.576403-1-trini@konsulko.com>
+References: <20240605013742.576403-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/3] efi_loader: select BLK not depends on BLK
+Message-Id: <171872239876.3307069.2225464519713333435.b4-ty@konsulko.com>
+Date: Tue, 18 Jun 2024 08:53:18 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,17 +90,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 May 2024 17:51:01 -0500, Jonathan Humphreys wrote:
+On Tue, 04 Jun 2024 19:37:40 -0600, Tom Rini wrote:
 
-> Add binman nodes for EFI capsules of firmware components so that capsules
-> are automatically created during the UBoot builds.
-> 
-> This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
-> BeaglePlay, AM69, J7, and BeagleboneAI.
-> 
-> Changes from v1:
-> - on GP devices, still use signed images in capsules where available
-> - Insert board specific capsule GUIDs into the capsule node's image-guid.
+> The BLK symbol is used both for "we have a block device subsystem
+> enabled" and "we need to utilize the block device library functions". In
+> the case of efi_loader, it is the case of "we need to utilize the block
+> device library", so select rather than depends on it. In turn, also
+> disable EFI_LOADER on platforms which did not have it on previously due
+> to a lack of block devices. They can enable it themselves if desired.
 > 
 > [...]
 
