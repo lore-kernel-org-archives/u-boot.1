@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2441EC2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 18:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B610C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 18:54:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A3C4883B3;
-	Tue, 18 Jun 2024 20:46:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E46728839C;
+	Tue, 18 Jun 2024 20:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZUbUHZ4N";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RSkDRpBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 030ED8834B; Tue, 18 Jun 2024 20:46:53 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 7DB218839C; Tue, 18 Jun 2024 20:54:24 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81C1D88352
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 20:46:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39373882F9
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 20:54:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hnagalla@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45IIkm8v108152;
- Tue, 18 Jun 2024 13:46:48 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45IIsHHi022564;
+ Tue, 18 Jun 2024 13:54:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718736408;
- bh=c2edeP9t3nrYllb7ZmCNQZoYAlndpq39UUEzPIVX3xY=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ZUbUHZ4NKu+7fuekXeqOe2J9/vUNsSP0CAJ0pBCfg5CXnCd4uLYHx9B/QhZGDxFWK
- B+u9pshOTKeL9JAti1YbsYRTJqWUODDGTkdN8CVpPK+HsdF9uLv6swr2iPpFqBEmsn
- zKczKA/MDe9ZC4tOwgaC3EksECfZMQOXu5JARuGM=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45IIkmbZ002813
+ s=ti-com-17Q1; t=1718736857;
+ bh=fbuV0zCQXaIPIrseJSVhpwTapKlA9dnJ+K9xcqGgYq0=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=RSkDRpBbaX7qpyAKjxIapyqTTVWdceYKHs1SIZOa0HBdC5amy7FUcAIUkjJIucemz
+ LfaGKbK9bxc5sO4gBLrBVFoAeDdCBuAO9kbibpuCoUsU2N8KYAcSpBgAvT3kP3Cuqd
+ SJQkSoFaKaV2AJ3CbkVsSybIY1ILpvATGLsy6Drw=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45IIsHCG088896
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 18 Jun 2024 13:46:48 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
- Jun 2024 13:46:48 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ Tue, 18 Jun 2024 13:54:17 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
  (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
+ Jun 2024 13:54:17 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 18 Jun 2024 13:46:47 -0500
-Received: from localhost ([10.249.48.175])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45IIklom046734;
- Tue, 18 Jun 2024 13:46:47 -0500
-From: Hari Nagalla <hnagalla@ti.com>
-To: <trini@konsulko.com>, <nm@ti.com>, <devarsht@ti.com>, <afd@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-CC: <u-kumar1@ti.com>, <praneeth@ti.com>
-Subject: [PATCH 3/3] board: ti: am62x: Add remote proc env variables
-Date: Tue, 18 Jun 2024 13:46:36 -0500
-Message-ID: <20240618184636.30642-4-hnagalla@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240618184636.30642-1-hnagalla@ti.com>
+ Frontend Transport; Tue, 18 Jun 2024 13:54:17 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45IIsHB2055842;
+ Tue, 18 Jun 2024 13:54:17 -0500
+Date: Tue, 18 Jun 2024 13:54:17 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Hari Nagalla <hnagalla@ti.com>
+CC: <trini@konsulko.com>, <devarsht@ti.com>, <afd@ti.com>, <b-padhi@ti.com>,
+ <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>
+Subject: Re: [PATCH 0/3] Add M4 remoteproc driver for TI K3 SoCs
+Message-ID: <20240618185417.cjzqmtzrqf5adwul@drapery>
 References: <20240618184636.30642-1-hnagalla@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240618184636.30642-1-hnagalla@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,31 +78,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add remote proc support environment variables.
+On 13:46-20240618, Hari Nagalla wrote:
+> This series adds support for M4 remoteproc driver for K3 devices.
+> 
+> Logs: https://paste.sr.ht/~hnagalla/62811c4003c27ada83bc1c94500f7714ab30092a
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
----
- board/ti/am62x/am62x.env | 4 ++++
- 1 file changed, 4 insertions(+)
+Obviously - this cannot work with out an M4F node in dts, correct? you
+should have mentioned that in your email.
 
-diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
-index 9cb186c2a0..f8a73d4c47 100644
---- a/board/ti/am62x/am62x.env
-+++ b/board/ti/am62x/am62x.env
-@@ -1,5 +1,8 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/mmc.env>
-+#if CONFIG_CMD_REMOTEPROC
-+#include <env/ti/k3_rproc.env>
-+#endif
- 
- name_kern=Image
- console=ttyS2,115200n8
-@@ -18,3 +21,4 @@ splashfile=ti_logo_414x97_32bpp.bmp.gz
- splashimage=0x80200000
- splashpos=m,m
- splashsource=sf
-+rproc_fw_binaries= 0 /lib/firmware/am62-mcu-m4f0_0-fw
+> 
+> Hari Nagalla (3):
+>   remoteproc: k3-m4: Introduce K3 remote proc driver for M4 subsystem
+>   configs: am62x_evm_a53_defconfig: Enable M4 remote proc driver
+>   board: ti: am62x: Add remote proc env variables
+> 
+>  board/ti/am62x/am62x.env            |   4 +
+>  configs/am62x_evm_a53_defconfig     |   2 +
+>  drivers/remoteproc/Kconfig          |  10 +
+>  drivers/remoteproc/Makefile         |   1 +
+>  drivers/remoteproc/ti_k3_m4_rproc.c | 421 ++++++++++++++++++++++++++++
+>  5 files changed, 438 insertions(+)
+>  create mode 100644 drivers/remoteproc/ti_k3_m4_rproc.c
+> 
+> -- 
+> 2.34.1
+> 
+
+I know we are close[1], but do wait for upstream kernel to accept
+the bindings before using the same in driver etc. the dts has no m4
+support atm.
+
+[1] https://lore.kernel.org/r/33550e82-4fd3-4066-b78d-27534584fa5b@ti.com
 -- 
-2.34.1
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
