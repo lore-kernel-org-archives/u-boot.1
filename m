@@ -4,76 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 831B8C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C2B2C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539A988366;
-	Tue, 18 Jun 2024 17:35:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 70E1C88307;
+	Tue, 18 Jun 2024 17:48:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TGWmv8gS";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="SU9zmYVC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ABED88366; Tue, 18 Jun 2024 17:35:22 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6490D88307; Tue, 18 Jun 2024 17:48:35 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72620884BF
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:35:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FDBB80C58
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:48:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718724913; x=1719329713; i=xypron.glpk@gmx.de;
- bh=FwqM7UEoIxbF5nq2uy/gukoTJYGJupmAI9IWJh15haE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=TGWmv8gSTi1zpOEH1lXtC1eqCpvswpvTPhs/2n3OMPFZieh3zg6H99U9C0WtyUtf
- Ioxj5f8yi7HBA8UF5S4xvJCYZSC5K3XEuEkT8RmYkreeVM6i0JUcO3x63FjBs+Jrm
- dyQ8XgOFlOT0CKVgZN8movwqRIkU0+pNb8pg0TpYaIWpFTDAVf2KMKFtx+FvEtRpv
- tmLVKSenOjNkgLNkDAwXM9fpBvAHB7TObnH9ba315ly4Xr9i7e5R6Evi1t+WZZkbe
- +0j8zFfhcRV8+bbvkhobTMLF/fC6qVDIbRAK5c15xFS9hU5GoZaHlgsyaf6mpXGLL
- wm21C7uMWAkkLvOKFw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MVvPJ-1ru3ee0mm5-00UQOa; Tue, 18
- Jun 2024 17:35:13 +0200
-Message-ID: <c1c66103-9d68-48ca-a542-1d0abbfdb634@gmx.de>
-Date: Tue, 18 Jun 2024 17:35:12 +0200
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a6e43dad8ecso972873666b.1
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 08:48:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1718725712; x=1719330512; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vnemZ9Mn02GbfTN0A/4aYAJ6rHd8irbg+REVymu+t5Q=;
+ b=SU9zmYVCJ7nm7pNUytMOTiAb33EeT3v7awfqSK6t2yUQoRaaZ02WT/tG568ogn1oTs
+ sDsIzJPEfsDpkPOVEJDSRlYw7vr1cjxEvyLpX2qAhFYJLoqW43TFIo54xUEq/LTVz/l4
+ 1aErHHycWQz3XtoRwcgXJEslXOBtnsRppUx+F2KoljNgy3qD8XBdkeYbnLbDvPOeMS1o
+ sL2E0r3YEE68PD3hgGGxDOaiyuAbIZIATz6dYablqpqjPo4kjqE4d+I73F3NYf0XJoNB
+ /RNdFmaORIJUUweXYsga6d+dUlJz/kQLfa79WqaOags2VSLAqrmZWyf2bWuV5GUReR5T
+ Ft+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718725712; x=1719330512;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vnemZ9Mn02GbfTN0A/4aYAJ6rHd8irbg+REVymu+t5Q=;
+ b=O2WbwKstYQLd/N+mV2xquncWJUNfwxKAb87GQuJ2cAjmD0G1vESsJEHlWg46kGc09+
+ gYDTbWEDvlMXaCp67q9XNKH1kw/7vCJyQ/JY9Dln8axrth6rZMANpUHh35HdXzm1bSdR
+ 5VZGkNpI/6+0DuiOxRPipZli04936KVhUv3TEOCPcscT2gvo1iNi5BvaZr3Ue4dkXltt
+ VaqPmfy7vCP17wbdcEH0zfXAkKdrdWmKn73UJj9Q3h9O9FrmLiJVIF9Vto2fs+msyDnP
+ F6Udbc6XYcmPnHmwPRlIWLgSBNEeWhjVx0sjAksD4FYbeRwkAFpVR4c6AYfkAnkExfRk
+ PcmQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU0JuNPawfRZnrFKzoYqaUypAwClA85iEx5noRLWdF2P7AiLohoR2VLOYbOFCLwuAnkkiqU/Ir+TL7Rvx2taA9YelKQtg==
+X-Gm-Message-State: AOJu0YzYTyyBYJgy8lfawfsBS1JqfbGVhn9ncT3aWQiVW3HvQui8B3+9
+ SHNH9fvO+3Gz6tSdtsSjY6/5R2N3NCq4BLEYiof1PKKbZyTYmAZamkV9bIII7g9WlEaWqRrkmdb
+ x9b0ISQybxATRzkYei7NVl/HR2Zn8bggZK8Oxw4NZ2Md9VMOiFCQ=
+X-Google-Smtp-Source: AGHT+IFeQmLcv9mOMOnfgSWzYew0SjOYwsvMO6e9RSbhYYOnQCpyYz2ujJE5C5aIwpors1Hy/w0c237Kj2M+5rbWFLE=
+X-Received: by 2002:a17:907:a091:b0:a6f:6df5:a264 with SMTP id
+ a640c23a62f3a-a6fa40d4349mr15504466b.1.1718725711861; Tue, 18 Jun 2024
+ 08:48:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] doc: describe UEFI measured boot
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
-References: <20240618152314.10140-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240618152314.10140-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20240617191416.1351790-1-tharvey@gateworks.com>
+ <20240617191416.1351790-5-tharvey@gateworks.com>
+ <626fe70e-ff61-46f6-84de-e9b8486ac5ed@gmx.de>
+In-Reply-To: <626fe70e-ff61-46f6-84de-e9b8486ac5ed@gmx.de>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 18 Jun 2024 08:48:20 -0700
+Message-ID: <CAJ+vNU3rtrGkL3gQwEZW0x=ivSPqv-jxsdUX59bCcYRofe7Wxw@mail.gmail.com>
+Subject: Re: [PATCH v6 4/4] test: cmd: fdt: fix chosen test for DM_RNG
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>, 
+ Akash Gajjar <gajjar04akash@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Chris Morgan <macromorgan@hotmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:hsGZxMfq24SeiuGKIPp1r7qiMWyRsKBbt97Dz9xA8v3nl9BBH8e
- pK8LOOogshjRiQc7sbcoCmMiKCc3R2crNp6zUt+plRdkGwaS5iQO/Sz3Lk97tnsSnYcshjF
- Pq6Tebg8S11za59v0IwE5T8uChKuZiJY12/+SDEUoNLkU2+EauFnTee/uAGLuzkJGKON8Un
- WdP1DfczUZfhw12fOtrnQ==
-UI-OutboundReport: notjunk:1;M01:P0:26BYGgGhYG8=;q/Qauyby8EcVpWk/oYD+04yR3pT
- HkL18+R9rt1AcWYtCpPEG7ov1F8VSYmH5d2vlv1L7b3cnHLLs4xkNfYTn6FhrUhcoC1m9Vc+q
- GmsqlQdbtqO1iYpghIMajsvBUkCx2NdjcE9D8WLPHeu6iZuxIneka/7pOVnfA7ZGGwKrdwCDn
- TYm5tk0UMpeDtstb9RXO7cSKf64NycASydEcDPAb6NawEb09QLr3kd3Gj/MaQEKkXSyMqQO9b
- jnuqzULq7oK8kVGI+Y27QgI496yFeGT7b/U/sQmE4v2bbw3+lQR6MAMjriSUTpYzIgrB7W1Nk
- mnV48GWGlQSqkhfGx8IigTaX8K4XKucLPPZSxuDFMYRic84xwqFXw61ciptmx4oCLrEhTLhUL
- ql2o+rPJai+3shfBrNxUUN1Wst+Qm8PANcx1qyiQotozgvIXuG5ydKvo9l2BKUr397F6e2TGx
- HxfGLSuhgwelVrO2WB8BT5nJDOIlxUfsrG7wS/CzD6aqf0g89Dv8J8IvlLNlf7uvUd7DwG8Cm
- btYN0lzC21GkJ/eKujh+wKkpjQevsri7ay5TTRgpKAau2genxAsZEO2Ky5zcppJZG07KgRIu0
- H/vbjY9rf9y5uHZe0lOVeb11zwWY5qsys8bq3LXOHRS+my4v60bA+ND8s6//d+luWOi6ARZ4n
- uQRtQZ8nOHFzXeyCvMTLCxgKVmD11EuraEHzDXYkx2s1kvq7zr2HO6t/MD5noi1Y+nh0vKXvI
- Tld6dZNZmUkxaB2WaSa2bRpRnLb4maRWtTJqVbyP9xRLRTm14dDbD+bLTTZ7IHdumEO31b8m5
- CTDkSMROo/WtgC0wSPWeox1RCSCHcmCNn+p/0rvztJJR4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,92 +100,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18.06.24 17:23, Ilias Apalodimas wrote:
-> We currently only describe the process to enable measured boot using
-> bootm. Describe the UEFI requirements as well which predate bootm.
+On Tue, Jun 18, 2024 at 4:51=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-Please, rebase on 00cac7456125 ("doc: describe UEFI measured boot")
-
-Best regards
-
-Heinrich
-
-> ---
-> Changes since v2:
-> - add all bootX commands in the description instead of just bootm
-> - Remove and extra _ from the header
-> Changes since v1:
-> - fixed remarks from Heinrich on titling and DTB measured PCR
->   doc/usage/measured_boot.rst | 31 +++++++++++++++++++++++++++----
->   1 file changed, 27 insertions(+), 4 deletions(-)
+> On 17.06.24 21:14, Tim Harvey wrote:
+> > Now that kaslr-seed is automatically added to the chosen node if DM_RNG
+> > is enabled, adjust the test to expect this.
 >
-> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-> index 9691904a9d8a..d31cb05226cd 100644
-> --- a/doc/usage/measured_boot.rst
-> +++ b/doc/usage/measured_boot.rst
-> @@ -7,19 +7,42 @@ U-Boot can perform a measured boot, the process of has=
-hing various components
->   of the boot process, extending the results in the TPM and logging the
->   component's measurement in memory for the operating system to consume.
+> We need to check that if CONFIG_EFI_TCG2_PROTOCOL=3Dy no kaslr-seed node
+> is passed to EFI binaries.
 >
-> +The functionality is available when booting via the EFI subsystem or 'b=
-ootm'
-> +command.
-> +
-> +UEFI measured boot
-> +------------------
-> +The EFI subsystem implements the `EFI TCG protocol
-> +<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specificat=
-ion/>`_
-> +and the `TCG PC Client Specific Platform Firmware Profile Specification
-> +<https://trustedcomputinggroup.org/resource/pc-client-specific-platform=
--firmware-profile-specification/>`_
-> +which defines the binaries to be measured and the corresponding PCRs to=
- be used.
-> +
-> +Requirements
-> +~~~~~~~~~~~~
-> +* A hardware TPM 2.0 supported by an enabled U-Boot driver
-> +* CONFIG_EFI_TCG2_PROTOCOL=3Dy
-> +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=3Dy
-> +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=3Dy will measure the lo=
-aded DTB in PCR 1
-> +
-> +Measured legacy boot with bootX command
-> +---------------------------------------
-> +The commands booti, bootm, and bootz can be used for measured boot
-> +using the legacy entry point of the Linux kernel.
-> +
->   By default, U-Boot will measure the operating system (linux) image, th=
-e
->   initrd image, and the "bootargs" environment variable. By enabling
-> -CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
-e.
-> +CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
-e in PCR1.
->
->   The operating system typically would verify that the hashes found in t=
-he
->   TPM PCRs match the contents of the event log. This can further be chec=
-ked
->   against the hash results of previous boots.
->
->   Requirements
-> -------------
-> +~~~~~~~~~~~~
->
-> -* A hardware TPM 2.0 supported by the U-Boot drivers
-> -* CONFIG_TPM=3Dy
-> +* A hardware TPM 2.0 supported by an enabled U-Boot driver
-> +* CONFIG_TPMv2=3Dy
->   * CONFIG_MEASURED_BOOT=3Dy
->   * Device-tree configuration of the TPM device to specify the memory ar=
-ea
->     for event logging. The TPM device node must either contain a phandle=
- to
-> --
-> 2.45.2
+> The right location for such a test is lib/efi_selftest/efi_selftest_tcg2.=
+c.
 >
 
+Hi Heinrich,
+
+I see you sent a patch for that but I'm not understanding how that
+fits into the ut framework.
+
+> We need as similar check for CONFIG_MEASURED_BOOT=3Dy.
+
+Can you explain more please?
+
+Does this explain the CI failures I see here:
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D8721&view=3Dlo=
+gs&j=3D6ebe5bb0-481f-5026-b4e6-2d4192a94e80&t=3D66c5926e-2461-580f-927d-c0d=
+0a6120549&l=3D539
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D8721&view=3Dlo=
+gs&j=3Da1270dec-081b-5c65-5cd5-5e915a842596&t=3D69f6cf72-86f3-551a-807d-f28=
+f62a1426f&l=3D541
+
+I'm still trying to make sense of those.
+
+In order to test this locally I built for sandbox64_defconfig and ran
+"./u-boot -Dc 'ut fdt'" but it seems that doesn't cover enough cases.
+
+Best regards,
+
+Tim
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > Cc: Michal Simek <michal.simek@amd.com>
+> > Cc: Andy Yan <andy.yan@rock-chips.com>
+> > Cc: Akash Gajjar <gajjar04akash@gmail.com>
+> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> > Cc: Devarsh Thakkar <devarsht@ti.com>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+> > Cc: Marek Vasut <marex@denx.de>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: Chris Morgan <macromorgan@hotmail.com>
+> > ---
+> > v6: new patch
+> > ---
+> >   test/cmd/fdt.c | 4 ++++
+> >   1 file changed, 4 insertions(+)
+> >
+> > diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+> > index 547085521758..537d8a338bbf 100644
+> > --- a/test/cmd/fdt.c
+> > +++ b/test/cmd/fdt.c
+> > @@ -1347,6 +1347,8 @@ static int fdt_test_chosen(struct unit_test_state=
+ *uts)
+> >       ut_assert_nextlinen("\tu-boot,version =3D "); /* Ignore the versi=
+on string */
+> >       if (env_bootargs)
+> >               ut_assert_nextline("\tbootargs =3D \"%s\";", env_bootargs=
+);
+> > +     if (CONFIG_IS_ENABLED(DM_RNG))
+> > +             ut_assert_nextlinen("\tkaslr-seed =3D ");
+> >       ut_assert_nextline("};");
+> >       ut_assertok(ut_check_console_end(uts));
+> >
+> > @@ -1363,6 +1365,8 @@ static int fdt_test_chosen(struct unit_test_state=
+ *uts)
+> >       ut_assert_nextlinen("\tu-boot,version =3D "); /* Ignore the versi=
+on string */
+> >       if (env_bootargs)
+> >               ut_assert_nextline("\tbootargs =3D \"%s\";", env_bootargs=
+);
+> > +     if (CONFIG_IS_ENABLED(DM_RNG))
+> > +             ut_assert_nextlinen("\tkaslr-seed =3D ");
+> >       ut_assert_nextline("};");
+> >       ut_assertok(ut_check_console_end(uts));
+> >
+>
