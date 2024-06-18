@@ -4,98 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D098CC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 12:34:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E79F0C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 12:43:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D646881D6;
-	Tue, 18 Jun 2024 14:34:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B188881D6;
+	Tue, 18 Jun 2024 14:43:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kD9oTrQo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mu09/eLY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DFD188137; Tue, 18 Jun 2024 14:34:05 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A41C9881D6; Tue, 18 Jun 2024 14:43:45 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E1A6882ED
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:34:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EB7E88137
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:43:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C87353F42A
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 12:34:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1718714040;
- bh=v6unGyKfnAZe8ZH6zMDskQrx4MmLwDKHv9WgKXayykM=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=kD9oTrQoeQ/UR+aTSY9lEHyVJJUU+3ipaNOUKHcKAwHK0PsDGVfTU3jHMsSaZks/P
- BVaIEPADpwNUfSqO2ukykCqhyD35xDcpCbNgmAoWSbdEnCTX0Y7KnhQ7g5BfLJvNrP
- UbCIFNeWxaeagxRUJgxUYEiN6VwZ57wrYYUQiyDf6DVPeZE4NASBaThFD/+u7qLSL2
- 6hgITZyDEGqykcQ9yrmz9SDzuQORkmNGtOKpR4Jh3BGwUDb3qId5m5wY3M5TLlLY0G
- V3rEb7vOK71GdXzwLS3YFtsySnz396s+xCa6kpKNMPzd0IRBsSkkOgBjaWoUeju/EL
- WOEWwpWCCm7RQ==
-Received: by mail-lf1-f72.google.com with SMTP id
- 2adb3069b0e04-52bc0027a29so3412441e87.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 05:34:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-797a8cfc4ecso329376585a.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 05:43:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1718714621; x=1719319421; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=43xMkb/sC+i6RXMX71jfOqCIEP1VV6ybLAwr0V/Bmu4=;
+ b=mu09/eLYjEYDrlzJfDBlJ9ajGoThybFUzxRGUxTQyFn+1AmwGA84nkDdPMqmaQ90tN
+ aF9zGQoz1bmSOD+MfnaozHR0R+NT3n1q1ZAjmJaOEIAD4CEjaKQz33AGwgdk3qj5dNUQ
+ h5Mf494hwlad24jXq8fvg6cdMMF7r2UqTCXgI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718714040; x=1719318840;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=v6unGyKfnAZe8ZH6zMDskQrx4MmLwDKHv9WgKXayykM=;
- b=gMmNf1F2jh0J3t7A80qIU4fvYvxOprC2rW0/ZXiBSDXtvRrrLPpAFVgjK6w3PyPvWg
- NNP3j5WoYm2jbb6ub/aCP/YSe6v58y4t55/6uue9SJjYOqVJL0yh4vPZAofnLo5rTSRw
- DsReTOWaQnDjOJlN/i3ZNd6SCF/nh2zzeyQX9KEEbKPbvQY18b4M/l3bxXEKX6n2gtfP
- sYg+ElgV5WE6HfomuCkdrJoajZeZrzUKcQpqpS/SVM9A/ALv/g0wnQLTAd+lBWOqyfG8
- tV9VlDXsqLCJjPtCUASneIL4VE5V2Lx1j6r+MqBgwMXf5GZRqXWwEP7KBjQIQSzhOEFx
- 44OA==
+ d=1e100.net; s=20230601; t=1718714621; x=1719319421;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=43xMkb/sC+i6RXMX71jfOqCIEP1VV6ybLAwr0V/Bmu4=;
+ b=l9utY4q5gI7kxCUjhw59e5TfXP+i4y+Sq84ivKdaDAqJDAsAJ427w3mTbJEcdUh3a2
+ yz2VDfmwv+1mBprw21WZN0+JirNil3ZQTId50TP00d9LKAeUEkqkHA1mMVHClqRyKJpK
+ v62n1pXFznUeIfYdtMwBEXMQ6F64cOtWNuB1lXbPjWpQNkhq9js9Qqzx0vQq9bzdxJdH
+ xAbP+wRd5LDA8x4NYYtOAkTyNw+FCtGCR+ZRZxyzc0Zr0jiecFMJKL2p8uQFKKN2LmHC
+ GZx2LMzqoL1PvGxIQO6GJux1EMS/+wdQHdG0qzo0iXCXoT0VcZzCi37IF4ia2cjJ+WWX
+ rU0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnqpM68tcEvw+60gcLgjtEhbrHZBYpAxdM68LgbJUHpxxXDunJx15pVCDRlNCjhZSO4F3jDbpXmZDRWYNp7LjL6PVCdQ==
-X-Gm-Message-State: AOJu0YwKFgdqB7UcQTOvHXutCbO4UnswFAmyn4cfhhkVojgsOKZFSi4C
- Or8tchhUI+OszaqyT4ZNg1FmcK9gc9d0PmSCVLe8dLfobFAN3pvODkly+lBA6rO1NxrMgHTVLOi
- Ty8fBo0fy+jcx4KdJEWqFSV2T2uen+H95jMXDJz5S+LJMs6TRC7xyks5J/wgZ7ekd/eqOtHVWJG
- k=
-X-Received: by 2002:a05:6512:308c:b0:52b:c262:99b3 with SMTP id
- 2adb3069b0e04-52ca6e56389mr8571238e87.11.1718714040140; 
- Tue, 18 Jun 2024 05:34:00 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG6Mf0G/vW9bk2rnjOQNL31RoNQ/JHRCCVfNgsGrkxojHaXTv8I8jpxQZcxUos+zpYk8pcL7w==
-X-Received: by 2002:a05:6512:308c:b0:52b:c262:99b3 with SMTP id
- 2adb3069b0e04-52ca6e56389mr8571219e87.11.1718714039729; 
- Tue, 18 Jun 2024 05:33:59 -0700 (PDT)
-Received: from [192.168.123.126]
- (ip-178-202-041-025.um47.pools.vodafone-ip.de. [178.202.41.25])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36075104c50sm13917998f8f.108.2024.06.18.05.33.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Jun 2024 05:33:59 -0700 (PDT)
-Message-ID: <30db2e7f-86f4-472e-9661-c50e32e400ca@canonical.com>
-Date: Tue, 18 Jun 2024 14:33:57 +0200
+ AJvYcCXxEuTuoCcf0cS3xuAGtM8rXRTz/PnEsnBro6CivzO6fEuUqRr+6Jyr3faNb1Ouw5SNeWnB62y9CiyNKS5gcEdG48VGfA==
+X-Gm-Message-State: AOJu0Yzpd2iQzthYvDA3cAV8cQoXuVOwg/H3QDGgVoMGpcbh9SKfJ0pW
+ srO8aYLvSg+xgMmc9g2JdGKX88lGtE5qrQfkm+v9OyadKCsdNqfoTmQpA069VlWI64bv50igYkH
+ J2AgE686OUn3q+2ZWoylQpwOnnzf8cCQnNopP
+X-Google-Smtp-Source: AGHT+IEUrOHQPZavuKX3Aia+jjvOJvZQhcXrXv4vUfh0MBf0/q2DfCiH/TiuAME8jYc//ksd+Rh/E4VboGICajDw/Vc=
+X-Received: by 2002:ad4:4e68:0:b0:6b0:8fab:d8db with SMTP id
+ 6a1803df08f44-6b2afcb1a1amr122326626d6.27.1718714621316; Tue, 18 Jun 2024
+ 05:43:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] spl: correct link to FIT specification
-To: Marek Vasut <marex@denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Suniel Mahesh <sunil@amarulasolutions.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
 References: <20240618063230.24478-1-heinrich.schuchardt@canonical.com>
- <30fc3a75-ee32-440a-9730-57dd5883919f@denx.de>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <30fc3a75-ee32-440a-9730-57dd5883919f@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240618063230.24478-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 18 Jun 2024 06:43:30 -0600
+Message-ID: <CAFLszTioe8E9VPTViyOv-3OPmksj-hgWS=6xJYiq+B0dLfYgXQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] spl: correct link to FIT specification
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, 
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,41 +87,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18.06.24 13:54, Marek Vasut wrote:
-> On 6/18/24 8:32 AM, Heinrich Schuchardt wrote:
->> Replace the invalid link to the FIT file format specification.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->> SPL is tightly size constrained.
->>
->> Shouldn't we remove the message with the link which is only of interest
->> to developers.
->> ---
->>   common/spl/spl_fit.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
->> index 988125be008..2a097f4464c 100644
->> --- a/common/spl/spl_fit.c
->> +++ b/common/spl/spl_fit.c
->> @@ -587,7 +587,7 @@ __weak void *spl_load_simple_fit_fix_load(const 
->> void *fit)
->>   static void warn_deprecated(const char *msg)
->>   {
->>       printf("DEPRECATED: %s\n", msg);
->> -    printf("\tSee doc/uImage.FIT/source_file_format.txt\n");
->> +    printf("\tSee https://fitspec.osfw.foundation/\n");
-> 
-> Why not fix the link to local documentation in the source tree instead ?
-> 
-> I would much prefer that than random links to random websites .
+Hi Heinrich,
 
-The internal page is going away, cf.
+On Tue, 18 Jun 2024 at 00:32, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Replace the invalid link to the FIT file format specification.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> SPL is tightly size constrained.
+>
+> Shouldn't we remove the message with the link which is only of interest
+> to developers.
+> ---
+>  common/spl/spl_fit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-[RFC 1/1] doc: Remove FIT documentation that is elsewhere
-https://lore.kernel.org/u-boot/20240617202041.3740154-2-sam.povilus@amd.com/
+I believe we wanted to use the internal U-Boot link, which can include
+the external docs using some Sphinx magic[1]
 
-Best regards
+>
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index 988125be008..2a097f4464c 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -587,7 +587,7 @@ __weak void *spl_load_simple_fit_fix_load(const void *fit)
+>  static void warn_deprecated(const char *msg)
+>  {
+>         printf("DEPRECATED: %s\n", msg);
+> -       printf("\tSee doc/uImage.FIT/source_file_format.txt\n");
+> +       printf("\tSee https://fitspec.osfw.foundation/\n");
+>  }
+>
+>  static int spl_fit_upload_fpga(struct spl_fit_info *ctx, int node,
+> --
+> 2.43.0
+>
 
-Heinrich
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/cover/20240604195256.1820285-1-sam.povilus@amd.com/
