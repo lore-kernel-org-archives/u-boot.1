@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E35B8C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B79EC27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:35:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80104882EF;
+	by phobos.denx.de (Postfix) with ESMTP id EDFEC88365;
 	Tue, 18 Jun 2024 17:34:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RX3KCE73";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pFqIUBGj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74C8F883BB; Tue, 18 Jun 2024 17:34:49 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id DA78A8819D; Tue, 18 Jun 2024 17:34:49 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D6B98834B
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:34:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC967882EF
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:34:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5849261A02;
+ by dfw.source.kernel.org (Postfix) with ESMTP id A7133617DF;
+ Tue, 18 Jun 2024 15:34:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C22FC3277B;
  Tue, 18 Jun 2024 15:34:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26E43C3277B;
- Tue, 18 Jun 2024 15:34:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718724885;
- bh=MPlblwN3eISBv5Uf6HhRVKiDEPr8Q8Kkp+s/+WnyXMI=;
+ s=k20201202; t=1718724886;
+ bh=J5BnbFVc9JNZak57au9RJy1uTBZfIa/8FQ148kuVOj8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=RX3KCE73f4fo8wYkEltQYzw8Nj0eN2PUHbC39RVzzXsQxt/kLYfqNxJMKmHLkqfYW
- uLyy6HrURhyR/9UrJZLaD8/LrUnP6mMln1+PdTWVxWfIgDf4l/v6msPBhA6fwHbqR9
- lDtJTOPvVXCqTF+m4eHXuPHmBRRQO0YCyWJfTBl+TIUbKD9JAI4ctVtvhfWo44tVyf
- x89X1+oZip10vAQEMpHdP2T//34q80zGafTdgAnPMcUUe4CqkDbRTixusDwESL0p1h
- ybBREv51zxOuH9UlDsiJgsQpTb7HchlNFlrEz4oMGnoMt+Wt/i6YB//wh7FjkB/HK3
- HHqRVzt6bcVRg==
+ b=pFqIUBGjF7kLASoaEsj9JqdXtOAeBSdC+Syopc076qIkDsny+LvrDC5a0e3LK/SZw
+ sS9lZe1tAbHjM92U3eBpuqFVr0hS9aaI2cbrmRjGG7u2JctSZzQyTIhrb9XJDv2dQT
+ yl9I75mrIXMC+4NvyqX7Jn6pMopi2lzm4aFyI7IyJpM4sHUqxkmeZ9ngQAYrBh8yN1
+ WcucAln/tjI7j/zJFrLTM8sctWYCkkJHLCT3YpnPTifiHb6vukt62uYd0qWx/QQv7p
+ 5tHIxLLBfvZtJGWiNq8aoN9tJ3YH66ouJh6eBgUwlRk5ptDFjHsUNn9SzOdg1DEjCg
+ eSKKg+RNVHhFQ==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-marvell 01/16] arm: mvebu: turris_omnia: Disable ext4
- write support in defconfig
-Date: Tue, 18 Jun 2024 17:34:24 +0200
-Message-ID: <20240618153439.9518-2-kabel@kernel.org>
+Subject: [PATCH u-boot-marvell 02/16] ddr: marvell: a38x: debug: return from
+ ddr3_tip_print_log() early if we won't print anything
+Date: Tue, 18 Jun 2024 17:34:25 +0200
+Message-ID: <20240618153439.9518-3-kabel@kernel.org>
 X-Mailer: git-send-email 2.44.2
 In-Reply-To: <20240618153439.9518-1-kabel@kernel.org>
 References: <20240618153439.9518-1-kabel@kernel.org>
@@ -70,28 +69,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Turris Omnia defconfig is nearing image size limit. Disable ext4 write
-support to reserve space for more important stuff.
+Return from ddr3_tip_print_log() early if we won't print anything
+anyway.
 
-This reduces the size of the KWB image by ~19 KiB.
-
-If in the future U-Boot supports compressing itself and decompressing
-on load, we may enable this again.
+This way the compiler can optimize away the VALIDATE_IF_ACTIVE() calls
+in the for-loop, so if the SILENT_LIB macro is defined, no code is
+generated for the rest of the function, which saves some space.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- configs/turris_omnia_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/ddr/marvell/a38x/ddr3_debug.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-index 225a76f993..d5699782d7 100644
---- a/configs/turris_omnia_defconfig
-+++ b/configs/turris_omnia_defconfig
-@@ -124,4 +124,3 @@ CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_WDT=y
- CONFIG_WDT_ORION=y
--CONFIG_EXT4_WRITE=y
+diff --git a/drivers/ddr/marvell/a38x/ddr3_debug.c b/drivers/ddr/marvell/a38x/ddr3_debug.c
+index 9e499cfb99..0374a84387 100644
+--- a/drivers/ddr/marvell/a38x/ddr3_debug.c
++++ b/drivers/ddr/marvell/a38x/ddr3_debug.c
+@@ -399,6 +399,15 @@ int ddr3_tip_print_log(u32 dev_num, u32 mem_addr)
+ 	}
+ #endif /* DDR_VIEWER_TOOL */
+ 
++	/* return early if we won't print anything anyway */
++	if (
++#if defined(SILENT_LIB)
++	    1 ||
++#endif
++	    debug_training < DEBUG_LEVEL_INFO) {
++		return MV_OK;
++	}
++
+ 	for (if_id = 0; if_id <= MAX_INTERFACE_NUM - 1; if_id++) {
+ 		VALIDATE_IF_ACTIVE(tm->if_act_mask, if_id);
+ 
 -- 
 2.44.2
 
