@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB962C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:37:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 831B8C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 15:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3D8788445;
-	Tue, 18 Jun 2024 17:35:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 539A988366;
+	Tue, 18 Jun 2024 17:35:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VD7URzq0";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TGWmv8gS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AC1A8841E; Tue, 18 Jun 2024 17:35:12 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 5ABED88366; Tue, 18 Jun 2024 17:35:22 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FE17884BA
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:35:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72620884BF
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 17:35:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 688BA6199A;
- Tue, 18 Jun 2024 15:35:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D04AC4AF49;
- Tue, 18 Jun 2024 15:35:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718724906;
- bh=AFCZh/WI0Wi3TrjxkAvDtz65+Zwz9W8qgyvuTIF0sRU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VD7URzq0BEhoVvG1eSdLHEmDBwlGspK4gRHiw5XZMvTM+9Zv1MoNLzT84bRWne+t7
- 3r/CTusiYJnJ4srJsFz/dUm15UL52h9Hj14jkidVMkpIxeb1UcuuVL8egZ8R/PMHr5
- 6FHsr+j14KgWaUcy3Ges9X3tOLhPDo2fGe4SZRKNLN/0qVyi5asYKMFfk04EPwGTJl
- yvGMQyzt/KrUovD8pDockStclDeeKblkrjQ/xAm1kQZQ2GMiJ1L0l3HwDgAS6EoC3x
- e7Vs+zihytYYSiosLAcH8RMWtRmqFR3AoC2avdpfcSxRh85A4oXQqorkgmysN/Wydv
- VxHsHqYUPPoow==
-From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-To: Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de,
-	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-marvell 16/16] arm: mvebu: turris_omnia: Support old
- DDR3 training
-Date: Tue, 18 Jun 2024 17:34:39 +0200
-Message-ID: <20240618153439.9518-17-kabel@kernel.org>
-X-Mailer: git-send-email 2.44.2
-In-Reply-To: <20240618153439.9518-1-kabel@kernel.org>
-References: <20240618153439.9518-1-kabel@kernel.org>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718724913; x=1719329713; i=xypron.glpk@gmx.de;
+ bh=FwqM7UEoIxbF5nq2uy/gukoTJYGJupmAI9IWJh15haE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=TGWmv8gSTi1zpOEH1lXtC1eqCpvswpvTPhs/2n3OMPFZieh3zg6H99U9C0WtyUtf
+ Ioxj5f8yi7HBA8UF5S4xvJCYZSC5K3XEuEkT8RmYkreeVM6i0JUcO3x63FjBs+Jrm
+ dyQ8XgOFlOT0CKVgZN8movwqRIkU0+pNb8pg0TpYaIWpFTDAVf2KMKFtx+FvEtRpv
+ tmLVKSenOjNkgLNkDAwXM9fpBvAHB7TObnH9ba315ly4Xr9i7e5R6Evi1t+WZZkbe
+ +0j8zFfhcRV8+bbvkhobTMLF/fC6qVDIbRAK5c15xFS9hU5GoZaHlgsyaf6mpXGLL
+ wm21C7uMWAkkLvOKFw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MVvPJ-1ru3ee0mm5-00UQOa; Tue, 18
+ Jun 2024 17:35:13 +0200
+Message-ID: <c1c66103-9d68-48ca-a542-1d0abbfdb634@gmx.de>
+Date: Tue, 18 Jun 2024 17:35:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] doc: describe UEFI measured boot
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
+References: <20240618152314.10140-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240618152314.10140-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:hsGZxMfq24SeiuGKIPp1r7qiMWyRsKBbt97Dz9xA8v3nl9BBH8e
+ pK8LOOogshjRiQc7sbcoCmMiKCc3R2crNp6zUt+plRdkGwaS5iQO/Sz3Lk97tnsSnYcshjF
+ Pq6Tebg8S11za59v0IwE5T8uChKuZiJY12/+SDEUoNLkU2+EauFnTee/uAGLuzkJGKON8Un
+ WdP1DfczUZfhw12fOtrnQ==
+UI-OutboundReport: notjunk:1;M01:P0:26BYGgGhYG8=;q/Qauyby8EcVpWk/oYD+04yR3pT
+ HkL18+R9rt1AcWYtCpPEG7ov1F8VSYmH5d2vlv1L7b3cnHLLs4xkNfYTn6FhrUhcoC1m9Vc+q
+ GmsqlQdbtqO1iYpghIMajsvBUkCx2NdjcE9D8WLPHeu6iZuxIneka/7pOVnfA7ZGGwKrdwCDn
+ TYm5tk0UMpeDtstb9RXO7cSKf64NycASydEcDPAb6NawEb09QLr3kd3Gj/MaQEKkXSyMqQO9b
+ jnuqzULq7oK8kVGI+Y27QgI496yFeGT7b/U/sQmE4v2bbw3+lQR6MAMjriSUTpYzIgrB7W1Nk
+ mnV48GWGlQSqkhfGx8IigTaX8K4XKucLPPZSxuDFMYRic84xwqFXw61ciptmx4oCLrEhTLhUL
+ ql2o+rPJai+3shfBrNxUUN1Wst+Qm8PANcx1qyiQotozgvIXuG5ydKvo9l2BKUr397F6e2TGx
+ HxfGLSuhgwelVrO2WB8BT5nJDOIlxUfsrG7wS/CzD6aqf0g89Dv8J8IvlLNlf7uvUd7DwG8Cm
+ btYN0lzC21GkJ/eKujh+wKkpjQevsri7ay5TTRgpKAau2genxAsZEO2Ky5zcppJZG07KgRIu0
+ H/vbjY9rf9y5uHZe0lOVeb11zwWY5qsys8bq3LXOHRS+my4v60bA+ND8s6//d+luWOi6ARZ4n
+ uQRtQZ8nOHFzXeyCvMTLCxgKVmD11EuraEHzDXYkx2s1kvq7zr2HO6t/MD5noi1Y+nh0vKXvI
+ Tld6dZNZmUkxaB2WaSa2bRpRnLb4maRWtTJqVbyP9xRLRTm14dDbD+bLTTZ7IHdumEO31b8m5
+ CTDkSMROo/WtgC0wSPWeox1RCSCHcmCNn+p/0rvztJJR4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,212 +90,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support old DDR3 training code on Turris Omnia, selectable via EEPROM
-field.
+On 18.06.24 17:23, Ilias Apalodimas wrote:
+> We currently only describe the process to enable measured boot using
+> bootm. Describe the UEFI requirements as well which predate bootm.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Users experiencing DDR3 initialization failures or random crashes of the
-operating system due to incorrect DDR3 configuration can select the old
-DDR3 training implementation to fix those issues by setting the EEPROM
-field "Use old DDR training":
-  eeprom update "Use old DDR training" 1
+Please, rebase on 00cac7456125 ("doc: describe UEFI measured boot")
 
-Signed-off-by: Marek Behún <kabel@kernel.org>
----
- arch/arm/mach-mvebu/Kconfig                   |  1 +
- board/CZ.NIC/turris_omnia/Makefile            |  1 +
- board/CZ.NIC/turris_omnia/eeprom.c            | 37 ++++++++++-
- board/CZ.NIC/turris_omnia/old_ddr3_training.c | 63 +++++++++++++++++++
- board/CZ.NIC/turris_omnia/turris_omnia.c      | 18 +++++-
- 5 files changed, 117 insertions(+), 3 deletions(-)
- create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
+Best regards
 
-diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-index e377e8a48a..4a8328760e 100644
---- a/arch/arm/mach-mvebu/Kconfig
-+++ b/arch/arm/mach-mvebu/Kconfig
-@@ -149,6 +149,7 @@ config TARGET_TURRIS_OMNIA
- 	select SPL_SYS_MALLOC_SIMPLE
- 	select SYS_I2C_MVTWSI
- 	select ATSHA204A
-+	select ARMADA_38X_SUPPORT_OLD_DDR3_TRAINING
- 
- config TARGET_TURRIS_MOX
- 	bool "Support CZ.NIC's Turris Mox / RIPE Atlas Probe"
-diff --git a/board/CZ.NIC/turris_omnia/Makefile b/board/CZ.NIC/turris_omnia/Makefile
-index 216e11958a..d1ef5cb860 100644
---- a/board/CZ.NIC/turris_omnia/Makefile
-+++ b/board/CZ.NIC/turris_omnia/Makefile
-@@ -4,3 +4,4 @@
- 
- obj-y	:= turris_omnia.o ../turris_atsha_otp.o ../turris_common.o
- obj-$(CONFIG_CMD_EEPROM_LAYOUT)	+= eeprom.o
-+obj-$(CONFIG_SPL_BUILD)		+= old_ddr3_training.o
-diff --git a/board/CZ.NIC/turris_omnia/eeprom.c b/board/CZ.NIC/turris_omnia/eeprom.c
-index 32572481ce..6e2640ad2a 100644
---- a/board/CZ.NIC/turris_omnia/eeprom.c
-+++ b/board/CZ.NIC/turris_omnia/eeprom.c
-@@ -91,13 +91,48 @@ static int eeprom_field_update_ddr_speed(struct eeprom_field *field,
- 	return 0;
- }
- 
-+static void eeprom_field_print_bool(const struct eeprom_field *field)
-+{
-+	unsigned char val = field->buf[0];
-+
-+	printf(PRINT_FIELD_SEGMENT, field->name);
-+
-+	if (val == 0xff)
-+		puts("(empty, defaults to 0)\n");
-+	else
-+		printf("%u\n", val);
-+}
-+
-+static int eeprom_field_update_bool(struct eeprom_field *field, char *value)
-+{
-+	unsigned char *val = &field->buf[0];
-+
-+	if (value[0] == '\0') {
-+		/* setting default value */
-+		*val = 0xff;
-+
-+		return 0;
-+	}
-+
-+	if (value[1] != '\0')
-+		return -1;
-+
-+	if (value[0] == '1' || value[0] == '0')
-+		*val = value[0] - '0';
-+	else
-+		return -1;
-+
-+	return 0;
-+}
-+
- static struct eeprom_field omnia_layout[] = {
- 	_DEF_FIELD("Magic constant", 4, bin),
- 	_DEF_FIELD("RAM size in GB", 4, ramsz),
- 	_DEF_FIELD("Wi-Fi Region", 4, region),
- 	_DEF_FIELD("CRC32 checksum", 4, bin),
- 	_DEF_FIELD("DDR speed", 5, ddr_speed),
--	_DEF_FIELD("Extended reserved fields", 39, reserved),
-+	_DEF_FIELD("Use old DDR training", 1, bool),
-+	_DEF_FIELD("Extended reserved fields", 38, reserved),
- 	_DEF_FIELD("Extended CRC32 checksum", 4, bin),
- };
- 
-diff --git a/board/CZ.NIC/turris_omnia/old_ddr3_training.c b/board/CZ.NIC/turris_omnia/old_ddr3_training.c
-new file mode 100644
-index 0000000000..cdb3487ad9
---- /dev/null
-+++ b/board/CZ.NIC/turris_omnia/old_ddr3_training.c
-@@ -0,0 +1,63 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Marek Behún <kabel@kernel.org>
-+ */
-+
-+#include <asm/arch/soc.h>
-+#include <asm/io.h>
-+
-+#include "../drivers/ddr/marvell/a38x/old/ddr3_init.h"
-+
-+static struct hws_topology_map board_topology_map_1g = {
-+	0x1, /* active interfaces */
-+	/* cs_mask, mirror, dqs_swap, ck_swap X PUPs */
-+	{ { { {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0} },
-+	    SPEED_BIN_DDR_1600K,	/* speed_bin */
-+	    BUS_WIDTH_16,		/* memory_width */
-+	    MEM_4G,			/* mem_size */
-+	    DDR_FREQ_800,		/* frequency */
-+	    0, 0,			/* cas_l cas_wl */
-+	    HWS_TEMP_NORMAL,		/* temperature */
-+	    HWS_TIM_2T} },              /* timing (force 2t) */
-+	5,				/* Num Of Bus Per Interface*/
-+	BUS_MASK_32BIT			/* Busses mask */
-+};
-+
-+static struct hws_topology_map board_topology_map_2g = {
-+	0x1, /* active interfaces */
-+	/* cs_mask, mirror, dqs_swap, ck_swap X PUPs */
-+	{ { { {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0},
-+	      {0x1, 0, 0, 0} },
-+	    SPEED_BIN_DDR_1600K,	/* speed_bin */
-+	    BUS_WIDTH_16,		/* memory_width */
-+	    MEM_8G,			/* mem_size */
-+	    DDR_FREQ_800,		/* frequency */
-+	    0, 0,			/* cas_l cas_wl */
-+	    HWS_TEMP_NORMAL,		/* temperature */
-+	    HWS_TIM_2T} },              /* timing (force 2t) */
-+	5,				/* Num Of Bus Per Interface*/
-+	BUS_MASK_32BIT			/* Busses mask */
-+};
-+
-+/* defined in turris_omnia.c */
-+extern int omnia_get_ram_size_gb(void);
-+
-+struct hws_topology_map *ddr3_get_topology_map(void)
-+{
-+	if (omnia_get_ram_size_gb() == 2)
-+		return &board_topology_map_2g;
-+	else
-+		return &board_topology_map_1g;
-+}
-+
-+__weak u32 sys_env_get_topology_update_info(struct topology_update_info *tui)
-+{
-+	return MV_OK;
-+}
-diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-index 544784e860..2f29d26edf 100644
---- a/board/CZ.NIC/turris_omnia/turris_omnia.c
-+++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-@@ -432,7 +432,8 @@ struct omnia_eeprom {
- 
- 	/* second part (only considered if crc2 is not all-ones) */
- 	char ddr_speed[5];
--	u8 reserved[39];
-+	u8 old_ddr_training;
-+	u8 reserved[38];
- 	u32 crc2;
- };
- 
-@@ -496,7 +497,7 @@ static bool omnia_read_eeprom(struct omnia_eeprom *oep)
- 	return true;
- }
- 
--static int omnia_get_ram_size_gb(void)
-+int omnia_get_ram_size_gb(void)
- {
- 	static int ram_size;
- 	struct omnia_eeprom oep;
-@@ -521,6 +522,19 @@ static int omnia_get_ram_size_gb(void)
- 	return ram_size;
- }
- 
-+bool board_use_old_ddr3_training(void)
-+{
-+	struct omnia_eeprom oep;
-+
-+	if (!omnia_read_eeprom(&oep))
-+		return false;
-+
-+	if (!is_omnia_eeprom_second_part_valid(&oep))
-+		return false;
-+
-+	return oep.old_ddr_training == 1;
-+}
-+
- static const char *omnia_get_ddr_speed(void)
- {
- 	struct omnia_eeprom oep;
--- 
-2.44.2
+Heinrich
+
+> ---
+> Changes since v2:
+> - add all bootX commands in the description instead of just bootm
+> - Remove and extra _ from the header
+> Changes since v1:
+> - fixed remarks from Heinrich on titling and DTB measured PCR
+>   doc/usage/measured_boot.rst | 31 +++++++++++++++++++++++++++----
+>   1 file changed, 27 insertions(+), 4 deletions(-)
+>
+> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+> index 9691904a9d8a..d31cb05226cd 100644
+> --- a/doc/usage/measured_boot.rst
+> +++ b/doc/usage/measured_boot.rst
+> @@ -7,19 +7,42 @@ U-Boot can perform a measured boot, the process of has=
+hing various components
+>   of the boot process, extending the results in the TPM and logging the
+>   component's measurement in memory for the operating system to consume.
+>
+> +The functionality is available when booting via the EFI subsystem or 'b=
+ootm'
+> +command.
+> +
+> +UEFI measured boot
+> +------------------
+> +The EFI subsystem implements the `EFI TCG protocol
+> +<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specificat=
+ion/>`_
+> +and the `TCG PC Client Specific Platform Firmware Profile Specification
+> +<https://trustedcomputinggroup.org/resource/pc-client-specific-platform=
+-firmware-profile-specification/>`_
+> +which defines the binaries to be measured and the corresponding PCRs to=
+ be used.
+> +
+> +Requirements
+> +~~~~~~~~~~~~
+> +* A hardware TPM 2.0 supported by an enabled U-Boot driver
+> +* CONFIG_EFI_TCG2_PROTOCOL=3Dy
+> +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=3Dy
+> +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=3Dy will measure the lo=
+aded DTB in PCR 1
+> +
+> +Measured legacy boot with bootX command
+> +---------------------------------------
+> +The commands booti, bootm, and bootz can be used for measured boot
+> +using the legacy entry point of the Linux kernel.
+> +
+>   By default, U-Boot will measure the operating system (linux) image, th=
+e
+>   initrd image, and the "bootargs" environment variable. By enabling
+> -CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
+e.
+> +CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
+e in PCR1.
+>
+>   The operating system typically would verify that the hashes found in t=
+he
+>   TPM PCRs match the contents of the event log. This can further be chec=
+ked
+>   against the hash results of previous boots.
+>
+>   Requirements
+> -------------
+> +~~~~~~~~~~~~
+>
+> -* A hardware TPM 2.0 supported by the U-Boot drivers
+> -* CONFIG_TPM=3Dy
+> +* A hardware TPM 2.0 supported by an enabled U-Boot driver
+> +* CONFIG_TPMv2=3Dy
+>   * CONFIG_MEASURED_BOOT=3Dy
+>   * Device-tree configuration of the TPM device to specify the memory ar=
+ea
+>     for event logging. The TPM device node must either contain a phandle=
+ to
+> --
+> 2.45.2
+>
 
