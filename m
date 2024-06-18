@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15EBDC2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9B5C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E80488402;
-	Tue, 18 Jun 2024 16:53:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5962F88263;
+	Tue, 18 Jun 2024 16:58:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="si7s/A1I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HPULProc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0595088363; Tue, 18 Jun 2024 16:53:29 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id A51CB88204; Tue, 18 Jun 2024 16:58:41 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A3DD883DE
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:53:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9AD98838E
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:58:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6f96445cfaeso3069965a34.2
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:53:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-57d0699fd02so34301a12.0
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 07:58:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718722405; x=1719327205; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cD1Y4htAhyYsiFTmSD/s9pFmhnXLb6NVR+O/3XEQwZM=;
- b=si7s/A1IJBMSZAIohqihsBPs/6AbGW7waUMl6LbT8CySrOYzMC8F6zAuKfkFM7yWx9
- 7P4yYTM7IWfIjB1a0QltsQa6bsQ9QXIwzFxEAQGVabSYkZwDYr8Ycykw1iBoNUil2kGn
- oZlCGin9huGoDxCEqOuJUMUd6PPCxE0EPKDrY=
+ d=linaro.org; s=google; t=1718722718; x=1719327518; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o1K8xV0vnW2i9kLt8X+1mRCYkaqXwgzJer4r36WS63A=;
+ b=HPULProcgzsTO/5q+mTx4ltQ52LaICKXxi5+aZCsWA2C7clcSvlF7o5yc9fF8BL2ud
+ zBMVF+mA7ypAiRoJoKyOqiwbzTARyPnxhkiN0Xy25G8bWU8LNE78HcByxYrWruAx0ThX
+ jI1Uneh8WDfvBPSg56UL8H3khv1vd2I5QbNH4RQ4dL9w0L9hnQyc5KfGE8/iwqwLzWxq
+ 9CUcAfQftOwFO1xUcKawHRa4JSO4dYPp1TBAGK2g5f43e301JkJ+nw441Mu+7oFbse9d
+ +zkh70I7w7T1ES0Fy4pnskgYEbnTgSKMBHX89fCRyBMgER05GMSCzNR6pZIjXX/JeGxR
+ Pl7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718722405; x=1719327205;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cD1Y4htAhyYsiFTmSD/s9pFmhnXLb6NVR+O/3XEQwZM=;
- b=sNjU+1u+JnU/8U6say98IkxGXgHCMUELfb4o9kmXg3T7MoespIl/67TQVjND08hHBQ
- 11m5YlpD1lM9qAw0MJ2Jj8u3T/DKEsGWmLP0lAt4KumNxiGlToIxPjpT2XVvScsFgTWs
- Mx/wQ4jNTjIc1e+mqGZSZ4hKLLpQ5YZ4MAX15pVNhdpLpQo50NW7PAKSwF47Bw22ipke
- zGAmVmu4YLl7uWgj5LronE5m7Dro5kAQpReyvWS9Z9LDUmsy5UWGqQd12GdXMrwwIuMz
- E1j7siyvdo8LYd+VkFCMC9bjXo4R2YvuHo8Tu3MXjQFSTj1cWxVdf2r7U4WKoDH2Ox13
- Wr7g==
-X-Gm-Message-State: AOJu0Yxy5J9T1CUtPBMW7HNSTwEBMdCphUpon7JwPVBLS5TjLoOcSnmH
- Cr7Thqgg8HxTxg+dbe8ZsKXEDpAhitR3xAO2SwljJVvS7f95HrwjLojAsdPQaf/3nacZzqqDxHA
- 7R1uzjw==
-X-Google-Smtp-Source: AGHT+IHAUP4uiDyn7QhFhCZo5PF2WZ7x8Vta2uJ49IQR5Wt/+HuOg65LTQc8DiZg53RviH64TLLzpA==
-X-Received: by 2002:a05:6870:e2d4:b0:258:3159:f489 with SMTP id
- 586e51a60fabf-25c94986cc8mr12449fac.9.1718722404852; 
- Tue, 18 Jun 2024 07:53:24 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567a94b7besm3202888fac.6.2024.06.18.07.53.24
+ d=1e100.net; s=20230601; t=1718722718; x=1719327518;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o1K8xV0vnW2i9kLt8X+1mRCYkaqXwgzJer4r36WS63A=;
+ b=v/Q5HSX2/SJwlJqnjpcPayLzZ5Pv8Tua3lvd+D0+t6wZKUyweBwKapE9JcGjyPax8S
+ sUuGH5OYZMObg3BXAvUbVh/sTsu3Srj0+ukB1ZUsuNzorqOV0rNIahvV6HqbVGOpsnzZ
+ O/sfeu7PeGb1FJYpRl05nTPE+GaxeopftG8LWNGr0VlFJf+a6LTM5cVCouPRTLeeCWn6
+ 2rSVSUkLXngDs3z/ISR9faXwJNz4xVZc/pZSiAexx5I+NnH7X7ihmqc6f/4IIZSN5ch8
+ y3ym3jAd4jYmy/Bi7NEk3GLpmQkTgIDNQsYMAm5nG8Dixpk2z5a1IgWCHzEE6yU8a3t1
+ auzA==
+X-Gm-Message-State: AOJu0YwPXfAo4pncNb3oobZ2RIbQzHUu92BdD+noICFStAJltV2PEUKh
+ rq1kJBN8D/74H+VeRUDB/w0QeDShlePF8zunnCugFqyVulxqbMRls4uuuDo7tJgVg3ZEJGFMkAN
+ Ml+FFsA==
+X-Google-Smtp-Source: AGHT+IE3fx/+PKtuS8U+qqqQ5ZAwocZ0QuQ9Dfk9ABFBNKvnl9OCP/xpOi4q0kphI7e/uInxH6LjlA==
+X-Received: by 2002:a50:9ea9:0:b0:57d:669:caf2 with SMTP id
+ 4fb4d7f45d1cf-57d0669cbd3mr137734a12.25.1718722718061; 
+ Tue, 18 Jun 2024 07:58:38 -0700 (PDT)
+Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::52af])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57cb72da824sm7831523a12.29.2024.06.18.07.58.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 07:53:24 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de, Nitin Yadav <n-yadav@ti.com>, 
- Dhruva Gole <d-gole@ti.com>
-In-Reply-To: <20240607-am62q-wip-v4-0-3900cdf25721@ti.com>
-References: <20240607-am62q-wip-v4-0-3900cdf25721@ti.com>
-Subject: Re: [PATCH v4 0/2] introduce basic support for TI's am625-lp-sk
-Message-Id: <171872240403.3307069.8251972450938475277.b4-ty@konsulko.com>
-Date: Tue, 18 Jun 2024 08:53:24 -0600
+ Tue, 18 Jun 2024 07:58:37 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] eth: asix88179: reset during probe
+Date: Tue, 18 Jun 2024 16:57:57 +0200
+Message-ID: <20240618145759.3296876-2-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,21 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 07 Jun 2024 17:06:11 -0500, Bryan Brattlof wrote:
+In some cases (consistently in my case with an embedded board) the
+ethernet controller will time out on the first init but always succeed
+after reset.
 
-> The am625-lp-sk is a variant of the am625-sk showcasing the low-power
-> features of the am625 SoC Family. Because it's essentially a board and
-> package spin of the am625-sk I've inherited the am625 configuration and
-> overridden what was needed.
-> 
-> This is a new spin of Nitin's original work which has been updated
-> significantly since October 2023
-> 
-> [...]
+Let's reset the controller during probe so we always start with it in a
+known state, and don't have wait for the first asix_wait_link() to
+time out.
 
-Applied to u-boot/next, thanks!
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+I see this behaviour consistently across three Qualcomm platforms that use this
+controller.
+---
+ drivers/usb/eth/asix88179.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
+diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
+index 7bfd285b3aa4..a0aa5c25e428 100644
+--- a/drivers/usb/eth/asix88179.c
++++ b/drivers/usb/eth/asix88179.c
+@@ -628,8 +628,14 @@ static int ax88179_eth_probe(struct udevice *dev)
+ 
+ 	usb_dev = priv->ueth.pusb_dev;
+ 	priv->maxpacketsize = usb_dev->epmaxpacketout[AX_ENDPOINT_OUT];
+ 
++	ret = asix_basic_reset(&priv->ueth, priv);
++	if (ret) {
++		printf("Failed to reset ethernet device\n");
++		return ret;
++	}
++
+ 	/* Get the MAC address */
+ 	ret = asix_read_mac(&priv->ueth, pdata->enetaddr);
+ 	if (ret)
+ 		return ret;
 -- 
-Tom
-
+2.45.0
 
