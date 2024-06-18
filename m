@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D315EC2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 17:02:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278D3C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 17:26:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47A7388263;
-	Tue, 18 Jun 2024 19:02:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 65410882D4;
+	Tue, 18 Jun 2024 19:26:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mSTlwGxe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xYPRBSba";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF1FB882F9; Tue, 18 Jun 2024 19:02:31 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 81644882F9; Tue, 18 Jun 2024 19:26:22 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F136D87FFB
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 19:02:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53EE48812C
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 19:26:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718730145; x=1719334945; i=xypron.glpk@gmx.de;
- bh=GOsMOZBPME0Cr97Jo27+GuMJ3LrcGs+kY60ZjZBmm4g=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=mSTlwGxeNH1dBvr6Ub8czyBRRZKlmWH7V1siBC3q/+DQ01e0JUAFG+a4/kZH1+mg
- vHQcFpi2uGKt94jAp2B/kiFZoMEB8JSyyH85t84cRMzw6lLuhM66KlEi6JV/r4gi/
- /Q7MrM6yn2frdJHY5+zCuoKzYsjM/rJ1MfBb00eAPlDk/J6hnCrUWuHpOz//oaNev
- XI5BQVrzFmMisiaZe8lSo/Zixu5xldbGHSr51BOksriuA/rBpsFkMtr2jpVDhoacl
- pOmuSJi8FCwfNON1w+cBU5BB9ImP1dAze6zBSMHGk2oeMJK6MGcOMx8+P2o4d1/8p
- x6FoQ3xxobXItoo8XA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.41.25]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MAOJV-1sDFUo2oA7-004gn3; Tue, 18
- Jun 2024 19:02:25 +0200
-Date: Tue, 18 Jun 2024 19:02:24 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Eddie James <eajames@linux.ibm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: make 'booti -h' not crash the board
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240618145213.3284922-1-caleb.connolly@linaro.org>
-References: <20240618145213.3284922-1-caleb.connolly@linaro.org>
-Message-ID: <A266762D-8A1C-4D1D-8410-B483817A0515@gmx.de>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1f862f7c7edso37872235ad.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 10:26:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718731579; x=1719336379; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=e1ae6aAODTUheD5xSnAvT1mUBtURlEYXcJi4pA8nLvs=;
+ b=xYPRBSban5V0vkLxsYQAFqiDaj44Cf48QlFqqosQ3Nw3IkCwlPNWH60BfPHdZo1wrt
+ 56Bmy66MzCJluA/in1/jj8II/FfA177EHYuCTROQWOvqPHI9Nr4wV4E1/3ra35gR2TI7
+ zL6SHJSTLfNqpkGAJWVBf0n5cOjwJ7tMM++zcEpwygfv5kZokBxpQVydccf/TCLTSeLq
+ e/DjchD8InAejZmYeM8VgGFaNwHFnj2cpGfw9BiASMLUCnG29nYBlDTJ0dfZtPlMv9AM
+ 62Nu1lMwJT/X+7OkdeExGBp9HNSNjvNdltw0hWjkaXYgDDvaL9MP4EGmp6a07x/3IhJ3
+ pfjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718731579; x=1719336379;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e1ae6aAODTUheD5xSnAvT1mUBtURlEYXcJi4pA8nLvs=;
+ b=tMtt7pGA1/gQGeZciQs9qOItYNcRvd+cGoMsB8UxyUbnSovR1YmkQJx1EM8xIKJ8GT
+ ZJLcKxkSY/IGo/FPgIWU0AnnCevPI7lKZZmzo8iiiBMVAiu56S9qGE7USrbcqGW3K9LP
+ cayuSB32CwUuMKPKWEGy2NhcmTdjkT1lCMgEc04VlxTJz53Fk/wHgum8TD6lqPHls+mS
+ mSFRlagQd0kve8W79RUbWKZA9bRs0GlQPzPhChnxb2/ad3zZfounm4r1B9In5grU6bfp
+ X5XuLbWsZIGzkO8t9yUFvmf7M+VuoRkz7ndDJ/zc/eNei7fvaa5IL+zu667PpSRY2ebV
+ FU8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUtcFbPtFdKo3cDOZjolSxcxv5GpOT0Lg0Mwoz9tllOqOabiK8SA99JHCH6yNFbaBaB9H5a1IN28RlXc1DWbsIulf95KQ==
+X-Gm-Message-State: AOJu0YzLxIBhd1KTJvfHnM7RF1zDgEz/+zMuJsdfN6Cx+BBP9YBislTm
+ St9HLUafGv+g7EpRB9abOZMc5NmEtz8lpoIAnuPrAt8ClurSv8znNXq/7mBkgwSIbSJbhtBU0dW
+ 7QYpjRB1v7rkP+qHjKB8ROnkUKY1WbVvhnzvEsB9MxzWHDS6rsUoKwQ==
+X-Google-Smtp-Source: AGHT+IGAOjKdFSS4Ie0PWVuXS24xX+89UCyb6XuizbO5bYezXvJ3rqY5/0pEP5qYSRCMHa7fh3FSvBtxrzhBGuAkzJQ=
+X-Received: by 2002:a17:902:eb49:b0:1f7:1ba5:85ff with SMTP id
+ d9443c01a7336-1f9aa462935mr2347645ad.57.1718731578678; Tue, 18 Jun 2024
+ 10:26:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:7pVj+Km4zYuLhFBXwP0pn6ssJ8byTDyG+4kFbHSLwp2vnjOjkD4
- f8i3hZ0Zv1fa1ik4aYEQiLvThqvFFXqpEAoyr6NefFduqBro03vLA3wOV1DysxvlOacISBo
- TCtPl+/3N2TwiGAWAftkM5pc53GtTZ75TTc31ekHAgmoFCUER4fY8Gwqxipcp0fCq86fCwO
- vxUL6QXe3jeTllE5UO1NA==
-UI-OutboundReport: notjunk:1;M01:P0:SIfAGZAIPuo=;KFrfIraNqR9l3J9FKcTTwlbb1WW
- mHX2Ultcjqi29MmJwKgs9C9IWbc99AqMUc1NYyr6LntDkJzEP34X64jpO9R5YlDLrDW70v+v4
- qDJhl6lWwI6iLUm6ZmQETG85cmcJZtYcZQaU67gP6QZEBfM0qaVJhVzf0yZCzuna/FZFqq0nO
- +DTIKUPHl/WeMkl7Fgyvdz2qHxCgi9f4WkqsSNSz+bts4CvL/m47U4asKhm7cPH+cTKEO1G6v
- gBe85XO0MzYS3MUci+GSfxCPrmiKRUfhuYDKQQMc/g7VBH/pfLQGSAuSxXcZiKH4Q14zXs4qv
- 02owAqXF5SZgjO8rNRO+vgK7eqlbeb8vLg6z34JIg0NIcyHnJ3SBtLF/LtHWIr+w6DJWehsqv
- rSZ7/af2JUE6hCJIJwH2S4ztllsc3/P6PeBln441rcusmzrJitEuaJ9QpAP9/ZF4nLR3ZWeTt
- Dd3mHrjuKZEkeI8ayLPvxiyeQ+pTcWhQ0nNo/v5sMA29Agdznvj3xwqaVFuxN2ZaQcePx3Yy9
- jhdLVJUGomTvH8H1ioEiAWWfZJJEBSaQPyyEwBKRZyc2IpFFVGXac0S/V7SDc4Kf7x1qJ/nq8
- J4IYKBAefYCDbVR44jAX9PYEriqJjTtiH8XgSBmpGf5xELUfitBRKC29C6sgY2ykUDimqBvKo
- R/yl+yFzeCkqAU//KJ/ezdhzZ5lE549KXaROarQfac1V+isDq3JsXWBNmc6sqq9jso/4ZZ2JM
- tF6G1LuBI6wMFIWBuzZfRF4boJK3OW6rCndOx62BiMWgfEmHXJHk6QUy2j4oYGVdzTDEQcoTT
- IEwT7DqG95F5dDG0k0cojB6qd1b09ZAtLQEeyypvHAl0U=
+References: <20240618154952.12314-1-ilias.apalodimas@linaro.org>
+ <86iky6i4b9.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <86iky6i4b9.fsf@udb0321960.dhcp.ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 18 Jun 2024 20:25:41 +0300
+Message-ID: <CAC_iWjJVSJCokmQsDVJphAVWX=vfwrDGmj=cqyiGHCvkPPbcug@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: adjust config options for capsule updates
+To: Jon Humphreys <jhumphreysti@gmail.com>
+Cc: xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,69 +88,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jon,
 
-
-Am 18=2E Juni 2024 16:51:56 MESZ schrieb Caleb Connolly <caleb=2Econnolly@=
-linaro=2Eorg>:
->Check the result of hextoul() when parsing the first argument to booti,
->and add specific handling for "-h" to print usage rather than causing a
->null pointer exception=2E
+On Tue, 18 Jun 2024 at 19:49, Jon Humphreys <jhumphreysti@gmail.com> wrote:
 >
->Fixes: 5db28905c952 ("cmd: Split 'bootz' and 'booti' out from 'bootm'")
->Signed-off-by: Caleb Connolly <caleb=2Econnolly@linaro=2Eorg>
->---
-> cmd/booti=2Ec | 11 ++++++++++-
-> 1 file changed, 10 insertions(+), 1 deletion(-)
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
 >
->diff --git a/cmd/booti=2Ec b/cmd/booti=2Ec
->index 62b19e834366=2E=2Ec4029a84e7a7 100644
->--- a/cmd/booti=2Ec
->+++ b/cmd/booti=2Ec
->@@ -31,8 +31,9 @@ static int booti_start(struct bootm_info *bmi)
-> 	ulong dest_end;
-> 	unsigned long comp_len;
-> 	unsigned long decomp_len;
-> 	int ctype;
->+	char *endp;
->=20
-> 	ret =3D bootm_run_states(bmi, BOOTM_STATE_START);
->=20
-> 	/* Setup Linux kernel Image entry point */
->@@ -40,9 +41,14 @@ static int booti_start(struct bootm_info *bmi)
-> 		ld =3D image_load_addr;
-> 		debug("*  kernel: default image load address =3D 0x%08lx\n",
-> 				image_load_addr);
-> 	} else {
->-		ld =3D hextoul(bmi->addr_img, NULL);
->+		ld =3D hextoul(bmi->addr_img, &endp);
->+		if (*endp !=3D '\0') {
->+			printf("## Invalid kernel image address: %s\n",
->+			       bmi->addr_img);
->+			return CMD_RET_USAGE;
->+		}
-> 		debug("*  kernel: cmdline image address =3D 0x%08lx\n", ld);
-> 	}
->=20
-> 	temp =3D map_sysmem(ld, 0);
->@@ -108,8 +114,11 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int ar=
-gc, char *const argv[])
->=20
-> 	/* Consume 'booti' */
-> 	argc--; argv++;
->=20
->+	if (argc && strcmp(argv[0], "-h") =3D=3D 0)
->+		return CMD_RET_USAGE;
+> > EFI_IGNORE_OSINDICATIONS is used to ignore OsIndications if setvariable
+> > at runtime is not supported and allow the platform to perform capsule
+> > updates on disk. With the recent changes boards can conditionally enable
+> > setvariable at runtime using EFI_RT_VOLATILE_STORE.
+> >
+> > So let's make the options depend on each other and clarify their
+> > functionality. When EFI_RT_VOLATILE_STORE, setvariable at runtime is
+> > supported and EFI_IGNORE_OSINDICATIONS, which also breaks the EFI spec, is
+> > not needed anymore.
+>
+> Hi Ilias,
+>
+> Is there a corresponding effort to update fwupdmgr to set OSIndications
+> (and set it correctly so the change persists a reboot)?
+>
 
-We have the help command which works on all commands=2E Please, avoid dupl=
-icating this functionality=2E
+We are not trying to fix anything atm, we probably will in the future.
 
-Best regards
+> Otherwise, fwupdmgr provided capsules will now get ignored for boards that
+> enable setvariable at runtime.
 
-Heinrich
+That goes beyond fwupd, EFI variable changes will be ignored in
+general unless you sync the file manually -- e.g. dd
+if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c
+of=/boot/efi/ubootefi.var skip=4 bs=1
+after every variable change. Unless you do that, enabling
+EFI_RT_VOLATILE_STORE makes little sense (and that's why it's not
+enabled by default).
+So, I prefer making EFI_IGNORE_OSINDICATIONS, which was a hack,
+mutually exclusive and start going in the right direction.
 
-
->+
-> 	bootm_init(&bmi);
-> 	if (argc)
-> 		bmi=2Eaddr_img =3D argv[0];
-> 	if (argc > 1)
+Regards
+/Ilias
+>
+> Jon
+>
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  lib/efi_loader/Kconfig | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index 430bb7f0f7dc..c84064de1366 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -220,6 +220,8 @@ config EFI_CAPSULE_ON_DISK
+> >  config EFI_IGNORE_OSINDICATIONS
+> >       bool "Ignore OsIndications for CapsuleUpdate on-disk"
+> >       depends on EFI_CAPSULE_ON_DISK
+> > +     depends on !EFI_RT_VOLATILE_STORE
+> > +     default y
+> >       help
+> >         There are boards where U-Boot does not support SetVariable at runtime.
+> >         Select this option if you want to use the capsule-on-disk feature
+> > --
+> > 2.45.2
