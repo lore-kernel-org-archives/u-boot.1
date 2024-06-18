@@ -4,135 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391D5C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E5B1C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 962D0881D6;
-	Tue, 18 Jun 2024 15:20:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A5828882BE;
+	Tue, 18 Jun 2024 15:26:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="RHKF4Cuu";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="csI1twWX";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="E1AXu13j";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Xg8M8mQQ";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="k8Y7WWJO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71BE2882ED; Tue, 18 Jun 2024 15:20:46 +0200 (CEST)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on20610.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2407::610])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B9E8E88422; Tue, 18 Jun 2024 08:03:25 +0200 (CEST)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B35E87FFB
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:20:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA58883C2
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 08:03:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OMDON+wbhMEmhUfBwNvVI9A8OnxcniCKfwSdXWNUpsiX2QypQY10CBXIpKtuU+Xi9/K2ZDVEKmGQGRki6+aVkT14ftrl7yEarJq+6cjxCICeUHarOQ3q9MSeksE4jD4imz+LH5U/iTE/g7I95ONYvIa8MdAz93FlnSqtDWeD2I7DgTWe1hSPc9CODP41HgrjX6yx3/rGe07ibTJHhGQ/cXk/XI2meuz4vuvp0pSrt8b4llMxTJuMibQPxKMkgW4agH8IEstYW764xreTLj28q6D9dQoirwQ0/yunvyDhCf6oo8fzenLnxHo1Aau2vyxdXnGtkXpk7SdZbxbFl6KHzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A4YuB+7I89obkRQmTi3foIrwW1Mx6KI9snTuZgRVJNg=;
- b=L9Q+E0Nhm/oy+ECYNm/FipAIFE5Fl6R9hM82c6ZdL3Wzyu6zWsimIiaArdrdcWoluK4GtZu3RZcxO+JOtr9X7whzVBYkLZhXor7hDsLwJmuHH9skYmBJlh9MKkhfiafwRz7a5fsEmcxBEL514fW9zahmeHSYZNZsTA9YNvkrjX8xSu5RFlmseO1JWnJ7vEiy7OKGRJhlVysHdrK6vf2AzptHHYrmEhPeRCTCp87JMVlJ5r46RSmVVzbugY3JjuX+TbZv0QQxLZC3VZFU1CK/lUkZKmMM34KsmNQUmkPUE92jP/tHmIKdfV0YKQ9S3mJqquKystHHNEd4uWtNODYI5g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A4YuB+7I89obkRQmTi3foIrwW1Mx6KI9snTuZgRVJNg=;
- b=RHKF4CuuUn3TDyI1woWakT6qBZAAq7XSFLL+jiF0WPHwFhNgnvOReqF1jC3ICaIJMtDjSljMQo5HNSj0dtxcQXThEjXrIWisGudZMOVs1iTAUofY/KsYGB1UVats3UQV1YSWBmPgJXeAY7pEkgwY1v4faSMBrUTJ9Z2gqGi++Gk=
-Received: from PH7P221CA0011.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:32a::25)
- by LV3PR12MB9236.namprd12.prod.outlook.com (2603:10b6:408:1a5::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.29; Tue, 18 Jun
- 2024 13:20:41 +0000
-Received: from SN1PEPF00036F43.namprd05.prod.outlook.com
- (2603:10b6:510:32a:cafe::7d) by PH7P221CA0011.outlook.office365.com
- (2603:10b6:510:32a::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.32 via Frontend
- Transport; Tue, 18 Jun 2024 13:20:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF00036F43.mail.protection.outlook.com (10.167.248.27) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7677.15 via Frontend Transport; Tue, 18 Jun 2024 13:20:40 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 18 Jun
- 2024 08:20:39 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: versal2: Remove UARTLITE from defconfig
-Date: Tue, 18 Jun 2024 15:20:35 +0200
-Message-ID: <c9b66495bbdef3fe94467ae43c50a74adaaeacae.1718716833.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ddiss@suse.de
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E70D722733;
+ Tue, 18 Jun 2024 06:03:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1718690603; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5dRdd8L/QYZXP9sTDT3+f4Q3yfiiwvfCoF57q2OXq7c=;
+ b=csI1twWXDoZAh7JQ6i1MeUkqsR7+Wqyw3xkw7hdOjNI26rtQDPonhat4XBg+spmcaaufna
+ sKu0aTBYywQxW+M32obkRLS1EH44USi2BMKb7N0dm2MynVZB7+EozNsDqVQuJPRi6U/cn8
+ Xm8O+bmdB3SF+imZRoEQI9VlzY71Xrw=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1718690603;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5dRdd8L/QYZXP9sTDT3+f4Q3yfiiwvfCoF57q2OXq7c=;
+ b=E1AXu13j6vrdpofRkqCK3d6ufPJN5fD4+2qyQBotqgJzVUka6iNVOpU/PfJKziN5aPxi/Q
+ bApC42boO1CyeDDQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1718690601; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5dRdd8L/QYZXP9sTDT3+f4Q3yfiiwvfCoF57q2OXq7c=;
+ b=Xg8M8mQQXkU976Tq4KhUXCcGQBIs8cvNj7e0ABDhxz5/DRASWtMOJo4qpVsvql7Pork9WV
+ 7qiSx/T1CH92ClxPirnftEcg8LOmCGomHcM9VVLOovGoS93qm0GeOoUgLFZSlOTbhPp7G+
+ dLnfuC9W6K4AF3TCkUd344d1s79hQuo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1718690601;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5dRdd8L/QYZXP9sTDT3+f4Q3yfiiwvfCoF57q2OXq7c=;
+ b=k8Y7WWJO8mJEiT1cxevs1TxFLqYEsnb8qXokgX3MAmDYh4C2BCOtfW26Vr1EldAsYKWWgy
+ cr+VEbh4D1dehADQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E7E5C13AA0;
+ Tue, 18 Jun 2024 06:03:18 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id uCf0JCYjcWZ2WAAAD6G6ig
+ (envelope-from <ddiss@suse.de>); Tue, 18 Jun 2024 06:03:18 +0000
+Date: Tue, 18 Jun 2024 16:03:08 +1000
+From: David Disseldorp <ddiss@suse.de>
+To: Alex Shumsky <alexthreed@gmail.com>
+Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>, Marek
+ =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>, Qu Wenruo <wqu@suse.com>, Tom Rini
+ <trini@konsulko.com>, linux-btrfs@vger.kernel.org
+Subject: Re: [PATCH] fs: btrfs: fix out of bounds write
+Message-ID: <20240618160308.5660ba6d.ddiss@suse.de>
+In-Reply-To: <20240617194947.1928008-1-alexthreed@gmail.com>
+References: <20240617194947.1928008-1-alexthreed@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=679; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=AKTFoifHpesD2zqIfgmdI6VRxG+GXKE5za80c5qMOe0=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrTCziUVbx7cM6uIcGQU6zWOeVLy47Je7I5j5hzfjul0t
- kaXXnjYEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACaizMQwz0Q9/9rqhOYmuQMW
- q1mUHrM2CPQnMcx3f3N25fGm47Gm28+nfrwjkdPE/WICAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F43:EE_|LV3PR12MB9236:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8dc90c7-bd6c-48da-9ab4-08dc8f99737c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230037|82310400023|1800799021|36860700010|376011; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RMP6h9takPSxuogxrO0RnhyLQ9C1yHicTIqqXT/xbdiYEW5jMIAmMApizuBr?=
- =?us-ascii?Q?voLwnkAM56nQf+nD0wW1F3clmoblsmvaAD5xnyvsYfILusQeD453bsK0AbeC?=
- =?us-ascii?Q?6HbN/i2D8lNvJEk+Dl1tvZHMxNCfaO6qGBZZpVhPSSv9ShuNocK6eREk6e9F?=
- =?us-ascii?Q?OmsxOBFWzDFgMs9wMKx10wzVykM5l7xnb1bhoUIvvQAyol8exkk9atMpxg5i?=
- =?us-ascii?Q?+ipy1+jOqdv2Qb/ql+07q0WUOxHi6Kthl7h9tZjyCpb33XWMULTeyA1V1gs9?=
- =?us-ascii?Q?2suC/XQ3nHYAZWKzIJAstNBVhEe+kqa0gsS6WkXMDIj3KiJ2GwLcimw3Erlu?=
- =?us-ascii?Q?B1iqPwPjAYda9SAJvQdp8ccV61R8CRwr9PdlvCpTmbL97roY8qFk7W5uFQsg?=
- =?us-ascii?Q?/5Ijq45M1o6ubvjltaxZTPfhQJrBTnN2TevwvArAjiX72QJXlP4Yb+nzRRQ1?=
- =?us-ascii?Q?IAy4OoyHj0FioCTMgmJ79IT0/S2+MEn3FGxN8ptlR9XIGN0baWkA+BNKjlRT?=
- =?us-ascii?Q?+dkHrsg5TM6O3/u8FNcqWdeK24jV4fzLbrikD/kL0c0jaizUl1RjAZRpTd2i?=
- =?us-ascii?Q?7BmEjeN/qX2HwCa45EwkrzM8i91kpLXaRn+bnunD28vZ235WU54zR7oI5hbN?=
- =?us-ascii?Q?pa3/ThPc1rxNuSOs0X1U67wmlhmZyc3kVFWUVjJ+TUtDZAnWyCb5r6W/YNjQ?=
- =?us-ascii?Q?NVgy4xfT6eepYq2kYfektQj0bIKlN3yQw+NKpXl5086vSYLWmopU1kKkGKH9?=
- =?us-ascii?Q?1bCUuFeY/yvoaNAUIk30flmhP+seE3AUcLmQwzYiUuJCab5ayswjumBO99CK?=
- =?us-ascii?Q?kvXx3/d1TZxJXH6UUt97Qx4ibjYb/dh08sE+rHHHb2+F3Wg0MlClgG58rR+f?=
- =?us-ascii?Q?yC2x78EDNlEOQi/NZ6chivud30XRlZGK8JsBYqG60h3wPFmKNQsosH9mhp4c?=
- =?us-ascii?Q?9veOg0pU80r5oSfOfwI84n3Alnjs3gj+1hROM6XYXcNpKBo1Og6LsRxypk3C?=
- =?us-ascii?Q?QAoxyPwA1DUHA8Z6VY4pVgYFUQ/k106rotNIaoqc3vZdwp3DV5rNnIDy7iJz?=
- =?us-ascii?Q?anF9Y0/Vpup7Y9xMAphUcEu0I358fAXG6sz522cC3hKI0an0B5K8s6uf+TXH?=
- =?us-ascii?Q?7G4nNk9/uYE2042XqPvL+EVFnWyLUoGlWnBJnR+soyOOCnnfKCkZMkWWrgto?=
- =?us-ascii?Q?B430imNoJHRRJkIVX57rimgq0Q0MytR0n5gSqZyGGL4bDJc7v+yPtx4zrAUm?=
- =?us-ascii?Q?MKZAPnfSP8ssFmMphR5Ge5w4S8RBU8KM1z4psEn5yEfn2ti9iMHoiJlJ6Wi3?=
- =?us-ascii?Q?6e6T2aTAaRqPetBK612sS4Vmc2ATJTLN4M1qjmv6JIGbEj65Ri/FaLzC2NFi?=
- =?us-ascii?Q?vLYbw13PhgCPCRVtkCfVa4F1W5ZJr+w1rPnpy04aYLgSVxRFrQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230037)(82310400023)(1800799021)(36860700010)(376011); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2024 13:20:40.9300 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8dc90c7-bd6c-48da-9ab4-08dc8f99737c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00036F43.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9236
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-3.29 / 50.00]; BAYES_HAM(-2.99)[99.97%];
+ MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+];
+ FREEMAIL_TO(0.00)[gmail.com]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_TLS_ALL(0.00)[];
+ MISSING_XM_UA(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
+ RCVD_COUNT_TWO(0.00)[2]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ RCPT_COUNT_SEVEN(0.00)[7];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
+X-Mailman-Approved-At: Tue, 18 Jun 2024 15:26:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,27 +124,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UARTLITE can be used as console but none is testing it that's why removing
-it not to pop up there.
+On Mon, 17 Jun 2024 22:49:47 +0300, Alex Shumsky wrote:
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+> Fix btrfs_read/read_and_truncate_page write out of bounds of destination
+> buffer. Old behavior break bootstd malloc'd buffers of exact file size.
+> Previously this OOB write have not been noticed because distroboot usually
+> read files into huge static memory areas.
+> 
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> ---
+> 
+>  fs/btrfs/inode.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index 4691612eda..b51f578b49 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -640,7 +640,7 @@ static int read_and_truncate_page(struct btrfs_path *path,
+>  	extent_type = btrfs_file_extent_type(leaf, fi);
+>  	if (extent_type == BTRFS_FILE_EXTENT_INLINE) {
+>  		ret = btrfs_read_extent_inline(path, fi, buf);
+> -		memcpy(dest, buf + page_off, min(page_len, ret));
+> +		memcpy(dest, buf + page_off, min(min(page_len, ret), len));
 
- configs/amd_versal2_virt_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+This looks (still) broken for the compressed inline extent error paths,
+where ret=-errno .
 
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 2d611f84cd93..b071a480b517 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -119,7 +119,6 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
--CONFIG_XILINX_UARTLITE=y
- CONFIG_SOC_DEVICE=y
- CONFIG_SOC_AMD_VERSAL2=y
- CONFIG_SPI=y
--- 
-2.43.0
-
+nit: please prefix your patch subject with "uboot" so that casual
+linux-btrfs readers like me don't get confused by matching kernel file
+paths.
