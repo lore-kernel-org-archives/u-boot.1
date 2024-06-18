@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F21EC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 20:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B71E4C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 20:23:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58E2B8834B;
-	Tue, 18 Jun 2024 22:21:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBE04882DB;
+	Tue, 18 Jun 2024 22:23:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DwfEcTFl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i3xt9xpn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6AB68834B; Tue, 18 Jun 2024 22:21:29 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 878C8831A2; Tue, 18 Jun 2024 22:23:50 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C73E831A2
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 22:21:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 516FF882DB
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 22:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7005c84e525so294260a34.3
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 13:21:27 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5bb36de2171so3141548eaf.2
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 13:23:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718742086; x=1719346886; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9GgjRkQ8FA531FQ5vHRKy50rxud2bcyGMMp3PGDtcVg=;
- b=DwfEcTFlpk5+3xfzRKhEAchy7jQ6ocsomYLZwLBhnxSvwgNDtlbw6Tgje+wcFNGZoI
- b4+esqwYWiV94Xyt5wPzWFdjImQHA1cMc6MFokN+tECn5DIqVANYKt4+qxnIHnrJpi+P
- pgPrDcQbhq0d6cY/SbDegaOCAOsVdxfsDCYLk=
+ d=konsulko.com; s=google; t=1718742227; x=1719347027; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iClqt5kegRj4SBrJeo0SZFrXn010sXzhMSWyBk4DO7M=;
+ b=i3xt9xpnkFwfyiMrQtvO2FY8bDJAtgbzJfJi+9fEwXv1k0PjdVnvbnT6vRMbVsqZBD
+ PlwsDSSa+1UTslZxRM4wWpPvj1M5laqQ9RTJuObGX0Xh7Xr7lj/fGqX5Lu5tTcA7n2Fv
+ k5Zl0Q48hHJqKrxpUfOHcxs53ZEJraD/7HbFI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718742086; x=1719346886;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9GgjRkQ8FA531FQ5vHRKy50rxud2bcyGMMp3PGDtcVg=;
- b=vaNdC/jwXUZmbfjLouV9IS239tS2aFudyoQdFADQYMXxmhyMtxDSL++Ar9U86hs05f
- wO426+hs5LrkXSoksoTX0UaOgRrciFMRuMtxP4Sc4st4lUSgxYClF1LZuMrNhADyMvnl
- +7M58KS/CfgfPrUrZFnzo1WVjwsupED2J8KkD5fFPhEzp8XuJQDxgzArf2xyFg6NhEf+
- 3yse3QlrC+t0xEjG9iGnd2UuNhzzIAoqZo8T60FkScXIFQt+w2QQ7hhDwmWYMK5iSOF1
- RI08QRW+pCFG8BDmUgXYOVd7OyA/ezq5hVr0fGb6xT+3NR9sdF3oxvgD5XjBTxCd3hsl
- kHmA==
-X-Gm-Message-State: AOJu0YxjtOcUBtNdfi6yGV4kwx8PLJqf5BZqXBi+lr2JN4/EZL4mNcVW
- mE3qb2itLMh1hS8ObOGlNdMjliHo5LWCqZqz6TR6VFVLKwf7js/hhD195Ax4vvA=
-X-Google-Smtp-Source: AGHT+IHaclRUXbyz330O45x20J/DWHzKOfjmGjCuWyD0vEd49zRAdzeOi/5i5/TZW5RnCWAI0l5pjQ==
-X-Received: by 2002:a05:6830:6b45:b0:6f9:a19e:7b40 with SMTP id
- 46e09a7af769-70075f5172bmr756853a34.36.1718742086099; 
- Tue, 18 Jun 2024 13:21:26 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6fb5b1e2a56sm1962813a34.35.2024.06.18.13.21.25
+ d=1e100.net; s=20230601; t=1718742227; x=1719347027;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iClqt5kegRj4SBrJeo0SZFrXn010sXzhMSWyBk4DO7M=;
+ b=mZqF9hH3YaQKXbMex5Xbjx41e5mVyO1WU3jTwTGGecddtrHqmtt95LJ5YJVSnszyOV
+ 23eGal+PlHfKdB3F1OxGq7jSS++BV/V0+1pWd4h2gjLczjvPpMOLXHtZJzNP3e6SNdzT
+ YsJmeubulwzMk55H+mY7tduSp52xEWqVeC4yNdC61Rxwreqr7DBDb6JPw83maCdxAjhp
+ HPx3nXGYuS5tIO3m0orRcT8SQyh0xnwA+apMUg2+k9V6WbHhVmTK1x+96ZDxly0+DGXk
+ eNeuDx2Df69PLTHd3N08x4D/ePCFWb3wBhTxSuRQIEEMQRb7sTbxUGGXU4Ris34Zrm85
+ pDGg==
+X-Gm-Message-State: AOJu0Ywj4HQn4nrkfYaoV+wcYzY5Y4EYARtRWMvluv1oCoDUiMGWQXYz
+ 18DjlZm5ZaFizxtddb+r5jHBexRpLBB4n4+JpDmJ7S7vqfi8qe06UCoc6I8OjiJJcgJB9zzFkns
+ o3JomNw==
+X-Google-Smtp-Source: AGHT+IFlXj/UGOsSwtjHtfylHZeqGb/UfuQTmxx61Jj0aHHAdA6NswUsFiMyrIfU1kSxrsHQExRv8Q==
+X-Received: by 2002:a4a:8556:0:b0:5bb:672:404d with SMTP id
+ 006d021491bc7-5c1adc21617mr833313eaf.7.1718742227085; 
+ Tue, 18 Jun 2024 13:23:47 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net
+ (fixed-187-190-205-45.totalplay.net. [187.190.205.45])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5bd5f4960fasm1555865eaf.32.2024.06.18.13.23.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 13:21:25 -0700 (PDT)
-Date: Tue, 18 Jun 2024 14:21:23 -0600
+ Tue, 18 Jun 2024 13:23:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
-Message-ID: <20240618202123.GW68077@bill-the-cat>
-References: <cover.1718638104.git.jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Love Kumar <love.kumar@amd.com>
+Subject: [PATCH] test/py/tests: Update some network dependencies
+Date: Tue, 18 Jun 2024 14:23:43 -0600
+Message-Id: <20240618202343.3332529-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Xuc8S/DWSFZeFnH3"
-Content-Disposition: inline
-In-Reply-To: <cover.1718638104.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,97 +87,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On tests which require "tftpboot" we need to depend not on cmd_net but
+rather cmd_tftpboot. And on tests which require cmd_pxe we do not need
+to also depend on cmd_net as this should be handled already via Kconfig
+logic.
 
---Xuc8S/DWSFZeFnH3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ test/py/tests/test_net.py      | 5 ++---
+ test/py/tests/test_net_boot.py | 5 +----
+ 2 files changed, 3 insertions(+), 7 deletions(-)
 
-On Mon, Jun 17, 2024 at 05:32:52PM +0200, Jerome Forissier wrote:
+diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+index 038a473b2394..ad143c19b0d2 100644
+--- a/test/py/tests/test_net.py
++++ b/test/py/tests/test_net.py
+@@ -254,7 +254,7 @@ def test_net_network_discovery(u_boot_console):
+     assert 'Set gatewayip6:' in output
+     assert '0000:0000:0000:0000:0000:0000:0000:0000' not in output
+ 
+-@pytest.mark.buildconfigspec('cmd_net')
++@pytest.mark.buildconfigspec('cmd_tftpboot')
+ def test_net_tftpboot(u_boot_console):
+     """Test the tftpboot command.
+ 
+@@ -335,7 +335,6 @@ def test_net_nfs(u_boot_console):
+     output = u_boot_console.run_command('crc32 %x $filesize' % addr)
+     assert expected_crc in output
+ 
+-@pytest.mark.buildconfigspec("cmd_net")
+ @pytest.mark.buildconfigspec("cmd_pxe")
+ def test_net_pxe_get(u_boot_console):
+     """Test the pxe get command.
+@@ -391,7 +390,7 @@ def test_net_pxe_get(u_boot_console):
+     assert "Config file 'default.boot' found" in output
+ 
+ @pytest.mark.buildconfigspec("cmd_crc32")
+-@pytest.mark.buildconfigspec("cmd_net")
++@pytest.mark.buildconfigspec("cmd_tftpboot")
+ @pytest.mark.buildconfigspec("cmd_tftpput")
+ def test_net_tftpput(u_boot_console):
+     """Test the tftpput command.
+diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
+index 4729ccf07feb..63309fe82e12 100644
+--- a/test/py/tests/test_net_boot.py
++++ b/test/py/tests/test_net_boot.py
+@@ -156,7 +156,7 @@ def setup_tftpboot_boot(u_boot_console):
+ 
+     return addr, timeout, pattern, chk_type, chk_pattern, config
+ 
+-@pytest.mark.buildconfigspec('cmd_net')
++@pytest.mark.buildconfigspec('cmd_tftpboot')
+ def test_net_tftpboot_boot(u_boot_console):
+     """Boot the loaded image
+ 
+@@ -209,7 +209,6 @@ def setup_pxe_boot(u_boot_console):
+ 
+     return f, bootfile
+ 
+-@pytest.mark.buildconfigspec('cmd_net')
+ @pytest.mark.buildconfigspec('cmd_pxe')
+ def test_net_pxe_boot(u_boot_console):
+     """Test the pxe boot command.
+@@ -261,7 +260,6 @@ def test_net_pxe_boot(u_boot_console):
+             u_boot_console.drain_console()
+             u_boot_console.cleanup_spawn()
+ 
+-@pytest.mark.buildconfigspec('cmd_net')
+ @pytest.mark.buildconfigspec('cmd_pxe')
+ def test_net_pxe_boot_config(u_boot_console):
+     """Test the pxe boot command by selecting different combination of labels
+@@ -341,7 +339,6 @@ def test_net_pxe_boot_config(u_boot_console):
+             u_boot_console.drain_console()
+             u_boot_console.cleanup_spawn()
+ 
+-@pytest.mark.buildconfigspec('cmd_net')
+ @pytest.mark.buildconfigspec('cmd_pxe')
+ def test_net_pxe_boot_config_invalid(u_boot_console):
+     """Test the pxe boot command by selecting invalid label
+-- 
+2.34.1
 
-> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
-/IP
-> stack [2] [3] as an alternative to the current implementation in net/,
-> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> reasons for doing so are:
-> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
-> has some additional lwIP and Mbed TLS patches to do so. With that it
-> becomes possible to fetch and launch a distro installer such as Debian
-> etc. using a secure, authenticated connection directly from the U-Boot
-> shell. Several use cases:
->   * Authentication: prevent MITM attack (third party replacing the
-> binary with a different one)
->   * Confidentiality: prevent third parties from grabbing a copy of the
-> image as it is being downloaded
->   * Allow connection to servers that do not support plain HTTP anymore
-> (this is becoming more and more common on the Internet these days)
-> - Possibly benefit from additional features implemented in lwIP
-> - Less code to maintain in U-Boot
-
-So, on a Pi 3 (rpi_3_defconfig) I see this now (and it passes normally):
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-___________________________________ test_efi_helloworld_net _______________=
-____________________
-test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
-    assert expected_text in output
-E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 20000=
-0'
------------------------------------- Captured stdout call -----------------=
---------------------
-U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
-Using smsc95xx_eth device
-TFTP from server 192.168.1.10; our IP address is 192.168.1.100
-Filename 'EFI/arm64/helloworld.efi'.
-Load address: 0x200000
-Loading:
-Bytes transferred =3D 4528 (11b0 hex)
-U-Boot> U-Boot> crc32 200000 $filesize
-CRC32 for 00200000 ... 002011af =3D=3D> 2b466005
-U-Boot> U-Boot> bootefi 200000
-No UEFI binary known at 200000
-U-Boot>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=20
-If I disable that test, it moves on to failing the same exact way for
-grub. If I disable the grub test too. After that, oh, a bunch of other
-tests get skipped because CMD_NET and similar aren't enabled now, and
-the tests are wrong. I'll post that as another patch by itself. After
-correcting for that, we're seemingly noticeably slower as I need to
-increase the timeout for tftp'ing my 83MiB FIT image I use for kernel
-testing. We no longer have the estimated speed message, so I can't as
-easily say how much slower it is. After increasing the timeout, the
-kernel boot test does work.
-
-I can note that normally it takes ~18ms to get a dhcp reply, but with
-lwIP it's now 132ms, and previously the kernel loaded at 2.7MiB/s
-(which, not great) but if that has a similar level of slowdown, could
-well explain it.
-
---=20
-Tom
-
---Xuc8S/DWSFZeFnH3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZx7EAACgkQFHw5/5Y0
-tywTTAwAn85J7LXMk6PXtvGrDrLwJRB2PYxwEMsLKXOxnMEHLHVKnP0pHS2JJLAo
-ZifOR9XPodXo1+SD2gkIekqlXUXWmc8rbX6qzb1oius7JYvbYZBbNcjcP0L3MMqk
-n//Y7Y9xZ/N46YkMzRFjPOV1xEhAcHbMQiYdcnuIgjJguLl8PnUWELeP7tV6FX/q
-Y15zwglmpxj+iQusXy/SaSQXMYHWD4NA9brOWLV7PVkc7LX3+35FwBAz5CGfyJgQ
-XocY1I5Ced74ovTygPxQRr62G2kI5SbK6+ramDeMx1G82jmtjsP+RUCm7g6bi/l9
-7nt6CHvJJa2fCQkLJnuyw+TnKD8d4VDRpErVzAsJdzJv5S2k2VmdNGhS2zRRTY5n
-QX7e2J5l2mTGJWcwLLVK1pGnQjDa5yzm4P9yXGAZFNZzOktf62xMo5sXC78kuarN
-4IJM3rQKalUA0WE59uv6gX2tGxIcJr5uRBQaqg9JrZBsWWTi7m9hq1ulDEOmEnDM
-sqElpWaS
-=iU7c
------END PGP SIGNATURE-----
-
---Xuc8S/DWSFZeFnH3--
