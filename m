@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E717AC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 19:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F21EC27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 20:21:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26AE588335;
-	Tue, 18 Jun 2024 21:51:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 58E2B8834B;
+	Tue, 18 Jun 2024 22:21:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="HRiaYVpq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DwfEcTFl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 670BB88180; Tue, 18 Jun 2024 21:51:45 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id E6AB68834B; Tue, 18 Jun 2024 22:21:29 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 922838824C
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 21:51:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C73E831A2
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 22:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a6ef64b092cso731983266b.1
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 12:51:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7005c84e525so294260a34.3
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 13:21:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1718740302; x=1719345102; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oPu7OVIE5UTrgmZ/4H+nHGMNMBnGVCDvwmo2Iy0OKFk=;
- b=HRiaYVpqFXrmeWk5aysyUoHzkHSD2Zfr7pdyD9fSnLLxg7bFwsY68bmBRqBNGypx5N
- ISWSE6W6jsyXcpuulfXByBVrCjECVC/0jPK1wMCB8aCJnrq/Se+WT+PghV3TfHqii0Rz
- 7y0xKlfXmN6ZFxuUhOBDPD6TS6t55e3Lg2LYZOHkxLektj2NjwIOeFJRer9bgglG/33X
- +cfWMQ5x+uXhyI8hxru3muzPISdOZKzpgNtCNOFRLVpCBoUAq61wtsrhgnPigYTHzr9l
- luF7smaB4z74ZDwLEN4cUwyCpa6RZ3YXdbXo8V14CZps2OYR+MDq6XV2EcfHGdbHjNRI
- rilA==
+ d=konsulko.com; s=google; t=1718742086; x=1719346886; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9GgjRkQ8FA531FQ5vHRKy50rxud2bcyGMMp3PGDtcVg=;
+ b=DwfEcTFlpk5+3xfzRKhEAchy7jQ6ocsomYLZwLBhnxSvwgNDtlbw6Tgje+wcFNGZoI
+ b4+esqwYWiV94Xyt5wPzWFdjImQHA1cMc6MFokN+tECn5DIqVANYKt4+qxnIHnrJpi+P
+ pgPrDcQbhq0d6cY/SbDegaOCAOsVdxfsDCYLk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718740302; x=1719345102;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oPu7OVIE5UTrgmZ/4H+nHGMNMBnGVCDvwmo2Iy0OKFk=;
- b=TGNDhbcwnx8n+Kd2JcbJutASfxLgfRf/h78etxVcnmXcFbmivX4qVfcOAvLUthUGz0
- nOW0aGqk9zN0kknvsS+LaH0oVJLAafMGZOAc3/mH/xCMnPFYPtZ2hqdl/otR8zMCJwoL
- vhqx11jPsi5mHLvKnLhiuI+V5f7779LW8etpyaXqvbPXCk0JGSX2TAO59VsTwXqYfMNf
- pfxwgtahdDLASTUyz6twO2ieva3mYvyEJG3aHC4q06O3JYD69gX+dHDyjZqlYBOgWIi6
- e6IAE/xud5rMoXoJFS9Ce2p5XBQwH7nGymcWeKwlQCxA+ttWIGOfEOncem0z42c4vIiI
- NmfQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXw0cFCrwF2NffL4HCii95enQ4kiChAF19gygxSbQm3qK/ZeT+4hkXh3JUKBuJXaeS+HZezjt3wzpArvgFMz4teES1gA==
-X-Gm-Message-State: AOJu0YxTB3Gxb7+JJSbmMYEM5X49ufdPSzYTVXFvcKL+uzNw6LLpng5w
- b4qQktuZLNqKLBnF6mdKPiELgTJPchv08jlBZmpL3hZko6r6fyM4NkhP8TR00EeBvF3tFdCXYjd
- zzspxG76eeATLrl2wesL5bH3sA2HUhHIIeiGE5w==
-X-Google-Smtp-Source: AGHT+IFI4VAbpJL9htyu8YZwSXgab5JCtWwSvmrm0mEqYn55CvQ+BtnqRh8drw689ugeu6+TXbxjAfx6ZusbnGhQJRw=
-X-Received: by 2002:a17:906:1289:b0:a6f:e1a:3ee0 with SMTP id
- a640c23a62f3a-a6fab62f455mr27411766b.30.1718740302051; Tue, 18 Jun 2024
- 12:51:42 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718742086; x=1719346886;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9GgjRkQ8FA531FQ5vHRKy50rxud2bcyGMMp3PGDtcVg=;
+ b=vaNdC/jwXUZmbfjLouV9IS239tS2aFudyoQdFADQYMXxmhyMtxDSL++Ar9U86hs05f
+ wO426+hs5LrkXSoksoTX0UaOgRrciFMRuMtxP4Sc4st4lUSgxYClF1LZuMrNhADyMvnl
+ +7M58KS/CfgfPrUrZFnzo1WVjwsupED2J8KkD5fFPhEzp8XuJQDxgzArf2xyFg6NhEf+
+ 3yse3QlrC+t0xEjG9iGnd2UuNhzzIAoqZo8T60FkScXIFQt+w2QQ7hhDwmWYMK5iSOF1
+ RI08QRW+pCFG8BDmUgXYOVd7OyA/ezq5hVr0fGb6xT+3NR9sdF3oxvgD5XjBTxCd3hsl
+ kHmA==
+X-Gm-Message-State: AOJu0YxjtOcUBtNdfi6yGV4kwx8PLJqf5BZqXBi+lr2JN4/EZL4mNcVW
+ mE3qb2itLMh1hS8ObOGlNdMjliHo5LWCqZqz6TR6VFVLKwf7js/hhD195Ax4vvA=
+X-Google-Smtp-Source: AGHT+IHaclRUXbyz330O45x20J/DWHzKOfjmGjCuWyD0vEd49zRAdzeOi/5i5/TZW5RnCWAI0l5pjQ==
+X-Received: by 2002:a05:6830:6b45:b0:6f9:a19e:7b40 with SMTP id
+ 46e09a7af769-70075f5172bmr756853a34.36.1718742086099; 
+ Tue, 18 Jun 2024 13:21:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6fb5b1e2a56sm1962813a34.35.2024.06.18.13.21.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 13:21:25 -0700 (PDT)
+Date: Tue, 18 Jun 2024 14:21:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
+Message-ID: <20240618202123.GW68077@bill-the-cat>
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-References: <20240617191416.1351790-1-tharvey@gateworks.com>
- <20240617191416.1351790-5-tharvey@gateworks.com>
- <626fe70e-ff61-46f6-84de-e9b8486ac5ed@gmx.de>
- <CAJ+vNU3rtrGkL3gQwEZW0x=ivSPqv-jxsdUX59bCcYRofe7Wxw@mail.gmail.com>
- <CAJ+vNU2KH8NgFkjWt5ZPKMauPjhLXwd-oNfGFy-+QHO6MWKARA@mail.gmail.com>
- <CAJ+vNU02a0VASJzAghDpSWm6XuOseQj9T70eRn0bD9deiHo6dA@mail.gmail.com>
- <CAOMZO5Cs6xWs-PvMq1u91n1Jmt8BDsZFMUwK8hCx1LWN3VPSzA@mail.gmail.com>
-In-Reply-To: <CAOMZO5Cs6xWs-PvMq1u91n1Jmt8BDsZFMUwK8hCx1LWN3VPSzA@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 18 Jun 2024 12:51:30 -0700
-Message-ID: <CAJ+vNU0yoe8kNw6BmqpB_NjEoZE=efFGihTz=rQ5OOs5ZJNF3Q@mail.gmail.com>
-Subject: Re: [PATCH v6 4/4] test: cmd: fdt: fix chosen test for DM_RNG
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>, 
- Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>, 
- Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Chris Morgan <macromorgan@hotmail.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Xuc8S/DWSFZeFnH3"
+Content-Disposition: inline
+In-Reply-To: <cover.1718638104.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,29 +90,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 18, 2024 at 12:35=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
- wrote:
->
-> Hi Tim,
->
-> On Tue, Jun 18, 2024 at 4:30=E2=80=AFPM Tim Harvey <tharvey@gateworks.com=
-> wrote:
->
-> > This seems like something from test/dm/wdt.c and unrelated to my patchs=
-et.
->
-> Do you have this recent commit applied?
->
-> https://github.com/u-boot/u-boot/commit/1fd754cebd38d7456caa82bef15225cbe=
-77960ec
 
-Hi Fabio,
+--Xuc8S/DWSFZeFnH3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Nope - I'm 1 day behind :)
+On Mon, Jun 17, 2024 at 05:32:52PM +0200, Jerome Forissier wrote:
 
-That would appear to be the issue... I'll rebase on todays
-origin/master and try again.
+> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
+/IP
+> stack [2] [3] as an alternative to the current implementation in net/,
+> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> reasons for doing so are:
+> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
+> has some additional lwIP and Mbed TLS patches to do so. With that it
+> becomes possible to fetch and launch a distro installer such as Debian
+> etc. using a secure, authenticated connection directly from the U-Boot
+> shell. Several use cases:
+>   * Authentication: prevent MITM attack (third party replacing the
+> binary with a different one)
+>   * Confidentiality: prevent third parties from grabbing a copy of the
+> image as it is being downloaded
+>   * Allow connection to servers that do not support plain HTTP anymore
+> (this is becoming more and more common on the Internet these days)
+> - Possibly benefit from additional features implemented in lwIP
+> - Less code to maintain in U-Boot
 
-Thanks,
+So, on a Pi 3 (rpi_3_defconfig) I see this now (and it passes normally):
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+___________________________________ test_efi_helloworld_net _______________=
+____________________
+test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
+    assert expected_text in output
+E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 20000=
+0'
+------------------------------------ Captured stdout call -----------------=
+--------------------
+U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
+Using smsc95xx_eth device
+TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+Filename 'EFI/arm64/helloworld.efi'.
+Load address: 0x200000
+Loading:
+Bytes transferred =3D 4528 (11b0 hex)
+U-Boot> U-Boot> crc32 200000 $filesize
+CRC32 for 00200000 ... 002011af =3D=3D> 2b466005
+U-Boot> U-Boot> bootefi 200000
+No UEFI binary known at 200000
+U-Boot>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=20
+If I disable that test, it moves on to failing the same exact way for
+grub. If I disable the grub test too. After that, oh, a bunch of other
+tests get skipped because CMD_NET and similar aren't enabled now, and
+the tests are wrong. I'll post that as another patch by itself. After
+correcting for that, we're seemingly noticeably slower as I need to
+increase the timeout for tftp'ing my 83MiB FIT image I use for kernel
+testing. We no longer have the estimated speed message, so I can't as
+easily say how much slower it is. After increasing the timeout, the
+kernel boot test does work.
 
-Tim
+I can note that normally it takes ~18ms to get a dhcp reply, but with
+lwIP it's now 132ms, and previously the kernel loaded at 2.7MiB/s
+(which, not great) but if that has a similar level of slowdown, could
+well explain it.
+
+--=20
+Tom
+
+--Xuc8S/DWSFZeFnH3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZx7EAACgkQFHw5/5Y0
+tywTTAwAn85J7LXMk6PXtvGrDrLwJRB2PYxwEMsLKXOxnMEHLHVKnP0pHS2JJLAo
+ZifOR9XPodXo1+SD2gkIekqlXUXWmc8rbX6qzb1oius7JYvbYZBbNcjcP0L3MMqk
+n//Y7Y9xZ/N46YkMzRFjPOV1xEhAcHbMQiYdcnuIgjJguLl8PnUWELeP7tV6FX/q
+Y15zwglmpxj+iQusXy/SaSQXMYHWD4NA9brOWLV7PVkc7LX3+35FwBAz5CGfyJgQ
+XocY1I5Ced74ovTygPxQRr62G2kI5SbK6+ramDeMx1G82jmtjsP+RUCm7g6bi/l9
+7nt6CHvJJa2fCQkLJnuyw+TnKD8d4VDRpErVzAsJdzJv5S2k2VmdNGhS2zRRTY5n
+QX7e2J5l2mTGJWcwLLVK1pGnQjDa5yzm4P9yXGAZFNZzOktf62xMo5sXC78kuarN
+4IJM3rQKalUA0WE59uv6gX2tGxIcJr5uRBQaqg9JrZBsWWTi7m9hq1ulDEOmEnDM
+sqElpWaS
+=iU7c
+-----END PGP SIGNATURE-----
+
+--Xuc8S/DWSFZeFnH3--
