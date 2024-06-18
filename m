@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A37C2BA18
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02CB0C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 13:57:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A90C8834B;
+	by phobos.denx.de (Postfix) with ESMTP id EEC93883A9;
 	Tue, 18 Jun 2024 15:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="XauZQ/Ef";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="TnRSoyOv";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="ro//kz9b";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="CldX2dG6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8849D88307; Tue, 18 Jun 2024 15:56:29 +0200 (CEST)
+ id 0B0D087F5C; Tue, 18 Jun 2024 15:56:31 +0200 (CEST)
 Received: from wfhigh8-smtp.messagingengine.com
  (wfhigh8-smtp.messagingengine.com [64.147.123.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0AFC8786C
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:56:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0115A882ED
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 15:56:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfhigh.west.internal (Postfix) with ESMTP id F1B1B18000E4;
- Tue, 18 Jun 2024 09:56:24 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.west.internal (Postfix) with ESMTP id 370CD18000D3;
+ Tue, 18 Jun 2024 09:56:27 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Tue, 18 Jun 2024 09:56:25 -0400
+ by compute5.internal (MEProxy); Tue, 18 Jun 2024 09:56:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1718718984;
- x=1718805384; bh=HSd75T7nLaTJY/hAAlsehz59myiyl7wNtMcuOyrusPc=; b=
- XauZQ/EfOKHsokQccK62zHh+7CzIsOKID3+0wRKTI1a6VNWSs2itECZTBIBtApWH
- Eg65rdOQBY6ecM7Iobiscw2+NvlXGWuoXyuCIv7O/ozowZeUhCgp+f/VN/Zlx9WV
- kJ/K+LGPtQjwkKuC4D1YMWCY7h9q6dw+/KQPqBOI3uu3DroEbcb/uCwqPDnzT74x
- kDXz7iXCTyOfAzWXZZ5EKEECUW+WOUWbfg4QA/5DmWKs0UeJIRc6YT7VoLtw+uV7
- amMGQ+lU7NcFHbfndr4+H607V20+IjAyEHFqXAHWhb2xTtsKlnADvr9ZrTZIZbSA
- cMdryrUqkKr+IE62IeYFLA==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1718718986;
+ x=1718805386; bh=llM8J/ihAKvSxRFDxwofhhSG1YekkNqe3YRboh2c+1M=; b=
+ ro//kz9bxwEP66R9sRF9sXQ0j87WVzj+wnu0qznqEi4H24wp/mnAF4oOKpI6Rgqx
+ EXXBkphd+sJIL0AyxKaC2U4JTQoud78uHMSHypPhvzAy16AJyG9cKl/208kAjat+
+ eq4gXf0+fCyQvEQh+LfGbqldV7cmtBG2w2JgYxWusHrzH+i/jqjCp1jfLQEMjhTm
+ LJ6oh6j0dbBi8CL7bpd9rG9C503j/mku5m3RX+MY7I4aZwIjRckTkmJNvPfN5rKx
+ 9dDRelJBZp8Uo6aAPrKBuu0YMf+JXvx5ra3bsPyXycE54WhHLmWvwJ6XeryQFvqv
+ z9gj/1qLNKzTgWBB5rN2Dg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718718984; x=
- 1718805384; bh=HSd75T7nLaTJY/hAAlsehz59myiyl7wNtMcuOyrusPc=; b=T
- nRSoyOvKZGlU1GdEYd1vfIxAa1SD3LEYI2PI91ibBhopV+D4M6MPugg6ra03lM2x
- 3QOxdp+R6Bpl8lSxD4mq/+CT2q/NZiUoUgNTzVOCGpRTSNM+Q7qYaBHg1D/jThyn
- otUY97pJf4YMj8F0qeAdHgELu3w7KDkzWHtD2WIfbtyQlXG63ukbHFimrvSrOzPi
- 5ZqU+pd6vLtj0Mm17gF7dnPJKqwRnetkaNgza7O7OI6GdMcWZLkY9G1qiMC3LOJd
- HKzElV5zRHAFeuw+kpsrv6QlqDmuj/TwtVTZO1P06YZkEP6TUfxS3s09nwsTg3wK
- BatmblW8DBPxAuAOqg9bA==
-X-ME-Sender: <xms:CJJxZqpccR4miw0ZhdNfjb887walPzsCjHa81OWlLdXCmujEiV6xwg>
- <xme:CJJxZopMM_Aajeji6MbjGRcWVPFam4b1W-EWwF7quA8UkOLQ5sRce4k-hXEIGZ7Tg
- KEgU7MBHKcxzdXX110>
-X-ME-Received: <xmr:CJJxZvPqM48H0w_XqJHWmqH6SrtD_sfmQSuQcq6iOi5QiB2ed-rRigo>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718718986; x=
+ 1718805386; bh=llM8J/ihAKvSxRFDxwofhhSG1YekkNqe3YRboh2c+1M=; b=C
+ ldX2dG6ecrMLYRWs7qTF1KUyIzNd+J7J+fvaMU3iqnlr1RHWK3ChbETJOwKFN80U
+ 3rFAwgWNfK0nbqPml8bErYYdcmdjz3eVvHPoQZ7XdzeGcdW0gfng7imWAXebvfQj
+ lthylXTiBMpBqldqwLj4jgRHaV1srEcbBkwGF0/RhiuZQdwZvN4BKp+kFh0m7aZz
+ AvpSrirsOUCZHmhzdrWqxXCwEBGTlQSazk8uZHolVBfRcXFfy7WhPjZ/OT20P7Wu
+ 8lG2aNR5N/bFRlgpkT2LN+t3QiA1C5Fw9WL6OFlq4htlYZRyK0S7fDdc3bujxwZG
+ RATi8NDyWyFNpjHUMkNmA==
+X-ME-Sender: <xms:CpJxZvxXm46N7f05AXtxIeMoQkf8Cx4Ka_TpDxMs6j0sgphbNe15dw>
+ <xme:CpJxZnT6djXCD3scbHK8NaaEgeAKfilOngI8QNMcg73JkfSuDEdTRgfu8cCo3o6W6
+ rOsfXmlpUtSYA5dYTc>
+X-ME-Received: <xmr:CpJxZpUz_RqeJtTJoElE9y_uBP4dpF5Xkn1lPTaW6yCHrexVDTYnZ18>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedvkedggeduucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,35 +68,34 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedvkedggeduucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:CJJxZp7HGDW3VtvAjVa4w7TjfFqf7WaE0UgEVZvW3esNZBd-CEVyXw>
- <xmx:CJJxZp620CR7ihBdRl8Y7691MyL_ZLahcqi2XIy1T1AQW_aSCnr4fA>
- <xmx:CJJxZphRfg_tnDtNOVlxlbdIJMXx_Ba0TgGCwA5BN369mHNyr_qvCw>
- <xmx:CJJxZj7f1JDV922SlkphdjOlu2kJhhJfdaNvCSlAfoUXI-i8he7iiQ>
- <xmx:CJJxZmtA9wWG33QWJjHYgxwjI0TLCApkyl3Xz-3wDMlN0jvJuGCJiz8Q>
+X-ME-Proxy: <xmx:CpJxZphAZgJWGjHDBeik7LpoJ_oWo9YhIgi8h4DtUuGRHU0d6tD1uw>
+ <xmx:CpJxZhDV9XvvEeTG-WcTzlOKA4bG_vDw2m7A8iJS_0rlzJMA-y8d_g>
+ <xmx:CpJxZiK0vnA51gDFm8NbjQYmScF78amrFgq05BS6yOb7_M6xOUauAw>
+ <xmx:CpJxZgDQ_lRmM0wQQ3qbt_HAQ29iE0xaa-cMzfZ43FbpIdKh5db7ww>
+ <xmx:CpJxZj20vnV9Fq3R3sB43c-zmdEAD2fkE8HTNY_X3TbL2nCzwOOJDDIa>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Jun 2024 09:56:23 -0400 (EDT)
+ 18 Jun 2024 09:56:25 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Tue, 18 Jun 2024 14:56:03 +0100
-Subject: [PATCH v3 03/12] xtensa: Implement phys virt conversion for
- PTP_MMU
+Date: Tue, 18 Jun 2024 14:56:04 +0100
+Subject: [PATCH v3 04/12] xtensa: Define PLATFORM_ELFFLAGS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240618-qemu-xtensa-v3-3-f5af5e6fdd23@flygoat.com>
+Message-Id: <20240618-qemu-xtensa-v3-4-f5af5e6fdd23@flygoat.com>
 References: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
 In-Reply-To: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2051;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=969;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=pCpFt4Od7VIN5VInTKC3EZ2MLltCnK6OVsxCbS0laaU=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTCSYyaoaIm6ustBe7G/HX9vny1zYwV3PuylKfofJa5t
- uvm9O03OkpZGMS4GGTFFFlCBJT6NjReXHD9QdYfmDmsTCBDGLg4BWAiuxwY/icy2Tk4/LlmtiLO
- c/msLze9dC2VLFTP2d7I2PFvjbW0tDcjw5WFZnsFglq943lKPe/fiDUS2F53XbrwSPTih3ZHXPj
- y+QE=
+ bh=N24eZYxZLUyusVP2k/IJowRxSUb0LlvcwQQo3gqkjf8=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTCSYxzjKb8Edv8zGb2g7iS+tmiro7Je/ouSjALJ0VOK
+ Z3lbO7UUcrCIMbFICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABPpYGVkuGO/xdJ41/nU/7JH
+ dPpmv9MLWeg3fZvQbae19fxJOjnl/YwMj4/FsS1uv59RHbOgNXHdzN/8C8U7NPv/zt25cpepEvt
+ 1bgA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -115,83 +114,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For PTP_MMU our physical address is not directly mapped
-into virtual address space, we need to access physical
-memory from those fixed map segments.
-
-Implement phys_to_virt and virt_to_phys hook to reflect
-this setting.
+u-boot.elf target requires it to work.
 
 Tested-by: Max Filippov <jcmvbkbc@gmail.com>
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/xtensa/include/asm/addrspace.h |  2 ++
- arch/xtensa/include/asm/io.h        | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+)
+v2:
+	- Concerning big endian CPU
 
-diff --git a/arch/xtensa/include/asm/addrspace.h b/arch/xtensa/include/asm/addrspace.h
-index 920b5fd26b20..c8bed8834b55 100644
---- a/arch/xtensa/include/asm/addrspace.h
-+++ b/arch/xtensa/include/asm/addrspace.h
-@@ -7,6 +7,8 @@
- #ifndef _XTENSA_ADDRSPACE_H
- #define _XTENSA_ADDRSPACE_H
+Note: CONFIG_SYS_BIG_ENDIAN will never be set for xtensa
+for now, but as we don't have big endian headers for xtensa
+core either I think it's fine for now. This will be improved
+after my arm64be work get merged.
+---
+ arch/xtensa/config.mk | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/arch/xtensa/config.mk b/arch/xtensa/config.mk
+index b0809999e403..200b66f85047 100644
+--- a/arch/xtensa/config.mk
++++ b/arch/xtensa/config.mk
+@@ -7,3 +7,9 @@ PLATFORM_CPPFLAGS += -D__XTENSA__ -mlongcalls -mforce-no-pic \
+ 		     -ffunction-sections -fdata-sections
  
-+#include <config.h>
+ LDFLAGS_FINAL += --gc-sections
 +
- #include <asm/arch/core.h>
- 
- /*
-diff --git a/arch/xtensa/include/asm/io.h b/arch/xtensa/include/asm/io.h
-index 87ad9faa2995..ab2438b829ac 100644
---- a/arch/xtensa/include/asm/io.h
-+++ b/arch/xtensa/include/asm/io.h
-@@ -12,6 +12,8 @@
- #include <linux/types.h>
- #include <asm/byteorder.h>
- 
-+#include <asm/addrspace.h>
-+
- /*
-  * swap functions to change byte order from little-endian to big-endian and
-  * vice versa.
-@@ -127,6 +129,36 @@ static inline void sync(void)
- {
- }
- 
-+#if XCHAL_HAVE_PTP_MMU
-+static inline void *phys_to_virt(phys_addr_t paddr)
-+{
-+	if (paddr >= CFG_SYS_IO_BASE)
-+		return (void *)(unsigned long)paddr;
-+
-+	if (paddr < CFG_MAX_MEM_MAPPED)
-+		return (void *)(unsigned long)MEMADDR(paddr);
-+
-+	return NULL;
-+}
-+
-+#define phys_to_virt phys_to_virt
-+
-+static inline phys_addr_t virt_to_phys(void *vaddr)
-+{
-+	unsigned long addr = (unsigned long)vaddr;
-+
-+	if (addr >= CFG_SYS_IO_BASE)
-+		return addr;
-+
-+	if (addr >= CFG_SYS_SDRAM_BASE && addr < MEMADDR(CFG_MAX_MEM_MAPPED))
-+		return PHYSADDR(addr);
-+
-+	return 0;
-+}
-+
-+#define virt_to_phys virt_to_phys
-+#endif /* XCHAL_HAVE_PTP_MMU */
-+
- #include <asm-generic/io.h>
- 
- #endif	/* _XTENSA_IO_H */
++ifeq ($(CONFIG_SYS_BIG_ENDIAN),y)
++PLATFORM_CPPFLAGS += -B xtensa -O elf32-xtensa-be
++else
++PLATFORM_ELFFLAGS += -B xtensa -O elf32-xtensa-le
++endif
 
 -- 
 2.43.0
