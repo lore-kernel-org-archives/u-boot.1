@@ -4,33 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E298CC27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 22:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB068C2BA15
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 22:56:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30B66883C9;
+	by phobos.denx.de (Postfix) with ESMTP id 8FA36883DE;
 	Wed, 19 Jun 2024 00:55:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="C8zw9nbq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hd+XyhZM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="botFW0u6";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bozcl4p8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6186F87E2E; Wed, 19 Jun 2024 00:55:35 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 6710B883B3; Wed, 19 Jun 2024 00:55:35 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A7BE883B3
+ by phobos.denx.de (Postfix) with ESMTPS id BE627883CD
  for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:55:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4W3htD0nGQz9tKs
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4W3htD3bysz9stf
  for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:55:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1718751332;
@@ -38,12 +39,12 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=lt5vZBJp8fNva4HDZddG7wEqfKDoFN9cG7cLv1L8Lqk=;
- b=C8zw9nbqUMtphkRrl2cGFe2+ly6enRGA/n8Na719YhaXntbxMWWfTFo/Togdrnc0JHa4Rv
- +9OVJVhQf8QMd2FFaPbeDlFD1zVKX/sXXdESewbbHDjWZ0EEE3gYSGkx4XZPF11EXua+/5
- vw/YuwZE9gj39Yv4cxxpO1NkDYnq1p0EVqMciKFqgjUZN19xQrIm0xVnCky8hPp+coGQKa
- T0Mv3wwmFUNKJ+DjRgwig2/r+jw/cRqwN3I7ZpjBl0FH4m/aRVgs1EwLkBDwLcXwxe9F25
- PcdBL1AyeHCMRaF6icZrE18I9z9JkrtMurMbq2ati/vOJhKP1N/yDPAmz4l2Zw==
+ bh=6ojwlJ5l7u/0o5haBXfW/DErpFtdPyj1szb7yCuoIjc=;
+ b=botFW0u6HagwyvqJS/cYwRZRrR0o07Nz1Q0UUlcruKl2XL28ftvCzF+z7bJuXTvhCXMugx
+ flb6l7jAaS/7LTHXN1FkbAP7ygR25MEivLkv37yhR75TReTjIYbffniohrj3e0s3YlGoD2
+ nMYyM1iiDDbT1SMPfVYtTHg6mlPf49FeYAksn5jXMFgdoMwCRQIr6b5+ttPDh0B6WzPKKN
+ qDXgfZWZooKLoNs19GJCJomBfQQPadLomCkspiWf0Rlqck6UpApmuIhiGA+iMFw0dGYz43
+ EJ1hR0daMuDw2LwcntZJLRQtF8Zp22zuWd98FIRDODunRyVN/P889EfHdFwTQg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1718751330;
@@ -51,24 +52,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=lt5vZBJp8fNva4HDZddG7wEqfKDoFN9cG7cLv1L8Lqk=;
- b=Hd+XyhZMFLyMfl14Borcitkivvm/biwzkBV0j2g1KmCMxcEOg9Qv+V42nQcZY1y2ba74Nz
- seLZKSRm/ZRxBfsQc4DkfBL23qxwUY95hXruUW6XKj+KCYHuw/PiM7ox8BIStpzSyCoQxC
- ptt+7zcZpT5KB/BIP8rL0Ir+l+OgL86z8S0oVZaBACVLBMUlWohlhhpXLaGRGKsGyRMSQS
- ut2xZMyJpaPT9Xg4rUKu2Yvzv6I98PQa5hM4fAaMifGP/gAW9KKJRIN708O6grDxVDmtGZ
- FHD2sub+W/vP5djkjhrnUD7Bcb4p8D9JxRN19/606mzbQ1TEfGeaY9PvuKfxtQ==
+ bh=6ojwlJ5l7u/0o5haBXfW/DErpFtdPyj1szb7yCuoIjc=;
+ b=bozcl4p8XUhXyKIsZOCXeFyXBdndIw5pimkKumm+nLyq49FFxEQGOwE8s+vp7W/MiefCm6
+ f244eJQaNzXOcRddqx6XD7TGEK5oQW1Uy0DVjx6b2/2/L8n6B5nRF82strPByw0Y0r5TF2
+ lDkwoQLm5VXPt+uVwAtbDHvofMX1LafjNpu1Tsos9m8SXavE39x6BNzMnn0kvOkzW7a69q
+ VOcDQl07YcCAAHP8comlAjaNAwQ3XUfMyuFs1/50Cu/W75l0u2s2RUZMfXQvAXW9vf70I9
+ 4IwI7lHnKzfD2L14stVaWHsoSOOt2wppb62ViejMznx8lKuNxRDdhXWMcJLWwg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 2/6] clk: renesas: Synchronize R-Car R8A779A0 V3U clock tables
+Subject: [PATCH 3/6] clk: renesas: Synchronize R-Car R8A779F0 S4 clock tables
  with Linux 6.9.3
-Date: Wed, 19 Jun 2024 00:54:16 +0200
-Message-ID: <20240618225505.154437-2-marek.vasut+renesas@mailbox.org>
+Date: Wed, 19 Jun 2024 00:54:17 +0200
+Message-ID: <20240618225505.154437-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240618225505.154437-1-marek.vasut+renesas@mailbox.org>
 References: <20240618225505.154437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 8qpfshpqk5f457815myd89gtazpzg1cu
-X-MBO-RS-ID: 81ce60ee28d114b0d02
+X-MBO-RS-ID: 1712a1e3254b013df08
+X-MBO-RS-META: c86eucgz88okraptb11g5e195yd3kobe
+X-Rspamd-Queue-Id: 4W3htD3bysz9stf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,27 +87,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Synchronize R-Car R8A779A0 V3U clock tables with Linux 6.9.3,
+Synchronize R-Car R8A779F0 S4 clock tables with Linux 6.9.3,
 commit 1b4861e32e461b6fae14dc49ed0f1c7f20af5146 .
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/clk/renesas/r8a779a0-cpg-mssr.c | 2 +-
+ drivers/clk/renesas/r8a779f0-cpg-mssr.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/renesas/r8a779a0-cpg-mssr.c b/drivers/clk/renesas/r8a779a0-cpg-mssr.c
-index ba086be0268..b44d5603edd 100644
---- a/drivers/clk/renesas/r8a779a0-cpg-mssr.c
-+++ b/drivers/clk/renesas/r8a779a0-cpg-mssr.c
-@@ -133,7 +133,7 @@ static const struct mssr_mod_clk r8a779a0_mod_clks[] __initconst = {
- 	DEF_MOD("avb3",		214,	R8A779A0_CLK_S3D2),
- 	DEF_MOD("avb4",		215,	R8A779A0_CLK_S3D2),
- 	DEF_MOD("avb5",		216,	R8A779A0_CLK_S3D2),
--	DEF_MOD("canfd0",	328,	R8A779A0_CLK_CANFD),
-+	DEF_MOD("canfd0",	328,	R8A779A0_CLK_S3D2),
- 	DEF_MOD("csi40",	331,	R8A779A0_CLK_CSI0),
- 	DEF_MOD("csi41",	400,	R8A779A0_CLK_CSI0),
- 	DEF_MOD("csi42",	401,	R8A779A0_CLK_CSI0),
+diff --git a/drivers/clk/renesas/r8a779f0-cpg-mssr.c b/drivers/clk/renesas/r8a779f0-cpg-mssr.c
+index 108655f145d..ea98bc6e50c 100644
+--- a/drivers/clk/renesas/r8a779f0-cpg-mssr.c
++++ b/drivers/clk/renesas/r8a779f0-cpg-mssr.c
+@@ -156,7 +156,7 @@ static const struct mssr_mod_clk r8a779f0_mod_clks[] __initconst = {
+ 	DEF_MOD("cmt1",		911,	R8A779F0_CLK_R),
+ 	DEF_MOD("cmt2",		912,	R8A779F0_CLK_R),
+ 	DEF_MOD("cmt3",		913,	R8A779F0_CLK_R),
+-	DEF_MOD("pfc0",		915,	R8A779F0_CLK_CL16M),
++	DEF_MOD("pfc0",		915,	R8A779F0_CLK_CPEX),
+ 	DEF_MOD("tsc",		919,	R8A779F0_CLK_CL16M),
+ 	DEF_MOD("rswitch2",	1505,	R8A779F0_CLK_RSW2),
+ 	DEF_MOD("ether-serdes",	1506,	R8A779F0_CLK_S0D2_HSC),
 -- 
 2.43.0
 
