@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FFF7C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:12:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6E5C27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 07:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB58F8838E;
-	Tue, 18 Jun 2024 09:12:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8387C88468;
+	Tue, 18 Jun 2024 09:15:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="pYnzAUDt";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="iVWvg5e3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74223882BE; Tue, 18 Jun 2024 09:12:38 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id E75798848F; Tue, 18 Jun 2024 09:15:44 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B47E88422
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:12:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFFB188468
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 09:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-35f1e35156cso4470518f8f.1
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:12:35 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42172ed3487so37464065e9.0
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 00:15:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718694755; x=1719299555;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718694942; x=1719299742;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=oVEM1I2xNIPCsUpAtdJCqjDfHlaT/uEA2qvAx7SdcBk=;
- b=pYnzAUDtZMUeSZRla4C4t/VOYeOjqEt3G+DsmP/Sx2VI2GTHBD+2Y5qGDPuh+HPn5/
- 7s9E0ULrY+6KFeg5g+cqVvnxvH+m4uu/T+xCspCaGMehQ7kxe0ZR3oiIzMCGIFS9ihYR
- d0qhcrbj6Onyue0AMbV0lQWug3ZcNgoWP3yMMzEuAtUO4l1avO1hmirkawvf8+k1B65f
- RHg29mmMcdNW/rMYNK6DW4aKSLT5ObwIEi4oDSpY6nMFdJ0jPGTXoqkso1JNI932muiK
- w2+pDhnZ1cLcp0USUurtYOPJ1wYjnOAVqdJvYKSfa99jpVhtfibsgHzvD4fm/A10fPC6
- fLhA==
+ bh=PteBXZMd8ic1aFEi4JwUr+Vmfee+Sn7GYUJgnf/QqpI=;
+ b=iVWvg5e3xRsan9r227mB8o5MGkWBjUbF+Z0tJnaYk8vQXvHspIrPy4KBwodYM3tNdN
+ ZL343gjD7I2lmf1FZE2SuSQ4MOhurJeDap2mDys28swuCr6CaLTrKGhrs74IpFk6PPYo
+ RQR5VEOOmf0pl0AmRgSgAbzxVWK7/dzo7cEqz6LA7YPXJPOgtdzU4K2oLjPx11Sm1w+x
+ 7VUwj2IXdpIg3QubNyhLT7+j7zQzrZHgwofV7es4biCxFunijVFHdxgT285gojFdoTXq
+ F2Y42Crwekazy17lJvkTbCmzrrzWL92HF5+7MuM/uCsDaha0PBOCYwWacIlRM8V/9+I9
+ tbBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718694755; x=1719299555;
+ d=1e100.net; s=20230601; t=1718694942; x=1719299742;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oVEM1I2xNIPCsUpAtdJCqjDfHlaT/uEA2qvAx7SdcBk=;
- b=t1R3epASYnctBX/3dMeSnzVW/SB/R6H0O6zGLCGcqNK+mj9s22a/JWsqKqnkQX2AXV
- Lla06tXTmypXYd1bqxfdv8YHc+Pyp+lhIxcVxqC7QLo7LLlsKkoJUJvIAni7X2Z9FEp1
- 5e/laYPVmbqJyTMRwhvaHnHR3e3zqM4Sq8oq2ZmL2L3Z2Wr8jLnP7UrJNIzJbR9rKWRb
- XjmkmesMtYv4bEln4tbGFcjR0u+R6TaM5Z88fRzDnCxtWzqYSTIGTZW6iEFw5zVTf0xk
- a/bBxagSMh3hofINVwJh5BrtanTQtvSaBVLnU6+zwb0KQClgRAE3b8rZsO3xmG3zq5eY
- u3Lw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7nZ+4xOAnD7vC3jgMGycA2zfWBQJmbkl6n67T5AGIYhhSTWGv6LEbY73D+T3KfyKYOWa8JlLDYIYmGfOCg9eXoiRKWg==
-X-Gm-Message-State: AOJu0Ywe1TL/gbfAtEI2n8I7yrAjym8M9ufbJWY/9twwxFQ5o7QYHu8M
- WPG9ZaPrdtoLcnFNzovJ1uLvXqYXA5jGMYC/cYketoFNtvZXbAfXLl2+icTpo34=
-X-Google-Smtp-Source: AGHT+IGI0vfRhMmj38VuQdBnzT6yyIOmwCklqIcze6KkJaw1w+1acuBqCTBW4XUjqb9rWYnQbDnEbg==
-X-Received: by 2002:a05:6000:1b0c:b0:35f:2a44:8aa with SMTP id
- ffacd0b85a97d-3607a7b0fe9mr6775144f8f.4.1718694754847; 
- Tue, 18 Jun 2024 00:12:34 -0700 (PDT)
+ bh=PteBXZMd8ic1aFEi4JwUr+Vmfee+Sn7GYUJgnf/QqpI=;
+ b=HEp+huwonn62om8ZBJXuyRcKJzDjWhxfL0cZi2bbXZSR6AL2Cn8nYpqOT4E6PM4C3a
+ UbNiRaj/F7Q6aT6MHeimnmjfPP74gB89FShtc6UzG5Vqk3Wsv8lKxTJ6bsDOgXwc0r4o
+ 5+hsIckg/j1Nzr7pI/uAVXVOvM5hHTcM8X8XHmEVbkffX7uVlp1YunrSXMPZCvSr8KX8
+ aNc+BNc5D9kDkEgxtrigs/aBz+YAcodNbQdZcq8fbRqdOYX1n3H+Somc+SIt++Wv7eKi
+ ftG+v4JpdhQA3UQgdFIEWAmbzPNBok/PkNcCvqMALFt2Ghrl46wLI5uUqgHa1vjMnesG
+ LDtQ==
+X-Gm-Message-State: AOJu0Yy9ZCL1WZeAJea7TkP1Tq6lJY/nFoFufDVB1dWZffr6EvcQyUpL
+ 6GN6ThfRtsRiN+6+Tq89rwoh5udOXH/Jyt/Co7ROZqHgmu5glz4D9ZxkPonQl7g=
+X-Google-Smtp-Source: AGHT+IFwEoyz26xqOYvi+C8Cqupuw92o4Qu5hjAp9ogi8mPpvuZ6kaZgjHaLUxX0F+Lz/STdPHxVaQ==
+X-Received: by 2002:a05:600c:3d88:b0:422:dfb0:8644 with SMTP id
+ 5b1f17b1804b1-4230484918cmr96210755e9.33.1718694942046; 
+ Tue, 18 Jun 2024 00:15:42 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36075104a26sm13515032f8f.97.2024.06.18.00.12.34
+ 5b1f17b1804b1-422f641a64bsm180840015e9.46.2024.06.18.00.15.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 00:12:34 -0700 (PDT)
+ Tue, 18 Jun 2024 00:15:41 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>, Felipe Balbi
- <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
- Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
- <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 01/11] usb: gadget: Introduce handle_interrupts ops to
- USB_GADGET_GENERIC uclass
-In-Reply-To: <20240614005309.34433-2-marek.vasut+renesas@mailbox.org>
-References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
- <20240614005309.34433-2-marek.vasut+renesas@mailbox.org>
-Date: Tue, 18 Jun 2024 09:12:32 +0200
-Message-ID: <87cyoek9lr.fsf@baylibre.com>
+To: Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when
+ USB_DWC3_GADGET is disabled
+In-Reply-To: <6bf2af4a-740e-4cfc-9009-0892139738c3@kwiboo.se>
+References: <20240225152715.1821613-1-jonas@kwiboo.se>
+ <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
+ <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
+ <20240226014708.GH3040305@bill-the-cat>
+ <81bdee81-2f8f-4fbf-a729-8fd543492adb@kwiboo.se>
+ <a809eb32-ae70-4f69-b5f0-81488759e838@denx.de>
+ <e14e9c06-ca37-4572-b410-c40a8c52898c@kwiboo.se>
+ <1544e744-bbf7-4460-b2b4-12a971e70d49@denx.de>
+ <7805b8d0-fb7c-41d5-8d74-f85dfd40233a@kwiboo.se>
+ <87y1b2nfpn.fsf@baylibre.com>
+ <6bf2af4a-740e-4cfc-9009-0892139738c3@kwiboo.se>
+Date: Tue, 18 Jun 2024 09:15:39 +0200
+Message-ID: <87a5jik9gk.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -96,99 +100,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Jonas,
 
-Thank you for the patch.
+On sam., mars 02, 2024 at 14:00, Jonas Karlman <jonas@kwiboo.se> wrote:
 
-On ven., juin 14, 2024 at 02:51, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+[...]
 
-> Introduce .ops for USB_GADGET_GENERIC uclass. The first new ops is
-> .handle_interrupts which must be implemented by DM capable USB gadget
-> controller drivers and must implement interrupt handling similar to
-> dm_usb_gadget_handle_interrupts(). This patch currently provides weak
-> dm_usb_gadget_handle_interrupts() implementation which is overriden by
-> the drivers, but this will be removed once conversion to handle_interrupts
-> callback is complete.
+>> 
+>> I will keep you posted.
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
-> Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/usb/gadget/udc/udc-uclass.c | 24 ++++++++++++++++++++++++
->  include/linux/usb/gadget.h          |  8 ++++++++
->  2 files changed, 32 insertions(+)
+> Thanks, much appreciated!
 >
-> diff --git a/drivers/usb/gadget/udc/udc-uclass.c b/drivers/usb/gadget/udc/udc-uclass.c
-> index 5dc23a55bb5..2320039fe3b 100644
-> --- a/drivers/usb/gadget/udc/udc-uclass.c
-> +++ b/drivers/usb/gadget/udc/udc-uclass.c
-> @@ -12,6 +12,25 @@
->  #include <linux/usb/gadget.h>
->  
->  #if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +static inline const struct usb_gadget_generic_ops *
-> +usb_gadget_generic_dev_ops(struct udevice *dev)
-> +{
-> +	return (const struct usb_gadget_generic_ops *)dev->driver->ops;
-> +}
-> +
-> +__weak int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> +{
-> +	const struct usb_gadget_generic_ops *ops;
-> +
-> +	ops = usb_gadget_generic_dev_ops(dev);
-> +	if (!ops)
-> +		return -EFAULT;
-> +	if (!ops->handle_interrupts)
-> +		return -ENOSYS;
-> +
-> +	return ops->handle_interrupts(dev);
-> +}
-> +
->  int udc_device_get_by_index(int index, struct udevice **udev)
->  {
->  	struct udevice *dev = NULL;
-> @@ -54,6 +73,11 @@ int udc_device_put(struct udevice *udev)
->  {
->  	return board_usb_cleanup(legacy_index, USB_INIT_DEVICE);
->  }
-> +
-> +__weak int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> +{
-> +	return 0;
-> +}
->  #endif
->  
->  #if CONFIG_IS_ENABLED(DM)
-> diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
-> index 36572be89e6..cf2161603d6 100644
-> --- a/include/linux/usb/gadget.h
-> +++ b/include/linux/usb/gadget.h
-> @@ -970,6 +970,14 @@ extern void usb_ep_autoconfig_reset(struct usb_gadget *);
->  
->  extern int dm_usb_gadget_handle_interrupts(struct udevice *);
->  
-> +/**
-> + * struct usb_gadget_generic_ops - The functions that a gadget driver must implement.
-> + * @handle_interrupts: Handle UDC interrupts.
-> + */
-> +struct usb_gadget_generic_ops {
-> +	int (*handle_interrupts)(struct udevice *udevice);
-> +};
-> +
->  /**
->   * udc_device_get_by_index() - Get UDC udevice by index
->   * @index: UDC device index
-> -- 
-> 2.43.0
+> Please also keep in mind that changing the interrupt handling probably
+> only fixes the second of the two build errors reported and fixed by this
+> patch.
+>
+> Trying to build with following will trigger the first build error, and
+> should not change because use of dm_usb_gadget_handle_interrupts() is
+> reworked.
+>
+> CONFIG_DM_USB_GADGET=y
+> CONFIG_USB_DWC3=y
+> # CONFIG_USB_DWC3_GADGET is not set
+> CONFIG_USB_DWC3_GENERIC=y
+> CONFIG_USB_GADGET=y
+>
+> E.g to only include host part of dwc3 and gadget from another driver,
+> to i.e. save on binary size, produce following build error:
+>
+> aarch64-linux-gnu-ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
+> drivers/usb/dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
+>   undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+>
+> I guess force select USB_DWC3_GADGET for USB_DWC3_GENERIC would make
+> that build error disappear, and increase binary size as a result.
+>
+> For my RK3328 series [1] I will just revert to use USB_XHCI_DWC3 instead
+> of using USB_DWC3_GENERIC on boards that enable peripheral use of otg
+> port.
+>
+> [1] https://patchwork.ozlabs.org/patch/1904779/
+
+Marek ended up doing this rework.
+It's available for review here, if you want to have a look:
+https://lore.kernel.org/all/20240614005309.34433-1-marek.vasut+renesas@mailbox.org/
+
+>
+> Regards,
+> Jonas
+>
+>> 
+>>>
+
+[...]
