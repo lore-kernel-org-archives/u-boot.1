@@ -4,52 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C17D1C27C4F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:01:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95888C2BA18
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 14:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32418882D4;
-	Tue, 18 Jun 2024 16:01:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9E97388354;
+	Tue, 18 Jun 2024 16:01:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718719271;
-	bh=JoAVe/zpuPdkcxSLZOfOe+FQBQ0pLDPFyS4OiNyMrEs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=caXm2RjnjEOfpYubi3a92hZiytpLArtEp+zuJ9ksCBzrSkzj8XUAHBbP595DXHYcf
-	 /Mi5GrUGzUulzvoncltTmmBDrimiZwBIOpZFlzgDXtgjqBjyRXGlifIAWXv+R7asA5
-	 2z/iw6uXv65+3BrPsRSdE6CaRAbLcZKOMnmIu3Ua1YBECcCrg8E8+bezDr9eRv08vN
-	 2PCLlxi+Nn2ZDHmktcb89jv13Y+DysFqG0vJBWhB7kMqR8xUoY5j3rlLrgVPRbWPPE
-	 l2Tg8ysqXzyWTqLDmZ4ZzePBhhFXVDKa12aYrtOya8JiuedHtSdZH+BmgTkGcWDnn5
-	 gSc7VyPK50GbA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="UaW8/k5j";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="JcNm5J6s";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27137882EF; Tue, 18 Jun 2024 16:01:10 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 3F936883F6; Tue, 18 Jun 2024 16:01:17 +0200 (CEST)
+Received: from wfout7-smtp.messagingengine.com
+ (wfout7-smtp.messagingengine.com [64.147.123.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF18688137
- for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:01:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 569F38839F
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 16:01:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4W3T1X552Fz9sSF;
- Tue, 18 Jun 2024 16:01:04 +0200 (CEST)
-Message-ID: <1b6c57bf-265d-441a-9e63-8182a7929ad1@denx.de>
-Date: Tue, 18 Jun 2024 16:01:03 +0200
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.west.internal (Postfix) with ESMTP id 282F21C0007D;
+ Tue, 18 Jun 2024 10:01:11 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Tue, 18 Jun 2024 10:01:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1718719270;
+ x=1718805670; bh=g30G/sepot5wzxB+opzHD1oJS3nktSVZ6tIprfkRIuo=; b=
+ UaW8/k5jKwaYYK8bnvjBWvEddwxQlwFETR6mtagdmetqUSIYRHarFBiVI//fHNXd
+ lzXgbFR5ek46RRnbCK/XkuYEfrcsBOXTyGZ0/YEY2t+ITsuwvW0AbTPb1Mo4oo0Q
+ T9rii7c+9QISnfNMWLgQ2iC37EEpFvXRD9g/ErD+FsX5uCrWbOWpx7KpyACi3KJP
+ aWgKGf7AnYtsUUvngi4z+z2YgbXInMIhePob7WX3gicUPiQSmicjeCmSMJZVUv3C
+ 4xRQHj/DVZqiLCp6TgBTsD1YUdMSRRyWyjn2Xf+jA+AR4K/lMNehdygiimyk18ll
+ oPgAMRkJzwbQyZO3W6SI6w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1718719270; x=
+ 1718805670; bh=g30G/sepot5wzxB+opzHD1oJS3nktSVZ6tIprfkRIuo=; b=J
+ cNm5J6sBCdD7u5M6i80k6ziAyBwNdhewtWr//XrfGu7UHaIWafP8J0b8s8oq7tuR
+ gidfei+V06z2hnxEFgLcApB89ps7M15ZabuF8F++tomRb2EJ/9jznqU+SpnkIqKZ
+ 4pTCDv2a8/QDJOLy5coJ1J91tECMVnX8rN6RC7aROCi2lRFq3+kueEAVhDpdLCoF
+ VCwTLNdDcmkuNtFMUQWIQ8mSJTNIRiZLipgUN8JMVOzdn75Wj4V7KZPxiifOzEyX
+ QFp69x4EAlcSm6gKRlFIhVxZPz46Xb86S6X24DTrLI8qFb8YkCgtddxFE00Y5QfY
+ rPIpMpcZODftNJG2vxJew==
+X-ME-Sender: <xms:JpNxZnpRJb9w60pP0hzTcABiQaDYbhDXS6Yren_w4CPuCtdKC52GzA>
+ <xme:JpNxZhpphRrIdhM4Du8oa8WIeSTJtpNSnlNAb88w1a_cg-QWy5z8V2jVcQAVhpveJ
+ HcbEWcigunC8sNJxig>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedvkedggedvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpeelleekkedtteekleeffefggeevfffhtdefudeuiefg
+ ueeiudevffeludejffdtffenucffohhmrghinhepohiilhgrsghsrdhorhhgnecuvehluh
+ hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdih
+ rghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:JpNxZkN0k47Vy0tXcDNKZkMQPE5Od4CUU4Q4B4k5AD4hijWqhy-siA>
+ <xmx:JpNxZq4e5LsQ3xt2rNzIUzPeM-wqqKv0dj6kdckzxJvSGgPh0BDWJQ>
+ <xmx:JpNxZm4oXVyat62dRPrTFvXKZC07bwOHbyL8HML_BMulpQiZ6MR09g>
+ <xmx:JpNxZiinSzAanjOTNbn_8ELfAUTn0b6mBJwCDMiDhSSt65JaCTk7PQ>
+ <xmx:JpNxZtZt4xgFx28--F_IxrT6nP2bivOzA0nKdVChALuYvP7rSgEvd2qD>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 534ED36A0074; Tue, 18 Jun 2024 10:01:10 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-522-ga39cca1d5-fm-20240610.002-ga39cca1d
 MIME-Version: 1.0
-Subject: Re: [PATCH 12/20] cyclic: Rise default CYCLIC_MAX_CPU_TIME_US to 5000
-To: Tom Rini <trini@konsulko.com>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Aaron Williams <awilliams@marvell.com>
+Message-Id: <c50b3dc0-0385-4548-80ed-ffdc8623bfcc@app.fastmail.com>
+In-Reply-To: <20240617232904.GL68077@bill-the-cat>
 References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
  <20240611-docker-image-v1-12-51472eb70357@flygoat.com>
  <20240612160053.GS68077@bill-the-cat>
@@ -57,12 +88,17 @@ References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
  <20240612165048.GD68077@bill-the-cat>
  <e94995af-f9dd-4262-8dfb-2c47ab817e61@denx.de>
  <20240617232904.GL68077@bill-the-cat>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240617232904.GL68077@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4W3T1X552Fz9sSF
+Date: Tue, 18 Jun 2024 15:00:50 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Tom Rini" <trini@konsulko.com>, "Stefan Roese" <sr@denx.de>
+Cc: u-boot@lists.denx.de, "Simon Glass" <sjg@chromium.org>,
+ "Alper Nebi Yasak" <alpernebiyasak@gmail.com>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ "Aaron Williams" <awilliams@marvell.com>
+Subject: Re: [PATCH 12/20] cyclic: Rise default CYCLIC_MAX_CPU_TIME_US to 5000
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,44 +115,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/18/24 01:29, Tom Rini wrote:
-> On Fri, Jun 14, 2024 at 04:13:54PM +0200, Stefan Roese wrote:
->> On 6/12/24 18:50, Tom Rini wrote:
->>> On Wed, Jun 12, 2024 at 05:13:37PM +0100, Jiaxun Yang wrote:
->>>>
->>>>
->>>> 在2024年6月12日六月 下午5:00，Tom Rini写道：
->>>> [...]
->>>>>>    configs/octeon_nic23_defconfig | 1 -
->>>>>>    2 files changed, 1 insertion(+), 2 deletions(-)
->>>>>
->>>>> This seems similar to:
->>>>> https://patchwork.ozlabs.org/project/uboot/patch/20240524210817.1953298-1-rasmus.villemoes@prevas.dk/
->>>>>
->>>>> at least for CI. And for outside CI, I'm OK with just having the value
->>>>> be changed in the defconfig as needed. We do support using config
->>>>> fragments, so keeping such changes locally isn't too hard.
->>>>
->>>> So the default value is a little bit too hard even for some of the actual
->>>> hardware.
->>>
->>> Right, there's some platforms where it's too small and we should just
->>> bump it up. I think for now the default is what we want it to be for
->>> most platforms.
->>
->> The current default value is definitely too small, especially when CI
->> is involved (I did not have this in mind when implementing), so:
->>
+
+
+=E5=9C=A82024=E5=B9=B46=E6=9C=8818=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8A=E5=
+=8D=8812:29=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
+[...]
 >> Acked-by: Stefan Roese <sr@denx.de>
-> 
+>
 > Can we please get either this, or
-> https://patchwork.ozlabs.org/project/uboot/patch/20240524210817.1953298-1-rasmus.villemoes@prevas.dk/
+> https://patchwork.ozlabs.org/project/uboot/patch/20240524210817.195329=
+8-1-rasmus.villemoes@prevas.dk/
 > merged for master? The number of false negatives in CI due to this is
 > big issue for getting more contributors to use CI. Thanks.
 
-Yes.
+It seems like CYCLIC doesn't have it's own custodian tree.
+How are we going to handle it in this case?
 
-Applied to u-boot-watchdog/master
+Thanks
+- Jiaxun
 
-Thanks,
-Stefan
+>
+> --=20
+> Tom
+>
+> =E9=99=84=E4=BB=B6:
+> * signature.asc
+
+--=20
+- Jiaxun
