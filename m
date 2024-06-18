@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14C6C2BA15
-	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 12:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F4DBC27C4F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Jun 2024 12:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABA89883AD;
-	Tue, 18 Jun 2024 14:01:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9A8B188271;
+	Tue, 18 Jun 2024 14:04:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718712087;
-	bh=tJbkOB3vsIptPiurqAxu/Um9NBWYoP7UYfADNjk4VBo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ur1zBS5FxwieFLXs6yRiGS6leK/Lxe9V0b6FCqSeFlUBXY8BlacQodQpSYzs0kYcs
-	 qtMpIWR/oHYw+G8ltZwuL23S0HKxaoMSZj2m6y98S/s84CDTwh3L8o2SjWK3nnBXyb
-	 vcjbcQp0s8SmkAaJ4eRjx42XtCIzwC7ipBeOkQrLF1PIEogsUtRlVFsnc15+xqOdX7
-	 VKX4klm+dspMyT2a+yaoiVTRqOzXVRgkC2c6DBHuDbXuBeHO1Z5CBf19dWWdtNKEy8
-	 h17EMasMm6qkmdRTNHidqBcXiArom3aBiC1wV5h32YtR+F0m54VYbSVaTTrJkUJI3z
-	 jOTDWNeR7nTrA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="s9EpMh+X";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B1BAF881CE; Tue, 18 Jun 2024 14:04:28 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4F9D88839C;
- Tue, 18 Jun 2024 14:01:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1718712085;
- bh=tJbkOB3vsIptPiurqAxu/Um9NBWYoP7UYfADNjk4VBo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ky1UI95Wg/wBEwcYYfIfHPf8mSYGBz47dTICCYXtxneN6v0AOFO/rDLU+EJHK4Ky4
- rWSgTFfvXKtNn620zfc80qVm2PGSkEjHvT6jmIeWg5kY11pnrZa20Q5SP5bWz9k7Q8
- MdBrGRN7het4x5OCv332i0frVHoTsF2h5Ewc3Qqhw97FPkqYNfSEGKWKzdn9ddiYmD
- uYLb1UfePHnBjbdzzGPSn2EVSftJ1ogCYSmvt01OhOCv7uoM310ZcmKxg9Mp2CysBe
- ux0dJ/mTtvhAM77O5+0ttUeQ3WNndD65sNHU3nAcRHOuWJ57qWARTaCcXVfRtZ9XQ9
- sW1Uoc0ZG5WsQ==
-Message-ID: <30fc3a75-ee32-440a-9730-57dd5883919f@denx.de>
-Date: Tue, 18 Jun 2024 13:54:34 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 9438888271
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 14:04:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-52c7f7fdd24so6677774e87.1
+ for <u-boot@lists.denx.de>; Tue, 18 Jun 2024 05:04:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718712266; x=1719317066;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=l0GZEzuLhKb/RCwQNc11WZ+dsFF/l9AsK4g7VbYXqIM=;
+ b=s9EpMh+XpH7hPUJAsk+cucwpQMtbVvvznNcp0c+HTBr1//7+8XNP6LkqyQPLMwhPY/
+ nzYmBM/txQDBoqQXcTRdMxG7O7YeTDy8OcXMmjW8ZXcTGcrRoQOcb4JMf8EUIUDE/SLb
+ 32v6x4I9xPcBHTl9LMF/XajuPetbw2Qn5wVMx5HdQ2m56WgqHUJei8z13ibzZVQHl9Bv
+ dajeLbmJmYgTeqP/xOWIf0FJY39wPpjPgmBOaPxNQnOaC/yPkH369u7OxbeXeuJpbWEN
+ gLwPjW5yX8wHvbq/ICEPPbKJkM/4Ku7yGK9V3P/CBQov3h+uGor//Adht5uG83zpA5/C
+ 0i3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718712266; x=1719317066;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=l0GZEzuLhKb/RCwQNc11WZ+dsFF/l9AsK4g7VbYXqIM=;
+ b=UnnIAwgjiGZXMhRA9hHmHKQfSAMDeZNsU4TrLnAppID4YeETMbXsa5kWnpkUPD541N
+ 7lLUNcXWdQ1mHe8/UWxXqdqxGLNMOJOIvBLFvo03txUjNcRw2H/FR+Iz4PsbO50pX/pv
+ y8tB3nyPByfw+4fnuJuaaaEPx7metZB9Km9VG/4UvnxIA5hs6KxW7NI2DKfl6qyClt0L
+ wakVG9OIBGWCVGGuzsT18rLD83Qip4vUi6wR4HccVKKXyalV0FzTb0nUXaKO1g8+UPg2
+ 5wq6R7lRJbq3STh3yeyRiKUGykpXl8vZC4Tl/UXQQBkbaXalIVOXwBSvfzYaN6dMffIH
+ qOwg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXPl9N2E11olMJk2mWFeX+xN3A70kqF/3CHx+ZWIjIMZ4zgHPV6unnYUERPIkyeoZFnQDyL6FgO/9q8XT4qUstaORe1+Q==
+X-Gm-Message-State: AOJu0YxuH+Zogoj15hpve7D6SrG27TDAOu2KxQMMFUtFWvDLE/HujHCc
+ DIzkHXYumQOHQlt1qHX9p/J8haG176UW5qge6qtbj6oa90wvX/r++FH4JSQZZOQ=
+X-Google-Smtp-Source: AGHT+IHuKadjVGU3Mklp7hrBmf1nIEomC/K6EwlhUrKgZm0FnLejszhcS7Hy8pn48XCKHZEw9d5gYA==
+X-Received: by 2002:a05:6512:280c:b0:52c:a06a:a118 with SMTP id
+ 2adb3069b0e04-52ca6e64e99mr9603397e87.15.1718712264564; 
+ Tue, 18 Jun 2024 05:04:24 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-422f602ee95sm190725365e9.13.2024.06.18.05.04.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 05:04:24 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Marek Vasut
+ <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Bin Meng
+ <bmeng.cn@gmail.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de, Heinrich
+ Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH v3 1/1] usb: informative message if no controller
+In-Reply-To: <20240618095857.58088-1-heinrich.schuchardt@canonical.com>
+References: <20240618095857.58088-1-heinrich.schuchardt@canonical.com>
+Date: Tue, 18 Jun 2024 14:04:21 +0200
+Message-ID: <87ed8uihiy.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] spl: correct link to FIT specification
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Suniel Mahesh <sunil@amarulasolutions.com>, u-boot@lists.denx.de
-References: <20240618063230.24478-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240618063230.24478-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,30 +94,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/18/24 8:32 AM, Heinrich Schuchardt wrote:
-> Replace the invalid link to the FIT file format specification.
-> 
+Hi Heinrich,
+
+Thank you for the patch.
+
+On mar., juin 18, 2024 at 11:58, Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+
+> The message 'No working controllers found' provides no clue that this
+> refers to USB controllers.
+>
+> Provide a message that refers to USB. Use log_info().
+>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> SPL is tightly size constrained.
-> 
-> Shouldn't we remove the message with the link which is only of interest
-> to developers.
-> ---
->   common/spl/spl_fit.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> index 988125be008..2a097f4464c 100644
-> --- a/common/spl/spl_fit.c
-> +++ b/common/spl/spl_fit.c
-> @@ -587,7 +587,7 @@ __weak void *spl_load_simple_fit_fix_load(const void *fit)
->   static void warn_deprecated(const char *msg)
->   {
->   	printf("DEPRECATED: %s\n", msg);
-> -	printf("\tSee doc/uImage.FIT/source_file_format.txt\n");
-> +	printf("\tSee https://fitspec.osfw.foundation/\n");
 
-Why not fix the link to local documentation in the source tree instead ?
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-I would much prefer that than random links to random websites .
+> ---
+> v3:
+> 	plural controllers
+> v2:
+> 	add 'found' at end of message
+> 	keep printf
+> ---
+>  drivers/usb/host/usb-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+> index a1cd0ad2d66..e16432a1516 100644
+> --- a/drivers/usb/host/usb-uclass.c
+> +++ b/drivers/usb/host/usb-uclass.c
+> @@ -388,7 +388,7 @@ int usb_init(void)
+>  
+>  	/* if we were not able to find at least one working bus, bail out */
+>  	if (controllers_initialized == 0)
+> -		printf("No working controllers found\n");
+> +		printf("No USB controllers found\n");
+>  
+>  	return usb_started ? 0 : -ENOENT;
+>  }
+> -- 
+> 2.43.0
