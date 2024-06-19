@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20890C27C79
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 14:47:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA9E6C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 14:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D4E8840F;
-	Wed, 19 Jun 2024 16:47:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 28E218844C;
+	Wed, 19 Jun 2024 16:50:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LmVH1SoT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="axLvKgZs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 574448844C; Wed, 19 Jun 2024 16:47:12 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id D321D8844F; Wed, 19 Jun 2024 16:50:15 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4520F87F19
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:47:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0DB18836D
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:50:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4217d808034so58797125e9.3
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 07:47:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6f9ca219760so3738525a34.2
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 07:50:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718808430; x=1719413230; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=L80bBHfsUg/SVDKM3md6DMk906H5BF1/2DUbFlCJb8w=;
- b=LmVH1SoTcxTwchZ2SOZkLroSJba00zlz922LGrr8BSPNu8q55Adkd8uAwaHxSEt+fW
- 7JHWW0kDYq6CVqN7EnkqPEPu8sRtK5M50x79LeZ5Jlxk1twiLKfva7v51ZKb1B4fhgVn
- wtuMkKNSVGGHOrzAHZsK64Wk8LKzB0ltujIbK4C0SzOjPzNK4FWj24oYc21vjArQkrTQ
- aUobcVdujCiLwod6z8NdvCPnNb8hm+T2g1YJRwK0R962CwwC+5CpuJEwras+7gokrgT6
- YsOaEqGHaYvMCqOUAIf/Eoe8+R6f+TCXG0IBw4tpe8rkqEZx3vSKqX1vWUjmvFMh4hL0
- A4KA==
+ d=konsulko.com; s=google; t=1718808612; x=1719413412; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YIEL6MMLqGeMr7EazggIXvfdeW+sYBJUjexesPmQM8U=;
+ b=axLvKgZsixKzMtN1I+2byXIg4JhKi27gTN28J6uGEd4Kv9wbhfbnROoVN9WjojXZ51
+ OZfyFcP33OK1ylv53+iqZhGPYZWbYD4k5KvAN1dPZuLOUM2vz9W2H/NTL6phZ2wFzIWE
+ Ye4hxsUCnjQ29xxtAk39k0euuDalyUlMtAdzs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718808430; x=1719413230;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L80bBHfsUg/SVDKM3md6DMk906H5BF1/2DUbFlCJb8w=;
- b=TAVvvgiQYBhUHrc/AI5PTMvDXdBtIuJk/LVRsfR3JlPmXO8gaxC8Qc5K71AwCfxukW
- OIPV3OEvI2O75poNhBu0Kv4aqmkYL9ey8wk+aryek2vH7V8lFUP0N8Vt4VxbxBc+YFmT
- ZyoO1HD4caMol/ZLDKrAbw/PLQvbkPXUzSAPl7jTfZ8EpZqvalD2gFb+MnFc4G3seaAn
- dAlgRJxRBDQWQKlMVDjhMhYwmi+C5tJ2D+hqBbkaCbmlDyjbUYzeqPwqLvw6UtxlRvHv
- aRBUSB78GsYpWnneWqcllE9jjhIvjjdodiZmVix6/LdXDUxad4xHvWfMIIZhiH+wrwT0
- ljyQ==
-X-Gm-Message-State: AOJu0YxlXGBizMsqdyBAJo5dF0M1mk5K/DLTEniA9CpZIdMspUNSJXAi
- B2yyojmz3sujixlW0fI9fpkQSWfZL6MP+VFWzLfHrcr/pPnybfq9CmrZYgC4bSS5SNRPoiOKuMH
- sewN4Lg==
-X-Google-Smtp-Source: AGHT+IHk+1qou7qiTrQH1WPvctnwtv94Jv9aB8HCq7w/YYiQlAkBoAyPDPNdgfDZRyeCHeCa11E+Cw==
-X-Received: by 2002:a05:6000:d90:b0:360:7f96:decc with SMTP id
- ffacd0b85a97d-36319a85a84mr2077451f8f.62.1718808429663; 
- Wed, 19 Jun 2024 07:47:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:b7e0:cc1c:dce0:48f9?
- ([2a01:e0a:3cb:7bb0:b7e0:cc1c:dce0:48f9])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36387d9b812sm2005381f8f.26.2024.06.19.07.47.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Jun 2024 07:47:09 -0700 (PDT)
-Message-ID: <e43d7a84-0348-4655-80d8-f91b9232bdbe@linaro.org>
-Date: Wed, 19 Jun 2024 16:47:08 +0200
+ d=1e100.net; s=20230601; t=1718808612; x=1719413412;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YIEL6MMLqGeMr7EazggIXvfdeW+sYBJUjexesPmQM8U=;
+ b=OHnCCHkpQFVkctVsNeiA9b6I3SBSqIa+gZ85SOvAdIB+azepR/t2ocHZM5d2PSP2YY
+ SAkcJBQM++9yG+a1WnE2rACmfqgVS5AOq5zRJZrKaFkN3tN6o3ZhgjSE3ZgWWr/Cst3L
+ d46udgvMPkzNo+PfwTsUH6H7XfLaKA4jRIshtKFtsjE2Su+Ocl6MHRNmnTQ8zVnLT+0t
+ J3kCSadir8X2oSk+2N5SQ4utkcz1rifqwUI+YxU3pSMu/CK0wMeeFywnxGSpJ1t5QuYs
+ 5/lxfXARV9IHp22hJpFaIAsX43uz75LYoYk0uHOcOpYBugoIux/XRpSv/vR7hG8iFF9j
+ n2pw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUB6YqwP4tcGY61IGenaDYM9muIhP8AuJPac++F6NCdJcrWgGYUidp+CsHZIErZ6aAO+fD+go47iIBpZkK6MFJfk34MWQ==
+X-Gm-Message-State: AOJu0Yyh3avVnt672dCl2eRPHZj0Tv+Z5Xe9vUC4RzPS2v4U3Ari/6nr
+ MT5Xtb61ZkasMjFsz/jC0eRtV1AQ1yC4KcP5U4+urcpEAJsi57M7Lg4VOG8DKto=
+X-Google-Smtp-Source: AGHT+IF3cOa2YiujuGNAeeUVKbPIFCGMXA1uDj322Z69lHs/fhc8D77nLUp0flvaJTOoM3ggEyRQlw==
+X-Received: by 2002:a9d:63d8:0:b0:6f9:6931:89ef with SMTP id
+ 46e09a7af769-7007365b72cmr2974795a34.2.1718808612273; 
+ Wed, 19 Jun 2024 07:50:12 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6ff2cfb7be8sm625122a34.54.2024.06.19.07.50.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Jun 2024 07:50:11 -0700 (PDT)
+Date: Wed, 19 Jun 2024 08:50:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <monstr@monstr.eu>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] cmd: Make use of U_BOOT_LONGHELP when missing
+Message-ID: <20240619145009.GY68077@bill-the-cat>
+References: <20240618174516.3320193-1-trini@konsulko.com>
+ <CAHTX3d+ovc79DW=gquPpN63Bs2Qzd8E7aj6TP0Fb75aUH=LQ8A@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-References: <cover.1718638104.git.jerome.forissier@linaro.org>
- <20240618202123.GW68077@bill-the-cat>
- <CAC_iWjJt=ie4jD2yUbCNXU-WEGUmvo_GToCwfWsOTWot3+r8Vg@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjJt=ie4jD2yUbCNXU-WEGUmvo_GToCwfWsOTWot3+r8Vg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="24iHJmCrsOq3ww5y"
+Content-Disposition: inline
+In-Reply-To: <CAHTX3d+ovc79DW=gquPpN63Bs2Qzd8E7aj6TP0Fb75aUH=LQ8A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,75 +93,91 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--24iHJmCrsOq3ww5y
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 6/19/24 09:24, Ilias Apalodimas wrote:
-> Hi Tom
-> 
-> On Tue, 18 Jun 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Mon, Jun 17, 2024 at 05:32:52PM +0200, Jerome Forissier wrote:
->>
->>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>> stack [2] [3] as an alternative to the current implementation in net/,
->>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>> reasons for doing so are:
->>> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
->>> has some additional lwIP and Mbed TLS patches to do so. With that it
->>> becomes possible to fetch and launch a distro installer such as Debian
->>> etc. using a secure, authenticated connection directly from the U-Boot
->>> shell. Several use cases:
->>>   * Authentication: prevent MITM attack (third party replacing the
->>> binary with a different one)
->>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>> image as it is being downloaded
->>>   * Allow connection to servers that do not support plain HTTP anymore
->>> (this is becoming more and more common on the Internet these days)
->>> - Possibly benefit from additional features implemented in lwIP
->>> - Less code to maintain in U-Boot
->>
->> So, on a Pi 3 (rpi_3_defconfig) I see this now (and it passes normally):
->> ========================================== FAILURES ===========================================
->> ___________________________________ test_efi_helloworld_net ___________________________________
->> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
->>     assert expected_text in output
->> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 200000'
->> ------------------------------------ Captured stdout call -------------------------------------
->> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
->> Using smsc95xx_eth device
->> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
->> Filename 'EFI/arm64/helloworld.efi'.
->> Load address: 0x200000
->> Loading:
->> Bytes transferred = 4528 (11b0 hex)
->> U-Boot> U-Boot> crc32 200000 $filesize
->> CRC32 for 00200000 ... 002011af ==> 2b466005
->> U-Boot> U-Boot> bootefi 200000
->> No UEFI binary known at 200000
->> U-Boot>
->> =================================== short test summary info ===================================
->> If I disable that test, it moves on to failing the same exact way for
->> grub. If I disable the grub test too. After that, oh, a bunch of other
->> tests get skipped because CMD_NET and similar aren't enabled now, and
->> the tests are wrong. I'll post that as another patch by itself. After
->> correcting for that, we're seemingly noticeably slower as I need to
->> increase the timeout for tftp'ing my 83MiB FIT image I use for kernel
->> testing. We no longer have the estimated speed message, so I can't as
->> easily say how much slower it is. After increasing the timeout, the
->> kernel boot test does work.
->>
->> I can note that normally it takes ~18ms to get a dhcp reply, but with
->> lwIP it's now 132ms, and previously the kernel loaded at 2.7MiB/s
->> (which, not great) but if that has a similar level of slowdown, could
->> well explain it.
->>
-> 
-> Thanks for taking the time. We'll run the pytests before v5. That
-> being said, my wget tests were faster with lwIP last time I checked.
+On Wed, Jun 19, 2024 at 08:15:04AM +0200, Michal Simek wrote:
+> =FAt 18. 6. 2024 v 19:45 odes=EDlatel Tom Rini <trini@konsulko.com> napsa=
+l:
+> >
+> > After adding the U_BOOT_LONGHELP macro some new commands came in still
+> > that were not making use if it. Switch these cases over and in a few
+> > places add missing newlines as well.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >  arch/arm/mach-imx/cmd_dek.c                |  4 ++--
+> >  arch/arm/mach-imx/cmd_mfgprot.c            |  4 ++--
+> >  arch/arm/mach-imx/imx8/snvs_security_sc.c  | 16 ++++++++--------
+> >  arch/arm/mach-stm32mp/cmd_stm32key.c       |  4 ++--
+> >  board/freescale/common/cmd_esbc_validate.c |  4 ++--
+> >  board/kontron/sl28/cmds.c                  |  4 ++--
+> >  cmd/adc.c                                  |  4 ++--
+> >  cmd/arm/exception.c                        |  5 ++---
+> >  cmd/arm/exception64.c                      |  5 ++---
+> >  cmd/blob.c                                 |  4 ++--
+> >  cmd/riscv/exception.c                      |  5 ++---
+> >  cmd/scmi.c                                 |  5 ++---
+> >  cmd/x86/exception.c                        |  5 ++---
+> >  13 files changed, 32 insertions(+), 37 deletions(-)
+[snip]
+> arch/arm/mach-imx/imx8/snvs_security_sc.c:781:static char
+> snvs_sec_status_help_text[] =3D
 
-The reason for the slower TFTP is the block size. lwIP supports only the
-default (512 bytes), while the legacy stack supports the 'blksize' option
-and sets CONFIG_TFTP_BLOCKSIZE=1468 by default.
+I missed this one for some reason, yeah.
 
--- 
-Jerome
+> board/xilinx/versal-net/cmds.c:74:static char versalnet_help_text[] =3D
+>=20
+> These two should also be part of this patch.
+
+OK.
+
+> And this one is interesting.
+> cmd/cli.c:122:static char cli_help_text[] =3D
+>=20
+> it is guarded by SYS_LONGHELP but I think it should be just removed
+> and macro should be used instead.
+>=20
+> #if CONFIG_IS_ENABLED(SYS_LONGHELP)
+> static char cli_help_text[] =3D
+>         "get - print current cli\n"
+>         "set - set the current cli, possible value are: old, modern"
+>         ;
+> #endif
+>=20
+> U_BOOT_CMD(cli, 3, 1, do_cli,
+>            "cli",
+> #if CONFIG_IS_ENABLED(SYS_LONGHELP)
+>            cli_help_text
+> #endif
+> );
+
+This one is actually kind of "funny". I know I changed it to that,
+rather than using the macro like everything else, when I first did the
+conversion as there was some sort of odd build failure introduced. I'll
+go and see if it still fails somewhere.
+
+--=20
+Tom
+
+--24iHJmCrsOq3ww5y
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZy8CEACgkQFHw5/5Y0
+tywC0gwAgUeI9H623tZpf33QDvB9R1lsgxK+S5zuKuEKGEml22phzycniVHK4f3T
+Nvzm44WuFmSBl6vBWbp3R7bIul7aklUEidXOkJHITaXjZ4L0Kf5bUMWgPVn9aJJK
+rO4iLrb3FZX64AEtibqXmBICIBSORaIH55vL7HKcW0lN8y8Z/eIBHAVCXZPOQuAh
+p0SpL2HDt+LL8g6fSMNLRQCi8pVM2yMFWojBERWFhIICp9GZ7/JOkCvF4RrCXXht
+O3KLT3qGGoBjwTvOIDLDXcfdRnrqh4/12/8NDqOz7gVqqahqCyuQ6i3QQj6rxzdI
+x5+wKgFeIEbj7O3zHjQ+++WGa1HtX2uwfxk+SaUJ7YB2Lj+XsFwCB9Q5b+XUFgAl
+V9gAuQwINF81D2AKutuqFhA1fQ4aPqH9F8EERyg2iagZLK2jNz+zbLdSXLdvJZro
+EIkPR5tMWvH+r9TTQuUUR30tA89LPK9bfeBTIhLRWTO811zxMIrGuUQE6UAa/6e1
+deCI/PTv
+=N/G4
+-----END PGP SIGNATURE-----
+
+--24iHJmCrsOq3ww5y--
