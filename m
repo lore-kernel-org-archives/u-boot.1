@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BF8C2BA1A
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 01:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0980AC27C53
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 01:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CA9588524;
-	Thu, 20 Jun 2024 03:32:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13ADB884D4;
+	Thu, 20 Jun 2024 03:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sou5CR6k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZWWJleF5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81DB4884C5; Thu, 20 Jun 2024 01:04:18 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id C2F78884CC; Thu, 20 Jun 2024 01:04:19 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A28EB8846D
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 01:04:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFE3888427
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 01:04:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-421d32fda86so4308805e9.0
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:04:16 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42249a4f9e4so2311975e9.2
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:04:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718838256; x=1719443056; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718838257; x=1719443057; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=FTNzwr9dxOJ4zY9jqHAKJxe1vUMNFnqS5tp4Lk+OX0s=;
- b=Sou5CR6kOPWZZp8d7aoE0xw83C8IflsAtYDi6agezBv5n/ez2blNNo5wjM0PRqAfs5
- nEA3d56OYAwUIFH0X4R5NyUIfQ+XOu4Z/ahcmIW/q/LoO/h5DxP+3hPjCyTViNF1LmfL
- fLm2hoz5iLmLio45ycZ293qqqk6ls6O0t7OrHti74gTZHcYekjelIXYiI9xL0TQ5O3At
- avd9mk3HXHpHfYkLmYa2MW4QX8tFUYzVZ4PRVX49Auf0dYtw8rWQ2eTGizQKox/q2hAS
- Wdlk+k8xMruJV+7nhyzARNvc09FeaF2D9dg7usaiSQ7bbs5J7fhxetN7CTouF/KahRXr
- HuGQ==
+ :reply-to; bh=Vpk7Y89IwPKGsYMfO3IDA913TgBD4Hl0+Lmy6nIGugY=;
+ b=ZWWJleF5hl3Bo36LFSrYF/fJx2Ywg2uE0xyz4xAp+JNrENZKW0H9gMvDrAvyP/IKqQ
+ L5Seb1ruXWYn/yApi76qkacJ87p5S0OEHUWHmXVqr+G2/iAdQCdEBf74BztBIjpyaPrq
+ PMUqTVp6YTMUF5aGU7y7ONCLHFzmUMNk1UOu2a/zTll2PLc4Dp3M6en0gMx3k2lZYI6H
+ wnbfrni/4vykjrfE8dKLNdIhHKC/Z21W6n6G+ydy5otsmdP7UuQ4bgFvcc+ZTI6OW8zb
+ tIvbTLPVUQ/vnuJYpEO4JPZDi6jh1eFqUex8dLs0PN8B8+DkucjKlBLvjp3ItdS3iTZc
+ 8HWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718838256; x=1719443056;
+ d=1e100.net; s=20230601; t=1718838257; x=1719443057;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FTNzwr9dxOJ4zY9jqHAKJxe1vUMNFnqS5tp4Lk+OX0s=;
- b=q52eAUcWq9CDE3VqB0eLnPoPZ7TNFTkAGatdqBA1/95gaYXV3qOUHgaf5SUxkp+Ujy
- 2+09gNivvQmQiXgcuYgHRCPTgH2vNVnH2fIcC/CHaTVMosWbrlMcEloi2Xq4lf0VQFAB
- NyKV9EuHIIKMoKu7LVgmRCK9+2ANpruyHE2TaePfYHZNpuM2vEozCAQCC+VSVxEtzR7c
- E2JCs2e9zv+Ch0CHDiPmGtwjJzWMNs1U+3npr6+IAl3MB815/7zewFOuCudbjVfcZitH
- Gu18cYCTQHp8+0ngrCZh9X3ZId3hzxIEhEWj+gPRWLYgC93ROMGlSwsvjPEn71oQhbYZ
- lemQ==
+ bh=Vpk7Y89IwPKGsYMfO3IDA913TgBD4Hl0+Lmy6nIGugY=;
+ b=hZdedncZvARP4I+OfJFiPbx3+GULC3teyXP+tTsmskkq+5HtfPHNxgMaZ6JtIYHpmr
+ Pw4WP7RYsQ9UliXOrCXa/0QlZqfSVmlpTj4LsaxYDew0/e3IeBEWoajmLLUGEJEYGwnq
+ VEEdLJGxxQzZVePPakQsosnpdFadEBJ8YxqHziulF4owm6xa9ghqKIoQ4/Jgs7I3Si1R
+ H1PZIxA02yD/Zqyi9N+XsmZ6L8xOpOUMOUcOomoTzqSMP2UvL8JTRdCEVVw1elbirMuK
+ ye/lsOggCX/9QeCJ4GMr9BOK4GVX7lGAkBlScRxn8sXBokH8kl5swVcAX2Ja9KV/VsPX
+ F6Jw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVD8q9Ycp7eFk2YZkOonNawm4MzBo5ZqRr8f36sYZ6S/ljmEatWj9NS3s15d49inR3sM3EoosRCqa52oNDkg38xbJeFEA==
-X-Gm-Message-State: AOJu0Yyv5bNUb3k6Vy/QhGZfykuhPIUoDQqFU1Ep1GNxGOBZOa/4czi6
- 4E1HuuaitvSD8wel9Hi/iFIhiYIkfE8+4UvCXmyizkvTieCEcbiZ
-X-Google-Smtp-Source: AGHT+IG8iaHjXIpOm4I4wyjmnLqBReehvd4QaCVfycCoDkRMWmuRvr3ZjkdmWOa5GroVV4q55L3LpQ==
-X-Received: by 2002:a05:600c:15c5:b0:422:aca:f87e with SMTP id
- 5b1f17b1804b1-42475182567mr34737015e9.19.1718838256119; 
- Wed, 19 Jun 2024 16:04:16 -0700 (PDT)
+ AJvYcCUhdXHt6BjAYFcwWm68qSaAOU4qr24ExbRK3Gys1a9hb3miQWljYllJECBDWbOuvnfHHkQK5+1xko6p31c2bcBt6JtkRw==
+X-Gm-Message-State: AOJu0Yzh6B1JV+vZMGLfCuD9nondeP7fHnXsvsAWRvpZ3lEPJ3UAHfpK
+ A+EOxBLXXTsUGCJ9XKq/JEmpARqlur5+hDOiZYAmibFb6wlZbJ68
+X-Google-Smtp-Source: AGHT+IE50uPX6/dsOm08GkWzu94yAfjMsAnMI1xcI1X3xPpLcHmeyNTtO5r9UujrnmnMgmXxZgqypg==
+X-Received: by 2002:a05:600c:3b16:b0:424:7c14:d184 with SMTP id
+ 5b1f17b1804b1-4247c14d33cmr5247105e9.15.1718838257339; 
+ Wed, 19 Jun 2024 16:04:17 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4247d0c54c9sm5410465e9.27.2024.06.19.16.04.14
+ 5b1f17b1804b1-4247d0c54c9sm5410465e9.27.2024.06.19.16.04.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 16:04:15 -0700 (PDT)
+ Wed, 19 Jun 2024 16:04:17 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -80,9 +80,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
-Subject: [PATCH v4 7/9] mtd: implement support for LED status activity
-Date: Thu, 20 Jun 2024 01:03:25 +0200
-Message-ID: <20240619230400.8459-8-ansuelsmth@gmail.com>
+Subject: [PATCH v4 8/9] ubi: implement support for LED status activity
+Date: Thu, 20 Jun 2024 01:03:26 +0200
+Message-ID: <20240619230400.8459-9-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240619230400.8459-1-ansuelsmth@gmail.com>
 References: <20240619230400.8459-1-ansuelsmth@gmail.com>
@@ -106,71 +106,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Implement support for LED status activity. If the feature is enabled,
-make the defined ACTIVITY LED to signal mtd write or erase operations.
+make the defined ACTIVITY LED to signal ubi write operation.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- cmd/mtd.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ cmd/ubi.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 795aaa2b37d..d36dff7875c 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -10,6 +10,7 @@
- 
- #include <command.h>
- #include <console.h>
+diff --git a/cmd/ubi.c b/cmd/ubi.c
+index 8c1b5df0572..cfc26d53d65 100644
+--- a/cmd/ubi.c
++++ b/cmd/ubi.c
+@@ -19,6 +19,7 @@
+ #include <mtd.h>
+ #include <nand.h>
+ #include <onenand_uboot.h>
 +#include <status_led.h>
- #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
- #include <hexdump.h>
- #endif
-@@ -558,6 +559,11 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 	while (mtd_block_isbad(mtd, off))
- 		off += mtd->erasesize;
+ #include <dm/devres.h>
+ #include <linux/mtd/mtd.h>
+ #include <linux/mtd/partitions.h>
+@@ -416,7 +417,19 @@ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
  
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+	if (!read)
-+		status_led_activity_start(CONFIG_LED_STATUS_ACTIVITY);
-+#endif
+ int ubi_volume_write(char *volume, void *buf, size_t size)
+ {
+-	return ubi_volume_begin_write(volume, buf, size, size);
++	int ret;
 +
- 	/* Loop over the pages to do the actual read/write */
- 	while (remaining) {
- 		/* Skip the block if it is bad */
-@@ -585,6 +591,11 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 		io_op.oobbuf += io_op.oobretlen;
- 	}
- 
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+	if (!read)
-+		status_led_activity_stop(CONFIG_LED_STATUS_ACTIVITY);
-+#endif
-+
- 	if (!ret && dump)
- 		mtd_dump_device_buf(mtd, start_off, buf, len, woob);
- 
-@@ -652,6 +663,10 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
- 	erase_op.addr = off;
- 	erase_op.len = mtd->erasesize;
- 
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_activity_start(CONFIG_LED_STATUS_ACTIVITY);
 +#endif
 +
- 	while (len) {
- 		if (!scrub) {
- 			ret = mtd_block_isbad(mtd, erase_op.addr);
-@@ -680,6 +695,10 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
- 		erase_op.addr += mtd->erasesize;
- 	}
- 
++	ret = ubi_volume_begin_write(volume, buf, size, size);
++
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_activity_stop(CONFIG_LED_STATUS_ACTIVITY);
 +#endif
 +
- 	if (ret && ret != -EIO)
- 		ret = CMD_RET_FAILURE;
- 	else
++	return ret;
+ }
+ 
+ int ubi_volume_read(char *volume, char *buf, size_t size)
 -- 
 2.43.0
 
