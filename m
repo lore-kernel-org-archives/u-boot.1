@@ -4,83 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D5B7C27C79
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 17:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08EB9C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 18:20:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BA758839C;
-	Wed, 19 Jun 2024 19:22:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B1A28839C;
+	Wed, 19 Jun 2024 20:20:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T3WMyObf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Atywlw7V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 188738839C; Wed, 19 Jun 2024 19:22:40 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 79E818844C; Wed, 19 Jun 2024 20:20:17 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A22F086EB5
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 19:22:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6987881C6
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 20:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6fa0d077694so2520a34.0
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 10:22:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718817755; x=1719422555; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gAjl3UjvmCcwD1XNhe8rRf9fDigt6VjQfbslQIaA4+A=;
- b=T3WMyObfmjoixznWASd01NkH3P3XB7T41H7hfqM7b4fxMAQ3XxU9/e0Ka7o9KJ2pvW
- XtzAhnDTmFj5B3OoFW5H/yi7RR7Pdk9kOBJFRqPuSp5qyMeGKA+JSMlxAVgGy0ZCHbQa
- ubv7xDPKISRs+xpAlE4U1o7OA4sjQyplysHHI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718817755; x=1719422555;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gAjl3UjvmCcwD1XNhe8rRf9fDigt6VjQfbslQIaA4+A=;
- b=EdFrJJdos4hTgwZL2vAjMUPlL7BBw/7Uhw9ncwpAHJXxK2s/aPYSiI8eApx8QOCXAo
- AlrdSQXPeb3Us/P9e380GAnt63/EO8baqrPnPKAHwOEiloOTkMDy0COxAxCMH1eucdzU
- o8xioSU5326mH+bmG3ohyw0WbTXSnRdX5zdFmVo11bFKGbeeplsjBA0GxTJ2Eam0Aca2
- +9wOY9fk89ErRXvg8ZIbpYt+BLNaEWTcSJSBh1nnuFtZQ7AXIXj0OaBdLOatfMlXn67j
- O/MuYZzs29Jz6mb7YwFc0C2KG0Gtu0bSgzxFEO0cBsRaAT+SXTT14hfPhMX/FMLfKMe6
- IH5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXSAxh5LkQgS5+cWYIz/fyO5wQgBKL/m+kQ2EX/Qa0HHi6t2oQH1+Y/7XG8lUIPjVcbeUbFT1CqnvGVgh+DDZgkZBtJ6g==
-X-Gm-Message-State: AOJu0Yxg5TbrVFdZk+eHu/QC72MHzeXTcTGUQG90X4sBpqiRXvyyogTk
- waYeex2qBbYGfZVUHVJ45/nPpICk+J5AfQQtGZjWLMtxF++N8ZuW4G1wUrEh67Q=
-X-Google-Smtp-Source: AGHT+IET9MB+XqHsadubpiV8EGe0Mbf4UNuz21SC8V357iijX/I67bPKi3JSbX29xGB+0gIWJzt5oQ==
-X-Received: by 2002:a05:6830:16cf:b0:700:5090:7081 with SMTP id
- 46e09a7af769-70074117519mr3664299a34.7.1718817755343; 
- Wed, 19 Jun 2024 10:22:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6fb5afab892sm2233443a34.7.2024.06.19.10.22.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 10:22:34 -0700 (PDT)
-Date: Wed, 19 Jun 2024 11:22:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] efi_loader: avoid duplicate weak
- invalidate_icache_all()
-Message-ID: <20240619172232.GA3435012@bill-the-cat>
-References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
- <20240616173105.7430-4-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45JIK5iT004044;
+ Wed, 19 Jun 2024 13:20:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718821205;
+ bh=xo7sMFO0OzO1TxPNl/76GmheAU3tDGFyFENraZtr8iE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Atywlw7V9KrI815S+LyGItHj2O/kol01qYuq3fEjBBT9SHzFb117C4PebZJB/nGqJ
+ iD+5WeB9ODX2xtQ9J+H37I7AsCny4PcseustZpAFy+SOYnsIvkhWamfLzU+MQ8xq2j
+ STxmIefZyyzORPNEXW7RkY8lLj1aAXJ3kR3MfDZc=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45JIK53B097119
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 19 Jun 2024 13:20:05 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
+ Jun 2024 13:20:05 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 19 Jun 2024 13:20:05 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45JIK56O122459;
+ Wed, 19 Jun 2024 13:20:05 -0500
+Date: Wed, 19 Jun 2024 13:20:05 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Dhruva Gole <d-gole@ti.com>, <afd@ti.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@lists.denx.de>, Robert Nelson
+ <robertcnelson@gmail.com>
+Subject: Re: [PATCH 1/6] arm: mach-k3: Add default ATF location for AM62/AM62a
+Message-ID: <20240619182005.yfkvf6ongwijorzz@dividable>
+References: <20240214163009.983034-1-afd@ti.com>
+ <20240214163009.983034-2-afd@ti.com>
+ <20240619114916.72icpumb2tumsnbt@dhruva>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gIf2QHc8E7muECtB"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240616173105.7430-4-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20240619114916.72icpumb2tumsnbt@dhruva>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,45 +82,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 17:19-20240619, Dhruva Gole wrote:
+> Hi,
+> 
+> On Feb 14, 2024 at 10:30:04 -0600, Andrew Davis wrote:
+> > There is a default ATF load address that is used for devices that have
+> > ATF running in SRAM. For AM62 and AM62a, ATF runs from DRAM. Instead
+> > of having to override the address in every defconfig, make add a
+> > default for these ATF in DRAM devices.
+> > 
+> > Signed-off-by: Andrew Davis <afd@ti.com>
+> > ---
+> >  arch/arm/mach-k3/Kconfig               | 5 +++--
+> >  configs/am62ax_evm_a53_defconfig       | 1 -
+> >  configs/am62x_beagleplay_a53_defconfig | 1 -
+> >  configs/am62x_evm_a53_defconfig        | 1 -
+> >  configs/phycore_am62x_a53_defconfig    | 1 -
+> >  configs/verdin-am62_a53_defconfig      | 1 -
+> >  6 files changed, 3 insertions(+), 7 deletions(-)
+> > 
+> 
+> Beagleplay stops booting completely with latest U-boot so I did a little
+> bisect and it seems like reverting this patch helps.
+> 
+> I am not sure what other implications there are of reverting this so I
+> don't suggest immediately dropping it, however some hints around what's
+> missing on beagleplay vs other platforms would be helpful.
+> 
+> Because other platforms based off the same SoC don't seem to be
+> affected.
 
---gIf2QHc8E7muECtB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Grumble... I had to rediscover this in parallel as well - Thanks Dhruva.
+mkimage -l tispl.bin and comparing with kernel log of reserved mem
+had me completely confused.
 
-On Sun, Jun 16, 2024 at 07:31:05PM +0200, Heinrich Schuchardt wrote:
+a) Memory maps are already notorious to manage on complex heterogenous
+  systems. From beagle perspective, we have no need to go and monkey
+  with DT defined memory map and DT should be the default and modifying
+  DT should be explicitly called out with a log (instead of done
+  "transparently") - so instead of CONFIG_K3_OPTEE_LOAD_ADDR default
+  being forced from u-boot, it should be made optional, where when
+  defined, it can overide the dt definition or some variant of that.
 
-> If multiple weak implementations of a weak function exist, it is unclear
-> which one the linker should chose. cmd/cache.c already defines a weak
-> invalidate_icache_all().
->=20
-> We don't need a call to invalidate_icache_all() on x86.
-> ARM, RISC-V, and Sandbox provide an implementation.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+b) Looks like
+   https://lore.kernel.org/u-boot/20240214163009.983034-4-afd@ti.com/
+   missed beagleplay? and we were in for a surprise there - i dont want
+   to switch from default dts for beagleplay to something different just
+   because of simplicity for users to know exactly the carveouts and
+   with other s/w starting up on uC, dts is our "canonical truth".
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---gIf2QHc8E7muECtB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZzE9gACgkQFHw5/5Y0
-tyxRKAv3UkGBHU/YHeXEZkvUqL/KBx3l6uLwLdW9HWBc3l/FErjnKpCQ+EgmMyOJ
-tU8Jv+Le0XOQGUKk8F0zqfoYPaZxFVQZ2GQrv8NeVUBwnSWAofS+C8wTJEGfY7bk
-YAs0iwaRAho+ZG74vvRJeNuEDRA75BPV//BNclVaWqmXU/cO4ThnPxkubHbeYggK
-4IvsUS+mEw3uKMBqAZpuJaHA38OgB5t/9opqak+fkOM6OtaDyHEPWH+19fSDFGVs
-6EppIBiTCoCBhxQ2TL4hkijBU5ILQVV4okUfkW2hYo/yL++OnbdIfAJ7yMgCgyO9
-PeEt3znTiHS+CCMl8rTH93SCX3l0ShlAQDSvWJg1nuGWpwIdfWtZElMbyPyBzmHi
-5vwsz1bFn6CvCcVASPUVv/QLwWsRaBgTExyEnP+37M+quz9/Dj/hUsF9QV/mIpD6
-+SabCm+7uRxyeN4VCkstSGmTAgaB0zi/Qp9vezoGH+JFHVEfKvHY09zZ+/Zp3Uvg
-pxQ4YFM=
-=7Tay
------END PGP SIGNATURE-----
-
---gIf2QHc8E7muECtB--
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
