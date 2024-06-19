@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E6CC2BBCA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 21:13:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17FCEC27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 21:13:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DA9988485;
-	Wed, 19 Jun 2024 23:13:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 73B3C8840F;
+	Wed, 19 Jun 2024 23:13:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 145DB87D83; Wed, 19 Jun 2024 23:13:05 +0200 (CEST)
+ id BECC9884A4; Wed, 19 Jun 2024 23:13:26 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B00E388363
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 23:13:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFA9588363
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 23:13:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,16 +25,15 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1sK2c0-00EJGk-Pu;
- Wed, 19 Jun 2024 21:13:00 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1sK2cN-00EK6f-Gb;
+ Wed, 19 Jun 2024 21:13:23 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: Fabio Estevam <festevam@gmail.com>,
 	u-boot@lists.denx.de
 Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] board: gateworks: venice: enable GSC supervisor for new board
- models
-Date: Wed, 19 Jun 2024 14:12:58 -0700
-Message-Id: <20240619211258.2068188-1-tharvey@gateworks.com>
+Subject: [PATCH] board: gateworks: venice: delay before reading GSC EEPROM
+Date: Wed, 19 Jun 2024 14:13:22 -0700
+Message-Id: <20240619211322.2068243-1-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -54,69 +53,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Gateworks System Controller (GSC) has a voltage supervisor which is
-disabled by default. On older boards we want to maintian this but on
-newer boards we wish to enable the voltage supervisor.
+Extensive testing has shown that at higher temperatures operating
+without a GSC backup battery, the GSC needs a small delay after
+releasing the I2C SDA/SCL pins before it is ready to handle I2C
+requests.
 
-The Gateworks System Controller (GSC) can disable the board primary
-power supply by driving a pin to a FET high. On older board models
-the leakage of the GSC may exceed the leakage of the FET causing this
-signal slowly rise when the GSC battery is low and the board is in a
-powered down state resulting in the board being kept in a disabled
-state.
-
-Newer boards have a hardware fix to avoid this leakage and thus should
-enable the voltage supervisor.
+Add a delay to avoid errors such as:
+wait_for_sr_state: Arbitration lost sr=93 cr=80 state=2020
+i2c_init_transfer: failed for chip 0x20 retry=0
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- board/gateworks/venice/spl.c | 20 ++++++++++++++++++--
- 1 file changed, 18 insertions(+), 2 deletions(-)
+ board/gateworks/venice/spl.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
-index b0a315ba9531..9a22eeef36ba 100644
+index 9a22eeef36ba..ec3c394d24d8 100644
 --- a/board/gateworks/venice/spl.c
 +++ b/board/gateworks/venice/spl.c
-@@ -119,13 +119,29 @@ static int dm_i2c_clrsetbits(struct udevice *dev, uint reg, uint clr, uint set)
- 	return dm_i2c_write(dev, reg, &val, 1);
- }
- 
--static int power_init_board(void)
-+static int power_init_board(struct udevice *gsc)
- {
- 	const char *model = eeprom_get_model();
- 	struct udevice *bus;
- 	struct udevice *dev;
- 	int ret;
- 
-+	/* Enable GSC voltage supervisor for new board models */
-+	if ((!strncmp(model, "GW7100", 6) && model[10] > 'D') ||
-+	    (!strncmp(model, "GW7101", 6) && model[10] > 'D') ||
-+	    (!strncmp(model, "GW7200", 6) && model[10] > 'E') ||
-+	    (!strncmp(model, "GW7201", 6) && model[10] > 'E') ||
-+	    (!strncmp(model, "GW7300", 6) && model[10] > 'E') ||
-+	    (!strncmp(model, "GW7301", 6) && model[10] > 'E') ||
-+	    (!strncmp(model, "GW740", 5) && model[7] > 'B')) {
-+		u8 ver;
-+
-+		if (!dm_i2c_read(gsc, 14, &ver, 1) && ver > 62) {
-+			printf("GSC     : enabling voltage supervisor\n");
-+			dm_i2c_clrsetbits(gsc, 25, 0, BIT(1));
-+		}
-+	}
-+
- 	if ((!strncmp(model, "GW71", 4)) ||
- 	    (!strncmp(model, "GW72", 4)) ||
- 	    (!strncmp(model, "GW73", 4)) ||
-@@ -298,7 +314,7 @@ void board_init_f(ulong dummy)
- 	dram_sz = venice_eeprom_init(0);
- 
- 	/* PMIC */
--	power_init_board();
-+	power_init_board(dev);
- 
- 	/* DDR initialization */
- 	spl_dram_init(dram_sz);
+@@ -303,6 +303,7 @@ void board_init_f(ulong dummy)
+ 				mdelay(10);
+ 			}
+ 			pinctrl_select_state(bus, "default");
++			mdelay(10);
+ 		}
+ 	}
+ 	/* Wait indefiniately until the GSC probes */
 -- 
 2.25.1
 
