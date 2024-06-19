@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD15AC27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 15:22:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80699C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 15:23:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39B258836D;
-	Wed, 19 Jun 2024 17:22:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CC5D78843F;
+	Wed, 19 Jun 2024 17:23:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cbnz6ben";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lMArniqF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9549388415; Wed, 19 Jun 2024 17:22:14 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E3EDF8844B; Wed, 19 Jun 2024 17:23:09 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7717E87F19
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 17:22:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2ECE8836D
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 17:23:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6f361af4cb6so2347596a34.3
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 08:22:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718810531; x=1719415331; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SBYxD23YVlx9ZSIs6RZoe0LXlZ2Aj0xCnCzIg1E6Ypg=;
- b=Cbnz6beny4NHz23l5RUqHFENCvRjGaMes4yrGxaG0xSGbtnmlRk4cJibJiMhBkWFaA
- Vcf4qepHGcsK/Iu2fDBJVedlowQyOH95p9KsZHll2qODFB/o6JAA+Hl31mK2VA+l+rSR
- h/YGq+SkMZ5SaVxoF4mKNsV1smo9NNO6FYQTk=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 737B73F2B3
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 15:23:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1718810585;
+ bh=skrMnrr7eXW0ZvOM2iUnpOJOXquScmtacpDFNvM3VGY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=lMArniqF8Y617h1y2pqBLk7+CduwviiPdPUwiOjbBujpI1GRUq47dCiuqmEPnBlBZ
+ tqc1pL3pQCxzd4Bo+1umCaZY6HG19ThQDxtY9enkzKcs9dH9CakPVVjrV92X+1FYPZ
+ 06KBZwcm9uEqxTZGn6ygNgGhZ22QapIn8P3g4hvBwKtD7uf5A52Pk3+H8WjI+KHZG0
+ bZUZfvbaLx9XqvjmzjhWKQrHvlQ1Heh3DnOVKHsaDlOh5V/6tjqPolNbjWnXOmNAab
+ RTGFikWnaQhSY+4W2HfRdcvdKcJL7s322y5bgeKz/8iF+353hWiyKpLLgqxNu02bE6
+ UIAOcIWBW5slA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4217a6a00d8so43695765e9.0
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 08:23:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718810531; x=1719415331;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SBYxD23YVlx9ZSIs6RZoe0LXlZ2Aj0xCnCzIg1E6Ypg=;
- b=MCoFwevYo6BzlGODxM7tp9GFDlW4r/2zwuArEoyUnboVmT98GbNFYPSXdJDy0XDJCJ
- J6MrjjONe8qaGerTMvhAfWahyIO4RdGFWSbZ/4SC1Sq0IoBbv6+m0E6bSxE6h+uXIMPV
- 1xFaj8aNrIOWozNnVoJbBAIK3529kiB70jXQDHb8BIwNfUWM24R02SBrQpIG0ruCFHzc
- Ya8EWRJ7OIKVCfF0Bu1YI63Gv92B4+uuiIhSa/Eo6Nj1ucd7RgRYF/46CRnYICK0cZZR
- rqmMe0yHtttYteTUJNufWBWHlFX2ggP9BKfAdZ2FmkgbKsgBVb04MfJdLyGmNOYz8eh7
- Mz0w==
+ d=1e100.net; s=20230601; t=1718810584; x=1719415384;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=skrMnrr7eXW0ZvOM2iUnpOJOXquScmtacpDFNvM3VGY=;
+ b=rYzG3QEiOOcX3EFDTy7CFfcXHYhekMoHF0hmS5EdsrDkYD/hSjGSLIReIYQdy+Itj7
+ lDchcLowuTb3KSOsORFgYvDHM31BmsJJYYeGxZKCtYa0oJTYV8OwtXRmwYfs9mpFOzht
+ 1nk/aZX+V/K4kjZp9R/m/e/oyWguZjVdf7P1gLPfV0C/3/eX8uDmjlPLlz+LEM7rMlaY
+ Tfv0GxPFp98qagc+TsaDU1xlMQmyy+5ewsQoyclyx/OO31+feSu7+7JfVN3+gzGhzao4
+ Oh3Y6zriji4WirlEWjomE57PdcLHPeW3E648e4ySP9VBMq5qy7nRhvQ5azZ5eRnXaFpf
+ H97Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYLJGMcY92TGzU4CT9Y2I2JuNsShyB4Ky0a8U9Tq1/okJmg72gx7V/SzcG8r78EVLoGebitSdf/L/OzlYBx0GzL5wpOg==
-X-Gm-Message-State: AOJu0Yxk7ClVSCBfxKWTN61n7LbJLSkQhpgVqfVMXkqCnPuzPHbQAq4f
- XWJEpOp9jY3eHotJhiNxM8f6pTACZ6wckAhu9VeSFfXcrZOHYav6UJ0J6cbI0WBjUiZ9OsM0lCA
- Eo3yDBQ==
-X-Google-Smtp-Source: AGHT+IGcxmnmMC1ezT584qxWe1yb/dmT1yKe0mh6NSHhzTr7o7+DJ3/3OHtk/M5ZEKWyVXYUKjYO0w==
-X-Received: by 2002:a9d:67c8:0:b0:6f9:cf25:d6fe with SMTP id
- 46e09a7af769-70076c0c109mr3082334a34.24.1718810531282; 
- Wed, 19 Jun 2024 08:22:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6fb5afa9f62sm2218057a34.3.2024.06.19.08.22.10
+ AJvYcCVuROb6a1pWsglQaG9qQOaAstckL4m6nobb95cEXYpd/46UeYGb3plFQ+/G12Ja2Ee0KZ87DVYXksO3tKoNvorLVgDOBA==
+X-Gm-Message-State: AOJu0YwE6Ck7s2zOtMjtQaM/8j9l/1GpfX8EUKbEreNcuNABqrtAe6Yd
+ t9+I972ovlorbz0Y21P2QDpAgCVoiRcsgWSAbrhIgZfZRt6PbAA+U5EUbNRwv82PnMf1rf72x9H
+ 9mCSL8aj9eT1I7MYwsZmH/Ujn+mgZoKfOafKjLKpW7fesHWMMrU1Pee7VfCu21I25VYw=
+X-Received: by 2002:a7b:c355:0:b0:421:8060:f772 with SMTP id
+ 5b1f17b1804b1-42475018647mr20703805e9.0.1718810584478; 
+ Wed, 19 Jun 2024 08:23:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGRnNfyzPIRV4+fp8076pyD7LlfbwxKkU9I/3Rz3RHKVbwb7h0itYv0JxiBshQQSEvUcdjxKg==
+X-Received: by 2002:a7b:c355:0:b0:421:8060:f772 with SMTP id
+ 5b1f17b1804b1-42475018647mr20703675e9.0.1718810583951; 
+ Wed, 19 Jun 2024 08:23:03 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-178-202-041-025.um47.pools.vodafone-ip.de. [178.202.41.25])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4247101a955sm49199235e9.0.2024.06.19.08.23.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 08:22:10 -0700 (PDT)
-Date: Wed, 19 Jun 2024 09:22:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Klaus Goger <klaus.goger@cherry.de>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] rockchip: puma-rk3399: increase Ethernet PHY timeout to
- 30s
-Message-ID: <20240619152208.GC68077@bill-the-cat>
-References: <20240619-puma-eth-timeout-v1-1-db5c17153f82@cherry.de>
+ Wed, 19 Jun 2024 08:23:03 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>,
+	Leo <ycliang@andestech.com>
+Cc: Sean Anderson <sean.anderson@seco.com>,
+ Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] riscv: semihosting: correct alignment
+Date: Wed, 19 Jun 2024 17:22:52 +0200
+Message-ID: <20240619152252.173684-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xTUfhyU67OMe3JwS"
-Content-Disposition: inline
-In-Reply-To: <20240619-puma-eth-timeout-v1-1-db5c17153f82@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,49 +104,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Commit 7400d34ba992 ("riscv: semihosting: replace inline assembly with
+assembly file") reduced the alignment of function smh_trap().
 
---xTUfhyU67OMe3JwS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+As described in the "RISC-V Semihosting" specification [1] the ssli,
+ebreak, and srai statements must all reside in the same memory page.
 
-On Wed, Jun 19, 2024 at 11:55:52AM +0200, Quentin Schulz wrote:
+[1] RISC-V Semihosting, Version 0.4, 12th June 2024
+    https://github.com/riscv-non-isa/riscv-semihosting
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->=20
-> On Puma v2.1 with a KSZ9031, the Ethernet PHY often doesn't detect the
-> link in the 4-second default timeout.
->=20
-> After some boot-loop test for about a thousand boots, 70% were below
-> 10s, 90% below 15s and 100% below 30s. Let's play it safe and make it
-> 30s so that hopefully all links that should be detected are.
->=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  include/configs/puma_rk3399.h | 3 +++
->  1 file changed, 3 insertions(+)
+Fixes: 7400d34ba992 ("riscv: semihosting: replace inline assembly with assembly file")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/riscv/lib/semihosting.S | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please rebase on -next where this is now in Kconfig.
+diff --git a/arch/riscv/lib/semihosting.S b/arch/riscv/lib/semihosting.S
+index c0c571bce9b..49bb419a962 100644
+--- a/arch/riscv/lib/semihosting.S
++++ b/arch/riscv/lib/semihosting.S
+@@ -8,7 +8,7 @@
+ 
+ .pushsection .text.smh_trap, "ax"
+ ENTRY(smh_trap)
+-	.align	2
++	.align	4		/* keep slli, ebreak, srai in same page */
+ 	.option	push
+ 	.option	norvc		/* semihosting sequence must be 32-bit wide */
+ 
+-- 
+2.45.1
 
---=20
-Tom
-
---xTUfhyU67OMe3JwS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZy96AACgkQFHw5/5Y0
-tywtpQv/WDydYyMTe7UKZEFEr96rE0qC9aOPS7E+8kg+coIwQQuX7p8/QyEA5IvS
-AmUoZ9iSnfyuS5cv0dWPjrd4FJrK0yAEaYFVC2WMadj2TN4gtVzD4DtFg4H/2wa+
-ign+24sSvwp41uayIksEvpQacvHysmMLPOTsKRDbu5FMtHUaIKFjossUnVOirymf
-FCqxyfHuqKj5nsmNJjlAIe+dLG7EIGWRtLFngd/Yo1wIWgJvEGYeDzfrkaUwofFJ
-ChXvYS0IcLmw7Kket6gcAa4Z9c2VniTjZ/N9pDVbIpkkYC5nunaV989ZfVCdz9ua
-O6pGH33OsBgY3G8O1iNr3cyWpiGC7aw87NfxFDUJ+h0EuRQcHBgbVr3doxDFm1PB
-8kKq9aInX7QTwV6+kSlzKbT53Oxd6RNFDr59RyvEBR3/hFQs8kT35A8+ieIqcylW
-kROZGWQM3L+veW5IymItCm7lF6qsuhTA0blZJ5mvGv5SSiaSbozP3pyNBKy4PB8H
-CFqgehHB
-=p8V7
------END PGP SIGNATURE-----
-
---xTUfhyU67OMe3JwS--
