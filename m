@@ -4,133 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE76DC27C79
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 07:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0D1C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 07:25:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D3A688445;
-	Wed, 19 Jun 2024 09:17:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E876883F6;
+	Wed, 19 Jun 2024 09:25:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="HlV4qg6L";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="azcXESxn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92CFA88445; Wed, 19 Jun 2024 09:17:56 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::613])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9616588400; Wed, 19 Jun 2024 09:25:20 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC8EE8844C
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 09:17:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40190883E7
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 09:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fjKPT2ZCtwovhC0hLOPts2RKcFB7vCUSWqk+S7dDnO5V0H3kpDxFRmJ4s5WRFhPLt/PS1gaEGazYFYallwVczxRU3eGI2kB2MOk83hS1Y8CTW8qlGjJQ5hc5Md5NO376BM+fRmv9/keshYN9rvLoLTeIEzwZ2qb82pCtfZylyiHwF4+k/gFHMwrxw/Or9CvSeNn4YxUj5Lo8w2oNNJ87UUsNMrGsvChnU642pgFDc+S58R8afktCE38mbZ2BVmpDNxxuU93iuhNvlfKu3rhXQyGd/R/2VdmYikdzdWJSlPljABX2FgCkLafyQWcYRE6WS9TR99DYiucWLXsOJo5W3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dkOX2E1yD71/ZrOqsBBRFG3BZZt/4KsVEelECUeIifs=;
- b=hUt4cODItYMVES4iQ1D8WdMna2a7/mWE59nTdCI0WsaG5GfhCfpnAXSqX4wiwHL3ti+YXmLjH0mrvmwe8xQCn276hgLRo3C5iDNFmxzTBE5ylMeNcBtdctg6QTpz6CCz5iOAPnLv73Qsuyu6HwZLehmSemsDSQLQMYqxnkbC10AluTsqpz0s5mOelRcT+AIKc34sbU0qmFTKuCB4+UkrGsJEdSsya9p8aZv9Y6gIZuFbeSuRFowV9tz/0v9dK6xRpcoA1NqZl4hEnr1OLlTVA/RzD7bhj4zkEKHDW54pjI6iZzUGZtH+v+PpisVioJuJTTP9hX8gD5cZgYYusLC0qw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dkOX2E1yD71/ZrOqsBBRFG3BZZt/4KsVEelECUeIifs=;
- b=HlV4qg6Lp2oJ/eIucu3WTgLKuc/ThHQW/SsfvZDj0T6xxDeZZtR6NolNVDnOoYnxQ0uovG/AAftyuRCy1YuYEUxo7Y5huvXOyFriEbVATgl9V87dIAvMhbCOMNOb0bkSDBtQUB5md72xwg45QLVo86vTviE6Pmhj0JILyDtKk+w=
-Received: from PH8PR07CA0037.namprd07.prod.outlook.com (2603:10b6:510:2cf::17)
- by DS0PR12MB7608.namprd12.prod.outlook.com (2603:10b6:8:13b::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.19; Wed, 19 Jun
- 2024 07:17:47 +0000
-Received: from SN1PEPF00036F3E.namprd05.prod.outlook.com
- (2603:10b6:510:2cf:cafe::ec) by PH8PR07CA0037.outlook.office365.com
- (2603:10b6:510:2cf::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.32 via Frontend
- Transport; Wed, 19 Jun 2024 07:17:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF00036F3E.mail.protection.outlook.com (10.167.248.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7677.15 via Frontend Transport; Wed, 19 Jun 2024 07:17:47 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 19 Jun
- 2024 02:17:46 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 19 Jun
- 2024 02:17:45 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 19 Jun 2024 02:17:44 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@amd.com>
-Subject: [PATCH 3/4] arm64: Add versal2 mini ospi support
-Date: Wed, 19 Jun 2024 12:47:32 +0530
-Message-ID: <20240619071733.10256-4-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240619071733.10256-1-venkatesh.abbarapu@amd.com>
-References: <20240619071733.10256-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2c4af25f7d7so5306262a91.1
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:25:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718781917; x=1719386717; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5yUcM2r7KgukhMAVi4mxJTid+HTbBYIp1p91NfG/n24=;
+ b=azcXESxncfiLQlPYwJe/g4Q/50XLwpFyLO/rpP41BUL1p4zk3ebB0TOuqmbetTSiAt
+ qOlXB38HrZUoMEHmYtUuMNBA1P6MtBOkWCb955/5KX626EKaxhkv3oj4nOEYjCheLcwM
+ MkHiGI9RQ5nwJZDXxzWjvXsuldztMndaaeu95xrTDjhyPNAWexo2lFpTkNqaxNzq5obx
+ wEATr9h+Nj2fh/LJSRdUs0d+5Pp4Ts5R8jzGBm+0H1cgtTgby7wgQJPOlTcTEgg34Teh
+ 814jZu0LQO3kAUNeaa9737/ih6+q4SWv6/j8jYhjnO4Kzj8EG8xY6GQJUJQFd2K4mjOR
+ ln4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718781917; x=1719386717;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5yUcM2r7KgukhMAVi4mxJTid+HTbBYIp1p91NfG/n24=;
+ b=unKSYTEh31mewTdPoCBkFFC4hfl52OPjwND4889z96Em5FlmJkdHgb0wekyxviW8cW
+ 3JfuJ6lBp/L5jbe7lLwzT48e2QReedSTYADCAQZvaQaVvaq8ME+WcI00MH5Nkxc2T14a
+ 7U/FP8Il7fKUTGxa1MoCOXC06KWoIqF7wbN24MDyx0A/FtTmaxydGfO8TZYNmK/cMXpD
+ c8JkWsYSLGqY3s+DHf9CGx1OXMHDyNBbwMId/dxnc/xNZEMSD/s2ahdRa4WqflqdGN3B
+ tJShg6sukNC/fAZ34X4/hcP2iAKPmbhuKnXRV7rVQp+clEk3LIKNfeFsvOVIflr2Kl8D
+ mwBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+hp9TbhBSHQYkOyuEMF4TTgJvTBKsmkxR+ZkypGNqYomr1Jv5hmRjJvm2HKK/cPxwjCtMYZEKloj1Q6zLHrN4tQLSMA==
+X-Gm-Message-State: AOJu0YyQwcrHupe2xV+GxsZJSiBl9GedEoGWoXWmvLNZaD/+uPJl25hS
+ uOKPLHB4QkYdITfSkVtyM+dUm75X05WBWQvrkBx11vS/HSOMkbroApYZil3MUiJ740wCkZBNf03
+ ygcYxvsXNGR9c2wJyxQkolMEbsDvMbFBgM14pFsEtQiIfKITCx5k=
+X-Google-Smtp-Source: AGHT+IF/ppxswOhbGJaqyVOh3AjXHVNOD6KQaF4WTHFxLN7l8gzpa0HPQtW1BVyNUdz/MKDgNYCLO2xMHI2CpmxX2d8=
+X-Received: by 2002:a17:90a:3044:b0:2c4:fc64:6b81 with SMTP id
+ 98e67ed59e1d1-2c7b5d52cb7mr2006036a91.31.1718781916646; Wed, 19 Jun 2024
+ 00:25:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3E:EE_|DS0PR12MB7608:EE_
-X-MS-Office365-Filtering-Correlation-Id: ece19faf-6eb5-4d06-08cf-08dc902febb1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230037|36860700010|82310400023|376011|1800799021; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wzXUaZVqXBDnQu8/8U/UlwqfTYykABdrCb/dDiVUrYVvCU070Gplrnhdj5WK?=
- =?us-ascii?Q?f9MIvz7E2CqrTPgHtrG4Me4E+U0yqVOAbb1wWfXjdsQl5nIqip6Xdnii3alD?=
- =?us-ascii?Q?IWz30JzFsezm3zhxjCd5mXwEExvnRE6l68171QT7oFOIUZN/+YxaxOvL3Aq2?=
- =?us-ascii?Q?5NtpLexRgpR0MoG+Jhg47qNUOhUgYS/9Wjwl4IQuTIhvRBlDSS1vAkGr3JyS?=
- =?us-ascii?Q?S4e0D3VphSHUty5K0io2bedZj36niLkJ7NI+7yOVnm72uK2Or4cCp72iHq3N?=
- =?us-ascii?Q?3oVJlGOX4pHwnGBLutVqoRYJ2Bdm+AgcLG1EnkbC+xc7i9o/7ebjXv74Ri2o?=
- =?us-ascii?Q?cABSH1imw6lB9lpZfCewwJTlVixHGagTC8sbWoL4VYVj32ye6aLLhKju1McB?=
- =?us-ascii?Q?LOkNxwgVzFaNqsQ6ePxn5kxe0rfTEBR1zgHsbFH2xixoNN+ZHzzCH7D87kxP?=
- =?us-ascii?Q?Efah9p4ggRrii6keUWQIzxw+07/iDWbY4+yzdM6hEJhS1+6y3gR/OLvBmGtV?=
- =?us-ascii?Q?M1ZNoaL6DvFQS2eSdfwnyhl/ZPUjQ33XOW/LY050e5uTgIgwxb0k/P9eu9/C?=
- =?us-ascii?Q?ciM/RttZ3RzYvtqwr1oBYWGF/5w5xodF0Q5QLeXOK2XJUWVWXpnOWgxbL7Rs?=
- =?us-ascii?Q?vfd9JnjWIab0GRTzMoh0U+vyTOidytymhehaxSiPxP5NcKI5lxq4juB8D/T2?=
- =?us-ascii?Q?Re4ZUT1S/rfq9J7qYpzBpDF21TvimHdc96K9XsYkmVhEoaIMSpLYUfK+9fdz?=
- =?us-ascii?Q?9+ZSXpZyfpaLsFjvJDp8A/G0R2fk7mkiUuJkqWguK4/IgNaUjin7E6IMRqY5?=
- =?us-ascii?Q?rS2rxin3dMunlarcjjy/QTzdkd37SNUTkBrASzaWlfaGRB220kZaO38SalCG?=
- =?us-ascii?Q?T8U1dXgfilfLJSF+Xs/D5iDnWDqMzs3/vzBHzfxRVM+273bxaWz+vsD0MPyh?=
- =?us-ascii?Q?myS2MTG4/pD9kIKS/K3lUqhxBrDfOcHE6NE/7a9Rba0KzvJY3W/G7d9bAg5P?=
- =?us-ascii?Q?LXA/DKNXO70I/v9AXDM22XFimpDAJn5oObkMdNI+T4zK7/tZc3oPE3j/cTCU?=
- =?us-ascii?Q?Ne/2gSL8Hovqc+IrnuAe+OMmk++j9NI+tmRT2k8EIcAeM8xqCl1SOfOJ8Cdk?=
- =?us-ascii?Q?WhnieWB+e77dpIidTTRE3JVmJCc8RAKyohed2giHOpk8WIOkCC2fU+Wp10vW?=
- =?us-ascii?Q?NLpXYutMnLwLMnyRZonc8Gx4+NmqtKDwtDvv/Q6l7ExgfvucOs3EMhnKxKfl?=
- =?us-ascii?Q?g6E1hvHe81gA3QC8Rzw0rxuc6cx9xPcAlv7EmU5VKQkcuWZVfQavSckolxx4?=
- =?us-ascii?Q?I51YQTWQ67QoZ5ZyF/zBx1C6rsixaMHov2fZ4yeML/NAeChgHfrSBYSrz5oD?=
- =?us-ascii?Q?34Q3wYtjphpWw0o5miu+ngtj+cn80EnPGc/O+RM+yVA5vji+ow=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230037)(36860700010)(82310400023)(376011)(1800799021); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2024 07:17:47.1253 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ece19faf-6eb5-4d06-08cf-08dc902febb1
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00036F3E.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7608
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <20240618202123.GW68077@bill-the-cat>
+In-Reply-To: <20240618202123.GW68077@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 19 Jun 2024 10:24:40 +0300
+Message-ID: <CAC_iWjJt=ie4jD2yUbCNXU-WEGUmvo_GToCwfWsOTWot3+r8Vg@mail.gmail.com>
+Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,104 +89,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add versal2 mini ospi configuration.
+Hi Tom
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- configs/amd_versal2_mini_ospi_defconfig | 84 +++++++++++++++++++++++++
- 1 file changed, 84 insertions(+)
- create mode 100644 configs/amd_versal2_mini_ospi_defconfig
+On Tue, 18 Jun 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Jun 17, 2024 at 05:32:52PM +0200, Jerome Forissier wrote:
+>
+> > This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> > library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+> > stack [2] [3] as an alternative to the current implementation in net/,
+> > selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> > reasons for doing so are:
+> > - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
+> > has some additional lwIP and Mbed TLS patches to do so. With that it
+> > becomes possible to fetch and launch a distro installer such as Debian
+> > etc. using a secure, authenticated connection directly from the U-Boot
+> > shell. Several use cases:
+> >   * Authentication: prevent MITM attack (third party replacing the
+> > binary with a different one)
+> >   * Confidentiality: prevent third parties from grabbing a copy of the
+> > image as it is being downloaded
+> >   * Allow connection to servers that do not support plain HTTP anymore
+> > (this is becoming more and more common on the Internet these days)
+> > - Possibly benefit from additional features implemented in lwIP
+> > - Less code to maintain in U-Boot
+>
+> So, on a Pi 3 (rpi_3_defconfig) I see this now (and it passes normally):
+> ========================================== FAILURES ===========================================
+> ___________________________________ test_efi_helloworld_net ___________________________________
+> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
+>     assert expected_text in output
+> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 200000'
+> ------------------------------------ Captured stdout call -------------------------------------
+> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
+> Using smsc95xx_eth device
+> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+> Filename 'EFI/arm64/helloworld.efi'.
+> Load address: 0x200000
+> Loading:
+> Bytes transferred = 4528 (11b0 hex)
+> U-Boot> U-Boot> crc32 200000 $filesize
+> CRC32 for 00200000 ... 002011af ==> 2b466005
+> U-Boot> U-Boot> bootefi 200000
+> No UEFI binary known at 200000
+> U-Boot>
+> =================================== short test summary info ===================================
+> If I disable that test, it moves on to failing the same exact way for
+> grub. If I disable the grub test too. After that, oh, a bunch of other
+> tests get skipped because CMD_NET and similar aren't enabled now, and
+> the tests are wrong. I'll post that as another patch by itself. After
+> correcting for that, we're seemingly noticeably slower as I need to
+> increase the timeout for tftp'ing my 83MiB FIT image I use for kernel
+> testing. We no longer have the estimated speed message, so I can't as
+> easily say how much slower it is. After increasing the timeout, the
+> kernel boot test does work.
+>
+> I can note that normally it takes ~18ms to get a dhcp reply, but with
+> lwIP it's now 132ms, and previously the kernel loaded at 2.7MiB/s
+> (which, not great) but if that has a similar level of slowdown, could
+> well explain it.
+>
 
-diff --git a/configs/amd_versal2_mini_ospi_defconfig b/configs/amd_versal2_mini_ospi_defconfig
-new file mode 100644
-index 0000000000..2242960392
---- /dev/null
-+++ b/configs/amd_versal2_mini_ospi_defconfig
-@@ -0,0 +1,84 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_CONFIG_NAME="amd_versal2_mini"
-+# CONFIG_ARM64_CRC32 is not set
-+CONFIG_COUNTER_FREQUENCY=100000000
-+# CONFIG_ARM64_SUPPORT_AARCH32 is not set
-+CONFIG_ARCH_VERSAL2=y
-+CONFIG_TEXT_BASE=0xBBF00000
-+CONFIG_SYS_MALLOC_LEN=0x20000
-+CONFIG_SYS_MALLOC_F_LEN=0x4000
-+CONFIG_NR_DRAM_BANKS=3
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xBBF20000
-+CONFIG_ENV_SIZE=0x80
-+CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-mini"
-+CONFIG_DEBUG_UART_BASE=0xf1920000
-+CONFIG_DEBUG_UART_CLOCK=100000000
-+CONFIG_SYS_MEM_RSVD_FOR_MMU=y
-+# CONFIG_PSCI_RESET is not set
-+CONFIG_SYS_LOAD_ADDR=0xBBF80000
-+CONFIG_DEBUG_UART=y
-+# CONFIG_EXPERT is not set
-+CONFIG_REMAKE_ELF=y
-+# CONFIG_LEGACY_IMAGE_FORMAT is not set
-+# CONFIG_AUTOBOOT is not set
-+# CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
-+CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_BOARD_EARLY_INIT_R=y
-+# CONFIG_BOARD_LATE_INIT is not set
-+# CONFIG_CMDLINE_EDITING is not set
-+# CONFIG_AUTO_COMPLETE is not set
-+# CONFIG_SYS_LONGHELP is not set
-+CONFIG_SYS_PROMPT="versal2> "
-+# CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_BOOTD is not set
-+# CONFIG_CMD_BOOTI is not set
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_FDT is not set
-+# CONFIG_CMD_GO is not set
-+# CONFIG_CMD_RUN is not set
-+# CONFIG_CMD_IMI is not set
-+# CONFIG_CMD_XIMG is not set
-+# CONFIG_CMD_EXPORTENV is not set
-+# CONFIG_CMD_IMPORTENV is not set
-+# CONFIG_CMD_EDITENV is not set
-+# CONFIG_CMD_SAVEENV is not set
-+# CONFIG_CMD_ENV_EXISTS is not set
-+# CONFIG_CMD_CRC32 is not set
-+# CONFIG_CMD_LOADB is not set
-+# CONFIG_CMD_LOADS is not set
-+# CONFIG_CMD_ECHO is not set
-+# CONFIG_CMD_ITEST is not set
-+# CONFIG_CMD_SOURCE is not set
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_CACHE=y
-+# CONFIG_CMD_SLEEP is not set
-+CONFIG_OF_EMBED=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+# CONFIG_NET is not set
-+# CONFIG_DM_DEVICE_REMOVE is not set
-+# CONFIG_GPIO is not set
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+# CONFIG_MMC is not set
-+CONFIG_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+# CONFIG_SPI_FLASH_LOCK is not set
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_MT35XU=y
-+# CONFIG_POWER is not set
-+CONFIG_DEBUG_UART_PL011=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_SKIP_INIT=y
-+CONFIG_ARM_DCC=y
-+CONFIG_PL01X_SERIAL=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_CADENCE_QSPI=y
-+CONFIG_HAS_CQSPI_REF_CLK=y
-+CONFIG_CQSPI_REF_CLK=200000000
-+CONFIG_CADENCE_OSPI_VERSAL=y
-+# CONFIG_GZIP is not set
--- 
-2.17.1
+Thanks for taking the time. We'll run the pytests before v5. That
+being said, my wget tests were faster with lwIP last time I checked.
 
+Thanks
+/Ilias
+> --
+> Tom
