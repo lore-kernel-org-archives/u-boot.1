@@ -4,75 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D5DC27C79
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 06:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA5AC27C79
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 07:11:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83B2287B1A;
-	Wed, 19 Jun 2024 08:36:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1AE77883E7;
+	Wed, 19 Jun 2024 09:11:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7o2kJ9l9";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XAIMJnlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFFC087923; Wed, 19 Jun 2024 08:35:58 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C7F7C883E7; Wed, 19 Jun 2024 09:11:22 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E84DF883F6
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 08:35:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D8B9883F6
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 09:11:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=690026c4cb=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45ILZtve002573;
- Wed, 19 Jun 2024 08:35:55 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- oxI/oHpnVoYsBVI53472R7ZraxX6l42TM8cRUojKihA=; b=7o2kJ9l98RkAEdoh
- Lz5y+tD0Zz823gz0/vGa4/bR9Dvuf3c/eqHyJhBjLyIaeo9XxG323e8vKnvYKcCa
- zmKk09cKgE+eproJcOtC3EZvoq4vfvEKmP0DvtlC36E2z3HvII3gFm7IIoHrHFZ3
- +g/JbtG38T6Xbo8KcsQDl6D5XV8AF0uFFTRk14Rb6VOyBQiREwRtjC4NFf7QiGXL
- wvNvQtVW98UCwryZje6UiXatqMUTd/dhNONCXQcGcHUyMXNknS7V/AqGE1omxU9P
- c5yylAhSc+bFgE0z3Ng8/SbViJFMVo716mbuaR4SyKj7ydkFz8jc6WQSDwzwqmY4
- dyBGUQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3yuj9n1gwn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 19 Jun 2024 08:35:55 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E607640048;
- Wed, 19 Jun 2024 08:35:50 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95DA720FA3E;
- Wed, 19 Jun 2024 08:35:25 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 19 Jun
- 2024 08:35:25 +0200
-Message-ID: <2fd69224-c299-4b43-9078-07e06cc345f5@foss.st.com>
-Date: Wed, 19 Jun 2024 08:35:24 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hrsourabh1107@gmail.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-6e4dbca52f0so4661998a12.0
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 00:11:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718781079; x=1719385879; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=B7Kpp86ZRB0FFXPlFuzXVxx43kUapkBbM7qeY06WlXI=;
+ b=XAIMJnlHjQxHo1+I77AbR0qwg1kzKlpuJyDfWKKhXj7q6T7/AgZb5Zc8rQOIFFHv/C
+ zmLdYbkn/kE0bNAbLJ/ZV7Z3en6lF7u6hd1jxw9WVhjrm1YqsrdJs2Ap8zQnR0RBHsRi
+ B8qgzgjp9PLBpYJlv9FSCN1sg764f4Ew8hQ98AHTtCSbj022FTMOryZvUpv6Dzse2jAK
+ ZLV6a/m8kqAmn3hneylUtyXwFpZv4ArTwIPkTeCdFxMK3UY7hod2lhYoOpGoNHxld+BW
+ paW3hd0AvwltRYRe2ddWAe9ploQ0FpBltXBmkRVj7LYqdKSlZqP2qZ3Q5DCgTkNEbFZD
+ JYog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718781079; x=1719385879;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=B7Kpp86ZRB0FFXPlFuzXVxx43kUapkBbM7qeY06WlXI=;
+ b=YJI2XAIABi3jUKQeO4s05dwgcKptOycUHS/mKC7hg2bH1oipFcO7qyTRHb+Qm2bkXr
+ uPGs6O0hT44ZRDJ3be+WVldjyAavLzIYU7eLYrrGsDj9jF5cF0WEzUcNaGcASXj3s5sR
+ W0lpS7rIqsP1MEGKYn2erY8MPLAD3592zv+fHPIPZePnrUzjDlZpIDTzW5Oum2Z9k8vq
+ mEK2DczZpDw7VPbAhv24lDhQny1eVIy1+kuMdck0KevoLtxtqldAi3lJEaVe7LYvkeMj
+ pktZWImEJVainm/mm0Ym/tGj2eJ9UQk3Z904UTZmVRrH9udUCmAXupBp1Hdnsiy5LzTz
+ 4WmQ==
+X-Gm-Message-State: AOJu0Ywje/u4kTN8ZwEmbPli+ztSxq3ufr/oIacQ5gj6pmEnVHa5lpiB
+ SvZIlZca2G668DJTjpxEWjlJgbaizGAoaVnJwUQ8lUYf5s5llNs5MVXLIbxZB7QhfJqiNDlmhlk
+ XwfNYF4yr6SvqS6nDLLKL9t/u3Jv4rA==
+X-Google-Smtp-Source: AGHT+IHlV/lBlrT/SsRqlKK6ViJMomAysm7b4Jp+PKlWBOrB72CyX3z3Nft7zBt9/kqwcBli+LkF6eOceMNduetGIIc=
+X-Received: by 2002:a17:903:110d:b0:1f7:2099:6f9a with SMTP id
+ d9443c01a7336-1f9aa396de8mr20955855ad.11.1718781078857; Wed, 19 Jun 2024
+ 00:11:18 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Fix TAMP_SMCR BKP..PROT fields on STM32MP15xx
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240618225736.154959-1-marex@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240618225736.154959-1-marex@denx.de>
+From: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>
+Date: Wed, 19 Jun 2024 09:11:08 +0200
+Message-ID: <CAHseuWCmRF2HsVJ3RbK49aKwB6rbrHwPAOX10caJWQhLtFo1Zw@mail.gmail.com>
+Subject: How to retrieve cpu info from u-boot fucntion?
+To: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-19_02,2024-06-17_01,2024-05-17_01
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,43 +82,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
+Currently, I am using the MAC address from eth_get_ethaddr() function to
+calculate a hash value. But, I would like to replace this with a more
+unique device info such as cpuid or other values. But I could not find any
+function that can retrieve cpu info.
 
-On 6/19/24 00:57, Marek Vasut wrote:
-> Update the TAMP_SMCR BKP..PROT fields to put first 10 registers
-> into protection zone 1 and next 5 into zone 2. This fixes use of
-> boot counter which is often in zone 3 and has to be updated from
-> Linux, which runs in NS.
-> 
-> Fixes: 73f7fc944cf6 ("ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on STM32MP15xx")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> index f096fe538d8..ca202bec8ee 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> @@ -148,8 +148,8 @@ static void security_init(void)
->  	 */
->  	clrsetbits_le32(TAMP_SMCR,
->  			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
-> -			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x20) |
-> -			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x20));
-> +			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x0A) |
-> +			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x0F));
->  
->  	/* GPIOZ: deactivate the security */
->  	writel(BIT(0), RCC_MP_AHB5ENSETR);
+Can anyone please point me in the correct direction? Do we have any
+functions for this? Are these things part of the documentation?
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks in advance.
 
-Thanks
-Patrice
+Kind regards,
+Sourabh
