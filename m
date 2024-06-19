@@ -4,52 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E40FC27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 14:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 643B1C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 14:43:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5880C883E0;
-	Wed, 19 Jun 2024 16:02:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B47F8840F;
+	Wed, 19 Jun 2024 16:43:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="O/FVU3dK";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 700E388415; Wed, 19 Jun 2024 16:02:47 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A838987E06
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:02:44 +0200 (CEST)
+ id AEEE188363; Wed, 19 Jun 2024 16:43:08 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A0BA88842C
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:43:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B7AAB1042;
- Wed, 19 Jun 2024 07:03:08 -0700 (PDT)
-Received: from debian (unknown [10.57.7.74])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1EF2C3F6A8;
- Wed, 19 Jun 2024 07:02:41 -0700 (PDT)
-Date: Wed, 19 Jun 2024 16:02:38 +0200
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 0/7] efi: CapsuleUpdate: support for dynamic UUIDs
-Message-ID: <ZnLk_pXstP2dlRGo@debian>
-Mail-Followup-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id CB29C3FE0F
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:43:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1718808184;
+ bh=9uwRo8DNAlInZCB7qTuTLV+v4oS0Dt5WXI1aXS8Teu0=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=O/FVU3dKWKXA6m6NZ9Aba5/cxcPvNpP+8PZCBW7YccIEaPQjle+yEE9V8UuFNq4dn
+ zTiB7nl4p4RfYH8/puwryKc47LVVxhSxJM50BaeTASDCnuLPX19SAcBfZfo+bN/Hbw
+ X3aQffczPWnVb1h+WUMrKdMniu8qvr7DrzUGA6fy8pbsRMRy8f/h/Q+UeV/N9QcTI1
+ tkLA+oKMuElSLVnSnVG32Zqn4uhz/ZFOik+HWS+1be4J75hhYFLdoAdFZODH13x3e+
+ 726vcGc3fZNCp8oUsFb9HQk1VD/qEN+VggGIt/gXmxKokZ9lPH8IFNs0suf8jPF9pO
+ VQlKJyuD4lScw==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-421e17ae038so48904405e9.0
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 07:43:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718808183; x=1719412983;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9uwRo8DNAlInZCB7qTuTLV+v4oS0Dt5WXI1aXS8Teu0=;
+ b=tA8qfNZgEeQvs2Pi1DnNwpZp8No1XulhCKtR1OH8Jh9V8HcCt2Z9zPG9SCciZt9RJr
+ iK5JEaS5EABPrM5M3dNp14U+bLsC9BsEj7gSDYYfdVZ1SyZ9UZLjepsGsxGIWXUA3oCu
+ Qfx5yODj3/V9JJCMlokEc1j6GbBhhtamfAc101823etIP8Oyfa9GmbbSf1dECvnFrtis
+ GXE7KizJP/UCsVinFpxV+MuTltzqQZziHpJPH/F0K0Iuou4me7VOMw/qtKIXmzKPIC3v
+ W3JpM5yM/Xos9NiwP9gGl/RB48Wx9me9a3o01ScdgKdV2OSF511xGvOHgOwAckezJbez
+ sz9Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVDqzb5/XWE61tMoiO2LQeXAnAMvKFjsn1cRf7Auu+lPcpiuzsZsqtTZ4Bwnv0CUWNfKdUFrhgM4trpCckkNQ01M5YsrQ==
+X-Gm-Message-State: AOJu0Yx4PjuxrFzQFMI+siKx+0lO42RyzFGt6eDvS2je4uj02PXLmnyp
+ AAZiMC/A5s3ox00zoma6IQ0MKm4vk+/s4kTH5rbdPxF1pSkYn4LEdrSy4LfmS+q367DzohEyCSL
+ q9ZJFPNTuspGQXdcLQyeScXtZrx2CCxVBRgi6TalEtlzpIn0ozsjaY4OzPUdzwaQI5Qs=
+X-Received: by 2002:adf:f003:0:b0:360:7c13:761e with SMTP id
+ ffacd0b85a97d-3631999003emr2071206f8f.65.1718808183585; 
+ Wed, 19 Jun 2024 07:43:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHnjiTmx7dGmPuYBNAWukPbSNdGf1WG7lIXojK32RTPr6EMvvU7ukRr+O29e7wHrSHYVZDrrg==
+X-Received: by 2002:adf:f003:0:b0:360:7c13:761e with SMTP id
+ ffacd0b85a97d-3631999003emr2071182f8f.65.1718808183130; 
+ Wed, 19 Jun 2024 07:43:03 -0700 (PDT)
+Received: from [192.168.123.126]
+ (ip-178-202-041-025.um47.pools.vodafone-ip.de. [178.202.41.25])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36437896ee5sm490801f8f.20.2024.06.19.07.43.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Jun 2024 07:43:02 -0700 (PDT)
+Message-ID: <9c8751b4-4f6b-4a05-879a-13aec4ecddbb@canonical.com>
+Date: Wed, 19 Jun 2024 16:43:01 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] cmd: avoid duplicate weak flush_dcache_all()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, u-boot@lists.denx.de
+References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
+ <20240616173105.7430-2-heinrich.schuchardt@canonical.com>
+ <CAC_iWj+W5grPjuD9=v7ZOYGPFDE7_mFxF7fJhERTTJCjjpk4aQ@mail.gmail.com>
+ <e1fb4d81-a20c-4a10-904e-8b19eb17f4e5@canonical.com>
+ <CAC_iWjKwP0psK0cuQLion54h5ZQdYL8-R_1oDvTYktin56OFDQ@mail.gmail.com>
+ <CAC_iWjL3pSQDgkNvLQjUEO2JbhtaRhCy81ZDn=WPiONmEZvVWQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAC_iWjL3pSQDgkNvLQjUEO2JbhtaRhCy81ZDn=WPiONmEZvVWQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,223 +114,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 31, 2024 at 03:50:34PM +0200, Caleb Connolly wrote:
-> As more boards adopt support for the EFI CapsuleUpdate mechanism, there
-> is a growing issue of being able to target updates to them properly. The
-> current mechanism of hardcoding UUIDs for each board at compile time is
-> unsustainable, and maintaining lists of GUIDs is similarly cumbersome.
+On 19.06.24 15:19, Ilias Apalodimas wrote:
+> On Wed, 19 Jun 2024 at 16:05, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+>>
+>> On Wed, 19 Jun 2024 at 15:36, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>>>
+>>> On 19.06.24 14:23, Ilias Apalodimas wrote:
+>>>> On Sun, 16 Jun 2024 at 20:31, Heinrich Schuchardt
+>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>
+>>>>> If we have multiple weak implementations of functions, the linker might
+>>>>> choose any of these. ARM and RISC-V already provide a weak implementation
+>>>>> of flush_dcache_all().
+>>>>>
+>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>> ---
+>>>>>    cmd/cache.c | 3 +++
+>>>>>    1 file changed, 3 insertions(+)
+>>>>>
+>>>>> diff --git a/cmd/cache.c b/cmd/cache.c
+>>>>> index 0254ff17f9b..16fa0f7c652 100644
+>>>>> --- a/cmd/cache.c
+>>>>> +++ b/cmd/cache.c
+>>>>> @@ -52,11 +52,14 @@ static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
+>>>>>           return 0;
+>>>>>    }
+>>>>>
+>>>>> +/* ARM and RISC-V define a weak flush_dcache_all() themselves. */
+>>>>> +#if !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
+>>>>>    void __weak flush_dcache_all(void)
+>>>>>    {
+>>>>>           puts("No arch specific flush_dcache_all available!\n");
+>>>>>           /* please define arch specific flush_dcache_all */
+>>>>>    }
+>>>>
+>>>> Aren't we supposed to add a single __weak function so the linker can
+>>>> replace it? IOW why is the declaration for Arm/riscv a weak one?
+>>>
+>>> Some sub-architectures override the architecture specific weak
+>>> implementation, e.g.
+>>>
+>>> arch/riscv/cpu/andes/cache.c:44:
+>>> void flush_dcache_all(void)
+>>>
+>>> arch/arm/cpu/arm926ejs/cache.c:17:
+>>> void flush_dcache_all(void)
+>>
+>> Ok, this does fix a problem, but afaict this is a band-aid and the
+>> cache management is a mess overall -- e.g invalidate_icache_all() will
+>> suffer from the same issue if a sub-architecture decides to define its
+>> own in the future.
+>>
+>> Would it be less bad to define
+>> static inline __weak flush_dcache_all(void)
+>> {
+>> }
+>> static inline __weak flush_icache_all(void)
+>> {
+>> }
 > 
-> In this series, I propose that we adopt v5 GUIDs, these are generated
-> by using a well-known salt GUID as well as board specific information
-> (like the model/revision), these are hashed together and the result is
-> truncated to form a new UUID.
+> ugh, this but without the inline!
+> 
+> Thanks
+> /Ilias
 
-Dear Caleb,
+GCC does not allow both a weak and a strong implementation in the same 
+module:
 
-Thank you for working on this proposal, this looks very useful.
-Indeed, we found out during SystemReady certifications that it is easy for
-unique ids to be inadvertently re-used, making them thus non-unique.
+   CC      board/sandbox/sandbox.o
+arch/sandbox/cpu/cache.c:15:6: error: redefinition of 
+‘invalidate_icache_all’
+    15 | void invalidate_icache_all(void)
+       |      ^~~~~~~~~~~~~~~~~~~~~
+In file included from arch/sandbox/cpu/cache.c:6:
+include/cpu_func.h:74:13: note: previous definition of 
+‘invalidate_icache_all’ with type ‘void(void)’
+    74 | void __weak invalidate_icache_all(void)
+       |             ^~~~~~~~~~~~~~~~~~~~~
 
-I have a doubt regarding the format of the generated UUIDs, which end up in the
-ESRT, though.
+Best regards
 
-Here is a quick experiment on the sandbox booting with a DTB using the efidebug
-command.
+Heinrich
 
-With the patch series, rebased on the master branch:
+>> in include/cpu_func.h instead of a random cmd file?
+>> We can only define those if !CONFIG_ARM && !!CONFIG_RISCV and add a
+>> comment on why.
+>> It's kind of putting lipstick on a pig, but at least we'll have them
+>> gathered in a single header file and know what we have to fix.
+>>
+>> Cheers
+>> /Ilias
+>>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>>
+>>>>
+>>>> Thanks
+>>>> /Ilias
+>>>>> +#endif
+>>>>>
+>>>>>    static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
+>>>>>                        char *const argv[])
+>>>>> --
+>>>>> 2.43.0
+>>>>>
+>>>
 
-  $ make sandbox_defconfig
-  $ make
-  $ ./u-boot --default_fdt
-  ...
-  U-Boot 2024.07-rc4-00028-g1c96225b0b3 (Jun 19 2024 - 15:29:04 +0200)
-  ...
-  Model: sandbox
-  ...
-  Hit any key to stop autoboot:  0
-  => efidebug capsule esrt
-  ...
-  ========================================
-  ESRT: fw_resource_count=2
-  ESRT: fw_resource_count_max=2
-  ESRT: fw_resource_version=1
-  [entry 0]==============================
-  ESRT: fw_class=FD5DB83C-12F3-A46B-80A9-E3007C7FF56E
-  ...
-  [entry 1]==============================
-  ESRT: fw_class=935FE837-FAC8-4394-C008-737D8852C60D
-  ...
-  ========================================
-
-  $ uuid -d FD5DB83C-12F3-A46B-80A9-E3007C7FF56E
-  encode: STR:     fd5db83c-12f3-a46b-80a9-e3007c7ff56e
-          SIV:     336781303264349553179461347850802165102
-  decode: variant: DCE 1.1, ISO/IEC 11578:1996
-          version: 10 (unknown)
-          content: FD:5D:B8:3C:12:F3:04:6B:00:A9:E3:00:7C:7F:F5:6E
-                   (not decipherable: unknown UUID version)
-
-Version 10 does not look right.
-
-  $ uuid -d 935FE837-FAC8-4394-C008-737D8852C60D
-  encode: STR:     935fe837-fac8-4394-c008-737d8852c60d
-          SIV:     195894493536133784175416063449172723213
-  decode: variant: reserved (Microsoft GUID)
-          version: 4 (random data based)
-          content: 93:5F:E8:37:FA:C8:03:94:00:08:73:7D:88:52:C6:0D
-                   (no semantics: random data only)
-
-A reserved Microsoft GUID variant does not look right.
-
-With the master branch, the (hardcoded) GUIDs are ok:
-
-  $ ./u-boot --default_fdt
-  ...
-  U-Boot 2024.07-rc4-00021-gfe2ce09a075 (Jun 19 2024 - 15:35:08 +0200)
-  ...
-  Model: sandbox
-  ...
-  => efidebug capsule esrt
-  ...
-  ========================================
-  ESRT: fw_resource_count=2
-  ESRT: fw_resource_count_max=2
-  ESRT: fw_resource_version=1
-  [entry 0]==============================
-  ESRT: fw_class=09D7CF52-0720-4710-91D1-08469B7FE9C8
-  ...
-  [entry 1]==============================
-  ESRT: fw_class=5A7021F5-FEF2-48B4-AABA-832E777418C0
-  ...
-  ========================================
-
-  $ uuid -d 09D7CF52-0720-4710-91D1-08469B7FE9C8
-  encode: STR:     09d7cf52-0720-4710-91d1-08469b7fe9c8
-          SIV:     13083600744351929150374221048734280136
-  decode: variant: DCE 1.1, ISO/IEC 11578:1996
-          version: 4 (random data based)
-          content: 09:D7:CF:52:07:20:07:10:11:D1:08:46:9B:7F:E9:C8
-                   (no semantics: random data only)
-
-  $ uuid -d 5A7021F5-FEF2-48B4-AABA-832E777418C0
-  encode: STR:     5a7021f5-fef2-48b4-aaba-832e777418c0
-          SIV:     120212745678117161641696128857923655872
-  decode: variant: DCE 1.1, ISO/IEC 11578:1996
-          version: 4 (random data based)
-          content: 5A:70:21:F5:FE:F2:08:B4:2A:BA:83:2E:77:74:18:C0
-                   (no semantics: random data only)
-
-Also, this is what to expect for a v5 UUID [1]:
-
-  $ uuid -d a8f6ae40-d8a7-58f0-be05-a22f94eca9ec
-  encode: STR:     a8f6ae40-d8a7-58f0-be05-a22f94eca9ec
-          SIV:     224591142595989943290477237735758014956
-  decode: variant: DCE 1.1, ISO/IEC 11578:1996
-          version: 5 (name based, SHA-1)
-          content: A8:F6:AE:40:D8:A7:08:F0:3E:05:A2:2F:94:EC:A9:EC
-                   (not decipherable: truncated SHA-1 message digest only)
-
-Best regards,
-Vincent.
-
-[1] https://uuid.ramsey.dev/en/stable/rfc4122/version5.html
-
-> 
-> The well-known salt GUID can be specific to the architecture (SoC
-> vendor), or OEM. It is defined in the board defconfig so that vendors
-> can easily bring their own.
-> 
-> Specifically, the following fields are used to generate a GUID for a
-> particular fw_image:
-> 
-> * namespace salt
-> * board compatible (usually the first entry in the dt root compatible
->   array).
-> * fw_image name (the string identifying the specific image, especially
->   relevant for board that can update multiple images).
-> 
-> == Usage ==
-> 
-> Boards can integrate dynamic UUID support as follows:
-> 
-> 1. Adjust Kconfig to depend on EFI_CAPSULE_DYNAMIC_UUIDS if
->    EFI_HAVE_CAPSULE_SUPPORT.
-> 2. Skip setting the fw_images image_type_id property.
-> 3. Generate a UUID and set CONFIG_EFI_CAPSULE_NAMESPACE_UUID in your
->    defconfig.
-> 
-> == Limitations ==
-> 
-> * Changing GUIDs
-> 
-> The primary limitation with this approach is that if any of the source
-> fields change, so will the GUID for the board. It is therefore pretty
-> important to ensure that GUID changes are caught during development.
-> 
-> * Supporting multiple boards with a single image
-> 
-> This now requires having an entry with the GUID for every board which
-> might lead to larger UpdateCapsule images.
-> 
-> == Tooling ==
-> 
-> This series introduces a new tool: genguid. This can be used to generate
-> the same GUIDs that the board would at runtime.
-> 
-> This series follows a related discussion started by Ilias:
-> https://lore.kernel.org/u-boot/CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com/
-> 
-> ---
-> Changes in v3:
-> - Add manpage for genguid
-> - Add dedicated CONFIG_TOOLS_GENGUID option
-> - Minor code fixes addressing v2 feedback
-> - Link to v2: https://lore.kernel.org/r/20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org
-> 
-> Changes in v2:
-> - Move namespace UUID to be defined in defconfig
-> - Add tests and tooling
-> - Only use the first board compatible to generate UUID.
-> - Link to v1: https://lore.kernel.org/r/20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org
-> 
-> ---
-> Caleb Connolly (7):
->       lib: uuid: add UUID v5 support
->       efi: add a helper to generate dynamic UUIDs
->       doc: uefi: document dynamic UUID generation
->       sandbox: switch to dynamic UUIDs
->       lib: uuid: supporting building as part of host tools
->       tools: add genguid tool
->       test: lib/uuid: add unit tests for dynamic UUIDs
-> 
->  arch/Kconfig                                       |   1 +
->  board/sandbox/sandbox.c                            |  16 ---
->  configs/sandbox_defconfig                          |   1 +
->  configs/sandbox_flattree_defconfig                 |   1 +
->  doc/develop/uefi/uefi.rst                          |  31 +++++
->  doc/genguid.1                                      |  52 +++++++
->  include/sandbox_efi_capsule.h                      |   6 +-
->  include/uuid.h                                     |  21 ++-
->  lib/Kconfig                                        |   8 ++
->  lib/efi_loader/Kconfig                             |  23 +++
->  lib/efi_loader/efi_capsule.c                       |   1 +
->  lib/efi_loader/efi_firmware.c                      |  66 +++++++++
->  lib/uuid.c                                         |  81 +++++++++--
->  test/lib/uuid.c                                    |  88 ++++++++++++
->  .../test_efi_capsule/test_capsule_firmware_fit.py  |   2 +-
->  .../test_efi_capsule/test_capsule_firmware_raw.py  |   8 +-
->  .../test_capsule_firmware_signed_fit.py            |   2 +-
->  .../test_capsule_firmware_signed_raw.py            |   4 +-
->  test/py/tests/test_efi_capsule/version.dts         |   6 +-
->  tools/Kconfig                                      |   7 +
->  tools/Makefile                                     |   3 +
->  tools/binman/etype/efi_capsule.py                  |   2 +-
->  tools/binman/ftest.py                              |   2 +-
->  tools/genguid.c                                    | 154 +++++++++++++++++++++
->  24 files changed, 538 insertions(+), 48 deletions(-)
-> ---
-> change-id: 20240422-b4-dynamic-uuid-1a5ab1486c27
-> base-commit: 2e682a4a406fc81ef32e05c28542cc8067f1e15f
-> 
-> // Caleb (they/them)
-> 
