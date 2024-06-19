@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C5ACC2BA1A
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 20:02:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB777C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 20:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3273C882DC;
-	Wed, 19 Jun 2024 22:02:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 14C19884D1;
+	Wed, 19 Jun 2024 22:26:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Kurx6y5D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hg8q1rBX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D54BA8839C; Wed, 19 Jun 2024 22:02:44 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6932F884C9; Wed, 19 Jun 2024 22:26:57 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21304882AD
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 22:02:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7E59884A9
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 22:26:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45JK2Wjk087500;
- Wed, 19 Jun 2024 15:02:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718827352;
- bh=xXdiJ8wdHOofZO375m5/JGsyTd2Kc5RO4WEnUQDxWKc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Kurx6y5DUmqKQ8FmJIMlYzwd0ABh+0oq7prSbDPYppn+FxUsoromLbf06i4DBpqbm
- Km2VfQ/lrSMdBHFDJKUviwHtmo6k1eDUhB/8dECMexdhw/t+mOMP1M5Wcps448MbPd
- /At+YqgPi02iDQw+jMpkr+vWlzDDtrvtfZdIxe1o=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45JK2W3O016465
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 19 Jun 2024 15:02:32 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Jun 2024 15:02:32 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Jun 2024 15:02:32 -0500
-Received: from [128.247.81.8] (ula0226330.dhcp.ti.com [128.247.81.8] (may be
- forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45JK2W4k016122;
- Wed, 19 Jun 2024 15:02:32 -0500
-Message-ID: <59c391a7-c6fe-4b04-891a-c6905ef29f20@ti.com>
-Date: Wed, 19 Jun 2024 15:02:32 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3d24a231342so58768b6e.1
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 13:26:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718828809; x=1719433609; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MhcgDoI1tRciEzIixNXbs2MvdxBILy+RuhOxv3MDe+4=;
+ b=hg8q1rBXiiMg7X0MqZv78GMCa+Ns7aDKCdohyg3R+BT6bCpRfxCd2pKZ5rXr3b0KCb
+ 4WOB9CWcRL57neUwLLN7b8N5RUUeSUZ+GCR8c5KQUK7RU5h9QSx8iH+AtXo1kDk9YQqC
+ 1RKrUsHxuWgLEzNvktcXZiley8eYzLHadS3mQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718828809; x=1719433609;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MhcgDoI1tRciEzIixNXbs2MvdxBILy+RuhOxv3MDe+4=;
+ b=ogtBFol3SDw9dk8KLHO0l7aayZeOhQ5PxuK4RJPys8awfaijfo2BMkTfBg+Z6xYu2q
+ 5+JpGTkmdaPpKPpH/c+8iqQb5xXyOfl0u8w3ycvgn9ui2mFJqfnDv/5cNBxjAzV7j3YW
+ 16jgoy65Z2+NGI5CVPgJznUDIXrlsVB1LVHBIjfbOS/YNOWu8QgaCZhyO9wrwi5Xjhw7
+ vo4KDEND9m61irDBTb9jtc4eCcKaZTEmi8M/WHQNZ+saKKZH0ct+WfvyRqWZqerdpErE
+ WOED9GOe+l9mCCCh93X+J6TBG83nJOWEgL+gmNpUIZuxxVmZscU3O92E4g6Sgc34kWRg
+ o/Wg==
+X-Gm-Message-State: AOJu0YwItXfmv//wTu800r5B/GxJzhqVhUYhbUYs/wwYss37NudHuekf
+ CJLXBpZ6ZtpYu/Tv90WDnpA75EbwIiB27TwlISPVf8rPUcIzN6JTyKR/h0RmgRs=
+X-Google-Smtp-Source: AGHT+IHntKu05OXbpyPAt5O+PsDlp4K9A0xpUz4QF4h3dr+jCckWtLEypBwJ8IJ803OJ+QIYXPmZnQ==
+X-Received: by 2002:a05:6808:1705:b0:3d2:1e2c:3a7c with SMTP id
+ 5614622812f47-3d51baceeaemr3655859b6e.44.1718828809501; 
+ Wed, 19 Jun 2024 13:26:49 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d2476bb36fsm2251402b6e.40.2024.06.19.13.26.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Jun 2024 13:26:48 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, jh80.chung@samsung.com, lukma@denx.de, 
+ seanga2@gmail.com, vaishnav.a@ti.com, n-francis@ti.com, u-kumar1@ti.com, 
+ sumit.garg@linaro.org, afd@ti.com, Jayesh Choudhary <j-choudhary@ti.com>
+Cc: vigneshr@ti.com, nm@ti.com, bb@ti.com, rogerq@kernel.org
+In-Reply-To: <20240612091123.253835-1-j-choudhary@ti.com>
+References: <20240612091123.253835-1-j-choudhary@ti.com>
+Subject: Re: [PATCH v2 00/14] Add basic U-Boot Support for J722S-EVM
+Message-Id: <171882880769.3451762.10763255890997844792.b4-ty@konsulko.com>
+Date: Wed, 19 Jun 2024 14:26:47 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] arm: mach-k3: Add default ATF location for AM62/AM62a
-To: Nishanth Menon <nm@ti.com>, Dhruva Gole <d-gole@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <u-boot@lists.denx.de>, Robert Nelson
- <robertcnelson@gmail.com>
-References: <20240214163009.983034-1-afd@ti.com>
- <20240214163009.983034-2-afd@ti.com> <20240619114916.72icpumb2tumsnbt@dhruva>
- <20240619182005.yfkvf6ongwijorzz@dividable>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240619182005.yfkvf6ongwijorzz@dividable>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,74 +91,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/19/24 1:20 PM, Nishanth Menon wrote:
-> On 17:19-20240619, Dhruva Gole wrote:
->> Hi,
->>
->> On Feb 14, 2024 at 10:30:04 -0600, Andrew Davis wrote:
->>> There is a default ATF load address that is used for devices that have
->>> ATF running in SRAM. For AM62 and AM62a, ATF runs from DRAM. Instead
->>> of having to override the address in every defconfig, make add a
->>> default for these ATF in DRAM devices.
->>>
->>> Signed-off-by: Andrew Davis <afd@ti.com>
->>> ---
->>>   arch/arm/mach-k3/Kconfig               | 5 +++--
->>>   configs/am62ax_evm_a53_defconfig       | 1 -
->>>   configs/am62x_beagleplay_a53_defconfig | 1 -
->>>   configs/am62x_evm_a53_defconfig        | 1 -
->>>   configs/phycore_am62x_a53_defconfig    | 1 -
->>>   configs/verdin-am62_a53_defconfig      | 1 -
->>>   6 files changed, 3 insertions(+), 7 deletions(-)
->>>
->>
->> Beagleplay stops booting completely with latest U-boot so I did a little
->> bisect and it seems like reverting this patch helps.
->>
->> I am not sure what other implications there are of reverting this so I
->> don't suggest immediately dropping it, however some hints around what's
->> missing on beagleplay vs other platforms would be helpful.
->>
->> Because other platforms based off the same SoC don't seem to be
->> affected.
+On Wed, 12 Jun 2024 14:41:09 +0530, Jayesh Choudhary wrote:
+
+> This series add the U-Boot support for our new platform of K3-SOC
+> family - J722S-EVM which is a superset of AM62P. It shares the same
+> memory map and thus the nodes are being reused from AM62P includes
+> instead of duplicating the definitions.
 > 
-> Grumble... I had to rediscover this in parallel as well - Thanks Dhruva.
-> mkimage -l tispl.bin and comparing with kernel log of reserved mem
-> had me completely confused.
+> Some highlights of J722S SoC (in addition to AM62P SoC features) are:
 > 
-> a) Memory maps are already notorious to manage on complex heterogenous
->    systems. From beagle perspective, we have no need to go and monkey
->    with DT defined memory map and DT should be the default and modifying
+> [...]
 
-Your DT source file is wrong, ATF is at 0x8000_0000 (or any address one
-wants to put in K3_ATF_LOAD_ADDR). DT doesn't "define" hardware, it "describes"
-it. ATF's location is dynamic and configurable, it doesn't belong in DT.
+Applied to u-boot/next, thanks!
 
-You have two options, either go update your DT, then update it again every
-time ATF moves. *OR* simply turn on OF_SYSTEM_SETUP and let U-Boot add the
-correct location reserved memory node for you.
+-- 
+Tom
 
-Then you can also drop out the reserved-node from the DT template file.
-Only U-Boot knows where ATF is really placed in RAM, so U-Boot must add
-this info to DT.
 
->    DT should be explicitly called out with a log (instead of done
->    "transparently") - so instead of CONFIG_K3_OPTEE_LOAD_ADDR default
->    being forced from u-boot, it should be made optional, where when
->    defined, it can overide the dt definition or some variant of that.
-> 
-> b) Looks like
->     https://lore.kernel.org/u-boot/20240214163009.983034-4-afd@ti.com/
->     missed beagleplay? and we were in for a surprise there - i dont want
-
-This was the only miss, OF_SYSTEM_SETUP didn't get added to the beagleplay
-config. Bryan just sent the fix for that now. I'll go look for a way to
-make this common across the whole SoC family so we don't again miss any
-new boards.
-
-Andrew
-
->     to switch from default dts for beagleplay to something different just
->     because of simplicity for users to know exactly the carveouts and
->     with other s/w starting up on uC, dts is our "canonical truth".
-> 
