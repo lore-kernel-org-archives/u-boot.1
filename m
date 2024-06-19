@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CC80C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 12:09:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA7FC27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 12:15:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DCF98841E;
-	Wed, 19 Jun 2024 14:09:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DFA2D88427;
+	Wed, 19 Jun 2024 14:14:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eK2+wYat";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oq2V92G0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8950F88428; Wed, 19 Jun 2024 14:09:39 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CE6578844B; Wed, 19 Jun 2024 14:14:58 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B06088415
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:09:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9073B88415
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:14:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hnagalla@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45JC9WI2019052;
- Wed, 19 Jun 2024 07:09:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718798972;
- bh=bXO7pZwETXn4McFwVIH8+WnCwT2FZYSZk5u5Cl129JI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=eK2+wYatqY0HLLHI92CrWHIMWqcb/THiKbp/BtIsUJXlDTlUSKHtqMPAjWi54T6+N
- OGvc1YTbr4VvVEAcn0Ib+2sYgk/jzipLUi6DwZkFG1piHNWzu71RNJZHVNKxrdhveF
- S9K2nGYqdxLu2CCffDeoNkCV9siCk7tXXa5SCOLQ=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45JC9WUN012647
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 19 Jun 2024 07:09:32 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Jun 2024 07:09:32 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Jun 2024 07:09:32 -0500
-Received: from [10.249.48.175] ([10.249.48.175])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45JC9VlM036488;
- Wed, 19 Jun 2024 07:09:32 -0500
-Message-ID: <c8d3538b-0fd6-9b94-f443-624b1d903cc1@ti.com>
-Date: Wed, 19 Jun 2024 07:09:31 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1f9aeb96b93so4611865ad.3
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 05:14:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718799295; x=1719404095; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RZem6zVxCmUyxT7kdOPHuzcjPs0eEV09BEFfMqQysuI=;
+ b=oq2V92G0UjPlTqWm3gZlG+9RA4mryxcSsrZzSf2XYTCgNM1/wLYOOsMLQeCRaUieba
+ TYTVBcJDENdFm7enob5c3TJqApCxgiU+Ckv+abaODaX9CgMi3JjSmgW/6fTw5HsVBOFo
+ m8JHtIoQNs3KouVV/Ld4h8OzoNjknt8X/sgEHtrwkoWhnqXGpssxPZ4S7SxOlQfrEnag
+ 1b9BtPH4DdlwHcwBCl7ccs8zj94KoenPomFZz3N01U/QMunig2qzqPrWqWrpI/l1jgDI
+ 0c7kLu6/+22bIthEsFu8W7QA/m5l9XZA098GUQ/sNvchQ7lrnKQCmNmWYLOcq588dQWN
+ HEMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718799295; x=1719404095;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RZem6zVxCmUyxT7kdOPHuzcjPs0eEV09BEFfMqQysuI=;
+ b=W48qG/PYIpInaXUkcZSt6tJ5HAMdccrzLo0zuJYi8cKs4+SDwkz35/m0fX874qDq4i
+ /6Jn5g0AXaFOnPKXUZEuQrizxYS157ib+1XIfjpgbSGfwh4cevrQt3BktQB06kZbbfJ+
+ PSmeVe5f169fS5WIDHbQkFL+O0jvV3um+N4/XVJVHkyJLsu9rSTp2oPC2Bwma4gBfPfC
+ /BSRyJz0cfDhZtIdlHvrDgTKypExDlBrp4GadWlsQ8RJptMZa/YFoHCuAZ/cn7Lbzzbr
+ E4Kpl4ajNWjoZlDDyvqMbzGYUfa1DgdqHbVSMNEGDIQLGH8p2oXxlG2dK99YbiEiHNcD
+ 86+A==
+X-Gm-Message-State: AOJu0YzCM3DNx4a841xQdfVmftdi1VlltzQNsQLk+C92XsEsruDRxv0c
+ mxVi7RmWmi6DtsZZ6fubu6t4No6EDhWEdTdmkPjU1Ee7O8gtaUGWkRq8OuIu3lTvno7BSgb+6gw
+ yNqnhqFknRhi929i1IEUpL14YAy3HKAeCzSL2M4WCMp95muEGqotAXw==
+X-Google-Smtp-Source: AGHT+IGsPeERS3Htmv4iOUcv7aFvGfIAWSHt1d2gffKMgPzvqLerVHIuuYqVGZn7ChmKDkFpIOLkMJVLzQPCR1ey88E=
+X-Received: by 2002:a17:902:e546:b0:1f9:a602:5e39 with SMTP id
+ d9443c01a7336-1f9aa3bcbd0mr28100125ad.11.1718799295028; Wed, 19 Jun 2024
+ 05:14:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 0/3] Add M4 remoteproc driver for TI K3 SoCs
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: <trini@konsulko.com>, <devarsht@ti.com>, <afd@ti.com>, <b-padhi@ti.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>
-References: <20240618184636.30642-1-hnagalla@ti.com>
- <20240618185417.cjzqmtzrqf5adwul@drapery>
-From: Hari Nagalla <hnagalla@ti.com>
-In-Reply-To: <20240618185417.cjzqmtzrqf5adwul@drapery>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <e76ac139a4f3841535e1ee306e912fd758dee957.1718638104.git.jerome.forissier@linaro.org>
+In-Reply-To: <e76ac139a4f3841535e1ee306e912fd758dee957.1718638104.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 19 Jun 2024 15:14:18 +0300
+Message-ID: <CAC_iWj+kw2u7h_bHwWKsH7JjzvimLKv-ioM=ZuzO8ETc4oneoA@mail.gmail.com>
+Subject: Re: [PATCH v4 12/14] configs: add qemu_arm64_lwip_defconfig
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,14 +87,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/18/24 13:54, Nishanth Menon wrote:
-> On 13:46-20240618, Hari Nagalla wrote:
->> This series adds support for M4 remoteproc driver for K3 devices.
->>
->> Logs:https://paste.sr.ht/~hnagalla/62811c4003c27ada83bc1c94500f7714ab30092a
-> Obviously - this cannot work with out an M4F node in dts, correct? you
-> should have mentioned that in your email.
-> 
-Yes, that is correct. It needs M4F node in dts. I should have mentioned 
-it in the email, that the kernel to u-boot device tree sync is needed 
-for it to work.
+On Mon, 17 Jun 2024 at 18:33, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Add qemu_arm64_lwip_defconfig which #include's qemu_arm64_defconfig and
+> selects NET_LWIP instead of NET. This config has all the supported net
+> commands enabled.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  configs/qemu_arm64_lwip_defconfig | 4 ++++
+>  1 file changed, 4 insertions(+)
+>  create mode 100644 configs/qemu_arm64_lwip_defconfig
+>
+> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+> new file mode 100644
+> index 00000000000..1f5fd097f0e
+> --- /dev/null
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/qemu_arm64_defconfig>
+> +CONFIG_NET_LWIP=y
+> +CONFIG_CMD_DNS=y
+> +CONFIG_CMD_WGET=y
+> --
+> 2.40.1
+>
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
