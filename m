@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA9E6C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 14:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB6EC27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 15:07:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28E218844C;
-	Wed, 19 Jun 2024 16:50:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC5B387F5C;
+	Wed, 19 Jun 2024 17:07:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="axLvKgZs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cv8RgD5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D321D8844F; Wed, 19 Jun 2024 16:50:15 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id CDB138836D; Wed, 19 Jun 2024 17:07:50 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0DB18836D
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 16:50:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DD7787F19
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 17:07:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6f9ca219760so3738525a34.2
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 07:50:13 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-2598001aae7so842020fac.2
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 08:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718808612; x=1719413412; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718809667; x=1719414467; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YIEL6MMLqGeMr7EazggIXvfdeW+sYBJUjexesPmQM8U=;
- b=axLvKgZsixKzMtN1I+2byXIg4JhKi27gTN28J6uGEd4Kv9wbhfbnROoVN9WjojXZ51
- OZfyFcP33OK1ylv53+iqZhGPYZWbYD4k5KvAN1dPZuLOUM2vz9W2H/NTL6phZ2wFzIWE
- Ye4hxsUCnjQ29xxtAk39k0euuDalyUlMtAdzs=
+ bh=X/OxpNiSjQgGukq18syEyhtvrIe1ebw17Cs66URyp0Y=;
+ b=Cv8RgD5DCh2Yf5As7DMUbPssap0Jj/Wn0Bq+EmfZCYMlZxaEhYD1L4nTWJN6yHj60d
+ H8uAChvQ54V0y5pTN0hCe2JjVMwMo/yxOnq7ebFf0Y5xBeu/BXe1xFBIooQsU8C/eAHL
+ BKhy+hru+5yYjhzPf2nqevzP04+Mt54U5NZ98=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718808612; x=1719413412;
+ d=1e100.net; s=20230601; t=1718809667; x=1719414467;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YIEL6MMLqGeMr7EazggIXvfdeW+sYBJUjexesPmQM8U=;
- b=OHnCCHkpQFVkctVsNeiA9b6I3SBSqIa+gZ85SOvAdIB+azepR/t2ocHZM5d2PSP2YY
- SAkcJBQM++9yG+a1WnE2rACmfqgVS5AOq5zRJZrKaFkN3tN6o3ZhgjSE3ZgWWr/Cst3L
- d46udgvMPkzNo+PfwTsUH6H7XfLaKA4jRIshtKFtsjE2Su+Ocl6MHRNmnTQ8zVnLT+0t
- J3kCSadir8X2oSk+2N5SQ4utkcz1rifqwUI+YxU3pSMu/CK0wMeeFywnxGSpJ1t5QuYs
- 5/lxfXARV9IHp22hJpFaIAsX43uz75LYoYk0uHOcOpYBugoIux/XRpSv/vR7hG8iFF9j
- n2pw==
+ bh=X/OxpNiSjQgGukq18syEyhtvrIe1ebw17Cs66URyp0Y=;
+ b=BlvcGN5pu+SE9Omdb6nVT9V4UEeuR+jQ7ugYNYswNyQRW8gFVFWgPVRJRtJakmy1Ya
+ LhsQ8TIjGaDmvw4V4LKELL2fLbljdRxJirc0m0cEfi6hVKAk4T0IURVa+ULmAuOpkQPR
+ MwSAGXH4EKAm9+ZbzAHx6kJsXY3WyHZGn3DdMEGqwCsjlo8GLqqrXMgDd50nzCKizK51
+ c87UAE0N5TgmtGmBfFA9pPoF9LFlFNR/ZgmfPVy4/5Nts/OWRZoovXAOfUw/bEq6J7Yf
+ H/XU8Q4Z8JOWD3wEjZj76mXp5cWjOY0xiuhYHXzm79aJ1ZfOTO8w5WDvq6ayROrHXKcb
+ IOLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUB6YqwP4tcGY61IGenaDYM9muIhP8AuJPac++F6NCdJcrWgGYUidp+CsHZIErZ6aAO+fD+go47iIBpZkK6MFJfk34MWQ==
-X-Gm-Message-State: AOJu0Yyh3avVnt672dCl2eRPHZj0Tv+Z5Xe9vUC4RzPS2v4U3Ari/6nr
- MT5Xtb61ZkasMjFsz/jC0eRtV1AQ1yC4KcP5U4+urcpEAJsi57M7Lg4VOG8DKto=
-X-Google-Smtp-Source: AGHT+IF3cOa2YiujuGNAeeUVKbPIFCGMXA1uDj322Z69lHs/fhc8D77nLUp0flvaJTOoM3ggEyRQlw==
-X-Received: by 2002:a9d:63d8:0:b0:6f9:6931:89ef with SMTP id
- 46e09a7af769-7007365b72cmr2974795a34.2.1718808612273; 
- Wed, 19 Jun 2024 07:50:12 -0700 (PDT)
+ AJvYcCXDFQM1cFdOBJpyFyYl4cBA0oDErCam0+uJXMl1d6E7Mt3okqY2OPwH3tY35KKFg9TiC9AC4LPWvWoS6bQZj5z0HKsDoA==
+X-Gm-Message-State: AOJu0Yxk8mzmsEPwDMnixPJN2vuSH6BPS5pAs/scvR7ay6Vg0Mwo0dkl
+ N3PuVnIsJIgnjvCDyKrRyVw65KlG9HdGNxd7qr6xJTcyNpzhp21wrAo3Aks+Z3M=
+X-Google-Smtp-Source: AGHT+IFfddxX44uH21qh6MogQ49Qu7amdN7VCUGe3nlaK6tMxbn9YyBVZolUgEEiHCZyGwxoutGAew==
+X-Received: by 2002:a05:6870:e0cd:b0:254:b7d9:2de3 with SMTP id
+ 586e51a60fabf-25c94a0e2e9mr3259996fac.33.1718809667079; 
+ Wed, 19 Jun 2024 08:07:47 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
  [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6ff2cfb7be8sm625122a34.54.2024.06.19.07.50.11
+ 586e51a60fabf-25cb083ca27sm59417fac.36.2024.06.19.08.07.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 07:50:11 -0700 (PDT)
-Date: Wed, 19 Jun 2024 08:50:09 -0600
+ Wed, 19 Jun 2024 08:07:46 -0700 (PDT)
+Date: Wed, 19 Jun 2024 09:07:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: Make use of U_BOOT_LONGHELP when missing
-Message-ID: <20240619145009.GY68077@bill-the-cat>
-References: <20240618174516.3320193-1-trini@konsulko.com>
- <CAHTX3d+ovc79DW=gquPpN63Bs2Qzd8E7aj6TP0Fb75aUH=LQ8A@mail.gmail.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
+Message-ID: <20240619150744.GA68077@bill-the-cat>
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <20240618202123.GW68077@bill-the-cat>
+ <CAC_iWjJt=ie4jD2yUbCNXU-WEGUmvo_GToCwfWsOTWot3+r8Vg@mail.gmail.com>
+ <e43d7a84-0348-4655-80d8-f91b9232bdbe@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="24iHJmCrsOq3ww5y"
+ protocol="application/pgp-signature"; boundary="Sj1eneIBGrSuBCS3"
 Content-Disposition: inline
-In-Reply-To: <CAHTX3d+ovc79DW=gquPpN63Bs2Qzd8E7aj6TP0Fb75aUH=LQ8A@mail.gmail.com>
+In-Reply-To: <e43d7a84-0348-4655-80d8-f91b9232bdbe@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,91 +96,124 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---24iHJmCrsOq3ww5y
-Content-Type: text/plain; charset=iso-8859-1
+--Sj1eneIBGrSuBCS3
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 19, 2024 at 08:15:04AM +0200, Michal Simek wrote:
-> =FAt 18. 6. 2024 v 19:45 odes=EDlatel Tom Rini <trini@konsulko.com> napsa=
-l:
-> >
-> > After adding the U_BOOT_LONGHELP macro some new commands came in still
-> > that were not making use if it. Switch these cases over and in a few
-> > places add missing newlines as well.
-> >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  arch/arm/mach-imx/cmd_dek.c                |  4 ++--
-> >  arch/arm/mach-imx/cmd_mfgprot.c            |  4 ++--
-> >  arch/arm/mach-imx/imx8/snvs_security_sc.c  | 16 ++++++++--------
-> >  arch/arm/mach-stm32mp/cmd_stm32key.c       |  4 ++--
-> >  board/freescale/common/cmd_esbc_validate.c |  4 ++--
-> >  board/kontron/sl28/cmds.c                  |  4 ++--
-> >  cmd/adc.c                                  |  4 ++--
-> >  cmd/arm/exception.c                        |  5 ++---
-> >  cmd/arm/exception64.c                      |  5 ++---
-> >  cmd/blob.c                                 |  4 ++--
-> >  cmd/riscv/exception.c                      |  5 ++---
-> >  cmd/scmi.c                                 |  5 ++---
-> >  cmd/x86/exception.c                        |  5 ++---
-> >  13 files changed, 32 insertions(+), 37 deletions(-)
-[snip]
-> arch/arm/mach-imx/imx8/snvs_security_sc.c:781:static char
-> snvs_sec_status_help_text[] =3D
-
-I missed this one for some reason, yeah.
-
-> board/xilinx/versal-net/cmds.c:74:static char versalnet_help_text[] =3D
+On Wed, Jun 19, 2024 at 04:47:08PM +0200, Jerome Forissier wrote:
 >=20
-> These two should also be part of this patch.
-
-OK.
-
-> And this one is interesting.
-> cmd/cli.c:122:static char cli_help_text[] =3D
 >=20
-> it is guarded by SYS_LONGHELP but I think it should be just removed
-> and macro should be used instead.
+> On 6/19/24 09:24, Ilias Apalodimas wrote:
+> > Hi Tom
+> >=20
+> > On Tue, 18 Jun 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Mon, Jun 17, 2024 at 05:32:52PM +0200, Jerome Forissier wrote:
+> >>
+> >>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lw=
+ip
+> >>> library for the network stack" [1]. The goal is to introduce the lwIP=
+ TCP/IP
+> >>> stack [2] [3] as an alternative to the current implementation in net/,
+> >>> selectable with Kconfig, and ultimately keep only lwIP if possible. S=
+ome
+> >>> reasons for doing so are:
+> >>> - Make the support of HTTPS in the wget command easier. Javier T. (CC=
+'d)
+> >>> has some additional lwIP and Mbed TLS patches to do so. With that it
+> >>> becomes possible to fetch and launch a distro installer such as Debian
+> >>> etc. using a secure, authenticated connection directly from the U-Boot
+> >>> shell. Several use cases:
+> >>>   * Authentication: prevent MITM attack (third party replacing the
+> >>> binary with a different one)
+> >>>   * Confidentiality: prevent third parties from grabbing a copy of the
+> >>> image as it is being downloaded
+> >>>   * Allow connection to servers that do not support plain HTTP anymore
+> >>> (this is becoming more and more common on the Internet these days)
+> >>> - Possibly benefit from additional features implemented in lwIP
+> >>> - Less code to maintain in U-Boot
+> >>
+> >> So, on a Pi 3 (rpi_3_defconfig) I see this now (and it passes normally=
+):
+> >> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> ___________________________________ test_efi_helloworld_net __________=
+_________________________
+> >> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
+> >>     assert expected_text in output
+> >> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at =
+200000'
+> >> ------------------------------------ Captured stdout call ------------=
+-------------------------
+> >> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
+> >> Using smsc95xx_eth device
+> >> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+> >> Filename 'EFI/arm64/helloworld.efi'.
+> >> Load address: 0x200000
+> >> Loading:
+> >> Bytes transferred =3D 4528 (11b0 hex)
+> >> U-Boot> U-Boot> crc32 200000 $filesize
+> >> CRC32 for 00200000 ... 002011af =3D=3D> 2b466005
+> >> U-Boot> U-Boot> bootefi 200000
+> >> No UEFI binary known at 200000
+> >> U-Boot>
+> >> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+> >> If I disable that test, it moves on to failing the same exact way for
+> >> grub. If I disable the grub test too. After that, oh, a bunch of other
+> >> tests get skipped because CMD_NET and similar aren't enabled now, and
+> >> the tests are wrong. I'll post that as another patch by itself. After
+> >> correcting for that, we're seemingly noticeably slower as I need to
+> >> increase the timeout for tftp'ing my 83MiB FIT image I use for kernel
+> >> testing. We no longer have the estimated speed message, so I can't as
+> >> easily say how much slower it is. After increasing the timeout, the
+> >> kernel boot test does work.
+> >>
+> >> I can note that normally it takes ~18ms to get a dhcp reply, but with
+> >> lwIP it's now 132ms, and previously the kernel loaded at 2.7MiB/s
+> >> (which, not great) but if that has a similar level of slowdown, could
+> >> well explain it.
+> >>
+> >=20
+> > Thanks for taking the time. We'll run the pytests before v5. That
+> > being said, my wget tests were faster with lwIP last time I checked.
 >=20
-> #if CONFIG_IS_ENABLED(SYS_LONGHELP)
-> static char cli_help_text[] =3D
->         "get - print current cli\n"
->         "set - set the current cli, possible value are: old, modern"
->         ;
-> #endif
->=20
-> U_BOOT_CMD(cli, 3, 1, do_cli,
->            "cli",
-> #if CONFIG_IS_ENABLED(SYS_LONGHELP)
->            cli_help_text
-> #endif
-> );
+> The reason for the slower TFTP is the block size. lwIP supports only the
+> default (512 bytes), while the legacy stack supports the 'blksize' option
+> and sets CONFIG_TFTP_BLOCKSIZE=3D1468 by default.
 
-This one is actually kind of "funny". I know I changed it to that,
-rather than using the macro like everything else, when I first did the
-conversion as there was some sort of odd build failure introduced. I'll
-go and see if it still fails somewhere.
+Ouch. Can we ask if upstream is agreeable to making that configurable
+some way, and then we utilize that? I'm not looking forward to lots of
+performance hit reports.
+
+But please note that my dhcp request/reply is also taking 10x as long,
+and in v3 it wasn't working at all? I feel like there's possibly another
+issue lurking here.
 
 --=20
 Tom
 
---24iHJmCrsOq3ww5y
+--Sj1eneIBGrSuBCS3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZy8CEACgkQFHw5/5Y0
-tywC0gwAgUeI9H623tZpf33QDvB9R1lsgxK+S5zuKuEKGEml22phzycniVHK4f3T
-Nvzm44WuFmSBl6vBWbp3R7bIul7aklUEidXOkJHITaXjZ4L0Kf5bUMWgPVn9aJJK
-rO4iLrb3FZX64AEtibqXmBICIBSORaIH55vL7HKcW0lN8y8Z/eIBHAVCXZPOQuAh
-p0SpL2HDt+LL8g6fSMNLRQCi8pVM2yMFWojBERWFhIICp9GZ7/JOkCvF4RrCXXht
-O3KLT3qGGoBjwTvOIDLDXcfdRnrqh4/12/8NDqOz7gVqqahqCyuQ6i3QQj6rxzdI
-x5+wKgFeIEbj7O3zHjQ+++WGa1HtX2uwfxk+SaUJ7YB2Lj+XsFwCB9Q5b+XUFgAl
-V9gAuQwINF81D2AKutuqFhA1fQ4aPqH9F8EERyg2iagZLK2jNz+zbLdSXLdvJZro
-EIkPR5tMWvH+r9TTQuUUR30tA89LPK9bfeBTIhLRWTO811zxMIrGuUQE6UAa/6e1
-deCI/PTv
-=N/G4
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZy9DUACgkQFHw5/5Y0
+tyzfDQv/TfySMMYLxZqZ2aNnvunXs/Lb+xZcO2Ew1D59/tMKc8MbLe/doV20VT7H
+GN2dOPQqMC58V7WVJhK8vfL/DgjBDF/5X3daqodJ0MdwYC3kUQz83SYqttqs9GL7
+JCMM9L3twJa6sx8/InIXVFdWR9eWQ6MN3DQK5gLtulyg8ZJIfkzRwiTEsdcmDsxa
+ecmNnAGWu+BxrFJk8fCx7tJ8j07qw0wEObSEzayh7NOCYZnauUgoRw3scXxVNABT
++wgtodcnCcBEQfRroKVMhkCpT+WGd3SyTgW6qt1Bdd01Krkfo0RCz1fwfnpz6fm+
+z749wSQcPoDebHz5U0CX5Sta6PlbPNCpVr0+4sBefmDaY2jSv9xInkiz6IAnwjnA
+ZmN+nIb318LQHmj5uyrLRiFF4SexAxkqZmDaBqw8jWud9E+dh011NeLWIRX6Z59K
+Irs8yLlJyBEYN4ZsTIGFmwfADaLvYfQoB5Mn0sdkEo2qR88GN4CHkwPetVP7VrHe
+A+DNqxTN
+=ivaA
 -----END PGP SIGNATURE-----
 
---24iHJmCrsOq3ww5y--
+--Sj1eneIBGrSuBCS3--
