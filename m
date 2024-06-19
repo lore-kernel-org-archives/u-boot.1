@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7F2C27C79
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 17:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D5B7C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 17:22:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF3528844F;
-	Wed, 19 Jun 2024 19:19:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9BA758839C;
+	Wed, 19 Jun 2024 19:22:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LciNY3jl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T3WMyObf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF16C8844F; Wed, 19 Jun 2024 19:19:46 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 188738839C; Wed, 19 Jun 2024 19:22:40 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B784F88428
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 19:19:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A22F086EB5
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 19:22:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2ec1620a956so67639271fa.1
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 10:19:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6fa0d077694so2520a34.0
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 10:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718817584; x=1719422384; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zY5+VGmstmxGYjmiho6SykUZTlm0XGmbzYvax1JGggg=;
- b=LciNY3jlbKZzDUiv1/QHflqwvN8Cs4kP6/wYjDVvu/XnFXOT5gBwNuzhjpLQDHvXYl
- b5r4oiqypj07EZzIXyGvIYIdsvmm7aafJn2CwT83VASF//CniGSDyA9jKjHwoSQ18K0y
- Q0qOQ1qZ2NhY11rJ5Kau7a//MO4sho9x3jvOBwRZn2AX6bu8/k8pDmA9aCG9oZrIbfoz
- Qeg2uOXRAoNtLH4mDqZxqpy7t7x+YPuOQpL/01EB3qKzlLDYiUleRYxrWC5kTZk82aFX
- EWM6MMoHB/Y94QXPy/FZe5P2NQFdkb+Dpo91wLbuFuDVP5b+02FZdMQCb49XAi1eOgy8
- C/dw==
+ d=konsulko.com; s=google; t=1718817755; x=1719422555; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gAjl3UjvmCcwD1XNhe8rRf9fDigt6VjQfbslQIaA4+A=;
+ b=T3WMyObfmjoixznWASd01NkH3P3XB7T41H7hfqM7b4fxMAQ3XxU9/e0Ka7o9KJ2pvW
+ XtzAhnDTmFj5B3OoFW5H/yi7RR7Pdk9kOBJFRqPuSp5qyMeGKA+JSMlxAVgGy0ZCHbQa
+ ubv7xDPKISRs+xpAlE4U1o7OA4sjQyplysHHI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718817584; x=1719422384;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zY5+VGmstmxGYjmiho6SykUZTlm0XGmbzYvax1JGggg=;
- b=jwlt131CIfMoIrfu307TimV3ICUr2uusrhG5p7wBNvYqBox3u8XfJG94F66iE9Kmtf
- E2ek+JxTiG0UbRStku90PryP4VaA0Igp8jMRmYOEBmd4IfTVjHPN4JFgPZSWYTwKd0pz
- gvLBLQPVWOf88AwsvOwpStnwuqGqN8rNR5K5odH8xPnVfgEf9nWzCm5a58JGS+mj4HC6
- qe6hN4ZkeI2EyCh/AiNPL/OYIbCfEeFazwC6lGdR9Ms0BBD5mAd6S8TSO0Mt+mBi3cBB
- FNLsI5FlnOsAZxzd7vZOfpEwtcPWptOy+lbk4IOIupnU8J9jIRhuv7+M/VXrMT0zrc4J
- v7TQ==
+ d=1e100.net; s=20230601; t=1718817755; x=1719422555;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gAjl3UjvmCcwD1XNhe8rRf9fDigt6VjQfbslQIaA4+A=;
+ b=EdFrJJdos4hTgwZL2vAjMUPlL7BBw/7Uhw9ncwpAHJXxK2s/aPYSiI8eApx8QOCXAo
+ AlrdSQXPeb3Us/P9e380GAnt63/EO8baqrPnPKAHwOEiloOTkMDy0COxAxCMH1eucdzU
+ o8xioSU5326mH+bmG3ohyw0WbTXSnRdX5zdFmVo11bFKGbeeplsjBA0GxTJ2Eam0Aca2
+ +9wOY9fk89ErRXvg8ZIbpYt+BLNaEWTcSJSBh1nnuFtZQ7AXIXj0OaBdLOatfMlXn67j
+ O/MuYZzs29Jz6mb7YwFc0C2KG0Gtu0bSgzxFEO0cBsRaAT+SXTT14hfPhMX/FMLfKMe6
+ IH5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUgRXU3r81boSd1er4QkvXaOO6DEEpTnZAtycTU+p9mam1LlcfJc1iSn3EaEfn9wHam99wO0rid1rQc9CXH4j1ggqvrQ==
-X-Gm-Message-State: AOJu0Yz+r4IXAxonAQwmXkbCYUv8auDFQQGSD9vsKO3SybY9xv0GWVrv
- vcSbxGDCLgalP/EynqLFstMnYD2ecXv/s5KHks7JZqwOKqR5N92wxUBRcH322SZO+WIx6Ske0Sa
- 8YEwXkyTksuJ8x3HGngGxUAxhrrA=
-X-Google-Smtp-Source: AGHT+IFFT3x8MkoF9LRf315wJQ2tjVLQjxyZE0aQLuFQQxAMfK7rub3XaYfjblaCw7L9SdVT/MWn8vKdHOvBMJaLR7s=
-X-Received: by 2002:a05:651c:1a23:b0:2ec:3d5f:7a36 with SMTP id
- 38308e7fff4ca-2ec3d5f7c1fmr22656031fa.23.1718817583673; Wed, 19 Jun 2024
- 10:19:43 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1718638104.git.jerome.forissier@linaro.org>
- <20240618202123.GW68077@bill-the-cat>
- <CAC_iWjJt=ie4jD2yUbCNXU-WEGUmvo_GToCwfWsOTWot3+r8Vg@mail.gmail.com>
- <e43d7a84-0348-4655-80d8-f91b9232bdbe@linaro.org>
-In-Reply-To: <e43d7a84-0348-4655-80d8-f91b9232bdbe@linaro.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 19 Jun 2024 18:19:32 +0100
-Message-ID: <CALeDE9OPyePDvkf1t0rPSRZzVrYL5uhWN=C7m8g03-J9+vgDuA@mail.gmail.com>
-Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
-To: Jerome Forissier <jerome.forissier@linaro.org>
+ AJvYcCXSAxh5LkQgS5+cWYIz/fyO5wQgBKL/m+kQ2EX/Qa0HHi6t2oQH1+Y/7XG8lUIPjVcbeUbFT1CqnvGVgh+DDZgkZBtJ6g==
+X-Gm-Message-State: AOJu0Yxg5TbrVFdZk+eHu/QC72MHzeXTcTGUQG90X4sBpqiRXvyyogTk
+ waYeex2qBbYGfZVUHVJ45/nPpICk+J5AfQQtGZjWLMtxF++N8ZuW4G1wUrEh67Q=
+X-Google-Smtp-Source: AGHT+IET9MB+XqHsadubpiV8EGe0Mbf4UNuz21SC8V357iijX/I67bPKi3JSbX29xGB+0gIWJzt5oQ==
+X-Received: by 2002:a05:6830:16cf:b0:700:5090:7081 with SMTP id
+ 46e09a7af769-70074117519mr3664299a34.7.1718817755343; 
+ Wed, 19 Jun 2024 10:22:35 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6fb5afab892sm2233443a34.7.2024.06.19.10.22.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Jun 2024 10:22:34 -0700 (PDT)
+Date: Wed, 19 Jun 2024 11:22:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/3] efi_loader: avoid duplicate weak
+ invalidate_icache_all()
+Message-ID: <20240619172232.GA3435012@bill-the-cat>
+References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
+ <20240616173105.7430-4-heinrich.schuchardt@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gIf2QHc8E7muECtB"
+Content-Disposition: inline
+In-Reply-To: <20240616173105.7430-4-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,84 +97,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Jun 2024 at 16:06, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
->
->
-> On 6/19/24 09:24, Ilias Apalodimas wrote:
-> > Hi Tom
-> >
-> > On Tue, 18 Jun 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Mon, Jun 17, 2024 at 05:32:52PM +0200, Jerome Forissier wrote:
-> >>
-> >>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> >>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
-> >>> stack [2] [3] as an alternative to the current implementation in net/,
-> >>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> >>> reasons for doing so are:
-> >>> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
-> >>> has some additional lwIP and Mbed TLS patches to do so. With that it
-> >>> becomes possible to fetch and launch a distro installer such as Debian
-> >>> etc. using a secure, authenticated connection directly from the U-Boot
-> >>> shell. Several use cases:
-> >>>   * Authentication: prevent MITM attack (third party replacing the
-> >>> binary with a different one)
-> >>>   * Confidentiality: prevent third parties from grabbing a copy of the
-> >>> image as it is being downloaded
-> >>>   * Allow connection to servers that do not support plain HTTP anymore
-> >>> (this is becoming more and more common on the Internet these days)
-> >>> - Possibly benefit from additional features implemented in lwIP
-> >>> - Less code to maintain in U-Boot
-> >>
-> >> So, on a Pi 3 (rpi_3_defconfig) I see this now (and it passes normally):
-> >> ========================================== FAILURES ===========================================
-> >> ___________________________________ test_efi_helloworld_net ___________________________________
-> >> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
-> >>     assert expected_text in output
-> >> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 200000'
-> >> ------------------------------------ Captured stdout call -------------------------------------
-> >> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
-> >> Using smsc95xx_eth device
-> >> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
-> >> Filename 'EFI/arm64/helloworld.efi'.
-> >> Load address: 0x200000
-> >> Loading:
-> >> Bytes transferred = 4528 (11b0 hex)
-> >> U-Boot> U-Boot> crc32 200000 $filesize
-> >> CRC32 for 00200000 ... 002011af ==> 2b466005
-> >> U-Boot> U-Boot> bootefi 200000
-> >> No UEFI binary known at 200000
-> >> U-Boot>
-> >> =================================== short test summary info ===================================
-> >> If I disable that test, it moves on to failing the same exact way for
-> >> grub. If I disable the grub test too. After that, oh, a bunch of other
-> >> tests get skipped because CMD_NET and similar aren't enabled now, and
-> >> the tests are wrong. I'll post that as another patch by itself. After
-> >> correcting for that, we're seemingly noticeably slower as I need to
-> >> increase the timeout for tftp'ing my 83MiB FIT image I use for kernel
-> >> testing. We no longer have the estimated speed message, so I can't as
-> >> easily say how much slower it is. After increasing the timeout, the
-> >> kernel boot test does work.
-> >>
-> >> I can note that normally it takes ~18ms to get a dhcp reply, but with
-> >> lwIP it's now 132ms, and previously the kernel loaded at 2.7MiB/s
-> >> (which, not great) but if that has a similar level of slowdown, could
-> >> well explain it.
-> >>
-> >
-> > Thanks for taking the time. We'll run the pytests before v5. That
-> > being said, my wget tests were faster with lwIP last time I checked.
->
-> The reason for the slower TFTP is the block size. lwIP supports only the
-> default (512 bytes), while the legacy stack supports the 'blksize' option
-> and sets CONFIG_TFTP_BLOCKSIZE=1468 by default.
 
-This number looks like it's derived from standard ethernet frame
-(1500) minus default packet sizes to get to 1468. Does LWIP have a
-concept of MTU? I would have thought it would be better to use MTU if
-so because it then means it's not hard coded and it can change based
-on what the driver/HW supports?
+--gIf2QHc8E7muECtB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Peter
+On Sun, Jun 16, 2024 at 07:31:05PM +0200, Heinrich Schuchardt wrote:
+
+> If multiple weak implementations of a weak function exist, it is unclear
+> which one the linker should chose. cmd/cache.c already defines a weak
+> invalidate_icache_all().
+>=20
+> We don't need a call to invalidate_icache_all() on x86.
+> ARM, RISC-V, and Sandbox provide an implementation.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--gIf2QHc8E7muECtB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZzE9gACgkQFHw5/5Y0
+tyxRKAv3UkGBHU/YHeXEZkvUqL/KBx3l6uLwLdW9HWBc3l/FErjnKpCQ+EgmMyOJ
+tU8Jv+Le0XOQGUKk8F0zqfoYPaZxFVQZ2GQrv8NeVUBwnSWAofS+C8wTJEGfY7bk
+YAs0iwaRAho+ZG74vvRJeNuEDRA75BPV//BNclVaWqmXU/cO4ThnPxkubHbeYggK
+4IvsUS+mEw3uKMBqAZpuJaHA38OgB5t/9opqak+fkOM6OtaDyHEPWH+19fSDFGVs
+6EppIBiTCoCBhxQ2TL4hkijBU5ILQVV4okUfkW2hYo/yL++OnbdIfAJ7yMgCgyO9
+PeEt3znTiHS+CCMl8rTH93SCX3l0ShlAQDSvWJg1nuGWpwIdfWtZElMbyPyBzmHi
+5vwsz1bFn6CvCcVASPUVv/QLwWsRaBgTExyEnP+37M+quz9/Dj/hUsF9QV/mIpD6
++SabCm+7uRxyeN4VCkstSGmTAgaB0zi/Qp9vezoGH+JFHVEfKvHY09zZ+/Zp3Uvg
+pxQ4YFM=
+=7Tay
+-----END PGP SIGNATURE-----
+
+--gIf2QHc8E7muECtB--
