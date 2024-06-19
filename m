@@ -4,83 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8DD7C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 09:25:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D86AC2BA15
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 09:38:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6C0B88415;
-	Wed, 19 Jun 2024 11:25:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 80EFD88400;
+	Wed, 19 Jun 2024 11:38:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oX7iQKgr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PdnKsVPN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A95F98842A; Wed, 19 Jun 2024 11:25:44 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id CC0D188400; Wed, 19 Jun 2024 11:38:03 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C88C587EBD
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 11:25:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 948678840C
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 11:37:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4230366ad7bso58082325e9.1
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 02:25:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-52c4b92c09bso8047755e87.1
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 02:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718789140; x=1719393940;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=/11EvVQ8kKo5SBrVwHaYuXlUdXV8yXl7VRqRkP2ef/E=;
- b=oX7iQKgr0oxV1FcAkDLDEfiSYOgzq6p4qQ7O1vojgZSdYLFtm2THaf5ixk9JPSWlNs
- vSRPHCBBLJCsMUE4m74DJ7dPhZ7aXUTVP9nciNAVVlkAh7qBswZoPomk7hc3wQAWkrR6
- eK12BEjrPt4hVIFlylzAquJ5p3Td19/SOPSk/UIKbemfXyvqCiSUdJ0Esysx0klH93u0
- qJNcAIkVTeXcsSlEBMU70evKfuLu+OdJYV8N+AajwUjfTOYEnTOwffPebD3FI9n3qlAK
- nQZ/X4wGn7vhvul19d7KS/Y3m+tz9/a2yrC9CK5/ECC0vj9EJ5z65blPKI9YffWZevsb
- 3Www==
+ d=linaro.org; s=google; t=1718789876; x=1719394676; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GI2AweAlWWhqb8LVTIjtB6y0x3EF2JLrXnnvX2SKCTo=;
+ b=PdnKsVPNN8PRxT2+PK2JfNtD6j8J/hoAaKcLHCTEGldcdwdOB3n6nFk0TFc1s3kqjI
+ qH1FwB5D69FKocdj8laWE8J75TlJFmpas00xkwujdlFLbJ2rjhcTPiMxnc0NS1xfqy9H
+ L1UJwVbYjw14u/JBU462zaIfNJci3Vc7jkeZxq2scLECECpkXMSB0LN+9+GLn6uq6Ct8
+ eEWGYlXA82kwgL1+LQr4TTGLRoZAr8syJobxp7GHRRZqX3JJMKr2A4PGMTAq02p63o5h
+ RkBKJIM8YBKYiAh6PEYIrWOHotqA8MH0viL5gsIu78zbHHgSu4Wr+kvYNgO55Xe73Oyd
+ 2JeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718789140; x=1719393940;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/11EvVQ8kKo5SBrVwHaYuXlUdXV8yXl7VRqRkP2ef/E=;
- b=riFYrNI5ZAsS/RKjWReX/KVcR3Zt5XGltLjl7nIsndq18baJQB1xZs4dJtllT32lk5
- 9LcNbBhFglgnqyGSEsm6CJvv5Y+/JECyrW34SLC+H1cdVoNpRHk4AoxJdekgoDp4iITq
- RRluh8+OzwM7zumVXnl1UB9c7LJh1E9nV90r6b6ijWeSh20GxPlDNa+hCSM3c2d7cw7m
- v6yYSmyPOrwr7h5wq0bMJtaq2B1/6nIXCkrwUN1lpunF9Fq/GzqQGT6OMViQblJcUXKw
- aofxTTzhYS/WU/wZX44muEajAWZ4MORXdh1uD+aIq4tMxV6jG6hbeetxs9Jp25YQQnHX
- kF+w==
+ d=1e100.net; s=20230601; t=1718789876; x=1719394676;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GI2AweAlWWhqb8LVTIjtB6y0x3EF2JLrXnnvX2SKCTo=;
+ b=QOZlvlaJxOYZa1obxd5iFxv//YSoT1QmKBdJzbKXHtYZMwRQdbSSfI8E5mpRHHXfrM
+ YrFe4WxBTBw0S46ciFCjCps8EXauio/M6diEZc1hbodYMot4BARzEDcQSPFQsZCi8/Dz
+ Ar5Ck6TpwrmjovNEhVWFwsBMCX0S1N/s2UXN+zlKVNuCIeDi1tky9Yx+HzoUc0N2REH0
+ v7dZP7fnBv5EfOqM0iQRBL3MYgIGb7bniQdEp3v0FMVjyR8PJ/cO24P3g9o2H3v1l48Z
+ ls3Z28bf0OtVmAkrz09+edaIKE1bf1z9sgZ3gYVeVYd94jqX7hDDwyb2FaR1obB07sW6
+ RyUQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBMlNTJxLTj6Dv8WjzfdKs4V7i1GuzSS36bhDRQnj+j6ABjGq+2VGTn9nlPoFUctj1EOnQYOhKeQ3ONNUEJ/Bm+lg2Vg==
-X-Gm-Message-State: AOJu0YxbmQfVlUdReTI/bP2HRg0+oaaWTgT633kVDhdmGJmR71308Mkq
- xuC9/Y6yX9jP5Az6TxjS/+etQk5N/DZNX6u+4bsrEWfzYezJKfqyywaOqogZhjg=
-X-Google-Smtp-Source: AGHT+IEhdJq3c7vbNOaD66Rx6Ph0rvFObAnkms7VVmJrQPB/fAnRq5a9tkokOumdC3RoDBNbhQsFWw==
-X-Received: by 2002:a05:600c:4b27:b0:423:b5f9:203f with SMTP id
- 5b1f17b1804b1-42475079466mr15075515e9.5.1718789140015; 
- Wed, 19 Jun 2024 02:25:40 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ AJvYcCU42ho/OeSAQGlbwn3p5KdBWk/YbiFF6KecbB0iZjiODtyxbrNVMHuOa7KBBvfESMzI4FF77AoGlGi/e6GlCjil6zbsdg==
+X-Gm-Message-State: AOJu0Yz8dK+n975K0UVNy+uB/Npf/IkGqJNP6fI7uqfmCnRuenVjYDql
+ U4cO8mGyQJWAAzmSaVQUlGhdzUJKEXRNMBFiTaSpckLWqANpwiMmvQAcbfro76Q=
+X-Google-Smtp-Source: AGHT+IEOn/d83WFBIdAkWyxDyoUBncG4Sv80caUVDep5SAhZE4WsVNLCNY+AmbZ+eQU3iqWFzVm2nQ==
+X-Received: by 2002:ac2:5481:0:b0:52c:a0b8:4dc0 with SMTP id
+ 2adb3069b0e04-52ccaa3407cmr1241229e87.28.1718789875593; 
+ Wed, 19 Jun 2024 02:37:55 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:b7e0:cc1c:dce0:48f9?
+ ([2a01:e0a:3cb:7bb0:b7e0:cc1c:dce0:48f9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42286eef970sm256496515e9.10.2024.06.19.02.25.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 02:25:39 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
- <glaroque@baylibre.com>, Dmitrii Merkurev <dimorinny@google.com>, Roman
- Stratiienko <r.stratiienko@gmail.com>, Igor Opaniuk
- <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/5] bootstd: Add Android support
-In-Reply-To: <CAFLszTgB92LRWcfZnpyNgiOUCKNeL4oMzm8HQq0_zfKjGurMhA@mail.gmail.com>
-References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
- <CAFLszThimpJyRFg2Dc8QKyin7=BF2Gwkez6ifWOYGnf-=15HWg@mail.gmail.com>
- <87o77zbnx3.fsf@baylibre.com>
- <CAFLszTgB92LRWcfZnpyNgiOUCKNeL4oMzm8HQq0_zfKjGurMhA@mail.gmail.com>
-Date: Wed, 19 Jun 2024 11:25:38 +0200
-Message-ID: <8734p9b7xp.fsf@baylibre.com>
+ ffacd0b85a97d-362d76f10e8sm2689565f8f.15.2024.06.19.02.37.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Jun 2024 02:37:55 -0700 (PDT)
+Message-ID: <a2fd13c5-f918-46d1-98db-5ff00ac06f30@linaro.org>
+Date: Wed, 19 Jun 2024 11:37:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/14] net-lwip: add DHCP support and dhcp commmand
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Bryan Brattlof <bb@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Artur Rojek <artur@conclusive.pl>, Yang Xiwen <forbidden405@outlook.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Boon Khai Ng
+ <boon.khai.ng@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <1455663bf6d4f8537d3919b755ef5148b65975c5.1718638104.git.jerome.forissier@linaro.org>
+ <4886f096-935a-4a61-b16c-245df8b30bd8@gmx.de>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <4886f096-935a-4a61-b16c-245df8b30bd8@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,141 +117,703 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon.
 
-On mar., juin 18, 2024 at 21:03, Simon Glass <sjg@chromium.org> wrote:
 
-> Hi Mattijs,
->
-> On Mon, 17 Jun 2024 at 09:15, Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
+On 6/17/24 18:54, Heinrich Schuchardt wrote:
+> On 17.06.24 17:32, Jerome Forissier wrote:
+>> Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP as
+>> well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI due
+>> to this code having an implicit dependency on do_tftpb().
 >>
->> Hi Simon,
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>   Makefile                |   6 +
+>>   boot/Kconfig            |   3 +-
+>>   cmd/Kconfig             |  26 ++++
+>>   cmd/Makefile            |   4 +
+>>   cmd/net-lwip.c          |  13 ++
+>>   common/board_r.c        |   4 +-
+>>   drivers/net/Kconfig     |   2 +-
+>>   include/net-lwip.h      |   2 +
+>>   net-lwip/Makefile       |  15 +++
+>>   net-lwip/dhcp.c         |  99 +++++++++++++++
+>>   net-lwip/eth_internal.h |  35 ++++++
+>>   net-lwip/net-lwip.c     | 270 ++++++++++++++++++++++++++++++++++++++++
+>>   net-lwip/tftp.c         |  11 ++
+>>   13 files changed, 486 insertions(+), 4 deletions(-)
+>>   create mode 100644 cmd/net-lwip.c
+>>   create mode 100644 net-lwip/Makefile
+>>   create mode 100644 net-lwip/dhcp.c
+>>   create mode 100644 net-lwip/eth_internal.h
+>>   create mode 100644 net-lwip/net-lwip.c
+>>   create mode 100644 net-lwip/tftp.c
 >>
->> On lun., juin 17, 2024 at 07:53, Simon Glass <sjg@chromium.org> wrote:
+>> diff --git a/Makefile b/Makefile
+>> index 0fe1623c550..92a0ab770bb 100644
+>> --- a/Makefile
+>> +++ b/Makefile
+>> @@ -862,6 +862,7 @@ libs-y += env/
+>>   libs-y += lib/
+>>   libs-y += fs/
+>>   libs-$(CONFIG_NET) += net/
+>> +libs-$(CONFIG_NET_LWIP) += net-lwip/
+>>   libs-y += disk/
+>>   libs-y += drivers/
+>>   libs-$(CONFIG_SYS_FSL_DDR) += drivers/ddr/fsl/
+>> @@ -2132,6 +2133,11 @@ etags:
+>>   cscope:
+>>           $(FIND) $(FINDFLAGS) $(TAG_SUBDIRS) -name '*.[chS]' -print > \
+>>                           cscope.files
+>> +ifdef CONFIG_NET_LWIP
+>> +        echo net/eth-uclass.c net/eth_common.c net/eth_bootdev.c \
+>> +             net/mdio-uclass.c net/mdio-mux-uclass.c >> \
+>> +                        cscope.files
+>> +endif
+>>           @find $(TAG_SUBDIRS) -name '*.[chS]' -type l -print | \
+>>               grep -xvf - cscope.files > cscope.files.no-symlinks; \
+>>           mv cscope.files.no-symlinks cscope.files
+>> diff --git a/boot/Kconfig b/boot/Kconfig
+>> index 6f3096c15a6..004e69dd92a 100644
+>> --- a/boot/Kconfig
+>> +++ b/boot/Kconfig
+>> @@ -378,7 +378,7 @@ config BOOT_DEFAULTS_CMDS
+>>       select CMD_FAT
+>>       select CMD_FS_GENERIC
+>>       select CMD_PART if PARTITIONS
+>> -    select CMD_DHCP if CMD_NET
+>> +    select CMD_DHCP if CMD_NET || CMD_NET_LWIP
+>>       select CMD_PING if CMD_NET
+>>       select CMD_PXE if CMD_NET
+>>       select CMD_BOOTI if ARM64
+>> @@ -540,6 +540,7 @@ config BOOTMETH_EXTLINUX_PXE
+>>   config BOOTMETH_EFILOADER
+>>       bool "Bootdev support for EFI boot"
+>>       depends on EFI_BINARY_EXEC
+>> +    select CMD_TFTPBOOT if CMD_NET_LWIP
+>>       default y
+>>       help
+>>         Enables support for EFI boot using bootdevs. This makes the
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index b026439c773..1bfa528e945 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -2084,6 +2084,32 @@ config CMD_WOL
 >>
->> > Hi Mattijs,
->> >
->> > On Thu, 13 Jun 2024 at 04:13, Mattijs Korpershoek
->> > <mkorpershoek@baylibre.com> wrote:
->> >>
->> >> Android boot flow is a bit different than a regular Linux distro.
->> >> Android relies on multiple partitions in order to boot.
->> >>
->> >> A typical boot flow would be:
->> >> 1. Parse the Bootloader Control Block (BCB, misc partition)
->> >> 2. If BCB requested bootonce-bootloader, start fastboot and wait.
->> >> 3. If BCB requested recovery or normal android, run the following:
->> >>    a. Get slot (A/B) from BCB
->> >>    b. Run AVB (Android Verified Boot) on boot partitions
->> >>    c. Load boot and vendor_boot partitions
->> >>    d. Load device-tree, ramdisk and boot
->> >>
->> >> The AOSP documentation has more details at [1], [2], [3]
->> >>
->> >> This has been implemented via complex boot scripts such as [4].
->> >> However, these boot script are neither very maintainable nor generic.
->> >> Moreover, DISTRO_DEFAULTS is being deprecated [5].
->> >>
->> >> Add a generic Android bootflow implementation for bootstd.
->> >>
->> >> For this initial version, only boot image v4 is supported.
->> >>
->> >> This has been tested on sandbox using:
->> >> $ ./test/py/test.py --bd sandbox --build -k test_ut
->> >>
->> >> This has also been tested on the AM62X SK EVM using TI's Android SDK[6]
->> >> To test on TI board, the following (WIP) patch is needed as well:
->> >> https://gitlab.baylibre.com/baylibre/ti/ti-u-boot/-/commit/84cceb912bccd7cdd7f9dd69bca0e5d987a1fd04
->> >>
->> >> [1] https://source.android.com/docs/core/architecture/bootloader
->> >> [2] https://source.android.com/docs/core/architecture/partitions
->> >> [3] https://source.android.com/docs/core/architecture/partitions/generic-boot
->> >> [4] https://source.denx.de/u-boot/u-boot/-/blob/master/include/configs/meson64_android.h
->> >> [5] https://lore.kernel.org/r/all/20230914165615.1058529-17-sjg@chromium.org/
->> >> [6] https://software-dl.ti.com/processor-sdk-android/esd/AM62X/09_02_00/docs/android/Overview.html
->> >>
->> >> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> >> ---
->> >> Changes in v2:
->> >> - Dropped patch 2/6 boot: android: Add image_android_get_version() (Igor)
->> >> - Fixed multi-line comment style (Igor, Simon)
->> >> - Added dependency on CMD_FASTBOOT for BOOTMETH_ANDROID (Igor)
->> >> - Fixed various resource leaks (Igor)
->> >> - Fixed bootmeth_priv dangling pointer on error cases (Igor)
->> >> - Updated test instructions in commit message for patch 6/6
->> >> - Added __weak impl of get_avendor_bootimg_addr() in patch 1 (dropped
->> >>   Igor's review because of this change)
->> >> - Added extra info in Kconfig to detail MMC limitation (Simon)
->> >> - Fixed typo Bootmethod->Bootmeth (Simon)
->> >> - Documented android_priv structure (Simon)
->> >> - Demoted various messages from printf() to log_debug (Simon)
->> >> - Fixed some lines too long (Simon)
->> >> - Added function documentation to read_slotted_partition() (Simon)
->> >> - Added some doc about avb extra_args being modified (Simon)
->> >> - Link to v1: https://lore.kernel.org/r/20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com
->> >>
->> >> ---
->> >> Mattijs Korpershoek (5):
->> >>       boot: android: Provide vendor_bootimg_addr in boot_get_fdt()
->> >>       bootstd: Add bootflow_iter_check_mmc() helper
->> >>       android: boot: Add set_abootimg_addr() and set_avendor_bootimg_addr()
->> >>       bootstd: Add a bootmeth for Android
->> >>       bootstd: Add test for bootmeth_android
->> >>
->> >>  MAINTAINERS               |   7 +
->> >>  arch/sandbox/dts/test.dts |   8 +
->> >>  boot/Kconfig              |  16 ++
->> >>  boot/Makefile             |   2 +
->> >>  boot/bootflow.c           |  12 +
->> >>  boot/bootmeth_android.c   | 553 ++++++++++++++++++++++++++++++++++++++++++++++
->> >>  boot/bootmeth_android.h   |  29 +++
->> >>  boot/image-android.c      |   5 +
->> >>  boot/image-fdt.c          |   2 +-
->> >>  cmd/abootimg.c            |  10 +
->> >>  configs/sandbox_defconfig |   2 +-
->> >>  doc/develop/bootstd.rst   |   6 +
->> >>  include/bootflow.h        |   9 +
->> >>  include/image.h           |  14 ++
->> >>  test/boot/bootflow.c      |  65 +++++-
->> >>  test/py/tests/test_ut.py  |  76 +++++++
->> >>  16 files changed, 811 insertions(+), 5 deletions(-)
->> >> ---
->> >> base-commit: f9886bc60f42d5bcfcfa4e474af7dc230400b6be
->> >> change-id: 20240605-bootmeth-android-bfc8596e9367
->> >>
->> >> Best regards,
->> >> --
->> >> Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> >>
->> >
->> > Thinking about this, I believe we should start having docs about the
->> > individual bootmeths themselves.
+>>   endif
 >>
->> Yes.
+>> +if NET_LWIP
+>> +
+>> +menuconfig CMD_NET_LWIP
+>> +    bool "Network commands (lwIP)"
+>> +    default y
+>> +
+>> +if CMD_NET_LWIP
+>> +
+>> +config CMD_DHCP
+>> +    bool "dhcp"
+>> +    select PROT_DHCP_LWIP
+>> +    help
+>> +      Boot image via network using DHCP/TFTP protocol
+>> +
+>> +config CMD_TFTPBOOT
+>> +    bool "tftp"
+>> +    select PROT_UDP_LWIP
+>> +    default n
+>> +    help
+>> +      tftpboot - load file via network using TFTP protocol
+>> +      Currently a placeholder (not implemented)
+>> +
+>> +endif
+>> +
+>> +endif
+>> +
+>>   menu "Misc commands"
 >>
->> >
->> > Can you add a section about your new bootmeth? I will come up with a
->> > patch for the others that I know about. Perhaps
->> > doc/develop/bootstd.rst would be a suitable place for now?
+>>   config CMD_2048
+>> diff --git a/cmd/Makefile b/cmd/Makefile
+>> index 87133cc27a8..535b6838ca5 100644
+>> --- a/cmd/Makefile
+>> +++ b/cmd/Makefile
+>> @@ -128,6 +128,10 @@ endif
+>>   obj-$(CONFIG_CMD_MUX) += mux.o
+>>   obj-$(CONFIG_CMD_NAND) += nand.o
+>>   obj-$(CONFIG_CMD_NET) += net.o
+>> +obj-$(CONFIG_CMD_NET_LWIP) += net-lwip.o
+>> +ifdef CONFIG_CMD_NET_LWIP
+>> +CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+>> +endif
+>>   obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
+>>   obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+>>   obj-$(CONFIG_CMD_ONENAND) += onenand.o
+>> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+>> new file mode 100644
+>> index 00000000000..82edb5fd2e6
+>> --- /dev/null
+>> +++ b/cmd/net-lwip.c
+>> @@ -0,0 +1,13 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/* Copyright (C) 2024 Linaro Ltd. */
+>> +
+>> +#include <command.h>
+>> +#include <net.h>
+>> +
+>> +#if defined(CONFIG_CMD_DHCP)
+>> +U_BOOT_CMD(
+>> +        dhcp,   3,      1,      do_dhcp,
+>> +        "boot image via network using DHCP/TFTP protocol",
+>> +        "[loadAddress] [[hostIPaddr:]bootfilename]"
+>> +);
+>> +#endif
+>> diff --git a/common/board_r.c b/common/board_r.c
+>> index da0b80f24ff..6548eb8fdd5 100644
+>> --- a/common/board_r.c
+>> +++ b/common/board_r.c
+>> @@ -472,7 +472,7 @@ static int initr_status_led(void)
+>>   }
+>>   #endif
 >>
->> Yes I can add a section. I would have preferred to have an example to
->> work from there, but I can start writing docs as well.
+>> -#ifdef CONFIG_CMD_NET
+>> +#if defined(CONFIG_CMD_NET) || defined(CONFIG_CMD_NET_LWIP)
+>>   static int initr_net(void)
+>>   {
+>>       puts("Net:   ");
+>> @@ -727,7 +727,7 @@ static init_fnc_t init_sequence_r[] = {
+>>   #ifdef CONFIG_PCI_ENDPOINT
+>>       pci_ep_init,
+>>   #endif
+>> -#ifdef CONFIG_CMD_NET
+>> +#if defined(CONFIG_CMD_NET) || defined(CONFIG_CMD_NET_LWIP)
+>>       INIT_FUNC_WATCHDOG_RESET
+>>       initr_net,
+>>   #endif
+>> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+>> index efc55e45ca8..640c4218518 100644
+>> --- a/drivers/net/Kconfig
+>> +++ b/drivers/net/Kconfig
+>> @@ -97,7 +97,7 @@ config DSA_SANDBOX
 >>
->> I'm leaving on vacation soon (without computer), so I'll be able to
->> send a v3 with docs included in at earliest a 2-3 weeks from now.
->
-> It isn't a blocker for this series, just something I thought of.
+>>   menuconfig NETDEVICES
+>>       bool "Network device support"
+>> -    depends on NET
+>> +    depends on NET || NET_LWIP
+>>       select DM_ETH
+>>       help
+>>         You must select Y to enable any network device support
+>> diff --git a/include/net-lwip.h b/include/net-lwip.h
+>> index f5c743b8d11..46cf6875f7e 100644
+>> --- a/include/net-lwip.h
+>> +++ b/include/net-lwip.h
+>> @@ -11,4 +11,6 @@ struct netif *net_lwip_new_netif_noip(void);
+>>   void net_lwip_remove_netif(struct netif *netif);
+>>   struct netif *net_lwip_get_netif(void);
+>>
+>> +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>> +
+>>   #endif /* __NET_LWIP_H__ */
+>> diff --git a/net-lwip/Makefile b/net-lwip/Makefile
+>> new file mode 100644
+>> index 00000000000..a56c32bfa74
+>> --- /dev/null
+>> +++ b/net-lwip/Makefile
+>> @@ -0,0 +1,15 @@
+>> +ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+>> +
+>> +obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) += ../net/eth_bootdev.o
+>> +obj-$(CONFIG_DM_MDIO)  += ../net/mdio-uclass.o
+>> +obj-$(CONFIG_DM_MDIO_MUX) += ../net/mdio-mux-uclass.o
+>> +obj-$(CONFIG_$(SPL_)DM_ETH) += ../net/eth_common.o
+>> +obj-$(CONFIG_$(SPL_)DM_ETH) += ../net/eth-uclass.o
+>> +obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
+>> +obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>> +obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+>> +
+>> +# Disable this warning as it is triggered by:
+>> +# sprintf(buf, index ? "foo%d" : "foo", index)
+>> +# and this is intentional usage.
+>> +CFLAGS_eth_common.o += -Wno-format-extra-args
+>> diff --git a/net-lwip/dhcp.c b/net-lwip/dhcp.c
+>> new file mode 100644
+>> index 00000000000..38ea565508f
+>> --- /dev/null
+>> +++ b/net-lwip/dhcp.c
+>> @@ -0,0 +1,99 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/* Copyright (C) 2024 Linaro Ltd. */
+>> +
+>> +#include <command.h>
+>> +#include <console.h>
+>> +#include <linux/delay.h>
+>> +#include <linux/errno.h>
+>> +#include <lwip/dhcp.h>
+>> +#include <lwip/dns.h>
+>> +#include <lwip/timeouts.h>
+>> +#include <net.h>
+>> +#include <time.h>
+>> +
+>> +#define DHCP_TIMEOUT_MS 10000
+>> +
+>> +#ifdef CONFIG_CMD_TFTPBOOT
+>> +/* Boot file obtained from DHCP (if present) */
+>> +static char boot_file_name[DHCP_BOOT_FILE_LEN];
+>> +#endif
+>> +
+>> +static void call_lwip_dhcp_fine_tmr(void *ctx)
+>> +{
+>> +    dhcp_fine_tmr();
+>> +    sys_timeout(10, call_lwip_dhcp_fine_tmr, NULL);
+>> +}
+>> +
+>> +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>> +{
+>> +    unsigned long start;
+>> +    struct netif *netif;
+>> +    struct dhcp *dhcp;
+>> +    bool bound;
+>> +
+>> +    netif = net_lwip_new_netif_noip();
+>> +    if (!netif)
+>> +        return CMD_RET_FAILURE;
+>> +
+>> +    start = get_timer(0);
+>> +    dhcp_start(netif);
+>> +    call_lwip_dhcp_fine_tmr(NULL);
+>> +
+>> +    /* Wait for DHCP to complete */
+>> +    do {
+>> +        eth_rx();
+>> +        sys_check_timeouts();
+>> +        bound = dhcp_supplied_address(netif);
+>> +        if (bound)
+>> +            break;
+>> +        if (ctrlc()) {
+>> +            printf("Abort\n");
+>> +            break;
+>> +        }
+>> +        mdelay(1);
+>> +    } while (get_timer(start) < DHCP_TIMEOUT_MS);
+>> +
+>> +    sys_untimeout(call_lwip_dhcp_fine_tmr, NULL);
+>> +
+>> +    if (!bound) {
+>> +        net_lwip_remove_netif(netif);
+>> +        return CMD_RET_FAILURE;
+>> +    }
+>> +
+>> +    dhcp = netif_dhcp_data(netif);
+>> +
+>> +    env_set("bootfile", dhcp->boot_file_name);
+>> +    if (dhcp->offered_gw_addr.addr != 0)
+>> +        env_set("gatewayip", ip4addr_ntoa(&dhcp->offered_gw_addr));
+>> +    env_set("ipaddr", ip4addr_ntoa(&dhcp->offered_ip_addr));
+>> +    env_set("netmask", ip4addr_ntoa(&dhcp->offered_sn_mask));
+>> +    env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
+>> +#ifdef CONFIG_PROT_DNS_LWIP
+>> +    env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
+>> +    env_set("dnsip2", ip4addr_ntoa(dns_getserver(1)));
+>> +#endif
+>> +#ifdef CONFIG_CMD_TFTPBOOT
+>> +    if (dhcp->boot_file_name[0] != '\0')
+>> +        strncpy(boot_file_name, dhcp->boot_file_name,
+>> +            sizeof(boot_file_name));
+>> +#endif
+>> +
+>> +    printf("DHCP client bound to address %pI4 (%lu ms)\n",
+>> +           &dhcp->offered_ip_addr, get_timer(start));
+>> +
+>> +    net_lwip_remove_netif(netif);
+>> +    return CMD_RET_SUCCESS;
+>> +}
+>> +
+>> +int dhcp_run(ulong addr, const char *fname, bool autoload)
+>> +{
+>> +    char *dhcp_argv[] = {"dhcp", NULL, };
+>> +    struct cmd_tbl cmdtp = {};    /* dummy */
+>> +
+>> +    if (autoload) {
+>> +        /* Will be supported when TFTP is added */
+>> +        return -EOPNOTSUPP;
+>> +    }
+>> +
+>> +    return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
+>> +}
+>> diff --git a/net-lwip/eth_internal.h b/net-lwip/eth_internal.h
+>> new file mode 100644
+>> index 00000000000..0b829a8d388
+>> --- /dev/null
+>> +++ b/net-lwip/eth_internal.h
+>> @@ -0,0 +1,35 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +/*
+>> + * (C) Copyright 2001-2015
+>> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>> + * Joe Hershberger, National Instruments
+>> + */
+>> +
+>> +#ifndef __ETH_INTERNAL_H
+>> +#define __ETH_INTERNAL_H
+>> +
+>> +/* Do init that is common to driver model and legacy networking */
+>> +void eth_common_init(void);
+>> +
+>> +/**
+>> + * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
+>> + *
+>> + * This sets up an environment variable with the given MAC address (@enetaddr).
+>> + * The environment variable to be set is defined by <@base_name><@index>addr.
+>> + * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
+>> + * eth1addr, etc.
+>> + *
+>> + * @base_name:    Base name for variable, typically "eth"
+>> + * @index:    Index of interface being updated (>=0)
+>> + * @enetaddr:    Pointer to MAC address to put into the variable
+>> + * Return: 0 if OK, other value on error
+>> + */
+>> +int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+>> +                 uchar *enetaddr);
+>> +
+>> +int eth_mac_skip(int index);
+>> +void eth_current_changed(void);
+>> +void eth_set_dev(struct udevice *dev);
+>> +void eth_set_current_to_next(void);
+>> +
+>> +#endif
+>> diff --git a/net-lwip/net-lwip.c b/net-lwip/net-lwip.c
+>> new file mode 100644
+>> index 00000000000..39e7e51e542
+>> --- /dev/null
+>> +++ b/net-lwip/net-lwip.c
+>> @@ -0,0 +1,270 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +
+>> +/* Copyright (C) 2024 Linaro Ltd. */
+>> +
+>> +#include <command.h>
+>> +#include <dm/device.h>
+>> +#include <dm/uclass.h>
+>> +#include <lwip/ip4_addr.h>
+>> +#include <lwip/err.h>
+>> +#include <lwip/netif.h>
+>> +#include <lwip/pbuf.h>
+>> +#include <lwip/etharp.h>
+>> +#include <lwip/prot/etharp.h>
+>> +#include <net.h>
+>> +
+>> +/* xx:xx:xx:xx:xx:xx\0 */
+>> +#define MAC_ADDR_STRLEN 18
+>> +
+>> +#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+>> +void (*push_packet)(void *, int len) = 0;
+>> +#endif
+>> +int net_restart_wrap;
+>> +static uchar net_pkt_buf[(PKTBUFSRX+1) * PKTSIZE_ALIGN + PKTALIGN];
+>> +uchar *net_rx_packets[PKTBUFSRX];
+>> +uchar *net_rx_packet;
+>> +uchar *net_tx_packet;
+>> +
+>> +static err_t low_level_output(struct netif *netif, struct pbuf *p)
+>> +{
+>> +        int err;
+>> +
+>> +    /*
+>> +     * lwIP is alwys configured to use one device, the active one, so
+>> +     * there is no need to use the netif parameter.
+>> +     */
+>> +
+>> +        /* switch dev to active state */
+>> +        eth_init_state_only();
+>> +
+>> +        err = eth_send(p->payload, p->len);
+>> +        if (err) {
+>> +                log_err("eth_send error %d\n", err);
+>> +                return ERR_ABRT;
+>> +        }
+>> +        return ERR_OK;
+>> +}
+>> +
+>> +static err_t net_lwip_if_init(struct netif *netif)
+>> +{
+>> +#if LWIP_IPV4
+>> +    netif->output = etharp_output;
+>> +#endif
+>> +    netif->linkoutput = low_level_output;
+>> +    netif->mtu = 1500;
+>> +    netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
+>> +
+>> +    return ERR_OK;
+>> +}
+>> +
+>> +static void eth_init_rings(void)
+>> +{
+>> +        static bool called;
+>> +    int i;
+>> +
+>> +        if (called)
+>> +        return;
+>> +    called = true;
+>> +
+>> +    net_tx_packet = &net_pkt_buf[0] + (PKTALIGN - 1);
+>> +    net_tx_packet -= (ulong)net_tx_packet % PKTALIGN;
+>> +    for (i = 0; i < PKTBUFSRX; i++)
+>> +        net_rx_packets[i] = net_tx_packet + (i + 1) * PKTSIZE_ALIGN;
+>> +}
+>> +
+>> +struct netif *net_lwip_get_netif(void)
+>> +{
+>> +    struct netif *netif, *found = NULL;
+>> +
+>> +    NETIF_FOREACH(netif) {
+>> +        if (!found)
+>> +            found = netif;
+>> +        else
+>> +            printf("Error: more than one netif in lwIP\n");
+>> +    }
+>> +    return found;
+>> +}
+>> +
+>> +static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+>> +                  ip4_addr_t *mask, ip4_addr_t *gw)
+>> +{
+>> +    char ipstr[9] = { 'i', 'p', 'a' , 'd', 'd', 'r', };
+>> +    char maskstr[10] = { 'n', 'e', 't', 'm', 'a', 's', 'k', };
+>> +    char gwstr[12] = { 'g', 'a', 't', 'e', 'w', 'a', 'y', 'i', 'p', };
+>> +    char *env;
+>> +    int ret;
+>> +
+>> +    if (dev_seq(dev) > 0) {
+>> +        ret = snprintf(ipstr, sizeof(ipstr), "ipaddr%d", dev_seq(dev));
+>> +        if (ret < 0 || ret >= sizeof(ipstr))
+>> +            return -1;
+>> +        snprintf(maskstr, sizeof(maskstr), "netmask%d", dev_seq(dev));
+>> +        if (ret < 0 || ret >= sizeof(maskstr))
+>> +            return -1;
+>> +        snprintf(gwstr, sizeof(gwstr), "gw%d", dev_seq(dev));
+>> +        if (ret < 0 || ret >= sizeof(gwstr))
+>> +            return -1;
+>> +    }
+>> +
+>> +    ip4_addr_set_zero(ip);
+>> +    ip4_addr_set_zero(mask);
+>> +    ip4_addr_set_zero(gw);
+>> +
+>> +    env = env_get(ipstr);
+>> +    if (env)
+>> +        ipaddr_aton(env, ip);
+>> +
+>> +    env = env_get(maskstr);
+>> +    if (env)
+>> +        ipaddr_aton(env, mask);
+>> +
+>> +    env = env_get(gwstr);
+>> +    if (env)
+>> +        ipaddr_aton(env, gw);
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static struct netif *new_netif(bool with_ip)
+>> +{
+>> +    unsigned char enetaddr[ARP_HLEN];
+>> +    char hwstr[MAC_ADDR_STRLEN];
+>> +    ip4_addr_t ip, mask, gw;
+>> +    struct udevice *dev;
+>> +    struct netif *netif;
+> 
+> This does not fit into the driver model.
+> 
+> In the EFI subsystem we want to implement network protocols like the
+> EFI_DHCP4_PROTOCOL.
+> 
+> Please, carve out functions to which we can pass a UCLASS_ETH udevice to
+> execute DHCP.
 
-Understood. In that case if there are no other remarks on this series,
-I'd prefer to submit a separate documentation patch once this is applied!
+v6 will have:
 
->
->>
->> If you make a patch for the other bootmeths in the mean-time, please cc
->> me so that I can help review and have an example for Android.
->
-> Yes, will do, if I do.
->
-> Regards,
-> Simon
+static struct netif *new_netif(struct udevice *udev, bool with_ip)
+struct netif *net_lwip_new_netif(struct udevice *udev)
+struct netif *net_lwip_new_netif_noip(struct udevice *udev)
+
+static int dhcp_loop(struct udevice *udev)
+
+> 
+>> +    int ret;
+>> +    static bool first_call = true;
+>> +
+>> +    eth_init_rings();
+>> +
+>> +    if (first_call) {
+>> +        if (eth_init()) {
+>> +            printf("eth_init() error\n");
+>> +            return NULL;
+>> +        }
+>> +        first_call = false;
+>> +    }
+>> +
+>> +    netif_remove(net_lwip_get_netif());
+>> +
+>> +    eth_set_current();
+>> +
+>> +    dev = eth_get_dev();
+>> +    if (!dev)
+>> +        return NULL;
+>> +
+>> +    ip4_addr_set_zero(&ip);
+>> +    ip4_addr_set_zero(&mask);
+>> +    ip4_addr_set_zero(&gw);
+>> +
+>> +    if (with_ip)
+>> +        if (get_udev_ipv4_info(dev, &ip, &mask, &gw) < 0)
+>> +            return NULL;
+>> +
+>> +    eth_env_get_enetaddr_by_index("eth", dev_seq(dev), enetaddr);
+>> +    ret = snprintf(hwstr, MAC_ADDR_STRLEN, "%pM",  enetaddr);
+>> +    if (ret < 0 || ret >= MAC_ADDR_STRLEN)
+>> +        return NULL;
+>> +
+>> +    netif = calloc(1, sizeof(struct netif));
+>> +    if (!netif)
+>> +        return NULL;
+>> +
+>> +    netif->name[0] = 'e';
+>> +    netif->name[1] = 't';
+>> +
+>> +    string_to_enetaddr(hwstr, netif->hwaddr);
+>> +    netif->hwaddr_len = ETHARP_HWADDR_LEN;
+>> +
+>> +    if (!netif_add(netif, &ip, &mask, &gw, netif, net_lwip_if_init,
+>> +               netif_input)) {
+>> +        printf("error: netif_add() failed\n");
+>> +        free(netif);
+>> +        return NULL;
+>> +    }
+>> +
+>> +    netif_set_up(netif);
+>> +    netif_set_link_up(netif);
+>> +    /* Routing: use this interface to reach the default gateway */
+>> +    netif_set_default(netif);
+>> +
+>> +    return netif;
+>> +}
+>> +
+>> +/* Configure lwIP to use the currently active network device */
+>> +struct netif *net_lwip_new_netif()
+>> +{
+>> +    return new_netif(true);
+>> +}
+>> +
+>> +struct netif *net_lwip_new_netif_noip()
+>> +{
+>> +
+>> +    return new_netif(false);
+>> +}
+>> +
+>> +void net_lwip_remove_netif(struct netif *netif)
+>> +{
+>> +    netif_remove(netif);
+>> +    free(netif);
+>> +}
+>> +
+>> +int net_init(void)
+>> +{
+>> +    net_lwip_new_netif();
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static struct pbuf *alloc_pbuf_and_copy(uchar *data, int len)
+>> +{
+>> +        struct pbuf *p, *q;
+>> +
+>> +        /* We allocate a pbuf chain of pbufs from the pool. */
+>> +        p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
+>> +        if (!p) {
+>> +                LINK_STATS_INC(link.memerr);
+>> +                LINK_STATS_INC(link.drop);
+>> +                return NULL;
+>> +        }
+>> +
+>> +        for (q = p; q != NULL; q = q->next) {
+>> +                memcpy(q->payload, data, q->len);
+>> +                data += q->len;
+>> +        }
+>> +
+>> +        LINK_STATS_INC(link.recv);
+>> +
+>> +        return p;
+>> +}
+>> +
+>> +void net_process_received_packet(uchar *in_packet, int len)
+> 
+> Library functions should take a udevice as an argument. Please, do not
+> use the concept of "active device" in these library functions.
+
+OK, I have unified the naming in v6 and all functions will take a udevice:
+
+static int dhcp_loop(struct udevice *udev)
+static int dns_loop(struct udevice *udev, const char *name, const char *var)
+static int ping_loop(struct udevice *udev, const ip_addr_t* addr)
+static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+		     ip_addr_t srvip)
+static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+
+> 
+> The command line interface may implement such a concept for backwards
+> compatibility.
+
+Sure.
+
+Thanks,
+-- 
+Jerome
+
+> 
+> Best regards
+> 
+> Heinrich
+> 
+>> +{
+>> +    struct netif *netif;
+>> +    struct pbuf *pbuf;
+>> +
+>> +    if (len < ETHER_HDR_SIZE)
+>> +        return;
+>> +
+>> +#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+>> +    if (push_packet) {
+>> +        (*push_packet)(in_packet, len);
+>> +        return;
+>> +    }
+>> +#endif
+>> +
+>> +    netif = net_lwip_get_netif();
+>> +    if (!netif)
+>> +        return;
+>> +
+>> +    pbuf = alloc_pbuf_and_copy(in_packet, len);
+>> +    if (!pbuf)
+>> +        return;
+>> +
+>> +    netif->input(pbuf, netif);
+>> +}
+>> +
+>> +u32_t sys_now(void)
+>> +{
+>> +    return get_timer(0);
+>> +}
+>> diff --git a/net-lwip/tftp.c b/net-lwip/tftp.c
+>> new file mode 100644
+>> index 00000000000..1fa246f55d9
+>> --- /dev/null
+>> +++ b/net-lwip/tftp.c
+>> @@ -0,0 +1,11 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/* Copyright (C) 2024 Linaro Ltd. */
+>> +
+>> +#include <command.h>
+>> +#include <net-lwip.h>
+>> +
+>> +int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>> +{
+>> +    /* Not implemented */
+>> +    return CMD_RET_FAILURE;
+>> +}
+> 
