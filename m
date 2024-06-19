@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B714C2BA15
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 12:23:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C79C2BA1A
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 12:24:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C98F98843F;
-	Wed, 19 Jun 2024 14:23:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F80D8845B;
+	Wed, 19 Jun 2024 14:24:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="epvcCC6e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KP5D8LYn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2483B87F5C; Wed, 19 Jun 2024 14:23:10 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 98A7C8846D; Wed, 19 Jun 2024 14:24:16 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAA8D8843F
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:23:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74DD487F5C
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:24:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-6bce380eb96so4482545a12.0
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 05:23:07 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-707040e3018so2553015a12.1
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 05:24:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718799786; x=1719404586; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718799853; x=1719404653; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z1SmVFs7eqkmTUp7TbS6JsmJc7S9QvL4vYRr9KMrOxs=;
- b=epvcCC6e4NOpt2FMRcgbOMM/tkAfHQd+2BDKBzr4RlGOUxqiy3Ihx+iEwkexmpXhDF
- x6iz2fkuBNVSrG80aQ0H9TEbKgXmql2spJ5hT2Edc/eW/MTae5aWUVX3p3R5gLuuwhzr
- WB83xyxANEUMC8SQuzS0GRLC1vDqVZD9xKhuaZLAjKjkYcIZyOgnwzziU/mMwudoaFNe
- UB1m8ejHUN2UryYTWGQtXEM5AJ6VUlaXN3zqFQU0RqqpER7l3Ah+MLChV5DcwARW0VIC
- 5q7aIGjksQtarP2ga++YDiIHAeEpHL/75UcIu6nYD5IRxCgxiLpVw2nHn2iHlfwC5GSU
- VyCw==
+ bh=MPhjVQVUe1vv6tiizIRMc4RfsP/MdECZRVlNCgCZpCw=;
+ b=KP5D8LYnE8G1TKj01q9sHv+9kjpl6I8O7W9Vas/WtBzU7wwHfE2FdkWH3wBJnYSwIt
+ C+kD2s5kGtqwtZqkqdWiR660sG2NZGPXCjR50Tiw6whtwHlbf4rZWdMTJQ2mAjxdDCDI
+ ncjD6PV/4F+J4QcfR5yUblh07VBwaaoHbuiQGOi6P2Rd/7zcCHtbsos3gJIjv9N6FtZg
+ dDdwS679lt54+TvA6XIipeKznoIytgMK0+doiDcIz6b8FUs2vx002OKBnBoq3TO9QCaV
+ 9+TOSHDV6KTZlMz1bbUnRj9hAEIEA4dn7UtAYDJuxWJsem83gP4Y9MA0xLVFK5fuRFZ2
+ LJ1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718799786; x=1719404586;
+ d=1e100.net; s=20230601; t=1718799853; x=1719404653;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z1SmVFs7eqkmTUp7TbS6JsmJc7S9QvL4vYRr9KMrOxs=;
- b=j8dn80MFkS6KHQpqCbf7NjCA41fk3pK/YN6On8PUOX+TSYS0Z4ZLCw1Zw3F8ZaRUrh
- A2tPz9gwHfperhfOskdJl9WzP+qM5FjHl6RGAG98kP6fnax1ieNY8UUkPvRsKm2/I72M
- mGFl5OrYSpeJhU7dVEE3coJ52KVku/MqxbT+3wG+NmsoHEGzSwFjF+wgghwakwZ84XtA
- 9SRwiID7gGaf8zr+Ql/ttDkPskog9+5odWfYdaIVVXHUP3s+XpjLTs/9qOpYv6AWKiP8
- gir8QfZ7NcEwrboESibVjYV+q8LuKbvV10j51X9FMQD3ohLXErPsNBgVve4KUhpCXgEN
- 9mfA==
+ bh=MPhjVQVUe1vv6tiizIRMc4RfsP/MdECZRVlNCgCZpCw=;
+ b=l33i47Sv1cn83I4gj67tjBKjwF+nJy7tErWy31+KBTIAoFh3RcVIQlfDuF6qhZ7bji
+ il2rBbAhTLTvT/uoqAoTsxoxOFcnrHHy/RpIMamqQGGF8fK9+87Lqjc0Q8SIJEB88sy8
+ VugYYVVNcusmdyDzKIqMYjW8RPENqdNk2BJXjHa9sy93Vy92v+yuzJKN9D4lkEA7vN2a
+ /uGGBj3BzOgXZ6/PLWyccU3P879JO4hX1gs649MVSEpWcDKgPHCoI62fGmZ7qYaybukA
+ 2+NfThtJmVhfrMAZK+yZNfpSWrt6R1lulyrO9K5xZlRt0OPhzXLkXS0U8bRDSqLF7B+z
+ h28A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVR5PONk9BffJmmun7sU6C9gYbnqTsct1lqYFMezrNlxrVxQD1nLjwgifXMAMhM5WI/z1uyzCYl4bPOaheW46ylOwqJ3Q==
-X-Gm-Message-State: AOJu0YycEo0rtlEXj8nNPuDI0hptnhfsbvA34/xNGgIMmpJpoy/gFKJM
- Usp8zRwkM6q5byeXrGo0SaFmPeI2TuXo8Y/PWbP8Y9aJMT5bwvdeVPQgXxLygMPNbyuznleUwjM
- xpfZZT8QZWsVEZIb/3Tp5mwQSpuJ0qgEG4C/Ohw==
-X-Google-Smtp-Source: AGHT+IHywyD4sS8w1Vqox6bGIxwTega6IBB/wHznBU6PSW/oVVgzIkZoB1XXNTLWsY1mQXIlHe23ULh+M0Jo7E1DG4c=
-X-Received: by 2002:a05:6a20:a891:b0:1b8:1be8:8014 with SMTP id
- adf61e73a8af0-1bcbb6415b7mr1915602637.39.1718799786067; Wed, 19 Jun 2024
- 05:23:06 -0700 (PDT)
+ AJvYcCX+39+V9UHjB+QM6Dkn7TJ/DbxKEDG0KMNX2jeyZFoQmIsw1Po9vL+3ckqvUe21KZgTmXTm/oFGROX6B/lFfsdxMmI/3Q==
+X-Gm-Message-State: AOJu0YyM8yVz5mItBvr6suc6wuemaOyiaWczDyp11nd/w3U5vNn+ePD6
+ PEqC6uUQijs4nW6/cyPX/KNhiuHBNYNgBsyI4/koRxASFhtucVi2yWtFE/chcva0me0aWtr/Kty
+ l9OjnxoHeI+Q88VSbTFjNBLY2Hp5FqNfNmuHQwg==
+X-Google-Smtp-Source: AGHT+IGFwyqJGQX9BZuKKNrMiP9jAn6bGYTnSo7QxPoL/nrVXnQnje5FDOoA0nVyPoO/4WcjXo2QFAJ8f7MXeC82xtc=
+X-Received: by 2002:a05:6a20:914b:b0:1b2:ccf7:4ad1 with SMTP id
+ adf61e73a8af0-1bcbb646a99mr2826519637.57.1718799852793; Wed, 19 Jun 2024
+ 05:24:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
- <20240616173105.7430-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240616173105.7430-3-heinrich.schuchardt@canonical.com>
+ <20240616173105.7430-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240616173105.7430-2-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 19 Jun 2024 15:22:28 +0300
-Message-ID: <CAC_iWj+VpDYAdzj0fqxBPAPshVt03g9SCNafxN-8RPdrPVDiMg@mail.gmail.com>
-Subject: Re: [PATCH 2/3] arm: implement invalidate_icache_all on ARM11
+Date: Wed, 19 Jun 2024 15:23:36 +0300
+Message-ID: <CAC_iWj+W5grPjuD9=v7ZOYGPFDE7_mFxF7fJhERTTJCjjpk4aQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] cmd: avoid duplicate weak flush_dcache_all()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>, Dan Carpenter <dan.carpenter@linaro.org>,
@@ -91,46 +91,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
 On Sun, 16 Jun 2024 at 20:31, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> In EFI sub-system we rely on invalidate_icache_all() to invalidate the
-> instruction cache after loading binaries. Add the missing implementation on
-> ARM1136, ARM1176.
+> If we have multiple weak implementations of functions, the linker might
+> choose any of these. ARM and RISC-V already provide a weak implementation
+> of flush_dcache_all().
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  arch/arm/cpu/arm11/cpu.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+>  cmd/cache.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/arch/arm/cpu/arm11/cpu.c b/arch/arm/cpu/arm11/cpu.c
-> index 01d2e1a125d..4bf0446b543 100644
-> --- a/arch/arm/cpu/arm11/cpu.c
-> +++ b/arch/arm/cpu/arm11/cpu.c
-> @@ -116,3 +116,15 @@ void enable_caches(void)
->  #endif
+> diff --git a/cmd/cache.c b/cmd/cache.c
+> index 0254ff17f9b..16fa0f7c652 100644
+> --- a/cmd/cache.c
+> +++ b/cmd/cache.c
+> @@ -52,11 +52,14 @@ static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
+>         return 0;
 >  }
->  #endif
-> +
-> +#if !CONFIG_IS_ENABLED(SYS_ICACHE_OFF)
-> +/* Invalidate entire I-cache */
-> +void invalidate_icache_all(void)
-> +{
-> +       unsigned long i = 0;
-> +
-> +       asm ("mcr p15, 0, %0, c7, c5, 0" : : "r" (i));
+>
+> +/* ARM and RISC-V define a weak flush_dcache_all() themselves. */
+> +#if !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
+>  void __weak flush_dcache_all(void)
+>  {
+>         puts("No arch specific flush_dcache_all available!\n");
+>         /* please define arch specific flush_dcache_all */
+>  }
 
-This looks correct, but can't we define it as
-__asm__("mcr p15, 0, %0, c7, c5, 0" : : "r" (0)); ?
+Aren't we supposed to add a single __weak function so the linker can
+replace it? IOW why is the declaration for Arm/riscv a weak one?
 
 Thanks
 /Ilias
-> +}
-> +#else
-> +void invalidate_icache_all(void) {}
 > +#endif
+>
+>  static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
+>                      char *const argv[])
 > --
 > 2.43.0
 >
