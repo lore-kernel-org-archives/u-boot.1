@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0487AC27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 21:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 155C5C2BA1A
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 21:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8096884D2;
-	Wed, 19 Jun 2024 23:28:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 500DD884F1;
+	Wed, 19 Jun 2024 23:28:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o8odUuUg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iBB8/xGe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A743884DC; Wed, 19 Jun 2024 23:28:10 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 6AFDA884BA; Wed, 19 Jun 2024 23:28:10 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66433884BA
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 23:28:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43570882DA
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 23:28:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7005c84e525so131762a34.3
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:28:07 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6f980c89db8so96630a34.1
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:28:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718832486; x=1719437286; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718832487; x=1719437287; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PESRWPE1/6Tjsl4yC8FCoMUonyw5OvXRn5EvjsdlUGc=;
- b=o8odUuUgExqX1KydehcwzPl+6nauVl92E7S8lLmO5v6bSHTYcDQBHqwrgTj028vwJk
- d6gGXE9f4FI8JrDoscxLyZcdF2eLjv8ln3DckHhuzKjMFCYB6ARumfsmn06mEMk/VhaI
- RfxMw2WCRDPEBJM0g8AlUhkcIG5/7kgEG86Hs=
+ bh=0OQTEtjdFP/SwMt+oBpZIdgduuwg6zoow3rwEX80eJo=;
+ b=iBB8/xGe9UmUVqC/pct2MR0zqzu3PBe9uY6Q/wM86X1HeFMkdq8yCPuTSwy7gSOzW/
+ /7FDP0Zs2QaRjKZMhcUK9Xwlt11UAO6OMuWAmh/daSSH+XOJZx7T7JyIb5TEpmfLn7/A
+ wD4fvw63RM6MNnw/2zHQAhHZ+XC4TVqAKTSx8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718832486; x=1719437286;
+ d=1e100.net; s=20230601; t=1718832487; x=1719437287;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PESRWPE1/6Tjsl4yC8FCoMUonyw5OvXRn5EvjsdlUGc=;
- b=K/05H+MySg6WdTYPpxROquAvyYhorNaCWiT+qWksz2PmIHXuuJc6hDSjolNPGZRJfd
- oPSmYSDN8soaQQIcfbZLzzszGFbbDIfFUotdZAuULfvoRraxW6rgfhmeXLHYzgCzbfm3
- mfSySTjChYJEiNH114iP6Fl0ldNkB8WY/lspKc9JxqPm6RuIx1Q3p/HXy6ruPpftbpG5
- +3y3Rms+Zm0//godU+Uk0qtqWmEcrUrhq9uZIQYcNrgGNEgthowFTgczeh2hM7tYcwZw
- 3OPL6f1YPSAVHb2wXei+PQypTi5dvIa14K7mAikJiTg2JoNPX72spJIlK0hFvJRfm4DP
- ebFg==
-X-Gm-Message-State: AOJu0Yy1ht/DaJP7pkMt+zlscRAA3MZx1G9TuD4kPJ1HcWxFn/nCs84M
- J8X+jh33qgdhJjLwIQUQUixzKVM4jCbSeuq3QYFjpujDiKEce4PvC2htnM3p9luVm6ETPnoS4z+
- 7L8UjZQ==
-X-Google-Smtp-Source: AGHT+IH+ceStpVoEmmW8dOQF+3qWzeszPDgs04sEqh/YM8rGNcYica1UzwxZje60BSs+fXYJyOVaEw==
-X-Received: by 2002:a05:6830:1e28:b0:6f9:de68:ab8e with SMTP id
- 46e09a7af769-7007587d3a5mr4027348a34.25.1718832486117; 
- Wed, 19 Jun 2024 14:28:06 -0700 (PDT)
+ bh=0OQTEtjdFP/SwMt+oBpZIdgduuwg6zoow3rwEX80eJo=;
+ b=Lo1ofaEyQW/R6viOXDFVBDi7cCn6Pt3X+KWGd3Z9iXgZttx8+U+r9t7CsWbd8I6BFB
+ zerJwy9GCxwdXDw1va5lCqMF3EFSkJIuhTNZdsgTaXQACGKuz1aFMJOEvt4ZhdiooIVp
+ y6QIRqKIqyepmW9FLbov/l6pb3LzaLhb3jAIcjS+wp3AI4LoylY5TP4VZ8b4uFHPdeFK
+ RjOl5hGfmk+3m/173VQUrT1sRKihusUhnjdZZTCWY9DLMmntsXP73Pqs4iNX3heWm4Ql
+ MzZIudNMm2yqrZvKnlZB8hIJuc10DRkolKyF6JOuAcjlDLmg0+uYmZsAzm2dsr/rXc6W
+ XJsA==
+X-Gm-Message-State: AOJu0Yyb0cn25hahF8o4/YJh4+OMzKQfvEro2oCc8i8n/0zLnT8wgNIh
+ FYrDmKdEzmY/OcbNENd3RFp5E3Wp8atHfYlV2+DqpbSlNTcGnev+1BFU81Elx47/Q0zARRDLgZs
+ m66zzVA==
+X-Google-Smtp-Source: AGHT+IEwcHl3snOsHtFuh27GMtEPRVabc0Bv+wb0YQu+tjeywW9MWPIEhGFPRa5wWHQaVg0VX8jgCQ==
+X-Received: by 2002:a9d:5c15:0:b0:6f9:bcb5:6e90 with SMTP id
+ 46e09a7af769-700747d4227mr3616950a34.15.1718832487018; 
+ Wed, 19 Jun 2024 14:28:07 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (fixed-187-190-205-45.totalplay.net. [187.190.205.45])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7008a5a34c9sm338654a34.73.2024.06.19.14.28.05
+ 46e09a7af769-7008a5a34c9sm338654a34.73.2024.06.19.14.28.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 14:28:05 -0700 (PDT)
+ Wed, 19 Jun 2024 14:28:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Subject: [PATCH 3/7] sh: Implement a default flush_dcache_all
-Date: Wed, 19 Jun 2024 15:27:55 -0600
-Message-Id: <20240619212759.3456158-3-trini@konsulko.com>
+Subject: [PATCH 4/7] sh: Add the old invalidate_icache_all function
+Date: Wed, 19 Jun 2024 15:27:56 -0600
+Message-Id: <20240619212759.3456158-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240619212759.3456158-1-trini@konsulko.com>
 References: <20240619212759.3456158-1-trini@konsulko.com>
@@ -92,38 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement a weak default version of flush_dcache_all which is based on
-the ARM default, which is to flush the entire range via
-flush_dcache_range(...).
+Add the old invalidate_icache_all function that prints a warning that
+was previously found in cmd/cache.c
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Marek Vasut <marex@denx.de>
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 ---
- arch/sh/cpu/sh4/cache.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/sh/cpu/sh4/cache.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/arch/sh/cpu/sh4/cache.c b/arch/sh/cpu/sh4/cache.c
-index 8c1839935ca1..f0cb39d6a923 100644
+index f0cb39d6a923..d3c480e79ed2 100644
 --- a/arch/sh/cpu/sh4/cache.c
 +++ b/arch/sh/cpu/sh4/cache.c
-@@ -65,6 +65,15 @@ void flush_dcache_range(unsigned long start, unsigned long end)
- 	}
+@@ -6,6 +6,7 @@
+ 
+ #include <command.h>
+ #include <cpu_func.h>
++#include <stdio.h>
+ #include <asm/cache.h>
+ #include <asm/io.h>
+ #include <asm/processor.h>
+@@ -100,6 +101,11 @@ void icache_disable(void)
+ 	cache_control(CACHE_DISABLE);
  }
  
-+/*
-+ * Default implementation:
-+ * do a range flush for the entire range
-+ */
-+void flush_dcache_all(void)
++void invalidate_icache_all(void)
 +{
-+	flush_dcache_range(0, ~0);
++	puts("No arch specific invalidate_icache_all available!\n");
 +}
 +
- void invalidate_dcache_range(unsigned long start, unsigned long end)
+ int icache_status(void)
  {
- 	u32 v;
+ 	return 0;
 -- 
 2.34.1
 
