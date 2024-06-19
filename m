@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E92C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 13:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AAE8C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 13:20:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B4578845A;
-	Wed, 19 Jun 2024 15:05:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54DC5881C6;
+	Wed, 19 Jun 2024 15:20:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s9krlbeL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lIxAc5Y6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2637E88445; Wed, 19 Jun 2024 15:05:59 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id AFF0C831A1; Wed, 19 Jun 2024 15:20:27 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DAE58845A
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 15:05:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1BE28844B
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 15:20:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-6c5a6151ff8so4696507a12.2
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 06:05:55 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-704090c11easo5471704b3a.2
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 06:20:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718802354; x=1719407154; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718803223; x=1719408023; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q2jCCjKWHJ5l2wQIlGarBbyqUCJz1LZtjlhL5xn3A24=;
- b=s9krlbeLcKfrZr3I/HHiCKqvYSeLUI/KFKUKAzo+cwWQHDcw03uizZfTAcxhmYjCQD
- LV3G5Sqsm6/WNaevJg/oJ8m2KOmzusIZO5y3/5cnn9GAfGMs6M2Ge4rZMK6ftlqAvv6y
- J7TwUeTjv+3x+k3P1hP0tsinygOv6YLsMqVJiJx1n8U9/wGXzZ8ATeqiGzFdofozrQE0
- Z/AO6tuspXkYOHt/EGBRlcoHeFBsVTVdp4Gh+QqDYRS67kIbt7+NbnuqeQolC090ku6O
- d1IcpbjlmnhZZcY9SaVrCPVJWjNnF0CDsfs5vByOZl0yDv4zPuxpSiSGZQXo72i931oe
- 6YBw==
+ bh=rb9SJEYarf/kwmATfhCjOp9a8e0JW+85v1BAgtaBGiw=;
+ b=lIxAc5Y6tsl4+9T8h2F4QgU8gCew1qe+dCKvfjWL0whoJ/Lpn3FM9ELX65Iy0g980E
+ 6Xx8LZDEqDaM1DgQspj18xWVIaMS5zi7QWqfzpJDNTipSpXcnioylINIXzPooxcFpfDB
+ vYj/vaMUjeDA+apCf7GWivcRNQUjeBqlqUiKpy6PFGYVfp3NDLR5SARERfC7+OQOuHLX
+ hNFVokVLUUJscmlzoKYhtNb964gTSeY3jddU8PsQ5YLiYWoFQz/nli1QVBoGEooYA0Wk
+ tyw0rGcCAn4uaGqZhXZ09HwJ3M0Y9gX5dPjrzXWEMf25I4U4N1OJ/wZZe5o7jLoGzLOk
+ oDcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718802354; x=1719407154;
+ d=1e100.net; s=20230601; t=1718803223; x=1719408023;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Q2jCCjKWHJ5l2wQIlGarBbyqUCJz1LZtjlhL5xn3A24=;
- b=rd/1h44Zsp4IpkKrswP9JPNvPV+sdOrHBeLs8DFwpDnePEk28kz8b11ODs4Ofzh7c+
- qPhZzjECXWwsdlQ5JA0kKVgIQMkXwoUfQY46pa5/5MS2CG0kAbaZJhBa5z97ZdKi9zph
- OKEK8fmGUJ1vwkkQWXD7/kCe55r/ep/CgbG/HuCYjGagu1uPtS8L/JXkEQrAhip8U2nh
- iITTt/8g7AescaCW/RvK3VTlNpLrJ8eHQAIYHP/Q2+NWl8DPH2f+ymgu5Eh9pPl2GKne
- oGOqW3XyhnzHvqHx7ZLA74+sjvGq13eCVjqsZbqM629Pcokw821ogc/tKixvQK49ZVMg
- NU/g==
+ bh=rb9SJEYarf/kwmATfhCjOp9a8e0JW+85v1BAgtaBGiw=;
+ b=P9mA0laMMMHgamfk9tVUWkM+utZfaSnXPG409JOV94wE7HXtXE78Yig5HO5wlsqgPo
+ tbjxnBpbS2RYNbSy8cItfYgdf6Yz+d/n2599mF7mKozLRwpWZqsPBXS/FYIHEL29gWU3
+ ELEtwuVpmPNoXI4GgnAsLRT1Bnl0/Xal4i6dzFn5003Y5O0pj+SBZ5G7pYK78YHP0swn
+ eYgglKysZEBrU2g6oVnT/dDz03LuZmap2RzL5y5qkKUg0mrKL7ePPVjDd9ls6T7b1uY2
+ 4G/z59Nt2yAOmKYe9V1A7Vu8vJXoQmlBJf0ZNn/Wfdwkbi9sPyq1gCl2sye0vNPbwAHo
+ VxJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwtNTJMJq4V2MLKfdC7K7ZB4E10D7DBKVV9i/S43OfWNWKJPEmlMSkjWJLPbymJM3yA++Vylh9t43phMEyBOb1N3MSMA==
-X-Gm-Message-State: AOJu0YxWDmhQ2EMaqT38UOZU1NZhenTZLL+ZLVyOswV01yVOO/OMW19v
- IZHmk1Ql5HvM2GW1TbxRViPgUPaMdXeHe7Tp/knnGvXChFHuK9KyeWnEO5B9VnQZNRmLB3oOuWb
- +O/KojRRCyhCsA/jJYTDsGqFQdyykH8hbEopC9Q==
-X-Google-Smtp-Source: AGHT+IGNpkWftePOWNK4TzxhQOXuQRcV3a7V6Tmt+B3hQNZV0xjTs9u+iWoeKZCGTdJVKOH+Sg8FeempNVm/vcOvuUs=
-X-Received: by 2002:a17:90b:fd8:b0:2c2:fed1:769f with SMTP id
- 98e67ed59e1d1-2c7b5c8234cmr2460571a91.13.1718802354011; Wed, 19 Jun 2024
- 06:05:54 -0700 (PDT)
+ AJvYcCW2DjfNcINeBeAeMsOBAbGLDhXzr3HzVMNFrjmOevBUTjrnzrULH7kT614u0+Q3lE6nUiNLj79Uxdt22otCZN5KDM00eg==
+X-Gm-Message-State: AOJu0Ywsz0xwCVmV8XziXCj4fdRKYVZ372j2yNIjJdYhywBbyxbmYwMq
+ EckiLhXp97OrgzjZ53yzh5g3bujJBcfBzaggWc0TxEDCVriSFjtYsfwI14dM2YaAL68lKMWY0ef
+ S9yVaTNyfCexU3P+UsSPKfg9eckrZrqsrqK3hrg==
+X-Google-Smtp-Source: AGHT+IHwjTLIhDzwM6xQL0dq67K/0e4A6wmqxoOc8WMvzp0cPOuJSIGXBvUDgJzIFpIF7aVnXQ4LHUSqMF9D0EMVy10=
+X-Received: by 2002:a05:6a20:4c82:b0:1b8:94a0:4a65 with SMTP id
+ adf61e73a8af0-1bcbb5cd4bcmr2322542637.36.1718803223119; Wed, 19 Jun 2024
+ 06:20:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240616173105.7430-1-heinrich.schuchardt@canonical.com>
  <20240616173105.7430-2-heinrich.schuchardt@canonical.com>
  <CAC_iWj+W5grPjuD9=v7ZOYGPFDE7_mFxF7fJhERTTJCjjpk4aQ@mail.gmail.com>
  <e1fb4d81-a20c-4a10-904e-8b19eb17f4e5@canonical.com>
-In-Reply-To: <e1fb4d81-a20c-4a10-904e-8b19eb17f4e5@canonical.com>
+ <CAC_iWjKwP0psK0cuQLion54h5ZQdYL8-R_1oDvTYktin56OFDQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjKwP0psK0cuQLion54h5ZQdYL8-R_1oDvTYktin56OFDQ@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 19 Jun 2024 16:05:17 +0300
-Message-ID: <CAC_iWjKwP0psK0cuQLion54h5ZQdYL8-R_1oDvTYktin56OFDQ@mail.gmail.com>
+Date: Wed, 19 Jun 2024 16:19:47 +0300
+Message-ID: <CAC_iWjL3pSQDgkNvLQjUEO2JbhtaRhCy81ZDn=WPiONmEZvVWQ@mail.gmail.com>
 Subject: Re: [PATCH 1/3] cmd: avoid duplicate weak flush_dcache_all()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
@@ -93,83 +94,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Jun 2024 at 15:36, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Wed, 19 Jun 2024 at 16:05, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On 19.06.24 14:23, Ilias Apalodimas wrote:
-> > On Sun, 16 Jun 2024 at 20:31, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> If we have multiple weak implementations of functions, the linker might
-> >> choose any of these. ARM and RISC-V already provide a weak implementation
-> >> of flush_dcache_all().
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   cmd/cache.c | 3 +++
-> >>   1 file changed, 3 insertions(+)
-> >>
-> >> diff --git a/cmd/cache.c b/cmd/cache.c
-> >> index 0254ff17f9b..16fa0f7c652 100644
-> >> --- a/cmd/cache.c
-> >> +++ b/cmd/cache.c
-> >> @@ -52,11 +52,14 @@ static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>          return 0;
-> >>   }
-> >>
-> >> +/* ARM and RISC-V define a weak flush_dcache_all() themselves. */
-> >> +#if !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
-> >>   void __weak flush_dcache_all(void)
-> >>   {
-> >>          puts("No arch specific flush_dcache_all available!\n");
-> >>          /* please define arch specific flush_dcache_all */
-> >>   }
+> On Wed, 19 Jun 2024 at 15:36, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
 > >
-> > Aren't we supposed to add a single __weak function so the linker can
-> > replace it? IOW why is the declaration for Arm/riscv a weak one?
+> > On 19.06.24 14:23, Ilias Apalodimas wrote:
+> > > On Sun, 16 Jun 2024 at 20:31, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > >>
+> > >> If we have multiple weak implementations of functions, the linker might
+> > >> choose any of these. ARM and RISC-V already provide a weak implementation
+> > >> of flush_dcache_all().
+> > >>
+> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >> ---
+> > >>   cmd/cache.c | 3 +++
+> > >>   1 file changed, 3 insertions(+)
+> > >>
+> > >> diff --git a/cmd/cache.c b/cmd/cache.c
+> > >> index 0254ff17f9b..16fa0f7c652 100644
+> > >> --- a/cmd/cache.c
+> > >> +++ b/cmd/cache.c
+> > >> @@ -52,11 +52,14 @@ static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
+> > >>          return 0;
+> > >>   }
+> > >>
+> > >> +/* ARM and RISC-V define a weak flush_dcache_all() themselves. */
+> > >> +#if !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
+> > >>   void __weak flush_dcache_all(void)
+> > >>   {
+> > >>          puts("No arch specific flush_dcache_all available!\n");
+> > >>          /* please define arch specific flush_dcache_all */
+> > >>   }
+> > >
+> > > Aren't we supposed to add a single __weak function so the linker can
+> > > replace it? IOW why is the declaration for Arm/riscv a weak one?
+> >
+> > Some sub-architectures override the architecture specific weak
+> > implementation, e.g.
+> >
+> > arch/riscv/cpu/andes/cache.c:44:
+> > void flush_dcache_all(void)
+> >
+> > arch/arm/cpu/arm926ejs/cache.c:17:
+> > void flush_dcache_all(void)
 >
-> Some sub-architectures override the architecture specific weak
-> implementation, e.g.
+> Ok, this does fix a problem, but afaict this is a band-aid and the
+> cache management is a mess overall -- e.g invalidate_icache_all() will
+> suffer from the same issue if a sub-architecture decides to define its
+> own in the future.
 >
-> arch/riscv/cpu/andes/cache.c:44:
-> void flush_dcache_all(void)
->
-> arch/arm/cpu/arm926ejs/cache.c:17:
-> void flush_dcache_all(void)
+> Would it be less bad to define
+> static inline __weak flush_dcache_all(void)
+> {
+> }
+> static inline __weak flush_icache_all(void)
+> {
+> }
 
-Ok, this does fix a problem, but afaict this is a band-aid and the
-cache management is a mess overall -- e.g invalidate_icache_all() will
-suffer from the same issue if a sub-architecture decides to define its
-own in the future.
+ugh, this but without the inline!
 
-Would it be less bad to define
-static inline __weak flush_dcache_all(void)
-{
-}
-static inline __weak flush_icache_all(void)
-{
-}
-in include/cpu_func.h instead of a random cmd file?
-We can only define those if !CONFIG_ARM && !!CONFIG_RISCV and add a
-comment on why.
-It's kind of putting lipstick on a pig, but at least we'll have them
-gathered in a single header file and know what we have to fix.
-
-Cheers
+Thanks
 /Ilias
+> in include/cpu_func.h instead of a random cmd file?
+> We can only define those if !CONFIG_ARM && !!CONFIG_RISCV and add a
+> comment on why.
+> It's kind of putting lipstick on a pig, but at least we'll have them
+> gathered in a single header file and know what we have to fix.
 >
-> Best regards
->
-> Heinrich
->
+> Cheers
+> /Ilias
 > >
-> > Thanks
-> > /Ilias
-> >> +#endif
-> >>
-> >>   static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>                       char *const argv[])
-> >> --
-> >> 2.43.0
-> >>
->
+> > Best regards
+> >
+> > Heinrich
+> >
+> > >
+> > > Thanks
+> > > /Ilias
+> > >> +#endif
+> > >>
+> > >>   static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
+> > >>                       char *const argv[])
+> > >> --
+> > >> 2.43.0
+> > >>
+> >
