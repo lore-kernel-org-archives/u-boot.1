@@ -4,73 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA7FC27C53
-	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 12:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10042C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 19 Jun 2024 12:21:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFA2D88427;
-	Wed, 19 Jun 2024 14:14:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C41F88415;
+	Wed, 19 Jun 2024 14:21:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oq2V92G0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GpZlnK7T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE6578844B; Wed, 19 Jun 2024 14:14:58 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id C5D6D883F6; Wed, 19 Jun 2024 11:06:46 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9073B88415
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 14:14:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 497698840F
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 11:06:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1f9aeb96b93so4611865ad.3
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 05:14:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-35f14af40c2so5308759f8f.0
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 02:06:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718799295; x=1719404095; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RZem6zVxCmUyxT7kdOPHuzcjPs0eEV09BEFfMqQysuI=;
- b=oq2V92G0UjPlTqWm3gZlG+9RA4mryxcSsrZzSf2XYTCgNM1/wLYOOsMLQeCRaUieba
- TYTVBcJDENdFm7enob5c3TJqApCxgiU+Ckv+abaODaX9CgMi3JjSmgW/6fTw5HsVBOFo
- m8JHtIoQNs3KouVV/Ld4h8OzoNjknt8X/sgEHtrwkoWhnqXGpssxPZ4S7SxOlQfrEnag
- 1b9BtPH4DdlwHcwBCl7ccs8zj94KoenPomFZz3N01U/QMunig2qzqPrWqWrpI/l1jgDI
- 0c7kLu6/+22bIthEsFu8W7QA/m5l9XZA098GUQ/sNvchQ7lrnKQCmNmWYLOcq588dQWN
- HEMw==
+ d=linaro.org; s=google; t=1718788002; x=1719392802; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=jXS3t6XtaPg53HsiTReP/NRgyissTwJLw2RVJaAMZ6o=;
+ b=GpZlnK7TJjUlsftLv/zfzUDnZkdbUQEU/Y42Goe6uCqxof+VDc1GNjAc8uJ2IHuvYM
+ WoBf7PhT/9fW+jLRIvZEsIJ324AJaHHbjbgCzchrik3rvd4HShlFjUhSEUzLm8nBXL5k
+ ZVfYn3RXKaiiQjXlkimXA8VTlBXIDdu3W4px2AWgsjONfZZOWbvn2lOgF2EOe1nN1HnG
+ Gz5NByoGoercLuxm+4Dsd2KRnjc2sDBAVlgA8m8jHpjntvY7nkgI/UT3SNisVLVpHeV5
+ CHuMTeTytpjznXJeq3VNHRcCc6FdJj7GZ7vzvWcz9Yt8Ml6hY54+gFe6ZsvAGb7ViF2H
+ gO3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718799295; x=1719404095;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RZem6zVxCmUyxT7kdOPHuzcjPs0eEV09BEFfMqQysuI=;
- b=W48qG/PYIpInaXUkcZSt6tJ5HAMdccrzLo0zuJYi8cKs4+SDwkz35/m0fX874qDq4i
- /6Jn5g0AXaFOnPKXUZEuQrizxYS157ib+1XIfjpgbSGfwh4cevrQt3BktQB06kZbbfJ+
- PSmeVe5f169fS5WIDHbQkFL+O0jvV3um+N4/XVJVHkyJLsu9rSTp2oPC2Bwma4gBfPfC
- /BSRyJz0cfDhZtIdlHvrDgTKypExDlBrp4GadWlsQ8RJptMZa/YFoHCuAZ/cn7Lbzzbr
- E4Kpl4ajNWjoZlDDyvqMbzGYUfa1DgdqHbVSMNEGDIQLGH8p2oXxlG2dK99YbiEiHNcD
- 86+A==
-X-Gm-Message-State: AOJu0YzCM3DNx4a841xQdfVmftdi1VlltzQNsQLk+C92XsEsruDRxv0c
- mxVi7RmWmi6DtsZZ6fubu6t4No6EDhWEdTdmkPjU1Ee7O8gtaUGWkRq8OuIu3lTvno7BSgb+6gw
- yNqnhqFknRhi929i1IEUpL14YAy3HKAeCzSL2M4WCMp95muEGqotAXw==
-X-Google-Smtp-Source: AGHT+IGsPeERS3Htmv4iOUcv7aFvGfIAWSHt1d2gffKMgPzvqLerVHIuuYqVGZn7ChmKDkFpIOLkMJVLzQPCR1ey88E=
-X-Received: by 2002:a17:902:e546:b0:1f9:a602:5e39 with SMTP id
- d9443c01a7336-1f9aa3bcbd0mr28100125ad.11.1718799295028; Wed, 19 Jun 2024
- 05:14:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718788002; x=1719392802;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=jXS3t6XtaPg53HsiTReP/NRgyissTwJLw2RVJaAMZ6o=;
+ b=ehpt3U39PT34px/DnsSsD9/cM5lfGqIIOh1tIUtl7zBHXnjp6iuT9c3gnrPTjUGJD9
+ DCITiKsJY0qbM4qWZEjPwPqQrA6RUsmAnvfsnQ/OhkaiJB+KbSIWupCluoZ2DKmSd8bH
+ slexB9K2cDGaBHpvGGvfq4tYtpBpczoNE0q/M8PGwyiWuY3FDDk7YAurgee7NHwzAfVW
+ AwBox3cqebD7ynVrC5XNJMsoh5whrktMeHQtJveL5C9cWXh/ymHYnlkrE6eDyhI+OG5B
+ qCdsjuQRyK+LddaZUCQuFC5qQf9inw7rpibghuwkIei/qfts8+MptMMyiJKE/KyIieXs
+ 0A0w==
+X-Gm-Message-State: AOJu0YzI0DlnW9eWUd1gEMp2LR/PiBZjLXOEcq0HZAo7AqLvQkJPb2oH
+ T/MXJHSk/B9X0jvCxak3JOuojYBvYpqoZ+pLoY/f69tPWVEyKqRtjoY/nE7RC44=
+X-Google-Smtp-Source: AGHT+IFAG2ASjyz6qd/6hikWzy4v227ybrYIt6y3S1x/ZBMtkd63eMsqPGhf434ivsMDqXSFP+B5vg==
+X-Received: by 2002:a5d:4fc4:0:b0:360:6dc8:4459 with SMTP id
+ ffacd0b85a97d-363192d0631mr1035580f8f.50.1718788001485; 
+ Wed, 19 Jun 2024 02:06:41 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:b7e0:cc1c:dce0:48f9?
+ ([2a01:e0a:3cb:7bb0:b7e0:cc1c:dce0:48f9])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36075114e09sm16510484f8f.117.2024.06.19.02.06.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Jun 2024 02:06:41 -0700 (PDT)
+Message-ID: <b753c9e8-2a70-4856-9a17-09c9319674a2@linaro.org>
+Date: Wed, 19 Jun 2024 11:06:39 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/14] net: introduce alternative implementation as
+ net-lwip/
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Sean Anderson <sean.anderson@seco.com>, Jesse Taube
+ <mr.bossman075@gmail.com>, Greg Malysa <greg.malysa@timesys.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Andrew Davis <afd@ti.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ying Sun <sunying@nj.iscas.ac.cn>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Joshua Watt <jpewhacker@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bin Meng
+ <bmeng.cn@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Samuel Holland <samuel@sholland.org>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Ion Agorria <ion@agorria.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Boon Khai Ng <boon.khai.ng@intel.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Baruch Siach <baruch@tkos.co.il>
 References: <cover.1718638104.git.jerome.forissier@linaro.org>
- <e76ac139a4f3841535e1ee306e912fd758dee957.1718638104.git.jerome.forissier@linaro.org>
-In-Reply-To: <e76ac139a4f3841535e1ee306e912fd758dee957.1718638104.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 19 Jun 2024 15:14:18 +0300
-Message-ID: <CAC_iWj+kw2u7h_bHwWKsH7JjzvimLKv-ioM=ZuzO8ETc4oneoA@mail.gmail.com>
-Subject: Re: [PATCH v4 12/14] configs: add qemu_arm64_lwip_defconfig
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+ <f382942cd9d0d62da5204b884c6fa1a59526d262.1718638104.git.jerome.forissier@linaro.org>
+ <20240618175933.GV68077@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240618175933.GV68077@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 19 Jun 2024 14:21:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,31 +127,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 17 Jun 2024 at 18:33, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Add qemu_arm64_lwip_defconfig which #include's qemu_arm64_defconfig and
-> selects NET_LWIP instead of NET. This config has all the supported net
-> commands enabled.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  configs/qemu_arm64_lwip_defconfig | 4 ++++
->  1 file changed, 4 insertions(+)
->  create mode 100644 configs/qemu_arm64_lwip_defconfig
->
-> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-> new file mode 100644
-> index 00000000000..1f5fd097f0e
-> --- /dev/null
-> +++ b/configs/qemu_arm64_lwip_defconfig
-> @@ -0,0 +1,4 @@
-> +#include <configs/qemu_arm64_defconfig>
-> +CONFIG_NET_LWIP=y
-> +CONFIG_CMD_DNS=y
-> +CONFIG_CMD_WGET=y
-> --
-> 2.40.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+On 6/18/24 19:59, Tom Rini wrote:
+> On Mon, Jun 17, 2024 at 05:32:54PM +0200, Jerome Forissier wrote:
+> 
+>> Prepare the introduction of the lwIP (lightweight IP) TCP/IP stack by
+>> adding a new net-lwip/ directory and the NET_LWIP symbol. Network
+>> support is either NO_NET, NET (legacy stack) or NET_LWIP. Subsequent
+>> commits will introduce the lwIP code, re-work the NETDEVICE integration
+>> and port some of the NET commands and features to lwIP.
+>>
+>> SPL_NET cannot be enabled when NET_LWIP=y. SPL_NET pulls some symbols
+>> that are part of NET (such as arp_init(), arp_timeout_check(),
+>> arp_receive(), net_arp_wait_packet_ip()). lwIP support in SPL may be
+>> added later.
+>>
+>> Similarly, DFU_TFTP and FASTBOOT are not compatible with NET_LWIP
+>> because of dependencies on net_loop(), tftp_timeout_ms,
+>> tftp_timeout_count_max and other NET things. Let's add a dependency on
+>> !NET_LWIP for now.
+>>
+>> As for SANDBOX, NET_LWIP cannot be used either because of strong
+>> assumptions on the network stack. Make NET_LWIP depend on !SANDBOX so
+>> that the NET_LWIP alternative is not visible in make menuconfig when
+>> sandbox_defconfig is used.
+> [snip]
+>> diff --git a/Kconfig b/Kconfig
+>> index 82df59f176e..cfe2a6d3eac 100644
+>> --- a/Kconfig
+>> +++ b/Kconfig
+>> @@ -745,7 +745,48 @@ source "dts/Kconfig"
+>>  
+>>  source "env/Kconfig"
+>>  
+>> +choice
+>> +	prompt "Networking stack"
+>> +	default NET
+>> +
+>> +config NO_NET
+>> +	bool "No networking support"
+>> +
+>> +config NET
+>> +	bool "Legacy U-Boot networking stack"
+>> +	imply NETDEVICES
+>> +
+>> +config NET_LWIP
+>> +	bool "Use lwIP for networking stack"
+>> +	imply NETDEVICES
+>> +	depends on !SANDBOX
+>> +	help
+>> +	  Include networking support based on the lwIP (lightweight IP)
+>> +	  TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+>> +	  the default U-Boot network stack and applications located in net/
+>> +	  and enabled via CONFIG_NET as well as other pieces of code that
+>> +	  depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
+>> +	  Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
+>> +	  exclusive.
+>> +
+>> +endchoice
+> 
+> For ease of reviewability the next patch in the series should change all
+> of the configs with '# CONFIG_NET is not set' to 'CONFIG_NO_NET=y' so
+> that they functionally don't change. It's 105 files and so while it will
+> be folded in when lwIP is ready for merge, keeping it separate for now
+> will make review easier.
+
+OK, done in v6.
+
+Thanks,
+-- 
+Jerome
