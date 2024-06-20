@@ -4,84 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 149DBC27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 11:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E311DC2BA18
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 11:58:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 082AB882E8;
-	Thu, 20 Jun 2024 13:08:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E4C73884DC;
+	Thu, 20 Jun 2024 13:58:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N0YjKVgf";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AD548882E8; Thu, 20 Jun 2024 13:08:42 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1718884730;
+	bh=GBgqSxou2HpB58y/v8BpXzxKa2VPzK/PHtQVPM14yAM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LwLfzP4CEUg9e1+0N08/+m3EdtoOUC5McnAwmd99eCEA9dcpuWJQt4RmR6R3bS5Vp
+	 K5EV0s72P+P8tQmH8bB+QPv11t1ElDNEWnY5YlzhkWGvECpN0xJDLOUsBt2xGJhh3k
+	 VHq/0k7ZaMhsCmf74JUFbYD/nd1/9FvtnJBxgGMszIkHMB/OhxWgO8eYel4hDcYtpU
+	 buUknL7Q4ws2+gZt/cvm/b69Z5+JlKzGl1XJhDCMSf1caRNie9rMrqPiDYOF/fyWv5
+	 xPEXAiLrwA+CUDjHc1AEiOUi47ePC3hRtoRnKAb+9SODlp/jShNKv32pVdj18YaSmk
+	 pCqPkbN/8oi6A==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6AE6882AD
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 13:08:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52c84a21b8cso682588e87.1
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 04:08:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718881719; x=1719486519; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7gx1diNhKyWAjNCLB7+2Z0iSOH9Ctk3ubqT1X8mhOAI=;
- b=N0YjKVgfDw04hqENlf7fg+fTa6EpnZEpLNj1XgTvqbOdtAAW1Sx6B+kw/IObxfcelB
- zTU9xfclLNgo7Taz6FUS/6oaaoz5pFwYZYdOZYTgG1S9LjBWkNp6NcI1sZx+6LNKfElC
- zTjHDo24mGVXvl2/LlQLhr4xy51lHWc9lv8+bnh/s1py45nwO6LoH7dPDGo95wzt1h03
- RZCke8zKW+0qi+ts7+jH2/GhEaVmWctswwYFGu28YeuGWabEVPzZcUnm0qaICDgDJq2Q
- sbKFmjQSBJtPNZYOPNqQpkJTtFAF1Op6cvCH9JQLp1AhaHwTPtXHEPjSb8p7KwPHYFEl
- bd1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718881719; x=1719486519;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7gx1diNhKyWAjNCLB7+2Z0iSOH9Ctk3ubqT1X8mhOAI=;
- b=gQoVDbGunPdQJ36BUCANPrbghVlsXRU7xu60gFcefh5YvgVTkj3S9fnq4A9zkHHFxL
- 7tEO4dU9/HG5w7zShW8fZ1OL1nYbqKibNN5vxaZR3AedP2N4JFMY5L0fnkcqHUrZfJgV
- 9TKNaNt4OEzaJJzUbl/FtMh/8WapfQgW115EhQBqpHLPJ0CCjp01kUGe7HTsjksOLdLq
- XSIrzUxJ6IZ12GCh8iltU9zKGcj81K6io4Nt2oEazBgzD6EelMDxxZIlVIuOEIxWbyIi
- lbHAtjfeSn7SNvB4/GVms9y4t0rx37zlJ2PUgkbQ7sDxiPXZLT5bZnTsKMUJ3KGcufCI
- 0JQQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXVlULlIWjpP5Gf/cjUQnrRVEzCxGAaH0q52ErwpG5EBK+bHgagJn2d9+tOXbuu86a9ffdKXZRN5/H8/ayuhJ4umNFUg==
-X-Gm-Message-State: AOJu0YzP7JhZXUeRXsfsSBtcOSZBr3PVAHS7WQRNRnDwCKQkkfnUG0W1
- cUYpIboG8OEsIJp/pqplnLuNoRJMEtBRSOa+31XdYz4zZ40goAsQXZTDaxWKqAzKSmofCqMq2wz
- Pbw4jsPx1SGhFd3sGdK04GS/rpQY=
-X-Google-Smtp-Source: AGHT+IHXAltcOLzsiCUdThqAC/CogGcbZiXDDkXvR5sT/5NjQua+x4f9LAwQT94u91XTv1iXbOLOrosBojawn/w/1I8=
-X-Received: by 2002:a19:6457:0:b0:52c:8dc6:e40b with SMTP id
- 2adb3069b0e04-52cca1b983amr1530574e87.4.1718881718579; Thu, 20 Jun 2024
- 04:08:38 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8352187EBD;
+ Thu, 20 Jun 2024 13:58:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1718884728;
+ bh=GBgqSxou2HpB58y/v8BpXzxKa2VPzK/PHtQVPM14yAM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=KMSmGF2VR54MHvz+7QlWNOTARhU1D9FoDy9a7AehTL867AOyUzzlEGGqVVKi5dXRJ
+ 6veOoF0zBcRlQqYZQhSTQWvxKMN7iFkZoqjY/p/haPfK9xa93KJpUvEdyhXlIMqtBS
+ k8PAiKjjv7PG5OeZ1ule1zD1nAeQcvHxCvw/geb4IJRxEnGQaY/11DYbkvtG812U0I
+ slLuznPzlOV0Vv55JMGswblXCPLQnUzZ3LC95CQSF9UdVOhXE2Gb4cKu9QlTOtfCcT
+ Eoy8SE8Xitdvupih8+V1Ur44gBG4zhnbHWlV1GX2D+79kmLVQgFqhiyARkAD/dvhwz
+ PmGXYmaT3v3wg==
+Message-ID: <8ce68679-f518-47c1-a6f8-f13e4cfd4dcc@denx.de>
+Date: Thu, 20 Jun 2024 13:52:18 +0200
 MIME-Version: 1.0
-References: <20240504150358.19600-1-minda.chen@starfivetech.com>
- <CANV2PTM8zp4cQu4vyuz5itm0mhoMiagV_=GUbsp87RUFTmQsNw@mail.gmail.com>
- <BJXPR01MB0855813DD38EF86CCA6DD5C8E6E92@BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn>
-In-Reply-To: <BJXPR01MB0855813DD38EF86CCA6DD5C8E6E92@BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn>
-From: E Shattow <lucent@gmail.com>
-Date: Thu, 20 Jun 2024 04:08:27 -0700
-Message-ID: <CANV2PTPjYM1PO5QtwsLYAkTCnko2DqLL2yjfOgaZUvxUjxXr4A@mail.gmail.com>
-Subject: Re: [PATCH v1 0/7] Add Starfive JH7110 Cadence USB driver
-To: Minda Chen <minda.chen@starfivetech.com>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>, 
- Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] phy: meson-gxl-usb2: remove
+ phy_meson_gxl_usb2_set_mode
+To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ u-boot-amlogic@groups.io, u-boot@lists.denx.de
+References: <20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org>
+ <20240618-u-boot-usb-gxl-phy-set-mode-v1-3-6b41efa46e35@linaro.org>
+ <54c7dcab-8925-4b20-b455-413a9bee8fda@denx.de>
+ <d8e7d2cb-b402-43fa-8c3e-eaebfaf5b0fc@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <d8e7d2cb-b402-43fa-8c3e-eaebfaf5b0fc@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,120 +73,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Minda, can you test USB Host function on VisionFive2? I guess that it
-is connected to the USB-C port. For the boards with JH7110 and not any
-VL805 USB controller this Cadence USB is the only way to have host
-USB. It is very much wanted to have host USB. Thanks! -E
+On 6/20/24 9:39 AM, Neil Armstrong wrote:
+> On 18/06/2024 16:56, Marek Vasut wrote:
+>> On 6/18/24 9:55 AM, Neil Armstrong wrote:
+>>
+>> [...]
+>>
+>>> @@ -205,7 +188,7 @@ static int phy_meson_gxl_usb2_power_off(struct 
+>>> phy *phy)
+>>>   struct phy_ops meson_gxl_usb2_phy_ops = {
+>>>       .power_on = phy_meson_gxl_usb2_power_on,
+>>>       .power_off = phy_meson_gxl_usb2_power_off,
+>>> -    .set_mode = _phy_meson_gxl_usb2_set_mode,
+>>> +    .set_mode = phy_meson_gxl_usb2_set_mode,
+>>
+>> Oh, I see you did rename it here, so please ignore my comment on 1/5 . 
+>> Maybe just mention in the 1/5 commit message that the rename is 
+>> happening in follow up patch , if you are doing V2 at all .
+> 
+> Sure, let me update the commit message,
 
-On Sun, May 19, 2024 at 11:20=E2=80=AFPM Minda Chen <minda.chen@starfivetec=
-h.com> wrote:
->
->
->
-> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
-> > =E5=8F=91=E4=BB=B6=E4=BA=BA: E Shattow <lucent@gmail.com>
-> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2024=E5=B9=B45=E6=9C=8820=E6=97=
-=A5 13:06
-> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Minda Chen <minda.chen@starfivetech.com>
-> > =E6=8A=84=E9=80=81: Marek Vasut <marex@denx.de>; Tom Rini <trini@konsul=
-ko.com>; Roger
-> > Quadros <rogerq@kernel.org>; Neil Armstrong <neil.armstrong@linaro.org>=
-;
-> > Alexey Romanov <avromanov@salutedevices.com>; Sumit Garg
-> > <sumit.garg@linaro.org>; Mark Kettenis <kettenis@openbsd.org>; Nishanth
-> > Menon <nm@ti.com>; Rick Chen <rick@andestech.com>; Leo Yu-Chi Liang
-> > <ycliang@andestech.com>; u-boot@lists.denx.de; Heinrich Schuchardt
-> > <xypron.glpk@gmx.de>; Simon Glass <sjg@chromium.org>
-> > =E4=B8=BB=E9=A2=98: Re: [PATCH v1 0/7] Add Starfive JH7110 Cadence USB =
-driver
-> >
-> > Hi, there is a compile warning. I don't know why.
-> >
-> > On Sat, May 4, 2024 at 8:04=E2=80=AFAM Minda Chen <minda.chen@starfivet=
-ech.com>
-> > wrote:
-> > >
-> > > Add Starfive JH7110 Cadence USB driver and related PHY driver.
-> > > So the codes can be used in visionfive2 and milkv 7110 board.
-> > >
-> > > The driver is almost the same with kernel driver.
-> > >
-> > > patch1: Add set phy mode function in cdns3 core driver
-> > >         which is used by Starfive.
-> > >
-> > > patch2-3: USB and PCIe 2.0 (usb 3.0) PHY drivier
-> > > patch4: Cadence USB wrapper driver.
-> > > patch5-7 dts, config and maintainers update.
-> > >
-> > > Minda Chen (7):
-> > >   usb: cdns3: Set USB PHY mode in cdns3_probe()
-> > >   phy: starfive: Add Starfive JH7110 USB 2.0 PHY driver
-> > >   phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY driver
-> > >   usb: cdns: starfive: Add cdns USB driver
-> > >   configs: starfive: Add visionfive2 cadence USB configuration
-> > >   dts: starfive: Add JH7110 Cadence USB dts node
-> > >   MAINTAINERS: Update Starfive visionfive2 maintain files.
-> > >
-> > >  .../dts/jh7110-starfive-visionfive-2.dtsi     |   5 +
-> > >  arch/riscv/dts/jh7110.dtsi                    |  52 +++++
-> > >  board/starfive/visionfive2/MAINTAINERS        |   2 +
-> > >  configs/starfive_visionfive2_defconfig        |   9 +
-> > >  drivers/phy/Kconfig                           |   1 +
-> > >  drivers/phy/Makefile                          |   1 +
-> > >  drivers/phy/starfive/Kconfig                  |  19 ++
-> > >  drivers/phy/starfive/Makefile                 |   7 +
-> > >  drivers/phy/starfive/phy-jh7110-pcie.c        | 211
-> > ++++++++++++++++++
-> > >  drivers/phy/starfive/phy-jh7110-usb2.c        | 135 +++++++++++
-> > >  drivers/usb/cdns3/Kconfig                     |   7 +
-> > >  drivers/usb/cdns3/Makefile                    |   2 +
-> > >  drivers/usb/cdns3/cdns3-starfive.c            | 184 +++++++++++++++
-> > >  drivers/usb/cdns3/core.c                      |  17 ++
-> > >  14 files changed, 652 insertions(+)
-> > >  create mode 100644 drivers/phy/starfive/Kconfig  create mode 100644
-> > > drivers/phy/starfive/Makefile  create mode 100644
-> > > drivers/phy/starfive/phy-jh7110-pcie.c
-> > >  create mode 100644 drivers/phy/starfive/phy-jh7110-usb2.c
-> > >  create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
-> > >
-> > >
-> > > base-commit: 174ac987655c888017c82df1883c0c2ea0dc2495
-> > > --
-> > > 2.17.1
-> > >
-> >
-> > The compile warning as follows:
-> >
-> > In file included from
-> > /home/user/source/u-boot.git/drivers/usb/cdns3/gadget.c:70:
-> > /home/user/source/u-boot.git/include/linux/bitmap.h: In function
-> > =E2=80=98bitmap_find_next_zero_area=E2=80=99:
-> > /home/user/source/u-boot.git/include/linux/bitmap.h:170:17: warning:
-> > implicit declaration of function =E2=80=98find_next_zero_bit=E2=80=99; =
-did you mean
-> > =E2=80=98find_next_bit=E2=80=99? [-Wimplicit-function-declaration]
-> >   170 |         index =3D find_next_zero_bit(map, size, start);
-> >       |                 ^~~~~~~~~~~~~~~~~~
-> >       |                 find_next_bit
-> >   CC      drivers/usb/cdns3/ep0.o
-> > In file included from
-> > /home/user/source/u-boot.git/include/linux/usb/composite.h:26,
-> >                  from
-> > /home/user/source/u-boot.git/drivers/usb/cdns3/ep0.c:19:
-> > /home/user/source/u-boot.git/include/linux/bitmap.h: In function
-> > =E2=80=98bitmap_find_next_zero_area=E2=80=99:
-> > /home/user/source/u-boot.git/include/linux/bitmap.h:170:17: warning:
-> > implicit declaration of function =E2=80=98find_next_zero_bit=E2=80=99; =
-did you mean
-> > =E2=80=98find_next_bit=E2=80=99? [-Wimplicit-function-declaration]
-> >   170 |         index =3D find_next_zero_bit(map, size, start);
-> >       |                 ^~~~~~~~~~~~~~~~~~
-> >       |                 find_next_bit
-> >
-> >
-> > Is this something missing in the patch series?
-> >
-> > -E
->
-> I have not noticed this. I just check this it is risc-v code do not conta=
-in "find_next_zero_bit" macro define.
+Thank you
