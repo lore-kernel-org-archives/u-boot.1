@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA30C27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 12:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05DB2C2BA18
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 13:19:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A139E8834D;
-	Thu, 20 Jun 2024 14:06:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 2EFF388535;
+	Thu, 20 Jun 2024 15:19:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="l+Sbe1el";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FN5zYBpW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6154388378; Thu, 20 Jun 2024 14:06:07 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 46F1488516; Thu, 20 Jun 2024 15:19:53 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73FC687EBD
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 14:06:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22FB088385
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 15:19:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1718885165; x=1721477165;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9mLOxA9tjJMp/TG163/E8BBZIOQMpR1J+I8dHlbZJ84=;
- b=l+Sbe1elUSt/xmG3ruCcAMbEvNqsdDmYWE6r1+X2e8RV3qDJyWjYYIeyotnxwMGg
- i5LDQQsQy5LMpPErUOoEMs2soWxB+Lcgyyfw4rybMVIrzkkZJ0XQRAPUAY8GZ7oz
- RuosE1tFO3CnxQICV8o53lfN8PAWKKYSg5Zfx4YGwVk=;
-X-AuditID: ac14000a-03e52700000021bc-45-66741b2dabb5
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 80.45.08636.D2B14766;
- Thu, 20 Jun 2024 14:06:05 +0200 (CEST)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 20 Jun
- 2024 14:06:04 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-CC: <trini@konsulko.com>, <d.schultz@phytec.de>
-Subject: [PATCH] doc: board: phytec: phycore-am6: Describe UART based boot
-Date: Thu, 20 Jun 2024 14:05:54 +0200
-Message-ID: <20240620120554.2640307-1-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-375d22e537cso1809985ab.2
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 06:19:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1718889590; x=1719494390; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zGxUmDSG76BTUjAKe7t1tQPXAgfXJOH0apox96lDzM8=;
+ b=FN5zYBpWrpy+GwRQZeNJ95gRb+jBdWNTqHZhgYJzgUhFb3UZsTrcB5S7zlxGYh+UOk
+ hfGK5TBLIX0AVIjF41tJvdX34BiAKB7Et5XA/Rs8a1ufIBM+Wx/xG7xlEKwttWLs8HK/
+ sEgf1F/5AQgQdHb33ffwkVSezlQ0gb8/XDCXA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718889590; x=1719494390;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zGxUmDSG76BTUjAKe7t1tQPXAgfXJOH0apox96lDzM8=;
+ b=D7YH/uT9Im1kqRKQVLxIzagzfmXEedGLzMNMKrWGkTl8tdgENojJ1s42hXgbvRYdEN
+ RlrxwIbHjrXCKIey7JbU8tH75wjf2V+YjOzgi+X9CwVLCC0IJjpRJ0GF+cTyuQBA8Gsu
+ seo+zvrYPQYvOZgeE496VrtvJodxbM7U+sz3kR4yAq99GFxmlrup6l+yAnIZUzASH5SM
+ aue+z1npkv6TSNNyPWBAZMxtgmsyOh83i1uhxF5FBF08Pt6eqL5mLFKSEr0ARvRnsgD3
+ 3v1bnRUYkwNwkAslNAtrnlxUDor+4NKjYQ/x3s0EA3hSxESoDOgmofkl5fKbxXes7aNe
+ VtmA==
+X-Gm-Message-State: AOJu0Yw4giIgR/MpawPCSZf3dVSi+t01BUoQNGGtJUbHLEczhCnOBvur
+ IOOexDYGFK+PGIUejJCPWznHYn+6uGVBAT5YeHaHijqRlglGaS/LZ+zmaicCn6gESxbQWa3ADqp
+ w0g==
+X-Google-Smtp-Source: AGHT+IEQWDB1UgPVTMiUxkrzrJ+/AVcdcjPW50tEmbWcSQivvakakWjt5+7g39rAKkNndE5iNRgUqw==
+X-Received: by 2002:a05:6e02:190b:b0:376:1c71:1e1d with SMTP id
+ e9e14a558f8ab-3761d6b3d4fmr65510585ab.12.1718889589722; 
+ Thu, 20 Jun 2024 06:19:49 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-375d866e260sm31807865ab.7.2024.06.20.06.19.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Jun 2024 06:19:49 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH 0/5] Add Binman code-coverage test to CI
+Date: Thu, 20 Jun 2024 07:19:32 -0600
+Message-Id: <20240620131937.1130446-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLLMWRmVeSWpSXmKPExsWyRpKBR1dXuiTN4OxufoupkzazW7zd28lu
- 0f1O3YHZ49WBVeweZ+/sYPTo725hDWCO4rJJSc3JLEst0rdL4Mq40bqZuaBbpOJU/w32BsYD
- Al2MnBwSAiYS539MYu9i5OIQEljCJNF/6j0rhPOYUaL9xDNmkCo2AXWJOxu+sYLYIgJmEovW
- nmcDsZkF9CXmXlgJZgsLeEl0bFwEVs8ioCrx6lsHWD2vgKXE1iVtzBDb5CVmXvrODhEXlDg5
- 8wkLxBx5ieats5khbAmJgy9egNlCQPEXl5azwPROO/caak6oxJFNq5kmMArMQjJqFpJRs5CM
- WsDIvIpRKDczOTu1KDNbryCjsiQ1WS8ldRMjKEhFGLh2MPbN8TjEyMTBeIhRgoNZSYT3eVdR
- mhBvSmJlVWpRfnxRaU5q8SFGaQ4WJXHe1R3BqUIC6YklqdmpqQWpRTBZJg5OqQbGyPked4T/
- /0ueeeOv17s8nV/nt5nPlJj33OWIe2nj9t6zOgvkJecrdv3SZBLtubVISMB/Vexl06lVixVe
- rQ91tFgqOvud7KZC9QVpGjfXvz6yqaqCu2bO8QuMTJ2nExaYa2hyCIfzqzbPeN9ac3qXSJDH
- l3UTNvqfanw1MfOE8cq37ZdPbllxWYmlOCPRUIu5qDgRAOt1xotAAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,74 +92,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Describe how to boot via UART.
+Binman has 100% code coverage to ensure that future changes and
+refactors do not break existing entry types. This is a critical feature,
+given that it is relied on to produce images for all sorts of different
+SoCs and vendors.
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
-For next
----
- doc/board/phytec/phycore-am62x.rst | 17 +++++++++++++++++
- doc/board/phytec/phycore-am64x.rst | 19 +++++++++++++++++++
- 2 files changed, 36 insertions(+)
+With the NXP additions the 'binman test -T' step was missed, so the
+Binman coverage test is currently failing.
 
-diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
-index a615d01474e..5f02a9db5f8 100644
---- a/doc/board/phytec/phycore-am62x.rst
-+++ b/doc/board/phytec/phycore-am62x.rst
-@@ -118,6 +118,23 @@ tiboot3.bin, tispl.bin and u-boot.img are stored on the uSD card.
-   fatload mmc 1 ${loadaddr} u-boot.img
-   mtd write ospi.u-boot ${loadaddr} 0 ${filesize}
- 
-+UART based boot
-+---------------
-+
-+To boot the board via UART, set the switches to UART mode and connect to the
-+micro USB port labeled as "Debug UART". After power-on the build artifacts
-+needs to be uploaded one by one with a tool like sz.
-+
-+Example bash script sequence for running on a Linux host PC feeding all boot
-+artifacts needed to the device. Assuming the host uses /dev/ttyUSB0 as
-+the main domain serial port:
-+
-+.. prompt:: bash $
-+
-+  stty -F /dev/ttyUSB0 115200
-+  sb --xmodem tiboot3.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  sb --ymodem tispl.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  sb --ymodem u-boot.img > /dev/ttyUSB0 < /dev/ttyUSB0
- 
- Boot Modes
- ----------
-diff --git a/doc/board/phytec/phycore-am64x.rst b/doc/board/phytec/phycore-am64x.rst
-index 189da179534..e7f8656e1bf 100644
---- a/doc/board/phytec/phycore-am64x.rst
-+++ b/doc/board/phytec/phycore-am64x.rst
-@@ -119,6 +119,25 @@ tiboot3.bin, tispl.bin and u-boot.img are stored on the uSD card.
-   fatload mmc 1 ${loadaddr} u-boot.img
-   mtd write ospi.u-boot ${loadaddr} 0 ${filesize}
- 
-+UART based boot
-+---------------
-+
-+To boot the board via UART, set the switches to UART mode and connect to the
-+micro USB port labeled as "Debug UART". After power-on the build artifacts
-+needs to be uploaded one by one with a tool like sz.
-+
-+Example bash script sequence for running on a Linux host PC feeding all boot
-+artifacts needed to the device. Assuming the host uses /dev/ttyUSB0 as
-+the main domain serial port:
-+
-+.. prompt:: bash $
-+
-+  stty -F /dev/ttyUSB0 115200
-+  sb --xmodem tiboot3.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  # Resend tiboot3.bin a 2nd time due to ErrataID:i2331
-+  sb --xmodem tiboot3.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  sb --ymodem tispl.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  sb --ymodem u-boot.img > /dev/ttyUSB0 < /dev/ttyUSB0
- 
- Boot Modes
- ----------
+This series provides a means to close the testing gap. It cannot be
+applied until the tests are added, which should happen before -next is
+applied to -master
+
+
+Simon Glass (5):
+  Dockerfile: Add python3-coverage
+  Dockerfile: Add python3-pycryptodome
+  buildman: Support building within a Python venv
+  u_boot_pylib: Use correct coverage tool within venv
+  CI: Run code-coverage test for Binman
+
+ .gitlab-ci.yml                  |  4 +-
+ tools/buildman/bsettings.py     |  3 ++
+ tools/buildman/test.py          | 83 +++++++++++++++++++++++++++++++++
+ tools/buildman/toolchain.py     | 31 ++++++++++--
+ tools/docker/Dockerfile         |  2 +
+ tools/u_boot_pylib/test_util.py | 11 +++--
+ 6 files changed, 126 insertions(+), 8 deletions(-)
+
 -- 
 2.34.1
 
