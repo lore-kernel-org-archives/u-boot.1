@@ -4,72 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0746C27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 05:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7894DC27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 05:51:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C349884D2;
-	Thu, 20 Jun 2024 07:49:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BBD51884D2;
+	Thu, 20 Jun 2024 07:51:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DN53RxCF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YrlRLkXy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1182C884DC; Thu, 20 Jun 2024 07:49:18 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CF69F884D2; Thu, 20 Jun 2024 07:51:15 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CE7F882E8
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:49:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E938C8851D
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:51:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-7042a8ad9f5so1027947b3a.0
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 22:49:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718862554; x=1719467354; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=US+sIcYo8c28KHosQ19Im91UTQbLeYj6BH5eUNXd6BU=;
- b=DN53RxCF7c8kElwdJnrX14LOMG7KFb1/2+Et9hoceGBf0jnB9D9GN1E4aR+5CIJIEN
- oku18ajOmde/y6PPSulefwWtoYM6ZUl1yBi7hbm6x2JU9dNSPwco1r6wArZBtyRzNgU1
- BOdw5WoJuxbVDRdNdsqBY1sSpdNWhxRL3UXj3oCSxaGM3S0QctYllCsv0p3NissxLC7P
- LxkefijgW99s6a7UYzW8wQ4wMvAhZvYL1OZAXLtm1nMJjG1NwJ0Q67a0piwVqkb6oMkV
- 2mquiLvCXuV15x4E95EPK0bsb9yywKdFmw3xA8xb+RFIY5nKIg4MZvYL3a0zffhs1G7P
- tW7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718862554; x=1719467354;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=US+sIcYo8c28KHosQ19Im91UTQbLeYj6BH5eUNXd6BU=;
- b=rWkJPTguqAXFe5snjCv/spKmK18o03rgkCMMib7sN2QOUjJRnC/vKNmtt5e9aOwlu/
- gsFkPLsmfqtdfJ4ktPYvo/e1aDOx12isW2mI+Jgmp0GAiFy85m9AOxV43Jo7umxC8k1z
- iq4fAaOU3zU5xt9mxE7lExvdeBpHRHO1men5ZGE1LZHTop2pSbRJQhoIQvPJ/bcwc8Sj
- x6SfQW03osMsN3zjTgSKWt7TQwbUlQQJ5O+5OegDyINsUgwTOFGMCqNoukJSnW+e5OwT
- Vl/3otXqwWRCyv481SEcUt5FluM6EMfS8qAEJh/Tlo0BY7KzEwhNrTmh81LVnKRGXS0J
- +DCg==
-X-Gm-Message-State: AOJu0YyD9etNZEn83uveguq9SElHnaHuMmxX9ed1Jkh72laA9mB7Qafz
- C3vMUzUTH+J7QyISbkoZqa+tvahejhfte1qE2nnNzMbDEAppyigO8ifhsPwTgfsgBLumzeuKi13
- p9PYFKJQUgwGDZZ7rbPznyUq86W9kQ5jT8Ud52A==
-X-Google-Smtp-Source: AGHT+IEsiOfIsE1TyA79GK7I7BSZbjZTRhGDIKNyZUFqQ2E7Y+/QRA3HPnuKFR+WH1Zq90IsGKnUh0AEC/T79dgoo64=
-X-Received: by 2002:a17:90a:ea89:b0:2c7:fdcf:7cf2 with SMTP id
- 98e67ed59e1d1-2c7fdcf7de6mr42692a91.9.1718862554010; Wed, 19 Jun 2024
- 22:49:14 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45K5p5Xr039580;
+ Thu, 20 Jun 2024 00:51:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718862665;
+ bh=1PeyysVaMllgrEPnnnIeoxjQb/ORy2KFW9Opg4YEeq4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=YrlRLkXyaz4WHMs3JZootXyv48va86dOJPhAm0TC3YebXvzldmjHYuZGnuk5gS4ux
+ fKvOa01uO1txYuOwb5hcTEjfK31Wpztzt86OD7x3pECfRxFmfgB8LK7+z/qaJBmmok
+ 2Hy/T+UJ1RLrrNgcdD+nR2Y6O5dNRZ4pze4ebP6U=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45K5p5aQ069987
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 20 Jun 2024 00:51:05 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
+ Jun 2024 00:51:05 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 20 Jun 2024 00:51:05 -0500
+Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45K5p41o093763;
+ Thu, 20 Jun 2024 00:51:04 -0500
+Date: Thu, 20 Jun 2024 11:21:03 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Bryan Brattlof <bb@ti.com>, Nishanth Menon <nm@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>,
+ Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>,
+ Dhruva Gole <d-gole@ti.com>
+Subject: Re: [PATCH] board: beagle: beagleplay: enable OF_SYSTEM_SETUP
+Message-ID: <20240620055103.jhn4krwido7nqbwr@dhruva>
+References: <20240619-play-fdt-fixup-v1-1-18e2a728ca45@ti.com>
+ <3f540efd-d428-49e3-bf48-de1e35dd41c3@ti.com>
 MIME-Version: 1.0
-References: <20240619212759.3456158-1-trini@konsulko.com>
- <20240619212759.3456158-7-trini@konsulko.com>
-In-Reply-To: <20240619212759.3456158-7-trini@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Jun 2024 08:48:38 +0300
-Message-ID: <CAC_iWjLk30o_UuLjMU2f7BbG9B-Z9KuHifM1WFBQDcO_o=P-rQ@mail.gmail.com>
-Subject: Re: [PATCH 7/7] cmd: cache: Remove weak functions
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <3f540efd-d428-49e3-bf48-de1e35dd41c3@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,69 +81,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Jun 2024 at 00:28, Tom Rini <trini@konsulko.com> wrote:
->
-> It should be up to an architecture to decide how to implement cache
-> functions, and if they need to use weak functions or not. Allowing the
-> cache command to be built without cache functionality implemented is
-> unhelpful. Further, guard the call to noncached_set_region with
-> CONFIG_SYS_NONCACHED_MEMORY as that's when it's implemented and again is
-> an architecture specific detail.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> This patch series is intended to replace
-> https://patchwork.ozlabs.org/project/uboot/patch/20240616173105.7430-2-heinrich.schuchardt@canonical.com/
-> ---
->  cmd/cache.c | 18 ++----------------
->  1 file changed, 2 insertions(+), 16 deletions(-)
->
-> diff --git a/cmd/cache.c b/cmd/cache.c
-> index 0254ff17f9b2..7a2068296ef1 100644
-> --- a/cmd/cache.c
-> +++ b/cmd/cache.c
-> @@ -13,16 +13,6 @@
->
->  static int parse_argv(const char *);
->
-> -void __weak invalidate_icache_all(void)
-> -{
-> -       /* please define arch specific invalidate_icache_all */
-> -       puts("No arch specific invalidate_icache_all available!\n");
-> -}
-> -
-> -__weak void noncached_set_region(void)
-> -{
-> -}
-> -
->  static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
->                      char *const argv[])
->  {
-> @@ -52,12 +42,6 @@ static int do_icache(struct cmd_tbl *cmdtp, int flag, int argc,
->         return 0;
->  }
->
-> -void __weak flush_dcache_all(void)
-> -{
-> -       puts("No arch specific flush_dcache_all available!\n");
-> -       /* please define arch specific flush_dcache_all */
-> -}
-> -
->  static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
->                      char *const argv[])
->  {
-> @@ -69,7 +53,9 @@ static int do_dcache(struct cmd_tbl *cmdtp, int flag, int argc,
->                         break;
->                 case 1:
->                         dcache_enable();
-> +#ifdef CONFIG_SYS_NONCACHED_MEMORY
->                         noncached_set_region();
-> +#endif
->                         break;
->                 case 2:
->                         flush_dcache_all();
-> --
-> 2.34.1
->
+On Jun 19, 2024 at 15:44:41 -0500, Andrew Davis wrote:
+> On 6/19/24 2:12 PM, Bryan Brattlof wrote:
+> > Unfortunately when enabling FDT fixups for the AM62x family of SoCs and
+> > moving TF-A to the bottom of RAM we missed the BeaglePlay. This is
+> > causing Linux's memory allocator to clobber TF-A and break its boot.
+> > 
+> > Enable OF_SYSTEM_SETUP to fixup the kernel's FDT to inform it of the
+> > actual location of the firmware
+> > 
+> > CC: Andrew Davis <afd@ti.com>
+> > CC: Nishanth Menon <nm@ti.com>
+> > CC: Robert Nelson <robertcnelson@gmail.com>
+> > Reported-by: Dhruva Gole <d-gole@ti.com>
+> > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> > ---
+> 
+> Acked-by: Andrew Davis <afd@ti.com>
+> 
+> > Hello everyone,
+> > 
+> > Fair warning, this may turn into a philosophical discussion about the
+> > role of device-tree with SystemReady and U-Boot's role in enabling true
+> > distribution to be completely agnostic of the board it's running on.
+> > 
+> > However substantively this is simply fixing a boot regression Dhruva
+> > found while testing out the beagleplay.
+> > 
+> > Happy reviewing
+> > ~Bryan
+> > ---
+> >   board/beagle/beagleplay/Kconfig | 1 +
+> >   1 file changed, 1 insertion(+)
+> > 
+> > diff --git a/board/beagle/beagleplay/Kconfig b/board/beagle/beagleplay/Kconfig
+> > index 7dbd833acb4cc..896a1c1be3010 100644
+> > --- a/board/beagle/beagleplay/Kconfig
+> > +++ b/board/beagle/beagleplay/Kconfig
+> > @@ -12,6 +12,7 @@ config TARGET_AM625_A53_BEAGLEPLAY
+> >   	bool "BeagleBoard.org AM625 BeaglePlay running on A53"
+> >   	select ARM64
+> >   	select BINMAN
+> > +	select OF_SYSTEM_SETUP
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Thanks for the quick fix,
+Tested-by: Dhruva Gole <d-gole@ti.com>
+
+Boot logs upto kernel prompt:
+https://gist.github.com/DhruvaG2000/4dc1c1e42207dd98a144f27cc9dff177
+
+-- 
+Best regards,
+Dhruva Gole <d-gole@ti.com>
