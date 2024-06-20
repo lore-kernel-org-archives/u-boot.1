@@ -4,42 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2BDC2BA18
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 10:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC77C27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 10:25:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8A6788535;
-	Thu, 20 Jun 2024 12:25:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 77CA888527;
+	Thu, 20 Jun 2024 12:25:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3A118852E; Thu, 20 Jun 2024 12:25:02 +0200 (CEST)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42af])
+ id 108608853B; Thu, 20 Jun 2024 12:25:04 +0200 (CEST)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::8faa])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E50F087C7E
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 12:25:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BBCB788521
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 12:25:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W4c7J35DWzC6W;
- Thu, 20 Jun 2024 12:25:00 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W4c7K2FKTzjPZ;
+ Thu, 20 Jun 2024 12:25:01 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4W4c7H2KQgzpl7; Thu, 20 Jun 2024 12:24:59 +0200 (CEST)
+ id 4W4c7J3lJKzn12; Thu, 20 Jun 2024 12:25:00 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH next 0/2] rockchip: theobroma: use HTTPS for git URLs and
- drop RK3368 Lion support
-Date: Thu, 20 Jun 2024 12:24:49 +0200
-Message-Id: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
+Date: Thu, 20 Jun 2024 12:24:50 +0200
+Subject: [PATCH next 1/2] rockchip: theobroma-systems: migrate git URLs to
+ HTTPS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAHEDdGYC/x3MQQqDMBBG4avIrB1I01bQqxQXafJXB0qUZJBA8
- O4Gl9/ivUoZSZBp6iolHJJliw2PviO/uriAJTSTNfZlBmtYc+BVdedFlP1/i+D30xu4YXThC2r
- hnvCTck8/FFGU5vO8AFyirSlqAAAA
+Message-Id: <20240620-tsd-http-git-clone-v1-1-666e8d6a8949@cherry.de>
+References: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
+In-Reply-To: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
 To: Klaus Goger <klaus.goger@cherry.de>, 
  Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
@@ -63,42 +62,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nobody at Theobroma has booted Lion since at least July 2021 and the
-last meaningful changes were made in February 2021.
-The product isn't listed on our website anymore.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Therefore let's remove its support.
+It turns out only Puma had a working git:// URL. Though that is now
+fixed, having HTTPS URLs make it easier to directly reach our cgit
+webserver to check what's up without having to change the URL manually.
 
-Additionally, migrate git URLs in MAINTAINERS to use https:// instead of
-git:// as it's more user-friendly (and also that git:// was only
-supported for Puma repo until yesterday).
+Depending on your terminal settings, this also makes it possible to
+open the link from it.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (2):
-      rockchip: theobroma-systems: migrate git URLs to HTTPS
-      rockchip: remove support for Theobroma Systems RK3368 Lion
+ board/theobroma-systems/jaguar_rk3588/MAINTAINERS | 2 +-
+ board/theobroma-systems/puma_rk3399/MAINTAINERS   | 2 +-
+ board/theobroma-systems/ringneck_px30/MAINTAINERS | 2 +-
+ board/theobroma-systems/tiger_rk3588/MAINTAINERS  | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
- arch/arm/dts/rk3368-lion-haikou-u-boot.dtsi       | 119 --------
- arch/arm/dts/rk3368-lion-haikou.dts               | 144 ----------
- arch/arm/dts/rk3368-lion.dtsi                     | 318 ----------------------
- arch/arm/mach-rockchip/rk3368/Kconfig             |  22 --
- board/theobroma-systems/jaguar_rk3588/MAINTAINERS |   2 +-
- board/theobroma-systems/lion_rk3368/Kconfig       |  18 --
- board/theobroma-systems/lion_rk3368/MAINTAINERS   |  10 -
- board/theobroma-systems/lion_rk3368/README        |  78 ------
- board/theobroma-systems/puma_rk3399/MAINTAINERS   |   2 +-
- board/theobroma-systems/ringneck_px30/MAINTAINERS |   2 +-
- board/theobroma-systems/tiger_rk3588/MAINTAINERS  |   2 +-
- configs/lion-rk3368_defconfig                     | 110 --------
- doc/board/rockchip/rockchip.rst                   |   1 -
- include/configs/lion_rk3368.h                     |  16 --
- 14 files changed, 4 insertions(+), 840 deletions(-)
----
-base-commit: e124e630ad694327e33d6513e43951793e827d3a
-change-id: 20240620-tsd-http-git-clone-53c0ea69adbe
+diff --git a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+index ab7051b427f..370d0a1272a 100644
+--- a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
++++ b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+@@ -10,4 +10,4 @@ F:	include/configs/jaguar_rk3588.h
+ F:	arch/arm/dts/rk3588-jaguar*
+ F:	configs/jaguar-rk3588_defconfig
+ W:	https://embedded.cherry.de/product/jaguar-sbc-rk3588/
+-T:	git git://git.embedded.cherry.de/jaguar-u-boot.git
++T:	git https://git.embedded.cherry.de/jaguar-u-boot.git
+diff --git a/board/theobroma-systems/puma_rk3399/MAINTAINERS b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+index 2536e348887..1a5b78bf535 100644
+--- a/board/theobroma-systems/puma_rk3399/MAINTAINERS
++++ b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+@@ -9,4 +9,4 @@ F:	include/configs/puma_rk3399.h
+ F:	arch/arm/dts/rk3399-puma*
+ F:	configs/puma-rk3399_defconfig
+ W:	https://embedded.cherry.de/product/puma-som-rk3399-q7/
+-T:	git git://git.embedded.cherry.de/puma-u-boot.git
++T:	git https://git.embedded.cherry.de/puma-u-boot.git
+diff --git a/board/theobroma-systems/ringneck_px30/MAINTAINERS b/board/theobroma-systems/ringneck_px30/MAINTAINERS
+index 2aff91f4207..4d4544a2a3e 100644
+--- a/board/theobroma-systems/ringneck_px30/MAINTAINERS
++++ b/board/theobroma-systems/ringneck_px30/MAINTAINERS
+@@ -9,4 +9,4 @@ F:	include/configs/ringneck_px30.h
+ F:	arch/arm/dts/px30-ringneck*
+ F:	configs/ringneck-px30_defconfig
+ W:	https://embedded.cherry.de/product/ringneck-som-px30-uq7/
+-T:	git git://git.embedded.cherry.de/ringneck-u-boot.git
++T:	git https://git.embedded.cherry.de/ringneck-u-boot.git
+diff --git a/board/theobroma-systems/tiger_rk3588/MAINTAINERS b/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+index e5aab4b29f3..a95135616ad 100644
+--- a/board/theobroma-systems/tiger_rk3588/MAINTAINERS
++++ b/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+@@ -10,4 +10,4 @@ F:	include/configs/tiger_rk3588.h
+ F:	arch/arm/dts/rk3588-tiger*
+ F:	configs/tiger-rk3588_defconfig
+ W:	https://embedded.cherry.de/product/tiger-som-rk3588-q7/
+-T:	git git://git.embedded.cherry.de/tiger-u-boot.git
++T:	git https://git.embedded.cherry.de/tiger-u-boot.git
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.45.2
 
