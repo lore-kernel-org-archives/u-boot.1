@@ -4,111 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB5A2C2BA18
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 07:39:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1314C27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 07:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC46E87C7E;
-	Thu, 20 Jun 2024 09:39:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A5AAC87C7E;
+	Thu, 20 Jun 2024 09:43:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GZrERtTV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="px/lIJNe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EA8388521; Thu, 20 Jun 2024 09:39:53 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 89D55809A8; Thu, 20 Jun 2024 09:43:10 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ADA987C7E
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 09:39:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EC2C87873
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 09:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a6f09b457fdso49883466b.2
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 00:39:51 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52bd48cf36bso646211e87.3
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 00:43:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718869190; x=1719473990; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=M6EU4d8LrV/Ueke3iuRp4pl3Ga+6FOrMKGxXcnG9ruk=;
- b=GZrERtTVv+DvLe6Zg7tpjTHfmzOcGmaLygNs/ZeV39+2O2dGekZ4K3xh+vR6OL/lxq
- YlZAcgs884iRiI3RVVg9+iJkoYIjXu9uaRWk0HqsLc4LzIV8pt90+myrQartVf8a68lh
- cBRZQSWBFVOnWAWa8jfo/6Q5TY6I3GORTySwjOT+b5zAa9XmtUst5Mm9zqhIZ0E8VwIz
- 97jExk3fza7uTWOv7e79cG0D5XW6Y6j7u0lHdlBcStyL0SXFH+0L3XWxwF9IsGnTiw1b
- Tth+90NvwwysGL3h7HCC3hgaC9EMho4TB4fnwaNf2BAowu6KBa1cb/Y37AuHK+8fcMCk
- jB+Q==
+ d=linaro.org; s=google; t=1718869387; x=1719474187; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=282fyFnlOqpclU9yoXXhdOW9Bq7g6LJgGe3tMA067NA=;
+ b=px/lIJNeWl4rfU2QZgG7qYViwg/cQNAVL7bd5JL9I4eN3LW+5FyH3VU2cCdokbEzIk
+ 9/r8YZfeaQewiTPa2D6qz7NvN8OHBFc1NOzCBkpncXtr0nYrgQeWGNa30nqDjOpIffxy
+ 7+0BuTPcPGZCr38S49Pp879Gbfkjtna2YXPu5E8/u1P5HYVXNpdk/A3lEJX85V5JY+pH
+ ADOqPpibJMGFFOnLyHbL64oj/cm3oOl79U6HKig6a2TXhx1C6+byzc4nF9BrK2MrNNCw
+ KEN6NLDfJsVod1hFc/jJsUZqK3uaheNvZ7+HpMNhY+z4/IGiOY177STj23jE3c5VefQy
+ rOxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718869190; x=1719473990;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=M6EU4d8LrV/Ueke3iuRp4pl3Ga+6FOrMKGxXcnG9ruk=;
- b=KG4PXj8iKG4C21eWP9HvgjYhF5fGjMTft2GO+CRFxV36JM1RMzaIl1a7Kb+VMZMgtn
- FkfcJjC/SePPMFVGOz5UW8XwQWo3xjccyXcVog7aX3pAqgWzZ8qn7qXFwXqWOtfIbq4d
- ProSuB3AaFg6lpkCNEmwKioTrBzhrROvsku9XIgeP7MPiy4zyL0JigY3NBsh2qtIUftH
- 6mm+0wlth81sj8AaI1cviRFv7xb3tvCDk0isg7OHtj9S4xqgHAwqzuTE4Pwuw5zA3OwQ
- JwpqLPFyRfSPWjTSXz73QPVsImxWAMYOdb5dN4zhj0DeQvbyXwod1S0n92t7GLz0dLTg
- CYXg==
+ d=1e100.net; s=20230601; t=1718869387; x=1719474187;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=282fyFnlOqpclU9yoXXhdOW9Bq7g6LJgGe3tMA067NA=;
+ b=YtFhXMUPycC9F3Gt5FiVnHSU2rg+4Wt4LWoCTb1SIY08UWTAr7KdJX8sAlXnpQIrCj
+ pjgfDVT6r8CBNnBlWVgtflypinliwYZqLL9n8w2MLr6okrs50pmsBiZmkKsQMyP2f4y4
+ fTJshcdBrHbAlqEAkG1VjqFVKux8bN+Q49W1BHR0tH+edmLfiMn92VWGAnIQ8gX8OKf+
+ cMKAz7m1pasSu64GowREQFh+QlBXLsQzBk4YoAwsuEaDAmewc6jOwm6lwPCuG3jaeqwl
+ IeTFJAOYeDUrzBqFYX6sOky1tQC27haWsC1vNn2GMzCIKHHHwLaDpH/9kweNU4alcp7O
+ SHGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVwyQX8Q5lfeNHDKQtAoTtMlXNSbxziTIGlseT6Fi30mNbbDOkrjLf417RpTSkBGClINxlgvVHaDUJ0jzlaTuEj1x85g==
-X-Gm-Message-State: AOJu0Yw+FxJqk3fKBnSmN8FLHeolQ6N0Tx1yoxD1uGr7QHy85bixRBCU
- Wdj0VZ7eU35s8WKFeiX8BjAfA73iB3ObPTHz3yD+ljuI711aPfZ1nSw74Uw0EWo=
-X-Google-Smtp-Source: AGHT+IHVIfG9uxE9peIApdgp8lAzabbTupri8C9xaJNkvUnb5Xxk/2En1LFiSwPAtMvYajH1HaCOiA==
-X-Received: by 2002:a17:907:c31c:b0:a6f:1378:1329 with SMTP id
- a640c23a62f3a-a6fab607142mr368624566b.4.1718869190507; 
- Thu, 20 Jun 2024 00:39:50 -0700 (PDT)
-Received: from [192.168.7.32] (679773502.box.freepro.com. [212.114.21.58])
+ AJvYcCVe18BitKgy5buk3CD5X2Je6XvazqJKkOCdbP2HtBlo1iPAnR2M9K537gnj5D/btNnCgpNjpV99nnlHgS72lzrY6vqCcA==
+X-Gm-Message-State: AOJu0YzK7cxMM2Zbaen6IUZZGxfZwFRDBrFN6J/smGiC1ygfS/panzOn
+ G3Xt2M7yG9LN13r/4B86gq7AAo8ku6EKuUgiHFQ2vRG1zZEE44w29vYxGA6i/vI=
+X-Google-Smtp-Source: AGHT+IEfEhXio9e0Lgo6onLFfma6GexW0gLj2sp1fwjvg9O+wizME77LhQOfaTNAm4+Xs6ZblC6/yQ==
+X-Received: by 2002:a05:6512:31c7:b0:52c:90ba:9705 with SMTP id
+ 2adb3069b0e04-52ccaa8862emr3998596e87.49.1718869384872; 
+ Thu, 20 Jun 2024 00:43:04 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fc3f3efb3sm25753266b.15.2024.06.20.00.39.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Jun 2024 00:39:50 -0700 (PDT)
-Message-ID: <d8e7d2cb-b402-43fa-8c3e-eaebfaf5b0fc@linaro.org>
-Date: Thu, 20 Jun 2024 09:39:48 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ 5b1f17b1804b1-4247d0b6402sm15506785e9.10.2024.06.20.00.43.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Jun 2024 00:43:04 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/5] phy: meson-gxl-usb2: remove
- phy_meson_gxl_usb2_set_mode
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org>
- <20240618-u-boot-usb-gxl-phy-set-mode-v1-3-6b41efa46e35@linaro.org>
- <54c7dcab-8925-4b20-b455-413a9bee8fda@denx.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <54c7dcab-8925-4b20-b455-413a9bee8fda@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: [PATCH v2 0/5] usb: meson: switch to set_mode callback and other
+ cleanup
+Date: Thu, 20 Jun 2024 09:42:49 +0200
+Message-Id: <20240620-u-boot-usb-gxl-phy-set-mode-v2-0-b81c027bc02c@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHndc2YC/43NMQ6DMAyF4asgz3VFQkClU+9RMQRiwBLFKAEEQ
+ ty9KSfo+L3hfwcE8kwBnskBnlYOLGOEviXQ9HbsCNlFg061SQv1wAVrkRmXUGO3DTj1Owaa8SO
+ OsMnKUjV5q5zVEAuTp5a3q/6uonsOs/j9OlvVb/2vuypMsaiNotaagrL8NfBovdzFd1Cd5/kFz
+ CGOT8cAAAA=
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1372;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=BXwVDHRfVU99OIOKma55zPHgrI85ZKsZ9sTjxKJag6c=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmc92F1qDclnH/7unSfuYE9G5eVTkKUYFdFdhHq1/a
+ Jr8ZRsmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZnPdhQAKCRB33NvayMhJ0aNhD/
+ 9vx4Gtf3Q7HNWVlvUc+GTmemplzxDT6J2IICpvDb1HYFZb9Ai500EaemEgYcPdSglyh454Ff8Fc7HV
+ ssbj8T2MB7qjdUt5mwamC/tvkrp9mc5YgnudoCZyKole3bZ5rFh/BvgoPXf9OxBP0Jml/qOB6FZwAh
+ ibhoV7VOKV43ZaJpG2CUxgXlzxDc6CtrjT4lgFZuMRoxtv3x6mFEwi2DJuwOE5AY5UvAzWFHjEIS/A
+ 2syP0zLF/Nxz1UbSg47el8zw47O8z6ssgLl9TKObrLQNr1n2iZAiUHCiyITmklbYUD9B2D36X0N1mE
+ G8Io1Ssund+55yPCLmL//ZFjL8QvPybibKO7EovOkXHXAtZyl37XaUesd2sirT40Vtn0G6r7BqwhmV
+ RklvYtQnreVn5/KBUxK472mSQeKmXtWp8EvCzlbZ0mPGxzsvdg54PWMehQtwlp9NslfB6+a2DLS20q
+ BmUTp5+WyMHiXQYZEszJeiCibaDA7lEjnQgVR1agWgm55DjpDmaelPI4OZLlLQvw9850XGLg+0G2zq
+ 1u4/xgRns/fZni13Lr7yAWsM+rmtuP/HQGUztjmVE4LkP3i9QaI3po9pG0SdhJrMC94kHj2VFQeCM1
+ BER0WTBGvuH5y3SbrBwpaYe2yZok7vMvJdYSeJtpfeMjNrVrOb34hUr0upwg==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,29 +109,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18/06/2024 16:56, Marek Vasut wrote:
-> On 6/18/24 9:55 AM, Neil Armstrong wrote:
-> 
-> [...]
-> 
->> @@ -205,7 +188,7 @@ static int phy_meson_gxl_usb2_power_off(struct phy *phy)
->>   struct phy_ops meson_gxl_usb2_phy_ops = {
->>       .power_on = phy_meson_gxl_usb2_power_on,
->>       .power_off = phy_meson_gxl_usb2_power_off,
->> -    .set_mode = _phy_meson_gxl_usb2_set_mode,
->> +    .set_mode = phy_meson_gxl_usb2_set_mode,
-> 
-> Oh, I see you did rename it here, so please ignore my comment on 1/5 . Maybe just mention in the 1/5 commit message that the rename is happening in follow up patch , if you are doing V2 at all .
+Switch to set_mode callback now it's available and in the same
+time make public functions static and drop useless mach-meson
+headers that are no more needed.
 
-Sure, let me update the commit message,
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v2:
+- Update commit message in patch 1 to specify why we use _ in the set_mode callback
+- Link to v1: https://lore.kernel.org/r/20240618-u-boot-usb-gxl-phy-set-mode-v1-0-6b41efa46e35@linaro.org
 
-Thanks,
-Neil
+---
+Neil Armstrong (5):
+      phy: meson-gxl-usb2: add set_mode callback
+      usb: dwc3: meson-gxl: switch to generic_phy_set_mode
+      phy: meson-gxl-usb2: remove phy_meson_gxl_usb2_set_mode
+      usb: dwc3: meson-gxl: drop usb-gx.h and make dwc3_meson_gxl_force_mode static
+      usb: dwc3: meson-g12a: drop usb.h and make dwc3_meson_g12a_force_mode static
 
+ arch/arm/include/asm/arch-meson/usb-gx.h | 17 -----------------
+ arch/arm/include/asm/arch-meson/usb.h    | 12 ------------
+ drivers/phy/meson-gxl-usb2.c             | 30 ++++++++++++++++++------------
+ drivers/usb/dwc3/dwc3-meson-g12a.c       |  2 +-
+ drivers/usb/dwc3/dwc3-meson-gxl.c        | 18 ++++++++++--------
+ 5 files changed, 29 insertions(+), 50 deletions(-)
+---
+base-commit: f1de28e67aa9b66bfca0fad3dc18446a6ec0b504
+change-id: 20240618-u-boot-usb-gxl-phy-set-mode-c3991c5f1da2
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
