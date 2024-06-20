@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15E0C27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 17:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B08C27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 19:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 385C7882AD;
-	Thu, 20 Jun 2024 19:53:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 35419884DC;
+	Thu, 20 Jun 2024 21:16:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QPeS2887";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JLBv1AKp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD89F884CA; Thu, 20 Jun 2024 19:53:47 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 6BD7288540; Thu, 20 Jun 2024 21:16:41 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C26E18813A
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 19:53:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C67B884DC
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 21:16:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a6f9fe791f8so200377366b.0
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 10:53:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a6efacd25ecso69128366b.1
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 12:16:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718906025; x=1719510825; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2nVV483uEJ40OjwOBFoGeCJb7jHFbFnOXmO72vTIj+U=;
- b=QPeS2887o439lqhjL+zhlNg84xjgahNG7QJbbgb7C7YeP9cgzzsJ5/K/boSBVpU1Kn
- 7oN89J1XKAbIdmXZ3xAk6iDGo++EEv1aY9/2zg/bj3TwSBpHWfcR2itw3yjqbNYKX9Hh
- 21m3SUdbrd4XQRlmLNLsZvO2AQa6oVMqMUMK2oX0/kTPU2AA0LclwhqgJBuqfdrVoFI1
- jOfBj5tvi+YtCht1zU2qKfDFgWuueOHCUtt7mzfotYKrDggWiw0e06q87H2AImBUO/E8
- 9r7FFv4pUgi6ag7ScNL2WTyCh9ziuPVeyzMQHInr+2NkK42bSN8BVaxf4i9bTXkZ8ghI
- oIUw==
+ d=linaro.org; s=google; t=1718910999; x=1719515799; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q5PkW08WBuMQykPjUWpPxx8HLYDMJAfcp6bEzzIfQhg=;
+ b=JLBv1AKpFAOP4DbGFZ+/GQ0zhy059jkhNR6phOOeChOetlcAWKPhmlRLwqzy0zhPEt
+ kPYdN5Qwn5EPpv9Je0Osqk7/DuK/oeyZWGJy66zapR+Vex7PDzZkJAisdqAlMcxEz0of
+ dj62/FRNTFPPwjc9VrBDdy+ss6biMVYJRGGFM96pCmwJ3kUCvcXQB3jt5ROiMLpu5WKd
+ 10q2chbfKwf/hCfl9dUirA/r7k4qYOWsJYZeIKdWnsvFfRPl3G1oMI5OEzpWKySEfQui
+ jpnH2xmQ97jFFCd3co966uQcM0r0YkiS+wROktxMb6V48y2CsuRkAniyP6z4hwa5uJGM
+ 64Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718906025; x=1719510825;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1718910999; x=1719515799;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2nVV483uEJ40OjwOBFoGeCJb7jHFbFnOXmO72vTIj+U=;
- b=SbeoD4DRnzEZCucPJSFD/b6RWoEUqq/6qfOFYZNDLsG5Qlwvf7f7NhIYHQPoEn0w0V
- pHlYfuRf07NWtEWURZJtHXJ5MzRt6XqMhKrq0mFedanvoUZifEp/5jx7jVVEgaClTBfN
- tfUC2Ni/TgU6RonL5fOr4JUwd+g1TvO+T773iiElUB38HRhNZUsFrCryeopRol1W8ehu
- WhYcWc4+AIgbxuydFi02UB3lOIpRHI5r59hzMJPitjtuWoa4o+8/5n0i2Xrg8u30O97c
- XFEcCU2QGh24+NhPaUclws41l5/50SNa4IpLs6WVO66lKleL/s2GFhabk/ajr+k7g8iJ
- a+KQ==
+ bh=Q5PkW08WBuMQykPjUWpPxx8HLYDMJAfcp6bEzzIfQhg=;
+ b=PZ4ebOqrUoMxSDDBCfyvXRbAHszi9DGko9fojcgL0iAG5LJ0pBp4qq2yQStpafons+
+ xVEQyH+4tonoMj0elMUdh4NdZBt34kKA7IDGpDhV5kbh6ueUkJRpOq0NMKxMwFmuYUwh
+ z7Hf64tPoUGV3QN0YvfR5ZVq1BKW15+K/7YtoDU9WQD9ZubPUjVpPpNPv//WopKlGrWD
+ j5nZhSNoZjd1bRu7tfJC1d15AANkpAStxlttrU0QJKTVeuf+xcT0DjhmUb3iA5nCkLpp
+ qDegBFc6cRzyQ8QcdyPj/o0cRLtR6G49fDhiBxDDI5uefOPK7rBfqnWez8x74paY4vaD
+ CeXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEEDNZlT+10dNAiBSLEjL2Sr2WSN+rzL+BLqvN8DNcV57TjsJoZONz9OJsfF7EPKY9GR96W+VxfNo5j+AKEBp4Pqp4ug==
-X-Gm-Message-State: AOJu0YyVD+QM3H9/YWJkfPccIfrdRRz4vXRObf9DlpfVGaARfklmUvUo
- 3oFX8u5PPAkKAqFgGrdCdzEOPYql98es0JSgEjscOnLr6cAbaH/0rbWg3YRhVeirEX5Q/cKfhf9
- zlUaIvY/xOwuz40tnWy3wv1bDm0A=
-X-Google-Smtp-Source: AGHT+IH/V9B5KZfhNd25hYmxyxV/Tu+tHYXRK1eI2AXGJDDU/NuMDfwYVonfE1lem8r+Pin615GYpokBL7JluoXLTng=
-X-Received: by 2002:a17:906:a257:b0:a6e:f540:8b5f with SMTP id
- a640c23a62f3a-a6f94f2ab1amr585625966b.19.1718906024943; Thu, 20 Jun 2024
- 10:53:44 -0700 (PDT)
+ AJvYcCVgKbhzG04L8seiHIOBTeLeEMUnSTucRatdK6WGxbGhaAw7H9k4O558PF1O1r7iseiDdQAyEQmeJW8iuMFikeu/J/UpcA==
+X-Gm-Message-State: AOJu0Yziha3MYG246Wwb0Fy+dCs6gYS/T91vk5UCEstin+cFQEBuVmUt
+ 3RsDTl74QIZlEGT7L0dwYOVM9NW2AJQSnW+1fUN4sz+YCyKYqMVxEO3Ls1+7izU=
+X-Google-Smtp-Source: AGHT+IFcXPc0KWuK5YRTGEjZnVWhqoZz5eNEXKBGZh1dLuTzcD+Rz3ZGrcoXvEPQUgPG23PD9bGTGg==
+X-Received: by 2002:a50:cc9d:0:b0:57c:6d89:eaef with SMTP id
+ 4fb4d7f45d1cf-57d07e5224bmr5109882a12.18.1718910997982; 
+ Thu, 20 Jun 2024 12:16:37 -0700 (PDT)
+Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
+ [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57cb72da790sm10015660a12.35.2024.06.20.12.16.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Jun 2024 12:16:37 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Subject: [PATCH 1/2] tpm: Fix return code, if the eventlog buffer is full
+Date: Thu, 20 Jun 2024 22:16:29 +0300
+Message-ID: <20240620191631.28811-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
- <20240620-tsd-http-git-clone-v1-2-666e8d6a8949@cherry.de>
- <09a91cfd-080a-4c39-8887-c36b42fc8ba2@gmail.com>
- <20240620170830.GQ68077@bill-the-cat>
- <d5f90fe2-230d-477b-8d4e-ff6088acebee@gmail.com>
-In-Reply-To: <d5f90fe2-230d-477b-8d4e-ff6088acebee@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 20 Jun 2024 18:53:34 +0100
-Message-ID: <CALeDE9PqLaxMvTK3chH06734sHs3JMH4U=gAV0rHA_RFrcbyRw@mail.gmail.com>
-Subject: Re: [PATCH next 2/2] rockchip: remove support for Theobroma Systems
- RK3368 Lion
-To: Alex Bee <knaerzche@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <foss+uboot@0leil.net>, 
- Klaus Goger <klaus.goger@cherry.de>, Heiko Stuebner <heiko.stuebner@cherry.de>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,41 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Jun 2024 at 18:41, Alex Bee <knaerzche@gmail.com> wrote:
->
->
-> Am 20.06.24 um 19:08 schrieb Tom Rini:
-> > On Thu, Jun 20, 2024 at 07:03:26PM +0200, Alex Bee wrote:
-> >> Am 20.06.24 um 12:24 schrieb Quentin Schulz:
-> >>> From: Quentin Schulz <quentin.schulz@cherry.de>
-> >>>
-> >>> No meaningful changes were made to this SoM since February 2021. Nobody
-> >>> from Theobroma has booted anything recent on that product since July
-> >>> 2021 at the latest. The product isn't available to buy anymore and
-> >>> disappeared from our website.
-> >>>
-> >>> This product is therefore unmaintained and it would be disingenuous to
-> >>> say the opposite, so drop support for RK3368 Lion.
-> >>>
-> >>> If you're a user of Lion, feel free to revert this patch or contact our
-> >>> sales/support department.
-> >> That's a pretty interesting support-strategy. While I really don't care for
-> >> this board, please don't go ahead and remove the whole TPL-/SPL-part for
-> >> RK3368 in yet another pointless "cleanup"  only because lion was one the of
-> >> last/only user. Even if EOL RK3368 is getting finally interesting in
-> >> regards of display pipeline as we are finally getting a OSS gpu driver [0].
-> >> I'm planning to add a board which uses TPL/SPL soonish (when my rare spare
-> >> time allows).
-> > Please update the MAINTAINERS file for the relevant to your future
-> > platform, or even better possibly get a skeleton of this platform
-> > posted. Thanks.
-> >
-> I don't think the whole platform would get removed as it has several users
-> (and is maintained) - I just was a bit worried that TPL/SPL support could
-> get removed, but now noticed there is one more user: evb-px5. So: sorry for
-> noise.
-> So I will go the usual way via upstream DT (linux tree) addition and so
-> forth.
+We currently return 'No space left on device' if the eventlong buffer
+we allocated is not enough. On a similar check later on that function
+during the call to tcg2_log_init() we return 'No buffer space
+available'. So switch both error codes to -ENOBUFS since we are always
+checking a buffer and not a device.
 
-It's easy enough to bring back the pieces from git, I have a geekbox
-somewhere I've always meant to take a closer look at.
+Fixes: 97707f12fdab ("tpm: Support boot measurements")
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/tpm-v2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+index a67daed2f3c1..91526af33acb 100644
+--- a/lib/tpm-v2.c
++++ b/lib/tpm-v2.c
+@@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+ 		if (elog->log_size) {
+ 			if (log.found) {
+ 				if (elog->log_size < log.log_position)
+-					return -ENOSPC;
++					return -ENOBUFS;
+ 
+ 				/*
+ 				 * Copy the discovered log into the user buffer
+-- 
+2.45.2
+
