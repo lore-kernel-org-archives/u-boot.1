@@ -4,93 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70157C2BBCA
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 23:19:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F17AC2BA18
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 23:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7DFC87DD3;
-	Fri, 21 Jun 2024 01:19:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0445587DEB;
+	Fri, 21 Jun 2024 01:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VllaSAre";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DXimConY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C913187DD3; Fri, 21 Jun 2024 01:19:49 +0200 (CEST)
+ id 71C3787EF6; Fri, 21 Jun 2024 01:30:32 +0200 (CEST)
 Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
  [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E04A879AF
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:19:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3889287DD3
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-25c4d8ae511so743114fac.2
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:19:47 -0700 (PDT)
+ 586e51a60fabf-25cb994dbfeso668908fac.0
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718925586; x=1719530386; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718926229; x=1719531029; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+xAqAe1RydCOyzHmYKRvlcj7UGd4AraJM0pkT4UWUms=;
- b=VllaSArevRRxbtvOdDnboPwSGFaosZugjOiLhQoHhssTSv40gG1qIb4jqUVCOyxoQ1
- 7IjGK6LzaLJUZHSrN01JgOS/YkGAJfEnN1BZaX1P6VkYX6kuq3RvCEtoFNrq1GH2l9/a
- KQgUbJb8D9XHx5MfwQVpwmE16xgTMye2pgqeo=
+ bh=dE6dUcsrvgzYITP1JWF3IvEN+/3tHXe+f882yn0QIHE=;
+ b=DXimConY6Lr8H4Sjji7lVOR6cBaQei9ehru3DRE4ULrAs7HGkxX2sD2fdQJmuY/mIJ
+ teYMJ8CkxE7tIk7hBvExBIRvs/S7PsRGmHPOduhXsphWHfyhMPxzN9cvptDlDI0/79Pd
+ oAgbB11SQdoCW4EuaBtew2JHk+SXKlW67T/JE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718925586; x=1719530386;
+ d=1e100.net; s=20230601; t=1718926229; x=1719531029;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+xAqAe1RydCOyzHmYKRvlcj7UGd4AraJM0pkT4UWUms=;
- b=FJf3208OVYS7Yq3KWzMFYczcpTvwHBf2kn/qaW/9TN3ifSSHL/CTPy/M2oN6eJFNaN
- dT8Dy3YCrO++RoBLvNcqa8L1USOe9sFDcscvHRVUmERx/U9Vht0MmNa7mNEUofpPpopE
- MbKtD1bXOfx+6unX5de/+4RSYKcsJLMe3Z2Cl1m2btyG/LSqPhEuWMe+chgUBGoVGJxw
- A4YPn6wdpDrSrftmHZw8SNWvHJl/DEalDu7W2mf/7FppZ+ThUVNCrY+e9OCHqG2YCRhx
- KfpPIKpASPEp86/42LvQsQH9WH91khSD02Z15mUjXmyK3UP3jzB197DQGYVuux2vM0kw
- ldSw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCImstWtDfkDfQSjc4EE2E/QIN/ljnk4Ql4OVY/WykTw7eZI4KI3JpdBUXR4q/8yzRt7/S3eZhLA6n1OKDAE7CKlcNww==
-X-Gm-Message-State: AOJu0Yx3CzLgPUPpcsAFGLS3UcFb+SrTphgzzM9agNFbssE/F2QbOg7R
- kOezPII1TlbJqP6Z3ZRmDSIcvg5kUBG3KRvDlLzoXVDEwU9Z0ncPQ58o9KNWlII=
-X-Google-Smtp-Source: AGHT+IGg3E3nQhQyGjRZHeqKVtQCTfzfI7gBA7iHkBfDsD4NLjPWmP9McspwWWQlSo4jD/TLezFyNA==
-X-Received: by 2002:a05:6870:970f:b0:24f:e100:ba2d with SMTP id
- 586e51a60fabf-25c94d72327mr7280652fac.54.1718925586074; 
- Thu, 20 Jun 2024 16:19:46 -0700 (PDT)
+ bh=dE6dUcsrvgzYITP1JWF3IvEN+/3tHXe+f882yn0QIHE=;
+ b=PqmFOSXRv23Nn/t9CiIdDL1PD2stkDXR7l+SOu9WAdiIawgoeKhkrWv+GhzlBeOKza
+ EBeWiOl8KUCOlmPa9i1U76HzxIMdgllm6JzOWi95ICIk1XWdUDTXxlVB8ZxXrMK+d4dK
+ Rl0CLUjLktRRUdzi9kue95DwIi2KgNqxiN1AkK6PeLmOiKxzh6IVmd3srcvnTwlPu47K
+ NGyJ9FKxJCpKCvQoQ+b7ZvDr/yhieiu1pqhjXH40Ci95uFGvWZWdFVshmPL8tHt+J6Yr
+ OUs4fc400LNOCECb9winIk1D2L1QMx90WJTe0LhIomdvwGxCkCCuHWGCjVkWqXlFEqw4
+ nQ3Q==
+X-Gm-Message-State: AOJu0YxUlv57SIKWytwlivFcZhzerYWhvDUOlq+fW230BL7R2eul1Z+d
+ a+KOyaXv1VCFMXEDF1aJGVIHXSRIk/8WQfr371BYPLEvUga3c8PLBkl5zwyJvQw=
+X-Google-Smtp-Source: AGHT+IGQogBX2itY1/CyX7tEUSsuqxFBYPVN6pqzcfwYYR0B0Y8G+crGdTdXloNn7Dzw1hcZyVOcZg==
+X-Received: by 2002:a05:6871:b28:b0:254:f00e:569b with SMTP id
+ 586e51a60fabf-25c948e9dc3mr7899010fac.6.1718926228895; 
+ Thu, 20 Jun 2024 16:30:28 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
  [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25cd498cefasm132469fac.24.2024.06.20.16.19.44
+ 586e51a60fabf-25cd49d18c1sm136568fac.28.2024.06.20.16.30.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 16:19:45 -0700 (PDT)
-Date: Thu, 20 Jun 2024 17:19:43 -0600
+ Thu, 20 Jun 2024 16:30:28 -0700 (PDT)
+Date: Thu, 20 Jun 2024 17:30:26 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-Message-ID: <20240620231943.GT68077@bill-the-cat>
-References: <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
- <8b6f5ad8-911f-4954-8b48-333986be0bf8@gmx.de>
- <CAC_iWjL-W604ne_O+U6B3_oGXJtQqZwak4N2qVRSnqdsAz=TbQ@mail.gmail.com>
- <CAFLszTigrcPCH3wwZUZAk75QttVS+cPMoj=hZJ9Ko9DqyN5vVA@mail.gmail.com>
- <20240617171623.GY68077@bill-the-cat>
- <CAFLszThO9Hnfv90X4yu49h7LcWCfgMztSGtQdGwrCt9UDH_cGA@mail.gmail.com>
- <20240618141524.GO68077@bill-the-cat>
- <CAFLszTj--0hi4=isy2Zmq9fBDFr5DMciFs+BZtfuvvmFO-9o9Q@mail.gmail.com>
- <20240619153207.GF68077@bill-the-cat>
- <CAFLszTiHSn4Vw7oMBOwOBC1gAHNYQ3Xc4mT54FkT-dfGSb0F0A@mail.gmail.com>
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
+Message-ID: <20240620233026.GU68077@bill-the-cat>
+References: <20240620131937.1130446-1-sjg@chromium.org>
+ <20240620131937.1130446-4-sjg@chromium.org>
+ <20240620143232.GM68077@bill-the-cat>
+ <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kfESqmW3v18nIVfO"
+ protocol="application/pgp-signature"; boundary="eZuMwjQ97vQVMHhe"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiHSn4Vw7oMBOwOBC1gAHNYQ3Xc4mT54FkT-dfGSb0F0A@mail.gmail.com>
+In-Reply-To: <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,225 +96,94 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kfESqmW3v18nIVfO
+--eZuMwjQ97vQVMHhe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 20, 2024 at 05:05:29PM -0600, Simon Glass wrote:
+On Thu, Jun 20, 2024 at 05:05:30PM -0600, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Wed, 19 Jun 2024 at 09:32, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 20 Jun 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Tue, Jun 18, 2024 at 09:03:37PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 18 Jun 2024 at 08:15, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Jun 18, 2024 at 06:43:51AM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 17 Jun 2024 at 11:16, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Mon, Jun 17, 2024 at 07:53:22AM -0600, Simon Glass wrote:
-> > > > > > > Hi,
-> > > > > > >
-> > > > > > > On Sat, 15 Jun 2024 at 01:03, Ilias Apalodimas
-> > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Heinrich
-> > > > > > > >
-> > > > > > > > resending the reply, I accidentally sent half of the messag=
-e...
-> > > > > > > >
-> > > > > > > > On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypron.g=
-lpk@gmx.de> wrote:
-> > > > > > > > >
-> > > > > > > > > On 14.06.24 09:01, Ilias Apalodimas wrote:
-> > > > > > > > > > On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <xypr=
-on.glpk@gmx.de> wrote:
-> > > > > > > > > >>
-> > > > > > > > > >> On 6/14/24 08:03, Ilias Apalodimas wrote:
-> > > > > > > > > >>> Hi Simon,
-> > > > > > > > > >>>
-> > > > > > > > > >>> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromi=
-um.org> wrote:
-> > > > > > > > > >>>>
-> > > > > > > > > >>>> It does not make sense to enable all SHA algorithms =
-unless they are
-> > > > > > > > > >>>> needed. It bloats the code and in this case, causes =
-chromebook_link to
-> > > > > > > > > >>>> fail to build. That board does use the TPM, but not =
-with measured boot,
-> > > > > > > > > >>>> nor EFI.
-> > > > > > > > > >>>>
-> > > > > > > > > >>>> Since EFI_TCG2_PROTOCOL already selects these option=
-s, we just need to
-> > > > > > > > > >>>> add them to MEASURED_BOOT as well.
-> > > > > > > > > >>>>
-> > > > > > > > > >>>> Note that the original commit combines refactoring a=
-nd new features,
-> > > > > > > > > >>>> which makes it hard to see what is going on.
-> > > > > > > > > >>>>
-> > > > > > > > > >>>> Fixes: 97707f12fda tpm: Support boot measurements
-> > > > > > > > > >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > >>>> ---
-> > > > > > > > > >>>>
-> > > > > > > > > >>>> Changes in v2:
-> > > > > > > > > >>>> - Put the conditions under EFI_TCG2_PROTOCOL
-> > > > > > > > > >>>> - Consider MEASURED_BOOT too
-> > > > > > > > > >>>>
-> > > > > > > > > >>>>    boot/Kconfig | 4 ++++
-> > > > > > > > > >>>>    lib/Kconfig  | 4 ----
-> > > > > > > > > >>>>    2 files changed, 4 insertions(+), 4 deletions(-)
-> > > > > > > > > >>>>
-> > > > > > > > > >>>> diff --git a/boot/Kconfig b/boot/Kconfig
-> > > > > > > > > >>>> index 6f3096c15a6..b061891e109 100644
-> > > > > > > > > >>>> --- a/boot/Kconfig
-> > > > > > > > > >>>> +++ b/boot/Kconfig
-> > > > > > > > > >>>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
-> > > > > > > > > >>>>    config MEASURED_BOOT
-> > > > > > > > > >>>>           bool "Measure boot images and configuratio=
-n when booting without EFI"
-> > > > > > > > > >>>>           depends on HASH && TPM_V2
-> > > > > > > > > >>>> +       select SHA1
-> > > > > > > > > >>>> +       select SHA256
-> > > > > > > > > >>>> +       select SHA384
-> > > > > > > > > >>>> +       select SHA512
-> > > > > > > > > >>>>           help
-> > > > > > > > > >>>>             This option enables measurement of the b=
-oot process when booting
-> > > > > > > > > >>>>             without UEFI . Measurement involves crea=
-ting cryptographic hashes
-> > > > > > > > > >>>> diff --git a/lib/Kconfig b/lib/Kconfig
-> > > > > > > > > >>>> index 189e6eb31aa..568892fce44 100644
-> > > > > > > > > >>>> --- a/lib/Kconfig
-> > > > > > > > > >>>> +++ b/lib/Kconfig
-> > > > > > > > > >>>> @@ -438,10 +438,6 @@ config TPM
-> > > > > > > > > >>>>           bool "Trusted Platform Module (TPM) Suppor=
-t"
-> > > > > > > > > >>>>           depends on DM
-> > > > > > > > > >>>>           imply DM_RNG
-> > > > > > > > > >>>> -       select SHA1
-> > > > > > > > > >>>> -       select SHA256
-> > > > > > > > > >>>> -       select SHA384
-> > > > > > > > > >>>> -       select SHA512
-> > > > > > > > > >>>
-> > > > > > > > > >>> I am not sure this is the right way to deal with your=
- problem.
-> > > > > > > > > >>> The TPM main functionality is to measure and extend P=
-CRs, so shaXXXX
-> > > > > > > > > >>> is really required. To make things even worse, you do=
-n't know the PCR
-> > > > > > > > > >>> banks that are enabled beforehand. This is a runtime =
-config of the
-> > > > > > > > > >>> TPM.
-> > > > > > > > > >>
-> > > > > > > > > >> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is sele=
-cted, U-Boot
-> > > > > > > > > >> cannot extend PCRs. So it seems fine to let these two =
-select the
-> > > > > > > > > >> complete set of hashing algorithms. As Simon pointed o=
-ut for
-> > > > > > > > > >> EFI_TCG2_PROTOCOL this is already done in lib/efi_load=
-er/Kconfig.
-> > > > > > > > > >
-> > > > > > > > > > It can. The cmd we have can extend those pcrs -- e.g tp=
-m2 pcr_extend 8
-> > > > > > > > > > 0xb0000000
-> > > > > > >
-> > > > > > > That's pretty normal for U-Boot though, since we want to avoi=
-d lots of
-> > > > > > > growth for things people might want control over. We can enab=
-le or
-> > > > > > > disable the SHA for the board, if this functionality is used =
-outside
-> > > > > > > of measured boot and tcg2, but someone is enabling the tpm co=
-mmand.
-> > > > > > >
-> > > > > > > > >
-> > > > > > > > > So this patch should also consider CMD_TPM_V2 and CMD_TPM=
-_V1.
-> > > > > > > > >
-> > > > > > > > > TPM v1 only needs SHA-1.
-> > > > > > > >
-> > > > > > > > I still prefer to imply all algos.
-> > > > > > >
-> > > > > > > 'imply' would be OK in this case as I can disable it for that=
- board. I
-> > > > > > > don't think it is in the spirit of U-Boot though.
-> > > > > > >
-> > > > > > > isn't someone checking the growth in U-Boot? Or do so few boa=
-rds have
-> > > > > > > TPMs that it didn't register? The size growth was 3.2KB on
-> > > > > > > chromebook_link.
-> > > > > >
-> > > > > > As always, yes, nearly every PR (I don't check the ones that to=
-uch just
-> > > > > > a single board for example) gets a world build before/after. In=
- this
-> > > > > > case I likely assumed that it was acceptable growth for enabling
-> > > > > > features. It sounds like some of the chromebook boards need to =
-be
-> > > > > > setting the features to cause link failure if a size is exceede=
-d?
-> > > > >
-> > > > > The problem is that some Intel platforms have binary blobs, so the
-> > > > > size isn't known unless you have a real blob.
-> > > >
-> > > > Alright, but can't we put in some limit based on what the current b=
-lobs
-> > > > are, or look at the last few blob releases and see if they change m=
-uch
-> > > > in size and put something in? Other platforms have blobs and size
-> > > > limits...
-> > >
-> > > Yes we can duplicate the entry sizes from binman into Kconfig options.
-> > > But I am not a fan of that...two variables controlling the same thing
-> > > and both can break, with nothing to connect them other than the poor
-> > > user.
-> > >
-> > > I wonder if some magic could solve this, inferring limits from the
-> > > binman image. But that is getting into yet another domain...
+> > On Thu, Jun 20, 2024 at 07:19:35AM -0600, Simon Glass wrote:
 > >
-> > I'm sorry, I just don't see what makes this case different from all of
-> > the other cases where we have to include blobs. We know there's X amount
-> > of flash available, blobs tend to take up Y and so we set
-> > BOARD_SIZE_LIMIT to Z where there's some room for growth in U-Boot but
-> > it takes in to account whatever limits the blobs place on us.
+> > > The Python virtualenv tool sets up a few things in the envronment,
+> > > putting its path first in the PATH environment variable and setting up
+> > > a sys.prefix different from the sys.base_prefix value.
+> > >
+> > > At present buildman puts the toolchain path first in PATH so that it =
+can
+> > > be found easily during the build. For sandbox this causes problems si=
+nce
+> > > /usr/bin/gcc (for example) results in '/usr/bin' being prepended to t=
+he
+> > > PATH variable. As a result, the venv is partially disabled.
+> > >
+> > > The result is that sandbox builds within a venv ignore the venv, e.g.
+> > > when looking for packages.
+> > >
+> > > Correct this by detecting the venv and adding the toolchain path after
+> > > the venv path.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > Why are we using PATH at all in this case? Shouldn't we just be setting
+> > CROSS_COMPILE=3D/full/path/to/the/prefix ?
 >=20
-> The difference is that now we are using Binman, we have the limit in
-> the image description, so adding it to Kconfig a) involves
-> calculations and perhaps guesswork and b) results in two limits stored
-> in different places which may conflict.
+> This is the -p option to buildman. The original commit was:
 >=20
-> I thought of a way to handle this in Binman, so will send that in the
-> next version.
+> commit bb1501f2c22c979961b735db775605cccedd98f6
+> Author: Simon Glass <sjg@chromium.org>
+> Date:   Mon Dec 1 17:34:00 2014 -0700
+>=20
+>     buildman: Add an option to use the full tool chain path
+>=20
+>     In some cases there may be multiple toolchains with the same name in =
+the
+>     path. Provide an option to use the full path in the CROSS_COMPILE
+>     environment variable.
+>=20
+>     Note: Wolfgang mentioned that this is dangerous since in some cases t=
+here
+>     may be other tools on the path that are needed. So this is set up as =
+an
+>     option, not the default. I will need test confirmation (i.e. that this
+>     commit fixes a real problem) before merging it.
+>=20
+> As to why we don't always do this, well that is back in the mists of
+> time, 10 years ago.
+>=20
+> BTW, this is raising a point ("let's change the behaviour") separate
+> from the goal of this commit, which is to fix a problem with venv,
+> albeit that if we made -p the only option, then we could potentially
+> drop all PATH changes. Perhaps toolchains are built differently now,
+> such that they always invoke their tools using the same prefix and
+> dir?
 
-I'm still confused, sorry. This sounds like a whole lot more work than
-setting BOARD_SIZE_LIMIT reasonably so that we fail to link and CI
-errors out, before we get to buildman and needing to make this case
-still fail but with fake blobs.
+Wait, I'm confused. buildman internally updates its own PATH to avoid
+calling CROSS_COMPILE with the full path due to a concern about
+toolchain bugs?
 
 --=20
 Tom
 
---kfESqmW3v18nIVfO
+--eZuMwjQ97vQVMHhe
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0uQ8ACgkQFHw5/5Y0
-tyz1awv/dqxSvNOdqL/tEoBce6t6F82kp5u/G1OSY0Q14ffRVbouV9wXC2jpw8Im
-kQeFuqdyKnRytGCXq7ZCqfEGUe9DSto/Ete26yoUd2qRl8DafvQhG6tR7iTWNCT0
-KQpYlpGI4fcivpfYnUhgMKrY6qOs2Q0l9EzF+BrQII3pDlJOXSjExY5Qm1YsO/2k
-ZmBq2QmDhsbuD+rcA/lJTkblzk5wpY/qDmv7/CEIRBYYlITcOLqUTZC6g4DE5/tH
-AEsvm7otUMqXqcnHmDq+Li68P6ZS9rqzJ1jxfC/Ufe1WTTngbmTGdHZe/kbfuIGB
-g+riVCZC0uJ5jQRHXm+ZJFwkhgyZ3b/44tItT3FMjQztEpxAAC0SVy8TbRPJpx9x
-rr4G6mkvguUos7OHYLvsztucNlKp4KSm++CWjDEKb89trF1aIThFf8hvr4B0LBly
-eyng+FCd8IFQNSdnU8OJLnn5jNEU8gKAuu5cykcmPYXdREoa0AhDMP6oULylMdzO
-CCUx6vdN
-=ZnnS
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0u44ACgkQFHw5/5Y0
+tywdxQwAtk7WBHNMWFSN1kZhSSLrlbadxEArCA+z/bYt5O6YXU7r2pAoE+zGIx/O
+Kr7DcwCulrKLfNA099KET2U/EzaiK5NupvV+BGM2lGb8dWE75U+evWffBcej96VX
+grnCQcLvKwxEOA/xcjgH6vSR0o3gqGuKWnOdllaRyaz/9Z18ifwMaEechuNo7+nn
+nerfrOultiXoLcik6wFUW0/tkrM3KvFGyzgTq4DkUyza6M9RvSuhIz41C8YlbE6x
+vBqbbwCl3NpOiszrdBryyvqX1okNKF14NorpfM400k42uCLbtcgbAtl3MRiNdrds
+E02ZkcQXDW94REwJtewZ1VHq4K+Sp+xWrPLuJLeZbd9DDQ4WL7aJoGTHfMtkz836
+08takKVhgCBiSsY1Bz2WFYx4D6xLODu50vkt+ATs3DR0CjwJXnm+vHU3CMBOrsXD
+zPv8lBDrmnsPv9tRMGE3Tho1EmaEMK0ugo7ln4pLtptqUkMnkALcyWxE2k+8jXCq
+szbeV0GQ
+=yOOS
 -----END PGP SIGNATURE-----
 
---kfESqmW3v18nIVfO--
+--eZuMwjQ97vQVMHhe--
