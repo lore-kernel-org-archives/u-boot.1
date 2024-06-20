@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB8A9C2BBCA
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 23:08:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E86C2BA18
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 23:09:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72BC3885BF;
+	by phobos.denx.de (Postfix) with ESMTP id D590188569;
 	Fri, 21 Jun 2024 01:06:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nuiHZAOP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hp8SVGOh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D6E58855E; Fri, 21 Jun 2024 01:06:49 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 5B8E987E13; Fri, 21 Jun 2024 01:06:50 +0200 (CEST)
+Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com
+ [IPv6:2607:f8b0:4864:20::d41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F5C687D1A
+ by phobos.denx.de (Postfix) with ESMTPS id DF94387B77
  for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:06:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7ea0b5e0977so56530339f.2
+Received: by mail-io1-xd41.google.com with SMTP id
+ ca18e2360f4ac-7ebe019b9cdso51284939f.0
  for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:06:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1718924806; x=1719529606; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mfcLD1zI16U3eN8QPXtyDsRvUuj2hvtPCbl0nEveeBM=;
- b=nuiHZAOPd/HqqbHLg6AvK2zdj8MUcfb4Extid09fn2arBzjtvDa12lZ9nVtMNLBI7r
- cdmG1NWVOL9A5/gn+U4sL+GwgIHpVfhgOHR1RzArEj9xx7gW08MlRxfUytNLg/MgKPz1
- 6IORriXQqWFDg39k2Ohdv1lB/cqBAEh9dDTCg=
+ bh=A6d6Au1EjTcFyCj48QfjSy1CLH2vHtoyvSNInjPJf5g=;
+ b=Hp8SVGOhpo/hqzdbkWukpUr1ylMJ9ST0gZCHE6dni2zKzZmdVjcK9pxansvNP0Hd0G
+ i4i1n5USa2ieIC4h5JdHXEMgAsSwloRQBvNOK6w0ynaiq/oOju+S7NsoQAygOU5tPOBf
+ MXg4FoWGMjwroIlETClWH9DRDAK0wwKTpE7/I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1718924806; x=1719529606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mfcLD1zI16U3eN8QPXtyDsRvUuj2hvtPCbl0nEveeBM=;
- b=cCCDCNv4l/JUktayfpD5YssG8l89jwA8H4ExDFmR5p/xJH1+G+kvcvNjKuIvGoOval
- 5ER0i5KGjv+IqST8wc5Tj0QFuSaR+NFrFUg86vzPAG0GfOYQvhaQGUkFJoiPslSx2i0u
- fAEdiV0IStAed+AXbXKmymRBbsZCUGrZJSTCHfelDAw0ce2Jp+c09C+lWZG0zkyfUZPN
- BkBW9b/1mZ3sKdYGrCVizfnalWh3YKx1Nf44477P+OgGFyUSiHlsQNfISYuYOqDmlZJN
- 19xCVdpAF9wOu9+7reNieSAXBBXd+0FJFDaylzPtkuropULlEs8KV8RWzSSb9fMA48RG
- seOQ==
-X-Gm-Message-State: AOJu0Yy0bmBsuiNiRhIExnp9ShiycwHG1CVRA+qEtesA13/xAoGlkb5f
- IsvHTOxgM651LZHu60vQC2K39nkUeIvpevy8jp5mxg5GF3s6jA36j9++JcPXHRogX+4V6Q8Y045
- ndA==
-X-Google-Smtp-Source: AGHT+IG2taZTGw8gvm0zJNCEZUutOC8O2aXxLKthfXPEUfg278UYTmZLKkmp1La7ItFGGlwbDGHmBA==
-X-Received: by 2002:a05:6602:15d1:b0:7e1:a7e8:eecb with SMTP id
- ca18e2360f4ac-7f13edde67cmr748517939f.6.1718924805853; 
- Thu, 20 Jun 2024 16:06:45 -0700 (PDT)
+ bh=A6d6Au1EjTcFyCj48QfjSy1CLH2vHtoyvSNInjPJf5g=;
+ b=U5J1Vt/xzc+DaaFtjLZmRR7biaNve5jAhoaLbC5hlNs02fj3GvopHv4RXwN3bWW8Ms
+ mFYWxqMrUzUeG/DEISQ8Crs2P7ibXxiXBWDikrc5uQRk9Vys2pQz/cHO5KtGWfEqKrYC
+ 9yY9BUihB8HSqz9nzUxJjdlw8wYOEDvBJA9TXaCsBVsXGVPQmQy0lVPhUWMTCXG3BAOM
+ rTXCpQUFdU/m/oaZANWMHy/pG7cAbGwMZs/cwywOLfdyvzPtyqNJjDTQSDd/a9gCu+GG
+ PjgLDcZVWjm4nax9sD8rFt2Oze0J5Z9a/OWF+BNW3k1yITUJp2WAR8N2kji+wfD7A4JJ
+ LsIA==
+X-Gm-Message-State: AOJu0YzJleIHvRW0tJwoiVqenIf7xdztjEjpzDGUqa1sAUgrWxWIYJsN
+ JuoEFYRc6bKYB2j7Y3Dak0GH5jjhScn1t/7gyo8F3DDZ3zoJmb4BGqFTJq5RT50LjYJrP/JW9MW
+ GLMn9
+X-Google-Smtp-Source: AGHT+IHxFxB5cf4sOZjtWZRdYfpgsrbWr5vyLcxUAWHl6MOjecFLr+P/qTd3/zj7hyTTdPrj0hneMw==
+X-Received: by 2002:a05:6602:3429:b0:7eb:708a:3264 with SMTP id
+ ca18e2360f4ac-7f13ee0f2cfmr718115539f.10.1718924806574; 
+ Thu, 20 Jun 2024 16:06:46 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4b9d110f566sm53269173.44.2024.06.20.16.06.45
+ 8926c6da1cb9f-4b9d110f566sm53269173.44.2024.06.20.16.06.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 16:06:45 -0700 (PDT)
+ Thu, 20 Jun 2024 16:06:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v3 10/18] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-Date: Thu, 20 Jun 2024 17:06:17 -0600
-Message-Id: <20240620230625.1797397-11-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
+Subject: [PATCH v3 11/18] rockchip: veyron: Add logging for power init
+Date: Thu, 20 Jun 2024 17:06:18 -0600
+Message-Id: <20240620230625.1797397-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240620230625.1797397-1-sjg@chromium.org>
 References: <20240620230625.1797397-1-sjg@chromium.org>
@@ -97,62 +91,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It does not make sense to enable all SHA algorithms unless they are
-needed. It bloats the code and in this case, causes chromebook_link to
-fail to build. That board does use the TPM, but not with measured boot,
-nor EFI.
+Add better logging for power init so that CONFIG_LOG_ERROR_RETURN can
+be enabled.
 
-Since EFI_TCG2_PROTOCOL already selects these options, we just need to
-add them to MEASURED_BOOT as well.
-
-Note that the original commit combines refactoring and new features,
-which makes it hard to see what is going on.
-
-Fixes: 97707f12fda tpm: Support boot measurements
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
 (no changes since v2)
 
 Changes in v2:
-- Put the conditions under EFI_TCG2_PROTOCOL
-- Consider MEASURED_BOOT too
+- Remove the superfluous if() and drop the debug() as well
 
- boot/Kconfig | 4 ++++
- lib/Kconfig  | 4 ----
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ board/google/veyron/veyron.c | 30 ++++++++++++------------------
+ 1 file changed, 12 insertions(+), 18 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 6f3096c15a6..b061891e109 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
- config MEASURED_BOOT
- 	bool "Measure boot images and configuration when booting without EFI"
- 	depends on HASH && TPM_V2
-+	select SHA1
-+	select SHA256
-+	select SHA384
-+	select SHA512
- 	help
- 	  This option enables measurement of the boot process when booting
- 	  without UEFI . Measurement involves creating cryptographic hashes
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 189e6eb31aa..568892fce44 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -438,10 +438,6 @@ config TPM
- 	bool "Trusted Platform Module (TPM) Support"
- 	depends on DM
- 	imply DM_RNG
--	select SHA1
--	select SHA256
--	select SHA384
--	select SHA512
- 	help
- 	  This enables support for TPMs which can be used to provide security
- 	  features for your board. The TPM can be connected via LPC or I2C
+diff --git a/board/google/veyron/veyron.c b/board/google/veyron/veyron.c
+index 32dbcdc4d10..6d4c9debdee 100644
+--- a/board/google/veyron/veyron.c
++++ b/board/google/veyron/veyron.c
+@@ -29,44 +29,38 @@ static int veyron_init(void)
+ 	int ret;
+ 
+ 	ret = regulator_get_by_platname("vdd_arm", &dev);
+-	if (ret) {
+-		debug("Cannot set regulator name\n");
+-		return ret;
+-	}
++	if (ret)
++		return log_msg_ret("vdd", ret);
+ 
+ 	/* Slowly raise to max CPU voltage to prevent overshoot */
+ 	ret = regulator_set_value(dev, 1200000);
+ 	if (ret)
+-		return ret;
++		return log_msg_ret("s12", ret);
+ 	udelay(175); /* Must wait for voltage to stabilize, 2mV/us */
+ 	ret = regulator_set_value(dev, 1400000);
+ 	if (ret)
+-		return ret;
++		return log_msg_ret("s14", ret);
+ 	udelay(100); /* Must wait for voltage to stabilize, 2mV/us */
+ 
+ 	ret = rockchip_get_clk(&clk.dev);
+ 	if (ret)
+-		return ret;
++		return log_msg_ret("clk", ret);
+ 	clk.id = PLL_APLL;
+ 	ret = clk_set_rate(&clk, 1800000000);
+ 	if (IS_ERR_VALUE(ret))
+-		return ret;
++		return log_msg_ret("s18", ret);
+ 
+ 	ret = regulator_get_by_platname("vcc33_sd", &dev);
+-	if (ret) {
+-		debug("Cannot get regulator name\n");
+-		return ret;
+-	}
++	if (ret)
++		return log_msg_ret("vcc", ret);
+ 
+ 	ret = regulator_set_value(dev, 3300000);
+ 	if (ret)
+-		return ret;
++		return log_msg_ret("s33", ret);
+ 
+ 	ret = regulators_enable_boot_on(false);
+-	if (ret) {
+-		debug("%s: Cannot enable boot on regulators\n", __func__);
+-		return ret;
+-	}
++	if (ret)
++		return log_msg_ret("boo", ret);
+ 
+ 	return 0;
+ }
+@@ -81,7 +75,7 @@ int board_early_init_r(void)
+ 	if (!fdt_node_check_compatible(gd->fdt_blob, 0, "google,veyron")) {
+ 		ret = veyron_init();
+ 		if (ret)
+-			return ret;
++			return log_msg_ret("vey", ret);
+ 	}
+ #endif
+ 	/*
 -- 
 2.34.1
 
