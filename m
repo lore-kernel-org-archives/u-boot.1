@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E428FC41513
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 14:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C09E1C2BA1A
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 14:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B6548855F;
-	Thu, 20 Jun 2024 16:35:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21D8888385;
+	Thu, 20 Jun 2024 16:39:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X2yZY5YB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZqBm/R6w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85362884DC; Thu, 20 Jun 2024 16:35:33 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 360CF8846F; Thu, 20 Jun 2024 16:39:56 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6672788535
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:35:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B54D88276
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:39:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-25cb994dbfeso412601fac.0
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:35:31 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-25cb3f1765bso538394fac.1
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:39:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718894130; x=1719498930; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0p+AASaCOYNDlpgRD7Vd0jYYGMQD5Klhf8pimkZzLWg=;
- b=X2yZY5YB/N05ZoGyr7J1qYH4AlFFmAWpGVAXgwudf7on4H42HwKNPREcuBuHpCxuXy
- 6IlMS4FI0ZTphaMlDSC5Q3fmmZAYKBP6XKhBzBDgtlxpiFs3NDoImjDGwN/pzEErRtmx
- zJsv1VSlqMSPMEUGZhGOARovgXNYBAjLohH7o=
+ d=konsulko.com; s=google; t=1718894393; x=1719499193; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aI50R7j4lvNxVfKVcnoIZkZjBuBR7L6gW2yE064bVi4=;
+ b=ZqBm/R6wNqsmeD9UnCimEUIi2gO+0Cf8xLR4LLG2K0JUt1x54cDnmw5da+I6GrDl5g
+ C7PqO1t+EFNdjVs32utsqU24c9Ylg6D0+QdfoIV/3+TQm9R1O6tHekVnq1E4DscMI3VF
+ PZpqLN8UsIeFIPpdc6F/AJko8mdiyvhoXZnP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718894130; x=1719498930;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0p+AASaCOYNDlpgRD7Vd0jYYGMQD5Klhf8pimkZzLWg=;
- b=hwKsr3sObaBzYTh8Ywu14nvS26kHrdXySOifqnoJr3q8DW5fXinoQVcBYdcpwCjXeg
- m5js55zVhonoK+kdgodhaUQdqp+SM2N0weKdg2emO1ffB9+uk8UiSOo5CETPsI3ac/5k
- +rhj7G2GTtf5TtkO6ILFc5igvZC7Od1OhtXa5UmN2JnmukiFV7OLaws4GbgsOHySFSOa
- 49EwcRb66Dg7WVNAfFdD8TQ8wLdEy6mmh/Hx6VChOErOtZ0ArC8iR5cZmtMvH1XvsXJb
- nt0qGzD9UQp4heTrdMe2pUB3hVg2v9u/Bom2Go8VCodgnKFCS20r2t5WOWmgh7ovBMe8
- vgrA==
-X-Gm-Message-State: AOJu0YyYMLvrGVy/d47hSvE2L4L+UycLTf7oyHDOnqAcB9bCp/JaVo+b
- 1rgNtwqiPF+tHTgqa508y1pWkQNEU8riIX16eUk/LlUhaZFk2S96AkKX3yT8qkMw+5XBj83/Gyt
- cjRk=
-X-Google-Smtp-Source: AGHT+IHaWbGfUW6W8nIqVNu0aAVwO1T7KdokiiL3u8WYXKatCKxL4/5/5SES8+SeH0neqxcX1BaE1Q==
-X-Received: by 2002:a05:6871:10b:b0:259:89fc:db65 with SMTP id
- 586e51a60fabf-25c94d70a63mr5658924fac.50.1718894130152; 
- Thu, 20 Jun 2024 07:35:30 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-45.totalplay.net.
+ d=1e100.net; s=20230601; t=1718894393; x=1719499193;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aI50R7j4lvNxVfKVcnoIZkZjBuBR7L6gW2yE064bVi4=;
+ b=HwJdGmEw4ce9aXxbKJjZ2ZwhMxDq1sbwWkaYM/94saHkocKpZXS1uhQk9GXELHyicq
+ fLUeo6swDUEyRNeSy1ka+e3Lx1rprTMpfALMfk5L+yIT72h0dAUROP3QGTH5LxYdLLdN
+ Y2EXjSjJkQpFLHkIbj3CZNNSuYLOwNJ2El2BPR4hE4GK9GPEKmR5E5XkvImqhuHrJZ/8
+ mX/f1lnhbPemIWD9i9FMe/sl0/bmN5yFhflLZiLLOOSMJjuwj8/Ho/lSQtUlPq47R6X8
+ SpPew9GsNJKAPQZxCutBQ8oD/cx+RxWZwDxt+D9UDZ+zy+JP7y6onLyw5b5bN/G5gB0C
+ P+dA==
+X-Gm-Message-State: AOJu0YyWY9Sh9/6tVR07gaF7PRE8Mg6bN2IvMdZp+4tRC3oUHMs173uV
+ vjmzOupFukoMSQynEPwv961qjLvRHRh2BmUWWtGyDWpTICsEEXSNMrvPzfJo+9M=
+X-Google-Smtp-Source: AGHT+IEKM3+JDmoRc1GxJCkz/uLa1UtvcizlXeaMcz4SSpfTkvnryJ4Nq9QCviwxNlfnLoCChH4xDw==
+X-Received: by 2002:a05:6870:b69e:b0:254:fb0c:cd6a with SMTP id
+ 586e51a60fabf-25c94d70a31mr6159853fac.48.1718894392780; 
+ Thu, 20 Jun 2024 07:39:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
  [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25cc7165817sm176573fac.14.2024.06.20.07.35.29
+ 586e51a60fabf-2567aa1140asm4269758fac.23.2024.06.20.07.39.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 07:35:29 -0700 (PDT)
+ Thu, 20 Jun 2024 07:39:52 -0700 (PDT)
+Date: Thu, 20 Jun 2024 08:39:50 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, harsimransingh.tungal@arm.com
-Cc: rui.silva@linaro.org
-In-Reply-To: <20240612100421.47938-1-harsimransingh.tungal@arm.com>
-References: <20240612100421.47938-1-harsimransingh.tungal@arm.com>
-Subject: Re: [PATCH] arm: dts: corstone1000: enable secondary cores for FVP
-Message-Id: <171889412934.3544072.14789652742091813667.b4-ty@konsulko.com>
-Date: Thu, 20 Jun 2024 08:35:29 -0600
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: Re: [PATCH] RFC: Add a tag for the world builds
+Message-ID: <20240620143950.GO68077@bill-the-cat>
+References: <20240620133346.1135479-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8b+DnrDHoY6Dd8Y6"
+Content-Disposition: inline
+In-Reply-To: <20240620133346.1135479-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,15 +93,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 12 Jun 2024 11:04:21 +0100, harsimransingh.tungal@arm.com wrote:
 
-> Add the secondary cores nodes in the dts file
-> 
-> 
+--8b+DnrDHoY6Dd8Y6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Thu, Jun 20, 2024 at 07:33:46AM -0600, Simon Glass wrote:
 
--- 
+> Currently the world builds run on all runners, including faster and
+> slower ones.
+>=20
+> The difference can be quite dramatic, with some builders 4x as fast as
+> others, resulting in just one world build taking between 20 minutes and
+> an hour and 20 minutes.
+>=20
+> Add a tag so that we can select which builders run these CPU-intensive
+> jobs.
+>=20
+> With this tag we can also increase CPU utilisation by running multiple
+> QEMU tests in parallel. Currently these tests leave most machines fairly
+> idle, since we cannot run more than one world build on a machine.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+This conflicts I think with Jiaxun's desire to make our GitLab job
+runnable on the public runners too, and where we'll end up with 10 world
+build jobs ala Azure.
+
+--=20
 Tom
 
+--8b+DnrDHoY6Dd8Y6
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0PzYACgkQFHw5/5Y0
+tyxoeQwAlxc/oFwonXqb//FF9cBdlt+YcSgeWbT4WT2YcbNA3vq8h+QkoBdi3hET
+a2QB5dHw1L+Vm4PmnxXFi4io4+lJIFSrAzsk4mm7ZFNT09XnLuyReSyhBm6X9BFm
+pECkhw6fAJYGXMIaSOucjjyKpWFFTFsSfJxwOzfRJH9VzpQ2RMdu6hB9SIM3BajM
+MU5RmvG8rO5U3Y9+sbw5AWnGkV5ccJuntSvYJmSxu1H8QzU81twuOj7Dd99gF48D
+EYW0PIuufISkvT+nWHBp3wI+In+WsGhvYkPAHgulOcamVbywNnleyTBpRCefIfzg
+EzAxRhR3hO9h2Am7SxF94hvCQux0jzrjmQ4WO8CZ6i1szGuTqHwB97ULCnY7s/y2
+MJ1W6yz0XarUekmNtrZW7tgM31Qym7P2JXuq9RezRT8ksCMztDfLNZEToF7jM29U
+xvVIo0vwHQos4jJr+noKRnkWqMkCHc6jaAh8uxVAyX2L+JSTJVaVS7yiQ4ZBwTc1
+vZO1Jvc6
+=8+V7
+-----END PGP SIGNATURE-----
+
+--8b+DnrDHoY6Dd8Y6--
