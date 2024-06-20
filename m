@@ -4,79 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD2DC2BA18
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 13:38:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E2DC27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 13:59:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B59C48853F;
-	Thu, 20 Jun 2024 15:38:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id CFCD288543;
+	Thu, 20 Jun 2024 15:59:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="IbaleXwF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nYoRbovM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3746588540; Thu, 20 Jun 2024 15:38:21 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A695C88543; Thu, 20 Jun 2024 15:59:06 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10B64884F9
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 15:38:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE1C08854B
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 15:58:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718890693; x=1719495493; i=xypron.glpk@gmx.de;
- bh=Ra2Jh0IMeWGrgylT6P9Ct1v3w7DtNa9gieG51AV9DiY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=IbaleXwFqtPTZevFVdp18TwjqP3XBmcCd/vh8y9u/UolNen1e//riSo3ty8xIZTr
- bKeP0CZIBxosaOezT7O3CM9ZsA7Wtk1uJDtVqbUv8rlx7/lokmMa1NtRjWr8rKlKP
- Nd1/5eadzV01XPs2tIx/x/wNkhmU3clWge3trzaIIOCWKuT/mTPGRwPnHAEe+OueL
- fFDYfB5KIr13mWp1gc23dOPP5qVatyzBDI4RYHapfEzJUHhhGE3S/82KTLjEoXn1I
- rsk6tKtdzFllyiztPrDmX8tFunmWibR7oW65I4plsTEOXW5zZBnFlf2jM0FkiyvZH
- fLn7zZmlbL2DNu7aGw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MVeI2-1rspUH00pA-00R5qW; Thu, 20
- Jun 2024 15:38:13 +0200
-Message-ID: <d2526c98-8198-4b8b-ab10-20bda0151da1@gmx.de>
-Date: Thu, 20 Jun 2024 15:38:03 +0200
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a6f8ebbd268so338866166b.0
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 06:58:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718891937; x=1719496737; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8vZpB7Xa0+4sYqr37ZVc3qBwTh6XfYB461JZux+DB+0=;
+ b=nYoRbovMktkhbNjI8BxGNT2pDERU+ZvArl2eMi/piufC7wY3lMoc2J8YY1erLQXyvG
+ 1EbRx/O3BCzyPD+HYXkwjN+9T+amaC4smZiXpL7LhUg/jaCzwfzXsdTWYJpx1QUEMMMI
+ y3CdahBGe5nE5FwNuPN7rgN+YrPdQZWirkg6DC+8/l/lft6oLjauMp21IaX56eqPegvO
+ FNykpgRCy+DssbspMg7isHVhLYRmW6PCanufF7fxB4+S/9iN+h2tk3YZN9yFwOjS1Xv6
+ 77Nbxt+dDcEaJySRPaOtoNBCDscYh43ukLpfPXT71Acnc0cG207bqOF5I/Nyu7tI+nhN
+ YXiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718891937; x=1719496737;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8vZpB7Xa0+4sYqr37ZVc3qBwTh6XfYB461JZux+DB+0=;
+ b=LESheQiklTVt4hV7WSt1wkXPb/cSMkOdxPUNo1IDVJxZAZZO7oJwecwkg7m65yNnaF
+ hdbK7AHtvtECXpEwx3bisJuqv11akSmPkeyrgV+zRFlQcZN1IBVWt47AlIbzrjHkfZRk
+ IZRWKl1KRldO93Neter81ueAo8NU1VizrnfC47FbMMP31bSuVgBdKAMwyaZ5A4R9FNgC
+ B0YqMyrvPONN+ApvNZOcqmAt/3/VYnia+8h09qWSW1aK9PFYOf+QUXFZoNYVGzovwdv4
+ 72+qU0gE5KMCAL0RNd8jtxvGh6z3YZhvkIsmUd1J9uwar/Bj+eyBdKs7oKwTR3Xx8IMR
+ aeEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXNW88NqbIqIzbaN0mKZrWlHLfcj22/IfdybPJjb0mLULk5a2vn37ZR0tunNWsaIkrShg9+KtkScAjeNDqziEVci1ENIQ==
+X-Gm-Message-State: AOJu0YwMHae4bbfZB6GRux09d7kznlsYncJmmmIwqGaNOrjWbuJEgCYT
+ 8+e6Y/Diby1yT1MQvqO+MziVnLW2AOiEd8RZa2nVvSqo/uxLRte+84IiibAzVe8=
+X-Google-Smtp-Source: AGHT+IG4msm1sRnLSdRtqYqZc18RH+hMDvyRPahfmLMzYNiaSEkpFxVL/7c5CndPXk0bOUJcrW1afA==
+X-Received: by 2002:a17:906:1348:b0:a6f:b352:a74b with SMTP id
+ a640c23a62f3a-a6fb352a781mr287217566b.38.1718891937066; 
+ Thu, 20 Jun 2024 06:58:57 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::ebdd? ([2a02:8109:aa0d:be00::ebdd])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6f56fa67ecsm760914866b.215.2024.06.20.06.58.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Jun 2024 06:58:56 -0700 (PDT)
+Message-ID: <7c12b0ac-5785-4199-9faf-5661b8809137@linaro.org>
+Date: Thu, 20 Jun 2024 15:58:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20240620131937.1130446-1-sjg@chromium.org>
- <20240620131937.1130446-4-sjg@chromium.org>
+Subject: Re: [PATCH v7 1/4] Add fdt_kaslrseed function to add kaslr-seed to
+ chosen node
+To: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>
+References: <20240618210609.1744727-1-tharvey@gateworks.com>
+ <20240618210609.1744727-2-tharvey@gateworks.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240620131937.1130446-4-sjg@chromium.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240618210609.1744727-2-tharvey@gateworks.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:kAEWzJj7EXxmWPTvzLw0645+3c8NHIJXvkfMjaZEmqQiZmyYdd3
- bVrvMXy45SwmeKSTpYsAEMrkWRg/Bbl4Zw/7YwA/eZahQjDy0b9YGa3vzKLn4/czL3g3ANv
- efP0cDGd5WiVpwyCK4Cigt4GQ46jlG0Zodwv4+bKtTic3PpBYhO/llphkhVGlopAlk9pL8e
- lo/HqOdsDU48I6puWbXWg==
-UI-OutboundReport: notjunk:1;M01:P0:3z8zksbDKiA=;KhihSdTwPR8z1F+zcj750OTghIm
- sXik11m56j+iHGZOhdWnXX0cRiXxiQ/Fc4Bl7W+7LPFmeM6TMUO4SiM06rFCzZ9ZsuHeCEYlI
- LXySBDMqvL46c5kwGtg79vfAT4MlIHZWycxzwhSAQYJ+sek4DvlWgPN5lNiCl3Hn4eRA5QoeA
- YuzqiQOIKLiTL3XvSygGa/LjDBgcBw4LOPjIHhED11kNBnuWrCkul79bpy/MQFmCo1ect4VIR
- shN17ATXxzRur3iE7sXtuRkF7i/F49JdGctmLHnqJ4Ttvero1J80LO7dPMXNQ/aerIKLkzoi8
- b7JBKO63gMZwro+z1gxk0S1bBC1u9umshJQlsep2Vpj6cioz/JpOfWRziXKQGEKvmAAlIB7fi
- /fGuGER2BmFg6E747qnkvnxlYw0UbKUTS1Z3KKVCizsSK+ROtBQymYXbU/4lYQ6Zruvq9Bx2L
- HWMkHojo/El3IDnsc9RZdyI9ZdTUhUdbhiX5jkS1QVMrZ0vjStDaNQ0274Itp2fge85Uzm66D
- +J6jcnf25caajoxFropR9bXCeEg7qRMneLwQCVIBEUb2sRz4RBD7+2ePrgfghyAENGLcNbeHd
- AFnH7VNGgMLMQ8FvlyoLl/fmihgKk6aubgsMe/sWzwiQIQzAnz7vmSWrrLAX5KgY/I3kotrMX
- SXq/rsu0737RsajIG8XGDOURNTeKCMSJj8F66qrqlro40fL1WKY826BxtPKrVtUF7KvpPLotQ
- Nj7Lepb3pwcEDkr1x/00nNHwAjqnY20ZSZYXuD84UokcA0h7eoaMDSSLqvZiLWfGNQSJ/QmMj
- 7vtMDeCgZlwGJcm5bszODlXKf4Sev+3iwF8GjwW2NRN9Q=
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,260 +106,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20.06.24 15:19, Simon Glass wrote:
-> The Python virtualenv tool sets up a few things in the envronment,
+Hi Tim,
 
-Nits
-
-%s/envronment/environment/
-
-> putting its path first in the PATH environment variable and setting up
-> a sys.prefix different from the sys.base_prefix value.
->
-> At present buildman puts the toolchain path first in PATH so that it can
-> be found easily during the build. For sandbox this causes problems since
-> /usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
-> PATH variable. As a result, the venv is partially disabled.
-
-If you want to remember a PATH, why don't you use a differnet variable
-like U_BOOT_TOOLPATH to convey this information instead of manipulating
-the PATH variable?
-
->
-> The result is that sandbox builds within a venv ignore the venv, e.g.
-> when looking for packages.
->
-> Correct this by detecting the venv and adding the toolchain path after
-> the venv path.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+On 18/06/2024 23:06, Tim Harvey wrote:
+> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+> randomize the virtual address at which the kernel image is loaded, it
+> expects entropy to be provided by the bootloader by populating
+> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+> 
+> Add a fdt_kaslrseed function to accommodate this allowing an existing
+> node to be overwritten if present. For now use the first rng device
+> but it would be good to enhance this in the future to allow some sort
+> of selection or policy in choosing the rng device used.
+> 
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Andy Yan <andy.yan@rock-chips.com>
+> Cc: Akash Gajjar <gajjar04akash@gmail.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Devarsh Thakkar <devarsht@ti.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Chris Morgan <macromorgan@hotmail.com>
 > ---
->
->   tools/buildman/bsettings.py |  3 ++
->   tools/buildman/test.py      | 83 +++++++++++++++++++++++++++++++++++++
->   tools/buildman/toolchain.py | 31 ++++++++++++--
->   3 files changed, 113 insertions(+), 4 deletions(-)
->
-> diff --git a/tools/buildman/bsettings.py b/tools/buildman/bsettings.py
-> index e225ac2ca0f..1be1d45e0fa 100644
-> --- a/tools/buildman/bsettings.py
-> +++ b/tools/buildman/bsettings.py
-> @@ -31,6 +31,9 @@ def setup(fname=3D''):
->   def add_file(data):
->       settings.readfp(io.StringIO(data))
->
-> +def add_section(name):
-> +    settings.add_section(name)
+> v6:
+>   - collected tags
+> v5:
+>   - move function to boot/fdt_support.c
+>   - remove ability to select rng index and note in the commit log
+>     something like this as a future enhancement.
+>   - fixed typo in commit message s/it's/its/
+>   - use cmd_process_error per Michal's suggestion
+> v4:
+>   - add missing /n to notice in kaslrseed cmd
+>   - combine ints in declaration
+>   - remove unused vars from board/xilinx/common/board.c ft_board_setup
+> v3:
+>   - skip if CONFIG_MEASURED_BOOT
+>   - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+>   - pass in rng index and bool to specify overwrite
+>   - remove duplicate error strings printed outside of fdt_kaslrseed
+>   - added note to commit log about how EFI STUB weeds out kalsr-seed
+> v2:
+>   - fix typo in commit msg
+>   - use stack for seed to avoid unecessary malloc/free
+>   - move to a library function and deduplicate code by using it
+>     elsewhere
+> ---
+>   boot/fdt_support.c    | 44 +++++++++++++++++++++++++++++++++++++++++++
+>   include/fdt_support.h | 10 ++++++++++
+>   2 files changed, 54 insertions(+)
+> 
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> index 2bd80a9dfb18..b1b2679dea0c 100644
+> --- a/boot/fdt_support.c
+> +++ b/boot/fdt_support.c
+> @@ -7,12 +7,15 @@
+>    */
+>   
+>   #include <common.h>
+> +#include <dm.h>
+>   #include <abuf.h>
+>   #include <env.h>
+>   #include <log.h>
+>   #include <mapmem.h>
+>   #include <net.h>
+> +#include <rng.h>
+>   #include <stdio_dev.h>
+> +#include <dm/device_compat.h>
+>   #include <dm/ofnode.h>
+>   #include <linux/ctype.h>
+>   #include <linux/types.h>
+> @@ -274,6 +277,47 @@ int fdt_initrd(void *fdt, ulong initrd_start, ulong initrd_end)
+>   	return 0;
+>   }
+>   
+> +int fdt_kaslrseed(void *fdt, bool overwrite)
+> +{
+> +	int len, err, nodeoffset;
+> +	struct udevice *dev;
+> +	const u64 *orig;
+> +	u64 data = 0;
 > +
->   def get_items(section):
->       """Get the items from a section of the config.
->
-> diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-> index f92add7a7c5..83219182fe0 100644
-> --- a/tools/buildman/test.py
-> +++ b/tools/buildman/test.py
-> @@ -146,6 +146,7 @@ class TestBuild(unittest.TestCase):
->           self.toolchains.Add('arm-linux-gcc', test=3DFalse)
->           self.toolchains.Add('sparc-linux-gcc', test=3DFalse)
->           self.toolchains.Add('powerpc-linux-gcc', test=3DFalse)
-> +        self.toolchains.Add('/path/to/aarch64-linux-gcc', test=3DFalse)
->           self.toolchains.Add('gcc', test=3DFalse)
->
->           # Avoid sending any output
-> @@ -747,6 +748,88 @@ class TestBuild(unittest.TestCase):
->           self.assertEqual([
->               ['MARY=3D"mary"', 'Missing expected line: CONFIG_MARY=3D"m=
-ary"']], result)
->
-> +    def call_make_environment(self, tchn, full_path, in_env=3DNone):
-> +        """Call Toolchain.MakeEnvironment() and process the result
-> +
-> +        Args:
-> +            tchn (Toolchain): Toolchain to use
-> +            full_path (bool): True to return the full path in CROSS_COM=
-PILE
-> +                rather than adding it to the PATH variable
-> +            in_env (dict): Input environment to use, None to use curren=
-t env
-> +
-> +        Returns:
-> +            tuple:
-> +                dict: Changes that MakeEnvironment has made to the envi=
-ronment
-> +                    key: Environment variable that was changed
-> +                    value: New value (for PATH this only includes compo=
-nents
-> +                        which were added)
-> +                str: Full value of the new PATH variable
-> +        """
-> +        env =3D tchn.MakeEnvironment(full_path, env=3Din_env)
-> +
-> +        # Get the original environment
-> +        orig_env =3D dict(os.environb if in_env is None else in_env)
-> +        orig_path =3D orig_env[b'PATH'].split(b':')
-> +
-> +        # Find new variables
-> +        diff =3D dict((k, env[k]) for k in env if orig_env.get(k) !=3D =
-env[k])
-> +
-> +        # Find new / different path components
-> +        diff_path =3D None
-> +        new_path =3D None
-> +        if b'PATH' in diff:
-> +            new_path =3D diff[b'PATH'].split(b':')
-> +            diff_paths =3D [p for p in new_path if p not in orig_path]
-> +            diff_path =3D b':'.join(p for p in new_path if p not in ori=
-g_path)
-> +            if diff_path:
-> +                diff[b'PATH'] =3D diff_path
-> +            else:
-> +                del diff[b'PATH']
-> +        return diff, new_path
-> +
-> +    def test_toolchain_env(self):
-> +        """Test PATH and other environment settings for toolchains"""
-> +        # Use a toolchain which has a path, so that full_path makes a d=
-ifference
-> +        tchn =3D self.toolchains.Select('aarch64')
-> +
-> +        # Normal cases
-> +        diff =3D self.call_make_environment(tchn, full_path=3DFalse)[0]
-> +        self.assertEqual(
-> +            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-> +             b'PATH': b'/path/to'}, diff)
-> +
-> +        diff =3D self.call_make_environment(tchn, full_path=3DTrue)[0]
-> +        self.assertEqual(
-> +            {b'CROSS_COMPILE': b'/path/to/aarch64-linux-', b'LC_ALL': b=
-'C'},
-> +            diff)
-> +
-> +        # When overriding the toolchain, only LC_ALL should be set
-> +        tchn.override_toolchain =3D True
-> +        diff =3D self.call_make_environment(tchn, full_path=3DTrue)[0]
-> +        self.assertEqual({b'LC_ALL': b'C'}, diff)
-> +
-> +        # Test that virtualenv is handled correctly
-> +        tchn.override_toolchain =3D False
-> +        sys.prefix =3D '/some/venv'
-> +        env =3D dict(os.environb)
-> +        env[b'PATH'] =3D b'/some/venv/bin:other/things'
-> +        tchn.path =3D '/my/path'
-> +        diff, diff_path =3D self.call_make_environment(tchn, False, env=
-)
-> +
-> +        self.assertIn(b'PATH', diff)
-> +        self.assertEqual([b'/some/venv/bin', b'/my/path', b'other/thing=
-s'],
-> +                         diff_path)
-> +        self.assertEqual(
-> +            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-> +             b'PATH': b'/my/path'}, diff)
-> +
-> +        # Handle a toolchain wrapper
-> +        tchn.path =3D ''
-> +        bsettings.add_section('toolchain-wrapper')
-> +        bsettings.set_item('toolchain-wrapper', 'my-wrapper', 'fred')
-> +        diff =3D self.call_make_environment(tchn, full_path=3DTrue)[0]
-> +        self.assertEqual(
-> +            {b'CROSS_COMPILE': b'fred aarch64-linux-', b'LC_ALL': b'C'}=
-, diff)
->
->   if __name__ =3D=3D "__main__":
->       unittest.main()
-> diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
-> index 79c7c11a110..cd917d8b7eb 100644
-> --- a/tools/buildman/toolchain.py
-> +++ b/tools/buildman/toolchain.py
-> @@ -172,13 +172,14 @@ class Toolchain:
->           else:
->               raise ValueError('Unknown arg to GetEnvArgs (%d)' % which)
->
-> -    def MakeEnvironment(self, full_path):
-> +    def MakeEnvironment(self, full_path, env=3DNone):
->           """Returns an environment for using the toolchain.
->
->           Thie takes the current environment and adds CROSS_COMPILE so t=
-hat
+> +	err = fdt_check_header(fdt);
+> +	if (err < 0)
+> +		return err;
 
-Maybe you could resolve these nits too:
-
-%s/Thie/This/
-
->           the tool chain will operate correctly. This also disables loca=
-lized
->           output and possibly unicode encoded output of all build tools =
-by
-
-%s/unicode/Unicode/
-
-Best regards
-
-Heinrich
-
-> -        adding LC_ALL=3DC.
-> +        adding LC_ALL=3DC. For the case where full_path is False, it pr=
-epends
-> +        the toolchain to PATH
->
->           Note that os.environb is used to obtain the environment, since=
- in some
->           cases the environment many contain non-ASCII characters and we=
- see
-> @@ -187,15 +188,21 @@ class Toolchain:
->             UnicodeEncodeError: 'utf-8' codec can't encode characters in=
- position
->                569-570: surrogates not allowed
->
-> +        When running inside a Python venv, care is taken not to put the
-> +        toolchain path before the venv path, so that builds initiated b=
-y
-> +        buildman will still respect the venv.
+All the paths that call fdt_kaslrseed() call fdt_check_header() 
+beforehand, I think it's safe to drop this.
 > +
->           Args:
->               full_path: Return the full path in CROSS_COMPILE and don't=
- set
->                   PATH
-> +            env (dict of bytes): Original environment, used for testing
->           Returns:
->               Dict containing the (bytes) environment to use. This is ba=
-sed on the
->               current environment, with changes as needed to CROSS_COMPI=
-LE, PATH
->               and LC_ALL.
->           """
-> -        env =3D dict(os.environb)
-> +        env =3D dict(env or os.environb)
-> +
->           wrapper =3D self.GetWrapper()
->
->           if self.override_toolchain:
-> @@ -206,7 +213,23 @@ class Toolchain:
->                   wrapper + os.path.join(self.path, self.cross))
->           else:
->               env[b'CROSS_COMPILE'] =3D tools.to_bytes(wrapper + self.cr=
-oss)
-> -            env[b'PATH'] =3D tools.to_bytes(self.path) + b':' + env[b'P=
-ATH']
-> +
-> +            # Detect a Python virtualenv and avoid defeating it
-> +            if sys.prefix !=3D sys.base_prefix:
-> +                paths =3D env[b'PATH'].split(b':')
-> +                new_paths =3D []
-> +                to_insert =3D tools.to_bytes(self.path)
-> +                insert_after =3D tools.to_bytes(sys.prefix)
-> +                for path in paths:
-> +                    new_paths.append(path)
-> +                    if to_insert and path.startswith(insert_after):
-> +                        new_paths.append(to_insert)
-> +                        to_insert =3D None
-> +                if to_insert:
-> +                    new_paths.append(to_insert)
-> +                env[b'PATH'] =3D b':'.join(new_paths)
-> +            else:
-> +                env[b'PATH'] =3D tools.to_bytes(self.path) + b':' + env=
-[b'PATH']
->
->           env[b'LC_ALL'] =3D b'C'
->
+> +	/* find or create "/chosen" node. */
+> +	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
+> +	if (nodeoffset < 0)
+> +		return nodeoffset;
 
+Arguably, this shouldn't be the responsibility of this function, maybe 
+it would be better to error our here?
+> +
+> +	/* return without error if we are not overwriting and existing non-zero node */
+> +	orig = fdt_getprop(fdt, nodeoffset, "kaslr-seed", &len);
+> +	if (orig && len == sizeof(*orig))
+> +		data = fdt64_to_cpu(*orig);
+> +	if (data && !overwrite) {
+> +		debug("not overwriting existing kaslr-seed\n");
+> +		return 0;
+> +	}
+> +	err = uclass_get_device(UCLASS_RNG, 0, &dev);
+> +	if (err) {
+> +		printf("No RNG device\n");
+> +		return err;
+> +	}
+> +	err = dm_rng_read(dev, &data, sizeof(data));
+> +	if (err) {
+> +		dev_err(dev, "dm_rng_read failed: %d\n", err);
+> +		return err;
+> +	}
+> +	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
+> +	if (err < 0)
+> +		printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
+> +
+> +	return err;
+> +}
+> +
+>   /**
+>    * board_fdt_chosen_bootargs - boards may override this function to use
+>    *                             alternative kernel command line arguments
+> diff --git a/include/fdt_support.h b/include/fdt_support.h
+> index 4b71b8948d99..741e2360c224 100644
+> --- a/include/fdt_support.h
+> +++ b/include/fdt_support.h
+> @@ -463,4 +463,14 @@ void fdt_fixup_board_enet(void *blob);
+>   #ifdef CONFIG_CMD_PSTORE
+>   void fdt_fixup_pstore(void *blob);
+>   #endif
+> +
+> +/**
+> + * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
+> + *
+> + * @blob:	fdt blob
+> + * @overwrite:	do not overwrite existing non-zero node unless true
+> + * Return:	0 if OK, -ve on error
+> + */
+> +int fdt_kaslrseed(void *blob, bool overwrite);
+> +
+>   #endif /* ifndef __FDT_SUPPORT_H */
+
+-- 
+// Caleb (they/them)
