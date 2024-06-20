@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA8CFC2BA1A
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 19:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68FCBC2BA1A
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 19:51:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FFF8884DC;
-	Thu, 20 Jun 2024 21:20:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8AAF08852D;
+	Thu, 20 Jun 2024 21:51:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FLzNqcpB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sAUOmLkR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FC7288532; Thu, 20 Jun 2024 21:20:26 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id 5AA49884FF; Thu, 20 Jun 2024 21:51:14 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B79088126
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 21:20:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19A258813A
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 21:51:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-681ad26f4a5so794763a12.2
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 12:20:24 -0700 (PDT)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1f9bf484d9fso10966185ad.1
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 12:51:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718911222; x=1719516022; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718913070; x=1719517870; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Bf5cfr2F4ori7yPnh6I9ev+ME+j830JkF8En1IzuFw8=;
- b=FLzNqcpBJsPfumDiWu9e8rPwHpwRYMgoRfAJHzEm9QwKH/JJLrV7h8HWkiak+s2Coe
- B6d28/NbAEoDOO20mFV4UocguJW3UQXDXE4J5M8Z85iyCdIg268MMyp4l5GQj0cDZbTS
- slNqmO0FvCd5ZhCzWzLFLIE2+qPzOh4Uwa9VE6V0qYpS9JZPs8578E8MdAZLmCDO+g9t
- wY/afOJj57p6x5fBoT7biNBLv+vVGd3ji980IQx7JiE44suyIiJQufDmHTRtteCEp8+f
- TRdT4Bq3Ll2DHMsDUwly1hpYRfjlZXft/RnRZmE3KVeWEK+RNz9zV12Dl+KBaxAp/3lo
- GG3Q==
+ bh=pc+TgaCaOxHP4fjHJq11490AEnBt28EKsBZscPiWtGA=;
+ b=sAUOmLkR1FJozT3nECoGsE73Oms6R0Fak2P5ZZTXk3DVbgV9BXfju5yNw8ZFyHpfrW
+ fe5IpvZ7HpravvQU/2CLOo2xqklGBZG1iocBCZ7Qr7hIif2aBm0d/eiwn6onZCPDsmZ1
+ 1rCeWuhBDO3bVa3jIsR8WXPGyiVsvpTD7U9rNA3/Bkg7XprykQW0jKkKWrCzIB059m2P
+ ka8cffrrNW2Z54nF3eCyKSNPv8EU24nuO8JQjve4BrFgo0DV8AxQ5kqgWO46Y/zGKO1U
+ SQULuK5cnXRexw5QjAWjxVEXuITy0igdcSqg9Z/Wb03x4StiD5TXf2RCqgrxf/7xhIbn
+ P8uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718911222; x=1719516022;
+ d=1e100.net; s=20230601; t=1718913070; x=1719517870;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Bf5cfr2F4ori7yPnh6I9ev+ME+j830JkF8En1IzuFw8=;
- b=hilRGd+hXMQnIO3Bg0BMu+BDASjZ3vSRwHOEER/biv+94EGOLs/0cVpGtMx/y+w6jr
- ECSCpojcXjX6EstYcHvMuaONxnYATH9eXmS08h2MdsE1ZG5b6lmeu94s6tlXNDR35BI+
- lO2ue6N7Oha6IVrFHnvR0kK4vDjC4egRLmkgYK6C9aOvUh9rSW6MS1glsz4PUcUWneMp
- 8H0107VkgcCaiw9K6F4bgnoVFNxVsDaM3VU0rP+uhJo/Tl0iwZ/4dlAiRnzMFpSEoHFw
- ObDvbi1efWokV38fOGXIfhyUatQRxglOxGi3GaN0xjH8IMYQ+MkwRusHbipSZTG81fsX
- rbjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2pHL8xPbBpf8bberZt1ZnktHHeHOIwlls9xJocUtVaI9dvrR3/JnK2Nk3G/uAzP95i241WLhISECOASzF8sqL7qKuWA==
-X-Gm-Message-State: AOJu0YxMzyMaxvT0f4XWdwtLmyOpbtk5uukWLYH5+6aVNL0WOBv/6Cve
- BLT4qLfErUKJNpBIhSAnWNXnH6Sd7f7bDAZg8drVZe2HcFoXgMMm0gi82lbptFSMqE2QDXPQZoT
- yRV+6lkZE+BJHQ3Z1jR8ZosHk2h6RL6sIt4ag1Q==
-X-Google-Smtp-Source: AGHT+IGjD8XS4gKvWCN3p7vVH9ObDoloCLkOGCQQnOWxbUburyYnNODa36UA4meYX8ErVgf2+1BaBFzav2p+Yst+pdI=
-X-Received: by 2002:a17:90a:e40b:b0:2c7:5622:cf02 with SMTP id
- 98e67ed59e1d1-2c7b59f8783mr6324718a91.2.1718911222400; Thu, 20 Jun 2024
- 12:20:22 -0700 (PDT)
+ bh=pc+TgaCaOxHP4fjHJq11490AEnBt28EKsBZscPiWtGA=;
+ b=WfDr4iel/zfjuxi5ozol9ZlzKiKw0rAciGvV9en3Ge5DT5FFYdDGT9GjlaWsvPqC0Y
+ lJwwanV2iRc85/9rIjXOO6SQKh4ZCRbVoAwGtxC2rpqjoQsm3Hqe4LKqm7Mq3RJpYUYv
+ me+7fchFbdDMjWm7zNHsAPZWBYwKu7kQhnn2AWm/HpWHUYfS3b1z0qozEEtdPzG3PpDL
+ 4+0WrQZjLh7Jy8xyIwYFih0zquzneoXI558VNB3HoP2y268qIBRuTpoAmKhOHAvtfkqs
+ PT//CemovzNrEEh/8LbBp2/OTsNAXPK9/evcmAoPBacucfsxuiqHhCdLuK13zuzo4hVh
+ sD+w==
+X-Gm-Message-State: AOJu0Yy9XBAuXcIMvckBaCcgp3fXpqloukaqfqhBjnb4I6EC3pk2bhSq
+ sBuNHaQigtNsYowjAE8o0ZOWKNpEzREUksCvdb8Lm4JJoIyFP9wvYkZLYRtQWf+a1cZi1ALQqi5
+ yWGvUlmN8w2X0H0GzHTDy/P5Isz4ruS0Cm3Wnjg==
+X-Google-Smtp-Source: AGHT+IFMHyx8ewaL/l+wDdzx/N/gT1lkdvIIUDwAaYMKEPOX304MYpVxh/Q16qCL8wNFEl7XG/Menh/WypfUU0zU3s4=
+X-Received: by 2002:a17:903:8c6:b0:1f8:50df:548e with SMTP id
+ d9443c01a7336-1f98b28eff9mr136329485ad.33.1718913070332; Thu, 20 Jun 2024
+ 12:51:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240620191631.28811-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20240620191631.28811-1-ilias.apalodimas@linaro.org>
+References: <20240618154952.12314-1-ilias.apalodimas@linaro.org>
+ <ccc37e73-4687-4bb6-9515-8a4d8d4c2063@gmx.de>
+In-Reply-To: <ccc37e73-4687-4bb6-9515-8a4d8d4c2063@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Jun 2024 22:19:46 +0300
-Message-ID: <CAC_iWjKafGj7wMtWAD0G_g-ArfQBoL_22oWjo69jjzjOvC030g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] tpm: Fix return code, if the eventlog buffer is full
-To: xypron.glpk@gmx.de
-Cc: Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Date: Thu, 20 Jun 2024 22:50:33 +0300
+Message-ID: <CAC_iWj+L5kGz=Z6AJMZkf0jRjJ0J98fWZpxJw5o9BUkhh7ELdQ@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: adjust config options for capsule updates
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Jon Humphreys <jhumphreysti@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,38 +86,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Jun 2024 at 22:16, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> We currently return 'No space left on device' if the eventlong buffer
-> we allocated is not enough. On a similar check later on that function
-> during the call to tcg2_log_init() we return 'No buffer space
-> available'. So switch both error codes to -ENOBUFS since we are always
-> checking a buffer and not a device.
->
-> Fixes: 97707f12fdab ("tpm: Support boot measurements")
+Hi Heinrich,
 
-and now I wonder why checkpatch didn't warn on this. There's a
-'commit' missing after the Fixes tag. Sorry!
+On Thu, 20 Jun 2024 at 18:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 18.06.24 17:49, Ilias Apalodimas wrote:
+> > EFI_IGNORE_OSINDICATIONS is used to ignore OsIndications if setvariable
+> > at runtime is not supported and allow the platform to perform capsule
+> > updates on disk. With the recent changes boards can conditionally enable
+> > setvariable at runtime using EFI_RT_VOLATILE_STORE.
+> >
+> > So let's make the options depend on each other and clarify their
+> > functionality. When EFI_RT_VOLATILE_STORE, setvariable at runtime is
+> > supported and EFI_IGNORE_OSINDICATIONS, which also breaks the EFI spec, is
+> > not needed anymore.
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   lib/efi_loader/Kconfig | 2 ++
+> >   1 file changed, 2 insertions(+)
+> >
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index 430bb7f0f7dc..c84064de1366 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -220,6 +220,8 @@ config EFI_CAPSULE_ON_DISK
+> >   config EFI_IGNORE_OSINDICATIONS
+> >       bool "Ignore OsIndications for CapsuleUpdate on-disk"
+> >       depends on EFI_CAPSULE_ON_DISK
+> > +     depends on !EFI_RT_VOLATILE_STORE
+>
+> EFI_RT_VOLATILE_STORE does not imply that the OS that you are running
+> supports writing variables to ubootefi.var or eMMC.
+>
+> How about
+>
+> default y if !EFI_RT_VOLATILE_STORE
 
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  lib/tpm-v2.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Sure, that works for me. I'll send a v2
+
+Cheers
+
 >
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index a67daed2f3c1..91526af33acb 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
->                 if (elog->log_size) {
->                         if (log.found) {
->                                 if (elog->log_size < log.log_position)
-> -                                       return -ENOSPC;
-> +                                       return -ENOBUFS;
+> Best regards
 >
->                                 /*
->                                  * Copy the discovered log into the user buffer
-> --
-> 2.45.2
+> Heinrich
+>
+> > +     default y
+> >       help
+> >         There are boards where U-Boot does not support SetVariable at runtime.
+> >         Select this option if you want to use the capsule-on-disk feature
 >
