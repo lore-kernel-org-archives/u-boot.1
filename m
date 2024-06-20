@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D8EDC2BBCA
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 23:07:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0E8C2BA18
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 23:07:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5174A88578;
-	Fri, 21 Jun 2024 01:05:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D77F5884AC;
+	Fri, 21 Jun 2024 01:06:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PGq0UE/N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ebeP0gYP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2337E8834D; Fri, 21 Jun 2024 01:05:49 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 9C38F8834D; Fri, 21 Jun 2024 01:06:43 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9194388571
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:05:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0B3E87B77
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:06:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6fa11ac8695so818002a34.3
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:05:46 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-7eee7728b00so54503439f.3
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 16:06:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718924745; x=1719529545; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tKEmERM0Xl14veeKj5cDr0pv1hbWbnTqHlOZFMMNZZg=;
- b=PGq0UE/NtzLHpH26UtW8JLuVdRv7mzzny2zulObO1HoZmyYQ5+qM7vIYLef8HZ12eH
- q1eAc3osyj/XrzX8ibAJ6tY7wo7H7g/9kf1ukMnXzoA1LWHLhB//nRx4YK1tDfr+wbRY
- Fc8D2KwfpxvX30X+AWhWXPxGJxEPmjoFXbMAg=
+ d=chromium.org; s=google; t=1718924799; x=1719529599; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+oOlZ3xjHaF1cpgRNdg6rKrqmBgPxk0dwBXY0MO1Dis=;
+ b=ebeP0gYP3JItFuSEGwTf4HGDLsaco7txnUpFKcZpT/+dT3dZaCZtRbkeQyGVkCS5Mb
+ 9xMNmwNJB9UMMcW3xHQcTDc8SQVL2X+XnrEZYvYGNOS1TA0TIJQ6HTPisab8Ij+5RE/G
+ os366EM+j/5BMTo/acyPWxmTBo4YjkCI1y+sQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718924745; x=1719529545;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tKEmERM0Xl14veeKj5cDr0pv1hbWbnTqHlOZFMMNZZg=;
- b=Xl1ZIUsj6J2C6WGOp8yLeVzGWo2mZsnBaRWba337jEzZ5FLPXhjIVwUHPdx3SnKgjA
- c69enDJq4F0HkQ8u/X9iIdfpEPb6Nd7xi5eSn9jMAFRzm0NyqnfRxOUJM7ORV5kcPfeP
- ouJmi0tLFw5bp8w1BkyvvPYllr/FdBqSvH4AEc9jb3Pxf5WtQIA249nJkz7onheQgpeA
- cgQ4DIuxMZywhFsJwhSzRIuN7aA/8HTHz3XKjfyo2wLR8SEzan4tHTojzbzqQbeLNjAs
- YbZ1r9a+0JAKagaqsosDsmqLcmq48FN28PSl5MTKnBHqbn0PgthZQ7uebGSCrLqB59mI
- SbCQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXxtvG5vVmlX+Ae1RZtuMnDuavsdVD4wSnza8OR0rqE6IhxofaCdxZEIpfbOfeH6SPwv5kU/07y8wGFC8yhbuOzsjT1JA==
-X-Gm-Message-State: AOJu0YzKhD5H9XHeeyUrZ7LG/OkDKiBLfkdorEoq8/i31sZ6IYJQBxQR
- gSUAd4+2ywXv3929JZJCA4J9qfjpKEcVaCansagI+yz439eBLZRvhO6FDJCvglZYrGliX5KpwE3
- 4HqBySMjrpTll6bnEOj8ep6JjjS2mXs9yEaZWezs3WnNEuKQ=
-X-Google-Smtp-Source: AGHT+IHojXo3eoNw/roI5MGbaDfvWHvMoVCeGViu3QHMvXjWiCiC5cUg9iVglt4VOY5zE5honQ4dN9s/NHGid0ke11g=
-X-Received: by 2002:a9d:77c2:0:b0:6f9:a1fd:85c8 with SMTP id
- 46e09a7af769-700735657femr7372740a34.2.1718924745281; Thu, 20 Jun 2024
- 16:05:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240620131937.1130446-1-sjg@chromium.org>
- <20240620131937.1130446-4-sjg@chromium.org>
- <d2526c98-8198-4b8b-ab10-20bda0151da1@gmx.de>
-In-Reply-To: <d2526c98-8198-4b8b-ab10-20bda0151da1@gmx.de>
+ d=1e100.net; s=20230601; t=1718924799; x=1719529599;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+oOlZ3xjHaF1cpgRNdg6rKrqmBgPxk0dwBXY0MO1Dis=;
+ b=CGfVpUv8UcCdaQui0favDUYvTQ2GKQhu1uoa9sQP1VArbEO7pqCmjILoOxFqCYi0am
+ z7s/ni5T/UQjTC1+OpwJnS7YcbrvVKLgPmdAXER2hfAPjmRiFO8Ft8VwV7K1jX8v/PeS
+ dpip4QuffkYv8FUSwJc0U8Y8k2OKB8kpBxUtPyqd4T6pcrKbEzy/GCKob2MHnja7M/WB
+ ifIdKE5QOqVV+mj+dj/njI42NVT/L8AbE5U7Jy+nBkytrTf7RbzWGxt4R6IW2zmkc36L
+ AzmvBBDCfLbMtVVXKBt7xm0qZnsVT7ajO6GPzEhELF6uVyA7wXhDf7ai4RPZp4z0j4bV
+ bWbQ==
+X-Gm-Message-State: AOJu0Yz4AC8GWfOFZ1EMeENtLYIihN5Og6ZmLTXlf/G3LjEn8TN0r1u4
+ grwI/UAOhnJlXekZdHIJwZ2UyZZV4qOdpxF1/GHP5W0BoJxoXpgGLzNNTlx7j3uwPxanSs8aVn2
+ BWg==
+X-Google-Smtp-Source: AGHT+IHxSV7fMOYZkSILKflVqnJVTUSMoQx8+jD2GBH6Px0/Rpg38MFhtkqKNLxjKp8YLqPPyqiIUw==
+X-Received: by 2002:a05:6602:1493:b0:7eb:6d0a:613a with SMTP id
+ ca18e2360f4ac-7f13edafa38mr801673039f.2.1718924799321; 
+ Thu, 20 Jun 2024 16:06:39 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4b9d110f566sm53269173.44.2024.06.20.16.06.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Jun 2024 16:06:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Jun 2024 17:05:34 -0600
-Message-ID: <CAFLszTjUy4OCM4bYh3CKM-F4U-in0eU3PV0e2jzHG1JRG4NxVQ@mail.gmail.com>
-Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v3 01/18] binman: Support an assumed size for missing binaries
+Date: Thu, 20 Jun 2024 17:06:08 -0600
+Message-Id: <20240620230625.1797397-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240620230625.1797397-1-sjg@chromium.org>
+References: <20240620230625.1797397-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,253 +97,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Binman has a the useful feature of handling missing external blobs
+gracefully, including allowing them to be missing, deciding whether the
+resulting image is functional or not and faking blobs when this is
+necessary for particular tools (e.g. mkimage).
 
-On Thu, 20 Jun 2024 at 07:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 20.06.24 15:19, Simon Glass wrote:
-> > The Python virtualenv tool sets up a few things in the envronment,
->
-> Nits
->
-> %s/envronment/environment/
->
-> > putting its path first in the PATH environment variable and setting up
-> > a sys.prefix different from the sys.base_prefix value.
-> >
-> > At present buildman puts the toolchain path first in PATH so that it can
-> > be found easily during the build. For sandbox this causes problems since
-> > /usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
-> > PATH variable. As a result, the venv is partially disabled.
->
-> If you want to remember a PATH, why don't you use a differnet variable
-> like U_BOOT_TOOLPATH to convey this information instead of manipulating
-> the PATH variable?
+This feature is widely used in CI. One drawback is that if U-Boot grows
+too large to fit along with the required blobs, then this is not
+discovered until someone does a 'real' build which includes the blobs.
 
-Remembering a path?
+Add a 'assume-size' property to entries to allow Binman to reserve a
+given size for missing external blobs.
 
-The goal here is to give buildman what it needs, i.e. the combination
-of PATH changes (if needed) and CROSS_COMPILE that makes things work.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-I am not proposing to change the mechanics of buildman, just deal with
-this venv situation which I had not previously noticed.
+(no changes since v1)
 
->
-> >
-> > The result is that sandbox builds within a venv ignore the venv, e.g.
-> > when looking for packages.
-> >
-> > Correct this by detecting the venv and adding the toolchain path after
-> > the venv path.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   tools/buildman/bsettings.py |  3 ++
-> >   tools/buildman/test.py      | 83 +++++++++++++++++++++++++++++++++++++
-> >   tools/buildman/toolchain.py | 31 ++++++++++++--
-> >   3 files changed, 113 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/tools/buildman/bsettings.py b/tools/buildman/bsettings.py
-> > index e225ac2ca0f..1be1d45e0fa 100644
-> > --- a/tools/buildman/bsettings.py
-> > +++ b/tools/buildman/bsettings.py
-> > @@ -31,6 +31,9 @@ def setup(fname=''):
-> >   def add_file(data):
-> >       settings.readfp(io.StringIO(data))
-> >
-> > +def add_section(name):
-> > +    settings.add_section(name)
-> > +
-> >   def get_items(section):
-> >       """Get the items from a section of the config.
-> >
-> > diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-> > index f92add7a7c5..83219182fe0 100644
-> > --- a/tools/buildman/test.py
-> > +++ b/tools/buildman/test.py
-> > @@ -146,6 +146,7 @@ class TestBuild(unittest.TestCase):
-> >           self.toolchains.Add('arm-linux-gcc', test=False)
-> >           self.toolchains.Add('sparc-linux-gcc', test=False)
-> >           self.toolchains.Add('powerpc-linux-gcc', test=False)
-> > +        self.toolchains.Add('/path/to/aarch64-linux-gcc', test=False)
-> >           self.toolchains.Add('gcc', test=False)
-> >
-> >           # Avoid sending any output
-> > @@ -747,6 +748,88 @@ class TestBuild(unittest.TestCase):
-> >           self.assertEqual([
-> >               ['MARY="mary"', 'Missing expected line: CONFIG_MARY="mary"']], result)
-> >
-> > +    def call_make_environment(self, tchn, full_path, in_env=None):
-> > +        """Call Toolchain.MakeEnvironment() and process the result
-> > +
-> > +        Args:
-> > +            tchn (Toolchain): Toolchain to use
-> > +            full_path (bool): True to return the full path in CROSS_COMPILE
-> > +                rather than adding it to the PATH variable
-> > +            in_env (dict): Input environment to use, None to use current env
-> > +
-> > +        Returns:
-> > +            tuple:
-> > +                dict: Changes that MakeEnvironment has made to the environment
-> > +                    key: Environment variable that was changed
-> > +                    value: New value (for PATH this only includes components
-> > +                        which were added)
-> > +                str: Full value of the new PATH variable
-> > +        """
-> > +        env = tchn.MakeEnvironment(full_path, env=in_env)
-> > +
-> > +        # Get the original environment
-> > +        orig_env = dict(os.environb if in_env is None else in_env)
-> > +        orig_path = orig_env[b'PATH'].split(b':')
-> > +
-> > +        # Find new variables
-> > +        diff = dict((k, env[k]) for k in env if orig_env.get(k) != env[k])
-> > +
-> > +        # Find new / different path components
-> > +        diff_path = None
-> > +        new_path = None
-> > +        if b'PATH' in diff:
-> > +            new_path = diff[b'PATH'].split(b':')
-> > +            diff_paths = [p for p in new_path if p not in orig_path]
-> > +            diff_path = b':'.join(p for p in new_path if p not in orig_path)
-> > +            if diff_path:
-> > +                diff[b'PATH'] = diff_path
-> > +            else:
-> > +                del diff[b'PATH']
-> > +        return diff, new_path
-> > +
-> > +    def test_toolchain_env(self):
-> > +        """Test PATH and other environment settings for toolchains"""
-> > +        # Use a toolchain which has a path, so that full_path makes a difference
-> > +        tchn = self.toolchains.Select('aarch64')
-> > +
-> > +        # Normal cases
-> > +        diff = self.call_make_environment(tchn, full_path=False)[0]
-> > +        self.assertEqual(
-> > +            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-> > +             b'PATH': b'/path/to'}, diff)
-> > +
-> > +        diff = self.call_make_environment(tchn, full_path=True)[0]
-> > +        self.assertEqual(
-> > +            {b'CROSS_COMPILE': b'/path/to/aarch64-linux-', b'LC_ALL': b'C'},
-> > +            diff)
-> > +
-> > +        # When overriding the toolchain, only LC_ALL should be set
-> > +        tchn.override_toolchain = True
-> > +        diff = self.call_make_environment(tchn, full_path=True)[0]
-> > +        self.assertEqual({b'LC_ALL': b'C'}, diff)
-> > +
-> > +        # Test that virtualenv is handled correctly
-> > +        tchn.override_toolchain = False
-> > +        sys.prefix = '/some/venv'
-> > +        env = dict(os.environb)
-> > +        env[b'PATH'] = b'/some/venv/bin:other/things'
-> > +        tchn.path = '/my/path'
-> > +        diff, diff_path = self.call_make_environment(tchn, False, env)
-> > +
-> > +        self.assertIn(b'PATH', diff)
-> > +        self.assertEqual([b'/some/venv/bin', b'/my/path', b'other/things'],
-> > +                         diff_path)
-> > +        self.assertEqual(
-> > +            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-> > +             b'PATH': b'/my/path'}, diff)
-> > +
-> > +        # Handle a toolchain wrapper
-> > +        tchn.path = ''
-> > +        bsettings.add_section('toolchain-wrapper')
-> > +        bsettings.set_item('toolchain-wrapper', 'my-wrapper', 'fred')
-> > +        diff = self.call_make_environment(tchn, full_path=True)[0]
-> > +        self.assertEqual(
-> > +            {b'CROSS_COMPILE': b'fred aarch64-linux-', b'LC_ALL': b'C'}, diff)
-> >
-> >   if __name__ == "__main__":
-> >       unittest.main()
-> > diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
-> > index 79c7c11a110..cd917d8b7eb 100644
-> > --- a/tools/buildman/toolchain.py
-> > +++ b/tools/buildman/toolchain.py
-> > @@ -172,13 +172,14 @@ class Toolchain:
-> >           else:
-> >               raise ValueError('Unknown arg to GetEnvArgs (%d)' % which)
-> >
-> > -    def MakeEnvironment(self, full_path):
-> > +    def MakeEnvironment(self, full_path, env=None):
-> >           """Returns an environment for using the toolchain.
-> >
-> >           Thie takes the current environment and adds CROSS_COMPILE so that
->
-> Maybe you could resolve these nits too:
->
-> %s/Thie/This/
->
-> >           the tool chain will operate correctly. This also disables localized
-> >           output and possibly unicode encoded output of all build tools by
->
-> %s/unicode/Unicode/
+ tools/binman/binman.rst                  |  7 ++++++
+ tools/binman/entry.py                    |  1 +
+ tools/binman/etype/blob.py               |  7 +++++-
+ tools/binman/ftest.py                    | 28 ++++++++++++++++++++++++
+ tools/binman/test/326_assume_size.dts    | 16 ++++++++++++++
+ tools/binman/test/327_assume_size_ok.dts | 16 ++++++++++++++
+ 6 files changed, 74 insertions(+), 1 deletion(-)
+ create mode 100644 tools/binman/test/326_assume_size.dts
+ create mode 100644 tools/binman/test/327_assume_size_ok.dts
 
-OK
+diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+index 230e055667f..872e9746c8c 100644
+--- a/tools/binman/binman.rst
++++ b/tools/binman/binman.rst
+@@ -711,6 +711,13 @@ missing-msg:
+     information about what needs to be fixed. See missing-blob-help for the
+     message for each tag.
+ 
++assume-size:
++    Sets the assumed size of a blob entry if it is missing. This allows for a
++    check that the rest of the image fits into the available space, even when
++    the contents are not available. If the entry is missing, Binman will use
++    this assumed size for the entry size, including creating a fake file of that
++    size if requested.
++
+ no-expanded:
+     By default binman substitutes entries with expanded versions if available,
+     so that a `u-boot` entry type turns into `u-boot-expanded`, for example. The
+diff --git a/tools/binman/entry.py b/tools/binman/entry.py
+index 42e0b7b9145..c1904f8ae69 100644
+--- a/tools/binman/entry.py
++++ b/tools/binman/entry.py
+@@ -315,6 +315,7 @@ class Entry(object):
+         self.overlap = fdt_util.GetBool(self._node, 'overlap')
+         if self.overlap:
+             self.required_props += ['offset', 'size']
++        self.assume_size = fdt_util.GetInt(self._node, 'assume-size', 0)
+ 
+         # This is only supported by blobs and sections at present
+         self.compress = fdt_util.GetString(self._node, 'compress', 'none')
+diff --git a/tools/binman/etype/blob.py b/tools/binman/etype/blob.py
+index 064fae50365..041e1122953 100644
+--- a/tools/binman/etype/blob.py
++++ b/tools/binman/etype/blob.py
+@@ -48,11 +48,16 @@ class Entry_blob(Entry):
+             self.external and (self.optional or self.section.GetAllowMissing()))
+         # Allow the file to be missing
+         if not self._pathname:
++            if not fake_size and self.assume_size:
++                fake_size = self.assume_size
+             self._pathname, faked = self.check_fake_fname(self._filename,
+                                                           fake_size)
+             self.missing = True
+             if not faked:
+-                self.SetContents(b'')
++                content_size = 0
++                if self.assume_size: # Ensure we get test coverage on next line
++                    content_size = self.assume_size
++                self.SetContents(tools.get_bytes(0, content_size))
+                 return True
+ 
+         self.ReadBlobContents()
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 8a44bc051b3..bd0a10ff885 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -7460,5 +7460,33 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFile('323_capsule_accept_revert_missing.dts')
+ 
++    def test_assume_size(self):
++        """Test handling of the assume-size property for external blob"""
++        with self.assertRaises(ValueError) as e:
++            self._DoTestFile('326_assume_size.dts', allow_missing=True,
++                             allow_fake_blobs=True)
++        self.assertIn("contents size 0xa (10) exceeds section size 0x9 (9)",
++                      str(e.exception))
++
++    def test_assume_size_ok(self):
++        """Test handling of the assume-size where it fits OK"""
++        with test_util.capture_sys_output() as (stdout, stderr):
++            self._DoTestFile('327_assume_size_ok.dts', allow_missing=True,
++                             allow_fake_blobs=True)
++        err = stderr.getvalue()
++        self.assertRegex(
++            err,
++            "Image '.*' has faked external blobs and is non-functional: .*")
++
++    def test_assume_size_no_fake(self):
++        """Test handling of the assume-size where it fits OK"""
++        with test_util.capture_sys_output() as (stdout, stderr):
++            self._DoTestFile('327_assume_size_ok.dts', allow_missing=True)
++        err = stderr.getvalue()
++        self.assertRegex(
++            err,
++            "Image '.*' is missing external blobs and is non-functional: .*")
++
++
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tools/binman/test/326_assume_size.dts b/tools/binman/test/326_assume_size.dts
+new file mode 100644
+index 00000000000..4c5f8b418d8
+--- /dev/null
++++ b/tools/binman/test/326_assume_size.dts
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		size = <9>;
++		blob-ext {
++			filename = "assume_blob";
++			assume-size = <10>;
++		};
++	};
++};
+diff --git a/tools/binman/test/327_assume_size_ok.dts b/tools/binman/test/327_assume_size_ok.dts
+new file mode 100644
+index 00000000000..00ed726f872
+--- /dev/null
++++ b/tools/binman/test/327_assume_size_ok.dts
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		size = <10>;
++		blob-ext {
++			filename = "assume_blob";
++			assume-size = <10>;
++		};
++	};
++};
+-- 
+2.34.1
 
->
-> Best regards
->
-> Heinrich
->
-> > -        adding LC_ALL=C.
-> > +        adding LC_ALL=C. For the case where full_path is False, it prepends
-> > +        the toolchain to PATH
-> >
-> >           Note that os.environb is used to obtain the environment, since in some
-> >           cases the environment many contain non-ASCII characters and we see
-> > @@ -187,15 +188,21 @@ class Toolchain:
-> >             UnicodeEncodeError: 'utf-8' codec can't encode characters in position
-> >                569-570: surrogates not allowed
-> >
-> > +        When running inside a Python venv, care is taken not to put the
-> > +        toolchain path before the venv path, so that builds initiated by
-> > +        buildman will still respect the venv.
-> > +
-> >           Args:
-> >               full_path: Return the full path in CROSS_COMPILE and don't set
-> >                   PATH
-> > +            env (dict of bytes): Original environment, used for testing
-> >           Returns:
-> >               Dict containing the (bytes) environment to use. This is based on the
-> >               current environment, with changes as needed to CROSS_COMPILE, PATH
-> >               and LC_ALL.
-> >           """
-> > -        env = dict(os.environb)
-> > +        env = dict(env or os.environb)
-> > +
-> >           wrapper = self.GetWrapper()
-> >
-> >           if self.override_toolchain:
-> > @@ -206,7 +213,23 @@ class Toolchain:
-> >                   wrapper + os.path.join(self.path, self.cross))
-> >           else:
-> >               env[b'CROSS_COMPILE'] = tools.to_bytes(wrapper + self.cross)
-> > -            env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
-> > +
-> > +            # Detect a Python virtualenv and avoid defeating it
-> > +            if sys.prefix != sys.base_prefix:
-> > +                paths = env[b'PATH'].split(b':')
-> > +                new_paths = []
-> > +                to_insert = tools.to_bytes(self.path)
-> > +                insert_after = tools.to_bytes(sys.prefix)
-> > +                for path in paths:
-> > +                    new_paths.append(path)
-> > +                    if to_insert and path.startswith(insert_after):
-> > +                        new_paths.append(to_insert)
-> > +                        to_insert = None
-> > +                if to_insert:
-> > +                    new_paths.append(to_insert)
-> > +                env[b'PATH'] = b':'.join(new_paths)
-> > +            else:
-> > +                env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
-> >
-> >           env[b'LC_ALL'] = b'C'
-> >
->
-
-Regards,
-Simon
