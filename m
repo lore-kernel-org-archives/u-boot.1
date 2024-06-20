@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA61EC27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 05:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47EFBC27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 05:47:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 144C1884CD;
-	Thu, 20 Jun 2024 07:30:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id A041E884D2;
+	Thu, 20 Jun 2024 07:47:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="JudUHWcq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jlh4Cy4j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 430D688501; Thu, 20 Jun 2024 07:30:51 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CFDEE882E8; Thu, 20 Jun 2024 07:47:55 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1C6D8840F
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:30:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EF42884F6
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:47:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1718861448; x=1721453448;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5TAUf0rzGpHRiuc3NG8kO+STB/dY2i/wo+BvshJUivI=;
- b=JudUHWcq+zLYicVZcuiLBtf/85pHyJJu33HJ5w/D8xG91+7G8iJ3o6vZ2HS0ASA0
- nF6NI4gMT8XNWchgyl41eBi+hA5MBtcHiACeLUPPlaSD89oNi28iI8hg7HXxU3rT
- cjFL+5LGrEAgMjOrQYHsv3Zn2+4Xt9yOHxUgsCQZ6EI=;
-X-AuditID: ac14000a-03251700000021bc-a3-6673be88bcff
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 70.62.08636.88EB3766;
- Thu, 20 Jun 2024 07:30:48 +0200 (CEST)
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 20 Jun
- 2024 07:30:47 +0200
-Message-ID: <0f41cd97-6876-43b8-a79a-9b047ae7485b@phytec.de>
-Date: Thu, 20 Jun 2024 07:30:46 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-711b1512aeaso397797a12.3
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 22:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718862472; x=1719467272; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Br7c61/P2OIjqlAyx0RNDdZV9Q2YuJEe1WLoLoS2xi8=;
+ b=Jlh4Cy4jFrpB4xVlYL+LrWFJYiBT6fL/jlHRhmBTwgZAWgAklHnZ1vZxpmDsiT/kyA
+ 7G/9wJ9HDx+/yv6pGxV+eVGGw5ppZCnFxuh37fe11s1jHmOwGnunYZsL8yuPgUed6s73
+ +iKwvb+exhaPZGY0TR2LH4FNbO2hIwmYU31jRD9id8Oo741c0likYkEh5MSv41crfpEt
+ +l1VlZs5h13du2ImTCqehcZ7P1b3gyCH9FoQypV2YUECXrPzU01DG/40bF1F8t3g87+r
+ GH/2T/wb9aF2/ZukEI5JR9tr3mogn1WkVYgIWiuFDediUKq9TIyxi7uXHu9kp9Kbbd0n
+ Z++Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718862472; x=1719467272;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Br7c61/P2OIjqlAyx0RNDdZV9Q2YuJEe1WLoLoS2xi8=;
+ b=HVF9d4ZcbcTD6RLZI9TlTwhX5yVFttPKxft1FDn9Xp75/GimRo/bGPBXHXx47xHjrJ
+ nK3kO1laruEQWxUo1ImnZM2ojjll9HPYqj8kOyT3kPl/7k0o419oF3fQ3nlhbi3Pe4PK
+ O4x8eeJ8+HDBug8Tdh+KzZ9vcaQ9b3U952DFD6tlAxXKvL9/QUVyI19BjcIhA2xKEywd
+ 8hPTtR9XSQvOWl7zD4Bb2plwxaEBr5sF+G5OGIiYVXwbOfK46fYgRnhS3fgM9KWmyXYu
+ 0Emnh0XfZ2O7mWCOs3lqVXF1fnAZ3llpJ6aCBR/2zTX6FkhHS2q2UEeov24N+c8OeHzV
+ a96A==
+X-Gm-Message-State: AOJu0YzrCMGIHhoJzbewAkeFIWKww/bFrkG7JcLHGxEdKPt8/FhfbX4G
+ nAiIWouqXaoqFv7OdolN2o237Xq3KfYF7o/HKL+dKM/9L/dCbpI8djd21lsqqw16o2Nz8ShnNeq
+ QVePKzh0ccb6q/SRA9KKadf4hM2qdwISdBxf3NQ==
+X-Google-Smtp-Source: AGHT+IHn3eUalA480wAknrcpJrV4xRErRxPPCpbu0gAF0TKkxZPAVGA9Tf0EeRJyCb9u/Kvg/B753oexz/Q81Lmw0Ms=
+X-Received: by 2002:a17:90b:60b:b0:2c2:ebc5:ffec with SMTP id
+ 98e67ed59e1d1-2c7b59fa605mr4559314a91.5.1718862471771; Wed, 19 Jun 2024
+ 22:47:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] arm: mach-k3: Add default ATF location for AM62/AM62a
-To: Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>, Dhruva Gole
- <d-gole@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <u-boot@lists.denx.de>, Robert Nelson
- <robertcnelson@gmail.com>
-References: <20240214163009.983034-1-afd@ti.com>
- <20240214163009.983034-2-afd@ti.com> <20240619114916.72icpumb2tumsnbt@dhruva>
- <20240619182005.yfkvf6ongwijorzz@dividable>
- <59c391a7-c6fe-4b04-891a-c6905ef29f20@ti.com>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <59c391a7-c6fe-4b04-891a-c6905ef29f20@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpjkeLIzCtJLcpLzFFi42JZI8nAo9uxrzjNYNccUYv3pyayW7Ss9bA4
- eaOV3eLNj7NMFu+XfGS0+LZlG6PF1Emb2S3e7u1kt/h/9gO7A6fH7IaLLB47Z91l93h1YBW7
- x9k7Oxg9jt/YzhTAGsVlk5Kak1mWWqRvl8CVsf7uGpaCXTIV2/7eZ21g/CvWxcjJISFgIvHl
- 2CbGLkYuDiGBJUwS505eZgZJCAncZZQ4c9sDxOYVsJG4evASK4jNIqAqcX92AyNEXFDi5Mwn
- LCC2qIC8xP1bM9hBbGEBP4k7Cz+D2SICERKfnrYxgSxgFrjOKLH0/BtmiG33GCVuHDrOBlLF
- LCAucevJfCYQm01AXeLOhm9g2zgFrCT+TIaIMwtYSCx+c5AdwpaXaN46G+pSeYkXl5azQLwj
- LzHt3GtmCDtUYuuX7UwTGIVnITl2FpJ1s5CMnYVk7AJGllWMQrmZydmpRZnZegUZlSWpyXop
- qZsYQXElwsC1g7FvjschRiYOxkOMEhzMSiK8z7uK0oR4UxIrq1KL8uOLSnNSiw8xSnOwKInz
- ru4IThUSSE8sSc1OTS1ILYLJMnFwSjUwzjdTm3SuSumBOcO+vcd8d/2yFZ/7c0GLVKfA3Rcz
- T/JI/PTocDi+/cKDs2eFMk9UMbKvtFdnvm/nLZUesDC1bYO2RfuJVi0Gw6Z915ZrTj8uaHvT
- cOajNv2WMGs2k6qnL9Z///PwlHn0VQbVF/E1e39YL8iZYLvRpyJ/s5+Ia62CtXr1njVLlFiK
- MxINtZiLihMB9VI31ZkCAAA=
+References: <20240619212759.3456158-1-trini@konsulko.com>
+ <20240619212759.3456158-2-trini@konsulko.com>
+In-Reply-To: <20240619212759.3456158-2-trini@konsulko.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 20 Jun 2024 08:47:15 +0300
+Message-ID: <CAC_iWj+5qZYWpnAWkErrXHEngMYuWMrzfs=Od5L1QDMcZjA4Dw@mail.gmail.com>
+Subject: Re: [PATCH 2/7] m68k: Rename icache_invalid to invalidate_icache_all
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,83 +86,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-Am 19.06.24 um 22:02 schrieb Andrew Davis:
-> On 6/19/24 1:20 PM, Nishanth Menon wrote:
->> On 17:19-20240619, Dhruva Gole wrote:
->>> Hi,
->>>
->>> On Feb 14, 2024 at 10:30:04 -0600, Andrew Davis wrote:
->>>> There is a default ATF load address that is used for devices that have
->>>> ATF running in SRAM. For AM62 and AM62a, ATF runs from DRAM. Instead
->>>> of having to override the address in every defconfig, make add a
->>>> default for these ATF in DRAM devices.
->>>>
->>>> Signed-off-by: Andrew Davis <afd@ti.com>
->>>> ---
->>>>   arch/arm/mach-k3/Kconfig               | 5 +++--
->>>>   configs/am62ax_evm_a53_defconfig       | 1 -
->>>>   configs/am62x_beagleplay_a53_defconfig | 1 -
->>>>   configs/am62x_evm_a53_defconfig        | 1 -
->>>>   configs/phycore_am62x_a53_defconfig    | 1 -
->>>>   configs/verdin-am62_a53_defconfig      | 1 -
->>>>   6 files changed, 3 insertions(+), 7 deletions(-)
->>>>
->>>
->>> Beagleplay stops booting completely with latest U-boot so I did a little
->>> bisect and it seems like reverting this patch helps.
->>>
->>> I am not sure what other implications there are of reverting this so I
->>> don't suggest immediately dropping it, however some hints around what's
->>> missing on beagleplay vs other platforms would be helpful.
->>>
->>> Because other platforms based off the same SoC don't seem to be
->>> affected.
->>
->> Grumble... I had to rediscover this in parallel as well - Thanks Dhruva.
->> mkimage -l tispl.bin and comparing with kernel log of reserved mem
->> had me completely confused.
->>
->> a) Memory maps are already notorious to manage on complex heterogenous
->>    systems. From beagle perspective, we have no need to go and monkey
->>    with DT defined memory map and DT should be the default and modifying
-> 
-> Your DT source file is wrong, ATF is at 0x8000_0000 (or any address one
-> wants to put in K3_ATF_LOAD_ADDR). DT doesn't "define" hardware, it 
-> "describes"
-> it. ATF's location is dynamic and configurable, it doesn't belong in DT.
-> 
-> You have two options, either go update your DT, then update it again every
-> time ATF moves. *OR* simply turn on OF_SYSTEM_SETUP and let U-Boot add the
-> correct location reserved memory node for you.
-> 
-> Then you can also drop out the reserved-node from the DT template file.
-> Only U-Boot knows where ATF is really placed in RAM, so U-Boot must add
-> this info to DT.
-
-I think it is a good idea to remove the nodes from the device tree or at 
-least mark them as "templates" and note that they are actually provided 
-by the bootloader to make it less confusing.
-
-> 
->>    DT should be explicitly called out with a log (instead of done
->>    "transparently") - so instead of CONFIG_K3_OPTEE_LOAD_ADDR default
->>    being forced from u-boot, it should be made optional, where when
->>    defined, it can overide the dt definition or some variant of that.
->>
->> b) Looks like
->>     https://lore.kernel.org/u-boot/20240214163009.983034-4-afd@ti.com/
->>     missed beagleplay? and we were in for a surprise there - i dont want
-> 
-> This was the only miss, OF_SYSTEM_SETUP didn't get added to the beagleplay
-> config. Bryan just sent the fix for that now. I'll go look for a way to
-> make this common across the whole SoC family so we don't again miss any
-> new boards.
-> 
-> Andrew
-> 
->>     to switch from default dts for beagleplay to something different just
->>     because of simplicity for users to know exactly the carveouts and
->>     with other s/w starting up on uC, dts is our "canonical truth".
->>
+On Thu, 20 Jun 2024 at 00:28, Tom Rini <trini@konsulko.com> wrote:
+>
+> The implementation of icache_invalid appears to be doing what other
+> architectures call invalidate_icache_all so rename to match.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Huan Wang <alison.wang@nxp.com>
+> Angelo Dureghello <angelo@kernel-space.org>
+> ---
+>  arch/m68k/include/asm/cache.h | 1 -
+>  arch/m68k/lib/cache.c         | 6 +++---
+>  drivers/net/mcffec.c          | 5 +++--
+>  3 files changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/arch/m68k/include/asm/cache.h b/arch/m68k/include/asm/cache.h
+> index 6ef7f7be1af8..aa8d2edb40ba 100644
+> --- a/arch/m68k/include/asm/cache.h
+> +++ b/arch/m68k/include/asm/cache.h
+> @@ -185,7 +185,6 @@
+>
+>  #ifndef __ASSEMBLY__           /* put C only stuff in this section */
+>
+> -void icache_invalid(void);
+>  void dcache_invalid(void);
+>
+>  #endif
+> diff --git a/arch/m68k/lib/cache.c b/arch/m68k/lib/cache.c
+> index dab834c1cbd8..370ad40f1423 100644
+> --- a/arch/m68k/lib/cache.c
+> +++ b/arch/m68k/lib/cache.c
+> @@ -29,7 +29,7 @@ int dcache_status(void)
+>
+>  void icache_enable(void)
+>  {
+> -       icache_invalid();
+> +       invalidate_icache_all();
+>
+>         *cf_icache_status = 1;
+>
+> @@ -53,7 +53,7 @@ void icache_disable(void)
+>         u32 temp = 0;
+>
+>         *cf_icache_status = 0;
+> -       icache_invalid();
+> +       invalidate_icache_all();
+>
+>  #if defined(CONFIG_CF_V4) || defined(CFG_CF_V4E)
+>         __asm__ __volatile__("movec %0, %%acr2"::"r"(temp));
+> @@ -68,7 +68,7 @@ void icache_disable(void)
+>  #endif
+>  }
+>
+> -void icache_invalid(void)
+> +void invalidate_icache_all(void)
+>  {
+>         u32 temp;
+>
+> diff --git a/drivers/net/mcffec.c b/drivers/net/mcffec.c
+> index 04b711e4f650..7e53492733ed 100644
+> --- a/drivers/net/mcffec.c
+> +++ b/drivers/net/mcffec.c
+> @@ -11,6 +11,7 @@
+>   */
+>
+>  #include <config.h>
+> +#include <cpu_func.h>
+>  #include <env.h>
+>  #include <hang.h>
+>  #include <malloc.h>
+> @@ -399,7 +400,7 @@ static int mcffec_send(struct udevice *dev, void *packet, int length)
+>  #endif
+>
+>  #ifdef CONFIG_SYS_UNIFY_CACHE
+> -       icache_invalid();
+> +       invalidate_icache_all();
+>  #endif
+>
+>         j = 0;
+> @@ -433,7 +434,7 @@ static int mcffec_recv(struct udevice *dev, int flags, uchar **packetp)
+>
+>         for (;;) {
+>  #ifdef CONFIG_SYS_UNIFY_CACHE
+> -               icache_invalid();
+> +               invalidate_icache_all();
+>  #endif
+>                 /* If nothing received - leave for() loop */
+>                 if (info->rxbd[info->rx_idx].cbd_sc & BD_ENET_RX_EMPTY)
+> --
+> 2.34.1
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
