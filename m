@@ -4,92 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4735C27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 16:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5058AC27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 17:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B25A78813A;
-	Thu, 20 Jun 2024 18:55:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AEEDF8813A;
+	Thu, 20 Jun 2024 19:03:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ojk1die9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c0Q3ROaO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C9288834D; Thu, 20 Jun 2024 18:55:18 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 85F948834D; Thu, 20 Jun 2024 19:03:31 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57B8088126
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 18:55:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62C0C87C7E
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 19:03:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-259884ef4ddso558575fac.2
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 09:55:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=knaerzche@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-57d07673185so1049519a12.1
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 10:03:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718902515; x=1719507315; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EJ6A/ZpkKNL4KWpLxnbRSZTpxXceYHWpA4P0MHHVN0I=;
- b=Ojk1die975BEtmlt1uTWceFP6AS/G/e0U+KpGGn/7UU8pq06H8LgXYzsaCLGYDDW08
- +H8APoIOyFmCGzsDM5AWp5+YFI88Yq5Mxuo4DNLSxDLanbkmLgi6+O5Uk4xyA8DElmCx
- OVifskyw/4fIuWWrFSR9NOv5cBqgK9zJA3DAc=
+ d=gmail.com; s=20230601; t=1718903009; x=1719507809; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8JGxkr/six9t3qc7f2ESqOisF9oE4Cst3xwl8CVGmGc=;
+ b=c0Q3ROaOaCwyPVDjabMwO4XQRBtJQwDiSe2m30cLc7aBpqBovc6mmZxCguOF8I1Z7r
+ 0lBT8aHSELfVviBOJjKk/8oFAceTlogy7L547TTByv7lglCz0/qX4WPf6NVHNwfQ+hKq
+ uTpyJMVdlEaF3lfsxJIjth81h7ndbhXLkbTMNmaTaboez5PH4azpopU7Be5JmWZ3mh3g
+ k2BDXKPyy/eNNY6WnZIzsQ4IFZQJKogfDG0kdhbyc8eagbI8Q3KEVscS9TFUWhaFOHL7
+ IcUB+ykfsENZNjQgNlLAVW8/zcAF3BIkx1u2DuC3A19GKn1BkuiHwt5DT9F74sDmzKMc
+ Rkhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718902515; x=1719507315;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EJ6A/ZpkKNL4KWpLxnbRSZTpxXceYHWpA4P0MHHVN0I=;
- b=OMmrfOhmoSNhdqEwhOuzeETZXjnnZvd17elbjbjrQ7GAMIaQpSNiH/y05V1reZWLdP
- VCWPJjz61wESmuJ5X0olj7XUwUe+S++07idRYzdW/HHQevMQ4lsKmfabWdtd9fQRgqJ3
- ofOesdjMahNImYN+GWZ++PjVyIaZc6eay22ADuWXom7w+3tkrxYAdLCaEidra+8L0Kyc
- jEr/L8Wa/J/3VHuYmuuQuv4KYUemoLpVqTTn+lloAnwENruBLrIiUnTTLFcNdjCYbLQI
- GLHJ5+4BEHoAO3+lHjRyTL11/+M6B/SJxMgxortyroxmijr4cg9t2yiLrjKwxGD/Gv1/
- rWKA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWdY4f88lWiUsqPVoxsboI6uRZC3U1j5t4ZshWH8xd8XnN+h2a0PB9JDfEcrRS0Ye0vy3gFR9kSyLi2+cwJ254a6Z1P1A==
-X-Gm-Message-State: AOJu0YxqyEijWGp5jTaUXrHL7l1ouDt6vUGwIlymH5d+1iMz51FbYde8
- h7jhyRe4bS9Lg/dFnLd03axsNQQ1OZa3h4+KRJsejBQR9dBf8wy1xwCtDV0ug4Y=
-X-Google-Smtp-Source: AGHT+IFH0FKCAiAVbVOc4+A8puJd65W7SQSw3CTe7jcniI+TAkapMHLm/jQcf1ZRccEJy5P3j0xyYQ==
-X-Received: by 2002:a05:6870:1685:b0:255:2e14:3d9d with SMTP id
- 586e51a60fabf-25c948edb0dmr7107004fac.5.1718902515001; 
- Thu, 20 Jun 2024 09:55:15 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25ca4cc858fsm857319fac.40.2024.06.20.09.55.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 09:55:14 -0700 (PDT)
-Date: Thu, 20 Jun 2024 10:55:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Dmitry Dunaev <dunaev@tecon.ru>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>
-Subject: Re: [PATCH v4 0/9] misc: introduce STATUS LED activity function
-Message-ID: <20240620165511.GP68077@bill-the-cat>
-References: <20240619230400.8459-1-ansuelsmth@gmail.com>
- <62bdc69d-edf8-422c-a6dd-4d50e1cdc1d1@gmx.de>
- <66740da0.050a0220.f7eae.7834@mx.google.com>
+ d=1e100.net; s=20230601; t=1718903009; x=1719507809;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8JGxkr/six9t3qc7f2ESqOisF9oE4Cst3xwl8CVGmGc=;
+ b=ptG0MohCE2jN2mD+mhZCwm+Nzlh74zf2f+J+oyfBRoPWrTjWovc3qkH9g961zJQ1vp
+ /59rfEVAVKxsU4TCmHWrq93E2pI9Fy4J7khHIECd1qQ4oBUblqY88I2B6dIzjGmEGtfa
+ VxyQxOgI/9gcwE8xX8cl73A0DCQ0Bnoq3y2hgvwCk98HM1iPGhhx8m6x++Mg8nErL4zQ
+ TXxCZGQpPO5u0V54ipH7PV5boO6BF5UA1prMDrFVC6CU/A8HAeaxqMWbw+akjYy2tr26
+ yrYAAKC+IUl5d2uJIO3vpf/g+yU1auc7o+5vKX4XbOnANSBuKae45xkt71+W6fJKzQf0
+ relA==
+X-Gm-Message-State: AOJu0YzoM+dAzaCtkqxxXWci/hHbjIr/i+Z8E6Y+yPVb5Jcz1bGZfMKg
+ wKlcMdF0+un+6x5w8R+Ug7zJm6SjU9IxcZNEiD4pnrR3zEoFAjI=
+X-Google-Smtp-Source: AGHT+IHE6ozhhgaDBXMvOK1d19EP+xQbujHBOOqMrsAtqKpclnjlyKRXp/NXBZzgoTj4aO08Reoeqg==
+X-Received: by 2002:a50:d494:0:b0:57d:788:aaa3 with SMTP id
+ 4fb4d7f45d1cf-57d272db7c8mr807161a12.8.1718903008319; 
+ Thu, 20 Jun 2024 10:03:28 -0700 (PDT)
+Received: from ?IPV6:2a02:810b:f40:4600:67df:1240:90e2:3b31?
+ ([2a02:810b:f40:4600:67df:1240:90e2:3b31])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57cb743907bsm9922568a12.87.2024.06.20.10.03.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Jun 2024 10:03:28 -0700 (PDT)
+Message-ID: <09a91cfd-080a-4c39-8887-c36b42fc8ba2@gmail.com>
+Date: Thu, 20 Jun 2024 19:03:26 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cs0XWUPI8oVBzisn"
-Content-Disposition: inline
-In-Reply-To: <66740da0.050a0220.f7eae.7834@mx.google.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH next 2/2] rockchip: remove support for Theobroma Systems
+ RK3368 Lion
+To: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger
+ <klaus.goger@cherry.de>, Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
+ <20240620-tsd-http-git-clone-v1-2-666e8d6a8949@cherry.de>
+Content-Language: en-US
+From: Alex Bee <knaerzche@gmail.com>
+In-Reply-To: <20240620-tsd-http-git-clone-v1-2-666e8d6a8949@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,98 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 20.06.24 um 12:24 schrieb Quentin Schulz:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> No meaningful changes were made to this SoM since February 2021. Nobody
+> from Theobroma has booted anything recent on that product since July
+> 2021 at the latest. The product isn't available to buy anymore and
+> disappeared from our website.
+> 
+> This product is therefore unmaintained and it would be disingenuous to
+> say the opposite, so drop support for RK3368 Lion.
+> 
+> If you're a user of Lion, feel free to revert this patch or contact our
+> sales/support department.
+That's a pretty interesting support-strategy. While I really don't care for
+this board, please don't go ahead and remove the whole TPL-/SPL-part for
+RK3368 in yet another pointless "cleanup"  only because lion was one the of
+last/only user. Even if EOL RK3368 is getting finally interesting in
+regards of display pipeline as we are finally getting a OSS gpu driver [0].
+I'm planning to add a board which uses TPL/SPL soonish (when my rare spare
+time allows).
 
---cs0XWUPI8oVBzisn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Alex
 
-On Thu, Jun 20, 2024 at 06:29:23AM +0200, Christian Marangi wrote:
-> On Thu, Jun 20, 2024 at 08:34:03AM +0200, Heinrich Schuchardt wrote:
-> > On 6/20/24 01:03, Christian Marangi wrote:
-> > > This series expand the STATUS LED framework with a new color
-> > > and a big new feature. One thing that many device need is a way
-> > > to communicate to the user that the device is actually doing
-> > > something.
-> > >=20
-> > > This is especially useful for recovery steps where an
-> > > user (for example) insert an USB drive, keep a button pressed
-> > > and the device autorecover.
-> > >=20
-> > > There is currently no way to signal the user externally that
-> > > the bootloader is processing/recoverying aside from setting
-> > > a LED on.
-> > >=20
-> > > A solid LED on is not enough and won't actually signal any
-> > > kind of progress.
-> > > Solution is the good old blinking LED but uboot doesn't
-> > > suggest (and support) interrupts and almost all the LED
-> > > are usually GPIO LED that doesn't support HW blink.
-> > >=20
-> > > To fix this and handle the problem of device not supporting
-> > > HW blink, expand the STATUS LED framework with new API.
-> > >=20
-> > > We introduce a new config LED_STATUS_ACTIVITY, that similar
-> > > to the RED, GREEN and others, takes the LED ID set in
-> > > the LED_STATUS config and is used as the global LED for activity
-> > > operations.
-> > >=20
-> > > We add status_led_activity_start/stop() used to turn the
-> > > activity LED on and register a cyclic to make it blink.
-> > > LED will continue to blink until _stop() is called.
-> > >=20
-> > > Function that will start some kind of action will first call
-> > > _start() and then at the end will call stop().
-> > > If (on the broken implementation) a _start() is called before
-> > > calling a _stop(), the Cyclic is first unregister and is
-> > > registered again.
-> > >=20
-> > > Support for this is initially added to the tftp, mtd and ubi
-> > > command.
-> > >=20
-> > > This also contains a big fixup for the gpio_led driver that
-> > > currently deviates from the Documentation and make the
-> > > coloured status led feature unusable.
-> > >=20
-> > > (world tested with the azure pipeline)
-> >=20
-> > Hello Christian,
-> >=20
-> > What is the relationship between CONFIG_LED and CONFIG_LED_STATUS?
-> > Can they be used at the same time or should they be exclusive?
-> > Should CONFIG_LED_STATUS depend on CONFIG_LED?
->=20
-> Well this is something that should have been fixed long time ago.
-> Given the 2 cmd and some function clash with each other they are totally
-> incompatible with each other and one should exclude the other.
+[0] https://gitlab.freedesktop.org/frankbinns/linux-firmware/-/issues/1
 
-Yes, sorry, I missed this earlier on, my fault. The CONFIG_LED_STATUS
-code is legacy and indeed shouldn't be enabled on anything new (and
-ideally, someone would care enough to transition the few platforms using
-the old framework over). So this functionality should be added to the
-drivers/led/ framework and then yes, your platforms defining the LED via
-device tree, with the same compatibles the Linux needs anyhow to be able
-to control it too.
-
---=20
-Tom
-
---cs0XWUPI8oVBzisn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0XusACgkQFHw5/5Y0
-tyydjwwAo/zOxGJ0lU6rcEmHYM177kVjRZhTVLnnoErm7GjXqP0BipaIUJpIU0E+
-LhX2L9YFJoD3SJ5X4crmST9YcO44ApSIbBFhG3HZf2Ju1jXstjHrkQC7ZIqJn0aw
-JM8o/XrB+fcFcoLryoA/YTv/NB9dnGuPe6LiA0FWLY2C5c4A41AEmmpIjK9duUxf
-ulGUJ2zY1YM98Dh+QXhUAkvRgJ9y12McSmaj9qjp9oeoJ1oQtmnoneYcWxSg7XKk
-0vSyMGdQ3y8lIkgz8vQWsdWl+Afxb/ZpY3aROVXV701/WD2cbBVYhwiHiOM06Lia
-O4+eCf8CCDvhfKV3pQ+A26KdHImvLg3qISodVu5rlPXVK7h840eLuCrl1zarDdFu
-lC37eP0hCRoJc11SmjFO99x8Ef22nVhgrTTq9H6y9/IBMc46CuK2WeoK4Bs02HdN
-wRbauUvCaPE6cGzwYGm3ygHDswH4WPzeD1OFc4uV+d7nMvK4TDrzyI7HgZJHQF52
-+QvRisQ/
-=MgDN
------END PGP SIGNATURE-----
-
---cs0XWUPI8oVBzisn--
