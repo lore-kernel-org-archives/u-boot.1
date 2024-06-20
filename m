@@ -4,76 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CF7AC27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 20:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62418C27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 20:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9C3C88385;
-	Thu, 20 Jun 2024 22:16:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B985987D1A;
+	Thu, 20 Jun 2024 22:19:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UeVx3p39";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D366288535; Thu, 20 Jun 2024 22:16:23 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FA5288427
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:16:21 +0200 (CEST)
+ id 760928853F; Thu, 20 Jun 2024 20:46:41 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 07F418840F
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 20:46:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6fa0d077694so604207a34.0
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 13:16:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718914580; x=1719519380; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=muHi0WOv0ewoYwvvzn+fTE8gxCQbp7j7+J48UA1M2/k=;
- b=UeVx3p39Db4CzVBoOS85w9L/ZN5cR3jQS/Enxp1b5sTygcY7dwBafZ3dbokM6JPkKn
- W1tzgJiaySZT8zrKhyH5ZxtCFKX1ZfnLAdCYlb8O5GSmF8kdrF7t9/uYpnRhzdEOgCum
- FtmapPRWmIcD1uvtlHwJ5ZxN9I9JpaARf5024=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718914580; x=1719519380;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=muHi0WOv0ewoYwvvzn+fTE8gxCQbp7j7+J48UA1M2/k=;
- b=MrABjdv31+3suTYH4MN+3VNH9rDFjSZO1Q2z7Uvlt9AVc7LRmKr6dCK8i800zp0Rz+
- DsxUoJM2F2/luJlYWjEeVizXMwXPu3DqaMEM5GddmP3GCHCy4GWW2EjT81vmsDmAu0n0
- pJIjXtFCSxVbz4HdGq88rx/KgpH1GYgxwzymnmHywiCurR+PK7T8G0UBI7egN7mC31iK
- y8VWz2rcYmKCpZHgnwQK92e0NdXrl3sF90cYlglve/fGs+/WzSKQyjbDAfumFI9Kr4TG
- KMJWz0GuTwjJfaDW5nsNh/IYV68+5mieefJgx4leDnDkXIqqmCWaIVlAXCwfsyhcL/Jm
- xBTg==
-X-Gm-Message-State: AOJu0Yz3AKJo64HTekrKRO6hT5lHV2LZmIquVtxR5hdUC9sHUZxrJ0s0
- m5l4+lk8aS7gPqNTKyG2ChHQ4OKl7A7oyV29jncHp3EtoBO9LsDXI9LUOtViwHxmmHSACLXAYy0
- nm0Y=
-X-Google-Smtp-Source: AGHT+IH7ubu4Tl5Jk42TylGMNqumxRzSoFwe+m9w0zzJkBiYcwIu0vFk/12Thbbo1TEBF91jV+Gadg==
-X-Received: by 2002:a05:6830:459:b0:6f9:8a29:8e8c with SMTP id
- 46e09a7af769-70076c0b4cbmr7987835a34.23.1718914580347; 
- Thu, 20 Jun 2024 13:16:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7009c67666csm31673a34.75.2024.06.20.13.16.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 13:16:19 -0700 (PDT)
-Date: Thu, 20 Jun 2024 14:16:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Chris Webb <chris@arachsys.com>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH RFC] gpio: Fix probing of gpio-hogs
-Message-ID: <20240620201617.GA3566532@bill-the-cat>
-References: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
+ spf=pass smtp.mailfrom=christian.loehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0E6B6DA7;
+ Thu, 20 Jun 2024 11:47:03 -0700 (PDT)
+Received: from [10.57.69.158] (unknown [10.57.69.158])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DF35B3F6A8;
+ Thu, 20 Jun 2024 11:46:36 -0700 (PDT)
+Message-ID: <c20f1134-468c-4d5c-aa70-0562d24c36ac@arm.com>
+Date: Thu, 20 Jun 2024 19:46:34 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6g+8gxS4Vb0jVfua"
-Content-Disposition: inline
-In-Reply-To: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: obscure microsd detection issue between U-Boot and kernel
+To: Tim Harvey <tharvey@gateworks.com>, Michael Walle <michael@walle.cc>
+Cc: u-boot <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Linux MMC List <linux-mmc@vger.kernel.org>,
+ Ulf Hansson <ulf.hansson@linaro.org>
+References: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
+ <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
+ <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
+ <50bfdbf9-2ab0-4111-bf2e-abe4c9ed86fb@arm.com>
+ <D1R2ZW5Q12QQ.OU52AZIYS68O@walle.cc>
+ <CAJ+vNU2zu5jwr_jScDN3Xs9-PV0yKyPVqOLBK504i79veAu+Lw@mail.gmail.com>
+Content-Language: en-US
+From: Christian Loehle <christian.loehle@arm.com>
+In-Reply-To: <CAJ+vNU2zu5jwr_jScDN3Xs9-PV0yKyPVqOLBK504i79veAu+Lw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 20 Jun 2024 22:19:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,80 +64,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 6/20/24 17:48, Tim Harvey wrote:
+> On Tue, Jun 4, 2024 at 1:14 AM Michael Walle <michael@walle.cc> wrote:
+>>
+>> On Tue Jun 4, 2024 at 9:47 AM CEST, Christian Loehle wrote:
+>>> On 6/3/24 22:28, Tim Harvey wrote:
+>>>> On Mon, Jun 3, 2024 at 1:18 AM Christian Loehle
+>>>> <christian.loehle@arm.com> wrote:
+>>>>>
+>>>>> On 5/31/24 21:47, Tim Harvey wrote:
+>>>>>> Greetings,
+>>>>>>
+>>>>>> I'm seeing an issue on an imx8mm board (imx8mm-venice-gw73xx) where
+>>>>>> for a specific set of microsd cards if I have accessed the microsd in
+>>>>>> U-Boot with UHS/1.8V the kernel will not recognize that microsd when
+>>>>>> scanning.
+>>>>>>
+>>>>>> The issue does not occur with all microsd cards but seems to appear
+>>>>>> with a large sample size of a specific card/model (Kingston SDC32 32GB
+>>>>>> SDR104 card). I do not see a signal integrity issue on the scope.
+>>>>>>
+>>>>>> Instrumenting the kernel the issue is that the host reports a CRC
+>>>>>> error as soon as the first mmc_send_if_cond call which occurs in
+>>>>>> mmc_rescan_try_freq.
+>>>>>>
+>>>>>> I can avoid the issue by either not accessing the microsd in U-Boot or
+>>>>>> by disabling UHS/1.8V mode in U-Boot therefore what I think is
+>>>>>> happening is that U-Boot leaves the card in UHS/1.8V signalling mode
+>>>>>> and when the kernel scans it sets the voltage back to 3.3V
+>>>>>> standard/default and default timings then issues its clock cycles to
+>>>>>> 'reset' the card and the card does not recognize the reset. I'm
+>>>>>> wondering if this is because the reset is done via clock cycles after
+>>>>>> the kernel has set the I/O voltage back to 3.3V when perhaps the card
+>>>>>> is still in 1.8V mode (although I don't see how that would cause an
+>>>>>> issue)?
+>>>>>
+>>>>> It will cause an issue for many cards and might break some cards.
+>>>>>
+>>>>>>
+>>>>>> Is there some sort of MMC 'reset' I can/should do in U-Boot before
+>>>>>> booting the kernel? Has anyone encountered anything like this before?
+>>>>>
+>>>>> There is no 'switching back' to 3.3V signalling from UHS 1.8V.
+>>>>> The only way this can be done is therefore a full power-off.
+>>>>> Is that done correctly for your system?
+>>>>> AFAIR spec dictates 500ms of <0.5V on VCC. Note that  driving CLK/signal
+>>>>> lines can also sustain the card somewhat, as leakage is only limited
+>>>>> within operating voltage.
+>>>>
+>>>> Hi Christian,
+>>>>
+>>>> Are you saying the only way to properly reset from 1.8V is to have a
+>>>> VDD supply on the microSD card that can be turned off before booting
+>>>> to Linux? We have never had that before and never encountered
+>>>> something like this.
+>>>
+>>> Yes, the only safe way to use UHS-I really anyway.
+>>
+>> I can second that. And also keep in mind that the actual supply
+>> voltage must be below that threshold. Thus, the power-off time also
+>> depends on the capacitance on that supply line after the power load
+>> switch. There are switches with dedicated output discharge circuits
+>> built-in.
+>>
+>> That being said, from my experience there are cards which will work
+>> when switching back from 1V8 to 3V3 signalling and some don't. I
+>> haven't digged deeper into that topic, though.
+>>
+>> -michael
+>>
+>>> You could disable UHS for u-boot but that still leaves (potentially)
+>>> problematic warm-reboots of the board.
+>>> Having a (software-controlled) switchable regulator on SD VCC is pretty
+>>> common for this reason and you should be able to find it in most dts
+>>> for host controllers with sd-uhs-* property.
+>>> I'm afraid that the relevant spec section isn't available in the
+>>> simplified version.
+>>>
+>>> Kind Regards,
+>>> Christian
+>>
+> 
+> Thanks for both of your responses here!
+> 
+> I have a situation where I can re-create a problem switching from 1.8V
+> back to 3.3V with a specific card on a board that has ESD protection
+> between the IMX8MM host and the microSD connector (Semtech
+> ECLAMP2410P.TCT [1]) but works just fine on a previous revision of
+> that same PCB that does not have the ESD protection added. Boards with
+> proper ESD protection are the first time I've seen this issue occur.
+> Does this make sense at all?
 
---6g+8gxS4Vb0jVfua
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I have some hypothesis but that isn't even worth sharing, see below.
 
-On Thu, Jun 13, 2024 at 11:59:05AM +0100, Chris Webb wrote:
+> 
+> I believe that the MMC device is 'reset' via a series of CLK cycles
+> with CMD/DAT non-asserted so I'm having a difficult time understanding
+> how this wouldn't work if the host has been reset to 3.3V.
 
-> 48b3ecbe replumbed the gpio-hog probing to use DM_FLAG_PROBE_AFTER_BIND.
->=20
-> Unfortunately gpio_post_bind is called after the non-preloc recursive
-> dm_probe_devices completes, so setting this flag does not have the intend=
-ed
-> effect and the gpio-hogs never get probed. With instrumentation:
->=20
->   [...]
->   CPU:   MediaTek MT7981
->   Model: GL.iNet GL-X3000
->   DRAM:  512 MiB
->   <mtk_pinctrl_mt7981_bind called>
->   <dm_probe_devices called: root root_driver root_driver [+] [ ]>
->   <dm_probe_devices called: clk fixed_clock gpt_dummy20m [ ] [ ]>
->   [...]
->   <dm_probe_devices called: led gpio_led signal-4 [ ] [ ]>
->   Core:  34 devices, 14 uclasses, devicetree: separate
->   MMC:   <gpio_post_bind called>
->   mmc@11230000: 0
->   [...]
->=20
-> Probe them directly in gpio_post_bind instead.
->=20
-> Signed-off-by: Chris Webb <chris@arachsys.com>
-> ---
->  drivers/gpio/gpio-uclass.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-> index 4234cd91..1c6e1715 100644
-> --- a/drivers/gpio/gpio-uclass.c
-> +++ b/drivers/gpio/gpio-uclass.c
-> @@ -1539,7 +1539,9 @@ static int gpio_post_bind(struct udevice *dev)
->  				 * since hogs can be essential to the hardware
->  				 * system.
->  				 */
-> -				dev_or_flags(child, DM_FLAG_PROBE_AFTER_BIND);
-> +				ret =3D device_probe(child);
-> +				if (ret)
-> +					return ret;
->  			}
->  		}
->  	}
+My answer is simple but not very satisfying:
+It is out of spec.
+After the CMD11 UHS voltage switch anything on CMD, DAT and CLK you
+drive from the host at 3.3V without a proper powercycle is out of spec,
+the card's behavior isn't covered by the SD spec and the card isn't to
+blame.
 
-Adding Marek, as the author of commit 48b3ecbedf82 ("gpio: Get rid of
-gpio_hog_probe_all()").
+If you want a really detailed answer try asking your SD card vendor,
+my guess would be their answer is "the host is out of spec".
 
---=20
-Tom
+Kind Regards,
+Christian
 
---6g+8gxS4Vb0jVfua
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0jgkACgkQFHw5/5Y0
-tyxsYwv+NdhHXniPmtqa6FMDxt/pIHt1N4iIrEBatQo7nTkb2oKanonMY3fBStcV
-SWhrJ3tVN+XY0QgfpchTO34iuA6Z7weng5FDmkLS7NXN5b7+jCfXxrpbdvmJSl3H
-qkpvpo3aJeu8TP0loWAasAQbtjNeNlm5EmXZrZFIqFP30hnV0DS2sIFbouzG5lhU
-AsGhk1TjqrDo/we+PysHaB2XFjz4Tt12q+R4ig+rdM+LwlrzVX4817H0QBit5Mi2
-M/KKNeoqPfVauY0+eVQ9ViFx+l6P4HacwV27hylaLVFG6OGa5aKnGW2wrlMDpsSI
-/HPsU/AL3knRxlspkRjVYmZuZjvJr2NbutdnY/TEZTV9BOcbMm5mld2v+zZogEDN
-XrEY3jTMKUaPD8YQSSXJ3W7T8lMB66OIPkhcM62imVxCWw69K71sNGQN2rzs4uED
-hvH6UMrMMhKLN4KuW9CjGkq63+xtJoy86BA6igTv4NH8yRtFAZS4CoUg1qOmKSnM
-XUzD8Im0
-=zks/
------END PGP SIGNATURE-----
-
---6g+8gxS4Vb0jVfua--
