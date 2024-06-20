@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC97C2BA18
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 04:55:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F57C27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 05:16:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A19D884FD;
-	Thu, 20 Jun 2024 06:55:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EA165884D1;
+	Thu, 20 Jun 2024 07:16:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SoCTVB4r";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iM3bUPZt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4594F88501; Thu, 20 Jun 2024 06:55:03 +0200 (CEST)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
+ id 4DB0688516; Thu, 20 Jun 2024 07:16:25 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2E54884FA
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 06:55:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B537884F9
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 07:16:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-48da5edc11dso844775137.0
- for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 21:55:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-dfef5980a69so462652276.3
+ for <u-boot@lists.denx.de>; Wed, 19 Jun 2024 22:16:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718859299; x=1719464099; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ojez6/Abg4peSECj6/a5Hf1ZgKTpVxw+L0mCGLbkZYI=;
- b=SoCTVB4rEpydeF9wY8blqRQfi4l3nUUOHmEGgTN+QPO+21A8oIE5grCkVS84ZsLRvg
- O4foYLHHTZWqaiafslcIarh3Pkk1+gUCoQoAuo/OPhAe223XGX3sqHariKVBu2X+kVff
- zPH0xfxCKl41Ul/QlcgzDXi49Z52AUO8jHT1ALEjE5PNACdExG8arH/y672Vv83UEpyu
- VTU+wGGIXGxiM/0QQAdDz9YK63bHl6GeEUNpu+E3CKBTAJLh3OzkFsQiTLMyCDVEEuNp
- dtjHKlAqdpi/CMGY7B1HDffiYTjULuBJu6UtwWNkbZSjBKz9KxrRUw66w0xhKnidqU76
- Mgjg==
+ d=gmail.com; s=20230601; t=1718860582; x=1719465382; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=xRPJ7anGPOYltgNLhdzdBBvJxRTfxcijR2b6ldeSmLM=;
+ b=iM3bUPZt5ldGsQMe5KJ8N/3M5HZFHt+szcxMN7PtJ7gxijc+1JvrjIVGYdfxBpOMbo
+ 5H6JobIRqTanhVEqMvLqyZ6RIO0GpUgG3C/+Mji1750+U+wfA1GzUYCwjEBgx4zD/B6o
+ 5GhAR44ySB9SFv2Wy7vRYTcUHRy4XStqp3PdAW5jueVsw9tDUL1+9WGVuaL8tT3PKD5g
+ O0cjRzcUZBhfWjCNqgUxg8y2wVW4K+dPPaHDkXv7CPVif4tUqtxAwdNpLfx2Jsdx3WiF
+ 1yHyURI7llAMx95H1SVzN8s/Rlb4ian0gwK3dKBHdPIcXG/CMiGKNFi5sq1IAt9ugvpX
+ fpXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718859299; x=1719464099;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ojez6/Abg4peSECj6/a5Hf1ZgKTpVxw+L0mCGLbkZYI=;
- b=t7yfQSdgFRZ8xiWWMPKz5rIRHjS7hdcM0yk6BtDOKeOILtJkuom/Cyi8axWdTASXVh
- IY3m53Iqcr8F7zdUYZ0FKgDkz7X43v6qYY+m1/XkhLuSznofz3FepIusR8oVAA2Xbaaz
- GT5TOgoHqDG3I81Bnu8Sjp0YfY2nlypUU0ZSdfrBLEkgjciIee0znIQObx4opvqDLktO
- /8DBXAsUnEUEe01gx4BfRJzJaI0PL8SjHE5waVqW4HqA9siaFg4nTw6aztCzAENf6Jkn
- 6hM4iylGcm2CEi+FU0TZJoI9BPf+5v+OfFNzuyC3gxdjy0yL8i7pgBVH0/iyICqlrhbM
- KYTg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUWyxFqD9kpEMFDbVN1yDMTk92mSVbowHmc9DKzmJhQdtmEvzBpPTxdV76d9kMp28NuRkMdtG2hijN6s++46LfcGsGTgg==
-X-Gm-Message-State: AOJu0YxKkGTumMHxhcTX6DCGaapE0uq1HRqrEPJj2JzNLmsTa9hg6p4j
- LN1CWQiBl45FLL+JK2A87L/P6e+qsymMmMogeozzFBTPBNn0Eda5/CI/9/Dle+kDaZeXsoCtS7Q
- aww9SR0QsVAIRDiI9r16/H97Ad5UhNU0mxSGzdA==
-X-Google-Smtp-Source: AGHT+IEGS5yYqRlm76eLqm2XaSeGtk2mxdycUnUM1GHN048LqpuqAEKHTyY/UIpmSxvmgphOthXngyKObHSuPBtAMZg=
-X-Received: by 2002:a67:ec94:0:b0:48d:798c:d991 with SMTP id
- ada2fe7eead31-48f02b6bf58mr5358696137.10.1718859299413; Wed, 19 Jun 2024
- 21:54:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718860582; x=1719465382;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xRPJ7anGPOYltgNLhdzdBBvJxRTfxcijR2b6ldeSmLM=;
+ b=eHW9XAUuLa4stW57xYB7HOk2axPgtxBT86iP9Pr+61t1qajDwR0fQFJMLst/9TKbmW
+ 3bxdqN+Z3gKh8GcUR8ILRZs5ju8iC4+3ehcihZHwfS8iMxGnKLayHTZ4O0rtW9U20Npc
+ x6x7PcYTDLwjxXzlDul+dG6Isq5lAytAQVCJiQTHKStot2sZpEbgP5re5mQ6DhCiX/4f
+ 1vSqoJR/frqLc8LP3V062qrMtuqOPeryWnThSCui7vUuMcUUY5msfO4fQ7l7OIYDkFR2
+ 4lDG2MC7vgBG8AeSvVaDXorEU2zwBEwLnT6yX7pQjkqcuKVMqzLhh0Kz1IsdJ/lyPHWj
+ 66rA==
+X-Gm-Message-State: AOJu0YwDhN4YlKPsrdj7AzG7mBQTHHLUX9fPOp2KfxtOKD7QBsB6j8E8
+ ogHcnT+Z8WgE/uszhZPrNH3sWewTh5FAB/toCRhgJ0+WqSmN9cjZ3Ed63ngDkboTQrXIim2CiSJ
+ Pg/iBo1AlXlTGCOv8wwbzPHf1JksfkeaU5JE=
+X-Google-Smtp-Source: AGHT+IF3aN2TdQESdgNx2e9KNAM0Qw+1hMD8McC4PxMRvX+gjijj8qa4ZPOQusK3g82gxEndNQmMZk0z7R4cW9KCvFg=
+X-Received: by 2002:a25:d381:0:b0:e01:a124:3fcc with SMTP id
+ 3f1490d57ef6-e02be0fe8cfmr4657477276.4.1718860581783; Wed, 19 Jun 2024
+ 22:16:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240619125310.94867-1-sumit.garg@linaro.org>
- <CAHCN7xK_39QTqRqjvmmnPQyx2atxw7ThoQYu5MB9LbHdeELfBg@mail.gmail.com>
- <CAFA6WYMJi-nVCEE7QoptHVURKpF-QoSh5XqSN14LrFSS5FAKrw@mail.gmail.com>
- <CAOf5uwmy6WsOTCD+mWfjLTrCBO=i8MqGm+mOe6jr+RfyXssjrw@mail.gmail.com>
-In-Reply-To: <CAOf5uwmy6WsOTCD+mWfjLTrCBO=i8MqGm+mOe6jr+RfyXssjrw@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 20 Jun 2024 10:24:48 +0530
-Message-ID: <CAFA6WYNcCu0FdpEN6_z3TmDqHSRnozQuUEwxZ6mWTOgdfSPd1w@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: imx: Drop redundant imports with dts/upstream
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de, 
- patrick.barsanti@amarulasolutions.com, trini@konsulko.com, festevam@denx.de, 
- peng.fan@nxp.com, sebastien.szymanski@armadeus.com, sjg@chromium.org, 
- xypron.glpk@gmx.de, marek.vasut+renesas@mailbox.org, afd@ti.com, bb@ti.com
+From: Chris Packham <judge.packham@gmail.com>
+Date: Thu, 20 Jun 2024 17:16:10 +1200
+Message-ID: <CAFOYHZAzfyGHp3FEFLEiuGFS-XMrprEqANLSBqRkv2B_RHMpUA@mail.gmail.com>
+Subject: mkimage alignment of initrd with -T multi
+To: u-boot <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,66 +81,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Jun 2024 at 18:51, Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi
->
-> On Wed, Jun 19, 2024 at 3:07=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org=
-> wrote:
-> >
-> > On Wed, 19 Jun 2024 at 18:26, Adam Ford <aford173@gmail.com> wrote:
-> > >
-> > > On Wed, Jun 19, 2024 at 7:53=E2=80=AFAM Sumit Garg <sumit.garg@linaro=
-.org> wrote:
-> > > >
-> > > > Drop redundant header imports with dts/upstream already providing
-> > > > updated headers which have been checked to be backwards compatibili=
-ty.
-> > > >
-> > > > The imx headers which aren't present in dts/upstream are as follows=
-:
-> > > >
-> > > > - include/dt-bindings/clock/imxrt1020-clock.h
-> > > > - include/dt-bindings/clock/imx8qm-clock.h
-> > > > - include/dt-bindings/clock/imxrt1170-clock.h
-> > > > - include/dt-bindings/clock/imx8qxp-clock.h
-> > > > - include/dt-bindings/memory/imxrt-sdram.h
-> > > > - include/dt-bindings/pinctrl/pads-imx8qxp.h
-> > > > - include/dt-bindings/pinctrl/pads-imx8qm.h
-> > > > - include/dt-bindings/soc/imx8_pd.h
-> > > > - include/dt-bindings/soc/imx_rsrc.h
-> > > >
-> > > > hence these aren't dropped yet but there was an unused header:
-> > > >
-> > > > - include/dt-bindings/pinctrl/pins-imx8mq.h
-> > > >
-> > > > which has been dropped as well. There shouldn't be any funtional im=
-pact
-> > > > with this change but it rather allows iMX platforms to use upstream
-> > > > dt-bindings headers in a backwards compatible manner.
-> > >
-> > > Will this have any impact on board with -u-boot.dtsi files that might
-> > > reference these files or will they point to the upstream path?
-> > >
-> >
-> > No it won't have any impact on existing boards, the headers would
-> > rather just be included from dts/upstream/include/dt-bindings/
-> > instead. The DT files would just be including headers the same way as
-> > before: #include <dt-bindings/foo/bar.h>. The world build is ongoing
-> > here [1] which should be able to justify it.
-> >
-> > [1] https://github.com/u-boot/u-boot/pull/587
-> >
->
-> They will point to the upstream part but the fact it's that you can
-> test only that they compile ;).
+Hi U-Boot,
 
-Majority of the headers removed have been compared to be identical and
-the rest headers have been checked to be DT ABI compatible with
-upstream counterparts. IMHO, that should be enough to believe the
-correctness of this patch. If you would like to manually review them
-or give this patch a try on a real iMX device then please feel free to
-do that.
+I've been given a MIPS reference board with a fairly old vendor U-Boot
+on it. It does seem to support the  Mutli-File Image format but I'm
+running into an issue where the kernel expects the initrd on a page
+boundary.
 
--Sumit
+I'm using a command like the following to produce and image
+  cat board.dtb >> vmlinux.bin
+  gzip vmlinux.bin >vmlinux.gz
+  mkimage -C gzip -A mips -O linux -T multi -a 0x80100000 -e
+0x80100000 -d vmlinux.gz:initrd.sqsh myboard.img
+
+I can mess about with padding vmlinux.gz after the gzip step but the
+process is a bit fragile and involves me guessing at some magic
+numbers that I think might be sizes of certain headers.
+
+Is there any way to convince mkimage to make sure the initrd is on an
+appropriately aligned boundary so I don't have to guess.
+
+Thanks,
+Chris
