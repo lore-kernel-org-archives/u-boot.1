@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5058AC27C79
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 17:03:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34C4EC27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 17:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEEDF8813A;
-	Thu, 20 Jun 2024 19:03:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9616B8852E;
+	Thu, 20 Jun 2024 19:08:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c0Q3ROaO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j87cPAvH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85F948834D; Thu, 20 Jun 2024 19:03:31 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 6D17A88532; Thu, 20 Jun 2024 19:08:36 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62C0C87C7E
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 19:03:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B4DD8852D
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 19:08:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=knaerzche@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-57d07673185so1049519a12.1
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 10:03:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-25caf76158cso658981fac.0
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 10:08:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718903009; x=1719507809; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8JGxkr/six9t3qc7f2ESqOisF9oE4Cst3xwl8CVGmGc=;
- b=c0Q3ROaOaCwyPVDjabMwO4XQRBtJQwDiSe2m30cLc7aBpqBovc6mmZxCguOF8I1Z7r
- 0lBT8aHSELfVviBOJjKk/8oFAceTlogy7L547TTByv7lglCz0/qX4WPf6NVHNwfQ+hKq
- uTpyJMVdlEaF3lfsxJIjth81h7ndbhXLkbTMNmaTaboez5PH4azpopU7Be5JmWZ3mh3g
- k2BDXKPyy/eNNY6WnZIzsQ4IFZQJKogfDG0kdhbyc8eagbI8Q3KEVscS9TFUWhaFOHL7
- IcUB+ykfsENZNjQgNlLAVW8/zcAF3BIkx1u2DuC3A19GKn1BkuiHwt5DT9F74sDmzKMc
- Rkhw==
+ d=konsulko.com; s=google; t=1718903313; x=1719508113; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0QRbh5HxXHXaDyB3NXkEWKEnQfmGLyoA+Uqyt4HExOE=;
+ b=j87cPAvHvmgsnkqJMK8fmtye0FNkYku2PVpTkOJe0hTpQvwo4gLCJIOXbK9nRcbBoJ
+ zaqhAYo7nxYMJvaPHqvrtJFMI/yBsUCCdqvYTo0wojIeYh36yfPj6v6qMGXFd9ScEjrO
+ 6uv0Zt5JrclTYnT19LsS0BmA9Cf9OlJeEcgjo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718903009; x=1719507809;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8JGxkr/six9t3qc7f2ESqOisF9oE4Cst3xwl8CVGmGc=;
- b=ptG0MohCE2jN2mD+mhZCwm+Nzlh74zf2f+J+oyfBRoPWrTjWovc3qkH9g961zJQ1vp
- /59rfEVAVKxsU4TCmHWrq93E2pI9Fy4J7khHIECd1qQ4oBUblqY88I2B6dIzjGmEGtfa
- VxyQxOgI/9gcwE8xX8cl73A0DCQ0Bnoq3y2hgvwCk98HM1iPGhhx8m6x++Mg8nErL4zQ
- TXxCZGQpPO5u0V54ipH7PV5boO6BF5UA1prMDrFVC6CU/A8HAeaxqMWbw+akjYy2tr26
- yrYAAKC+IUl5d2uJIO3vpf/g+yU1auc7o+5vKX4XbOnANSBuKae45xkt71+W6fJKzQf0
- relA==
-X-Gm-Message-State: AOJu0YzoM+dAzaCtkqxxXWci/hHbjIr/i+Z8E6Y+yPVb5Jcz1bGZfMKg
- wKlcMdF0+un+6x5w8R+Ug7zJm6SjU9IxcZNEiD4pnrR3zEoFAjI=
-X-Google-Smtp-Source: AGHT+IHE6ozhhgaDBXMvOK1d19EP+xQbujHBOOqMrsAtqKpclnjlyKRXp/NXBZzgoTj4aO08Reoeqg==
-X-Received: by 2002:a50:d494:0:b0:57d:788:aaa3 with SMTP id
- 4fb4d7f45d1cf-57d272db7c8mr807161a12.8.1718903008319; 
- Thu, 20 Jun 2024 10:03:28 -0700 (PDT)
-Received: from ?IPV6:2a02:810b:f40:4600:67df:1240:90e2:3b31?
- ([2a02:810b:f40:4600:67df:1240:90e2:3b31])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57cb743907bsm9922568a12.87.2024.06.20.10.03.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Jun 2024 10:03:28 -0700 (PDT)
-Message-ID: <09a91cfd-080a-4c39-8887-c36b42fc8ba2@gmail.com>
-Date: Thu, 20 Jun 2024 19:03:26 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ d=1e100.net; s=20230601; t=1718903313; x=1719508113;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0QRbh5HxXHXaDyB3NXkEWKEnQfmGLyoA+Uqyt4HExOE=;
+ b=xPXr5bgEkZ3rqVOWCTDbGfxfUJXFgCJBK1u0209ouEpeDLoTr5Ux0ARxQJ19kO3Y48
+ oz3MbQdDUqoyKsDpG+bcmHgCjA/v3+W99/4CHE868D9UKt7CSbSc60lFHnvwsS4pKKoU
+ izOqe5V7FUEuYn0T5SQkoJTNzpNuYYI4tiPvmUaOpqmuLDh5D4bWu229fyE2e+3/a5ld
+ gUgY96KNNqmbQe4LVcSfrfOeLuiZ6xCcDWnfgLxL0Xxdz/Ie/GEYX82owi0GEnP+B6ca
+ DnMfL0N0BSSdw7rBkUQYZKOTrtS7pbzNINM9uCjO+ESv/Ai/7t+DxwPDPElCEScio/d/
+ 1KrA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXZgN0jF3hdCWe5e26T3htZ2POt1arlIwystDhfEEl2sW2/N+zYWXwrTcb46zoNvdzkPRveaUMQR08FRS6mAhGiMyd5mg==
+X-Gm-Message-State: AOJu0YymUOXF3bAs2T+Ddur+71YgxLHQmA9PF56Qlp+//yGXeLwN5y+w
+ 0qxoMFwb3N/8jnqDfP78RPvyv/ICuhbfiu3k02BI/LjYjCNMQuC99BheglnfD1o=
+X-Google-Smtp-Source: AGHT+IHopUScVuK5ZVZdRlolH7NTYJ9BxxigqOGmRmXEUNXUn91xvVUi93Tfw2D+Ujs0iGxZ5F4HkQ==
+X-Received: by 2002:a05:6870:d8f:b0:254:a810:cdf with SMTP id
+ 586e51a60fabf-25c94a0018cmr6512240fac.13.1718903312923; 
+ Thu, 20 Jun 2024 10:08:32 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2569930f768sm4337280fac.41.2024.06.20.10.08.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Jun 2024 10:08:32 -0700 (PDT)
+Date: Thu, 20 Jun 2024 11:08:30 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alex Bee <knaerzche@gmail.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger <klaus.goger@cherry.de>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@cherry.de>
 Subject: Re: [PATCH next 2/2] rockchip: remove support for Theobroma Systems
  RK3368 Lion
-To: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger
- <klaus.goger@cherry.de>, Heiko Stuebner <heiko.stuebner@cherry.de>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+Message-ID: <20240620170830.GQ68077@bill-the-cat>
 References: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
  <20240620-tsd-http-git-clone-v1-2-666e8d6a8949@cherry.de>
-Content-Language: en-US
-From: Alex Bee <knaerzche@gmail.com>
-In-Reply-To: <20240620-tsd-http-git-clone-v1-2-666e8d6a8949@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <09a91cfd-080a-4c39-8887-c36b42fc8ba2@gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xzFIDNQL2WTddJ17"
+Content-Disposition: inline
+In-Reply-To: <09a91cfd-080a-4c39-8887-c36b42fc8ba2@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,28 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 20.06.24 um 12:24 schrieb Quentin Schulz:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> No meaningful changes were made to this SoM since February 2021. Nobody
-> from Theobroma has booted anything recent on that product since July
-> 2021 at the latest. The product isn't available to buy anymore and
-> disappeared from our website.
-> 
-> This product is therefore unmaintained and it would be disingenuous to
-> say the opposite, so drop support for RK3368 Lion.
-> 
-> If you're a user of Lion, feel free to revert this patch or contact our
-> sales/support department.
-That's a pretty interesting support-strategy. While I really don't care for
-this board, please don't go ahead and remove the whole TPL-/SPL-part for
-RK3368 in yet another pointless "cleanup"  only because lion was one the of
-last/only user. Even if EOL RK3368 is getting finally interesting in
-regards of display pipeline as we are finally getting a OSS gpu driver [0].
-I'm planning to add a board which uses TPL/SPL soonish (when my rare spare
-time allows).
 
-Alex
+--xzFIDNQL2WTddJ17
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[0] https://gitlab.freedesktop.org/frankbinns/linux-firmware/-/issues/1
+On Thu, Jun 20, 2024 at 07:03:26PM +0200, Alex Bee wrote:
+> Am 20.06.24 um 12:24 schrieb Quentin Schulz:
+> > From: Quentin Schulz <quentin.schulz@cherry.de>
+> >=20
+> > No meaningful changes were made to this SoM since February 2021. Nobody
+> > from Theobroma has booted anything recent on that product since July
+> > 2021 at the latest. The product isn't available to buy anymore and
+> > disappeared from our website.
+> >=20
+> > This product is therefore unmaintained and it would be disingenuous to
+> > say the opposite, so drop support for RK3368 Lion.
+> >=20
+> > If you're a user of Lion, feel free to revert this patch or contact our
+> > sales/support department.
+> That's a pretty interesting support-strategy. While I really don't care f=
+or
+> this board, please don't go ahead and remove the whole TPL-/SPL-part for
+> RK3368 in yet another pointless "cleanup"  only because lion was one the =
+of
+> last/only user. Even if EOL RK3368 is getting finally interesting in
+> regards of display pipeline as we are finally getting a OSS gpu driver [0=
+].
+> I'm planning to add a board which uses TPL/SPL soonish (when my rare spare
+> time allows).
 
+Please update the MAINTAINERS file for the relevant to your future
+platform, or even better possibly get a skeleton of this platform
+posted. Thanks.
+
+--=20
+Tom
+
+--xzFIDNQL2WTddJ17
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0YgoACgkQFHw5/5Y0
+tyzS0Qv/X60XA5qlqHNY1MxjTS1qkpGb+XQwnHewC85HfRRjwPa2UbsmzL6SfnbJ
+zvdP6d++k0V+pkKk0T2y+aPPcFP59BvfUT/O2g2WM39q8yuPSFiGE9Mklvs2ltFS
+Fh5OCm4/9URi4T7yKf+NZlwyi2HjDKWTbF+ZKVYZLjQzoWD5jcnzBDB02WL0ksJt
+NEls5w+o+t7uOOdSpiPgOyK2f787HB/f1Ffoq5nyinmLufo6Th7TdBmFSaktA7TG
+FEY1IxePj4RJc2nOB+zEh+aoXc+OdyfAJqsbptiAqQNWX3GZRK3IBGlleM3PSaUp
+ydVnSb227x4KTCyNELFv+ZkH0cfd61ilG+vRzJ1pK7Y2I9DNfUmq9v0q/Nt6cfDw
+GPjSqVHsTTOQjaX68qkBzmNlVxfoIOPxFoqVZbtFXMdzeDZIFOtTTV3aLrCUTPPl
+/UfcAA94gZ8maB53k986y5nFUlqNpLXb8i2U7SlupZIfQtAIx+kQh8gMn2FS7xC8
+02ND3a1e
+=FpNL
+-----END PGP SIGNATURE-----
+
+--xzFIDNQL2WTddJ17--
