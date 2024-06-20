@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2344CC2BA1A
-	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 20:15:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CF7AC27C79
+	for <u-boot@archiver.kernel.org>; Thu, 20 Jun 2024 20:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6239687DD3;
-	Thu, 20 Jun 2024 22:15:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D9C3C88385;
+	Thu, 20 Jun 2024 22:16:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rD05TN6N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UeVx3p39";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0183688385; Thu, 20 Jun 2024 22:15:38 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id D366288535; Thu, 20 Jun 2024 22:16:23 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F07F08780E
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:15:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FA5288427
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:16:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a6265d3ba8fso133145366b.0
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 13:15:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6fa0d077694so604207a34.0
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 13:16:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718914535; x=1719519335; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=li5mHXyyyfT2dIQ+nk2Zca4tMZrlGBLbgHWF17J1zIQ=;
- b=rD05TN6NdzOy0QjJl1fVG3fjLTJY0pMT1dx0lrxAUOxHsw2kzcZT8o0wzX6F0I7yQe
- Z+GPYvOqjKSBCqnmnvC7UDleM64MfyqwIrS3iYMrR4VpOQtc1rpXxlXx6QwG8s8P9dkK
- O891adAoMLxvFNEdnudzMxzKv4P0Ne9WYJaAIj5Dvvf89MtpQ2BVysFwR6B/kVyDfuJN
- qUXP8ukHKakS5jHvUZFT9tKNjZ8pZxWk9G6nMCbQpJXibNscqVD9ha52V5X0hHKmnhCW
- mc40EqXjo7fJdSuoLIUQxb/PbtkQ4+sXIdETi+aq7WAEQ+eHWZmb6CCKE/9Sf6vjb+wE
- oG3g==
+ d=konsulko.com; s=google; t=1718914580; x=1719519380; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=muHi0WOv0ewoYwvvzn+fTE8gxCQbp7j7+J48UA1M2/k=;
+ b=UeVx3p39Db4CzVBoOS85w9L/ZN5cR3jQS/Enxp1b5sTygcY7dwBafZ3dbokM6JPkKn
+ W1tzgJiaySZT8zrKhyH5ZxtCFKX1ZfnLAdCYlb8O5GSmF8kdrF7t9/uYpnRhzdEOgCum
+ FtmapPRWmIcD1uvtlHwJ5ZxN9I9JpaARf5024=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718914535; x=1719519335;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=li5mHXyyyfT2dIQ+nk2Zca4tMZrlGBLbgHWF17J1zIQ=;
- b=w3/svZKW82fCmKyKsc4X7ZBl1ZmORAFkabcrkasU5yf4N2cjz4a1JSgYecAjEZ1Eit
- SghVMcyp3z0IIcL6kp9av4Rx//CeixA0qY+/DUwDjYCsONhSF9kUQFA/B2wuzx66u/TI
- 91i0gT8zrH+cKrCzgIOtxTP7pzGeLAg6XGv7snDsrWRS2BXEyxq5zlPBK7y4xyqg6Uu4
- vUvr4QjBhGXkP1xGZ89LjgEWx8xrfbJaWm0vb43pyki4PklBXvBCWYwkWvi0y//OV/dg
- xvqrp07OFZo2beuXar4flg64F6gFNY2QXM2TDckRHoE7hSpjzt179+h9bL4CZzhkfjvB
- fcUw==
-X-Gm-Message-State: AOJu0YzxKefCY+h247HCA5ZRVYnT7g2ofy8wCS+J2kiEcmuDrzgwZ+Oi
- wICVKalrVSvYMRpoBkb+QxVLOwoCLpIp3q2Q0rGTmcgWMA2sy0ULmFaIfcUyLEo=
-X-Google-Smtp-Source: AGHT+IEb8p0RxbWypGy6uxoYGg2o2EzyDfmOESHujFmO8dSxRP2ULhg69wyMYldd29Cf94i3aOyJ6Q==
-X-Received: by 2002:a17:907:a707:b0:a6f:b08b:86cb with SMTP id
- a640c23a62f3a-a6fb08b8da5mr291120966b.56.1718914535180; 
- Thu, 20 Jun 2024 13:15:35 -0700 (PDT)
-Received: from hades.. (ppp046103020130.access.hol.gr. [46.103.20.130])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fcf560668sm5900866b.167.2024.06.20.13.15.34
+ d=1e100.net; s=20230601; t=1718914580; x=1719519380;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=muHi0WOv0ewoYwvvzn+fTE8gxCQbp7j7+J48UA1M2/k=;
+ b=MrABjdv31+3suTYH4MN+3VNH9rDFjSZO1Q2z7Uvlt9AVc7LRmKr6dCK8i800zp0Rz+
+ DsxUoJM2F2/luJlYWjEeVizXMwXPu3DqaMEM5GddmP3GCHCy4GWW2EjT81vmsDmAu0n0
+ pJIjXtFCSxVbz4HdGq88rx/KgpH1GYgxwzymnmHywiCurR+PK7T8G0UBI7egN7mC31iK
+ y8VWz2rcYmKCpZHgnwQK92e0NdXrl3sF90cYlglve/fGs+/WzSKQyjbDAfumFI9Kr4TG
+ KMJWz0GuTwjJfaDW5nsNh/IYV68+5mieefJgx4leDnDkXIqqmCWaIVlAXCwfsyhcL/Jm
+ xBTg==
+X-Gm-Message-State: AOJu0Yz3AKJo64HTekrKRO6hT5lHV2LZmIquVtxR5hdUC9sHUZxrJ0s0
+ m5l4+lk8aS7gPqNTKyG2ChHQ4OKl7A7oyV29jncHp3EtoBO9LsDXI9LUOtViwHxmmHSACLXAYy0
+ nm0Y=
+X-Google-Smtp-Source: AGHT+IH7ubu4Tl5Jk42TylGMNqumxRzSoFwe+m9w0zzJkBiYcwIu0vFk/12Thbbo1TEBF91jV+Gadg==
+X-Received: by 2002:a05:6830:459:b0:6f9:8a29:8e8c with SMTP id
+ 46e09a7af769-70076c0b4cbmr7987835a34.23.1718914580347; 
+ Thu, 20 Jun 2024 13:16:20 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7009c67666csm31673a34.75.2024.06.20.13.16.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 13:15:34 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de,
-	jhumphreysti@gmail.com
-Cc: u-boot@lists.denx.de,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH] efi_loader: adjust config options for capsule updates
-Date: Thu, 20 Jun 2024 23:15:31 +0300
-Message-ID: <20240620201531.321110-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ Thu, 20 Jun 2024 13:16:19 -0700 (PDT)
+Date: Thu, 20 Jun 2024 14:16:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Chris Webb <chris@arachsys.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH RFC] gpio: Fix probing of gpio-hogs
+Message-ID: <20240620201617.GA3566532@bill-the-cat>
+References: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6g+8gxS4Vb0jVfua"
+Content-Disposition: inline
+In-Reply-To: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,35 +90,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI_IGNORE_OSINDICATIONS is used to ignore OsIndications if setvariable
-at runtime is not supported and allow the platform to perform capsule
-updates on disk. With the recent changes boards can conditionally enable
-setvariable at runtime using EFI_RT_VOLATILE_STORE.
 
-Let's make that visible in our Kconfigs and enable EFI_IGNORE_OSINDICATIONS
-when set variable at runtime is disabled.
+--6g+8gxS4Vb0jVfua
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Since EFI_RT_VOLATILE_STORE needs help from the OS to persist the
-variables, allow users to ignore OsIndications even if setvariable at
-runtime is enabled.
+On Thu, Jun 13, 2024 at 11:59:05AM +0100, Chris Webb wrote:
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+> 48b3ecbe replumbed the gpio-hog probing to use DM_FLAG_PROBE_AFTER_BIND.
+>=20
+> Unfortunately gpio_post_bind is called after the non-preloc recursive
+> dm_probe_devices completes, so setting this flag does not have the intend=
+ed
+> effect and the gpio-hogs never get probed. With instrumentation:
+>=20
+>   [...]
+>   CPU:   MediaTek MT7981
+>   Model: GL.iNet GL-X3000
+>   DRAM:  512 MiB
+>   <mtk_pinctrl_mt7981_bind called>
+>   <dm_probe_devices called: root root_driver root_driver [+] [ ]>
+>   <dm_probe_devices called: clk fixed_clock gpt_dummy20m [ ] [ ]>
+>   [...]
+>   <dm_probe_devices called: led gpio_led signal-4 [ ] [ ]>
+>   Core:  34 devices, 14 uclasses, devicetree: separate
+>   MMC:   <gpio_post_bind called>
+>   mmc@11230000: 0
+>   [...]
+>=20
+> Probe them directly in gpio_post_bind instead.
+>=20
+> Signed-off-by: Chris Webb <chris@arachsys.com>
+> ---
+>  drivers/gpio/gpio-uclass.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+> index 4234cd91..1c6e1715 100644
+> --- a/drivers/gpio/gpio-uclass.c
+> +++ b/drivers/gpio/gpio-uclass.c
+> @@ -1539,7 +1539,9 @@ static int gpio_post_bind(struct udevice *dev)
+>  				 * since hogs can be essential to the hardware
+>  				 * system.
+>  				 */
+> -				dev_or_flags(child, DM_FLAG_PROBE_AFTER_BIND);
+> +				ret =3D device_probe(child);
+> +				if (ret)
+> +					return ret;
+>  			}
+>  		}
+>  	}
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index ee71f417147a..6006e845cb1f 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -220,6 +220,7 @@ config EFI_CAPSULE_ON_DISK
- config EFI_IGNORE_OSINDICATIONS
- 	bool "Ignore OsIndications for CapsuleUpdate on-disk"
- 	depends on EFI_CAPSULE_ON_DISK
-+	default y if !EFI_RT_VOLATILE_STORE
- 	help
- 	  There are boards where U-Boot does not support SetVariable at runtime.
- 	  Select this option if you want to use the capsule-on-disk feature
---
-2.43.0
+Adding Marek, as the author of commit 48b3ecbedf82 ("gpio: Get rid of
+gpio_hog_probe_all()").
 
+--=20
+Tom
+
+--6g+8gxS4Vb0jVfua
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ0jgkACgkQFHw5/5Y0
+tyxsYwv+NdhHXniPmtqa6FMDxt/pIHt1N4iIrEBatQo7nTkb2oKanonMY3fBStcV
+SWhrJ3tVN+XY0QgfpchTO34iuA6Z7weng5FDmkLS7NXN5b7+jCfXxrpbdvmJSl3H
+qkpvpo3aJeu8TP0loWAasAQbtjNeNlm5EmXZrZFIqFP30hnV0DS2sIFbouzG5lhU
+AsGhk1TjqrDo/we+PysHaB2XFjz4Tt12q+R4ig+rdM+LwlrzVX4817H0QBit5Mi2
+M/KKNeoqPfVauY0+eVQ9ViFx+l6P4HacwV27hylaLVFG6OGa5aKnGW2wrlMDpsSI
+/HPsU/AL3knRxlspkRjVYmZuZjvJr2NbutdnY/TEZTV9BOcbMm5mld2v+zZogEDN
+XrEY3jTMKUaPD8YQSSXJ3W7T8lMB66OIPkhcM62imVxCWw69K71sNGQN2rzs4uED
+hvH6UMrMMhKLN4KuW9CjGkq63+xtJoy86BA6igTv4NH8yRtFAZS4CoUg1qOmKSnM
+XUzD8Im0
+=zks/
+-----END PGP SIGNATURE-----
+
+--6g+8gxS4Vb0jVfua--
