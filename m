@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D97E5C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EFC6C2BB85
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:57:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 097F98862D;
+	by phobos.denx.de (Postfix) with ESMTP id 71C3B88633;
 	Fri, 21 Jun 2024 21:52:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NmvHkdH+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JAPao/Ec";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B26E888617; Fri, 21 Jun 2024 21:52:33 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 78BE3885F2; Fri, 21 Jun 2024 21:52:34 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94FC1885FE
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 561BF8860A
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-7ebde93bf79so92514739f.1
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:31 -0700 (PDT)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-7ebe508fa34so122841339f.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718999550; x=1719604350; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718999551; x=1719604351; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=o3ifV3AkqrSdmnwOJI4BSwUd2tvrU4e53OcYI7a17Hg=;
- b=NmvHkdH+q6d5iGBmtGHyAG0B8EhqmSAA/Nm3Jje4kdlbSe8V1US//CtHfw4SEAGI7K
- JLoCY31dNPZuy2yIOWzUfy0Lxdkg/RSLmh5RfebCDa8fOE8FN9SUs9YbSfxT0qR+/Z8i
- pGhJdZy5FO7W0BHBocSPy1fIjDJmtRQZAe+uw=
+ bh=OOtaUyztkVMZyLL+JdveXN1qKv0Wgnd/AW8GpO0yH1o=;
+ b=JAPao/Ec7xjdswgxSevT6sU1rykmaOz4jf3JMXPsCPuTFbY74l8ZmfD2e/TwLZaQoT
+ COBq0fBh0mhfr6N5AFvanJHm191ZfgchblmEParOhYiF0QvBYxGPv7v5STLmIsgEtxmq
+ 1n68VoL8blcVJU9Yx2yq7ZUFX/03PPFsq2raA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718999550; x=1719604350;
+ d=1e100.net; s=20230601; t=1718999551; x=1719604351;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=o3ifV3AkqrSdmnwOJI4BSwUd2tvrU4e53OcYI7a17Hg=;
- b=eLIg5NqdZ0W4sxErXCZ4CHPVAGKNVAFaMODx5KNzPtEUI1nU4xxvJXCbboEzgiwHFX
- 6N70yWipTwFwVqSXkwrP+CeGnC9Y8dwKHJ0hdJU7EDtC+C71vNRqLxaocE6hfV2knVx4
- 1CnM8gcghrlIsBXPfLGvyoPcNi1YOU6kvzW/p/mUjotvEmTXk3ehacwUCfGjW7/UMumm
- MNtEWOHi1yhxkqdrPTwa+KaCG36dJZ1qKWbNmcuj7TsmGsVh/3Bat4NZrfhJhVSLxsFc
- z7/uJw7ZupvqgQAYlbP0QizSzv8z0gMtHEgE2YKmm/DtPspxwZrrZVd69IHNJBeNL4mA
- jg/Q==
-X-Gm-Message-State: AOJu0YzvG3qSiRmLHltd9QcU25cHhBoPp+AQB8/2mH7IWb6ctDcaOVS7
- NM6OS+nnKg5Nu9q+To2npzJfPXPGaRnfcXQDn717TtLttsfcUtC+E8FVMcgL/EUZAz9nl7EK7di
- WMA==
-X-Google-Smtp-Source: AGHT+IE7e32vS6BFqH2RoNidpq8LU0gfINhmoRP2r4Mp8e2YIW3ZfTxMgn3O0zj7YgdQJYI6LiGCWw==
-X-Received: by 2002:a05:6602:6d06:b0:7eb:8d08:e9df with SMTP id
- ca18e2360f4ac-7f13eea3198mr1161958739f.19.1718999550211; 
- Fri, 21 Jun 2024 12:52:30 -0700 (PDT)
+ bh=OOtaUyztkVMZyLL+JdveXN1qKv0Wgnd/AW8GpO0yH1o=;
+ b=gSHNAWyvZz+H88jJivzgVUwPx81IzoR50miNNjVrEU/fbNEjGLqEpR6xQac4NQvzpR
+ Yij8JarBFzG9VdZk3VLSxPN2RvrMwpuQYfvGsJoIu65kJ4i2rpfjSUPhY1A+fQCHb9g8
+ 3yzXytnyK1uSbz6C69iWvSmpc9tlb/YlUMPJflxkAji8rCwC6rRK0xqKxIwtk0TEPikv
+ EpqsziTyEzB7JcT9ckpJbm8HtoNWLNYlE2ow0fVnZYSifnsuzvj2+AkILyUxNmUaZ/6c
+ NAVo/GpXlOjuw47fd9iXviPRt7IdWuzAJl+IWdp9sSL7ToUSltdOd9sXUcBmYjvYUTAv
+ W0YQ==
+X-Gm-Message-State: AOJu0YzR12ePR6AuH4h8Wr5TfdA5BiUg3ytG9/v40N4KbFcCWMdGDkaq
+ v0pw/+MJKIIodn8MnNG/GeSmRRJDCCqpfUQsKWzetFP6VBXk/LKcjjt5XTPGzM7MmB6ek29pa89
+ fDw==
+X-Google-Smtp-Source: AGHT+IFJlgucYZDZg0iAU3dcsO2aVfQBlej6YRH/i/saJ+B648gYT3R4wxzDhF9VAOVb95sVByypGA==
+X-Received: by 2002:a05:6602:158b:b0:7e1:8a93:48ef with SMTP id
+ ca18e2360f4ac-7f13ee8ac9dmr1127785239f.21.1718999551011; 
+ Fri, 21 Jun 2024 12:52:31 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.29
+ ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 12:52:29 -0700 (PDT)
+ Fri, 21 Jun 2024 12:52:30 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 26/43] test: Decode exceptions only with sandbox
-Date: Fri, 21 Jun 2024 13:51:47 -0600
-Message-Id: <20240621195204.2675252-27-sjg@chromium.org>
+Subject: [PATCH v2 27/43] test: Avoid failing skipped tests
+Date: Fri, 21 Jun 2024 13:51:48 -0600
+Message-Id: <20240621195204.2675252-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
 References: <20240621195204.2675252-1-sjg@chromium.org>
@@ -89,74 +89,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a real board fails we don't want to decode the exception. Reserve
-that behaviour for sandbox. Also avoid raising a new exception on
-failure - just re-raise the existing one.
+When a test returns -EAGAIN this should not be considered a failure.
+Fix what seems to be a problem case, where the pytests see a failure
+when a test has merely been skipped.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_sandbox.py |  2 +-
- test/py/u_boot_spawn.py           | 10 ++++++----
- 2 files changed, 7 insertions(+), 5 deletions(-)
+ test/test-main.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/test/py/u_boot_console_sandbox.py b/test/py/u_boot_console_sandbox.py
-index 27c6db8d719..7bc44c78b8b 100644
---- a/test/py/u_boot_console_sandbox.py
-+++ b/test/py/u_boot_console_sandbox.py
-@@ -58,7 +58,7 @@ class ConsoleSandbox(ConsoleBase):
-         if self.use_dtb:
-             cmd += ['-d', self.config.dtb]
-         cmd += self.sandbox_flags
--        return Spawn(cmd, cwd=self.config.source_dir)
-+        return Spawn(cmd, cwd=self.config.source_dir, decode_signal=True)
+diff --git a/test/test-main.c b/test/test-main.c
+index 3fa6f6e32ec..cda1a186390 100644
+--- a/test/test-main.c
++++ b/test/test-main.c
+@@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
+ static int ut_run_test_live_flat(struct unit_test_state *uts,
+ 				 struct unit_test *test)
+ {
+-	int runs;
++	int runs, ret;
  
-     def restart_uboot_with_flags(self, flags, expect_reset=False, use_dtb=True):
-         """Run U-Boot with the given command-line flags
-diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
-index 7421da49aa9..81a09a9d639 100644
---- a/test/py/u_boot_spawn.py
-+++ b/test/py/u_boot_spawn.py
-@@ -25,18 +25,20 @@ class Spawn:
-         output: accumulated output from expect()
-     """
+ 	if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SANDBOX))
+ 		return skip_test(uts);
+@@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+ 	if (CONFIG_IS_ENABLED(OF_LIVE)) {
+ 		if (!(test->flags & UT_TESTF_FLAT_TREE)) {
+ 			uts->of_live = true;
+-			ut_assertok(ut_run_test(uts, test, test->name));
+-			runs++;
++			ret = ut_run_test(uts, test, test->name);
++			if (ret != -EAGAIN) {
++				ut_assertok(ret);
++				runs++;
++			}
+ 		}
+ 	}
  
--    def __init__(self, args, cwd=None):
-+    def __init__(self, args, cwd=None, decode_signal=False):
-         """Spawn (fork/exec) the sub-process.
+@@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+ 	    (!runs || ut_test_run_on_flattree(test)) &&
+ 	    !(gd->flags & GD_FLG_FDT_CHANGED)) {
+ 		uts->of_live = false;
+-		ut_assertok(ut_run_test(uts, test, test->name));
+-		runs++;
++		ret = ut_run_test(uts, test, test->name);
++		if (ret != -EAGAIN) {
++			ut_assertok(ret);
++			runs++;
++		}
+ 	}
  
-         Args:
-             args: array of processs arguments. argv[0] is the command to
-               execute.
-             cwd: the directory to run the process in, or None for no change.
-+            decode_signal (bool): True to indicate the exception number when
-+                something goes wrong
- 
-         Returns:
-             Nothing.
-         """
--
-+        self.decode_signal = decode_signal
-         self.waited = False
-         self.exit_code = 0
-         self.exit_info = ''
-@@ -199,12 +201,12 @@ class Spawn:
-                     # With sandbox, try to detect when U-Boot exits when it
-                     # shouldn't and explain why. This is much more friendly than
-                     # just dying with an I/O error
--                    if err.errno == 5:  # Input/output error
-+                    if self.decode_signal and err.errno == 5:  # I/O error
-                         alive, _, info = self.checkalive()
-                         if alive:
-                             raise err
-                         raise ValueError('U-Boot exited with %s' % info)
--                    raise err
-+                    raise
-                 if self.logfile_read:
-                     self.logfile_read.write(c)
-                 self.buf += c
+ 	return 0;
 -- 
 2.34.1
 
