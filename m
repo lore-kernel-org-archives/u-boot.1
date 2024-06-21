@@ -4,85 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F33C2BA1A
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 09:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15557C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 09:45:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 222F5880AD;
-	Fri, 21 Jun 2024 11:44:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8BB54881B8;
+	Fri, 21 Jun 2024 11:45:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mCUVtP6P";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Yd4pcbmu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 762308839C; Fri, 21 Jun 2024 11:44:40 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CB82D8840F; Fri, 21 Jun 2024 11:45:47 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4407B88013
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:44:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1D788385
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:45:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-57d0eca877cso2060495a12.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 02:44:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718963078; x=1719567878; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xvYWExG+a0K8fVDEL5cE0K9xp5Sd1TSW/wSjo6GbYi0=;
- b=mCUVtP6PUD44CSUROWkzMJRP2DcjUMaLKAPHdJDk53tnLy5RdkwFuMDBPuUgvzzGZu
- lMD0ZDd39TbKpVncqgQzTvPpyMjybzKOrcPjupidQ1+rK4jdAsS+rKvkMeTdhybAejI9
- XkkUBJTJLvWyijmSrF2wDJLQwjTuQQfVBrxpruvNpcf0sd/gQ2l1GXFp1z+xO2phM5Cw
- Q0/qfujsd+/JAjR8I1M+kq3VShgcMuQH5IlhoozfjLzjzH1deLoqJW4JTu4oFTrBA8sI
- id7jaXJKHoIgBndUPxe55ZLMLSzHz8ltZnds598nh285QDGZ+h3Hj/5NncKla8gAfRRj
- NHHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718963078; x=1719567878;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xvYWExG+a0K8fVDEL5cE0K9xp5Sd1TSW/wSjo6GbYi0=;
- b=q+DTLvTiYt7jgJNC9rwTunE9TJsG42GQdG4EI8T1oC83iSj40y+Th0warmpKo+/XxJ
- ix9LqkSMo0GTCZsf6AZ7voUygbFPGA9tAQvLxJAnZFurtrSXZhS27QvBK4Qr0dP7996q
- DqOVXS9FS3mUjSZqXKp2Yfxnd1VPDDW6Eyl2OJ7dBLUmpSS5ebHYZOv35VBtATFAcXLA
- Z+kkP1K0AwT2dLnacSWrelmuToeJacvFKaLhzc43+5ikrJofjomb9hIQq7f+rpduh6kt
- q/Yr3ibExoYD+qOEVuL6lgrHLhlnh5zc4EeSfL2ENIJmqrwQ/iKcDi5Yl9WczXQAjfQG
- eqmw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWq/OUvMVCfYysxIxGW8LRcwCZ3mUUyLphQxiRiUaFTMFIyzD7Db4F99gtxjR+rf+yH+1/on6iow54Ohci852T9HEjn+g==
-X-Gm-Message-State: AOJu0YyIl6+U7oz7nDHIgEQdY1YAG8M44ah57IzaQaaTRRKeBW7Egvo6
- CrPKoF/LPwnpB8BVxsJfWA1GNOIwvDIlVsRasveI+0+/62MjTt77pN3dZjpiaUg=
-X-Google-Smtp-Source: AGHT+IGHMn8JOy/f7FmiOriqbNxXRBi8esJThyLxNKu7akHYYESLQF09ecDU2NbLZ4ePIAyF5dzsyg==
-X-Received: by 2002:a50:cd97:0:b0:57c:80bf:9267 with SMTP id
- 4fb4d7f45d1cf-57d07e6ecc1mr5713635a12.6.1718963077450; 
- Fri, 21 Jun 2024 02:44:37 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::ebdd? ([2a02:8109:aa0d:be00::ebdd])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d303d80f7sm689207a12.8.2024.06.21.02.44.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Jun 2024 02:44:37 -0700 (PDT)
-Message-ID: <ceba95fe-32d4-4bbc-99e7-b76fed9ebb2a@linaro.org>
-Date: Fri, 21 Jun 2024 11:44:35 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45L9jhrx129175;
+ Fri, 21 Jun 2024 04:45:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718963143;
+ bh=UBKRM6hFeogRi8yQ/52rAfjz3d7us7S5vUbrvaSlrIw=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Yd4pcbmuVhrrAwRFhfktV74R9fOpM3cBIKoCfLIpYQ09vkAOTRdmNh/P4VD6UljU2
+ vXGfi2gXtXdQVC8RxPrQWbLCm40XSnvmWIdYt7+uc5UbVUim5kKSRnmCcFrB5FMvod
+ AV8Jt00lYID3A+8fOUdUmmI7Kp3R1Mlva1A1ubyQ=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45L9jheq002122
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 21 Jun 2024 04:45:43 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
+ Jun 2024 04:45:42 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 21 Jun 2024 04:45:42 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45L9jgp8120454;
+ Fri, 21 Jun 2024 04:45:42 -0500
+Date: Fri, 21 Jun 2024 04:45:42 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Dhruva Gole <d-gole@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
+ <n-francis@ti.com>, Nishant Menon <nm@ti.com>,
+ <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>
+Subject: Re: [PATCH v2] arm: dts: k3-am625-beagleplay: Package TIFS Stub
+Message-ID: <20240621094542.e4dqved53z53q7an@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20240618045610.271884-1-d-gole@ti.com>
+ <20240619214448.saaw6w2iueolb6vd@bryanbrattlof.com>
+ <20240621050802.45nrhsbrtr7ciaqh@dhruva>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-snapdragon: move default environment to a file
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240617085629.1744017-1-caleb.connolly@linaro.org>
- <CAFA6WYM1Rah1=Ktxk-64YhhwLQV7m9D0ixvErcMh7DDv7ssgVg@mail.gmail.com>
- <d64e6ce3-0bc5-4175-af7c-6146d4402c60@linaro.org>
- <CAFA6WYOZjm6akShXbL2UG+Cs=CAxZAmdG+WkiVt=KESOvvbc+g@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYOZjm6akShXbL2UG+Cs=CAxZAmdG+WkiVt=KESOvvbc+g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20240621050802.45nrhsbrtr7ciaqh@dhruva>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,135 +83,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 21/06/2024 10:07, Sumit Garg wrote:
-> On Fri, 21 Jun 2024 at 13:19, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->>
->>
->> On 21/06/2024 09:35, Sumit Garg wrote:
->>> Hi Caleb,
->>>
->>> On Mon, 17 Jun 2024 at 14:26, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>
->>>> Make use of CONFIG_DEFAULT_ENV_FILE and move the default qcom
->>>> environment to a file under board/qualcomm.
->>>>
->>>> This is much cleaner and means we don't need to recompile on changing
->>>> the environment.
->>>>
->>>> Additionally, extend the environment to include a boot menu and
->>>> auto-boot using EFI instead of bootm. Since we now support MMC and USB
->>>> on most platforms, these are much more useful defaults.
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>>    board/qualcomm/default.env | 12 ++++++++++++
->>>>    configs/qcom_defconfig     |  2 ++
->>>>    include/configs/qcom.h     |  7 -------
->>>>    3 files changed, 14 insertions(+), 7 deletions(-)
->>>>    create mode 100644 board/qualcomm/default.env
->>>>
->>>> diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
->>>> new file mode 100644
->>>> index 000000000000..243aede77be7
->>>> --- /dev/null
->>>> +++ b/board/qualcomm/default.env
->>>> @@ -0,0 +1,12 @@
->>>> +stdin=serial,button-kbd
->>>> +stdout=serial,vidconsole
->>>> +stderr=serial,vidconsole
->>>> +bootfile=/extlinux/extlinux.conf
->>>
->>> Is this file used to perform EFI boot or is it redundantly copied from
->>> somewhere?
->>
->> This is here because there's a bunch of codepaths in U-Boot that
->> implicitly expect the bootfile environment variable to have something
->> useful in. It stops a whole class of null pointer exceptions.
->>
->> extlinux isn't used for EFI booting, but it's supported, and having a
->> sensible default here is nice-to-have regardless.
+On June 21, 2024 thus sayeth Dhruva Gole:
+> Bryan,
 > 
-> extlinux is a different boot method as compared to EFI, so it looks
-> confusing to use extlinux as default when we want EFI to be the
-> default. AFAICS, bootfile simply means the file to load and boot which
-> makes it more suitable for Linux image ("Image") to be the default
-> option.
-
-Image? Why not Image.gz, vmlinuz, or vmlinuz.efi?
-
-The value is meaningless, since all this does is stop U-Boot crashing if 
-you run some commands without arguments.
-
-The only times I've ever encountered bootfile has been in pxe or 
-something related, where extlinux.conf was expected. Obviously this is a 
-heavily overloaded variable...
-
-Maybe I should just leave it unset to encourage folks to fix more of 
-those unchecked accesses...
-
-I don't think changing this to Image would be any more sensible than its 
-current value.
+> On Jun 19, 2024 at 16:44:48 -0500, Bryan Brattlof wrote:
+> > On June 18, 2024 thus sayeth Dhruva Gole:
+> > > Add support for packaging the TIFS Stub as it's required for basic Low
+> > > Power Modes like Deep Sleep.
+> > > 
+> > > Acked-by: Neha Malcom Francis <n-francis@ti.com>
+> > > Signed-off-by: Dhruva Gole <d-gole@ti.com>
+> > > ---
+> > > 
+> > > No changes from v1, just picked Neha's ack and rebased on master again.
+> > > Link to v1:
+> > > https://lore.kernel.org/u-boot/20240612062351.3690091-1-d-gole@ti.com/
+> > > 
+> > >  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 33 +++++++++++++++++++-
+> > >  1 file changed, 32 insertions(+), 1 deletion(-)
+> > > 
+> > > diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> > > index fb2032068d1c..5e2248a4a668 100644
+> > > --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> > > +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> > > @@ -69,6 +69,23 @@
+> > >  		};
+> > >  	};
+> > >  
+> > > +	tifsstub-gp {
+> > > +		filename = "tifsstub.bin_gp";
+> > > +		ti-secure-rom {
+> > > +			content = <&tifsstub_gp>;
+> > > +			core = "secure";
+> > > +			load = <0x60000>;
+> > > +			sw-rev = <CONFIG_K3_X509_SWRV>;
+> > > +			keyfile = "ti-degenerate-key.pem";
+> > > +			tifsstub;
+> > > +		};
+> > > +		tifsstub_gp: tifsstub-gp.bin {
+> > > +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
+> > > +			type = "blob-ext";
+> > > +			optional;
+> > > +		};
+> > > +	};
+> > > +
+> > >  	ti-spl_unsigned {
+> > >  		filename = "tispl.bin_unsigned";
+> > >  		pad-byte = <0xff>;
+> > > @@ -105,6 +122,19 @@
+> > >  					};
+> > >  				};
+> > >  
+> > > +				tifsstub-gp {
+> > > +					description = "tifsstub";
+> > > +					type = "firmware";
+> > > +					arch = "arm32";
+> > > +					compression = "none";
+> > > +					os = "tifsstub-gp";
+> > > +					load = <0x9dc00000>;
+> > > +					entry = <0x9dc00000>;
+> > 
+> > Is this stub position independent? Or is this address compiled in at 
+> > build time? We have some variants of 62x that don't have these addresses 
+> > backed by DRAM.
 > 
-> With that change, feel free to add
+> The stub is not position independent and is indeed fixed at build time.
+> Can you talk more about these am62x variants that don't have the address
+> backed by DRAM? What would be the suggested address range in those
+> cases?
 > 
-> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-> 
-> -Sumit
-> 
->>
->> Kind regards,
->>>
->>> -Sumit
->>>
->>>> +preboot=scsi scan; usb start
->>>> +fastboot=fastboot -l $fastboot_addr_r usb 0
->>>> +do_boot=bootefi bootmgr
->>>> +bootmenu_0=Boot first available device=run do_boot
->>>> +bootmenu_1=Enable fastboot mode=run fastboot
->>>> +bootmenu_2=Reset device=reset
->>>> +menucmd=bootmenu
->>>> +bootcmd=run do_boot
->>>> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
->>>> index 80ad3b32e139..a9e3797bb39a 100644
->>>> --- a/configs/qcom_defconfig
->>>> +++ b/configs/qcom_defconfig
->>>> @@ -35,8 +35,10 @@ CONFIG_CMD_BMP=y
->>>>    CONFIG_CMD_LOG=y
->>>>    CONFIG_OF_LIVE=y
->>>>    CONFIG_OF_BOARD_SETUP=y
->>>>    CONFIG_BUTTON_QCOM_PMIC=y
->>>> +CONFIG_USE_DEFAULT_ENV_FILE=y
->>>> +CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
->>>>    CONFIG_CLK=y
->>>>    CONFIG_CLK_QCOM_QCM2290=y
->>>>    CONFIG_CLK_QCOM_QCS404=y
->>>>    CONFIG_CLK_QCOM_SDM845=y
->>>> diff --git a/include/configs/qcom.h b/include/configs/qcom.h
->>>> index e50b3bce5cdd..5b5ebbd844df 100644
->>>> --- a/include/configs/qcom.h
->>>> +++ b/include/configs/qcom.h
->>>> @@ -10,12 +10,5 @@
->>>>    #define __CONFIGS_SNAPDRAGON_H
->>>>
->>>>    #define CFG_SYS_BAUDRATE_TABLE { 115200, 230400, 460800, 921600 }
->>>>
->>>> -/* Load addressed are calculated during board_late_init(). See arm/mach-snapdragon/board.c */
->>>> -#define CFG_EXTRA_ENV_SETTINGS \
->>>> -       "stdin=serial,button-kbd\0"     \
->>>> -       "stdout=serial,vidconsole\0"    \
->>>> -       "stderr=serial,vidconsole\0" \
->>>> -       "bootcmd=bootm $prevbl_initrd_start_addr\0"
->>>> -
->>>>    #endif
->>>> --
->>>> 2.45.0
->>>>
->>
->> --
->> // Caleb (they/them)
 
--- 
-// Caleb (they/them)
+We've always had a 'soft' limit of 512MB so you're correct this isn't an 
+issue today and I haven't seen any 'u-boot shall support' language 
+internally however there have been a few questions about minimum DDR 
+capacities we can support. Some have asked about 256MB.
+
+(This 512MB 'soft' limit is most likely why this stub and OP-TEE is 
+where it is today)
+
+>
+> For BeaglePlay atleast I don't see an issue. So I don't think we'd have
+> issues with this patch in particular?
+>
+
+No you're correct however knowing that this address location is compiled 
+into other firmware means we would need to have separate firmware builds 
+if we wanted this stub in another location and it's awkwardly in the 
+middle of DRAM and not at the bottom like I would prefer. 
+
+So while yes this is a board/ level decision because it's also dealing 
+with mach-k3/ level firmware this is an unfortunate thing we're 
+hard-coding. This is essentially hard-coding a 512MB minimum limit for 
+the entire AM62x SoC family.
+
+My question was trying to determine if we should/could add this address 
+to Kconfig so we can pass in the address to tispl.bin here and somehow 
+get this into board-cfg.yaml. (This will be some work for us)
+
+All of that to say, I'm okay with this change however I wish there was a 
+'there be dragons' trailer I could add to this
+
+~Bryan
