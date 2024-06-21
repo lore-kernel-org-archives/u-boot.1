@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AF43C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 13:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 931E2C2BA1A
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 14:16:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7805F8804F;
-	Fri, 21 Jun 2024 15:49:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DF1C287D10;
+	Fri, 21 Jun 2024 16:16:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g8tJ5+95";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ykm2XM2d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D03408851C; Fri, 21 Jun 2024 15:49:26 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 46C218851C; Fri, 21 Jun 2024 16:16:28 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CD7F88013
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 15:49:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA06587D10
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 16:16:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45LDnLEt056535;
- Fri, 21 Jun 2024 08:49:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718977761;
- bh=eEeCMRtUCU8rCrHjRwt7R09F19xBQXp7oe5/9m0H2Kg=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=g8tJ5+95JBkHf3i/eyG7juc22qpe0qj4vme0qG1Dx/N8kClGWxDVerca1wO5h7TEY
- T6zj9ZGL2PxszC2HoXWV7XyW9nEGsybWP5Wh9us8EjUjWeACnQwWBQT0adclUsr19O
- mzA9II1nWal57t5b4on5Ji6lC8w9zug/NFPE7GjA=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45LDnLpR016584
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 21 Jun 2024 08:49:21 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Jun 2024 08:49:21 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Jun 2024 08:49:21 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45LDnLgl063178;
- Fri, 21 Jun 2024 08:49:21 -0500
-Date: Fri, 21 Jun 2024 08:49:21 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-CC: Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>, Dhruva Gole
- <d-gole@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Robert Nelson
- <robertcnelson@gmail.com>
-Subject: Re: [PATCH 1/6] arm: mach-k3: Add default ATF location for AM62/AM62a
-Message-ID: <20240621134921.wh7onmz3upk576ob@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240214163009.983034-1-afd@ti.com>
- <20240214163009.983034-2-afd@ti.com>
- <20240619114916.72icpumb2tumsnbt@dhruva>
- <20240619182005.yfkvf6ongwijorzz@dividable>
- <59c391a7-c6fe-4b04-891a-c6905ef29f20@ti.com>
- <0f41cd97-6876-43b8-a79a-9b047ae7485b@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-dff0712ede2so2060832276.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:16:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718979385; x=1719584185; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=K5Y5dkPresCSjeGTApLlRTLWd01ozXYd0/684k+w49Y=;
+ b=Ykm2XM2deVav5g20nr+ovWcttFJnH8YGtPNT4/dFTUlrCNttfjSwCiQ7PK2gPjLqxi
+ oz9Dr8mLUpdkiK5MXxdPdRH6wA6ucZskOQngAGVtOW+w6PFOf6ifbUvdx3tVFovKYjDJ
+ 6EdF4Bwk+nR+N17K0r7yerP9roOeTCoOPKhE149g8cnxGLbxwdAYDzdMqz/ZJtFTu9LZ
+ IOiaJO0RNyqWxd8u3x3Pl36KYlp1Iwyp2igYSocQC95BKEs4RVHOhi9XRX9ZnFf3fOMx
+ Y+cdogRN//MVUTqn+cx48pRXGe9otkdB69aQdVZvaONHwUOlvYIu2OB6IIirh9V3e+kW
+ mDUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718979385; x=1719584185;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=K5Y5dkPresCSjeGTApLlRTLWd01ozXYd0/684k+w49Y=;
+ b=f/lBRrtNoIBuXDgpk4P2LrF0+boN3LntPQPXM5ejedIVB34Jcas1MheuDNzCqgfO5y
+ DOiBgg4XS9TfvIRdBTQVtW52k0fUwnznIr9csLYe+70fdjheUBs2oyBvB5o8T3l8PONJ
+ jAe+sTuJR6cIdqxe4Hgu8utQboWk8DDHzk1GQ2/xTFKy8PE6bvabX1L0yiDfRNq2SR/y
+ T4A3/JrUHAdah1nLj1yYjFx1DezfaniVtvadKgN1l9U8KV1f+HBTkDRs/tQxkUwgkVYi
+ u1yVfnDnxcJZTQtLr4ACYypgEif9U1yExeL1gb2dzS7I43v2GFWjyzpAmsZm/z9RDGwV
+ uheg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWHHkw+xLktfTmZexVaS/pUizcS3v/HZZNdS3gFISudv4VepCfJMxmTqtr5GmVRfs3Ye6Tu/uo6sKH90MZggnSV2zTK3A==
+X-Gm-Message-State: AOJu0Yzy5DxpB7CeTyu67FbNOnRluH7dI+cc1/uFVj8VJVkWoiWW8727
+ SBoqQ6hV+P16MswAyKCFNA28+u77tfZNfo/GuhOq7zRoNCn34JREuQoZSBAOghzMcDMRGdQuu6l
+ 7KiWbDcVD82czYpMqeqb/p+/rCkxgOieQnPk=
+X-Google-Smtp-Source: AGHT+IEILIOgyzOv/hnfkIBLfa0WSpMdw0z/eLntt6blay0SEv7H5+u/nmKi2RDm10cUQyDDlaiqvEtZ1lqcb1Vd8UU=
+X-Received: by 2002:a25:688e:0:b0:e02:c3de:5d95 with SMTP id
+ 3f1490d57ef6-e02c3de5e0amr7302155276.43.1718979384664; Fri, 21 Jun 2024
+ 07:16:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0f41cd97-6876-43b8-a79a-9b047ae7485b@phytec.de>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240621114210.51101-1-Maxim.Moskalets@kaspersky.com>
+ <f516756f-93f7-4064-9dbe-abbced5fbd93@gmx.de>
+In-Reply-To: <f516756f-93f7-4064-9dbe-abbced5fbd93@gmx.de>
+From: =?UTF-8?B?0JzQsNC60YHQuNC8INCc0L7RgdC60LDQu9C10YY=?=
+ <maximmosk4@gmail.com>
+Date: Fri, 21 Jun 2024 17:16:13 +0300
+Message-ID: <CALUeBeD7y=2DJWms46FmRq-T8hZGLAwxbO-GQOGpbVj8DJ0BpQ@mail.gmail.com>
+Subject: Re: [PATCH v5] cmd: bootm: add ELF file support
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ quentin.schulz@theobroma-systems.com, 
+ sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,96 +93,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On June 20, 2024 thus sayeth Wadim Egorov:
-> 
-> 
-> Am 19.06.24 um 22:02 schrieb Andrew Davis:
-> > On 6/19/24 1:20 PM, Nishanth Menon wrote:
-> > > On 17:19-20240619, Dhruva Gole wrote:
-> > > > Hi,
-> > > > 
-> > > > On Feb 14, 2024 at 10:30:04 -0600, Andrew Davis wrote:
-> > > > > There is a default ATF load address that is used for devices that have
-> > > > > ATF running in SRAM. For AM62 and AM62a, ATF runs from DRAM. Instead
-> > > > > of having to override the address in every defconfig, make add a
-> > > > > default for these ATF in DRAM devices.
-> > > > > 
-> > > > > Signed-off-by: Andrew Davis <afd@ti.com>
-> > > > > ---
-> > > > >   arch/arm/mach-k3/Kconfig               | 5 +++--
-> > > > >   configs/am62ax_evm_a53_defconfig       | 1 -
-> > > > >   configs/am62x_beagleplay_a53_defconfig | 1 -
-> > > > >   configs/am62x_evm_a53_defconfig        | 1 -
-> > > > >   configs/phycore_am62x_a53_defconfig    | 1 -
-> > > > >   configs/verdin-am62_a53_defconfig      | 1 -
-> > > > >   6 files changed, 3 insertions(+), 7 deletions(-)
-> > > > > 
-> > > > 
-> > > > Beagleplay stops booting completely with latest U-boot so I did a little
-> > > > bisect and it seems like reverting this patch helps.
-> > > > 
-> > > > I am not sure what other implications there are of reverting this so I
-> > > > don't suggest immediately dropping it, however some hints around what's
-> > > > missing on beagleplay vs other platforms would be helpful.
-> > > > 
-> > > > Because other platforms based off the same SoC don't seem to be
-> > > > affected.
-> > > 
-> > > Grumble... I had to rediscover this in parallel as well - Thanks Dhruva.
-> > > mkimage -l tispl.bin and comparing with kernel log of reserved mem
-> > > had me completely confused.
-> > > 
-> > > a) Memory maps are already notorious to manage on complex heterogenous
-> > >    systems. From beagle perspective, we have no need to go and monkey
-> > >    with DT defined memory map and DT should be the default and modifying
-> > 
-> > Your DT source file is wrong, ATF is at 0x8000_0000 (or any address one
-> > wants to put in K3_ATF_LOAD_ADDR). DT doesn't "define" hardware, it
-> > "describes"
-> > it. ATF's location is dynamic and configurable, it doesn't belong in DT.
-> > 
-> > You have two options, either go update your DT, then update it again every
-> > time ATF moves. *OR* simply turn on OF_SYSTEM_SETUP and let U-Boot add the
-> > correct location reserved memory node for you.
-> > 
-> > Then you can also drop out the reserved-node from the DT template file.
-> > Only U-Boot knows where ATF is really placed in RAM, so U-Boot must add
-> > this info to DT.
-> 
-> I think it is a good idea to remove the nodes from the device tree or at
-> least mark them as "templates" and note that they are actually provided by
-> the bootloader to make it less confusing.
-> 
+=D0=BF=D1=82, 21 =D0=B8=D1=8E=D0=BD. 2024=E2=80=AF=D0=B3. =D0=B2 15:51, Hei=
+nrich Schuchardt <xypron.glpk@gmx.de>:
 
-I have a patch lined up for this. My hope was we could remove all memory 
-nodes completely from the kernel and have U-Boot fix these up. It's 
-initialize DDR knows about capacity, inline ECC, and trowing all the 
-different binaries into it. 
-
-Our memory{} node fixup isn't ready yet unfortunately so I think just the 
-reserved-memory{} node can be ripped out for now.
-
-~Bryan
-
+> On 21.06.24 13:42, Maxim Moskalets wrote:
+> > Some operating systems (e.g. seL4) and embedded applications are ELF
+> > images. It is convenient to use FIT-images to implement trusted boot.
+> > Added "elf" image type for booting using bootm command.
+> >
+> > Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 >
-> > 
-> > >    DT should be explicitly called out with a log (instead of done
-> > >    "transparently") - so instead of CONFIG_K3_OPTEE_LOAD_ADDR default
-> > >    being forced from u-boot, it should be made optional, where when
-> > >    defined, it can overide the dt definition or some variant of that.
-> > > 
-> > > b) Looks like
-> > >     https://lore.kernel.org/u-boot/20240214163009.983034-4-afd@ti.com/
-> > >     missed beagleplay? and we were in for a surprise there - i dont want
-> > 
-> > This was the only miss, OF_SYSTEM_SETUP didn't get added to the beagleplay
-> > config. Bryan just sent the fix for that now. I'll go look for a way to
-> > make this common across the whole SoC family so we don't again miss any
-> > new boards.
-> > 
-> > Andrew
-> > 
-> > >     to switch from default dts for beagleplay to something different just
-> > >     because of simplicity for users to know exactly the carveouts and
-> > >     with other s/w starting up on uC, dts is our "canonical truth".
-> > > 
+> I guess a test could be added to test/py/tests/test_zynqmp_rpu.py which
+> already uses the bootelf command?
+>
+> Is it necessary to use specific hardware to run this test?
+
+Best regards
+
+Maxim
+
+> Best regards
+>
+> Heinrich
+>
+> > ---
+> > v5:
+> >       used func from lib/elf.c to avoid dependency form CLI
+> > ---
+> >   boot/bootm_os.c  | 18 ++++++++++++++++++
+> >   boot/image-fit.c |  3 ++-
+> >   boot/image.c     |  5 ++++-
+> >   cmd/Kconfig      |  7 +++++++
+> >   include/image.h  |  1 +
+> >   5 files changed, 32 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> > index 15297ddb53..6a6621706f 100644
+> > --- a/boot/bootm_os.c
+> > +++ b/boot/bootm_os.c
+> > @@ -8,6 +8,7 @@
+> >   #include <bootstage.h>
+> >   #include <cpu_func.h>
+> >   #include <efi_loader.h>
+> > +#include <elf.h>
+> >   #include <env.h>
+> >   #include <fdt_support.h>
+> >   #include <image.h>
+> > @@ -394,6 +395,20 @@ static int do_bootm_qnxelf(int flag, struct
+> bootm_info *bmi)
+> >   }
+> >   #endif
+> >
+> > +#if defined(CONFIG_BOOTM_ELF)
+> > +static int do_bootm_elf(int flag, struct bootm_info *bmi)
+> > +{
+> > +     Bootelf_flags flags =3D { .autostart =3D 1 };
+> > +
+> > +     if (flag !=3D BOOTM_STATE_OS_GO)
+> > +             return 0;
+> > +
+> > +     bootelf(bmi->images->ep, flags, 0, NULL);
+> > +
+> > +     return 1;
+> > +}
+> > +#endif
+> > +
+> >   #ifdef CONFIG_INTEGRITY
+> >   static int do_bootm_integrity(int flag, struct bootm_info *bmi)
+> >   {
+> > @@ -535,6 +550,9 @@ static boot_os_fn *boot_os[] =3D {
+> >   #ifdef CONFIG_BOOTM_EFI
+> >       [IH_OS_EFI] =3D do_bootm_efi,
+> >   #endif
+> > +#if defined(CONFIG_BOOTM_ELF)
+> > +     [IH_OS_ELF] =3D do_bootm_elf,
+> > +#endif
+> >   };
+> >
+> >   /* Allow for arch specific config before we boot */
+> > diff --git a/boot/image-fit.c b/boot/image-fit.c
+> > index f6464bcf62..9253f81fff 100644
+> > --- a/boot/image-fit.c
+> > +++ b/boot/image-fit.c
+> > @@ -2175,7 +2175,8 @@ int fit_image_load(struct bootm_headers *images,
+> ulong addr,
+> >               fit_image_check_os(fit, noffset, IH_OS_TEE) ||
+> >               fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
+> >               fit_image_check_os(fit, noffset, IH_OS_EFI) ||
+> > -             fit_image_check_os(fit, noffset, IH_OS_VXWORKS);
+> > +             fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
+> > +             fit_image_check_os(fit, noffset, IH_OS_ELF);
+> >
+> >       /*
+> >        * If either of the checks fail, we should report an error, but
+> > diff --git a/boot/image.c b/boot/image.c
+> > index fc774d605d..abac254e02 100644
+> > --- a/boot/image.c
+> > +++ b/boot/image.c
+> > @@ -130,7 +130,10 @@ static const table_entry_t uimage_os[] =3D {
+> >       {       IH_OS_OPENRTOS, "openrtos",     "OpenRTOS",             }=
+,
+> >   #endif
+> >       {       IH_OS_OPENSBI,  "opensbi",      "RISC-V OpenSBI",       }=
+,
+> > -     {       IH_OS_EFI,      "efi",          "EFI Firmware" },
+> > +     {       IH_OS_EFI,      "efi",          "EFI Firmware"          }=
+,
+> > +#ifdef CONFIG_BOOTM_ELF
+> > +     {       IH_OS_ELF,      "elf",          "ELF Image"             }=
+,
+> > +#endif
+> >
+> >       {       -1,             "",             "",                     }=
+,
+> >   };
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index a2dee34689..613baa106e 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -321,6 +321,13 @@ config BOOTM_EFI
+> >       help
+> >         Support booting UEFI FIT images via the bootm command.
+> >
+> > +config BOOTM_ELF
+> > +     bool "Support booting ELF images"
+> > +     depends on CMD_BOOTM && LIB_ELF
+> > +     default n
+> > +     help
+> > +       Support booting ELF images via the bootm command.
+> > +
+> >   config CMD_BOOTZ
+> >       bool "bootz"
+> >       help
+> > diff --git a/include/image.h b/include/image.h
+> > index c5b288f62b..9daaee15cd 100644
+> > --- a/include/image.h
+> > +++ b/include/image.h
+> > @@ -100,6 +100,7 @@ enum {
+> >       IH_OS_TEE,                      /* Trusted Execution Environment =
+*/
+> >       IH_OS_OPENSBI,                  /* RISC-V OpenSBI */
+> >       IH_OS_EFI,                      /* EFI Firmware (e.g. GRUB2) */
+> > +     IH_OS_ELF,                      /* ELF Image (e.g. seL4) */
+> >
+> >       IH_OS_COUNT,
+> >   };
+>
+>
