@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EFC6C2BB85
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 837ACC2BB85
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71C3B88633;
+	by phobos.denx.de (Postfix) with ESMTP id D9852885F2;
 	Fri, 21 Jun 2024 21:52:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JAPao/Ec";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MXDTmwTw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78BE3885F2; Fri, 21 Jun 2024 21:52:34 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 475788857E; Fri, 21 Jun 2024 21:52:36 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 561BF8860A
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1943D885F7
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-7ebe508fa34so122841339f.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:32 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7f38da3800aso67415639f.0
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1718999551; x=1719604351; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OOtaUyztkVMZyLL+JdveXN1qKv0Wgnd/AW8GpO0yH1o=;
- b=JAPao/Ec7xjdswgxSevT6sU1rykmaOz4jf3JMXPsCPuTFbY74l8ZmfD2e/TwLZaQoT
- COBq0fBh0mhfr6N5AFvanJHm191ZfgchblmEParOhYiF0QvBYxGPv7v5STLmIsgEtxmq
- 1n68VoL8blcVJU9Yx2yq7ZUFX/03PPFsq2raA=
+ bh=4tbJLNnm3Z118ihDJe+gI1HEGhxpJQOMu7FJdqi+hsQ=;
+ b=MXDTmwTwizYLLKasQXuNtmBwduQ3+P3Pja0OqdLjxmy5gv1+yFx55SBPzw4hQc1pDq
+ J1G5cG4THhn+JJFGEb8GHqZ1OM4+9zdsvOGdLBepQpj+hzgW81VsEGg8n+FBtbnEiyAJ
+ PBk+haFpXcJg5RgD9R3QvqlRazWSNQePSPpgM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1718999551; x=1719604351;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OOtaUyztkVMZyLL+JdveXN1qKv0Wgnd/AW8GpO0yH1o=;
- b=gSHNAWyvZz+H88jJivzgVUwPx81IzoR50miNNjVrEU/fbNEjGLqEpR6xQac4NQvzpR
- Yij8JarBFzG9VdZk3VLSxPN2RvrMwpuQYfvGsJoIu65kJ4i2rpfjSUPhY1A+fQCHb9g8
- 3yzXytnyK1uSbz6C69iWvSmpc9tlb/YlUMPJflxkAji8rCwC6rRK0xqKxIwtk0TEPikv
- EpqsziTyEzB7JcT9ckpJbm8HtoNWLNYlE2ow0fVnZYSifnsuzvj2+AkILyUxNmUaZ/6c
- NAVo/GpXlOjuw47fd9iXviPRt7IdWuzAJl+IWdp9sSL7ToUSltdOd9sXUcBmYjvYUTAv
- W0YQ==
-X-Gm-Message-State: AOJu0YzR12ePR6AuH4h8Wr5TfdA5BiUg3ytG9/v40N4KbFcCWMdGDkaq
- v0pw/+MJKIIodn8MnNG/GeSmRRJDCCqpfUQsKWzetFP6VBXk/LKcjjt5XTPGzM7MmB6ek29pa89
- fDw==
-X-Google-Smtp-Source: AGHT+IFJlgucYZDZg0iAU3dcsO2aVfQBlej6YRH/i/saJ+B648gYT3R4wxzDhF9VAOVb95sVByypGA==
-X-Received: by 2002:a05:6602:158b:b0:7e1:8a93:48ef with SMTP id
- ca18e2360f4ac-7f13ee8ac9dmr1127785239f.21.1718999551011; 
+ bh=4tbJLNnm3Z118ihDJe+gI1HEGhxpJQOMu7FJdqi+hsQ=;
+ b=cLlZgeT/PhxuB80Zf6WdCgOhk5/0ybzVao5AOLbdPqcfVmeGqgaWOjSriIztSfbDa5
+ jtGn0nJ7ouuE86De+MvG2bwvuYrcvH9FHwkga3bB56DAhBjwU5kD611d1GOxcJraw8TG
+ Mx36r4mexK85uQhZOtk8DbhYeYquKZ1+hg3IflO7nPRkJooxe0bz/PoAbMrPyPLASCGX
+ YnZhL2SqNtkxjmbeYkoDJyBAOTM/E6+HljtZOJvVls98mhTZpfgpKieMOm38D6EYSpfI
+ BGFAP51gxDPzju/8C2+EDiHE+otlbXNTo6zZHCRl46lacgfpuwqG/JTFpRSOWvuFOha4
+ MvOA==
+X-Gm-Message-State: AOJu0Yzm+SlNW+3U8L/wI8LqiWsnzxEENH/0pDfqqsporlIBGDb4lHnR
+ AV5YNp5IOJAP2KI0os7WhXA9EDZO+aZ27vHRLybf7ZHGlJEo5js7kZQJQcsBQFI2hyngMPzY5iA
+ 89g==
+X-Google-Smtp-Source: AGHT+IHu7L88Stc0X5GXD2RApq4dKZjTTXvg/9BhIE1+HSxZjfp1YRH9H2qAhsFKnRZDEUMU+E9sYg==
+X-Received: by 2002:a05:6602:2ccd:b0:7eb:7e0c:d195 with SMTP id
+ ca18e2360f4ac-7f13edcf244mr1215751539f.8.1718999551654; 
  Fri, 21 Jun 2024 12:52:31 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.30
+ ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 12:52:30 -0700 (PDT)
+ Fri, 21 Jun 2024 12:52:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 27/43] test: Avoid failing skipped tests
-Date: Fri, 21 Jun 2024 13:51:48 -0600
-Message-Id: <20240621195204.2675252-28-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>
+Subject: [PATCH v2 28/43] test: dm: Show failing driver name
+Date: Fri, 21 Jun 2024 13:51:49 -0600
+Message-Id: <20240621195204.2675252-29-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
 References: <20240621195204.2675252-1-sjg@chromium.org>
@@ -89,59 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a test returns -EAGAIN this should not be considered a failure.
-Fix what seems to be a problem case, where the pytests see a failure
-when a test has merely been skipped.
+When a driver is not registered properly it is not clear which one it
+is. Adjust test_dm_compat() to show this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/test-main.c | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
+ test/py/tests/test_dm.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/test/test-main.c b/test/test-main.c
-index 3fa6f6e32ec..cda1a186390 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
- static int ut_run_test_live_flat(struct unit_test_state *uts,
- 				 struct unit_test *test)
- {
--	int runs;
-+	int runs, ret;
+diff --git a/test/py/tests/test_dm.py b/test/py/tests/test_dm.py
+index 68d4ea12235..be94971e455 100644
+--- a/test/py/tests/test_dm.py
++++ b/test/py/tests/test_dm.py
+@@ -13,8 +13,11 @@ def test_dm_compat(u_boot_console):
+                for line in response[:-1].split('\n')[2:])
  
- 	if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SANDBOX))
- 		return skip_test(uts);
-@@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
- 	if (CONFIG_IS_ENABLED(OF_LIVE)) {
- 		if (!(test->flags & UT_TESTF_FLAT_TREE)) {
- 			uts->of_live = true;
--			ut_assertok(ut_run_test(uts, test, test->name));
--			runs++;
-+			ret = ut_run_test(uts, test, test->name);
-+			if (ret != -EAGAIN) {
-+				ut_assertok(ret);
-+				runs++;
-+			}
- 		}
- 	}
+     response = u_boot_console.run_command('dm compat')
++    bad_drivers = set()
+     for driver in drivers:
+-        assert driver in response
++        if not driver in response:
++            bad_drivers.add(driver)
++    assert not bad_drivers
  
-@@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
- 	    (!runs || ut_test_run_on_flattree(test)) &&
- 	    !(gd->flags & GD_FLG_FDT_CHANGED)) {
- 		uts->of_live = false;
--		ut_assertok(ut_run_test(uts, test, test->name));
--		runs++;
-+		ret = ut_run_test(uts, test, test->name);
-+		if (ret != -EAGAIN) {
-+			ut_assertok(ret);
-+			runs++;
-+		}
- 	}
- 
- 	return 0;
+     # check sorting - output looks something like this:
+     #  testacpi      0  [   ]   testacpi_drv          |-- acpi-test
 -- 
 2.34.1
 
