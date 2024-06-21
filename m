@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ACE4C2BB85
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:55:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C36FC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:55:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0E31885F5;
-	Fri, 21 Jun 2024 21:52:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63F6E885CE;
+	Fri, 21 Jun 2024 21:52:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V7PS4hea";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xs08FrYn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F37EB88599; Fri, 21 Jun 2024 21:52:26 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id D2FEF885BE; Fri, 21 Jun 2024 21:52:27 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE8FF8859C
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A52B9885A5
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7ec07f4170bso94577439f.0
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:24 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-7eee734a668so101106239f.3
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718999543; x=1719604343; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718999544; x=1719604344; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i9F8DGtexo5Z5viC+x68GhJfe/EABbTkRGOuNzW7k20=;
- b=V7PS4heavbKSI8q30ZfZ00JCPW6oI034MtnM5lEh3/Art9kK1kXz/rE3ybEsU50X/N
- cmLyuPB7Xu/ySjklHaeu97zO/j/EFHqRXk08/8ZXvfH6/EYx3VC8uwb0mGZo+GC3Ai/O
- hCYKBa8E7bpSMv5QQwRzceQovH/G9TZfuUyHk=
+ bh=vd1lgyE0323kxHzqwAr6nvI90PDCPp9kU72jIBe8uLY=;
+ b=Xs08FrYnlNWz8G2cUdJZFEtjMlaQwBTLxcTQfKrEPtewxblu5l5dByN5PoxKANm5aq
+ Y7CLgpjgteoFKAI8klD7vwaccNqnoCPaqiDnOgG8okINW3QJlQq5B62QDQH9iITXAFFr
+ DSqRn7JGtIGx0Nbo5C/C00+DlOL4Akw4kG+vo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718999543; x=1719604343;
+ d=1e100.net; s=20230601; t=1718999544; x=1719604344;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i9F8DGtexo5Z5viC+x68GhJfe/EABbTkRGOuNzW7k20=;
- b=E3wF/fUQH9zUdlMKxN+vpo5NcxmTrshhsuHbjl1snPcPPX4uLGoqwu1yXkltfiv7Zc
- E6Z/LknXDEur5YYbeWKGn1t61SeFzVWbOeCP2ajQCLvbDrQoWgL9/qccBBUmX+zxflIV
- oBTCO54REL9jUskR5rXnwdcSsa/ELTB4GnHFacBr7DVae+pnYr1nsN/Wd5om59f6Iu3M
- JQyFfQl3o3ymQ0rTHjnh1WD3USHHsVt2yxekeyWgQawJ02xjO3ct4byWrDk+cRmloMRv
- v38++W4ZIr7xycHsDpH91H+TJMaH1gIzo1K59kO0mBofo5qSbVhcax4FjiWDK+jALK+2
- F5HQ==
-X-Gm-Message-State: AOJu0Yw62c0JZdfR0TzOtaYjug0IrpQ7I1TvDrggB6O83K3PPGr6fbvi
- thFyiPosur6v8rlxP1T3lcyLJnLL2ZXTx1WutmuYTlM88r1YUK7T1vypPXKDQ9JwPLRabpxIXfG
- jiw==
-X-Google-Smtp-Source: AGHT+IHrEDqiNWVt/mGwd9mMqDdpcYW0etdwRlz8d6DJFJ//ExlTtPXlYoY99yJWRr+PcchZvXv+yw==
-X-Received: by 2002:a05:6602:6d83:b0:7eb:c59e:b0f with SMTP id
- ca18e2360f4ac-7f13ee8c3femr1118450139f.18.1718999543557; 
- Fri, 21 Jun 2024 12:52:23 -0700 (PDT)
+ bh=vd1lgyE0323kxHzqwAr6nvI90PDCPp9kU72jIBe8uLY=;
+ b=F1AxGC05do4+fdi4ktF+v1f3pebRzc5PJ+0iqiNcpoHdXHbxbYBYuEyA6ISOPON23Z
+ uHRNvVg0tewY93StLukDYWUtiHYEMV5WKNvAiThv712lilYfrZQtxb+EiaI3LMMBrxXo
+ nV/B/tP0TeKtbnwEJpKEnc+xFAwRV8s4d/S8v0Bc7pUYG9uzEuf33FEYDhaRUCdgdopZ
+ nQ5zw9z47vZK8Kha5kWd8sNk0B/u5I80I0c8ImZ2ab0RK4lWV0Xgf21b9wy6UTJoVLlj
+ 8UrMzGogM3TI8HoM65j1IyKbFN2IqsPKrj3RhF8cX991pGVRmbiwnpmT9/2eReVaMIcN
+ tSSA==
+X-Gm-Message-State: AOJu0Yz2LeJ1llpUkW+dB4N6qxu59NDTAT5nXLBiUi004zeOr8RcH2mB
+ hEBJCPgqtbbXqxDJZe3MFegBbhUV6ERmmWB60snI1EL+RbI/n1je4aqzRKeeyfc5bWnBJMldzvl
+ Yrg==
+X-Google-Smtp-Source: AGHT+IGGmeEuApYEDVaDdFzINV6SZs41L8PlB0cRIyKEYSSCqlwbaaDWyvKGW3Gasoq6cpQtCSlGyQ==
+X-Received: by 2002:a05:6602:14d2:b0:7eb:9864:410b with SMTP id
+ ca18e2360f4ac-7f13ee202bbmr1043360639f.5.1718999544248; 
+ Fri, 21 Jun 2024 12:52:24 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.22
+ ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 21 Jun 2024 12:52:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2 17/43] google: Disable TPMv2 on most Chromebooks
-Date: Fri, 21 Jun 2024 13:51:38 -0600
-Message-Id: <20240621195204.2675252-18-sjg@chromium.org>
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jerome Brunet <jbrunet@baylibre.com>
+Subject: [PATCH v2 18/43] meson: Correct driver declaration for meson_axg_gpio
+Date: Fri, 21 Jun 2024 13:51:39 -0600
+Message-Id: <20240621195204.2675252-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
 References: <20240621195204.2675252-1-sjg@chromium.org>
@@ -89,112 +90,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This feature is not present on older Chromebooks, so disable the
-setting.
+This should use the driver macros so that the driver appears in the
+linker list. Fix this.
+
+Fixes: 8587839f19d ("pinctrl: meson: add axg support")
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v1)
 
- configs/chromebook_link64_defconfig    | 1 +
- configs/chromebook_link_defconfig      | 1 +
- configs/chromebook_samus_defconfig     | 1 +
- configs/chromebook_samus_tpl_defconfig | 1 +
- configs/nyan-big_defconfig             | 4 +---
- configs/snow_defconfig                 | 1 +
- 6 files changed, 6 insertions(+), 3 deletions(-)
+ drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c | 2 +-
+ drivers/pinctrl/meson/pinctrl-meson-axg.c     | 4 ++--
+ drivers/pinctrl/meson/pinctrl-meson-axg.h     | 2 +-
+ drivers/pinctrl/meson/pinctrl-meson-g12a.c    | 4 ++--
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/configs/chromebook_link64_defconfig b/configs/chromebook_link64_defconfig
-index 7cf23b29e46..9583f87bf0f 100644
---- a/configs/chromebook_link64_defconfig
-+++ b/configs/chromebook_link64_defconfig
-@@ -80,6 +80,7 @@ CONFIG_SYS_NS16550=y
- CONFIG_SYS_NS16550_PORT_MAPPED=y
- CONFIG_SPI=y
- CONFIG_TPM_TIS_LPC=y
-+# CONFIG_TPM_V2 is not set
- CONFIG_USB_STORAGE=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
-diff --git a/configs/chromebook_link_defconfig b/configs/chromebook_link_defconfig
-index a9f91dd9b26..75a7a488a92 100644
---- a/configs/chromebook_link_defconfig
-+++ b/configs/chromebook_link_defconfig
-@@ -70,6 +70,7 @@ CONFIG_SYS_NS16550_PORT_MAPPED=y
- CONFIG_SOUND=y
- CONFIG_SPI=y
- CONFIG_TPM_TIS_LPC=y
-+# CONFIG_TPM_V2 is not set
- CONFIG_USB_STORAGE=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_VIDEO_COPY=y
-diff --git a/configs/chromebook_samus_defconfig b/configs/chromebook_samus_defconfig
-index 40cc449b9b3..8cdad8d2344 100644
---- a/configs/chromebook_samus_defconfig
-+++ b/configs/chromebook_samus_defconfig
-@@ -74,6 +74,7 @@ CONFIG_SOUND_I8254=y
- CONFIG_SOUND_RT5677=y
- CONFIG_SPI=y
- CONFIG_TPM_TIS_LPC=y
-+# CONFIG_TPM_V2 is not set
- CONFIG_USB_STORAGE=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_VIDEO_COPY=y
-diff --git a/configs/chromebook_samus_tpl_defconfig b/configs/chromebook_samus_tpl_defconfig
-index 3e7298f16af..1be57560f89 100644
---- a/configs/chromebook_samus_tpl_defconfig
-+++ b/configs/chromebook_samus_tpl_defconfig
-@@ -96,6 +96,7 @@ CONFIG_SOUND_RT5677=y
- CONFIG_SPI=y
- CONFIG_TPL_SYSRESET=y
- CONFIG_TPM_TIS_LPC=y
-+# CONFIG_TPM_V2 is not set
- CONFIG_USB_STORAGE=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
-diff --git a/configs/nyan-big_defconfig b/configs/nyan-big_defconfig
-index 4dec710cf8d..78fb7580da7 100644
---- a/configs/nyan-big_defconfig
-+++ b/configs/nyan-big_defconfig
-@@ -11,8 +11,6 @@ CONFIG_DEFAULT_DEVICE_TREE="tegra124-nyan-big"
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_BOOTSTAGE_STASH_ADDR=0x83000000
--CONFIG_DEBUG_UART_BASE=0x70006000
--CONFIG_DEBUG_UART_CLOCK=408000000
- CONFIG_TEGRA124=y
- CONFIG_TARGET_NYAN_BIG=y
- CONFIG_TEGRA_GPU=y
-@@ -75,7 +73,6 @@ CONFIG_DM_REGULATOR=y
- CONFIG_REGULATOR_AS3722=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_PWM_TEGRA=y
--CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550=y
- CONFIG_SOUND=y
- CONFIG_I2S=y
-@@ -83,6 +80,7 @@ CONFIG_I2S_TEGRA=y
- CONFIG_SOUND_MAX98090=y
- CONFIG_TEGRA114_SPI=y
- CONFIG_TPM_TIS_INFINEON=y
-+# CONFIG_TPM_V2 is not set
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_TEGRA=y
-diff --git a/configs/snow_defconfig b/configs/snow_defconfig
-index 3a617c6cf40..2c0757194bd 100644
---- a/configs/snow_defconfig
-+++ b/configs/snow_defconfig
-@@ -88,6 +88,7 @@ CONFIG_SOUND_MAX98095=y
- CONFIG_SOUND_WM8994=y
- CONFIG_EXYNOS_SPI=y
- CONFIG_TPM_TIS_INFINEON=y
-+# CONFIG_TPM_V2 is not set
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
+diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c b/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
+index 52c726cf038..15ebd574ef1 100644
+--- a/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
++++ b/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
+@@ -179,7 +179,7 @@ static const struct dm_gpio_ops meson_axg_gpio_ops = {
+ 	.direction_output = meson_gpio_direction_output,
+ };
+ 
+-const struct driver meson_axg_gpio_driver = {
++U_BOOT_DRIVER(meson_axg_gpio) = {
+ 	.name	= "meson-axg-gpio",
+ 	.id	= UCLASS_GPIO,
+ 	.probe	= meson_gpio_probe,
+diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg.c b/drivers/pinctrl/meson/pinctrl-meson-axg.c
+index 94e09cd3f8a..ed3f92b2d75 100644
+--- a/drivers/pinctrl/meson/pinctrl-meson-axg.c
++++ b/drivers/pinctrl/meson/pinctrl-meson-axg.c
+@@ -939,7 +939,7 @@ struct meson_pinctrl_data meson_axg_periphs_pinctrl_data = {
+ 	.num_groups	= ARRAY_SIZE(meson_axg_periphs_groups),
+ 	.num_funcs	= ARRAY_SIZE(meson_axg_periphs_functions),
+ 	.num_banks	= ARRAY_SIZE(meson_axg_periphs_banks),
+-	.gpio_driver	= &meson_axg_gpio_driver,
++	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
+ 	.pmx_data	= &meson_axg_periphs_pmx_banks_data,
+ };
+ 
+@@ -953,7 +953,7 @@ struct meson_pinctrl_data meson_axg_aobus_pinctrl_data = {
+ 	.num_groups	= ARRAY_SIZE(meson_axg_aobus_groups),
+ 	.num_funcs	= ARRAY_SIZE(meson_axg_aobus_functions),
+ 	.num_banks	= ARRAY_SIZE(meson_axg_aobus_banks),
+-	.gpio_driver	= &meson_axg_gpio_driver,
++	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
+ 	.pmx_data	= &meson_axg_aobus_pmx_banks_data,
+ };
+ 
+diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg.h b/drivers/pinctrl/meson/pinctrl-meson-axg.h
+index c8d2b3af036..a6581bab500 100644
+--- a/drivers/pinctrl/meson/pinctrl-meson-axg.h
++++ b/drivers/pinctrl/meson/pinctrl-meson-axg.h
+@@ -61,6 +61,6 @@ struct meson_pmx_axg_data {
+ 	}
+ 
+ extern const struct pinctrl_ops meson_axg_pinctrl_ops;
+-extern const struct driver meson_axg_gpio_driver;
++extern U_BOOT_DRIVER(meson_axg_gpio);
+ 
+ #endif /* __PINCTRL_MESON_AXG_H__ */
+diff --git a/drivers/pinctrl/meson/pinctrl-meson-g12a.c b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
+index 24f47f82558..67114df6824 100644
+--- a/drivers/pinctrl/meson/pinctrl-meson-g12a.c
++++ b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
+@@ -1253,7 +1253,7 @@ static struct meson_pinctrl_data meson_g12a_periphs_pinctrl_data = {
+ 	.num_groups	= ARRAY_SIZE(meson_g12a_periphs_groups),
+ 	.num_funcs	= ARRAY_SIZE(meson_g12a_periphs_functions),
+ 	.num_banks	= ARRAY_SIZE(meson_g12a_periphs_banks),
+-	.gpio_driver	= &meson_axg_gpio_driver,
++	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
+ 	.pmx_data	= &meson_g12a_periphs_pmx_banks_data,
+ };
+ 
+@@ -1267,7 +1267,7 @@ static struct meson_pinctrl_data meson_g12a_aobus_pinctrl_data = {
+ 	.num_groups	= ARRAY_SIZE(meson_g12a_aobus_groups),
+ 	.num_funcs	= ARRAY_SIZE(meson_g12a_aobus_functions),
+ 	.num_banks	= ARRAY_SIZE(meson_g12a_aobus_banks),
+-	.gpio_driver	= &meson_axg_gpio_driver,
++	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
+ 	.pmx_data	= &meson_g12a_aobus_pmx_banks_data,
+ };
+ 
 -- 
 2.34.1
 
