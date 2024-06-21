@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38CFAC2BA18
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 01:51:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F17C2BA18
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 01:54:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6908B87C69;
-	Fri, 21 Jun 2024 03:51:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EA7D882AD;
+	Fri, 21 Jun 2024 03:54:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GM3AsdHO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GBqfg/ts";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2957487FC8; Fri, 21 Jun 2024 03:51:43 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id E37DE883F2; Fri, 21 Jun 2024 03:54:05 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 978CB80C58
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 03:51:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6B2888013
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 03:54:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-52cc5d5179aso2068738e87.0
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 18:51:40 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-57d0f929f79so1314919a12.2
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 18:54:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718934700; x=1719539500; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718934843; x=1719539643; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gUk3LFtbVYGV0wVXyVu06IalIlwtKtkl3lMGhm/QNQw=;
- b=GM3AsdHOBpDfjhKjCSkoC2AQaM9UZbcZEamk5PLcK5sM15uzWq/tsDp2mHmYKWPqry
- abbNENPRabhVhp874PBq6jsJnu02UvmJDI2jC74aKs6Z8ia9ynBlzZurJXxkDYMKRRp1
- CycI5QK3+I/lEKE1bn1sR85S2k6BeuOHzgjfXquYdtHMMEwRD+AO/kJ5infhVIaWBwwj
- fPn7OKfE+wO7zrdW5xmfxAF9m0Tft5MXC2K/P12buKA6pyNPpBBkNkH8bAACuz7YZ7tP
- gD3oGdOMN73YyFIdJwEvyfZ0gvZzVYLqjohxLv9ik83SkylMJmrE7Ooi0RsSvyenMQIW
- 6Wlw==
+ bh=mG/VkNSKWlWqbcP9I+0WoDws0pP73p8OtMj2sCPffIs=;
+ b=GBqfg/tsiE26ud/DylsFW1rd33OKxQwAEEW8ZgAxTLP5qmgerY3GnWP/5NIaM8z2wT
+ okRowwM1JnHVg5ph4sdJKKTJM6IIgAbuU9CrFp4zmqGpEbRIU+2/vKucpAK07Fz5zmno
+ c88M36wUuFU6xEsPFx3kmZfiVX/VLQXazSoHTySfxp4biyjgAiFMaJfGxdPcjB88cWbs
+ 6V1nY1c6bMk11YOwR0F5zD9tyrptcRdnukZeYP/qg4Sy2mcwcdkE1i+E3uzQWxyUEuSV
+ YfF8NR+gFa+ZPt7B0pc+hZnj1nHx+RNh+CsC6EzoYtYJ9CK/A74TCl/zG9gnW78hy2RH
+ 1LAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718934700; x=1719539500;
+ d=1e100.net; s=20230601; t=1718934843; x=1719539643;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gUk3LFtbVYGV0wVXyVu06IalIlwtKtkl3lMGhm/QNQw=;
- b=PPEe9C3FpnV1ihco7EJSvgq+Qff/y1JRWaSKigxqriP/l9gYbWWq+DYODSu+vhTFdx
- AOspgESy/hFHLciNsz2iTvVo8RSuk3VJIWtSXaOenZDCSt23xJAySRgMziOKa/S9nZN8
- mDn93zz98Ou+n209qnXaefY49F4mVsfW6aiSFk+GRZ8VPoLqIOIu5JqKSTOa2Bhz9p/q
- l+DaPwZ5PsvQauQSJ1XGsumh4v0qYKHbHB9ePc/5ZbAPlyLz/XbrCKo5noDOHTyYJiqm
- uyzQ9kmFogAFUGliXX6CvD/ZYQSRtnQtH2jCupfV39Jbu6lsbvPyG1KZX2EoliSwV9SU
- 8+uA==
-X-Gm-Message-State: AOJu0YxTv03+Cjr8OrHjYErBvFzEhM2C4UF3LdATwrIPfJ890RKQZhiv
- +LWMGQGswW3A4tq3rzL1wVR2SYOqxZhWBCi6pg/HLZnlDR8gd+aElPYuYWcFEQ8=
-X-Google-Smtp-Source: AGHT+IGgAWfktqWbC2YfMhm//AcqfJD2xxPthnT83/Jk9C8TJ/Xhx/tJZjDPTjl39sLJD0x4bYqAPA==
-X-Received: by 2002:ac2:4834:0:b0:52c:8a9b:17f4 with SMTP id
- 2adb3069b0e04-52ccaa375c8mr4336811e87.37.1718934699697; 
- Thu, 20 Jun 2024 18:51:39 -0700 (PDT)
+ bh=mG/VkNSKWlWqbcP9I+0WoDws0pP73p8OtMj2sCPffIs=;
+ b=oKKNFLgs4eAoSZzI1daFrhxuXOHbKI7LZeQpoQSoAKz6Rw46/Zn4MHx5CceF8BX/EN
+ m3wDA89j85vfw0Y2NUSUeXchhiP3RWg9SG1y0WONKM4Cy7fz8hsc6NToySLwte/cZ1qa
+ Uak2S1MkrDm/sj4OntAFDAqJpu9fuJXo1NMEgQIJnDMGmrEhfd2ZmMJhvsGCtrOZFBYy
+ zIXowDhQIDhb+fLx77oOk882c7k7a06ZEzL762CNu2uA1bbhX30LhTnZXtFdKAUd+Fk6
+ l0RS9LhEOwOa0X2qn5lG+4kZOcwN8SBG5MrCeoM3hSHvm5YXoKATZ63qL8UAmLfF0sn0
+ ScJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV6zslS6lLo9M1q6say157uC5dmca/F8iXYEFaNrW5tPPye5Bl+d9shjHll44200pMLeplNhGb1mMMd6DLnNA4KFJkw+A==
+X-Gm-Message-State: AOJu0YwAzIlOH8NIXr4EMV3HNP7drQwCgEmTBpZgcH+AH1M0L6YPnC18
+ iYD1TFXZeLH40b/qmKf1icC5RyL09KjEZpFSGokapiqYA4qG044kFGI/Q618F/g=
+X-Google-Smtp-Source: AGHT+IEamWTz98qo58G4EQjZqccGmp10dsqxTFWTLibCf+5Gm/FA7aiNZaFMs8dUzb4Rk+o5g8CvZA==
+X-Received: by 2002:a50:d619:0:b0:57d:73c:9299 with SMTP id
+ 4fb4d7f45d1cf-57d07e752fbmr4153205a12.23.1718934843069; 
+ Thu, 20 Jun 2024 18:54:03 -0700 (PDT)
 Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::ebdd])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fcf48b17esm28499966b.88.2024.06.20.18.51.38
+ 4fb4d7f45d1cf-57d3041208esm257919a12.30.2024.06.20.18.54.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 18:51:39 -0700 (PDT)
+ Thu, 20 Jun 2024 18:54:02 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Alexey Romanov <avromanov@salutedevices.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Ion Agorria <ion@agorria.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] include/fastboot.h: add missing types.h include
-Date: Fri, 21 Jun 2024 03:51:02 +0200
-Message-ID: <20240621015135.1570605-1-caleb.connolly@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: [PATCH] mmc: msm_sdhci: program core_vendor_spec
+Date: Fri, 21 Jun 2024 03:53:09 +0200
+Message-ID: <20240621015351.1573934-1-caleb.connolly@linaro.org>
 X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,28 +95,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fixes a compile error when building with only the TCP fastboot implementation.
+After resetting the host controller, program in the POR val for this
+register just like the Linux driver does.
+
+This seems to help with initialization when running U-Boot as the primary
+bootloader on some boards.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/fastboot.h | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/mmc/msm_sdhci.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/include/fastboot.h b/include/fastboot.h
-index 2ca1b907a54d..b106d6177493 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -11,8 +11,10 @@
-  */
- #ifndef _FASTBOOT_H_
- #define _FASTBOOT_H_
+diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+index 4ce0de6c47d8..8b3188fa20d4 100644
+--- a/drivers/mmc/msm_sdhci.c
++++ b/drivers/mmc/msm_sdhci.c
+@@ -31,8 +31,10 @@
+ #define SDCC_MCI_STATUS2 0x6C
+ #define SDCC_MCI_STATUS2_MCI_ACT 0x1
+ #define SDCC_MCI_HC_MODE 0x78
  
-+#include <linux/types.h>
++#define CORE_VENDOR_SPEC_POR_VAL 0xa9c
 +
- #define FASTBOOT_VERSION	"0.4"
+ struct msm_sdhc_plat {
+ 	struct mmc_config cfg;
+ 	struct mmc mmc;
+ };
+@@ -45,21 +47,25 @@ struct msm_sdhc {
  
- /*
-  * Signals u-boot fastboot code to send multiple responses by
+ struct msm_sdhc_variant_info {
+ 	bool mci_removed;
+ 
++	u32 core_vendor_spec;
+ 	u32 core_vendor_spec_capabilities0;
+ };
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ static int msm_sdc_clk_init(struct udevice *dev)
+ {
+ 	struct msm_sdhc *prv = dev_get_priv(dev);
++	const struct msm_sdhc_variant_info *var_info;
+ 	ofnode node = dev_ofnode(dev);
+ 	ulong clk_rate;
+ 	int ret, i = 0, n_clks;
+ 	const char *clk_name;
+ 
++	var_info = (void *)dev_get_driver_data(dev);
++
+ 	ret = ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate));
+ 	if (ret)
+ 		clk_rate = 201500000;
+ 
+@@ -104,8 +110,11 @@ static int msm_sdc_clk_init(struct udevice *dev)
+ 		log_warning("Couldn't set MMC core clock rate: %dE\n", clk_rate ? (int)PTR_ERR((void *)clk_rate) : 0);
+ 		return -EINVAL;
+ 	}
+ 
++	writel_relaxed(CORE_VENDOR_SPEC_POR_VAL,
++		prv->host.ioaddr + var_info->core_vendor_spec);
++
+ 	return 0;
+ }
+ 
+ static int msm_sdc_mci_init(struct msm_sdhc *prv)
+@@ -254,14 +263,16 @@ static int msm_sdc_bind(struct udevice *dev)
+ 
+ static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
+ 	.mci_removed = false,
+ 
++	.core_vendor_spec = 0x10c,
+ 	.core_vendor_spec_capabilities0 = 0x11c,
+ };
+ 
+ static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
+ 	.mci_removed = true,
+ 
++	.core_vendor_spec = 0x20c,
+ 	.core_vendor_spec_capabilities0 = 0x21c,
+ };
+ 
+ static const struct udevice_id msm_mmc_ids[] = {
 -- 
 2.45.0
 
