@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B99C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 20:17:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED96BC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 20:27:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2838B88405;
-	Fri, 21 Jun 2024 22:17:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 69E8388027;
+	Fri, 21 Jun 2024 22:27:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oUyVEkwV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AqQs7EFm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 024C3884FF; Fri, 21 Jun 2024 22:17:22 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EEEFA87FBC; Fri, 21 Jun 2024 22:27:02 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 453CA87B4D
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 22:17:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A38D088405
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 22:27:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45LKH9It007891;
- Fri, 21 Jun 2024 15:17:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1719001029;
- bh=aehJBBAn51WV6piGK9PyRkVCGpKkYbLdyqwoBWMxKbA=;
- h=From:To:CC:Subject:Date;
- b=oUyVEkwV0DqGbUgKUCFAttIE9I4M1PUY/Bof7GIalBtamu3iqkPnUN7PenymMbZ/A
- nhWcoomzWEXMktRJmzarRMEbTaD535/xP+14ckP55gVNh/jzBtbKqdUhwN+4pLJo5M
- EoJn8GCOTPPxW571xprw8743jv/w4kOMp/rt9gZY=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45LKH9pJ022259
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 21 Jun 2024 15:17:09 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Jun 2024 15:17:09 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Jun 2024 15:17:09 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45LKH9XM130346;
- Fri, 21 Jun 2024 15:17:09 -0500
-From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>,
- Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>
-CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH] doc: board: ti: Add capsule documentation for TI K3 devices
-Date: Fri, 21 Jun 2024 15:17:06 -0500
-Message-ID: <20240621201706.3797019-1-j-humphreys@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-797b24b8944so235026885a.0
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 13:27:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719001619; x=1719606419; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=to4Ra8uNKwjEyamTk8PYejU2gVASSxrO5cbJUuwcFqI=;
+ b=AqQs7EFmIbk0yCp5Mz+jkzZaWVpwGbI1VewuiP1KlPNY1VvvdtSAA19bgNAXvwuK5O
+ 2ZZ0Gc61TqnvMSeLLBqtEvivWZohdRVIcvMKsMccAiS1uou1r2W841yWOHnphic1tqCL
+ evTNh5Z0ZXupR5CUDGeCgBWewArszrCzb88FU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719001619; x=1719606419;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=to4Ra8uNKwjEyamTk8PYejU2gVASSxrO5cbJUuwcFqI=;
+ b=tMRis3Nwlfnxf+VaG7ebWTxlJFOkROSF9vHp1RbLng8leSUeM/SY1a1ufUCGNMzhI4
+ XwK4A56SxqVUdCnnxnHt2Q4flKAmcee1Ltfffe3OfpvuRWNJ9ONKLO+Y7SuTvkf9LHr0
+ UUbz0bHW0Wu04m95Zw1EHNOYNoAGhOOsLXVrgYeiOsErhnZXKWyLzGYGEz5iCKPFSsf3
+ v3Lh43E1BgvA3Qyj3HOJEjsp6XQI0ZWgOF27alM+fOfbxnoulQNgftnxACy31Onvz3Si
+ J4XIx2CI3y9mNK1bOucSf13EdARcPI5T0I+XVnmuHpwBTTSqT2aGFwuWFgPefLeGUA/N
+ q/4g==
+X-Gm-Message-State: AOJu0Yzg+vkXI1+XIrBHFcYXD572nw1CYfw6Ml2oZJAe+53DkNF0vU63
+ iXBMxwQJf551eAyunW7VvtPnaENSiJUE7ocEt9K18MsVuQgbVnicY7yYjQ1m3D8XayEV8kwJUHQ
+ 7yH9VQXmnlfHehYdnF4I0PLaOnkJcRz3X/5rK
+X-Google-Smtp-Source: AGHT+IFdWnkViz2YQwdY2W/iQA51anwQ2RdGaKfywsgTMSIFWyea3ek2gfdqKsD1Y4FaathJ4u639oWX9/PD5T7uRpk=
+X-Received: by 2002:a05:6214:b32:b0:6b2:a364:b86d with SMTP id
+ 6a1803df08f44-6b501df809dmr86650246d6.3.1719001619385; Fri, 21 Jun 2024
+ 13:26:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240621195204.2675252-1-sjg@chromium.org>
+ <20240621200735.GB68077@bill-the-cat>
+In-Reply-To: <20240621200735.GB68077@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 21 Jun 2024 14:26:48 -0600
+Message-ID: <CAFLszTj4o3EZJ7tVn+URbz1+9vyR2JdXu62A=nuPX3v15JY9+A@mail.gmail.com>
+Subject: Re: [PATCH v2 00/43] labgrid: Provide an integration with Labgrid
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Jerome Brunet <jbrunet@baylibre.com>, Marek Vasut <marex@denx.de>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,68 +91,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added introductory documentation about capsule support for TI devices,
-including links to more detailed information.
+Hi Tom,
 
-Also added a note in the build secction that points to the host package
-dependency docs.
+OK will do.
 
-This patch is followup from a request in the series introducing capsule
-update for TI boards.
-https://lore.kernel.org/r/20240618145058.552eapp5iiz772ej@hardcore
+One I have already split out ("Bug-fixes for a few boards") so I'll
+split out a few more.
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
----
- doc/board/ti/k3.rst | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+REgards,
+Simon
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 76375473185..67b066a07d3 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -204,6 +204,11 @@ online
- Build Procedure
- ---------------
- 
-+.. note ::
-+
-+   Make sure you have installed all necessary host package dependencies
-+   before proceeding. See :ref:`build/gcc:Building with GCC`.
-+
- Depending on the specifics of your device, you will need three or more
- binaries to boot your SoC.
- 
-@@ -388,6 +393,30 @@ wakeup and main domain and to boot to the U-Boot prompt
-    | `tispl.bin` for HS devices or `tispl.bin_unsigned` for GP devices
-    | `u-boot.img` for HS devices or `u-boot.img_unsigned` for GP devices
- 
-+Capsules
-+--------
-+
-+Most K3 boards have support for UEFI capsule update via capsule-on-disk
-+functionality. Check the ``CONFIG_EFI_CAPSULE_ON_DISK`` config option for
-+the board under question to verify. If configured, capsules for each of the
-+binaries above are automatically generated as part of the binary's build.
-+They are named `<binary>-capsule.bin`. For example, the capsule for
-+`u-boot.img` would be called `uboot-capsule.bin`.
-+
-+See :ref:`uefi_capsule_update_ref` for more information on U-Boot's support
-+for capsule update and how they are applied.
-+
-+Each board defines the capsules generated, including where those capsules
-+are applied. See the ``update_info`` definition for a board, typically
-+found at `board/ti/<board>/evm.c`. For example, `board/ti/am62x/evm.c`.
-+Usually, if the board has OSPI flash, the capsules will be applied there,
-+else the boot partition of the eMMC device.
-+
-+Once applied, the board will have U-Boot binaries in on-board non-volatile
-+storage. To start booting from that storage, set the bootmode pins
-+accordingly. Future updates can be performed by using the capsules
-+generated from the corresponding U-Boot builds.
-+
- FIT signature signing
- ---------------------
- 
--- 
-2.34.1
-
+On Fri, 21 Jun 2024 at 14:07, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Jun 21, 2024 at 01:51:21PM -0600, Simon Glass wrote:
+>
+> > Labgrid provides access to a hardware lab in an automated way. It is
+> > possible to boot U-Boot on boards in the lab without physically touching
+> > them. It relies on relays, USB UARTs and SD muxes, among other things.
+> >
+> > By way of background, about 4 years ago I wrong a thing called Labman[1]
+> > which allowed my lab of about 30 devices to be operated remotely, using
+> > tbot for the console and build integration. While it worked OK and I
+> > used it for many bisects, I didn't take it any further.
+> >
+> > It turns out that there was already an existing program, called Labgrid,
+> > which I did not know about at time (thank you Tom for telling me). It is
+> > more rounded than Labman and has a number of advantages:
+> >
+> > - does not need udev rules, mostly
+> > - has several existing users who rely on it
+> > - supports multiple machines exporting their devices
+> >
+> > It lacks a 'lab check' feature and a few other things, but these can be
+> > remedied.
+> >
+> > On and off over the past several weeks I have been experimenting with
+> > Labgrid. I have managed to create an initial U-Boot integration (this
+> > series) by adding various features to Labgrid[2] and the U-Boot test
+> > hooks.
+> >
+> > I hope that this might inspire others to set up boards and run tests
+> > automatically, rather than relying on infrequent, manual test. Perhaps
+> > it may even be possible to have a number of labs available.
+> >
+> > Included in the integration are a number of simple scripts which make it
+> > easy to connect to boards and run tests:
+> >
+> > ub-int <target>
+> >     Build and boot on a target, starting an interactive session
+> >
+> > ub-cli <target>
+> >     Build and boot on a target, ensure U-Boot starts and provide an interactive
+> >     session from there
+> >
+> > ub-smoke <target>
+> >     Smoke test U-Boot to check that it boots to a prompt on a target
+> >
+> > ub-bisect
+> >     Bisect a git tree to locate a failure on a particular target
+> >
+> > ub-pyt <target> <testspec>
+> >     Run U-Boot pytests on a target
+> >
+> > Some of these help to provide the same tbot[4] workflow which I have
+> > relied on for several years, albeit much simpler versions.
+> >
+> > The goal here is to create some sort of script which can collect
+> > patches from the mailing list, apply them and test them on a selection
+> > of boards. I suspect that script already exists, so please let me know
+> > what you suggest.
+> >
+> > I hope you find this interesting and take a look!
+>
+> Can you please split this up in to 3-4 series so that they can be
+> reviewed and merged? Thanks.
+>
+> --
+> Tom
