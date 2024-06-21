@@ -4,94 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B6BCC27C78
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 22:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD09CC27C78
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 22:33:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9719988059;
-	Sat, 22 Jun 2024 00:12:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E1A3387C69;
+	Sat, 22 Jun 2024 00:33:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gFbVjM8S";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="KhE1yNyQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 161D987C69; Sat, 22 Jun 2024 00:12:16 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id A1B968644E; Sat, 22 Jun 2024 00:33:27 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9D5E87FBC
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 00:12:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6169B87FBC
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 00:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-254aec5a084so1331522fac.3
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 15:12:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-52bbf73f334so2186342e87.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 15:33:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719007932; x=1719612732; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=G/GyCOeWrloj20LoCUfjUNyANeC849oxm99WXZ/zkSI=;
- b=gFbVjM8SUOPTIVWJgMVBJ1F2OEbzAwAp5ZDEGHNs8mk3XnJq/D64LILAGjtoTwjX1K
- aXphVrop4OqTiHrptysrJlWdyz2xSAiZmDKKIKqtN8hIp8ZoCxDiP51ibcwv2cYdOfaS
- JBo+FewdpNUUEglUQ2iMHKiV3yDYbP2u8TPFc=
+ d=gateworks.com; s=google; t=1719009204; x=1719614004; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=+nzSjo2ZmyG/U0ldPJy4kie3PaLPjDMddxJB2jQbzv8=;
+ b=KhE1yNyQlYE4KU+cZn+8JNd75mXbYdSghTeCuLDeivyFfSfakPbhU556yBWUZ7g48v
+ doG0R3mFQQz3jONKSCIIZfgCdOTF+WKhJLC8Lmkyrfhki8AiDlvE2fg8JmiSXXES09Qb
+ o9jcqPog9VEX1vIkminsGQ9cY2gL5hg+uyYEDuwOaGnSrnXAP6yU2NP0h2ti+vHxpn3k
+ BDJhR2WHhsmeQravDBDlIprR8BUUOShGn9PxuAI0Uu0XAz7w7oDi5N28oeuRt+L7gIC/
+ +w0pGMunxUjCizyT8hDf5/iqcraaIRZ5a2QDwFK8d2m9hCofMn4ozVZ8WB4P9eO/g61a
+ ysOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719007932; x=1719612732;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G/GyCOeWrloj20LoCUfjUNyANeC849oxm99WXZ/zkSI=;
- b=mMn2C4MDrmJM4HkhU8xecqXhxc6/udMRECyWe7bJDnb4PiWLFtvpFs8W6MbFp0VASf
- DSX4BB3Tpc3e3sjIrg+LV4F4Zix1j4KYhb0CIb/e979Ug8uaeetQ25xPxQWfzusjsm77
- +DTSy9jNMKQ1WX6OHTVljz8eKLBylmjW+YPJO/thFcNREEfd/eVFwwkYH/9t+S7Ybf55
- 897hHSuj4bIezR3O6GO+kWwC3eLH4tg5q9Irw8Ebz6AgozarOll3XnMFIUOQJJ686q31
- ytKYMhnm5Wmrm4sQj3xFc3KVsV4DL11v4Gxpn2BxXShou42a9QKKY2K9BpMnZgn4llUJ
- jfTg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXGWf8AY83spyiyDHZ8N48ejqWfRC1vN/hDjJZnB76IL+E8zCuLev3mn5BHsMhLo7AilPVBHfau3WlTOj8iVPHKB1TKCQ==
-X-Gm-Message-State: AOJu0Yzqg4/u7pM6u7FL+JPy6nVAmrp0KCnMcQKqeqZL4XH5cFZoQZzS
- QpskYLSl2IatvL6pEnllRGPXP+DIcLfvMGMNAGA2nfhPa6ySRTw2WFwICN8KmT8=
-X-Google-Smtp-Source: AGHT+IHuhXdrX8OgUvzPo7K6RZMtEdm1H3NXFyIYn7RjrUc9x2EuotPhw347g2vR6doCTplrj/zxdw==
-X-Received: by 2002:a05:6870:e2c9:b0:254:c16b:10ad with SMTP id
- 586e51a60fabf-25c948ec9d2mr10530455fac.9.1719007932389; 
- Fri, 21 Jun 2024 15:12:12 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25cd4b832ebsm596847fac.46.2024.06.21.15.12.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 15:12:11 -0700 (PDT)
-Date: Fri, 21 Jun 2024 16:12:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-Message-ID: <20240621221209.GD68077@bill-the-cat>
-References: <20240618141524.GO68077@bill-the-cat>
- <CAFLszTj--0hi4=isy2Zmq9fBDFr5DMciFs+BZtfuvvmFO-9o9Q@mail.gmail.com>
- <20240619153207.GF68077@bill-the-cat>
- <CAFLszTiHSn4Vw7oMBOwOBC1gAHNYQ3Xc4mT54FkT-dfGSb0F0A@mail.gmail.com>
- <20240620231943.GT68077@bill-the-cat>
- <CAFLszTgA6Gc1T55v07skZQ3U=_JuM7yW9aTxmAtXsoLTbSOtdQ@mail.gmail.com>
- <20240621160514.GY68077@bill-the-cat>
- <CAFLszTi45oeCoLRQK_noh2dHXTMGGteadT83M9Ce9cC2fcR9wA@mail.gmail.com>
- <20240621191915.GZ68077@bill-the-cat>
- <CAFLszTjdDSVsMPTU0OU09JrD0Njxb6NXmb_KKk4gUXC_JAgv8A@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1719009204; x=1719614004;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+nzSjo2ZmyG/U0ldPJy4kie3PaLPjDMddxJB2jQbzv8=;
+ b=SkVLToYPKHmOLSDX6AERucJWZ4JeTBy7rErkYvte7fNnuujO4+CeA+5zmI/d7DfHgb
+ 0SIozHCPWYYc+RpzzAc/soKCQZhBlnphPRgL0RQdqUZLRD2zB+3y9Uy2fLx/bi6uuS4X
+ PBIjkoG5Z5vryXCZqzrYPXX8O00onBSyQJ8tH8wYtQwMHtmHlgKAYVchZwZIFG2Ide+L
+ NNDsfLadumgJOSqg85ri0roFTmwruM4Di1OPggvbono0SpZd/G2miSxaa3KCJr4aamXG
+ sl8cocFCtp4eFtWTxzgZwSbTengGlHbdJ/D9j2zlsr68kRdAy8TT7JB086Qh7OE83tI4
+ w6JA==
+X-Gm-Message-State: AOJu0YzqiFVfnbrn2SCT2s22W0aj4CT+rHR4d9bHyRhFuRGCCkL95yMd
+ dZE/uAmXGJiSXt5GxCloue753ujnGczZ5249DyhcPk24H3Ua4jY9bG4otkz27M6PKGeuxgKKoga
+ moKLXuMJtCcQsPjlyH6+AG/jWLBwFAzsqSd2/ziveF5qM4TinfQQ=
+X-Google-Smtp-Source: AGHT+IHnDG/C8eG5ujUxMkN0G6zEiamSIWvwCuHBSdbRJO4IMpwtlqHGIdyPxGZVWYkk0P3k4OKgzEPzEALg94cM3+o=
+X-Received: by 2002:ac2:58c5:0:b0:52c:9fac:2147 with SMTP id
+ 2adb3069b0e04-52ccaa5cc98mr5557265e87.16.1719009203131; Fri, 21 Jun 2024
+ 15:33:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oECOVSKXMeI/AgEz"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjdDSVsMPTU0OU09JrD0Njxb6NXmb_KKk4gUXC_JAgv8A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 21 Jun 2024 15:33:11 -0700
+Message-ID: <CAJ+vNU1cy9LmQ82J+pHTO22xTCh4G6MG477ncpjvzARREnMMjQ@mail.gmail.com>
+Subject: USB gadget device (USB_ETHER) with ChipIdea device controller (imx)
+To: u-boot <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,126 +82,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Greetings,
 
---oECOVSKXMeI/AgEz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is anyone successfully using USB gadget device (USB_ETHER) on any imx
+that has the ChipIdea device controller? (imx6/imx7/imx8mm):
 
-On Fri, Jun 21, 2024 at 01:38:07PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 21 Jun 2024 at 13:19, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Jun 21, 2024 at 11:55:42AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 21 Jun 2024 at 10:05, Tom Rini <trini@konsulko.com> wrote:
-> > [snip]
-> > > > Yes, I very much do not like guessing about 3 numbers instead of
-> > > > guessing about 1 number and using the standard mechanism we already
-> > > > have. Please use BOARD_SIZE_LIMIT as this is the standard mechanism=
- to
-> > > > enforce size limits on U-Boot itself.
-> > >
-> > > If it were that easy I would have sent a patch :-)
-> > >
-> > > Here is the map for this board:
-> > >
-> > > ImagePos    Offset      Size  Name
-> > > 00000000  00000000  00800000  rom
-> > > ff800000   ff800000  00001000  intel-descriptor
-> > > ff801000   ff801000  001ff000  intel-me
-> > > ffef0000   ffef0000  000999f0  u-boot-with-ucode-ptr
-> > > fff899f0   fff899f0  00005554  u-boot-dtb-with-ucode
-> > > fff8ef50   fff8ef50  00000000  u-boot-ucode
-> > > fff8ef50   fff8ef50  00000571  fdtmap
-> > > fff90000   fff90000  00010000  intel-vga
-> > > fffa0000   fffa0000  0002fc94  intel-mrc
-> > > fffcfc94   fffcfc94  00000000  private-files
-> > > fffff800   fffff800  00000070  x86-start16
-> > > fffffff0   fffffff0  00000005  x86-reset16
-> > > fffffff8   fffffff8  00000008  image-header
-> > >
-> > > What limit should I set on what?
-> >
-> > Is this a trick question?
-> > $ printf %d\\n $(( 0xfff90000 - 0xffef0000))
-> > 655360
-> >
-> > Of course since we're less than that today, you can reduce it by
-> > whatever other magic numbers I'm not seeing but are part of your assumed
-> > sizes.
->=20
-> That limit is on u-boot-nodtb.bin. Even with a size (for that file) of
-> 634816 it doesn't fit. I need to calculate a size based on the size of
-> the dtb and the microcode...which of course can change.
+I've never been able to get this to work as when
+usb_setup_ehci_gadget() is called from ci_udc's
+usb_gadget_register_driver() it first removes the usb controller (and
+its children) before reprobing it and this causes a hang.
 
-Yes, and you're able to assume some size for them, which is what you
-put in the dts file?
+Here's an example with v2024.07-rc4 on an imx8mm-venice-gw73xx-0x
+(imx8mm_venice_defconfig) after enabling CONFIG_USB_ETHER:
+u-boot=> net list
+eth0 : ethernet@30be0000 00:d0:12:ba:f8:cc active
+u-boot=> bind usb 0 usb_ether # bind usb_ether to first usb controller
+u-boot=> net list
+eth0 : ethernet@30be0000 00:d0:12:ba:f8:cc active
+eth2 : usb_ether 00:00:00:00:00:00
+u-boot => setenv eth2addr 00:d0:12:ba:f8:cd
+u-boot=> net list
+eth0 : ethernet@30be0000 00:d0:12:ba:f8:cc active
+eth2 : usb_ether 00:d0:12:ba:f8:cd
+u-boot=> setenv ethact usb_ether; setenv ipaddr 10.0.0.2; setenv
+netmask 255.255.255.0; ping 10.0.0.1
+^^^ board hangs, USB host connected to board does not enumerate a CDC
+ether device
 
-> > > - the U-Boot is the thing you are wanting to limit
-> > > - the dtb has microcode added
-> > > - the ucode is empty in this case
-> > > - the fdtmap is variable in size
-> > >
-> > > So this all seems a bit backwards. The actual limit is that
-> > > (u-boot-with-ucode-ptr + u-boot-dtb-with-ucode + u-boot-ucode +
-> > > fdtmap) fits in the space available. Note that some boards don't have
-> > > intel-vga or intel-mrc.
-> > >
-> > > With the other patch I sent I can have a sensible limit for all x86 b=
-oards.
->=20
-> Did you miss the comments above?
+Unbinding ethernet via 'unbind ethernet 0' first does not appear to
+make a difference.
 
-No, I saw them. They're similar constraints to other systems.
->=20
-> >
-> > And you can set the same sensible limit with the existing mechanism with
-> > the bonus of it not making x86 different from the rest?
->=20
-> I understand that it is possible to set a limit for u-boot-nodtb.bin
-> but that is not accurate nor sufficient in the presence of blobs. The
-> solution belongs in Binman.
+The following patch resolves this however I don't think this is the
+right fix as that was apparently added for a reason in commit
+fbeceb260232a ("dm: usb: Allow setting up a USB controller as a
+device/gadget"):
 
-Your series puts reasonable estimates on the size of the blobs and then
-will give a failure such as:
-binman: Node '/binman/rom/intel-vga': Offset 0xfff90000 (4294508544)
-overlaps with previous entry '/binman/rom/fdtmap' ending at 0xfff902e1
-(4294509281)
-Which is not as nice as (I just threw in a limit):
-u-boot-nodtb.bin exceeds file size limit:
-  limit:  0x927c0 bytes
-  actual: 0x9a810 bytes
-  excess: 0x8050 bytes
-make[1]: *** [/home/trini/work/u-boot/u-boot/Makefile:1359: u-boot-nodtb.bi=
-n] Error 1
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index a1cd0ad2d669..38111fda8af9 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -403,6 +403,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
+        ret = uclass_find_first_device(UCLASS_USB, &dev);
+        if (ret)
+                return ret;
++#if 0
+        ret = device_remove(dev, DM_REMOVE_NORMAL);
+        if (ret)
+                return ret;
+@@ -412,6 +413,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
+        ret = device_probe(dev);
+        if (ret)
+                return ret;
++#endif
+        *ctlrp = dev_get_priv(dev);
 
-And tells us how much we need to get back size wise. Aside from when
-using the actual blobs (and in which case a real error will be shown
-when trying to use them), it's always about making an estimate on the
-part of the system that we control.
+        return 0;
 
---=20
-Tom
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index a1cd0ad2d669..38111fda8af9 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -403,6 +403,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
+        ret = uclass_find_first_device(UCLASS_USB, &dev);
+        if (ret)
+                return ret;
++#if 0
+        ret = device_remove(dev, DM_REMOVE_NORMAL);
+        if (ret)
+                return ret;
+@@ -412,6 +413,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
+        ret = device_probe(dev);
+        if (ret)
+                return ret;
++#endif
+        *ctlrp = dev_get_priv(dev);
 
---oECOVSKXMeI/AgEz
-Content-Type: application/pgp-signature; name="signature.asc"
+        return 0;
 
------BEGIN PGP SIGNATURE-----
+Adding debugging to device_remove the hang occurs when removing
+'usb_ether.bootdev' and I'm not quite sure where this device even
+comes from:
+usb_setup_ehci_gadget removing usb@32e40000
+device_remove usb@32e40000 flags=0x1
+device_remove usb_ether flags=0x1
+device_remove usb_ether.bootdev flags=0x1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ1+rUACgkQFHw5/5Y0
-tywMYQv+I6zrswOPqW3jUNjW6NivNLsc3B4mzDmeFUAO5g8ua/wBGv9zZ6+jDo4z
-DlqHfJ9xbqEh56zKQfjOQximtF4apEZOT5MXTzuj7R1x15lhySWpiT17ccRJ8G11
-wu3lv9ekJgOxSY0xZs38GE3Lf0cfQFJdkTrgvOu+csotGWotZoVK3v0IfC1Z0NHL
-uauTXYmYxxOv+12A5DGM+TcdDHGqtfhU5N5xtPGk4Vzwz3SDw9mcqsHznvXGgtvA
-uzrtG73NSr9veM5iXJBcABZvjFrt9ikYgRHvBV0PhRryU4hJK3sdG8Zjt6FE+t+8
-cPCJ6id5/tDNbzkLzYAiYAh2EPY/CuJYMXtzzra9b+c+8jPFEl7WUq1shdHGVbsf
-cV3gBrBlKrIhGcIxr79Fb8vlHJMz06ZX6AmoiuTgNVVXFLnLYJrY68iczc5cJky3
-v2mdbG3Vmr1ftbt9hvOdz+X7vEe/Mi5YWQfzOU8OtMdJC8OOPsfvpMjF7td92MuQ
-ZncArhEg
-=YUts
------END PGP SIGNATURE-----
+I don't understand why usb_setup_ehci_gadget() is removing the device
+in the first place just to go and probe it again.
 
---oECOVSKXMeI/AgEz--
+This is not a regression... I've never seen this work since I first
+tried it back in Feb 2022 [1]
+
+Any ideas?
+
+Best Regards,
+
+Tim
+[1] https://lore.kernel.org/all/CAJ+vNU1xH-J-0RV09OuM1e+hsRV=HXvh2oS6PfCWY5d+0stRYg@mail.gmail.com/
