@@ -4,82 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1EF9C2BA1A
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 08:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DABF7C2BA1A
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 09:12:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D4CE87FBC;
-	Fri, 21 Jun 2024 10:58:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BFAA58801A;
+	Fri, 21 Jun 2024 11:12:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ecZ4mRri";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42AB988001; Fri, 21 Jun 2024 10:58:00 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EECC0879AF
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 10:57:57 +0200 (CEST)
+ id 9DB6087DEB; Fri, 21 Jun 2024 11:12:40 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 427078801A
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-57d2fc03740so414389a12.0
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:57:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718960277; x=1719565077; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JuOpYKCYq6QGUpUx7ozwI6xDNo/gullDReeERxyDlfI=;
- b=ecZ4mRrizvYgXj4HOpuQilpO6bVPCD6lMQFJrvR8ID6alAviObW8beWv2dnfj7/7Ic
- ycBMwL9Mv3o11dVywY6dNBm2TTm4lRVY0tjwfFFqq+pYGIWheIGVMeuYbtH0/+cRhsgf
- A1fpngumEuA8tVgerfe5zG/KxS90QgcypcAPAG3PLuR64v8gZuO70ArveMqiRLARkkAU
- BCX6Zj6aHHqjPtk7sHnCC76RGBepNFJ2C+s52B612n+lj51bx7dLV8N2jylIpwREfaer
- kWtOcwhF5YUkhdBYTLZOWKVx2Q/evnU5INmCGlQ94x4xMj8ZQDz7VznFAMx/Pn0gYz/T
- LcXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718960277; x=1719565077;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JuOpYKCYq6QGUpUx7ozwI6xDNo/gullDReeERxyDlfI=;
- b=H5bbfRpsgw2TKZTBhq5J8KsGZEKumuSmqTI7afct8kKlwC3uirKEkZepgJxLdw5QkE
- YDiOXDS4+yY+stU0gUiVlGiViiu3ZPtJby52WxGQpspIwFM+VFBw/QrymGxUcj12xJre
- tVdN6X4keczM8VkyfWdG2r7WvJfoNGYa7t8FE6FG9OLXzUKXALKN1iNkLVAEXctVIBYl
- Sp0lOS+brPhoSh19RsSE95+NSOYqA/qq6swfAbE3I0qUJto0gz3KWVN9GMY9fwu1fH3C
- XHC4ura8f4C4UXTc6KqFuzbnxgMQj2k1asogp1YCn+o7F3Q46svIk5ORGIPmH2gI0OJn
- 4oAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWp0NFPVEr8IjSO7bsOZGRmLvDgIfO/MH9Y7aWGM/uv7GSaSTDQl6nyhxDjXCONT8PUqboIrtuxuk0AWN8zANS4MprN0Q==
-X-Gm-Message-State: AOJu0YzGF5gJRuH+e29soA1OEJTRnJUbS7EZ/DhMhsrMUTMulepMJ9HT
- mf+R4RNPnPHjgUDxvlrMw3l6JmT+Cf1tA71kNzc6GFJGMYiRr/G1T2DAmJ+cyVcnCe0XHSdGPUX
- q3xAq3++DVe0TJo+QSNg8DBsg+0g=
-X-Google-Smtp-Source: AGHT+IHcGn4Ywh5uAW2txBPsC8UcjmpioTLPn2cpCwlYOfaRAzdr1JMMXeCI72+K048irCANjb2mzBTI5AqjPiesnsU=
-X-Received: by 2002:a50:96cf:0:b0:57d:730:e0d5 with SMTP id
- 4fb4d7f45d1cf-57d07e7a4edmr4848645a12.15.1718960277168; Fri, 21 Jun 2024
- 01:57:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 32C74DA7;
+ Fri, 21 Jun 2024 02:13:02 -0700 (PDT)
+Received: from debian (unknown [10.57.8.27])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CFAA13F73B;
+ Fri, 21 Jun 2024 02:12:35 -0700 (PDT)
+Date: Fri, 21 Jun 2024 11:12:32 +0200
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 0/7] efi: CapsuleUpdate: support for dynamic UUIDs
+Message-ID: <ZnVEALsxt2b9s-cI@debian>
+Mail-Followup-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
+ <ZnLk_pXstP2dlRGo@debian>
+ <CAC_iWjL_rytosTAcsW2-3fmwVhjTgkMRAB0LwPuNpq73K=YmcQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240620213539.ftmjhphypssxp5n4@desolate>
- <a7cca1a2-5ba8-487b-9fce-1553da93c56e@cherry.de>
- <CALeDE9Ojza7T3gMxBJP5L0s0CA6CfxeO_6AAvnoUKDevG+_eBw@mail.gmail.com>
- <6d80a505-3374-406e-ab1f-959a1794cae1@cherry.de>
- <CALeDE9O=5_LnvFMLKCU3gKruTnsRBAs1jNqRD4EjkufP+HAtfA@mail.gmail.com>
-In-Reply-To: <CALeDE9O=5_LnvFMLKCU3gKruTnsRBAs1jNqRD4EjkufP+HAtfA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 21 Jun 2024 09:57:46 +0100
-Message-ID: <CALeDE9Pgrhau98t4eKPZVGKbAxs7we2Lha+LqnrMABpFB=C4hA@mail.gmail.com>
-Subject: Re: Request for hosting a boot-firmware repository in u-boot git
- (denx and GitHub)
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Enric Balletbo i Serra <eballetb@redhat.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Josh Boyer <jwboyer@redhat.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAC_iWjL_rytosTAcsW2-3fmwVhjTgkMRAB0LwPuNpq73K=YmcQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,71 +69,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Jun 2024 at 09:56, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> > > rk3568 is now upstream, there was a PR upstream for this for some
-> > > time, similar to rk3588, albeit not as long as rk56x. In some cases
-> > > the issue here is the speed of review of upstream ATF. I don't think
-> > > that means it should go into something like this.
-> > >
-> >
-> > If the BL31 blob doesn't go into boot-firmware, I don't see the benefit
-> > of boot-firmware for Rockchip platforms to be honest. Instead of telling
-> > people to get their firmware from github.com/rockchip-linux/rkbin we'll
-> > tell them to get one from rkbin and the other from boot-firmware. And I
-> > have a feeling that if that's how it'll go that the vendor will just not
-> > care about boot-firmware as they would anyway need to keep updating
-> > rkbin as well.
->
-> Well it could go there, but I currently build ATF for all Rockchip
-> platforms we support.
->
-> > It doesn't matter whose fault it is for not being upstreamed earlier,
->
-> I agree. There's also  no reason something can't be included and then
-> dropped at a later time when things land upstream in appropriate
-> places.
->
-> > the fact is, we still don't have a **merged** open-source BL31 for
-> > RK3588 2 and half years after the Rock5B from Radxa was announced. So in
-> > that whole timeframe, we have to work with blobs (or maintain your own
-> > forked TF-A whenever patches are posted and hope it works well enough).
->
-> Agreed, the rk356x has *finally* been merged[1], it was sent as a PR
-> around 2 years before. I have highlighted this to Linaro/arm in the
-> past that this delay really isn't good enough.
+On Wed, Jun 19, 2024 at 10:15:32PM +0300, Ilias Apalodimas wrote:
+> Allô Vincent,
 
-Also I don't believe this repository should be used as a band-aid for
-other problems.
+Hi Ilias :)
 
-> [1] https://github.com/ARM-software/arm-trusted-firmware/tree/master/plat/rockchip/rk3568
->
-> The point I was trying to make, and I clearly didn't was. In the case
-> where there's open source code do we want to include vendor binaries?
->
-> > >> FYI, the DDR bin is printing stuff on the console, so we had to modify
-> > >> it (with a tool from Rockchip) to remove the gibberish breaking the
-> > >> terminal by setting the appropriate controller, mux and baudrate (for
-> > >> our products, there's no one size fits all :) ). The question is how to
-> > >> handle this since we cannot realistically store every possible
-> > >> permutation of that binary for each UART controller, mux of UART
-> > >> controller and baudrate (the only parameters **we** modify, but there
-> > >> are tons of others).
-> > >
-> > > I think those sort of things should be mostly quiet TBH.
+> 
+> Thanks for testing!
+> 
+> On Wed, 19 Jun 2024 at 17:02, Vincent Stehlé <vincent.stehle@arm.com> wrote:
 > >
-> > Mostly != fully. The console doesn't break consistently so I assume that
-> > if it even prints a tiny bit of info it would still be able to break
-> > stuff. I assume we could have binman run some logic to replace the uart
-> > controller, mux and baudrate. Not sure we want that but we could.
->
-> Adjusting binaries on the fly sounds problematic to me. Is the process
-> open or something that's NDA between rockchip and their customers?
->
-> > Also, the DDR bin is passing the console info to the BL31 binary through
-> > ATAGS, so if you don't fix the DDR bin baudrate, controller and mux, the
-> > BL31 will also not be fixed.
->
-> Ultimately we should work with the vendor to fix those so they're
-> consistent? Why do you're products have issues, are they using
-> baudrate that is different to all the other rockchip devices?
+> > On Fri, May 31, 2024 at 03:50:34PM +0200, Caleb Connolly wrote:
+> > > As more boards adopt support for the EFI CapsuleUpdate mechanism, there
+> > > is a growing issue of being able to target updates to them properly. The
+> > > current mechanism of hardcoding UUIDs for each board at compile time is
+> > > unsustainable, and maintaining lists of GUIDs is similarly cumbersome.
+> > >
+> > > In this series, I propose that we adopt v5 GUIDs, these are generated
+> > > by using a well-known salt GUID as well as board specific information
+> > > (like the model/revision), these are hashed together and the result is
+> > > truncated to form a new UUID.
+> >
+> > Dear Caleb,
+> >
+> > Thank you for working on this proposal, this looks very useful.
+> > Indeed, we found out during SystemReady certifications that it is easy for
+> > unique ids to be inadvertently re-used, making them thus non-unique.
+> >
+> > I have a doubt regarding the format of the generated UUIDs, which end up in the
+> > ESRT, though.
+> >
+> > Here is a quick experiment on the sandbox booting with a DTB using the efidebug
+> > command.
+> >
+> > With the patch series, rebased on the master branch:
+> >
+> >   $ make sandbox_defconfig
+> >   $ make
+> >   $ ./u-boot --default_fdt
+> >   ...
+> >   U-Boot 2024.07-rc4-00028-g1c96225b0b3 (Jun 19 2024 - 15:29:04 +0200)
+> >   ...
+> >   Model: sandbox
+> >   ...
+> >   Hit any key to stop autoboot:  0
+> >   => efidebug capsule esrt
+> >   ...
+> >   ========================================
+> >   ESRT: fw_resource_count=2
+> >   ESRT: fw_resource_count_max=2
+> >   ESRT: fw_resource_version=1
+> >   [entry 0]==============================
+> >   ESRT: fw_class=FD5DB83C-12F3-A46B-80A9-E3007C7FF56E
+> >   ...
+> >   [entry 1]==============================
+> >   ESRT: fw_class=935FE837-FAC8-4394-C008-737D8852C60D
+> >   ...
+> >   ========================================
+> >
+> >   $ uuid -d FD5DB83C-12F3-A46B-80A9-E3007C7FF56E
+> >   encode: STR:     fd5db83c-12f3-a46b-80a9-e3007c7ff56e
+> >           SIV:     336781303264349553179461347850802165102
+> >   decode: variant: DCE 1.1, ISO/IEC 11578:1996
+> >           version: 10 (unknown)
+> >           content: FD:5D:B8:3C:12:F3:04:6B:00:A9:E3:00:7C:7F:F5:6E
+> >                    (not decipherable: unknown UUID version)
+> >
+> > Version 10 does not look right.
+> 
+> So, this seems to be an endianess problem.
+> Looking at RFC4122 only the space ID needs to be in BE.
+> 
+> >
+> >   $ uuid -d 935FE837-FAC8-4394-C008-737D8852C60D
+> >   encode: STR:     935fe837-fac8-4394-c008-737d8852c60d
+> >           SIV:     195894493536133784175416063449172723213
+> >   decode: variant: reserved (Microsoft GUID)
+> >           version: 4 (random data based)
+> >           content: 93:5F:E8:37:FA:C8:03:94:00:08:73:7D:88:52:C6:0D
+> >                    (no semantics: random data only)
+> >
+> > A reserved Microsoft GUID variant does not look right.
+> 
+> This seems like an existing bug. RFC4122 defines the MS reserved GUIDs
+> in the variant as
+> 1     1     0    Reserved, Microsoft Corporation backward
+> compatibility and the existing UUID_VARIANT_MASK is defined as 0xc0...
+
+I think the variant mask 0xc0 is correct:
+
+- The variant field is in the top three bits of the "clock seq high and
+  reserved" byte, but...
+- The variant we want is 1 0 x (do not care for bit 5, a.k.a. "Msb2").
+
+With the mask 0xc0 we can clear the top two bits as we set the top most bit just
+after anyway.
+
+...the mask needs to be used correctly, though; see below.
+
+> 
+> The patch below should work for you (on top of Calebs')
+> 
+> diff --git a/include/uuid.h b/include/uuid.h
+> index b38b20d957ef..78ed5839d2d6 100644
+> --- a/include/uuid.h
+> +++ b/include/uuid.h
+> @@ -81,7 +81,7 @@ struct uuid {
+>  #define UUID_VERSION_SHIFT     12
+>  #define UUID_VERSION           0x4
+> 
+> -#define UUID_VARIANT_MASK      0xc0
+> +#define UUID_VARIANT_MASK      0xb0
+>  #define UUID_VARIANT_SHIFT     7
+>  #define UUID_VARIANT           0x1
+> 
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index 89911b06ccc0..73251eaa397e 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -411,9 +411,9 @@ void gen_uuid_v5(const struct uuid *namespace,
+> struct uuid *uuid, ...)
+>         memcpy(uuid, hash, sizeof(*uuid));
+> 
+>         /* Configure variant/version bits */
+> -       tmp = be32_to_cpu(uuid->time_hi_and_version);
+> +       tmp = uuid->time_hi_and_version;
+
+Not caring for the endianness at all does not look right.
+Indeed, while this does work on my side in little-endian, this does not work on
+on big-endian simulators.
+Also, this is a 16b quantity, not 32b; we need to redefine tmp to uint16_t and
+use the be16 functions.
+
+>         tmp = (tmp & ~UUID_VERSION_MASK) | (5 << UUID_VERSION_SHIFT);
+> -       uuid->time_hi_and_version = cpu_to_be32(tmp);
+> +       uuid->time_hi_and_version = tmp;
+> 
+>         uuid->clock_seq_hi_and_reserved &= UUID_VARIANT_MASK;
+
+We need to mask with ~UUID_VARIANT_MASK, I think.
+
+>         uuid->clock_seq_hi_and_reserved |= UUID_VARIANT << UUID_VARIANT_SHIFT;
+> 
+> Can you give it a shot?
+
+This does indeed work on my little-endian machines, but not on big-endian
+simulators.
+For testing on big-endian, I suggest using only genguid as the sandbox will not
+help there:
+
+  $ make sandbox_defconfig
+  $ make tools-only
+  $ ./tools/genguid 2a5aa852-b856-4d97-baa9-5c5f4421551f \
+        -c "qcom,qrb4210-rb2" \
+        QUALCOMM-UBOOT
+
+...and feed the resulting UUID to `uuid -d'.
+(The genguid command is the online help example.)
+
+> What I am afraid of is breaking existing use cases using a different
+> variant mask....
+> If that's the case we might need to keep the buggy existing
+> UUID_VARIANT_MASK and use the new one only on v5 and newer code
+
+I tried to debug further and I suspect that:
+
+- Operations on 8b clock_seq_hi_and_reserved might need further casts.
+
+- My understanding is that we are generating the v5 UUID as big-endian in
+  memory; if this is indeed the case, genguid should not print it with the GUID
+  byte order.
+
+For the moment I am unable to make the code work in all the following cases:
+
+- genguid on little-endian
+- genguid on big-endian
+- sandbox ESRT on little-endian
+
+I will let you and Caleb know if I make any progress.
+
+Best regards,
+Vincent.
+
+> 
+> Thanks
+> /Ilias
