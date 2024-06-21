@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A6F6C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 17:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01FE0C2BB85
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 17:51:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAE388840F;
-	Fri, 21 Jun 2024 19:11:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C6E18845A;
+	Fri, 21 Jun 2024 19:51:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DD26jO26";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S4ARv9d/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5B1E88440; Fri, 21 Jun 2024 19:11:44 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id D85858846D; Fri, 21 Jun 2024 19:50:58 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7123C880FB
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 19:11:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DF6A88059
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 19:50:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3762abfe005so7533405ab.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 10:11:42 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6f9ca219760so1180305a34.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 10:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718989901; x=1719594701; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WQLg3tVOSCeMsWzFi+tfUt6UeD8ZSYjDEJxcZvwY8Pg=;
- b=DD26jO26qDZqK7xIufrkBO9MWH+XgijUV5x9M52RkUCzSr6rsGFp+UPGqslvpLZ7PO
- h3b6dTiA0cUXdlavmohqE5ew6Nw342PfPDDlGtrCBuweoOWu/dJ543yJKvygewYD2j1Q
- EaPXZPPe09EOp7fxqEdankZF+6AgAR1zHVD3D5maXYYZs8rK7/ZRT59EDWFYGLj+EvIx
- 5RLx7VfrOneLJnhDF9cqRwPeKiSup3z6GRlJqfAb+Hmp7wp/VF3Ez9EKKGB5STlRsBZF
- wMkfgUlvqxXwEVPJLQSc7Pffc2BljSXqfJ5wMN0O5GKCnVcgxCw8NmUObSsY9hq7Kik3
- GVMw==
+ d=chromium.org; s=google; t=1718992255; x=1719597055; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/fxYaPHHnYIqhmcKnur9D+ZYnel6APc3+6GJoUsR26k=;
+ b=S4ARv9d/CME8TOs9Or7WAfpWW+mToFSYBcUGmhuXRdZhSPWrhFqSXBurarv3jhwDQp
+ CsoVlbOfAw+pi1B9OkKhGm/9WpM8iUTj3Lc38kHOm68S2V+tT0wurgeynazLY+o+r7bR
+ uZAh4aSP9em+fXE9eiGWOlJPiruGFKT22ImJw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718989901; x=1719594701;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WQLg3tVOSCeMsWzFi+tfUt6UeD8ZSYjDEJxcZvwY8Pg=;
- b=m/khnRzcN+0xMu3gycmhzmHzbXiqVf6W6ChbWB/7XfKUV+N01saRc319Yn7Pb4Cf/l
- mlNx7XY4m9A87Ss0QjSDSzb55FerRgk60ck7Ffe3LUdBgyKkwPfkIcx+mtJCR1p/ucPK
- oj98t4OrEKyhi8YdoIT1hkshtPgWRY7880VS9sqtoY0hyp6O6ag93EHveIR2ZRveRSZI
- AwU0UNrReQ4yjVy9P+GoQzVDXd47CAT3HO8m6hyaDYJxcz0a6f8zkufXKyUd7R9fvycf
- jaePL6xm6l5+qcbpSoif8JJ1xxdXBvq+Av0Xu26F8aAeionJRIwRFoqPAcMUyLmC0n6M
- AQKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOeHO9AjoZIg4tS/NsurXoXoRimDntvjT/RSLeVb2P65AlJIvzM1gydD75d5eq+F7xT43XkFaAg42YvXxIN+9YTXDVvg==
-X-Gm-Message-State: AOJu0Yw4bVTuIH9q86XLCsdfINk0sqI7MW4bA5sZ87Afv6Cy3xIW+VuF
- q0KUQ6eGOwdnE2k3j0DIZomyKKy4GrNNPnyEIs3MPzTFXIm8OLf2zikkO3mb1yl6O07Kr2dc7m5
- FSqYuD9xWRgT/Jwd+UbNNjATlQIZgr1ihkp9uDA==
-X-Google-Smtp-Source: AGHT+IHAhOFuRKci6tQN96uth1+iU06NZgdiOW88SJGpg1Fo50UmBVQfxBqU4gCQZilZjgXHo/uXGHPAfkZw0qDHzaA=
-X-Received: by 2002:a05:6602:168b:b0:7eb:815b:bead with SMTP id
- ca18e2360f4ac-7f13ee867b3mr938136039f.15.1718989901010; Fri, 21 Jun 2024
- 10:11:41 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718992255; x=1719597055;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/fxYaPHHnYIqhmcKnur9D+ZYnel6APc3+6GJoUsR26k=;
+ b=n6SKAJCEW8F+6NQ9ZWTMOcKjasQJrHS5r5EEyrY7cSc7TksS4cKBdw1g0ALtwosoGp
+ XLrzqJ9v5Hc7kwYmGRidvw5Mh41Gj0tpLwzDSgH0O3L7+1qFRGcdqQ6m25dWpOCnk2Oh
+ A85MnI5ZlqkdsaYp4y44klyN6TXIcKi6k+4kWFEFG0kn2ihdCrHn94MkQBhN3JlbS4AU
+ S71IpIv03nlJgq16PredJOErgPl1JAV5aa90NkxkhDuNSPhkP4pcwy+36K1Wq3EXiFXE
+ ivO8KjkPtjpAjw8/W+6CuHHE7uukw7eASh7AFHeIkPKKrRMXo+KPvb1TVpYM5H6gaPou
+ rcOQ==
+X-Gm-Message-State: AOJu0Yxz0WfP2FZECP6V121d5sNhpvYs+pIrrI42Kspp602hfW0vedbi
+ HtirLHw+nF8+mpi6jbAMPfF6e1rxpy+Gb4IjkBt4kwM6vRmnbKkQD09XaZpXV5Eq++IGVfTybgH
+ J+I6IgZAPBPzb25y7GRitsSCIbW/Xg9u1ZHbv
+X-Google-Smtp-Source: AGHT+IEW3EMXTrAr2UJPLTDsSnnvSL1L9kUsCMUSxcy7+NYPukEhWkrTRHoI1p+g6xK1HWrpXI06zPjol/o3ZJcjdnM=
+X-Received: by 2002:a05:6830:912:b0:6f9:b580:e420 with SMTP id
+ 46e09a7af769-70075a753a6mr9937373a34.37.1718992254838; Fri, 21 Jun 2024
+ 10:50:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
- <ZnLk_pXstP2dlRGo@debian>
- <CAC_iWjL_rytosTAcsW2-3fmwVhjTgkMRAB0LwPuNpq73K=YmcQ@mail.gmail.com>
- <ZnVEALsxt2b9s-cI@debian> <b2f16a9c-e916-4fbc-9f9c-87b23c0277a5@gmx.de>
- <ZnWzJKEf1B0RLOyP@debian>
-In-Reply-To: <ZnWzJKEf1B0RLOyP@debian>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 21 Jun 2024 19:11:28 +0200
-Message-ID: <CAC-n0DzafDJqP7LwzKJ4Gii48X1pQMZ9hXuG8SsnwoHpo_FWxg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/7] efi: CapsuleUpdate: support for dynamic UUIDs
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240620230625.1797397-1-sjg@chromium.org>
+ <20240620230625.1797397-11-sjg@chromium.org>
+ <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
+ <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
+ <CAFLszTiRgwf4T6h1T5-5BiWckc7062Tgcs-2M2qi+7y_k=YbRw@mail.gmail.com>
+ <CAC_iWjL7kTVB-jj7VbAJDe4UZgDk55Gxax5V7csvkRsvJ8OK2A@mail.gmail.com>
+In-Reply-To: <CAC_iWjL7kTVB-jj7VbAJDe4UZgDk55Gxax5V7csvkRsvJ8OK2A@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 21 Jun 2024 11:50:43 -0600
+Message-ID: <CAFLszTj8QfBXjD3YGXpzfLv8pLVqKeB4gKE0f_jNSvfken6SZg@mail.gmail.com>
+Subject: Re: [PATCH v3 10/18] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Sean Anderson <sean.anderson@seco.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,87 +94,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Jun 2024, 19:06 Vincent Stehl=C3=A9, <vincent.stehle@arm.com> wr=
-ote:
+Hi Ilias,
 
-> On Fri, Jun 21, 2024 at 01:00:51PM +0200, Heinrich Schuchardt wrote:
-> (..)
-> > The current specification is in RFC 9562, 4.1, "Variant field"
+On Fri, 21 Jun 2024 at 09:52, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Fri, 21 Jun 2024 at 17:57, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > "The variant field consists of a variable number of the most significan=
-t
-> > bits of octet 8 of the UUID.
+> > Hi Ilias,
 > >
-> > ...
+> > On Thu, 20 Jun 2024 at 23:49, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > On Fri, 21 Jun 2024 at 08:32, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > It does not make sense to enable all SHA algorithms unless they are
+> > > > > needed. It bloats the code and in this case, causes chromebook_link to
+> > > > > fail to build. That board does use the TPM, but not with measured boot,
+> > > > > nor EFI.
+> > > > >
+> > > > > Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+> > > > > add them to MEASURED_BOOT as well.
+> > > > >
+> > > > > Note that the original commit combines refactoring and new features,
+> > > > > which makes it hard to see what is going on.
+> > > > >
+> > > > > Fixes: 97707f12fda tpm: Support boot measurements
+> > > > > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v2)
+> > > >
+> > > > There was a discussion in the previous version, bout enabling these on
+> > > > CMD_TPM as they are required.
 > >
-> > Specifically for UUIDs in this document, bits 64 and 65 of the UUID
-> > (bits 0 and 1 of octet 8) MUST be set to 1 and 0 as specified in row 2
-> > of Table 1."
+> > For reference [1]
 > >
-> > This reference to byte 8 does not depend on endianness.
+> > >
+> > > Or switch this to an imply instead so you can disable it ?
+> >
+> > The thing is, we need to be able to easily disable unwanted features.
+> > My reading of that thread is that U-Boot doesn't use SHA384/512 from
+> > the 'tpm2 pcr_extend' command today.
 >
-> Hi Heinrich,
+> It does, it was mentioned on the thread you referenced. commit
+> 89aa8463cdf39 ("tpm-v2: allow algorithm name to be configured for
+> pcr_read and pcr_extend")
 >
-> Agreed, variant is not concerned by the endianness.
+> > Even if it did, I would think it
+> > better to allow the supported algorithms to be controlled. At worst, I
+> > would expect a separate option to disable that subcommand which would
+> > remove the implies.
+>
+> To control the algos you need to compile, you need to control the
+> algorithms the TPM supports. Otherwise, you are leaving security
+> holes. We don't configure the supported PCR banks today iirc.
+>
+> If we need the fix for those platforms for the release so badly, why
+> don't we just disable the TPM? It's going to be useless and
+> potentially dangerous without SHA support. Any idea why those
+> platforms use it for?
 >
 > >
-> > U-Boot's include/uuid.h has:
+> > Some tpm code recently added puts a table and some functions in
+> > tpm-v2.h - could someone fix that? tpm-common.c would be a better
+> > place.
+>
+> Do you mean commit 954b95e77ef0a8? If that's the one, I don't mind
+> moving it there.
+> Those values though are described in [0], which is primarily for v2.0.
+> Nothing prevents you from using it in v1.2 but all of the values apart
+> from SHA1 are useless. Also, we don't support measured boot with 1.2
+> anyway so I didn't see the point back then.
+>
+> > Also we already have a list of hash algorithms in U-Boot
+> > (common/hash.c) so should use that, >and respect the fact that certain
+> > algos may not be supported.
+>
+> That seems tailored for a very specific reason. Do you want to fill it
+> in with EFI internal definitions?
+> We could adjust some lookup functions which seems common.
+>
 > >
-> >     /* This is structure is in big-endian */
-> >     struct uuid {
+> > If there is a requirement that (for a certain situation / protocol) we
+> > need to support everything, then let's have a Kconfig for that.
+>
+> We do. The difference here is that the *TPM at runtime* dictates what
+> you need. So you can't blindly disable stuff.
+>
+> > It is
+> > what my patch was trying to work around, perhaps. For boards which
+> > don't care about extending TPM in this way, or don't use the more
+> > expensive algorithms, it avoids lots of code bloat.
+>
+> Ok, I disagree here. That's potentially dangerous. Because someone,
+> might need the TPM, easily misconfigure it, and end up with broken
+> measurements.
+>
 > >
-> > The field time_hi_and_version needs to be stored in big-endian fashion.
+> > One of the principles of U-Boot is to allow configurability in these
+> > situations. It shouldn't be too hard to have the best of both worlds
+> > (supports all reasonable cases by default / allow unwanted cases to be
+> > dropped).
 >
-> Thanks! I thought this structure was used to hold either a big-endian UUI=
-D
-> or a
-> little-endian GUID, but now you have convinced me.
+> It's not. We can have the TPM configure the supported algorithms once it starts.
+> IMHO that's the proper way to do it. Everything else is just papering
+> over the problem -- which even worse no one will care to fix.
 >
-> This confirms that the generation of the dynamic GUID is missing somethin=
-g:
+> >
+> > So I'll await your reply on the above before figuring out where to go
+> > with this. For this release I'd just like to get the board working,
+> > but I understand that the TPM stuff is very-much in flux, perhaps in
+> > -next.
 >
->     gen_uuid_v5(&namespace,
->                 (struct uuid *)&fw_array[i].image_type_id,
->                 compatible, strlen(compatible),
->                 fw_array[i].fw_name, u16_strsize(fw_array[i].fw_name)
->                     - sizeof(uint16_t),
->                 NULL);
+> This is a very complex problem. Even if we configure the TPMs banks
+> based on the supported algoriths, a previous stage loader might have
+> enabled more. So you end up breaking that in that case...
 >
-> It is not possible to cast the little-endian efi_guid_t .image_type_id as
-> the
-> big-endian struct uuid output of gen_uuid_v5() like this; we need to
-> convert the
-> three time fields from big to little endianness.
->
+> Let me see if I can configure the TPM on boot....
 
-I'm inclined to disagree, the comment above struct uuid in include/uuid.h
-state clearly that the format in memory is always big endian, but that a
-GUID when printed has some fields converted to little endian.
+I just don't understand any of this very well.
+
+My request is, please can you find a way to allow the TPM to be
+enabled for a board that doesn't use the pcr_extend subcommand with
+SHA384/512? I just want to get that 5KB back for this board. I'm happy
+with the defaults being a certain way, just not wanting to require
+this code for boards which don't need it.
+
+Regards,
+Simon
 
 
+>
+> Cheers
+> /Ilias
 > >
+> > Regards,
+> > Simon
 > >
-> > tools/genguid uses UUID_STR_FORMAT_GUID which prints low-endian which i=
-s
-> > typical in the EFI context but not understood by 'uuid -d'. Maybe we
-> > should add a parameter for the output format.
+> > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240610145920.3302001-3-sjg@chromium.org/
 >
-> My understanding is that there is a single universal string format for bo=
-th
-> UUIDs and GUIDs, which uuid -d understands, and which has no notion of
-> endianness. (Only the structures in memory have an endianness.)
-> This means we do not need an output format parameter.
->
-> genguid is calling the new gen_uuid_v5() function, which outputs a
-> big-endian
-> struct uuid. Therefore, genguid should print it with 'STD format, not
-> 'GUID.
->
-> Best regards,
-> Vincent.
->
-> >
-> > Best regards
-> >
-> > Heinrich
->
+> [0] https://trustedcomputinggroup.org/wp-content/uploads/EFI-Protocol-Specification-rev13-160330final.pdf
+> -- search for EFI_TCG2_BOOT_HASH_ALG_SHA512
