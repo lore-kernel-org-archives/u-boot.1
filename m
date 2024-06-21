@@ -4,61 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE117C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 06:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3492C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 07:35:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E828E87FED;
-	Fri, 21 Jun 2024 08:55:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id E0421880A5;
+	Fri, 21 Jun 2024 09:35:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="y21jEsUT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GR/aJ0pg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55C96880F1; Fri, 21 Jun 2024 08:55:33 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 15738880A3; Fri, 21 Jun 2024 09:35:26 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EB9687EF6
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 08:55:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D363880A5
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 09:35:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=b72a=NX=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718952914;
- bh=T/dVght4+W0R6bicP54QbmR5FLDzDgl/UhfN2HAwgYk=;
- b=y21jEsUTk+VKTz0ZTvmcEEjv8dXHN1OwsAzWjzdNkASZc8rQBlTs029amf3nmbOhQ/aEpoVPO
- nCvONyPKX+NqlQgZPgKb0yeguHHsAZnxC5E0fiLRw1zrv3h2wir3tz9/tosMPegofr3rjQUzPjw
- 7JjW8YP/pF5XcjF7CFRC9vlKU9pS9JezzFq51T9Enf//vonYwco6VprMPIVyYXT7tM2qgIIPIFb
- 37JMgdwcsl13kR6TzzCGga87RxrKq6u9rr1rqkc0FvncUz1wn+f+uKvDNkMoEUmXL8LDbpfgnxI
- fcYs6pbCev5B+ASfK2rLxN18z2ITEiSkS9bjB87SrZWw==
-Message-ID: <3dbe42b8-7f9d-4b67-b903-692860518461@kwiboo.se>
-Date: Fri, 21 Jun 2024 08:45:01 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57d331cc9feso217098a12.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 00:35:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718955323; x=1719560123; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Idqyj4dkrGNauNGP5ksMOgN0IK9cetkmJm/t5H1cs9U=;
+ b=GR/aJ0pgfRaVelzgMckfh98pw1F72i21vbCdbLL4yvmzEU0b+HK5hqu60KA4Eig9oN
+ alKjN938yJBh5SASUwx1daY9PRbIDiY9iBbZTqNMFLchcf3A4B7xR6saLWvK4nCjTuWK
+ 2HKBd+QG3fYFSLtGUXqT71XeFbBy3e1jATtV0cLg4mTEaVFZ/aIGPEnIkfoqWt8oXaYT
+ 2PECDyPwVViIO/L9HWV+9t7NFvWkQ50sn3ql6QYY0ko7xVCvX3Oja8DcfOf0f/z9kggQ
+ 4yBtd3IXFrFAcmD81kt6rfyBq9hUgKDR+BzpQu9484oh69VQ+roYDVV51wK0CHgw62FS
+ ayXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718955323; x=1719560123;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Idqyj4dkrGNauNGP5ksMOgN0IK9cetkmJm/t5H1cs9U=;
+ b=rQILViBzu78qK/bxSaLlff3/SAd4oxS76EQMxaziUcybqC+jIozD0jDJTvcBWggziH
+ tBg11+EtWgFUjIQ6BWC16iCel9vFfmIkDZ98b8wZevkfCpdwTuaq01zrcE+mzZFx9knV
+ 7+hJdmbFabqvope/Bm7oSM6eAL3Tuaac6o0QERvAIt+jPPq43GbsH4XE7n+nxd6PmUCf
+ 3UOSbsCpGG2DiTh6pW/IY+9W68xfLQpzX7LQGIoV1lpMSzI+05odVH6Rb+cpSqGoMtPL
+ XkDDfLxbKIR3nGah0Pk8aQ4Ypyxovr16otuubPD263nZcR0OgWz0bcmK328u4zUD+pqK
+ 2jTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU645kbzGlNmbvOXsY9MIDU1psyccIQYYLYtklGIdrLuwT/cNZjXh4CbfRlqJK0zAfYDpXpflflz+KOyjlb0iaGpodRlQ==
+X-Gm-Message-State: AOJu0Yz8vwKF6pBCCR0XT+KL3Lxv8C0kyQOkAyP6vraGYBPnS8dUOZwI
+ PwMI24isHE5BdwGw14yj7uXQO42EOQzMnzzhA/2JHWqcVbXTf6O8N8aMsDDo3Rc6Cw/lb7ohHc6
+ ya+zw6zpPv3v/FBrwwwBu6/I9IY4=
+X-Google-Smtp-Source: AGHT+IEDZJ1eK12hQ82IJ3FqiRZxKMho05ocSqzypaRoIyxp7D4/3PCASP9e66gofb2fFCORRSEBmAJRpjrBSQjq6QY=
+X-Received: by 2002:a50:9fcb:0:b0:57c:70b0:d541 with SMTP id
+ 4fb4d7f45d1cf-57d07e6bd08mr4741332a12.20.1718955322646; Fri, 21 Jun 2024
+ 00:35:22 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 16/18] rockchip: Avoid #ifdefs in RK3399 SPL
+References: <20240620213539.ftmjhphypssxp5n4@desolate>
+ <CAFLszTjhqUA4if6mzt-CNxZA6sHB5sHCXTVHVsOPdag0mXzpnA@mail.gmail.com>
+In-Reply-To: <CAFLszTjhqUA4if6mzt-CNxZA6sHB5sHCXTVHVsOPdag0mXzpnA@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 21 Jun 2024 08:35:11 +0100
+Message-ID: <CALeDE9NWwUeDL2-GpVx5_Br5u9aL36UMmOEVqv+PXYF1X1xOqQ@mail.gmail.com>
+Subject: Re: Request for hosting a boot-firmware repository in u-boot git
+ (denx and GitHub)
 To: Simon Glass <sjg@chromium.org>
-Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, Kever Yang
- <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
-References: <20240620230625.1797397-1-sjg@chromium.org>
- <20240620230625.1797397-17-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240620230625.1797397-17-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66752172d60083b892db978b
+Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Josh Boyer <jwboyer@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,168 +95,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, 21 Jun 2024 at 00:05, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Nishanth,
+>
+> On Thu, 20 Jun 2024 at 15:35, Nishanth Menon <nm@ti.com> wrote:
+> >
+> > Hi Team,
+> >
+> > We have briefly discussed this topic on IRC[1]. I would like to
+> > propose a new boot-firmware repository similar to the Linux-firmware
+> > repository under the aegis of u-boot hosting.
+> >
+> > In addition to TI, it looks like some NXP[2] and Rockchip[3]
+> > platforms seem to require additional closed-source/open-source
+> > binaries to have a complete bootable image. Distribution rights and
+> > locations of these binaries are challenging, and there needs to be a
+> > standard for how and where they are hosted for end users.
+> >
+> > Further, looking ahead to future architectures:
+> > * IP firmware: More and more IP vendors are embedding their own
+> >   "specialized controllers" and require firmware for the operation
+> >   (similar to Rockchip's DDR controller, I guess),
+> > * boot stage firmware: Additional stages of the boot process involve
+> >   vendor intermediate firmware, such as power configuration.
+> > * Security enclave binaries: While I see a few folks trying to have an
+> >   open-source s/w architecture, many PKA and PQC systems still require
+> >   prop binaries for IP reasons.
+> >
+> > NOTE: I am not judging any company(including TI) for reasons why some
+> > firmware is proprietary, but I hate to have the end users and other
+> > system (distro) maintainers have to deal with hell trying to make the
+> > life of end users easy to live with.
+> >
+> > In the case of TI's K3 architecture devices, we have two binary blobs
+> > that are critical for the boot process.
+> >
+> > 1. TIFS Firmware / DMSC firmware[4]=E2=80=94This is the security enclav=
+e
+> >   firmware. It is often encrypted, and sources are not public (due to
+> >   various business/regulatory reasons).
+> > 2. DM Firmware[5] - There is a source in public in some cases and
+> >   binary only in others - essentially limited function binary to be
+> >   put up in the device management uC. In cases where the source is
+> >   available, the build procedure is, in my personal opinion, pretty
+> >   arcane, and even though in theory it is practical, in practice, not
+> >   friendly - efforts are going to simplify it, even probably integrate
+> >   it with a more opensource ecosystem, but that is talking "look at the
+> >   tea leaves" stuff.
+> > 3. Low Power Management (LPM) binaries: tifs stub: another encrypted
+> >   binary that gives the tifs system context restore logic before
+> >   retrieving tifs firmware and a corresponding DM restoration binary.
+> >
+> > All told, this is not unlike the situation that necessitated the
+> > creation of a Linux firmware repository.
+> >
+> > Options that I see:
+> >
+> > 1. Let the status quo be - SoC vendors maintain random locations and
+> >   random rules to maintain boot firmware.
+> > 2. Ask Linux-firmware to host the binaries in a single canonical
+> >   location
+> > 3. Host a boot-firmware repository - u-boot repo may be the more
+> >   logical location.
+> >
+> > * (1) isn't the correct answer.
+> >
+> > * (2) Though I haven't seen any policy from the Linux-firmware
+> >   community mandating anything of the form, the binaries we are talking
+> >   of may not belong to Linux-firmware as they aren't strictly speaking
+> >   something Linux kernel will load (since the bootloader has that
+> >   responsibility), and in some cases may not even directly talk to
+> >   (security enclave or DDR firmware stuff). I am adding Josh to this
+> >   mail to see if he has any opinions on the topic (but keeping
+> >   from cross posting on linux-firmware list, unless folks feel it is
+> >   OK).
+> >
+> > On (3):
+> > Proposal:
+> >
+> > * Create a boot firmware repository in Denx and/or GitHub (if
+> >   financials are a hurdle, I hope we can solve it as a community).
+> > * Limit binaries only to those consumed part of the u-boot scope.
+> >
+> > * Limit binaries only to those that do not have an opensource project
+> >   (Trusted Firmware-A/M, OP-TEE, etc..) or depend entirely on vendor
+> >   source or are binary only in nature (subject to licensing terms below=
+)
+> > * Limit binaries to some pre-established size to prevent repository
+> >   explosion - say, 512Kib?
+> > * Follow the same rules of integration and licensing guidelines as
+> >   Linux-firmware[6].
+> > * Similar rules as Linux-firmware guidelines of ABI backward and
+> >   forward compatibility.
+> > * Set a workflow update flow and a compatibility requirements document
+> >
+> > If we agree to have boot firmware under the stewardship of u-boot, we
+> > should also set other rules, which is excellent to discuss.
+> >
+> > Thoughts?
+>
+> I suggest:
+>
+> 4) Add a 'binman blob' subcommand which can fetch blobs, similarly to
+> how 'binman tool -f xxx' features a tool, using the image description
+> to know what is needed and some configuration for where to find it /
+> how to build it.
 
-On 2024-06-21 01:06, Simon Glass wrote:
-> The code here is confusing due to large blocks which are #ifdefed out.
-> Add a function phase_sdram_init() which returns whether SDRAM init
-> should happen in the current phase, using that as needed to control the
-> code flow.
-> 
-> This increases code size by about 500 bytes in SPL when the cache is on,
-> since it must call the rather large rockchip_sdram_size() function.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> Changes in v3:
-> - Split out the refactoring into a separate patch
-> - Drop the non-dcache optimisation, since the cache should normally be on
-> 
->  drivers/ram/rockchip/sdram_rk3399.c | 47 ++++++++++++++++-------------
->  1 file changed, 26 insertions(+), 21 deletions(-)
-> 
-> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> index 3c4e20f4e80..2f37dd712e7 100644
-> --- a/drivers/ram/rockchip/sdram_rk3399.c
-> +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> @@ -13,6 +13,7 @@
->  #include <log.h>
->  #include <ram.h>
->  #include <regmap.h>
-> +#include <spl.h>
->  #include <syscon.h>
->  #include <asm/arch-rockchip/clock.h>
->  #include <asm/arch-rockchip/cru.h>
-> @@ -63,8 +64,6 @@ struct chan_info {
->  };
->  
->  struct dram_info {
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
->  	u32 pwrup_srefresh_exit[2];
->  	struct chan_info chan[2];
->  	struct clk ddr_clk;
-> @@ -75,7 +74,6 @@ struct dram_info {
->  	struct rk3399_pmusgrf_regs *pmusgrf;
->  	struct rk3399_ddr_cic_regs *cic;
->  	const struct sdram_rk3399_ops *ops;
-> -#endif
->  	struct ram_info info;
->  	struct rk3399_pmugrf_regs *pmugrf;
->  };
-> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
->  					struct rk3399_sdram_params *params);
->  };
->  
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> -
->  struct rockchip_dmc_plat {
->  #if CONFIG_IS_ENABLED(OF_PLATDATA)
->  	struct dtd_rockchip_rk3399_dmc dtplat;
-> @@ -191,6 +186,17 @@ struct io_setting {
->  	},
->  };
->  
-> +/**
-> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
-> + *
-> + * Returns: true to do SDRAM init in this phase, false to not
-> + */
-> +static bool phase_sdram_init(void)
-> +{
-> +	return spl_phase() == PHASE_TPL ||
-> +	    (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
-> +}
-> +
->  static struct io_setting *
->  lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
->  {
-> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
->  	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
->  	int ret;
->  
-> -	if (!CONFIG_IS_ENABLED(OF_REAL))
-> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
->  		return 0;
->  
->  	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
-> @@ -3138,22 +3144,24 @@ static int rk3399_dmc_init(struct udevice *dev)
->  
->  	return 0;
->  }
-> -#endif
->  
->  static int rk3399_dmc_probe(struct udevice *dev)
->  {
->  	struct dram_info *priv = dev_get_priv(dev);
->  
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> -	if (rk3399_dmc_init(dev))
-> -		return 0;
-> -#endif
-> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> -	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> -	priv->info.base = CFG_SYS_SDRAM_BASE;
-> -	priv->info.size =
-> -		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
-> +	if (phase_sdram_init()) {
-> +		if (rk3399_dmc_init(dev))
-> +			return 0;
-> +	} else {
-> +		priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> +		debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> +	}
-> +
-> +	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
+This is a solving a different problem IMO. Also most distros build in
+constrained environments so pulling FW randomly with a tool in the
+build process won't work. Also most users won't want to pull the
+latest each time they build, most vendors will choose a static set of
+versions and only bump to deal with bugs, CVEs or explicit features
+they need rather than having a series of moving targets.
 
-This check should be dropped, this driver intent is to initialize dram
-in first phase (normally TPL), and report the size to any other phase.
+Well the whole point of the repo is to remove the guesswork, it would
+be a set of firmware that is expected to work in a single location.
 
-The main need for phase_sdram_init() and disable of DCACHE can probably
-be avoided if bob/kevin can move to use separate TPL and SPL instead of
-doing both dram init and everything else in SPL.
+> IMO the actual repo is not the ultimate goal here. Building and
+> testing should be the ultimate goal.
 
-My best guess is that enabling of caches in SPL cause issue for bob and
-kevin because they only use SPL not TPL+SPL like (if I am not mistaken)
-all other Rockchip arm64 targets.
+I disagree, the repo would assist working and tested firmware because
+there could be a review/test process as part of it to ensure things
+work and are tested to give users a good experience rather than having
+to search the web and forum posts to attempt to find pieces that work
+together.
 
-Using SPL-only was not something I tested when caches was enabled in SPL.
-
-Maybe bob/kevin can be changed to also use TPL+SPL similar to all other
-RK3399 boards?
-
-How U-Boot works on these chromebooks is still a mystery to me.
-
-When coreboot is involved it would only load U-Boot proper and SPL or
-TPL+SPL would never be involved at all?
-
-If I understand correctly SPL is only involved for bare metal boot, if
-this is the case then using TPL + back-to-brom to load SPL should
-probably work fine?, and would align all RK3399 boards to work in a
-similar way and reduce the need for special care/handling in the code.
-
-Regards,
-Jonas
-
-> +		priv->info.base = CFG_SYS_SDRAM_BASE;
-> +		priv->info.size =
-> +			rockchip_sdram_size((ulong)&priv->pmugrf->os_reg2);
-> +	}
->  
->  	return 0;
->  }
-> @@ -3181,10 +3189,7 @@ U_BOOT_DRIVER(dmc_rk3399) = {
->  	.id = UCLASS_RAM,
->  	.of_match = rk3399_dmc_ids,
->  	.ops = &rk3399_dmc_ops,
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
->  	.of_to_plat = rk3399_dmc_of_to_plat,
-> -#endif
->  	.probe = rk3399_dmc_probe,
->  	.priv_auto	= sizeof(struct dram_info),
->  #if defined(CONFIG_TPL_BUILD) || \
-
+> >
+> > [1] https://libera.irclog.whitequark.org/u-boot/2024-06-13#36498796;
+> > [2] https://docs.nxp.com/bundle/AN14093/page/topics/build_the_u-boot.ht=
+ml
+> > [3] https://bbs.t-firefly.com/forum.php?mod=3Dviewthread&tid=3D2236
+> > [4] https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/tree/t=
+i-sysfw?h=3Dti-linux-firmware
+> > [5] https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/tree/t=
+i-dm?h=3Dti-linux-firmware
+> > [6] https://docs.kernel.org/next/driver-api/firmware/firmware-usage-gui=
+delines.html
+> > --
+> > Regards,
+> > Nishanth Menon
+> > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 =
+DDB5 849D 1736 249D
+>
+> Regards,
+> SImon
