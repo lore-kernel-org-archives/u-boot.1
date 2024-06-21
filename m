@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8468AC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 14:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC261C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 15:22:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CC7E88582;
-	Fri, 21 Jun 2024 16:58:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 578F4884C6;
+	Fri, 21 Jun 2024 17:22:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h3kHBinA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VHpJpx2I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2D3588582; Fri, 21 Jun 2024 16:58:13 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 6B19F8851C; Fri, 21 Jun 2024 17:22:35 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71AAD88550
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 16:58:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 286D7884C6
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 17:22:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6f97b836c42so1079624a34.1
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:58:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5bb36de2171so1042535eaf.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 08:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718981890; x=1719586690; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H+g7JmdfcSGcLHhnPXk5g9o+Uw+tgop4opxdWtPXbag=;
- b=h3kHBinAuSlxcFG1Ia7TZpAPp/X6pVtskSxizH/zIvgha6yNwAWV8z8ENWE+zsfvu6
- 3PDd7kDIDftJidLVKl6WQ1hzp3GutgWQi3nhQkvtFMp3PaGgFHLHYG4xQyulb+NoD2tD
- pvUjc1xks9ShT7kwRfyCQmsFRFeZQSsLKXOLE=
+ d=konsulko.com; s=google; t=1718983352; x=1719588152; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mLPo6bANnQRVBi6yITxZogL60zCOdhCdK751sQvrMh4=;
+ b=VHpJpx2ICSX0p9qijwUP0qnB3ykIJKiebnyfoPWv3vsiaIXlXIVjuRuBc7QQ8cVQM5
+ yBKU335FAzI3Tf25yITzMAuWibj1gj9/Hibyc0PMMhwwTKakZpERjQcyTB57jtSaoDO5
+ POh7hxCbXI3Bs8frj5M50fbIdAtl7i4rnRY+g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718981890; x=1719586690;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H+g7JmdfcSGcLHhnPXk5g9o+Uw+tgop4opxdWtPXbag=;
- b=ensmJOhflxIqFnZezwQDpIW3MGQYdEJlrXEtdewROfansSmf5zlZGy5rTR+jHk92uL
- TdFAp1JlDz79RWljTh8XomsyKYtXFf5NH0er0ii0ipyCu6MsFBOedaCWoD8X37Ec4DVS
- B+RMwizybc8VEdqnQTeY5igCX0g2SGZjB/xvjwVkTY5TRTTH5TW7Lrw3s+olVPLpEb6k
- tVAyAebFkyh7PqjH6b4pgw1HBXZRJidcAPOyDQmb1idTOGt1LQD2Bn5rw/2dRj1PkzPA
- 8Mc1GYjYXUTrRlHpWqAaTTefQZkgBmHwo+uoq1KT0JPwymFkf/Sr0vU9gG86PxW4mNjm
- 2Kvw==
-X-Gm-Message-State: AOJu0Yz/xbyMaavkMgT365Puy2/YbaMZVcM/TF9M2ZG1HD4U1F3uv+CT
- VcgLFL+gLl1gbBszBD+cTWYsvPLF4Asdmb8XYlAfk/txgRNG9RnDBc8fQoC9k4pPb94MGMPbh/R
- 2KVQGI+q8N0JvZqNCALrGJZoV8+fjiVDTCpui
-X-Google-Smtp-Source: AGHT+IH3KbYH6YW4XP1sktsMXgQEvJe5NOspb8bGGoGhcm5qaZEOS2LduVUiGCI55y6PHCO4f+VI+9O8GQLoima03OE=
-X-Received: by 2002:a05:6830:4b9:b0:700:9dd6:956 with SMTP id
- 46e09a7af769-7009dd609d1mr1804908a34.15.1718981890105; Fri, 21 Jun 2024
- 07:58:10 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718983352; x=1719588152;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mLPo6bANnQRVBi6yITxZogL60zCOdhCdK751sQvrMh4=;
+ b=TI9Hiu0v0QZVnQ7D81Vn3ff37wSBLHXvPfXcvYeXJIsw/Cbuei/oLGvWSElr+OMKv5
+ Lx/ngKNm1OsqKyBogQrw0NwnKUM2Jo4OFh+Edxq8rW4CumnCG6TlQWz+2j3zhsMsa8+e
+ tKvw5W+MBsMhwLJUiOpteY9FVYh56sPQIsmxYINtO+mVvpR6Y3bJSvshfDnRFHrNlR/x
+ icbxC1OdFwsYB1U93Q1dq5lIN4GBNQgoYYEyHQ3sNgpbYYmtAnRAqznGcsXF1fh4SJfZ
+ fMeXoi87VnrVXJlHSrMExNkM6BzrsKIpRWEFFekbO/lhF6ywEtIMxXgyTjMHir+7ZPhj
+ eX2A==
+X-Gm-Message-State: AOJu0YxEUYNe4YyZYx8ZV45qmIImNHL5h85GCAEz8yzkTzsZRzeNG7Pt
+ trm5Dhvh9CHRLnSwvkYAG5i4HXgFP5Ax2euXn/l7rSE5CzAbGUtUn/Gflm5kgo0=
+X-Google-Smtp-Source: AGHT+IGbRcKEY+iD0v+OE8aFyZSP35rhNxt/hIZdsBCdWwkdVanPUSlNQ3JiDoW5Bnhwo7ovmuJfSw==
+X-Received: by 2002:a05:6870:2254:b0:25c:9a02:cb64 with SMTP id
+ 586e51a60fabf-25c9a02d2b0mr8021344fac.16.1718983351729; 
+ Fri, 21 Jun 2024 08:22:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25ce25f70bbsm190436fac.1.2024.06.21.08.22.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Jun 2024 08:22:31 -0700 (PDT)
+Date: Fri, 21 Jun 2024 09:22:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
+Message-ID: <20240621152229.GV68077@bill-the-cat>
+References: <20240620131937.1130446-1-sjg@chromium.org>
+ <20240620131937.1130446-4-sjg@chromium.org>
+ <20240620143232.GM68077@bill-the-cat>
+ <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
+ <20240620233026.GU68077@bill-the-cat>
+ <CAFLszTi7qXX6R5=LQqCMveH7aJ=N96Mcob+gp11MEPixgrK66A@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240620230625.1797397-1-sjg@chromium.org>
- <20240620230625.1797397-17-sjg@chromium.org>
- <3dbe42b8-7f9d-4b67-b903-692860518461@kwiboo.se>
-In-Reply-To: <3dbe42b8-7f9d-4b67-b903-692860518461@kwiboo.se>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Jun 2024 08:57:59 -0600
-Message-ID: <CAFLszTgF9cBnQkLQX24yd-Z3KKoujkiwbBBP2c26vyOBbOaLtQ@mail.gmail.com>
-Subject: Re: [PATCH v3 16/18] rockchip: Avoid #ifdefs in RK3399 SPL
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Q3lRkNGn78uhbWdO"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTi7qXX6R5=LQqCMveH7aJ=N96Mcob+gp11MEPixgrK66A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,170 +97,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On Fri, 21 Jun 2024 at 00:45, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> Hi Simon,
->
-> On 2024-06-21 01:06, Simon Glass wrote:
-> > The code here is confusing due to large blocks which are #ifdefed out.
-> > Add a function phase_sdram_init() which returns whether SDRAM init
-> > should happen in the current phase, using that as needed to control the
-> > code flow.
-> >
-> > This increases code size by about 500 bytes in SPL when the cache is on,
-> > since it must call the rather large rockchip_sdram_size() function.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v3:
-> > - Split out the refactoring into a separate patch
-> > - Drop the non-dcache optimisation, since the cache should normally be on
-> >
-> >  drivers/ram/rockchip/sdram_rk3399.c | 47 ++++++++++++++++-------------
-> >  1 file changed, 26 insertions(+), 21 deletions(-)
-> >
-> > diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> > index 3c4e20f4e80..2f37dd712e7 100644
-> > --- a/drivers/ram/rockchip/sdram_rk3399.c
-> > +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> > @@ -13,6 +13,7 @@
-> >  #include <log.h>
-> >  #include <ram.h>
-> >  #include <regmap.h>
-> > +#include <spl.h>
-> >  #include <syscon.h>
-> >  #include <asm/arch-rockchip/clock.h>
-> >  #include <asm/arch-rockchip/cru.h>
-> > @@ -63,8 +64,6 @@ struct chan_info {
-> >  };
-> >
-> >  struct dram_info {
-> > -#if defined(CONFIG_TPL_BUILD) || \
-> > -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> >       u32 pwrup_srefresh_exit[2];
-> >       struct chan_info chan[2];
-> >       struct clk ddr_clk;
-> > @@ -75,7 +74,6 @@ struct dram_info {
-> >       struct rk3399_pmusgrf_regs *pmusgrf;
-> >       struct rk3399_ddr_cic_regs *cic;
-> >       const struct sdram_rk3399_ops *ops;
-> > -#endif
-> >       struct ram_info info;
-> >       struct rk3399_pmugrf_regs *pmugrf;
-> >  };
-> > @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
-> >                                       struct rk3399_sdram_params *params);
-> >  };
-> >
-> > -#if defined(CONFIG_TPL_BUILD) || \
-> > -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> > -
-> >  struct rockchip_dmc_plat {
-> >  #if CONFIG_IS_ENABLED(OF_PLATDATA)
-> >       struct dtd_rockchip_rk3399_dmc dtplat;
-> > @@ -191,6 +186,17 @@ struct io_setting {
-> >       },
-> >  };
-> >
-> > +/**
-> > + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
-> > + *
-> > + * Returns: true to do SDRAM init in this phase, false to not
-> > + */
-> > +static bool phase_sdram_init(void)
-> > +{
-> > +     return spl_phase() == PHASE_TPL ||
-> > +         (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
-> > +}
-> > +
-> >  static struct io_setting *
-> >  lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
-> >  {
-> > @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
-> >       struct rockchip_dmc_plat *plat = dev_get_plat(dev);
-> >       int ret;
-> >
-> > -     if (!CONFIG_IS_ENABLED(OF_REAL))
-> > +     if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
-> >               return 0;
-> >
-> >       ret = dev_read_u32_array(dev, "rockchip,sdram-params",
-> > @@ -3138,22 +3144,24 @@ static int rk3399_dmc_init(struct udevice *dev)
-> >
-> >       return 0;
-> >  }
-> > -#endif
-> >
-> >  static int rk3399_dmc_probe(struct udevice *dev)
-> >  {
-> >       struct dram_info *priv = dev_get_priv(dev);
-> >
-> > -#if defined(CONFIG_TPL_BUILD) || \
-> > -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> > -     if (rk3399_dmc_init(dev))
-> > -             return 0;
-> > -#endif
-> > -     priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> > -     debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> > -     priv->info.base = CFG_SYS_SDRAM_BASE;
-> > -     priv->info.size =
-> > -             rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
-> > +     if (phase_sdram_init()) {
-> > +             if (rk3399_dmc_init(dev))
-> > +                     return 0;
-> > +     } else {
-> > +             priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> > +             debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> > +     }
-> > +
-> > +     if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
->
-> This check should be dropped, this driver intent is to initialize dram
-> in first phase (normally TPL), and report the size to any other phase.
+--Q3lRkNGn78uhbWdO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This whole patch can be dropped :-) Here I am just trying to avoid
-code-size growth when the cache is off. But yes, it is not needed.
+On Fri, Jun 21, 2024 at 08:57:50AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 20 Jun 2024 at 17:30, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Jun 20, 2024 at 05:05:30PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 20 Jun 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Jun 20, 2024 at 07:19:35AM -0600, Simon Glass wrote:
+> > > >
+> > > > > The Python virtualenv tool sets up a few things in the envronment,
+> > > > > putting its path first in the PATH environment variable and setti=
+ng up
+> > > > > a sys.prefix different from the sys.base_prefix value.
+> > > > >
+> > > > > At present buildman puts the toolchain path first in PATH so that=
+ it can
+> > > > > be found easily during the build. For sandbox this causes problem=
+s since
+> > > > > /usr/bin/gcc (for example) results in '/usr/bin' being prepended =
+to the
+> > > > > PATH variable. As a result, the venv is partially disabled.
+> > > > >
+> > > > > The result is that sandbox builds within a venv ignore the venv, =
+e.g.
+> > > > > when looking for packages.
+> > > > >
+> > > > > Correct this by detecting the venv and adding the toolchain path =
+after
+> > > > > the venv path.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > Why are we using PATH at all in this case? Shouldn't we just be set=
+ting
+> > > > CROSS_COMPILE=3D/full/path/to/the/prefix ?
+> > >
+> > > This is the -p option to buildman. The original commit was:
+> > >
+> > > commit bb1501f2c22c979961b735db775605cccedd98f6
+> > > Author: Simon Glass <sjg@chromium.org>
+> > > Date:   Mon Dec 1 17:34:00 2014 -0700
+> > >
+> > >     buildman: Add an option to use the full tool chain path
+> > >
+> > >     In some cases there may be multiple toolchains with the same name=
+ in the
+> > >     path. Provide an option to use the full path in the CROSS_COMPILE
+> > >     environment variable.
+> > >
+> > >     Note: Wolfgang mentioned that this is dangerous since in some cas=
+es there
+> > >     may be other tools on the path that are needed. So this is set up=
+ as an
+> > >     option, not the default. I will need test confirmation (i.e. that=
+ this
+> > >     commit fixes a real problem) before merging it.
+> > >
+> > > As to why we don't always do this, well that is back in the mists of
+> > > time, 10 years ago.
+> > >
+> > > BTW, this is raising a point ("let's change the behaviour") separate
+> > > from the goal of this commit, which is to fix a problem with venv,
+> > > albeit that if we made -p the only option, then we could potentially
+> > > drop all PATH changes. Perhaps toolchains are built differently now,
+> > > such that they always invoke their tools using the same prefix and
+> > > dir?
+> >
+> > Wait, I'm confused. buildman internally updates its own PATH to avoid
+> > calling CROSS_COMPILE with the full path due to a concern about
+> > toolchain bugs?
+>=20
+> Not its own PATH: the one it passes to U-Boot's 'make'.
 
->
-> The main need for phase_sdram_init() and disable of DCACHE can probably
-> be avoided if bob/kevin can move to use separate TPL and SPL instead of
-> doing both dram init and everything else in SPL.
->
-> My best guess is that enabling of caches in SPL cause issue for bob and
-> kevin because they only use SPL not TPL+SPL like (if I am not mistaken)
-> all other Rockchip arm64 targets.
->
-> Using SPL-only was not something I tested when caches was enabled in SPL.
->
-> Maybe bob/kevin can be changed to also use TPL+SPL similar to all other
-> RK3399 boards?
->
-> How U-Boot works on these chromebooks is still a mystery to me.
->
-> When coreboot is involved it would only load U-Boot proper and SPL or
-> TPL+SPL would never be involved at all?
->
-> If I understand correctly SPL is only involved for bare metal boot, if
-> this is the case then using TPL + back-to-brom to load SPL should
-> probably work fine?, and would align all RK3399 boards to work in a
-> similar way and reduce the need for special care/handling in the code.
+OK, but the point stands.
 
-These boards were the first rk3399 support we had in mainline, I
-believe. Everything else came later but conversions were not done for
-these existing boards.
+> I'm not sure why, actually. It is such a long time ago that I don't remem=
+ber.
+>=20
+> I see:
+>=20
+> ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-=
+gnueabi-ld
 
-I actually intensely dislike the back-to-brom stuff. If the ROM had an
-actual API (mmc_read(), etc.) then that would be fine. But just
-jumping back makes it hard to control what is going on.
+Yes, prefixed version that's allowed to be called by users.
 
-It is interesting to hear that SPL-only is causing a problem. Do you
-have any inkling of what that might be? I could take a look at
-converting the boards to use TPL, but it does seem a bit sideways to
-the issue here. Is the bootrom doing some magic, perhaps? Is there
-decent documentation for the boot ROM these days?
+> and
+>=20
+> ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/arm-linux-gnue=
+abi/bin/ld
 
-Regards,
-Simon
+Internal usage, here be dragons and all that.
+
+> but interestingly there is no gcc in the latter directory, which there
+> was in 4.6 (and presumably for some time after).
+>=20
+> Certainly for sandbox there is no prefix, so we cannot add it in that
+> case, and sandbox is actually the arch used to run these tests.
+
+CROSS_COMPILE is empty for sandbox, yes.
+
+> What are you suggesting we change about this patch?
+
+That it's going about things backwards? If you're setting CROSS_COMPILE
+_then_ it should be the full path that it already knows otherwise if not
+setting CROSS_COMPILE then also not modifying PATH.
+
+--=20
+Tom
+
+--Q3lRkNGn78uhbWdO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ1mrEACgkQFHw5/5Y0
+tywQVwv/dbTrBRYgpVqL3+vQCR15Mbx5cxrfvCNk4emUPzxezOSWegDEJkbyD+SK
+BEVl8AmYlhHGpHBV6gpJB3ULe8xgQ4/vmF6jEcSg8lcZXE3OkyNXGLO43sCTygkP
+xHjFeQaj6GXkubmh0IYNVzvXiTnExhNyOVWL7boU7i8h6V8x7YlDxfebz0dLCBXi
+41+uOm+cxujV9TtW5JbeXQ8BCD14eJf1xj3ZYmxmkQm8DPgou9gS4gpIFZpTbgQK
+yRxZVazZi4+gDzdCa4PXtabJ87kzFJzIJ1IpMgyD/lvfIdnqCA/5t6JoTlwxuF/V
+xguwhTFHJfNYY4E/j63fiOgrNw2YkpE5zrf3mQDkA5l2/CfqWtHO+Jz+XYftcX66
+hMfUhU9DQJ58XLje7ZhaN3DC43KIZ375YB7yGYAxDURlFMJRfEzYVz3K3SPdiZQG
+1D21rGdrtT9wPdlLsOgMB4f9uI04N2H3uscvCVvFlebaVHvq+L28fxGiJ19GFNqS
+Sm9TNCDQ
+=0st/
+-----END PGP SIGNATURE-----
+
+--Q3lRkNGn78uhbWdO--
