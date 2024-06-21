@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A525CC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 14:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC7CC2BA1A
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 14:58:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FA598840F;
-	Fri, 21 Jun 2024 16:58:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 955AD8854A;
+	Fri, 21 Jun 2024 16:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jn0Xx4YQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GFDOiTNT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C73FB884C6; Fri, 21 Jun 2024 16:58:00 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 9873288556; Fri, 21 Jun 2024 16:58:04 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C3C8880F1
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 16:57:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6853B8853F
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 16:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6b501a4344bso9246286d6.3
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:57:57 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-795a4fde8bfso132058685a.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718981877; x=1719586677; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718981881; x=1719586681; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ht25f2ICSjpZr9cgYMZ78UPU45JFDUatdPt4/AkVCtI=;
- b=jn0Xx4YQidd4ncbhdzC8Z5bIg+jWd7lHvZnRzOpd7KtiJqTY/uIOTvj+tsRtmN/Cl3
- DKFQqbr88kUUz/mSH4ipZtl8RjNpiRmXpx1esE9zUVua0tiYMIcszQrgCCxUJpq8rk5M
- HivwxD2eQdz5oj2vTdAle0s3mnhMZ2BoKhniQ=
+ bh=fCntKDYLJVZNGfUWL+UD+r/f0fcedQUiEPsRz3nIzuY=;
+ b=GFDOiTNTTMLJAxy1qm4O03rGdsMT96/osBq66RM2vJwNwZioROLN9NCNrUEmgrhVyl
+ mWURsoZPp/eRnoikdKr7r400xdHWg+dnDU+6Dm2AgSqhxU8y16HPEXOoqyPjCTs2mLxq
+ HjCGSnqnMvFgrJMRsC07X7jDFlv5izJ5MZ5G4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718981877; x=1719586677;
+ d=1e100.net; s=20230601; t=1718981881; x=1719586681;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ht25f2ICSjpZr9cgYMZ78UPU45JFDUatdPt4/AkVCtI=;
- b=B36Xr9HbbR4LzZL7agry80ZgraNuvlrjvOEedweyhHFaZ5uSpIHEUggYJCeCSreaZe
- nyo6qYjQ827p3dQuDSagw7l3ZgR9zU+5tsIhL1rZJQHvg83iz85igzYwDUwnahYXEyiz
- xn4apd7OIdxm70W6Aw7OAtISaUnI1x/plBPCypIXCYbOL/aJs/7WLXVJeAX6+aRw0NgR
- 2X6bHg2DIXDVCbcFYGCcPmUNNxC61Pc2gQi+QCemtMgj0aBakJfDFrWqfSHZvqh1QIR1
- az4STrtT8YqMmIP99QSLHBJ7cgDoegrvSxHCbD8OmoVZQzVCm+9zD44L+226WgTkBJ+G
- 7wOQ==
-X-Gm-Message-State: AOJu0YyyJysjTebosdOIMmewCI6UuXZXpCN1XKaTXt34mN+2gZH8PAgN
- gwuoej3UqBybbHuPO9XUzU6yF+MRKUKMpOEPqWe62Zt2lLTrbx68O/WVLQFYWGx+t7P3X+mOYvg
- QY+y46XZtfqaNoLt13v349zbUlruLpXhQu1U9
-X-Google-Smtp-Source: AGHT+IGMtKFHo+URtAQnYImciB5Lbm4JjhPDM3oES/A9oE6Q6R9iCnU54xGyCNVC1eXN5LTkmoCOSNGOPRTlkJf8pao=
-X-Received: by 2002:a0c:ca92:0:b0:6b5:34b:8c02 with SMTP id
- 6a1803df08f44-6b5034b8dbamr82211786d6.27.1718981876888; Fri, 21 Jun 2024
- 07:57:56 -0700 (PDT)
+ bh=fCntKDYLJVZNGfUWL+UD+r/f0fcedQUiEPsRz3nIzuY=;
+ b=XMRO8vBX3bKnCmarjC0IM1zOmyPAprqiYE556ccPEGOngywCoFzHwxT9Nb9iKgTJQb
+ bzv0vbYkT4yYVXZJryRrsf1B6fG+mNdgOeDYw+bWZwUJeMoz+1mBWAwxkXm+2/t6uxZA
+ dzs5tQRKziptBJewWTDH5jdw1Y1z66fGvC6j47TBgZ3IUGrFR9+FgCJzCqpG/t+suf4T
+ EJZIS/stTclmNyAc6GZhHtbqFqugWxH0q57fREA9mrsj4JlqRm9QJDE2TN6gumQVQr1T
+ I6/A9Q/Wk+f+otqVI2S5zxJtnJMk8TIcbAg1T6x9f4lOj/NOqKnreLX9IqtIA1353CfK
+ ovaA==
+X-Gm-Message-State: AOJu0Yz4GNmT52TABYT+UdtaGuExXZjeoNAJfEnUm59WwWgNOGxVk/6R
+ nWaaVLSv6OxoSzxvbn4XlWwp4jUXoaId9YmoHgJIjGJNCG7aumeb1E8sZgtvcIx1myFZ87bjxm+
+ mUIW7Dp1v0wXD9cHs+wDDtItSbtVmVv2lmA9P
+X-Google-Smtp-Source: AGHT+IEAprfw2nwbOr+CvZBlFBlBjspcER2P5dyB4+hh+ug11L2/hjsdbmGzYNoNVob981k8lLjsk/zAC9A7hBw5YqI=
+X-Received: by 2002:a05:6214:e4c:b0:6b5:1976:98ac with SMTP id
+ 6a1803df08f44-6b519769adcmr46365206d6.28.1718981880967; Fri, 21 Jun 2024
+ 07:58:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240620230625.1797397-1-sjg@chromium.org>
- <20240620230625.1797397-11-sjg@chromium.org>
- <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
- <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
-In-Reply-To: <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
+References: <20240620131937.1130446-1-sjg@chromium.org>
+ <20240620131937.1130446-4-sjg@chromium.org>
+ <20240620143232.GM68077@bill-the-cat>
+ <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
+ <20240620233026.GU68077@bill-the-cat>
+In-Reply-To: <20240620233026.GU68077@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Jun 2024 08:57:46 -0600
-Message-ID: <CAFLszTiRgwf4T6h1T5-5BiWckc7062Tgcs-2M2qi+7y_k=YbRw@mail.gmail.com>
-Subject: Re: [PATCH v3 10/18] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+Date: Fri, 21 Jun 2024 08:57:50 -0600
+Message-ID: <CAFLszTi7qXX6R5=LQqCMveH7aJ=N96Mcob+gp11MEPixgrK66A@mail.gmail.com>
+Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Sean Anderson <sean.anderson@seco.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,74 +88,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Thu, 20 Jun 2024 at 23:49, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 20 Jun 2024 at 17:30, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, 21 Jun 2024 at 08:32, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On Thu, Jun 20, 2024 at 05:05:30PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Hi Simon,
+> > On Thu, 20 Jun 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jun 20, 2024 at 07:19:35AM -0600, Simon Glass wrote:
+> > >
+> > > > The Python virtualenv tool sets up a few things in the envronment,
+> > > > putting its path first in the PATH environment variable and setting up
+> > > > a sys.prefix different from the sys.base_prefix value.
+> > > >
+> > > > At present buildman puts the toolchain path first in PATH so that it can
+> > > > be found easily during the build. For sandbox this causes problems since
+> > > > /usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
+> > > > PATH variable. As a result, the venv is partially disabled.
+> > > >
+> > > > The result is that sandbox builds within a venv ignore the venv, e.g.
+> > > > when looking for packages.
+> > > >
+> > > > Correct this by detecting the venv and adding the toolchain path after
+> > > > the venv path.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > Why are we using PATH at all in this case? Shouldn't we just be setting
+> > > CROSS_COMPILE=/full/path/to/the/prefix ?
 > >
-> > On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > It does not make sense to enable all SHA algorithms unless they are
-> > > needed. It bloats the code and in this case, causes chromebook_link to
-> > > fail to build. That board does use the TPM, but not with measured boot,
-> > > nor EFI.
-> > >
-> > > Since EFI_TCG2_PROTOCOL already selects these options, we just need to
-> > > add them to MEASURED_BOOT as well.
-> > >
-> > > Note that the original commit combines refactoring and new features,
-> > > which makes it hard to see what is going on.
-> > >
-> > > Fixes: 97707f12fda tpm: Support boot measurements
-> > > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v2)
+> > This is the -p option to buildman. The original commit was:
 > >
-> > There was a discussion in the previous version, bout enabling these on
-> > CMD_TPM as they are required.
-
-For reference [1]
-
+> > commit bb1501f2c22c979961b735db775605cccedd98f6
+> > Author: Simon Glass <sjg@chromium.org>
+> > Date:   Mon Dec 1 17:34:00 2014 -0700
+> >
+> >     buildman: Add an option to use the full tool chain path
+> >
+> >     In some cases there may be multiple toolchains with the same name in the
+> >     path. Provide an option to use the full path in the CROSS_COMPILE
+> >     environment variable.
+> >
+> >     Note: Wolfgang mentioned that this is dangerous since in some cases there
+> >     may be other tools on the path that are needed. So this is set up as an
+> >     option, not the default. I will need test confirmation (i.e. that this
+> >     commit fixes a real problem) before merging it.
+> >
+> > As to why we don't always do this, well that is back in the mists of
+> > time, 10 years ago.
+> >
+> > BTW, this is raising a point ("let's change the behaviour") separate
+> > from the goal of this commit, which is to fix a problem with venv,
+> > albeit that if we made -p the only option, then we could potentially
+> > drop all PATH changes. Perhaps toolchains are built differently now,
+> > such that they always invoke their tools using the same prefix and
+> > dir?
 >
-> Or switch this to an imply instead so you can disable it ?
+> Wait, I'm confused. buildman internally updates its own PATH to avoid
+> calling CROSS_COMPILE with the full path due to a concern about
+> toolchain bugs?
 
-The thing is, we need to be able to easily disable unwanted features.
-My reading of that thread is that U-Boot doesn't use SHA384/512 from
-the 'tpm2 pcr_extend' command today. Even if it did, I would think it
-better to allow the supported algorithms to be controlled. At worst, I
-would expect a separate option to disable that subcommand which would
-remove the implies.
+Not its own PATH: the one it passes to U-Boot's 'make'.
 
-Some tpm code recently added puts a table and some functions in
-tpm-v2.h - could someone fix that? tpm-common.c would be a better
-place. Also we already have a list of hash algorithms in U-Boot
-(common/hash.c) so should use that, and respect the fact that certain
-algos may not be supported.
+I'm not sure why, actually. It is such a long time ago that I don't remember.
 
-If there is a requirement that (for a certain situation / protocol) we
-need to support everything, then let's have a Kconfig for that. It is
-what my patch was trying to work around, perhaps. For boards which
-don't care about extending TPM in this way, or don't use the more
-expensive algorithms, it avoids lots of code bloat.
+I see:
 
-One of the principles of U-Boot is to allow configurability in these
-situations. It shouldn't be too hard to have the best of both worlds
-(supports all reasonable cases by default / allow unwanted cases to be
-dropped).
+~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-ld
 
-So I'll await your reply on the above before figuring out where to go
-with this. For this release I'd just like to get the board working,
-but I understand that the TPM stuff is very-much in flux, perhaps in
--next.
+and
+
+~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/arm-linux-gnueabi/bin/ld
+
+but interestingly there is no gcc in the latter directory, which there
+was in 4.6 (and presumably for some time after).
+
+Certainly for sandbox there is no prefix, so we cannot add it in that
+case, and sandbox is actually the arch used to run these tests.
+
+What are you suggesting we change about this patch?
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240610145920.3302001-3-sjg@chromium.org/
