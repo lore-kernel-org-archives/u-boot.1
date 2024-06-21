@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B5FC2BB85
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7694FC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E85C28845A;
-	Fri, 21 Jun 2024 21:40:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3AB78854E;
+	Fri, 21 Jun 2024 21:52:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ST00sVQ0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GQxVRJPh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E86A884C6; Fri, 21 Jun 2024 21:40:00 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 3B0FB884B2; Fri, 21 Jun 2024 21:52:14 +0200 (CEST)
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
+ [IPv6:2607:f8b0:4864:20::d43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C7B688059
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:39:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C17588059
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6b4ff7cb429so11259376d6.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:39:57 -0700 (PDT)
+Received: by mail-io1-xd43.google.com with SMTP id
+ ca18e2360f4ac-7eeea388a8eso92245639f.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718998797; x=1719603597; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PiXbQHju/lfqol40fciEhTaeXiK0lJwjo7gJQov26KQ=;
- b=ST00sVQ0pCQ3tHzRHBj/HM5P9dyuRFdwiN/CsKqnLHzAENbFdYUz4NcuzfrzlxGpES
- 3UbTnNebLI4RejQX34uFyuoZ86J3pTXWU8FMz5eIHHbolZCodYud2zGZdHmCflqTQEjL
- VlwqKGfOyoBIwBwVMZlE9OeIpR1Lba5JRlOWQ=
+ d=chromium.org; s=google; t=1718999530; x=1719604330; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rWXAlwLFSQoE2MnuuTeSuI1f4Vpi7Iz4DtOLJT94zt8=;
+ b=GQxVRJPhNZ5ekirz84q1nIyXz5pkjvuSxRTioaKt3BHg7eBe1GfZwPn4PQujj2bevf
+ EFtV7VD95qJysEePcnxFXmhnWtvpB3K6mPSsnsSVn/oE1lkgRQDWgDjfy+LX0NmDgRaj
+ LV/3xhbkf2twc3mCBgc5zG5MP8XZH7p9lQAfs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718998797; x=1719603597;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1718999530; x=1719604330;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PiXbQHju/lfqol40fciEhTaeXiK0lJwjo7gJQov26KQ=;
- b=AKtO3F4s/JpqkIqIy5GmPRuf2HxU7rOcM0ZvSQZYJvwjrbwlJc+VzsGhESMx9XK0Y/
- oYqnbujVWrnY1Dm1LxQGaicrL1Hto0mqLZlIg4GkhcautPbOiFLUyQRWOZU247FCBriM
- xag6J4UUhuqpwIStiNYG6FXPUHzKt3rA1hwTgMu5pim+/EkcNP0Wyac3KfLLuOqRSswG
- GYw76vSILmjDD3TObA7wes3NukrvudlRGAiMPhFePnuI+O1fvC7gE9eSpTxa+T0+Ic/b
- nEFJL1D+P+gYUkXReyHSZYb0+6jIu2ucIWZTTP3M/Y+B/DHba4UnKQ1UeVEVNaD41ftM
- U50A==
-X-Gm-Message-State: AOJu0Yz20oujz/DRFlyOIcfMUl3xT6qCR2KSpsqu29qf7kJRehjbnMGi
- zqp2is5TQYadhiwt71FkLq2O2mW1jgb/5edLEkuBhIzE88IDwo/KUbFuPKGHxPeo5dJKufuzn2X
- +sRS0R0qpkzVucxI5jrjchAej5eoez81qVnVoxB2pCmFmmMdHPw==
-X-Google-Smtp-Source: AGHT+IEu5dblY+1MpyL71fYQtJo+IUZmc4msagSra7zodslUJg8Jz4U8hLSX0TqY/6ePeVQbvMdxefZW1wox+5axV8Y=
-X-Received: by 2002:a0c:c983:0:b0:6b0:92ac:8193 with SMTP id
- 6a1803df08f44-6b516863f17mr57453796d6.54.1718998796884; Fri, 21 Jun 2024
- 12:39:56 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240620131937.1130446-1-sjg@chromium.org>
- <20240620131937.1130446-4-sjg@chromium.org>
- <20240620143232.GM68077@bill-the-cat>
- <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
- <20240620233026.GU68077@bill-the-cat>
- <CAFLszTi7qXX6R5=LQqCMveH7aJ=N96Mcob+gp11MEPixgrK66A@mail.gmail.com>
- <20240621152229.GV68077@bill-the-cat>
- <CAFLszTi_NBBxz3MZz0HuOW5c2bGT3FgZ2usnAginZ0LC_TdX9A@mail.gmail.com>
- <20240621192617.GA68077@bill-the-cat>
-In-Reply-To: <20240621192617.GA68077@bill-the-cat>
+ bh=rWXAlwLFSQoE2MnuuTeSuI1f4Vpi7Iz4DtOLJT94zt8=;
+ b=s5rvXjFUsatzoJT9i17Li//LhiRB7/8Ipejz23v5Rq0QvrtJVtgmEBfHSa1ItzxbCo
+ QUmxuATWplkf5C0WyyRNIK938/xcIZqEqx9N5dHsBI61xrrJPDsIfkv3exLAjpZm35P8
+ mzGpqpzDatYOTCK2IzFEJtt9F8BhKWJzmg+wIoOgzrrm4hCDYe6zgKfGoP/KBfIoZgMa
+ IH7buK6fTT5Lax1azsBE3ew+4AkrypLY8VCqTzbgBlJfxJNCI+W8Pfg+ROAOowJAUH6Q
+ ka/jzdxgM+YVudH6PHh62rYfXIFr62jUIMz9wklaLkMPy2rqBpDBsKLbJfBifzewwhON
+ 36UA==
+X-Gm-Message-State: AOJu0YzLlOb1scL4DamMn8QEeU+PEDS8USktjouy/GVlwNHaqZ5ceTFk
+ dfl13DD1ZFpN6txgNa1fAZidZpu/ajM4E3yVIyanNpiAzqZ6qLw7qsvjU3hQSlZCZqnw7ibjtpW
+ mNH6C
+X-Google-Smtp-Source: AGHT+IHIg3eQXnzqstg5Ug8zV2MJtM6sGNjpo2e8qDgxbUt3fe8hGVDmZVKMtxTTfX6N05Wvzig9Rg==
+X-Received: by 2002:a05:6602:1607:b0:7eb:b36f:b4e2 with SMTP id
+ ca18e2360f4ac-7f13ee475camr1119493939f.10.1718999529977; 
+ Fri, 21 Jun 2024 12:52:09 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Jun 2024 12:52:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Jun 2024 13:39:46 -0600
-Message-ID: <CAFLszTiA5JFU3EaTi_f142tDRej6rSMk=gCWitnqC2tb8d_vtQ@mail.gmail.com>
-Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Brunet <jbrunet@baylibre.com>, Marek Vasut <marex@denx.de>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v2 00/43] labgrid: Provide an integration with Labgrid
+Date: Fri, 21 Jun 2024 13:51:21 -0600
+Message-Id: <20240621195204.2675252-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,119 +94,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Labgrid provides access to a hardware lab in an automated way. It is
+possible to boot U-Boot on boards in the lab without physically touching
+them. It relies on relays, USB UARTs and SD muxes, among other things.
 
-On Fri, 21 Jun 2024 at 13:26, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Jun 21, 2024 at 12:19:12PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 21 Jun 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Jun 21, 2024 at 08:57:50AM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 20 Jun 2024 at 17:30, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Jun 20, 2024 at 05:05:30PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Thu, 20 Jun 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Jun 20, 2024 at 07:19:35AM -0600, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > The Python virtualenv tool sets up a few things in the envronment,
-> > > > > > > > putting its path first in the PATH environment variable and setting up
-> > > > > > > > a sys.prefix different from the sys.base_prefix value.
-> > > > > > > >
-> > > > > > > > At present buildman puts the toolchain path first in PATH so that it can
-> > > > > > > > be found easily during the build. For sandbox this causes problems since
-> > > > > > > > /usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
-> > > > > > > > PATH variable. As a result, the venv is partially disabled.
-> > > > > > > >
-> > > > > > > > The result is that sandbox builds within a venv ignore the venv, e.g.
-> > > > > > > > when looking for packages.
-> > > > > > > >
-> > > > > > > > Correct this by detecting the venv and adding the toolchain path after
-> > > > > > > > the venv path.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > >
-> > > > > > > Why are we using PATH at all in this case? Shouldn't we just be setting
-> > > > > > > CROSS_COMPILE=/full/path/to/the/prefix ?
-> > > > > >
-> > > > > > This is the -p option to buildman. The original commit was:
-> > > > > >
-> > > > > > commit bb1501f2c22c979961b735db775605cccedd98f6
-> > > > > > Author: Simon Glass <sjg@chromium.org>
-> > > > > > Date:   Mon Dec 1 17:34:00 2014 -0700
-> > > > > >
-> > > > > >     buildman: Add an option to use the full tool chain path
-> > > > > >
-> > > > > >     In some cases there may be multiple toolchains with the same name in the
-> > > > > >     path. Provide an option to use the full path in the CROSS_COMPILE
-> > > > > >     environment variable.
-> > > > > >
-> > > > > >     Note: Wolfgang mentioned that this is dangerous since in some cases there
-> > > > > >     may be other tools on the path that are needed. So this is set up as an
-> > > > > >     option, not the default. I will need test confirmation (i.e. that this
-> > > > > >     commit fixes a real problem) before merging it.
-> > > > > >
-> > > > > > As to why we don't always do this, well that is back in the mists of
-> > > > > > time, 10 years ago.
-> > > > > >
-> > > > > > BTW, this is raising a point ("let's change the behaviour") separate
-> > > > > > from the goal of this commit, which is to fix a problem with venv,
-> > > > > > albeit that if we made -p the only option, then we could potentially
-> > > > > > drop all PATH changes. Perhaps toolchains are built differently now,
-> > > > > > such that they always invoke their tools using the same prefix and
-> > > > > > dir?
-> > > > >
-> > > > > Wait, I'm confused. buildman internally updates its own PATH to avoid
-> > > > > calling CROSS_COMPILE with the full path due to a concern about
-> > > > > toolchain bugs?
-> > > >
-> > > > Not its own PATH: the one it passes to U-Boot's 'make'.
-> > >
-> > > OK, but the point stands.
-> > >
-> > > > I'm not sure why, actually. It is such a long time ago that I don't remember.
-> > > >
-> > > > I see:
-> > > >
-> > > > ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-ld
-> > >
-> > > Yes, prefixed version that's allowed to be called by users.
-> > >
-> > > > and
-> > > >
-> > > > ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/arm-linux-gnueabi/bin/ld
-> > >
-> > > Internal usage, here be dragons and all that.
-> > >
-> > > > but interestingly there is no gcc in the latter directory, which there
-> > > > was in 4.6 (and presumably for some time after).
-> > > >
-> > > > Certainly for sandbox there is no prefix, so we cannot add it in that
-> > > > case, and sandbox is actually the arch used to run these tests.
-> > >
-> > > CROSS_COMPILE is empty for sandbox, yes.
-> > >
-> > > > What are you suggesting we change about this patch?
-> > >
-> > > That it's going about things backwards? If you're setting CROSS_COMPILE
-> > > _then_ it should be the full path that it already knows otherwise if not
-> > > setting CROSS_COMPILE then also not modifying PATH.
-> >
-> > That is what the code does, yes. It either adds the toolchain path to
-> > CROSS_COMPILE or to PATH, not both. The 'full_path' argument controls
-> > which one it uses.
->
-> I'm saying it should always use the full path to CROSS_COMPILE and never
-> modify PATH.
+By way of background, about 4 years ago I wrong a thing called Labman[1]
+which allowed my lab of about 30 devices to be operated remotely, using
+tbot for the console and build integration. While it worked OK and I
+used it for many bisects, I didn't take it any further.
 
-That wouldn't work with toolchains that don't have a prefix, though.
-If that is what you want I'm happy to modify the patch.
+It turns out that there was already an existing program, called Labgrid,
+which I did not know about at time (thank you Tom for telling me). It is
+more rounded than Labman and has a number of advantages:
 
-Regards,
-Simon
+- does not need udev rules, mostly
+- has several existing users who rely on it
+- supports multiple machines exporting their devices
+
+It lacks a 'lab check' feature and a few other things, but these can be
+remedied.
+
+On and off over the past several weeks I have been experimenting with
+Labgrid. I have managed to create an initial U-Boot integration (this
+series) by adding various features to Labgrid[2] and the U-Boot test
+hooks.
+
+I hope that this might inspire others to set up boards and run tests
+automatically, rather than relying on infrequent, manual test. Perhaps
+it may even be possible to have a number of labs available.
+
+Included in the integration are a number of simple scripts which make it
+easy to connect to boards and run tests:
+
+ub-int <target>
+    Build and boot on a target, starting an interactive session
+
+ub-cli <target>
+    Build and boot on a target, ensure U-Boot starts and provide an interactive
+    session from there
+
+ub-smoke <target>
+    Smoke test U-Boot to check that it boots to a prompt on a target
+
+ub-bisect
+    Bisect a git tree to locate a failure on a particular target
+
+ub-pyt <target> <testspec>
+    Run U-Boot pytests on a target
+
+Some of these help to provide the same tbot[4] workflow which I have
+relied on for several years, albeit much simpler versions.
+
+The goal here is to create some sort of script which can collect
+patches from the mailing list, apply them and test them on a selection
+of boards. I suspect that script already exists, so please let me know
+what you suggest.
+
+I hope you find this interesting and take a look!
+
+[1] https://github.com/sjg20/u-boot/tree/lab6a
+[2] https://github.com/labgrid-project/labgrid/pull/1411
+[3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
+[4] https://tbot.tools/index.html
+
+Changes in v2:
+- Only disable echo if a terminal is detected
+- Add new patch to update u-boot.cfg with CFG_... options
+- Avoid running a docker image for skipped lab tests
+
+Simon Glass (43):
+  trace: Update test to tolerate different trace-cmd version
+  binman: efi: Correct entry docs
+  binman: Regenerate nxp docs
+  binman: ti: Regenerate entry docs
+  binman: Update the entrydocs header
+  buildman: Make mrproper an argument to _reconfigure()
+  buildman: Make mrproper an argument to _config_and_build()
+  buildman: Make mrproper an argument to run_commit()
+  buildman: Avoid rebuilding when --mrproper is used
+  buildman: Add a flag to force mrproper on failure
+  buildman: Retry the build for current source
+  buildman: Add a way to limit the number of buildmans
+  dm: core: Enhance comments on bind_drivers_pass()
+  initcall: Correct use of relocation offset
+  am33xx: Provide a function to set up the debug UART
+  sunxi: Mark scp as optional
+  google: Disable TPMv2 on most Chromebooks
+  meson: Correct driver declaration for meson_axg_gpio
+  test: Allow signaling that U-Boot is ready
+  test: Make bootstd init run only on sandbox
+  test: Use a constant for the test timeout
+  test: Pass stderr to stdout
+  test: Release board after tests complete
+  log: Allow tests to pass with CONFIG_LOGF_FUNC_PAD set
+  test: Allow connecting to a running board
+  test: Decode exceptions only with sandbox
+  test: Avoid failing skipped tests
+  test: dm: Show failing driver name
+  test: Check help output
+  test: Create a common function to get the config
+  test: Introduce the concept of a role
+  test: Move the receive code into a function
+  test: Separate out the exception handling
+  test: Detect dead connections
+  test: Tidy up remaining exceptions
+  test: Introduce lab mode
+  test: Improve handling of sending commands
+  test: Fix mulptiplex_log typo
+  test: Avoid double echo when starting up
+  test: Try to shut down the lab console gracefully
+  test: Add a section for closing the connection
+  Update u-boot.cfg to include CFG also
+  CI: Allow running tests on sjg lab
+
+ .gitlab-ci.yml                                | 153 +++++++++++++++++
+ arch/arm/dts/sunxi-u-boot.dtsi                |   1 +
+ arch/arm/mach-omap2/am33xx/board.c            |  18 +-
+ configs/chromebook_link64_defconfig           |   1 +
+ configs/chromebook_link_defconfig             |   1 +
+ configs/chromebook_samus_defconfig            |   1 +
+ configs/chromebook_samus_tpl_defconfig        |   1 +
+ configs/nyan-big_defconfig                    |   4 +-
+ configs/snow_defconfig                        |   1 +
+ drivers/core/lists.c                          |  16 ++
+ drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c |   2 +-
+ drivers/pinctrl/meson/pinctrl-meson-axg.c     |   4 +-
+ drivers/pinctrl/meson/pinctrl-meson-axg.h     |   2 +-
+ drivers/pinctrl/meson/pinctrl-meson-g12a.c    |   4 +-
+ lib/initcall.c                                |   6 +-
+ scripts/Makefile.autoconf                     |   2 +-
+ test/py/conftest.py                           |  86 ++++++++--
+ test/py/tests/test_dm.py                      |   5 +-
+ test/py/tests/test_help.py                    |   6 +-
+ test/py/tests/test_log.py                     |  11 +-
+ test/py/tests/test_trace.py                   |   6 +-
+ test/py/tests/test_ut.py                      |   1 +
+ test/py/u_boot_console_base.py                | 154 ++++++++++++------
+ test/py/u_boot_console_exec_attach.py         |  31 +++-
+ test/py/u_boot_console_sandbox.py             |   2 +-
+ test/py/u_boot_spawn.py                       | 126 ++++++++++++--
+ test/test-main.c                              |  16 +-
+ tools/binman/entries.rst                      | 115 +++++++++----
+ tools/binman/entry.py                         |   2 +-
+ tools/binman/etype/efi_capsule.py             |  40 ++---
+ tools/binman/etype/efi_empty_capsule.py       |  22 +--
+ tools/binman/etype/ti_secure.py               |  45 ++---
+ tools/buildman/builder.py                     |  18 +-
+ tools/buildman/builderthread.py               |  44 +++--
+ tools/buildman/buildman.rst                   |   8 +-
+ tools/buildman/cmdline.py                     |   6 +-
+ tools/buildman/control.py                     | 141 +++++++++++++++-
+ tools/buildman/pyproject.toml                 |   6 +-
+ tools/buildman/test.py                        | 121 ++++++++++++++
+ tools/u_boot_pylib/terminal.py                |   7 +-
+ 40 files changed, 1009 insertions(+), 227 deletions(-)
+
+-- 
+2.34.1
+
