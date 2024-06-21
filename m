@@ -4,76 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B2FC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 16:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620ABC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 16:40:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4284588405;
-	Fri, 21 Jun 2024 18:08:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 624FB8846D;
+	Fri, 21 Jun 2024 18:40:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="qiSZtiZO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZBHduZA/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D425F8845A; Fri, 21 Jun 2024 18:08:33 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id D4EAD8840F; Fri, 21 Jun 2024 18:40:04 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5102F87FBC
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 18:08:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E4C48846D
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 18:40:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a6ef64b092cso260709866b.1
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 09:08:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2bfffa3c748so1810173a91.3
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 09:40:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1718986110; x=1719590910; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qrPbM3VQO04uZVMVJR22EMo0x1LSmX1sVdloA233MDo=;
- b=qiSZtiZOJFjZjxd3wpwsv3FT0ZZ4yJRdwFwhE5XGfsvxYu5CbV4DYRo9ByRiIjFZRN
- 1ikfKYsScpFO/s+iKCIW2QllZsUA7Umqj7Cipz8aFx9ZTy0eJYORAzqFlL4nbtr8yny7
- m4UBfxzAwfCJ1UgDYRRFLuD2TxuRCAuLsYS9fj1TBLZR49ylSAPmk+TnhkN+/oTZ8mCH
- bQFYQGjxc4vMvtNL9LNicMtjflYAdMdBiRoKncRRD3uHmvGtbGws1UyVsb0DddSRrTdU
- 5tPtxgMN2Oj+eAdiK2loqNsA3RnAGvPvb2fZz1gcxDgkDm2AgjN3B693N+7aPOO/CHJi
- B0yg==
+ d=linaro.org; s=google; t=1718988000; x=1719592800; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GCkWv3/SMqRmok2XgDuv6GraoVlbqUMqjxqL5SAOr/8=;
+ b=ZBHduZA/o9AxViPv0FUN2HqJFm7Zk7TmIyz92qP5wUNlZUQktwpyJOeG5v3R3rJjpL
+ yQTeye++ZBsYZRDbTSZql28rpdSuo2FjSrJ1Cygobkj67EoNZpZuX2Qcr3ON8nYMiFzL
+ RwCYjzGAHHZB33tRJGKdv7BVJq/h+hhsF0qUTHEqtayEJfww4GYqlulY9S8WJIwrCo0c
+ pfX4DHzrV1fZn7ECPfiMKBJPumWElXunKaei15hbhD1KMBcPvUA6pqyPpm79olHcmE2H
+ W289UVu2FfgwO37DQ5HO/Dap5njntVuGKvPC1lEdQFaXgjeRs9JbssirFBrvtZTeJGvd
+ zOsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718986110; x=1719590910;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qrPbM3VQO04uZVMVJR22EMo0x1LSmX1sVdloA233MDo=;
- b=Z81mvuaJUJzD/8lhbXaJn0iuazbbtcY7f6ofrIGeZgTBIFb8IVCFOA8P9JYlJUA9co
- qNIbz8MIafYtI/ixxa3JIubnsp8zbMvX3OZopgb+jm4E8heuBm4BX07/BpUf6jQGrUeX
- Af5KbAkt2nFif4X8z+pgMEwE/x8g+AIQSl9cYs+GxVAlo9ZVB2pdcmsMjVRRjhJg+zi/
- tgBNh10j2bgEW+j8laV4RSAB7b0HjsW830SAxJ43Kd8s58dSW25jlvkp2AgQyAvNeVd6
- fwx2jDXmZiWkxs5UH8v6BggdFHp6lQbgWZkxVJcCe5LGQwyL0MVx2Acug3/68swgIw2w
- +r2w==
-X-Gm-Message-State: AOJu0YyrPxxOQULAkGxwr3O6nxyWzj1OelaPrUVwSfzrptUFoW23hU2J
- pgzlUGas/i1zFJX7uJmsVTZRrvcV6vr7xyr7VK4ZNt/8uSkrANSDKz9hTXVGtPfL6ZoVMqHyyQU
- U4OXg/d8KtjsGFuiDcYlDR5gNQBlqwn4B+eD8IA==
-X-Google-Smtp-Source: AGHT+IEQHEGck3JC/SADC/ffcnhWvcvG9qSrAunKwjRBSHt3FJPtJL80Eddm1AYoQV/keqdP3Hp+C0XolwNCgmcUCfo=
-X-Received: by 2002:a17:906:f896:b0:a6f:4827:7966 with SMTP id
- a640c23a62f3a-a6fab60bbe2mr548532566b.15.1718986109084; Fri, 21 Jun 2024
- 09:08:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718988000; x=1719592800;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GCkWv3/SMqRmok2XgDuv6GraoVlbqUMqjxqL5SAOr/8=;
+ b=ldpleB7i1bWedyF6sI/CJ+U9/V7gwDFRGzcCkcrKTISMsDhwukZPfWlUi0htkmqczj
+ fepaw2PQfOkvR73A9OqmJZdkfMSm+V6+3zh94Bcd90Wg6Oj+WkGKg9DGfT+5BOP+UG+8
+ Qh36um/bt6FhreEzlb7Nr3z0l30p9kIKa8erIxj2SZcBGIud/1ST/fS7G41GFefosyok
+ mbfnGL8pFba5noBHHjliOS50JJO5eyI1b3e7txE9t0VTRLgRs2LGJHVczcBz2WBaJtAT
+ YWpi9JMsg3kWcDiFxNmTBrX+TU258EWWi01uDGtnDlvMqPkEdjZ0rKjVQBC0O8WyPmgD
+ quRA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWKm4sYXLz1zOc7ML/4nUAegW6Ali0UnOmBQnmPZxPtnqrMLTWj95YswDGIVxaaL6S92Lx1+vHr+PcpDQM7xMBtdOlWQ==
+X-Gm-Message-State: AOJu0YwUyWJcfmzhjF4ThHs50ObpTEyr9Z/XENGY/RZq0gBVgUC3LPv0
+ 7LAlYBQaPyj57HU/9IqN0HJ0ZMijUygtZbdFaKiFYul0eN4BsRpbB2xLDf02ifWUprAqJ+NYjPz
+ Z8Mvy6L5eWaSU/131t0rkPKS1z4YBT8aQLMvumg==
+X-Google-Smtp-Source: AGHT+IEh5Z95DgH/B+FslvSwtzXk4HE2NLSgb/ho82uVZkbJtMEhKb1xs7SMH6JDCgCAiOTvmqH7k6qZs9hufNByHcE=
+X-Received: by 2002:a17:90a:e50b:b0:2c7:2103:67bb with SMTP id
+ 98e67ed59e1d1-2c7b5b68c03mr8439734a91.16.1718987999744; Fri, 21 Jun 2024
+ 09:39:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1718638104.git.jerome.forissier@linaro.org>
- <CAJ+vNU0yGH6FKZsx+UZXvnQnsT13U9iKUb68=Fqc_z7J0XL14w@mail.gmail.com>
- <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
-In-Reply-To: <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 21 Jun 2024 09:08:17 -0700
-Message-ID: <CAJ+vNU3ECDoquHLyA3ULac0HkUGbzggG-bDQ8v0F2vStyr47gQ@mail.gmail.com>
-Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+References: <20240605032521.1142768-1-sjg@chromium.org>
+ <20240605032521.1142768-6-sjg@chromium.org>
+ <CAEfUkUKABkoHWr8i5fLNxgLAcs_7AdVYJEJj_UJj_Oby0HmwNA@mail.gmail.com>
+ <CAFLszThqijQQjvSgGAkK387KXV9mjo8xs9tEK_jfKGocYyZzGQ@mail.gmail.com>
+ <CAC_iWj+M5uw1qaVcUFZpXDArdbF3jfJDXk1HiA1i4S2eEYbEig@mail.gmail.com>
+ <CAFLszTgeKggZYaTRnH9xB7Uznf0=OS42aogg-rym7cp=QRjw+A@mail.gmail.com>
+ <CAC_iWj+Y+hXwjgcVaMdEYrE_G9XuuhiZQnp2ckCYNkzYPZN3tQ@mail.gmail.com>
+ <CAFLszThK_FnLxWrSzax_Jm7XMmmTanTmGrLjK3MfCM0uqKsNOw@mail.gmail.com>
+ <ZnLR_NnJY3hFBXcR@hera>
+ <CAFLszTitfewWG_dHDM3idEyntkL8tjvh6puH08+aUDeXLy4+LQ@mail.gmail.com>
+In-Reply-To: <CAFLszTitfewWG_dHDM3idEyntkL8tjvh6puH08+aUDeXLy4+LQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 21 Jun 2024 12:39:48 -0400
+Message-ID: <CAEfUkU+AJb8z6_KgMVac90iQ6R4P0dNTgq5hitvZrXDQ8x8B1w@mail.gmail.com>
+Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Shiji Yang <yangshiji66@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,187 +100,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 21, 2024 at 5:59=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
->
->
-> On 6/20/24 19:10, Tim Harvey wrote:
-> > On Mon, Jun 17, 2024 at 8:33=E2=80=AFAM Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> >>
-> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwi=
-p
-> >> library for the network stack" [1]. The goal is to introduce the lwIP =
-TCP/IP
-> >> stack [2] [3] as an alternative to the current implementation in net/,
-> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
-me
-> >> reasons for doing so are:
-> >> - Make the support of HTTPS in the wget command easier. Javier T. (CC'=
-d)
-> >> has some additional lwIP and Mbed TLS patches to do so. With that it
-> >> becomes possible to fetch and launch a distro installer such as Debian
-> >> etc. using a secure, authenticated connection directly from the U-Boot
-> >> shell. Several use cases:
-> >>   * Authentication: prevent MITM attack (third party replacing the
-> >> binary with a different one)
-> >>   * Confidentiality: prevent third parties from grabbing a copy of the
-> >> image as it is being downloaded
-> >>   * Allow connection to servers that do not support plain HTTP anymore
-> >> (this is becoming more and more common on the Internet these days)
-> >> - Possibly benefit from additional features implemented in lwIP
-> >> - Less code to maintain in U-Boot
-> >>
-> >> Prior to applying this series, the lwIP stack needs to be added as a
-> >> Git subtree with the following command:
-> >>
-> >>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savann=
-ah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> >>
-> >> The first patch renames some enums in order to avoid a conflict when a
-> >> later patch enables the lwIP library.
-> >>
-> >> The second patch introduces a new Kconfig symbol: NET_LWIP, which sele=
-cts
-> >> the lwIP implementation instead of the current one (NET). Contrary to =
-the
-> >> approach chosen by Maxim in [1], NET_LWIP and NET cannot be enabled
-> >> simultaneously. The rationale is we want to start from a clean state a=
-nd
-> >> not pull potentially duplicated functionality from both stacks. Note
-> >> however that a few files are still built in net/, they are the ones
-> >> related to ethernet device management and the ethernet bootflow.
-> >>
-> >> The third patch splits the net.h header into net-legacy.h, net-common.=
-h,
-> >> net-lwip.h, leaving net.h as a simple wrapper.
-> >>
-> >> The fourth patch introduces the Makefile to build lwIP when NET_LWIP i=
-s
-> >> enabled.
-> >>
-> >> The subsequent patches implement various network-oriented commands and
-> >> features: dhcp, dns, ping, tftpboot, wget.
-> >>
-> >> A number of features are currently incompatible with NET_LWIP: SANDBOX=
-,
-> >> DFU_TFTP, FASTBOOT, SPL_NET. All make assumptions on how the network
-> >> stack is implemented and/or pull sybols that are not trivially exporte=
-d
-> >> from lwIP. Some interface rework may be needed.
-> >>
-> >> Due to the above and in order to provide some level of testing, a new =
-QEMU
-> >> configuration is introduced (qemu_arm64_lwip_defconfig) which is the s=
-ame
-> >> as qemu_arm64_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
-> >> Tests are added to test/py/tests/test_net.py for that configuration.
-> >>
-> >
-> > Hi Jermone,
-> >
-> > I've given this a spin on an imx8mm-venice-gw73xx-0x via
-> > imx8mm_venice_defconfig and I can't get DHCP to work (didn't work in
-> > v3 either):
-> >
-> > $ diff defconfig configs/imx8mm_venice_defconfig
-> > 68,69c68,71
-> > < CONFIG_CMD_DNS_LWIP=3Dy
-> > < CONFIG_CMD_WGET_LWIP=3Dy
-> > ---
-> >> CONFIG_CMD_DHCP6=3Dy
-> >> CONFIG_CMD_TFTPPUT=3Dy
-> >> CONFIG_SYS_DISABLE_AUTOLOAD=3Dy
-> >> CONFIG_CMD_WGET=3Dy
-> > 88,90c90,94
-> > < CONFIG_NET_LWIP=3Dy
-> > < CONFIG_LWIP_DEBUG=3Dy
-> > < CONFIG_LWIP_ASSERT=3Dy
-> > ---
-> >> CONFIG_NET_RANDOM_ETHADDR=3Dy
-> >> CONFIG_IP_DEFRAG=3Dy
-> >> CONFIG_TFTP_BLOCKSIZE=3D4096
-> >> CONFIG_PROT_TCP_SACK=3Dy
-> >> CONFIG_IPV6=3Dy
-> >
-> > Target:
-> > u-boot=3D> net list
-> > eth0 : ethernet@30be0000 00:d0:12:b5:f8:41 active
-> > u-boot=3D> dhcp || echo fail
-> > eth0: ethernet@30be0000 00:d0:12:b5:f8:41 active
-> > netif_set_ipaddr: netif address being changed
-> > netif: added interface 0 addr 192.168.1.1 netmask 0.0.0.0 gw 0.0.0.0
-> > etharp_request: sending ARP request.
-> > etharp_raw: sending raw ARP packet.
-> > ethernet_output: sending packet 000000007df00bf0
-> > dhcp_start(netif=3D000000007df2af40) 0dhcp_start(): mallocing new DHCP =
-client
-> > dhcp_start(): allocated dhcp
-> > dhcp_start(): starting DHCP configuration
-> > dhcp_discover()
-> > transaction id xid(42021)
-> > dhcp_discover: making request
-> > dhcp_discover: sendto(DISCOVER, IP_ADDR_BROADCAST, LWIP_IANA_PORT_DHCP_=
-SERVER)
-> > ip4_output_if: 0IP header:
-> > +-------------------------------+
-> > | 4 | 5 |  0x00 |       336     | (v, hl, tos, len)
-> > +-------------------------------+
-> > |        0      |000|       0   | (id, flags, offset)
-> > +-------------------------------+
-> > |  255  |   17  |    0xba9d     | (ttl, proto, chksum)
-> > +-------------------------------+
-> > |    0  |    0  |    0  |    0  | (src)
-> > +-------------------------------+
-> > |  255  |  255  |  255  |  255  | (dest)
-> > +-------------------------------+
-> > ip4_output_if: call netif->output()
-> > ethernet_output: sending packet 000000007df2c010
-> > dhcp_discover: deleting()
-> > dhcp_discover: SELECTING
-> > dhcp_discover(): set request timeout 2000 msecs
-> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:28:28:5d:bb:16:9f, type:889=
-9
-> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:00:27:0e:0d:74:ba, type:806
-> > etharp_update_arp_entry: 172.24.20.24 - 00:27:0e:0d:74:ba
-> > etharp_find_entry: found empty entry 0
-> > etharp_find_entry: no empty entry found and not allowed to recycle
-> > etharp_input: incoming ARP request
-> > etharp_input: ARP request was not for us.
-> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:98:90:96:ac:d7:63, type:806
-> > etharp_update_arp_entry: 172.24.20.3 - 98:90:96:ac:d7:63
-> > etharp_find_entry: found empty entry 0
-> > etharp_find_entry: no empty entry found and not allowed to recycle
-> > etharp_input: incoming ARP request
-> > etharp_input: ARP request was not for us.
-> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:84:2b:2b:4e:5a:9a, type:806
-> > etharp_update_arp_entry: 172.24.0.1 - 84:2b:2b:4e:5a:9a
-> > etharp_find_entry: found empty entry 0
-> > etharp_find_entry: no empty entry found and not allowed to recycle
-> > etharp_input: incoming ARP request
-> > etharp_input: ARP request was not for us.
-> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:cc:96:e5:1e:a0:7b, type:800
-> > ip_input: iphdr->dest 0xffff1fac netif->ip_addr 0x101a8c0 (0x0, 0x0, 0x=
-ffff1fac)
-> > ip4_input: UDP packet to DHCP client port 138
-> > ip4_input: packet not for us.
->
-> That's weird. I think what could happen is the interface already has
-> a static IP assigned when it is registered to the lwIP stack and thus
-> DHCP never receives the packed because it is dropped before.
-> I have reworked the initialization code in v5, lwIP will get to know
-> only one interface at a time and I make sure that interface is registered
-> without an IP address when doing DHCP. Hopefully that should fix the issu=
-e.
->
-> Thanks for testing!
->
+Hi Simon,
 
-I tried your to-upstream/v5-wip branch
-(042bea36eb9731079a3d7afffe3774d79e06ac5d) and it behaves the same. Do
-you have something else to try/test?
+On Fri, 21 Jun 2024 at 10:58, Simon Glass <sjg@chromium.org> wrote:
 
-Best Regards,
+> Hi Ilias,
+>
+> On Wed, 19 Jun 2024 at 06:41, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Wed, Jun 12, 2024 at 02:24:31PM -0600, Simon Glass wrote:
+> > > Hi Ilias,
+> > >
+> > > On Wed, 12 Jun 2024 at 00:02, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > [...]
+> > > >
+> > > > > > > >> ---
+> > > > > > > >>
+> > > > > > > >>  lib/fdtdec.c | 12 ++++++++++--
+> > > > > > > >>  1 file changed, 10 insertions(+), 2 deletions(-)
+> > > > > > > >>
+> > > > > > > >> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> > > > > > > >> index b2c59ab3818..b141244e3b9 100644
+> > > > > > > >> --- a/lib/fdtdec.c
+> > > > > > > >> +++ b/lib/fdtdec.c
+> > > > > > > >> @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
+> > > > > > > >>  {
+> > > > > > > >>         int ret = -ENOENT;
+> > > > > > > >>
+> > > > > > > >> -       /* If allowing a bloblist, check that first */
+> > > > > > > >> -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
+> > > > > > > >> +       /*
+> > > > > > > >> +        * If allowing a bloblist, check that first. This
+> would be better
+> > > > > > > >> +        * handled with an OF_BLOBLIST Kconfig, but that
+> caused far too much
+> > > > > > > >> +        * argument, so add a hack here, used e.g. by
+> chromebook_coral
+> > > > > > > >
+> > > > > > > > I am a bit confused by this comment - It means you will not
+> use OF_BLOBLIST,
+> > > > > > > > but actually you are using it below. Is it a typo?
+> > > > > > >
+> > > > > > > Basically it would be cleaner to have a separate,
+> phase-specific
+> > > > > > > Kconfig control as to whether the DT can come from the
+> bloblist (I
+> > > > > > > can't remember the Kconfig name I suggested, nor the patch as
+> it was
+> > > > > > > last year sometime). But for now I am adding this hack to get
+> a few
+> > > > > > > boards working again.
+> > > > > >
+> > > > > > I am a bit confused.
+> > > > > > First of all the comment is innapropriate. We went through a
+> lengthy
+> > > > > > discussion on BLOBLIST/OF_BLOSLIST etc and,  even Tom chimed in
+> and we
+> > > > > > made up our minds. Why are you adding this comment now? Why do
+> code
+> > > > > > comments have to illustrate your personal opinion -- which was
+> > > > > > rejected?
+> > > > >
+> > > > > I'm sorry for the tone of the comment. I am not trying to offend
+> > > > > anyone here and I'm happy to change the language.
+> > > >
+> > > > Yes please a comment explaining why that piece of code is there is
+> far
+> > > > more intuitive.
+> > >
+> > > OK, once we have agreed the below I can do that.
+> > >
+> > > >
+> > > > >  As I probably
+> > > > > mentioned at the time, my accepted patch breaks my workflow and
+> > > > > several boards. I hope you can understand how frustrating that
+> sort of
+> > > > > thing can be.
+> > > >
+> > > > Yes, I do and I am fine with a short-term patch that fixes issues, as
+> > > > long as its not too intrusive. There is a very thin line between
+> quick
+> > > > and dirty fixes to spaghetti unreadable code. But we should have
+> > > > comments and/or commit messages indicating that this needs a proper
+> > > > fix
+> > >
+> > > I spent a lot of time explaining this last time.
+> > >
+> > > >
+> > > > > Also, now that I have my lab back up and running and I
+> > > > > would like these boards to work again on mainline!
+> > > > >
+> > > > > >
+> > > > > > Grepping for OF_BLOBLIST, I can't find any matches, so is the
+> above if a typo?
+> > > > >
+> > > > > Remember, it was a patch you rejected :-)
+> > > >
+> > > > I don't maintain any of that. I only gave some feedback along the
+> > > > lines of "bloblist was designed to be auto-discoverable, I don't see
+> > > > how adding an explicit Kconfig helps". IIRC we eventually followed
+> > > > what Tom suggested.
+> > >
+> > > I'm not trying to point the finger here. So far the boards are broken
+> > > in mainline...I'm just trying to fix that,
+> > >
+> > > >
+> > > > In any case, the amount of bike-shedding in the topic is too much. Do
+> > > > you mind explaining the problem in your workflow again? Perhaps we
+> can
+> > > > find a solution that is integrated in bloblist_maybe_init() instead
+> of
+> > > > injecting ifs on when a bloblist should or should not be searched for
+> > > > all over the place.
+> > >
+> > > TPL (or SPL) sets up a bloblist with bits of info in it, but no DT
+> > > (which is in memory-mapped SPI flash)
+> > > U-Boot proper starts up, it wants to get the bloblist but not hang if
+> > > the bloblist doesn't have a DT
+> >
+> > Sure, that's reasonable and IIRC that's the design we agreed a while
+> back.
+> > Looking at the code, if the DT isn't found in a bloblist and the feature
+> is
+> > enabled, we don't crash. We just print a debug message and continue to
+> find
+> > the DT as we used. Why do we have to skip the call to
+> > bloblist_maybe_init()?
+>
+> Because at this point, if there is no bloblist, then it needs to be
+> created. But creating it this early may fail, e.g. since there is no
+> malloc(). The intent of this code is to locate an FDT from an existing
+> bloblist. There is no point in creating a new bloblist here, since it
+> obviously won't have an FDT in it.
+>
+> Can we add a bool arg to bloblist_init for this?
+Eg. int bloblist_init(bool allow_malloc);
 
-Tim
+Regards,
+Raymond
