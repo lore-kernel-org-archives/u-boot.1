@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B5B6C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 13:15:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81209C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 13:15:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FFAF8855F;
-	Fri, 21 Jun 2024 15:14:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 946FD88577;
+	Fri, 21 Jun 2024 15:14:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BI3HiWQ6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eRGFOvDy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 292A888550; Fri, 21 Jun 2024 15:14:33 +0200 (CEST)
-Received: from mail-io1-xd44.google.com (mail-io1-xd44.google.com
- [IPv6:2607:f8b0:4864:20::d44])
+ id 8495288405; Fri, 21 Jun 2024 15:14:34 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7F0987073
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 15:14:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8543288405
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 15:14:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd44.google.com with SMTP id
- ca18e2360f4ac-7eb7c8f114eso76174439f.1
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 06:14:30 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7eec09cc7f6so75759939f.0
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 06:14:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718975669; x=1719580469; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718975670; x=1719580470; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2ATYadbv6Gh3psnUgQ3QOxAk0OgM02LjLYkK7bGyciI=;
- b=BI3HiWQ6mvUi4Tmb2wH+6R93X7M7knqZb2o/7yg9K/Hjd9/5HXAKssWL+dkWsBUByV
- IDnj7kHfS7qvSSw8jHmaeK9wZglEz9h+E9JQojoCBx1nhfZvv9CsKhrjJ4lcQnnyKxJs
- m6ag4fiiXyXsSzCPwmsmD3eBhp3+m8Tkni5uk=
+ bh=eIaUHtmxOCoDPB8Dr2EtcMBBfsP4hsti4aYZcgI3OQk=;
+ b=eRGFOvDy9pUDaigk/VJdiAKS6OMYJRqrXI6QEvFulRR3ZEkM/6pQtCVP66zP3GWW/W
+ YCGrVmt/oid7/B15fenyz3HkEZQIihNWM157rMKqhXet2lSuqHxxeYzEcsbRQrZwWuLQ
+ fgjD2HPt70msnKHoDdlxN+AHePXycn/dkTFnY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718975669; x=1719580469;
+ d=1e100.net; s=20230601; t=1718975670; x=1719580470;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2ATYadbv6Gh3psnUgQ3QOxAk0OgM02LjLYkK7bGyciI=;
- b=kCUOQrX/bROpDE2VGffvi8rO8MdtFlvleONHydX0nng+CtNtumW31L8UkSEETOhm9s
- 7Nq+41K4Af+LYk+jeK9fXo4LiELfXEYJxa4dx1BSrm2veKT2R7N0Ar5tH1/TvtjHqc29
- A1EUzkWwkpoL20vgVNcq+9BmFIW4jrII0KFCR27fJn86IHW5DVNBph3TVBq81IYrBLbB
- JwcqNO3mt9Qar0FsIKPKZN0heKnUCbt8czW1WSft+iKWfeslc72IOpy+kw+5wTghaJfY
- WVcq1SQ347FCjwHLFnc5jtkWpOQqK+vN1ngOXnTjN/Xmrkiv2vMH5eLgH/aaKkUqaIVF
- ri5Q==
-X-Gm-Message-State: AOJu0YzRLQS66cTr3vDghCRrKrlvWTSqw4RgJsovU47VC4qZNc61A5kO
- WosRoeXtx0fLbILZtJwx1paBxAQB1PTL4bGXXSYNpn2q5sQv4+kHOSkeTD7N+FVp/3s87Jiii38
- UcCvl
-X-Google-Smtp-Source: AGHT+IGB8tc1wNzCfVc7f8+kQxcyKLB6YaSGjkSg8FtRqjX8gbCNLBxN5AYXI+xLCq41iBYhiWo/Og==
-X-Received: by 2002:a05:6602:2c8a:b0:7eb:b025:648d with SMTP id
- ca18e2360f4ac-7f13ee469eamr1044227839f.10.1718975669373; 
- Fri, 21 Jun 2024 06:14:29 -0700 (PDT)
+ bh=eIaUHtmxOCoDPB8Dr2EtcMBBfsP4hsti4aYZcgI3OQk=;
+ b=vk3p9AJCiu5yB/rWWGJjE41gKlXpRzcfuO6WkvFtVbnJtmfZtuMwBe7ezxpSo08t7c
+ ABYBg2wmHL2ec5MVX6ZPZvoRQMX+B+5nmORK9tKbYnLxkj/aemrGNpJVYet4AW7zA9Et
+ Hw0NvqOsv9sftu/3ggFQj2I1qmIDNzPqLFfTSxQJlDIJ4MrxVAtcS8mBi45L/p6OwXuA
+ +zxBY+C13/8SaRAs5JzG2HZoS+c6u9DineKJxkIOOJuCSC0GIvG2MhVpPdqCpDDIifoV
+ OSLOTOgf0qWD7q8dNDRSoW8Iekj09Tm/sk3bgTCaZsgEKCKUU3hCqGqhXxMbtP9mJY47
+ GE+A==
+X-Gm-Message-State: AOJu0YxeHDyNNS7TEYySf2P3VbPoyH47ax1dbPXzLzOzASMKahp1FHFG
+ cvGr5kXHtrA64ED0k1unKhFrVmMmAvnrN+FVBXfXfVCJe+3qGI7z72qxtEoreKv1s/EXjI9Zgog
+ RBQ==
+X-Google-Smtp-Source: AGHT+IEZ9zSvxf1XnGz2Wu8RCS3RNJMRkS/RInzvWk3Ou8A/LwA6KiRn+TH1tpqSvgOaykusM7Dz3A==
+X-Received: by 2002:a05:6602:15c9:b0:7eb:906e:e3ee with SMTP id
+ ca18e2360f4ac-7f13ee5c07dmr971246439f.12.1718975670204; 
+ Fri, 21 Jun 2024 06:14:30 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4b9d12496fdsm346881173.163.2024.06.21.06.14.28
+ 8926c6da1cb9f-4b9d12496fdsm346881173.163.2024.06.21.06.14.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 06:14:28 -0700 (PDT)
+ Fri, 21 Jun 2024 06:14:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v2 4/6] buildman: Support building within a Python venv
-Date: Fri, 21 Jun 2024 07:14:20 -0600
-Message-Id: <20240621131423.2363294-5-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 5/6] u_boot_pylib: Use correct coverage tool within venv
+Date: Fri, 21 Jun 2024 07:14:21 -0600
+Message-Id: <20240621131423.2363294-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240621131423.2363294-1-sjg@chromium.org>
 References: <20240621131423.2363294-1-sjg@chromium.org>
@@ -91,216 +89,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Python virtualenv tool sets up a few things in the environment,
-putting its path first in the PATH environment variable and setting up
-a sys.prefix different from the sys.base_prefix value.
+When running within a Python venv we must use the 'coverage' tool (which
+is within the venv) so that the venv packages are used in preference to
+system packages. Otherwise the coverage tests run in a different
+environment from the normal tests and may fail due to missing packages.
 
-At present buildman puts the toolchain path first in PATH so that it can
-be found easily during the build. For sandbox this causes problems since
-/usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
-PATH variable. As a result, the venv is partially disabled.
-
-The result is that sandbox builds within a venv ignore the venv, e.g.
-when looking for packages.
-
-Correct this by detecting the venv and adding the toolchain path after
-the venv path.
+Handle this by detecting the venv and changing the tool name.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Fix 'envronment' typo
+(no changes since v1)
 
- tools/buildman/bsettings.py |  3 ++
- tools/buildman/test.py      | 83 +++++++++++++++++++++++++++++++++++++
- tools/buildman/toolchain.py | 31 ++++++++++++--
- 3 files changed, 113 insertions(+), 4 deletions(-)
+ tools/u_boot_pylib/test_util.py | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/tools/buildman/bsettings.py b/tools/buildman/bsettings.py
-index e225ac2ca0f..1be1d45e0fa 100644
---- a/tools/buildman/bsettings.py
-+++ b/tools/buildman/bsettings.py
-@@ -31,6 +31,9 @@ def setup(fname=''):
- def add_file(data):
-     settings.readfp(io.StringIO(data))
- 
-+def add_section(name):
-+    settings.add_section(name)
+diff --git a/tools/u_boot_pylib/test_util.py b/tools/u_boot_pylib/test_util.py
+index f18d385d995..857ce58c98c 100644
+--- a/tools/u_boot_pylib/test_util.py
++++ b/tools/u_boot_pylib/test_util.py
+@@ -60,12 +60,17 @@ def run_test_coverage(prog, filter_fname, exclude_list, build_dir, required=None
+     prefix = ''
+     if build_dir:
+         prefix = 'PYTHONPATH=$PYTHONPATH:%s/sandbox_spl/tools ' % build_dir
+-    cmd = ('%spython3-coverage run '
+-           '--omit "%s" %s %s %s %s' % (prefix, ','.join(glob_list),
 +
- def get_items(section):
-     """Get the items from a section of the config.
- 
-diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-index f92add7a7c5..83219182fe0 100644
---- a/tools/buildman/test.py
-+++ b/tools/buildman/test.py
-@@ -146,6 +146,7 @@ class TestBuild(unittest.TestCase):
-         self.toolchains.Add('arm-linux-gcc', test=False)
-         self.toolchains.Add('sparc-linux-gcc', test=False)
-         self.toolchains.Add('powerpc-linux-gcc', test=False)
-+        self.toolchains.Add('/path/to/aarch64-linux-gcc', test=False)
-         self.toolchains.Add('gcc', test=False)
- 
-         # Avoid sending any output
-@@ -747,6 +748,88 @@ class TestBuild(unittest.TestCase):
-         self.assertEqual([
-             ['MARY="mary"', 'Missing expected line: CONFIG_MARY="mary"']], result)
- 
-+    def call_make_environment(self, tchn, full_path, in_env=None):
-+        """Call Toolchain.MakeEnvironment() and process the result
++    # Detect a Python virtualenv and use 'coverage' instead
++    covtool = ('python3-coverage' if sys.prefix == sys.base_prefix else
++               'coverage')
 +
-+        Args:
-+            tchn (Toolchain): Toolchain to use
-+            full_path (bool): True to return the full path in CROSS_COMPILE
-+                rather than adding it to the PATH variable
-+            in_env (dict): Input environment to use, None to use current env
-+
-+        Returns:
-+            tuple:
-+                dict: Changes that MakeEnvironment has made to the environment
-+                    key: Environment variable that was changed
-+                    value: New value (for PATH this only includes components
-+                        which were added)
-+                str: Full value of the new PATH variable
-+        """
-+        env = tchn.MakeEnvironment(full_path, env=in_env)
-+
-+        # Get the original environment
-+        orig_env = dict(os.environb if in_env is None else in_env)
-+        orig_path = orig_env[b'PATH'].split(b':')
-+
-+        # Find new variables
-+        diff = dict((k, env[k]) for k in env if orig_env.get(k) != env[k])
-+
-+        # Find new / different path components
-+        diff_path = None
-+        new_path = None
-+        if b'PATH' in diff:
-+            new_path = diff[b'PATH'].split(b':')
-+            diff_paths = [p for p in new_path if p not in orig_path]
-+            diff_path = b':'.join(p for p in new_path if p not in orig_path)
-+            if diff_path:
-+                diff[b'PATH'] = diff_path
-+            else:
-+                del diff[b'PATH']
-+        return diff, new_path
-+
-+    def test_toolchain_env(self):
-+        """Test PATH and other environment settings for toolchains"""
-+        # Use a toolchain which has a path, so that full_path makes a difference
-+        tchn = self.toolchains.Select('aarch64')
-+
-+        # Normal cases
-+        diff = self.call_make_environment(tchn, full_path=False)[0]
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-+             b'PATH': b'/path/to'}, diff)
-+
-+        diff = self.call_make_environment(tchn, full_path=True)[0]
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'/path/to/aarch64-linux-', b'LC_ALL': b'C'},
-+            diff)
-+
-+        # When overriding the toolchain, only LC_ALL should be set
-+        tchn.override_toolchain = True
-+        diff = self.call_make_environment(tchn, full_path=True)[0]
-+        self.assertEqual({b'LC_ALL': b'C'}, diff)
-+
-+        # Test that virtualenv is handled correctly
-+        tchn.override_toolchain = False
-+        sys.prefix = '/some/venv'
-+        env = dict(os.environb)
-+        env[b'PATH'] = b'/some/venv/bin:other/things'
-+        tchn.path = '/my/path'
-+        diff, diff_path = self.call_make_environment(tchn, False, env)
-+
-+        self.assertIn(b'PATH', diff)
-+        self.assertEqual([b'/some/venv/bin', b'/my/path', b'other/things'],
-+                         diff_path)
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-+             b'PATH': b'/my/path'}, diff)
-+
-+        # Handle a toolchain wrapper
-+        tchn.path = ''
-+        bsettings.add_section('toolchain-wrapper')
-+        bsettings.set_item('toolchain-wrapper', 'my-wrapper', 'fred')
-+        diff = self.call_make_environment(tchn, full_path=True)[0]
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'fred aarch64-linux-', b'LC_ALL': b'C'}, diff)
- 
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
-index 324ad0e0821..6ca79c2c0f9 100644
---- a/tools/buildman/toolchain.py
-+++ b/tools/buildman/toolchain.py
-@@ -172,13 +172,14 @@ class Toolchain:
-         else:
-             raise ValueError('Unknown arg to GetEnvArgs (%d)' % which)
- 
--    def MakeEnvironment(self, full_path):
-+    def MakeEnvironment(self, full_path, env=None):
-         """Returns an environment for using the toolchain.
- 
-         This takes the current environment and adds CROSS_COMPILE so that
-         the tool chain will operate correctly. This also disables localized
-         output and possibly Unicode encoded output of all build tools by
--        adding LC_ALL=C.
-+        adding LC_ALL=C. For the case where full_path is False, it prepends
-+        the toolchain to PATH
- 
-         Note that os.environb is used to obtain the environment, since in some
-         cases the environment many contain non-ASCII characters and we see
-@@ -187,15 +188,21 @@ class Toolchain:
-           UnicodeEncodeError: 'utf-8' codec can't encode characters in position
-              569-570: surrogates not allowed
- 
-+        When running inside a Python venv, care is taken not to put the
-+        toolchain path before the venv path, so that builds initiated by
-+        buildman will still respect the venv.
-+
-         Args:
-             full_path: Return the full path in CROSS_COMPILE and don't set
-                 PATH
-+            env (dict of bytes): Original environment, used for testing
-         Returns:
-             Dict containing the (bytes) environment to use. This is based on the
-             current environment, with changes as needed to CROSS_COMPILE, PATH
-             and LC_ALL.
-         """
--        env = dict(os.environb)
-+        env = dict(env or os.environb)
-+
-         wrapper = self.GetWrapper()
- 
-         if self.override_toolchain:
-@@ -206,7 +213,23 @@ class Toolchain:
-                 wrapper + os.path.join(self.path, self.cross))
-         else:
-             env[b'CROSS_COMPILE'] = tools.to_bytes(wrapper + self.cross)
--            env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
-+
-+            # Detect a Python virtualenv and avoid defeating it
-+            if sys.prefix != sys.base_prefix:
-+                paths = env[b'PATH'].split(b':')
-+                new_paths = []
-+                to_insert = tools.to_bytes(self.path)
-+                insert_after = tools.to_bytes(sys.prefix)
-+                for path in paths:
-+                    new_paths.append(path)
-+                    if to_insert and path.startswith(insert_after):
-+                        new_paths.append(to_insert)
-+                        to_insert = None
-+                if to_insert:
-+                    new_paths.append(to_insert)
-+                env[b'PATH'] = b':'.join(new_paths)
-+            else:
-+                env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
- 
-         env[b'LC_ALL'] = b'C'
- 
++    cmd = ('%s%s run '
++           '--omit "%s" %s %s %s %s' % (prefix, covtool, ','.join(glob_list),
+                                         prog, extra_args or '', test_cmd,
+                                         single_thread or '-P1'))
+     os.system(cmd)
+-    stdout = command.output('python3-coverage', 'report')
++    stdout = command.output(covtool, 'report')
+     lines = stdout.splitlines()
+     if required:
+         # Convert '/path/to/name.py' just the module name 'name'
 -- 
 2.34.1
 
