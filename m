@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8845AC2BA1A
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 05:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A00C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 05:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B0A88093;
-	Fri, 21 Jun 2024 07:49:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AAB1687FF7;
+	Fri, 21 Jun 2024 07:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CBeOkoIa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nhCzrNDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CB7887FF7; Fri, 21 Jun 2024 07:49:06 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id BBB1688093; Fri, 21 Jun 2024 07:51:20 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2761882AD
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:49:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75B0E87FBC
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:51:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-70635466708so1586606b3a.1
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:49:03 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2c7da220252so1374905a91.1
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:51:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718948942; x=1719553742; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718949077; x=1719553877; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=euDJDaTFyQFq13+6sJFdOh6anT+XbrRARCTcp+3aXkc=;
- b=CBeOkoIazrw3IJCZEl8DDm10ZIUypCSzBBjg0qzdXaIgtAy4ewuOy0rnqjqog3Itn4
- xaDqARwUawFQ6Qsp9QByR66iUb2sxKv+YQGM/qDFcz4wEm0n6gVzlT6Bg5579mcRRaOS
- e+cNHO0pDJjGI1vbwcm7yqX0rzB9hJcoxeALrcdr4DgBI0W2XZmSti9VBBhPQQr4Jlch
- aJEq8+c0cT17teQoWev94arHwIpauiMwnFqekXuPc6+/traLgdJitlyFn+UKr4yWz7pR
- RoNnclcxbogYHAWGe8JIt3cLKJqan35jdPg2o3yzGdk3V6v3mrRL9Xf9fk5OJ7m0Oavu
- dE6Q==
+ bh=C46k3CvHvnciE+CXQXC7azc+6l/2m9A+ACn+crFmDvM=;
+ b=nhCzrNDSBdV7XPoP7oAgpRbYSKSBW83Q54XhpOIldWmiFNNvRGDELb2XFsAUxrRK4P
+ 26T1sewBcxuYQNqDTD7eH+5xkbj2fL3HhvqDxGGc+xXDlBcEi6a5t7ojQFEz980CF0+q
+ fdaiM2UFlkP5n4Jl5S7SDLWnQQ3aE1paUpIAX+897w8y3xJpM2GORF+u2DvVmuwtEI7T
+ 9PxwpB2TqZSjIr5wrOPVtxRt077Y9DtOH/HFvi7D+Mtb/NDXEg0EsGRi5A2KRhyEptjp
+ 6jzIiz1In70VI0xEYibZFWhdUKTXMNPG8oTJAKgiUEZ8HziGCdUBpzVPhPoe5xWah9j0
+ 7suA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718948942; x=1719553742;
+ d=1e100.net; s=20230601; t=1718949077; x=1719553877;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=euDJDaTFyQFq13+6sJFdOh6anT+XbrRARCTcp+3aXkc=;
- b=AltqHrkh5brHitKVYdP2ZdLlwGKr83oI40k6joYN7Z8Q8U5wcPs6M1RAVBQi4AAQR8
- C55KwscJkHqDkr7eSYOVPI0a/WrrkUh177OH9saOsEzejyHHkiJhYU3q6pFXV6EDwH71
- +Sob5wfOpwzm/YCYH68sAiJ62OmP9zgia1hTYVIons/8G9SB/zbHT2dz5ZtIrHDB97n9
- V56aAMVnRXqJ1AjQ9oKPz7gCfBFYxXNZgMn9J7/TacbQ1rw06PNR+uED7NKsi+agTAYT
- vGPzsMyFEX1j3jLIhbm3Q55za7xCpfSTRKtxmPhxvjMF0IDoxPptxfmCMURcMc1imsBt
- uaqA==
-X-Gm-Message-State: AOJu0Yx6RfBamKdV2lPUg0KVDy6NkWxwSeGT8aybK1cMjstLyEsPATEJ
- oBRUnxM3vdcyLpmsax0aIVzeWBGYjvzAjmeg7rPkw614FkZ4+K92QqM8WDcMJrvh+Qm43Mbi0EU
- NqquVXqICozWjCKFLnNxdyEw8Ig20+cwvZvPxEw==
-X-Google-Smtp-Source: AGHT+IHCLiqGCISeZMT01rGEM/71e4++vS86rOi0LLfce9ZLQANut7Sh9KQhpbTLD/0ggAMA3C5qvZWpX0QNo5gA5Y8=
-X-Received: by 2002:a05:6a21:9989:b0:1b8:807a:49c2 with SMTP id
- adf61e73a8af0-1bcbb655bd0mr9587908637.50.1718948942206; Thu, 20 Jun 2024
- 22:49:02 -0700 (PDT)
+ bh=C46k3CvHvnciE+CXQXC7azc+6l/2m9A+ACn+crFmDvM=;
+ b=Qvvciz4rLe2eVJQtG2iw5ThHHR4L4H0DHXP4Qee/L2xEIdsNr+RN/V151lUbKvfr8E
+ hEiIZLZcCY7rk4t2qChnkfuO5NkSWaG/B3+0b0Y0YngzQua0wtwcEhHRgAyUeQrnNqUr
+ 3I8eJ5MRewiaXSL/u14ZKYJfDu5Ow2QWuzIUGEqpYh8fr42xkIDqD9Cq6NTs57WZTHlX
+ FyH0Jw2Mbc+1d9Exnbe7ho3gRycUWHDnQERGLdU6UdovFQpTLTIXfU/6XCEkQg5zMSTo
+ OEflTmV9g3LdTMuJ/pq5+amyZDNEKSy56T3apZGHKVe8VEPwTp5a8gD6RzerxNxH5Rn8
+ 2Lug==
+X-Gm-Message-State: AOJu0YyeZeIzJx8w87DKFi7b/fETHQw8vzne1ZE+K9Sd9mnrSz0hZvm1
+ KMXNj7xIMw14aBdkj5hScMrmT+BwnvUgml6CUTSmkfvEZHkDU1MOXBgA5yestjkzZVhNHx+DxKW
+ e6AmLjW8AMgwV2GSGmtb6qHbBrCFtioHfF362cw==
+X-Google-Smtp-Source: AGHT+IE469CQPHV42AOxdmNs/usTlO7pqya4fJDyJBTvK2E6GthMOYhK/hKh9OpBiSCryjjaxm3mg6S5o4hPLigdSdY=
+X-Received: by 2002:a17:90a:e643:b0:2c7:b194:6881 with SMTP id
+ 98e67ed59e1d1-2c7b5d56bc9mr8082462a91.31.1718949076778; Thu, 20 Jun 2024
+ 22:51:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240620230625.1797397-1-sjg@chromium.org>
- <20240620230625.1797397-11-sjg@chromium.org>
- <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
+ <20240620230625.1797397-4-sjg@chromium.org>
+In-Reply-To: <20240620230625.1797397-4-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 21 Jun 2024 08:48:26 +0300
-Message-ID: <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
-Subject: Re: [PATCH v3 10/18] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
+Date: Fri, 21 Jun 2024 08:50:40 +0300
+Message-ID: <CAC_iWjKxfLSHdyWMbZ6sYB52=TPXB79=qSJMbhAdS=mPdwCVmw@mail.gmail.com>
+Subject: Re: [PATCH v3 03/18] mkeficapsule: Add a --version argument
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Sean Anderson <sean.anderson@seco.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,40 +88,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Jun 2024 at 08:32, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Simon,
+> Tools should have an option to obtain the version, so add this to the
+> mkeficapsule tool.
 >
-> On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > It does not make sense to enable all SHA algorithms unless they are
-> > needed. It bloats the code and in this case, causes chromebook_link to
-> > fail to build. That board does use the TPM, but not with measured boot,
-> > nor EFI.
-> >
-> > Since EFI_TCG2_PROTOCOL already selects these options, we just need to
-> > add them to MEASURED_BOOT as well.
-> >
-> > Note that the original commit combines refactoring and new features,
-> > which makes it hard to see what is going on.
-> >
-> > Fixes: 97707f12fda tpm: Support boot measurements
-> > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v2)
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> There was a discussion in the previous version, bout enabling these on
-> CMD_TPM as they are required.
+> (no changes since v1)
+>
+>  doc/mkeficapsule.1   | 4 ++++
+>  tools/mkeficapsule.c | 8 +++++++-
+>  2 files changed, 11 insertions(+), 1 deletion(-)
+>
+> diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
+> index c4c2057d5c7..c3d0f21488a 100644
+> --- a/doc/mkeficapsule.1
+> +++ b/doc/mkeficapsule.1
+> @@ -87,6 +87,10 @@ Generate a firmware revert empty capsule
+>  .BI "-o\fR,\fB --capoemflag "
+>  Capsule OEM flag, value between 0x0000 to 0xffff
+>
+> +.TP
+> +.BR -V ", " --version
+> +Print version information and exit.
+> +
+>  .TP
+>  .BR -h ", " --help
+>  Print a help message
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index 6a261ff549d..c112ae2de8d 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -21,6 +21,8 @@
+>  #include <gnutls/pkcs7.h>
+>  #include <gnutls/abstract.h>
+>
+> +#include <version.h>
+> +
+>  #include "eficapsule.h"
+>
+>  static const char *tool_name = "mkeficapsule";
+> @@ -28,7 +30,7 @@ static const char *tool_name = "mkeficapsule";
+>  efi_guid_t efi_guid_fm_capsule = EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
+>  efi_guid_t efi_guid_cert_type_pkcs7 = EFI_CERT_TYPE_PKCS7_GUID;
+>
+> -static const char *opts_short = "g:i:I:v:p:c:m:o:dhARD";
+> +static const char *opts_short = "g:i:I:v:p:c:m:o:dhARDV";
+>
+>  enum {
+>         CAPSULE_NORMAL_BLOB = 0,
+> @@ -70,6 +72,7 @@ static void print_usage(void)
+>                 "\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
+>                 "\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
+>                 "\t-D, --dump-capsule          dump the contents of the capsule headers\n"
+> +               "\t-V, --version               show version number\n"
+>                 "\t-h, --help                  print a help message\n",
+>                 tool_name);
+>  }
+> @@ -969,6 +972,9 @@ int main(int argc, char **argv)
+>                 case 'D':
+>                         capsule_dump = true;
+>                         break;
+> +               case 'V':
+> +                       printf("mkeficapsule version %s\n", PLAIN_VERSION);
+> +                       exit(EXIT_SUCCESS);
+>                 default:
+>                         print_usage();
+>                         exit(EXIT_SUCCESS);
+> --
+> 2.34.1
+>
 
-Or switch this to an imply instead so you can disable it ?
-
-Regards
-/Ilias
->
-> Thanks
-> /Ilias
-> >
->
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
