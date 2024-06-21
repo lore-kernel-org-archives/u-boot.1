@@ -4,69 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15557C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 09:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9595C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 09:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BB54881B8;
-	Fri, 21 Jun 2024 11:45:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 03664880AE;
+	Fri, 21 Jun 2024 11:46:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Yd4pcbmu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T6eHDDo3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB82D8840F; Fri, 21 Jun 2024 11:45:47 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A125F884B2; Fri, 21 Jun 2024 11:46:19 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E1D788385
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:45:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0DDF88013
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:46:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45L9jhrx129175;
- Fri, 21 Jun 2024 04:45:43 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718963143;
- bh=UBKRM6hFeogRi8yQ/52rAfjz3d7us7S5vUbrvaSlrIw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Yd4pcbmuVhrrAwRFhfktV74R9fOpM3cBIKoCfLIpYQ09vkAOTRdmNh/P4VD6UljU2
- vXGfi2gXtXdQVC8RxPrQWbLCm40XSnvmWIdYt7+uc5UbVUim5kKSRnmCcFrB5FMvod
- AV8Jt00lYID3A+8fOUdUmmI7Kp3R1Mlva1A1ubyQ=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45L9jheq002122
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 21 Jun 2024 04:45:43 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Jun 2024 04:45:42 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Jun 2024 04:45:42 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45L9jgp8120454;
- Fri, 21 Jun 2024 04:45:42 -0500
-Date: Fri, 21 Jun 2024 04:45:42 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Dhruva Gole <d-gole@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, Nishant Menon <nm@ti.com>,
- <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>
-Subject: Re: [PATCH v2] arm: dts: k3-am625-beagleplay: Package TIFS Stub
-Message-ID: <20240621094542.e4dqved53z53q7an@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240618045610.271884-1-d-gole@ti.com>
- <20240619214448.saaw6w2iueolb6vd@bryanbrattlof.com>
- <20240621050802.45nrhsbrtr7ciaqh@dhruva>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robimarko@gmail.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-42179dafd6bso17630795e9.0
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 02:46:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718963177; x=1719567977; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hhoJKgY7shKcy5YRKXGm5QRZcpFiWezUbDb7uQGDpUw=;
+ b=T6eHDDo3G/c9cqIqqieZeMyZSCpgOOLlPwW25LyGwpkv/jX9lJiIXg3lMtPoi4o53S
+ ZXU5AHK/9pVDh4XWU7LocglpTp8Du0vEcRVKIyke7bOW2KLg8I6+5edjnU63bB51xOW/
+ umK62Nd8P2zqRmnw+s6OU/Ccxeo6ZgNQuomm7LqxKP57V9cFr8g9YCj1OXwTOMKYLNEm
+ lYKEpeuzB6isJIoaHPPvvQmJNc6l6dg6Uu8ZrQxRiJSqPh7hJuGJFx2H3xQ3FTtbicWd
+ jCCxzADVargH+SjjmDFtBNg8D0WlBFnA7n6cz020cY3gWMcRBLEgQW2wPgWK40IzExm4
+ KfTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718963177; x=1719567977;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hhoJKgY7shKcy5YRKXGm5QRZcpFiWezUbDb7uQGDpUw=;
+ b=srpt1xhGunqFPs26Wd8PIPLQemN/QFEJoMXdKrrvC/M7Fv5lLJIL6iGhyo4KoNxve6
+ BJ9tRq8bZY4b7qYKFHVA2XpVCrG59xXQ4h0xlj7hVkjzPWRpg2TGuWAT76kb8JV8NZl3
+ 2TeEJv9Q1IQRlid2WOAIOSODuv4yLLS32NEyhKClJjHbn1fEqHMzEGcVXC1bliLHeZ1u
+ 4YUUhBC9b+oqeIKsGHQs03tPjgtL/D92anTizbX9PfKWyA74eewvIXj+UgWkQct87RQa
+ 1bYfTrpN8MCIHg4FDkbpveLIFBTmyVC1VGeBTv4cRgYuhfhXtLnNmPE4SYikmAypMPml
+ xmpw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVK16a7jWrHEacap53OYaHPyrJVwyTbyt1jn2rT+UL9+PAY31wFntrlKs6UoTGfsS1uk4YiqWId85A2o+j+JzwoY48kUQ==
+X-Gm-Message-State: AOJu0YxpHlRQSupuRCdTYratjRt8WSgEL/v+jm7LGS/352ZziLyt57yM
+ tPRkfM2ck3wkYRhPtjXfoCOPRYhgnt2FCeK4Hf8eQ7Y3q8iwiIX8
+X-Google-Smtp-Source: AGHT+IGxCsEKq6mhGUTYlPbIvyOmx7HJgqFGbGP3+5qBjg00+0Vs9Tjyq5k4sX2wOSU9lzHe2l9PYQ==
+X-Received: by 2002:a05:600c:35cb:b0:422:1def:e1ac with SMTP id
+ 5b1f17b1804b1-4246f5dbe8dmr89847875e9.20.1718963176887; 
+ Fri, 21 Jun 2024 02:46:16 -0700 (PDT)
+Received: from fedora.. (d-zg2-226.globalnet.hr. [213.149.37.226])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-366389b8ad2sm1222084f8f.33.2024.06.21.02.46.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Jun 2024 02:46:16 -0700 (PDT)
+From: Robert Marko <robimarko@gmail.com>
+To: sr@denx.de,
+	trini@konsulko.com,
+	u-boot@lists.denx.de
+Cc: Robert Marko <robimarko@gmail.com>
+Subject: [PATCH] mvebu: armada-8k: respect CONFIG_DISTRO_DEFAULTS
+Date: Fri, 21 Jun 2024 11:46:02 +0200
+Message-ID: <20240621094613.1438806-1-robimarko@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20240621050802.45nrhsbrtr7ciaqh@dhruva>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,104 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On June 21, 2024 thus sayeth Dhruva Gole:
-> Bryan,
-> 
-> On Jun 19, 2024 at 16:44:48 -0500, Bryan Brattlof wrote:
-> > On June 18, 2024 thus sayeth Dhruva Gole:
-> > > Add support for packaging the TIFS Stub as it's required for basic Low
-> > > Power Modes like Deep Sleep.
-> > > 
-> > > Acked-by: Neha Malcom Francis <n-francis@ti.com>
-> > > Signed-off-by: Dhruva Gole <d-gole@ti.com>
-> > > ---
-> > > 
-> > > No changes from v1, just picked Neha's ack and rebased on master again.
-> > > Link to v1:
-> > > https://lore.kernel.org/u-boot/20240612062351.3690091-1-d-gole@ti.com/
-> > > 
-> > >  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 33 +++++++++++++++++++-
-> > >  1 file changed, 32 insertions(+), 1 deletion(-)
-> > > 
-> > > diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> > > index fb2032068d1c..5e2248a4a668 100644
-> > > --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> > > +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> > > @@ -69,6 +69,23 @@
-> > >  		};
-> > >  	};
-> > >  
-> > > +	tifsstub-gp {
-> > > +		filename = "tifsstub.bin_gp";
-> > > +		ti-secure-rom {
-> > > +			content = <&tifsstub_gp>;
-> > > +			core = "secure";
-> > > +			load = <0x60000>;
-> > > +			sw-rev = <CONFIG_K3_X509_SWRV>;
-> > > +			keyfile = "ti-degenerate-key.pem";
-> > > +			tifsstub;
-> > > +		};
-> > > +		tifsstub_gp: tifsstub-gp.bin {
-> > > +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
-> > > +			type = "blob-ext";
-> > > +			optional;
-> > > +		};
-> > > +	};
-> > > +
-> > >  	ti-spl_unsigned {
-> > >  		filename = "tispl.bin_unsigned";
-> > >  		pad-byte = <0xff>;
-> > > @@ -105,6 +122,19 @@
-> > >  					};
-> > >  				};
-> > >  
-> > > +				tifsstub-gp {
-> > > +					description = "tifsstub";
-> > > +					type = "firmware";
-> > > +					arch = "arm32";
-> > > +					compression = "none";
-> > > +					os = "tifsstub-gp";
-> > > +					load = <0x9dc00000>;
-> > > +					entry = <0x9dc00000>;
-> > 
-> > Is this stub position independent? Or is this address compiled in at 
-> > build time? We have some variants of 62x that don't have these addresses 
-> > backed by DRAM.
-> 
-> The stub is not position independent and is indeed fixed at build time.
-> Can you talk more about these am62x variants that don't have the address
-> backed by DRAM? What would be the suggested address range in those
-> cases?
-> 
+Currently, Armada 8k config header is setting boot devices and including
+<config_distro_bootcmd.h> regardless of the CONFIG_DISTRO_DEFAULTS being
+enabled or not, thus populating the environment for distro boot even on
+devices that have no need for it.
 
-We've always had a 'soft' limit of 512MB so you're correct this isn't an 
-issue today and I haven't seen any 'u-boot shall support' language 
-internally however there have been a few questions about minimum DDR 
-capacities we can support. Some have asked about 256MB.
+So, lets simply respect the value of CONFIG_DISTRO_DEFAULTS.
 
-(This 512MB 'soft' limit is most likely why this stub and OP-TEE is 
-where it is today)
+Signed-off-by: Robert Marko <robimarko@gmail.com>
+---
+ include/configs/mvebu_armada-8k.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
->
-> For BeaglePlay atleast I don't see an issue. So I don't think we'd have
-> issues with this patch in particular?
->
+diff --git a/include/configs/mvebu_armada-8k.h b/include/configs/mvebu_armada-8k.h
+index 239a09763a..6fedbe9ee3 100644
+--- a/include/configs/mvebu_armada-8k.h
++++ b/include/configs/mvebu_armada-8k.h
+@@ -30,7 +30,7 @@
+ /*
+  * PCI configuration
+  */
+-
++#ifdef CONFIG_DISTRO_DEFAULTS
+ #define BOOT_TARGET_DEVICES(func) \
+ 	func(MMC, mmc, 1) \
+ 	func(MMC, mmc, 0) \
+@@ -40,6 +40,9 @@
+ 	func(DHCP, dhcp, na)
+ 
+ #include <config_distro_bootcmd.h>
++#else
++#define BOOTENV
++#endif
+ 
+ #define CFG_EXTRA_ENV_SETTINGS	\
+ 	"scriptaddr=0x6d00000\0"	\
+-- 
+2.45.2
 
-No you're correct however knowing that this address location is compiled 
-into other firmware means we would need to have separate firmware builds 
-if we wanted this stub in another location and it's awkwardly in the 
-middle of DRAM and not at the bottom like I would prefer. 
-
-So while yes this is a board/ level decision because it's also dealing 
-with mach-k3/ level firmware this is an unfortunate thing we're 
-hard-coding. This is essentially hard-coding a 512MB minimum limit for 
-the entire AM62x SoC family.
-
-My question was trying to determine if we should/could add this address 
-to Kconfig so we can pass in the address to tispl.bin here and somehow 
-get this into board-cfg.yaml. (This will be some work for us)
-
-All of that to say, I'm okay with this change however I wish there was a 
-'there be dragons' trailer I could add to this
-
-~Bryan
