@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A00C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 05:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD6B5C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 06:14:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAB1687FF7;
-	Fri, 21 Jun 2024 07:51:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0ED7A880F1;
+	Fri, 21 Jun 2024 08:14:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nhCzrNDS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XMXTzrBL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBB1688093; Fri, 21 Jun 2024 07:51:20 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id E3D8D88149; Fri, 21 Jun 2024 08:14:14 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75B0E87FBC
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:51:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1B7E88047
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 08:14:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2c7da220252so1374905a91.1
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:51:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-57d15b85a34so1831268a12.3
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 23:14:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718949077; x=1719553877; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718950452; x=1719555252; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=C46k3CvHvnciE+CXQXC7azc+6l/2m9A+ACn+crFmDvM=;
- b=nhCzrNDSBdV7XPoP7oAgpRbYSKSBW83Q54XhpOIldWmiFNNvRGDELb2XFsAUxrRK4P
- 26T1sewBcxuYQNqDTD7eH+5xkbj2fL3HhvqDxGGc+xXDlBcEi6a5t7ojQFEz980CF0+q
- fdaiM2UFlkP5n4Jl5S7SDLWnQQ3aE1paUpIAX+897w8y3xJpM2GORF+u2DvVmuwtEI7T
- 9PxwpB2TqZSjIr5wrOPVtxRt077Y9DtOH/HFvi7D+Mtb/NDXEg0EsGRi5A2KRhyEptjp
- 6jzIiz1In70VI0xEYibZFWhdUKTXMNPG8oTJAKgiUEZ8HziGCdUBpzVPhPoe5xWah9j0
- 7suA==
+ bh=Evu+sjgyFMCs5driTT6kHQFXvr9DwwMg/9znAHogQCI=;
+ b=XMXTzrBLmBIgNP4KNCJ57sxuNODVN2HWJRwOh9RM/0UEQhqYgkozy7bLrU5/4ocb16
+ 6pWKgAvnlym0NEVeKAnQANsLBxkfC8ooU3lnvWvE83kSUk3e4R0YOa+ryL4WKZvylRgZ
+ NcC/zybDxHfbdBd3OEt6hpskLh9bDwdcly0C3U1T9ECoYuNBZxmuNypnf2Z9PNZDhPbE
+ wr2KPCWe2+vv+U4So7TTHcz9TC6I3XX2TpbkSJrJaZsSPWP0D5WqMLOEsgXMe7HFR8uP
+ jUD97PTZJkS0xbn5R8cVK/x9x7IoteDXQJ7FD4bALXE5wg4JQlVOgb7hmRh+ZguZR3QV
+ RUlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718949077; x=1719553877;
+ d=1e100.net; s=20230601; t=1718950452; x=1719555252;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=C46k3CvHvnciE+CXQXC7azc+6l/2m9A+ACn+crFmDvM=;
- b=Qvvciz4rLe2eVJQtG2iw5ThHHR4L4H0DHXP4Qee/L2xEIdsNr+RN/V151lUbKvfr8E
- hEiIZLZcCY7rk4t2qChnkfuO5NkSWaG/B3+0b0Y0YngzQua0wtwcEhHRgAyUeQrnNqUr
- 3I8eJ5MRewiaXSL/u14ZKYJfDu5Ow2QWuzIUGEqpYh8fr42xkIDqD9Cq6NTs57WZTHlX
- FyH0Jw2Mbc+1d9Exnbe7ho3gRycUWHDnQERGLdU6UdovFQpTLTIXfU/6XCEkQg5zMSTo
- OEflTmV9g3LdTMuJ/pq5+amyZDNEKSy56T3apZGHKVe8VEPwTp5a8gD6RzerxNxH5Rn8
- 2Lug==
-X-Gm-Message-State: AOJu0YyeZeIzJx8w87DKFi7b/fETHQw8vzne1ZE+K9Sd9mnrSz0hZvm1
- KMXNj7xIMw14aBdkj5hScMrmT+BwnvUgml6CUTSmkfvEZHkDU1MOXBgA5yestjkzZVhNHx+DxKW
- e6AmLjW8AMgwV2GSGmtb6qHbBrCFtioHfF362cw==
-X-Google-Smtp-Source: AGHT+IE469CQPHV42AOxdmNs/usTlO7pqya4fJDyJBTvK2E6GthMOYhK/hKh9OpBiSCryjjaxm3mg6S5o4hPLigdSdY=
-X-Received: by 2002:a17:90a:e643:b0:2c7:b194:6881 with SMTP id
- 98e67ed59e1d1-2c7b5d56bc9mr8082462a91.31.1718949076778; Thu, 20 Jun 2024
- 22:51:16 -0700 (PDT)
+ bh=Evu+sjgyFMCs5driTT6kHQFXvr9DwwMg/9znAHogQCI=;
+ b=d6OGST4MQy2EuG/Bc+vvGqDJUlmfsF18+KeSyeePrh2Ls4mUZ0u0BkY16wt+FpTjk0
+ EdaA0FQJzsulQdlGHeRUPqKBNYM7ovA/xJYTD0IR13iWhZevJOzkSPsmT2dbXKzsjik8
+ goOOSYP0E2zHlK9fHAKOkz3hGlqJINltO0ZmXkXXYQdfYry728+hbbs+TP1SXtPnwD3n
+ 3K34u2uRHq5B8hzlg/ejEU/3dlAbpxgo5ezF46MnJEjRXVjIXXbnATnuj/hiN++x3Z4v
+ RYlibrl83Tu8DNTv9dB55tSXjh4UR7u9HzKWitcdH/soBrbFMskhnkroejTWydP+6zAs
+ JH0A==
+X-Gm-Message-State: AOJu0YyO3IkFbn87HimFk7W9N8pQZaS0Re3rxyFGKZ7HDcqXMurfYn4f
+ aCrurMcN+0XdjysJ4oiKg4VuAkAV+U7+7p7oW3H8H50v1wX2oPNtyih3mXzWo7hO77cWmJv1RrE
+ JyrV0Q2Zlk3feO6cJYdHiaj9ogdQZRjWarcwImw==
+X-Google-Smtp-Source: AGHT+IGnRWU+JZCfW4ZGoGcLncahMb/DeyZopZJH6EGiG72FV2NpRpjrOVhmkfXbpCgPyyUPjuMZJnHaJrxp0eRYg+8=
+X-Received: by 2002:a50:a69c:0:b0:57d:10be:6100 with SMTP id
+ 4fb4d7f45d1cf-57d10be6193mr3945896a12.29.1718950452302; Thu, 20 Jun 2024
+ 23:14:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240620230625.1797397-1-sjg@chromium.org>
- <20240620230625.1797397-4-sjg@chromium.org>
-In-Reply-To: <20240620230625.1797397-4-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 21 Jun 2024 08:50:40 +0300
-Message-ID: <CAC_iWjKxfLSHdyWMbZ6sYB52=TPXB79=qSJMbhAdS=mPdwCVmw@mail.gmail.com>
-Subject: Re: [PATCH v3 03/18] mkeficapsule: Add a --version argument
+ <20240620230625.1797397-8-sjg@chromium.org>
+In-Reply-To: <20240620230625.1797397-8-sjg@chromium.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 21 Jun 2024 11:44:01 +0530
+Message-ID: <CADg8p96c=xd6=6d1fijNFBwzXMszRnvo7J-qm-7co1panamP2w@mail.gmail.com>
+Subject: Re: [PATCH v3 07/18] binman: Keep the efi_capsule input file
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,77 +90,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
+On Fri, 21 Jun 2024 at 04:36, Simon Glass <sjg@chromium.org> wrote:
 >
-> Tools should have an option to obtain the version, so add this to the
-> mkeficapsule tool.
+> There is no need to remove input files. It makes it harder to diagnose
+> failures. Keep the payload file.
+>
+> There is no test for this condition, but one could be added.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: b617611b27a ("binman: capsule: Add support for generating...")
 > ---
+
+Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+
+Although I don't think this warrants a Fixes tag. It is not fixing any
+issue as such.
+
+-sughosh
+
 >
 > (no changes since v1)
 >
->  doc/mkeficapsule.1   | 4 ++++
->  tools/mkeficapsule.c | 8 +++++++-
->  2 files changed, 11 insertions(+), 1 deletion(-)
+>  tools/binman/etype/efi_capsule.py | 1 -
+>  1 file changed, 1 deletion(-)
 >
-> diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
-> index c4c2057d5c7..c3d0f21488a 100644
-> --- a/doc/mkeficapsule.1
-> +++ b/doc/mkeficapsule.1
-> @@ -87,6 +87,10 @@ Generate a firmware revert empty capsule
->  .BI "-o\fR,\fB --capoemflag "
->  Capsule OEM flag, value between 0x0000 to 0xffff
->
-> +.TP
-> +.BR -V ", " --version
-> +Print version information and exit.
-> +
->  .TP
->  .BR -h ", " --help
->  Print a help message
-> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-> index 6a261ff549d..c112ae2de8d 100644
-> --- a/tools/mkeficapsule.c
-> +++ b/tools/mkeficapsule.c
-> @@ -21,6 +21,8 @@
->  #include <gnutls/pkcs7.h>
->  #include <gnutls/abstract.h>
->
-> +#include <version.h>
-> +
->  #include "eficapsule.h"
->
->  static const char *tool_name = "mkeficapsule";
-> @@ -28,7 +30,7 @@ static const char *tool_name = "mkeficapsule";
->  efi_guid_t efi_guid_fm_capsule = EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
->  efi_guid_t efi_guid_cert_type_pkcs7 = EFI_CERT_TYPE_PKCS7_GUID;
->
-> -static const char *opts_short = "g:i:I:v:p:c:m:o:dhARD";
-> +static const char *opts_short = "g:i:I:v:p:c:m:o:dhARDV";
->
->  enum {
->         CAPSULE_NORMAL_BLOB = 0,
-> @@ -70,6 +72,7 @@ static void print_usage(void)
->                 "\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
->                 "\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
->                 "\t-D, --dump-capsule          dump the contents of the capsule headers\n"
-> +               "\t-V, --version               show version number\n"
->                 "\t-h, --help                  print a help message\n",
->                 tool_name);
->  }
-> @@ -969,6 +972,9 @@ int main(int argc, char **argv)
->                 case 'D':
->                         capsule_dump = true;
->                         break;
-> +               case 'V':
-> +                       printf("mkeficapsule version %s\n", PLAIN_VERSION);
-> +                       exit(EXIT_SUCCESS);
->                 default:
->                         print_usage();
->                         exit(EXIT_SUCCESS);
+> diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
+> index 47da5da324b..03e55cbc4d9 100644
+> --- a/tools/binman/etype/efi_capsule.py
+> +++ b/tools/binman/etype/efi_capsule.py
+> @@ -148,7 +148,6 @@ class Entry_efi_capsule(Entry_section):
+>                                                   self.fw_version,
+>                                                   self.oem_flags)
+>          if ret is not None:
+> -            os.remove(payload)
+>              return tools.read_file(capsule_fname)
+>          else:
+>              # Bintool is missing; just use the input data as the output
 > --
 > 2.34.1
 >
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
