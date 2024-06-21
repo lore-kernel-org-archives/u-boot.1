@@ -4,67 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4191DC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 05:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8845AC2BA1A
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 05:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A74387FF7;
-	Fri, 21 Jun 2024 07:43:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C8B0A88093;
+	Fri, 21 Jun 2024 07:49:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wwS9sNBr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CBeOkoIa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CAEB88059; Fri, 21 Jun 2024 07:43:44 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4CB7887FF7; Fri, 21 Jun 2024 07:49:06 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9367787FBC
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:43:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2761882AD
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:49:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45L5hdeg130139;
- Fri, 21 Jun 2024 00:43:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718948619;
- bh=0nWoTJdSaSrVB9xi34cE6QwlN5dMg6Ok3a9SrknS2+w=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=wwS9sNBrFZ6EZ32B/2nmlmt1+5cxZrFiaq2uIo8ZLOZpGAptYphR5rG6qWpwdYRSx
- kP+ku3K1NRk7Ku2uiu8ocZHOjs8vksmAgMIdjcerIhxCzOwkeCElI2zCKiPSipssxX
- 1c6eNix/HPMYbRfyLSHTaZ040EecJkQfTcKm3pFc=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45L5hdlX107903
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 21 Jun 2024 00:43:39 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Jun 2024 00:43:38 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Jun 2024 00:43:38 -0500
-Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45L5hcAd007979;
- Fri, 21 Jun 2024 00:43:38 -0500
-Date: Fri, 21 Jun 2024 11:13:37 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, <c-shilwant@ti.com>,
- <m-chawdhry@ti.com>, <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>
-Subject: Re: [PATCH v2] arm: dts: k3-am625-beagleplay: Package TIFS Stub
-Message-ID: <20240621054337.qqjftv72ofiinlhv@dhruva>
-References: <20240618045610.271884-1-d-gole@ti.com>
- <20240619184736.lnxyxdy44opk5in3@erased>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-70635466708so1586606b3a.1
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 22:49:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718948942; x=1719553742; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=euDJDaTFyQFq13+6sJFdOh6anT+XbrRARCTcp+3aXkc=;
+ b=CBeOkoIazrw3IJCZEl8DDm10ZIUypCSzBBjg0qzdXaIgtAy4ewuOy0rnqjqog3Itn4
+ xaDqARwUawFQ6Qsp9QByR66iUb2sxKv+YQGM/qDFcz4wEm0n6gVzlT6Bg5579mcRRaOS
+ e+cNHO0pDJjGI1vbwcm7yqX0rzB9hJcoxeALrcdr4DgBI0W2XZmSti9VBBhPQQr4Jlch
+ aJEq8+c0cT17teQoWev94arHwIpauiMwnFqekXuPc6+/traLgdJitlyFn+UKr4yWz7pR
+ RoNnclcxbogYHAWGe8JIt3cLKJqan35jdPg2o3yzGdk3V6v3mrRL9Xf9fk5OJ7m0Oavu
+ dE6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718948942; x=1719553742;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=euDJDaTFyQFq13+6sJFdOh6anT+XbrRARCTcp+3aXkc=;
+ b=AltqHrkh5brHitKVYdP2ZdLlwGKr83oI40k6joYN7Z8Q8U5wcPs6M1RAVBQi4AAQR8
+ C55KwscJkHqDkr7eSYOVPI0a/WrrkUh177OH9saOsEzejyHHkiJhYU3q6pFXV6EDwH71
+ +Sob5wfOpwzm/YCYH68sAiJ62OmP9zgia1hTYVIons/8G9SB/zbHT2dz5ZtIrHDB97n9
+ V56aAMVnRXqJ1AjQ9oKPz7gCfBFYxXNZgMn9J7/TacbQ1rw06PNR+uED7NKsi+agTAYT
+ vGPzsMyFEX1j3jLIhbm3Q55za7xCpfSTRKtxmPhxvjMF0IDoxPptxfmCMURcMc1imsBt
+ uaqA==
+X-Gm-Message-State: AOJu0Yx6RfBamKdV2lPUg0KVDy6NkWxwSeGT8aybK1cMjstLyEsPATEJ
+ oBRUnxM3vdcyLpmsax0aIVzeWBGYjvzAjmeg7rPkw614FkZ4+K92QqM8WDcMJrvh+Qm43Mbi0EU
+ NqquVXqICozWjCKFLnNxdyEw8Ig20+cwvZvPxEw==
+X-Google-Smtp-Source: AGHT+IHCLiqGCISeZMT01rGEM/71e4++vS86rOi0LLfce9ZLQANut7Sh9KQhpbTLD/0ggAMA3C5qvZWpX0QNo5gA5Y8=
+X-Received: by 2002:a05:6a21:9989:b0:1b8:807a:49c2 with SMTP id
+ adf61e73a8af0-1bcbb655bd0mr9587908637.50.1718948942206; Thu, 20 Jun 2024
+ 22:49:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240619184736.lnxyxdy44opk5in3@erased>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240620230625.1797397-1-sjg@chromium.org>
+ <20240620230625.1797397-11-sjg@chromium.org>
+ <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 21 Jun 2024 08:48:26 +0300
+Message-ID: <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
+Subject: Re: [PATCH v3 10/18] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Sean Anderson <sean.anderson@seco.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,90 +95,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nishanth,
-
-On Jun 19, 2024 at 13:47:36 -0500, Nishanth Menon wrote:
-> On 10:26-20240618, Dhruva Gole wrote:
-> > Add support for packaging the TIFS Stub as it's required for basic Low
-> > Power Modes like Deep Sleep.
-> 
-> What the heck is tifs stub?
-> https://docs.u-boot.org/en/latest/search.html?q=tifs&check_keywords=yes&area=default
-> I see no mention of the same?
-
-I agree, documentation is lacking, will be sure to add that.
-
-> > 
-> > Acked-by: Neha Malcom Francis <n-francis@ti.com>
-> > Signed-off-by: Dhruva Gole <d-gole@ti.com>
+On Fri, 21 Jun 2024 at 08:32, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > It does not make sense to enable all SHA algorithms unless they are
+> > needed. It bloats the code and in this case, causes chromebook_link to
+> > fail to build. That board does use the TPM, but not with measured boot,
+> > nor EFI.
+> >
+> > Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+> > add them to MEASURED_BOOT as well.
+> >
+> > Note that the original commit combines refactoring and new features,
+> > which makes it hard to see what is going on.
+> >
+> > Fixes: 97707f12fda tpm: Support boot measurements
+> > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
-> > 
-> > No changes from v1, just picked Neha's ack and rebased on master again.
-> > Link to v1:
-> > https://lore.kernel.org/u-boot/20240612062351.3690091-1-d-gole@ti.com/
-> > 
-> >  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 33 +++++++++++++++++++-
-> >  1 file changed, 32 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> > index fb2032068d1c..5e2248a4a668 100644
-> > --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> > +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> > @@ -69,6 +69,23 @@
-> >  		};
-> >  	};
-> >  
-> > +	tifsstub-gp {
-> > +		filename = "tifsstub.bin_gp";
-> > +		ti-secure-rom {
-> > +			content = <&tifsstub_gp>;
-> > +			core = "secure";
-> > +			load = <0x60000>;
-> > +			sw-rev = <CONFIG_K3_X509_SWRV>;
-> > +			keyfile = "ti-degenerate-key.pem";
-> > +			tifsstub;
-> > +		};
-> > +		tifsstub_gp: tifsstub-gp.bin {
-> > +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
-> > +			type = "blob-ext";
-> > +			optional;
-> > +		};
-> > +	};
-> > +
-> >  	ti-spl_unsigned {
-> >  		filename = "tispl.bin_unsigned";
-> >  		pad-byte = <0xff>;
-> > @@ -105,6 +122,19 @@
-> >  					};
-> >  				};
-> >  
-> > +				tifsstub-gp {
-> > +					description = "tifsstub";
-> > +					type = "firmware";
-> > +					arch = "arm32";
-> > +					compression = "none";
-> > +					os = "tifsstub-gp";
-> > +					load = <0x9dc00000>;
-> > +					entry = <0x9dc00000>;
-> 
-> two issues with this:
-> a) if the tifsstub-gp is not automatically consumed by tifs by the time
-> u-boot is up or kernel is up, this is going to get clobbered by OS
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts#n78
-> Should be updated before this is done.
+> >
+> > (no changes since v2)
+>
+> There was a discussion in the previous version, bout enabling these on
+> CMD_TPM as they are required.
 
-This won't be much of a concern, the TIFS Stub is loaded into the R5 ATCM as
-soon as the DM R5 core comes up [0] : See the Deep Sleep Exit part, it
-talks about this stub.
+Or switch this to an imply instead so you can disable it ?
 
-[0] https://software-dl.ti.com/processor-sdk-linux/esd/AM62AX/09_01_00/exports/docs/linux/Foundational_Components/Kernel/Kernel_Drivers/Power_Management/pm_sw_arch.html
-
-> b) Documentation update - please always make sure you update
->   documentation when doing this kind of change
-> https://docs.u-boot.org/en/latest/board/beagle/am62x_beagleplay.html#image-formats
-
-Will do.
-
--- 
-Best regards,
-Dhruva Gole <d-gole@ti.com>
+Regards
+/Ilias
+>
+> Thanks
+> /Ilias
+> >
+>
