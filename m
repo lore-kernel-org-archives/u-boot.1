@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6238DC2BB85
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 20:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670E2C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 20:07:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19FF0886B1;
-	Fri, 21 Jun 2024 21:52:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DF60D88540;
+	Fri, 21 Jun 2024 22:07:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OD471qmg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eviR0j2c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5763988640; Fri, 21 Jun 2024 21:52:47 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 16A7B8852D; Fri, 21 Jun 2024 22:07:43 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84CAD88652
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20CED88540
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 22:07:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7ebe508fa34so122844939f.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:44 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6f9603730d5so1274998a34.1
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 13:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718999563; x=1719604363; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wYQvRiUNnfOOR+xidkmOapKEZkIh/XMIb68wz27lEII=;
- b=OD471qmg3PwQ6B+uXYLga5zDmMxxewetUkr7q/O4uJrF8GKzz2b5hYnkj4L8wbdpxe
- feBoANsMTcRttPK3yh8IqeByKXrA/1UL14R1inptm8wc/aJrR8MjNvWsVH7fl9QaGfVJ
- 3KcO84r35iPFcPMWv0LM4/o3MWODZM7sbZhTk=
+ d=konsulko.com; s=google; t=1719000459; x=1719605259; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=m+a8/u5rZCMHnfopPS9dZ5X+mVZ9BBJRaiXzVi+rWgc=;
+ b=eviR0j2c0osdDKQLIv+AgGwbC9DZAL3lPuKFkaFDAsdJ4/01UZsZTqe+xTESOJnnj5
+ 2hUjjjvoj0lsHsfuBjpAwj6zUz1jiV3B9nWgc7TmfQPb1/mbj6dbL1Bmdr/oCeR1tEoA
+ 0yAgtm/Vt61sk9v3eeLa0dtp7Nlma2lXRGN70=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718999563; x=1719604363;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wYQvRiUNnfOOR+xidkmOapKEZkIh/XMIb68wz27lEII=;
- b=ak0u/yAPkWOnEGnNnsLGsVXgq8x8wgzLRMkSPQRhSCnQtOWU3Oe5UXfP/hn5vZcluq
- D0DbOob6F8xnxYYEv8FjnZ/8le8kGegxJsNcX59baJduWC0eAsuBZSE8So+b4w3MoHB7
- vG7HAWSdv2wihS4tg0wA2iKxlL2JFGSGyM4mVaE42U9KEzzzg+S3f8txCk6+JNhrZoZS
- QocMcLXc5rPxCM+6WV+01nofaiEkUcz/9q8B7FG36NrrhEDoMKoAqMQt0muDWlRyzE4m
- +vfbgAy2HTYUY1Thmj+lelvUVZTYBS1wt3kPzoQAeaTRjAwuCXiZp0ut5A/Ehf9WvoXi
- 4w/A==
-X-Gm-Message-State: AOJu0YztLX32kqqXovgF+vbz64IsSlgBIKyOEZuBZpc/EsJWi7xp9hor
- KxTuVLEF/MxBO2DJq3hl42kQf8inEKL95He/eXdAA2ioQtZ8qVmRWlkmuFFzPumBysAOws+H1b1
- PwQ==
-X-Google-Smtp-Source: AGHT+IFLevWEfXNgVi5OdesmPPi86kKgiTnZd9SLEpNe4Tc7Cr4/YKIjZk6f7KKydxN/4UIU0fhDjw==
-X-Received: by 2002:a05:6602:2d93:b0:7eb:97a0:8209 with SMTP id
- ca18e2360f4ac-7f13ee61db8mr1030447139f.15.1718999563197; 
- Fri, 21 Jun 2024 12:52:43 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.42
+ d=1e100.net; s=20230601; t=1719000459; x=1719605259;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m+a8/u5rZCMHnfopPS9dZ5X+mVZ9BBJRaiXzVi+rWgc=;
+ b=JmMGJtebsxhBn2x+QEr5pHSDnp+Dsjxy+fRIoDKEyu3h//iYyq0DsWeKaGlZyijpmr
+ 01iQdo5hh/kpG4KHIQOiA3gr2zbsUGPXSe9qIweBUDdBl7grSpcpKyz8mGF2hysj9iy+
+ NacowTa9ATouXyM00QKsEY40EcXZ8IR7c0lap0CkuYikIk4T6MoIluWPHdeGSv8Q1OxO
+ IgprqI0qw/JmZKKepRRH9KLW4iU8CJCuC7baMj2IDUCRnFeeG9JBNSe+hiQikBU2Xe7h
+ QL6lvAk3FquLvajqKbf+jFFlBE2ohtmQDDkcptT0j+lJ50Uo+7MTZl7gi/w3dEcaKKWv
+ 32Ig==
+X-Gm-Message-State: AOJu0YyaV3CAo9rHFsaDdBE55kRpqoUn7V6iB2M0DE9u8PNuCLGsK9Ii
+ EVYwQlnUe1xTQWErKG8GHMmWf3zlVFsemgUBcbtysN8lRbs5pyaHuOwudCHR9f0=
+X-Google-Smtp-Source: AGHT+IG2/WWca2pp6jpjQj97SunOoh8wF247NCjnzW803jY863DPNgiEH85B2/OUoShUKyFrUMkjsQ==
+X-Received: by 2002:a9d:6851:0:b0:700:8da9:1dc9 with SMTP id
+ 46e09a7af769-7008da9246fmr7803732a34.29.1719000458657; 
+ Fri, 21 Jun 2024 13:07:38 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7009c65be9csm360997a34.50.2024.06.21.13.07.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 12:52:42 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 43/43] CI: Allow running tests on sjg lab
-Date: Fri, 21 Jun 2024 13:52:04 -0600
-Message-Id: <20240621195204.2675252-44-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
+ Fri, 21 Jun 2024 13:07:38 -0700 (PDT)
+Date: Fri, 21 Jun 2024 14:07:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Brunet <jbrunet@baylibre.com>, Marek Vasut <marex@denx.de>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v2 00/43] labgrid: Provide an integration with Labgrid
+Message-ID: <20240621200735.GB68077@bill-the-cat>
 References: <20240621195204.2675252-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tp1b+8QGAKhNmCJn"
+Content-Disposition: inline
+In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,191 +98,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a way to run tests on a real hardware lab. This is in the very early
-experimental stages. There are only 23 boards and 3 of those are broken!
-(bob, ff3399, samus). A fourth fails due to problems with the TPM tests.
 
-To try this, assuming you have gitlab access, set SJG_LAB=1, e.g.:
+--tp1b+8QGAKhNmCJn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-   git push -o ci.variable="SJG_LAB=1" dm HEAD:try
+On Fri, Jun 21, 2024 at 01:51:21PM -0600, Simon Glass wrote:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> Labgrid provides access to a hardware lab in an automated way. It is
+> possible to boot U-Boot on boards in the lab without physically touching
+> them. It relies on relays, USB UARTs and SD muxes, among other things.
+>=20
+> By way of background, about 4 years ago I wrong a thing called Labman[1]
+> which allowed my lab of about 30 devices to be operated remotely, using
+> tbot for the console and build integration. While it worked OK and I
+> used it for many bisects, I didn't take it any further.
+>=20
+> It turns out that there was already an existing program, called Labgrid,
+> which I did not know about at time (thank you Tom for telling me). It is
+> more rounded than Labman and has a number of advantages:
+>=20
+> - does not need udev rules, mostly
+> - has several existing users who rely on it
+> - supports multiple machines exporting their devices
+>=20
+> It lacks a 'lab check' feature and a few other things, but these can be
+> remedied.
+>=20
+> On and off over the past several weeks I have been experimenting with
+> Labgrid. I have managed to create an initial U-Boot integration (this
+> series) by adding various features to Labgrid[2] and the U-Boot test
+> hooks.
+>=20
+> I hope that this might inspire others to set up boards and run tests
+> automatically, rather than relying on infrequent, manual test. Perhaps
+> it may even be possible to have a number of labs available.
+>=20
+> Included in the integration are a number of simple scripts which make it
+> easy to connect to boards and run tests:
+>=20
+> ub-int <target>
+>     Build and boot on a target, starting an interactive session
+>=20
+> ub-cli <target>
+>     Build and boot on a target, ensure U-Boot starts and provide an inter=
+active
+>     session from there
+>=20
+> ub-smoke <target>
+>     Smoke test U-Boot to check that it boots to a prompt on a target
+>=20
+> ub-bisect
+>     Bisect a git tree to locate a failure on a particular target
+>=20
+> ub-pyt <target> <testspec>
+>     Run U-Boot pytests on a target
+>=20
+> Some of these help to provide the same tbot[4] workflow which I have
+> relied on for several years, albeit much simpler versions.
+>=20
+> The goal here is to create some sort of script which can collect
+> patches from the mailing list, apply them and test them on a selection
+> of boards. I suspect that script already exists, so please let me know
+> what you suggest.
+>=20
+> I hope you find this interesting and take a look!
 
-Changes in v2:
-- Avoid running a docker image for skipped lab tests
+Can you please split this up in to 3-4 series so that they can be
+reviewed and merged? Thanks.
 
- .gitlab-ci.yml | 153 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 153 insertions(+)
+--=20
+Tom
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 165f765a833..75c18a0f2f7 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -17,6 +17,7 @@ stages:
-   - testsuites
-   - test.py
-   - world build
-+  - sjg-lab
- 
- .buildman_and_testpy_template: &buildman_and_testpy_dfn
-   stage: test.py
-@@ -482,3 +483,155 @@ coreboot test.py:
-     TEST_PY_TEST_SPEC: "not sleep"
-     TEST_PY_ID: "--id qemu"
-   <<: *buildman_and_testpy_dfn
-+
-+.lab_template: &lab_dfn
-+  stage: sjg-lab
-+  rules:
-+    - if: $SJG_LAB == "1"
-+      when: always
-+    - when: manual
-+  tags: [ 'lab' ]
-+  script:
-+    - if [[ -z "${SJG_LAB}" ]]; then
-+        exit 0;
-+      fi
-+    # Environment:
-+    #   SRC  - source tree
-+    #   OUT  - output directory for builds
-+    - export SRC="$(pwd)"
-+    - export OUT="${SRC}/build/${BOARD}"
-+    - export PATH=$PATH:~/bin
-+    - export PATH=$PATH:/vid/software/devel/ubtest/u-boot-test-hooks/bin
-+
-+    # Load it on the device
-+    - ret=0
-+    - echo "role ${ROLE}"
-+    - export strategy="-s uboot -e off"
-+    # export verbose="-v"
-+    - ${SRC}/test/py/test.py --role ${ROLE} --build-dir "${OUT}"
-+        --capture=tee-sys -k "not bootstd"|| ret=$?
-+    - U_BOOT_BOARD_IDENTITY="${ROLE}" u-boot-test-release || true
-+    - if [[ $ret -ne 0 ]]; then
-+        exit $ret;
-+      fi
-+  artifacts:
-+    when: always
-+    paths:
-+      - "build/${BOARD}/test-log.html"
-+      - "build/${BOARD}/multiplexed_log.css"
-+    expire_in: 1 week
-+
-+rpi3:
-+  variables:
-+    ROLE: rpi3
-+  <<: *lab_dfn
-+
-+opi_pc:
-+  variables:
-+    ROLE: opi_pc
-+  <<: *lab_dfn
-+
-+pcduino3_nano:
-+  variables:
-+    ROLE: pcduino3_nano
-+  <<: *lab_dfn
-+
-+samus:
-+  variables:
-+    ROLE: samus
-+  <<: *lab_dfn
-+
-+link:
-+  variables:
-+    ROLE: link
-+  <<: *lab_dfn
-+
-+jerry:
-+  variables:
-+    ROLE: jerry
-+  <<: *lab_dfn
-+
-+minnowmax:
-+  variables:
-+    ROLE: minnowmax
-+  <<: *lab_dfn
-+
-+opi_pc2:
-+  variables:
-+    ROLE: opi_pc2
-+  <<: *lab_dfn
-+
-+bpi:
-+  variables:
-+    ROLE: bpi
-+  <<: *lab_dfn
-+
-+rpi2:
-+  variables:
-+    ROLE: rpi2
-+  <<: *lab_dfn
-+
-+bob:
-+  variables:
-+    ROLE: bob
-+  <<: *lab_dfn
-+
-+ff3399:
-+  variables:
-+    ROLE: ff3399
-+  <<: *lab_dfn
-+
-+coral:
-+  variables:
-+    ROLE: coral
-+  <<: *lab_dfn
-+
-+rpi3z:
-+  variables:
-+    ROLE: rpi3z
-+  <<: *lab_dfn
-+
-+bbb:
-+  variables:
-+    ROLE: bbb
-+  <<: *lab_dfn
-+
-+kevin:
-+  variables:
-+    ROLE: kevin
-+  <<: *lab_dfn
-+
-+pine64:
-+  variables:
-+    ROLE: pine64
-+  <<: *lab_dfn
-+
-+c4:
-+  variables:
-+    ROLE: c4
-+  <<: *lab_dfn
-+
-+rpi4:
-+  variables:
-+    ROLE: rpi4
-+  <<: *lab_dfn
-+
-+rpi0:
-+  variables:
-+    ROLE: rpi0
-+  <<: *lab_dfn
-+
-+snow:
-+  variables:
-+    ROLE: snow
-+  <<: *lab_dfn
-+
-+pcduino3:
-+  variables:
-+    ROLE: pcduino3
-+  <<: *lab_dfn
-+
-+nyan-big:
-+  variables:
-+    ROLE: nyan-big
-+  <<: *lab_dfn
--- 
-2.34.1
+--tp1b+8QGAKhNmCJn
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ13YAACgkQFHw5/5Y0
+tyw0Kgv+PuFzr13bjuYFvfPijZHVQ2OP+RrsB1avqXIBC2nfEfGKD7wv8N0sYa98
+LALoFyTZ3LRZPDqpXSmtYhljZFCGkSDvV9yheufiAx+4DwkSe/JTO1wFgLpOeGjQ
+BMD3JBrKE/ZQxeYkBYX0yrXUZawGucF0qhuQPZJPg2CFhVHEJsiYV+ovP829YD+Y
+FeLig16zyiEL+Krv6aEPHeFF7fV2raoMNhWDQR3waRNbavP0RQGZkXLmy2WoYgM2
+6l8VRt3h+AjYV6IqYj1uczWu/k+JYpMI0DpQOBvhAGYXKpfoTDm4WkiND5Zu2f8j
+URkes+qLFNSs6NeC9TFIFEdYjMjN0se7vQtQK3sX14r4bjPqdrLQBmfqFFX0Ja78
+Kf+9vpbOqHKWMUD6ppeOiKpgQl5+CYPtiYNP2JAnDWTLK1MHWMV0onRoIS8E2RNf
+Q5GOK1GDRkuI/aQAcKM7bFCm2U75g7Li6A7EGuxxjO4SgwTN5DljFAVv9C5M7XtM
+k+01HoaV
+=OgLN
+-----END PGP SIGNATURE-----
+
+--tp1b+8QGAKhNmCJn--
