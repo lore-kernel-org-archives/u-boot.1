@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E7A4C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E102DC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:57:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4837388641;
-	Fri, 21 Jun 2024 21:52:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B1E9F885F1;
+	Fri, 21 Jun 2024 21:52:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n6ASKmP5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hXP5fK/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FDD68857E; Fri, 21 Jun 2024 21:52:36 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id D8C09885B3; Fri, 21 Jun 2024 21:52:36 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF7FB885FE
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0623885EB
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7ea0b5e0977so97694439f.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:33 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-7eb6aedcabcso90280539f.0
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718999552; x=1719604352; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718999553; x=1719604353; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hjl01oo/zYgNsESARtjMuhhXIjsgTRhjuyoEbdCHLeY=;
- b=n6ASKmP5iKb4a/wfDMEp5YjKFub0Q6mVgr9BRr3AoJ39LydffpxjEdckfE/9pRionc
- mqG6Mh+bedAZSwJkvLX5G7IsJAqXcKJDqtVLIRsw6JcN+sF5xzmr+MHGR/6YhUpnlnd3
- +thRIYmeVpgyzU1Ex30/3KDmf5XeD6AH8Wj/8=
+ bh=VZX1CswZm054B0+zWyTmo8TAPiF+XAr8TcpdTNnsbHA=;
+ b=hXP5fK/xgNuSRN2A0OYUB1wL2b4p7H5fD0klU55sXU5jhvV80Jqn/zcqng3DNHe/Yu
+ 3kfXL1tBcYBtXoqvVRVQAn9879j09uL6gDQMlymZulx7JNt5dIqtxshb6Kak0yGRCoCi
+ E5XMmUnulJVZZZSuTi3dRVHY/u5gcBXPpWIHQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718999552; x=1719604352;
+ d=1e100.net; s=20230601; t=1718999553; x=1719604353;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hjl01oo/zYgNsESARtjMuhhXIjsgTRhjuyoEbdCHLeY=;
- b=J6xPK+oMAiHmnm7GgBZjpuqe4XJCfv3ILr2xhsv3yvTOkJNnV2+RKsapFhChA/DhRj
- J1dzmyCrWr4noOpdrXo9G9ZXSg707uxRqeNc0JQOF3gQ9lHb9bvPckl6urdEB0USWngy
- hU5kaSouSD9xnUN4p3rR//RfbHGYj8AlX92uN2rIPsRm3dCgXEq0IZ99wMrBjh/pxRes
- yafGSaiBk8161Q8JRgDTrMGEeGz2RDvIqD+CfzUZENgaTntm3UKKQosfhoTotWAQc+p1
- cAk00v57cUb/FjNDPgTrLGxL95NNw+50Z00dqOsMBaamDaB+1iH72iV166dkDYXWlskx
- O7uA==
-X-Gm-Message-State: AOJu0Yyd/atHiDnNA9qTkBgcfy7U14Z+lezLjSvlpNmVs7guBIRSoCpi
- qSHTM507h2EN8+hbRV1AHu7mX7VgsyiURhuLXrRJGNZAniukSF5urNX0R0/pydFR2uD0d0D2+Dn
- CAQ==
-X-Google-Smtp-Source: AGHT+IG1c3gjLxjheSuiBx78HCsRBvggh1tkZtjxMw0dyn0SBgXRTf/jEPixv8dEeukcDnaSJvva4A==
-X-Received: by 2002:a05:6602:2c8d:b0:7eb:8a0f:1f32 with SMTP id
- ca18e2360f4ac-7f13ee68305mr1118884739f.15.1718999552482; 
- Fri, 21 Jun 2024 12:52:32 -0700 (PDT)
+ bh=VZX1CswZm054B0+zWyTmo8TAPiF+XAr8TcpdTNnsbHA=;
+ b=vLVwcW3rVDW7caim2aHid5914V5asjDRYiUPIioWRA+INfYSiu+IIMgsEl/wArPBmI
+ MfYcAivDiesxXnk2s3OraeXmoS2lWnw5DyD6rpAaRG//ixkQC1b4apG/Ou6ZMuOtekis
+ aUihuThkfV8Mjwr2WeL3CLQ642nGMBqOjphdPqQiAHKGT4xtfKB/vkITOTVQ5euCG41D
+ Q5RObsBYbe+cftI0lcVm2C41gc5Gix3eDtBQGi1hzKNvBdECh5DTTaDToWOAt1aVgiR8
+ mxABL725KVPHOOMg654O212wIECIgtgR4FhIf8Zi1tDFwYrL497QRAd++LMVB+SDGIjr
+ v92A==
+X-Gm-Message-State: AOJu0YzClyidDlrM86Aw6pOQRXr5BCHirj1qaB85IiGwjAgRoOXqR7P+
+ max0v+XLHdPKgWYihLKsbdHWnc3NGRB4HahiGb2l14y824UYBUc7ZUm9dRRElUN0AXhI06j+dsM
+ GbQ==
+X-Google-Smtp-Source: AGHT+IEmT7ZAlO9oQgQOmO9ZphGfLCpY8ycXHTRUH0Xos7eaXV4qkAchlaLnC10OgIp/YKUqdIPtrw==
+X-Received: by 2002:a05:6602:2dc1:b0:7eb:f3c8:c59f with SMTP id
+ ca18e2360f4ac-7f13ee26cc6mr1031610739f.11.1718999553217; 
+ Fri, 21 Jun 2024 12:52:33 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.31
+ ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 12:52:31 -0700 (PDT)
+ Fri, 21 Jun 2024 12:52:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 29/43] test: Check help output
-Date: Fri, 21 Jun 2024 13:51:50 -0600
-Message-Id: <20240621195204.2675252-30-sjg@chromium.org>
+Subject: [PATCH v2 30/43] test: Create a common function to get the config
+Date: Fri, 21 Jun 2024 13:51:51 -0600
+Message-Id: <20240621195204.2675252-31-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
 References: <20240621195204.2675252-1-sjg@chromium.org>
@@ -89,36 +89,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current test doesn't check anything about the output. If a bug
-results in junk before the output, this is not currently detected.
-
-Add a check for the first line being the one expected.
+The settings are decoded in two places. Combine them into a new
+function, before (in a future patch) expanding the number of items.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/tests/test_help.py | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ test/py/conftest.py | 41 ++++++++++++++++++++++++++++-------------
+ 1 file changed, 28 insertions(+), 13 deletions(-)
 
-diff --git a/test/py/tests/test_help.py b/test/py/tests/test_help.py
-index 153133cf28f..2325ff69229 100644
---- a/test/py/tests/test_help.py
-+++ b/test/py/tests/test_help.py
-@@ -7,7 +7,11 @@ import pytest
- def test_help(u_boot_console):
-     """Test that the "help" command can be executed."""
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index ca66b9d9e61..6547c6922c6 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -117,14 +117,36 @@ def run_build(config, source_dir, build_dir, board_type, log):
+         runner.close()
+         log.status_pass('OK')
  
--    u_boot_console.run_command('help')
-+    lines = u_boot_console.run_command('help')
-+    if u_boot_console.config.buildconfig.get('config_cmd_2048', 'n') == 'y':
-+        assert lines.splitlines()[0] == "2048      - The 2048 game"
-+    else:
-+        assert lines.splitlines()[0] == "?         - alias for 'help'"
+-def pytest_xdist_setupnodes(config, specs):
+-    """Clear out any 'done' file from a previous build"""
+-    global build_done_file
+-    build_dir = config.getoption('build_dir')
++def get_details(config):
++    """Obtain salient details about the board and directories to use
++
++    Args:
++        config (pytest.Config): pytest configuration
++
++    Returns:
++        tuple:
++            str: Board type (U-Boot build name)
++            str: Identity for the lab board
++            str: Build directory
++            str: Source directory
++    """
+     board_type = config.getoption('board_type')
++    board_identity = config.getoption('board_identity')
++    build_dir = config.getoption('build_dir')
++
+     source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
++    default_build_dir = source_dir + '/build-' + board_type
+     if not build_dir:
+-        build_dir = source_dir + '/build-' + board_type
++        build_dir = default_build_dir
++
++    return board_type, board_identity, build_dir, source_dir
++
++def pytest_xdist_setupnodes(config, specs):
++    """Clear out any 'done' file from a previous build"""
++    global build_done_file
++
++    build_dir = get_details(config)[2]
++
+     build_done_file = Path(build_dir) / 'build.done'
+     if build_done_file.exists():
+         os.remove(build_done_file)
+@@ -163,17 +185,10 @@ def pytest_configure(config):
+     global console
+     global ubconfig
  
- @pytest.mark.boardspec('sandbox')
- def test_help_no_devicetree(u_boot_console):
+-    source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
++    board_type, board_identity, build_dir, source_dir = get_details(config)
+ 
+-    board_type = config.getoption('board_type')
+     board_type_filename = board_type.replace('-', '_')
+-
+-    board_identity = config.getoption('board_identity')
+     board_identity_filename = board_identity.replace('-', '_')
+-
+-    build_dir = config.getoption('build_dir')
+-    if not build_dir:
+-        build_dir = source_dir + '/build-' + board_type
+     mkdir_p(build_dir)
+ 
+     result_dir = config.getoption('result_dir')
 -- 
 2.34.1
 
