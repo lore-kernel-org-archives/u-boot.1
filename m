@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BE73C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 20:48:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B3AC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 20:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EA23885A9;
-	Fri, 21 Jun 2024 22:47:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A79C6884FF;
+	Fri, 21 Jun 2024 22:49:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AZ8hSdHs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ll5Ea31j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2B9288569; Fri, 21 Jun 2024 22:46:52 +0200 (CEST)
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com
- [IPv6:2607:f8b0:4864:20::d42])
+ id 2093C88548; Fri, 21 Jun 2024 22:49:03 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC31B8804F
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 22:46:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0B2E88059
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 22:49:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd42.google.com with SMTP id
- ca18e2360f4ac-7ec00e71a57so92531239f.3
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 13:46:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3d2299e6650so1119833b6e.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 13:49:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719002808; x=1719607608; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eVShViM73zxJOwfrcyPwQc2E+SZEwYZjtlVJOQ7v5XY=;
- b=AZ8hSdHs20aLBOgk5ONUKlnXJKWGrMQV3M8wpQ3GaQIOgZtM76CpH7CsbX8gSeq8hQ
- NDDw6w8k4J6x8r9CONmNmXv0Hb1JAhc43S1Dkw3o/aABwS084eEHnAaf3/KvX8oGFgnr
- Q0hZHIO4OpC/1GzUbuOtH1i84Z90NBI93Kems=
+ d=konsulko.com; s=google; t=1719002939; x=1719607739; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=25WSz6Ry4cM9/ml+3bhYvECgQ2mEe6x8uUEQbS8izUA=;
+ b=ll5Ea31joU8wnpaIJ1wjn+FRdxtbwck8zFc/bh7Ug1m61vaMCi/DymcofhBQc7pXhg
+ 7mUcWfn6LsZlsjsRtc+8uf78QMicFGr7I5r3jlCRWxNAnZZ8xFrDRR2es8ow170X7UVU
+ qHYQN9wRtAvil1+kCQNGysxGJC3VN/9hVh1vM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719002808; x=1719607608;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eVShViM73zxJOwfrcyPwQc2E+SZEwYZjtlVJOQ7v5XY=;
- b=pT+cEojfs4FlE27g1JHinzfE1G7HjinwabR2VYDaqxXFQTLy26k4eIfaJ5582FL5ZA
- 97F9U82yJvzbFsPaTzc0iRq059upy3KKh3cblfICL+nZlC6yjXGxsgG+YDfrGjECgoD+
- 9E4hot83XBzw/xvo+udFezN2WtO0cLoZg7Ukm//5K62lG7yp5NgLZQhBvDa/fMgGHOgM
- HFLgZhJIBfa8RD8l9q6Ymcm6dvLD7fnHqzphce3femS6RP3uMMI18p7cDos87xuyRKib
- 9ejQ9mqZjkFwSYIGWAiDoOAbVBl15EXtxXG5uQYBFr8HbXYuVtSfSj9r61VBNYhSgqOu
- uSkg==
-X-Gm-Message-State: AOJu0YzCMd0s5tSAXN8mIUFvcCfN9Ac7aOYncDmh79rwX/K3HkRuxQVY
- a4bNCTHrjkXVeKPXXLC4vKQCGZ2U9L90xjrUO+VjGNtn/UhHP8syad7JnwoxTwbhAhSzpVHiXFn
- ytxtr
-X-Google-Smtp-Source: AGHT+IEAc/D4U0YNH/4wB+a2s5jQjfBcrZIsq798c4xjQS29HRAHA+J85eCHfByy6qLNS+zhyX8jxA==
-X-Received: by 2002:a05:6602:158b:b0:7e1:8a93:48ef with SMTP id
- ca18e2360f4ac-7f13ee8ac9dmr1141421739f.21.1719002808083; 
- Fri, 21 Jun 2024 13:46:48 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203ec51sm50698939f.53.2024.06.21.13.46.47
+ d=1e100.net; s=20230601; t=1719002939; x=1719607739;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=25WSz6Ry4cM9/ml+3bhYvECgQ2mEe6x8uUEQbS8izUA=;
+ b=uwN4mtoSFp73SSXmfeyh/kBeEU2y5+WQa6PGBr12axa9q6pq61wnJpNdLzvBAbSmBP
+ QzxFlHE0yZwGSZOBYu/Z1TNK3+NEf5zn7WMFpFDGZX3Bv4mWB86H91YrwPTanrTJP+zW
+ dQME+eJpr56QQDYi/DhuB6GQRfWCQ7/e4iyLNTNactfVE4zoQa1WzPDExsOulYBGE+YV
+ 0P4tgMmuWr93Pn9XUNqbYzZBfbnglLH5AtYAu0u2zuE8ABgc5OkQ6t5oIUS+fv7GAkpM
+ XA5paSWjaAdwVulzbc5kM2Ph7KhSHn8brDelgrqKKlRxSfyA3p19qYLUnaCEX9IYm+a+
+ 350g==
+X-Gm-Message-State: AOJu0Ywh5xwospYQksg0NKK1Oz1NUK+ey6SqGFgfo89Y63fCUdbEI0LA
+ wIaeD8J4UkJZlZXAgRFWiRXErSE48BGU47Cwdgl4WAFgeuWbMHBa5R3PXshIOYQ=
+X-Google-Smtp-Source: AGHT+IGAUZPIso5/FnNFtAsYLRZZoZtAUw77lLH3UKo2eMnBppe1gp5COgL1jdsKkLxcjpITYq0m1w==
+X-Received: by 2002:a05:6870:fb90:b0:254:a694:e678 with SMTP id
+ 586e51a60fabf-25c94d02f62mr9783083fac.37.1719002939337; 
+ Fri, 21 Jun 2024 13:48:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
+ [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25cd4941a11sm571661fac.9.2024.06.21.13.48.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 13:46:47 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Fri, 21 Jun 2024 13:48:58 -0700 (PDT)
+Date: Fri, 21 Jun 2024 14:48:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 11/11] buildman: Add a way to limit the number of buildmans
-Date: Fri, 21 Jun 2024 14:46:32 -0600
-Message-Id: <20240621204632.2706813-12-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240621204632.2706813-1-sjg@chromium.org>
-References: <20240621204632.2706813-1-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
+Message-ID: <20240621204856.GC68077@bill-the-cat>
+References: <20240620131937.1130446-1-sjg@chromium.org>
+ <20240620131937.1130446-4-sjg@chromium.org>
+ <20240620143232.GM68077@bill-the-cat>
+ <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
+ <20240620233026.GU68077@bill-the-cat>
+ <CAFLszTi7qXX6R5=LQqCMveH7aJ=N96Mcob+gp11MEPixgrK66A@mail.gmail.com>
+ <20240621152229.GV68077@bill-the-cat>
+ <CAFLszTi_NBBxz3MZz0HuOW5c2bGT3FgZ2usnAginZ0LC_TdX9A@mail.gmail.com>
+ <20240621192617.GA68077@bill-the-cat>
+ <CAFLszTiA5JFU3EaTi_f142tDRej6rSMk=gCWitnqC2tb8d_vtQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BwRchxss3G+bi+a5"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiA5JFU3EaTi_f142tDRej6rSMk=gCWitnqC2tb8d_vtQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,427 +101,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Buildman uses all available CPUs by default, so running more than one or
-two concurrent processes is not normally useful.
 
-However in some CI cases we want to be able to run several jobs at once
-to save time. For example, in a lab situation we may want to run a test
-on 20 boards at a time, since only the build step actually takes much
-CPU.
+--BwRchxss3G+bi+a5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add an option which allows such a limit. When buildman starts up, it
-waits until the number of running processes goes below the limit, then
-claims a spot in the list. The list is maintained with a temporary file.
+On Fri, Jun 21, 2024 at 01:39:46PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 21 Jun 2024 at 13:26, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Jun 21, 2024 at 12:19:12PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 21 Jun 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Jun 21, 2024 at 08:57:50AM -0600, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Thu, 20 Jun 2024 at 17:30, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Jun 20, 2024 at 05:05:30PM -0600, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Thu, 20 Jun 2024 at 08:32, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > On Thu, Jun 20, 2024 at 07:19:35AM -0600, Simon Glass wrote:
+> > > > > > > >
+> > > > > > > > > The Python virtualenv tool sets up a few things in the en=
+vronment,
+> > > > > > > > > putting its path first in the PATH environment variable a=
+nd setting up
+> > > > > > > > > a sys.prefix different from the sys.base_prefix value.
+> > > > > > > > >
+> > > > > > > > > At present buildman puts the toolchain path first in PATH=
+ so that it can
+> > > > > > > > > be found easily during the build. For sandbox this causes=
+ problems since
+> > > > > > > > > /usr/bin/gcc (for example) results in '/usr/bin' being pr=
+epended to the
+> > > > > > > > > PATH variable. As a result, the venv is partially disable=
+d.
+> > > > > > > > >
+> > > > > > > > > The result is that sandbox builds within a venv ignore th=
+e venv, e.g.
+> > > > > > > > > when looking for packages.
+> > > > > > > > >
+> > > > > > > > > Correct this by detecting the venv and adding the toolcha=
+in path after
+> > > > > > > > > the venv path.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > >
+> > > > > > > > Why are we using PATH at all in this case? Shouldn't we jus=
+t be setting
+> > > > > > > > CROSS_COMPILE=3D/full/path/to/the/prefix ?
+> > > > > > >
+> > > > > > > This is the -p option to buildman. The original commit was:
+> > > > > > >
+> > > > > > > commit bb1501f2c22c979961b735db775605cccedd98f6
+> > > > > > > Author: Simon Glass <sjg@chromium.org>
+> > > > > > > Date:   Mon Dec 1 17:34:00 2014 -0700
+> > > > > > >
+> > > > > > >     buildman: Add an option to use the full tool chain path
+> > > > > > >
+> > > > > > >     In some cases there may be multiple toolchains with the s=
+ame name in the
+> > > > > > >     path. Provide an option to use the full path in the CROSS=
+_COMPILE
+> > > > > > >     environment variable.
+> > > > > > >
+> > > > > > >     Note: Wolfgang mentioned that this is dangerous since in =
+some cases there
+> > > > > > >     may be other tools on the path that are needed. So this i=
+s set up as an
+> > > > > > >     option, not the default. I will need test confirmation (i=
+=2Ee. that this
+> > > > > > >     commit fixes a real problem) before merging it.
+> > > > > > >
+> > > > > > > As to why we don't always do this, well that is back in the m=
+ists of
+> > > > > > > time, 10 years ago.
+> > > > > > >
+> > > > > > > BTW, this is raising a point ("let's change the behaviour") s=
+eparate
+> > > > > > > from the goal of this commit, which is to fix a problem with =
+venv,
+> > > > > > > albeit that if we made -p the only option, then we could pote=
+ntially
+> > > > > > > drop all PATH changes. Perhaps toolchains are built different=
+ly now,
+> > > > > > > such that they always invoke their tools using the same prefi=
+x and
+> > > > > > > dir?
+> > > > > >
+> > > > > > Wait, I'm confused. buildman internally updates its own PATH to=
+ avoid
+> > > > > > calling CROSS_COMPILE with the full path due to a concern about
+> > > > > > toolchain bugs?
+> > > > >
+> > > > > Not its own PATH: the one it passes to U-Boot's 'make'.
+> > > >
+> > > > OK, but the point stands.
+> > > >
+> > > > > I'm not sure why, actually. It is such a long time ago that I don=
+'t remember.
+> > > > >
+> > > > > I see:
+> > > > >
+> > > > > ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/ar=
+m-linux-gnueabi-ld
+> > > >
+> > > > Yes, prefixed version that's allowed to be called by users.
+> > > >
+> > > > > and
+> > > > >
+> > > > > ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/arm-li=
+nux-gnueabi/bin/ld
+> > > >
+> > > > Internal usage, here be dragons and all that.
+> > > >
+> > > > > but interestingly there is no gcc in the latter directory, which =
+there
+> > > > > was in 4.6 (and presumably for some time after).
+> > > > >
+> > > > > Certainly for sandbox there is no prefix, so we cannot add it in =
+that
+> > > > > case, and sandbox is actually the arch used to run these tests.
+> > > >
+> > > > CROSS_COMPILE is empty for sandbox, yes.
+> > > >
+> > > > > What are you suggesting we change about this patch?
+> > > >
+> > > > That it's going about things backwards? If you're setting CROSS_COM=
+PILE
+> > > > _then_ it should be the full path that it already knows otherwise i=
+f not
+> > > > setting CROSS_COMPILE then also not modifying PATH.
+> > >
+> > > That is what the code does, yes. It either adds the toolchain path to
+> > > CROSS_COMPILE or to PATH, not both. The 'full_path' argument controls
+> > > which one it uses.
+> >
+> > I'm saying it should always use the full path to CROSS_COMPILE and never
+> > modify PATH.
+>=20
+> That wouldn't work with toolchains that don't have a prefix, though.
+> If that is what you want I'm happy to modify the patch.
 
-Note that the temp file is user-specific, since it is hard to create a
-locked temporary file which can be accessed by any user. In most cases,
-only one user is running jobs on a machine, so this should not matter.
+Yes, thanks.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+--=20
+Tom
 
- tools/buildman/buildman.rst    |   5 ++
- tools/buildman/cmdline.py      |   2 +
- tools/buildman/control.py      | 140 ++++++++++++++++++++++++++++++++-
- tools/buildman/pyproject.toml  |   6 +-
- tools/buildman/test.py         | 121 ++++++++++++++++++++++++++++
- tools/u_boot_pylib/terminal.py |   7 +-
- 6 files changed, 277 insertions(+), 4 deletions(-)
+--BwRchxss3G+bi+a5
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-index bd0482af5f7..b8ff3bf1ab2 100644
---- a/tools/buildman/buildman.rst
-+++ b/tools/buildman/buildman.rst
-@@ -1286,6 +1286,11 @@ then buildman hangs. Failing to handle any eventuality is a bug in buildman and
- should be reported. But you can use -T0 to disable threading and hopefully
- figure out the root cause of the build failure.
- 
-+For situations where buildman is invoked from multiple running processes, it is
-+sometimes useful to have buildman wait until the others have finished. Use the
-+--process-limit option for this: --process-limit 1 will allow only one buildman
-+to process jobs at a time.
-+
- Build summary
- -------------
- 
-diff --git a/tools/buildman/cmdline.py b/tools/buildman/cmdline.py
-index 8dc5a8787b5..544a391a464 100644
---- a/tools/buildman/cmdline.py
-+++ b/tools/buildman/cmdline.py
-@@ -129,6 +129,8 @@ def add_after_m(parser):
-           default=False, help="Use an O= (output) directory per board rather than per thread")
-     parser.add_argument('--print-arch', action='store_true',
-           default=False, help="Print the architecture for a board (ARCH=)")
-+    parser.add_argument('--process-limit', type=int,
-+          default=0, help='Limit to number of buildmans running at once')
-     parser.add_argument('-r', '--reproducible-builds', action='store_true',
-           help='Set SOURCE_DATE_EPOCH=0 to suuport a reproducible build')
-     parser.add_argument('-R', '--regen-board-list', type=str,
-diff --git a/tools/buildman/control.py b/tools/buildman/control.py
-index f2dd87814c3..464835c5be5 100644
---- a/tools/buildman/control.py
-+++ b/tools/buildman/control.py
-@@ -7,10 +7,13 @@
- This holds the main control logic for buildman, when not running tests.
- """
- 
-+import getpass
- import multiprocessing
- import os
- import shutil
- import sys
-+import tempfile
-+import time
- 
- from buildman import boards
- from buildman import bsettings
-@@ -21,10 +24,23 @@ from patman import gitutil
- from patman import patchstream
- from u_boot_pylib import command
- from u_boot_pylib import terminal
--from u_boot_pylib.terminal import tprint
-+from u_boot_pylib import tools
-+from u_boot_pylib.terminal import print_clear, tprint
- 
- TEST_BUILDER = None
- 
-+# Space-separated list of buildman process IDs currently running jobs
-+RUNNING_FNAME = f'buildmanq.{getpass.getuser()}'
-+
-+# Lock file for access to RUNNING_FILE
-+LOCK_FNAME = f'{RUNNING_FNAME}.lock'
-+
-+# Wait time for access to lock (seconds)
-+LOCK_WAIT_S = 10
-+
-+# Wait time to start running
-+RUN_WAIT_S = 300
-+
- def get_plural(count):
-     """Returns a plural 's' if count is not 1"""
-     return 's' if count != 1 else ''
-@@ -578,6 +594,125 @@ def calc_adjust_cfg(adjust_cfg, reproducible_builds):
-     return adjust_cfg
- 
- 
-+def read_procs(tmpdir=tempfile.gettempdir()):
-+    """Read the list of running buildman processes
-+
-+    If the list is corrupted, returns an empty list
-+
-+    Args:
-+        tmpdir (str): Temporary directory to use (for testing only)
-+    """
-+    running_fname = os.path.join(tmpdir, RUNNING_FNAME)
-+    procs = []
-+    if os.path.exists(running_fname):
-+        items = tools.read_file(running_fname, binary=False).split()
-+        try:
-+            procs = [int(x) for x in items]
-+        except ValueError: # Handle invalid format
-+            pass
-+    return procs
-+
-+
-+def check_pid(pid):
-+    """Check for existence of a unix PID
-+
-+    https://stackoverflow.com/questions/568271/how-to-check-if-there-exists-a-process-with-a-given-pid-in-python
-+
-+    Args:
-+        pid (int): PID to check
-+
-+    Returns:
-+        True if it exists, else False
-+    """
-+    try:
-+        os.kill(pid, 0)
-+    except OSError:
-+        return False
-+    else:
-+        return True
-+
-+
-+def write_procs(procs, tmpdir=tempfile.gettempdir()):
-+    """Write the list of running buildman processes
-+
-+    Args:
-+        tmpdir (str): Temporary directory to use (for testing only)
-+    """
-+    running_fname = os.path.join(tmpdir, RUNNING_FNAME)
-+    tools.write_file(running_fname, ' '.join([str(p) for p in procs]),
-+                     binary=False)
-+
-+    # Allow another user to access the file
-+    os.chmod(running_fname, 0o666)
-+
-+def wait_for_process_limit(limit, tmpdir=tempfile.gettempdir(),
-+                           pid=os.getpid()):
-+    """Wait until the number of buildman processes drops to the limit
-+
-+    This uses FileLock to protect a 'running' file, which contains a list of
-+    PIDs of running buildman processes. The number of PIDs in the file indicates
-+    the number of running processes.
-+
-+    When buildman starts up, it calls this function to wait until it is OK to
-+    start the build.
-+
-+    On exit, no attempt is made to remove the PID from the file, since other
-+    buildman processes will notice that the PID is no-longer valid, and ignore
-+    it.
-+
-+    Two timeouts are provided:
-+        LOCK_WAIT_S: length of time to wait for the lock; if this occurs, the
-+            lock is busted / removed before trying again
-+        RUN_WAIT_S: length of time to wait to be allowed to run; if this occurs,
-+            the build starts, with the PID being added to the file.
-+
-+    Args:
-+        limit (int): Maximum number of buildman processes, including this one;
-+            must be > 0
-+        tmpdir (str): Temporary directory to use (for testing only)
-+        pid (int): Current process ID (for testing only)
-+    """
-+    from filelock import Timeout, FileLock
-+
-+    running_fname = os.path.join(tmpdir, RUNNING_FNAME)
-+    lock_fname = os.path.join(tmpdir, LOCK_FNAME)
-+    lock = FileLock(lock_fname)
-+
-+    # Allow another user to access the file
-+    col = terminal.Color()
-+    tprint('Waiting for other buildman processes...', newline=False,
-+           colour=col.RED)
-+
-+    claimed = False
-+    deadline = time.time() + RUN_WAIT_S
-+    while True:
-+        try:
-+            with lock.acquire(timeout=LOCK_WAIT_S):
-+                os.chmod(lock_fname, 0o666)
-+                procs = read_procs(tmpdir)
-+
-+                # Drop PIDs which are not running
-+                procs = list(filter(check_pid, procs))
-+
-+                # If we haven't hit the limit, add ourself
-+                if len(procs) < limit:
-+                    tprint('done...', newline=False)
-+                    claimed = True
-+                if time.time() >= deadline:
-+                    tprint('timeout...', newline=False)
-+                    claimed = True
-+                if claimed:
-+                    write_procs(procs + [pid], tmpdir)
-+                    break
-+
-+        except Timeout:
-+            tprint('failed to get lock: busting...', newline=False)
-+            os.remove(lock_fname)
-+
-+        time.sleep(1)
-+    tprint('starting build', newline=False)
-+    print_clear()
-+
- def do_buildman(args, toolchains=None, make_func=None, brds=None,
-                 clean_dir=False, test_thread_exceptions=False):
-     """The main control code for buildman
-@@ -677,5 +812,8 @@ def do_buildman(args, toolchains=None, make_func=None, brds=None,
- 
-     TEST_BUILDER = builder
- 
-+    if args.process_limit:
-+        wait_for_process_limit(args.process_limit)
-+
-     return run_builder(builder, series.commits if series else None,
-                        brds.get_selected_dict(), args)
-diff --git a/tools/buildman/pyproject.toml b/tools/buildman/pyproject.toml
-index fe0f6421b53..68bfa45c3f4 100644
---- a/tools/buildman/pyproject.toml
-+++ b/tools/buildman/pyproject.toml
-@@ -8,7 +8,11 @@ version = "0.0.6"
- authors = [
-   { name="Simon Glass", email="sjg@chromium.org" },
- ]
--dependencies = ["u_boot_pylib >= 0.0.6", "patch-manager >= 0.0.6"]
-+dependencies = [
-+    "filelock >= 3.0.12",
-+    "u_boot_pylib >= 0.0.6",
-+    "patch-manager >= 0.0.6"
-+]
- description = "Buildman build tool for U-Boot"
- readme = "README.rst"
- requires-python = ">=3.7"
-diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-index f92add7a7c5..d68395c2164 100644
---- a/tools/buildman/test.py
-+++ b/tools/buildman/test.py
-@@ -2,12 +2,14 @@
- # Copyright (c) 2012 The Chromium OS Authors.
- #
- 
-+from filelock import FileLock
- import os
- import shutil
- import sys
- import tempfile
- import time
- import unittest
-+from unittest.mock import patch
- 
- from buildman import board
- from buildman import boards
-@@ -156,6 +158,11 @@ class TestBuild(unittest.TestCase):
-         if not os.path.isdir(self.base_dir):
-             os.mkdir(self.base_dir)
- 
-+        self.cur_time = 0
-+        self.valid_pids = []
-+        self.finish_time = None
-+        self.finish_pid = None
-+
-     def tearDown(self):
-         shutil.rmtree(self.base_dir)
- 
-@@ -747,6 +754,120 @@ class TestBuild(unittest.TestCase):
-         self.assertEqual([
-             ['MARY="mary"', 'Missing expected line: CONFIG_MARY="mary"']], result)
- 
-+    def get_procs(self):
-+        running_fname = os.path.join(self.base_dir, control.RUNNING_FNAME)
-+        items = tools.read_file(running_fname, binary=False).split()
-+        return [int(x) for x in items]
-+
-+    def get_time(self):
-+        return self.cur_time
-+
-+    def inc_time(self, amount):
-+        self.cur_time += amount
-+
-+        # Handle a process exiting
-+        if self.finish_time == self.cur_time:
-+            self.valid_pids = [pid for pid in self.valid_pids
-+                               if pid != self.finish_pid]
-+
-+    def kill(self, pid, signal):
-+        if pid not in self.valid_pids:
-+            raise OSError('Invalid PID')
-+
-+    def test_process_limit(self):
-+        """Test wait_for_process_limit() function"""
-+        tmpdir = self.base_dir
-+
-+        with (patch('time.time', side_effect=self.get_time),
-+              patch('time.sleep', side_effect=self.inc_time),
-+              patch('os.kill', side_effect=self.kill)):
-+            # Grab the process. Since there is no other profcess, this should
-+            # immediately succeed
-+            control.wait_for_process_limit(1, tmpdir=tmpdir, pid=1)
-+            lines = terminal.get_print_test_lines()
-+            self.assertEqual(0, self.cur_time)
-+            self.assertEqual('Waiting for other buildman processes...',
-+                             lines[0].text)
-+            self.assertEqual(self._col.RED, lines[0].colour)
-+            self.assertEqual(False, lines[0].newline)
-+            self.assertEqual(True, lines[0].bright)
-+
-+            self.assertEqual('done...', lines[1].text)
-+            self.assertEqual(None, lines[1].colour)
-+            self.assertEqual(False, lines[1].newline)
-+            self.assertEqual(True, lines[1].bright)
-+
-+            self.assertEqual('starting build', lines[2].text)
-+            self.assertEqual([1], control.read_procs(tmpdir))
-+            self.assertEqual(None, lines[2].colour)
-+            self.assertEqual(False, lines[2].newline)
-+            self.assertEqual(True, lines[2].bright)
-+
-+            # Try again, with a different PID...this should eventually timeout
-+            # and start the build anyway
-+            self.cur_time = 0
-+            self.valid_pids = [1]
-+            control.wait_for_process_limit(1, tmpdir=tmpdir, pid=2)
-+            lines = terminal.get_print_test_lines()
-+            self.assertEqual('Waiting for other buildman processes...',
-+                             lines[0].text)
-+            self.assertEqual('timeout...', lines[1].text)
-+            self.assertEqual(None, lines[1].colour)
-+            self.assertEqual(False, lines[1].newline)
-+            self.assertEqual(True, lines[1].bright)
-+            self.assertEqual('starting build', lines[2].text)
-+            self.assertEqual([1, 2], control.read_procs(tmpdir))
-+            self.assertEqual(control.RUN_WAIT_S, self.cur_time)
-+
-+            # Check lock-busting
-+            self.cur_time = 0
-+            self.valid_pids = [1, 2]
-+            lock_fname = os.path.join(tmpdir, control.LOCK_FNAME)
-+            lock = FileLock(lock_fname)
-+            lock.acquire(timeout=1)
-+            control.wait_for_process_limit(1, tmpdir=tmpdir, pid=3)
-+            lines = terminal.get_print_test_lines()
-+            self.assertEqual('Waiting for other buildman processes...',
-+                             lines[0].text)
-+            self.assertEqual('failed to get lock: busting...', lines[1].text)
-+            self.assertEqual(None, lines[1].colour)
-+            self.assertEqual(False, lines[1].newline)
-+            self.assertEqual(True, lines[1].bright)
-+            self.assertEqual('timeout...', lines[2].text)
-+            self.assertEqual('starting build', lines[3].text)
-+            self.assertEqual([1, 2, 3], control.read_procs(tmpdir))
-+            self.assertEqual(control.RUN_WAIT_S, self.cur_time)
-+            lock.release()
-+
-+            # Check handling of dead processes. Here we have PID 2 as a running
-+            # process, even though the PID file contains 1, 2 and 3. So we can
-+            # add one more PID, to make 2 and 4
-+            self.cur_time = 0
-+            self.valid_pids = [2]
-+            control.wait_for_process_limit(2, tmpdir=tmpdir, pid=4)
-+            lines = terminal.get_print_test_lines()
-+            self.assertEqual('Waiting for other buildman processes...',
-+                             lines[0].text)
-+            self.assertEqual('done...', lines[1].text)
-+            self.assertEqual('starting build', lines[2].text)
-+            self.assertEqual([2, 4], control.read_procs(tmpdir))
-+            self.assertEqual(0, self.cur_time)
-+
-+            # Try again, with PID 2 quitting at time 50. This allows the new
-+            # build to start
-+            self.cur_time = 0
-+            self.valid_pids = [2, 4]
-+            self.finish_pid = 2
-+            self.finish_time = 50
-+            control.wait_for_process_limit(2, tmpdir=tmpdir, pid=5)
-+            lines = terminal.get_print_test_lines()
-+            self.assertEqual('Waiting for other buildman processes...',
-+                             lines[0].text)
-+            self.assertEqual('done...', lines[1].text)
-+            self.assertEqual('starting build', lines[2].text)
-+            self.assertEqual([4, 5], control.read_procs(tmpdir))
-+            self.assertEqual(self.finish_time, self.cur_time)
-+
- 
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/u_boot_pylib/terminal.py b/tools/u_boot_pylib/terminal.py
-index 40d79f8ac07..2cd5a54ab52 100644
---- a/tools/u_boot_pylib/terminal.py
-+++ b/tools/u_boot_pylib/terminal.py
-@@ -164,8 +164,11 @@ def print_clear():
-     global last_print_len
- 
-     if last_print_len:
--        print('\r%s\r' % (' '* last_print_len), end='', flush=True)
--        last_print_len = None
-+        if print_test_mode:
-+            print_test_list.append(PrintLine(None, None, None, None))
-+        else:
-+            print('\r%s\r' % (' '* last_print_len), end='', flush=True)
-+            last_print_len = None
- 
- def set_print_test_mode(enable=True):
-     """Go into test mode, where all printing is recorded"""
--- 
-2.34.1
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ15zUACgkQFHw5/5Y0
+tyykcAv8DtF3Fxyamt8pPLQHQ9S7Dw0SpjecyvKxJvnIRvXTyKk45sBdjTq5+NV0
+yOQGk9iCWaIKQhFhBo7zIOc60X5jhWR9FIPnjclFlVbPOTb+DxNm3fOFbwIq+Bbi
+YYWpSf0qC3gOvRQkSuo/qGojblrKpfwLkyS+UCM90FeYTGDRxHiOGtJAWU7T7dci
+es3CsmCdvJftFN8lCtFu82MCOkqG62qP3/zhoCUe7Ju3S2UMczN9D7NbHPjVsovT
+PIWFFmmQfPGN1/RJ/rT/qScyldERU+mM0ZeUKd8+pwDeprPyAh8X4admJqB6jURe
+ulS0KcpD/Atd+W4hDbBzFc1YDLN3ehhRcwsOIkZyHtEBWq85WPj+YYsg2MQZNxi2
+/4ripg45ZZmYVcJz7ya1fsNPOMdgB5YPYBcOMmdv28J68KC1W0tGfnrAWnZqMZTI
+pb+KN1Y/DPUn9mW01djKYS/KjqrGP3eLhiWlCg11oSeX71hKz8zZBmai2RSDJ1UI
+JENr7/p2
+=ASBn
+-----END PGP SIGNATURE-----
+
+--BwRchxss3G+bi+a5--
