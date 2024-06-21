@@ -4,76 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04AD4C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 08:25:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372E5C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 08:44:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 381ED880A5;
-	Fri, 21 Jun 2024 10:25:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 828AE87FF0;
+	Fri, 21 Jun 2024 10:44:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KdlIzKkx";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="FeVCnkQf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37197880AD; Fri, 21 Jun 2024 10:25:41 +0200 (CEST)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C69387FBC; Fri, 21 Jun 2024 10:44:40 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B385B8644E
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 10:25:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17F6387FBC
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 10:44:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-48d7a7f3580so559714137.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 01:25:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718958336; x=1719563136; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a2G2B1L5mzX1F3CzeZoNt583WLHWwGiGaoRRIfwpxWo=;
- b=KdlIzKkxwwo7/DHsQBirunXK6syKDiJg+qAIzxfcO8uqAB0nGm66fDXtjViZdgzg7x
- PlKiLtcCK+sTJ+dw0cfGP79+GUEWbiJ0LkDoj9pBc+fKcwClD3DN4ZeDJy/mXEbamQj6
- qO01UqQuBGCLQhOaXBAgNKFIUEC/75F51zg6Z0DpV7r6yG2jzTZTQft0BrcwYA5B4OK9
- H03huW1+YUiV2JPnBJP9jxuKhhSbzLq1ODWyc+ucAmSjnfh9U7UYC1a9McgU/M/7emjG
- hgeS+kCVbuG+VrmNQwuyV5L7NOzCwBYE8zPIJFxcOsVVJj4M7XvhxPNRZ5JExblvCRow
- a3oQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718958336; x=1719563136;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a2G2B1L5mzX1F3CzeZoNt583WLHWwGiGaoRRIfwpxWo=;
- b=ApJaNbfLH8HgcfWjbvf0B/U2HMyOQvIwdoAF50gYzdJhHdYtTdgfk12EAWrFMj/Ckq
- M+Ls8PXSoSbaC8CtYiZEf7Zna6nHl4LwT/2MrP8xNJ2zmRf6ydcFJ5FZWghLlBgrnOzx
- g0RaG3Bo8Rgc6n4bfU58rdgMlrpHksqv4nW9a1HsRejuPvBkZXLG/V9S47dIPKLyBR1y
- B30qdCv+HSMLIbjgetdo8OArF+c9J1e8GllulLii6AtRpys9EKXAssJBCkyi30+SZPTL
- xLOH/olPk6Kr2qRZrY8YBfPYoOoUNbU9GDXfhDxaZM+/Exv1EQkdKBRs59QiWRll+d7z
- dqVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXey0DNbV73kE9/E0c1HaWNkB3kjyTKk1+fKqzhwjwvLFEXllw1FYZJQjNIHYsoCCUHPyATxVoeZXjrt7n1HrLu3XXX9w==
-X-Gm-Message-State: AOJu0YymJJas7eHwKYHWvHSG7QpEabF0blmsD0HkbSGk7e15ZtGiASjJ
- FGGqAxMH1W3t2F6MO2dlvn3M3y3T8lvXFoVqJDQttz56kelo/gUnm4sDlVcfptzgjLOVjuoU+Pj
- JuGWdCfU6Z6w+nyi485ZZhuUXjQTqOVWKMIor+A==
-X-Google-Smtp-Source: AGHT+IF+RYsuntCzcX8w6ATbjGYDvLHAaceuJr5bo1ms3hFCEr99/EpmYT5x3RElTns+f2D7e2A+WwayDBTmhcuJXng=
-X-Received: by 2002:a67:f04c:0:b0:48f:3800:d355 with SMTP id
- ada2fe7eead31-48f3800d54cmr796038137.15.1718958336041; Fri, 21 Jun 2024
- 01:25:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HmJ1XzDqvjXfezZzEuipVUznOPboOP6Zu6vL5ixzpNXZ6FNen3C8hsYg6lvw7DR3gk9MS6E1ffA7w4kHPxlNKZjqjv+1B8zIQhsdFa6Giaoi3+8AXT7XQy5H3wUUuS74qP3WjiKE5Xi+bjQOnx8KHrBVhKZ36pLxEGPbiDvoGmL+rSwEhavyvYdlLH7clhUKIdqB4ngCnozHba3BuYJ5MX5N2HXD82lH2owSd+JNvsNMM0oVEjGGyFaLbh0R7hiuwbPH/WlamYdtvgsolEouz2k2CEqGkWJ6HZHx1OBtNl9ZSWhSCddGU74Rid1GOgEzXeZnE6d1nF+3nKpHfyfHcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kkT0gqxVGfysrRO7FovY7WaNkJGKPVDUsRNRGWnjoKk=;
+ b=hD9gaCNRQNqBiT/mDK7crHTNUMfnZRtyzHuKSFLF9GkhS8d3zlPgBgXuKLiXija2wUtVO8tHDbL2OdnQ5P/2Diu65hBQ8g3YGIXG1Y68qnMm8PHUEeqYZDT6OmSmYEi0PQxtj0m3hNPO576hzEGByCaZxHSBgqRSrqRcdZkeozI8evZMvlx7KnHg3q0j+U7fEEWrVkOfKrbnpEdxf4aH2AMejcg0JG6HCDpN7i285fccLbje9cWMNVL7HOsGCIE77Y6sDQ71qNf2rbB8yEMzdy9ch+5Bz007my0RBwU85pmvazzDNu7RjIisE/9BFZqIlGpZHrLJniuOWPqZviaL0A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kkT0gqxVGfysrRO7FovY7WaNkJGKPVDUsRNRGWnjoKk=;
+ b=FeVCnkQfyjKolJBtVQ+jSR+aC0chxL6Pwz9M7sWvZZobt+1bVdCS0l6xGoLclgpJ06DxvjLul5GjXQ+jtl1zZz8Uw5Nis/uUhHVDUXYqbl6Mvt3cTvYcN0jbRpnpRtSgH6BJM6l65TBobOoXeb8iddCtZk4EazYaFWocSKPTSfE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
+ by AS4PR04MB9433.eurprd04.prod.outlook.com (2603:10a6:20b:4e9::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.21; Fri, 21 Jun
+ 2024 08:44:35 +0000
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7698.020; Fri, 21 Jun 2024
+ 08:44:35 +0000
+Message-ID: <6d80a505-3374-406e-ab1f-959a1794cae1@cherry.de>
+Date: Fri, 21 Jun 2024 10:44:32 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: Request for hosting a boot-firmware repository in u-boot git
+ (denx and GitHub)
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Josh Boyer <jwboyer@redhat.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>
+References: <20240620213539.ftmjhphypssxp5n4@desolate>
+ <a7cca1a2-5ba8-487b-9fce-1553da93c56e@cherry.de>
+ <CALeDE9Ojza7T3gMxBJP5L0s0CA6CfxeO_6AAvnoUKDevG+_eBw@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CALeDE9Ojza7T3gMxBJP5L0s0CA6CfxeO_6AAvnoUKDevG+_eBw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: WA2P291CA0036.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1f::9) To PA4PR04MB7982.eurprd04.prod.outlook.com
+ (2603:10a6:102:c4::9)
 MIME-Version: 1.0
-References: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
- <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
-In-Reply-To: <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 21 Jun 2024 13:55:24 +0530
-Message-ID: <CAFA6WYM9hPFpb9F=nYSe-UkFbGMuUuJBiBfMiUzrSowSxvOUNQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] soc: qcom: rpmh and cmd-db drivers
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|AS4PR04MB9433:EE_
+X-MS-Office365-Filtering-Correlation-Id: a459ac2b-cbe5-4b51-fb90-08dc91ce609b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230037|1800799021|366013|7416011|376011;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?U2JvYUJMTjRPQzdPQ3kzN1hQcW9CcXdELzhmaHBNMmdob1FXUStTM0llUXgw?=
+ =?utf-8?B?L3RtT3RRQnpqdXpjeDNYcmpnZE1kQWk4aU5wNTlrVVZWdGhZSjM2VUt2YXJN?=
+ =?utf-8?B?bHpOKzhVQzFrVGMxMDc5aUw2dG5xd1B1b0JHbzcvR205cjU1OUVwU0ZFelJz?=
+ =?utf-8?B?YlkyUDFRdXltYnh1UkJGTEw4VitBU0JGV2JxTVkxbkJZN0Y5R2NaQ0FkRkQy?=
+ =?utf-8?B?Y1hTY2NhNnBXbitQZlp6b2dxbFRvVERJL2xMYXgvbVNneU1acFVuRVU0cHBk?=
+ =?utf-8?B?ZWEybkkrMDU0bnVwaGM0aXZIalZJUDJsRkZXbHYvajJkSE1TTWx2b2hXUlBK?=
+ =?utf-8?B?NnhjWjY0QU15Szk0MldLcGZENVg0Um85YlYrYVRMSTR0YnNxVzg0S1lvU3Q2?=
+ =?utf-8?B?MkRXamFVbEhVNTkxZDc0Rk9VVkZyZ29XNDY0VWJxbUhXd1NhcGwxT3EzMzBq?=
+ =?utf-8?B?K1pVTGR4ZFNWcVg2NHlvWCtGZlVVcWZZc1JFeDQzRlcxTWZOZzdpd25OWWVr?=
+ =?utf-8?B?K0pvMnI0WG9hZWU1VS9VMmhsVmN0TU85bEZHcFZSaERkK0x5Y2VmblpBaDdW?=
+ =?utf-8?B?QnprYnI5ektQRSt2dXliWEhaODEwUUx6YlVSRVd5Uk50N3BDTEY2QkVIcWtP?=
+ =?utf-8?B?eGxHSXNsYkg4bzgrdTNKdURpdlU1MjdLMjVzb1JHeW9jQWpHRy9sSEtVQ2Na?=
+ =?utf-8?B?dmdkUFAzWExycGN5Z0Z4L3RJb2xPSjcrSlp0bGUyMVpsUk1oVXZCRHova0ZR?=
+ =?utf-8?B?YmZYNC9oZEZKTTlsYm14K3FLWDVqNHE4NFBWNkRxSHl6YWRZbnNHbVh2RmlQ?=
+ =?utf-8?B?OGFQZ1ZKdy9pTFR5ZGhQdmxhL0NYZzdiYmpiZS9uTDUzUVVTT292TkRlek5Q?=
+ =?utf-8?B?R0VRd3BQSWVlaTJWOHUvVW5CZlh5NUpCQVNOZ3ZmM3p3TWRoeDJSMlVLVzRI?=
+ =?utf-8?B?dVFvcDE1M253NEdNQnFpaDlZUkJOZTNvS0pUOVFzVWVtcE94blFGekxVSC9X?=
+ =?utf-8?B?MFYrOVlvNUVRQ29mY0hyV01NUW05VTlWdDkwVjErdm5vUGtnYXZoaExXampQ?=
+ =?utf-8?B?aVZiQ0JFMkZNUEU1amxwcmVNbVY3dXJEWERJc3ltYVh0TVRaY3dnU3B1YkFn?=
+ =?utf-8?B?dWt0WnFDTGpPK0s1WjRpdjVTMjJZUyt5SWFGa0JZWmZwWVJScTFyb2RLa0xw?=
+ =?utf-8?B?dWZxZjdvTFlHKzNkbjArMStVc2NramFSd1MvTjZ6WEFXTGZQaVI3cTBlcGtJ?=
+ =?utf-8?B?YXV6UnhsVjZYSHBwNU51RDNoOHJPNUI0NFMxTHNLbWFPVER3Wi9maVpuaW1q?=
+ =?utf-8?B?MkVTYTB1czltb1R5MGpMRDZDZ2FjVDdTcS9sNjVvcTM4ZktweVdEQXdUZExs?=
+ =?utf-8?B?aUR1ZTRzOUFDVy9tZEk5aHk3cW12dHJEZmFzcnk2OElkSnBrUllQeE5XUkZS?=
+ =?utf-8?B?UkxvS29udmo5ejFWbk8vMGUxUEN2dUlBejE0RWt1NWUrUCtuMlE5b1l5K2hM?=
+ =?utf-8?B?ZmhsUUNvSVpNTmtyZC9jdWVuT3hsR3ZwcDc2M1hGZUpacW9xemVGL2ZDMm1C?=
+ =?utf-8?B?L0YvMGxNU0FZRzBzOFNTWXRjQ3lkQjkvQVVSQnhxWTZsZzNydmhaRHFtSGVX?=
+ =?utf-8?B?Z2w4U1psdkRJR3I1R3FPVU9kUXF1MjhwMTRnMDl1M1c2U1dBZXNmeXJRZDFK?=
+ =?utf-8?Q?QDkFwesSOA5hiP+FQ4T0?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230037)(1800799021)(366013)(7416011)(376011); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eFJObFNJUjArblpwRG5QT2U2NkpXazNYNDMzRitEdjVIeHhJRG81NHptNWgx?=
+ =?utf-8?B?VzdqWTJyTnYwNFI3U0ZheXFHanFtS2tlVGUybHY4bEtpMzRJR3NXa0lCQ3lm?=
+ =?utf-8?B?TWVlWVFMdnBJRUdoNURqaVBjSmhsQjNNVm8xekdFbm9Fd3JpalZ6TndDWStt?=
+ =?utf-8?B?dENjVkpFMUVqMC9GU0dlRTNXeFNYQ3dUNnJuS0taa3VGdjdYK0I5ZkVmdGFl?=
+ =?utf-8?B?dnk3clpWSGM3SHZmQ2hyWjdSdENOZmUvbVg4YUtDSmgwdHIrRGY0LzhTRTVu?=
+ =?utf-8?B?WWxCMkEwSnFNTmQ0VDlxZ2xXWlFNcG1sWllIOStJbkloRUdwNHFGazFoOGxN?=
+ =?utf-8?B?MnB4N1J1d1M0RjZvNVhxR1VISUdka2phMUVGS09tWmtDTUpXd04zR2ZSeXlN?=
+ =?utf-8?B?UHhYWlNiNWFPL1p2Rm9xUHAwQU11ZERYU05SdW01Z2VyWjdRMUVUMXlhRUFw?=
+ =?utf-8?B?WVRhRXdMSG1UZnFYOU8rd1FjamRqZEgxOUMzek9Bd2YzeE5oblR6alpXTlV5?=
+ =?utf-8?B?ZGFwSXlsWG9yYUs2cE5oKzRXUXdrcWwzSVRCRTFuSlRkaXRPWU5vZHpZYWwz?=
+ =?utf-8?B?dXp5anE1ZllTVXg3Y29uOTdnZjZWL0VKZnFzSDN0OHhDVHpxWmcrZzFGN2V4?=
+ =?utf-8?B?c2NtRHVuVUk3eXpjNnpJdEV2RWFzcmYrVWs3VVNpdGFiQ1FpdzliaEg5N3U3?=
+ =?utf-8?B?VjhmR0kyWFZHMElwcFFXSzRRWFJtOHdSVTcwVTdlUnRIbEx6WlVUYnpiUFpv?=
+ =?utf-8?B?OEN4NDRtSWZTb1BHU0ova0hyK1FFZjA2cEdFRzBLT3N4czZyQ2grVDlLS3Jm?=
+ =?utf-8?B?SGlGekdIR2JRZ3ZQKzJtTDY3QlhPcWszK0pCWWFQTURVVytVYVBXYVVjTFNp?=
+ =?utf-8?B?T2d6bmppYXRyd3p6bjVmWVF0VTFjMkh5ZU55QStQMHRteUV1QWFEMkpZR1Na?=
+ =?utf-8?B?SkdHb2ZLOWVLay90SlJlSGt6cHNDTnh1TzhEM3BxSjdHYXVla0lpazV4U0ha?=
+ =?utf-8?B?bVovNnlQOHRLaFRSdVFqLzdXa3dpenJYek5KTERwNzc0SEd4R25EcTFMU1J5?=
+ =?utf-8?B?OVhnWWZ5d05rak1Ba1lVd1ZDZnUzbWpCME1EMkJiM3BUdkZobnJYK1N4OUR4?=
+ =?utf-8?B?NmJkRzVZdFlBSGVCMTN4MVZIbzlHUEg3d0M3dG5WLzZZK3Rwd1hzQTRNS1Nu?=
+ =?utf-8?B?M05CYmxmOHc0UGJtcE00ZllKM2xJYjY0TTRxUjZDUjkyai9LZ09rQmQ1aUtw?=
+ =?utf-8?B?SksyNG5NU2NGdUlWUkpySjdSWlBwTGQxR3lWYUhaeWRrUjM1Q1M0TDIxaHBy?=
+ =?utf-8?B?N3E2QjdGb0M3U2ZwM0Zyc3ArWVdCN0lhTmxDcGZ3MWlIUE5QUy96SGpkcjJy?=
+ =?utf-8?B?dCtwQzFOZ2Jpak94MFEyNDBBOGd4QzZTN0taS0J6TjJIOStsU2ZBUTc0aUpy?=
+ =?utf-8?B?SjhZRjUyTmhuVi9Ec3psUFYrVjIrWVJoWTBkMFI3VWkva0ZUeko0NE5oT1Rk?=
+ =?utf-8?B?dHVHb05QZnVzVG8wbTZoVWFnU3N3aERuQTBlS1lrbkplUUJpRjlEMVJReHpk?=
+ =?utf-8?B?bm9nL1c3dUlFQ1pkZ1dnaGxlaWllSlVZWnAycHZxMXpVZThqUUFaZFROMUFB?=
+ =?utf-8?B?SXVnbU5pNHh6MFFYU210Tm9RWDl6RDVnQVJGUk1EQitnZjFTRG13VStRcURK?=
+ =?utf-8?B?MG55UWVzM0tZdVpTSEY3K1I5UjZRVmZ4cTJjU0VkR3NxaUVERmFKaHZ4VVJp?=
+ =?utf-8?B?WG1NZkozSFFmdnpzNHV1VUZZa0wxWW9KeXpSUGhyd3pIaGIyaHFCc3JBZi9h?=
+ =?utf-8?B?NGFueUNqTnlqbEpVbTFDNFRScDRTZGdJZlFzVEtITXkxUHRVL21HWktodyto?=
+ =?utf-8?B?M0ZzREQvR3JWeE5SaFBFYUV5SzlaL1U0QzFZR2RRbXpmbDhlcm43clVRcnV1?=
+ =?utf-8?B?YlpkeTkwa3ora2ViSjNJbDJrYkV5eVVqZ1ptSmYwRmJCZXN6cFNTOEM3a3lN?=
+ =?utf-8?B?dWR3Z2FtV0EzSEJ2T1FFUVVpN0hRZEM5ZGh0UVdFbXNrbnRLWWtpQ2pSNi9z?=
+ =?utf-8?B?MmtwTTBOUUdsNTdkRDQ2eEJXQUtvdnU2cFVCT3Bpbi9yTkRRZi82T3M2dDdZ?=
+ =?utf-8?B?MmNpU0VnN3ZacHQ0SkZJaFR5NDFZWG5ucURyS3R0cXVubEtkRFhGZmtqcXJO?=
+ =?utf-8?B?WVE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a459ac2b-cbe5-4b51-fb90-08dc91ce609b
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2024 08:44:35.1426 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LOizlO/QsgWem56xT5FjdrxN428Q5S6Lh55B1laf+qlb4wfTbPOKPzA62IDV+bTP391CibN2n+CBUjPLXbhidQWyke8VyV6lk5s537Uf4hw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9433
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,1426 +177,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Peter,
 
-On Mon, 17 Jun 2024 at 14:02, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Introduce two Qualcomm SoC drivers, the RPMh and cmd-db. RPMh is a the
-> name for the second generation Resource Power Management hub on Qualcomm
-> SoCs. Most core regulators have to be controlled via this hub.
->
-> The cmd-db is a region of memory which contains offsets and data about
-> how to communicate with the RPMh.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/soc/Kconfig              |   1 +
->  drivers/soc/Makefile             |   1 +
->  drivers/soc/qcom/Kconfig         |  25 ++
->  drivers/soc/qcom/Makefile        |   4 +
->  drivers/soc/qcom/cmd-db.c        | 246 ++++++++++++++++
->  drivers/soc/qcom/rpmh-internal.h | 141 +++++++++
->  drivers/soc/qcom/rpmh-rsc.c      | 619 +++++++++++++++++++++++++++++++++++++++
->  drivers/soc/qcom/rpmh.c          | 110 +++++++
->  include/soc/qcom/cmd-db.h        |  42 +++
->  include/soc/qcom/rpmh.h          |  29 ++
->  include/soc/qcom/tcs.h           |  78 +++++
->  11 files changed, 1296 insertions(+)
->
-> diff --git a/drivers/soc/Kconfig b/drivers/soc/Kconfig
-> index 03433bc0e6d2..8ceca0cb1386 100644
-> --- a/drivers/soc/Kconfig
-> +++ b/drivers/soc/Kconfig
-> @@ -39,8 +39,9 @@ config SOC_XILINX_VERSAL_NET
->           Enable this option to select SoC device id driver for Xilinx Versal NET.
->           This allows other drivers to verify the SoC familiy & revision using
->           matching SoC attributes.
->
-> +source "drivers/soc/qcom/Kconfig"
->  source "drivers/soc/samsung/Kconfig"
->  source "drivers/soc/ti/Kconfig"
->
->  endmenu
-> diff --git a/drivers/soc/Makefile b/drivers/soc/Makefile
-> index 610bf816d40a..c3d484e5bf6c 100644
-> --- a/drivers/soc/Makefile
-> +++ b/drivers/soc/Makefile
-> @@ -3,8 +3,9 @@
->  # Makefile for the U-Boot SOC specific device drivers.
->
->  obj-$(CONFIG_SOC_SAMSUNG) += samsung/
->  obj-$(CONFIG_SOC_TI) += ti/
-> +obj-$(CONFIG_SOC_QCOM) += qcom/
->  obj-$(CONFIG_SOC_DEVICE) += soc-uclass.o
->  obj-$(CONFIG_SOC_DEVICE_TI_K3) += soc_ti_k3.o
->  obj-$(CONFIG_SANDBOX) += soc_sandbox.o
->  obj-$(CONFIG_SOC_XILINX_ZYNQMP) += soc_xilinx_zynqmp.o
-> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-> new file mode 100644
-> index 000000000000..a0872c5b3c83
-> --- /dev/null
-> +++ b/drivers/soc/qcom/Kconfig
-> @@ -0,0 +1,25 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +menuconfig SOC_QCOM
-> +       bool "Qualcomm SOC drivers support"
-> +       help
-> +         Say Y here if you want to enable Qualcomm SOC drivers support.
-> +
-> +if SOC_QCOM
-> +
-> +config QCOM_COMMAND_DB
-> +       bool "Qualcomm Command DB"
-> +       help
-> +         Command DB queries shared memory by key string for shared system
-> +         resources. Platform drivers that require to set state of a shared
-> +         resource on a RPM-hardened platform must use this database to get
-> +         SoC specific identifier and information for the shared resources.
-> +
-> +config QCOM_RPMH
-> +       bool "Qualcomm RPMh support"
-> +       depends on QCOM_COMMAND_DB
-> +       help
-> +         Say y here to support the Qualcomm RPMh (resource peripheral manager)
-> +         if you need to control regulators on Qualcomm platforms, say y here.
-> +
-> +endif # SOC_QCOM
-> diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
-> new file mode 100644
-> index 000000000000..4fca569cfb77
-> --- /dev/null
-> +++ b/drivers/soc/qcom/Makefile
-> @@ -0,0 +1,4 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-$(CONFIG_QCOM_COMMAND_DB) += cmd-db.o
-> +obj-$(CONFIG_QCOM_RPMH)        += rpmh-rsc.o rpmh.o
-> diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-> new file mode 100644
-> index 000000000000..7bfd72ae2f3f
-> --- /dev/null
-> +++ b/drivers/soc/qcom/cmd-db.c
-> @@ -0,0 +1,246 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2016-2018, 2020, The Linux Foundation. All rights reserved.
-> + * Copyright (c) 2023, Linaro Ltd.
-> + */
-> +
-> +#include <dm/device.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/kernel.h>
-> +#include <linux/types.h>
-> +#include <linux/ioport.h>
-> +#include <linux/byteorder/generic.h>
-> +
-> +#include <soc/qcom/cmd-db.h>
-> +
-> +#define NUM_PRIORITY           2
-> +#define MAX_SLV_ID             8
-> +#define SLAVE_ID_MASK          0x7
-> +#define SLAVE_ID_SHIFT         16
-> +
-> +/**
-> + * struct entry_header: header for each entry in cmddb
-> + *
-> + * @id: resource's identifier
-> + * @priority: unused
-> + * @addr: the address of the resource
-> + * @len: length of the data
-> + * @offset: offset from :@data_offset, start of the data
-> + */
-> +struct entry_header {
-> +       u8 id[8];
-> +       __le32 priority[NUM_PRIORITY];
-> +       __le32 addr;
-> +       __le16 len;
-> +       __le16 offset;
-> +};
-> +
-> +/**
-> + * struct rsc_hdr: resource header information
-> + *
-> + * @slv_id: id for the resource
-> + * @header_offset: entry's header at offset from the end of the cmd_db_header
-> + * @data_offset: entry's data at offset from the end of the cmd_db_header
-> + * @cnt: number of entries for HW type
-> + * @version: MSB is major, LSB is minor
-> + * @reserved: reserved for future use.
-> + */
-> +struct rsc_hdr {
-> +       __le16 slv_id;
-> +       __le16 header_offset;
-> +       __le16 data_offset;
-> +       __le16 cnt;
-> +       __le16 version;
-> +       __le16 reserved[3];
-> +};
-> +
-> +/**
-> + * struct cmd_db_header: The DB header information
-> + *
-> + * @version: The cmd db version
-> + * @magic: constant expected in the database
-> + * @header: array of resources
-> + * @checksum: checksum for the header. Unused.
-> + * @reserved: reserved memory
-> + * @data: driver specific data
-> + */
-> +struct cmd_db_header {
-> +       __le32 version;
-> +       u8 magic[4];
-> +       struct rsc_hdr header[MAX_SLV_ID];
-> +       __le32 checksum;
-> +       __le32 reserved;
-> +       u8 data[];
-> +};
-> +
-> +/**
-> + * DOC: Description of the Command DB database.
-> + *
-> + * At the start of the command DB memory is the cmd_db_header structure.
-> + * The cmd_db_header holds the version, checksum, magic key as well as an
-> + * array for header for each slave (depicted by the rsc_header). Each h/w
-> + * based accelerator is a 'slave' (shared resource) and has slave id indicating
-> + * the type of accelerator. The rsc_header is the header for such individual
-> + * slaves of a given type. The entries for each of these slaves begin at the
-> + * rsc_hdr.header_offset. In addition each slave could have auxiliary data
-> + * that may be needed by the driver. The data for the slave starts at the
-> + * entry_header.offset to the location pointed to by the rsc_hdr.data_offset.
-> + *
-> + * Drivers have a stringified key to a slave/resource. They can query the slave
-> + * information and get the slave id and the auxiliary data and the length of the
-> + * data. Using this information, they can format the request to be sent to the
-> + * h/w accelerator and request a resource state.
-> + */
-> +
-> +static const u8 CMD_DB_MAGIC[] = { 0xdb, 0x30, 0x03, 0x0c };
-> +
-> +static bool cmd_db_magic_matches(const struct cmd_db_header *header)
-> +{
-> +       const u8 *magic = header->magic;
-> +
-> +       return memcmp(magic, CMD_DB_MAGIC, ARRAY_SIZE(CMD_DB_MAGIC)) == 0;
-> +}
-> +
-> +static struct cmd_db_header *cmd_db_header;
-> +
-> +static inline const void *rsc_to_entry_header(const struct rsc_hdr *hdr)
-> +{
-> +       u16 offset = le16_to_cpu(hdr->header_offset);
-> +
-> +       return cmd_db_header->data + offset;
-> +}
-> +
-> +static inline void *
-> +rsc_offset(const struct rsc_hdr *hdr, const struct entry_header *ent)
-> +{
-> +       u16 offset = le16_to_cpu(hdr->data_offset);
-> +       u16 loffset = le16_to_cpu(ent->offset);
-> +
-> +       return cmd_db_header->data + offset + loffset;
-> +}
-> +
-> +static int cmd_db_get_header(const char *id, const struct entry_header **eh,
-> +                            const struct rsc_hdr **rh)
-> +{
-> +       const struct rsc_hdr *rsc_hdr;
-> +       const struct entry_header *ent;
-> +       int i, j;
-> +       u8 query[sizeof(ent->id)] __nonstring;
-> +
-> +       /*
-> +        * Pad out query string to same length as in DB. NOTE: the output
-> +        * query string is not necessarily '\0' terminated if it bumps up
-> +        * against the max size. That's OK and expected.
-> +        */
-> +       strncpy(query, id, sizeof(query));
-> +
-> +       for (i = 0; i < MAX_SLV_ID; i++) {
-> +               rsc_hdr = &cmd_db_header->header[i];
-> +               if (!rsc_hdr->slv_id)
-> +                       break;
-> +
-> +               ent = rsc_to_entry_header(rsc_hdr);
-> +               for (j = 0; j < le16_to_cpu(rsc_hdr->cnt); j++, ent++) {
-> +                       if (memcmp(ent->id, query, sizeof(ent->id)) == 0) {
-> +                               if (eh)
-> +                                       *eh = ent;
-> +                               if (rh)
-> +                                       *rh = rsc_hdr;
-> +                               return 0;
-> +                       }
-> +               }
-> +       }
-> +
-> +       return -ENODEV;
-> +}
-> +
-> +/**
-> + * cmd_db_read_addr() - Query command db for resource id address.
-> + *
-> + * @id: resource id to query for address
-> + *
-> + * Return: resource address on success, 0 on error
-> + *
-> + * This is used to retrieve resource address based on resource
-> + * id.
-> + */
-> +u32 cmd_db_read_addr(const char *id)
-> +{
-> +       int ret;
-> +       const struct entry_header *ent;
-> +
-> +       ret = cmd_db_get_header(id, &ent, NULL);
-> +
-> +       return ret < 0 ? 0 : le32_to_cpu(ent->addr);
-> +}
-> +EXPORT_SYMBOL(cmd_db_read_addr);
+On 6/21/24 12:29 AM, Peter Robinson wrote:
+> On Thu, 20 Jun 2024 at 23:22, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>>
+>> Hi Nishanth Menon,
+>>
+>> +Cc Kever from Rockchip as maintainer of the arch in U-Boot
+>> +Cc Heiko as maintainer of many things Rockchip in many projects
+>>
+>> On 6/20/24 11:35 PM, Nishanth Menon wrote:
+>>> Hi Team,
+>>>
+>>> We have briefly discussed this topic on IRC[1]. I would like to
+>>> propose a new boot-firmware repository similar to the Linux-firmware
+>>> repository under the aegis of u-boot hosting.
+>>>
+>>> In addition to TI, it looks like some NXP[2] and Rockchip[3]
+>>> platforms seem to require additional closed-source/open-source
+>>> binaries to have a complete bootable image. Distribution rights and
+>>> locations of these binaries are challenging, and there needs to be a
+>>> standard for how and where they are hosted for end users.
+>>>
+>>> Further, looking ahead to future architectures:
+>>> * IP firmware: More and more IP vendors are embedding their own
+>>>     "specialized controllers" and require firmware for the operation
+>>>     (similar to Rockchip's DDR controller, I guess),
+>>> * boot stage firmware: Additional stages of the boot process involve
+>>>     vendor intermediate firmware, such as power configuration.
+>>> * Security enclave binaries: While I see a few folks trying to have an
+>>>     open-source s/w architecture, many PKA and PQC systems still require
+>>>     prop binaries for IP reasons.
+>>>
+>>> NOTE: I am not judging any company(including TI) for reasons why some
+>>> firmware is proprietary, but I hate to have the end users and other
+>>> system (distro) maintainers have to deal with hell trying to make the
+>>> life of end users easy to live with.
+>>>
+>>> In the case of TI's K3 architecture devices, we have two binary blobs
+>>> that are critical for the boot process.
+>>>
+>>> 1. TIFS Firmware / DMSC firmware[4]—This is the security enclave
+>>>     firmware. It is often encrypted, and sources are not public (due to
+>>>     various business/regulatory reasons).
+>>> 2. DM Firmware[5] - There is a source in public in some cases and
+>>>     binary only in others - essentially limited function binary to be
+>>>     put up in the device management uC. In cases where the source is
+>>>     available, the build procedure is, in my personal opinion, pretty
+>>>     arcane, and even though in theory it is practical, in practice, not
+>>>     friendly - efforts are going to simplify it, even probably integrate
+>>>     it with a more opensource ecosystem, but that is talking "look at the
+>>>     tea leaves" stuff.
+>>> 3. Low Power Management (LPM) binaries: tifs stub: another encrypted
+>>>     binary that gives the tifs system context restore logic before
+>>>     retrieving tifs firmware and a corresponding DM restoration binary.
+>>>
+>>> All told, this is not unlike the situation that necessitated the
+>>> creation of a Linux firmware repository.
+>>>
+>>> Options that I see:
+>>>
+>>> 1. Let the status quo be - SoC vendors maintain random locations and
+>>>     random rules to maintain boot firmware.
+>>> 2. Ask Linux-firmware to host the binaries in a single canonical
+>>>     location
+>>> 3. Host a boot-firmware repository - u-boot repo may be the more
+>>>     logical location.
+>>>
+>>> * (1) isn't the correct answer.
+>>>
+>>> * (2) Though I haven't seen any policy from the Linux-firmware
+>>>     community mandating anything of the form, the binaries we are talking
+>>>     of may not belong to Linux-firmware as they aren't strictly speaking
+>>>     something Linux kernel will load (since the bootloader has that
+>>>     responsibility), and in some cases may not even directly talk to
+>>>     (security enclave or DDR firmware stuff). I am adding Josh to this
+>>>     mail to see if he has any opinions on the topic (but keeping
+>>>     from cross posting on linux-firmware list, unless folks feel it is
+>>>     OK).
+>>>
+>>> On (3):
+>>> Proposal:
+>>>
+>>> * Create a boot firmware repository in Denx and/or GitHub (if
+>>>     financials are a hurdle, I hope we can solve it as a community).
+>>> * Limit binaries only to those consumed part of the u-boot scope.
+>>>
+>>> * Limit binaries only to those that do not have an opensource project
+>>>     (Trusted Firmware-A/M, OP-TEE, etc..) or depend entirely on vendor
+>>>     source or are binary only in nature (subject to licensing terms below)
+>>
+>> FYI, on Rockchip, there are currently three blobs **we** use on Aarch64
+>> (i have only worked with RK3399, PX30 and RK3588, so they may be more :) ):
+>>    - DDR bin/TPL no clue what this actually is under the hood. I think
+>> most SoCs do not get an open-source DDR init in U-Boot sadly, therefore
+>> mandatory until it isn't,
+>>    - BL31, mandatory on Aarch64, a blob that is an old TF-A (v2.2/2.3 I
+>> don't remember anymore). I don't know the state for all SoCs, but I can
+>> say the RK3399, PX30 and RK3568 have an open one, RK3588 is one the way
+>> (but considering the RK3568 and RK3588 were released years ago, BL31
+>> blob is mandatory for a while),
+> 
+> rk3568 is now upstream, there was a PR upstream for this for some
+> time, similar to rk3588, albeit not as long as rk56x. In some cases
+> the issue here is the speed of review of upstream ATF. I don't think
+> that means it should go into something like this.
+> 
 
-Export symbols aren't required in U-Boot here and other instances in this patch.
+If the BL31 blob doesn't go into boot-firmware, I don't see the benefit 
+of boot-firmware for Rockchip platforms to be honest. Instead of telling 
+people to get their firmware from github.com/rockchip-linux/rkbin we'll 
+tell them to get one from rkbin and the other from boot-firmware. And I 
+have a feeling that if that's how it'll go that the vendor will just not 
+care about boot-firmware as they would anyway need to keep updating 
+rkbin as well.
 
-> +
-> +/**
-> + * cmd_db_read_aux_data() - Query command db for aux data.
-> + *
-> + *  @id: Resource to retrieve AUX Data on
-> + *  @len: size of data buffer returned
-> + *
-> + *  Return: pointer to data on success, error pointer otherwise
-> + */
-> +const void *cmd_db_read_aux_data(const char *id, size_t *len)
-> +{
-> +       int ret;
-> +       const struct entry_header *ent;
-> +       const struct rsc_hdr *rsc_hdr;
-> +
-> +       ret = cmd_db_get_header(id, &ent, &rsc_hdr);
-> +       if (ret)
-> +               return ERR_PTR(ret);
-> +
-> +       if (len)
-> +               *len = le16_to_cpu(ent->len);
-> +
-> +       return rsc_offset(rsc_hdr, ent);
-> +}
-> +EXPORT_SYMBOL(cmd_db_read_aux_data);
-> +
-> +/**
-> + * cmd_db_read_slave_id - Get the slave ID for a given resource address
-> + *
-> + * @id: Resource id to query the DB for version
-> + *
-> + * Return: cmd_db_hw_type enum on success, CMD_DB_HW_INVALID on error
-> + */
-> +enum cmd_db_hw_type cmd_db_read_slave_id(const char *id)
-> +{
-> +       int ret;
-> +       const struct entry_header *ent;
-> +       u32 addr;
-> +
-> +       ret = cmd_db_get_header(id, &ent, NULL);
-> +       if (ret < 0)
-> +               return CMD_DB_HW_INVALID;
-> +
-> +       addr = le32_to_cpu(ent->addr);
-> +       return (addr >> SLAVE_ID_SHIFT) & SLAVE_ID_MASK;
-> +}
-> +EXPORT_SYMBOL(cmd_db_read_slave_id);
-> +
-> +int cmd_db_init(ofnode node)
-> +{
-> +       void __iomem *base;
-> +
-> +       debug("%s(%s)\n", __func__, ofnode_get_name(node));
-> +
-> +       base = (void __iomem *)ofnode_get_addr(node);
-> +       if ((fdt_addr_t)base == FDT_ADDR_T_NONE) {
-> +               log_err("%s: Failed to read base address\n", __func__);
-> +               return -ENOENT;
-> +       }
-> +
-> +       cmd_db_header = base;
-> +       if (!cmd_db_magic_matches(cmd_db_header)) {
-> +               log_err("%s: Invalid Command DB Magic\n", __func__);
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +EXPORT_SYMBOL(cmd_db_init);
-> diff --git a/drivers/soc/qcom/rpmh-internal.h b/drivers/soc/qcom/rpmh-internal.h
-> new file mode 100644
-> index 000000000000..9dbb1c51cc35
-> --- /dev/null
-> +++ b/drivers/soc/qcom/rpmh-internal.h
-> @@ -0,0 +1,141 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
-> + */
-> +
-> +#ifndef __RPM_INTERNAL_H__
-> +#define __RPM_INTERNAL_H__
-> +
-> +#include <linux/bitmap.h>
-> +#include <soc/qcom/tcs.h>
-> +
-> +#define TCS_TYPE_NR                    4
-> +#define MAX_CMDS_PER_TCS               16
-> +#define MAX_TCS_PER_TYPE               3
-> +#define MAX_TCS_NR                     (MAX_TCS_PER_TYPE * TCS_TYPE_NR)
-> +#define MAX_TCS_SLOTS                  (MAX_CMDS_PER_TCS * MAX_TCS_PER_TYPE)
-> +
-> +#define USEC_PER_SEC           1000000UL
-> +
-> +struct rsc_drv;
-> +
-> +/**
-> + * struct tcs_group: group of Trigger Command Sets (TCS) to send state requests
-> + * to the controller
-> + *
-> + * @drv:       The controller.
-> + * @type:      Type of the TCS in this group - active, sleep, wake.
-> + * @mask:      Mask of the TCSes relative to all the TCSes in the RSC.
-> + * @offset:    Start of the TCS group relative to the TCSes in the RSC.
-> + * @num_tcs:   Number of TCSes in this type.
-> + * @ncpt:      Number of commands in each TCS.
-> + * @req:       Requests that are sent from the TCS; only used for ACTIVE_ONLY
-> + *             transfers (could be on a wake/sleep TCS if we are borrowing for
-> + *             an ACTIVE_ONLY transfer).
-> + *             Start: grab drv->lock, set req, set tcs_in_use, drop drv->lock,
-> + *                    trigger
-> + *             End: get irq, access req,
-> + *                  grab drv->lock, clear tcs_in_use, drop drv->lock
-> + * @slots:     Indicates which of @cmd_addr are occupied; only used for
-> + *             SLEEP / WAKE TCSs.  Things are tightly packed in the
-> + *             case that (ncpt < MAX_CMDS_PER_TCS).  That is if ncpt = 2 and
-> + *             MAX_CMDS_PER_TCS = 16 then bit[2] = the first bit in 2nd TCS.
-> + */
-> +struct tcs_group {
-> +       struct rsc_drv *drv;
-> +       int type;
-> +       u32 mask;
-> +       u32 offset;
-> +       int num_tcs;
-> +       int ncpt;
-> +       const struct tcs_request *req[MAX_TCS_PER_TYPE];
-> +       DECLARE_BITMAP(slots, MAX_TCS_SLOTS);
-> +};
-> +
-> +/**
-> + * struct rpmh_request: the message to be sent to rpmh-rsc
-> + *
-> + * @msg: the request
-> + * @cmd: the payload that will be part of the @msg
-> + * @completion: triggered when request is done
-> + * @dev: the device making the request
-> + * @needs_free: check to free dynamically allocated request object
-> + */
-> +struct rpmh_request {
-> +       struct tcs_request msg;
-> +       struct tcs_cmd cmd[MAX_RPMH_PAYLOAD];
-> +       const struct udevice *dev;
-> +       bool needs_free;
-> +};
-> +
-> +/**
-> + * struct rpmh_ctrlr: our representation of the controller
-> + *
-> + * @cache: the list of cached requests
-> + * @cache_lock: synchronize access to the cache data
-> + * @dirty: was the cache updated since flush
-> + * @batch_cache: Cache sleep and wake requests sent as batch
-> + */
-> +struct rpmh_ctrlr {
-> +       struct list_head cache;
-> +       bool dirty;
-> +       struct list_head batch_cache;
-> +};
-> +
-> +struct rsc_ver {
-> +       u32 major;
-> +       u32 minor;
-> +};
-> +
-> +/**
-> + * struct rsc_drv: the Direct Resource Voter (DRV) of the
-> + * Resource State Coordinator controller (RSC)
-> + *
-> + * @name:               Controller identifier.
-> + * @base:               Start address of the DRV registers in this controller.
-> + * @tcs_base:           Start address of the TCS registers in this controller.
-> + * @id:                 Instance id in the controller (Direct Resource Voter).
-> + * @num_tcs:            Number of TCSes in this DRV.
-> + * @rsc_pm:             CPU PM notifier for controller.
-> + *                      Used when solver mode is not present.
-> + * @cpus_in_pm:         Number of CPUs not in idle power collapse.
-> + *                      Used when solver mode and "power-domains" is not present.
-> + * @genpd_nb:           PM Domain notifier for cluster genpd notifications.
-> + * @tcs:                TCS groups.
-> + * @tcs_in_use:         S/W state of the TCS; only set for ACTIVE_ONLY
-> + *                      transfers, but might show a sleep/wake TCS in use if
-> + *                      it was borrowed for an active_only transfer.  You
-> + *                      must hold the lock in this struct (AKA drv->lock) in
-> + *                      order to update this.
-> + * @lock:               Synchronize state of the controller.  If RPMH's cache
-> + *                      lock will also be held, the order is: drv->lock then
-> + *                      cache_lock.
-> + * @tcs_wait:           Wait queue used to wait for @tcs_in_use to free up a
-> + *                      slot
-> + * @client:             Handle to the DRV's client.
-> + * @dev:                RSC device.
-> + */
-> +struct rsc_drv {
-> +       const char *name;
-> +       void __iomem *base;
-> +       void __iomem *tcs_base;
-> +       int id;
-> +       int num_tcs;
-> +       struct tcs_group tcs[TCS_TYPE_NR];
-> +       DECLARE_BITMAP(tcs_in_use, MAX_TCS_NR);
-> +       struct rpmh_ctrlr client;
-> +       struct udevice *dev;
-> +       struct rsc_ver ver;
-> +       u32 *regs;
-> +};
-> +
-> +int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg);
-> +int rpmh_rsc_write_ctrl_data(struct rsc_drv *drv,
-> +                            const struct tcs_request *msg);
-> +void rpmh_rsc_invalidate(struct rsc_drv *drv);
-> +void rpmh_rsc_write_next_wakeup(struct rsc_drv *drv);
-> +
-> +int rpmh_rsc_wait_for_resp(struct rsc_drv *drv, int tcs_id);
-> +int rpmh_flush(struct rpmh_ctrlr *ctrlr);
-> +
-> +#endif /* __RPM_INTERNAL_H__ */
-> diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-> new file mode 100644
-> index 000000000000..3c73dc0ffe25
-> --- /dev/null
-> +++ b/drivers/soc/qcom/rpmh-rsc.c
-> @@ -0,0 +1,619 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2016-2018, 2020, The Linux Foundation. All rights reserved.
-> + * Copyright (c) 2023, Linaro Ltd.
-> + */
-> +
-> +#include <linux/err.h>
-> +#include <linux/types.h>
-> +#include <dm.h>
-> +#include <dm/ofnode.h>
-> +#include <dm/devres.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/delay.h>
-> +#include <dm/lists.h>
-> +#include <errno.h>
-> +#include <asm/io.h>
-> +#include <asm/bitops.h>
-> +#include <linux/bitmap.h>
-> +#include <log.h>
-> +
-> +#include <dt-bindings/soc/qcom,rpmh-rsc.h>
-> +#include "rpmh-internal.h"
-> +
-> +#include <soc/qcom/rpmh.h>
-> +#include <soc/qcom/cmd-db.h>
-> +
-> +#define RSC_DRV_ID                     0
-> +
-> +#define MAJOR_VER_MASK                 0xFF
-> +#define MAJOR_VER_SHIFT                        16
-> +#define MINOR_VER_MASK                 0xFF
-> +#define MINOR_VER_SHIFT                        8
-> +
-> +enum {
-> +       RSC_DRV_TCS_OFFSET,
-> +       RSC_DRV_CMD_OFFSET,
-> +       DRV_SOLVER_CONFIG,
-> +       DRV_PRNT_CHLD_CONFIG,
-> +       RSC_DRV_IRQ_ENABLE,
-> +       RSC_DRV_IRQ_STATUS,
-> +       RSC_DRV_IRQ_CLEAR,
-> +       RSC_DRV_CMD_WAIT_FOR_CMPL,
-> +       RSC_DRV_CONTROL,
-> +       RSC_DRV_STATUS,
-> +       RSC_DRV_CMD_ENABLE,
-> +       RSC_DRV_CMD_MSGID,
-> +       RSC_DRV_CMD_ADDR,
-> +       RSC_DRV_CMD_DATA,
-> +       RSC_DRV_CMD_STATUS,
-> +       RSC_DRV_CMD_RESP_DATA,
-> +};
-> +
-> +/* DRV HW Solver Configuration Information Register */
-> +#define DRV_HW_SOLVER_MASK             1
-> +#define DRV_HW_SOLVER_SHIFT            24
-> +
-> +/* DRV TCS Configuration Information Register */
-> +#define DRV_NUM_TCS_MASK               0x3F
-> +#define DRV_NUM_TCS_SHIFT              6
-> +#define DRV_NCPT_MASK                  0x1F
-> +#define DRV_NCPT_SHIFT                 27
-> +
-> +/* Offsets for CONTROL TCS Registers */
-> +#define RSC_DRV_CTL_TCS_DATA_HI                0x38
-> +#define RSC_DRV_CTL_TCS_DATA_HI_MASK   0xFFFFFF
-> +#define RSC_DRV_CTL_TCS_DATA_HI_VALID  BIT(31)
-> +#define RSC_DRV_CTL_TCS_DATA_LO                0x40
-> +#define RSC_DRV_CTL_TCS_DATA_LO_MASK   0xFFFFFFFF
-> +#define RSC_DRV_CTL_TCS_DATA_SIZE      32
-> +
-> +#define TCS_AMC_MODE_ENABLE            BIT(16)
-> +#define TCS_AMC_MODE_TRIGGER           BIT(24)
-> +
-> +/* TCS CMD register bit mask */
-> +#define CMD_MSGID_LEN                  8
-> +#define CMD_MSGID_RESP_REQ             BIT(8)
-> +#define CMD_MSGID_WRITE                        BIT(16)
-> +#define CMD_STATUS_ISSUED              BIT(8)
-> +#define CMD_STATUS_COMPL               BIT(16)
-> +
-> +/*
-> + * Here's a high level overview of how all the registers in RPMH work
-> + * together:
-> + *
-> + * - The main rpmh-rsc address is the base of a register space that can
-> + *   be used to find overall configuration of the hardware
-> + *   (DRV_PRNT_CHLD_CONFIG). Also found within the rpmh-rsc register
-> + *   space are all the TCS blocks. The offset of the TCS blocks is
-> + *   specified in the device tree by "qcom,tcs-offset" and used to
-> + *   compute tcs_base.
-> + * - TCS blocks come one after another. Type, count, and order are
-> + *   specified by the device tree as "qcom,tcs-config".
-> + * - Each TCS block has some registers, then space for up to 16 commands.
-> + *   Note that though address space is reserved for 16 commands, fewer
-> + *   might be present. See ncpt (num cmds per TCS).
-> + *
-> + * Here's a picture:
-> + *
-> + *  +---------------------------------------------------+
-> + *  |RSC                                                |
-> + *  | ctrl                                              |
-> + *  |                                                   |
-> + *  | Drvs:                                             |
-> + *  | +-----------------------------------------------+ |
-> + *  | |DRV0                                           | |
-> + *  | | ctrl/config                                   | |
-> + *  | | IRQ                                           | |
-> + *  | |                                               | |
-> + *  | | TCSes:                                        | |
-> + *  | | +------------------------------------------+  | |
-> + *  | | |TCS0  |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-> + *  | | | ctrl | 0| 1| 2| 3| 4| 5| .| .| .| .|14|15|  | |
-> + *  | | |      |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-> + *  | | +------------------------------------------+  | |
-> + *  | | +------------------------------------------+  | |
-> + *  | | |TCS1  |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-> + *  | | | ctrl | 0| 1| 2| 3| 4| 5| .| .| .| .|14|15|  | |
-> + *  | | |      |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-> + *  | | +------------------------------------------+  | |
-> + *  | | +------------------------------------------+  | |
-> + *  | | |TCS2  |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-> + *  | | | ctrl | 0| 1| 2| 3| 4| 5| .| .| .| .|14|15|  | |
-> + *  | | |      |  |  |  |  |  |  |  |  |  |  |  |  |  | |
-> + *  | | +------------------------------------------+  | |
-> + *  | |                    ......                     | |
-> + *  | +-----------------------------------------------+ |
-> + *  | +-----------------------------------------------+ |
-> + *  | |DRV1                                           | |
-> + *  | | (same as DRV0)                                | |
-> + *  | +-----------------------------------------------+ |
-> + *  |                      ......                       |
-> + *  +---------------------------------------------------+
-> + */
-> +
-> +static u32 rpmh_rsc_reg_offset_ver_2_7[] = {
-> +       [RSC_DRV_TCS_OFFSET]            = 672,
-> +       [RSC_DRV_CMD_OFFSET]            = 20,
-> +       [DRV_SOLVER_CONFIG]             = 0x04,
-> +       [DRV_PRNT_CHLD_CONFIG]          = 0x0C,
-> +       [RSC_DRV_IRQ_ENABLE]            = 0x00,
-> +       [RSC_DRV_IRQ_STATUS]            = 0x04,
-> +       [RSC_DRV_IRQ_CLEAR]             = 0x08,
-> +       [RSC_DRV_CMD_WAIT_FOR_CMPL]     = 0x10,
-> +       [RSC_DRV_CONTROL]               = 0x14,
-> +       [RSC_DRV_STATUS]                = 0x18,
-> +       [RSC_DRV_CMD_ENABLE]            = 0x1C,
-> +       [RSC_DRV_CMD_MSGID]             = 0x30,
-> +       [RSC_DRV_CMD_ADDR]              = 0x34,
-> +       [RSC_DRV_CMD_DATA]              = 0x38,
-> +       [RSC_DRV_CMD_STATUS]            = 0x3C,
-> +       [RSC_DRV_CMD_RESP_DATA]         = 0x40,
-> +};
-> +
-> +static inline void __iomem *
-> +tcs_reg_addr(const struct rsc_drv *drv, int reg, int tcs_id)
-> +{
-> +       return drv->tcs_base + drv->regs[RSC_DRV_TCS_OFFSET] * tcs_id + reg;
-> +}
-> +
-> +static inline void __iomem *
-> +tcs_cmd_addr(const struct rsc_drv *drv, int reg, int tcs_id, int cmd_id)
-> +{
-> +       return tcs_reg_addr(drv, reg, tcs_id) + drv->regs[RSC_DRV_CMD_OFFSET] * cmd_id;
-> +}
-> +
-> +static u32 read_tcs_reg(const struct rsc_drv *drv, int reg, int tcs_id)
-> +{
-> +       return readl_relaxed(tcs_reg_addr(drv, reg, tcs_id));
-> +}
-> +
-> +static void write_tcs_cmd(const struct rsc_drv *drv, int reg, int tcs_id,
-> +                         int cmd_id, u32 data)
-> +{
-> +       void __iomem *addr = tcs_cmd_addr(drv, reg, tcs_id, cmd_id);
-> +
-> +       debug("%s: tcs(m): %d cmd(n): %d addr: %#x data: %#x\n", drv->name,
-> +             tcs_id, cmd_id, reg, data);
-> +       writel_relaxed(data, addr);
-> +}
-> +
-> +static void write_tcs_reg(const struct rsc_drv *drv, int reg, int tcs_id,
-> +                         u32 data)
-> +{
-> +       void __iomem *addr = tcs_reg_addr(drv, reg, tcs_id);
-> +
-> +       debug("%s: tcs(m): %d addr: %#x data: %#x\n", drv->name,
-> +             tcs_id, reg, data);
-> +       writel_relaxed(data, addr);
-> +}
-> +
-> +static void write_tcs_reg_sync(const struct rsc_drv *drv, int reg, int tcs_id,
-> +                              u32 data)
-> +{
-> +       int i;
-> +       void __iomem *addr = tcs_reg_addr(drv, reg, tcs_id);
-> +
-> +       debug("%s: tcs(m): %d addr: %#x data: %#x\n", drv->name,
-> +             tcs_id, reg, data);
-> +
-> +       writel(data, addr);
-> +
-> +       /*
-> +        * Wait until we read back the same value.  Use a counter rather than
-> +        * ktime for timeout since this may be called after timekeeping stops.
-> +        */
-> +       for (i = 0; i < USEC_PER_SEC; i++) {
-> +               if (readl(addr) == data)
-> +                       return;
-> +               udelay(1);
-> +       }
+It doesn't matter whose fault it is for not being upstreamed earlier, 
+the fact is, we still don't have a **merged** open-source BL31 for 
+RK3588 2 and half years after the Rock5B from Radxa was announced. So in 
+that whole timeframe, we have to work with blobs (or maintain your own 
+forked TF-A whenever patches are posted and hope it works well enough).
 
-Can we rather use readx_poll_sleep_timeout() here instead?
+[...]
 
-> +       pr_err("%s: error writing %#x to %d:%#x\n", drv->name,
-> +              data, tcs_id, reg);
-> +}
-> +
-> +/**
-> + * tcs_invalidate() - Invalidate all TCSes of the given type (sleep or wake).
-> + * @drv:  The RSC controller.
-> + * @type: SLEEP_TCS or WAKE_TCS
-> + *
-> + * This will clear the "slots" variable of the given tcs_group and also
-> + * tell the hardware to forget about all entries.
-> + *
-> + * The caller must ensure that no other RPMH actions are happening when this
-> + * function is called, since otherwise the device may immediately become
-> + * used again even before this function exits.
-> + */
-> +static void tcs_invalidate(struct rsc_drv *drv, int type)
-> +{
-> +       int m;
-> +       struct tcs_group *tcs = &drv->tcs[type];
-> +
-> +       /* Caller ensures nobody else is running so no lock */
-> +       if (bitmap_empty(tcs->slots, MAX_TCS_SLOTS))
-> +               return;
-> +
-> +       for (m = tcs->offset; m < tcs->offset + tcs->num_tcs; m++)
-> +               write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], m, 0);
-> +
-> +       bitmap_zero(tcs->slots, MAX_TCS_SLOTS);
-> +}
-> +
-> +/**
-> + * rpmh_rsc_invalidate() - Invalidate sleep and wake TCSes.
-> + * @drv: The RSC controller.
-> + *
-> + * The caller must ensure that no other RPMH actions are happening when this
-> + * function is called, since otherwise the device may immediately become
-> + * used again even before this function exits.
-> + */
-> +void rpmh_rsc_invalidate(struct rsc_drv *drv)
-> +{
-> +       tcs_invalidate(drv, SLEEP_TCS);
-> +       tcs_invalidate(drv, WAKE_TCS);
-> +}
-> +
-> +/**
-> + * rpmh_rsc_wait_for_resp() - Spin until we get a response from the rpmh
-> + * @drv:    The controller.
-> + * @tcs_id: The global ID of this TCS.
-> + *
-> + * This is for ACTIVE_ONLY transfers (which are the only ones we support in
-> + * u-boot). As we don't support interrupts, we just spin on the IRQ_STATUS
-> + * register until the bit is set to confirm that the TCS TX is done.
-> + */
-> +int rpmh_rsc_wait_for_resp(struct rsc_drv *drv, int tcs_id)
-> +{
-> +       u32 reg;
-> +       int i;
-> +
-> +       reg = drv->regs[RSC_DRV_IRQ_STATUS];
-> +
-> +       debug("%s: waiting for response on tcs %d\n", __func__, tcs_id);
-> +
-> +       for (i = 0; i < 5 * USEC_PER_SEC; i++) {
-> +               if (readl(tcs_reg_addr(drv, reg, tcs_id)) & BIT(tcs_id))
-> +                       break;
-> +               udelay(1);
-> +       }
+>> FYI, the DDR bin is printing stuff on the console, so we had to modify
+>> it (with a tool from Rockchip) to remove the gibberish breaking the
+>> terminal by setting the appropriate controller, mux and baudrate (for
+>> our products, there's no one size fits all :) ). The question is how to
+>> handle this since we cannot realistically store every possible
+>> permutation of that binary for each UART controller, mux of UART
+>> controller and baudrate (the only parameters **we** modify, but there
+>> are tons of others).
+> 
+> I think those sort of things should be mostly quiet TBH.
 
-Can we rather use readx_poll_sleep_timeout() here instead?
+Mostly != fully. The console doesn't break consistently so I assume that 
+if it even prints a tiny bit of info it would still be able to break 
+stuff. I assume we could have binman run some logic to replace the uart 
+controller, mux and baudrate. Not sure we want that but we could.
 
-> +
-> +       if (i == 5 * USEC_PER_SEC) {
-> +               printf("%s: timeout waiting for response\n", drv->name);
-> +               return -ETIMEDOUT;
-> +       }
-> +
-> +       writel_relaxed(BIT(tcs_id), drv->tcs_base + drv->regs[RSC_DRV_IRQ_CLEAR]);
-> +
-> +       return 0;
-> +}
-> +
-> +/**
-> + * __tcs_buffer_write() - Write to TCS hardware from a request; don't trigger.
-> + * @drv:    The controller.
-> + * @tcs_id: The global ID of this TCS.
-> + * @cmd_id: The index within the TCS to start writing.
-> + * @msg:    The message we want to send, which will contain several addr/data
-> + *          pairs to program (but few enough that they all fit in one TCS).
-> + *
-> + * This is used for all types of transfers (active, sleep, and wake).
-> + */
-> +static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
-> +                              const struct tcs_request *msg)
-> +{
-> +       u32 msgid;
-> +       u32 cmd_msgid = CMD_MSGID_LEN | CMD_MSGID_WRITE;
-> +       u32 cmd_enable = 0;
-> +       struct tcs_cmd *cmd;
-> +       int i, j;
-> +
-> +       /* u-boot: get a response to ensure everything is golden before continuing */
-> +       cmd_msgid |= CMD_MSGID_RESP_REQ;
-> +
-> +       for (i = 0, j = cmd_id; i < msg->num_cmds; i++, j++) {
-> +               cmd = &msg->cmds[i];
-> +               cmd_enable |= BIT(j);
-> +               msgid = cmd_msgid;
-> +               /*
-> +                * Additionally, if the cmd->wait is set, make the command
-> +                * response reqd even if the overall request was fire-n-forget.
-> +                */
-> +               msgid |= cmd->wait ? CMD_MSGID_RESP_REQ : 0;
-> +
-> +               write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, j, msgid);
-> +               write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, j, cmd->addr);
-> +               write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
-> +               debug("%s: tcs(m): %d [%s] cmd(n): %d msgid: %#x addr: %#x data: %#x complete: %d\n",
-> +                     drv->name, tcs_id, msg->state == RPMH_ACTIVE_ONLY_STATE ? "active" : "?", j, msgid,
-> +                     cmd->addr, cmd->data, cmd->wait);
-> +       }
-> +
-> +       cmd_enable |= read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id);
-> +       write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, cmd_enable);
-> +}
-> +
-> +/**
-> + * __tcs_set_trigger() - Start xfer on a TCS or unset trigger on a borrowed TCS
-> + * @drv:     The controller.
-> + * @tcs_id:  The global ID of this TCS.
-> + * @trigger: If true then untrigger/retrigger. If false then just untrigger.
-> + *
-> + * In the normal case we only ever call with "trigger=true" to start a
-> + * transfer. That will un-trigger/disable the TCS from the last transfer
-> + * then trigger/enable for this transfer.
-> + *
-> + * If we borrowed a wake TCS for an active-only transfer we'll also call
-> + * this function with "trigger=false" to just do the un-trigger/disable
-> + * before using the TCS for wake purposes again.
-> + *
-> + * Note that the AP is only in charge of triggering active-only transfers.
-> + * The AP never triggers sleep/wake values using this function.
-> + */
-> +static void __tcs_set_trigger(struct rsc_drv *drv, int tcs_id, bool trigger)
-> +{
-> +       u32 enable;
-> +       u32 reg = drv->regs[RSC_DRV_CONTROL];
-> +
-> +       /*
-> +        * HW req: Clear the DRV_CONTROL and enable TCS again
-> +        * While clearing ensure that the AMC mode trigger is cleared
-> +        * and then the mode enable is cleared.
-> +        */
-> +       enable = read_tcs_reg(drv, reg, tcs_id);
-> +       enable &= ~TCS_AMC_MODE_TRIGGER;
-> +       write_tcs_reg_sync(drv, reg, tcs_id, enable);
-> +       enable &= ~TCS_AMC_MODE_ENABLE;
-> +       write_tcs_reg_sync(drv, reg, tcs_id, enable);
-> +
-> +       if (trigger) {
-> +               /* Enable the AMC mode on the TCS and then trigger the TCS */
-> +               enable = TCS_AMC_MODE_ENABLE;
-> +               write_tcs_reg_sync(drv, reg, tcs_id, enable);
-> +               enable |= TCS_AMC_MODE_TRIGGER;
-> +               write_tcs_reg(drv, reg, tcs_id, enable);
-> +       }
-> +}
-> +
-> +/**
-> + * get_tcs_for_msg() - Get the tcs_group used to send the given message.
-> + * @drv: The RSC controller.
-> + * @msg: The message we want to send.
-> + *
-> + * This is normally pretty straightforward except if we are trying to send
-> + * an ACTIVE_ONLY message but don't have any active_only TCSes.
-> + *
-> + * Return: A pointer to a tcs_group or an ERR_PTR.
-> + */
-> +static struct tcs_group *get_tcs_for_msg(struct rsc_drv *drv,
-> +                                        const struct tcs_request *msg)
-> +{
-> +       if (msg->state != RPMH_ACTIVE_ONLY_STATE) {
-> +               printf("WARN: only ACTIVE_ONLY state supported\n");
-> +               return ERR_PTR(-EINVAL);
-> +       }
-> +
-> +       return &drv->tcs[ACTIVE_TCS];
-> +}
-> +
-> +/**
-> + * rpmh_rsc_send_data() - Write / trigger active-only message.
-> + * @drv: The controller.
-> + * @msg: The data to be sent.
-> + *
-> + * NOTES:
-> + * - This is only used for "ACTIVE_ONLY" since the limitations of this
-> + *   function don't make sense for sleep/wake cases.
-> + * - To do the transfer, we will grab a whole TCS for ourselves--we don't
-> + *   try to share. If there are none available we'll wait indefinitely
-> + *   for a free one.
-> + * - This function will not wait for the commands to be finished, only for
-> + *   data to be programmed into the RPMh. See rpmh_tx_done() which will
-> + *   be called when the transfer is fully complete.
-> + * - This function must be called with interrupts enabled. If the hardware
-> + *   is busy doing someone else's transfer we need that transfer to fully
-> + *   finish so that we can have the hardware, and to fully finish it needs
-> + *   the interrupt handler to run. If the interrupts is set to run on the
-> + *   active CPU this can never happen if interrupts are disabled.
-> + *
-> + * Return: 0 on success, -EINVAL on error.
-> + */
-> +int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
-> +{
-> +       struct tcs_group *tcs;
-> +       int tcs_id;
-> +       unsigned long flags;
-> +
-> +       tcs = get_tcs_for_msg(drv, msg);
-> +       if (IS_ERR(tcs))
-> +               return PTR_ERR(tcs);
-> +
-> +       spin_lock_irqsave(&drv->lock, flags);
+Also, the DDR bin is passing the console info to the BL31 binary through 
+ATAGS, so if you don't fix the DDR bin baudrate, controller and mux, the 
+BL31 will also not be fixed.
 
-Locks aren't needed in U-Boot, can be dropped here and other places.
-
-> +
-> +       /* u-boot is single-threaded, always use the first TCS as we'll never conflict */
-> +       tcs_id = tcs->offset;
-> +
-> +       tcs->req[tcs_id - tcs->offset] = msg;
-> +       generic_set_bit(tcs_id, drv->tcs_in_use);
-> +       if (msg->state == RPMH_ACTIVE_ONLY_STATE && tcs->type != ACTIVE_TCS) {
-> +               /*
-> +                * Clear previously programmed WAKE commands in selected
-> +                * repurposed TCS to avoid triggering them. tcs->slots will be
-> +                * cleaned from rpmh_flush() by invoking rpmh_rsc_invalidate()
-> +                */
-> +               write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, 0);
-> +       }
-> +       spin_unlock_irqrestore(&drv->lock, flags);
-> +
-> +       /*
-> +        * These two can be done after the lock is released because:
-> +        * - We marked "tcs_in_use" under lock.
-> +        * - Once "tcs_in_use" has been marked nobody else could be writing
-> +        *   to these registers until the interrupt goes off.
-> +        * - The interrupt can't go off until we trigger w/ the last line
-> +        *   of __tcs_set_trigger() below.
-> +        */
-> +       __tcs_buffer_write(drv, tcs_id, 0, msg);
-> +       __tcs_set_trigger(drv, tcs_id, true);
-> +
-> +       rpmh_rsc_wait_for_resp(drv, tcs_id);
-> +
-> +       return 0;
-> +}
-> +
-> +static int rpmh_probe_tcs_config(struct udevice *dev, struct rsc_drv *drv)
-> +{
-> +       struct tcs_type_config {
-> +               u32 type;
-> +               u32 n;
-> +       } tcs_cfg[TCS_TYPE_NR] = { { 0 } };
-> +       ofnode dn = dev_ofnode(dev);
-> +       u32 config, max_tcs, ncpt, offset;
-> +       int i, ret, n, st = 0;
-> +       struct tcs_group *tcs;
-> +
-> +       ret = ofnode_read_u32(dn, "qcom,tcs-offset", &offset);
-> +       if (ret)
-> +               return ret;
-> +       drv->tcs_base = drv->base + offset;
-> +
-> +       config = readl_relaxed(drv->base + drv->regs[DRV_PRNT_CHLD_CONFIG]);
-> +
-> +       max_tcs = config;
-> +       max_tcs &= DRV_NUM_TCS_MASK << (DRV_NUM_TCS_SHIFT * drv->id);
-> +       max_tcs = max_tcs >> (DRV_NUM_TCS_SHIFT * drv->id);
-> +
-> +       ncpt = config & (DRV_NCPT_MASK << DRV_NCPT_SHIFT);
-> +       ncpt = ncpt >> DRV_NCPT_SHIFT;
-> +
-> +       n = ofnode_read_u32_array(dn, "qcom,tcs-config", (u32 *)tcs_cfg, 2 * TCS_TYPE_NR);
-> +       if (n < 0) {
-> +               printf("RPMh: %s: error reading qcom,tcs-config %d\n", dev->name, n);
-> +               return n;
-> +       }
-> +
-> +       for (i = 0; i < TCS_TYPE_NR; i++) {
-> +               if (tcs_cfg[i].n > MAX_TCS_PER_TYPE)
-> +                       return -EINVAL;
-> +       }
-> +
-> +       for (i = 0; i < TCS_TYPE_NR; i++) {
-> +               tcs = &drv->tcs[tcs_cfg[i].type];
-> +               if (tcs->drv)
-> +                       return -EINVAL;
-> +               tcs->drv = drv;
-> +               tcs->type = tcs_cfg[i].type;
-> +               tcs->num_tcs = tcs_cfg[i].n;
-> +               tcs->ncpt = ncpt;
-> +
-> +               if (!tcs->num_tcs || tcs->type == CONTROL_TCS)
-> +                       continue;
-> +
-> +               if (st + tcs->num_tcs > max_tcs ||
-> +                   st + tcs->num_tcs >= BITS_PER_BYTE * sizeof(tcs->mask))
-> +                       return -EINVAL;
-> +
-> +               tcs->mask = ((1 << tcs->num_tcs) - 1) << st;
-> +               tcs->offset = st;
-> +               st += tcs->num_tcs;
-> +       }
-> +
-> +       drv->num_tcs = st;
-> +
-> +       return 0;
-> +}
-> +
-> +static int rpmh_rsc_probe(struct udevice *dev)
-> +{
-> +       ofnode dn = dev_ofnode(dev);
-> +       ofnode rmem, node;
-> +       struct rsc_drv *drv;
-> +       char drv_id[10] = {0};
-> +       int ret;
-> +       u32 rsc_id;
-> +
-> +       /*
-> +        * Even though RPMh doesn't directly use cmd-db, all of its children
-> +        * do. We init cmd-db here or bail out if we can't. All child devices
-> +        * can therefore safely assume that cmd-db is available.
-> +        */
-> +       rmem = ofnode_path("/reserved-memory");
-> +       ofnode_for_each_subnode(node, rmem) {
-> +               if (ofnode_device_is_compatible(node, "qcom,cmd-db"))
-> +                       goto found;
-> +       }
-> +
-> +       printf("Couldn't find qcom,cmd-db node!\n");
-> +       return -ENODEV;
-> +found:
-> +       ret = cmd_db_init(node);
-> +       if (ret < 0) {
-> +               printf("Couldn't init cmd-db!\n");
-> +               return ret;
-> +       }
-> +
-> +       drv = dev_get_priv(dev);
-> +
-> +       ret = ofnode_read_u32(dn, "qcom,drv-id", &drv->id);
-> +       if (ret)
-> +               return ret;
-> +
-> +       drv->name = ofnode_get_property(dn, "label", NULL);
-> +       if (!drv->name)
-> +               drv->name = dev->name;
-> +
-> +       snprintf(drv_id, ARRAY_SIZE(drv_id), "drv-%d", drv->id);
-> +       drv->base = (void __iomem*)dev_read_addr_name(dev, drv_id);
-> +       if (IS_ERR(drv->base))
-> +               return PTR_ERR(drv->base);
-> +
-> +       rsc_id = readl_relaxed(drv->base + RSC_DRV_ID);
-> +       drv->ver.major = rsc_id & (MAJOR_VER_MASK << MAJOR_VER_SHIFT);
-> +       drv->ver.major >>= MAJOR_VER_SHIFT;
-> +       drv->ver.minor = rsc_id & (MINOR_VER_MASK << MINOR_VER_SHIFT);
-> +       drv->ver.minor >>= MINOR_VER_SHIFT;
-> +
-> +       if (drv->ver.major == 3) {
-> +               printf("RPMh v3 not supported\n");
-> +               return -EOPNOTSUPP;
-> +       } else {
-> +               drv->regs = rpmh_rsc_reg_offset_ver_2_7;
-> +       }
-> +
-> +       ret = rpmh_probe_tcs_config(dev, drv);
-> +       if (ret)
-> +               return ret;
-> +
-> +       spin_lock_init(&drv->lock);
-> +       init_waitqueue_head(&drv->tcs_wait);
-
-Similarly waitqueue should be dropped too.
-
--Sumit
-
-> +       bitmap_zero(drv->tcs_in_use, MAX_TCS_NR);
-> +
-> +       /* Enable the active TCS to send requests immediately */
-> +       writel_relaxed(drv->tcs[ACTIVE_TCS].mask,
-> +                      drv->tcs_base + drv->regs[RSC_DRV_IRQ_ENABLE]);
-> +
-> +       spin_lock_init(&drv->client.cache_lock);
-> +       INIT_LIST_HEAD(&drv->client.cache);
-> +       INIT_LIST_HEAD(&drv->client.batch_cache);
-> +
-> +       dev_set_drvdata(dev, drv);
-> +       drv->dev = dev;
-> +
-> +       log_debug("RPMh: %s: v%d.%d\n", dev->name, drv->ver.major, drv->ver.minor);
-> +
-> +       return ret;
-> +}
-> +
-> +static const struct udevice_id qcom_rpmh_ids[] = {
-> +       { .compatible = "qcom,rpmh-rsc" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(qcom_rpmh_rsc) = {
-> +       .name           = "qcom_rpmh_rsc",
-> +       .id             = UCLASS_MISC,
-> +       .priv_auto      = sizeof(struct rsc_drv),
-> +       .probe          = rpmh_rsc_probe,
-> +       .bind           = dm_scan_fdt_dev,
-> +       .of_match       = qcom_rpmh_ids,
-> +       /* rpmh is under CLUSTER_PD which we don't support */
-> +       .flags          = DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-> diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-> new file mode 100644
-> index 000000000000..f00c241de373
-> --- /dev/null
-> +++ b/drivers/soc/qcom/rpmh.c
-> @@ -0,0 +1,110 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
-> + */
-> +
-> +#include <linux/bug.h>
-> +#include <linux/kernel.h>
-> +#include <linux/list.h>
-> +#include <linux/types.h>
-> +#include <dm/device.h>
-> +
-> +#include <soc/qcom/rpmh.h>
-> +
-> +#include "rpmh-internal.h"
-> +
-> +#define RPMH_TIMEOUT_MS                        msecs_to_jiffies(10000)
-> +
-> +#define DEFINE_RPMH_MSG_ONSTACK(device, s, name)       \
-> +       struct rpmh_request name = {                    \
-> +               .msg = {                                \
-> +                       .state = s,                     \
-> +                       .cmds = name.cmd,               \
-> +                       .num_cmds = 0,                  \
-> +               },                                      \
-> +               .cmd = { { 0 } },                       \
-> +               .dev = device,                          \
-> +               .needs_free = false,                    \
-> +       }
-> +
-> +#define ctrlr_to_drv(ctrlr) container_of(ctrlr, struct rsc_drv, client)
-> +
-> +static struct rpmh_ctrlr *get_rpmh_ctrlr(const struct udevice *dev)
-> +{
-> +       struct rsc_drv *drv = (struct rsc_drv *)dev_get_priv(dev->parent);
-> +
-> +       if (!drv) {
-> +               printf("BUG: no RPMh driver for %s (parent %s)\n", dev->name, dev->parent->name);
-> +               BUG();
-> +       }
-> +
-> +       return &drv->client;
-> +}
-> +
-> +/**
-> + * __rpmh_write: Cache and send the RPMH request
-> + *
-> + * @dev: The device making the request
-> + * @state: Active/Sleep request type
-> + * @rpm_msg: The data that needs to be sent (cmds).
-> + *
-> + * Cache the RPMH request and send if the state is ACTIVE_ONLY.
-> + * SLEEP/WAKE_ONLY requests are not sent to the controller at
-> + * this time. Use rpmh_flush() to send them to the controller.
-> + */
-> +static int __rpmh_write(const struct udevice *dev, enum rpmh_state state,
-> +                       struct rpmh_request *rpm_msg)
-> +{
-> +       struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
-> +
-> +       debug("rpmh_write: %s, %d\n", dev->name, state);
-> +
-> +       if (state != RPMH_ACTIVE_ONLY_STATE) {
-> +               printf("WARN: only ACTIVE_ONLY state supported\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       return rpmh_rsc_send_data(ctrlr_to_drv(ctrlr), &rpm_msg->msg);
-> +}
-> +
-> +static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
-> +                          const struct tcs_cmd *cmd, u32 n)
-> +{
-> +       if (!cmd || !n || n > MAX_RPMH_PAYLOAD)
-> +               return -EINVAL;
-> +
-> +       memcpy(req->cmd, cmd, n * sizeof(*cmd));
-> +
-> +       req->msg.state = state;
-> +       req->msg.cmds = req->cmd;
-> +       req->msg.num_cmds = n;
-> +
-> +       debug("rpmh_msg: %d, %d cmds [first %#x/%#x]\n", state, n, cmd->addr, cmd->data);
-> +
-> +       return 0;
-> +}
-> +
-> +/**
-> + * rpmh_write: Write a set of RPMH commands and block until response
-> + *
-> + * @dev: The device making the request
-> + * @state: Active/sleep set
-> + * @cmd: The payload data
-> + * @n: The number of elements in @cmd
-> + *
-> + * May sleep. Do not call from atomic contexts.
-> + */
-> +int rpmh_write(const struct udevice *dev, enum rpmh_state state,
-> +              const struct tcs_cmd *cmd, u32 n)
-> +{
-> +       DEFINE_RPMH_MSG_ONSTACK(dev, state, rpm_msg);
-> +       int ret;
-> +
-> +       ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret = __rpmh_write(dev, state, &rpm_msg);
-> +
-> +       return ret;
-> +}
-> diff --git a/include/soc/qcom/cmd-db.h b/include/soc/qcom/cmd-db.h
-> new file mode 100644
-> index 000000000000..1e22d86c66c9
-> --- /dev/null
-> +++ b/include/soc/qcom/cmd-db.h
-> @@ -0,0 +1,42 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/* Copyright (c) 2016-2018, The Linux Foundation. All rights reserved. */
-> +
-> +#ifndef __QCOM_COMMAND_DB_H__
-> +#define __QCOM_COMMAND_DB_H__
-> +
-> +#include <linux/err.h>
-> +#include <dm/device.h>
-> +
-> +enum cmd_db_hw_type {
-> +       CMD_DB_HW_INVALID = 0,
-> +       CMD_DB_HW_MIN     = 3,
-> +       CMD_DB_HW_ARC     = CMD_DB_HW_MIN,
-> +       CMD_DB_HW_VRM     = 4,
-> +       CMD_DB_HW_BCM     = 5,
-> +       CMD_DB_HW_MAX     = CMD_DB_HW_BCM,
-> +       CMD_DB_HW_ALL     = 0xff,
-> +};
-> +
-> +#if IS_ENABLED(CONFIG_QCOM_COMMAND_DB)
-> +u32 cmd_db_read_addr(const char *resource_id);
-> +
-> +const void *cmd_db_read_aux_data(const char *resource_id, size_t *len);
-> +
-> +enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id);
-> +
-> +int cmd_db_init(ofnode node);
-> +
-> +#else
-> +static inline u32 cmd_db_read_addr(const char *resource_id)
-> +{ return 0; }
-> +
-> +static inline const void *cmd_db_read_aux_data(const char *resource_id, size_t *len)
-> +{ return ERR_PTR(-ENODEV); }
-> +
-> +static inline enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id)
-> +{ return -ENODEV; }
-> +
-> +static inline int cmd_db_ready(void)
-> +{ return -ENODEV; }
-> +#endif /* CONFIG_QCOM_COMMAND_DB */
-> +#endif /* __QCOM_COMMAND_DB_H__ */
-> diff --git a/include/soc/qcom/rpmh.h b/include/soc/qcom/rpmh.h
-> new file mode 100644
-> index 000000000000..eb7c067cc5fd
-> --- /dev/null
-> +++ b/include/soc/qcom/rpmh.h
-> @@ -0,0 +1,29 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
-> + */
-> +
-> +#ifndef __SOC_QCOM_RPMH_H__
-> +#define __SOC_QCOM_RPMH_H__
-> +
-> +#include <linux/types.h>
-> +#include <linux/errno.h>
-> +#include <soc/qcom/tcs.h>
-> +#include <dm/device-internal.h>
-> +
-> +#if IS_ENABLED(CONFIG_QCOM_RPMH)
-> +int rpmh_write(const struct udevice *dev, enum rpmh_state state,
-> +              const struct tcs_cmd *cmd, u32 n);
-> +
-> +#else
-> +
-> +static inline int rpmh_write(const struct udevice *dev, enum rpmh_state state,
-> +                            const struct tcs_cmd *cmd, u32 n)
-> +{ return -ENODEV; }
-> +
-> +#endif /* CONFIG_QCOM_RPMH */
-> +
-> +/* u-boot: no multithreading */
-> +#define rpmh_write_async(dev, state, cmd, n) rpmh_write(dev, state, cmd, n)
-> +
-> +#endif /* __SOC_QCOM_RPMH_H__ */
-> diff --git a/include/soc/qcom/tcs.h b/include/soc/qcom/tcs.h
-> new file mode 100644
-> index 000000000000..c8d28b052f1d
-> --- /dev/null
-> +++ b/include/soc/qcom/tcs.h
-> @@ -0,0 +1,78 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (c) 2016-2019, The Linux Foundation. All rights reserved.
-> + */
-> +
-> +#ifndef __SOC_QCOM_TCS_H__
-> +#define __SOC_QCOM_TCS_H__
-> +
-> +#define MAX_RPMH_PAYLOAD       16
-> +
-> +/**
-> + * rpmh_state: state for the request
-> + *
-> + * RPMH_SLEEP_STATE:       State of the resource when the processor subsystem
-> + *                         is powered down. There is no client using the
-> + *                         resource actively.
-> + * RPMH_WAKE_ONLY_STATE:   Resume resource state to the value previously
-> + *                         requested before the processor was powered down.
-> + * RPMH_ACTIVE_ONLY_STATE: Active or AMC mode requests. Resource state
-> + *                         is aggregated immediately.
-> + */
-> +enum rpmh_state {
-> +       RPMH_SLEEP_STATE,
-> +       RPMH_WAKE_ONLY_STATE,
-> +       RPMH_ACTIVE_ONLY_STATE,
-> +};
-> +
-> +/**
-> + * struct tcs_cmd: an individual request to RPMH.
-> + *
-> + * @addr: the address of the resource slv_id:18:16 | offset:0:15
-> + * @data: the resource state request
-> + * @wait: ensure that this command is complete before returning.
-> + *        Setting "wait" here only makes sense during rpmh_write_batch() for
-> + *        active-only transfers, this is because:
-> + *        rpmh_write() - Always waits.
-> + *                       (DEFINE_RPMH_MSG_ONSTACK will set .wait_for_compl)
-> + *        rpmh_write_async() - Never waits.
-> + *                       (There's no request completion callback)
-> + */
-> +struct tcs_cmd {
-> +       u32 addr;
-> +       u32 data;
-> +       u32 wait;
-> +};
-> +
-> +/**
-> + * struct tcs_request: A set of tcs_cmds sent together in a TCS
-> + *
-> + * @state:          state for the request.
-> + * @num_cmds:       the number of @cmds in this request
-> + * @cmds:           an array of tcs_cmds
-> + */
-> +struct tcs_request {
-> +       enum rpmh_state state;
-> +       u32 num_cmds;
-> +       struct tcs_cmd *cmds;
-> +};
-> +
-> +#define BCM_TCS_CMD_COMMIT_SHFT                30
-> +#define BCM_TCS_CMD_COMMIT_MASK                0x40000000
-> +#define BCM_TCS_CMD_VALID_SHFT         29
-> +#define BCM_TCS_CMD_VALID_MASK         0x20000000
-> +#define BCM_TCS_CMD_VOTE_X_SHFT                14
-> +#define BCM_TCS_CMD_VOTE_MASK          0x3fff
-> +#define BCM_TCS_CMD_VOTE_Y_SHFT                0
-> +#define BCM_TCS_CMD_VOTE_Y_MASK                0xfffc000
-> +
-> +/* Construct a Bus Clock Manager (BCM) specific TCS command */
-> +#define BCM_TCS_CMD(commit, valid, vote_x, vote_y)             \
-> +       (((commit) << BCM_TCS_CMD_COMMIT_SHFT) |                \
-> +       ((valid) << BCM_TCS_CMD_VALID_SHFT) |                   \
-> +       ((cpu_to_le32(vote_x) &                                 \
-> +       BCM_TCS_CMD_VOTE_MASK) << BCM_TCS_CMD_VOTE_X_SHFT) |    \
-> +       ((cpu_to_le32(vote_y) &                                 \
-> +       BCM_TCS_CMD_VOTE_MASK) << BCM_TCS_CMD_VOTE_Y_SHFT))
-> +
-> +#endif /* __SOC_QCOM_TCS_H__ */
->
-> --
-> 2.45.0
->
+Cheers,
+Quentin
