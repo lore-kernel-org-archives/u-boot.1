@@ -4,94 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B9BCC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 16:05:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B2FC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 16:08:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8404887FBC;
-	Fri, 21 Jun 2024 18:05:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4284588405;
+	Fri, 21 Jun 2024 18:08:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qt70YQoh";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="qiSZtiZO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADBCB88059; Fri, 21 Jun 2024 18:05:24 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id D425F8845A; Fri, 21 Jun 2024 18:08:33 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35FE387B77
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 18:05:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5102F87FBC
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 18:08:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5bae81effd1so1132941eaf.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 09:05:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a6ef64b092cso260709866b.1
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 09:08:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718985920; x=1719590720; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ocE/rfXxRct66nNpI6FmJLyd5xFbXlfxl55PmgcqDnY=;
- b=Qt70YQohLEDcdI0UFebIXuw6SngjHDherWJjiM7Fiu5ldsoJY0r9m/e0I/DWHVH/1M
- XMWQ3RwTIpURl1RiATr10Vj1vL8NSpYsdn1I2R6WL7zjQDKI5rAVc7hMNKFS10GCL73e
- Ddg4xAlxD6wGb6cWeg2+poTsKkvlH3BP4khLM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718985920; x=1719590720;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1718986110; x=1719590910; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ocE/rfXxRct66nNpI6FmJLyd5xFbXlfxl55PmgcqDnY=;
- b=a9hsDXdglZrQW2ie3Ib0YRtm5f/iY5fViorD119CxSoqewG4LB5t3ETsXJByT5shkL
- z5r2mzeZCqjALZuR03OUVgS+WPK887Sc+hFnsCvYYOiU9QKVJgsIOwgBvPEq1N4kzp92
- 15L2lWUHIum3YvgwEJwHzdCeNDI+OzgC5TKLtr3I5sPX/6VxZAgu4odjNoXgw9uCyR4h
- nGN+J/6nIOAjmrrBShPecnNGOq3Vto7FS4FNRglavKW6FGP93Db+jI3CffjQOMLu4jH/
- fKpYF4yB6hFryeN1hgYZWp7yvtSTtw/vDVkSVZxTMdg3yNMAsoV/bLO01mrHXgErqE4e
- ZsFg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwgS3qolVUGKwSrqgDTBTYjIMf6z837CE1BZC1nG8DNL50yK4CwnaB+89C48az9QjNp5AUJylCiOztZb/lk7x2NSzbgQ==
-X-Gm-Message-State: AOJu0YzdBsYkTCtN6LsZJg5UWSeynUTFVXfyA+B+LCz2sQN0vwCecPv1
- GrTVRM4bCQb8/b4i8NSTmcN3fQ5k9EwmqOoXdYH3TChMv7b9ejNoyFpzjs5Ahv0=
-X-Google-Smtp-Source: AGHT+IER0+14jCQ0xaRtxBiKEKXjjD1n0pqWRt4y3vizNgQpm+Iz7odkyJ5DynwPIvQGsy3UkN1Vog==
-X-Received: by 2002:a4a:d2db:0:b0:5ba:e1aa:9346 with SMTP id
- 006d021491bc7-5c1adbcaa5dmr10389313eaf.4.1718985920541; 
- Fri, 21 Jun 2024 09:05:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-45.totalplay.net.
- [187.190.205.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5c1d55d9b9dsm307641eaf.23.2024.06.21.09.05.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 09:05:20 -0700 (PDT)
-Date: Fri, 21 Jun 2024 10:05:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-Message-ID: <20240621160514.GY68077@bill-the-cat>
-References: <CAC_iWjL-W604ne_O+U6B3_oGXJtQqZwak4N2qVRSnqdsAz=TbQ@mail.gmail.com>
- <CAFLszTigrcPCH3wwZUZAk75QttVS+cPMoj=hZJ9Ko9DqyN5vVA@mail.gmail.com>
- <20240617171623.GY68077@bill-the-cat>
- <CAFLszThO9Hnfv90X4yu49h7LcWCfgMztSGtQdGwrCt9UDH_cGA@mail.gmail.com>
- <20240618141524.GO68077@bill-the-cat>
- <CAFLszTj--0hi4=isy2Zmq9fBDFr5DMciFs+BZtfuvvmFO-9o9Q@mail.gmail.com>
- <20240619153207.GF68077@bill-the-cat>
- <CAFLszTiHSn4Vw7oMBOwOBC1gAHNYQ3Xc4mT54FkT-dfGSb0F0A@mail.gmail.com>
- <20240620231943.GT68077@bill-the-cat>
- <CAFLszTgA6Gc1T55v07skZQ3U=_JuM7yW9aTxmAtXsoLTbSOtdQ@mail.gmail.com>
+ bh=qrPbM3VQO04uZVMVJR22EMo0x1LSmX1sVdloA233MDo=;
+ b=qiSZtiZOJFjZjxd3wpwsv3FT0ZZ4yJRdwFwhE5XGfsvxYu5CbV4DYRo9ByRiIjFZRN
+ 1ikfKYsScpFO/s+iKCIW2QllZsUA7Umqj7Cipz8aFx9ZTy0eJYORAzqFlL4nbtr8yny7
+ m4UBfxzAwfCJ1UgDYRRFLuD2TxuRCAuLsYS9fj1TBLZR49ylSAPmk+TnhkN+/oTZ8mCH
+ bQFYQGjxc4vMvtNL9LNicMtjflYAdMdBiRoKncRRD3uHmvGtbGws1UyVsb0DddSRrTdU
+ 5tPtxgMN2Oj+eAdiK2loqNsA3RnAGvPvb2fZz1gcxDgkDm2AgjN3B693N+7aPOO/CHJi
+ B0yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718986110; x=1719590910;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qrPbM3VQO04uZVMVJR22EMo0x1LSmX1sVdloA233MDo=;
+ b=Z81mvuaJUJzD/8lhbXaJn0iuazbbtcY7f6ofrIGeZgTBIFb8IVCFOA8P9JYlJUA9co
+ qNIbz8MIafYtI/ixxa3JIubnsp8zbMvX3OZopgb+jm4E8heuBm4BX07/BpUf6jQGrUeX
+ Af5KbAkt2nFif4X8z+pgMEwE/x8g+AIQSl9cYs+GxVAlo9ZVB2pdcmsMjVRRjhJg+zi/
+ tgBNh10j2bgEW+j8laV4RSAB7b0HjsW830SAxJ43Kd8s58dSW25jlvkp2AgQyAvNeVd6
+ fwx2jDXmZiWkxs5UH8v6BggdFHp6lQbgWZkxVJcCe5LGQwyL0MVx2Acug3/68swgIw2w
+ +r2w==
+X-Gm-Message-State: AOJu0YyrPxxOQULAkGxwr3O6nxyWzj1OelaPrUVwSfzrptUFoW23hU2J
+ pgzlUGas/i1zFJX7uJmsVTZRrvcV6vr7xyr7VK4ZNt/8uSkrANSDKz9hTXVGtPfL6ZoVMqHyyQU
+ U4OXg/d8KtjsGFuiDcYlDR5gNQBlqwn4B+eD8IA==
+X-Google-Smtp-Source: AGHT+IEQHEGck3JC/SADC/ffcnhWvcvG9qSrAunKwjRBSHt3FJPtJL80Eddm1AYoQV/keqdP3Hp+C0XolwNCgmcUCfo=
+X-Received: by 2002:a17:906:f896:b0:a6f:4827:7966 with SMTP id
+ a640c23a62f3a-a6fab60bbe2mr548532566b.15.1718986109084; Fri, 21 Jun 2024
+ 09:08:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NfiTbHX7VTsQ787X"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgA6Gc1T55v07skZQ3U=_JuM7yW9aTxmAtXsoLTbSOtdQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <CAJ+vNU0yGH6FKZsx+UZXvnQnsT13U9iKUb68=Fqc_z7J0XL14w@mail.gmail.com>
+ <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
+In-Reply-To: <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 21 Jun 2024 09:08:17 -0700
+Message-ID: <CAJ+vNU3ECDoquHLyA3ULac0HkUGbzggG-bDQ8v0F2vStyr47gQ@mail.gmail.com>
+Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,251 +90,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---NfiTbHX7VTsQ787X
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jun 21, 2024 at 08:57:51AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 20 Jun 2024 at 17:19, Tom Rini <trini@konsulko.com> wrote:
+On Fri, Jun 21, 2024 at 5:59=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+>
+>
+> On 6/20/24 19:10, Tim Harvey wrote:
+> > On Mon, Jun 17, 2024 at 8:33=E2=80=AFAM Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwi=
+p
+> >> library for the network stack" [1]. The goal is to introduce the lwIP =
+TCP/IP
+> >> stack [2] [3] as an alternative to the current implementation in net/,
+> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
+me
+> >> reasons for doing so are:
+> >> - Make the support of HTTPS in the wget command easier. Javier T. (CC'=
+d)
+> >> has some additional lwIP and Mbed TLS patches to do so. With that it
+> >> becomes possible to fetch and launch a distro installer such as Debian
+> >> etc. using a secure, authenticated connection directly from the U-Boot
+> >> shell. Several use cases:
+> >>   * Authentication: prevent MITM attack (third party replacing the
+> >> binary with a different one)
+> >>   * Confidentiality: prevent third parties from grabbing a copy of the
+> >> image as it is being downloaded
+> >>   * Allow connection to servers that do not support plain HTTP anymore
+> >> (this is becoming more and more common on the Internet these days)
+> >> - Possibly benefit from additional features implemented in lwIP
+> >> - Less code to maintain in U-Boot
+> >>
+> >> Prior to applying this series, the lwIP stack needs to be added as a
+> >> Git subtree with the following command:
+> >>
+> >>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savann=
+ah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+> >>
+> >> The first patch renames some enums in order to avoid a conflict when a
+> >> later patch enables the lwIP library.
+> >>
+> >> The second patch introduces a new Kconfig symbol: NET_LWIP, which sele=
+cts
+> >> the lwIP implementation instead of the current one (NET). Contrary to =
+the
+> >> approach chosen by Maxim in [1], NET_LWIP and NET cannot be enabled
+> >> simultaneously. The rationale is we want to start from a clean state a=
+nd
+> >> not pull potentially duplicated functionality from both stacks. Note
+> >> however that a few files are still built in net/, they are the ones
+> >> related to ethernet device management and the ethernet bootflow.
+> >>
+> >> The third patch splits the net.h header into net-legacy.h, net-common.=
+h,
+> >> net-lwip.h, leaving net.h as a simple wrapper.
+> >>
+> >> The fourth patch introduces the Makefile to build lwIP when NET_LWIP i=
+s
+> >> enabled.
+> >>
+> >> The subsequent patches implement various network-oriented commands and
+> >> features: dhcp, dns, ping, tftpboot, wget.
+> >>
+> >> A number of features are currently incompatible with NET_LWIP: SANDBOX=
+,
+> >> DFU_TFTP, FASTBOOT, SPL_NET. All make assumptions on how the network
+> >> stack is implemented and/or pull sybols that are not trivially exporte=
+d
+> >> from lwIP. Some interface rework may be needed.
+> >>
+> >> Due to the above and in order to provide some level of testing, a new =
+QEMU
+> >> configuration is introduced (qemu_arm64_lwip_defconfig) which is the s=
+ame
+> >> as qemu_arm64_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
+> >> Tests are added to test/py/tests/test_net.py for that configuration.
+> >>
 > >
-> > On Thu, Jun 20, 2024 at 05:05:29PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 19 Jun 2024 at 09:32, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Jun 18, 2024 at 09:03:37PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 18 Jun 2024 at 08:15, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Jun 18, 2024 at 06:43:51AM -0600, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 17 Jun 2024 at 11:16, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Mon, Jun 17, 2024 at 07:53:22AM -0600, Simon Glass wrote:
-> > > > > > > > > Hi,
-> > > > > > > > >
-> > > > > > > > > On Sat, 15 Jun 2024 at 01:03, Ilias Apalodimas
-> > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > Hi Heinrich
-> > > > > > > > > >
-> > > > > > > > > > resending the reply, I accidentally sent half of the me=
-ssage...
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 14 Jun 2024 at 12:04, Heinrich Schuchardt <xypr=
-on.glpk@gmx.de> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On 14.06.24 09:01, Ilias Apalodimas wrote:
-> > > > > > > > > > > > On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <=
-xypron.glpk@gmx.de> wrote:
-> > > > > > > > > > > >>
-> > > > > > > > > > > >> On 6/14/24 08:03, Ilias Apalodimas wrote:
-> > > > > > > > > > > >>> Hi Simon,
-> > > > > > > > > > > >>>
-> > > > > > > > > > > >>> On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@ch=
-romium.org> wrote:
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>> It does not make sense to enable all SHA algorit=
-hms unless they are
-> > > > > > > > > > > >>>> needed. It bloats the code and in this case, cau=
-ses chromebook_link to
-> > > > > > > > > > > >>>> fail to build. That board does use the TPM, but =
-not with measured boot,
-> > > > > > > > > > > >>>> nor EFI.
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>> Since EFI_TCG2_PROTOCOL already selects these op=
-tions, we just need to
-> > > > > > > > > > > >>>> add them to MEASURED_BOOT as well.
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>> Note that the original commit combines refactori=
-ng and new features,
-> > > > > > > > > > > >>>> which makes it hard to see what is going on.
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>> Fixes: 97707f12fda tpm: Support boot measurements
-> > > > > > > > > > > >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > >>>> ---
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>> Changes in v2:
-> > > > > > > > > > > >>>> - Put the conditions under EFI_TCG2_PROTOCOL
-> > > > > > > > > > > >>>> - Consider MEASURED_BOOT too
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>>    boot/Kconfig | 4 ++++
-> > > > > > > > > > > >>>>    lib/Kconfig  | 4 ----
-> > > > > > > > > > > >>>>    2 files changed, 4 insertions(+), 4 deletions=
-(-)
-> > > > > > > > > > > >>>>
-> > > > > > > > > > > >>>> diff --git a/boot/Kconfig b/boot/Kconfig
-> > > > > > > > > > > >>>> index 6f3096c15a6..b061891e109 100644
-> > > > > > > > > > > >>>> --- a/boot/Kconfig
-> > > > > > > > > > > >>>> +++ b/boot/Kconfig
-> > > > > > > > > > > >>>> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
-> > > > > > > > > > > >>>>    config MEASURED_BOOT
-> > > > > > > > > > > >>>>           bool "Measure boot images and configur=
-ation when booting without EFI"
-> > > > > > > > > > > >>>>           depends on HASH && TPM_V2
-> > > > > > > > > > > >>>> +       select SHA1
-> > > > > > > > > > > >>>> +       select SHA256
-> > > > > > > > > > > >>>> +       select SHA384
-> > > > > > > > > > > >>>> +       select SHA512
-> > > > > > > > > > > >>>>           help
-> > > > > > > > > > > >>>>             This option enables measurement of t=
-he boot process when booting
-> > > > > > > > > > > >>>>             without UEFI . Measurement involves =
-creating cryptographic hashes
-> > > > > > > > > > > >>>> diff --git a/lib/Kconfig b/lib/Kconfig
-> > > > > > > > > > > >>>> index 189e6eb31aa..568892fce44 100644
-> > > > > > > > > > > >>>> --- a/lib/Kconfig
-> > > > > > > > > > > >>>> +++ b/lib/Kconfig
-> > > > > > > > > > > >>>> @@ -438,10 +438,6 @@ config TPM
-> > > > > > > > > > > >>>>           bool "Trusted Platform Module (TPM) Su=
-pport"
-> > > > > > > > > > > >>>>           depends on DM
-> > > > > > > > > > > >>>>           imply DM_RNG
-> > > > > > > > > > > >>>> -       select SHA1
-> > > > > > > > > > > >>>> -       select SHA256
-> > > > > > > > > > > >>>> -       select SHA384
-> > > > > > > > > > > >>>> -       select SHA512
-> > > > > > > > > > > >>>
-> > > > > > > > > > > >>> I am not sure this is the right way to deal with =
-your problem.
-> > > > > > > > > > > >>> The TPM main functionality is to measure and exte=
-nd PCRs, so shaXXXX
-> > > > > > > > > > > >>> is really required. To make things even worse, yo=
-u don't know the PCR
-> > > > > > > > > > > >>> banks that are enabled beforehand. This is a runt=
-ime config of the
-> > > > > > > > > > > >>> TPM.
-> > > > > > > > > > > >>
-> > > > > > > > > > > >> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is =
-selected, U-Boot
-> > > > > > > > > > > >> cannot extend PCRs. So it seems fine to let these =
-two select the
-> > > > > > > > > > > >> complete set of hashing algorithms. As Simon point=
-ed out for
-> > > > > > > > > > > >> EFI_TCG2_PROTOCOL this is already done in lib/efi_=
-loader/Kconfig.
-> > > > > > > > > > > >
-> > > > > > > > > > > > It can. The cmd we have can extend those pcrs -- e.=
-g tpm2 pcr_extend 8
-> > > > > > > > > > > > 0xb0000000
-> > > > > > > > >
-> > > > > > > > > That's pretty normal for U-Boot though, since we want to =
-avoid lots of
-> > > > > > > > > growth for things people might want control over. We can =
-enable or
-> > > > > > > > > disable the SHA for the board, if this functionality is u=
-sed outside
-> > > > > > > > > of measured boot and tcg2, but someone is enabling the tp=
-m command.
-> > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > So this patch should also consider CMD_TPM_V2 and CMD=
-_TPM_V1.
-> > > > > > > > > > >
-> > > > > > > > > > > TPM v1 only needs SHA-1.
-> > > > > > > > > >
-> > > > > > > > > > I still prefer to imply all algos.
-> > > > > > > > >
-> > > > > > > > > 'imply' would be OK in this case as I can disable it for =
-that board. I
-> > > > > > > > > don't think it is in the spirit of U-Boot though.
-> > > > > > > > >
-> > > > > > > > > isn't someone checking the growth in U-Boot? Or do so few=
- boards have
-> > > > > > > > > TPMs that it didn't register? The size growth was 3.2KB on
-> > > > > > > > > chromebook_link.
-> > > > > > > >
-> > > > > > > > As always, yes, nearly every PR (I don't check the ones tha=
-t touch just
-> > > > > > > > a single board for example) gets a world build before/after=
-=2E In this
-> > > > > > > > case I likely assumed that it was acceptable growth for ena=
-bling
-> > > > > > > > features. It sounds like some of the chromebook boards need=
- to be
-> > > > > > > > setting the features to cause link failure if a size is exc=
-eeded?
-> > > > > > >
-> > > > > > > The problem is that some Intel platforms have binary blobs, s=
-o the
-> > > > > > > size isn't known unless you have a real blob.
-> > > > > >
-> > > > > > Alright, but can't we put in some limit based on what the curre=
-nt blobs
-> > > > > > are, or look at the last few blob releases and see if they chan=
-ge much
-> > > > > > in size and put something in? Other platforms have blobs and si=
-ze
-> > > > > > limits...
-> > > > >
-> > > > > Yes we can duplicate the entry sizes from binman into Kconfig opt=
-ions.
-> > > > > But I am not a fan of that...two variables controlling the same t=
-hing
-> > > > > and both can break, with nothing to connect them other than the p=
-oor
-> > > > > user.
-> > > > >
-> > > > > I wonder if some magic could solve this, inferring limits from the
-> > > > > binman image. But that is getting into yet another domain...
-> > > >
-> > > > I'm sorry, I just don't see what makes this case different from all=
- of
-> > > > the other cases where we have to include blobs. We know there's X a=
-mount
-> > > > of flash available, blobs tend to take up Y and so we set
-> > > > BOARD_SIZE_LIMIT to Z where there's some room for growth in U-Boot =
-but
-> > > > it takes in to account whatever limits the blobs place on us.
-> > >
-> > > The difference is that now we are using Binman, we have the limit in
-> > > the image description, so adding it to Kconfig a) involves
-> > > calculations and perhaps guesswork and b) results in two limits stored
-> > > in different places which may conflict.
-> > >
-> > > I thought of a way to handle this in Binman, so will send that in the
-> > > next version.
+> > Hi Jermone,
 > >
-> > I'm still confused, sorry. This sounds like a whole lot more work than
-> > setting BOARD_SIZE_LIMIT reasonably so that we fail to link and CI
-> > errors out, before we get to buildman and needing to make this case
-> > still fail but with fake blobs.
->=20
-> It is simpler for me, since I don't need to reverse-engineer the space
-> requirement for each board. With the patch I sent, I can just add some
-> reasonable numbers to each entry and it will do the right thing.
+> > I've given this a spin on an imx8mm-venice-gw73xx-0x via
+> > imx8mm_venice_defconfig and I can't get DHCP to work (didn't work in
+> > v3 either):
+> >
+> > $ diff defconfig configs/imx8mm_venice_defconfig
+> > 68,69c68,71
+> > < CONFIG_CMD_DNS_LWIP=3Dy
+> > < CONFIG_CMD_WGET_LWIP=3Dy
+> > ---
+> >> CONFIG_CMD_DHCP6=3Dy
+> >> CONFIG_CMD_TFTPPUT=3Dy
+> >> CONFIG_SYS_DISABLE_AUTOLOAD=3Dy
+> >> CONFIG_CMD_WGET=3Dy
+> > 88,90c90,94
+> > < CONFIG_NET_LWIP=3Dy
+> > < CONFIG_LWIP_DEBUG=3Dy
+> > < CONFIG_LWIP_ASSERT=3Dy
+> > ---
+> >> CONFIG_NET_RANDOM_ETHADDR=3Dy
+> >> CONFIG_IP_DEFRAG=3Dy
+> >> CONFIG_TFTP_BLOCKSIZE=3D4096
+> >> CONFIG_PROT_TCP_SACK=3Dy
+> >> CONFIG_IPV6=3Dy
+> >
+> > Target:
+> > u-boot=3D> net list
+> > eth0 : ethernet@30be0000 00:d0:12:b5:f8:41 active
+> > u-boot=3D> dhcp || echo fail
+> > eth0: ethernet@30be0000 00:d0:12:b5:f8:41 active
+> > netif_set_ipaddr: netif address being changed
+> > netif: added interface 0 addr 192.168.1.1 netmask 0.0.0.0 gw 0.0.0.0
+> > etharp_request: sending ARP request.
+> > etharp_raw: sending raw ARP packet.
+> > ethernet_output: sending packet 000000007df00bf0
+> > dhcp_start(netif=3D000000007df2af40) 0dhcp_start(): mallocing new DHCP =
+client
+> > dhcp_start(): allocated dhcp
+> > dhcp_start(): starting DHCP configuration
+> > dhcp_discover()
+> > transaction id xid(42021)
+> > dhcp_discover: making request
+> > dhcp_discover: sendto(DISCOVER, IP_ADDR_BROADCAST, LWIP_IANA_PORT_DHCP_=
+SERVER)
+> > ip4_output_if: 0IP header:
+> > +-------------------------------+
+> > | 4 | 5 |  0x00 |       336     | (v, hl, tos, len)
+> > +-------------------------------+
+> > |        0      |000|       0   | (id, flags, offset)
+> > +-------------------------------+
+> > |  255  |   17  |    0xba9d     | (ttl, proto, chksum)
+> > +-------------------------------+
+> > |    0  |    0  |    0  |    0  | (src)
+> > +-------------------------------+
+> > |  255  |  255  |  255  |  255  | (dest)
+> > +-------------------------------+
+> > ip4_output_if: call netif->output()
+> > ethernet_output: sending packet 000000007df2c010
+> > dhcp_discover: deleting()
+> > dhcp_discover: SELECTING
+> > dhcp_discover(): set request timeout 2000 msecs
+> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:28:28:5d:bb:16:9f, type:889=
+9
+> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:00:27:0e:0d:74:ba, type:806
+> > etharp_update_arp_entry: 172.24.20.24 - 00:27:0e:0d:74:ba
+> > etharp_find_entry: found empty entry 0
+> > etharp_find_entry: no empty entry found and not allowed to recycle
+> > etharp_input: incoming ARP request
+> > etharp_input: ARP request was not for us.
+> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:98:90:96:ac:d7:63, type:806
+> > etharp_update_arp_entry: 172.24.20.3 - 98:90:96:ac:d7:63
+> > etharp_find_entry: found empty entry 0
+> > etharp_find_entry: no empty entry found and not allowed to recycle
+> > etharp_input: incoming ARP request
+> > etharp_input: ARP request was not for us.
+> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:84:2b:2b:4e:5a:9a, type:806
+> > etharp_update_arp_entry: 172.24.0.1 - 84:2b:2b:4e:5a:9a
+> > etharp_find_entry: found empty entry 0
+> > etharp_find_entry: no empty entry found and not allowed to recycle
+> > etharp_input: incoming ARP request
+> > etharp_input: ARP request was not for us.
+> > ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:cc:96:e5:1e:a0:7b, type:800
+> > ip_input: iphdr->dest 0xffff1fac netif->ip_addr 0x101a8c0 (0x0, 0x0, 0x=
+ffff1fac)
+> > ip4_input: UDP packet to DHCP client port 138
+> > ip4_input: packet not for us.
+>
+> That's weird. I think what could happen is the interface already has
+> a static IP assigned when it is registered to the lwIP stack and thus
+> DHCP never receives the packed because it is dropped before.
+> I have reworked the initialization code in v5, lwIP will get to know
+> only one interface at a time and I make sure that interface is registered
+> without an IP address when doing DHCP. Hopefully that should fix the issu=
+e.
+>
+> Thanks for testing!
+>
 
-Yes, I very much do not like guessing about 3 numbers instead of
-guessing about 1 number and using the standard mechanism we already
-have. Please use BOARD_SIZE_LIMIT as this is the standard mechanism to
-enforce size limits on U-Boot itself.
+I tried your to-upstream/v5-wip branch
+(042bea36eb9731079a3d7afffe3774d79e06ac5d) and it behaves the same. Do
+you have something else to try/test?
 
---=20
-Tom
+Best Regards,
 
---NfiTbHX7VTsQ787X
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ1pLcACgkQFHw5/5Y0
-tyxkjAv5Acc29pPP466rcttPmmb3YVwi171qxVIHFnnNkr5ErNLv8lEyXMjC5/Gz
-cWLIn0iJIlCDyj0MmO9gp9x8SITJyd9ArJoIRx+7eUQb0sAGN1MxVtexjCr1oGUS
-W3XyGyXE2OyzP11bgHUXlLY/yUm4vs3KMiscZvIBBgnvikWOYlLgvhvM6mx3tg0X
-u+Szjm71eIMf58B5BM1NHqVziqenZZsZbK1Q4Q3zeqjnjbXGxUAO4v76OMh6boNU
-9IQZhMy4+lEsaD5lr0sNdyCeG7STFeOvFH2HxPkxZSelKsMPg+N9APVPuLvlYH7t
-61EFVGgH/YIUkamNBHvkUzk29NKZtae5W/ZE24X3o/zYdVcNQhVnLjxpD+eAlKoe
-b1/EeQpMtekG76UDTXUmbsaZue5oTngONJsbgciawRXDF+PFS3zs8v50mgMZkEaa
-tkHXCkEDLMvKKZnVVb8ecHYxVXyhs8EAG1MG6mKCdP5vENmCLqyt0r9WQ6vspvg/
-lP3ZdDmx
-=5g14
------END PGP SIGNATURE-----
-
---NfiTbHX7VTsQ787X--
+Tim
