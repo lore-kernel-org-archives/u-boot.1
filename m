@@ -4,76 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD6B5C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 06:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE117C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 06:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED7A880F1;
-	Fri, 21 Jun 2024 08:14:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E828E87FED;
+	Fri, 21 Jun 2024 08:55:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XMXTzrBL";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="y21jEsUT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3D8D88149; Fri, 21 Jun 2024 08:14:14 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 55C96880F1; Fri, 21 Jun 2024 08:55:33 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1B7E88047
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 08:14:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EB9687EF6
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 08:55:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-57d15b85a34so1831268a12.3
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 23:14:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718950452; x=1719555252; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Evu+sjgyFMCs5driTT6kHQFXvr9DwwMg/9znAHogQCI=;
- b=XMXTzrBLmBIgNP4KNCJ57sxuNODVN2HWJRwOh9RM/0UEQhqYgkozy7bLrU5/4ocb16
- 6pWKgAvnlym0NEVeKAnQANsLBxkfC8ooU3lnvWvE83kSUk3e4R0YOa+ryL4WKZvylRgZ
- NcC/zybDxHfbdBd3OEt6hpskLh9bDwdcly0C3U1T9ECoYuNBZxmuNypnf2Z9PNZDhPbE
- wr2KPCWe2+vv+U4So7TTHcz9TC6I3XX2TpbkSJrJaZsSPWP0D5WqMLOEsgXMe7HFR8uP
- jUD97PTZJkS0xbn5R8cVK/x9x7IoteDXQJ7FD4bALXE5wg4JQlVOgb7hmRh+ZguZR3QV
- RUlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718950452; x=1719555252;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Evu+sjgyFMCs5driTT6kHQFXvr9DwwMg/9znAHogQCI=;
- b=d6OGST4MQy2EuG/Bc+vvGqDJUlmfsF18+KeSyeePrh2Ls4mUZ0u0BkY16wt+FpTjk0
- EdaA0FQJzsulQdlGHeRUPqKBNYM7ovA/xJYTD0IR13iWhZevJOzkSPsmT2dbXKzsjik8
- goOOSYP0E2zHlK9fHAKOkz3hGlqJINltO0ZmXkXXYQdfYry728+hbbs+TP1SXtPnwD3n
- 3K34u2uRHq5B8hzlg/ejEU/3dlAbpxgo5ezF46MnJEjRXVjIXXbnATnuj/hiN++x3Z4v
- RYlibrl83Tu8DNTv9dB55tSXjh4UR7u9HzKWitcdH/soBrbFMskhnkroejTWydP+6zAs
- JH0A==
-X-Gm-Message-State: AOJu0YyO3IkFbn87HimFk7W9N8pQZaS0Re3rxyFGKZ7HDcqXMurfYn4f
- aCrurMcN+0XdjysJ4oiKg4VuAkAV+U7+7p7oW3H8H50v1wX2oPNtyih3mXzWo7hO77cWmJv1RrE
- JyrV0Q2Zlk3feO6cJYdHiaj9ogdQZRjWarcwImw==
-X-Google-Smtp-Source: AGHT+IGnRWU+JZCfW4ZGoGcLncahMb/DeyZopZJH6EGiG72FV2NpRpjrOVhmkfXbpCgPyyUPjuMZJnHaJrxp0eRYg+8=
-X-Received: by 2002:a50:a69c:0:b0:57d:10be:6100 with SMTP id
- 4fb4d7f45d1cf-57d10be6193mr3945896a12.29.1718950452302; Thu, 20 Jun 2024
- 23:14:12 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b72a=NX=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1718952914;
+ bh=T/dVght4+W0R6bicP54QbmR5FLDzDgl/UhfN2HAwgYk=;
+ b=y21jEsUTk+VKTz0ZTvmcEEjv8dXHN1OwsAzWjzdNkASZc8rQBlTs029amf3nmbOhQ/aEpoVPO
+ nCvONyPKX+NqlQgZPgKb0yeguHHsAZnxC5E0fiLRw1zrv3h2wir3tz9/tosMPegofr3rjQUzPjw
+ 7JjW8YP/pF5XcjF7CFRC9vlKU9pS9JezzFq51T9Enf//vonYwco6VprMPIVyYXT7tM2qgIIPIFb
+ 37JMgdwcsl13kR6TzzCGga87RxrKq6u9rr1rqkc0FvncUz1wn+f+uKvDNkMoEUmXL8LDbpfgnxI
+ fcYs6pbCev5B+ASfK2rLxN18z2ITEiSkS9bjB87SrZWw==
+Message-ID: <3dbe42b8-7f9d-4b67-b903-692860518461@kwiboo.se>
+Date: Fri, 21 Jun 2024 08:45:01 +0200
 MIME-Version: 1.0
-References: <20240620230625.1797397-1-sjg@chromium.org>
- <20240620230625.1797397-8-sjg@chromium.org>
-In-Reply-To: <20240620230625.1797397-8-sjg@chromium.org>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 21 Jun 2024 11:44:01 +0530
-Message-ID: <CADg8p96c=xd6=6d1fijNFBwzXMszRnvo7J-qm-7co1panamP2w@mail.gmail.com>
-Subject: Re: [PATCH v3 07/18] binman: Keep the efi_capsule input file
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 16/18] rockchip: Avoid #ifdefs in RK3399 SPL
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
+References: <20240620230625.1797397-1-sjg@chromium.org>
+ <20240620230625.1797397-17-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240620230625.1797397-17-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 66752172d60083b892db978b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,42 +75,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Jun 2024 at 04:36, Simon Glass <sjg@chromium.org> wrote:
->
-> There is no need to remove input files. It makes it harder to diagnose
-> failures. Keep the payload file.
->
-> There is no test for this condition, but one could be added.
->
+Hi Simon,
+
+On 2024-06-21 01:06, Simon Glass wrote:
+> The code here is confusing due to large blocks which are #ifdefed out.
+> Add a function phase_sdram_init() which returns whether SDRAM init
+> should happen in the current phase, using that as needed to control the
+> code flow.
+> 
+> This increases code size by about 500 bytes in SPL when the cache is on,
+> since it must call the rather large rockchip_sdram_size() function.
+> 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: b617611b27a ("binman: capsule: Add support for generating...")
 > ---
+> 
+> Changes in v3:
+> - Split out the refactoring into a separate patch
+> - Drop the non-dcache optimisation, since the cache should normally be on
+> 
+>  drivers/ram/rockchip/sdram_rk3399.c | 47 ++++++++++++++++-------------
+>  1 file changed, 26 insertions(+), 21 deletions(-)
+> 
+> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> index 3c4e20f4e80..2f37dd712e7 100644
+> --- a/drivers/ram/rockchip/sdram_rk3399.c
+> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+> @@ -13,6 +13,7 @@
+>  #include <log.h>
+>  #include <ram.h>
+>  #include <regmap.h>
+> +#include <spl.h>
+>  #include <syscon.h>
+>  #include <asm/arch-rockchip/clock.h>
+>  #include <asm/arch-rockchip/cru.h>
+> @@ -63,8 +64,6 @@ struct chan_info {
+>  };
+>  
+>  struct dram_info {
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>  	u32 pwrup_srefresh_exit[2];
+>  	struct chan_info chan[2];
+>  	struct clk ddr_clk;
+> @@ -75,7 +74,6 @@ struct dram_info {
+>  	struct rk3399_pmusgrf_regs *pmusgrf;
+>  	struct rk3399_ddr_cic_regs *cic;
+>  	const struct sdram_rk3399_ops *ops;
+> -#endif
+>  	struct ram_info info;
+>  	struct rk3399_pmugrf_regs *pmugrf;
+>  };
+> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
+>  					struct rk3399_sdram_params *params);
+>  };
+>  
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -
+>  struct rockchip_dmc_plat {
+>  #if CONFIG_IS_ENABLED(OF_PLATDATA)
+>  	struct dtd_rockchip_rk3399_dmc dtplat;
+> @@ -191,6 +186,17 @@ struct io_setting {
+>  	},
+>  };
+>  
+> +/**
+> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
+> + *
+> + * Returns: true to do SDRAM init in this phase, false to not
+> + */
+> +static bool phase_sdram_init(void)
+> +{
+> +	return spl_phase() == PHASE_TPL ||
+> +	    (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
+> +}
+> +
+>  static struct io_setting *
+>  lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
+>  {
+> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
+>  	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
+>  	int ret;
+>  
+> -	if (!CONFIG_IS_ENABLED(OF_REAL))
+> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
+>  		return 0;
+>  
+>  	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
+> @@ -3138,22 +3144,24 @@ static int rk3399_dmc_init(struct udevice *dev)
+>  
+>  	return 0;
+>  }
+> -#endif
+>  
+>  static int rk3399_dmc_probe(struct udevice *dev)
+>  {
+>  	struct dram_info *priv = dev_get_priv(dev);
+>  
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -	if (rk3399_dmc_init(dev))
+> -		return 0;
+> -#endif
+> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+> -	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+> -	priv->info.base = CFG_SYS_SDRAM_BASE;
+> -	priv->info.size =
+> -		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+> +	if (phase_sdram_init()) {
+> +		if (rk3399_dmc_init(dev))
+> +			return 0;
+> +	} else {
+> +		priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+> +		debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+> +	}
+> +
+> +	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
 
-Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+This check should be dropped, this driver intent is to initialize dram
+in first phase (normally TPL), and report the size to any other phase.
 
-Although I don't think this warrants a Fixes tag. It is not fixing any
-issue as such.
+The main need for phase_sdram_init() and disable of DCACHE can probably
+be avoided if bob/kevin can move to use separate TPL and SPL instead of
+doing both dram init and everything else in SPL.
 
--sughosh
+My best guess is that enabling of caches in SPL cause issue for bob and
+kevin because they only use SPL not TPL+SPL like (if I am not mistaken)
+all other Rockchip arm64 targets.
 
->
-> (no changes since v1)
->
->  tools/binman/etype/efi_capsule.py | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
-> index 47da5da324b..03e55cbc4d9 100644
-> --- a/tools/binman/etype/efi_capsule.py
-> +++ b/tools/binman/etype/efi_capsule.py
-> @@ -148,7 +148,6 @@ class Entry_efi_capsule(Entry_section):
->                                                   self.fw_version,
->                                                   self.oem_flags)
->          if ret is not None:
-> -            os.remove(payload)
->              return tools.read_file(capsule_fname)
->          else:
->              # Bintool is missing; just use the input data as the output
-> --
-> 2.34.1
->
+Using SPL-only was not something I tested when caches was enabled in SPL.
+
+Maybe bob/kevin can be changed to also use TPL+SPL similar to all other
+RK3399 boards?
+
+How U-Boot works on these chromebooks is still a mystery to me.
+
+When coreboot is involved it would only load U-Boot proper and SPL or
+TPL+SPL would never be involved at all?
+
+If I understand correctly SPL is only involved for bare metal boot, if
+this is the case then using TPL + back-to-brom to load SPL should
+probably work fine?, and would align all RK3399 boards to work in a
+similar way and reduce the need for special care/handling in the code.
+
+Regards,
+Jonas
+
+> +		priv->info.base = CFG_SYS_SDRAM_BASE;
+> +		priv->info.size =
+> +			rockchip_sdram_size((ulong)&priv->pmugrf->os_reg2);
+> +	}
+>  
+>  	return 0;
+>  }
+> @@ -3181,10 +3189,7 @@ U_BOOT_DRIVER(dmc_rk3399) = {
+>  	.id = UCLASS_RAM,
+>  	.of_match = rk3399_dmc_ids,
+>  	.ops = &rk3399_dmc_ops,
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>  	.of_to_plat = rk3399_dmc_of_to_plat,
+> -#endif
+>  	.probe = rk3399_dmc_probe,
+>  	.priv_auto	= sizeof(struct dram_info),
+>  #if defined(CONFIG_TPL_BUILD) || \
+
