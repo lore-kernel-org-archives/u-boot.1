@@ -4,71 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56860C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 14:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A525CC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 14:58:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80729884FF;
-	Fri, 21 Jun 2024 16:54:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FA598840F;
+	Fri, 21 Jun 2024 16:58:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mT9gJ6O4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jn0Xx4YQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72C798840F; Fri, 21 Jun 2024 16:54:54 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C73FB884C6; Fri, 21 Jun 2024 16:58:00 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CF74884FF
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 16:54:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C3C8880F1
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 16:57:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45LEsmaK022497;
- Fri, 21 Jun 2024 09:54:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718981688;
- bh=cOUOg5nZxVljtejtyrNRwMpH/SmDJGTTxY1IvxB+xVU=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=mT9gJ6O4zy7ShpcsvO8v2uNFgdreDl5zysRVQ+DbmYnlMawIrXAly7ceC/wAtY/zW
- aP1qVgbopF7B1FzAoCDVzPKwAAfuc2uWDz0MaV41+X+LQreG+SDcYBG4Wicam1asY5
- dFm0RJg98Rf/Vfs1dFhv1pcbfJdun5GYP+QMmSqg=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45LEsmS4025331
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 21 Jun 2024 09:54:48 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Jun 2024 09:54:48 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Jun 2024 09:54:48 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45LEsm8n055822;
- Fri, 21 Jun 2024 09:54:48 -0500
-Date: Fri, 21 Jun 2024 09:54:48 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-CC: Nishanth Menon <nm@ti.com>, <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Enric Balletbo i Serra
- <eballetb@redhat.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Josh Boyer <jwboyer@redhat.com>
-Subject: Re: Request for hosting a boot-firmware repository in u-boot git
- (denx and GitHub)
-Message-ID: <20240621145448.6bur6wfgufvifuk2@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240620213539.ftmjhphypssxp5n4@desolate>
- <CALeDE9OF5Eqqk5PgTZUUi7r-1ApC7HhoxUMELQRWLXVJzuPOew@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b501a4344bso9246286d6.3
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 07:57:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1718981877; x=1719586677; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ht25f2ICSjpZr9cgYMZ78UPU45JFDUatdPt4/AkVCtI=;
+ b=jn0Xx4YQidd4ncbhdzC8Z5bIg+jWd7lHvZnRzOpd7KtiJqTY/uIOTvj+tsRtmN/Cl3
+ DKFQqbr88kUUz/mSH4ipZtl8RjNpiRmXpx1esE9zUVua0tiYMIcszQrgCCxUJpq8rk5M
+ HivwxD2eQdz5oj2vTdAle0s3mnhMZ2BoKhniQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718981877; x=1719586677;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ht25f2ICSjpZr9cgYMZ78UPU45JFDUatdPt4/AkVCtI=;
+ b=B36Xr9HbbR4LzZL7agry80ZgraNuvlrjvOEedweyhHFaZ5uSpIHEUggYJCeCSreaZe
+ nyo6qYjQ827p3dQuDSagw7l3ZgR9zU+5tsIhL1rZJQHvg83iz85igzYwDUwnahYXEyiz
+ xn4apd7OIdxm70W6Aw7OAtISaUnI1x/plBPCypIXCYbOL/aJs/7WLXVJeAX6+aRw0NgR
+ 2X6bHg2DIXDVCbcFYGCcPmUNNxC61Pc2gQi+QCemtMgj0aBakJfDFrWqfSHZvqh1QIR1
+ az4STrtT8YqMmIP99QSLHBJ7cgDoegrvSxHCbD8OmoVZQzVCm+9zD44L+226WgTkBJ+G
+ 7wOQ==
+X-Gm-Message-State: AOJu0YyyJysjTebosdOIMmewCI6UuXZXpCN1XKaTXt34mN+2gZH8PAgN
+ gwuoej3UqBybbHuPO9XUzU6yF+MRKUKMpOEPqWe62Zt2lLTrbx68O/WVLQFYWGx+t7P3X+mOYvg
+ QY+y46XZtfqaNoLt13v349zbUlruLpXhQu1U9
+X-Google-Smtp-Source: AGHT+IGMtKFHo+URtAQnYImciB5Lbm4JjhPDM3oES/A9oE6Q6R9iCnU54xGyCNVC1eXN5LTkmoCOSNGOPRTlkJf8pao=
+X-Received: by 2002:a0c:ca92:0:b0:6b5:34b:8c02 with SMTP id
+ 6a1803df08f44-6b5034b8dbamr82211786d6.27.1718981876888; Fri, 21 Jun 2024
+ 07:57:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CALeDE9OF5Eqqk5PgTZUUi7r-1ApC7HhoxUMELQRWLXVJzuPOew@mail.gmail.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240620230625.1797397-1-sjg@chromium.org>
+ <20240620230625.1797397-11-sjg@chromium.org>
+ <CAC_iWjKtOjR9evF81MhTVUKsn6OB5s=8O40+CZE-Y4+YfQO9GQ@mail.gmail.com>
+ <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
+In-Reply-To: <CAC_iWj+uQ2z=SQpWhdZqVm02csoyFkeE-gXd7YWWS-MqYjxG1g@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 21 Jun 2024 08:57:46 -0600
+Message-ID: <CAFLszTiRgwf4T6h1T5-5BiWckc7062Tgcs-2M2qi+7y_k=YbRw@mail.gmail.com>
+Subject: Re: [PATCH v3 10/18] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Sean Anderson <sean.anderson@seco.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,165 +92,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On June 20, 2024 thus sayeth Peter Robinson:
-> Hi Nishanth,
-> 
-> Thanks for starting this conversation.
-> 
-> > We have briefly discussed this topic on IRC[1]. I would like to
-> > propose a new boot-firmware repository similar to the Linux-firmware
-> > repository under the aegis of u-boot hosting.
-> >
-> > In addition to TI, it looks like some NXP[2] and Rockchip[3]
-> > platforms seem to require additional closed-source/open-source
-> > binaries to have a complete bootable image. Distribution rights and
-> > locations of these binaries are challenging, and there needs to be a
-> > standard for how and where they are hosted for end users.
-> 
-> Yes, it's been painful for some time, and often the distribution is
-> unclear because often the binaries are copies around between SBC
-> makers often without the other bits such as licenses etc so it's a
-> case of "who knows ¯\_(ツ)_/¯" even if it's the same for all devices of
-> a particular SoC.
-> 
-> Having a process around licensing and redistribution requirements is useful.
-> 
-> > Further, looking ahead to future architectures:
-> > * IP firmware: More and more IP vendors are embedding their own
-> >   "specialized controllers" and require firmware for the operation
-> >   (similar to Rockchip's DDR controller, I guess),
-> > * boot stage firmware: Additional stages of the boot process involve
-> >   vendor intermediate firmware, such as power configuration.
-> > * Security enclave binaries: While I see a few folks trying to have an
-> >   open-source s/w architecture, many PKA and PQC systems still require
-> >   prop binaries for IP reasons.
-> >
-> > NOTE: I am not judging any company(including TI) for reasons why some
-> > firmware is proprietary, but I hate to have the end users and other
-> > system (distro) maintainers have to deal with hell trying to make the
-> > life of end users easy to live with.
-> >
-> > In the case of TI's K3 architecture devices, we have two binary blobs
-> > that are critical for the boot process.
-> >
-> > 1. TIFS Firmware / DMSC firmware[4]—This is the security enclave
-> >   firmware. It is often encrypted, and sources are not public (due to
-> >   various business/regulatory reasons).
-> > 2. DM Firmware[5] - There is a source in public in some cases and
-> >   binary only in others - essentially limited function binary to be
-> >   put up in the device management uC. In cases where the source is
-> >   available, the build procedure is, in my personal opinion, pretty
-> >   arcane, and even though in theory it is practical, in practice, not
-> >   friendly - efforts are going to simplify it, even probably integrate
-> >   it with a more opensource ecosystem, but that is talking "look at the
-> >   tea leaves" stuff.
-> > 3. Low Power Management (LPM) binaries: tifs stub: another encrypted
-> >   binary that gives the tifs system context restore logic before
-> >   retrieving tifs firmware and a corresponding DM restoration binary.
-> >
-> > All told, this is not unlike the situation that necessitated the
-> > creation of a Linux firmware repository.
-> >
-> > Options that I see:
-> >
-> > 1. Let the status quo be - SoC vendors maintain random locations and
-> >   random rules to maintain boot firmware.
-> > 2. Ask Linux-firmware to host the binaries in a single canonical
-> >   location
-> 
-> I don't believe this makes sense. linux-firmware is designed for
-> firmware that is loaded by linunx drivers, these are not, they're
-> generally used a part of early boot firmware prior to the linux kernel
-> even booting, and could in fact be any other OS. As it is
-> linux-firmware is 2Gb+ in size, as a maintainer of that package in
-> Fedora having to determine which of 1000s of firmware is used by linux
-> or something else or if we need to ship it is hard enough already
-> without throwing a whole raft of other FW into the mix. I think a
-> separate repo is the right way to go here please.
-> 
+Hi Ilias,
+
+On Thu, 20 Jun 2024 at 23:49, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-
-Agree! While consolidating all of these binaries together under denx.de
-or linux-firmware is needed, it doesn't make much sense to put this in a 
-linux-firmware like repo. Unlike linux-firmware we don't need all of 
-these binaries on the board (another side-effect of putting these u-boot 
-binaries in linux-firmware), only the tiniest of subsets will be used
-for a specific board build.
-
-My hope was we could use some type of distribution mirroring system like 
-most distributions use for their binaries today with some central 
-routing for all the build machines consuming these blobs. This has the 
-benefit of allowing vendors to help out with hosting and bandwidth if 
-that's a problem and gives denx.de the ability to secure the software 
-supply chain.
-
-Using a system like this does add to the complexity of an already 
-complex setup/build system for u-boot. But we can do much better than a 
-signed git repo
-
-~Bryan
-
-
-> > 3. Host a boot-firmware repository - u-boot repo may be the more
-> >   logical location.
+> On Fri, 21 Jun 2024 at 08:32, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > * (1) isn't the correct answer.
+> > Hi Simon,
 > >
-> > * (2) Though I haven't seen any policy from the Linux-firmware
-> >   community mandating anything of the form, the binaries we are talking
-> 
-> my understanding is the policy is that it's firmware required by linux drivers.
-> 
-> >   of may not belong to Linux-firmware as they aren't strictly speaking
-> >   something Linux kernel will load (since the bootloader has that
-> >   responsibility), and in some cases may not even directly talk to
-> >   (security enclave or DDR firmware stuff). I am adding Josh to this
-> >   mail to see if he has any opinions on the topic (but keeping
-> >   from cross posting on linux-firmware list, unless folks feel it is
-> >   OK).
+> > On Fri, 21 Jun 2024 at 02:06, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > It does not make sense to enable all SHA algorithms unless they are
+> > > needed. It bloats the code and in this case, causes chromebook_link to
+> > > fail to build. That board does use the TPM, but not with measured boot,
+> > > nor EFI.
+> > >
+> > > Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+> > > add them to MEASURED_BOOT as well.
+> > >
+> > > Note that the original commit combines refactoring and new features,
+> > > which makes it hard to see what is going on.
+> > >
+> > > Fixes: 97707f12fda tpm: Support boot measurements
+> > > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v2)
 > >
-> > On (3):
-> > Proposal:
-> >
-> > * Create a boot firmware repository in Denx and/or GitHub (if
-> >   financials are a hurdle, I hope we can solve it as a community).
-> > * Limit binaries only to those consumed part of the u-boot scope.
-> > * Limit binaries only to those that do not have an opensource project
-> >   (Trusted Firmware-A/M, OP-TEE, etc..) or depend entirely on vendor
-> >   source or are binary only in nature (subject to licensing terms below)
-> > * Limit binaries to some pre-established size to prevent repository
-> >   explosion - say, 512Kib?
-> 
-> Not sure that makes sense, if a FW is needed by a device to boot it
-> doesn't make sense to exclude it based on some arbitrary size
-> 
-> > * Follow the same rules of integration and licensing guidelines as
-> >   Linux-firmware[6].
-> > * Similar rules as Linux-firmware guidelines of ABI backward and
-> >   forward compatibility.
-> > * Set a workflow update flow and a compatibility requirements document
-> 
-> * needs to come from the vendor (there's been issues with
-> linux-firmware where people try and post firmware that might not be
-> redistributable)
-> * need to be freely redistributable
-> * needs something similar to the liniux-firmware whence file etc.
-> * The new linux-firmware PR automation etc is quite good
-> 
-> > If we agree to have boot firmware under the stewardship of u-boot, we
-> > should also set other rules, which is excellent to discuss.
-> 
-> I think that's a good start, I think we should be open to expansion.
-> 
-> > Thoughts?
-> >
-> > [1] https://libera.irclog.whitequark.org/u-boot/2024-06-13#36498796;
-> > [2] https://docs.nxp.com/bundle/AN14093/page/topics/build_the_u-boot.html
-> > [3] https://bbs.t-firefly.com/forum.php?mod=viewthread&tid=2236
-> > [4] https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/tree/ti-sysfw?h=ti-linux-firmware
-> > [5] https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/tree/ti-dm?h=ti-linux-firmware
-> > [6] https://docs.kernel.org/next/driver-api/firmware/firmware-usage-guidelines.html
-> > --
-> > Regards,
-> > Nishanth Menon
-> > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> > There was a discussion in the previous version, bout enabling these on
+> > CMD_TPM as they are required.
+
+For reference [1]
+
+>
+> Or switch this to an imply instead so you can disable it ?
+
+The thing is, we need to be able to easily disable unwanted features.
+My reading of that thread is that U-Boot doesn't use SHA384/512 from
+the 'tpm2 pcr_extend' command today. Even if it did, I would think it
+better to allow the supported algorithms to be controlled. At worst, I
+would expect a separate option to disable that subcommand which would
+remove the implies.
+
+Some tpm code recently added puts a table and some functions in
+tpm-v2.h - could someone fix that? tpm-common.c would be a better
+place. Also we already have a list of hash algorithms in U-Boot
+(common/hash.c) so should use that, and respect the fact that certain
+algos may not be supported.
+
+If there is a requirement that (for a certain situation / protocol) we
+need to support everything, then let's have a Kconfig for that. It is
+what my patch was trying to work around, perhaps. For boards which
+don't care about extending TPM in this way, or don't use the more
+expensive algorithms, it avoids lots of code bloat.
+
+One of the principles of U-Boot is to allow configurability in these
+situations. It shouldn't be too hard to have the best of both worlds
+(supports all reasonable cases by default / allow unwanted cases to be
+dropped).
+
+So I'll await your reply on the above before figuring out where to go
+with this. For this release I'd just like to get the board working,
+but I understand that the TPM stuff is very-much in flux, perhaps in
+-next.
+
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20240610145920.3302001-3-sjg@chromium.org/
