@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C9AC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 18:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49000C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 18:43:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 624BF88405;
-	Fri, 21 Jun 2024 20:19:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 891458845A;
+	Fri, 21 Jun 2024 20:42:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Pv97b5bY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2XfV45/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28BE28845A; Fri, 21 Jun 2024 20:19:26 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 6CCD68846D; Fri, 21 Jun 2024 20:42:57 +0200 (CEST)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2F3688059
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 20:19:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 231CF88405
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 20:42:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6b2c6291038so18803506d6.0
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:19:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2c70878c54aso361048a91.2
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 11:42:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718993963; x=1719598763; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZlB1NqPXs1HzpW14gecXYRAzLiVu5r0E6u9MHZ0QRz4=;
- b=Pv97b5bYvTVqVRnJhX5b7i+ZpH3169LfcNDmqiboaq0SFlG6eKtO5uh3A/Ht8S/60x
- wCNuhrfD7DgDWEsOEhZ7052+5dxG9tU+X8unsmAPmkyMQlo1xfuArkXazjlJUXfUGd19
- ZFqZGxefJNdG5hWj0GM4ZJyEFHcqABor9AEIc=
+ d=gmail.com; s=20230601; t=1718995373; x=1719600173; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cozUdDLQLwb7yykmQzNYEW7SkYobU0Ql20BWmD+K/hM=;
+ b=Y2XfV45/YliHtaHgI76CChqeTJ7V9wcDFGh9UkWKZPx70MJUQmBTv20ALwSNTfK6G6
+ StWCiMCRIpRtbrHEWZqvdgFzfhXA8pzLehhPHZvjlD2uV82ssX59j2vA3BgodNdtbwIj
+ VKM16idZ/GfChjXAYfw4c/5xQ1pbjCCHyEYaz1DajK65Hz+l1skhTpz7IHLEOJdAWe/U
+ CTZeIeXKiZeIhT3lMfC+D5II8qknXHtXenHJd6cC4MHZJ163rVy+wcBDAYGmnUSkXSov
+ eBU8nlcEWGAb0cFeNTD2E8NSHMlHMErXQ97jQrjSeu+6nfhgjo1jOJvNM/Q3YufXUkA6
+ 7sDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718993963; x=1719598763;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZlB1NqPXs1HzpW14gecXYRAzLiVu5r0E6u9MHZ0QRz4=;
- b=KRG+yktlPJHp29f2exlkk8LKXTIPxvSKZhgGoEnQiN6KpEXNHRQOE1astpZVvL3via
- nHIVLaicsc9bYSl5obUmA4L0oDr3cgJqUv+/NixoY8sLkKHhRvXkwPODVfX/hwnxJX72
- C7jIeRqm5jNvDH/fgsTz2+heTTt0XGEBM4mnaLRYUxES4lspkkJldXVL2AYVzWUUbFNs
- w6FahVb2WbCbyKZWRB5CMYUS1AUBOEuG69PHSuM3JLFNUJmBiZd3j7fu4jIBpfjEzcKU
- XJbUFDJ0L/KuVnwTalt+8fYztKrA6/+0yKIL9E4PrBvbLe4RZG2Kq/x1GQ/o2JDUMd0i
- wfyA==
-X-Gm-Message-State: AOJu0YybJW1XLySM0U2vPjZJn8AqODRIBLqSdNudSS2/eq6tyraI4ivN
- /Lw7/tx2o+QzuA1ePnxhbonW1OockYLALG/vADtiFaJqM94XnJDb+x+L6abK2d/FeJz6LwgG6ji
- 8w73kYSZidMHCHbm4JUkw0J8/Dej0EtxDI5Zj
-X-Google-Smtp-Source: AGHT+IH8+MOaiS+CJXx6h/f+LS4McijTufyEHlYWXMomNXlN32E36oJFYdjmWSXmScfyllCscOmqnig+4DqilbL3OXg=
-X-Received: by 2002:a0c:e8c5:0:b0:6b5:a1a:9692 with SMTP id
- 6a1803df08f44-6b52b831217mr10663926d6.24.1718993962860; Fri, 21 Jun 2024
- 11:19:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718995373; x=1719600173;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cozUdDLQLwb7yykmQzNYEW7SkYobU0Ql20BWmD+K/hM=;
+ b=C6PIsMT1x3xmadH6lHFje/D8fpVOCntgSGYzaxziPSyduPMSkO92WjRtPDioj3X2MH
+ TtY995heT02dfxfQRe4gR6YL08DfDF5wdG2hjDt5TaCzbmuEVjKpshW7Th4KLUCtcth5
+ QRP2vvzijhP6QfT4bWCfZxJaxHBbO+T8ojsolWGQWhNx2ZAfXt8fKjY3RTPIc8plG2mx
+ PCbppc1tjLj8T8OyHQh+m2aQM2ayLY7tTkhW+U3QJyIPVT1ZHIGhnaoNgOFkHo6plrWR
+ Q5zE9OPlp2lq1oRTkv71agcF1Vym2V5MdBrQ99oZxGTAoqtuL+h3aETPhnpBZ0jzbfKL
+ VaxA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmwVP3TdcJLLcyV0TDTuZPFFIODsSR20LbjRy0o+3s0YPFx6uKEaahba+wmShK+f3P82omfblQu4Sv7E5JRAnQE86Wlw==
+X-Gm-Message-State: AOJu0YypEawbZaP7r9l7Hdi+Pf1ppUxSN54dme1RrssPvDMRrrMftSRW
+ 3Wk5LSQDN1jNT/L5CbExMDvOTHNIgl/BfuIb/Sl+GzxypJ62p/KLbOs1j1+yKu1xS8A7RcAtWH/
+ 3J3G9beF7UbdaIBpbqiES2gc+n4g=
+X-Google-Smtp-Source: AGHT+IGgFSQM+FDR39XkroTNodWN/hUlxB76euXndCj+dwXk6EcgZy3TmhEF/QFMcs8i0vfHwBnKKtwyuiFwDlj5Zac=
+X-Received: by 2002:a17:90b:30c9:b0:2c8:412:8746 with SMTP id
+ 98e67ed59e1d1-2c804128779mr4402302a91.4.1718995373487; Fri, 21 Jun 2024
+ 11:42:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240620131937.1130446-1-sjg@chromium.org>
- <20240620131937.1130446-4-sjg@chromium.org>
- <20240620143232.GM68077@bill-the-cat>
- <CAFLszTj0QgctNFigd=m7450gCLU3mnu9bTXtk=DuZmE7eAtWBg@mail.gmail.com>
- <20240620233026.GU68077@bill-the-cat>
- <CAFLszTi7qXX6R5=LQqCMveH7aJ=N96Mcob+gp11MEPixgrK66A@mail.gmail.com>
- <20240621152229.GV68077@bill-the-cat>
-In-Reply-To: <20240621152229.GV68077@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Jun 2024 12:19:12 -0600
-Message-ID: <CAFLszTi_NBBxz3MZz0HuOW5c2bGT3FgZ2usnAginZ0LC_TdX9A@mail.gmail.com>
-Subject: Re: [PATCH 3/5] buildman: Support building within a Python venv
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <CAJ+vNU0yGH6FKZsx+UZXvnQnsT13U9iKUb68=Fqc_z7J0XL14w@mail.gmail.com>
+ <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
+ <CAJ+vNU3ECDoquHLyA3ULac0HkUGbzggG-bDQ8v0F2vStyr47gQ@mail.gmail.com>
+In-Reply-To: <CAJ+vNU3ECDoquHLyA3ULac0HkUGbzggG-bDQ8v0F2vStyr47gQ@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 21 Jun 2024 15:42:41 -0300
+Message-ID: <CAOMZO5A4MS9eZe24WBSu4omfhjmwtjM72ftdQBwDWGd1wFiLmw@mail.gmail.com>
+Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,108 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Tim and Jerome,
 
-On Fri, 21 Jun 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Jun 21, 2024 at 08:57:50AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 20 Jun 2024 at 17:30, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Jun 20, 2024 at 05:05:30PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 20 Jun 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Jun 20, 2024 at 07:19:35AM -0600, Simon Glass wrote:
-> > > > >
-> > > > > > The Python virtualenv tool sets up a few things in the envronment,
-> > > > > > putting its path first in the PATH environment variable and setting up
-> > > > > > a sys.prefix different from the sys.base_prefix value.
-> > > > > >
-> > > > > > At present buildman puts the toolchain path first in PATH so that it can
-> > > > > > be found easily during the build. For sandbox this causes problems since
-> > > > > > /usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
-> > > > > > PATH variable. As a result, the venv is partially disabled.
-> > > > > >
-> > > > > > The result is that sandbox builds within a venv ignore the venv, e.g.
-> > > > > > when looking for packages.
-> > > > > >
-> > > > > > Correct this by detecting the venv and adding the toolchain path after
-> > > > > > the venv path.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > >
-> > > > > Why are we using PATH at all in this case? Shouldn't we just be setting
-> > > > > CROSS_COMPILE=/full/path/to/the/prefix ?
-> > > >
-> > > > This is the -p option to buildman. The original commit was:
-> > > >
-> > > > commit bb1501f2c22c979961b735db775605cccedd98f6
-> > > > Author: Simon Glass <sjg@chromium.org>
-> > > > Date:   Mon Dec 1 17:34:00 2014 -0700
-> > > >
-> > > >     buildman: Add an option to use the full tool chain path
-> > > >
-> > > >     In some cases there may be multiple toolchains with the same name in the
-> > > >     path. Provide an option to use the full path in the CROSS_COMPILE
-> > > >     environment variable.
-> > > >
-> > > >     Note: Wolfgang mentioned that this is dangerous since in some cases there
-> > > >     may be other tools on the path that are needed. So this is set up as an
-> > > >     option, not the default. I will need test confirmation (i.e. that this
-> > > >     commit fixes a real problem) before merging it.
-> > > >
-> > > > As to why we don't always do this, well that is back in the mists of
-> > > > time, 10 years ago.
-> > > >
-> > > > BTW, this is raising a point ("let's change the behaviour") separate
-> > > > from the goal of this commit, which is to fix a problem with venv,
-> > > > albeit that if we made -p the only option, then we could potentially
-> > > > drop all PATH changes. Perhaps toolchains are built differently now,
-> > > > such that they always invoke their tools using the same prefix and
-> > > > dir?
-> > >
-> > > Wait, I'm confused. buildman internally updates its own PATH to avoid
-> > > calling CROSS_COMPILE with the full path due to a concern about
-> > > toolchain bugs?
-> >
-> > Not its own PATH: the one it passes to U-Boot's 'make'.
->
-> OK, but the point stands.
->
-> > I'm not sure why, actually. It is such a long time ago that I don't remember.
-> >
-> > I see:
-> >
-> > ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-ld
->
-> Yes, prefixed version that's allowed to be called by users.
->
-> > and
-> >
-> > ~/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/arm-linux-gnueabi/bin/ld
->
-> Internal usage, here be dragons and all that.
->
-> > but interestingly there is no gcc in the latter directory, which there
-> > was in 4.6 (and presumably for some time after).
-> >
-> > Certainly for sandbox there is no prefix, so we cannot add it in that
-> > case, and sandbox is actually the arch used to run these tests.
->
-> CROSS_COMPILE is empty for sandbox, yes.
->
-> > What are you suggesting we change about this patch?
->
-> That it's going about things backwards? If you're setting CROSS_COMPILE
-> _then_ it should be the full path that it already knows otherwise if not
-> setting CROSS_COMPILE then also not modifying PATH.
+On Fri, Jun 21, 2024 at 1:08=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-That is what the code does, yes. It either adds the toolchain path to
-CROSS_COMPILE or to PATH, not both. The 'full_path' argument controls
-which one it uses.
+> I tried your to-upstream/v5-wip branch
+> (042bea36eb9731079a3d7afffe3774d79e06ac5d) and it behaves the same. Do
+> you have something else to try/test?
 
-Regards,
-Simon
+Yes, when I tested older versions from Maxim I could never get lwIP to
+work with i.MX.
+
+Jerome,
+
+Please try to run the lwIP series on any i.MX board, if possible.
+
+Thanks
