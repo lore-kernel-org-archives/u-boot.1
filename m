@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C22DBC27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 12:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA131C27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 12:59:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1052880AE;
-	Fri, 21 Jun 2024 14:51:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0E9EB87D10;
+	Fri, 21 Jun 2024 14:59:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TeHMbaD1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d4jvhkmw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BA8588405; Fri, 21 Jun 2024 14:51:45 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 381B888405; Fri, 21 Jun 2024 14:59:52 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52E8287D10
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 14:51:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9E72879AF
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 14:59:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718974291; x=1719579091; i=xypron.glpk@gmx.de;
- bh=rsGplqd6HaZkKE+EbaKOd63LmSmaYnboR3ycmxJWfNA=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=TeHMbaD1gKxtg1HTtFs0xNMjFPpX3zUciC+gR2HcBvLNXoAg3n6yyHLrxbRbwdFc
- hXZwxd7f26oBR7f8gC6hlrVXvefQvqhnPqFS/htBh0U1086J1H45vRpKfRi0ppFBM
- rMePsWd0zmU0PgLLixRIuvMebRsangl07lVwy31CRg+lo8vDMVOZF72H1L6CeUmGa
- nIpLRbxCCWZkmD6Sr3biWv1A8vAWMuIWWGVwaxv7QT7DgBc3ddJJoo7wha24QJZlJ
- xngPcV3GR5D++NIGn5Z1XoD7aElxStEZSDOm97+u1uCwlhouH/v/MkwM3GprMGXu8
- Vbq8mKusUPRt2ro/lw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M8QS2-1sGDsx2blg-006JRA; Fri, 21
- Jun 2024 14:51:31 +0200
-Message-ID: <f516756f-93f7-4064-9dbe-abbced5fbd93@gmx.de>
-Date: Fri, 21 Jun 2024 14:50:59 +0200
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2ec408c6d94so23793441fa.3
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 05:59:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718974789; x=1719579589; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kkzxGGvd+rgmhU8uATscXOmOld4Mhrv9F+Affnp0a7Q=;
+ b=d4jvhkmwGl9M0vWApCwFbtqyVFDbCzeEf3VDIg74kCOOA3Obt+kXlFCEWn4F1OSH9I
+ vxW2f7LaJVoiz9xy4CFlSAdGQk88EBQeOC5Z8Z6vF5w2ss8N9dRCGywu2n35E9Sj3Kk0
+ CLJOkXDh87NkT7U6h6cGKITz6coOsi0H5ORbFZOFWZKBw+kVJ0/hf/cQaO6r4bzeDnS/
+ k+RnmCm907onuONXFIrywru658/hg2MG/3uyMTPfGm6BQ4/6J+LfUPqMRYOcOe6uT5dR
+ znIhHem10+nzVvD/bnKk002WRtY9CwlvM6/xs6IurKVEhjVc02yB9nfczREGF61OTY52
+ eMvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718974789; x=1719579589;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kkzxGGvd+rgmhU8uATscXOmOld4Mhrv9F+Affnp0a7Q=;
+ b=kMkdCWHGJHnIHTK0JYPqA6gqdlbgKw4htMqJTN72oJLz2Xwt8IW5doJYswZEAv9Sg3
+ WW+13gcWP2JAXEcfytFhgcxlFEXd3yV/cYmymMWQMl+Hjn6QNaU/sQ+P/MNdJ8zJ8UIC
+ ZyIRONEIR/0yq1n4MH832mm+2MayfNvmk/hbAc/pO2iKkVUJvYj871hTWDEf92Y8v17t
+ AccH4DZkSjTcaRxKCsTEAL9DsLuf8DyLH91YJGuCH5D8xKJqBtAhQKcb6m1xp8xbPGtE
+ TsfzQj6+gymnjTV+sWIVO28FNWNgZ/bhTuhUDmtkLOhmyTrCYFgPE9lOP7c9ftAywjcH
+ f9PQ==
+X-Gm-Message-State: AOJu0YxqjbMN8wiGn66EPxBgqUKh7TE25/F2AER6eyWoLMxD6rBsNeEK
+ JtSguSStrSrXJKGLmMYgKkc2ZYKgG0DNYabMbidzXLRgI0oC9eouHJob+Dx4HEaUk4zh1F0GkaD
+ 2SmE=
+X-Google-Smtp-Source: AGHT+IGEjhX3ARZSHTiQwJfHoYrhhWjpJDaJFDcsQesX5kHVJQrZz5miqEBW8m4Z2u7qVCpPSdOs8Q==
+X-Received: by 2002:a5d:5f8a:0:b0:364:3ba5:c5af with SMTP id
+ ffacd0b85a97d-3643ba5cc94mr5844896f8f.61.1718974768360; 
+ Fri, 21 Jun 2024 05:59:28 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:dbe1:6155:be06:e47d?
+ ([2a01:e0a:3cb:7bb0:dbe1:6155:be06:e47d])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3663a8c7499sm1701697f8f.90.2024.06.21.05.59.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 21 Jun 2024 05:59:28 -0700 (PDT)
+Message-ID: <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
+Date: Fri, 21 Jun 2024 14:59:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] cmd: bootm: add ELF file support
-To: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- quentin.schulz@theobroma-systems.com, sjg@chromium.org, trini@konsulko.com,
- u-boot@lists.denx.de
-References: <20240621114210.51101-1-Maxim.Moskalets@kaspersky.com>
+Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+References: <cover.1718638104.git.jerome.forissier@linaro.org>
+ <CAJ+vNU0yGH6FKZsx+UZXvnQnsT13U9iKUb68=Fqc_z7J0XL14w@mail.gmail.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240621114210.51101-1-Maxim.Moskalets@kaspersky.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cK1wWj/EtGswCFsQWbkz7epoIkYpdCpx1j6z5mDdxQF7L0f7lJC
- q37nuw9OIUMZH3xuHw4NMjRfHixqty/ECWvsrt1ZXHvv4vufWIwBJOCbj3upuEPcKU/cQBi
- AX/pYaPFDL64QKxwG2OZkQSXxNkbX3RAlTv3tF8yB67/24JM6vUVVz6BCvilfW3NEGlg1Ha
- j/6M/p3xqWeNlCEVjkzLw==
-UI-OutboundReport: notjunk:1;M01:P0:Lf/o9TaN3+8=;iOnwRsihQ4HBT17eSwBWJUFk8Pv
- zM3e9Gqkr2OAMkaQQ1j5NGx8ftat033tFrE/3rXOjr9EQ2aAPWAzADznr0XN0z6yjyljMNmoB
- uPL1wD979dpgUxMZKtr011PF28sMlSvoq/JW+/L0BxjoHVAi3XuIIUXTJdrlALf1689SdmHrb
- 66jK0Igl6Uhzd5sz+x9mfEdKf5eIZJ4wiQoPFTYqLNKSQo52URcmj6BRdIHzYfyxK86n8CN83
- QYQBYlMfqKoK54yJDqHrrBxU3S4Wyso8kCtdT2uUb3oPgU7yiNI2PjC5TLWEoyM9hQNMSaSsM
- 1H/w/e3NCIlZO8tH6y3qAVqZjYdNxr9DfSN5cLtJZrvbLFBAhRMJvzCkbmlaKdz8el2vof5ks
- uttOQNpjU6fHQQIRQ3/3w45w2wSYFFkoXyjHyn/UuioHDG1Jb808uLtikGY+7/8A3h6LBDQOF
- pqmNNZNrxhHoEdWztaVB9r1I8J+UVvFci+NoiudLqmqr5xnYl1RngCDXH5synA2GV/7f9XWrp
- yF6SkQtfQBDtYDHwpTdKlwDiNWTNRnzabFQpMoz86xHxXNckECqdcfcSVnz6PLn6+0Kp3RLja
- IkYxp9fExxJKxPrM08P1B89yvg+b05AqPH+kWP880ldmoqV+bDyIF2yfUsFb/PakFSx9e8vTl
- wUsGnBjUW80mi9qf769+0s+fhBGRcbSIO0nM75xnwoL0Ov7wY09s5MWo3JMgIxpm99zmG0s9K
- JbICPEsVEwl6aN3Za96B15XoB0NYVkUo6ggSVNpj9zAQLF6xqj33WKdeCklnhBAatpI2wrsJN
- hLZ3h1PEbkDyd5N3RAQUBtRta2flzq0GkYbfQUfdNLkKQ=
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAJ+vNU0yGH6FKZsx+UZXvnQnsT13U9iKUb68=Fqc_z7J0XL14w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,134 +97,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 21.06.24 13:42, Maxim Moskalets wrote:
-> Some operating systems (e.g. seL4) and embedded applications are ELF
-> images. It is convenient to use FIT-images to implement trusted boot.
-> Added "elf" image type for booting using bootm command.
->
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 
-I guess a test could be added to test/py/tests/test_zynqmp_rpu.py which
-already uses the bootelf command?
 
-Best regards
-
-Heinrich
-
+On 6/20/24 19:10, Tim Harvey wrote:
+> On Mon, Jun 17, 2024 at 8:33 AM Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>> stack [2] [3] as an alternative to the current implementation in net/,
+>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>> reasons for doing so are:
+>> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
+>> has some additional lwIP and Mbed TLS patches to do so. With that it
+>> becomes possible to fetch and launch a distro installer such as Debian
+>> etc. using a secure, authenticated connection directly from the U-Boot
+>> shell. Several use cases:
+>>   * Authentication: prevent MITM attack (third party replacing the
+>> binary with a different one)
+>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>> image as it is being downloaded
+>>   * Allow connection to servers that do not support plain HTTP anymore
+>> (this is becoming more and more common on the Internet these days)
+>> - Possibly benefit from additional features implemented in lwIP
+>> - Less code to maintain in U-Boot
+>>
+>> Prior to applying this series, the lwIP stack needs to be added as a
+>> Git subtree with the following command:
+>>
+>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+>>
+>> The first patch renames some enums in order to avoid a conflict when a
+>> later patch enables the lwIP library.
+>>
+>> The second patch introduces a new Kconfig symbol: NET_LWIP, which selects
+>> the lwIP implementation instead of the current one (NET). Contrary to the
+>> approach chosen by Maxim in [1], NET_LWIP and NET cannot be enabled
+>> simultaneously. The rationale is we want to start from a clean state and
+>> not pull potentially duplicated functionality from both stacks. Note
+>> however that a few files are still built in net/, they are the ones
+>> related to ethernet device management and the ethernet bootflow.
+>>
+>> The third patch splits the net.h header into net-legacy.h, net-common.h,
+>> net-lwip.h, leaving net.h as a simple wrapper.
+>>
+>> The fourth patch introduces the Makefile to build lwIP when NET_LWIP is
+>> enabled.
+>>
+>> The subsequent patches implement various network-oriented commands and
+>> features: dhcp, dns, ping, tftpboot, wget.
+>>
+>> A number of features are currently incompatible with NET_LWIP: SANDBOX,
+>> DFU_TFTP, FASTBOOT, SPL_NET. All make assumptions on how the network
+>> stack is implemented and/or pull sybols that are not trivially exported
+>> from lwIP. Some interface rework may be needed.
+>>
+>> Due to the above and in order to provide some level of testing, a new QEMU
+>> configuration is introduced (qemu_arm64_lwip_defconfig) which is the same
+>> as qemu_arm64_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
+>> Tests are added to test/py/tests/test_net.py for that configuration.
+>>
+> 
+> Hi Jermone,
+> 
+> I've given this a spin on an imx8mm-venice-gw73xx-0x via
+> imx8mm_venice_defconfig and I can't get DHCP to work (didn't work in
+> v3 either):
+> 
+> $ diff defconfig configs/imx8mm_venice_defconfig
+> 68,69c68,71
+> < CONFIG_CMD_DNS_LWIP=y
+> < CONFIG_CMD_WGET_LWIP=y
 > ---
-> v5:
-> 	used func from lib/elf.c to avoid dependency form CLI
+>> CONFIG_CMD_DHCP6=y
+>> CONFIG_CMD_TFTPPUT=y
+>> CONFIG_SYS_DISABLE_AUTOLOAD=y
+>> CONFIG_CMD_WGET=y
+> 88,90c90,94
+> < CONFIG_NET_LWIP=y
+> < CONFIG_LWIP_DEBUG=y
+> < CONFIG_LWIP_ASSERT=y
 > ---
->   boot/bootm_os.c  | 18 ++++++++++++++++++
->   boot/image-fit.c |  3 ++-
->   boot/image.c     |  5 ++++-
->   cmd/Kconfig      |  7 +++++++
->   include/image.h  |  1 +
->   5 files changed, 32 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> index 15297ddb53..6a6621706f 100644
-> --- a/boot/bootm_os.c
-> +++ b/boot/bootm_os.c
-> @@ -8,6 +8,7 @@
->   #include <bootstage.h>
->   #include <cpu_func.h>
->   #include <efi_loader.h>
-> +#include <elf.h>
->   #include <env.h>
->   #include <fdt_support.h>
->   #include <image.h>
-> @@ -394,6 +395,20 @@ static int do_bootm_qnxelf(int flag, struct bootm_i=
-nfo *bmi)
->   }
->   #endif
->
-> +#if defined(CONFIG_BOOTM_ELF)
-> +static int do_bootm_elf(int flag, struct bootm_info *bmi)
-> +{
-> +	Bootelf_flags flags =3D { .autostart =3D 1 };
-> +
-> +	if (flag !=3D BOOTM_STATE_OS_GO)
-> +		return 0;
-> +
-> +	bootelf(bmi->images->ep, flags, 0, NULL);
-> +
-> +	return 1;
-> +}
-> +#endif
-> +
->   #ifdef CONFIG_INTEGRITY
->   static int do_bootm_integrity(int flag, struct bootm_info *bmi)
->   {
-> @@ -535,6 +550,9 @@ static boot_os_fn *boot_os[] =3D {
->   #ifdef CONFIG_BOOTM_EFI
->   	[IH_OS_EFI] =3D do_bootm_efi,
->   #endif
-> +#if defined(CONFIG_BOOTM_ELF)
-> +	[IH_OS_ELF] =3D do_bootm_elf,
-> +#endif
->   };
->
->   /* Allow for arch specific config before we boot */
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index f6464bcf62..9253f81fff 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -2175,7 +2175,8 @@ int fit_image_load(struct bootm_headers *images, u=
-long addr,
->   		fit_image_check_os(fit, noffset, IH_OS_TEE) ||
->   		fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
->   		fit_image_check_os(fit, noffset, IH_OS_EFI) ||
-> -		fit_image_check_os(fit, noffset, IH_OS_VXWORKS);
-> +		fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
-> +		fit_image_check_os(fit, noffset, IH_OS_ELF);
->
->   	/*
->   	 * If either of the checks fail, we should report an error, but
-> diff --git a/boot/image.c b/boot/image.c
-> index fc774d605d..abac254e02 100644
-> --- a/boot/image.c
-> +++ b/boot/image.c
-> @@ -130,7 +130,10 @@ static const table_entry_t uimage_os[] =3D {
->   	{	IH_OS_OPENRTOS,	"openrtos",	"OpenRTOS",		},
->   #endif
->   	{	IH_OS_OPENSBI,	"opensbi",	"RISC-V OpenSBI",	},
-> -	{	IH_OS_EFI,	"efi",		"EFI Firmware" },
-> +	{	IH_OS_EFI,	"efi",		"EFI Firmware"		},
-> +#ifdef CONFIG_BOOTM_ELF
-> +	{	IH_OS_ELF,	"elf",		"ELF Image"		},
-> +#endif
->
->   	{	-1,		"",		"",			},
->   };
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index a2dee34689..613baa106e 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -321,6 +321,13 @@ config BOOTM_EFI
->   	help
->   	  Support booting UEFI FIT images via the bootm command.
->
-> +config BOOTM_ELF
-> +	bool "Support booting ELF images"
-> +	depends on CMD_BOOTM && LIB_ELF
-> +	default n
-> +	help
-> +	  Support booting ELF images via the bootm command.
-> +
->   config CMD_BOOTZ
->   	bool "bootz"
->   	help
-> diff --git a/include/image.h b/include/image.h
-> index c5b288f62b..9daaee15cd 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -100,6 +100,7 @@ enum {
->   	IH_OS_TEE,			/* Trusted Execution Environment */
->   	IH_OS_OPENSBI,			/* RISC-V OpenSBI */
->   	IH_OS_EFI,			/* EFI Firmware (e.g. GRUB2) */
-> +	IH_OS_ELF,			/* ELF Image (e.g. seL4) */
->
->   	IH_OS_COUNT,
->   };
+>> CONFIG_NET_RANDOM_ETHADDR=y
+>> CONFIG_IP_DEFRAG=y
+>> CONFIG_TFTP_BLOCKSIZE=4096
+>> CONFIG_PROT_TCP_SACK=y
+>> CONFIG_IPV6=y
+> 
+> Target:
+> u-boot=> net list
+> eth0 : ethernet@30be0000 00:d0:12:b5:f8:41 active
+> u-boot=> dhcp || echo fail
+> eth0: ethernet@30be0000 00:d0:12:b5:f8:41 active
+> netif_set_ipaddr: netif address being changed
+> netif: added interface 0 addr 192.168.1.1 netmask 0.0.0.0 gw 0.0.0.0
+> etharp_request: sending ARP request.
+> etharp_raw: sending raw ARP packet.
+> ethernet_output: sending packet 000000007df00bf0
+> dhcp_start(netif=000000007df2af40) 0dhcp_start(): mallocing new DHCP client
+> dhcp_start(): allocated dhcp
+> dhcp_start(): starting DHCP configuration
+> dhcp_discover()
+> transaction id xid(42021)
+> dhcp_discover: making request
+> dhcp_discover: sendto(DISCOVER, IP_ADDR_BROADCAST, LWIP_IANA_PORT_DHCP_SERVER)
+> ip4_output_if: 0IP header:
+> +-------------------------------+
+> | 4 | 5 |  0x00 |       336     | (v, hl, tos, len)
+> +-------------------------------+
+> |        0      |000|       0   | (id, flags, offset)
+> +-------------------------------+
+> |  255  |   17  |    0xba9d     | (ttl, proto, chksum)
+> +-------------------------------+
+> |    0  |    0  |    0  |    0  | (src)
+> +-------------------------------+
+> |  255  |  255  |  255  |  255  | (dest)
+> +-------------------------------+
+> ip4_output_if: call netif->output()
+> ethernet_output: sending packet 000000007df2c010
+> dhcp_discover: deleting()
+> dhcp_discover: SELECTING
+> dhcp_discover(): set request timeout 2000 msecs
+> ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:28:28:5d:bb:16:9f, type:8899
+> ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:00:27:0e:0d:74:ba, type:806
+> etharp_update_arp_entry: 172.24.20.24 - 00:27:0e:0d:74:ba
+> etharp_find_entry: found empty entry 0
+> etharp_find_entry: no empty entry found and not allowed to recycle
+> etharp_input: incoming ARP request
+> etharp_input: ARP request was not for us.
+> ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:98:90:96:ac:d7:63, type:806
+> etharp_update_arp_entry: 172.24.20.3 - 98:90:96:ac:d7:63
+> etharp_find_entry: found empty entry 0
+> etharp_find_entry: no empty entry found and not allowed to recycle
+> etharp_input: incoming ARP request
+> etharp_input: ARP request was not for us.
+> ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:84:2b:2b:4e:5a:9a, type:806
+> etharp_update_arp_entry: 172.24.0.1 - 84:2b:2b:4e:5a:9a
+> etharp_find_entry: found empty entry 0
+> etharp_find_entry: no empty entry found and not allowed to recycle
+> etharp_input: incoming ARP request
+> etharp_input: ARP request was not for us.
+> ethernet_input: dest:ff:ff:ff:ff:ff:ff, src:cc:96:e5:1e:a0:7b, type:800
+> ip_input: iphdr->dest 0xffff1fac netif->ip_addr 0x101a8c0 (0x0, 0x0, 0xffff1fac)
+> ip4_input: UDP packet to DHCP client port 138
+> ip4_input: packet not for us.
 
+That's weird. I think what could happen is the interface already has
+a static IP assigned when it is registered to the lwIP stack and thus
+DHCP never receives the packed because it is dropped before.
+I have reworked the initialization code in v5, lwIP will get to know
+only one interface at a time and I make sure that interface is registered
+without an IP address when doing DHCP. Hopefully that should fix the issue.
+
+Thanks for testing!
+
+-- 
+Jerome
+
+> 
+> Best Regards,
+> 
+> Tim
