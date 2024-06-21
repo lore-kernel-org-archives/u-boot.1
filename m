@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F17C2BA18
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 01:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2BBC2BA18
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 02:14:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EA7D882AD;
-	Fri, 21 Jun 2024 03:54:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F012087FC8;
+	Fri, 21 Jun 2024 04:14:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GBqfg/ts";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ecZUbY0H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E37DE883F2; Fri, 21 Jun 2024 03:54:05 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 9A6B387C69; Fri, 21 Jun 2024 04:14:08 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6B2888013
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 03:54:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10E7788001
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 04:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-57d0f929f79so1314919a12.2
- for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 18:54:03 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a6fd3f5a19bso372466b.3
+ for <u-boot@lists.denx.de>; Thu, 20 Jun 2024 19:14:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718934843; x=1719539643; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718936044; x=1719540844; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mG/VkNSKWlWqbcP9I+0WoDws0pP73p8OtMj2sCPffIs=;
- b=GBqfg/tsiE26ud/DylsFW1rd33OKxQwAEEW8ZgAxTLP5qmgerY3GnWP/5NIaM8z2wT
- okRowwM1JnHVg5ph4sdJKKTJM6IIgAbuU9CrFp4zmqGpEbRIU+2/vKucpAK07Fz5zmno
- c88M36wUuFU6xEsPFx3kmZfiVX/VLQXazSoHTySfxp4biyjgAiFMaJfGxdPcjB88cWbs
- 6V1nY1c6bMk11YOwR0F5zD9tyrptcRdnukZeYP/qg4Sy2mcwcdkE1i+E3uzQWxyUEuSV
- YfF8NR+gFa+ZPt7B0pc+hZnj1nHx+RNh+CsC6EzoYtYJ9CK/A74TCl/zG9gnW78hy2RH
- 1LAA==
+ bh=NsQCZO25FWJCiBev/SEulu11JBkZCgJ55+ZAQCk6w50=;
+ b=ecZUbY0HF3JJKORSoJ0mwQSs/XZSunTpFWv07/eOku4+4Kv7wSio3xj5p/LisLokSr
+ sSmuid2RrXE6oHD8Vx20z40K+4izoRvmukZT36W8yR/0In+tkUSTupnn7fkbrlLy+5lO
+ axWKQDT8OIG64DVHQx5f8jxGDWE5DLZ4h8RAFcWGDmMqKC9X8fyYuVJSlagfGm8Kcwqs
+ z8VXhuWTLd303WMCtgonxfk272t1clV87BXmH866ia04aXtYi8KKWbF0ghmNsVnr+5uC
+ EfpIT7TP8LBb69dsvpiI7lRTI8JrvBZ/qHQV/Ng+zkIdlmb9eUyVC/L3Qd/Jur21VZJD
+ rL4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718934843; x=1719539643;
+ d=1e100.net; s=20230601; t=1718936044; x=1719540844;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mG/VkNSKWlWqbcP9I+0WoDws0pP73p8OtMj2sCPffIs=;
- b=oKKNFLgs4eAoSZzI1daFrhxuXOHbKI7LZeQpoQSoAKz6Rw46/Zn4MHx5CceF8BX/EN
- m3wDA89j85vfw0Y2NUSUeXchhiP3RWg9SG1y0WONKM4Cy7fz8hsc6NToySLwte/cZ1qa
- Uak2S1MkrDm/sj4OntAFDAqJpu9fuJXo1NMEgQIJnDMGmrEhfd2ZmMJhvsGCtrOZFBYy
- zIXowDhQIDhb+fLx77oOk882c7k7a06ZEzL762CNu2uA1bbhX30LhTnZXtFdKAUd+Fk6
- l0RS9LhEOwOa0X2qn5lG+4kZOcwN8SBG5MrCeoM3hSHvm5YXoKATZ63qL8UAmLfF0sn0
- ScJA==
+ bh=NsQCZO25FWJCiBev/SEulu11JBkZCgJ55+ZAQCk6w50=;
+ b=Q/Ve/Ul6A4pPZVXUggZYwcKbK8IZIp1Rti0LUTstxzuyL3jfd5WmOxZ6McZ1d72Hbg
+ iB05c8KesY5HVAbW0O+PJ6sUNyhHVA2KYkpwqGvdWZcqV7GITmDKWOg4JJivYa4OdDSH
+ 3A5T6qjvmmRgSBBZ9pLqF+lt0pO/M/Nn6MlylZSclp7hIQWOTA8lok8eYbSDD8td6RWC
+ bTlp546vMzFyDkp8xfUyWsdxo8uZqDCJ/4e30NfohHyB0nYFDBZI+upojCzkrV8924QZ
+ 7b/iZLN8LODFAvgHj/DeZJ1/QeXZPIq8C/lgvVElV4bi+rCxL4OTy86NnyxKTL9ryF4l
+ KaIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6zslS6lLo9M1q6say157uC5dmca/F8iXYEFaNrW5tPPye5Bl+d9shjHll44200pMLeplNhGb1mMMd6DLnNA4KFJkw+A==
-X-Gm-Message-State: AOJu0YwAzIlOH8NIXr4EMV3HNP7drQwCgEmTBpZgcH+AH1M0L6YPnC18
- iYD1TFXZeLH40b/qmKf1icC5RyL09KjEZpFSGokapiqYA4qG044kFGI/Q618F/g=
-X-Google-Smtp-Source: AGHT+IEamWTz98qo58G4EQjZqccGmp10dsqxTFWTLibCf+5Gm/FA7aiNZaFMs8dUzb4Rk+o5g8CvZA==
-X-Received: by 2002:a50:d619:0:b0:57d:73c:9299 with SMTP id
- 4fb4d7f45d1cf-57d07e752fbmr4153205a12.23.1718934843069; 
- Thu, 20 Jun 2024 18:54:03 -0700 (PDT)
+ AJvYcCXKtnDE4/RnBbwGlF22ndLRv41Ftz/iWKesXPje/RPj66qQGE307MFVTXu4o8/is1oM+mk3EYb+RHyiruHA+i7wtLArAQ==
+X-Gm-Message-State: AOJu0YwaRlS8sSL2H8TIgrWGaiQzwj24qodIJDnEbEyeiqFEmZTTfuJ+
+ 6TpwbwNR6j/gN95vD0RuKDTvoLiOw8VSL7VKnplg1NVhso9h96+QLjmOHIsIafk=
+X-Google-Smtp-Source: AGHT+IF9Snf/ozVg4Ohtw8IbLAOI0P8mPPIdT27BFzYDj/pv/gddYq12uYEfIWBd9gqwu9LbUYtkTw==
+X-Received: by 2002:a17:906:590c:b0:a6f:513a:a65 with SMTP id
+ a640c23a62f3a-a6fab6423a4mr414754866b.33.1718936044270; 
+ Thu, 20 Jun 2024 19:14:04 -0700 (PDT)
 Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::ebdd])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d3041208esm257919a12.30.2024.06.20.18.54.02
+ a640c23a62f3a-a6fcf48b51csm29730766b.89.2024.06.20.19.14.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jun 2024 18:54:02 -0700 (PDT)
+ Thu, 20 Jun 2024 19:14:03 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Subject: [PATCH] mmc: msm_sdhci: program core_vendor_spec
-Date: Fri, 21 Jun 2024 03:53:09 +0200
-Message-ID: <20240621015351.1573934-1-caleb.connolly@linaro.org>
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] usb: dwc3: respect role-switch-default-mode
+Date: Fri, 21 Jun 2024 04:11:31 +0200
+Message-ID: <20240621021135.1600847-2-caleb.connolly@linaro.org>
 X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,87 +96,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After resetting the host controller, program in the POR val for this
-register just like the Linux driver does.
+* Factor out the common pattern of checking the dr_mode property on
+  the usb node and it's parent
+* Respect the usb-role-switch property, rather than requiring dr_mode be
+  set
+* Override OTG mode with the value in role-switch-default-mode
 
-This seems to help with initialization when running U-Boot as the primary
-bootloader on some boards.
+The devicetree bindings don't dictate that dr_mode is a required
+property, but the dwc3 driver would refuse to probe if it was unset
+(this breaks the Qualcomm RB2 board which doesn't set it).
+
+Here, we update the driver to respect the other properties that can be
+used to describe the controller, and more gracefully handle some of the
+edge cases.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/mmc/msm_sdhci.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ drivers/usb/dwc3/dwc3-generic.c | 56 +++++++++++++++++++++++++--------
+ 1 file changed, 43 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 4ce0de6c47d8..8b3188fa20d4 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -31,8 +31,10 @@
- #define SDCC_MCI_STATUS2 0x6C
- #define SDCC_MCI_STATUS2_MCI_ACT 0x1
- #define SDCC_MCI_HC_MODE 0x78
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index cbb5d61dfb0b..1cf8b90e8bbf 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -49,8 +49,46 @@ struct dwc3_generic_host_priv {
+ 	struct dwc3_generic_priv gen_priv;
+ 	struct udevice *vbus_supply;
+ };
  
-+#define CORE_VENDOR_SPEC_POR_VAL 0xa9c
++/**
++ * dwc3_get_preferred_dr_mode() - Get the preferred DR mode for the USB node
++ *
++ * Since we don't support dynamic role switching yet in dwc3, this is a slightly
++ * opinionated wrapper around usb_get_dr_mode() which will respect the
++ * role-switch-default-mode property if it is present and the dr_mode is OTG.
++ *
++ * @child: Node to get the DR mode for
++ */
++static enum usb_dr_mode dwc3_get_preferred_dr_mode(ofnode node)
++{
++	enum usb_dr_mode mode;
++	bool is_role_switch = ofnode_has_property(node, "usb-role-switch");
 +
- struct msm_sdhc_plat {
- 	struct mmc_config cfg;
- 	struct mmc mmc;
- };
-@@ -45,21 +47,25 @@ struct msm_sdhc {
- 
- struct msm_sdhc_variant_info {
- 	bool mci_removed;
- 
-+	u32 core_vendor_spec;
- 	u32 core_vendor_spec_capabilities0;
- };
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
- static int msm_sdc_clk_init(struct udevice *dev)
++	mode = usb_get_dr_mode(node);
++	/* Attempt to search the parent node too */
++	if (mode == USB_DR_MODE_UNKNOWN) {
++		node = ofnode_get_parent(node);
++		mode = usb_get_dr_mode(node);
++		is_role_switch |= ofnode_has_property(node, "usb-role-switch");
++	}
++
++	/* If the usb-role-switch property is present, but dr_mode isn't, then the
++	 * default is OTG.
++	 */
++	if (is_role_switch && mode == USB_DR_MODE_UNKNOWN)
++		mode = USB_DR_MODE_OTG;
++
++	/* Respect the role-switch-default-mode property */
++	if (mode == USB_DR_MODE_OTG && is_role_switch) {
++		mode = usb_get_role_switch_default_mode(node);
++		if (mode == USB_DR_MODE_UNKNOWN)
++			mode = USB_DR_MODE_OTG;
++	}
++
++	return mode;
++}
++
+ static int dwc3_generic_probe(struct udevice *dev,
+ 			      struct dwc3_generic_priv *priv)
  {
- 	struct msm_sdhc *prv = dev_get_priv(dev);
-+	const struct msm_sdhc_variant_info *var_info;
- 	ofnode node = dev_ofnode(dev);
- 	ulong clk_rate;
- 	int ret, i = 0, n_clks;
- 	const char *clk_name;
- 
-+	var_info = (void *)dev_get_driver_data(dev);
-+
- 	ret = ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate));
- 	if (ret)
- 		clk_rate = 201500000;
- 
-@@ -104,8 +110,11 @@ static int msm_sdc_clk_init(struct udevice *dev)
- 		log_warning("Couldn't set MMC core clock rate: %dE\n", clk_rate ? (int)PTR_ERR((void *)clk_rate) : 0);
- 		return -EINVAL;
+ 	int rc;
+@@ -178,17 +216,12 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
+ 		pr_info("No USB maximum speed specified. Using super speed\n");
+ 		plat->maximum_speed = USB_SPEED_SUPER;
  	}
  
-+	writel_relaxed(CORE_VENDOR_SPEC_POR_VAL,
-+		prv->host.ioaddr + var_info->core_vendor_spec);
-+
+-	plat->dr_mode = usb_get_dr_mode(node);
++	plat->dr_mode = dwc3_get_preferred_dr_mode(node);
+ 	if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
+-		/* might be a leaf so check the parent for mode */
+-		node = dev_ofnode(dev->parent);
+-		plat->dr_mode = usb_get_dr_mode(node);
+-		if (plat->dr_mode == USB_DR_MODE_UNKNOWN) {
+-			pr_err("Invalid usb mode setup\n");
+-			return -ENODEV;
+-		}
++		pr_err("Invalid usb mode setup\n");
++		return -ENODEV;
+ 	}
+ 
  	return 0;
  }
+@@ -541,12 +574,9 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
+ 	int ret;
  
- static int msm_sdc_mci_init(struct msm_sdhc *prv)
-@@ -254,14 +263,16 @@ static int msm_sdc_bind(struct udevice *dev)
+ 	debug("%s: subnode name: %s\n", __func__, name);
  
- static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
- 	.mci_removed = false,
+-	/* if the parent node doesn't have a mode check the leaf */
+-	dr_mode = usb_get_dr_mode(dev_ofnode(parent));
+-	if (!dr_mode)
+-		dr_mode = usb_get_dr_mode(node);
++	dr_mode = dwc3_get_preferred_dr_mode(node);
  
-+	.core_vendor_spec = 0x10c,
- 	.core_vendor_spec_capabilities0 = 0x11c,
- };
+ 	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
+ 	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
+ 		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
+@@ -698,9 +728,9 @@ int dwc3_glue_probe(struct udevice *dev)
  
- static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
- 	.mci_removed = true,
+ 	while (child) {
+ 		enum usb_dr_mode dr_mode;
  
-+	.core_vendor_spec = 0x20c,
- 	.core_vendor_spec_capabilities0 = 0x21c,
- };
- 
- static const struct udevice_id msm_mmc_ids[] = {
+-		dr_mode = usb_get_dr_mode(dev_ofnode(child));
++		dr_mode = dwc3_get_preferred_dr_mode(dev_ofnode(child));
+ 		device_find_next_child(&child);
+ 		if (ops && ops->glue_configure)
+ 			ops->glue_configure(dev, index, dr_mode);
+ 		index++;
 -- 
 2.45.0
 
