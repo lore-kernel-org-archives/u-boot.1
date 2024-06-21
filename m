@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED38C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1494FC2BB85
+	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 19:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D56E488604;
-	Fri, 21 Jun 2024 21:52:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54729885EB;
+	Fri, 21 Jun 2024 21:52:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OLxlOPTL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mXTuY0/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6811D8859F; Fri, 21 Jun 2024 21:52:28 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 0E1FA885C5; Fri, 21 Jun 2024 21:52:29 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45C10885BC
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0312A8856F
+ for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 21:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7ebc67365e3so90051439f.1
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-7eb9e7f3da2so99227439f.1
  for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 12:52:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1718999545; x=1719604345; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VImn7eC6Dpo9NE6YIGiHh04gfKjTg4SkC4HhpgpbdXc=;
- b=OLxlOPTLTgx4qCO4HihaHYmAY35xc55PF1jKDEOxsD8jmGs4GyD0h/Y5B6Uddo67kK
- E5bNk5ljKdvq4KSp7ruYc9FkN2JibnRuluIi+ycGK0qvjYwxC868BJ8+A81TEpvJWGxu
- 6bl1CYioydPMbO8VJA3PnjPQlvnlHr1rpdwgg=
+ bh=ZxLbNXGoaXJvLvumbBY4pNS0+jFG7Ox/AWRsfxKB3CY=;
+ b=mXTuY0/XxqHjO/jcAEUlhH3kk2dPApafJPTzmg6l+8lT2i2WQx+r4kTRJMv62GteOh
+ EN1YrszzwNsXBc4sQ3v0syQHgFG5rs3snyjjuq1gXU8NJRblTj/jmXx2buqkc6045wty
+ +maSf4v+bwDK9xzuxu7bCjJJeNUHSu9kvN/k0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1718999545; x=1719604345;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VImn7eC6Dpo9NE6YIGiHh04gfKjTg4SkC4HhpgpbdXc=;
- b=qf8I2McdJFMwtTeSUwkl6ENhcWL6hT9dn2WZB1iwNoq4xon0E2ngDevvl6ptBsMF/0
- DTpYaLmbdaakrawjIlt/EjVkVE5B7yyk37iTWulfor2ZYr7TwwGCO4Twr5/+czJf/199
- S68byEbDHvYOcpKYhdPG3x57A+RZQGz3i8+8rRliJMAWRnnnz4U7bGKNS6ToEd7F1YgD
- EceaasMSA+7h/I7jFcMfYm8Hnl9DeVG/wYlqlx1D08zj6NcHmnU5VOGSpe5GuDLnljhE
- ayOloSrsBGx1768GSPemDqvC1oPBkk87cYmsTULip/AMBQnTmaN9lmuGc3EqP+VpDeQz
- Eouw==
-X-Gm-Message-State: AOJu0YxoST2XrrNW01cilvu6k43cca96wqy6D7x7h5bJ0+x8DhC2AQcn
- Lcz1niPz2zetgdLJAeZuEkKtsaSobYQErLFDf/hdSvs2p/Hon+hqJzMIkVCR2VWonH2TbFMLPI5
- eJw==
-X-Google-Smtp-Source: AGHT+IF8rxxLjtIgL+ENWXDQ5Dek0atzIfMvIHb4ZshcruBIYZbbHvUENc5acmc8cLiyandKz++47w==
-X-Received: by 2002:a05:6602:2dd4:b0:7eb:6b58:440e with SMTP id
- ca18e2360f4ac-7f13ee94480mr1107166539f.18.1718999545016; 
+ bh=ZxLbNXGoaXJvLvumbBY4pNS0+jFG7Ox/AWRsfxKB3CY=;
+ b=AJiqUpYtU0nYF93d3xHmeaSEHqoVc4K+GuNQpmNQZ80ZLGiHrkGbHVnUqxw2P01Acv
+ XLN4A53pqP8WkckybIzFVrDVVSLERLBhMi1SqroHwbiFPdORqHROQIeg/WHqHcRDmm7G
+ TvqSV39vVAvtKyX7pbwbgXWvcqfXXmg4PHD49M0w+nYWfYLpcLz2IFEpz/eHXW0PVYR3
+ Yhnq+nxrUUlQ1UBc2YdblaRu1lJ0I6OB+42rEn0sYBxbo6KxC3qagJBbjdQR7vy9wKlR
+ 8BUl/wd5moyeJ56OvM4m4tvLi6iVCwmCi79YtvBtpusNulfAI5Cnkr/ZSIqftpKMpc00
+ Eocw==
+X-Gm-Message-State: AOJu0YygY+UfLSoOpC+NS18uV41gFE07m1aC+cbv04x9eLLYf3/a5Db/
+ 9wgEe8n27eXRxpOO/GFEQ6LOBiPISWwlLok+cpwRs3rbCWAWDnN2f9TBrajdBYSVjBSUshPCPMA
+ ehw==
+X-Google-Smtp-Source: AGHT+IER48vEHR5yAA+ivsDvInt1J4JIX1YJYxvOg1dsU1lQWPif6rPDLQ9Ug2GjLmhvXpTzn8gWVQ==
+X-Received: by 2002:a05:6602:13ce:b0:7eb:8d08:e9de with SMTP id
+ ca18e2360f4ac-7f13ee617f3mr1247279939f.14.1718999545635; 
  Fri, 21 Jun 2024 12:52:25 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.24
+ ca18e2360f4ac-7f39203deb7sm48801139f.47.2024.06.21.12.52.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 12:52:24 -0700 (PDT)
+ Fri, 21 Jun 2024 12:52:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 19/43] test: Allow signaling that U-Boot is ready
-Date: Fri, 21 Jun 2024 13:51:40 -0600
-Message-Id: <20240621195204.2675252-20-sjg@chromium.org>
+Subject: [PATCH v2 20/43] test: Make bootstd init run only on sandbox
+Date: Fri, 21 Jun 2024 13:51:41 -0600
+Message-Id: <20240621195204.2675252-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240621195204.2675252-1-sjg@chromium.org>
 References: <20240621195204.2675252-1-sjg@chromium.org>
@@ -89,51 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When Labgrid is used, it can get U-Boot ready for running tests. It
-prints a message when it has done so.
-
-Add logic to detect this message and accept it.
+Tests for standard boot need disks to be set up, which can only be done
+on sandbox, since adjusting disks on real hardware is not currently
+supported. Mark the init function as sandbox-only.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_base.py | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ test/py/tests/test_ut.py | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index 3e01be11029..e230caf37e1 100644
---- a/test/py/u_boot_console_base.py
-+++ b/test/py/u_boot_console_base.py
-@@ -22,6 +22,7 @@ pattern_stop_autoboot_prompt = re.compile('Hit any key to stop autoboot: ')
- pattern_unknown_command = re.compile('Unknown command \'.*\' - try \'help\'')
- pattern_error_notification = re.compile('## Error: ')
- pattern_error_please_reset = re.compile('### ERROR ### Please RESET the board ###')
-+pattern_ready_prompt = re.compile('U-Boot is ready')
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index c169c835e38..58205066ec8 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -470,6 +470,7 @@ def test_ut_dm_init(u_boot_console):
+         fh.write(data)
  
- PAT_ID = 0
- PAT_RE = 1
-@@ -170,15 +171,15 @@ class ConsoleBase(object):
-                                     self.bad_pattern_ids[m - 1])
-             self.u_boot_version_string = self.p.after
-             while True:
--                m = self.p.expect([self.prompt_compiled,
-+                m = self.p.expect([self.prompt_compiled, pattern_ready_prompt,
-                     pattern_stop_autoboot_prompt] + self.bad_patterns)
--                if m == 0:
-+                if m == 0 or m == 1:
-                     break
--                if m == 1:
-+                if m == 2:
-                     self.p.send(' ')
-                     continue
-                 raise Exception('Bad pattern found on console: ' +
--                                self.bad_pattern_ids[m - 2])
-+                                self.bad_pattern_ids[m - 3])
+ @pytest.mark.buildconfigspec('cmd_bootflow')
++@pytest.mark.buildconfigspec('sandbox')
+ def test_ut_dm_init_bootstd(u_boot_console):
+     """Initialise data for bootflow tests"""
  
-         except Exception as ex:
-             self.log.error(str(ex))
 -- 
 2.34.1
 
