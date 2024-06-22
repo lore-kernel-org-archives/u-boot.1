@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE21EC27C78
-	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 14:36:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B3BC27C53
+	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 14:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3EF287923;
-	Sat, 22 Jun 2024 16:36:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 623D888001;
+	Sat, 22 Jun 2024 16:36:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AAxUtySt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R+y8tdiE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63126879AF; Sat, 22 Jun 2024 16:36:23 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 231ED87FB5; Sat, 22 Jun 2024 16:36:27 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E240878E2
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 16:36:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B62F87D8E
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 16:36:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a72459d8d6aso1399566b.0
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 07:36:21 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a6265d3ba8fso309797466b.0
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 07:36:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719066981; x=1719671781; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Hh2Bp6Fi0+BCvqGwCIWrQpgkA916kcZH6xOeRZN+M30=;
- b=AAxUtyStxbvFTvRGrmmbLQojokOGMDSrqVUmz4hSKWpEAnbK6vsFMa/GL+4yaqxpio
- F5aOKceYsSFa3WoamXRKt/3EP6tfPlJ2btxO2duCZP2yY+SxmASVYRxwKlkPcl/DMfJI
- JFXoYGL5hB6Vc4xchIniN7nTjK+yxM1EaKRrCYqXaSIrYmAzBB+0pvRjzgYVfDxpLfUG
- lyhydjx2mfkylmM8PdNB9Rj1akbPsopruzosWrvRMZk5QNoKnaoLZP4pvl0Ae1gIJDtT
- 6YKYqtCQUZM+lqrU6XgHff4WxgoFSvLnrxxglHJFnaP7CX33Mlg/t4G7xLVvNrFUEzCF
- 3KEw==
+ d=linaro.org; s=google; t=1719066985; x=1719671785; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2N8RNRcSBLmt0ZSK5CiACSpazEEoUvaXOylAXemtb1s=;
+ b=R+y8tdiEptRjeRld33GnAlLW8a2VTVvvQw7iLhvVZStDHUulu36ZmPJ9D5+scty5cS
+ 3aClAF8yitrIM9U84QMzQH6mg0cQ56KI3hUWB0aZONSA46BpcacKk2xhfoWL0y6Oym9o
+ ct62mrogkEad5NbB6VQA+rRjMZW07lccpsn4zUyPRtGTi8ogf5bJcQg/G6s6MhL7gH4R
+ +hsfdAnFGSHBHhvqlcguhdmXUTtBKpyPqFw01cIxay8RKdiL5T5IZJw74/VElMEKbrJe
+ uTUTaRY+9sT/lJzV3wm2xXD33BhOQApu3fDsw1mpugu53NQSllbYJurmzX38+c/xy72f
+ aLKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719066981; x=1719671781;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Hh2Bp6Fi0+BCvqGwCIWrQpgkA916kcZH6xOeRZN+M30=;
- b=d27Yni4HPXketNYoLp7+WFqm5W1egl2grtfoKFtlH/N1JjEODu7tf6cKXql5d5KN7D
- GMAfEspnAFlPKlO/WmcjSZxm/Gv08TxeJfy1XW92QbJcvrr9AH5AQsy0HqlK/AqivLbv
- hV1kYt68+Wbb727YpBQCZimUaH9JyIcZeNW9r491/OZRzyFVH+9SsAZPG2YB7CW1QHZP
- +x0NDFafT3O8MFM9YMk683XQgs1zQMCsjL2vbrW1SQhqivSUwV2hpWUcHWSPbSzNMvSg
- 5+pSSNZXv3qPhg7KKCh+X8I4h0Im5GMba8i3U+ity+kms4YdLkHSxarXAj/VpiUoAi9t
- EzXw==
+ d=1e100.net; s=20230601; t=1719066985; x=1719671785;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2N8RNRcSBLmt0ZSK5CiACSpazEEoUvaXOylAXemtb1s=;
+ b=mmbFmnSqHiRXKqRonRFIFbaY9+C0PHzbLazt/wiknYBU7I5SyQX0fvPhzRwu26mnbm
+ M51Ii+6NmRTlBr840WcpYgDTXyAOP5nukyRogBTPadLlfqNhmQKgCcXcxdOb3AdbBPqC
+ IOfvcNKBx0NEKJQG7C+mcf4lxrNQhT+Jm/y9ddQhGrPucqmX1RvkkvbAtJYqczP3loYA
+ AntUXYq/HB6cQX34z60HuPoXCD8uxZpVa+hXekCBw9Id8Z15sAQAwVcQcB71P5VybyqS
+ Vq7AftsO3SaMw8R0MAVvADcDZ5wgOrxKrIZtGE1FSseWkSJrMctwbHixifn71CPFitxj
+ L7iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVecC3zk9alCx4wzCMizXIMAehQndcumJgNi7ex2i6KOJBbeSUA0swWIz/wCNUoKtNXPZ4GtdwqITL72cfborKzb1CNeA==
-X-Gm-Message-State: AOJu0YzSYshnN8Fkh8jQNEJPNbZXb3FQA42YWwqwgHV+7IFHWI5FyXmR
- 3dKeHfTIbiOO8d6zCHRbXg0tLx2NvToHVIcUByVHwMuW+hv9MhDLHBup5E8Y0kY=
-X-Google-Smtp-Source: AGHT+IGiJliT0nWZUKW9rhiSjxt09OqEwh+d0+m34Az4AGF16IRvQ6ryU0SlIjhBCispI57YfSY9Zg==
-X-Received: by 2002:a17:906:e28c:b0:a6f:b1fa:aa24 with SMTP id
- a640c23a62f3a-a7245b45af4mr1725966b.5.1719066980480; 
- Sat, 22 Jun 2024 07:36:20 -0700 (PDT)
+ AJvYcCW+PR6wdAUYXDwAtztxUNL8DjKm1jptn3xplRgJ8dYoWlJF8gCflASbsixS9Su2av+ELRkYS/y77JNNGM9huSMnhDg5og==
+X-Gm-Message-State: AOJu0Yz97uXIg58uzh5ESC09Q/w0Uwszrd6L/bKrwQNjBv4aPwxJyXI/
+ hYh8iGYiWsE7MrcphtnCFv0e59ZbI5WSYleOEsndF6rITKbjxNDcz9UjNSv4IUU=
+X-Google-Smtp-Source: AGHT+IFHbN3T4VLHB9egDAseHQV1DbZe26CvQU8F4qA3iTqYbf33HAWLVj8uBuDLWP65ATUA/S/GLA==
+X-Received: by 2002:a17:907:c307:b0:a6f:2981:56c with SMTP id
+ a640c23a62f3a-a7242da6a35mr29659866b.53.1719066984464; 
+ Sat, 22 Jun 2024 07:36:24 -0700 (PDT)
 Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
  [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fcf54a534sm204005366b.136.2024.06.22.07.36.18
+ a640c23a62f3a-a6fcf54a534sm204005366b.136.2024.06.22.07.36.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Jun 2024 07:36:19 -0700 (PDT)
+ Sat, 22 Jun 2024 07:36:23 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: sjg@chromium.org,
 	trini@konsulko.com
@@ -79,10 +80,12 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Subject: [PATCH 0/7] The great TCG deduplication saga
-Date: Sat, 22 Jun 2024 17:35:36 +0300
-Message-ID: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH 1/7] tpm: fix the return code, if the eventlog buffer is full
+Date: Sat, 22 Jun 2024 17:35:37 +0300
+Message-ID: <20240622143601.187723-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
+References: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,66 +104,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
-A while back some TPM measured boot code was moved out of EFI in order to
-support !EFI boot methods, e.g bootm, booti etc.
+We currently return 'No space left on device' if the eventlong buffer
+we allocated is not enough. On a similar check later on that function
+during the call to tcg2_log_init() we return 'No buffer space
+available'. So switch both error codes to -ENOBUFS since we are always
+checking a buffer and not a device.
 
-Back then we decided to move the code in the TPM subsystem directly.
-In hindsight, we should have created a different library file that hosts
-all the TCG specific bits, but better late than never!
+Fixes: commit 97707f12fdab ("tpm: Support boot measurements")
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/tpm-v2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Since the algorithms that the TPM supports are only known at runtime, we
-unconditionally enabled all hashing algorithms. Simon reported some breakage
-lately due to size limitations and he wanted to remove some of the supported
-algorithms from those configs.  But that's not always safe depending on what
-the user expects the TPM to do.
-
-If MEASURED_BOOT or EFI_TCG2_PROTOCOL is enabled our Kconfig will enable
-all supported hashing algorithms. Nothing changes there.
-
-This is an attempt to allow users to add a TPM and not enable measured boot
-via EFI or bootm and at the same time, control the compiled algorithms for
-size reasons, without shooting themselves in the foot.
-
-Functionality has been added that checks the TPM active PCRs banks against
-the one U-Boot was compiled with. If all the active PCRs banks are not
-enabled refuse to extend a PCR but otherwise leave the TPM functional.
-
-patches #1, #2 have been reposted and are fixes from the code moving
-patches #3, #5 get rid of duplicat header entries
-patch #4 moves the TCG code out of the TPM in its own file
-patch #6 refactors a function so we can use it in both TCG & TPM now
-and finally patch #7 adds the desired functionality
-
-The u-boot CI seems happy, my internal CI that tests EFI measured boot in
-various scenarios is happy and the EFI eventlog hasn't changed at all pre/post
-patches.
-I haven't manged to test bootm etc, but that code hasn't changed at all and the CI
-tests are passing. Eddie any chance you can test it?
-
-Ilias Apalodimas (7):
-  tpm: fix the return code, if the eventlog buffer is full
-  efi_loader: fix the return values on efi_tcg
-  efi_loader: remove duplicate TCG algo definitions
-  tpm: Move TCG into a separate library
-  efi_loader: remove unneeded header files
-  tpm: Untangle tpm2_get_pcr_info()
-  tpm: allow the user to select the compiled algorithms
-
- boot/Kconfig              |   4 +
- boot/bootm.c              |   1 +
- include/efi_tcg2.h        |   9 +-
- include/tpm-v2.h          | 541 +++++++--------------------
- include/tpm_tcg2.h        | 349 +++++++++++++++++
- lib/Kconfig               |   6 +-
- lib/Makefile              |   2 +
- lib/efi_loader/efi_tcg2.c | 124 +++---
- lib/tpm-v2.c              | 767 +++-----------------------------------
- lib/tpm_tcg2.c            | 732 ++++++++++++++++++++++++++++++++++++
- 10 files changed, 1335 insertions(+), 1200 deletions(-)
- create mode 100644 include/tpm_tcg2.h
- create mode 100644 lib/tpm_tcg2.c
-
---
+diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+index a67daed2f3c1..91526af33acb 100644
+--- a/lib/tpm-v2.c
++++ b/lib/tpm-v2.c
+@@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+ 		if (elog->log_size) {
+ 			if (log.found) {
+ 				if (elog->log_size < log.log_position)
+-					return -ENOSPC;
++					return -ENOBUFS;
+ 
+ 				/*
+ 				 * Copy the discovered log into the user buffer
+-- 
 2.45.2
 
