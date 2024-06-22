@@ -4,72 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 287CDC27C53
-	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 16:46:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 132ACC27C53
+	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 16:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 894D88803E;
-	Sat, 22 Jun 2024 18:46:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 58854878ED;
+	Sat, 22 Jun 2024 18:58:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MpNukfOV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uqCOvzlK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27C0B881A1; Sat, 22 Jun 2024 18:46:19 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 07083879AF; Sat, 22 Jun 2024 18:58:12 +0200 (CEST)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E03ED87A09
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 18:46:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88BC487873
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 18:58:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1719074776; x=1719679576; i=xypron.glpk@gmx.de;
- bh=ZC6P5B6vldrpelVeWqX9oh3VX28Dv5yDzd91VZCAVKc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=MpNukfOVNPVpSOXL1rKrp05ti1DWK072s9mOZsdMC9MZds0vCbWaPkJSwYstWe5V
- BUdi0a5ZVnp1/f7DQnjD3uq2yaBDOi8SoS1UJz9oBnJWvyxxGCNe7cqtJfRGlmcW7
- xU7q5GviyBy7W7azHYrseRCb8WXBbZCkfzL7/5tipjDA9Vz7ZUkBngaNy0ZIYCEtY
- G6x1fKk4xj5JbhuC8dE0+s+yXlgsG9/kblWczcxYsf2CWLN/xtOOnRUJHVug77T+a
- y59kXgv/8jPwW6oRWlK+Z9wQTjhSmIRXbTHx2ZIA44rsmOPI7FhvUDxHO+A8Y3Mtt
- 3aHky+V46m4qYyqy5w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MUXtY-1ruYmV3WKW-00Q6XT; Sat, 22
- Jun 2024 18:46:15 +0200
-Message-ID: <35bcd226-5ab9-490f-8a7c-e190aea647dc@gmx.de>
-Date: Sat, 22 Jun 2024 18:46:15 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-706738c209bso90982b3a.3
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 09:58:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1719075488; x=1719680288; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SBApqmpt0SR+bPsx/U1JA70j9RRiFVcPmC7A1aiPhY4=;
+ b=uqCOvzlKAgbQfVrlWlhwTVPZ0tlNgIQRFHBcfd7gPNNo/RTIBmiAfztOzj/saz9xov
+ X2xZgHQH/lYJdcJoBEMcprNo6ybI0AsnzhuBtpWpbtfwkR9ywUxe1mOU2VwuB72X5yI9
+ MWuCZn3GxaiOJW9ObcoHIS7+J5BaiDRy9F0KOEdUA8GKCHoPisnOtS67EPYxbynH8CfL
+ teMNhFHclOayQGyyqY+pNRoXHQ3U+aAMel5A2x6ZCunMFhFwZMVkgrr+D+Q+YfjjXZIz
+ QSh7WOPcktMPMATYHVlEVDFN0Pfrb0QYU0BYxarVPUsOIJkNWjJNfaaheyCFFje7pVcZ
+ 2Q7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719075488; x=1719680288;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SBApqmpt0SR+bPsx/U1JA70j9RRiFVcPmC7A1aiPhY4=;
+ b=HNFDcDX8ZPbrZ1smZ1Qz57CBfeqGTRH6MAhWRgNDXTsQkLRdbynTOlGfPIh+eoEHr1
+ yeG8lnI/HXIPfQQ5N/4YGYdPiAH3Z09NoqRBo22OHO6q3XfGhZyxGdlpNvJ5uG1OCF7M
+ DJHWPC4n8EvQoi/OrUJh7jgRLZwuLLJX57ScJGgKRlMSy8UajAaaNtfStzgwuMpm08BA
+ 7s7TQNMzjwlgMkEZhmAUmRP7JsXRzOj/nwkeFtOYriWPPqxi12YjCWnt/lWO+fT5Oq0h
+ uS8zY4uxTRHvIDajE0rHxqKBi8PH49Jg2yCftpp7TlYfbAoKbcXOC9RxUbONqcSbGBCL
+ TRDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU8RlIs1c1t26wRap+tlgp4wFiPG4t+nrwDoZPtXOJB9Yd+yN6vb3Jy43c92UY9HNJdycnPOHfdYexETJiz28M4u3lJ2g==
+X-Gm-Message-State: AOJu0Yx0+3kN6GjjIEdOvujY1XhZylGbL6ZUknSof89MrkbUWM9SApMz
+ kBywXWjifD7XFdVDFh7LkGTsLUXAWiUMICB0/9cmX50lS/GlBl6n5kZcWkSqEzZpYjaiDI62ftd
+ HoBgutmPL1OToJLAlTiVyrF1IO/5exDLCN/eKzQ==
+X-Google-Smtp-Source: AGHT+IEWX+gGaYMo35St7YUzmYToUycWpcfSON6Oy9cfTj6+rApdKnMJzp1sv9830I23CN0GLrLA1l/9OWtHuuCrH1U=
+X-Received: by 2002:a05:6a20:c512:b0:1b7:cc4e:eb6 with SMTP id
+ adf61e73a8af0-1bcf7e366a7mr255150637.8.1719075487658; Sat, 22 Jun 2024
+ 09:58:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request doc-2024-07-rc5-2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:wXsZoSmhGamft2HKSZu8F1Zup5cZ81K1m1kMMmb3mwcQkkBDcbg
- vBa79xIz8+e0yaDL0Be+fMD3to3b6Ld8C/ZzYMnYd+6CnPohvECbz6rOSXxhAhO+oM9SNv5
- P3Xg5ZS0SKi0zSodwWqHgsWSWwfFO45O46Qbr76euSq8qEzfQ6Ymkg1pjIvLKnUhmmy+5cn
- f+4gKDVczoP/68aI6PoIQ==
-UI-OutboundReport: notjunk:1;M01:P0:Zcxned1d1f4=;01IHp7to6jGe2t1XX/upLtD8/Je
- AvDVCGwr+p3TpGNnY3YahQZTODsoJzCqpdAyz823UT1u7EpuHEqo1DoCWvu21BQPpv0Bqop8x
- tPeSiq8r96uI2mogRt58JwAWPSHJ2+H+LM7jfbZrMGassgJzVwYcw+lRCieZ1zmj9W1nUszRY
- aPsFKokW56Q5e9BTrcWt5EnmmGsJ+dcycH3wo8AJ3+mHqM7wEhp2w+XMFfkdoG3aGGdUscu8o
- xu9Vp1KOIgjgbhsyHGwpI4KdNl7HrEu7p2DJwYO66EeQWqPCJsosdFgnYs7tAg4bH2QDeLnLx
- RezhPd4wt89TKRp6T/ySrsXJpZxnk1g+OmJVJztrJoJAp7n4xS8R7ONi7GdMY5DkeqKGgYh6V
- suBD/dV3l7KdVWTZMk25LUTVzxpL992/gJX9z50g55wV+EOe1HjQlwmaCe+nVIKKvm3ZbUy67
- uqdDpNQqGCx98vPudKM06/xVGmuKdxzbDuag3o85nzZy4J/3QYMZpwuFlUsktcRm52FyBo0XF
- Z6z55THl/FidMbtPFgkmLaGF8yJhXYjkJsf3LM6JIFxyxu2iqKc9avnSPvtUCQx3DnuVMeFPV
- fdugjyqZYjLTXbCWL9mqluH9LlDVs0lu8rbjq5cKzrIJPCCKyzUpXItuxXUb9IgqRUcg0SgMv
- +mh6OFIQtvkJ0mC9+vL17LxzkDycK6lBT5bUDhjuwoM63So8iga/7n4Ta5j59D4c9pQvXf3Xi
- cuENSpM8R0IMAw6BJiIFIplQos2Jtm2yMmMXoIYH9kyQK5NL38xXEgQnt8DlCdFNgBqO0KwV5
- X/A2+Yr1myYrYQRnYTulXginkDXM+rxPNrFYUasXoU3bA=
+References: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
+ <20240622143601.187723-5-ilias.apalodimas@linaro.org>
+ <02965f5b-d824-48ee-a2dc-f4e5883ef26e@gmx.de>
+ <CAC_iWjLo6fA4vUPunU1tfbShesmHp7F0bMJm-O=CXteOJBsjgQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjLo6fA4vUPunU1tfbShesmHp7F0bMJm-O=CXteOJBsjgQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 22 Jun 2024 19:57:31 +0300
+Message-ID: <CAC_iWj+QFpNcDeThwR6WnMQ-g+vfDYnAphoHDQsiwkB3NQkGSw@mail.gmail.com>
+Subject: Re: [PATCH 4/7] tpm: Move TCG into a separate library
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Michal Simek <michal.simek@amd.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,53 +99,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Sat, 22 Jun 2024 at 19:36, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi
+>
+> again many thanks for the quick review
+>
+> On Sat, 22 Jun 2024 at 19:25, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 22.06.24 16:35, Ilias Apalodimas wrote:
+> > > commit 97707f12fdab ("tpm: Support boot measurements") moved out code
+> > > from the EFI subsystem into the TPM one to support measurements when
+> > > booting with !EFI.
+> > >
+> > > Those were moved directly into the TPM subsystem and in the tpm-v2.c
+> > > library. In hindsight, it would have been better to move it in new
+> > > files since the TCG2 is governed by its own spec and it's cleaner
+> > > when we want to enable certian parts of the TPM functionality.
+> >
+> > Nits:
+> >
+> > %s/certian/certain/
+> >
+> > >
+> > > So let's create a header file and another library and move the TCG
+> > > specific bits there.
+> > >
+> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > ---
+> > >   boot/bootm.c       |   1 +
+> > >   include/efi_tcg2.h |   1 +
+> > >   include/tpm-v2.h   | 474 +++++-------------------------
+> > >   include/tpm_tcg2.h | 336 ++++++++++++++++++++++
+> > >   lib/Makefile       |   2 +
+> > >   lib/tpm-v2.c       | 676 +------------------------------------------
+> > >   lib/tpm_tcg2.c     | 696 +++++++++++++++++++++++++++++++++++++++++++++
+> >
+> > The patch series were easier to review if moving header definitions were
+> > separated from moving implementations.
 
-The following changes since commit fe2ce09a0753634543c32cafe85eb87a625f76c=
-a:
+So, I can't do that because I'll need an intermediate commit to
+include tpm_tcg2.h to tpm-v2.h which I'd rather avoid.
 
-   Merge branch 'master' of
-https://source.denx.de/u-boot/custodians/u-boot-watchdog (2024-06-18
-08:34:56 -0600)
+I can make the diff smaller though. Are you ok with that ?
 
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/doc-2024-07-rc5-2
-
-for you to fetch changes up to 271ca9ef8a37b8668b9858638175ac2da5c152df:
-
-   doc: board: ti: Add capsule documentation for TI K3 devices
-(2024-06-22 17:04:19 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21289
-
-=2D---------------------------------------------------------------
-Pull request doc-2024-07-rc5-2
-
-Documentation:
-
-* Fix broken references to pytest suite and test writing
-* Fix links to FIT documentation
-* Add capsule documentation for TI K3 devices
-
-=2D---------------------------------------------------------------
-Alexander Dahl (2):
-       doc: develop: testing: Fix broken reference to pytest suite help
-       doc: develop: testing: Fix reference to test writing section
-
-Heinrich Schuchardt (3):
-       cmd: link to doc/usage/fit/x86-fit-boot.rst
-       doc: FIT links in develop/uefi/uefi.rst
-       boot: links to FIT documentation in Kconfig
-
-Jonathan Humphreys (1):
-       doc: board: ti: Add capsule documentation for TI K3 devices
-
-  boot/Kconfig              |  6 +++---
-  cmd/Kconfig               |  2 +-
-  doc/board/ti/k3.rst       | 29 +++++++++++++++++++++++++++++
-  doc/develop/testing.rst   |  4 ++--
-  doc/develop/uefi/uefi.rst |  4 ++--
-  5 files changed, 37 insertions(+), 8 deletions(-)
+Thanks
+/Ilias
+> >
+> > This patch contains changes that are not described in the commit
+> > message, e.g.
+> >
+> >                 if (elog->log_size) {
+> >                         if (log.found) {
+> >                                 if (elog->log_size < log.log_position)
+> > -                                      return -ENOBUFS;
+> > +                                      return -ENOSPC;
+>
+> And this is a great catch. this changed in patch#1 and the correct
+> return is -ENOBUFS. I started working on 2 trees and obviously messed
+> up this rebase... Thanks!
+>
+> >
+> > I guess you wanted to put this into patch 1.
+> >
+> > Please, separate the patches adequately.
+>
+> Fair enough. I thought it was going to be hard not breaking
+> compilation hence the big patch. I'll try splitting it
+>
+> >
+> > + * Copyright (c) 2020 Linaro
+> > + * Copyright (c) 2023 Linaro Limited
+> >
+> > The copyright lines look inconsistent. Linaro Limited exists under this
+> > name since April 13th, 2010. Is the 2020 copyright for a different company?
+> >
+>
+> I'll keep the older one, same company
+>
+> [...]
+>
+> > > +}
+> > > +
+> > > +__weak void tcg2_platform_startup_error(struct udevice *dev, int rc) {}
+> > > +
+> >
+> > git warning: "new blank line at EOF".
+> >
+> > Otherwise looks good.
+> >
+> > Best regards
+> >
+> > Heinrich
+>
+> Thanks
+> /Ilias
