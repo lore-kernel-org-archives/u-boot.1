@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C409AC27C78
-	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 14:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD988C27C53
+	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 14:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C84D388261;
-	Sat, 22 Jun 2024 16:36:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CAAE87A09;
+	Sat, 22 Jun 2024 16:38:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h7jvv0LT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N9BWBrzt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EE1C878E2; Sat, 22 Jun 2024 16:36:52 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 18F6387D8E; Sat, 22 Jun 2024 16:38:35 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F54D881C1
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 16:36:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99A5C87923
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 16:38:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a7245453319so5514966b.1
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 07:36:50 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2c7b14bb4a5so2087663a91.0
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 07:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719067009; x=1719671809; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RHixSKTgHr1vQBMgBi4j0zUifCR88z9fhOUh+rxTU5o=;
- b=h7jvv0LT2aZBqjfjZDxt472EyfhR/i+aD17tTmYSRXXU10m8AT1ZwFxleq+oukcaTe
- oboHOnV/tE50zNk9PPSSNUU9shUtlC4/PF5er/9WV4AcCjM8vsQWxGLuz54cIXV+tbh9
- li/REQ6SQ3EvqHfZkq12fx1mV77e25PCaO7IFXy2fs/UBnFP5zu380vMWlfWq+3CRpfv
- ZCE4RVb/QQsEP+AK/KSqxBszXNXzNn9ECidueI7q9Lh2m/OC5BvY1EQ90pwwS/9ePtUH
- h2HE+L6i7YrZytvQ4kxq0WOTI070yU+j8bD+hJGDoAuYXCWEM9KzO7HChR/8QedV2OVG
- 81pw==
+ d=linaro.org; s=google; t=1719067111; x=1719671911; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PGQyRXvw17xDShpDmgSmmPWCvrl6GTxjQUrOwmvF8og=;
+ b=N9BWBrztptFUvJ2EWQmwPp4YShneAwnSaeGPSFhZgCwRqt+YrMDABA/iay/09JZnG7
+ 5gF0YGx5t+gjhelPaay6na4zTfjrrxzPEQbnDIS2QXs3eaBTBwTtLE2Tn768XOD8Xrv1
+ 475SUVP5MDOychacqindVupoIpBS6ZK6d/hunywKoYAvqV7vrouskMyGmNb5nP3EVcjY
+ ZlPfPuz0qObfRJgRROsWBLCktPeR+sOs989VUfxAA0P27wNm5iXpT4hdBFJpswHCyAtQ
+ MU8sSHUu/BrXoQg0D2tLJ5BYegBOnSvJ2JQqGtmno/MABOloqqbpFMxzqz6QtxFES1yF
+ aJ2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719067009; x=1719671809;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RHixSKTgHr1vQBMgBi4j0zUifCR88z9fhOUh+rxTU5o=;
- b=a1k2lRnKQ9c+LSm9xMBrRQKzHuPghjSrMHdTZFMsbdIbOqJZzDMcpzx36i+3ltRw/D
- gQ2UC6bk1gAb/6+koK6wNv3BvQ+TmJxdQT8GI8cevDcYYqn9X2KRmaR+lCNC75RAHoXy
- KLQiZM1C7sZte158vhezOobfJByFB4o4q0my1NaK8oIhmUMIjswIdfPXg+2q3Ag16ZcA
- wX4aYYC9Q/N5ggDDGMEVCDkihFRWDZMBonM+3GZ71u3dkQkIuEz6Q2dI9UyHnWTtlAoS
- rbGZtQ8lx9Dod6udmvXvCMNDMAEbwD3fQjOF3zEV2ccHAoV0ylUEBOEOSrm9AtTPIzjH
- w07g==
+ d=1e100.net; s=20230601; t=1719067111; x=1719671911;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PGQyRXvw17xDShpDmgSmmPWCvrl6GTxjQUrOwmvF8og=;
+ b=he79q/k9eKXSItMOnl27kk6/XgHYkVYY3Ii75kcoNbSA20UyTzRhxrwGNKo4UXk9bZ
+ fvdiyCp+IUFL9i+vDWBgee+0zhZExfUcECGhkT5hSEan5nRxScgPx0ep4ze9nb9yQWXx
+ gY4MuwpZ0H1fRLteDx0gAN2Jw2URlm7/eRB/5HgXDPf5Ugfj/1GXQSUdawyj7MzsW1Ng
+ miVII21dpINe1/cWgm3b6AV0RMMiLT47fCsA1X32aYBgaa7S7R1XKuGAf4dhLDmmLJV4
+ nVNPz2u9aT4fl/Sq8+M3Pmp0GtKfC2kYCWGwFllXW2RKx0Xk6AaJ2mHgV2Y3/Lk9LXMV
+ qGjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQgNnNxxiTZOHUiJDTKQUI/JPYD5iI9WusOwi0ki/WoOgNsWe1frVc9vSCONhLSyeKk3x4OYr18aTJT59OtuMOaJal9w==
-X-Gm-Message-State: AOJu0Yz+jkTOtBZPYhivFa4IJzBrrLYJHdn2HC/R2laFP9SxrM7GhqT1
- g3tDt0REscNvX/kJByMVQkEo+uB61AtTXiU4hZ+354fXqxD9DtJKN/hHzeduQSU=
-X-Google-Smtp-Source: AGHT+IFZirEYUcQTfmZRcy/0qxadtThtruNl13e0KBTZiZ5r2vF0jzR6ddI3qMCU65rLoZHGDwkx4Q==
-X-Received: by 2002:a17:906:34c7:b0:a6f:e151:75ca with SMTP id
- a640c23a62f3a-a700e707029mr99623966b.30.1719067009487; 
- Sat, 22 Jun 2024 07:36:49 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
- [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6fcf54a534sm204005366b.136.2024.06.22.07.36.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Jun 2024 07:36:48 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: sjg@chromium.org,
-	trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Subject: [PATCH 7/7] tpm: allow the user to select the compiled algorithms
-Date: Sat, 22 Jun 2024 17:35:43 +0300
-Message-ID: <20240622143601.187723-8-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
-References: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
+ AJvYcCUogINSXDLntUORa7+cv+qpLV5BDWuM1rYVrbESSlov8THBp2ckbDS3oKL0zyUHbsDZ6V8ln/yaw6Crk0uQ4vgE7GwSvw==
+X-Gm-Message-State: AOJu0YwDIRgzkPSHhWa4knQWI6DUAyBP/kjozJXLWZlQiJA4WX58lOP8
+ 0+v4A8U1p+TLatG/V84sAcVU88VddN7YnASXgicwOb5fRzHILp1S8tsUomgFSS62GmjqiRICzbY
+ GqDBTW3p2tUHTnID0TCNCf4DwmfvOOyZM6lNwLsM3EDv4B4wrsSbhMA==
+X-Google-Smtp-Source: AGHT+IEZA58SJlsVorHOV0M6rs1PHFuKsFo+VhRy0IPwF1/Dy5QsqcL2HcLPf6ymHST7ti6rxGo74AkY7UXCxJxz9f4=
+X-Received: by 2002:a17:90a:d48d:b0:2c2:f0a7:f8be with SMTP id
+ 98e67ed59e1d1-2c849bf8334mr1993380a91.9.1719067110864; Sat, 22 Jun 2024
+ 07:38:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240620191631.28811-1-ilias.apalodimas@linaro.org>
+ <CAC_iWjKafGj7wMtWAD0G_g-ArfQBoL_22oWjo69jjzjOvC030g@mail.gmail.com>
+In-Reply-To: <CAC_iWjKafGj7wMtWAD0G_g-ArfQBoL_22oWjo69jjzjOvC030g@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 22 Jun 2024 17:37:54 +0300
+Message-ID: <CAC_iWjK7_3VYezYO8gfFerWWjaCiA1X4SNZDq+fObCorKn1RZA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] tpm: Fix return code, if the eventlog buffer is full
+To: xypron.glpk@gmx.de
+Cc: Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,243 +91,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon reports that after enabling all algorithms on the TPM some boards
-fail since they don't have enough storage to accommodate the ~5KB growth.
+On Thu, 20 Jun 2024 at 22:19, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> On Thu, 20 Jun 2024 at 22:16, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > We currently return 'No space left on device' if the eventlong buffer
+> > we allocated is not enough. On a similar check later on that function
+> > during the call to tcg2_log_init() we return 'No buffer space
+> > available'. So switch both error codes to -ENOBUFS since we are always
+> > checking a buffer and not a device.
+> >
+> > Fixes: 97707f12fdab ("tpm: Support boot measurements")
+>
+> and now I wonder why checkpatch didn't warn on this. There's a
+> 'commit' missing after the Fixes tag. Sorry!
+>
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  lib/tpm-v2.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> > index a67daed2f3c1..91526af33acb 100644
+> > --- a/lib/tpm-v2.c
+> > +++ b/lib/tpm-v2.c
+> > @@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+> >                 if (elog->log_size) {
+> >                         if (log.found) {
+> >                                 if (elog->log_size < log.log_position)
+> > -                                       return -ENOSPC;
+> > +                                       return -ENOBUFS;
+> >
+> >                                 /*
+> >                                  * Copy the discovered log into the user buffer
+> > --
+> > 2.45.2
+> >
 
-The choice of hash algorithms are determined by the platform and the TPM
-configuration. Failing to cap a PCR in a bank which the platform left
-active is a security vulnerability. It might allow  unsealing of secrets
-if an attacker can replay a good set of measurements into an unused bank.
+This is now included in
+https://lore.kernel.org/u-boot/20240622143601.187723-1-ilias.apalodimas@linaro.org/T/#t
 
-If MEASURED_BOOT or EFI_TCG2_PROTOCOL is enabled our Kconfig will enable
-all supported hashing algorithms. We still want to allow users to add a
-TPM and not enable measured boot via EFI or bootm though and at the same
-time, control the compiled algorithms for size reasons.
-
-So let's add a function tpm2_allow_extend() which checks the TPM active
-PCRs banks against the one U-Boot was compiled with.
-If all the active PCRs banks are not enabled refuse to extend a PCR but
-otherwise leave the TPM functional.
-
-It's worth noting that this is only added on TPM2.0, since TPM1.2 is
-lacking a lot of code at the moment to read the available PCRs.
-We unconditionally enable SHA1 when a TPM is selected, which is the only
-hashing algorithm v1.2 supports.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- boot/Kconfig     |  4 ++++
- include/tpm-v2.h | 59 +++++++++++++++++++++++++++++++++++-------------
- lib/Kconfig      |  6 ++---
- lib/tpm-v2.c     | 40 +++++++++++++++++++++++++++++---
- 4 files changed, 87 insertions(+), 22 deletions(-)
-
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 6f3096c15a6f..b061891e109c 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
- config MEASURED_BOOT
- 	bool "Measure boot images and configuration when booting without EFI"
- 	depends on HASH && TPM_V2
-+	select SHA1
-+	select SHA256
-+	select SHA384
-+	select SHA512
- 	help
- 	  This option enables measurement of the boot process when booting
- 	  without UEFI . Measurement involves creating cryptographic hashes
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index eac04d1c6831..fccb07fa4695 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -277,48 +277,40 @@ struct digest_info {
- #define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
- 
- static const struct digest_info hash_algo_list[] = {
-+#if IS_ENABLED(CONFIG_SHA1)
- 	{
- 		"sha1",
- 		TPM2_ALG_SHA1,
- 		TCG2_BOOT_HASH_ALG_SHA1,
- 		TPM2_SHA1_DIGEST_SIZE,
- 	},
-+#endif
-+#if IS_ENABLED(CONFIG_SHA256)
- 	{
- 		"sha256",
- 		TPM2_ALG_SHA256,
- 		TCG2_BOOT_HASH_ALG_SHA256,
- 		TPM2_SHA256_DIGEST_SIZE,
- 	},
-+#endif
-+#if IS_ENABLED(CONFIG_SHA384)
- 	{
- 		"sha384",
- 		TPM2_ALG_SHA384,
- 		TCG2_BOOT_HASH_ALG_SHA384,
- 		TPM2_SHA384_DIGEST_SIZE,
- 	},
-+#endif
-+#if IS_ENABLED(CONFIG_SHA512)
- 	{
- 		"sha512",
- 		TPM2_ALG_SHA512,
- 		TCG2_BOOT_HASH_ALG_SHA512,
- 		TPM2_SHA512_DIGEST_SIZE,
- 	},
-+#endif
- };
- 
--static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
--{
--	switch (a) {
--	case TPM2_ALG_SHA1:
--		return TPM2_SHA1_DIGEST_SIZE;
--	case TPM2_ALG_SHA256:
--		return TPM2_SHA256_DIGEST_SIZE;
--	case TPM2_ALG_SHA384:
--		return TPM2_SHA384_DIGEST_SIZE;
--	case TPM2_ALG_SHA512:
--		return TPM2_SHA512_DIGEST_SIZE;
--	default:
--		return 0;
--	}
--}
--
- /* NV index attributes */
- enum tpm_index_attrs {
- 	TPMA_NV_PPWRITE		= 1UL << 0,
-@@ -711,6 +703,41 @@ enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
-  */
- const char *tpm2_algorithm_name(enum tpm2_algorithms);
- 
-+/**
-+ * tpm2_algorithm_to_len() - Return an algorithm length for supported algorithm id
-+ *
-+ * @algorithm_id: algorithm defined in enum tpm2_algorithms
-+ * Return: len or 0 if not supported
-+ */
-+u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo);
-+
-+/*
-+ * When measured boot is enabled via EFI or bootX commands all the algorithms
-+ * above are selected by our Kconfigs. Due to U-Boots nature of being small there
-+ * are cases where we need some functionality from the TPM -- e.g storage or RNG
-+ * but we don't want to support measurements.
-+ *
-+ * The choice of hash algorithms are determined by the platform and the TPM
-+ * configuration. Failing to cap a PCR in a bank which the platform left
-+ * active is a security vulnerability. It permits the unsealing of secrets
-+ * if an attacker can replay a good set of measurements into an unused bank.
-+ *
-+ * On top of that a previous stage bootloader (e.g TF-A), migh pass an eventlog
-+ * since it doesn't have a TPM driver, which U-Boot needs to replace. The algorit h
-+ * choice is a compile time option in that case and we need to make sure we conform.
-+ *
-+ * Add a variable here that sums the supported algorithms U-Boot was compiled
-+ * with so we can refuse to do measurements if we don't support all of them
-+ */
-+
-+/**
-+ * tpm2_allow_extend() - Check if extending PCRs is allowed and safe
-+ *
-+ * @dev: TPM device
-+ * Return: true if allowed
-+ */
-+bool tpm2_allow_extend(struct udevice *dev);
-+
- /**
-  * tpm2_is_active_pcr() - check the pcr_select. If at least one of the PCRs
-  *			  supports the algorithm add it on the active ones
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 189e6eb31aa1..b3baa4b85b07 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -439,9 +439,6 @@ config TPM
- 	depends on DM
- 	imply DM_RNG
- 	select SHA1
--	select SHA256
--	select SHA384
--	select SHA512
- 	help
- 	  This enables support for TPMs which can be used to provide security
- 	  features for your board. The TPM can be connected via LPC or I2C
-@@ -449,6 +446,9 @@ config TPM
- 	  command to interactive the TPM. Driver model support is provided
- 	  for the low-level TPM interface, but only one TPM is supported at
- 	  a time by the TPM library.
-+	  For size reasons only SHA1 is selected which is supported on TPM1.2.
-+	  If you want a fully functional TPM enable all hashing algorithms.
-+	  If you enabled measured boot all hashing algorithms are selected.
- 
- config SPL_TPM
- 	bool "Trusted Platform Module (TPM) Support in SPL"
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 36aace03cf4e..59e6cbafafaa 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -196,6 +196,11 @@ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
- 
- 	if (!digest)
- 		return -EINVAL;
-+
-+	if (!tpm2_allow_extend(dev)) {
-+		log_err("Cannot extend PCRs if all the TPM enabled algorithms are not supported\n");
-+		return -EINVAL;
-+	}
- 	/*
- 	 * Fill the command structure starting from the first buffer:
- 	 *     - the digest
-@@ -409,11 +414,10 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
- 
- 	pcrs->count = get_unaligned_be32(response);
- 	/*
--	 * We only support 5 algorithms for now so check against that
-+	 * We only support 4 algorithms for now so check against that
- 	 * instead of TPM2_NUM_PCR_BANKS
- 	 */
--	if (pcrs->count > ARRAY_SIZE(hash_algo_list) ||
--	    pcrs->count < 1) {
-+	if (pcrs->count > 4 || pcrs->count < 1) {
- 		printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
- 		return -EMSGSIZE;
- 	}
-@@ -880,3 +884,33 @@ const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
- 	return "";
- }
- 
-+u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo)
-+{
-+	size_t i;
-+
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (hash_algo_list[i].hash_alg == algo)
-+			return hash_algo_list[i].hash_len;
-+	}
-+
-+	return 0;
-+}
-+
-+bool tpm2_allow_extend(struct udevice *dev)
-+{
-+	struct tpml_pcr_selection pcrs;
-+	size_t i;
-+	int rc;
-+
-+	rc = tpm2_get_pcr_info(dev, &pcrs);
-+	if (rc)
-+		return false;
-+
-+	for (i = 0; i < pcrs.count; i++) {
-+		if (tpm2_is_active_pcr(&pcrs.selection[i]) &&
-+		    !tpm2_algorithm_to_len(pcrs.selection[i].hash))
-+			return false;
-+	}
-+
-+	return true;
-+}
--- 
-2.45.2
-
+Cheers
+/Ilias
