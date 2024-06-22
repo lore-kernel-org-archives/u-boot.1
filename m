@@ -4,68 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD09CC27C78
-	for <u-boot@archiver.kernel.org>; Fri, 21 Jun 2024 22:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F6C4C27C53
+	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 03:49:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A3387C69;
-	Sat, 22 Jun 2024 00:33:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 66AE387D10;
+	Sat, 22 Jun 2024 05:49:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="KhE1yNyQ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="icUsqKcl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1B968644E; Sat, 22 Jun 2024 00:33:27 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 753ED87FC2; Sat, 22 Jun 2024 05:49:38 +0200 (CEST)
+Received: from mail-m25467.xmail.ntesmail.com (mail-m25467.xmail.ntesmail.com
+ [103.129.254.67])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6169B87FBC
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 00:33:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F0B387C2D
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 05:49:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-52bbf73f334so2186342e87.2
- for <u-boot@lists.denx.de>; Fri, 21 Jun 2024 15:33:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1719009204; x=1719614004; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=+nzSjo2ZmyG/U0ldPJy4kie3PaLPjDMddxJB2jQbzv8=;
- b=KhE1yNyQlYE4KU+cZn+8JNd75mXbYdSghTeCuLDeivyFfSfakPbhU556yBWUZ7g48v
- doG0R3mFQQz3jONKSCIIZfgCdOTF+WKhJLC8Lmkyrfhki8AiDlvE2fg8JmiSXXES09Qb
- o9jcqPog9VEX1vIkminsGQ9cY2gL5hg+uyYEDuwOaGnSrnXAP6yU2NP0h2ti+vHxpn3k
- BDJhR2WHhsmeQravDBDlIprR8BUUOShGn9PxuAI0Uu0XAz7w7oDi5N28oeuRt+L7gIC/
- +w0pGMunxUjCizyT8hDf5/iqcraaIRZ5a2QDwFK8d2m9hCofMn4ozVZ8WB4P9eO/g61a
- ysOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719009204; x=1719614004;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+nzSjo2ZmyG/U0ldPJy4kie3PaLPjDMddxJB2jQbzv8=;
- b=SkVLToYPKHmOLSDX6AERucJWZ4JeTBy7rErkYvte7fNnuujO4+CeA+5zmI/d7DfHgb
- 0SIozHCPWYYc+RpzzAc/soKCQZhBlnphPRgL0RQdqUZLRD2zB+3y9Uy2fLx/bi6uuS4X
- PBIjkoG5Z5vryXCZqzrYPXX8O00onBSyQJ8tH8wYtQwMHtmHlgKAYVchZwZIFG2Ide+L
- NNDsfLadumgJOSqg85ri0roFTmwruM4Di1OPggvbono0SpZd/G2miSxaa3KCJr4aamXG
- sl8cocFCtp4eFtWTxzgZwSbTengGlHbdJ/D9j2zlsr68kRdAy8TT7JB086Qh7OE83tI4
- w6JA==
-X-Gm-Message-State: AOJu0YzqiFVfnbrn2SCT2s22W0aj4CT+rHR4d9bHyRhFuRGCCkL95yMd
- dZE/uAmXGJiSXt5GxCloue753ujnGczZ5249DyhcPk24H3Ua4jY9bG4otkz27M6PKGeuxgKKoga
- moKLXuMJtCcQsPjlyH6+AG/jWLBwFAzsqSd2/ziveF5qM4TinfQQ=
-X-Google-Smtp-Source: AGHT+IHnDG/C8eG5ujUxMkN0G6zEiamSIWvwCuHBSdbRJO4IMpwtlqHGIdyPxGZVWYkk0P3k4OKgzEPzEALg94cM3+o=
-X-Received: by 2002:ac2:58c5:0:b0:52c:9fac:2147 with SMTP id
- 2adb3069b0e04-52ccaa5cc98mr5557265e87.16.1719009203131; Fri, 21 Jun 2024
- 15:33:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=icUsqKclDPbQ7QhpMXLY3At1zGWSBr6FqgkJcna2evVmJ8raajtFFe5kHA5NKaXNp4trycSAgy33JHBIWbIfP99ia0cwY1j+430nZz58bmh+Ki1sv6M7QpOlGgF8L0Rmk8/hEt0xXI6pmYgsUWcTUmgxTd8DVoaM2/lzpTI5RV8=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=dyLqdgk+7Hf1dNU7x5V98ZUPfHyEe7e9ykiZFXb1Ivk=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 950709003A2;
+ Sat, 22 Jun 2024 11:49:17 +0800 (CST)
+Message-ID: <7fa48725-c965-4a41-bab1-74e987569855@rock-chips.com>
+Date: Sat, 22 Jun 2024 11:49:17 +0800
 MIME-Version: 1.0
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 21 Jun 2024 15:33:11 -0700
-Message-ID: <CAJ+vNU1cy9LmQ82J+pHTO22xTCh4G6MG477ncpjvzARREnMMjQ@mail.gmail.com>
-Subject: USB gadget device (USB_ETHER) with ChipIdea device controller (imx)
-To: u-boot <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 16/18] rockchip: Avoid #ifdefs in RK3399 SPL
+To: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
+References: <20240620230625.1797397-1-sjg@chromium.org>
+ <20240620230625.1797397-17-sjg@chromium.org>
+ <3dbe42b8-7f9d-4b67-b903-692860518461@kwiboo.se>
+ <CAFLszTgF9cBnQkLQX24yd-Z3KKoujkiwbBBP2c26vyOBbOaLtQ@mail.gmail.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <CAFLszTgF9cBnQkLQX24yd-Z3KKoujkiwbBBP2c26vyOBbOaLtQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhgaTFZITh5IQ0tLGh9JThpWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ NVSktLVUpCS0tZBg++
+X-HM-Tid: 0a903e100e5103a9kunm950709003a2
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mxg6ESo5PTNOHThOPxAiSCgP
+ TD9PFBdVSlVKTEpCS0lDSk5DTktNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFCSk5INwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,100 +78,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Greetings,
+Hi Simon,
 
-Is anyone successfully using USB gadget device (USB_ETHER) on any imx
-that has the ChipIdea device controller? (imx6/imx7/imx8mm):
+On 2024/6/21 22:57, Simon Glass wrote:
+> Hi Jonas,
+>
+> On Fri, 21 Jun 2024 at 00:45, Jonas Karlman <jonas@kwiboo.se> wrote:
+>> Hi Simon,
+>>
+>> On 2024-06-21 01:06, Simon Glass wrote:
+>>> The code here is confusing due to large blocks which are #ifdefed out.
+>>> Add a function phase_sdram_init() which returns whether SDRAM init
+>>> should happen in the current phase, using that as needed to control the
+>>> code flow.
+>>>
+>>> This increases code size by about 500 bytes in SPL when the cache is on,
+>>> since it must call the rather large rockchip_sdram_size() function.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>>
+>>> Changes in v3:
+>>> - Split out the refactoring into a separate patch
+>>> - Drop the non-dcache optimisation, since the cache should normally be on
+>>>
+>>>   drivers/ram/rockchip/sdram_rk3399.c | 47 ++++++++++++++++-------------
+>>>   1 file changed, 26 insertions(+), 21 deletions(-)
+>>>
+>>> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+>>> index 3c4e20f4e80..2f37dd712e7 100644
+>>> --- a/drivers/ram/rockchip/sdram_rk3399.c
+>>> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+>>> @@ -13,6 +13,7 @@
+>>>   #include <log.h>
+>>>   #include <ram.h>
+>>>   #include <regmap.h>
+>>> +#include <spl.h>
+>>>   #include <syscon.h>
+>>>   #include <asm/arch-rockchip/clock.h>
+>>>   #include <asm/arch-rockchip/cru.h>
+>>> @@ -63,8 +64,6 @@ struct chan_info {
+>>>   };
+>>>
+>>>   struct dram_info {
+>>> -#if defined(CONFIG_TPL_BUILD) || \
+>>> -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>>>        u32 pwrup_srefresh_exit[2];
+>>>        struct chan_info chan[2];
+>>>        struct clk ddr_clk;
+>>> @@ -75,7 +74,6 @@ struct dram_info {
+>>>        struct rk3399_pmusgrf_regs *pmusgrf;
+>>>        struct rk3399_ddr_cic_regs *cic;
+>>>        const struct sdram_rk3399_ops *ops;
+>>> -#endif
+>>>        struct ram_info info;
+>>>        struct rk3399_pmugrf_regs *pmugrf;
+>>>   };
+>>> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
+>>>                                        struct rk3399_sdram_params *params);
+>>>   };
+>>>
+>>> -#if defined(CONFIG_TPL_BUILD) || \
+>>> -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>>> -
+>>>   struct rockchip_dmc_plat {
+>>>   #if CONFIG_IS_ENABLED(OF_PLATDATA)
+>>>        struct dtd_rockchip_rk3399_dmc dtplat;
+>>> @@ -191,6 +186,17 @@ struct io_setting {
+>>>        },
+>>>   };
+>>>
+>>> +/**
+>>> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
+>>> + *
+>>> + * Returns: true to do SDRAM init in this phase, false to not
+>>> + */
+>>> +static bool phase_sdram_init(void)
+>>> +{
+>>> +     return spl_phase() == PHASE_TPL ||
+>>> +         (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
+>>> +}
+>>> +
+>>>   static struct io_setting *
+>>>   lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
+>>>   {
+>>> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
+>>>        struct rockchip_dmc_plat *plat = dev_get_plat(dev);
+>>>        int ret;
+>>>
+>>> -     if (!CONFIG_IS_ENABLED(OF_REAL))
+>>> +     if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
+>>>                return 0;
+>>>
+>>>        ret = dev_read_u32_array(dev, "rockchip,sdram-params",
+>>> @@ -3138,22 +3144,24 @@ static int rk3399_dmc_init(struct udevice *dev)
+>>>
+>>>        return 0;
+>>>   }
+>>> -#endif
+>>>
+>>>   static int rk3399_dmc_probe(struct udevice *dev)
+>>>   {
+>>>        struct dram_info *priv = dev_get_priv(dev);
+>>>
+>>> -#if defined(CONFIG_TPL_BUILD) || \
+>>> -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>>> -     if (rk3399_dmc_init(dev))
+>>> -             return 0;
+>>> -#endif
+>>> -     priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+>>> -     debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+>>> -     priv->info.base = CFG_SYS_SDRAM_BASE;
+>>> -     priv->info.size =
+>>> -             rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+>>> +     if (phase_sdram_init()) {
+>>> +             if (rk3399_dmc_init(dev))
+>>> +                     return 0;
+>>> +     } else {
+>>> +             priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+>>> +             debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+>>> +     }
+>>> +
+>>> +     if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
+>> This check should be dropped, this driver intent is to initialize dram
+>> in first phase (normally TPL), and report the size to any other phase.
+> This whole patch can be dropped :-) Here I am just trying to avoid
+> code-size growth when the cache is off. But yes, it is not needed.
+>
+>> The main need for phase_sdram_init() and disable of DCACHE can probably
+>> be avoided if bob/kevin can move to use separate TPL and SPL instead of
+>> doing both dram init and everything else in SPL.
+>>
+>> My best guess is that enabling of caches in SPL cause issue for bob and
+>> kevin because they only use SPL not TPL+SPL like (if I am not mistaken)
+>> all other Rockchip arm64 targets.
+>>
+>> Using SPL-only was not something I tested when caches was enabled in SPL.
+>>
+>> Maybe bob/kevin can be changed to also use TPL+SPL similar to all other
+>> RK3399 boards?
+>>
+>> How U-Boot works on these chromebooks is still a mystery to me.
+>>
+>> When coreboot is involved it would only load U-Boot proper and SPL or
+>> TPL+SPL would never be involved at all?
+>>
+>> If I understand correctly SPL is only involved for bare metal boot, if
+>> this is the case then using TPL + back-to-brom to load SPL should
+>> probably work fine?, and would align all RK3399 boards to work in a
+>> similar way and reduce the need for special care/handling in the code.
+> These boards were the first rk3399 support we had in mainline, I
+> believe. Everything else came later but conversions were not done for
+> these existing boards.
+>
+> I actually intensely dislike the back-to-brom stuff. If the ROM had an
+> actual API (mmc_read(), etc.) then that would be fine. But just
+> jumping back makes it hard to control what is going on.
+The logic of BootRom is very simple and very clear:
+- Read image from boot medium and check the availability(format of 
+rockchip IDB,
+     which is packed by the mkimage rksd/rkspi);
+- Load TPL/dram init blob to the internal SRAM(size limit by the sram), 
+and jump to the entry;
+- Back to bootRom with '0' return means the dram init success, bootRom 
+will get next image for dram;
+- Read SPL image from boot medium to DDR start address(no size limit), 
+and jump to the ddr entry;
+- The signature verify will be done for all the firmware load by bootRom 
+if the secure boot feature is enabled;
+This model works for all Rockchip SoCs, although some SoCs have very 
+limit SRAM size(only available
+for DRAM init) and some other SoCs like rk3399 have bigger SRAM size.
 
-I've never been able to get this to work as when
-usb_setup_ehci_gadget() is called from ci_udc's
-usb_gadget_register_driver() it first removes the usb controller (and
-its children) before reprobing it and this causes a hang.
-
-Here's an example with v2024.07-rc4 on an imx8mm-venice-gw73xx-0x
-(imx8mm_venice_defconfig) after enabling CONFIG_USB_ETHER:
-u-boot=> net list
-eth0 : ethernet@30be0000 00:d0:12:ba:f8:cc active
-u-boot=> bind usb 0 usb_ether # bind usb_ether to first usb controller
-u-boot=> net list
-eth0 : ethernet@30be0000 00:d0:12:ba:f8:cc active
-eth2 : usb_ether 00:00:00:00:00:00
-u-boot => setenv eth2addr 00:d0:12:ba:f8:cd
-u-boot=> net list
-eth0 : ethernet@30be0000 00:d0:12:ba:f8:cc active
-eth2 : usb_ether 00:d0:12:ba:f8:cd
-u-boot=> setenv ethact usb_ether; setenv ipaddr 10.0.0.2; setenv
-netmask 255.255.255.0; ping 10.0.0.1
-^^^ board hangs, USB host connected to board does not enumerate a CDC
-ether device
-
-Unbinding ethernet via 'unbind ethernet 0' first does not appear to
-make a difference.
-
-The following patch resolves this however I don't think this is the
-right fix as that was apparently added for a reason in commit
-fbeceb260232a ("dm: usb: Allow setting up a USB controller as a
-device/gadget"):
-
-diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-index a1cd0ad2d669..38111fda8af9 100644
---- a/drivers/usb/host/usb-uclass.c
-+++ b/drivers/usb/host/usb-uclass.c
-@@ -403,6 +403,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
-        ret = uclass_find_first_device(UCLASS_USB, &dev);
-        if (ret)
-                return ret;
-+#if 0
-        ret = device_remove(dev, DM_REMOVE_NORMAL);
-        if (ret)
-                return ret;
-@@ -412,6 +413,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
-        ret = device_probe(dev);
-        if (ret)
-                return ret;
-+#endif
-        *ctlrp = dev_get_priv(dev);
-
-        return 0;
-
-diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-index a1cd0ad2d669..38111fda8af9 100644
---- a/drivers/usb/host/usb-uclass.c
-+++ b/drivers/usb/host/usb-uclass.c
-@@ -403,6 +403,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
-        ret = uclass_find_first_device(UCLASS_USB, &dev);
-        if (ret)
-                return ret;
-+#if 0
-        ret = device_remove(dev, DM_REMOVE_NORMAL);
-        if (ret)
-                return ret;
-@@ -412,6 +413,7 @@ int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
-        ret = device_probe(dev);
-        if (ret)
-                return ret;
-+#endif
-        *ctlrp = dev_get_priv(dev);
-
-        return 0;
-
-Adding debugging to device_remove the hang occurs when removing
-'usb_ether.bootdev' and I'm not quite sure where this device even
-comes from:
-usb_setup_ehci_gadget removing usb@32e40000
-device_remove usb@32e40000 flags=0x1
-device_remove usb_ether flags=0x1
-device_remove usb_ether.bootdev flags=0x1
-
-I don't understand why usb_setup_ehci_gadget() is removing the device
-in the first place just to go and probe it again.
-
-This is not a regression... I've never seen this work since I first
-tried it back in Feb 2022 [1]
-
-Any ideas?
-
-Best Regards,
-
-Tim
-[1] https://lore.kernel.org/all/CAJ+vNU1xH-J-0RV09OuM1e+hsRV=HXvh2oS6PfCWY5d+0stRYg@mail.gmail.com/
+Thanks,
+- Kever
+> It is interesting to hear that SPL-only is causing a problem. Do you
+> have any inkling of what that might be? I could take a look at
+> converting the boards to use TPL, but it does seem a bit sideways to
+> the issue here. Is the bootrom doing some magic, perhaps? Is there
+> decent documentation for the boot ROM these days?
+>
+> Regards,
+> Simon
