@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DC3C27C53
-	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 16:03:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AA7C27C53
+	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 16:05:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B021880C5;
-	Sat, 22 Jun 2024 18:03:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 94B2F87FC2;
+	Sat, 22 Jun 2024 18:05:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bjhEOuMA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BRjDlm4T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9042388080; Sat, 22 Jun 2024 18:03:31 +0200 (CEST)
+ id B952188080; Sat, 22 Jun 2024 18:05:00 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A039387A09
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 18:03:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D171C87A09
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 18:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1719072195; x=1719676995; i=xypron.glpk@gmx.de;
- bh=EbKUzGNzILHlcZ1OCu++nubN8pqXLR0mTheAVTqiH9I=;
+ s=s31663417; t=1719072282; x=1719677082; i=xypron.glpk@gmx.de;
+ bh=Wi8ukTCSCsdtcGDmOdkVoJncRdC/aVu5/qVExcy4PiA=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=bjhEOuMAxFnQRKlTv5m7xdFZz48vtVTLRC0rUt9JUzujdveyV9GTAOn7L2Q3p2Xg
- ZGiEBICpwgSt0S/A/e6oPJkbL1HDrWXPqLn/lSy88rEQfGMPdmHItUHXKb0xcd6Dp
- 0R/M+BiR4paIqq3gXqGlQcgzQGhC3ZH6U4Vf8DSdD1Gx9eIf8eNV+Na5SGEC5vP27
- DV0ag5i8Nj0sq09Z2adFL5fj8f26UgtBLQI4eIPBOzlwPTGs9lUDtJ2NlXOOlJMyU
- CbGaDfYfoV2J9rLl1aAoa95GYHoPHYmuUXEkZSgVJwcy71JXUWzJEdDjurbRMCS3T
- n5VvbY7y0pbDSHzjFg==
+ b=BRjDlm4T/yEkNPtSfGhO/MgompS2w4mewWIJy/HtU6lAlBAcu9TqInmbqT2ZV+8w
+ l7nqaoKCwHjdUInpfhZezjbV3DF3HzqCz6lPrDHi8DQuS4kCgfQvK2JMq9HNTiIiO
+ PcTMfEfHDZAsSGPWLFNzNq3giazJSBh161gNL7I2iVFa/GHjqDoAS9vqIeNFIaOPy
+ XLrNWtNo/kWAlDyQQkVa0mztpYOlSZJ/vYoqy1KEsWH5wCRhgTJJEp9WkE6lFYc5G
+ 2Q03tvX2mrKgHakFijJnXPZEcDlVFE2VKRd37UmSK90U2Fjaq7ImE0tmGcfG0aEmH
+ BnWHFQoxMXGORBZE2Q==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Ml6qC-1smNgd2ljQ-00eBVQ; Sat, 22
- Jun 2024 18:03:15 +0200
-Message-ID: <023d85a1-40eb-40d6-ba3e-5d777fb2564b@gmx.de>
-Date: Sat, 22 Jun 2024 18:03:14 +0200
+Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtfNf-1sdGy50Ugh-00ruJD; Sat, 22
+ Jun 2024 18:04:42 +0200
+Message-ID: <27d932c2-d04d-4f1b-8104-4aad129bebf4@gmx.de>
+Date: Sat, 22 Jun 2024 18:04:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] efi_loader: remove duplicate TCG algo definitions
+Subject: Re: [PATCH 1/7] tpm: fix the return code, if the eventlog buffer is
+ full
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>,
- Sean Anderson <sean.anderson@seco.com>, Michal Simek <michal.simek@amd.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de,
- sjg@chromium.org, trini@konsulko.com
+ Sean Anderson <sean.anderson@seco.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Michal Simek <michal.simek@amd.com>, AKASHI Takahiro
+ <akashi.tkhro@gmail.com>, Masahisa Kojima <kojima.masahisa@socionext.com>,
+ u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org
 References: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
- <20240622143601.187723-4-ilias.apalodimas@linaro.org>
+ <20240622143601.187723-2-ilias.apalodimas@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240622143601.187723-4-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240622143601.187723-2-ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:GVHQAnSiGq8Jka/EHwL8eREkmwNEEN9iJNo/QN31asD34vAhFJm
- YocAGABCvb6bU2+7zR/TmsILx8hj/nGfy/9bFVNppK6HJoFTCAIv3ohARx7QibzU0PKj8JN
- tllSer3n11MUXlMIItfq8I1oaNYYGKCQklvle01g8Jg4HQf7LOUhHZI36yDkagLcAfQKbFk
- vtNXifzqPZ4QYLxNoqndg==
-UI-OutboundReport: notjunk:1;M01:P0:w71hxkAqVMI=;3Nr+y9mcMQ9yVkghAlu0FxTr/jv
- ukJbDlc/34PZU3LUZXQXYKrEW/QDQvXFHiOQbqbez270fGsLuZzV6cDTgnv7EoJTQOZTtmUov
- jG4fmbmik9lOMup5j5eiNKAsoUM5htzawGwzQCQp1BcJo5lFCv0TZAWtAGpiDQGkplp430fd6
- qbK12mBUb1aj5n28Qy+fnjRRJV+95r7VYyJcUWhOwYPKSowL9stjuICLZkHggY+31UFO8ugAI
- W8OIlbDceqiakApof88lB5p7ON2zkUW7kme/4DGgGGJn/4gMhwwEpJzWhNvUOsOKEa+7SXUwp
- 34oOjKB2aL5M1yZshK1gnTuAUMMgqsrIG5bISrHzL3C7qtsoaaDzaelazKHXznF5xyVOObTlZ
- lzzAzHL9RbnxyrhS/RxtvHSx2lJpuhaCbhU4xNYkrf+xY4d60msDptm4wAMNd4rDj9vgsjTAd
- ODgGOc0YSoWdpU8osDsaXBZYwhbgrwg9l5pqSkzgbXPnI+rbaWxlNgb5HJzou5ET2xxiQAa6Z
- ZPvG2D+9abZMFyi3dOi1MtN30y7TAy1g7N+dYlBcjBGDvibCqoeQo+IJ/r5bhjd66mHRgs3br
- sG/ZiEMFWoGm/QxGQvJzsxo1NTpR7OD1HQv9+rmk2arUHVe4v+v4QEbqn9FW0ra3NmwSYcrmy
- 8DY0h+LkCsioTBIIx41Gfjoko8aAu3UssG05+KVHoCffOkS/Eoi+ikkhRL4syPbL9rqIsioaj
- AOTL2LH3G0Dy12WyfQM6UN8w+7Q7uMc/4k2oiWXxaDlfDrkV6lG9ikNtd0ursdBSwprsTRyJS
- qW//LTddRjRgIyvtHeknBpCPWvr9OcNJDdP5e/cfRG36U=
+X-Provags-ID: V03:K1:oVqojQpMTI9N3xs++2DeTyX3dFKAt+nq64mMI/54OuYyvZwjKVR
+ S1QCEvLcFVqxSFk73c7I09A+4rjHbBQ0ZF+khte/6cCCsqmPVoRK34AoqLcefofQio4PZ6j
+ M9+dyGueqrDsXcdNMuaSxAe/z/ckgNcOU2S7IeRqN1bd46XcrzbHM9vtODzWdL4i25uZeW0
+ kOnIc1Try2JQbzDes9YLQ==
+UI-OutboundReport: notjunk:1;M01:P0:uydM2B2/tAM=;bqjnfIeCl5NTOX5bpFwv/o/K2P6
+ LRrly7TOBevYptQRPDqcahJbGmJBadUa5214EXDeT9wwNcVEk1g2OczRfyTgcLH0ruNSl+cKY
+ ctoc1HJcw4XNYN6ZxO4OOyCOk++4N0ess763ahJTvpcSAJK0fWdL5RyU2ebitN7rGde/T9Tli
+ R9f/m9ryBIgFzgYZDWSMBdH/lwTXtUEf1XP0bYJxlNCldsb2693FOiZ/XCNORJuzA5YhuH6Uy
+ sk+Ov+2WRBDnO5x1re1owhvTOwDuhh+L4QpsrJMdv6+DQx6DmIW9DQ71AB11Vq5rSIkY2CSkw
+ cQP2bq8SOBYMKmmwSHTPRKZgzCfnb1jXTq7YoBppnOdjpf0tInign37FjP9mq1/zdYhCW3OmE
+ Iz1EaMoHKAPa2FnmnEodYFYHxPBGkJnxL+cwVREC1aQmjmNt+e3wxg1CTey2A5wqwr3ghBQsY
+ rSW89qCBck6Nb6MMVfC4SGOAwLAG62fh4yzkqQRwnC/YzbnJebblMxjxTPgrfimestaaHDnJv
+ qbXumNJTwBaF/d6xx+eY4wQwtqPDK29JRfVzHemD+MUvkgAOuMfnlg5OldisdBLVNt7M6XQ7x
+ oJffQpv/fesBNKfzOyU1wYKlDAVeV1IulYt3/SDNG3TiMkAyxChxrdE7xFQ5gqpQ5hGKSWtAS
+ Yn+11dceau5+LFk2DXqCsP7zBSnrCcwK5gCKG79k5qB5r/mGRjxmX5m9bMILJCwUwWTcgTW2T
+ Y1nt5E7lJZ7Rm1ueRdjatsLaVgCmfpmFRtBPTow68cPaJBk9zLytSUIso8oMko48brQzDtK+L
+ boWDzBcQk7IKQnhvrr8T3cMYpheKDCQFkWG0eag4D38Rw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,41 +99,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 22.06.24 16:35, Ilias Apalodimas wrote:
-> commit 97707f12fdab ("tpm: Support boot measurements") moved some of the
-> EFI TCG code to the TPM subsystem. Those definitions are now in tpm-v2.h=
-.
-> Let's remove the duplicate entries
-
-The constants are not duplicate but unused.
-97707f12fdab introduced different constant names (TPM2_ALG_*).
-
-Otherwise
+> We currently return 'No space left on device' if the eventlong buffer
+> we allocated is not enough. On a similar check later on that function
+> during the call to tcg2_log_init() we return 'No buffer space
+> available'. So switch both error codes to -ENOBUFS since we are always
+> checking a buffer and not a device.
+>
+> Fixes: commit 97707f12fdab ("tpm: Support boot measurements")
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
->   include/efi_tcg2.h | 8 --------
->   1 file changed, 8 deletions(-)
+>   lib/tpm-v2.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/include/efi_tcg2.h b/include/efi_tcg2.h
-> index a75b5a35b6e7..54490969b2d1 100644
-> --- a/include/efi_tcg2.h
-> +++ b/include/efi_tcg2.h
-> @@ -25,14 +25,6 @@
->   #define PE_COFF_IMAGE 0x0000000000000010
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index a67daed2f3c1..91526af33acb 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, str=
+uct tcg2_event_log *elog,
+>   		if (elog->log_size) {
+>   			if (log.found) {
+>   				if (elog->log_size < log.log_position)
+> -					return -ENOSPC;
+> +					return -ENOBUFS;
 >
->   #define EFI_TCG2_MAX_PCR_INDEX 23
-> -
-> -/* Algorithm Registry */
-> -#define EFI_TCG2_BOOT_HASH_ALG_SHA1    0x00000001
-> -#define EFI_TCG2_BOOT_HASH_ALG_SHA256  0x00000002
-> -#define EFI_TCG2_BOOT_HASH_ALG_SHA384  0x00000004
-> -#define EFI_TCG2_BOOT_HASH_ALG_SHA512  0x00000008
-> -#define EFI_TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
-> -
->   #define EFI_TCG2_FINAL_EVENTS_TABLE_VERSION 1
->
->   #define TPM2_EVENT_LOG_SIZE CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
+>   				/*
+>   				 * Copy the discovered log into the user buffer
 
