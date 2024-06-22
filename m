@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC7DBC27C53
-	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 16:36:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F8FC27C53
+	for <u-boot@archiver.kernel.org>; Sat, 22 Jun 2024 16:37:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37DDD87D14;
-	Sat, 22 Jun 2024 18:36:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0B397880DB;
+	Sat, 22 Jun 2024 18:37:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YG5ukm+D";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pMUNXnSJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B2087FC2; Sat, 22 Jun 2024 18:36:55 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5D7F8880F8; Sat, 22 Jun 2024 18:37:34 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B005887A09
- for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 18:36:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B06F87A09
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 18:37:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1719074212; x=1719679012; i=xypron.glpk@gmx.de;
- bh=p/zyx1UTv/cpYi62snKjhBWR/HMgAU3y6LmHOsqgXT8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=YG5ukm+DnKqsaYFej8Y/r4N+LC8DGY27J6SMsGDTBl37T6ZHOBqe/MW37AqssgxT
- s4lSF1YSS6Ly4z/NUSrhSAFFmexe5dNk+2W3mleQIdet5dgQ7TZrqQ8nCDRYLyq0f
- fiAp+4OLY95mg2QpPg8aQi0bzxMZ3BfVxQsbJHi1N7fo7zaYxmW2qpCXIMbrPddFO
- SZxo/0nsuQui2ojFYozWneNosdEgA1NIwDUOUpTLCsUrkls9ioi/Noe/DQNkn3bdm
- iyDE9eXcLitge/DS6Ksq8CDWMkKXoC9ngKn6hdfjT57cbgvj3zUv60yF5/UfekvHT
- oZA37Yq0+IdNtaQ0CA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtOKc-1sczUY0v3m-0144Ej; Sat, 22
- Jun 2024 18:36:52 +0200
-Message-ID: <2a1d9bf4-1790-4186-b8e0-3a5001af9f72@gmx.de>
-Date: Sat, 22 Jun 2024 18:36:51 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-70df213542bso2166360a12.3
+ for <u-boot@lists.denx.de>; Sat, 22 Jun 2024 09:37:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1719074250; x=1719679050; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mS9z9N0xbKp6B4n7bBkkDFMc7rIGoPVzkmPiD1X6TJE=;
+ b=pMUNXnSJJ3oJZL9rCTrTNFLXnqHhZyzpFKKDgiYUacLohjCMTEFQCutE6+q/VOYVn5
+ hgQ5HWPr/ygR9WvEc0JRWQ/BSWGj+DLcRS02RS6sDgs5zEn12JUW3yLpz1Exj8HZTVbi
+ kXi+aN+5VCjM1f/TBgZ9oxGrFuHzc+e+ePLqPZVhjUsh3bNvse3oNtTI9FMxccpLxh+J
+ x4qQdxhJHoiycNDRePkpd5wir44LgTKnTI2Dq8ie8uuAw81rYyXcdDkYnz3rtcU9UzPY
+ O7Ows9mXl1funSFrtOF3a0sE/VsGIMnv3ZsTz6KPp0s7mD0Q+/eW6bc1EYbZMTdHTxJB
+ y1Tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719074250; x=1719679050;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mS9z9N0xbKp6B4n7bBkkDFMc7rIGoPVzkmPiD1X6TJE=;
+ b=vI/EX/or36kQiG/0oGCRgyrtCk+WL0LrkMrNaut5xLEbf7o57rKz4HBjidEpk2gJWl
+ NQA75X92Ic4nDiG7jnqVZVhKL2yYX8E5liSWTJymm8CpDjWuNSgOs14nk8RgPQZvlvFM
+ 8mnN2ihw+y3PpI8YBick9FMhJDuhpFx6qCHDQYlxvYNmpRAR0B/yjidxJj9l2fHgNl1N
+ W6r2rht89aNRc+mKlHgUpUlInGCPxK6knDtqgTzBaVF2NTwuXu0xqTzPeSO5zgrEjSeB
+ qAsawaCFjBuzrmNd6sMeWlRFmb9hU/2vM35MifpaLWW6pSDBhcpmEiXLET+H3O0nDv16
+ rZtg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXd1tQ4HbmXN0ZF8ckJ7UkUbtJ6yjglgARB09/6feFUlh7doIcM/+X1N2JEhnMeIXtLUJhV51nM2IpdSQxPEDxlVqkKTQ==
+X-Gm-Message-State: AOJu0Yzxahtc+53brxVTwLq7mEJL2USdil2UyFxsD5TvznPXxPvwtMSb
+ GgWZRMFf7XPOE1gg6J58qJ4e6HtanPGK6HeEqjCzNbuvFmjZdtwz97s/lPIiMfchjacdN0WEk3E
+ fu9wnyfDgFLkNl7Zqsye3tCxwMeLJRIp6yXGupA==
+X-Google-Smtp-Source: AGHT+IEPgrCBRS7h5FVGxpMdvja7mNEEZ0g0yJq5NYKLztR1s3nOK44QbI9UsPtGgOQv0ivgrdsp9BpitkkMVtfydYo=
+X-Received: by 2002:a17:90b:17d1:b0:2c8:62b9:903a with SMTP id
+ 98e67ed59e1d1-2c862b991d4mr186638a91.2.1719074250139; Sat, 22 Jun 2024
+ 09:37:30 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: adjust config options for capsule updates
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, jhumphreysti@gmail.com
-References: <20240620201531.321110-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240620201531.321110-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SLiSBA5Tc4MWS2U5U8sW+kMF0LnNNjwk5lUwYNQTfjjvC1FIf2D
- MINp4f/iGMOjmszisti7xvwigqORIPmCcnQRPzgweLJUoC/f0lZ1mJOn8pNytjI0mQq2Cy8
- SmcgZsNbsQbbI22XmiVV46Flw6tCn/EaFyZt3tOS3K2/kDVfhOjSgxY9evUti2SmXlRenSO
- o+j3sfsqDaf+3X9jBor6A==
-UI-OutboundReport: notjunk:1;M01:P0:zegR/XAr/m0=;+PwbyqcHsogFxGmjCPRLh1YHYF/
- tDjRALi5A+VyZvifrpD/82qOxfkQh+faMZ1nxH4kVZu/ETCos5yg5JSCTHONnDrEBvOqsIiW0
- rteFBwl1yCaNcMg8S1sXpuNswoRssN3QrM+a2kg5Yo3TTe8fj/WKso5vd05b0daOI9/u/TpsL
- MsqZLHiFZxzJj+QASVYLsY7Voh5/AYgtpNAnUzN4UWR4SvIc1ch9PYYwJ1gaZ1u+V2FmSipjf
- kKyqBuDhfV1z1yYiPEqGQ8nR0hAcvukQxbvN0NI7Mqwnu1/NrduK6kh4vl/pn3gIN5Ug4G6bd
- cQznamdsOcyYnXIhWTASJSuWTW3KWC0YwhOA1QHva8PSKxdoybP6jwWYMECXlz+tIzq5qdECl
- IvDDHZ6gQeDSN6C4cW4G5lE9O65CA6AyPALIGW8WYFLQqKRO/vonyyYxQJHwa4MyJTizD1Wpo
- RBJbaXN4TTdNB6nvVSYLYPzBis9w+zsCMba0Rm03tSxviYuV4ofhI3eackwdaaUMJwLl4uViB
- LRRlb1hEZsVNbfsOqCL67OPFQEzx5LYneLp5Zu48MoOW/H02tO0zzpHLoWcYsZcXbW3feYcvV
- s6s4R45ZtSaKUare+1KfJ78n/W8ZqFGbr3pX0aSmxGUvEr659J5LFligGGyUEO+QL67eZCfpW
- LaTCNDf28yxIY2Ki+OY8qOy4k2a+llt1NM/G2KF612ATXOR10eogiDZwC2BjwekAL+8+Dzcel
- zXA021yXLYGGwNeSdStiH0DA51xUk1PUNmoOZU1Cppxn4RhJxVfW866g37T9OBFbclrtIRcBs
- q13phErUDCWiPEEiszRSTQFUXY9J+j1WPqTPWsKC7llrM=
+References: <20240622143601.187723-1-ilias.apalodimas@linaro.org>
+ <20240622143601.187723-5-ilias.apalodimas@linaro.org>
+ <02965f5b-d824-48ee-a2dc-f4e5883ef26e@gmx.de>
+In-Reply-To: <02965f5b-d824-48ee-a2dc-f4e5883ef26e@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 22 Jun 2024 19:36:54 +0300
+Message-ID: <CAC_iWjLo6fA4vUPunU1tfbShesmHp7F0bMJm-O=CXteOJBsjgQ@mail.gmail.com>
+Subject: Re: [PATCH 4/7] tpm: Move TCG into a separate library
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Michal Simek <michal.simek@amd.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,47 +98,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20.06.24 22:15, Ilias Apalodimas wrote:
-> EFI_IGNORE_OSINDICATIONS is used to ignore OsIndications if setvariable
-> at runtime is not supported and allow the platform to perform capsule
-> updates on disk. With the recent changes boards can conditionally enable
-> setvariable at runtime using EFI_RT_VOLATILE_STORE.
->
-> Let's make that visible in our Kconfigs and enable EFI_IGNORE_OSINDICATI=
-ONS
-> when set variable at runtime is disabled.
->
-> Since EFI_RT_VOLATILE_STORE needs help from the OS to persist the
-> variables, allow users to ignore OsIndications even if setvariable at
-> runtime is enabled.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi
 
-So this v2:
+again many thanks for the quick review
 
-v2:
-	allow EFI_IGNORE_OSINDICATIONS if EFI_RT_VOLATILE_STORE=3Dy
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-> ---
->   lib/efi_loader/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
+On Sat, 22 Jun 2024 at 19:25, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index ee71f417147a..6006e845cb1f 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -220,6 +220,7 @@ config EFI_CAPSULE_ON_DISK
->   config EFI_IGNORE_OSINDICATIONS
->   	bool "Ignore OsIndications for CapsuleUpdate on-disk"
->   	depends on EFI_CAPSULE_ON_DISK
-> +	default y if !EFI_RT_VOLATILE_STORE
->   	help
->   	  There are boards where U-Boot does not support SetVariable at runti=
-me.
->   	  Select this option if you want to use the capsule-on-disk feature
-> --
-> 2.43.0
+> On 22.06.24 16:35, Ilias Apalodimas wrote:
+> > commit 97707f12fdab ("tpm: Support boot measurements") moved out code
+> > from the EFI subsystem into the TPM one to support measurements when
+> > booting with !EFI.
+> >
+> > Those were moved directly into the TPM subsystem and in the tpm-v2.c
+> > library. In hindsight, it would have been better to move it in new
+> > files since the TCG2 is governed by its own spec and it's cleaner
+> > when we want to enable certian parts of the TPM functionality.
+>
+> Nits:
+>
+> %s/certian/certain/
+>
+> >
+> > So let's create a header file and another library and move the TCG
+> > specific bits there.
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   boot/bootm.c       |   1 +
+> >   include/efi_tcg2.h |   1 +
+> >   include/tpm-v2.h   | 474 +++++-------------------------
+> >   include/tpm_tcg2.h | 336 ++++++++++++++++++++++
+> >   lib/Makefile       |   2 +
+> >   lib/tpm-v2.c       | 676 +------------------------------------------
+> >   lib/tpm_tcg2.c     | 696 +++++++++++++++++++++++++++++++++++++++++++++
+>
+> The patch series were easier to review if moving header definitions were
+> separated from moving implementations.
+>
+> This patch contains changes that are not described in the commit
+> message, e.g.
+>
+>                 if (elog->log_size) {
+>                         if (log.found) {
+>                                 if (elog->log_size < log.log_position)
+> -                                      return -ENOBUFS;
+> +                                      return -ENOSPC;
+
+And this is a great catch. this changed in patch#1 and the correct
+return is -ENOBUFS. I started working on 2 trees and obviously messed
+up this rebase... Thanks!
+
+>
+> I guess you wanted to put this into patch 1.
+>
+> Please, separate the patches adequately.
+
+Fair enough. I thought it was going to be hard not breaking
+compilation hence the big patch. I'll try splitting it
+
+>
+> + * Copyright (c) 2020 Linaro
+> + * Copyright (c) 2023 Linaro Limited
+>
+> The copyright lines look inconsistent. Linaro Limited exists under this
+> name since April 13th, 2010. Is the 2020 copyright for a different company?
 >
 
+I'll keep the older one, same company
+
+[...]
+
+> > +}
+> > +
+> > +__weak void tcg2_platform_startup_error(struct udevice *dev, int rc) {}
+> > +
+>
+> git warning: "new blank line at EOF".
+>
+> Otherwise looks good.
+>
+> Best regards
+>
+> Heinrich
+
+Thanks
+/Ilias
