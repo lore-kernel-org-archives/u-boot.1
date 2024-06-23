@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72245C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85CF3C2BA18
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FF408858B;
-	Sun, 23 Jun 2024 19:55:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CF52885A9;
+	Sun, 23 Jun 2024 19:55:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bf5lLX23";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BycI1dTj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 726F78857E; Sun, 23 Jun 2024 19:55:24 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id A1F9F88549; Sun, 23 Jun 2024 19:55:24 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A4F88855B
+ by phobos.denx.de (Postfix) with ESMTPS id E66AA88576
  for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:55:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7ebdb5d9915so135559139f.1
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7ec2d71059dso142114939f.2
  for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:55:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1719165320; x=1719770120; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1MNIMhO/Ndz6W2tKEOG699I123CEzO9+iNidV5hkSFM=;
- b=Bf5lLX23atHo6Vekdplg126pG2diIlAFFO6dWoAL+QPPGJ8J1lRVslXBxRRuV0TrBk
- zrSyD4f5/KTXzO8DNQxbJHh2dcmiFkWLtdayZKC/irb1ZsZpoFvnRNmId1xyFrt9lBLe
- jtAKC83zyKftAY8Lbp5+aLGADYUkqbAdvH3sQ=
+ bh=7/NjtgmhdGNN51ppyRZf80LJV+wFQVnrrC1NW5Sw19c=;
+ b=BycI1dTjT7tsofjdoWYpimCAbaWLYcW/P3itGKes5zq2Ww/Qf6Qdb0dDrKgDynxGZa
+ 1Hz4etrgtU+CYIFbnTEEKJ2dEVb7NCP1gWSVnXzogs5mSNBnyTrJ0syjHoTgBYIa/jAO
+ y1KmrQRNFxT1rQy8aPgo67WXLN7lp8aVzKB8g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1719165320; x=1719770120;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1MNIMhO/Ndz6W2tKEOG699I123CEzO9+iNidV5hkSFM=;
- b=mNzLNboufdYQROY8XmoZrvxVJ0VnFtLSQ5+RqZ8kbN/9qi8o8qEYX9mRGDUEmyOoCG
- 52lv0oWSezUdiMMtz61WgPgcaY7ds11l+kwmrSMXR6ZKtWCUUkfucdr4zKSfdhmnyAoy
- n9cqZjtVnp6jSQ5aHuqIU1UJD8LfCxBAlh4JIoUX2jo2yBHBcvngU4Gmy2Nm5dZjs2Xx
- aokZWHC60CYlKXczOZOBVrWIkyV6Q6md2Yq0xJMTooioeaTmyP54b5Kd1v1fn4XqEq0/
- 4mHkvpVuE9HgV/wv0vTCt3wqwGnXQme4K2tvCXycLXRyfLzf2jOx7uqbo4WErtUgY/Zh
- 5Wvw==
-X-Gm-Message-State: AOJu0Yxk24jPnC81sSlsy4zOm7NSWQzMySeoTZoRPOwiLFTrkpQf6w2F
- Lyk48eCmqlEXM/+0jkw37QELokCElgOzWBlDZWluRCS6fk+kFxiKlhEMi37APKmYjkCWr1LB8uj
- E2A==
-X-Google-Smtp-Source: AGHT+IFPVnz96UbHaSkI+UdTvdxJz3iqS/KYBcBm2sRtcwLXjlhIqTwBh4OPw3WCTV9bPnJYjEfh4g==
-X-Received: by 2002:a05:6602:2d8b:b0:7f3:a9d4:105f with SMTP id
- ca18e2360f4ac-7f3a9d412dfmr195850139f.5.1719165319699; 
- Sun, 23 Jun 2024 10:55:19 -0700 (PDT)
+ bh=7/NjtgmhdGNN51ppyRZf80LJV+wFQVnrrC1NW5Sw19c=;
+ b=sVvawc9TFCYi/6hvT8AALoY5sw0V2sNAbc4dOjCLNNBiq+dEEn1nfF494UVOTheq4T
+ L7/Ws8b6EwZPptBsFXcEU+GoUyoLLx/yU9kp/L0G7pdF40HZWm75t12VcYw4u5FdPMJO
+ W6SHyYVF2n6TTyNQOf84zM3yqVzff0rb7h7Z5HD+ZkISWmcsoQmpe10tsGhD931tI9vx
+ SpkicWjfEYgXmeTAsfQQSy+vgguvp68XG3uoM3+fAQghw93aquAzY3kepGiae5aDj/7l
+ O5wpKmFW/h+G+RBzHSG2Ye3Y0HPhOSq6+gFTVk4seCi2HRxm7oqmSnzRPtkHlJ32ei6A
+ beQg==
+X-Gm-Message-State: AOJu0YyjKK7GDIeh/Rk6dMf4EzEOLupQEW8SqRtnk3CJ8n1ouQVgkRFn
+ qfgSF9xWoIzZmYMq/HJqMbM7Eh04rHs8seHGh7S1y4Os2kxDsqQ+UQ7rqYEEcRXkGbTZl36wVCU
+ a0w==
+X-Google-Smtp-Source: AGHT+IHnKDWPICEjIw0aJRLiDBOCvELMABqjRnmUOAIJoAxWR2hCPoDYDBOfoMNXzUXdRFwXdJKnJg==
+X-Received: by 2002:a05:6602:6013:b0:7eb:db06:e067 with SMTP id
+ ca18e2360f4ac-7f3a7532d73mr241284139f.9.1719165320461; 
+ Sun, 23 Jun 2024 10:55:20 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  ca18e2360f4ac-7f391fc9b12sm134472239f.5.2024.06.23.10.55.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:55:19 -0700 (PDT)
+ Sun, 23 Jun 2024 10:55:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lukas Funke <lukas.funke@weidmueller.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 01/14] binman: efi: Correct entry docs
-Date: Sun, 23 Jun 2024 11:55:02 -0600
-Message-Id: <20240623175515.1466908-2-sjg@chromium.org>
+Subject: [PATCH v2 02/14] binman: Regenerate nxp docs
+Date: Sun, 23 Jun 2024 11:55:03 -0600
+Message-Id: <20240623175515.1466908-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623175515.1466908-1-sjg@chromium.org>
 References: <20240623175515.1466908-1-sjg@chromium.org>
@@ -96,240 +95,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Somehow the class documentation has got out of sync with the generated
-entries.rst file. Regenerating it causes errors, so correct these and
-regenerate the entries.rst file.
+Regenerate the entries.rst file to include this recent addition.
+
+Note that more docs are needed here, to actually describe the entry
+type.
+
+Note also that the entry type needs Binman tests added.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 809f28e7213 ("binman: capsule: Use dumped capsule header...")
 ---
 
 (no changes since v1)
 
- tools/binman/entries.rst                | 58 ++++++++++++-------------
- tools/binman/etype/efi_capsule.py       | 40 ++++++++---------
- tools/binman/etype/efi_empty_capsule.py | 22 +++++-----
- 3 files changed, 61 insertions(+), 59 deletions(-)
+ tools/binman/entries.rst | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
 diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index 254afe76074..dc42a9cb97d 100644
+index dc42a9cb97d..1b9b868e33f 100644
 --- a/tools/binman/entries.rst
 +++ b/tools/binman/entries.rst
-@@ -470,11 +470,11 @@ updating the EC on startup via software sync.
+@@ -1521,6 +1521,28 @@ byte.
  
- .. _etype_efi_capsule:
  
--Entry: capsule: Entry for generating EFI Capsule files
--------------------------------------------------------
-+Entry: efi-capsule: Generate EFI capsules
-+-----------------------------------------
  
--The parameters needed for generation of the capsules can be provided
--as properties in the entry.
-+The parameters needed for generation of the capsules can
-+be provided as properties in the entry.
++.. _etype_nxp_imx8mcst:
++
++Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
++-----------------------------------------------------------------------
++
++Properties / Entry arguments:
++    - nxp,loader-address - loader address (SPL text base)
++
++
++
++.. _etype_nxp_imx8mimage:
++
++Entry: nxp-imx8mimage: NXP i.MX8M imx8mimage .cfg file generator and mkimage invoker
++------------------------------------------------------------------------------------
++
++Properties / Entry arguments:
++    - nxp,boot-from - device to boot from (e.g. 'sd')
++    - nxp,loader-address - loader address (SPL text base)
++    - nxp,rom-version - BootROM version ('2' for i.MX8M Nano and Plus)
++
++
++
+ .. _etype_opensbi:
  
- Properties / Entry arguments:
-     - image-index: Unique number for identifying corresponding
-@@ -495,9 +495,9 @@ Properties / Entry arguments:
-       file. Mandatory property for generating signed capsules.
-     - oem-flags - OEM flags to be passed through capsule header.
- 
--    Since this is a subclass of Entry_section, all properties of the parent
--    class also apply here. Except for the properties stated as mandatory, the
--    rest of the properties are optional.
-+Since this is a subclass of Entry_section, all properties of the parent
-+class also apply here. Except for the properties stated as mandatory, the
-+rest of the properties are optional.
- 
- For more details on the description of the capsule format, and the capsule
- update functionality, refer Section 8.5 and Chapter 23 in the `UEFI
-@@ -510,17 +510,17 @@ provided as a subnode of the capsule entry.
- A typical capsule entry node would then look something like this::
- 
-     capsule {
--            type = "efi-capsule";
--            image-index = <0x1>;
--            /* Image GUID for testing capsule update */
--            image-guid = SANDBOX_UBOOT_IMAGE_GUID;
--            hardware-instance = <0x0>;
--            private-key = "path/to/the/private/key";
--            public-key-cert = "path/to/the/public-key-cert";
--            oem-flags = <0x8000>;
-+        type = "efi-capsule";
-+        image-index = <0x1>;
-+        /* Image GUID for testing capsule update */
-+        image-guid = SANDBOX_UBOOT_IMAGE_GUID;
-+        hardware-instance = <0x0>;
-+        private-key = "path/to/the/private/key";
-+        public-key-cert = "path/to/the/public-key-cert";
-+        oem-flags = <0x8000>;
- 
--            u-boot {
--            };
-+        u-boot {
-+        };
-     };
- 
- In the above example, the capsule payload is the U-Boot image. The
-@@ -534,8 +534,8 @@ payload using the blob-ext subnode.
- 
- .. _etype_efi_empty_capsule:
- 
--Entry: efi-empty-capsule: Entry for generating EFI Empty Capsule files
------------------------------------------------------------------------
-+Entry: efi-empty-capsule: Generate EFI empty capsules
-+-----------------------------------------------------
- 
- The parameters needed for generation of the empty capsules can
- be provided as properties in the entry.
-@@ -551,22 +551,22 @@ update functionality, refer Section 8.5 and Chapter 23 in the `UEFI
- specification`_. For more information on the empty capsule, refer the
- sections 2.3.2 and 2.3.3 in the `Dependable Boot specification`_.
- 
--A typical accept empty capsule entry node would then look something
--like this::
-+A typical accept empty capsule entry node would then look something like
-+this::
- 
-     empty-capsule {
--            type = "efi-empty-capsule";
--            /* GUID of the image being accepted */
--            image-type-id = SANDBOX_UBOOT_IMAGE_GUID;
--            capsule-type = "accept";
-+        type = "efi-empty-capsule";
-+        /* GUID of image being accepted */
-+        image-type-id = SANDBOX_UBOOT_IMAGE_GUID;
-+        capsule-type = "accept";
-     };
- 
--A typical revert empty capsule entry node would then look something
--like this::
-+A typical revert empty capsule entry node would then look something like
-+this::
- 
-     empty-capsule {
--            type = "efi-empty-capsule";
--            capsule-type = "revert";
-+        type = "efi-empty-capsule";
-+        capsule-type = "revert";
-     };
- 
- The empty capsules do not have any input payload image.
-diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
-index e3203717822..751f654bf31 100644
---- a/tools/binman/etype/efi_capsule.py
-+++ b/tools/binman/etype/efi_capsule.py
-@@ -36,23 +36,23 @@ class Entry_efi_capsule(Entry_section):
-     be provided as properties in the entry.
- 
-     Properties / Entry arguments:
--    - image-index: Unique number for identifying corresponding
--      payload image. Number between 1 and descriptor count, i.e.
--      the total number of firmware images that can be updated. Mandatory
--      property.
--    - image-guid: Image GUID which will be used for identifying the
--      updatable image on the board. Mandatory property.
--    - hardware-instance: Optional number for identifying unique
--      hardware instance of a device in the system. Default value of 0
--      for images where value is not to be used.
--    - fw-version: Value of image version that can be put on the capsule
--      through the Firmware Management Protocol(FMP) header.
--    - monotonic-count: Count used when signing an image.
--    - private-key: Path to PEM formatted .key private key file. Mandatory
--      property for generating signed capsules.
--    - public-key-cert: Path to PEM formatted .crt public key certificate
--      file. Mandatory property for generating signed capsules.
--    - oem-flags - OEM flags to be passed through capsule header.
-+        - image-index: Unique number for identifying corresponding
-+          payload image. Number between 1 and descriptor count, i.e.
-+          the total number of firmware images that can be updated. Mandatory
-+          property.
-+        - image-guid: Image GUID which will be used for identifying the
-+          updatable image on the board. Mandatory property.
-+        - hardware-instance: Optional number for identifying unique
-+          hardware instance of a device in the system. Default value of 0
-+          for images where value is not to be used.
-+        - fw-version: Value of image version that can be put on the capsule
-+          through the Firmware Management Protocol(FMP) header.
-+        - monotonic-count: Count used when signing an image.
-+        - private-key: Path to PEM formatted .key private key file. Mandatory
-+          property for generating signed capsules.
-+        - public-key-cert: Path to PEM formatted .crt public key certificate
-+          file. Mandatory property for generating signed capsules.
-+        - oem-flags - OEM flags to be passed through capsule header.
- 
-     Since this is a subclass of Entry_section, all properties of the parent
-     class also apply here. Except for the properties stated as mandatory, the
-@@ -66,9 +66,9 @@ class Entry_efi_capsule(Entry_section):
-     properties in the entry. The payload to be used in the capsule is to be
-     provided as a subnode of the capsule entry.
- 
--    A typical capsule entry node would then look something like this
-+    A typical capsule entry node would then look something like this::
- 
--    capsule {
-+        capsule {
-             type = "efi-capsule";
-             image-index = <0x1>;
-             /* Image GUID for testing capsule update */
-@@ -80,7 +80,7 @@ class Entry_efi_capsule(Entry_section):
- 
-             u-boot {
-             };
--    };
-+        };
- 
-     In the above example, the capsule payload is the U-Boot image. The
-     capsule entry would read the contents of the payload and put them
-diff --git a/tools/binman/etype/efi_empty_capsule.py b/tools/binman/etype/efi_empty_capsule.py
-index 064bf9a77f0..1d99fbfb3bb 100644
---- a/tools/binman/etype/efi_empty_capsule.py
-+++ b/tools/binman/etype/efi_empty_capsule.py
-@@ -19,31 +19,33 @@ class Entry_efi_empty_capsule(Entry_section):
-     be provided as properties in the entry.
- 
-     Properties / Entry arguments:
--    - image-guid: Image GUID which will be used for identifying the
--      updatable image on the board. Mandatory for accept capsule.
--    - capsule-type - String to indicate type of capsule to generate. Valid
--      values are 'accept' and 'revert'.
-+        - image-guid: Image GUID which will be used for identifying the
-+          updatable image on the board. Mandatory for accept capsule.
-+        - capsule-type - String to indicate type of capsule to generate. Valid
-+          values are 'accept' and 'revert'.
- 
-     For more details on the description of the capsule format, and the capsule
-     update functionality, refer Section 8.5 and Chapter 23 in the `UEFI
-     specification`_. For more information on the empty capsule, refer the
-     sections 2.3.2 and 2.3.3 in the `Dependable Boot specification`_.
- 
--    A typical accept empty capsule entry node would then look something like this
-+    A typical accept empty capsule entry node would then look something like
-+    this::
- 
--    empty-capsule {
-+        empty-capsule {
-             type = "efi-empty-capsule";
-             /* GUID of image being accepted */
-             image-type-id = SANDBOX_UBOOT_IMAGE_GUID;
-             capsule-type = "accept";
--    };
-+        };
- 
--    A typical revert empty capsule entry node would then look something like this
-+    A typical revert empty capsule entry node would then look something like
-+    this::
- 
--    empty-capsule {
-+        empty-capsule {
-             type = "efi-empty-capsule";
-             capsule-type = "revert";
--    };
-+        };
- 
-     The empty capsules do not have any input payload image.
- 
+ Entry: opensbi: RISC-V OpenSBI fw_dynamic blob
 -- 
 2.34.1
 
