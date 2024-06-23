@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF485C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 13:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38770C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42DF980245;
-	Sun, 23 Jun 2024 15:54:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 51A3B88258;
+	Sun, 23 Jun 2024 19:40:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qFcdBjOZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TGn/r58a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C736A88327; Sun, 23 Jun 2024 15:54:26 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 749DC88271; Sun, 23 Jun 2024 19:40:38 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 133F787D07
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 15:54:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4378587702
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:40:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=660c=N2=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1719150854;
- bh=G94xrzGVAwhoS9OCwJzPnqdPNKjW85+otW4hqK5atSc=;
- b=qFcdBjOZ+3tEnSWnhzg7X3fEy8iCjTQDIHZHflFUMNEp7Hxe9fF5fDfOJRiahGPVDMz9SPyxy
- 8Z7Bw/kwY2IYBpWFjKeC9SgKxyoAAkXGVR0Ahu5JdcV9Pigpj/j11DBhqPDdFPRZInjYx5i/Fhl
- uD1O/RkJYTn27dWYihlh6Z1UtOwpBepAjTuU0Y/2PlELYUNcN3ChBeCK322srfEDJ+0zWJpOgsl
- 4h7EhwxhKyUh8Iv9FosTgu+FPgfFXhsJ2o5JOLFvbNgvo0fwIBtU8aiKbA0sUUXF4ikFLu2VTz+
- q44eBvhzkbfTpnso35cYXNMoPxqJQk5dnamUNLi5tZbg==
-Message-ID: <d47493c4-f841-448f-b931-947ed362dd31@kwiboo.se>
-Date: Sun, 23 Jun 2024 15:54:09 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5b9794dad09so1700635eaf.3
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:40:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1719164435; x=1719769235; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8InBjfnxc5wqh+h8OZBtf+EvRzipSbRBw0bwBqkAbUw=;
+ b=TGn/r58asDUvwRSqvx7i3dSTFmSIFn1cXx10iB52bTixWTS65vbOSJTehJj8j6N1pE
+ 6L2F22760MN6SdD7aDKr594voAlIVv/vG/5pwPSuhtXrqNGdlNT1d3nnOTVRP08upT6W
+ XSjffj8sFOuij1Q6mcAmanC2T/M7Mgger0TSA3fBuSAQlFJX8/ofjDkjvhjgK+RXvLRZ
+ uTz9iW+Sh+ZPqZXLEP7rJZzN2YceM/SK5mEycT9SzueIT8cm09anlgi7Vhy2cRbAM8Ix
+ H1A5a6Qgw8lc8EvwQZGzpfQnuEuT9HqY7YxX4xBZ8xoOtLiqHfNqxsF+mx0cT2Z8x2rD
+ S2Yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719164435; x=1719769235;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8InBjfnxc5wqh+h8OZBtf+EvRzipSbRBw0bwBqkAbUw=;
+ b=KcfiNzMgFoDnamgUlO6bx1o5JkR7WmoYIyXb0BC6Jaa0WfyKHqG1wSiGkn3g/f+VfB
+ G6dzm9ZR+xbuX2XuTDUvXGoIkJIs7yA7rmUmGIK/1vya9NaTU0zvQN1P7TDlWMYk6J5C
+ HqtYNXO/lR7XajxJJECVWD1yGEcCXvfVdd12rfHMMfMVPnCsp45OB9XxeRKZiDi9Ij+e
+ Vc5oe5FrcOxItK50d2dU4tVHnmwZmY2s0T1hs7ZgUKhVMqToEKDMsST8r3rTTlyk2xpq
+ 4IpfgPYmm/UaY47bziR45JhTAZYg1r/77wMBgStQC2v+4BdCVOkAsvpstUcwfegB4tAt
+ nqjg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEr7o6Wea4TAnBgHGuST7+OBWBQkGtCXQm4s1evPXSGuDXROFBHWk+9VU/cH1ujMn/3Gy58bZ7jb4PlrJb9gd+WUG01Q==
+X-Gm-Message-State: AOJu0Yw5EkDI9Z+c24gGsr67r5Z/ZPv8G7vtHSZGj3qSzzzU3CyfpfZT
+ Eb4O1LpWpy/PBKNzntIj7FOU3OO3FMQHpinllL82aP74jUtKxnwZ
+X-Google-Smtp-Source: AGHT+IHTeXiWvAHBK0LXdhBElZN1gYBVv2RdLO4Q503RiyhIpRHxxVoqK3zMYUQJCXqpQ+PmGRC+GQ==
+X-Received: by 2002:a05:6358:3113:b0:1a2:59e:e887 with SMTP id
+ e5c5f4694b2df-1a2389a51c4mr445481255d.7.1719164434706; 
+ Sun, 23 Jun 2024 10:40:34 -0700 (PDT)
+Received: from localhost.localdomain ([113.30.217.222])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-716baf4c053sm4166016a12.78.2024.06.23.10.40.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 23 Jun 2024 10:40:34 -0700 (PDT)
+From: Anand Moon <linux.amoon@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Cc: Anand Moon <linux.amoon@gmail.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH] Fix Kconfig coding style from spaces to tab
+Date: Sun, 23 Jun 2024 23:10:21 +0530
+Message-ID: <20240623174021.15247-1-linux.amoon@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] rockchip: add support for Radxa ROCK Pi E v3.0 which uses
- DDR4 SDRAM
-To: FUKAUMI Naoki <naoki@radxa.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com
-References: <20240623041542.50137-1-naoki@radxa.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240623041542.50137-1-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 667829067b64d9fda5f9a681
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,235 +92,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-06-23 06:15, FUKAUMI Naoki wrote:
-> rk3328-rock-pi-e-v3.dts is identical to rk3328-rock-pi-e.dts in
-> upstream. only difference between v3.0 and prior ver. is, using
-> rk3328-sdram-ddr4-666.dtsi instead of rk3328-sdram-ddr3-666.dtsi.
-> 
-> here is console output from ROCK Pi E v3.0:
-> 
-> ```
-> U-Boot TPL 2024.07-rc4-dirty (Jun 23 2024 - 12:53:09)
-> DDR4, 333MHz
-> BW=32 Col=10 Bk=4 BG=2 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
-> Trying to boot from BOOTROM
-> Returning to boot ROM...
-> 
-> U-Boot SPL 2024.07-rc4-dirty (Jun 23 2024 - 12:53:09 +0900)
-> Trying to boot from MMC2
-> ```
-> 
-> there is an another way which can share same u-boot-rockchip.bin
-> between v3 and prior, using ddr blob from Rockchip instead of TPL in
-> U-Boot. is it acceptable?
+Adjust indentation from spaces to tab (+optional two spaces) as in
+coding style with command like:
+	$ sed -e 's/^        /\t/' -i */Kconfig
 
-Maybe it is time to add a small config fragment, rockchip_tpl.config,
-that enable use of external TPL.
+Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+---
+ boot/Kconfig |  8 ++++----
+ cmd/Kconfig  | 20 ++++++++++----------
+ disk/Kconfig |  2 +-
+ lib/Kconfig  |  2 +-
+ net/Kconfig  |  4 ++--
+ 5 files changed, 18 insertions(+), 18 deletions(-)
 
-e.g. building with:
-
-  make rock-pi-e-rk3328_defconfig rockchip_tpl.config
-
-would expect external TPL and include the external TPL in resulting
-u-boot-rockchip.bin.
-
-> 
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
->  arch/arm/dts/rk3328-rock-pi-e-v3-u-boot.dtsi |   43 +
->  arch/arm/dts/rk3328-rock-pi-e-v3.dts         |  445 ++++
->  arch/arm/dts/rk3328.dtsi                     | 1943 ++++++++++++++++++
->  configs/rock-pi-e-v3-rk3328_defconfig        |   97 +
->  4 files changed, 2528 insertions(+)
->  create mode 100644 arch/arm/dts/rk3328-rock-pi-e-v3-u-boot.dtsi
->  create mode 100644 arch/arm/dts/rk3328-rock-pi-e-v3.dts
->  create mode 100644 arch/arm/dts/rk3328.dtsi
->  create mode 100644 configs/rock-pi-e-v3-rk3328_defconfig
-> 
-> diff --git a/arch/arm/dts/rk3328-rock-pi-e-v3-u-boot.dtsi b/arch/arm/dts/rk3328-rock-pi-e-v3-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..d7b22b01d7
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3328-rock-pi-e-v3-u-boot.dtsi
-> @@ -0,0 +1,43 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2020 Radxa
-> + */
-> +
-> +#include "rk3328-u-boot.dtsi"
-> +#include "rk3328-sdram-ddr4-666.dtsi"
-> +
-> +/ {
-> +	smbios {
-> +		compatible = "u-boot,sysinfo-smbios";
-> +
-> +		smbios {
-> +			system {
-> +				manufacturer = "radxa";
-> +				product = "rock-pi-e_rk3328";
-> +			};
-> +
-> +			baseboard {
-> +				manufacturer = "radxa";
-> +				product = "rock-pi-e_rk3328";
-> +			};
-> +
-> +			chassis {
-> +				manufacturer = "radxa";
-> +				product = "rock-pi-e_rk3328";
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&u2phy_host {
-> +	phy-supply = <&vcc_host_5v>;
-> +};
-> +
-> +&vcc_host_5v {
-> +	/delete-property/ regulator-always-on;
-> +	/delete-property/ regulator-boot-on;
-> +};
-> +
-> +&vcc_sd {
-> +	bootph-pre-ram;
-> +};
-> diff --git a/arch/arm/dts/rk3328-rock-pi-e-v3.dts b/arch/arm/dts/rk3328-rock-pi-e-v3.dts
-> new file mode 100644
-> index 0000000000..3cda6c627b
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3328-rock-pi-e-v3.dts
-> @@ -0,0 +1,445 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * (C) Copyright 2020 Chen-Yu Tsai <wens@csie.org>
-> + *
-> + * Based on ./rk3328-rock64.dts, which is
-> + *
-> + * Copyright (c) 2017 PINE64
-> + */
-> +
-> +/dts-v1/;
-> +
-
-Here you can just:
-
-  #include "rk3328-rock-pi-e.dts"
-
-and then you should be good.
-
-Please see nanopi-m4-2gb, it is same/similar situation, a diff board rev
-with other DRAM modules.
-
-A completely new DT should not be needed.
-
-Regards,
-Jonas
-
-[snip]
-
-> diff --git a/configs/rock-pi-e-v3-rk3328_defconfig b/configs/rock-pi-e-v3-rk3328_defconfig
-> new file mode 100644
-> index 0000000000..4c6cc634bd
-> --- /dev/null
-> +++ b/configs/rock-pi-e-v3-rk3328_defconfig
-> @@ -0,0 +1,97 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SPL_GPIO=y
-> +CONFIG_NR_DRAM_BANKS=1
-> +CONFIG_SF_DEFAULT_SPEED=20000000
-> +CONFIG_ENV_OFFSET=0x3F8000
-> +CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock-pi-e-v3"
-> +CONFIG_DM_RESET=y
-> +CONFIG_ROCKCHIP_RK3328=y
-> +CONFIG_DEBUG_UART_BASE=0xFF130000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0x800800
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_POWER=y
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_TIME=y
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_TPL_OF_CONTROL=y
-> +# CONFIG_OF_UPSTREAM is not set
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_TPL_OF_PLATDATA=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SYS_MMC_ENV_DEV=1
-> +CONFIG_TPL_DM=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_REGMAP=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_TPL_REGMAP=y
-> +CONFIG_SYSCON=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_TPL_SYSCON=y
-> +CONFIG_CLK=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_MDIO=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_PHY_GIGE=y
-> +CONFIG_ETH_DESIGNWARE=y
-> +CONFIG_GMAC_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_SPL_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> +CONFIG_SPL_DM_REGULATOR_FIXED=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_RAM=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_TPL_RAM=y
-> +CONFIG_DM_RNG=y
-> +CONFIG_RNG_ROCKCHIP=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSINFO=y
-> +CONFIG_SYSINFO_SMBIOS=y
-> +CONFIG_SYSRESET=y
-> +# CONFIG_TPL_SYSRESET is not set
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_SPL_TINY_MEMSET=y
-> +CONFIG_TPL_TINY_MEMSET=y
-> +CONFIG_ERRNO_STR=y
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 6f3096c15a..12148ac3f2 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -150,10 +150,10 @@ config FIT_IMAGE_POST_PROCESS
+ 	  processed before being added to the FIT image).
+ 
+ config FIT_PRINT
+-        bool "Support FIT printing"
+-        default y
+-        help
+-          Support printing the content of the fitImage in a verbose manner.
++	bool "Support FIT printing"
++	default y
++	help
++	  Support printing the content of the fitImage in a verbose manner.
+ 
+ config SPL_FIT
+ 	bool "Support Flattened Image Tree within SPL"
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b026439c77..011f4ad429 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -271,7 +271,7 @@ config CMD_BOOTM_PRE_LOAD
+        depends on CMD_BOOTM
+        depends on IMAGE_PRE_LOAD
+        help
+-         Enable support of stage pre-load for the bootm command.
++	 Enable support of stage pre-load for the bootm command.
+ 	 This stage allow to check or modify the image provided
+ 	 to the bootm command.
+ 
+@@ -897,9 +897,9 @@ config CMD_MX_CYCLIC
+ 	bool "Enable cyclic md/mw commands"
+ 	depends on CMD_MEMORY
+ 	help
+-          Add the "mdc" and "mwc" memory commands. These are cyclic
+-          "md/mw" commands.
+-          Examples:
++	  Add the "mdc" and "mwc" memory commands. These are cyclic
++	  "md/mw" commands.
++	  Examples:
+ 
+ 	  => mdc.b 10 4 500
+ 	  This command will print 4 bytes (10,11,12,13) each 500 ms.
+@@ -2150,12 +2150,12 @@ config CMD_BLKMAP
+ 
+ 	  Example use-cases:
+ 	  - Treat a region of RAM as a block device, i.e. a RAM disk. This let's
+-            you extract files from filesystem images stored in RAM (perhaps as a
+-            result of a TFTP transfer).
++	    you extract files from filesystem images stored in RAM (perhaps as a
++	    result of a TFTP transfer).
+ 	  - Create a virtual partition on an existing device. This let's you
+-            access filesystems that aren't stored at an exact partition
+-            boundary. A common example is a filesystem image embedded in an FIT
+-            image.
++	    access filesystems that aren't stored at an exact partition
++	    boundary. A common example is a filesystem image embedded in an FIT
++	    image.
+ 
+ config CMD_BUTTON
+ 	bool "button"
+@@ -2934,7 +2934,7 @@ config CMD_UBI_RENAME
+        bool "Enable rename"
+        depends on CMD_UBI
+        help
+-         Enable a "ubi" command to rename ubi volume:
++	 Enable a "ubi" command to rename ubi volume:
+ 	   ubi rename <oldname> <newname>
+ 
+ config CMD_UBIFS
+diff --git a/disk/Kconfig b/disk/Kconfig
+index 8549695807..ffa835eb35 100644
+--- a/disk/Kconfig
++++ b/disk/Kconfig
+@@ -116,7 +116,7 @@ config EFI_PARTITION_ENTRIES_NUMBERS
+ 	  number.
+ 
+ config EFI_PARTITION_ENTRIES_OFF
+-        int "Offset (in bytes) of the EFI partition entries"
++	int "Offset (in bytes) of the EFI partition entries"
+ 	depends on EFI_PARTITION
+ 	default 0
+ 	help
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 189e6eb31a..b8e4f516f9 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1143,7 +1143,7 @@ config PHANDLE_CHECK_SEQ
+ 	bool "Enable phandle check while getting sequence number"
+ 	help
+ 	  When there are multiple device tree nodes with same name,
+-          enable this config option to distinguish them using
++	  enable this config option to distinguish them using
+ 	  phandles in fdtdec_get_alias_seq() function.
+ 
+ endmenu
+diff --git a/net/Kconfig b/net/Kconfig
+index 5dff633629..7cb80b880a 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -42,8 +42,8 @@ config BOOTP_SEND_HOSTNAME
+ 	  DNS server. To do this, they need the hostname of the DHCP
+ 	  requester.
+ 	  If CONFIG_BOOTP_SEND_HOSTNAME is defined, the content
+-          of the "hostname" environment variable is passed as
+-          option 12 to the DHCP server.
++	  of the "hostname" environment variable is passed as
++	  option 12 to the DHCP server.
+ 
+ config NET_RANDOM_ETHADDR
+ 	bool "Random ethaddr if unset"
+-- 
+2.44.0
 
