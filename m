@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38770C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03277C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:53:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51A3B88258;
-	Sun, 23 Jun 2024 19:40:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 43C5D8823C;
+	Sun, 23 Jun 2024 19:53:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TGn/r58a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EVzHoMbb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 749DC88271; Sun, 23 Jun 2024 19:40:38 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 383688780E; Sun, 23 Jun 2024 19:53:18 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4378587702
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:40:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97E43882B8
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:53:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-5b9794dad09so1700635eaf.3
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:40:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-7eb85f63f4aso131823139f.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:53:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719164435; x=1719769235; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719165194; x=1719769994; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8InBjfnxc5wqh+h8OZBtf+EvRzipSbRBw0bwBqkAbUw=;
- b=TGn/r58asDUvwRSqvx7i3dSTFmSIFn1cXx10iB52bTixWTS65vbOSJTehJj8j6N1pE
- 6L2F22760MN6SdD7aDKr594voAlIVv/vG/5pwPSuhtXrqNGdlNT1d3nnOTVRP08upT6W
- XSjffj8sFOuij1Q6mcAmanC2T/M7Mgger0TSA3fBuSAQlFJX8/ofjDkjvhjgK+RXvLRZ
- uTz9iW+Sh+ZPqZXLEP7rJZzN2YceM/SK5mEycT9SzueIT8cm09anlgi7Vhy2cRbAM8Ix
- H1A5a6Qgw8lc8EvwQZGzpfQnuEuT9HqY7YxX4xBZ8xoOtLiqHfNqxsF+mx0cT2Z8x2rD
- S2Yw==
+ bh=928FsnmMkx8sdJtqLT45Z8v0wD0wnuBzZBEeTuqoHto=;
+ b=EVzHoMbbQkz9wuMGVD77HIJaWcHGBi3gjNPrXMjjXRI8HVO5wSx+5+MgdrvLuk9UJW
+ NwdgwXpemHVVgC/rj0jACLKEhazKIJHASpVoPY7hMfuqEOrEj0OVRLDjoM4mlWRjwjEP
+ TbA9hJr9dheEqOSYoVC6N2ucCULVGMh0vJDY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719164435; x=1719769235;
+ d=1e100.net; s=20230601; t=1719165194; x=1719769994;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8InBjfnxc5wqh+h8OZBtf+EvRzipSbRBw0bwBqkAbUw=;
- b=KcfiNzMgFoDnamgUlO6bx1o5JkR7WmoYIyXb0BC6Jaa0WfyKHqG1wSiGkn3g/f+VfB
- G6dzm9ZR+xbuX2XuTDUvXGoIkJIs7yA7rmUmGIK/1vya9NaTU0zvQN1P7TDlWMYk6J5C
- HqtYNXO/lR7XajxJJECVWD1yGEcCXvfVdd12rfHMMfMVPnCsp45OB9XxeRKZiDi9Ij+e
- Vc5oe5FrcOxItK50d2dU4tVHnmwZmY2s0T1hs7ZgUKhVMqToEKDMsST8r3rTTlyk2xpq
- 4IpfgPYmm/UaY47bziR45JhTAZYg1r/77wMBgStQC2v+4BdCVOkAsvpstUcwfegB4tAt
- nqjg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEr7o6Wea4TAnBgHGuST7+OBWBQkGtCXQm4s1evPXSGuDXROFBHWk+9VU/cH1ujMn/3Gy58bZ7jb4PlrJb9gd+WUG01Q==
-X-Gm-Message-State: AOJu0Yw5EkDI9Z+c24gGsr67r5Z/ZPv8G7vtHSZGj3qSzzzU3CyfpfZT
- Eb4O1LpWpy/PBKNzntIj7FOU3OO3FMQHpinllL82aP74jUtKxnwZ
-X-Google-Smtp-Source: AGHT+IHTeXiWvAHBK0LXdhBElZN1gYBVv2RdLO4Q503RiyhIpRHxxVoqK3zMYUQJCXqpQ+PmGRC+GQ==
-X-Received: by 2002:a05:6358:3113:b0:1a2:59e:e887 with SMTP id
- e5c5f4694b2df-1a2389a51c4mr445481255d.7.1719164434706; 
- Sun, 23 Jun 2024 10:40:34 -0700 (PDT)
-Received: from localhost.localdomain ([113.30.217.222])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-716baf4c053sm4166016a12.78.2024.06.23.10.40.32
+ bh=928FsnmMkx8sdJtqLT45Z8v0wD0wnuBzZBEeTuqoHto=;
+ b=QL9o3NcB4hQ3IFcDPl/NhFGysKn5EAchu144L1Yg1f1pGjneQWzxIkN0AaJlhPXdE+
+ XQbfl9Z2erb3HDaOa1qwHe5pF37yanHsMjXyvv5itFar06incynqBhJgWcnuZ+eoEuvc
+ 7q0SA+RgTigROU85Hd4tuCP675SomtA0jXK99cgMh9qaQB3+OyxCuLszHiApsin6/NS7
+ OLBcJE1rkHjZDoSynVOU2plXwEZByqPF1ec/zu10dmibvV9F6gADLs8zyTDp5UTwfhA/
+ 63CMYRM7aGMNHucpc8ZXOQ+qbmTfnQXdl09zhPX5QrxG+szJLCCiZH6F2zm5yMIHQjyi
+ BWDA==
+X-Gm-Message-State: AOJu0Yz/nj3fbOa32MxymK1fjUHKyNH2e1sI9OLjx/JC3vSaORt9PgCC
+ kB8oXYigsRHgnwMWEWRINBKmhA3/YkqE0p84INtlmIviqfklGTuw8BA+6srmgX23aX4pImM5AAw
+ CHA==
+X-Google-Smtp-Source: AGHT+IGFt/Lcx2d32PaxPdGNz1rThlfaWv5W2VdsiZTqTPT45oIr9KSGHCLQ/mwCWwRLnNLsaqjvQQ==
+X-Received: by 2002:a05:6e02:1187:b0:376:3ece:dc5 with SMTP id
+ e9e14a558f8ab-3763ece0e25mr11591775ab.4.1719165193866; 
+ Sun, 23 Jun 2024 10:53:13 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4b9d113ff85sm1636834173.81.2024.06.23.10.53.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:40:34 -0700 (PDT)
-From: Anand Moon <linux.amoon@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Cc: Anand Moon <linux.amoon@gmail.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] Fix Kconfig coding style from spaces to tab
-Date: Sun, 23 Jun 2024 23:10:21 +0530
-Message-ID: <20240623174021.15247-1-linux.amoon@gmail.com>
-X-Mailer: git-send-email 2.44.0
+ Sun, 23 Jun 2024 10:53:13 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jerry Van Baren <vanbaren@cideas.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <l.majewski@samsung.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ huang lin <hl@rock-chips.com>
+Subject: [PATCH v4 00/16] Bug-fixes for a few boards
+Date: Sun, 23 Jun 2024 11:52:46 -0600
+Message-Id: <20240623175302.1463973-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,132 +95,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust indentation from spaces to tab (+optional two spaces) as in
-coding style with command like:
-	$ sed -e 's/^        /\t/' -i */Kconfig
+This series includes fixes to get some rockchip and nvidia boards
+working again. It also drops the broken Beaglebone Black config and
+provides a devicetree fix for coral (x86).
 
-Signed-off-by: Anand Moon <linux.amoon@gmail.com>
----
- boot/Kconfig |  8 ++++----
- cmd/Kconfig  | 20 ++++++++++----------
- disk/Kconfig |  2 +-
- lib/Kconfig  |  2 +-
- net/Kconfig  |  4 ++--
- 5 files changed, 18 insertions(+), 18 deletions(-)
+Note that since this series fixes bugs, it is targeted at -master
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 6f3096c15a..12148ac3f2 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -150,10 +150,10 @@ config FIT_IMAGE_POST_PROCESS
- 	  processed before being added to the FIT image).
- 
- config FIT_PRINT
--        bool "Support FIT printing"
--        default y
--        help
--          Support printing the content of the fitImage in a verbose manner.
-+	bool "Support FIT printing"
-+	default y
-+	help
-+	  Support printing the content of the fitImage in a verbose manner.
- 
- config SPL_FIT
- 	bool "Support Flattened Image Tree within SPL"
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b026439c77..011f4ad429 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -271,7 +271,7 @@ config CMD_BOOTM_PRE_LOAD
-        depends on CMD_BOOTM
-        depends on IMAGE_PRE_LOAD
-        help
--         Enable support of stage pre-load for the bootm command.
-+	 Enable support of stage pre-load for the bootm command.
- 	 This stage allow to check or modify the image provided
- 	 to the bootm command.
- 
-@@ -897,9 +897,9 @@ config CMD_MX_CYCLIC
- 	bool "Enable cyclic md/mw commands"
- 	depends on CMD_MEMORY
- 	help
--          Add the "mdc" and "mwc" memory commands. These are cyclic
--          "md/mw" commands.
--          Examples:
-+	  Add the "mdc" and "mwc" memory commands. These are cyclic
-+	  "md/mw" commands.
-+	  Examples:
- 
- 	  => mdc.b 10 4 500
- 	  This command will print 4 bytes (10,11,12,13) each 500 ms.
-@@ -2150,12 +2150,12 @@ config CMD_BLKMAP
- 
- 	  Example use-cases:
- 	  - Treat a region of RAM as a block device, i.e. a RAM disk. This let's
--            you extract files from filesystem images stored in RAM (perhaps as a
--            result of a TFTP transfer).
-+	    you extract files from filesystem images stored in RAM (perhaps as a
-+	    result of a TFTP transfer).
- 	  - Create a virtual partition on an existing device. This let's you
--            access filesystems that aren't stored at an exact partition
--            boundary. A common example is a filesystem image embedded in an FIT
--            image.
-+	    access filesystems that aren't stored at an exact partition
-+	    boundary. A common example is a filesystem image embedded in an FIT
-+	    image.
- 
- config CMD_BUTTON
- 	bool "button"
-@@ -2934,7 +2934,7 @@ config CMD_UBI_RENAME
-        bool "Enable rename"
-        depends on CMD_UBI
-        help
--         Enable a "ubi" command to rename ubi volume:
-+	 Enable a "ubi" command to rename ubi volume:
- 	   ubi rename <oldname> <newname>
- 
- config CMD_UBIFS
-diff --git a/disk/Kconfig b/disk/Kconfig
-index 8549695807..ffa835eb35 100644
---- a/disk/Kconfig
-+++ b/disk/Kconfig
-@@ -116,7 +116,7 @@ config EFI_PARTITION_ENTRIES_NUMBERS
- 	  number.
- 
- config EFI_PARTITION_ENTRIES_OFF
--        int "Offset (in bytes) of the EFI partition entries"
-+	int "Offset (in bytes) of the EFI partition entries"
- 	depends on EFI_PARTITION
- 	default 0
- 	help
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 189e6eb31a..b8e4f516f9 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1143,7 +1143,7 @@ config PHANDLE_CHECK_SEQ
- 	bool "Enable phandle check while getting sequence number"
- 	help
- 	  When there are multiple device tree nodes with same name,
--          enable this config option to distinguish them using
-+	  enable this config option to distinguish them using
- 	  phandles in fdtdec_get_alias_seq() function.
- 
- endmenu
-diff --git a/net/Kconfig b/net/Kconfig
-index 5dff633629..7cb80b880a 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -42,8 +42,8 @@ config BOOTP_SEND_HOSTNAME
- 	  DNS server. To do this, they need the hostname of the DHCP
- 	  requester.
- 	  If CONFIG_BOOTP_SEND_HOSTNAME is defined, the content
--          of the "hostname" environment variable is passed as
--          option 12 to the DHCP server.
-+	  of the "hostname" environment variable is passed as
-+	  option 12 to the DHCP server.
- 
- config NET_RANDOM_ETHADDR
- 	bool "Random ethaddr if unset"
+Changes in v4:
+- Drop Fixes tag
+- Add new patch to set a board-size limit for chromebook_link
+- Drop the non-dcache optimisation, since the cache should normally be on
+- Move Binman size feature to a separate series
+
+Changes in v3:
+- Use BLOBLIST instead of OF_BLOBLIST
+- Cut the patch down to bare bones
+- Split out the refactoring into a separate patch
+
+Changes in v2:
+- Put the conditions under EFI_TCG2_PROTOCOL
+- Consider MEASURED_BOOT too
+- Remove the superfluous if() and drop the debug() as well
+- Use 'phase' instead of 'stage'
+- Add new patch to correct memory size in SPL
+- Drop patch "regulator: rk8xx: Fix incorrect parameter"
+- Rewrite boneblack patch to onstead drop the target and update docs
+
+Simon Glass (16):
+  mkeficapsule: Add a --version argument
+  binman: Collect the version number for mkeficapsule
+  binman: Deal with mkeficapsule being missing
+  binman: Return failure when a usage() message is generated
+  binman: Keep the efi_capsule input file
+  nvidia: nyan-big: Disable debug UART
+  tpm: Avoid code bloat when not using EFI_TCG2_PROTOCOL
+  x86: Set a board-size limit for chromebook_link
+  rockchip: veyron: Add logging for power init
+  power: regulator: Handle autoset in regulators_enable_boot_on()
+  fdt: Correct condition for bloblist existing
+  spl: Allow ATF to work when dcache is disabled
+  rockchip: Ensure memory size is available in RK3399 SPL
+  rockchip: Avoid #ifdefs in RK3399 SPL
+  rockchip: bob: kevin: Disable dcache in SPL
+  Drop the special am335x_boneblack_vboot target
+
+ board/google/veyron/veyron.c               | 30 +++----
+ board/ti/am335x/MAINTAINERS                |  1 -
+ boot/Kconfig                               |  4 +
+ common/spl/spl_atf.c                       |  3 +-
+ configs/am335x_boneblack_vboot_defconfig   | 94 ----------------------
+ configs/am335x_evm_defconfig               |  3 +-
+ configs/chromebook_bob_defconfig           |  1 +
+ configs/chromebook_kevin_defconfig         |  1 +
+ configs/chromebook_link_defconfig          |  2 +
+ configs/nyan-big_defconfig                 |  1 -
+ doc/mkeficapsule.1                         |  4 +
+ doc/usage/fit/beaglebone_vboot.rst         | 21 +++--
+ drivers/power/regulator/regulator-uclass.c |  2 +-
+ drivers/ram/rockchip/sdram_rk3399.c        | 44 +++++-----
+ lib/Kconfig                                |  4 -
+ lib/fdtdec.c                               | 12 ++-
+ tools/binman/btool/mkeficapsule.py         |  3 +-
+ tools/binman/etype/efi_capsule.py          |  5 +-
+ tools/mkeficapsule.c                       | 10 ++-
+ 19 files changed, 86 insertions(+), 159 deletions(-)
+ delete mode 100644 configs/am335x_boneblack_vboot_defconfig
+
 -- 
-2.44.0
+2.34.1
 
