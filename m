@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620C0C2BA18
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 860C6C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DF2788473;
-	Sun, 23 Jun 2024 19:53:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72EA388477;
+	Sun, 23 Jun 2024 19:53:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="El1of7+1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ndD2mMf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E632882B7; Sun, 23 Jun 2024 19:53:24 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 738D38851C; Sun, 23 Jun 2024 19:53:26 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A7918780E
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:53:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4262088387
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-7ea0b5e0977so149941939f.2
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:53:22 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-7eb85e80661so136407539f.1
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:53:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719165201; x=1719770001; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719165202; x=1719770002; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9w+sUR2AVGoO5kGbs1GbQb9CzRrIlLYGbu0jwVoLkS8=;
- b=El1of7+1GsWg1jjtPx1inwgRm4pNY3unnqpAyWoBcFRFo4fdBB+zTkNvutXoDwqzw5
- 6Zqmo2eR8jmglqPXHp4mPLXddzAwnC7zlIMiPc9qYGK8IkeMlxg1ogA9/PnZ8dIoHfQH
- QaWDr/E8YMn7qaxj3PjzfB9xYSgyWqhcB/c50=
+ bh=I7f7BP+opKLFa9/ciieR5UyH6P8YpaRYZrb5EZwJ4oQ=;
+ b=ndD2mMf9SgUuFzbVj/9YHyJLXFuQxBy7/Z7rlahCnQgk2msyusN/3AeIXUxDbSETNk
+ Z1TR/NZl52rI3YlzCejx4J6lr+L8eD5ZgUKGtt6JiMW055EQmdhaLsjHr4uPrfjwn2/b
+ 34izkUNo06cqCzr28sHY2M/WgExI+QoPESHCc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719165201; x=1719770001;
+ d=1e100.net; s=20230601; t=1719165202; x=1719770002;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9w+sUR2AVGoO5kGbs1GbQb9CzRrIlLYGbu0jwVoLkS8=;
- b=slkLhsFSdhIup0Km2SrodWm8soriECL4paHIuVO78Ofq+0Vl8je5qTiS++Pxr11ThS
- 7qiykv93SJJ8FdFUbT/aDfAFmvMUNeAS7JBgPU0bZxvOKgEoJPERK/Bt/Br2FhdbYYtB
- bx4fgYURGiwdAelFiUJ1rwDb2zMOMVf4kzpVHmSXuyN/VZDO14sUia2DQTfOU677q50p
- KPT/np1zLO+sDRb4H7vM9aZ77zjqwOovoRNBI1Q45PfPoTSq9VXsM/oJg4EsGjxqCsGo
- EIo572HWtROhoTVEPIuY0TbYEfRHKvUBewNll50f7qqbuCOAAsQ4aCZa5sC89SQy+vF8
- TzOg==
-X-Gm-Message-State: AOJu0YwZ6VC7oAKyTLrRBeOEf0+vdV7GcmM2B4RL+N1v4eYDK7HeorB5
- YLLFKMtMd2hXJbJufV6HpG3mIH1cgP/U7CreRpXn/WtQfVsm0pSyviFrVXgrx/CWVekLWKMy8qG
- MJg==
-X-Google-Smtp-Source: AGHT+IHmNU7TSc8hWIiRJShrZNSHNFtuPHqUOuVhhPAzhgUpw4qQeXgQHn8l6saHsbRrpKwYCsyDNw==
-X-Received: by 2002:a05:6e02:20cf:b0:376:3fc4:1180 with SMTP id
- e9e14a558f8ab-3763fc4128dmr34816075ab.17.1719165200990; 
- Sun, 23 Jun 2024 10:53:20 -0700 (PDT)
+ bh=I7f7BP+opKLFa9/ciieR5UyH6P8YpaRYZrb5EZwJ4oQ=;
+ b=tXBdXwl1CgSz5zHkYQJgnBc4i5W2UEpWFdSAskL0KamZenuJLJuAYY3GhhSGzHCuMI
+ XEBMMi3SdAoXzb3n8+JsmpU73JBkr5pR9V/voPYFJ23gmGpfc5xaT8GXijtAmbfX4cbN
+ YMqmzEMvQmzX6Gy7fAKbs7bEXZ9FxU2mSQ+DgmuGo5n9sZwGSY4+SrgMffxLffflox0b
+ uT06AoRp5hPLH5FlY1zNwfJU0HcWUhVlTIV97fQVGOye3QhTniXlLqw8mFaYG7JElNfo
+ P1gyzg/9F+tUoupvAsHV1gGJVTep5wqrKFFFblqEqELssVwHOPIbIBNc71n9VGA9baUL
+ EKrA==
+X-Gm-Message-State: AOJu0YxW2s7YaO1BbDXWRORNrOOxTxTY9Wi3u4tNAbmi9w+yf2wpd/sH
+ phsp326HaHODklW5Dh9sMc2rwwSqCp/z9OzUNzFL4XRH1hpGP/Meh88cEWSW/kP6lluIsPsZnKl
+ PJg==
+X-Google-Smtp-Source: AGHT+IFse+2X0LzekOmaSZtzOIbQfGpyY2n/FbaePA5a3mPhxbyo83vnn3nEKonzQEgD+4sah2FXHQ==
+X-Received: by 2002:a05:6602:1681:b0:7eb:6d0a:613a with SMTP id
+ ca18e2360f4ac-7f3a74a9ddbmr300309339f.2.1719165201703; 
+ Sun, 23 Jun 2024 10:53:21 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4b9d113ff85sm1636834173.81.2024.06.23.10.53.20
+ 8926c6da1cb9f-4b9d113ff85sm1636834173.81.2024.06.23.10.53.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:53:20 -0700 (PDT)
+ Sun, 23 Jun 2024 10:53:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -68,9 +68,9 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH v4 02/16] binman: Collect the version number for mkeficapsule
-Date: Sun, 23 Jun 2024 11:52:48 -0600
-Message-Id: <20240623175302.1463973-3-sjg@chromium.org>
+Subject: [PATCH v4 03/16] binman: Deal with mkeficapsule being missing
+Date: Sun, 23 Jun 2024 11:52:49 -0600
+Message-Id: <20240623175302.1463973-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623175302.1463973-1-sjg@chromium.org>
 References: <20240623175302.1463973-1-sjg@chromium.org>
@@ -92,30 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that this tool has a version number, collect it.
+Tools cannot be assumed to be present. Add a check for this with the
+mkeficpasule tool.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: b617611b27a ("binman: capsule: Add support for generating...")
 ---
 
 (no changes since v1)
 
- tools/binman/btool/mkeficapsule.py | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ tools/binman/etype/efi_capsule.py | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkeficapsule.py
-index ef1da638df1..f7e5a886849 100644
---- a/tools/binman/btool/mkeficapsule.py
-+++ b/tools/binman/btool/mkeficapsule.py
-@@ -33,7 +33,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
-     commandline, or through a config file.
-     """
-     def __init__(self, name):
--        super().__init__(name, 'mkeficapsule tool for generating capsules')
-+        super().__init__(name, 'mkeficapsule tool for generating capsules',
-+                         r'mkeficapsule version (.*)')
+diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
+index e3203717822..47da5da324b 100644
+--- a/tools/binman/etype/efi_capsule.py
++++ b/tools/binman/etype/efi_capsule.py
+@@ -150,6 +150,10 @@ class Entry_efi_capsule(Entry_section):
+         if ret is not None:
+             os.remove(payload)
+             return tools.read_file(capsule_fname)
++        else:
++            # Bintool is missing; just use the input data as the output
++            self.record_missing_bintool(self.mkeficapsule)
++            return data
  
-     def generate_capsule(self, image_index, image_guid, hardware_instance,
-                          payload, output_fname, priv_key, pub_key,
+     def AddBintools(self, btools):
+         self.mkeficapsule = self.AddBintool(btools, 'mkeficapsule')
 -- 
 2.34.1
 
