@@ -4,73 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB577C2BA18
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 18:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25B79C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 18:44:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F018388630;
-	Sun, 23 Jun 2024 19:56:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3961A881BA;
+	Sun, 23 Jun 2024 20:44:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C6X1ufNe";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D158587D10; Sun, 23 Jun 2024 19:56:32 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1719168285;
+	bh=xFfq6IMls8R/GFy0awkeKfG3UUB4RaNR//ykkxGG2DY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=rVi2ZS7l7qJ2DUSwlA9agNBSGs/N4Mrnoy016UwFDQZ1js+3tkUyT7XFAwzyRjTFM
+	 6lJQw6xf3Yhrmq7OQNk7JsvYDK239xXDK/5cDEz5K4U61z2isRsWjtWjaRXjjQgc5/
+	 q3jaKfBjY08hIbDLQn2t1BY35/7WS9ALXRgafR71Gt0rYN/sBiZx4+ipSyaQNxK17L
+	 /thfRQU1RAKAHdnwBnSJedqHpUyrlUFboOmWFhsLebkIykRPwmPeCagu5tdQrBUi/H
+	 jih49736yvqBG/n9hnb8Uw3d3wewJnDNeu8v0PoabyevXN4m6GVswjb1uA4e7u3T9S
+	 Hch1O5+YFptLw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E034F88578
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:56:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-375af3538f2so15412935ab.3
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:56:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719165388; x=1719770188; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eIaUHtmxOCoDPB8Dr2EtcMBBfsP4hsti4aYZcgI3OQk=;
- b=C6X1ufNe64VenVJs9zwAM3qUMahVzigpAGtPEb25ylCn/T5o6aYo4S1J+eGAzsAuEm
- SmtW0NLVBFwaQ3KN5b4/TghbsJvsd4VFXj2FbLY1JlUCYG6aoKSVeXpMo52nrLTWSAa9
- 5l6BPs56Imt3aqTVDfKEj0Dfw8O1Dv9X6wP3k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719165388; x=1719770188;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eIaUHtmxOCoDPB8Dr2EtcMBBfsP4hsti4aYZcgI3OQk=;
- b=pOtqhKyWgjKWvzaufHtgGekKIYLoZQ0okyIpg7EgEhE6j9hnQ/ojj5jI9e+THJkLMf
- ncEHQmIZSOURO+4t5WbEqj02jMy6fEacqjSObpdVsUQfqAWmqshTNtuo9G0Rm/ByRWot
- ImwAkXkFtIU57xdqn6NTSxONN6fdrb40vKXA418aN1Rda3TBpiq+UJCzT4g8sDwtlwHP
- GypBLFNcMPdSxpkjarGUyBIsK5V8V1fBK1zxT0zYmF298IqNCYSkGysxpsVMJCVtCur+
- bhiacP12BZeG9zjEKemEE9EVgxIOVuXug7Ag/NogKhba9BbClKLCSoRDHDRuTm4olw3V
- YC6w==
-X-Gm-Message-State: AOJu0YxrhlLxrXUlhNGpbWcKENOgWDdyg7Q6QGgZZH3+ayW4ZEeUPtFm
- 9e5CUMjE6jSYZtPtXK8A259Z+JaRp9dwPf/hhXojNZ639yZSRKVfEU9WyeC18h3xgnEf7cjOwIi
- orw==
-X-Google-Smtp-Source: AGHT+IGe3H6LRMdJ65/o9U+tc6l3ZQDlMQytjXMf/bynrR1biga45AN5HUafJ9lEI6betldPVWq0BA==
-X-Received: by 2002:a05:6e02:180b:b0:374:9a34:9ee with SMTP id
- e9e14a558f8ab-3763f709301mr29017455ab.31.1719165388593; 
- Sun, 23 Jun 2024 10:56:28 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3762f2fb1bbsm13551465ab.12.2024.06.23.10.56.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:56:28 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 5/6] u_boot_pylib: Use correct coverage tool within venv
-Date: Sun, 23 Jun 2024 11:56:21 -0600
-Message-Id: <20240623175622.1468600-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240623175622.1468600-1-sjg@chromium.org>
-References: <20240623175622.1468600-1-sjg@chromium.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 297BF878E2;
+ Sun, 23 Jun 2024 20:44:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1719168284;
+ bh=xFfq6IMls8R/GFy0awkeKfG3UUB4RaNR//ykkxGG2DY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=zwhAbt7lu6Y38tMz+x+iqYfy66ETqld/02ynQxg3m8OF7JM80H3xfPYiACs6jwGMt
+ HudMaGL0jdnX/tZBAFqV47KhBl1KY4dc7KeYzXKNnOegDR7xWg1CTkOOB2DHY4+Xta
+ ZvvmYYKMwZ/fW977Z0urjYabEc0EeEACOfWSEMVOBqOrR6X+TDO+Ud0EP5JPHDrl7L
+ TQ+kIxsWwVKPznpYuoREHKHePJPm93AoDJyQwtTVz08q701Yyk8Qm7Bjv0V8mzo2PR
+ uJekzaQEm8gSS4edkFVVcm6AVpZMMqR8B5rT5rh6FO8OGTEXW43afYkrhqbIbu91Jg
+ xh7ieDIp4v6xA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Subject: [PATCH] ARM: imx: Enable SPL DTO application support for i.MX8MP
+ DHCOM PDK2
+Date: Sun, 23 Jun 2024 20:44:19 +0200
+Message-ID: <20240623184427.56551-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,46 +65,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When running within a Python venv we must use the 'coverage' tool (which
-is within the venv) so that the venv packages are used in preference to
-system packages. Otherwise the coverage tests run in a different
-environment from the normal tests and may fail due to missing packages.
+Enable SPL DTO support to apply matching SoM specific DTOs to cater
+for the SoM differences in DH i.MX8MP DHCOM PDK2 configuration. This
+is already enabled in DH i.MX8MP DHCOM PDK3 configuration so align
+the two configurations.
 
-Handle this by detecting the venv and changing the tool name.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: ad1158c50e0e ("arm64: dts: imx8mp: Switch to DT overlays for i.MX8MP DHCOM SoM")
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ configs/imx8mp_dhcom_pdk2_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-(no changes since v1)
-
- tools/u_boot_pylib/test_util.py | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/tools/u_boot_pylib/test_util.py b/tools/u_boot_pylib/test_util.py
-index f18d385d995..857ce58c98c 100644
---- a/tools/u_boot_pylib/test_util.py
-+++ b/tools/u_boot_pylib/test_util.py
-@@ -60,12 +60,17 @@ def run_test_coverage(prog, filter_fname, exclude_list, build_dir, required=None
-     prefix = ''
-     if build_dir:
-         prefix = 'PYTHONPATH=$PYTHONPATH:%s/sandbox_spl/tools ' % build_dir
--    cmd = ('%spython3-coverage run '
--           '--omit "%s" %s %s %s %s' % (prefix, ','.join(glob_list),
-+
-+    # Detect a Python virtualenv and use 'coverage' instead
-+    covtool = ('python3-coverage' if sys.prefix == sys.base_prefix else
-+               'coverage')
-+
-+    cmd = ('%s%s run '
-+           '--omit "%s" %s %s %s %s' % (prefix, covtool, ','.join(glob_list),
-                                         prog, extra_args or '', test_cmd,
-                                         single_thread or '-P1'))
-     os.system(cmd)
--    stdout = command.output('python3-coverage', 'report')
-+    stdout = command.output(covtool, 'report')
-     lines = stdout.splitlines()
-     if required:
-         # Convert '/path/to/name.py' just the module name 'name'
+diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
+index e5d74a9bdb2..cbc608dd912 100644
+--- a/configs/imx8mp_dhcom_pdk2_defconfig
++++ b/configs/imx8mp_dhcom_pdk2_defconfig
+@@ -15,7 +15,6 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-pdk2"
+ CONFIG_SPL_TEXT_BASE=0x920000
+ CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
+-CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=1048576
+ CONFIG_SPL_MMC=y
+@@ -41,6 +40,7 @@ CONFIG_FIT=y
+ CONFIG_FIT_EXTERNAL_OFFSET=0x3000
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x44000000
++CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
+ CONFIG_SYS_BOOTM_LEN=0x8000000
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_OF_SYSTEM_SETUP=y
+@@ -66,6 +66,7 @@ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
++# CONFIG_SPL_FIT_IMAGE_TINY is not set
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_POWER=y
+ CONFIG_SPL_WATCHDOG=y
 -- 
-2.34.1
+2.43.0
 
