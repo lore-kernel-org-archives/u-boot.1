@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85CF3C2BA18
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0876AC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CF52885A9;
-	Sun, 23 Jun 2024 19:55:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 833338854A;
+	Sun, 23 Jun 2024 19:55:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BycI1dTj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S2kCvljm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1F9F88549; Sun, 23 Jun 2024 19:55:24 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 4930B882B7; Sun, 23 Jun 2024 19:55:26 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E66AA88576
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:55:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB5E2882B7
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:55:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-7ec2d71059dso142114939f.2
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:55:21 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-7eba486df76so106511939f.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719165320; x=1719770120; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719165321; x=1719770121; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7/NjtgmhdGNN51ppyRZf80LJV+wFQVnrrC1NW5Sw19c=;
- b=BycI1dTjT7tsofjdoWYpimCAbaWLYcW/P3itGKes5zq2Ww/Qf6Qdb0dDrKgDynxGZa
- 1Hz4etrgtU+CYIFbnTEEKJ2dEVb7NCP1gWSVnXzogs5mSNBnyTrJ0syjHoTgBYIa/jAO
- y1KmrQRNFxT1rQy8aPgo67WXLN7lp8aVzKB8g=
+ bh=6HB2ErhIf6siF/0qMBG68GPp5zfuKT+xollSj3Pe6/g=;
+ b=S2kCvljmfU84efjvfiXQ06D0ib/rDea7SnHMoDfjYmBwmbYGWnof8szMUeUUh12pR8
+ PdOuNr0arvzXznVtKVYdiCkQvB3r4i3R9PgPZL7Q5a2BHQawd8WJDQdVXlipCKk4JcZk
+ 4zNlrBSMkX2bwM/3MYIddqGdWfTEGUT6WnD0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719165320; x=1719770120;
+ d=1e100.net; s=20230601; t=1719165321; x=1719770121;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7/NjtgmhdGNN51ppyRZf80LJV+wFQVnrrC1NW5Sw19c=;
- b=sVvawc9TFCYi/6hvT8AALoY5sw0V2sNAbc4dOjCLNNBiq+dEEn1nfF494UVOTheq4T
- L7/Ws8b6EwZPptBsFXcEU+GoUyoLLx/yU9kp/L0G7pdF40HZWm75t12VcYw4u5FdPMJO
- W6SHyYVF2n6TTyNQOf84zM3yqVzff0rb7h7Z5HD+ZkISWmcsoQmpe10tsGhD931tI9vx
- SpkicWjfEYgXmeTAsfQQSy+vgguvp68XG3uoM3+fAQghw93aquAzY3kepGiae5aDj/7l
- O5wpKmFW/h+G+RBzHSG2Ye3Y0HPhOSq6+gFTVk4seCi2HRxm7oqmSnzRPtkHlJ32ei6A
- beQg==
-X-Gm-Message-State: AOJu0YyjKK7GDIeh/Rk6dMf4EzEOLupQEW8SqRtnk3CJ8n1ouQVgkRFn
- qfgSF9xWoIzZmYMq/HJqMbM7Eh04rHs8seHGh7S1y4Os2kxDsqQ+UQ7rqYEEcRXkGbTZl36wVCU
- a0w==
-X-Google-Smtp-Source: AGHT+IHnKDWPICEjIw0aJRLiDBOCvELMABqjRnmUOAIJoAxWR2hCPoDYDBOfoMNXzUXdRFwXdJKnJg==
-X-Received: by 2002:a05:6602:6013:b0:7eb:db06:e067 with SMTP id
- ca18e2360f4ac-7f3a7532d73mr241284139f.9.1719165320461; 
- Sun, 23 Jun 2024 10:55:20 -0700 (PDT)
+ bh=6HB2ErhIf6siF/0qMBG68GPp5zfuKT+xollSj3Pe6/g=;
+ b=NZJvbuZjRPPonSvY+isj/jDZeUtvXmFDHYa0fNq46uyEkFm2D/fPm876MvehZ8ltga
+ IeDz+Op/M3gt4I2URuep3Rntnw3WCrIQdFESU+uAHtIs44GUHAD95EUfz4bI6ZGQ1Gwa
+ O8tj0EkoQhUVn6zhKIThsDaJBaFMYMYGtR5KZ2UDgdFOv5Y2NtMkZn7uvay7wVtGdbMe
+ rGWIlveQvL0dHpVsZ/hMpwR5Mjfk2L4OKempKrXl6DM43rjDCxP/BVgPDo+hhcerVC85
+ zIQhANJjaZUqbPRxPRjT+ZAJA9zCcDwxecfcval2U8lRviuw8VA0rVYNDhTdHWlIod83
+ AwJA==
+X-Gm-Message-State: AOJu0YxC97YfZDyuyxibScQ5Vxv7R6o3o/dobzdV4YB78dle7B3MMtIq
+ 4x640oyPWzz+O0ULYM2wa6I2boh6wGT4ax8C0e78ByLOgS/74xyZUE4aRuRC744kPztIzZN6iqH
+ rAw==
+X-Google-Smtp-Source: AGHT+IFQ2nEBQ9WTnUq166/qeOwj34fWPTwO5cySdNAAca1lNJL18kPcqP45mY8JWiRgrnRmREWphg==
+X-Received: by 2002:a05:6602:1604:b0:7eb:ff8b:e25b with SMTP id
+ ca18e2360f4ac-7f3a0732675mr167366139f.1.1719165321305; 
+ Sun, 23 Jun 2024 10:55:21 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-7f391fc9b12sm134472239f.5.2024.06.23.10.55.19
+ ca18e2360f4ac-7f391fc9b12sm134472239f.5.2024.06.23.10.55.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:55:20 -0700 (PDT)
+ Sun, 23 Jun 2024 10:55:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 02/14] binman: Regenerate nxp docs
-Date: Sun, 23 Jun 2024 11:55:03 -0600
-Message-Id: <20240623175515.1466908-3-sjg@chromium.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>
+Subject: [PATCH v2 03/14] binman: ti: Regenerate entry docs
+Date: Sun, 23 Jun 2024 11:55:04 -0600
+Message-Id: <20240623175515.1466908-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623175515.1466908-1-sjg@chromium.org>
 References: <20240623175515.1466908-1-sjg@chromium.org>
@@ -95,54 +97,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Correct formatting errors in the documentation.
+
 Regenerate the entries.rst file to include this recent addition.
-
-Note that more docs are needed here, to actually describe the entry
-type.
-
-Note also that the entry type needs Binman tests added.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/binman/entries.rst | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ tools/binman/entries.rst        | 35 +++++++++++++++++++++++++
+ tools/binman/etype/ti_secure.py | 45 +++++++++++++++++----------------
+ 2 files changed, 58 insertions(+), 22 deletions(-)
 
 diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index dc42a9cb97d..1b9b868e33f 100644
+index 1b9b868e33f..bdda1ef2855 100644
 --- a/tools/binman/entries.rst
 +++ b/tools/binman/entries.rst
-@@ -1521,6 +1521,28 @@ byte.
+@@ -1951,6 +1951,12 @@ Properties / Entry arguments:
+     - content: List of phandles to entries to sign
+     - keyfile: Filename of file containing key to sign binary with
+     - sha: Hash function to be used for signing
++    - auth-in-place: This is an integer field that contains two pieces
++      of information:
++
++        - Lower Byte - Remains 0x02 as per our use case
++          ( 0x02: Move the authenticated binary back to the header )
++        - Upper Byte - The Host ID of the core owning the firewall
+ 
+ Output files:
+     - input.<unique_name> - input file passed to openssl
+@@ -1959,6 +1965,35 @@ Output files:
+     - cert.<unique_name> - output file generated by openssl (which is
+       used as the entry contents)
+ 
++Depending on auth-in-place information in the inputs, we read the
++firewall nodes that describe the configurations of firewall that TIFS
++will be doing after reading the certificate.
++
++The syntax of the firewall nodes are as such::
++
++    firewall-257-0 {
++        id = <257>;           /* The ID of the firewall being configured */
++        region = <0>;         /* Region number to configure */
++
++        control =             /* The control register */
++            <(FWCTRL_EN | FWCTRL_LOCK | FWCTRL_BG | FWCTRL_CACHE)>;
++
++        permissions =         /* The permission registers */
++            <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
++                        FWPERM_SECURE_PRIV_RWCD |
++                        FWPERM_SECURE_USER_RWCD |
++                        FWPERM_NON_SECURE_PRIV_RWCD |
++                        FWPERM_NON_SECURE_USER_RWCD)>;
++
++        /* More defines can be found in k3-security.h */
++
++        start_address =        /* The Start Address of the firewall */
++            <0x0 0x0>;
++        end_address =          /* The End Address of the firewall */
++            <0xff 0xffffffff>;
++    };
++
++
+ openssl signs the provided data, using the TI templated config file and
+ writes the signature in this entry. This allows verification that the
+ data is genuine.
+diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
+index 704dcf8a381..420ee263e4f 100644
+--- a/tools/binman/etype/ti_secure.py
++++ b/tools/binman/etype/ti_secure.py
+@@ -53,10 +53,11 @@ class Entry_ti_secure(Entry_x509_cert):
+         - keyfile: Filename of file containing key to sign binary with
+         - sha: Hash function to be used for signing
+         - auth-in-place: This is an integer field that contains two pieces
+-          of information
+-            Lower Byte - Remains 0x02 as per our use case
+-            ( 0x02: Move the authenticated binary back to the header )
+-            Upper Byte - The Host ID of the core owning the firewall
++          of information:
++
++            - Lower Byte - Remains 0x02 as per our use case
++              ( 0x02: Move the authenticated binary back to the header )
++            - Upper Byte - The Host ID of the core owning the firewall
+ 
+     Output files:
+         - input.<unique_name> - input file passed to openssl
+@@ -69,29 +70,29 @@ class Entry_ti_secure(Entry_x509_cert):
+     firewall nodes that describe the configurations of firewall that TIFS
+     will be doing after reading the certificate.
+ 
+-    The syntax of the firewall nodes are as such:
++    The syntax of the firewall nodes are as such::
+ 
+-    firewall-257-0 {
+-        id = <257>;           /* The ID of the firewall being configured */
+-        region = <0>;         /* Region number to configure */
++        firewall-257-0 {
++            id = <257>;           /* The ID of the firewall being configured */
++            region = <0>;         /* Region number to configure */
+ 
+-        control =             /* The control register */
+-            <(FWCTRL_EN | FWCTRL_LOCK | FWCTRL_BG | FWCTRL_CACHE)>;
++            control =             /* The control register */
++                <(FWCTRL_EN | FWCTRL_LOCK | FWCTRL_BG | FWCTRL_CACHE)>;
+ 
+-        permissions =         /* The permission registers */
+-            <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
+-                        FWPERM_SECURE_PRIV_RWCD |
+-                        FWPERM_SECURE_USER_RWCD |
+-                        FWPERM_NON_SECURE_PRIV_RWCD |
+-                        FWPERM_NON_SECURE_USER_RWCD)>;
++            permissions =         /* The permission registers */
++                <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
++                            FWPERM_SECURE_PRIV_RWCD |
++                            FWPERM_SECURE_USER_RWCD |
++                            FWPERM_NON_SECURE_PRIV_RWCD |
++                            FWPERM_NON_SECURE_USER_RWCD)>;
+ 
+-        /* More defines can be found in k3-security.h */
++            /* More defines can be found in k3-security.h */
+ 
+-        start_address =        /* The Start Address of the firewall */
+-            <0x0 0x0>;
+-        end_address =          /* The End Address of the firewall */
+-            <0xff 0xffffffff>;
+-    };
++            start_address =        /* The Start Address of the firewall */
++                <0x0 0x0>;
++            end_address =          /* The End Address of the firewall */
++                <0xff 0xffffffff>;
++        };
  
  
- 
-+.. _etype_nxp_imx8mcst:
-+
-+Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
-+-----------------------------------------------------------------------
-+
-+Properties / Entry arguments:
-+    - nxp,loader-address - loader address (SPL text base)
-+
-+
-+
-+.. _etype_nxp_imx8mimage:
-+
-+Entry: nxp-imx8mimage: NXP i.MX8M imx8mimage .cfg file generator and mkimage invoker
-+------------------------------------------------------------------------------------
-+
-+Properties / Entry arguments:
-+    - nxp,boot-from - device to boot from (e.g. 'sd')
-+    - nxp,loader-address - loader address (SPL text base)
-+    - nxp,rom-version - BootROM version ('2' for i.MX8M Nano and Plus)
-+
-+
-+
- .. _etype_opensbi:
- 
- Entry: opensbi: RISC-V OpenSBI fw_dynamic blob
+     openssl signs the provided data, using the TI templated config file and
 -- 
 2.34.1
 
