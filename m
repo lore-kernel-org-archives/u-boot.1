@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC7AC2BA18
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33DD2C2BA18
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44B4D885C4;
+	by phobos.denx.de (Postfix) with ESMTP id A17A9885DF;
 	Sun, 23 Jun 2024 22:32:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fhzCoth+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k9/GQlU6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FEB4885D7; Sun, 23 Jun 2024 22:32:30 +0200 (CEST)
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com
- [IPv6:2607:f8b0:4864:20::144])
+ id 51EED884BE; Sun, 23 Jun 2024 22:32:31 +0200 (CEST)
+Received: from mail-il1-x143.google.com (mail-il1-x143.google.com
+ [IPv6:2607:f8b0:4864:20::143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F96787D07
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23007885A5
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x144.google.com with SMTP id
- e9e14a558f8ab-37621e7468eso11414265ab.0
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:28 -0700 (PDT)
+Received: by mail-il1-x143.google.com with SMTP id
+ e9e14a558f8ab-371c97913cdso17036075ab.3
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719174747; x=1719779547; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719174748; x=1719779548; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zsYn/7DjZxJm+0gcVgdsuoh0XrMyXJi91lp22nAzzhA=;
- b=fhzCoth+M/9f774TDgVAFZDFvLH+4fGi/LgjtlNmPFyAfL2ojA+u/cLMlpaCs0fpJg
- dbvkC4qepXobTvKLWP89M1sCj8UuM7f/DpjQfeIKegygaVfhXHdpVZPUsgFs0MHPdbj7
- jBoPz8rE1B9vYUoMnAmiukgSnhmX4CZm5Txz4=
+ bh=HgE2Ha75unv9qhbZKp1LqB8rmSDQuGoKX36Qsl1n6sM=;
+ b=k9/GQlU6F3hsFv4oWRzDmJrBPnRN7bi1p57jZe9aWUrV/RHlH2eUUwT1NyWn64Inid
+ JMHWFRMyx7hkjHAxJcb2bHQL0U3muXAglydqdXt5gCPQhxS2Z1NG2ri1wTLo5uYaaU8z
+ q7iwsMYweWcEGcgcv4nMEFeKp5XnfckEwT1Z8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719174747; x=1719779547;
+ d=1e100.net; s=20230601; t=1719174748; x=1719779548;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zsYn/7DjZxJm+0gcVgdsuoh0XrMyXJi91lp22nAzzhA=;
- b=ZcBmk8Wd9F8c+qzSZFKyzOQFGNl5zHhiXFR5rqM0zogJNjqGEWDKBlraPOlx1Ii9gW
- LcWZJnqhDiQOqN7DGo2xHZ6Hq66aj7HwuMwwg8pRn8iYkl10Z4zFUrVTEOKbzOStW8y8
- zDV/qGkIRbRQyLpnXkttG6AZ4Sc6YuqIXJfte59AYX8eWELsYaX7wnTVEjq2xiiVN0Ry
- dybfI2dxfx9m8LZlGOI/LceyymZ2ucUJhJBQCL1gHirGhksXYc5L1NFr0IUfwEUnR73d
- +pfdtrOagmP9bQTSMCnUpIcEEbPT7Ax8TWBDc5IJWAUWiTomRuvGVAnzXMvYFcb2uEX+
- tNwA==
-X-Gm-Message-State: AOJu0YzLl5FvV8QOYZulgq5LKggLKM6p1dP/kxsnZlnz50fZuK9HcdgQ
- EEXG7Il9eesPUmHFeyhekzY9hkSW0WJV4jNYO6UtcRwdhqHzDI9lp5YA73HNkoDk0MXT/ldADmX
- UrNH8
-X-Google-Smtp-Source: AGHT+IGBxy7iMIyZ0NfozDXnuS0JH9b/Me8zuSl1jSw7eYw8pqOFsFkeuhqDa4gAUtoRl1+afZynmw==
-X-Received: by 2002:a92:c54b:0:b0:375:dd94:29f with SMTP id
- e9e14a558f8ab-37639fc884cmr17229215ab.0.1719174746896; 
- Sun, 23 Jun 2024 13:32:26 -0700 (PDT)
+ bh=HgE2Ha75unv9qhbZKp1LqB8rmSDQuGoKX36Qsl1n6sM=;
+ b=h/akkZWfbbKlQg5yt6q49Zfranfb5iw1ud7W163hAoCFRNKP2vuRsvuOV69NdQ7pEv
+ RscLN+DbJo3EbnQokGFw7wzr4TnyK29p0ZO+NS7zoL4MLGkmjed8izEEygNM5m86N6Fv
+ YXaWrw+uZCXqLxSwxx3ZVwiU21jFm9eQzmdAfvCIkNNi/3d3TrHvYXv6eytIjkLuc1vn
+ ezZIzZOcFMJuAXAfviuaIgSLuPFLRWkIVLCh5XOAF9tHdblHYV1uoVa7krR3M1b1yIay
+ vHWgaoCfHMAfGe/hX786X2FI7B3CFBA9cz7wVco0eFpH/YnKFilzTW3fkiHCY9aviUG9
+ alWg==
+X-Gm-Message-State: AOJu0YxBSLyRSAQ+dI/9WWcp2eefNh0hcaZhqMr1yfrad0VxnTY2Q54v
+ ZVswwjCxKV+DwpOGaXYbEoqEnuQweXQgAMZutTkkofIrrTIOsZZMcuxmldlLjaT62jiLKWP9oKu
+ 2Wty0
+X-Google-Smtp-Source: AGHT+IFRGaTHw6UTm8RwXsuV7sQbg67Mp5kLFukR8LozgSFySB/X7plro2M1LccdHow5PK0XrKnKXg==
+X-Received: by 2002:a05:6e02:1c04:b0:376:1299:81e8 with SMTP id
+ e9e14a558f8ab-3763b34f02cmr46527795ab.28.1719174747689; 
+ Sun, 23 Jun 2024 13:32:27 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3763374634asm12016765ab.52.2024.06.23.13.32.26
+ e9e14a558f8ab-3763374634asm12016765ab.52.2024.06.23.13.32.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 13:32:26 -0700 (PDT)
+ Sun, 23 Jun 2024 13:32:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Love Kumar <love.kumar@amd.com>
-Subject: [PATCH v3 10/19] test: Separate out the exception handling
-Date: Sun, 23 Jun 2024 14:32:04 -0600
-Message-Id: <20240623203213.1571666-11-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 11/19] test: Detect dead connections
+Date: Sun, 23 Jun 2024 14:32:05 -0600
+Message-Id: <20240623203213.1571666-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623203213.1571666-1-sjg@chromium.org>
 References: <20240623203213.1571666-1-sjg@chromium.org>
@@ -89,129 +89,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The tests currently catch a very board Exception in each case. This is
-thrown even in the event of a coding error.
-
-We want to handle exceptions differently depending on their severity,
-so that we can avoid hour-long delays waiting for a board that is
-clearly broken.
-
-As a first step, create some new exception types, separating out those
-which are simply an unexpected result from executed a command, from
-those which indicate some kind of hardware failure.
+When the connection to a board dies, assume it is dead forever until
+some user action is taken. Skip all remaining tests. This avoids CI
+runs taking an hour, with hundreds of 30-second timeouts all to no
+avail.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_base.py | 26 ++++++++++++++------------
- test/py/u_boot_spawn.py        | 11 +++++++++++
- 2 files changed, 25 insertions(+), 12 deletions(-)
+ test/py/conftest.py     | 19 +++++++++++++++++--
+ test/py/u_boot_spawn.py | 38 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 2 deletions(-)
 
-diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index 8a9c4a576dc..fa87952694d 100644
---- a/test/py/u_boot_console_base.py
-+++ b/test/py/u_boot_console_base.py
-@@ -14,6 +14,7 @@ import pytest
- import re
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index 5de8d7b0e23..42af1abd72e 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -25,6 +25,7 @@ import re
+ from _pytest.runner import runtestprotocol
+ import subprocess
  import sys
- import u_boot_spawn
-+from u_boot_spawn import BootFail, Timeout, Unexpected
++from u_boot_spawn import BootFail, Timeout, Unexpected, handle_exception
  
- # Regexes for text we expect U-Boot to send to the console.
- pattern_u_boot_spl_signon = re.compile('(U-Boot SPL \\d{4}\\.\\d{2}[^\r\n]*\\))')
-@@ -190,13 +191,13 @@ class ConsoleBase(object):
-                     m = self.p.expect([pattern_u_boot_spl_signon] +
-                                       self.bad_patterns)
-                     if m != 0:
--                        raise Exception('Bad pattern found on SPL console: ' +
-+                        raise BootFail('Bad pattern found on SPL console: ' +
-                                         self.bad_pattern_ids[m - 1])
-                     env_spl_banner_times -= 1
+ # Globals: The HTML log file, and the connection to the U-Boot console.
+ log = None
+@@ -280,6 +281,7 @@ def pytest_configure(config):
+     ubconfig.gdbserver = gdbserver
+     ubconfig.no_prompt_wait = config.getoption('no_prompt_wait')
+     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
++    ubconfig.connection_ok = True
  
-                 m = self.p.expect([pattern_u_boot_main_signon] + self.bad_patterns)
-                 if m != 0:
--                    raise Exception('Bad pattern found on console: ' +
-+                    raise BootFail('Bad pattern found on console: ' +
-                                     self.bad_pattern_ids[m - 1])
-             self.u_boot_version_string = self.p.after
-             while True:
-@@ -207,13 +208,9 @@ class ConsoleBase(object):
-                 if m == 2:
-                     self.p.send(' ')
-                     continue
--                raise Exception('Bad pattern found on console: ' +
-+                raise BootFail('Bad pattern found on console: ' +
-                                 self.bad_pattern_ids[m - 3])
+     env_vars = (
+         'board_type',
+@@ -446,8 +448,21 @@ def u_boot_console(request):
+     Returns:
+         The fixture value.
+     """
+-
+-    console.ensure_spawned()
++    if not ubconfig.connection_ok:
++        pytest.skip('Cannot get target connection')
++        return None
++    try:
++        console.ensure_spawned()
++    except OSError as err:
++        handle_exception(ubconfig, console, log, err, 'Lab failure', True)
++    except Timeout as err:
++        handle_exception(ubconfig, console, log, err, 'Lab timeout', True)
++    except BootFail as err:
++        handle_exception(ubconfig, console, log, err, 'Boot fail', True,
++                         console.get_spawn_output())
++    except Unexpected:
++        handle_exception(ubconfig, console, log, err, 'Unexpected test output',
++                         False)
+     return console
  
--        except Exception as ex:
--            self.log.error(str(ex))
--            self.cleanup_spawn()
--            raise
-         finally:
-             self.log.timestamp()
- 
-@@ -279,7 +276,7 @@ class ConsoleBase(object):
-                 m = self.p.expect([chunk] + self.bad_patterns)
-                 if m != 0:
-                     self.at_prompt = False
--                    raise Exception('Bad pattern found on console: ' +
-+                    raise BootFail('Bad pattern found on console: ' +
-                                     self.bad_pattern_ids[m - 1])
-             if not wait_for_prompt:
-                 return
-@@ -289,14 +286,18 @@ class ConsoleBase(object):
-                 m = self.p.expect([self.prompt_compiled] + self.bad_patterns)
-                 if m != 0:
-                     self.at_prompt = False
--                    raise Exception('Bad pattern found on console: ' +
-+                    raise BootFail('Missing prompt on console: ' +
-                                     self.bad_pattern_ids[m - 1])
-             self.at_prompt = True
-             self.at_prompt_logevt = self.logstream.logfile.cur_evt
-             # Only strip \r\n; space/TAB might be significant if testing
-             # indentation.
-             return self.p.before.strip('\r\n')
--        except Exception as ex:
-+        except Timeout as exc:
-+            self.log.error(str(exc))
-+            self.cleanup_spawn()
-+            raise
-+        except BootFail as ex:
-             self.log.error(str(ex))
-             self.cleanup_spawn()
-             raise
-@@ -355,8 +356,9 @@ class ConsoleBase(object):
-             text = re.escape(text)
-         m = self.p.expect([text] + self.bad_patterns)
-         if m != 0:
--            raise Exception('Bad pattern found on console: ' +
--                            self.bad_pattern_ids[m - 1])
-+            raise Unexpected(
-+                "Unexpected pattern found on console (exp '{text}': " +
-+                self.bad_pattern_ids[m - 1])
- 
-     def drain_console(self):
-         """Read from and log the U-Boot console for a short time.
+ anchors = {}
 diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
-index cb0d8f702ba..57ea845ad4c 100644
+index 57ea845ad4c..62eb4118731 100644
 --- a/test/py/u_boot_spawn.py
 +++ b/test/py/u_boot_spawn.py
-@@ -17,6 +17,17 @@ import traceback
- class Timeout(Exception):
-     """An exception sub-class that indicates that a timeout occurred."""
+@@ -8,6 +8,7 @@ Logic to spawn a sub-process and interact with its stdio.
+ import os
+ import re
+ import pty
++import pytest
+ import signal
+ import select
+ import sys
+@@ -28,6 +29,43 @@ class BootFail(Exception):
+ class Unexpected(Exception):
+     """An exception sub-class that indicates that unexpected test was seen."""
  
-+class BootFail(Exception):
-+    """An exception sub-class that indicates that a boot failure occurred.
 +
-+    This is used when a bad pattern is seen when waiting for the boot prompt.
-+    It is regarded as fatal, to avoid trying to boot the again and again to no
-+    avail.
++def handle_exception(ubconfig, console, log, err, name, fatal, output=''):
++    """Handle an exception from the console
++
++    Exceptions can occur when there is unexpected output or due to the board
++    crashing or hanging. Some exceptions are likely fatal, where retrying will
++    just chew up time to no available. In those cases it is best to cause
++    further tests be skipped.
++
++    Args:
++        ubconfig (ArbitraryAttributeContainer): ubconfig object
++        log (Logfile): Place to log errors
++        console (ConsoleBase): Console to clean up, if fatal
++        err (Exception): Exception which was thrown
++        name (str): Name of problem, to log
++        fatal (bool): True to abort all tests
++        output (str): Extra output to report on boot failure. This can show the
++           target's console output as it tried to boot
 +    """
++    msg = f'{name}: '
++    if fatal:
++        msg += 'Marking connection bad - no other tests will run'
++    else:
++        msg += 'Assuming that lab is healthy'
++    print(msg)
++    log.error(msg)
++    log.error(f'Error: {err}')
 +
-+class Unexpected(Exception):
-+    """An exception sub-class that indicates that unexpected test was seen."""
++    if output:
++        msg += f'; output {output}'
++
++    if fatal:
++        ubconfig.connection_ok = False
++        console.cleanup_spawn()
++        pytest.exit(msg)
++
 +
  class Spawn:
      """Represents the stdio of a freshly created sub-process. Commands may be
