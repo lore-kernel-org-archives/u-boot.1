@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52444C2BBCA
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 11:48:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5720EC2BBCA
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 11:49:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60FBB87D70;
-	Sun, 23 Jun 2024 13:48:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA59088327;
+	Sun, 23 Jun 2024 13:48:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LikSyI0f";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xwuRG62P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8FB887DC7; Sun, 23 Jun 2024 13:48:46 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 7C7C1882E6; Sun, 23 Jun 2024 13:48:50 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9604987572
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:48:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 868E9882B8
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:48:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2ec4a35baddso29747621fa.0
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 04:48:44 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-57ccd1111aeso4073383a12.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 04:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719143324; x=1719748124; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GlQQOyrMokxqv2lQupenwp9x4YQ/x3Dy8M1cu1+dZmw=;
- b=LikSyI0fcajyGeNBXPBXVTnI2TDJFqdZCXs/EEUNR42ajeGZHvIpr1Wzedb78BHopM
- HmTR17oTakwxMyJxL/0kLbiD7FkHjCvaiKdJ+fuisbo3fUF03GpGmYoa1FbVx/GXU+UU
- bPWhzG8QxnlXPsIm8xsVQtIuCYdMfSipVFVuptl0NHwRwczk42Aa2ECXyQcwHOVAkYYh
- m8xvYnrOu1UrJqP6PNsFpxo2er/1+xZXHuzb5Hd4DQxLjHNeaSGEM7Gx0UXw7p6V2ZGE
- G/UfHVzzfRo8JelvgCDmg3sXd3TGibmY+m4xuMn6sInsKaI3WfTYiUbyKL9SmZcdYF/N
- JlgA==
+ d=linaro.org; s=google; t=1719143328; x=1719748128; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qYtWenobQtR5aOmVQ8zApI9sPDX6wCJfo/xL6dG1i0Q=;
+ b=xwuRG62PvUIl6Dmqijk2StAs2y4Auy6PYStAuevDUYHjptBKXgyWsnhudAOsSzjwVZ
+ FA2OUqpTvfaJaHSIgaexFmZ5tgPx+tgdXn1b8Yg7KsPrOQqwXSBqjubVwYfanPyFSFAW
+ lBaUzjMA0zSQecqCKgL+jidrvKpxQmGwgbt6Lf8ZQ8FymRPqgNdrQL9LcRvvrSnFKqqF
+ IRHZc78Xp7xgqoXJDWwm7V/Ivix1ObF6DFidXzFMUzvhwvNF5fo6SCYhVyU+dgP/S3o9
+ XIlPGil2OZHDscNEQNh9GAgnz9Exl6rM6Ik4vy4gHbF2FvQesJ9r4QuQDsxYjRhXcPZI
+ j4Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719143324; x=1719748124;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GlQQOyrMokxqv2lQupenwp9x4YQ/x3Dy8M1cu1+dZmw=;
- b=Vrjk46cvQm8Gqg4mLfPFwmBVVgES7X9ry2hQPK+WUQj7WfNSBr8Evx3o//Ngb3D99Y
- n2BzKbIPLuEXTUa85NXn8mpH0rXGBS8Vnn7680eqbaIHskhWmpZiGtDsUPcObJwfqHO9
- V1x4FdD0nh8ueUghC0QoSdW1goB+IVkEygst/f3jspXXNboCsMbIxIdOH1YHu31qmeeq
- rVsO5U/BmcQ17agjaFpFPaaU/JnowME+cBtawV6FIwy5JhDRY/VT0G3YNoyLFUTsaIsr
- rRL0X5/XGCpVJVOFWbyAFH2NJ+2iZbIKwbIXEkwga5AmAcQXNJrZ1QexUcC/i4a5D1fW
- syBA==
+ d=1e100.net; s=20230601; t=1719143328; x=1719748128;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qYtWenobQtR5aOmVQ8zApI9sPDX6wCJfo/xL6dG1i0Q=;
+ b=QzugKZoUTdKMy8MsNXavuT7Ua/E5k7Stmp8Mtb5e7n6QY3wsu5IiprMO7XgaNQPf3+
+ clKUXumfMfeqU0PRPnAdM+yXt/EuH1K58WY5GDWFcIYVu1QioRq57L0QkZVUanHqYcic
+ w7nQmPELjIGczSpr8AxXzvxIZQkNfAoyQqtYK//Ha92HLM+AhTPNqPuA3FkQo7kTeED5
+ IUrBS4kr4asPPlRGXFkPCnA+IYOXlwb82roiUvgxyem7zCS1szEE8mb4vEIqkOGQcgt3
+ joZ5WdXs+xAj9b9Ta9ZgNCnqLSnGhxUGHY3QfXeRGaM+Y4yHBpd8Fh28G5rWHD8MrMV2
+ XmKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbIzdEfC9WsWnfCqnW/89wQpff75ub0VocqtBJPKuITHE3Ye4SKfOI4wzW8vgSR5rQmb99ALEbWhYiT0UXzA0suQ6qJw==
-X-Gm-Message-State: AOJu0YxZxrkO09Qg63A5xr3Y+tAA0tRylhGRXoBWdPEykEj+YIdhFtgO
- 1Cn5i1BKRxfTJYYiWBSCDNR4moRISr8ThkxtBA69HaXSTLDxd4D14RurYef3eow=
-X-Google-Smtp-Source: AGHT+IE98wwr8UZ+W6+S6emDB7oy+Lnomj1wcJKzPaC8w+/2vpFPDN0X1lBwkMQFEm1su7zcq8qPEw==
-X-Received: by 2002:a2e:9996:0:b0:2ec:58e8:d7a2 with SMTP id
- 38308e7fff4ca-2ec5b337346mr12157291fa.16.1719143323431; 
- Sun, 23 Jun 2024 04:48:43 -0700 (PDT)
+ AJvYcCUprfb1LTV8c+67Awv+JBNJsH6PxrxTvqIPs7agH9vuoWBYNGl+n6xzNl2h82PR9EyJe2cxFB+/He/zvOnwIIShHNKO0A==
+X-Gm-Message-State: AOJu0YzRP4aKFb1HqHJK5dejRvz4nZ0Vd8zleIi74khha2r0xLu4s3+E
+ O+y3Gs5L91IZWXXBy8FS0LbG/rBh6TvqEIU+84osRw6x0XO0kyK3JFqCGDFj9Xg=
+X-Google-Smtp-Source: AGHT+IErDuKiYlO2gwT6QD1wwopQd+NXjtjyx04eP8YKUxfyw0qqgw1idIrmaNv2rLOBXtkv/Vqxpw==
+X-Received: by 2002:a50:cd1c:0:b0:57d:4ca4:61ba with SMTP id
+ 4fb4d7f45d1cf-57d4ca46204mr1382805a12.10.1719143327615; 
+ Sun, 23 Jun 2024 04:48:47 -0700 (PDT)
 Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
  [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d30534ffasm3402053a12.60.2024.06.23.04.48.41
+ 4fb4d7f45d1cf-57d30534ffasm3402053a12.60.2024.06.23.04.48.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 04:48:42 -0700 (PDT)
+ Sun, 23 Jun 2024 04:48:46 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	sjg@chromium.org,
@@ -74,14 +75,18 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>,
  Sean Anderson <sean.anderson@seco.com>,
- Michal Simek <michal.simek@amd.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Michal Simek <michal.simek@amd.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/8] The great TCG deduplication saga
-Date: Sun, 23 Jun 2024 14:48:10 +0300
-Message-ID: <20240623114838.14639-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 1/8] tpm: fix the return code,
+ if the eventlog buffer is full
+Date: Sun, 23 Jun 2024 14:48:11 +0300
+Message-ID: <20240623114838.14639-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240623114838.14639-1-ilias.apalodimas@linaro.org>
+References: <20240623114838.14639-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,49 +105,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all
+We currently return 'No space left on device' if the eventlong buffer
+we allocated is not enough. On a similar check later on that function
+during the call to tcg2_log_init() we return 'No buffer space
+available'. So switch both error codes to -ENOBUFS since we are always
+checking a buffer and not a device.
 
-Apologies on resending so fast. We are close to the release and some
-patches are needed. This is v2 of [0]
+Fixes: commit 97707f12fdab ("tpm: Support boot measurements")
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/tpm-v2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Not much changed, since v1. The major change is that I managed to split
-the code and headers file moving around as Heinrich asked for easier
-review
-
-Changes since v1:
-- Added a comment on why we return EFI_INVALID_PARAMETER on failures
-  while EFI_DEVICE_ERROR would make more sense
-- Fixed some typos
-- split patch 4 to 2 patches
-- collected r-b tags
-
-The testing was ok again, and comparing the eventlog between versions
-had no changes -- aprt from PCR0 which is expected
-
-Ilias Apalodimas (8):
-  tpm: fix the return code, if the eventlog buffer is full
-  efi_loader: fix the return values on efi_tcg
-  efi_loader: remove unused TCG algo definitions
-  tpm: Move TCG headers into a separate file
-  tpm: Move TCG functions into a separate file
-  efi_loader: remove unneeded header files
-  tpm: Untangle tpm2_get_pcr_info()
-  tpm: allow the user to select the compiled algorithms
-
- boot/Kconfig              |   4 +
- boot/bootm.c              |   1 +
- include/efi_tcg2.h        |   9 +-
- include/tpm-v2.h          | 388 +++----------------
- include/tpm_tcg2.h        | 348 +++++++++++++++++
- lib/Kconfig               |   6 +-
- lib/Makefile              |   2 +
- lib/efi_loader/efi_tcg2.c | 129 ++++---
- lib/tpm-v2.c              | 767 +++-----------------------------------
- lib/tpm_tcg2.c            | 731 ++++++++++++++++++++++++++++++++++++
- 10 files changed, 1262 insertions(+), 1123 deletions(-)
- create mode 100644 include/tpm_tcg2.h
- create mode 100644 lib/tpm_tcg2.c
-
---
+diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+index a67daed2f3c1..91526af33acb 100644
+--- a/lib/tpm-v2.c
++++ b/lib/tpm-v2.c
+@@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+ 		if (elog->log_size) {
+ 			if (log.found) {
+ 				if (elog->log_size < log.log_position)
+-					return -ENOSPC;
++					return -ENOBUFS;
+ 
+ 				/*
+ 				 * Copy the discovered log into the user buffer
+-- 
 2.45.2
 
