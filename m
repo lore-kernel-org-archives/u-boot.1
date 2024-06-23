@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A04EC2BA18
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F3FC2BA18
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:55:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13A948858C;
+	by phobos.denx.de (Postfix) with ESMTP id 71057884B2;
 	Sun, 23 Jun 2024 19:53:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a8NHxAkf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PfDHOjuY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C64D0882E6; Sun, 23 Jun 2024 19:53:31 +0200 (CEST)
+ id 72A5788405; Sun, 23 Jun 2024 19:53:32 +0200 (CEST)
 Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
  [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0D3C883C8
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:53:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 625B288551
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:53:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7eb895539e3so143364139f.2
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:53:29 -0700 (PDT)
+ ca18e2360f4ac-7f39116e564so78221939f.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:53:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719165208; x=1719770008; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719165209; x=1719770009; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JPDTBpVZuVkaqULrtYe8FXz9i1e5MJHdje88Wa78OmY=;
- b=a8NHxAkfC4l+0bJnUC89c1Fd/Te2BhJYzN7rHygHNQE2NroXfB9ppOaHHA8Ypdi4Z9
- OybHjWrm2Ft9UTzBxrvxj184E/X5HYW+yCG5Uw/3ZqrOzec/AcFBeA5LZP+bKrKuXR2R
- WrPk0d7Mu3VAWrziklXgCQqLtrmtqfMQByD8c=
+ bh=UIVlvjCM6wlz/Uph5LRLcypc2mEYIAfW4W7EWyp4Ek0=;
+ b=PfDHOjuYaBLv3xxfMohmQ42/xrWfT/ZGe2SkpR9W8tiro53bOnAzwwrUXq+60ehFXm
+ U/plZblstXFj/KR/izRe/B69suh2s9No8A+54pej3GPjZTCtdf5fB0MR1+5RbxLIggGt
+ i6SowJGhckO3GYWRZe0n/3QOLegcWcCp922b0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719165208; x=1719770008;
+ d=1e100.net; s=20230601; t=1719165209; x=1719770009;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JPDTBpVZuVkaqULrtYe8FXz9i1e5MJHdje88Wa78OmY=;
- b=KLjY1C1RckmOMwfK1tPSOjTiYAkDKu1hWQteUnaW0u8BvZPHrBp2e8Mo7ZHFGnWCE1
- IDo/8j3S+yJ+VCSUiZ+RstCRF3U4t67LVeFUJeEAheHh5U+6PN4uz3k1SfFfRZ3xa5oJ
- J/IW85EOW6yWj/lEaw8cbWvC+bBq/V3r2/zNKWBuHa7ByfoZEFl9tE19rsPSrauLAy3C
- q7nohP02CuhJ5FIfJWsSEQnBW7YB++lXbU566hzUMS7VzkWeXXlragsJLJ/XsLXRgGPG
- j1E84KbV3EvNP+3hhFRB2mTDxMP/m2j0rf5WlKgO1lfJR1HAnVcOU28QC7k/J0CZIZx5
- h63Q==
-X-Gm-Message-State: AOJu0Ywujje31Rp1QU4R8Dt1oDBd5DUEvj7YaSj45Viphl0ekOTJWjai
- rTjAUmwfH6nPUG2laX/y3nzOZthQ/JuwnBX/xj8/7fjSr0B7B22L8H1Au40I0W8phfcxpUpQsY4
- Ztg==
-X-Google-Smtp-Source: AGHT+IFk40aj+L5+NrnBYdPOKlRONSO0IVoVedumpzcv/nVcjia/1Nm2TJPWNZ7Hq6KYUAw4Ob4C+Q==
-X-Received: by 2002:a05:6602:14c3:b0:7eb:c7ff:26e3 with SMTP id
- ca18e2360f4ac-7f3a4e36a08mr367763539f.16.1719165208258; 
+ bh=UIVlvjCM6wlz/Uph5LRLcypc2mEYIAfW4W7EWyp4Ek0=;
+ b=V5MY3ls0cvrz4tQii0nupe0se2MlGRbSGdQOgbo+PWoKzC1DFvIa2QLEGuqoG8p8Fm
+ DF/wsK/8Zf2QGpWRRp3fOXPWBsEdm53+PprNJHTm9vNpWffTSjtxfJjNOCmf4EfOXjIU
+ XluJNow0phyZgjM4XCuCfSytMZe1usrtVHYrtn58hDObmUq6WvwJ+MaEgNVEWnvT6RUG
+ pB/JH0Ye2Fl4NPsnbw2RqBAyvmPnb9r2dcwFN+cOmmdI4P76fcRXVN1SXsYLJPmjUJec
+ Ccr06AswouQSEmxQhpZuk5RFeJHNTEUxD/NLIXNrf5JCCrxGAMKmpIlJznn5ykWkbbF6
+ M9xg==
+X-Gm-Message-State: AOJu0YxCmg8B/Hu5t6g1dDDiENka6fDxPf2POsa/RmrJnwMQ/owj4Ov1
+ h1fj1TMdOja7v4WRe2KHT9IUi8bD5Nt7+z5xHUlxybMV1b6LfdZXfExOcptxdSLZft8mqJWFlXB
+ Meg==
+X-Google-Smtp-Source: AGHT+IHffGGWWH54BoJDFTQMI2Eed+7CxMyvzY46jTCwOSccTq6JVC8ALliykav9kvkRqSX/lxgcRQ==
+X-Received: by 2002:a05:6602:1582:b0:7eb:cc55:af1d with SMTP id
+ ca18e2360f4ac-7f3a4dda232mr313675339f.12.1719165208960; 
  Sun, 23 Jun 2024 10:53:28 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4b9d113ff85sm1636834173.81.2024.06.23.10.53.27
+ 8926c6da1cb9f-4b9d113ff85sm1636834173.81.2024.06.23.10.53.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:53:27 -0700 (PDT)
+ Sun, 23 Jun 2024 10:53:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 12/16] spl: Allow ATF to work when dcache is disabled
-Date: Sun, 23 Jun 2024 11:52:58 -0600
-Message-Id: <20240623175302.1463973-13-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
+Subject: [PATCH v4 13/16] rockchip: Ensure memory size is available in RK3399
+ SPL
+Date: Sun, 23 Jun 2024 11:52:59 -0600
+Message-Id: <20240623175302.1463973-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623175302.1463973-1-sjg@chromium.org>
 References: <20240623175302.1463973-1-sjg@chromium.org>
@@ -89,32 +92,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The dcache may not be enabled in SPL. Add a check to avoid trying to
-use an undefined function.
+At present gd->ram_size is 0 in SPL, meaning that it is not possible to
+enable the cache. Correct this by always populating the RAM size
+correctly.
+
+This increases code size by about 500 bytes in SPL, since it must call
+the rather large rockchip_sdram_size() function.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- common/spl/spl_atf.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Changes in v3:
+- Cut the patch down to bare bones
 
-diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
-index 3bdd013a35f..9afe6456bc4 100644
---- a/common/spl/spl_atf.c
-+++ b/common/spl/spl_atf.c
-@@ -204,7 +204,8 @@ static void __noreturn bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
- 						       fdt_addr);
+Changes in v2:
+- Add new patch to correct memory size in SPL
+
+ drivers/ram/rockchip/sdram_rk3399.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+index 02cc4a38cf0..3c4e20f4e80 100644
+--- a/drivers/ram/rockchip/sdram_rk3399.c
++++ b/drivers/ram/rockchip/sdram_rk3399.c
+@@ -3142,19 +3142,19 @@ static int rk3399_dmc_init(struct udevice *dev)
  
- 	raw_write_daif(SPSR_EXCEPTION_MASK);
--	dcache_disable();
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		dcache_disable();
- 
- 	atf_entry(bl31_params, (void *)fdt_addr);
+ static int rk3399_dmc_probe(struct udevice *dev)
+ {
++	struct dram_info *priv = dev_get_priv(dev);
++
+ #if defined(CONFIG_TPL_BUILD) || \
+ 	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ 	if (rk3399_dmc_init(dev))
+ 		return 0;
+-#else
+-	struct dram_info *priv = dev_get_priv(dev);
+-
++#endif
+ 	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+ 	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+ 	priv->info.base = CFG_SYS_SDRAM_BASE;
+ 	priv->info.size =
+ 		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+-#endif
++
+ 	return 0;
  }
+ 
 -- 
 2.34.1
 
