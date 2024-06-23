@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA4BC27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC20EC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C317888591;
-	Sun, 23 Jun 2024 22:30:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45870883B1;
+	Sun, 23 Jun 2024 22:32:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KePWrxQk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BpLrDd92";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91FBB87D07; Sun, 23 Jun 2024 22:30:51 +0200 (CEST)
-Received: from mail-io1-xd44.google.com (mail-io1-xd44.google.com
- [IPv6:2607:f8b0:4864:20::d44])
+ id 73CEA8837A; Sun, 23 Jun 2024 22:32:22 +0200 (CEST)
+Received: from mail-il1-x141.google.com (mail-il1-x141.google.com
+ [IPv6:2607:f8b0:4864:20::141])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F26088569
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:30:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E26F1884BE
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd44.google.com with SMTP id
- ca18e2360f4ac-7eb75c0d0a7so127998539f.3
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:30:48 -0700 (PDT)
+Received: by mail-il1-x141.google.com with SMTP id
+ e9e14a558f8ab-375daa47685so16517835ab.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719174647; x=1719779447; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B+ashUbIN25qKsnBwZRuLHdB7K6Nj39S33p92ZbbXXA=;
- b=KePWrxQkHN0n0G7OEaaHX4L1Xjq01phWmZUcCtARlmTCkvXiSL1dK4nmjnq69Y4hqU
- f23o0ynkAVcx9EC139MkZCJIHclbpV+Rw/8vZKZiGg0r4TYwcLSOWx69YX1yyeIwu1DO
- HtOQgFTr/gBLOTgs5JdMFV3vqKkOBh+7LhZA8=
+ d=chromium.org; s=google; t=1719174738; x=1719779538; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5QXyZWkpsl3TboluHjT4040WFeVkOKOb0Wj/c1dKvCc=;
+ b=BpLrDd92uKQnU1p5N4htxq1dDyZhNuMS2ViuxqRjf+pM6FMaBVX8nM0o/HO9JWr2BU
+ X6ZuCNhx0yui2scqcT8Wkrm4qtrfIkp4XQZgsj8WhkxjSFDnetvX7/c6CJ3jiA8YfXX8
+ mXCswEkAj0MHubaipVsFKXa/H/TGteoXuuOww=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719174647; x=1719779447;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=B+ashUbIN25qKsnBwZRuLHdB7K6Nj39S33p92ZbbXXA=;
- b=dzFGpzLS5g76yEf/sP3+S4W2XL0YGXOV3c42YuPlV3wFxjl6+ttMAOBsOjk9qedjV3
- XYRjTRvVn925afyUsxbVSYyrbWYfktDHe5obSdTi1+9BT3euitIuhiARSjN1Jn5lEh2n
- TGfWRNwYdCGZxkZ5B0fMKC/ODB56GGU7RrkobqXvaNJtilNMia3gdXzmt+9cqMBe11bh
- xQ4MFZqhctOG3yE8aWKXo1Yu+SyE4TNxICgvaAvnb/W3lP6uifMgJvJc0Uy9Or0DXrEQ
- NmSpRANZjcouWpg/fxLPuaNoEAPTJWIIRRaP2n//LCAopMOiTGVzM+XrrPbJcs2oQUh8
- lGeg==
-X-Gm-Message-State: AOJu0YyENFSj5B+ijIzTQv+dZFG69Uk0O8yn+H1DoixADertQ6Cr7S35
- tAKhS64/TQh/hKMR3Grt6DoR6GJVtvJQTeHJX6lT0OJJ4zT+LALjvcNFFhLL1iAVxXrdRbcBT3X
- s2VLj
-X-Google-Smtp-Source: AGHT+IFxLuM2hvruVivlmICnMePxFQWXEQouYMwYrfPUwBB18VjJrizaWprQ7OpeLm499TP0zzSS2Q==
-X-Received: by 2002:a05:6602:2ccc:b0:7eb:7351:8beb with SMTP id
- ca18e2360f4ac-7f3a4d5d227mr339301339f.0.1719174647272; 
- Sun, 23 Jun 2024 13:30:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1719174738; x=1719779538;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5QXyZWkpsl3TboluHjT4040WFeVkOKOb0Wj/c1dKvCc=;
+ b=tifHFbRCtPKlBpcb9/pv9WKsMRvc6VxggQkgfJ4PBRn3TR8OTWNhRKlxrxmSW9cDJg
+ fhb2Af+sMn6VR1rx8B7Y7om8U/mI3saGXsMmWBOyjUdUkl59bi7YZ2utw7JiIFFM4Jb/
+ gtfi7SELh3BcCsBxpE/+89IayEH+ZSwp8lB1rXhKa5UN4AH9idorFCVsb8wTZTV0abEM
+ sX4GpSQF+uh3ch+gQSGG643mU58yWVLks2FiUlWjdyjaRcWR/G8qRuoBzE+Ps0KE/HdZ
+ L5D8Bz8Ei0sBYBcLLeHrEnVk5DaoWJciFvB9rJxxh0gCo/WpoZjJau9wsXHXbVxPFwyg
+ tOJA==
+X-Gm-Message-State: AOJu0Yzi3ZpKcwTqDunLpEe6XiqnuYLRyJO2I9dHyPHzO25NhqgePcoa
+ N4FVpQ8aNL3GP3O1chzjb9qQKWJcX3ELV1C1di4C6wVGgpw8LjdPy6dqmsXiZP03w5aEjZ7Bikg
+ wtYqB
+X-Google-Smtp-Source: AGHT+IFTSVj52jxVI86Wd5OxP+8lb+1Dn6LdlZ8ZatedDVfAMn2dei3DJn1DvuGve6Y3uoyhBDetug==
+X-Received: by 2002:a05:6e02:1a28:b0:375:a50d:7f45 with SMTP id
+ e9e14a558f8ab-3763f5ae01fmr34741215ab.1.1719174738489; 
+ Sun, 23 Jun 2024 13:32:18 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4b9d110ffb6sm1627335173.58.2024.06.23.13.30.46
+ e9e14a558f8ab-3763374634asm12016765ab.52.2024.06.23.13.32.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 13:30:47 -0700 (PDT)
+ Sun, 23 Jun 2024 13:32:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 14/14] smbios: Correct error handling when writing tables
-Date: Sun, 23 Jun 2024 14:30:33 -0600
-Message-Id: <20240623203033.1566505-15-sjg@chromium.org>
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Love Kumar <love.kumar@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v3 00/19] labgrid: Provide an integration with Labgrid
+Date: Sun, 23 Jun 2024 14:31:54 -0600
+Message-Id: <20240623203213.1571666-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240623203033.1566505-1-sjg@chromium.org>
-References: <20240623203033.1566505-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,49 +90,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since write_smbios_table() returns an address, we cannot use it to
-return and error number. Also, failing on sysinfo_detect() breaks
-existing boards, e.g. chromebook_link
+Labgrid provides access to a hardware lab in an automated way. It is
+possible to boot U-Boot on boards in the lab without physically touching
+them. It relies on relays, USB UARTs and SD muxes, among other things.
 
-Correct this by logging and swallowing the error.
+By way of background, about 4 years ago I wrong a thing called Labman[1]
+which allowed my lab of about 30 devices to be operated remotely, using
+tbot for the console and build integration. While it worked OK and I
+used it for many bisects, I didn't take it any further.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: a5a57562856 ("lib: smbios: Detect system properties via...")
----
+It turns out that there was already an existing program, called Labgrid,
+which I did not know about at time (thank you Tom for telling me). It is
+more rounded than Labman and has a number of advantages:
 
-(no changes since v1)
+- does not need udev rules, mostly
+- has several existing users who rely on it
+- supports multiple machines exporting their devices
 
- lib/smbios.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+It lacks a 'lab check' feature and a few other things, but these can be
+remedied.
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index fb6eaf1d5ca..4126466e34a 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -5,6 +5,8 @@
-  * Adapted from coreboot src/arch/x86/smbios.c
-  */
- 
-+#define LOG_CATEGORY	LOGC_BOARD
-+
- #include <dm.h>
- #include <env.h>
- #include <linux/stringify.h>
-@@ -596,8 +598,12 @@ ulong write_smbios_table(ulong addr)
- 
- 			parent_node = dev_read_subnode(ctx.dev, "smbios");
- 			ret = sysinfo_detect(ctx.dev);
--			if (ret)
--				return ret;
-+
-+			/*
-+			 * ignore the error since many boards don't implement
-+			 * this and we can still use the info in the devicetree
-+			 */
-+			ret = log_msg_ret("sys", ret);
- 		}
- 	} else {
- 		ctx.dev = NULL;
+On and off over the past several weeks I have been experimenting with
+Labgrid. I have managed to create an initial U-Boot integration (this
+series) by adding various features to Labgrid[2] and the U-Boot test
+hooks.
+
+I hope that this might inspire others to set up boards and run tests
+automatically, rather than relying on infrequent, manual test. Perhaps
+it may even be possible to have a number of labs available.
+
+Included in the integration are a number of simple scripts which make it
+easy to connect to boards and run tests:
+
+ub-int <target>
+    Build and boot on a target, starting an interactive session
+
+ub-cli <target>
+    Build and boot on a target, ensure U-Boot starts and provide an interactive
+    session from there
+
+ub-smoke <target>
+    Smoke test U-Boot to check that it boots to a prompt on a target
+
+ub-bisect
+    Bisect a git tree to locate a failure on a particular target
+
+ub-pyt <target> <testspec>
+    Run U-Boot pytests on a target
+
+Some of these help to provide the same tbot[4] workflow which I have
+relied on for several years, albeit much simpler versions.
+
+The goal here is to create some sort of script which can collect
+patches from the mailing list, apply them and test them on a selection
+of boards. I suspect that script already exists, so please let me know
+what you suggest.
+
+I hope you find this interesting and take a look!
+
+[1] https://github.com/sjg20/u-boot/tree/lab6a
+[2] https://github.com/labgrid-project/labgrid/pull/1411
+[3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
+[4] https://tbot.tools/index.html
+
+Changes in v3:
+- Split out most patches into two new series and update cover letter
+
+Changes in v2:
+- Only disable echo if a terminal is detected
+- Avoid running a docker image for skipped lab tests
+
+Simon Glass (19):
+  test: Allow signaling that U-Boot is ready
+  test: Use a constant for the test timeout
+  test: Pass stderr to stdout
+  test: Release board after tests complete
+  test: Allow connecting to a running board
+  test: Avoid failing skipped tests
+  test: Create a common function to get the config
+  test: Introduce the concept of a role
+  test: Move the receive code into a function
+  test: Separate out the exception handling
+  test: Detect dead connections
+  test: Tidy up remaining exceptions
+  test: Introduce lab mode
+  test: Improve handling of sending commands
+  test: Fix mulptiplex_log typo
+  test: Avoid double echo when starting up
+  test: Try to shut down the lab console gracefully
+  test: Add a section for closing the connection
+  CI: Allow running tests on sjg lab
+
+ .gitlab-ci.yml                        | 153 +++++++++++++++++++++++++
+ test/py/conftest.py                   |  86 +++++++++++---
+ test/py/u_boot_console_base.py        | 154 ++++++++++++++++++--------
+ test/py/u_boot_console_exec_attach.py |  31 ++++--
+ test/py/u_boot_spawn.py               | 120 +++++++++++++++++---
+ test/test-main.c                      |  16 ++-
+ 6 files changed, 470 insertions(+), 90 deletions(-)
+
 -- 
 2.34.1
 
