@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB696C2BBCA
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 11:50:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3BFC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 11:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B85CF8854A;
-	Sun, 23 Jun 2024 13:49:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 273DD882B8;
+	Sun, 23 Jun 2024 13:49:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jVAKNioS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZAKkytzb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86E7F882B8; Sun, 23 Jun 2024 13:49:15 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 1BB3D882B8; Sun, 23 Jun 2024 13:49:20 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D340884FF
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:49:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D8E48855C
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:49:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57d05e0017aso4070938a12.1
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 04:49:13 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-57d203d4682so4068395a12.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 04:49:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719143352; x=1719748152; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719143356; x=1719748156; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KraYSJlmPBi5ybskApfioaa8wae00p58MKb1xkdItE8=;
- b=jVAKNioS0YvCUaIIcuiIj4qdFQD+AIImbPph82fWP5T7zL5b5UcyJtoHuljf322fI6
- r3C0X4iTjk25/Mtm4eMp8XLpb3sDpGW294Dil7WjbpN3yGg+I2I5mLFXg2+6+ufecFml
- iwBK0iFSgS4uF1UZkJWOnZWvm0ICVWSsbIpI2fKNgX85IO0NLkkLhAt8/x55O0KQwQ1L
- AYvJUuzeM7s6f0gWyIvCxsFHF0U2I38F99ZnquCtAC+qUkpO+PJKT79F4njj+h87JoiD
- fBzA7WOOBSkY62Y/fZwMAxDGnzub92VmqAKjP0eoP95MGl+ybloBiIV0wt62dg+YMDiB
- 3QAg==
+ bh=pw5H0u0c48y+4fn8JouCrrGyjr+gXdfIWa2gd781q3U=;
+ b=ZAKkytzbrCNKEvNbRd+qc31vNIOogicUxcz2ylv9HZ6BmJD+sdxrn+xbCYRR/RxGml
+ /TJPGFH18cz9IStiapOqipRS4yfVtmy5TXP1yHAeJ/ool42BsJnYKUyuXtao/j3mL3rX
+ 0FPDoiKeA7vU/cdiilL4CiGAXDo6hD/JfHKqJ+4aG6EWO6jfHvkbvjdaoffKB6NXzr/P
+ GrOTiOj5ldhc92XdDNbBBC0yj7W30h3HBXQvEXYGYkvs+vfOIyos9XUcf+Ex92sl0t0U
+ j4dHrFgaJy5sllGo1DjcMKidv8oszhidSlz+Ye9cwPKu1bTiF/NBGnYOgRFZ2hd9QxtP
+ ctpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719143352; x=1719748152;
+ d=1e100.net; s=20230601; t=1719143356; x=1719748156;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KraYSJlmPBi5ybskApfioaa8wae00p58MKb1xkdItE8=;
- b=uce6OAjP9hasTk1daiic3+L0b9y2UFs3gS/uB1K5i1sivqUfCCaHJMn1Sge7TrwLy0
- Wca63pRWSxsGch8bxo0Hy3lVhEGMiMsP9TMOa7Ks0xOYiC1DBbHSXu8QXazVyMGae007
- 99Cn8vlwRXiPwVXcwfnVcWvE+UNVzO1NAjD6s50FTkCjvQQc24sA4lbL+lUXtxEOo08z
- q2b3Ie/RsmVeXXtC5vLdAJPhtfYxzyhhbNPotCZj7gaCwFQxZPHT8+8y+3RcMmnz0WTM
- iK8kyQB2Esi1I0fYCyaEKIOcbLSOVfqzQygfQYaGtZcR8GgXcbQM9O3SKblT1XDs9lmH
- bBVA==
+ bh=pw5H0u0c48y+4fn8JouCrrGyjr+gXdfIWa2gd781q3U=;
+ b=etEzqWo+JHFS5uOCtwtDsVGwTpRDxMMtsFg+rvSwUJJi/l11q4ACxOY5So1FkQfMdy
+ kldxAu+hG+bR+iltM1U8077zMSPmEE8d/vjihwhn1bjURBbQx2OSszedkToM9CmAqqwZ
+ X6kfxq8DiXQyLm3l1hCVGvayvyFP0A1ZWnSy3T8+Vze/5Qv3jni72mhWklA6bGA7qjIz
+ lKb/Qy1qH5Z9I5zIOd/8rteKN8RGYf2SGh4/d65oOAlROghSCAoVF13okyK+GCcyAbXN
+ s9B5Ify8q36PeAt9UViVeceOx+wxYhxKX5jQa7Syht/GuOAAidOBDkAoBbwsL49WVgV3
+ w7Bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdC4Q3WdnbFN/UFj/Y+oEx1XRA9dcV3JID0+6SwZIbiESXX+ws4LWY2d+TATCmwvi7z22CMWOKBdfvTZ8fK4N3jK0wlA==
-X-Gm-Message-State: AOJu0YxAbEsmzkQWzMbsOmMC86CCSYhlTfMapi3X/W8c34fcx+Eqh6tI
- l9Bwoj1p7my69KL2dh1LsxNijcsPDFjdpgxs64Tg2PpIax8UZH7ClG2KcUUXsso=
-X-Google-Smtp-Source: AGHT+IEAQyHD6Qevyzi4qr2PXVil0JR6yN6AgAY+s4YMrfOh1w5Oq72iaKS9S7j2ydxT9Yk7T+l2vw==
-X-Received: by 2002:aa7:c382:0:b0:57d:46f4:7df5 with SMTP id
- 4fb4d7f45d1cf-57d46f47e4fmr1642561a12.23.1719143352213; 
- Sun, 23 Jun 2024 04:49:12 -0700 (PDT)
+ AJvYcCW1t/ONqz23RSSH26JqhfvFP2lctBFJCwsKhuEeQs4da+CXKj0fnf0Ap7mpKG7kjuEeuhOnn/I392y7oI4s1I7A8bO+5A==
+X-Gm-Message-State: AOJu0YzcJdOvYm/Q/AKrAJu8W2UYx3KHg0ZI+dhdLlPitpZ8JCo5OAkK
+ PWOwJRdMcDb/A2QVY3f3Ha/+wLnl0UUl+UsmrrH7v9xDXVSE2XmEUQuA4evNF7pt/cgj+3MMfCF
+ uARg=
+X-Google-Smtp-Source: AGHT+IH78uzZL4tsYDhoqjV4RBKA3ucdeOVa/KJFyr31tY91G+goXbkFO0x8JbpNmg9KALG+zxedXw==
+X-Received: by 2002:a50:9318:0:b0:57c:71a4:3142 with SMTP id
+ 4fb4d7f45d1cf-57d45791e60mr2073564a12.11.1719143356274; 
+ Sun, 23 Jun 2024 04:49:16 -0700 (PDT)
 Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
  [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d30534ffasm3402053a12.60.2024.06.23.04.49.10
+ 4fb4d7f45d1cf-57d30534ffasm3402053a12.60.2024.06.23.04.49.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 04:49:11 -0700 (PDT)
+ Sun, 23 Jun 2024 04:49:15 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	sjg@chromium.org,
@@ -75,13 +76,14 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>,
  Sean Anderson <sean.anderson@seco.com>,
- Michal Simek <michal.simek@amd.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Michal Simek <michal.simek@amd.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 7/8] tpm: Untangle tpm2_get_pcr_info()
-Date: Sun, 23 Jun 2024 14:48:17 +0300
-Message-ID: <20240623114838.14639-8-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 8/8] tpm: allow the user to select the compiled algorithms
+Date: Sun, 23 Jun 2024 14:48:18 +0300
+Message-ID: <20240623114838.14639-9-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240623114838.14639-1-ilias.apalodimas@linaro.org>
 References: <20240623114838.14639-1-ilias.apalodimas@linaro.org>
@@ -103,283 +105,243 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function was used on measured boot to retrieve the number of active
-PCR banks and was designed to work with the TCG protocols.
-Since we now have the need to retrieve the active PCRs outside the
-measured boot context -- e.g use the in the command line, decouple the
-function.
+Simon reports that after enabling all algorithms on the TPM some boards
+fail since they don't have enough storage to accommodate the ~5KB growth.
 
-Create one that will only adheres to TCG TSS2.0 [0] specification called
-tpm2_get_pcr_info() which can be used by the TPM2.0 APIs and a new one that
-is called from the measured boot context called tcg2_get_pcr_info()
+The choice of hash algorithms is determined by the platform and the TPM
+configuration. Failing to cap a PCR in a bank which the platform left
+active is a security vulnerability. It might allow  unsealing of secrets
+if an attacker can replay a good set of measurements into an unused bank.
 
-[0] https://trustedcomputinggroup.org/wp-content/uploads/TSS_Overview_Common_Structures_Version-0.9_Revision-03_Review_030918.pdf
+If MEASURED_BOOT or EFI_TCG2_PROTOCOL is enabled our Kconfig will enable
+all supported hashing algorithms. We still want to allow users to add a
+TPM and not enable measured boot via EFI or bootm though and at the same
+time, control the compiled algorithms for size reasons.
+
+So let's add a function tpm2_allow_extend() which checks the TPM active
+PCRs banks against the one U-Boot was compiled with. We only allow
+extending PCRs if the algorithms selected during build match the TPM
+configuration.
+
+It's worth noting that this is only added for TPM2.0, since TPM1.2 is
+lacking a lot of code at the moment to read the available PCR banks.
+We unconditionally enable SHA1 when a TPM is selected, which is the only
+hashing algorithm v1.2 supports.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- include/tpm-v2.h          | 16 ++++++---
- include/tpm_tcg2.h        | 13 +++++++
- lib/efi_loader/efi_tcg2.c |  2 +-
- lib/tpm-v2.c              | 73 +++++++++++++--------------------------
- lib/tpm_tcg2.c            | 38 +++++++++++++++++++-
- 5 files changed, 86 insertions(+), 56 deletions(-)
+ boot/Kconfig     |  4 ++++
+ include/tpm-v2.h | 59 +++++++++++++++++++++++++++++++++++-------------
+ lib/Kconfig      |  6 ++---
+ lib/tpm-v2.c     | 40 +++++++++++++++++++++++++++++---
+ 4 files changed, 87 insertions(+), 22 deletions(-)
 
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 6f3096c15a6f..b061891e109c 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
+ config MEASURED_BOOT
+ 	bool "Measure boot images and configuration when booting without EFI"
+ 	depends on HASH && TPM_V2
++	select SHA1
++	select SHA256
++	select SHA384
++	select SHA512
+ 	help
+ 	  This option enables measurement of the boot process when booting
+ 	  without UEFI . Measurement involves creating cryptographic hashes
 diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index fc7c58204e58..aedf2c0f4f5c 100644
+index aedf2c0f4f5c..4fd19c52fd70 100644
 --- a/include/tpm-v2.h
 +++ b/include/tpm-v2.h
-@@ -522,14 +522,11 @@ u32 tpm2_get_capability(struct udevice *dev, u32 capability, u32 property,
-  * tpm2_get_pcr_info() - get the supported, active PCRs and number of banks
-  *
-  * @dev:		TPM device
-- * @supported_pcr:	bitmask with the algorithms supported
-- * @active_pcr:		bitmask with the active algorithms
-- * @pcr_banks:		number of PCR banks
-+ * @pcrs:		struct tpml_pcr_selection of available PCRs
-  *
-  * @return 0 on success, code of operation or negative errno on failure
-  */
--int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
--		      u32 *pcr_banks);
-+int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs);
+@@ -278,48 +278,40 @@ struct digest_info {
+ #define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
  
- /**
-  * Issue a TPM2_DictionaryAttackLockReset command.
-@@ -715,4 +712,13 @@ enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
+ static const struct digest_info hash_algo_list[] = {
++#if IS_ENABLED(CONFIG_SHA1)
+ 	{
+ 		"sha1",
+ 		TPM2_ALG_SHA1,
+ 		TCG2_BOOT_HASH_ALG_SHA1,
+ 		TPM2_SHA1_DIGEST_SIZE,
+ 	},
++#endif
++#if IS_ENABLED(CONFIG_SHA256)
+ 	{
+ 		"sha256",
+ 		TPM2_ALG_SHA256,
+ 		TCG2_BOOT_HASH_ALG_SHA256,
+ 		TPM2_SHA256_DIGEST_SIZE,
+ 	},
++#endif
++#if IS_ENABLED(CONFIG_SHA384)
+ 	{
+ 		"sha384",
+ 		TPM2_ALG_SHA384,
+ 		TCG2_BOOT_HASH_ALG_SHA384,
+ 		TPM2_SHA384_DIGEST_SIZE,
+ 	},
++#endif
++#if IS_ENABLED(CONFIG_SHA512)
+ 	{
+ 		"sha512",
+ 		TPM2_ALG_SHA512,
+ 		TCG2_BOOT_HASH_ALG_SHA512,
+ 		TPM2_SHA512_DIGEST_SIZE,
+ 	},
++#endif
+ };
+ 
+-static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
+-{
+-	switch (a) {
+-	case TPM2_ALG_SHA1:
+-		return TPM2_SHA1_DIGEST_SIZE;
+-	case TPM2_ALG_SHA256:
+-		return TPM2_SHA256_DIGEST_SIZE;
+-	case TPM2_ALG_SHA384:
+-		return TPM2_SHA384_DIGEST_SIZE;
+-	case TPM2_ALG_SHA512:
+-		return TPM2_SHA512_DIGEST_SIZE;
+-	default:
+-		return 0;
+-	}
+-}
+-
+ /* NV index attributes */
+ enum tpm_index_attrs {
+ 	TPMA_NV_PPWRITE		= 1UL << 0,
+@@ -712,6 +704,41 @@ enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
   */
  const char *tpm2_algorithm_name(enum tpm2_algorithms);
  
 +/**
-+ * tpm2_is_active_pcr() - check the pcr_select. If at least one of the PCRs
-+ *			  supports the algorithm add it on the active ones
++ * tpm2_algorithm_to_len() - Return an algorithm length for supported algorithm id
 + *
-+ * @selection: PCR selection structure
-+ * Return: True if the algorithm is active
++ * @algorithm_id: algorithm defined in enum tpm2_algorithms
++ * Return: len or 0 if not supported
 + */
-+bool tpm2_is_active_pcr(struct tpms_pcr_selection *selection);
++u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo);
 +
- #endif /* __TPM_V2_H */
-diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
-index 4e4ea1e8067d..6519004cc410 100644
---- a/include/tpm_tcg2.h
-+++ b/include/tpm_tcg2.h
-@@ -93,6 +93,19 @@ struct tcg_pcr_event {
- 	u8 event[];
- } __packed;
- 
-+/**
-+ * tcg2_get_pcr_info() - get the supported, active PCRs and number of banks
++/*
++ * When measured boot is enabled via EFI or bootX commands all the algorithms
++ * above are selected by our Kconfigs. Due to U-Boots nature of being small there
++ * are cases where we need some functionality from the TPM -- e.g storage or RNG
++ * but we don't want to support measurements.
 + *
-+ * @dev:		TPM device
-+ * @supported_pcr:	bitmask with the algorithms supported
-+ * @active_pcr:		bitmask with the active algorithms
-+ * @pcr_banks:		number of PCR banks
++ * The choice of hash algorithms are determined by the platform and the TPM
++ * configuration. Failing to cap a PCR in a bank which the platform left
++ * active is a security vulnerability. It permits the unsealing of secrets
++ * if an attacker can replay a good set of measurements into an unused bank.
 + *
-+ * @return 0 on success, code of operation or negative errno on failure
++ * On top of that a previous stage bootloader (e.g TF-A), migh pass an eventlog
++ * since it doesn't have a TPM driver, which U-Boot needs to replace. The algorit h
++ * choice is a compile time option in that case and we need to make sure we conform.
++ *
++ * Add a variable here that sums the supported algorithms U-Boot was compiled
++ * with so we can refuse to do measurements if we don't support all of them
 + */
-+int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
-+		      u32 *pcr_banks);
++
++/**
++ * tpm2_allow_extend() - Check if extending PCRs is allowed and safe
++ *
++ * @dev: TPM device
++ * Return: true if allowed
++ */
++bool tpm2_allow_extend(struct udevice *dev);
 +
  /**
-  * Crypto Agile Log Entry Format
-  *
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index 19fe4720ef48..ebbcd13bfbf6 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -279,7 +279,7 @@ efi_tcg2_get_capability(struct efi_tcg2_protocol *this,
- 	/* Supported and active PCRs */
- 	capability->hash_algorithm_bitmap = 0;
- 	capability->active_pcr_banks = 0;
--	ret = tpm2_get_pcr_info(dev, &capability->hash_algorithm_bitmap,
-+	ret = tcg2_get_pcr_info(dev, &capability->hash_algorithm_bitmap,
- 				&capability->active_pcr_banks,
- 				&capability->number_of_pcr_banks);
- 	if (ret) {
+  * tpm2_is_active_pcr() - check the pcr_select. If at least one of the PCRs
+  *			  supports the algorithm add it on the active ones
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 189e6eb31aa1..b3baa4b85b07 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -439,9 +439,6 @@ config TPM
+ 	depends on DM
+ 	imply DM_RNG
+ 	select SHA1
+-	select SHA256
+-	select SHA384
+-	select SHA512
+ 	help
+ 	  This enables support for TPMs which can be used to provide security
+ 	  features for your board. The TPM can be connected via LPC or I2C
+@@ -449,6 +446,9 @@ config TPM
+ 	  command to interactive the TPM. Driver model support is provided
+ 	  for the low-level TPM interface, but only one TPM is supported at
+ 	  a time by the TPM library.
++	  For size reasons only SHA1 is selected which is supported on TPM1.2.
++	  If you want a fully functional TPM enable all hashing algorithms.
++	  If you enabled measured boot all hashing algorithms are selected.
+ 
+ config SPL_TPM
+ 	bool "Trusted Platform Module (TPM) Support in SPL"
 diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 62ab804b4b38..36aace03cf4e 100644
+index 36aace03cf4e..59e6cbafafaa 100644
 --- a/lib/tpm-v2.c
 +++ b/lib/tpm-v2.c
-@@ -395,48 +395,26 @@ static int tpm2_get_num_pcr(struct udevice *dev, u32 *num_pcr)
- 	return 0;
- }
+@@ -196,6 +196,11 @@ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
  
--static bool tpm2_is_active_pcr(struct tpms_pcr_selection *selection)
--{
--	int i;
--
--	/*
--	 * check the pcr_select. If at least one of the PCRs supports the
--	 * algorithm add it on the active ones
--	 */
--	for (i = 0; i < selection->size_of_select; i++) {
--		if (selection->pcr_select[i])
--			return true;
--	}
--
--	return false;
--}
--
--int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
--		      u32 *pcr_banks)
-+int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
- {
- 	u8 response[(sizeof(struct tpms_capability_data) -
- 		offsetof(struct tpms_capability_data, data))];
--	struct tpml_pcr_selection pcrs;
- 	u32 num_pcr;
- 	size_t i;
- 	u32 ret;
- 
--	*supported_pcr = 0;
--	*active_pcr = 0;
--	*pcr_banks = 0;
--	memset(response, 0, sizeof(response));
- 	ret = tpm2_get_capability(dev, TPM2_CAP_PCRS, 0, response, 1);
- 	if (ret)
- 		return ret;
- 
--	pcrs.count = get_unaligned_be32(response);
-+	pcrs->count = get_unaligned_be32(response);
+ 	if (!digest)
+ 		return -EINVAL;
++
++	if (!tpm2_allow_extend(dev)) {
++		log_err("Cannot extend PCRs if all the TPM enabled algorithms are not supported\n");
++		return -EINVAL;
++	}
  	/*
- 	 * We only support 5 algorithms for now so check against that
+ 	 * Fill the command structure starting from the first buffer:
+ 	 *     - the digest
+@@ -409,11 +414,10 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
+ 
+ 	pcrs->count = get_unaligned_be32(response);
+ 	/*
+-	 * We only support 5 algorithms for now so check against that
++	 * We only support 4 algorithms for now so check against that
  	 * instead of TPM2_NUM_PCR_BANKS
  	 */
--	if (pcrs.count > ARRAY_SIZE(hash_algo_list) ||
--	    pcrs.count < 1) {
--		printf("%s: too many pcrs: %u\n", __func__, pcrs.count);
-+	if (pcrs->count > ARRAY_SIZE(hash_algo_list) ||
-+	    pcrs->count < 1) {
-+		printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
+-	if (pcrs->count > ARRAY_SIZE(hash_algo_list) ||
+-	    pcrs->count < 1) {
++	if (pcrs->count > 4 || pcrs->count < 1) {
+ 		printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
  		return -EMSGSIZE;
  	}
- 
-@@ -444,7 +422,7 @@ int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
- 	if (ret)
- 		return ret;
- 
--	for (i = 0; i < pcrs.count; i++) {
-+	for (i = 0; i < pcrs->count; i++) {
- 		/*
- 		 * Definition of TPMS_PCR_SELECTION Structure
- 		 * hash: u16
-@@ -464,35 +442,20 @@ int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
- 			hash_offset + offsetof(struct tpms_pcr_selection,
- 					       pcr_select);
- 
--		pcrs.selection[i].hash =
-+		pcrs->selection[i].hash =
- 			get_unaligned_be16(response + hash_offset);
--		pcrs.selection[i].size_of_select =
-+		pcrs->selection[i].size_of_select =
- 			__get_unaligned_be(response + size_select_offset);
--		if (pcrs.selection[i].size_of_select > TPM2_PCR_SELECT_MAX) {
-+		if (pcrs->selection[i].size_of_select > TPM2_PCR_SELECT_MAX) {
- 			printf("%s: pcrs selection too large: %u\n", __func__,
--			       pcrs.selection[i].size_of_select);
-+			       pcrs->selection[i].size_of_select);
- 			return -ENOBUFS;
- 		}
- 		/* copy the array of pcr_select */
--		memcpy(pcrs.selection[i].pcr_select, response + pcr_select_offset,
--		       pcrs.selection[i].size_of_select);
--	}
--
--	for (i = 0; i < pcrs.count; i++) {
--		u32 hash_mask = tcg2_algorithm_to_mask(pcrs.selection[i].hash);
--
--		if (hash_mask) {
--			*supported_pcr |= hash_mask;
--			if (tpm2_is_active_pcr(&pcrs.selection[i]))
--				*active_pcr |= hash_mask;
--		} else {
--			printf("%s: unknown algorithm %x\n", __func__,
--			       pcrs.selection[i].hash);
--		}
-+		memcpy(pcrs->selection[i].pcr_select, response + pcr_select_offset,
-+		       pcrs->selection[i].size_of_select);
- 	}
- 
--	*pcr_banks = pcrs.count;
--
- 	return 0;
+@@ -880,3 +884,33 @@ const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
+ 	return "";
  }
  
-@@ -880,6 +843,18 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
- 	return 0;
- }
- 
-+bool tpm2_is_active_pcr(struct tpms_pcr_selection *selection)
++u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo)
 +{
-+	int i;
-+
-+	for (i = 0; i < selection->size_of_select; i++) {
-+		if (selection->pcr_select[i])
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
- {
- 	size_t i;
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 91b9612fd3f6..7f868cc88374 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -20,6 +20,42 @@
- #include <linux/unaligned/le_byteshift.h>
- #include "tpm-utils.h"
- 
-+int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
-+		      u32 *pcr_banks)
-+{
-+	u8 response[(sizeof(struct tpms_capability_data) -
-+		offsetof(struct tpms_capability_data, data))];
-+	struct tpml_pcr_selection pcrs;
 +	size_t i;
-+	u32 ret;
 +
-+	*supported_pcr = 0;
-+	*active_pcr = 0;
-+	*pcr_banks = 0;
-+	memset(response, 0, sizeof(response));
-+
-+	ret = tpm2_get_pcr_info(dev, &pcrs);
-+	if (ret)
-+		return ret;
-+
-+	for (i = 0; i < pcrs.count; i++) {
-+		u32 hash_mask = tcg2_algorithm_to_mask(pcrs.selection[i].hash);
-+
-+		if (hash_mask) {
-+			*supported_pcr |= hash_mask;
-+			if (tpm2_is_active_pcr(&pcrs.selection[i]))
-+				*active_pcr |= hash_mask;
-+		} else {
-+			printf("%s: unknown algorithm %x\n", __func__,
-+			       pcrs.selection[i].hash);
-+		}
++	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
++		if (hash_algo_list[i].hash_alg == algo)
++			return hash_algo_list[i].hash_len;
 +	}
-+
-+	*pcr_banks = pcrs.count;
 +
 +	return 0;
 +}
 +
- int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_banks)
- {
- 	u32 supported = 0;
-@@ -27,7 +63,7 @@ int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_banks)
- 	u32 active = 0;
- 	int rc;
- 
--	rc = tpm2_get_pcr_info(dev, &supported, &active, &pcr_banks);
-+	rc = tcg2_get_pcr_info(dev, &supported, &active, &pcr_banks);
- 	if (rc)
- 		return rc;
- 
++bool tpm2_allow_extend(struct udevice *dev)
++{
++	struct tpml_pcr_selection pcrs;
++	size_t i;
++	int rc;
++
++	rc = tpm2_get_pcr_info(dev, &pcrs);
++	if (rc)
++		return false;
++
++	for (i = 0; i < pcrs.count; i++) {
++		if (tpm2_is_active_pcr(&pcrs.selection[i]) &&
++		    !tpm2_algorithm_to_len(pcrs.selection[i].hash))
++			return false;
++	}
++
++	return true;
++}
 -- 
 2.45.2
 
