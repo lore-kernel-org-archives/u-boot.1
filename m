@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA0EC2BA18
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB26CC2BA18
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:34:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE9DC884C8;
-	Sun, 23 Jun 2024 22:32:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49D938854A;
+	Sun, 23 Jun 2024 22:32:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="le6YJT+2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WTpZKz7t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E86F188582; Sun, 23 Jun 2024 22:32:25 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id DE91B88327; Sun, 23 Jun 2024 22:32:26 +0200 (CEST)
+Received: from mail-il1-x142.google.com (mail-il1-x142.google.com
+ [IPv6:2607:f8b0:4864:20::142])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC84E8852D
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6BAC882E6
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-376208fbe7bso14929265ab.3
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:23 -0700 (PDT)
+Received: by mail-il1-x142.google.com with SMTP id
+ e9e14a558f8ab-375f43e005cso10774485ab.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719174742; x=1719779542; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719174743; x=1719779543; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nLCrRj6pAlFRGjImJoweM//OdBLyyEKrzNSfFlyshSE=;
- b=le6YJT+2o9OvwxCOrwrdvdEhOWyb2W1D3p5a7inkh7IzTu5aQVpi8TTXhiK5TnwNRH
- ow16NnNK9C3CycCWUUJevsq/4M2tcAz4u/gvR309FFstvel0Q3JVKotn9q+7xbpJhMtd
- VRVqEHiH55qS4GkbAWLHeMvJCiU2nU268Xs58=
+ bh=n+H31XKUz/+EK1B2GCG0Zwccq4I6BpseEx5TJ2nBGWw=;
+ b=WTpZKz7tohVUYi6r7Y4WjeCRrFqdUVW2BItG26IJo1WRVsRMHaG97YfRxV7aHlCzxA
+ a3V6KCFJgVHz2dMyA79EMI6iwTyv0kcMGW8lS0mMWdyPNKZaOA0yKPw/ScPOaYCuJINY
+ f0gYybDjh0CjZ7+Qhm7SuwR+NZ0pFQGofMwAU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719174742; x=1719779542;
+ d=1e100.net; s=20230601; t=1719174743; x=1719779543;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nLCrRj6pAlFRGjImJoweM//OdBLyyEKrzNSfFlyshSE=;
- b=P0j2KO59dc4DCuoMTm2gCXqsJ8O3jyD4VXrEe7XzGjWRHp/k982tGa/sk6Kx4t1L0F
- irzT3sPnu6asIo95J4DUfdIdUorqQz0YX5dofYD8bLsJ0wWohThOgQLTkuzkJkl5MrE+
- VbkMLt9kl/zrc3CqxINgjZrbd9jb4iExYiMDZxmiD0T/zYmw3Q8w4bCo60Wu8V1k3Xum
- hQzuMaKuKqoLur8eDXEoLBpEouvBBuVv05Wth5IkUBnEdOLd3+g29j9dXpmuwxPy0FAg
- bcTlZfHsen5T3QmjBFyuQbGYzcETfbmgkqJz/jGxaIsHUou4pzCzWVq2dnAlFTOJ1Bo+
- w/wg==
-X-Gm-Message-State: AOJu0YxhlNWDnKSurmPIIA9kpurGFpBNDifedC9kM8dVg0L18kZQICbj
- c7z0w8wL2L1BYwGTGVwXsr00gzNlQHvSiXmbuMQ5hU9acWkoUaf9Sz8oE0Sf4acVEIMO8c5OFk0
- krg==
-X-Google-Smtp-Source: AGHT+IHAzbY8gRQJEsEGO5LdS71pZTw+Ex0AR7VgqJsIkdE8RGfxUUpIDRFO4RXI2ynMxbSZYAWwtw==
-X-Received: by 2002:a92:cd8b:0:b0:374:b07f:6dbf with SMTP id
- e9e14a558f8ab-3763df4d286mr41330535ab.1.1719174742501; 
- Sun, 23 Jun 2024 13:32:22 -0700 (PDT)
+ bh=n+H31XKUz/+EK1B2GCG0Zwccq4I6BpseEx5TJ2nBGWw=;
+ b=iqeyquBr2ElcZvMcxy2aSHm8wa5RvH4j5wnAM8z94OcplmF2qbyKhVvnm405tOPaMi
+ Rvts4xYLaILuybzcyVX83Z0LT7ACtDsJLe4Jq0YjCsczHivGllaOQoDVWi9urmgsFVpq
+ cR+B29CyBJjemDOpjQcZCwQuzBfBvwkF5IkqAE1qwapPdeYum93bCvUDEnGX1gkeWp6R
+ tXmeVJ/AkYhiN1U1yE1V6jn+y/vgJPamSYMaXgmJca3JSXkIxiBQQvYFRDmboV//8EBJ
+ zhpoxLNguFqz9rI3QVJ+GK5AhETMDQDpumXmYgBtDTN+Uqc4Cjbv2jlJqOQ8w/eqKhlF
+ Dspg==
+X-Gm-Message-State: AOJu0Yy5Bdb2MR+PQQVD25IQfUceJghPqG637KQLpMYDgZ9Eyico/7EA
+ yJlsagB1hZRYHh7gF6MnoUxD/bmouC+wgo9Ny/9uzlgTI8v5u9XhriijbT0w5Z5Z1v0Slpn/qB+
+ BQ+Hn
+X-Google-Smtp-Source: AGHT+IFNamOGDEb9DF6UDdGuvxH5/eWANDImbYuo++zJTS93kTB/8FckoQ9daryrNF/sfep8zLlQQQ==
+X-Received: by 2002:a05:6e02:1586:b0:376:47f5:d0ae with SMTP id
+ e9e14a558f8ab-37647f5d368mr4308625ab.17.1719174743273; 
+ Sun, 23 Jun 2024 13:32:23 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-3763374634asm12016765ab.52.2024.06.23.13.32.22
@@ -63,11 +63,11 @@ Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  Sun, 23 Jun 2024 13:32:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 04/19] test: Release board after tests complete
-Date: Sun, 23 Jun 2024 14:31:58 -0600
-Message-Id: <20240623203213.1571666-5-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Love Kumar <love.kumar@amd.com>
+Subject: [PATCH v3 05/19] test: Allow connecting to a running board
+Date: Sun, 23 Jun 2024 14:31:59 -0600
+Message-Id: <20240623203213.1571666-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623203213.1571666-1-sjg@chromium.org>
 References: <20240623203213.1571666-1-sjg@chromium.org>
@@ -89,36 +89,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a board is finished with, the lab may want to power it off, or
-perform some other function. Add a new script which is called when tests
-are complete.
+Sometimes we know that the board is already running the right software,
+so provide an option to allow running of tests directly, without first
+resetting the board.
+
+This saves time when re-running a test where only the Python code is
+changing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_exec_attach.py | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ test/py/conftest.py                   |  3 +++
+ test/py/u_boot_console_base.py        | 14 ++++++++++----
+ test/py/u_boot_console_exec_attach.py | 21 ++++++++++++---------
+ 3 files changed, 25 insertions(+), 13 deletions(-)
 
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index fc9dd3a83f8..ca66b9d9e61 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -79,6 +79,8 @@ def pytest_addoption(parser):
+     parser.addoption('--gdbserver', default=None,
+         help='Run sandbox under gdbserver. The argument is the channel '+
+         'over which gdbserver should communicate, e.g. localhost:1234')
++    parser.addoption('--no-prompt-wait', default=False, action='store_true',
++        help="Assume that U-Boot is ready and don't wait for a prompt")
+ 
+ def run_build(config, source_dir, build_dir, board_type, log):
+     """run_build: Build U-Boot
+@@ -238,6 +240,7 @@ def pytest_configure(config):
+     ubconfig.board_type = board_type
+     ubconfig.board_identity = board_identity
+     ubconfig.gdbserver = gdbserver
++    ubconfig.no_prompt_wait = config.getoption('no_prompt_wait')
+     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
+ 
+     env_vars = (
+diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+index 9cc0af66356..8a9c4a576dc 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/u_boot_console_base.py
+@@ -439,11 +439,17 @@ class ConsoleBase(object):
+             if not self.config.gdbserver:
+                 self.p.timeout = TIMEOUT_MS
+             self.p.logfile_read = self.logstream
+-            if expect_reset:
+-                loop_num = 2
++            if self.config.no_prompt_wait:
++                # Send an empty command to set up the 'expect' logic. This has
++                # the side effect of ensuring that there was no partial command
++                # line entered
++                self.run_command(' ')
+             else:
+-                loop_num = 1
+-            self.wait_for_boot_prompt(loop_num = loop_num)
++                if expect_reset:
++                    loop_num = 2
++                else:
++                    loop_num = 1
++                self.wait_for_boot_prompt(loop_num = loop_num)
+             self.at_prompt = True
+             self.at_prompt_logevt = self.logstream.logfile.cur_evt
+         except Exception as ex:
 diff --git a/test/py/u_boot_console_exec_attach.py b/test/py/u_boot_console_exec_attach.py
-index 8dd8cc1230c..5f4916b7da2 100644
+index 5f4916b7da2..42fc15197b9 100644
 --- a/test/py/u_boot_console_exec_attach.py
 +++ b/test/py/u_boot_console_exec_attach.py
-@@ -70,3 +70,13 @@ class ConsoleExecAttach(ConsoleBase):
-             raise
+@@ -59,15 +59,18 @@ class ConsoleExecAttach(ConsoleBase):
+         args = [self.config.board_type, self.config.board_identity]
+         s = Spawn(['u-boot-test-console'] + args)
+ 
+-        try:
+-            self.log.action('Resetting board')
+-            cmd = ['u-boot-test-reset'] + args
+-            runner = self.log.get_runner(cmd[0], sys.stdout)
+-            runner.run(cmd)
+-            runner.close()
+-        except:
+-            s.close()
+-            raise
++        if self.config.no_prompt_wait:
++            self.log.action('Connecting to board without reset')
++        else:
++            try:
++                self.log.action('Resetting board')
++                cmd = ['u-boot-test-reset'] + args
++                runner = self.log.get_runner(cmd[0], sys.stdout)
++                runner.run(cmd)
++                runner.close()
++            except:
++                s.close()
++                raise
  
          return s
-+
-+    def close(self):
-+        super().close()
-+
-+        self.log.action('Releasing board')
-+        args = [self.config.board_type, self.config.board_identity]
-+        cmd = ['u-boot-test-release'] + args
-+        runner = self.log.get_runner(cmd[0], sys.stdout)
-+        runner.run(cmd)
-+        runner.close()
+ 
 -- 
 2.34.1
 
