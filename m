@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E608C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:34:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC7AC2BA18
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:34:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5D83885B3;
-	Sun, 23 Jun 2024 22:32:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44B4D885C4;
+	Sun, 23 Jun 2024 22:32:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YdcYuAKQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fhzCoth+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5245885C4; Sun, 23 Jun 2024 22:32:29 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 7FEB4885D7; Sun, 23 Jun 2024 22:32:30 +0200 (CEST)
+Received: from mail-il1-x144.google.com (mail-il1-x144.google.com
+ [IPv6:2607:f8b0:4864:20::144])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90B4D8837A
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F96787D07
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:32:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-375f713a099so13333655ab.2
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:27 -0700 (PDT)
+Received: by mail-il1-x144.google.com with SMTP id
+ e9e14a558f8ab-37621e7468eso11414265ab.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:32:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719174746; x=1719779546; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719174747; x=1719779547; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0GUQ22yXstJ07sqtXUQGOyWefZZku0HDPU+POgIhC2c=;
- b=YdcYuAKQZ3QObGog6Epxje0paOn4TMWNkQ2WNASbfkG+xHztstinJBIj0E4IxjDNXI
- jnvVsQNpYj3AvSrwWlhv/6zQmgSv0RefoCEhSZIpDJIrwOPLCCEQLvfnsgbIx9vONyYb
- KkEDW+R/kxutq9xHK2d3r/j1DIyi1FuK8PQqw=
+ bh=zsYn/7DjZxJm+0gcVgdsuoh0XrMyXJi91lp22nAzzhA=;
+ b=fhzCoth+M/9f774TDgVAFZDFvLH+4fGi/LgjtlNmPFyAfL2ojA+u/cLMlpaCs0fpJg
+ dbvkC4qepXobTvKLWP89M1sCj8UuM7f/DpjQfeIKegygaVfhXHdpVZPUsgFs0MHPdbj7
+ jBoPz8rE1B9vYUoMnAmiukgSnhmX4CZm5Txz4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719174746; x=1719779546;
+ d=1e100.net; s=20230601; t=1719174747; x=1719779547;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0GUQ22yXstJ07sqtXUQGOyWefZZku0HDPU+POgIhC2c=;
- b=i7GELOX0nU+7xKfK0x7FzISMg8hpOy2kFyaYByCc5M9SzgrKbcxB4ZD7OfwyzFQ5Ze
- PAzaPkwV0X5yaF2fUn2jrYtWIbeb08NZxhC1GYGz66FX6HENBq2WS75S1Yjjz5di49Z7
- NeU5uz7m3WmFnknntmQSArpO4ZC2ftMf+7gGHKToiSp/nUisFyJc/ZvTUw9n7H3b1fqF
- d++gwtND4YR1W0MRSqzFBlKHsjCL6bgIFsxCscdhftAd7yqBiTZ1XMy5+BTrYDWD7aRJ
- nkNb/OkDEVgal8auH8WAfrbD0tAkt+1orT6qZUvRS3hia+wWpIsoajY04gI+cZXN/FRu
- dO2A==
-X-Gm-Message-State: AOJu0YwAYF0AsJr45ayC0TUq0wSyueR/1yve9Hk9JIjMBNKbt8QXdX4P
- BqlTQNxzE2iE2+4qZAh2PzQZEL1EH8JGYiOOnoOje7A5KyseKTVDytW8yoFYzbqUP2MD4MHxbFp
- 3UQ==
-X-Google-Smtp-Source: AGHT+IGsEkh33ueV+BErTwokrgTbycIxLrUnLW/rX9hyp4IJ3YFNT2/SAUkUQXmg2tk+Hpo+w1KvIg==
-X-Received: by 2002:a05:6e02:1548:b0:375:9828:ae6 with SMTP id
- e9e14a558f8ab-3763e060679mr31585565ab.21.1719174746134; 
+ bh=zsYn/7DjZxJm+0gcVgdsuoh0XrMyXJi91lp22nAzzhA=;
+ b=ZcBmk8Wd9F8c+qzSZFKyzOQFGNl5zHhiXFR5rqM0zogJNjqGEWDKBlraPOlx1Ii9gW
+ LcWZJnqhDiQOqN7DGo2xHZ6Hq66aj7HwuMwwg8pRn8iYkl10Z4zFUrVTEOKbzOStW8y8
+ zDV/qGkIRbRQyLpnXkttG6AZ4Sc6YuqIXJfte59AYX8eWELsYaX7wnTVEjq2xiiVN0Ry
+ dybfI2dxfx9m8LZlGOI/LceyymZ2ucUJhJBQCL1gHirGhksXYc5L1NFr0IUfwEUnR73d
+ +pfdtrOagmP9bQTSMCnUpIcEEbPT7Ax8TWBDc5IJWAUWiTomRuvGVAnzXMvYFcb2uEX+
+ tNwA==
+X-Gm-Message-State: AOJu0YzLl5FvV8QOYZulgq5LKggLKM6p1dP/kxsnZlnz50fZuK9HcdgQ
+ EEXG7Il9eesPUmHFeyhekzY9hkSW0WJV4jNYO6UtcRwdhqHzDI9lp5YA73HNkoDk0MXT/ldADmX
+ UrNH8
+X-Google-Smtp-Source: AGHT+IGBxy7iMIyZ0NfozDXnuS0JH9b/Me8zuSl1jSw7eYw8pqOFsFkeuhqDa4gAUtoRl1+afZynmw==
+X-Received: by 2002:a92:c54b:0:b0:375:dd94:29f with SMTP id
+ e9e14a558f8ab-37639fc884cmr17229215ab.0.1719174746896; 
  Sun, 23 Jun 2024 13:32:26 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3763374634asm12016765ab.52.2024.06.23.13.32.25
+ e9e14a558f8ab-3763374634asm12016765ab.52.2024.06.23.13.32.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 13:32:25 -0700 (PDT)
+ Sun, 23 Jun 2024 13:32:26 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 09/19] test: Move the receive code into a function
-Date: Sun, 23 Jun 2024 14:32:03 -0600
-Message-Id: <20240623203213.1571666-10-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Love Kumar <love.kumar@amd.com>
+Subject: [PATCH v3 10/19] test: Separate out the exception handling
+Date: Sun, 23 Jun 2024 14:32:04 -0600
+Message-Id: <20240623203213.1571666-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623203213.1571666-1-sjg@chromium.org>
 References: <20240623203213.1571666-1-sjg@chromium.org>
@@ -89,74 +89,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is quite a bit of code to deal with receiving data from the target
-so move it into its own receive() function.
+The tests currently catch a very board Exception in each case. This is
+thrown even in the event of a coding error.
+
+We want to handle exceptions differently depending on their severity,
+so that we can avoid hour-long delays waiting for a board that is
+clearly broken.
+
+As a first step, create some new exception types, separating out those
+which are simply an unexpected result from executed a command, from
+those which indicate some kind of hardware failure.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_spawn.py | 39 +++++++++++++++++++++++++++------------
- 1 file changed, 27 insertions(+), 12 deletions(-)
+ test/py/u_boot_console_base.py | 26 ++++++++++++++------------
+ test/py/u_boot_spawn.py        | 11 +++++++++++
+ 2 files changed, 25 insertions(+), 12 deletions(-)
 
+diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+index 8a9c4a576dc..fa87952694d 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/u_boot_console_base.py
+@@ -14,6 +14,7 @@ import pytest
+ import re
+ import sys
+ import u_boot_spawn
++from u_boot_spawn import BootFail, Timeout, Unexpected
+ 
+ # Regexes for text we expect U-Boot to send to the console.
+ pattern_u_boot_spl_signon = re.compile('(U-Boot SPL \\d{4}\\.\\d{2}[^\r\n]*\\))')
+@@ -190,13 +191,13 @@ class ConsoleBase(object):
+                     m = self.p.expect([pattern_u_boot_spl_signon] +
+                                       self.bad_patterns)
+                     if m != 0:
+-                        raise Exception('Bad pattern found on SPL console: ' +
++                        raise BootFail('Bad pattern found on SPL console: ' +
+                                         self.bad_pattern_ids[m - 1])
+                     env_spl_banner_times -= 1
+ 
+                 m = self.p.expect([pattern_u_boot_main_signon] + self.bad_patterns)
+                 if m != 0:
+-                    raise Exception('Bad pattern found on console: ' +
++                    raise BootFail('Bad pattern found on console: ' +
+                                     self.bad_pattern_ids[m - 1])
+             self.u_boot_version_string = self.p.after
+             while True:
+@@ -207,13 +208,9 @@ class ConsoleBase(object):
+                 if m == 2:
+                     self.p.send(' ')
+                     continue
+-                raise Exception('Bad pattern found on console: ' +
++                raise BootFail('Bad pattern found on console: ' +
+                                 self.bad_pattern_ids[m - 3])
+ 
+-        except Exception as ex:
+-            self.log.error(str(ex))
+-            self.cleanup_spawn()
+-            raise
+         finally:
+             self.log.timestamp()
+ 
+@@ -279,7 +276,7 @@ class ConsoleBase(object):
+                 m = self.p.expect([chunk] + self.bad_patterns)
+                 if m != 0:
+                     self.at_prompt = False
+-                    raise Exception('Bad pattern found on console: ' +
++                    raise BootFail('Bad pattern found on console: ' +
+                                     self.bad_pattern_ids[m - 1])
+             if not wait_for_prompt:
+                 return
+@@ -289,14 +286,18 @@ class ConsoleBase(object):
+                 m = self.p.expect([self.prompt_compiled] + self.bad_patterns)
+                 if m != 0:
+                     self.at_prompt = False
+-                    raise Exception('Bad pattern found on console: ' +
++                    raise BootFail('Missing prompt on console: ' +
+                                     self.bad_pattern_ids[m - 1])
+             self.at_prompt = True
+             self.at_prompt_logevt = self.logstream.logfile.cur_evt
+             # Only strip \r\n; space/TAB might be significant if testing
+             # indentation.
+             return self.p.before.strip('\r\n')
+-        except Exception as ex:
++        except Timeout as exc:
++            self.log.error(str(exc))
++            self.cleanup_spawn()
++            raise
++        except BootFail as ex:
+             self.log.error(str(ex))
+             self.cleanup_spawn()
+             raise
+@@ -355,8 +356,9 @@ class ConsoleBase(object):
+             text = re.escape(text)
+         m = self.p.expect([text] + self.bad_patterns)
+         if m != 0:
+-            raise Exception('Bad pattern found on console: ' +
+-                            self.bad_pattern_ids[m - 1])
++            raise Unexpected(
++                "Unexpected pattern found on console (exp '{text}': " +
++                self.bad_pattern_ids[m - 1])
+ 
+     def drain_console(self):
+         """Read from and log the U-Boot console for a short time.
 diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
-index 81a09a9d639..cb0d8f702ba 100644
+index cb0d8f702ba..57ea845ad4c 100644
 --- a/test/py/u_boot_spawn.py
 +++ b/test/py/u_boot_spawn.py
-@@ -139,6 +139,32 @@ class Spawn:
+@@ -17,6 +17,17 @@ import traceback
+ class Timeout(Exception):
+     """An exception sub-class that indicates that a timeout occurred."""
  
-         os.write(self.fd, data.encode(errors='replace'))
- 
-+    def receive(self, num_bytes):
-+        """Receive data from the sub-process's stdin.
++class BootFail(Exception):
++    """An exception sub-class that indicates that a boot failure occurred.
 +
-+        Args:
-+            num_bytes (int): Maximum number of bytes to read
++    This is used when a bad pattern is seen when waiting for the boot prompt.
++    It is regarded as fatal, to avoid trying to boot the again and again to no
++    avail.
++    """
 +
-+        Returns:
-+            str: The data received
++class Unexpected(Exception):
++    """An exception sub-class that indicates that unexpected test was seen."""
 +
-+        Raises:
-+            ValueError if U-Boot died
-+        """
-+        try:
-+            c = os.read(self.fd, num_bytes).decode(errors='replace')
-+        except OSError as err:
-+            # With sandbox, try to detect when U-Boot exits when it
-+            # shouldn't and explain why. This is much more friendly than
-+            # just dying with an I/O error
-+            if self.decode_signal and err.errno == 5:  # I/O error
-+                alive, _, info = self.checkalive()
-+                if alive:
-+                    raise err
-+                raise ValueError('U-Boot exited with %s' % info)
-+            raise
-+        return c
-+
-     def expect(self, patterns):
-         """Wait for the sub-process to emit specific data.
- 
-@@ -195,18 +221,7 @@ class Spawn:
-                 events = self.poll.poll(poll_maxwait)
-                 if not events:
-                     raise Timeout()
--                try:
--                    c = os.read(self.fd, 1024).decode(errors='replace')
--                except OSError as err:
--                    # With sandbox, try to detect when U-Boot exits when it
--                    # shouldn't and explain why. This is much more friendly than
--                    # just dying with an I/O error
--                    if self.decode_signal and err.errno == 5:  # I/O error
--                        alive, _, info = self.checkalive()
--                        if alive:
--                            raise err
--                        raise ValueError('U-Boot exited with %s' % info)
--                    raise
-+                c = self.receive(1024)
-                 if self.logfile_read:
-                     self.logfile_read.write(c)
-                 self.buf += c
+ class Spawn:
+     """Represents the stdio of a freshly created sub-process. Commands may be
+     sent to the process, and responses waited for.
 -- 
 2.34.1
 
