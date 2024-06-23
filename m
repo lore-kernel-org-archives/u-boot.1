@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD980C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EE0AC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 20:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D43DC88477;
-	Sun, 23 Jun 2024 22:30:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C4B688548;
+	Sun, 23 Jun 2024 22:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h40tm5cX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WVw7BN6v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36E8B8855C; Sun, 23 Jun 2024 22:30:48 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 4446788477; Sun, 23 Jun 2024 22:30:49 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DF0E88528
+ by phobos.denx.de (Postfix) with ESMTPS id 9E8E1882EF
  for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 22:30:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7eb7a2f062cso143199939f.0
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:30:44 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-7ebe019b9cdso138613339f.0
+ for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 13:30:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1719174644; x=1719779444; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wB8IlpEyasJ77UcuVJ/mSH9PPTejySs9mrOW63czuxA=;
- b=h40tm5cX9OsVac2lQWp8UzUD9dNk6N7zX8865XguLPr9h7AtgBCdewPyb2s7XkuEVv
- 5soyfcA+s7hjX6PpwKHRONLWSNqwPbPHDXLsMmJhDSVxvuHlboq6jKTFtuVahX62tDrL
- Q/RPHb0s/7Ivri7Fh5gzMg1AmY39X08DYpKFw=
+ bh=4tbJLNnm3Z118ihDJe+gI1HEGhxpJQOMu7FJdqi+hsQ=;
+ b=WVw7BN6vpnsI3Xl27/948lmO2MsQNdohf6xvxrEzDI7eZTzPYkYbptsSyxNU85vY9y
+ XVJ+D4XQx8Qq0Iq1WkHzkm1qaDo+EQplXR7OKsMZq7DVPMfvpbqn0Aaytvz46TayJQZ6
+ He2NPvQ6ewR9w3SF3e7uWuPiYouhW7osZz+04=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1719174644; x=1719779444;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wB8IlpEyasJ77UcuVJ/mSH9PPTejySs9mrOW63czuxA=;
- b=ESjy4a+Hhx1Cf3AcLcv7YQYlgy6vxSwWR2NA4B4lm5PFRCYChBCi+2JplirTRwSeH8
- MKRTFBTdlC6sqGPgLC5CtA77FI/mAmtt0zPEu3xpAIDJw2PqvqhUa6ctADUnI2ldXGs3
- I5W6IqhihjNszxlMRlhwwD1d4I1PEnzd6H8q+Z7XAMEKH+Y6Vj+zpwP1xAxv06dCaEy4
- T8ChGi/vKwWHFMyNWt37fbigeyYF2JjgkI7Ms9qrze9C31Rvp7jId51LxOeZiSCxwjZH
- kN4jgS40OzVyRo/txzTSRFZOd1U7Enweg9pgJGoHXuiOjNCWBsji/BgRQMikQFjGLPuh
- 2nug==
-X-Gm-Message-State: AOJu0YxXDRWnqIWu4HQMouu+qpJw9SwiltPWO5uEMFwXm+sYuq6T9eSr
- oYYA2umiZXSMKloPyjH5+8Ee4qxqfz24KaH2WPt2xXWMe4VYNGcy+o1PhOYk+qziDRmqfncI63S
- jug==
-X-Google-Smtp-Source: AGHT+IHhvHQzdIo1kieH3RigX5pbhiY2n9vLfJXDzuKII7FAnnxh0UUsWACarAa8Aqca+uErDl7LGQ==
-X-Received: by 2002:a05:6602:6d8e:b0:7ea:da27:e59e with SMTP id
- ca18e2360f4ac-7f3a7554742mr294903539f.12.1719174643690; 
- Sun, 23 Jun 2024 13:30:43 -0700 (PDT)
+ bh=4tbJLNnm3Z118ihDJe+gI1HEGhxpJQOMu7FJdqi+hsQ=;
+ b=Ts2f3mpDK4j/ZWVIiWEuBcESFeHXErlmNxVPGsideEA+Ko24r6ZYaHISRC1wYLZxA/
+ 4XwIbjaGLGiWjf1PSV5kvMWa7Q2daA7+yrU8uz9vwAyuOKTATHcWmmNtzS0MYmoB5RTJ
+ 8+MUN/MxMsgonp7rp6R3GV+O9xKPbGTSXbR37Ymly2ijwzT8iAcWLYsIUO0Djd+/dHVL
+ EFJhqgETQqpWfLFJPa1GuiqYo/8jqakh3e6aFIo8jhu3BXbG3Dd8BZjx3wg0wjPmmL/d
+ wZqxdRkabtyPhnf3okSeAcp3P15l0LvzoxwpRvZTaPByk7owg+enKsMeitBAV3TKkBZI
+ EIsQ==
+X-Gm-Message-State: AOJu0YzBce8Tn0hYPEFeKyPt+GfqJaiqVEZ1Z206NzIUozuP28On5tia
+ 80xMOLwsXtt/rCtbF1e3fVTb9ttXVfoa9zcMZ7Ew459Vvi1gmV3JqvUiuboBTB6iw4W3sXfeyx9
+ 1sg==
+X-Google-Smtp-Source: AGHT+IGyTshpPS2u2DY/rJEwD7qWMgd2Yal2t7KcgleqNpIA5W0AoXAreVAINnWX+FMgGWMrKOwgOQ==
+X-Received: by 2002:a05:6602:14c2:b0:7eb:6cbc:8856 with SMTP id
+ ca18e2360f4ac-7f3a7480881mr354060039f.2.1719174644292; 
+ Sun, 23 Jun 2024 13:30:44 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-4b9d110ffb6sm1627335173.58.2024.06.23.13.30.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 13:30:43 -0700 (PDT)
+ Sun, 23 Jun 2024 13:30:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 09/14] log: Allow tests to pass with CONFIG_LOGF_FUNC_PAD set
-Date: Sun, 23 Jun 2024 14:30:28 -0600
-Message-Id: <20240623203033.1566505-10-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>
+Subject: [PATCH 10/14] test: dm: Show failing driver name
+Date: Sun, 23 Jun 2024 14:30:29 -0600
+Message-Id: <20240623203033.1566505-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623203033.1566505-1-sjg@chromium.org>
 References: <20240623203033.1566505-1-sjg@chromium.org>
@@ -89,42 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This setting pads out the function names. Adjust the test to handle
-this, since some boards use it.
+When a driver is not registered properly it is not clear which one it
+is. Adjust test_dm_compat() to show this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/tests/test_log.py | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ test/py/tests/test_dm.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/test/py/tests/test_log.py b/test/py/tests/test_log.py
-index 140dcb9aa2b..79808674bbe 100644
---- a/test/py/tests/test_log.py
-+++ b/test/py/tests/test_log.py
-@@ -27,13 +27,16 @@ def test_log_format(u_boot_console):
+diff --git a/test/py/tests/test_dm.py b/test/py/tests/test_dm.py
+index 68d4ea12235..be94971e455 100644
+--- a/test/py/tests/test_dm.py
++++ b/test/py/tests/test_dm.py
+@@ -13,8 +13,11 @@ def test_dm_compat(u_boot_console):
+                for line in response[:-1].split('\n')[2:])
  
-     cons = u_boot_console
-     with cons.log.section('format'):
--        run_with_format('all', 'NOTICE.arch,file.c:123-func() msg')
-+        pad = int(u_boot_console.config.buildconfig.get('config_logf_func_pad'))
-+        padding = ' ' * (pad - len('func'))
-+
-+        run_with_format('all', f'NOTICE.arch,file.c:123-{padding}func() msg')
-         output = cons.run_command('log format')
-         assert output == 'Log format: clFLfm'
+     response = u_boot_console.run_command('dm compat')
++    bad_drivers = set()
+     for driver in drivers:
+-        assert driver in response
++        if not driver in response:
++            bad_drivers.add(driver)
++    assert not bad_drivers
  
--        run_with_format('fm', 'func() msg')
--        run_with_format('clfm', 'NOTICE.arch,func() msg')
--        run_with_format('FLfm', 'file.c:123-func() msg')
-+        run_with_format('fm', f'{padding}func() msg')
-+        run_with_format('clfm', f'NOTICE.arch,{padding}func() msg')
-+        run_with_format('FLfm', f'file.c:123-{padding}func() msg')
-         run_with_format('lm', 'NOTICE. msg')
-         run_with_format('m', 'msg')
- 
+     # check sorting - output looks something like this:
+     #  testacpi      0  [   ]   testacpi_drv          |-- acpi-test
 -- 
 2.34.1
 
