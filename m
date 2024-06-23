@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F832C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 097C7C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 23 Jun 2024 17:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14D9E88327;
-	Sun, 23 Jun 2024 19:53:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 723C78855C;
+	Sun, 23 Jun 2024 19:53:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OjSklaO9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZmrUFZO8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D95884BE; Sun, 23 Jun 2024 19:53:28 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 950F488405; Sun, 23 Jun 2024 19:53:29 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 438F4884B2
+ by phobos.denx.de (Postfix) with ESMTPS id B556788433
  for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 19:53:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-7eb6b1045f7so138612339f.3
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7ec07f4170bso144539539f.0
  for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 10:53:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1719165205; x=1719770005; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mfcLD1zI16U3eN8QPXtyDsRvUuj2hvtPCbl0nEveeBM=;
- b=OjSklaO9jrhcAeNmwMlsp+m8ZO6a9DlOnZZQaS+0OSpbHb3wXVsED6plNc4/1LsNvO
- ElyVitAi7yZ6QJe3oEUHolweSMtR+KEGLBJZNmaFCkCE/MW9LM19fWzsoaV49MISLz+w
- RinicRjZv+5P3vZIK0mIhRXnnyM0gjjKsW47g=
+ bh=tElDSyoJfFQYZphlkBNYSPslFhtNW18S3Qmcc0PftvU=;
+ b=ZmrUFZO8UnAaem9SbJW1WxMmq2s9jhHXqM4vviAzgNALHTG94sEOd+D4JOFWYlKM4g
+ WPqXd1+FSs3w1UHfQxU+izCt6iDrZXMeta1DvNh8PEi4pxk+tcCn03XkuMHxRb8KY5Bu
+ FWrColG1PLEG9oATnNZ//iqeUd8X2PPHa5lAY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1719165205; x=1719770005;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mfcLD1zI16U3eN8QPXtyDsRvUuj2hvtPCbl0nEveeBM=;
- b=tUVfa+Gop5jmkR0DjAyZAqmWv9H0YTjnc/i5P46ZWLiX4eLeB/8dXC6gj+xqw96wfc
- EKzFFIjzSdY0qgicHWwHY3NB2MIT0LXrNyzGoodtoOhKxKHVDwJRiBclMGQ5MZFKVlLV
- gwIDSTd8M0MTbx5GOY8+eF/4otM+RE5mhqO9tMTOrDx7xJJpg5PItUBGryWtZ0c/XvtN
- IoWso+W2pmbWU+VPSGFEgy2B0P8IgxC34/U4DD8IeZr3dUQT5U/ShxUyoIrI8W+0bgVo
- DxElXHHY7SXN1dlSMR4i0+9L5V2MLc900RZRa0zTa6HyF/81pE37FNYnUHNihTQ02yrN
- bHLA==
-X-Gm-Message-State: AOJu0YzJxS8GtCMj1teOU1nKpQQQlGUOqdjMo0U6L+mj4GzFGeq4zO6q
- IgOKOXP/aih1l51+IazKe8+0gaf6RwXEd2y+nJ9BaOOU3V5xnUu+M5kA+/WNHSVXsAhxx4RtFpE
- QzA==
-X-Google-Smtp-Source: AGHT+IHB3+dxvC1L9raNbddBXymUIG338gpWtf3m9UIuawq2vwH5IUJPo5oaiV2CMmon4addfUbBbw==
-X-Received: by 2002:a05:6602:1504:b0:7ec:cf:1d3 with SMTP id
- ca18e2360f4ac-7f3a75fa927mr287500139f.19.1719165204798; 
- Sun, 23 Jun 2024 10:53:24 -0700 (PDT)
+ bh=tElDSyoJfFQYZphlkBNYSPslFhtNW18S3Qmcc0PftvU=;
+ b=eHKbdBqLXiMJgk4s2O62oB/nTf1NfVRzZXCBGeo6392RT8sKBa6UhDKx0KTefXvubc
+ I6RtOqPQiHxGcd0CNLH8QsziwxywixK3rmpb/ICKBYEFPxuBejGuVxgR76d3HyzAbnpI
+ PxX8Lri98GzueNvsa9BwJ7FBmjiEufYiy31zkeb+VQpw6uYH7LyJg1ysdaXvwCmnBWGg
+ uXyuhXdA9jJ24LzLXT/g74ctT+N1e1uVtDoI415lnE2UT85TudHY2qHdvtpel3/kAwjP
+ 4qURZmBnWquLsTBF+in2MREmhqoPoENveZAYg8hC1qQ2SPS2B9cdsDfcqpczU0/diCmq
+ fZHA==
+X-Gm-Message-State: AOJu0YzDxiSCk84KobK4haJFq62GJurQ/I2AEv7CEpFlCgomW3oC8s7M
+ sPBk5uRkZQ5UFXKSuhCS1uTU34b6L9efrqF0IKE27XaW5dfh5H3QYJfZopZdqILVWaFv/tLV2+h
+ PAQ==
+X-Google-Smtp-Source: AGHT+IGsdcDLh6kEAXHUsMJih8hsxHwpL9ZCPsHUV0JGSimGNeoSwD3T1hXrur4qzUKmOZSVdL0zRw==
+X-Received: by 2002:a05:6602:6015:b0:7eb:9697:95e1 with SMTP id
+ ca18e2360f4ac-7f3a4d48277mr354413039f.0.1719165205445; 
+ Sun, 23 Jun 2024 10:53:25 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-4b9d113ff85sm1636834173.81.2024.06.23.10.53.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Jun 2024 10:53:24 -0700 (PDT)
+ Sun, 23 Jun 2024 10:53:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v4 07/16] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-Date: Sun, 23 Jun 2024 11:52:53 -0600
-Message-Id: <20240623175302.1463973-8-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v4 08/16] x86: Set a board-size limit for chromebook_link
+Date: Sun, 23 Jun 2024 11:52:54 -0600
+Message-Id: <20240623175302.1463973-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240623175302.1463973-1-sjg@chromium.org>
 References: <20240623175302.1463973-1-sjg@chromium.org>
@@ -90,62 +89,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It does not make sense to enable all SHA algorithms unless they are
-needed. It bloats the code and in this case, causes chromebook_link to
-fail to build. That board does use the TPM, but not with measured boot,
-nor EFI.
+Set a size limit for this board so that we get a build error if it grows
+too much.
 
-Since EFI_TCG2_PROTOCOL already selects these options, we just need to
-add them to MEASURED_BOOT as well.
+Note that the limit is approximately, since it does not include the FDT,
+microcode and fdtmap, which can change in size. However this board is
+fairly stable, so overflowing this limit will likely result in the image
+not fitting in the ROM space available for U-Boot.
 
-Note that the original commit combines refactoring and new features,
-which makes it hard to see what is going on.
-
-Fixes: 97707f12fda tpm: Support boot measurements
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v4:
+- Add new patch to set a board-size limit for chromebook_link
 
-Changes in v2:
-- Put the conditions under EFI_TCG2_PROTOCOL
-- Consider MEASURED_BOOT too
+ configs/chromebook_link_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
- boot/Kconfig | 4 ++++
- lib/Kconfig  | 4 ----
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 6f3096c15a6..b061891e109 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
- config MEASURED_BOOT
- 	bool "Measure boot images and configuration when booting without EFI"
- 	depends on HASH && TPM_V2
-+	select SHA1
-+	select SHA256
-+	select SHA384
-+	select SHA512
- 	help
- 	  This option enables measurement of the boot process when booting
- 	  without UEFI . Measurement involves creating cryptographic hashes
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 189e6eb31aa..568892fce44 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -438,10 +438,6 @@ config TPM
- 	bool "Trusted Platform Module (TPM) Support"
- 	depends on DM
- 	imply DM_RNG
--	select SHA1
--	select SHA256
--	select SHA384
--	select SHA512
- 	help
- 	  This enables support for TPMs which can be used to provide security
- 	  features for your board. The TPM can be connected via LPC or I2C
+diff --git a/configs/chromebook_link_defconfig b/configs/chromebook_link_defconfig
+index a9f91dd9b26..1a72fd178a8 100644
+--- a/configs/chromebook_link_defconfig
++++ b/configs/chromebook_link_defconfig
+@@ -15,6 +15,8 @@ CONFIG_DEBUG_UART=y
+ CONFIG_HAVE_MRC=y
+ CONFIG_SMP=y
+ CONFIG_HAVE_VGA_BIOS=y
++CONFIG_HAS_BOARD_SIZE_LIMIT=y
++CONFIG_BOARD_SIZE_LIMIT=630000
+ CONFIG_FIT=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
 -- 
 2.34.1
 
