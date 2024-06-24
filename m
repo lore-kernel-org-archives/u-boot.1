@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D96C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 19:30:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F09C2D0D1
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 19:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E29988403;
-	Mon, 24 Jun 2024 21:30:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 574FD87D07;
+	Mon, 24 Jun 2024 21:39:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A88ki3YS";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Nj4rGITE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF47E883C2; Mon, 24 Jun 2024 21:30:41 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 2C4BB87572; Mon, 24 Jun 2024 21:39:25 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C53A188403
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 21:30:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A80E883DE
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 21:39:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7009b8113ebso2027091a34.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 12:30:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a6fdd947967so245715766b.2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 12:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719257437; x=1719862237; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=M4Pydd91BzW5yBemycokvUslaOTHoLGdx/0Mtqjd9Cc=;
- b=A88ki3YSOp7xZbWekkFfz7TIbIeEDJA+A3fu2V7a4P3u8rRh88R3RKIUk9/N1UdLtY
- c5QfwosjBpcXGdDioyZLj/y50AdYxdHW3ayQkUI9cY74VWON6ewJWRN8AyyHtD6ovcn9
- QVOLfvA65pffSmOYiYeb+srmNuoVVtFlBaGIM=
+ d=gateworks.com; s=google; t=1719257959; x=1719862759; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=8hofnCnFArBzqpry09H8Mrk+Du/oOXCOo9C1KCQhJhk=;
+ b=Nj4rGITEgkrTfIJwbDNO39uWyXW6GbnRAbJ769bAyTmQqnF1gn5gcCYdzfewDlbKy3
+ OdRSzsSkKZ+KfE2JsHr3sZwiWtsTEMCP0wu7pd/uQKYVdzId3Bht78xmTKAtTbhVWc5N
+ 0CefOS4z4J01iNT/fZrszU/N+SqCpBKBNkroep8UnRS16RPk+xXlq+y97UOlkpVH9yGR
+ PrZblnJBH4DRGXAVRi0U//RnPxBUXXoBhzJYYJB4JhtAV+jHFUPIuiOzJzMQR7z5dv/5
+ XqoBqCAgkmXVz6SVRMnwHv87VKXyoToqyzwiiB/+pt6xXZaGE0FzK6ZuFdWHKS/OeBAY
+ NThw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719257437; x=1719862237;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=M4Pydd91BzW5yBemycokvUslaOTHoLGdx/0Mtqjd9Cc=;
- b=O5d2il75vcgDJc2Zj931Okr2vt5V5tIV/x1KbZzf9PZ5KKzre+5/VtMiNFVj+N57k8
- IxzaPh7s15nedDctp8UcbHR2AslrjoV6QNukVt5YQlNaWOsx4RKM5GOrj4lxNV/XGjkY
- YddYu3/EnWd0RrKCTdyY4PgMWeait2ryqSDtAi1mVz7BByJxMD7G2v4cbydgtnRK8r+6
- OhTk0kN2eEJDf0SVZZasHbnnpBGvy7CWJBg7DFAQN+UjqdTtsWh48PJRMuX29gz/U4im
- KdVwGmaco0KgmWR5qOysI4reQ9ziEMUiGr01zXn6gqsEP4+uBOnYjuE/EqueXnhEEelT
- RTQg==
-X-Gm-Message-State: AOJu0Yxfy2OuDPOK73XR1WmcHKt0be3cUNPvQZH2+wPQZtdTn53+vR9h
- BGUgKR0dTvGdEMJkTe6+WH66O5TNLqLe7cqMe3YC3aFAVWqMmckkxk7iU0Yngs8UVVScoX9qn6s
- z3K4=
-X-Google-Smtp-Source: AGHT+IHgH2/EPhjN/Coz3pU7zl0juOU/Px5Z885u7DrWgVwK2ci/5VQwRgWbVD03cR2OxvvWC0cmUA==
-X-Received: by 2002:a9d:3e50:0:b0:700:b15a:ee22 with SMTP id
- 46e09a7af769-700b15aeeb3mr5583626a34.23.1719257437427; 
- Mon, 24 Jun 2024 12:30:37 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
- [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7009c676919sm1304208a34.72.2024.06.24.12.30.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 12:30:37 -0700 (PDT)
-Date: Mon, 24 Jun 2024 13:30:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2024.07-rc5 released
-Message-ID: <20240624193035.GK38804@bill-the-cat>
+ d=1e100.net; s=20230601; t=1719257959; x=1719862759;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8hofnCnFArBzqpry09H8Mrk+Du/oOXCOo9C1KCQhJhk=;
+ b=vgXyBO7fPrmuWUOu2BwmAvJtruppvRj0HvPCb++B97KjHdvVTW3YmPwC9c2RKdmjZs
+ uPsKkarIQeOwcQa6qG6rxLPuSxMID8SznKH1zNjPYgZrEOJvJoExBsd3Dj/KZJN8ZsaR
+ OTOEuUZsXvAF3iUeFMDV31MTDHGzbyj1bxGMDe2q1+Q9fjoft+Ywmy6XsSq3Dp2lx0nN
+ 51qXg8MzgEfIFg44bgUfcrYIYtm//oypZ/6ySHnnU1S2C+gGXKSph21GYlS8O5CvdFK7
+ bydy2xKMEpDp5+AIi1XnXhgFOBx+eE3Xply1rWdPxu1ZrANkq4F8ML+cm0nGe/8wnYqC
+ tRYg==
+X-Gm-Message-State: AOJu0YwrBxMar/c4UTjMRgQdppRODQJgQXIHmJUQAPhsBv5FfvKgAMDc
+ 9ApmDITGkx73eKrKzHQIv9vA9I3wQ6DgPRju260ooeirme66exuOYtx8Ve/LC2ifb3VQ1z/ycoa
+ jxvZ+BVCEUAFw/FVJl9TRQ0F/oK37AF8Nz7amQ/Y2ymRQVBOO4Fk=
+X-Google-Smtp-Source: AGHT+IEKwqH1p1tICJhovLeEsc1TEpi9oUmvlJtgBMqNPMgV7/rPujmLk/RzxALSwUcGBFdwnlZA5v7lYXp84RJrYNA=
+X-Received: by 2002:a17:907:c787:b0:a6f:b6c3:fb30 with SMTP id
+ a640c23a62f3a-a7245b84f56mr534271566b.7.1719257959232; Mon, 24 Jun 2024
+ 12:39:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Dfd/N5+VPG6nOjjA"
-Content-Disposition: inline
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 24 Jun 2024 12:39:06 -0700
+Message-ID: <CAJ+vNU34T3gpSn0upzfK8ra5pUyVDE-CQZGaNo73btHA4pdE-A@mail.gmail.com>
+Subject: USB OTG mode for DWC3 (ie imx8mp) host controller with usb_ether USB
+ Ethernet gadget?
+To: u-boot <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, Adam Ford <aford173@gmail.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, Teresa Remmet <t.remmet@phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,48 +85,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Greetings,
 
---Dfd/N5+VPG6nOjjA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+What is missing in U-Boot for the DWC3 host controller to support OTG
+mode for usb_ether (USB Ethernet gadget)? I'm unable to get the usb
+ethernet gadget to work for the imx8mp as it errors out with 'No UDC
+available in the system'.
 
-Hey all,
+The ums/acm/sdp gadget's all call udc_device_get_by_index to get the
+UDC controller which for DWC3 is provided by
+drivers/usb/dwc3/dwc3-generic.c and these gadgets work, however
+usb_ether is different in that it calls usb_gadget_register_driver to
+bind the gadget driver to the UDC and for DWC3 this calls
+usb_gadget_probe_driver which iterates over udc_list which does not
+contain DWC3 hosts that are in peripheral/otg mode.
 
-Well, once again I need to check my calender reminders since, whoops,
-I'm a week late. That said, looking at the list of changes in this
-slightly elongated period, I think it's OK. At this point we're a week
-out from the release, so it's time for clear and obvious regression
-fixes. Ideally ones introduced this release cycle so there's less
-chances of unintended side-effects.
+Before I spend a lot more time on this I wanted to see if anyone else
+understands why boards with DWC3 host controllers like imx8mp don't
+seem to register controllers in udc_list that are not in host mode.
 
-In terms of a changelog,=20
-git log --merges v2024.07-rc4..v2024.07-rc5
-contains what I've pulled but as always, better PR messages and tags
-will provide better results here.
+I'm also unclear how to get a DWC3 controller to switch roles
+dynamically at runtime based on a gpio state for example. That support
+appears to be missing and I'm not sure what the right way would be to
+go about adding it. I notice that some imx8mp boards like the
+imx8mp-evk have a u-boot.dtsi that just forces its OTG controller to
+peripheral mode and I force the imx8mp-venice OTG controllers into
+host mode.
 
-With that, the final release is planned for Monday, July 1st, 2024.
-Thanks all!
+Best Regards,
 
---=20
-Tom
-
---Dfd/N5+VPG6nOjjA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5yVsACgkQFHw5/5Y0
-tyw9LQv/SFMKDZKUj+tHsCVHcUGC82GjeFgvRqQqiwgHCz9ywfhLNyTmIFockprS
-vl7+JqQYscFQi5yMqBvHS0m2tKNwY+G+lEuASpkp0f28+YMMXOOWaw3q2yvF5ilt
-JjnYbwvq7eHXhbtXDpS0cXQg/yYhRVFeUuCh4RF0rKudLwwK3Jf1jXIyTsk1yOvy
-wVpCHxnh5tTYMa7GcOBmzityRzuN3PH929xHQHJmpfjI3BtLEdkst7DrMwoY+3+4
-UwEXdyawuIL+jXFxuo7SrCLShs7OLG6uMJ/6cuKbbab1QCc+WQprTyq5CplzxYZz
-46yfTWDMFo181RTiFvD1i3NEbSUHsHpxAxQSRHfZBpBFvd+1YyZuSpCevlzDqjiV
-Ey+UXyydpLmru5I12f3yC0rfMMSPZBfx4DH7iDwO54Cle1EW8gl8mOtCKGn3EEbE
-r/sNQCIGjwF3RdURr1UpyEnmJySasS64IKrFfNQPOQgMMTr6cQwfMR6MTJ/5Ll1S
-seX2Fxvb
-=N06x
------END PGP SIGNATURE-----
-
---Dfd/N5+VPG6nOjjA--
+Tim
