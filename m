@@ -4,69 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 366FFC2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:54:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F4C4C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:54:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15E5588477;
-	Mon, 24 Jun 2024 14:52:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=imag.fr
+	by phobos.denx.de (Postfix) with ESMTP id AAB6E882B7;
+	Mon, 24 Jun 2024 14:54:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=imag.fr header.i=@imag.fr header.b="rkFLWXfe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sNA8iVh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8917F8837A; Mon, 24 Jun 2024 14:40:36 +0200 (CEST)
-Received: from zm-mta-out-3.u-ga.fr (zm-mta-out-3.u-ga.fr [152.77.200.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 15280882CE; Mon, 24 Jun 2024 14:54:44 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD0AD88137
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:40:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9D2D88137
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:54:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=imag.fr
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=etienne.duble@imag.fr
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=imag.fr; s=2022;
- t=1719232834; bh=Trh1vYljCGBfeLzUnxCPUpeh1nNFpdNu3cuxPlZl/z8=;
- h=Date:From:To:Cc:Subject:From;
- b=rkFLWXfeRnpuJJ/DEPXrTZ3GBXq0XeTmVoliD46s+7Tphv//wJGCO3Wp937eMlk7N
- 9Tb8m6cW4VMWmlKR8TqjEBiKKrp0jIelOB8+9nhkwkN6gRNO9KK8haKHqcWl+NywoS
- vsgrcTeIYOt3n5o6d04RBBEldBVZkA7BAZ1gxI2BIcp+CSqFUkzHAtOMmyUQwB57oW
- hX76cyZEHSQV3eUV2gQ7MUabyXBEsTRE3Ph5iqdQu5Q+BfwlC3wRAjM5TM1U07nTHY
- wpR5IXbeqqo4CWAksxa/ijDtODesZeMhDmkdF/gTQHS0Oc73ZNqdW+QxRFzDGgY77+
- Wq32RrSJBcf5Q==
-Received: from mailhub.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 6296E402E8;
- Mon, 24 Jun 2024 14:40:34 +0200 (CEST)
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by mailhub.u-ga.fr (Postfix) with ESMTP id 5F6A1100068;
- Mon, 24 Jun 2024 14:40:34 +0200 (CEST)
-Received: from zm-mbx1.u-ga.fr (zm-mbx1.u-ga.fr [152.77.200.25])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 43E706006F;
- Mon, 24 Jun 2024 14:40:34 +0200 (CEST)
-Date: Mon, 24 Jun 2024 14:40:34 +0200 (CEST)
-From: ETIENNE DUBLE <etienne.duble@imag.fr>
-To: Kever Yang <kever.yang@rock-chips.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-Cc: ETIENNE DUBLE <etienne.duble@imag.fr>, 
- joe hershberger <joe.hershberger@ni.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Minda Chen <minda.chen@starfivetech.com>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- u-boot <u-boot@lists.denx.de>
-Message-ID: <1097774847.15003262.1719232834237.JavaMail.zimbra@univ-grenoble-alpes.fr>
-Subject: [PATCH 3/3] net: RTL-8125B -- write mac to MAC0_BKP
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-361785bfa71so3268904f8f.2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 05:54:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1719233681; x=1719838481; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=sfVTwJRIkkSlSXU/pYbEGbulhSIGVFmYiWR/rU+P/zg=;
+ b=sNA8iVh6XyIPda1uod0HROSXHa3/3WoVUCslEUKTrEW8uCY4wiIwGFahO4RZtYeMka
+ uN0nwGNdRsoZpu2aY0bQU8gr1ekIj8T8hSDiccukts13ggW5+4jxtlM5zzAk+oltVRWu
+ 6JjAf8LBE4cCp1C0DBXBLr+ZX761bbQWTy//VDzafjxvUWPh/W19tAwA6u7jKKUnhEgJ
+ RIXWdqte+3o1EJfo92w3uopKHdB/umwOJmi8WcSpL6dyWjQz3zjYrEOlTableUraKpn0
+ w3s677bBedCA2EWbTPIg3BpOVT9UX3A/RvamxY14Y/hx7+6PDHUBwtyWpnkN/qgsIg9T
+ Y0fA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719233681; x=1719838481;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=sfVTwJRIkkSlSXU/pYbEGbulhSIGVFmYiWR/rU+P/zg=;
+ b=sqV2lW1CgSsPM0HTFLfCHnFce+y9IFO4bSUtsgBk0BbmdxScBaxNAQUh2++E/Kf/R9
+ 2XlKtGG3VW7+ptaRMvCYAZo78xLy0wvK/riSluXNvVPmoxifZKzPvcnCs3TopHsL7AcE
+ auBo4aTagi/XqVP4XtbcEY9rz4/a6GT6x61sz3SV7my4Umpz+yLXb6LWb17jjI9/uVPp
+ K7zdU3AyTJ+6vr99IwCnfwOh+q8ElibQTRGMH73O17ScEXID0gwrWATT8Jifp4HzuhF9
+ W6z4LX5I9T3PB9HempD3tQy5odIqWl0v8Lw8FbixFkPfwPznD5uhn3QgTNwH/+ZU/6kQ
+ vvKg==
+X-Gm-Message-State: AOJu0YyXito5IjqUgGx3464k0N62eTmXNYmxzZgIHHWSfIlROw7SJBZP
+ TyPKD85nLVS28Y7LZqEDjVxGpvXg8DluCOSbxX57C7jPT7iTB7t3shB765k5sLk=
+X-Google-Smtp-Source: AGHT+IGi64/cMsni0wgRRlOnSjuqfKWoIQFZ4h85XHVQPo6CexrIiSknEIRtBAzMllEZdgvUGUdePg==
+X-Received: by 2002:a5d:6483:0:b0:366:eedd:afc4 with SMTP id
+ ffacd0b85a97d-366eeddb18emr2974237f8f.12.1719233680919; 
+ Mon, 24 Jun 2024 05:54:40 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:cf01:774b:55fd:ab74?
+ ([2a01:e0a:982:cbb0:cf01:774b:55fd:ab74])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3666dc46d50sm9654460f8f.67.2024.06.24.05.54.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Jun 2024 05:54:40 -0700 (PDT)
+Message-ID: <c5870b0c-483b-4b2e-bc62-174928f981aa@linaro.org>
+Date: Mon, 24 Jun 2024 14:54:39 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [129.88.53.250]
-X-Mailer: Zimbra 10.0.8_GA_4611 (ZimbraWebClient - FF102
- (Linux)/10.0.8_GA_4611)
-Thread-Index: qdRVx/O8xTvENFyyHgIYL9coeK7rzQ==
-Thread-Topic: RTL-8125B -- write mac to MAC0_BKP
-X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.200.25
-X-Mailman-Approved-At: Mon, 24 Jun 2024 14:52:21 +0200
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2] spmi: msm: demote to debug()
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20240624124716.2610961-1-caleb.connolly@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240624124716.2610961-1-caleb.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,67 +117,53 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the case of RTL-8125B, Linux reads the mac address
-from register MAC0_BKP instead of MAC0, so let u-boot
-write the mac address there.
+On 24/06/2024 14:46, Caleb Connolly wrote:
+> Most devices have buttons exposed via the PMIC, the button polling
+> therefore triggers a log spam if debug logging is enabled.
+> 
+> Demote these to debug() so that they aren't printed unless LOG_DEBUG is
+> defined explicitly for this file.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+> Changes since v1:
+> - use debug() instead of just commenting out
+> - V1: https://lore.kernel.org/u-boot/20240607142229.50709-1-caleb.connolly@linaro.org
+> ---
+>   drivers/spmi/spmi-msm.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
+> index b0d6226041e5..a35cb0ba01e4 100644
+> --- a/drivers/spmi/spmi-msm.c
+> +++ b/drivers/spmi/spmi-msm.c
+> @@ -118,9 +118,9 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
+>   		return -EPERM;
+>   
+>   	channel = priv->channel_map[usid][pid] & SPMI_CHANNEL_MASK;
+>   
+> -	dev_dbg(dev, "[%d:%d] %s: channel %d\n", usid, pid, __func__, channel);
+> +	debug("%s: [%d:%d] %s: channel %d\n", dev->name, usid, pid, __func__, channel);
+>   
+>   	switch (priv->arb_ver) {
+>   	case V1:
+>   		ch_offset = SPMI_CH_OFFSET(channel);
+> @@ -185,9 +185,9 @@ static int msm_spmi_read(struct udevice *dev, int usid, int pid, int off)
+>   		return -EIO;
+>   
+>   	channel = priv->channel_map[usid][pid] & SPMI_CHANNEL_MASK;
+>   
+> -	dev_dbg(dev, "[%d:%d] %s: channel %d\n", usid, pid, __func__, channel);
+> +	debug("%s: [%d:%d] %s: channel %d\n", dev->name, usid, pid, __func__, channel);
+>   
+>   	switch (priv->arb_ver) {
+>   	case V1:
+>   		ch_offset = SPMI_CH_OFFSET(channel);
 
-Note: writing to MAC0 is still needed too, because this
-register is used by the hardware for mac filtering (the
-board will not receive packets if MAC0 is not set).
-
-Tested on a FriendlyElec Nanopi R5C board.
-
-Signed-off-by: Etienne Dubl=C3=A9 <etienne.duble@imag.fr>
-
----
-
- drivers/net/rtl8169.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/drivers/net/rtl8169.c b/drivers/net/rtl8169.c
-index b30d51731f..7c4d658c6b 100644
---- a/drivers/net/rtl8169.c
-+++ b/drivers/net/rtl8169.c
-@@ -153,6 +153,7 @@ enum RTL8125_registers {
- =09IntrMask_8125 =3D 0x38,
- =09IntrStatus_8125 =3D 0x3C,
- =09TxPoll_8125 =3D 0x90,
-+=09MAC0_BKP =3D 0x19e0,
- };
-=20
- enum RTL8169_register_content {
-@@ -881,6 +882,7 @@ void rtl8169_eth_stop(struct udevice *dev)
- static int rtl8169_write_hwaddr(struct udevice *dev)
- {
- =09struct eth_pdata *plat =3D dev_get_plat(dev);
-+=09struct pci_child_plat *pplat =3D dev_get_parent_plat(dev);
- =09unsigned int i;
-=20
- =09RTL_W8(Cfg9346, Cfg9346_Unlock);
-@@ -888,6 +890,19 @@ static int rtl8169_write_hwaddr(struct udevice *dev)
- =09for (i =3D 0; i < MAC_ADDR_LEN; i++)
- =09=09RTL_W8(MAC0 + i, plat->enetaddr[i]);
-=20
-+=09/*
-+=09 * In the case of RTL8125, linux is reading the mac
-+=09 * address from register MAC0_BKP instead of MAC0,
-+=09 * so let's copy it there.
-+=09 * Note: we still need to write the mac to MAC0 too
-+=09 * (cf. the loop above) because the hardware uses MAC0
-+=09 * for mac filtering.
-+=09 */
-+=09if (pplat->device =3D=3D 0x8125) {
-+=09=09for (i =3D 0; i < MAC_ADDR_LEN; i++)
-+=09=09=09RTL_W8(MAC0_BKP + i, plat->enetaddr[i]);
-+=09}
-+
- =09RTL_W8(Cfg9346, Cfg9346_Lock);
-=20
- =09return 0;
---=20
-2.34.1
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
