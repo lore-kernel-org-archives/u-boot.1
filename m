@@ -4,83 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13846C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 22:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33B60C2BD09
+	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 01:15:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64C84882B7;
-	Tue, 25 Jun 2024 00:28:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id D829B883E7;
+	Tue, 25 Jun 2024 03:15:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Rz1mJi+r";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="Aj4jJ7QP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0997883D2; Tue, 25 Jun 2024 00:28:22 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 448E288411; Tue, 25 Jun 2024 01:56:43 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF01184374
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 00:28:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29CA383989
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 01:56:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a724a8097deso207556966b.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 15:28:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1719268100; x=1719872900; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e3sorjRD5sWx65qot7iJvwV3GFcd47xslgJoS1OOYjI=;
- b=Rz1mJi+rLok+eS4/Sk8rO2Z3s42tnY9lOsAv5O3byVksST1OKIKnMoeelUhTqCbPlo
- rCpo2sonKFt+jj7T18oOLb9Z9zwp6ufrPzzznAcPCirdYP8KFpJ4kGTWaGkJnk5NL4d0
- GlIGLnkrnkezqzLOQI9vk7v19CSVn1lNdEQtLbOBozHhWqfm7/HeZn16IedhcZ/i/uYf
- l5t7unoGnXldmxd3GZViDm/tFuIr/4rKONXIu1IijipBnYPdJMBe0Ev8Dp80cjpEAgst
- LY1nHofeEZVWbpiytygTRKBrq77fJytV1lmufX+q/aygOi/AyWjRsDRW+mjh1FRM8Hot
- Qr/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719268100; x=1719872900;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e3sorjRD5sWx65qot7iJvwV3GFcd47xslgJoS1OOYjI=;
- b=RjAfAsef25BQyTv174UR2qhSJORmng3cqI/fHKO/zdcdRQN3TBSYuB8F+H9EE3j94j
- zVC4EmV7BK05W6r5HmGhGsqwlFJQE/HweJSAOI+zfcVRV1gR0VLh3h7NkLqXsnRf6ypv
- RYwVLM8c/DuxWIKEwegmp1jJ4smk8tvoNXkPPUjZzhTLbCk6281agphqGPdL/mJndBzz
- 9f8BHg+2nfhityUBdC9qbRIg93e2/ouqt8Q2j9ekZfda7XqpgZ9R9O69MIodGNqCx8An
- j+uiaPBObu2ooHA0H4vFmjSJ4iP+UpIgNcA9Z2UiYfrevWIM74ZsPBk4I7vz+r+DrxK7
- qaoA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVa/SmSW4kiQsJXPN4GCRwoXH3QlAgRHjZapWDIK+70ugcJo5LOWcEFOkGrQNskqUJseBoVfc8Bov65N5MGJQLskd9D0A==
-X-Gm-Message-State: AOJu0YwEChzQAw6+MNksOjkHqDXAH0ON84YMWjCNmbVYsbvUDhXhOo9Q
- F8LfXVM2fDxtNw9J+w+aOPQiyzUB38h6dlUNKRCWqOKTqyqc/sVX1N87YYwvdqxe8Ly7cPSCFev
- 4On9xOlKUE0x2Eh+Usl3FZQ/RZkDeOLXnDJRJWA==
-X-Google-Smtp-Source: AGHT+IFGD3diYb7Y8dLvPQ9+rNwrzrXmbXeD5O8JSgXfzMUJti/XoZlFcb6QcNgJXhZrWmzBN6fAmMeLuAXDqdb4Ylw=
-X-Received: by 2002:a17:906:dc91:b0:a72:60e2:bf5 with SMTP id
- a640c23a62f3a-a7260e21034mr131419466b.19.1719268099949; Mon, 24 Jun 2024
- 15:28:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrejs.cainikovs@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1719273400;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iBMvDXRM+siwtkf+otDfB1XWZoppBtRB71eytBQOM4U=;
+ b=Aj4jJ7QPljrkM7tuuwpsZesYo4PwhVesAkJ2M5Z+Ov/pZMkbYiOWqStQdJ2T/XWVxJMNSB
+ 44ze0PzqtWx4xBOQxs7MdUqbPhvXC0LqJU5FYsRfIEs85KSi4ZIJ/veFk/LbEnY9CN6tp4
+ +fnXXjBkqfulMXewjwUuEVUrwij+uOc=
+Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
+ (mail-zr0che01lp2104.outbound.protection.outlook.com [104.47.22.104]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-42-0TYmU0xhOly-sgzUhAGFQQ-1; Tue, 25 Jun 2024 01:56:38 +0200
+X-MC-Unique: 0TYmU0xhOly-sgzUhAGFQQ-1
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1e::13)
+ by ZR3P278MB1427.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:9d::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.30; Mon, 24 Jun
+ 2024 23:56:37 +0000
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::69a7:1995:40d7:53cc]) by ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::69a7:1995:40d7:53cc%7]) with mapi id 15.20.7698.025; Mon, 24 Jun 2024
+ 23:56:37 +0000
+Date: Tue, 25 Jun 2024 01:56:35 +0200
+From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 25/42] test: Allow connecting to a running board
+Message-ID: <ZnoHs6YiQlsoUWrL@toradex.com>
+References: <20240611200156.2245525-1-sjg@chromium.org>
+ <20240611200156.2245525-26-sjg@chromium.org>
+In-Reply-To: <20240611200156.2245525-26-sjg@chromium.org>
+X-ClientProxiedBy: ZR0P278CA0187.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:44::9) To ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1e::13)
 MIME-Version: 1.0
-References: <cover.1718638104.git.jerome.forissier@linaro.org>
- <CAJ+vNU0yGH6FKZsx+UZXvnQnsT13U9iKUb68=Fqc_z7J0XL14w@mail.gmail.com>
- <0db93742-f8d3-45b6-9d1e-e4f687c2d81a@linaro.org>
- <CAJ+vNU3ECDoquHLyA3ULac0HkUGbzggG-bDQ8v0F2vStyr47gQ@mail.gmail.com>
- <CAOMZO5A4MS9eZe24WBSu4omfhjmwtjM72ftdQBwDWGd1wFiLmw@mail.gmail.com>
- <CAJGZr0LCGaKN_G54HMOmQx8y7cuER_OLGP6Axf2ksUQLhoSF8Q@mail.gmail.com>
-In-Reply-To: <CAJGZr0LCGaKN_G54HMOmQx8y7cuER_OLGP6Axf2ksUQLhoSF8Q@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 24 Jun 2024 15:28:08 -0700
-Message-ID: <CAJ+vNU2X7n0VQjP0EZ7NpyVM-fKiqWQ7xL=MKGa3xQa+d4YXrA@mail.gmail.com>
-Subject: Re: [PATCH v4 00/14] Introduce the lwIP network stack
-To: Maxim Uvarov <muvarov@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0254:EE_|ZR3P278MB1427:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72f9c4d2-984a-45df-dd4b-08dc94a948f2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|376011|1800799021
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?z3XQaSL8pGcEKEfYRG6xSRvhDN+zKiXfE2apgT4JncoA/RuAXRMMDMj9PPhb?=
+ =?us-ascii?Q?bvz2dGDSmUumy3A30rW1ALVkikA6JS7MtvC6HmSKEa9OmNpL7WYx9lDWKfFZ?=
+ =?us-ascii?Q?hdx20tryzYLZpdfKq4NDJWV92J692S2sjqmPRFykPF3A3DBnqxZs8R+flabn?=
+ =?us-ascii?Q?fPsXDJNo/X2Je2xNXiZBVl3uriGK8CmDr+Rc0F1A7N/hVaxqw+hIzZHGCGWE?=
+ =?us-ascii?Q?hjEiqKumiel3sfgVDOy59q1pHMdXBnktes5NocRX88NnPD8SYSj5Db4Z1QIM?=
+ =?us-ascii?Q?mpNeF/j4ICs7D+OLgYU4rNjbNlHd7kLoG8AKVIlZmFEmplwXbKbdYJIM0ale?=
+ =?us-ascii?Q?Wx70B2InYx6NR5Q7PWzfKXsinkkt1i+qvZJtGm0dTAEhzV9btQ30op3Debv2?=
+ =?us-ascii?Q?9DIRHb7hPWcIa4kNR+qGqfvfDuovPNDvOEon+FCIRbfxvZ9PpQGHC/JaW3KG?=
+ =?us-ascii?Q?0/5nacrRLg2473Y2bqtZdVkVXsEh0M3xGkMonMspMLxh0yyC7UMctzGh8esQ?=
+ =?us-ascii?Q?u02Zg1MrNuK0aTq+fdLcmpReV7LsG/saLKyIGV0/N9wWQbAC8N0KXKKAZpGv?=
+ =?us-ascii?Q?wyMn8t7brWAuaIeH+LWrOPb/jOgGX/s33GNuJczuKwwlPcyuxhjRDNS4Li3M?=
+ =?us-ascii?Q?4q4zdUQSNCw1ZvOUGJyiwcvyRx3yraMsM2a8/bQxgUnDZfZoq7HOznt2pBcN?=
+ =?us-ascii?Q?vzkRyqIqxSPJd26PbgBkzljE6oahnZfHdJdMdMdOet1ji7Ks7oLoKLri3x30?=
+ =?us-ascii?Q?+wqllwFeS4EoxESkj65PfY2nVRq96biVFpBut7QjYsG9Xhiref5yNj1iVCMH?=
+ =?us-ascii?Q?QBBE/fhzG4YUWd15Kg43/F4iHfdvMBnM160mR8eRKTQDvV85w2K9eUei9vtc?=
+ =?us-ascii?Q?+4iUPJSmJqSulqUNsRZNPxSkdXR6qSN0kBaxwEMhJz2A0jqGIXgOEh7C6oHd?=
+ =?us-ascii?Q?6TIyEgOMWGVTzP7stlpnzDrmpXEp0R61215gBNuFh9gqeW5kwzKo1RMP4uHm?=
+ =?us-ascii?Q?ZIur842BBVqJzRDifdJAyfo5f9G67XLP9JR4h3B/ujdpSWL/iB8HQ0L6jpkL?=
+ =?us-ascii?Q?0lquZC2NRtKTeEMM87GUs3uF/WMmcke1ERrLe+NvwHRRcT9s93MpuNApMlFS?=
+ =?us-ascii?Q?FD3tcaJ7wCQw5iWh3I1pnnugkiI/r4YDT3sghfMFyLQft6dNU8YQzMSYE44P?=
+ =?us-ascii?Q?rZdipaprFDLJW/RPe1EDc2zXJsrdei/nXPgbO2ut3gmfw7i1dAh8kZhr46pC?=
+ =?us-ascii?Q?/lUSg/6uATJ/V0Og3ToI0AUvo3MKuVJgxKVx1H6M4lHcIYv3RuvbRDh+MMwb?=
+ =?us-ascii?Q?Yn7hgZcQihbz+e/G2hKr34fG?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230037)(366013)(376011)(1800799021); DIR:OUT; SFP:1102
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ckFLe9oQqg5VCDljxmoOJwPPjSnU6aReKF9nq6VqOI6ql6TKeN+IOb8Pe7tt?=
+ =?us-ascii?Q?Ow+2D3/lg9kPVfBxGMjflWKVjGrdkJW+K5xxt62fFzKZ0TSCdj2unpIynRdr?=
+ =?us-ascii?Q?IgGAXiwFQFp/Ng0Z69tLeWfZNeTZNQf2KgnKSAxPsxbC29dSFg04HOgV05eO?=
+ =?us-ascii?Q?6I60G/kg2mhJiNf9iokjLgMZg1YvKCjZqDZ3pkczPMoxP2N06J2eNGmJiQFW?=
+ =?us-ascii?Q?HxzzuipT8q8gTSJdZ7K+4yU8oFsZFq3KV86tOebkggE73kA3/nYYeA4Y0h+v?=
+ =?us-ascii?Q?OAJ2LM91c8J5iRF0KVNQLR4Ob1OVDwWDzAiJaGCuG26cWUoBhxrMnrvsEQsG?=
+ =?us-ascii?Q?WjPDxMbApVrslSyPrSy92lOga0SC/Mrcp5ah345FzsuE6vbAwZiDlKCTUrXu?=
+ =?us-ascii?Q?5phkNPhRkLze7ZHuMJwQH/CAFOpQgSiA1+EmMijWTcIFPMDVjSihWBhY0Vil?=
+ =?us-ascii?Q?WcO1qpIei9mQl8712rjoHqlE83kYviF9pYgqSjHmWGWx6M3gxGR9bO0lhBVp?=
+ =?us-ascii?Q?PIdQ9gkoMiegUSdle2Q/syIbEEwTkzp3gH6lkV42OwLSZ9xo8GwLiACVWOE2?=
+ =?us-ascii?Q?H09SkiAnF+7VTinW0P2tppGPsMuPNRJD6AJM+spYeroDKI68T7QIdOvIqRgX?=
+ =?us-ascii?Q?pWCOEZ9jqx4iJLIQJLtAbGuPzRDG6ARiGtMB4tkU8vA+jwj8ENEyO8wTm9LD?=
+ =?us-ascii?Q?s9niQbAe0LZCVKX+ktJdARqnTaodVa+MOqzzDuaXGVClOnIb/w9c48qbAZdN?=
+ =?us-ascii?Q?LaB3wbHkjBIf3SCL1ks4QbGZCyCv5w5km3eE5cqiJkOtAcZ8+0PM3l3cwAvT?=
+ =?us-ascii?Q?mQiQyDgOZljIz1d6/X/pF2LZ2WQyU4rggYQqRNNn+9H4f8mKU2bYmRN26xfp?=
+ =?us-ascii?Q?Mdh045QQhIdYHgS1eR1QfeesmOwctTZnQ6CmOTEKH8THR1l8zwN5a9ArLKLt?=
+ =?us-ascii?Q?tK751nINiNGSsfNsHZ0B5oUL+mD1TRP8gX6O4Y2e6crzVhVMI4IYm9hyxPhE?=
+ =?us-ascii?Q?f1m9a25dSCWyULfArcNYOfV91Ja8dXmu4TiudbIT6hrvmU/rsDQkcVa1UQ8Z?=
+ =?us-ascii?Q?aBM7naMHBNtZ8VA3Kv6APTJtkK3Rzise9bwLMnD141Ma8/xIF2T8x003iUU7?=
+ =?us-ascii?Q?vFWuDGRe/EWUnpauf3sXxKAt+y4r2GGiEJXkDKQONBRMvoKxSf6+7/k4P7vk?=
+ =?us-ascii?Q?HHuPu+E5jcIcHLWk0hQwt1k+ElcXmVXkpyuMk8pNQMId5N+2AYGorM6Gefce?=
+ =?us-ascii?Q?O8UHvsXyEhUvJROvcifXYcSCToZ/9+gPwhMFILlyqGRKjwia866l+RaL2eu6?=
+ =?us-ascii?Q?i/ceRiHMDZSFfkQW4fqZH4bV5IUSHLnT0QCO2v0mYGKlE3tlzAd3+zLK1MmL?=
+ =?us-ascii?Q?GJT4C15YfxHg6hl1NDdhjEuthxx92cbQ5TgVefDrJceUUyTM3QArnD8bO5/i?=
+ =?us-ascii?Q?b4E5iNqZM9dlU3/9+1R/82LCEFAsjkXXkDygL/kOG2rHjQmI3l1udnoLinAN?=
+ =?us-ascii?Q?7kSYTmtAbpPt4yqWdF1tvsDwyHNxfzuW9+24SJJWKIf/uSihEnisf1l/EfYo?=
+ =?us-ascii?Q?oW68EtxkPs8SH50gFc0xPSpGbzade+y/S1eHDev0p+PWfj2P+PJkEw+0v6h2?=
+ =?us-ascii?Q?HQ=3D=3D?=
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72f9c4d2-984a-45df-dd4b-08dc94a948f2
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2024 23:56:37.5514 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KLdRsm0Tt+Y1wrHmbDQ7XoZoM3F/hfwN87hseGMFwxuJOL/tz3x4KZ5VcTLl6qzDI6fw7Y/EQQBKQCxVc3GdKMvfqvM9Q+uWg2ZF8Aw/4Hw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR3P278MB1427
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 25 Jun 2024 03:15:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,84 +157,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jun 22, 2024 at 1:09=E2=80=AFAM Maxim Uvarov <muvarov@gmail.com> wr=
-ote:
->
-> =D0=BF=D1=82, 21 =D0=B8=D1=8E=D0=BD. 2024=E2=80=AF=D0=B3. =D0=B2 21:42, F=
-abio Estevam <festevam@gmail.com>:
-> >
-> > Hi Tim and Jerome,
-> >
-> > On Fri, Jun 21, 2024 at 1:08=E2=80=AFPM Tim Harvey <tharvey@gateworks.c=
-om> wrote:
-> >
-> > > I tried your to-upstream/v5-wip branch
-> > > (042bea36eb9731079a3d7afffe3774d79e06ac5d) and it behaves the same. D=
-o
-> > > you have something else to try/test?
-> >
-> > Yes, when I tested older versions from Maxim I could never get lwIP to
-> > work with i.MX.
-> >
-> > Jerome,
-> >
-> > Please try to run the lwIP series on any i.MX board, if possible.
-> >
-> > Thanks
->
-> Packet not for us means that incoming packet DST MAC does not match to
-> the MAC address inside lwip. I.e. to MAC address set into lwip when
-> lwip_init was done. Original U-Boot network stack does not compare
-> MACs but lwip does. There is something specific on this board, in
-> general lwip with debug should print out
-> MAC used during initialization. This MAC should match to the MAC from
-> the incoming packet.
->
+On Tue, Jun 11, 2024 at 02:01:39PM -0600, Simon Glass wrote:
+> Sometimes we know that the board is already running the right software,
+> so provide an option to allow running of tests directly, without first
+> resetting the board.
+>=20
+> This saves time when re-running a test where only the Python code is
+> changing.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  test/py/conftest.py                   |  3 +++
+>  test/py/u_boot_console_base.py        | 14 ++++++++++----
+>  test/py/u_boot_console_exec_attach.py | 21 ++++++++++++---------
+>  3 files changed, 25 insertions(+), 13 deletions(-)
+>=20
+> diff --git a/test/py/conftest.py b/test/py/conftest.py
+> index fc9dd3a83f8..ca66b9d9e61 100644
+> --- a/test/py/conftest.py
+> +++ b/test/py/conftest.py
+> @@ -79,6 +79,8 @@ def pytest_addoption(parser):
+>      parser.addoption('--gdbserver', default=3DNone,
+>          help=3D'Run sandbox under gdbserver. The argument is the channel=
+ '+
+>          'over which gdbserver should communicate, e.g. localhost:1234')
+> +    parser.addoption('--no-prompt-wait', default=3DFalse, action=3D'stor=
+e_true',
+> +        help=3D"Assume that U-Boot is ready and don't wait for a prompt"=
+)
+> =20
+>  def run_build(config, source_dir, build_dir, board_type, log):
+>      """run_build: Build U-Boot
+> @@ -238,6 +240,7 @@ def pytest_configure(config):
+>      ubconfig.board_type =3D board_type
+>      ubconfig.board_identity =3D board_identity
+>      ubconfig.gdbserver =3D gdbserver
+> +    ubconfig.no_prompt_wait =3D config.getoption('no_prompt_wait')
+>      ubconfig.dtb =3D build_dir + '/arch/sandbox/dts/test.dtb'
+> =20
+>      env_vars =3D (
+> diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base=
+.py
+> index e4f86f6af5b..a61eec31148 100644
+> --- a/test/py/u_boot_console_base.py
+> +++ b/test/py/u_boot_console_base.py
+> @@ -413,11 +413,17 @@ class ConsoleBase(object):
+>              if not self.config.gdbserver:
+>                  self.p.timeout =3D TIMEOUT_MS
+>              self.p.logfile_read =3D self.logstream
+> -            if expect_reset:
+> -                loop_num =3D 2
+> +            if self.config.no_prompt_wait:
+> +                # Send an empty command to set up the 'expect' logic. Th=
+is has
+> +                # the side effect of ensuring that there was no partial =
+command
+> +                # line entered
+> +                self.run_command(' ')
+>              else:
+> -                loop_num =3D 1
+> -            self.wait_for_boot_prompt(loop_num =3D loop_num)
+> +                if expect_reset:
+> +                    loop_num =3D 2
+> +                else:
+> +                    loop_num =3D 1
+> +                self.wait_for_boot_prompt(loop_num =3D loop_num)
 
-It seems 'packet not for us' can mean a lot of things.
+Hi Simon,
 
-I added a bit of debugging around 'DHCP packet accepted' and found I'm
-not receiving any packets from my DHCP server. So I connected directly
-to another board (isolated network) where I ran my own server and
-tcpdump and I don't see packets coming from lwip:
+I had a very bad day, so here you go:
 
-without lwip my server shows:
-# tcpdump -i eth1
-tcpdump: listening on eth1, link-type EN10MB (Ethernet), snapshot
-length 262144 bytes
-tcpdump: listening on eth1, link-type EN10MB (Ethernet), snapshot
-length 262144 bytes
-22:18:01.043992 IP (tos 0x0, ttl 255, id 23, offset 0, flags [DF],
-proto UDP (17), length 328)
-22:18:01.044391 IP (tos 0x10, ttl 128, id 0, offset 0, flags [none],
-proto UDP (17), length 328)
-22:18:01.044454 IP (tos 0x0, ttl 255, id 24, offset 0, flags [DF],
-proto UDP (17), length 328)
-22:18:01.044752 IP (tos 0x10, ttl 128, id 0, offset 0, flags [none],
-proto UDP (17), length 328)
+=3D=3D ?
 
-# tcpdump -i eth1
-tcpdump: listening on eth1, link-type EN10MB (Ethernet), snapshot
-length 262144 bytes
-22:22:41.602178  [|llc]
-22:22:41.709978  [|llc]
-22:22:41.867947  [|llc]
-22:22:42.105202  [|llc]
-22:22:42.502091  [|llc]
-22:22:43.219079  [|llc]
-22:22:44.497979  [|llc]
-22:22:45.776884  [|llc]
-22:22:47.054773  [|llc]
-22:22:48.333667  [|llc]
-22:22:49.611559  [|llc]
-22:22:50.890469  [|llc]
+/Andrejs
 
-What actual hardware has this been tested with? I think Tom mentioned
-he tested with an rpi of some sort.
+>              self.at_prompt =3D True
+>              self.at_prompt_logevt =3D self.logstream.logfile.cur_evt
+>          except Exception as ex:
+> diff --git a/test/py/u_boot_console_exec_attach.py b/test/py/u_boot_conso=
+le_exec_attach.py
+> index 5f4916b7da2..42fc15197b9 100644
+> --- a/test/py/u_boot_console_exec_attach.py
+> +++ b/test/py/u_boot_console_exec_attach.py
+> @@ -59,15 +59,18 @@ class ConsoleExecAttach(ConsoleBase):
+>          args =3D [self.config.board_type, self.config.board_identity]
+>          s =3D Spawn(['u-boot-test-console'] + args)
+> =20
+> -        try:
+> -            self.log.action('Resetting board')
+> -            cmd =3D ['u-boot-test-reset'] + args
+> -            runner =3D self.log.get_runner(cmd[0], sys.stdout)
+> -            runner.run(cmd)
+> -            runner.close()
+> -        except:
+> -            s.close()
+> -            raise
+> +        if self.config.no_prompt_wait:
+> +            self.log.action('Connecting to board without reset')
+> +        else:
+> +            try:
+> +                self.log.action('Resetting board')
+> +                cmd =3D ['u-boot-test-reset'] + args
+> +                runner =3D self.log.get_runner(cmd[0], sys.stdout)
+> +                runner.run(cmd)
+> +                runner.close()
+> +            except:
+> +                s.close()
+> +                raise
+> =20
+>          return s
+> =20
+> --=20
+> 2.34.1
+>=20
 
-I don't know what the meaning of the llc msg is above but you can see
-there is no DHCP request.
-
-Best Regards,
-
-Tim
