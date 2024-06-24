@@ -4,62 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F76CC2BD05
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 09:14:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C8E7C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 09:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0F5687E30;
-	Mon, 24 Jun 2024 11:14:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C0DC487FFB;
+	Mon, 24 Jun 2024 11:15:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="R1FjBuPS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86F0F88352; Mon, 24 Jun 2024 11:14:43 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id CF4A1801BA
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:14:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B83B4DA7;
- Mon, 24 Jun 2024 02:15:04 -0700 (PDT)
-Received: from debian (X72Y076X74.nice.arm.com [10.34.129.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7F8403F6A8;
- Mon, 24 Jun 2024 02:14:38 -0700 (PDT)
-Date: Mon, 24 Jun 2024 11:14:35 +0200
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 0/7] efi: CapsuleUpdate: support for dynamic UUIDs
-Message-ID: <Znk4-5xH7wtBPSSu@debian>
-Mail-Followup-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
- <ZnLk_pXstP2dlRGo@debian>
- <CAC_iWjL_rytosTAcsW2-3fmwVhjTgkMRAB0LwPuNpq73K=YmcQ@mail.gmail.com>
- <ZnVEALsxt2b9s-cI@debian>
- <b2f16a9c-e916-4fbc-9f9c-87b23c0277a5@gmx.de>
- <ZnWzJKEf1B0RLOyP@debian>
- <CAC-n0DzafDJqP7LwzKJ4Gii48X1pQMZ9hXuG8SsnwoHpo_FWxg@mail.gmail.com>
+ id 4976387FFB; Mon, 24 Jun 2024 11:15:08 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 526F1801BA
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:15:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id DE8EA14835CC; Mon, 24 Jun 2024 11:15:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1719220504; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=4G52iIyOvuB3NMQrMFve1s34aRyuySDoK/eLdGw14Jc=;
+ b=R1FjBuPSBlVtq12MISS85CiT8AU0EQOxZad+xOZx9m9+YJkjcqQEgwu8KOqUbYK39y0RiY
+ rrxlKS864rhReTQ+zRoiXcxApjgS84bbFuvnkSU6rN3qna/R0rszK4R6YlfONJGfWa2U2E
+ if/msrG31/PcYIH07HGNoYM9CsOFTpHrId1kdaHyt23lRB6BV+L32wyk+M+HDbcPTuKChk
+ 6yCB8Rq6OCJuviWEvLafSgFjot8+hIxJnBW1Td9s0fmvYXVx4ve/dlNbsDLl5Fehb+ZOGr
+ cbaY9GD9Hi2dmbvJaauuFhxy6XUClVQxbnau6CxGWhi8M6LL3kFnCWp+30aJnw==
+Date: Mon, 24 Jun 2024 11:14:55 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ kernel@sberdevices.ru, oxffffaa@gmail.com
+Subject: Re: [PATCH v1 1/3] mtd: rawnand: nand_base: support for
+ 'NAND_IS_BOOT_MEDIUM' flag
+Message-ID: <20240624-preacher-sharpness-b33541d3302d@thorsis.com>
+Mail-Followup-To: Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ kernel@sberdevices.ru, oxffffaa@gmail.com
+References: <20240602200836.3949773-1-avkrasnov@salutedevices.com>
+ <20240602200836.3949773-2-avkrasnov@salutedevices.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAC-n0DzafDJqP7LwzKJ4Gii48X1pQMZ9hXuG8SsnwoHpo_FWxg@mail.gmail.com>
+In-Reply-To: <20240602200836.3949773-2-avkrasnov@salutedevices.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,116 +79,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 21, 2024 at 07:11:28PM +0200, Caleb Connolly wrote:
-> On Fri, 21 Jun 2024, 19:06 Vincent Stehlé, <vincent.stehle@arm.com> wrote:
+Hello Arseniy,
+
+Am Sun, Jun 02, 2024 at 11:08:34PM +0300 schrieb Arseniy Krasnov:
+> Based on Linux kernel:
+> commit f922bd798bb9 ("mtd: rawnand: add an option to specify NAND chip as a boot device")
 > 
-> > On Fri, Jun 21, 2024 at 01:00:51PM +0200, Heinrich Schuchardt wrote:
-> > (..)
-> > > The current specification is in RFC 9562, 4.1, "Variant field"
-> > >
-> > > "The variant field consists of a variable number of the most significant
-> > > bits of octet 8 of the UUID.
-> > >
-> > > ...
-> > >
-> > > Specifically for UUIDs in this document, bits 64 and 65 of the UUID
-> > > (bits 0 and 1 of octet 8) MUST be set to 1 and 0 as specified in row 2
-> > > of Table 1."
-> > >
-> > > This reference to byte 8 does not depend on endianness.
-> >
-> > Hi Heinrich,
-> >
-> > Agreed, variant is not concerned by the endianness.
-> >
-> > >
-> > > U-Boot's include/uuid.h has:
-> > >
-> > >     /* This is structure is in big-endian */
-> > >     struct uuid {
-> > >
-> > > The field time_hi_and_version needs to be stored in big-endian fashion.
-> >
-> > Thanks! I thought this structure was used to hold either a big-endian UUID
-> > or a
-> > little-endian GUID, but now you have convinced me.
-> >
-> > This confirms that the generation of the dynamic GUID is missing something:
-> >
-> >     gen_uuid_v5(&namespace,
-> >                 (struct uuid *)&fw_array[i].image_type_id,
-> >                 compatible, strlen(compatible),
-> >                 fw_array[i].fw_name, u16_strsize(fw_array[i].fw_name)
-> >                     - sizeof(uint16_t),
-> >                 NULL);
-> >
-> > It is not possible to cast the little-endian efi_guid_t .image_type_id as
-> > the
-> > big-endian struct uuid output of gen_uuid_v5() like this; we need to
-> > convert the
-> > three time fields from big to little endianness.
-> >
+> Allow to define a NAND chip as a boot device. This can be helpful
+> for the selection of the ECC algorithm and strength in case the boot
+> ROM supports only a subset of controller provided options.
 > 
-> I'm inclined to disagree, the comment above struct uuid in include/uuid.h
-> state clearly that the format in memory is always big endian, but that a
-> GUID when printed has some fields converted to little endian.
-
-Hi Caleb,
-
-I read the comments above struct uuid differently: the GUID has some fields
-little-endian when stored in memory (and can thus not be stored in a struct
-uuid after Heinrich's comments).
-
-This is consistent with how it is done in U-Boot in various locations; for
-example, the EFI_GUID() macro stores a GUID with its time fields little-endian
-in memory. Similarly, the callers of uuid_str_to_bin() or uuid_bin_to_str() with
-format UUID_STR_FORMAT_GUID have indeed a little-endian GUID in memory (most
-often an efi_guid_t). This is also consistent with the UEFI specification's
-16-byte buffer format. [1]
-
-When you have a big-endian UUID in memory, the version field is stored in byte
-6, which is consistent with the RFC 9562. [2]
-If you convert this big-endian UUID with uuid_bin_to_str() and
-UUID_STR_FORMAT_GUID as in genguid, the "time high and version" field's bytes
-will be printed with byte 7 first and then byte 6, as per guid_char_order[].
-
-This is in contradiction with the RFC, which shows that the version field ("M")
-should be printed first.
-
-If you print the UUID with format 'STD, you will indeed have byte 6 containing
-the version field printed first as it should (uuid_char_order[]).
-
-This is confirmed by "uuid -d".
-
-Best regards,
-Vincent.
-
-[1] https://uefi.org/specs/UEFI/2.10/Apx_A_GUID_and_Time_Formats.html
-[2] https://www.rfc-editor.org/rfc/rfc9562
-
+> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+> ---
+>  drivers/mtd/nand/raw/nand_base.c | 3 +++
+>  include/linux/mtd/rawnand.h      | 6 ++++++
+>  2 files changed, 9 insertions(+)
 > 
+> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+> index c40a0f23d7..ed605b4af5 100644
+> --- a/drivers/mtd/nand/raw/nand_base.c
+> +++ b/drivers/mtd/nand/raw/nand_base.c
+> @@ -4458,6 +4458,9 @@ static int nand_dt_init(struct mtd_info *mtd, struct nand_chip *chip, ofnode nod
+>  	if (ret == 16)
+>  		chip->options |= NAND_BUSWIDTH_16;
+>  
+> +	if (ofnode_read_bool(node, "nand-is-boot-medium"))
+> +		chip->options |= NAND_IS_BOOT_MEDIUM;
+> +
+>  	if (ofnode_read_bool(node, "nand-on-flash-bbt"))
+>  		chip->bbt_options |= NAND_BBT_USE_FLASH;
+>  
+> diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
+> index fb002ae641..4eb880d8fb 100644
+> --- a/include/linux/mtd/rawnand.h
+> +++ b/include/linux/mtd/rawnand.h
+> @@ -218,6 +218,12 @@ enum nand_ecc_algo {
+>  /* Device needs 3rd row address cycle */
+>  #define NAND_ROW_ADDR_3		0x00004000
+>  
+> +/*
+> + * Whether the NAND chip is a boot medium. Drivers might use this information
+> + * to select ECC algorithms supported by the boot ROM or similar restrictions.
+> + */
+> +#define NAND_IS_BOOT_MEDIUM	0x00400000
+> +
+>  /* Options valid for Samsung large page devices */
+>  #define NAND_SAMSUNG_LP_OPTIONS NAND_CACHEPRG
+
+The entries in that file are ordered numerically.  Comparing with the
+same file in Linux this should go before NAND_KEEP_TIMINGS, not
+anywhere in between.  Makes later diffs and ports from Linux easier.
+
+Greets
+Alex
+
+>  
+> -- 
+> 2.35.0
 > 
-> > >
-> > >
-> > > tools/genguid uses UUID_STR_FORMAT_GUID which prints low-endian which is
-> > > typical in the EFI context but not understood by 'uuid -d'. Maybe we
-> > > should add a parameter for the output format.
-> >
-> > My understanding is that there is a single universal string format for both
-> > UUIDs and GUIDs, which uuid -d understands, and which has no notion of
-> > endianness. (Only the structures in memory have an endianness.)
-> > This means we do not need an output format parameter.
-> >
-> > genguid is calling the new gen_uuid_v5() function, which outputs a
-> > big-endian
-> > struct uuid. Therefore, genguid should print it with 'STD format, not
-> > 'GUID.
-> >
-> > Best regards,
-> > Vincent.
-> >
-> > >
-> > > Best regards
-> > >
-> > > Heinrich
-> >
