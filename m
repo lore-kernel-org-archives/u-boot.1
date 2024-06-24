@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E2A0C2BD05
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 08:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD9EFC2BD05
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 08:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE66787D07;
-	Mon, 24 Jun 2024 10:50:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6FB3D87F3B;
+	Mon, 24 Jun 2024 10:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mv5mmPNf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y5treJN7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B83DD87DEA; Mon, 24 Jun 2024 10:50:57 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 5BC9D88327; Mon, 24 Jun 2024 10:53:02 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE26887CFE
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 10:50:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DC0187F3B
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 10:53:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42249a4f9e4so30648825e9.2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 01:50:55 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42249a4f9e4so30666685e9.2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 01:53:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719219055; x=1719823855; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719219180; x=1719823980; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=MSGt6tT5aGf77bQwsewp2UyAIIQzZTrNXy/30CimzoI=;
- b=mv5mmPNfGZz3WkU/8lb6ag/Pz6s3vAGjRR25kO2PgxycU0xN8JHv5gfPVtFOWszBP+
- YIkZqRBR24R2+2ysq5Y9zzkxtCdzqXZQd/mtLkGcHvtZiwism5Vouw3bqnznIEGxNIfd
- yta2gSZoN16J0cXC0OwaGu+OrK5DzHSWcujiGPJ4SZ7sPwMXDE8v3jZRT0mbtDVvXPfJ
- PriiZMJLu7OUIMJG1F32L6p5ORw62B+FJcfXk8fCGg7TdM3YfF/tnqPVgoSKQPbfM36D
- xTNZb5Bfr0T3s0Lcw4HVm9D7Fn1JkS4+TF3yj2MCYa5UrCnlfak41e3GKk6D8QpzGGqc
- DU2w==
+ bh=+wK98rWoOVKRlmtDVYJgZ9j9Q3kCjf38C5u8HTfJk4I=;
+ b=Y5treJN7niAfjJ9QeD5nbf00q7qcNxWQEc4YAcUXN/vcO4anSLfwKyAvIQEUUO1CpJ
+ sBBxMVbd+5YNfifmctkGW0ajeROkxY9rj6GyrcNPKGHeZP014cPzX6HfTF6Cql7TZAYI
+ fpFk9rXcn6Ufl0DyPjwIDsBSyyWr3Y4MxnwOM7/1REd1toToumXOr/rTvpvPRl/ETAks
+ u9byUMas2DnHajbPyThkUnudYIQlOWfpx7gES56kqOr7vbWpaTcCvxs9gwtmc2o9L/Zj
+ kNONeQtJGNcEqoYFc1xOKy7laXeR+RjDpjI4h1ld5xYTIOfH+SQGVef9rjO2FrzlIxbL
+ 9ksg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719219055; x=1719823855;
+ d=1e100.net; s=20230601; t=1719219180; x=1719823980;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MSGt6tT5aGf77bQwsewp2UyAIIQzZTrNXy/30CimzoI=;
- b=KH9EbFAmocbFepEkr5L45B1YD0bl3o0qi0dNULT+9tbbxlw94Yon4kPlocM1eAZ7e0
- KENr5MQ96eEk1cE2bcGqj9587MWNT6p8h8zxPkyocMGns9bU9o0a8FNdd3K7xyD8t8aJ
- d42bVh/vqukisjubjBLGUXL2ZAfAzJ2Hkbs397Rr/o3QOR6zqFTMjYRnXhf6ZptNb19j
- PlOXCTOsE1sAtjPlpW+vPzKspdC0kCUsrNeSVEBUQtIctSiyluuczGzLqh5hpM1k3cJw
- +pJYdH4GV46ymnhPtQDwXiBthQLXStjd/UZjrS1bCpoymeQu4J8d1yhR8xRBW5ARZowB
- Kknw==
+ bh=+wK98rWoOVKRlmtDVYJgZ9j9Q3kCjf38C5u8HTfJk4I=;
+ b=xHiC4dM5dH3vFHQTlTARbAu7/MbfQIU1CltZoUtAWwwpAHFgDgJ4w72Kw6pIiFbaV3
+ 42mxkVgcNKwuCvG7H2N1i1CLQpgjDTm1Fjy2GVHE8HJ1tFEuw+JFm+iVd/7yv5eQH+XB
+ G1X3jLALH8SL9p5mOhD4RA3e9AMNQ8KZyUARvDPz56HFVLPunKKnvW+ZuVtPTdZ+GjKw
+ tfRz6F0+j33Fy3RVjb9+bz/A/z6uMO239D7Zs9EfNoOi7/vGyaw9iAljw1ahhz/pxUY9
+ ukQVDAdcc0YdMI836Yo1DyjO8rH4uCxSFbGnxIsq/ZGwIo6wZWEThyvtqe0bqC1UysTM
+ dNyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMXMXVoxV4lI+cvhx41CW0vTsyQJE/avvyT/Ir9EWumQ/xu9mL0ALUwQvf5dSk5prOT7lbUSLJpQVoXy+64UuZSzYLTA==
-X-Gm-Message-State: AOJu0Yxmh3sM4Nnz0f4AOT2H+MtlmjE6mfguxw0w2nK6yoorzfFnTeyw
- 5hTFCpFFGqfLs//cjTPJfdoqBQlSmyHs11Ruer7/hRG8/BXWXt1hRiNCzv3Sj/E=
-X-Google-Smtp-Source: AGHT+IHFZgaKoFtrWfSSeVQPO/CLOlranhS9i5EaqDa16HHu+/0yBNSe5Eg20DCeqj9OYCh62114aQ==
-X-Received: by 2002:a05:600c:6b19:b0:424:918c:3f5b with SMTP id
- 5b1f17b1804b1-424918c6d91mr15135395e9.29.1719219055259; 
- Mon, 24 Jun 2024 01:50:55 -0700 (PDT)
+ AJvYcCXJWs05aGE/bGhjfBzELbmb7Khr/DLs4zPJ2w/cVL3EAo+peyB52MTEpvOcDdCqnQbnfl9gw5zWsetUbTI3aweLjhjbKw==
+X-Gm-Message-State: AOJu0Yydqvo+uh1XHf6P5ps3scCQVlewP+SqwPeN+MzzUQU8xx5bHFiw
+ Ji+1RYCM8fY0L08eB3087IAan2cbZwxV2nOtI/8KYblBKFhcl1QeXdAgM8yUiBk=
+X-Google-Smtp-Source: AGHT+IGlHZ3TuY2Pv33nRCop5mt0uwzLVlehW1c1CDj5ETgpUJhz+fDDfPYc80QF4o0P8KUNPsVs7w==
+X-Received: by 2002:a05:600c:49a9:b0:421:8f16:16d5 with SMTP id
+ 5b1f17b1804b1-4248cc66687mr27937275e9.33.1719219179812; 
+ Mon, 24 Jun 2024 01:52:59 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:4500:90e2:c2d5:54ab?
  ([2a01:e0a:3cb:7bb0:4500:90e2:c2d5:54ab])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42471e65fb7sm141147175e9.1.2024.06.24.01.50.54
+ 5b1f17b1804b1-4247d208b0esm164997685e9.38.2024.06.24.01.52.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jun 2024 01:50:55 -0700 (PDT)
-Message-ID: <e197a0df-d152-4090-a1ec-348161fcc777@linaro.org>
-Date: Mon, 24 Jun 2024 10:50:54 +0200
+ Mon, 24 Jun 2024 01:52:59 -0700 (PDT)
+Message-ID: <f0413089-270f-4f2d-94ba-5fe41a65afe6@linaro.org>
+Date: Mon, 24 Jun 2024 10:52:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 10/14] net-lwip: add wget command
@@ -83,10 +83,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
 References: <cover.1718638104.git.jerome.forissier@linaro.org>
  <ba84782cebf8a151ae7bd5d9abc4b313fb4334e8.1718638104.git.jerome.forissier@linaro.org>
  <86frt2vp2k.fsf@udb0321960.dhcp.ti.com>
- <86cyo6vovk.fsf@udb0321960.dhcp.ti.com>
+ <86a5javou8.fsf@udb0321960.dhcp.ti.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <86cyo6vovk.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <86a5javou8.fsf@udb0321960.dhcp.ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,35 +107,36 @@ X-Virus-Status: Clean
 
 
 
-On 6/24/24 08:25, Jon Humphreys wrote:
-> Subject: [PATCH] net-lwip: fixes off-by-one array access error with wget
+On 6/24/24 08:26, Jon Humphreys wrote:
+> Subject: [PATCH] net-lwip: Add message if not using http:// for wget
 > 
-> When wget parses the url and extracts the host, it is off by one on the
-> index to terminate the character array.
+> U-Boot's wget only supports http://, so give the user a clue if they don't
+> use it.
 > 
 > Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 > ---
->  net-lwip/wget.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  net-lwip/wget.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 > 
 > diff --git a/net-lwip/wget.c b/net-lwip/wget.c
-> index 069299bd469..63b19b99112 100644
+> index 63b19b99112..6b9c953ef51 100644
 > --- a/net-lwip/wget.c
 > +++ b/net-lwip/wget.c
-> @@ -51,7 +51,7 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
+> @@ -35,8 +35,10 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
+>  	long lport;
+>  
+>  	p = strstr(url, "http://");
+> -	if (!p)
+> +	if (!p) {
+> +		log_err("only http:// is supported\n");
 >  		return -EINVAL;
+> +	}
 >  
->  	memcpy(host, p, pp - p);
-> -	host[pp - p + 1] = '\0';
-> +	host[pp - p] = '\0';
+>  	p += strlen("http://");
 >  
->  	if (*pp == ':') {
->  		/* Parse port number */
 
-Hi Jon,
-
-As I said previously I am ignoring this patch since I already have it in
-my working tree. Thanks for reporting.
+I am folding that into "net-lwip: add wget command" if you don't mind.
+Thanks!
 
 -- 
 Jerome
