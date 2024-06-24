@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B46C2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227C7C30658
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C486988387;
-	Mon, 24 Jun 2024 23:20:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E579882DC;
+	Mon, 24 Jun 2024 23:26:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="qeQmVsiy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L/JxJ34s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEBD1882DC; Mon, 24 Jun 2024 23:20:29 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 45064866EB; Mon, 24 Jun 2024 23:26:31 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0FF188387
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:20:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FC3D866EB
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:26:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a6fbe639a76so766568866b.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:20:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5c1d42d4470so1837432eaf.1
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:26:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1719264027; x=1719868827; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1719264388; x=1719869188; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VD2eoFUPRxuTcXicYkbSuHvadir0EqhUiDsAfDWOlIc=;
- b=qeQmVsiyex1dtG4DLkxfE8/69v/P2QXzn/19a0cjIp4jZ/6n30SHTPFDsk6r6OaoIY
- zjUKu1oIgFrT3cvWDWYtLACjRageuuc3OjgzYjPooD/LtJsDrDGuK0bFCVRJqZIwnQm/
- wVgD2lV13DXudu1+pFsKXThS5anwfKk78QrjJBz129ETTVdAgDwFHp4+WWq8gQ2DmtTk
- Bd/y7nLyoLKNnKBgJnc7oQ4v3HkF5uHwxFqmZOlmITd3cJ3WfMkADAnLgEjALFKxTbvw
- 1ieBnNTDo0M92WCVgnKvuw4TRDxPg0XKGjVEy+khg6T0+kC+BlW90SEcTquyIEXoEICc
- rkZA==
+ bh=3UApMtD08AIn61SdIBJ+kjf1zsC81C9iSU17kaNWLxs=;
+ b=L/JxJ34sfdJphu5ht9jgRS8zfTnBFkwy89TPbezVur2I289wWanl1CDghTp+Ax8JeD
+ IvvLRuCNOeIzaYozXE4DICOLolX+XZ1YGuMaSopfZOZbA1plb+cKUCrUaMKWFas2A464
+ GHAV9WWiuT0k9Uxs0OUVAiiAZkubiQB+puq84=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719264027; x=1719868827;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1719264388; x=1719869188;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VD2eoFUPRxuTcXicYkbSuHvadir0EqhUiDsAfDWOlIc=;
- b=KaEwEhPZknZeQGHzBB9vpamDcXyje1cY/s93l2YqdcjSpuP5ZsvucKIeCutKGOZ21M
- xVYOifqm0m92eLf5nbns1Lmk14umYPvUhLKiKKEFVwTHxF0JWd6QvR1meSjvnCRYELlA
- FpPgWJUY14xQHcd0ye9igHDKN1O1yhSpcqQSgBT7uZHUaxHRRj/I8s4+0QhFf8HbSVGH
- mxvjSrLpxJeRbdgthZS+cHPniKhJ1OYGury+Wao9WUTIzesjKlQZBuO0nmYNiYuRlItT
- 2XvPRktKDodN3nR4PlV0HBw70l+lUkGkz+aa12sRZ/Y6Brp/BZ/7rRxNqe+HyXOUCURR
- Eouw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXGHGhJAqckbXwM1r2POuK8JyC39SRxeg77SJoh35TioBrydlMJHa7Vdy3RZ1ut5Wg219qx7yBWo8hjZ2eDBMUXrLXVJQ==
-X-Gm-Message-State: AOJu0YzWj6gh3ewc9OJgydjXU23DZvipVdWGVLkMfXcD6039popSyR02
- y8PDXqbrXttFplANbZgFa89WRGMbK9/GJIS+hXFoz+X3Xjf0xGziIMxjskEymuyeokYSEoabilr
- Cbk4OgerZx8yifZ6D5vef//01+MaKajVlXrRQWA==
-X-Google-Smtp-Source: AGHT+IG8PvxepLBKAXg4PdoKsShBNJTMe+zKotwQ8mq0S2xdVZBL8xUJeC90p4U9MMzuKgzYIVHn9rcRmJiYdDUvYb0=
-X-Received: by 2002:a17:906:99cd:b0:a72:6442:d53a with SMTP id
- a640c23a62f3a-a726442f729mr115306966b.9.1719264026830; Mon, 24 Jun 2024
- 14:20:26 -0700 (PDT)
+ bh=3UApMtD08AIn61SdIBJ+kjf1zsC81C9iSU17kaNWLxs=;
+ b=rp698Snd4kpYFQgK7AdflNGTq8hoFmFChTHQ3qhoDJ+DopFAaVzcK07qRwyyE8R350
+ qpyEJABMob8hU772V+9O5N+51fKtvNAkjQM2shT5ZdmQyU+MGhmO0a47TmRKrZehNIBS
+ UTUlGROAJkIjDziYyX/phgn/4F+xlcsBppp4RaqJqveDcvRVlAKVOpn0HPVB3+bJoES8
+ WxQ3nuPe9cfTrp4E/BJgKHF6MMlCY2LA1RA6iFegsFwkyPpLqDiKT2xi2RP+5H5zAaCb
+ D7Kj/W6N2YK7nOTjWNG9SJwhz3FHVN1wkiqlsGFiGzsrL/XpaOoFIuq3KGDpkAwoPBpD
+ Xj3w==
+X-Gm-Message-State: AOJu0YzpfZSBrB3dqaNnwpTZROqsVZjLE00sgWejlrVQel/pf8AyaQj0
+ CNO7nk6FTrQXekRU9iKtI3x+H0OoWu4rGtUoiEbMoYcH7Ie1uddRMi+DeVqnEow=
+X-Google-Smtp-Source: AGHT+IHQfKZATxXiU8RENpydi1yz8vu6MTErevM8jNs9GS2JDwaNkjZ9+09zFNi6Iy6oe/6lfdE6cQ==
+X-Received: by 2002:a4a:3055:0:b0:5bb:3326:175a with SMTP id
+ 006d021491bc7-5c1eebfe6bcmr5741960eaf.2.1719264387756; 
+ Mon, 24 Jun 2024 14:26:27 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7009c5df65csm1332833a34.9.2024.06.24.14.26.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Jun 2024 14:26:27 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
+ Bryan Brattlof <bb@ti.com>
+Cc: u-boot@lists.denx.de, Andrew Davis <afd@ti.com>, 
+ Dhruva Gole <d-gole@ti.com>
+In-Reply-To: <20240619-play-fdt-fixup-v1-1-18e2a728ca45@ti.com>
+References: <20240619-play-fdt-fixup-v1-1-18e2a728ca45@ti.com>
+Subject: Re: [PATCH] board: beagle: beagleplay: enable OF_SYSTEM_SETUP
+Message-Id: <171926438692.1912351.4241540655800115685.b4-ty@konsulko.com>
+Date: Mon, 24 Jun 2024 15:26:26 -0600
 MIME-Version: 1.0
-References: <20240604163546.60225-1-sebastian.reichel@collabora.com>
-In-Reply-To: <20240604163546.60225-1-sebastian.reichel@collabora.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 24 Jun 2024 14:20:14 -0700
-Message-ID: <CAJ+vNU1+wJBDdvW9g1RgD8HszeA-sDUvB6CBj0qqY0VRiZVeeg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] FUSB302 USB-C controller support
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- Eugen Hristev <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Simon Glass <sjg@chromium.org>, Soeren Moch <smoch@web.de>,
- Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,77 +91,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 4, 2024 at 9:35=E2=80=AFAM Sebastian Reichel
-<sebastian.reichel@collabora.com> wrote:
->
-> Hi,
->
-> On ROCK 5B power is usually supplied via it's USB-C port. This port has t=
-he
-> data lines connected to RK3588, VBUS connected to the input regulator and
-> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
-> accessed via I2C from RK3588. The USB-C controller is needed to figure ou=
-t
-> the USB-C cable orientation, but also to do USB PD communication. Thus it
-> would be great to enable support for it in the operating system.
->
-> But the USB-PD specification requires, that a device reacts to USB-PD mes=
-sages
-> send by the power-supply within around 5 seconds. If that does not happen=
- the
-> power-supply assumes, that the device does not support USB-PD. If a devic=
-e
-> later starts sending USB-PD messages it is considered an error, which is =
-solved
-> by doing a hard reset. A USB-PD hard reset means, that all supply voltage=
-s are
-> removed for a short period of time. For boards, which are solely powered
-> through their USB-C port, like the Radxa Rock 5B, this results in an mach=
-ine
-> reset. This is currently worked around by not describing the FUSB302 in t=
-he
-> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
->
-> 1. the USB-C port cannot be used at all
-> 2. the board will be running via fallback supply, which provides limited
->    power capabilities
->
-> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
-> that we react to the power-supply's queries in time. The code, which is
-> originally from the Linux kernel, consists of two parts:
->
-> 1. the tcpm state machine, which implements the Type C port manager state
->    machine as described in the USB PD specification
-> 2. the fusb302 driver, which knows about specific registers
->
-> Especially the first part has been heavily modified compared to the
-> kernel, which makes use of multiple delayed works and threads. For this
-> I used a priorly ported version from Rockchip, removed their hacks and
-> any states not necessary in U-Boot (e.g. audio accessory support).
->
+On Wed, 19 Jun 2024 14:12:30 -0500, Bryan Brattlof wrote:
 
-Hi Sebastian,
+> Unfortunately when enabling FDT fixups for the AM62x family of SoCs and
+> moving TF-A to the bottom of RAM we missed the BeaglePlay. This is
+> causing Linux's memory allocator to clobber TF-A and break its boot.
+> 
+> Enable OF_SYSTEM_SETUP to fixup the kernel's FDT to inform it of the
+> actual location of the firmware
+> 
+> [...]
 
-It seems here that your goal was primarily to react to the USB-PD
-messages to negotiate board power. It looks like your tpmc class
-implementation has the ability to handle role determination among
-everything else from the tpmc but it's not clear to me how a tpmc
-would hook into a USB controller to provide role feedback.
+Applied to u-boot/master, thanks!
 
-The rk3588 you're using in this series has a DWC3 controller
-configured with dr_mode of otg which means it will register the
-dwc3-generic-peripheral driver. When dwc3_core_init_mode is called,
-what exists to set dwc->dr_mode according to the mode the TPMC is
-showing? In other words what is here to provide the means for your OTG
-controller to act in both host mode and device mode?
+-- 
+Tom
 
-Perhaps it is beyond the scope of your series but I'm looking for a
-framework where a driver monitoring a GPIO can provide the role to UDC
-drivers. For example, I'm talking about a USB-B connector with the ID
-pin going to a generic GPIO or a GPIO connected to a bus-less type-C
-CC controller like the TPS25821 which provides a SINK# pin to specify
-if you have a host cable vs a device cable attached.
 
-Best Regards,
-
-Tim
