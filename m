@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA724C2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:05:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F06C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:05:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A178B8852D;
-	Mon, 24 Jun 2024 23:04:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1054C88548;
+	Mon, 24 Jun 2024 23:04:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fNBApdOT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F5tBWN82";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E6F088119; Mon, 24 Jun 2024 23:04:36 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 23E818852D; Mon, 24 Jun 2024 23:04:38 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55269883C9
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C26E188568
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4217136a74dso39664115e9.2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:34 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-424720e73e0so42678465e9.0
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719263074; x=1719867874; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719263075; x=1719867875; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=t9CfDVGOz6KTLC+evnRlVUFAOKx9+mHwstEfz5WLmCk=;
- b=fNBApdOTeUsrLELrYpnxVTSk3YfRzpejE/bEMzhVtGMW3O7gOE9xONmmTGxU7GJDbG
- jPHFYnKejj7MpbSq+wjkS7Sr9LB3fr/fxnlLffhAbDpHANCXUN31zQl7GeSUVPxOTLRj
- ARUpkIaIk7oWb3aHLEwLzWNPxwW3ptfOv63G0O0lR7h6KzjBKHIuWjntLi/ML5IhB09c
- BDn95QPbNDLdg1CrPeh0KKraz2akmhmTy5HFsAIKh23LoxSlO0DFguyQT0XH6ARonn2k
- kkpQBYL5ebuxmyX3saTzZJ+1JbwHbA8cCksYpBsJ6fCpwStO4JlQG8zfcrDq//YHStyJ
- wnkg==
+ :reply-to; bh=SgKyKJvRxrzHLDzZymGyPACBzjoYAUijZTCxAgiEaAs=;
+ b=F5tBWN823vlbSIepcZcdKXUA6gwmVnXjKfc5ILHcjxeXBrYG5HemZt8aC03BAeDqir
+ X4EhJ5T2RcaGW8VnPkxLi+ET/y+rEtfJ/O2Oo1UdfNVFbz/XbOvAp9pDFKGIS186/Np2
+ HgjedvW4JfQuUhTz3OamTPHVIoYVCO1eK+57w8oeFxKyhHSMEj9LQo5rgLeHxFPGXNxY
+ JRZhIP9k+MocTv6bWYnDbUnUxGfV+KbihQPeVa5v7zRQ03u8Js0q1oN1TS7sSUgJkA0J
+ QjNuc+HMKNUzVwVfRdVOxJDHkcDlplvaxXxH+LjLjkqlortpJSEtDvo9InyiSKpCiuXW
+ XR6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719263074; x=1719867874;
+ d=1e100.net; s=20230601; t=1719263075; x=1719867875;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t9CfDVGOz6KTLC+evnRlVUFAOKx9+mHwstEfz5WLmCk=;
- b=qsjC5jPV4pRUiQChlmffb6V7YCKuqZDIQ43sMf/syEtqgzdyTN2zvFD2Cz7t6FyEtD
- YngfiFEt7YCLfyJMpN+MJ7gOj6TFBE3rU4y+T3SlT9PFm89FOqfpYjZ3h9eRGHZA9ZHU
- Bz6Nk0XmTiSrD5TZBlvgCIgoIePW+dvERIxqIa+qcGiMoEyAJGykVb+mrw6+4whvUVmc
- a2MhieKO00br6tjeSW21+9YPLkELDE1AgyEHhz0Gzi5jVfaUkGWSZMF7rqaY65gkCj63
- d7JbRgB12cNyZjSiNMBIsLZY+g/WlXaesqIHD38fk176m0bs4O/Wh2CoZhOlPXqnKl0n
- pUXA==
+ bh=SgKyKJvRxrzHLDzZymGyPACBzjoYAUijZTCxAgiEaAs=;
+ b=kl8JbiERdfEoiBKlILdzrBVmTJPCLe65juJ6MVEyiLlmoSxI4d2TKWWFhzwkv4d6Kn
+ sFX0OV9cZfffmYRx5aEqG+/UiM0cgk2lSMk57Elz1q/SCcQOzhtw5AklKgSQQ4mzXPNC
+ mYPhxIGD8yHHo7qqb/gcqQhbB65SdYy5zQ3FdodS53VA9bJgL+w6rfRvTJHTu/2btqbt
+ uO/8Af8BbEc0c9QoWf6eXYTg9jaeMHozCIT1a5G6XIKv9wEBEozqaActZkRM9vrfVEia
+ C+RdvBrOtU3Py2glmdhimsafuXYbFanCs5dyPgxgVpaYCj8yiZm/JvE0cOxxUzoys6PG
+ 6qTg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXaRV5F0e+vyglMqGN6Jt8CyXUhqpd3pSLApCFG8U6/x6S/5TAlYVWoGGPvk2b0stRr4x4Nenl0TXBLaUiQMfi7rCBycQ==
-X-Gm-Message-State: AOJu0YyCcXtdJpF7bi8izO+/epthfBfBXK++JO/zyyWfAgvDnDskXUGc
- rQT+7zflWlwgqNUrz5B4oQ+mtD3Adtj/1RFUWtauBTRsQ9lN+VYa
-X-Google-Smtp-Source: AGHT+IErsodt/sExvpD1Q/TI57TmQZ99Uhm2HqCpQW3VUuPa/IgqKfzlbefIIbBsArvxXb/K8ZWFLA==
-X-Received: by 2002:a05:600c:2d05:b0:421:82ed:28d1 with SMTP id
- 5b1f17b1804b1-4248cc73e25mr38207885e9.41.1719263073694; 
- Mon, 24 Jun 2024 14:04:33 -0700 (PDT)
+ AJvYcCWhxGMQ1bKQ3q11ypVmpA5i6MlaMF++Y5pST+zk9de4s7uDOC1T7Ewma2siHtyCbXDfZGeS8D7rPeRGpmu/6uqzFjkffQ==
+X-Gm-Message-State: AOJu0YxbHoithhMPMlYAqGmSW4k/ATEm1GMOrB2yjQZ/KvZcsANFBdVI
+ uTLQQxYJ6uzQGpdXZBXhyP4xGXUHeXuXbxkOgJ5tHt4YLI9eJxHY
+X-Google-Smtp-Source: AGHT+IFeCrlvSZy0jOJtK/w2tBHmubLkEUZOebIpB6Forzf7s7No+7ZXfFrl1Y5qglrE2EPhLeihGw==
+X-Received: by 2002:a5d:4712:0:b0:35f:1128:2514 with SMTP id
+ ffacd0b85a97d-366e7a0fc96mr3631284f8f.32.1719263075268; 
+ Mon, 24 Jun 2024 14:04:35 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.32
+ ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:04:33 -0700 (PDT)
+ Mon, 24 Jun 2024 14:04:34 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,10 +87,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Alexey Romanov <avromanov@salutedevices.com>,
  Peter Robinson <pbrobinson@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v4 05/14] i2c: mediatek: add support for optional arb and pmic
- clock
-Date: Mon, 24 Jun 2024 23:03:31 +0200
-Message-ID: <20240624210418.19324-6-ansuelsmth@gmail.com>
+Subject: [PATCH v4 06/14] serial: mediatek: add support for bus clock and
+ enable it
+Date: Mon, 24 Jun 2024 23:03:32 +0200
+Message-ID: <20240624210418.19324-7-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240624210418.19324-1-ansuelsmth@gmail.com>
 References: <20240624210418.19324-1-ansuelsmth@gmail.com>
@@ -112,76 +112,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for optional arb and pmic clock for i2c provided in upstream
-linux DTSI.
+Upstream linux also provide the additional optional bus clock.
+
+Add support for it and also enable the baud and bus clock on probe.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/i2c/mtk_i2c.c | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ drivers/serial/serial_mtk.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/i2c/mtk_i2c.c b/drivers/i2c/mtk_i2c.c
-index 5592fe91817..3450177741a 100644
---- a/drivers/i2c/mtk_i2c.c
-+++ b/drivers/i2c/mtk_i2c.c
-@@ -221,6 +221,8 @@ struct mtk_i2c_priv {
- 	void __iomem *pdmabase;		/* dma base address*/
- 	struct clk clk_main;		/* main clock for i2c bus */
- 	struct clk clk_dma;		/* DMA clock for i2c via DMA */
-+	struct clk clk_arb;		/* DMA clock for i2c ARB */
-+	struct clk clk_pmic;		/* DMA clock for i2c PMIC */
- 	const struct mtk_i2c_soc_data *soc_data; /* Compatible data for different IC */
- 	int op;				/* operation mode */
- 	bool zero_len;			/* Only transfer slave address, no data */
-@@ -255,6 +257,18 @@ static int mtk_i2c_clk_enable(struct mtk_i2c_priv *priv)
- 	if (ret)
- 		return log_msg_ret("enable clk_dma", ret);
+diff --git a/drivers/serial/serial_mtk.c b/drivers/serial/serial_mtk.c
+index 3f569c68f22..78e8d9dc735 100644
+--- a/drivers/serial/serial_mtk.c
++++ b/drivers/serial/serial_mtk.c
+@@ -76,6 +76,7 @@ struct mtk_serial_regs {
+  *				driver
+  * @regs:			Register base of the serial port
+  * @clk:			The baud clock device
++ * @clk_bus:			The bus clock device
+  * @fixed_clk_rate:		Fallback fixed baud clock rate if baud clock
+  *				device is not specified
+  * @force_highspeed:		Force using high-speed mode
+@@ -83,6 +84,7 @@ struct mtk_serial_regs {
+ struct mtk_serial_priv {
+ 	struct mtk_serial_regs __iomem *regs;
+ 	struct clk clk;
++	struct clk clk_bus;
+ 	u32 fixed_clk_rate;
+ 	bool force_highspeed;
+ };
+@@ -220,6 +222,10 @@ static int mtk_serial_probe(struct udevice *dev)
+ 	writel(UART_MCRVAL, &priv->regs->mcr);
+ 	writel(UART_FCRVAL, &priv->regs->fcr);
  
-+	if (priv->clk_arb.dev) {
-+		ret = clk_enable(&priv->clk_arb);
-+		if (ret)
-+			return log_msg_ret("enable clk_arb", ret);
-+	}
-+
-+	if (priv->clk_pmic.dev) {
-+		ret = clk_enable(&priv->clk_pmic);
-+		if (ret)
-+			return log_msg_ret("enable clk_pmic", ret);
-+	}
++	clk_enable(&priv->clk);
++	if (priv->clk_bus.dev)
++		clk_enable(&priv->clk_bus);
 +
  	return 0;
  }
  
-@@ -262,6 +276,18 @@ static int mtk_i2c_clk_disable(struct mtk_i2c_priv *priv)
- {
- 	int ret;
+@@ -250,6 +256,8 @@ static int mtk_serial_of_to_plat(struct udevice *dev)
+ 		}
+ 	}
  
-+	if (priv->clk_pmic.dev) {
-+		ret = clk_disable(&priv->clk_pmic);
-+		if (ret)
-+			return log_msg_ret("disable clk_pmic", ret);
-+	}
++	clk_get_by_name(dev, "bus", &priv->clk_bus);
 +
-+	if (priv->clk_arb.dev) {
-+		ret = clk_disable(&priv->clk_arb);
-+		if (ret)
-+			return log_msg_ret("disable clk_arb", ret);
-+	}
-+
- 	ret = clk_disable(&priv->clk_dma);
- 	if (ret)
- 		return log_msg_ret("disable clk_dma", ret);
-@@ -748,6 +774,10 @@ static int mtk_i2c_of_to_plat(struct udevice *dev)
+ 	priv->force_highspeed = dev_read_bool(dev, "mediatek,force-highspeed");
  
- 	ret = clk_get_by_index(dev, 1, &priv->clk_dma);
- 
-+	/* optional i2c clock */
-+	clk_get_by_name(dev, "arb", &priv->clk_arb);
-+	clk_get_by_name(dev, "pmic", &priv->clk_pmic);
-+
- 	return ret;
- }
- 
+ 	return 0;
 -- 
 2.45.1
 
