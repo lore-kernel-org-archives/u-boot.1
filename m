@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0D65C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 04:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A35C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 04:36:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 114A887702;
-	Mon, 24 Jun 2024 06:34:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BC05787D10;
+	Mon, 24 Jun 2024 06:36:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uVANoV9X";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ttejsS+v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CD8387923; Mon, 24 Jun 2024 06:34:20 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00F3F87DC7; Mon, 24 Jun 2024 06:36:46 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B55E1876D3
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 06:34:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B89A87923
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 06:36:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2c70c08d98fso3086368a91.0
- for <u-boot@lists.denx.de>; Sun, 23 Jun 2024 21:34:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719203656; x=1719808456; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T1bLInjVzIQEjwbKUX8FEODR3+132nSIrXW69XRpLvw=;
- b=uVANoV9XhdO2jJ5Pff1Lj45JGFtb75hYorC1eCwkNsSJlNmOJjOr8ycY7Fj5vqFcZV
- PndNgJvjW8Zh14olBoLAqj3fCPkUK+TQMQuys3W/W3/onihgDzX2OUVfjlPOEjJT7AoQ
- CI/pWV8C9DEzx8EWT/9qXyUomX51mgFSDoEJiZxkS7s/JY22za3cm+08h+vRUc65AgDh
- zLupVqfdD8um6siXpvJK8K2hZkJ7sPQDV2xLaitFLV2OMtuItsMbiqOi/wC1NMgo0/xd
- 5zT7LqMSGv/yKzEs/9W5MTXZwpGZnvxx+R4WYAWDHFIChCqZoWPweL2YfGnIx7ka/Z1V
- VCWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719203656; x=1719808456;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=T1bLInjVzIQEjwbKUX8FEODR3+132nSIrXW69XRpLvw=;
- b=MZ4MgsiGhtfaw75gtHppsIhC6U+wJay9nb+VbIjgTfdAz8C2pCV3BuNT2rs3voxueR
- zwE6XOmdLxBanMoIKJQOnMhpevQrPgXKBSmI8lBkMT1zHEHtisEGDvw0gAUaVuoZcoCP
- Xvy3RxOkqezwMx0yGIYr34n85DBjfsb5G0bEEFhNzBBqlsOV5nmL15bWDsJzaGddEID7
- kxkPx2K6HZDeh/AeXrqq38QcdI4uqEhriobI0gcvcxusbFGpKpXETqDaLUOS/N+y7cyX
- WFnFjpi280bB3ujwYwp43am9bzCUZ8TqgjQcirI6mYSqb+rF0fUtS/h40zzf4bIrZcg5
- tmcg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+4uAlNB2P+Tum114T/F+LZlGGFUOR/yP+imkT7Y/DcjdFor44xCrMuUH/n6c/TGAz+HPx3ElFnKNutxlpxNpiVq+UrA==
-X-Gm-Message-State: AOJu0Yz9AiHTKGHAQcKeGrPIcSV2676nweHQkB/fwWz26bBFmY9soFXA
- SqYDQ6yM1xZ51WxvEOebBKrg48RH3MYf1bBX7DY23aBjiNS2n0iHMicea3pF4OCGt8o/pjuPxLs
- 1xcw2i3r/Yb/SyFZKg06g9/HaGrjxzILbxhI9sw==
-X-Google-Smtp-Source: AGHT+IEuf2T9uHNhsaYtXvQAwNGb/gj+R7UFJDDPUsmgt7AF15clu9Gf27wGMapSYt02wRgqGBY9oGFSbdkShltQzQI=
-X-Received: by 2002:a17:90a:7444:b0:2c8:84b:580e with SMTP id
- 98e67ed59e1d1-2c85829734amr3116496a91.41.1719203655964; Sun, 23 Jun 2024
- 21:34:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1719203799; x=1719808599; i=xypron.glpk@gmx.de;
+ bh=n2hEqrW3s7XiJgEGYb1bF7RXrtHLdNMR0VgTKOcgVVQ=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=ttejsS+vofUQ/aoCCBD1ZwfHbcieWoNjUVXEvjvdT/q1AK9lM/PRBqWVZm7Cenpv
+ 5jFGlByNLnBBcdjLcEdsGK+UD3kZHhJFreaLO9v0zCuEJStimz5lMd8+XcGQA4I4x
+ 30W/yZ1lUXAtNgoXEYX6v/riXFlAdEUbItpj/q8OPjsr9nQKNRg9pJc8QBX9wUcZf
+ kxWknMldZA9Tmzri1Fpl3JsKwzVvUXpd5cTSjlc4u04KGqu5gIWIwx9EbWTdI9dLO
+ JPN8xRd8bR2TjQKChJswAI4lV4vFRn46gkQHf8FCq8/k0Iur/kTt0LehDIDVpckEL
+ O/6HKJkS6wLbL+a1xg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([213.179.142.81]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1McH9i-1stZDX2ODM-00oEWD; Mon, 24
+ Jun 2024 06:36:39 +0200
+Date: Mon, 24 Jun 2024 06:36:38 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH 14/14] smbios: Correct error handling when writing tables
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240623203033.1566505-15-sjg@chromium.org>
+References: <20240623203033.1566505-1-sjg@chromium.org>
+ <20240623203033.1566505-15-sjg@chromium.org>
+Message-ID: <8441D4BF-6E80-4518-B52F-2EAF47F05CE1@gmx.de>
 MIME-Version: 1.0
-References: <20240623114838.14639-1-ilias.apalodimas@linaro.org>
- <20240623114838.14639-2-ilias.apalodimas@linaro.org>
- <CAFLszTg+OA3Dt_9Yjiu5X=Rhnt5g6HRcXQYopg_mQVnyp0=2iw@mail.gmail.com>
-In-Reply-To: <CAFLszTg+OA3Dt_9Yjiu5X=Rhnt5g6HRcXQYopg_mQVnyp0=2iw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 24 Jun 2024 07:33:39 +0300
-Message-ID: <CAC_iWj+3nrRDP9p_jESyQi3qjsRS892x7S_JKGVsPQoDWUkfVA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] tpm: fix the return code, if the eventlog buffer
- is full
-To: Simon Glass <sjg@chromium.org>
-Cc: xypron.glpk@gmx.de, trini@konsulko.com, 
- Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Tim Harvey <tharvey@gateworks.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Sean Anderson <sean.anderson@seco.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Michal Simek <michal.simek@amd.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:c3nm2/vteqVelnomvXgfDuf996tZQfj0fGoD1y6tWGyU1IxGWJJ
+ ZynKpE61e6+mVyua3cf0zybk4H5CHXmov12mVgpjobrgj12GPpc4oSXN7ti1m2D4gjyyfMh
+ zDgB4LcYaxql2znQ8hbNhpuYXn8gsEHmgEQp/W+VKwPC6EFEBrYIQivCngT/9siYmbz6re8
+ kd28AwvNBh5gtQnLO7Gcw==
+UI-OutboundReport: notjunk:1;M01:P0:khBhj7VUBMQ=;wDRO3eGJRvKre/fl1DP7x5EBtWm
+ KwqS8WnT8xE+J4XQwhUYvhHLXuKM1a5j8d4pP1RYDRtqeUf+13Bke4hehl1J6+umeWWkI/CYN
+ yxsETcxYmT5ve0NxNDkrLgWecmr6gBliCoZnqbIhlb9j+vcnPcs8hgOKXH6AqZY7rdxvaocu9
+ 5L+enfVYyDdO7XrWHdSi3oIi7eqmqmNGq0FmvWr8UWfZavL4wzaIDninTrlvFMPcnYEDB1I9o
+ hQi7hnAmtjMkxPqcoOA+DJQ+BFnU/G9vuS5b8VrsHLhTWmdALD9tawWdOXYeKszfBoTOf4oQo
+ m1GfFgSdUqtpme22X+raiTim4ir5QlnXwYplY3rV4t5yjUEkOy6taKqHtVcMPAaQVncgclmPh
+ c7H0zxHk55mOsyYdu38gnay3PW2r9IgQsLLmxezmRgZ52kXXMMx5U8xorf8Si2sXV33m//ElQ
+ irFLfHXWeU5ey4kJdoJZE0I7yaojDqKeLrqSlyb2qQxNT9vKhNP1BsPPR0nJRT2krMskItAic
+ oMqB7KKNdrDebnfpunzyCel1JykXshVXdUYyRM6zYBu8X9u5wcVZSuOemqpfnPQ38Aef0IiHk
+ G6B0gbvf8ePhTN5pa0/qh14L6Wbx7qTnFstLLt2Lz0rlk2iHRHzhj6Lmcp2QZ2c2SPxeFfBsb
+ HomGptrqD/eBAe3l0GmB7ZcikjWB9Ewdr6i4j7tbHCcVVCYjqDEaiJo5wFvC4j3KUJIeqaUqa
+ g+A2+AUtuwVaDiKWdHDO6WpyZh4RRsHW2062/q2+lkr2cSjHKbqZr2Lr8DYmHUl6idHtCW1Mp
+ w6Km7Cwv54xlq4Ek+g+PLnbSdiEl1J3Hbb3+n7lGGJP+s=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,62 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Mon, 24 Jun 2024 at 00:52, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Sun, 23 Jun 2024 at 05:48, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > We currently return 'No space left on device' if the eventlong buffer
-> > we allocated is not enough. On a similar check later on that function
-> > during the call to tcg2_log_init() we return 'No buffer space
-> > available'. So switch both error codes to -ENOBUFS since we are always
-> > checking a buffer and not a device.
-> >
-> > Fixes: commit 97707f12fdab ("tpm: Support boot measurements")
-> > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  lib/tpm-v2.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Thanks
+Am 23=2E Juni 2024 22:30:33 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
+>Since write_smbios_table() returns an address, we cannot use it to
+>return and error number=2E Also, failing on sysinfo_detect() breaks
 
->
-> For better or worse, we mostly use -ENOSPC for this sort of thing. But
-> this will at least make the TPM error stand out.
+IS_ERR_VALUE() could serve as template for conveying errors in addresses=
+=2E
 
-The TCG spec is an EFI one. Since we moved that code to u-boots core
-we had to convert the return values from efi to int etc. We need
-mapping to be as precise as possible.
-The reason I switched this to ENOBUFS is because it seemed more
-appropriate. I just wanted that function to be coherent on the return
-code, I can switch both errors to ENOSPC just as easily.
 
-/Ilias
+
+>existing boards, e=2Eg=2E chromebook_link
 >
-> >
-> > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> > index a67daed2f3c1..91526af33acb 100644
-> > --- a/lib/tpm-v2.c
-> > +++ b/lib/tpm-v2.c
-> > @@ -554,7 +554,7 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
-> >                 if (elog->log_size) {
-> >                         if (log.found) {
-> >                                 if (elog->log_size < log.log_position)
-> > -                                       return -ENOSPC;
-> > +                                       return -ENOBUFS;
-> >
-> >                                 /*
-> >                                  * Copy the discovered log into the user buffer
-> > --
-> > 2.45.2
-> >
+>Correct this by logging and swallowing the error=2E
 >
-> Regards,
-> Simon
+>Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>Fixes: a5a57562856 ("lib: smbios: Detect system properties via=2E=2E=2E")
+>---
+>
+>(no changes since v1)
+>
+> lib/smbios=2Ec | 10 ++++++++--
+> 1 file changed, 8 insertions(+), 2 deletions(-)
+>
+>diff --git a/lib/smbios=2Ec b/lib/smbios=2Ec
+>index fb6eaf1d5ca=2E=2E4126466e34a 100644
+>--- a/lib/smbios=2Ec
+>+++ b/lib/smbios=2Ec
+>@@ -5,6 +5,8 @@
+>  * Adapted from coreboot src/arch/x86/smbios=2Ec
+>  */
+>=20
+>+#define LOG_CATEGORY	LOGC_BOARD
+>+
+> #include <dm=2Eh>
+> #include <env=2Eh>
+> #include <linux/stringify=2Eh>
+>@@ -596,8 +598,12 @@ ulong write_smbios_table(ulong addr)
+>=20
+> 			parent_node =3D dev_read_subnode(ctx=2Edev, "smbios");
+> 			ret =3D sysinfo_detect(ctx=2Edev);
+>-			if (ret)
+>-				return ret;
+>+
+>+			/*
+>+			 * ignore the error since many boards don't implement
+>+			 * this and we can still use the info in the devicetree
+>+			 */
+>+			ret =3D log_msg_ret("sys", ret);
+
+Can we make this a debug message?
+It is nothing an end user should worry about=2E
+
+Best regards
+
+Heinrich
+
+> 		}
+> 	} else {
+> 		ctx=2Edev =3D NULL;
