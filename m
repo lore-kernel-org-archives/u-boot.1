@@ -4,57 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC7BC2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 15:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14B97C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 16:39:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1910883BA;
-	Mon, 24 Jun 2024 17:51:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EDE4A882B8;
+	Mon, 24 Jun 2024 18:39:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="sVzie2X/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TdFNdnQN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2B588387; Mon, 24 Jun 2024 17:50:58 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6A1B287572; Mon, 24 Jun 2024 18:39:03 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E32B882B8
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 17:50:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id F3E08882B8
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 18:39:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3d24724514eso2716668b6e.0
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 09:39:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1719247140; x=1719851940; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l4ikWD7DjT4q4QDvAIybToauGfOKMU5mXIxr0xi7ONo=;
+ b=TdFNdnQNep2Ro93ItJcWKsKplPIMNrvZ6bWJyZNy2zhTU7kbNAz+l2xdeGzA+5bRyA
+ xEAO9HTk241xEK3Z1yv9P30jR96zCZFKWBeG5Nt+8vVycVImMH9KwzPfn+BRT9v4BC0V
+ eWVz6IaeDF+P6XcX4KF9GI1RuACbNBMEu24eo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719247140; x=1719851940;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l4ikWD7DjT4q4QDvAIybToauGfOKMU5mXIxr0xi7ONo=;
+ b=DCE06r1T61mjtTjorEF/f+YO6lu1imx2fas8lO6TeuAMpCTSeQrbQls6u/sF6rrZLm
+ 4Bp3lFWwEC8NJHR4jJIQlV+9w9uuIJssfl/ACxYutt+YxqXTJnW8ijJQVGUTcypKohi7
+ XAzkhSHsl35ZvgfGiefYj/HAVx3J+AX+DhbE6upeBubFeJUmxOB8+RqA/kOX/rHlZ1hC
+ QDUgZsqnUs7ur1sFQIZtIC6vUo7OyLiffjZ6Gyt4BlUSDmPEtvkrlYPnC7TQEPBNvZZo
+ OTxHviCVjAgPb7wsYfVpz/ki6AmzzU2xcVfb90Yizfg9O0OSUwbkL33peAblY/B4A7Ak
+ kLJw==
+X-Gm-Message-State: AOJu0YyDq8KVn0NkiZILR1g0HppXvby4pXIhciU1/sabwMkEeW0t5ODq
+ 6INq1yIAsN58zfrkLheBSwFPid5IVuqdQxy+qnTKsGvAQVIdOJFvxEu67/A+Wdo=
+X-Google-Smtp-Source: AGHT+IHb24g+xbVg0LjDmutqkQkPVg4fdqjgaqN8jabxzK0r3OSNLXQYt2rDPQ039ISPoSBYn+DYzQ==
+X-Received: by 2002:a05:6808:1707:b0:3d5:123b:e2db with SMTP id
+ 5614622812f47-3d545a555a3mr6729454b6e.41.1719247139498; 
+ Mon, 24 Jun 2024 09:38:59 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d5345e0c6csm1498120b6e.53.2024.06.24.09.38.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Jun 2024 09:38:59 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, u-kumar1@ti.com, a-bhatia1@ti.com, afd@ti.com, 
+ Jayesh Choudhary <j-choudhary@ti.com>
+Cc: n-francis@ti.com, nm@ti.com, joao.goncalves@toradex.com, 
+ j-humphreys@ti.com, d.haller@phytec.de, hnagalla@ti.com, bb@ti.com, 
+ seanga2@gmail.com, sjg@chromium.org, clamor95@gmail.com, 
+ martyn.welch@collabora.com, m-chawdhry@ti.com, a-limaye@ti.com, 
+ sebin.francis@ti.com
+In-Reply-To: <20240614124442.178280-1-j-choudhary@ti.com>
+References: <20240614124442.178280-1-j-choudhary@ti.com>
+Subject: Re: [PATCH v2 0/8] Enable QoS for DSS on J7 family of TI SoCs
+Message-Id: <171924713797.1682286.16213893248130375890.b4-ty@konsulko.com>
+Date: Mon, 24 Jun 2024 10:38:57 -0600
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1719244256;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=A4ntBgHFjm744efcDdjDVZYzqtfnUBSKiEBlz1vp0gM=;
- b=sVzie2X/50ELdOFQYkFsqXcHjxfdfEsQURLZ39Q7G9Vsp/mP1XnahfA4RnEGipaydF6rZ6
- 6U/S3O29If9+sQXZRGbmddTrjLVgyoTMYmAGH4Qmkw9zfA2IvMOKE/vkqNN7YsCECugc+a
- DNd2DJdd/5F2gGkZUitbov6h90qjZS6ulDSY/fqxugWKXhE8Ke6nSepgartCRL26gCAeZ0
- nb+0cW+FkBsd5CbGxhK2kxTSh/jXEA8Jf+BPjAxGqWlnc/aUfJASpINZ6TFxSlih/g0D6+
- EGbCh0sPxVqXKI2UBRkoYxdib/EPEUIDPnSUWpXW/NL+EgrO62XrhrluIygOww==
-Date: Mon, 24 Jun 2024 17:50:54 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH 05/14] sunxi: Mark scp as optional
-In-Reply-To: <20240623203033.1566505-6-sjg@chromium.org>
-References: <20240623203033.1566505-1-sjg@chromium.org>
- <20240623203033.1566505-6-sjg@chromium.org>
-Message-ID: <71fa5c0e46328b6d7b35222df4dee860@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,33 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+On Fri, 14 Jun 2024 18:14:34 +0530, Jayesh Choudhary wrote:
 
-On 2024-06-23 22:30, Simon Glass wrote:
-> This binary does not prevent the system from booting. Mark it optional
-> so that U-Boot can be built without it.
+> This series adds the QoS for DSS on J721E, J721S2 and J784S4 family of
+> SoCs.
+> 
+> Before adding the support, cleanup is done for AM62A QoS support[0]
+> and common bit mask defines are moved to the common file so that they
+> are not defined every time we add QoS support for a new K3 platform.
+> 
+> [...]
 
-It should read "Lack of this binary..." instead, to properly describe
-the background of this patch.
+Applied to u-boot/next, thanks!
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
->  arch/arm/dts/sunxi-u-boot.dtsi | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/arm/dts/sunxi-u-boot.dtsi 
-> b/arch/arm/dts/sunxi-u-boot.dtsi
-> index 0909a67883e..e1a9a7f5d4c 100644
-> --- a/arch/arm/dts/sunxi-u-boot.dtsi
-> +++ b/arch/arm/dts/sunxi-u-boot.dtsi
-> @@ -90,6 +90,7 @@
->  					scp {
->  						filename = "scp.bin";
->  						missing-msg = "scp-sunxi";
-> +						optional;
->  					};
->  				};
->  #endif
+-- 
+Tom
+
+
