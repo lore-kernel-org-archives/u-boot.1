@@ -4,108 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1872CC2BD05
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 08:18:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2641EC2BD05
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 08:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F4B287CFE;
-	Mon, 24 Jun 2024 10:18:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5027D87CDB;
+	Mon, 24 Jun 2024 10:24:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yhG40wWv";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="EJ13PRPJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0158087DEA; Mon, 24 Jun 2024 10:18:54 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F83387CDB; Mon, 24 Jun 2024 10:24:10 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA8FC87CDB
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 10:18:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02B0B8332E
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 10:24:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42189d3c7efso44193995e9.2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 01:18:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719217131; x=1719821931; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=ukqViPM6903ByOj7FHDg7fovrP9WQgu6WiEQJ2dEhYo=;
- b=yhG40wWvvhaq17BAhFhji31HXyqpbf0noyum6RaPh7k6qT+bnwxfngIkVJGEtr+3Ks
- I98o+ALA3ziJmtqGVuSiohEl2eFdpxU6UZaVRhGxSRBzPO/se6o4RQAYOGdKmmNAjIhu
- vBybAhzTU2Fn0SVGu09rVvc7DS2eTXu9jsLqWmKRjcf9vSawLlslBO0uz8SuoE8g/6Xh
- pqOJy1wJ4w2n0TtpW73fWt5fC5vl4C67hWKfmO18ZQKQz7z3qWTyxaBNMzt9DyKXDOiY
- WbkHBtFfppQBJCGHLRIaU6s8JQiwyI0SiyflvY/AM5/gfrj3QWMn4wNg/hW8FlQ48caL
- 1XBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719217131; x=1719821931;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ukqViPM6903ByOj7FHDg7fovrP9WQgu6WiEQJ2dEhYo=;
- b=OjfIqKOTijx0kwMImheOWDffVJinbKF70bndlCasyG3RLpgcJBigMp9VzowPMNBX5X
- UwB1ZdDBBig232b+CzGCGbtLlHBDDVQg/xgB67Lz4UT1vQGc8rsFlraewm4b43a4t348
- RMNASeJ+c/djSgBCERWCouPwVdym6nrk1zzriYIkWjm3rjhyL4wyn4fCIj09YJdnC5qO
- N0bXmMMi9ckfhJkgixqg79Zo/MUzcdczjunUwc466XTAlC8VcQBHUqJFwxAFCu1q60cG
- sME5oUhfLOTevfLRdcp6JMtL42kcuMHbSAIy3IfcXVtm9U/sDJ6RCTZ7FbQwZsCviQWX
- IkWA==
-X-Gm-Message-State: AOJu0Ywcy0iAtbNoyCz//eto20HVTjeBVktPtzrOE7EwUcjHSlpfU3GV
- e0yymtM8n8l41tIy60sTjbCuXuLRYkzv7sivuBNSQm96pwvmbqxcTXw/+MOvdfU=
-X-Google-Smtp-Source: AGHT+IGrwujlW83j9PkeL47wzlItro7064LVHZD66Xtn6nlf9IOgwRbk958VR19D5EK77Bizmg37HA==
-X-Received: by 2002:a05:600c:220d:b0:422:7899:76d2 with SMTP id
- 5b1f17b1804b1-4248cc33cdcmr34670985e9.17.1719217130739; 
- Mon, 24 Jun 2024 01:18:50 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:cf01:774b:55fd:ab74?
- ([2a01:e0a:982:cbb0:cf01:774b:55fd:ab74])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-366e0750e41sm6821901f8f.97.2024.06.24.01.18.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jun 2024 01:18:50 -0700 (PDT)
-Message-ID: <8a410cf1-2dfe-4bac-b709-c79178ba5870@linaro.org>
-Date: Mon, 24 Jun 2024 10:18:49 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=dqbpS+oDwEuB6VsRqeHhsAT7m92Ca8Zv8kIDsqKF7zV+aZv/Us35HtsTyryx90lJoWPGOyEuzVUME3KtAdXaHliM+CPAs362Fl2aeqpFXxUZcYcTiRhVGV793Ej6HyOOvfu8b9t3eR4ZNG9s/9defxRzMDR7s6b8KS7fRrLqJUZ2Ujbbam0TB8wI3EKJ9L+isfmeRZ3Bf92X9i1cNAGkVBd1y5nyxqHlYyJ9R9kk078qGlEIDBslv/urRcOILX8WEFCBDPZk7ie5RgZkVZzcUrsrqtgTHa+ApofwY6BO0J093X4UQ6BVT4ICo/6ZhNr2VT/IkSQjmviaji9icqwZMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yEEMRpzo10XffpVT1icM7NPxCaBk2PcIzLqa0tbxHAE=;
+ b=obHfpbXBW3rFaVTDrUrCdFKuMEmRF/93A6e1Lm/mTFw20p1pWGZsAKkSotyIGQHumjQ4xa/y6EkRVIl0RAFol41uN6eP6CyBmzHWhyfOFfA/yjdGh1Q7ZyNiRzzqHa/gn3RiThOjHAy8hNDrmgupzsln1wYS2odXzdLONyoLsEm7xW908EwurSMZG06mjAWwvOU/eLt1CMzU0ueWJ/cDmhDpaYN7aTqkEz/QlYncv08WbjXLD4r96qlx6O7Qpu5GVRWLn8C5B9Ez03jTyiWaXrA/fqXbuuiL+PgxlG3aPNyfqVY/aKZFkL4uBr+7HFqW0FDqhEXj4WkdT1sElWgdhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yEEMRpzo10XffpVT1icM7NPxCaBk2PcIzLqa0tbxHAE=;
+ b=EJ13PRPJr0uNoJjQVqbH5KjgRg55+D55cElcIdowwP2J1ad0+fZRLiiwQSErT/RzMPHpcjb9YQHIE6SqKTI3irVz7Vb7Od16pr4BcgndAGiJJgKncWcAsklS7THHVX+xAVVci5h3iGwYMxarT/4GXxlVEJhQAImU89gZVxlGTYg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
+ by DB9PR04MB9577.eurprd04.prod.outlook.com (2603:10a6:10:304::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.26; Mon, 24 Jun
+ 2024 08:24:04 +0000
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7698.025; Mon, 24 Jun 2024
+ 08:24:04 +0000
+Message-ID: <dc4f2532-4039-425f-8309-f62f73b5feaf@cherry.de>
+Date: Mon, 24 Jun 2024 10:24:02 +0200
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] spmi: msm: correct mac_channels for v5 controllers
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240624022333.2380607-1-caleb.connolly@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240624022333.2380607-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH v4 14/16] rockchip: Avoid #ifdefs in RK3399 SPL
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ huang lin <hl@rock-chips.com>
+References: <20240623175302.1463973-1-sjg@chromium.org>
+ <20240623175302.1463973-15-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240623175302.1463973-15-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA2P291CA0032.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1f::21) To PA4PR04MB7982.eurprd04.prod.outlook.com
+ (2603:10a6:102:c4::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|DB9PR04MB9577:EE_
+X-MS-Office365-Filtering-Correlation-Id: 09c9a67c-d85a-40e9-254f-08dc94270268
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230037|1800799021|376011|366013;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OUVkbnhUcEh1ZGthem9lbld4NUdLMlYzdDk5aldRcEpvWlErUjJBZGZUU2xy?=
+ =?utf-8?B?YTR5bTkwbTFPbGxXVVMrM2NqU2Ztc2FFK205Qm1Na0I0K05nRTRJaUZsbmtx?=
+ =?utf-8?B?MUQ4YnNpcFV5MmV1VHNYT0lqelVReVF2NXY3Sm9kOWVXZ01EclpUV2xHdUxp?=
+ =?utf-8?B?c2ViMnRvUTR0cWoyN3VxN1Y3ZFJsWTdFM3JmY3Z0bXB5VTNKSjBBck82blRi?=
+ =?utf-8?B?UzIvWFdPOVFPSDh5enREMHF4STdSNzdjUFNnekV5SjJwb250cGRyLzAvcWR4?=
+ =?utf-8?B?aEtzK1VQOUpIQWZtWVQzRVZVREU0a0Z6NTJRdkVPRzlNVkxkNUdDdzVnb1VY?=
+ =?utf-8?B?T1hCamNVbDVvbGwrY0JRbVljeGZ2a0loZG5ETk5OQndUTDYzalgwMmtSUEtJ?=
+ =?utf-8?B?MjdjbnZ2cE8zbStQNWJBMW9JaWc2UVlCaStoQndSZjVnRXVBcHo1SG01dnVR?=
+ =?utf-8?B?Vi9IU01jY3RpMHh5UWowci9Rc0trOUw0TDNKY25tNGVMTUdidUFuM05leXJk?=
+ =?utf-8?B?c2owVmx5ZXdFVzd2RWx3bndQQVZJb3JuWE1pS2R1TFdHaTRGZFUrSzJTdlA3?=
+ =?utf-8?B?NjhXWDUvOFVpaXNwNlJLbHJxeEQ4Y090Y2tSN3pZd1RXVWlZbUNOejlJOEQz?=
+ =?utf-8?B?amZoTlNjd2Jyc1lJYUtpRGVVazNsc0ROUHkrbUdBV2lpTFozNVRSTmxMczZC?=
+ =?utf-8?B?dzdtYy9nRFJkZitEZStPdE1vLzBPbFpaWitVTmx5QXMzbzVhZXVqeFYrbXNH?=
+ =?utf-8?B?UnlGSXRTQzhaRm1wMzdST2ZxcHVoN3FtbnAyTXQrSDA3M20xWndRMXAzVUlT?=
+ =?utf-8?B?Z2FYVU5nd3k2Nkw5K3czQU5kbkhocGpQVGFua2orNTdQZjg4VXJDbmlJTnky?=
+ =?utf-8?B?SWFTZWxRTURVWmtHWnBKSDVLWlBBNWN1cEk5MDRGUW8xanI4R2Q3SEV0R3lh?=
+ =?utf-8?B?aXhxWFkyeFhhdURTRnBzNTlQMVVrWitzQmt1VkNXTWZ5Qit5VTBpNXZwaXFN?=
+ =?utf-8?B?NHQwYVRvTzRDVDJwNXlPSWVXQjFqM0dKQ2hZeE81SERXeXpSQkpTN1ZVa2Ux?=
+ =?utf-8?B?WnhYaDRTVFVMMU1DU2sycXNJdVltd1Y0VnY2Y0xXNXMzUHNXbTVUalB0eEV2?=
+ =?utf-8?B?RnN5NHJlZkV2VERSeDRGdjRGL3hsaVBiSkFCb3BKZEVvblNEOVd3emUySHcv?=
+ =?utf-8?B?QTBneFB6VWx4d0xSMDBObHkvVXNSZ2ZXdkZ5Z09yalJ1ZXY3VjY0a3FLSHRD?=
+ =?utf-8?B?ZDMyM3hlSW1uR09keWU5Q3gzM0JNWnFQaEw4bm13ekpoQkpuSERsL3VCeDY3?=
+ =?utf-8?B?dkJJUmh4MDF0MytvU3o5T3NiRkl3cWlndGN4V2cxS0ZZeEtqL3JMeklxRGdo?=
+ =?utf-8?B?TWYrMTMyQ0hPTlVSK0p2alF6ZUpsakFEN0NZYWVLZVVWSFJYcnR5bDMyVEM0?=
+ =?utf-8?B?NUtKdUlHbkh1U1VzRmovM3RmclhJWGs5UzZIMFFGaXV5bkx0M0hHYXFBM2dN?=
+ =?utf-8?B?RHJPMDNNSkI4RmUweXJ4eWwyaGQvRk9FVWFFRENVdzBxQzZQSWJaVHNHRVpw?=
+ =?utf-8?B?SnI2YkFwdkJhZnd3bTJvVTZ0MXhYODM1WG9WZnpYSUI3R2NabFBHSE5yNVVM?=
+ =?utf-8?B?WUQ4OGRNS1JLVnh4YkpHOVJzai80SmExZ1hEbU1KQjU1NGRBTWdvV2g5cmhQ?=
+ =?utf-8?B?UEFkRUROQmRSekVhL1l2T2QycUZ5eDVHRjVuYXBGcVRSdEJKT2VMM0h2UVR6?=
+ =?utf-8?Q?/4Ds/27VzH1+K5EuxcoN4kwmMnEjjGyuqatcER3?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230037)(1800799021)(376011)(366013); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V1o3UzRuZFJ6THE0K1JjSzliZGFLYXVjb01IOVFFdFVuZ1F0VzYyb1dnbENh?=
+ =?utf-8?B?bk5BWTZ5bnlkM05OV3A1V1djYk1hZzc5ZGVUNGZuUDFzUHlrWDkza3dRbExa?=
+ =?utf-8?B?VU9qRmpvQ1dudW9ETVJNVy93WFdmbXhSNDA1TnNOakh4Z3pCQi9oQmdXTGp2?=
+ =?utf-8?B?d295S1lMTFpjVlEwTjArSlp3c01XUnpBdlhJUEhNR05rejZubzNueTAwMGQ1?=
+ =?utf-8?B?NDF0VDROWmZtRjcrUTZTd1FmN0NEVXFhU1JoeXpnRXk4STRjUWM0VnVYSk5h?=
+ =?utf-8?B?cC9UT2g4R1YvbGEwL2twVUdpWW5RK1VmMkR6dFNhNmlEcExrdWNhYXNGOGM5?=
+ =?utf-8?B?ZndDbTZtQkZDTG8weWdSZks0eTRSM3FpU2w4b1JSQ0IzVjI1VDQwMTlYbng4?=
+ =?utf-8?B?V2FYblJLd0hmd09wMU9ZajRHTjYzQTJ6bnFGOTVSRHlxWjN1ZmRRYldGWjdY?=
+ =?utf-8?B?SmJ3dVY3d3RGejI5TlJUMGVsZ0dPSmNBdHdIYTYvak5ZYXlHeTZRZGN2eUVU?=
+ =?utf-8?B?ZWhhUytVZk1ISERXMlIwd0o4L3NXUVZPV3pNN2M3d0U1cWE4UW41ZHFHa2ZZ?=
+ =?utf-8?B?Mk1xNlpKT05CcHlqT2VnTm1ReklyU3ZBNE94T1M0a2dTc0orVmtHUHAvT3Rl?=
+ =?utf-8?B?NmJSL1ZzMUdmbnlQZDY3WWVodkVIakd0a3VzeTlna20xcWRtRGdFRU1GZGRY?=
+ =?utf-8?B?cmxCNzk3cjEvcTJxcmhReXI0QW5kMFlvNFlpVDJmTGJLR3BmdzhmOFYvT1hV?=
+ =?utf-8?B?WHVDT3Z5WVRELzFURU9zcjhISUJ5UExtQXBwaEhvQ0Y5OSt5UDduTE5tSGVD?=
+ =?utf-8?B?VUMxU2xSeDliMmd0WWhMQVQ2NnZOSTg1aHZHamZZdDZwKzI2elhERFVpZUR2?=
+ =?utf-8?B?MWZhY1BMbzd0d1J1VmkyaGdVV2t4QTdmYWZJZFFyWk9zVXQzVUxpRkZqQWkx?=
+ =?utf-8?B?enA3QlVVOWQ2WW1MQ2FLSldPVmhod2FvMUplYllFNGNlMEFhTnhDNnd5RVRU?=
+ =?utf-8?B?ZXRpSitobWJ4U0xWcUt4WWF5S2MxajAvVG1yVUlXcmdscUNzTGUvZ0FQUHFv?=
+ =?utf-8?B?dVVIQW1YdU1Xdm1CUHBuZkZIVUdneU8xL05HUnBXeE9Yb3NBQUhYSFYrY1Zo?=
+ =?utf-8?B?V0x1L2tHYU9MR0lUWVRnaE1RZ2xCeVFhd0R3SjF3Mk9xWkRDRVJ6eXg1ZzFu?=
+ =?utf-8?B?WmlCZ1B6NlNEYTJJeUlLdU82dVVBWGhTRmtjelBHNUpXZmFDYVJoSEJqUWFQ?=
+ =?utf-8?B?eEkydDF6RGN3NWYxRUU5ZXQ4NDVyY2xSWXJaUCsrWGxaV0xMa3VkZ3FDeXd2?=
+ =?utf-8?B?bGVFSTlEbmJXdStIdWowakNuSDY4Mm9wZ2N5NWl2TXBxdlBnOFBSaU4vc1U0?=
+ =?utf-8?B?RURXenBlSUFlY1VvSjBoREgwREpVbnZwTVJhKzhRdjMvUGppVXc4Ty85QnZz?=
+ =?utf-8?B?dHVxc2x2Ym1ObmJXZFg2OWxza1NOTlBLM1JYRElrR3pHcDJHS3diNXFHVFdU?=
+ =?utf-8?B?U2tYRUYyN3FuTC9qTkRVOGF4bFhmQ3JoRExxTlpQRW5ncjNSUjVrN1FxcGo2?=
+ =?utf-8?B?c3NhTUdMZnJ5RGhtV2s1V1hZR1VKZlNqdnZqREdZSy9GeHdySmczUkVkVnNQ?=
+ =?utf-8?B?RjkvMUZhc2JqUkcyTGNzdkZWREcwWmx5c2VsMmVac1hmRDE2UGs0UCttSHFX?=
+ =?utf-8?B?aVBjbWttcjJuSEl4ZFMxOUN0U201TkJqVHFxYVNEbkFwd0YrRmc1QVRreGJL?=
+ =?utf-8?B?SEQ2T3ZLSHR6TEcrS2NnT1g2MnY2YzlhcUxyVHpQcjNlbURQNCsweUJyM0Y1?=
+ =?utf-8?B?T3BMS2o5REVLWlZiOCtCN1FPSzZWK3FIVENERDE2Zjc2d2U4SDNGNi9FTlNT?=
+ =?utf-8?B?bzlmYVB6TEE4MmtsTllPMzI5TTJtRzhNMC9ZQm1tT0tPU1dZdTA1L3JMZkkz?=
+ =?utf-8?B?UWIvcjdqNDYyaFlpcDRkYU1rRS96czZ0UUh2WWtYc1lwRFJEV2Y3VVZQUVFo?=
+ =?utf-8?B?ak9rWU1rRXNoSnllZXZ0Zno2Nk5FRUVCUHljaDFIb0J4ZFljY3U0a2VmQWZ3?=
+ =?utf-8?B?VytrbDBMei9rOEFOKzFhRCtDVDdCMzhzUVZHV2NXK2NTZVdCK3FmU21za0dJ?=
+ =?utf-8?B?dHlHMmFYVzdGdmtrUlVhNDh4ZEIyTVd0QUtsUkg5M1dwRytRMFIvRDNoVVhj?=
+ =?utf-8?B?Q0E9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09c9a67c-d85a-40e9-254f-08dc94270268
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2024 08:24:04.5667 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8A6G9hctD/K4g5s5P07V8c7SXydl5F1S8r2hUpkMz4wg6um4R8vxu7zH24fdDUXOtlw7cTb7F0Yz5NwwvzCsKTa4RVn3TROlve94pg9KHK0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9577
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,44 +169,141 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24/06/2024 04:23, Caleb Connolly wrote:
-> Commit ee1d8aa5ecf7 ("spmi: msm: support controller version 7") broke
-> support for channels > 128 on v5 controllers, resulting in some
-> peripherals (like the power button / pon) working but others (like
-> gpios) reading bogus data.
+Hi Simon,
+
+On 6/23/24 7:53 PM, Simon Glass wrote:
+> The code here is confusing due to large blocks which are #ifdefed out.
+> Add a function phase_sdram_init() which returns whether SDRAM init
+> should happen in the current phase, using that as needed to control the
+> code flow.
 > 
-> Correct max_channels for v5 controllers.
+> This increases code size by about 500 bytes in SPL when the cache is on,
+> since it must call the rather large rockchip_sdram_size() function.
 > 
-> Fixes: ee1d8aa5ecf7 ("spmi: msm: support controller version 7")
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->   drivers/spmi/spmi-msm.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-> index 58c676423f40..49aad439648f 100644
-> --- a/drivers/spmi/spmi-msm.c
-> +++ b/drivers/spmi/spmi-msm.c
-> @@ -270,9 +270,9 @@ static int msm_spmi_probe(struct udevice *dev)
->   		priv->max_channels = SPMI_MAX_CHANNELS;
->   	} else if (hw_ver < PMIC_ARB_VERSION_V7_MIN) {
->   		priv->arb_ver = V5;
->   		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V5;
-> -		priv->max_channels = SPMI_MAX_CHANNELS;
-> +		priv->max_channels = SPMI_MAX_CHANNELS_V5;
->   		priv->spmi_cnfg = dev_read_addr_name(dev, "cnfg");
->   	} else {
->   		/* TOFIX: handle second bus */
->   		priv->arb_ver = V7;
+> Changes in v4:
+> - Drop the non-dcache optimisation, since the cache should normally be on
+> 
+> Changes in v3:
+> - Split out the refactoring into a separate patch
+> 
+>   drivers/ram/rockchip/sdram_rk3399.c | 42 +++++++++++++++--------------
+>   1 file changed, 22 insertions(+), 20 deletions(-)
+> 
+> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> index 3c4e20f4e80..949a082d00c 100644
+> --- a/drivers/ram/rockchip/sdram_rk3399.c
+> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+> @@ -13,6 +13,7 @@
+>   #include <log.h>
+>   #include <ram.h>
+>   #include <regmap.h>
+> +#include <spl.h>
+>   #include <syscon.h>
+>   #include <asm/arch-rockchip/clock.h>
+>   #include <asm/arch-rockchip/cru.h>
+> @@ -63,8 +64,6 @@ struct chan_info {
+>   };
+>   
+>   struct dram_info {
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>   	u32 pwrup_srefresh_exit[2];
+>   	struct chan_info chan[2];
+>   	struct clk ddr_clk;
+> @@ -75,7 +74,6 @@ struct dram_info {
+>   	struct rk3399_pmusgrf_regs *pmusgrf;
+>   	struct rk3399_ddr_cic_regs *cic;
+>   	const struct sdram_rk3399_ops *ops;
+> -#endif
+>   	struct ram_info info;
+>   	struct rk3399_pmugrf_regs *pmugrf;
+>   };
+> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
+>   					struct rk3399_sdram_params *params);
+>   };
+>   
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -
+>   struct rockchip_dmc_plat {
+>   #if CONFIG_IS_ENABLED(OF_PLATDATA)
+>   	struct dtd_rockchip_rk3399_dmc dtplat;
+> @@ -191,6 +186,17 @@ struct io_setting {
+>   	},
+>   };
+>   
+> +/**
+> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
+> + *
+> + * Returns: true to do SDRAM init in this phase, false to not
+> + */
+> +static bool phase_sdram_init(void)
+> +{
+> +	return spl_phase() == PHASE_TPL ||
+> +	    (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
+> +}
+> +
+>   static struct io_setting *
+>   lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
+>   {
+> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
+>   	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
+>   	int ret;
+>   
+> -	if (!CONFIG_IS_ENABLED(OF_REAL))
+> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
+>   		return 0;
+>   
+>   	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
+> @@ -3138,22 +3144,21 @@ static int rk3399_dmc_init(struct udevice *dev)
+>   
+>   	return 0;
+>   }
+> -#endif
+>   
+>   static int rk3399_dmc_probe(struct udevice *dev)
+>   {
+>   	struct dram_info *priv = dev_get_priv(dev);
+>   
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -	if (rk3399_dmc_init(dev))
+> -		return 0;
+> -#endif
+> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+> -	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+> +	if (phase_sdram_init()) {
+> +		if (rk3399_dmc_init(dev))
+> +			return 0;
+> +	} else {
+> +		priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+> +		debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+> +	}
+> +
 
-Thanks for spotting this...
+I'm not sure we need to put the debug message into an else as this 
+pmugrf is also used when dmc_init passes.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Additionally, we could also just set priv->pmugrf before the if 
+condition and remove it from dmc_init if we really wanted to.
 
-Neil
+>   	priv->info.base = CFG_SYS_SDRAM_BASE;
+> -	priv->info.size =
+> -		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+> +	priv->info.size = rockchip_sdram_size((ulong)&priv->pmugrf->os_reg2);
+>   
+
+Can you please say a few words about this change in the commit log? Why 
+phys_addr_t->ulong here?
+
+Otherwise looks ok to me,
+Cheers,
+Quentin
