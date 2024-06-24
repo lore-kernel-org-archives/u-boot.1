@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0DCC2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 18:06:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1C03C2D0D1
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 18:13:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37C5587572;
-	Mon, 24 Jun 2024 20:06:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 362D687572;
+	Mon, 24 Jun 2024 20:13:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I+oFFy0N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KDozcpfa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBADA882CE; Mon, 24 Jun 2024 20:06:04 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 3814087572; Mon, 24 Jun 2024 20:13:09 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F0048751B
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 20:06:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01428883CD
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 20:13:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6fa11ac8695so2765871a34.3
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:06:02 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-700a8e595eeso1197521a34.3
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:13:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719252361; x=1719857161; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719252786; x=1719857586; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=paB+sljHV/FIknzwEgu+epZh9FkkrJTL7ef1B6OkOgw=;
- b=I+oFFy0NSqkDfv9b3JZwLKnhNJhPtCdLnN0cq4QQ8TV4kD/nw6SVhEzxwAWb5p9CMD
- GF4Z8GKVv0gZgUrAspiwDWoCHm6YbTg5sm/AcpATSVvmCdVr5LbQAgOT7YA7gmaydgtR
- S0Aowhc/db7D/pilzdVerQae8dXbEM+zygxwI=
+ bh=IiPFwn36fRz/REUVMVaYdmIQuoy0dyqo1bLE6VL+Sx8=;
+ b=KDozcpfaBmHa4jfm/hO3mBYMU6aEWu8N4X30fHsO/KR/iyQyqlO0HZQNqe6ap/XaRj
+ y7Y234tU+84efnBaUdf47Li4F+wgAT4Av7obHiIfYb9sougq1aAcJ+o5pfu2cFMBDXaP
+ +2C1JxRpYdfwjldW+dgFCQteh1ded3aVaNHFs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719252361; x=1719857161;
+ d=1e100.net; s=20230601; t=1719252786; x=1719857586;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=paB+sljHV/FIknzwEgu+epZh9FkkrJTL7ef1B6OkOgw=;
- b=fr3D7AYCD+aYSn8A//3UPlIIdWwjuZlb1DN+yBRpzHgmzrjJ3JL4mkDn4ejmagn7pJ
- LgBNrZ8rTr6soQ6FXrxFEoYOVWW1cUi5dkHkhLuNDN9GhOfKiDhNb3K9Z+g393e5ojP4
- E3pcEE75ya6KCDs0fO0YiTe6tjnnFUTiWfITUVuaQN3zJZ1nhEVzPUL8PxjyCvyZZ8Dz
- ALHH+UhTER0cVuhy4DDVfgfETAQabdI1VJ8muoil9JkRLiAoxEEndmiwKukUJahIaZB5
- s2hi/u6ZZLmuKJoBD4pK8ENhRsK3om3topbYANeGFmp1RDAginh3x3fGrAWWovWDYalP
- r/yA==
-X-Gm-Message-State: AOJu0YxQ39D+q0jK9sypVKT9oz6naaypRrsrsA6q6iGdyrx/BgHm6/uR
- 5NuYhUhN7rZ2DOyFZ2eHX1ocTmc/hfKOlH+ck6iY+ER89NwCUjHViD34/JmITyU=
-X-Google-Smtp-Source: AGHT+IGRhuNi3JZW2sMRC7DWyO2Ex4beWBQXSEtPcZUQfdZURkW38DFrvF80e+HIPIA778wgNrlsyg==
-X-Received: by 2002:a05:6808:120d:b0:3d5:47bc:14db with SMTP id
- 5614622812f47-3d547bc1742mr4867909b6e.22.1719252359819; 
- Mon, 24 Jun 2024 11:05:59 -0700 (PDT)
+ bh=IiPFwn36fRz/REUVMVaYdmIQuoy0dyqo1bLE6VL+Sx8=;
+ b=HVXTr9Sa8GWqiYTS5xBxNoPNbTL0MoPxntomu09ds+89PfbqiWERU77PPVSEVS/acf
+ WMDNaYJbN5v3cE3zmHt2II4hEV7vy7e1bowtflQU6Okdk4g+6x8HqvDQQbMtZh994xB7
+ LoI8ltLcPI1hnh8diyUVzAfyDRypfCx7L2yK8jlZTlJh6yO4EBwBTAKeohx+cps4DpE6
+ Un0TqmgKDYIN2fR1EVXhzizsdwLWpo8GMIJGiaqCXLDGGNfVG5bF3HWJFrQNpAgYb8CC
+ W4RzctPeGAJImtjuyUfiqhKd7lPrWFP/40kovAOYmyLY9YppYqNNaU7oYZnr1qfRhTM5
+ NU8Q==
+X-Gm-Message-State: AOJu0Yz7FUkzBBZ2z1vv5m+4ysaySgCklwjkXy3U1pRBi47vSdDttvt2
+ 4zVMMAvVXAOG8FnthjSkjz4c6xrCvCawF6R56yOvDmTkW9jYwdTDwkkuScbAl+k=
+X-Google-Smtp-Source: AGHT+IH0anXJC6K3RSIC2q6epC0NJI3T4ukIKYEU2ljxqG0exLYMYrRKIg3k8SLkuafcHmvKv1gRlQ==
+X-Received: by 2002:a05:6871:588f:b0:25c:9a02:cb61 with SMTP id
+ 586e51a60fabf-25d06bc7e5fmr5807801fac.7.1719252785652; 
+ Mon, 24 Jun 2024 11:13:05 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d5344fa318sm1564832b6e.15.2024.06.24.11.05.59
+ 586e51a60fabf-25cd4941ce4sm1990659fac.12.2024.06.24.11.13.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 11:05:59 -0700 (PDT)
-Date: Mon, 24 Jun 2024 12:05:56 -0600
+ Mon, 24 Jun 2024 11:13:05 -0700 (PDT)
+Date: Mon, 24 Jun 2024 12:13:03 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Sean Anderson <seanga2@gmail.com>
-Subject: Re: [PATCH v3 06/19] test: Avoid failing skipped tests
-Message-ID: <20240624180556.GG38804@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 08/19] test: Introduce the concept of a role
+Message-ID: <20240624181303.GH38804@bill-the-cat>
 References: <20240623203213.1571666-1-sjg@chromium.org>
- <20240623203213.1571666-7-sjg@chromium.org>
+ <20240623203213.1571666-9-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="naa5xj4m8zYzXe6X"
+ protocol="application/pgp-signature"; boundary="SlMNhPD1+6CYXl97"
 Content-Disposition: inline
-In-Reply-To: <20240623203213.1571666-7-sjg@chromium.org>
+In-Reply-To: <20240623203213.1571666-9-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,91 +91,123 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---naa5xj4m8zYzXe6X
+--SlMNhPD1+6CYXl97
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jun 23, 2024 at 02:32:00PM -0600, Simon Glass wrote:
+On Sun, Jun 23, 2024 at 02:32:02PM -0600, Simon Glass wrote:
 
-> When a test returns -EAGAIN this should not be considered a failure.
-> Fix what seems to be a problem case, where the pytests see a failure
-> when a test has merely been skipped.
+> In Labgrid there is the concept of a 'role', which is similar to the
+> U-Boot board ID in U-Boot's pytest subsystem.
+>=20
+> The role indicates both the target and information about the U-Boot
+> build to use. It can also provide any amount of other configuration.
+> The information is obtained using the 'labgrid-client query' operation.
+>=20
+> Make use of this in tests, so that only the role is required in gitlab
+> and other situations. The board type and other things can be queried
+> as needed.
+>=20
+> Use a new 'u-boot-test-getrole' script to obtain the requested
+> information.
+>=20
+> With this it is possible to run lab tests in gitlab with just a single
+> 'ROLE' variable for each board.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >=20
 > (no changes since v1)
 >=20
->  test/test-main.c | 16 +++++++++++-----
->  1 file changed, 11 insertions(+), 5 deletions(-)
+>  test/py/conftest.py | 31 +++++++++++++++++++++++++++----
+>  1 file changed, 27 insertions(+), 4 deletions(-)
 >=20
-> diff --git a/test/test-main.c b/test/test-main.c
-> index 3fa6f6e32ec..cda1a186390 100644
-> --- a/test/test-main.c
-> +++ b/test/test-main.c
-> @@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *uts, s=
-truct unit_test *test,
->  static int ut_run_test_live_flat(struct unit_test_state *uts,
->  				 struct unit_test *test)
->  {
-> -	int runs;
-> +	int runs, ret;
+> diff --git a/test/py/conftest.py b/test/py/conftest.py
+> index 6547c6922c6..5de8d7b0e23 100644
+> --- a/test/py/conftest.py
+> +++ b/test/py/conftest.py
+> @@ -23,6 +23,7 @@ from pathlib import Path
+>  import pytest
+>  import re
+>  from _pytest.runner import runtestprotocol
+> +import subprocess
+>  import sys
 > =20
->  	if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SANDBOX))
->  		return skip_test(uts);
-> @@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_test_st=
-ate *uts,
->  	if (CONFIG_IS_ENABLED(OF_LIVE)) {
->  		if (!(test->flags & UT_TESTF_FLAT_TREE)) {
->  			uts->of_live =3D true;
-> -			ut_assertok(ut_run_test(uts, test, test->name));
-> -			runs++;
-> +			ret =3D ut_run_test(uts, test, test->name);
-> +			if (ret !=3D -EAGAIN) {
-> +				ut_assertok(ret);
-> +				runs++;
-> +			}
->  		}
->  	}
+>  # Globals: The HTML log file, and the connection to the U-Boot console.
+> @@ -79,6 +80,7 @@ def pytest_addoption(parser):
+>      parser.addoption('--gdbserver', default=3DNone,
+>          help=3D'Run sandbox under gdbserver. The argument is the channel=
+ '+
+>          'over which gdbserver should communicate, e.g. localhost:1234')
+> +    parser.addoption('--role', help=3D'U-Boot board role (for Labgrid)')
+>      parser.addoption('--no-prompt-wait', default=3DFalse, action=3D'stor=
+e_true',
+>          help=3D"Assume that U-Boot is ready and don't wait for a prompt")
 > =20
-> @@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_test_st=
-ate *uts,
->  	    (!runs || ut_test_run_on_flattree(test)) &&
->  	    !(gd->flags & GD_FLG_FDT_CHANGED)) {
->  		uts->of_live =3D false;
-> -		ut_assertok(ut_run_test(uts, test, test->name));
-> -		runs++;
-> +		ret =3D ut_run_test(uts, test, test->name);
-> +		if (ret !=3D -EAGAIN) {
-> +			ut_assertok(ret);
-> +			runs++;
-> +		}
->  	}
+> @@ -130,12 +132,33 @@ def get_details(config):
+>              str: Build directory
+>              str: Source directory
+>      """
+> -    board_type =3D config.getoption('board_type')
+> -    board_identity =3D config.getoption('board_identity')
+> +    role =3D config.getoption('role')
+>      build_dir =3D config.getoption('build_dir')
+> +    if role:
+> +        board_identity =3D role
+> +        cmd =3D ['u-boot-test-getrole', role, '--configure']
+> +        env =3D os.environ.copy()
+> +        if build_dir:
+> +            env['U_BOOT_BUILD_DIR'] =3D build_dir
+> +        proc =3D subprocess.run(cmd, capture_output=3DTrue, encoding=3D'=
+utf-8',
+> +                              env=3Denv)
+> +        if proc.returncode:
+> +            raise ValueError(proc.stderr)
+> +        print('conftest: lab:', proc.stdout)
+> +        vals =3D {}
+> +        for line in proc.stdout.splitlines():
+> +            item, value =3D line.split(' ', maxsplit=3D1)
+> +            k =3D item.split(':')[-1]
+> +            vals[k] =3D value
+> +        print('conftest: lab info:', vals)
+> +        board_type, default_build_dir, source_dir =3D (vals['board'],
+> +            vals['build_dir'], vals['source_dir'])
+> +    else:
+> +        board_type =3D config.getoption('board_type')
+> +        board_identity =3D config.getoption('board_identity')
 > =20
->  	return 0;
+> -    source_dir =3D os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> -    default_build_dir =3D source_dir + '/build-' + board_type
+> +        source_dir =3D os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> +        default_build_dir =3D source_dir + '/build-' + board_type
+>      if not build_dir:
+>          build_dir =3D default_build_dir
 
-How did you trigger this case exactly?
+I'm a little confused here. Why can't we construct "role" from
+board_type+board_identity and then we have the board
+conf.${board_type}_${board_identity} file set whatever needs setting to
+be "labgrid" ?
 
 --=20
 Tom
 
---naa5xj4m8zYzXe6X
+--SlMNhPD1+6CYXl97
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5tYQACgkQFHw5/5Y0
-tyzuJQv/R//5MBBfEv66nVTyu+/kS9w6sDh0Top180Ne8wmdG/tMBfSYl1YuANz/
-YF0q6i5fDf7CFLLbGfHmXjLitO72Fyp1A1KYcTGqCrJOjvMWYAsr7HOnNXobjS+t
-ZHzgE7B47Jxk1JAIGnwZP9dDQpwRmpOlYQOd6cO/eaFbXNhxiOoRRSBh7mZmk93F
-qaacpw7mBbUwIAhAXAeRuWRmTRciSYvJFgResY+SQlKID98j6WYdZZa0tHQSQtcH
-O/N5KdJNaCTfgw/3KFPFKVpq/NDUXwN4J7EbNge2U8k0i8HhPSDM1eTbIkx4mnVw
-0hMBUrtsrWgqMsSu4Gs3VhWOOny8rKPqKHn6xbvYhXKOnvkBRSLgpmCT6mObbh7u
-pi4GV2C7yXpr7vniVNBMajwPU2ORsu3Y4ZDpjXXcGjXOpOKLbQcFSdW3Z3wG43WY
-XF0/LY1ysGiJ1RvPIo32abkDKGCk7Qw3FyuGVIu6ArP6xuqj+xe6RheDv9WOIiy+
-qnZNR1wo
-=VQWi
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5ty8ACgkQFHw5/5Y0
+tyxCpAv/Wpg+aiWDnsXDaqm5O6Pyk9JzNLEJUxKJ7BW140jfiYwh8fWbuae4UwLL
++dyu+kS2upHpwdO3kuLfPuDvlonpvgvYVXbSIneVZ7dUC0rX9bw71bfXP2cd3OnJ
+U1bZ+eSrLXwhpOSIIdn9iieJIUtdcJMBfoW9P81WI9+P5r+3rzXwTE5s+qVnUp4n
+7On5BCWypzAbkQac1LRInZzrchAVwyOTD+aZulz6+UjQgV9l3epdi8jSauchDNuy
+tb54Sq+PKOS6Ai4VrbWjZGFpm/t2gQiJDdQ6Aqx3Q3SEpNArvAfx3gJD95mMqwBc
+uXEXDY6S9WHxaTW0iXV6Tx/rY5ZjaJQggquNk76+rTe1aGPuWfNVMbmeQByYkhDJ
+DbMjv6F32j0d2RUFa1vgch0mSdg2OQG2rrgwL9MRweY4q/HtvVvGA8DAk+ANxsHS
+FJ754eSPGOU/FRruLAbn+3tYWfbt4UdCuHHP2PFXz4At2O2bEb2mGzMRKqdnWOda
+fjZHCueA
+=yf+n
 -----END PGP SIGNATURE-----
 
---naa5xj4m8zYzXe6X--
+--SlMNhPD1+6CYXl97--
