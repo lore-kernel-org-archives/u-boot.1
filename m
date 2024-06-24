@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD74C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:06:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58083C2D0D1
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:06:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 943A888405;
-	Mon, 24 Jun 2024 23:04:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01416883CD;
+	Mon, 24 Jun 2024 23:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kEGVKmqH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="awmd8F82";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C18C6885A4; Mon, 24 Jun 2024 23:04:48 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 67BE88859A; Mon, 24 Jun 2024 23:04:49 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5976888590
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD9AE884B2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-36279cf6414so3854007f8f.3
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:45 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-362b32fbb3bso3238454f8f.2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719263085; x=1719867885; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719263086; x=1719867886; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=XNqKnoO1M7Vvxa76ER/5BqBkhfciKUzVHEdydKoIgrI=;
- b=kEGVKmqH04Of3jw0W1dxQmIok4duNiTv1WVUT4SObGr0NwLHw7OQdPAhKMRC8/+7CO
- UirpAS39Wz1dCn9GORBqJu7n7Vm7vnJTwSnxEYlCaXdr2hv1IQtq1C7AOLjWnh0F152k
- bFHUf3m92VpXU/FsT1NnRgYKwV0I8JsQb9ue0ruWMakdQdk7L3Nov/GI7cBm1d6Vbra3
- XjkubNpc6pvBBFyrzuAwsYvIuTAxfribBWZbHw9nEolOno8eP/CZrq2rMQM1880mmo7E
- 4ro1vYiVaGc7/25AADdKEfjDtG5FoH4IFQ0hcwpVaRGfPJH3AqcQZEeHwEnmSRwYHlmO
- q81Q==
+ :reply-to; bh=ouaA9glpsw4lLaDiPHKMwtMgf9xQnvqTg2ZrILZg59k=;
+ b=awmd8F82kYvu+1iCJVC31m49rrcv6kxxASz7oULlijkNREjQE3wwM1VuJYNFuvta75
+ ZGgqnPfKBpVPYkvPHU3x7EH48MbE0W+7crd1zzXN8wZ8Je0pHzRsCIIG3QzlQfqy4ppK
+ vqibaHsSTfR0Qaxu2Nm4nseL9h+8USfu42FvJMzXOREs6XlUUQRkdf3qj6Uurqps+koZ
+ rvQC4VGs/kOLr8mq3njFii2TKooF9NJWlqS82nRjCv+TDxYcfKjNr4zVYnkB34zX/942
+ J+iLiOXcvevI7sVOTSpdSFoTT1hzqKiokZbToIoDod32Du3dLA2N+sOmIOVfjRPWW3Mn
+ lLMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719263085; x=1719867885;
+ d=1e100.net; s=20230601; t=1719263086; x=1719867886;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XNqKnoO1M7Vvxa76ER/5BqBkhfciKUzVHEdydKoIgrI=;
- b=J8jYuNzubIsAKc3xMPMAYiexUwyN/QsYURErzy08hTeEN6ZbYXDAKJ2QzfClkFeukN
- R653BZclCnvCy5J0JNLVzVTFIKVje646IdQlPGs3uawLOIft+S9FBXVS9HFyN9j3aYVF
- e/JfACuSwvi/kdSBCjBbBq25yPWZv6EGYk2/S1IWWHkPQVLs6p3txIhCG8BGuLJkc/Dl
- CXPRAuASb3uWdg35M1Adu3ZGI1o6qusgqvsYOKOf5h4bp7bQANKub95eCRhMwyTK0WlZ
- ZBfNLdpQNQgNCG6LLI+Es6CWxid6wEZ206rdFKqlgJlubvG7efjFCYbBBJCddKFTaWqb
- fH4Q==
+ bh=ouaA9glpsw4lLaDiPHKMwtMgf9xQnvqTg2ZrILZg59k=;
+ b=J5BuGkhPRcq31tBrsh47oiawy3+3GwTtFCsE1dXAlrFvV7tIyFPsUxK32smAvUtIEb
+ 1SbJ4I6Ock/PJf/qta6gTp/sY8mvsh2vnwsZC4XF7STRypHTozEPtG4uGncGi4V9F4xc
+ mav7RYsMci/U9b/4HvFaFQnqBSTQlDXwPjBSu+xKVdoPA/9ItuuApJWDjCEGhvptoJRQ
+ hueTnPjYYawnIyvCkRgyQLuPi2PVG659jO5dgxS0UwQQQKd0Z1Uc6pXFuGuDeENBMQfu
+ UeGzQZ264wvtakuJ/AOlXHGDoK/Vg/WjNB55nj/srO8HmG0RVU5MNak+KDSZ9PLqL9l2
+ TzdQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUVNtLy3xpahbqdQPvN9xgPnMYjs7kSh9AaYledPnRM44NT1tHlEsi4XF3YQgYMx4+dD8w3vtUcRBCMiX4RLE4if3DtBg==
-X-Gm-Message-State: AOJu0YxVTIwNeaOKg63tfcna+wzgFZPebJCEycfpzALDe2boGxb5eLCy
- /35i5lLMLIuRFvanfY6VzS97+EzBhY7cQ3KNbV8wgkV03wLqIK9t
-X-Google-Smtp-Source: AGHT+IFjQs6WtX2SWx45UU3FOmc7+43R9g3mb4/0jLcKmpHOI+9d6m2dYPmL4WcSZxmeoSyZIZL2iw==
-X-Received: by 2002:adf:f7d2:0:b0:366:ddc2:a14a with SMTP id
- ffacd0b85a97d-366e94d6a97mr2914196f8f.40.1719263084735; 
- Mon, 24 Jun 2024 14:04:44 -0700 (PDT)
+ AJvYcCWwtbEQBvSYFHY7J9aK5q/6rphcAjpuRnvUVPG5qHEWwKWMJEJG4mH6vKbFxcl5UF3pZ0B1QLIdIhOkTCOr150yE1ZmAg==
+X-Gm-Message-State: AOJu0YxFUfOZo3ghjXSoMkoggBpUCbok8Nw1B5duRW1w7AN0WPfMISdg
+ 8QYPLAWQeuD9b64zeCU1wUc/8XYeP+CBtnYYtrb2yW4Xg8xswOLx
+X-Google-Smtp-Source: AGHT+IF3b+SXU/1zS9OhMwz6qaG8BpAoP4TChH+UBuHyb0/okE05aaXUfJq+14GlIHEu6Fy3fkeiJg==
+X-Received: by 2002:adf:f48d:0:b0:35f:2547:6be6 with SMTP id
+ ffacd0b85a97d-366e7a1a128mr4410777f8f.21.1719263086248; 
+ Mon, 24 Jun 2024 14:04:46 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.43
+ ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:04:44 -0700 (PDT)
+ Mon, 24 Jun 2024 14:04:45 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,9 +87,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Alexey Romanov <avromanov@salutedevices.com>,
  Peter Robinson <pbrobinson@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v4 12/14] pci: mediatek: make pcie-phy optional for gen3
-Date: Mon, 24 Jun 2024 23:03:38 +0200
-Message-ID: <20240624210418.19324-13-ansuelsmth@gmail.com>
+Subject: [PATCH v4 13/14] clk: mediatek: mt7988: support alternative
+ compatible for fixed-plls
+Date: Mon, 24 Jun 2024 23:03:39 +0200
+Message-ID: <20240624210418.19324-14-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240624210418.19324-1-ansuelsmth@gmail.com>
 References: <20240624210418.19324-1-ansuelsmth@gmail.com>
@@ -111,62 +112,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set pcie-phy optional for PCIe gen3. MT7988 doesn't require it and
-making it mandatory prevent the driver to correctly probe.
+Support alternative compatible for fixed-plls clocks used upstream with
+the compatible mediatek,mt7988-apmixedsys.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/pci/pcie_mediatek_gen3.c | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
+ drivers/clk/mediatek/clk-mt7988.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pci/pcie_mediatek_gen3.c b/drivers/pci/pcie_mediatek_gen3.c
-index 673813b8b75..0149edae0bf 100644
---- a/drivers/pci/pcie_mediatek_gen3.c
-+++ b/drivers/pci/pcie_mediatek_gen3.c
-@@ -284,9 +284,8 @@ static int mtk_pcie_power_on(struct udevice *dev)
+diff --git a/drivers/clk/mediatek/clk-mt7988.c b/drivers/clk/mediatek/clk-mt7988.c
+index 34e7b2d734c..32b04511781 100644
+--- a/drivers/clk/mediatek/clk-mt7988.c
++++ b/drivers/clk/mediatek/clk-mt7988.c
+@@ -833,6 +833,7 @@ static const struct mtk_clk_tree mt7988_infracfg_clk_tree = {
  
- 	pcie->priv = dev;
+ static const struct udevice_id mt7988_fixed_pll_compat[] = {
+ 	{ .compatible = "mediatek,mt7988-fixed-plls" },
++	{ .compatible = "mediatek,mt7988-apmixedsys" },
+ 	{}
+ };
  
--	err = generic_phy_get_by_name(dev, "pcie-phy", &pcie->phy);
--	if (err)
--		return err;
-+	/* pcie-phy is optional (mt7988 doesn't need it) */
-+	generic_phy_get_by_name(dev, "pcie-phy", &pcie->phy);
- 
- 	/*
- 	 * Upstream linux kernel devine these clock without clock-names
-@@ -308,13 +307,15 @@ static int mtk_pcie_power_on(struct udevice *dev)
- 	if (err)
- 		return err;
- 
--	err = generic_phy_init(&pcie->phy);
--	if (err)
--		return err;
-+	if (pcie->phy.dev) {
-+		err = generic_phy_init(&pcie->phy);
-+		if (err)
-+			return err;
- 
--	err = generic_phy_power_on(&pcie->phy);
--	if (err)
--		goto err_phy_on;
-+		err = generic_phy_power_on(&pcie->phy);
-+		if (err)
-+			goto err_phy_on;
-+	}
- 
- 	err = clk_enable(&pcie->pl_250m_ck);
- 	if (err)
-@@ -348,7 +349,8 @@ err_clk_tl_26m:
- err_clk_pl_250m:
- 	clk_disable(&pcie->pl_250m_ck);
- err_phy_on:
--	generic_phy_exit(&pcie->phy);
-+	if (pcie->phy.dev)
-+		generic_phy_exit(&pcie->phy);
- 
- 	return err;
- }
 -- 
 2.45.1
 
