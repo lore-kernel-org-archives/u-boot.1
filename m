@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B26EC2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46E0C2D0D1
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F1AF88435;
-	Mon, 24 Jun 2024 23:04:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EEE4088403;
+	Mon, 24 Jun 2024 23:04:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="elMRUOGO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HdqE5/OH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C01A88403; Mon, 24 Jun 2024 23:04:29 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 4568488387; Mon, 24 Jun 2024 23:04:31 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5C6688119
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27F07883D2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-365663f51adso3571513f8f.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:26 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-421757d217aso52890225e9.3
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719263066; x=1719867866; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=8oP0R4wOKfNVwP20LxzJ02/vhFxnKcID1GREDx58njs=;
- b=elMRUOGOMid3V+bvrbtF9kPJ4EP1wT2FpzNVqjOxnbpgVcyAnmqKH8ypUPPbk400Zi
- 9CP44RDz4Z7wyFhQ1crvmH0XE04/GlYTsZrrCWPy1VWWQ2+HV5gDbjVOwlkgKvnn55tK
- 2KkvxkMA+DC3aqjFZHkip4ywu1NW+pSMOeswJWyhsdGUyl6bX1AjTGfhDtJ953bH/uuv
- fDI/wIRUVnyRFdAfvk/Jvl1lkj0OtV1cNkc57rje/juwT/+5c1ls2OHyX/oWyw8Wb/w+
- T5fBRUIfFlov2qkjLm4GdFIB7gK9uSN9DSflDEedqvsvWG5Fm6GBylXWjQxXRnlhhN8n
- aL9g==
+ d=gmail.com; s=20230601; t=1719263067; x=1719867867; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=eFXbWzKKLkmGQpE+YbS152r2t08PRpPi4kBpt6cBr94=;
+ b=HdqE5/OHQYFju8ZjV3kOa41otwqZUlj0wnuqVXGd5W6X/4M58Mcd/NJSrIdc/vRNp6
+ 6rfyFaoQm0EBj8etELq/OvbtFpQRXfrPAoFZ83HmRPOtL92e/fc+iYKdzKqfj+GWKlMK
+ Bv9C99Jzy/IXfQhXh98qEsuDbxKFoS5+pPzwOZ6w7PVLY0gKvWCox/Q07nL/miM9lk2f
+ uaZtAW4SB42iHx61jLLXTPVbIySEGi6OnHo1BmUyNY3wzfwHBFNSBjxhH4b/g5vMJl14
+ xXaYmddMHVhgInKExiycc9BaUObM1AqhsqiRvHoR+lDLOMNGGfgvjpMUFPFYoNPW97jJ
+ qXBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719263066; x=1719867866;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8oP0R4wOKfNVwP20LxzJ02/vhFxnKcID1GREDx58njs=;
- b=XuFetODnoYg3FFhGrTVh2FAmdWDhfJ+7eHx7KHqauRIcVkEemCmNTSxB20taPclYBF
- Si4usPdMrKjXh8mqvzIbGa8byl2zkkiV3otJoHJYjfj4LD/8V4NZX+rD7jMyJbiNZSSE
- tzZrgwnHUV9khWzfCdywt4rbFWgad3YEbJzBBUFof1oVnfd9nGCHib0nXRa7dj39v+BC
- AHY316X5qnKfb/7mTbWSXjeOdjDWZ7aGJyzXL2IwyvScEBdTCGvQOU1jKaGxg5l5T3uZ
- 6jYeWtPfyoIpxaZyjzsuvG2jiBgSDQr2EexdUUjqrM0FRsA8KALcrbHiSW0wZv78/93b
- TlMw==
+ d=1e100.net; s=20230601; t=1719263067; x=1719867867;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eFXbWzKKLkmGQpE+YbS152r2t08PRpPi4kBpt6cBr94=;
+ b=FSyZjvH7FYvYdaKBT1WnZ4LZyq5i/vrz9DCCO95kvFFNXnVhTdAixR5O8vT0z829lm
+ 06zm0HRiQmZAZ39UpO8KltoPJe4UQHo52m9yrZbH8TumpQzIpug4l2c62S+nMi993G+x
+ fd3HX1NuwE9A1gai1VebwC3RUF89YtP6OpwYxVZn2lIYnjvspfI3Qi7RMqKkiAxS0m7R
+ vmgqMT3/TRN7cn2Tg1RI1Jn1wTCglUpq84kqQ/iCbT4dlcJhfsqPNgVtHsgswc/Wqkzz
+ eQu1o6XyNb2XHJojbHlaMhY+FTs7EPWytV5I2EtJ1EQFcoyJDVJG5ZobOoMKxbl3oF8L
+ 7hIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMGkrvY8bPmoEcEsDRRAokyV+ukIuNItXZInrbwwTPhhfa+vjG3/GehBw+glbq7nbemPdA8X9qpCb4a3OvcRtmFWS+Rw==
-X-Gm-Message-State: AOJu0Ywpfgqdcph5tp9zAJJ4grUvWLSUSryJ5rou646d1ghkABc0AbJT
- ESatthY2ocpQcuAMoY6nViLWqHrcIcM/puu+ZoW/upOqhmaiJYwT
-X-Google-Smtp-Source: AGHT+IFVPK7cburCRnSTPkP5/WhAhAjQ9m7DsGwPy2a7EOVs1AkJSvUJDr43OlMCNE+aPcBEqJtchg==
-X-Received: by 2002:adf:e6c6:0:b0:35f:2725:f6cd with SMTP id
- ffacd0b85a97d-366e4f0bf67mr4329667f8f.59.1719263065926; 
- Mon, 24 Jun 2024 14:04:25 -0700 (PDT)
+ AJvYcCVwZ2nCiEg0V4iLyOHSwVJZSGklyrw+Z1jriQkEnin8fGoVyU3cvbn9aFKy94Zlaxc+DZDCC3eYs/YL5JXdfBLBvurzuA==
+X-Gm-Message-State: AOJu0Yzgh8DuLvmH7yJe7VfMmRSZs7BCKRHmOeERBcOuJ0GBOU3VM+9h
+ fA5Nj/iJ/1oOoPhZmV/W2XLZK3tEs8H/hQQKM8NWxUcrw3cLvEbO
+X-Google-Smtp-Source: AGHT+IHvNenFk0lvoCoTnBmsN+KGQS1hYet9nTfFhwwtM78wb0hVarXv6AkeULLXQVAvha2fcbd0rQ==
+X-Received: by 2002:a5d:59a4:0:b0:366:f48e:c6b with SMTP id
+ ffacd0b85a97d-366f48e0e2emr3589120f8f.45.1719263067418; 
+ Mon, 24 Jun 2024 14:04:27 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.24
+ ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:04:25 -0700 (PDT)
+ Mon, 24 Jun 2024 14:04:27 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -86,11 +87,12 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Alexey Romanov <avromanov@salutedevices.com>,
  Peter Robinson <pbrobinson@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v4 00/14] mediatek: cumulative trivial fix for OF_UPSTREAM
- support
-Date: Mon, 24 Jun 2024 23:03:26 +0200
-Message-ID: <20240624210418.19324-1-ansuelsmth@gmail.com>
+Subject: [PATCH v4 01/14] phy: phy-mtk-tphy: add support for phy type switch
+Date: Mon, 24 Jun 2024 23:03:27 +0200
+Message-ID: <20240624210418.19324-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
+In-Reply-To: <20240624210418.19324-1-ansuelsmth@gmail.com>
+References: <20240624210418.19324-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,70 +111,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an initial series that have all the initial trivial
-fixes required for usage of OF_UPSTREAM for the mediatek SoC
+Add support for PHY type switch via the mediatek topmisc syscon.
 
-This also contains the pcie-gen3 driver and the required tphy
-support driver to make it work.
+This is needed on mt7981 to make the PCIe correctly work and display
+LinkUp.
 
-Subsequent series will follow with conversion of the mtk-clk
-to permit usage of OF_UPSTREAM and upstream clk ID.
+Follow the same implementation done on Linux kernel with the usage of
+the mediatek,syscon-type property.
 
-MT7981, MT7986 and MT7988 migration to upstream clock ID
-is complete and working on MT7623.
+Example:
 
-Series CI tested with PR [0]
+u3port0: usb-phy@11e10700 {
+	reg = <0x11e10700 0x900>;
+	clocks = <&topckgen CK_TOP_USB3_PHY_SEL>;
+	clock-names = "ref";
+	#phy-cells = <1>;
+	mediatek,syscon-type = <&topmisc 0x218 0>;
+	status = "okay";
+};
 
-[0] https://github.com/u-boot/u-boot/pull/590
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/phy/Kconfig        |  2 +
+ drivers/phy/phy-mtk-tphy.c | 80 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 82 insertions(+)
 
-Changes v4:
-- Fix compilation error catched by Azure CI
-- Rework serial with legacy platform
-Changes v3:
-- Fix copy paste error in gpio-controller (dev instead of parent)
-- Rebase on top of next
-Changes v2:
-- Add mt7986 and mt7988 apmixed trivial PATCH
-- Make phy for pcie optional (it is for mt7988)
-- Fix broken mmc patch
-
-Christian Marangi (13):
-  phy: phy-mtk-tphy: add support for phy type switch
-  spi: mtk_spim: add support for upstream mediatek,spi-ipm compatible
-  net: mediatek: handle alternative name for pn_swap property
-  i2c: mediatek: add support for optional arb and pmic clock
-  serial: mediatek: add support for bus clock and enable it
-  serial: mediatek: add special handling for highspeed and linux compat
-  mmc: mediatek: add support for upstream linux clock and property
-  clk: mediatek: mt7981: support alternative compatible for fixed-plls
-  pinctrl: mediatek: add support for gpio-controller property in root
-    node
-  pinctrl: mediatek: mt7981: init device before relocation
-  pci: mediatek: make pcie-phy optional for gen3
-  clk: mediatek: mt7988: support alternative compatible for fixed-plls
-  clk: mediatek: mt7986: support alternative compatible for fixed-plls
-
-John Crispin (1):
-  pci: mediatek: add PCIe controller support for filogic silicon
-
- drivers/clk/mediatek/clk-mt7981.c             |   1 +
- drivers/clk/mediatek/clk-mt7986.c             |   1 +
- drivers/clk/mediatek/clk-mt7988.c             |   1 +
- drivers/i2c/mtk_i2c.c                         |  30 ++
- drivers/mmc/mtk-sd.c                          |  35 +-
- drivers/net/mtk_eth.c                         |   4 +-
- drivers/pci/Kconfig                           |   7 +
- drivers/pci/Makefile                          |   1 +
- drivers/pci/pcie_mediatek_gen3.c              | 384 ++++++++++++++++++
- drivers/phy/Kconfig                           |   2 +
- drivers/phy/phy-mtk-tphy.c                    |  80 ++++
- drivers/pinctrl/mediatek/pinctrl-mt7981.c     |   1 +
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c |  10 +
- drivers/serial/serial_mtk.c                   |  20 +-
- drivers/spi/mtk_spim.c                        |  45 +-
- 15 files changed, 614 insertions(+), 8 deletions(-)
- create mode 100644 drivers/pci/pcie_mediatek_gen3.c
-
+diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+index 8f767877e73..e12347e8a03 100644
+--- a/drivers/phy/Kconfig
++++ b/drivers/phy/Kconfig
+@@ -263,6 +263,8 @@ config PHY_MTK_TPHY
+ 	bool "MediaTek T-PHY Driver"
+ 	depends on PHY
+ 	depends on ARCH_MEDIATEK || SOC_MT7621
++	select REGMAP
++	select SYSCON
+ 	help
+ 	  MediaTek T-PHY driver supports usb2.0, usb3.0 ports, PCIe and
+ 	  SATA, and meanwhile supports two version T-PHY which have
+diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
+index 6f9ac1528e8..0a45dc58629 100644
+--- a/drivers/phy/phy-mtk-tphy.c
++++ b/drivers/phy/phy-mtk-tphy.c
+@@ -10,6 +10,8 @@
+ #include <generic-phy.h>
+ #include <malloc.h>
+ #include <mapmem.h>
++#include <regmap.h>
++#include <syscon.h>
+ #include <asm/io.h>
+ #include <dm/device_compat.h>
+ #include <dm/devres.h>
+@@ -215,6 +217,14 @@
+ #define ANA_EQ_EYE_CTRL_SIGNAL5		0xdc
+ #define RG_CDR_BIRLTD0_GEN3_MSK		GENMASK(4, 0)
+ 
++/* PHY switch between pcie/usb3/sgmii/sata */
++#define USB_PHY_SWITCH_CTRL	0x0
++#define RG_PHY_SW_TYPE		GENMASK(3, 0)
++#define RG_PHY_SW_PCIE		0x0
++#define RG_PHY_SW_USB3		0x1
++#define RG_PHY_SW_SGMII		0x2
++#define RG_PHY_SW_SATA		0x3
++
+ enum mtk_phy_version {
+ 	MTK_TPHY_V1 = 1,
+ 	MTK_TPHY_V2,
+@@ -257,6 +267,10 @@ struct mtk_phy_instance {
+ 	u32 index;
+ 	u32 type;
+ 
++	struct regmap *type_sw;
++	u32 type_sw_reg;
++	u32 type_sw_index;
++
+ 	u32 eye_vrt;
+ 	u32 eye_term;
+ 	u32 discth;
+@@ -616,6 +630,67 @@ static void u2_phy_props_set(struct mtk_tphy *tphy,
+ 				FIELD_PREP(PA6_RG_U2_PRE_EMP, instance->pre_emphasis));
+ }
+ 
++/* type switch for usb3/pcie/sgmii/sata */
++static int phy_type_syscon_get(struct udevice *dev, struct mtk_phy_instance *instance,
++			       ofnode dn)
++{
++	struct ofnode_phandle_args args;
++	int err;
++
++	if (!ofnode_read_bool(dn, "mediatek,syscon-type"))
++		return 0;
++
++	err = ofnode_parse_phandle_with_args(dn, "mediatek,syscon-type",
++					     NULL, 2, 0, &args);
++	if (err)
++		return err;
++
++	instance->type_sw_reg = args.args[0];
++	instance->type_sw_index = args.args[1] & 0x3; /* <=3 */
++	instance->type_sw = syscon_node_to_regmap(args.node);
++	if (IS_ERR(instance->type_sw))
++		return PTR_ERR(instance->type_sw);
++
++	debug("phy-%s.%d: type_sw - reg %#x, index %d\n",
++	      dev->name, instance->index, instance->type_sw_reg,
++	      instance->type_sw_index);
++
++	return 0;
++}
++
++static int phy_type_set(struct mtk_phy_instance *instance)
++{
++	int type;
++	u32 offset;
++
++	if (!instance->type_sw)
++		return 0;
++
++	switch (instance->type) {
++	case PHY_TYPE_USB3:
++		type = RG_PHY_SW_USB3;
++		break;
++	case PHY_TYPE_PCIE:
++		type = RG_PHY_SW_PCIE;
++		break;
++	case PHY_TYPE_SGMII:
++		type = RG_PHY_SW_SGMII;
++		break;
++	case PHY_TYPE_SATA:
++		type = RG_PHY_SW_SATA;
++		break;
++	case PHY_TYPE_USB2:
++	default:
++		return 0;
++	}
++
++	offset = instance->type_sw_index * BITS_PER_BYTE;
++	regmap_update_bits(instance->type_sw, instance->type_sw_reg,
++			   RG_PHY_SW_TYPE << offset, type << offset);
++
++	return 0;
++}
++
+ static int mtk_phy_init(struct phy *phy)
+ {
+ 	struct mtk_tphy *tphy = dev_get_priv(phy->dev);
+@@ -746,6 +821,7 @@ static int mtk_phy_xlate(struct phy *phy,
+ 	}
+ 
+ 	phy_parse_property(tphy, instance);
++	phy_type_set(instance);
+ 
+ 	return 0;
+ }
+@@ -807,6 +883,10 @@ static int mtk_tphy_probe(struct udevice *dev)
+ 						     &instance->da_ref_clk);
+ 		if (err)
+ 			return err;
++
++		err = phy_type_syscon_get(dev, instance, subnode);
++		if (err)
++			return err;
+ 	}
+ 
+ 	return 0;
 -- 
 2.45.1
 
