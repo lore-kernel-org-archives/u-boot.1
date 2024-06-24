@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC88C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 18:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0DCC2D0D1
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 18:06:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F85187572;
-	Mon, 24 Jun 2024 20:01:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37C5587572;
+	Mon, 24 Jun 2024 20:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GhTjn35X";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I+oFFy0N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AE968751B; Mon, 24 Jun 2024 20:01:56 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id BBADA882CE; Mon, 24 Jun 2024 20:06:04 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E9FF883B1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 20:01:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F0048751B
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 20:06:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3d51e7557faso1408673b6e.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:01:54 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6fa11ac8695so2765871a34.3
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:06:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719252113; x=1719856913; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719252361; x=1719857161; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VFmz6UX+g1PbbOrqjthK7KwU+lYZ82yYJgwx5+W7+pE=;
- b=GhTjn35XHkT/sVJLupRCXA1rqm35f+NM+qIpQUtNM9v/F5U5RRQwMgbq0nCSgC9o5k
- qc5j6xaOmQluSIW1dpeef6zhBKg2FM/2JYkzzERg4JK6ZrIl929Yli5jZVD2sPMjF2d+
- noy4uidkfbMUnhUf8AmSh+TMiibBwLisRyNv8=
+ bh=paB+sljHV/FIknzwEgu+epZh9FkkrJTL7ef1B6OkOgw=;
+ b=I+oFFy0NSqkDfv9b3JZwLKnhNJhPtCdLnN0cq4QQ8TV4kD/nw6SVhEzxwAWb5p9CMD
+ GF4Z8GKVv0gZgUrAspiwDWoCHm6YbTg5sm/AcpATSVvmCdVr5LbQAgOT7YA7gmaydgtR
+ S0Aowhc/db7D/pilzdVerQae8dXbEM+zygxwI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719252113; x=1719856913;
+ d=1e100.net; s=20230601; t=1719252361; x=1719857161;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VFmz6UX+g1PbbOrqjthK7KwU+lYZ82yYJgwx5+W7+pE=;
- b=aLUNQHmXxMvV0pr7GEQf+LXCPcNq/N5vjWfG26i0jP9ziR4jm0M3vHeThmzY4/eGQA
- iEg8tdOZwqRkSSDrQGXmIUlyMDcSqtuLqQG7uLj7njDuPSSkLAC7AIaxir9XvwMapZG+
- eu/Yt+3QCh6slxDZrrsf0W5TN/U74RB1URYcmn+Bhf+z3PN5ILeNSe7HWGyrVJvWazci
- 0jKDinCuslzLZFDe6OmZxmT7org2K/PSx8OTHD9ZH0YpQ2AU1rhxMIs9nCyoSR7KHyTX
- 7Lqya1f/VdDg51mnYEmleBBA4//FGgRlA2jCh0yCDykro6PJEawxamNmAD2mSq2T4grU
- xcjg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUd6Jqq5X3nayiSKk+gskwI9HWQqoMwr/MFigJwtBcIKLip26YlLhJvhDYGJROahV1lajRFXA/gFhAxIuznGdVhujj36w==
-X-Gm-Message-State: AOJu0YxwJJeNh0OUknSO9KTMspgV8LGCN6dBJ90RfItrc3qShKoTbJGl
- jq7yIJDCAEEzlqVsl2Of5c6xsq9ZO4XGlGxMZ+cVTHoCSJEJ/XUvimEbz9rypgk=
-X-Google-Smtp-Source: AGHT+IFsRUL01vHXRXx/VtRVerqs5bvlA37dAmzqBH8YrlvpWn4vyk1Y1yF/m2ylbKxTlY/TgQdxuA==
-X-Received: by 2002:a05:6808:171a:b0:3d2:18c1:bf35 with SMTP id
- 5614622812f47-3d541c939a9mr6306812b6e.33.1719252112424; 
- Mon, 24 Jun 2024 11:01:52 -0700 (PDT)
+ bh=paB+sljHV/FIknzwEgu+epZh9FkkrJTL7ef1B6OkOgw=;
+ b=fr3D7AYCD+aYSn8A//3UPlIIdWwjuZlb1DN+yBRpzHgmzrjJ3JL4mkDn4ejmagn7pJ
+ LgBNrZ8rTr6soQ6FXrxFEoYOVWW1cUi5dkHkhLuNDN9GhOfKiDhNb3K9Z+g393e5ojP4
+ E3pcEE75ya6KCDs0fO0YiTe6tjnnFUTiWfITUVuaQN3zJZ1nhEVzPUL8PxjyCvyZZ8Dz
+ ALHH+UhTER0cVuhy4DDVfgfETAQabdI1VJ8muoil9JkRLiAoxEEndmiwKukUJahIaZB5
+ s2hi/u6ZZLmuKJoBD4pK8ENhRsK3om3topbYANeGFmp1RDAginh3x3fGrAWWovWDYalP
+ r/yA==
+X-Gm-Message-State: AOJu0YxQ39D+q0jK9sypVKT9oz6naaypRrsrsA6q6iGdyrx/BgHm6/uR
+ 5NuYhUhN7rZ2DOyFZ2eHX1ocTmc/hfKOlH+ck6iY+ER89NwCUjHViD34/JmITyU=
+X-Google-Smtp-Source: AGHT+IGRhuNi3JZW2sMRC7DWyO2Ex4beWBQXSEtPcZUQfdZURkW38DFrvF80e+HIPIA778wgNrlsyg==
+X-Received: by 2002:a05:6808:120d:b0:3d5:47bc:14db with SMTP id
+ 5614622812f47-3d547bc1742mr4867909b6e.22.1719252359819; 
+ Mon, 24 Jun 2024 11:05:59 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d5345d417esm1558826b6e.48.2024.06.24.11.01.51
+ 5614622812f47-3d5344fa318sm1564832b6e.15.2024.06.24.11.05.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 11:01:52 -0700 (PDT)
-Date: Mon, 24 Jun 2024 12:01:49 -0600
+ Mon, 24 Jun 2024 11:05:59 -0700 (PDT)
+Date: Mon, 24 Jun 2024 12:05:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v3 19/19] CI: Allow running tests on sjg lab
-Message-ID: <20240624180149.GF38804@bill-the-cat>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v3 06/19] test: Avoid failing skipped tests
+Message-ID: <20240624180556.GG38804@bill-the-cat>
 References: <20240623203213.1571666-1-sjg@chromium.org>
- <20240623203213.1571666-20-sjg@chromium.org>
- <ZnkchlJmYdVCkQV+@toradex.com>
- <CAOf5uwkQDzOpj-XUojvfWD6tU2cOxZkv4OEvOK7eZJZcRHTjfg@mail.gmail.com>
+ <20240623203213.1571666-7-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9lkvbEA0vC5metl8"
+ protocol="application/pgp-signature"; boundary="naa5xj4m8zYzXe6X"
 Content-Disposition: inline
-In-Reply-To: <CAOf5uwkQDzOpj-XUojvfWD6tU2cOxZkv4OEvOK7eZJZcRHTjfg@mail.gmail.com>
+In-Reply-To: <20240623203213.1571666-7-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,66 +92,91 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9lkvbEA0vC5metl8
-Content-Type: text/plain; charset=utf-8
+--naa5xj4m8zYzXe6X
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 24, 2024 at 04:56:02PM +0200, Michael Nazzareno Trimarchi wrote:
-> Hi Simon
->=20
-> On Mon, Jun 24, 2024 at 2:52=E2=80=AFPM Andrejs Cainikovs
-> <andrejs.cainikovs@toradex.com> wrote:
-> >
-> > On Sun, Jun 23, 2024 at 02:32:13PM -0600, Simon Glass wrote:
-> > > Add a way to run tests on a real hardware lab. This is in the very ea=
-rly
-> > > experimental stages. There are only 23 boards and 3 of those are brok=
-en!
-> > > (bob, ff3399, samus). A fourth fails due to problems with the TPM tes=
-ts.
-> > >
-> > > To try this, assuming you have gitlab access, set SJG_LAB=3D1, e.g.:
-> > >
-> > >    git push -o ci.variable=3D"SJG_LAB=3D1" dm HEAD:try
-> > >
-> > > This relies on the two previous series targeted at -next as well as t=
-he
-> > > bugfix series for -master
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > Reviewed-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-> >
->=20
-> Do you have documentation on how to set it? We would like to do in our
-> company too
+On Sun, Jun 23, 2024 at 02:32:00PM -0600, Simon Glass wrote:
 
-I _think_ from some talking with Simon before the biggest sticking point
-might be changes needed on the labgrid side of things. However, that
-might also be most easily remedied if there's a few people showing up in
-the GitHub issue(s) showing interest in getting changes made/merged and
-to use the overall feature.
+> When a test returns -EAGAIN this should not be considered a failure.
+> Fix what seems to be a problem case, where the pytests see a failure
+> when a test has merely been skipped.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> (no changes since v1)
+>=20
+>  test/test-main.c | 16 +++++++++++-----
+>  1 file changed, 11 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/test/test-main.c b/test/test-main.c
+> index 3fa6f6e32ec..cda1a186390 100644
+> --- a/test/test-main.c
+> +++ b/test/test-main.c
+> @@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *uts, s=
+truct unit_test *test,
+>  static int ut_run_test_live_flat(struct unit_test_state *uts,
+>  				 struct unit_test *test)
+>  {
+> -	int runs;
+> +	int runs, ret;
+> =20
+>  	if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SANDBOX))
+>  		return skip_test(uts);
+> @@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_test_st=
+ate *uts,
+>  	if (CONFIG_IS_ENABLED(OF_LIVE)) {
+>  		if (!(test->flags & UT_TESTF_FLAT_TREE)) {
+>  			uts->of_live =3D true;
+> -			ut_assertok(ut_run_test(uts, test, test->name));
+> -			runs++;
+> +			ret =3D ut_run_test(uts, test, test->name);
+> +			if (ret !=3D -EAGAIN) {
+> +				ut_assertok(ret);
+> +				runs++;
+> +			}
+>  		}
+>  	}
+> =20
+> @@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_test_st=
+ate *uts,
+>  	    (!runs || ut_test_run_on_flattree(test)) &&
+>  	    !(gd->flags & GD_FLG_FDT_CHANGED)) {
+>  		uts->of_live =3D false;
+> -		ut_assertok(ut_run_test(uts, test, test->name));
+> -		runs++;
+> +		ret =3D ut_run_test(uts, test, test->name);
+> +		if (ret !=3D -EAGAIN) {
+> +			ut_assertok(ret);
+> +			runs++;
+> +		}
+>  	}
+> =20
+>  	return 0;
+
+How did you trigger this case exactly?
 
 --=20
 Tom
 
---9lkvbEA0vC5metl8
+--naa5xj4m8zYzXe6X
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5tIoACgkQFHw5/5Y0
-tyzKZgwAj7dCelVQh2+m+GA6ro0DchCn2jJGRfSCf82s46uGUfr16mhS80KaBo35
-8j2V+qH5mZW5BsjrArDK7eDSoaxWOi4ZidJcJLiYO/TJeVs4+H2dPYVJuq2fXfpI
-4hv+uLsd1y3TLhCBdkv1Cd2zo3/gUiFo8qne7BRbbNCMSNNAMb4yM61rBhSKrO/z
-znUVivvPlPF9yeEG52CrD3Y3qhYZiuSQph7J5SnzHqevvlxEY7Nfk+NArSzlfwMe
-fjH7RLbot9vCuFDOCjZnhRLrpOGN2/NNmOyqhcxqB9PUZSczBVJqquIwhWM58lnV
-mAJsILvYxg/demDdiaDBwpvtKIzrnLYWHjjo1At9s0ehaN6oGNLDGzhClj2KcCCL
-fdbX9r4XClasFArhu9k3JVi0IajLPSTxpTY88CnwgE2NZfGCcStRFDYDMRGqHV06
-ECL370JSgcdPyUzWSmwBzqE3j389ZAfmV2M1Pz4ZsZCky2WfrmwYRQoQyVqIbfv0
-Q9r6+HA9
-=bKM8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5tYQACgkQFHw5/5Y0
+tyzuJQv/R//5MBBfEv66nVTyu+/kS9w6sDh0Top180Ne8wmdG/tMBfSYl1YuANz/
+YF0q6i5fDf7CFLLbGfHmXjLitO72Fyp1A1KYcTGqCrJOjvMWYAsr7HOnNXobjS+t
+ZHzgE7B47Jxk1JAIGnwZP9dDQpwRmpOlYQOd6cO/eaFbXNhxiOoRRSBh7mZmk93F
+qaacpw7mBbUwIAhAXAeRuWRmTRciSYvJFgResY+SQlKID98j6WYdZZa0tHQSQtcH
+O/N5KdJNaCTfgw/3KFPFKVpq/NDUXwN4J7EbNge2U8k0i8HhPSDM1eTbIkx4mnVw
+0hMBUrtsrWgqMsSu4Gs3VhWOOny8rKPqKHn6xbvYhXKOnvkBRSLgpmCT6mObbh7u
+pi4GV2C7yXpr7vniVNBMajwPU2ORsu3Y4ZDpjXXcGjXOpOKLbQcFSdW3Z3wG43WY
+XF0/LY1ysGiJ1RvPIo32abkDKGCk7Qw3FyuGVIu6ArP6xuqj+xe6RheDv9WOIiy+
+qnZNR1wo
+=VQWi
 -----END PGP SIGNATURE-----
 
---9lkvbEA0vC5metl8--
+--naa5xj4m8zYzXe6X--
