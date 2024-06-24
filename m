@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D468AC2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3568CC30653
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:48:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A29718854E;
-	Mon, 24 Jun 2024 23:46:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BEDA88576;
+	Mon, 24 Jun 2024 23:46:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h9rBp0hj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aiwHBggv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 870AB883FA; Mon, 24 Jun 2024 23:46:47 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id E743D88119; Mon, 24 Jun 2024 23:46:48 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C2F4883DE
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:46:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00F808856B
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-57d1679ee83so5041566a12.2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:46:45 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57d07673185so4515053a12.1
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:46:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719265605; x=1719870405; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719265606; x=1719870406; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=AIU53hSikLVwOMMuoG7NRsRB4FSSbFj6q5GKvhgjA0s=;
- b=h9rBp0hjYCiMHvn7GoVcgGSy9ObPwYZWTVq2BVWU59bT0dg6r8pfF+g9T0IFJZta2A
- uqZg3hh5PAZ/z7f4gvvCkbJ1sXpGgMN0bwFYN3xtIUCuYVWFCI28u1MeEmqR4SIAZsq8
- 9VByINH7baXLI6GON0PcW3EPa+/YTIbquERPx8h7d3zxgN55+zSrITEY1t3bxUKJF65J
- TajDSUjkTv5WaPzy6wQKCVAWVGWVdHlMln30U+2J+1tvUjFpOoGS6HEyhXW8H8VgK/S9
- S4q4sFIiwN7g9wFWo9XiuRWD8J2g0jQ2/J6SxuluJUUArMwp+0vV9aF7CqQ9C+msmyvm
- 0ACQ==
+ :reply-to; bh=dS4FLeyjqAXWjQ9DvKgAMPqYWa0no/rNxLNm3N6TAYY=;
+ b=aiwHBggvhYORCXBaOYuElyUhU/AOaSHqxq8fnGiIjyC7l0HZSJtZG5IufBNLoL4Bvs
+ oEbItox1LsGA75sur57IvKC+bpY46t9R1YWkK8JFsZauMztuNOF+9SEscPfSxhBC2c0J
+ D4WMcNAgWKfhxa+VqwtgkIBlvN1uBk6MAtOOiFn/q9thlxRlrjEjwG5uP5KLYKaAlbd/
+ Tau6lUFbCpFliNGuMbAOUgUetkfta1tKeDXHFSX1MLDKAtHJuGt+eCYEwaMKyGIFY8lx
+ ZgIAkvd48FvER4rfBpHK5YxjchKgjzZVb1LBNFMRjnonrsY1+amS+avF20FYWTanzLfw
+ gr/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719265605; x=1719870405;
+ d=1e100.net; s=20230601; t=1719265606; x=1719870406;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AIU53hSikLVwOMMuoG7NRsRB4FSSbFj6q5GKvhgjA0s=;
- b=d8zRRv/VextMpq4JUsxFquvL4YPHLhJl5Ja84VZRolAOG9HbNwabdCO6/k9daqSM+W
- tRlRJ6cQfdSkSDgfK3d9YIF1AmDJ6kxm+y1fbN0ZCB9ZcYcU/AR926/Y4qK30aMzg9WA
- 9QUAUVwSWaOMUfGc/7b3cZYWpVIavZtwiozUa6AE9aR4mk0xe03bYZAV9kinvR5gCTHO
- adwYZCKxfISr6g6Zkawvf5Eg50kfFU2/lgY81OYF3q2S5bnAfgfcLUGWMmcTP63sUJ38
- XGb/bUcMGJHUIZUuZVKW+0dAmad1uEOtUXRAwyAMRiXN+V0HnM79d0Dvjy52QvjCGZBH
- NP1w==
+ bh=dS4FLeyjqAXWjQ9DvKgAMPqYWa0no/rNxLNm3N6TAYY=;
+ b=VVh5k0pYrdfD8gEOs1QCoSNkxraicvcYVJhy2GvUn3g0B+97n60F6dDDTbN4HHpKYZ
+ fv2aNLeSypQvCZ5pUzmGG80I5DCgiZ9aRfW57j5HOzg4QTDl12s1R57jSNHSwHfpcOYH
+ gJaRZLbC7I3/psz2HMm1fP86cLRECRjY6nFhfCOwlIAxQ23KNz6Gll9NsCYwZagfkCkJ
+ lHuuNsgWhFsQ/cZMRJZGHwd+7TMCM2iCc5ZCIvRuLcLpJRPP43sSohUF8dhkdpY/np4U
+ TfL7Als2HdUSyK9koZzTcwWjZmZ9M305CcFAa5f0AwydRwZPvAsLLmjeX0eXsmURZk5R
+ vSGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIJTZw+KPvQgsVoUh64ss5Wyb3NzLkjCKmfr/VsFDpOaB1n8cKljzpbQCmuKbLwMDTXE4r0A4TZtSK568Q1Q0a88QDTw==
-X-Gm-Message-State: AOJu0Yxekh8nI37jgNsjKJLkLvm+PPVf/quZqdF24RK5Z8/z727AvbiE
- r5zeKSEJFn/VIsC6c83WC8Si0oJSuNu70B+vjjkr7DFhYDjWWrQ+
-X-Google-Smtp-Source: AGHT+IHqv9oH+a9vkvc+cDxlUsrY7ns3Qi/eaffm/B7Ey5+S3GMOg50Y9EslZswbeDeXmh53srOnxw==
-X-Received: by 2002:a50:d50c:0:b0:578:676e:324 with SMTP id
- 4fb4d7f45d1cf-57d45791fc4mr4007615a12.17.1719265604953; 
- Mon, 24 Jun 2024 14:46:44 -0700 (PDT)
+ AJvYcCVLeXrbBrR/tt7weJGq3YoQ1Xz8gzJXmvjx9PTPZTvxSvPvTqp629ODxry8Y3BnN+QXrpvCdvtGhr0KFGNfTrxe6z/iBQ==
+X-Gm-Message-State: AOJu0YyWhCVcYAT59iY+hZOcQCyEkKjxgv4iKuUFQQAqO61BD6PwTA4y
+ 2fvMJqacEZ/US3a2vUwpV4CZhbBLpH5GE7g856MvtDSnaZmft81M
+X-Google-Smtp-Source: AGHT+IG0dpKD6R99TqAIUIWQJKUx1EhDaaTpWkG8faImZqNsgz2LRPx9Pg19qTRRY5i4GU67yxPaXg==
+X-Received: by 2002:a50:cd93:0:b0:57a:2fe7:6699 with SMTP id
+ 4fb4d7f45d1cf-57d4a281750mr4432462a12.14.1719265606327; 
+ Mon, 24 Jun 2024 14:46:46 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d303d7b1bsm5100588a12.11.2024.06.24.14.46.43
+ 4fb4d7f45d1cf-57d303d7b1bsm5100588a12.11.2024.06.24.14.46.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:46:44 -0700 (PDT)
+ Mon, 24 Jun 2024 14:46:46 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -81,9 +81,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>,
  Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 8/9] ubi: implement support for LED activity
-Date: Mon, 24 Jun 2024 23:46:18 +0200
-Message-ID: <20240624214626.24336-9-ansuelsmth@gmail.com>
+Subject: [PATCH 9/9] doc: introduce led.rst documentation
+Date: Mon, 24 Jun 2024 23:46:19 +0200
+Message-ID: <20240624214626.24336-10-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240624214626.24336-1-ansuelsmth@gmail.com>
 References: <20240624214626.24336-1-ansuelsmth@gmail.com>
@@ -105,47 +105,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement support for LED activity. If the feature is enabled,
-make the defined ACTIVITY LED to signal ubi write operation.
+Introduce simple led.rst documentation to document all the additional
+Kconfig and the current limitation of LED_BLINK and GPIO software blink.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- cmd/ubi.c | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ doc/api/index.rst |  1 +
+ doc/api/led.rst   | 10 ++++++++++
+ include/led.h     | 38 ++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
+ create mode 100644 doc/api/led.rst
 
-diff --git a/cmd/ubi.c b/cmd/ubi.c
-index 8c1b5df0572..984be3da4af 100644
---- a/cmd/ubi.c
-+++ b/cmd/ubi.c
-@@ -14,6 +14,7 @@
- #include <command.h>
- #include <env.h>
- #include <exports.h>
-+#include <led.h>
- #include <malloc.h>
- #include <memalign.h>
- #include <mtd.h>
-@@ -416,7 +417,19 @@ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
+diff --git a/doc/api/index.rst b/doc/api/index.rst
+index 51b2013af36..6f11b94eac3 100644
+--- a/doc/api/index.rst
++++ b/doc/api/index.rst
+@@ -13,6 +13,7 @@ U-Boot API documentation
+    event
+    getopt
+    interrupt
++   led
+    linker_lists
+    lmb
+    logging
+diff --git a/doc/api/led.rst b/doc/api/led.rst
+new file mode 100644
+index 00000000000..e52e350d1bb
+--- /dev/null
++++ b/doc/api/led.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++LED
++===
++
++.. kernel-doc:: include/led.h
++   :doc: Overview
++
++.. kernel-doc:: include/led.h
++   :internal:
+\ No newline at end of file
+diff --git a/include/led.h b/include/led.h
+index 409397e1df9..4dac54338e4 100644
+--- a/include/led.h
++++ b/include/led.h
+@@ -7,6 +7,44 @@
+ #ifndef __LED_H
+ #define __LED_H
  
- int ubi_volume_write(char *volume, void *buf, size_t size)
- {
--	return ubi_volume_begin_write(volume, buf, size, size);
-+	int ret;
++/**
++ * DOC: Overview
++ *
++ * Generic LED API provided when a supported compatible is defined in DeviceTree.
++ *
++ * To enable support for LEDs, enable the `CONFIG_LED` Kconfig option.
++ *
++ * The most common implementation is for GPIO-connected LEDs. If using GPIO-connected LEDs,
++ * enable the `LED_GPIO` Kconfig option.
++ *
++ * `LED_BLINK` support requires LED driver support and is therefore optional. If LED blink
++ * functionality is needed, enable the `LED_BLINK` Kconfig option.
++ *
++ * GPIO-connected LEDs can simulate blinking via software using the Cyclic API. To utilize this,
++ * enable `CONFIG_LED_GPIO_SW_BLINK`. This will also select `CONFIG_LED_BLINK` and `CONFIG_CYCLIC`.
++ *
++ * Boot and Activity LEDs are also supported. These LEDs can signal various system operations
++ * during runtime, such as boot initialization, file transfers, and flash write/erase operations.
++ *
++ * To enable a Boot LED, enable `CONFIG_LED_BOOT_ENABLE` and define `CONFIG_LED_BOOT_LABEL`. This
++ * will enable the specified LED to blink and turn ON when the bootloader initializes correctly.
++ *
++ * To enable an Activity LED, enable `CONFIG_LED_ACTIVITY_ENABLE` and define
++ * `CONFIG_LED_ACTIVITY_LABEL`.
++ * This will enable the specified LED to blink and turn ON during file transfers or flash
++ * write/erase operations.
++ *
++ * Both Boot and Activity LEDs provide a simple API to turn the LED ON or OFF:
++ * `led_boot_on()`, `led_boot_off()`, `led_activity_on()`, and `led_activity_off()`.
++ *
++ * Both configurations can optionally define a `_PERIOD` option if `CONFIG_LED_BLINK` is enabled
++ * for LED blink operations, which is usually used by the Activity LED.
++ *
++ * When `CONFIG_LED_BLINK` is enabled, additional APIs are exposed: `led_boot_blink()` and
++ * `led_activity_blink()`. Note that if `CONFIG_LED_BLINK` is disabled, these APIs will behave
++ * like the `led_boot_on()` and `led_activity_on()` APIs, respectively.
++ */
 +
-+#ifdef CONFIG_LED_ACTIVITY_ENABLE
-+	led_activity_blink();
-+#endif
-+
-+	ret = ubi_volume_begin_write(volume, buf, size, size);
-+
-+#ifdef CONFIG_LED_ACTIVITY_ENABLE
-+	led_activity_off();
-+#endif
-+
-+	return ret;
- }
+ struct udevice;
  
- int ubi_volume_read(char *volume, char *buf, size_t size)
+ enum led_state_t {
 -- 
 2.45.1
 
