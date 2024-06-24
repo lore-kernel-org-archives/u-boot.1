@@ -4,56 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D04AC2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E9B7C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:07:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 080E7885BF;
+	by phobos.denx.de (Postfix) with ESMTP id 6523D885CC;
 	Mon, 24 Jun 2024 23:05:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=prodrive-technologies.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=odyssee-systemes.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 203D5883B1; Mon, 24 Jun 2024 21:28:29 +0200 (CEST)
-Received: from EXCEDGE01.prodrive.nl (mail.prodrive-technologies.com
- [212.61.153.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 155A6883E7; Mon, 24 Jun 2024 21:49:41 +0200 (CEST)
+Received: from 3.mo575.mail-out.ovh.net (3.mo575.mail-out.ovh.net
+ [46.105.58.60])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 382A3883D2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 21:28:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=prodrive-technologies.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1E5F2882CE
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 21:49:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=odyssee-systemes.fr
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=paul.geurts@prodrive-technologies.com
-Received: from EXCOP01.bk.prodrive.nl (10.1.0.22) by webmail.prodrive.nl
- (192.168.102.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Mon, 24 Jun
- 2024 21:28:05 +0200
-Received: from EXCOP01.bk.prodrive.nl (10.1.0.22) by EXCOP01.bk.prodrive.nl
- (10.1.0.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 24 Jun
- 2024 21:28:05 +0200
-Received: from lnxdevrm02.bk.prodrive.nl (10.1.1.121) by
- EXCOP01.bk.prodrive.nl (10.1.0.22) with Microsoft SMTP Server id 15.2.1544.4
- via Frontend Transport; Mon, 24 Jun 2024 21:28:05 +0200
-Received: from paugeu by lnxdevrm02.bk.prodrive.nl with local (Exim 4.94.2)
- (envelope-from <paul.geurts@prodrive-technologies.com>)
- id 1sLpMD-006Ehd-2q; Mon, 24 Jun 2024 21:28:05 +0200
-From: Paul Geurts <paul.geurts@prodrive-technologies.com>
-To: <sbabic@denx.de>, <festevam@gmail.com>, <uboot-imx@nxp.com>,
- <trini@konsulko.com>, <peng.fan@nxp.com>, <ye.li@nxp.com>,
- <eduard@lionizers.com>, <marex@denx.de>, <fedor.ross@ifm.com>,
- <rasmus.villemoes@prevas.dk>, <xypron.glpk@gmx.de>, <elena.popa@nxp.com>,
- <tharvey@gateworks.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>
-CC: <martijn.de.gouw@prodrive-technologies.com>, Paul Geurts
- <paul.geurts@prodrive-technologies.com>
-Subject: [PATCH v2 1/2] imx: hab: rename imx_sec_config_fuse_t to imx_fuse_t
-Date: Mon, 24 Jun 2024 21:28:02 +0200
-Message-ID: <20240624192803.1484398-2-paul.geurts@prodrive-technologies.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240624192803.1484398-1-paul.geurts@prodrive-technologies.com>
-References: <20240624192803.1484398-1-paul.geurts@prodrive-technologies.com>
+ smtp.mailfrom=marjolaine.amate@odyssee-systemes.fr
+Received: from director3.ghost.mail-out.ovh.net (unknown [10.109.176.32])
+ by mo575.mail-out.ovh.net (Postfix) with ESMTP id 4W7JSy4FJnz1PH0
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 19:49:38 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-rgzl9 (unknown [10.110.96.170])
+ by director3.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 2F37D1FE61;
+ Mon, 24 Jun 2024 19:49:38 +0000 (UTC)
+Received: from odyssee-systemes.fr ([37.59.142.95])
+ by ghost-submission-6684bf9d7b-rgzl9 with ESMTPSA
+ id eh6vBdLNeWZZcAEAepRnDQ
+ (envelope-from <marjolaine.amate@odyssee-systemes.fr>);
+ Mon, 24 Jun 2024 19:49:38 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-95G0016437eb0c-4c4e-4773-b8fa-4e379684c7cc,
+ F6C0AEFBAD486127301FF0EA271F04B174220FCD)
+ smtp.auth=marjolaine.amate@odyssee-systemes.fr
+X-OVh-ClientIp: 194.146.15.227
+From: Marjolaine Amate <marjolaine.amate@odyssee-systemes.fr>
+To: u-boot@lists.denx.de
+Cc: Marjolaine Amate <marjolaine.amate@odyssee-systemes.fr>
+Subject: [PATCH] pci_ids: fix i225 unprogrammed value
+Date: Mon, 24 Jun 2024 19:49:07 +0000
+Message-ID: <20240624194907.81341-1-marjolaine.amate@odyssee-systemes.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-Ovh-Tracer-Id: 14830916525938962929
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvledrfeeguddgudeggecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepofgrrhhjohhlrghinhgvucetmhgrthgvuceomhgrrhhjohhlrghinhgvrdgrmhgrthgvsehougihshhsvggvqdhshihsthgvmhgvshdrfhhrqeenucggtffrrghtthgvrhhnpeekjeeuteevhfdukeduvdeiffelfeffvdefffeggeffvdelgeejfedtjeeltdekffenucfkphepuddvjedrtddrtddruddpudelgedrudegiedrudehrddvvdejpdefjedrheelrddugedvrdelheenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepmhgrrhhjohhlrghinhgvrdgrmhgrthgvsehougihshhsvggvqdhshihsthgvmhgvshdrfhhrpdhnsggprhgtphhtthhopedupdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehjeehpdhmohguvgepshhmthhpohhuth
 X-Mailman-Approved-At: Mon, 24 Jun 2024 23:05:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,109 +69,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The imx_sec_config_fuse_t structure is not specific to the sec_config
-fuse, but can be used for all fuse words.
+This patch fixes the I225 hardware default value
+at 0x15FD meaning empty flash image
+or the NVM configuration loading failed
 
-Rename the structure to a more generic name to be reused for other
-fuses.
-
-Signed-off-by: Paul Geurts <paul.geurts@prodrive-technologies.com>
+Signed-off-by: Marjolaine Amate <marjolaine.amate@odyssee-systemes.fr>
 ---
- arch/arm/include/asm/mach-imx/hab.h | 4 ++--
- arch/arm/mach-imx/hab.c             | 4 ++--
- arch/arm/mach-imx/imx8m/soc.c       | 2 +-
- arch/arm/mach-imx/mx6/soc.c         | 2 +-
- arch/arm/mach-imx/mx7/soc.c         | 2 +-
- arch/arm/mach-imx/mx7ulp/soc.c      | 2 +-
- 6 files changed, 8 insertions(+), 8 deletions(-)
+ include/pci_ids.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/mach-imx/hab.h b/arch/arm/include/asm/mach-imx/hab.h
-index 2abf28ea45bc..52cd8aff87e1 100644
---- a/arch/arm/include/asm/mach-imx/hab.h
-+++ b/arch/arm/include/asm/mach-imx/hab.h
-@@ -132,13 +132,13 @@ enum hab_target {
- 	HAB_TGT_ANY		= 0x55,
- };
- 
--struct imx_sec_config_fuse_t {
-+struct imx_fuse_t {
- 	int bank;
- 	int word;
- };
- 
- #if defined(CONFIG_IMX_HAB)
--extern struct imx_sec_config_fuse_t const imx_sec_config_fuse;
-+extern struct imx_fuse_t const imx_sec_config_fuse;
- #endif
- 
- /*Function prototype description*/
-diff --git a/arch/arm/mach-imx/hab.c b/arch/arm/mach-imx/hab.c
-index 27e053ef701c..1de0b648efdb 100644
---- a/arch/arm/mach-imx/hab.c
-+++ b/arch/arm/mach-imx/hab.c
-@@ -871,8 +871,8 @@ static int validate_ivt(struct ivt *ivt_initial)
- 
- bool imx_hab_is_enabled(void)
- {
--	struct imx_sec_config_fuse_t *fuse =
--		(struct imx_sec_config_fuse_t *)&imx_sec_config_fuse;
-+	struct imx_fuse_t *fuse =
-+		(struct imx_fuse_t *)&imx_sec_config_fuse;
- 	uint32_t reg;
- 	int ret;
- 
-diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-index 0c49fb9cd488..89e77236f024 100644
---- a/arch/arm/mach-imx/imx8m/soc.c
-+++ b/arch/arm/mach-imx/imx8m/soc.c
-@@ -36,7 +36,7 @@
- DECLARE_GLOBAL_DATA_PTR;
- 
- #if defined(CONFIG_IMX_HAB)
--struct imx_sec_config_fuse_t const imx_sec_config_fuse = {
-+struct imx_fuse_t const imx_sec_config_fuse = {
- 	.bank = 1,
- 	.word = 3,
- };
-diff --git a/arch/arm/mach-imx/mx6/soc.c b/arch/arm/mach-imx/mx6/soc.c
-index c2875e727c94..703f2b3093dc 100644
---- a/arch/arm/mach-imx/mx6/soc.c
-+++ b/arch/arm/mach-imx/mx6/soc.c
-@@ -52,7 +52,7 @@ U_BOOT_DRVINFO(imx6_thermal) = {
- #endif
- 
- #if defined(CONFIG_IMX_HAB)
--struct imx_sec_config_fuse_t const imx_sec_config_fuse = {
-+struct imx_fuse_t const imx_sec_config_fuse = {
- 	.bank = 0,
- 	.word = 6,
- };
-diff --git a/arch/arm/mach-imx/mx7/soc.c b/arch/arm/mach-imx/mx7/soc.c
-index 689dbefe8ee0..f95c7845cf06 100644
---- a/arch/arm/mach-imx/mx7/soc.c
-+++ b/arch/arm/mach-imx/mx7/soc.c
-@@ -128,7 +128,7 @@ static void isolate_resource(void)
- #endif
- 
- #if defined(CONFIG_IMX_HAB)
--struct imx_sec_config_fuse_t const imx_sec_config_fuse = {
-+struct imx_fuse_t const imx_sec_config_fuse = {
- 	.bank = 1,
- 	.word = 3,
- };
-diff --git a/arch/arm/mach-imx/mx7ulp/soc.c b/arch/arm/mach-imx/mx7ulp/soc.c
-index 217b7c45867d..e0b17e1b4ff1 100644
---- a/arch/arm/mach-imx/mx7ulp/soc.c
-+++ b/arch/arm/mach-imx/mx7ulp/soc.c
-@@ -38,7 +38,7 @@
- static char *get_reset_cause(char *);
- 
- #if defined(CONFIG_IMX_HAB)
--struct imx_sec_config_fuse_t const imx_sec_config_fuse = {
-+struct imx_fuse_t const imx_sec_config_fuse = {
- 	.bank = 29,
- 	.word = 6,
- };
+diff --git a/include/pci_ids.h b/include/pci_ids.h
+index f1886c3a75..b2136d3e9d 100644
+--- a/include/pci_ids.h
++++ b/include/pci_ids.h
+@@ -2710,7 +2710,7 @@
+ #define PCI_DEVICE_ID_INTEL_I211_COPPER			0x1539
+ #define PCI_DEVICE_ID_INTEL_I210_COPPER_FLASHLESS	0x157b
+ #define PCI_DEVICE_ID_INTEL_I210_SERDES_FLASHLESS	0x157c
+-#define PCI_DEVICE_ID_INTEL_I225_UNPROGRAMMED		0x15dF
++#define PCI_DEVICE_ID_INTEL_I225_UNPROGRAMMED		0x15fd
+ #define PCI_DEVICE_ID_INTEL_I225_IT			0x0d9f
+ #define PCI_DEVICE_ID_INTEL_80960_RP	0x1960
+ #define PCI_DEVICE_ID_INTEL_82840_HB	0x1a21
 -- 
-2.30.2
+2.43.0
 
