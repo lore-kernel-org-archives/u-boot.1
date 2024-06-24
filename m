@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21656C2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD74C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:06:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2072588580;
-	Mon, 24 Jun 2024 23:04:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 943A888405;
+	Mon, 24 Jun 2024 23:04:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DLfU5cI8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kEGVKmqH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7E888859F; Mon, 24 Jun 2024 23:04:45 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id C18C6885A4; Mon, 24 Jun 2024 23:04:48 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C943D88405
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5976888590
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-421cd1e5f93so36771595e9.0
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:43 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-36279cf6414so3854007f8f.3
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719263083; x=1719867883; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719263085; x=1719867885; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=p9v9DjB0A3JjR41lueuEJ6VMkIeEOYx0CJAcYGaKU9c=;
- b=DLfU5cI8eMTie4P+KFwH6U5MgLpE3PHdRNzttlbCdTBq8WBukWSSf2fiIIJmoco1RU
- o0bjWBKOhSpv/Zq2sKz9hUoKgmiNs+Q5K92r3eCgyBGV8VhSEgw+bdqOrAn65HXAIFcn
- 9oUcSA1e09OFlmVO7viG6laYCZHq/9bmjrqbTnO1u4sRsbchBbPJZphrj8FcVQoiqP9n
- DafnR9+j3LM/OovKlTyQy2CyIZjWs+KItd6zUGq9y03ttErLeoF9UbuY1dQPoUtgPBHA
- uDV28I4hOU9Fw6Da8qABNvrC5jbTPsRK+Rwox2nMxJ4PoIb0OgexvBytsFr+tdZHQbPb
- 1oVQ==
+ :reply-to; bh=XNqKnoO1M7Vvxa76ER/5BqBkhfciKUzVHEdydKoIgrI=;
+ b=kEGVKmqH04Of3jw0W1dxQmIok4duNiTv1WVUT4SObGr0NwLHw7OQdPAhKMRC8/+7CO
+ UirpAS39Wz1dCn9GORBqJu7n7Vm7vnJTwSnxEYlCaXdr2hv1IQtq1C7AOLjWnh0F152k
+ bFHUf3m92VpXU/FsT1NnRgYKwV0I8JsQb9ue0ruWMakdQdk7L3Nov/GI7cBm1d6Vbra3
+ XjkubNpc6pvBBFyrzuAwsYvIuTAxfribBWZbHw9nEolOno8eP/CZrq2rMQM1880mmo7E
+ 4ro1vYiVaGc7/25AADdKEfjDtG5FoH4IFQ0hcwpVaRGfPJH3AqcQZEeHwEnmSRwYHlmO
+ q81Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719263083; x=1719867883;
+ d=1e100.net; s=20230601; t=1719263085; x=1719867885;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p9v9DjB0A3JjR41lueuEJ6VMkIeEOYx0CJAcYGaKU9c=;
- b=ft4AP3q0HBAGMCVdfCjq+lscyGFjNLMY13DVKGAE2CI8oZNxY/6TaAeuoFEuXZLaZK
- spUBi5IMt1iOqa4Vq3joHYBfathyPj5D4e43juJjGgW7WnDdaxt9IXuRd5HhE4o/Y90h
- J586mcC+JDx4eb+kRSh7gCeUz8fm17GvcKuO1jS5WIxF+mMs/9G3OoAzLFBivkJUVR+S
- h+JdHZh1lKMZ9szp4c2q01HxNuaG0qLUarci2NocLXBzv0NKK4zZseERmaxbnJu6Ws1X
- gpUBO0ccjyZ6DySXQJa3h8isHhxFeqfIF6t0AaNi2z6KG0vUoU9QsgVhp7IHSscrcd8I
- aKAA==
+ bh=XNqKnoO1M7Vvxa76ER/5BqBkhfciKUzVHEdydKoIgrI=;
+ b=J8jYuNzubIsAKc3xMPMAYiexUwyN/QsYURErzy08hTeEN6ZbYXDAKJ2QzfClkFeukN
+ R653BZclCnvCy5J0JNLVzVTFIKVje646IdQlPGs3uawLOIft+S9FBXVS9HFyN9j3aYVF
+ e/JfACuSwvi/kdSBCjBbBq25yPWZv6EGYk2/S1IWWHkPQVLs6p3txIhCG8BGuLJkc/Dl
+ CXPRAuASb3uWdg35M1Adu3ZGI1o6qusgqvsYOKOf5h4bp7bQANKub95eCRhMwyTK0WlZ
+ ZBfNLdpQNQgNCG6LLI+Es6CWxid6wEZ206rdFKqlgJlubvG7efjFCYbBBJCddKFTaWqb
+ fH4Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWArdMazOHIPK+9Zk74daSW0voVjuoLY/G7/b7wTEmxgGvRs93Vh44QSMJBl1Dje7sK+zs4SmpxsvN/2ijt9fzSijw1Yw==
-X-Gm-Message-State: AOJu0Yx1PhgsmZ8wuomgduQe/fivSZwG8+sa04hK5Jbq5IbZx/fLNxV3
- PPPnE49wLpFl6sPJqt0zI7RL/LrQZRIDjBIytN657PMjDu5+iul/
-X-Google-Smtp-Source: AGHT+IEdll3ZIQ4UlK4nyoJqHel8df4FI0sY9fsgaskL4AV57MvlzxnQpreDjmV0eHHt3ApD0mrIFQ==
-X-Received: by 2002:a05:600c:6b19:b0:424:918c:3f5b with SMTP id
- 5b1f17b1804b1-424918c6d91mr28685895e9.29.1719263083214; 
- Mon, 24 Jun 2024 14:04:43 -0700 (PDT)
+ AJvYcCUVNtLy3xpahbqdQPvN9xgPnMYjs7kSh9AaYledPnRM44NT1tHlEsi4XF3YQgYMx4+dD8w3vtUcRBCMiX4RLE4if3DtBg==
+X-Gm-Message-State: AOJu0YxVTIwNeaOKg63tfcna+wzgFZPebJCEycfpzALDe2boGxb5eLCy
+ /35i5lLMLIuRFvanfY6VzS97+EzBhY7cQ3KNbV8wgkV03wLqIK9t
+X-Google-Smtp-Source: AGHT+IFjQs6WtX2SWx45UU3FOmc7+43R9g3mb4/0jLcKmpHOI+9d6m2dYPmL4WcSZxmeoSyZIZL2iw==
+X-Received: by 2002:adf:f7d2:0:b0:366:ddc2:a14a with SMTP id
+ ffacd0b85a97d-366e94d6a97mr2914196f8f.40.1719263084735; 
+ Mon, 24 Jun 2024 14:04:44 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.41
+ ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:04:42 -0700 (PDT)
+ Mon, 24 Jun 2024 14:04:44 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,10 +87,9 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Alexey Romanov <avromanov@salutedevices.com>,
  Peter Robinson <pbrobinson@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v4 11/14] pinctrl: mediatek: mt7981: init device before
- relocation
-Date: Mon, 24 Jun 2024 23:03:37 +0200
-Message-ID: <20240624210418.19324-12-ansuelsmth@gmail.com>
+Subject: [PATCH v4 12/14] pci: mediatek: make pcie-phy optional for gen3
+Date: Mon, 24 Jun 2024 23:03:38 +0200
+Message-ID: <20240624210418.19324-13-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240624210418.19324-1-ansuelsmth@gmail.com>
 References: <20240624210418.19324-1-ansuelsmth@gmail.com>
@@ -112,25 +111,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream kernel linux define pinctrl for uart0, hence this pin group
-and pinctrl driver is needed before relocation. Add DM_FLAG_PRE_RELOC
-flag to init and mute mtk_serial error on early serial init.
+Set pcie-phy optional for PCIe gen3. MT7988 doesn't require it and
+making it mandatory prevent the driver to correctly probe.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/pinctrl/mediatek/pinctrl-mt7981.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/pci/pcie_mediatek_gen3.c | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mt7981.c b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-index 3fa198ed79c..4bc4abe6518 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-@@ -1050,4 +1050,5 @@ U_BOOT_DRIVER(mt7981_pinctrl) = {
- 	.ops = &mtk_pinctrl_ops,
- 	.probe = mtk_pinctrl_mt7981_probe,
- 	.priv_auto = sizeof(struct mtk_pinctrl_priv),
-+	.flags = DM_FLAG_PRE_RELOC,
- };
+diff --git a/drivers/pci/pcie_mediatek_gen3.c b/drivers/pci/pcie_mediatek_gen3.c
+index 673813b8b75..0149edae0bf 100644
+--- a/drivers/pci/pcie_mediatek_gen3.c
++++ b/drivers/pci/pcie_mediatek_gen3.c
+@@ -284,9 +284,8 @@ static int mtk_pcie_power_on(struct udevice *dev)
+ 
+ 	pcie->priv = dev;
+ 
+-	err = generic_phy_get_by_name(dev, "pcie-phy", &pcie->phy);
+-	if (err)
+-		return err;
++	/* pcie-phy is optional (mt7988 doesn't need it) */
++	generic_phy_get_by_name(dev, "pcie-phy", &pcie->phy);
+ 
+ 	/*
+ 	 * Upstream linux kernel devine these clock without clock-names
+@@ -308,13 +307,15 @@ static int mtk_pcie_power_on(struct udevice *dev)
+ 	if (err)
+ 		return err;
+ 
+-	err = generic_phy_init(&pcie->phy);
+-	if (err)
+-		return err;
++	if (pcie->phy.dev) {
++		err = generic_phy_init(&pcie->phy);
++		if (err)
++			return err;
+ 
+-	err = generic_phy_power_on(&pcie->phy);
+-	if (err)
+-		goto err_phy_on;
++		err = generic_phy_power_on(&pcie->phy);
++		if (err)
++			goto err_phy_on;
++	}
+ 
+ 	err = clk_enable(&pcie->pl_250m_ck);
+ 	if (err)
+@@ -348,7 +349,8 @@ err_clk_tl_26m:
+ err_clk_pl_250m:
+ 	clk_disable(&pcie->pl_250m_ck);
+ err_phy_on:
+-	generic_phy_exit(&pcie->phy);
++	if (pcie->phy.dev)
++		generic_phy_exit(&pcie->phy);
+ 
+ 	return err;
+ }
 -- 
 2.45.1
 
