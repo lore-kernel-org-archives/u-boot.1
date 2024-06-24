@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F4C4C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:54:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3303C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:56:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAB6E882B7;
-	Mon, 24 Jun 2024 14:54:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E3E2882B7;
+	Mon, 24 Jun 2024 14:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sNA8iVh6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yysZ9Gc0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15280882CE; Mon, 24 Jun 2024 14:54:44 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id E9CE4883B1; Mon, 24 Jun 2024 14:56:00 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9D2D88137
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:54:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E64288137
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:55:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-361785bfa71so3268904f8f.2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 05:54:41 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-424720e73e1so34993225e9.1
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 05:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719233681; x=1719838481; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719233758; x=1719838558; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=sfVTwJRIkkSlSXU/pYbEGbulhSIGVFmYiWR/rU+P/zg=;
- b=sNA8iVh6XyIPda1uod0HROSXHa3/3WoVUCslEUKTrEW8uCY4wiIwGFahO4RZtYeMka
- uN0nwGNdRsoZpu2aY0bQU8gr1ekIj8T8hSDiccukts13ggW5+4jxtlM5zzAk+oltVRWu
- 6JjAf8LBE4cCp1C0DBXBLr+ZX761bbQWTy//VDzafjxvUWPh/W19tAwA6u7jKKUnhEgJ
- RIXWdqte+3o1EJfo92w3uopKHdB/umwOJmi8WcSpL6dyWjQz3zjYrEOlTableUraKpn0
- w3s677bBedCA2EWbTPIg3BpOVT9UX3A/RvamxY14Y/hx7+6PDHUBwtyWpnkN/qgsIg9T
- Y0fA==
+ :reply-to; bh=NQFUJ0T5gUV8EnE+EizM2UPNOSwenUjO04Rq436gr2s=;
+ b=yysZ9Gc0hE4nwPhH3AyVl+iWfhifAbdHXE1wQ6liQSAoB4ITu7RxktW2Ubq8vRVD1P
+ NUprvOBrcFb60mIugGdzO55O02U+1Nre61TFGqeAkcV+VwEKyt4IzfHLf2qYXrWhOg8n
+ ncxrPdIPQRiJZ/B09FrQ9qhhxUWgTVmzs/8/UeBAITLNHR4T233hUhIyossakta8wpgG
+ pymdgxq8mE8bJM2ef2glLQIkLjq0R8BvKvBa2fOxIZipH1eBxfg/Bd81+cijnBCrsU+R
+ VPDPDh/TpP61kXj1syGmNOJimbKbb9/kf3gM9p87wwHpnI3HEyi8sD1khW2nrKqtKkQE
+ IFwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719233681; x=1719838481;
+ d=1e100.net; s=20230601; t=1719233758; x=1719838558;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=sfVTwJRIkkSlSXU/pYbEGbulhSIGVFmYiWR/rU+P/zg=;
- b=sqV2lW1CgSsPM0HTFLfCHnFce+y9IFO4bSUtsgBk0BbmdxScBaxNAQUh2++E/Kf/R9
- 2XlKtGG3VW7+ptaRMvCYAZo78xLy0wvK/riSluXNvVPmoxifZKzPvcnCs3TopHsL7AcE
- auBo4aTagi/XqVP4XtbcEY9rz4/a6GT6x61sz3SV7my4Umpz+yLXb6LWb17jjI9/uVPp
- K7zdU3AyTJ+6vr99IwCnfwOh+q8ElibQTRGMH73O17ScEXID0gwrWATT8Jifp4HzuhF9
- W6z4LX5I9T3PB9HempD3tQy5odIqWl0v8Lw8FbixFkPfwPznD5uhn3QgTNwH/+ZU/6kQ
- vvKg==
-X-Gm-Message-State: AOJu0YyXito5IjqUgGx3464k0N62eTmXNYmxzZgIHHWSfIlROw7SJBZP
- TyPKD85nLVS28Y7LZqEDjVxGpvXg8DluCOSbxX57C7jPT7iTB7t3shB765k5sLk=
-X-Google-Smtp-Source: AGHT+IGi64/cMsni0wgRRlOnSjuqfKWoIQFZ4h85XHVQPo6CexrIiSknEIRtBAzMllEZdgvUGUdePg==
-X-Received: by 2002:a5d:6483:0:b0:366:eedd:afc4 with SMTP id
- ffacd0b85a97d-366eeddb18emr2974237f8f.12.1719233680919; 
- Mon, 24 Jun 2024 05:54:40 -0700 (PDT)
+ bh=NQFUJ0T5gUV8EnE+EizM2UPNOSwenUjO04Rq436gr2s=;
+ b=DBl/bxkkabuaigm67XCfPftkrJm76yTaraS/o1Q1Hvri4+5MgcF7BoRvtkm8juYB2L
+ XJOIAyV0bPnfvDd/x8yTCwl06bk1CuzTpBjdR/AS6JrAQ3RiQ+ENSfnXLRqVZko+IwYr
+ KP2ZvWqbparsJURovy/WR5FXgpt9bfOEv6JJfLM+TDmJrHidC/uFWwpj7u1YTjyAPHLX
+ fxfi0W8qTKu+NKvP3tHB1B31s9WJTkG5SGJ+ZYkpt3t/E15Kp6BCgrL6oS0DEaTLkIn2
+ yuQVM1aTaAtVT0BK4yXaUk/VIxMI2kDKqDMYKrb2B2bD83qTP4kAkL80xjUIHnwLsXjW
+ gHvA==
+X-Gm-Message-State: AOJu0Yz79GRfd1wgykLjx6NxCQkoBYlLy3pU8xXhN4EH6u19Kk+Zl8fs
+ 5MhiP/3kp6Ur4Yii72TiX8sUOyAY3AMfzwDenGYh6LwBieXriLl/E9R9gnmxZcU=
+X-Google-Smtp-Source: AGHT+IHFV2G0VZs9w3QsJr/7hZHyVlXD6gxmZIjzOzd2RbzA7EDtb+CnvwK1Z8bhzhNZu1oVt55/jw==
+X-Received: by 2002:a05:600c:4348:b0:421:f441:e7e7 with SMTP id
+ 5b1f17b1804b1-4248cc33c88mr29769605e9.19.1719233757424; 
+ Mon, 24 Jun 2024 05:55:57 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:cf01:774b:55fd:ab74?
  ([2a01:e0a:982:cbb0:cf01:774b:55fd:ab74])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3666dc46d50sm9654460f8f.67.2024.06.24.05.54.40
+ 5b1f17b1804b1-424817a9981sm137880855e9.17.2024.06.24.05.55.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jun 2024 05:54:40 -0700 (PDT)
-Message-ID: <c5870b0c-483b-4b2e-bc62-174928f981aa@linaro.org>
-Date: Mon, 24 Jun 2024 14:54:39 +0200
+ Mon, 24 Jun 2024 05:55:57 -0700 (PDT)
+Message-ID: <5448973e-bde0-42fb-b331-57497bbeb80e@linaro.org>
+Date: Mon, 24 Jun 2024 14:55:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2] spmi: msm: demote to debug()
+Subject: Re: [PATCH v2] mach-snapdragon: move default environment to a file
 To: Caleb Connolly <caleb.connolly@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240624124716.2610961-1-caleb.connolly@linaro.org>
+References: <20240624123255.2590424-1-caleb.connolly@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -103,7 +102,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240624124716.2610961-1-caleb.connolly@linaro.org>
+In-Reply-To: <20240624123255.2590424-1-caleb.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -123,47 +122,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24/06/2024 14:46, Caleb Connolly wrote:
-> Most devices have buttons exposed via the PMIC, the button polling
-> therefore triggers a log spam if debug logging is enabled.
+On 24/06/2024 14:31, Caleb Connolly wrote:
+> Make use of CONFIG_DEFAULT_ENV_FILE and move the default qcom
+> environment to a file under board/qualcomm.
 > 
-> Demote these to debug() so that they aren't printed unless LOG_DEBUG is
-> defined explicitly for this file.
+> This is much cleaner and means we don't need to recompile on changing
+> the environment.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > Changes since v1:
-> - use debug() instead of just commenting out
-> - V1: https://lore.kernel.org/u-boot/20240607142229.50709-1-caleb.connolly@linaro.org
+> - Don't set bootfile
+> - V1: https://lore.kernel.org/u-boot/20240617085629.1744017-1-caleb.connolly@linaro.org
 > ---
->   drivers/spmi/spmi-msm.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   board/qualcomm/default.env | 11 +++++++++++
+>   configs/qcom_defconfig     |  2 ++
+>   include/configs/qcom.h     | 16 ----------------
+>   3 files changed, 13 insertions(+), 16 deletions(-)
+>   create mode 100644 board/qualcomm/default.env
 > 
-> diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-> index b0d6226041e5..a35cb0ba01e4 100644
-> --- a/drivers/spmi/spmi-msm.c
-> +++ b/drivers/spmi/spmi-msm.c
-> @@ -118,9 +118,9 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
->   		return -EPERM;
+> diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
+> new file mode 100644
+> index 000000000000..dbf6f4e72600
+> --- /dev/null
+> +++ b/board/qualcomm/default.env
+> @@ -0,0 +1,11 @@
+> +stdin=serial,button-kbd
+> +stdout=serial,vidconsole
+> +stderr=serial,vidconsole
+> +preboot=scsi scan; usb start
+> +fastboot=fastboot -l $fastboot_addr_r usb 0
+> +do_boot=bootefi bootmgr
+> +bootmenu_0=Boot first available device=run do_boot
+> +bootmenu_1=Enable fastboot mode=run fastboot
+> +bootmenu_2=Reset device=reset
+> +menucmd=bootmenu
+> +bootcmd=run do_boot
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 25fa8b0f7d2b..4ff280fc6e7d 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -46,8 +46,10 @@ CONFIG_CMD_LOG=y
+>   CONFIG_OF_LIVE=y
+>   CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+>   CONFIG_BUTTON_QCOM_PMIC=y
+>   CONFIG_BUTTON_REMAP_PHONE_KEYS=y
+> +CONFIG_USE_DEFAULT_ENV_FILE=y
+> +CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
+>   CONFIG_CLK=y
+>   CONFIG_CLK_STUB=y
+>   CONFIG_CLK_QCOM_APQ8016=y
+>   CONFIG_CLK_QCOM_APQ8096=y
+> diff --git a/include/configs/qcom.h b/include/configs/qcom.h
+> index c13a847f62f1..b7d38866c51d 100644
+> --- a/include/configs/qcom.h
+> +++ b/include/configs/qcom.h
+> @@ -10,21 +10,5 @@
+>   #define __CONFIGS_SNAPDRAGON_H
 >   
->   	channel = priv->channel_map[usid][pid] & SPMI_CHANNEL_MASK;
+>   #define CFG_SYS_BAUDRATE_TABLE	{ 115200, 230400, 460800, 921600, 3000000 }
 >   
-> -	dev_dbg(dev, "[%d:%d] %s: channel %d\n", usid, pid, __func__, channel);
-> +	debug("%s: [%d:%d] %s: channel %d\n", dev->name, usid, pid, __func__, channel);
->   
->   	switch (priv->arb_ver) {
->   	case V1:
->   		ch_offset = SPMI_CH_OFFSET(channel);
-> @@ -185,9 +185,9 @@ static int msm_spmi_read(struct udevice *dev, int usid, int pid, int off)
->   		return -EIO;
->   
->   	channel = priv->channel_map[usid][pid] & SPMI_CHANNEL_MASK;
->   
-> -	dev_dbg(dev, "[%d:%d] %s: channel %d\n", usid, pid, __func__, channel);
-> +	debug("%s: [%d:%d] %s: channel %d\n", dev->name, usid, pid, __func__, channel);
->   
->   	switch (priv->arb_ver) {
->   	case V1:
->   		ch_offset = SPMI_CH_OFFSET(channel);
+> -/* Load addressed are calculated during board_late_init(). See arm/mach-snapdragon/board.c */
+> -#define CFG_EXTRA_ENV_SETTINGS \
+> -	"stdin=serial,button-kbd\0"	\
+> -	"stdout=serial,vidconsole\0"	\
+> -	"stderr=serial,vidconsole\0" \
+> -	"bootfile=/extlinux/extlinux.conf\0" \
+> -	"preboot=scsi scan; usb start\0" \
+> -	"fastboot=fastboot -l $fastboot_addr_r usb 0\0" \
+> -	"do_boot=bootefi bootmgr\0" \
+> -	"bootmenu_0=Boot first available device=run do_boot\0" \
+> -	"bootmenu_1=Enable USB mass storage=ums 0 scsi 0,1,2,3,4,5\0" \
+> -	"bootmenu_2=Enable fastboot mode=run fastboot\0" \
+> -	"bootmenu_3=Reset device=reset\0" \
+> -	"menucmd=bootmenu\0" \
+> -	"bootcmd=run do_boot\0" /* first entry is default */
+> -
+>   #endif
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
