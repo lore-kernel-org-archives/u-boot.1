@@ -4,91 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3568CC30653
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:48:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F19AFC2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 22:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BEDA88576;
-	Mon, 24 Jun 2024 23:46:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DED9882B7;
+	Tue, 25 Jun 2024 00:22:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aiwHBggv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kY21GJ/M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E743D88119; Mon, 24 Jun 2024 23:46:48 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id D2D9B8836D; Tue, 25 Jun 2024 00:22:15 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00F808856B
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:46:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4A598824C
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 00:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57d07673185so4515053a12.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:46:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3d2472450d6so2593456b6e.3
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 15:22:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719265606; x=1719870406; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dS4FLeyjqAXWjQ9DvKgAMPqYWa0no/rNxLNm3N6TAYY=;
- b=aiwHBggvhYORCXBaOYuElyUhU/AOaSHqxq8fnGiIjyC7l0HZSJtZG5IufBNLoL4Bvs
- oEbItox1LsGA75sur57IvKC+bpY46t9R1YWkK8JFsZauMztuNOF+9SEscPfSxhBC2c0J
- D4WMcNAgWKfhxa+VqwtgkIBlvN1uBk6MAtOOiFn/q9thlxRlrjEjwG5uP5KLYKaAlbd/
- Tau6lUFbCpFliNGuMbAOUgUetkfta1tKeDXHFSX1MLDKAtHJuGt+eCYEwaMKyGIFY8lx
- ZgIAkvd48FvER4rfBpHK5YxjchKgjzZVb1LBNFMRjnonrsY1+amS+avF20FYWTanzLfw
- gr/w==
+ d=gmail.com; s=20230601; t=1719267732; x=1719872532; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+CTAbgHFmj7cZfcsIZaPKGe9XUB2CF2LNM9fMOso4Nk=;
+ b=kY21GJ/MqW5bN5sIeEtkvjp570BmbJ+0AuI0ozQEGNeV3DBrMP8guTu2fNm52roLd7
+ clbZTpXZ+ZiNpS1s681vOrW0eOVgbjMSZeZfOfvuvr6hLXwrPh99cPro5C+i2eDiya61
+ 2sBhIul4fB88qxQUe7x08nZL9LsXT5detC1/lDrsP4nxa9zeYzDhiK8iyXt9kJ3p8LG3
+ HBYCNJ7x7UPHRm74nP2TiEbfZGYFkq3at1TPiOdmeMYrnVp2Fp2LTpVXVRr5cx/tSlfk
+ TjIk+5ZsbALNx+ixqXhUUgGKhwTyHrSjFcdZxvSi3DTekltGFOLad7gbtClVfPRdr8jM
+ OZ3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719265606; x=1719870406;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dS4FLeyjqAXWjQ9DvKgAMPqYWa0no/rNxLNm3N6TAYY=;
- b=VVh5k0pYrdfD8gEOs1QCoSNkxraicvcYVJhy2GvUn3g0B+97n60F6dDDTbN4HHpKYZ
- fv2aNLeSypQvCZ5pUzmGG80I5DCgiZ9aRfW57j5HOzg4QTDl12s1R57jSNHSwHfpcOYH
- gJaRZLbC7I3/psz2HMm1fP86cLRECRjY6nFhfCOwlIAxQ23KNz6Gll9NsCYwZagfkCkJ
- lHuuNsgWhFsQ/cZMRJZGHwd+7TMCM2iCc5ZCIvRuLcLpJRPP43sSohUF8dhkdpY/np4U
- TfL7Als2HdUSyK9koZzTcwWjZmZ9M305CcFAa5f0AwydRwZPvAsLLmjeX0eXsmURZk5R
- vSGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVLeXrbBrR/tt7weJGq3YoQ1Xz8gzJXmvjx9PTPZTvxSvPvTqp629ODxry8Y3BnN+QXrpvCdvtGhr0KFGNfTrxe6z/iBQ==
-X-Gm-Message-State: AOJu0YyWhCVcYAT59iY+hZOcQCyEkKjxgv4iKuUFQQAqO61BD6PwTA4y
- 2fvMJqacEZ/US3a2vUwpV4CZhbBLpH5GE7g856MvtDSnaZmft81M
-X-Google-Smtp-Source: AGHT+IG0dpKD6R99TqAIUIWQJKUx1EhDaaTpWkG8faImZqNsgz2LRPx9Pg19qTRRY5i4GU67yxPaXg==
-X-Received: by 2002:a50:cd93:0:b0:57a:2fe7:6699 with SMTP id
- 4fb4d7f45d1cf-57d4a281750mr4432462a12.14.1719265606327; 
- Mon, 24 Jun 2024 14:46:46 -0700 (PDT)
-Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
- [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d303d7b1bsm5100588a12.11.2024.06.24.14.46.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:46:46 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Dmitry Dunaev <dunaev@tecon.ru>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Doug Zobel <douglas.zobel@climate.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 9/9] doc: introduce led.rst documentation
-Date: Mon, 24 Jun 2024 23:46:19 +0200
-Message-ID: <20240624214626.24336-10-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.45.1
-In-Reply-To: <20240624214626.24336-1-ansuelsmth@gmail.com>
-References: <20240624214626.24336-1-ansuelsmth@gmail.com>
+ d=1e100.net; s=20230601; t=1719267732; x=1719872532;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+CTAbgHFmj7cZfcsIZaPKGe9XUB2CF2LNM9fMOso4Nk=;
+ b=Lhox0kgnn638Jzg3vafWxpBbpnZ6NdghS3SdxJmGYezvQxMykmiMDovbnyPUky4vm0
+ s60cjIJEkcq02YC7lc3phiAKTQDayibuT2oRfM0ZqlazSTARG8oj+DU+N4K7CorT0XyF
+ ueOVbNgxOjFGo6iSO9D5kkNmbAH6+asw3uqZ/IgOAhF4a9kYvbagFXP7nNQpwYGgqpkr
+ dK7mV8255n8Mpz/3maaktJWah9UgER62mCBVuDGwfdsXiVwiHrDDiwQ/IdMaXAx0EDqU
+ CrSsvEzXNTE9D2dBHn3XYCMMMZAeyIQE6VHAUU0nKmQDJbsvyZxvjaSfWELXGpIpJesl
+ /vWA==
+X-Gm-Message-State: AOJu0YzIW+K20MSr4b38I8h26vEfwyl7j11hxTTN4nnLtwjaij6BzqQh
+ RunGPjDa5nr0fzco3x34IKcW/Wv3JusY2CAZoprCHlEMjUOx/hmgmoN5mo3NAKoKOw5Bc5oV2Ki
+ jRjwWSyi9xQLtkG0lSFIwoc0tMR18gqgheK0=
+X-Google-Smtp-Source: AGHT+IFNO5zWnZSoIPvbNSpA8xPG114eUScJDtv2yl30nLONi28EGFxTQcUfIsMS05/BGW07ZJFn8zsQVFDv1jse3qU=
+X-Received: by 2002:a05:6871:b07:b0:25c:c5da:a7a8 with SMTP id
+ 586e51a60fabf-25d06cc05c6mr5745736fac.33.1719267732109; Mon, 24 Jun 2024
+ 15:22:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240618214138.3212175-1-alexthreed@gmail.com>
+In-Reply-To: <20240618214138.3212175-1-alexthreed@gmail.com>
+From: Alex ThreeD <alexthreed@gmail.com>
+Date: Tue, 25 Jun 2024 01:22:01 +0300
+Message-ID: <CAF4oh-NEUG4rVqiUg_wFVaRF+_dFCXQNbrTPNA90Y2iGqksh2Q@mail.gmail.com>
+Subject: Re: [PATCH v2] fs: btrfs: fix out of bounds write
+To: u-boot@lists.denx.de
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Qu Wenruo <wqu@suse.com>, Tom Rini <trini@konsulko.com>,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,95 +90,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce simple led.rst documentation to document all the additional
-Kconfig and the current limitation of LED_BLINK and GPIO software blink.
+Hi all,
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- doc/api/index.rst |  1 +
- doc/api/led.rst   | 10 ++++++++++
- include/led.h     | 38 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 49 insertions(+)
- create mode 100644 doc/api/led.rst
+Is there something on my side needed to push this forward?
 
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index 51b2013af36..6f11b94eac3 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -13,6 +13,7 @@ U-Boot API documentation
-    event
-    getopt
-    interrupt
-+   led
-    linker_lists
-    lmb
-    logging
-diff --git a/doc/api/led.rst b/doc/api/led.rst
-new file mode 100644
-index 00000000000..e52e350d1bb
---- /dev/null
-+++ b/doc/api/led.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+LED
-+===
-+
-+.. kernel-doc:: include/led.h
-+   :doc: Overview
-+
-+.. kernel-doc:: include/led.h
-+   :internal:
-\ No newline at end of file
-diff --git a/include/led.h b/include/led.h
-index 409397e1df9..4dac54338e4 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -7,6 +7,44 @@
- #ifndef __LED_H
- #define __LED_H
- 
-+/**
-+ * DOC: Overview
-+ *
-+ * Generic LED API provided when a supported compatible is defined in DeviceTree.
-+ *
-+ * To enable support for LEDs, enable the `CONFIG_LED` Kconfig option.
-+ *
-+ * The most common implementation is for GPIO-connected LEDs. If using GPIO-connected LEDs,
-+ * enable the `LED_GPIO` Kconfig option.
-+ *
-+ * `LED_BLINK` support requires LED driver support and is therefore optional. If LED blink
-+ * functionality is needed, enable the `LED_BLINK` Kconfig option.
-+ *
-+ * GPIO-connected LEDs can simulate blinking via software using the Cyclic API. To utilize this,
-+ * enable `CONFIG_LED_GPIO_SW_BLINK`. This will also select `CONFIG_LED_BLINK` and `CONFIG_CYCLIC`.
-+ *
-+ * Boot and Activity LEDs are also supported. These LEDs can signal various system operations
-+ * during runtime, such as boot initialization, file transfers, and flash write/erase operations.
-+ *
-+ * To enable a Boot LED, enable `CONFIG_LED_BOOT_ENABLE` and define `CONFIG_LED_BOOT_LABEL`. This
-+ * will enable the specified LED to blink and turn ON when the bootloader initializes correctly.
-+ *
-+ * To enable an Activity LED, enable `CONFIG_LED_ACTIVITY_ENABLE` and define
-+ * `CONFIG_LED_ACTIVITY_LABEL`.
-+ * This will enable the specified LED to blink and turn ON during file transfers or flash
-+ * write/erase operations.
-+ *
-+ * Both Boot and Activity LEDs provide a simple API to turn the LED ON or OFF:
-+ * `led_boot_on()`, `led_boot_off()`, `led_activity_on()`, and `led_activity_off()`.
-+ *
-+ * Both configurations can optionally define a `_PERIOD` option if `CONFIG_LED_BLINK` is enabled
-+ * for LED blink operations, which is usually used by the Activity LED.
-+ *
-+ * When `CONFIG_LED_BLINK` is enabled, additional APIs are exposed: `led_boot_blink()` and
-+ * `led_activity_blink()`. Note that if `CONFIG_LED_BLINK` is disabled, these APIs will behave
-+ * like the `led_boot_on()` and `led_activity_on()` APIs, respectively.
-+ */
-+
- struct udevice;
- 
- enum led_state_t {
--- 
-2.45.1
+On Wed, Jun 19, 2024 at 12:41=E2=80=AFAM Alex Shumsky <alexthreed@gmail.com=
+> wrote:
 
+> Fix btrfs_read/read_and_truncate_page write out of bounds of destination
+> buffer. Old behavior break bootstd malloc'd buffers of exact file size.
+> Previously this OOB write have not been noticed because distroboot usuall=
+y
+> read files into huge static memory areas.
+>
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> Fixes: e342718 ("fs: btrfs: Implement btrfs_file_read()")
+> ---
+>
+> Changes in v2:
+> - fix error path handling
+> - add Fixes tag
+> - use min3
+>
+>  fs/btrfs/inode.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+> index 4691612eda..3998ffc2c8 100644
+> --- a/fs/btrfs/inode.c
+> +++ b/fs/btrfs/inode.c
+> @@ -640,7 +640,11 @@ static int read_and_truncate_page(struct btrfs_path
+> *path,
+>         extent_type =3D btrfs_file_extent_type(leaf, fi);
+>         if (extent_type =3D=3D BTRFS_FILE_EXTENT_INLINE) {
+>                 ret =3D btrfs_read_extent_inline(path, fi, buf);
+> -               memcpy(dest, buf + page_off, min(page_len, ret));
+> +               if (ret < 0) {
+> +                       free(buf);
+> +                       return ret;
+> +               }
+> +               memcpy(dest, buf + page_off, min3(page_len, ret, len));
+>                 free(buf);
+>                 return len;
+>         }
+> @@ -652,7 +656,7 @@ static int read_and_truncate_page(struct btrfs_path
+> *path,
+>                 free(buf);
+>                 return ret;
+>         }
+> -       memcpy(dest, buf + page_off, page_len);
+> +       memcpy(dest, buf + page_off, min(page_len, len));
+>         free(buf);
+>         return len;
+>  }
+> --
+> 2.34.1
+>
+>
