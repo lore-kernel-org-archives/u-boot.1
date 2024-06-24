@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4D0C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F331C2D0D1
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:52:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F2B8883B1;
+	by phobos.denx.de (Postfix) with ESMTP id AF0D6883CD;
 	Mon, 24 Jun 2024 14:52:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B7C9882B7; Mon, 24 Jun 2024 08:25:29 +0200 (CEST)
+ id 98A3C882B7; Mon, 24 Jun 2024 08:26:18 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF4AD8819D
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 08:25:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1EA98819D
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 08:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=jhumphreysti@gmail.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45O6PJDi082403;
- Mon, 24 Jun 2024 01:25:19 -0500
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45O6PJCA128817
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45O6Q8ua082751;
+ Mon, 24 Jun 2024 01:26:08 -0500
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45O6Q7Nq118822
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 24 Jun 2024 01:25:19 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 24 Jun 2024 01:26:08 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 24
- Jun 2024 01:25:19 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 01:26:07 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 24 Jun 2024 01:25:19 -0500
+ Frontend Transport; Mon, 24 Jun 2024 01:26:07 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45O6PJXb027110;
- Mon, 24 Jun 2024 01:25:19 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45O6Q7up028363;
+ Mon, 24 Jun 2024 01:26:07 -0500
 From: Jon Humphreys <jhumphreysti@gmail.com>
 To: Jerome Forissier <jerome.forissier@linaro.org>, <u-boot@lists.denx.de>
 CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Javier Tia
@@ -55,8 +55,8 @@ In-Reply-To: <86frt2vp2k.fsf@udb0321960.dhcp.ti.com>
 References: <cover.1718638104.git.jerome.forissier@linaro.org>
  <ba84782cebf8a151ae7bd5d9abc4b313fb4334e8.1718638104.git.jerome.forissier@linaro.org>
  <86frt2vp2k.fsf@udb0321960.dhcp.ti.com>
-Date: Mon, 24 Jun 2024 01:25:19 -0500
-Message-ID: <86cyo6vovk.fsf@udb0321960.dhcp.ti.com>
+Date: Mon, 24 Jun 2024 01:26:07 -0500
+Message-ID: <86a5javou8.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -77,29 +77,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Subject: [PATCH] net-lwip: fixes off-by-one array access error with wget
+Subject: [PATCH] net-lwip: Add message if not using http:// for wget
 
-When wget parses the url and extracts the host, it is off by one on the
-index to terminate the character array.
+U-Boot's wget only supports http://, so give the user a clue if they don't
+use it.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- net-lwip/wget.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ net-lwip/wget.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/net-lwip/wget.c b/net-lwip/wget.c
-index 069299bd469..63b19b99112 100644
+index 63b19b99112..6b9c953ef51 100644
 --- a/net-lwip/wget.c
 +++ b/net-lwip/wget.c
-@@ -51,7 +51,7 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
+@@ -35,8 +35,10 @@ static int parse_url(char *url, char *host, u16 *port, char **path)
+ 	long lport;
+ 
+ 	p = strstr(url, "http://");
+-	if (!p)
++	if (!p) {
++		log_err("only http:// is supported\n");
  		return -EINVAL;
++	}
  
- 	memcpy(host, p, pp - p);
--	host[pp - p + 1] = '\0';
-+	host[pp - p] = '\0';
+ 	p += strlen("http://");
  
- 	if (*pp == ':') {
- 		/* Parse port number */
 -- 
 2.34.1
-
