@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227C7C30658
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:26:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E10C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:26:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E579882DC;
-	Mon, 24 Jun 2024 23:26:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03605883BA;
+	Mon, 24 Jun 2024 23:26:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L/JxJ34s";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kwOUl9yC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45064866EB; Mon, 24 Jun 2024 23:26:31 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id AF156866EB; Mon, 24 Jun 2024 23:26:47 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FC3D866EB
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:26:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53C26883DE
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:26:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5c1d42d4470so1837432eaf.1
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:26:29 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-25cba5eea69so2326591fac.2
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:26:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719264388; x=1719869188; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3UApMtD08AIn61SdIBJ+kjf1zsC81C9iSU17kaNWLxs=;
- b=L/JxJ34sfdJphu5ht9jgRS8zfTnBFkwy89TPbezVur2I289wWanl1CDghTp+Ax8JeD
- IvvLRuCNOeIzaYozXE4DICOLolX+XZ1YGuMaSopfZOZbA1plb+cKUCrUaMKWFas2A464
- GHAV9WWiuT0k9Uxs0OUVAiiAZkubiQB+puq84=
+ d=konsulko.com; s=google; t=1719264404; x=1719869204; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=eVRso0Ja7n4RC7Yfp9drtGRrppRWfi2angdFmVPs1Qg=;
+ b=kwOUl9yCYenj7bZjUaOa3qa8cTPsNFM30vCKq0iK6pf+kUcyTvdEfflcGWVD7fi5JA
+ Vpc/QGVhK7GFhtKOpqBZzEXkn768+SDCmL90w0cIkwWEIs9q+Dq5hssKiCdp35vRm/6b
+ ppc4P9MHeNlaM6Se0wo4Fwxk3pHYdurTMvjFY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719264388; x=1719869188;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3UApMtD08AIn61SdIBJ+kjf1zsC81C9iSU17kaNWLxs=;
- b=rp698Snd4kpYFQgK7AdflNGTq8hoFmFChTHQ3qhoDJ+DopFAaVzcK07qRwyyE8R350
- qpyEJABMob8hU772V+9O5N+51fKtvNAkjQM2shT5ZdmQyU+MGhmO0a47TmRKrZehNIBS
- UTUlGROAJkIjDziYyX/phgn/4F+xlcsBppp4RaqJqveDcvRVlAKVOpn0HPVB3+bJoES8
- WxQ3nuPe9cfTrp4E/BJgKHF6MMlCY2LA1RA6iFegsFwkyPpLqDiKT2xi2RP+5H5zAaCb
- D7Kj/W6N2YK7nOTjWNG9SJwhz3FHVN1wkiqlsGFiGzsrL/XpaOoFIuq3KGDpkAwoPBpD
- Xj3w==
-X-Gm-Message-State: AOJu0YzpfZSBrB3dqaNnwpTZROqsVZjLE00sgWejlrVQel/pf8AyaQj0
- CNO7nk6FTrQXekRU9iKtI3x+H0OoWu4rGtUoiEbMoYcH7Ie1uddRMi+DeVqnEow=
-X-Google-Smtp-Source: AGHT+IHQfKZATxXiU8RENpydi1yz8vu6MTErevM8jNs9GS2JDwaNkjZ9+09zFNi6Iy6oe/6lfdE6cQ==
-X-Received: by 2002:a4a:3055:0:b0:5bb:3326:175a with SMTP id
- 006d021491bc7-5c1eebfe6bcmr5741960eaf.2.1719264387756; 
- Mon, 24 Jun 2024 14:26:27 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-197-45.totalplay.net.
+ d=1e100.net; s=20230601; t=1719264404; x=1719869204;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eVRso0Ja7n4RC7Yfp9drtGRrppRWfi2angdFmVPs1Qg=;
+ b=xRk8al6chxxyHtMHMnNCgmoHeFiX1d/if37pSDULNgNgfPlpPo4FqzaTDKBCU/Vxuh
+ RFtcKmEI6shcpBbG3dKg5GQ59mZijbqd0jGzoEGIx6FkA479tCx7mNW55C9JDcpUUpgU
+ 3w5i9FU+IjyUhIzRH/4J/FI1YSaBItTdRKIG005k4m+RLkf8odo9myT7qECWXHkpdTaF
+ s3vognXh0krbhyrQ3HB6YyyJqZ1/SQUQvPr31ZZydzvriBWyO4fdjoh65CKtq7oAVJf+
+ WWI3xwxYmqo8Tk/tNqZ7NR7Sy6jSmEdpYxHf7BFAqgdy4wtO0NgMAOPp+UGLGi8DNcsK
+ ITJg==
+X-Gm-Message-State: AOJu0YwLNPrzI4SxhvZmtIbRXKfWSBKir9hg7RX2gfvF5+M1vBnpf+g3
+ MJ9/c6rlb4KT4esLHY/1geRhLY8XOdYbCIS9QYx3cVq60xlWsGZXgI1rzglmKoc=
+X-Google-Smtp-Source: AGHT+IFbmgXnURzF9KSLN3gAD2bbp1aNF69ZNICDihmi0t8wB6s0FxMyLsolRi7chAuXacyuVyhf2A==
+X-Received: by 2002:a05:6870:4709:b0:254:ccac:134d with SMTP id
+ 586e51a60fabf-25d0163eab8mr6692428fac.2.1719264404001; 
+ Mon, 24 Jun 2024 14:26:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7009c5df65csm1332833a34.9.2024.06.24.14.26.27
+ 586e51a60fabf-25cd49881bcsm2100508fac.20.2024.06.24.14.26.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:26:27 -0700 (PDT)
+ Mon, 24 Jun 2024 14:26:43 -0700 (PDT)
+Date: Mon, 24 Jun 2024 15:26:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de, Andrew Davis <afd@ti.com>, 
- Dhruva Gole <d-gole@ti.com>
-In-Reply-To: <20240619-play-fdt-fixup-v1-1-18e2a728ca45@ti.com>
-References: <20240619-play-fdt-fixup-v1-1-18e2a728ca45@ti.com>
-Subject: Re: [PATCH] board: beagle: beagleplay: enable OF_SYSTEM_SETUP
-Message-Id: <171926438692.1912351.4241540655800115685.b4-ty@konsulko.com>
-Date: Mon, 24 Jun 2024 15:26:26 -0600
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20240624
+Message-ID: <20240624212641.GL38804@bill-the-cat>
+References: <20240624133553.104708-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JG04Frs6cALZF5tg"
+Content-Disposition: inline
+In-Reply-To: <20240624133553.104708-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,20 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Jun 2024 14:12:30 -0500, Bryan Brattlof wrote:
 
-> Unfortunately when enabling FDT fixups for the AM62x family of SoCs and
-> moving TF-A to the bottom of RAM we missed the BeaglePlay. This is
-> causing Linux's memory allocator to clobber TF-A and break its boot.
-> 
-> Enable OF_SYSTEM_SETUP to fixup the kernel's FDT to inform it of the
-> actual location of the firmware
-> 
-> [...]
+--JG04Frs6cALZF5tg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Mon, Jun 24, 2024 at 10:35:53AM -0300, Fabio Estevam wrote:
 
--- 
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/next, thanks.
+>=20
+> The following changes since commit 81e2b69880566a90e909a7e2c02dff0c39a8c1=
+e5:
+>=20
+>   Merge patch series "boot: fix crash in bootflow menu with EFI BOOTMGR s=
+upport + typos" (2024-06-20 11:41:43 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-next-20240624
+>=20
+> for you to fetch changes up to b7f677dc40429a8172c7ba5edcf3b426097e2881:
+>=20
+>   ARM: imx: Enable SPL DTO application support for i.MX8MP DHCOM PDK2 (20=
+24-06-24 09:24:16 -0300)
+>=20
+> u-boot-imx-next-20240624
+
+Applied to u-boot/next, thanks!
+
+--=20
 Tom
 
+--JG04Frs6cALZF5tg
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ55I8ACgkQFHw5/5Y0
+tywO5wv+Kw3yuCKTk8AXSeCjBkb+764liOwcSCMmC5eBsBu501wQi22bQPEtXHxr
+lmRBqiOfzxVe1lJNuDu7GySgIboHh+2C1cDIoRZt+Pzgb+NlFLAPhQtXhSs6nNXi
+EbB/Es9LudEjVNLPvDIihLHs4Ix/wqS6sGKG+h1RmaHqGuVwQDHYCUb028ljTSRl
+zLebdR8BUQlPifDMAX9Gz5O1ylooZKJ2Z3sNQkkN64xhaQsnKobM2ecNlNS6KxZY
+N7m+N9Tdddhk2CCVtWYYW902Sy56vvL3F4V0+U/hJqC58VH0UQG8gPGIM6nVHEj4
+dI1Xfn5Losi54PPhrMIRxCCO/0qwkS/a/e7Oi481H5+Zcj/s2CdYaluXvrT2icuR
+F9InM3mQuJ5AfYkPdqsbx8/r5mKMqdF5B4OPG7yEegTDanL0rs7ctphgNTXoR6Oz
+eK0BkdlTNxcHxXAzkoFlFo3kGMEFC/4tV2b5CQ/Csu743StrvAPPYfExof8nYl38
+joIwzpuR
+=cjbX
+-----END PGP SIGNATURE-----
+
+--JG04Frs6cALZF5tg--
