@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1C03C2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 18:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BEBEC2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 18:29:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 362D687572;
-	Mon, 24 Jun 2024 20:13:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CEA0D883CD;
+	Mon, 24 Jun 2024 20:29:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KDozcpfa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QD9wvUW9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3814087572; Mon, 24 Jun 2024 20:13:09 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 28A2F88387; Mon, 24 Jun 2024 20:29:37 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01428883CD
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 20:13:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D5F588119
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 20:29:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-700a8e595eeso1197521a34.3
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:13:06 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6f95be3d4c4so2009993a34.3
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 11:29:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719252786; x=1719857586; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719253774; x=1719858574; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IiPFwn36fRz/REUVMVaYdmIQuoy0dyqo1bLE6VL+Sx8=;
- b=KDozcpfaBmHa4jfm/hO3mBYMU6aEWu8N4X30fHsO/KR/iyQyqlO0HZQNqe6ap/XaRj
- y7Y234tU+84efnBaUdf47Li4F+wgAT4Av7obHiIfYb9sougq1aAcJ+o5pfu2cFMBDXaP
- +2C1JxRpYdfwjldW+dgFCQteh1ded3aVaNHFs=
+ bh=XEpJNSiKhnbKf18HLcqTDABeu83BeFMVHlmBqld9hfA=;
+ b=QD9wvUW9kwLHpwDeaJlLOUxpjHwwjhwVpIlxs0H83AujqtX9NjjwwoFSPQLHQIaHTI
+ tCH/paqZjTdmQVwNIzY3WM/GWXexfkc6NaZ8ftvSPoL2YH4B/1MqzdMwd0AT/4bNVNKH
+ VZkIwUR7KdwgJzufavYl0UdGaPMzFwiylxBmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719252786; x=1719857586;
+ d=1e100.net; s=20230601; t=1719253774; x=1719858574;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IiPFwn36fRz/REUVMVaYdmIQuoy0dyqo1bLE6VL+Sx8=;
- b=HVXTr9Sa8GWqiYTS5xBxNoPNbTL0MoPxntomu09ds+89PfbqiWERU77PPVSEVS/acf
- WMDNaYJbN5v3cE3zmHt2II4hEV7vy7e1bowtflQU6Okdk4g+6x8HqvDQQbMtZh994xB7
- LoI8ltLcPI1hnh8diyUVzAfyDRypfCx7L2yK8jlZTlJh6yO4EBwBTAKeohx+cps4DpE6
- Un0TqmgKDYIN2fR1EVXhzizsdwLWpo8GMIJGiaqCXLDGGNfVG5bF3HWJFrQNpAgYb8CC
- W4RzctPeGAJImtjuyUfiqhKd7lPrWFP/40kovAOYmyLY9YppYqNNaU7oYZnr1qfRhTM5
- NU8Q==
-X-Gm-Message-State: AOJu0Yz7FUkzBBZ2z1vv5m+4ysaySgCklwjkXy3U1pRBi47vSdDttvt2
- 4zVMMAvVXAOG8FnthjSkjz4c6xrCvCawF6R56yOvDmTkW9jYwdTDwkkuScbAl+k=
-X-Google-Smtp-Source: AGHT+IH0anXJC6K3RSIC2q6epC0NJI3T4ukIKYEU2ljxqG0exLYMYrRKIg3k8SLkuafcHmvKv1gRlQ==
-X-Received: by 2002:a05:6871:588f:b0:25c:9a02:cb61 with SMTP id
- 586e51a60fabf-25d06bc7e5fmr5807801fac.7.1719252785652; 
- Mon, 24 Jun 2024 11:13:05 -0700 (PDT)
+ bh=XEpJNSiKhnbKf18HLcqTDABeu83BeFMVHlmBqld9hfA=;
+ b=VVhiTrm+2mq5+jP6eqHd+nwBOvTNl2NNhDLq+O7f+8NUsrEuiYEUvd6dOozBOV4rLP
+ dQxEqjph+fCyMNAx/fnMO6LNWdg3+spe59cTpNaQfvdi+US9BZmiwWkGiaQqdiK+M1ZA
+ MKSD1OfdKcamnNOjVhPRqU4wKI0Qztnmjb9s2SEvV/JTUyFs2xr+4LgJO1aul0se8+WD
+ UuqYMURotQa8CkJUTmWNjqKEQCnsGFoYqBtkez46tPvX2Zeslye6e8WvKIkKISDb4Q72
+ NyLYzhUnIWwhqIlEWLFqhSTtg73f9UngHi/SOOT3eVQIlL5Kt3R5RCerCR16g+oqwO3F
+ 1K/g==
+X-Gm-Message-State: AOJu0YzCbwWRkm2hV4u7WpbNdT7pvOVXZhTFH16jQfNIPtrFqrEip3BG
+ h/+WUtqsRNjV7NHNHdUQIzYhmEKXy9jEvLrlBwjxE8Nf+AYcqtDPcYx9PwtlOkeo/nLLof86Hgx
+ k4gI=
+X-Google-Smtp-Source: AGHT+IFrpbi8fM0tlsck9jjTRCyzUSfeDUiRSydDITyCuxg0UDTzG1a6sV+pFV0hTidXMjG1eP+lyg==
+X-Received: by 2002:a9d:7348:0:b0:6fa:18e8:4446 with SMTP id
+ 46e09a7af769-700b11882afmr6136689a34.8.1719253773711; 
+ Mon, 24 Jun 2024 11:29:33 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25cd4941ce4sm1990659fac.12.2024.06.24.11.13.04
+ 46e09a7af769-7009c5f591esm1282690a34.27.2024.06.24.11.29.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 11:13:05 -0700 (PDT)
-Date: Mon, 24 Jun 2024 12:13:03 -0600
+ Mon, 24 Jun 2024 11:29:33 -0700 (PDT)
+Date: Mon, 24 Jun 2024 12:29:31 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 08/19] test: Introduce the concept of a role
-Message-ID: <20240624181303.GH38804@bill-the-cat>
-References: <20240623203213.1571666-1-sjg@chromium.org>
- <20240623203213.1571666-9-sjg@chromium.org>
+Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
+Message-ID: <20240624182931.GI38804@bill-the-cat>
+References: <20240623203033.1566505-1-sjg@chromium.org>
+ <20240623203033.1566505-14-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SlMNhPD1+6CYXl97"
+ protocol="application/pgp-signature"; boundary="/v+5Uh0lKWtWNJj3"
 Content-Disposition: inline
-In-Reply-To: <20240623203213.1571666-9-sjg@chromium.org>
+In-Reply-To: <20240623203033.1566505-14-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,123 +92,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---SlMNhPD1+6CYXl97
+--/v+5Uh0lKWtWNJj3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jun 23, 2024 at 02:32:02PM -0600, Simon Glass wrote:
+On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
 
-> In Labgrid there is the concept of a 'role', which is similar to the
-> U-Boot board ID in U-Boot's pytest subsystem.
->=20
-> The role indicates both the target and information about the U-Boot
-> build to use. It can also provide any amount of other configuration.
-> The information is obtained using the 'labgrid-client query' operation.
->=20
-> Make use of this in tests, so that only the role is required in gitlab
-> and other situations. The board type and other things can be queried
-> as needed.
->=20
-> Use a new 'u-boot-test-getrole' script to obtain the requested
-> information.
->=20
-> With this it is possible to run lab tests in gitlab with just a single
-> 'ROLE' variable for each board.
+> Some configuration is now in variables with a CFG_ prefix. Add these to
+> the .cfg file so that we can see everything in one place. Sort the
+> options so they are easier to find and compare.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >=20
-> (no changes since v1)
+> Changes in v2:
+> - Add new patch to update u-boot.cfg with CFG_... options
 >=20
->  test/py/conftest.py | 31 +++++++++++++++++++++++++++----
->  1 file changed, 27 insertions(+), 4 deletions(-)
+>  scripts/Makefile.autoconf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/test/py/conftest.py b/test/py/conftest.py
-> index 6547c6922c6..5de8d7b0e23 100644
-> --- a/test/py/conftest.py
-> +++ b/test/py/conftest.py
-> @@ -23,6 +23,7 @@ from pathlib import Path
->  import pytest
->  import re
->  from _pytest.runner import runtestprotocol
-> +import subprocess
->  import sys
-> =20
->  # Globals: The HTML log file, and the connection to the U-Boot console.
-> @@ -79,6 +80,7 @@ def pytest_addoption(parser):
->      parser.addoption('--gdbserver', default=3DNone,
->          help=3D'Run sandbox under gdbserver. The argument is the channel=
- '+
->          'over which gdbserver should communicate, e.g. localhost:1234')
-> +    parser.addoption('--role', help=3D'U-Boot board role (for Labgrid)')
->      parser.addoption('--no-prompt-wait', default=3DFalse, action=3D'stor=
-e_true',
->          help=3D"Assume that U-Boot is ready and don't wait for a prompt")
-> =20
-> @@ -130,12 +132,33 @@ def get_details(config):
->              str: Build directory
->              str: Source directory
->      """
-> -    board_type =3D config.getoption('board_type')
-> -    board_identity =3D config.getoption('board_identity')
-> +    role =3D config.getoption('role')
->      build_dir =3D config.getoption('build_dir')
-> +    if role:
-> +        board_identity =3D role
-> +        cmd =3D ['u-boot-test-getrole', role, '--configure']
-> +        env =3D os.environ.copy()
-> +        if build_dir:
-> +            env['U_BOOT_BUILD_DIR'] =3D build_dir
-> +        proc =3D subprocess.run(cmd, capture_output=3DTrue, encoding=3D'=
-utf-8',
-> +                              env=3Denv)
-> +        if proc.returncode:
-> +            raise ValueError(proc.stderr)
-> +        print('conftest: lab:', proc.stdout)
-> +        vals =3D {}
-> +        for line in proc.stdout.splitlines():
-> +            item, value =3D line.split(' ', maxsplit=3D1)
-> +            k =3D item.split(':')[-1]
-> +            vals[k] =3D value
-> +        print('conftest: lab info:', vals)
-> +        board_type, default_build_dir, source_dir =3D (vals['board'],
-> +            vals['build_dir'], vals['source_dir'])
-> +    else:
-> +        board_type =3D config.getoption('board_type')
-> +        board_identity =3D config.getoption('board_identity')
-> =20
-> -    source_dir =3D os.path.dirname(os.path.dirname(TEST_PY_DIR))
-> -    default_build_dir =3D source_dir + '/build-' + board_type
-> +        source_dir =3D os.path.dirname(os.path.dirname(TEST_PY_DIR))
-> +        default_build_dir =3D source_dir + '/build-' + board_type
->      if not build_dir:
->          build_dir =3D default_build_dir
+> diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+> index b42f9b525fe..65ff11ea508 100644
+> --- a/scripts/Makefile.autoconf
+> +++ b/scripts/Makefile.autoconf
+> @@ -71,7 +71,7 @@ quiet_cmd_autoconf =3D GEN     $@
+>  quiet_cmd_u_boot_cfg =3D CFG     $@
+>        cmd_u_boot_cfg =3D \
+>  	$(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.tmp && { \
+> -		grep 'define CONFIG_' $@.tmp | \
+> +		egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
+>  			sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_IF_ENABLED_INT(/d;/d=
+efine CONFIG_VAL(/d;' > $@; \
+>  		rm $@.tmp;						\
+>  	} || {								\
 
-I'm a little confused here. Why can't we construct "role" from
-board_type+board_identity and then we have the board
-conf.${board_type}_${board_identity} file set whatever needs setting to
-be "labgrid" ?
+I don't like this because whereas "CONFIG_" is enforced to be set only
+by Kconfig and so always all reliably set and found via a single header,
+CFG_ stuff is not.
 
 --=20
 Tom
 
---SlMNhPD1+6CYXl97
+--/v+5Uh0lKWtWNJj3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5ty8ACgkQFHw5/5Y0
-tyxCpAv/Wpg+aiWDnsXDaqm5O6Pyk9JzNLEJUxKJ7BW140jfiYwh8fWbuae4UwLL
-+dyu+kS2upHpwdO3kuLfPuDvlonpvgvYVXbSIneVZ7dUC0rX9bw71bfXP2cd3OnJ
-U1bZ+eSrLXwhpOSIIdn9iieJIUtdcJMBfoW9P81WI9+P5r+3rzXwTE5s+qVnUp4n
-7On5BCWypzAbkQac1LRInZzrchAVwyOTD+aZulz6+UjQgV9l3epdi8jSauchDNuy
-tb54Sq+PKOS6Ai4VrbWjZGFpm/t2gQiJDdQ6Aqx3Q3SEpNArvAfx3gJD95mMqwBc
-uXEXDY6S9WHxaTW0iXV6Tx/rY5ZjaJQggquNk76+rTe1aGPuWfNVMbmeQByYkhDJ
-DbMjv6F32j0d2RUFa1vgch0mSdg2OQG2rrgwL9MRweY4q/HtvVvGA8DAk+ANxsHS
-FJ754eSPGOU/FRruLAbn+3tYWfbt4UdCuHHP2PFXz4At2O2bEb2mGzMRKqdnWOda
-fjZHCueA
-=yf+n
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ5uwcACgkQFHw5/5Y0
+tyxdwgwAguq/JoEK4r/ZBjv7uXDoeMC9snuezThtiW7n7qHl0Wrgc+60kGanzA5/
+znl2HSEGFYAyLr3lONJDk2fAnUkIXM0GujsLQE0w8/bgjC/dW4T6bSE5hy+ehJf0
+K5UwB2dgk8Bp6bfgqJPVOAAY4rTfvteW9Uzz5SRh6u711klA1sRvYSTHLsMYup48
+xtS9Gq12w1VG76e2qyBEJV0B4NhmzY7vqRulK2KLRt3nBka3/F2+dXLTfPtZwS+P
+pX3cv5fltGXXiugjPwhLyx7apFO3tzNUpxAEJJIbYte4Ar8XLB92Hx3eEzughjjg
+SkauynVyaA3kVGtTCzsR+l27ylC7z2KoXzC3PVTtGLNLibLnQlKz39WcWjywnYGU
+pPzYWKav0vUR/SRfVeHags+Gc5DJzSrPT8NyvUxFrDp/qbGN5hN2s23n5o86dSNw
+fvmd7xN7ZnDOx+PfV0QOIPgzHj904BIArgiPc1H8BGt9nAom/53TDs/XGBoaDW76
+W+0GTRce
+=SxAG
 -----END PGP SIGNATURE-----
 
---SlMNhPD1+6CYXl97--
+--/v+5Uh0lKWtWNJj3--
