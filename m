@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46E0C2D0D1
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0311C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:04:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEE4088403;
-	Mon, 24 Jun 2024 23:04:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E153883E7;
+	Mon, 24 Jun 2024 23:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HdqE5/OH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J/LDtuDk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4568488387; Mon, 24 Jun 2024 23:04:31 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 5FB9A88387; Mon, 24 Jun 2024 23:04:33 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27F07883D2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3227A883C9
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:04:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-421757d217aso52890225e9.3
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:28 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4217dbeb4caso41194545e9.1
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:04:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719263067; x=1719867867; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719263069; x=1719867869; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=eFXbWzKKLkmGQpE+YbS152r2t08PRpPi4kBpt6cBr94=;
- b=HdqE5/OHQYFju8ZjV3kOa41otwqZUlj0wnuqVXGd5W6X/4M58Mcd/NJSrIdc/vRNp6
- 6rfyFaoQm0EBj8etELq/OvbtFpQRXfrPAoFZ83HmRPOtL92e/fc+iYKdzKqfj+GWKlMK
- Bv9C99Jzy/IXfQhXh98qEsuDbxKFoS5+pPzwOZ6w7PVLY0gKvWCox/Q07nL/miM9lk2f
- uaZtAW4SB42iHx61jLLXTPVbIySEGi6OnHo1BmUyNY3wzfwHBFNSBjxhH4b/g5vMJl14
- xXaYmddMHVhgInKExiycc9BaUObM1AqhsqiRvHoR+lDLOMNGGfgvjpMUFPFYoNPW97jJ
- qXBQ==
+ :reply-to; bh=KDWMK5M9ZXGk8iO6l3vofKPhNxDF4lRDTRFpqShUKi8=;
+ b=J/LDtuDkhjSQch4BE1WiFAp9HCqYR3exR9hlvlbZ4i40PaekPVSRKNw/ZrTOO9mqnh
+ lEe87vlhpAFBPPAxUV3gTFUymiEdrhQcOssZ9GF2hfYX1VseX5dPP/dssLLQ2YhjWup2
+ O2vgI0GZWXIumC28JtHrluHT2VkxI+DFFWHN6ytTtyJU2cTL4u+TpYtfl0OJ/6ZzCwiO
+ gzCXjy6VNxu/p6dwONIN6WbuNJcdCLm5k4nf7QBz6V/FcU9z/YgcXoAxFQWCWJZ4pDwS
+ SFTiv5vXw5obz5WDna/dWjJGcZBXb2aAe/MWU2oNxE3VuiubZEcev28t5zZQaAwSuCxf
+ /4jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719263067; x=1719867867;
+ d=1e100.net; s=20230601; t=1719263069; x=1719867869;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eFXbWzKKLkmGQpE+YbS152r2t08PRpPi4kBpt6cBr94=;
- b=FSyZjvH7FYvYdaKBT1WnZ4LZyq5i/vrz9DCCO95kvFFNXnVhTdAixR5O8vT0z829lm
- 06zm0HRiQmZAZ39UpO8KltoPJe4UQHo52m9yrZbH8TumpQzIpug4l2c62S+nMi993G+x
- fd3HX1NuwE9A1gai1VebwC3RUF89YtP6OpwYxVZn2lIYnjvspfI3Qi7RMqKkiAxS0m7R
- vmgqMT3/TRN7cn2Tg1RI1Jn1wTCglUpq84kqQ/iCbT4dlcJhfsqPNgVtHsgswc/Wqkzz
- eQu1o6XyNb2XHJojbHlaMhY+FTs7EPWytV5I2EtJ1EQFcoyJDVJG5ZobOoMKxbl3oF8L
- 7hIQ==
+ bh=KDWMK5M9ZXGk8iO6l3vofKPhNxDF4lRDTRFpqShUKi8=;
+ b=FfthZmjBiohjVms8JucQhmXCbeob+lg9nQ8LgmmJiBR7Um6dn0sIPkuMQu3Zto/RkQ
+ xYoWI+4sbebcaDxMPO697LecL6ZmSP+TeXA06Enlamiy5A2R25iJ/UPdTXVe31eqoBNZ
+ 1XnUPloToRQXfxkStlGFit+0Xh0KHJwvk8uHkawDpzaMudSu5ktYrXQ148x5De/GzfgW
+ Cqp62Sg4CcGfNvFhmmf+FCJMYh3nNxzgndUFY8HZbmmd37sGrzSQn9kne8zxzlHcfVkZ
+ 9ZxCxUig90McDFXOsZboWNp1gxqF47JCJV14l0q3j2B20IMYeMuEaklmDd36qMPpfcWP
+ zIrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwZ2nCiEg0V4iLyOHSwVJZSGklyrw+Z1jriQkEnin8fGoVyU3cvbn9aFKy94Zlaxc+DZDCC3eYs/YL5JXdfBLBvurzuA==
-X-Gm-Message-State: AOJu0Yzgh8DuLvmH7yJe7VfMmRSZs7BCKRHmOeERBcOuJ0GBOU3VM+9h
- fA5Nj/iJ/1oOoPhZmV/W2XLZK3tEs8H/hQQKM8NWxUcrw3cLvEbO
-X-Google-Smtp-Source: AGHT+IHvNenFk0lvoCoTnBmsN+KGQS1hYet9nTfFhwwtM78wb0hVarXv6AkeULLXQVAvha2fcbd0rQ==
-X-Received: by 2002:a5d:59a4:0:b0:366:f48e:c6b with SMTP id
- ffacd0b85a97d-366f48e0e2emr3589120f8f.45.1719263067418; 
- Mon, 24 Jun 2024 14:04:27 -0700 (PDT)
+ AJvYcCUFqSuR3Qyc0QbmI93fnOtLzO2kMiRSH4b6o3M+6IUUDaNnOs7QsBMxQqMjEtHJ+v9rgCeQdT/m6CoGVJlQJ7PAla1s/g==
+X-Gm-Message-State: AOJu0YwC5HKR1JWpHAJ6iB8hDeXBwKpFhvz/zVvTRWN6B+yfnCUiV2fG
+ XdigDzTfcClgEf7XLUWF14HadT0+DnbhR+TM5IEvqf1cB9SK4fD4
+X-Google-Smtp-Source: AGHT+IGU6vcL61tldO1cNqAauBJwEzWzOwk5O33G6uqZQLsyY//cBdbotI7vlDjG1qL7eSKHzxy+3w==
+X-Received: by 2002:a05:600c:1d23:b0:424:760d:75cb with SMTP id
+ 5b1f17b1804b1-4248cc18217mr40617275e9.6.1719263069073; 
+ Mon, 24 Jun 2024 14:04:29 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.26
+ ffacd0b85a97d-3664178f5f7sm10968228f8f.19.2024.06.24.14.04.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:04:27 -0700 (PDT)
+ Mon, 24 Jun 2024 14:04:28 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,9 +87,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Alexey Romanov <avromanov@salutedevices.com>,
  Peter Robinson <pbrobinson@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v4 01/14] phy: phy-mtk-tphy: add support for phy type switch
-Date: Mon, 24 Jun 2024 23:03:27 +0200
-Message-ID: <20240624210418.19324-2-ansuelsmth@gmail.com>
+Subject: [PATCH v4 02/14] pci: mediatek: add PCIe controller support for
+ filogic silicon
+Date: Mon, 24 Jun 2024 23:03:28 +0200
+Message-ID: <20240624210418.19324-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240624210418.19324-1-ansuelsmth@gmail.com>
 References: <20240624210418.19324-1-ansuelsmth@gmail.com>
@@ -111,170 +112,439 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for PHY type switch via the mediatek topmisc syscon.
+From: John Crispin <john@phrozen.org>
 
-This is needed on mt7981 to make the PCIe correctly work and display
-LinkUp.
+Add MediaTek GEN3 PCIe controller support for filogic silicon.
+This is adapted from the Linux version of the driver.
 
-Follow the same implementation done on Linux kernel with the usage of
-the mediatek,syscon-type property.
-
-Example:
-
-u3port0: usb-phy@11e10700 {
-	reg = <0x11e10700 0x900>;
-	clocks = <&topckgen CK_TOP_USB3_PHY_SEL>;
-	clock-names = "ref";
-	#phy-cells = <1>;
-	mediatek,syscon-type = <&topmisc 0x218 0>;
-	status = "okay";
-};
-
+Signed-off-by: John Crispin <john@phrozen.org>
+[ fix minor problems, fix checkpatch errors ]
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/phy/Kconfig        |  2 +
- drivers/phy/phy-mtk-tphy.c | 80 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+)
+ drivers/pci/Kconfig              |   7 +
+ drivers/pci/Makefile             |   1 +
+ drivers/pci/pcie_mediatek_gen3.c | 382 +++++++++++++++++++++++++++++++
+ 3 files changed, 390 insertions(+)
+ create mode 100644 drivers/pci/pcie_mediatek_gen3.c
 
-diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
-index 8f767877e73..e12347e8a03 100644
---- a/drivers/phy/Kconfig
-+++ b/drivers/phy/Kconfig
-@@ -263,6 +263,8 @@ config PHY_MTK_TPHY
- 	bool "MediaTek T-PHY Driver"
- 	depends on PHY
- 	depends on ARCH_MEDIATEK || SOC_MT7621
-+	select REGMAP
-+	select SYSCON
- 	help
- 	  MediaTek T-PHY driver supports usb2.0, usb3.0 ports, PCIe and
- 	  SATA, and meanwhile supports two version T-PHY which have
-diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
-index 6f9ac1528e8..0a45dc58629 100644
---- a/drivers/phy/phy-mtk-tphy.c
-+++ b/drivers/phy/phy-mtk-tphy.c
-@@ -10,6 +10,8 @@
- #include <generic-phy.h>
- #include <malloc.h>
- #include <mapmem.h>
-+#include <regmap.h>
-+#include <syscon.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <dm/devres.h>
-@@ -215,6 +217,14 @@
- #define ANA_EQ_EYE_CTRL_SIGNAL5		0xdc
- #define RG_CDR_BIRLTD0_GEN3_MSK		GENMASK(4, 0)
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+index 8d02ab82ad9..22a56f4ca38 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -350,6 +350,13 @@ config PCIE_MEDIATEK
+ 	  Say Y here if you want to enable Gen2 PCIe controller,
+ 	  which could be found on MT7623 SoC family.
  
-+/* PHY switch between pcie/usb3/sgmii/sata */
-+#define USB_PHY_SWITCH_CTRL	0x0
-+#define RG_PHY_SW_TYPE		GENMASK(3, 0)
-+#define RG_PHY_SW_PCIE		0x0
-+#define RG_PHY_SW_USB3		0x1
-+#define RG_PHY_SW_SGMII		0x2
-+#define RG_PHY_SW_SATA		0x3
++config PCIE_MEDIATEK_GEN3
++	bool "MediaTek PCIe Gen3 controller"
++	depends on ARCH_MEDIATEK
++	help
++	  Say Y here if you want to enable Gen3 PCIe controller,
++	  which could be found on the Mediatek Filogic SoC family.
 +
- enum mtk_phy_version {
- 	MTK_TPHY_V1 = 1,
- 	MTK_TPHY_V2,
-@@ -257,6 +267,10 @@ struct mtk_phy_instance {
- 	u32 index;
- 	u32 type;
- 
-+	struct regmap *type_sw;
-+	u32 type_sw_reg;
-+	u32 type_sw_index;
+ config PCIE_DW_MESON
+ 	bool "Amlogic Meson DesignWare based PCIe controller"
+ 	depends on ARCH_MESON
+diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
+index 2927c519129..5b2d2969802 100644
+--- a/drivers/pci/Makefile
++++ b/drivers/pci/Makefile
+@@ -42,6 +42,7 @@ obj-$(CONFIG_PCIE_INTEL_FPGA) += pcie_intel_fpga.o
+ obj-$(CONFIG_PCIE_DW_COMMON) += pcie_dw_common.o
+ obj-$(CONFIG_PCI_KEYSTONE) += pcie_dw_ti.o
+ obj-$(CONFIG_PCIE_MEDIATEK) += pcie_mediatek.o
++obj-$(CONFIG_PCIE_MEDIATEK_GEN3) += pcie_mediatek_gen3.o
+ obj-$(CONFIG_PCIE_ROCKCHIP) += pcie_rockchip.o
+ obj-$(CONFIG_PCIE_DW_ROCKCHIP) += pcie_dw_rockchip.o
+ obj-$(CONFIG_PCIE_DW_MESON) += pcie_dw_meson.o
+diff --git a/drivers/pci/pcie_mediatek_gen3.c b/drivers/pci/pcie_mediatek_gen3.c
+new file mode 100644
+index 00000000000..673813b8b75
+--- /dev/null
++++ b/drivers/pci/pcie_mediatek_gen3.c
+@@ -0,0 +1,382 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * MediaTek PCIe host controller driver.
++ *
++ * Copyright (c) 2023 John Crispin <john@phrozen.org>
++ * Driver is based on u-boot gen1/2 and upstream linux gen3 code
++ */
 +
- 	u32 eye_vrt;
- 	u32 eye_term;
- 	u32 discth;
-@@ -616,6 +630,67 @@ static void u2_phy_props_set(struct mtk_tphy *tphy,
- 				FIELD_PREP(PA6_RG_U2_PRE_EMP, instance->pre_emphasis));
- }
- 
-+/* type switch for usb3/pcie/sgmii/sata */
-+static int phy_type_syscon_get(struct udevice *dev, struct mtk_phy_instance *instance,
-+			       ofnode dn)
++#include <clk.h>
++#include <dm.h>
++#include <generic-phy.h>
++#include <log.h>
++#include <malloc.h>
++#include <pci.h>
++#include <reset.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <dm/devres.h>
++#include <linux/bitops.h>
++#include <linux/iopoll.h>
++#include <linux/list.h>
++#include "pci_internal.h"
++
++/* PCIe shared registers */
++#define PCIE_CFG_ADDR			0x20
++#define PCIE_CFG_DATA			0x24
++
++#define PCIE_SETTING_REG		0x80
++
++#define PCIE_PCI_IDS_1			0x9c
++#define PCIE_RC_MODE			BIT(0)
++#define PCI_CLASS(class)		((class) << 8)
++
++#define PCIE_CFGNUM_REG			0x140
++#define PCIE_CFG_DEVFN(devfn)		((devfn) & GENMASK(7, 0))
++#define PCIE_CFG_BUS(bus)		(((bus) << 8) & GENMASK(15, 8))
++#define PCIE_CFG_BYTE_EN(bytes)		(((bytes) << 16) & GENMASK(19, 16))
++#define PCIE_CFG_FORCE_BYTE_EN		BIT(20)
++#define PCIE_CFG_OFFSET_ADDR		0x1000
++#define PCIE_CFG_HEADER(bus, devfn)	(PCIE_CFG_BUS(bus) | PCIE_CFG_DEVFN(devfn))
++
++#define PCIE_RST_CTRL_REG		0x148
++#define PCIE_MAC_RSTB			BIT(0)
++#define PCIE_PHY_RSTB			BIT(1)
++#define PCIE_BRG_RSTB			BIT(2)
++#define PCIE_PE_RSTB			BIT(3)
++
++#define PCIE_LINK_STATUS_REG		0x154
++#define PCIE_PORT_LINKUP		BIT(8)
++
++#define PCIE_INT_ENABLE_REG		0x180
++
++#define PCIE_MISC_CTRL_REG		0x348
++#define PCIE_DISABLE_DVFSRC_VLT_REQ	BIT(1)
++
++#define PCIE_TRANS_TABLE_BASE_REG       0x800
++#define PCIE_ATR_SRC_ADDR_MSB_OFFSET    0x4
++#define PCIE_ATR_TRSL_ADDR_LSB_OFFSET   0x8
++#define PCIE_ATR_TRSL_ADDR_MSB_OFFSET   0xc
++#define PCIE_ATR_TRSL_PARAM_OFFSET      0x10
++#define PCIE_ATR_TLB_SET_OFFSET         0x20
++
++#define PCIE_MAX_TRANS_TABLES           8
++#define PCIE_ATR_EN                     BIT(0)
++#define PCIE_ATR_SIZE(size) \
++	(((((size) - 1) << 1) & GENMASK(6, 1)) | PCIE_ATR_EN)
++#define PCIE_ATR_ID(id)                 ((id) & GENMASK(3, 0))
++#define PCIE_ATR_TYPE_MEM               PCIE_ATR_ID(0)
++#define PCIE_ATR_TYPE_IO                PCIE_ATR_ID(1)
++#define PCIE_ATR_TLP_TYPE(type)         (((type) << 16) & GENMASK(18, 16))
++#define PCIE_ATR_TLP_TYPE_MEM           PCIE_ATR_TLP_TYPE(0)
++#define PCIE_ATR_TLP_TYPE_IO            PCIE_ATR_TLP_TYPE(2)
++
++struct mtk_pcie {
++	void __iomem *base;
++	void *priv;
++	struct clk pl_250m_ck;
++	struct clk tl_26m_ck;
++	struct clk peri_26m_ck;
++	struct clk top_133m_ck;
++	struct reset_ctl reset_phy;
++	struct reset_ctl reset_mac;
++	struct phy phy;
++};
++
++static void mtk_pcie_config_tlp_header(const struct udevice *bus,
++				       pci_dev_t devfn,
++				       int where, int size)
 +{
-+	struct ofnode_phandle_args args;
++	struct mtk_pcie *pcie = dev_get_priv(bus);
++	int bytes;
++	u32 val;
++
++	size = 1 << size;
++	bytes = (GENMASK(size - 1, 0) & 0xf) << (where & 0x3);
++
++	val = PCIE_CFG_FORCE_BYTE_EN | PCIE_CFG_BYTE_EN(bytes) |
++	      PCIE_CFG_HEADER(PCI_BUS(devfn), (devfn >> 8));
++
++	writel(val, pcie->base + PCIE_CFGNUM_REG);
++}
++
++static int mtk_pcie_config_address(const struct udevice *udev, pci_dev_t bdf,
++				   uint offset, void **paddress)
++{
++	struct mtk_pcie *pcie = dev_get_priv(udev);
++
++	*paddress = pcie->base + PCIE_CFG_OFFSET_ADDR + offset;
++
++	return 0;
++}
++
++static int mtk_pcie_read_config(const struct udevice *bus, pci_dev_t bdf,
++				uint offset, ulong *valuep,
++				enum pci_size_t size)
++{
++	int ret;
++
++	mtk_pcie_config_tlp_header(bus, bdf, offset, size);
++	ret = pci_generic_mmap_read_config(bus, mtk_pcie_config_address,
++					   bdf, offset, valuep, size);
++	return ret;
++}
++
++static int mtk_pcie_write_config(struct udevice *bus, pci_dev_t bdf,
++				 uint offset, ulong value,
++				 enum pci_size_t size)
++{
++	mtk_pcie_config_tlp_header(bus, bdf, offset, size);
++
++	switch (size) {
++	case PCI_SIZE_8:
++	case PCI_SIZE_16:
++		value <<= (offset & 0x3) * 8;
++	case PCI_SIZE_32:
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	return pci_generic_mmap_write_config(bus, mtk_pcie_config_address,
++					     bdf, (offset & ~0x3), value, PCI_SIZE_32);
++}
++
++static const struct dm_pci_ops mtk_pcie_ops = {
++	.read_config	= mtk_pcie_read_config,
++	.write_config	= mtk_pcie_write_config,
++};
++
++static int mtk_pcie_set_trans_table(struct udevice *dev, struct mtk_pcie *pcie,
++				    u64 cpu_addr, u64 pci_addr, u64 size,
++				    unsigned long type, int num)
++{
++	void __iomem *table;
++	u32 val;
++
++	if (num >= PCIE_MAX_TRANS_TABLES) {
++		dev_err(dev, "not enough translate table for addr: %#llx, limited to [%d]\n",
++			(unsigned long long)cpu_addr, PCIE_MAX_TRANS_TABLES);
++		return -ENODEV;
++	}
++
++	dev_dbg(dev, "set trans table %d: %#llx %#llx, %#llx\n", num, cpu_addr,
++		pci_addr, size);
++	table = pcie->base + PCIE_TRANS_TABLE_BASE_REG +
++		num * PCIE_ATR_TLB_SET_OFFSET;
++
++	writel(lower_32_bits(cpu_addr) | PCIE_ATR_SIZE(fls(size) - 1), table);
++	writel(upper_32_bits(cpu_addr), table + PCIE_ATR_SRC_ADDR_MSB_OFFSET);
++	writel(lower_32_bits(pci_addr), table + PCIE_ATR_TRSL_ADDR_LSB_OFFSET);
++	writel(upper_32_bits(pci_addr), table + PCIE_ATR_TRSL_ADDR_MSB_OFFSET);
++
++	if (type == PCI_REGION_IO)
++		val = PCIE_ATR_TYPE_IO | PCIE_ATR_TLP_TYPE_IO;
++	else
++		val = PCIE_ATR_TYPE_MEM | PCIE_ATR_TLP_TYPE_MEM;
++	writel(val, table + PCIE_ATR_TRSL_PARAM_OFFSET);
++
++	return 0;
++}
++
++static int mtk_pcie_startup_port(struct udevice *dev)
++{
++	struct mtk_pcie *pcie = dev_get_priv(dev);
++	struct udevice *ctlr = pci_get_controller(dev);
++	struct pci_controller *hose = dev_get_uclass_priv(ctlr);
++	u32 val;
++	int i, err;
++
++	/* Set as RC mode */
++	val = readl(pcie->base + PCIE_SETTING_REG);
++	val |= PCIE_RC_MODE;
++	writel(val, pcie->base + PCIE_SETTING_REG);
++
++	/* setup RC BARs */
++	writel(PCI_BASE_ADDRESS_MEM_TYPE_64,
++	       pcie->base + PCI_BASE_ADDRESS_0);
++	writel(0x0, pcie->base + PCI_BASE_ADDRESS_1);
++
++	/* setup interrupt pins */
++	clrsetbits_le32(pcie->base + PCI_INTERRUPT_LINE,
++			0xff00, 0x100);
++
++	/* setup bus numbers */
++	clrsetbits_le32(pcie->base + PCI_PRIMARY_BUS,
++			0xffffff, 0x00ff0100);
++
++	/* setup command register */
++	clrsetbits_le32(pcie->base + PCI_PRIMARY_BUS,
++			0xffff,
++			PCI_COMMAND_IO | PCI_COMMAND_MEMORY |
++			PCI_COMMAND_MASTER | PCI_COMMAND_SERR);
++
++	/* Set class code */
++	val = readl(pcie->base + PCIE_PCI_IDS_1);
++	val &= ~GENMASK(31, 8);
++	val |= PCI_CLASS(PCI_CLASS_BRIDGE_PCI << 8);
++	writel(val, pcie->base + PCIE_PCI_IDS_1);
++
++	/* Mask all INTx interrupts */
++	val = readl(pcie->base + PCIE_INT_ENABLE_REG);
++	val &= ~0xFF000000;
++	writel(val, pcie->base + PCIE_INT_ENABLE_REG);
++
++	/* Disable DVFSRC voltage request */
++	val = readl(pcie->base + PCIE_MISC_CTRL_REG);
++	val |= PCIE_DISABLE_DVFSRC_VLT_REQ;
++	writel(val, pcie->base + PCIE_MISC_CTRL_REG);
++
++	/* Assert all reset signals */
++	val = readl(pcie->base + PCIE_RST_CTRL_REG);
++	val |= PCIE_MAC_RSTB | PCIE_PHY_RSTB | PCIE_BRG_RSTB | PCIE_PE_RSTB;
++	writel(val, pcie->base + PCIE_RST_CTRL_REG);
++
++	/*
++	 * Described in PCIe CEM specification sections 2.2 (PERST# Signal)
++	 * and 2.2.1 (Initial Power-Up (G3 to S0)).
++	 * The deassertion of PERST# should be delayed 100ms (TPVPERL)
++	 * for the power and clock to become stable.
++	 */
++	mdelay(100);
++
++	/* De-assert reset signals */
++	val &= ~(PCIE_MAC_RSTB | PCIE_PHY_RSTB | PCIE_BRG_RSTB);
++	writel(val, pcie->base + PCIE_RST_CTRL_REG);
++
++	mdelay(100);
++
++	/* De-assert PERST# signals */
++	val &= ~(PCIE_PE_RSTB);
++	writel(val, pcie->base + PCIE_RST_CTRL_REG);
++
++	/* 100ms timeout value should be enough for Gen1/2 training */
++	err = readl_poll_timeout(pcie->base + PCIE_LINK_STATUS_REG, val,
++				 !!(val & PCIE_PORT_LINKUP),
++				 100 * 1000);
++	if (err) {
++		dev_dbg(dev, "no card detected\n");
++		return -ETIMEDOUT;
++	}
++	dev_dbg(dev, "detected a card\n");
++
++	for (i = 0; i < hose->region_count; i++) {
++		struct pci_region *reg = &hose->regions[i];
++
++		if (reg->flags != PCI_REGION_MEM)
++			continue;
++
++		mtk_pcie_set_trans_table(dev, pcie, reg->bus_start, reg->phys_start,
++					 reg->size, reg->flags, 0);
++	}
++
++	return 0;
++}
++
++static int mtk_pcie_power_on(struct udevice *dev)
++{
++	struct mtk_pcie *pcie = dev_get_priv(dev);
 +	int err;
 +
-+	if (!ofnode_read_bool(dn, "mediatek,syscon-type"))
-+		return 0;
++	pcie->base = dev_remap_addr_name(dev, "pcie-mac");
++	if (!pcie->base)
++		return -ENOENT;
 +
-+	err = ofnode_parse_phandle_with_args(dn, "mediatek,syscon-type",
-+					     NULL, 2, 0, &args);
++	pcie->priv = dev;
++
++	err = generic_phy_get_by_name(dev, "pcie-phy", &pcie->phy);
 +	if (err)
 +		return err;
 +
-+	instance->type_sw_reg = args.args[0];
-+	instance->type_sw_index = args.args[1] & 0x3; /* <=3 */
-+	instance->type_sw = syscon_node_to_regmap(args.node);
-+	if (IS_ERR(instance->type_sw))
-+		return PTR_ERR(instance->type_sw);
++	/*
++	 * Upstream linux kernel devine these clock without clock-names
++	 * and use clk bulk API to enable them all.
++	 */
++	err = clk_get_by_index(dev, 0, &pcie->pl_250m_ck);
++	if (err)
++		return err;
 +
-+	debug("phy-%s.%d: type_sw - reg %#x, index %d\n",
-+	      dev->name, instance->index, instance->type_sw_reg,
-+	      instance->type_sw_index);
++	err = clk_get_by_index(dev, 1, &pcie->tl_26m_ck);
++	if (err)
++		return err;
++
++	err = clk_get_by_index(dev, 2, &pcie->peri_26m_ck);
++	if (err)
++		return err;
++
++	err = clk_get_by_index(dev, 3, &pcie->top_133m_ck);
++	if (err)
++		return err;
++
++	err = generic_phy_init(&pcie->phy);
++	if (err)
++		return err;
++
++	err = generic_phy_power_on(&pcie->phy);
++	if (err)
++		goto err_phy_on;
++
++	err = clk_enable(&pcie->pl_250m_ck);
++	if (err)
++		goto err_clk_pl_250m;
++
++	err = clk_enable(&pcie->tl_26m_ck);
++	if (err)
++		goto err_clk_tl_26m;
++
++	err = clk_enable(&pcie->peri_26m_ck);
++	if (err)
++		goto err_clk_peri_26m;
++
++	err = clk_enable(&pcie->top_133m_ck);
++	if (err)
++		goto err_clk_top_133m;
++
++	err = mtk_pcie_startup_port(dev);
++	if (err)
++		goto err_startup;
 +
 +	return 0;
++
++err_startup:
++err_clk_top_133m:
++	clk_disable(&pcie->top_133m_ck);
++err_clk_peri_26m:
++	clk_disable(&pcie->peri_26m_ck);
++err_clk_tl_26m:
++	clk_disable(&pcie->tl_26m_ck);
++err_clk_pl_250m:
++	clk_disable(&pcie->pl_250m_ck);
++err_phy_on:
++	generic_phy_exit(&pcie->phy);
++
++	return err;
 +}
 +
-+static int phy_type_set(struct mtk_phy_instance *instance)
++static int mtk_pcie_probe(struct udevice *dev)
 +{
-+	int type;
-+	u32 offset;
++	struct mtk_pcie *pcie = dev_get_priv(dev);
++	int err;
 +
-+	if (!instance->type_sw)
-+		return 0;
++	pcie->priv = dev;
 +
-+	switch (instance->type) {
-+	case PHY_TYPE_USB3:
-+		type = RG_PHY_SW_USB3;
-+		break;
-+	case PHY_TYPE_PCIE:
-+		type = RG_PHY_SW_PCIE;
-+		break;
-+	case PHY_TYPE_SGMII:
-+		type = RG_PHY_SW_SGMII;
-+		break;
-+	case PHY_TYPE_SATA:
-+		type = RG_PHY_SW_SATA;
-+		break;
-+	case PHY_TYPE_USB2:
-+	default:
-+		return 0;
-+	}
-+
-+	offset = instance->type_sw_index * BITS_PER_BYTE;
-+	regmap_update_bits(instance->type_sw, instance->type_sw_reg,
-+			   RG_PHY_SW_TYPE << offset, type << offset);
++	err = mtk_pcie_power_on(dev);
++	if (err)
++		return err;
 +
 +	return 0;
 +}
 +
- static int mtk_phy_init(struct phy *phy)
- {
- 	struct mtk_tphy *tphy = dev_get_priv(phy->dev);
-@@ -746,6 +821,7 @@ static int mtk_phy_xlate(struct phy *phy,
- 	}
- 
- 	phy_parse_property(tphy, instance);
-+	phy_type_set(instance);
- 
- 	return 0;
- }
-@@ -807,6 +883,10 @@ static int mtk_tphy_probe(struct udevice *dev)
- 						     &instance->da_ref_clk);
- 		if (err)
- 			return err;
++static const struct udevice_id mtk_pcie_ids[] = {
++	{ .compatible = "mediatek,mt8192-pcie" },
++	{ }
++};
 +
-+		err = phy_type_syscon_get(dev, instance, subnode);
-+		if (err)
-+			return err;
- 	}
- 
- 	return 0;
++U_BOOT_DRIVER(pcie_mediatek_gen3) = {
++	.name		= "pcie_mediatek_gen3",
++	.id		= UCLASS_PCI,
++	.of_match	= mtk_pcie_ids,
++	.ops		= &mtk_pcie_ops,
++	.probe		= mtk_pcie_probe,
++	.priv_auto	= sizeof(struct mtk_pcie),
++};
 -- 
 2.45.1
 
