@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C79FC30653
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE63C30653
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 21:47:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C10C988418;
-	Mon, 24 Jun 2024 23:46:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31FC988481;
+	Mon, 24 Jun 2024 23:46:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K4Ejwluo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ilg1XRRx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93DCD87B1A; Mon, 24 Jun 2024 23:46:38 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id A80D888412; Mon, 24 Jun 2024 23:46:39 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9083088119
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:46:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B17C6882DC
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 23:46:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a62ef52e837so587060166b.3
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:46:36 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-57d203d4682so5795309a12.0
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:46:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719265596; x=1719870396; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719265597; x=1719870397; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Lwn27umt7Ia1pnQO+R9k1S/p3TzisyCSqEQ9iSKDuUo=;
- b=K4EjwluoR4NBy70wvAHQLPZ8Bh6oMhcYnxZrzUj4HpPyWRenXJLTLYz/HRvKJdGS4C
- v3JSctt0Tunk02e5vtMFShtL4NRnq6lv+KwnBJ+8FHwN85t9HQ8aWpzc0fR8QHUw1nOq
- HCgEgIF6h68U/pmIGPxcUQd4PvOOC5b2Og9+uflJcOER4dvUp3aGCk6RXwZqoni5W9U9
- MCkdxbDW486w3cxnVP7pCXxvG2Koz8smWGs3nhHRnVPYAbIJzTyBDDy6zU34/9jLWbOl
- KYI6rzqTxBaLt/3TSsvV/JTfbqHOeaXfZ9MkbjGsdSrLFzjUdVNv02gcCmAYTEPx9rt3
- ve+w==
+ :reply-to; bh=nBkr1XCfMuJlQSMMcwjBGGwlw9SBwzqro/e6vXMYw3o=;
+ b=ilg1XRRx1rdF8nujzTd/GztOyCKb3r97VHDsZGdDbQLM+pIsMrMq0rmkXwcamc2bpE
+ FZ2dMpE2AnJbZQAaDpvi6Pa1WmEYbOEceRcQC+55e4DBmOjb1MRIb4APef6NflybqVFT
+ 0d2UEq72HmDp8do55FImu5/0BDthNYW16QGayO1jHssGyL8GU7lMqRiELSyGZW6zakNA
+ 1+Sbsbm4SxyGKeSKgN+FpogDtY3+tVG0rcp+eAcvdOhlTyEp8oyx6aGTKc/HLj6QdE8Z
+ +httFNWk9YaZ11qgCspcCUsBn/R6J+pWJSS3vlYRgp2Q8GjRhSq0kSRPCap/W2QBlDVX
+ RDUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719265596; x=1719870396;
+ d=1e100.net; s=20230601; t=1719265597; x=1719870397;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lwn27umt7Ia1pnQO+R9k1S/p3TzisyCSqEQ9iSKDuUo=;
- b=VzyZbbf7K15jzMc7gHdh+8evqC8K8poNasAis3Hs47fLIkP4vss6fNKYmwBSz5JyC4
- CPvIf31ZWfIOiZmK47MaiOTFqiwKl1OEQ1ZTeRvlWI1W9uckdfUrFn4swuj+gMWf4dlC
- GyUJYVZujtX3T5w0ezfjSwAJxnQpmiLqkgLx4JgtMYz+PD/X45t4R9J1CrOp+47Mqsvl
- ChtQGcqQv9hY/xa+TntlSjUWw1XLaFYdZIhL4+06TPl1fm4+6qkd/aP5eQA4YUERMf73
- yE2o/rFR862GRtacziww+oqVmk1h9jVtUcBgbJdzR3YmRW5/+lTm0Tae+RkXS5VIbOxC
- dm5w==
+ bh=nBkr1XCfMuJlQSMMcwjBGGwlw9SBwzqro/e6vXMYw3o=;
+ b=hNsCSlSljm66w1Q3/FIhnzD0LhR1VfZPxkL+iLY1DlboKBIQdwkOZtGH4TjIs4nD5W
+ dJxb+Ac4rr1j/iJt2x31yV0I6Zv778vuBenKxk2J9zDYmPYCm+eaWhK1eRbZM5bSUy54
+ Sa7tG35XOl5TUGz8VGpIG5Xs8kYper7+qJk9J1CTd1xmhmf8/hwFu95JXoYfLmrO05ss
+ GgOkVs+GRx916LPD8Nq+RjyVZAWKptZfbZj4QYj7CKRoz7FBSejkFz5yHxDKZHbSZoMO
+ BwG2MSPppXyNFoVfvVc9bQz5G8HE0KMTupXKqS+vESZTDvWx5gVHc+qDsF6Sn9x/5XbX
+ n8tw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0ODHKiWTsxQTd1uCh6zXOxjOynIswq+wHdYcwkesUl8jhPWUvyKLRX7qeyziSPpSad4GHt2u96+JBCpUTFPsYuo22YA==
-X-Gm-Message-State: AOJu0YwH44Ps+xFKkYWvYp+4qVtDemPJywNdjLxNYgrGNSb6VuPdcEsZ
- ozSuKG4Ms3feEb33SoT626CKS+oYsCuANbYDTNzKX/93G1zeA+Qu
-X-Google-Smtp-Source: AGHT+IHliy9X/co+Ru+cZp1q5pqHv+Z7aSFf42QJT9y45ztOpZouKHtArtmgo/fNKr1LDWMx4S6KLg==
-X-Received: by 2002:a50:bac3:0:b0:57c:7471:a0dd with SMTP id
- 4fb4d7f45d1cf-57d4a2815a6mr5274051a12.12.1719265595460; 
- Mon, 24 Jun 2024 14:46:35 -0700 (PDT)
+ AJvYcCXK98v9kLjOdl2cILaPnpT5W5dBmmOwtR4cGhla6oMI0PHZy0J9TMZWKitxGVDeLnTCD5Osam7FYyaGcclJB9wxXknNlQ==
+X-Gm-Message-State: AOJu0YzfRrLUn5v6RJDyoUNw0XMcWHdT8CFleKHu93ElTFoqepJfe/0N
+ 96LB2b/aBKiWFgemPAZoiPv++HVC6KieLZndouWk+XPG4o4bVfET
+X-Google-Smtp-Source: AGHT+IFN8KXr+WUDPaZEuGllMibkBn3E4kmf4L/aPd1/iNbYGGzuOPtHXieUfHG2oT6Jbngn0xxxRg==
+X-Received: by 2002:a50:d698:0:b0:57c:ff94:c817 with SMTP id
+ 4fb4d7f45d1cf-57d45791fb8mr3385031a12.16.1719265596852; 
+ Mon, 24 Jun 2024 14:46:36 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d303d7b1bsm5100588a12.11.2024.06.24.14.46.34
+ 4fb4d7f45d1cf-57d303d7b1bsm5100588a12.11.2024.06.24.14.46.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 14:46:35 -0700 (PDT)
+ Mon, 24 Jun 2024 14:46:36 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -81,9 +81,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>,
  Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/9] led: led_gpio: add support for SW Blink
-Date: Mon, 24 Jun 2024 23:46:11 +0200
-Message-ID: <20240624214626.24336-2-ansuelsmth@gmail.com>
+Subject: [PATCH 2/9] led: implement led_set_state/paeriod_by_label
+Date: Mon, 24 Jun 2024 23:46:12 +0200
+Message-ID: <20240624214626.24336-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240624214626.24336-1-ansuelsmth@gmail.com>
 References: <20240624214626.24336-1-ansuelsmth@gmail.com>
@@ -105,132 +105,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for GPIO-connected LEDs to make use of Cyclic API to
-simulate Blink by software.
+Introduce new API led_set_state/period_by label as a shorthand to set
+LED state and LED blink period by referencing them by label.
 
-A new Kconfig is introduced to enable this, CONFIG_LED_GPIO_SW_BLINK.
+This is needed for the upcoming additional API that will declare LED in
+.confg and reference them by their LED label name.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/led/Kconfig    |  9 +++++++
- drivers/led/led_gpio.c | 56 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 65 insertions(+)
+ drivers/led/led-uclass.c | 28 ++++++++++++++++++++++++++++
+ include/led.h            | 18 ++++++++++++++++++
+ 2 files changed, 46 insertions(+)
 
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 9837960198d..13d6eb40cea 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -91,6 +91,15 @@ config LED_GPIO
- 	  The GPIO driver must used driver model. LEDs are configured using
- 	  the device tree.
- 
-+config LED_GPIO_SW_BLINK
-+	bool "LED support for GPIO software blink"
-+	depends on LED_GPIO
-+	select CYCLIC
-+	select LED_BLINK
-+	help
-+	  Enable support for GPIO-connected LEDs to make use of Cyclic API
-+	  to simulate LED blink by software.
-+
- config SPL_LED_GPIO
- 	bool "LED support for GPIO-connected LEDs in SPL"
-         depends on SPL_LED && SPL_DM_GPIO
-diff --git a/drivers/led/led_gpio.c b/drivers/led/led_gpio.c
-index ce22fb49f2a..20a6c149e4a 100644
---- a/drivers/led/led_gpio.c
-+++ b/drivers/led/led_gpio.c
-@@ -4,6 +4,7 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
-+#include <cyclic.h>
- #include <dm.h>
- #include <errno.h>
- #include <led.h>
-@@ -13,13 +14,60 @@
- 
- struct led_gpio_priv {
- 	struct gpio_desc gpio;
-+#ifdef CONFIG_LED_GPIO_SW_BLINK
-+	bool sw_blink;
-+	struct cyclic_info cyclic;
-+#endif
- };
- 
-+#ifdef CONFIG_LED_GPIO_SW_BLINK
-+static void gpio_led_toggle(struct cyclic_info *ctx)
-+{
-+	struct led_gpio_priv *priv = container_of(ctx, struct led_gpio_priv, cyclic);
-+	struct gpio_desc *gpio = &priv->gpio;
-+	int state;
-+
-+	state = dm_gpio_get_value(gpio);
-+	if (state < 0) {
-+		printf("Error getting value for GPIO %d\n",
-+		       gpio->offset);
-+		return;
-+	}
-+
-+	dm_gpio_set_value(gpio, !state);
-+}
-+
-+static int gpio_led_set_period(struct udevice *dev, int period_ms)
-+{
-+	struct led_gpio_priv *priv = dev_get_priv(dev);
-+	char cyclic_name[16];
-+
-+	if (priv->sw_blink)
-+		cyclic_unregister(&priv->cyclic);
-+
-+	snprintf(cyclic_name, sizeof(cyclic_name),
-+		 "gpio_cyclic%u", priv->gpio.offset);
-+	cyclic_register(&priv->cyclic, gpio_led_toggle,
-+			period_ms * 500, cyclic_name);
-+
-+	/* Init the LED on */
-+	dm_gpio_set_value(&priv->gpio, LEDST_ON);
-+
-+	priv->sw_blink = true;
-+	return 0;
-+}
-+#endif
-+
- static int gpio_led_set_state(struct udevice *dev, enum led_state_t state)
- {
- 	struct led_gpio_priv *priv = dev_get_priv(dev);
- 	int ret;
- 
-+#ifdef CONFIG_LED_GPIO_SW_BLINK
-+	if (priv->sw_blink)
-+		cyclic_unregister(&priv->cyclic);
-+#endif
-+
- 	if (!dm_gpio_is_valid(&priv->gpio))
- 		return -EREMOTEIO;
- 	switch (state) {
-@@ -50,6 +98,11 @@ static enum led_state_t gpio_led_get_state(struct udevice *dev)
- 	if (ret < 0)
- 		return ret;
- 
-+#ifdef CONFIG_LED_GPIO_SW_BLINK
-+	if (priv->sw_blink)
-+		return LEDST_BLINK;
-+#endif
-+
- 	return ret ? LEDST_ON : LEDST_OFF;
+diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+index f37bf6a1550..d1e9916bb33 100644
+--- a/drivers/led/led-uclass.c
++++ b/drivers/led/led-uclass.c
+@@ -61,6 +61,20 @@ int led_set_state(struct udevice *dev, enum led_state_t state)
+ 	return ops->set_state(dev, state);
  }
  
-@@ -84,6 +137,9 @@ static int led_gpio_bind(struct udevice *parent)
- static const struct led_ops gpio_led_ops = {
- 	.set_state	= gpio_led_set_state,
- 	.get_state	= gpio_led_get_state,
-+#ifdef CONFIG_LED_GPIO_SW_BLINK
-+	.set_period	= gpio_led_set_period,
-+#endif
- };
++int led_set_state_by_label(const char *label, enum led_state_t state)
++{
++	struct udevice *dev;
++	int ret;
++
++	ret = led_get_by_label(label, &dev);
++	if (ret) {
++		printf("Failed to get LED by label %s\n", label);
++		return ret;
++	}
++
++	return led_set_state(dev, state);
++}
++
+ enum led_state_t led_get_state(struct udevice *dev)
+ {
+ 	struct led_ops *ops = led_get_ops(dev);
+@@ -81,6 +95,20 @@ int led_set_period(struct udevice *dev, int period_ms)
  
- U_BOOT_DRIVER(led_gpio) = {
+ 	return ops->set_period(dev, period_ms);
+ }
++
++int led_set_period_by_label(const char *label, int period_ms)
++{
++	struct udevice *dev;
++	int ret;
++
++	ret = led_get_by_label(label, &dev);
++	if (ret) {
++		printf("Failed to get LED by label %s\n", label);
++		return ret;
++	}
++
++	return led_set_period(dev, period_ms);
++}
+ #endif
+ 
+ static int led_post_bind(struct udevice *dev)
+diff --git a/include/led.h b/include/led.h
+index a6353166289..71dd7a28d93 100644
+--- a/include/led.h
++++ b/include/led.h
+@@ -93,6 +93,15 @@ int led_get_by_label(const char *label, struct udevice **devp);
+  */
+ int led_set_state(struct udevice *dev, enum led_state_t state);
+ 
++/**
++ * led_set_state_by_label - set the state of an LED referenced by Label
++ *
++ * @label:	LED label
++ * @state:	LED state to set
++ * Return: 0 if OK, -ve on error
++ */
++int led_set_state_by_label(const char *label, enum led_state_t state);
++
+ /**
+  * led_get_state() - get the state of an LED
+  *
+@@ -110,6 +119,15 @@ enum led_state_t led_get_state(struct udevice *dev);
+  */
+ int led_set_period(struct udevice *dev, int period_ms);
+ 
++/**
++ * led_set_period_by_label - set the blink period of an LED referenced by Label
++ *
++ * @label:	LED label
++ * @period_ms:	LED blink period in milliseconds
++ * Return: 0 if OK, -ve on error
++ */
++int led_set_period_by_label(const char *label, int period_ms);
++
+ /**
+  * led_bind_generic() - bind children of parent to given driver
+  *
 -- 
 2.45.1
 
