@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CABEC2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E67C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 12:47:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DA0F882B7;
-	Mon, 24 Jun 2024 14:33:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2806C882B7;
+	Mon, 24 Jun 2024 14:47:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ApYY2r5s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zcA3hguC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 687BF882BE; Mon, 24 Jun 2024 14:33:17 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 9556988373; Mon, 24 Jun 2024 14:47:25 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2729888137
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:33:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AA4688137
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 14:47:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-57d044aa5beso4759002a12.2
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 05:33:15 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-57ccd1111aeso5046920a12.0
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 05:47:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719232394; x=1719837194; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719233242; x=1719838042; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=16leo386kdyQHDuibzMPERFxISztzEmMgENhPhboQTk=;
- b=ApYY2r5sOuVfncUwm9msrjLYL1aFHCF3L3pqcr9YO+LpY1+equee4t5RMp21B9WYta
- Hnez09xSt6cd5mTkL7BTRbC7up6OBqVmx7ZUzcPE+PIuFK7q0vJW2kwjnhHCkAw1fc2D
- kNuiWtUUcuFtnE5wfZdMytat5lnU2Gy48udSv7s7BgBmS4ejTXY9jOYZTOFXY9JFRGZF
- MS6BOnBL7z5VPODgnv7Vc4IOwwO8gZi411Vmv1hKBdrvsFu/sLsNVqmDjqeC6devXUL9
- HT+663epxQES13NsulhVxPe7GjD3GmMJCcRf7tduYRHcPmsh5PvdrcpJrcJbaYjVkbu+
- IHjQ==
+ bh=TrNS0WrO3zxbqdcRWPPIG2l/xj57+RHQEACow0lNkVQ=;
+ b=zcA3hguCtOqZP7IAY6LSSYL8FPnbh1KKhrEbG3SuKdBASpojm8zl4clBeGfM/NBFFz
+ 10IPk8mRFOvvzzgnh/wug4prjbuYA+lstIvXifi2Hsjzb+aX89PPJ+TOdP3pRi6pM2xt
+ VV7HqsD6m6bL1eJtMQfxoCSZbCWIVQVONYh78YB2pUtEde9UeNTzdu0DJjDOKOql2LIB
+ TQVAbN75BlzqX/WwWGhdAHSZlXAWfmvxqyZpsbhb1OtIGyW7wjGDT+tmKL51HYBTMyBY
+ 59Hk28qM3TP0swAHKBiYoS19AOofGltNQJFs1OvycpMycECf5OWCnqX3lvHXECFOJ5Xf
+ tuhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719232394; x=1719837194;
+ d=1e100.net; s=20230601; t=1719233242; x=1719838042;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=16leo386kdyQHDuibzMPERFxISztzEmMgENhPhboQTk=;
- b=Y1nIW9oAsTeLqfD4/mPSM91YPDb33VxhABNtXggnI76qZFYH4aqXyCCqQfMMLhep/I
- dIS2AFpYAgmZaIBeD6oU02Rveu8UmesJytJSd/rxQ+QPGIS/nivjQYU8EPFho8qdskYA
- WTwUPIpRIq55kUt42O8Rbqc84PtaruXoq0EKRAiCicvOpd6fTPoaIyDmCbk8IbbbFJkv
- 7uB50Yr/seyi+mvUofrdSlWWQO4Tjm4RhKeYUpe+HcbtBLotkYHCCOQLnyKBurXqi6vf
- lrnM9Mrsi6LDMZbmcNdAT0KHQZ0GyAE/qHcNOKNwY8SlSLW0gAdvUZYZWWutVR1ivINN
- wiOA==
-X-Gm-Message-State: AOJu0Yx+dn2MREjOvx7ilgVfnFb9/V1AnrjjG3E67R4iJf720wSoRnhT
- ehqPuzSc88jfFxZEg3wZEeCfhQMYKG6JnYQOb36+32bR+QtOb68Sw3Gt1UcJ5ww=
-X-Google-Smtp-Source: AGHT+IEUIpxoLuBv3jVLheTsiQgggFqECaoRbnSe7QBkKNKHeMTQHCnChjPhV2GwMn+h2HGCHgpZ1A==
-X-Received: by 2002:a50:8e54:0:b0:57c:745d:110b with SMTP id
- 4fb4d7f45d1cf-57d4bd56bd6mr2825884a12.3.1719232394485; 
- Mon, 24 Jun 2024 05:33:14 -0700 (PDT)
+ bh=TrNS0WrO3zxbqdcRWPPIG2l/xj57+RHQEACow0lNkVQ=;
+ b=kiWcMcr34/UP+pnK0UQfsocT6JUgjiOeO32T+tFDRNjpDHw6S4Z/Ot9gybQNXyLQpU
+ Z0kWaW2mEz9U0MyTZ2lv8LdnoU+l0QNOn6FsYJLUak+24SGimYkS15Sjo4AxFg7H+nZ+
+ TZr48EPOGtnbWh89kKLf3E/jZ5CirHfiJJvMxYuhn1mtRA85vN6rMZsOWA71obl3nooL
+ fAHSiVy1JKL4N06q3kcIswgbFTfoU6bloRrqH8vCuJvPhexmnYFkAPPJYzqGTARoCq8t
+ ErVfJMbLoq3erO32q7icdg//jdE2AzYvkj0t7W1aeCv68R5hqCg/XRvZeYG3BqNhrx1A
+ j5QA==
+X-Gm-Message-State: AOJu0YyicyoiilY0nbC1Ic/aaMhy/zs1FQBTBXntiXIq5FNPSBuhZCz1
+ 3qapYIsAvH2SMvmrCeD7AtAkUCF+QxWmiCCPNors8eFtr6Ji4qHBTOmTHXbpayE=
+X-Google-Smtp-Source: AGHT+IHOWoHI475Ye5bO+QjCW0EDDc//XvrhuW5fQvz3CLFI+Cb+Olcoxfygr1Xg9fadyV5witZ9jA==
+X-Received: by 2002:a17:907:a4c7:b0:a6f:e529:adb5 with SMTP id
+ a640c23a62f3a-a7242cda444mr347601366b.59.1719233242571; 
+ Mon, 24 Jun 2024 05:47:22 -0700 (PDT)
 Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::52af])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d30427976sm4654929a12.33.2024.06.24.05.33.13
+ a640c23a62f3a-a6fe0ec4fd4sm297669166b.200.2024.06.24.05.47.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jun 2024 05:33:13 -0700 (PDT)
+ Mon, 24 Jun 2024 05:47:22 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	u-boot-qcom@groups.io
-Subject: [PATCH v2] mach-snapdragon: move default environment to a file
-Date: Mon, 24 Jun 2024 14:31:59 +0200
-Message-ID: <20240624123255.2590424-1-caleb.connolly@linaro.org>
+Subject: [PATCH v2] spmi: msm: demote to debug()
+Date: Mon, 24 Jun 2024 14:46:27 +0200
+Message-ID: <20240624124716.2610961-1-caleb.connolly@linaro.org>
 X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,82 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make use of CONFIG_DEFAULT_ENV_FILE and move the default qcom
-environment to a file under board/qualcomm.
+Most devices have buttons exposed via the PMIC, the button polling
+therefore triggers a log spam if debug logging is enabled.
 
-This is much cleaner and means we don't need to recompile on changing
-the environment.
+Demote these to debug() so that they aren't printed unless LOG_DEBUG is
+defined explicitly for this file.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
 Changes since v1:
-- Don't set bootfile
-- V1: https://lore.kernel.org/u-boot/20240617085629.1744017-1-caleb.connolly@linaro.org
+- use debug() instead of just commenting out
+- V1: https://lore.kernel.org/u-boot/20240607142229.50709-1-caleb.connolly@linaro.org
 ---
- board/qualcomm/default.env | 11 +++++++++++
- configs/qcom_defconfig     |  2 ++
- include/configs/qcom.h     | 16 ----------------
- 3 files changed, 13 insertions(+), 16 deletions(-)
- create mode 100644 board/qualcomm/default.env
+ drivers/spmi/spmi-msm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
-new file mode 100644
-index 000000000000..dbf6f4e72600
---- /dev/null
-+++ b/board/qualcomm/default.env
-@@ -0,0 +1,11 @@
-+stdin=serial,button-kbd
-+stdout=serial,vidconsole
-+stderr=serial,vidconsole
-+preboot=scsi scan; usb start
-+fastboot=fastboot -l $fastboot_addr_r usb 0
-+do_boot=bootefi bootmgr
-+bootmenu_0=Boot first available device=run do_boot
-+bootmenu_1=Enable fastboot mode=run fastboot
-+bootmenu_2=Reset device=reset
-+menucmd=bootmenu
-+bootcmd=run do_boot
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 25fa8b0f7d2b..4ff280fc6e7d 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -46,8 +46,10 @@ CONFIG_CMD_LOG=y
- CONFIG_OF_LIVE=y
- CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_BUTTON_REMAP_PHONE_KEYS=y
-+CONFIG_USE_DEFAULT_ENV_FILE=y
-+CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
- CONFIG_CLK=y
- CONFIG_CLK_STUB=y
- CONFIG_CLK_QCOM_APQ8016=y
- CONFIG_CLK_QCOM_APQ8096=y
-diff --git a/include/configs/qcom.h b/include/configs/qcom.h
-index c13a847f62f1..b7d38866c51d 100644
---- a/include/configs/qcom.h
-+++ b/include/configs/qcom.h
-@@ -10,21 +10,5 @@
- #define __CONFIGS_SNAPDRAGON_H
+diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
+index b0d6226041e5..a35cb0ba01e4 100644
+--- a/drivers/spmi/spmi-msm.c
++++ b/drivers/spmi/spmi-msm.c
+@@ -118,9 +118,9 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
+ 		return -EPERM;
  
- #define CFG_SYS_BAUDRATE_TABLE	{ 115200, 230400, 460800, 921600, 3000000 }
+ 	channel = priv->channel_map[usid][pid] & SPMI_CHANNEL_MASK;
  
--/* Load addressed are calculated during board_late_init(). See arm/mach-snapdragon/board.c */
--#define CFG_EXTRA_ENV_SETTINGS \
--	"stdin=serial,button-kbd\0"	\
--	"stdout=serial,vidconsole\0"	\
--	"stderr=serial,vidconsole\0" \
--	"bootfile=/extlinux/extlinux.conf\0" \
--	"preboot=scsi scan; usb start\0" \
--	"fastboot=fastboot -l $fastboot_addr_r usb 0\0" \
--	"do_boot=bootefi bootmgr\0" \
--	"bootmenu_0=Boot first available device=run do_boot\0" \
--	"bootmenu_1=Enable USB mass storage=ums 0 scsi 0,1,2,3,4,5\0" \
--	"bootmenu_2=Enable fastboot mode=run fastboot\0" \
--	"bootmenu_3=Reset device=reset\0" \
--	"menucmd=bootmenu\0" \
--	"bootcmd=run do_boot\0" /* first entry is default */
--
- #endif
+-	dev_dbg(dev, "[%d:%d] %s: channel %d\n", usid, pid, __func__, channel);
++	debug("%s: [%d:%d] %s: channel %d\n", dev->name, usid, pid, __func__, channel);
+ 
+ 	switch (priv->arb_ver) {
+ 	case V1:
+ 		ch_offset = SPMI_CH_OFFSET(channel);
+@@ -185,9 +185,9 @@ static int msm_spmi_read(struct udevice *dev, int usid, int pid, int off)
+ 		return -EIO;
+ 
+ 	channel = priv->channel_map[usid][pid] & SPMI_CHANNEL_MASK;
+ 
+-	dev_dbg(dev, "[%d:%d] %s: channel %d\n", usid, pid, __func__, channel);
++	debug("%s: [%d:%d] %s: channel %d\n", dev->name, usid, pid, __func__, channel);
+ 
+ 	switch (priv->arb_ver) {
+ 	case V1:
+ 		ch_offset = SPMI_CH_OFFSET(channel);
 -- 
 2.45.0
 
