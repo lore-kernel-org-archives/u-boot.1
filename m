@@ -4,160 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2641EC2BD05
-	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 08:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 553D8C2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 24 Jun 2024 08:25:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5027D87CDB;
-	Mon, 24 Jun 2024 10:24:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA6C787CDB;
+	Mon, 24 Jun 2024 10:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="EJ13PRPJ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="n6bFc82V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F83387CDB; Mon, 24 Jun 2024 10:24:10 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::700])
+ id 9535487CDB; Mon, 24 Jun 2024 10:25:36 +0200 (CEST)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2602::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02B0B8332E
- for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 10:24:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 713678332E
+ for <u-boot@lists.denx.de>; Mon, 24 Jun 2024 10:25:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dqbpS+oDwEuB6VsRqeHhsAT7m92Ca8Zv8kIDsqKF7zV+aZv/Us35HtsTyryx90lJoWPGOyEuzVUME3KtAdXaHliM+CPAs362Fl2aeqpFXxUZcYcTiRhVGV793Ej6HyOOvfu8b9t3eR4ZNG9s/9defxRzMDR7s6b8KS7fRrLqJUZ2Ujbbam0TB8wI3EKJ9L+isfmeRZ3Bf92X9i1cNAGkVBd1y5nyxqHlYyJ9R9kk078qGlEIDBslv/urRcOILX8WEFCBDPZk7ie5RgZkVZzcUrsrqtgTHa+ApofwY6BO0J093X4UQ6BVT4ICo/6ZhNr2VT/IkSQjmviaji9icqwZMw==
+ b=EBcp3ispBLmpOuynHF/yYZRNhmXhObi7UJ6iUROSkJIv+T9DpZWeV7xMIeFZE1l9rMRrwEWe9obpF9rESjrfc5CH4Ni6H7WVSRbBEwbQfkMbzy6Uril+6LJ9E3ew5kOIxBL9gKwWpwwv24w90ikd1+Yd3hxq+cLWoGWDfTO0EGknGz9LEpoijZCfTDaSC4PYBlo8Zqk1m4r3mdr33D+tF/Qm9a6nr3ni80WohishfxBkSIRtv7loO03LD/ch1/sauThe2HYlxa+aNXAMb6I456W7R9lUeSUK3rYGfWPSeST+5o0qvO34TzJetVmqXoz7TrnA1mLta79EO3toA/JdvA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yEEMRpzo10XffpVT1icM7NPxCaBk2PcIzLqa0tbxHAE=;
- b=obHfpbXBW3rFaVTDrUrCdFKuMEmRF/93A6e1Lm/mTFw20p1pWGZsAKkSotyIGQHumjQ4xa/y6EkRVIl0RAFol41uN6eP6CyBmzHWhyfOFfA/yjdGh1Q7ZyNiRzzqHa/gn3RiThOjHAy8hNDrmgupzsln1wYS2odXzdLONyoLsEm7xW908EwurSMZG06mjAWwvOU/eLt1CMzU0ueWJ/cDmhDpaYN7aTqkEz/QlYncv08WbjXLD4r96qlx6O7Qpu5GVRWLn8C5B9Ez03jTyiWaXrA/fqXbuuiL+PgxlG3aPNyfqVY/aKZFkL4uBr+7HFqW0FDqhEXj4WkdT1sElWgdhA==
+ bh=AAk5iaD0cb4kSrbyA/Q5Rks0g9B/2swNGgl1NqZOjQM=;
+ b=OrBOF20qo/rFuhNsHn8Nwbfxj/VD5s/wu0LG0Z4Xn9vs7YI0fifhaEI9gaTTR/4g5i3YIDRzQKbNBhAu4+eW19oiCHo3a5yca4P3BP9kX69oo1qhDgs/RhE+yZQTNCfsY51Yk7S3fazKPEQpgIJWjvMbJVBbNH5Uv+zKDxJiRfTUKZ1/Ei4Mcu5tJMVqU/OQ0Rm5a9mpbrhwiekKPW2wmBIG+bJuglfBgw/trxmhz6myAgo173odxnv4PCvrpmIq8ZxvKPJGhwtOKZMMX6S5RJ94lc8Mmx9QS2O993vci1kNsvfm4k6e/l8V1BBBIl8O0rbQj+3aYLB0Ay7o8hX9ow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yEEMRpzo10XffpVT1icM7NPxCaBk2PcIzLqa0tbxHAE=;
- b=EJ13PRPJr0uNoJjQVqbH5KjgRg55+D55cElcIdowwP2J1ad0+fZRLiiwQSErT/RzMPHpcjb9YQHIE6SqKTI3irVz7Vb7Od16pr4BcgndAGiJJgKncWcAsklS7THHVX+xAVVci5h3iGwYMxarT/4GXxlVEJhQAImU89gZVxlGTYg=
+ bh=AAk5iaD0cb4kSrbyA/Q5Rks0g9B/2swNGgl1NqZOjQM=;
+ b=n6bFc82VDOjhNde1PStHXy+bBuQ0sWIxdCzCZdYt32dL3r2aNsUTNzvt/ddecwyz08Reh6VbVmZMafvJ+qni+YC3F2RbDxxFIwH8PrAQ9JPwYqE04sEcD6uDTLwsOTZejiJT9kvVYnqSAvOw6/Th1YSJncoJB0h29MHA2Ze2Dps=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by DB9PR04MB9577.eurprd04.prod.outlook.com (2603:10a6:10:304::22) with
+ by DB9PR04MB8265.eurprd04.prod.outlook.com (2603:10a6:10:24f::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.26; Mon, 24 Jun
- 2024 08:24:04 +0000
+ 2024 08:25:31 +0000
 Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
  ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
  ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7698.025; Mon, 24 Jun 2024
- 08:24:04 +0000
-Message-ID: <dc4f2532-4039-425f-8309-f62f73b5feaf@cherry.de>
-Date: Mon, 24 Jun 2024 10:24:02 +0200
+ 08:25:31 +0000
+Message-ID: <9b24f6ba-6b4c-40aa-836f-c8a576b54701@cherry.de>
+Date: Mon, 24 Jun 2024 10:25:30 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 14/16] rockchip: Avoid #ifdefs in RK3399 SPL
+Subject: Re: [PATCH v4 16/16] Drop the special am335x_boneblack_vboot target
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- huang lin <hl@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>
 References: <20240623175302.1463973-1-sjg@chromium.org>
- <20240623175302.1463973-15-sjg@chromium.org>
+ <20240623175302.1463973-17-sjg@chromium.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240623175302.1463973-15-sjg@chromium.org>
+In-Reply-To: <20240623175302.1463973-17-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0032.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::21) To PA4PR04MB7982.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA2P291CA0048.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1f::10) To PA4PR04MB7982.eurprd04.prod.outlook.com
  (2603:10a6:102:c4::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|DB9PR04MB9577:EE_
-X-MS-Office365-Filtering-Correlation-Id: 09c9a67c-d85a-40e9-254f-08dc94270268
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|DB9PR04MB8265:EE_
+X-MS-Office365-Filtering-Correlation-Id: 797c56c8-2247-4359-914e-08dc9427363f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230037|1800799021|376011|366013;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OUVkbnhUcEh1ZGthem9lbld4NUdLMlYzdDk5aldRcEpvWlErUjJBZGZUU2xy?=
- =?utf-8?B?YTR5bTkwbTFPbGxXVVMrM2NqU2Ztc2FFK205Qm1Na0I0K05nRTRJaUZsbmtx?=
- =?utf-8?B?MUQ4YnNpcFV5MmV1VHNYT0lqelVReVF2NXY3Sm9kOWVXZ01EclpUV2xHdUxp?=
- =?utf-8?B?c2ViMnRvUTR0cWoyN3VxN1Y3ZFJsWTdFM3JmY3Z0bXB5VTNKSjBBck82blRi?=
- =?utf-8?B?UzIvWFdPOVFPSDh5enREMHF4STdSNzdjUFNnekV5SjJwb250cGRyLzAvcWR4?=
- =?utf-8?B?aEtzK1VQOUpIQWZtWVQzRVZVREU0a0Z6NTJRdkVPRzlNVkxkNUdDdzVnb1VY?=
- =?utf-8?B?T1hCamNVbDVvbGwrY0JRbVljeGZ2a0loZG5ETk5OQndUTDYzalgwMmtSUEtJ?=
- =?utf-8?B?MjdjbnZ2cE8zbStQNWJBMW9JaWc2UVlCaStoQndSZjVnRXVBcHo1SG01dnVR?=
- =?utf-8?B?Vi9IU01jY3RpMHh5UWowci9Rc0trOUw0TDNKY25tNGVMTUdidUFuM05leXJk?=
- =?utf-8?B?c2owVmx5ZXdFVzd2RWx3bndQQVZJb3JuWE1pS2R1TFdHaTRGZFUrSzJTdlA3?=
- =?utf-8?B?NjhXWDUvOFVpaXNwNlJLbHJxeEQ4Y090Y2tSN3pZd1RXVWlZbUNOejlJOEQz?=
- =?utf-8?B?amZoTlNjd2Jyc1lJYUtpRGVVazNsc0ROUHkrbUdBV2lpTFozNVRSTmxMczZC?=
- =?utf-8?B?dzdtYy9nRFJkZitEZStPdE1vLzBPbFpaWitVTmx5QXMzbzVhZXVqeFYrbXNH?=
- =?utf-8?B?UnlGSXRTQzhaRm1wMzdST2ZxcHVoN3FtbnAyTXQrSDA3M20xWndRMXAzVUlT?=
- =?utf-8?B?Z2FYVU5nd3k2Nkw5K3czQU5kbkhocGpQVGFua2orNTdQZjg4VXJDbmlJTnky?=
- =?utf-8?B?SWFTZWxRTURVWmtHWnBKSDVLWlBBNWN1cEk5MDRGUW8xanI4R2Q3SEV0R3lh?=
- =?utf-8?B?aXhxWFkyeFhhdURTRnBzNTlQMVVrWitzQmt1VkNXTWZ5Qit5VTBpNXZwaXFN?=
- =?utf-8?B?NHQwYVRvTzRDVDJwNXlPSWVXQjFqM0dKQ2hZeE81SERXeXpSQkpTN1ZVa2Ux?=
- =?utf-8?B?WnhYaDRTVFVMMU1DU2sycXNJdVltd1Y0VnY2Y0xXNXMzUHNXbTVUalB0eEV2?=
- =?utf-8?B?RnN5NHJlZkV2VERSeDRGdjRGL3hsaVBiSkFCb3BKZEVvblNEOVd3emUySHcv?=
- =?utf-8?B?QTBneFB6VWx4d0xSMDBObHkvVXNSZ2ZXdkZ5Z09yalJ1ZXY3VjY0a3FLSHRD?=
- =?utf-8?B?ZDMyM3hlSW1uR09keWU5Q3gzM0JNWnFQaEw4bm13ekpoQkpuSERsL3VCeDY3?=
- =?utf-8?B?dkJJUmh4MDF0MytvU3o5T3NiRkl3cWlndGN4V2cxS0ZZeEtqL3JMeklxRGdo?=
- =?utf-8?B?TWYrMTMyQ0hPTlVSK0p2alF6ZUpsakFEN0NZYWVLZVVWSFJYcnR5bDMyVEM0?=
- =?utf-8?B?NUtKdUlHbkh1U1VzRmovM3RmclhJWGs5UzZIMFFGaXV5bkx0M0hHYXFBM2dN?=
- =?utf-8?B?RHJPMDNNSkI4RmUweXJ4eWwyaGQvRk9FVWFFRENVdzBxQzZQSWJaVHNHRVpw?=
- =?utf-8?B?SnI2YkFwdkJhZnd3bTJvVTZ0MXhYODM1WG9WZnpYSUI3R2NabFBHSE5yNVVM?=
- =?utf-8?B?WUQ4OGRNS1JLVnh4YkpHOVJzai80SmExZ1hEbU1KQjU1NGRBTWdvV2g5cmhQ?=
- =?utf-8?B?UEFkRUROQmRSekVhL1l2T2QycUZ5eDVHRjVuYXBGcVRSdEJKT2VMM0h2UVR6?=
- =?utf-8?Q?/4Ds/27VzH1+K5EuxcoN4kwmMnEjjGyuqatcER3?=
+X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|1800799021|376011;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?U0s4Z0VCREpjMXB1ODR5ZjdBaUpRdms4bm9FcU9QdW5oYjhvQ2tVbUE4YWV1?=
+ =?utf-8?B?ZVZ0MHVlZ0o3TVJHd2E3aFhLd0cwcVpENTlOckJpeVF1djFaVjBHdXZJbmJI?=
+ =?utf-8?B?SlNNWDNwTnU0aUhZK3orUWxiNng5RkRhOC9zK29vOU9wVllVS1FEY2R2aDgx?=
+ =?utf-8?B?ZFgycUhFbExqWVVDRXdBYjFDVVNTRFlzeWxuNXZHdnE4Sld5ZXR1QWluTWth?=
+ =?utf-8?B?N0ZDcTJINzEwSXBwN2twZElRYmZpclJrMkswTnV2emVockFjZ0E2MmJXZjZK?=
+ =?utf-8?B?WTZHMnpqR1d6MGdVTjZkaXB1d1E5ZjlHUER1QkpaK1hyZGxRUFdjdVl2Ky9D?=
+ =?utf-8?B?QXRBMTY0eWdqWnJZMEI4bTJrc1IvWUdtMHRSUWdDN2FRWkt3RC9WcG5odXBl?=
+ =?utf-8?B?MlZ1OFRMOEpWdnZ2SHFNdnR5RnpMaVJJcmo3cTVKNkVrMDlkKzBEdnZrYzFH?=
+ =?utf-8?B?M25WLy9mTi9QQVhuUTZOMnBjNnZ4QlFVVnpMYndRdDRRMnRvd2xLdWRYYnlD?=
+ =?utf-8?B?WTdkUGVTUm9Rc3RFK3VUQ3JBK3BFRDBnQzdTUnhaZUxSd2kzbHZkdytkUEFR?=
+ =?utf-8?B?TjRYWjBaTXQ4b21EZmRrMDI4SDJlYVoyNU5lZFNaRFgvQWY4R0RDalVaWElk?=
+ =?utf-8?B?cUZwdFdCSGlIa3NBUG9oRGtYaWd2bGVCTTNSaW9JSmYzSzBRbVRRRXR4Uitx?=
+ =?utf-8?B?US9FVlRtUjRsLzdyRUpQOTVzai9wbkV6ekFkb0xObXZ0WE5vUXFwNXg1aWth?=
+ =?utf-8?B?Q0JiVkxWVDZrUzNEbFN5YkJpcUZuZ3ZyZWt1K1hnSVh1T3FRVWhFcnJIRFIx?=
+ =?utf-8?B?czVLS1Q4WnNNMGJlaHJlMXFWWWhqa1N2aHphUVV1anZIMVNMMGZiM0ZEQmo1?=
+ =?utf-8?B?UjU2b2d2bER0aFFHcDVVV0s0SUR5MU5TNDh4ZjFxVXAvVHg1clRNbWZQaWdk?=
+ =?utf-8?B?enNzUzZpdWdCNlRFQlBNM1c5dEVsR1NvMnE0b0lBR21NNzJUZi82Ry9xM3dI?=
+ =?utf-8?B?dUh2R2hBdEFxNEFqYlc2ZWwwUFozemZJZmRpT0hJYUVDZkNkUHZKMGtwWnpt?=
+ =?utf-8?B?SmFZcEhRVUgzOXYwSDFIVzgweVpxNjVlZTF2alhtVkwvSjJQU2lBaC9UMTlq?=
+ =?utf-8?B?TlprSXh2a0hpRHBVaE4rRXBDRWNxaGlUYnJvWjBNRko1R1RTSWRMc1l1aXlt?=
+ =?utf-8?B?UDkzS1E5ZkFqSDdNK0hqaExyOXRsa0VtZXdtbVhJSnNaM25wZW9nMjNaVllq?=
+ =?utf-8?B?NFdmeW4zb1FJTzRrRzlWNk14cEwvN0hYMDVKcjg3bFFISTdCZkJGUGpNdnVj?=
+ =?utf-8?B?eEJEWFJQSlZaRExOSzgvVHdvUWs5NVNWdDhiK2hwSkpxd2Njd3FIYUEzQWg2?=
+ =?utf-8?B?RXJEWExXZWZta0FndXYyT3dZQytkenVnaFdVQ2xPaENlZ1Vvb3hQVjJuMG1r?=
+ =?utf-8?B?UjhjK3BUYzllWTZ5bGVRcVU2M0VaRTFOZiszRkpSUlJjN0lQWjlLUk1ER1Jt?=
+ =?utf-8?B?c3N2Um5RWjBGbUtOWHJyMkhTWW82My9mRFFVeW9rbFRYMzhNUVdvWWl3Z0hE?=
+ =?utf-8?B?Vi96MVp4VHZlcGcyZmdNcy9FTFdFenBVaC93MzVxVTVzTXBBcFN6bzYvV2Zw?=
+ =?utf-8?B?cEo3a213RHMveVpZeXYvbTRlaVB2ekhzd21kNzU1MGZwUmFHY1g3NUZmbllk?=
+ =?utf-8?B?UTR0TCtZVEw2NUNOVkpmMnl0TWJRTTE1UVBMQUwxVXhaaEJON3M2b3VKZEZC?=
+ =?utf-8?Q?ZoMiBCtIduDVVZyWfOhdGsLim5RS9ibwbK7gjwO?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230037)(1800799021)(376011)(366013); DIR:OUT; SFP:1102; 
+ SFS:(13230037)(366013)(1800799021)(376011); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V1o3UzRuZFJ6THE0K1JjSzliZGFLYXVjb01IOVFFdFVuZ1F0VzYyb1dnbENh?=
- =?utf-8?B?bk5BWTZ5bnlkM05OV3A1V1djYk1hZzc5ZGVUNGZuUDFzUHlrWDkza3dRbExa?=
- =?utf-8?B?VU9qRmpvQ1dudW9ETVJNVy93WFdmbXhSNDA1TnNOakh4Z3pCQi9oQmdXTGp2?=
- =?utf-8?B?d295S1lMTFpjVlEwTjArSlp3c01XUnpBdlhJUEhNR05rejZubzNueTAwMGQ1?=
- =?utf-8?B?NDF0VDROWmZtRjcrUTZTd1FmN0NEVXFhU1JoeXpnRXk4STRjUWM0VnVYSk5h?=
- =?utf-8?B?cC9UT2g4R1YvbGEwL2twVUdpWW5RK1VmMkR6dFNhNmlEcExrdWNhYXNGOGM5?=
- =?utf-8?B?ZndDbTZtQkZDTG8weWdSZks0eTRSM3FpU2w4b1JSQ0IzVjI1VDQwMTlYbng4?=
- =?utf-8?B?V2FYblJLd0hmd09wMU9ZajRHTjYzQTJ6bnFGOTVSRHlxWjN1ZmRRYldGWjdY?=
- =?utf-8?B?SmJ3dVY3d3RGejI5TlJUMGVsZ0dPSmNBdHdIYTYvak5ZYXlHeTZRZGN2eUVU?=
- =?utf-8?B?ZWhhUytVZk1ISERXMlIwd0o4L3NXUVZPV3pNN2M3d0U1cWE4UW41ZHFHa2ZZ?=
- =?utf-8?B?Mk1xNlpKT05CcHlqT2VnTm1ReklyU3ZBNE94T1M0a2dTc0orVmtHUHAvT3Rl?=
- =?utf-8?B?NmJSL1ZzMUdmbnlQZDY3WWVodkVIakd0a3VzeTlna20xcWRtRGdFRU1GZGRY?=
- =?utf-8?B?cmxCNzk3cjEvcTJxcmhReXI0QW5kMFlvNFlpVDJmTGJLR3BmdzhmOFYvT1hV?=
- =?utf-8?B?WHVDT3Z5WVRELzFURU9zcjhISUJ5UExtQXBwaEhvQ0Y5OSt5UDduTE5tSGVD?=
- =?utf-8?B?VUMxU2xSeDliMmd0WWhMQVQ2NnZOSTg1aHZHamZZdDZwKzI2elhERFVpZUR2?=
- =?utf-8?B?MWZhY1BMbzd0d1J1VmkyaGdVV2t4QTdmYWZJZFFyWk9zVXQzVUxpRkZqQWkx?=
- =?utf-8?B?enA3QlVVOWQ2WW1MQ2FLSldPVmhod2FvMUplYllFNGNlMEFhTnhDNnd5RVRU?=
- =?utf-8?B?ZXRpSitobWJ4U0xWcUt4WWF5S2MxajAvVG1yVUlXcmdscUNzTGUvZ0FQUHFv?=
- =?utf-8?B?dVVIQW1YdU1Xdm1CUHBuZkZIVUdneU8xL05HUnBXeE9Yb3NBQUhYSFYrY1Zo?=
- =?utf-8?B?V0x1L2tHYU9MR0lUWVRnaE1RZ2xCeVFhd0R3SjF3Mk9xWkRDRVJ6eXg1ZzFu?=
- =?utf-8?B?WmlCZ1B6NlNEYTJJeUlLdU82dVVBWGhTRmtjelBHNUpXZmFDYVJoSEJqUWFQ?=
- =?utf-8?B?eEkydDF6RGN3NWYxRUU5ZXQ4NDVyY2xSWXJaUCsrWGxaV0xMa3VkZ3FDeXd2?=
- =?utf-8?B?bGVFSTlEbmJXdStIdWowakNuSDY4Mm9wZ2N5NWl2TXBxdlBnOFBSaU4vc1U0?=
- =?utf-8?B?RURXenBlSUFlY1VvSjBoREgwREpVbnZwTVJhKzhRdjMvUGppVXc4Ty85QnZz?=
- =?utf-8?B?dHVxc2x2Ym1ObmJXZFg2OWxza1NOTlBLM1JYRElrR3pHcDJHS3diNXFHVFdU?=
- =?utf-8?B?U2tYRUYyN3FuTC9qTkRVOGF4bFhmQ3JoRExxTlpQRW5ncjNSUjVrN1FxcGo2?=
- =?utf-8?B?c3NhTUdMZnJ5RGhtV2s1V1hZR1VKZlNqdnZqREdZSy9GeHdySmczUkVkVnNQ?=
- =?utf-8?B?RjkvMUZhc2JqUkcyTGNzdkZWREcwWmx5c2VsMmVac1hmRDE2UGs0UCttSHFX?=
- =?utf-8?B?aVBjbWttcjJuSEl4ZFMxOUN0U201TkJqVHFxYVNEbkFwd0YrRmc1QVRreGJL?=
- =?utf-8?B?SEQ2T3ZLSHR6TEcrS2NnT1g2MnY2YzlhcUxyVHpQcjNlbURQNCsweUJyM0Y1?=
- =?utf-8?B?T3BMS2o5REVLWlZiOCtCN1FPSzZWK3FIVENERDE2Zjc2d2U4SDNGNi9FTlNT?=
- =?utf-8?B?bzlmYVB6TEE4MmtsTllPMzI5TTJtRzhNMC9ZQm1tT0tPU1dZdTA1L3JMZkkz?=
- =?utf-8?B?UWIvcjdqNDYyaFlpcDRkYU1rRS96czZ0UUh2WWtYc1lwRFJEV2Y3VVZQUVFo?=
- =?utf-8?B?ak9rWU1rRXNoSnllZXZ0Zno2Nk5FRUVCUHljaDFIb0J4ZFljY3U0a2VmQWZ3?=
- =?utf-8?B?VytrbDBMei9rOEFOKzFhRCtDVDdCMzhzUVZHV2NXK2NTZVdCK3FmU21za0dJ?=
- =?utf-8?B?dHlHMmFYVzdGdmtrUlVhNDh4ZEIyTVd0QUtsUkg5M1dwRytRMFIvRDNoVVhj?=
- =?utf-8?B?Q0E9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bDJscWF5cHNMOHlUbkMrM1gyYmpWVko0Mjhub296UUpqSWRLK25PT1kvODZH?=
+ =?utf-8?B?Yk9uNStkZ3FRTGNSUjAxNXF0cHA5S0lqS0RzSHd1ZXF5VnhrYTZ0WHR1bjhU?=
+ =?utf-8?B?UVk1dUxqWmZjQWNjWHdJRHJyeHdaSnBmN1M1Ky8wY2pMUTVDZk91cTRwSFNt?=
+ =?utf-8?B?U2x5T1NndTdvWE9SeW9kcGRIVklXcGdqMXN4UGQwU0RXRW1XUXNKSWdxVnBB?=
+ =?utf-8?B?WklRaW0wZVhweGdEZEM2UkJpanpHQzRoUWlWdllHN3A5UUs5UFZjZ00zdlF0?=
+ =?utf-8?B?L0h6OS9KdjJLNXYvOHNhUWMzZFJZNkhXMGVhMjN1bE1VVUkvT3NiTHhRQ3Nz?=
+ =?utf-8?B?TXd5ME45VXdIQ3dlcWJ4U1dOclhZT1ZRS2s1RGdwVG11Ymwxb0VSbTViTklz?=
+ =?utf-8?B?YXJNbDU2Y1lzMEY3OUFpdTFodmd2VXdEZnF0WklzaEJ4Y3M1OEI1ZjhLM0I3?=
+ =?utf-8?B?eTRVUko2S3dHTFF1TXBXbmdYOUtYSkZPdjgxRkFMQkJvR0pMSnd6dkkybENo?=
+ =?utf-8?B?WFhTaEVmZG5LREY0S1FWaG9ZaEErVTRnNmFna3gvODR5ZEdTZU9UbGwzVUd0?=
+ =?utf-8?B?QU8xbEw3RTU3ekxiYWtyZjZYTkl4dldhUVNGTWVpVW5NWjlYOStSRjVUZ2Zk?=
+ =?utf-8?B?Nk11YWo0ZWkrVVVpNHl3S3F6R0JFUG9TOFR6V1VmNDJCbWpQeVVKQTh3VEs3?=
+ =?utf-8?B?ZlVqV2dXYlV2bXd6U0NuNVFWTnJReUFmeTJwQnZFV2VXM21qR1k1cEo1UlRM?=
+ =?utf-8?B?UUdaQVdKa3I0R0pYNElaRFpvSzdEQjNxMGhxRmFiYmlSRmRDYmdXZVpnZFBz?=
+ =?utf-8?B?cVF1akE3M3U0bGxQWGN2ckx5L1ZVUy9lekthZzV3Z1NMcUVsL0JUa0Uzazc0?=
+ =?utf-8?B?bDNyTDlYcENKb05CWTVYdk93SEFidVhZTnFobUdRQStPczRIM3MvMG9sMmZo?=
+ =?utf-8?B?N3NHalJwcWx0bW1KdFRJeDc4UnpVY3BybXJCcy9uWUNtSEdtdzQ3Kzk3anBh?=
+ =?utf-8?B?b2w3WVduMXNGRWJkTnkvbGtLRVpKQlpzN0tBdFJVdW9OYnBkajNjdnZtZkNX?=
+ =?utf-8?B?WEJpTEdjS251ZnRURHI0M1JTdG5TdVE0TURPL0hTU0x3ajhFYm14QkhhZ09S?=
+ =?utf-8?B?TXh4Y1NmMFVJMytpUjMwd0V0cHRURHdLUWt0eFRpKzNCWC9kVkQvMXB0MmRt?=
+ =?utf-8?B?Sk8yUFRFcnR2cXdyQ3d6cjBNY21LcGttd3ZUN3JYeWlKMCtQcE1mQmVYWDJ1?=
+ =?utf-8?B?ME5BMmgzN3U0Qlg1V3hRaHhhNjFqL3l3WjFLbmpsRk83Mk8vZS9kQ291bzho?=
+ =?utf-8?B?VXJuTnMxYWdiRkZneFg5MVZrOEFuNzNndks1VXA1SFlQbFBFUnVUcldCVENr?=
+ =?utf-8?B?MVNpeVpxRjdJdTRmZmhybnk1ZTFHck4zSHRhS1lFM3NyM2pvN0tSYWo4OGNH?=
+ =?utf-8?B?STV3N2N1WkZnZllCTmpTdGZ1ZXpqL3hrUWFwek82Y1JMNjdwRTZzT2FCY2U2?=
+ =?utf-8?B?RVBLTCtIeHFKQi9aTmloMW9lcEZjNGQveDBzbk9idXlEUGxlNk1qOFo2bk01?=
+ =?utf-8?B?Tjk1ZU9wQ0JoNEkxTVYyNncrV0NHdWE1VWVzbHR6bG52ZkxkR1ViV3pIazJQ?=
+ =?utf-8?B?NUozb1ZSbjlKNGErSnE0cHdSeDJ2ZmxGV0ZleDlNRjdvTkxGaG1mNlVEUURs?=
+ =?utf-8?B?bkJJZFBkUStmNm9sZStyU3hLREJvYVdGUlJZdnFuSnlHN25udjNZSXdRajhN?=
+ =?utf-8?B?eCtWNUN3eklLeWJhWnhYbVFYcHBiMmNmalBKQXoydEt2R01Nb0FSZC9oTlB6?=
+ =?utf-8?B?VTIrK25ON1REUnFoT2RCZFhhMkxXclhYOFNyZE13TzBMclFsZ2xRNGw5dVpM?=
+ =?utf-8?B?b3NIVHpYd2YvTUJqa3VTNHR5WkVCM3RycXI5cURCWGlaODRXZkVaV2xZTzZr?=
+ =?utf-8?B?c1FhOEhMakFJZHlXc0pqZzZWR3p2YlJlU3NwVlpBVU9QbUVnc1hFK05FS2d1?=
+ =?utf-8?B?eGpiMDhSdk5vRWltZ3JlcUw4Z2MwekJLeHIzUXJtY3lvMG84Mk9sMGtmZ05B?=
+ =?utf-8?B?UDBETkNMNEY5UFdkYk83NW1wdEFkRTJBVnNnWngvcGFiam1EQ3Z2bmRIK0JR?=
+ =?utf-8?B?Uy9rNFRoa0dGQ0ZqSWRVK3gvQXdOU24vLytFazg4RVBMQ2hwd2N3WHc0c0po?=
+ =?utf-8?B?dUE9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 09c9a67c-d85a-40e9-254f-08dc94270268
+X-MS-Exchange-CrossTenant-Network-Message-Id: 797c56c8-2247-4359-914e-08dc9427363f
 X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2024 08:24:04.5667 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2024 08:25:31.5541 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8A6G9hctD/K4g5s5P07V8c7SXydl5F1S8r2hUpkMz4wg6um4R8vxu7zH24fdDUXOtlw7cTb7F0Yz5NwwvzCsKTa4RVn3TROlve94pg9KHK0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9577
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6G4dPdz8lVFI+/Ls9cgMtVL9DKs8iJJesY4OtqSts7I27thbqRXHAsfmic8WUV9MC0O7FBNPNhEIi4DlrmehhT5DjJ9yAOVbycwtJe4RTKQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8265
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,133 +175,208 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 6/23/24 7:53 PM, Simon Glass wrote:
-> The code here is confusing due to large blocks which are #ifdefed out.
-> Add a function phase_sdram_init() which returns whether SDRAM init
-> should happen in the current phase, using that as needed to control the
-> code flow.
+> Now that am335x_evm boots OK on the Beaglebone black, drop the latter
+> and update the docs to cover the change.
 > 
-> This increases code size by about 500 bytes in SPL when the cache is on,
-> since it must call the rather large rockchip_sdram_size() function.
+> Also add a few updates about 'make fit' and drop the note about the
+> security review, as U-Boot's verified boot has had quite extensive
+> review now.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 > ---
 > 
 > Changes in v4:
-> - Drop the non-dcache optimisation, since the cache should normally be on
+> - Move Binman size feature to a separate series
 > 
-> Changes in v3:
-> - Split out the refactoring into a separate patch
+> Changes in v2:
+> - Drop patch "regulator: rk8xx: Fix incorrect parameter"
+> - Rewrite boneblack patch to onstead drop the target and update docs
 > 
->   drivers/ram/rockchip/sdram_rk3399.c | 42 +++++++++++++++--------------
->   1 file changed, 22 insertions(+), 20 deletions(-)
+>   board/ti/am335x/MAINTAINERS              |  1 -
+>   configs/am335x_boneblack_vboot_defconfig | 94 ------------------------
+>   configs/am335x_evm_defconfig             |  3 +-
+>   doc/usage/fit/beaglebone_vboot.rst       | 21 +++---
+>   4 files changed, 12 insertions(+), 107 deletions(-)
+>   delete mode 100644 configs/am335x_boneblack_vboot_defconfig
 > 
-> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> index 3c4e20f4e80..949a082d00c 100644
-> --- a/drivers/ram/rockchip/sdram_rk3399.c
-> +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> @@ -13,6 +13,7 @@
->   #include <log.h>
->   #include <ram.h>
->   #include <regmap.h>
-> +#include <spl.h>
->   #include <syscon.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
-> @@ -63,8 +64,6 @@ struct chan_info {
->   };
+> diff --git a/board/ti/am335x/MAINTAINERS b/board/ti/am335x/MAINTAINERS
+> index 219c8715bf1..ed8800a2663 100644
+> --- a/board/ti/am335x/MAINTAINERS
+> +++ b/board/ti/am335x/MAINTAINERS
+> @@ -3,6 +3,5 @@ M:	Tom Rini <trini@konsulko.com>
+>   S:	Maintained
+>   F:	board/ti/am335x/
+>   F:	include/configs/am335x_evm.h
+> -F:	configs/am335x_boneblack_vboot_defconfig
+>   F:	configs/am335x_evm_defconfig
+>   F:	configs/am335x_evm_spiboot_defconfig
+> diff --git a/configs/am335x_boneblack_vboot_defconfig b/configs/am335x_boneblack_vboot_defconfig
+> deleted file mode 100644
+> index d473a1a793b..00000000000
+> --- a/configs/am335x_boneblack_vboot_defconfig
+> +++ /dev/null
+> @@ -1,94 +0,0 @@
+> -CONFIG_ARM=y
+> -CONFIG_ARCH_CPU_INIT=y
+> -# CONFIG_SPL_USE_ARCH_MEMCPY is not set
+> -# CONFIG_SPL_USE_ARCH_MEMSET is not set
+> -CONFIG_ARCH_OMAP2PLUS=y
+> -CONFIG_TI_COMMON_CMD_OPTIONS=y
+> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4030ff00
+> -CONFIG_SF_DEFAULT_SPEED=24000000
+> -CONFIG_DEFAULT_DEVICE_TREE="am335x-boneblack"
+> -CONFIG_AM33XX=y
+> -CONFIG_CLOCK_SYNTHESIZER=y
+> -CONFIG_SPL=y
+> -CONFIG_ENV_OFFSET_REDUND=0x280000
+> -CONFIG_TIMESTAMP=y
+> -CONFIG_FIT_SIGNATURE=y
+> -CONFIG_FIT_VERBOSE=y
+> -CONFIG_SYS_BOOTM_LEN=0x1000000
+> -CONFIG_DISTRO_DEFAULTS=y
+> -CONFIG_AUTOBOOT_KEYED=y
+> -CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
+> -CONFIG_AUTOBOOT_DELAY_STR="d"
+> -CONFIG_AUTOBOOT_STOP_STR=" "
+> -CONFIG_BOOTCOMMAND="run findfdt; run init_console; run finduuid; run distro_bootcmd"
+> -CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> -CONFIG_ARCH_MISC_INIT=y
+> -CONFIG_SPL_SYS_MALLOC=y
+> -CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
+> -CONFIG_SPL_MUSB_NEW=y
+> -# CONFIG_SPL_NAND_SUPPORT is not set
+> -CONFIG_SPL_NET=y
+> -CONFIG_SPL_NET_VCI_STRING="AM33xx U-Boot SPL"
+> -CONFIG_SPL_OS_BOOT=y
+> -CONFIG_SPL_FALCON_BOOT_MMCSD=y
+> -CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+> -CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
+> -CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
+> -CONFIG_CMD_SPL=y
+> -CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+> -# CONFIG_CMD_SETEXPR is not set
+> -CONFIG_BOOTP_DNS2=y
+> -CONFIG_OF_CONTROL=y
+> -CONFIG_SPL_OF_CONTROL=y
+> -CONFIG_ENV_OVERWRITE=y
+> -CONFIG_ENV_IS_IN_MMC=y
+> -CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+> -CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_SYS_MMC_ENV_DEV=1
+> -CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+> -CONFIG_VERSION_VARIABLE=y
+> -CONFIG_NET_RETRY_COUNT=10
+> -CONFIG_BOOTP_SEND_HOSTNAME=y
+> -# CONFIG_SPL_BLK is not set
+> -CONFIG_BOOTCOUNT_LIMIT=y
+> -CONFIG_SYS_BOOTCOUNT_BE=y
+> -CONFIG_DFU_MMC=y
+> -CONFIG_DFU_RAM=y
+> -CONFIG_USB_FUNCTION_FASTBOOT=y
+> -CONFIG_DM_I2C=y
+> -CONFIG_MISC=y
+> -CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+> -# CONFIG_SPL_DM_MMC is not set
+> -CONFIG_MMC_OMAP_HS=y
+> -CONFIG_MTD=y
+> -CONFIG_DM_SPI_FLASH=y
+> -CONFIG_SPI_FLASH_WINBOND=y
+> -CONFIG_PHY_ATHEROS=y
+> -CONFIG_PHY_SMSC=y
+> -CONFIG_PHY_GIGE=y
+> -CONFIG_MII=y
+> -CONFIG_DRIVER_TI_CPSW=y
+> -CONFIG_DM_PMIC=y
+> -# CONFIG_SPL_DM_PMIC is not set
+> -CONFIG_PMIC_TPS65217=y
+> -CONFIG_SPL_POWER_TPS65910=y
+> -CONFIG_SPI=y
+> -CONFIG_DM_SPI=y
+> -CONFIG_OMAP3_SPI=y
+> -CONFIG_TIMER=y
+> -CONFIG_OMAP_TIMER=y
+> -CONFIG_USB=y
+> -CONFIG_DM_USB_GADGET=y
+> -CONFIG_SPL_DM_USB_GADGET=y
+> -CONFIG_USB_MUSB_HOST=y
+> -CONFIG_USB_MUSB_GADGET=y
+> -CONFIG_USB_MUSB_TI=y
+> -CONFIG_USB_GADGET=y
+> -CONFIG_SPL_USB_GADGET=y
+> -CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> -CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> -CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+> -CONFIG_USB_ETHER=y
+> -CONFIG_SPL_USB_ETHER=y
+> -CONFIG_LZO=y
+> diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
+> index d243cb16e72..cabc181460a 100644
+> --- a/configs/am335x_evm_defconfig
+> +++ b/configs/am335x_evm_defconfig
+> @@ -13,6 +13,8 @@ CONFIG_AM335X_USB0_PERIPHERAL=y
+>   CONFIG_AM335X_USB1=y
+>   CONFIG_SPL=y
+>   CONFIG_TIMESTAMP=y
+> +CONFIG_FIT_SIGNATURE=y
+> +CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_SYS_BOOTM_LEN=0x1000000
+>   CONFIG_DISTRO_DEFAULTS=y
+> @@ -119,5 +121,4 @@ CONFIG_SPL_USB_ETHER=y
+>   CONFIG_WDT=y
+>   # CONFIG_SPL_WDT is not set
+>   CONFIG_DYNAMIC_CRC_TABLE=y
+> -CONFIG_RSA=y
+>   CONFIG_LZO=y
+> diff --git a/doc/usage/fit/beaglebone_vboot.rst b/doc/usage/fit/beaglebone_vboot.rst
+> index cd6bb141910..1360c71803c 100644
+> --- a/doc/usage/fit/beaglebone_vboot.rst
+> +++ b/doc/usage/fit/beaglebone_vboot.rst
+> @@ -67,18 +67,20 @@ a. Set up the environment variable to point to your toolchain. You will need
 >   
->   struct dram_info {
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
->   	u32 pwrup_srefresh_exit[2];
->   	struct chan_info chan[2];
->   	struct clk ddr_clk;
-> @@ -75,7 +74,6 @@ struct dram_info {
->   	struct rk3399_pmusgrf_regs *pmusgrf;
->   	struct rk3399_ddr_cic_regs *cic;
->   	const struct sdram_rk3399_ops *ops;
-> -#endif
->   	struct ram_info info;
->   	struct rk3399_pmugrf_regs *pmugrf;
->   };
-> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
->   					struct rk3399_sdram_params *params);
->   };
+>          export CROSS_COMPILE=arm-linux-gnueabi-
 >   
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> -
->   struct rockchip_dmc_plat {
->   #if CONFIG_IS_ENABLED(OF_PLATDATA)
->   	struct dtd_rockchip_rk3399_dmc dtplat;
-> @@ -191,6 +186,17 @@ struct io_setting {
->   	},
->   };
+> -b. Configure and build U-Boot with verified boot enabled::
+> +b. Configure and build U-Boot with verified boot enabled. Note that we use the
+> +am335x_evm target since it covers all boards based on the AM335x evaluation
+> +board::
 >   
-> +/**
-> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
-> + *
-> + * Returns: true to do SDRAM init in this phase, false to not
-> + */
-> +static bool phase_sdram_init(void)
-> +{
-> +	return spl_phase() == PHASE_TPL ||
-> +	    (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
-> +}
-> +
->   static struct io_setting *
->   lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
->   {
-> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
->   	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
->   	int ret;
+>       export UBOOT=/path/to/u-boot
+>       cd $UBOOT
+>       # You can add -j10 if you have 10 CPUs to make it faster
+> -    make O=b/am335x_boneblack_vboot am335x_boneblack_vboot_config all
+> -    export UOUT=$UBOOT/b/am335x_boneblack_vboot
+> +    make O=b/am335x_evm am335x_evm_config all
+> +    export UOUT=$UBOOT/b/am335x_evm
 >   
-> -	if (!CONFIG_IS_ENABLED(OF_REAL))
-> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
->   		return 0;
+>   c. You will now have a U-Boot image::
 >   
->   	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
-> @@ -3138,22 +3144,21 @@ static int rk3399_dmc_init(struct udevice *dev)
+> -    file b/am335x_boneblack_vboot/u-boot-dtb.img
+> -    b/am335x_boneblack_vboot/u-boot-dtb.img: u-boot legacy uImage,
+> +    file b/am335x_evm/u-boot-dtb.img
+> +    b/am335x_evm/u-boot-dtb.img: u-boot legacy uImage,
+>         U-Boot 2014.07-rc2-00065-g2f69f8, Firmware/ARM, Firmware Image
+>         (Not compressed), 395375 bytes, Sat May 31 16:19:04 2014,
+>         Load Address: 0x80800000, Entry Point: 0x00000000,
+> @@ -466,7 +468,7 @@ the private key that you signed with so that it can verify any kernels that
+>   you sign::
 >   
->   	return 0;
->   }
-> -#endif
+>       cd $UBOOT
+> -    make O=b/am335x_boneblack_vboot EXT_DTB=${WORK}/am335x-boneblack-pubkey.dtb
+> +    make O=b/am335x_evm EXT_DTB=${WORK}/am335x-boneblack-pubkey.dtb
 >   
->   static int rk3399_dmc_probe(struct udevice *dev)
->   {
->   	struct dram_info *priv = dev_get_priv(dev);
+>   Here we are overriding the normal device tree file with our one, which
+>   contains the public key.
+> @@ -597,14 +599,11 @@ Further Improvements
 >   
-> -#if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> -	if (rk3399_dmc_init(dev))
-> -		return 0;
-> -#endif
-> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> -	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> +	if (phase_sdram_init()) {
-> +		if (rk3399_dmc_init(dev))
-> +			return 0;
-> +	} else {
-> +		priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> +		debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> +	}
-> +
+>   Several of the steps here can be easily automated. In particular it would be
+>   capital if signing and packaging a kernel were easy, perhaps a simple make
+> -target in the kernel.
+> +target in the kernel. A stating point for this is the 'make image.fit' target
 
-I'm not sure we need to put the debug message into an else as this 
-pmugrf is also used when dmc_init passes.
+s/stating/starting/ I believe?
 
-Additionally, we could also just set priv->pmugrf before the if 
-condition and remove it from dmc_init if we really wanted to.
-
->   	priv->info.base = CFG_SYS_SDRAM_BASE;
-> -	priv->info.size =
-> -		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
-> +	priv->info.size = rockchip_sdram_size((ulong)&priv->pmugrf->os_reg2);
->   
-
-Can you please say a few words about this change in the commit log? Why 
-phys_addr_t->ulong here?
-
-Otherwise looks ok to me,
 Cheers,
 Quentin
