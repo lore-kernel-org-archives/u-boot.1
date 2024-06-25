@@ -4,181 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86ED5C3064D
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 01:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C446C2BBCA
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 01:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 404DB88405;
-	Wed, 26 Jun 2024 03:59:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cs-soprasteria.com
+	by phobos.denx.de (Postfix) with ESMTP id E5B5B884CA;
+	Wed, 26 Jun 2024 03:59:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=cs-soprasteria.com header.i=@cs-soprasteria.com header.b="QmM9JTWZ";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="i+bDV4Kh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D4F888452; Tue, 25 Jun 2024 17:12:42 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::61d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6761588356; Tue, 25 Jun 2024 17:16:39 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 183928815E;
- Tue, 25 Jun 2024 17:12:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEC4F87572
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 17:16:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cs-soprasteria.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=christophe.leroy2@cs-soprasteria.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZF5qnRZ/1Uv7pEMLjXx/Om7505Pl1gXZZXQBZKlmgLG61KTOGuBOiAbKuJVbBDMp8LwcXg164Ccgc1V7DVLSGVftB8uMsp4RDVSt1Cdwht+3PkzIH1eUn16dQT9MlWAhPed4+yBw6Lxwh84WJFFGtg7uuVoGAKbqNNIAuV54m63CHQSz+OqvU37DIZeB7My5augG4do5G1Y2mp/jJs2uvnpoFPE0xHRRxMiM+VLymopXEFsd5Jw+r4UrCd+UE5Gu4D41jccxh246U4aq95BxGP5Dh0G2HfYRvS5GexrRHmg3V9aVPnvKdLBJzDujPQyjJ2hhA6K+HKW3xjlBw/4M+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=COnwpV9B53i6nl6aHrFhOUexRnlO8zyrlHuY7QyWeso=;
- b=a01whFvPK1sWTgpjj0GBiFORhdbrWNPYiYyl0R/aA5utUWE4iMge/4BT43iTMC+T1Ta15Uwf/ez8BNbrVXZ2eHr/MfARt8qW+DT1cFomUFtXSy1V7Ta2nMauK0FeEzw4mjKgL3cZL1KHee8Zyg/zg289DQiVs23CcK3EX7erpYV8J5VF7fvyzkcYV0uatZJHkWPVT3MFjd6f4cOxWHiY50HlqGiE5uCMf+nEfpgF8jsasABiV9rIm2wwX7O5zl1Dyfls7sByFa2b02mNUcjszTulrshBGNJBW/hvj1sYW9HvWrP1HORTme5QNg5eTlGo6wBU4nwoLIAp8fOHE0QDbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cs-soprasteria.com; dmarc=pass action=none
- header.from=cs-soprasteria.com; dkim=pass header.d=cs-soprasteria.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cs-soprasteria.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=COnwpV9B53i6nl6aHrFhOUexRnlO8zyrlHuY7QyWeso=;
- b=QmM9JTWZIskm//B7Ttf0xF5JBc3KCGA/AycBM84Z1xZslLODPUtMlT1BGonrBPlNHu+A0B0SCkdSU4jU0eO5pgI2kPQ6u+xmsI9KpvijfJGwk/4hBoTwFxG/lNx1ofdS+2a0Q9hrDKhD9VDQTYD4IiG242FZbKpivlJAWZryEEKfWp7wQIO7kq55WryXFfDARtkLLvwZyipXoKA/ymdUlW9vWiA4uNUynLVPXTfGfB5BlTS9JSjXJwOB2SXOXjbVEO3C7q397AGrkDerQ9RUobxWgvGHn53BiVFKHFKdhH3hP1a5Puwa5RFnro6FZ24ukdcBBXTjT+qOFxnUkPM5iA==
-Received: from AM0PR07MB4962.eurprd07.prod.outlook.com (2603:10a6:208:f3::19)
- by DU2PR07MB8378.eurprd07.prod.outlook.com (2603:10a6:10:2f1::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.20; Tue, 25 Jun
- 2024 15:12:38 +0000
-Received: from AM0PR07MB4962.eurprd07.prod.outlook.com
- ([fe80::6724:2919:9cbb:2bb2]) by AM0PR07MB4962.eurprd07.prod.outlook.com
- ([fe80::6724:2919:9cbb:2bb2%5]) with mapi id 15.20.7698.025; Tue, 25 Jun 2024
- 15:12:38 +0000
-From: LEROY Christophe <christophe.leroy2@cs-soprasteria.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>
-CC: "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
- "u-boot-board-maintainers@lists.denx.de"
- <u-boot-board-maintainers@lists.denx.de>
-Subject: Re: [ANN] U-Boot v2024.07-rc5 released
-Thread-Topic: [ANN] U-Boot v2024.07-rc5 released
-Thread-Index: AQHaxm0FAqyE7DrRlkOEjCCn8HqPdLHYl1+A
-Date: Tue, 25 Jun 2024 15:12:38 +0000
-Message-ID: <e396268c-e106-4bb8-a40d-e0582e556c6b@cs-soprasteria.com>
-References: <20240624193035.GK38804@bill-the-cat>
-In-Reply-To: <20240624193035.GK38804@bill-the-cat>
-Accept-Language: fr-FR, en-US
-Content-Language: fr-FR
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla Thunderbird
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cs-soprasteria.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM0PR07MB4962:EE_|DU2PR07MB8378:EE_
-x-ms-office365-filtering-correlation-id: 6003b312-3855-4d8c-feec-08dc95294028
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230037|1800799021|366013|376011|38070700015;
-x-microsoft-antispam-message-info: =?utf-8?B?YTFmUW1BN2tLVnIwQ0lFc0pYVjhtdmlIS3pzQm5YNUhSbmxFSXJLMTg0TStH?=
- =?utf-8?B?dGlMRE1UQ1NHajZWdXJscUUyUCtBVDA1ZU5Ya1FWT29iMy9ONXUrbDFXQmpR?=
- =?utf-8?B?T2xjV0ZacjcrR1BFR1hmaWptWWI2emwxQUsrUEkrZUJQTVpsUlo2MThEZkdq?=
- =?utf-8?B?c3lVUnNmNW9ZSmRZOXl1cW5WaXdFZUlwcm5vTFg3QjIyRVRqNk9BeVgwWEJY?=
- =?utf-8?B?aXYrTTlTZHozSExPQm5qYU1ZdXhib3kxRlZJOUNwMVFrOTJqM2lxYjAvOVNY?=
- =?utf-8?B?dis4STRoTCthZlhuZkxYTFcyMXFXc0o1VWFYd2I1T3NDZ2RRMzgzbVQ2UE9p?=
- =?utf-8?B?QXJpa2lpTTBRZ2tvekNHbEZiOTNQa2JENm1lUklFRTN0ZmREaVFVdHlpNmMw?=
- =?utf-8?B?N2lhRnBsYlNzUlJtWjErTElGWUV1bzVkN2NhT3F6cHBjU0RROWNGTzlWU2V3?=
- =?utf-8?B?QzU4ZEMzYzdHKzNFS1oyWHVTTVBldExxLzllM24wVzFyeUp0QldKb29WV09v?=
- =?utf-8?B?MG8xYXRZQnNWTWZpRnE4cFBBRGdlQnpjNU41WFBBODZ1cEk2QXg1T1BFY0hw?=
- =?utf-8?B?VHNwT0NBRnl6aUhyc3dRdXlCWWRzUlFNUm5VL3hLUWwzSGlLbmFLMk9aVzV3?=
- =?utf-8?B?T1FLWERWNjNVa2J3a2RIY3dHd0x6V1p6MVpaU1FKYjFjc2JjVmVvUXpkTTlr?=
- =?utf-8?B?ZU4zUmhrSCs3eWlzVG8ySTl0SHQvNmRyeENLS2NmMzRlVkNwTy9nYlFqK2I3?=
- =?utf-8?B?VWs5dFFiNDZ4MlAxd1FCdk1LcDUzZUt5Zk9UMmxBWVozK21aS1ltY0Q4WU5z?=
- =?utf-8?B?QzZFM3laY0NJc2FHMXJtbElXNjR1WE9PanczdDBGNGJ4TUNWY3dyemRSWTJ4?=
- =?utf-8?B?U2hhNFlsb3h2TDdCRXM0cHZMV1RDTThuaUpPS0xVYjBpNXpvc0licFlKdERm?=
- =?utf-8?B?dkZhTlc1bGNGVVBPZWpxdjdIdkRic1NlSURzNytRSFF1aGFEdGkvWm5SZzZD?=
- =?utf-8?B?bFZGTVBWMXB6bVVGbFdDazV2OWpPZlE5RmFKK1gvek1Ya0hFU2ljTk1FRGth?=
- =?utf-8?B?Y0xqNnR6Rmw1Nk5vL1BMMHV4MFdudWp3TXBHNVplb29qalVtZmF3S2sra25Z?=
- =?utf-8?B?WWRqcSt5cWhWYnNBVmNtSTFtandSUWdGdmNYNXdUc0VoVFhuQ1drREpGMFY5?=
- =?utf-8?B?SytSVjVzYzJDVjJDMG1jSWs0THZOQ1RFUUNWYll1b3BQTkhYMHZEWngxK25x?=
- =?utf-8?B?UVZGVGtDaXd4eTM4bFRiUG1DVGQ0ZExlOWVETTdSclZFMmNuN3JYYzFrUjEx?=
- =?utf-8?B?dlF0aEVsR25wZlc3K1JJd0J1UmQ2SCt4cGNFM2lWTnV6U3RvYmJTZnEzWGlx?=
- =?utf-8?B?ckMyRDAyUEM0ZVFsbHc5NnZZYjlPbzJ5bCtteHR4M1l1dm1IaExrZmlqeUpw?=
- =?utf-8?B?ektERkJYdndEZDNWWUJwMzhPR0YrYWV2ZjZGODM4NXdhUW43R01PbUFtZDhO?=
- =?utf-8?B?aExWNitQdTJvYzhLYnY5V0VBRE1FTnBGeDhuYjMvNEx4cHlveS9HMEVlWUEy?=
- =?utf-8?B?Z2h4aFh0cUxpWFlpMzRlVUZVWGIzSDFmYW5ldWZmMzVvVkZjT3J4TkwySzJJ?=
- =?utf-8?B?L2gybm84d3R5Y0luVXdMR2xTL0lDdEVobnprUGRkRThvUDZmRmcwMFI2dCsy?=
- =?utf-8?B?V1hlTjBhcUp3WlpKd2VvVGwyRk9ScmhWSVpjTUxkU0FxWVlOeExHeUE2UjBQ?=
- =?utf-8?B?TnRyY0l5cysxT1FCMjFPNkV2MWtERC9WUHcrbFMrRWg3QWtqU0NVOWl3UnhN?=
- =?utf-8?B?NTZGeUxobnBjQ2hJUHNramRmeGVnWXRRVVF2c0V6ME5vbk5HK2xmaVFHZHBS?=
- =?utf-8?B?Wk83OVhNSnkxWUZRWnVReFV4amwwR0pHL2N6MDRrRkNsbEE9PQ==?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR07MB4962.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230037)(1800799021)(366013)(376011)(38070700015); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TDdEUGRRak03S1ZyajlPYnR3VzExYUpBL0JWZ25ZS1FoYW9oeHhTOGRiWGpi?=
- =?utf-8?B?R0prVUxkVlZWYmNkWmFTYmNRQXhNRUsrSHBiYlBISytDQ2VxWkVURm5JUGFj?=
- =?utf-8?B?bVlDL0M0Uy9VSHQ1U2IyY3FvYlF6Wkg5R0UzamFRVXljQ2huWHFJQ1BsaFFM?=
- =?utf-8?B?ZEh4OTQ2empGWnBDRGI2SXRZQjdJOEE2T2RTSDVTL3dFdnZXbE9ITWNtOTdu?=
- =?utf-8?B?Vmx1MlQrREMwT0tQWFlyUVg0WXE1OGZTVm12ZFR2Mk9PbFA2bmhlSkRnUkRm?=
- =?utf-8?B?N2JYNzZnQ2ZuWkFPTk5oMjFBcTZoOXpUNENOZ2lEZjlCNVI4TXk2Z2pURnl3?=
- =?utf-8?B?eGs3VXJHR2xlM3NHa1lKbzIxVlhwdjNUN3RSWWEwbGRzRG1venYzL1Fmaks1?=
- =?utf-8?B?S01Ea1k0QTFkLzFkNXJlUk50eTVVZS84dDF6TzNYcXZBcDE0cldJL21XaXZR?=
- =?utf-8?B?V3BtVXZ1d3Y3MGhybHdBWko4Y1ZPOHgyYU80S1VZQjEvSkJPZjA1QkZqWEZt?=
- =?utf-8?B?Y1dHbnRiNlZsUXNUUjNERTdrbTFPaVpSMGd4N3JaT0Z5QitVN2c2RkQ5MTFz?=
- =?utf-8?B?eHRLOG5Deko0SVJjVnhNY1hXRGVwdVNyZkJ3L3dWZG0zRHMxZDNzTE9GNE15?=
- =?utf-8?B?dktDdWFQZmRRWmZxVkt2UndLdFlGTG9CNjVWZVBsbDdydklVWTBaZVlacUtL?=
- =?utf-8?B?VldxZEFYZHFnWHViRXQvUjBBUG4yYUVmMm9YMWYzMTJ3T0M2bHc3SmY5MGoz?=
- =?utf-8?B?cEY2SEx1UVZGQUhsaTd5d1RhWkthMDBqbHdVSU5DSXdldk0yRHplTXNEdVVR?=
- =?utf-8?B?MkxxZzMxbzBzK3RpUzU0czZZL0ZyZkRIUm9MOTJNWHRqT09IenA2Wkk0TFRR?=
- =?utf-8?B?V3pyUHVobHZjODBvekk0SXc3OWNQTmM5UitRK29uRVBOQ0dkVmczLzJGVW9o?=
- =?utf-8?B?RUg3V0FWZ1RYTit1dmczTm83ek8rM0FseFJ5Yk1Kc2J6Lzl6ZGQwQ3BKRElt?=
- =?utf-8?B?b1RHK1Y3UUl2Rkh3T1diVEI5UmNhK0phN3JUNHh3TS9BZVdpaTFJdnNZTmJL?=
- =?utf-8?B?Zmd5dWFxVXdiRm5EOXJleHdzQkJ2S0RrV2xWM25UV1hRNHAzblV6SXc1Wk9z?=
- =?utf-8?B?TEd6akNNNW50SWJ2WVFQOVl0b2p5ZVZrNnZvWkRYRHdscnBENEF4WVlKNlBG?=
- =?utf-8?B?WEtEVHZRTWdaek5MbHBMVWdyTTlCckdCamt3YzR5TG5MejRvQnpEcnNHQWJt?=
- =?utf-8?B?R2p3ZndnamJGOWhpK2VHbDVlbnl5ZGVyRjN6V2NFZmlVaTZaSytHSkVmSjdx?=
- =?utf-8?B?dnd2SGRVS3JNVnRJeG9YQ2NLUDl5MEJ2blVoNGdMTDJmQ2VSVUhZb2tKVXdW?=
- =?utf-8?B?OUZXRlZBQlZLNzliQnRpRGZSUDMxRzBaSE1zUEkvK2x6K05USWdLeUFRRm5Z?=
- =?utf-8?B?a1ZNY1g3bklEdTBSOEZ2cSt0anFhWTRRWmUyS010aWZWUit3bythdEt1QldN?=
- =?utf-8?B?NzRVQVQxV2JLUXA4UzNZVkZHZ0ZZU2RwbU1HallkdW1GcFZQWHBhazRwV29S?=
- =?utf-8?B?bWJWdmVYNmJheU83YXZ4NVg3L0lQVjVpcVptckpOcjdoWEIyT2NmbHNzb09R?=
- =?utf-8?B?S1hZdFdvbDFoZnBUUWN6SUllcWVtM2xpRXdqcDM1ZzQ5Y1FFTDB1U0tVVzlt?=
- =?utf-8?B?aVdpREZZWlhleCs5b3dRSEd4a1JPTlVEQkR4NXNmWUFhR3FlcE93UHhiM3cr?=
- =?utf-8?B?Z294c2xCeWJGRXZUVEpGS1RHeWk5Sy9UVUMySHV5V0lreHVQOFh3U0lZWk5h?=
- =?utf-8?B?WHZNTVZPSElNbmpneW4zNnBmMWVDSVkxRlhNamVkUVFYOXIzSnlxbzVZTGpG?=
- =?utf-8?B?K3BKQy9CUXVwWlBlOWRldDI3MC9qdnQ0ZVBMU2tzZFVKQXpwcUZvVHdWWHpP?=
- =?utf-8?B?cGtjWkcycHhkdDdPLzNTVXA5enV3Wk4wSjh4QThqRXJzZ0tzclBYOFVJVFFo?=
- =?utf-8?B?RW9CanZBT0tWazZsK3ErbGRUZXA5TE02NTFWQmNNK0tiRklJT0c3U0puRDNW?=
- =?utf-8?B?Nkh1Mk5uMUpWay9Vd3c5ZlRjaFVYMjB6U0hFYmFyNEY1UGkxUWZsV2pwZ0Mr?=
- =?utf-8?B?eXFjQ29wU0hiNVlTQXN5NFZKRTM4SUN5TmpCR3YzVVVtNlh4eTI2bk80SGVN?=
- =?utf-8?B?bjZta055Wnp0SWVMRi9mSFRQS05hUk1adndzd1I5cUZ5aWsvL0cvRG9zaHZG?=
- =?utf-8?Q?LoNy9vgW+Y/mWsoKPU6edXg7gt59lhl10s8RqmOSMk=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B25C82F1887BD94FB35B3FA1152FA344@eurprd07.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ header.from=toradex.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrejs.cainikovs@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1719328596;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=flx93FGYl0c5ZOQ2WB4jsXF/egl/sqY1DdAztF/IC0c=;
+ b=i+bDV4KhvzhgitWx4H4u+KkjOys5j+UtJuOUZ5lFo99o5AuBtMqF/niWpYjBaC5cf92jG7
+ hql/U0ZUrZjzzzTHL0IeNJjbZAWShyL6DTGS1UvWsdgz0Kp9XZFMAVdavDMDMIMDi36VBQ
+ wQAiSKqY03ByiICODTjYnRetqH/hGfc=
+Received: from CHE01-GV0-obe.outbound.protection.outlook.com
+ (mail-gv0che01lp2040.outbound.protection.outlook.com [104.47.22.40]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-56-vbA51vlXMqmVrpX3jpd7cA-1; Tue, 25 Jun 2024 17:16:32 +0200
+X-MC-Unique: vbA51vlXMqmVrpX3jpd7cA-1
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1e::13)
+ by ZR0P278MB0154.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:32::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.30; Tue, 25 Jun
+ 2024 15:16:30 +0000
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::69a7:1995:40d7:53cc]) by ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::69a7:1995:40d7:53cc%7]) with mapi id 15.20.7698.025; Tue, 25 Jun 2024
+ 15:16:30 +0000
+Date: Tue, 25 Jun 2024 17:16:28 +0200
+From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v3 4/6] buildman: Always use the full path in CROSS_COMPILE
+Message-ID: <ZnrfTOKroizhiPvY@toradex.com>
+References: <20240623175622.1468600-1-sjg@chromium.org>
+ <20240623175622.1468600-5-sjg@chromium.org>
+ <ZnoKCXS5+Z0tM7Wb@toradex.com>
+ <CAFLszTgKvEUVEGOUnuiSzVD3TQE2UjwdFS9Dm8sBpwbw9guaww@mail.gmail.com>
+In-Reply-To: <CAFLszTgKvEUVEGOUnuiSzVD3TQE2UjwdFS9Dm8sBpwbw9guaww@mail.gmail.com>
+X-ClientProxiedBy: ZR0P278CA0105.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:23::20) To ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1e::13)
 MIME-Version: 1.0
-X-OriginatorOrg: cs-soprasteria.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0254:EE_|ZR0P278MB0154:EE_
+X-MS-Office365-Filtering-Correlation-Id: f7840efe-7920-4f55-0a84-08dc9529ca84
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|376011|1800799021
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?t4T/Ig9LQ+Nh/qMkdJljnGcmez2l6krTd3S373wvLdHC6BMTgHIzIuSx4nUh?=
+ =?us-ascii?Q?GwFTJqSf5zmc75HfplMerOu9HOezkFS2s8VqFBBkZNPFaqwv/58T7SfaQ36r?=
+ =?us-ascii?Q?bzSvKLlgNgJ7oVv9euPNmzxKYtIN2reccjy4EZEcTIdRgrVtetzL/ZlyWAjd?=
+ =?us-ascii?Q?7C5XrQ32M5kYjAkxwIhHz+Jl07AcGBM8ogcHD1drh6YYkEIBjk9g6Jtgb7r3?=
+ =?us-ascii?Q?hD59OvWM/MN1tATQIGL5B+E99HqOzf4rN+eRUEWk4Bo86gWBt/B45pELUtq2?=
+ =?us-ascii?Q?MeKFe6AnOJ+JXa//K2J0qA8UcfiIctNuAgIqStF/HFXMa/NjgJg/f7M/qpkn?=
+ =?us-ascii?Q?cOHcjfaOdHfyAXIbjJMuTjZ9DnfOFQr/6sHP/Bwk2h5jF5kY4KjVe1SVPtv4?=
+ =?us-ascii?Q?cB4RZn1PJVWDFb4Tcf2HjVnxrY76vrIWuDqrNfS972pFv/u4XzHyksGQx8tg?=
+ =?us-ascii?Q?n125n2wbkKb9iuWBnVg9eonCTDvl6yJdZWumFdaz86o6Qk+kStGzB747dysZ?=
+ =?us-ascii?Q?zADQA7osZkJrwRqyFd8Q3kJ21Lx9x9UklrIHX8IyhtESW9X/zAK6HFfY2Utf?=
+ =?us-ascii?Q?LeGyU5FV/p+LstZEHE8iwiU+XSJDVFqGuKVxVAn0LwFM1lpUpEGsS3vsaasx?=
+ =?us-ascii?Q?qeUmf5VmFCtPpsHByItERHyL2YWZNE25akKR7S+uW33E2yG5a5oVLT2Z6XJU?=
+ =?us-ascii?Q?ltaRQEIRP+3uu4hb5WI1jJwZX/4jMSMv1INIsC6fChWAJRsCW4Xju9AOTXhI?=
+ =?us-ascii?Q?8jDimE222WCumKz4eTa1c8HGD8Byo+cEcrhbCRvf6gEcf9fzj8/kBp3QhTBz?=
+ =?us-ascii?Q?g+dQeC3JrxsXDuh0NrdG5JmKF9+ZBC6RvOyG3Fjv5zPyviHjI+BOVMs4ERgw?=
+ =?us-ascii?Q?cQRJfR79tTOJRCtDqr3ZCQ1XZ8YT7JmoSKCO7MOZyhv8PFtV33z8vV9Sz0b6?=
+ =?us-ascii?Q?WC4fphMKphk+jYgpIBY/WEkgukT04d/A3FdpV95V7Ly/zRzjAoGqq9M5GbLK?=
+ =?us-ascii?Q?7CwI0OKXvlm5szkd2sbCJICeO9SUUPuJbgoWSml2B3S+E4W9dwWEl0j7F9Ap?=
+ =?us-ascii?Q?QX2h4Lo34EW79J2ITpNOaroACrTn+HjOF83rtvlTEfnvmn138K6hbgBfbTLZ?=
+ =?us-ascii?Q?mB6zAc6j/wKGb2Ggh0SX/o1HAEcSExOvVK1gqjK06HfD9gprarLL+CLPgGnY?=
+ =?us-ascii?Q?Y9tvHAypmaUNVTsnjUx0tvwwyx2gBNWF+8q9kB4kJ3T+7Wic+cXJbDkWbl9x?=
+ =?us-ascii?Q?O8J8xfSr1Z299mRc0QJMp4qgWb1+J4DMuErk1OIC6+3MLWCOPr+hdkY6RlbB?=
+ =?us-ascii?Q?HHE=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230037)(366013)(376011)(1800799021); DIR:OUT; SFP:1102
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dpxalNwDw4+PSRM1GBY5YaIfAPdHiFdwqArvFLVtfzjQSXJ2ewjaF7OmmGHM?=
+ =?us-ascii?Q?vhZsy0fVMpAGLfvQ9k8C7BIgQfl0j5V+NAbh1gR/Q0BEqiM8gnzPSFO/Eo1x?=
+ =?us-ascii?Q?px+nC1mogkJb4deVZ54KiqfFutwE4kUGAnVNb6IEUCUV+z808Tf2kT9dwzhn?=
+ =?us-ascii?Q?oSSmnIDpeM0DaPtXEQE4lvpFNAg+vvIVzDdDU/8jS3k498NkPLQjg7zIkyN7?=
+ =?us-ascii?Q?kdZJ2ZEsUzvzbHbMroyWceuSO1lhXGV1Sy3xIGRa5tBBuSqNxliWaLKTLdSX?=
+ =?us-ascii?Q?zSPJykXVy+7yVLW1QAjcRpaKsDPq2bj3qB32T2QWCYl3ihnsIl6NGnKSW0ec?=
+ =?us-ascii?Q?LXFoetAPHL3tWVIhTIyCqKUJNqU1eUFsjpaMMNhsSxoPu7y3wGdslRLgfuPG?=
+ =?us-ascii?Q?fEQEBUQ2hmvSl5XUF07bHkyGmkXgVBPxqNtShFO5dAvcFx3jgBrDrH+SZKzv?=
+ =?us-ascii?Q?MsH0rV4LDrHCVV98jMGfniVlcfRpRf7Yxlrx31+7t2ldCS3lZnarnsvRCv24?=
+ =?us-ascii?Q?UXgL0zjuj/WOCM4H2Ioql97Ypj2w/t2DlmXgCwf913ZliIBKfCLiDrbWP17/?=
+ =?us-ascii?Q?rfY3CJPgdtKFyoNSQbyE3G575WAVJdFR7SdLcPEI/MGMMUphAWTfVlGCjd8v?=
+ =?us-ascii?Q?/9xVSquD4gbXXpKGQ28VySIEbfMVB19qZkqF+rvEu2J2kwLrY5/3Mrj40P0J?=
+ =?us-ascii?Q?+fRi2SJup/RagCuPAIGKq7EWWcF8cPeINT6x5LTHWGF7UvC0ZZmnoTrm2pS4?=
+ =?us-ascii?Q?vI6yyRBDPS+ATBR+raiV8bNoM1Pz6bulVCMeqVvKR++D3onwSMQqUICXIQ+A?=
+ =?us-ascii?Q?ZeoQYtHPgMHjKTZGJoZUZ0EMqAePPSsUHPVeeyUV11GvfmnoCFuu4PwdoxT3?=
+ =?us-ascii?Q?Q/IQ4AfK8e58s3dXj/sLqIpwv6jxJr8t0IDeGIa5NR8kw2iOX81kw12fqWwC?=
+ =?us-ascii?Q?uSApTM2Hg/4GYb765pqISjE4fvpcnG0Rj9oVxj6mI4z88oi2cmWjXT21DbbR?=
+ =?us-ascii?Q?WdZjuX9xqMf1BRKHCxJdNygNUV4zbtrZ37zyf/fSlRenQe5DwDg1i3wOqdoZ?=
+ =?us-ascii?Q?vam/BKccuqgFap3uV/8vffauAeIAqeH8RllMjPyBRPL/toWJYdvie4FowF0Z?=
+ =?us-ascii?Q?Vbf5P5n8DFbuYUV/C1pUOm+hbg5tgaosydOxzo+yKlDdv7QAxnQoWIaxZi71?=
+ =?us-ascii?Q?rNUZ/3/2iXIZNTKpTdbSoJHXnpfgr/fxLmzpnHJbZCaSzn6TUq/xxmkWgWVF?=
+ =?us-ascii?Q?ufX1ISLk0YYtfEB7RDeFU9q68TbVboVhohbwNoNjQAqnYhRmZWVEykn81r74?=
+ =?us-ascii?Q?6N0ah7lidurZxiH2kYvu4iXRM1m8GE6xvs03vukIo760xG4F/sXYa/o5w3k3?=
+ =?us-ascii?Q?QA0L/tODge0lBrXJnpFp4PpZJHK7jfouzWHqNiq5SlZI3chyEQBSdk5E25rE?=
+ =?us-ascii?Q?sqzgDrwlEfWadflgyfMeWMnniNIAI3ajRx6TBo2miUzKK3ZTSHvzXDAXmP8y?=
+ =?us-ascii?Q?YqtQalhw2vkWyuAPLsrI7EQiasCcfIendEgJqq1ujttsmz4HlyIsfnQ59hgk?=
+ =?us-ascii?Q?ObHWnjm2m7k/J3oTO0LTNn0VpigOYqykLG/AXoLMeAuSiizFyHtgyCphUMHp?=
+ =?us-ascii?Q?ug=3D=3D?=
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f7840efe-7920-4f55-0a84-08dc9529ca84
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR07MB4962.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6003b312-3855-4d8c-feec-08dc95294028
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jun 2024 15:12:38.1975 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8b87af7d-8647-4dc7-8df4-5f69a2011bb5
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ngxfJml5c40ZID/1jOXVlqYUSh9SItSSy/3PlivPjuoY1HdS2bgxjS17qyB+xvbu/Y5jXwhTrDo0Y+CPkQ07XDpxzIveJ8pJUA8dGtrYvP8b5xPJgwi7aPlw1gmgVtLL
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR07MB8378
-X-MS-Exchange-CrossPremises-AuthAs: Internal
-X-MS-Exchange-CrossPremises-AuthMechanism: 04
-X-MS-Exchange-CrossPremises-AuthSource: AM0PR07MB4962.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossPremises-TransportTrafficType: Email
-X-MS-Exchange-CrossPremises-SCL: 1
-X-MS-Exchange-CrossPremises-messagesource: StoreDriver
-X-MS-Exchange-CrossPremises-BCC: 
-X-MS-Exchange-CrossPremises-originalclientipaddress: 2a01:e0a:511:aad0:9f10:86ad:5cd0:9703
-X-MS-Exchange-CrossPremises-transporttraffictype: Email
-X-MS-Exchange-CrossPremises-antispam-scancontext: DIR:Originating; SFV:NSPM;
- SKIP:0; 
-X-MS-Exchange-CrossPremises-processed-by-journaling: Journal Agent
-X-OrganizationHeadersPreserved: DU2PR07MB8378.eurprd07.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2024 15:16:30.6523 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EU01QYWFDdGnJZKLVydAlP6I9XRH3mQ+zl2BUZflV+d+gc6SU+Bas7P4TmEOPxqRWqnil4HjsHOW7qcWZCOM0zPTn1d/8GY8kiHOAC449LM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0154
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Wed, 26 Jun 2024 03:59:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -196,26 +162,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQWxsLA0KDQpMZSAyNC8wNi8yMDI0IMOgIDIxOjMwLCBUb20gUmluaSBhIMOpY3JpdMKgOg0K
-PiBIZXkgYWxsLA0KPiANCj4gV2VsbCwgb25jZSBhZ2FpbiBJIG5lZWQgdG8gY2hlY2sgbXkgY2Fs
-ZW5kZXIgcmVtaW5kZXJzIHNpbmNlLCB3aG9vcHMsDQo+IEknbSBhIHdlZWsgbGF0ZS4gVGhhdCBz
-YWlkLCBsb29raW5nIGF0IHRoZSBsaXN0IG9mIGNoYW5nZXMgaW4gdGhpcw0KPiBzbGlnaHRseSBl
-bG9uZ2F0ZWQgcGVyaW9kLCBJIHRoaW5rIGl0J3MgT0suIEF0IHRoaXMgcG9pbnQgd2UncmUgYSB3
-ZWVrDQo+IG91dCBmcm9tIHRoZSByZWxlYXNlLCBzbyBpdCdzIHRpbWUgZm9yIGNsZWFyIGFuZCBv
-YnZpb3VzIHJlZ3Jlc3Npb24NCj4gZml4ZXMuIElkZWFsbHkgb25lcyBpbnRyb2R1Y2VkIHRoaXMg
-cmVsZWFzZSBjeWNsZSBzbyB0aGVyZSdzIGxlc3MNCj4gY2hhbmNlcyBvZiB1bmludGVuZGVkIHNp
-ZGUtZWZmZWN0cy4NCj4gDQo+IEluIHRlcm1zIG9mIGEgY2hhbmdlbG9nLA0KPiBnaXQgbG9nIC0t
-bWVyZ2VzIHYyMDI0LjA3LXJjNC4udjIwMjQuMDctcmM1DQo+IGNvbnRhaW5zIHdoYXQgSSd2ZSBw
-dWxsZWQgYnV0IGFzIGFsd2F5cywgYmV0dGVyIFBSIG1lc3NhZ2VzIGFuZCB0YWdzDQo+IHdpbGwg
-cHJvdmlkZSBiZXR0ZXIgcmVzdWx0cyBoZXJlLg0KPiANCj4gV2l0aCB0aGF0LCB0aGUgZmluYWwg
-cmVsZWFzZSBpcyBwbGFubmVkIGZvciBNb25kYXksIEp1bHkgMXN0LCAyMDI0Lg0KPiBUaGFua3Mg
-YWxsIQ0KPiANCg0KRm9yIHlvdXIgaW5mb3JtYXRpb24sIEkgaGF2ZSBzdGFydGVkIHRlc3Rpbmcg
-djIwMjQuMDcgb24gbXkgcG93ZXJwYyANCmJvYXJkcyBpbiBvcGVyYXRpb25hbCBjb25kaXRpb24g
-YW5kIEkgaGF2ZSBhIG1ham9yIHByb2JsZW0gOiBVLWJvb3QgDQpkb2Vzbid0IGdldCB0aGUgTGlu
-dXgga2VybmVsIHN0YXJ0ZWQgYmVmb3JlIHRoZSB3YXRjaGRvZyBmaXJlcy4gSSBoYXZlIA0KdG8g
-ZGlzYWJsZSB3YXRjaGRvZyB0byBnZXQgaXQgcnVubmluZy4NCg0KVGhpcyBwcm9ibGVtIGRvZXNu
-J3Qgb2NjdXIgd2l0aCB2MjAyNC4wNC4NCg0KSSBiaXNlY3RlZCBpdCB0byBjb21taXQgMzQwZmRm
-MTMwM2RjICgiemxpYjogUG9ydCBmaXggZm9yIENWRS0yMDE2LTk4NDEgDQp0byBVLUJvb3QiKSBh
-bmQgSSBhbHNvIGNvbmZpcm0gdGhhdCB2MjAyNC4wNy1yYzUgd29ya3Mgd2VsbCB3aXRoIHRoYXQg
-DQpjb21taXQgcmV2ZXJ0ZWQgb24gdG9wIG9mIGl0Lg0KDQpBbnkgaWRlYSBvZiB3aGF0IGlzIGdv
-aW5nIHdyb25nIHdpdGggdGhhdCBjb21taXQgPw0KDQpDaHJpc3RvcGhlDQo=
+On Tue, Jun 25, 2024 at 01:38:07PM +0100, Simon Glass wrote:
+> Hi Andrejs,
+>=20
+> On Tue, 25 Jun 2024 at 01:06, Andrejs Cainikovs
+> <andrejs.cainikovs@toradex.com> wrote:
+> >
+> > On Sun, Jun 23, 2024 at 11:56:20AM -0600, Simon Glass wrote:
+> > > The feature to set the toolchain path does not seem to be needed. It
+> > > causes problems with venv (see [1]). Let's remove it.
+> > >
+> > > Add some tests while we are here.
+> > >
+> > > It does not look like any docs changes are needed for this.
+> > >
+> > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240621131423.2=
+363294-6-sjg@chromium.org/
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Suggested-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > >
+> > > Changes in v3:
+> > > - Drop the PATH modification altogether
+> > >
+> > >  tools/buildman/bsettings.py     |  3 ++
+> > >  tools/buildman/builder.py       |  5 +--
+> > >  tools/buildman/builderthread.py |  4 +-
+> > >  tools/buildman/cmdline.py       |  2 -
+> > >  tools/buildman/control.py       |  6 +--
+> > >  tools/buildman/test.py          | 75 +++++++++++++++++++++++++++++++=
+++
+> > >  tools/buildman/toolchain.py     | 20 ++++-----
+> > >  7 files changed, 92 insertions(+), 23 deletions(-)
+> > >
+> > > diff --git a/tools/buildman/bsettings.py b/tools/buildman/bsettings.p=
+y
+> > > index e225ac2ca0f..1be1d45e0fa 100644
+> > > --- a/tools/buildman/bsettings.py
+> > > +++ b/tools/buildman/bsettings.py
+> > > @@ -31,6 +31,9 @@ def setup(fname=3D''):
+> > >  def add_file(data):
+> > >      settings.readfp(io.StringIO(data))
+> > >
+> > > +def add_section(name):
+> > > +    settings.add_section(name)
+> > > +
+> > >  def get_items(section):
+> > >      """Get the items from a section of the config.
+> > >
+> > > diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+> > > index f35175b4598..7c563cddada 100644
+> > > --- a/tools/buildman/builder.py
+> > > +++ b/tools/buildman/builder.py
+> > > @@ -255,7 +255,7 @@ class Builder:
+> > >
+> > >      def __init__(self, toolchains, base_dir, git_dir, num_threads, n=
+um_jobs,
+> > >                   gnu_make=3D'make', checkout=3DTrue, show_unknown=3D=
+True, step=3D1,
+> > > -                 no_subdirs=3DFalse, full_path=3DFalse, verbose_buil=
+d=3DFalse,
+> > > +                 no_subdirs=3DFalse, verbose_build=3DFalse,
+> > >                   mrproper=3DFalse, per_board_out_dir=3DFalse,
+> > >                   config_only=3DFalse, squash_config_y=3DFalse,
+> > >                   warnings_as_errors=3DFalse, work_in_output=3DFalse,
+> > > @@ -279,8 +279,6 @@ class Builder:
+> > >              step: 1 to process every commit, n to process every nth =
+commit
+> > >              no_subdirs: Don't create subdirectories when building cu=
+rrent
+> > >                  source for a single board
+> > > -            full_path: Return the full path in CROSS_COMPILE and don=
+'t set
+> > > -                PATH
+> > >              verbose_build: Run build with V=3D1 and don't use 'make =
+-s'
+> > >              mrproper: Always run 'make mrproper' when configuring
+> > >              per_board_out_dir: Build in a separate persistent direct=
+ory per
+> > > @@ -336,7 +334,6 @@ class Builder:
+> > >          self._step =3D step
+> > >          self._error_lines =3D 0
+> > >          self.no_subdirs =3D no_subdirs
+> > > -        self.full_path =3D full_path
+> > >          self.verbose_build =3D verbose_build
+> > >          self.config_only =3D config_only
+> > >          self.squash_config_y =3D squash_config_y
+> > > diff --git a/tools/buildman/builderthread.py b/tools/buildman/builder=
+thread.py
+> > > index a8599c0bb2a..c23c3254d2d 100644
+> > > --- a/tools/buildman/builderthread.py
+> > > +++ b/tools/buildman/builderthread.py
+> > > @@ -404,7 +404,7 @@ class BuilderThread(threading.Thread):
+> > >                      the next incremental build
+> > >          """
+> > >          # Set up the environment and command line
+> > > -        env =3D self.toolchain.MakeEnvironment(self.builder.full_pat=
+h)
+> > > +        env =3D self.toolchain.MakeEnvironment()
+> > >          mkdir(out_dir)
+> > >
+> > >          args, cwd, src_dir =3D self._build_args(brd, out_dir, out_re=
+l_dir,
+> > > @@ -569,7 +569,7 @@ class BuilderThread(threading.Thread):
+> > >                  outf.write(f'{result.return_code}')
+> > >
+> > >              # Write out the image and function size information and =
+an objdump
+> > > -            env =3D result.toolchain.MakeEnvironment(self.builder.fu=
+ll_path)
+> > > +            env =3D result.toolchain.MakeEnvironment()
+> > >              with open(os.path.join(build_dir, 'out-env'), 'wb') as o=
+utf:
+> > >                  for var in sorted(env.keys()):
+> > >                      outf.write(b'%s=3D"%s"' % (var, env[var]))
+> > > diff --git a/tools/buildman/cmdline.py b/tools/buildman/cmdline.py
+> > > index 03211bd5aa5..5fda90508f2 100644
+> > > --- a/tools/buildman/cmdline.py
+> > > +++ b/tools/buildman/cmdline.py
+> > > @@ -121,8 +121,6 @@ def add_after_m(parser):
+> > >            help=3D"Override host toochain to use for sandbox (e.g. 'c=
+lang-7')")
+> > >      parser.add_argument('-Q', '--quick', action=3D'store_true',
+> > >            default=3DFalse, help=3D'Do a rough build, with limited wa=
+rning resolution')
+> > > -    parser.add_argument('-p', '--full-path', action=3D'store_true',
+> > > -          default=3DFalse, help=3D"Use full toolchain path in CROSS_=
+COMPILE")
+> > >      parser.add_argument('-P', '--per-board-out-dir', action=3D'store=
+_true',
+> > >            default=3DFalse, help=3D"Use an O=3D (output) directory pe=
+r board rather than per thread")
+> > >      parser.add_argument('--print-arch', action=3D'store_true',
+> > > diff --git a/tools/buildman/control.py b/tools/buildman/control.py
+> > > index 8f6850c5211..3ca9e2e8761 100644
+> > > --- a/tools/buildman/control.py
+> > > +++ b/tools/buildman/control.py
+> > > @@ -653,10 +653,8 @@ def do_buildman(args, toolchains=3DNone, make_fu=
+nc=3DNone, brds=3DNone,
+> > >      builder =3D Builder(toolchains, output_dir, git_dir,
+> > >              args.threads, args.jobs, checkout=3DTrue,
+> > >              show_unknown=3Dargs.show_unknown, step=3Dargs.step,
+> > > -            no_subdirs=3Dargs.no_subdirs, full_path=3Dargs.full_path=
+,
+> > > -            verbose_build=3Dargs.verbose_build,
+> > > -            mrproper=3Dargs.mrproper,
+> > > -            per_board_out_dir=3Dargs.per_board_out_dir,
+> > > +            no_subdirs=3Dargs.no_subdirs, verbose_build=3Dargs.verbo=
+se_build,
+> > > +            mrproper=3Dargs.mrproper, per_board_out_dir=3Dargs.per_b=
+oard_out_dir,
+> > >              config_only=3Dargs.config_only,
+> > >              squash_config_y=3Dnot args.preserve_config_y,
+> > >              warnings_as_errors=3Dargs.warnings_as_errors,
+> > > diff --git a/tools/buildman/test.py b/tools/buildman/test.py
+> > > index f92add7a7c5..ae9963eed4f 100644
+> > > --- a/tools/buildman/test.py
+> > > +++ b/tools/buildman/test.py
+> > > @@ -146,6 +146,7 @@ class TestBuild(unittest.TestCase):
+> > >          self.toolchains.Add('arm-linux-gcc', test=3DFalse)
+> > >          self.toolchains.Add('sparc-linux-gcc', test=3DFalse)
+> > >          self.toolchains.Add('powerpc-linux-gcc', test=3DFalse)
+> > > +        self.toolchains.Add('/path/to/aarch64-linux-gcc', test=3DFal=
+se)
+> >
+> > Sorry Simon, but me and others love to be consistent.
+>=20
+> That's fine, but do you have a comment on this patch?
+>=20
+> Regards,
+> Simon
+
+I was just thinking about aarch64-linux-gcc (should it be
+aarch64-linux-gnu-gcc, btw?)  without path for consistency.
+But this of course is very minor - feel free to disregard my
+comment.
+
+Best regards,
+Andrejs.
+
