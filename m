@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39557C2BBCA
-	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 11:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDEB7C30653
+	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 12:30:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87BEE8824C;
-	Tue, 25 Jun 2024 13:42:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=imag.fr
+	by phobos.denx.de (Postfix) with ESMTP id 67BCE884AC;
+	Tue, 25 Jun 2024 14:30:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=imag.fr header.i=@imag.fr header.b="I23oI5DQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jHlkSwks";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AE178841D; Tue, 25 Jun 2024 13:42:30 +0200 (CEST)
-Received: from zm-mta-out-3.u-ga.fr (zm-mta-out-3.u-ga.fr [152.77.200.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65E70884B0; Tue, 25 Jun 2024 14:30:22 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2700288208
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 13:42:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDF6788496
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 14:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=imag.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=etienne.duble@imag.fr
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=imag.fr; s=2022;
- t=1719315747; bh=ocmnycEdHilSr9n9yA3/uUqlC8ynzghmroJn6ppjyFo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=I23oI5DQXMcYocQdSoAptqoQerJbO5fML8LHKfnyMvfK6ViFShyQNOigX/i28xirr
- mCl7smJrZRanMpLnQe/fLCGjkvYo4tPzDPIqIW+d49N+IYbCKjDTnHkKNYj4DwT3qq
- pYcYiuaM3YO9QJ1B1sWql/lgL8xoGltQC69XuJyr4r7a0Ar3Eja1mzoRPMIv7vyU6Z
- QDODNb6oQSenlCnGSuWnAwiOraIWsEzcVE1yAbNQzc7BaepXQQvCqTQL2ABpO4vjMe
- t123Nxs+jFjO9KvJ6HHcQ8ZF2RMkdXNbyBBdsS97vGvvvuW5za1eDGJiX3d8Sjzmfg
- VdTSrfgaZPp7A==
-Received: from mailhub.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id C3FC140235;
- Tue, 25 Jun 2024 13:42:27 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhub.u-ga.fr (Postfix) with ESMTP id C01AD100068;
- Tue, 25 Jun 2024 13:42:27 +0200 (CEST)
-Received: from [129.88.53.250] (pimlig-dock-duble.imag.fr [129.88.53.250])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- (Authenticated sender: dublee@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 1532F4007F;
- Tue, 25 Jun 2024 13:42:22 +0200 (CEST)
-Message-ID: <273b4022-4192-4df8-ab69-db8d05b091ea@imag.fr>
-Date: Tue, 25 Jun 2024 13:42:21 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2c7fa0c9a8cso3743373a91.1
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 05:30:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719318618; x=1719923418; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bl4t7em8lGlHzBmUqV/Ct4Gepvqn56f1pQJtcj/mgtk=;
+ b=jHlkSwkskaYbRd9z+vXfKHYddAd7GSUp2IutQWJu2wGkhzmBMnApIliG/Td9gUOio7
+ /onRrpPbU02a4qV9fzFnZnsMXjMVW8z/l1KXjJwWyMYSTqj5fu9DN2otVefV/FuhZnzK
+ elgTqtOm8e7Z8Wyx9n4d/EwZS50/Owwtg10t0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719318618; x=1719923418;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bl4t7em8lGlHzBmUqV/Ct4Gepvqn56f1pQJtcj/mgtk=;
+ b=nAybewTWqXMJClr6PZ9x7h+Y9gzORSPEtBDpNMdnrmp8EX1HDflCdEp5L4tPGlfDdp
+ dcpzKhiXnV/d6r7f53m4abdv8kF98Yrw/ZSskrgKCFmiGxQjSEzCeDUGlXi1bGwL9Ryu
+ i12N83YBMCcG9SWbyDhRWF4IaUw8Bg7iHWUvzkaz29OSsoTcgV1hkncFTz/mqAZsynkr
+ oLlTabzY476HR0huPZiU+dNvlUmQGPTbNFDG3B/0wrEQWqPkXek9oKbmaBDP2VRleSEY
+ xvh7wR74aKL0VD6Px5cmTHlnxjZn4r7woe1H0MALeWpl0HssQ/08yiAtWdJxc61rVn4i
+ OsVg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUabM9YjKZbPP9j0Lrc8Ne+cwr9iQ+E30RqAf3/mRw9wg/haAVVxeZMdCUfGH6gol4vyWWAWdIRLFg9E7N3BmyyqUs1xw==
+X-Gm-Message-State: AOJu0YzvCRblHa0A5cHCFeJcQUdq4GPoCYFWGbX4IY/PE7jCD9dTTwKk
+ PM5Oy0mVwq12qTlROFdGJhYqt4qKtEeSVa9tdNWCrBNwV+M4gCAlW2aOVQiF3E6ZEGMij79JoyW
+ GPhsgq+PrFNBFXpqajZnqhmmi1lrhntGJFTDlEJpW4x4rJhzZBvxp
+X-Google-Smtp-Source: AGHT+IEOT/TBVT8KItJ6ybI0/jsmtENDMKM4t0fb5uUJ7HDyJE0nCS8ljYZWqijqvHlThM2S5N7iREo/zD2vQNH5paM=
+X-Received: by 2002:a17:90b:440b:b0:2c2:fed1:769f with SMTP id
+ 98e67ed59e1d1-2c8581d0636mr5803250a91.13.1719318618005; Tue, 25 Jun 2024
+ 05:30:18 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] net: give a different name to rtl8169 interfaces
-To: Dragan Simic <dsimic@manjaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- joe hershberger <joe.hershberger@ni.com>,
+References: <20240623203213.1571666-1-sjg@chromium.org>
+ <20240623203213.1571666-20-sjg@chromium.org>
+ <ZnkchlJmYdVCkQV+@toradex.com>
+ <CAOf5uwkQDzOpj-XUojvfWD6tU2cOxZkv4OEvOK7eZJZcRHTjfg@mail.gmail.com>
+ <20240624180149.GF38804@bill-the-cat>
+In-Reply-To: <20240624180149.GF38804@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 25 Jun 2024 13:30:05 +0100
+Message-ID: <CAFLszThdms5TT_o0CjQOp+6pqXF9nMUJKq5rvz0Y=EGZa2Tj-g@mail.gmail.com>
+Subject: Re: [PATCH v3 19/19] CI: Allow running tests on sjg lab
+To: Tom Rini <trini@konsulko.com>
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
  Leo Yu-Chi Liang <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>, Ramon Fried
- <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot <u-boot@lists.denx.de>
-References: <1978999632.15003049.1719232814587.JavaMail.zimbra@univ-grenoble-alpes.fr>
- <888498a7-0d65-4dd0-907e-0f8eb8a92695@cherry.de>
- <6472908d-548f-483a-8199-6c7233fc0eb9@imag.fr>
- <f8be5725-e8a5-454c-82db-4aaeb293673c@cherry.de>
- <a7dbf00b11304f80cacd5821a5e19127@manjaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Etienne_Dubl=C3=A9?= <etienne.duble@imag.fr>
-In-Reply-To: <a7dbf00b11304f80cacd5821a5e19127@manjaro.org>
-X-Greylist: Whitelist-UGA SMTP Authentifie (dublee@univ-grenoble-alpes.fr) via
- smtps-465 ACL (41)
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,32 +93,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-Hello,
-
-Le 25/06/2024 à 12:25, Dragan Simic a écrit :
->>> Another option may be to name them "rtl8169@<hexa>", with "<hexa>" 
->>> reflecting the PCI region address (so it is unique and stable). What 
->>> do you think?
->>
->> I guess that's one way, I'm also wondering how systemd renames those
->> to be unique but stable on the same machine, maybe we could take some
->> inspiration from them for that?
+On Mon, 24 Jun 2024 at 19:01, Tom Rini <trini@konsulko.com> wrote:
 >
-> Systemd also allows renaming of network interfaces using some rules
-> predefined by the user, so there's also the possibility to rename the
-> interfaces in U-Boot to ethernet0 and ethernet1, using fixed rules
-> that would be based on the PCI region address.
+> On Mon, Jun 24, 2024 at 04:56:02PM +0200, Michael Nazzareno Trimarchi wro=
+te:
+> > Hi Simon
+> >
+> > On Mon, Jun 24, 2024 at 2:52=E2=80=AFPM Andrejs Cainikovs
+> > <andrejs.cainikovs@toradex.com> wrote:
+> > >
+> > > On Sun, Jun 23, 2024 at 02:32:13PM -0600, Simon Glass wrote:
+> > > > Add a way to run tests on a real hardware lab. This is in the very =
+early
+> > > > experimental stages. There are only 23 boards and 3 of those are br=
+oken!
+> > > > (bob, ff3399, samus). A fourth fails due to problems with the TPM t=
+ests.
+> > > >
+> > > > To try this, assuming you have gitlab access, set SJG_LAB=3D1, e.g.=
+:
+> > > >
+> > > >    git push -o ci.variable=3D"SJG_LAB=3D1" dm HEAD:try
+> > > >
+> > > > This relies on the two previous series targeted at -next as well as=
+ the
+> > > > bugfix series for -master
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > Reviewed-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+> > >
+> >
+> > Do you have documentation on how to set it? We would like to do in our
+> > company too
+>
+> I _think_ from some talking with Simon before the biggest sticking point
+> might be changes needed on the labgrid side of things. However, that
+> might also be most easily remedied if there's a few people showing up in
+> the GitHub issue(s) showing interest in getting changes made/merged and
+> to use the overall feature.
 
-OK but the renaming occurs in the rtl8169 driver, that is used by 
-several boards, whereas the PCI region addresses come from the 
-device-tree, so they differ from board to board.
+The documentation is in the PR [1] mostly in the last commit [2].
+
+Yes it would really help for you to try it out and comment on the PR.
+I may end up splitting it into a few separate PRs, but code review on
+the project is very limited, from what I have seen so far. You will
+see an example of my lab (devices and environment file).
+
+I also have a few minor updates to the PR which I just uploaded, to
+work on top of the grpc branch and to support QEMU.
+
+[1] https://github.com/labgrid-project/labgrid/pull/1411
+[2] https://github.com/labgrid-project/labgrid/pull/1411/commits/c4b13af0e6=
+169228c9adef03d4b66401201edd23
 
 Regards,
-Etienne
-
--- 
-Etienne Dublé
-CNRS / LIG - Bâtiment IMAG
-700 avenue Centrale - 38401 St Martin d'Hères
-Bureau 426 - Tel 0457421431
+Simon
