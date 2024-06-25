@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF668C2BBCA
-	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 14:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F3EAC2BBCA
+	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 14:14:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8006C884B0;
-	Tue, 25 Jun 2024 16:14:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE99D884C8;
+	Tue, 25 Jun 2024 16:14:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="POi22sZO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q77LquqX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E4AD884B0; Tue, 25 Jun 2024 16:14:33 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 4FBF8884AC; Tue, 25 Jun 2024 16:14:48 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB7A088356
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 16:14:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26C2088356
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 16:14:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5bfb24e338bso2203491eaf.0
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 07:14:30 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5c21a177affso202714eaf.2
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 07:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719324869; x=1719929669; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719324885; x=1719929685; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=E8+FKkukESUDVjYiCKivz4aIF469YwDnbIuMHVdq+d8=;
- b=POi22sZO0EnHXXFb5Q0SwmZY+fbmo6we182tdiHpC5lRfVr5R8OMAZzeiEM/QMrpW6
- uLEghCXucIne3KBLxkhTByLCzaOZ1ChYvRFRVItKYv9Mzz0K2D/lKBCdb00RAFl+MDnp
- AcNWp5Op6MvbilGl9xsaFoGETi9OloQz35DLI=
+ bh=pxK51jKqmKaeZvecOUa5UJC0XRMR7dTSrfyiZZ6eCDE=;
+ b=Q77LquqXHKNrEHwSK84dTex6rpDyI1zfsKh2sedUHD0DM+qIIAYhFxOb5VWsFivXab
+ h1uD2BU5OsCjiziLiHHvbu+l3KfPvAbUjULddeaXpbuihfsQETotbdey2rbyLPq/lcqp
+ 8RWi1Au2q21RAC7gJEm6U2STAbJZJ29prUe0k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719324869; x=1719929669;
+ d=1e100.net; s=20230601; t=1719324885; x=1719929685;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E8+FKkukESUDVjYiCKivz4aIF469YwDnbIuMHVdq+d8=;
- b=eWr9pTRzw4x0nNJPXr5qMfgRcS82AoN1gUEEBGGrxpQyD977HbYoNOtE6bV7yn6ss6
- BjIq9OSLFdaRjeGePNzX+EpozKoxcGXn10Y8D/gpAeCBP3EPcXzagC1Qie2dZxKZ5MPq
- pChMbC/FoKmW7WKcX/Ctkerq8e6DEsekyw60BThIF/RW4G4aaSCv5MUzJyiP6xzyRFmX
- AreOP5eW3NoeMM56zZRTdHX4ic0ro9LYwD1k95zKD37KWxnYG2wdI9L4XnYFtYSjGBxN
- kX/HakcT5yM2Z2ILnvOgQ9g0ls1rpr+vhjyY2RlkMtmxdP1eYqCU5HD0wDA2GaV4ARzV
- gArw==
-X-Gm-Message-State: AOJu0YxC/s0QgSlP0sMOR9wuYUDN+7leYjj9S5zZbZG4eDtFuI+9J9aX
- ckkZBpqTPrq1A4OJlalznZ7eewAQxES+DLhnHWH/uLMTHkBxoFoG/ZBRG7MCaPU=
-X-Google-Smtp-Source: AGHT+IE1vVAVVp3pHsi67doSft45cle+41o5WQQZmCCQwqPGUeLdAZMZKKfgQxT1EhGpC05tNogt9g==
-X-Received: by 2002:a4a:928c:0:b0:5c1:ea56:44c7 with SMTP id
- 006d021491bc7-5c1ea564687mr3422773eaf.3.1719324869289; 
- Tue, 25 Jun 2024 07:14:29 -0700 (PDT)
+ bh=pxK51jKqmKaeZvecOUa5UJC0XRMR7dTSrfyiZZ6eCDE=;
+ b=BTa10/4ua0XmeFoRa5u71/tml0EXXiyDWTPEmpFsMQZ2B+wqW3XBkt82t+Rb8M5JO+
+ th8D72PSAgpoD8Y6KCwFeqOqxuMvXv3Y7lAUv9dsNG9Gx1QzqbVwPvRnOBJnAouia+/4
+ 5MpD9osfINIXlMFXSGBC4Ka6xisYa70U+b4fbyn9rZnBbG5WJ63EZ7EpF7mXPVCuhzck
+ QJF68YnL6agLGHkKvir4B9MgkWJ1M+MqoHNOpc61Qxa2psbGHlvtcnPX3R+tV3lL/UEo
+ iWkQ/UHxBc6vh6VEUvW79APkOk/1xJJ9flHvFsZoPvPsbdVBXf87xq74XihLvf1OrvjO
+ 8ehA==
+X-Gm-Message-State: AOJu0YzkQAnlcfKQ5V+oZliM+r8g3vlEFyzx/jMj3AAgxubgPVIxv5Z4
+ lUMHRiSIH1A9P6ZOODeOuprnHhsYHsuYn9YkQx/N7FZs8lVBDoOUBPj5VGpjc48=
+X-Google-Smtp-Source: AGHT+IFc/hAFjSzLkjfGpHgkybkkAtj9wdBJ/YvXNHkb+0RljIr6KiZDVdZ4WJy9dSlstTj4MoJL9g==
+X-Received: by 2002:a4a:8515:0:b0:5ba:ffcb:c760 with SMTP id
+ 006d021491bc7-5c1ebb01d47mr7949701eaf.5.1719324875249; 
+ Tue, 25 Jun 2024 07:14:35 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-700cb858899sm86854a34.77.2024.06.25.07.14.28
+ 006d021491bc7-5c1d58ff8f4sm1808995eaf.41.2024.06.25.07.14.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Jun 2024 07:14:28 -0700 (PDT)
-Date: Tue, 25 Jun 2024 08:14:27 -0600
+ Tue, 25 Jun 2024 07:14:34 -0700 (PDT)
+Date: Tue, 25 Jun 2024 08:14:32 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
-Message-ID: <20240625141427.GO38804@bill-the-cat>
-References: <20240623203033.1566505-1-sjg@chromium.org>
- <20240623203033.1566505-14-sjg@chromium.org>
- <20240624182931.GI38804@bill-the-cat>
- <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v3 06/19] test: Avoid failing skipped tests
+Message-ID: <20240625141432.GP38804@bill-the-cat>
+References: <20240623203213.1571666-1-sjg@chromium.org>
+ <20240623203213.1571666-7-sjg@chromium.org>
+ <20240624180556.GG38804@bill-the-cat>
+ <CAFLszTiJYVQZ=2kqC6FUQMfrFwtSraET_3nG-2oZhMV=Ts7OEw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Hz+6qt4kPD0gEbDR"
+ protocol="application/pgp-signature"; boundary="AHfEoxGm7XccCPDs"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
+In-Reply-To: <CAFLszTiJYVQZ=2kqC6FUQMfrFwtSraET_3nG-2oZhMV=Ts7OEw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,81 +94,104 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Hz+6qt4kPD0gEbDR
+--AHfEoxGm7XccCPDs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
+On Tue, Jun 25, 2024 at 01:38:00PM +0100, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 24 Jun 2024 at 19:06, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
+> > On Sun, Jun 23, 2024 at 02:32:00PM -0600, Simon Glass wrote:
 > >
-> > > Some configuration is now in variables with a CFG_ prefix. Add these =
-to
-> > > the .cfg file so that we can see everything in one place. Sort the
-> > > options so they are easier to find and compare.
+> > > When a test returns -EAGAIN this should not be considered a failure.
+> > > Fix what seems to be a problem case, where the pytests see a failure
+> > > when a test has merely been skipped.
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > ---
 > > >
-> > > Changes in v2:
-> > > - Add new patch to update u-boot.cfg with CFG_... options
+> > > (no changes since v1)
 > > >
-> > >  scripts/Makefile.autoconf | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >  test/test-main.c | 16 +++++++++++-----
+> > >  1 file changed, 11 insertions(+), 5 deletions(-)
 > > >
-> > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-> > > index b42f9b525fe..65ff11ea508 100644
-> > > --- a/scripts/Makefile.autoconf
-> > > +++ b/scripts/Makefile.autoconf
-> > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf =3D GEN     $@
-> > >  quiet_cmd_u_boot_cfg =3D CFG     $@
-> > >        cmd_u_boot_cfg =3D \
-> > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.t=
-mp && { \
-> > > -             grep 'define CONFIG_' $@.tmp | \
-> > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
-> > >                       sed '/define CONFIG_IS_ENABLED(/d;/define CONFI=
-G_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
-> > >               rm $@.tmp;                                             =
- \
-> > >       } || {                                                         =
- \
+> > > diff --git a/test/test-main.c b/test/test-main.c
+> > > index 3fa6f6e32ec..cda1a186390 100644
+> > > --- a/test/test-main.c
+> > > +++ b/test/test-main.c
+> > > @@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *ut=
+s, struct unit_test *test,
+> > >  static int ut_run_test_live_flat(struct unit_test_state *uts,
+> > >                                struct unit_test *test)
+> > >  {
+> > > -     int runs;
+> > > +     int runs, ret;
+> > >
+> > >       if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SA=
+NDBOX))
+> > >               return skip_test(uts);
+> > > @@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_tes=
+t_state *uts,
+> > >       if (CONFIG_IS_ENABLED(OF_LIVE)) {
+> > >               if (!(test->flags & UT_TESTF_FLAT_TREE)) {
+> > >                       uts->of_live =3D true;
+> > > -                     ut_assertok(ut_run_test(uts, test, test->name));
+> > > -                     runs++;
+> > > +                     ret =3D ut_run_test(uts, test, test->name);
+> > > +                     if (ret !=3D -EAGAIN) {
+> > > +                             ut_assertok(ret);
+> > > +                             runs++;
+> > > +                     }
+> > >               }
+> > >       }
+> > >
+> > > @@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_tes=
+t_state *uts,
+> > >           (!runs || ut_test_run_on_flattree(test)) &&
+> > >           !(gd->flags & GD_FLG_FDT_CHANGED)) {
+> > >               uts->of_live =3D false;
+> > > -             ut_assertok(ut_run_test(uts, test, test->name));
+> > > -             runs++;
+> > > +             ret =3D ut_run_test(uts, test, test->name);
+> > > +             if (ret !=3D -EAGAIN) {
+> > > +                     ut_assertok(ret);
+> > > +                     runs++;
+> > > +             }
+> > >       }
+> > >
+> > >       return 0;
 > >
-> > I don't like this because whereas "CONFIG_" is enforced to be set only
-> > by Kconfig and so always all reliably set and found via a single header,
-> > CFG_ stuff is not.
+> > How did you trigger this case exactly?
 >=20
-> OK, so how are CFG_ options found? I hit this when trying to find the
-> SDRAM size on rockchip 3399 and I could not find any way of figuring
-> it out.
+> I noticed this in CI, where some skipped tests were shown as failed in
+> the log, even though they were not counted as failures in the final
+> results.
 
-It's just another define, there's no uniformity to it. For some of the
-SDRAM values really we need some build time way to grab some information
-out of the default device tree.
+That's really really strange, do you have an example log or something
+around still?
 
 --=20
 Tom
 
---Hz+6qt4kPD0gEbDR
+--AHfEoxGm7XccCPDs
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ60MMACgkQFHw5/5Y0
-tyzGJQwApDm9OU/Kqz6JQzRb85K7kmDOWmDiGt/A5jHfgbEyd/wZKObG1EAU+p4H
-Onijtg1OUt+XRhsLmN0MEf6Z7yt82JbqeAe71j8BMlQ7AIqpOuH+LpwICCu1A7fR
-bBj7ZgKOSXBjJsyuNYRB9NZ0tYd6C0+USuBz2oGaTEwkLa/XMRfB5xSGZojfs4SN
-wxLS4eom+uihUQhR53gjoVVUqMRFfUOi8HqOPDVQoiQVHQt0jsp3WvL2XlEiL4P2
-wYq2OMy1T0O2TUzNMxRhIoZtRS/CX2Zm+2bZNSflwnnWuppT0owL+sUd4BenSXBK
-5t2OTJAcsLlDjm49wzEcv3hePoT5r+42kevtpp7srpPR8hD0iIsMCcZU57CuUgfl
-qGamOYJxyQMA18dT+V11G2JR+NgDxjNvvDAaUjFatSiKV1q9g4JoKbqUPVcePlIV
-30rK8bvGOTZXRoDmMD+En4K4vChcA16WiDz59VH52yR9fqXigfeC5amWBrqx49ic
-0HY0J/Tx
-=sYFG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ60MgACgkQFHw5/5Y0
+tyxSOwv6ApanqHQYHrbF48ocT6qHPCNBErEku5NKELgChzfkqrBmgRQ0/hRvg3lO
+SayHzpmdxb1p34y8Fnk5Neiw5VzX+yjZXSFWV5qt+aU+lFw1xs/saq7a6gHIl+XQ
+qbZPI6kGCRQvnCRbyNPIWZlisjZaZUOxgnWCbfTIx4raMDs89Jy9kjTjBtTKd4i4
+ExuTXe/s6bzie8DRD66v/hwP27UlHTmNYt06qfYKJrc3pa6CzsprtcRzBif7mQ0W
+UK931Hfn2aNpYrizuz2DNZIMddLpb35S907XsNidwGbMQn14RWr0eoTbO4UBMbFV
+ujDLZtccP1mRc3Ll7ybF3NOn41rVuO5pZHbPfkzzFvlG1+i7jPn09vfAVSIQ0XU6
+Y5sXksHjlrifnRteiE/Ah2IKY4D0glcjDTWBt+/68cpR4fgyL5FQmbzn0gsHo86c
+ta1urjzEq+VAGQmKuAYpD3MZ6RACJei0SJdODIAnOnyyCdEXEVufuw9K7paoYynz
+VgkW4tPq
+=6j7K
 -----END PGP SIGNATURE-----
 
---Hz+6qt4kPD0gEbDR--
+--AHfEoxGm7XccCPDs--
