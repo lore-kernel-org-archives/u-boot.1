@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E23C2BBCA
-	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 11:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39557C2BBCA
+	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 11:42:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AECAC8824C;
-	Tue, 25 Jun 2024 13:31:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87BEE8824C;
+	Tue, 25 Jun 2024 13:42:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=imag.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=imag.fr header.i=@imag.fr header.b="ZGSVPEuY";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=imag.fr header.i=@imag.fr header.b="I23oI5DQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 465BC8841D; Tue, 25 Jun 2024 13:31:40 +0200 (CEST)
+ id 1AE178841D; Tue, 25 Jun 2024 13:42:30 +0200 (CEST)
 Received: from zm-mta-out-3.u-ga.fr (zm-mta-out-3.u-ga.fr [152.77.200.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF89288208
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 13:31:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2700288208
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 13:42:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=imag.fr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=etienne.duble@imag.fr
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=imag.fr; s=2022;
- t=1719315097; bh=t/BvuxODH4dE9Y4+n5szsg4fhJfQYXhWG3kesk9Tf+0=;
+ t=1719315747; bh=ocmnycEdHilSr9n9yA3/uUqlC8ynzghmroJn6ppjyFo=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ZGSVPEuYyvwVZnuQsnHreiUliIwtj1EKzmmPfsdvNqfCV1nCMtL6HwkxNz2+MXcJe
- kBEpYxy+yND1o+FTBehZ96qyvpcY0abjUu+PqvPQ0yN9iP5prpxRGW55eC611KNwKE
- n+tCmlS5IAesSWuqKWWB7Y6JoGaQv56bRG1wZ4YSJGz3K83BLDF94ZtObFAaq3TEcC
- Tjos+kM/29cy27gUbTjhGKkuJm7447e8IboC6hyzZbsGMUkgloOdPSot2SxZPD6QJX
- /5vzzAsFCpmk86J+ENNfPlYkf2SQvsB222RBNvGJ1d9OBbY+uIDAezrD2S12lxEZli
- iOZWdWWJrWDyg==
+ b=I23oI5DQXMcYocQdSoAptqoQerJbO5fML8LHKfnyMvfK6ViFShyQNOigX/i28xirr
+ mCl7smJrZRanMpLnQe/fLCGjkvYo4tPzDPIqIW+d49N+IYbCKjDTnHkKNYj4DwT3qq
+ pYcYiuaM3YO9QJ1B1sWql/lgL8xoGltQC69XuJyr4r7a0Ar3Eja1mzoRPMIv7vyU6Z
+ QDODNb6oQSenlCnGSuWnAwiOraIWsEzcVE1yAbNQzc7BaepXQQvCqTQL2ABpO4vjMe
+ t123Nxs+jFjO9KvJ6HHcQ8ZF2RMkdXNbyBBdsS97vGvvvuW5za1eDGJiX3d8Sjzmfg
+ VdTSrfgaZPp7A==
 Received: from mailhub.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5B31F40228;
- Tue, 25 Jun 2024 13:31:37 +0200 (CEST)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id C3FC140235;
+ Tue, 25 Jun 2024 13:42:27 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhub.u-ga.fr (Postfix) with ESMTP id 57A87100068;
- Tue, 25 Jun 2024 13:31:37 +0200 (CEST)
+ by mailhub.u-ga.fr (Postfix) with ESMTP id C01AD100068;
+ Tue, 25 Jun 2024 13:42:27 +0200 (CEST)
 Received: from [129.88.53.250] (pimlig-dock-duble.imag.fr [129.88.53.250])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
  (Authenticated sender: dublee@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id E19F94007F;
- Tue, 25 Jun 2024 13:31:35 +0200 (CEST)
-Message-ID: <9b6692fb-6856-4cd7-ab18-19a33eef1db4@imag.fr>
-Date: Tue, 25 Jun 2024 13:31:35 +0200
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 1532F4007F;
+ Tue, 25 Jun 2024 13:42:22 +0200 (CEST)
+Message-ID: <273b4022-4192-4df8-ab69-db8d05b091ea@imag.fr>
+Date: Tue, 25 Jun 2024 13:42:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] rockchip: fix wrong PCI range address in rk3568 dtsi
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>,
+Subject: Re: [PATCH 1/3] net: give a different name to rtl8169 interfaces
+To: Dragan Simic <dsimic@manjaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  joe hershberger <joe.hershberger@ni.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>, Ramon Fried
  <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot <u-boot@lists.denx.de>
-References: <1506177052.15003206.1719232828107.JavaMail.zimbra@univ-grenoble-alpes.fr>
- <6e542e4b-9785-4ce5-b10a-7ed1b54131a8@cherry.de>
- <2b902244-0688-432b-bd04-061a083a0fbd@imag.fr>
- <8224b226-49ba-4a6a-a736-3c0dfee0aa57@kwiboo.se>
- <b238dae1-17f8-48c4-a75c-5d6002a9bea7@imag.fr>
- <12057632-0ea4-45c5-8c98-8f689c0338db@kwiboo.se>
+References: <1978999632.15003049.1719232814587.JavaMail.zimbra@univ-grenoble-alpes.fr>
+ <888498a7-0d65-4dd0-907e-0f8eb8a92695@cherry.de>
+ <6472908d-548f-483a-8199-6c7233fc0eb9@imag.fr>
+ <f8be5725-e8a5-454c-82db-4aaeb293673c@cherry.de>
+ <a7dbf00b11304f80cacd5821a5e19127@manjaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Etienne_Dubl=C3=A9?= <etienne.duble@imag.fr>
-In-Reply-To: <12057632-0ea4-45c5-8c98-8f689c0338db@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <a7dbf00b11304f80cacd5821a5e19127@manjaro.org>
 X-Greylist: Whitelist-UGA SMTP Authentifie (dublee@univ-grenoble-alpes.fr) via
  smtps-465 ACL (41)
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,65 +91,31 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Hello Jonas,
+Hello,
 
-Le 25/06/2024 à 12:46, Jonas Karlman a écrit :
-> Ahh, linux is still missing a patch to be able to use full address ranges
-> as a root complex.
+Le 25/06/2024 à 12:25, Dragan Simic a écrit :
+>>> Another option may be to name them "rtl8169@<hexa>", with "<hexa>" 
+>>> reflecting the PCI region address (so it is unique and stable). What 
+>>> do you think?
+>>
+>> I guess that's one way, I'm also wondering how systemd renames those
+>> to be unique but stable on the same machine, maybe we could take some
+>> inspiration from them for that?
 >
-> Will re-run some tests on my R5C on both u-boot and linux to see if I can
-> replicate your issue.
+> Systemd also allows renaming of network interfaces using some rules
+> predefined by the user, so there's also the possibility to rename the
+> interfaces in U-Boot to ethernet0 and ethernet1, using fixed rules
+> that would be based on the PCI region address.
 
-OK.
-To use the second interface in u-boot, you first need to provide a 
-".bind()" member function in the rtl8169 driver, otherwise both 
-interfaces have the same name (this is my [PATCH 1/3]).
-Then :
+OK but the renaming occurs in the rtl8169 driver, that is used by 
+several boards, whereas the PCI region addresses come from the 
+device-tree, so they differ from board to board.
 
-Hit any key to stop autoboot:  0
-=> pci enum
-=> net list
-eth0 : RTL8169#0 52:e8:a1:60:81:e7 active
-eth1 : RTL8169#1 52:e8:a1:60:81:e6
-=> setenv ethact "RTL8169#1"
-=> dhcp
-
-The issue appears when sending the first packet. When activating 
-DEBUG_RTL8169_TX in rtl8169.c it prints "tx timeout/error".
-
-> The issue may be that U-Boot is not fully capable of having overlapping
-> bus addresses for multiple pci controllers.
->
-> To my knowledge these addresses should be internal to the pci controller
-> and its devices.
->
-> The addresses below tells us that system memory address 0x340000000+,
-> and 0x380000000+ is mapped to bus address 0x40000000+ of each pci
-> controller.
-
-I see.
-
->> [...]
->> So I verified in the downstream repository of the board vendor
->> (https://github.com/friendlyarm/uboot-rockchip/blob/nanopi5-v2017.09/arch/arm/dts/rk3568.dtsi#L1754C21-L1754C31
->> and the second address there was replaced with "*0x0* *0x80000000*".
->> Then, updating this was enough to make the second interface work in u-boot.
-> The bus addresses should be isolated to each pci controller if I am not
-> mistaken, so changing the bus address was probably just done as a
-> workaround because of some other unknown bug.
-
-OK.
-
-> Hum, could be an issue in pci core of U-Boot that expect unique bus
-> addresses across all pci controllers.
->
-> Will run some quick tests on my R5C later.
-
-OK, thanks for looking at it. Regards, Etienne
+Regards,
+Etienne
 
 -- 
 Etienne Dublé
 CNRS / LIG - Bâtiment IMAG
 700 avenue Centrale - 38401 St Martin d'Hères
 Bureau 426 - Tel 0457421431
-
