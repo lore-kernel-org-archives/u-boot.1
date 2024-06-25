@@ -4,63 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28EBC2BBCA
-	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 10:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C92BC2BBCA
+	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 10:27:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ECED884AC;
-	Tue, 25 Jun 2024 12:25:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F3AD687C68;
+	Tue, 25 Jun 2024 12:27:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="m7urWdNo";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="hAsjm+U6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 891FA8845A; Tue, 25 Jun 2024 12:25:09 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1290F883CD; Tue, 25 Jun 2024 12:27:49 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88964883CD
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 12:25:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id C1DF680E9A
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 12:27:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 29F1B100007;
+ Tue, 25 Jun 2024 13:27:46 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 29F1B100007
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1719311266;
+ bh=dMGzS5n7LKisn48TGqv7KuYr9H5aW7kDOnMGaToe5vM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=hAsjm+U6lApjxsQwFRJWaCvfj+WspklaoddV4HsToVEkcIQccFwG3TdKcn592Y9Ng
+ frxsXRJA5l5prNODvoOpYpbWe+nfv7vy3ddlOXeCEo6ZU0000CkBYhQ/N/9wTtr8Cf
+ Os91F7wxKvkABhHkVN33PlYeWu/L6RvAL8XN0l+eMp/l2EU1/79lN7IuEaPDE6IJX7
+ mKW0n95NLhbrBBSLXemaNyGqkj/WaUncGmS97uJNpaWzI7nx8JacBrsLzvcW4pQ60U
+ FDvc9VP8wGUmmQxcUlrw3DoPbvzvVbPzf9yjeCqyG70CQPy4dOWaHGzuXpoVjfU1rQ
+ qi/hNGTfnAfyg==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 25 Jun 2024 13:27:46 +0300 (MSK)
+Received: from [172.28.65.100] (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Tue, 25 Jun 2024 13:27:45 +0300
+Message-ID: <2d5d992d-cd14-1391-e860-4bf64785d64e@salutedevices.com>
+Date: Tue, 25 Jun 2024 13:16:07 +0300
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1719311106;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TNPH3eqbTwm0xWX+zyyAa5tvbg3IC77QWA9/arhFsYM=;
- b=m7urWdNoc4Y44Yy9hiaKzYhXr7Rwyq0K7jche9ydH5rY1MxO33i8iIdZvN2vyeSn48R3n+
- 3Cjl5I165BqNt9rUPYS+BWIN+rma93ZKFpTwUOdgXTtJuDnptNnFE/4YV2bnAR7m5iyvuT
- GpdM8a0iVS/7T1WUHjpSTrfvZpnrug6a6kfNiRka3Bpww3rz0zYNnFa1ejg2ykuaqA5eIV
- FXaHPkvb81a90k4vBpPWfY5Zhu+l+v9K5QkH4BgJhMFvuSkYg9nEroxwqgzixmvYZwVNUa
- mg1gtXsfre6H8W+INh7bKYxW4ljVMk04J1zZRYl+HrxkFV6rLbBlsFSO65KnOg==
-Date: Tue, 25 Jun 2024 12:25:05 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: =?UTF-8?Q?Etienne_Dubl=C3=A9?= <etienne.duble@imag.fr>, Kever Yang
- <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Simon Glass <sjg@chromium.org>, joe hershberger <joe.hershberger@ni.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Minda Chen
- <minda.chen@starfivetech.com>, Ramon Fried <rfried.dev@gmail.com>, Sumit
- Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, u-boot
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/3] net: give a different name to rtl8169 interfaces
-In-Reply-To: <f8be5725-e8a5-454c-82db-4aaeb293673c@cherry.de>
-References: <1978999632.15003049.1719232814587.JavaMail.zimbra@univ-grenoble-alpes.fr>
- <888498a7-0d65-4dd0-907e-0f8eb8a92695@cherry.de>
- <6472908d-548f-483a-8199-6c7233fc0eb9@imag.fr>
- <f8be5725-e8a5-454c-82db-4aaeb293673c@cherry.de>
-Message-ID: <a7dbf00b11304f80cacd5821a5e19127@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v1 1/3] mtd: rawnand: nand_base: support for
+ 'NAND_IS_BOOT_MEDIUM' flag
+Content-Language: en-US
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>,
+ Sean Anderson <seanga2@gmail.com>, <u-boot@lists.denx.de>,
+ <u-boot-amlogic@groups.io>, <kernel@sberdevices.ru>, <oxffffaa@gmail.com>
+References: <20240602200836.3949773-1-avkrasnov@salutedevices.com>
+ <20240602200836.3949773-2-avkrasnov@salutedevices.com>
+ <20240624-preacher-sharpness-b33541d3302d@thorsis.com>
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <20240624-preacher-sharpness-b33541d3302d@thorsis.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 186120 [Jun 25 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
+ 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f,
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ smtp.sberdevices.ru:7.1.1,5.0.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/06/25 01:39:00 #25693004
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,70 +110,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
 
-On 2024-06-25 12:03, Quentin Schulz wrote:
-> On 6/25/24 8:38 AM, Etienne Dublé wrote:
->> Thanks for reviewing my patches.
->> 
->> Le 24/06/2024 à 15:08, Quentin Schulz a écrit :
->>> [...]
->>> 
->>>>   1 file changed, 11 insertions(+)
->>>> 
->>>> diff --git a/drivers/net/rtl8169.c b/drivers/net/rtl8169.c
->>>> index 93e83661ce..b30d51731f 100644
->>>> --- a/drivers/net/rtl8169.c
->>>> +++ b/drivers/net/rtl8169.c
->>>> @@ -1091,6 +1091,16 @@ static int rtl8169_eth_probe(struct udevice 
->>>> *dev)
->>>>       return 0;
->>>>   }
->>>>   +static int rtl8169_eth_bind(struct udevice *dev)
->>>> +{
->>>> +    static int card_number;
->>>> +    char name[16];
->>>> +
->>>> +    sprintf(name, "RTL8169#%u", card_number++);
->>>> +
->>>> +    return device_set_name(dev, name);
->>>> +}
->>>> +
->>> 
->>> I don't think we can guarantee bind order so this may not be stable 
->>> over time.
->>> 
->>> I'm wondering if there isn't a way to use the "ethernet" (ethernet0, 
->>> ethernet1) alias in DT instead?
->> 
->> Actually the ethernet interfaces are not declared in the device tree, 
->> only PCI buses are (at least on this Nanopi board).
->> The ethernet interfaces are only detected when running "pci enum".
->> 
-> 
-> Ah shoot.
-> 
->> Another option may be to name them "rtl8169@<hexa>", with "<hexa>" 
->> reflecting the PCI region address (so it is unique and stable). What 
->> do you think?
->> 
-> 
-> I guess that's one way, I'm also wondering how systemd renames those
-> to be unique but stable on the same machine, maybe we could take some
-> inspiration from them for that?
 
-Systemd also allows renaming of network interfaces using some rules
-predefined by the user, so there's also the possibility to rename the
-interfaces in U-Boot to ethernet0 and ethernet1, using fixed rules
-that would be based on the PCI region address.
+On 24.06.2024 12:14, Alexander Dahl wrote:
+> Hello Arseniy,
+> 
+> Am Sun, Jun 02, 2024 at 11:08:34PM +0300 schrieb Arseniy Krasnov:
+>> Based on Linux kernel:
+>> commit f922bd798bb9 ("mtd: rawnand: add an option to specify NAND chip as a boot device")
+>>
+>> Allow to define a NAND chip as a boot device. This can be helpful
+>> for the selection of the ECC algorithm and strength in case the boot
+>> ROM supports only a subset of controller provided options.
+>>
+>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+>> ---
+>>  drivers/mtd/nand/raw/nand_base.c | 3 +++
+>>  include/linux/mtd/rawnand.h      | 6 ++++++
+>>  2 files changed, 9 insertions(+)
+>>
+>> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+>> index c40a0f23d7..ed605b4af5 100644
+>> --- a/drivers/mtd/nand/raw/nand_base.c
+>> +++ b/drivers/mtd/nand/raw/nand_base.c
+>> @@ -4458,6 +4458,9 @@ static int nand_dt_init(struct mtd_info *mtd, struct nand_chip *chip, ofnode nod
+>>  	if (ret == 16)
+>>  		chip->options |= NAND_BUSWIDTH_16;
+>>  
+>> +	if (ofnode_read_bool(node, "nand-is-boot-medium"))
+>> +		chip->options |= NAND_IS_BOOT_MEDIUM;
+>> +
+>>  	if (ofnode_read_bool(node, "nand-on-flash-bbt"))
+>>  		chip->bbt_options |= NAND_BBT_USE_FLASH;
+>>  
+>> diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
+>> index fb002ae641..4eb880d8fb 100644
+>> --- a/include/linux/mtd/rawnand.h
+>> +++ b/include/linux/mtd/rawnand.h
+>> @@ -218,6 +218,12 @@ enum nand_ecc_algo {
+>>  /* Device needs 3rd row address cycle */
+>>  #define NAND_ROW_ADDR_3		0x00004000
+>>  
+>> +/*
+>> + * Whether the NAND chip is a boot medium. Drivers might use this information
+>> + * to select ECC algorithms supported by the boot ROM or similar restrictions.
+>> + */
+>> +#define NAND_IS_BOOT_MEDIUM	0x00400000
+>> +
+>>  /* Options valid for Samsung large page devices */
+>>  #define NAND_SAMSUNG_LP_OPTIONS NAND_CACHEPRG
+> 
+> The entries in that file are ordered numerically.  Comparing with the
+> same file in Linux this should go before NAND_KEEP_TIMINGS, not
+> anywhere in between.  Makes later diffs and ports from Linux easier.
 
-> FYI, for NVMEs I also have
-> /dev/disk/by-path/platform-fe190000.pcie-pci-0004:41:00.0-nvme-1 for
-> example. platform-fe19000.pcie- being the pcie controller at address
-> fe19000 on the platform root bus, no clue about what's after that
-> though. I also assume the N in nvme-N isn't necessarily stable over
-> time but whatever's before should be? Maybe there's something like
-> ports/addresses on the PCIe bus that will never change or rely on
-> probe order/timings to keep a stable naming?
-> Sorry, don't know much about PCIe so cannot suggest anything meaningful 
-> :/
+Ok, I'll update this in the next version.
+
+Thanks
+
+> 
+> Greets
+> Alex
+> 
+>>  
+>> -- 
+>> 2.35.0
+>>
