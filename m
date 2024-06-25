@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 766F2C30653
-	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 08:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD8EC30653
+	for <u-boot@archiver.kernel.org>; Tue, 25 Jun 2024 09:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02137884B2;
-	Tue, 25 Jun 2024 10:30:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9F13B8842C;
+	Tue, 25 Jun 2024 11:08:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ouuDfN8B";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="taYZc94V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FDDF884BA; Tue, 25 Jun 2024 10:30:20 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EECDB8844C; Tue, 25 Jun 2024 11:08:52 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F34D58844C
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 10:30:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ by phobos.denx.de (Postfix) with ESMTPS id 400DB88387
+ for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 11:08:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0f7a=N3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1719304197;
- bh=Dqkp6fYKbsVgRQ9VJxKWoAP/SgSajadtGgh0n2bboHQ=;
- b=ouuDfN8Bf+IIXxw03FJC9KVU3pP+OMVy5xqnKL9lguLZhy9oo9wVLecX1hV2t/G9CJ3okuVBO
- Pk5VwcuZEjqvd5BwZu3XpSE2+yPPFK5GnQBmQI0m3c5FQSYI27CDc/or8+exkziTWh/PH0Wg4Es
- USKyuv2OiKJevDn0qMuJdWeIOj71XIf0c10V33qkNBx/Vf1n6Rs63VnfoyiJ4QrJiarHDJQfCd3
- bOTbNumCjrt+jofw9EK1jCrWqSaD37ATWzrogbR57XHflS4MXKA6ESJyiceBsSFGsT/jdSJA6U4
- oJ63X82uPrsFCjbWgR2P6M88L5LE664V0WbeFAseUMEA==
-Message-ID: <8224b226-49ba-4a6a-a736-3c0dfee0aa57@kwiboo.se>
-Date: Tue, 25 Jun 2024 10:29:48 +0200
+ smtp.mailfrom=prvs=899203465=Conor.Dooley@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1719306530; x=1750842530;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=BMwMA6th8X0WqvHYfbD7Bav8evE6/Bc9Z7Yqev7DSsg=;
+ b=taYZc94VjIoUmthu6uudaAATE7yuHRmDt3ARAzsYBhPLcAHg2pZgmEPh
+ Day5OlvlAjzzi3kae13MTF/Zl8KCk9+6YS4xPq8+vpsF1a718fvtx9kT4
+ mXSVPlzX2Sx+3cNs22JTJfWmJu5Nm09fGS7mjOJOUIjbfN1JIvmgf+T+t
+ 6K+8miq7TxaAKJEEo5MFiPpVjs7d1eZr57TnbXSupfjX/JKvCWI4X5ZQJ
+ vKvk0LryyhiblFmyVW/8kq9jKCCaDM90ZwDWg7FF+FcdzdbN6fQfbHnKD
+ 5JQWs/Zj6/cQT18YcyFx/vH1Up+ZqtoCMuE0WlFbIaV9XTvtsMXjBX6st Q==;
+X-CSE-ConnectionGUID: 1TAlZiLjSrG2uBOdBv8Y1g==
+X-CSE-MsgGUID: /09JQyQ6Qq6ynzU52Q2S7A==
+X-IronPort-AV: E=Sophos;i="6.08,263,1712646000"; d="scan'208";a="259337853"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 25 Jun 2024 02:08:48 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 25 Jun 2024 02:08:23 -0700
+Received: from wendy.microchip.com (10.10.85.11) by chn-vm-ex03.mchp-main.com
+ (10.10.85.151) with Microsoft SMTP Server id 15.1.2507.35 via
+ Frontend Transport; Tue, 25 Jun 2024 02:08:21 -0700
+From: Conor Dooley <conor.dooley@microchip.com>
+To: <u-boot@lists.denx.de>
+CC: <conor@kernel.org>, <conor.dooley@microchip.com>, Ivan Griffin
+ <ivan.griffin@microchip.com>, Padmarao Begari
+ <padmarao.begari@microchip.com>, Cyril Jean <cyril.jean@microchip.com>, "Tom
+ Rini" <trini@konsulko.com>
+Subject: [PATCH v1] board: mpfs_icicle: implement board_fdt_blob_setup()
+Date: Tue, 25 Jun 2024 10:08:06 +0100
+Message-ID: <20240625090806.1787287-2-conor.dooley@microchip.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] rockchip: fix wrong PCI range address in rk3568 dtsi
-To: "=?UTF-8?Q?Etienne_Dubl=C3=A9?=" <etienne.duble@imag.fr>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Kever Yang
- <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Simon Glass <sjg@chromium.org>, joe hershberger <joe.hershberger@ni.com>,
- "Leo Yu-Chi Liang" <ycliang@andestech.com>, Minda Chen
- <minda.chen@starfivetech.com>, Ramon Fried <rfried.dev@gmail.com>, Sumit
- Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, "u-boot"
- <u-boot@lists.denx.de>
-References: <1506177052.15003206.1719232828107.JavaMail.zimbra@univ-grenoble-alpes.fr>
- <6e542e4b-9785-4ce5-b10a-7ed1b54131a8@cherry.de>
- <2b902244-0688-432b-bd04-061a083a0fbd@imag.fr>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <2b902244-0688-432b-bd04-061a083a0fbd@imag.fr>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 667a8001d393be1057f6cdc9
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,64 +81,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Etienne,
+The firmware on the Icicle is capable of providing a devicetree in a1 to
+U-Boot, but until now the devicetree has been packaged in a "payload" [1]
+alongside U-Boot (or other bootloaders/RTOSes) and appended to the image.
+The address of this appended devicetree is placed in a1 by the firmware.
+This meant that the mechanism used by OF_SEPARATE to locate the
+devicetree at the end of the image would pick up the one provided by the
+firmware when u-boot-nodtb.bin was in the payload and U-Boot's devicetree
+when u-boot.bin was.
 
-On 2024-06-25 08:47, Etienne Dublé wrote:
-> Hi Quentin,
-> 
-> Le 24/06/2024 à 15:15, Quentin Schulz a écrit :
->> Hi Etienne,
->>
->> On 6/24/24 2:40 PM, ETIENNE DUBLE wrote:
->>> One of the PCI ranges was wrong in this device tree.
->>> When testing with a FriendlyElec Nanopi R5C board, the
->>> 2nd ethernet interface (labelled "wan") was not working
->>> in u-boot because of that.
->>>
->>> With the correct value (found in FriendlyElec's downstream
->>> u-boot repository), this 2nd ethernet interface now works.
->>>
->>> Signed-off-by: Etienne Dublé <etienne.duble@imag.fr>
->>> ---
->>>
->>>   dts/upstream/src/arm64/rockchip/rk3568.dtsi | 2 +-
->>
->> dts/upstream is only for patches coming from **merged** Linux kernel 
->> (i.e. releases or -rc releases or master branch from Linus Torvalds).
->>
->> We do not accept U-Boot-only patches in dts/upstream.
->>
->> Please submit the patch to the Linux kernel first and it will 
->> eventually make it to that directory either via a 
->> dts/update-dts-subtree.sh pull or dts/update-dts-subtree.sh pick. 
->> Depending on maintainer's opinion, fixing the range in 
->> arch/arm/dts/rk3568-u-boot.dtsi could be an option, but we really need 
->> the patch sent to upstream Linux kernel community first.
->>
->> c.f. https://www.kernel.org/doc/html/v6.5/process/submitting-patches.html
-> 
-> I see, I will look at it.
-> In version 2 of the series I will remove this second patch and just 
-> mention that we are waiting for this problem to be fixed upstream, in 
-> the cover letter.
+The firmware is now going to be capable of providing a minimal devicetree
+(quite cut down due to severe space constraints), but this devicetree is
+linked into the firmware that runs out of the L2 rather than at the end
+of the U-Boot image. Implement board_fdt_blob_setup() so that this
+devicetree can be optionally used, and the devicetree provided in the
+"payload" can be used without relying on "happening" to implement the
+same strategy as OF_SEPARATE expects in combination with
+u-boot-nodtb.bin. Unlike other RISC-V boards, the firmware provided
+devicetree is only used when OF_BOARD is set, so that the almost
+certainly more complete devicetree in U-Boot will be used unless
+explicitly requested otherwise.
 
-I do not understand the need for such/this patch. The changed address is
-the internal io address that is shared with the pci controller and
-devices.
+Link: https://github.com/polarfire-soc/hart-software-services/blob/master/tools/hss-payload-generator/README.md [1]
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+CC: Ivan Griffin <ivan.griffin@microchip.com>
+CC: Padmarao Begari <padmarao.begari@microchip.com>
+CC: Cyril Jean <cyril.jean@microchip.com>
+CC: Tom Rini <trini@konsulko.com>
+CC: Conor Dooley <conor.dooley@microchip.com>
+CC: u-boot@lists.denx.de
+---
+ board/microchip/mpfs_icicle/mpfs_icicle.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-Do you have any issue in linux or is it only in U-Boot?, I suspect this
-change is only a workaround to an issue only found in U-Boot.
-
-The rtl8169 driver or pci system of U-Boot may be of fault and should
-probably be fixed instead of changing io addresses to work around issues
-in software. E.g rtl8169 has a static ioaddr that is shared between all
-drivers, something that may cause issues.
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Etienne
-> 
+diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mpfs_icicle/mpfs_icicle.c
+index 4d7d843dfa3..2c1f7175f0e 100644
+--- a/board/microchip/mpfs_icicle/mpfs_icicle.c
++++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
+@@ -9,6 +9,7 @@
+ #include <init.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
++#include <asm/sections.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -50,6 +51,24 @@ static void read_device_serial_number(u8 *response, u8 response_size)
+ 		response_buf[idx] = readb(MPFS_SYS_SERVICE_MAILBOX + idx);
+ }
+ 
++void *board_fdt_blob_setup(int *err)
++{
++	*err = 0;
++	/*
++	 * The devicetree provided by the previous stage is very minimal due to
++	 * severe space constraints. The firmware performs no fixups etc.
++	 * U-Boot, if providing a devicetree, almost certainly has a better
++	 * more complete one than the firmware so that provided by the firmware
++	 * is ignored for OF_SEPARATE.
++	 */
++	if (IS_ENABLED(CONFIG_OF_BOARD)) {
++		if (gd->arch.firmware_fdt_addr)
++			return (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
++	}
++
++	return (ulong *)_end;
++}
++
+ int board_init(void)
+ {
+ 	/* For now nothing to do here. */
+-- 
+2.43.2
 
