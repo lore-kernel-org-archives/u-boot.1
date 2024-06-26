@@ -4,78 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC42CC27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 21:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB726C27C4F
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 23:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0B1A880AE;
-	Wed, 26 Jun 2024 23:16:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id CB5EF884C3;
+	Thu, 27 Jun 2024 01:59:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="lNTw1g64";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CA418826B; Wed, 26 Jun 2024 23:16:48 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1719446356;
+	bh=ik6jTz7Wn86liTSjIjh6ryzPRVpdwnbb1+rEP2z4KIw=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=N72aNrkLOzIL0wj4bDvhU81FbcgAeK4z2CeSUt32GoHx/B4r7sV6ah8LmzI512hMp
+	 jqDQraMcv3rzIPS+SmsHKVajZT7uk2KOrM31WV1iIfw9qdJoI4TxS7potcu16O6cgp
+	 AFqgfdbs+1vlYZrzMXppXvhBqMBXpalGXFth1Oq5PT3+vFX9StJfAfzoz4oklhmK0Z
+	 A71kEa2oiedzeJBLnfnpXjT8bZi9tdK+BfrWZnjNiJCkPtV3VTnNShAOobH7RFXhO5
+	 Ol6XlaOU81SEKbzOgQthZKw92obC0+sIHQhOAKSkWJQ4I6ykEUacxKXJXmx/C5Ofmz
+	 26Ax5YNC9xJHw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A125C87D43
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 23:16:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1719436598; x=1720041398; i=frank-w@public-files.de;
- bh=DpQv7fqQmPqyyzWB9ywfaDo77ezhtq8IJVZAq+6uIY8=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:Reply-to:In-Reply-To:
- References:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=lNTw1g64/Q4SKs6h4Y9Qjyk2V+RsnC2ZSplFZIHN7w8wqKuGSqa5Prdii68pbygV
- 44MtNVttCCLyheZdnFG05aseKFtNgnkMWiyh4fALYzhYi8lWn8w3aVV72EQ9U1HIm
- rB6rDVPOuRAKtAPoI3MNU+iENKaEQjBUnBLqw5kWh+mIRalXCFyrAyF5XOVzOuVVc
- rAlEq+JyD74d9jZzfFV9OhDvbKmtiw5PCryFcppQnP4CkZIN1ztqmRObPvylUL9+8
- 8EUk1QL0u53xraMYMchI6ZBW8fQDxPgG7dJm6vDjyaF7/DjO3ROELhw0s1TCfPB95
- vubdn4EqDnxF/envWw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([217.61.144.17]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mqs0X-1silap09ZJ-00dNlN; Wed, 26
- Jun 2024 23:16:38 +0200
-Date: Wed, 26 Jun 2024 23:16:38 +0200
-From: Frank Wunderlich <frank-w@public-files.de>
-To: Frank Wunderlich <linux@fw-web.de>, Tom Rini <trini@konsulko.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-CC: u-boot@lists.denx.de
-Subject: Re: [PATCH] arm: mediatek: fix ram init for mt7622 (decrease to 1G)
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240615093456.95856-1-linux@fw-web.de>
-References: <20240615093456.95856-1-linux@fw-web.de>
-Message-ID: <5FB36B12-AE76-47FE-AEFC-76A47A5B57C7@public-files.de>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 1957B88495;
+ Thu, 27 Jun 2024 01:59:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1719446355;
+ bh=ik6jTz7Wn86liTSjIjh6ryzPRVpdwnbb1+rEP2z4KIw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=CTqyGLglo99SvF9fqbLVdSgSYJDMz8kxNRfqLsKrK8MFGMDurc7kuy8b5vI+QBb8L
+ oUy+R05dzhkuwJB/UbFHiMr1iOuajb2NdjWTrJIfdWOBNxTyAaeDZC9bN5kApPpRxF
+ 0TEa3mPNaNkQ0xCtE0XbcoRJUWa/ffXftw7IT0EDQyIFm9Ddp40JmU307Lj+Qp329V
+ /fPTiEk+ijN0Dtq1Eb2ajeE/wHxJfCyERP00tjKNovA2/INC4V3Vi8QNWlq0+2ytoA
+ Kpr4A2g/QzJlKqjbK/jXYJ9gLH2TsJzMUN4+IMDCA4Q8hHZYRgKW8grRn+6T5ehXo1
+ 0nJsU+lC5voPg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH] spl: fit: List DTOs applied by SPL in U-Boot control DT
+Date: Thu, 27 Jun 2024 01:58:02 +0200
+Message-ID: <20240626235857.272264-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:YAQ5AAxgOBuCgApc4syrY5YNfy62tK6tcY12CusToDLA55pFzIT
- sqMrYPvey/Vs2FvMFt66xYmrspkLp4Q1Lme7gTMJW/KDgzXfxQJaV1bcT9iVQRAfLyzHNgN
- rK1/wKhGSsdy9Uxok9+U3s4jahPRDTffclBdhT3oq+B0WZG7k41VGa1nSUtb0ksPkWuZszm
- xQNfI6B1bsSbbe3goLWIA==
-UI-OutboundReport: notjunk:1;M01:P0:7yqqrs4+cdQ=;KmaUaaEvfig+rAjsHKDTPPXBIQl
- kXfVGobsIDFyZMJKh7Lvu++gerYhOBnPesW+gRnOSvk9oLfJbe0ky5Z10xeIyTNuUAFqm3EL5
- IbR7icAEPaE394omZ3L6ns20LhdvinGuvCzw0TJuuuUAhDG/Nnb+smfng7rMx6r2M7ZXYHWlt
- Ny3ARuQ/EPsICcjUmX+hWufxgQ4QfCQR8zsDUbvb3Qf9fBMjbMkPRbzD4lhAHV2ZEXQatMKaV
- qq0gD/llhD31LoC4eFVm8/ie1b91at9KKkzduqCP5lxNBuYcIeTlNOht3AW/b/sklJYpGIabs
- KOHnhuWaWQPlT5d3sqYYhIjoMv04u3TC0CSSYYFNC7ma3vcLKFZmWbD+Gaqx6b1kadZBitzno
- ugJ+O5D93cEhLvNrEay+nWLIoqbqjOa2CjDcTifO/EpoYw3pd3UAZYy9MgwH9sV/8kIaegNO5
- /kO2/TXF3I3lAUgK8MYRsJgeeTfS6TIi3YF4F5u24Y5bgiogXUZwDhZop9wuX5Rlk+KMjHbW+
- L5JcCZPoe6j5Inz6GohqV4io4t0wJiSHKn+I8YyxdXmXCE/W5zIxyI+AdEk/SwfwaQ69qnigr
- +Mz/bJ/U0Vu7G848qbxzPhSZrKfjcDXdEIpfbwHE2oej4mX3eTigUcTJewMPsvttOvfZGodcw
- KN0PZgPIqjy+36saDIAxvmqNS0cdZOKz1Zfr5y5fasDHU4z5djujfXTIVKEw1f0CKwE07AjyN
- NqHcvdv/fK7fMIFTbQ3HMLr5vsNwbyacXc8fTxnxJDIYf8zl0g7czlgC78pVhVI8xIjkzYigz
- NColb+Mf5OLNvG7OvyzRufzheGIiMQ2VHXilT/K78OqyI=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,46 +62,88 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: frank-w@public-files.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 15=2E Juni 2024 11:34:56 MESZ schrieb Frank Wunderlich <linux@fw-web=2Ed=
-e>:
->From: Frank Wunderlich <frank-w@public-files=2Ede>
->
->RAM init on mt7622 based bananapi R64 is broken since v2023=2E10=2E
->
->Increasing the mem-map does not help here, so i reduced the maximum
->available ram in get_ram_size call from 2G to 1G (board has only 1G)=2E
->
->Fixes: 5fd6d4c7b3ad ("arm: mediatek: retrieve ram_base from dts node for =
-armv8 platform")
->Signed-off-by: Frank Wunderlich <frank-w@public-files=2Ede>
->---
-> arch/arm/mach-mediatek/mt7622/init=2Ec | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/arch/arm/mach-mediatek/mt7622/init=2Ec b/arch/arm/mach-media=
-tek/mt7622/init=2Ec
->index 00d3eb9ce7a4=2E=2E1f32ff947dcd 100644
->--- a/arch/arm/mach-mediatek/mt7622/init=2Ec
->+++ b/arch/arm/mach-mediatek/mt7622/init=2Ec
->@@ -28,7 +28,7 @@ int dram_init(void)
-> 	if (ret)
-> 		return ret;
->=20
->-	gd->ram_size =3D get_ram_size((void *)gd->ram_base, SZ_2G);
->+	gd->ram_size =3D get_ram_size((void *)gd->ram_base, SZ_1G);
->=20
-> 	return 0;
-> }
+Insert /u-boot,<dto-name> = <index> property into the U-Boot control DT
+during SPL DTO application process. This can be used by user to inspect
+which DTOs got applied by the SPL and in which order from running U-Boot.
 
-Hi Tom,
+Example:
+```
+u-boot=> fdt addr $fdtcontroladdr && fdt list /
+Working FDT set to aee9aeb0
+/ {
+        u-boot,fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 = <0x00000005>;
+        u-boot,fdt-dto-imx8mp-dhcom-som-overlay-rev100 = <0x00000004>;
+        u-boot,fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast = <0x00000003>;
+        u-boot,fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast = <0x00000002>;
+...
+```
 
-Can you pick this fix for 2024=2E7?
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Suniel Mahesh <sunil@amarulasolutions.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ common/spl/spl_fit.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
 
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 988125be008..261b72419b1 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -363,6 +363,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ {
+ 	struct spl_image_info image_info;
+ 	int node, ret = 0, index = 0;
++	char dtoname[256];
+ 
+ 	/*
+ 	 * Use the address following the image as target address for the
+@@ -450,7 +451,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 
+ 			/* Make room in FDT for changes from the overlay */
+ 			ret = fdt_increase_size(spl_image->fdt_addr,
+-						image_info.size);
++						image_info.size + strlen(str));
+ 			if (ret < 0)
+ 				break;
+ 
+@@ -464,6 +465,26 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 
+ 			debug("%s: DT overlay %s applied\n", __func__,
+ 			      fit_get_name(ctx->fit, node, NULL));
++
++			/*
++			 * Insert /u-boot,<dto-name> = <index> property into
++			 * the U-Boot control DT. This can be used by user
++			 * to inspect which DTOs got applied by the SPL from
++			 * a running U-Boot.
++			 */
++			snprintf(dtoname, sizeof(dtoname), "u-boot,%s", str);
++			ret = fdt_setprop_u32(spl_image->fdt_addr, 0, dtoname,
++					      index);
++			if (!ret) {
++				/*
++				 * The DTO itself was applied, do not treat the
++				 * insertion of /u-boot,<dto-name> as an error
++				 * so the system can possibly boot somehow.
++				 */
++				debug("%s: DT overlay %s name not inserted into / node (%d)\n",
++				      __func__,
++				      fit_get_name(ctx->fit, node, NULL), ret);
++			}
+ 		}
+ 		free(tmpbuffer);
+ 		if (ret)
+-- 
+2.43.0
 
-regards Frank
