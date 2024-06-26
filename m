@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EA7DC27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 14:54:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDFDC27C4F
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 15:01:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08BF788307;
-	Wed, 26 Jun 2024 16:54:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6D19F883D9;
+	Wed, 26 Jun 2024 17:01:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EuM105rv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9jTdyLW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41B4C8844F; Wed, 26 Jun 2024 16:54:50 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 6548D88495; Wed, 26 Jun 2024 17:01:20 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09F15880AD
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 16:54:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CBF3880AD
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 17:01:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-700cc97b220so907352a34.0
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 07:54:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5c226165667so329187eaf.2
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 08:01:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719413687; x=1720018487; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n6obnP/4dNCNaKP4Yaq2Ei6WxlRiVZS4kd6pnQrODkM=;
- b=EuM105rv3FgPDXMDb/uuA0lUu4NdJtbiPTIu8gG2r5AW6ivr7YdUNH75IyMxDlZwUI
- B9QlKjW7zqZoFq3JozXmy12GBXwvzOMmMiPYPf22e9d51UDr0sndgqCKbo+g+qebNodW
- iYrpDh+zalbDKEOyFx2je04EoxBYHAWFUd0eY=
+ d=konsulko.com; s=google; t=1719414077; x=1720018877; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9rTyDl0cyu4YBNU70HYEX1lPVB2WsdCvZrfOE6mKd1I=;
+ b=M9jTdyLW7L1PfV3fdp5hjeEkDye80slEy6ZbaCyxBaZIGmjniO8iA9U5lsJMPE8P6j
+ Y78576TQljJbCEyM0+BaRqlNP567QPmblgvaDiy43RFKgmRwFUmIsghn+51nLYE3y5B4
+ 7SPtYRVJAI+PQzCQvDw5V6fG+aDeZ2hHhXnLA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719413687; x=1720018487;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=n6obnP/4dNCNaKP4Yaq2Ei6WxlRiVZS4kd6pnQrODkM=;
- b=wLDxb7B+0W+0Bg3KiKIRjtEWMjik3YTwvyBRzKo/+fYX8tkL5AT1KC71gbdIPjftjd
- YXs446D2Ablez7vZ0bC+pkZ6iIcgz39J89d+ATFpxYddURamarOgXtJGPGBWSCXNoiQN
- t7MB27VszGVAXRGM08pJ+mqjcN0J24D7aVpoZcUb4CXvKkiL8i7QSvh5ss1sKvPi8MkZ
- zt6S86C3tx7cOC2QA0Uzwu14SOGds9gI8tZxb9hhq5/5wXfetuxhgF7IW3SnTfZ2twtK
- U6WKvyzSUnASYeQZMraiy9G6R4sqN/c2Ii4k2T4j+p6MRPy0ygk6gfYpmJX4BWuWKuri
- eqEA==
-X-Gm-Message-State: AOJu0YwWL1luVXjIXpk9H2SMODmV45zYXI+wMxjqvW8Tk4y28JRUu6TH
- sxc81Bo5/0cJUPQZdMDbXSRlECkNS184LGwZ1OfAlLROmKIAONUKvTHAYvwfqKEXjK3VqMFrdyn
- ARPGLKj5cCP9ruC1yI06EsXzm/63mJ5qFEfWxlw5US1fSiLU=
-X-Google-Smtp-Source: AGHT+IFxzt9d7zD3dD806+tGmz5c6s8HOrDlQxKnDwxVdQVt2fZuUERcfu8UoEm3Z3vKz35rN2j4Q/GULemhk7jOY8o=
-X-Received: by 2002:a05:6830:6b84:b0:6f9:a3c6:a864 with SMTP id
- 46e09a7af769-700b11b09b1mr10679220a34.10.1719413686709; Wed, 26 Jun 2024
- 07:54:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1719414077; x=1720018877;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9rTyDl0cyu4YBNU70HYEX1lPVB2WsdCvZrfOE6mKd1I=;
+ b=fUG91d8e6+S9LMnRhX7LIIPN5odQ6WcAVrlbD07IIMx4yYHr/pEhQR7Aj3udPOCouA
+ zKvFk9EoR1K7MrKHt/FMTsf+mQYdYFajJIAZYj5vmIkIYak6Lq3rjaawEnkdmemOSYlC
+ d26KGJ5pHhgB44e+aoFyhegoLGFKOnt/zreBhSqPVio/ptLuYEsBfMsCKibJcOOBd1no
+ q2fTtBQLsDtazLJF5rXRe8wxIkOLmZSXlhq9OH0TYk/HSdUpHVyrRPxZ5ntu4cpYE+aV
+ ZNw9gCPYO54ZS0ZmHbpEqReItUlHL5DgmrRSKRjHX4T6v7NwGKQHPHOHdbIHxxLCK5IV
+ 7aLA==
+X-Gm-Message-State: AOJu0Ywbrabkee2zlW/u9yZ8KGOgRm2IvWaS6okbS9wwMdTemfeOcmcn
+ zjkfv79I8LNEzOJAATn6w9xkOhmhrMHz2dVkYcakQDNoSVR9iTkzyxM68fx5pF3Wr0k48o45jcc
+ cTCZK+Q==
+X-Google-Smtp-Source: AGHT+IEe+AQqGFhfjsu92JGplsdULArEayvXjU+5+1DYELysIMmB5UsL0dXzERblzKBKOy+BGvEmZw==
+X-Received: by 2002:a4a:7643:0:b0:5c2:1df2:2737 with SMTP id
+ 006d021491bc7-5c21df2288dmr4110559eaf.3.1719414076749; 
+ Wed, 26 Jun 2024 08:01:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5c1d55ce4adsm2131896eaf.16.2024.06.26.08.01.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Jun 2024 08:01:16 -0700 (PDT)
+Date: Wed, 26 Jun 2024 09:01:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
+ "u-boot-board-maintainers@lists.denx.de"
+ <u-boot-board-maintainers@lists.denx.de>
+Subject: Re: [ANN] U-Boot v2024.07-rc5 released
+Message-ID: <20240626150113.GX38804@bill-the-cat>
+References: <20240624193035.GK38804@bill-the-cat>
+ <e396268c-e106-4bb8-a40d-e0582e556c6b@cs-soprasteria.com>
+ <20240625151929.GS38804@bill-the-cat>
+ <7b87013a-23b6-419f-a163-2e9f4c44b200@csgroup.eu>
 MIME-Version: 1.0
-References: <20240623175302.1463973-1-sjg@chromium.org>
- <20240623175302.1463973-15-sjg@chromium.org>
- <dc4f2532-4039-425f-8309-f62f73b5feaf@cherry.de>
-In-Reply-To: <dc4f2532-4039-425f-8309-f62f73b5feaf@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 26 Jun 2024 15:54:36 +0100
-Message-ID: <CAFLszTiwsc5qyYe2-Y_BxPhq8Dsintk7Tnt6ahn=X1UyDx2nag@mail.gmail.com>
-Subject: Re: [PATCH v4 14/16] rockchip: Avoid #ifdefs in RK3399 SPL
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="e4J+l/DawbRFsuh3"
+Content-Disposition: inline
+In-Reply-To: <7b87013a-23b6-419f-a163-2e9f4c44b200@csgroup.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,146 +97,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On Mon, 24 Jun 2024 at 09:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 6/23/24 7:53 PM, Simon Glass wrote:
-> > The code here is confusing due to large blocks which are #ifdefed out.
-> > Add a function phase_sdram_init() which returns whether SDRAM init
-> > should happen in the current phase, using that as needed to control the
-> > code flow.
-> >
-> > This increases code size by about 500 bytes in SPL when the cache is on,
-> > since it must call the rather large rockchip_sdram_size() function.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v4:
-> > - Drop the non-dcache optimisation, since the cache should normally be on
-> >
-> > Changes in v3:
-> > - Split out the refactoring into a separate patch
-> >
-> >   drivers/ram/rockchip/sdram_rk3399.c | 42 +++++++++++++++--------------
-> >   1 file changed, 22 insertions(+), 20 deletions(-)
-> >
-> > diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> > index 3c4e20f4e80..949a082d00c 100644
-> > --- a/drivers/ram/rockchip/sdram_rk3399.c
-> > +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> > @@ -13,6 +13,7 @@
-> >   #include <log.h>
-> >   #include <ram.h>
-> >   #include <regmap.h>
-> > +#include <spl.h>
-> >   #include <syscon.h>
-> >   #include <asm/arch-rockchip/clock.h>
-> >   #include <asm/arch-rockchip/cru.h>
-> > @@ -63,8 +64,6 @@ struct chan_info {
-> >   };
-> >
-> >   struct dram_info {
-> > -#if defined(CONFIG_TPL_BUILD) || \
-> > -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> >       u32 pwrup_srefresh_exit[2];
-> >       struct chan_info chan[2];
-> >       struct clk ddr_clk;
-> > @@ -75,7 +74,6 @@ struct dram_info {
-> >       struct rk3399_pmusgrf_regs *pmusgrf;
-> >       struct rk3399_ddr_cic_regs *cic;
-> >       const struct sdram_rk3399_ops *ops;
-> > -#endif
-> >       struct ram_info info;
-> >       struct rk3399_pmugrf_regs *pmugrf;
-> >   };
-> > @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
-> >                                       struct rk3399_sdram_params *params);
-> >   };
-> >
-> > -#if defined(CONFIG_TPL_BUILD) || \
-> > -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> > -
-> >   struct rockchip_dmc_plat {
-> >   #if CONFIG_IS_ENABLED(OF_PLATDATA)
-> >       struct dtd_rockchip_rk3399_dmc dtplat;
-> > @@ -191,6 +186,17 @@ struct io_setting {
-> >       },
-> >   };
-> >
-> > +/**
-> > + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
-> > + *
-> > + * Returns: true to do SDRAM init in this phase, false to not
-> > + */
-> > +static bool phase_sdram_init(void)
-> > +{
-> > +     return spl_phase() == PHASE_TPL ||
-> > +         (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
-> > +}
-> > +
-> >   static struct io_setting *
-> >   lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
-> >   {
-> > @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
-> >       struct rockchip_dmc_plat *plat = dev_get_plat(dev);
-> >       int ret;
-> >
-> > -     if (!CONFIG_IS_ENABLED(OF_REAL))
-> > +     if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
-> >               return 0;
-> >
-> >       ret = dev_read_u32_array(dev, "rockchip,sdram-params",
-> > @@ -3138,22 +3144,21 @@ static int rk3399_dmc_init(struct udevice *dev)
-> >
-> >       return 0;
-> >   }
-> > -#endif
-> >
-> >   static int rk3399_dmc_probe(struct udevice *dev)
-> >   {
-> >       struct dram_info *priv = dev_get_priv(dev);
-> >
-> > -#if defined(CONFIG_TPL_BUILD) || \
-> > -     (!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> > -     if (rk3399_dmc_init(dev))
-> > -             return 0;
-> > -#endif
-> > -     priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> > -     debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> > +     if (phase_sdram_init()) {
-> > +             if (rk3399_dmc_init(dev))
-> > +                     return 0;
-> > +     } else {
-> > +             priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> > +             debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> > +     }
-> > +
->
-> I'm not sure we need to put the debug message into an else as this
-> pmugrf is also used when dmc_init passes.
->
-> Additionally, we could also just set priv->pmugrf before the if
-> condition and remove it from dmc_init if we really wanted to.
->
-> >       priv->info.base = CFG_SYS_SDRAM_BASE;
-> > -     priv->info.size =
-> > -             rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
-> > +     priv->info.size = rockchip_sdram_size((ulong)&priv->pmugrf->os_reg2);
-> >
->
-> Can you please say a few words about this change in the commit log? Why
-> phys_addr_t->ulong here?
+--e4J+l/DawbRFsuh3
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Oh dear, it keeps coming back! Removed now.
+On Tue, Jun 25, 2024 at 09:20:54PM +0200, Christophe Leroy wrote:
+>=20
+>=20
+> Le 25/06/2024 =E0 17:19, Tom Rini a =E9crit=A0:
+> > On Tue, Jun 25, 2024 at 03:12:38PM +0000, LEROY Christophe wrote:
+> > > Hi All,
+> > >=20
+> > > Le 24/06/2024 =E0 21:30, Tom Rini a =E9crit=A0:
+> > > > Hey all,
+> > > >=20
+> > > > Well, once again I need to check my calender reminders since, whoop=
+s,
+> > > > I'm a week late. That said, looking at the list of changes in this
+> > > > slightly elongated period, I think it's OK. At this point we're a w=
+eek
+> > > > out from the release, so it's time for clear and obvious regression
+> > > > fixes. Ideally ones introduced this release cycle so there's less
+> > > > chances of unintended side-effects.
+> > > >=20
+> > > > In terms of a changelog,
+> > > > git log --merges v2024.07-rc4..v2024.07-rc5
+> > > > contains what I've pulled but as always, better PR messages and tags
+> > > > will provide better results here.
+> > > >=20
+> > > > With that, the final release is planned for Monday, July 1st, 2024.
+> > > > Thanks all!
+> > > >=20
+> > >=20
+> > > For your information, I have started testing v2024.07 on my powerpc
+> > > boards in operational condition and I have a major problem : U-boot
+> > > doesn't get the Linux kernel started before the watchdog fires. I have
+> > > to disable watchdog to get it running.
+> > >=20
+> > > This problem doesn't occur with v2024.04.
+> > >=20
+> > > I bisected it to commit 340fdf1303dc ("zlib: Port fix for CVE-2016-98=
+41
+> > > to U-Boot") and I also confirm that v2024.07-rc5 works well with that
+> > > commit reverted on top of it.
+> > >=20
+> > > Any idea of what is going wrong with that commit ?
+> >=20
+> > Are you able to check the zlib performance before/after that commit?
+> >=20
+>=20
+> Indeed there's a huge difference.
+>=20
+> Before : 12298074 timebase ticks to decompress kernel
+> After :  17145906 ticks, that is 40% more time.
+>=20
+> But behind that, we also need to understand why the watchdog is not kept
+> alive during that time.
 
->
-> Otherwise looks ok to me,
-> Cheers,
-> Quentin
+That is odd, I would have expected it to have been kept alive.
 
-Regards,
-Simon
+--=20
+Tom
+
+--e4J+l/DawbRFsuh3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ8LR0ACgkQFHw5/5Y0
+tyw7Agv+MykY/wqd7I6LutgbprgI8QG26jcJ44xdcdlTKMWmd5Dw0fVeIhUuRl8V
+6dkB4IOk15HMD0EoxLTFtuxrkh7USLvab65fHNAKIp61+FV+kKwAzR3iA6cB79Qw
+23cFmagXQCwrqdKNt6yNdaD7Zx/eyaJ5v/YbZYx+EyoYBg6Cs8QYqOr8xEPiEqUs
+5kE5GGOqGIY4FY6GO/IPr/lVWUlHE5JKBrXmtcXc/lxjmtx9g8gxsNWZsjJtfFsl
+ozE1E3WjzdtEh1ikMJb2/RMA29hVqj4BQRsMW0o1oxbW2ylV+uhkR8F2LgQcURCo
+jA7+hNcJMki/FkZ+hxu4WsVkmnqcMCEWufOMV/6YWRpAYVcdMp8G/cpJ6+oKY0qQ
+Tyho6Hs1Wz7PSuJrEp2kFSyUwZzjdTwK2YKce1SKpoIeFu1CWFeumOguAEnqVodo
+X+xv3aePZqqLvX1aC+/nXE6K8fDqa+xX8/8wgyAHqZo1t8VYQLhAtt9dlp0EPU7W
+5vsfkHr4
+=Kgcb
+-----END PGP SIGNATURE-----
+
+--e4J+l/DawbRFsuh3--
