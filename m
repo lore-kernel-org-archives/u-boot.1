@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C53C27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 16:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14DC7C3064D
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 16:01:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA8FD8855B;
-	Wed, 26 Jun 2024 18:00:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2050688574;
+	Wed, 26 Jun 2024 18:00:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fm6qKhtf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aQL5FTsp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 072F1884DD; Wed, 26 Jun 2024 18:00:14 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 9371C884C7; Wed, 26 Jun 2024 18:00:15 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C20C3884F1
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 18:00:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E8018855B
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 18:00:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-424acf3226fso8632935e9.1
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 09:00:11 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4248ea53493so27310475e9.3
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 09:00:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719417611; x=1720022411; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719417612; x=1720022412; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JfQhvNgKcrCfr+fuDoJ/yQIZ0hGftxiA34nh3+CI+jY=;
- b=Fm6qKhtfz8OismkO23MBYcX8NEjJ7rGQWynx2NGGHXdHA0bFl7uEvA0lS2zWfp9UmC
- ShJW6Yq3pshahYQ6oM6/S9Kr2OtIfC/5tFLBn3prlndH8UE7jg81KfQEzRQPvH6LeGwg
- gakJx6AODXjMpz7cDkGqGqKB80EE3zFOEOJLM=
+ bh=bJXFsCW6LCl1bXkmZ8sKbXEiUPqgjCbPoT+lGmHDHLY=;
+ b=aQL5FTspN9pL0chNoKbFJHRtOUvm/nWdZFvnJvfwGyxGFU3BaR+7Pb4zvrGr4cH85n
+ SYzmLbh/V79yBbtf3JtaiwyPd930EAwvv3vZ90CjLu/JeSE3mTN/sK+5P72cDvcIg+He
+ conjdkKRCiYimSvVosv4XT1wMb9fFzQA9j0vw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719417611; x=1720022411;
+ d=1e100.net; s=20230601; t=1719417612; x=1720022412;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JfQhvNgKcrCfr+fuDoJ/yQIZ0hGftxiA34nh3+CI+jY=;
- b=nnX548FcQK3KgAWgPvoO6yDe2c3PtdF1Ej13sXAnV29koF0JmgAKu/CY9xZ6faeLT6
- 4gepIIBzRR4l/v749HlI68yEGOuPVjLM7zYxe9W48l/j3+jnCEH1u63468BWLrco/Ygt
- gWImJSQbYXEwnTMiXs5d8A1A6hIm2ZjNB/yh8xU+J2UIhmlkr/D3jsRmnoT1M/OuLNMA
- 37FSaBKQXKpZKagViUW0R8RGTaNf1cqDOqebgV9CvNSBPZL70QcwNfv+2zV7yby4cbJd
- a5/IVmLzuJoNmQkbO8WqNj8Bp1s4Xx1c61hqtNZU31jrfBn2o1kJZwvmGWdnx/KOdcLt
- mBLw==
-X-Gm-Message-State: AOJu0YzKF5NeqFIIdADvFL2nc5TXsJzSLH8QdeqqF8QDCs35R8v8JgUZ
- 3hUKAckr2vpqdtedH/I8OBkTK9UQKFLLjwHyZ8+3C8iZp/5QTDLdnxiJ7o/rIjiLv3YgrmxISb+
- +vw==
-X-Google-Smtp-Source: AGHT+IFvp/1tZMc8CN0d9uxkAn10nNhMOY0BAmYSaUReeac2+RmcPjjOpySQUKnbnvkBSBoNxsXvXw==
-X-Received: by 2002:a05:600c:3b9c:b0:424:8e97:5feb with SMTP id
- 5b1f17b1804b1-4248e9763femr66249195e9.3.1719417611093; 
- Wed, 26 Jun 2024 09:00:11 -0700 (PDT)
+ bh=bJXFsCW6LCl1bXkmZ8sKbXEiUPqgjCbPoT+lGmHDHLY=;
+ b=cy//eESnK4e0hDClKilaZ/S5gWjH08ICy5mWXIMkWI0igYqden+1uoL0EkP5ZiZL4r
+ +fbYuyKNMJsn0jOlVn9nbJ+mxwW/CoVY5RgXN1gxP+QVxVCTfW1NjniVv4JN592+Lwqw
+ dTJE5iGv2tXyTT8WBOn5nkmVxbpihrl6Ln20z74Cwhl6ZUQDCuSlzuyYkwgbno0IKCEA
+ +80tNLXAjOprLojLBkheeAYVfegaubW1SqUvb2hWQ4rNN2tzs2OS2KuI9dMvZqwzInv9
+ BWVKHa//Hy6KDCzkQBpm834Oxmy74GfC1Ox9/vE0DOnxZz1FzhXkM3pGHL+vIAN5Dm5q
+ YsQw==
+X-Gm-Message-State: AOJu0YxMKdvbUqfqSqENBJ2ylMPWDr+6I2TQKcM4mx1Foytcr4HdodA9
+ dEeOpswj5yoYXR9rihp+E8pb5yG04/wu7fLWcVJXfHv8fN3GbyVWodEIx7lzMyXBZRph/SjKEe+
+ Jbg==
+X-Google-Smtp-Source: AGHT+IG3mYUR/H3ckbcSlWSpABLSiE68kn81Lp07psRTVQx1aqtDCBJEVPHn71ZlWuimzIoXsjl/oQ==
+X-Received: by 2002:a05:600c:1d24:b0:424:917e:f394 with SMTP id
+ 5b1f17b1804b1-424917ef3dbmr75354985e9.31.1719417612713; 
+ Wed, 26 Jun 2024 09:00:12 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-424c827507bsm30753715e9.22.2024.06.26.09.00.10
+ 5b1f17b1804b1-424c827507bsm30753715e9.22.2024.06.26.09.00.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 09:00:10 -0700 (PDT)
+ Wed, 26 Jun 2024 09:00:12 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v5 08/16] x86: Set a board-size limit for chromebook_link
-Date: Wed, 26 Jun 2024 16:59:37 +0100
-Message-Id: <20240626155945.278640-9-sjg@chromium.org>
+ Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Majewski <l.majewski@samsung.com>
+Subject: [PATCH v5 10/16] power: regulator: Handle autoset in
+ regulators_enable_boot_on()
+Date: Wed, 26 Jun 2024 16:59:39 +0100
+Message-Id: <20240626155945.278640-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240626155945.278640-1-sjg@chromium.org>
 References: <20240626155945.278640-1-sjg@chromium.org>
@@ -89,38 +91,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set a size limit for this board so that we get a build error if it grows
-too much.
+With a recent change, regulators_enable_boot_on() returns an error if a
+regulator is already set. Check for and handle this situation.
 
-Note that the limit is approximately, since it does not include the FDT,
-microcode and fdtmap, which can change in size. However this board is
-fairly stable, so overflowing this limit will likely result in the image
-not fitting in the ROM space available for U-Boot.
+Fixes: d99fb64a98a power: regulator: Only run autoset once for each regulator
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v4)
+(no changes since v1)
 
-Changes in v4:
-- Add new patch to set a board-size limit for chromebook_link
+ drivers/power/regulator/regulator-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- configs/chromebook_link_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/chromebook_link_defconfig b/configs/chromebook_link_defconfig
-index a9f91dd9b26..1a72fd178a8 100644
---- a/configs/chromebook_link_defconfig
-+++ b/configs/chromebook_link_defconfig
-@@ -15,6 +15,8 @@ CONFIG_DEBUG_UART=y
- CONFIG_HAVE_MRC=y
- CONFIG_SMP=y
- CONFIG_HAVE_VGA_BIOS=y
-+CONFIG_HAS_BOARD_SIZE_LIMIT=y
-+CONFIG_BOARD_SIZE_LIMIT=630000
- CONFIG_FIT=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 77d101f262e..d9e1fb68295 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -518,7 +518,7 @@ int regulators_enable_boot_on(bool verbose)
+ 	     dev;
+ 	     uclass_next_device(&dev)) {
+ 		ret = regulator_autoset(dev);
+-		if (ret == -EMEDIUMTYPE) {
++		if (ret == -EMEDIUMTYPE || ret == -EALREADY) {
+ 			ret = 0;
+ 			continue;
+ 		}
 -- 
 2.34.1
 
