@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC76C27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 12:31:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F14C30653
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 12:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8587A8854A;
+	by phobos.denx.de (Postfix) with ESMTP id EAD4C88566;
 	Wed, 26 Jun 2024 14:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="os1U2bnb";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Sixp9RXY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CD41884C8; Wed, 26 Jun 2024 12:45:43 +0200 (CEST)
+ id B7236884A9; Wed, 26 Jun 2024 12:45:45 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2318D88096
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 12:45:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C39A8844F
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 12:45:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 6277B12000E;
- Wed, 26 Jun 2024 13:45:38 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6277B12000E
+ by mx1.sberdevices.ru (Postfix) with ESMTP id E8AE712000F;
+ Wed, 26 Jun 2024 13:45:42 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru E8AE712000F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1719398738;
- bh=cbczKmvR3eO16B3AfQEiSN0VIeAKoaSIn236+E6OnUE=;
+ s=mail; t=1719398742;
+ bh=61sR3h/b8qIR6vIe1OJN9futwKbexYydip0TK3VQiEo=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=os1U2bnbURog7Np+xg3xV83XpTyvPWg1GSkUsFnZgottHFCkzAmGB+5bzQ83PKEDt
- 6bo+zo86FcUq+FjNzpDKyuYvepjSVzW0ZwvReIlLyPLjtHb+qTS1QJDabwXvSJuzQa
- 1U9+Yc4WKgJneM5ODgGKoPm3VgromeCgZDY8+IQTD2taz6nFhfTLWYq7nJp7r8yrzy
- BvIkpNXjjURfJGJWpkcAc4RCr//Iypkk4bxn9XVIqp/JSCVVzkXiASw88q3208xOZQ
- U04uChyl8xKWR9Oo1ICq1Iw39M8xGAsfQt14TjOPuIYsGCjZ/1BXungQICsG1D54aG
- Le1uk/Y1R/bdw==
+ b=Sixp9RXY047nTIw+wM6tgs2zJgqXqZU/KNnpBwZKR63+UszwbI2rfM3ba1XnSsnbv
+ znyuP+kaORYUWoYXWiaAlE+/eeLW+YJAD6uImpO5s8h3PMAtL0Qilg8INTPIGJ421A
+ +ENLz3zRcrQfJxBrOVrr+WJ5zt8xQi6whiLqiEJ1uNVPRrAz/7ynf2TItmTsUU5vrx
+ nvstJVT5rVFVyJdCC4opr9uOxjWgXye+ICFbKmkRROMUJTMzZgacb6iTdoqc1TPWIH
+ eJRMgopJcFy1AWejrOclUnNea+7SVCzn344DaVh7fcbKl8r0p/t+9fxneX2nNIwh8h
+ y/dW0Ne+xAy0w==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
  [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 26 Jun 2024 13:45:38 +0300 (MSK)
+ Wed, 26 Jun 2024 13:45:42 +0300 (MSK)
 Received: from user-A520M-DS3H.sigma.sbrf.ru (100.64.160.123) by
  p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 26 Jun 2024 13:45:36 +0300
+ 15.2.1118.40; Wed, 26 Jun 2024 13:45:40 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <frieder.schrempf@kontron.de>, <kmpark@infradead.org>, <hs@denx.de>,
@@ -60,10 +60,12 @@ To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <jagan@amarulasolutions.com>
 CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v5 0/6] Introduce UBI block device
-Date: Wed, 26 Jun 2024 13:45:21 +0300
-Message-ID: <20240626104527.2811828-1-avromanov@salutedevices.com>
+Subject: [PATCH v5 2/6] ubi: allow to write to volume with offset
+Date: Wed, 26 Jun 2024 13:45:23 +0300
+Message-ID: <20240626104527.2811828-3-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240626104527.2811828-1-avromanov@salutedevices.com>
+References: <20240626104527.2811828-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,16 +82,15 @@ X-KSMG-AntiSpam-Status: not_detected
 X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
- 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f, {Tracking_uf_ne_domains},
+ 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f,
  {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1; lore.kernel.org:7.1.1; 127.0.0.199:7.1.2;
- 100.64.160.123:7.1.2;
+ smtp.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2; 100.64.160.123:7.1.2;
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
  ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/06/26 10:17:00
-X-KSMG-LinksScanning: Clean, bases: 2024/06/26 10:18:00
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
 X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
  bases: 2024/06/26 09:49:00 #25717626
 X-KSMG-AntiVirus-Status: Clean, skipped
@@ -110,73 +111,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello!
+Introduce ubi_volume_offset_write() helper, which
+allow to write to ubi volume with specified offset.
 
-This series adds support for the UBI block device, which
-allows to read/write data block by block. For example,
-it can now be used for BCB or Android AB command:
-
-  $ bcb load ubi 0 part_name
-
-Tested only on SPI NAND, so bind is made only for
-SPI NAND drivers. Can be used with mtdblock device [1].
-
+Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+Reviewed-by: Heiko Schocher <hs@denx.de>
+Acked-by: Heiko Schocher <hs@denx.de>
 ---
+ cmd/ubi.c           | 72 +++++++++++++++++++++++++++++++++++++++++++--
+ env/ubi.c           | 10 +++----
+ include/ubi_uboot.h |  2 +-
+ 3 files changed, 75 insertions(+), 9 deletions(-)
 
-Changes V1 -> V2 [2]:
-
- - Rebased over mtdblock v2 patchset [3].
- - Compile UBI partitions support only if CONFIG_BLK option
-   is enabled.
-
-Changes V2 -> V3 [4]:
-
- - Fix build warnings: use LBAF printf format string for lbaint_t types.
-
-Changes V3 -> V4 [5]:
-
- - Rebased over u-boot/master.
- - Fix build errors and warnings if CONFIG_BLK isn't enabled.
- - Fix failed tests in cases is ubiblock device isn't binded.
-
-Changes V4 -> V5 [6]:
-
-  - Rebased over u-boot/master.
-  - Fix build errors when CONFIG_MTD and CONFIG_MTD_UBI isn't enabled.
-  - Use auto blk device devnum generation when call
-    blk_create_devicef (pass -1 parameter instead of dev_seq(dev)).
-
-Links:
-
-  [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
-  [2] https://lore.kernel.org/all/20240306134906.1179285-1-avromanov@salutedevices.com/
-  [3] https://lore.kernel.org/all/20240307130726.1582487-1-avromanov@salutedevices.com/
-  [4] https://lore.kernel.org/all/20240325144148.3738195-1-avromanov@salutedevices.com/
-  [5] https://lore.kernel.org/all/20240524111319.3512009-1-avromanov@salutedevices.com/
-  [6] https://lore.kernel.org/all/20240603155740.1840571-1-avromanov@salutedevices.com/
-
-Alexey Romanov (6):
-  ubi: allow to read from volume with offset
-  ubi: allow to write to volume with offset
-  drivers: introduce UBI block abstraction
-  disk: don't try search for partition type if already set
-  disk: support UBI partitions
-  spinand: bind UBI block
-
- cmd/ubi.c                   |  78 ++++++++++++++++++++--
- disk/part.c                 |   7 ++
- drivers/block/blk-uclass.c  |   1 +
- drivers/mtd/nand/spi/core.c |   9 ++-
- drivers/mtd/ubi/Makefile    |   1 +
- drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
- drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
- env/ubi.c                   |  16 ++---
- include/part.h              |   2 +
- include/ubi_uboot.h         |  13 +++-
- 10 files changed, 339 insertions(+), 17 deletions(-)
- create mode 100644 drivers/mtd/ubi/block.c
- create mode 100644 drivers/mtd/ubi/part.c
-
+diff --git a/cmd/ubi.c b/cmd/ubi.c
+index 2257f68498..151afb9803 100644
+--- a/cmd/ubi.c
++++ b/cmd/ubi.c
+@@ -415,9 +415,75 @@ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
+ 	return ubi_volume_continue_write(volume, buf, size);
+ }
+ 
+-int ubi_volume_write(char *volume, void *buf, size_t size)
++static int ubi_volume_offset_write(char *volume, void *buf, loff_t offset,
++				   size_t size)
+ {
+-	return ubi_volume_begin_write(volume, buf, size, size);
++	int len, tbuf_size, ret;
++	u64 lnum;
++	struct ubi_volume *vol;
++	loff_t off = offset;
++	void *tbuf;
++
++	vol = ubi_find_volume(volume);
++	if (!vol)
++		return -ENODEV;
++
++	if (size > vol->reserved_pebs * (ubi->leb_size - vol->data_pad))
++		return -EINVAL;
++
++	tbuf_size = vol->usable_leb_size;
++	tbuf = malloc_cache_aligned(tbuf_size);
++	if (!tbuf)
++		return -ENOMEM;
++
++	lnum = off;
++	off = do_div(lnum, vol->usable_leb_size);
++
++	do {
++		struct ubi_volume_desc desc = {
++			.vol = vol,
++			.mode = UBI_READWRITE,
++		};
++
++		len = size > tbuf_size ? tbuf_size : size;
++		if (off + len >= vol->usable_leb_size)
++			len = vol->usable_leb_size - off;
++
++		ret = ubi_read(&desc, (int)lnum, tbuf, 0, tbuf_size);
++		if (ret) {
++			pr_err("Failed to read leb %lld (%d)\n", lnum, ret);
++			goto exit;
++		}
++
++		memcpy(tbuf + off, buf, len);
++
++		ret = ubi_leb_change(&desc, (int)lnum, tbuf, tbuf_size);
++		if (ret) {
++			pr_err("Failed to write leb %lld (%d)\n", lnum, ret);
++			goto exit;
++		}
++
++		off += len;
++		if (off >= vol->usable_leb_size) {
++			lnum++;
++			off -= vol->usable_leb_size;
++		}
++
++		buf += len;
++		size -= len;
++	} while (size);
++
++exit:
++	free(tbuf);
++	return ret;
++}
++
++int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size)
++{
++	if (!offset)
++		return ubi_volume_begin_write(volume, buf, size, size);
++
++	return ubi_volume_offset_write(volume, buf, offset, size);
+ }
+ 
+ int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size)
+@@ -761,7 +827,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 						(void *)addr, size, full_size);
+ 			}
+ 		} else {
+-			ret = ubi_volume_write(argv[3], (void *)addr, size);
++			ret = ubi_volume_write(argv[3], (void *)addr, 0, size);
+ 		}
+ 		if (!ret) {
+ 			printf("%lld bytes written to volume %s\n", size,
+diff --git a/env/ubi.c b/env/ubi.c
+index c4c62b0dd9..ac45d2a12b 100644
+--- a/env/ubi.c
++++ b/env/ubi.c
+@@ -54,7 +54,7 @@ static int env_ubi_save(void)
+ 	if (gd->env_valid == ENV_VALID) {
+ 		puts("Writing to redundant UBI... ");
+ 		if (ubi_volume_write(CONFIG_ENV_UBI_VOLUME_REDUND,
+-				     (void *)env_new, CONFIG_ENV_SIZE)) {
++				     (void *)env_new, 0, CONFIG_ENV_SIZE)) {
+ 			printf("\n** Unable to write env to %s:%s **\n",
+ 			       CONFIG_ENV_UBI_PART,
+ 			       CONFIG_ENV_UBI_VOLUME_REDUND);
+@@ -63,7 +63,7 @@ static int env_ubi_save(void)
+ 	} else {
+ 		puts("Writing to UBI... ");
+ 		if (ubi_volume_write(CONFIG_ENV_UBI_VOLUME,
+-				     (void *)env_new, CONFIG_ENV_SIZE)) {
++				     (void *)env_new, 0, CONFIG_ENV_SIZE)) {
+ 			printf("\n** Unable to write env to %s:%s **\n",
+ 			       CONFIG_ENV_UBI_PART,
+ 			       CONFIG_ENV_UBI_VOLUME);
+@@ -93,7 +93,7 @@ static int env_ubi_save(void)
+ 		return 1;
+ 	}
+ 
+-	if (ubi_volume_write(CONFIG_ENV_UBI_VOLUME, (void *)env_new,
++	if (ubi_volume_write(CONFIG_ENV_UBI_VOLUME, (void *)env_new, 0,
+ 			     CONFIG_ENV_SIZE)) {
+ 		printf("\n** Unable to write env to %s:%s **\n",
+ 		       CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VOLUME);
+@@ -197,7 +197,7 @@ static int env_ubi_erase(void)
+ 	memset(env_buf, 0x0, CONFIG_ENV_SIZE);
+ 
+ 	if (ubi_volume_write(CONFIG_ENV_UBI_VOLUME,
+-			     (void *)env_buf, CONFIG_ENV_SIZE)) {
++			     (void *)env_buf, 0, CONFIG_ENV_SIZE)) {
+ 		printf("\n** Unable to erase env to %s:%s **\n",
+ 		       CONFIG_ENV_UBI_PART,
+ 		       CONFIG_ENV_UBI_VOLUME);
+@@ -205,7 +205,7 @@ static int env_ubi_erase(void)
+ 	}
+ 	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
+ 		if (ubi_volume_write(ENV_UBI_VOLUME_REDUND,
+-				     (void *)env_buf, CONFIG_ENV_SIZE)) {
++				     (void *)env_buf, 0, CONFIG_ENV_SIZE)) {
+ 			printf("\n** Unable to erase env to %s:%s **\n",
+ 			       CONFIG_ENV_UBI_PART,
+ 			       ENV_UBI_VOLUME_REDUND);
+diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+index a4be0feabb..d36bb92348 100644
+--- a/include/ubi_uboot.h
++++ b/include/ubi_uboot.h
+@@ -48,7 +48,7 @@ extern int ubi_mtd_param_parse(const char *val, struct kernel_param *kp);
+ extern int ubi_init(void);
+ extern void ubi_exit(void);
+ extern int ubi_part(char *part_name, const char *vid_header_offset);
+-extern int ubi_volume_write(char *volume, void *buf, size_t size);
++extern int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size);
+ extern int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size);
+ 
+ extern struct ubi_device *ubi_devices[];
 -- 
 2.34.1
 
