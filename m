@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAF7C30659
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 08:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83843C30653
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 08:01:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14E65884CD;
-	Wed, 26 Jun 2024 10:00:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6CC54884FB;
+	Wed, 26 Jun 2024 10:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L+rbiFve";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b/edPAcK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B6C9884DB; Wed, 26 Jun 2024 10:00:50 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 98253884F6; Wed, 26 Jun 2024 10:00:54 +0200 (CEST)
+Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
+ [IPv6:2607:f8b0:4864:20::a30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B018A884CC
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 10:00:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 457CE884EA
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 10:00:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6b501a4344bso25527266d6.3
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 01:00:47 -0700 (PDT)
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-4ef746cb3a2so1071802e0c.3
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 01:00:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719388846; x=1719993646; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719388851; x=1719993651; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pwLhGoSXlZtEqiurtNFCr8aBgeEa0P7fjY7PPbk8u4E=;
- b=L+rbiFveZlsUEgze5dxwWAFlnR7Uz0dml/5K9Iy6LT5V1Z6bARuoEyV7zuut5aF8Oa
- 6ZGBj8a4H/Tf7gRQNZ8iv4GD5LccRoaWbW4J+GevBM6fnEyqRGH1XXOTBHiViSN/dD17
- zftDDly5lpKB0DsGVNcGGWXgoykmKUhQ1Azps=
+ bh=+FeNyG4XyYDLzwJlk17xBEMOL/MpkCrIfABopEN5/0M=;
+ b=b/edPAcK3DIhcSjdYfW1jkNHzB82IOh4kPU9iOc4H2ouk7kWcqieKv+Wh7jFv68Zhs
+ lZW9kqLO/TfYdMnrIou3Gnc+8B00r4O3LoSRp7yI+YwWN29OND5fR82wBDelXwL1u4oE
+ RaAOwQ+1ptAOpLJ54+MBpUhha0+iUry3hAOhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719388846; x=1719993646;
+ d=1e100.net; s=20230601; t=1719388851; x=1719993651;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pwLhGoSXlZtEqiurtNFCr8aBgeEa0P7fjY7PPbk8u4E=;
- b=CV1XDWe8i8GpTp7213sXTiDQS4bNl0UnvC+kjBFop8pcGDWp/9KUdg79wp4rNqkk2I
- MKT+xZ3M5rR54uKmtRt03FgOgq35e1cp8rRqMlEerWPueG0Xv9IvFrXskNEqI1CuZP+S
- ewlZp8UpitXa9tP4llBJRfzrOuAWwUADijn48KTLe0q54T9CC99fawlpoXcdv6M5JuiM
- cSwCHLAsZImMHXa2FipiOxUDfLBfywiYkh5pSb1gjlLpIZA7yR2TmyvgvvP0FB29w9xe
- rwr+lWudKkMnFKKLTqEJB9HLuMF80wWA2u7cH1rd+aufKkJUuStu13TgExrTLtj+VZj4
- JTWg==
-X-Gm-Message-State: AOJu0YwqjWO3YujdtFQ8Cr5VQNKf4aBTzw//3ceQL7gxziyyV+RD5ODr
- eAN+Jm2qPx3jKXHOlR/PPtfEh9fDqSwxR1PHzVAHk8DhN2eJla+Z+Urnj8bAXQJ1YYBodETEcpX
- mUtwDn35oFF7PovR0PquhKPfNTm9vR1vHft4YRit9DcMUV+yHXW3Y
-X-Google-Smtp-Source: AGHT+IF6LIKqJJ8qaK5vTo2vaL0xsndznBU9bxZR6f2djnUOmWUoflDIoLoZs9AF9PptcG4u4yk7VLeRLcpIxl/fVcU=
-X-Received: by 2002:a05:6214:19ea:b0:6b5:40d:c2d9 with SMTP id
- 6a1803df08f44-6b5409c4e93mr117913266d6.19.1719388846044; Wed, 26 Jun 2024
- 01:00:46 -0700 (PDT)
+ bh=+FeNyG4XyYDLzwJlk17xBEMOL/MpkCrIfABopEN5/0M=;
+ b=JT9CMa6apZUWcEWCbvuFeCqTgmKYdZcRS76MuDdzW3crOrBBGjwjcR64Nh4fbP1F9T
+ AEIWALWKOqzOXKSENfl5LPVn1NQl67Z+M5dvAGQYJhrKee1D8SSfOUkhQe7I4MfeYY+q
+ 0LcoYFU1Z3qkiwC7OSPnUIv9PzBJidjF4+Ay+dAGgjDDiGd/JLeNwVXL+VNPfF4QqSG9
+ TtjHj8l4EYKeG/PbuzYXDYYw0NKNecqyQGTnSHimJZNDrpFv0fePcHDyRVtYjcZfyspm
+ rCzq8dIFk/ElEGCcYKB3pL9wd28r6cROv3Zm/CNFB4+s6txfobr5m/WAopk3+LuXpeeK
+ ynwg==
+X-Gm-Message-State: AOJu0Yy64zMxOcKAqJIgMf5zuNE/cyikjqmqko5y7MC0KMZAs2ah5dnG
+ b0wwYLXjwpLE+e+2Mda2OIkhoxiEtl+lPtysyF9/YF99ZvJ9UOGUvhKe9ZhP4Q0jssdRn5RBNCw
+ u/tyfUr116H4JtTdEtjzFRFmzMKGNqUHWQ6yE
+X-Google-Smtp-Source: AGHT+IGK3TXMt/HYnSi7lNjLZtdROj6Y9/4Pfhp+B2+lVrvAAUPGJZWFQk0OFTFsesUm8AH7SR66+tzE/dG+zc43Qbs=
+X-Received: by 2002:a05:6122:4592:b0:4d4:21cc:5f4f with SMTP id
+ 71dfb90a1353d-4ef6a73950emr7276155e0c.11.1719388851051; Wed, 26 Jun 2024
+ 01:00:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240623203213.1571666-1-sjg@chromium.org>
- <20240623203213.1571666-9-sjg@chromium.org>
- <20240624181303.GH38804@bill-the-cat>
- <CAFLszThRfe9vkSdooS-tiX5ffSHxBKF359m9nov_MAJ7B4bmtQ@mail.gmail.com>
- <20240625142705.GQ38804@bill-the-cat>
-In-Reply-To: <20240625142705.GQ38804@bill-the-cat>
+References: <20240624170041.1024-1-bage@debian.org>
+In-Reply-To: <20240624170041.1024-1-bage@debian.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 26 Jun 2024 09:00:33 +0100
-Message-ID: <CAFLszTip6hbX0yM6T7wAPOqLMavPLpTfemvjN9RPh9C4MmV8Uw@mail.gmail.com>
-Subject: Re: [PATCH v3 08/19] test: Introduce the concept of a role
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 26 Jun 2024 09:00:40 +0100
+Message-ID: <CAFLszTg=n1fa8itjbw9t2X7hwjXMr2=o4GaR=5wj27WT1seW3g@mail.gmail.com>
+Subject: Re: [PATCH] doc: fit: Make data-size a conditionally mandatory
+ property
+To: Bastian Germann <bage@debian.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,175 +82,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 25 Jun 2024 at 15:27, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 24 Jun 2024 at 20:08, Bastian Germann <bage@debian.org> wrote:
 >
-> On Tue, Jun 25, 2024 at 01:38:08PM +0100, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 24 Jun 2024 at 19:13, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Jun 23, 2024 at 02:32:02PM -0600, Simon Glass wrote:
-> > >
-> > > > In Labgrid there is the concept of a 'role', which is similar to the
-> > > > U-Boot board ID in U-Boot's pytest subsystem.
-> > > >
-> > > > The role indicates both the target and information about the U-Boot
-> > > > build to use. It can also provide any amount of other configuration.
-> > > > The information is obtained using the 'labgrid-client query' operation.
-> > > >
-> > > > Make use of this in tests, so that only the role is required in gitlab
-> > > > and other situations. The board type and other things can be queried
-> > > > as needed.
-> > > >
-> > > > Use a new 'u-boot-test-getrole' script to obtain the requested
-> > > > information.
-> > > >
-> > > > With this it is possible to run lab tests in gitlab with just a single
-> > > > 'ROLE' variable for each board.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  test/py/conftest.py | 31 +++++++++++++++++++++++++++----
-> > > >  1 file changed, 27 insertions(+), 4 deletions(-)
-> > > >
-> > > > diff --git a/test/py/conftest.py b/test/py/conftest.py
-> > > > index 6547c6922c6..5de8d7b0e23 100644
-> > > > --- a/test/py/conftest.py
-> > > > +++ b/test/py/conftest.py
-> > > > @@ -23,6 +23,7 @@ from pathlib import Path
-> > > >  import pytest
-> > > >  import re
-> > > >  from _pytest.runner import runtestprotocol
-> > > > +import subprocess
-> > > >  import sys
-> > > >
-> > > >  # Globals: The HTML log file, and the connection to the U-Boot console.
-> > > > @@ -79,6 +80,7 @@ def pytest_addoption(parser):
-> > > >      parser.addoption('--gdbserver', default=None,
-> > > >          help='Run sandbox under gdbserver. The argument is the channel '+
-> > > >          'over which gdbserver should communicate, e.g. localhost:1234')
-> > > > +    parser.addoption('--role', help='U-Boot board role (for Labgrid)')
-> > > >      parser.addoption('--no-prompt-wait', default=False, action='store_true',
-> > > >          help="Assume that U-Boot is ready and don't wait for a prompt")
-> > > >
-> > > > @@ -130,12 +132,33 @@ def get_details(config):
-> > > >              str: Build directory
-> > > >              str: Source directory
-> > > >      """
-> > > > -    board_type = config.getoption('board_type')
-> > > > -    board_identity = config.getoption('board_identity')
-> > > > +    role = config.getoption('role')
-> > > >      build_dir = config.getoption('build_dir')
-> > > > +    if role:
-> > > > +        board_identity = role
-> > > > +        cmd = ['u-boot-test-getrole', role, '--configure']
-> > > > +        env = os.environ.copy()
-> > > > +        if build_dir:
-> > > > +            env['U_BOOT_BUILD_DIR'] = build_dir
-> > > > +        proc = subprocess.run(cmd, capture_output=True, encoding='utf-8',
-> > > > +                              env=env)
-> > > > +        if proc.returncode:
-> > > > +            raise ValueError(proc.stderr)
-> > > > +        print('conftest: lab:', proc.stdout)
-> > > > +        vals = {}
-> > > > +        for line in proc.stdout.splitlines():
-> > > > +            item, value = line.split(' ', maxsplit=1)
-> > > > +            k = item.split(':')[-1]
-> > > > +            vals[k] = value
-> > > > +        print('conftest: lab info:', vals)
-> > > > +        board_type, default_build_dir, source_dir = (vals['board'],
-> > > > +            vals['build_dir'], vals['source_dir'])
-> > > > +    else:
-> > > > +        board_type = config.getoption('board_type')
-> > > > +        board_identity = config.getoption('board_identity')
-> > > >
-> > > > -    source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
-> > > > -    default_build_dir = source_dir + '/build-' + board_type
-> > > > +        source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
-> > > > +        default_build_dir = source_dir + '/build-' + board_type
-> > > >      if not build_dir:
-> > > >          build_dir = default_build_dir
-> > >
-> > > I'm a little confused here. Why can't we construct "role" from
-> > > board_type+board_identity and then we have the board
-> > > conf.${board_type}_${board_identity} file set whatever needs setting to
-> > > be "labgrid" ?
-> >
-> > The role is equivalent to the board identity, not the combination of
-> > the U-Boot board type and the board identity. I went this way to avoid
-> > having to type long and complicated roles when connecting to boards.
-> > It is similar to how things work today, except that the board type is
-> > implied by the 'role'.
-> >
-> > For boards which have multiple identities (e.g. can support two
-> > different board types), Labgrid handles acquiring and releasing the
-> > shares resources, to avoid any problems.
+> Before 9d0750064e (doc: Move external FIT docs into the main body), the
+> FIT property data-size was not a mandatory property and still it is not
+> expected to be set alongside the data property.
 >
-> I guess I have two sets of questions. First, if it's basically the
-> board identity why can't we just use that as the role name, in your
-> setup?
+> Move the data-size property to the "Conditionally mandatory property"
+> section, where it actually belongs.
+>
+> Signed-off-by: Bastian Germann <bage@debian.org>
+> ---
+>  doc/usage/fit/source_file_format.rst | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 
-Yes, that's what I am doing. If you look in console.labgrid you can
-see that it is passing U_BOOT_BOARD_IDENTITY as the -r argument.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Can you please add a PR here?
+
+https://github.com/open-source-firmware/flat-image-tree
 
 >
-> But second, I'm not sure why we need this. The labgrid support we worked
-> up here (but, sigh, it's not really clean enough to post) has:
-> $ cat bin/lootbox/conf.rpi_4_na
-> console_impl=labgrid
-> reset_impl=labgrid
-> flash_impl=labgrid.rpi_4
-> flash_writer=labgrid.rpi_4
+> diff --git a/doc/usage/fit/source_file_format.rst b/doc/usage/fit/source_file_format.rst
+> index 7727ab77c5..15990e3ff5 100644
+> --- a/doc/usage/fit/source_file_format.rst
+> +++ b/doc/usage/fit/source_file_format.rst
+> @@ -254,9 +254,6 @@ compression
+>      zstd                  zstd compressed
+>      ====================  ==================
 >
-> For example and:
-> $ cat bin/writer.labgrid.rpi_4
-> set -e
+> -data-size
+> -    size of the data in bytes
+> -
 >
-> build=${U_BOOT_BUILD_DIR}
+>  Conditionally mandatory property
+>  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> @@ -276,6 +273,9 @@ data-position
+>      not relative to the loading of the FIT. This is mandatory if external data
+>      used with a fixed address.
 >
-> $LG_CLIENT write-files -T ${build}/u-boot.bin kernel8.img
+> +data-size
+> +    Size of the data in bytes. This is mandatory if external data is used.
+> +
+>  os
+>      OS name, mandatory for types "kernel". Valid OS names are:
 >
-> So I don't know what the "role" part you have is for. And yes, there end
-> up being multiple writer.labgrid.FOO scripts because for TI K3 platforms
-> (such as beagleplay) we have:
-> $ cat bin/writer.labgrid.ti-k3
-> set -e
-> build=${U_BOOT_BUILD_DIR}
+> --
+> 2.45.2
 >
-> if [ -z "${tispl}" -o -z "${uboot}" -o -z "${tiboot3}" ]; then
->     echo "Must configure tispl, uboot, tiboot3 and optionally sysfw"
->     echo "per the board documentation."
->     exit 1
-> fi
-> echo "Writing build at ${build}"
-> $LG_CLIENT write-files -T ${build}/${tispl} tispl.bin
-> $LG_CLIENT write-files -T ${build}/${uboot} u-boot.img
-> $LG_CLIENT write-files -T ${build/_a??/_r5}/${tiboot3} tiboot3.bin
-> echo "Done writing build"
->
-> In all cases we first build U-Boot and then pass the build directory to
-> test.py, in something like:
-> export LG_PLACE=rpi4
-> ./test/py/test.py -ra --bd rpi_4 --build-dir .../build-rpi4 \
->   --results-dir .../results-rpi4 --persistent-data-dir .../pd-rpi4 \
->   --exitfirst
->
-> The only U-Boot side changes I needed to make were for counting the SPL
-> banner instances, and that was regardless of framework (a particularly
-> fun platform will show it 3 times).
-
-Yes it is possible to build U-Boot separately. Of course that involved
-various blobs and so on, so every board is different. The approach I
-have taken here is to have Labgrid call buildman to build what is
-needed, with the blobs defined in the environment.
-
-You can use the -B flag to use a pre-built U-Boot, with the scripts
-I've included.
 
 Regards,
 Simon
