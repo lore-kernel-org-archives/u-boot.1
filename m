@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDFDC27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 15:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0085C27C4F
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 15:15:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D19F883D9;
-	Wed, 26 Jun 2024 17:01:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C1D488452;
+	Wed, 26 Jun 2024 17:15:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9jTdyLW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WzCDXWlo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6548D88495; Wed, 26 Jun 2024 17:01:20 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 0AC5C8844F; Wed, 26 Jun 2024 17:15:40 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CBF3880AD
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 17:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D11CB88315
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 17:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5c226165667so329187eaf.2
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 08:01:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1f9cd92b146so53532055ad.3
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 08:15:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719414077; x=1720018877; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9rTyDl0cyu4YBNU70HYEX1lPVB2WsdCvZrfOE6mKd1I=;
- b=M9jTdyLW7L1PfV3fdp5hjeEkDye80slEy6ZbaCyxBaZIGmjniO8iA9U5lsJMPE8P6j
- Y78576TQljJbCEyM0+BaRqlNP567QPmblgvaDiy43RFKgmRwFUmIsghn+51nLYE3y5B4
- 7SPtYRVJAI+PQzCQvDw5V6fG+aDeZ2hHhXnLA=
+ d=gmail.com; s=20230601; t=1719414936; x=1720019736; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BNGM0TQ+C5MiJk3yc8dX5Z8ezvzmDyER8OhJD4UkE9c=;
+ b=WzCDXWloWSQPNJojVDE+egVJ0CwXndd/T/nb0wkaj8Fr3O7O9Y+Jkjgn1n/pKm7xM0
+ 0GB6g93SBKBTJEKmhbRdFkKc5NW5Ru9ZHm626+wA6PtsSFVjPXGm2dYjhuQG527dq5IR
+ t7b/mU8qA2y823DTn/2Q+l+RorpzwW1IP2o7Ldck7yp2cd5w/vAt0sGnhB22pgLigHjy
+ kueoLeYTu6sKDlFZ4B9M4LcsvX02EYIZjY50PP9SDd1oc0q4hFMVHjzCtXIM/M7j8M/f
+ +W47TS+VQ8vCB0Pp83U5bz/MzJt35ZrtMSjuAwPsJ15xf6JE5FYLvuDOk4Tsu3LSDgPh
+ Y9Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719414077; x=1720018877;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9rTyDl0cyu4YBNU70HYEX1lPVB2WsdCvZrfOE6mKd1I=;
- b=fUG91d8e6+S9LMnRhX7LIIPN5odQ6WcAVrlbD07IIMx4yYHr/pEhQR7Aj3udPOCouA
- zKvFk9EoR1K7MrKHt/FMTsf+mQYdYFajJIAZYj5vmIkIYak6Lq3rjaawEnkdmemOSYlC
- d26KGJ5pHhgB44e+aoFyhegoLGFKOnt/zreBhSqPVio/ptLuYEsBfMsCKibJcOOBd1no
- q2fTtBQLsDtazLJF5rXRe8wxIkOLmZSXlhq9OH0TYk/HSdUpHVyrRPxZ5ntu4cpYE+aV
- ZNw9gCPYO54ZS0ZmHbpEqReItUlHL5DgmrRSKRjHX4T6v7NwGKQHPHOHdbIHxxLCK5IV
- 7aLA==
-X-Gm-Message-State: AOJu0Ywbrabkee2zlW/u9yZ8KGOgRm2IvWaS6okbS9wwMdTemfeOcmcn
- zjkfv79I8LNEzOJAATn6w9xkOhmhrMHz2dVkYcakQDNoSVR9iTkzyxM68fx5pF3Wr0k48o45jcc
- cTCZK+Q==
-X-Google-Smtp-Source: AGHT+IEe+AQqGFhfjsu92JGplsdULArEayvXjU+5+1DYELysIMmB5UsL0dXzERblzKBKOy+BGvEmZw==
-X-Received: by 2002:a4a:7643:0:b0:5c2:1df2:2737 with SMTP id
- 006d021491bc7-5c21df2288dmr4110559eaf.3.1719414076749; 
- Wed, 26 Jun 2024 08:01:16 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
- [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5c1d55ce4adsm2131896eaf.16.2024.06.26.08.01.15
+ d=1e100.net; s=20230601; t=1719414936; x=1720019736;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BNGM0TQ+C5MiJk3yc8dX5Z8ezvzmDyER8OhJD4UkE9c=;
+ b=KCAFXlBinIWK/czP9KJTw5rQ0zGCjGBuLkj4dMtAbzda9AwN+pTZRGo2SdVMXyxNUU
+ tceetohNnAswX16z+bMXK7dNlE1q6BmnjxDe+miGlGJ9ZWNzzKKRoTRavNXiVnPcZYY2
+ NmpBKSBqLNZG6kY+pFsfX0i08Ipe1LXRIBh1ch7eWwUu+YmfCkmY4ojNiFO92IMqAfGF
+ uC+JGQka0tfrxeuRFFXO79xl1AL/aMUzNEacjxPcg9wXXAw4UxDb1ElzH2R4/FpKdjXL
+ CyxomR0WeTPH3co/2K57KEBFg6D+wcvLzjzwSnSLwrimTiqXFk7fIu4uMPq6ykVp5yc1
+ SC7w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKJemCaLjo35/WvAXa+dQEo5WbZ8gdGV0Xxh9GhEgZ2zjBizyp9bnSSSYaSRAs2yyezNFPw3eVp32JpDTq3H3ALV8ilQ==
+X-Gm-Message-State: AOJu0YwoPd0QybhSypJNrAjXBUjOWvgQuo1zy37ra2YtOp3u2r0rdFFH
+ d7sgVA2zgJz6M9TmhK2fMSpcje7pB9P06/WNuu+HBAG+gjlXTqir
+X-Google-Smtp-Source: AGHT+IHX79lxPzQifqqSSRFgpRSRysp6z3xFrSeThJAACfgneBm8Vv31LcGdmyjDaumGHepFv1LAGQ==
+X-Received: by 2002:a17:902:f60d:b0:1fa:4fcb:c198 with SMTP id
+ d9443c01a7336-1fa4fcbc1bfmr90681915ad.44.1719414936022; 
+ Wed, 26 Jun 2024 08:15:36 -0700 (PDT)
+Received: from localhost.localdomain ([113.30.217.222])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1fa060eeee9sm85536795ad.280.2024.06.26.08.15.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 08:01:16 -0700 (PDT)
-Date: Wed, 26 Jun 2024 09:01:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Michal Simek <michal.simek@amd.com>,
- "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
- "u-boot-board-maintainers@lists.denx.de"
- <u-boot-board-maintainers@lists.denx.de>
-Subject: Re: [ANN] U-Boot v2024.07-rc5 released
-Message-ID: <20240626150113.GX38804@bill-the-cat>
-References: <20240624193035.GK38804@bill-the-cat>
- <e396268c-e106-4bb8-a40d-e0582e556c6b@cs-soprasteria.com>
- <20240625151929.GS38804@bill-the-cat>
- <7b87013a-23b6-419f-a163-2e9f4c44b200@csgroup.eu>
+ Wed, 26 Jun 2024 08:15:35 -0700 (PDT)
+From: Anand Moon <linux.amoon@gmail.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>,
+ --Minkyu Kang <mk7.kang@samsung.com>
+Cc: Anand Moon <linux.amoon@gmail.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1 1/2] dm: exynos: Correct CONFIG_SYS_BOARD setting for
+ Odroid XU3 boards
+Date: Wed, 26 Jun 2024 20:45:21 +0530
+Message-ID: <20240626151522.83561-1-linux.amoon@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="e4J+l/DawbRFsuh3"
-Content-Disposition: inline
-In-Reply-To: <7b87013a-23b6-419f-a163-2e9f4c44b200@csgroup.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,86 +93,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Fix the issue where CONFIG_SYS_BOARD was incorrectly set on
+Odroid XU3 boards, causing boot failure. This was resolved by
+correcting the SYS_BOARD entry in Kconfig to load the correct
+device tree source (dts) for the Odroid Exynos5422 Platforms.
 
---e4J+l/DawbRFsuh3
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: f76750d11133 ("Convert CONFIG_CONS_INDEX et al to Kconfig")
+Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+---
+U-Boot 2024.07-rc5-00042-g80a111f426 (Jun 26 2024 - 15:03:09 +0530) for ODROID-XU3/XU4/HC1/HC2
 
-On Tue, Jun 25, 2024 at 09:20:54PM +0200, Christophe Leroy wrote:
->=20
->=20
-> Le 25/06/2024 =E0 17:19, Tom Rini a =E9crit=A0:
-> > On Tue, Jun 25, 2024 at 03:12:38PM +0000, LEROY Christophe wrote:
-> > > Hi All,
-> > >=20
-> > > Le 24/06/2024 =E0 21:30, Tom Rini a =E9crit=A0:
-> > > > Hey all,
-> > > >=20
-> > > > Well, once again I need to check my calender reminders since, whoop=
-s,
-> > > > I'm a week late. That said, looking at the list of changes in this
-> > > > slightly elongated period, I think it's OK. At this point we're a w=
-eek
-> > > > out from the release, so it's time for clear and obvious regression
-> > > > fixes. Ideally ones introduced this release cycle so there's less
-> > > > chances of unintended side-effects.
-> > > >=20
-> > > > In terms of a changelog,
-> > > > git log --merges v2024.07-rc4..v2024.07-rc5
-> > > > contains what I've pulled but as always, better PR messages and tags
-> > > > will provide better results here.
-> > > >=20
-> > > > With that, the final release is planned for Monday, July 1st, 2024.
-> > > > Thanks all!
-> > > >=20
-> > >=20
-> > > For your information, I have started testing v2024.07 on my powerpc
-> > > boards in operational condition and I have a major problem : U-boot
-> > > doesn't get the Linux kernel started before the watchdog fires. I have
-> > > to disable watchdog to get it running.
-> > >=20
-> > > This problem doesn't occur with v2024.04.
-> > >=20
-> > > I bisected it to commit 340fdf1303dc ("zlib: Port fix for CVE-2016-98=
-41
-> > > to U-Boot") and I also confirm that v2024.07-rc5 works well with that
-> > > commit reverted on top of it.
-> > >=20
-> > > Any idea of what is going wrong with that commit ?
-> >=20
-> > Are you able to check the zlib performance before/after that commit?
-> >=20
->=20
-> Indeed there's a huge difference.
->=20
-> Before : 12298074 timebase ticks to decompress kernel
-> After :  17145906 ticks, that is 40% more time.
->=20
-> But behind that, we also need to understand why the watchdog is not kept
-> alive during that time.
+CPU:   Exynos5422 @ 800 MHz
+DRAM:  2 GiB
+Core:  74 devices, 12 uclasses, devicetree: separate
+MMC:   mmc@12200000: 0, mmc@12220000: 2
+Loading Environment from MMC... Reading from MMC(2)... *** Warning - bad CRC, using default environment
 
-That is odd, I would have expected it to have been kept alive.
+In:    serial
+Out:   serial
+Err:   serial
+Model: Odroid XU3/XU4/HC1/HC2 based on Exynos5422
+Type:  xu4
+Boot device: MMC(2)
+Net:   No ethernet found.
+Hit any key to stop autoboot:  0
+switch to partitions #0, OK
+mmc2 is current device
+Scanning mmc 2:1...
+Found U-Boot script /boot/boot.scr
+2046 bytes read in 22 ms (90.8 KiB/s)
+8104280 bytes read in 519 ms (14.9 MiB/s)
+Failed to load '/boot/dtbs/exynos5422-smdk5420xu4.dtb'
+SCRIPT FAILED: continuing...
+No EFI system partition
+No EFI system partition
+Failed to persist EFI variables
+No EFI system partition
+Failed to persist EFI variables
+No EFI system partition
+Failed to persist EFI variables
+Loading Boot0000 'mmc 2' failed
+EFI boot manager: Cannot load any image
+MMC Device 1 not found
+no mmc device at slot 1
+---
+ board/samsung/smdk5420/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---=20
-Tom
+diff --git a/board/samsung/smdk5420/Kconfig b/board/samsung/smdk5420/Kconfig
+index a9d62fffa5..37d6bbbed1 100644
+--- a/board/samsung/smdk5420/Kconfig
++++ b/board/samsung/smdk5420/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_ODROID_XU3
+ 
+ config SYS_BOARD
+-	default "smdk5420"
++	default "odroid"
+ 
+ config SYS_VENDOR
+ 	default "samsung"
 
---e4J+l/DawbRFsuh3
-Content-Type: application/pgp-signature; name="signature.asc"
+base-commit: c53b344475734d0d29f522b7b1d80c5b8204442d
+-- 
+2.44.0
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ8LR0ACgkQFHw5/5Y0
-tyw7Agv+MykY/wqd7I6LutgbprgI8QG26jcJ44xdcdlTKMWmd5Dw0fVeIhUuRl8V
-6dkB4IOk15HMD0EoxLTFtuxrkh7USLvab65fHNAKIp61+FV+kKwAzR3iA6cB79Qw
-23cFmagXQCwrqdKNt6yNdaD7Zx/eyaJ5v/YbZYx+EyoYBg6Cs8QYqOr8xEPiEqUs
-5kE5GGOqGIY4FY6GO/IPr/lVWUlHE5JKBrXmtcXc/lxjmtx9g8gxsNWZsjJtfFsl
-ozE1E3WjzdtEh1ikMJb2/RMA29hVqj4BQRsMW0o1oxbW2ylV+uhkR8F2LgQcURCo
-jA7+hNcJMki/FkZ+hxu4WsVkmnqcMCEWufOMV/6YWRpAYVcdMp8G/cpJ6+oKY0qQ
-Tyho6Hs1Wz7PSuJrEp2kFSyUwZzjdTwK2YKce1SKpoIeFu1CWFeumOguAEnqVodo
-X+xv3aePZqqLvX1aC+/nXE6K8fDqa+xX8/8wgyAHqZo1t8VYQLhAtt9dlp0EPU7W
-5vsfkHr4
-=Kgcb
------END PGP SIGNATURE-----
-
---e4J+l/DawbRFsuh3--
