@@ -4,96 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74451C27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 09:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA50C27C4F
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 10:31:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3730B884DD;
-	Wed, 26 Jun 2024 11:43:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 63228884A9;
+	Wed, 26 Jun 2024 12:31:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xux0G0WG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="bZJ+MgE1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21A83884BC; Wed, 26 Jun 2024 11:43:56 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B77FE884BC; Wed, 26 Jun 2024 12:31:22 +0200 (CEST)
+Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE1E0884FF
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 11:43:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9632C884A9
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 12:31:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4255fa23f7bso1695225e9.2
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 02:43:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719395032; x=1719999832; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GBpK95HsKn8tqL5eWnQabaZgJfuPWAfbgXD9A1iKlM0=;
- b=Xux0G0WGWe0yUl6y+yeGh3yjLt0Em5y7PaGmubVD9lIxw0ycWDVwlUgRKa9ymbHNXF
- 8/pJxfNTokstclxaEzf7ZlGEhN9iT9B4Fw64vwru6HgQLLycp7rAETN0JYjrz/ANcymS
- FZ9wqmEa2NUdSnb9afQPggR5CafXWxQiTzzsIk6whAFKnaC6zlJ5f2f2oXpE1YFdA78V
- A0tpIvJMZ83atXT4AasTIgY4xX4h/ti6DuY3z4xokww7emOlpajbQUggkQ9A3+YZwPDL
- U0pelI8YY+xixzGByY1stQa6UkpPiXEjKwNv9xCswM9HX+58WQRuqQBn6t+s6XqMNjER
- z4Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719395032; x=1719999832;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GBpK95HsKn8tqL5eWnQabaZgJfuPWAfbgXD9A1iKlM0=;
- b=SIAByJ+oo9cIZs+5DhjUi2QptrHfuEgvY6jLf4VPJ4Yc7puIeX+n+ZkPyBEecX92gg
- ICJZfoKYv3SAg5LRwqwm2qLbU8T4I6/U1HNePYGs0mtnnkB2iz/078r+nWOXCGjgaxPL
- +MknErJBK2xeHvTg3eWYSTPR6eP4pxAYNGDG41sJJiObdWOyCPxTB3PolmcRXzSGGfuk
- qUFGU78f56DA8hhxjKpVTZNkGpxWaZbgCSFkClMgFgVXEB2W9We639IWd95y4dJMe3jw
- Fz/qpPENrN2INXKzkev5m8ydtU7Gua0Yx+tIsBBaK/HLyFnRnsS3DbEAgTWz+DG00ycy
- xSuw==
-X-Gm-Message-State: AOJu0Ywv3T+NeZvK9nu0p93wx72OVz4GxCTH4bgwmnOwIdqgv4N50IxY
- xNuwXB8b6Gyp5qKGSfSG730r9fjFLDlgQgYdY14zsOHoiflzSnQtNKixHAwpxMk=
-X-Google-Smtp-Source: AGHT+IFYe7ftfjzkblkfpRPeZIk86qwv8keN8jYFzlQXl4kQ42DD2A78YF70uB+DPJyZoBo23QG2DQ==
-X-Received: by 2002:a05:600c:4348:b0:424:a774:2ba with SMTP id
- 5b1f17b1804b1-424a7740338mr17148975e9.14.1719395031710; 
- Wed, 26 Jun 2024 02:43:51 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-424c84692c0sm18857175e9.43.2024.06.26.02.43.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 02:43:51 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Alexander Gendin <agendin@matrox.com>, 
- Allen Martin <amartin@nvidia.com>, Andre Przywara <andre.przywara@arm.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Jerome Brunet <jbrunet@baylibre.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Michal Simek <michal.simek@amd.com>, 
- =?utf-8?q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
- Nishanth Menon <nm@ti.com>, Pavel Herrmann <morpheus.ibis@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Samuel Holland <samuel@sholland.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Trevor Woerner <twoerner@gmail.com>, 
- u-boot-amlogic@groups.io
-In-Reply-To: <20240623203033.1566505-1-sjg@chromium.org>
-References: <20240623203033.1566505-1-sjg@chromium.org>
-Subject: Re: (subset) [PATCH 00/14] testb: Various tweaks and fixes for Labgrid
-Message-Id: <171939503058.2754394.2844444802537886889.b4-ty@linaro.org>
-Date: Wed, 26 Jun 2024 11:43:50 +0200
+ dmarc=none (p=none dis=none) header.from=nwl.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
+ s=mail2022; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=H3XPnOQkil/YHi8HjScFiD2BTHEoHq0X6gTp4LjvgVo=; b=bZJ+MgE1XWTAo/fpXOGBxnuJCr
+ ifmTij1fbtPPxQhNU5Q3nDhd8rAQ7hTHqkD1oqC2eYgMRIpq1I8flewPWLpQxy8aD6VF22biPBKzs
+ CEdYCwjXnZl8G8AvXCdrwDJsOnTV3YQ6cxHw2rPW2fdQdN4swxh9RzK0hFS6CB/p1foFHQCcvdQOQ
+ 9LUfROhVGSXkepOYFqBjheAIloWRTeBq/0OT6RQW0dgfj2C5jBFDzjIk7Jr5/whH/trLd5MH2J5Is
+ pzwOkR3fOE30M6AEDadlFy062mnjx2qEmcO4z8cbA7QSbMY5G0/9MuyYmbCzxPAZs8JNBGRFfwmXb
+ w9qp2sXQ==;
+Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.97.1)
+ (envelope-from <phil@nwl.cc>) id 1sMPvr-000000002dQ-2IMY;
+ Wed, 26 Jun 2024 12:31:19 +0200
+Date: Wed, 26 Jun 2024 12:31:19 +0200
+From: Phil Sutter <phil@nwl.cc>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] arm: mvebu: Enable bootstd and other modernization
+ for Synology DS414 (Armada XP) board
+Message-ID: <Znvt9_7xbdccZkFd@orbyte.nwl.cc>
+Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20240615220654.10648-1-mibodhi@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240615220654.10648-1-mibodhi@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,38 +71,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tony,
 
-On Sun, 23 Jun 2024 14:30:19 -0600, Simon Glass wrote:
-> This series includes a number of mostly unrelated changes which are in
-> service of running U-Boot on a lab using Labgrid.
-> 
-> Changes in v2:
-> - Add new patch to update u-boot.cfg with CFG_... options
-> 
-> Simon Glass (14):
->   trace: Update test to tolerate different trace-cmd version
->   dm: core: Enhance comments on bind_drivers_pass()
->   initcall: Correct use of relocation offset
->   am33xx: Provide a function to set up the debug UART
->   sunxi: Mark scp as optional
->   google: Disable TPMv2 on most Chromebooks
->   meson: Correct driver declaration for meson_axg_gpio
->   test: Make bootstd init run only on sandbox
->   log: Allow tests to pass with CONFIG_LOGF_FUNC_PAD set
->   test: dm: Show failing driver name
->   test: Decode exceptions only with sandbox
->   test: Check help output
->   Update u-boot.cfg to include CFG also
->   smbios: Correct error handling when writing tables
-> 
-> [...]
+On Sat, Jun 15, 2024 at 03:06:54PM -0700, Tony Dinh wrote:
+[...]
+> diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
+> index abe6f9eb5e..f0b55fa095 100644
+> --- a/board/Synology/ds414/ds414.c
+> +++ b/board/Synology/ds414/ds414.c
+> @@ -181,18 +181,9 @@ int board_init(void)
+>  	return 0;
+>  }
+>  
+> -int misc_init_r(void)
+> +int board_late_init(void)
+>  {
+> -	if (!env_get("ethaddr")) {
+> -		puts("Incomplete environment, populating from SPI flash\n");
+> -		do_syno_populate(0, NULL);
+> -	}
+> -	return 0;
+> -}
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
+Could you please leave misc_init_r() in place (along with MISC_INIT_R in
+defconfig)? A closer look at doc/README.enetaddr suggests that
+implementing this board-specific function which acts if the environment
+does not have ethaddr defined already is exactly the right thing to do.
+Also, it doesn't conflict with NET_RANDOM_ETHADDR: If do_syno_populate()
+succeeds, no random MAC addresses are generated. If I manually remove
+the call, random MACs come into play. So having this option enabled
+serves as a fallback for boxes which lack the data in flash.
 
-[07/14] meson: Correct driver declaration for meson_axg_gpio
-        https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/96e1a156e90a0674b21c56e7121b17a9211176ec
+> -int checkboard(void)
+> -{
+> -	puts("Board: DS414\n");
+> -
+> +	/* Do late init to ensure successful enumeration of XHCI devices */
+> +	pci_init();
+>  	return 0;
+>  }
 
--- 
-Neil
+FWIW, booting from rear USB port worked fine for me!
 
+> diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
+> index ecf9501ba5..501ed51129 100644
+> --- a/configs/ds414_defconfig
+> +++ b/configs/ds414_defconfig
+[...]
+> @@ -25,44 +26,40 @@ CONFIG_SPL_BSS_MAX_SIZE=0x4000
+>  CONFIG_SPL=y
+>  CONFIG_DEBUG_UART_BASE=0xf1012000
+>  CONFIG_DEBUG_UART_CLOCK=250000000
+> +CONFIG_IDENT_STRING="\nSynology DS214+/DS414 2/4-Bay Diskstation"
+>  CONFIG_SYS_LOAD_ADDR=0x800000
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+> +CONFIG_BOOTSTD_FULL=y
+>  CONFIG_BOOTDELAY=3
+>  CONFIG_USE_BOOTARGS=y
+> -CONFIG_BOOTARGS="console=ttyS0,115200 ip=off initrd=0x8000040,8M root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 flash_size=8 SataLedSpecial=1 HddHotplug=1"
+> -CONFIG_USE_BOOTCOMMAND=y
+> -CONFIG_BOOTCOMMAND="sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; sf read ${ramdisk_addr_r} 0x3a0000 0x430000; bootm ${loadaddr} ${ramdisk_addr_r}"
+
+So these should not be necessary anymore with BOOTSTD. I wonder if it is
+possible to provide a static bootmeth (or bootflow?) with low priority
+which boots the legacy OS from flash. It could hold all the details
+instead of the *_legacy env vars introduced below.
+
+A pending issue for me is inability to 'saveenv' - the flash seems
+read-only in that spot. Does it work for you?
+
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+> +CONFIG_BOARD_LATE_INIT=y
+>  CONFIG_SPL_MAX_SIZE=0x1bfd0
+>  CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>  CONFIG_SPL_I2C=y
+> +CONFIG_SYS_PROMPT="DS414> "
+
+Can we detect whether it is 414 or 214, BTW? bootargs_legacy contains
+414-specific info as well.
+
+[...]
+> diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> index 9446acba79..89e55bf0d4 100644
+> --- a/include/configs/ds414.h
+> +++ b/include/configs/ds414.h
+[...]
+> @@ -16,14 +17,9 @@
+>   * U-Boot into it.
+>   */
+>  
+> -/* I2C */
+>  #define CFG_I2C_MVTWSI_BASE0		MVEBU_TWSI_BASE
+>  
+> -/*
+> - * mv-common.h should be defined after CMD configs since it used them
+> - * to enable certain macros
+> - */
+> -#include "mv-common.h"
+> +#define PHY_ANEG_TIMEOUT	16000	/* PHY needs a longer aneg time */
+
+AIUI, this is a limitation of my local NIC, not the DS414 one. It just
+took too long for link detection and autoneg when directly connected. A
+switch should have helped. Or do you have more details?
+
+Cheers, Phil
