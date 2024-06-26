@@ -4,111 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C67C30653
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 12:29:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA71C27C4F
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 12:30:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EBCA884BE;
-	Wed, 26 Jun 2024 14:29:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7E968884F1;
+	Wed, 26 Jun 2024 14:29:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AQBRZqpn";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="EBDZ5B3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB7CE87F8B; Wed, 26 Jun 2024 11:43:53 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F89088413; Wed, 26 Jun 2024 12:44:56 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC70188452
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 11:43:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 895C287AEC
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 12:44:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2eaafda3b5cso67158491fa.3
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 02:43:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719395030; x=1719999830; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f9yXouYFFVoeh+wzgUNghZOG6eQE4xLISuuG/NrBTh4=;
- b=AQBRZqpnHPbXfRcoklb1hO/tqG4GfJF1b8XFUm6VFgIdq+KSSwTi90JBCvwYsCB/gE
- H7nBHNJIWDrNIVLzDX/lSy2bFEwv5uYZ/3sHDCqzyV62MvLvpOeEZgMSHUHbwPFUn3/P
- tA/m32lt9m5l6HDUfihCuYOsBCLgteAswxSOhoHR3t6DBXLKrwOhDtATP2iIGrQpB4Zx
- 887uV02PnmN4twuensOo/PNt6JbU+gDkrdUOfGfb4owJHDKYAuAZmRxA/sS6Sr8RfHzg
- c87p48fIRO3fTKeQTubQ8c6IPQXjmgpEKCHqp1qGEJTVqgKVYrRyk9uC//3+Z5Snt5Ih
- vp6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719395030; x=1719999830;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=f9yXouYFFVoeh+wzgUNghZOG6eQE4xLISuuG/NrBTh4=;
- b=V329NRoXXjzM79hPDuSv+YLxGm3JfSsVHqYez4GPEoR4Eq88c6ZmjLT/Cspmu9vXtG
- hwXggIOkv+M3eEGf8k1k2Y+9dIZPZgpOH0jFUwDzoJ0Eh7Fa4RVzsyEuiFcuOweQEKHy
- K3mQsiZEcm4SKx8f4of16pp24qaPHaf2dDM4IfiS3YzxIYf57afZfKc6E36nCOmZqN0X
- WJTM3uqFZ9wQvp5KITKhySxlENh7yeq83bdtImOtP1krq2cXduiqXAejBf8j2oLRRcSs
- iT3O48yV4ABSxAxqor8FW5Y4F6JJyUHk9ZHT9RfHRPm4GuDcAxZozhBkXGugqDH2Nid4
- /dMw==
-X-Gm-Message-State: AOJu0YxuRbIKmgQ8stvf+fx5R+5iZlfzHyR6qjrQ9kHEbFUb6GsQsE1S
- ZvpXK5Hki9GtWS21Xe0e9NKuKg1mX6OZ1Bpo/1hoMDz1dWC4bjZQ6dPZnOFgq5A=
-X-Google-Smtp-Source: AGHT+IHysr8Tgc5ey5jrgRUt5Qg2zyfxJ/YAUp2E2EN6PHVL/ZhhgxHZGrHQoak+XPgNwj8vKXUiGg==
-X-Received: by 2002:a05:651c:1a1e:b0:2ec:59b6:ad71 with SMTP id
- 38308e7fff4ca-2ec59b6ae47mr75393621fa.40.1719395029661; 
- Wed, 26 Jun 2024 02:43:49 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-424c84692c0sm18857175e9.43.2024.06.26.02.43.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 02:43:49 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, 
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>, 
- Allen Martin <amartin@nvidia.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Andrew Davis <afd@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Taedcke <christian.taedcke@weidmueller.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Jerome Brunet <jbrunet@baylibre.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Lukas Funke <lukas.funke@weidmueller.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- =?utf-8?q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
- Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Trevor Woerner <twoerner@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, u-boot-amlogic@groups.io
-In-Reply-To: <20240611200156.2245525-1-sjg@chromium.org>
-References: <20240611200156.2245525-1-sjg@chromium.org>
-Subject: Re: (subset) [PATCH 00/42] labgrid: Provide an integration with
- Labgrid
-Message-Id: <171939502804.2754394.6148007977344212026.b4-ty@linaro.org>
-Date: Wed, 26 Jun 2024 11:43:48 +0200
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C828710000D;
+ Wed, 26 Jun 2024 13:44:51 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C828710000D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1719398691;
+ bh=qNomjNsO3ymiBFFijt3e6gS31NnGHzNqGq7KiktxE0U=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=EBDZ5B3z0aFzkMMtRfrEO+vCxowL0dgumB4xn8++vvBOC2A4oXMkL+KUGGsd+s7bd
+ N5k51dEyAeH7X1iKugjuEKpggkbyZSPIHKhoe2543BNiOf+FtEP+cy4oB6O7c+Z/Gd
+ VpGBfSARB0xXtHEfOIGZEycwJZaxOGzKNaTOJIgX71j2FTCL//qL8o7FbiwoeYClFe
+ rMeNRzDRAcLapPt6bvvGMN84jxLVWPY/1B6b0537MVd3+RIopD76kV84HgRSeiTlZu
+ TojKgnZtu5iHhGGKv89fWTecMrbSIDJmPFsnHVRZ5oxyf2s8CQH15RNnnZwDldaC4d
+ tivS/GBuXbxWg==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Wed, 26 Jun 2024 13:44:51 +0300 (MSK)
+Received: from user-A520M-DS3H.sigma.sbrf.ru (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Wed, 26 Jun 2024 13:44:50 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
+ <frieder.schrempf@kontron.de>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>, <sjg@chromium.org>, <bmeng@tinylab.org>,
+ <tobias@waldekranz.com>, <jpewhacker@gmail.com>,
+ <marek.vasut+renesas@mailbox.org>, <kever.yang@rock-chips.com>,
+ <jbx6244@gmail.com>, <abdellatif.elkhlifi@arm.com>, <michal.simek@amd.com>,
+ <mikhail.kshevetskiy@iopsys.eu>, <patrice.chotard@foss.st.com>
+CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
+ <avromanov@salutedevices.com>
+Subject: [PATCH v6 0/3] Introduce mtdblock device
+Date: Wed, 26 Jun 2024 13:44:37 +0300
+Message-ID: <20240626104440.2811686-1-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 186156 [Jun 26 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
+ 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, lore.kernel.org:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
+ 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/06/26 10:17:00
+X-KSMG-LinksScanning: Clean, bases: 2024/06/26 10:18:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/06/26 09:49:00 #25717626
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-Mailman-Approved-At: Wed, 26 Jun 2024 14:29:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,25 +108,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hello!
 
-On Tue, 11 Jun 2024 14:01:14 -0600, Simon Glass wrote:
-> Labgrid provides access to a hardware lab in an automated way. It is
-> possible to boot U-Boot on boards in the lab without physically touching
-> them. It relies on relays, USB UARTs and SD muxes, among other things.
-> 
-> By way of background, about 4 years ago I wrong a thing called Labman[1]
-> which allowed my lab of about 30 devices to be operated remotely, using
-> tbot for the console and build integration. While it worked OK and I
-> used it for many bisects, I didn't take it any further.
-> 
-> [...]
+This series adds support for the mtdblock device, which
+allows to read/write data block by block. For example,
+it can now be used for BCB or Android AB command:
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
+  $ bcb load mtd 0 part_name
 
-[18/42] meson: Correct driver declaration for meson_axg_gpio
-        https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/96e1a156e90a0674b21c56e7121b17a9211176ec
+Tested only on SPI NAND, so bind is made only for
+SPI NAND drivers.
+
+---
+
+Changes V1 -> V2 [1]:
+
+  - Drop patch [2].
+  - Add warning if bind NAND mtdblock device.
+  - Move documentation of mtdblock implementation
+    from commit message to the source code.
+  - Remove __maybe_unused from mtd partition functions
+    description.
+  - Use blk_enabled() instead of #ifdefs.
+
+Changes V2 -> V3 [2]:
+
+  - Rebased over [3].
+  - Rename mtd_bread/bwrite -> mtd_blk_read/write.
+  - Fix GPL-2.0 license short name definiton in headers.
+  - Add empty line after MTD_ENTRY_NUMBERS define.
+
+Changes V3 -> V4 [4]:
+
+  - Fix build warnings: use LBAF printf format string for lbaint_t types.
+
+Changes V4 -> V5 [5]:
+
+  - Rebased over u-boot/master.
+  - Fix build errors and warnings if CONFIG_BLK isn't enabled.
+  - Fix failed tests in cases is mtdblock device isn't binded.
+
+Changes V5 -> V6 [6]:
+
+  - Rebased over u-boot/master.
+  - Fix build errors when CONFIG_MTD isn't enabled.
+  - Use auto blk device devnum generation when call
+    blk_create_devicef (pass -1 parameter instead of dev_seq(dev)).
+
+Links:
+
+  - [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
+  - [2] https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@salutedevices.com/
+  - [3] https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schuchardt@canonical.com/T/#u
+  - [4] https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@salutedevices.com/
+  - [5] https://lore.kernel.org/all/20240524102920.2631731-1-avromanov@salutedevices.com/
+  - [6] https://lore.kernel.org/all/20240603155702.1840464-1-avromanov@salutedevices.com/
+
+Alexey Romanov (3):
+  disk: support MTD partitions
+  drivers: introduce mtdblock abstraction
+  spinand: bind mtdblock
+
+ disk/part.c                 |   3 +-
+ drivers/block/blk-uclass.c  |   1 +
+ drivers/mtd/Kconfig         |   1 +
+ drivers/mtd/Makefile        |   3 +
+ drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
+ drivers/mtd/mtdpart.c       |  76 ++++++++++++
+ drivers/mtd/nand/spi/core.c |  20 ++++
+ include/linux/mtd/mtd.h     |  25 ++++
+ include/part.h              |   3 +
+ 9 files changed, 358 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/mtdblock.c
 
 -- 
-Neil
+2.34.1
 
