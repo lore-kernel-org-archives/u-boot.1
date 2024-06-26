@@ -4,146 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F8C2C2BBCA
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 01:59:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAF7C30659
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 08:00:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BBAB884DD;
-	Wed, 26 Jun 2024 03:59:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 14E65884CD;
+	Wed, 26 Jun 2024 10:00:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="fCCY3UH8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L+rbiFve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268F5884A9; Tue, 25 Jun 2024 17:21:24 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0B6C9884DB; Wed, 26 Jun 2024 10:00:50 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27CC488452
- for <u-boot@lists.denx.de>; Tue, 25 Jun 2024 17:21:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id B018A884CC
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 10:00:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrejs.cainikovs@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1719328881;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uQCAej/KhGBpw+QnaHsxS/tDG1311cyyIHd2cmSrinw=;
- b=fCCY3UH8luDnZzRyJeRA1Mf/MVTlS72pYtz2y8RK0j4W3fqbJl2LtsvmfvhhJQKpKDEKVt
- FYw5/PvebkB9kcvPBc51vKMnMa9p46Mv+pKLhoAzWX8EKwDHQd3gMjM9cuCXvhMFNy0HlA
- o0By/rqDoHpilViJTSIaalmPHptACfE=
-Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
- (mail-zr0che01lp2104.outbound.protection.outlook.com [104.47.22.104]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-44-n1cXMw1eMBGTOtJqViYuDg-1; Tue, 25 Jun 2024 17:21:17 +0200
-X-MC-Unique: n1cXMw1eMBGTOtJqViYuDg-1
-Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1e::13)
- by ZR1P278MB0998.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:5c::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.30; Tue, 25 Jun
- 2024 15:21:15 +0000
-Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
- ([fe80::69a7:1995:40d7:53cc]) by ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
- ([fe80::69a7:1995:40d7:53cc%7]) with mapi id 15.20.7698.025; Tue, 25 Jun 2024
- 15:21:15 +0000
-Date: Tue, 25 Jun 2024 17:21:13 +0200
-From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 25/42] test: Allow connecting to a running board
-Message-ID: <ZnrgaZaXQy+xCUM6@toradex.com>
-References: <20240611200156.2245525-1-sjg@chromium.org>
- <20240611200156.2245525-26-sjg@chromium.org>
- <ZnoHs6YiQlsoUWrL@toradex.com>
- <CAFLszTiR6oabXzbrjC4DTvJM11HfSyMZSergdA1=isWY1pVeOQ@mail.gmail.com>
- <20240625141417.GN38804@bill-the-cat>
-In-Reply-To: <20240625141417.GN38804@bill-the-cat>
-X-ClientProxiedBy: ZR0P278CA0045.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:1d::14) To ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:1e::13)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b501a4344bso25527266d6.3
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 01:00:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719388846; x=1719993646; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pwLhGoSXlZtEqiurtNFCr8aBgeEa0P7fjY7PPbk8u4E=;
+ b=L+rbiFveZlsUEgze5dxwWAFlnR7Uz0dml/5K9Iy6LT5V1Z6bARuoEyV7zuut5aF8Oa
+ 6ZGBj8a4H/Tf7gRQNZ8iv4GD5LccRoaWbW4J+GevBM6fnEyqRGH1XXOTBHiViSN/dD17
+ zftDDly5lpKB0DsGVNcGGWXgoykmKUhQ1Azps=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719388846; x=1719993646;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pwLhGoSXlZtEqiurtNFCr8aBgeEa0P7fjY7PPbk8u4E=;
+ b=CV1XDWe8i8GpTp7213sXTiDQS4bNl0UnvC+kjBFop8pcGDWp/9KUdg79wp4rNqkk2I
+ MKT+xZ3M5rR54uKmtRt03FgOgq35e1cp8rRqMlEerWPueG0Xv9IvFrXskNEqI1CuZP+S
+ ewlZp8UpitXa9tP4llBJRfzrOuAWwUADijn48KTLe0q54T9CC99fawlpoXcdv6M5JuiM
+ cSwCHLAsZImMHXa2FipiOxUDfLBfywiYkh5pSb1gjlLpIZA7yR2TmyvgvvP0FB29w9xe
+ rwr+lWudKkMnFKKLTqEJB9HLuMF80wWA2u7cH1rd+aufKkJUuStu13TgExrTLtj+VZj4
+ JTWg==
+X-Gm-Message-State: AOJu0YwqjWO3YujdtFQ8Cr5VQNKf4aBTzw//3ceQL7gxziyyV+RD5ODr
+ eAN+Jm2qPx3jKXHOlR/PPtfEh9fDqSwxR1PHzVAHk8DhN2eJla+Z+Urnj8bAXQJ1YYBodETEcpX
+ mUtwDn35oFF7PovR0PquhKPfNTm9vR1vHft4YRit9DcMUV+yHXW3Y
+X-Google-Smtp-Source: AGHT+IF6LIKqJJ8qaK5vTo2vaL0xsndznBU9bxZR6f2djnUOmWUoflDIoLoZs9AF9PptcG4u4yk7VLeRLcpIxl/fVcU=
+X-Received: by 2002:a05:6214:19ea:b0:6b5:40d:c2d9 with SMTP id
+ 6a1803df08f44-6b5409c4e93mr117913266d6.19.1719388846044; Wed, 26 Jun 2024
+ 01:00:46 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZRAP278MB0254:EE_|ZR1P278MB0998:EE_
-X-MS-Office365-Filtering-Correlation-Id: a982b6d7-c023-48d6-8503-08dc952a7464
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|376011|1800799021
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?XWPoRNzYQNS0fByy+fJAlUF5yCPGd/QERth85tb8ku5OpptOHJ48ZU1JMc6u?=
- =?us-ascii?Q?DltU3mPRMTZmoCVoab+rlS5txlM85RcDMSUaAd9TqC6eMGjBj1JfRLv+nDBv?=
- =?us-ascii?Q?YrLmk549MP13lzXaV7Owyb3KNcN9qcjVtQ5cJgjE1Vhx/qW4h1wJwxsgLhGM?=
- =?us-ascii?Q?w12/kjqooBquxcU/DxjKbiyNt1/fzVHUT6EjrAHNnrVrm8Tzg7N8DXIfYYK9?=
- =?us-ascii?Q?Xtr8yzfio/jAMsf8L2yQOsuxvCdE7HzNWBJFhUYiP1D/zxdFIkVwFQMa3aUh?=
- =?us-ascii?Q?AOTXVaTrjaefzPLS5A/q2U/8nF8aAQlOi7ltjMQnEC84P+zFq14y3zkJpFF7?=
- =?us-ascii?Q?5gxjxDlmLrdP8w7HlRNcusP8JOhbGd96iMeNw2IsFjLUUt0w1Oag50Cnh2Sp?=
- =?us-ascii?Q?Z0UWmI1kHosF5vpy5Y+uZp4WoiiG/oXsAF+Mkgcfaf3cqZGC/McBPZVg0Aga?=
- =?us-ascii?Q?L9ol34C8bbVLHY0yRooQBpNGlOHKPHAyxP3gRYeEw283xnjBRVeh6qQuf64m?=
- =?us-ascii?Q?gxk38FgVNXOgcZFoAvk6UkeXMb5KYqyFQolZkOw9me1lNFanrEiZk/+jZadm?=
- =?us-ascii?Q?PJnsTk3a/wuPrU0Oo+j7HVUql3O4KlGOTqEsCETPiY/0yJPhrfGgsVBurTPR?=
- =?us-ascii?Q?WeC9zuDuSH3Vgvu6/G1BYgeCw3x8K03xclZ8feQb8AMHqCvjmkG4ftRINr/f?=
- =?us-ascii?Q?tvr50oaFtAprTXxiQiWjl0iU3CGUhgYakHLf8QzTix7yfrxN610Cf4nyjnEw?=
- =?us-ascii?Q?polxW1LZpfPfZECq+gAHZ3sG8DM/lkFCZ49kUF+iIWM1YmW+WdlhlxmexBOK?=
- =?us-ascii?Q?bU1p5y2H3o6ECuk3fmfx0ORii/snpwGz2jSzPIGCdHaALLJgnog1U+fIEmiL?=
- =?us-ascii?Q?2ZZ+xOzkWi9U20BkIf2VLkS4Slrj5xxGgwdNHQLw79/THBC0uKHMNynG8qup?=
- =?us-ascii?Q?fpAoJAygTykvvbdXRMNe3YMAPtBoYvhbwUyDeqXc1p/A34zaBFl+1KnKWOSm?=
- =?us-ascii?Q?IyZxh+5wCP+PfJQ68L1UMhBoEmPCEg05ndW2ijHY2y84hSCvrwW4IzmgO5pV?=
- =?us-ascii?Q?1NOvCXNJ4Y6LF6P8GSAXnNFCRmeTM6ma/jQTKc2xFnvDMzQbGpUsh+y15Wes?=
- =?us-ascii?Q?sdLTga20sXrj71fd7uvl3326x0O6QGid+LFCKX0tvJBUkvlLBr2UIeD9BI1z?=
- =?us-ascii?Q?si/nzneChAXlReFstG27sDyjtPZdBgRnb1ToqZgCN1ZCSgB3DBcmqj5evJ2G?=
- =?us-ascii?Q?PGE/e9htQ+2/wP5///nyNGumD9F+h418KkTzOlp1Jt/QbBCKw8PzcIjkwD1N?=
- =?us-ascii?Q?0o5yxXzU+wUCLJxBQcJ7eA37?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230037)(366013)(376011)(1800799021); DIR:OUT; SFP:1102
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jGtQXoJj1lqjOQPKbCSVH16m3VcNU1rKX3d1ftpCg+PtKIdjb97FMK3naO0F?=
- =?us-ascii?Q?wuRdwT6A+S6gJAB+8JsBjJFyrQXYUBFTbdEqikOnfXndWtLKL+KQ9fiMCy/5?=
- =?us-ascii?Q?lLaJOq54TM2OjJkJ2lLTxbnvBLxiLMMtWD5gHpwsH7YZx4Q1H6fOAbljzTG4?=
- =?us-ascii?Q?NGdWRhzqXI+FVA7uY5WPYaXLpb0LTj+UTPSsAXsVuwsxn5zZ6MpEPB1cUaj9?=
- =?us-ascii?Q?Qq+Ri1jG2JWc35QtzTu0p9fopSIPrUPzrwajRsSzALxKQMZyFqvJ6/Fdg9SP?=
- =?us-ascii?Q?3kiQxmxe3FTOq1rQA/1bbX+PhTFgHPTP28wD84hlMcz/MVB/arvgIw1KRNDR?=
- =?us-ascii?Q?AX3IXxnPQigpykK7XOJPuHcXO2tCZVpbJvMC+PaDAtAOeMJiSSWFWh1VqWxo?=
- =?us-ascii?Q?67QvE98B66NstSV4oG8IPZpLUS0qfZpYKiZ7XVZMc/tOqopUG9x3wNoihC1E?=
- =?us-ascii?Q?hmCN9s59/tbJ692NYt225xlky9lmt864RlFaz/nmuZp9oRpYkfrdyPEOiCv6?=
- =?us-ascii?Q?EitOMIEkEUCA6xPdF1pfCRcMEL2midF5wnmYgAut3h04y776V05vF5KUEB7j?=
- =?us-ascii?Q?n/6Cs2scICZaDA1JNRxUuLMmxEgDEI1cWgOTyiIe/BAAh4lgnLTXXnLQ2REo?=
- =?us-ascii?Q?sDNi9PeAGFZ/mFV4onqKRFsSuwdiOJeW6OODEk4M1aoha+3hQ+hEfv8Yn+jZ?=
- =?us-ascii?Q?SYKY+H+bGfZ1uksPPn8SVg/GULTbV+j7ybVfyVoxTITZX7NgvA1rZDUf79oV?=
- =?us-ascii?Q?j2jMF0OaNXZmjvik30t7rcQvgJh96+4TEkysO5nMmEca2lwQzrbzemZp8erk?=
- =?us-ascii?Q?lfKBqtk+aIah4n9+cxgs3d4dyOolFLdRWK/ULeFb7wzhV9b4jVjGRyaU+VZ1?=
- =?us-ascii?Q?weBMRlQr4FE7L7psvvfrSs4jrA8vbFRCzyeySv0M1mjH3U7xZ/hMYie2+x9k?=
- =?us-ascii?Q?RQMYkm9bh9n/t7H8wI60dQE/EH0SVIFdbqz0m7Xpcn/r7DOo7+ZZ8+0+LEOk?=
- =?us-ascii?Q?1Z2Cc5nOsPQS2IQ88sGnHXpoPKnYJzUkYXBGVWDb7kwZ/GcUM3ZzAIWpbrOI?=
- =?us-ascii?Q?3jgjiqIPmYxurjrJbbFQaDetwYUYS4SnNmOxIVcC3sAJ+8V7ZlMlL5yei1uQ?=
- =?us-ascii?Q?Ixx69Pzv4WaKnnimfxHKBuyoppzMWhwSi4C578dQwzYgFyG6zkr0kyNNuHLc?=
- =?us-ascii?Q?NhdHJvuCrPhm1mLb1aRjX97AG9cgja8XZ9/p68la2Se6Ces5qKZGfeuCcX3Z?=
- =?us-ascii?Q?pidbfkb77+CB/Cc+Ia3K3tzu8tilRcQlQTh8go7YkAYAh90h6Pak2pZPIjVl?=
- =?us-ascii?Q?B/ISpb6K1t4YrU5BnZFAPujY895iiOy4A2SK4PoBLvTUlwsCL9jFk2lrj7OZ?=
- =?us-ascii?Q?QTH8iwe2UyuB0nEtSJ02jYsU8wL35r+kaERZWCVoTK2eI9nh6hWT2yCA6mTX?=
- =?us-ascii?Q?GOAzfku/FYS0Ji6TLUgp3vO0m/8P0czlFmcUmlUKucknJIe6M6rrfKW5XGA9?=
- =?us-ascii?Q?oXbvuNeKMk6UYdYPFAb4iTxaoXLi96yyiNC8AvbnP1/EdCuqf2055n0l9fUO?=
- =?us-ascii?Q?TOSlOlqB89QV8XiWz8dK57/6629MMYNaguAn8WSQgoMw0d3/mfuoTifngg38?=
- =?us-ascii?Q?FQ=3D=3D?=
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a982b6d7-c023-48d6-8503-08dc952a7464
-X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2024 15:21:15.5341 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9AX7IPj90nSWPZYqwweBtCz89+4NKK5+Lo6bR3xCYNza3trYqGsSdCOQUqsfUzfOkiTXm4kZdPcH3gZk54Us2ZnRajsuSgZXjWvr6rwVgDw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR1P278MB0998
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Type: text/plain; charset=WINDOWS-1252
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 26 Jun 2024 03:59:08 +0200
+References: <20240623203213.1571666-1-sjg@chromium.org>
+ <20240623203213.1571666-9-sjg@chromium.org>
+ <20240624181303.GH38804@bill-the-cat>
+ <CAFLszThRfe9vkSdooS-tiX5ffSHxBKF359m9nov_MAJ7B4bmtQ@mail.gmail.com>
+ <20240625142705.GQ38804@bill-the-cat>
+In-Reply-To: <20240625142705.GQ38804@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 26 Jun 2024 09:00:33 +0100
+Message-ID: <CAFLszTip6hbX0yM6T7wAPOqLMavPLpTfemvjN9RPh9C4MmV8Uw@mail.gmail.com>
+Subject: Re: [PATCH v3 08/19] test: Introduce the concept of a role
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,99 +85,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 25, 2024 at 08:14:17AM -0600, Tom Rini wrote:
-> On Tue, Jun 25, 2024 at 01:31:19PM +0100, Simon Glass wrote:
-> > Hi Andrejs,
-> >=20
-> > On Tue, 25 Jun 2024 at 00:56, Andrejs Cainikovs
-> > <andrejs.cainikovs@toradex.com> wrote:
+Hi Tom,
+
+On Tue, 25 Jun 2024 at 15:27, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Jun 25, 2024 at 01:38:08PM +0100, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 24 Jun 2024 at 19:13, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Tue, Jun 11, 2024 at 02:01:39PM -0600, Simon Glass wrote:
-> > > > Sometimes we know that the board is already running the right softw=
-are,
-> > > > so provide an option to allow running of tests directly, without fi=
-rst
-> > > > resetting the board.
+> > > On Sun, Jun 23, 2024 at 02:32:02PM -0600, Simon Glass wrote:
+> > >
+> > > > In Labgrid there is the concept of a 'role', which is similar to the
+> > > > U-Boot board ID in U-Boot's pytest subsystem.
 > > > >
-> > > > This saves time when re-running a test where only the Python code i=
-s
-> > > > changing.
+> > > > The role indicates both the target and information about the U-Boot
+> > > > build to use. It can also provide any amount of other configuration.
+> > > > The information is obtained using the 'labgrid-client query' operation.
+> > > >
+> > > > Make use of this in tests, so that only the role is required in gitlab
+> > > > and other situations. The board type and other things can be queried
+> > > > as needed.
+> > > >
+> > > > Use a new 'u-boot-test-getrole' script to obtain the requested
+> > > > information.
+> > > >
+> > > > With this it is possible to run lab tests in gitlab with just a single
+> > > > 'ROLE' variable for each board.
 > > > >
 > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > > ---
 > > > >
-> > > >  test/py/conftest.py                   |  3 +++
-> > > >  test/py/u_boot_console_base.py        | 14 ++++++++++----
-> > > >  test/py/u_boot_console_exec_attach.py | 21 ++++++++++++---------
-> > > >  3 files changed, 25 insertions(+), 13 deletions(-)
+> > > > (no changes since v1)
+> > > >
+> > > >  test/py/conftest.py | 31 +++++++++++++++++++++++++++----
+> > > >  1 file changed, 27 insertions(+), 4 deletions(-)
 > > > >
 > > > > diff --git a/test/py/conftest.py b/test/py/conftest.py
-> > > > index fc9dd3a83f8..ca66b9d9e61 100644
+> > > > index 6547c6922c6..5de8d7b0e23 100644
 > > > > --- a/test/py/conftest.py
 > > > > +++ b/test/py/conftest.py
-> > > > @@ -79,6 +79,8 @@ def pytest_addoption(parser):
-> > > >      parser.addoption('--gdbserver', default=3DNone,
-> > > >          help=3D'Run sandbox under gdbserver. The argument is the c=
-hannel '+
-> > > >          'over which gdbserver should communicate, e.g. localhost:1=
-234')
-> > > > +    parser.addoption('--no-prompt-wait', default=3DFalse, action=
-=3D'store_true',
-> > > > +        help=3D"Assume that U-Boot is ready and don't wait for a p=
-rompt")
+> > > > @@ -23,6 +23,7 @@ from pathlib import Path
+> > > >  import pytest
+> > > >  import re
+> > > >  from _pytest.runner import runtestprotocol
+> > > > +import subprocess
+> > > >  import sys
 > > > >
-> > > >  def run_build(config, source_dir, build_dir, board_type, log):
-> > > >      """run_build: Build U-Boot
-> > > > @@ -238,6 +240,7 @@ def pytest_configure(config):
-> > > >      ubconfig.board_type =3D board_type
-> > > >      ubconfig.board_identity =3D board_identity
-> > > >      ubconfig.gdbserver =3D gdbserver
-> > > > +    ubconfig.no_prompt_wait =3D config.getoption('no_prompt_wait')
-> > > >      ubconfig.dtb =3D build_dir + '/arch/sandbox/dts/test.dtb'
+> > > >  # Globals: The HTML log file, and the connection to the U-Boot console.
+> > > > @@ -79,6 +80,7 @@ def pytest_addoption(parser):
+> > > >      parser.addoption('--gdbserver', default=None,
+> > > >          help='Run sandbox under gdbserver. The argument is the channel '+
+> > > >          'over which gdbserver should communicate, e.g. localhost:1234')
+> > > > +    parser.addoption('--role', help='U-Boot board role (for Labgrid)')
+> > > >      parser.addoption('--no-prompt-wait', default=False, action='store_true',
+> > > >          help="Assume that U-Boot is ready and don't wait for a prompt")
 > > > >
-> > > >      env_vars =3D (
-> > > > diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_consol=
-e_base.py
-> > > > index e4f86f6af5b..a61eec31148 100644
-> > > > --- a/test/py/u_boot_console_base.py
-> > > > +++ b/test/py/u_boot_console_base.py
-> > > > @@ -413,11 +413,17 @@ class ConsoleBase(object):
-> > > >              if not self.config.gdbserver:
-> > > >                  self.p.timeout =3D TIMEOUT_MS
-> > > >              self.p.logfile_read =3D self.logstream
-> > > > -            if expect_reset:
-> > > > -                loop_num =3D 2
-> > > > +            if self.config.no_prompt_wait:
-> > > > +                # Send an empty command to set up the 'expect' log=
-ic. This has
-> > > > +                # the side effect of ensuring that there was no pa=
-rtial command
-> > > > +                # line entered
-> > > > +                self.run_command(' ')
-> > > >              else:
-> > > > -                loop_num =3D 1
-> > > > -            self.wait_for_boot_prompt(loop_num =3D loop_num)
-> > > > +                if expect_reset:
-> > > > +                    loop_num =3D 2
-> > > > +                else:
-> > > > +                    loop_num =3D 1
-> > > > +                self.wait_for_boot_prompt(loop_num =3D loop_num)
+> > > > @@ -130,12 +132,33 @@ def get_details(config):
+> > > >              str: Build directory
+> > > >              str: Source directory
+> > > >      """
+> > > > -    board_type = config.getoption('board_type')
+> > > > -    board_identity = config.getoption('board_identity')
+> > > > +    role = config.getoption('role')
+> > > >      build_dir = config.getoption('build_dir')
+> > > > +    if role:
+> > > > +        board_identity = role
+> > > > +        cmd = ['u-boot-test-getrole', role, '--configure']
+> > > > +        env = os.environ.copy()
+> > > > +        if build_dir:
+> > > > +            env['U_BOOT_BUILD_DIR'] = build_dir
+> > > > +        proc = subprocess.run(cmd, capture_output=True, encoding='utf-8',
+> > > > +                              env=env)
+> > > > +        if proc.returncode:
+> > > > +            raise ValueError(proc.stderr)
+> > > > +        print('conftest: lab:', proc.stdout)
+> > > > +        vals = {}
+> > > > +        for line in proc.stdout.splitlines():
+> > > > +            item, value = line.split(' ', maxsplit=1)
+> > > > +            k = item.split(':')[-1]
+> > > > +            vals[k] = value
+> > > > +        print('conftest: lab info:', vals)
+> > > > +        board_type, default_build_dir, source_dir = (vals['board'],
+> > > > +            vals['build_dir'], vals['source_dir'])
+> > > > +    else:
+> > > > +        board_type = config.getoption('board_type')
+> > > > +        board_identity = config.getoption('board_identity')
+> > > >
+> > > > -    source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> > > > -    default_build_dir = source_dir + '/build-' + board_type
+> > > > +        source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> > > > +        default_build_dir = source_dir + '/build-' + board_type
+> > > >      if not build_dir:
+> > > >          build_dir = default_build_dir
 > > >
-> > > Hi Simon,
-> > >
-> > > I had a very bad day, so here you go:
-> > >
-> > > =3D=3D ?
-> >=20
-> > What does this mean? I hope you have a good day today.
->=20
-> I _think_ this one is that "self.wait_for_boot_prompt(loop_num =3D
-> loop_num)" should be "self.wait_for_boot_prompt(loop_num =3D=3D loop_num)=
-" ?
->=20
-> --=20
-> Tom
+> > > I'm a little confused here. Why can't we construct "role" from
+> > > board_type+board_identity and then we have the board
+> > > conf.${board_type}_${board_identity} file set whatever needs setting to
+> > > be "labgrid" ?
+> >
+> > The role is equivalent to the board identity, not the combination of
+> > the U-Boot board type and the board identity. I went this way to avoid
+> > having to type long and complicated roles when connecting to boards.
+> > It is similar to how things work today, except that the board type is
+> > implied by the 'role'.
+> >
+> > For boards which have multiple identities (e.g. can support two
+> > different board types), Labgrid handles acquiring and releasing the
+> > shares resources, to avoid any problems.
+>
+> I guess I have two sets of questions. First, if it's basically the
+> board identity why can't we just use that as the role name, in your
+> setup?
 
-Yes, that was what I was thinking, but now after another look I see my
-comment is wrong. Please disregard, again.
+Yes, that's what I am doing. If you look in console.labgrid you can
+see that it is passing U_BOOT_BOARD_IDENTITY as the -r argument.
 
+>
+> But second, I'm not sure why we need this. The labgrid support we worked
+> up here (but, sigh, it's not really clean enough to post) has:
+> $ cat bin/lootbox/conf.rpi_4_na
+> console_impl=labgrid
+> reset_impl=labgrid
+> flash_impl=labgrid.rpi_4
+> flash_writer=labgrid.rpi_4
+>
+> For example and:
+> $ cat bin/writer.labgrid.rpi_4
+> set -e
+>
+> build=${U_BOOT_BUILD_DIR}
+>
+> $LG_CLIENT write-files -T ${build}/u-boot.bin kernel8.img
+>
+> So I don't know what the "role" part you have is for. And yes, there end
+> up being multiple writer.labgrid.FOO scripts because for TI K3 platforms
+> (such as beagleplay) we have:
+> $ cat bin/writer.labgrid.ti-k3
+> set -e
+> build=${U_BOOT_BUILD_DIR}
+>
+> if [ -z "${tispl}" -o -z "${uboot}" -o -z "${tiboot3}" ]; then
+>     echo "Must configure tispl, uboot, tiboot3 and optionally sysfw"
+>     echo "per the board documentation."
+>     exit 1
+> fi
+> echo "Writing build at ${build}"
+> $LG_CLIENT write-files -T ${build}/${tispl} tispl.bin
+> $LG_CLIENT write-files -T ${build}/${uboot} u-boot.img
+> $LG_CLIENT write-files -T ${build/_a??/_r5}/${tiboot3} tiboot3.bin
+> echo "Done writing build"
+>
+> In all cases we first build U-Boot and then pass the build directory to
+> test.py, in something like:
+> export LG_PLACE=rpi4
+> ./test/py/test.py -ra --bd rpi_4 --build-dir .../build-rpi4 \
+>   --results-dir .../results-rpi4 --persistent-data-dir .../pd-rpi4 \
+>   --exitfirst
+>
+> The only U-Boot side changes I needed to make were for counting the SPL
+> banner instances, and that was regardless of framework (a particularly
+> fun platform will show it 3 times).
+
+Yes it is possible to build U-Boot separately. Of course that involved
+various blobs and so on, so every board is different. The approach I
+have taken here is to have Labgrid call buildman to build what is
+needed, with the blobs defined in the environment.
+
+You can use the -B flag to use a pre-built U-Boot, with the scripts
+I've included.
+
+Regards,
+Simon
