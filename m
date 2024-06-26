@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E89C27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 15:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8570C3064D
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 15:40:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AABD8882DC;
-	Wed, 26 Jun 2024 17:37:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F39088495;
+	Wed, 26 Jun 2024 17:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i6CRtRKW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m95oz8sU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE65888496; Wed, 26 Jun 2024 17:37:44 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 098BF8836D; Wed, 26 Jun 2024 17:40:12 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD8278826B
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 17:37:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E73B6884A9
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 17:40:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-6439f6cf79dso34905617b3.0
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 08:37:42 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-644630a8de9so6842327b3.1
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 08:40:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719416261; x=1720021061; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719416409; x=1720021209; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yWavs7vLntYqGL/xMzdfJTZJGn7CYpKwCdvRpO93pGI=;
- b=i6CRtRKWyVY/VTvMeJPkEBqkL1iOSK00b7idTcwu3OV41QAqtZXC7d8tCXOyzc19km
- 2PKi9orUbvJ0fyh6tHMsu0PE1r6WIKReb+uZ2yUL4aTF2YNdNnzWkpsWnlTFNY0M18az
- ZpRbBB39DVxng2zvaKiR/pbDXAMPWXw0ORe2C0KOA8pCmXPuz/4vmVA2DD9ij1ogvWWa
- I9gd5+SpHGIbAwbOVqpAeRgvAAHx3umpAeJm/lWi4udw7dHH0kWb0oEy+5tsOg5y0fak
- 7ZNWeLrbP2oo4BZSxSFnCvk9YItJNo4E8D8hcq5t9QLa48vEf0WC7wJ1WoIUW9pvLQf/
- jfdQ==
+ bh=fL6h87fJW4NhpQ9NF+jRtRM56va4CxCjOTcgvB5hKdM=;
+ b=m95oz8sUNtmieEcDwAtM7T+Zpk38KU38DluhkhSCun7D7u2pc4BBGr7/0iS9STkxtZ
+ J9iwQ1ArqPl+UqyE5aTd30SUR2L7HNNeKG0XwsqaXwjoH5oOcwfd+QbhptcS66hb/6YO
+ izRxXsqVK7jGCJoaboH/UCQlHQqJ+OF+BUv5eoRvBckFEYJ4qhne3V+B9/crgGB41wNY
+ WNfMq//tgNs6ACsgjKLwJ46ARR93Ag74VuiA+stnxMYi3/DqrQjz+srJtHKaqZoItCbh
+ y2mx8PwMGVfleFdwxIHDzlQyyZZ5Eg3AGarKpehH++2wMQMq5FVyt9Nd9Pm46ReYKYVf
+ UbRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719416261; x=1720021061;
+ d=1e100.net; s=20230601; t=1719416409; x=1720021209;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yWavs7vLntYqGL/xMzdfJTZJGn7CYpKwCdvRpO93pGI=;
- b=tZF87kJpa/1bfGj5Z4DiTICGi9XTHhvnTdyhy0U8ioQdJ5v5yvOOYMTRvstwhBXwwC
- AN8udeTtE8q/a4iOLf/qCWEvgHj4JWBvQ5V5DHzblsJ87s97MZ9Intj2ezzrAzj1qzva
- 0TId5ve74EcctGqQyX8MZ2eUzYWVXElv6zOBZIxqSLml6puAfwmL6ejxDNuJxk4dKnAj
- HEwXL1MFAf81oO3oM/GKXhwt+P8qYWKjJiPW1mdI2+f8ZYggaClrsYYnltgCDWUCp6q5
- kozu8XYqPHVg3kh4v4VebT5LFTssnx/n6t9J/u19dQ81lqwpZaG9HI+D6/Sy1uj1tKDF
- r+zQ==
+ bh=fL6h87fJW4NhpQ9NF+jRtRM56va4CxCjOTcgvB5hKdM=;
+ b=rEyox1pvIjCjUsOgWru525c3H4o/Kswhq5QCdxdmqDVTmsdLJMhDSvbxOnVD9AtUaa
+ JyMIjNheIKsLPeP2dY5M9eZEgIsvuQWZZMY16ZfEhvfoVg2nNP9n7rLo+Qd/TQP/hAP1
+ KKWLZcI8tWAEYVdqjtjKaASMqvRarJ9hI+NjFxKq2CZ9AFI5IMGkPYrx0yTzekDUUDvu
+ i8GHwq6ZsokHjDIQDY6l4AS4Xdjl6JiwxVbY2vMDglIQBjkEnw+re8VJ1TJG93mODVDd
+ I7RPTBmLeFHqOxts4mnwB48rckv10RyFtap+OqCqIWYy8CE757IjBT+aZVLxqIH1/qrt
+ 0QNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkwTluonqsZJ640xO2/zv+FL02ApbUEXVEXER5MSxGsdu7HdRstTd8BF/hGoOQ8/mfpYy8h4e+lsJyVqWfUzMOmoKxbg==
-X-Gm-Message-State: AOJu0YzTuX3xtU5IvYB0xQKKJBYuUx+pw1qBuafso7ldqK4x4eb5RGiJ
- oYEy9DMFsUXKrD8XBELbP5YGRoG0Q9E1KiXWPjycoM8M6Fb/i63yNPMpJAcLeGr4xXGwyrFj8Fz
- RopyRxAB0tIkrryp8DM+1A3sr3j03PfLXIFNTmg==
-X-Google-Smtp-Source: AGHT+IFkvlrBwPNSNL9bH6tg1SwjCrjPKy1IYKsyXDqjmUBgenDWTgBOoW1RnsCkp/gG6Xx7tgIHaZ7mW3CGQD0l0vw=
-X-Received: by 2002:a81:9146:0:b0:648:2949:4d2b with SMTP id
- 00721157ae682-64829589223mr18498667b3.12.1719416261558; Wed, 26 Jun 2024
- 08:37:41 -0700 (PDT)
+ AJvYcCXxq8qHVNMmVXEZKBkJobLoOXJ7qimdyD175BKPIuGutexGb4R60wuRD8pPfzXQBNqFoVO2XC2R3Ij+kJNCsmUEa+iZjA==
+X-Gm-Message-State: AOJu0YwMKhjcEeI7Ab+l+ydVOABjKqGLpbY6CW7tRfRQaGnSqqB38McB
+ IUeiacyhpjIvnD44LZqZYhs12zgakd/rNYiFZWOEdjUPkeDP0kCUW64dsN2naKkiW5hQHqdTdhf
+ nSmo6hKMlsZwpFsN2kgQPEkoUPNhoFqpe0ALM0Q==
+X-Google-Smtp-Source: AGHT+IGBqLV+CSS8VQkS3J2MrOgX+C4BxRmj1R/zmuu+NNfv1DsTHwN7VKYH8INPu/LlOyAeiK7szrLf0ml7Vh619oI=
+X-Received: by 2002:a05:690c:a0f:b0:627:e3ba:2ad7 with SMTP id
+ 00721157ae682-6462e4f5f2emr41744907b3.9.1719416408658; Wed, 26 Jun 2024
+ 08:40:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240626151522.83561-1-linux.amoon@gmail.com>
-In-Reply-To: <20240626151522.83561-1-linux.amoon@gmail.com>
+ <20240626151522.83561-2-linux.amoon@gmail.com>
+In-Reply-To: <20240626151522.83561-2-linux.amoon@gmail.com>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Wed, 26 Jun 2024 10:37:30 -0500
-Message-ID: <CAPLW+4kqcLVFxxdGL8V66TquKEtPz0VX7NyejAYS=reJmjJWEQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] dm: exynos: Correct CONFIG_SYS_BOARD setting for
- Odroid XU3 boards
+Date: Wed, 26 Jun 2024 10:39:57 -0500
+Message-ID: <CAPLW+4k9tgNftwC0dhiw+tR8XLXanX2z4dKuhEtWAzS2eE+a2A@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] odroid: Fix target platform compilation issue on
+ Odroid-XU3
 To: Anand Moon <linux.amoon@gmail.com>
 Cc: Jaehoon Chung <jh80.chung@samsung.com>,
  --Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
@@ -94,74 +95,36 @@ X-Virus-Status: Clean
 On Wed, Jun 26, 2024 at 10:15=E2=80=AFAM Anand Moon <linux.amoon@gmail.com>=
  wrote:
 >
-> Fix the issue where CONFIG_SYS_BOARD was incorrectly set on
-> Odroid XU3 boards, causing boot failure. This was resolved by
-> correcting the SYS_BOARD entry in Kconfig to load the correct
-> device tree source (dts) for the Odroid Exynos5422 Platforms.
+> Resolved a compilation issue where the build system attempted
+> to compile for the Odroid-XU3 platform instead of the specified
+> Exynos4412 platform due to an incorrect CONFIG_SYS_BOARD setting.
+> Updated the Makefile to ensure that compilation only occurs for
+> the Odroid-XU3 specified target platform.
 >
-> Fixes: f76750d11133 ("Convert CONFIG_CONS_INDEX et al to Kconfig")
+> Now, object files will be generated only when building for the
+> TARGET_ODROID platform.
+>
 > Signed-off-by: Anand Moon <linux.amoon@gmail.com>
-> ---
-> U-Boot 2024.07-rc5-00042-g80a111f426 (Jun 26 2024 - 15:03:09 +0530) for O=
-DROID-XU3/XU4/HC1/HC2
->
-> CPU:   Exynos5422 @ 800 MHz
-> DRAM:  2 GiB
-> Core:  74 devices, 12 uclasses, devicetree: separate
-> MMC:   mmc@12200000: 0, mmc@12220000: 2
-> Loading Environment from MMC... Reading from MMC(2)... *** Warning - bad =
-CRC, using default environment
->
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Model: Odroid XU3/XU4/HC1/HC2 based on Exynos5422
-> Type:  xu4
-> Boot device: MMC(2)
-> Net:   No ethernet found.
-> Hit any key to stop autoboot:  0
-> switch to partitions #0, OK
-> mmc2 is current device
-> Scanning mmc 2:1...
-> Found U-Boot script /boot/boot.scr
-> 2046 bytes read in 22 ms (90.8 KiB/s)
-> 8104280 bytes read in 519 ms (14.9 MiB/s)
-> Failed to load '/boot/dtbs/exynos5422-smdk5420xu4.dtb'
-> SCRIPT FAILED: continuing...
-> No EFI system partition
-> No EFI system partition
-> Failed to persist EFI variables
-> No EFI system partition
-> Failed to persist EFI variables
-> No EFI system partition
-> Failed to persist EFI variables
-> Loading Boot0000 'mmc 2' failed
-> EFI boot manager: Cannot load any image
-> MMC Device 1 not found
-> no mmc device at slot 1
 > ---
 
 Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
->  board/samsung/smdk5420/Kconfig | 2 +-
+> Tested om Odroid-U3 and Odroid-XU4.
+> ---
+>  board/samsung/odroid/Makefile | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/board/samsung/smdk5420/Kconfig b/board/samsung/smdk5420/Kcon=
-fig
-> index a9d62fffa5..37d6bbbed1 100644
-> --- a/board/samsung/smdk5420/Kconfig
-> +++ b/board/samsung/smdk5420/Kconfig
-> @@ -1,7 +1,7 @@
->  if TARGET_ODROID_XU3
+> diff --git a/board/samsung/odroid/Makefile b/board/samsung/odroid/Makefil=
+e
+> index 5bf48313de..615c99f501 100644
+> --- a/board/samsung/odroid/Makefile
+> +++ b/board/samsung/odroid/Makefile
+> @@ -3,4 +3,4 @@
+>  # Copyright (c) 2014 Samsung Electronics Co., Ltd. All rights reserved.
+>  # Przemyslaw Marczak <p.marczak@samsung.com>
 >
->  config SYS_BOARD
-> -       default "smdk5420"
-> +       default "odroid"
->
->  config SYS_VENDOR
->         default "samsung"
->
-> base-commit: c53b344475734d0d29f522b7b1d80c5b8204442d
+> -obj-y  :=3D odroid.o
+> +obj-$(CONFIG_TARGET_ODROID)    :=3D odroid.o
 > --
 > 2.44.0
 >
