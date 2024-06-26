@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C8AC27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 08:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1DD1C30653
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 08:01:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1F608852A;
-	Wed, 26 Jun 2024 10:00:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E9D1884F1;
+	Wed, 26 Jun 2024 10:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FtQ+Cu+u";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DTHs99V2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFBA68851E; Wed, 26 Jun 2024 10:00:56 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 9EAD4884EA; Wed, 26 Jun 2024 10:00:59 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6624A884F4
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 10:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A6E0884F6
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 10:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6ad8243dba8so29408466d6.3
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 01:00:54 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-711b1512aeaso4988528a12.3
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 01:00:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719388853; x=1719993653; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719388856; x=1719993656; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7wOxWea6pbiAGsuLIautVdEUwHvK2h05LqPc6LJivI4=;
- b=FtQ+Cu+umruJMsEOlBsfpG+vHy7eQ8Zw770uWDJYU9X1iWRtwNZJtZ/WInO6aO4Eab
- k9YvfGsxliDPjsq+4WVr34bn+6T+6kmA/yIkKBf9RzIAjdsn3hvw+pDeC1g6gRb+5CQv
- PwPR5MsmLYV5a0PlAdXeOzMvJ8qAanoGnc9pY=
+ bh=WGltA4EiuESfZLm6sDeUq58UaU4h2wxQP+yxiYuX6vg=;
+ b=DTHs99V25jQ0/a4B6O+8EXPHO2xlI4ZT+XXT+eb2gEIXMXgAdM1PSewo3Unrm1D/o/
+ LwjB9fWi671M3kmlpna3gMM9DSjsW5aMXzHxEBzPY87R9N5ChShhD3pg5OCR1/K9LNfy
+ JTYNcLO1oOxS7vcvNHBq7GdCsE2G+9a8Hz4lo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719388853; x=1719993653;
+ d=1e100.net; s=20230601; t=1719388856; x=1719993656;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7wOxWea6pbiAGsuLIautVdEUwHvK2h05LqPc6LJivI4=;
- b=GglRKZCjLVtNJlZKR9hdewecoZiTY0K1hKXH/9dxHRLHJuwRhTPA74ASPd4PZ1LrrF
- ZQ6kpKiC6mLrACS8B7fSSQqgWz7Fk9kRPp1GqrCB4SEdL/mqyCQtJQ3W/U0e9X+qKnCp
- hRM8296MFyVvr9iuOTFBw5E2sGXk0YEtNVpWcidVop4LkyQUrdJTX7ADwQG9Kq49UVwY
- Pd+Lev5pcPtif5Ob/MdNq0kGvQ1zeQSrDWNOZ1vLSFbMFHAKNhjvRvWUjIimgIhkjoZc
- PbDNqL2z1QEF3swJKSFDXoZdQ3eMmowd1JBMyl5Skqx1Oyz7533BVMQjSmHCBpx7GLsc
- u5Sg==
-X-Gm-Message-State: AOJu0YzhCDOGCxtOkvIdFDH+n6YdgKi2cT9GDu+05JYFXXTqjzz/lj2r
- 2yC0e8jhmS7KBYxhxHZhMzNxpHjzAre8tdpdhpouUAnCQlRjycyB/tYuSitAYmCr6+CT2YCpQ8R
- eY3l5mjgMfKK3NfPfIQnc4XrXlXx4iGGSBztG
-X-Google-Smtp-Source: AGHT+IGvW4GElpc+vycccFx7Z2Mq58YUQ9IQznhltfU5U/isYIIZ3tRaEc64Pr3zyXMclSi0mtID3fBbtoD51AblSaU=
-X-Received: by 2002:ad4:574b:0:b0:6b0:6ed7:1d5b with SMTP id
- 6a1803df08f44-6b540a8375bmr130015586d6.45.1719388853303; Wed, 26 Jun 2024
- 01:00:53 -0700 (PDT)
+ bh=WGltA4EiuESfZLm6sDeUq58UaU4h2wxQP+yxiYuX6vg=;
+ b=Nsy3hNiS7lleLxWvzwJ5/DMAVi958H84tVTii/XExXW76s9ny0xFvczhxYfskiRQjb
+ F2tkL4QwVw48IHFZDbgx7sltHj8SfXsfHodyNhE+cLwUfC2LMPy3cDK1EClVtnaYNqxs
+ Ur7f0ZQg8bkR+vO4py9VED2jnyK7F4WwgCvPOZ/mMG90hxK1pwILfqi54pEjn7751Zw7
+ 4kV3jFzdEgjuOdO2nQV8n5LNucMLPFkFKuJK7NR0l3Dsw/ywl8jNJZjdcJkA/vUbAZT2
+ Ix+Yh1KWpSz1Bzz2EzCKbPUvyTzIIIhm3FvF96URX7iEkIyd+ejdemXvzHGqI/sexVpA
+ NPXg==
+X-Gm-Message-State: AOJu0Ywp/ZreRqyPketcW8a3lL9zhRafvaEcQr4JgaMo5Cm/SAoUpx79
+ A9lsP0cOC1UY57py9Zr8U79ciWVu8pc6bejODcT41QkAGCGzaqjwCnIYeWcvouJQlXRacmXTKWi
+ M/ZqHyDOOPuQfeNFAaxGpJfunTTP9svqTeBz2C5alFvSuEmfG4A==
+X-Google-Smtp-Source: AGHT+IHtLY5M6nBD1y5s4dJQoTlh+KahPR578jKQqK3so6tYPUNNOqKLeHmuRdP7YSRpmZRGVLG6vTGoLOYC+P8QGjE=
+X-Received: by 2002:a17:90b:4b50:b0:2c8:a8e:8eff with SMTP id
+ 98e67ed59e1d1-2c85819b635mr9270963a91.1.1719388855701; Wed, 26 Jun 2024
+ 01:00:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240623203213.1571666-1-sjg@chromium.org>
- <20240623203213.1571666-7-sjg@chromium.org>
- <20240624180556.GG38804@bill-the-cat>
- <CAFLszTiJYVQZ=2kqC6FUQMfrFwtSraET_3nG-2oZhMV=Ts7OEw@mail.gmail.com>
- <20240625141432.GP38804@bill-the-cat>
-In-Reply-To: <20240625141432.GP38804@bill-the-cat>
+References: <20240623203033.1566505-1-sjg@chromium.org>
+ <20240623203033.1566505-14-sjg@chromium.org>
+ <20240624182931.GI38804@bill-the-cat>
+ <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
+ <20240625141427.GO38804@bill-the-cat>
+In-Reply-To: <20240625141427.GO38804@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 26 Jun 2024 09:00:42 +0100
-Message-ID: <CAFLszTg3LhZTeOAANcm29pZnvfF4mpWZEw6Swf09wzGaWQOOtA@mail.gmail.com>
-Subject: Re: [PATCH v3 06/19] test: Avoid failing skipped tests
+Date: Wed, 26 Jun 2024 09:00:41 +0100
+Message-ID: <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
+Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Sean Anderson <seanga2@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,93 +89,55 @@ Hi Tom,
 
 On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Jun 25, 2024 at 01:38:00PM +0100, Simon Glass wrote:
+> On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 24 Jun 2024 at 19:06, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sun, Jun 23, 2024 at 02:32:00PM -0600, Simon Glass wrote:
+> > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
 > > >
-> > > > When a test returns -EAGAIN this should not be considered a failure.
-> > > > Fix what seems to be a problem case, where the pytests see a failure
-> > > > when a test has merely been skipped.
+> > > > Some configuration is now in variables with a CFG_ prefix. Add these to
+> > > > the .cfg file so that we can see everything in one place. Sort the
+> > > > options so they are easier to find and compare.
 > > > >
 > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > > ---
 > > > >
-> > > > (no changes since v1)
+> > > > Changes in v2:
+> > > > - Add new patch to update u-boot.cfg with CFG_... options
 > > > >
-> > > >  test/test-main.c | 16 +++++++++++-----
-> > > >  1 file changed, 11 insertions(+), 5 deletions(-)
+> > > >  scripts/Makefile.autoconf | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
 > > > >
-> > > > diff --git a/test/test-main.c b/test/test-main.c
-> > > > index 3fa6f6e32ec..cda1a186390 100644
-> > > > --- a/test/test-main.c
-> > > > +++ b/test/test-main.c
-> > > > @@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
-> > > >  static int ut_run_test_live_flat(struct unit_test_state *uts,
-> > > >                                struct unit_test *test)
-> > > >  {
-> > > > -     int runs;
-> > > > +     int runs, ret;
-> > > >
-> > > >       if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SANDBOX))
-> > > >               return skip_test(uts);
-> > > > @@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
-> > > >       if (CONFIG_IS_ENABLED(OF_LIVE)) {
-> > > >               if (!(test->flags & UT_TESTF_FLAT_TREE)) {
-> > > >                       uts->of_live = true;
-> > > > -                     ut_assertok(ut_run_test(uts, test, test->name));
-> > > > -                     runs++;
-> > > > +                     ret = ut_run_test(uts, test, test->name);
-> > > > +                     if (ret != -EAGAIN) {
-> > > > +                             ut_assertok(ret);
-> > > > +                             runs++;
-> > > > +                     }
-> > > >               }
-> > > >       }
-> > > >
-> > > > @@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
-> > > >           (!runs || ut_test_run_on_flattree(test)) &&
-> > > >           !(gd->flags & GD_FLG_FDT_CHANGED)) {
-> > > >               uts->of_live = false;
-> > > > -             ut_assertok(ut_run_test(uts, test, test->name));
-> > > > -             runs++;
-> > > > +             ret = ut_run_test(uts, test, test->name);
-> > > > +             if (ret != -EAGAIN) {
-> > > > +                     ut_assertok(ret);
-> > > > +                     runs++;
-> > > > +             }
-> > > >       }
-> > > >
-> > > >       return 0;
+> > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+> > > > index b42f9b525fe..65ff11ea508 100644
+> > > > --- a/scripts/Makefile.autoconf
+> > > > +++ b/scripts/Makefile.autoconf
+> > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf = GEN     $@
+> > > >  quiet_cmd_u_boot_cfg = CFG     $@
+> > > >        cmd_u_boot_cfg = \
+> > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.tmp && { \
+> > > > -             grep 'define CONFIG_' $@.tmp | \
+> > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
+> > > >                       sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
+> > > >               rm $@.tmp;                                              \
+> > > >       } || {                                                          \
 > > >
-> > > How did you trigger this case exactly?
+> > > I don't like this because whereas "CONFIG_" is enforced to be set only
+> > > by Kconfig and so always all reliably set and found via a single header,
+> > > CFG_ stuff is not.
 > >
-> > I noticed this in CI, where some skipped tests were shown as failed in
-> > the log, even though they were not counted as failures in the final
-> > results.
+> > OK, so how are CFG_ options found? I hit this when trying to find the
+> > SDRAM size on rockchip 3399 and I could not find any way of figuring
+> > it out.
 >
-> That's really really strange, do you have an example log or something
-> around still?
+> It's just another define, there's no uniformity to it. For some of the
+> SDRAM values really we need some build time way to grab some information
+> out of the default device tree.
 
-This happens on snow, which is (maybe) the only real board that
-defines CONFIG_UNIT_TEST
-
-test/py/tests/test_ut.py sssnow # ut bdinfo bdinfo_test_eth
-Test: bdinfo_test_eth: bdinfo.c
-Skipping: Console recording disabled
-test/test-main.c:486, ut_run_test_live_flat(): 0 == ut_run_test(uts,
-test, test->name): Expected 0x0 (0), got 0xfffffff5 (-11)
-Test bdinfo_test_eth failed 1 times
-Skipped: 1, Failures: 1
-snow # F+u-boot-test-reset snow snow
-
-For this particular mechanism (-EAGAIN returned by test_pre_run()) , I
-think a better fix would be to squash the error in ut_run_test(), as
-is done when -EAGAIN is returned in the body of the test. I'll update
-that. I cannot see any other way this could happen, but we can always
-deal with it later if it does.
+Can you give an example of a board that could use this? I looked at
+the devicetree for chromebook_kevin and don't see a memory range in
+ther.
 
 Regards,
 Simon
