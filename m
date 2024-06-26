@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12655C27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 15:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0FD1C3064D
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 16:00:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B4AF87F33;
-	Wed, 26 Jun 2024 17:58:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5B78D883D9;
+	Wed, 26 Jun 2024 18:00:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pcHyySUF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HszBKzgR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C91C387E49; Wed, 26 Jun 2024 17:58:38 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id B8AD8882DF; Wed, 26 Jun 2024 18:00:04 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BF9087F33
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 17:58:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B3B87F33
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 18:00:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-57d1782679fso623906a12.0
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 08:58:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-424ad991c1cso11226535e9.1
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 09:00:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719417514; x=1720022314; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OCNIF0vWNmJeEd1W13vqeWqb+2OouC3NAXhXDnb+mHI=;
- b=pcHyySUFqXoBuWFDzp3s862Wwr5+lTApFCHWsFAZUN5sfBZnA8GiwgB6CUTKFf/70p
- Dja4qAJPuu/I+gYnGB00Evzdwx0+V8lcngsfWHwmEUP28thu/xpwh5tpCx9tBxgf7cnO
- 9GJMxoxv/aZj7tuXTyaYkkhQh91cJ2dqTbzj5wqVzKNKGzEplq7V92FFmAzzeX5cKRJB
- zJqoT8KQ/JXNQKbBfWlF80SzvNF6Rmh+SCQ5qBOJM5CgPDXinggvp7flrd2tfcnPoC53
- t74D4RLcjV1HA4xGyGyXD7Gv04gMW5fDXyoBIhp8zmIF6oTywApXTzxpp6S/IhQIbcye
- KUAQ==
+ d=chromium.org; s=google; t=1719417601; x=1720022401; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DPRD1jgS/M2PHvfU/90ZxntC2r0S/chlgyZ1YBt+g4M=;
+ b=HszBKzgRbG8h9hpAtRQ2r/YASO+PbFhCi+NSavjsrWsv1xc4nFmYwT5BqaZwDQhoQS
+ oPsOUE6MlSBF84TiPhOnUcqf68slc3xofV+l4VV0a0+7PXtPGOoxzSX+koZPk8tvnTD0
+ bkcacGjXNt51hnV3IfIP6n7ex91GqHl8FV40U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719417514; x=1720022314;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OCNIF0vWNmJeEd1W13vqeWqb+2OouC3NAXhXDnb+mHI=;
- b=uBjDdpgKJu7asXfT7ds1RgseTsze3irnfyJhm34V9ngksTd7bQhXlJKnr65puRAY8k
- KCr71BnGcx5s2O3UCxl/unEE1TcyUMh1A6KQtmcAIHhyl+3FWPeeaV0yqZFV8OF+iUDO
- 7rTBxGgGm4F/1CrRKeuDiz6RbxrypoUBLyky0zvawvhn+YxKNGx4gSomAjLUnPa8z1HX
- 85Hoo1ZLRwFFNvaXStkEbxRnut1R8uLsG1bCCiQG2bjPJfNPpLj0BWO5w91JSvhKdoki
- /G0PdLQ+R5vJUwk0ES94uaoTrp4X95m39nPiv0ic5fpAJlDOLaw2AOtDLddg25HOnpzw
- MRGg==
-X-Gm-Message-State: AOJu0YwL/7Id75ORLJoZD93sP/v8HCxhf6ZJfAFhdmlTUZ75rea5k6HO
- P0MYK1vfrXkNQRslaLilHErMwu8m4eXO/M33UPbdwMtdpp+0ppdgDuUvTekPHLI=
-X-Google-Smtp-Source: AGHT+IExXOFEwtdE5KEhbAHcaP7YHpTcRUS+hj1gh1uuCjlKdOE4HMT0+c3BNoTzVapn7a4aWMMbeg==
-X-Received: by 2002:a50:d7cc:0:b0:57a:1e0a:379f with SMTP id
- 4fb4d7f45d1cf-57d4bd6a2ddmr6388326a12.16.1719417514203; 
- Wed, 26 Jun 2024 08:58:34 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::18f8? ([2a02:8109:aa0d:be00::18f8])
+ d=1e100.net; s=20230601; t=1719417601; x=1720022401;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DPRD1jgS/M2PHvfU/90ZxntC2r0S/chlgyZ1YBt+g4M=;
+ b=WeJu2TlHoW3maZLrIMVh9Jbrb8YQm4V5rc9odi1/mPhkbZIMqTq0LpahVx3udRXyw7
+ 1qDvzXDGBDJ5BjptWr3g7HBcNybf3InQo6AGbxEAau0eF2HbK2FX8iw8n5EEUaM3oSLv
+ 6pXnhifMcga7ESXjvodZKMqSu/mc5A7ghmLHGObUyR/pvFHjtQp0pC3q4tb3oPSCxz52
+ LVVtfnRiKscynunJrPHanMlGGWFrCmIrjwnOASExvwXNPkeDHxiYtq+eHjC4TdJ3aUx5
+ H0cCu0jgz6gkblTiph4x9HnIYmgkcm+yBOGSfAq15VmmXbLm13Db6uP/ZaeDelFcoubI
+ j72w==
+X-Gm-Message-State: AOJu0Yx9m1dIyfoohXELzchZ1c5XQum+A0mBKjT9nFrbgQsbNkW+oz61
+ iALA0Fawuq/VdflS3+98TEfRoIlVM31Ws+FOdAWxFc91zUmxnxMmvE4/uSy1gGDFTkEkipvyotS
+ zig==
+X-Google-Smtp-Source: AGHT+IF9pZmVN70JN+V/g4jZI0np7Gt2zC948ch7Wd2y/VfRkmD/79VwticDaqV5DysYvmEAXEjaIg==
+X-Received: by 2002:a7b:c3d7:0:b0:424:ab89:1106 with SMTP id
+ 5b1f17b1804b1-424ab891275mr29227725e9.19.1719417601001; 
+ Wed, 26 Jun 2024 09:00:01 -0700 (PDT)
+Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57d3042d10csm7458147a12.40.2024.06.26.08.58.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Jun 2024 08:58:33 -0700 (PDT)
-Message-ID: <5500bc65-82cc-418a-8836-b90e923ce4bb@linaro.org>
-Date: Wed, 26 Jun 2024 17:58:32 +0200
+ 5b1f17b1804b1-424c827507bsm30753715e9.22.2024.06.26.09.00.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Jun 2024 09:00:00 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jerry Van Baren <vanbaren@cideas.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Lukasz Majewski <l.majewski@samsung.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ huang lin <hl@rock-chips.com>
+Subject: [PATCH v5 00/16] Bug-fixes for a few boards
+Date: Wed, 26 Jun 2024 16:59:29 +0100
+Message-Id: <20240626155945.278640-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/4] Add fdt_kaslrseed function to add kaslr-seed to
- chosen node
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>,
- Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20240618210609.1744727-1-tharvey@gateworks.com>
- <20240618210609.1744727-2-tharvey@gateworks.com>
- <7c12b0ac-5785-4199-9faf-5661b8809137@linaro.org>
- <CAJ+vNU2LN9PTbEanEbHGgHG6qGL2jV8fDy8K-1W9Am1VbPyOsA@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAJ+vNU2LN9PTbEanEbHGgHG6qGL2jV8fDy8K-1W9Am1VbPyOsA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,195 +94,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series includes fixes to get some rockchip and nvidia boards
+working again. It also drops the broken Beaglebone Black config and
+provides a devicetree fix for coral (x86).
 
+Note that since this series fixes bugs, it is targeted at -master
 
-On 24/06/2024 17:47, Tim Harvey wrote:
-> On Thu, Jun 20, 2024 at 6:58 AM Caleb Connolly
-> <caleb.connolly@linaro.org> wrote:
->>
->> Hi Tim,
->>
->> On 18/06/2024 23:06, Tim Harvey wrote:
->>> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
->>> randomize the virtual address at which the kernel image is loaded, it
->>> expects entropy to be provided by the bootloader by populating
->>> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
->>>
->>> Add a fdt_kaslrseed function to accommodate this allowing an existing
->>> node to be overwritten if present. For now use the first rng device
->>> but it would be good to enhance this in the future to allow some sort
->>> of selection or policy in choosing the rng device used.
->>>
->>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
->>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>> Cc: Michal Simek <michal.simek@amd.com>
->>> Cc: Andy Yan <andy.yan@rock-chips.com>
->>> Cc: Akash Gajjar <gajjar04akash@gmail.com>
->>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>> Cc: Simon Glass <sjg@chromium.org>
->>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>> Cc: Devarsh Thakkar <devarsht@ti.com>
->>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>> Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
->>> Cc: Marek Vasut <marex@denx.de>
->>> Cc: Tom Rini <trini@konsulko.com>
->>> Cc: Chris Morgan <macromorgan@hotmail.com>
->>> ---
->>> v6:
->>>    - collected tags
->>> v5:
->>>    - move function to boot/fdt_support.c
->>>    - remove ability to select rng index and note in the commit log
->>>      something like this as a future enhancement.
->>>    - fixed typo in commit message s/it's/its/
->>>    - use cmd_process_error per Michal's suggestion
->>> v4:
->>>    - add missing /n to notice in kaslrseed cmd
->>>    - combine ints in declaration
->>>    - remove unused vars from board/xilinx/common/board.c ft_board_setup
->>> v3:
->>>    - skip if CONFIG_MEASURED_BOOT
->>>    - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
->>>    - pass in rng index and bool to specify overwrite
->>>    - remove duplicate error strings printed outside of fdt_kaslrseed
->>>    - added note to commit log about how EFI STUB weeds out kalsr-seed
->>> v2:
->>>    - fix typo in commit msg
->>>    - use stack for seed to avoid unecessary malloc/free
->>>    - move to a library function and deduplicate code by using it
->>>      elsewhere
->>> ---
->>>    boot/fdt_support.c    | 44 +++++++++++++++++++++++++++++++++++++++++++
->>>    include/fdt_support.h | 10 ++++++++++
->>>    2 files changed, 54 insertions(+)
->>>
->>> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
->>> index 2bd80a9dfb18..b1b2679dea0c 100644
->>> --- a/boot/fdt_support.c
->>> +++ b/boot/fdt_support.c
->>> @@ -7,12 +7,15 @@
->>>     */
->>>
->>>    #include <common.h>
->>> +#include <dm.h>
->>>    #include <abuf.h>
->>>    #include <env.h>
->>>    #include <log.h>
->>>    #include <mapmem.h>
->>>    #include <net.h>
->>> +#include <rng.h>
->>>    #include <stdio_dev.h>
->>> +#include <dm/device_compat.h>
->>>    #include <dm/ofnode.h>
->>>    #include <linux/ctype.h>
->>>    #include <linux/types.h>
->>> @@ -274,6 +277,47 @@ int fdt_initrd(void *fdt, ulong initrd_start, ulong initrd_end)
->>>        return 0;
->>>    }
->>>
->>> +int fdt_kaslrseed(void *fdt, bool overwrite)
->>> +{
->>> +     int len, err, nodeoffset;
->>> +     struct udevice *dev;
->>> +     const u64 *orig;
->>> +     u64 data = 0;
->>> +
->>> +     err = fdt_check_header(fdt);
->>> +     if (err < 0)
->>> +             return err;
->>
->> All the paths that call fdt_kaslrseed() call fdt_check_header()
->> beforehand, I think it's safe to drop this.
-> 
-> Hi Caleb,
-> 
-> The do_kaslr_seed path does not check for this and instead passes
-> working_fdt - perhaps your point is still valid if working_fdt is
-> guaranteed to always be a valid fdt?
-> 
->>> +
->>> +     /* find or create "/chosen" node. */
->>> +     nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
->>> +     if (nodeoffset < 0)
->>> +             return nodeoffset;
->>
->> Arguably, this shouldn't be the responsibility of this function, maybe
->> it would be better to error our here?
-> 
-> I'm not sure what your point is here... it is erroring out.
+Changes in v5:
+- Move setting of pmugrf into the probe() function
 
-Hi Tim,
+Changes in v4:
+- Drop Fixes tag
+- Add new patch to set a board-size limit for chromebook_link
+- Fix 'stating' typo
+- Move Binman size feature to a separate series
 
-On a re-read, I'm honestly not sure what I was getting at here. I was 
-under the impression that were were doing fdt_check_header() multiple 
-times on the same fdt, but if that's not the case then this is of course 
-fine.
+Changes in v3:
+- Use BLOBLIST instead of OF_BLOBLIST
+- Cut the patch down to bare bones
+- Split out the refactoring into a separate patch
 
-Regarding the chosen node, clearly something went amiss between brain 
-and keyboard there.
+Changes in v2:
+- Put the conditions under EFI_TCG2_PROTOCOL
+- Consider MEASURED_BOOT too
+- Remove the superfluous if() and drop the debug() as well
+- Use 'phase' instead of 'stage'
+- Add new patch to correct memory size in SPL
+- Drop patch "regulator: rk8xx: Fix incorrect parameter"
+- Rewrite boneblack patch to onstead drop the target and update docs
 
-Sorry if I delayed this patch series! Looking forward to having it in.
+Simon Glass (16):
+  mkeficapsule: Add a --version argument
+  binman: Collect the version number for mkeficapsule
+  binman: Deal with mkeficapsule being missing
+  binman: Return failure when a usage() message is generated
+  binman: Keep the efi_capsule input file
+  nvidia: nyan-big: Disable debug UART
+  tpm: Avoid code bloat when not using EFI_TCG2_PROTOCOL
+  x86: Set a board-size limit for chromebook_link
+  rockchip: veyron: Add logging for power init
+  power: regulator: Handle autoset in regulators_enable_boot_on()
+  fdt: Correct condition for bloblist existing
+  spl: Allow ATF to work when dcache is disabled
+  rockchip: Ensure memory size is available in RK3399 SPL
+  rockchip: Avoid #ifdefs in RK3399 SPL
+  rockchip: bob: kevin: Disable dcache in SPL
+  Drop the special am335x_boneblack_vboot target
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-Thanks and regards,
-> 
-> Best Regards,
-> 
-> Tim
-> 
->>> +
->>> +     /* return without error if we are not overwriting and existing non-zero node */
->>> +     orig = fdt_getprop(fdt, nodeoffset, "kaslr-seed", &len);
->>> +     if (orig && len == sizeof(*orig))
->>> +             data = fdt64_to_cpu(*orig);
->>> +     if (data && !overwrite) {
->>> +             debug("not overwriting existing kaslr-seed\n");
->>> +             return 0;
->>> +     }
->>> +     err = uclass_get_device(UCLASS_RNG, 0, &dev);
->>> +     if (err) {
->>> +             printf("No RNG device\n");
->>> +             return err;
->>> +     }
->>> +     err = dm_rng_read(dev, &data, sizeof(data));
->>> +     if (err) {
->>> +             dev_err(dev, "dm_rng_read failed: %d\n", err);
->>> +             return err;
->>> +     }
->>> +     err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
->>> +     if (err < 0)
->>> +             printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
->>> +
->>> +     return err;
->>> +}
->>> +
->>>    /**
->>>     * board_fdt_chosen_bootargs - boards may override this function to use
->>>     *                             alternative kernel command line arguments
->>> diff --git a/include/fdt_support.h b/include/fdt_support.h
->>> index 4b71b8948d99..741e2360c224 100644
->>> --- a/include/fdt_support.h
->>> +++ b/include/fdt_support.h
->>> @@ -463,4 +463,14 @@ void fdt_fixup_board_enet(void *blob);
->>>    #ifdef CONFIG_CMD_PSTORE
->>>    void fdt_fixup_pstore(void *blob);
->>>    #endif
->>> +
->>> +/**
->>> + * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
->>> + *
->>> + * @blob:    fdt blob
->>> + * @overwrite:       do not overwrite existing non-zero node unless true
->>> + * Return:   0 if OK, -ve on error
->>> + */
->>> +int fdt_kaslrseed(void *blob, bool overwrite);
->>> +
->>>    #endif /* ifndef __FDT_SUPPORT_H */
->>
->> --
->> // Caleb (they/them)
+ board/google/veyron/veyron.c               | 30 +++----
+ board/ti/am335x/MAINTAINERS                |  1 -
+ boot/Kconfig                               |  4 +
+ common/spl/spl_atf.c                       |  3 +-
+ configs/am335x_boneblack_vboot_defconfig   | 94 ----------------------
+ configs/am335x_evm_defconfig               |  3 +-
+ configs/chromebook_bob_defconfig           |  1 +
+ configs/chromebook_kevin_defconfig         |  1 +
+ configs/chromebook_link_defconfig          |  2 +
+ configs/nyan-big_defconfig                 |  1 -
+ doc/mkeficapsule.1                         |  4 +
+ doc/usage/fit/beaglebone_vboot.rst         | 21 +++--
+ drivers/power/regulator/regulator-uclass.c |  2 +-
+ drivers/ram/rockchip/sdram_rk3399.c        | 35 ++++----
+ lib/Kconfig                                |  4 -
+ lib/fdtdec.c                               | 12 ++-
+ tools/binman/btool/mkeficapsule.py         |  3 +-
+ tools/binman/etype/efi_capsule.py          |  5 +-
+ tools/mkeficapsule.c                       | 10 ++-
+ 19 files changed, 80 insertions(+), 156 deletions(-)
+ delete mode 100644 configs/am335x_boneblack_vboot_defconfig
 
 -- 
-// Caleb (they/them)
+2.34.1
+
