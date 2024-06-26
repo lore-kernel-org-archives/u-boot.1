@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB39C27C4F
-	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 14:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EE4BC27C4F
+	for <u-boot@archiver.kernel.org>; Wed, 26 Jun 2024 14:29:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 507C3881C3;
-	Wed, 26 Jun 2024 16:08:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72F3586EB5;
+	Wed, 26 Jun 2024 16:29:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bjU7lIxQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lCJGJZ3X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82D788826B; Wed, 26 Jun 2024 16:07:58 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id AC2EA88149; Wed, 26 Jun 2024 16:29:49 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53022880AD
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 16:07:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 468B683989
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 16:29:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5c1adbcaad3so286821eaf.1
- for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 07:07:56 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5c1adbcaad3so298938eaf.1
+ for <u-boot@lists.denx.de>; Wed, 26 Jun 2024 07:29:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719410875; x=1720015675; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719412186; x=1720016986; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pPArSBLcxuCEe+iEZKybD2YBIFKjxEIz+RIC2cR6ARU=;
- b=bjU7lIxQcYR4tktm8gZXTBPSASWKDg69wZDvmLXrt0QxZVT9jSHpyAuuvrDm6nhnFG
- KSa4oacC4XjoIDcpr6bEkd4L3y6aBhdzd3lJchsIJD08Aolaw9+Rx7iMeqBQeq+9TmYN
- 60kKA06SH9yYOiNkja5yFSbwgCgyQf/hy1jWE=
+ bh=WtgyJsH/YAkF8kXvp/zdm7fekfmbDcY2tRh1XbdcV2E=;
+ b=lCJGJZ3Xc4REvvsSmHw+zuOrNWApBWemxL73mNbmlWEPKTgSWlMiOwF84Cl+PkdFnB
+ zfA8mFHe+ku88MZv3vmJsY6/B8ZbzdgrHu1nuv8dLsiObYeOixlsdZffOgSk64Mdt0ow
+ oUVXmdjbOAWnsegEVNUogu8ZfB6GA57Cfei00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719410875; x=1720015675;
+ d=1e100.net; s=20230601; t=1719412186; x=1720016986;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pPArSBLcxuCEe+iEZKybD2YBIFKjxEIz+RIC2cR6ARU=;
- b=AV0QaocG0BEgyO1Lcg6+toXDaQ9b6XJXjc/6BlKQsl+Bc3WkjAFBxLVGhndxFMdBgn
- pt2vh2rYkWnDDdYmlikGvcVAX7AbvVLwNzeJ0SU2mIclfRs6qa8Tc2CJHedw2CIux2eH
- pr3Ca8iRu1wM82Dpf96Mv/YFA7QmnvWahVH6WY9QlH/nA5ybkBj/XA09iV2E9GxYZczd
- /LoYYRbWWGGIRpFNTNwz4OOJ+gU/hDDJMdVulByICE7MlzV9zdBKdPF+iJU7fHKu6M42
- LWDi/b1Npm7Dv8cAo3CQiJvk8++wW/1aMcsBPDE1EOrD9Gr+K6iBHYYyHe2kQtI5DMLg
- oV6w==
-X-Gm-Message-State: AOJu0YyDAmDoRWNkadLpwM4ypXvoH4+TNRB+YTOmsdnot7tZIwpV3obf
- f0EmELPkQW5H6l2hl9zshZkvQR4r8+wRlzlk1chQWd2NmNKpUO8t91+wcRhKfuHu3v9K/6oIlwZ
- dwCIfUQ==
-X-Google-Smtp-Source: AGHT+IFpaiRmADQrOmfEwPHCXOQLiHu/morEvq30nCXfv1Ph2me0tElBdr/hc+Zi4GYLiF0zqWT/fg==
-X-Received: by 2002:a4a:b543:0:b0:5c2:279f:243f with SMTP id
- 006d021491bc7-5c2279f25damr413516eaf.1.1719410874960; 
- Wed, 26 Jun 2024 07:07:54 -0700 (PDT)
+ bh=WtgyJsH/YAkF8kXvp/zdm7fekfmbDcY2tRh1XbdcV2E=;
+ b=hWnHqVahqifgnxmIxdjwoJWghmQmObAxDUugB8996Fn7ZpkTNIAVjnGyqsXT5jnB2V
+ 4Fm1aFepaKQjQVD/79lT4GKo52cJK/ITFahv7hZXvEOI5wkRlL2LineqRqWFPWmQMj2M
+ IzsSyEA1NCkP5Nbqz9jzcsTj4Eki8icCTFbX64DGLNTpyD7X2LcUo3g2v8jQU5c2aawS
+ OCWWwTsA4uNJldXWuNXGu50xt6bJ5d8FCp8RU4Yn1WpnwXqp3Nux++NzTF0h6Xac8iDX
+ QjIFJGhm9pYw0b6Vuz++CUpd1ADwc0ocqeDp2IXDfNW02dI3JOvn9TFdbHaNYjnnffd9
+ oAiA==
+X-Gm-Message-State: AOJu0YwNE9Ij+u4hzTzMrwB42bgnjSAjLUOj7K5WnB0qadm+mzd95Jjr
+ 0PqpatJZ168prIT7QW2p/yp4e/o1aqYi+T8L3TuYfLeAg4pxmYwgbatTbf4bBaqWe5dieZn9X8c
+ +DVt27Q==
+X-Google-Smtp-Source: AGHT+IFW8utoU8+LR4IoxbciNaSegf4o3pK0B87Moel8e4NQLd7ESZbh1delbpxpLLG4TVQx2ffGKA==
+X-Received: by 2002:a4a:6709:0:b0:5c2:246e:bfa7 with SMTP id
+ 006d021491bc7-5c2246ec022mr533050eaf.9.1719412185785; 
+ Wed, 26 Jun 2024 07:29:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5c22a10ea27sm60633eaf.10.2024.06.26.07.07.54
+ 006d021491bc7-5c1d55cd06asm2112753eaf.11.2024.06.26.07.29.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 07:07:54 -0700 (PDT)
-Date: Wed, 26 Jun 2024 08:07:52 -0600
+ Wed, 26 Jun 2024 07:29:45 -0700 (PDT)
+Date: Wed, 26 Jun 2024 08:29:43 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
-Message-ID: <20240626140752.GV38804@bill-the-cat>
-References: <20240623203033.1566505-1-sjg@chromium.org>
- <20240623203033.1566505-14-sjg@chromium.org>
- <20240624182931.GI38804@bill-the-cat>
- <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
- <20240625141427.GO38804@bill-the-cat>
- <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
+Subject: Re: [PATCH v3 08/19] test: Introduce the concept of a role
+Message-ID: <20240626142943.GW38804@bill-the-cat>
+References: <20240623203213.1571666-1-sjg@chromium.org>
+ <20240623203213.1571666-9-sjg@chromium.org>
+ <20240624181303.GH38804@bill-the-cat>
+ <CAFLszThRfe9vkSdooS-tiX5ffSHxBKF359m9nov_MAJ7B4bmtQ@mail.gmail.com>
+ <20240625142705.GQ38804@bill-the-cat>
+ <CAFLszTip6hbX0yM6T7wAPOqLMavPLpTfemvjN9RPh9C4MmV8Uw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pin3O9TVLiFYkYRK"
+ protocol="application/pgp-signature"; boundary="ZFZy1vK1kxQm0uxX"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
+In-Reply-To: <CAFLszTip6hbX0yM6T7wAPOqLMavPLpTfemvjN9RPh9C4MmV8Uw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,95 +96,228 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---pin3O9TVLiFYkYRK
+--ZFZy1vK1kxQm0uxX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 26, 2024 at 09:00:41AM +0100, Simon Glass wrote:
+On Wed, Jun 26, 2024 at 09:00:33AM +0100, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 25 Jun 2024 at 15:27, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
+> > On Tue, Jun 25, 2024 at 01:38:08PM +0100, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
+> > > On Mon, 24 Jun 2024 at 19:13, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
+> > > > On Sun, Jun 23, 2024 at 02:32:02PM -0600, Simon Glass wrote:
 > > > >
-> > > > > Some configuration is now in variables with a CFG_ prefix. Add th=
-ese to
-> > > > > the .cfg file so that we can see everything in one place. Sort the
-> > > > > options so they are easier to find and compare.
+> > > > > In Labgrid there is the concept of a 'role', which is similar to =
+the
+> > > > > U-Boot board ID in U-Boot's pytest subsystem.
+> > > > >
+> > > > > The role indicates both the target and information about the U-Bo=
+ot
+> > > > > build to use. It can also provide any amount of other configurati=
+on.
+> > > > > The information is obtained using the 'labgrid-client query' oper=
+ation.
+> > > > >
+> > > > > Make use of this in tests, so that only the role is required in g=
+itlab
+> > > > > and other situations. The board type and other things can be quer=
+ied
+> > > > > as needed.
+> > > > >
+> > > > > Use a new 'u-boot-test-getrole' script to obtain the requested
+> > > > > information.
+> > > > >
+> > > > > With this it is possible to run lab tests in gitlab with just a s=
+ingle
+> > > > > 'ROLE' variable for each board.
 > > > > >
 > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > > > ---
 > > > > >
-> > > > > Changes in v2:
-> > > > > - Add new patch to update u-boot.cfg with CFG_... options
+> > > > > (no changes since v1)
 > > > > >
-> > > > >  scripts/Makefile.autoconf | 2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > >  test/py/conftest.py | 31 +++++++++++++++++++++++++++----
+> > > > >  1 file changed, 27 insertions(+), 4 deletions(-)
 > > > > >
-> > > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-> > > > > index b42f9b525fe..65ff11ea508 100644
-> > > > > --- a/scripts/Makefile.autoconf
-> > > > > +++ b/scripts/Makefile.autoconf
-> > > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf =3D GEN     $@
-> > > > >  quiet_cmd_u_boot_cfg =3D CFG     $@
-> > > > >        cmd_u_boot_cfg =3D \
-> > > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > =
-$@.tmp && { \
-> > > > > -             grep 'define CONFIG_' $@.tmp | \
-> > > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
-> > > > >                       sed '/define CONFIG_IS_ENABLED(/d;/define C=
-ONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
-> > > > >               rm $@.tmp;                                         =
-     \
-> > > > >       } || {                                                     =
-     \
+> > > > > diff --git a/test/py/conftest.py b/test/py/conftest.py
+> > > > > index 6547c6922c6..5de8d7b0e23 100644
+> > > > > --- a/test/py/conftest.py
+> > > > > +++ b/test/py/conftest.py
+> > > > > @@ -23,6 +23,7 @@ from pathlib import Path
+> > > > >  import pytest
+> > > > >  import re
+> > > > >  from _pytest.runner import runtestprotocol
+> > > > > +import subprocess
+> > > > >  import sys
+> > > > >
+> > > > >  # Globals: The HTML log file, and the connection to the U-Boot c=
+onsole.
+> > > > > @@ -79,6 +80,7 @@ def pytest_addoption(parser):
+> > > > >      parser.addoption('--gdbserver', default=3DNone,
+> > > > >          help=3D'Run sandbox under gdbserver. The argument is the=
+ channel '+
+> > > > >          'over which gdbserver should communicate, e.g. localhost=
+:1234')
+> > > > > +    parser.addoption('--role', help=3D'U-Boot board role (for La=
+bgrid)')
+> > > > >      parser.addoption('--no-prompt-wait', default=3DFalse, action=
+=3D'store_true',
+> > > > >          help=3D"Assume that U-Boot is ready and don't wait for a=
+ prompt")
+> > > > >
+> > > > > @@ -130,12 +132,33 @@ def get_details(config):
+> > > > >              str: Build directory
+> > > > >              str: Source directory
+> > > > >      """
+> > > > > -    board_type =3D config.getoption('board_type')
+> > > > > -    board_identity =3D config.getoption('board_identity')
+> > > > > +    role =3D config.getoption('role')
+> > > > >      build_dir =3D config.getoption('build_dir')
+> > > > > +    if role:
+> > > > > +        board_identity =3D role
+> > > > > +        cmd =3D ['u-boot-test-getrole', role, '--configure']
+> > > > > +        env =3D os.environ.copy()
+> > > > > +        if build_dir:
+> > > > > +            env['U_BOOT_BUILD_DIR'] =3D build_dir
+> > > > > +        proc =3D subprocess.run(cmd, capture_output=3DTrue, enco=
+ding=3D'utf-8',
+> > > > > +                              env=3Denv)
+> > > > > +        if proc.returncode:
+> > > > > +            raise ValueError(proc.stderr)
+> > > > > +        print('conftest: lab:', proc.stdout)
+> > > > > +        vals =3D {}
+> > > > > +        for line in proc.stdout.splitlines():
+> > > > > +            item, value =3D line.split(' ', maxsplit=3D1)
+> > > > > +            k =3D item.split(':')[-1]
+> > > > > +            vals[k] =3D value
+> > > > > +        print('conftest: lab info:', vals)
+> > > > > +        board_type, default_build_dir, source_dir =3D (vals['boa=
+rd'],
+> > > > > +            vals['build_dir'], vals['source_dir'])
+> > > > > +    else:
+> > > > > +        board_type =3D config.getoption('board_type')
+> > > > > +        board_identity =3D config.getoption('board_identity')
+> > > > >
+> > > > > -    source_dir =3D os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> > > > > -    default_build_dir =3D source_dir + '/build-' + board_type
+> > > > > +        source_dir =3D os.path.dirname(os.path.dirname(TEST_PY_D=
+IR))
+> > > > > +        default_build_dir =3D source_dir + '/build-' + board_type
+> > > > >      if not build_dir:
+> > > > >          build_dir =3D default_build_dir
 > > > >
-> > > > I don't like this because whereas "CONFIG_" is enforced to be set o=
-nly
-> > > > by Kconfig and so always all reliably set and found via a single he=
-ader,
-> > > > CFG_ stuff is not.
+> > > > I'm a little confused here. Why can't we construct "role" from
+> > > > board_type+board_identity and then we have the board
+> > > > conf.${board_type}_${board_identity} file set whatever needs settin=
+g to
+> > > > be "labgrid" ?
 > > >
-> > > OK, so how are CFG_ options found? I hit this when trying to find the
-> > > SDRAM size on rockchip 3399 and I could not find any way of figuring
-> > > it out.
+> > > The role is equivalent to the board identity, not the combination of
+> > > the U-Boot board type and the board identity. I went this way to avoid
+> > > having to type long and complicated roles when connecting to boards.
+> > > It is similar to how things work today, except that the board type is
+> > > implied by the 'role'.
+> > >
+> > > For boards which have multiple identities (e.g. can support two
+> > > different board types), Labgrid handles acquiring and releasing the
+> > > shares resources, to avoid any problems.
 > >
-> > It's just another define, there's no uniformity to it. For some of the
-> > SDRAM values really we need some build time way to grab some information
-> > out of the default device tree.
+> > I guess I have two sets of questions. First, if it's basically the
+> > board identity why can't we just use that as the role name, in your
+> > setup?
 >=20
-> Can you give an example of a board that could use this? I looked at
-> the devicetree for chromebook_kevin and don't see a memory range in
-> ther.
+> Yes, that's what I am doing. If you look in console.labgrid you can
+> see that it is passing U_BOOT_BOARD_IDENTITY as the -r argument.
 
-OK, wow, I didn't realize /memory was optional now. But indeed, I don't
-see it in the dtb file. That removes that option then, sadly.
+Then why do we need this?
+
+> > But second, I'm not sure why we need this. The labgrid support we worked
+> > up here (but, sigh, it's not really clean enough to post) has:
+> > $ cat bin/lootbox/conf.rpi_4_na
+> > console_impl=3Dlabgrid
+> > reset_impl=3Dlabgrid
+> > flash_impl=3Dlabgrid.rpi_4
+> > flash_writer=3Dlabgrid.rpi_4
+> >
+> > For example and:
+> > $ cat bin/writer.labgrid.rpi_4
+> > set -e
+> >
+> > build=3D${U_BOOT_BUILD_DIR}
+> >
+> > $LG_CLIENT write-files -T ${build}/u-boot.bin kernel8.img
+> >
+> > So I don't know what the "role" part you have is for. And yes, there end
+> > up being multiple writer.labgrid.FOO scripts because for TI K3 platforms
+> > (such as beagleplay) we have:
+> > $ cat bin/writer.labgrid.ti-k3
+> > set -e
+> > build=3D${U_BOOT_BUILD_DIR}
+> >
+> > if [ -z "${tispl}" -o -z "${uboot}" -o -z "${tiboot3}" ]; then
+> >     echo "Must configure tispl, uboot, tiboot3 and optionally sysfw"
+> >     echo "per the board documentation."
+> >     exit 1
+> > fi
+> > echo "Writing build at ${build}"
+> > $LG_CLIENT write-files -T ${build}/${tispl} tispl.bin
+> > $LG_CLIENT write-files -T ${build}/${uboot} u-boot.img
+> > $LG_CLIENT write-files -T ${build/_a??/_r5}/${tiboot3} tiboot3.bin
+> > echo "Done writing build"
+> >
+> > In all cases we first build U-Boot and then pass the build directory to
+> > test.py, in something like:
+> > export LG_PLACE=3Drpi4
+> > ./test/py/test.py -ra --bd rpi_4 --build-dir .../build-rpi4 \
+> >   --results-dir .../results-rpi4 --persistent-data-dir .../pd-rpi4 \
+> >   --exitfirst
+> >
+> > The only U-Boot side changes I needed to make were for counting the SPL
+> > banner instances, and that was regardless of framework (a particularly
+> > fun platform will show it 3 times).
+>=20
+> Yes it is possible to build U-Boot separately. Of course that involved
+> various blobs and so on, so every board is different. The approach I
+> have taken here is to have Labgrid call buildman to build what is
+> needed, with the blobs defined in the environment.
+>=20
+> You can use the -B flag to use a pre-built U-Boot, with the scripts
+> I've included.
+
+OK. I personally think pre-built (or outside of buildman built) U-Boot
+will be an important case, since everything needs more options enabled
+to test more features, but on real hardware. For example,
+CONFIG_UNIT_TEST should be on for everyone, in testing, once the build
+issues are resolved. And I need to add CONFIG_FIT to some platforms so
+that I can then use the kernel test. And some platforms I end up
+enabling CONFIG_CMD_BOOTEFI_HELLO on (but others disabling
+CONFIG_CMD_BOOTEFI_SELFTEST as that fails and that's just A Thing).
 
 --=20
 Tom
 
---pin3O9TVLiFYkYRK
+--ZFZy1vK1kxQm0uxX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ8ILgACgkQFHw5/5Y0
-tywHcAwAoSROinjDCXJihz+ZYE5zAMh8CfBN9agvNXKuma9ultLtFBRZ/+wMT3yz
-22D7hL3Pq5Fab3xv3NFxw6inP/A9/yXepvrJ07Ste6Qhu3yYuZI25RR22FiNHd2s
-tUuu7NGumYh54HbN8jOGEfhXX0sue5XdvkWtaBb+RUHapl5QOrBy/WBiWYY7Zwxn
-m4LtQeqQdalh/dekMnJl4Ab0ujDWWNNV7c0z+hvXWxsOkHmku0sx7/+LnFcATeYI
-S2y2djD9/O4G0aDFFsaoNkgqD7+JZZcDIuLf5xffFFUb+KKcgVNcAES89JSSpOEu
-/hTpCjr56Ge8ZgCfG2eS+lQ7iNwMgRlEuay2nVB/CtT8oNuGowdCLMyDAZ27hIrT
-oDpEjX07hZTMrhLKTxOMXVmCVsMZ7jwV4LuzOmMPgzxr+ZRWm+/jKf1YHBdzoNzx
-T2jd38zywK3QueHIV0S3zHz4MZ+a7aFVHna7GStNMELcfYsnS645P2eeqO3cFFzn
-QxILJOyE
-=bt5+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ8JdMACgkQFHw5/5Y0
+tyx6WQwAkyKLKC8x4gbvbQ/izuhoXKFC7MI7pfP30zrDGCogARFg42wbtwl2je6z
+nZHBdU6ppYOkn+fRFlVP9KdJLADbKrsMsW5HRKEXepc5kb9y3noheztWfVSEmais
+BhNH9LaIbpbsf6WVpUJsykiGJaPB33o8f2PR0vY9ol+NT36AJrcHkaF3/F9xjb7M
+Lsd6tYh7v4TiIHJoU0AnNnvydHKuJ/fypFasj9dh4NAL1F9rTH2r98ZykJy5WuEf
+yw1c4TCYZOAywaocuBmxvsOj121wxZJf5H3Lrpx/JnDB6I/XaK6UvJuQiYt8r0xE
+lh7eOa8ToiOADj0AIoNe+HosCk4zhcdevufyrDJLcZUk0ofWdqtkPArQZOKUVytV
+8NcgKZqLdg86uOPG8AV1XBzbLXlOi+2OActWbUqzlf52VpFT5gmB0HQBzNvJh0Ya
+ppt9WyeFdVJ2hLYlUfCoyE92t+Np2s+ReXvCaCeK2YKUk7k4cdkfTaKr3Sgakfhm
+xpEid65b
+=Df6g
 -----END PGP SIGNATURE-----
 
---pin3O9TVLiFYkYRK--
+--ZFZy1vK1kxQm0uxX--
