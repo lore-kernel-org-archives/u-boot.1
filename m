@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C03CC30653
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 21:18:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EAF1C2BD09
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 23:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98BE5884A9;
-	Thu, 27 Jun 2024 23:18:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4773F88578;
+	Fri, 28 Jun 2024 01:26:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1719523093;
-	bh=0NJ7EQtkD4lEE6F/SVXOfE4V/RtaZwjonSi2d0jkSz0=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=P/LLJ1iCrEcT3o3smpnSGkmCn+DCO4IXD4XiZ6uzpjO9mt/PgRK0uEq/2pbnyPC7D
-	 uSmzZm78MGBRxWoFndaSIyQSZnrL+1ROAUBPwzXwGILdBFNj3NXo2rr42ShPbzP+KX
-	 fcMBweEsF6oq07lTSA+R6VD2XrvUUyl4Cvua0V2x4mivkyd0HIXwBBbGnTDxO3FOQn
-	 9y3bNPlTpGURbKzNTG4HyYTghrGs/SOLsLYrQcDjjHJ0OOQuAhmGrELIu0Xlu2tSDK
-	 u4pWYkqx4iEklSjoplDWdJJf67V/FjAgJDC0/NB7/z3I3zEYEyZeuFTPmYMpRuq9mq
-	 +etgXiuPt9bcA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b0vC7m1o";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DC5678857D; Fri, 28 Jun 2024 01:26:03 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 81FB6880A5;
- Thu, 27 Jun 2024 18:05:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1719504314;
- bh=0NJ7EQtkD4lEE6F/SVXOfE4V/RtaZwjonSi2d0jkSz0=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=yXYAKgsV0PiziaUn6F1ui/Sm2lYwWT74aa1m3fC/j77evxW2Ko8Z8i/ZYVSIKVCfa
- 16pd+OAJUIxqSAc+49xAdP3ieC+iqvrB9Ugx1dMiV52tG94et2JpbRock5KVUtQYQg
- 4nUNwGSjxc5UvMKVDPLLcurUeIYuSCSs60MbkjNqLDvo8U3XLD3ap+oD1X7HrSIcve
- 7Ydzb120SXL8BOqdNLE0tTUFDuOOBNxfGnENH4zWq45bwaP1zvalbOszkU+GVYtU8m
- 7wAybHMyjENwLwzWd0VbRzvZV3k4DZdxrTSPoC6g7rY96Zo/iJvqetwmtFHiOMLzQ+
- QNDHnWCKAmIsw==
-Message-ID: <6abad4ba-b29a-47a3-addb-91e8f46ee425@denx.de>
-Date: Thu, 27 Jun 2024 18:04:22 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 61F5A884A9
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 01:26:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-7f3c5af0a04so180504639f.0
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 16:26:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1719530759; x=1720135559; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oiCSBcclVveDbdqTD54Eha5tojNYdncT+zlabvqMC04=;
+ b=b0vC7m1okRyw5QgWlPfAM6ZBCxDC8hmHU0PLWoa5gvTvhEtzDsdnH7z2QL8v7GMt3T
+ DWfAkw3tvRAl1A9JOvmgofxGRSMtBhmR1h8Qnp6vlE9vfxv2ZBDRbWNg/VjH5HoVvqgK
+ IEPuAdEVxgGM7IgSlb/n9b3Y3xPGr+GOdX1u6fZdo+YrCZqJKlJfdsTc9KEa6lV+rDMc
+ hakoE774sIgf6vGcdxVIPc+mhPdFGpppNNZXlTAJgP6WXVe/qEQYy0eMocl1R2Dki3N1
+ RvhiwvVz7mzx5R2NHCgBDBo+snvz2FTtRk8XiMd3NKMTdyHSrsRcYMNfOhsFP1goFT8i
+ 2jmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719530759; x=1720135559;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oiCSBcclVveDbdqTD54Eha5tojNYdncT+zlabvqMC04=;
+ b=Ci/Hx/JfcYo91Lo/lpB5lqXf+WhXHLUgwlNGz3H/SBFWmE//C62LNy1OIeDb5vPxWZ
+ NvSZInCXKwQ13JNAit4YFvaTwu9U+AX0CToPzEqK/XRfb3Nw5W57NA00eCPHbE+E7/a4
+ 1Thu8Qeb3FJcXEwsz0oMEwtj8SaR6yBgiyOP9kAhdcNroLOfa/WG056VBEjuOVkrWovt
+ 2M0PK0/Qw3gSbkq3F9b1EGjr3F4DlZFk1MWzFwm/wWkzCxoklB8hWyTe4L5Pi6Zbhxdn
+ GXJmLlwhNb7y2dnCwvGG+2wfGO2BSziK70w6NsoXbBMKmPSJgobIX5uDwDMWe1BBRMOo
+ vnlQ==
+X-Gm-Message-State: AOJu0YxCV8DRoKBnaqqYX8T64Dv9pSkDF7caH0vN/3NQ8QNKSSZ4fwku
+ 00TkBHZTEFsrgU+j9hDVmtRk0TjYfMIkgyp+i0ey7XKMM20XGctU
+X-Google-Smtp-Source: AGHT+IHGLpizPgJET9zPqYZ4lXyddNpUlIHPVr42p4/A8inntWAP7kTmXhlAzDO0H/lwEp8ON/vxiQ==
+X-Received: by 2002:a05:6602:1685:b0:7eb:898f:1c76 with SMTP id
+ ca18e2360f4ac-7f3a74e4466mr1851374739f.6.1719530758959; 
+ Thu, 27 Jun 2024 16:25:58 -0700 (PDT)
+Received: from ?IPV6:2001:470:42c4:101:8fad:bda4:c25d:403e?
+ ([2001:470:42c4:101:8fad:bda4:c25d:403e])
+ by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4bb73277ab0sm200628173.0.2024.06.27.16.25.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Jun 2024 16:25:58 -0700 (PDT)
+Message-ID: <9716fa71-d010-4444-979f-d120c558426c@gmail.com>
+Date: Thu, 27 Jun 2024 17:25:57 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi
- <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
- u-boot-qcom@groups.io, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20240626235717.272219-1-marex@denx.de>
- <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] usb: musb-new: sunxi: make compatible with UDC/DM
+ gadget model
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, John Watts <contact@jookia.org>
+References: <20230608195631.55364-1-CFSworks@gmail.com>
+ <20230608195631.55364-3-CFSworks@gmail.com>
+ <20240627160639.2353fd1e@donnerap.manchester.arm.com>
 Content-Language: en-US
-In-Reply-To: <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <20240627160639.2353fd1e@donnerap.manchester.arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 27 Jun 2024 23:18:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,90 +98,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/27/24 10:37 AM, Simon Glass wrote:
-> Hi Marek,
-
-Hi,
-
-[...]
-
->> ---
->>   drivers/power/regulator/regulator-uclass.c | 22 +++++++++++++++-------
->>   1 file changed, 15 insertions(+), 7 deletions(-)
->>
->> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
->> index 66fd531da04..ccc4ef33d83 100644
->> --- a/drivers/power/regulator/regulator-uclass.c
->> +++ b/drivers/power/regulator/regulator-uclass.c
->> @@ -433,6 +433,8 @@ static int regulator_post_bind(struct udevice *dev)
->>          const char *property = "regulator-name";
->>
->>          uc_pdata = dev_get_uclass_plat(dev);
->> +       uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
->> +       uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
->>
->>          /* Regulator's mandatory constraint */
->>          uc_pdata->name = dev_read_string(dev, property);
->> @@ -444,13 +446,21 @@ static int regulator_post_bind(struct udevice *dev)
->>                          return -EINVAL;
->>          }
->>
->> -       if (regulator_name_is_unique(dev, uc_pdata->name))
->> -               return 0;
->> +       if (!regulator_name_is_unique(dev, uc_pdata->name)) {
->> +               debug("'%s' of dev: '%s', has nonunique value: '%s\n",
->> +                     property, dev->name, uc_pdata->name);
->> +               return -EINVAL;
->> +       }
->>
->> -       debug("'%s' of dev: '%s', has nonunique value: '%s\n",
->> -             property, dev->name, uc_pdata->name);
->> +       /*
->> +        * In case the regulator has regulator-always-on or
->> +        * regulator-boot-on DT property, trigger probe() to
->> +        * configure its default state during startup.
->> +        */
->> +       if (uc_pdata->always_on && uc_pdata->boot_on)
->> +               dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
->>
->> -       return -EINVAL;
->> +       return 0;
->>   }
->>
->>   static int regulator_pre_probe(struct udevice *dev)
->> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udevice *dev)
->>                                                  -ENODATA);
->>          uc_pdata->max_uA = dev_read_u32_default(dev, "regulator-max-microamp",
->>                                                  -ENODATA);
->> -       uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
->> -       uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
->>          uc_pdata->ramp_delay = dev_read_u32_default(dev, "regulator-ramp-delay",
->>                                                      0);
->>          uc_pdata->force_off = dev_read_bool(dev, "regulator-force-boot-off");
->> --
->> 2.43.0
->>
+On 6/27/24 09:06, Andre Przywara wrote:
+> On Thu,  8 Jun 2023 13:56:31 -0600
+> Sam Edwards <cfsworks@gmail.com> wrote:
 > 
-> This is reading a lot of DT stuff very early, which may be slow. It is
-> also reading from the DT in the bind() step which we sometimes have to
-> do, but try to avoid.
+> Hi,
+> 
+> John asked me have a look at this.
 
-Actually, it is reading only the bare minimum very early in bind, the 
-always-on and boot-on, the rest is in pre_probe, i.e. later.
+Hi Andre, it's good to hear from you again,
 
-> Also this seems to happen in SPL and again pre-reloc and again in
-> U-Boot post-reloc?
+I'd first like to make sure you're aware that the date on this patch is 
+June *2023,* not June 2024. It's possible things have changed 
+substantially in the past year. I do not know if this patch is still a 
+necessity; though if John is nudging about it, it probably is.
 
-What does, the uclass post_bind ?
+> 
+>> Since many sunxi boards do not implement a `board_usb_init`, it's
+> 
+> I am confused, what has this have to do with gadget support? *No* sunxi
+> board build provides board_usb_init(), but apparently this works fine for
+> now.
+> I am all for this converting to DM part, but the rationale seems a bit
+> off.
 
-> Should we have a step in the init sequence where we set up the
-> regulators, by calling regulators_enable_boot_on() ?
+For context, board_usb_init() is (was?) the non-DM entry point for USB 
+functionality; it is (was?) *the* implementation of 
+usb_gadget_initialize() when !DM_USB_GADGET.
 
-Let's not do this , the entire point of this series is to get rid of 
-those functions and do the regulator configuration the same way LED 
-subsystem does it -- by probing always-on/boot-on regulators and 
-configuring them correctly on probe.
+> 
+> Also can you give some reason for this patch? What does this fix or
+> improve? "it's better" is a bit thin, "complying with DM" would already be
+> sufficient, but maybe there is more?
 
-To me regulators_enable_boot_on() and the like was always an 
-inconsistently applied workaround for missing DM_FLAG_PROBE_AFTER_BIND , 
-which is now implemented, so such workarounds can be removed.
+Eh, yeah, "better" is something of a question-begging word isn't it? :)
+
+The main point is to be compatible with DM's view of UDC, which as you 
+said is a worthy goal in itself. It's "better" because this allows using 
+DM's all-purpose implementation of usb_gadget_initialize(), which is 
+(was?) necessary for those targets lacking board_usb_init().
+
+> 
+>> better if we just make the sunxi USB driver compatible with the
+>> DM gadget model, as many other musb-new variants already are.
+>>
+>> This change has been verified working on a T113s.
+>>
+>> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+>> ---
+>>   drivers/usb/musb-new/sunxi.c | 50 +++++++++++++++++++++++-------------
+>>   1 file changed, 32 insertions(+), 18 deletions(-)
+>>
+>> diff --git a/drivers/usb/musb-new/sunxi.c b/drivers/usb/musb-new/sunxi.c
+>> index 510b254f7d..6658cd995d 100644
+>> --- a/drivers/usb/musb-new/sunxi.c
+>> +++ b/drivers/usb/musb-new/sunxi.c
+>> @@ -444,6 +444,16 @@ static struct musb_hdrc_config musb_config_h3 = {
+>>   	.ram_bits	= SUNXI_MUSB_RAM_BITS,
+>>   };
+>>   
+>> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
+> 
+> Please no more #ifdef's. Is there any reason to *not* force
+> DM_USB_GADGET now, for all sunxi boards, in Kconfig?
+> Either by "select"ing it in the USB Kconfig, or in arch/arm/Kconfig, like
+> other platforms do.
+> Then you don't need to care about the !DM_USB_GADGET definition of this
+> function and can drop the #ifdef.
+
+I wouldn't be the one to ask. I can't think of any such reason myself. 
+But to me it sounds like since *no sunxi board provides 
+board_usb_init()* the only way USB gadgets *could* work is with 
+DM_USB_GADGET? That'd be reason enough to force it.
+
+> 
+>> +int dm_usb_gadget_handle_interrupts(struct udevice *dev) {
+> 
+> coding style
+
+Sentence fragments are harder to understand. I am assuming you are 
+saying, "Please put the opening '{' on its own line."
+
+> 
+>> +	struct sunxi_glue *glue = dev_get_priv(dev);
+>> +	struct musb_host_data *host = &glue->mdata;
+>> +
+>> +	host->host->isr(0, host->host);
+>> +	return 0;
+>> +}
+>> +#endif
+>> +
+>>   static int musb_usb_probe(struct udevice *dev)
+>>   {
+>>   	struct sunxi_glue *glue = dev_get_priv(dev);
+>> @@ -452,10 +462,6 @@ static int musb_usb_probe(struct udevice *dev)
+>>   	void *base = dev_read_addr_ptr(dev);
+>>   	int ret;
+>>   
+>> -#ifdef CONFIG_USB_MUSB_HOST
+>> -	struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
+>> -#endif
+>> -
+>>   	if (!base)
+>>   		return -EINVAL;
+>>   
+>> @@ -486,23 +492,31 @@ static int musb_usb_probe(struct udevice *dev)
+>>   	pdata.platform_ops = &sunxi_musb_ops;
+>>   	pdata.config = glue->cfg->config;
+>>   
+>> -#ifdef CONFIG_USB_MUSB_HOST
+>> -	priv->desc_before_addr = true;
+>> +	if (IS_ENABLED(CONFIG_USB_MUSB_HOST)) {
+>> +		struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
+>> +		priv->desc_before_addr = true;
+>>   
+>> -	pdata.mode = MUSB_HOST;
+>> -	host->host = musb_init_controller(&pdata, &glue->dev, base);
+>> -	if (!host->host)
+>> -		return -EIO;
+>> +		pdata.mode = MUSB_HOST;
+>> +		host->host = musb_init_controller(&pdata, &glue->dev, base);
+>> +		if (!host->host)
+>> +			return -EIO;
+>>   
+>> -	return musb_lowlevel_init(host);
+>> -#else
+>> -	pdata.mode = MUSB_PERIPHERAL;
+>> -	host->host = musb_register(&pdata, &glue->dev, base);
+>> -	if (IS_ERR_OR_NULL(host->host))
+>> -		return -EIO;
+>> +		return musb_lowlevel_init(host);
+>> +	} else if (CONFIG_IS_ENABLED(DM_USB_GADGET)) {
+>> +		pdata.mode = MUSB_PERIPHERAL;
+>> +		host->host = musb_init_controller(&pdata, &glue->dev, base);
+>> +		if (!host->host)
+>> +			return -EIO;
+>>   
+>> -	return 0;
+>> -#endif
+>> +		return usb_add_gadget_udc(&glue->dev, &host->host->g);
+>> +	} else {
+>> +		pdata.mode = MUSB_PERIPHERAL;
+>> +		host->host = musb_register(&pdata, &glue->dev, base);
+>> +		if (IS_ERR_OR_NULL(host->host))
+>> +			return -EIO;
+>> +
+>> +		return 0;
+>> +	}
+> 
+> That looks like a good cleanup! Just need to test it briefly, but it seems
+> like the gist of this patch is fine.
+
+I think it would be wise to test it a little better than "briefly" given 
+the age of the patch. I'm not well-equipped to do any testing myself 
+right now or I'd volunteer.
+
+> 
+> Cheers,
+> Andre
+
+Likewise,
+Sam
+
+> 
+> 
+>>   }
+>>   
+>>   static int musb_usb_remove(struct udevice *dev)
+> 
