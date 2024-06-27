@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF8CC3064D
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 13:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86A7BC2BD09
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 13:57:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F4B8857D;
-	Thu, 27 Jun 2024 15:43:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DEBE488528;
+	Thu, 27 Jun 2024 15:57:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HhWC3GJc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SN2Uy1cN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7378988582; Thu, 27 Jun 2024 15:43:25 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id D30448811C; Thu, 27 Jun 2024 15:57:56 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41E0E87A9C
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 15:43:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77F5788093
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 15:57:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6f8d0a00a35so7176892a34.2
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 06:43:23 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-25c9786835eso4070717fac.3
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 06:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719495802; x=1720100602; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Hdup8B9WmAzWR3WLu8r19PGFn+jFbIWNYWSe/aUp7LU=;
- b=HhWC3GJc03EUBl2m+ZIcUytm2rY5iV04BVqywwzQOq02mlw6v3GtEL0/KWx4LzMsaF
- 1vTVr8PPrY+wiDSw39jz4XAUr2rrqWe6icRHr3blw0KS+Mnsb6Dl/rXaBQZSNGX+Y4Lv
- fLAIO/zFcjf28qlXTG9RXT4WYKBV5ZrqBqdtU=
+ d=konsulko.com; s=google; t=1719496673; x=1720101473; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x7AtLXSQhdAdSJMORx7r78eKrBtp5eb35woLesCe2Oo=;
+ b=SN2Uy1cN+zLVBbtZHTxUL6EgA7cvtbpA3dx9mE+F07MTVfW4WOoKCsqY6s8a/+2ylx
+ UhZH/xqJ0G2wRH3w/4Hjr1Owf/Ksg/bd8ormh5YOwUDRD3rGQO+E3p5XVDRKvBvW3zgf
+ 5ATUk4TVlzpfZAF7x98PPZcYt9wtQR/IfRHAk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719495802; x=1720100602;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Hdup8B9WmAzWR3WLu8r19PGFn+jFbIWNYWSe/aUp7LU=;
- b=FPWhWXeHAFX263kHDAceZBCmmnBAfJV1r7bCea9eo7krdnWjIQD5jr1ySJ0bW9wEBn
- 9PZrLkYTOhU5PFE8KXS6zNPsWvmnEX5QKHtOx1iDVJYXLTLq1Q4pm542vZVHjYFSsXm3
- EyPNxh7gyl3MMziOW/oOda2VG284p4yeZsoq2+0VMiDjHMl/Ap3oG+lZyhK0Q3Ow45p9
- BU4FqglGriddOA3fkxQg0BQbJiMJCIpqPFkw7oiDMcxRm68waqur09Nw3u9lVVbifS+S
- ucVYbNKCpzdGTiCEUnBzg8RXKjqH7gdScL0kbIrCeBHKJ8ph3/MO/mwAurJaqCFxMFSl
- FtnQ==
-X-Gm-Message-State: AOJu0YwfichH+B02B0YHTtJ7VyHr0H+acXY3mW0HYPbjxqyJAsV0tNWe
- 8X96jWhwvQucdY0H0CzQEIQTZUH4FxHuSNhFv016LqwaIr0Awrz5fObRDNoXtRpgABAJPKos43P
- 7axvD+w==
-X-Google-Smtp-Source: AGHT+IHx6n7kOtgoZ39/tPTxbNpOG+2bAmN2ZAhvEn/yPbRrxPaUXAJ5m/N6MrdAfxIiH+dMVMZ+YQ==
-X-Received: by 2002:a05:6870:638c:b0:259:89a5:440d with SMTP id
- 586e51a60fabf-25cfce010dcmr14412029fac.15.1719495801888; 
- Thu, 27 Jun 2024 06:43:21 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net
- (fixed-187-190-197-45.totalplay.net. [187.190.197.45])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25d72bee195sm364980fac.32.2024.06.27.06.43.21
- for <u-boot@lists.denx.de>
+ d=1e100.net; s=20230601; t=1719496673; x=1720101473;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x7AtLXSQhdAdSJMORx7r78eKrBtp5eb35woLesCe2Oo=;
+ b=C8DuFDECyYlfNnFN0DMGwZMzy1wrGyK6HH1L6QDJjbsdvtVyWvV/uwFdUCSBw7ZLZP
+ TQ2dHYV/rX5eYXYpwIK/+DfFRDExCVQR9SVK6HrM8Bzf9xc32WQSceT6Wsm1oZAWt1lQ
+ ln2sGry3ioDyN/63Tu5uZ8gId1nbIogOIRccyKjy2/yfbzMndEj+0ru/mVOEvfs2wLWQ
+ /2OnmFD2jCDY96pIs/hWl88caURHbzyK/PAXJBDeF5m65Nuq5tOceqF2M2t3g+c/SSQv
+ py+PkwflFxGSe5TFhZOvPAAoIN9HUdANmMN8odJjvCJ99pCQRcXUei/62q+V72p+nLcW
+ p/TA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVBqVxlh15h6GaTTTNl8GQtJ1FEVVC0Td0jGoH32HiCFHejgSD9DRf7DJRKuxM5vHI4f1GHcVhpFjIP6jMicqM5IRqjTw==
+X-Gm-Message-State: AOJu0YxE6BXcCvA6+h4hPgkRsaffWjPO7sCHUUtgunq4/EwAkxR6QSlb
+ 2Q/IOrlEioYmtZcinmVemf21vdfrj4FvWnsTY4eHVUL9DhXnaX/MglIbKjpSiCw=
+X-Google-Smtp-Source: AGHT+IHaEqvfZMuvwf50gNDC3Dg5d3f/jjHR180lhemv0MX/weDLL0wpcbDJPBiUSsr7Lgro4Ws+cQ==
+X-Received: by 2002:a05:6871:892:b0:24f:d9de:3bed with SMTP id
+ 586e51a60fabf-25d06e365d1mr14433087fac.41.1719496673048; 
+ Thu, 27 Jun 2024 06:57:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25d72dd61b6sm362148fac.47.2024.06.27.06.57.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jun 2024 06:43:21 -0700 (PDT)
+ Thu, 27 Jun 2024 06:57:52 -0700 (PDT)
+Date: Thu, 27 Jun 2024 07:57:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] CI: Make pytest export JUnitXML
-Date: Thu, 27 Jun 2024 07:43:20 -0600
-Message-Id: <20240627134320.3518272-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+To: Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] zlib: Fix big performance regression
+Message-ID: <20240627135749.GZ38804@bill-the-cat>
+References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GEh7dmt2Evknk3zw"
+Content-Disposition: inline
+In-Reply-To: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,98 +91,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Both GitLab and Azure (and other CI systems) have native support for
-displaying JUnitXML test report results. The pytest framework that we
-use can generate these reports. Change our CI tests so that they will
-generate these reports and then have the respective CI platform pick
-them up. We write to different locations because of where each CI is
-(and isn't) able to easily pass things along.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .azure-pipelines.yml | 12 +++++++++++-
- .gitlab-ci.yml       |  5 ++++-
- 2 files changed, 15 insertions(+), 2 deletions(-)
+--GEh7dmt2Evknk3zw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index c43bb51066a5..fff78785ee92 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -287,7 +287,7 @@ stages:
-           export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
-           export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
-           # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \$var" if not
--          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR"
-+          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
-           # the below corresponds to .gitlab-ci.yml "after_script"
-           rm -rf /tmp/uboot-test-hooks /tmp/venv
-           EOF
-@@ -371,6 +371,7 @@ stages:
-           docker run "$@" --device /dev/fuse:/dev/fuse \
-                          -v $PWD:$(work_dir) \
-                          -v $(Pipeline.Workspace):$(Pipeline.Workspace) \
-+                         -v $(System.DefaultWorkingDirectory):$(System.DefaultWorkingDirectory) \
-                          -e WORK_DIR="${WORK_DIR}" \
-                          -e TEST_PY_BD="${TEST_PY_BD}" \
-                          -e TEST_PY_ID="${TEST_PY_ID}" \
-@@ -378,6 +379,10 @@ stages:
-                          -e OVERRIDE="${OVERRIDE}" \
-                          -e BUILD_ENV="${BUILD_ENV}" $(ci_runner_image) \
-                          $(Pipeline.Workspace)/testsh/test.sh
-+      - task: PublishTestResults@2
-+        inputs:
-+          testResultsFormat: 'JUnit'
-+          testResultsFiles: 'results.xml'
- 
- - stage: test_py_qemu
-   jobs:
-@@ -495,6 +500,7 @@ stages:
-           docker run "$@" --device /dev/fuse:/dev/fuse \
-                          -v $PWD:$(work_dir) \
-                          -v $(Pipeline.Workspace):$(Pipeline.Workspace) \
-+                         -v $(System.DefaultWorkingDirectory):$(System.DefaultWorkingDirectory) \
-                          -e WORK_DIR="${WORK_DIR}" \
-                          -e TEST_PY_BD="${TEST_PY_BD}" \
-                          -e TEST_PY_ID="${TEST_PY_ID}" \
-@@ -503,6 +509,10 @@ stages:
-                          -e BUILD_ENV="${BUILD_ENV}" $(ci_runner_image) \
-                          $(Pipeline.Workspace)/testsh/test.sh
-         retryCountOnTaskFailure: 2 # QEMU may be too slow, etc.
-+      - task: PublishTestResults@2
-+        inputs:
-+          testResultsFormat: 'JUnit'
-+          testResultsFiles: 'results.xml'
- 
- - stage: world_build
-   jobs:
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 165f765a8332..a6c5040239ae 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -41,7 +41,7 @@ stages:
-       fi
- 
-   after_script:
--    - cp -v /tmp/${TEST_PY_BD}/*.{html,css} .
-+    - cp -v /tmp/${TEST_PY_BD}/*.{html,css,xml} .
-     - rm -rf /tmp/uboot-test-hooks /tmp/venv
-   script:
-     # If we've been asked to use clang only do one configuration.
-@@ -83,11 +83,14 @@ stages:
-       ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID}
-         ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
-         --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
-+        --junitxml=/tmp/${TEST_PY_BD}/results.xml
-   artifacts:
-     when: always
-     paths:
-       - "*.html"
-       - "*.css"
-+    reports:
-+      junit: results.xml
-     expire_in: 1 week
- 
- .world_build:
--- 
-2.34.1
+On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
 
+> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+> brings a big performance regression in inflate_fast(), which leads
+> to watchdog timer reset on powerpc 8xx.
+>=20
+> It looks like that commit does more than what it describe, it
+> especially removed an important optimisation that was doing copies
+> using halfwords instead of bytes. That unexpected change multiplied
+> by almost 4 the time spent in inflate_fast() and increased by 40%
+> the overall time needed to uncompress linux kernel image.
+>=20
+> So partially revert that commit but keep post incrementation as it
+> is the initial purpose of said commit.
+>=20
+> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+
+Good work.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+And can you please head over to https://github.com/madler/zlib and file
+an issue, or pull request with your changes explaining why? I would hope
+they're interested in performance regressions on slower parts still.
+Thanks!
+
+--=20
+Tom
+
+--GEh7dmt2Evknk3zw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9b9MACgkQFHw5/5Y0
+tyzGWwwAs5K6PuFzTLGqmGKuXaxLdvdks+xykS7nLxMBpvpcxg/PCjG3IqmwAcxs
+toxNaUBPkjpd7Tttp9LVXew3MDMiiViUBLb7/YLBtyYVBXNV0z168enrJPZ1EaJZ
+82zte1Q8Cld1SD9Fyi9GNEpirUnPNTgfz+PxSmDpPCV3SjROX2vNmX4v67r/8gzp
+E8Akao215ezRSzihiC6f2kgR1m+DfmWbN7Pcgufgcx286i/SKLOgyeFnf10ZZP2C
+eWJ2BG076bNeqBpuwCn/zvBIyDsKk28kQy2aeUvSgBHgitfsuPkN4vsA2qX/0Mzt
+mZyLHpW/x/opdh2+MyIb1t5S7J+/cZXi9cXAbiY4bYnSB64Dr/Ss/KbMfELRuZhX
+3d5eLO259GjfPMw5yWBj1N+oXO2FVoiNxts0d/foSxrZX7nonGD+dDJEXA4kS5jc
+jX7W+NL+0TkYMgE94VmdlSWz8ORKzRJ2bKQPJJqciadz7AcDtqMy//6f68W7wmKW
+sW8SZPkf
+=5P2g
+-----END PGP SIGNATURE-----
+
+--GEh7dmt2Evknk3zw--
