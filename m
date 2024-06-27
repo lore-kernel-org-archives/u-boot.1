@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A2CC3064D
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 04:30:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB269C3064D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 08:02:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 093DD8852C;
-	Thu, 27 Jun 2024 06:29:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0430487F5C;
+	Thu, 27 Jun 2024 10:02:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1719462591;
-	bh=27+6eTN2FcuHQYfWU79Rhy5D2e6lNaQfoiKILOzPOqM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DgH2OUUNeZ1ynR/jy/FaDl2OVfTh1KnnchoguwNjeaWIbopJusEE2qC4HfdC9KTh8
-	 Dhg3SXhIWaId7jkLDTtCmo0JbBu8MvVeOJBg1mkQnjiw9m4Cq5qWjDNTUIh1NUvgji
-	 N08O9Vgg3qid/4fIGpOJR+9d1H3a9Z946igJAXQSYIXmC402LKwMZKmNwXzFSZfZn+
-	 9bxZUwNzZ3RPLaM0kTSApAugCDgAWdf6RSnyCqs6GJ0epC2OLP8LvqIi7x+WpsyH2b
-	 dDqfyIhFG8io0ghvnMq8ldXTNOlgX4dqIBERjFM/mWEXPEash4hY69Tlm5fwNnAinF
-	 crNNK47WEOqPg==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D+Gje5NR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8D86E884A7; Thu, 27 Jun 2024 10:02:29 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1B11D884C9;
- Thu, 27 Jun 2024 01:57:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1719446276;
- bh=27+6eTN2FcuHQYfWU79Rhy5D2e6lNaQfoiKILOzPOqM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=EsXBtQBKIWU5wy30+pJEdzP3H+DCbMErCn+xr2K0dNLbXhx1zAFpYjjqFf1h4Uw5B
- gvHzQ3gb7Vs6BobAZPZbAqB/2vH6s9AHgF1Q7Hl3GyMT2+gz17npJPy7uHvsfhyfci
- 7CmwKC3vKEu8rLIOfdSdnbyqX+ARUa6HMprnEYADoT4g0k/dPCAnMf3SqyREZdXsPR
- 9oSdSyBJBYxeqgwV7m617wp8ONXRgYQevgEebMayAHS1Dp09RO9elqpaBFfDk5+C9k
- gamS7q8pTi+dv6YkHghL6Lfue4YQAWKvZ0Ntjnnw8aALHG4OtPyWmzzf5leqskZTM8
- CW823SCXHJyiA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Ben Wolsieffer <benwolsieffer@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Kostya Porotchkin <kostap@marvell.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
- u-boot-qcom@groups.io, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 4/4] power: regulator: Drop regulators_enable_boot_on/off()
-Date: Thu, 27 Jun 2024 01:55:44 +0200
-Message-ID: <20240626235717.272219-4-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240626235717.272219-1-marex@denx.de>
-References: <20240626235717.272219-1-marex@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 641E587E49
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 10:02:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-79c0bc8092dso226866485a.2
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 01:02:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719475346; x=1720080146; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VnceFawjZg561B1hOcHZoTALJW7KkWkfRbu5Qq6vuQ8=;
+ b=D+Gje5NRox1vCLPbRrKuthKqHOgAjnDcYX5qujWmcjq8tDEfZjWg72gFMddkyefem+
+ oIJTCWAtOk6g7mwZ88zN+mHwHlpluQjC0NefprtzICeFdPozor376NvDWuqQB6yfS8eG
+ EVhpI+QohmYIQDgYFSZfUNaljbS+rK6ghy3Js=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719475346; x=1720080146;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VnceFawjZg561B1hOcHZoTALJW7KkWkfRbu5Qq6vuQ8=;
+ b=R8TiTF3FTxysaCwljw4iNeiDHETssc64dfBtDpr9FSmtIbMZIhgNtI1Li40zxzsQE6
+ GI6tZ6VxZIGJ7rIZRHVpdM4FgJ1uLwGLgT3iw+AKIeNMpvq/UmGHd4FPgQSLXy1EUSJN
+ CNDsUeMylDq0f1xbANdeMhIyiwOM1XayXK1LAjkJGKiJQyxvdwb+MbCB0bjd64qCXSsO
+ 4sBKwxUkMCRa400AzC4kX2Nci5LWm881SjAiFGcMOMQWspp6e/+G13sU6jYmBGL9ZqvQ
+ j/IQwnV0A3obmRny6zWpw9PJA/W8erXm8CO092k3FXvyX2WgFQLPauUBJj8GEbFbAg9N
+ ZKOg==
+X-Gm-Message-State: AOJu0YwoUVLdq8nUZe++n2D3RzvhKdEKjdTUu2ixzBkU3D3caZzC6vUB
+ sBTLUQD57ZAdsub/P2ClpePqo3ZFUOTd33hmkPYdevAvd/YQjBXIcqtKscoUXBAjfTRvCCqwbQE
+ P3AW0XW5fwVZHwNxQhFs70bDT8Lbl8osr3Mfu
+X-Google-Smtp-Source: AGHT+IFO+Ypggsbw74JhRjk1y+LjwTNPvBXXDQR2bM/i5meW/YYbvXv6x96+VFoEZthTZ/ZecqjXXmJF6qAzw5HiouQ=
+X-Received: by 2002:a0c:ea86:0:b0:6b5:a98:44b8 with SMTP id
+ 6a1803df08f44-6b53643de93mr137428446d6.29.1719475346141; Thu, 27 Jun 2024
+ 01:02:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 27 Jun 2024 06:29:48 +0200
+References: <20240626155945.278640-1-sjg@chromium.org>
+ <20240626155945.278640-15-sjg@chromium.org>
+ <e6df1db5-745d-4398-9207-7f08faa1628d@kwiboo.se>
+In-Reply-To: <e6df1db5-745d-4398-9207-7f08faa1628d@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 27 Jun 2024 09:02:14 +0100
+Message-ID: <CAFLszTjRO7CypWHBLqHr2NW6YPjxdD+VxeUEWLXGfbiPE4kJ3A@mail.gmail.com>
+Subject: Re: [PATCH v5 14/16] rockchip: Avoid #ifdefs in RK3399 SPL
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,255 +85,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Both regulators_enable_boot_on/off() are unused and superseded by
-regulator uclass regulator_post_probe(). Remove both functions.
+Hi Jonas,
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Chris Morgan <macromorgan@hotmail.com>
-Cc: Dragan Simic <dsimic@manjaro.org>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Kostya Porotchkin <kostap@marvell.com>
-Cc: Matteo Lisi <matteo.lisi@engicam.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Sam Day <me@samcday.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: u-boot-amlogic@groups.io
-Cc: u-boot-qcom@groups.io
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- arch/arm/mach-rockchip/board.c                |  8 --------
- arch/arm/mach-snapdragon/board.c              |  1 -
- arch/arm/mach-tegra/board2.c                  |  3 ---
- board/Marvell/octeontx2_cn913x/board.c        |  5 -----
- .../amlogic/odroid-go-ultra/odroid-go-ultra.c |  2 --
- board/dhelectronics/dh_stm32mp1/board.c       |  2 --
- board/engicam/stm32mp1/stm32mp1.c             |  3 ---
- board/google/veyron/veyron.c                  |  6 ------
- board/samsung/common/exynos5-dt.c             |  4 ----
- board/st/stm32mp1/stm32mp1.c                  |  2 --
- drivers/power/regulator/regulator-uclass.c    | 10 ----------
- include/power/regulator.h                     | 20 -------------------
- 12 files changed, 66 deletions(-)
+On Wed, 26 Jun 2024 at 17:16, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi Simon,
+>
+> On 2024-06-26 17:59, Simon Glass wrote:
+> > The code here is confusing due to large blocks which are #ifdefed out.
+> > Add a function phase_sdram_init() which returns whether SDRAM init
+> > should happen in the current phase, using that as needed to control the
+> > code flow.
+> >
+> > This increases code size by about 500 bytes in SPL when the cache is on,
+> > since it must call the rather large rockchip_sdram_size() function.
+> >
+> > - Drop the non-dcache optimisation, since the cache should normally be on
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v5:
+> > - Move setting of pmugrf into the probe() function
+> >
+> > Changes in v3:
+> > - Split out the refactoring into a separate patch
+> >
+> >  drivers/ram/rockchip/sdram_rk3399.c | 33 ++++++++++++++---------------
+> >  1 file changed, 16 insertions(+), 17 deletions(-)
+> >
+> > diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> > index 3c4e20f4e80..b259e8e3dd6 100644
+> > --- a/drivers/ram/rockchip/sdram_rk3399.c
+> > +++ b/drivers/ram/rockchip/sdram_rk3399.c
+>
+> [snip]
+>
+> > +/**
+> > + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
+> > + *
+> > + * Returns: true to do SDRAM init in this phase, false to not
+> > + */
+> > +static bool phase_sdram_init(void)
+> > +{
+> > +     return spl_phase() == PHASE_TPL ||
+> > +         (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
+>
+> This still need to check for !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL)
+> to be correct, else you must build with both CONFIG_TPL and
+> CONFIG_ROCKCHIP_EXTERNAL_TPL or the generated SPL will incorrectly try
+> to initialize DRAM.
+>
+> DRAM should only be initialized in TPL or ROCKCHIP_EXTERNAL_TPL,
+> or if none of them are defined in SPL. All other phases should
+> just read and report dram size.
 
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index 8a57b8217ff..a1933300653 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -202,14 +202,6 @@ int board_late_init(void)
- 
- int board_init(void)
- {
--	int ret;
--
--#ifdef CONFIG_DM_REGULATOR
--	ret = regulators_enable_boot_on(false);
--	if (ret)
--		debug("%s: Cannot enable boot on regulator\n", __func__);
--#endif
--
- 	return 0;
- }
- 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index b439a19ec7e..feb2a1157de 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -162,7 +162,6 @@ void __weak qcom_board_init(void)
- 
- int board_init(void)
- {
--	regulators_enable_boot_on(false);
- 	show_psci_version();
- 	qcom_of_fixup_nodes();
- 	qcom_board_init();
-diff --git a/arch/arm/mach-tegra/board2.c b/arch/arm/mach-tegra/board2.c
-index 479137e457c..193220f29c9 100644
---- a/arch/arm/mach-tegra/board2.c
-+++ b/arch/arm/mach-tegra/board2.c
-@@ -187,9 +187,6 @@ int board_init(void)
- 	warmboot_prepare_code(TEGRA_LP0_ADDR, TEGRA_LP0_SIZE);
- #endif
- 
--	/* Set up boot-on regulators */
--	regulators_enable_boot_on(_DEBUG);
--
- 	return nvidia_board_init();
- }
- 
-diff --git a/board/Marvell/octeontx2_cn913x/board.c b/board/Marvell/octeontx2_cn913x/board.c
-index 3d20cfb2fab..3ffe15d42b8 100644
---- a/board/Marvell/octeontx2_cn913x/board.c
-+++ b/board/Marvell/octeontx2_cn913x/board.c
-@@ -23,11 +23,6 @@ int board_early_init_f(void)
- 
- int board_early_init_r(void)
- {
--	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
--		/* Check if any existing regulator should be turned down */
--		regulators_enable_boot_off(false);
--	}
--
- 	return 0;
- }
- 
-diff --git a/board/amlogic/odroid-go-ultra/odroid-go-ultra.c b/board/amlogic/odroid-go-ultra/odroid-go-ultra.c
-index 8f3f2045d74..f9412071737 100644
---- a/board/amlogic/odroid-go-ultra/odroid-go-ultra.c
-+++ b/board/amlogic/odroid-go-ultra/odroid-go-ultra.c
-@@ -16,7 +16,5 @@ int mmc_get_env_dev(void)
- 
- int board_init(void)
- {
--	regulators_enable_boot_on(_DEBUG);
--
- 	return 0;
- }
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index 4f4f537fee5..24c5f37c12f 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -622,8 +622,6 @@ static void board_init_regulator_av96(void)
- static void board_init_regulator(void)
- {
- 	board_init_regulator_av96();
--
--	regulators_enable_boot_on(_DEBUG);
- }
- #else
- static inline int board_get_regulator_buck3_nvm_uv_av96(int *uv)
-diff --git a/board/engicam/stm32mp1/stm32mp1.c b/board/engicam/stm32mp1/stm32mp1.c
-index bc2af66d8e9..56557d56429 100644
---- a/board/engicam/stm32mp1/stm32mp1.c
-+++ b/board/engicam/stm32mp1/stm32mp1.c
-@@ -37,9 +37,6 @@ int checkboard(void)
- /* board dependent setup after realloc */
- int board_init(void)
- {
--	if (IS_ENABLED(CONFIG_DM_REGULATOR))
--		regulators_enable_boot_on(_DEBUG);
--
- 	return 0;
- }
- 
-diff --git a/board/google/veyron/veyron.c b/board/google/veyron/veyron.c
-index 53c3435c92f..055c1c5fc6d 100644
---- a/board/google/veyron/veyron.c
-+++ b/board/google/veyron/veyron.c
-@@ -61,12 +61,6 @@ static int veyron_init(void)
- 	if (ret)
- 		return ret;
- 
--	ret = regulators_enable_boot_on(false);
--	if (ret) {
--		debug("%s: Cannot enable boot on regulators\n", __func__);
--		return ret;
--	}
--
- 	return 0;
- }
- #endif
-diff --git a/board/samsung/common/exynos5-dt.c b/board/samsung/common/exynos5-dt.c
-index 56862bcb34d..68edd1ec282 100644
---- a/board/samsung/common/exynos5-dt.c
-+++ b/board/samsung/common/exynos5-dt.c
-@@ -88,10 +88,6 @@ int exynos_power_init(void)
- 	if (ret == -ENODEV)
- 		return 0;
- 
--	ret = regulators_enable_boot_on(false);
--	if (ret)
--		return ret;
--
- 	ret = exynos_set_regulator("vdd_mif", 1100000);
- 	if (ret)
- 		return ret;
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 97532a8156f..d5e5e776d2a 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -665,8 +665,6 @@ int board_init(void)
- 	if (board_is_stm32mp15x_dk2())
- 		board_stm32mp15x_dk2_init();
- 
--	regulators_enable_boot_on(_DEBUG);
--
- 	/*
- 	 * sysconf initialisation done only when U-Boot is running in secure
- 	 * done in TF-A for TFABOOT.
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index bcbcec1567e..7d59d0f0cbd 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -520,16 +520,6 @@ static int regulator_post_probe(struct udevice *dev)
- 	return 0;
- }
- 
--int regulators_enable_boot_on(bool verbose)
--{
--	return 0;
--}
--
--int regulators_enable_boot_off(bool verbose)
--{
--	return 0;
--}
--
- UCLASS_DRIVER(regulator) = {
- 	.id		= UCLASS_REGULATOR,
- 	.name		= "regulator",
-diff --git a/include/power/regulator.h b/include/power/regulator.h
-index 5363483d02a..f49bcf76b68 100644
---- a/include/power/regulator.h
-+++ b/include/power/regulator.h
-@@ -414,26 +414,6 @@ int regulator_get_mode(struct udevice *dev);
-  */
- int regulator_set_mode(struct udevice *dev, int mode_id);
- 
--/**
-- * regulators_enable_boot_on() - enable regulators needed for boot
-- *
-- * This enables all regulators which are marked to be on at boot time. This
-- * only works for regulators which don't have a range for voltage/current,
-- * since in that case it is not possible to know which value to use.
-- *
-- * This effectively calls regulator_autoset() for every regulator.
-- */
--int regulators_enable_boot_on(bool verbose);
--
--/**
-- * regulators_enable_boot_off() - disable regulators needed for boot
-- *
-- * This disables all regulators which are marked to be off at boot time.
-- *
-- * This effectively does nothing.
-- */
--int regulators_enable_boot_off(bool verbose);
--
- /**
-  * regulator_autoset: setup the voltage/current on a regulator
-  *
--- 
-2.43.0
+Thanks for the info.
 
+The reason I am finding this hard to understand is that
+ROCKCHIP_EXTERNAL_TPL does not appear in the code as it is. So I
+cannot figure out why it needs to be added. Is there a bug in the
+current code, or does my patch introduce a bug, or...?
+
+Regards,
+Simon
