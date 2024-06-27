@@ -4,74 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D3BC2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 14:42:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54194C2BD09
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 14:42:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B211D8852A;
-	Thu, 27 Jun 2024 16:42:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1ECAD8855B;
+	Thu, 27 Jun 2024 16:42:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qcbKRJnl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J31h2xfi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63CC187AEC; Thu, 27 Jun 2024 16:42:04 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id E1B7787AEC; Thu, 27 Jun 2024 16:42:11 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A7A58852A
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 16:42:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4A9A88571
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 16:42:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-701f397e8ffso242988a34.0
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 07:42:02 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3cabac56b38so4646374b6e.3
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 07:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719499321; x=1720104121; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719499328; x=1720104128; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8VuU6QGPJcyFO5NJZXYFEqvXPhrCM94mUOVysHFai14=;
- b=qcbKRJnlV4i6rjzX45dE+CqRiS/YBonX3NpQq2jwF50yHgdQLXzuEs54+TxKNeLCjC
- 174/4uOf4IGG739lvbAuoLKCEL8zugc/SYspiMY8o1Xk3c0KAnoaEj8236wu5ELVybP8
- Ug93T6OB/KGSyfUJcR7gBI3gOtrHKAVerScOE=
+ bh=w3nFEvu7bYDmik9c3n+5BIHp0kV+7S6TY9zg/VN6SI8=;
+ b=J31h2xfiW1w9bxf5Yz0EDg4PJkXo9juie8jK/UMKuFx3BjvWqwZfizg3w7Ah6B16d6
+ IsE3ThvbqjYmcOOpuNf4/D9Jcgn164X9nWHTU2iqi6BXibyqGI7Hpy+BlUD97JADXAWM
+ 0RoIcy7qylNuW8ZycvAoXR2kBGfPa37tZEkic=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719499321; x=1720104121;
+ d=1e100.net; s=20230601; t=1719499328; x=1720104128;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8VuU6QGPJcyFO5NJZXYFEqvXPhrCM94mUOVysHFai14=;
- b=sLqDMirFhGIZ6kzmWU4vyzqGbDCSFo6amPUdRHB7ipTvTlyi4huDf9lMYFWzRDt2nJ
- bGZt5FE3w2pqKm/vdd5R565u+49cr6M2dAXbajncpVjRiSP0vnW4eeeO5KbpekqQLoOX
- aztqcwFPTWuoJOfiLHJGwWgtf+p7uKEo7IIbfjJ8kqZrzgHYFJ1IkEmGGPC75WKtMIsc
- EpSdJ1bnsy4fiAIEVZvBEa9SLZ7jQWdgWON4/VuwxutuJR1yAP8F+UF1RcY02fLbOG1X
- Ffjehn+JZOlkDTUJKoELt7UubwaA+ZiC8zM1bc23O9DRp2AbqUymiOtx0civFHOf1NwZ
- n9eQ==
-X-Gm-Message-State: AOJu0YzZ752q4uya//swiU76+XJDbeZegxwQU7LV6b+rrETGpIXMgWWI
- 4mDZLQ30LUGIhYYOH4m2f67NW7uD0skVGpUmViFV7rLYiWBw/z0GYLlzEwjmvdg=
-X-Google-Smtp-Source: AGHT+IFWbMRxzkVJkdFDPqdI6a7SqR1ntdQnJB85rzyJV4wJjDoMqhU7lXq7uv7LWES1/aH5/6V3kQ==
-X-Received: by 2002:a05:6870:a98a:b0:250:7dba:9501 with SMTP id
- 586e51a60fabf-25cfcf2f0c6mr15005109fac.41.1719499321005; 
- Thu, 27 Jun 2024 07:42:01 -0700 (PDT)
+ bh=w3nFEvu7bYDmik9c3n+5BIHp0kV+7S6TY9zg/VN6SI8=;
+ b=KAL2E6tWOqjPYbdOw2m8tHXTTtnxj+S3JsjPLy6hcr+mARDgA3tWg6LlTuVSKEji+y
+ 2ilrXyuj6kS6jDHLtBuO68CL6B+r1e70UzwMQ7zEV5MYgKA5FfaLUh37Aqdr+g4KQGi0
+ BRNE8jBxVr3ymGp7ZeHreiCQMgdKayXw37dOAND+HAVoLQ6Jftm1gdDpKgloj2q+mxwk
+ 4RWBK6KSrpaLdiaLjHd/KXpGEPbzHP/mVKSkdK1gwfmkdHCEtlSGVXBYBcMl8R0U4l47
+ +n8wBqaQ5ECqMpHjIQfdP0YaNjFp36n8QpXAJxO6fnuKgI4hdotGa3siZGLsUjeRaVsq
+ kvyg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXW2fOS8HJ4+CEKvuyxF6D2GhNTK7qP/YzmYtPmF/+u0KfOevzPRfMgw5KPS+IPHHSnv+RIXFhcdzxzP9ZJWW6bu85f5Q==
+X-Gm-Message-State: AOJu0YyfWi7sYznTXGYiJFEhikAM2pJeiFYHldkeuFpO1aIu5bvtS2g7
+ QliCsTeinHZmUeCwz9tXX7CT+X3LbLpvAw0+KeOM7F7WldO+UUj24BqbxkBzPZw=
+X-Google-Smtp-Source: AGHT+IHqn8mp92ij3LEy9jM4SKZj9J75vAk0U285JCLnkSymGnvKz7PdfmrruttoJJCbAkjN2XZkGQ==
+X-Received: by 2002:a05:6808:16a8:b0:3d2:271d:37cf with SMTP id
+ 5614622812f47-3d543b3ff77mr16218212b6e.30.1719499328474; 
+ Thu, 27 Jun 2024 07:42:08 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25d72d552c7sm372468fac.41.2024.06.27.07.42.00
+ 46e09a7af769-701efbe8a84sm299529a34.8.2024.06.27.07.42.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jun 2024 07:42:00 -0700 (PDT)
-Date: Thu, 27 Jun 2024 08:41:58 -0600
+ Thu, 27 Jun 2024 07:42:08 -0700 (PDT)
+Date: Thu, 27 Jun 2024 08:42:05 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: u-boot@lists.denx.de, sr@denx.de, rasmus.villemoes@prevas.dk
-Subject: Re: [PATCH] arm: davinci: remove unused defines
-Message-ID: <20240627144158.GA38804@bill-the-cat>
-References: <20240619105958.43083-1-emil.kronborg@protonmail.com>
+To: Anand Moon <linux.amoon@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Minkyu Kang <mk7.kang@samsung.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ uboot-snps-arc@synopsys.com, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v2 00/40] mmc: dw_mmc: Enable eMMC on E850-96 board
+Message-ID: <20240627144205.GB38804@bill-the-cat>
+References: <20240610011226.4050-1-semen.protsenko@linaro.org>
+ <CAPLW+4=xXM8m7y030kcxTBwgLfm_cud8HYrwF0k75=GOg==zAg@mail.gmail.com>
+ <CANAwSgSw3ZkZBaVeAUoj6hCtGoydEmMEoLBaEkU4JW586M5TEA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w5HJtZS/ehpRWjil"
+ protocol="application/pgp-signature"; boundary="Fq6BoOnuDfxzcoiR"
 Content-Disposition: inline
-In-Reply-To: <20240619105958.43083-1-emil.kronborg@protonmail.com>
+In-Reply-To: <CANAwSgSw3ZkZBaVeAUoj6hCtGoydEmMEoLBaEkU4JW586M5TEA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,41 +105,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---w5HJtZS/ehpRWjil
+--Fq6BoOnuDfxzcoiR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 19, 2024 at 11:00:01AM +0000, Emil Kronborg wrote:
-
-> The last usage of the DV_TIMER_ and DV_WDT_ definitions were removed in
-> commits 8d7757637138 ("ARM: davinci: remove support for cam_enc_4xx")
-> and cef443c1666c ("arm: davinci: remove leftover code for dm* SoCs"),
-> respectively.
+On Wed, Jun 26, 2024 at 10:12:12PM +0530, Anand Moon wrote:
+> Hi Sam,
 >=20
-> Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
+> On Wed, 19 Jun 2024 at 02:26, Sam Protsenko <semen.protsenko@linaro.org> =
+wrote:
+> >
+> > If there are no new comments on this series, can you please apply it?
+> >
+> > Thanks!
+>=20
+> Tested on Odroid XU4 and Odrroid U3 boards
+>=20
+> Please add my
+>=20
+> Reviewed-by: Anand Moon <linux.amoon@gmail.com>
+> Tested-by: Anand Moon <linux.amoon@gmail.com>
 
-Applied to u-boot/next, thanks!
+Thanks, Minkyu will you be able to pick these up (and other outstanding
+patches) for a pull request to -next soon?
 
 --=20
 Tom
 
---w5HJtZS/ehpRWjil
+--Fq6BoOnuDfxzcoiR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9ejMACgkQFHw5/5Y0
-tyxDDQv/evxvwFRS9pna+hrUbbrgb2RNSHsK0OyT1Jetkwlobm7jEBltZKp7FHKV
-8bWug8VTngHutUl/MNH1kE1LWLQLjCZkqHrpVxwRzbmGJExwP8PeAcB0kFiiPzjm
-+hHkkLJLtjbNi5TgH/c27Dv20kzEdwfKxeIAEKF9HEhNBVXX9dLBaH5Ylc83v29+
-CIciXxN84ihGB/LDnb0gHSB60oh2W+WBiu1zD423nT7tGYmUzmFRFnG8gR4RqjlC
-boBFwCN+hZVBUyNl7i7CTRyK2DbwnxShiGknE4bQeK3a//IrEfTzM3jQc2meE1dg
-qWphyUgVdpCsbNnTcqelZIu8d95M+QRYUswKtsZYxWa8AQPpnIhAKlDfy0gZb4j8
-l1zF54Tax/G8aqVkwmX+r070D8YrjUx/vwoa+xqpDxE/vaTH00BQFd7AsXBRiMmd
-70IxrNchLFT21U3KPmYynQE+J0MeEHbDDVYAgIl5bV/diASBg0VmarDyxMjHe5dl
-K8uOKUlX
-=ZAiK
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9ej0ACgkQFHw5/5Y0
+tyw6zAwAnMKMslV00EoaSJ/3fjMnGrztzL3vpfXnio9hG3HgyLaxbdf/Oz1f6ptp
+cOzwzgKfVOomeM+gbYHAVakyrDnFmi5FnIu0lGzOU87vL20THdlSD2EwETePLOT9
+Ca/pR9/QQl/GSfNA8ddtvrXnR2DqENa+ulHzMckBo4Ze9HIjBomscKjjENTZPRw1
+quWu4Cn/LbZQWZUzUc49cGtRpa1OOGwX0Ju4YFmmAjuFAZIlmUzLeyAfPHkVrFW9
+0TbaXKs+Jld6YLb8Q3aneLKpwtLqCu8GGj//8bf6C61sHVqNV67RR50RBI8d5RS1
+IAkoZ0N+K1FhdW4YRw9AYuVwI53HKKsd/7UtZ7oe5bPp+wktAaV2K8RU3s65Vf6G
+EuIbpE18xbA26djiaW9ylevYtS1zFhg7wjBpN3VUVqZtSh5R0tuqkQInA6geP1Sr
+cDKKvFUA7Ken8Oes0v9FykX+lIBcUyJWn+7sPI+VYQled9rytic6HI1Wlyp5L0I7
+LpEETedd
+=ccai
 -----END PGP SIGNATURE-----
 
---w5HJtZS/ehpRWjil--
+--Fq6BoOnuDfxzcoiR--
