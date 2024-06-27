@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7E8C2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 11:40:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1301CC3064D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 11:40:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9066088582;
+	by phobos.denx.de (Postfix) with ESMTP id F1216885D7;
 	Thu, 27 Jun 2024 13:39:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="pa92WUdq";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="aOIJ1Qiw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE11D885CC; Thu, 27 Jun 2024 13:39:54 +0200 (CEST)
+ id 0F17D885F4; Thu, 27 Jun 2024 13:39:55 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::700])
+ (mail-vi1eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 033CC885D4
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 13:39:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EAE5885DF
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 13:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Cd4BQ7eSG5QWof0xnonzaLCNcfKhaGa51AZIZ6KXC9tG4QGOOx4WvUs2CGI0wNT28VSwGVuAp70B+IbGhMCtzrCQARpNUpYfRx4tJ8p802GHzJx1iromKUmWb00sua4YS5Wf3LHMSQlIv80MD72A/r5QoO1pF5rNe/6wkOIKhwHOyJgSv25u/X8PvKjtwDIKO6dtwHJa055NjwMNPdEkc6+ErzCd6kFB+6SzKFu0i0yDm9wRWj+6OzqhCxdr+Lw0iHnu79ZCMybsFIogFsCJNNKZcfjHAkdBWue+oQSwjO/uO7dyTxbuymAVHJx12lzM7B9xYfwLUkJJ0HwkCJfu2g==
+ b=P7M0tl+7hN+9rWYBinbH9EPVTAy80ZxeSAPR4oVBxqErAAw6tipUzyGQ8arAtYo4EXyGqFjWYln0pnj/+94YgtlhdGp6POpx57YaoifHtNCqn1/WSrbLeZKVKDrSc8rlFtEl+TxbYyroC3IiG5kaYGcdGTM47oYawfJcuMIK6NTCYt40Q0VvjCBt+tjWehuKyiiLC8CuHjfGWmfFPWXFvdvfS+rgKLmEqokbEAMPr+2T/Netbe0mSpTN//geRDwHL/AN6E1vqNAQxsF3OiI6K1ak9kIcb7Q+jKCMkCVDcxcXEiezUaDp6mhRrVOok+aj4OY6IZn7G4RUiye7ZbIPuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E9mixrsFSVSkB8hOUJO2kKNC/w62S8gMTBZbl/yLX8g=;
- b=UOaJU+8ZpM4iPB3Lxi8BjDu48eHCPfm3Y1MLUr1fvsXvWSuJbgBVneJfJA825XCLe9PdRHzdaBlIfIIJ4PUpa1JQv413RNxdNI2QvMGxGD/gsttqWIFR+y+RnkvhaB2GR7VyzLWp+Kv57Gpc6Is60VB6OZxWRchjKIseI/KtW8ZPmJWgnfXZgfNs/SuWrJN90P85M9dusc1MYQtL8+nUZtOo8NRhz9mEKZz9smp3CH2ciEN2YhQcrvj72m+/+5rStD3Y8FlC9aM8YQljRmtQFtSI5H6aNVdrbFaRaLMC775dkRiTtHIsGbU1lLDAQgyKTAhmC7c5j3KJGrW0mLX7Cg==
+ bh=zVi1oJiTw/nBTiqVwS0NLxjth0b1g4/gSIAMWaN97AE=;
+ b=ep0lpeLwJaEEWwozra2RXjzQsxeWVLfykMY6Mc4+MGHD2FUKDo05AY+o31518s8wYTUYC5qAsOVuvBQlXOBNWX6ObeyHWiCSGVkgwXPfwKKvkeW30j406RmFXDm5+8JDRF9Hu/5+zCOW58vPju4JwrdJBDfyql4GjwWO5ujzkoHxDZh9fAtFHa3v0NVyUqyDH3cgBsXcGP41OReZ/fEU0oJRXd6yEVCQEaRayYMF4VW2gN1TS3bururmuE8Nd7OCFASdtQfe+1f3Vt94PqxzSPbgq1ZwG41LhjddhuntVhf7CFiZ9kFOElM/6JZ6Xlj3dGWtupB0FWMcMzp5woNPSg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E9mixrsFSVSkB8hOUJO2kKNC/w62S8gMTBZbl/yLX8g=;
- b=pa92WUdqnJalKKb2kLGK1aVndUhc55MsEyco+oGH2sQ5v6p72n2sfLwIhjkP27zJWHTQMChCX2EcRz214eH95Pnql2NyJCEEq10KKvSREe6wIx3wu4Vl/ab3U7vYcBOcoP7sutIM+B4FQ9bckSIYYocrDDHYT6p3ES1nYk98DWnSM4tX3lDcKr4hfGV56iUpt4sZ1FYeBlui+sfgrDdskh2uNk25FO2WVW1elpf1A3JBXBDn7y2IXjPrUpsc8HLEHYKsJPCgevXrjxQvuWumXhQpYTsay8GBL8LqItk05QFG02yk3PXHUlspfUEniBFXmS2pkXIFRq+8/zfVR8qqow==
+ bh=zVi1oJiTw/nBTiqVwS0NLxjth0b1g4/gSIAMWaN97AE=;
+ b=aOIJ1QiwZfOYLrqzVQJ5Wt5KLcHeIgkgnB6u0wTOHGWEf8gCAofv6Q7gp2WZ+3kko3jHh5d5KjKUO6kocWeGaq0emOC1h3/4qs4JZjc6WeSbuGVEsKSI/wdetuIzsYHv+i1qNf+N5N4Q7UNELIqSGc1gzOx98tR09U9j6NO9owj9Ifs+Ujx0g9FzTqGNnF533KHa+KoMcvwJmG67A4r3vk6Avslt8d6IowauwnB+ZClmkQR6A7+sybDcWW/1k7SjeaoTLKNUvc8pQdAUE6wt/E/uGjZEgOrT7pOzNYaGfBVHIVqd+FH07kTWYLAFIOT6KxV0apvLgt0ITGxdHaDBgw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by VI0PR08MB10427.eurprd08.prod.outlook.com (2603:10a6:800:1b8::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.35; Thu, 27 Jun
- 2024 11:39:48 +0000
+ 2024 11:39:50 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7698.025; Thu, 27 Jun 2024
- 11:39:48 +0000
+ 11:39:50 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -68,9 +68,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Baruch Siach <baruch@tkos.co.il>, Siddharth Vadapalli <s-vadapalli@ti.com>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>,
  Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
-Subject: [PATCH 02/12] net/tcp: fix selective acknowledge
-Date: Thu, 27 Jun 2024 14:39:29 +0300
-Message-ID: <20240627113939.100620-2-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 03/12] net/tcp: preparing for multiple connections
+Date: Thu, 27 Jun 2024 14:39:30 +0300
+Message-ID: <20240627113939.100620-3-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240627113939.100620-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240627113939.100620-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,78 +82,78 @@ X-ClientProxiedBy: GV3PEPF00002BB3.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|VI0PR08MB10427:EE_
-X-MS-Office365-Filtering-Correlation-Id: a984a6d9-60fe-4cfb-bf13-08dc969dd9b5
+X-MS-Office365-Filtering-Correlation-Id: 6dc0343c-a67a-4e20-3494-08dc969ddaaa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|7416014|52116014|1800799024|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?215HJ+47MBv6S3Xhn0q4vGo5ck9hRTWwtFuLkwb+M2lB+Q7U324pzo4ad6uk?=
- =?us-ascii?Q?+RhyKTokTq944/SxAoYVRodkWtbeeEZYlp9CQdpt1Vq9SiBsx6FyZriaxKcz?=
- =?us-ascii?Q?Ee79BzfhlQhHrl+dQDwsX10Rm394Om/Pk+PkClLxJM17Y/YeV/rKHQmwqgyT?=
- =?us-ascii?Q?8tuSoHlY79rlDcpHwl4BCoQyTRqJKTJqCtwZckgWSYz2OdWCWnHTnrj6iei8?=
- =?us-ascii?Q?Vd3cD+YYxag9QLSI5UKX9wlxAcEikBaGU5hoGdKgOust/OIHoqq7TCK3Yjpm?=
- =?us-ascii?Q?K9EfBZwLJ5WUu8sqeFgBJB5Zpxgc68AhQq0wuLd3FKQjOCUXOfrHbasTVQBB?=
- =?us-ascii?Q?rb6Ij77xUC4L4KVKM3zLwa/FiOrfVf3sYHJ9KDNxf0yWzjiAjT410do6hCPr?=
- =?us-ascii?Q?4n7OEH//9OGaFReup3YwYBT0BfK4BL4pXpX4rGTJgmH9W9mnd0nTwYU0zVVb?=
- =?us-ascii?Q?IzG/idUQfRMczeey5tzJeLmCox3Iikk4HLrZH9pGjiiA8Kl9Gj9PCdUKPtM+?=
- =?us-ascii?Q?aFIbuYCRbx5y+hNN4ShP3qIgcFi8T3YiwJY0hJxAucq0ktqON9u/eiUgi1JD?=
- =?us-ascii?Q?r/LIuKQt2Iz9cHEI1D6JcCEUkYKniYR8xYJALc4RdqO743j+sSxEFzuMy3ov?=
- =?us-ascii?Q?Am2nlEhhjvSdv+50UdrG9TOdvRGpruY9ephydCh2zsylvYlt5TDWhMyOUxJu?=
- =?us-ascii?Q?9zt3DGvgp3bbu61BrtLrXnqU1PK056QZE0VvfsGZgNXI6k55PWXtAMDp44jx?=
- =?us-ascii?Q?cpAjrYpjdX4fhf7qaaexdrCYd4/v02Csx27paRTDcw2SUcxpTaEw1knLXlVc?=
- =?us-ascii?Q?UnQz1h9qQW6Crk/rT0+TZDBwVHu4vDcfcDCpN87oiq90TeteDKrl9AAa6+8P?=
- =?us-ascii?Q?whvY15ZG/8RnYlUnb8w2FxEKXLlAjW9YHn4Ifb77Ymzxn+vDYjEsTTOzWDfh?=
- =?us-ascii?Q?Lm1B6vyzdxTrxMo7NuSVbS9UJjIFOG0v82oVv8JYlEug8SRBUWBoKl8q8zxm?=
- =?us-ascii?Q?1/W2h8a23P3XcaSQC8UB2rk4dsC4XsBC3gWzupq8Am7L50QoEDEgHTZsD3Jv?=
- =?us-ascii?Q?wfRfr8m8LzxfNs7VlqzK9hAndUIeue82MO9ZcJkN/yJ8rC4qP7i4Eon1rfTN?=
- =?us-ascii?Q?LZkvZzbkUMFhc0R1XbtgMbcgnLJ6AJKH5ouZAtBC4qMN1ijW3NuzBWz3xU9a?=
- =?us-ascii?Q?vP6vGULM7ZxrdhsKFkECaS8vy/LKb0Euz2OE4cF88N9EaHZqc+DqfxanZO0d?=
- =?us-ascii?Q?12uyCNGD2FchCKcntH1EkbD6XuZHre9ojzjJrHiPK4KiLstWUklLjM2APoPV?=
- =?us-ascii?Q?eC04ckhhtAmgffwzpWMtD5xxVf/gQbYboCdzxbEK1z7BPMwM52OTlcL19Hki?=
- =?us-ascii?Q?rPOpVf/t0NKoyCLfQdaWQDr7qcANENXB9iknBRN2mCU9UvxNQY8uiSJbV/0p?=
- =?us-ascii?Q?86zKjBbTtU4=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vxiocW5AfpzNwS3yemDgiSkjpEmeSYW9QOjqeVNdjjkEjZgk4L5YstWQHzu9?=
+ =?us-ascii?Q?aBdtOs3M1pCrT8oiEZzNndbF+H8d+piFJS5K9L6zy6rHPalDRdabZ8+BUcHF?=
+ =?us-ascii?Q?Z2pVnqacDfBDhTvdYWJUXORRzIVHy1I+sWDXxzA+kfHZyncNabevIEMsBrBL?=
+ =?us-ascii?Q?mifYHWFu7RCiYZCq4ATZC6T3zBC/0qOdW8rt+CfLNzTHPVd24L64+iVBtK5Z?=
+ =?us-ascii?Q?kxBgWv+99mB4tttmKzxFSQjFMjGbLSwQMC8CdrrmYFo71/+cbZAGX2jEWqbA?=
+ =?us-ascii?Q?L5txgy8qQh6/yK4bIdSVEN6LNydE8HV+OgdXvVBUBT5hrBW16k5jE5EN+f3G?=
+ =?us-ascii?Q?9NuxKlRmNBcvK9ygpFi84wF/GfOIFtOrS8+lNIemC2FCJstp0ZcO0UDK0PS+?=
+ =?us-ascii?Q?NJfliOHcAFHN8Gp7BCQagFPKzfXFJZnsM88y+j4jhnmlaHe8GUK1fyzZYk+B?=
+ =?us-ascii?Q?4tBAuiND7c+85LmX2ojpsUMlwbwSongW2exYrxhVxgLMR4ttjoSjZxN2z242?=
+ =?us-ascii?Q?JK/j0M3J1n78ovv1wUoQYZP11cGHYno9SsnDP1eU6P3muDtju1m+FHBImlCR?=
+ =?us-ascii?Q?SQODxodMQ6AIVw3rC+M9Fn0v2+2c0TxGiVzmnu1oCpNHb+ltWqP2v8i5fq8M?=
+ =?us-ascii?Q?fl7m9zGmLcdCz1Gi6cu8+eR3lTbM3XTBH/KcZ+XlAq52g/XWtmGqdy0iWcu2?=
+ =?us-ascii?Q?YGYf45srh1r5DPpLmZuzUErkJtxYrZuSIKndYnetHSB7QcrZpOyBvwQIRdO5?=
+ =?us-ascii?Q?xAddF7iVMDRCPON/cxGQuchwux4/10Vx5xEsGuleWuzc3D7mEAbXqGFBIjRg?=
+ =?us-ascii?Q?lfZO6qWbdiNKcMjZ/KyelT10Vii8ZI0wxfse0JbhKcvGxy1IVd6VsP6TXEN1?=
+ =?us-ascii?Q?x6Pyc9xjAYap7kCgbf1woDICEI/Z2pzm/LPqJ04CylKbLV8em5tuA+Xcl/zj?=
+ =?us-ascii?Q?sbKxiF9E/L4e0l9hBZO9UcGpFiVziR7l39efwPW9c1hleAKwaLTQ3cmwpP6k?=
+ =?us-ascii?Q?AYPBxLeysDj7H85KXbcnhdbWGuxH6O6fIuEZwSfnXnQljBk54HtJ1oxC4Mg+?=
+ =?us-ascii?Q?5Mh+0dvXQrGobtkyhN96TaE6LIWwKvOrUptRYsczT2yq0xrvKtmIJmu/tS3r?=
+ =?us-ascii?Q?mv3L3Je7POpcHEw3Ria5EYAiPhTxtxsOnN50mtRstKM8dtjlwbcEbaVS3HrP?=
+ =?us-ascii?Q?+8WEJY1eLefjzq+3Hl9Z8BPDphr6m1e+BVHmGRw3pXXWmwyq0jc8RG9m/m8e?=
+ =?us-ascii?Q?CcyU9YVT6b37V3TV1zAi2gVe3Cdb1EXnLZOrEO6SgDjxDEkQ+mTA2nIfUOZJ?=
+ =?us-ascii?Q?cBxbv0eToELudV4jT0ENoPnqHUEz5r9PVLQDqMl+HfE1IQhgcapIi7yWrV6/?=
+ =?us-ascii?Q?nw5ZPeA1hDjCIDBFaKG2NrKHv3F7NjIVQ9rf6F4cBj21crR+FWFEHp+JX+rs?=
+ =?us-ascii?Q?GKRCrOIItt8=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(52116014)(1800799024)(366016)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2S8avPMH3KD64K52DyYDeV2wGczzX/ZnqbEnvn7D5X2QKhDdL6tfhX+EfdXr?=
- =?us-ascii?Q?S4W5cOGWpJc0qNh8oaE4ZTnszM8euEAQf8v6V6P2u9vPSu8yMBlSkfaiyBOw?=
- =?us-ascii?Q?I6M4hQgctX6Agx8LYkqjAJAIWwzlqKbAteBOOZRvf6xnu58tmqr4Vvf+woiU?=
- =?us-ascii?Q?ofSPNSOUckg33L5vfoeLMXqfmdkgc9mZndOLDOyApy4N6/rML9wPQ4Qkn1bN?=
- =?us-ascii?Q?pX9G099Bylj+DETDczXsvzlT9D9XFCXpWfUKvdBjp72HLA6QsEFR07YyuJkd?=
- =?us-ascii?Q?wa+qcamGrda90dxXSFs/Q/TksDoWJK51Q4VGxjdapM8kpTs7KOAZLlW4uuDl?=
- =?us-ascii?Q?bzLpgNZWXNTJn5MtHyflTKwBfo3XtoJE4x6ZcZnpkDvZIvMq6HRNZ6qWHpGu?=
- =?us-ascii?Q?GtY48l+VC+PyzMF/xIco6jnQRW5vehc3Xvy6UigBKhkFVIt1AkAOUytGbdhk?=
- =?us-ascii?Q?b/AJzR4aLuWAGXXyvlAbAUoluruehbSdg5rMtrHpGvw26knSgwkexEcQwpML?=
- =?us-ascii?Q?jEg9axcD5UH1okvD1jdmwNF959NnWGKNd9LeELVTIbGaLqzv0aylGAPL2F/9?=
- =?us-ascii?Q?6qcVSUjcjdpIfmdkFfgYxrwIb2g0i1Fr1H+JWCbFNpGS6e/Cy12n0nFWaCrl?=
- =?us-ascii?Q?7LU0ui4q9kLLXMfP3MKkaQaDqKXOWfFQVWBy+YyiBwhzxobiwrVtrSy0iZnC?=
- =?us-ascii?Q?gOicpL4S1aDaRAFWzXNqpljd6w4yuijqVmr/c2QwUGsJpN8RK3KDeX/Trazx?=
- =?us-ascii?Q?v6FkfdGhCu0/Doy8FOGxqS+6BVBEhRjVHKVdDzKyFiOqVqRp7nmJkc6dtslE?=
- =?us-ascii?Q?fvup49HYzbCt0Y4P48HneZTNfsfKnOg12humLTLUUwb2+wQZbR2rnMdWD++w?=
- =?us-ascii?Q?NgvH9rPbwDEYaobryAavRRB0gDzZyncjHAzyzESkUAX8WxijDM9RIk8kFQkN?=
- =?us-ascii?Q?eUMLEOVbNX+gs603olLeTW7s2OuuuEh0sUaQUpR5RkMTtf6gwQtntJsMwhdC?=
- =?us-ascii?Q?i1VaEkRyyUFFnIvY5LXcvSzM6mE3VhfJtBTXXEEAhq2xYXlJ+CIJaB4xKXHt?=
- =?us-ascii?Q?V/VKop7IfkIqHqfmWPrJU8+X1PwY72ZTODZ9cWyAFp2kC/mTUI7AgiRHSUJT?=
- =?us-ascii?Q?h3Q2VHk/lttZykwaFNflmStw2dZ7SHTSqQxhriiR06t0mlC397H+3JxPoozi?=
- =?us-ascii?Q?YVMZ2/m9s2DAjCSYLMiRpgJNXUYrH7ImPbpPOsccebwF8ynDWqiAHaRXMnPT?=
- =?us-ascii?Q?2RSaWRz2wJxu26WvnYkIxfy18W2DgaNtqPM5qA6KZ5PReiY2/rT2dqmVcVP2?=
- =?us-ascii?Q?ScAXduWqvMFjRmmn3+ZkmhEBXPm+SYxpkydNbNrLd2KBjQ6r+3/+oiGkyM1b?=
- =?us-ascii?Q?NYPK7DNIoCCG4IN2tSMpjViHW2bGMxn7X5bqrCc8zAv4IVso88N1M37T3mkB?=
- =?us-ascii?Q?2cdqyEHnXUdvkCnf5sAKR4PwG8QtsDUG3bddsRv5wlfBwNcc/N3tVzkBljdJ?=
- =?us-ascii?Q?W7QifI4VgI4dafYo9Y/c59uefh5qZYrljKda9kpERD5L6iveY9t6S0iWQu+Z?=
- =?us-ascii?Q?iHCPvpgIO6dDhvav6FSJHkG1/i6r19giM6BriOG0AStc1RbyQfzOCe3VGt35?=
- =?us-ascii?Q?3LfaiS4+jd+yY98nKCmpiWs=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?mYwuqg5NoWdB7LT1Y1zFDDgBZU2MEEUItHx+vysT1tmfgdMfL9ewF82t5S3V?=
+ =?us-ascii?Q?58G/4nHCTt/cSmTH/PJXtigodzNBq9msXnieYLlISYxNNNyRKLjdKV1wUX8f?=
+ =?us-ascii?Q?XY5bWDU9bjo7KfodNOIOVjDeFrBhsYk0avia6HFwAziDiN7yF3iO1L4S0Boz?=
+ =?us-ascii?Q?+3Q3GIfASC8DQQBPmklUGgJhcSNtYKBGxzXGQecfZE4Wxr/3cP+bjbmkRA3W?=
+ =?us-ascii?Q?QSozMFPQttjn6lqxPB31D+jW3qPpcw3iWo3efxuqZWw3lo7Al6Y0fEpOwLEf?=
+ =?us-ascii?Q?LFevciVr01bezArcs2zMG13RgnrkmbaBNeoL4A5YDpg68qIjG7UzN9fyPdZn?=
+ =?us-ascii?Q?WkOgpFxQkbugvKRN1S/ghZo2CLSGzs+XoUV8HLbiyvTWtJXKEOSpJBq1zEDT?=
+ =?us-ascii?Q?eVLtmO+wscNBY16r3q+QMrYSk5HG5aaVm63pG9NkAgu2h8vumBVCgMEgEoFC?=
+ =?us-ascii?Q?RFHm3/mQVMOi/5daKHA9HAjZPqJStzpaW3+AOuqIGZd8a8c3MdCllm1vqapm?=
+ =?us-ascii?Q?MhbDsGnEQo8/BcjeelzZg1EtCFDGJD215pDTTqnFgTOkcypP47hESXms4E3u?=
+ =?us-ascii?Q?KsgZ6c6Sm/Kbk4h2IMtcby7Y2XyiS7/v8YMMbnb5/AbiY7AdRVgZ9N7nVY7M?=
+ =?us-ascii?Q?I20KJVFD80KvEnVJqpzcRsdPNaTUtvKCT41/qzuwsSJ4W5CAiCh2ORhWZmND?=
+ =?us-ascii?Q?EZhNBhGrmudWhJOMVkoZqMIaSaGRigcFGrHQBKN/0KLeqKgVBfTHkxI5JyMJ?=
+ =?us-ascii?Q?tT9WjrT7CpnZTvSIobbKK35/Afsw773snvMkdoI2HtPrgx8Ch2mYSklNZRZG?=
+ =?us-ascii?Q?J3wB8rwFr3MtZM3Ww0aJJKOFO67yTjZlw9CYlpf+4l7a9kW/Umohw6UPJWAT?=
+ =?us-ascii?Q?cw04KysIpOrCQWC23NPpbz0LswzxjjuoaARv8QHsg8LHyOwspy52fZ4PHaa7?=
+ =?us-ascii?Q?uRUglLlFSgKfkOSbfYxV6rUR/rqbG0fsUUU8syk2NaJgyljGi7DMVGQ8RZkY?=
+ =?us-ascii?Q?DLS9gCIct5Cxd3ellae787dJQKUd5OKiIFbBTUXQ9bPkptBKxN7lCnI7T8YR?=
+ =?us-ascii?Q?mRWS1E489d4Z1fwHOXZVtR23Ks6Huc5qM1z09RRqqjWLJfuBRktzTz8Qd6yL?=
+ =?us-ascii?Q?vgt3dIbdioW1NyXdqr+5bT9fCbZcB2Dvh5KKeKnsDxX+qI1JFIn2U+msRYsl?=
+ =?us-ascii?Q?j0w8eRY4jpi1dQNBGmp17McxFOVMtC0qq6ekFs9VkXPnLGd1ulSm9qHoTrn1?=
+ =?us-ascii?Q?8Vc9Nwmq46xV0+k2H7H21PDoLpX1NxJWvsjpBnyYIS+4F+SP+Szb5qpRV3aG?=
+ =?us-ascii?Q?Byd0Opsyuep1x/28qFZvmNkLT0iC2fjXSMXP3ToOTmag0ARaKgIfhnSBL6f9?=
+ =?us-ascii?Q?l+rnCLc/TcBdAM4m8A/ztQhtqod8GmgZM8gk/8Rq3sryMEIPviC7VyIyYSKF?=
+ =?us-ascii?Q?oDk1K27dcS8mmA2ivR8f3ZrY2wCO7cFGU9Q5MdqyQYn4bYy0xSimXk02ZD/z?=
+ =?us-ascii?Q?h6vZGnMXb8dSX6pkxVmKELYehdSZMnOel6IqfwyAoN307xMYGECAecHPcHxU?=
+ =?us-ascii?Q?CB0UNmciyKCdpyQKX1OoU0L6r6R9+P0YX+Oy7uZZ1pfD3g5ZhwQmOROU5Kld?=
+ =?us-ascii?Q?XBDnVS9aRp/lAccel3UxqCM=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: a984a6d9-60fe-4cfb-bf13-08dc969dd9b5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6dc0343c-a67a-4e20-3494-08dc969ddaaa
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 11:39:48.7970 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 11:39:50.3923 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D8+EJq3CfvE7cEOkshZgnPFHKEh2Rq9fQApNRsBGM8lO2IOovrYdZkjqmqvT0AbFGLpOom21+Jub5ET/jbNzZc8FGPUlkoSoI/pe6PbyV6I=
+X-MS-Exchange-CrossTenant-UserPrincipalName: dZlDaFbysQJGrMrZyBjf7wW0O/SVowHF4pHDtd97iDM50r+POlX1lBlcuAi6PaDyqaeu2pYT8Z0bwqTg0veiJAV/eA6WYsaGaWl192NkA3w=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB10427
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,284 +171,670 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current code assume that all (except last) packets are of the same size.
-This is definitely wrong. Replace SACK code with a new one, that does
-not rely on this assumption. Also this code uses less memory.
+no functional changes, just put connection specific data
+into a tcp_stream structure
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- net/tcp.c | 200 +++++++++++++++++++++++-------------------------------
- 1 file changed, 86 insertions(+), 114 deletions(-)
+ include/net/tcp.h |  37 +++++++-
+ net/net.c         |  11 ++-
+ net/tcp.c         | 231 +++++++++++++++++++++++-----------------------
+ net/wget.c        |   3 +-
+ 4 files changed, 163 insertions(+), 119 deletions(-)
 
+diff --git a/include/net/tcp.h b/include/net/tcp.h
+index c29d4ce24a7..14aee64cb1c 100644
+--- a/include/net/tcp.h
++++ b/include/net/tcp.h
+@@ -277,9 +277,40 @@ enum tcp_state {
+ 	TCP_FIN_WAIT_2
+ };
+ 
+-enum tcp_state tcp_get_tcp_state(void);
+-void tcp_set_tcp_state(enum tcp_state new_state);
+-int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
++/**
++ * struct tcp_stream - TCP data stream structure
++ *
++ * @state:		TCP connection state
++ *
++ * @seq_init:		Initial receive sequence number
++ * @ack_edge:		Receive next
++ *
++ * @loc_timestamp:	Local timestamp
++ * @rmt_timestamp:	Remote timestamp
++ *
++ * @lost:		Used for SACK
++ */
++struct tcp_stream {
++	/* TCP connection state */
++	enum tcp_state	state;
++
++	u32		seq_init;
++	u32		ack_edge;
++
++	/* TCP option timestamp */
++	u32		loc_timestamp;
++	u32		rmt_timestamp;
++
++	/* TCP sliding window control used to request re-TX */
++	struct tcp_sack_v lost;
++};
++
++struct tcp_stream *tcp_stream_get(void);
++
++enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp);
++void tcp_set_tcp_state(struct tcp_stream *tcp, enum tcp_state new_state);
++int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
++		       int sport, int payload_len,
+ 		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
+ 
+ /**
+diff --git a/net/net.c b/net/net.c
+index 0fb2d250773..8f076fa18e3 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -416,7 +416,7 @@ int net_init(void)
+ 		/* Only need to setup buffer pointers once. */
+ 		first_call = 0;
+ 		if (IS_ENABLED(CONFIG_PROT_TCP))
+-			tcp_set_tcp_state(TCP_CLOSED);
++			tcp_set_tcp_state(tcp_stream_get(), TCP_CLOSED);
+ 	}
+ 
+ 	return net_init_loop();
+@@ -917,6 +917,9 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+ 	uchar *pkt;
+ 	int eth_hdr_size;
+ 	int pkt_hdr_size;
++#if defined(CONFIG_PROT_TCP)
++	struct tcp_stream *tcp;
++#endif
+ 
+ 	/* make sure the net_tx_packet is initialized (net_init() was called) */
+ 	assert(net_tx_packet != NULL);
+@@ -943,8 +946,12 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+ 		break;
+ #if defined(CONFIG_PROT_TCP)
+ 	case IPPROTO_TCP:
++		tcp = tcp_stream_get();
++		if (tcp == NULL)
++			return -EINVAL;
++
+ 		pkt_hdr_size = eth_hdr_size
+-			+ tcp_set_tcp_header(pkt + eth_hdr_size, dport, sport,
++			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size, dport, sport,
+ 					     payload_len, action, tcp_seq_num,
+ 					     tcp_ack_num);
+ 		break;
 diff --git a/net/tcp.c b/net/tcp.c
-index c9bcd364ee3..228e1e4872c 100644
+index 228e1e4872c..80a161838f5 100644
 --- a/net/tcp.c
 +++ b/net/tcp.c
-@@ -39,21 +39,6 @@ static u32 tcp_ack_edge;
- 
- static int tcp_activity_count;
+@@ -25,19 +25,8 @@
+ #include <net.h>
+ #include <net/tcp.h>
  
 -/*
-- * Search for TCP_SACK and review the comments before the code section
-- * TCP_SACK is the number of packets at the front of the stream
+- * TCP sliding window  control used by us to request re-TX
 - */
+-static struct tcp_sack_v tcp_lost;
 -
--enum pkt_state {PKT, NOPKT};
--struct sack_r {
--	struct sack_edges se;
--	enum pkt_state st;
--};
+-/* TCP option timestamp */
+-static u32 loc_timestamp;
+-static u32 rmt_timestamp;
 -
--static struct sack_r edge_a[TCP_SACK];
--static unsigned int sack_idx;
--static unsigned int prev_len;
+-static u32 tcp_seq_init;
+-static u32 tcp_ack_edge;
 -
+ static int tcp_activity_count;
++static struct tcp_stream tcp_stream;
+ 
  /*
   * TCP lengths are stored as a rounded up number of 32 bit words.
-  * Add 3 to length round up, rounded, then divided into the
-@@ -70,6 +55,11 @@ static enum tcp_state current_tcp_state;
+@@ -49,9 +38,6 @@ static int tcp_activity_count;
+ #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
+ #define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
+ 
+-/* TCP connection state */
+-static enum tcp_state current_tcp_state;
+-
  /* Current TCP RX packet handler */
  static rxhand_tcp *tcp_packet_handler;
  
-+static inline s32 tcp_seq_cmp(u32 a, u32 b)
-+{
-+	return (s32)(a - b);
+@@ -61,22 +47,30 @@ static inline s32 tcp_seq_cmp(u32 a, u32 b)
+ }
+ 
+ /**
+- * tcp_get_tcp_state() - get current TCP state
++ * tcp_get_tcp_state() - get TCP stream state
++ * @tcp: tcp stream
+  *
+- * Return: Current TCP state
++ * Return: TCP stream state
+  */
+-enum tcp_state tcp_get_tcp_state(void)
++enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp)
+ {
+-	return current_tcp_state;
++	return tcp->state;
+ }
+ 
+ /**
+- * tcp_set_tcp_state() - set current TCP state
++ * tcp_set_tcp_state() - set TCP stream state
++ * @tcp: tcp stream
+  * @new_state: new TCP state
+  */
+-void tcp_set_tcp_state(enum tcp_state new_state)
++void tcp_set_tcp_state(struct tcp_stream *tcp,
++		       enum tcp_state new_state)
+ {
+-	current_tcp_state = new_state;
++	tcp->state = new_state;
 +}
 +
++struct tcp_stream *tcp_stream_get(void)
++{
++	return &tcp_stream;
+ }
+ 
+ static void dummy_handler(uchar *pkt, u16 dport,
+@@ -139,29 +133,30 @@ u16 tcp_set_pseudo_header(uchar *pkt, struct in_addr src, struct in_addr dest,
+ 
  /**
-  * tcp_get_tcp_state() - get current TCP state
+  * net_set_ack_options() - set TCP options in acknowledge packets
++ * @tcp: tcp stream
+  * @b: the packet
   *
-@@ -268,6 +258,7 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+  * Return: TCP header length
+  */
+-int net_set_ack_options(union tcp_build_pkt *b)
++int net_set_ack_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
+ {
+ 	b->sack.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
+ 
+ 	b->sack.t_opt.kind = TCP_O_TS;
+ 	b->sack.t_opt.len = TCP_OPT_LEN_A;
+-	b->sack.t_opt.t_snd = htons(loc_timestamp);
+-	b->sack.t_opt.t_rcv = rmt_timestamp;
++	b->sack.t_opt.t_snd = htons(tcp->loc_timestamp);
++	b->sack.t_opt.t_rcv = tcp->rmt_timestamp;
+ 	b->sack.sack_v.kind = TCP_1_NOP;
+ 	b->sack.sack_v.len = 0;
+ 
+ 	if (IS_ENABLED(CONFIG_PROT_TCP_SACK)) {
+-		if (tcp_lost.len > TCP_OPT_LEN_2) {
++		if (tcp->lost.len > TCP_OPT_LEN_2) {
+ 			debug_cond(DEBUG_DEV_PKT, "TCP ack opt lost.len %x\n",
+-				   tcp_lost.len);
+-			b->sack.sack_v.len = tcp_lost.len;
++				   tcp->lost.len);
++			b->sack.sack_v.len = tcp->lost.len;
+ 			b->sack.sack_v.kind = TCP_V_SACK;
+-			b->sack.sack_v.hill[0].l = htonl(tcp_lost.hill[0].l);
+-			b->sack.sack_v.hill[0].r = htonl(tcp_lost.hill[0].r);
++			b->sack.sack_v.hill[0].l = htonl(tcp->lost.hill[0].l);
++			b->sack.sack_v.hill[0].r = htonl(tcp->lost.hill[0].r);
+ 
+ 			/*
+ 			 * These SACK structures are initialized with NOPs to
+@@ -169,17 +164,17 @@ int net_set_ack_options(union tcp_build_pkt *b)
+ 			 * SACK structures used for both header padding and
+ 			 * internally.
+ 			 */
+-			b->sack.sack_v.hill[1].l = htonl(tcp_lost.hill[1].l);
+-			b->sack.sack_v.hill[1].r = htonl(tcp_lost.hill[1].r);
+-			b->sack.sack_v.hill[2].l = htonl(tcp_lost.hill[2].l);
+-			b->sack.sack_v.hill[2].r = htonl(tcp_lost.hill[2].r);
++			b->sack.sack_v.hill[1].l = htonl(tcp->lost.hill[1].l);
++			b->sack.sack_v.hill[1].r = htonl(tcp->lost.hill[1].r);
++			b->sack.sack_v.hill[2].l = htonl(tcp->lost.hill[2].l);
++			b->sack.sack_v.hill[2].r = htonl(tcp->lost.hill[2].r);
+ 			b->sack.sack_v.hill[3].l = TCP_O_NOP;
+ 			b->sack.sack_v.hill[3].r = TCP_O_NOP;
+ 		}
+ 
+ 		b->sack.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(ROUND_TCPHDR_LEN(TCP_HDR_SIZE +
+ 										 TCP_TSOPT_SIZE +
+-										 tcp_lost.len));
++										 tcp->lost.len));
+ 	} else {
+ 		b->sack.sack_v.kind = 0;
+ 		b->sack.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(ROUND_TCPHDR_LEN(TCP_HDR_SIZE +
+@@ -195,13 +190,14 @@ int net_set_ack_options(union tcp_build_pkt *b)
+ }
+ 
+ /**
+- * net_set_ack_options() - set TCP options in SYN packets
++ * net_set_syn_options() - set TCP options in SYN packets
++ * @tcp: tcp stream
+  * @b: the packet
+  */
+-void net_set_syn_options(union tcp_build_pkt *b)
++void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
+ {
+ 	if (IS_ENABLED(CONFIG_PROT_TCP_SACK))
+-		tcp_lost.len = 0;
++		tcp->lost.len = 0;
+ 
+ 	b->ip.hdr.tcp_hlen = 0xa0;
+ 
+@@ -220,14 +216,15 @@ void net_set_syn_options(union tcp_build_pkt *b)
+ 	}
+ 	b->ip.t_opt.kind = TCP_O_TS;
+ 	b->ip.t_opt.len = TCP_OPT_LEN_A;
+-	loc_timestamp = get_ticks();
+-	rmt_timestamp = 0;
++	tcp->loc_timestamp = get_ticks();
++	tcp->rmt_timestamp = 0;
+ 	b->ip.t_opt.t_snd = 0;
+ 	b->ip.t_opt.t_rcv = 0;
+ 	b->ip.end = TCP_O_END;
+ }
+ 
+-int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
++int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
++		       int sport, int payload_len,
+ 		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
+ {
+ 	union tcp_build_pkt *b = (union tcp_build_pkt *)pkt;
+@@ -250,21 +247,21 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+ 			   &net_server_ip, &net_ip,
+ 			   tcp_seq_num, tcp_ack_num);
+ 		tcp_activity_count = 0;
+-		net_set_syn_options(b);
++		net_set_syn_options(tcp, b);
+ 		tcp_seq_num = 0;
+ 		tcp_ack_num = 0;
+ 		pkt_hdr_len = IP_TCP_O_SIZE;
+-		if (current_tcp_state == TCP_SYN_SENT) {  /* Too many SYNs */
++		if (tcp->state == TCP_SYN_SENT) {  /* Too many SYNs */
  			action = TCP_FIN;
- 			current_tcp_state = TCP_FIN_WAIT_1;
+-			current_tcp_state = TCP_FIN_WAIT_1;
++			tcp->state = TCP_FIN_WAIT_1;
  		} else {
-+			tcp_lost.len = TCP_OPT_LEN_2;
- 			current_tcp_state = TCP_SYN_SENT;
+-			tcp_lost.len = TCP_OPT_LEN_2;
+-			current_tcp_state = TCP_SYN_SENT;
++			tcp->lost.len = TCP_OPT_LEN_2;
++			tcp->state = TCP_SYN_SENT;
  		}
  		break;
-@@ -354,6 +345,20 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+ 	case TCP_SYN | TCP_ACK:
+ 	case TCP_ACK:
+-		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(b);
++		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
+ 		b->ip.hdr.tcp_flags = action;
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Hdr:ACK (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
+@@ -277,20 +274,20 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+ 			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
+ 		payload_len = 0;
+ 		pkt_hdr_len = IP_TCP_HDR_SIZE;
+-		current_tcp_state = TCP_FIN_WAIT_1;
++		tcp->state = TCP_FIN_WAIT_1;
+ 		break;
+ 	case TCP_RST | TCP_ACK:
+ 	case TCP_RST:
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Hdr:RST  (%pI4, %pI4, s=%u, a=%u)\n",
+ 			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
+-		current_tcp_state = TCP_CLOSED;
++		tcp->state = TCP_CLOSED;
+ 		break;
+ 	/* Notify connection closing */
+ 	case (TCP_FIN | TCP_ACK):
+ 	case (TCP_FIN | TCP_ACK | TCP_PUSH):
+-		if (current_tcp_state == TCP_CLOSE_WAIT)
+-			current_tcp_state = TCP_CLOSING;
++		if (tcp->state == TCP_CLOSE_WAIT)
++			tcp->state = TCP_CLOSING;
+ 
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Hdr:FIN ACK PSH(%pI4, %pI4, s=%u, a=%u, A=%x)\n",
+@@ -298,7 +295,7 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+ 			   tcp_seq_num, tcp_ack_num, action);
+ 		fallthrough;
+ 	default:
+-		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(b);
++		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
+ 		b->ip.hdr.tcp_flags = action | TCP_PUSH | TCP_ACK;
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Hdr:dft  (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
+@@ -309,9 +306,9 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+ 	pkt_len	= pkt_hdr_len + payload_len;
+ 	tcp_len	= pkt_len - IP_HDR_SIZE;
+ 
+-	tcp_ack_edge = tcp_ack_num;
++	tcp->ack_edge = tcp_ack_num;
+ 	/* TCP Header */
+-	b->ip.hdr.tcp_ack = htonl(tcp_ack_edge);
++	b->ip.hdr.tcp_ack = htonl(tcp->ack_edge);
+ 	b->ip.hdr.tcp_src = htons(sport);
+ 	b->ip.hdr.tcp_dst = htons(dport);
+ 	b->ip.hdr.tcp_seq = htonl(tcp_seq_num);
+@@ -345,78 +342,79 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
  	return pkt_hdr_len;
  }
  
-+static void tcp_update_ack_edge(void)
-+{
-+	if (tcp_seq_cmp(tcp_ack_edge, tcp_lost.hill[0].l) >= 0) {
-+		tcp_ack_edge = tcp_lost.hill[0].r;
-+
-+		memmove(&tcp_lost.hill[0], &tcp_lost.hill[1],
-+			(TCP_SACK_HILLS - 1) * sizeof(struct sack_edges));
-+
-+		tcp_lost.len -= TCP_OPT_LEN_8;
-+		tcp_lost.hill[TCP_SACK_HILLS - 1].l = TCP_O_NOP;
-+		tcp_lost.hill[TCP_SACK_HILLS - 1].r = TCP_O_NOP;
-+	}
-+}
-+
+-static void tcp_update_ack_edge(void)
++static void tcp_update_ack_edge(struct tcp_stream *tcp)
+ {
+-	if (tcp_seq_cmp(tcp_ack_edge, tcp_lost.hill[0].l) >= 0) {
+-		tcp_ack_edge = tcp_lost.hill[0].r;
++	if (tcp_seq_cmp(tcp->ack_edge, tcp->lost.hill[0].l) >= 0) {
++		tcp->ack_edge = tcp->lost.hill[0].r;
+ 
+-		memmove(&tcp_lost.hill[0], &tcp_lost.hill[1],
++		memmove(&tcp->lost.hill[0], &tcp->lost.hill[1],
+ 			(TCP_SACK_HILLS - 1) * sizeof(struct sack_edges));
+ 
+-		tcp_lost.len -= TCP_OPT_LEN_8;
+-		tcp_lost.hill[TCP_SACK_HILLS - 1].l = TCP_O_NOP;
+-		tcp_lost.hill[TCP_SACK_HILLS - 1].r = TCP_O_NOP;
++		tcp->lost.len -= TCP_OPT_LEN_8;
++		tcp->lost.hill[TCP_SACK_HILLS - 1].l = TCP_O_NOP;
++		tcp->lost.hill[TCP_SACK_HILLS - 1].r = TCP_O_NOP;
+ 	}
+ }
+ 
  /**
   * tcp_hole() - Selective Acknowledgment (Essential for fast stream transfer)
++ * @tcp: tcp stream
   * @tcp_seq_num: TCP sequence start number
-@@ -361,106 +366,79 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+  * @len: the length of sequence numbers
   */
- void tcp_hole(u32 tcp_seq_num, u32 len)
+-void tcp_hole(u32 tcp_seq_num, u32 len)
++void tcp_hole(struct tcp_stream *tcp, u32 tcp_seq_num, u32 len)
  {
--	u32 idx_sack, sack_in;
--	u32 sack_end = TCP_SACK - 1;
--	u32 hill = 0;
--	enum pkt_state expect = PKT;
--	u32 seq = tcp_seq_num - tcp_seq_init;
--	u32 hol_l = tcp_ack_edge - tcp_seq_init;
--	u32 hol_r = 0;
--
--	/* Place new seq number in correct place in receive array */
--	if (prev_len == 0)
--		prev_len = len;
--
--	idx_sack = sack_idx + ((tcp_seq_num - tcp_ack_edge) / prev_len);
--	if (idx_sack < TCP_SACK) {
--		edge_a[idx_sack].se.l = tcp_seq_num;
--		edge_a[idx_sack].se.r = tcp_seq_num + len;
--		edge_a[idx_sack].st = PKT;
-+	int i, j, cnt, cnt_move;
+ 	int i, j, cnt, cnt_move;
  
--		/*
--		 * The fin (last) packet is not the same length as data
--		 * packets, and if it's length is recorded and used for
--		 *  array index calculation, calculation breaks.
--		 */
--		if (prev_len < len)
--			prev_len = len;
--	}
-+	cnt = (tcp_lost.len - TCP_OPT_LEN_2) / TCP_OPT_LEN_8;
-+	for (i = 0; i < cnt; i++) {
-+		if (tcp_seq_cmp(tcp_lost.hill[i].r, tcp_seq_num) < 0)
-+			continue;
-+		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num + len) > 0)
-+			break;
+-	cnt = (tcp_lost.len - TCP_OPT_LEN_2) / TCP_OPT_LEN_8;
++	cnt = (tcp->lost.len - TCP_OPT_LEN_2) / TCP_OPT_LEN_8;
+ 	for (i = 0; i < cnt; i++) {
+-		if (tcp_seq_cmp(tcp_lost.hill[i].r, tcp_seq_num) < 0)
++		if (tcp_seq_cmp(tcp->lost.hill[i].r, tcp_seq_num) < 0)
+ 			continue;
+-		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num + len) > 0)
++		if (tcp_seq_cmp(tcp->lost.hill[i].l, tcp_seq_num + len) > 0)
+ 			break;
  
--	debug_cond(DEBUG_DEV_PKT,
--		   "TCP 1 seq %d, edg %d, len %d, sack_idx %d, sack_end %d\n",
--		    seq, hol_l, len, sack_idx, sack_end);
-+		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num) > 0)
-+			tcp_lost.hill[i].l = tcp_seq_num;
-+		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num) < 0) {
-+			len += tcp_seq_num - tcp_lost.hill[i].l;
-+			tcp_seq_num = tcp_lost.hill[i].l;
-+		}
-+		if (tcp_seq_cmp(tcp_lost.hill[i].r, tcp_seq_num + len) >= 0) {
-+			tcp_update_ack_edge();
-+			return;
-+		}
- 
--	/* Right edge of contiguous stream, is the left edge of first hill */
--	hol_l = tcp_seq_num - tcp_seq_init;
--	hol_r = hol_l + len;
-+		/* check overlapping with next hills */
-+		cnt_move = 0;
-+		tcp_lost.hill[i].r = tcp_seq_num + len;
-+		for (j = i + 1; j < cnt; j++) {
-+			if (tcp_seq_cmp(tcp_lost.hill[j].l, tcp_lost.hill[i].r) > 0)
-+				break;
- 
--	if (IS_ENABLED(CONFIG_PROT_TCP_SACK))
--		tcp_lost.len = TCP_OPT_LEN_2;
-+			tcp_lost.hill[i].r = tcp_lost.hill[j].r;
-+			cnt_move++;
-+		}
- 
--	debug_cond(DEBUG_DEV_PKT,
--		   "TCP 1 in %d, seq %d, pkt_l %d, pkt_r %d, sack_idx %d, sack_end %d\n",
--		   idx_sack, seq, hol_l, hol_r, sack_idx, sack_end);
--
--	for (sack_in = sack_idx; sack_in < sack_end && hill < TCP_SACK_HILLS;
--	     sack_in++)  {
--		switch (expect) {
--		case NOPKT:
--			switch (edge_a[sack_in].st) {
--			case NOPKT:
--				debug_cond(DEBUG_INT_STATE, "N");
--				break;
--			case PKT:
--				debug_cond(DEBUG_INT_STATE, "n");
--				if (IS_ENABLED(CONFIG_PROT_TCP_SACK)) {
--					tcp_lost.hill[hill].l =
--						edge_a[sack_in].se.l;
--					tcp_lost.hill[hill].r =
--						edge_a[sack_in].se.r;
--				}
--				expect = PKT;
--				break;
--			}
--			break;
--		case PKT:
--			switch (edge_a[sack_in].st) {
--			case NOPKT:
--				debug_cond(DEBUG_INT_STATE, "p");
--				if (sack_in > sack_idx &&
--				    hill < TCP_SACK_HILLS) {
--					hill++;
--					if (IS_ENABLED(CONFIG_PROT_TCP_SACK))
--						tcp_lost.len += TCP_OPT_LEN_8;
--				}
--				expect = NOPKT;
--				break;
--			case PKT:
--				debug_cond(DEBUG_INT_STATE, "P");
--
--				if (tcp_ack_edge == edge_a[sack_in].se.l) {
--					tcp_ack_edge = edge_a[sack_in].se.r;
--					edge_a[sack_in].st = NOPKT;
--					sack_idx++;
--				} else {
--					if (IS_ENABLED(CONFIG_PROT_TCP_SACK) &&
--					    hill < TCP_SACK_HILLS)
--						tcp_lost.hill[hill].r =
--							edge_a[sack_in].se.r;
--				if (IS_ENABLED(CONFIG_PROT_TCP_SACK) &&
--				    sack_in == sack_end - 1)
--					tcp_lost.hill[hill].r =
--						edge_a[sack_in].se.r;
--				}
--				break;
-+		if (cnt_move > 0) {
-+			if (cnt > i + cnt_move + 1)
-+				memmove(&tcp_lost.hill[i + 1],
-+					&tcp_lost.hill[i + cnt_move + 1],
-+					cnt_move * sizeof(struct sack_edges));
-+
-+			cnt -= cnt_move;
-+			tcp_lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
-+			for (j = cnt; j < TCP_SACK_HILLS; j++) {
-+				tcp_lost.hill[j].l = TCP_O_NOP;
-+				tcp_lost.hill[j].r = TCP_O_NOP;
- 			}
--			break;
+-		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num) > 0)
+-			tcp_lost.hill[i].l = tcp_seq_num;
+-		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num) < 0) {
+-			len += tcp_seq_num - tcp_lost.hill[i].l;
+-			tcp_seq_num = tcp_lost.hill[i].l;
++		if (tcp_seq_cmp(tcp->lost.hill[i].l, tcp_seq_num) > 0)
++			tcp->lost.hill[i].l = tcp_seq_num;
++		if (tcp_seq_cmp(tcp->lost.hill[i].l, tcp_seq_num) < 0) {
++			len += tcp_seq_num - tcp->lost.hill[i].l;
++			tcp_seq_num = tcp->lost.hill[i].l;
  		}
-+
-+		tcp_update_ack_edge();
-+		return;
+-		if (tcp_seq_cmp(tcp_lost.hill[i].r, tcp_seq_num + len) >= 0) {
+-			tcp_update_ack_edge();
++		if (tcp_seq_cmp(tcp->lost.hill[i].r, tcp_seq_num + len) >= 0) {
++			tcp_update_ack_edge(tcp);
+ 			return;
+ 		}
+ 
+ 		/* check overlapping with next hills */
+ 		cnt_move = 0;
+-		tcp_lost.hill[i].r = tcp_seq_num + len;
++		tcp->lost.hill[i].r = tcp_seq_num + len;
+ 		for (j = i + 1; j < cnt; j++) {
+-			if (tcp_seq_cmp(tcp_lost.hill[j].l, tcp_lost.hill[i].r) > 0)
++			if (tcp_seq_cmp(tcp->lost.hill[j].l, tcp->lost.hill[i].r) > 0)
+ 				break;
+ 
+-			tcp_lost.hill[i].r = tcp_lost.hill[j].r;
++			tcp->lost.hill[i].r = tcp->lost.hill[j].r;
+ 			cnt_move++;
+ 		}
+ 
+ 		if (cnt_move > 0) {
+ 			if (cnt > i + cnt_move + 1)
+-				memmove(&tcp_lost.hill[i + 1],
+-					&tcp_lost.hill[i + cnt_move + 1],
++				memmove(&tcp->lost.hill[i + 1],
++					&tcp->lost.hill[i + cnt_move + 1],
+ 					cnt_move * sizeof(struct sack_edges));
+ 
+ 			cnt -= cnt_move;
+-			tcp_lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
++			tcp->lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
+ 			for (j = cnt; j < TCP_SACK_HILLS; j++) {
+-				tcp_lost.hill[j].l = TCP_O_NOP;
+-				tcp_lost.hill[j].r = TCP_O_NOP;
++				tcp->lost.hill[j].l = TCP_O_NOP;
++				tcp->lost.hill[j].r = TCP_O_NOP;
+ 			}
+ 		}
+ 
+-		tcp_update_ack_edge();
++		tcp_update_ack_edge(tcp);
+ 		return;
  	}
--	debug_cond(DEBUG_INT_STATE, "\n");
--	if (!IS_ENABLED(CONFIG_PROT_TCP_SACK) || tcp_lost.len <= TCP_OPT_LEN_2)
--		sack_idx = 0;
--}
-+
-+	if (i == TCP_SACK_HILLS) {
-+		tcp_update_ack_edge();
-+		return;
-+	}
-+
-+	if (cnt < TCP_SACK_HILLS) {
-+		cnt_move = cnt - i;
-+		cnt++;
-+	} else {
-+		cnt = TCP_SACK_HILLS;
-+		cnt_move = TCP_SACK_HILLS - i;
-+	}
-+
-+	if (cnt_move > 0)
-+		memmove(&tcp_lost.hill[i + 1],
-+			&tcp_lost.hill[i],
-+			cnt_move * sizeof(struct sack_edges));
-+
-+	tcp_lost.hill[i].l = tcp_seq_num;
-+	tcp_lost.hill[i].r = tcp_seq_num + len;
-+	tcp_lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
-+
-+	tcp_update_ack_edge();
-+};
+ 
+ 	if (i == TCP_SACK_HILLS) {
+-		tcp_update_ack_edge();
++		tcp_update_ack_edge(tcp);
+ 		return;
+ 	}
+ 
+@@ -429,23 +427,24 @@ void tcp_hole(u32 tcp_seq_num, u32 len)
+ 	}
+ 
+ 	if (cnt_move > 0)
+-		memmove(&tcp_lost.hill[i + 1],
+-			&tcp_lost.hill[i],
++		memmove(&tcp->lost.hill[i + 1],
++			&tcp->lost.hill[i],
+ 			cnt_move * sizeof(struct sack_edges));
+ 
+-	tcp_lost.hill[i].l = tcp_seq_num;
+-	tcp_lost.hill[i].r = tcp_seq_num + len;
+-	tcp_lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
++	tcp->lost.hill[i].l = tcp_seq_num;
++	tcp->lost.hill[i].r = tcp_seq_num + len;
++	tcp->lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
+ 
+-	tcp_update_ack_edge();
++	tcp_update_ack_edge(tcp);
+ };
  
  /**
   * tcp_parse_options() - parsing TCP options
-@@ -510,7 +488,6 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
- 	u8 tcp_push = tcp_flags & TCP_PUSH;
- 	u8 tcp_ack = tcp_flags & TCP_ACK;
- 	u8 action = TCP_DATA;
--	int i;
++ * @tcp: tcp stream
+  * @o: pointer to the option field.
+  * @o_len: length of the option field.
+  */
+-void tcp_parse_options(uchar *o, int o_len)
++void tcp_parse_options(struct tcp_stream *tcp, uchar *o, int o_len)
+ {
+ 	struct tcp_t_opt  *tsopt;
+ 	uchar *p = o;
+@@ -468,7 +467,7 @@ void tcp_parse_options(uchar *o, int o_len)
+ 			break;
+ 		case TCP_O_TS:
+ 			tsopt = (struct tcp_t_opt *)p;
+-			rmt_timestamp = tsopt->t_snd;
++			tcp->rmt_timestamp = tsopt->t_snd;
+ 			break;
+ 		}
  
- 	/*
- 	 * tcp_flags are examined to determine TX action in a given state
-@@ -537,6 +514,7 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+@@ -480,7 +479,8 @@ void tcp_parse_options(uchar *o, int o_len)
+ 	}
+ }
+ 
+-static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
++static u8 tcp_state_machine(struct tcp_stream *tcp, u8 tcp_flags,
++			    u32 tcp_seq_num, int payload_len)
+ {
+ 	u8 tcp_fin = tcp_flags & TCP_FIN;
+ 	u8 tcp_syn = tcp_flags & TCP_SYN;
+@@ -501,21 +501,21 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+ 	debug_cond(DEBUG_INT_STATE, "TCP STATE ENTRY %x\n", action);
+ 	if (tcp_rst) {
+ 		action = TCP_DATA;
+-		current_tcp_state = TCP_CLOSED;
++		tcp->state = TCP_CLOSED;
+ 		net_set_state(NETLOOP_FAIL);
+ 		debug_cond(DEBUG_INT_STATE, "TCP Reset %x\n", tcp_flags);
+ 		return TCP_RST;
+ 	}
+ 
+-	switch  (current_tcp_state) {
++	switch  (tcp->state) {
+ 	case TCP_CLOSED:
+ 		debug_cond(DEBUG_INT_STATE, "TCP CLOSED %x\n", tcp_flags);
+ 		if (tcp_syn) {
  			action = TCP_SYN | TCP_ACK;
- 			tcp_seq_init = tcp_seq_num;
- 			tcp_ack_edge = tcp_seq_num + 1;
-+			tcp_lost.len = TCP_OPT_LEN_2;
- 			current_tcp_state = TCP_SYN_RECEIVED;
+-			tcp_seq_init = tcp_seq_num;
+-			tcp_ack_edge = tcp_seq_num + 1;
+-			tcp_lost.len = TCP_OPT_LEN_2;
+-			current_tcp_state = TCP_SYN_RECEIVED;
++			tcp->seq_init = tcp_seq_num;
++			tcp->ack_edge = tcp_seq_num + 1;
++			tcp->lost.len = TCP_OPT_LEN_2;
++			tcp->state = TCP_SYN_RECEIVED;
  		} else if (tcp_ack || tcp_fin) {
  			action = TCP_DATA;
-@@ -553,13 +531,7 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+ 		}
+@@ -526,12 +526,12 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+ 			   tcp_flags, tcp_seq_num);
+ 		if (tcp_fin) {
+ 			action = action | TCP_PUSH;
+-			current_tcp_state = TCP_CLOSE_WAIT;
++			tcp->state = TCP_CLOSE_WAIT;
+ 		} else if (tcp_ack || (tcp_syn && tcp_ack)) {
  			action |= TCP_ACK;
- 			tcp_seq_init = tcp_seq_num;
- 			tcp_ack_edge = tcp_seq_num + 1;
--			sack_idx = 0;
--			edge_a[sack_idx].se.l = tcp_ack_edge;
--			edge_a[sack_idx].se.r = tcp_ack_edge;
--			prev_len = 0;
- 			current_tcp_state = TCP_ESTABLISHED;
--			for (i = 0; i < TCP_SACK; i++)
--				edge_a[i].st = NOPKT;
+-			tcp_seq_init = tcp_seq_num;
+-			tcp_ack_edge = tcp_seq_num + 1;
+-			current_tcp_state = TCP_ESTABLISHED;
++			tcp->seq_init = tcp_seq_num;
++			tcp->ack_edge = tcp_seq_num + 1;
++			tcp->state = TCP_ESTABLISHED;
  
  			if (tcp_syn && tcp_ack)
  				action |= TCP_PUSH;
+@@ -542,15 +542,15 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+ 	case TCP_ESTABLISHED:
+ 		debug_cond(DEBUG_INT_STATE, "TCP_ESTABLISHED %x\n", tcp_flags);
+ 		if (payload_len > 0) {
+-			tcp_hole(tcp_seq_num, payload_len);
++			tcp_hole(tcp, tcp_seq_num, payload_len);
+ 			tcp_fin = TCP_DATA;  /* cause standalone FIN */
+ 		}
+ 
+ 		if ((tcp_fin) &&
+ 		    (!IS_ENABLED(CONFIG_PROT_TCP_SACK) ||
+-		     tcp_lost.len <= TCP_OPT_LEN_2)) {
++		     tcp->lost.len <= TCP_OPT_LEN_2)) {
+ 			action = action | TCP_FIN | TCP_PUSH | TCP_ACK;
+-			current_tcp_state = TCP_CLOSE_WAIT;
++			tcp->state = TCP_CLOSE_WAIT;
+ 		} else if (tcp_ack) {
+ 			action = TCP_DATA;
+ 		}
+@@ -568,7 +568,7 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+ 		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_2 (%x)\n", tcp_flags);
+ 		if (tcp_ack) {
+ 			action = TCP_PUSH | TCP_ACK;
+-			current_tcp_state = TCP_CLOSED;
++			tcp->state = TCP_CLOSED;
+ 			puts("\n");
+ 		} else if (tcp_syn) {
+ 			action = TCP_DATA;
+@@ -579,20 +579,20 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
+ 	case TCP_FIN_WAIT_1:
+ 		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_1 (%x)\n", tcp_flags);
+ 		if (tcp_fin) {
+-			tcp_ack_edge++;
++			tcp->ack_edge++;
+ 			action = TCP_ACK | TCP_FIN;
+-			current_tcp_state = TCP_FIN_WAIT_2;
++			tcp->state = TCP_FIN_WAIT_2;
+ 		}
+ 		if (tcp_syn)
+ 			action = TCP_RST;
+ 		if (tcp_ack)
+-			current_tcp_state = TCP_CLOSED;
++			tcp->state = TCP_CLOSED;
+ 		break;
+ 	case TCP_CLOSING:
+ 		debug_cond(DEBUG_INT_STATE, "TCP_CLOSING (%x)\n", tcp_flags);
+ 		if (tcp_ack) {
+ 			action = TCP_PUSH;
+-			current_tcp_state = TCP_CLOSED;
++			tcp->state = TCP_CLOSED;
+ 			puts("\n");
+ 		} else if (tcp_syn) {
+ 			action = TCP_RST;
+@@ -616,6 +616,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 	u8  tcp_action = TCP_DATA;
+ 	u32 tcp_seq_num, tcp_ack_num;
+ 	int tcp_hdr_len, payload_len;
++	struct tcp_stream *tcp;
+ 
+ 	/* Verify IP header */
+ 	debug_cond(DEBUG_DEV_PKT,
+@@ -644,11 +645,15 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 		return;
+ 	}
+ 
++	tcp = tcp_stream_get();
++	if (tcp == NULL)
++		return;
++
+ 	tcp_hdr_len = GET_TCP_HDR_LEN_IN_BYTES(b->ip.hdr.tcp_hlen);
+ 	payload_len = tcp_len - tcp_hdr_len;
+ 
+ 	if (tcp_hdr_len > TCP_HDR_SIZE)
+-		tcp_parse_options((uchar *)b + IP_TCP_HDR_SIZE,
++		tcp_parse_options(tcp, (uchar *)b + IP_TCP_HDR_SIZE,
+ 				  tcp_hdr_len - TCP_HDR_SIZE);
+ 	/*
+ 	 * Incoming sequence and ack numbers are server's view of the numbers.
+@@ -658,7 +663,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 	tcp_ack_num = ntohl(b->ip.hdr.tcp_ack);
+ 
+ 	/* Packets are not ordered. Send to app as received. */
+-	tcp_action = tcp_state_machine(b->ip.hdr.tcp_flags,
++	tcp_action = tcp_state_machine(tcp, b->ip.hdr.tcp_flags,
+ 				       tcp_seq_num, payload_len);
+ 
+ 	tcp_activity_count++;
+@@ -679,7 +684,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 	} else if (tcp_action != TCP_DATA) {
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Action (action=%x,Seq=%u,Ack=%u,Pay=%d)\n",
+-			   tcp_action, tcp_ack_num, tcp_ack_edge, payload_len);
++			   tcp_action, tcp_ack_num, tcp->ack_edge, payload_len);
+ 
+ 		/*
+ 		 * Warning: Incoming Ack & Seq sequence numbers are transposed
+@@ -688,6 +693,6 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 		net_send_tcp_packet(0, ntohs(b->ip.hdr.tcp_src),
+ 				    ntohs(b->ip.hdr.tcp_dst),
+ 				    (tcp_action & (~TCP_PUSH)),
+-				    tcp_ack_num, tcp_ack_edge);
++				    tcp_ack_num, tcp->ack_edge);
+ 	}
+ }
+diff --git a/net/wget.c b/net/wget.c
+index abab371e58e..1c0f97a6cc0 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -357,7 +357,8 @@ static void wget_handler(uchar *pkt, u16 dport,
+ 			 u32 tcp_seq_num, u32 tcp_ack_num,
+ 			 u8 action, unsigned int len)
+ {
+-	enum tcp_state wget_tcp_state = tcp_get_tcp_state();
++	struct tcp_stream *tcp = tcp_stream_get();
++	enum tcp_state wget_tcp_state = tcp_get_tcp_state(tcp);
+ 
+ 	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+ 	packets++;
 -- 
 2.43.0
 
