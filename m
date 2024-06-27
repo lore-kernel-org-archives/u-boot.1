@@ -4,161 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11862C2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 12:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF8CC3064D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 13:43:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AE7C884FC;
-	Thu, 27 Jun 2024 14:42:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A1F4B8857D;
+	Thu, 27 Jun 2024 15:43:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="UlVxkmiv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HhWC3GJc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC286880A5; Thu, 27 Jun 2024 14:42:20 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20711.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::711])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7378988582; Thu, 27 Jun 2024 15:43:25 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEAE688247
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 14:42:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 41E0E87A9C
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 15:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EbUKmyBVcgKgKd8ykgvvZjOzq8Gv/6i3z2fcgjTl+C5as6M0s26IuhpMQJA6r9Eyg/J0qOO7r2R0AHy2AcNmH4Kvc5N/BAMGxW+bxSEnRfC0cyj3rsq+Q4khPH5ZTY6hS73mY09akh8Ve54Yv4dt5OShJFz6/KKFsmk3d76wspn+ChUS4ueBXN3FHEmt1NnFLBbwaS9IVu2+8KeeHvxlxTqkPMjzvCaXiA2vyJ6GffqcXX8AdNofXpvfVC/fvujNQGonWlRkPfrRgW+KKmFPGbNoL0WsisRQHuimGU2r0Y1kc2wHf52RRgaivKl5pbPPKFDYMk+etK//SM4VGfSinQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9xJFZkEzuOJgqKFExMHl/q7l5AppiqT94RztqyLkeHs=;
- b=Jwc65UsTbsLsIYX3wvDeTKmzfmlM3eAB9r8wcirXZDJfPZjBluatFqUIuMucmJUbyIsrjwP4mzvxvTrilyj2/H/C4OZLHvtnF+CDVs3yvWwsgVRi/fyUbL2Q2suyvXFB5rAlP2BYGNJ2lcGGQJlHzI4jJk7Kf/fX7u5edU5AFsaaAYA1MBZaZEtQTKvpyaDlQFnH8d3oAwUkCCVSStNoRf472m7ReMtgCcSx6w7CBEQg9gfg+RKRXhvuVk5o+kqD1r4CzQi5/jZ0dL8Tr03K/5yV9lebM1NkMLmkDvxArKA8Myj+7F2wNIqTQGuWbyID64MXkftCNx7Rr3+vOtvXLA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9xJFZkEzuOJgqKFExMHl/q7l5AppiqT94RztqyLkeHs=;
- b=UlVxkmivJjXrbKaYwweyiJRCZWNVtigZHrAnY58IWfysVUfBZG1pdglaJSxT03VzkANX8KMqCS9Xr7gyIpYU9V7KxCcMqx8r8np5jIUJR1tiwv7ueIrtWBY8RMxP4xvZ1Hx/Ce/F3gmjmMqI6ZpFszKDd8PjXNr4deJarf96FB8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by PA4PR04MB7757.eurprd04.prod.outlook.com (2603:10a6:102:b8::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.32; Thu, 27 Jun
- 2024 12:42:16 +0000
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7698.025; Thu, 27 Jun 2024
- 12:42:16 +0000
-Message-ID: <d31b4e88-a59c-4ec7-aa05-1293ab8139d9@cherry.de>
-Date: Thu, 27 Jun 2024 14:42:14 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spl: fit: List DTOs applied by SPL in U-Boot control DT
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-References: <20240626235857.272264-1-marex@denx.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240626235857.272264-1-marex@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0017.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::17) To PA4PR04MB7982.eurprd04.prod.outlook.com
- (2603:10a6:102:c4::9)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-6f8d0a00a35so7176892a34.2
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 06:43:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1719495802; x=1720100602; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hdup8B9WmAzWR3WLu8r19PGFn+jFbIWNYWSe/aUp7LU=;
+ b=HhWC3GJc03EUBl2m+ZIcUytm2rY5iV04BVqywwzQOq02mlw6v3GtEL0/KWx4LzMsaF
+ 1vTVr8PPrY+wiDSw39jz4XAUr2rrqWe6icRHr3blw0KS+Mnsb6Dl/rXaBQZSNGX+Y4Lv
+ fLAIO/zFcjf28qlXTG9RXT4WYKBV5ZrqBqdtU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719495802; x=1720100602;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hdup8B9WmAzWR3WLu8r19PGFn+jFbIWNYWSe/aUp7LU=;
+ b=FPWhWXeHAFX263kHDAceZBCmmnBAfJV1r7bCea9eo7krdnWjIQD5jr1ySJ0bW9wEBn
+ 9PZrLkYTOhU5PFE8KXS6zNPsWvmnEX5QKHtOx1iDVJYXLTLq1Q4pm542vZVHjYFSsXm3
+ EyPNxh7gyl3MMziOW/oOda2VG284p4yeZsoq2+0VMiDjHMl/Ap3oG+lZyhK0Q3Ow45p9
+ BU4FqglGriddOA3fkxQg0BQbJiMJCIpqPFkw7oiDMcxRm68waqur09Nw3u9lVVbifS+S
+ ucVYbNKCpzdGTiCEUnBzg8RXKjqH7gdScL0kbIrCeBHKJ8ph3/MO/mwAurJaqCFxMFSl
+ FtnQ==
+X-Gm-Message-State: AOJu0YwfichH+B02B0YHTtJ7VyHr0H+acXY3mW0HYPbjxqyJAsV0tNWe
+ 8X96jWhwvQucdY0H0CzQEIQTZUH4FxHuSNhFv016LqwaIr0Awrz5fObRDNoXtRpgABAJPKos43P
+ 7axvD+w==
+X-Google-Smtp-Source: AGHT+IHx6n7kOtgoZ39/tPTxbNpOG+2bAmN2ZAhvEn/yPbRrxPaUXAJ5m/N6MrdAfxIiH+dMVMZ+YQ==
+X-Received: by 2002:a05:6870:638c:b0:259:89a5:440d with SMTP id
+ 586e51a60fabf-25cfce010dcmr14412029fac.15.1719495801888; 
+ Thu, 27 Jun 2024 06:43:21 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net
+ (fixed-187-190-197-45.totalplay.net. [187.190.197.45])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25d72bee195sm364980fac.32.2024.06.27.06.43.21
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Jun 2024 06:43:21 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] CI: Make pytest export JUnitXML
+Date: Thu, 27 Jun 2024 07:43:20 -0600
+Message-Id: <20240627134320.3518272-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|PA4PR04MB7757:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d096c37-26f3-4fe0-9ac8-08dc96a69379
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cGp5dURGRURqMkZTZXA2eE1tNFdKL3pYZVFiNDJVQU14cWFjNnBmWHNFc2pu?=
- =?utf-8?B?WDFlVmd3ZC96ajl4cU9IUVhIaUw0Qk5jeElRMDJHOENGWVlJNzMyamlucHlB?=
- =?utf-8?B?eEEzTVJDQitzTzd4bFg1SEVzeXgxQnVHNFlMMHoyNlphQWcxZU84OE5uWXl1?=
- =?utf-8?B?NE5GYW9USDIwRWN3aVVjZkFGd1o4T2EvQmVRb1dRd2JLeUlFWmQ3RVpQa2pr?=
- =?utf-8?B?ODFlaUdwOGxYSzR0T3VSRmNieDVEZFBibWhXNlRTaEcwaUNLRlp5aEsxaEtX?=
- =?utf-8?B?ci83dTAvTXZBRllxUVJqeDRwaG9mL1NQc2xWbEVQMFVuOUJmdUp3VnRISG16?=
- =?utf-8?B?cWlRRkJCYko1bmdDeXAzUUN1Ymw4c1NjZ0Exc0c0L2JWaE9aT1lnaVV1RlRZ?=
- =?utf-8?B?NmlxZDgzU2syUlpCVWhUanlqdE9Ta3lVNHdiMkNnRDlCUTc0MFEvbUE5eXJo?=
- =?utf-8?B?cmFDdDgrWkdzWkpLWk5YL1ZIaXN4Si9rRmNSRVlXVjRNeDlWazUxcUJiL0xp?=
- =?utf-8?B?MWprbENVV0VmRk9BL05zbnhMRUIzU2NQTVRCdHM3M1FIclVxclRLZE5UODhJ?=
- =?utf-8?B?akdpYWEvdXVoL3ZPMUZvV05NQTNLZzEvRXphRmJSc3E1VTB6ZjJNRXZtbmxz?=
- =?utf-8?B?ZlF2MUdjUjdaNlJQM1Zkc1lUcHRhaUM3M0hLb0UydFNua2NDemdCODVnNTFN?=
- =?utf-8?B?bGFvcnltSHpoVFZuUU5lY1dFbWdKVnBxdlZUZXZQZm9SRFpaemZZcGZMZk1t?=
- =?utf-8?B?TzBpNmFoQi91NlE2YlQ2S1ZXa0FVaTV6NDNXNEFPRVkxTFM2clV6VEE2MFVO?=
- =?utf-8?B?WE01cVZGZ0s5Ym5DUktXUkNUeVJ0K2FsQ2w0alZEak8rTWcrL1FGV3VLV09v?=
- =?utf-8?B?YWhaYjZhUmZNNFFOS1ROUFlJVEV3TmgzRURZcEZmQ0NLS0NhZWtTRHpqVW9l?=
- =?utf-8?B?dVdYbXg5Z3pNTmExbVdVc1cyWnNvb1JHZWhlbUVpTlpUbmg4UVNaa0JnQUda?=
- =?utf-8?B?ZU9lSnJZdmxna3hZNXY4SlUrbkpybmxJdnQwZkhXMW1PS2VJZEFRUlUrelpQ?=
- =?utf-8?B?WWgwblJaeWtScEdMdlJPbkJheXc3MDR2NXlPa0haUm93TVIvdFpNeUZqWWJ6?=
- =?utf-8?B?dUZva1dsaE94VzgwelhPcmdlTWpXY05nT09MUjZGTXpMV2hSaG5XbEFVc1BB?=
- =?utf-8?B?NHhXUndWTXZodnRwOUxWUERjSDZ5dTgraDFnUnd1ZlpiamZrWHd1cTRpSDB3?=
- =?utf-8?B?VmJ0L0EyTHZzK0VIZ0phR3pYTFJlek8vR0VVdmpoMmF6NHBWNVN0eXRjMnlF?=
- =?utf-8?B?clVnTW1HZk1ZeWFrUG1TcGROaVpJY1EvUW1TNWNUcUpvRFNNM1pKck9NSWN2?=
- =?utf-8?B?Z1NLYXdmKzJGRVE4R2lNMnRrNTczeitIclR2Wi9GeCthbUhXL0VlYjR5eXRM?=
- =?utf-8?B?TkFDNWNMWXJNRXB4U09PS3BjWmRNdGZRaUtRSUxlS0JybjFlRlRKVWR1V2Za?=
- =?utf-8?B?RStyd3NFUjA4cE82T29IWnZRK0NhbEdSOFVzbG9SZFRFeVRjMnR4NDd0NlQr?=
- =?utf-8?B?K0VQMjdacGtOaUFsYnk2NUZPeU5CejQ1c2dGYUc3WldxV2dzNXZSYlJWMWVO?=
- =?utf-8?B?eVZBVEdrMU5lSGRkNm1BSE5sUTF2ek9ZWWh3SWlta2l3SktJUWJ1VHE4MlVP?=
- =?utf-8?B?Zk5LNTRjMjVOQTVndWs0bm53MTVYcTQ2TmFoYzlmWTFZQTRuU1R0R2sxSWpv?=
- =?utf-8?B?eUZUbzBNYkxTZWdCRWJnb0M5ZWdZMjlPSmkxbkVnZHd3bVkvb2FNV3BYUDlE?=
- =?utf-8?B?Nmh1cElYcUM3L1JyTEZ5QT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y2xWcmJKMDJZTW9sT2RyYzFpZVYxSHhqTWFiRmRsSUY2SjhwZWRXZ3MyT0Fh?=
- =?utf-8?B?MTM0V2tnWnZSWUkvQmhPVHpRdm9rWlI3NVNCbmpJUGVJZzNXQkYvUnhJY2hr?=
- =?utf-8?B?TEh3WHlDam52M0pSMVFSc2xqQ0dpdUVQcjdOV2R6YnpqYmFZTzZIdGdGa1FM?=
- =?utf-8?B?TXNteHNJT1dDSEpJWjBvL2lxbVBwd3d4NEc5NEUyQVJKQitVQS9yem8wMms3?=
- =?utf-8?B?MnNnbE15RjNVL0JIUStMVlFtb1ljaG5wQ2d1dXZnTTk4R2hiSGlabGNmZFV1?=
- =?utf-8?B?cVl0S0wyT0Z6eHZjdFJBMzI3dmRqa1hqV3ArK0dUVk54a3JsMFpsWXBSR2VY?=
- =?utf-8?B?L1Q1RDNhdDhJTkM4VDNGcHlSWEFIMTBHVHNpa3piaDE0cmNGRzFEM2lpdCtR?=
- =?utf-8?B?SXMxaHZadnNUc3JVa1VNR2dYV0NsUk15VGdXaGM0SHp3RHRKeUhDUlgwcFdm?=
- =?utf-8?B?YmtCdUlkSE9QdTBwYkUwUkhJbjg2MlY3aGkzR050ZTdDV1djMHBwSkVZZWxq?=
- =?utf-8?B?S0VieWQ0SFEvK25xTDczMEJmbFRjMm1NOXFUS1BBSGFQNlgyM0JLRVY1cUVm?=
- =?utf-8?B?REV5dHM2eDFxa1NPM0Rxd0JBbjFRMmtxQURPcDBseWtkL1ZLcnd5Y0lMRnVV?=
- =?utf-8?B?Y2JPbmFOREpWd0VwMElJejdrQWNNTDQ3UmZFOWM4dDR0TnVFdEVPbHc2cWlP?=
- =?utf-8?B?YmxpcVp2anI2UjdvZGwwMW1oODA2a1h1dklueDdqYTdpNitVb2M1SnpzODlK?=
- =?utf-8?B?Z1JiSU1ubjBMbGpSSVhDcVI5RURUNjJmNWR6OWVlWklzT3ZJY0VCeDJBN04x?=
- =?utf-8?B?UXBhNU9OMWJOV2QrMENpM3VYYzhmS29aWFBWaFhPTGxHbmhhNHJGMEhPV2N0?=
- =?utf-8?B?dnVyYkJOMWp5REdrSTdKT2lDdHVmYWRRS3RlWGxZMFY1UlNHZnYvUWVoZnZv?=
- =?utf-8?B?OVpraGdGUmpxS01HamM1NE1YbXZ6cWptbEdYY29vSUlpdTBsR2grNkVKUHh0?=
- =?utf-8?B?S0Z1TFVTemtpSVBQUnRYL015K0VCWW9waDBNNEV5QnE1MW5ueVJYOXVEWFVL?=
- =?utf-8?B?Rm5RVWdlUURVbXZuZGxjc1pCZDRBY2NVMEc0QWZkVUhTdGM3QVRuVmloTjFE?=
- =?utf-8?B?cmNLM2NGVkg4U1Y3ZFB4aEg4ejhjRHpqOXE4T3dFL085andQaXAwZERMZWcv?=
- =?utf-8?B?QlhVYitEVnhRNU5OUnlkMmVaWURMbVF3WGhYZFp6emxYbnpXV1JXZnVURnY4?=
- =?utf-8?B?YzRvVGpKUXdxZlJjSXMzQkUyNjFtZkx1YVN2Q3cxZ1FCRkZpZHl2dDBVU1RH?=
- =?utf-8?B?Q3p2dUJBZjgxV0RRd0V6RDBsU0lUVFd5UDJwbDZJdTVmcHoraEhuSGQrcysr?=
- =?utf-8?B?ek1HMWN3OEdYWkh6bnlaRGY5aS9HazJLbCsyZjk5cVJKV1BLUVA4eHRvZXU0?=
- =?utf-8?B?K244aHJVZUhwV0V3dkNiTUZwdnhkY29XZ0UrS2xMNExhZzlEaU5YUEtPK3VV?=
- =?utf-8?B?Rkh4N1JMdXlNWDdXNU9UblJjODh2RzVKTXNFR1orcDJHa3JLSnd1bnhYQk9z?=
- =?utf-8?B?cFJ5bUlSMnJPSGlOcHl4Z2JFUFlLdDRkRDBGWXN1SHBmczRhTFNjNC96TEtT?=
- =?utf-8?B?TE5kRys4bkxIa2pZWjVub0xHemh3SUhHNm00MHNPVmk1Mk9EdHpzSFduTmRG?=
- =?utf-8?B?Vk92ZURUdUttZjB6TGxkRlBKd2VIRWJjNXhMaE1qTHcrV1hzNE1IS0t6LzZG?=
- =?utf-8?B?MFJzMUU3WWQ5Wm5vK2VhSlFQZ3RPY0tiRVZMdnJBTUxpLy82WWpiOVlnc2po?=
- =?utf-8?B?aDBKdmwwbGlWdnV5L3oxdzhNN3dUVHY1VmNEdDhNQytSRWZYeDhRWEtpYVVv?=
- =?utf-8?B?MUhyNFNLVmhYcERpTkNOOGF3ekV3VE8rSkt6TmEvaTVxWnFpVzNXZE5NMStL?=
- =?utf-8?B?cUl0VmNlS0htL2FXMzZyRXBSc1FZeG9kTVdRUWl5YlpPZ21raEF2RFJyMzhw?=
- =?utf-8?B?RDl0MFMyNVBmdTZwOE1lTzJaYVBtMHFGNlpTTk5nNzZldG9RTHkxN3gvY29R?=
- =?utf-8?B?MlpqdERTYmFnVE5GbjNwcm5jZ2hnR1VJWU9UK2M2c0xxMnBDdFZDejljenZh?=
- =?utf-8?B?QWhFdmQ0aXZ3VExoN2lva0t1cjhVbHVTOHlhTXVEVW9iQzBhdEVkT2hrYzBW?=
- =?utf-8?B?ZXc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d096c37-26f3-4fe0-9ac8-08dc96a69379
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 12:42:16.4082 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dbo0ku+3401Fzx2TnGi0SHfbXsOj5wpPM3EKToP40pFHVL8W0qa/RJewXppFafPi22Y7MiR7zec6h5LyWtC0K+PK9YBN5U2Kejz9kp/ZYdA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7757
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,40 +86,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Both GitLab and Azure (and other CI systems) have native support for
+displaying JUnitXML test report results. The pytest framework that we
+use can generate these reports. Change our CI tests so that they will
+generate these reports and then have the respective CI platform pick
+them up. We write to different locations because of where each CI is
+(and isn't) able to easily pass things along.
 
-On 6/27/24 1:58 AM, Marek Vasut wrote:
-> Insert /u-boot,<dto-name> = <index> property into the U-Boot control DT
-> during SPL DTO application process. This can be used by user to inspect
-> which DTOs got applied by the SPL and in which order from running U-Boot.
-> 
-> Example:
-> ```
-> u-boot=> fdt addr $fdtcontroladdr && fdt list /
-> Working FDT set to aee9aeb0
-> / {
->          u-boot,fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 = <0x00000005>;
->          u-boot,fdt-dto-imx8mp-dhcom-som-overlay-rev100 = <0x00000004>;
->          u-boot,fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast = <0x00000003>;
->          u-boot,fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast = <0x00000002>;
-> ...
-> ```
-> 
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml | 12 +++++++++++-
+ .gitlab-ci.yml       |  5 ++++-
+ 2 files changed, 15 insertions(+), 2 deletions(-)
 
-Shouldn't this rather be in /config node?
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index c43bb51066a5..fff78785ee92 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -287,7 +287,7 @@ stages:
+           export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
+           export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
+           # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \$var" if not
+-          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR"
++          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
+           # the below corresponds to .gitlab-ci.yml "after_script"
+           rm -rf /tmp/uboot-test-hooks /tmp/venv
+           EOF
+@@ -371,6 +371,7 @@ stages:
+           docker run "$@" --device /dev/fuse:/dev/fuse \
+                          -v $PWD:$(work_dir) \
+                          -v $(Pipeline.Workspace):$(Pipeline.Workspace) \
++                         -v $(System.DefaultWorkingDirectory):$(System.DefaultWorkingDirectory) \
+                          -e WORK_DIR="${WORK_DIR}" \
+                          -e TEST_PY_BD="${TEST_PY_BD}" \
+                          -e TEST_PY_ID="${TEST_PY_ID}" \
+@@ -378,6 +379,10 @@ stages:
+                          -e OVERRIDE="${OVERRIDE}" \
+                          -e BUILD_ENV="${BUILD_ENV}" $(ci_runner_image) \
+                          $(Pipeline.Workspace)/testsh/test.sh
++      - task: PublishTestResults@2
++        inputs:
++          testResultsFormat: 'JUnit'
++          testResultsFiles: 'results.xml'
+ 
+ - stage: test_py_qemu
+   jobs:
+@@ -495,6 +500,7 @@ stages:
+           docker run "$@" --device /dev/fuse:/dev/fuse \
+                          -v $PWD:$(work_dir) \
+                          -v $(Pipeline.Workspace):$(Pipeline.Workspace) \
++                         -v $(System.DefaultWorkingDirectory):$(System.DefaultWorkingDirectory) \
+                          -e WORK_DIR="${WORK_DIR}" \
+                          -e TEST_PY_BD="${TEST_PY_BD}" \
+                          -e TEST_PY_ID="${TEST_PY_ID}" \
+@@ -503,6 +509,10 @@ stages:
+                          -e BUILD_ENV="${BUILD_ENV}" $(ci_runner_image) \
+                          $(Pipeline.Workspace)/testsh/test.sh
+         retryCountOnTaskFailure: 2 # QEMU may be too slow, etc.
++      - task: PublishTestResults@2
++        inputs:
++          testResultsFormat: 'JUnit'
++          testResultsFiles: 'results.xml'
+ 
+ - stage: world_build
+   jobs:
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 165f765a8332..a6c5040239ae 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -41,7 +41,7 @@ stages:
+       fi
+ 
+   after_script:
+-    - cp -v /tmp/${TEST_PY_BD}/*.{html,css} .
++    - cp -v /tmp/${TEST_PY_BD}/*.{html,css,xml} .
+     - rm -rf /tmp/uboot-test-hooks /tmp/venv
+   script:
+     # If we've been asked to use clang only do one configuration.
+@@ -83,11 +83,14 @@ stages:
+       ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID}
+         ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
+         --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
++        --junitxml=/tmp/${TEST_PY_BD}/results.xml
+   artifacts:
+     when: always
+     paths:
+       - "*.html"
+       - "*.css"
++    reports:
++      junit: results.xml
+     expire_in: 1 week
+ 
+ .world_build:
+-- 
+2.34.1
 
-Also, I am highly suggesting to have an additional prefix aside from 
-u-boot to avoid unfortunate name clashes between DTO and existing 
-properties. Or could be in its own child node of /config ?
-
-In any case, can you please add or edit a file somewhere to define this 
-new dt-binding.
-
-Additional question, what is this index for?
-
-I am wondering if we cannot simply have a string array with overlays 
-applied left-to-right or right-to-left instead? Or u-boot,fdt-dto-N = 
-"imx8mp-dhcom-pdk3-overlay-rev100";
-
-Cheers,
-Quentin
