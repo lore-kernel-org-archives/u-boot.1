@@ -4,55 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C37EC2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 19:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CAFC2BD09
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 19:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DF5788435;
-	Thu, 27 Jun 2024 21:29:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
+	by phobos.denx.de (Postfix) with ESMTP id B022D88247;
+	Thu, 27 Jun 2024 21:35:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 498BE884FD; Thu, 27 Jun 2024 21:29:55 +0200 (CEST)
-Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F109187F51
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 21:29:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
-Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4W97tm3y1lz9vBg;
- Thu, 27 Jun 2024 21:29:52 +0200 (CEST)
-Received: from pegase1.c-s.fr ([192.168.12.234])
- by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8s8SCli8WGAl; Thu, 27 Jun 2024 21:29:52 +0200 (CEST)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4W97tm2Zn9z9vBc;
- Thu, 27 Jun 2024 21:29:52 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 5410D8B776;
- Thu, 27 Jun 2024 21:29:52 +0200 (CEST)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id vIm_94BVr4DL; Thu, 27 Jun 2024 21:29:52 +0200 (CEST)
-Received: from [192.168.232.4] (PO20524.IDSI0.si.c-s.fr [192.168.232.4])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id E71AB8B763;
- Thu, 27 Jun 2024 21:29:51 +0200 (CEST)
-Message-ID: <0f489861-2847-421b-9e8c-4b84786d3373@csgroup.eu>
-Date: Thu, 27 Jun 2024 21:29:50 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iUhbdyuD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 89C97884F9; Thu, 27 Jun 2024 21:35:03 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B0916809A8
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 21:34:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-25d57957b37so1198823fac.2
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 12:34:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1719516898; x=1720121698; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pYu+swD1Tml/5H6O4sF2/0BxHfp4Bgp4GAEPgS7COWs=;
+ b=iUhbdyuDap27/XCO7HyHIh0K3Z/cHW34Yv2+6aHRhRP+NfyYRdowSbni2fQaTnH2ln
+ FiC0cewAJr1SubD5Z9jtZ8spSHWET2S4JHjSrTDEssrt1k3bTDJOAg4YhJmVsFWeXJ3K
+ VLltfTc6oZTXevMu117AuBjTy9cOOyrWYoUJk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719516898; x=1720121698;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pYu+swD1Tml/5H6O4sF2/0BxHfp4Bgp4GAEPgS7COWs=;
+ b=Un5VfNlXoLadoAskcAaqeLh5L0Z1ydWLiRRTLHoA7RaTUiBsQjpHFltnG86bRf3idA
+ aepMFBxS3CkL55bc4bJM1g9d1uQVUy0iwKV3bP2L3HQR/xo5uyQzcZmcv3Q3e7utiwzy
+ HjWXj2Szp2UPBmDTg5wWiHtRNCpsTQ6e21LDOIpYenTn6z01Ooc/O9V8/bo5+59kadHt
+ Su8he3Ca1emNqbZtpAb0JVuPJ7hDqoHUYHxQeSuS42nioG0Ft9uwkOSDjqKxlnECYHD1
+ 9VJFVWpFbeoJVtuj+QBqmMLl7BJvw4SRSeuc7030Vlz2AnqspXw55sQUCL3HGJU9IZJV
+ /lhg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW84F6XA6N6KjKdApG4RiMnDNM6lJsu2vR/mj1gsfzopuwlrZscMEPbBSynjolqconfR46mzHA7FT5x0xooCKyRAxbqxQ==
+X-Gm-Message-State: AOJu0YzKMUo1ogY2btb3jS1IbiUrF4nOR0EhV6Hsfsn+V8E9Hrr9IV2P
+ FkE9ydq8m9GQQ+7S7ACeJ+LpaLN88VNEKPFc4QSeZIHL4zT8UpwG6BGZyNIZoWk=
+X-Google-Smtp-Source: AGHT+IGLpyRiIFiEQJ1Kdosoy9pe8FkRodYySuZx1tGAIKiFMkh444JE/4r5JHCqT40UVQ8+CSixrQ==
+X-Received: by 2002:a05:6870:15ca:b0:254:e8d6:cab0 with SMTP id
+ 586e51a60fabf-25d06cdd82amr15528361fac.34.1719516898433; 
+ Thu, 27 Jun 2024 12:34:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-701f7ab182csm61346a34.20.2024.06.27.12.34.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Jun 2024 12:34:57 -0700 (PDT)
+Date: Thu, 27 Jun 2024 13:34:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] zlib: Fix big performance regression
+Message-ID: <20240627193455.GE38804@bill-the-cat>
+References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "zlib: Port fix for CVE-2016-9841 to U-Boot"
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>
-References: <20240627154909.3536095-1-trini@konsulko.com>
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-In-Reply-To: <20240627154909.3536095-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="d5At3sqbBKTX9JnZ"
+Content-Disposition: inline
+In-Reply-To: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,282 +92,127 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--d5At3sqbBKTX9JnZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Le 27/06/2024 à 17:49, Tom Rini a écrit :
-> In commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
-> Michal brings in (correctly) the upstream fix for CVE-2016-9841.
-> However, when upstream was fixing this issue they also removed a
-> necessary optimization for some CPU classes as part of simplifying the
-> code. This in turn leads to boot failures on the platforms as they now
-> take too long to decompress images and so the watchdog sees the system
-> as stuck.
-> 
-> The long term fix here is as Christophe has posted, which is to restore
-> the optimization. Given the nearness of the release, what I do here is
-> very similar, result wise, but less so, code wise. This is a revert of
-> Michal's commit _except_ we only allow for post-increment in the code,
-> thus keeping the CVE resolved. For the next release this commit shall be
-> reverted and then Christophe's patch applied.
-> 
-> This largely reverts commit 340fdf1303dce7e5f53ddd981471836058ff23ef.
-> 
-> Reported-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
 
-Tested-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-
-> --
-> Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
-> Cc: Michal Simek <michal.simek@amd.com>
+> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+> brings a big performance regression in inflate_fast(), which leads
+> to watchdog timer reset on powerpc 8xx.
+>=20
+> It looks like that commit does more than what it describe, it
+> especially removed an important optimisation that was doing copies
+> using halfwords instead of bytes. That unexpected change multiplied
+> by almost 4 the time spent in inflate_fast() and increased by 40%
+> the overall time needed to uncompress linux kernel image.
+>=20
+> So partially revert that commit but keep post incrementation as it
+> is the initial purpose of said commit.
+>=20
+> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 > ---
->   lib/zlib/inffast.c | 117 +++++++++++++++++++++++++++++----------------
->   1 file changed, 75 insertions(+), 42 deletions(-)
-> 
+>  lib/zlib/inffast.c | 51 ++++++++++++++++++++++++++++++++++++----------
+>  1 file changed, 40 insertions(+), 11 deletions(-)
+
+Both this, and my mostly revert lead to CI failures around compression
+tests:
+https://source.denx.de/u-boot/u-boot/-/jobs/859329
+
+>=20
 > diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
-> index 5e2a65ad4d27..c271d85ea191 100644
+> index 5e2a65ad4d..c4b1d12258 100644
 > --- a/lib/zlib/inffast.c
 > +++ b/lib/zlib/inffast.c
-> @@ -1,5 +1,5 @@
->   /* inffast.c -- fast decoding
-> - * Copyright (C) 1995-2008, 2010, 2013 Mark Adler
-> + * Copyright (C) 1995-2004 Mark Adler
->    * For conditions of distribution and use, see copyright notice in zlib.h
->    */
->   
-> @@ -12,6 +12,12 @@
->   
->   #ifndef ASMINF
->   
-> +/*
-> + * Only allow post-increment in order to resolve CVE-2016-9841
-> + */
-> +#  define OFF 0
-> +#  define PUP(a) *(a)++
-> +
->   /*
->      Decode literal, length, and distance codes and write out the resulting
->      literal and match bytes until either not enough input or output is
-> @@ -47,13 +53,12 @@
->         requires strm->avail_out >= 258 for each loop to avoid checking for
->         output space.
->    */
-> -void ZLIB_INTERNAL inflate_fast(strm, start)
-> -z_streamp strm;
-> -unsigned start;         /* inflate()'s starting value for strm->avail_out */
-> +void inflate_fast(z_streamp strm, unsigned start)
-> +/* start: inflate()'s starting value for strm->avail_out */
->   {
->       struct inflate_state FAR *state;
-> -    z_const unsigned char FAR *in;      /* local strm->next_in */
-> -    z_const unsigned char FAR *last;    /* have enough input while in < last */
-> +    unsigned char FAR *in;      /* local strm->next_in */
-> +    unsigned char FAR *last;    /* while in < last, enough input available */
->       unsigned char FAR *out;     /* local strm->next_out */
->       unsigned char FAR *beg;     /* inflate()'s initial strm->next_out */
->       unsigned char FAR *end;     /* while out < end, enough space available */
-> @@ -79,7 +84,7 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->   
->       /* copy state to local variables */
->       state = (struct inflate_state FAR *)strm->state;
-> -    in = strm->next_in;
-> +    in = strm->next_in - OFF;
->       last = in + (strm->avail_in - 5);
->       if (in > last && strm->avail_in > 5) {
->           /*
-> @@ -89,7 +94,7 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->   	strm->avail_in = 0xffffffff - (uintptr_t)in;
->           last = in + (strm->avail_in - 5);
->       }
-> -    out = strm->next_out;
-> +    out = strm->next_out - OFF;
->       beg = out - (start - strm->avail_out);
->       end = out + (strm->avail_out - 257);
->   #ifdef INFLATE_STRICT
-> @@ -110,9 +115,9 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->          input data or output space */
->       do {
->           if (bits < 15) {
-> -            hold += (unsigned long)(*in++) << bits;
-> +            hold += (unsigned long)(PUP(in)) << bits;
->               bits += 8;
-> -            hold += (unsigned long)(*in++) << bits;
-> +            hold += (unsigned long)(PUP(in)) << bits;
->               bits += 8;
->           }
->           here = lcode[hold & lmask];
-> @@ -125,14 +130,14 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->               Tracevv((stderr, here.val >= 0x20 && here.val < 0x7f ?
->                       "inflate:         literal '%c'\n" :
->                       "inflate:         literal 0x%02x\n", here.val));
-> -            *out++ = (unsigned char)(here.val);
-> +            PUP(out) = (unsigned char)(here.val);
->           }
->           else if (op & 16) {                     /* length base */
->               len = (unsigned)(here.val);
->               op &= 15;                           /* number of extra bits */
->               if (op) {
->                   if (bits < op) {
-> -                    hold += (unsigned long)(*in++) << bits;
-> +                    hold += (unsigned long)(PUP(in)) << bits;
->                       bits += 8;
->                   }
->                   len += (unsigned)hold & ((1U << op) - 1);
-> @@ -141,9 +146,9 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->               }
->               Tracevv((stderr, "inflate:         length %u\n", len));
->               if (bits < 15) {
-> -                hold += (unsigned long)(*in++) << bits;
-> +                hold += (unsigned long)(PUP(in)) << bits;
->                   bits += 8;
-> -                hold += (unsigned long)(*in++) << bits;
-> +                hold += (unsigned long)(PUP(in)) << bits;
->                   bits += 8;
->               }
->               here = dcode[hold & dmask];
-> @@ -156,10 +161,10 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->                   dist = (unsigned)(here.val);
->                   op &= 15;                       /* number of extra bits */
->                   if (bits < op) {
-> -                    hold += (unsigned long)(*in++) << bits;
-> +                    hold += (unsigned long)(PUP(in)) << bits;
->                       bits += 8;
->                       if (bits < op) {
-> -                        hold += (unsigned long)(*in++) << bits;
-> +                        hold += (unsigned long)(PUP(in)) << bits;
->                           bits += 8;
->                       }
->                   }
-> @@ -178,18 +183,17 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->                   if (dist > op) {                /* see if copy from window */
->                       op = dist - op;             /* distance back in window */
->                       if (op > whave) {
-> -                        strm->msg =
-> -                            (char *)"invalid distance too far back";
-> +                        strm->msg = (char *)"invalid distance too far back";
->                           state->mode = BAD;
->                           break;
->                       }
-> -                    from = window;
-> +                    from = window - OFF;
->                       if (wnext == 0) {           /* very common case */
->                           from += wsize - op;
->                           if (op < len) {         /* some from window */
->                               len -= op;
->                               do {
-> -                                *out++ = *from++;
-> +                                PUP(out) = PUP(from);
->                               } while (--op);
->                               from = out - dist;  /* rest from output */
->                           }
-> @@ -200,14 +204,14 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->                           if (op < len) {         /* some from end of window */
->                               len -= op;
->                               do {
-> -                                *out++ = *from++;
-> +                                PUP(out) = PUP(from);
->                               } while (--op);
-> -                            from = window;
-> +                            from = window - OFF;
->                               if (wnext < len) {  /* some from start of window */
->                                   op = wnext;
->                                   len -= op;
->                                   do {
-> -                                    *out++ = *from++;
-> +                                    PUP(out) = PUP(from);
->                                   } while (--op);
->                                   from = out - dist;      /* rest from output */
->                               }
-> @@ -218,36 +222,65 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->                           if (op < len) {         /* some from window */
->                               len -= op;
->                               do {
-> -                                *out++ = *from++;
-> +                                PUP(out) = PUP(from);
->                               } while (--op);
->                               from = out - dist;  /* rest from output */
->                           }
->                       }
->                       while (len > 2) {
-> -                        *out++ = *from++;
-> -                        *out++ = *from++;
-> -                        *out++ = *from++;
-> +                        PUP(out) = PUP(from);
-> +                        PUP(out) = PUP(from);
-> +                        PUP(out) = PUP(from);
->                           len -= 3;
->                       }
->                       if (len) {
-> -                        *out++ = *from++;
-> +                        PUP(out) = PUP(from);
->                           if (len > 1)
-> -                            *out++ = *from++;
-> +                            PUP(out) = PUP(from);
->                       }
->                   }
->                   else {
+> @@ -236,18 +236,47 @@ unsigned start;         /* inflate()'s starting val=
+ue for strm->avail_out */
+>                      }
+>                  }
+>                  else {
 > +		    unsigned short *sout;
 > +		    unsigned long loops;
 > +
->                       from = out - dist;          /* copy direct from output */
-> -                    do {                        /* minimum length is three */
-> -                        *out++ = *from++;
-> -                        *out++ = *from++;
-> -                        *out++ = *from++;
-> -                        len -= 3;
+>                      from =3D out - dist;          /* copy direct from ou=
+tput */
+> -                    do {                        /* minimum length is thr=
+ee */
+> -                        *out++ =3D *from++;
+> -                        *out++ =3D *from++;
+> -                        *out++ =3D *from++;
+> -                        len -=3D 3;
 > -                    } while (len > 2);
 > -                    if (len) {
-> -                        *out++ = *from++;
+> -                        *out++ =3D *from++;
 > -                        if (len > 1)
-> -                            *out++ = *from++;
+> -                            *out++ =3D *from++;
 > -                    }
 > +                    /* minimum length is three */
 > +		    /* Align out addr */
-> +		    if (!((long)(out - 1 + OFF) & 1)) {
-> +			PUP(out) = PUP(from);
+> +		    if (!((long)(out - 1) & 1)) {
+> +			*out++ =3D *from++;
 > +			len--;
 > +		    }
-> +		    sout = (unsigned short *)(out - OFF);
+> +		    sout =3D (unsigned short *)out;
 > +		    if (dist > 2 ) {
 > +			unsigned short *sfrom;
 > +
-> +			sfrom = (unsigned short *)(from - OFF);
-> +			loops = len >> 1;
+> +			sfrom =3D (unsigned short *)from;
+> +			loops =3D len >> 1;
 > +			do
-> +			    PUP(sout) = get_unaligned(++sfrom);
+> +			    *sout++ =3D get_unaligned(++sfrom);
 > +			while (--loops);
-> +			out = (unsigned char *)sout + OFF;
-> +			from = (unsigned char *)sfrom + OFF;
-> +		    } else { /* dist == 1 or dist == 2 */
+> +			out =3D (unsigned char *)sout;
+> +			from =3D (unsigned char *)sfrom;
+> +		    } else { /* dist =3D=3D 1 or dist =3D=3D 2 */
 > +			unsigned short pat16;
 > +
-> +			pat16 = *(sout-2+2*OFF);
-> +			if (dist == 1)
+> +			pat16 =3D *(sout-2);
+> +			if (dist =3D=3D 1)
 > +#if defined(__BIG_ENDIAN)
-> +			    pat16 = (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
+> +			    pat16 =3D (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
 > +#elif defined(__LITTLE_ENDIAN)
-> +			    pat16 = (pat16 & 0xff00) | ((pat16 & 0xff00 ) >> 8);
+> +			    pat16 =3D (pat16 & 0xff00) | ((pat16 & 0xff00 ) >> 8);
 > +#else
 > +#error __BIG_ENDIAN nor __LITTLE_ENDIAN is defined
 > +#endif
-> +			loops = len >> 1;
+> +			loops =3D len >> 1;
 > +			do
-> +			    PUP(sout) = pat16;
+> +			    *sout++ =3D pat16;
 > +			while (--loops);
-> +			out = (unsigned char *)sout + OFF;
+> +			out =3D (unsigned char *)sout;
 > +		    }
 > +		    if (len & 1)
-> +			PUP(out) = PUP(from);
->                   }
->               }
->               else if ((op & 64) == 0) {          /* 2nd level distance code */
-> @@ -283,8 +316,8 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
->       hold &= (1U << bits) - 1;
->   
->       /* update state and return */
-> -    strm->next_in = in;
-> -    strm->next_out = out;
-> +    strm->next_in = in + OFF;
-> +    strm->next_out = out + OFF;
->       strm->avail_in = (unsigned)(in < last ? 5 + (last - in) : 5 - (in - last));
->       strm->avail_out = (unsigned)(out < end ?
->                                    257 + (end - out) : 257 - (out - end));
+> +			*out++ =3D *from++;
+>                  }
+>              }
+>              else if ((op & 64) =3D=3D 0) {          /* 2nd level distanc=
+e code */
+> --=20
+> 2.44.0
+>=20
+
+--=20
+Tom
+
+--d5At3sqbBKTX9JnZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9vtwACgkQFHw5/5Y0
+tywrYwwAtpGi9YdsyCw6YkLwIuvgapPB6V5TiBTpQSjp+M5O9+WXsR3hlCay698x
+hMZfprsJ+NU7G1jAZXJ6ilYvMfiMUd4Kog//OKXiZabn9wQ9V1IyiOL1I72mjI2/
+6c7LKGqu0vwRbeYFCvFskyuzLElR2dLF9wIgaMZdqkewpWwmrE04mlUDs2cPslRe
+8pc0wMo2l8OrcLpAHaF6jM22PXkHhfCsxE3CoGdx99NfVFz7SiD1qTtxF/7UR7nI
+lB5Ts7oVpJzLOR6LfTR3q86lSbVOK4VL19iZVhcJ32ggjB+5oetmnZ6g4JO8W7Zk
+Mz4SdZxC6pU9vv+H8yoCj9Iq3aFi4+JNvveFn4JE3Cp/cF6LGuOS0I9jtSbWuuep
+wOdKP+uuti+W7D8eH5X4oEscWrcRIVIAaBTRKB2H1BrpG4noE2dm+Oyam1QLaJCt
+Qq8dkQ2C2CLQ6P/GBVRXN1CWUxIzaWX26U3mLysqOx1uwIfrKP53ckIFTEMdqghQ
+7Zfmuhnr
+=QNyI
+-----END PGP SIGNATURE-----
+
+--d5At3sqbBKTX9JnZ--
