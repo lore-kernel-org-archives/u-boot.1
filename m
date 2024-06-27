@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C892C3064D
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 11:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715E5C3064D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 11:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E53C98862C;
-	Thu, 27 Jun 2024 13:40:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D32C88605;
+	Thu, 27 Jun 2024 13:40:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="FQ44NDu/";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="1PiMXCWx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F1A58861A; Thu, 27 Jun 2024 13:40:06 +0200 (CEST)
+ id 35A7588605; Thu, 27 Jun 2024 13:40:07 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
  (mail-vi1eur05on20701.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:2613::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8090885E7
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 13:40:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E257885D4
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 13:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ACFP4stcQ5teTtRM2Pa4Uw6ZYKzNWZRKYsaDyWE/5Do+KdL7qEtXTxCqILC8Sc59OmpKsmWS5XKGxHPSJeY10bwZ31chha3veG9BpNwrUgjhh4D8WPoby3fG2o6SonEGcEwSLL8LZf/nhOa8n2quauCecKreXiyNx44MMXArKUT1/9u08LhGuzCDXcPWNr76crig/xw5oa3dPO3XYDwVkn5ln5gU8pLKuEYRVqRG7sr7zXnhkDKd8r+chgfc7W3gPj9ZPzD16HkBf/yraoNXwTcq/u6ZwZsjw10qAIoMT+MUY/rQ2sT8zXT24gB61CSnBTDtd1dG4oelB8bn+EX9Yw==
+ b=GjLc564lKi+f4rcJwZLUQ5A9zkNN/r4/BdxTPhXsMFCGAlUceQ9/I24i2s/fbHeQ1qgtDPeKZDiSi7DsIsc6Gub9O664+QN8p0aeiMCUWVbffZTzjeyuw2wSzHebfPax8tol+XIZ4PS/ice2duc7+Kadsbik3fQcJC9p719RUNASCo4VEORpEVoBk3u7I+QeGFKoijslaefH3bp2RuECjrFUWeYnpDlr5qjsD1o4BqIDtWNuNVDhcKy8wOODeBk7qAo7GRfOvvFxkq3qdZWbZFMImKy0x1ur4ndPOqCCeAyIaQqNKL65seVHPIHwUl7KchhoHuuagjw7b77yAtWNUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eP6uG9qhaM0zqflh4V2LCmovCnLOEH3UDDHo12ZY08E=;
- b=burqGUbthW+o3Gn5mypxH7Y2f2QWuvd6qy89XGR8sc04ykz9n6x3FuxAfl+J0oo3WxK9mE9/Yb7/cM2FqsyllQacK9yQ6OlnOumfmkZu5NJFlk+AxeJeIX1clGdwH2V0weqaXYsZjbGomO4Cq1yS2L3qbYnSDmvX5FDblTShG2S+JeyHsqAzr+XaJXWokvJClKHArgZOCbbD44zaG0SjaezxZL6aQhbTJBhhgPjPIkUEIFwMNSTMDUZ4REKbNJo2hKwd+InMHpIEjw+c5hYmUJn8edHbueh1QXA40Nqq8Uv6TabW5WBqDCVakwzGvKunQWLm0dQ+6kqLcf1vo1Ab7A==
+ bh=wgBiX12vd1N27uJkxDfQ3F8Sdu73DZ7eumt1cC6V9LE=;
+ b=fwkdKD/cF3f0hlzsH0isCKE/rF4QiIKZaYZNFzJJbugcYzgxu2b/z8YrhPQa1dICpDSMLkcNg8YTULFXmM4ajFy6STIbRXcuGTCol11gn9tu1hJHsfdpsEW8f8E82EzpyCY9NbmRcKmk6unoQFqwGdDrUlEgNyU+EyjounLo6BZBIAK8MQOC+u/8cwjM7Lyy7WOijBpQWfe/s9o9tVlt089RWpuRlDRzz5a6ZK22HBug1sUkV1HfPT4yvJb2/9oxDM9fCI6ETwP802RG5Q7wHFcZ6/lm2F3ef6pzFued1h19Fa/LSXZkCkHCdpCDIs7wNfszfx+Hr2KE73S7gi9dUw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eP6uG9qhaM0zqflh4V2LCmovCnLOEH3UDDHo12ZY08E=;
- b=FQ44NDu/BXkUPs8amBmPR7wm7sdx8IUPMvNlvVFwaweSQq0Qy0sdQLw9boWbO5c2vuQzH1ZQ9f90JcZapOm99oz7J7+5oxLm7s2LltrUEbd03TyW9DscGfNjLvNlXcWVYACRR9v66qse0q05jaWK4lHNrCEG7nEHnc07SlgNSZun733CEC0e2uzZ25qB8ia8/3Y9UisS+oHxMAJNfZIBMDkyO31hZNBiLZlU2oNwb5UgrcexKFITcKbMCoN2hHxoLqj3srxwHCnE408rwUezJOKip3hsQs6V3KBJEtGgPe9zl/9RbYpMaKuZE0tv7S9ZPq75PPj0kpR4RXrmpcKFBA==
+ bh=wgBiX12vd1N27uJkxDfQ3F8Sdu73DZ7eumt1cC6V9LE=;
+ b=1PiMXCWxeeH8Yf08QKzdY/X8g8D85L4OKEK+rW0MIlrtaUTjNCzS4swuJoBiwYQls0ZkwYgoIqh7//A4tYvCClN/TZSNvX0vEcCRBggrOc0+HsuEgCtcN1NzgNNPyf7TgGG8NyE1m0/skfpFzqw3Gsohbxha6Cu2qCkx4I8RvgslGqyFfkF59wGG8hT7H8TUfSiaVO9zWTCmNOhZDh//hn00GkJP/1zeToT+3SXwXuxTTCfrN1g8LOYzOFLdaOTn0kXzDP5BqPntleJkhDz7PzoiVHpiECMrmNw2PK0s0eazrsDFqBOqgKBi87jmf1fHMgrDcEPDA3Y1CTS3qMSP7w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by VI0PR08MB10427.eurprd08.prod.outlook.com (2603:10a6:800:1b8::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.35; Thu, 27 Jun
- 2024 11:40:00 +0000
+ 2024 11:40:01 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7698.025; Thu, 27 Jun 2024
- 11:40:00 +0000
+ 11:40:01 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -68,9 +68,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Baruch Siach <baruch@tkos.co.il>, Siddharth Vadapalli <s-vadapalli@ti.com>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>,
  Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
-Subject: [PATCH 09/12] net/httpd-upload: add web-server for file uploading
-Date: Thu, 27 Jun 2024 14:39:36 +0300
-Message-ID: <20240627113939.100620-9-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 10/12] net/tcp: simplify tcp header filling code
+Date: Thu, 27 Jun 2024 14:39:37 +0300
+Message-ID: <20240627113939.100620-10-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240627113939.100620-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240627113939.100620-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,78 +82,78 @@ X-ClientProxiedBy: GV3PEPF00002BB3.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|VI0PR08MB10427:EE_
-X-MS-Office365-Filtering-Correlation-Id: 213774b4-b67d-4293-8dcd-08dc969de08a
+X-MS-Office365-Filtering-Correlation-Id: dd315fe1-935a-460c-29dd-08dc969de17d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|7416014|52116014|1800799024|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6ZO8A7Oo71tT/ICmHVPIWOoFD9QQDgkBYWnp+j426YsgbHaFF2x2QZyf9hzr?=
- =?us-ascii?Q?4ILwjnj6GjecXqA9wL0HpGpvURmaDzu4egvFWoK8HXiNGXhlvKMcn9jUixuz?=
- =?us-ascii?Q?FtC98iQpHanLRQ6MZCDeJ7cLg/KgjlTY8g+moBJ7bnGXAwfHpaGki+rM6FsV?=
- =?us-ascii?Q?toqj5uxr45Acqo9VvAp4+zr7kiwdCuV9UPYvesZhwhb3uPoypgamTv0z/eOd?=
- =?us-ascii?Q?AVovtXUW4FCt3iWYd3xZBDzjlubahblCtj+fbVfigMYy2I6/EJwNTRRUl8K5?=
- =?us-ascii?Q?+qmccdUmJh3dwBkgn3eHFDbEQfjn4HcTxlwLpiqbLpWeipeUKsNtPOi02rcu?=
- =?us-ascii?Q?iyxVQCYi0122c9h5QjEeqXkpGBx6xnP2ChnzxwZPMdBS8Mo7C5mRH6RZMvog?=
- =?us-ascii?Q?v+ilOU30eadk5J3qXu+b8vJ2YGjZGnoVv0wLSv5HWE9UTQEhvz4ey833m3yH?=
- =?us-ascii?Q?XmCxE+J4NTZhs8ipJggEviHFgYVym53rzJ0fKp6t7eiRUkQnR+oCRneQZ1Fx?=
- =?us-ascii?Q?G6121zXA+BI7PMmBTxjd/jo7ugWLGkRZRpcD85T5b3OGJg3LRYOyNQtxbYr8?=
- =?us-ascii?Q?MhC+Yoh/cIItBrlHZk2EmPbkfOqF3TKkrMpJEx34IfWIBYB52ema0F0PUs73?=
- =?us-ascii?Q?nWKoDLASEvS42mkO3gTKNusmmptjPwMowWaHGEbgK/xrmun91EAyOcx5cmjy?=
- =?us-ascii?Q?00QDiG/O/oPI/wp3DOO4nzRxjqz1RekpHPFUETcVUNTT6DTl5wwhh/InzeZQ?=
- =?us-ascii?Q?zrF+ckpMxuyXTXoffIqRKGY5nG53wPVYV+3I3BQASEk/HZsFPqkp4AfMiRSg?=
- =?us-ascii?Q?DwxCwe/DImtmqC1/4Rcdqf4HT2mXulCalWSOc6kNfGn0hiCjftEl60x7IJJP?=
- =?us-ascii?Q?KzenAyDc8amn0kVHVkTrkl10fdkJI5AaRekJOPtkwPKu0djIFX5Ds2CxhkGy?=
- =?us-ascii?Q?KrFjuTsHdXYG6ExPmgc77RrTQ58UHBuIjZMVD8U7zxEmiyydnkDaZcmyc2n7?=
- =?us-ascii?Q?v819FcRKPopkwNuxyjE/Bewk0ZgRmtsk+FzX90AARZ3m5MiBbo7AerX23hNB?=
- =?us-ascii?Q?PV2yP9D3RYcSPPQZCaqkwRXsYDAIfawtFOemZaXk22D8EKWCA8ZdqVHsNKmU?=
- =?us-ascii?Q?gJeXXWCRqEer4rmuGdXyL9aghsUW1bHGK79FS9QjiMqUlwlAApdygsCjT4HF?=
- =?us-ascii?Q?V3I6HRtk2JdRVeTGUHt2besfBHo3m4tV5y7rXriuH3xAa0FTzMgSDztqro8u?=
- =?us-ascii?Q?ZFCJsJLXnuuZqlXfWXEaH1YKRxR5lx7bT/K+AKo/MLInJrAUw7dNDYyllVw6?=
- =?us-ascii?Q?vp96xUyeosDgsbEp0xznZy/ScQRcFHYa0c2AYWv4xmB7lvUDvkHrAzapWRsO?=
- =?us-ascii?Q?U30yd5QndzTcSg7JDyuOR5LWK/GAJexm9Wo8t/o74InQqGsmg9eo5/NBly8R?=
- =?us-ascii?Q?iS6t0yzMBes=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HxpODs6RyXyHHe2zHZVKPyHGep0ajd0MBXOnju0lXowv4mV3oVNvBQ9+fmEg?=
+ =?us-ascii?Q?T+k6rVsiEw+0ZzXhkZcNNxTivxAq71+VcD0PeRMC6Z6RFqV6KMdD17NZoSsY?=
+ =?us-ascii?Q?NWza1yqK/CsAYKdH7014Gg/BzzJ5m5lLGaCs6rzVb4OT1nHcz/UlkAQ9wT4X?=
+ =?us-ascii?Q?2xmhFN1Fp9bHgHWq6q8eeuX/30H3LRXWTK/bEHCHgr9JnKhS97IVJsMga0sz?=
+ =?us-ascii?Q?5MuQKwOwTlXqaBLP3A9mtpvF2c+EwjxkmEAf+80qQ3xQNKOpMaQ08YXLmfDI?=
+ =?us-ascii?Q?dhQLnic/ej+p8ogbKjBeyZEnwylPf3qMmvLw0+rx03iMBHMvXEd6RggxpOKi?=
+ =?us-ascii?Q?W418IK3s4v9wWkU9BrOKWvB5oEuUcWrha9nMVy+xMni7lJJ444l2KXH7bG8k?=
+ =?us-ascii?Q?SjmTv/38Kldn6NOi08v2o98bzjEAYW5EQguSwUV5RRWheB8rPVErRck2aSYJ?=
+ =?us-ascii?Q?PXvvBaKX6G3H9f2EKBDM/TJcTS05y3SjlFY9USJvUhwWtqM65GUayLfqFVOA?=
+ =?us-ascii?Q?cmYNVaslV+/4OrtuGQU8BsxDYMS1lWNIfxap3y30wblOy1z86nAW+/9kuvcP?=
+ =?us-ascii?Q?+yy6quCIYA132B8Xorrd594gZdg/q2K5BmNvkppZukZ5IHdP1gJ26yN2PxFT?=
+ =?us-ascii?Q?fw1hzQxdhiLd2FHmSv5d8ajCTzreyEJHW5F4+OzosUCtnbAYXxW4HWN0kG/b?=
+ =?us-ascii?Q?Uvh4QD87pi9fG2MDUbJJbwJjFcTxUEtEXuaDS7DyvZbYjWD7FBclkeSLnVVA?=
+ =?us-ascii?Q?PkxJjz8fVgVXa4bx1rN6+AwC2IfjR4TYzkdAriBS0+dcZLnMVmkXzv8F/D9A?=
+ =?us-ascii?Q?emrAN2+m/Zn9yRXwg471HrFgRhNEyaRmFAcvQNwssHLkiHSC0/xfOmruqVKb?=
+ =?us-ascii?Q?baSSpyT8BvdOvsAWpWYyLuWa6ltpjd1kd1ot1Sld0ecWhv9AuHzag9wv634k?=
+ =?us-ascii?Q?XCl73ZZcFKA7b7om4YdyErFXgif1auA2pQEAu6yEpauYWvjoEOeKF1YAK8vv?=
+ =?us-ascii?Q?9N1rd875BJhuDFjOOexQsND03d5574rHF8ejzYyRo1Za5RRn2lP7HvVFd0wr?=
+ =?us-ascii?Q?nRkCx2ejwGUDSttCSRgEq9yWCjQEF3rbW173o4jbPSTUuML1aMR90vfxaX4A?=
+ =?us-ascii?Q?J4g7zgUrIIapWQU+FjQ69SREGw/UocItng1JVbPQ8o9ZoWo5XPCaZ+Oa/cKV?=
+ =?us-ascii?Q?pth8bsmbtjlliM3HCpLcDxY3u8Ibow7CMh33pdLpKmK3Vi1c9kPRnqdAMIOz?=
+ =?us-ascii?Q?R5OF5XQHhKHQhcMPvplUc6OjZLiTHZrgbgKJb/Tvf6I9GRBKy6b/dZttRdAX?=
+ =?us-ascii?Q?I7dcy36At9AzZzZ8JaVHAu+zQBJdMXS6passDh+MTnWg6MC6XnxKFkx9Kno6?=
+ =?us-ascii?Q?xtwYa6lNBkJje8b3B3MhOqUcjcoRb1NKMy3kcMKXmD5KbKtyHgoqdUAugW/K?=
+ =?us-ascii?Q?RpAnpDiLK6A=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(52116014)(1800799024)(366016)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?j2JVeH0QsLHnVXSKxRhQaXLxAoQND+RoHDIy90uVh+rxO42aTSNCwU3tQA/7?=
- =?us-ascii?Q?0OFQUOMygsu7igW1v1MJ+bF7PnBJREe0pCq2pwrRDRXYCiRkSEHqIfrNDw8z?=
- =?us-ascii?Q?LLB0bWq/ZRjG2CNBrSJAx4OrtoA/DmCY2ur/cCaiBAqfA9QvToACPFh6ExJc?=
- =?us-ascii?Q?AnP/yWArn6hbq40jhD4ymdPG8zY5dspmjVjS+jMm6xcDhmb9O0CDlVPIlXap?=
- =?us-ascii?Q?lkXWWfgPVax9y6ZWDYTXMkZKRYgNGmeY8gjOFz/ASL1WRnkzfwMW9If8YNbb?=
- =?us-ascii?Q?Kf1CIyEE6i5ywQW9QcCqDHL9MI9QK3Zzt/tCsUnxYQ4U9J0hfX65U8A3WH0v?=
- =?us-ascii?Q?UWI3Z2G/hU7ogVXwEgObBORYfV8biIsdbsAQwnjoacU+00nKF6uXsvExISm0?=
- =?us-ascii?Q?Oc+CEIsdK8lXpeZjjUAEDt660EgcXrsNh0AVrANrRa77QQcSLzAl6EJhrVt4?=
- =?us-ascii?Q?eicR+xvM6joFUWYZhRPs7BNdeLHiQ5mx8tvSEZ+fE8CKmKbmykyQQ/K6nGmu?=
- =?us-ascii?Q?F5IjE6loB3YFlizAUC/S6zZbuFPLYB5aVoSqrXoS4pLgt0tTsK+GGo85fevo?=
- =?us-ascii?Q?87ZMSgLxLmYHmk2lH3JGnUxeohd4VVFQwWwTVUkwHoPDnlkJQfgfgCPWUzcF?=
- =?us-ascii?Q?R2U6DosDU6ZZ8Tjw+HLEmrNiKrRLrFusL0ez0ByAvg/Pqde+S3kONCXSLZvj?=
- =?us-ascii?Q?DmWwttLIWc8gAQi4I1in5oYfy0H0rwkqSLuA8jIFDOx8xxI4ryWAlI+TKBtW?=
- =?us-ascii?Q?P6lL2ZZPYQhp5Ts8amXc24TK0WHWIfuuq5HH84WfAAPkkPOPGL/uVyYdVBEy?=
- =?us-ascii?Q?6dXN60oSF2TpLyFqKWMRxmiOi5ABw2yhpDblZnmtemrEXW/9TpFRDQluqJaV?=
- =?us-ascii?Q?ZtuqUOTPXnNJmP5BVWkqqw4pznicoPm+RpkANpx1RFaj0CjZV8sp2kqEs1BP?=
- =?us-ascii?Q?1D3ZK/s1gcNBLhb78uJmBGO6DVCKcjZGfM4d4hPd2p1bLCkS0b4fylYPaRhM?=
- =?us-ascii?Q?OfP1l+X6trLsp7IAKFplY8V8kWMauiQIrOLevwSke3bqvKVVxKwJ9l7i6g6H?=
- =?us-ascii?Q?ZnOrCzhiRbTKl+wOjjtF/9B4BbLhi3SHoYstfE2gn0mKvVVe/AofuwNLfR79?=
- =?us-ascii?Q?qASXpB3u/7UJipI3qc622xdpW83eQKxdGQJEAPuf5kDkjyYdsT3DguZ7CHhb?=
- =?us-ascii?Q?4I1oqkMfHxFgtTWxDDWtGzVRj/GPf3xbLXTnO2TQT8OVXBnx4vAK8xffy0KI?=
- =?us-ascii?Q?Ym8hdoHzbhTzvcqhpUyaQ5Dms5YE56iMajvcav7nUOm0ms0crxe0IYzbMVzG?=
- =?us-ascii?Q?lzbFev+Tsrur0LekATTJgiXNUwmzRM/jdekhVScs2V2ifgzFuNAs5Xa+Leso?=
- =?us-ascii?Q?4cTtVWaL/H4cOruAcBp5QdSk/4QoaJG035CFhULnQIV7sH90+VQ/hlFcNvXg?=
- =?us-ascii?Q?bzInPjBYgyICLsisWQcCLH7VZG+18lSUWasMop7m9Kwr6gznacTTWPM+P57c?=
- =?us-ascii?Q?aw/a5B5J6Fk2SYlThTPCVoq5HRVatAPHrRDGZpFais6a/8Dsz//qVhwFeuWt?=
- =?us-ascii?Q?TvWRfcoSGw49PoMU7rdVPvTLvDWMWtNbhVKy1uMuqQDYmQlFNcbyebRL6lft?=
- =?us-ascii?Q?XR2Dc8w5qDIEc4cOIbcEr2k=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8nSrgDv45VC6tYWKLPNbIc0QEw0hN7Oe/4Ptg2tbchgEaEck7nMa2jZ5SfzV?=
+ =?us-ascii?Q?G0AaH2GLzDioBhNa7k30+sZpNya8cPB2qCkUHTji9hbENI4Mln/a53DJ/gUS?=
+ =?us-ascii?Q?j9Q0/HCMDnMQrxwQ/zel6TTbSAzj0mDYXQ1To4k7Rn8U8RJyJoZk2vKjJIq0?=
+ =?us-ascii?Q?lTQR4ADoSIWi7Qrb6jIS2RLv9XUBgULBAmm1b863AcvN9WcymrRbsB/SNvoz?=
+ =?us-ascii?Q?nRaioKuSLtSsTXdmr4uDC9l1vq1V4/lboKEDtmyt7uY0HFmOrOX8JYrdmnLA?=
+ =?us-ascii?Q?0mbAzX3bOThyKLHh1Wmd4wkdNM0JAZtxC+Cv97/IAHCvpazKaSHoV9btmADJ?=
+ =?us-ascii?Q?JNDpwoSmPtTuL8aQmJXs/605ms+kt2aNM5iEL07258KlOEiLVvglmx1q6LSd?=
+ =?us-ascii?Q?/dn6XLlJTvPn8AEQ2AnyL0ebzQOMwIzrv1tKqYgeDUpL64vlLkcFx+IOXNJ4?=
+ =?us-ascii?Q?ZQ6wjCs86lorHwTrLpenED98YLIs2E+uWCa8TZ8DtXxQk85E2Yt+qZT2APBv?=
+ =?us-ascii?Q?i/0pDyDFTbsVlW6/jQLo+5TO5PmFGr1l6trDPsOhiy0+BXIyZ7p4KdmlN7o7?=
+ =?us-ascii?Q?+7+5NyIa7b9iPMkXCTL0azauDqa6J7e10337yY9kgvtROb7GwBLuvYTrhiki?=
+ =?us-ascii?Q?R7xbsohVvrzYeuxiRqigfWlWykW1qLT4DprnzHqIVCVRjXVwM6tCQ1NS3wme?=
+ =?us-ascii?Q?qotX7tvmr6qwcW8dCRR3FzLgTyuamN+B8LzfR3Ag/DxRZ75ApSmL32wBAIWt?=
+ =?us-ascii?Q?lGZTpSBPch6MbIZ9TlKm+ISiknqn3h7zjw6j2CStVEP2lxPi6kl5EboC6AQR?=
+ =?us-ascii?Q?3Oo1Z6Sp/KUwUltm/SjN/Fki+UrdcZKswbRSOb/NjAYKgnt7O8pnDum3J2vP?=
+ =?us-ascii?Q?oC1ak5s7/902YbtrhnRiLhaW538B9yTkenp4J6rZa594L+mW67lwysusIx3i?=
+ =?us-ascii?Q?2ul62BpZrE27LVSt/LS30KAVLqjC1kagVcB6CgPyhgMbH5OoM10SwEh3l8pL?=
+ =?us-ascii?Q?yVkKdZgolUTI2fRsS0GYE5blmBC4CwYYA83wSj6gkpujj/cvN4/HK5gjlzp3?=
+ =?us-ascii?Q?9OJPvUKSf6mSPCtSrjunLxrCPVZg+czaeP0agwZdk9rJqONHyWgbofImWmfp?=
+ =?us-ascii?Q?yFGgEgKYH/41Oana/VQa02lG1kUV69+cV3D3qylrdVSFB8WmB9DUCbkosJL6?=
+ =?us-ascii?Q?aLY5MqAlC00Rci6alYtIJOFNdX+JKyOzS2EQqRkK4mhJWGS6GXZApRR1KEze?=
+ =?us-ascii?Q?x3L4eOA02AxPVxhJvqjwrTlCsr/tGwKtArqHyMysEQf/6Ys13ZpF3KhbD/7M?=
+ =?us-ascii?Q?RuSGP0r2psddZQC/hyrQUJe5kiYIdVgCdd7w+tTuka50ztgg8iDeSh1wz3V+?=
+ =?us-ascii?Q?tLLmn+wojZpkOvOnX+u8vusd8OLhnpJ6lh3EXamWnwEyEporDwRkLiaXDKVY?=
+ =?us-ascii?Q?+bbnQ+cWAnf1rlitzpnZcE5dlZVwkJzGG+lzlnCUzRlE9coXvDHDj33iN1c1?=
+ =?us-ascii?Q?C5Mr8WSz+51FPexCmEtt3rLPsZNBFwsTwHZtJIDz7+M15U1sWCme63ovldvh?=
+ =?us-ascii?Q?BhoKNRZWgnqGXk4TkjHuz2iz+nwF0t6YRm9ONj6HCECnxfQ1gbRqoJEXEvGt?=
+ =?us-ascii?Q?GNFWOs+hZs61yAqopGIikLc=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 213774b4-b67d-4293-8dcd-08dc969de08a
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd315fe1-935a-460c-29dd-08dc969de17d
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 11:40:00.2522 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 11:40:01.8398 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b0eZ+XvE6Naz81dQ6D+uMvwqNJH6lLxKVVkT/y8TaDSFAf7JBGPxQ8xi3OFQY2TUpOj8bLliNfUK7iVmxA3kqR8grgQqWjiJ7YsyGGqWivk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: TQhhiz6mTK8o1i/0hB6LbS6yGmo97/TIE/jTMs/jeThQbl3/ZyyDp3pi90wvaIlnvEQI6z52ynb1lIPq1km2SBs2/1LS142+g69Tkosvp2c=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB10427
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -173,329 +173,117 @@ X-Virus-Status: Clean
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- cmd/Kconfig                     |  14 ++++
- cmd/net.c                       |  20 ++++++
- include/net/httpd-upload.h      |  12 ++++
- net/Makefile                    |  19 +++++
- net/httpd-upload.c              | 123 ++++++++++++++++++++++++++++++++
- net/httpd_upload/error_400.html |   9 +++
- net/httpd_upload/error_404.html |  10 +++
- net/httpd_upload/index.html     |  14 ++++
- net/httpd_upload/upload_ok.html |   7 ++
- 9 files changed, 228 insertions(+)
- create mode 100644 include/net/httpd-upload.h
- create mode 100644 net/httpd-upload.c
- create mode 100644 net/httpd_upload/error_400.html
- create mode 100644 net/httpd_upload/error_404.html
- create mode 100644 net/httpd_upload/index.html
- create mode 100644 net/httpd_upload/upload_ok.html
+ net/tcp.c | 70 +++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 37 insertions(+), 33 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 00cc13e2006..e5d2852168b 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1997,6 +1997,20 @@ config CMD_NETCAT
- 	  netcat is a simple command to load/store kernel, or other files,
- 	  using netcat like manner over TCP.
+diff --git a/net/tcp.c b/net/tcp.c
+index a5689a892b2..9fb80f9c2a8 100644
+--- a/net/tcp.c
++++ b/net/tcp.c
+@@ -528,10 +528,37 @@ void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
+ 	b->ip.end = TCP_O_END;
+ }
  
-+config CMD_HTTPD_UPLOAD
-+	bool "HTTP server for file uploading"
-+	depends on HTTPD_COMMON
-+	help
-+	  HTTP/1.1 compatible server for file uploading.
-+
-+config CMD_HTTPD_UPLOAD_MAX_SIZE
-+	int "Maximum uploading size"
-+	depends on CMD_HTTPD_UPLOAD
-+	default 209715200
-+	help
-+	  This sets maximum size of uploaded file. Real transfer will be
-+	  slightly more than this limit.
-+
- config CMD_MII
- 	bool "mii"
- 	imply CMD_MDIO
-diff --git a/cmd/net.c b/cmd/net.c
-index ecc1b49f52f..22e9d1910b6 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -22,6 +22,9 @@
- #include <net/udp.h>
- #include <net/sntp.h>
- #include <net/ncsi.h>
-+#if defined(CONFIG_CMD_HTTPD_UPLOAD)
-+#include <net/httpd-upload.h>
-+#endif
- 
- static int netboot_common(enum proto_t, struct cmd_tbl *, int, char * const []);
- 
-@@ -230,6 +233,23 @@ U_BOOT_CMD(
- );
- #endif
- 
-+#if defined(CONFIG_CMD_HTTPD_UPLOAD)
-+static int do_httpd_upload(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++const char *tcpflags_to_str(char tcpflags, char *buf, int size)
 +{
-+	if (argc < 2)
-+		return 1;
++	int i = 0, len;
++	char *orig = buf;
++	const struct {
++		int		bit;
++		const char	*name;
++	} desc[] = {{TCP_RST, "RST"}, {TCP_SYN, "SYN"}, {TCP_PUSH, "PSH"},
++		    {TCP_FIN, "FIN"}, {TCP_ACK, "ACK"}, {0, NULL}};
 +
-+	httpd_upload_prepare();
-+	return netboot_common(HTTPD, cmdtp, argc, argv);
++	*orig = '\0';
++	while (desc[i].name != NULL) {
++		len = strlen(desc[i].name);
++		if (size <= len + 1)
++			break;
++		if (buf != orig) {
++			*buf++ = ',';
++			size--;
++		}
++		strcpy(buf, desc[i].name);
++		buf += len;
++		size -= len;
++	}
++	return orig;
 +}
 +
-+U_BOOT_CMD(
-+	httpd_upload,   2,      1,      do_httpd_upload,
-+	"starts httpd server for file uploading",
-+	"[loadAddress]\n"
-+);
-+#endif
-+
- static void netboot_update_env(void)
+ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
+ 		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
  {
- 	char tmp[46];
-diff --git a/include/net/httpd-upload.h b/include/net/httpd-upload.h
-new file mode 100644
-index 00000000000..a80df214668
---- /dev/null
-+++ b/include/net/httpd-upload.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: BSD-2-Clause
-+ *
-+ * httpd-upload include file
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+#ifndef __NET_HTTPD_UPLOAD_TCP_H__
-+#define __NET_HTTPD_UPLOAD_TCP_H__
-+
-+void httpd_upload_prepare(void);
-+
-+#endif /* __NET_HTTPD_UPLOAD_TCP_H__ */
-diff --git a/net/Makefile b/net/Makefile
-index c1f491fad02..e7cbbc2248e 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -35,8 +35,27 @@ obj-$(CONFIG_PROT_TCP) += tcp.o
- obj-$(CONFIG_CMD_WGET) += wget.o
- obj-$(CONFIG_CMD_NETCAT) += netcat.o
- obj-$(CONFIG_HTTPD_COMMON) += httpd.o
-+obj-$(CONFIG_CMD_HTTPD_UPLOAD) += httpd-upload.o
+ 	union tcp_build_pkt *b = (union tcp_build_pkt *)pkt;
++	char buf[24];
+ 	int pkt_hdr_len;
+ 	int pkt_len;
+ 	int tcp_len;
+@@ -541,55 +568,32 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
+ 	 *         4 bits reserved options
+ 	 */
+ 	b->ip.hdr.tcp_flags = action;
+-	pkt_hdr_len = IP_TCP_HDR_SIZE;
+ 	b->ip.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
  
- # Disable this warning as it is triggered by:
- # sprintf(buf, index ? "foo%d" : "foo", index)
- # and this is intentional usage.
- CFLAGS_eth_common.o += -Wno-format-extra-args
-+
-+STATIC_SUBST := 's/^\(unsigned char \)/static \1/'
-+SIZE_REMOVE_SUBST := 's/^unsigned int .*//'
-+
-+httpd_upload_generated:
-+	rm -rf $(src)/httpd_upload_generated
-+	mkdir -p $(src)/httpd_upload_generated
-+	cd $(src)/httpd_upload && find . -type f | while read fname; do \
-+		name="$${fname##*/}" && \
-+		name="$${name%%.*}"  && \
-+		set -o pipefail && xxd -i "$${fname##./}" | \
-+			sed $(STATIC_SUBST) | \
-+			sed $(SIZE_REMOVE_SUBST) > ../httpd_upload_generated/$${name}.h; \
-+	done
-+
-+.PHONY: httpd_upload_generated
-+
-+net/httpd-upload.o:	httpd_upload_generated
-diff --git a/net/httpd-upload.c b/net/httpd-upload.c
-new file mode 100644
-index 00000000000..f3015a37f2f
---- /dev/null
-+++ b/net/httpd-upload.c
-@@ -0,0 +1,123 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * httpd-upload support driver
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+
-+#include <command.h>
-+#include <net.h>
-+#include <net/httpd.h>
-+#include <net/httpd-upload.h>
-+
-+#define MAX_FILE_SIZE	CONFIG_CMD_HTTPD_UPLOAD_MAX_SIZE
-+
-+static enum net_loop_state  httpd_on_stop(void);
-+
-+static enum httpd_req_check httpd_pre_post(void *req_id, const char *url,
-+					   struct httpd_post_data *post);
-+static struct http_reply    *httpd_get(void *req_id, const char *url);
-+static struct http_reply    *httpd_post(void *req_id, const char *url,
-+					struct httpd_post_data *post);
-+static void		     httpd_on_req_end(void *req_id);
-+
-+#include "httpd_upload_generated/error_400.h"
-+#include "httpd_upload_generated/error_404.h"
-+#include "httpd_upload_generated/index.h"
-+#include "httpd_upload_generated/upload_ok.h"
-+
-+static struct http_reply error_400 = {
-+	.code      = 400,
-+	.code_msg  = "Bad Request",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = error_400_html,
-+	.len       = sizeof(error_400_html)
-+};
-+
-+static struct http_reply error_404 = {
-+	.code      = 404,
-+	.code_msg  = "Not Found",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = error_404_html,
-+	.len       = sizeof(error_404_html)
-+};
-+
-+static struct http_reply index = {
-+	.code      = 200,
-+	.code_msg  = "OK",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = index_html,
-+	.len       = sizeof(index_html)
-+};
-+
-+static struct http_reply upload_ok = {
-+	.code      = 200,
-+	.code_msg  = "OK",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = upload_ok_html,
-+	.len       = sizeof(upload_ok_html)
-+};
-+
-+static struct httpd_config cfg = {
-+	.on_stop    = httpd_on_stop,
-+	.on_req_end = httpd_on_req_end,
-+	.get        = httpd_get,
-+	.post       = httpd_post,
-+	.pre_post   = httpd_pre_post,
-+	.error_400  = &error_400,
-+	.error_404  = &error_404,
-+};
-+
-+static enum net_loop_state	httpd_loop_state;
-+static void			*post_req_id;
-+
-+void httpd_upload_prepare(void)
-+{
-+	httpd_setup(&cfg);
-+	httpd_loop_state = NETLOOP_FAIL;
-+}
-+
-+static enum httpd_req_check httpd_pre_post(void *req_id, const char *url,
-+					   struct httpd_post_data *post)
-+{
-+	if (post->size > MAX_FILE_SIZE) {
-+		printf("HTTPD: reset connection, upload file is too large\n");
-+		return HTTPD_CLNT_RST;
-+	}
-+
-+	post_req_id = req_id;
-+	return HTTPD_REQ_OK;
-+}
-+
-+static struct http_reply *httpd_post(void *req_id, const char *url,
-+				     struct httpd_post_data *post)
-+{
-+	if (strcmp(url, "/file_upload") != 0)
-+		return &error_404;
-+
-+	httpd_loop_state = NETLOOP_SUCCESS;
-+	printf("HTTPD: upload OK\n");
-+	return &upload_ok;
-+}
-+
-+static struct http_reply *httpd_get(void *req_id, const char *url)
-+{
-+	if (strcmp(url, "/") == 0)
-+		return &index;
-+	if (strcmp(url, "/index.html") == 0)
-+		return &index;
-+	return &error_404;
-+}
-+
-+static void httpd_on_req_end(void *req_id)
-+{
-+	if (req_id == post_req_id) {
-+		post_req_id = NULL;
-+		httpd_stop();
-+	}
-+}
-+
-+static enum net_loop_state httpd_on_stop(void)
-+{
-+	return httpd_loop_state;
-+}
-diff --git a/net/httpd_upload/error_400.html b/net/httpd_upload/error_400.html
-new file mode 100644
-index 00000000000..de654364edf
---- /dev/null
-+++ b/net/httpd_upload/error_400.html
-@@ -0,0 +1,9 @@
-+<html>
-+  <head><title>400</title></head>
-+  <body>
-+    <h1>400 - Bad Request</h1>
-+    <p>
-+      Sorry, the request you are trying to do is wrong.
-+    </p>
-+  </body>
-+</html>
-diff --git a/net/httpd_upload/error_404.html b/net/httpd_upload/error_404.html
-new file mode 100644
-index 00000000000..9dac22d497d
---- /dev/null
-+++ b/net/httpd_upload/error_404.html
-@@ -0,0 +1,10 @@
-+<html>
-+  <head><title>404</title></head>
-+  <body>
-+    <h1>404 - Page not found</h1>
-+    <p>
-+      Sorry, the page you are requesting was not found on this
-+      server.
-+    </p>
-+  </body>
-+</html>
-diff --git a/net/httpd_upload/index.html b/net/httpd_upload/index.html
-new file mode 100644
-index 00000000000..e7d5ac943b6
---- /dev/null
-+++ b/net/httpd_upload/index.html
-@@ -0,0 +1,14 @@
-+<html>
-+  <head><title>Upload File</title></head>
-+  <body>
-+    <h1>Upload File.</h1>
-+    <p>This will write the uploaded file to the memory arear pointed by ${loadaddr}.
-+      <form method="post" enctype="multipart/form-data" action="file_upload">
-+        File to upload:
-+        <input type="file" name="fileID" size="500" /><br />
-+        <p>&nbsp;&nbsp;<input type="submit" value="upload" />
-+        <p>It takes no more than a second after the file has been uploaded until status OK is shown.
-+      </form>
-+    </p>
-+  </body>
-+</html>
-diff --git a/net/httpd_upload/upload_ok.html b/net/httpd_upload/upload_ok.html
-new file mode 100644
-index 00000000000..8d2e561982f
---- /dev/null
-+++ b/net/httpd_upload/upload_ok.html
-@@ -0,0 +1,7 @@
-+<html>
-+  <head><title>OK</title></head>
-+  <body>
-+    <h1>Upload OK</h1>
-+    <p>The file was uploaded.</p>
-+  </body>
-+</html>
+ 	switch (action) {
+ 	case TCP_SYN:
+ 		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Hdr:SYN (%pI4, %pI4, sq=%u, ak=%u)\n",
+-			   &tcp->rhost, &net_ip,
+-			   tcp_seq_num, tcp_ack_num);
++			   "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
++			   tcpflags_to_str(action, buf, sizeof(buf)),
++			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
+ 		net_set_syn_options(tcp, b);
+ 		pkt_hdr_len = IP_TCP_O_SIZE;
+ 		break;
+-	case TCP_SYN | TCP_ACK:
+-	case TCP_ACK:
+-		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
+-		b->ip.hdr.tcp_flags = action;
+-		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Hdr:ACK (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
+-			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num,
+-			   action);
+-		break;
+-	case TCP_FIN:
+-		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Hdr:FIN  (%pI4, %pI4, s=%u, a=%u)\n",
+-			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
+-		payload_len = 0;
+-		pkt_hdr_len = IP_TCP_HDR_SIZE;
+-		break;
+ 	case TCP_RST | TCP_ACK:
+ 	case TCP_RST:
+ 		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Hdr:RST  (%pI4, %pI4, s=%u, a=%u)\n",
++			   "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
++			   tcpflags_to_str(action, buf, sizeof(buf)),
+ 			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
++		pkt_hdr_len = IP_TCP_HDR_SIZE;
+ 		break;
+-	/* Notify connection closing */
+-	case (TCP_FIN | TCP_ACK):
+-	case (TCP_FIN | TCP_ACK | TCP_PUSH):
+-		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Hdr:FIN ACK PSH(%pI4, %pI4, s=%u, a=%u, A=%x)\n",
+-			   &tcp->rhost, &net_ip,
+-			   tcp_seq_num, tcp_ack_num, action);
+-		fallthrough;
+ 	default:
+ 		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
+-		b->ip.hdr.tcp_flags = action | TCP_PUSH | TCP_ACK;
+ 		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Hdr:dft  (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
+-			   &tcp->rhost, &net_ip,
+-			   tcp_seq_num, tcp_ack_num, action);
++			   "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
++			   tcpflags_to_str(action, buf, sizeof(buf)),
++			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
++		break;
+ 	}
+ 
+ 	pkt_len	= pkt_hdr_len + payload_len;
 -- 
 2.43.0
 
