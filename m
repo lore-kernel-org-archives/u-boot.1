@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57BB8C2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 14:42:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 737BAC2BD09
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 14:43:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D41988591;
-	Thu, 27 Jun 2024 16:42:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA1B08852E;
+	Thu, 27 Jun 2024 16:43:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Me7udVhj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G1GSc3aS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C894D8852C; Thu, 27 Jun 2024 16:42:19 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 86A988854E; Thu, 27 Jun 2024 16:43:51 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1BC687AEC
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 16:42:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57E348811C
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 16:43:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3d566d5eda9so448581b6e.0
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 07:42:17 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-25d0d16e38eso2420463fac.2
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 07:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719499336; x=1720104136; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1719499428; x=1720104228; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dBXO0ig0SlUnyL2wB5BnzFHX0Z8qFt8LygJ/zVRzWYo=;
- b=Me7udVhj8dwF1GKgBHZC/wBuPAtGltJkFnFo+nZum5/jmsNFm3079oKMaUyp5QMVXp
- zPOHNIX4Qq0EfPvRlJPd/lP5PxZrMSwLCleg7Y9C8c1UmfJ1WlqEoDeWjEnZemwv/VaJ
- hCgcRGayfzcpx+r0B8rUY7gGvbDsxDLMQCp04=
+ bh=CSaLi0QtohHGkIutKxofG9KMirc10F0apUWwBa1SEak=;
+ b=G1GSc3aStDNmyQchyXvrQglbhfaEHrF4PV9CXUEbZEtPjM+Jlz/pKecrWyUJG7NdYG
+ EsV+dT08bPMwPxffsKB/L1tE+kNAuPft2MukkvK22LwWsPfWNenDgTOy1EuU7FSNZAbR
+ fL44FA/S7mUHm9chXk5Zn/8RM19VyalEkSzw0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719499336; x=1720104136;
+ d=1e100.net; s=20230601; t=1719499428; x=1720104228;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dBXO0ig0SlUnyL2wB5BnzFHX0Z8qFt8LygJ/zVRzWYo=;
- b=ArT43iWPUKGUPaXglWg6Dniy8ILtlCIT+cOCuIGuwTfnEjzCFb9oVGXo/Vji/b7QCv
- BIHe6UyXEPNVabOhRFLi7AHDwgSU/WIaNbr1Hy27Uj6zAsl1gkUA37FXRHBa4cUXZrRV
- MNMAPMlIRrwk8Gw1hGi0G+RCtV1tA8qsFiR8KrKELj7xui6knsZKr7CccVu6hP38+2ya
- DWL5fBBLbpc/jXPvtqLzzwn0HmOo5ypA6tuNd/0bxvDgGbKvc0uU582PCVSypJZ2jg/H
- NoqVWT1i3u+s1YBLY1CNJ6FEd+JX9XoPP0b0MyKpnNWUJM38jYHai/ogPN6btGVGFPLi
- KoEA==
-X-Gm-Message-State: AOJu0Yxs+dPMZOTB3sQENqt6KsZrWOc4fnbHS6B/Xb1GjUBdSaUQBYxv
- B2yuUbxxVyPl+zagMSW3nIz41JW4sxQgLCmiGmPW7mSp7Ey46TkDbmyhq4qHXg0tW250hQPEkOZ
- qEE5aGQ==
-X-Google-Smtp-Source: AGHT+IGI1AtaVcNRQBGnzqi/KyKsquQR/2CnXZebJQ9La2AMwVNhSGw3bvnqyXrdRXCjaMuYABNEjw==
-X-Received: by 2002:a05:6870:9216:b0:25d:b48:3652 with SMTP id
- 586e51a60fabf-25d0b489846mr13772188fac.44.1719499336281; 
- Thu, 27 Jun 2024 07:42:16 -0700 (PDT)
+ bh=CSaLi0QtohHGkIutKxofG9KMirc10F0apUWwBa1SEak=;
+ b=DI8wTc9YzqxIaCZ7vRB7CGM+e53sEoXiOlJJaHWtwkDBAeLew4N6nNoESNP+xtvrqb
+ Sai+O2beNxZsrrYRHER/jh26m6bX/8P/sS/m6ol+hf3unmX9v57r/3mqf7+uWXnBCjEh
+ 13mxAcoCKmY4TLPmFyWeAW3LCalvObnkbdld93R1H5pS6/XZwEccITl5a19hTFWoM2Vq
+ dfJ/45tfbGl7oB5ceRMQgQ0ZnYt2h0G2JHNTpD4bM1WuvE44m4BOKfxYBU6YofyX97fU
+ bcvznv7h3FQaQYsGYuk6R9M7+zuEXsj2bMrqhlcoL8IvbQiEEglN7qzWprhzRSAj4vx8
+ gY4A==
+X-Gm-Message-State: AOJu0YwATfmWeHwaPr737zURz9MTnyPcdUM4CDZmCMVXIgkZ64QkFfpp
+ wy5180cI5U/oJSzrRr5cxbD52t2loGqYk95P02IeinfxgKbWTnIBq+wqrvRQWmg=
+X-Google-Smtp-Source: AGHT+IGQU2a8EYwBVCaKo9g47oJP11zuK+AUVKY+kFDkhzb4CtNTa5uKyzjhLnLa8gpIsIDn91KlhQ==
+X-Received: by 2002:a05:6870:b48e:b0:24f:c9e3:b76f with SMTP id
+ 586e51a60fabf-25d06bd5898mr13023782fac.19.1719499428051; 
+ Thu, 27 Jun 2024 07:43:48 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
  [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25d72be3446sm371675fac.29.2024.06.27.07.42.15
+ 586e51a60fabf-25d72d55340sm375686fac.43.2024.06.27.07.43.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jun 2024 07:42:15 -0700 (PDT)
-Date: Thu, 27 Jun 2024 08:42:14 -0600
+ Thu, 27 Jun 2024 07:43:47 -0700 (PDT)
+Date: Thu, 27 Jun 2024 08:43:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
-Message-ID: <20240627144214.GC38804@bill-the-cat>
-References: <20240623203033.1566505-1-sjg@chromium.org>
- <20240623203033.1566505-14-sjg@chromium.org>
- <20240624182931.GI38804@bill-the-cat>
- <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
- <20240625141427.GO38804@bill-the-cat>
- <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
- <20240626140752.GV38804@bill-the-cat>
- <CAFLszTj0h5w+sz796LokxgcfyRTGmHnQJ3OTDdoaoC61Ob=akw@mail.gmail.com>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
+ "u-boot-board-maintainers@lists.denx.de"
+ <u-boot-board-maintainers@lists.denx.de>
+Subject: Re: [ANN] U-Boot v2024.07-rc5 released
+Message-ID: <20240627144344.GD38804@bill-the-cat>
+References: <20240624193035.GK38804@bill-the-cat>
+ <e396268c-e106-4bb8-a40d-e0582e556c6b@cs-soprasteria.com>
+ <20240625151929.GS38804@bill-the-cat>
+ <7b87013a-23b6-419f-a163-2e9f4c44b200@csgroup.eu>
+ <20240626150113.GX38804@bill-the-cat>
+ <9bf49364-e95f-486a-9642-66953657e4aa@csgroup.eu>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZYfyxTWfTi4n1Cw1"
+ protocol="application/pgp-signature"; boundary="Av7/uBUgmeHAAtNC"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTj0h5w+sz796LokxgcfyRTGmHnQJ3OTDdoaoC61Ob=akw@mail.gmail.com>
+In-Reply-To: <9bf49364-e95f-486a-9642-66953657e4aa@csgroup.eu>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,116 +99,132 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZYfyxTWfTi4n1Cw1
-Content-Type: text/plain; charset=us-ascii
+--Av7/uBUgmeHAAtNC
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 27, 2024 at 09:37:15AM +0100, Simon Glass wrote:
-> Hi Tom,
+On Thu, Jun 27, 2024 at 10:23:34AM +0200, Christophe Leroy wrote:
 >=20
-> On Wed, 26 Jun 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Jun 26, 2024 at 09:00:41AM +0100, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
-> > > > > >
-> > > > > > > Some configuration is now in variables with a CFG_ prefix. Ad=
-d these to
-> > > > > > > the .cfg file so that we can see everything in one place. Sor=
-t the
-> > > > > > > options so they are easier to find and compare.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Add new patch to update u-boot.cfg with CFG_... options
-> > > > > > >
-> > > > > > >  scripts/Makefile.autoconf | 2 +-
-> > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > > >
-> > > > > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.aut=
-oconf
-> > > > > > > index b42f9b525fe..65ff11ea508 100644
-> > > > > > > --- a/scripts/Makefile.autoconf
-> > > > > > > +++ b/scripts/Makefile.autoconf
-> > > > > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf =3D GEN     $@
-> > > > > > >  quiet_cmd_u_boot_cfg =3D CFG     $@
-> > > > > > >        cmd_u_boot_cfg =3D \
-> > > > > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.=
-h > $@.tmp && { \
-> > > > > > > -             grep 'define CONFIG_' $@.tmp | \
-> > > > > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
-> > > > > > >                       sed '/define CONFIG_IS_ENABLED(/d;/defi=
-ne CONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
-> > > > > > >               rm $@.tmp;                                     =
-         \
-> > > > > > >       } || {                                                 =
-         \
-> > > > > >
-> > > > > > I don't like this because whereas "CONFIG_" is enforced to be s=
-et only
-> > > > > > by Kconfig and so always all reliably set and found via a singl=
-e header,
-> > > > > > CFG_ stuff is not.
-> > > > >
-> > > > > OK, so how are CFG_ options found? I hit this when trying to find=
- the
-> > > > > SDRAM size on rockchip 3399 and I could not find any way of figur=
-ing
-> > > > > it out.
-> > > >
-> > > > It's just another define, there's no uniformity to it. For some of =
-the
-> > > > SDRAM values really we need some build time way to grab some inform=
-ation
-> > > > out of the default device tree.
-> > >
-> > > Can you give an example of a board that could use this? I looked at
-> > > the devicetree for chromebook_kevin and don't see a memory range in
-> > > ther.
-> >
-> > OK, wow, I didn't realize /memory was optional now. But indeed, I don't
-> > see it in the dtb file. That removes that option then, sadly.
 >=20
-> Well, we can still require it, so long as an error is produced if the
-> property is needed but does not exist.
+> Le 26/06/2024 =E0 17:01, Tom Rini a =E9crit=A0:
+> > On Tue, Jun 25, 2024 at 09:20:54PM +0200, Christophe Leroy wrote:
+> > >=20
+> > >=20
+> > > Le 25/06/2024 =E0 17:19, Tom Rini a =E9crit=A0:
+> > > > On Tue, Jun 25, 2024 at 03:12:38PM +0000, LEROY Christophe wrote:
+> > > > > Hi All,
+> > > > >=20
+> > > > > Le 24/06/2024 =E0 21:30, Tom Rini a =E9crit=A0:
+> > > > > > Hey all,
+> > > > > >=20
+> > > > > > Well, once again I need to check my calender reminders since, w=
+hoops,
+> > > > > > I'm a week late. That said, looking at the list of changes in t=
+his
+> > > > > > slightly elongated period, I think it's OK. At this point we're=
+ a week
+> > > > > > out from the release, so it's time for clear and obvious regres=
+sion
+> > > > > > fixes. Ideally ones introduced this release cycle so there's le=
+ss
+> > > > > > chances of unintended side-effects.
+> > > > > >=20
+> > > > > > In terms of a changelog,
+> > > > > > git log --merges v2024.07-rc4..v2024.07-rc5
+> > > > > > contains what I've pulled but as always, better PR messages and=
+ tags
+> > > > > > will provide better results here.
+> > > > > >=20
+> > > > > > With that, the final release is planned for Monday, July 1st, 2=
+024.
+> > > > > > Thanks all!
+> > > > > >=20
+> > > > >=20
+> > > > > For your information, I have started testing v2024.07 on my power=
+pc
+> > > > > boards in operational condition and I have a major problem : U-bo=
+ot
+> > > > > doesn't get the Linux kernel started before the watchdog fires. I=
+ have
+> > > > > to disable watchdog to get it running.
+> > > > >=20
+> > > > > This problem doesn't occur with v2024.04.
+> > > > >=20
+> > > > > I bisected it to commit 340fdf1303dc ("zlib: Port fix for CVE-201=
+6-9841
+> > > > > to U-Boot") and I also confirm that v2024.07-rc5 works well with =
+that
+> > > > > commit reverted on top of it.
+> > > > >=20
+> > > > > Any idea of what is going wrong with that commit ?
+> > > >=20
+> > > > Are you able to check the zlib performance before/after that commit?
+> > > >=20
+> > >=20
+> > > Indeed there's a huge difference.
+> > >=20
+> > > Before : 12298074 timebase ticks to decompress kernel
+> > > After :  17145906 ticks, that is 40% more time.
+> > >=20
+> > > But behind that, we also need to understand why the watchdog is not k=
+ept
+> > > alive during that time.
+> >=20
+> > That is odd, I would have expected it to have been kept alive.
+> >=20
+>=20
+> I digged into it a bit more and really that commit 340fdf1303dc ("zlib: P=
+ort
+> fix for CVE-2016-9841 to U-Boot") is the issue. The watchdog is still kept
+> alive, but not fast enough. On powerpc 8xx, the CPU watchdog has a timeout
+> of slightly more than 1s, so it must be kept alive very often.
+>=20
+> schedule() is called in inflate() just before calling inflate_fast(), whi=
+ch
+> worked until now because the maximum time spent in inflate_fast() was abo=
+ut
+> 300ms. With the above commit, more than 1s is spent in inflate_fast() , f=
+or
+> the problematic block the time spent inside inflate_fast() is multiplied =
+by
+> almost 4.
+>=20
+> The problem is that the commit does more than what it says and removes
+> an important optimisation that is using halfwords instead of bytes for the
+> copy.
+>=20
+> I'm going to send shortly a patch to partially revert that commit. But if
+> you feel it is better to revert the commit completely and provide a fix in
+> next cycle, it is ok as well, up to you but I think it is important to get
+> that fixed for v2024.07.
+>=20
+> I'm also sending a fix on the setup of 8xx watchdog, but that has almost =
+no
+> impact in reality and doesn't fix the problem.
 
-"We" who? I don't feel like we'll have a lot of traction with linux
-kernel folks in requiring /memory to be added to the dts files on
-however many platforms don't have it today because I'm going to guess
-it's added at run time, possibly by us, with the correct size and we'd
-be asking for statically adding things half-wrong like a lot of
-platforms used to do (and in turn rely on U-Boot to correct the size).
+Thanks for digging in to all of this, I'll have to think about what path
+is better at this point in the cycle.
 
 --=20
 Tom
 
---ZYfyxTWfTi4n1Cw1
+--Av7/uBUgmeHAAtNC
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9ekYACgkQFHw5/5Y0
-tyzFJgv9H8WEjDcEeMH9AyAMWtpmJ1F5oryclJjhMgG9TbF1I1JhFnmTqFCGmL/3
-ud5OjA2BU+nvXzV0FgTnHBXIeFIrXokXsscqUWnimC+TnZYSI5TfNAVH4H7C41pV
-iqOx6hsyaDRL0W68ERi9qfS7EgvWSr1JChhhM31mMfJ7ULN+3FxJIDCw2OS2C14J
-yc3NMK3IYOl0hAy2Z5ju3vV2SjF4cXzE161amrKXb1bOK5h12QyH+UahFhUKZULB
-1WDoXkhR+48DOYkMx0fdJh7SIwkmMcDFCAndwEPFfgE3lq50UCYElTOyycVWJIBQ
-lm55Lv1NGCsJ4CJjglL6cmGnzu2qzpPQ5/+aaYJYx2l4OkZXD1CeDHXwkumoC9Db
-1yiJ2h56uWgCW++aMTEoJRBESHljjfQQurD43q4UTBr9TxfVhcYERjMH0/ZFLkkt
-gPii/2t6jPqv2B+PRPmvZNodq5df9fykulk0c+qTwNOLWQm2SP26jOLT+oZ473FP
-r333Jjjp
-=m6or
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9eqAACgkQFHw5/5Y0
+tyyL/gwApWIJHzIa8VaC/yL8+toEPcQXNUrgVLFW/DZzcUb96pbzasNz6KyweRQ/
+VDwbh1cy6EIJq4VPmPIJ+89R1uEKc8tR+SjrAB6vO6kckLZxF1M+MZJgoOM8T/6V
+z3BLAwyjHuO0MOLj5Xgg0C8xLuoQgMpJQ56jWCeTDJ0mGKOzuwAkmtMowdZVU3N+
+SutJRmJw/QjgQ6gAQ5eeTRXLZ0WRZnFpaQqqJMmBU8pxOOlJUr8hnBwgZtaohSmI
+t5owjndPkvEKCwmvrKN5FpyG5YS9ow2ZECI2CRB5rQVEFAnARk8nPftD4PRniLWh
+CW8gHjEewlWl4u/phDH/bp+QKPpyy2oj49R6/1TZj1YigtjqkjLh5i8eZoFNx+1a
+4KEZx4029QZCsaSnDEhWvDBZjt8bwDmJOth3GpDBVtzhYVm2w+t+2kJrC/7mmd9r
+hjgxTkApt/nEjKtn4/Z1ilWfz3B2v77XvBgPJ+/krEKrIpeVzAH2B4qySDR+LTIR
+i8TJV9+E
+=m8/n
 -----END PGP SIGNATURE-----
 
---ZYfyxTWfTi4n1Cw1--
+--Av7/uBUgmeHAAtNC--
