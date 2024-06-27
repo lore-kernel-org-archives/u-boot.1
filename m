@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CEFC2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 15:49:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2DEC2BD09
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 16:45:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 584F587FCD;
-	Thu, 27 Jun 2024 17:49:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 78524884F9;
+	Thu, 27 Jun 2024 18:45:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vk6ndaFZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a0zMf56e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55246880A5; Thu, 27 Jun 2024 17:49:16 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B7CEB881EC; Thu, 27 Jun 2024 18:45:02 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBCA487D1A
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 17:49:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80BC7883F6
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 18:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-700d1f442e1so1128184a34.0
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 08:49:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719503352; x=1720108152; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vSbsMjufq5j3PRA65VblQAbj/KNrHZbfLao9dInYNm8=;
- b=Vk6ndaFZPEijiW71KMduQYXDHkdzkHdriTfkj13kAzxvLrB46hc8QmxDVaqQ+lINcY
- 0ds1TJ4jTPEQ4INRVS+xtvjIdpWXK28qvTXFRYv/6zmhiwOdXFXH8TldD94vmQXtk0Mh
- xs2FcxbkO+AzSQCkaTSJAp1kL/mmNspF8WCbY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719503352; x=1720108152;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vSbsMjufq5j3PRA65VblQAbj/KNrHZbfLao9dInYNm8=;
- b=TlejjoOA6he4kmi3lsQOSOTvTPhDNoBC7lIZ0J6l1MoG0I3+zSW7nsqCB272yo6TNi
- ZnDEWgB3Ese2MFSIXUI3WfDwH1eMDLiIICJM6Id+ZhEXnWuFrzJSPTk/ZbDwfvlYaqCG
- uoWSqeXiiNJzXNiynRykapunFxYNzPbskP3Qh1gClqCoQJL7J/C5eg4jSnn/kJHe+z14
- oscHfaEwJFy6yFTcdGn6M5mGd8M/K6roDgArX+z02omzUKrqTgDg1DAWP5DzDYIfc8fp
- 7ruY0n0ROmB8/XGzOmZCn8l+5a2UySlEJVj81FXGS3YtbmqJUhw0tN8iT9JPrTsJRSVR
- 4ecA==
-X-Gm-Message-State: AOJu0YxmvMa7Id/7Nmnker2BN5kawHvjMDVh7VA/zQHzaxIv832CUaDg
- p4mFvpzxwqhgPEm0T1WUYpOM26cYlCCQ0awu52WKSYwGF8cefoRls0z8zQPaXBOhEuFXNrQ6PvZ
- 0w7g+zA==
-X-Google-Smtp-Source: AGHT+IGyyN5X+D3AiOB22zkwsqo6aQgsaQ4LUyIFpRaxmTj9B+rB65ETTW/uPv6o4jly9U0gCd8oLw==
-X-Received: by 2002:a05:6870:4412:b0:24f:cabc:4f6b with SMTP id
- 586e51a60fabf-25d06b79405mr13470843fac.8.1719503352604; 
- Thu, 27 Jun 2024 08:49:12 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net
- (fixed-187-190-197-45.totalplay.net. [187.190.197.45])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25d72bf1318sm402252fac.34.2024.06.27.08.49.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jun 2024 08:49:12 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH] Revert "zlib: Port fix for CVE-2016-9841 to U-Boot"
-Date: Thu, 27 Jun 2024 09:49:09 -0600
-Message-Id: <20240627154909.3536095-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45RGipSt024248;
+ Thu, 27 Jun 2024 11:44:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719506691;
+ bh=O8Z++9OeiCePQ2ASHnvkyhXbGYsvl0udiLHCtI68Lu0=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=a0zMf56ezHYuHi12dNhMIE36ayPdorEQkxG55a+DQnbxlDt3GcuX6EFBs3ro8mRxi
+ 8FpgD+14/KemlQPmt8tL2snS7BQHd33IlXePxktXFiszCWSVbORXw5y0kXcSgVK8fU
+ /8x0dY3SEzanTIywRcBLcHveYhIdlfzNsNKWaUdQ=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45RGioO1110891
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 27 Jun 2024 11:44:50 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
+ Jun 2024 11:44:50 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 27 Jun 2024 11:44:50 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45RGiolL028922;
+ Thu, 27 Jun 2024 11:44:50 -0500
+Date: Thu, 27 Jun 2024 11:44:50 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+CC: <trini@konsulko.com>, <joe.hershberger@ni.com>, <m-chawdhry@ti.com>,
+ <afd@ti.com>, <n-jain1@ti.com>, <rogerq@kernel.org>, <vigneshr@ti.com>,
+ <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
+ <andriy.shevchenko@linux.intel.com>, <bmeng.cn@gmail.com>,
+ <u-kumar1@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH] board/include: ti/env: j721e.env/ti_common: Fix
+ cpsw0_qsgmii_phyinit
+Message-ID: <20240627164450.y7ziouhui3kmc2qq@gating>
+References: <20240627094952.2074528-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240627094952.2074528-1-s-vadapalli@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,280 +82,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
-Michal brings in (correctly) the upstream fix for CVE-2016-9841.
-However, when upstream was fixing this issue they also removed a
-necessary optimization for some CPU classes as part of simplifying the
-code. This in turn leads to boot failures on the platforms as they now
-take too long to decompress images and so the watchdog sees the system
-as stuck.
+On 15:19-20240627, Siddharth Vadapalli wrote:
+> The command "main_cpsw0_qsgmii_phyinit" has to be run depending on
+> whether or not the "do_main_cpsw0_qsgmii_phyinit" variable is set.
+> However, there is no support for the cases where the environment variable
+> "do_main_cpsw0_qsgmii_phyinit" is updated at runtime. On J721E, the value
+> of "do_main_cpsw0_qsgmii_phyinit" is updated at runtime.
+> 
+> Fix the existing implementation in order to handle the case where the
+> value of "do_main_cpsw0_qsgmii_phyinit" is updated at runtime. Do so by
+> introducing the environment variable "update_do_main_cpsw0_qsgmii_phyinit"
+> which defaults to setting "do_main_cpsw0_qsgmii_phyinit" to zero, but at
+> the same time, it allows the board to update the value at runtime.
+> 
+> Fixes: 0d72b0f2f83b ("include: env: ti: ti_common: Run main_cpsw0_qsgmii_phyinit conditionally")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
-The long term fix here is as Christophe has posted, which is to restore
-the optimization. Given the nearness of the release, what I do here is
-very similar, result wise, but less so, code wise. This is a revert of
-Michal's commit _except_ we only allow for post-increment in the code,
-thus keeping the CVE resolved. For the next release this commit shall be
-reverted and then Christophe's patch applied.
 
-This largely reverts commit 340fdf1303dce7e5f53ddd981471836058ff23ef.
+Why cant we do this entirely in board files? we do the board detection
+there anyways..
 
-Reported-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-Signed-off-by: Tom Rini <trini@konsulko.com>
---
-Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: Michal Simek <michal.simek@amd.com>
----
- lib/zlib/inffast.c | 117 +++++++++++++++++++++++++++++----------------
- 1 file changed, 75 insertions(+), 42 deletions(-)
+> ---
+> 
+> Hello,
+> 
+> This patch is based on commit
+> 899b088674 Merge patch series "pxe: Add debugging for booting"
+> of U-Boot's next branch.
+> 
+> Regards,
+> Siddharth.
+> 
+>  board/ti/j721e/j721e.env     | 9 +++++----
+>  include/env/ti/ti_common.env | 3 ++-
+>  2 files changed, 7 insertions(+), 5 deletions(-)
+> 
+> diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
+> index 38bfd7d496..03d7e81aa8 100644
+> --- a/board/ti/j721e/j721e.env
+> +++ b/board/ti/j721e/j721e.env
+> @@ -29,7 +29,7 @@ bootdir=/boot
+>  rd_spec=-
+>  
+>  #if CONFIG_TARGET_J7200_A72_EVM
+> -do_main_cpsw0_qsgmii_phyinit=1
+> +update_do_main_cpsw0_qsgmii_phyinit=setenv do_main_cpsw0_qsgmii_phyinit 1;
+>  init_main_cpsw0_qsgmii_phy=gpio set gpio@22_17;
+>  	gpio clear gpio@22_16
+>  main_cpsw0_qsgmii_phyinit=
+> @@ -39,10 +39,11 @@ main_cpsw0_qsgmii_phyinit=
+>  #elif CONFIG_TARGET_J721E_A72_EVM
+>  init_main_cpsw0_qsgmii_phy=gpio set gpio@22_17;
+>  	gpio clear gpio@22_16
+> -main_cpsw0_qsgmii_phyinit=
+> +update_do_main_cpsw0_qsgmii_phyinit=
+>  	if test $board_name = J721EX-PM1-SOM || test $board_name = J721EX-PM2-SOM || test $board_name = j721e; then
+> -		do_main_cpsw0_qsgmii_phyinit=1; else
+> -		do_main_cpsw0_qsgmii_phyinit=0; fi;
+> +		setenv do_main_cpsw0_qsgmii_phyinit 1; else
+> +		setenv do_main_cpsw0_qsgmii_phyinit 0; fi;
+> +main_cpsw0_qsgmii_phyinit=
+>  	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1 && test ${dorprocboot} -eq 1 && test ${boot} = mmc; then
+>  		run init_main_cpsw0_qsgmii_phy;			\
+>  	fi;
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index c5c3642177..d0b3d698a0 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -23,9 +23,10 @@ get_fit_overlaystring=
+>  	done;
+>  get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
+>  run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+> -do_main_cpsw0_qsgmii_phyinit=0
+> +update_do_main_cpsw0_qsgmii_phyinit=setenv do_main_cpsw0_qsgmii_phyinit 0;
+>  bootcmd_ti_mmc=
+>  	run findfdt; run init_${boot};
+> +	run update_do_main_cpsw0_qsgmii_phyinit;
+>  #if CONFIG_CMD_REMOTEPROC
+>  	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
+>  		then run main_cpsw0_qsgmii_phyinit;
+> -- 
+> 2.40.1
+> 
 
-diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
-index 5e2a65ad4d27..c271d85ea191 100644
---- a/lib/zlib/inffast.c
-+++ b/lib/zlib/inffast.c
-@@ -1,5 +1,5 @@
- /* inffast.c -- fast decoding
-- * Copyright (C) 1995-2008, 2010, 2013 Mark Adler
-+ * Copyright (C) 1995-2004 Mark Adler
-  * For conditions of distribution and use, see copyright notice in zlib.h
-  */
- 
-@@ -12,6 +12,12 @@
- 
- #ifndef ASMINF
- 
-+/*
-+ * Only allow post-increment in order to resolve CVE-2016-9841
-+ */
-+#  define OFF 0
-+#  define PUP(a) *(a)++
-+
- /*
-    Decode literal, length, and distance codes and write out the resulting
-    literal and match bytes until either not enough input or output is
-@@ -47,13 +53,12 @@
-       requires strm->avail_out >= 258 for each loop to avoid checking for
-       output space.
-  */
--void ZLIB_INTERNAL inflate_fast(strm, start)
--z_streamp strm;
--unsigned start;         /* inflate()'s starting value for strm->avail_out */
-+void inflate_fast(z_streamp strm, unsigned start)
-+/* start: inflate()'s starting value for strm->avail_out */
- {
-     struct inflate_state FAR *state;
--    z_const unsigned char FAR *in;      /* local strm->next_in */
--    z_const unsigned char FAR *last;    /* have enough input while in < last */
-+    unsigned char FAR *in;      /* local strm->next_in */
-+    unsigned char FAR *last;    /* while in < last, enough input available */
-     unsigned char FAR *out;     /* local strm->next_out */
-     unsigned char FAR *beg;     /* inflate()'s initial strm->next_out */
-     unsigned char FAR *end;     /* while out < end, enough space available */
-@@ -79,7 +84,7 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
- 
-     /* copy state to local variables */
-     state = (struct inflate_state FAR *)strm->state;
--    in = strm->next_in;
-+    in = strm->next_in - OFF;
-     last = in + (strm->avail_in - 5);
-     if (in > last && strm->avail_in > 5) {
-         /*
-@@ -89,7 +94,7 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
- 	strm->avail_in = 0xffffffff - (uintptr_t)in;
-         last = in + (strm->avail_in - 5);
-     }
--    out = strm->next_out;
-+    out = strm->next_out - OFF;
-     beg = out - (start - strm->avail_out);
-     end = out + (strm->avail_out - 257);
- #ifdef INFLATE_STRICT
-@@ -110,9 +115,9 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-        input data or output space */
-     do {
-         if (bits < 15) {
--            hold += (unsigned long)(*in++) << bits;
-+            hold += (unsigned long)(PUP(in)) << bits;
-             bits += 8;
--            hold += (unsigned long)(*in++) << bits;
-+            hold += (unsigned long)(PUP(in)) << bits;
-             bits += 8;
-         }
-         here = lcode[hold & lmask];
-@@ -125,14 +130,14 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-             Tracevv((stderr, here.val >= 0x20 && here.val < 0x7f ?
-                     "inflate:         literal '%c'\n" :
-                     "inflate:         literal 0x%02x\n", here.val));
--            *out++ = (unsigned char)(here.val);
-+            PUP(out) = (unsigned char)(here.val);
-         }
-         else if (op & 16) {                     /* length base */
-             len = (unsigned)(here.val);
-             op &= 15;                           /* number of extra bits */
-             if (op) {
-                 if (bits < op) {
--                    hold += (unsigned long)(*in++) << bits;
-+                    hold += (unsigned long)(PUP(in)) << bits;
-                     bits += 8;
-                 }
-                 len += (unsigned)hold & ((1U << op) - 1);
-@@ -141,9 +146,9 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-             }
-             Tracevv((stderr, "inflate:         length %u\n", len));
-             if (bits < 15) {
--                hold += (unsigned long)(*in++) << bits;
-+                hold += (unsigned long)(PUP(in)) << bits;
-                 bits += 8;
--                hold += (unsigned long)(*in++) << bits;
-+                hold += (unsigned long)(PUP(in)) << bits;
-                 bits += 8;
-             }
-             here = dcode[hold & dmask];
-@@ -156,10 +161,10 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-                 dist = (unsigned)(here.val);
-                 op &= 15;                       /* number of extra bits */
-                 if (bits < op) {
--                    hold += (unsigned long)(*in++) << bits;
-+                    hold += (unsigned long)(PUP(in)) << bits;
-                     bits += 8;
-                     if (bits < op) {
--                        hold += (unsigned long)(*in++) << bits;
-+                        hold += (unsigned long)(PUP(in)) << bits;
-                         bits += 8;
-                     }
-                 }
-@@ -178,18 +183,17 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-                 if (dist > op) {                /* see if copy from window */
-                     op = dist - op;             /* distance back in window */
-                     if (op > whave) {
--                        strm->msg =
--                            (char *)"invalid distance too far back";
-+                        strm->msg = (char *)"invalid distance too far back";
-                         state->mode = BAD;
-                         break;
-                     }
--                    from = window;
-+                    from = window - OFF;
-                     if (wnext == 0) {           /* very common case */
-                         from += wsize - op;
-                         if (op < len) {         /* some from window */
-                             len -= op;
-                             do {
--                                *out++ = *from++;
-+                                PUP(out) = PUP(from);
-                             } while (--op);
-                             from = out - dist;  /* rest from output */
-                         }
-@@ -200,14 +204,14 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-                         if (op < len) {         /* some from end of window */
-                             len -= op;
-                             do {
--                                *out++ = *from++;
-+                                PUP(out) = PUP(from);
-                             } while (--op);
--                            from = window;
-+                            from = window - OFF;
-                             if (wnext < len) {  /* some from start of window */
-                                 op = wnext;
-                                 len -= op;
-                                 do {
--                                    *out++ = *from++;
-+                                    PUP(out) = PUP(from);
-                                 } while (--op);
-                                 from = out - dist;      /* rest from output */
-                             }
-@@ -218,36 +222,65 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-                         if (op < len) {         /* some from window */
-                             len -= op;
-                             do {
--                                *out++ = *from++;
-+                                PUP(out) = PUP(from);
-                             } while (--op);
-                             from = out - dist;  /* rest from output */
-                         }
-                     }
-                     while (len > 2) {
--                        *out++ = *from++;
--                        *out++ = *from++;
--                        *out++ = *from++;
-+                        PUP(out) = PUP(from);
-+                        PUP(out) = PUP(from);
-+                        PUP(out) = PUP(from);
-                         len -= 3;
-                     }
-                     if (len) {
--                        *out++ = *from++;
-+                        PUP(out) = PUP(from);
-                         if (len > 1)
--                            *out++ = *from++;
-+                            PUP(out) = PUP(from);
-                     }
-                 }
-                 else {
-+		    unsigned short *sout;
-+		    unsigned long loops;
-+
-                     from = out - dist;          /* copy direct from output */
--                    do {                        /* minimum length is three */
--                        *out++ = *from++;
--                        *out++ = *from++;
--                        *out++ = *from++;
--                        len -= 3;
--                    } while (len > 2);
--                    if (len) {
--                        *out++ = *from++;
--                        if (len > 1)
--                            *out++ = *from++;
--                    }
-+                    /* minimum length is three */
-+		    /* Align out addr */
-+		    if (!((long)(out - 1 + OFF) & 1)) {
-+			PUP(out) = PUP(from);
-+			len--;
-+		    }
-+		    sout = (unsigned short *)(out - OFF);
-+		    if (dist > 2 ) {
-+			unsigned short *sfrom;
-+
-+			sfrom = (unsigned short *)(from - OFF);
-+			loops = len >> 1;
-+			do
-+			    PUP(sout) = get_unaligned(++sfrom);
-+			while (--loops);
-+			out = (unsigned char *)sout + OFF;
-+			from = (unsigned char *)sfrom + OFF;
-+		    } else { /* dist == 1 or dist == 2 */
-+			unsigned short pat16;
-+
-+			pat16 = *(sout-2+2*OFF);
-+			if (dist == 1)
-+#if defined(__BIG_ENDIAN)
-+			    pat16 = (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
-+#elif defined(__LITTLE_ENDIAN)
-+			    pat16 = (pat16 & 0xff00) | ((pat16 & 0xff00 ) >> 8);
-+#else
-+#error __BIG_ENDIAN nor __LITTLE_ENDIAN is defined
-+#endif
-+			loops = len >> 1;
-+			do
-+			    PUP(sout) = pat16;
-+			while (--loops);
-+			out = (unsigned char *)sout + OFF;
-+		    }
-+		    if (len & 1)
-+			PUP(out) = PUP(from);
-                 }
-             }
-             else if ((op & 64) == 0) {          /* 2nd level distance code */
-@@ -283,8 +316,8 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
-     hold &= (1U << bits) - 1;
- 
-     /* update state and return */
--    strm->next_in = in;
--    strm->next_out = out;
-+    strm->next_in = in + OFF;
-+    strm->next_out = out + OFF;
-     strm->avail_in = (unsigned)(in < last ? 5 + (last - in) : 5 - (in - last));
-     strm->avail_out = (unsigned)(out < end ?
-                                  257 + (end - out) : 257 - (out - end));
 -- 
-2.34.1
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
