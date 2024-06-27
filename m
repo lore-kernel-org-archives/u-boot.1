@@ -4,97 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FB6C2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 11:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE87C3064D
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 11:14:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08643885B6;
-	Thu, 27 Jun 2024 13:09:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4407287FA1;
+	Thu, 27 Jun 2024 13:14:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cMzppPKT";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="BaeUOx1K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA4B88511; Thu, 27 Jun 2024 12:52:59 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D744E88511; Thu, 27 Jun 2024 13:14:48 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B219E88256
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 12:52:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BADF387A9C
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 13:14:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b54683f65fso19658576d6.1
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 03:52:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719485575; x=1720090375; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qY84K82fkGTAVmr5h4lYCawi3o86p4wLkfu1ffHu034=;
- b=cMzppPKTZWhUXLLlbVWSgv4ph3XLNuM9WGODd0vg4AwGxqg1J1PIrM1UPxQtFMYXDn
- D1yHBQphZwJWYownmVau5QdOjTHE6W/0+DBG1U2VuzhWZETipZ8VODp+r7c0PYySzf6u
- 2xQ95bs19wreTWisaNEFkMM1DuE7GDZEcKJOo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719485575; x=1720090375;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qY84K82fkGTAVmr5h4lYCawi3o86p4wLkfu1ffHu034=;
- b=DWFzzt5fsuNI3BrTwHRyvNJa3nqRLbuUrmjGNRhTtS5VMcJvKWvCqwUd3iJT2NsisD
- cJSDKHxELAeaY57DNGlmxWDwpw88FK984CKyuY/lGUjDuMx3lCRbMLXJ9vwQ0K+EOHtB
- /ydA1qRHffK4hY5Z2XeJw4XPlM9xAqz61z9JInry/IBEzwnXKHSyvtrIZb4nVExOEXFH
- P5kxzs4P/HLGz2va8td5auFkhyve6lQIf40nqErSx8Fm4zPqz6NM8EPsWy9emE+C6cGI
- 0ed2uqW/ERTb+a8zNgiIcwLc/a90JmX+3JQnCJIdhKZLoWdh+seTK5dxsMQLHH72cdsN
- nnow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdSWd1/FUA98b4e577CmTKF5l5qgcHRP1tG8MucAoYwY6J2Mdvy+Q6FnS3k51+bVWwHdZkCdJiymwXURP/BF23bfLJCA==
-X-Gm-Message-State: AOJu0YxEA2Yg2myPd/8Hg2Ky8Y6nNYbe6DB58JybbRAHoZH+dlwlIdji
- WwLFlxaWSDf0P3cvo3+RtQxloxkDIRtWJWewX8w/v/hCxkbEWuVNSmcpRUBxnZGGhWjbGfLww5e
- ZS58LjqiRf8YxSq0buSaWY/Si6BF5Me52gNyD
-X-Google-Smtp-Source: AGHT+IGYeT6b4Yx8ko/Y1+YqUIHhM2ryJjAEE2ncLfVl5cwyKVEStDiPyZPGtwkPBT7R00MbD6dgx45zZrRaB0L9/i8=
-X-Received: by 2002:a0c:ca0a:0:b0:6b2:cf90:8b7 with SMTP id
- 6a1803df08f44-6b53bcd223emr135416436d6.23.1719485575607; Thu, 27 Jun 2024
- 03:52:55 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Jpw6FNVUFnGYInVEzO2V2hRmqW/7y//fqNumnz6sPjrIGm6A98g9bL65ttch6oGgLZjru1iu2VsoDIW5fdWpUzjQlunZJ20CM5krPMyvqC49pKdP5TrdDgOyUmszr54yBnGAIvMLnqRQD4vkOd0fU0rYtZAtnEkqJm+LgG6ECFd7Kd8E1UlJQP8roUJgtn4jjrh3b+BqnzM2CgG0G0QgwlcZ3dgFlqkIwvd0xRtvvc60nJSwa10gUVpKQ3hkL4gWF/VonEuqJ0RI/T2EBJ/Y5sqyB7T3spNVIqN7ig1RypAcb11iyAPna6n32O1iZn+xJ9yrux74re9CclNgM/E9TQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oIU6n2V7JTLySLkX8jVrAvvgLXChUCYNpOP3Y5kgX1s=;
+ b=b8iq5kdjhFGJLZmChVsjk7S+ACXJPswef2Kqxr1ZhDbO+6Y7FwOPKFga2kml2vTzJtiZv+eNukvm/10KzDZFN4nlG5PaJGSGf8CKsC7mB9m5ropPJZFd7lcTWjZMniQ7IZwiymZHnESyYfKlg8iBeB5voqPBOkDJDfXi6XA6Hs22mtIi20vD29xrHJc5wt9oY2ZRFvLfqIkh8zZ52c/fHOPxEV+s5WzkfCnI9+jFIpheYYw9ki1beIpO2i9QG3SR0Ueyq2Ulo0jacvXbk88wuloaDvWvPL0MP2q2Ay19cuWzRdWms3KzsrrcNnwCSKM8cUTHtS4x0EH89T5opetpnw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oIU6n2V7JTLySLkX8jVrAvvgLXChUCYNpOP3Y5kgX1s=;
+ b=BaeUOx1KWFyAdyXtVfubmwTd5NXHiHme5j8z+CWlWtujx/DbW8pIPVQ9fyHYXjDWFJKSh+LywxHedm8Iz8MUnfoD2vXOD/EkLZOE76px4NeRz5rPwebRNpnxflAKOkaAMCJcL2FriWMy5l+XWDrvI3xdln/0mI2XfTNxfXQuP3XqA+YMvwEtZiCcWK8Oonekgu42DxGGSqGU90gcXdPja5wwMV2HF2jPMty6rDA7L5u+AK8+tE+fY6BX9uGsqCQR5vKi/nnkuK/t8U0T8teCawaT5XNPCOKtchvIVXZ0S3kuXHq0E3/iNbzPwK9BPYgKnR8rR/XSx0TZUcjczwt7vw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by PAWPR08MB10284.eurprd08.prod.outlook.com (2603:10a6:102:369::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.35; Thu, 27 Jun
+ 2024 11:14:44 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7698.025; Thu, 27 Jun 2024
+ 11:14:44 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH 01/79] net/tftp: make tftpput working with servers that do not
+ use OACK
+Date: Thu, 27 Jun 2024 14:14:37 +0300
+Message-ID: <20240627111437.98987-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0093.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:9::16) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-References: <20240626235717.272219-1-marex@denx.de>
- <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
- <b84e8b10-8698-41f2-9648-0b3f5c399b02@linaro.org>
- <96AEFD59-B8D3-4298-8867-E94D474E16BE@gmail.com>
- <CAFLszTgvEkunWE8apORsK0+PU7wjrWCVCR0F1qij=yo8nDLUNg@mail.gmail.com>
- <CAPVz0n0ySK1YrE_Y_jSMm5WxG_b6Kc9PiXp2mMC0i7pwSWkFRQ@mail.gmail.com>
-In-Reply-To: <CAPVz0n0ySK1YrE_Y_jSMm5WxG_b6Kc9PiXp2mMC0i7pwSWkFRQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Jun 2024 11:52:44 +0100
-Message-ID: <CAFLszTgzdbjv8nDHjSYvquU2sEf-C5DUoZxmJ06xy9EsDhwYyA@mail.gmail.com>
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, 
- Dragan Simic <dsimic@manjaro.org>, Eugen Hristev <eugen.hristev@collabora.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi <matteo.lisi@engicam.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Thierry Reding <treding@nvidia.com>, 
- Tom Rini <trini@konsulko.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
- u-boot-amlogic@groups.io, u-boot-qcom@groups.io, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 27 Jun 2024 13:09:53 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAWPR08MB10284:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3fde52b6-4c6f-4c8e-9658-08dc969a592c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?oIZlGURMd2ueDnU0Llt7jlcnJVNOjPXURs8Yh7l4ISENSmSOzyx48j3YgmWu?=
+ =?us-ascii?Q?svKkT5VHldgLkuEaWGGWfy/2OM1rqdhZPWMKQzvb/q5XblNQqsNKk876DI1R?=
+ =?us-ascii?Q?OXNJPpMZmT34bz38Owr1FCEP0FGNVVyuMM02Sztx5aP5yfro/vK3eSRg/tHb?=
+ =?us-ascii?Q?FDB2RhDDGWcJI7ZCYWjmsc74UeLUf8IObbXsxlzHlgJi71OpXx02SVwR6nCO?=
+ =?us-ascii?Q?Bzl46yDEstO/R8Y3y+IoKbXEZ2PFnPl7XPYXvZk6I/PeLoUZvY3KGU4mI4g8?=
+ =?us-ascii?Q?UF0y1ufCa5xDSvzdhpfnfEN8ytV7ZHFhpVIfd/1JLNeLvefWVlF3BqMsBxAm?=
+ =?us-ascii?Q?uAkCosAnbNYppKNyVAGUPIxATTSU7d8GmCmL8+xxXRPnHW2JnxpZ/RBLNkKn?=
+ =?us-ascii?Q?a5XKQvDad24F7CPIwVlCCGLyYerFabr5dhzcB5kmJWKzqBGlghod7KdwKoL7?=
+ =?us-ascii?Q?iBSsoo9gpSWChMamoti3vYv6Ukf3BzBoUQZ2KeZXVGeRRBRosNqCE1Aw4ill?=
+ =?us-ascii?Q?4W0DzGTBMW998HsZf9gf8wx20ApI5AYuLzayMAPUYA7iTslcyyNyrHqfQEKl?=
+ =?us-ascii?Q?J70Y/Y36GgkRH3IQPH910nYND6+vSM+/FMfu4Fc8rI2p2QFX40dcFiLKGbi3?=
+ =?us-ascii?Q?Ir5sZLgXZEdFjhMF+mlsxPDHUalTgqgitorWmI3/lCfyrHydMV5AFTMVavot?=
+ =?us-ascii?Q?3pDuKc+4Z5z9jRY+QWHUMtCyndUfLmg0zOWLhhfrnwmEFYAiYupcGx/cpm4n?=
+ =?us-ascii?Q?FAetx5Ag9dzJxkLQTlSlbVAcHQbTRocb1o+aVtOBNy4Pmigb5fpnYKRZPumo?=
+ =?us-ascii?Q?0MbjVzqSovaW2S9vWm71N8ddljvKna0eWfEYCHEqcbWPViUqt9VZ8OBE+yy+?=
+ =?us-ascii?Q?Os/5fdA+6MHVOgS2JjmLQLF4M8OtUYFQAtJGEpjmPYpRVrYf7s0WKwgFCRWX?=
+ =?us-ascii?Q?w71l0JFI5D9G8f89gBFv+pnI3x6JrAbLf6RXGpEd79Ci8hEXsL2itpsiz3FU?=
+ =?us-ascii?Q?yiM5dO1O/oA3vKcnmOOVwSZ+KCuiqjlsNmg1kA0zyrLTDT6+/PjzwaEjfAKV?=
+ =?us-ascii?Q?20HmojWUbh1Sr+UJs8938u/1L3FWorlDdwoiJlGKrEvwhI+ScC8wFlOZGnwR?=
+ =?us-ascii?Q?88/L7Opi11dOMnaMw32XUWrXsZCy+vrsRQ0vWZZYEozP9qTO7YkU8iNebP+g?=
+ =?us-ascii?Q?5LKt1pQR/Z0FAWkmbT+ezndIOaHOB7saC0mXeFKg90ccoobkbE335Db0kGpZ?=
+ =?us-ascii?Q?zm4sexiFoTpWcTbfA3OMwHWz/Plow+O+Uvxf/iQwh6u1Osisg4WEsukR8Qa9?=
+ =?us-ascii?Q?dL+EMmkIJwK3bD8IwWhxFITpftOeDSP4lWrd77ncIoQ5RJffstXGzBa9xFCA?=
+ =?us-ascii?Q?VSYS+WuBC0w2gc3eP22ix2KnFO9b/rSvySsteD8g3JMnAFQ2Qw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bgFmNM7RsjQgjAoQuMKIbSs9xszcOWvi1lwBPgqNd4GgRac9b+03vIJyl7LN?=
+ =?us-ascii?Q?a2aJeQQ4YIVB+8RfFmDHfeGV6gaDxBTimID9dna4CWEpDB4wM3sj0i+8hJcg?=
+ =?us-ascii?Q?E+XBNm+z6/EOGCaiLtuTPc1YPtKtKUjmbFjiW1EA2QrHfLLpzsm8dulsVret?=
+ =?us-ascii?Q?Tr/7BOC4YRw5BUqPruu6/H4VZuQ07B1wAn3neTb7S/WWowy0J12Hw3NQUwfa?=
+ =?us-ascii?Q?QlhFF0SnRO+eoU6eoHztERPa66NsyrqhUvVl2W5bv8lJKi1xexhqNznfiQgh?=
+ =?us-ascii?Q?p8iJFErBaf8y3m4GTaL9ILDqY+ra/nAefEAdB4c9+U11Wmbt1P96JZ1WcFuy?=
+ =?us-ascii?Q?LHNUfZ1bFVReiJJ0hj2EzkM8PJ0HcAcYYSqJcVAIXJlraIUipevVeOubek6H?=
+ =?us-ascii?Q?U7K3Qw6NZi6fKn21RCmgYg0BmqI9XsSMc7Yc57aEWIowBpLo569nmRBSP3pv?=
+ =?us-ascii?Q?oS6CeRrVLc9Y6EhmwcCBvmqc0L++E1ViR1HuC43ulcY5Dg4or/OeuNgbKI4j?=
+ =?us-ascii?Q?eP7wxTqyZL9ktpbTw8Brm6PUwwYgo4aP4ua7L8dNsqGUfExNXodfUXsCnSC+?=
+ =?us-ascii?Q?7hirkaxfSBc2rd8rAR7yXR7Gby5RiaIJ1WZvH6RZOMizVeDiG0FgI4fbaqyX?=
+ =?us-ascii?Q?om1lOnQOPDFKn8aAsENuoD8IcW7YX3d1x+AL3T8MxGA74x62cptjqYB1H6rf?=
+ =?us-ascii?Q?q9jCsFc5KkBq1FhgYOyU7lBI9htuBBanu8YFx/1DCpJhALjLQRA/DAXTGpoM?=
+ =?us-ascii?Q?U1AeHdPleCNDhFExbJRuxkmdbShvnd0YeXhCHHf2AWsGzygNW8TEbsBN5qDh?=
+ =?us-ascii?Q?7NeAb+n9cDErJsGb+zcFvVpqqyeFvXkiJqNFAdYH3WOr7qbkQVu6tdvXtYhx?=
+ =?us-ascii?Q?e0EhdZoiTb1RAxV55vKwjlhycHssOPUP7JITdWSdOhUC4K0uSL2ZZ1xZQ2Fg?=
+ =?us-ascii?Q?jjOLkFdVsTWMOyYc1zAOavoDS0VViBxSm3gCR3Qh9bPFGso5nzon38e8VDTn?=
+ =?us-ascii?Q?BZQdqBGo/DFGFRJmIjEY6TZEavfwHn2wQi1tKc7znW2JyujD6Dm1hOqUL44y?=
+ =?us-ascii?Q?GvndRK1SG+262I1Thg1r8JOTG8GcAREXDVdiqWQ8LDKlPsX7Hho9ag5PESMu?=
+ =?us-ascii?Q?5sXfYa6qCiHWpxt32L0omHRxwOWDhBSShOKDgRJUV1/WgOqa7U+BxhM6guza?=
+ =?us-ascii?Q?poiRZnzh/wlZUvLy2n1ZXOjb8TV48M+Vj0FAUE/wJ+V1ZtyJCuIztjnW+Ie2?=
+ =?us-ascii?Q?s2DmAYOh5ozWp9R0eJzoNrtAAri1Q4fFBJTQA+4XzYchNZ7N4ZNCdr3MXath?=
+ =?us-ascii?Q?NteDhqd+/MRs8ubMUk2AZgDYIUAL/O4vamELJXpLJde8ANGwLbqNuNlIqFRv?=
+ =?us-ascii?Q?jIoimP32OrpCB4nTkyRVfuFQcwDnNgNh756YjYiuAa1EIt4Z8P3/brkoFDiL?=
+ =?us-ascii?Q?QJdmTqeGh4jCWvd6CetvBOHFsHzheCTstCRiMIIvS3HKD8NhF3NUhRpUfNk+?=
+ =?us-ascii?Q?WdYgMntwNrcJtiNBu4fNgaJdYpWz23/DnIlLIEvrMqTkmfi8QeD4YuMZQ+uv?=
+ =?us-ascii?Q?GXRHWMhGaIYrg0ZbjtEbPjIzKGxgrx4lwFAXeWAROqZkvzKi9ailHMCS9SGu?=
+ =?us-ascii?Q?cj5cG8jk75iBw/rzITwR8PY=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3fde52b6-4c6f-4c8e-9658-08dc969a592c
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 11:14:44.6578 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: oRDHRiAg1TPVT0FsV/9DGSHOOifXYxvvZH0hTLw/HOXZH0NTF7UgbrtUdpafPfIWXP/6E7O5DO0jiK9ARZaBbPgdb56NEXr6lcObfkiWltI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB10284
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,195 +157,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+---
+ net/tftp.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-On Thu, 27 Jun 2024 at 11:34, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
->
-> =D1=87=D1=82, 27 =D1=87=D0=B5=D1=80=D0=B2. 2024=E2=80=AF=D1=80. =D0=BE 12=
-:26 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > Hi Svyatoslav,
-> >
-> > On Thu, 27 Jun 2024 at 10:09, Svyatoslav <clamor95@gmail.com> wrote:
-> > >
-> > >
-> > >
-> > > 27 =D1=87=D0=B5=D1=80=D0=B2=D0=BD=D1=8F 2024=E2=80=AF=D1=80. 11:48:46=
- GMT+03:00, Caleb Connolly <caleb.connolly@linaro.org> =D0=BD=D0=B0=D0=BF=
-=D0=B8=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
-> > > >
-> > > >
-> > > >On 27/06/2024 10:37, Simon Glass wrote:
-> > > >> Hi Marek,
-> > > >>
-> > > >> On Thu, 27 Jun 2024 at 00:57, Marek Vasut <marex@denx.de> wrote:
-> > > >>>
-> > > >>> In case a regulator DT node contains regulator-always-on or regul=
-ator-boot-on
-> > > >>> property, make sure the regulator gets correctly configured by U-=
-Boot on start
-> > > >>> up. Unconditionally probe such regulator drivers. This is a prepa=
-ratory patch
-> > > >>> for introduction of .regulator_post_probe() which would trigger t=
-he regulator
-> > > >>> configuration.
-> > > >>>
-> > > >>> Parsing of regulator-always-on and regulator-boot-on DT property =
-has been
-> > > >>> moved to regulator_post_bind() as the information is required ear=
-ly, the
-> > > >>> rest of the DT parsing has been kept in regulator_pre_probe() to =
-avoid
-> > > >>> slowing down the boot process.
-> > > >>>
-> > > >>> Signed-off-by: Marek Vasut <marex@denx.de>
-> > > >>> ---
-> > > >>> Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
-> > > >>> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> > > >>> Cc: Chris Morgan <macromorgan@hotmail.com>
-> > > >>> Cc: Dragan Simic <dsimic@manjaro.org>
-> > > >>> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> > > >>> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> > > >>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > >>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> > > >>> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> > > >>> Cc: Jonas Karlman <jonas@kwiboo.se>
-> > > >>> Cc: Kever Yang <kever.yang@rock-chips.com>
-> > > >>> Cc: Kostya Porotchkin <kostap@marvell.com>
-> > > >>> Cc: Matteo Lisi <matteo.lisi@engicam.com>
-> > > >>> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > > >>> Cc: Max Krummenacher <max.krummenacher@toradex.com>
-> > > >>> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> > > >>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> > > >>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> > > >>> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> > > >>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> > > >>> Cc: Sam Day <me@samcday.com>
-> > > >>> Cc: Simon Glass <sjg@chromium.org>
-> > > >>> Cc: Sumit Garg <sumit.garg@linaro.org>
-> > > >>> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > >>> Cc: Thierry Reding <treding@nvidia.com>
-> > > >>> Cc: Tom Rini <trini@konsulko.com>
-> > > >>> Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> > > >>> Cc: u-boot-amlogic@groups.io
-> > > >>> Cc: u-boot-qcom@groups.io
-> > > >>> Cc: u-boot@dh-electronics.com
-> > > >>> Cc: u-boot@lists.denx.de
-> > > >>> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> > > >>> ---
-> > > >>>   drivers/power/regulator/regulator-uclass.c | 22 +++++++++++++++=
--------
-> > > >>>   1 file changed, 15 insertions(+), 7 deletions(-)
-> > > >>>
-> > > >>> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers=
-/power/regulator/regulator-uclass.c
-> > > >>> index 66fd531da04..ccc4ef33d83 100644
-> > > >>> --- a/drivers/power/regulator/regulator-uclass.c
-> > > >>> +++ b/drivers/power/regulator/regulator-uclass.c
-> > > >>> @@ -433,6 +433,8 @@ static int regulator_post_bind(struct udevice=
- *dev)
-> > > >>>          const char *property =3D "regulator-name";
-> > > >>>
-> > > >>>          uc_pdata =3D dev_get_uclass_plat(dev);
-> > > >>> +       uc_pdata->always_on =3D dev_read_bool(dev, "regulator-alw=
-ays-on");
-> > > >>> +       uc_pdata->boot_on =3D dev_read_bool(dev, "regulator-boot-=
-on");
-> > > >>>
-> > > >>>          /* Regulator's mandatory constraint */
-> > > >>>          uc_pdata->name =3D dev_read_string(dev, property);
-> > > >>> @@ -444,13 +446,21 @@ static int regulator_post_bind(struct udevi=
-ce *dev)
-> > > >>>                          return -EINVAL;
-> > > >>>          }
-> > > >>>
-> > > >>> -       if (regulator_name_is_unique(dev, uc_pdata->name))
-> > > >>> -               return 0;
-> > > >>> +       if (!regulator_name_is_unique(dev, uc_pdata->name)) {
-> > > >>> +               debug("'%s' of dev: '%s', has nonunique value: '%=
-s\n",
-> > > >>> +                     property, dev->name, uc_pdata->name);
-> > > >>> +               return -EINVAL;
-> > > >>> +       }
-> > > >>>
-> > > >>> -       debug("'%s' of dev: '%s', has nonunique value: '%s\n",
-> > > >>> -             property, dev->name, uc_pdata->name);
-> > > >>> +       /*
-> > > >>> +        * In case the regulator has regulator-always-on or
-> > > >>> +        * regulator-boot-on DT property, trigger probe() to
-> > > >>> +        * configure its default state during startup.
-> > > >>> +        */
-> > > >>> +       if (uc_pdata->always_on && uc_pdata->boot_on)
-> > > >>> +               dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-> > > >>>
-> > > >>> -       return -EINVAL;
-> > > >>> +       return 0;
-> > > >>>   }
-> > > >>>
-> > > >>>   static int regulator_pre_probe(struct udevice *dev)
-> > > >>> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udevice=
- *dev)
-> > > >>>                                                  -ENODATA);
-> > > >>>          uc_pdata->max_uA =3D dev_read_u32_default(dev, "regulato=
-r-max-microamp",
-> > > >>>                                                  -ENODATA);
-> > > >>> -       uc_pdata->always_on =3D dev_read_bool(dev, "regulator-alw=
-ays-on");
-> > > >>> -       uc_pdata->boot_on =3D dev_read_bool(dev, "regulator-boot-=
-on");
-> > > >>>          uc_pdata->ramp_delay =3D dev_read_u32_default(dev, "regu=
-lator-ramp-delay",
-> > > >>>                                                      0);
-> > > >>>          uc_pdata->force_off =3D dev_read_bool(dev, "regulator-fo=
-rce-boot-off");
-> > > >>> --
-> > > >>> 2.43.0
-> > > >>>
-> > > >>
-> > > >> This is reading a lot of DT stuff very early, which may be slow. I=
-t is
-> > > >> also reading from the DT in the bind() step which we sometimes hav=
-e to
-> > > >> do, but try to avoid.
-> > > >
-> > > >Could we set up the livetree pre-bind? What about MMU? On armv8 at l=
-east this would have a huge impact on performance. I've done some measureme=
-nts and there is at least 1 order of magnitude difference between parsing F=
-DT with no caches vs parsing livetree with, it's huge.
-> > > >>
-> > > >> Also this seems to happen in SPL and again pre-reloc and again in
-> > > >> U-Boot post-reloc?
-> > >
-> > > Not so long ago I proposed a similar patchset with the same goal
-> > > and I have discovered massive issues with SPL and relocation
-> > > interfering with driver loading.
-> > >
-> > > The issue which I have personally encountered was i2c driver failure
-> > > due to double probing. This behavior was triggered by
-> > > always-on/boot-on regulators provided by pmic which in most
-> > > cases is an i2c device.
-> > >
-> > > At that time everyone just ignored me, so idk if tegra i2c is the onl=
-y
-> > > driver which has this response or there are more, but be aware that
-> > > this patch set may cause cascade failure on many devices.
-> >
-> > I'm not sure if I remember this, but I can certainly see some problems
-> > with it. Did we have drivers that probed in the bind() function,
-> > perhaps?
-> >
->
-> It is expected not to remember all patchsets sent, not an issue. As for
-> drivers probed after bind there are several, but they are quite essential=
-.
-> Core GPIO and pinmux drivers are probed as early as possible but in most
-> cases they have no dependencies among complex subsystems (like i2c).
+diff --git a/net/tftp.c b/net/tftp.c
+index 2e335413492..2534dec1c9f 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -494,8 +494,15 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 				tftp_prev_block = tftp_cur_block;
+ 				tftp_cur_block = (unsigned short)(block + 1);
+ 				update_block_number();
+-				if (ack_ok)
++				if (ack_ok) {
++					if (block == 0 &&
++					    tftp_state == STATE_SEND_WRQ){
++						/* connection's first ACK */
++						tftp_state = STATE_DATA;
++						tftp_remote_port = src;
++					}
+ 					tftp_send(); /* Send next data block */
++				}
+ 			}
+ 		}
+ #endif
+-- 
+2.43.0
 
-OK, well I suppose that you managed to find a solution.
-
-From my side I just want to avoid doing too much such stuff
-'automatically' in driver model. As you say, it can lead to difficult
-race conditions / bugs.
-
-Regards,
-Simon
