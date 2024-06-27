@@ -4,84 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 737BAC2BD09
-	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 14:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0ADAC30653
+	for <u-boot@archiver.kernel.org>; Thu, 27 Jun 2024 15:06:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA1B08852E;
-	Thu, 27 Jun 2024 16:43:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 382C887FCD;
+	Thu, 27 Jun 2024 17:06:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G1GSc3aS";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86A988854E; Thu, 27 Jun 2024 16:43:51 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57E348811C
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 16:43:49 +0200 (CEST)
+ id 2A9078853E; Thu, 27 Jun 2024 17:06:46 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id CDC4D88247
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 17:06:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-25d0d16e38eso2420463fac.2
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 07:43:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719499428; x=1720104228; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CSaLi0QtohHGkIutKxofG9KMirc10F0apUWwBa1SEak=;
- b=G1GSc3aStDNmyQchyXvrQglbhfaEHrF4PV9CXUEbZEtPjM+Jlz/pKecrWyUJG7NdYG
- EsV+dT08bPMwPxffsKB/L1tE+kNAuPft2MukkvK22LwWsPfWNenDgTOy1EuU7FSNZAbR
- fL44FA/S7mUHm9chXk5Zn/8RM19VyalEkSzw0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719499428; x=1720104228;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CSaLi0QtohHGkIutKxofG9KMirc10F0apUWwBa1SEak=;
- b=DI8wTc9YzqxIaCZ7vRB7CGM+e53sEoXiOlJJaHWtwkDBAeLew4N6nNoESNP+xtvrqb
- Sai+O2beNxZsrrYRHER/jh26m6bX/8P/sS/m6ol+hf3unmX9v57r/3mqf7+uWXnBCjEh
- 13mxAcoCKmY4TLPmFyWeAW3LCalvObnkbdld93R1H5pS6/XZwEccITl5a19hTFWoM2Vq
- dfJ/45tfbGl7oB5ceRMQgQ0ZnYt2h0G2JHNTpD4bM1WuvE44m4BOKfxYBU6YofyX97fU
- bcvznv7h3FQaQYsGYuk6R9M7+zuEXsj2bMrqhlcoL8IvbQiEEglN7qzWprhzRSAj4vx8
- gY4A==
-X-Gm-Message-State: AOJu0YwATfmWeHwaPr737zURz9MTnyPcdUM4CDZmCMVXIgkZ64QkFfpp
- wy5180cI5U/oJSzrRr5cxbD52t2loGqYk95P02IeinfxgKbWTnIBq+wqrvRQWmg=
-X-Google-Smtp-Source: AGHT+IGQU2a8EYwBVCaKo9g47oJP11zuK+AUVKY+kFDkhzb4CtNTa5uKyzjhLnLa8gpIsIDn91KlhQ==
-X-Received: by 2002:a05:6870:b48e:b0:24f:c9e3:b76f with SMTP id
- 586e51a60fabf-25d06bd5898mr13023782fac.19.1719499428051; 
- Thu, 27 Jun 2024 07:43:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
- [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25d72d55340sm375686fac.43.2024.06.27.07.43.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jun 2024 07:43:47 -0700 (PDT)
-Date: Thu, 27 Jun 2024 08:43:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Michal Simek <michal.simek@amd.com>,
- "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
- "u-boot-board-maintainers@lists.denx.de"
- <u-boot-board-maintainers@lists.denx.de>
-Subject: Re: [ANN] U-Boot v2024.07-rc5 released
-Message-ID: <20240627144344.GD38804@bill-the-cat>
-References: <20240624193035.GK38804@bill-the-cat>
- <e396268c-e106-4bb8-a40d-e0582e556c6b@cs-soprasteria.com>
- <20240625151929.GS38804@bill-the-cat>
- <7b87013a-23b6-419f-a163-2e9f4c44b200@csgroup.eu>
- <20240626150113.GX38804@bill-the-cat>
- <9bf49364-e95f-486a-9642-66953657e4aa@csgroup.eu>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E4A46367;
+ Thu, 27 Jun 2024 08:07:07 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1173D3F766;
+ Thu, 27 Jun 2024 08:06:41 -0700 (PDT)
+Date: Thu, 27 Jun 2024 16:06:39 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Marek
+ Vasut <marex@denx.de>, John Watts <contact@jookia.org>
+Subject: Re: [PATCH v2 2/2] usb: musb-new: sunxi: make compatible with
+ UDC/DM gadget model
+Message-ID: <20240627160639.2353fd1e@donnerap.manchester.arm.com>
+In-Reply-To: <20230608195631.55364-3-CFSworks@gmail.com>
+References: <20230608195631.55364-1-CFSworks@gmail.com>
+ <20230608195631.55364-3-CFSworks@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Av7/uBUgmeHAAtNC"
-Content-Disposition: inline
-In-Reply-To: <9bf49364-e95f-486a-9642-66953657e4aa@csgroup.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,133 +59,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu,  8 Jun 2023 13:56:31 -0600
+Sam Edwards <cfsworks@gmail.com> wrote:
 
---Av7/uBUgmeHAAtNC
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Thu, Jun 27, 2024 at 10:23:34AM +0200, Christophe Leroy wrote:
->=20
->=20
-> Le 26/06/2024 =E0 17:01, Tom Rini a =E9crit=A0:
-> > On Tue, Jun 25, 2024 at 09:20:54PM +0200, Christophe Leroy wrote:
-> > >=20
-> > >=20
-> > > Le 25/06/2024 =E0 17:19, Tom Rini a =E9crit=A0:
-> > > > On Tue, Jun 25, 2024 at 03:12:38PM +0000, LEROY Christophe wrote:
-> > > > > Hi All,
-> > > > >=20
-> > > > > Le 24/06/2024 =E0 21:30, Tom Rini a =E9crit=A0:
-> > > > > > Hey all,
-> > > > > >=20
-> > > > > > Well, once again I need to check my calender reminders since, w=
-hoops,
-> > > > > > I'm a week late. That said, looking at the list of changes in t=
-his
-> > > > > > slightly elongated period, I think it's OK. At this point we're=
- a week
-> > > > > > out from the release, so it's time for clear and obvious regres=
-sion
-> > > > > > fixes. Ideally ones introduced this release cycle so there's le=
-ss
-> > > > > > chances of unintended side-effects.
-> > > > > >=20
-> > > > > > In terms of a changelog,
-> > > > > > git log --merges v2024.07-rc4..v2024.07-rc5
-> > > > > > contains what I've pulled but as always, better PR messages and=
- tags
-> > > > > > will provide better results here.
-> > > > > >=20
-> > > > > > With that, the final release is planned for Monday, July 1st, 2=
-024.
-> > > > > > Thanks all!
-> > > > > >=20
-> > > > >=20
-> > > > > For your information, I have started testing v2024.07 on my power=
-pc
-> > > > > boards in operational condition and I have a major problem : U-bo=
-ot
-> > > > > doesn't get the Linux kernel started before the watchdog fires. I=
- have
-> > > > > to disable watchdog to get it running.
-> > > > >=20
-> > > > > This problem doesn't occur with v2024.04.
-> > > > >=20
-> > > > > I bisected it to commit 340fdf1303dc ("zlib: Port fix for CVE-201=
-6-9841
-> > > > > to U-Boot") and I also confirm that v2024.07-rc5 works well with =
-that
-> > > > > commit reverted on top of it.
-> > > > >=20
-> > > > > Any idea of what is going wrong with that commit ?
-> > > >=20
-> > > > Are you able to check the zlib performance before/after that commit?
-> > > >=20
-> > >=20
-> > > Indeed there's a huge difference.
-> > >=20
-> > > Before : 12298074 timebase ticks to decompress kernel
-> > > After :  17145906 ticks, that is 40% more time.
-> > >=20
-> > > But behind that, we also need to understand why the watchdog is not k=
-ept
-> > > alive during that time.
-> >=20
-> > That is odd, I would have expected it to have been kept alive.
-> >=20
->=20
-> I digged into it a bit more and really that commit 340fdf1303dc ("zlib: P=
-ort
-> fix for CVE-2016-9841 to U-Boot") is the issue. The watchdog is still kept
-> alive, but not fast enough. On powerpc 8xx, the CPU watchdog has a timeout
-> of slightly more than 1s, so it must be kept alive very often.
->=20
-> schedule() is called in inflate() just before calling inflate_fast(), whi=
-ch
-> worked until now because the maximum time spent in inflate_fast() was abo=
-ut
-> 300ms. With the above commit, more than 1s is spent in inflate_fast() , f=
-or
-> the problematic block the time spent inside inflate_fast() is multiplied =
-by
-> almost 4.
->=20
-> The problem is that the commit does more than what it says and removes
-> an important optimisation that is using halfwords instead of bytes for the
-> copy.
->=20
-> I'm going to send shortly a patch to partially revert that commit. But if
-> you feel it is better to revert the commit completely and provide a fix in
-> next cycle, it is ok as well, up to you but I think it is important to get
-> that fixed for v2024.07.
->=20
-> I'm also sending a fix on the setup of 8xx watchdog, but that has almost =
-no
-> impact in reality and doesn't fix the problem.
+John asked me have a look at this.
 
-Thanks for digging in to all of this, I'll have to think about what path
-is better at this point in the cycle.
+> Since many sunxi boards do not implement a `board_usb_init`, it's
 
---=20
-Tom
+I am confused, what has this have to do with gadget support? *No* sunxi
+board build provides board_usb_init(), but apparently this works fine for
+now.
+I am all for this converting to DM part, but the rationale seems a bit
+off.
 
---Av7/uBUgmeHAAtNC
-Content-Type: application/pgp-signature; name="signature.asc"
+Also can you give some reason for this patch? What does this fix or
+improve? "it's better" is a bit thin, "complying with DM" would already be
+sufficient, but maybe there is more?
 
------BEGIN PGP SIGNATURE-----
+> better if we just make the sunxi USB driver compatible with the
+> DM gadget model, as many other musb-new variants already are.
+> 
+> This change has been verified working on a T113s.
+> 
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> ---
+>  drivers/usb/musb-new/sunxi.c | 50 +++++++++++++++++++++++-------------
+>  1 file changed, 32 insertions(+), 18 deletions(-)
+> 
+> diff --git a/drivers/usb/musb-new/sunxi.c b/drivers/usb/musb-new/sunxi.c
+> index 510b254f7d..6658cd995d 100644
+> --- a/drivers/usb/musb-new/sunxi.c
+> +++ b/drivers/usb/musb-new/sunxi.c
+> @@ -444,6 +444,16 @@ static struct musb_hdrc_config musb_config_h3 = {
+>  	.ram_bits	= SUNXI_MUSB_RAM_BITS,
+>  };
+>  
+> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZ9eqAACgkQFHw5/5Y0
-tyyL/gwApWIJHzIa8VaC/yL8+toEPcQXNUrgVLFW/DZzcUb96pbzasNz6KyweRQ/
-VDwbh1cy6EIJq4VPmPIJ+89R1uEKc8tR+SjrAB6vO6kckLZxF1M+MZJgoOM8T/6V
-z3BLAwyjHuO0MOLj5Xgg0C8xLuoQgMpJQ56jWCeTDJ0mGKOzuwAkmtMowdZVU3N+
-SutJRmJw/QjgQ6gAQ5eeTRXLZ0WRZnFpaQqqJMmBU8pxOOlJUr8hnBwgZtaohSmI
-t5owjndPkvEKCwmvrKN5FpyG5YS9ow2ZECI2CRB5rQVEFAnARk8nPftD4PRniLWh
-CW8gHjEewlWl4u/phDH/bp+QKPpyy2oj49R6/1TZj1YigtjqkjLh5i8eZoFNx+1a
-4KEZx4029QZCsaSnDEhWvDBZjt8bwDmJOth3GpDBVtzhYVm2w+t+2kJrC/7mmd9r
-hjgxTkApt/nEjKtn4/Z1ilWfz3B2v77XvBgPJ+/krEKrIpeVzAH2B4qySDR+LTIR
-i8TJV9+E
-=m8/n
------END PGP SIGNATURE-----
+Please no more #ifdef's. Is there any reason to *not* force
+DM_USB_GADGET now, for all sunxi boards, in Kconfig?
+Either by "select"ing it in the USB Kconfig, or in arch/arm/Kconfig, like
+other platforms do.
+Then you don't need to care about the !DM_USB_GADGET definition of this
+function and can drop the #ifdef.
 
---Av7/uBUgmeHAAtNC--
+> +int dm_usb_gadget_handle_interrupts(struct udevice *dev) {
+
+coding style
+
+> +	struct sunxi_glue *glue = dev_get_priv(dev);
+> +	struct musb_host_data *host = &glue->mdata;
+> +
+> +	host->host->isr(0, host->host);
+> +	return 0;
+> +}
+> +#endif
+> +
+>  static int musb_usb_probe(struct udevice *dev)
+>  {
+>  	struct sunxi_glue *glue = dev_get_priv(dev);
+> @@ -452,10 +462,6 @@ static int musb_usb_probe(struct udevice *dev)
+>  	void *base = dev_read_addr_ptr(dev);
+>  	int ret;
+>  
+> -#ifdef CONFIG_USB_MUSB_HOST
+> -	struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
+> -#endif
+> -
+>  	if (!base)
+>  		return -EINVAL;
+>  
+> @@ -486,23 +492,31 @@ static int musb_usb_probe(struct udevice *dev)
+>  	pdata.platform_ops = &sunxi_musb_ops;
+>  	pdata.config = glue->cfg->config;
+>  
+> -#ifdef CONFIG_USB_MUSB_HOST
+> -	priv->desc_before_addr = true;
+> +	if (IS_ENABLED(CONFIG_USB_MUSB_HOST)) {
+> +		struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
+> +		priv->desc_before_addr = true;
+>  
+> -	pdata.mode = MUSB_HOST;
+> -	host->host = musb_init_controller(&pdata, &glue->dev, base);
+> -	if (!host->host)
+> -		return -EIO;
+> +		pdata.mode = MUSB_HOST;
+> +		host->host = musb_init_controller(&pdata, &glue->dev, base);
+> +		if (!host->host)
+> +			return -EIO;
+>  
+> -	return musb_lowlevel_init(host);
+> -#else
+> -	pdata.mode = MUSB_PERIPHERAL;
+> -	host->host = musb_register(&pdata, &glue->dev, base);
+> -	if (IS_ERR_OR_NULL(host->host))
+> -		return -EIO;
+> +		return musb_lowlevel_init(host);
+> +	} else if (CONFIG_IS_ENABLED(DM_USB_GADGET)) {
+> +		pdata.mode = MUSB_PERIPHERAL;
+> +		host->host = musb_init_controller(&pdata, &glue->dev, base);
+> +		if (!host->host)
+> +			return -EIO;
+>  
+> -	return 0;
+> -#endif
+> +		return usb_add_gadget_udc(&glue->dev, &host->host->g);
+> +	} else {
+> +		pdata.mode = MUSB_PERIPHERAL;
+> +		host->host = musb_register(&pdata, &glue->dev, base);
+> +		if (IS_ERR_OR_NULL(host->host))
+> +			return -EIO;
+> +
+> +		return 0;
+> +	}
+
+That looks like a good cleanup! Just need to test it briefly, but it seems
+like the gist of this patch is fine.
+
+Cheers,
+Andre
+
+
+>  }
+>  
+>  static int musb_usb_remove(struct udevice *dev)
+
