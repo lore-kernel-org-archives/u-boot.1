@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 533EDC30658
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 17:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79555C2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 17:42:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77B0C885E1;
+	by phobos.denx.de (Postfix) with ESMTP id D189B88600;
 	Fri, 28 Jun 2024 19:41:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fD1wYIxL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h/4y3hhL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5094A885A2; Fri, 28 Jun 2024 19:41:43 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 6DEAC88591; Fri, 28 Jun 2024 19:41:46 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CD72885D4
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 19:41:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BC41885A0
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 19:41:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-425624255f3so5780155e9.0
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 10:41:41 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2eaae2a6dc1so11999251fa.0
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 10:41:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719596500; x=1720201300; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719596502; x=1720201302; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/+VqgFpybrKKi1ENpWeSBVaTVBicGVWbauPS9WF1fX0=;
- b=fD1wYIxLbT+ygnWvh9nSKTmebL/0w0uvC6NbeKWIfHf+4rV7KDfZ4CrAoUcUfOk4/t
- xQmEliekjq/zCa4/OfHHJa0R7Vt3yVUXGaWAI186kU4qhXSEGNWRWUb8VpF5imbKvR5c
- h3hlq52/QuwBO06am+ZChi+dKJ4u2uPmdmi9yXdKyDxU6jx7I5jzS4meXm0I7Z341cX0
- Sp38yWsDqB5gtzaQgoWsA3vhLsn9BQQlreoSx7HaTAMXOG/sobYTHVcRVz284fY9byoj
- hww7EBAHis35dLoMlznXtlBOpPtp7ds+aVFFLgT9GEp+ljoePQpZS3THVBklvRiRAl+g
- 2Vxw==
+ bh=+Et/k5LVOxHtfBQGpaCz7WImDb01evOUMkYgz0sKEL0=;
+ b=h/4y3hhLNeXqNP0jgdXABYYY2Qd7X7QQstE7bjwXUa+CJ0p1ghmrLWZ63MBSztNaYu
+ tFgJZfC/H+kJqviBG1qkbgqmldcDyd6kvM9wWOx2kh0g1QlIWhoMzUHBlol1muWt9JSP
+ 13znjTrOwE/WxwKf+YASQM6uaDPhuZqzSuH8Zju+riOJCSmYa5BoG7HAHDip8NvEuHDl
+ Xo42yefa8j6Ew2KYCLZBAhzHodxwxCqWQpsuSQ8hCaQXqzxQCSVWqqnYcVN9vELEcJfJ
+ ywz01wnyXDzFjSW3Bkjd9WkVhVjINjmhgt8Xu/kQ6l4gnRVzILiIOXjwaLBZZTD2WGyp
+ XMRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719596500; x=1720201300;
+ d=1e100.net; s=20230601; t=1719596502; x=1720201302;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/+VqgFpybrKKi1ENpWeSBVaTVBicGVWbauPS9WF1fX0=;
- b=WrriTAsfwm6xEXtR6svYM2Csz4nCXMB8veg7btEQ3hYQUJOqyJbYaCFWRBNL+HP8Zb
- UztSuzAADfdBC46J4OYb+xP0PrHZ6ZbhX4D9483SqhpIpN2NO+/XYmABKVjnXgN11fwU
- 6Mz/2H4ezfP5LnssOeCvGFBHYdxnBPxjzPsiSTuJt09s8KDsMOQvsU706MeGX0PpMWLf
- GBOc6YapRu6AB6kGuHDuzKYzMvYRQYGy8r/udftfyUvelzTXlkRRZKSbXmVKInoBgLdz
- ARHCRhmrPEz4gUal4nr2C862N8ApnRgi9u/hvfHxo19duI5UvFPI3TAc6ZWVquGd53pN
- kk0A==
+ bh=+Et/k5LVOxHtfBQGpaCz7WImDb01evOUMkYgz0sKEL0=;
+ b=VFRLLMFc2boA213+d5WkWi8w7DIQxXgo1DSHdp6ErFqmP4p1i1F1XmkflMNqn4rAVI
+ BQahcJSZQrtEhN1Pv0/3NHEI1lHLzHcfibKcA+R4hF4EuSN6J9+fajMHBviugfTFx/Gd
+ VIhTBLWs34vVNQSlbm0bGX+Ix5Pj/I2TY3zvfbJeymgMZ0rBBdH7IQJ5WhH1cezhRsJy
+ oClzT0RCxpWrqzG4Ce+zMll5lu1+4K5wSUjgqq8gBjLryUo4sMLRyyFwuVa2SEsjftQ1
+ fQr2DCYzZRSLwtXOLlcwzrbfikVCtG9sVM1MWQcbc/LYgttuTWZc1AcfxASt46v5GXS+
+ tngw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFrXFc2bNjYAHaMIstg7f4b5lP4EUxHroTNCeYSjfFhZ+mzYh4+4CIxKzkvGSMk5B9PwosYuK9/UQLS7NE6SJuoVERbg==
-X-Gm-Message-State: AOJu0Yyu0uYDrLhQapwjuwe/sDyGzfRIk7MdUUrzm1Pc2h7fqTNMPXcQ
- sH4dPoPIQPKzZ8iJ3zzZOV7vwli29lVR+rFFKfPmATRJIK8fpBRH
-X-Google-Smtp-Source: AGHT+IFSg4cE87aPInbivMspeWWSpSbng+LbwhvQ+5X66BFRf4ejsQv4ZjbSm4D5NGJ0qifJOWKv3Q==
-X-Received: by 2002:a05:600c:4ecf:b0:421:347a:f0a6 with SMTP id
- 5b1f17b1804b1-4256d4c1d7cmr19967165e9.3.1719596500520; 
- Fri, 28 Jun 2024 10:41:40 -0700 (PDT)
+ AJvYcCXBEYQIRLIxCJyPNUh6lmlDhAoLs4WqXzKMbyiXfz0rBpSJbGFBan15vl5U250EX0FiWXqXsmXN/pOt4zo9fVEiteyEPQ==
+X-Gm-Message-State: AOJu0YzL63Rf8GEawTkw78ms3ieUaK04saNZWBSsw6/x/omji4Wt7r9h
+ cCBLss+O4dVuG73Wckie1ndzaMdagAnjVH4N/uBi6EcgKszn0j0c
+X-Google-Smtp-Source: AGHT+IE2UQCMCEojJDI/1RM8yIcpGUXGOOhAd5wVIN1DS9CXD2lwbnVIlHe6Ba3DiqPXlA7Mkn8qWg==
+X-Received: by 2002:a2e:bc1a:0:b0:2ec:5f85:61c0 with SMTP id
+ 38308e7fff4ca-2ec5f856227mr157184061fa.48.1719596501468; 
+ Fri, 28 Jun 2024 10:41:41 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4256b097bd6sm46275635e9.30.2024.06.28.10.41.39
+ 5b1f17b1804b1-4256b097bd6sm46275635e9.30.2024.06.28.10.41.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 10:41:40 -0700 (PDT)
+ Fri, 28 Jun 2024 10:41:41 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -74,10 +74,10 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
 Cc: Christian Marangi <ansuelsmth@gmail.com>
-Subject: [PATCH 06/12] clk: mediatek: add support for parent mux from
- different source for topckgen
-Date: Fri, 28 Jun 2024 19:40:51 +0200
-Message-ID: <20240628174114.8675-7-ansuelsmth@gmail.com>
+Subject: [PATCH 07/12] clk: mediatek: add support for gate clock to reference
+ topckgen clock
+Date: Fri, 28 Jun 2024 19:40:52 +0200
+Message-ID: <20240628174114.8675-8-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240628174114.8675-1-ansuelsmth@gmail.com>
 References: <20240628174114.8675-1-ansuelsmth@gmail.com>
@@ -99,77 +99,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As done for infracfg, also add support for parent mux from different
-source for topckgen. This is needed as upstream linux doesn't use 1/1
-factor and use directly the APMIXED clocks.
+Add support for gate clock get_rate to reference topckgen clock for
+infracfg-ao implementation.
+
+In infracfg-ao implementation topckgen is on second level of parent with
+infracfg in the middle.
+To correctly detect this, check the driver of the dev parent and use the
+second level parent if it's not mtk_clk_topckgen.
+
+Due to all the dependency, parent tree must be filled before a gate is
+used, hence is safe to assume it will be there.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/clk/mediatek/clk-mtk.c | 42 ++++++++++++++++++++++------------
- 1 file changed, 28 insertions(+), 14 deletions(-)
+ drivers/clk/mediatek/clk-mtk.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index 4b8a904aa5e..790b92eaf86 100644
+index 790b92eaf86..4a057059407 100644
 --- a/drivers/clk/mediatek/clk-mtk.c
 +++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -338,6 +338,19 @@ static ulong mtk_infrasys_get_factor_rate(struct clk *clk, u32 off)
- 	return mtk_factor_recalc_rate(fdiv, rate);
- }
- 
-+static ulong mtk_topckgen_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
-+					   const int parent, u16 flags)
-+{
-+	switch (flags & CLK_PARENT_MASK) {
-+	case CLK_PARENT_XTAL:
-+		return priv->tree->xtal_rate;
-+	case CLK_PARENT_APMIXED:
-+		return mtk_clk_find_parent_rate(clk, parent, priv->parent);
-+	default:
-+		return mtk_clk_find_parent_rate(clk, parent, NULL);
-+	}
-+}
-+
- static ulong mtk_topckgen_get_mux_rate(struct clk *clk, u32 off)
+@@ -651,20 +651,33 @@ static int mtk_clk_infrasys_disable(struct clk *clk)
+ static ulong mtk_clk_gate_get_rate(struct clk *clk)
  {
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -348,22 +361,23 @@ static ulong mtk_topckgen_get_mux_rate(struct clk *clk, u32 off)
- 	index &= mux->mux_mask << mux->mux_shift;
- 	index = index >> mux->mux_shift;
+ 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
++	struct udevice *parent = priv->parent;
+ 	const struct mtk_gate *gate;
  
--	if (mux->parent[index] > 0 ||
--	    (mux->parent[index] == CLK_XTAL &&
--	     priv->tree->flags & CLK_BYPASS_XTAL)) {
--		switch (mux->flags & CLK_PARENT_MASK) {
--		case CLK_PARENT_APMIXED:
--			return mtk_clk_find_parent_rate(clk, mux->parent[index],
--							priv->parent);
--			break;
--		default:
--			return mtk_clk_find_parent_rate(clk, mux->parent[index],
--							NULL);
--			break;
--		}
+ 	if (clk->id < priv->tree->gates_offs)
+ 		return -EINVAL;
+ 
+ 	gate = &priv->gates[clk->id - priv->tree->gates_offs];
 +	/*
-+	 * Parents can be either from APMIXED or TOPCKGEN,
-+	 * inspect the mtk_parent struct to check the source
++	 * With requesting a TOPCKGEN parent, make sure the dev parent
++	 * is actually topckgen. This might not be the case for an
++	 * infracfg-ao implementation where:
++	 * parent = infracfg
++	 * parent->parent = topckgen
 +	 */
-+	if (mux->flags & CLK_PARENT_MIXED) {
-+		const struct mtk_parent *parent = &mux->parent_flags[index];
-+
-+		return mtk_topckgen_find_parent_rate(priv, clk, parent->id,
-+						     parent->flags);
- 	}
++	if (gate->flags & CLK_PARENT_TOPCKGEN &&
++	    parent->driver != DM_DRIVER_GET(mtk_clk_topckgen)) {
++		priv = dev_get_priv(parent);
++		parent = priv->parent;
+ 	/*
+ 	 * Assume xtal_rate to be declared if some gates have
+ 	 * XTAL as parent
+ 	 */
+-	if (gate->flags & CLK_PARENT_XTAL)
++	} else if (gate->flags & CLK_PARENT_XTAL) {
+ 		return priv->tree->xtal_rate;
++	}
  
--	return priv->tree->xtal_rate;
-+	if (mux->parent[index] == CLK_XTAL &&
-+	    !(priv->tree->flags & CLK_BYPASS_XTAL))
-+		return priv->tree->xtal_rate;
-+
-+	return mtk_topckgen_find_parent_rate(priv, clk, mux->parent[index],
-+					     mux->flags);
+-	return mtk_clk_find_parent_rate(clk, gate->parent, priv->parent);
++	return mtk_clk_find_parent_rate(clk, gate->parent, parent);
  }
  
- static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
+ const struct clk_ops mtk_clk_apmixedsys_ops = {
 -- 
 2.45.1
 
