@@ -4,46 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A09EC2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 15:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF9AAC2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 15:38:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B17388239;
-	Fri, 28 Jun 2024 17:17:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2367C88261;
+	Fri, 28 Jun 2024 17:38:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xZF/McBe";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF7A0879AF; Fri, 28 Jun 2024 17:17:34 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 67E9588239
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 17:17:32 +0200 (CEST)
+ id 7D55588254; Fri, 28 Jun 2024 17:38:42 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 760C088286
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 17:38:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7BBD4106F;
- Fri, 28 Jun 2024 08:17:56 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A2A2E3F73B;
- Fri, 28 Jun 2024 08:17:30 -0700 (PDT)
-Date: Fri, 28 Jun 2024 16:17:27 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Marek
- Vasut <marex@denx.de>, John Watts <contact@jookia.org>
-Subject: Re: [PATCH v2 2/2] usb: musb-new: sunxi: make compatible with
- UDC/DM gadget model
-Message-ID: <20240628161727.5a2f6333@donnerap.manchester.arm.com>
-In-Reply-To: <9716fa71-d010-4444-979f-d120c558426c@gmail.com>
-References: <20230608195631.55364-1-CFSworks@gmail.com>
- <20230608195631.55364-3-CFSworks@gmail.com>
- <20240627160639.2353fd1e@donnerap.manchester.arm.com>
- <9716fa71-d010-4444-979f-d120c558426c@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42562a984d3so5829335e9.3
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 08:38:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1719589120; x=1720193920; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=aAUzl6mfADwpGxqIFXpVPSadF7lLguG+3nnYbv/gn9E=;
+ b=xZF/McBeJ6RT/HgLBL0pwoTL60r7pyLJd5XoCFyYcemhVKj5IHETfyc8CwIzihZhVF
+ 9QFYb+EzAE3u2JwTeOLKNbnLlrQ7GaJyPZW/VTQF8eMNL/uV0RtgLmEdg8pRgYYMRj1o
+ sDL0e92SRcCsKT97JqSl/xCm+XOHTPa7jlEsOolAOEK50HA4+z6u5j6QJedc1NWFEo6w
+ DKmkOnS//kShRt9CJFnCGCZNlHEBKlLIrIP0Mf/5SkjoydD/LAw35fQITYEjgwFFBfnA
+ jGg8VzBVQ5Kt/D8jnJ6mNx1eG0LmK4vJV7BoWb3KtMUAMuag57AbIh2cmzLg1h3z5Oxr
+ EJlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719589120; x=1720193920;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=aAUzl6mfADwpGxqIFXpVPSadF7lLguG+3nnYbv/gn9E=;
+ b=p9O7C+NP3lUvn2UuLpFXhRCnc/jA3Sd724+AT9KtUCthnXkqhaIHcFz06u4qMxKSkf
+ 5WQbY2GG8uY9fw0f9IHMfxxy/bq0M+4lusAPsc81V5DrtRiFNAvQV6PzZtmpZEXLhvUP
+ tOzRfHROtPsaOew38URcGruU1aIQ4wfwr5b0T9kxi6fApJ2cIeliSsbaT9Cse8hpgNNZ
+ G1Gkjoghr/VgGHp+tqf2IDvZtM8vVISICAwTlp5HJaV45Bk8ZKI0Dz6cA36Ib3Vc+MRo
+ UJ1gGtQO4YRXWlmaeVItu/RhX3rlcPmqd3/1hebZ0Rsf8u7X+Mps/aGWSMc9quzamE3r
+ QAew==
+X-Gm-Message-State: AOJu0YyACjKzIkdVZeM3bxoqJ75E/DjeUNTy2730TXLEsNsqJENecq4i
+ 4zJR8CVa58CIsBx7qyftUWOZdCm9RvsVfLJ5FjOS+8aYAc1qPU61TAt2J31SH1k=
+X-Google-Smtp-Source: AGHT+IGI9Hgx7oqKiJuTMy+vUV9Hb6jdXEK4gLMNMVj3TTiAt+gF0KZWpz+R6+wIS3PRaLG1mEV0JA==
+X-Received: by 2002:a05:6000:1885:b0:360:7a3f:7a3a with SMTP id
+ ffacd0b85a97d-366e96b23e2mr14484568f8f.44.1719589119456; 
+ Fri, 28 Jun 2024 08:38:39 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:698a:cbfc:82e9:f7c1?
+ ([2a01:e0a:982:cbb0:698a:cbfc:82e9:f7c1])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3675a0fb950sm2647321f8f.83.2024.06.28.08.38.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Jun 2024 08:38:38 -0700 (PDT)
+Message-ID: <a29c5a2e-c771-41ab-9006-da7d3a86be5c@linaro.org>
+Date: Fri, 28 Jun 2024 17:38:38 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/3] soc: qcom: rpmh and cmd-db drivers
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
+ <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -56,261 +118,88 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Jun 2024 17:25:57 -0600
-Sam Edwards <cfsworks@gmail.com> wrote:
+Hi Caleb,
 
-Hi Sam,
-
-thanks for coming back so quickly!
-
-> On 6/27/24 09:06, Andre Przywara wrote:
-> > On Thu,  8 Jun 2023 13:56:31 -0600
-> > Sam Edwards <cfsworks@gmail.com> wrote:
-> > 
-> > Hi,
-> > 
-> > John asked me have a look at this.  
+On 17/06/2024 10:32, Caleb Connolly wrote:
+> Introduce two Qualcomm SoC drivers, the RPMh and cmd-db. RPMh is a the
+> name for the second generation Resource Power Management hub on Qualcomm
+> SoCs. Most core regulators have to be controlled via this hub.
 > 
-> Hi Andre, it's good to hear from you again,
+> The cmd-db is a region of memory which contains offsets and data about
+> how to communicate with the RPMh.
 > 
-> I'd first like to make sure you're aware that the date on this patch is 
-> June *2023,* not June 2024. It's possible things have changed 
-> substantially in the past year.
-
-Not in the Allwinner MUSB driver, but indeed the gadget support in U-Boot
-has changed since then.
-
-> I do not know if this patch is still a 
-> necessity; though if John is nudging about it, it probably is.
-
-Yes apparently he needs it, though I am not entirely sure why.
-USB gadget has worked for ages in sunxi, without DM_USB_GADGET support,
-that's why I was a bit puzzled why this patch seems so important.
-
-And secondly I was put off by John's initial reply that it would trigger
-many USB errors for him. He later rectified it, but I must have missed
-that message.
-
-> >> Since many sunxi boards do not implement a `board_usb_init`, it's  
-> > 
-> > I am confused, what has this have to do with gadget support? *No* sunxi
-> > board build provides board_usb_init(), but apparently this works fine for
-> > now.
-> > I am all for this converting to DM part, but the rationale seems a bit
-> > off.  
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   drivers/soc/Kconfig              |   1 +
+>   drivers/soc/Makefile             |   1 +
+>   drivers/soc/qcom/Kconfig         |  25 ++
+>   drivers/soc/qcom/Makefile        |   4 +
+>   drivers/soc/qcom/cmd-db.c        | 246 ++++++++++++++++
+>   drivers/soc/qcom/rpmh-internal.h | 141 +++++++++
+>   drivers/soc/qcom/rpmh-rsc.c      | 619 +++++++++++++++++++++++++++++++++++++++
+>   drivers/soc/qcom/rpmh.c          | 110 +++++++
+>   include/soc/qcom/cmd-db.h        |  42 +++
+>   include/soc/qcom/rpmh.h          |  29 ++
+>   include/soc/qcom/tcs.h           |  78 +++++
+>   11 files changed, 1296 insertions(+)
 > 
-> For context, board_usb_init() is (was?) the non-DM entry point for USB 
-> functionality;
 
-I think board_usb_init() comes from the old days, to provide hooks in case
-certain boards need something special to enable USB, like an extra
-regulator, power domain or clock to toggle. These days this should all be
-covered by DT properties, so we should not (and do not!) need it.
-And there is an empty fallback implementation in common/usb.c.
+<snip>
 
-> it is (was?) *the* implementation of 
-> usb_gadget_initialize() when !DM_USB_GADGET.
+> +
+> +static int cmd_db_get_header(const char *id, const struct entry_header **eh,
+> +			     const struct rsc_hdr **rh)
+> +{
+> +	const struct rsc_hdr *rsc_hdr;
+> +	const struct entry_header *ent;
+> +	int i, j;
+> +	u8 query[sizeof(ent->id)] __nonstring;
+> +
+> +	/*
+> +	 * Pad out query string to same length as in DB. NOTE: the output
+> +	 * query string is not necessarily '\0' terminated if it bumps up
+> +	 * against the max size. That's OK and expected.
+> +	 */
+> +	strncpy(query, id, sizeof(query));
+> +
+> +	for (i = 0; i < MAX_SLV_ID; i++) {
+> +		rsc_hdr = &cmd_db_header->header[i];
+> +		if (!rsc_hdr->slv_id)
+> +			break;
+> +
+> +		ent = rsc_to_entry_header(rsc_hdr);
+> +		for (j = 0; j < le16_to_cpu(rsc_hdr->cnt); j++, ent++) {
+> +			if (memcmp(ent->id, query, sizeof(ent->id)) == 0) {
 
-Mmh, was that so? None of them seemed to call usb_gadget_initialize(),
-though? I checked older releases, but usb_gadget_initialize() seemed to
-have always been called by the respective gadget code (fastboot, ums,
-ethernet)?
+I had to change to:
+			if (strncmp(ent->id, query, sizeof(ent->id)) == 0) {
+otherwise I get:
+Failed to read RPMh address for bobb1
+...
 
-> > Also can you give some reason for this patch? What does this fix or
-> > improve? "it's better" is a bit thin, "complying with DM" would already be
-> > sufficient, but maybe there is more?  
-> 
-> Eh, yeah, "better" is something of a question-begging word isn't it? :)
-> 
-> The main point is to be compatible with DM's view of UDC, which as you 
-> said is a worthy goal in itself. It's "better" because this allows using 
-> DM's all-purpose implementation of usb_gadget_initialize(), which is 
-> (was?) necessary for those targets lacking board_usb_init().
+on SM8550 and SM8650.
 
-That's what triggered my confusion: there is no sunxi board as such that
-implements board_usb_init(), and with our USB PHY code being DT driven, we
-should not need it anyway.
-There are empty fallback implementations in common/usb.c and
-drivers/usb/gadget/g_dnl.c, and we pick up one of them, given the right
-Kconfig symbols defined.
+Linux uses memcmp, but it pads the buffer with strtomem_pad(), strncpy doesn't seem to do the padding.
+	
+Neil
 
-I just tried it: enabling the "ums" command, and it worked:
+> +				if (eh)
+> +					*eh = ent;
+> +				if (rh)
+> +					*rh = rsc_hdr;
+> +				return 0;
+> +			}
+> +		}
+> +	}
+> +
+> +	return -ENODEV;
+> +}
 
-$ make orangepi_zero3_defconfig
-$ scripts/config --enable CONFIG_CMD_USB_MASS_STORAGE
-$ make olddefconfig
-$ make
-
-then, on the U-Boot prompt:
-=> ums 0 mmc 0
-and the SD card block device popped up on my host.
-
-(That the ums command is useful enough to be enabled by default is a
-separate story).
-Gadget Ethernet and fastboot are even enabled by default, so whenever you
-have a defconfig with CONFIG_USB_MUSB_GADGET=y, you should get this
-functionality.
-
-So can anyone tell why this patch is needed so desperately?
-
-> >> better if we just make the sunxi USB driver compatible with the
-> >> DM gadget model, as many other musb-new variants already are.
-> >>
-> >> This change has been verified working on a T113s.
-> >>
-> >> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> >> ---
-> >>   drivers/usb/musb-new/sunxi.c | 50 +++++++++++++++++++++++-------------
-> >>   1 file changed, 32 insertions(+), 18 deletions(-)
-> >>
-> >> diff --git a/drivers/usb/musb-new/sunxi.c b/drivers/usb/musb-new/sunxi.c
-> >> index 510b254f7d..6658cd995d 100644
-> >> --- a/drivers/usb/musb-new/sunxi.c
-> >> +++ b/drivers/usb/musb-new/sunxi.c
-> >> @@ -444,6 +444,16 @@ static struct musb_hdrc_config musb_config_h3 = {
-> >>   	.ram_bits	= SUNXI_MUSB_RAM_BITS,
-> >>   };
-> >>   
-> >> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)  
-> > 
-> > Please no more #ifdef's. Is there any reason to *not* force
-> > DM_USB_GADGET now, for all sunxi boards, in Kconfig?
-> > Either by "select"ing it in the USB Kconfig, or in arch/arm/Kconfig, like
-> > other platforms do.
-> > Then you don't need to care about the !DM_USB_GADGET definition of this
-> > function and can drop the #ifdef.  
-> 
-> I wouldn't be the one to ask. I can't think of any such reason myself. 
-> But to me it sounds like since *no sunxi board provides 
-> board_usb_init()* the only way USB gadgets *could* work is with 
-> DM_USB_GADGET? That'd be reason enough to force it.
-
-See above.
-So I think the only reason to *not* have DM_USB_GADGET in general is
-because some driver is not ready for that yet, or there is some odd device
-that requires some extra hacks that the DM implementation does not cover.
-
-So with this patch we remove those reasons for sunxi, AFAICT. The Allwinner
-MUSB driver is now DM ready, so there is no reason to not set it. Think of
-it more as we are now declaring the sunxi MUSB driver as DM ready. That's
-why I want to see it set unconditionally, as it's not a user choice per se.
-
-Eventually this DM specific symbol will go away at some point, as it did
-for other subsystems like Ethernet already.
-
-> >> +int dm_usb_gadget_handle_interrupts(struct udevice *dev) {  
-> > 
-> > coding style  
-> 
-> Sentence fragments are harder to understand. I am assuming you are 
-> saying, "Please put the opening '{' on its own line."
-
-Funny enough I had these extra words, but then deleted them in fear it
-would sound too patronising for this obvious typo ;-)
-
-> >> +	struct sunxi_glue *glue = dev_get_priv(dev);
-> >> +	struct musb_host_data *host = &glue->mdata;
-> >> +
-> >> +	host->host->isr(0, host->host);
-> >> +	return 0;
-> >> +}
-> >> +#endif
-> >> +
-> >>   static int musb_usb_probe(struct udevice *dev)
-> >>   {
-> >>   	struct sunxi_glue *glue = dev_get_priv(dev);
-> >> @@ -452,10 +462,6 @@ static int musb_usb_probe(struct udevice *dev)
-> >>   	void *base = dev_read_addr_ptr(dev);
-> >>   	int ret;
-> >>   
-> >> -#ifdef CONFIG_USB_MUSB_HOST
-> >> -	struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
-> >> -#endif
-> >> -
-> >>   	if (!base)
-> >>   		return -EINVAL;
-> >>   
-> >> @@ -486,23 +492,31 @@ static int musb_usb_probe(struct udevice *dev)
-> >>   	pdata.platform_ops = &sunxi_musb_ops;
-> >>   	pdata.config = glue->cfg->config;
-> >>   
-> >> -#ifdef CONFIG_USB_MUSB_HOST
-> >> -	priv->desc_before_addr = true;
-> >> +	if (IS_ENABLED(CONFIG_USB_MUSB_HOST)) {
-> >> +		struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
-> >> +		priv->desc_before_addr = true;
-> >>   
-> >> -	pdata.mode = MUSB_HOST;
-> >> -	host->host = musb_init_controller(&pdata, &glue->dev, base);
-> >> -	if (!host->host)
-> >> -		return -EIO;
-> >> +		pdata.mode = MUSB_HOST;
-> >> +		host->host = musb_init_controller(&pdata, &glue->dev, base);
-> >> +		if (!host->host)
-> >> +			return -EIO;
-> >>   
-> >> -	return musb_lowlevel_init(host);
-> >> -#else
-> >> -	pdata.mode = MUSB_PERIPHERAL;
-> >> -	host->host = musb_register(&pdata, &glue->dev, base);
-> >> -	if (IS_ERR_OR_NULL(host->host))
-> >> -		return -EIO;
-> >> +		return musb_lowlevel_init(host);
-> >> +	} else if (CONFIG_IS_ENABLED(DM_USB_GADGET)) {
-> >> +		pdata.mode = MUSB_PERIPHERAL;
-> >> +		host->host = musb_init_controller(&pdata, &glue->dev, base);
-> >> +		if (!host->host)
-> >> +			return -EIO;
-> >>   
-> >> -	return 0;
-> >> -#endif
-> >> +		return usb_add_gadget_udc(&glue->dev, &host->host->g);
-> >> +	} else {
-> >> +		pdata.mode = MUSB_PERIPHERAL;
-> >> +		host->host = musb_register(&pdata, &glue->dev, base);
-> >> +		if (IS_ERR_OR_NULL(host->host))
-> >> +			return -EIO;
-> >> +
-> >> +		return 0;
-> >> +	}  
-> > 
-> > That looks like a good cleanup! Just need to test it briefly, but it seems
-> > like the gist of this patch is fine.  
-> 
-> I think it would be wise to test it a little better than "briefly" given 
-> the age of the patch. I'm not well-equipped to do any testing myself 
-> right now or I'd volunteer.
-
-So I gave it a spin on my OPi Zero 3. It seems to work(TM), although I
-need to stop the connection to the Ethernet gadget:
-
-=> ums 0 mmc 0
-UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x3af000
-All UDCs in use (1 available), use the unbind command
-g_dnl_register: failed!, error: -19
-g_dnl_register failed
-=> unbind ethernet 1
-=> ums 0 mmc 0
-=> ums 0 mmc 0
-UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x3af000
-(works and waits at this point)
-
-This seems like a quite annoying limitation, if anyone has an idea what
-should be done here, I am all ears. Maybe dropping the default Ethernet
-connection?
-
-Thanks!
-Andre
-
-> > 
-> >   
-> >>   }
-> >>   
-> >>   static int musb_usb_remove(struct udevice *dev)  
-> >   
+<snip>
 
