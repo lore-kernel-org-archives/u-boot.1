@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F933C30658
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 22:44:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15268C3064D
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 23:17:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBC498848F;
-	Sat, 29 Jun 2024 00:44:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 41152882EF;
+	Sat, 29 Jun 2024 01:17:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dowhile0.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S3uVamyR";
+	dkim=pass (2048-bit key; unprotected) header.d=dowhile0-org.20230601.gappssmtp.com header.i=@dowhile0-org.20230601.gappssmtp.com header.b="fkHWVJb5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CC08881BC; Sat, 29 Jun 2024 00:44:17 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 3C50B88453; Sat, 29 Jun 2024 01:17:18 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61AF88848F
- for <u-boot@lists.denx.de>; Sat, 29 Jun 2024 00:44:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A15C88258
+ for <u-boot@lists.denx.de>; Sat, 29 Jun 2024 01:17:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=dowhile0.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5854ac817afso1424922a12.2
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 15:44:14 -0700 (PDT)
+ spf=none smtp.mailfrom=javier@dowhile0.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-361785bfa71so859202f8f.2
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 16:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719614654; x=1720219454; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3nHthPf54JbukwFhHyrGDEWuJOZpsbCYhwz8qTWj0ow=;
- b=S3uVamyRAbmpYsNMqfSLiApgqOIaBHPHs2CCCAHj60t9YHTOy+iWSqPaocZ5bTbACo
- VqPrUKhQFXYdWiuKMzRBQJhlNJPk7zdlv8LmYXYsbGTOkJPffwd/CebKY9jBzmeTRsgy
- mrXA1pzo2sdmDK11mt8ddsT2hZ2Vycq6hB/cA3xf3JkDqN0mU4SzWfJl675bUfEPR1G0
- eHNijeP8/L8iRc+M5FItSHfAUYfJ1II1xBiq8MCOk/WQ5h2FWQ/oCtwFEUjB+77JGIcq
- B0KjRhWaDyPzbJJ3Der7+Ja176FJDbdm15JXyaGq8sAjEw2bJyasDt5OwOR3XInvepuK
- pirw==
+ d=dowhile0-org.20230601.gappssmtp.com; s=20230601; t=1719616635; x=1720221435;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hF4mSRu1IpuBKvMtZaqq8y8GQLQh1Ra9F3KnMf+F+pE=;
+ b=fkHWVJb5metmPXx/ThsbdjOB1ErULhu40TT3XZB115KXFnM61vICnlOGy9IXLXbCfD
+ Yg60tETCcG9ivDg6OVbvSJ/jTgCoRPdUCzVDEAwtzc76NPTAzrZZvSdSUj76NkJENAz7
+ MtTyxafVHNsy6Uf7kKYOvBZ0M22NXR9pwb6fw3NL3Jf1RLdOEgVS5EYWZlw6msp5X6pb
+ bX7T4S0TU9I48fH+93Nt70k6Q9lxMDYAeprLKCESbF/TB9C+OrrzRXbOy/3cl2vSpiMo
+ YWO/keMhaK/0riU6q5GHM7sDuoBHCXO/gFoYfc/bYgcTKyuAP4Xi7YOWH6grA3BvOq+D
+ utFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719614654; x=1720219454;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3nHthPf54JbukwFhHyrGDEWuJOZpsbCYhwz8qTWj0ow=;
- b=cL/up1eJC8kV2UGYo0jkC08mGnLmZk2VtJFPCPHUksUgwTS0TXkTvB3PKl7SbDgQEX
- VkSTspvTQIukdG/RLkOOhKPHb4ctf7p+S1LRZqTstfF60boCQtkBMyMO4915mtW9d/JT
- uL90jHQ4JUWz0168WQEh2YnJ1U6+VettDAkIRzn+mwm/EW/bN+FAKs4j154ozbaSXp8o
- pOYijV2MzOtCCa783esTsUsf78lTGqiGp1RAFRYLnIgo+yAw4KPK2e1OEjN5AMkl3BUe
- q2JvCSlL/5uKvjNN24hhyqfoYgnPu4Bkdfl0F+RF0b+ht3gcpaFfJQITCDetjwg/Ly3D
- UynA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWwQBawW4IUZER8Sg4BxSW45L3aakxMQIbotHA4QLZAys9WCfgeo0UI93nPw215OjarZ3xpupxH5X03+JuJdC3KyOscNQ==
-X-Gm-Message-State: AOJu0Yza3eD6LzMcLpRtjR9FcHGE3YqCdjBMRuoUScTt9MysKm9U1Veg
- Gp+kD8fhgBsg/fMTRThQBFllc8LibVkh86BkpvlvdhGqhVSV2UvqMKge/DRZdQbUyUgEAjWGqY5
- mZ4C3Udd4fakLqirtAIIArsgMBBKSAuYf
-X-Google-Smtp-Source: AGHT+IGw2zu5wiNgCXNoebRzO9h5NNzPDKV5rPTIraLVNkoE4Rni76KrV94n1j3/EYp2Nv3lU3b9SDG3wG1YM8bSvDU=
-X-Received: by 2002:a05:6402:2546:b0:587:2fa6:496a with SMTP id
- 4fb4d7f45d1cf-5872fa64dfbmr368883a12.15.1719614653425; Fri, 28 Jun 2024
- 15:44:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1719616635; x=1720221435;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hF4mSRu1IpuBKvMtZaqq8y8GQLQh1Ra9F3KnMf+F+pE=;
+ b=TBBtQHyzYm5HAfmxduS1yQyeljhP3ysFi05WnDnqNqorJfqdmNaWaHp6b1pMUtPciX
+ MR3G0nBrr7+Ig8eUznKmVhAzldS2fGDxUIb8KEJs+JHQksrgseuXxtJLqaEJx7tuWlt6
+ /xhy2ZHTF2FuiO95R08vlsyMxv728rdmO21TzsNze4169m4IMiiRVI4yjmdDOaYqy3ST
+ KoHY8t0FuoKHPfRafMipnlEt4d6VNfiZmZQJeVV0fhitW+22Rr6qt7Gqq04txXHF8D8/
+ RCV2w6ZG2d1caU3T/IceEPilfZZBxoBMMgkfBaAcOEXvpoXL4ebauxV2xsouvIIc5Oiz
+ /ZCw==
+X-Gm-Message-State: AOJu0Yz3ZO5AJUMtIHjFCGCYrFWv9YWlHzvGgLRnUmcBFpUcJpei6z/E
+ rgmyRCPrbZ+KNCcox4opfpVIx1Bhiv4RnpNuGfSQEl2dZBs7VrDJ1MTSMUj3MwVHOE7Ih2eam+H
+ R
+X-Google-Smtp-Source: AGHT+IFIXENlVrX8ocD/AnIVkbGqIfv2TbrMUgmzxDvwbbuh/vftPHw2KB/gL9euJWfoY3lI/OXsKQ==
+X-Received: by 2002:adf:f247:0:b0:35f:1835:3a76 with SMTP id
+ ffacd0b85a97d-366e7a5236bmr11387380f8f.70.1719616634681; 
+ Fri, 28 Jun 2024 16:17:14 -0700 (PDT)
+Received: from minerva.home (205.pool92-176-231.dynamic.orange.es.
+ [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3675a0e1345sm3464133f8f.54.2024.06.28.16.17.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Jun 2024 16:17:13 -0700 (PDT)
+From: Javier Martinez Canillas <javier@dowhile0.org>
+To: u-boot@lists.denx.de
+Cc: Javier Martinez Canillas <javierm@redhat.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] omap3: igep0x00: Switch to the I2C driver model
+Date: Sat, 29 Jun 2024 01:17:04 +0200
+Message-ID: <20240628231707.195389-1-javier@dowhile0.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240615220654.10648-1-mibodhi@gmail.com>
- <Znvt9_7xbdccZkFd@orbyte.nwl.cc>
- <CAJaLiFyTWfmsAVT4NO_Nvq1eHC73dNhxmF7KtYCR4VwOUg8Z3w@mail.gmail.com>
-In-Reply-To: <CAJaLiFyTWfmsAVT4NO_Nvq1eHC73dNhxmF7KtYCR4VwOUg8Z3w@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 28 Jun 2024 15:44:01 -0700
-Message-ID: <CAJaLiFz0GW1-TWmZ_gGWGEri1vJH9uHtehr7fXmB36vPAV-0aQ@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: mvebu: Enable bootstd and other modernization for
- Synology DS414 (Armada XP) board
-To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,181 +93,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Phil,
+From: Javier Martinez Canillas <javierm@redhat.com>
 
-On Fri, Jun 28, 2024 at 3:04=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrote=
-:
->
-> Hi Phil,
->
-> On Wed, Jun 26, 2024 at 3:31=E2=80=AFAM Phil Sutter <phil@nwl.cc> wrote:
-> >
-> > Hi Tony,
-> >
-> > On Sat, Jun 15, 2024 at 03:06:54PM -0700, Tony Dinh wrote:
-> > [...]
-> > > diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds41=
-4.c
-> > > index abe6f9eb5e..f0b55fa095 100644
-> > > --- a/board/Synology/ds414/ds414.c
-> > > +++ b/board/Synology/ds414/ds414.c
-> > > @@ -181,18 +181,9 @@ int board_init(void)
-> > >       return 0;
-> > >  }
-> > >
-> > > -int misc_init_r(void)
-> > > +int board_late_init(void)
-> > >  {
-> > > -     if (!env_get("ethaddr")) {
-> > > -             puts("Incomplete environment, populating from SPI flash=
-\n");
-> > > -             do_syno_populate(0, NULL);
-> > > -     }
-> > > -     return 0;
-> > > -}
-> >
-> > Could you please leave misc_init_r() in place (along with MISC_INIT_R i=
-n
-> > defconfig)? A closer look at doc/README.enetaddr suggests that
-> > implementing this board-specific function which acts if the environment
-> > does not have ethaddr defined already is exactly the right thing to do.
-> > Also, it doesn't conflict with NET_RANDOM_ETHADDR: If do_syno_populate(=
-)
-> > succeeds, no random MAC addresses are generated. If I manually remove
-> > the call, random MACs come into play. So having this option enabled
-> > serves as a fallback for boxes which lack the data in flash.
->
-> Sure I will do that. I was mistaken in assuming that network random
-> addresses were already generated before misc_init_r(). Thanks!
->
-> >
-> > > -int checkboard(void)
-> > > -{
-> > > -     puts("Board: DS414\n");
-> > > -
-> > > +     /* Do late init to ensure successful enumeration of XHCI device=
-s */
-> > > +     pci_init();
-> > >       return 0;
-> > >  }
-> >
-> > FWIW, booting from rear USB port worked fine for me!
->
-> Cool! That was the main thing I was interested in for sending in this
-> patch. One thing led to another... :)
->
-> >
-> > > diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
-> > > index ecf9501ba5..501ed51129 100644
-> > > --- a/configs/ds414_defconfig
-> > > +++ b/configs/ds414_defconfig
-> > [...]
-> > > @@ -25,44 +26,40 @@ CONFIG_SPL_BSS_MAX_SIZE=3D0x4000
-> > >  CONFIG_SPL=3Dy
-> > >  CONFIG_DEBUG_UART_BASE=3D0xf1012000
-> > >  CONFIG_DEBUG_UART_CLOCK=3D250000000
-> > > +CONFIG_IDENT_STRING=3D"\nSynology DS214+/DS414 2/4-Bay Diskstation"
-> > >  CONFIG_SYS_LOAD_ADDR=3D0x800000
-> > >  CONFIG_PCI=3Dy
-> > >  CONFIG_DEBUG_UART=3Dy
-> > > +CONFIG_BOOTSTD_FULL=3Dy
-> > >  CONFIG_BOOTDELAY=3D3
-> > >  CONFIG_USE_BOOTARGS=3Dy
-> > > -CONFIG_BOOTARGS=3D"console=3DttyS0,115200 ip=3Doff initrd=3D0x800004=
-0,8M root=3D/dev/md0 rw syno_hw_version=3DDS414r1 ihd_num=3D4 netif_num=3D2=
- flash_size=3D8 SataLedSpecial=3D1 HddHotplug=3D1"
-> > > -CONFIG_USE_BOOTCOMMAND=3Dy
-> > > -CONFIG_BOOTCOMMAND=3D"sf probe; sf read ${loadaddr} 0xd0000 0x2d0000=
-; sf read ${ramdisk_addr_r} 0x3a0000 0x430000; bootm ${loadaddr} ${ramdisk_=
-addr_r}"
-> >
-> > So these should not be necessary anymore with BOOTSTD. I wonder if it i=
-s
-> > possible to provide a static bootmeth (or bootflow?) with low priority
-> > which boots the legacy OS from flash. It could hold all the details
-> > instead of the *_legacy env vars introduced below.
->
-> I recall from bootstd documentation that it is possible to have a
-> bootflow on flash. But it seems a bit too much for this patch. I think
-> we'll have to repartition or find some space on the flash to store
-> that bootflow script.
->
+When building with the igep00x0_defconfig, the following warning is shown:
 
-Sorry I've misread your comment "it is possible to provide a static
-bootmeth (or bootflow?) ". I think by "static bootflow" you must have
-meant we would define it in the board code, and convince bootstd to
-use it as the last boot method (without hunting for it on flash). I'm
-not sure. Perhaps "global bootflow" is something that can be defined
-and used here. I'll have to dig into bootstd documentation a bit more.
+  $ make -j $(nproc)
+  ...
+    LD      spl/u-boot-spl
+    OBJCOPY spl/u-boot-spl-nodtb.bin
+    SYM     spl/u-boot-spl.sym
+    CAT     spl/u-boot-spl-dtb.bin
+    COPY    spl/u-boot-spl.bin
+    MKIMAGE MLO
+  ===================== WARNING ======================
+  This board does not use CONFIG_DM_I2C (Driver Model
+  for I2C drivers). Please update the board to use
+  CONFIG_DM_I2C before the v2022.04 release. Failure to
+  update by the deadline may result in board removal.
+  See doc/develop/driver-model/migration.rst for more info.
+  ====================================================
 
-All the best,
-Tony
+The only reason why I2C is enabled for the IGEP boards is that the TWL4030
+driver requires it.
 
-> >
-> > A pending issue for me is inability to 'saveenv' - the flash seems
-> > read-only in that spot. Does it work for you?
->
-> Yes it does work for me. With the latest u-boot SPI flash driver, as I
-> recall, the entire flash is automatically unprotected at
-> initialization. But we need to be careful using saveenv running stock
-> FW, because it could overwrite the rootfs on flash. It is common for
-> Synology NAS that the envs location is at the same place as the stock
-> rootfs. Since I don't care about stock FW, I saved the envs and used
-> the location for u-boot envs in Linux /etc/fw_env.config. I'm not sure
-> if my DS214+ box can boot stock FW anymore :)
->
-> >
-> > >  # CONFIG_DISPLAY_BOARDINFO is not set
-> > >  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> > > -CONFIG_MISC_INIT_R=3Dy
-> > > +CONFIG_BOARD_LATE_INIT=3Dy
-> > >  CONFIG_SPL_MAX_SIZE=3D0x1bfd0
-> > >  CONFIG_SPL_SYS_MALLOC_SIMPLE=3Dy
-> > >  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> > >  CONFIG_SPL_I2C=3Dy
-> > > +CONFIG_SYS_PROMPT=3D"DS414> "
-> >
-> > Can we detect whether it is 414 or 214, BTW? bootargs_legacy contains
-> > 414-specific info as well.
->
-> It's a bit hard to do without creating another defconfig. AFAICT, the
-> only difference between DS414 and DS214+ is the number of SATA bays.
-> But currently u-boot SATA does not work for this box. U-Boot sata_mv
-> driver is a subset of Linux sata_mv, and we don't have support for the
-> right PCIe SATA chip in u-boot sata_mv.
->
-> >
-> > [...]
-> > > diff --git a/include/configs/ds414.h b/include/configs/ds414.h
-> > > index 9446acba79..89e55bf0d4 100644
-> > > --- a/include/configs/ds414.h
-> > > +++ b/include/configs/ds414.h
-> > [...]
-> > > @@ -16,14 +17,9 @@
-> > >   * U-Boot into it.
-> > >   */
-> > >
-> > > -/* I2C */
-> > >  #define CFG_I2C_MVTWSI_BASE0         MVEBU_TWSI_BASE
-> > >
-> > > -/*
-> > > - * mv-common.h should be defined after CMD configs since it used the=
-m
-> > > - * to enable certain macros
-> > > - */
-> > > -#include "mv-common.h"
-> > > +#define PHY_ANEG_TIMEOUT     16000   /* PHY needs a longer aneg time=
- */
-> >
-> > AIUI, this is a limitation of my local NIC, not the DS414 one. It just
-> > took too long for link detection and autoneg when directly connected. A
-> > switch should have helped. Or do you have more details?
->
-> Ah! The typical PHY_ANEG_TIMEOUT on other Armada 38x boards is 8000. I
-> thought the 16000 was for Armada XP when I saw that code. I think it's
-> OK to use a larger timeout. It really does not hurt?
->
-> All the best,
-> Tony
->
-> > Cheers, Phil
+But both the TWL4034 and the OMAP I2C controller drivers were converted to
+the driver model by commits daa69ffe3d4d ("drivers: i2c: omap24xx_i2c:
+adopt omap_i2c driver to driver model") and fb1b7712ad3f power: make most
+tps drivers and the twl4030 driver compatible with DM_I2C") respectively.
+
+So there's no reason anymore to keep using the I2C legacy API and instead
+the DM_I2C option could just be enabled.
+
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+
+ configs/igep00x0_defconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+index 87fd2797eace..473891607b0f 100644
+--- a/configs/igep00x0_defconfig
++++ b/configs/igep00x0_defconfig
+@@ -68,8 +68,8 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_VERSION_VARIABLE=y
+ # CONFIG_NET is not set
+ CONFIG_SPL_DM=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ CONFIG_MMC_OMAP_HS=y
+ CONFIG_MTD=y
+ CONFIG_SYS_MTDPARTS_RUNTIME=y
+-- 
+2.45.2
+
