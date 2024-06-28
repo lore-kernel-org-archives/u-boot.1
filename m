@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E79DC2BBCA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 07:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B27C8C3064D
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 08:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 703C78857D;
-	Fri, 28 Jun 2024 09:33:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CF01C88254;
+	Fri, 28 Jun 2024 10:23:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BsKivL3C";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ft490PG9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC4A7885A3; Fri, 28 Jun 2024 09:33:16 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D0F5D8825E; Fri, 28 Jun 2024 10:23:44 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED1F188261
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 09:33:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1184087F13
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 10:23:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6b4fe2c79fdso1924826d6.0
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 00:33:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719559993; x=1720164793; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VLK6Fe7ozgs9nx0YImc0xVL+BjMNTvG9aLXQirts+Zc=;
- b=BsKivL3CdDCj4C372D5VADdgS5O1Q3C5V80F7pzmDOapJAMnPEE2XYfmklrWjiFKD7
- vk6PPomNJcx7qi4bd6VgD+b5FBQMR+ERFanNfJXaKzowyDc7Yjyh7HEbXhjZt59MOWcS
- 7We0lWcho/oB2jPp7+dktKFkNi4vXrrnlLJ0I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719559993; x=1720164793;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VLK6Fe7ozgs9nx0YImc0xVL+BjMNTvG9aLXQirts+Zc=;
- b=wx1SWTLB0iuNkBXYjgLnG6QjKgQZImucgrWcH3sAemhxbkN6vusooLid/ag8hpdO+/
- d8u9bDKpV//k/1oXcVz5saYTRLg4WeIjfc0pAywfyzXMjToIHsbLQzyPDl/S7zXP2p+I
- +XY9QHZFW8GS+K+hSfDRGjj7yzvPQQoghJGQuUuhgKr18lmza/fva0GT4Vmh3pejbooz
- gYyA/TFNqBVtjEA8wg/bsMv6GIK8liPQ/bHTRZ6S9d6Jh5YgOOhjfsEpjN3tnhy/ASS9
- y5ICLMWXkO/S8xUlMOA+dFEyjN/5G0Cm29cOXTrj1jwVfmOx9//RxDFDfgRvSqJogwUS
- UBBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOCgIdC8NLX7cD8HiuuGLXRKNHHu3eE5G+w9L6jxMI7tR5E9Q9NFzj0eaEDSKBqphIFCAtyRBv3qLhersqAbPQ9+6DWg==
-X-Gm-Message-State: AOJu0Yxrn9D7+bmUY+rtS266X3SioYXeQ5x32p8ML4QyA9YxE2tjrocX
- JVHO2TJtm5wT+u65CUtbiLb3VZdjDDUNb2OpI2SyOCaF/vwcdzdr12T84F3MyGL4s02JrqmkyXV
- pC/UggJahsfMn0TTKTn4IZMBW4MjvZm69c+HM
-X-Google-Smtp-Source: AGHT+IEvArYTr5/lwbU/7VARa6k5sShQLCUWrWnJ318d5VfJKD0fK26/qzX6ITcuq1zqCFxoUdusKNMrd8mVxgm0OJY=
-X-Received: by 2002:a0c:e4d4:0:b0:6b2:de9a:409e with SMTP id
- 6a1803df08f44-6b53c035f0fmr161624106d6.65.1719559992888; Fri, 28 Jun 2024
- 00:33:12 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45S8Ne4N019080;
+ Fri, 28 Jun 2024 03:23:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719563020;
+ bh=ZJHipp+zDFjfxcMHmqY6OY87djnOyi4pHIsBU9a/mSs=;
+ h=From:Subject:Date:To:CC;
+ b=ft490PG92flDyvGmm1ZlPhNK7Jv5alFEVNAQ4z0vta4PeMncNviFg0cwbXqNdPe1K
+ Q68XBbnifTYG3jP8vMUxdbelychKfugjhMHrVNVU91Qq3guTQmQteN7hEfuFg1yX9F
+ n8E/gtdHD+39mxRwRn6z/BtRiPUrt+EyhKZ3YGro=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45S8Neb1021832
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 28 Jun 2024 03:23:40 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 28
+ Jun 2024 03:23:39 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 28 Jun 2024 03:23:39 -0500
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45S8NZY1119300;
+ Fri, 28 Jun 2024 03:23:36 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH 0/3] Fix findfdt for j722s and am62p
+Date: Fri, 28 Jun 2024 13:53:27 +0530
+Message-ID: <20240628-b4-upstream-streamline-platform-v1-0-17659af992c1@ti.com>
 MIME-Version: 1.0
-References: <20240627113546.100333-1-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20240627113546.100333-1-mikhail.kshevetskiy@iopsys.eu>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Jun 2024 08:33:02 +0100
-Message-ID: <CAFLszTi+uhnV0HW-XeafPd5Ra8bOX8vMh-bcyZ3LGOdZ0h09Yg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] fit_dtb: relocate whole fit dtb image instead of
- selected dtb only
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Raymond Mao <raymond.mao@linaro.org>, 
- Chanho Park <chanho61.park@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP9yfmYC/yWNywqEMAwAf0VyNlBrfeCviIeqqQa0llSXBfHfL
+ bunYS4zN0QSpghddoPQhyMfPkmRZzCt1i+EPCcHrbRRtW5xNHiFeArZHf/Y2BOGzZ7ukB2dmht
+ TlXXZjBpSJQg5/v4O/fA8L7ppvotxAAAA
+To: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Tom
+ Rini <trini@konsulko.com>, Vaishnav Achath <vaishnav.a@ti.com>, Jayesh
+ Choudhary <j-choudhary@ti.com>, Joe Hershberger <joe.hershberger@ni.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishanth
+ Menon <nm@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1719563016; l=815;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=9/YLsP+yuRyi7+P0bvBHe0yHE5d0O138bKHZ/La3ClQ=;
+ b=U+cmQV+j5Gp4KD7sJ6YALqUOXgEr6DCJThPx0FKx3pMs1TqP73f+rPOlkXJ5mXlurikZKNdF7
+ TM29pnF/YnPDVMRg4BdKBnXnqxbWpINmyc+bNHhMuvSA+CEELWmLtxB
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,33 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
+findfdt wasn't being populated in these boards, add the code in evm.c
+for the same.
 
-On Thu, 27 Jun 2024 at 12:35, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@iopsys.eu> wrote:
->
-> U-Boot with linked fit dtb image may be loaded by a bootloader to
-> a low memory. On a later stage U-Boot will relocate itself and used
-> dtb.
->
-> There is no problem until we decide to reselect dtb on a later stage.
-> In this case dtb placed in the low memory address may be selected.
-> But this data can be overwritted by flash reading or network file
-> transfer. Thus we will use damaged dtb.
->
-> To fix it move the whole fit dtb image instead of just used dtb.
->
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> ---
->  boot/boot_fit.c    | 48 ++++++++++++++++++++++++++++++++++++++++++++++
->  common/board_f.c   | 34 ++++++++++++++++++++++++++++----
->  include/boot_fit.h |  8 ++++++++
->  3 files changed, 86 insertions(+), 4 deletions(-)
->
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Manorit Chawdhry (3):
+      include: env: ti: mmc: Change name_fdt usage to fdtfile
+      board: ti: am62p|j722s: Add ti_set_fdt_env for findfdt
+      configs: am62p|j722s_a53: Add CONFIG_BOARD_LATE_INIT
 
-The current mechanism is in reloc_fdt() but it only happens during
-relocation. What is the later stage you refer to? Is it after
-relocation, or before?
+ board/ti/am62px/evm.c            | 9 +++++++++
+ board/ti/j722s/evm.c             | 9 +++++++++
+ configs/am62px_evm_a53_defconfig | 1 +
+ configs/j722s_evm_a53_defconfig  | 1 +
+ include/env/ti/mmc.env           | 2 +-
+ 5 files changed, 21 insertions(+), 1 deletion(-)
+---
+base-commit: 899b088674b6905710ce546f0a8848662904852a
+change-id: 20240628-b4-upstream-streamline-platform-f0d7453637b2
 
-Regards,
-Simon
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
