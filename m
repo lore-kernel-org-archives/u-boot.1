@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76532C2BBCA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 09:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 874B4C2BBCA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 10:04:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0BA68851E;
-	Fri, 28 Jun 2024 11:59:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A685688254;
+	Fri, 28 Jun 2024 12:04:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sqyQsdl8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rIguuHDk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9842F88581; Fri, 28 Jun 2024 11:59:36 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 0355A88578; Fri, 28 Jun 2024 12:04:28 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EF768851E
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 11:59:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4B3A88254
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 12:04:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-52e743307a2so525180e87.0
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 02:59:34 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2ec1620a956so3868051fa.1
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 03:04:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719568773; x=1720173573; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719569065; x=1720173865; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=1CjBZpY6Cgykx7jxf4p8fvOOoWK4yuGaGanuncNylKI=;
- b=sqyQsdl82ZVkuwToBnNuDZUJww1CgHmxOL8nqPRfwONohwDQNI/DnkJh2BkIZp0KGl
- guIthaSaVcewOck63GgcDzmMIGQBXzAfWoiRjuvAizb8t2mDJyUiM66UJQis0vfKBFOK
- CzHjdvl7u6syFpiz/WxlGZfzpg9W559Ky4l4dfzXBLzzNo1gWzyGtEPfy9snx4J52pMg
- knnBCWFCwMCg9Gyh9xL7APC6Y3bN0QOJh+mif8FjemEetaykFgE8V4ZgETJlXA7PaQzH
- fLwhLMPsIpWIRTQTGDdG2f9eg+Sxc7b2jf2YOScSVW+Z486mHygpTHo3nBqNcSf5ZSiP
- Msrg==
+ :reply-to; bh=GE8XRFmE3ja+LJZKwFZju1+ZaIQvzQwo9fxyZmchtn0=;
+ b=rIguuHDk1VR9zW65+KTRsI3urjvxIZIogrNdrlEknYCXJK10cq+5HPzfZUiT/syVkt
+ htKLR6FVF7b/KNVxSbEPA7tJJMS0QGzTUX1ZnPvKDf7eFn2VOSG++RQi1b3ZG/JFCw54
+ Xab9OyypJfzQp2zL/jM/jBxeYoRPj/jJVrVsiSXvLtG+8Babm0XfG9Bl27GbiDzV2Pdm
+ qOXBYPTTElfLWZq8snxx2uhUbASad+XZcLn+nXOiPXM0obj/ESW1NBpVEdXr2IUX3GB7
+ TqacudpZ1bol3Opr6dUdygmw3K3JmqZognNBOdWf09jFVn4FiLHR95cbyH8A6HCSrPjo
+ eNUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719568773; x=1720173573;
+ d=1e100.net; s=20230601; t=1719569065; x=1720173865;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=1CjBZpY6Cgykx7jxf4p8fvOOoWK4yuGaGanuncNylKI=;
- b=sPH1ET71Lb36cIR7oeEWtC2uDKUuXpVd6puUgQwCydDkWTXNSvOwPqqBokE0xYXL5n
- 4s/8qpHEINPVo37u20azrJTeQmGBKyNaP3cUNyVKuSCmMOdK0pLdL1JhMZ4pLgAVJKlD
- KTUU3GMitHPUxquOsO0IfzHURCkWgrDOQNbpjk8+ajeG2Ilcn3jjF2RItZ+0i1UBM0vx
- ookUCYSX7A34JlaZez6HwzpuWK5lEB00wHvNYe6PWlaDmSw9ohOFh/26GM3vfUTrPgE3
- eqryX9o4GJ3d0Mc7AdVEQR08fPLV+78qyscxRorip0/hJFeikJihEqCMZ/X+Tf5WnMuv
- 0G8A==
+ bh=GE8XRFmE3ja+LJZKwFZju1+ZaIQvzQwo9fxyZmchtn0=;
+ b=cw+pVUHOrxmgQpg5b21ToO9VKtu64+I0n6wXP50BUUlcfFDeA2vpmwhLvR3LjfZ7Di
+ HtKwF456gTO5Cx7TC++M8al6VpBma0KGO61ub8spgRalFSLhMf7gus8XsPmOQ55ZxJir
+ fmOpsdzPi+KLTFl/S/DK+kFtyvI+jPafNCB9CjVXapDnIdaI1BVCGFK6oqUsefJolVfi
+ a47qDY4ztVc3L8AdqXiAKJAG/P4waHKShHwuGUXvAJbXISxhdurW/XWsGdtJx8DgmtDy
+ +SJVdYmB/pFWddgnNhVVuKvb5G0/A/e4jaxWLh9tBkXNDk37EkZn3/Rux2feKMiLuR9A
+ H4rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtVuAsXKQNbKZuYIixWTjDrim+1ds0PRipnr8DH2tDo14q+WcqK3cjHRsUXHkr/k9+BUkmRecOU/BlxRHPo92jAq+DvQ==
-X-Gm-Message-State: AOJu0Yzss3w7B2SAXQYZ3eK+oejKvZ/O3klC9xVGKJy6yZ5X5M57dYFz
- XoZJHAy+2QN39bEHvmEP+OAM79f7W024JrkVeX2+lEaDj/vWdtY2lFlaH4ky7As=
-X-Google-Smtp-Source: AGHT+IFov27mPN7BQgjhyBlnjxjM97fE1f2HLfGDv2+T14yZRYLdFGheImF76mkau8budfag6g1qRw==
-X-Received: by 2002:a19:5e4f:0:b0:52c:b09e:136d with SMTP id
- 2adb3069b0e04-52ce183ae38mr12035253e87.32.1719568773169; 
- Fri, 28 Jun 2024 02:59:33 -0700 (PDT)
+ AJvYcCV2c07/59izsY3cx6igKLdlPW265tLhGuZn2Mv71tq7hzRzZpDaPO5EMO4X5ArKkU3ipzkJ336wiAGRfmFdjSiF2zve5Q==
+X-Gm-Message-State: AOJu0Yz5HdXpimmowQ0vSdfKgkKMTWIg8isi/3neenybmt+YDxWiCqIu
+ +nE9UtrUfRercGMIJxrMtEfjVO51mzOT0pMOL0hASdOUWkZcsIG6M1Km+uzmszQ=
+X-Google-Smtp-Source: AGHT+IHNW7jFL+LHkrlX3gnhxdwm8UpKwgoETEB5jaeTXtQ6KMk0vwiljA+cf1wHJlidnA/KcL/23g==
+X-Received: by 2002:a05:651c:10a2:b0:2ec:5cfe:2e99 with SMTP id
+ 38308e7fff4ca-2ec5cfe2efcmr86755971fa.6.1719569064539; 
+ Fri, 28 Jun 2024 03:04:24 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:b17d:324d:ca1:ab31?
  ([2a01:e0a:982:cbb0:b17d:324d:ca1:ab31])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4256b0c0fb3sm27276235e9.40.2024.06.28.02.59.32
+ ffacd0b85a97d-3675a104023sm1736863f8f.109.2024.06.28.03.04.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Jun 2024 02:59:32 -0700 (PDT)
-Message-ID: <3272888c-1370-43e1-ae5b-b789e1faf2c6@linaro.org>
-Date: Fri, 28 Jun 2024 11:59:31 +0200
+ Fri, 28 Jun 2024 03:04:24 -0700 (PDT)
+Message-ID: <05c16a1a-11d1-48ad-83f7-6b1741b5545b@linaro.org>
+Date: Fri, 28 Jun 2024 12:04:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 0/2] clk: add a stub clock driver
+Subject: Re: [PATCH v2 1/2] clk: add stub clock driver
 To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
@@ -81,6 +81,7 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 References: <20240527-b4-clk-stub-v2-0-29013855e343@linaro.org>
+ <20240527-b4-clk-stub-v2-1-29013855e343@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -107,7 +108,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240527-b4-clk-stub-v2-0-29013855e343@linaro.org>
+In-Reply-To: <20240527-b4-clk-stub-v2-1-29013855e343@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -128,55 +129,135 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 27/05/2024 19:12, Caleb Connolly wrote:
-> As U-Boot works to align itself with upstream devicetrees, there are
-> some common issues we start to run into, that of hardware blocks which
-> might be important for an OS like Linux, but which aren't useful in
-> U-Boot.
+> Add a stub clock driver which can be used to bind clock controllers
+> which aren't required for the platform to boot, but which are needed for
+> U-Boot drivers to work.
 > 
-> For example, the Resource Power Manager found on Qualcomm platforms
-> includes clock controllers and power domains which are only useful for
-> managing power consumption and enabling low power states.
+> In addition, add a NOP parent driver to allow for binding the parent
+> nodes of the clock.
 > 
-> As this is not at all relevant for U-Boot, we can safely ignore these
-> devices, but we don't have a good way to communicate that to U-Boot.
+> Initially this driver supports a Qualcomm platform where the MMC driver
+> tries to fetch the RPM clock controller, which is not actually required
+> for the device to work.
 > 
-> As an initial step, implement a "stub" clock driver which can be bound
-> to these devices so that drivers will work as expected. Make the
-> Qualcomm SM6115 RPMCC the first user of this, and enable the driver for
-> Qualcomm platforms.
-> 
-> To: Tom Rini <trini@konsulko.com>
-> To: Lukasz Majewski <lukma@denx.de>
-> To: Sean Anderson <seanga2@gmail.com>
-> To: Caleb Connolly <caleb.connolly@linaro.org>
-> To: Neil Armstrong <neil.armstrong@linaro.org>
-> To: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: u-boot@lists.denx.de
-> Cc: u-boot-qcom@groups.io
-> 
-> Changes in v2:
-> - Take the other discussed approach of just implementing a stub driver.
-> - Link to v1: https://lore.kernel.org/r/20240410-b4-stub-drivers-v1-0-6935bd2c07d1@linaro.org
-> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
-> Caleb Connolly (2):
->        clk: add stub clock driver
->        qcom_defconfig: enable stub clock
-> 
->   configs/qcom_defconfig |  1 +
 >   drivers/clk/Kconfig    |  7 ++++++
 >   drivers/clk/Makefile   |  1 +
 >   drivers/clk/clk-stub.c | 63 ++++++++++++++++++++++++++++++++++++++++++++++++++
->   4 files changed, 72 insertions(+)
-> ---
-> change-id: 20240527-b4-clk-stub-9698797a65ef
-> base-commit: 7e52d6ccfb76e2afc2d183b357abe2a2e2f948cf
+>   3 files changed, 71 insertions(+)
 > 
-> // Caleb (they/them)
+> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+> index 9acbc47fe8ed..965bc4959403 100644
+> --- a/drivers/clk/Kconfig
+> +++ b/drivers/clk/Kconfig
+> @@ -95,8 +95,15 @@ config SPL_CLK_GPIO
+>   	help
+>   	  Enable this option to add GPIO-controlled clock gate driver
+>   	  in U-Boot SPL.
+>   
+> +config CLK_STUB
+> +	bool "Stub clock driver"
+> +	depends on CLK
+> +	help
+> +	  Enable this to provide a stub clock driver for non-essential clock
+> +	  controllers.
+> +
+>   config CLK_BCM6345
+>   	bool "Clock controller driver for BCM6345"
+>   	depends on CLK && ARCH_BMIPS
+>   	default y
+> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+> index 847b9b291100..b2cea41419b7 100644
+> --- a/drivers/clk/Makefile
+> +++ b/drivers/clk/Makefile
+> @@ -10,8 +10,9 @@ obj-$(CONFIG_$(SPL_TPL_)CLK) += clk_fixed_factor.o
+>   obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
+>   obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk-fixed-factor.o
+>   obj-$(CONFIG_$(SPL_TPL_)CLK_COMPOSITE_CCF) += clk-composite.o
+>   obj-$(CONFIG_$(SPL_TPL_)CLK_GPIO) += clk-gpio.o
+> +obj-$(CONFIG_CLK_STUB) += clk-stub.o
+>   
+>   obj-y += adi/
+>   obj-y += analogbits/
+>   obj-y += imx/
+> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+> new file mode 100644
+> index 000000000000..3f9c758ef115
+> --- /dev/null
+> +++ b/drivers/clk/clk-stub.c
+> @@ -0,0 +1,63 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Stub clk driver for non-essential clocks.
+> + *
+> + * This driver should be used for clock controllers
+> + * which are described as dependencies in DT but aren't
+> + * actually necessary for hardware functionality.
+> + */
+> +
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +
+> +/* NOP parent nodes to stub clocks */
+> +static const struct udevice_id nop_parent_ids[] = {
+> +	{ .compatible = "qcom,rpm-proc" },
+> +	{ .compatible = "qcom,glink-rpm" },
+> +	{ .compatible = "qcom,rpm-sm6115" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(nop_parent) = {
+> +	.name = "nop_parent",
+> +	.id = UCLASS_NOP,
+> +	.of_match = nop_parent_ids,
+> +	.bind = dm_scan_fdt_dev,
+> +	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
+> +
+> +static ulong stub_clk_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	return (clk->rate = rate);
+> +}
+> +
+> +static ulong stub_clk_get_rate(struct clk *clk)
+> +{
+> +	return clk->rate;
+> +}
+> +
+> +static int stub_clk_nop(struct clk *clk)
+> +{
+> +	return 0;
+> +}
+> +
+> +static struct clk_ops stub_clk_ops = {
+> +	.set_rate = stub_clk_set_rate,
+> +	.get_rate = stub_clk_get_rate,
+> +	.enable = stub_clk_nop,
+> +	.disable = stub_clk_nop,
+> +};
+> +
+> +static const struct udevice_id stub_clk_ids[] = {
+> +	{ .compatible = "qcom,rpmcc" },
+
+
+If you resend, please add:
+- qcom,sm8550-rpmh-clk
+- qcom,sm8650-rpmh-clk
+
+Thanks,
+Neil
+
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(clk_stub) = {
+> +	.name = "clk_stub",
+> +	.id = UCLASS_CLK,
+> +	.ops = &stub_clk_ops,
+> +	.of_match = stub_clk_ids,
+> +	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
+> +
 > 
 
-LGTM
-
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
