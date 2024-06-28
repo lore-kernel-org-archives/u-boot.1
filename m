@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15268C3064D
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 23:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A0DC2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 23:29:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41152882EF;
-	Sat, 29 Jun 2024 01:17:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dowhile0.org
+	by phobos.denx.de (Postfix) with ESMTP id 9A2A088453;
+	Sat, 29 Jun 2024 01:29:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dowhile0-org.20230601.gappssmtp.com header.i=@dowhile0-org.20230601.gappssmtp.com header.b="fkHWVJb5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qkvmZzlP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C50B88453; Sat, 29 Jun 2024 01:17:18 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id C75A38851E; Sat, 29 Jun 2024 01:29:10 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A15C88258
- for <u-boot@lists.denx.de>; Sat, 29 Jun 2024 01:17:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7B0588258
+ for <u-boot@lists.denx.de>; Sat, 29 Jun 2024 01:29:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dowhile0.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=javier@dowhile0.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-361785bfa71so859202f8f.2
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 16:17:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-25d8ab4f279so610894fac.3
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 16:29:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dowhile0-org.20230601.gappssmtp.com; s=20230601; t=1719616635; x=1720221435;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hF4mSRu1IpuBKvMtZaqq8y8GQLQh1Ra9F3KnMf+F+pE=;
- b=fkHWVJb5metmPXx/ThsbdjOB1ErULhu40TT3XZB115KXFnM61vICnlOGy9IXLXbCfD
- Yg60tETCcG9ivDg6OVbvSJ/jTgCoRPdUCzVDEAwtzc76NPTAzrZZvSdSUj76NkJENAz7
- MtTyxafVHNsy6Uf7kKYOvBZ0M22NXR9pwb6fw3NL3Jf1RLdOEgVS5EYWZlw6msp5X6pb
- bX7T4S0TU9I48fH+93Nt70k6Q9lxMDYAeprLKCESbF/TB9C+OrrzRXbOy/3cl2vSpiMo
- YWO/keMhaK/0riU6q5GHM7sDuoBHCXO/gFoYfc/bYgcTKyuAP4Xi7YOWH6grA3BvOq+D
- utFg==
+ d=konsulko.com; s=google; t=1719617347; x=1720222147; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0IOihu+hwmGe3M2TeDX14LkreTh6/1yAtkSH+28HMHk=;
+ b=qkvmZzlPZFzf9oEUY5A7QeoGq6OEqUdQZWtMqEczyClY46OKI6wcx4pLzNtlU/wTcW
+ 97gVpE54aeWRI0cXLMRL4nwI8ASBCnxEmwlcR2pmegRdI425WCL4u4ib/A9zamU7ZVUh
+ WKJwiide35GDs/QrqKN5RDi6rNLrUxZpfWSnY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719616635; x=1720221435;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hF4mSRu1IpuBKvMtZaqq8y8GQLQh1Ra9F3KnMf+F+pE=;
- b=TBBtQHyzYm5HAfmxduS1yQyeljhP3ysFi05WnDnqNqorJfqdmNaWaHp6b1pMUtPciX
- MR3G0nBrr7+Ig8eUznKmVhAzldS2fGDxUIb8KEJs+JHQksrgseuXxtJLqaEJx7tuWlt6
- /xhy2ZHTF2FuiO95R08vlsyMxv728rdmO21TzsNze4169m4IMiiRVI4yjmdDOaYqy3ST
- KoHY8t0FuoKHPfRafMipnlEt4d6VNfiZmZQJeVV0fhitW+22Rr6qt7Gqq04txXHF8D8/
- RCV2w6ZG2d1caU3T/IceEPilfZZBxoBMMgkfBaAcOEXvpoXL4ebauxV2xsouvIIc5Oiz
- /ZCw==
-X-Gm-Message-State: AOJu0Yz3ZO5AJUMtIHjFCGCYrFWv9YWlHzvGgLRnUmcBFpUcJpei6z/E
- rgmyRCPrbZ+KNCcox4opfpVIx1Bhiv4RnpNuGfSQEl2dZBs7VrDJ1MTSMUj3MwVHOE7Ih2eam+H
- R
-X-Google-Smtp-Source: AGHT+IFIXENlVrX8ocD/AnIVkbGqIfv2TbrMUgmzxDvwbbuh/vftPHw2KB/gL9euJWfoY3lI/OXsKQ==
-X-Received: by 2002:adf:f247:0:b0:35f:1835:3a76 with SMTP id
- ffacd0b85a97d-366e7a5236bmr11387380f8f.70.1719616634681; 
- Fri, 28 Jun 2024 16:17:14 -0700 (PDT)
-Received: from minerva.home (205.pool92-176-231.dynamic.orange.es.
- [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3675a0e1345sm3464133f8f.54.2024.06.28.16.17.13
+ d=1e100.net; s=20230601; t=1719617347; x=1720222147;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0IOihu+hwmGe3M2TeDX14LkreTh6/1yAtkSH+28HMHk=;
+ b=ik0FN0Zvmk1o0el80wHzXAuLxb3r+nGYvTEo6j0gAdlsdE8B67RSlRcEtXfi58Mnlq
+ Y43fM0moEDLzTPUN4Qjs47dMKP7SiSTly7B81bwrAGxOslXWuJt8Mkbxz8ZZtbXjG0Ge
+ jC11KgIL6OyAebPImk0yXQWc9nEhkFZSdu3y79WCTpM+UJtQq7p7Il5T6o0SAu6+goEY
+ nTwayxLVA7diI7w1wwklXkA16PPsy9+dkAczdL2jGeWIJEjOuolYb0DAwvO43QG+lQkM
+ K4oRaToqITN3U9JccbLmbFDjrx6lAYtngtb/xP3eYOF55vVfM4ZX1zVBR2nRmLp7OWyl
+ jVAQ==
+X-Gm-Message-State: AOJu0YzsxB7fX1kstjxYSyLGlYmABgAdheM1oig8lInu93WEsIhOnMKJ
+ gQC/7sSN8O+06jIXfm6NSs+6dbnkYq7F8Ehv6MsRZPvGX53UyOAa+4m1kEbyaUo=
+X-Google-Smtp-Source: AGHT+IE/8SofwDZn8+VgWCHc76WJ8y5OGtYQXatXqIg5TpexLU3DhlkHzWC57IjU9LcW2fxTxE4iQQ==
+X-Received: by 2002:a05:6870:c088:b0:254:9a96:96a4 with SMTP id
+ 586e51a60fabf-25cfcf9e9f2mr18935627fac.49.1719617347290; 
+ Fri, 28 Jun 2024 16:29:07 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25d8e1f04b7sm650418fac.18.2024.06.28.16.29.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 16:17:13 -0700 (PDT)
-From: Javier Martinez Canillas <javier@dowhile0.org>
-To: u-boot@lists.denx.de
-Cc: Javier Martinez Canillas <javierm@redhat.com>,
- Enric Balletbo i Serra <eballetbo@gmail.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] omap3: igep0x00: Switch to the I2C driver model
-Date: Sat, 29 Jun 2024 01:17:04 +0200
-Message-ID: <20240628231707.195389-1-javier@dowhile0.org>
-X-Mailer: git-send-email 2.45.2
+ Fri, 28 Jun 2024 16:29:06 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Lukasz Majewski <l.majewski@samsung.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
+In-Reply-To: <20240627082949.357089-1-sjg@chromium.org>
+References: <20240627082949.357089-1-sjg@chromium.org>
+Subject: Re: [PATCH v6 0/8] Bug-fixes for a few boards (reduced series)
+Message-Id: <171961734627.3626318.8177706462255672318.b4-ty@konsulko.com>
+Date: Fri, 28 Jun 2024 17:29:06 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +91,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Javier Martinez Canillas <javierm@redhat.com>
+On Thu, 27 Jun 2024 09:29:41 +0100, Simon Glass wrote:
 
-When building with the igep00x0_defconfig, the following warning is shown:
+> This series includes fixes to get some rockchip and nvidia boards
+> working again. It also drops the broken Beaglebone Black config and
+> provides a devicetree fix for coral (x86).
+> 
+> Note that since this series fixes bugs, it is targeted at -master
+> 
+> Note that this series does not include:
+> 
+> [...]
 
-  $ make -j $(nproc)
-  ...
-    LD      spl/u-boot-spl
-    OBJCOPY spl/u-boot-spl-nodtb.bin
-    SYM     spl/u-boot-spl.sym
-    CAT     spl/u-boot-spl-dtb.bin
-    COPY    spl/u-boot-spl.bin
-    MKIMAGE MLO
-  ===================== WARNING ======================
-  This board does not use CONFIG_DM_I2C (Driver Model
-  for I2C drivers). Please update the board to use
-  CONFIG_DM_I2C before the v2022.04 release. Failure to
-  update by the deadline may result in board removal.
-  See doc/develop/driver-model/migration.rst for more info.
-  ====================================================
+Applied to u-boot/master, thanks!
 
-The only reason why I2C is enabled for the IGEP boards is that the TWL4030
-driver requires it.
-
-But both the TWL4034 and the OMAP I2C controller drivers were converted to
-the driver model by commits daa69ffe3d4d ("drivers: i2c: omap24xx_i2c:
-adopt omap_i2c driver to driver model") and fb1b7712ad3f power: make most
-tps drivers and the twl4030 driver compatible with DM_I2C") respectively.
-
-So there's no reason anymore to keep using the I2C legacy API and instead
-the DM_I2C option could just be enabled.
-
-Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
----
-
- configs/igep00x0_defconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
-index 87fd2797eace..473891607b0f 100644
---- a/configs/igep00x0_defconfig
-+++ b/configs/igep00x0_defconfig
-@@ -68,8 +68,8 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_VERSION_VARIABLE=y
- # CONFIG_NET is not set
- CONFIG_SPL_DM=y
--CONFIG_SYS_I2C_LEGACY=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
- CONFIG_MMC_OMAP_HS=y
- CONFIG_MTD=y
- CONFIG_SYS_MTDPARTS_RUNTIME=y
 -- 
-2.45.2
+Tom
+
 
