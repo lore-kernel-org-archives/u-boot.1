@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E68C3064D
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 07:33:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AC1C30659
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 07:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55CF888155;
-	Fri, 28 Jun 2024 09:33:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1455E8859C;
+	Fri, 28 Jun 2024 09:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZidmUktZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FCb1uRz0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37E7288027; Fri, 28 Jun 2024 09:33:04 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id D9E8D8859C; Fri, 28 Jun 2024 09:33:14 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A44768824A
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 09:33:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACACA87E3F
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 09:33:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-444be1a2b01so1716641cf.1
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 00:33:01 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6b50aeb2424so1891456d6.0
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 00:33:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719559980; x=1720164780; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719559991; x=1720164791; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1IX5wwC+AUawoa015e+m5RZ5b5PTYBiykGiYpwP2I7k=;
- b=ZidmUktZbLjNTtYvGfBnmVK8zFQiMXb/x23wM7V5zLy1oskc1vO5zOEcpI+XH8SJQn
- e5+nNAaykRTw881/TrTSV0HO0i4gCh3DEvsB7S06UcTSUkzQ15J7NKShKZ/Wm3UgXUh7
- LNfZbE5k0VvwC4QLxChH+9YHx5CGuPoQzDgnE=
+ bh=rCnD+hvbFrDRDHVeeRcpQLswoJ+OmIqxEhuOa58TPZY=;
+ b=FCb1uRz0S/gAFbIkd2/C6D5Y6P/44JrOPTLGRj7GHO8s0GoqMGUF+AQtGPiKPivyeH
+ ot/hFRdtjc+JQVGg4wdkBlKjjryGJZhH7y9sthL2Q0eGnKngVlQSKAVkEhdO9Mc6L/DE
+ VlkxxANdY0w32YCJs+Soy2NRhHpxZC9X7ASgM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719559980; x=1720164780;
+ d=1e100.net; s=20230601; t=1719559991; x=1720164791;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1IX5wwC+AUawoa015e+m5RZ5b5PTYBiykGiYpwP2I7k=;
- b=YCFKyOem3mHQ05aeZdL14tSHBhjBS/8vb8zdbQxGUIeIP1EMCtjG/oFeDvQ8G4QlBa
- kAg4ym+uC0WIg0XpKSE6XvL1sJ8mX4my4bMvvQCr0OHRzkW+citP+ijBhfbrWfKpOFU3
- GmB66N0CyjOh9Eu4mViLVOpOlBBNvQUP5if7rbnJFaZ4wVNLv1+111suzmakd8oSWIF7
- 2SOJ/x2jVFdf4Ru0AaD0WC3KnZo8NF/ggc/3glAq3j+HyYm9wutvrBFt27PuYGWcytZ7
- PwKJ734gzI/m/MyuKwztHeIbpM9OwqmxxVEgSxQVa7AFXJ0FM4gmla2MZMq147awndzp
- lSyw==
-X-Gm-Message-State: AOJu0YyMrhBqke5ztG/E24pyKxVV9APHeMTg7NrrAtGx+iJ0l6CCRKJy
- r6AXJjBfe+1D4JaD318OCsFxfLDi1RxfDB9QXsAZo9obyv628Zt5WGJUoWCH0BOq+FF9qytUlRC
- Y57loR7WhJx7XB50NmB+4SZXvRYMwIqS8ksWIf8Z1eo0ABfonTw==
-X-Google-Smtp-Source: AGHT+IF3MY9tHjsyAkEFsx0LUu6x/OLx42vR9WtnvXpj136rTHDN3zAAfkWHyBFDKDWooDE1flCA8esRCzqSAtn67TY=
-X-Received: by 2002:a05:6214:1630:b0:6b2:c840:7a2 with SMTP id
- 6a1803df08f44-6b540aa8879mr154967676d6.45.1719559980574; Fri, 28 Jun 2024
- 00:33:00 -0700 (PDT)
+ bh=rCnD+hvbFrDRDHVeeRcpQLswoJ+OmIqxEhuOa58TPZY=;
+ b=kYiIAjNNb2DXy7Ten9ZurEJ6fzP8fR2eubmkw30vLsDOl3FkYaIlCqyHavp2d1xSSw
+ q63MaM6AFq6Rapa/ipc2wnf+MiaDvAkX1udNLZHPi5mZ9uaTbqNVgSdHXJV+MkJex/ci
+ cr0Fs2SBadyAQ5ukrZFg9e6GFaJXAQ7MZZ2vuJfVXr5I5bd4LM4daUtCDlIV4ZXDGAnj
+ nX9hhfgNuUUIP6IbMJeEaItZAvM+VkSQ8+oMd7SVTfUcdye1ACfy9IVlcuRDRl9z8UWd
+ szcaVLxwG5fcc8oJ3UB+oJhQAx648Y+IzO9ZnNf6xyrRr1PerA6JCswQB6+hxM9zLLrN
+ RrKQ==
+X-Gm-Message-State: AOJu0YzDjTJ1s51G8QwS7b/wFpDYF92c0pk0pbeFKQ0VILpQF7Oi848B
+ g8WJ/SK+nC45/UvjA4DMinKfwntSLqqumbY8zKgIDuqrwk9EdjUsOki4Gr1+ichZBr4fcIJvf0K
+ aY8hl0VqzEAQAgNEXrs+esb0qE3B5INan4rUo1SYHX3uMpcOMlw==
+X-Google-Smtp-Source: AGHT+IEdbfeTba1+/IEjbtRAUVKpgdCaghcsjkkEnswDO+BriTZdvzG1dBHkfONjSZ0ZetdVQTNQqH7NIOJ70cd6uFo=
+X-Received: by 2002:a05:6214:20e2:b0:6b2:b5d9:91d6 with SMTP id
+ 6a1803df08f44-6b5409c4ad5mr196354056d6.18.1719559991624; Fri, 28 Jun 2024
+ 00:33:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240628024804.149871-1-marex@denx.de>
-In-Reply-To: <20240628024804.149871-1-marex@denx.de>
+References: <20240623203033.1566505-1-sjg@chromium.org>
+ <20240623203033.1566505-14-sjg@chromium.org>
+ <20240624182931.GI38804@bill-the-cat>
+ <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
+ <20240625141427.GO38804@bill-the-cat>
+ <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
+ <20240626140752.GV38804@bill-the-cat>
+ <CAFLszTj0h5w+sz796LokxgcfyRTGmHnQJ3OTDdoaoC61Ob=akw@mail.gmail.com>
+ <20240627144214.GC38804@bill-the-cat>
+In-Reply-To: <20240627144214.GC38804@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Jun 2024 08:32:49 +0100
-Message-ID: <CAFLszTh_u8ipmSqyi73TVZ=kCGnk8mnb7Ww3HeHwUXSEdGqVEg@mail.gmail.com>
-Subject: Re: [PATCH v2] spl: fit: List DTOs applied by SPL in U-Boot control DT
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
- Sean Anderson <seanga2@gmail.com>,
- Suniel Mahesh <sunil@amarulasolutions.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Date: Fri, 28 Jun 2024 08:33:01 +0100
+Message-ID: <CAFLszTixbMxDq7TvjPzc+Xup6biMmPvLP5CVPJLp7w94e0dd4Q@mail.gmail.com>
+Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,158 +89,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Tom,
 
-On Fri, 28 Jun 2024 at 03:48, Marek Vasut <marex@denx.de> wrote:
+On Thu, 27 Jun 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
 >
-> Insert /u-boot,spl-applied-dto-<dto-name> = <index> property into the
-> U-Boot control DT during SPL DTO application process. This can be used
-> by user to inspect which DTOs got applied by the SPL and in which order
-> from running U-Boot.
+> On Thu, Jun 27, 2024 at 09:37:15AM +0100, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 26 Jun 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Jun 26, 2024 at 09:00:41AM +0100, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > Some configuration is now in variables with a CFG_ prefix. Add these to
+> > > > > > > > the .cfg file so that we can see everything in one place. Sort the
+> > > > > > > > options so they are easier to find and compare.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > > Changes in v2:
+> > > > > > > > - Add new patch to update u-boot.cfg with CFG_... options
+> > > > > > > >
+> > > > > > > >  scripts/Makefile.autoconf | 2 +-
+> > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > > > >
+> > > > > > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+> > > > > > > > index b42f9b525fe..65ff11ea508 100644
+> > > > > > > > --- a/scripts/Makefile.autoconf
+> > > > > > > > +++ b/scripts/Makefile.autoconf
+> > > > > > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf = GEN     $@
+> > > > > > > >  quiet_cmd_u_boot_cfg = CFG     $@
+> > > > > > > >        cmd_u_boot_cfg = \
+> > > > > > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.tmp && { \
+> > > > > > > > -             grep 'define CONFIG_' $@.tmp | \
+> > > > > > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
+> > > > > > > >                       sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
+> > > > > > > >               rm $@.tmp;                                              \
+> > > > > > > >       } || {                                                          \
+> > > > > > >
+> > > > > > > I don't like this because whereas "CONFIG_" is enforced to be set only
+> > > > > > > by Kconfig and so always all reliably set and found via a single header,
+> > > > > > > CFG_ stuff is not.
+> > > > > >
+> > > > > > OK, so how are CFG_ options found? I hit this when trying to find the
+> > > > > > SDRAM size on rockchip 3399 and I could not find any way of figuring
+> > > > > > it out.
+> > > > >
+> > > > > It's just another define, there's no uniformity to it. For some of the
+> > > > > SDRAM values really we need some build time way to grab some information
+> > > > > out of the default device tree.
+> > > >
+> > > > Can you give an example of a board that could use this? I looked at
+> > > > the devicetree for chromebook_kevin and don't see a memory range in
+> > > > ther.
+> > >
+> > > OK, wow, I didn't realize /memory was optional now. But indeed, I don't
+> > > see it in the dtb file. That removes that option then, sadly.
+> >
+> > Well, we can still require it, so long as an error is produced if the
+> > property is needed but does not exist.
 >
-> Example:
-> ```
-> u-boot=> fdt addr $fdtcontroladdr && fdt list /
-> Working FDT set to aee9aeb0
-> / {
->         u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 = <0x00000005>;
->         u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-som-overlay-rev100 = <0x00000004>;
->         u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast = <0x00000003>;
->         u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast = <0x00000002>;
-> ...
-> ```
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Suniel Mahesh <sunil@amarulasolutions.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: - Expand the DT by one more byte to cater for trailing NUL byte
->     - Update comment related to the expansion of DT
->     - Flip the !ret conditional, which was incorrect and missed
->     - Expand prefix to u-boot,spl-applied-dto-
->     - Document the binding
-> ---
->  common/spl/spl_fit.c                | 29 +++++++++++++++++++++++++++--
->  doc/device-tree-bindings/config.txt | 11 +++++++++++
->  2 files changed, 38 insertions(+), 2 deletions(-)
+> "We" who? I don't feel like we'll have a lot of traction with linux
+> kernel folks in requiring /memory to be added to the dts files on
+> however many platforms don't have it today because I'm going to guess
+> it's added at run time, possibly by us, with the correct size and we'd
+> be asking for statically adding things half-wrong like a lot of
+> platforms used to do (and in turn rely on U-Boot to correct the size).
 
-Once this is figured out, can you extend test/image/spl_load_os.c to
-test this code?
-
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> index 988125be008..0a6b5ea8212 100644
-> --- a/common/spl/spl_fit.c
-> +++ b/common/spl/spl_fit.c
-> @@ -363,6 +363,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
->  {
->         struct spl_image_info image_info;
->         int node, ret = 0, index = 0;
-> +       char dtoname[256];
->
->         /*
->          * Use the address following the image as target address for the
-> @@ -448,9 +449,13 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
->                         if (ret < 0)
->                                 break;
->
-> -                       /* Make room in FDT for changes from the overlay */
-> +                       /*
-> +                        * Make room in FDT for changes from the overlay,
-> +                        * the overlay name and the trailing NUL byte in
-> +                        * that name.
-> +                        */
->                         ret = fdt_increase_size(spl_image->fdt_addr,
-> -                                               image_info.size);
-> +                                               image_info.size + strlen(str) + 1);
-
-Oh and I missed the room for the property, sorry. It needs something like this:
-
-ALIGN(strlen(str) + 1, 4) + 12 + 4
-
-the first bit is the string-table size increase
-
-12 is sizeof(struct fdt_property)
-4 is the u32 size
-
-Alos, is there any way to check that there is actually enough space to
-increase the size?
-
-
->                         if (ret < 0)
->                                 break;
->
-> @@ -464,6 +469,26 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
->
->                         debug("%s: DT overlay %s applied\n", __func__,
->                               fit_get_name(ctx->fit, node, NULL));
-> +
-> +                       /*
-> +                        * Insert /u-boot,<dto-name> = <index> property into
-> +                        * the U-Boot control DT. This can be used by user
-> +                        * to inspect which DTOs got applied by the SPL from
-> +                        * a running U-Boot.
-> +                        */
-> +                       snprintf(dtoname, sizeof(dtoname), "u-boot,spl-applied-dto-%s", str);
-> +                       ret = fdt_setprop_u32(spl_image->fdt_addr, 0, dtoname,
-> +                                             index);
-> +                       if (ret) {
-> +                               /*
-> +                                * The DTO itself was applied, do not treat the
-> +                                * insertion of /u-boot,<dto-name> as an error
-> +                                * so the system can possibly boot somehow.
-> +                                */
-> +                               debug("%s: DT overlay %s name not inserted into / node (%d)\n",
-> +                                     __func__,
-> +                                     fit_get_name(ctx->fit, node, NULL), ret);
-> +                       }
->                 }
->                 free(tmpbuffer);
->                 if (ret)
-> diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
-> index f50c68bbdc3..7aa6d9a72c6 100644
-> --- a/doc/device-tree-bindings/config.txt
-> +++ b/doc/device-tree-bindings/config.txt
-> @@ -95,6 +95,17 @@ rootdisk-offset (int)
->  silent-console (int)
->         If present and non-zero, the console is silenced by default on boot.
->
-> +u-boot,spl-applied-dto-* (int)
-> +       Emitted by SPL into U-Boot control DT root node in case a DTO from
-> +       fitImage was applied on top of U-Boot control DT by the SPL fitImage
-> +       loader. The single integer cell indicates in which order was the DTO
-> +       applied by the SPL and matches the index of the DTO in the fitImage.
-> +       DTOs in fitImage may be skipped using board_spl_fit_append_fdt_skip(),
-> +       therefore the integers might not be monotonically incrementing, there
-> +       may be gaps. This property can be used to determine which DTOs were
-> +       applied by the SPL from running U-Boot by inspecting the U-Boot
-> +       control DT.
-
-Should we send a binding with this? I wonder if it would be better to
-make the filename a property value rather than including it in the
-property name/string table? That way you would not need the
-integers...the ordering would be enough.
-
-E.g.
-
-u-boot,spl-applied-dtos = "fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast",
-      "fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast";
-
-But that might be more annoying to construct as you would probably
-need fdt_setprop_placeholder()
-
-> +
->  u-boot,spl-payload-offset (int)
->         If present (and SPL is controlled by the device-tree), this allows
->         to override the CONFIG_SYS_SPI_U_BOOT_OFFS setting using a value
-> --
-> 2.43.0
->
+Hmm yes of course, the firmware is supposed to add these
+properties...that's how it gets in there. So we need to stick with CFG
+(and perhaps the RAM-size prober) for now.
 
 Regards,
 Simon
