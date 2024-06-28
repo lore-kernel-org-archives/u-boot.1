@@ -4,97 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5859AC3064D
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 09:54:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76532C2BBCA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 09:59:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD24A88549;
-	Fri, 28 Jun 2024 11:54:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0BA68851E;
+	Fri, 28 Jun 2024 11:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KIqHQHxv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sqyQsdl8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1761788549; Fri, 28 Jun 2024 11:54:53 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 9842F88581; Fri, 28 Jun 2024 11:59:36 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02DBF88254
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 11:54:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EF768851E
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 11:59:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-42564a0d3ceso3177745e9.0
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 02:54:50 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52e743307a2so525180e87.0
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 02:59:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719568490; x=1720173290; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6gKy8SF9XDvpg221szVN3rP9v4GgKb6Iy9Ed8wpcG7A=;
- b=KIqHQHxv3Og46LwkSe1axjtHSynbuO/osHds8dkpoXUCckFvvHTcjBkdGIrqCeh/1N
- 3IHJy4z7kP3KT35cT+myxs4xm9rLNiPFRZ7dYS6Vsm9H7m7J4DgRKxfneLP/FOS96y4x
- 5ZUojEdvgKrr193/JJ7FjGGAXJXDiDrY8Q6THlYe0ijlrvFUsT75bVFjPnF0PLjcKFjK
- GnkSxrio8z7W3lu4qyjj2QIQwIpKyFdA9M5NsQCAukpjM2euV+1Y4nJLgbP/Th/1rloZ
- w6bpCpj89XDFyxkozf+C1WxRYKI5aCED99mpE5HH9WbMeBeGk4pq2tqEe5GdhdrgPbw6
- 0oqg==
+ d=linaro.org; s=google; t=1719568773; x=1720173573; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=1CjBZpY6Cgykx7jxf4p8fvOOoWK4yuGaGanuncNylKI=;
+ b=sqyQsdl82ZVkuwToBnNuDZUJww1CgHmxOL8nqPRfwONohwDQNI/DnkJh2BkIZp0KGl
+ guIthaSaVcewOck63GgcDzmMIGQBXzAfWoiRjuvAizb8t2mDJyUiM66UJQis0vfKBFOK
+ CzHjdvl7u6syFpiz/WxlGZfzpg9W559Ky4l4dfzXBLzzNo1gWzyGtEPfy9snx4J52pMg
+ knnBCWFCwMCg9Gyh9xL7APC6Y3bN0QOJh+mif8FjemEetaykFgE8V4ZgETJlXA7PaQzH
+ fLwhLMPsIpWIRTQTGDdG2f9eg+Sxc7b2jf2YOScSVW+Z486mHygpTHo3nBqNcSf5ZSiP
+ Msrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719568490; x=1720173290;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6gKy8SF9XDvpg221szVN3rP9v4GgKb6Iy9Ed8wpcG7A=;
- b=uUOUKNHSrTA8bK61G6e4+Qjhwn3vBJkXbC/a9O9RPrRKFdf+L/n7UuRAutsOjU21Qd
- NUldbM03kNmgLzGC29ZH3rKiSiocoR1W9PA161QSHkd/77kd/Hhjfd4XY6aPCyO3TYxv
- nXN5mkROGIY1SpKKgDHmbiaH6s72YaX8ZjmWrpPmyZRz7NXNtdsb+kYEy5T+U1KPehhu
- IuUvx+/TjCciwUSViPcSwnlQa5JERT7vHzPOH6Czvs1Px6/OjMGbnIPGHvahfBbQvsg/
- 9r7BXXfghiKIH7G1IGjqoo0wjxKFZA+M0Jgj2h0YyznUv5/v97oTRn6+HvuL1P/6ArYc
- 1N9w==
+ d=1e100.net; s=20230601; t=1719568773; x=1720173573;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=1CjBZpY6Cgykx7jxf4p8fvOOoWK4yuGaGanuncNylKI=;
+ b=sPH1ET71Lb36cIR7oeEWtC2uDKUuXpVd6puUgQwCydDkWTXNSvOwPqqBokE0xYXL5n
+ 4s/8qpHEINPVo37u20azrJTeQmGBKyNaP3cUNyVKuSCmMOdK0pLdL1JhMZ4pLgAVJKlD
+ KTUU3GMitHPUxquOsO0IfzHURCkWgrDOQNbpjk8+ajeG2Ilcn3jjF2RItZ+0i1UBM0vx
+ ookUCYSX7A34JlaZez6HwzpuWK5lEB00wHvNYe6PWlaDmSw9ohOFh/26GM3vfUTrPgE3
+ eqryX9o4GJ3d0Mc7AdVEQR08fPLV+78qyscxRorip0/hJFeikJihEqCMZ/X+Tf5WnMuv
+ 0G8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXGn0ITt1WfJ/pJ2d6fpT6hUKfQVCQP7QjEiRA57iaYuEsTNAX7LOiiKwqNrQolrgsGF6tnE99cuzYv7YCdWdLw0h7C0Q==
-X-Gm-Message-State: AOJu0Yyali2fNiBAwnd1OIaWlJZQih03/TtgfKImCCgNPvLIMpd6+A5i
- VfqZbSvQkdbkpHabAuj5wUyBAmvlqGSGdQuzrSfrZme2d9dB3yzBVVe9SntCN2A=
-X-Google-Smtp-Source: AGHT+IGKRriRnjtUA6mvVQ153rDGlqnCXy5Bb8gZrciszxDFgFupYSsQGH60ZbIxbSvvyOo1/hVGng==
-X-Received: by 2002:a5d:5f8e:0:b0:366:ebf5:c6cc with SMTP id
- ffacd0b85a97d-366ebf5c746mr12913359f8f.50.1719568489999; 
- Fri, 28 Jun 2024 02:54:49 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ AJvYcCWtVuAsXKQNbKZuYIixWTjDrim+1ds0PRipnr8DH2tDo14q+WcqK3cjHRsUXHkr/k9+BUkmRecOU/BlxRHPo92jAq+DvQ==
+X-Gm-Message-State: AOJu0Yzss3w7B2SAXQYZ3eK+oejKvZ/O3klC9xVGKJy6yZ5X5M57dYFz
+ XoZJHAy+2QN39bEHvmEP+OAM79f7W024JrkVeX2+lEaDj/vWdtY2lFlaH4ky7As=
+X-Google-Smtp-Source: AGHT+IFov27mPN7BQgjhyBlnjxjM97fE1f2HLfGDv2+T14yZRYLdFGheImF76mkau8budfag6g1qRw==
+X-Received: by 2002:a19:5e4f:0:b0:52c:b09e:136d with SMTP id
+ 2adb3069b0e04-52ce183ae38mr12035253e87.32.1719568773169; 
+ Fri, 28 Jun 2024 02:59:33 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:b17d:324d:ca1:ab31?
+ ([2a01:e0a:982:cbb0:b17d:324d:ca1:ab31])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3675a1055b9sm1717759f8f.95.2024.06.28.02.54.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 02:54:49 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 28 Jun 2024 11:54:47 +0200
-Subject: [PATCH] firmware: psci: register PSCI power domains to stub driver
+ 5b1f17b1804b1-4256b0c0fb3sm27276235e9.40.2024.06.28.02.59.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Jun 2024 02:59:32 -0700 (PDT)
+Message-ID: <3272888c-1370-43e1-ae5b-b789e1faf2c6@linaro.org>
+Date: Fri, 28 Jun 2024 11:59:31 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 0/2] clk: add a stub clock driver
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20240527-b4-clk-stub-v2-0-29013855e343@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240527-b4-clk-stub-v2-0-29013855e343@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240628-topic-sm8x50-psci-power-domain-v1-1-4608830f194a@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAGaIfmYC/x3NQQqDMBBA0avIrDsQh7ZGr1JchGSsszAJGdGAe
- PeGLt/m/wuUi7DC1F1Q+BCVFBv6Rwd+dfHLKKEZyNDTvMninrJ41M3Wl8GsXjCnkwuGtDmJSEM
- Io3HDQqOFFsmFF6n/wWe+7x/395+kcAAAAA==
-To: Tom Rini <trini@konsulko.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2795;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=MdxUZm7q75Tt4aJsXi/XUio+Zbt/pPyO7/PcSpQ6q8A=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmfohowkjLtf1Y5I5781TBFaVh+Qn73sEYKnamtI+E
- nIPU8W2JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZn6IaAAKCRB33NvayMhJ0U9bD/
- 9RRpYrbzhOQ21kG9sIJ3PE9uojlxnyBEnjUOX8qHALyRYua7az5KOudqglSfw0jmklx23w+yMS8wnp
- eXQEE/iHN5u1czrQlgM3m4WBaymyIFJilJ4KQc5qvGNc8obmwXwYqUPnZjcWOnEav/z4edoyzSc8E5
- MAUOpncF2LXUhRLRyVdTv9O3qxoqUe4xL6i2UjYzFupzhGkZN2imHLFTAV3HjeJHhDS93NglyaZcjp
- 0jhQwCfhH5abaMushQkmU/Ikgv4+2EpeLUiN2hElNRY0zDpgV3eU2bjPMPQ4R7Z+MTTyXBq7JrMREh
- d/9F6j9Cci6WxdyF19pMFddKBgnoKH9YWN9myZrwe6UfJc2nMjg4f8NsMVxyjz5OgoGGrirB5YKJFn
- FCelkf79RlSW0epec69EuBnoSQaEjxbVZyy4XsvN56r1FScUBcKVPAecQROByaL452CVZuMaPvwP6m
- kM1Z48lOuc7y7i+DI3KznE4qmIIqfieKqbCd0CE3UVJbKMwwleDXyhPe6dR7dDiOoOK+8SWZGlQR/g
- VNJh2LQoYsfYcm3Zbv/zwig64LKj//wj4M423DGEXlrQmWKQm0ySM/zH3E0W66jZT0N9nrRzIfwVAk
- ocKSVz4Pg15lrP/QOFclbZ9vMj9YhpddI0fid3YVvIgx4pIxAlxRAlmTFL4A==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,103 +121,62 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On some SoCs, like Qualcomm SoCs, the PSCI cluster power domain
-is used by system-wide firmware interfaces to make sure none
-of the CPUs are suspended before submitting requests.
+On 27/05/2024 19:12, Caleb Connolly wrote:
+> As U-Boot works to align itself with upstream devicetrees, there are
+> some common issues we start to run into, that of hardware blocks which
+> might be important for an OS like Linux, but which aren't useful in
+> U-Boot.
+> 
+> For example, the Resource Power Manager found on Qualcomm platforms
+> includes clock controllers and power domains which are only useful for
+> managing power consumption and enabling low power states.
+> 
+> As this is not at all relevant for U-Boot, we can safely ignore these
+> devices, but we don't have a good way to communicate that to U-Boot.
+> 
+> As an initial step, implement a "stub" clock driver which can be bound
+> to these devices so that drivers will work as expected. Make the
+> Qualcomm SM6115 RPMCC the first user of this, and enable the driver for
+> Qualcomm platforms.
+> 
+> To: Tom Rini <trini@konsulko.com>
+> To: Lukasz Majewski <lukma@denx.de>
+> To: Sean Anderson <seanga2@gmail.com>
+> To: Caleb Connolly <caleb.connolly@linaro.org>
+> To: Neil Armstrong <neil.armstrong@linaro.org>
+> To: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: u-boot@lists.denx.de
+> Cc: u-boot-qcom@groups.io
+> 
+> Changes in v2:
+> - Take the other discussed approach of just implementing a stub driver.
+> - Link to v1: https://lore.kernel.org/r/20240410-b4-stub-drivers-v1-0-6935bd2c07d1@linaro.org
+> 
+> ---
+> Caleb Connolly (2):
+>        clk: add stub clock driver
+>        qcom_defconfig: enable stub clock
+> 
+>   configs/qcom_defconfig |  1 +
+>   drivers/clk/Kconfig    |  7 ++++++
+>   drivers/clk/Makefile   |  1 +
+>   drivers/clk/clk-stub.c | 63 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>   4 files changed, 72 insertions(+)
+> ---
+> change-id: 20240527-b4-clk-stub-9698797a65ef
+> base-commit: 7e52d6ccfb76e2afc2d183b357abe2a2e2f948cf
+> 
+> // Caleb (they/them)
+> 
 
-While on U-boot we only use the first core and we never
-suspend it, the Device Tree still references it and blocks
-those nodes to be probed.
+LGTM
 
-Simply bind the PSCI power-domain subnoded to a stub power
-domain driver in order to solve the runtime dependencies.
-
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/firmware/psci.c | 41 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
-
-diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-index 03544d76ed4..fc72bc17274 100644
---- a/drivers/firmware/psci.c
-+++ b/drivers/firmware/psci.c
-@@ -23,6 +23,7 @@
- #include <linux/libfdt.h>
- #include <linux/printk.h>
- #include <linux/psci.h>
-+#include <power-domain-uclass.h>
- 
- #define DRIVER_NAME "psci"
- 
-@@ -172,6 +173,10 @@ static int bind_smccc_features(struct udevice *dev, int psci_method)
- 
- static int psci_bind(struct udevice *dev)
- {
-+#if IS_ENABLED(CONFIG_POWER_DOMAIN)
-+	ofnode node;
-+#endif
-+
- 	/* No SYSTEM_RESET support for PSCI 0.1 */
- 	if (device_is_compatible(dev, "arm,psci-0.2") ||
- 	    device_is_compatible(dev, "arm,psci-1.0")) {
-@@ -188,6 +193,16 @@ static int psci_bind(struct udevice *dev)
- 	if (IS_ENABLED(CONFIG_ARM_SMCCC_FEATURES) && device_is_compatible(dev, "arm,psci-1.0"))
- 		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
- 
-+	/* Bind power-domain subnodes */
-+#if IS_ENABLED(CONFIG_POWER_DOMAIN)
-+	dev_for_each_subnode(node, dev) {
-+		if (device_bind_driver_to_node(dev, "psci_power_domain",
-+					       ofnode_get_name(node),
-+					       node, NULL))
-+			pr_warn("failed to bind %s\n", ofnode_get_name(node));
-+	}
-+#endif
-+
- 	return 0;
- }
- 
-@@ -324,3 +339,29 @@ U_BOOT_DRIVER(psci) = {
- #endif
- 	.flags = DM_FLAG_PRE_RELOC,
- };
-+
-+#if IS_ENABLED(CONFIG_POWER_DOMAIN)
-+/* Accept #power-domain-cells == 0 */
-+static int psci_power_domain_xlate(struct power_domain *power_domain,
-+				   struct ofnode_phandle_args *args)
-+{
-+	return args->args_count == 0 ? 0 : -EINVAL;
-+}
-+
-+static const struct power_domain_ops psci_power_ops = {
-+	.of_xlate = psci_power_domain_xlate,
-+};
-+
-+static int psci_power_domain_probe(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(psci_power_domain) = {
-+	.name = "psci_power_domain",
-+	.id = UCLASS_POWER_DOMAIN,
-+	.ops = &psci_power_ops,
-+	.probe = psci_power_domain_probe,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-+#endif
-
----
-base-commit: 9e9f78f7aa0124ef0e622532043acf87e84008dc
-change-id: 20240628-topic-sm8x50-psci-power-domain-27dd90a7f298
-
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
