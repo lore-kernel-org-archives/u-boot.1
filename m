@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 979ACC2BBCA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 08:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E194C2BBCA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 09:33:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 139C68857C;
-	Fri, 28 Jun 2024 10:34:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 464E288286;
+	Fri, 28 Jun 2024 11:33:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kV1wpPXE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NSiKfgtA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07A5888581; Fri, 28 Jun 2024 10:34:19 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 997FA8857D; Fri, 28 Jun 2024 11:33:29 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C779E8825E
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 10:34:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 406A487D40
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 11:33:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2ebe6495aedso3201551fa.0
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 01:34:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719563656; x=1720168456; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZI0XrNdzBlvmYL93KmYHyynRSCi1x2gjGLwnfloHtis=;
- b=kV1wpPXE5p5fxR1fEe99LF2SxsvNqy0RrldyNOqpCuIg3+Yl7E4Sv/kDrVK/Q2ZQw4
- 1sN/9eWew6YfWhPS0+o1bIzQDRrboRPo0hWxzsqwM3fXLFwOthjnwHeXQSyMK47oU7vL
- cLmloB5tJQxoPH2xuQ1JLZ5Kma4DiByeKbAUPbGVlTAbvTm091U21Bmqzr7E4cc9sWc9
- f2xvARmo3orsin2uBSBaD2BvLfOEvaKQ2R8LZFPIl2Tc+Sz7GGz1OdJ++4UTnbUD5l7T
- 3l0r2EvnBPDjn/WKQwEbkHjf9QPbHTHmnekfEpLTv4P+LXxdB/IxS9++BDjyWEs+5XX5
- qwLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719563656; x=1720168456;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZI0XrNdzBlvmYL93KmYHyynRSCi1x2gjGLwnfloHtis=;
- b=nuy5KpXsyIAgLHj0Fj6LpB57rx8WBZ8S51EI+tCaRuzL7pNl8RrtwiQCk+UUqX9VO4
- C6L5f0+ZMpfeqy6GczqVBPdPVfZS8g3o6/x2QGo8U0s27wipsXUbBVUm8HVfCtkZdPr0
- +IdmrWIEC94gZAptz14E6KwipnufrladffltddH+nApqwPoA6FRal2ceFb9bV3rpEbIQ
- utV9/Ims+DBskflHdsWQGEimkkwqvl3jwRCWSeaz7Zi5XRli0TbsA7UfnltqLzL8rBhC
- DhxILzuzRSZaGWlWb3saDkKIyKe2n+lnH/O92t5EniQFB0zFKpS3AwB3lBrytHzxTrH5
- RMfA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzxOVFJ+kn8tJ/c8QMtTHvbvb4m7iuI+7uZcUW3GV6C0lkBwIHYvxFxALnj9bUyfkeZQ79GcxLOPn9aTnokTKYgUw2cw==
-X-Gm-Message-State: AOJu0YwotzbQHAS19CeEfwkpKPF4JbUTBF/FDN/XvfMYkiJLKWpXcmvx
- 39d+TiCH7xh10pyp+tiU8nKkISXJgAEZmsH3KKFlUvVBSXNPQD/yt84VDA==
-X-Google-Smtp-Source: AGHT+IEyJKEZFreILMUw+8Zi8Pn5QBn2OdIyZvUQoMHzIKp/8AhCJzt26m67xkVGCG8Qce1kAOjlCg==
-X-Received: by 2002:a2e:9213:0:b0:2ec:53a9:2036 with SMTP id
- 38308e7fff4ca-2ec5b2f0491mr103923801fa.37.1719563655736; 
- Fri, 28 Jun 2024 01:34:15 -0700 (PDT)
-Received: from moskalets-nb.avp.ru ([2a00:1fa0:48e3:f865:bc1e:8502:f048:8db9])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ee516803c4sm2196491fa.93.2024.06.28.01.34.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 01:34:15 -0700 (PDT)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: trini@konsulko.com,
-	u-boot@lists.denx.de
-Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- Maxim Moskalets <maximmosk4@gmail.com>
-Subject: [PATCH] cmd: add resize for FDT in bootelf
-Date: Fri, 28 Jun 2024 11:34:11 +0300
-Message-Id: <20240628083411.19843-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45S9XPw7091403;
+ Fri, 28 Jun 2024 04:33:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719567205;
+ bh=YUchegk5Epm1UNr1YTXunhNnH6V659tDqYYNdrvdaEU=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=NSiKfgtAeFCjmIkTcrpiIqPz84skLxFN4H9IGyTzZyCUdQ75v4CkgHf05NWtsZTXa
+ 6tXOQo7BVPSaeGbvDP2fEYOLStp8CRkGpIrNPkqDN1O68m8zJkcLXWjo9xfRttgKKa
+ PjtkXzOC1EfjPPyJ6uEsL4PfYpRL1CklFCuV/9ZE=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45S9XPfl018560
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 28 Jun 2024 04:33:25 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 28
+ Jun 2024 04:33:24 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 28 Jun 2024 04:33:24 -0500
+Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45S9XFW8088895;
+ Fri, 28 Jun 2024 04:33:21 -0500
+From: Dhruva Gole <d-gole@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
+ Menon <nm@ti.com>, <c-shilwant@ti.com>, <m-chawdhry@ti.com>,
+ <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vibhore Vardhan
+ <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>, Dhruva Gole
+ <d-gole@ti.com>
+Subject: [PATCH V3 1/4] arm: dts: k3-am625-beagleplay: Package TIFS Stub
+Date: Fri, 28 Jun 2024 15:02:49 +0530
+Message-ID: <20240628093252.1864609-2-d-gole@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240628093252.1864609-1-d-gole@ti.com>
+References: <20240628093252.1864609-1-d-gole@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,27 +82,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In some FDTs, there is not enough free memory to add nodes, so this
-operation fails.
+Add support for packaging the TIFS Stub as it's required for basic Low
+Power Modes like Deep Sleep.
 
-Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+Acked-by: Neha Malcom Francis <n-francis@ti.com>
+Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- cmd/elf.c | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 33 +++++++++++++++++++-
+ 1 file changed, 32 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/elf.c b/cmd/elf.c
-index 32b7462f92..673c6c3051 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -68,6 +68,8 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		log_debug("Setting up FDT at 0x%08lx ...\n", fdt_addr);
- 		flush();
+diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+index fb2032068d1c..5e2248a4a668 100644
+--- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+@@ -69,6 +69,23 @@
+ 		};
+ 	};
  
-+		fdt_set_totalsize((void *)fdt_addr,
-+				fdt_totalsize(fdt_addr) + CONFIG_SYS_FDT_PAD);
- 		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
- 			return 1;
- 	}
++	tifsstub-gp {
++		filename = "tifsstub.bin_gp";
++		ti-secure-rom {
++			content = <&tifsstub_gp>;
++			core = "secure";
++			load = <0x60000>;
++			sw-rev = <CONFIG_K3_X509_SWRV>;
++			keyfile = "ti-degenerate-key.pem";
++			tifsstub;
++		};
++		tifsstub_gp: tifsstub-gp.bin {
++			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
++			type = "blob-ext";
++			optional;
++		};
++	};
++
+ 	ti-spl_unsigned {
+ 		filename = "tispl.bin_unsigned";
+ 		pad-byte = <0xff>;
+@@ -105,6 +122,19 @@
+ 					};
+ 				};
+ 
++				tifsstub-gp {
++					description = "tifsstub";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-gp";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_gp";
++					};
++				};
++
+ 				dm {
+ 					description = "DM binary";
+ 					type = "firmware";
+@@ -148,7 +178,8 @@
+ 				conf-0 {
+ 					description = "k3-am625-beagleplay";
+ 					firmware = "atf";
+-					loadables = "tee", "dm", "spl";
++					loadables = "tee", "dm", "spl",
++					"tifsstub-gp";
+ 					fdt = "fdt-0";
+ 				};
+ 			};
+
+base-commit: c53b344475734d0d29f522b7b1d80c5b8204442d
 -- 
-2.39.2
+2.34.1
 
