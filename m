@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E729C2BBCA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 06:51:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D3D3C2BBCA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 07:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AD55885AE;
-	Fri, 28 Jun 2024 08:51:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=imag.fr
+	by phobos.denx.de (Postfix) with ESMTP id 7742688581;
+	Fri, 28 Jun 2024 09:33:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=imag.fr header.i=@imag.fr header.b="ZRQ6KcOF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RX+gfHhT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F0FC885A8; Fri, 28 Jun 2024 08:51:06 +0200 (CEST)
-Received: from zm-mta-out-3.u-ga.fr (zm-mta-out-3.u-ga.fr [152.77.200.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2BAE687E3F; Fri, 28 Jun 2024 09:33:02 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7843885A0
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 08:51:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AED5887E3F
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 09:32:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=imag.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=etienne.duble@imag.fr
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=imag.fr; s=2022;
- t=1719557463; bh=QeubiLrr5wfEQ8ZL0YG3h2+SHRg0KID6XVsV4drJ89M=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ZRQ6KcOFX/6qxt1GcUvcLjGKTXajnwfMDmsTcP4TlxoEE+vy7wVTIEoDPYWBmXAPW
- n1yXCSLcNHKBC4DzSTI4Ok/BvHNjzKPdLcz6muP5Umo8BB4BmCaooyqibd+WnollXk
- nV9ASPt47XeDuTUpKDaa+2VSAXSoNe8jL6RY1lOb3S9uZYYsqC6DEXT6BTm/ezEggE
- PpiQklzfVw1aK1QfsGW/WwCkw3TG23OTGgU4EyBDON79oq9VDA9ttfrWgyCmyFyJ77
- 8BgESdoH8P5u0clSL6gOB3XSRhKmedI+25ffu43rOzq8pA+lg/KWJ/RqeFSEJxEByL
- sTdcy28juHjdQ==
-Received: from mailhub.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 871E340289;
- Fri, 28 Jun 2024 08:51:03 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhub.u-ga.fr (Postfix) with ESMTP id 82CE3100071;
- Fri, 28 Jun 2024 08:51:03 +0200 (CEST)
-Received: from [129.88.53.250] (pimlig-dock-duble.imag.fr [129.88.53.250])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- (Authenticated sender: dublee@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 13951140092;
- Fri, 28 Jun 2024 08:51:01 +0200 (CEST)
-Message-ID: <9d618818-f3f4-4e03-8696-dcbc5b944006@imag.fr>
-Date: Fri, 28 Jun 2024 08:51:01 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-643efaf0786so2676737b3.1
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 00:32:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719559978; x=1720164778; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XjjR/7XuWlrrlViuS8GuBLnVxnV2nfqXOn+Sm+zf5wY=;
+ b=RX+gfHhTMRjpM2UWWjkfm7n+QBAlPNHMOS4Sb1Px8GlVL2dqScw80KJU3ZxNsZrmw6
+ jBbkuQ9yN0BTu5AuSx8Yv+RCZuCSfbiZsaREMebNpE9/FxJWs4ikCrl9ecBCfcXEZ0ei
+ kKSstaHUfFJcmYnscRKCXSQrca62yyDWhQ7sQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719559978; x=1720164778;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XjjR/7XuWlrrlViuS8GuBLnVxnV2nfqXOn+Sm+zf5wY=;
+ b=fFqr/kuKKAECNLD+l4bjy9Sr3vWscsBmA54w8MUgaSZzFYNCDdMitHMLENpZecdWya
+ CFzGvFwjtY697veZ7H5iJMvEvxnk0xS2QNC/1yKXFJ17lDTsTnAiWuvNY4mdOisoxCi/
+ DXmrWcuPsWWFywvK0yHHnG9EKJpdyqwicNZ7Re6J1ELvJALh8AzYZRv/y6DinZDKKDff
+ tWp+Hgmx48KnXxMyK0LkF27P9y1krbHKMVOxhKR4UHKHo0n/OyDfH3Ld923igEybusAJ
+ Hrm+pHUWsPVuWyv8yFdF/YfBu85a8YafLwYKTYkfI/3o+sr5yTZL8VxINy2unyM++925
+ Ne6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhYlEdsvbgZG0E9ijBBujvHrIBjt4kWSxkyvZU8ALCzLN/obTlSOGRxRPrns4CW/IOSjjEl/vGkQpo8pHxAqOBihxNSQ==
+X-Gm-Message-State: AOJu0YxRhok6wKFyY8mymiZWjX5hNfk8ia8/+V2mEsPXB2sdk+TW6K+c
+ EMMzj8DBgqcsNpD+2kZzb01RcsdmFo28P6rWxFgcA+ZdMGSNAUeonxwbFDPmsl5XngWMZr+3PFQ
+ B+ZUyoMRoZelZorv7r+RoM26ioqqOeYfww8Ip
+X-Google-Smtp-Source: AGHT+IHmw+NQmBGakZM2LEF3KJQYFOhYSLBJoq5asEa+fMSQv8lpMo+k4ceA+5lNNeEdoQpUkdOMe1tTuQbKVzjt4DI=
+X-Received: by 2002:a81:8583:0:b0:62d:45:4098 with SMTP id
+ 00721157ae682-643409d8c17mr137411737b3.26.1719559978374; 
+ Fri, 28 Jun 2024 00:32:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] net: give a different name to rtl8169 interfaces
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Dragan Simic <dsimic@manjaro.org>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- joe hershberger <joe.hershberger@ni.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>, Ramon Fried
- <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot <u-boot@lists.denx.de>
-References: <1978999632.15003049.1719232814587.JavaMail.zimbra@univ-grenoble-alpes.fr>
- <888498a7-0d65-4dd0-907e-0f8eb8a92695@cherry.de>
- <6472908d-548f-483a-8199-6c7233fc0eb9@imag.fr>
- <f8be5725-e8a5-454c-82db-4aaeb293673c@cherry.de>
- <a7dbf00b11304f80cacd5821a5e19127@manjaro.org>
- <273b4022-4192-4df8-ab69-db8d05b091ea@imag.fr>
- <0487e16e-9a4f-4a1d-be80-312a2969d258@cherry.de>
-Content-Language: en-US
-From: =?UTF-8?Q?Etienne_Dubl=C3=A9?= <etienne.duble@imag.fr>
-In-Reply-To: <0487e16e-9a4f-4a1d-be80-312a2969d258@cherry.de>
-X-Greylist: Whitelist-UGA SMTP Authentifie (dublee@univ-grenoble-alpes.fr) via
- smtps-465 ACL (42)
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+References: <20240627170629.2696427-1-vincent.stehle@arm.com>
+ <13D2D563-69DD-4BD3-8A97-37B39A0B5D52@gmx.de>
+In-Reply-To: <13D2D563-69DD-4BD3-8A97-37B39A0B5D52@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 28 Jun 2024 08:32:47 +0100
+Message-ID: <CAFLszTgJSW+UO=CPjMazaqeQFSF7GPUDXLuKJCNALboUGqNLzw@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: cros: store partition type in an efi_guid_t
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,54 +87,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-Hi Quentin,
-
-Le 27/06/2024 à 14:27, Quentin Schulz a écrit :
-> Hi Etienne,
+On Thu, 27 Jun 2024 at 20:28, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
+e:
 >
-> On 6/25/24 1:42 PM, Etienne Dublé wrote:
->>
->> Hello,
->>
->> Le 25/06/2024 à 12:25, Dragan Simic a écrit :
->>>>> Another option may be to name them "rtl8169@<hexa>", with "<hexa>" 
->>>>> reflecting the PCI region address (so it is unique and stable). 
->>>>> What do you think?
->>>>
->>>> I guess that's one way, I'm also wondering how systemd renames those
->>>> to be unique but stable on the same machine, maybe we could take some
->>>> inspiration from them for that?
->>>
->>> Systemd also allows renaming of network interfaces using some rules
->>> predefined by the user, so there's also the possibility to rename the
->>> interfaces in U-Boot to ethernet0 and ethernet1, using fixed rules
->>> that would be based on the PCI region address.
->>
->> OK but the renaming occurs in the rtl8169 driver, that is used by 
->> several boards, whereas the PCI region addresses come from the 
->> device-tree, so they differ from board to board.
->>
 >
-> I'm of the opinion that we only care about stability for the same 
-> product, not for different products with the same Ethernet PHY on 
-> different SoCs/products.
+>
+> Am 27. Juni 2024 19:06:29 MESZ schrieb "Vincent Stehl=C3=A9" <vincent.ste=
+hle@arm.com>:
+> >The scan_part() function uses a struct uuid to store the little-endian
+> >partition type GUID, but this structure should be used only to contain a
+> >big-endian UUID. Use an efi_guid_t instead.
+> >
+> >Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> >Cc: Simon Glass <sjg@chromium.org>
+> >Cc: Tom Rini <trini@konsulko.com>
+> >---
+> > boot/bootmeth_cros.c | 4 ++--
+> > 1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> >diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
+> >index f015f2e1c75..1f83c14aeab 100644
+> >--- a/boot/bootmeth_cros.c
+> >+++ b/boot/bootmeth_cros.c
+> >@@ -148,7 +148,7 @@ static int scan_part(struct udevice *blk, int partnu=
+m,
+> > {
+> >       struct blk_desc *desc =3D dev_get_uclass_plat(blk);
+> >       struct vb2_keyblock *hdr;
+> >-      struct uuid type;
+> >+      efi_guid_t type;
+>
+> Does Chrome OS only support GPT partitioning?
 
-I agree, but my comment was more about how u-boot code is structured 
-(network interface naming is done in the driver, and the driver code 
-should probably not include board-specific code, so we are quite limited).
-In theory we could just name the interfaces ethernet0, ethernet1, etc., 
-by using the PCI region address as the sort key, and maybe this is what 
-Dragan was suggesting. But in practice when driver->bind() is called we 
-don't know if more interfaces will be discovered next; and renaming the 
-1st interface when the 2nd one is discovered with a lower address is 
-probably not the kind of code u-boot code experts would like...
+Indeed.
 
-Cheers,
-Etienne Dublé
+>
+> >       ulong num_blks;
+> >       int ret;
+> >
+> >@@ -161,7 +161,7 @@ static int scan_part(struct udevice *blk, int partnu=
+m,
+> >
+> >       /* Check for kernel partition type */
+> >       log_debug("part %x: type=3D%s\n", partnum, info->type_guid);
+> >-      if (uuid_str_to_bin(info->type_guid, (u8 *)&type, UUID_STR_FORMAT=
+_GUID))
+> >+      if (uuid_str_to_bin(info->type_guid, type.b, UUID_STR_FORMAT_GUID=
+))
+> >               return log_msg_ret("typ", -EINVAL);
+>
+> struct disk_partition containing a string which is only needed in the CLI=
+ instead of the 16 byte GUID was a bad idea to start with. Shouldn't we rep=
+lace it or add least add a GUID field instead of first converting to string=
+ and than back to GUID?
 
--- 
-Etienne Dublé
-CNRS / LIG - Bâtiment IMAG
-700 avenue Centrale - 38401 St Martin d'Hères
-Bureau 426 - Tel 0457421431
+Yes I agree, it would be nice to fix that.
+
+>
+> >
+> >       if (memcmp(&cros_kern_type, &type, sizeof(type)))
+>
+> You could use the guidcmp() macro here.
+
+Regards,
+Simon
