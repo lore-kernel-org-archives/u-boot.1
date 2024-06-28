@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F118C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 17:41:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B74C30658
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 17:41:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E507E884A7;
-	Fri, 28 Jun 2024 19:41:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4ED97885B6;
+	Fri, 28 Jun 2024 19:41:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DLZc/Z9C";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CJy/mOJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49042885A0; Fri, 28 Jun 2024 19:41:37 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 2F7C6885B6; Fri, 28 Jun 2024 19:41:39 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57055881EC
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 19:41:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4680788581
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 19:41:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-424f2b73629so8582785e9.2
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 10:41:35 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4256f102e89so5504345e9.0
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 10:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719596495; x=1720201295; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=O46Cca/sScXUpNrFHUSBEh9kbAC2oFIM0L7a/d0atWc=;
- b=DLZc/Z9Ca6Mzen9wX1LSMbjs+pqwTwnpGtPSghmiWE3LRl7xla2d1DZXnKsjFu1iwc
- D3vay3K5GCU5zAscZdIiOnwoQPBKpxhzjLRbXlzcRnRqs0ZV8AVeNxLNVo0NFOVo98Cg
- a9mvM6fuWRkR4UuDSJipBQ39ZCNd6TuULu/KjPW6QrSdaPHr0T2US6RdRgaYhXtMD1Aj
- 4HDrn3jfYzI8X8+5ezkXSOMSCF9DcFrcaa08bNyOHo3r4pHgANrb9zmyFQhMAD6B/lDp
- 6clGWyxrtq0iiKJ8aFuv1UDyKhfQCAQ8I41zIEbG1XgOAA4uVgkvMCVPqWIfQPfoyGDg
- vWIQ==
+ d=gmail.com; s=20230601; t=1719596496; x=1720201296; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LddlRVqLaui1Zlv5wf4Q0iURIWsOCtFSBVx2z/9tO1k=;
+ b=CJy/mOJeWSIs8jeRDKYwrrrWfDVemv6pGGQgUNNPVSNRnSNJrx6LK+cUG1chSnBxKY
+ dmNmkKYfy8i8hiO+XOrbgUCdiAGLDTlmPw3N6jXSwyAyfhC0Xp6mTLzc0z5d6Dp7mlTQ
+ iBWCc3o84c6LVV3U4Ae17s0cM81r4ylo0hxU6rITaGFje9/YjL2LFXWPIrpgY9X4atL4
+ ZRqULV6d9/70RplajOiuMu9BGdxTn0Lo6c3dWizJa0m0wvHnyze/hNIELM+ViDpM8726
+ KCwHhVO6Mi9rCPdBX1RrSH7C5ZgsXklXChJVZCya1XjFRM5ron5NJj50mZwM4AmK19u6
+ 1n5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719596495; x=1720201295;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O46Cca/sScXUpNrFHUSBEh9kbAC2oFIM0L7a/d0atWc=;
- b=bL5lPQ2YT/Db/Gp6o7uvlomgdaC+LeZLWVRRPu0Xx9g0tM9QrHFsbjFoJZLYtn/7jz
- 3L9v/oaVy0NyvNIRSNp4yknzwrmoHib92ozmQMckg10Enfdcy8Rc9HIkLjym2fByStpM
- Jvqt7B8J2jHKxsIKSKH7T93NNZseSqPzqBkokeWyIW/vf66KHq+YfXiyk6mOqpoOS+mL
- O3U+ByVhEgQgHd6WvE68HFtm7dMYm1F/awtt/8ooRV2iJSPg1RseLTBEgLnuF3EidQ7c
- poc+c4UCWvW/kyRRx3gNu4mHYw7TOarI7hZpGX/fB6sd2Jgidn5Ce3HbIbDtnVNvI3zm
- nN0A==
+ d=1e100.net; s=20230601; t=1719596496; x=1720201296;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LddlRVqLaui1Zlv5wf4Q0iURIWsOCtFSBVx2z/9tO1k=;
+ b=DlSTCEcGO51hUudlTm5BXGy+Er52qVc8d2tIwY+tiLqE4KN/0at7mLXVs2/xNkrOnS
+ HtLXlr8JBhIt1+2j2xR9dlFJAT7iO3KyXTRqYrf6a44fpqqX3tTPNS3DigvIh8ZKYSTe
+ 1vUSxiDKzM8Iek+IcYtwdWir1IiFMcNRgNDtoouhbCsYWeMzMu9KaV4k7MQyOzS5Cm85
+ zDInSK+NojqVUklk6A2CGwlKexHSHzTT+4FXIPizYGFvw2vO0dhbeYGidDH2XUi7MHlc
+ Eg18hvPgwzwjjNvB2UzGEJHBOeCNazWlLrI7csbesxPciZ+nxrEtIsWUT+kN1U3/JKYl
+ 2gew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXNK0kjNb+h2dVD5QlzB+1ngrGwaoztlDo5UdkpntmZTTvZk5TNEvQOkhhaz8HIYX1NDoP8G+2K7mg2h0rdcoowLySOSA==
-X-Gm-Message-State: AOJu0YzO6JWXb+BoxYdwGlqlO77F3x9N5Wl0Q10otPAAE1V1i3IV2Dn7
- 8d+RfI/9W0a5vB3PzAIR20kB2zDeM9ugt+VjQlWuo3/jqqO5sbsK
-X-Google-Smtp-Source: AGHT+IFObFMBhDIhyDfERS5Jht0aQNY/8KnOlxJH7FQe/KSIEEK/iREBTqPUNOPOvwDuFaIXMUFRTw==
-X-Received: by 2002:a05:600c:43d4:b0:424:a4a2:9478 with SMTP id
- 5b1f17b1804b1-424a4a294cemr95245705e9.25.1719596494443; 
- Fri, 28 Jun 2024 10:41:34 -0700 (PDT)
+ AJvYcCWMM4gieGMoq53MhkS9+ZtX4ilmAMVPM7hynjA1eLvolnlfcylmY1ELPenzaPZdQSmjc/tWmg0jXiQyU/7T4xDVx6rgQg==
+X-Gm-Message-State: AOJu0Ywlw49VSTr2Rr7Khl98wNfTwN/VVRzX7UhlKj68RftVw6zMs984
+ H+zyfwuPwBVtoNpOo6BjfanCp5gzgeJlDsiCBHuEMwaBWg9ukcMV
+X-Google-Smtp-Source: AGHT+IEBiTq/rG/voXf2716Y83yAlmbfgqqJ/DsycQqv8HRZWKat38A8DVt7r1pge58R/94gbzWHxw==
+X-Received: by 2002:a7b:c8cf:0:b0:425:63a9:f96e with SMTP id
+ 5b1f17b1804b1-42563a9fadbmr49198315e9.36.1719596495363; 
+ Fri, 28 Jun 2024 10:41:35 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4256b097bd6sm46275635e9.30.2024.06.28.10.41.33
+ 5b1f17b1804b1-4256b097bd6sm46275635e9.30.2024.06.28.10.41.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 10:41:34 -0700 (PDT)
+ Fri, 28 Jun 2024 10:41:35 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -73,10 +74,13 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
 Cc: Christian Marangi <ansuelsmth@gmail.com>
-Subject: [PATCH 00/12] clk: mediatek: add OPs to support OF_UPSTREAM
-Date: Fri, 28 Jun 2024 19:40:45 +0200
-Message-ID: <20240628174114.8675-1-ansuelsmth@gmail.com>
+Subject: [PATCH 01/12] clk: mediatek: return XTAL rate directly for gates with
+ XTAL parent
+Date: Fri, 28 Jun 2024 19:40:46 +0200
+Message-ID: <20240628174114.8675-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.1
+In-Reply-To: <20240628174114.8675-1-ansuelsmth@gmail.com>
+References: <20240628174114.8675-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,57 +99,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series doesn't currently change anything and it does add all the
-additional OPs to make support of OF_UPSTREAM.
+There is currently a massive bug that makes any gate clk that have
+CLK_XTAL as parent to return the wrong clock.
 
-While converting the mt7681/7686/7688/7623/7622 it was notice lots of
-discrepancy between the downstream dtsi and the upstream one and the
-clock ID between downstream clock ID and upstream clock ID.
+Following the code, with CLK_XTAL defined as TOPCKGEN parent, the
+topckgen get_rate is called. The clk ID (0) is parsed and only in some
+corner case (scenario where fixed clock are not defined) the correct
+XTAL rate will be returned as get_factor or get_mux is called (that have
+correct handling for CLK_XTAL). With fixed clock defined, the rate that
+will be returned will always be the FIRST ELEMENT of the fixed clock
+table instead of the hardcoded XTAL rate.
 
-Upstream reference clock by names and clock are handled by the
-CCF (Common Clock Framework). The same can't be used here as we would
-quickly reach the max space allocated before relocation.
+To handle this, add additional logic and if the flag is set to
+PARENT_XTAL for the gate, return the XTAL rate directly.
 
-The current mediatek clock driver reference all the parents and clocks
-with offset from the clk ID related to the different tables.
+We assume the clk_tree to have xtal_rate defined with clk gates that
+have XTAL as parents.
 
-Discrepancy between clock ID and the order in the clocks table cause
-one clock referenced for another or even crash for trying to access
-a clock at an offset that doesn't exist.
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/clk/mediatek/clk-mtk.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-To handle this and permit use of OF_UPSTREAM, various measure and
-changes are done to the mediatek clock driver to support it.
-
-This series have all the generic clock changes. Once this is merged,
-series for each SoC will came that will just change files in their
-dedicated clock driver. This is to prevent massive patch and to
-permit to split series, one for each SoC.
-
-As said at the start, these changes doesn't cause regression and are
-just expansion to the current API. Current behaviour is saved in every
-possible way (aside from the first 2 patch that fixes latent bugs)
-
-World compile tested in Azure Pipeline test
-
-Christian Marangi (12):
-  clk: mediatek: return XTAL rate directly for gates with XTAL parent
-  clk: mediatek: return XTAL rate for infrasys get_mux_rate
-  clk: mediatek: add support for gates in clk_tree for infrasys
-  clk: mediatek: add support for gate ID at offset
-  clk: mediatek: add support for parent mux from different source
-  clk: mediatek: add support for parent mux from different source for
-    topckgen
-  clk: mediatek: add support for gate clock to reference topckgen clock
-  clk: mediatek: provide common clk init function for infrasys
-  clk: mediatek: add support for remapping clock ID
-  clk: mediatek: implement MUX_FLAGS and MUX_MIXED_FLAGS macro
-  clk: mediatek: add support for GATEs for APMIXED OPs
-  clk: mediatek: add support for APMIXED parent in infra MUX
-
- drivers/clk/mediatek/clk-mtk.c | 433 ++++++++++++++++++++++++---------
- drivers/clk/mediatek/clk-mtk.h |  74 +++++-
- 2 files changed, 392 insertions(+), 115 deletions(-)
-
+diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
+index d2c45be30de..e68beccc060 100644
+--- a/drivers/clk/mediatek/clk-mtk.c
++++ b/drivers/clk/mediatek/clk-mtk.c
+@@ -543,6 +543,13 @@ static ulong mtk_clk_gate_get_rate(struct clk *clk)
+ 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
+ 	const struct mtk_gate *gate = &priv->gates[clk->id];
+ 
++	/*
++	 * Assume xtal_rate to be declared if some gates have
++	 * XTAL as parent
++	 */
++	if (gate->flags & CLK_PARENT_XTAL)
++		return priv->tree->xtal_rate;
++
+ 	return mtk_clk_find_parent_rate(clk, gate->parent, priv->parent);
+ }
+ 
 -- 
 2.45.1
 
