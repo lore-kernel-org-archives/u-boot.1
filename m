@@ -4,94 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F62C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 00:02:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CB72C2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 02:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9CCB87FB5;
-	Fri, 28 Jun 2024 02:02:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CBD9884A9;
+	Fri, 28 Jun 2024 04:48:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lPY2SvGr";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id ECA2687FB5; Fri, 28 Jun 2024 02:02:54 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1719542899;
+	bh=BKGRDZ8Nsi7ay1F0s0scHMN3TUuAKc5a1RjsV2Ocuyc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=CMP/kMlFSIMRYTxgEUA1G7GrqaVhivpn1GMa9dUiZR47LDz/NwEdzC5+B6AZcNyhU
+	 4dRX2D1NCps7Nq+FiryGDCp8NzACb+ZaOIOhhsbch+zOWsMJoeC4DUS+e2Hk+4RGxY
+	 DN2nGhf0A8Vme3cMkfLU+J2qYfYn9PpCAXm4gwiLgGBnwh+oTUisBNj9kezy1sC8Wj
+	 UeTnj5sEx/m741hnvmxRWXdkAAW5BYnYxLD9+B/zHGc5hyadMp49TDTDgvuXYn1grz
+	 0pGBbJEv1lkQ/B68ihEItRNhDTH1U2x6wgpphm20fS9UQ+b3iZYiiJTtcvGaV0exFQ
+	 itB4c0zd8tqZw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD7B487F9F
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 02:02:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5295eb47b48so47171e87.1
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 17:02:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719532972; x=1720137772; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Wkz5217NCjFZnSx5Wyqplqc2rnSCBbvMGYhJM/ob7KQ=;
- b=lPY2SvGriatunJ3G05nHoM+ZSoFxYJP8rUIBsTR6slZ6klQb65suhCZvCxct5lYfsZ
- vmQodbB3BTmDxN2xw7PM3CGjOM/PUq+Fa3dqd7o0cntc0f0YfzXBPjznkn9OINBwf3lz
- g9I9ldK+YQxtvMwh7Ia4/B8u0DfWyQ42UXAMwv8ifSaYJMweCJZ1oOv0i+lZcmKQMwVz
- F89MaEBMcFG5jVhC5AakJYxhF9Ym2oFvy/RqbBxzKgK5zK2Fsrl3vIAgxDcgL7LJEU9r
- vdou7z5iK/HIppaqsEVh1n2SDJlY8Xzkoq6nKipMV+kQ2Wfy7Udw25/FYknIzLZeJCZn
- xgDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719532972; x=1720137772;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Wkz5217NCjFZnSx5Wyqplqc2rnSCBbvMGYhJM/ob7KQ=;
- b=B7C53pJ3mKQKHCGJfCdD9rGkYevhd6pja7iApu6VntxomY3CelMcUz86WdWf6U+MAM
- ad7nZPVsbeOHZomxsjk3zVMDG/gyd2Kpls+BWKMVTDgujSNymhElqPvbEX2kHZltDXlE
- fHcAt0ibv8iOX94E3GdWQJDsTD8oTgnzfGwN7M/P5/3Y39TJsIzSPFB7l/Y+qw7tNXkh
- hpL4bTgPSXRd9kFfCHGQwpq8m7DtQ8oPziZaN3QLnSMbyxT6q56LFF0QWfOQT3hZBiCo
- dhCI/unCKb4nfNug3QfUQ3dkBDkQiW5/H1g85hsjJM86HoI29AWkEvdypE3gMervM4TQ
- Pa5A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUD0BLoZvPmWJy5xNBsnvdm99TnuhdlEcBbss/DALnpGDmFy4zXN1wLQfU8tiqixey6VhzyFv/iicHFEITJ3sZxBgUSEQ==
-X-Gm-Message-State: AOJu0YzUW6B2aPHv3OF3aWvTqE2q+Rel1R5zeEhHqDvTTHiAwNmtvtxJ
- CnlxiH5Xo18WxFCz9qBC7uNO+eB90AKvFU/MnIo19Jh/ioPp3wf5cj1cMMlez/Y=
-X-Google-Smtp-Source: AGHT+IH/54Z9D5QfBpRqGv0w4FrUFiV04aohVKJ1kF2sAarL3STEJtRc6WmJwAVlltnICG+OSun7nQ==
-X-Received: by 2002:ac2:4315:0:b0:52c:c9bb:2ba4 with SMTP id
- 2adb3069b0e04-52ce06414d5mr10025258e87.46.1719532971549; 
- Thu, 27 Jun 2024 17:02:51 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::18f8? ([2a02:8109:aa0d:be00::18f8])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72ab0b571fsm21604266b.208.2024.06.27.17.02.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Jun 2024 17:02:51 -0700 (PDT)
-Message-ID: <200e17af-d703-4dae-90ac-508712d55c68@linaro.org>
-Date: Fri, 28 Jun 2024 02:02:49 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EA20687D40;
+ Fri, 28 Jun 2024 04:48:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1719542897;
+ bh=BKGRDZ8Nsi7ay1F0s0scHMN3TUuAKc5a1RjsV2Ocuyc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=YbdJfRfexPEA5OHqfHd0g2L8W6cEb8zLsNbeBsG7ZNweLqw4PQu3ofQrC69YB4whh
+ LtSpvljqiMXOx1Jzx2mVHA6YD3GUX1et0Ly80zmmkIn0/D0dqVKMnyqF7xqHXZzga0
+ NHAUto4oiO9Tjj5N8DqjA3aNuA7W0vuLXFPlndm0tieUfIb+rVZY5njHEgrxgxFHWD
+ 4X/diawf3MTORNL61U2v9dw/SqWntUvsn0ESu5NM38NvVxqwzOhPTSDDMmMIrEIi1a
+ ay/nIoJKz2mrEzjHVr9Z6VStjWOkEg8nlEdUcxrk046LW0Z1+CySTEAIEfR65t1k7R
+ 1eFU+lUS3JWfg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH v2] spl: fit: List DTOs applied by SPL in U-Boot control DT
+Date: Fri, 28 Jun 2024 04:47:57 +0200
+Message-ID: <20240628024804.149871-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] dm: core: support dtb switching without
- devices/drivers unloading
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Bin Meng <bmeng.cn@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>,
- Shiji Yang <yangshiji66@outlook.com>, Raymond Mao <raymond.mao@linaro.org>,
- Chanho Park <chanho61.park@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Sumit Garg <sumit.garg@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-References: <20240627113546.100333-1-mikhail.kshevetskiy@iopsys.eu>
- <20240627113546.100333-2-mikhail.kshevetskiy@iopsys.eu>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240627113546.100333-2-mikhail.kshevetskiy@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,228 +67,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Insert /u-boot,spl-applied-dto-<dto-name> = <index> property into the
+U-Boot control DT during SPL DTO application process. This can be used
+by user to inspect which DTOs got applied by the SPL and in which order
+from running U-Boot.
 
+Example:
+```
+u-boot=> fdt addr $fdtcontroladdr && fdt list /
+Working FDT set to aee9aeb0
+/ {
+        u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 = <0x00000005>;
+        u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-som-overlay-rev100 = <0x00000004>;
+        u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast = <0x00000003>;
+        u-boot,spl-applied-dto-fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast = <0x00000002>;
+...
+```
 
-On 27/06/2024 13:35, Mikhail Kshevetskiy wrote:
-> Consider a case when we have several similar boards but leds & buttons
-> connected differently. Some of leds uses gpio, other pwm, third gpio over
-> spi bitbang. Also different board may have different gpio hogs. And last
-> but not least: board type stored inside a ubi volume.
-> 
-> We want a single u-boot image that will support all these boards (we are
-> not using SPL). So we need runtime dtb switching.
-> 
-> We can't use MULTI_DTB_FIT and DTB_RESELECT because they tries to switch
-> dtb too early when flash & ubi drivers are not loaded/activated.
-> 
-> The following code do runtime switching
-> 
-> 	ret = fdtdec_resetup(&rescan);
-> 	if (!ret && rescan){
-> 		dm_uninit();
-> 		dm_init_and_scan(false);
-> 	}
-> 
-> but it have several nasty issues
->   * additional code required to reinitialize console otherwise board will hang.
->   * MTD subsystem is not cleared, we need to remove mtd partition before
->     switching to new dtb
->   * spi-nand flash will be named "spi-nand1" instead of "spi-nand0", thus
->     flash becomes unusable
->   * some drivers are unable to deinitialize properly (ex: network driver will
->     not release mdio interface)
->   * some memory will leak, because most of drivers assumes that it will never
->     be unloaded
-> 
-> To avoid this nasty issues the following hack was implemented
->   * Full DM and console reinitialization was skipped
->   * Only missed device/subdevice added from new dtb during device scan.
->   * Some driver renames their devices. As result we can't use device names
->     to match old device node with a new one. The special field was added to
->     struct udevice for this purposes.
->   * Driver must be binded to the old device one more time to add missed
->     subdevices.
->   * uclass must be post_bind to the old device one more time to add missed
->     subdevices.
->   * We can't use old dtb anymore, so replace old device node with a new one
->     for existing devices.
-> 
-> The following restrictions are present:
->   * initial dtb MUST be a subset of a new one
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Suniel Mahesh <sunil@amarulasolutions.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+V2: - Expand the DT by one more byte to cater for trailing NUL byte
+    - Update comment related to the expansion of DT
+    - Flip the !ret conditional, which was incorrect and missed
+    - Expand prefix to u-boot,spl-applied-dto-
+    - Document the binding
+---
+ common/spl/spl_fit.c                | 29 +++++++++++++++++++++++++++--
+ doc/device-tree-bindings/config.txt | 11 +++++++++++
+ 2 files changed, 38 insertions(+), 2 deletions(-)
 
-Surely dtbo is a better application for your usecase? Switching out the 
-entire dtb and "rebooting" the entire driver model seems a bit overkill 
-to add some LEDs? If you can just pick a dtbo at some point, overlay it, 
-maybe re-generate livetree, and then just devices that are affected by 
-the dtbo?
-
-Maybe that's a bit of a naive idea... Perhaps it could be restricted to 
-some specific situations, like only support dtbo's that either add new 
-nodes or change just the status property of a node?
-
-Though this seems like more or less what you're doing in this patch.
->   * old devices will NOT be reinitialised
->   * no devices will be deleted or deactivated
->   * only new devices will be added
-> 
-> Typical usage:
-> 	ret = fdtdec_resetup(&rescan);
-> 	if (!ret && rescan)
-> 		dm_rescan();
-> 
-> The code was tested with: gpio, gpio_hog, leds, buttons.
-> 
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> ---
->   drivers/core/device.c | 31 +++++++++++++++++++++++++++++++
->   drivers/core/root.c   | 15 +++++++++++++++
->   dts/Kconfig           |  8 ++++++++
->   include/dm/device.h   |  3 +++
->   include/dm/root.h     | 23 +++++++++++++++++++++++
->   5 files changed, 80 insertions(+)
-> 
-> diff --git a/drivers/core/device.c b/drivers/core/device.c
-> index bf7f261cbce..4f575ca82e7 100644
-> --- a/drivers/core/device.c
-> +++ b/drivers/core/device.c
-> @@ -62,6 +62,34 @@ static int device_bind_common(struct udevice *parent, const struct driver *drv,
->   		return ret;
->   	}
->   
-> +#if CONFIG_IS_ENABLED(MULTI_DTB_FIT_RESCAN)
-> +	if (parent) {
-> +		struct list_head	*entry;
-> +		ofnode			dev_node;
-> +
-> +		list_for_each(entry, &parent->child_head) {
-> +			dev = list_entry(entry, struct udevice, sibling_node);
-> +			dev_node = dev_ofnode(dev);
-> +			if ((dev->driver == drv) && (dev->uclass == uc) &&
-> +			    (dev->driver_data == driver_data) &&
-> +			    (strcmp(dev->node_name, ofnode_get_name(node)) == 0))
-> +			{
-> +				ret = 0;
-> +				dev_set_ofnode(dev, node);
-> +				if (drv->bind)
-> +					ret = drv->bind(dev);
-> +
-> +				if (!ret && uc->uc_drv->post_bind)
-> +					ret = uc->uc_drv->post_bind(dev);
-> +
-> +				if (!ret && devp)
-> +					*devp = dev;
-> +				return ret;
-> +			}
-> +		}
-> +	}
-> +#endif
-> +
->   	dev = calloc(1, sizeof(struct udevice));
->   	if (!dev)
->   		return -ENOMEM;
-> @@ -75,6 +103,9 @@ static int device_bind_common(struct udevice *parent, const struct driver *drv,
->   	dev_set_plat(dev, plat);
->   	dev->driver_data = driver_data;
->   	dev->name = name;
-> +#if CONFIG_IS_ENABLED(MULTI_DTB_FIT_RESCAN)
-> +	dev->node_name = name;
-> +#endif
->   	dev_set_ofnode(dev, node);
->   	dev->parent = parent;
->   	dev->driver = drv;
-> diff --git a/drivers/core/root.c b/drivers/core/root.c
-> index d4ae652bcfb..4bf1ff80636 100644
-> --- a/drivers/core/root.c
-> +++ b/drivers/core/root.c
-> @@ -340,6 +340,21 @@ static int dm_scan(bool pre_reloc_only)
->   	return dm_probe_devices(gd->dm_root, pre_reloc_only);
->   }
->   
-> +#if CONFIG_IS_ENABLED(MULTI_DTB_FIT_RESCAN)
-> +int dm_rescan(void)
-> +{
-> +	int ret;
-> +
-> +	ret = dm_extended_scan(false);
-> +	if (ret) {
-> +		debug("dm_extended_scan() failed: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return dm_probe_devices(gd->dm_root, false);
-> +}
-> +#endif
-> +
->   int dm_init_and_scan(bool pre_reloc_only)
->   {
->   	int ret;
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 6883a000a05..ab486b21fe2 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -292,6 +292,14 @@ config DTB_RESELECT
->   	  config allows boards to implement a function at a later point
->   	  during boot to switch to the "correct" dtb.
->   
-> +config MULTI_DTB_FIT_RESCAN
-> +	bool "Support switching dtb without drivers unloading (experimental)"
-> +	depends on MULTI_DTB_FIT
-> +	help
-> +	  This configs adds possibility to switch from initial (minimal) dtb
-> +	  to a "correct" one without devices/drivers unloading (ex: board type
-> +	  required to switch dtb stored in ubi volume)
-> +
->   config MULTI_DTB_FIT
->   	bool "Support embedding several DTBs in a FIT image for u-boot"
->   	help
-> diff --git a/include/dm/device.h b/include/dm/device.h
-> index add67f9ec06..409b1c4861a 100644
-> --- a/include/dm/device.h
-> +++ b/include/dm/device.h
-> @@ -170,6 +170,9 @@ enum {
->   struct udevice {
->   	const struct driver *driver;
->   	const char *name;
-> +#if CONFIG_IS_ENABLED(MULTI_DTB_FIT_RESCAN)
-> +	const char *node_name;
-> +#endif
->   	void *plat_;
->   	void *parent_plat_;
->   	void *uclass_plat_;
-> diff --git a/include/dm/root.h b/include/dm/root.h
-> index b2f30a842f5..dcab28f6c47 100644
-> --- a/include/dm/root.h
-> +++ b/include/dm/root.h
-> @@ -155,6 +155,29 @@ int dm_init(bool of_live);
->    */
->   int dm_uninit(void);
->   
-> +#if CONFIG_IS_ENABLED(MULTI_DTB_FIT_RESCAN)
-> +/**
-> + * dm_rescan - Rescan ftd and add missed DM devices (experimental)
-> + *
-> + * This function can be used for switching from initial (minimal) dtb
-> + * to a "correct" one without devices/drivers unloading.
-> + *
-> + * Restrictions:
-> + *   - initial dtb MUST be a subset of a new one
-> + *   - old devices will NOT be reinitialised
-> + *   - no devices will be deleted or deactivated
-> + *   - only new devices will be added
-> + *
-> + * Typical usage:
-> + *	ret = fdtdec_resetup(&rescan);
-> + *	if (!ret && rescan)
-> + *		dm_rescan();
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int dm_rescan(void);
-> +#endif
-> +
->   #if CONFIG_IS_ENABLED(DM_DEVICE_REMOVE)
->   /**
->    * dm_remove_devices_flags - Call remove function of all drivers with
-
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 988125be008..0a6b5ea8212 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -363,6 +363,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ {
+ 	struct spl_image_info image_info;
+ 	int node, ret = 0, index = 0;
++	char dtoname[256];
+ 
+ 	/*
+ 	 * Use the address following the image as target address for the
+@@ -448,9 +449,13 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 			if (ret < 0)
+ 				break;
+ 
+-			/* Make room in FDT for changes from the overlay */
++			/*
++			 * Make room in FDT for changes from the overlay,
++			 * the overlay name and the trailing NUL byte in
++			 * that name.
++			 */
+ 			ret = fdt_increase_size(spl_image->fdt_addr,
+-						image_info.size);
++						image_info.size + strlen(str) + 1);
+ 			if (ret < 0)
+ 				break;
+ 
+@@ -464,6 +469,26 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 
+ 			debug("%s: DT overlay %s applied\n", __func__,
+ 			      fit_get_name(ctx->fit, node, NULL));
++
++			/*
++			 * Insert /u-boot,<dto-name> = <index> property into
++			 * the U-Boot control DT. This can be used by user
++			 * to inspect which DTOs got applied by the SPL from
++			 * a running U-Boot.
++			 */
++			snprintf(dtoname, sizeof(dtoname), "u-boot,spl-applied-dto-%s", str);
++			ret = fdt_setprop_u32(spl_image->fdt_addr, 0, dtoname,
++					      index);
++			if (ret) {
++				/*
++				 * The DTO itself was applied, do not treat the
++				 * insertion of /u-boot,<dto-name> as an error
++				 * so the system can possibly boot somehow.
++				 */
++				debug("%s: DT overlay %s name not inserted into / node (%d)\n",
++				      __func__,
++				      fit_get_name(ctx->fit, node, NULL), ret);
++			}
+ 		}
+ 		free(tmpbuffer);
+ 		if (ret)
+diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
+index f50c68bbdc3..7aa6d9a72c6 100644
+--- a/doc/device-tree-bindings/config.txt
++++ b/doc/device-tree-bindings/config.txt
+@@ -95,6 +95,17 @@ rootdisk-offset (int)
+ silent-console (int)
+ 	If present and non-zero, the console is silenced by default on boot.
+ 
++u-boot,spl-applied-dto-* (int)
++	Emitted by SPL into U-Boot control DT root node in case a DTO from
++	fitImage was applied on top of U-Boot control DT by the SPL fitImage
++	loader. The single integer cell indicates in which order was the DTO
++	applied by the SPL and matches the index of the DTO in the fitImage.
++	DTOs in fitImage may be skipped using board_spl_fit_append_fdt_skip(),
++	therefore the integers might not be monotonically incrementing, there
++	may be gaps. This property can be used to determine which DTOs were
++	applied by the SPL from running U-Boot by inspecting the U-Boot
++	control DT.
++
+ u-boot,spl-payload-offset (int)
+ 	If present (and SPL is controlled by the device-tree), this allows
+ 	to override the CONFIG_SYS_SPI_U_BOOT_OFFS setting using a value
 -- 
-// Caleb (they/them)
+2.43.0
+
