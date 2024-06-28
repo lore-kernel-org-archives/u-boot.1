@@ -4,63 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2334CC2BBCA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 05:53:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED07C3064D
+	for <u-boot@archiver.kernel.org>; Fri, 28 Jun 2024 06:22:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2490D880F8;
-	Fri, 28 Jun 2024 07:53:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6324888245;
+	Fri, 28 Jun 2024 08:22:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bh44rpHy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eJMfn6Jh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE6D388229; Fri, 28 Jun 2024 07:53:52 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 5BF0188581; Fri, 28 Jun 2024 08:22:50 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D111287FB5
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 07:53:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A021F881EA
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 08:22:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1fab50496f0so1304995ad.2
- for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 22:53:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6b5834b3a95so1331176d6.2
+ for <u-boot@lists.denx.de>; Thu, 27 Jun 2024 23:22:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719554028; x=1720158828; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719555766; x=1720160566; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L8OhW8WWwrKFGqKnDPuRof/I5IHbUr+oNEmEzUwC31U=;
- b=bh44rpHy6uARBUeuoEaIMyFua8LTkr1tRqmaupvg6aRNrJcpNsJp3IsJGRVF/pGbSQ
- UGM9UYLFLmZ/erf6HgEwyRKrinB3ZXuGg30luPZR8ZNCybUO6TY3H+Y5k6Bvq9PjqZtg
- /vV5OWBzzG9S9PJ45zzkWGWCOMUtEM/WuvG1tBxGpQyKGfd2cvwSnZSx7yfy0PJb1fVx
- QPIaqSq6mIc3S3LEeKhHoA89dv79bdNdlMOzgFyODRrgSvU1R/LitmJ+KNBSeRJlOjkw
- tJY0cRVbGj8aycLmO786P1MUKssUG59jC/3dyqNJitoY5hOxqiBfM4v08A+5psQj62UK
- N5YA==
+ bh=QFQEkSIKSHfn769qexWi7udCJoQYtrARn9zYLGpUT6Y=;
+ b=eJMfn6JhnTeb7p5sLU9ckyziHm8EekFIh4CS2dOwdGEhyta3D/2EJFwi0iFaPXbirY
+ 5fZ4YLZG4hbnmQc6mZg0XS6ZbtHzlosf3NyK+imHzqbyzWt8fbHQlXB+LPYfWRkeRFoh
+ cc8UEuicNm3OVbiuO9j3gjuzI3LXyU0cicfnI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719554028; x=1720158828;
+ d=1e100.net; s=20230601; t=1719555766; x=1720160566;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L8OhW8WWwrKFGqKnDPuRof/I5IHbUr+oNEmEzUwC31U=;
- b=w+/n+EzU4MBI6j7cOJykOxCfyYu0hzIB53WJcXVG/AFZlKbhAU7sKiQXtYI4NTfIr8
- LCPyF3Rk5WXPE/AptM7QkNs6gfK+w94OjXPriE5WYNVODO6VSTg015njbm7X9Nvbfi+H
- rtVE9C3CvH4X/n0Kh/N4oxAA7l5nzzE0oFg/9OCACk/qPxJxp5/GA1lrbwWbxrp4EbFR
- M7XFwe7Io5/6e5sDVTH7t8qRC334l4zA4HrurdsmHJujbaoo4R2js/LfrcNEVtq+mbk+
- HkLfeTwqwBUNBaRvMsi2BxtuaUDZ8a02VitfdLCadv4AileHTppBJw8fMZzuXjDijOeu
- Ltaw==
+ bh=QFQEkSIKSHfn769qexWi7udCJoQYtrARn9zYLGpUT6Y=;
+ b=KjC1eXQocIJZmjCgI8oiddj3lnIrdHDh4NmVmK55sgWHy0prM7TXhUy3Mivw/HsmN4
+ OdY2izbvnyhavGcbUbulQMLFY17f2YGOS1IenFpdzylMJ50zBFgLugADaxmcqum6i2z+
+ F3xFoyH64+DdT+SveMeJIudYLN1tIqpOKP5PkxCSxDNYT6N9K5NU7IN3U1CooS5LNlfv
+ dJX2BP2z23ZlN1j8dB+996gDHyL2d2y0Yjfm09QBp6gbxI+FUrv2AGbE4VXQkSBgkzjv
+ 3czES5l7X5wtxbsC5qHWe94lKW1tp8S3Y2NatXfgxTnS7y+YvvRspfp6JOfBxezFVIDM
+ EPDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbm12RBcOsiSju9RJxui6NPm8kGyIQNHIuOeiy0Ej7STw449cbjkfYZtwbRnxW25lTa4homM/N6JccQTBzpj12VyxVkA==
-X-Gm-Message-State: AOJu0Yxu5cosamBWnUd3f2exkE0GfwKjvATLr+Uu5b8JFZNIe655gpLF
- t+kjx27Y40FCW/quAnOrp6f8ThxWcKnNs9g7WofNX0qQ/Y2clmrgyOu3Odn59f1eN7mLjet5m3p
- JisEmUVxOXoUQffP4x704AEl+tZSgAaFtjejrQA==
-X-Google-Smtp-Source: AGHT+IHwSwAKPEitFO5iGIDj214vzwrsexCK9U8YaIdFLER1zSkr4+QjaE1xI+G+wCXD2qjM+Y6vxRFpSuuF3XoXUeE=
-X-Received: by 2002:a17:902:e9cd:b0:1fa:bcb:3db9 with SMTP id
- d9443c01a7336-1fa23f60fdfmr111544625ad.31.1719554028070; Thu, 27 Jun 2024
- 22:53:48 -0700 (PDT)
+ AJvYcCU3GFk7Yi0ATzvuv4uih9fz4D3z/K+5jH9z3ST4ocLUBSqVMxRuNh+ris5GYHSnbV0T47nTYQ8Cl7RKNuHZ7o+wB0Kp2A==
+X-Gm-Message-State: AOJu0Yy/idlVeXNLFcQnlPX8LODaIpmC/E4XzBUTB8xfozeOZx1Bluuq
+ KHpGzzcw015d+LGths+MUQGWPnZu/n+ArFFiTbQtdgswEEZiAi16hb+p21zp8PFFXlBYi/w0IYS
+ iCtcF3apQnN253azk6w3ZuIpCF9cDwJHiidOJ
+X-Google-Smtp-Source: AGHT+IGP7kBBEU6PxoOxfr7GrMfphwWUcXB9kcEJx2Ai0Z7BZUuAN9baN3wrFzgPbBPVdDsS4Fx+1Ewaw7ioMO+ex88=
+X-Received: by 2002:ad4:5c4d:0:b0:6b5:9d12:c9da with SMTP id
+ 6a1803df08f44-6b59d12cb75mr28102406d6.61.1719555766487; Thu, 27 Jun 2024
+ 23:22:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240625090806.1787287-2-conor.dooley@microchip.com>
  <20240625143421.GR38804@bill-the-cat>
@@ -69,13 +65,13 @@ References: <20240625090806.1787287-2-conor.dooley@microchip.com>
  <CAFLszTj3uSd8UOvmg5M2x1EOnidocRYxiBg0SeG8-eCfm1huRQ@mail.gmail.com>
  <20240627-prowess-train-e37fe71c1310@spud>
 In-Reply-To: <20240627-prowess-train-e37fe71c1310@spud>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Jun 2024 08:53:11 +0300
-Message-ID: <CAC_iWjKz18jONK-vVw1BR7xwJDqqD_rAF55yqdyfwN-gRqwMTg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 28 Jun 2024 07:22:35 +0100
+Message-ID: <CAFLszTjoKPT68X7kBHELgCAbgXe_X-5Zs4-UJUaCVxSXeM3Wow@mail.gmail.com>
 Subject: Re: [PATCH v1] board: mpfs_icicle: implement board_fdt_blob_setup()
 To: Conor Dooley <conor@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Conor Dooley <conor.dooley@microchip.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+Cc: Conor Dooley <conor.dooley@microchip.com>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
  Ivan Griffin <ivan.griffin@microchip.com>, 
  Padmarao Begari <padmarao.begari@microchip.com>,
  Cyril Jean <cyril.jean@microchip.com>
@@ -98,8 +94,7 @@ X-Virus-Status: Clean
 
 Hi Conor,
 
-
-On Thu, 27 Jun 2024 at 23:27, Conor Dooley <conor@kernel.org> wrote:
+On Thu, 27 Jun 2024 at 21:27, Conor Dooley <conor@kernel.org> wrote:
 >
 > On Thu, Jun 27, 2024 at 11:50:33AM +0100, Simon Glass wrote:
 > > On Thu, 27 Jun 2024 at 10:38, Conor Dooley <conor.dooley@microchip.com> wrote:
@@ -209,22 +204,10 @@ On Thu, 27 Jun 2024 at 23:27, Conor Dooley <conor@kernel.org> wrote:
 > I mean I could also just do it myself, I just wanted to know if it
 > existed, since that'd make investigating this pretty straightforward to
 > do.
-
-Someone is already working on it.
-https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/29253
-this will help!
-
 >
 > Either way, the firmware already is capable of doing this with a
 > devicetree blob, so I figure even if we manage to get bloblist stuff
 > going, there's little harm in supporting what's already there?
-
-There isn't, but OTOH the bloblist support is already in u-boot. I
-would prefer to try that out first. Up to you
-
-Cheers
-/Ilias
-
 >
 > > The confusing thing for me is that the 'firmware' is very
 > > constrained...but are you saying that U-Boot is not?
@@ -284,6 +267,10 @@ Cheers
 > > OK...so does this platform use SPL?
 >
 > No :)
->
-> Thanks,
-> Conor.
+
+OK, thanks for all the details. I suppose, to me, 128KB does not sound
+that constrained :-) But I can see that messing with a bloblist can
+add code. A static tool would help with that.
+
+Regards,
+Simon
