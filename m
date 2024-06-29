@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BED62C27C4F
-	for <u-boot@archiver.kernel.org>; Sat, 29 Jun 2024 06:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7B4C27C4F
+	for <u-boot@archiver.kernel.org>; Sat, 29 Jun 2024 06:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD515885F1;
-	Sat, 29 Jun 2024 08:56:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 162AA885FF;
+	Sat, 29 Jun 2024 08:56:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Qeh3Wv8K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ME3TuAyp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E87C885F6; Sat, 29 Jun 2024 08:56:14 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id F0C4D885FD; Sat, 29 Jun 2024 08:56:17 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05386885F1
- for <u-boot@lists.denx.de>; Sat, 29 Jun 2024 08:56:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E295F885F6
+ for <u-boot@lists.denx.de>; Sat, 29 Jun 2024 08:56:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6ad8243dba8so7769046d6.3
- for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 23:56:11 -0700 (PDT)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6ad8243dba8so7769206d6.3
+ for <u-boot@lists.denx.de>; Fri, 28 Jun 2024 23:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719644171; x=1720248971; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719644175; x=1720248975; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZmHxv+JMXmvde+9w/mOIkCjZ8aU+CBQUmY3AgjDLk60=;
- b=Qeh3Wv8KGFg8aSLBYGhk8UyLiumteCkjl5A1ReHhpI9Rg6K88m8sgFfJF3dag1KpBh
- ZTjKfKPFEIlKVBVL68SSTWpiT8tZdRwv/FkuI6aXMzFoHnfTCBmkePNyxkR7G5MIS31G
- 6P5uKX7encwxjHpLIcp50I8nkrS7Ot2ywDwx8=
+ bh=yVDgnPqLyB039p/27unyr6s8Xd7f/CqmtZT+tV5XV2c=;
+ b=ME3TuAypwjOHDZFHwNU4qSKKDQBWOXmYT1b63x//TJ85UXCntjbx2SZY/mrbAbqq8i
+ xuCjIXWjdamVFW6h0SqBSFJrZ2PzFLncMo6laciiATMrWKlSEl3OvlDAgVu/BIFLngBw
+ L+ULl2xwshSB6SGnZSQ9w0kPFmqGEeOpKQutw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719644171; x=1720248971;
+ d=1e100.net; s=20230601; t=1719644175; x=1720248975;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZmHxv+JMXmvde+9w/mOIkCjZ8aU+CBQUmY3AgjDLk60=;
- b=cZRWfxjTQRgrYyuu+ziXccVwDbkJHepnG6aKwtgjfoNPzxxbLlkAI4PQohdr73o0BT
- u4UdV3kr8WkXuZx6+feRrhlHAz+pjOJr7GqppoM7y8TZb4dYxsgWwtJyQESQi13QSbva
- 9xKukImPHIt1s5/VCUFiy0vZy3hD24uQdXehOkPYRvtmFSp95AjZGJ04kaCB8DdVIlNQ
- nmFArCco7M08O1jLT8/NgR4NWaLLLmqea7tfSdq7IdmyNU26AjwxhdboHQCaxEA6BEgp
- nqyZm5saSo3aSm6nOGODP9ipQLL54yYny9KiAL6MTmVPNxF6i/QjrUDlSvbhg7HjGjqW
- GUzg==
-X-Gm-Message-State: AOJu0YwOzWTWRi2ajpp+zEA3k6NXIzcHUrVGw9lw56X1gqy950X9w7ot
- 8FZDLJ1SVQrro7GRhQha+Ntdu7RWlIVh900BjJmmC0FekUtzwH0o4juPdS92BvugzANcW3AANKW
- /R3wC7xSo+vJjlETX7dXXK2LDy6lL96PKkGd6
-X-Google-Smtp-Source: AGHT+IE/qNksFE1Nz7nAGgV/+qQ8qz5o7j2S3mH0ITJNQSy6KeeqKRSpzIlw65Y3TGsIJknVTotIbczZX0LVTJqQDZY=
-X-Received: by 2002:ad4:5aa7:0:b0:6b5:9a8a:beb with SMTP id
- 6a1803df08f44-6b5b71aa126mr4547776d6.65.1719644170852; Fri, 28 Jun 2024
- 23:56:10 -0700 (PDT)
+ bh=yVDgnPqLyB039p/27unyr6s8Xd7f/CqmtZT+tV5XV2c=;
+ b=CfARRlUQ4Oy3w3jOQEjcRkETyfrctP5Bo0K1u+vJeir1umVB2AaAR0VmLTCiD/GfZq
+ Jb58ECw3qBNU8tSRJAKcfyPb1CHc9MryhNPUeWtATSiyCwH4T/HFbXDM2wPC6YqyPfTn
+ fV2mL+m48XhJxZeLjASFmYJF2ungr8Zg+ckLrhmeTaOV7JVAGzmK14Kd/ROdQTJvpnUm
+ KkOpXG4iqHFCTQeYSS5LyIaTjoDrTOsV/THZQ0q0frNjeaDJVZm6dOzCjZmuq9FJYglG
+ czdbkbPRYHa9Hclb9i/rAGYSITlirdO773dgzNMW41QAGoOMnHnvJQeoV/8eq+fbKrM/
+ gctg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVu6Z0dEqVGroxpE1I3XVNAjDIHLYYCWsjRZr0htS+8i3XGByDAPru0NvcqL325HBxJh+bJsksAswU3DRoGG067CSsI0w==
+X-Gm-Message-State: AOJu0YwK8wqVMkeJxnduuimnsvu19Y0pP/9GX9YfAd8kNmYjvPPMvnbc
+ OdlkWd/9BIfi8RK6nnkQ4qkeB61/yflSLQBhoXAdVUTdtx8AS3WGv/Dd8Nbq5JMV4DeGMq1HBVH
+ QdyqLic3q1t0UaIfs3L3Wj0FK+CvwhdvIZf5fc06Dk7tVfqM=
+X-Google-Smtp-Source: AGHT+IE6GSmf4q/UrwlDmDJpoNuCzLYwzvuJvsPYNvJ0OYv3Pee1HNL2LggiYlSqdIfCtP/lLzqYcnzcEDMprsH3eik=
+X-Received: by 2002:a05:6214:20a6:b0:6b4:fd24:95f9 with SMTP id
+ 6a1803df08f44-6b5b70d27f6mr4478716d6.38.1719644174851; Fri, 28 Jun 2024
+ 23:56:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240619123453.720600-1-sjg@chromium.org>
- <171945114145.3478677.13570700547612365560.b4-ty@konsulko.com>
-In-Reply-To: <171945114145.3478677.13570700547612365560.b4-ty@konsulko.com>
+References: <20240628083411.19843-1-Maxim.Moskalets@kaspersky.com>
+In-Reply-To: <20240628083411.19843-1-Maxim.Moskalets@kaspersky.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 29 Jun 2024 07:56:00 +0100
-Message-ID: <CAFLszTiaqv7CXZg639JybryyaUerjJX=vn+gdh2nCeEPB2PH6Q@mail.gmail.com>
-Subject: Re: [PATCH 1/3] pxe: Add debugging for booting
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Paul Menzel <paulepanter@mailbox.org>, 
- Dan Carpenter <dan.carpenter@linaro.org>, Marek Vasut <marex@denx.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
+Date: Sat, 29 Jun 2024 07:56:04 +0100
+Message-ID: <CAFLszTgWusENqmRi7ehDAqK+dJsCV_Y-cAAprQ9vbragBwdFWg@mail.gmail.com>
+Subject: Re: [PATCH] cmd: add resize for FDT in bootelf
+To: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, 
+ Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,21 +84,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Maxim,
 
-On Thu, 27 Jun 2024 at 02:19, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 28 Jun 2024 at 09:34, Maxim Moskalets <maximmosk4@gmail.com> wrote:
 >
-> On Wed, 19 Jun 2024 06:34:50 -0600, Simon Glass wrote:
+> In some FDTs, there is not enough free memory to add nodes, so this
+> operation fails.
 >
-> > Show which boot protocol is being used.
-> >
-> >
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+> ---
+>  cmd/elf.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> Applied to u-boot/next, thanks!
+> diff --git a/cmd/elf.c b/cmd/elf.c
+> index 32b7462f92..673c6c3051 100644
+> --- a/cmd/elf.c
+> +++ b/cmd/elf.c
+> @@ -68,6 +68,8 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>                 log_debug("Setting up FDT at 0x%08lx ...\n", fdt_addr);
+>                 flush();
+>
+> +               fdt_set_totalsize((void *)fdt_addr,
+> +                               fdt_totalsize(fdt_addr) + CONFIG_SYS_FDT_PAD);
+>                 if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
+>                         return 1;
+>         }
+> --
+> 2.39.2
+>
 
-I wonder if this could go to -master since it is an important bugfix?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=411595&state=*
+Would you mind adding some docs for this comment in doc/usage/cmd/elf.rst ?
+
+You can also use the 'fdt addr <addr> <size>' to expand the FDT.
 
 Regards,
 Simon
