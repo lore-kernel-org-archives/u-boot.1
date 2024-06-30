@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5125BC27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 05:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C04A0C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 05:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22A8D8862D;
+	by phobos.denx.de (Postfix) with ESMTP id 7057988640;
 	Sun, 30 Jun 2024 07:24:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1719725048;
-	bh=+nrgutLwKq6xnfLeq+F1ekQfrU4RHHu5sH9BwHrEo0g=;
+	bh=n55W+vUzKBsYFKKoQp8MWP1+mJBjepy6w4ZSAu0kIg8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=p/626c9A0H4P9O4JG5t5S1t+Gax24kfiayEt//WY3NS9avtnDLhV21K04HAyd8S7s
-	 HjtBkyIMus54+ysQdUgCVjf7gWRAxMwgvfr4nKxezQXEGMKGVfxkLgTlboPTEp/Fds
-	 ZC5alcMchW3zsxGufmcxXhFpt2NwkQ0w0nnzKRt+Mi3VizM/MxXvZEG2mUyR2l9/Fy
-	 21UThtb7PJxoHp6Og/SmRSLjYT9iD8bhXsURzAksgO8rQIhZjWossear/jPWYL02QA
-	 SjWRaYZ7Xdf89ZOkNmNthTzrMhDG2YW5jDXdTY0K0XJuY5J1ZEbeIdxMBd9i4S9Lzx
-	 PZObDwCTQ702Q==
+	b=Fhotvh/S1zEwFIxLYtb3jgNxp1icOlHIv44TUQ/WOA1pb1kbzhCT6QfHrU4aZFvwK
+	 TyRps9+3hIB49bevrjAPrLKWEIZArNljKuHG9r7UWojlAzs9odzNqItXjtNsFJ13mN
+	 SZP9F7pBpWxBC2ezgSoC+l0HapYXMXE7Hi4/2RHGV9fCQZjN5OmQEnO/qmaVKmFwn0
+	 +P7rjt3prf5ej7U3jb9vlZnMUcHQz6HrpRLI69mj0ywPK30CLdGhU+6M6tzeKNQ4mp
+	 iMN7+DclD4kMk68SMLI7MuRBFkFkEoRvnGPnWXzhsi7ZRRNTRVH3ZYKwAgUR+q+TDz
+	 5AnO93ZkViuEA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7562B88621;
- Sun, 30 Jun 2024 07:24:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E7FDE88633;
+ Sun, 30 Jun 2024 07:24:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1719725045;
- bh=+nrgutLwKq6xnfLeq+F1ekQfrU4RHHu5sH9BwHrEo0g=;
+ s=phobos-20191101; t=1719725046;
+ bh=n55W+vUzKBsYFKKoQp8MWP1+mJBjepy6w4ZSAu0kIg8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=JU8H2OBRR6HPEmNxz1dk+amOcVDPcFERBjaJXlpahEtQOPfDdmz8r+8wGmW9gRUtn
- CqCYOceRr/VB9JzBYLwjNNwZ8MxmTLuj/x8W/edmm4z4fuJohZup0UzNbPWfvG9kEV
- sGMf9hv5SD/kcKxhNVtIV0B5KYkRtPWbWtiXqZ8GDVCqk3/f5ES1/aV1mgQLaTZglA
- ck8+HTiNbhBwkA/6LctOMP3nAktBrOOzsj00cbJyEwdlp/HC3WpCGYeWcPZXIvxNx4
- /Hlgm+idaMsWOEcVoWtJQzNLXrB/QCHfhU3zEZb1nDdVTUPQbjPlrzR9ox2WPoPbaB
- 3q9gIVKhWMKVw==
-Message-ID: <197c6afd-b917-4e8e-ac5e-07f4fcf38117@denx.de>
-Date: Sun, 30 Jun 2024 04:49:10 +0200
+ b=JFyZKrriwLFaUUd9+/EcMyfWcOJ+R3G46UFuUhLyr/OQ7Fogs5tmXLoi7RUPYnMaB
+ B+zohKXO/cLYIU/MErYI+EbHY3ib7/9QBKTfuFg4y1MfcHNX+q6HYN9Fs43dQgxE8F
+ b0KGkESqvAszZ+fBMHwNSBIhKmdGe8YSeeeb2g3iFurOOVp1J3TTFQQB3aMr/6O61p
+ j9/v9mwfHN/Y9KGDh5fc/XeRA3xt8qXkeO2zIl+kQHlyDU5DMi7DIRgWEyh1YjS/zj
+ yQnS8QMqGCst0mJzgqRdM7k+iSGap7kTcRow1xKHoFZqHoz46Zd9PA+K4PkjWmZ+We
+ IKD903C3hI2og==
+Message-ID: <36290216-33dd-45a0-a44d-af7d3273fb0a@denx.de>
+Date: Sun, 30 Jun 2024 06:53:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] usb: dwc2: Extract USB DWC2 register definitions
-To: Kongyang Liu <seashell11234455@gmail.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Teik Heng Chong <teik.heng.chong@intel.com>,
- Tom Rini <trini@konsulko.com>
-References: <20240522142311.17351-1-seashell11234455@gmail.com>
- <20240522142311.17351-2-seashell11234455@gmail.com>
- <292e66c6-5665-4d0e-8510-5789a7853786@denx.de>
- <CAOKwTdqeppqngwX2PFx7vLtnbv=hbfkL3cmW3nwRNa9psnWtsA@mail.gmail.com>
+Subject: Re: [PATCH v2] ARM: imx: verdin-imx8mm: Set CAN oscillator frequency
+ based on model
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Stefano Babic <sbabic@denx.de>
+References: <20240522002122.50796-1-marex@denx.de>
+ <20240522063948.GA5278@francesco-nb>
+ <e9a57cfc-637a-4c26-84ac-6f6530ca62ce@denx.de>
+ <20240523150359.GA18323@francesco-nb>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOKwTdqeppqngwX2PFx7vLtnbv=hbfkL3cmW3nwRNa9psnWtsA@mail.gmail.com>
+In-Reply-To: <20240523150359.GA18323@francesco-nb>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,70 +76,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/27/24 1:33 PM, Kongyang Liu wrote:
-> Marek Vasut <marex@denx.de> 于2024年6月23日周日 07:49写道：
+On 5/23/24 5:03 PM, Francesco Dolcini wrote:
+> On Wed, May 22, 2024 at 03:23:51PM +0200, Marek Vasut wrote:
+>> On 5/22/24 8:39 AM, Francesco Dolcini wrote:
+>>>> diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+>>>> index 55c02653da6..ef632d95f0a 100644
+>>>> --- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+>>>> +++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+>>>> @@ -125,6 +125,36 @@ int board_phys_sdram_size(phys_size_t *size)
+>>>>    #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
+>>>>    int ft_board_setup(void *blob, struct bd_info *bd)
+>>>>    {
+>>>> +	const char *canoscpath = "/oscillator";
+>>>> +	int freq = 40000000;	/* 40 MHz is used on most variants */
+>>>> +	int canoscoff, ret;
+>>>> +
+>>>> +	canoscoff = fdt_path_offset(blob, canoscpath);
+>>>> +	if (canoscoff < 0)	/* No CAN oscillator found. */
+>>>> +		goto exit;
+>>>> +
+>>>> +	/*
+>>>> +	 * The actual "prodid" (PID4 in Toradex naming) that have the CAN
+>>>> +	 * functionality are 0055 and 0059. Special case 20 MHz variant
+>>>> +	 * here:
+>>>> +	 * - 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
+>>>> +	 * - 0059, V1.1A and V1.1B, use a 20MHz oscillator
+>>>> +	 */
+>>>
+>>> Any reason why you ignored my suggestion here? The variants you list
+>>> here are the only one with a 20MHz oscillator, and this is correct.
+>>>
+>>> What is not correct is that 0055/0059 are the only variant with CAN
+>>> functionality. We have other "prodid" with CAN functionality.
+>>>
+>>> With that said, the code is correct, thanks. I appreciate you taking care
+>>> of this.
 >>
->> On 5/22/24 4:22 PM, Kongyang Liu wrote:
+>> So ... what should I change for V3 ?
 >>
->> Hi,
->>
->> sorry for the late reply.
->>
->>> diff --git a/drivers/usb/common/dwc2_core.c b/drivers/usb/common/dwc2_core.c
->>> new file mode 100644
->>> index 0000000000..2fa11fd59d
->>> --- /dev/null
->>> +++ b/drivers/usb/common/dwc2_core.c
->>> @@ -0,0 +1,53 @@
->>> +// SPDX-License-Identifier: GPL-2.0+
->>> +/*
->>> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
->>> + */
->>> +
->>> +#include <linux/bitfield.h>
->>> +#include <linux/errno.h>
->>> +#include <linux/io.h>
->>> +#include <wait_bit.h>
->>> +
->>> +#include "dwc2_core.h"
->>> +
->>> +void dwc2_flush_tx_fifo(struct dwc2_core_regs *regs, const int num)
->>> +{
->>> +     int ret;
->>> +
->>> +     log_debug("Flush Tx FIFO %d\n", num);
->>> +
->>> +     /* Wait for AHB master IDLE state */
->>> +     ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE, true, 1000, false);
->>
->> Just a quick design point, would it be possible to split this patch into
->> two, one which adds this .global_regs and changes the code accordingly,
->> and another which does the code refactoring/move ? That would make it
->> easier to review.
+>> Maybe just create me a diff I can squash into the patch before resend ? (I
+>> think I am a bit confused, I thought I addressed all the V1 feedback)
 > 
-> This patch only extracts the common parts of the host mode and gadget
-> mode, without any code refactoring. Could you please describe more clearly
-> how the patch should be split?
+> Sorry for the confusion, here the diff.
+> With that please add
 
-Sure, sorry for being unclear. There seems to be multiple types of 
-changes that are combined in this patch:
-
-1) Structure reorganization:
--	writel(DIEPMSK_INIT, &reg->diepmsk);
-+	writel(DIEPMSK_INIT, &reg->device_regs.diepmsk);
-
-2) Structure rename:
--	reg = (struct dwc2_usbotg_reg *)pdata->regs_otg;
-+	reg = (struct dwc2_core_regs *)pdata->regs_otg;
-
-3) Conversion from (1 << n) to BIT(n)
-4) Macro rename:
-5) Moving code around between files:
-#define DWC2_HWCFG4_IDDIG_FILT_EN			(1 << 20)
-#define GHWCFG4_IDDIG_FILT_EN			BIT(20)
-
-It would be good to have those as separate patches (one type of clean up 
-change per patch), otherwise it is really hard to review such a combined 
-patch.
-
-Thanks !
+Thank you. I missed this mail and now I found it. Fixed in V3.
