@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CE9C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 14:15:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABFB5C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 14:20:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DECC88629;
-	Sun, 30 Jun 2024 16:15:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5A4288629;
+	Sun, 30 Jun 2024 16:19:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ETqQRSC7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X1oOaUIB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0260388629; Sun, 30 Jun 2024 16:15:53 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 996F088630; Sun, 30 Jun 2024 16:19:58 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08ACE8824C
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 16:15:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5BDA882B8
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 16:19:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-52ce01403f6so2423869e87.0
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 07:15:50 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-52cdc4d221eso2269354e87.3
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 07:19:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719756950; x=1720361750; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1719757196; x=1720361996; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sqzobgnamGORRyZZUH0piao0uwcPtjsosSjtUKgJ8s8=;
- b=ETqQRSC734ytkXNpFvK5zX8MJPCReW0y1zKkghk1J8reZVdUXfOmo6RMYhhHu2g5dm
- 6nXR3rv19h5WWOclK336Hg/SF+YRfxwOmHw8WKl4gdn6aJxoByYojZEw+ACSb8kZMNVE
- 2Ic+W9LVCUCVffy01K1uJ75C5uFGL2wljOeCTvN91gAfI4Q+l3Jo4HUFj0df6YvUPpju
- D+CTA+PGOssuVeKA+KCreIl/e3qWsUKgjCRyUogB3AEodT2pV6bI+YR7nIvqz0gy8+yO
- H8XWAm39SqZCYfKHiY5YL0Z/0jqTS7bgT/1zCVzcZ1Y5riSCdWGE7BdXrfDxbr6402Qh
- qdTA==
+ bh=EGLYILj6bAxm+ybso3aEHgB6y8skEMqQSEOAfMaT8Vk=;
+ b=X1oOaUIB4NnPxsqZeyUYj1/nfQ0O8arMPuVf0e+mM/V+ZmtpPrsnzSpDAvdtM8wg5I
+ +Ja89GMqTSFSpUEWDyLkCknHBXEQGVkQ1zIihMc03XgQfRj1FGN9VgqE6eEYIe+q16hA
+ 3keFK0Z8ZQ5Dp7wOx1L/zhN/G7GitCNwLM3VwWdqoe5hSzYf3YHUa63mg8P2RI0pM8u1
+ BBV9c6Mj6nT2+dvWtQkckOlGRBHv+LgY+qX6L3e+bi24t5E2BdXYUuqP3Ngqi7BKLhGZ
+ i7CUdt4VvL2MbcCD8qqDDsDGrDbPKUzDTKIMwiWtQ40b7xZ+2TTk09UMA4CpbeCDhL5l
+ 1zuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719756950; x=1720361750;
+ d=1e100.net; s=20230601; t=1719757196; x=1720361996;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sqzobgnamGORRyZZUH0piao0uwcPtjsosSjtUKgJ8s8=;
- b=RMjdV3P9ysmvAEtcrYgSlGjktB9Y//yeTbnT8JDyDMgZ9yJEPB+ogILsYgNQN4QjnE
- yrwUJHG3RklWvlksFwQVQrkENCUklKrQIjapOQomdIvdp8YCNP20it9/I2wVVqjsBLFB
- WbdaBez4X8RINN5nnd0dwUMMHIoJmJaT+smQeXk3bbUxezI65+fUm/zkYILRpcnCZEus
- 4OzgfEFz0xvcUE75qvwwk3ZxiuKZv78BEtHl4ywlwh/RicKEqY8uQL/IqSm1Bk0HH2rP
- Zqg8RUD03Y+dtb7ilVk5cp4KBDwjAiV1BwesMTgCZMFREdMdK1jEDCWJ0MDOzABm2//m
- cKZw==
+ bh=EGLYILj6bAxm+ybso3aEHgB6y8skEMqQSEOAfMaT8Vk=;
+ b=LdA3Zz4nGw8Iq9DWjHnYym+Y35xqBYNQ5sheG5MgQAkxH86vwMh3QR2/BuithMd2Hf
+ 2gvTK8Tq4JldV9Or2SdnFHXx2kiDUwWxbKOZvstw207NF2nHn7NQukaIL588Q8i9fkIC
+ ZAAD1gXjIUicU6ibjJYb9gaCvFbucBoM/5uRNKuokwAGQr92dnwo+1/8a7kmA93G16jH
+ CHJn1mRSwT/7FpoR60TfXdZ1AMDcaYPeAteBpjWrBaH7WAFL2UbB8n9Xk9oBhowSxugb
+ UmuLcbq8dXkTfZQAD5kBDRtix19M3ILpOpy8RRNgJxNH+kH6YEoNaZRlcTSLGsZjVetf
+ 6CFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHimbnuZxkEhzHTsyMCNG912rhaTk1HeJgz7oo+eIUHK+nGL05wJ/kqDIGXoYAT4HWjpqG3FtGBOm754RdKjYki51anQ==
-X-Gm-Message-State: AOJu0Yz1j72ZuJ5UF2ui2/OmJGrskzLKO7OcbGa76HWd103530ZSJWHm
- V1LimBeRT0/qHCin/4YOWpqwUHflOKu9g3hAyeFau/mvJeIl1+SXSCsOZg==
-X-Google-Smtp-Source: AGHT+IFiRh+d/mnc0c0i8nyDfTjAPtobnrYdN5/8DSYVv7+R8MIpKnNa5Ht4hbCtABFeNcKOOkWCUw==
-X-Received: by 2002:a05:6512:1d2:b0:52c:d9c6:f934 with SMTP id
- 2adb3069b0e04-52e82671ea0mr1795597e87.18.1719756950009; 
- Sun, 30 Jun 2024 07:15:50 -0700 (PDT)
+ AJvYcCWC5NFbnvWygJod0KFfLoKEdqqEvEc19upOKEiXpuK0OMbxSlAUzu8EU+T/cVrlKLyIlwFvMuVZtdo7FLe5qlf1P2gfQw==
+X-Gm-Message-State: AOJu0YwA4nBBxV4dKrbnRarxqzc5hRBy70SRLY+AJBxBZBhfpNYupPqO
+ tJdpLuXeaWPeyPMhMp5w1zMNFks8AyWTqV6nWA6qyJ35aJamAEVI
+X-Google-Smtp-Source: AGHT+IEBtQG2F/Bl2VjZM41V1UOlmqfYPy3IyhxwGgEcNHHpJs7zxl1mPyjinNS8w+HGDTVUw3uukA==
+X-Received: by 2002:a05:6512:39d0:b0:52e:6d6e:5770 with SMTP id
+ 2adb3069b0e04-52e82646839mr2240964e87.14.1719757195619; 
+ Sun, 30 Jun 2024 07:19:55 -0700 (PDT)
 Received: from localhost.localdomain (109-252-15-116.nat.spd-mgts.ru.
  [109.252.15.116]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52e7ab3b2e4sm963434e87.272.2024.06.30.07.15.48
+ 2adb3069b0e04-52e7ab2ea1fsm978657e87.188.2024.06.30.07.19.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Jun 2024 07:15:49 -0700 (PDT)
+ Sun, 30 Jun 2024 07:19:55 -0700 (PDT)
 From: Maxim Moskalets <maximmosk4@gmail.com>
 X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: trini@konsulko.com,
-	u-boot@lists.denx.de,
-	sjg@chromium.org
+To: trini@konsulko.com, u-boot@lists.denx.de, sjg@chromium.org,
+ xypron.glpk@gmx.de
 Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
  Maxim Moskalets <maximmosk4@gmail.com>
-Subject: [PATCH v2] doc: add bootelf command documentation
-Date: Sun, 30 Jun 2024 17:15:45 +0300
-Message-Id: <20240630141545.215907-1-Maxim.Moskalets@kaspersky.com>
+Subject: [PATCH v3] doc: add bootelf command documentation
+Date: Sun, 30 Jun 2024 17:19:52 +0300
+Message-Id: <20240630141952.216250-1-Maxim.Moskalets@kaspersky.com>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -96,19 +95,21 @@ X-Virus-Status: Clean
 
 Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 ---
+v3:
+	Separate -p -s into different lines.
 v2:
 	Add Configuration section.
 ---
- doc/usage/cmd/bootelf.rst | 58 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
+ doc/usage/cmd/bootelf.rst | 61 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 61 insertions(+)
  create mode 100644 doc/usage/cmd/bootelf.rst
 
 diff --git a/doc/usage/cmd/bootelf.rst b/doc/usage/cmd/bootelf.rst
 new file mode 100644
-index 0000000000..748c3e2e4b
+index 0000000000..8bae31ef1f
 --- /dev/null
 +++ b/doc/usage/cmd/bootelf.rst
-@@ -0,0 +1,58 @@
+@@ -0,0 +1,61 @@
 +.. SPDX-License-Identifier: GPL-2.0+
 +.. Copyright 2024, Maxim Moskalets <maximmosk4@gmail.com>
 +
@@ -156,8 +157,11 @@ index 0000000000..748c3e2e4b
 +
 +Flags:
 +
-+-p|-s
-+    Load ELF image via program headers (-p) or via section headers (-s).
++-p
++    Load ELF image via program headers.
++
++-s
++    Load ELF image via section headers.
 +
 +-d
 +    Setup FDT by address.
