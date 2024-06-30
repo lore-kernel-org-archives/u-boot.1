@@ -4,55 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FCF2C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 08:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501FBC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 10:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F45B88618;
-	Sun, 30 Jun 2024 10:47:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
+	by phobos.denx.de (Postfix) with ESMTP id 7E26088621;
+	Sun, 30 Jun 2024 12:37:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D6818861D; Sun, 30 Jun 2024 10:47:10 +0200 (CEST)
-Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF18A882B8
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 10:47:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
-Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4WBjTl0kKqz9tdJ;
- Sun, 30 Jun 2024 10:47:07 +0200 (CEST)
-Received: from pegase1.c-s.fr ([192.168.12.234])
- by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YsnlKqDRAOL9; Sun, 30 Jun 2024 10:47:06 +0200 (CEST)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4WBjTk6ZzLz9tZl;
- Sun, 30 Jun 2024 10:47:06 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id D961D8B768;
- Sun, 30 Jun 2024 10:47:06 +0200 (CEST)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id X18p2if3QsCQ; Sun, 30 Jun 2024 10:47:06 +0200 (CEST)
-Received: from [192.168.232.162] (PO26725.IDSI0.si.c-s.fr [192.168.232.162])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 984F18B763;
- Sun, 30 Jun 2024 10:47:06 +0200 (CEST)
-Message-ID: <d53c76b8-2962-4b8e-b2d5-b969a0cf08cf@csgroup.eu>
-Date: Sun, 30 Jun 2024 10:47:06 +0200
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ShqErZwn";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B69D388624; Sun, 30 Jun 2024 12:37:10 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C749B8861D
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 12:37:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-52ce9ba0cedso3360219e87.2
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 03:37:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1719743828; x=1720348628; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=suxOGmQSW8H/Ky2b74QlBndtQF+aluUMs/xAIcOUoxY=;
+ b=ShqErZwn6CB35MHtDJnUM2dkl5Iq6c0mIrcm68dsf85HgiR7/0LatoIZM2psdZ+YcJ
+ vxxDfbXPJeklWgEaSmzoAeQYP7CceyddDU5c32SYTjEyfBsLuho47SvZU2S0WwaJOece
+ PByxBogI9/7BTpFaC7Elyh500/B3EabuF4ScI+ZY9zIwaVQKJHDiX2QQilwvFLPTWqrT
+ OpagBzU2uV4RwrizvrbUdq84+NR/8gVqWbzgUt4jixmEhI0U09uouhluQ3qaq5+wEIvN
+ BwwUW/eF8FHEvslvSb30pf5IfTwxFhSbDujuEvurOdgcYkQTEzWc5R7E7QgJKMd/Lrea
+ 0+0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719743828; x=1720348628;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=suxOGmQSW8H/Ky2b74QlBndtQF+aluUMs/xAIcOUoxY=;
+ b=kF8izGAA/1Q9kpFAHHaE6w6e0KrAbTnTGYx08ZqMlgoOEAysg5ECNW2rVGchfbU8BD
+ oBp+24tHbh6Bb021MqxDcbTwncH7tkCdLTTwUUAWbTWQ9fXJLkbgbgbHm1FhHBNYvE22
+ e2HI7p8v7CGn0GOO/uljk9y0dlLi2TH/w+lZRaRoYdjcroovqif5goG8l+4hYqibPjW2
+ 8dbfEl6A7Yb4/J09QGPwFe0X4w8Cf4oClUxsZ19OUR2JDleS2OTkrqJWnN/Q19hFAABd
+ iadM/YgMFqlpu4lXwV3+9xhE1+kC/ymrBADVOzAzxIuEfdnM4ekLPl5WjU/coz8lXdJk
+ tDcA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWPtdVEdCG7u9FpvV8biZvsAj2ZnWgtMTSYKrzSqaaCCb3NINgQ5TK5TUFnT52tCbDF4pK+UVa0+BVWnydlTKGW+Eycug==
+X-Gm-Message-State: AOJu0YxCyN7U/dojgEgc4Kq06g0T6O8Sw7G/4oTUmfjXVaEDcdyHOnv9
+ xf+J45jUmuCFX9DPsf3kHtoB4HRkeofH1eguDjmSjfJvRhEwqqI+
+X-Google-Smtp-Source: AGHT+IHG5kGZdIeMw/mqH7aS6aqExnnLb41mmDfCmg8b+cgaOyflSMN77XDjW0hQ1QWpWtvDdiW1Fw==
+X-Received: by 2002:a05:6512:32ba:b0:52d:215c:4111 with SMTP id
+ 2adb3069b0e04-52e826679b8mr2080407e87.24.1719743827780; 
+ Sun, 30 Jun 2024 03:37:07 -0700 (PDT)
+Received: from localhost.localdomain (109-252-15-116.nat.spd-mgts.ru.
+ [109.252.15.116]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52e7ab0bb67sm894587e87.40.2024.06.30.03.37.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Jun 2024 03:37:07 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: trini@konsulko.com,
+	u-boot@lists.denx.de,
+	sjg@chromium.org
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>
+Subject: [PATCH] doc: add bootelf command documentation
+Date: Sun, 30 Jun 2024 13:37:03 +0300
+Message-Id: <20240630103703.49318-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] zlib: Fix big performance regression
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
- <20240627193455.GE38804@bill-the-cat> <20240627194006.GG38804@bill-the-cat>
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-In-Reply-To: <20240627194006.GG38804@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,68 +94,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+---
+ doc/usage/cmd/bootelf.rst | 52 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 52 insertions(+)
+ create mode 100644 doc/usage/cmd/bootelf.rst
 
+diff --git a/doc/usage/cmd/bootelf.rst b/doc/usage/cmd/bootelf.rst
+new file mode 100644
+index 0000000000..5472a90fe2
+--- /dev/null
++++ b/doc/usage/cmd/bootelf.rst
+@@ -0,0 +1,52 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. Copyright 2024, Maxim Moskalets <maximmosk4@gmail.com>
++
++.. index::
++   single: bootelf (command)
++
++bootelf command
++===============
++
++Synopsis
++--------
++
++::
++
++    bootelf [-p|-s] [-d <fdt_addr>] [<image_addr> [<arg>]...]
++
++Description
++-----------
++
++The *bootelf* command is used to launch a ELF binary at *image_addr*. If
++*image_addr* is not specified, the bootelf command will try to find image in
++*image_load_addr* variable (*CONFIG\_SYS\_LOAD\_ADDR* by default).
++
++Args after *image_addr* will be passed to application in common *argc*, *argv*
++format.
++
++A command sequence to run a ELF image using FDT might look like
++
++::
++
++    load mmc 0:1 ${loadaddr} /kernel.elf
++    load mmc 0:1 ${fdt_addr_r} /soc-board.dtb
++    bootelf -d ${fdt_addr_r} ${loadaddr} ${loadaddr}
++
++image_addr
++    Address of the ELF binary.
++
++fdt_addr
++    Address of the device-tree. This argument in only needed if bootable
++    application uses FDT that requires additional setup (like /memory node).
++
++arg
++    Any text arguments for bootable application. This is usually the address
++    of the device-tree.
++
++Flags:
++
++-p|-s
++    Load ELF image via program headers (-p) or via section headers (-s).
++
++-d
++    Setup FDT by address. Available only if CONFIG_CMD_ELF_FDT_SETUP is enabled.
+-- 
+2.39.2
 
-Le 27/06/2024 à 21:40, Tom Rini a écrit :
-> On Thu, Jun 27, 2024 at 01:34:55PM -0600, Tom Rini wrote:
->> On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
->>
->>> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
->>> brings a big performance regression in inflate_fast(), which leads
->>> to watchdog timer reset on powerpc 8xx.
->>>
->>> It looks like that commit does more than what it describe, it
->>> especially removed an important optimisation that was doing copies
->>> using halfwords instead of bytes. That unexpected change multiplied
->>> by almost 4 the time spent in inflate_fast() and increased by 40%
->>> the overall time needed to uncompress linux kernel image.
->>>
->>> So partially revert that commit but keep post incrementation as it
->>> is the initial purpose of said commit.
->>>
->>> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
->>> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
->>> ---
->>>   lib/zlib/inffast.c | 51 ++++++++++++++++++++++++++++++++++++----------
->>>   1 file changed, 40 insertions(+), 11 deletions(-)
->>
->> Both this, and my mostly revert lead to CI failures around compression
->> tests:
->> https://source.denx.de/u-boot/u-boot/-/jobs/859329
-> 
-> A full revert however, is fine.
-> 
-
-Is it that ? :
-
-FAILED 
-test/py/tests/test_ut.py::test_ut[ut_compression_compression_test_gzip]
-
-It seems like when the optimisation was added by commit cd514aeb996e 
-("zlib: Optimize decompression"), only the pre-increment implementation 
-was available.
-
-When POSTINC was added by commit e89516f031db ("zlib: split up to match 
-original source tree"), I guess it was not verified because POSTINC is 
-#undef by zlib.h.
-
-With the following change I don't get the FAILED 
-ut_compression_compression_test_gzip CI anymore 
-(https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/jobs/859937)
-
-diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
-index c271d85ea1..5dc0574202 100644
---- a/lib/zlib/inffast.c
-+++ b/lib/zlib/inffast.c
-@@ -257,7 +257,7 @@ void inflate_fast(z_streamp strm, unsigned start)
-                         sfrom = (unsigned short *)(from - OFF);
-                         loops = len >> 1;
-                         do
--                           PUP(sout) = get_unaligned(++sfrom);
-+                           PUP(sout) = get_unaligned(sfrom++);
-                         while (--loops);
-                         out = (unsigned char *)sout + OFF;
-                         from = (unsigned char *)sfrom + OFF;
-
-
-Christophe
