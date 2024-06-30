@@ -4,59 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7796EC27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 18:49:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A77C27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 21:26:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A66E08845A;
-	Sun, 30 Jun 2024 20:49:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
+	by phobos.denx.de (Postfix) with ESMTP id 68E3A88630;
+	Sun, 30 Jun 2024 23:26:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FE4488629; Sun, 30 Jun 2024 20:49:13 +0200 (CEST)
-Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00F7488208
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 20:49:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=csgroup.eu
+ id 121FA8863B; Sun, 30 Jun 2024 23:26:04 +0200 (CEST)
+Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 08F078824C
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 23:26:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
-Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4WByrP3sJsz9tdf;
- Sun, 30 Jun 2024 20:49:09 +0200 (CEST)
-Received: from pegase1.c-s.fr ([192.168.12.234])
- by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wOfMNHbUqhtP; Sun, 30 Jun 2024 20:49:09 +0200 (CEST)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4WByrP2l29z9tdJ;
- Sun, 30 Jun 2024 20:49:09 +0200 (CEST)
+ dmarc=none (p=none dis=none) header.from=nod.at
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 51A558B768;
- Sun, 30 Jun 2024 20:49:09 +0200 (CEST)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id GJM6eyoEs4vl; Sun, 30 Jun 2024 20:49:09 +0200 (CEST)
-Received: from [192.168.232.162] (PO26725.IDSI0.si.c-s.fr [192.168.232.162])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id F37028B763;
- Sun, 30 Jun 2024 20:49:08 +0200 (CEST)
-Message-ID: <c88fbe6b-1205-4b73-ae16-2a4ae1fa9df7@csgroup.eu>
-Date: Sun, 30 Jun 2024 20:49:08 +0200
+ by lithops.sigma-star.at (Postfix) with ESMTP id A25B36195FC4;
+ Sun, 30 Jun 2024 23:26:01 +0200 (CEST)
+Received: from lithops.sigma-star.at ([127.0.0.1])
+ by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id dYTBbaeuKW86; Sun, 30 Jun 2024 23:26:01 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by lithops.sigma-star.at (Postfix) with ESMTP id 2148764943E1;
+ Sun, 30 Jun 2024 23:26:01 +0200 (CEST)
+Received: from lithops.sigma-star.at ([127.0.0.1])
+ by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id fdfNvnTTRsVR; Sun, 30 Jun 2024 23:26:01 +0200 (CEST)
+Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id C8FD164943DB;
+ Sun, 30 Jun 2024 23:26:00 +0200 (CEST)
+From: Richard Weinberger <richard@nod.at>
+To: u-boot@lists.denx.de
+Cc: Jixiong.Hu@mediatek.com, sjg@chromium.org, patrick.delaunay@foss.st.com,
+ ilias.apalodimas@linaro.org, seanga2@gmail.com, xypron.glpk@gmx.de,
+ trini@konsulko.com, upstream+uboot@sigma-star.at,
+ Richard Weinberger <richard@nod.at>
+Subject: [PATCH] ext4: Improve feature checking
+Date: Sun, 30 Jun 2024 23:25:56 +0200
+Message-Id: <20240630212556.5627-1-richard@nod.at>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] zlib: Fix big performance regression
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
- <20240627193455.GE38804@bill-the-cat> <20240627194006.GG38804@bill-the-cat>
- <d53c76b8-2962-4b8e-b2d5-b969a0cf08cf@csgroup.eu>
- <20240630145422.GH38804@bill-the-cat>
- <a40866e3-025f-493c-b1f7-db3bb1bb5bb2@csgroup.eu>
-Content-Language: fr-FR
-In-Reply-To: <a40866e3-025f-493c-b1f7-db3bb1bb5bb2@csgroup.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,111 +64,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Evaluate the filesystem incompat and ro_compat bit fields to judge
+whether the filesystem can be read or written.
+For the read side only a scary warning is shown so far.
+I'd love to about mounting too, but I fear this will break some setups
+where the driver works by chance.
 
+Signed-off-by: Richard Weinberger <richard@nod.at>
+---
+After facing ext4 write corruptions and read errors I checked
+the ext4 implementation briefly.
+Hopefully this patch helps other users to detect earlier that
+they're using ext4 features which are not supported by u-boot.
 
-Le 30/06/2024 à 20:28, Christophe Leroy a écrit :
-> 
-> 
-> Le 30/06/2024 à 16:54, Tom Rini a écrit :
->> On Sun, Jun 30, 2024 at 10:47:06AM +0200, Christophe Leroy wrote:
->>>
->>>
->>> Le 27/06/2024 à 21:40, Tom Rini a écrit :
->>>> On Thu, Jun 27, 2024 at 01:34:55PM -0600, Tom Rini wrote:
->>>>> On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
->>>>>
->>>>>> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
->>>>>> brings a big performance regression in inflate_fast(), which leads
->>>>>> to watchdog timer reset on powerpc 8xx.
->>>>>>
->>>>>> It looks like that commit does more than what it describe, it
->>>>>> especially removed an important optimisation that was doing copies
->>>>>> using halfwords instead of bytes. That unexpected change multiplied
->>>>>> by almost 4 the time spent in inflate_fast() and increased by 40%
->>>>>> the overall time needed to uncompress linux kernel image.
->>>>>>
->>>>>> So partially revert that commit but keep post incrementation as it
->>>>>> is the initial purpose of said commit.
->>>>>>
->>>>>> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
->>>>>> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
->>>>>> ---
->>>>>>    lib/zlib/inffast.c | 51 
->>>>>> ++++++++++++++++++++++++++++++++++++----------
->>>>>>    1 file changed, 40 insertions(+), 11 deletions(-)
->>>>>
->>>>> Both this, and my mostly revert lead to CI failures around compression
->>>>> tests:
->>>>> https://source.denx.de/u-boot/u-boot/-/jobs/859329
->>>>
->>>> A full revert however, is fine.
->>>>
->>>
->>> Is it that ? :
->>>
->>> FAILED
->>> test/py/tests/test_ut.py::test_ut[ut_compression_compression_test_gzip]
->>>
->>> It seems like when the optimisation was added by commit cd514aeb996e 
->>> ("zlib:
->>> Optimize decompression"), only the pre-increment implementation was
->>> available.
->>>
->>> When POSTINC was added by commit e89516f031db ("zlib: split up to match
->>> original source tree"), I guess it was not verified because POSTINC is
->>> #undef by zlib.h.
->>>
->>> With the following change I don't get the FAILED
->>> ut_compression_compression_test_gzip CI anymore
->>> (https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/jobs/859937)
->>>
->>> diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
->>> index c271d85ea1..5dc0574202 100644
->>> --- a/lib/zlib/inffast.c
->>> +++ b/lib/zlib/inffast.c
->>> @@ -257,7 +257,7 @@ void inflate_fast(z_streamp strm, unsigned start)
->>>                          sfrom = (unsigned short *)(from - OFF);
->>>                          loops = len >> 1;
->>>                          do
->>> -                           PUP(sout) = get_unaligned(++sfrom);
->>> +                           PUP(sout) = get_unaligned(sfrom++);
->>>                          while (--loops);
->>>                          out = (unsigned char *)sout + OFF;
->>>                          from = (unsigned char *)sfrom + OFF;
->>
->> Ah, thanks! Testing again now.
->>
-> 
-> That's probably not enough. I thought other failures were unrelated but 
-> I gave it a try with a full revert and I get no failure at all with that 
-> so there must be other things.
-> 
-> I find that pat16 = *(sout-2+2*OFF) suspicious, sout being a short it 
-> means -4 bytes which is not what is expected I think.
+To make feature checking possible I had to figure what this
+implementation actually supports.
+I hope I got them right, feedback is welcome!
 
-That's it. I get all green with the following, see 
-https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/pipelines/21391
+Thanks,
+//richard
+---
+ fs/ext4/ext4_common.c |  8 +++++++
+ fs/ext4/ext4_write.c  | 12 ++++++++--
+ include/ext4fs.h      | 55 ++++++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 72 insertions(+), 3 deletions(-)
 
-diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
-index c271d85ea1..69268caee8 100644
---- a/lib/zlib/inffast.c
-+++ b/lib/zlib/inffast.c
-@@ -257,14 +257,14 @@ void inflate_fast(z_streamp strm, unsigned start)
-  			sfrom = (unsigned short *)(from - OFF);
-  			loops = len >> 1;
-  			do
--			    PUP(sout) = get_unaligned(++sfrom);
-+			    PUP(sout) = get_unaligned(sfrom++);
-  			while (--loops);
-  			out = (unsigned char *)sout + OFF;
-  			from = (unsigned char *)sfrom + OFF;
-  		    } else { /* dist == 1 or dist == 2 */
-  			unsigned short pat16;
+diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+index 2ff0dca249..7148d35ee0 100644
+--- a/fs/ext4/ext4_common.c
++++ b/fs/ext4/ext4_common.c
+@@ -2386,6 +2386,14 @@ int ext4fs_mount(void)
+ 		fs->inodesz =3D 128;
+ 		fs->gdsize =3D 32;
+ 	} else {
++		int missing =3D __le32_to_cpu(data->sblock.feature_incompat) & \
++			      ~(EXT4_FEATURE_INCOMPAT_SUPP | \
++				EXT4_FEATURE_INCOMPAT_SUPP_LAZY_RO);
++
++		if (missing)
++			log_err("fs uses incompatible features: %08x, failures *are* expected=
+!\n",
++				missing);
++
+ 		debug("EXT4 features COMPAT: %08x INCOMPAT: %08x RO_COMPAT: %08x\n",
+ 		      __le32_to_cpu(data->sblock.feature_compatibility),
+ 		      __le32_to_cpu(data->sblock.feature_incompat),
+diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+index d057f6b5a7..4aae3c5f7f 100644
+--- a/fs/ext4/ext4_write.c
++++ b/fs/ext4/ext4_write.c
+@@ -869,6 +869,7 @@ int ext4fs_write(const char *fname, const char *buffe=
+r,
+ 	ALLOC_CACHE_ALIGN_BUFFER(char, filename, 256);
+ 	bool store_link_in_inode =3D false;
+ 	memset(filename, 0x00, 256);
++	int missing_feat;
+=20
+ 	if (type !=3D FILETYPE_REG && type !=3D FILETYPE_SYMLINK)
+ 		return -1;
+@@ -882,8 +883,15 @@ int ext4fs_write(const char *fname, const char *buff=
+er,
+ 		return -1;
+ 	}
+=20
+-	if (le32_to_cpu(fs->sb->feature_ro_compat) & EXT4_FEATURE_RO_COMPAT_MET=
+ADATA_CSUM) {
+-		printf("Unsupported feature metadata_csum found, not writing.\n");
++	missing_feat =3D le32_to_cpu(fs->sb->feature_incompat) & ~EXT4_FEATURE_=
+INCOMPAT_SUPP;
++	if (missing_feat) {
++		log_err("Unsupported features found %08x, not writing.\n", missing_fea=
+t);
++		return -1;
++	}
++
++	missing_feat =3D le32_to_cpu(fs->sb->feature_ro_compat) & ~EXT4_FEATURE=
+_RO_COMPAT_SUPP;
++	if (missing_feat) {
++		log_err("Unsupported RO compat features found %08x, not writing.\n", m=
+issing_feat);
+ 		return -1;
+ 	}
+=20
+diff --git a/include/ext4fs.h b/include/ext4fs.h
+index d96edfd057..01b66f469f 100644
+--- a/include/ext4fs.h
++++ b/include/ext4fs.h
+@@ -34,12 +34,65 @@ struct disk_partition;
+ #define EXT4_TOPDIR_FL		0x00020000 /* Top of directory hierarchies*/
+ #define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
+ #define EXT4_EXT_MAGIC			0xf30a
+-#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
++
++#define EXT4_FEATURE_RO_COMPAT_SPARSE_SUPER  0x0001
++#define EXT4_FEATURE_RO_COMPAT_LARGE_FILE    0x0002
++#define EXT4_FEATURE_RO_COMPAT_BTREE_DIR     0x0004
++#define EXT4_FEATURE_RO_COMPAT_HUGE_FILE     0x0008
++#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM      0x0010
++#define EXT4_FEATURE_RO_COMPAT_DIR_NLINK     0x0020
++#define EXT4_FEATURE_RO_COMPAT_EXTRA_ISIZE   0x0040
++#define EXT4_FEATURE_RO_COMPAT_QUOTA         0x0100
++#define EXT4_FEATURE_RO_COMPAT_BIGALLOC      0x0200
+ #define EXT4_FEATURE_RO_COMPAT_METADATA_CSUM 0x0400
++
++#define EXT4_FEATURE_INCOMPAT_FILETYPE  0x0002
++#define EXTE_FEATURE_INCOMPAT_RECOVER   0x0004
+ #define EXT4_FEATURE_INCOMPAT_EXTENTS	0x0040
+ #define EXT4_FEATURE_INCOMPAT_64BIT	0x0080
++#define EXT4_FEATURE_INCOMPAT_MMP       0x0100
++#define EXT4_FEATURE_INCOMPAT_FLEX_BG   0x0200
++#define EXT4_FEATURE_INCOMPAT_CSUM_SEED 0x2000
++#define EXT4_FEATURE_INCOMPAT_ENCRYPT   0x10000
++
+ #define EXT4_INDIRECT_BLOCKS		12
+=20
++/*
++ * Incompat features supported by this implementation.
++ */
++#define EXT4_FEATURE_INCOMPAT_SUPP ( EXT4_FEATURE_INCOMPAT_FILETYPE \
++				   | EXTE_FEATURE_INCOMPAT_RECOVER \
++				   | EXT4_FEATURE_INCOMPAT_EXTENTS \
++				   | EXT4_FEATURE_INCOMPAT_64BIT \
++				   | EXT4_FEATURE_INCOMPAT_FLEX_BG \
++				   )
++
++/*
++ * Incompat features supported by this implementation only in a lazy
++ * way, good enough for reading files.
++ *
++ * - Multi mount protection (mmp) is not supported, but for read-only
++ *   we get away with it.
++ * - Same fore metadata_csum_seed and metadata_csum.
++ * - The implementation has also no clue about fscrypt, but it can read
++ *   unencrypted files. Reading encrypted files will read garbage.
++ */
++#define EXT4_FEATURE_INCOMPAT_SUPP_LAZY_RO ( EXT4_FEATURE_INCOMPAT_MMP \
++					   | EXT4_FEATURE_INCOMPAT_CSUM_SEED \
++					   | EXT4_FEATURE_INCOMPAT_ENCRYPT \
++					   )
++
++/*
++ * Read-only compat features we support.
++ * If unknown ro compat features are detected, writing to the fs is deni=
+ed.
++ */
++#define EXT4_FEATURE_RO_COMPAT_SUPP ( EXT4_FEATURE_RO_COMPAT_SPARSE_SUPE=
+R \
++				    | EXT4_FEATURE_RO_COMPAT_LARGE_FILE \
++				    | EXT4_FEATURE_RO_COMPAT_HUGE_FILE \
++				    | EXT4_FEATURE_RO_COMPAT_DIR_NLINK \
++				    | EXT4_FEATURE_RO_COMPAT_EXTRA_ISIZE \
++				    )
++
+ #define EXT4_BG_INODE_UNINIT		0x0001
+ #define EXT4_BG_BLOCK_UNINIT		0x0002
+ #define EXT4_BG_INODE_ZEROED		0x0004
+--=20
+2.35.3
 
--			pat16 = *(sout-2+2*OFF);
-+			pat16 = *(sout-1+OFF);
-  			if (dist == 1)
-  #if defined(__BIG_ENDIAN)
-  			    pat16 = (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
-
-Christophe
