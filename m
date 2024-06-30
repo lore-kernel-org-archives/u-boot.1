@@ -4,83 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDCEC3064D
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 14:57:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E7BBC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 18:28:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B70B28845A;
-	Sun, 30 Jun 2024 16:57:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 72277882EF;
+	Sun, 30 Jun 2024 20:28:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tlXmVLA+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DE398842C; Sun, 30 Jun 2024 16:57:57 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E479D8845A; Sun, 30 Jun 2024 20:28:18 +0200 (CEST)
+Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E60738845A
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 16:57:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8AAD87C86
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 20:28:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-700cbdd90fbso1422508a34.0
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 07:57:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719759473; x=1720364273; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4QvRDFzDEIB1oBNZ6/DpUoALnSFaBcTLF1JyYaGHp0U=;
- b=tlXmVLA+rIRThhPx/PQu2w+P8TvJ66QWcdpEHPQtEXKXubEtMjp9zu16TL7Sijh8Ro
- U5b5XUQGxNUpWa9I3Qs+kKr9TdsQEJnI8fGcAY7661Ijjm+K/FdSIqTg0PjWWyxy216G
- IiEewk2JnMt+1DLAixVwe9JGeilpGd9oTPGfw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719759473; x=1720364273;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4QvRDFzDEIB1oBNZ6/DpUoALnSFaBcTLF1JyYaGHp0U=;
- b=jlZQ2HLRKgu8yox9xDIXTq0CIiY9WtjXaJSFayaf7kMsM9pGtnTkwUuc6D+monoAIw
- nINQIGqwMCDBWkSqlUrsPP0ZhOaBrasfXSvMFUB6onmVuufOnTqRub1Q0w0mt2kil6kZ
- pMsXWE/aWop2axWK6N3S71eUMPpFmUJumoQOtpfyy23yZZ+wCu3K0B9CS72Oc4AciNO+
- o1uauZYchKAFVnwneVz84CN/zb+KfNNskvBxRKMQtzVCi/XVUJfu3Df5XmHuH3nWSi/a
- FhB2S2D8AGbdhm4OEaJOl4yu5aUMB+mKzmBD1FYE42CjGu6fqbhpKInz43GZCnXPjD8B
- QD5w==
-X-Gm-Message-State: AOJu0YwMrbDXoDFKEUuXo4kHgXsWAySgbmalLv4Vx6VSo5FarkPziSYe
- iYSo9AG35ofguOqcjAKZH2PCoLVbCFriu3PWs/p4C/GimysgDGOWVtJJzyYHQU8=
-X-Google-Smtp-Source: AGHT+IFGbxb/uSl33MVnrAXchE5MXqHlFy5q0rbeSN0jMOaEHsWgjqXcuxUxdA6jQSbaLLFqevrOGg==
-X-Received: by 2002:a05:6830:1484:b0:701:fd08:905 with SMTP id
- 46e09a7af769-702075e239cmr4043597a34.13.1719759473558; 
- Sun, 30 Jun 2024 07:57:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
- [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-701f7ab1690sm968436a34.18.2024.06.30.07.57.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Jun 2024 07:57:52 -0700 (PDT)
-Date: Sun, 30 Jun 2024 08:57:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Paul Menzel <paulepanter@mailbox.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, Marek Vasut <marex@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
-Subject: Re: [PATCH 1/3] pxe: Add debugging for booting
-Message-ID: <20240630145750.GI38804@bill-the-cat>
-References: <20240619123453.720600-1-sjg@chromium.org>
- <171945114145.3478677.13570700547612365560.b4-ty@konsulko.com>
- <CAFLszTiaqv7CXZg639JybryyaUerjJX=vn+gdh2nCeEPB2PH6Q@mail.gmail.com>
+ spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
+Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
+ by localhost (Postfix) with ESMTP id 4WByNJ1Q1zz9tdf;
+ Sun, 30 Jun 2024 20:28:16 +0200 (CEST)
+Received: from pegase1.c-s.fr ([192.168.12.234])
+ by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id n3ijy3j5Zle3; Sun, 30 Jun 2024 20:28:16 +0200 (CEST)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4WByNJ0KVSz9tdJ;
+ Sun, 30 Jun 2024 20:28:16 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id F2CC58B768;
+ Sun, 30 Jun 2024 20:28:15 +0200 (CEST)
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id oP0nLQ3GhO0g; Sun, 30 Jun 2024 20:28:15 +0200 (CEST)
+Received: from [192.168.232.162] (PO26725.IDSI0.si.c-s.fr [192.168.232.162])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id A4BF08B763;
+ Sun, 30 Jun 2024 20:28:15 +0200 (CEST)
+Message-ID: <a40866e3-025f-493c-b1f7-db3bb1bb5bb2@csgroup.eu>
+Date: Sun, 30 Jun 2024 20:28:15 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P9/2k9qjP3YFtOk/"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiaqv7CXZg639JybryyaUerjJX=vn+gdh2nCeEPB2PH6Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] zlib: Fix big performance regression
+To: Tom Rini <trini@konsulko.com>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
+ <20240627193455.GE38804@bill-the-cat> <20240627194006.GG38804@bill-the-cat>
+ <d53c76b8-2962-4b8e-b2d5-b969a0cf08cf@csgroup.eu>
+ <20240630145422.GH38804@bill-the-cat>
+Content-Language: fr-FR
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+In-Reply-To: <20240630145422.GH38804@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,51 +73,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---P9/2k9qjP3YFtOk/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jun 29, 2024 at 07:56:00AM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 27 Jun 2024 at 02:19, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, 19 Jun 2024 06:34:50 -0600, Simon Glass wrote:
-> >
-> > > Show which boot protocol is being used.
-> > >
-> > >
-> >
-> > Applied to u-boot/next, thanks!
->=20
-> I wonder if this could go to -master since it is an important bugfix?
->=20
-> https://patchwork.ozlabs.org/project/uboot/list/?series=3D411595&state=3D*
+Le 30/06/2024 à 16:54, Tom Rini a écrit :
+> On Sun, Jun 30, 2024 at 10:47:06AM +0200, Christophe Leroy wrote:
+>>
+>>
+>> Le 27/06/2024 à 21:40, Tom Rini a écrit :
+>>> On Thu, Jun 27, 2024 at 01:34:55PM -0600, Tom Rini wrote:
+>>>> On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
+>>>>
+>>>>> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+>>>>> brings a big performance regression in inflate_fast(), which leads
+>>>>> to watchdog timer reset on powerpc 8xx.
+>>>>>
+>>>>> It looks like that commit does more than what it describe, it
+>>>>> especially removed an important optimisation that was doing copies
+>>>>> using halfwords instead of bytes. That unexpected change multiplied
+>>>>> by almost 4 the time spent in inflate_fast() and increased by 40%
+>>>>> the overall time needed to uncompress linux kernel image.
+>>>>>
+>>>>> So partially revert that commit but keep post incrementation as it
+>>>>> is the initial purpose of said commit.
+>>>>>
+>>>>> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+>>>>> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+>>>>> ---
+>>>>>    lib/zlib/inffast.c | 51 ++++++++++++++++++++++++++++++++++++----------
+>>>>>    1 file changed, 40 insertions(+), 11 deletions(-)
+>>>>
+>>>> Both this, and my mostly revert lead to CI failures around compression
+>>>> tests:
+>>>> https://source.denx.de/u-boot/u-boot/-/jobs/859329
+>>>
+>>> A full revert however, is fine.
+>>>
+>>
+>> Is it that ? :
+>>
+>> FAILED
+>> test/py/tests/test_ut.py::test_ut[ut_compression_compression_test_gzip]
+>>
+>> It seems like when the optimisation was added by commit cd514aeb996e ("zlib:
+>> Optimize decompression"), only the pre-increment implementation was
+>> available.
+>>
+>> When POSTINC was added by commit e89516f031db ("zlib: split up to match
+>> original source tree"), I guess it was not verified because POSTINC is
+>> #undef by zlib.h.
+>>
+>> With the following change I don't get the FAILED
+>> ut_compression_compression_test_gzip CI anymore
+>> (https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/jobs/859937)
+>>
+>> diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
+>> index c271d85ea1..5dc0574202 100644
+>> --- a/lib/zlib/inffast.c
+>> +++ b/lib/zlib/inffast.c
+>> @@ -257,7 +257,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+>>                          sfrom = (unsigned short *)(from - OFF);
+>>                          loops = len >> 1;
+>>                          do
+>> -                           PUP(sout) = get_unaligned(++sfrom);
+>> +                           PUP(sout) = get_unaligned(sfrom++);
+>>                          while (--loops);
+>>                          out = (unsigned char *)sout + OFF;
+>>                          from = (unsigned char *)sfrom + OFF;
+> 
+> Ah, thanks! Testing again now.
+> 
 
-It doesn't apply to master and v2024.04 was also seemingly broken. I
-think it's clear enough that it can be cherry-picked in places as
-needed.
+That's probably not enough. I thought other failures were unrelated but 
+I gave it a try with a full revert and I get no failure at all with that 
+so there must be other things.
 
---=20
-Tom
-
---P9/2k9qjP3YFtOk/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaBcm4ACgkQFHw5/5Y0
-tyyI1Av/Zj29YkUqZGhaMjsHe+cBSo41XRiG8shvdpdUuIa7hcONs/e3rqoNkqwC
-KtLPnGVhwgju3ZvO65hd8POIu/YqhYelWY9xbZhcpVV5HHbbqtCn+k5Coku4rqeT
-27F3JHai5KVKixFsy3hRXhWNRwLtiz0QMz06+G5jp5Uqkj6/Mnv5C//JvcoIao5+
-KhjKguRl8l3a4qTMPi75t3fOVIjfj0cuBu+sId3gVdUghQrVWjhPzWI5Bmy1MWAy
-8K3SfYtpoizCClveQoRE8EsU7tXsqdazt/TW4AQsbQFLSAHasK6emaCR3kuiq7gt
-G7LJMM3zsXafMzsrlYQqfr9ObtglusQ6n3dAJ+vL94aYzZ59IPjpM1W8tp/WBPU1
-iBGdV+zcDnOLs3H6HiNu62YtH1AsjhfqWf9cMfWrhV6E7thEkZBXoWcglJ0rNMWI
-MEx38GWvtVIPc6KOfBosY7A1z6Ng6adhLEBuHJqUzqFEuS2XBJa1Xiw/60lvhhyJ
-75xoAk65
-=0eUQ
------END PGP SIGNATURE-----
-
---P9/2k9qjP3YFtOk/--
+I find that pat16 = *(sout-2+2*OFF) suspicious, sout being a short it 
+means -4 bytes which is not what is expected I think.
