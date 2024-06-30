@@ -4,56 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2559CC27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 05:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 122BEC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 05:24:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 427D48861A;
-	Sun, 30 Jun 2024 07:24:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 981F688629;
+	Sun, 30 Jun 2024 07:24:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1719725044;
-	bh=VcKRTxnr7meWoqtbYCvCabPYgyk9NU5n1YJihdtPZ7A=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1719725045;
+	bh=OpMbvTt4JFqxcl2NM3gXuoKTcNiA+iqub+Ats+CcuV0=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wGGD/hGfu6x8LpqoDnLFRV/R4JsvdmRMgV+Q7jueAnGSEitSWI9wPWqdm79ZCKgMi
-	 isRqUaxijOmlFhIdixoMmGto7Fjx4R4uALGeetaINBrh2HHhfb3Qjo7AVNIzoy5MPF
-	 m7xtipwY0MexQEoqaM9vpNELNpQD/WyjlNgE5uKamtmjrYImkqIFCVA3xC7SsK/m6O
-	 omZ9u5RveYTfiJFHkvRyE9fTefbCepZ8cbb8P8OUPKItJMYXynqZ88mK0UKEjvb6tK
-	 Mdx9C9Go6neKPJOssLtGKP/SZiQmQLjv4mqVoifNSOzJqswlhkj5WOU/mLCWpV9awj
-	 Wf/hHaVlqWtmw==
+	b=Y4+hl/JoVNryUgaIG7Fm7GJfPSGubrmTPgYeqaWxYaki3gkvkoZcVcUkekUZyl/L0
+	 KRuzPIHDytMY2+INM391VG7gw3Ax2xO6HG5pg4Z3Z32QMZi9/o4/hlzkikLntN6rOg
+	 eo2S3vVBPezc20iw65cws7VR2FHInzuEkOTIHzjcquIk85+y0rN+6bvk9z72wtqQf3
+	 VwyeyrfHsdFlxx532dvsn2vJu9eR8XZ6jXd4MgDnJGWMk6KMGncIYlAKJk6PwqTvEZ
+	 ooOy5ZSVU3yZWga/iu8tb0xQZXkP2JfAypkHARwRLpmY9zeiicQVGiFvUouN0+qfKV
+	 HXQuEwRriLvCw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B1CCF88614;
- Sun, 30 Jun 2024 07:24:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6A3D788617;
+ Sun, 30 Jun 2024 07:24:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1719725043;
- bh=VcKRTxnr7meWoqtbYCvCabPYgyk9NU5n1YJihdtPZ7A=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qOlDKP1kqS2+IC8w5MDTKYuB7GqB1ZH7jx0mOoORdY8PH+QldwHDFL/HesMrJDPwU
- Z5x1Q0v/rxzY2e2HevO9AmLtr4jmGtEOUK/DX51kY36GMY8i89rO51OV5eJKlFevmm
- eSgHDnM29tStssezar5s9L4lV2tEMq/AT7thsgIHtps0Da4UzF1zJT6Zw5/BieE3fW
- XuzNCbym+JFT7GhIjynPOFwJuvJEOYOXyr8BbWSJVN1qzzwwh+S4Tc9cfbJDec00lt
- FuCQs7gEb5rQQWnujx0x5g8aY8H/5LF5qo+m+zWN6LodhXwSqhqKjwE3ZYMs9DueF7
- GbeQLX2GQVGdQ==
-Message-ID: <4a6085d9-9c52-49a1-8c36-c3d1094b8a28@denx.de>
-Date: Sun, 30 Jun 2024 04:21:46 +0200
+ bh=OpMbvTt4JFqxcl2NM3gXuoKTcNiA+iqub+Ats+CcuV0=;
+ h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
+ b=p9voqsojkgBAJBsTAXosCX/B2h6cdSKqZWVCeKsyITNsA+eZdonF8YTnLVzYBI3YX
+ eCPQD9kXRk6r6cNSs+2pCZsHF85OfSA5pBkRJlnPrA+RnDtmK4g9xgu6j3pax/tkn0
+ lmIar8o6vHBDoyWNwXvlOMv94ytt0h4XjLlso6NOLacxNuy5s0/YlbRhKhK0XSknuS
+ f2gqqHslm4sZJMWyKoE54jHi3W/dy6h3nnVuDD8EK1wmYw8m0X1NwceY/ATC4DqtOM
+ FWihY8ZIe6oGEKvVlFu2qoIegg5cUePf/ZmM1/nX6yO4hV3v0cTjwUGtNiwOYo5ID2
+ 5h1yg6l5DOEMA==
+Message-ID: <f873b919-a4de-4d06-9f6c-b964cf0699b7@denx.de>
+Date: Sun, 30 Jun 2024 04:33:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] spl: fit: List DTOs applied by SPL in U-Boot control DT
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
- Sean Anderson <seanga2@gmail.com>, Suniel Mahesh
- <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-References: <20240628024804.149871-1-marex@denx.de>
- <CAFLszTh_u8ipmSqyi73TVZ=kCGnk8mnb7Ww3HeHwUXSEdGqVEg@mail.gmail.com>
-Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTh_u8ipmSqyi73TVZ=kCGnk8mnb7Ww3HeHwUXSEdGqVEg@mail.gmail.com>
+Subject: Re: [PATCH] spl: fit: List DTOs applied by SPL in U-Boot control DT
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+References: <20240626235857.272264-1-marex@denx.de>
+ <d31b4e88-a59c-4ec7-aa05-1293ab8139d9@cherry.de>
+ <7c53dff2-9703-4a59-9a90-ec2d64cdb3fa@denx.de>
+ <274c876c-4d42-4af4-a68c-5b51c20bfdb8@cherry.de>
+Content-Language: en-US
+In-Reply-To: <274c876c-4d42-4af4-a68c-5b51c20bfdb8@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,95 +74,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/28/24 9:32 AM, Simon Glass wrote:
-> Hi Marek,
+On 6/28/24 10:27 AM, Quentin Schulz wrote:
 
 Hi,
 
->> ---
->>   common/spl/spl_fit.c                | 29 +++++++++++++++++++++++++++--
->>   doc/device-tree-bindings/config.txt | 11 +++++++++++
->>   2 files changed, 38 insertions(+), 2 deletions(-)
-> 
-> Once this is figured out, can you extend test/image/spl_load_os.c to
-> test this code?
-
-It seems there is nothing which would do even basic tests for SPL 
-fitImage DT handling in that test? Or am I reading the current test wrong ?
-
->> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
->> index 988125be008..0a6b5ea8212 100644
->> --- a/common/spl/spl_fit.c
->> +++ b/common/spl/spl_fit.c
->> @@ -363,6 +363,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
->>   {
->>          struct spl_image_info image_info;
->>          int node, ret = 0, index = 0;
->> +       char dtoname[256];
+>>> Shouldn't this rather be in /config node?
 >>
->>          /*
->>           * Use the address following the image as target address for the
->> @@ -448,9 +449,13 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
->>                          if (ret < 0)
->>                                  break;
+>> This is what I had there originally, but then I realized that some DTs 
+>> might not have the /config node in them (or am I mistaken?), so I 
+>> moved the new properties into the root node, which surely exists.
 >>
->> -                       /* Make room in FDT for changes from the overlay */
->> +                       /*
->> +                        * Make room in FDT for changes from the overlay,
->> +                        * the overlay name and the trailing NUL byte in
->> +                        * that name.
->> +                        */
->>                          ret = fdt_increase_size(spl_image->fdt_addr,
->> -                                               image_info.size);
->> +                                               image_info.size + strlen(str) + 1);
-> 
-> Oh and I missed the room for the property, sorry. It needs something like this:
-> 
-> ALIGN(strlen(str) + 1, 4) + 12 + 4
-> 
-> the first bit is the string-table size increase
-> 
-> 12 is sizeof(struct fdt_property)
-> 4 is the u32 size
-> 
-> Alos, is there any way to check that there is actually enough space to
-> increase the size?
-
-fdt_increase_size() would fail if there isn't enough space, so that 
-should cover the check.
-
->> diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
->> index f50c68bbdc3..7aa6d9a72c6 100644
->> --- a/doc/device-tree-bindings/config.txt
->> +++ b/doc/device-tree-bindings/config.txt
->> @@ -95,6 +95,17 @@ rootdisk-offset (int)
->>   silent-console (int)
->>          If present and non-zero, the console is silenced by default on boot.
+>> It also keeps the code simpler, as it doesn't have to fiddle with 
+>> creation of the /config node if it doesn't exist.
 >>
->> +u-boot,spl-applied-dto-* (int)
->> +       Emitted by SPL into U-Boot control DT root node in case a DTO from
->> +       fitImage was applied on top of U-Boot control DT by the SPL fitImage
->> +       loader. The single integer cell indicates in which order was the DTO
->> +       applied by the SPL and matches the index of the DTO in the fitImage.
->> +       DTOs in fitImage may be skipped using board_spl_fit_append_fdt_skip(),
->> +       therefore the integers might not be monotonically incrementing, there
->> +       may be gaps. This property can be used to determine which DTOs were
->> +       applied by the SPL from running U-Boot by inspecting the U-Boot
->> +       control DT.
 > 
-> Should we send a binding with this? I wonder if it would be better to
-> make the filename a property value rather than including it in the
-> property name/string table? That way you would not need the
-> integers...the ordering would be enough.
-> 
-> E.g.
-> 
-> u-boot,spl-applied-dtos = "fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast",
->        "fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast";
-> 
-> But that might be more annoying to construct as you would probably
-> need fdt_setprop_placeholder()
+> I don't think we should pollute the root node with this. If we want to 
+> be able to expose this in a proper binding to the upstream DT binding 
+> repo, I'm not sure this is going to fly :/
 
-It is easier to test for a presence of property from U-Boot shell, also 
-the property is integer where the integer indicates the index of the DTO 
-when it was applied.
+The other option is to add more code into SPL, that's not great.
+
+I can check if /config node exists, and if so, add it there, otherwise 
+do nothing. That should be some sort of compromise between bloat and 
+config node. What do you think ?
+
+[...]
+
+>>> I am wondering if we cannot simply have a string array with overlays 
+>>> applied left-to-right or right-to-left instead? Or u-boot,fdt-dto-N = 
+>>> "imx8mp-dhcom-pdk3-overlay-rev100";
+>>
+>> We can, but that is much harder to test for presence of specific DTO 
+>> on U-Boot command line. It is easy to test for presence of boolean or 
+>> integer DT property using 'fdt' command.
+>>
+> 
+> Not sure dt-bindings people would love to hear that we adapt the fdt to 
+> be easier to work with from the U-Boot CLI :)
+> 
+> In any case, another few thoughts that popped up overnight:
+> 1- do we want to have this for SPL DTB modified by TPL? If so, I'm sure 
+> we want it different from the one passed from SPL to U-Boot proper IFF 
+> we start from a clean sheet (new DTB) and/or add the DTBO we applied on 
+> top the DTBOs already applied by the TPL to the SPL DTB before passing 
+> it to proper
+
+As far as I can tell, TPL currently does not support loading fitImages 
+and applying DTOs from them. When this is available, I suspect the 
+prefix of the newly added property would change from 
+u-boot,spl-applied-dto- to u-boot,tpl-applied-dto- and that would be it.
+
+> 2- Add info about which DTBOs were applied to the kernel DTB?
+
+SPL DTOs or DTOs applied from kernel fitImage ? Or a merging of those ?
