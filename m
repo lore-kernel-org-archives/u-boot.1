@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB559C27C4F
-	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 12:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15C7FC27C4F
+	for <u-boot@archiver.kernel.org>; Sun, 30 Jun 2024 12:55:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AD39885E1;
-	Sun, 30 Jun 2024 14:48:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 211C2885E1;
+	Sun, 30 Jun 2024 14:55:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QWa4NfGO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RyQb0tvU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CAB188618; Sun, 30 Jun 2024 14:48:28 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D885788621; Sun, 30 Jun 2024 14:55:15 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F02F088481
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 14:48:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E76DE88481
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 14:55:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2c5362c7c0bso1109550a91.1
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 05:48:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719751704; x=1720356504; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xbdMt3SsV2rooNP1mmkch3S3Opu0+HtcdyMcoxUjrV0=;
- b=QWa4NfGOP19KYJLsAYLbPo4IsguQTkguQBY8FwlG0OELhEPHStzw2Dpfu1PaSO8VOK
- oS5oEkj4GZRMXfBKoo8VFm9vBwWT/BQmIYqNDGax+h8YjbBPKXZytds3lRYwT9ni67rT
- 0NKos5hCuOYqFvbZASBUVv6H/Rm8YLydupxtT9R+JlUnGglYACazclwO7KzpBVlRsUgd
- 1s/fC+OP2+hrq/YT3/gL6OHWEosRyv5S89HrgR+mCMx6dTWOjsz+rhmPbMMFvIcWu64e
- mebks3GZSzb+OfXxqq8473HdLNuBhYombJgSyYKtuUedI2IOhN6f62j5+MH85Dab25nB
- +5cQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719751704; x=1720356504;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xbdMt3SsV2rooNP1mmkch3S3Opu0+HtcdyMcoxUjrV0=;
- b=lBW2lVJ1vfbj52TAe1l/7lJmR7IY6x+hcHYSWElsX1ep6h6zDavYGAaRFMMNkSq2yi
- c3XJYS3AQ428v4/BQYln/D9S0soHwWkWT2wX4TBEsywofyY7LVcBFIPMD6Ar85ADZiTu
- 7UmGkC8ljRUdZwG29mIUxxdPMZvnX+T4338g0IWTbxus1BOMrSsTrhltaAB/kr/mP9f/
- EEwpjSAhb3zAclAYyDiar0D4/beRZNOXN47emUON/8vZOHwEhlTeCv5EBXvH1t7rI3oT
- 0zO+Z0jJJ8lVE1VV09w16M2r/V3ytQpR5mkIIDediUIzw10RYBobYaPGTMrvAC2e31Ii
- gR7w==
-X-Gm-Message-State: AOJu0Yzcc58anHS8VeDvOu9O/ewrdCm6jAnycLLD0Xhh9nhzYjDnjdSt
- 5lysi75+GA9UNdLmrm4iaZ2BHaYT2HuxTO6jg8k/eBrRWwTpWeJ0yHqnFt865EKchs8H1em6kU/
- vNcUZpfa6Cp36BrqliExeHAFZC7pEc1mcsCg3Ow==
-X-Google-Smtp-Source: AGHT+IGNfO0QHxw0B6LaHYyiG6HLPcxhtmE1fojS0SVBMGImdrQOhy4JQZwgoKMiuj2vmdUrRyzkRQxzyezVeMLrthE=
-X-Received: by 2002:a17:90a:a58a:b0:2c7:c7e6:eb89 with SMTP id
- 98e67ed59e1d1-2c93d7277ecmr1238505a91.23.1719751704176; Sun, 30 Jun 2024
- 05:48:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1719752105; x=1720356905; i=xypron.glpk@gmx.de;
+ bh=ikaQcDDRxggWxEW89PbsOvwoB6YdNUf9AIIx/QxNmGQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=RyQb0tvUfnU+o68Ui3PpWg55eE2LqlEYwth8lUcKIB457FnOhXVBXpHs4IG+oqiU
+ yWPOxv7nRiFbWv4s5t+Udv/fS44FQuoabu2N+kXEL6cBOS4yfqG7/0iTe3SZkbwmH
+ pvXMm5NNbP+cSr0d6tPYznsZn1Er0TOMmasIYK2o0U5icAqV/MDSb7uxcJitYlrHj
+ j11gAIG7Ua902r4umUZlw9TSpFl7pOJQyGuw2VX23+l8QT1v7R5kiZulHWOWKsAD4
+ dzbUnmgW2EfxP0m0oO/Xxu501lSElkbFTbL+6oa4bpniF8kKPJnoU+XoTaqBsOHwY
+ UZW7yXvsntI2UhLxNA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.41.25]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Md6R1-1rp7Qh3g3v-00bTJz; Sun, 30
+ Jun 2024 14:55:04 +0200
+Message-ID: <053cc180-266b-460b-aa68-0adf241c4934@gmx.de>
+Date: Sun, 30 Jun 2024 14:54:45 +0200
 MIME-Version: 1.0
-References: <20240620201531.321110-1-ilias.apalodimas@linaro.org>
- <2a1d9bf4-1790-4186-b8e0-3a5001af9f72@gmx.de>
- <CAC_iWjKLdkbaxFXbogprgcaBMXtVGnp+j0_ED-izZaydQcAxEQ@mail.gmail.com>
- <6783af44-4d10-48ff-817d-d0434900319e@gmx.de>
-In-Reply-To: <6783af44-4d10-48ff-817d-d0434900319e@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 30 Jun 2024 15:47:48 +0300
-Message-ID: <CAC_iWjL=gopWJj9DV026Hkq5QYfZHj0HcrqNLq88CJFy_U0Pog@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: adjust config options for capsule updates
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, jhumphreysti@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: add bootelf command documentation
+To: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>, trini@konsulko.com,
+ u-boot@lists.denx.de, sjg@chromium.org
+References: <20240630103703.49318-1-Maxim.Moskalets@kaspersky.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240630103703.49318-1-Maxim.Moskalets@kaspersky.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:SuT1cq29fyKebLsLKgeeUBwDj3mkaMidDKioVJnm6mA6lImN76j
+ +Hj1MowQkxdt1FfDfs/AwwFd3oKFVQnb4C67ep7t/egF4tddJjt3MFXYO4Lsmte2sXh/crC
+ tfLwGYMl8viPaEAODZ4qbl70HUQX6xkiWKJ3cUM5R5WzD0jUIqx5XW9HnsPRvjG7F/KdBFL
+ TN9/2doW62K70bA0Xip6Q==
+UI-OutboundReport: notjunk:1;M01:P0:ZJTrDGVUt7E=;mEOgpkgPXJS6ejBUwykSP18a8uS
+ bw7QfQ95v1ZzwZkYVVckla6kzdWNba6caNNK5d6TfqFrnfSvGnbsZCHnQJ3NsQyF19S0HWIR/
+ UUdcNeNIw4Fukeye/5Vr6In1YZZpd9sk8GOzF8WoB4DN0jXoDv3vJqvDvZovMa1PM5p72W8DA
+ BunISEHaJQWvzt6zaZr1NQubFvjRh0D1D6lv99+gX0HZGcUAtuPwvc+P1sFRWht1EH3QuDnfV
+ qnX3nw6N2duiLyYgbkijBMI+VEddg/t9aIsJHAgSrezMsUrpq4pfGJaSOzxZCfqrJ4NXr3YUP
+ /mcByOoKikDTAFhCGYLndhodXHFNaPvhcPeZ9ZkUnLl29TsOCAtQ9CxPuj115MKcSi6bR1YFv
+ pc3s+0/izya4fIIe3Aua4OT63B/FXFED7PmIH5bWCRzUzDcibQfNMcj+1AUKrCokU5KlwzM7q
+ YYJCYxZmd0oyiQ5U8qLnCe6ZIR919JMRlAsCYyMhD8xDytJqf8yAE5fjrJ1Uo+BEbcHNSsGKq
+ YizSjVP4i7ribklBC0DVR2EQ6gY3sFjU0uzeezugROVH0C4k9mwZc2ye358K71fuHIT1aSTdU
+ a0RDQB/tewTIokRbHVGTyK+U+VJcKFjLxHoYQ+Tyy7GDG/MYzrC3LudmSTSND7nFjOFOnEVn5
+ H1kwiaBuIvPgZDRNV37SOTI88WqGSvwTbHZvRmRQgTbUTAI5YmTjbXPVkcQKR/aoOp4raXRM6
+ SqZLtcQIp9IyrVScPcM9Vwz+SrVJGkruL6/tqcZN1HHJ2PNzM+lcA88oQLaOHqJCUtsdHheCW
+ HGyv3Uiuq2C8jTa9uIkgtUDIf8q8FDE6Dje+kfsBq6WTk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,80 +90,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On 6/30/24 12:37, Maxim Moskalets wrote:
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+> ---
+>   doc/usage/cmd/bootelf.rst | 52 +++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 52 insertions(+)
+>   create mode 100644 doc/usage/cmd/bootelf.rst
+>
+> diff --git a/doc/usage/cmd/bootelf.rst b/doc/usage/cmd/bootelf.rst
+> new file mode 100644
+> index 0000000000..5472a90fe2
+> --- /dev/null
+> +++ b/doc/usage/cmd/bootelf.rst
+> @@ -0,0 +1,52 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +.. Copyright 2024, Maxim Moskalets <maximmosk4@gmail.com>
+> +
+> +.. index::
+> +   single: bootelf (command)
+> +
+> +bootelf command
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Synopsis
+> +--------
+> +
+> +::
+> +
+> +    bootelf [-p|-s] [-d <fdt_addr>] [<image_addr> [<arg>]...]
+> +
+> +Description
+> +-----------
+> +
+> +The *bootelf* command is used to launch a ELF binary at *image_addr*. I=
+f
+> +*image_addr* is not specified, the bootelf command will try to find ima=
+ge in
+> +*image_load_addr* variable (*CONFIG\_SYS\_LOAD\_ADDR* by default).
+> +
+> +Args after *image_addr* will be passed to application in common *argc*,=
+ *argv*
+> +format.
+> +
+> +A command sequence to run a ELF image using FDT might look like
+> +
+> +::
+> +
+> +    load mmc 0:1 ${loadaddr} /kernel.elf
+> +    load mmc 0:1 ${fdt_addr_r} /soc-board.dtb
+> +    bootelf -d ${fdt_addr_r} ${loadaddr} ${loadaddr}
 
-On Sun, 30 Jun 2024 at 15:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 6/22/24 18:38, Ilias Apalodimas wrote:
-> > On Sat, 22 Jun 2024 at 19:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 20.06.24 22:15, Ilias Apalodimas wrote:
-> >>> EFI_IGNORE_OSINDICATIONS is used to ignore OsIndications if setvariable
-> >>> at runtime is not supported and allow the platform to perform capsule
-> >>> updates on disk. With the recent changes boards can conditionally enable
-> >>> setvariable at runtime using EFI_RT_VOLATILE_STORE.
-> >>>
-> >>> Let's make that visible in our Kconfigs and enable EFI_IGNORE_OSINDICATIONS
-> >>> when set variable at runtime is disabled.
-> >>>
-> >>> Since EFI_RT_VOLATILE_STORE needs help from the OS to persist the
-> >>> variables, allow users to ignore OsIndications even if setvariable at
-> >>> runtime is enabled.
-> >>>
-> >>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >>
-> >> So this v2:
-> >
-> > Yes sorry, forgot to add the tile and log...
->
-> With this patch I get a failure on the sandbox in the CI:
->
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21382
+Thank you for providing this man-page.
 
-Yes, this test is trying to test updates with OsIndications not set
-and it obviously fails, because it expects the update to stop.
+Please, move the example to an Examples section. See other man-pages.
 
-I'll send a v3 and adjust the tests.
+> +
+> +image_addr
+> +    Address of the ELF binary.
+> +
+> +fdt_addr
+> +    Address of the device-tree. This argument in only needed if bootabl=
+e
+> +    application uses FDT that requires additional setup (like /memory n=
+ode).
+> +
+> +arg
+> +    Any text arguments for bootable application. This is usually the ad=
+dress
+> +    of the device-tree.
+> +
+> +Flags:
+> +
+> +-p|-s
+> +    Load ELF image via program headers (-p) or via section headers (-s)=
+.
 
-Cheers
-/Ilias
->
-> Without the patch the sandbox runs fine:
->
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21383
->
-> Best regards
->
-> Heinrich
->
-> >
-> >>
-> >> v2:
-> >>          allow EFI_IGNORE_OSINDICATIONS if EFI_RT_VOLATILE_STORE=y
-> >>
-> >> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >
-> > Thanks Heinrich
-> >
-> >>
-> >>> ---
-> >>>    lib/efi_loader/Kconfig | 1 +
-> >>>    1 file changed, 1 insertion(+)
-> >>>
-> >>> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> >>> index ee71f417147a..6006e845cb1f 100644
-> >>> --- a/lib/efi_loader/Kconfig
-> >>> +++ b/lib/efi_loader/Kconfig
-> >>> @@ -220,6 +220,7 @@ config EFI_CAPSULE_ON_DISK
-> >>>    config EFI_IGNORE_OSINDICATIONS
-> >>>        bool "Ignore OsIndications for CapsuleUpdate on-disk"
-> >>>        depends on EFI_CAPSULE_ON_DISK
-> >>> +     default y if !EFI_RT_VOLATILE_STORE
-> >>>        help
-> >>>          There are boards where U-Boot does not support SetVariable at runtime.
-> >>>          Select this option if you want to use the capsule-on-disk feature
-> >>> --
-> >>> 2.43.0
-> >>>
-> >>
->
+Please, separate -p -s into different lines.
+
+> +
+> +-d
+> +    Setup FDT by address. Available only if CONFIG_CMD_ELF_FDT_SETUP is=
+ enabled.
+
+Please, add a Configuration section like in the other man-pages
+describing which configuration setting enables the command.
+
+Best regards
+
+Heinrich
