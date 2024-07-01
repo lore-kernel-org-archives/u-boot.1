@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D474CC30653
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 13:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBDD5C2BD09
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 14:35:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DDD7886DD;
-	Mon,  1 Jul 2024 15:58:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA05D884D2;
+	Mon,  1 Jul 2024 16:35:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IlUSD919";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lZteZALI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F66E886A8; Mon,  1 Jul 2024 15:58:15 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id AA77D88096; Mon,  1 Jul 2024 16:35:03 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CCEA886F3
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 15:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E78F08863E
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 16:35:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6ad86f3cc34so14149216d6.1
- for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 06:58:13 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-79c0bbff48aso245415885a.1
+ for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 07:35:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719842291; x=1720447091; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hCSVVJI/5P+YhFUUmCnA3zFXCHa866UXYXYIS/hwI+o=;
- b=IlUSD919SfvfAmD6puGBlbJM1DOjolYodsi6PfJfBxLo4Q80RLLLJSPQQRb5MsYtde
- B43G87vDMRn9Odj3IHGiJS9DojmPcXM5hZT3v/KuRi8m4bUaOhecsVp5h25ToIohlk2j
- UfHHPqW12oxKtCejwttrhD3AQurd5TbC20plA=
+ d=chromium.org; s=google; t=1719844500; x=1720449300; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iqV/jhs5qaYRKXd45iljGdsX20mP20nvPbY0qsgS/oQ=;
+ b=lZteZALIr05bnHPqLTyhvYQkH9kND6Le/V6y8Pc+cly68QjT1P49HYXw/Y7VtqJMl4
+ IOQ3vWC7jQrqUnc++mesA5U8nmcTCA1+YoAhD8jQmNNHsbIYm1i+wL2naYm269rCQd3y
+ xyclsBkCJ0rWyFKPrPOdlbI7kkV6FzE7sLIIU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719842291; x=1720447091;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hCSVVJI/5P+YhFUUmCnA3zFXCHa866UXYXYIS/hwI+o=;
- b=u80GdiNyT+1BjKobsg+NcSpH/EByoGMhanC9qm4vlsVOXXbhfQWFwuCDc0IONTpScf
- WvzWDBqdEl1lq4mvLHmZyz8NP9O5sCH5MmXwoBbDXd/klvFQBe2M+ahjXVN2OKjQOzlp
- 11N9KKEjyxM9fahcc89Z9ovRyCwzOlx4rv/Cma3YGWqPanC1uykZL0T9N1REtu3UKHWd
- ZnpbRaIIO8buqd2IhZurfgtOx3ZC09Dn81fj1eu4mLhOVc3oT+AoTlpff816bCMcgi34
- UnFdzpiXs6VQmBqJM2G6JxxhGjxX+xCv9Kk2Z9Zb3YWun4BvBQMSegIxlJQaYONMFvXQ
- LdXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXWzYH/77kYzC/93Aj4viJXcxYl4elxqMUj1oRspIJwQa718uTwMvWGB9GrCaBihHsusIWWwva52YcuUO1MXa78QROWLw==
-X-Gm-Message-State: AOJu0YyA4izlBDNAoVtfZ9cox6p4KZa4q4HBGrqRIcyUF6EBJhEA6ZD3
- DweTSvKpa9MysVElXKnPtGxTimgZUa6Z57OLlCSv67Mgu3pOc2ny7PSYpRIe7GLhym4V4Bi2FK/
- N+WvpFIc8QUhDeNU5SQfOBBhA8kKYeAwm4OAd
-X-Google-Smtp-Source: AGHT+IFvLaabBucp4SGABrmO6uwBzdZdKhldgwS+3a6Nk5okGyN400GNAflQ8Wb/F9N1E04WChwnT0sljBaLuQryjuM=
-X-Received: by 2002:a05:6214:246c:b0:6b4:fdcd:1604 with SMTP id
- 6a1803df08f44-6b5b71eba9amr73861876d6.62.1719842291373; Mon, 01 Jul 2024
- 06:58:11 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1719844500; x=1720449300;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iqV/jhs5qaYRKXd45iljGdsX20mP20nvPbY0qsgS/oQ=;
+ b=RZgmCjrED24sQstNJfTDRwiU2iIzDc34fJSF+qMfPS048fglRpifa8kEuXSqWkZQUl
+ DpQUyZrxrAHoh8GhpLvKVfVr3T7dJI5QOicIJD1kSKXH+bfTXfajnNZb7fWhhUks8MXJ
+ sARySAizMYrnRbgXC0oiuOGRtFtm8zkzfRCN0ZO7zzznlA0XiUpOPFGoXDTAbWpF5Jst
+ YjN9W52xNkZ2lLEjcNKkRztNKNvQ3hTC/Lh/7I0v05zhg2Jb41K+6Taxr7yAv5tbfUaV
+ mtCumAa+qslpHRzo1pUy4ie3vyYDoU6aQqfHdEoLzq/k4mqeze9LqtLDR9W56h82jkU7
+ C+gw==
+X-Gm-Message-State: AOJu0YwEopQfL4qObvRm85ScupA6koox1GbRoxjyI4tsrvxryc53dhoT
+ kyY4GI0FMYFJk5bqB30bnl6fCc0wDR3de3V+l/qmQ1aaFSEH6LanY48ljAMtipBifCODx8/IACS
+ Mm7bHh+oRH0GRMrvPO1N7PqXIbuwTfv1iAVg4SchZ0OBUGo0=
+X-Google-Smtp-Source: AGHT+IGz6iS2s5XGtSUvtEVLX4tUOH/fbKlAP2HLPEbijs1rdPInGTLJp1AlXL4pQ+S4D6+FZhSe9b/pufDHl/0fwVQ=
+X-Received: by 2002:a05:620a:472a:b0:79c:9431:f71a with SMTP id
+ af79cd13be357-79d7b9edad4mr701483185a.11.1719844499742; Mon, 01 Jul 2024
+ 07:34:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240618172820.5570-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20240618172820.5570-1-ilias.apalodimas@linaro.org>
+References: <20240604163134.1149752-1-brandon.maier@collins.com>
+ <CAFLszTg++xwrcHyt-3hficWSMm=wBJ+bS1oTrjcDY7HYJD7pEg@mail.gmail.com>
+In-Reply-To: <CAFLszTg++xwrcHyt-3hficWSMm=wBJ+bS1oTrjcDY7HYJD7pEg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 1 Jul 2024 14:58:00 +0100
-Message-ID: <CAFLszTg+XCKjksG3BPz0yFEC6rQdsCji0QhdVeQhpY_RF-7+2g@mail.gmail.com>
-Subject: Re: [PATCH] configs: enable setvariable at runtime on sandbox
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: heinrich.schuchardt@canonical.com, u-boot@lists.denx.de
+Date: Mon, 1 Jul 2024 15:34:48 +0100
+Message-ID: <CAFLszTgc5D52ARKVANyWOimyB6VpbtwZ_S+jzO8vtEPyXKRmkA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: patman: fix `pip install` with Python 3.12
+To: Brandon Maier <brandon.maier@collins.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,17 +84,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Jun 2024 at 18:28, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> We currently don't have any boards enabling CONFIG_EFI_RT_VOLATILE_STORE.
-> We do have EFI selftests testing the feature though, so enable it in
-> all the sandbox platforms and test the functionality properly
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  configs/sandbox64_defconfig | 1 +
->  configs/sandbox_defconfig   | 1 +
->  2 files changed, 2 insertions(+)
+Hi Brandon,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, 5 Jun 2024 at 03:13, Simon Glass <sjg@chromium.org> wrote:
+>
+> On Tue, 4 Jun 2024 at 10:31, Brandon Maier <brandon.maier@collins.com> wr=
+ote:
+> >
+> > Installing patman with `cd ./tools/patman && pip install -e .` fails
+> > with the error below.
+> >
+> > As described in the error output, the license line is not allowed to be
+> > only defined in the setup.py.
+> >
+> > > $ cd ./tools/patman && pip install -e .
+> > > Obtaining file:///.../u-boot/tools/patman
+> > >   Installing build dependencies ... done
+> > >   Checking if build backend supports build_editable ... done
+> > >   Getting requirements to build editable ... error
+> > >   error: subprocess-exited-with-error
+> > >
+> > >   =C3=97 Getting requirements to build editable did not run successfu=
+lly.
+> > >   =E2=94=82 exit code: 1
+> > >   =E2=95=B0=E2=94=80> [61 lines of output]
+> > >       /tmp/pip-build-env-mqjvnmz8/overlay/lib/python3.12/site-package=
+s/setuptools/config/_apply_pyprojecttoml.py:76:
+> > >           _MissingDynamic: `license` defined outside of `pyproject.to=
+ml` is ignored.
+> > >       !!
+> > >
+> > >       ***************************************************************=
+*****************
+> > >       The following seems to be defined outside of `pyproject.toml`:
+> > >
+> > >       `license =3D 'GPL-2.0+'`
+> > >
+> > >       According to the spec (see the link below), however, setuptools=
+ CANNOT
+> > >       consider this value unless `license` is listed as `dynamic`.
+> > >
+> > >       https://packaging.python.org/en/latest/specifications/pyproject=
+-toml/#declaring-project-metadata-the-project-table
+> > >
+> > >       To prevent this problem, you can list `license` under `dynamic`=
+ or alternatively
+> > >       remove the `[project]` table from your file and rely entirely o=
+n other means of
+> > >       configuration.
+> > >       ***************************************************************=
+*****************
+> > >
+> > >       !!
+> >
+> > Signed-off-by: Brandon Maier <brandon.maier@collins.com>
+> > CC: Simon Glass <sjg@chromium.org>
+> > ---
+> >  tools/patman/pyproject.toml | 1 +
+> >  1 file changed, 1 insertion(+)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Unfortunately this causes 'make pip' to fail. Can you please take a look?
+
+Regards,
+Simon
