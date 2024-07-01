@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEEECC27C4F
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 00:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461FDC27C4F
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 00:32:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90CA98824C;
-	Mon,  1 Jul 2024 02:23:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69B038824C;
+	Mon,  1 Jul 2024 02:32:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ayNg1jhO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Nq3zOTK/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5676F8824C; Mon,  1 Jul 2024 02:23:06 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id D14AD88644; Mon,  1 Jul 2024 02:32:53 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0B3B88005
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 02:23:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 868F488005
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 02:32:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-79d5d14fa8bso330483885a.0
- for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 17:23:03 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6ad8243dba8so14771576d6.3
+ for <u-boot@lists.denx.de>; Sun, 30 Jun 2024 17:32:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719793382; x=1720398182; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=gmail.com; s=20230601; t=1719793970; x=1720398770; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=f010g8WmXA63f2Ob8s/1tAXYs6k1vhHKzjJl93MXJSQ=;
- b=ayNg1jhOSzexd8uMyABNT31CzCmQ0yPX/TwOgXdNAKFB6IkPZLa+2DhlHl6b68yNJr
- r/5qg/FKYESF83hKZG/XIyC6MpjyOX+2GCUsnffu6oBsCzxR0GX4lj3WqT3yqKszTYAg
- /8TKEGHpnWdI2Is2wea4XXcqsVmUfju2E7GO81V0jGHR8TqXuRxrYovjQXVtVOkFvrmx
- qwJJwaHMG8d6M/jHK4bKycP9QQ+hFKcir/NHf1AFk28cZhIJaGpB3f2ACsdfGc3WOUdk
- Tx6nr/wi5Qfhk37STMVOgekDZM41hyIrAwBIZziEuP/mmXEy1QnBgAzQDUEjVhaFP5rX
- cJag==
+ bh=AoLcH/mUnG8W9Trs3SPQYeWDGkVPWGJicPvvYDi6jV0=;
+ b=Nq3zOTK/Kfd75PB6p3pEThvPhYrP6oC/09nBXLUAOHFnbq936J4VMSa+yn24wLRuNu
+ 379tHhVk6pd1yQUZ60B0r78FKFSkvDS1LWbwj5vpzVK1idaGE74weFWE2Pxq7lPtV8PS
+ GnUQtkoPJMVpm+dR+blKBgVDiScoA27Wc3N4La4tvp+8bRd1kGkcQs0HvinuKMa/BDjT
+ FKeTYOghB7Qdk1yGrJESOwjm6ZHapdinXZF4nPFp1Ntove2JVA1ptC4Lzhz5I1DUpYrG
+ 8fKTUavgKzxWbbwe8zk2P/Eb7ik9dSxo/kMs9BJFFCw1p6Z+x/gFjO6DHug3rjU61vyi
+ OjZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719793382; x=1720398182;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20230601; t=1719793970; x=1720398770;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=f010g8WmXA63f2Ob8s/1tAXYs6k1vhHKzjJl93MXJSQ=;
- b=d4JEAGKbXLgXJe3Er0369OCJ9u1oyCU43JyGuNgLpqAPmpyp2LjgR5rUGLy9Nfxy5v
- cflOiuwXfkQ8V/AdfEqIIdOqOQRv59oHWJsDqgj+CbtQb0UNpvhO7jyNyK2AuWMugGMN
- FkCcBWb91KtJ0iChSzKfwulCb+zOuex3WFqvzB7if+i8IKTowViC5a3eYbvhmN9FWWKJ
- Ec3ugLOGSyqFwaB65WloS92xgDWeqZI7zJIv9fi6gW2hnQSJdI4qCZr9FQfM1gYMZ4+A
- DA1njNAEYnQeQ94NnvemPzJu2bnmlfpMVOw/JgUrgO/1mFNNoMnfOxVdnB/dNij3OV6M
- O8zA==
+ bh=AoLcH/mUnG8W9Trs3SPQYeWDGkVPWGJicPvvYDi6jV0=;
+ b=NUVMMaBZneZCi2Sxl9aLPMsQ6SZxvB2kVaWlHU/cB1jabcABY/eR2ig00Rgpw6cgf2
+ 1qmoHrS75axtSDPvINv0Y8RYHkuwcslTFhvmtN9IhznCb5bF9tGsFE3RCplkqPXJ3n+T
+ MVBrigOMPFXzO+XwhmSWhzS2QvpHe3FQT6ExyrI5YYLVw89ub19WvebR5/2g/50M+iEf
+ Jo4VEyzTU8v+5em2GSgy3LWi38mZlhfkdoGO4w1tcx9I96QtLmn50Ifhsio1zq9R0Z2N
+ pZVDFJp6CJ4NEBeC9WtKtKXWozUcZIZyH3lYpv27nFdpRYabmUYojvzgVSN301utND4m
+ g5bA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOeNoaklWZqionGFoTUN7X6U8do4GVEn4do5x1Y/myokWm9WYzqY0XHezTv24PboGLot+evzT39JL+ldjfqspvbt0jdQ==
-X-Gm-Message-State: AOJu0YwwVeGQhoomtONFqSNpqpZmlO7l+d0+/7uPkyK1fiNG4pPkN3ce
- +yOVfa/8DykavyeEJjBBCqLFRffxuO16EoltdSj5pX2yhb6DeYZk
-X-Google-Smtp-Source: AGHT+IGXUOKwgMtZGiKsf8Hfar5G+TXb+hGTCGoHLUBm9jp3lRUwbQaaslGi0fIbOvoNpyVHSZLhfA==
-X-Received: by 2002:a05:620a:2016:b0:795:e9cd:f5b8 with SMTP id
- af79cd13be357-79d6ba6657bmr1078004885a.23.1719793382536; 
- Sun, 30 Jun 2024 17:23:02 -0700 (PDT)
+ AJvYcCUoKwvVbeoRS1LEAyKTfBriMKJmL71aHBED1eaenorwcYqkbkCrYZNLeOmrcKsNL4kAqijdIU4ZqocNPcddIzzaJ7TmVQ==
+X-Gm-Message-State: AOJu0Yy6n0EQ/LHDVFlzw/z/v5Mn26SLfFOfFk9nTby6YNGoKkjG17qo
+ AFQYhqq5W0dlz14i+BFtahCW3+zw/ymkBoANnFLxKzUO5QFsqnQo
+X-Google-Smtp-Source: AGHT+IEqoGW4zDWdwfBlQJa+X+yb4KP/gxb8xEImZADDuIjzjbnRRmKBxaOelho2BkKhlHuuqe7FTA==
+X-Received: by 2002:a05:6214:20a6:b0:6b4:fd24:95f9 with SMTP id
+ 6a1803df08f44-6b5b70d27f6mr55710666d6.38.1719793970257; 
+ Sun, 30 Jun 2024 17:32:50 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-79d6925ebbfsm296605085a.13.2024.06.30.17.23.01
+ 6a1803df08f44-6b59e368420sm28165446d6.23.2024.06.30.17.32.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 30 Jun 2024 17:23:01 -0700 (PDT)
-Message-ID: <279949a8-26da-e480-e498-e9a85cdbf479@gmail.com>
-Date: Sun, 30 Jun 2024 20:23:00 -0400
+ Sun, 30 Jun 2024 17:32:49 -0700 (PDT)
+Message-ID: <fe81c80b-fc30-1464-7e27-2c5073cdb270@gmail.com>
+Date: Sun, 30 Jun 2024 20:32:48 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Subject: Re: [PATCH] ext4: Improve feature checking
 Content-Language: en-US
+From: Sean Anderson <seanga2@gmail.com>
 To: Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
 Cc: Jixiong.Hu@mediatek.com, sjg@chromium.org, patrick.delaunay@foss.st.com,
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, trini@konsulko.com,
  upstream+uboot@sigma-star.at
 References: <20240630212556.5627-1-richard@nod.at>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240630212556.5627-1-richard@nod.at>
+ <279949a8-26da-e480-e498-e9a85cdbf479@gmail.com>
+In-Reply-To: <279949a8-26da-e480-e498-e9a85cdbf479@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,181 +99,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/30/24 17:25, Richard Weinberger wrote:
-> Evaluate the filesystem incompat and ro_compat bit fields to judge
-> whether the filesystem can be read or written.
-> For the read side only a scary warning is shown so far.
-> I'd love to about mounting too, but I fear this will break some setups
-
-I think you are missing a verb in the first half of your sentence
-
-> where the driver works by chance.
-> 
-> Signed-off-by: Richard Weinberger <richard@nod.at>
-> ---
-> After facing ext4 write corruptions and read errors I checked
-> the ext4 implementation briefly.
-> Hopefully this patch helps other users to detect earlier that
-> they're using ext4 features which are not supported by u-boot.
-> 
-> To make feature checking possible I had to figure what this
-> implementation actually supports.
-> I hope I got them right, feedback is welcome!
-> 
-> Thanks,
-> //richard
-> ---
->   fs/ext4/ext4_common.c |  8 +++++++
->   fs/ext4/ext4_write.c  | 12 ++++++++--
->   include/ext4fs.h      | 55 ++++++++++++++++++++++++++++++++++++++++++-
->   3 files changed, 72 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-> index 2ff0dca249..7148d35ee0 100644
-> --- a/fs/ext4/ext4_common.c
-> +++ b/fs/ext4/ext4_common.c
-> @@ -2386,6 +2386,14 @@ int ext4fs_mount(void)
->   		fs->inodesz = 128;
->   		fs->gdsize = 32;
->   	} else {
-> +		int missing = __le32_to_cpu(data->sblock.feature_incompat) & \
-> +			      ~(EXT4_FEATURE_INCOMPAT_SUPP | \
-> +				EXT4_FEATURE_INCOMPAT_SUPP_LAZY_RO);
-> +
-> +		if (missing)
-> +			log_err("fs uses incompatible features: %08x, failures *are* expected!\n",
-> +				missing);
-> +
-
-I think it is a bit unclear to the user what their action should be. Maybe something like
-
-printf("EXT4 incompatible features: %08x, ignoring...\n")
-  
-and then maybe add a comment like what you have in the commit message.
-
->   		debug("EXT4 features COMPAT: %08x INCOMPAT: %08x RO_COMPAT: %08x\n",
->   		      __le32_to_cpu(data->sblock.feature_compatibility),
->   		      __le32_to_cpu(data->sblock.feature_incompat),
-> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-> index d057f6b5a7..4aae3c5f7f 100644
-> --- a/fs/ext4/ext4_write.c
-> +++ b/fs/ext4/ext4_write.c
-> @@ -869,6 +869,7 @@ int ext4fs_write(const char *fname, const char *buffer,
->   	ALLOC_CACHE_ALIGN_BUFFER(char, filename, 256);
->   	bool store_link_in_inode = false;
->   	memset(filename, 0x00, 256);
-> +	int missing_feat;
->   
->   	if (type != FILETYPE_REG && type != FILETYPE_SYMLINK)
->   		return -1;
-> @@ -882,8 +883,15 @@ int ext4fs_write(const char *fname, const char *buffer,
->   		return -1;
->   	}
->   
-> -	if (le32_to_cpu(fs->sb->feature_ro_compat) & EXT4_FEATURE_RO_COMPAT_METADATA_CSUM) {
-> -		printf("Unsupported feature metadata_csum found, not writing.\n");
-> +	missing_feat = le32_to_cpu(fs->sb->feature_incompat) & ~EXT4_FEATURE_INCOMPAT_SUPP;
-> +	if (missing_feat) {
-> +		log_err("Unsupported features found %08x, not writing.\n", missing_feat);
-> +		return -1;
-> +	}
-> +
-> +	missing_feat = le32_to_cpu(fs->sb->feature_ro_compat) & ~EXT4_FEATURE_RO_COMPAT_SUPP;
-> +	if (missing_feat) {
-> +		log_err("Unsupported RO compat features found %08x, not writing.\n", missing_feat);
->   		return -1;
->   	}
->   
-> diff --git a/include/ext4fs.h b/include/ext4fs.h
-> index d96edfd057..01b66f469f 100644
-> --- a/include/ext4fs.h
-> +++ b/include/ext4fs.h
-> @@ -34,12 +34,65 @@ struct disk_partition;
->   #define EXT4_TOPDIR_FL		0x00020000 /* Top of directory hierarchies*/
->   #define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
->   #define EXT4_EXT_MAGIC			0xf30a
-> -#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
-> +
-> +#define EXT4_FEATURE_RO_COMPAT_SPARSE_SUPER  0x0001
-> +#define EXT4_FEATURE_RO_COMPAT_LARGE_FILE    0x0002
-> +#define EXT4_FEATURE_RO_COMPAT_BTREE_DIR     0x0004
-> +#define EXT4_FEATURE_RO_COMPAT_HUGE_FILE     0x0008
-> +#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM      0x0010
-> +#define EXT4_FEATURE_RO_COMPAT_DIR_NLINK     0x0020
-> +#define EXT4_FEATURE_RO_COMPAT_EXTRA_ISIZE   0x0040
-> +#define EXT4_FEATURE_RO_COMPAT_QUOTA         0x0100
-> +#define EXT4_FEATURE_RO_COMPAT_BIGALLOC      0x0200
->   #define EXT4_FEATURE_RO_COMPAT_METADATA_CSUM 0x0400
-> +
-> +#define EXT4_FEATURE_INCOMPAT_FILETYPE  0x0002
-> +#define EXTE_FEATURE_INCOMPAT_RECOVER   0x0004
->   #define EXT4_FEATURE_INCOMPAT_EXTENTS	0x0040
->   #define EXT4_FEATURE_INCOMPAT_64BIT	0x0080
-> +#define EXT4_FEATURE_INCOMPAT_MMP       0x0100
-> +#define EXT4_FEATURE_INCOMPAT_FLEX_BG   0x0200
-> +#define EXT4_FEATURE_INCOMPAT_CSUM_SEED 0x2000
-> +#define EXT4_FEATURE_INCOMPAT_ENCRYPT   0x10000
-> +
->   #define EXT4_INDIRECT_BLOCKS		12
->   
-> +/*
-> + * Incompat features supported by this implementation.
-> + */
-> +#define EXT4_FEATURE_INCOMPAT_SUPP ( EXT4_FEATURE_INCOMPAT_FILETYPE \
-> +				   | EXTE_FEATURE_INCOMPAT_RECOVER \
-
-EXT4
-
-> +				   | EXT4_FEATURE_INCOMPAT_EXTENTS \
-> +				   | EXT4_FEATURE_INCOMPAT_64BIT \
-> +				   | EXT4_FEATURE_INCOMPAT_FLEX_BG \
-> +				   )
-
-Operators should go at the end of the line. So like
-
-#define EXT4_FEATURE_INCOMPAT_SUPP (EXT4_FEATURE_INCOMPAT_FILETYPE | \
-				    EXT4_FEATURE_INCOMPAT_RECOVER | \
-				    EXT4_FEATURE_INCOMPAT_EXTENTS | \
-				    EXT4_FEATURE_INCOMPAT_64BIT | \
-				    EXT4_FEATURE_INCOMPAT_FLEX_BG)
-
-> +/*
-> + * Incompat features supported by this implementation only in a lazy
-> + * way, good enough for reading files.
-> + *
-> + * - Multi mount protection (mmp) is not supported, but for read-only
-> + *   we get away with it.
-> + * - Same fore metadata_csum_seed and metadata_csum.
-
-nit: for
-
-> + * - The implementation has also no clue about fscrypt, but it can read
-> + *   unencrypted files. Reading encrypted files will read garbage.
-> + */
-> +#define EXT4_FEATURE_INCOMPAT_SUPP_LAZY_RO ( EXT4_FEATURE_INCOMPAT_MMP \
-> +					   | EXT4_FEATURE_INCOMPAT_CSUM_SEED \
-> +					   | EXT4_FEATURE_INCOMPAT_ENCRYPT \
-> +					   )
-
-ditto
-
-> +/*
-> + * Read-only compat features we support.
-> + * If unknown ro compat features are detected, writing to the fs is denied.
-> + */
-> +#define EXT4_FEATURE_RO_COMPAT_SUPP ( EXT4_FEATURE_RO_COMPAT_SPARSE_SUPER \
-> +				    | EXT4_FEATURE_RO_COMPAT_LARGE_FILE \
-> +				    | EXT4_FEATURE_RO_COMPAT_HUGE_FILE \
-> +				    | EXT4_FEATURE_RO_COMPAT_DIR_NLINK \
-> +				    | EXT4_FEATURE_RO_COMPAT_EXTRA_ISIZE \
-> +				    )
-
-ditto
-
->   #define EXT4_BG_INODE_UNINIT		0x0001
->   #define EXT4_BG_BLOCK_UNINIT		0x0002
->   #define EXT4_BG_INODE_ZEROED		0x0004
-
-Anyway, the substance of this patch is good. Just needs a little cosmetic cleanup.
-
---Sean
+T24gNi8zMC8yNCAyMDoyMywgU2VhbiBBbmRlcnNvbiB3cm90ZToNCj4gT24gNi8zMC8yNCAx
+NzoyNSwgUmljaGFyZCBXZWluYmVyZ2VyIHdyb3RlOg0KPj4gRXZhbHVhdGUgdGhlIGZpbGVz
+eXN0ZW0gaW5jb21wYXQgYW5kIHJvX2NvbXBhdCBiaXQgZmllbGRzIHRvIGp1ZGdlDQo+PiB3
+aGV0aGVyIHRoZSBmaWxlc3lzdGVtIGNhbiBiZSByZWFkIG9yIHdyaXR0ZW4uDQo+PiBGb3Ig
+dGhlIHJlYWQgc2lkZSBvbmx5IGEgc2Nhcnkgd2FybmluZyBpcyBzaG93biBzbyBmYXIuDQo+
+PiBJJ2QgbG92ZSB0byBhYm91dCBtb3VudGluZyB0b28sIGJ1dCBJIGZlYXIgdGhpcyB3aWxs
+IGJyZWFrIHNvbWUgc2V0dXBzDQo+IA0KPiBJIHRoaW5rIHlvdSBhcmUgbWlzc2luZyBhIHZl
+cmIgaW4gdGhlIGZpcnN0IGhhbGYgb2YgeW91ciBzZW50ZW5jZQ0KPiANCj4+IHdoZXJlIHRo
+ZSBkcml2ZXIgd29ya3MgYnkgY2hhbmNlLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IFJpY2hh
+cmQgV2VpbmJlcmdlciA8cmljaGFyZEBub2QuYXQ+DQo+PiAtLS0NCj4+IEFmdGVyIGZhY2lu
+ZyBleHQ0IHdyaXRlIGNvcnJ1cHRpb25zIGFuZCByZWFkIGVycm9ycyBJIGNoZWNrZWQNCj4+
+IHRoZSBleHQ0IGltcGxlbWVudGF0aW9uIGJyaWVmbHkuDQo+PiBIb3BlZnVsbHkgdGhpcyBw
+YXRjaCBoZWxwcyBvdGhlciB1c2VycyB0byBkZXRlY3QgZWFybGllciB0aGF0DQo+PiB0aGV5
+J3JlIHVzaW5nIGV4dDQgZmVhdHVyZXMgd2hpY2ggYXJlIG5vdCBzdXBwb3J0ZWQgYnkgdS1i
+b290Lg0KPj4NCj4+IFRvIG1ha2UgZmVhdHVyZSBjaGVja2luZyBwb3NzaWJsZSBJIGhhZCB0
+byBmaWd1cmUgd2hhdCB0aGlzDQo+PiBpbXBsZW1lbnRhdGlvbiBhY3R1YWxseSBzdXBwb3J0
+cy4NCj4+IEkgaG9wZSBJIGdvdCB0aGVtIHJpZ2h0LCBmZWVkYmFjayBpcyB3ZWxjb21lIQ0K
+Pj4NCj4+IFRoYW5rcywNCj4+IC8vcmljaGFyZA0KPj4gLS0tDQo+PiDCoCBmcy9leHQ0L2V4
+dDRfY29tbW9uLmMgfMKgIDggKysrKysrKw0KPj4gwqAgZnMvZXh0NC9leHQ0X3dyaXRlLmPC
+oCB8IDEyICsrKysrKysrLS0NCj4+IMKgIGluY2x1ZGUvZXh0NGZzLmjCoMKgwqDCoMKgIHwg
+NTUgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLQ0KPj4gwqAg
+MyBmaWxlcyBjaGFuZ2VkLCA3MiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KPj4N
+Cj4+IGRpZmYgLS1naXQgYS9mcy9leHQ0L2V4dDRfY29tbW9uLmMgYi9mcy9leHQ0L2V4dDRf
+Y29tbW9uLmMNCj4+IGluZGV4IDJmZjBkY2EyNDkuLjcxNDhkMzVlZTAgMTAwNjQ0DQo+PiAt
+LS0gYS9mcy9leHQ0L2V4dDRfY29tbW9uLmMNCj4+ICsrKyBiL2ZzL2V4dDQvZXh0NF9jb21t
+b24uYw0KPj4gQEAgLTIzODYsNiArMjM4NiwxNCBAQCBpbnQgZXh0NGZzX21vdW50KHZvaWQp
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgZnMtPmlub2Rlc3ogPSAxMjg7DQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgZnMtPmdkc2l6ZSA9IDMyOw0KPj4gwqDCoMKgwqDCoCB9IGVsc2Ugew0K
+Pj4gK8KgwqDCoMKgwqDCoMKgIGludCBtaXNzaW5nID0gX19sZTMyX3RvX2NwdShkYXRhLT5z
+YmxvY2suZmVhdHVyZV9pbmNvbXBhdCkgJiBcDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCB+KEVYVDRfRkVBVFVSRV9JTkNPTVBBVF9TVVBQIHwgXA0KPj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfU1VQ
+UF9MQVpZX1JPKTsNCj4+ICsNCj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAobWlzc2luZykNCj4+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvZ19lcnIoImZzIHVzZXMgaW5jb21wYXRpYmxl
+IGZlYXR1cmVzOiAlMDh4LCBmYWlsdXJlcyAqYXJlKiBleHBlY3RlZCFcbiIsDQo+PiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1pc3NpbmcpOw0KPj4gKw0KPiANCj4gSSB0
+aGluayBpdCBpcyBhIGJpdCB1bmNsZWFyIHRvIHRoZSB1c2VyIHdoYXQgdGhlaXIgYWN0aW9u
+IHNob3VsZCBiZS4gTWF5YmUgc29tZXRoaW5nIGxpa2UNCj4gDQo+IHByaW50ZigiRVhUNCBp
+bmNvbXBhdGlibGUgZmVhdHVyZXM6ICUwOHgsIGlnbm9yaW5nLi4uXG4iKQ0KPiANCj4gYW5k
+IHRoZW4gbWF5YmUgYWRkIGEgY29tbWVudCBsaWtlIHdoYXQgeW91IGhhdmUgaW4gdGhlIGNv
+bW1pdCBtZXNzYWdlLg0KDQpvciBtYXliZSBldmVuDQoNCnByaW50ZigiRVhUNCBpbmNvbXBh
+dGlibGUgZmVhdHVyZXM6ICUwOHgsIG1vdW50aW5nIHJlYWQtb25seS4uLlxuIikNCg0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIGRlYnVnKCJFWFQ0IGZlYXR1cmVzIENPTVBBVDogJTA4eCBJ
+TkNPTVBBVDogJTA4eCBST19DT01QQVQ6ICUwOHhcbiIsDQo+PiDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgX19sZTMyX3RvX2NwdShkYXRhLT5zYmxvY2suZmVhdHVyZV9jb21w
+YXRpYmlsaXR5KSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBfX2xlMzJf
+dG9fY3B1KGRhdGEtPnNibG9jay5mZWF0dXJlX2luY29tcGF0KSwNCj4+IGRpZmYgLS1naXQg
+YS9mcy9leHQ0L2V4dDRfd3JpdGUuYyBiL2ZzL2V4dDQvZXh0NF93cml0ZS5jDQo+PiBpbmRl
+eCBkMDU3ZjZiNWE3Li40YWFlM2M1ZjdmIDEwMDY0NA0KPj4gLS0tIGEvZnMvZXh0NC9leHQ0
+X3dyaXRlLmMNCj4+ICsrKyBiL2ZzL2V4dDQvZXh0NF93cml0ZS5jDQo+PiBAQCAtODY5LDYg
+Kzg2OSw3IEBAIGludCBleHQ0ZnNfd3JpdGUoY29uc3QgY2hhciAqZm5hbWUsIGNvbnN0IGNo
+YXIgKmJ1ZmZlciwNCj4+IMKgwqDCoMKgwqAgQUxMT0NfQ0FDSEVfQUxJR05fQlVGRkVSKGNo
+YXIsIGZpbGVuYW1lLCAyNTYpOw0KPj4gwqDCoMKgwqDCoCBib29sIHN0b3JlX2xpbmtfaW5f
+aW5vZGUgPSBmYWxzZTsNCj4+IMKgwqDCoMKgwqAgbWVtc2V0KGZpbGVuYW1lLCAweDAwLCAy
+NTYpOw0KPj4gK8KgwqDCoCBpbnQgbWlzc2luZ19mZWF0Ow0KPj4gwqDCoMKgwqDCoCBpZiAo
+dHlwZSAhPSBGSUxFVFlQRV9SRUcgJiYgdHlwZSAhPSBGSUxFVFlQRV9TWU1MSU5LKQ0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAtMTsNCj4+IEBAIC04ODIsOCArODgzLDE1IEBA
+IGludCBleHQ0ZnNfd3JpdGUoY29uc3QgY2hhciAqZm5hbWUsIGNvbnN0IGNoYXIgKmJ1ZmZl
+ciwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLTE7DQo+PiDCoMKgwqDCoMKgIH0N
+Cj4+IC3CoMKgwqAgaWYgKGxlMzJfdG9fY3B1KGZzLT5zYi0+ZmVhdHVyZV9yb19jb21wYXQp
+ICYgRVhUNF9GRUFUVVJFX1JPX0NPTVBBVF9NRVRBREFUQV9DU1VNKSB7DQo+PiAtwqDCoMKg
+wqDCoMKgwqAgcHJpbnRmKCJVbnN1cHBvcnRlZCBmZWF0dXJlIG1ldGFkYXRhX2NzdW0gZm91
+bmQsIG5vdCB3cml0aW5nLlxuIik7DQo+PiArwqDCoMKgIG1pc3NpbmdfZmVhdCA9IGxlMzJf
+dG9fY3B1KGZzLT5zYi0+ZmVhdHVyZV9pbmNvbXBhdCkgJiB+RVhUNF9GRUFUVVJFX0lOQ09N
+UEFUX1NVUFA7DQo+PiArwqDCoMKgIGlmIChtaXNzaW5nX2ZlYXQpIHsNCj4+ICvCoMKgwqDC
+oMKgwqDCoCBsb2dfZXJyKCJVbnN1cHBvcnRlZCBmZWF0dXJlcyBmb3VuZCAlMDh4LCBub3Qg
+d3JpdGluZy5cbiIsIG1pc3NpbmdfZmVhdCk7DQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJu
+IC0xOw0KPj4gK8KgwqDCoCB9DQo+PiArDQo+PiArwqDCoMKgIG1pc3NpbmdfZmVhdCA9IGxl
+MzJfdG9fY3B1KGZzLT5zYi0+ZmVhdHVyZV9yb19jb21wYXQpICYgfkVYVDRfRkVBVFVSRV9S
+T19DT01QQVRfU1VQUDsNCj4+ICvCoMKgwqAgaWYgKG1pc3NpbmdfZmVhdCkgew0KPj4gK8Kg
+wqDCoMKgwqDCoMKgIGxvZ19lcnIoIlVuc3VwcG9ydGVkIFJPIGNvbXBhdCBmZWF0dXJlcyBm
+b3VuZCAlMDh4LCBub3Qgd3JpdGluZy5cbiIsIG1pc3NpbmdfZmVhdCk7DQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgcmV0dXJuIC0xOw0KPj4gwqDCoMKgwqDCoCB9DQo+PiBkaWZmIC0tZ2l0
+IGEvaW5jbHVkZS9leHQ0ZnMuaCBiL2luY2x1ZGUvZXh0NGZzLmgNCj4+IGluZGV4IGQ5NmVk
+ZmQwNTcuLjAxYjY2ZjQ2OWYgMTAwNjQ0DQo+PiAtLS0gYS9pbmNsdWRlL2V4dDRmcy5oDQo+
+PiArKysgYi9pbmNsdWRlL2V4dDRmcy5oDQo+PiBAQCAtMzQsMTIgKzM0LDY1IEBAIHN0cnVj
+dCBkaXNrX3BhcnRpdGlvbjsNCj4+IMKgICNkZWZpbmUgRVhUNF9UT1BESVJfRkzCoMKgwqDC
+oMKgwqDCoCAweDAwMDIwMDAwIC8qIFRvcCBvZiBkaXJlY3RvcnkgaGllcmFyY2hpZXMqLw0K
+Pj4gwqAgI2RlZmluZSBFWFQ0X0VYVEVOVFNfRkzCoMKgwqDCoMKgwqDCoCAweDAwMDgwMDAw
+IC8qIElub2RlIHVzZXMgZXh0ZW50cyAqLw0KPj4gwqAgI2RlZmluZSBFWFQ0X0VYVF9NQUdJ
+Q8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHhmMzBhDQo+PiAtI2RlZmluZSBFWFQ0X0ZFQVRV
+UkVfUk9fQ09NUEFUX0dEVF9DU1VNwqDCoMKgIDB4MDAxMA0KPj4gKw0KPj4gKyNkZWZpbmUg
+RVhUNF9GRUFUVVJFX1JPX0NPTVBBVF9TUEFSU0VfU1VQRVLCoCAweDAwMDENCj4+ICsjZGVm
+aW5lIEVYVDRfRkVBVFVSRV9ST19DT01QQVRfTEFSR0VfRklMRcKgwqDCoCAweDAwMDINCj4+
+ICsjZGVmaW5lIEVYVDRfRkVBVFVSRV9ST19DT01QQVRfQlRSRUVfRElSwqDCoMKgwqAgMHgw
+MDA0DQo+PiArI2RlZmluZSBFWFQ0X0ZFQVRVUkVfUk9fQ09NUEFUX0hVR0VfRklMRcKgwqDC
+oMKgIDB4MDAwOA0KPj4gKyNkZWZpbmUgRVhUNF9GRUFUVVJFX1JPX0NPTVBBVF9HRFRfQ1NV
+TcKgwqDCoMKgwqAgMHgwMDEwDQo+PiArI2RlZmluZSBFWFQ0X0ZFQVRVUkVfUk9fQ09NUEFU
+X0RJUl9OTElOS8KgwqDCoMKgIDB4MDAyMA0KPj4gKyNkZWZpbmUgRVhUNF9GRUFUVVJFX1JP
+X0NPTVBBVF9FWFRSQV9JU0laRcKgwqAgMHgwMDQwDQo+PiArI2RlZmluZSBFWFQ0X0ZFQVRV
+UkVfUk9fQ09NUEFUX1FVT1RBwqDCoMKgwqDCoMKgwqDCoCAweDAxMDANCj4+ICsjZGVmaW5l
+IEVYVDRfRkVBVFVSRV9ST19DT01QQVRfQklHQUxMT0PCoMKgwqDCoMKgIDB4MDIwMA0KPj4g
+wqAgI2RlZmluZSBFWFQ0X0ZFQVRVUkVfUk9fQ09NUEFUX01FVEFEQVRBX0NTVU0gMHgwNDAw
+DQo+PiArDQo+PiArI2RlZmluZSBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfRklMRVRZUEXCoCAw
+eDAwMDINCj4+ICsjZGVmaW5lIEVYVEVfRkVBVFVSRV9JTkNPTVBBVF9SRUNPVkVSwqDCoCAw
+eDAwMDQNCj4+IMKgICNkZWZpbmUgRVhUNF9GRUFUVVJFX0lOQ09NUEFUX0VYVEVOVFPCoMKg
+wqAgMHgwMDQwDQo+PiDCoCAjZGVmaW5lIEVYVDRfRkVBVFVSRV9JTkNPTVBBVF82NEJJVMKg
+wqDCoCAweDAwODANCj4+ICsjZGVmaW5lIEVYVDRfRkVBVFVSRV9JTkNPTVBBVF9NTVDCoMKg
+wqDCoMKgwqAgMHgwMTAwDQo+PiArI2RlZmluZSBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfRkxF
+WF9CR8KgwqAgMHgwMjAwDQo+PiArI2RlZmluZSBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfQ1NV
+TV9TRUVEIDB4MjAwMA0KPj4gKyNkZWZpbmUgRVhUNF9GRUFUVVJFX0lOQ09NUEFUX0VOQ1JZ
+UFTCoMKgIDB4MTAwMDANCj4+ICsNCj4+IMKgICNkZWZpbmUgRVhUNF9JTkRJUkVDVF9CTE9D
+S1PCoMKgwqDCoMKgwqDCoCAxMg0KPj4gKy8qDQo+PiArICogSW5jb21wYXQgZmVhdHVyZXMg
+c3VwcG9ydGVkIGJ5IHRoaXMgaW1wbGVtZW50YXRpb24uDQo+PiArICovDQo+PiArI2RlZmlu
+ZSBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfU1VQUCAoIEVYVDRfRkVBVFVSRV9JTkNPTVBBVF9G
+SUxFVFlQRSBcDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwg
+RVhURV9GRUFUVVJFX0lOQ09NUEFUX1JFQ09WRVIgXA0KPiANCj4gRVhUNA0KPiANCj4+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCBFWFQ0X0ZFQVRVUkVfSU5D
+T01QQVRfRVhURU5UUyBcDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHwgRVhUNF9GRUFUVVJFX0lOQ09NUEFUXzY0QklUIFwNCj4+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfRkxFWF9C
+RyBcDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICkNCj4gDQo+
+IE9wZXJhdG9ycyBzaG91bGQgZ28gYXQgdGhlIGVuZCBvZiB0aGUgbGluZS4gU28gbGlrZQ0K
+PiANCj4gI2RlZmluZSBFWFQ0X0ZFQVRVUkVfSU5DT01QQVRfU1VQUCAoRVhUNF9GRUFUVVJF
+X0lOQ09NUEFUX0ZJTEVUWVBFIHwgXA0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgRVhUNF9GRUFUVVJFX0lOQ09NUEFUX1JFQ09WRVIgfCBcDQo+ICDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBFWFQ0X0ZFQVRVUkVfSU5DT01Q
+QVRfRVhURU5UUyB8IFwNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIEVYVDRfRkVBVFVSRV9JTkNPTVBBVF82NEJJVCB8IFwNCj4gIMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIEVYVDRfRkVBVFVSRV9JTkNPTVBBVF9GTEVYX0JH
+KQ0KPiANCj4+ICsvKg0KPj4gKyAqIEluY29tcGF0IGZlYXR1cmVzIHN1cHBvcnRlZCBieSB0
+aGlzIGltcGxlbWVudGF0aW9uIG9ubHkgaW4gYSBsYXp5DQo+PiArICogd2F5LCBnb29kIGVu
+b3VnaCBmb3IgcmVhZGluZyBmaWxlcy4NCj4+ICsgKg0KPj4gKyAqIC0gTXVsdGkgbW91bnQg
+cHJvdGVjdGlvbiAobW1wKSBpcyBub3Qgc3VwcG9ydGVkLCBidXQgZm9yIHJlYWQtb25seQ0K
+Pj4gKyAqwqDCoCB3ZSBnZXQgYXdheSB3aXRoIGl0Lg0KPj4gKyAqIC0gU2FtZSBmb3JlIG1l
+dGFkYXRhX2NzdW1fc2VlZCBhbmQgbWV0YWRhdGFfY3N1bS4NCj4gDQo+IG5pdDogZm9yDQo+
+IA0KPj4gKyAqIC0gVGhlIGltcGxlbWVudGF0aW9uIGhhcyBhbHNvIG5vIGNsdWUgYWJvdXQg
+ZnNjcnlwdCwgYnV0IGl0IGNhbiByZWFkDQo+PiArICrCoMKgIHVuZW5jcnlwdGVkIGZpbGVz
+LiBSZWFkaW5nIGVuY3J5cHRlZCBmaWxlcyB3aWxsIHJlYWQgZ2FyYmFnZS4NCj4+ICsgKi8N
+Cj4+ICsjZGVmaW5lIEVYVDRfRkVBVFVSRV9JTkNPTVBBVF9TVVBQX0xBWllfUk8gKCBFWFQ0
+X0ZFQVRVUkVfSU5DT01QQVRfTU1QIFwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8IEVYVDRfRkVBVFVSRV9JTkNPTVBBVF9DU1VNX1NFRUQg
+XA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwg
+RVhUNF9GRUFUVVJFX0lOQ09NUEFUX0VOQ1JZUFQgXA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICkNCj4gDQo+IGRpdHRvDQo+IA0KPj4gKy8q
+DQo+PiArICogUmVhZC1vbmx5IGNvbXBhdCBmZWF0dXJlcyB3ZSBzdXBwb3J0Lg0KPj4gKyAq
+IElmIHVua25vd24gcm8gY29tcGF0IGZlYXR1cmVzIGFyZSBkZXRlY3RlZCwgd3JpdGluZyB0
+byB0aGUgZnMgaXMgZGVuaWVkLg0KPj4gKyAqLw0KPj4gKyNkZWZpbmUgRVhUNF9GRUFUVVJF
+X1JPX0NPTVBBVF9TVVBQICggRVhUNF9GRUFUVVJFX1JPX0NPTVBBVF9TUEFSU0VfU1VQRVIg
+XA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgRVhUNF9G
+RUFUVVJFX1JPX0NPTVBBVF9MQVJHRV9GSUxFIFwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8IEVYVDRfRkVBVFVSRV9ST19DT01QQVRfSFVHRV9GSUxF
+IFwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IEVYVDRf
+RkVBVFVSRV9ST19DT01QQVRfRElSX05MSU5LIFwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8IEVYVDRfRkVBVFVSRV9ST19DT01QQVRfRVhUUkFfSVNJ
+WkUgXA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICkNCj4g
+DQo+IGRpdHRvDQo+IA0KPj4gwqAgI2RlZmluZSBFWFQ0X0JHX0lOT0RFX1VOSU5JVMKgwqDC
+oMKgwqDCoMKgIDB4MDAwMQ0KPj4gwqAgI2RlZmluZSBFWFQ0X0JHX0JMT0NLX1VOSU5JVMKg
+wqDCoMKgwqDCoMKgIDB4MDAwMg0KPj4gwqAgI2RlZmluZSBFWFQ0X0JHX0lOT0RFX1pFUk9F
+RMKgwqDCoMKgwqDCoMKgIDB4MDAwNA0KPiANCj4gQW55d2F5LCB0aGUgc3Vic3RhbmNlIG9m
+IHRoaXMgcGF0Y2ggaXMgZ29vZC4gSnVzdCBuZWVkcyBhIGxpdHRsZSBjb3NtZXRpYyBjbGVh
+bnVwLg0KPiANCj4gLS1TZWFuDQoNCg==
