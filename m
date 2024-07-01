@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B37C2BD09
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 05:04:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA25C2BD09
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 05:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4294387B4D;
-	Mon,  1 Jul 2024 07:04:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5CDE884B0;
+	Mon,  1 Jul 2024 07:19:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wPt50mU0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BLgGCGO8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799558864D; Mon,  1 Jul 2024 07:04:56 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 9333788651; Mon,  1 Jul 2024 07:18:59 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E6987923
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 07:04:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FD2488444
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 07:18:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46154q8B049131;
- Mon, 1 Jul 2024 00:04:52 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4615It5D120131;
+ Mon, 1 Jul 2024 00:18:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1719810292;
- bh=+BHPT/sMZ8LtT77ibsPq8+20UEjDLcrNiHd0Te9+pg8=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=wPt50mU08B5uSU9xiSm0WOPwiX0hB+rA9WZiCopMQs8o8kREcIHF/xXSfGsZszIzl
- EDEDUKoUw/u7qBlQubuvEi+KMk0Ks1gWQNpoSkTH424Yz1tuG5FXPJsHoQgNFVnvnX
- Zvz8NHBevuQ6Pd2GmntQvstZ7ASHGZHO+cJ/WEI4=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46154qhq076504
+ s=ti-com-17Q1; t=1719811135;
+ bh=VGGHo/1wRSpww0jlyiyGhR3d4OhaxtIlu20dxIIilrQ=;
+ h=From:Subject:Date:To:CC;
+ b=BLgGCGO8CO2ymRUzhxnd8Ng0M0+qk42lvH2o6O2B2zU+tZITI+5auGDxzhKraAywO
+ DXRJSE4RtxUZOZRcc3QSHEaQPO8XNliz3c8QkFh6CEOEgFoEcGbrLzZLNgHBrVZO2/
+ 2FBQQwMOVsGmouh3rKF7X+sTIvmUJzCJ4Q1gMSNA=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4615ItxF029815
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 1 Jul 2024 00:04:52 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 1 Jul 2024 00:18:55 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 1
- Jul 2024 00:04:52 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 00:18:55 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 1 Jul 2024 00:04:52 -0500
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46154p0j061902;
- Mon, 1 Jul 2024 00:04:52 -0500
-Date: Mon, 1 Jul 2024 10:34:51 +0530
+ Frontend Transport; Mon, 1 Jul 2024 00:18:55 -0500
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4615IpvV059517;
+ Mon, 1 Jul 2024 00:18:52 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Tom
- Rini <trini@konsulko.com>, Vaishnav Achath <vaishnav.a@ti.com>, Jayesh
- Choudhary <j-choudhary@ti.com>,
- Joe Hershberger <joe.hershberger@ni.com>, <u-boot@lists.denx.de>,
- Neha Malcom Francis <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Dhruva Gole <d-gole@ti.com>
-Subject: Re: [PATCH 1/3] include: env: ti: mmc: Change name_fdt usage to
- fdtfile
-Message-ID: <20240701050451.esuoiobz5qqfcrka@uda0497581>
-References: <20240628-b4-upstream-streamline-platform-v1-0-17659af992c1@ti.com>
- <20240628-b4-upstream-streamline-platform-v1-1-17659af992c1@ti.com>
- <20240628130512.4hcrvcap72mgihga@preschool>
+Subject: [PATCH v2 0/4] Fix fdtfile for j722s and am62p
+Date: Mon, 1 Jul 2024 10:48:48 +0530
+Message-ID: <20240701-b4-upstream-streamline-platform-v2-0-7539ff066b58@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240628130512.4hcrvcap72mgihga@preschool>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADg8gmYC/42NTQ6CMBBGr0Jm7Zi2/Ikr72FYFJjKJECbthIN4
+ e5WvICrL+9bvLdBIM8U4Jpt4GnlwHZJoE4Z9KNeHoQ8JAYlVCEqdcGuwKcL0ZOe8TcTL4Ru0tF
+ YP6MRQ12UeZXXnYJkcZ4Mv47CvU08cojWv4/gKr/v/+5VokBZV2WjTdOoXt4in3s7Q7vv+weIE
+ GjcywAAAA==
+To: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Tom
+ Rini <trini@konsulko.com>, Vaishnav Achath <vaishnav.a@ti.com>, Jayesh
+ Choudhary <j-choudhary@ti.com>, Joe Hershberger <joe.hershberger@ni.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishanth
+ Menon <nm@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1719811131; l=1188;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=U+VwP6vbU294tNfCJb3sTaYLjPfp8in+KH9ewNMw5vA=;
+ b=v+IMrJieHvSlbSz5H1wqhICTZqQhGoLASoxBeuC5JSX4m8gfMI7VNK774fD2uhEyfjcB+1BON
+ aUHraRhcSv7BBmw4IiiNQv5Yh5a7aG87N9HZOBNbE1DY7oCSfXp86ny
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,54 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth,
+fdtfile wasn't being populated in these boards, add the code in evm.c
+for the same.
 
-On 08:05-20240628, Nishanth Menon wrote:
-> On 13:53-20240628, Manorit Chawdhry wrote:
-> > name_fdt is kept for backward compatibility but it depends on EEPROM
-> > detection logic and some of the platforms like J7AHP/AM69 don't have
-> > that anymore which causes boot failure.
-> > 
-> > Replacing name_fdt usage to fdtfile as fdtfile is populated based on
-> > CONFIG_DEFAULT_DEVICE_TREE.
-> > 
-> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > ---
-> >  include/env/ti/mmc.env | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/include/env/ti/mmc.env b/include/env/ti/mmc.env
-> > index 0256a2d2aaca..037a09010ce4 100644
-> > --- a/include/env/ti/mmc.env
-> > +++ b/include/env/ti/mmc.env
-> > @@ -16,7 +16,7 @@ importbootenv=echo Importing environment from mmc${mmcdev} ...;
-> >  loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}
-> >  loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}
-> >  loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/dtb/${fdtfile}
-> > -get_fdt_mmc=load mmc ${bootpart} ${fdtaddr} ${bootdir}/dtb/${name_fdt}
-> > +get_fdt_mmc=load mmc ${bootpart} ${fdtaddr} ${bootdir}/dtb/${fdtfile}
-> 
-> Did you check the other users of mmc.env file? How about legacy boards like k2g?
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v2:
+- Replace findfdt with fdtfile as that is what the series fixes. (Nishanth)
+- Drop findfdt as well for K3 platforms legacy support
+- Link to v1: https://lore.kernel.org/r/20240628-b4-upstream-streamline-platform-v1-0-17659af992c1@ti.com
 
-Am not sure about the status of migration to ti_set_fdt_env for k2g
-platforms. Though I see k2g redefining get_fdt_mmc with name_fdt itself
-so hoping that this change wouldn't affect them. If they also migrate to
-ti_set_fdt_env then I think for them also this change would work and the
-override can be deleted later.
+---
+Dhruva Gole (1):
+      include: env: ti_common: Remove findfdt
 
-Regards,
-Manorit
+Manorit Chawdhry (3):
+      include: env: ti: mmc: Change name_fdt usage to fdtfile
+      board: ti: am62p|j722s: Add ti_set_fdt_env for fdtfile
+      configs: am62p|j722s_a53: Add CONFIG_BOARD_LATE_INIT
 
-> 
-> >  envboot=if mmc dev ${mmcdev}; then
-> >  	if mmc rescan; then
-> >  		echo SD/MMC found on device ${mmcdev};
-> > 
-> > -- 
-> > 2.45.1
-> > 
-> 
-> -- 
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+ board/ti/am62px/evm.c            | 9 +++++++++
+ board/ti/j722s/evm.c             | 9 +++++++++
+ configs/am62px_evm_a53_defconfig | 1 +
+ configs/j722s_evm_a53_defconfig  | 1 +
+ include/env/ti/mmc.env           | 2 +-
+ include/env/ti/ti_common.env     | 2 +-
+ 6 files changed, 22 insertions(+), 2 deletions(-)
+---
+base-commit: 899b088674b6905710ce546f0a8848662904852a
+change-id: 20240628-b4-upstream-streamline-platform-f0d7453637b2
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
