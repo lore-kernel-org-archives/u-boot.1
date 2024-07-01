@@ -4,98 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D293C3065A
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 18:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FE9C2BD09
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 18:08:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC00C886B1;
-	Mon,  1 Jul 2024 20:07:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=collins.com
+	by phobos.denx.de (Postfix) with ESMTP id 56772886B9;
+	Mon,  1 Jul 2024 20:08:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collins.com header.i=@collins.com header.b="tgsLlOt1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a9099WiS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 549D3886B6; Mon,  1 Jul 2024 20:07:02 +0200 (CEST)
-Received: from mx0b-00105401.pphosted.com (mx0b-00105401.pphosted.com
- [67.231.152.184])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 530C7886BA; Mon,  1 Jul 2024 20:08:34 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8E6488670
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 20:06:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05B0D88670
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 20:08:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=collins.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=brandon.maier@collins.com
-Received: from pps.filterd (m0346904.ppops.net [127.0.0.1])
- by mx0a-00105401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 461GpqEb014093; Mon, 1 Jul 2024 18:06:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=collins.com; h=cc :
- content-transfer-encoding : content-type : date : from : in-reply-to :
- message-id : mime-version : references : subject : to; s=POD051818;
- bh=ohiKA6nnSQ/H/F57/pj/RFPFcVwySb+k5Gc6Unaw1rE=;
- b=tgsLlOt11vMZ6J4zQDyGOU/Gb8oEU5NuaYaUVNTp9CF7Id4Wh8aBp8nQtI1ySBcVUKMH
- iOLaPbQybF4CKhPm1NsVk+C4e5Mho/d3UJaclEVxuNn4dmr4SesckjGu4gMwvGu5G7hD
- btYC2PlDO+P81wzPkSbu6kDuOjS5u2+cUyMd++VHW+OSW2Rbi86QrAW6jSzf2hBvhWqK
- iNn9TbriXkzO0NYzDX7nuA4HXITlCqvK3wmKf33MAzZUqyblQ21ec6aJFEkSuh9MQMpP
- zPmuZA7nJThOIB9nJWNkby0C3j12E1v98fPfFlqncMbMNwbDChkOMwGnXbJuazd6ooJD aA== 
-Received: from xusxph009rp050.rtx.com (xusxph009rp050.rtx.com [128.13.125.147])
- by mx0a-00105401.pphosted.com (PPS) with ESMTPS id 402av0y96g-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 01 Jul 2024 18:06:57 +0000
-Received: from xusxph005rp020.corp.ray.com ([128.13.121.224])
- by xusxph009rp050.rtx.com (8.17.1.19/8.17.1.19) with ESMTPS id 461I6uC1021511
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 1 Jul 2024 18:06:57 GMT
-Received: from crulimr02.rockwellcollins.com
- (snat-utc-mailhub.rockwellcollins.com [10.172.224.19])
- by xusxph005rp020.corp.ray.com (8.17.1.19/8.17.1.19) with ESMTPS id
- 461I6uDO002663
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 1 Jul 2024 18:06:56 GMT
-X-Received: from localhost (unknown [10.148.204.208])
- by crulimr02.rockwellcollins.com (Postfix) with ESMTP id 5E38230041CA;
- Mon,  1 Jul 2024 13:06:56 -0500 (CDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 01 Jul 2024 18:06:56 +0000
-Message-Id: <D2EEI1UVCSAR.25E0OJILODS4F@collins.com>
-Cc: <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] tools: patman: fix `pip install` with Python 3.12
-From: "Brandon Maier" <brandon.maier@collins.com>
-To: "Simon Glass" <sjg@chromium.org>
-X-Mailer: aerc 0.17.0-0-g6ea74eb30457
-References: <20240604163134.1149752-1-brandon.maier@collins.com>
- <CAFLszTg++xwrcHyt-3hficWSMm=wBJ+bS1oTrjcDY7HYJD7pEg@mail.gmail.com>
- <CAFLszTgc5D52ARKVANyWOimyB6VpbtwZ_S+jzO8vtEPyXKRmkA@mail.gmail.com>
-In-Reply-To: <CAFLszTgc5D52ARKVANyWOimyB6VpbtwZ_S+jzO8vtEPyXKRmkA@mail.gmail.com>
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-07-01_18,2024-07-01_01,2024-05-17_01
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-07-01_18,2024-07-01_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- mlxlogscore=999
- phishscore=0 spamscore=0 bulkscore=0 adultscore=0 mlxscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2406180000 definitions=main-2407010136
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- malwarescore=0 bulkscore=0
- suspectscore=0 mlxscore=0 phishscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2406180000
- definitions=main-2407010137
-X-Proofpoint-GUID: 0KMmEvr8yqrTW3Xf9phlLcPSmj4XfUdX
-X-Proofpoint-ORIG-GUID: 0KMmEvr8yqrTW3Xf9phlLcPSmj4XfUdX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-07-01_18,2024-07-01_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_default_notspam
- policy=outbound_default score=0 mlxscore=0
- suspectscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015
- impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0 adultscore=0
- malwarescore=0 mlxlogscore=999 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2406180000 definitions=main-2407010136
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-25c9af0102cso1663719fac.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 11:08:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1719857311; x=1720462111; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mziQn/ffyNyccDlznvXlxlTcMTsdikg1qE0MwxeKG5A=;
+ b=a9099WiSdUIFk5qhFtKMfCl4D3TR3zpU+KF/T+lsR1tgmrChhUmAmJz8Bj64g0fCkc
+ UuEnBjTVaqnyHYCepjNp3db5t2rUiBD/3fZ0cBnepiDyxhAJwsUKYR4HMoF7QzMaIfl7
+ EgP/lqJqMNNdFRTdkkDCOUWc24DtL7TWKG0c8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719857311; x=1720462111;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mziQn/ffyNyccDlznvXlxlTcMTsdikg1qE0MwxeKG5A=;
+ b=STK0zax562Cgry4qGRlGXMELNjilWSZOiBr0jrt2W5aolG7HqmB6rAiUC//gpGerVW
+ kXigpJofGU/bE1v6hAViRHb1ZfPAaViU1i1EVWtzCaObl9fDREfguRuPdByRTNlyxgMz
+ yph11srmzag7SAWglpdCtKBIkyX98oqzw/I1oK1+yg8xPrfANQWeRZTQotNgZx8SI8Zg
+ b8u4USNfc+P8oO9QCR5p15wLIG8cS6rNEtQEGXnG425GTTk19dGvf3wb+gaCCjQ28nCm
+ UwDuvtMEdBgCmZiTj5spXdYrX2c34TBIHfNCLQJSGMnqUDqEMjBjDCqDrWix1V7P7XMG
+ Zl+Q==
+X-Gm-Message-State: AOJu0Yw/c3RH6QHUcybVV6oNW4LT9IYXnUvhF7qA0fisRuTYuVNPIb0s
+ lv71DccupG4YvrExgr9HvyNA9/nnV+1NRwkfCX4XGjVmqyKpfARkV+aBTYZOPXo=
+X-Google-Smtp-Source: AGHT+IGVthffckeHY6WU+PmWxT35ubGRKmZaDBTUWh/E291gwdhd/dIKBlowjs1KgArTG269WZY9bQ==
+X-Received: by 2002:a05:6870:eca3:b0:259:8b37:9e9a with SMTP id
+ 586e51a60fabf-25db34b9bcfmr6100354fac.34.1719857310751; 
+ Mon, 01 Jul 2024 11:08:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-45.totalplay.net.
+ [187.190.197.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25d8e234b66sm1874848fac.30.2024.07.01.11.08.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Jul 2024 11:08:30 -0700 (PDT)
+Date: Mon, 1 Jul 2024 12:08:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: Re: [PATCH] binman: Update cbfstool
+Message-ID: <20240701180827.GL38804@bill-the-cat>
+References: <20240701134102.1465810-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IOCvoPfXKVLVsAIQ"
+Content-Disposition: inline
+In-Reply-To: <20240701134102.1465810-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,85 +93,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Mon Jul 1, 2024 at 2:34 PM UTC, Simon Glass wrote:
-> Hi Brandon,
->
-> On Wed, 5 Jun 2024 at 03:13, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > On Tue, 4 Jun 2024 at 10:31, Brandon Maier <brandon.maier@collins.com> =
-wrote:
-> > >
-> > > Installing patman with `cd ./tools/patman && pip install -e .` fails
-> > > with the error below.
-> > >
-> > > As described in the error output, the license line is not allowed to =
-be
-> > > only defined in the setup.py.
-> > >
-> > > > $ cd ./tools/patman && pip install -e .
-> > > > Obtaining file:///.../u-boot/tools/patman
-> > > >   Installing build dependencies ... done
-> > > >   Checking if build backend supports build_editable ... done
-> > > >   Getting requirements to build editable ... error
-> > > >   error: subprocess-exited-with-error
-> > > >
-> > > >   =C3=97 Getting requirements to build editable did not run success=
-fully.
-> > > >   =E2=94=82 exit code: 1
-> > > >   =E2=95=B0=E2=94=80> [61 lines of output]
-> > > >       /tmp/pip-build-env-mqjvnmz8/overlay/lib/python3.12/site-packa=
-ges/setuptools/config/_apply_pyprojecttoml.py:76:
-> > > >           _MissingDynamic: `license` defined outside of `pyproject.=
-toml` is ignored.
-> > > >       !!
-> > > >
-> > > >       *************************************************************=
-*******************
-> > > >       The following seems to be defined outside of `pyproject.toml`=
-:
-> > > >
-> > > >       `license =3D 'GPL-2.0+'`
-> > > >
-> > > >       According to the spec (see the link below), however, setuptoo=
-ls CANNOT
-> > > >       consider this value unless `license` is listed as `dynamic`.
-> > > >
-> > > >       https://packaging.python.org/en/latest/specifications/pyproje=
-ct-toml/#declaring-project-metadata-the-project-table
-> > > >
-> > > >       To prevent this problem, you can list `license` under `dynami=
-c` or alternatively
-> > > >       remove the `[project]` table from your file and rely entirely=
- on other means of
-> > > >       configuration.
-> > > >       *************************************************************=
-*******************
-> > > >
-> > > >       !!
-> > >
-> > > Signed-off-by: Brandon Maier <brandon.maier@collins.com>
-> > > CC: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >  tools/patman/pyproject.toml | 1 +
-> > >  1 file changed, 1 insertion(+)
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Unfortunately this causes 'make pip' to fail. Can you please take a look?
+--IOCvoPfXKVLVsAIQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The `make pip` uses `python -m build` which seems to handle this
-differently.
+On Mon, Jul 01, 2024 at 02:41:02PM +0100, Simon Glass wrote:
 
-I removed the license line from setup.py entirely, as the pyproject doc
-says it's not needed if a license classifier is used. That now works
-with both `pip install` and `python -m build`.
+> Update to a newer version of this tool, from December 2023. This runs OK
+> with the current binman tests.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  tools/binman/btool/cbfstool.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/tools/binman/btool/cbfstool.py b/tools/binman/btool/cbfstool=
+=2Epy
+> index 29be2d8a2b5..b7c64b90ffa 100644
+> --- a/tools/binman/btool/cbfstool.py
+> +++ b/tools/binman/btool/cbfstool.py
+> @@ -215,5 +215,5 @@ class Bintoolcbfstool(bintool.Bintool):
+>          if method !=3D bintool.FETCH_BIN:
+>              return None
+>          fname, tmpdir =3D self.fetch_from_drive(
+> -            '1IOnE0Qvy97d-0WOCwF64xBGpKSY2sMtJ')
+> +            '1KPR41-fKHPqlMCVsfMl2xJcyUgTT_6YI')
+>          return fname, tmpdir
 
-Thanks,
-Brandon
+This should probably be from 4.22.01 to match CI, or do we need to bump
+CI up to a newer release too?
 
->
-> Regards,
-> Simon
+--=20
+Tom
 
+--IOCvoPfXKVLVsAIQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaC8JsACgkQFHw5/5Y0
+tyxQkgv/b3eDoQIR9sLFhxRwC10GXnrqmwHOsegrz5F5XqwEzgKd1XKw0cfhLqwS
+wR5lE0REeKqQ534VBpb0VWX4J+4Nn57t8dqZqSqR7E9+JivvKUdYh6tF+3sGxTey
+qwrwcJ4gkgYWA/f6Q2LPuulD0r+FA7CqGL3Tz+vXRlgWjt9xJzvtXxKK51WhpX2o
+6pPuScNFfecDfY3a1UclMvELDXsAiG7JWTKF9x4uhPN4hMxozKbPAmSAKg6o0o39
+1AoEC9WyzRR5OlKOOQ/p2aeYnFn52VNyQYA7t3aGdRGXLrKCz6lmpopz64IJgLt/
+iz8VLNXaRxzskI48GgXl5jHqgf0pb5HDLlYfRlVg8eCTUK/vDJ7j3c2HOXfONtwp
+MWoROOmsVsN16KXcu4E8bdTzK+4YoYWt/CEWsIX7idtGMu+2qus/jNCHL1GmCWND
+9/i9byrIINaptxV/HDuRE54mzEEZihuWxzktiJal0GhRBHR5ruS1b8Uc6P9/w9K1
+MC/e6Bsc
+=Gboe
+-----END PGP SIGNATURE-----
+
+--IOCvoPfXKVLVsAIQ--
