@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D75C2BD09
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 13:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4175C2BD09
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 13:54:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A504886B5;
-	Mon,  1 Jul 2024 15:53:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 1A5B1886BA;
+	Mon,  1 Jul 2024 15:53:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="tsckgkFL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EbbYrt0u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 672E788657; Mon,  1 Jul 2024 08:21:23 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 47AC587E13; Mon,  1 Jul 2024 11:55:59 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E9FF8824C
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 08:21:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2BDC88297
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 11:55:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=D.Schultz@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1719814881; x=1722406881;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l5PwJ529kbhE7voOA3aOyDqVDvtVaMLKqOZi6fmZ7Vk=;
- b=tsckgkFLE1DLxcvoi0GoNldk6d5qEDDagVv88ij/9+TgJYBXILgXNbzW/ROSs4nN
- vwvGzZY7l6wpqLpeMFmk1LjpnH0qCm7iiLg/arO3ofTEF4986zpXjtjJxUkPCbXt
- bM/tahvtv4JBp5PO9+bo4/4iWlq+D+9GK5TYPpkkyW8=;
-X-AuditID: ac14000a-03251700000021bc-44-66824ae022e0
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id D0.B0.08636.0EA42866;
- Mon,  1 Jul 2024 08:21:20 +0200 (CEST)
-Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 1 Jul 2024
- 08:21:18 +0200
-From: Daniel Schultz <d.schultz@phytec.de>
-To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-CC: <w.egorov@phytec.de>, <trini@konsulko.com>, <d-gole@ti.com>,
- <mkorpershoek@baylibre.com>, <nm@ti.com>, Daniel Schultz
- <d.schultz@phytec.de>
-Subject: [PATCH 4/4] board: phytec: phycore_am64x: Move earlycon into own
- variable
-Date: Sun, 30 Jun 2024 23:20:50 -0700
-Message-ID: <20240701062050.1475249-4-d.schultz@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240701062050.1475249-1-d.schultz@phytec.de>
-References: <20240701062050.1475249-1-d.schultz@phytec.de>
+ spf=pass smtp.mailfrom=sebin.francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4619toNF075330;
+ Mon, 1 Jul 2024 04:55:50 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719827750;
+ bh=EeQQM6JyGICsfteYvw8OCGOjOEmCMv0qAe3kj9I3wFU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=EbbYrt0upO4azCe9hniXOvSttS319itglxx8nsSkjxbPBUyhaXVBPdfQDZSq4fQmr
+ Ra4gBOP/xGTQOp1kIyb4mjWExsIU4P4lbZVjG9VoqQlZzCUL8QxXwbRf8rUJJ4ydO3
+ PSAojHqlaGK8HgwEMfIH7D1pMGtnbGklJBFtK28c=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4619to3B113170
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 1 Jul 2024 04:55:50 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 1
+ Jul 2024 04:55:50 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 1 Jul 2024 04:55:49 -0500
+Received: from [10.24.69.195] (shark.dhcp.ti.com [10.24.69.195])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4619tkr2085891;
+ Mon, 1 Jul 2024 04:55:46 -0500
+Message-ID: <7769855e-8e08-47c0-b4a0-a466f44044de@ti.com>
+Date: Mon, 1 Jul 2024 15:25:45 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrLLMWRmVeSWpSXmKPExsWyRpKBR/eBV1OawckrVhYtaz0sXhyby27x
- 5sdZJoupkzazW7zd28lu0f1O3YHN4/2NVnaPVwdWsXucvbOD0aO/u4XV4/iN7UwBrFFcNimp
- OZllqUX6dglcGU9O/mYqaOOomNnUx9rA2MXexcjJISFgInFr72K2LkYuDiGBJUwSC3raWCGc
- e4wSezceYAapYhPQkrizZS6YLSJgJrFo7XmwDmaByYwSzYcWAo3i4BAWCJK4NY8RpIZFQFXi
- w+urLCA2r4CVxLTjs9ggtslLzLz0HWwzp4C1xORbt1lBbCGgmms77rND1AtKnJz5BKyXGai+
- eetsZghbQuLgixfMEPUKErO3TWaEmTnt3GtmCDtU4sim1UwTGIVmIRk1C8moWUhGLWBkXsUo
- lJuZnJ1alJmtV5BRWZKarJeSuokRFAUiDFw7GPvmeBxiZOJgPMQowcGsJMIb+Ks+TYg3JbGy
- KrUoP76oNCe1+BCjNAeLkjjv6o7gVCGB9MSS1OzU1ILUIpgsEwenVANjiYvvXRtBwRm9Sz2j
- bk80fXCt+bCNfBvjtAPP83Qjlgn4yc0stJJ2EPp3UnrbdhW77n1mR/JmR70ru/15wsTap9M6
- H7NnSvK8E1ze4cdX6dewdfohU3Ed6cyyUwY8++9wsJk83qfw+nhM1DITti9cj5PntmluuFbR
- +Gjl5c3RWTmLX1w9/UNWiaU4I9FQi7moOBEAVGxjx3ACAAA=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V3 0/4] Low Power Mode: Pakage TIFS Stub on BeaglePlay
+To: Nishanth Menon <nm@ti.com>
+CC: Dhruva Gole <d-gole@ti.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
+ <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>,
+ Vibhore Vardhan <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>
+References: <20240628093252.1864609-1-d-gole@ti.com>
+ <20240628130323.vxy7rruh3bdcklxe@brownnose>
+ <067d0bd4-867f-4d48-8852-f5d8e04ffc2a@ti.com>
+ <20240628174008.tjdhwvzj7mxaka6z@destruct>
+Content-Language: en-US
+From: Sebin Francis <sebin.francis@ti.com>
+In-Reply-To: <20240628174008.tjdhwvzj7mxaka6z@destruct>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-Mailman-Approved-At: Mon, 01 Jul 2024 15:53:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,29 +88,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-By moving the earlycon definition into a dedicated variable, it's
-easier to change these values in case the kernel should print on
-a different serial interface.
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
----
- board/phytec/phycore_am64x/phycore_am64x.env | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On 28/06/24 23:10, Nishanth Menon wrote:
+> On 19:39-20240628, Sebin Francis wrote:
+>> On 28/06/24 18:33, Nishanth Menon wrote:
+>>> On 15:02-20240628, Dhruva Gole wrote:
+>>>> This series includes the binman related changes required to package tIFS
+>>>> Stub to support Low Power Modes on BeaglePlay.
+>>>> Also, based on comments from previous patch [0] documentation has been
+>>>> added to describe small addition in boot flow as well as tispl image
+>>>> format.
+>>>>
+>>>> I am aware that the new boot flow image will need to be updated in
+>>>> other places like am62a, am62p and even other boards that use am62x.
+>>>> However, I would like to keep this series beagleplay TIFSStub specific
+>>>> and so I will be sending a follow up series to update other places
+>>>> seperately if that's ok.
+> [...]
+>>> Maybe you can help clarify a bit. I understand from [1]
+>>> that you are betting on timing to keep tifs stub safe. But then, why
+>>> not plug in this firmware blob along with DM itself? that allows DM
+>>> to manage itself the way it wants to and control it's own memory map?
+>>> DM initialization itself takes a few ms, just because TFA is not
+>>> touching any part of DDR does not mean that we can assume system is
+>>> interference free, no? What if DM architecture changes such that PLL
+>>> initialization or some other long pole item is performed prior to
+>>> loading the tifs stub?
+>> In Linux DT the address space in which FS stub is copied is part of DM
+>> firmware carve-out in DDR,
+>> so if fs stub can get corrupted then DM also can get corrupted.
+> OK - so the memory map we are copying to is already reserved in device
+> tree?
+>
+> See this thread[1] - we are arguing here that the reserved region is
+> meant for bootloader to fill up and keep protected. DT itself from
+> kernel is shared between u-boot and kernel OF_UPSTREAM.
+>
+> Now, the consumer of the binary is DM, the load area is already part of
+> carveout for DM, it sounds like it should have been packaged with DM
+> itself instead of making the packaging problem the problem that everyone
+> image creation system has to solve - not to mention signing etc..
+>
+> Why not merge this with DM?
+>
+>
+> [1] https://lore.kernel.org/all/59c391a7-c6fe-4b04-891a-c6905ef29f20@ti.com/
+For HS-FS device we need to sign the fs-stub with customer key. DM firmware
+cannot have a component which is signed using customer key.
+Thanks
+Sebin
 
-diff --git a/board/phytec/phycore_am64x/phycore_am64x.env b/board/phytec/phycore_am64x/phycore_am64x.env
-index ada3a9233be..e24a958f51d 100644
---- a/board/phytec/phycore_am64x/phycore_am64x.env
-+++ b/board/phytec/phycore_am64x/phycore_am64x.env
-@@ -11,7 +11,8 @@ mmcdev=1
- mmcroot=2
- mmcpart=1
- console=ttyS2,115200n8
--mmcargs=setenv bootargs console=${console} earlycon=ns16550a,mmio32,0x02800000
-+earlycon=ns16550a,mmio32,0x02800000
-+mmcargs=setenv bootargs console=${console} earlycon=${earlycon}
- 	root=/dev/mmcblk${mmcdev}p${mmcroot} rootwait rw
- loadimage=load mmc ${mmcdev}:${mmcpart} ${loadaddr} Image
- loadfdt=load mmc ${mmcdev}:${mmcpart} ${fdtaddr} ${fdtfile}
--- 
-2.25.1
 
