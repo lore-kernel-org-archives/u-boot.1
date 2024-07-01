@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC94C3065A
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 15:01:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E40FDC3065A
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 15:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED2B6886A0;
-	Mon,  1 Jul 2024 17:01:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 10BD5886A4;
+	Mon,  1 Jul 2024 17:24:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y8ioLW8P";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w0FaTWZn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 942378866B; Mon,  1 Jul 2024 17:01:34 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4ADEE886AA; Mon,  1 Jul 2024 17:24:31 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56BD7886A0
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 17:01:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11EE6886A0
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 17:24:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52cdbc20faeso4479344e87.1
- for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 08:01:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719846089; x=1720450889; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jQTaA9wgQTqop3uWpviwV+AueZrG8MEG6NSssolQHYE=;
- b=y8ioLW8PIBcmSDcVStku9ifgP1IVpB2rNujhZ2bFwgTem3jVyfSTKsOWYlIZoDZl0X
- BhBEcXUrMxRzibWAP6HuzcWdnZ9UA1a7iIwOn6/PvZk4GZ4WW2TloArdlBUTOoeQd5Du
- mSZ30nwJlSW54lWGdcFBpCW+VkYRaH2UAI8PbcBfvLXSPL8HZsbOVwv9SnPDmWNKN9OM
- ehnrYf0ml/rvMoLKdhWlUI3LPcwWupeqntfyx0Ymp0wt3xP0X/IFKKz8HHPaCkKBI5Cz
- nRgQGxSkQOvKsn1ThedZTRvwxgMen48GWgOeD4WNCwqWfeVUVgVLvTYwY/OcFQzWCWk4
- /OPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719846089; x=1720450889;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jQTaA9wgQTqop3uWpviwV+AueZrG8MEG6NSssolQHYE=;
- b=WEA1tljX/Xx7LQJLEXe/iMjBexyvkPU0pbip/TCQYDH3lDxzMUwn4q6SheuKN3DDBu
- h1feF78vpx6wx9M0/MeKir2lP9abu7Y+bCzwPEKFhE4CHbYnNfssuGStF68ev/C8U1hU
- 64XYeHupWfd5nKmA2YbLlpA+B4qfp/dC/MFXJRBvifg+wxFG7wcyQk9y7QADI3yPASny
- Bzex3giasIKBA9K9D7qN97NZJZxRLoCqtMQqOBqAssIANh35KrL3DPekNA/yGHd7TG5k
- rPxJLdyge+0aL2IUoHW4ct9u1vBSgnGhu0b+Fkmk/rZ/4XuXJwULybXGYeLgVrqsLJ1b
- 3QAA==
-X-Gm-Message-State: AOJu0Yyd91RcplDMvr8IZlVmheTl+HsCQ2IcZCvm69mtmbpd6A7gKdhG
- 9/X9HyVNrSp9axILGR+CYjVYboRi+FEMRNBrytol5JSVJoiTYU3hwCk7pjxfOGA=
-X-Google-Smtp-Source: AGHT+IFVEKeCENkAT1ZMufkBwYNXeEgCMXk49UYWr8s4cxd5k0qTKFy5y2XJ0Kqw5M9M5BM/HhkXQw==
-X-Received: by 2002:a05:6512:3b12:b0:52c:e17c:3753 with SMTP id
- 2adb3069b0e04-52e82647353mr3859005e87.5.1719846089069; 
- Mon, 01 Jul 2024 08:01:29 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:ea8:cd01:2a82:217:96f3:c43e?
- ([2a0a:ef40:ea8:cd01:2a82:217:96f3:c43e])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3675a0cd4a1sm10280883f8f.23.2024.07.01.08.01.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Jul 2024 08:01:28 -0700 (PDT)
-Message-ID: <230eedde-87bd-4625-b258-a345427b659c@linaro.org>
-Date: Mon, 1 Jul 2024 16:01:27 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 461FOJAL083576;
+ Mon, 1 Jul 2024 10:24:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719847459;
+ bh=rHI2/+qkGi+IJTocjfaHYC8e9tTi+alOIpDcX1JtMbE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=w0FaTWZnSL6jR516HOqV9T4R9CO3TvmgJl8qog70MUMftnPeix5DBqIoHHAikwpeo
+ /GpRtESddAEUs5cVsCgta45kKmD9Jk5CcZAM4L3pIOq666nV03IRhfRxB+QAftJbXL
+ OUGh3KyGusVZFa2hmhd3QzJJo+etvpcv3l2asmBg=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 461FOJu3005679
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 1 Jul 2024 10:24:19 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 1
+ Jul 2024 10:24:19 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 1 Jul 2024 10:24:19 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 461FOJf7099035;
+ Mon, 1 Jul 2024 10:24:19 -0500
+Date: Mon, 1 Jul 2024 10:24:19 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Sebin Francis <sebin.francis@ti.com>
+CC: Dhruva Gole <d-gole@ti.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
+ <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>,
+ Vibhore Vardhan <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>
+Subject: Re: [PATCH V3 0/4] Low Power Mode: Pakage TIFS Stub on BeaglePlay
+Message-ID: <20240701152419.zptqmwrqcwabyrx3@lethargic>
+References: <20240628093252.1864609-1-d-gole@ti.com>
+ <20240628130323.vxy7rruh3bdcklxe@brownnose>
+ <067d0bd4-867f-4d48-8852-f5d8e04ffc2a@ti.com>
+ <20240628174008.tjdhwvzj7mxaka6z@destruct>
+ <7769855e-8e08-47c0-b4a0-a466f44044de@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] sandbox: Fix LTO to work with STACKPROTECTOR
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20240624092900.2108175-1-andrew.goodbody@linaro.org>
- <CAFLszTg1HmMT-Lzv2aUEmG-jHr0gOAScpdk2RbDueCu_bCnKvw@mail.gmail.com>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <CAFLszTg1HmMT-Lzv2aUEmG-jHr0gOAScpdk2RbDueCu_bCnKvw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <7769855e-8e08-47c0-b4a0-a466f44044de@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,61 +85,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01/07/2024 14:57, Simon Glass wrote:
-> Hi Andrew,
-> 
-> On Mon, 24 Jun 2024 at 10:29, Andrew Goodbody
-> <andrew.goodbody@linaro.org> wrote:
->>
->> Add the STACKPROTECTOR symbols to the script that generates the
->> symbols that should not be removed by the use of LTO when linking
->> a shared object. This prevents a fail to build due to link errors.
->>
->> https://source.denx.de/u-boot/u-boot/-/issues/35
->>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>
->>   scripts/gen_ll_addressable_symbols.sh | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/scripts/gen_ll_addressable_symbols.sh b/scripts/gen_ll_addressable_symbols.sh
->> index d0864804aa..ebf89b04bf 100755
->> --- a/scripts/gen_ll_addressable_symbols.sh
->> +++ b/scripts/gen_ll_addressable_symbols.sh
->> @@ -13,3 +13,5 @@ set -e
->>   echo '#include <common.h>'
->>   $@ 2>/dev/null | grep -oe '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*' | \
->>          sort -u | sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
->> +$@ 2>/dev/null | grep -oe '__stack_chk_.*' | \
->> +       sort -u | sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
->> --
-> 
-> It is OK to add these new ones, but here you seem to be adding lots of
-> other things also. So far we are only allowing linker lists. So can
-> you update this to allow just linker lists and stack_chk? Perhaps
-> egrep (_u_boot_list_2_|__stack_chk_) or similar?
-> 
-> Regards,
-> Simon
+On 15:25-20240701, Sebin Francis wrote:
+> For HS-FS device we need to sign the fs-stub with customer key. DM firmware
+> cannot have a component which is signed using customer key.
 
-I am sorry but I do not follow you here. I am not sure what you mean by 
-'linker lists'. The script is matching on symbols from object files as 
-output by nm. I have not changed that original match expression.
+Please explain please why DM cannot have a component signed using a
+customer key for the public record?
 
-My addition only adds the following 3 symbols to the output of 
-gen_ll_addressable_symbols.sh
-
-__stack_chk_guard
-__stack_chk_fail
-__stack_chk_fail_local
-
-These all come from the same file, common/stackprot.c
-
-I can reduce the match to just search for '__stack_chk_guard' and that 
-still works and I can put that as another expression in the grep instead 
-of doing the whole nm | grep | sort | sed thing a second time. Would 
-that address your concerns?
-
-Thanks,
-Andrew
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
