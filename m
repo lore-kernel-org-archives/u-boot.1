@@ -4,58 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B767AC30653
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 13:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8449C2BD09
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 13:57:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BE42886C3;
-	Mon,  1 Jul 2024 15:53:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=prodrive-technologies.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F2DD88677;
+	Mon,  1 Jul 2024 15:57:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AMrp+y/h";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AA9A88667; Mon,  1 Jul 2024 14:39:18 +0200 (CEST)
-Received: from EXCEDGE01.prodrive.nl (mail.prodrive-technologies.com
- [212.61.153.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A574F886AD; Mon,  1 Jul 2024 15:57:55 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25DE8884EA
- for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 14:39:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=prodrive-technologies.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=paul.geurts@prodrive-technologies.com
-Received: from EXCOP01.bk.prodrive.nl (10.1.0.22) by webmail.prodrive.nl
- (192.168.102.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Mon, 1 Jul
- 2024 14:39:15 +0200
-Received: from EXCOP01.bk.prodrive.nl (10.1.0.22) by EXCOP01.bk.prodrive.nl
- (10.1.0.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 1 Jul 2024
- 14:39:15 +0200
-Received: from lnxdevrm02.bk.prodrive.nl (10.1.1.121) by
- EXCOP01.bk.prodrive.nl (10.1.0.22) with Microsoft SMTP Server id 15.2.1544.4
- via Frontend Transport; Mon, 1 Jul 2024 14:39:15 +0200
-Received: from paugeu by lnxdevrm02.bk.prodrive.nl with local (Exim 4.94.2)
- (envelope-from <paul.geurts@prodrive-technologies.com>)
- id 1sOGJO-00BGd5-QR; Mon, 01 Jul 2024 14:39:14 +0200
-From: Paul Geurts <paul.geurts@prodrive-technologies.com>
-To: <festevam@gmail.com>, <ye.li@oss.nxp.com>
-CC: <sbabic@denx.de>, <uboot-imx@nxp.com>, <trini@konsulko.com>,
- <peng.fan@nxp.com>, <eduard@lionizers.com>, <marex@denx.de>,
- <fedor.ross@ifm.com>, <rasmus.villemoes@prevas.dk>, <xypron.glpk@gmx.de>,
- <elena.popa@nxp.com>, <tharvey@gateworks.com>, <sjg@chromium.org>,
- <vitor.soares@toradex.com>, <u-boot@lists.denx.de>,
- <martijn.de.gouw@prodrive-technologies.com>
-Subject: Re: [PATCH] imx: hab: Make imx_hab_is_enabled dependent on
- FIELD_RETURN
-Date: Mon, 1 Jul 2024 14:39:14 +0200
-Message-ID: <20240701123914.2685310-1-paul.geurts@prodrive-technologies.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <a9ebece9-4ab6-4bca-bebe-985e0bf95278@oss.nxp.com>
-References: <a9ebece9-4ab6-4bca-bebe-985e0bf95278@oss.nxp.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 93F98884EA
+ for <u-boot@lists.denx.de>; Mon,  1 Jul 2024 15:57:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6b06e63d288so14464096d6.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 06:57:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719842272; x=1720447072; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WsyuAW0zhBAoutJTx2a6DxgFfaEtURCVzhNW0m7NYms=;
+ b=AMrp+y/hnvOkcZgSCjPoUGkEOpApPKMLwxjfOaPVFc8cXy+Ru+le1hZ6oaXqjYwh46
+ AEaOKSh6roXkqO4ImekTHzXCzjAvi/+0pjm78JP3vKvFOlu5jCQtUO8XKYW17Q85FQnC
+ NN+PqtBJY9ddThM1/ck5OpUvwf0S3nR+S5xi8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719842272; x=1720447072;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WsyuAW0zhBAoutJTx2a6DxgFfaEtURCVzhNW0m7NYms=;
+ b=u5CLj2gukgLbDKsIug4Opmd40hbPhLn5q9Wczt2lyq11myjWcT8QEIfmFV39v0Qk+O
+ bqS128QufigW/d1MxVjEdth1TXHW/goldBh8ClfpNBZCJ3EIkQT2fnDcvsYlJNKDg44x
+ ZCidgg5gGfkZ4tfUGZkfm6rLmQwa9/05sTbhPXkBATtCv0GIFeQjevs50JGKx9EeOUOe
+ Q010DvU0i5TRPi8U7Vd6o+gPduRstc+ITTCeGkG6XIzkDsCxK1UbgcBTZGteQs+zyFHD
+ UmrKqvOVffnyC1uU5Po1rzFEUek2wsQK4LBScnnxzbpfFv6rZJHTH7HrZNFfIQTWYJ02
+ lbBA==
+X-Gm-Message-State: AOJu0YxN2FQrJ+U7z4vhgJa+azyPVaN0ue3yrNye/CxSzSe6g0Y7ZSW+
+ OpVkvYn084B2LbclhIBecW9IREGhTUYRYpHtGQptnscfycwDzYWyBEqRaMl7gK4Nn5i6cxsEAxt
+ q1NBKXyw/WpDLch1q2QwUUPk3HVT9T0gJSVB1SxyQmgNn3vE=
+X-Google-Smtp-Source: AGHT+IF6Pvcl7omnhkE5WmgQaLvvTkGoTAsQjYuIHcVIJXaPcw42ITvGVZWqPoF6ZyMky7QFI0t8swp7trVDw0CCE5w=
+X-Received: by 2002:a05:6214:212d:b0:6b5:26f7:76b5 with SMTP id
+ 6a1803df08f44-6b5b704eafcmr96839496d6.7.1719842272550; Mon, 01 Jul 2024
+ 06:57:52 -0700 (PDT)
 MIME-Version: 1.0
+References: <20240501231657.2088609-1-trini@konsulko.com>
+In-Reply-To: <20240501231657.2088609-1-trini@konsulko.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 1 Jul 2024 14:57:41 +0100
+Message-ID: <CAFLszTgBghtvKxf5-92k7bfXFeOKK9FK_R9h3+Uhsq5K1AnR+w@mail.gmail.com>
+Subject: Re: [PATCH] buildman: Add flag to filter out missing binary blobs
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 01 Jul 2024 15:53:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,77 +81,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ye,
+Hi Tom,
 
-> Hi Paul,
+On Thu, 2 May 2024 at 00:17, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 6/26/2024 3:17 PM, Paul Geurts wrote:
->> Hi,
->> Thanks for the feedback.
->>
->>> Hi Paul,
->>>
->>> On 6/24/2024 8:09 PM, Fabio Estevam wrote:
->>>
->>>> Hi Paul,
->>>>
->>>> On Fri, Jun 21, 2024 at 10:06 AM Paul Geurts
->>>> <paul.geurts@prodrive-technologies.com>  wrote:
->>>>
->>>>> -struct imx_sec_config_fuse_t {
->>>>> +struct imx_fuse_t {
->>>> Please make the struct renaming a separate patch.
->>>>
->>>> Peng Fan, Ye Li,
->>>>
->>>> Could you please help review this patch?
->>>>
->>>> Thanks
->>> Can you take a look iMX8MP FIELD_RETURN fuse, I think it does not
->>> have 1 bit but 8 bits which requires to burn a sequence. Only when
->>> the bits sequence is matched, the field return can work.  So checking
->>> the bit 0 is not enough.
->> Are you sure about that? The security reference manual (IMX8MPSRM)
->> says in Table 5-5
->> that the FIELD_RETURN fuse is located on fuse 0x630[0], which is a
->> single bit. Also,
->> the "Chip Security Lifecycle" section (2.15.1) says the following:
->>
->> FEILD RETURN (SEC_CONFIG[1] fuse = 1 and FIELD_RETURN fuse = 1)
->>
->> Are you maybe confusing the FIELD_RETURN fuse with the
->> FIELD_RETURN_LOCK sticky bit?
->> clearing the lock bit _is_ quite the procedure, but it is unrelated to
->> U-Boot, as
->> this is done by ROM code through CSF.
->>
->> I tested this on an i.MX8M Plus and it seems to work fine.
+> When doing builds of a number of platforms and not intending to run the
+> resulting binaries, we have an option already to tell buildman to just
+> make fake binaries for linking only. Add another option to filter this
+> from the output, to make parsing build logs easier.
 >
-> I know the steps for field return.  What I mean is the FIELD_RETURN
-> fuse.  It is true that security RM mentions it as you quote. But from
-> 8MP fuse map and ROM codes,  I get different things.
->
-> FIELD_RETURN 8-bit code.
-> FIELD_RETURN = 0, is non-field return mode, functional/secure mode.
-> FIELD_RETURN = Matching Sequence, device is in field_return mode
-> FIELD_RETURN != Matching Sequence, device asserts security violation
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  tools/buildman/builder.py | 13 ++++++++++++-
+>  tools/buildman/cmdline.py |  3 +++
+>  tools/buildman/control.py |  3 ++-
+>  3 files changed, 17 insertions(+), 2 deletions(-)
 
-That is indeed different from what is mentioned in documentation. I have
-asked our NXP FAE about the discrepancy and I will adjust the code if
-needed.
+This needs a test. See eg. testFilterMigration().
 
->
->
-> However, I'm not sure how is it implemented in HAB. Since you have
-> tested 8M plus, can you confirm the closed part is successfully
-> converted to field return and can boot without signing?
-
-Maybe I did something wrong while testing. I will retest it on a new
-board when I have received some more information from NXP.
-
->
->
->  Best regards,
->
-> Ye Li
->
+Regards,
+Simon
