@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9268C3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD07C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:00:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5A92885E4;
-	Tue,  2 Jul 2024 15:00:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 56A37886C3;
+	Tue,  2 Jul 2024 15:00:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LWZsg80o";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cjrcrZeZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56653874AC; Tue,  2 Jul 2024 08:54:28 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 688F688081; Tue,  2 Jul 2024 09:00:20 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9099487D33
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 08:54:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 522CB874AC
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 09:00:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ee794ec014so207991fa.0
- for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 23:54:25 -0700 (PDT)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-65011d9bd75so3161857b3.2
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 00:00:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719903265; x=1720508065; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MaQFIOJs6pBFcMOfXzsz2pqh/c5Mak4kmjpmRnoBu8Y=;
- b=LWZsg80oFLv8Z6aLoQkX7pVHoQu/gjEC1f9CF2BrfE/c4U4FdKn4P/H5MfjTmSs82H
- MOxbw2bRdP17QPd7ifnfgZF2JJzdJuXwCePQxAnK+4R8nYk1niqu5SouADt+kmYI1TXf
- i9z8Lmz5SMdq5NvRYqaNF79F/jUstU07veH2dhYcGiOAI3EBDNKQvwqNEgNTB+/HKsEf
- mZbwZ07RdeoLOjv4k5MF+fuO76Xx2luRYPaozns4W+r4AsKh3WbIAb+E9mdF3m52gBKj
- qrbY3iTJBy8K4AzVwrRaVilENtcG5ZTIXGSz3Pj+z6DCT6qSIZoV+HNn98gkt+Gsnxlg
- +q8g==
+ d=gmail.com; s=20230601; t=1719903617; x=1720508417; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1+3JPUlcqyLK+A5PVP8cnOPDk+FAJjOJLpNF8fOQMT0=;
+ b=cjrcrZeZb3vVH2hxe0rgFBQqHZWLUrrzRsWfJA+lxS/gftCM/Z0BBIAXzQ46MYnp5e
+ V4x627Cziv/sSDQQurgSrJQ2cZ4T+ye0D57hILClLobfbGr3LNln1v31vsinp/Dc2ufO
+ 4OPEztJ8Xt+9stTloBjygc6Y8aa3whmbFsHER9mS+vqeD9R3wN1lk9+tXk0EzFrJPOC9
+ gtTEm+F+zSC4bso5Ml2Koe2E9rDNQrp/wrBx4LuTkR4cPS24DP7SWO2EcRTSxnKkAUPk
+ 8IMkRFC6c/l2rMftByRjuZYDL6PPmuQT8AQtA3s+GgCcgqx/9ftdDVkd3j0R02LutUMG
+ XKZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719903265; x=1720508065;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MaQFIOJs6pBFcMOfXzsz2pqh/c5Mak4kmjpmRnoBu8Y=;
- b=ZrjByLQ6AWSjQtxeLYPukP3eSImp0fcMOM2QN8xAT2yOI7eaPONmWpRwCKy65PfFsj
- d0dpRYDlwyR2Y873ypNOvHA0PG7+2jYxfJYk1740q0nDFojxuuwQ9epYyIg4661tDP1t
- 36ruLlBKZuENSTNdzIjN+WDekHvmNcFRsM6W8i+PALrwPJQX/01q1OXSmpBvqHf0s7jY
- 5T+as+vDd6LQpWsrcvHld5f2f25+Y3/MJ3dRyEbyiP4+HLvzKj1JMd9COh3cTrUlpWEd
- LJqreR2xuMW/QA5kl5KT8ErvN7hxJyMCSeiaRbGgMP6nWKtYmEiBnKty6OXG4HYNslFt
- QQ5g==
-X-Gm-Message-State: AOJu0YyYe08A/LEZZBh3+Klyx6eoLx1LLcLhVUge6j+uXwPIIlTEOj9K
- aB9mImGpG0shP1OBB81tpqVTj3Ji6jNiDOM1BoErxaEk0VgG1GsM
-X-Google-Smtp-Source: AGHT+IH2DUPb8tsvh5c7TFf/LtEUDpFxwunTnRj/ER4W7hpgVpMfW25PbheztDdLHmIw24mgqMYuug==
-X-Received: by 2002:a2e:a984:0:b0:2ec:53ad:464 with SMTP id
- 38308e7fff4ca-2ee5e6cd723mr61638381fa.34.1719903264542; 
- Mon, 01 Jul 2024 23:54:24 -0700 (PDT)
-Received: from 9a2819e34573.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
- [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-58613815e1csm5320954a12.44.2024.07.01.23.54.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jul 2024 23:54:24 -0700 (PDT)
-From: Lothar Rubusch <l.rubusch@gmail.com>
-To: marex@denx.de, simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
- trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de
-Cc: u-boot@lists.denx.de,
-	l.rubusch@gmail.com
-Subject: [PATCH] ARM: socfpga: show broken function call for arria10
-Date: Tue,  2 Jul 2024 06:53:51 +0000
-Message-Id: <20240702065351.289968-2-l.rubusch@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240702065351.289968-1-l.rubusch@gmail.com>
-References: <20240702065351.289968-1-l.rubusch@gmail.com>
+ d=1e100.net; s=20230601; t=1719903617; x=1720508417;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1+3JPUlcqyLK+A5PVP8cnOPDk+FAJjOJLpNF8fOQMT0=;
+ b=DNLtQIfTQqe91zY2zM57ddZyQSLp8Y4qWF08RuBtcauAObStX7CsDWeCy35IVFXhqW
+ im7Fna/LRrVwVJ2Qf/CCPdrRjHNApTd8a+Xk7T6apF0Ps65pPTz3VEoLf33A6dE2q1lJ
+ GdoQKLWlEkEppZJrTabdxiVn821fKFpT2N03lnGrXhcs25bxGNWm3OffFIfArBEp4Vh+
+ mt3O7wzUEprdY6Mf2sCmyTAmsTqXc0Z99ZbdwHFzbGaBRWVVAM5z8aENLQ2NBqwUdnOH
+ 2UDttMMX2mST8prlah+8fs7BJ7jRI4mh5RGoel9PB7JrIQetqhEE6AxZ7hkHTrdXKgT/
+ 45rQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaC68BszfLH9TerGdgp78oN99Wb6OtGUv+I1XtAysPLpOMNRiVtgIAKSMZFUVGuPLGNYMVumTm3UMtws/v7khU3Ftumg==
+X-Gm-Message-State: AOJu0YzK/hU3RuibobToaYBu+D/TwfcPKUatlgq+tkH0otugPi1OPnum
+ kqBQDoAaFgR3KnzeOzSK9ad/xGGR8lI+n7Wu6RcwX2cwVMcLmcs8BivgC+M9QoygK1+dXUV4pxK
+ 3T3Lc4iGjP/zFQ65C98JPnHLJD8o=
+X-Google-Smtp-Source: AGHT+IEFZAYR0t2F4x3LHsS77VUVo7DVavxGA+JvcvD4wW1ilDDPVeaVjmjDe1zhy5PiPm1A1mUC9fF5M104FOYpTqo=
+X-Received: by 2002:a81:b04d:0:b0:618:ce10:2fcd with SMTP id
+ 00721157ae682-64c71cd7bb7mr86104107b3.26.1719903617177; Tue, 02 Jul 2024
+ 00:00:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240701215927.285961-1-l.rubusch@gmail.com>
+ <bc923c6b-e2d9-4a12-be6f-7e5d404b1665@denx.de>
+In-Reply-To: <bc923c6b-e2d9-4a12-be6f-7e5d404b1665@denx.de>
+From: Lothar Rubusch <l.rubusch@gmail.com>
+Date: Tue, 2 Jul 2024 08:59:41 +0200
+Message-ID: <CAFXKEHZML4WUg+ZftybRvEcCJ0i4t7K2h9kQT5dUEmySpdh8fg@mail.gmail.com>
+Subject: Re: [PATCH] ARM: socfpga: fix broken function call for arria10
+To: Marek Vasut <marex@denx.de>
+Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com, 
+ trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org, 
+ xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 02 Jul 2024 15:00:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,38 +91,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch only shows the problem on an existing platform. Turning on
-the cadence QSPI flash breaks the build for arria10. Can you reproduce?
+Hi U-boot-teers!
 
-  make socfpga_arria10_defconfig
-  make
+(...)
 
-Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
----
-NB: Don't apply this config/patch permanently! The Cadence QSPI
-flash can be tricky due to a write reset register instruction which can
-brick the board if interrupted. We experienced this situation.
-So, that's why I removed the config option in my boards (to be upstreamed
-soon). Hence, my boards won't show the above problem anymore.
+> Reviewed-by: Marek Vasut <marex@denx.de>
+>
+> Could you by any chance also send a patch to enable this QSPI NOR
+> support on one of the A10 targets, so the CI would compile this code and
+> this code wouldn't bitrot again ?
+>
+> Thanks
 
-Anyway, I think the code section in misc_arria10.c have a bug. So, I
-presented the before patch.
----
- configs/socfpga_arria10_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+I've sent you now a series of one patch showing the error for me. And
+another one with the above fix. NB: I did not apply reviewed-by tags,
+so far.
+Also note, it is not supposed to turn on the (bloody) cadence QSPI
+flash permanently. We have this piece and having turned on, it can
+lead into situations due to ...interesting hardware behavior.
 
-diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
-index 6d27deeb..c7321bab 100644
---- a/configs/socfpga_arria10_defconfig
-+++ b/configs/socfpga_arria10_defconfig
-@@ -61,6 +61,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_MII=y
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SPI=y
-+CONFIG_CADENCE_QSPI=y
- CONFIG_TIMER=y
- CONFIG_SPL_TIMER=y
- CONFIG_DESIGNWARE_APB_TIMER=y
--- 
-2.25.1
-
+Best,
+L
