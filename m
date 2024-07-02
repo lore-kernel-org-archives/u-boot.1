@@ -4,101 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55883C30658
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:32:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D9DC3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90FF3886FD;
-	Tue,  2 Jul 2024 15:31:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8A5D488005;
+	Tue,  2 Jul 2024 15:36:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dpTGmj2I";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lpzy/iwN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31BE088748; Tue,  2 Jul 2024 15:31:01 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3AC0787666; Tue,  2 Jul 2024 15:36:31 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16FD488732
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 15:30:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE59B88005
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 15:36:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a754746f3easo63521866b.0
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 06:30:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719927057; x=1720531857; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zgTGsECpuui4joumBLRrHZBmSfd26OhIye1/OmJYNpI=;
- b=dpTGmj2I0ZZpK9Ng5b+zwKRFv9n3mFTeGb8IZHVvvcWGcu+Z4+i4gtM6Ef/+du0zFP
- BZ03u6nMq94wenGHBBsCB2MNkqA+y7xKnKYqEOu/l8amUCNkoRQ3swf4Jbyalf70V6LU
- 68+CBbxwAlDBv40ymFsrDNtVVTSlFV0JI1dtFjVR1vaCEzKQ1JySX0E0FUNmtIfu/5g/
- rmmwcArCyxGDE8UctmJ3YC6WeIYWnPD9jdMKVA1HMfwdUMG8aqCBX3ekQsQacz7+PeRY
- U4daQZFYYx1Co704iLiQxFGjovWbq1ww0CnlAkaF+CTKybTjZA5vYIQTRB9JTt+B0Euv
- wyuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719927057; x=1720531857;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zgTGsECpuui4joumBLRrHZBmSfd26OhIye1/OmJYNpI=;
- b=WNmipc7rqCEWVqUWXOdeE5ycF1MlqbYAIJRLIY22bZXVgztnwO4wsu8MrtBDTUg3F0
- BAp2v0qY0Hu+OnidqkGo82G12yjk29OXaCX+yfmiU9XbDDqV0f2DRmTvnPb8KdQ+cDAj
- mpKT4hLZNAL3Qfx87EiYY9UIkh5kwmfIw3NJFNE7F0PBE3SCEYtfQ8s7k1IiR1bzqLlY
- IC8rEIjU0JGS8Qhiz6nAIT9K/F2ey8oahxpimdKDRP+S+7Z/rowxSWH01q2aYKOu/3kG
- nA/cIyg83pIbea1mQwmKoAUcf0vahhJgABlwvYQpEG2C1GBv3EJ1tpWYT5A0ZxQZcXd5
- WT/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUP5gefEVWcdqtIGHw/w+tR4SCVYscVWMBDoBD2QKMgulsTbHE/3i8MnehLcLdx4kINnQEgfgTkCyV8i5UsFbMOEhlPdA==
-X-Gm-Message-State: AOJu0YzX9G5cJ2/T7F/Kj7z8Hm6v2iBohp7QbL42o2HVEt6dE3wKVX+E
- tog7K8qaAJPmNMx8HC6u2G0gYdQS4aQHP6K8A79ekK9Y2Ty7CeVLDocLTyWL9DM=
-X-Google-Smtp-Source: AGHT+IFMKJLslm86m5uaIqVHhI9o5xYoDA63f4srhc00oXIGex2n6ro/tnwEwaiMOhEv0b5APlY4Jg==
-X-Received: by 2002:a17:906:a292:b0:a70:c02f:8a7e with SMTP id
- a640c23a62f3a-a751451385dmr660757766b.54.1719927057572; 
- Tue, 02 Jul 2024 06:30:57 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7430367d55sm323796166b.87.2024.07.02.06.30.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 06:30:57 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 02 Jul 2024 15:30:50 +0200
-Subject: [PATCH v4 10/10] test: lib/uuid: add unit tests for dynamic UUIDs
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 462DaEae126501;
+ Tue, 2 Jul 2024 08:36:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719927374;
+ bh=eNaOTKkjboRZNVyfqtmSOByMGjyf1GbshMm9c5gCbK8=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=lpzy/iwNj+5zKmkp4n6zs/CVovxNw0BItW/83wYYbc5boqDvs+qcqSAyJTzVjJNxX
+ y91HiXC83cpPkdyssny+SuwkpXhC8731A1bNjmuu+16KZNqPaZ0es6Yi2O4GUZgISP
+ 1BzACuHDDja+A9knxaEkSBxHL8MAZsNWgG7Uuz3o=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 462DaEVD056588
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 2 Jul 2024 08:36:14 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
+ Jul 2024 08:36:13 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 2 Jul 2024 08:36:13 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [172.24.227.9])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 462DaD6A063933;
+ Tue, 2 Jul 2024 08:36:13 -0500
+Date: Tue, 2 Jul 2024 19:06:12 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Roger Quadros <rogerq@kernel.org>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <marex@denx.de>,
+ <trini@konsulko.com>, <mkorpershoek@baylibre.com>,
+ <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <danishanwar@ti.com>,
+ <srk@ti.com>
+Subject: Re: [PATCH] usb: cdns3: continue probe even when USB PHY device does
+ not exist
+Message-ID: <a7f7fccd-6c97-4617-be71-e5986e359adb@ti.com>
+References: <20240702120724.368102-1-s-vadapalli@ti.com>
+ <f75621af-cfcc-4909-bb79-dbbc9aeb30e2@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240702-b4-dynamic-uuid-v4-10-a00c82d1f504@linaro.org>
-References: <20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org>
-In-Reply-To: <20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3008;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=ZETTwLjb7NljHuT9g0TrbGD3/tc1AKgjAkUPham0EcU=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmhAEDtTMOQihyajtp2Xee3UYIPlphcmDAbZJoC
- 0OPy/5UZy6JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZoQBAwAKCRAFgzErGV9k
- tu8rD/9defrNDiL0y/GlXRy+oW35vJEsLFvpnMO1UHMJ/o3MspF0+KU5mAAVPPM5VCgO6eBbm06
- FDC7UPV//BJpEvMOVfRy/SRz9jlMDnZGugH94/nX8RELl0lTb2DpnRpEFl9Rr//2hPkJg5uc4fh
- GUUI4LGjKBRPlNMEj3jOjjePelQxDR9I/kbHfShCqUNhfKMZz2tfWwWYAFzn9+59t7f2cHXLpk3
- WrWEFXPIRT1L6wXrW28fXq8c49Iu1rXjblf7bLkTDtSeID1F4TKvgYTK6PbRKITNOnXUGL9CeXm
- U9kQ0fohz8I8/RVwO6jV/FVqcFNJwzfYoNT9l4mEVX/vLEK4J1ZBckvtpbLLScBUD4ygsZ7697E
- vs1l+n/auFHrwZwo8Nj0vyaEw1SQ1MtKYF3mhwReA1o0krLAj5vMlwxmLGTkSpiQYF8thkm6RDZ
- RBzrih5x4061sPyGSFezYvlGEDmZXunN+BKB4gQWLiuuRxtW2gFkTbUUYdxPSgJqv90shEjADvK
- boW2sJJHhOlRtfpBoKLKfXt78hTaD8VG2HatLEbteZO2OsTPGD/u5GEoFLOc0KD0o15Ijorlf4m
- iQ5KfY24yVKxCcaGiOUV61nq5wt0BciK+r4+PbIxH1MRezl9t9jqFI4c7qAYfM2WUyRzidZfYAe
- ArCm90XLrAYW6TQ==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <f75621af-cfcc-4909-bb79-dbbc9aeb30e2@kernel.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,123 +83,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some basic unit tests to validate that the UUID generation behaves
-as expected. This matches the implementation in efi_loader for sandbox
-and a Qualcomm board and should catch any regressions.
+On Tue, Jul 02, 2024 at 04:20:43PM +0300, Roger Quadros wrote:
+> 
+> 
+> On 02/07/2024 15:07, Siddharth Vadapalli wrote:
+> > Prior to commit cd295286c786 ("usb: cdns3: avoid error messages if phys
+> > don't exist"), cdns3_probe() errors out only on failing to initialize the
+> > USB2/USB3 PHY. However, since commit cd295286c786, absence of the PHY
+> > device is also treated as an error, resulting in a regression.
+> > 
+> > Extend commit cd295286c786 to treat -ENODEV as an acceptable return value
+> > of generic_phy_get_by_name() and continue device probe as was the case
+> > prior to the commit.
+> > 
+> > Fixes: cd295286c786 ("usb: cdns3: avoid error messages if phys don't exist")
+> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> > ---
+> > 
+> > Hello,
+> > 
+> > This patch is based on commit
+> > b4cbd1a257 Merge tag 'u-boot-amlogic-20240701' of https://source.denx.de/u-boot/custodians/u-boot-amlogic into next
+> > of the next branch of U-Boot.
+> > 
+> > Regards,
+> > Siddharth.
+> > 
+> >  drivers/usb/cdns3/core.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+> > index b4e931646b..5b3e32953e 100644
+> > --- a/drivers/usb/cdns3/core.c
+> > +++ b/drivers/usb/cdns3/core.c
+> > @@ -338,7 +338,7 @@ static int cdns3_probe(struct cdns3 *cdns)
+> >  			dev_err(dev, "USB2 PHY init failed: %d\n", ret);
+> >  			return ret;
+> >  		}
+> > -	} else if (ret != -ENOENT && ret != -ENODATA) {
+> > +	} else if (ret != -ENOENT && ret != -ENODATA && ret != -ENODEV) {
+> 
+> With this change we will not error out on a genuine error condition
+> that produces ENODEV.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- test/lib/uuid.c | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 82 insertions(+)
+It isn't necessarily a genuine error condition which is why it was a
+"dev_warn" earlier for any error. If the previous stage has already
+configured the PHY, or if the PHY present in the device-tree in Linux is
+not the same as the PHY being used at U-Boot (USB 2 PHY at U-Boot vs
+SERDES in Linux), then it isn't an error.
 
-diff --git a/test/lib/uuid.c b/test/lib/uuid.c
-index 9629d378c329..2c6cfd42ddc3 100644
---- a/test/lib/uuid.c
-+++ b/test/lib/uuid.c
-@@ -7,15 +7,20 @@
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-  */
- 
-+#include <charset.h>
- #include <u-boot/uuid.h>
- #include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
-+#include <efi.h>
-+
- /* test UUID */
- #define TEST_SVC_UUID	"ed32d533-4209-99e6-2d72-cdd998a79cc0"
-+/* U-Boot default fw image namespace */
-+#define DEFAULT_FW_IMAGE_NAMESPACE "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
- 
- #define UUID_SIZE 16
- 
- /* The UUID binary data (little-endian format) */
-@@ -37,4 +42,81 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
- 	return 0;
- }
- 
- LIB_TEST(lib_test_uuid_to_le, 0);
-+
-+struct dynamic_uuid_test_data {
-+	const char *compatible;
-+	const u16 *images[4];
-+	const char *expected_uuids[4];
-+};
-+
-+static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
-+				      const struct dynamic_uuid_test_data *data)
-+{
-+	struct uuid namespace;
-+	int j;
-+
-+	ut_assertok(uuid_str_to_bin(DEFAULT_FW_IMAGE_NAMESPACE, (unsigned char *)&namespace,
-+				    UUID_STR_FORMAT_GUID));
-+
-+	for (j = 0; data->images[j]; j++) {
-+		const char *expected_uuid = data->expected_uuids[j];
-+		const u16 *image = data->images[j];
-+		efi_guid_t uuid;
-+		char uuid_str[37];
-+
-+		gen_v5_guid(&namespace, &uuid,
-+			    data->compatible, strlen(data->compatible),
-+			    image, u16_strlen(image) * sizeof(uint16_t),
-+			    NULL);
-+		uuid_bin_to_str((unsigned char *)&uuid, uuid_str, UUID_STR_FORMAT_GUID);
-+
-+		ut_asserteq_str(expected_uuid, uuid_str);
-+	}
-+
-+	return 0;
-+}
-+
-+static int lib_test_dynamic_uuid(struct unit_test_state *uts)
-+{
-+	int ret, i;
-+	const struct dynamic_uuid_test_data test_data[] = {
-+		{
-+			.compatible = "sandbox",
-+			.images = {
-+				u"SANDBOX-UBOOT",
-+				u"SANDBOX-UBOOT-ENV",
-+				u"SANDBOX-FIT",
-+				NULL,
-+			},
-+			.expected_uuids = {
-+				"985f2937-7c2e-5e9a-8a5e-8e063312964b",
-+				"9e339473-c2eb-530a-a69b-0cd6bbbed40e",
-+				"46610520-469e-59dc-a8dd-c11832b877ea",
-+				NULL,
-+			}
-+		},
-+		{
-+			.compatible = "qcom,qrb4210-rb2",
-+			.images = {
-+				u"QUALCOMM-UBOOT",
-+				NULL,
-+			},
-+			.expected_uuids = {
-+				"d5021fac-8dd0-5ed7-90c2-763c304aaf86",
-+				NULL,
-+			}
-+		},
-+	};
-+
-+	for (i = 0; i < ARRAY_SIZE(test_data); i++) {
-+		ret = lib_test_dynamic_uuid_case(uts, &test_data[i]);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_test_dynamic_uuid, 0);
-+
+> 
+> If PHY phandle is not present the API should return ENOENT right?
+> 
+> static int __of_parse_phandle_with_args(const struct device_node *np,
+> 
+>         /* Retrieve the phandle list property */
+>         list = of_get_property(np, list_name, &size);
+>         if (!list)
+>                 return -ENOENT;
 
--- 
-2.45.2
+The PHY phandle is present, but it isn't the one being used by U-Boot.
+The device-tree could be pointing to SERDES as the PHY, since Linux uses
+USB with SERDES. So the entry exists, but the error is -ENODEV rather
+than -ENOENT.
 
+> 
+> Can you please check and point where the -ENODEV error is coming from?
+
+The sequence of function calls is as follows:
+generic_phy_get_by_name
+  generic_phy_get_by_index
+    generic_phy_get_by_index_nodev
+      uclass_get_device_by_ofnode
+        uclass_find_device_by_ofnode
+	  -ENODEV
+
+In the above sequence, the device-tree contains SERDES PHY as the USB
+PHY since Linux uses the same and U-Boot's device-tree is in sync with
+Linux's. However, USB at U-Boot will use the USB 2 PHY. So one option is
+to remove the SERDES PHY from USB node to have it fallback to USB 2 PHY.
+At the same time, if the previous stage has configured SERDES for example,
+it might not be necessary to reconfigure SERDES. -ENODEV might be an
+acceptable error in such a situation as well. Please let me know.
+
+[...]
+
+Regards,
+Siddharth.
