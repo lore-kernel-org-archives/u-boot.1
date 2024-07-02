@@ -4,155 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBFB9C3065C
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 06:49:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA653C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 07:41:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 006C588722;
-	Tue,  2 Jul 2024 08:49:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E0E6880AE;
+	Tue,  2 Jul 2024 09:41:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="AXhgbrcT";
+	dkim=pass (1024-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="KmXjWthm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DF3988714; Tue,  2 Jul 2024 08:49:04 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20727.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::727])
+ id 06C9D88025; Tue,  2 Jul 2024 09:41:57 +0200 (CEST)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 072A388718
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 08:49:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=weidmueller.com
+ by phobos.denx.de (Postfix) with ESMTPS id C1A39880AE
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 09:41:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WVIQ7Efg3g5plM/JtJzqdRgiDmQcIMKCIJi+yN5MWaq3Lxf4rmBPd4NzlfNK460L8Vgi9rdrhG2zYyCRaNlKGjXU3YEX6InpJYiBt5PkAjTMcc4Rwlm8UWX5UVrovOEoasm5lA886T8A5MVRM3gOeUFMO4Lsgx35WuIfAuvEFC2Lj//kAvHoLwWEGbeltDiZ6qV07jo9EveP5kq9h9aa55KVJpf8NwfbzmyEjIV6NXUjI+DaUGgHijektIw2UPvfAYeHbE5oabHFXvJs7wkUa/1pl7oOvPQAixIMgtk5FmdNRr/GDUzTVoda4M9yTAblZP2BUYU8eMIWaMizXlfE5Q==
+ b=Hevn8Z25mvzHN49B1vnXhAmEKJf/voXCOMefGi6lQARwxvZAafK81nr22zTzA3SN/w4IcLBi3nRkdcGc0GbHvNJRj6FYgU7hqYnzLSDbk3KPKy2K+p77vN+7e5nUdsXQVBfJ7nxlDXOtpEYe9Ptoe3E8bi4L57DzAYqk2ek08ibuI+Wj+jYirkCiaZ5gj4kFp+fefvLTQ5gWhLO4X/A/Tb275fTO1e4HXYvT+E0Zo6g1fu9qXrRXZSXuBDu17O0MJFFRNChBBFEZFQ03gJnPb+0Z+rTFyZeHhOMvrO9nksZyi1grhLhqz4Dg0iaMsEzDMl4ROEbKGf9X2YLRX4+BUw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vyYsmZO8UMwy6pWoV0fP/e1vazi5QueSmbpsBtBL2Kw=;
- b=TXQutU7QJtTQ3D2zkiZKOuPcEMDGPikvyRuk+eO+ZI7nqGehkX9wsyNduEuNSpRlVcE3G3Sev1dHiicZvUe3weUGVlUczo63mgJzP1JLDcc6aYQSCadK9vDqOJ1h9UWUa7ROM0fai1Ru+xt69n9SX9z5uKunEnEmW5jrCDT429nOgemf3z4dMOvXsqejCFVls9+U+aGH+gOXfB1dEXV7anx5Dezs9FRWcwRGg91AZeKpijViWzT4zpjw6iTk2kLjx8xBS/kJmwYhytBAs/vIqmUm3Gy9LmXuTjA6nyMIBNrv2OYl95Kxb3vnJHC/Q3vDg8Ej4PxCuG1dOAbcn+llkQ==
+ bh=7LawvJaY8umxri8N6VOVf8tO0MpWxhYSnjMKkDamsak=;
+ b=hKQ3CmdZAR97/zBS5jtu7P0xKKgByf+0Y70VCpsnQyXLiO+IKou0fTdQS988jh7ZZHh1xian3rhsnnRBpp1r95mjd85kZOrkTEXUZMbmklryOliUbWWTaklCfRHB/fyKO0vdmrtDO+r/gCRA8f3h26zEa0hW6eU5kyQ1+7WcS9ZovVqkVO+KmEwF1NhZfPkqBhcWkIM4LmQw2Ss67P8gHhkSuGEkEBg513MVcb99PM+2g0YVj4R6bJ3Any7wlnOn4c3+oagUs9oABEa62+kzX2Dk6tXRuBKsW28dId3GxhWQpqFiNesgkWPeTnYBBolJ2gkpLoLw79A1HBvTWtlQ4w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weidmueller.com;
- s=selector2;
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector2-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vyYsmZO8UMwy6pWoV0fP/e1vazi5QueSmbpsBtBL2Kw=;
- b=AXhgbrcTM0xc8hakNHA44Rzd2MTcuytTqBaytzC6chaLmFsFHYdu65tT0snAulYaGPbRyDqF2ebdSP+i3THw187upn/ye5OO3R6rZF4Z5FfD5bfsFLhGpxJQdeLZQ6GnrgctkYJmS34NNlVjead6KArBxbWVDUv72TtGPkhMa6PIPn4dX3ryq8qCdcbhIz5YqcknmrunubdHpS0fmFinV0fl2oRq9VIgZfiPJjkiNgefgLyZJ1eqGPeS60Vg34KbC1T3yKsVhoHL0enmpmfwJcXsCOC0NcbJmheEThWhKV+DpSgOKQLH1SwdBv71fm2Rl+ZLzf//Ys1NBoiI7hKc9Q==
+ bh=7LawvJaY8umxri8N6VOVf8tO0MpWxhYSnjMKkDamsak=;
+ b=KmXjWthmJHVGHXiZAfbR7oxlQ7EtZ/0lsmamhDYFlIPr3EQPgm3pzy+P/1w50NTcnjMGlo03UQtFyL8dDe3e4mRype8PLrp+BsmrXv6kwtZ9PoMKhtQpziaA7VTW0fhg3IFaq4Cm4vHLgLl+RzPVxhL+Z76hL7Onp2+EuVwlIsk=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by AM8PR08MB6356.eurprd08.prod.outlook.com (2603:10a6:20b:36b::23)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
+ by AS8PR04MB9143.eurprd04.prod.outlook.com (2603:10a6:20b:44a::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.32; Tue, 2 Jul
- 2024 06:48:59 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::aeb:1738:d59a:cee6%2]) with mapi id 15.20.7719.028; Tue, 2 Jul 2024
- 06:48:59 +0000
-From: lukas.funke-oss@weidmueller.com
-To: u-boot@lists.denx.de
-Cc: Niko Mauno <niko.mauno@vaisala.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joshua Watt <jpewhacker@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Piotr Kubik <piotr.kubik@iopsys.eu>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] test: fit: Add test to check environment extraction from
- FIT conf node
-Date: Tue,  2 Jul 2024 08:48:34 +0200
-Message-Id: <20240702064834.9543-3-lukas.funke-oss@weidmueller.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240702064834.9543-1-lukas.funke-oss@weidmueller.com>
-References: <20240702064834.9543-1-lukas.funke-oss@weidmueller.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.19; Tue, 2 Jul
+ 2024 07:41:52 +0000
+Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
+ ([fe80::afae:fb35:fc8:5c90]) by AS4PR04MB9436.eurprd04.prod.outlook.com
+ ([fe80::afae:fb35:fc8:5c90%7]) with mapi id 15.20.7719.029; Tue, 2 Jul 2024
+ 07:41:51 +0000
+Message-ID: <038dad39-e99a-4464-be5e-57a3a73ca8af@oss.nxp.com>
+Date: Tue, 2 Jul 2024 15:41:43 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] imx: hab: Make imx_hab_is_enabled dependent on
+ FIELD_RETURN
+To: Paul Geurts <paul.geurts@prodrive-technologies.com>, festevam@gmail.com
+Cc: sbabic@denx.de, uboot-imx@nxp.com, trini@konsulko.com, peng.fan@nxp.com,
+ eduard@lionizers.com, marex@denx.de, fedor.ross@ifm.com,
+ rasmus.villemoes@prevas.dk, xypron.glpk@gmx.de, elena.popa@nxp.com,
+ tharvey@gateworks.com, sjg@chromium.org, vitor.soares@toradex.com,
+ u-boot@lists.denx.de, martijn.de.gouw@prodrive-technologies.com
+References: <a9ebece9-4ab6-4bca-bebe-985e0bf95278@oss.nxp.com>
+ <20240701123914.2685310-1-paul.geurts@prodrive-technologies.com>
+Content-Language: en-US
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <20240701123914.2685310-1-paul.geurts@prodrive-technologies.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR5P281CA0057.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f0::15) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+X-ClientProxiedBy: SG2PR02CA0089.apcprd02.prod.outlook.com
+ (2603:1096:4:90::29) To AS4PR04MB9436.eurprd04.prod.outlook.com
+ (2603:10a6:20b:4ec::5)
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AM8PR08MB6356:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1fa3ea3e-c6da-486e-ab48-08dc9a630d59
+X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|AS8PR04MB9143:EE_
+X-MS-Office365-Filtering-Correlation-Id: 52b633e8-1d9f-405d-ace1-08dc9a6a6ff8
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|7416014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KZAIL0r3s2mah7I4a+7ryrjWEBmz+kARRmmdNf+zsHa6ZeRgU5F0ib8ixo66?=
- =?us-ascii?Q?bUBxk2yuvZYhATQSqWUFgv/qT7leupJ2BK5Gen6DTiB5VaAzE83MP9AKDIPG?=
- =?us-ascii?Q?8Z+HNxv0khDb6ao9bFbNBy9lTOr0jSvApHECZRYEXLiuTjxljKhGTRHGzfO4?=
- =?us-ascii?Q?mjWX6lzeyfhCK0sYZp8KRyxYsGc5BKZNV9MdPRNU4pRCzW7qw7RMkwe/O3bs?=
- =?us-ascii?Q?9GZTN/Icv1VKOIRSWUGSCvzzgxqbsnLxPLezWBKT1RKLJclUAVLiDlM+h91+?=
- =?us-ascii?Q?5B2U1ei6+ChqRgX1pcrUqFSaiCD36waIAf7CZlfsvMFr0QWW3HBedeF/S5iM?=
- =?us-ascii?Q?TW0e6shynYwcFhe1Fb7bbQYkufwyCv2lsCooZqvP4zuUbhZuq+l5yLyJ+tEd?=
- =?us-ascii?Q?kOcbtwvBQyz78mT39inhiQ/D+v8VllATfRIGuefMrJk/rZe72gFng8xN72JT?=
- =?us-ascii?Q?bVdi24NkWms5G0eOlE9NiIlVWD3kl6YRk0d4q08TGkBRgZLEsuok7TYul2lR?=
- =?us-ascii?Q?WZTgpMzkVzDjHsjQ9aTJHBwU/KG/+XsjwnRJXfj9cxR0FUdBrWPfWwEtGxtp?=
- =?us-ascii?Q?/DurLRfhfwi06NKeKX5M5OtvOYDnI8AVS1E29+a9as8NU45QG87+bUTTo5WK?=
- =?us-ascii?Q?BkAxaj5e6N461EYbRFJO2MS5ozpoku67jXzNuZOLbkNGLKD/UpPoXv4Hh7T0?=
- =?us-ascii?Q?8KNmJVfbKsuY8QKN20hdTzTMxVQ/VpUEAVjn1QOPfo7ODdLf6epEa/tXkdyX?=
- =?us-ascii?Q?kYzJIjQG1+mzIutPTNu5/RMqQmrJ67BG1G/03AtjtW0sreSrZb23XfXFc3CW?=
- =?us-ascii?Q?14fR5Kg9CYOWED1a4tniPDaDOCNopQR1U2Eq03lQGmPb+QmBbTQDTaIu7HPA?=
- =?us-ascii?Q?nJRsZ5tCaCDcbUXN7ocdndWMrhLFbdmot90M7WW7JOmcGwj/6k4hCeVyzAhi?=
- =?us-ascii?Q?1RXa1P48M+WYl3IjRQLEfSZi+DifryU+NoPceN5k87CIKkaRt8tPLVD98uL+?=
- =?us-ascii?Q?L4XVzH6MJCFsCqXbSPQOHCoo7NPcgt7YoyUpljDfHKyMP/A6nsCp5I8TQBeE?=
- =?us-ascii?Q?phJjwyM/9ySFE7emy2gTKoWf+f22kA6BQHZaB9vKdctah8cp5OCtn5kVo61r?=
- =?us-ascii?Q?yLP+iIHLFspbXWo6vtpo73vfZRCwZJiPmPEItm3MtlejU11QefqutvbO8oCH?=
- =?us-ascii?Q?vx+IAVWQ3RcbnPI++ctBkd+1d5/ys32mhueNk08O4RXhhiPhZlSASGU9xILr?=
- =?us-ascii?Q?A6GRo1OSHFHFDYpZ37IFEJpnfZOxlh/e28dR2KnvWWHwJNw4D2JTef4GMtCp?=
- =?us-ascii?Q?F/i8sg+6TQ/xzcezw9fUXM/2DX+aEDlneUHMoVFuc7NzUuQFdTXsvQ99Py/T?=
- =?us-ascii?Q?/FHRi4/Y94ViZh0VIbZg2tisOTDNMQEImjjdbL96wm9RcTT7gw=3D=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RGdnRUlKdVVYU2RCcEt0cjQzNlQzRFN6L1BROGpJVWs1cmcxbno4bUtoV0xv?=
+ =?utf-8?B?R0JuL1c3M1dKTHJkWGtpOHM5c0Y0Z09jdE9haVlEZlpHZlF0a1dVYlNyeHRT?=
+ =?utf-8?B?Nk9YM0xhdlh4RjVGbnZQZ2s0b0gwVUNDTkhyejJDdjkybUQxWGJJZ0tVcC9q?=
+ =?utf-8?B?NFNJZXc3bGszSkFoOFZ5RGtaQWZGaGkwY1FnQWdzY0R5RytGeEx1a1VoVDB2?=
+ =?utf-8?B?UE5JaUJvb3NNaERkdDNmaGJQbHNpS3R2Nk51aUNlajAveVBYNTQ4cFFyMnFZ?=
+ =?utf-8?B?SDlaK2RrTFAzQWhYeFE2b3VVc055L2tqRVdqZkRqT2J0bnFxdEdzUE9OV2dr?=
+ =?utf-8?B?VTBoWlphZ0R3RHRRcWREeDU5OVQrb1JKTzhSbU9tMTVMWkpwOGFXL1NWcWtI?=
+ =?utf-8?B?NzVwNVlLTldkUnhPWjhFSzJCOUx6REJYWjZocElYMUZEWDFFSXZyV1dlelo5?=
+ =?utf-8?B?YVMwd2h6a09nclV6TmVTemhVVU54Q1BjcE1sWFJFcm15UDlnQTE3ZDJJRERz?=
+ =?utf-8?B?L3J3WldNTnRBNG0yS3NsdjRVeEhlUmFBTGVuaTFCcnkvazdoeUtkOGhIbWF6?=
+ =?utf-8?B?SzRaamtsNnd3QVU3aUJINE1kaHpITU1lS2ZVZzI2MUU4QVRRekdwbURhU0VX?=
+ =?utf-8?B?UHl5ZjZSTTlpbE1uU09ERkx3TWtsLzlBeUt0aVl0L0xCTnF1UWovVE5sK2NQ?=
+ =?utf-8?B?OTJMRGJrRWxiaWdCNWtXaUZ2OEU4Q0s3NzJQWEZWTHNva25USmlQTk5IN3JJ?=
+ =?utf-8?B?dHlBSmdMaWloKzE4MXZ1bkhyWWJaYTRHMFZjbUZRekEzWTRXOXk4RUhpV24y?=
+ =?utf-8?B?K2swTjNtU2NsL0l1bzc0Slo4YUFmR3c1dFNVQTVXcmxWeDFKYXNhMEd1VUZo?=
+ =?utf-8?B?cjFSYkJZRVpqSmloeDNvVGxLZzErRGtQR1FjRjhOK01QaytXUHR3b3JXU3VE?=
+ =?utf-8?B?WWcrSUpuNUFVK2d3UVF5aXlBT1FOQyt1Zm1KRlIybXQ0VGFqenFlek4xRTlY?=
+ =?utf-8?B?WUJqeEt5bmp1anNPUjUxOW8rNlhPazREdnhLMEJwancreCtzN1VLSHVka2Yw?=
+ =?utf-8?B?bVh0RmJNRnpSaUVXUnN2bHo0TXpVYkcxOEh0YjMrTnZqdTJBYzZTRVFIMk5U?=
+ =?utf-8?B?U3RCbERwcVRCNDNWOHFOT0JQNlpOaDlKVjdVRzNJMXA2dWlObzNMZ3lXTVNZ?=
+ =?utf-8?B?L1k5RWc1UDZJZkhUMmFsTnk5eVVRRFIxN2d5bUlnOVhzVEdtZ1V6dFlucENK?=
+ =?utf-8?B?MEd3UEMwWXVqdGN1QzJPTGFiOU80OEZxMFdtR24wSVp2Wm1LSFBnaExiQng1?=
+ =?utf-8?B?YkljVXR4ZnNWcElxTjA1T0dHUnBHcVA1K09QVTg0UFNUK3gvUmlzU1E4SGw1?=
+ =?utf-8?B?aGt4d3lGV2R1ZjBtTmZBSWxvN0ZEa0llWTVzeFR1MCsvUHp5QVgxcC9XYUdI?=
+ =?utf-8?B?Y3MzNDlkNEtsNDVLV3RpMUpUU0VFMGdiRDl0MTJxTks3a2tscW0xS0NITmpB?=
+ =?utf-8?B?a0ZPT0dwMkZrNGhGd2tyaWNYNSt1c1k4VDJveUc2blhXUk5MbUVRNDlxeEEv?=
+ =?utf-8?B?cVh3WXo3NEhna3lQM2xIL09XbFhVT3grMGpiRXh2YmlDdUhjMGh4WHBwV0dm?=
+ =?utf-8?B?Vi92Q082UTZYdW9vNkdBT0dwbnVNRUlXOGtNSDcyUHc4d2Y1VVJxWEVTckdq?=
+ =?utf-8?B?Y2prMkVyUUxpVlFrVHZ5bU5BVlhzajFaQ3ZYSVdGVnhnMVZXaTJyaXF0UEJk?=
+ =?utf-8?B?U3VrUlFKMjBqY1RBeThkOW45UjBBWWFhS0YyMkQ3Z0FoRkk1SVdaZ2dCY201?=
+ =?utf-8?B?V2UxeDJ0SzlqQjd0eEZrUT09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(7416014)(366016)(1800799024)(38350700014);
- DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?JlHgPMnTz2FElFRbDhN/74hCnkLoX6KGKHxJ4p8BJv9pV9HZeppmhsklhDXD?=
- =?us-ascii?Q?B8xqq2f0mjxN66xhHYP0est6Eu9UPlCKdrfZDh/F51y0FYVwemsr7UiT+kdR?=
- =?us-ascii?Q?mRnCr5oeHhv/7RIW2qfEZ5vuSn/VuwRngmTgt9ipOgpYS7qFwX6c4tdeNUMj?=
- =?us-ascii?Q?v0HUBjgoi13xXz54jjqEWjO9dBSCUOmxKyE/kBH/wLWCWIamRCLQcYKjqCCE?=
- =?us-ascii?Q?170PUcTPPBIh/7fcAzFkGn1Fv8kr4TOoDobp/jTaBdpuM0Qv7CF4HtG0dn18?=
- =?us-ascii?Q?lLV2wGjpn9/uFda68WQnOCkgKd7ZcT2/ySSQ1zbzqm1xYoKOQflNvhhTM7xW?=
- =?us-ascii?Q?7YcNLT8dv5TM6DeCq7dhrVSe+l6pSwqRIkD99ycf9DNWYmuyn6JPxg8l3CTL?=
- =?us-ascii?Q?iK5BQBFirQxDPUctzzecrRgNyKWLdh3f9VkY14akIikmfGKV/L8CycsNV8Dj?=
- =?us-ascii?Q?7tgI8GxxnKqpaKnNyXHUzkM9QmOIqjD+DoqR6cOmxKZrI90XOgTx09oOhLen?=
- =?us-ascii?Q?sobceKEPujoMdzhcMz+9pqJO56x+kobUyHNTuKSxe0mxfXtzTNxGGfAQcKNz?=
- =?us-ascii?Q?+rtugGJhkg4JEiLC4Ux7uetgtzB/2Ia8l+YU16YFri7ZU0/xcKKLE7JvSUCt?=
- =?us-ascii?Q?pMbeZDTfbskcpKGsrWFpDNuO8JaYnMabx895ZuYbw8rqvDPUYMKzQE5j3BUc?=
- =?us-ascii?Q?Wc/1k3dKosmeQu9+ehH/wVHjzUvhGEQFA4KA8uo9X26OAlpFbHORtJ+NQ/2Y?=
- =?us-ascii?Q?em8ahXJkqgs7jscWUlcRHFd3ZwrXVAl87gERkQpfOEkYJ/ziP2OR1Gua0zlr?=
- =?us-ascii?Q?+66iQlmeNLeInx8xWg5nqA+ra9wVNX3Elwm4amGQtgqpIHWBn7UzgwHseWWy?=
- =?us-ascii?Q?We57MmssjEkiVqxNrsYmFkDob9fk0IVQEalYqtH09lim+WMChxid4RoFComf?=
- =?us-ascii?Q?A1blnCjPtBD6imd4yIjOJ4QSqvMR95qpWjKV4fqGGcFZe6z147ADoTa3850J?=
- =?us-ascii?Q?z5m2IEtbXNxnykMCAgn0YSQa04CTv9BhhTWbbvSEJQDsvlRWwKxccCTCRq13?=
- =?us-ascii?Q?RV2RZ8EYwLgpP0/WCQ0j85DNUZfLiENm74XXFBIYMqHa3UClVxZhvbRoSwE1?=
- =?us-ascii?Q?xAYJLfgnV+a0rN2b9LLXVilqWQT8oe9jmlAw7nriRQTdil5DVu1cHxgwSG3Z?=
- =?us-ascii?Q?PNNu6dLvY5d9VAKLv3x1L6NXmQJ6+I2GvWA+4m6ksmZm+cpRS9xHYXxhV8L4?=
- =?us-ascii?Q?hErH3jMlMn1kpJocgaJmd9cYSM2PcytMAuNcZ4ZG7RIhWqrCd6+DmvsUDeg5?=
- =?us-ascii?Q?NL2VH14Y1rKO8TnEbSsHKBMmj3KoKinvCQO9PPFYBeM6rzB7xUCjnlFj9+ir?=
- =?us-ascii?Q?6G4OZFqooNKU5NRINxb/n0XOwuvp0qb9WHDtXlJI2e2fEz/bO5cMGvC4/Ne4?=
- =?us-ascii?Q?MPRWU6GL4CwkP1ernFS9ue+bayh0wqQs2N6ybWtR12RLhE0aaLFwy5qmtw1U?=
- =?us-ascii?Q?gALvU8CpTXfxXxvGIDkGM922rzS/p7dn38tUvmHkZLC18JchWGFhhixPX/El?=
- =?us-ascii?Q?E0qwn2dEQIOVidYMCHxpyTOGyV2Zl31MLoCesfsW++QqmUIrSaiVZoxJfHdZ?=
- =?us-ascii?Q?JQ=3D=3D?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1fa3ea3e-c6da-486e-ab48-08dc9a630d59
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MHhodFEzM2piOWpMaG0wcFZyRlZvazczOUV5ZGNzenBkOEJwcDFDTllDOStE?=
+ =?utf-8?B?Q1p0S2g4WUVtbU5JVGxHMU1ocGRjV0E0ajQwRG1xTTBuTHhTd01kN1Y1RkVm?=
+ =?utf-8?B?aENmazRuMXd1QjBHUDZhdzR3S0tlK1pkNjBFZVVDemkyTm93UTFVN1U1TCtI?=
+ =?utf-8?B?dUo1SzRqWjJvNWFOQmo2cjI3YzkzOHJTQ3l0VFNwZGtJU1JKMFFROGVhT0NS?=
+ =?utf-8?B?b25VUGpEWUgrUjR2UDg4OGxESTRhWUhxaUo0aEJRUEZXOElJYzVZNmVwZ1oz?=
+ =?utf-8?B?akl2bUxTYTNha3VmNFhMcVUyN1FEa2htMnE1RlY3RFFSTG5lclRjcEV2OCtl?=
+ =?utf-8?B?RldpZExaT3dhay9OY3RWUFhtSWZzemxHK2xTdm5GTmZicUxOdHFLUTNYdlRh?=
+ =?utf-8?B?dE5WU3dOVW8xTkQ5RE5LMkNFUFFUSXJTd01ucVh1OXprRDcraXNJMExOZ2ox?=
+ =?utf-8?B?NWI2U3RWd01mU21WMHhUZCswSzVGTFVJMTZ2RVJWUFlMWFAxREJ3V095WTBv?=
+ =?utf-8?B?WkVCK3JDdmlwVExKVGI2SzZxenh1clcrUHR6WExuTXRVeU9tblJpdHQyempU?=
+ =?utf-8?B?Y0djTURFZHN3T2xkVEw1cmF6SDJ2dkJpSFlhMWkyYURhWk1zSDNEVTVhWVdV?=
+ =?utf-8?B?NUVUOVI5aHByS2FicmYxUDduZmxtNE1DZ0xqSEI3eFl4LzNYRURVYXlES25L?=
+ =?utf-8?B?L0pRNFU1Y2Vuc1FnVlN0MTRSVGE2bSt0TXQ5QU1DR1NWTEM0dzlOYXhFQy9H?=
+ =?utf-8?B?QUVjVkZXVDlMdmxPZ3U3dnFvQ0oyQkJwZ0JwVlFpTVc0cWc2c0NIelQ5SU54?=
+ =?utf-8?B?a1JoaDJYVllLNUIwQzFYSWdocS9IZjBqZXU5aVlGRHd6Qi9iMGtENzVDN291?=
+ =?utf-8?B?YnFNNXBHUkJXdW4vdVdzR3JjeW14VXdzUzV5SVIrcklrRDdMcno2MzYzUFI4?=
+ =?utf-8?B?SUgzTHFvTXN4aFZKODRHOXJiWmF5b1Z2cmZkU056UytSSSthSTcycjZmZW5V?=
+ =?utf-8?B?MmdaRGpyZ2pjQk5aT2tMdnlvUjdRSzFIV0hZTm1rUFRPTFpldnZlQXBwMk5h?=
+ =?utf-8?B?ckovL2ZteWxkZEFCRElxcklzNUM3S25PNXZnUEU1RTFKMXYrWnBWQzE1Z0l5?=
+ =?utf-8?B?UGRSUXhxbVFpU0tSU0xDbG9LV2tIV2NvSjJOc0RrQ056YmlqWURUUERScTFt?=
+ =?utf-8?B?VnNRWGZTamFyN3QyY0V2VGVMRjh0T3dFbGU1TFpvei9CRWhWczJ2eUNtOHVt?=
+ =?utf-8?B?QnlDSUt4Z3VVWExnS2hhQ1Zpekg5eEk3UXRIVmpJejBQNy9DNTY4bVlrTkRJ?=
+ =?utf-8?B?QUlzTU5kTFZDeXBrWk1NU1NkUE5oVzJkNVVwVlBBOGdTOXM3WVN6R2prdmFC?=
+ =?utf-8?B?aDNob3dGMGUzSDNhTzJKUlBnTHBpbnA4eVk2K3EyKzNsR2IyMDM3KzJpSDBh?=
+ =?utf-8?B?aXVqVDU0dmNVVWhSMFVoOHlxemllQ3Q4R2Q1YVRxdHBxVDNQektjWjRkdHh3?=
+ =?utf-8?B?N0MyTlV0QWVjajRLbFZIYkYvSVBldkY4NzVhQUNpaVZXa2NPb3QrYWtJOXBR?=
+ =?utf-8?B?R2wyYk1zRzUyZWJrVUZEMWNsbmF1RWZPYmNuTUd5S3hwK1FtTVlGUEtsaUVW?=
+ =?utf-8?B?ekMwc1RmSkJKc2FFczlzRDlteWxvaGNRbHRVcGFOaUlvd1hzUEtHUmdYMzN2?=
+ =?utf-8?B?cFhHUjB2N08yaGZBeGJRdFg3czhzZlhmT25id05aSWxVYnhOanVxaVNPSkQ0?=
+ =?utf-8?B?K1JvRzFTN1hWRkNVaC94NUUxcEZmU1FCaDZRb3h1dnNjUS9DNDV3aTJQWE5Q?=
+ =?utf-8?B?cUFJemRIQWNwQ3h6WFBTalgxQytxb3lsZks5Lzk4YlFEZkt0Y1c5NVFHdkNZ?=
+ =?utf-8?B?dkNQREthMFBtYnVRelhIY3R0eU1Hek9tWi9raklFc0thWVlDRFVQSGdmTnpa?=
+ =?utf-8?B?bUhndDFDUkNPakRWc3hycURSbkNoNWsrY1l5NjBUTUdTd0hwUWZpZXpoRjkz?=
+ =?utf-8?B?WnpOL3djTW56TUNmWXpraGhqaTR3bldGKy9EbW9kS0JxNk0vYnI1NmhoQ0tZ?=
+ =?utf-8?B?UGU4RmV4ZGFMaXc0S05JRCthUDBlbEp0OEErV0Z4R2gzZXZMd3pKYWQ1eUxl?=
+ =?utf-8?Q?6FWgNQ2FNw3uHyu7AMo7iUjrV?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52b633e8-1d9f-405d-ace1-08dc9a6a6ff8
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2024 06:48:59.7369 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2024 07:41:51.9176 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V6yt1DT1YJpRt2koaNpwEBq7cbSsUZudfj6y6xtX/quHyB4D3/ULID09IAxY8G81y/6/05Xf8ur54xH3lmauHg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6356
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8OalHxQT/M0vUhW2JruXN6vcmLfoPfI+FWm13R58LJ2y0DOQOpwOcvCnr7C5/y2G
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB9143
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,100 +181,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lukas Funke <lukas.funke@weidmueller.com>
+Hi Paul,
 
-Add test which adds environment variables to the FIT configuration node
-and checks whether they are exported to the runtime environment.
+On 7/1/2024 8:39 PM, Paul Geurts wrote:
+> Hi Ye,
+>
+>> Hi Paul,
+>>
+>> On 6/26/2024 3:17 PM, Paul Geurts wrote:
+>>> Hi,
+>>> Thanks for the feedback.
+>>>
+>>>> Hi Paul,
+>>>>
+>>>> On 6/24/2024 8:09 PM, Fabio Estevam wrote:
+>>>>
+>>>>> Hi Paul,
+>>>>>
+>>>>> On Fri, Jun 21, 2024 at 10:06 AM Paul Geurts
+>>>>> <paul.geurts@prodrive-technologies.com>  wrote:
+>>>>>
+>>>>>> -struct imx_sec_config_fuse_t {
+>>>>>> +struct imx_fuse_t {
+>>>>> Please make the struct renaming a separate patch.
+>>>>>
+>>>>> Peng Fan, Ye Li,
+>>>>>
+>>>>> Could you please help review this patch?
+>>>>>
+>>>>> Thanks
+>>>> Can you take a look iMX8MP FIELD_RETURN fuse, I think it does not
+>>>> have 1 bit but 8 bits which requires to burn a sequence. Only when
+>>>> the bits sequence is matched, the field return can work.  So checking
+>>>> the bit 0 is not enough.
+>>> Are you sure about that? The security reference manual (IMX8MPSRM)
+>>> says in Table 5-5
+>>> that the FIELD_RETURN fuse is located on fuse 0x630[0], which is a
+>>> single bit. Also,
+>>> the "Chip Security Lifecycle" section (2.15.1) says the following:
+>>>
+>>> FEILD RETURN (SEC_CONFIG[1] fuse = 1 and FIELD_RETURN fuse = 1)
+>>>
+>>> Are you maybe confusing the FIELD_RETURN fuse with the
+>>> FIELD_RETURN_LOCK sticky bit?
+>>> clearing the lock bit _is_ quite the procedure, but it is unrelated to
+>>> U-Boot, as
+>>> this is done by ROM code through CSF.
+>>>
+>>> I tested this on an i.MX8M Plus and it seems to work fine.
+>> I know the steps for field return.  What I mean is the FIELD_RETURN
+>> fuse.  It is true that security RM mentions it as you quote. But from
+>> 8MP fuse map and ROM codes,  I get different things.
+>>
+>> FIELD_RETURN 8-bit code.
+>> FIELD_RETURN = 0, is non-field return mode, functional/secure mode.
+>> FIELD_RETURN = Matching Sequence, device is in field_return mode
+>> FIELD_RETURN != Matching Sequence, device asserts security violation
+> That is indeed different from what is mentioned in documentation. I have
+> asked our NXP FAE about the discrepancy and I will adjust the code if
+> needed.
 
-Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
----
+Thanks for confirm. I also cross checked with teams. 8MP must burn a 
+pattern. Otherwise HAB won't covert to field return.
 
- configs/sandbox_defconfig |  1 +
- test/py/tests/test_fit.py | 45 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+)
+Additional, do you think it is very necessary to add this patch set?  
+Because field return is a pure debug feature, it won't be deployed on 
+productions. The developers working on field return parts can re-build 
+u-boot with CONFIG_IMX_HAB disabled.
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 93b52f2de5c..7431c8a910e 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -142,6 +142,7 @@ CONFIG_ENV_IS_IN_EXT4=y
- CONFIG_ENV_EXT4_INTERFACE="host"
- CONFIG_ENV_EXT4_DEVICE_AND_PART="0:0"
- CONFIG_ENV_IMPORT_FDT=y
-+CONFIG_ENV_IMPORT_FIT_CONF=y
- CONFIG_BOOTP_SEND_HOSTNAME=y
- CONFIG_NETCONSOLE=y
- CONFIG_IP_DEFRAG=y
-diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
-index 8f9c4b26411..2a3aba74502 100755
---- a/test/py/tests/test_fit.py
-+++ b/test/py/tests/test_fit.py
-@@ -74,6 +74,8 @@ base_its = '''
-                         fdt = "fdt-1";
-                         %(ramdisk_config)s
-                         %(loadables_config)s
-+                        %(env_var0)s
-+                        %(env_var1)s
-                 };
-         };
- };
-@@ -308,6 +310,13 @@ def test_fit(u_boot_console):
- 
-             'loadables_config' : '',
-             'compression' : 'none',
-+
-+            'env_var0': '',
-+            'env_var0_name': 'foo',
-+            'env_var0_value': 'somevalue',
-+            'env_var1': '',
-+            'env_var1_name': 'bar',
-+            'env_var1_value': 'anothervalue',
-         }
- 
-         # Make a basic FIT and a script to load it
-@@ -396,6 +405,42 @@ def test_fit(u_boot_console):
-             check_not_equal(ramdisk, ramdisk_out, 'Ramdisk got decompressed?')
-             check_equal(ramdisk + '.gz', ramdisk_out, 'Ramdist not loaded')
- 
-+        # Now a kernel, FDT and environment variables
-+        with cons.log.section('Kernel + FDT load + env'):
-+            params['fdt_load'] = 'load = <%#x>;' % params['fdt_addr']
-+            params['env_var0'] = ('env,%s = "%s";' %
-+                                 (params['env_var0_name'],
-+                                  params['env_var0_value']))
-+            params['env_var1'] = ('env,%s = "%s";' %
-+                                 (params['env_var1_name'],
-+                                  params['env_var1_value']))
-+            fit = fit_util.make_fit(cons, mkimage, base_its, params)
-+            cons.restart_uboot()
-+
-+            output = cons.run_command_list(cmd.splitlines())
-+            check_equal(kernel, kernel_out, 'Kernel not loaded')
-+            check_equal(control_dtb, fdt_out, 'FDT not loaded')
-+            check_not_equal(ramdisk, ramdisk_out,
-+                            'Ramdisk loaded but should not be')
-+
-+            # Check if bootargs strings substitution works
-+            output = cons.run_command_list([
-+                'env set bootargs \\\"\'my_boot_var=${%s}\'\\\"' % params['env_var0_name'],
-+                'bootm prep',
-+                'env print %s' % params['env_var0_name'],
-+                'env print %s' % params['env_var1_name'],
-+                'env print bootargs'])
-+            assert ('%s=%s' %
-+                    (params['env_var0_name'],
-+                     params['env_var0_value'])) \
-+                in output, "Environment not loaded from configuration"
-+            assert ('%s=%s' %
-+                    (params['env_var1_name'],
-+                     params['env_var1_value'])) \
-+                in output, "Environment not loaded from configuration"
-+            assert 'bootargs="my_boot_var=%s"' % params['env_var0_value'] \
-+                in output, "Bootargs strings not substituted"
-+
- 
-     cons = u_boot_console
-     # We need to use our own device tree file. Remember to restore it
--- 
-2.30.2
+This patch may introduce risk to HAB in some sense,  especially for 
+productions. One mistake would make unsigned image bypass authentication 
+result.
 
+
+Best regards,
+
+Ye Li
+
+>>
+>> However, I'm not sure how is it implemented in HAB. Since you have
+>> tested 8M plus, can you confirm the closed part is successfully
+>> converted to field return and can boot without signing?
+> Maybe I did something wrong while testing. I will retest it on a new
+> board when I have received some more information from NXP.
+>
+>>
+>>   Best regards,
+>>
+>> Ye Li
+>>
