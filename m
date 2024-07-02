@@ -4,75 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0249AC3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DB03C30658
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7394E871C7;
-	Tue,  2 Jul 2024 15:12:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 742A58780A;
+	Tue,  2 Jul 2024 15:20:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="KDVg/NY3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gbSFx3wY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18871880AE; Tue,  2 Jul 2024 15:12:17 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CFAEE883AC; Tue,  2 Jul 2024 15:20:51 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2770E87073
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 15:12:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B349871C7
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 15:20:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1719925934; x=1722517934;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sEmhmw3LP7CxpE8eDbApypl3LcDzW04VRqs4wklL05o=;
- b=KDVg/NY3LF7zFVOUH+OAFdZYWmAr6wMDAjGJQ4r1zUnMWTEgS9wEGWY5PtxCV7dj
- Wl8XSDwKvcP27pNvd6f6I71IT3TQDprBbPQhZZaScQF+0JjRnci0kStjfhbRUF9r
- JEEynFosAS5nPvglLsxzURwEks6uFGa2Uw43gkhexxA=;
-X-AuditID: ac14000a-03e52700000021bc-e4-6683fcae1181
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 00.3A.08636.EACF3866;
- Tue,  2 Jul 2024 15:12:14 +0200 (CEST)
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 2 Jul 2024
- 15:12:13 +0200
-Message-ID: <3e800028-7b87-4ba0-a08e-ede176523598@phytec.de>
-Date: Tue, 2 Jul 2024 15:12:13 +0200
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5903461B98;
+ Tue,  2 Jul 2024 13:20:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D014C4AF07;
+ Tue,  2 Jul 2024 13:20:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1719926448;
+ bh=4yjz/ylRLQh89qu9m9ng0XQXPCMUa9m02Dto6ARSYXs=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=gbSFx3wY/qSZl0ajr3Q8c4RrnS1lUBM8rfcnw8egCY8TVe7tsbHGqplGRr0fBGWIk
+ ZHfUxNu0CCkacWa5PWla+o42UXyJaqWmo2/rqoTAX+fS3/MagYn/5PWttM6PoJ0dCy
+ NNJscP190sCE/3QAO0b8Oa1S8qF5CAIW9Wf+Kuh+09Rs4dxDlUjtvGxwMhnLYNLNsj
+ r7NpyD55/jw9V4pnUxXX9Dn/M2YHItvitJYdJY9LnRoS0oU7tVwm5uVyWrn3oZoY2T
+ oyb9nnr+EPm6582feySBgCJv70QVzvrpOyQK2c2j6zvpSOMzYUQlW56OGro70Ex6OB
+ O7XbxOYyqS+Pg==
+Message-ID: <f75621af-cfcc-4909-bb79-dbbc9aeb30e2@kernel.org>
+Date: Tue, 2 Jul 2024 16:20:43 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: phytec: k3: k3_ddrss_patch: Add ddr phy reg count
-To: Dominik Haller <d.haller@phytec.de>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>
-CC: <trini@konsulko.com>, <jma@phytec.com>
-References: <20240702092240.34349-1-d.haller@phytec.de>
+Subject: Re: [PATCH] usb: cdns3: continue probe even when USB PHY device does
+ not exist
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, marex@denx.de,
+ trini@konsulko.com, mkorpershoek@baylibre.com
+Cc: u-boot@lists.denx.de, u-kumar1@ti.com, danishanwar@ti.com, srk@ti.com
+References: <20240702120724.368102-1-s-vadapalli@ti.com>
 Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20240702092240.34349-1-d.haller@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240702120724.368102-1-s-vadapalli@ti.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGLMWRmVeSWpSXmKPExsWyRpKBR3fdn+Y0g6dLNCyedTYxW0ydtJnd
- 4u3eTnaL7nfqDiwerw6sYvc4e2cHo0d/dwurx5+L71gDWKK4bFJSczLLUov07RK4Mh7++cJc
- cJ2r4nPbW7YGxvscXYycHBICJhKTn6xlArGFBJYwSfybWdTFyAVk32GUuN3YyAiS4BWwkTjU
- 9hesiEVAReLlvdtQcUGJkzOfsIDYogLyEvdvzWAHsYUFfCVeTPjJBmKLCMRKbOw7AlbPLKAl
- 0fLwFgvEMnOJEw272CDi4hK3nswHm88moC5xZ8M3VhCbU8BC4siTPlaIGguJxW8OskPY8hLb
- 385hhpgjL/Hi0nIWiGfkJaade80MYYdKbP2ynWkCo/AsJKfOQrJuFpKxs5CMXcDIsopRKDcz
- OTu1KDNbryCjsiQ1WS8ldRMjKC5EGLh2MPbN8TjEyMTBeIhRgoNZSYRX6n1zmhBvSmJlVWpR
- fnxRaU5q8SFGaQ4WJXHe1R3BqUIC6YklqdmpqQWpRTBZJg5OqQZGtudS2w2CCi1P1O03jDLr
- rWycs9XPf+Gb7nD1Auljr7ZMaZO2lciZKuT8V/jxpYPvH+X0bHZ4J77R59uX3Pqt4gJHsqSi
- ph8s7dy6bnflzT2qvwwTbCVXWFQo1Ozpuz1zZayabh/7uU7HDf7qFuovOF99X9W89VXR1nb+
- 5zdcoiabn5pjet9CiaU4I9FQi7moOBEAEJU5G3kCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,36 +73,73 @@ X-Virus-Status: Clean
 
 
 
-Am 02.07.24 um 11:22 schrieb Dominik Haller:
-> Add and use the correct number of ddr phy registers to update the
-> corresponding settings.
+On 02/07/2024 15:07, Siddharth Vadapalli wrote:
+> Prior to commit cd295286c786 ("usb: cdns3: avoid error messages if phys
+> don't exist"), cdns3_probe() errors out only on failing to initialize the
+> USB2/USB3 PHY. However, since commit cd295286c786, absence of the PHY
+> device is also treated as an error, resulting in a regression.
 > 
-> Fixes: cbf5c99ef317 ("board: phytec: common: Introduce a method to inject DDR timings deltas")
-> Signed-off-by: Dominik Haller <d.haller@phytec.de>
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
-
+> Extend commit cd295286c786 to treat -ENODEV as an acceptable return value
+> of generic_phy_get_by_name() and continue device probe as was the case
+> prior to the commit.
+> 
+> Fixes: cd295286c786 ("usb: cdns3: avoid error messages if phys don't exist")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 > ---
->   board/phytec/common/k3/k3_ddrss_patch.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/board/phytec/common/k3/k3_ddrss_patch.c b/board/phytec/common/k3/k3_ddrss_patch.c
-> index 39f7be8dc922..5afe5a20c7f3 100644
-> --- a/board/phytec/common/k3/k3_ddrss_patch.c
-> +++ b/board/phytec/common/k3/k3_ddrss_patch.c
-> @@ -12,6 +12,7 @@
->   #ifdef CONFIG_K3_AM64_DDRSS
->   #define LPDDR4_INTR_CTL_REG_COUNT (423U)
->   #define LPDDR4_INTR_PHY_INDEP_REG_COUNT (345U)
-> +#define LPDDR4_INTR_PHY_REG_COUNT (1406U)
->   #endif
->   
->   static int fdt_setprop_inplace_idx_u32(void *fdt, int nodeoffset,
-> @@ -54,7 +55,7 @@ int fdt_apply_ddrss_timings_patch(void *fdt, struct ddrss *ddrss)
->   					return ret;
->   			}
->   
-> -	for (i = 0; i < LPDDR4_INTR_PHY_INDEP_REG_COUNT; i++)
-> +	for (i = 0; i < LPDDR4_INTR_PHY_REG_COUNT; i++)
->   		for (j = 0; j < ddrss->phy_regs_num; j++)
->   			if (i == ddrss->phy_regs[j].off) {
->   				ret = fdt_setprop_inplace_idx_u32(fdt,
+> Hello,
+> 
+> This patch is based on commit
+> b4cbd1a257 Merge tag 'u-boot-amlogic-20240701' of https://source.denx.de/u-boot/custodians/u-boot-amlogic into next
+> of the next branch of U-Boot.
+> 
+> Regards,
+> Siddharth.
+> 
+>  drivers/usb/cdns3/core.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+> index b4e931646b..5b3e32953e 100644
+> --- a/drivers/usb/cdns3/core.c
+> +++ b/drivers/usb/cdns3/core.c
+> @@ -338,7 +338,7 @@ static int cdns3_probe(struct cdns3 *cdns)
+>  			dev_err(dev, "USB2 PHY init failed: %d\n", ret);
+>  			return ret;
+>  		}
+> -	} else if (ret != -ENOENT && ret != -ENODATA) {
+> +	} else if (ret != -ENOENT && ret != -ENODATA && ret != -ENODEV) {
+
+With this change we will not error out on a genuine error condition
+that produces ENODEV.
+
+If PHY phandle is not present the API should return ENOENT right?
+
+static int __of_parse_phandle_with_args(const struct device_node *np,
+...
+{
+...
+
+        /* Retrieve the phandle list property */
+        list = of_get_property(np, list_name, &size);
+        if (!list)
+                return -ENOENT;
+
+Can you please check and point where the -ENODEV error is coming from?
+
+>  		dev_err(dev, "Couldn't get USB2 PHY:  %d\n", ret);
+>  		return ret;
+>  	}
+> @@ -350,7 +350,7 @@ static int cdns3_probe(struct cdns3 *cdns)
+>  			dev_err(dev, "USB3 PHY init failed: %d\n", ret);
+>  			return ret;
+>  		}
+> -	} else if (ret != -ENOENT && ret != -ENODATA) {
+> +	} else if (ret != -ENOENT && ret != -ENODATA && ret != -ENODEV) {
+>  		dev_err(dev, "Couldn't get USB3 PHY:  %d\n", ret);
+>  		return ret;
+>  	}
+
+-- 
+cheers,
+-roger
