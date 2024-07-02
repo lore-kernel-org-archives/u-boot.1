@@ -4,56 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A38D8C3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 04:04:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF073C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 04:53:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9A4588718;
-	Tue,  2 Jul 2024 06:04:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 24B74884D0;
+	Tue,  2 Jul 2024 06:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1719893069;
-	bh=bvH41JazhyCRM+ndro4NDRtmx0Hz0m9ETxG7LOSEOko=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yQ8UfTKDa1IwovmKxAIXLc5KM4ZK0UuD2tkEY48O4gWcJFXRsshBgt3DiqYDkueD8
-	 QxNUcqKTlwAI5wZ8P2TBw3tBWECxvJVDc/g1o55RFC9NKxeu1oOocErWW/PQc5Lspw
-	 TJJ7ufM17uz+6bwmRwmO4VbVBpxN9Y+IXlm+44+h3RET3NBCpg0P6drPBohfgYYHOW
-	 pGIH2d8ivYyo9dbyB5h7+WUI9Rzwex0TQ/K27tPbkGW0/7FNP3eBmmm9//GOV04f/w
-	 4plx0sA3FAZFqkLZdu8loqyfX0hcH8vwsZ7aAe0kZ8TiY+KVrNo742nn1v6USapG1g
-	 2bIC76Xej86jQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MIqxnLzJ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 043E9886C9; Tue,  2 Jul 2024 06:53:41 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A8B8C886FD;
- Tue,  2 Jul 2024 06:04:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1719893068;
- bh=bvH41JazhyCRM+ndro4NDRtmx0Hz0m9ETxG7LOSEOko=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=IXNMGr3W8EQP/C+ORXvYGd3K1/K2OcjssBusN+0xkdlonzltIF3/kkLam7FHePtEG
- Zi6LRh6aF63oozGamZj0OitDm1rFQt2tZRS+0COIr07APYMwQ9Nu/Eo0e/wzhx/vHC
- p6h5rkbzkms7soCbKlKmcJIMb6jOPaTN0owIIKoy8H68cz1+6Z9AflZEJjvYBXtpSn
- /x1jfQ/ty1RwuHEdIZozeAoklZko0wPiY2wJqNkRM/3biY5WspPvh00mNCTklHRDqd
- ikHkib9AfJEe7ONK/o1y2gPFAGrwmSNCUX3hyn3KSqyhmX0tDZ1qOs0/3SlLljm1FY
- Etdb0Whmh99IA==
-Message-ID: <bc923c6b-e2d9-4a12-be6f-7e5d404b1665@denx.de>
-Date: Tue, 2 Jul 2024 02:35:01 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id DEE01884BE
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 06:53:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4624rXu0008360;
+ Mon, 1 Jul 2024 23:53:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1719896013;
+ bh=IYpPxAwk6u5e/yztLOazj1xlMV3Oo9StNnIkW4H5WmY=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=MIqxnLzJunnDWdU8nnDFD16EQF9M+kzvrI4cJRSPm4sfWaRw+ewN1QonLZnhR6dmv
+ 7AkDHJFGlumdcJKMAn61KdFxwZpTEww18nrvgoG2ALlTIeu8ku2PeSKJ+y7wyHY7bK
+ 4jQ3nm36xT6AEH8To4SXhrcLGGfRpKeVpnleDWtE=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4624rXLL009395
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 1 Jul 2024 23:53:33 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 1
+ Jul 2024 23:53:33 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 1 Jul 2024 23:53:33 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4624rWUg066077;
+ Mon, 1 Jul 2024 23:53:32 -0500
+Date: Tue, 2 Jul 2024 10:23:31 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Tom
+ Rini <trini@konsulko.com>, Vaishnav Achath <vaishnav.a@ti.com>, Jayesh
+ Choudhary <j-choudhary@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, <u-boot@lists.denx.de>,
+ Neha Malcom Francis <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Dhruva Gole <d-gole@ti.com>
+Subject: Re: [PATCH v2 0/4] Fix fdtfile for j722s and am62p
+Message-ID: <20240702045331.am74g4abirhxtewk@uda0497581>
+References: <20240701-b4-upstream-streamline-platform-v2-0-7539ff066b58@ti.com>
+ <20240701152823.qa73d3s3meln34es@accurate>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: socfpga: fix broken function call for arria10
-To: Lothar Rubusch <l.rubusch@gmail.com>, simon.k.r.goldschmidt@gmail.com,
- tien.fong.chee@intel.com, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de
-Cc: u-boot@lists.denx.de
-References: <20240701215927.285961-1-l.rubusch@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240701215927.285961-1-l.rubusch@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240701152823.qa73d3s3meln34es@accurate>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,45 +84,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/1/24 11:59 PM, Lothar Rubusch wrote:
-> Remove obsolete arguments in the function call. The call's argument list
-> differs from its more recent definition. This breaks compilation of the
-> 'socfpga_arria10_defconfig' target, with additionally enabled:
-> 
->    CONFIG_CADENCE_QSPI=y'
-> 
-> The removed arguments are obtained from device-tree declaration.
-> 
-> Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
-> ---
-> The patch makes the problem disappear. While messing with some old
-> Intels, it looked to me as if this usually turned off code region of
-> the misc_arria10.c still contains legacy arguments in the call. Thus
-> broke my compilation. I'm unsure. Please verify.
-> ---
->   arch/arm/mach-socfpga/misc_arria10.c | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
-> 
-> diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
-> index 93c9e8b0..5c782f6b 100644
-> --- a/arch/arm/mach-socfpga/misc_arria10.c
-> +++ b/arch/arm/mach-socfpga/misc_arria10.c
-> @@ -211,11 +211,9 @@ int qspi_flash_software_reset(void)
->   	struct udevice *flash;
->   	int ret;
->   
-> -	/* Get the flash info */
-> +	/* Get the flash info, speed and mode will be read from DT */
->   	ret = spi_flash_probe_bus_cs(CONFIG_SF_DEFAULT_BUS,
->   				     CONFIG_SF_DEFAULT_CS,
-> -				     CONFIG_SF_DEFAULT_SPEED,
-> -				     CONFIG_SF_DEFAULT_MODE,
->   				     &flash);
+Hi Nishanth,
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+On 10:28-20240701, Nishanth Menon wrote:
+> On 10:48-20240701, Manorit Chawdhry wrote:
+> > fdtfile wasn't being populated in these boards, add the code in evm.c
+> > for the same.
+> > 
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> > Changes in v2:
+> > - Replace findfdt with fdtfile as that is what the series fixes. (Nishanth)
+> > - Drop findfdt as well for K3 platforms legacy support
+> > - Link to v1: https://lore.kernel.org/r/20240628-b4-upstream-streamline-platform-v1-0-17659af992c1@ti.com
+> > 
+> > ---
+> 
+> 
+> Please explain in your patches the impact the changes have on all
+> platforms - not just TI K3 platforms. that was already asked on previous
+> reviews, please provide the explanations in commit message to prevent
+> folks from having to guess.
+> 
 
-Could you by any chance also send a patch to enable this QSPI NOR 
-support on one of the A10 targets, so the CI would compile this code and 
-this code wouldn't bitrot again ?
+From my understanding, there should be no impact to any platform with
+these changes, let me know if you notice any platform that is being
+impacted by the following change?
 
-Thanks
+The way I see it is - 
+1. It's adding support for populating fdtfile with ti_set_fdt_env for
+   j722s, am62p
+2. It's moving name_fdt change to fdtfile ( as name_fdt is not defined
+   anymore - and we need to move away from name_fdt as well due to
+   deprecation warning ) in ti/mmc.env.
+3. ti/mmc.env even though used in k2g devices along with K3, still have
+   their own override of the variable that am changing in the common
+   ti/mmc.env so should be no-impact.
+3. Since fdtfile is being set by ti_set_fdt_env for all K3 platforms (
+   which are the only users of bootcmd_ti_mmc iiuc ) so we can remove
+   findfdt from bootcmd_ti_mmc ( which is still legacy support and not
+   used in the default BOOTCOMMAND ). 
+
+Let me know if am understanding something incorrectly.
+
+Regards,
+Manorit
+
+> > Dhruva Gole (1):
+> >       include: env: ti_common: Remove findfdt
+> > 
+> > Manorit Chawdhry (3):
+> >       include: env: ti: mmc: Change name_fdt usage to fdtfile
+> >       board: ti: am62p|j722s: Add ti_set_fdt_env for fdtfile
+> >       configs: am62p|j722s_a53: Add CONFIG_BOARD_LATE_INIT
+> > 
+> >  board/ti/am62px/evm.c            | 9 +++++++++
+> >  board/ti/j722s/evm.c             | 9 +++++++++
+> >  configs/am62px_evm_a53_defconfig | 1 +
+> >  configs/j722s_evm_a53_defconfig  | 1 +
+> >  include/env/ti/mmc.env           | 2 +-
+> >  include/env/ti/ti_common.env     | 2 +-
+> >  6 files changed, 22 insertions(+), 2 deletions(-)
+> > ---
+> > base-commit: 899b088674b6905710ce546f0a8848662904852a
+> > change-id: 20240628-b4-upstream-streamline-platform-f0d7453637b2
+> > 
+> > Best regards,
+> > -- 
+> > Manorit Chawdhry <m-chawdhry@ti.com>
+> > 
+> 
+> -- 
+> Regards,
+> Nishanth Menon
+> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
