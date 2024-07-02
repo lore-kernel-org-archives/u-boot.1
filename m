@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0ECC3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 15:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03DA8C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 15:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78579883B6;
-	Tue,  2 Jul 2024 17:38:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D51CC883AC;
+	Tue,  2 Jul 2024 17:51:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FR2IBbVO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jY6i5wSU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EE6A8852D; Tue,  2 Jul 2024 17:38:14 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id E17B9883B6; Tue,  2 Jul 2024 17:51:05 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADE7988495
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 17:38:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6003287C86
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 17:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3678aa359b7so452185f8f.1
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 08:38:12 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3d55ed47cc6so2718801b6e.2
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 08:51:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719934692; x=1720539492; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MDdylNRAMaJwbN8WvRyEeOB+toBEHdcPGadcMVzf4Ic=;
- b=FR2IBbVOsXPHwQHfjeSbMbLPgjL9DKUsTZJ5oOqTvSbhq8Gw/qfgX5GTjxa4vnvObz
- Iwq+tIF5APtujs4EzZjehP/f+RIZtC8JNv+S9CZbXoYII2T5WoakwgHCuSmFBhSVtJcv
- TFxLO0ytyB/WYeNgYl2pyWWD05CXrd2tp26/4=
+ d=chromium.org; s=google; t=1719935462; x=1720540262; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2cIQfiQAXqgxOlu2W3G3F1vOSItbhCMcdfRI4h89hGg=;
+ b=jY6i5wSUBR2PScBx9yNHeY8VfCTMSHSJI+63NP2WanTn6OZpp9vQnzs+WW8spwmN9m
+ vjrJ2D7Z8YgVa4H4Us4GOGOcvqmG7Jv3+QMlUuPYjQeW7dHlcnEOhOtlQPzmxPd6Q8Oz
+ 1ThMiCmYcku9if2qR9IBUSmBmpYIxC6J/TCgU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719934692; x=1720539492;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1719935462; x=1720540262;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MDdylNRAMaJwbN8WvRyEeOB+toBEHdcPGadcMVzf4Ic=;
- b=DCUy/GbqHT7iDY66hWOWkZUuqR3NdBrgcsCbSkVbxjwIyotQRBSdUx5b47DXnYoCA6
- 1Pu9/n8SIZt4bKRI+oC2WXqUSFlVWAFPDrygeBdPAvnayARLTU/MpjJRladgY9XQ+U+Z
- mgI/5wYD4eOnSODMnRDNw70W36EFxmSc9VP+iVRafW4HY/ums+QHU+eX7XEWngLDB+Av
- 3WnJmdnX2LEK29r7YsQedGcb2VhdfsAaE5a7RO1qPX/KLh89ych2wqcscqrOVlgKsMXk
- nh6okgtKFuEPvYblVih+whLrzJ3CxuyRI+fW0jk7NhiuQ53oRcQe7QRKfC0senMf4INf
- hj6A==
-X-Gm-Message-State: AOJu0YwxCP3LeZsgwJC45jjDJjGED4NAo62mQ982l6jnkIzyuY9LTW9r
- AFVFfYF19Zg2e6Ck7x/OKm6GDzjgMJI6zq1X4fP0AW9MhaBLKDsE7IgLzxoIc7U0mv2xKEMPMkw
- =
-X-Google-Smtp-Source: AGHT+IE1C8kWZeYVYI14JmCcInFMyAMVDNrsHyHWAVKGeL54DHZkPOg+jJ2qLeA6Tm8a5p+6P1ai1g==
-X-Received: by 2002:a5d:47c3:0:b0:362:69b3:8e4d with SMTP id
- ffacd0b85a97d-36774f89a60mr9708616f8f.25.1719934691780; 
- Tue, 02 Jul 2024 08:38:11 -0700 (PDT)
-Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3678c379cc6sm1235700f8f.49.2024.07.02.08.38.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 08:38:11 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Fabio Estevam <festevam@gmail.com>,
- Hiago De Franco <hiago.franco@toradex.com>,
- Mathieu Othacehe <m.othacehe@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH] mx9: Correct repeatable build error
-Date: Tue,  2 Jul 2024 16:37:39 +0100
-Message-Id: <20240702153739.2651815-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ bh=2cIQfiQAXqgxOlu2W3G3F1vOSItbhCMcdfRI4h89hGg=;
+ b=jl4NZwAfEQx7T4fjRkB7dFSY1pkkuYNCEi58opKsNZHVQT7+vKPSzEwnYxeSJi5dze
+ lxrwtVjvNKz+Y7wJVqwWecKM0qwhsAcgfITXCmuuUN5hNZM7dKVmHxSeptLaXr5hkezH
+ vVItyLIFbk0El68pidvkltmG5rZvfZj1OMs2VzsmrE9FO8LyrVyEQlwpAqW7sTc0L6QQ
+ 4YXPWuDtRGO5OlikKxVyMZBERNsQvhbDSK9EwH4IQov+Uba4CAJZxmfrYMo0auBNwyJ2
+ plp5KDHfvVx5aAiyje7pQOu/zxGnLSuLe8eQu8ulNfSNqqsD9T6oBM+LkjNDbSxXQOwU
+ jfOA==
+X-Gm-Message-State: AOJu0YxSw9kwd3Txze59sIKDv6V57NaUjBvopInfKsh7L31AKSnHpWQr
+ E8bNCUeToXyor1tA1ToIW01L16VCia7Cdh6qjUMGzoIrF+oYOIdTfctVySFMOSrU1IxkdLME3G8
+ rpDXz7WvzZ1QFZOECMeBHh6OMoFKpkZ0AhwTU
+X-Google-Smtp-Source: AGHT+IGPGG6ugHW1S8cxJ+F3OyOwzH3pdrD+2mfBCAEY/6Gh6GdB5EPAm5kFTZZRhropf/UoeJIW1W73UglNaM2ktxc=
+X-Received: by 2002:a05:6808:13d3:b0:3d5:60d1:bdcd with SMTP id
+ 5614622812f47-3d6b50c08femr12699215b6e.41.1719935462063; Tue, 02 Jul 2024
+ 08:51:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240624092900.2108175-1-andrew.goodbody@linaro.org>
+ <CAFLszTg1HmMT-Lzv2aUEmG-jHr0gOAScpdk2RbDueCu_bCnKvw@mail.gmail.com>
+ <230eedde-87bd-4625-b258-a345427b659c@linaro.org>
+In-Reply-To: <230eedde-87bd-4625-b258-a345427b659c@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 2 Jul 2024 16:50:50 +0100
+Message-ID: <CAFLszTiTOLODDv9gYA4croPm=YOiSKd2nqGNUcgFg+pf+mWr8g@mail.gmail.com>
+Subject: Re: [PATCH] sandbox: Fix LTO to work with STACKPROTECTOR
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,49 +83,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For some reason every second time imx93_11x11_evk is built it gives an
-error:
+Hi Andrew,
 
-   make O=/tmp/x BINMAN_ALLOW_MISSING=1
+On Mon, 1 Jul 2024 at 16:01, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
+>
+> On 01/07/2024 14:57, Simon Glass wrote:
+> > Hi Andrew,
+> >
+> > On Mon, 24 Jun 2024 at 10:29, Andrew Goodbody
+> > <andrew.goodbody@linaro.org> wrote:
+> >>
+> >> Add the STACKPROTECTOR symbols to the script that generates the
+> >> symbols that should not be removed by the use of LTO when linking
+> >> a shared object. This prevents a fail to build due to link errors.
+> >>
+> >> https://source.denx.de/u-boot/u-boot/-/issues/35
+> >>
+> >> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> >> ---
+> >>
+> >>   scripts/gen_ll_addressable_symbols.sh | 2 ++
+> >>   1 file changed, 2 insertions(+)
+> >>
+> >> diff --git a/scripts/gen_ll_addressable_symbols.sh b/scripts/gen_ll_addressable_symbols.sh
+> >> index d0864804aa..ebf89b04bf 100755
+> >> --- a/scripts/gen_ll_addressable_symbols.sh
+> >> +++ b/scripts/gen_ll_addressable_symbols.sh
+> >> @@ -13,3 +13,5 @@ set -e
+> >>   echo '#include <common.h>'
+> >>   $@ 2>/dev/null | grep -oe '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*' | \
+> >>          sort -u | sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
+> >> +$@ 2>/dev/null | grep -oe '__stack_chk_.*' | \
+> >> +       sort -u | sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
+> >> --
+> >
+> > It is OK to add these new ones, but here you seem to be adding lots of
+> > other things also. So far we are only allowing linker lists. So can
+> > you update this to allow just linker lists and stack_chk? Perhaps
+> > egrep (_u_boot_list_2_|__stack_chk_) or similar?
+> >
+> > Regards,
+> > Simon
+>
+> I am sorry but I do not follow you here. I am not sure what you mean by
+> 'linker lists'. The script is matching on symbols from object files as
+> output by nm. I have not changed that original match expression.
+>
+> My addition only adds the following 3 symbols to the output of
+> gen_ll_addressable_symbols.sh
+>
+> __stack_chk_guard
+> __stack_chk_fail
+> __stack_chk_fail_local
+>
+> These all come from the same file, common/stackprot.c
+>
+> I can reduce the match to just search for '__stack_chk_guard' and that
+> still works and I can put that as another expression in the grep instead
+> of doing the whole nm | grep | sort | sed thing a second time. Would
+> that address your concerns?
 
-It seems to sometimes skip generation of the .cfgout file and then
-eventually Binman complains:
+Ah yes that would help, thank you, just running grep once.
 
-   ValueError: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
-      spl/u-boot-spl.cfgout -T imx8image -e 0x2049A000
-      ./mkimage-out.spl.mkimage': Fail open first container file
-      mx93a1-ahab-container.img
-
-Correct this by using if_changed instead of if_changed_dep
-
-The only reason this hasn't come up in CI is that buildman did not retry
-failing builds of current source, but now it does.
-
-Note: The logic in this Makefile should be moved to Binman, e.g. these
-warnings duplicate Binman functionality:
-
-  WARNING 'bl31.bin' not found, resulting binary may be not-functional
-  WARNING 'tee.bin' not found, resulting binary may be not-functional
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- arch/arm/mach-imx/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
-index ef0caed3f7f..640e332e78b 100644
---- a/arch/arm/mach-imx/Makefile
-+++ b/arch/arm/mach-imx/Makefile
-@@ -227,7 +227,7 @@ flash.bin: MKIMAGEOUTPUT = flash.log
- 
- spl/u-boot-spl.cfgout: $(IMX_CONFIG) FORCE
- 	$(Q)mkdir -p $(dir $@)
--	$(call if_changed_dep,cpp_cfg)
-+	$(call if_changed_,cpp_cfg)
- 	$(call if_changed,imx9_check)
- 
- spl/u-boot-spl-ddr.bin: spl/u-boot-spl.bin spl/u-boot-spl.cfgout FORCE
--- 
-2.34.1
-
+Regards,
+Simon
