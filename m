@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7475FC3065C
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 18:28:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDBC1C3065C
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 18:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1C6387D33;
-	Tue,  2 Jul 2024 20:28:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 671B6887A1;
+	Tue,  2 Jul 2024 20:29:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y3AuA/os";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H3v7lu2V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D801687D33; Tue,  2 Jul 2024 20:28:42 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 61125887B2; Tue,  2 Jul 2024 20:29:04 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 520C287D0A
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 20:28:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0976987D0A
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 20:29:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-446449e5df5so22112071cf.0
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 11:28:40 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-4468ac3c579so3295011cf.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 11:29:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719944919; x=1720549719; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719944940; x=1720549740; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OBkO6mof8pqrxXImXrRflCZDqdhmog3oVk6n6ue+ohc=;
- b=y3AuA/osFTd52E6ctsUtIX/+sTiMeF657swBqV6U6C9NhEfuYIbtQZOnGqhATsDOCL
- Tmc7RKBvey88K1tYuXIUdbptKBRViwo/eORNWMQQ1PjOLeKEB+rAzqdhZDj6AGL+DxmQ
- fX2S6Cb1fGnVWkKJlj9735qJCDpA8kTQ6RvhVwIX3jkNXU7iXX3e+K/QzMd0ngdN7M2d
- Mdx0BodgQIkSLtM39WAiepIpP4/tKVQv0SXNa48homMTe7h9YEfoZHPtHJcaOomx1Q7Q
- M32jgnF7ZInOg5xMEAd0deSfo0PyMpUjEBLfaIXr2JFo2CuTzGB+pS5GdxTOIqikgEy6
- wZmA==
+ bh=w51ycu0Ck8ZvbQIoGfv2pnMBqCAtaWnBVBbUXVW8pXA=;
+ b=H3v7lu2VymFnLS7Hb0F27EmXKGPrJvdVGg28QtUfUzeBlCdotKGF0WzlI9984Lau43
+ 2pQsD1RGE/pRD0zjA5x7JVfWrN9XODPUpImHMjA25PC4JVbof4Ng9aePs8QdqnoKAtmq
+ erKdAEHMwGIFCk4/G090w94hGiIvRlrfbLSPwejqOUGU9NBUOdcjdX1kNwD1id+omJCk
+ TF9+ODJysKCVazknjQWS2Fss9oQqjKMI2ytALiOrxPZHaIp7Xabjb/T5UheaRhDEs4h1
+ fcs+Gm4sGhqSSrNZbyyKuDRRX4IJSwstqkS0C39cM4iYQjzM9aGxK3+adStmz2e4hqwr
+ mBVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719944919; x=1720549719;
+ d=1e100.net; s=20230601; t=1719944940; x=1720549740;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OBkO6mof8pqrxXImXrRflCZDqdhmog3oVk6n6ue+ohc=;
- b=dSwOQmTVilmbAKnETkjK5/jU3aVaXXhZ81zpVUirEDqhDAHs8HTL93DZ7Pj5qj4XOf
- i2ugtZxqiwKYfOP1DIqnLB+xFaI5Ic51phcAHEZApHA22La1IH9EUJKTxDD6w8Er+R/F
- +0c86RQRoQYuAB3T1jsU97qbR6p03ADL3vMT1MGZ8ZSh3GgFuMl4YHBzADioWiOOxXky
- eOgdqRPglf+5yb/4pdEqQAAS+g2YDt7vecpzf9ow/lLaq0UpjQcMCQKaZUaLnScosK9T
- fy4B9196brXTGDG0Z+clKHNimXYw+Aal/QtMygPwnGpOBbTwW3bIiXOWKg9A7/UoytAc
- 7cqQ==
-X-Gm-Message-State: AOJu0YyHbj2G3cgTOMEueY3JkGgDg41WZsU4rlKqduthMTH1Ez6hP6LY
- nBN1FRqJRLvd4Ol6DwySLjED+p2RRVejiBN8RgbnUrb6sepVeVbLAM+vY5NKrYGCYUJb3tQYitG
- Q
-X-Google-Smtp-Source: AGHT+IE35BNGirDYVUxIkU3E+9wXQOUsPtiTumnnSGxDFMOk2sdKY/beGrF5x/AVzT2MCgYeqLzifw==
-X-Received: by 2002:ac8:5803:0:b0:441:5994:fd40 with SMTP id
- d75a77b69052e-44662e54497mr98296161cf.61.1719944918974; 
- Tue, 02 Jul 2024 11:28:38 -0700 (PDT)
+ bh=w51ycu0Ck8ZvbQIoGfv2pnMBqCAtaWnBVBbUXVW8pXA=;
+ b=EJNm9tzauv/cxpxN5ah1kQaG1wu38Uxlm6pl4jybps8gtY3QmCJiBrVbxqVqWdHMaE
+ 38OSw7rlvlmTjOHELz4BoFKuRZe4phNnJN+G948ft/J0rFXbreFrx9ohho/yDP+IrcNw
+ W4vr3U6Djbf76QEMtd+gx19EIT3Ygdc1f891epJ6U2cNfzph99alWmQ9CdDdnpViCIyP
+ A/YxlNkoyo1A0kSPcF7O4tTvrZDQWhVxh0zrzky0ptZbQCE82ZjH66nKW8kMpwu3g2ok
+ U5l4Ijtu+q58+YHEdSD+MynAiOsT4N2LlpXJfqyiKB8Lb0fPAhdX30jzGkZMdX2NGCPe
+ vzeQ==
+X-Gm-Message-State: AOJu0YwKlLWkmquzkSJMIkdaxEkaA6ZnAFAeeF53f8Gq4PdokNiV/Yzp
+ ElbY73OALhMbs+feeWEd07iVrMAaKPVXAoQTYxtjftme6/cfK7PEV9fhcAsTJK3gFaX/EbNyUT1
+ r
+X-Google-Smtp-Source: AGHT+IE4cbA7nqo6nR4pHcMndq9hBs0rQGEOlB0hFQpr7Ao5tQ5MYZfKFScwp68WAxq4FiLgkac0xg==
+X-Received: by 2002:ac8:4551:0:b0:446:641d:d11e with SMTP id
+ d75a77b69052e-446641de3bdmr84560081cf.61.1719944940491; 
+ Tue, 02 Jul 2024 11:29:00 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-446514b613dsm43316351cf.84.2024.07.02.11.28.37
+ d75a77b69052e-446514b613dsm43316351cf.84.2024.07.02.11.28.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 11:28:38 -0700 (PDT)
+ Tue, 02 Jul 2024 11:29:00 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
@@ -80,17 +80,18 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>, Jesse Taube <mr.bossman075@gmail.com>,
  Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Sergei Antonov <saproj@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v4 12/29] mbedtls/external: support decoding multiple signer's
- cert
-Date: Tue,  2 Jul 2024 11:22:48 -0700
-Message-Id: <20240702182325.2904421-13-raymond.mao@linaro.org>
+Subject: [PATCH v4 13/29] mbedtls/external: update MbedTLS PKCS7 test suites
+Date: Tue,  2 Jul 2024 11:22:49 -0700
+Message-Id: <20240702182325.2904421-14-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240702182325.2904421-1-raymond.mao@linaro.org>
 References: <20240702182325.2904421-1-raymond.mao@linaro.org>
@@ -112,8 +113,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support decoding multiple signer's cert in the signed data within
-a PKCS7 message.
+Update the PKCS7 test suites for multiple certs.
 
 The PR for this patch is at:
 https://github.com/Mbed-TLS/mbedtls/pull/9001
@@ -131,118 +131,25 @@ Changes in v3
 Changes in v4
 - None.
 
- lib/mbedtls/external/mbedtls/library/pkcs7.c | 75 ++++++++++++--------
- 1 file changed, 47 insertions(+), 28 deletions(-)
+ .../external/mbedtls/tests/suites/test_suite_pkcs7.data       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/lib/mbedtls/external/mbedtls/library/pkcs7.c b/lib/mbedtls/external/mbedtls/library/pkcs7.c
-index da73fb341d6..01105227d7a 100644
---- a/lib/mbedtls/external/mbedtls/library/pkcs7.c
-+++ b/lib/mbedtls/external/mbedtls/library/pkcs7.c
-@@ -61,6 +61,36 @@ static int pkcs7_get_next_content_len(unsigned char **p, unsigned char *end,
-     return ret;
- }
+diff --git a/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data b/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
+index d3b83cdf0aa..2dd1c56109f 100644
+--- a/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
++++ b/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
+@@ -14,9 +14,9 @@ PKCS7 Signed Data Parse with zero signers
+ depends_on:MBEDTLS_MD_CAN_SHA256
+ pkcs7_parse:"data_files/pkcs7_data_no_signers.der":MBEDTLS_PKCS7_SIGNED_DATA
  
-+/**
-+ * Get and decode one cert from a sequence.
-+ * Return 0 for success,
-+ * Return negative error code for failure.
-+ **/
-+static int pkcs7_get_one_cert(unsigned char **p, unsigned char *end,
-+                              mbedtls_x509_crt *certs)
-+{
-+    int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
-+    size_t len = 0;
-+    unsigned char *start = *p;
-+    unsigned char *end_cert;
-+
-+    ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
-+                               | MBEDTLS_ASN1_SEQUENCE);
-+    if (ret != 0) {
-+        return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CERT, ret);
-+    }
-+
-+    end_cert = *p + len;
-+
-+    if ((ret = mbedtls_x509_crt_parse_der(certs, start, end_cert - start)) < 0) {
-+        return MBEDTLS_ERR_PKCS7_INVALID_CERT;
-+    }
-+
-+    *p = end_cert;
-+
-+    return 0;
-+}
-+
- /**
-  * version Version
-  * Version ::= INTEGER
-@@ -178,11 +208,12 @@ static int pkcs7_get_certificates(unsigned char **p, unsigned char *end,
-                                   mbedtls_x509_crt *certs)
- {
-     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
--    size_t len1 = 0;
--    size_t len2 = 0;
--    unsigned char *end_set, *end_cert, *start;
-+    size_t len = 0;
-+    unsigned char *end_set;
-+    int num_of_certs = 0;
+-PKCS7 Signed Data Parse Fail with multiple certs #4
++PKCS7 Signed Data Parse Pass with multiple certs #4
+ depends_on:MBEDTLS_MD_CAN_SHA256:MBEDTLS_RSA_C
+-pkcs7_parse:"data_files/pkcs7_data_multiple_certs_signed.der":MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE
++pkcs7_parse:"data_files/pkcs7_data_multiple_certs_signed.der":MBEDTLS_PKCS7_SIGNED_DATA
  
--    ret = mbedtls_asn1_get_tag(p, end, &len1, MBEDTLS_ASN1_CONSTRUCTED
-+    /* Get the set of certs */
-+    ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
-                                | MBEDTLS_ASN1_CONTEXT_SPECIFIC);
-     if (ret == MBEDTLS_ERR_ASN1_UNEXPECTED_TAG) {
-         return 0;
-@@ -190,38 +221,26 @@ static int pkcs7_get_certificates(unsigned char **p, unsigned char *end,
-     if (ret != 0) {
-         return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_FORMAT, ret);
-     }
--    start = *p;
--    end_set = *p + len1;
-+    end_set = *p + len;
- 
--    ret = mbedtls_asn1_get_tag(p, end_set, &len2, MBEDTLS_ASN1_CONSTRUCTED
--                               | MBEDTLS_ASN1_SEQUENCE);
-+    ret = pkcs7_get_one_cert(p, end_set, certs);
-     if (ret != 0) {
--        return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CERT, ret);
-+        return ret;
-     }
- 
--    end_cert = *p + len2;
-+    num_of_certs++;
- 
--    /*
--     * This is to verify that there is only one signer certificate. It seems it is
--     * not easy to differentiate between the chain vs different signer's certificate.
--     * So, we support only the root certificate and the single signer.
--     * The behaviour would be improved with addition of multiple signer support.
--     */
--    if (end_cert != end_set) {
--        return MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE;
--    }
--
--    if ((ret = mbedtls_x509_crt_parse_der(certs, start, len1)) < 0) {
--        return MBEDTLS_ERR_PKCS7_INVALID_CERT;
-+    while (*p != end_set) {
-+        ret = pkcs7_get_one_cert(p, end_set, certs);
-+        if (ret != 0) {
-+            return ret;
-+        }
-+        num_of_certs++;
-     }
- 
--    *p = end_cert;
-+    *p = end_set;
- 
--    /*
--     * Since in this version we strictly support single certificate, and reaching
--     * here implies we have parsed successfully, we return 1.
--     */
--    return 1;
-+    return num_of_certs;
- }
- 
- /**
+ PKCS7 Signed Data Parse Fail with corrupted cert #5.0
+ depends_on:MBEDTLS_MD_CAN_SHA256:MBEDTLS_RSA_C
 -- 
 2.25.1
 
