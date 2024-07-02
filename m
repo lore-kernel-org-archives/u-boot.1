@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D81B7C3065C
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 19:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A53FC30658
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 19:42:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FBA988765;
-	Tue,  2 Jul 2024 21:41:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B56D883F6;
+	Tue,  2 Jul 2024 21:42:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D415C88777; Tue,  2 Jul 2024 21:41:26 +0200 (CEST)
+ id 870B688783; Tue,  2 Jul 2024 21:42:32 +0200 (CEST)
 Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4837883A9
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 21:41:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 913EE883A9
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 21:42:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 8741A605835D;
- Tue,  2 Jul 2024 21:41:24 +0200 (CEST)
+ by lithops.sigma-star.at (Postfix) with ESMTP id 649EA64943DE;
+ Tue,  2 Jul 2024 21:42:30 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 9dIkdn9LIE-K; Tue,  2 Jul 2024 21:41:24 +0200 (CEST)
+ with ESMTP id tkNHrBsE7uwW; Tue,  2 Jul 2024 21:42:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id E652E605835E;
- Tue,  2 Jul 2024 21:41:23 +0200 (CEST)
+ by lithops.sigma-star.at (Postfix) with ESMTP id 1FF80605835F;
+ Tue,  2 Jul 2024 21:42:30 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id vc8QFFSSxKfp; Tue,  2 Jul 2024 21:41:23 +0200 (CEST)
+ with ESMTP id ehLThKUVK6us; Tue,  2 Jul 2024 21:42:30 +0200 (CEST)
 Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
- by lithops.sigma-star.at (Postfix) with ESMTPSA id 95C12605835D;
- Tue,  2 Jul 2024 21:41:23 +0200 (CEST)
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id CBE26605835D;
+ Tue,  2 Jul 2024 21:42:29 +0200 (CEST)
 From: Richard Weinberger <richard@nod.at>
 To: u-boot@lists.denx.de
 Cc: Jixiong.Hu@mediatek.com, sjg@chromium.org, patrick.delaunay@foss.st.com,
  ilias.apalodimas@linaro.org, seanga2@gmail.com, xypron.glpk@gmx.de,
  trini@konsulko.com, upstream+uboot@sigma-star.at,
  Richard Weinberger <richard@nod.at>
-Subject: [PATCH v2] ext4: Improve feature checking
-Date: Tue,  2 Jul 2024 21:41:12 +0200
-Message-Id: <20240702194112.31853-1-richard@nod.at>
+Subject: [PATCH 1/2] ext4: Fix integer overflow in ext4fs_read_symlink()
+Date: Tue,  2 Jul 2024 21:42:22 +0200
+Message-Id: <20240702194223.31998-1-richard@nod.at>
 X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
@@ -64,157 +64,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Evaluate the filesystem incompat and ro_compat bit fields to judge
-whether the filesystem can be read or written.
-For the read side only a scary warning is shown so far.
-I'd love to abort mounting too, but I fear this will break some setups
-where the driver works by chance.
+While zalloc() takes a size_t type, adding 1 to the le32 variable
+will overflow.
+A carefully crafted ext4 filesystem can exhibit an inode size of 0xffffff=
+ff
+and as consequence zalloc() will do a zero allocation.
+
+Later in the function the inode size is again used for copying data.
+So an attacker can overwrite memory.
+
+Avoid the overflow by using the __builtin_add_overflow() helper.
 
 Signed-off-by: Richard Weinberger <richard@nod.at>
 ---
-changes since v1:
-- Spelling errors
-- Coding style
-- Better log messages
----
- fs/ext4/ext4_common.c | 14 ++++++++++++
- fs/ext4/ext4_write.c  | 12 ++++++++--
- include/ext4fs.h      | 52 ++++++++++++++++++++++++++++++++++++++++++-
- 3 files changed, 75 insertions(+), 3 deletions(-)
+ fs/ext4/ext4_common.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-index 2ff0dca249..2c42aff06d 100644
+index 2ff0dca249..32364b72fb 100644
 --- a/fs/ext4/ext4_common.c
 +++ b/fs/ext4/ext4_common.c
-@@ -2386,6 +2386,20 @@ int ext4fs_mount(void)
- 		fs->inodesz =3D 128;
- 		fs->gdsize =3D 32;
- 	} else {
-+		int missing =3D __le32_to_cpu(data->sblock.feature_incompat) &
-+			      ~(EXT4_FEATURE_INCOMPAT_SUPP |
-+				EXT4_FEATURE_INCOMPAT_SUPP_LAZY_RO);
-+
-+		if (missing) {
-+			/*
-+			 * This code used to be relaxed about feature flags.
-+			 * We don't stop the mount to avoid breaking existing setups.
-+			 * But, incompatible features can cause serious read errors.
-+			 */
-+			log_err("fs uses incompatible features: %08x, ignoring\n",
-+				missing);
-+		}
-+
- 		debug("EXT4 features COMPAT: %08x INCOMPAT: %08x RO_COMPAT: %08x\n",
- 		      __le32_to_cpu(data->sblock.feature_compatibility),
- 		      __le32_to_cpu(data->sblock.feature_incompat),
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index d057f6b5a7..4aae3c5f7f 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -869,6 +869,7 @@ int ext4fs_write(const char *fname, const char *buffe=
-r,
- 	ALLOC_CACHE_ALIGN_BUFFER(char, filename, 256);
- 	bool store_link_in_inode =3D false;
- 	memset(filename, 0x00, 256);
-+	int missing_feat;
+@@ -2183,13 +2183,18 @@ static char *ext4fs_read_symlink(struct ext2fs_no=
+de *node)
+ 	struct ext2fs_node *diro =3D node;
+ 	int status;
+ 	loff_t actread;
++	size_t alloc_size;
 =20
- 	if (type !=3D FILETYPE_REG && type !=3D FILETYPE_SYMLINK)
- 		return -1;
-@@ -882,8 +883,15 @@ int ext4fs_write(const char *fname, const char *buff=
-er,
- 		return -1;
+ 	if (!diro->inode_read) {
+ 		status =3D ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
+ 		if (status =3D=3D 0)
+ 			return NULL;
  	}
+-	symlink =3D zalloc(le32_to_cpu(diro->inode.size) + 1);
++
++	if (__builtin_add_overflow(le32_to_cpu(diro->inode.size), 1, &alloc_siz=
+e))
++		return NULL;
++
++	symlink =3D zalloc(alloc_size);
+ 	if (!symlink)
+ 		return NULL;
 =20
--	if (le32_to_cpu(fs->sb->feature_ro_compat) & EXT4_FEATURE_RO_COMPAT_MET=
-ADATA_CSUM) {
--		printf("Unsupported feature metadata_csum found, not writing.\n");
-+	missing_feat =3D le32_to_cpu(fs->sb->feature_incompat) & ~EXT4_FEATURE_=
-INCOMPAT_SUPP;
-+	if (missing_feat) {
-+		log_err("Unsupported features found %08x, not writing.\n", missing_fea=
-t);
-+		return -1;
-+	}
-+
-+	missing_feat =3D le32_to_cpu(fs->sb->feature_ro_compat) & ~EXT4_FEATURE=
-_RO_COMPAT_SUPP;
-+	if (missing_feat) {
-+		log_err("Unsupported RO compat features found %08x, not writing.\n", m=
-issing_feat);
- 		return -1;
- 	}
-=20
-diff --git a/include/ext4fs.h b/include/ext4fs.h
-index d96edfd057..79d087b6f9 100644
---- a/include/ext4fs.h
-+++ b/include/ext4fs.h
-@@ -34,12 +34,62 @@ struct disk_partition;
- #define EXT4_TOPDIR_FL		0x00020000 /* Top of directory hierarchies*/
- #define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
- #define EXT4_EXT_MAGIC			0xf30a
--#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
-+
-+#define EXT4_FEATURE_RO_COMPAT_SPARSE_SUPER  0x0001
-+#define EXT4_FEATURE_RO_COMPAT_LARGE_FILE    0x0002
-+#define EXT4_FEATURE_RO_COMPAT_BTREE_DIR     0x0004
-+#define EXT4_FEATURE_RO_COMPAT_HUGE_FILE     0x0008
-+#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM      0x0010
-+#define EXT4_FEATURE_RO_COMPAT_DIR_NLINK     0x0020
-+#define EXT4_FEATURE_RO_COMPAT_EXTRA_ISIZE   0x0040
-+#define EXT4_FEATURE_RO_COMPAT_QUOTA         0x0100
-+#define EXT4_FEATURE_RO_COMPAT_BIGALLOC      0x0200
- #define EXT4_FEATURE_RO_COMPAT_METADATA_CSUM 0x0400
-+
-+#define EXT4_FEATURE_INCOMPAT_FILETYPE  0x0002
-+#define EXT4_FEATURE_INCOMPAT_RECOVER   0x0004
- #define EXT4_FEATURE_INCOMPAT_EXTENTS	0x0040
- #define EXT4_FEATURE_INCOMPAT_64BIT	0x0080
-+#define EXT4_FEATURE_INCOMPAT_MMP       0x0100
-+#define EXT4_FEATURE_INCOMPAT_FLEX_BG   0x0200
-+#define EXT4_FEATURE_INCOMPAT_CSUM_SEED 0x2000
-+#define EXT4_FEATURE_INCOMPAT_ENCRYPT   0x10000
-+
- #define EXT4_INDIRECT_BLOCKS		12
-=20
-+/*
-+ * Incompat features supported by this implementation.
-+ */
-+#define EXT4_FEATURE_INCOMPAT_SUPP (EXT4_FEATURE_INCOMPAT_FILETYPE | \
-+				   EXT4_FEATURE_INCOMPAT_RECOVER | \
-+				   EXT4_FEATURE_INCOMPAT_EXTENTS | \
-+				   EXT4_FEATURE_INCOMPAT_64BIT | \
-+				   EXT4_FEATURE_INCOMPAT_FLEX_BG)
-+
-+/*
-+ * Incompat features supported by this implementation only in a lazy
-+ * way, good enough for reading files.
-+ *
-+ * - Multi mount protection (mmp) is not supported, but for read-only
-+ *   we get away with it.
-+ * - Same for metadata_csum_seed and metadata_csum.
-+ * - The implementation has also no clue about fscrypt, but it can read
-+ *   unencrypted files. Reading encrypted files will read garbage.
-+ */
-+#define EXT4_FEATURE_INCOMPAT_SUPP_LAZY_RO (EXT4_FEATURE_INCOMPAT_MMP | =
-\
-+					   EXT4_FEATURE_INCOMPAT_CSUM_SEED | \
-+					   EXT4_FEATURE_INCOMPAT_ENCRYPT)
-+
-+/*
-+ * Read-only compat features we support.
-+ * If unknown ro compat features are detected, writing to the fs is deni=
-ed.
-+ */
-+#define EXT4_FEATURE_RO_COMPAT_SUPP (EXT4_FEATURE_RO_COMPAT_SPARSE_SUPER=
- | \
-+				    EXT4_FEATURE_RO_COMPAT_LARGE_FILE | \
-+				    EXT4_FEATURE_RO_COMPAT_HUGE_FILE | \
-+				    EXT4_FEATURE_RO_COMPAT_DIR_NLINK | \
-+				    EXT4_FEATURE_RO_COMPAT_EXTRA_ISIZE)
-+
- #define EXT4_BG_INODE_UNINIT		0x0001
- #define EXT4_BG_BLOCK_UNINIT		0x0002
- #define EXT4_BG_INODE_ZEROED		0x0004
 --=20
 2.35.3
 
