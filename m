@@ -4,74 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D033C3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 15:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90300C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 15:51:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A72BF87923;
-	Tue,  2 Jul 2024 17:51:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20FD988732;
+	Tue,  2 Jul 2024 17:51:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jlQQkN+f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UzcUkPgp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BD7C87C86; Tue,  2 Jul 2024 17:51:29 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 00F098871B; Tue,  2 Jul 2024 17:51:45 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 798B587837
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 17:51:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E4B487837
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 17:51:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b593387daaso41074046d6.1
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 08:51:27 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6b5dc36b896so3047136d6.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 08:51:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719935486; x=1720540286; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1719935501; x=1720540301; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eeqUdGd3mA3GE9ngVaOruV+dJjvRy+h86XmIqMrD5hw=;
- b=jlQQkN+fv5AgSzam9rxcdo2FRK1LkD54ZOHhelpuZ4q0Hy37LvGom18PXQ+l/7wVun
- 4torOm6KLNfMAkMAywGfG7+4KPFQpymklz8HoR+QbX+ZEWzIHQHgudaYvRLL2V0GKSfD
- eAmDiDZW4sDcJqckj+i9QX2OamYfqbMK2Mhxc=
+ bh=yU5h3uEpOyWW+aojMzd9mq9OCzalFDcd1ltCzRyeojc=;
+ b=UzcUkPgpOiobh9CftePa28IkGKu1VlwZx/QwFnU8pSmd8YsOsZ+i22ba6FIVPSl4qO
+ nrZvvCGTndLLV3xP/C3ua6avsgOkcAqerZz5eYzQeXdEVlN/kvlZHUtD7kICVYhcm8EZ
+ NG/oPRfcmf2c9jpIVl4KHi+m7wN9qciFB/sSg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719935486; x=1720540286;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1719935501; x=1720540301;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eeqUdGd3mA3GE9ngVaOruV+dJjvRy+h86XmIqMrD5hw=;
- b=dAFvARjRbUmHEnAXyh8NkhFtUb7957DMuxCv5sn3K/PBhPaHOM9TJyz9eTdXsgQImf
- hWlfn9syERmO39T03CuILhOH9L7K0+IAzOw8S4VONzi6CboN7ojTjU/e7/3CSpgAPlDL
- 6XfUEp5htt/9lJIWh8ZPMgvKassVp3kyrByTf1D7WZx94bkKOHjed35JkCbVhV/Ws1lQ
- mqJLGdpa/pPwDctWx2i84TOlfKeiRPO5Gv7AjSZA0qdG0Ruc4uAw1byhpFBOHn22w6cy
- kBYN+gYgLMPKZ6ij+HOgNFOzZGl/c4deA9ZCH1GSzafXocXZ2k4xASBk9zxzUDfssFrk
- dfGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNyu1y2CVgOJXvm13g8VC1sYQfENK8p9hpOQwNMZgPtn6aC4/5lu4fYyULY9Z6B8e5L9VQt13PHbUykFfd5SRTveFFhA==
-X-Gm-Message-State: AOJu0YyiEyr1fd1EVOakT+6ebHUuxBVGB25fV/uPMGPUmynMcR5QL7Zg
- 5UmUPUt35gO5ckkK1JxrnSXVUY0dYd/NMZOODcrRxRFaoo6PxLbRuzz+A60km5P00IzbApMPbXd
- ClJ36Gfaw9KdJNABTueOL0/H8SWZh6fp/ecPF
-X-Google-Smtp-Source: AGHT+IHZFhjTAvakYb3s0KMYCn7EIJdzsN5fh7Xb/2gkI3DGSTYTFUYf/bSHv4qjvYSaFp9ORGOZ7Q1ms7fiG5yiCaw=
-X-Received: by 2002:a05:6214:1c0a:b0:6b5:1d2f:1d3 with SMTP id
- 6a1803df08f44-6b5a5321281mr203621376d6.0.1719935486377; Tue, 02 Jul 2024
- 08:51:26 -0700 (PDT)
+ bh=yU5h3uEpOyWW+aojMzd9mq9OCzalFDcd1ltCzRyeojc=;
+ b=NDst5JlyAwOyBnRORgbaEHEANX5vvY7/iR5n7QBU9poI2zrWUorTYjhleN8BO2VJkq
+ 3+YBoeXYTzOTLTQYQ2p+SKtCqQXVUPBtyg9J0BRpeM8vXjuV/7ViILggSX9u48vzAB7C
+ 5E3vcN/tq1JD/mDbHdM8OI/+q151lTvk3uOWQAQuZf0Gk9ZT9IANU8yBOXGbilW4wIFm
+ ItyL+9Bo8lUfYcG8u+8HX3Yymb90gOw3Xly6je1yhDt/ljWeF58nq78FeG23cpcqsoZF
+ sa1rCZIsJTzgaeuJ1RYfidLQLZQeJOXUqf2MyrRdO+q+iH5BbeI3kfhMVtApvzNiKwWg
+ zVfg==
+X-Gm-Message-State: AOJu0YwO78cR2F3ikrrc+iGG2YA3F+o3JOMc4BsEQAfrU5To6MFzDUBe
+ tOFvez6ULpTWi21/irzypk4yzR0zULX5EKatUvfzUNp0qdmUXYN9kgV2+Zqj4ch7yRGqwKX9iA6
+ 84NoJecjwQ2SjaDuI7ps6u94VcxIVWxKB1WQZhND5pvl3RKE=
+X-Google-Smtp-Source: AGHT+IFOAOLuqgBRVT7xcalzsoqIib0esKkEsM+ALLaC6oNt2uEkUIq5fN+BubS2BFSDO1NmbaJRV9kHu1qkUdTzsRc=
+X-Received: by 2002:ad4:594b:0:b0:6b5:2062:dd5c with SMTP id
+ 6a1803df08f44-6b5a5412ba9mr184590116d6.8.1719935501157; Tue, 02 Jul 2024
+ 08:51:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240627112904.99969-1-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszThsS2oYVx3zxZhN6HSzHkA-NStydZfS=Jr25FpwRimJNA@mail.gmail.com>
- <dd3453b2-2ad6-473f-b419-88a7577fded9@genexis.eu>
-In-Reply-To: <dd3453b2-2ad6-473f-b419-88a7577fded9@genexis.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 2 Jul 2024 16:51:15 +0100
-Message-ID: <CAFLszTgtOWNGQFwKnyAADXVgbpiBR3d8NcjaG3VpUQbnnhboeA@mail.gmail.com>
-Subject: Re: [PATCH] gpt: allow spaces in partition list
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Joshua Watt <jpewhacker@gmail.com>, 
- Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>, u-boot@lists.denx.de
+Date: Tue, 2 Jul 2024 16:51:30 +0100
+Message-ID: <CAFLszTicbbAAcx=Lpt7RxOAktV1Pn9avhLYbT6VXMF3tnZGyQw@mail.gmail.com>
+Subject: Please pull u-boot-dm/next
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,71 +80,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
+Hi Tom,
 
-On Tue, 2 Jul 2024 at 10:42, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@genexis.eu> wrote:
->
->
-> On 27.06.2024 22:05, Simon Glass wrote:
-> > Hi Mikhail,
-> >
-> > On Thu, 27 Jun 2024 at 12:29, Mikhail Kshevetskiy
-> > <mikhail.kshevetskiy@iopsys.eu> wrote:
-> >> This allows spliting partition list to several lines in environment file
-> >>
-> >> ex:
-> >> --------------------
-> >> gpt_partition_list=
-> >>         name=boot1,size=5MiB,start=0x100000;
-> >>         name=boot2,size=5MiB;
-> >>         name=rootfs1,size=70MiB;
-> >>         name=rootfs2,size=70MiB;
-> >>         name=overlay1,size=20MiB;
-> >>         name=overlay2,size=20MiB;
-> >>         name=art,size=4MiB;
-> > Is this referring to a .env file, i.e. a text environment file? If so,
-> > I would hope that spaces at the start of a line would be automatically
-> > removed.
->
-> This is refer to a .env file, so starting space/tabs will be removed,
-> all '\n' will be replaced by spaces. Thus we will get a single line where
-> each partition divided from other with a single space (like below)
->
-> gpt_partition_list=name=boot1,size=5MiB,start=0x100000; name=boot2,size=5MiB; ...
+This is for -next but we need to figure out the patch I just sent
+first. I can redo the pull if that patch is acceptable, or you can
+pick that up first.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/21414
+Note failure fixed by:
+https://patchwork.ozlabs.org/project/uboot/patch/20240702153739.2651815-1-s=
+jg@chromium.org/
 
-But I wonder if the \t is needed?
+https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D64&view=3Dr=
+esults
+(same failure)
 
+The following changes since commit b4cbd1a257d4027038b4f997d73bdb0a066db045=
+:
 
->
-> >> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> >> ---
-> >>  cmd/gpt.c | 2 ++
-> >>  1 file changed, 2 insertions(+)
-> >>
-> >> diff --git a/cmd/gpt.c b/cmd/gpt.c
-> >> index 7aaf1889a5a..2b29ab98ccc 100644
-> >> --- a/cmd/gpt.c
-> >> +++ b/cmd/gpt.c
-> >> @@ -117,6 +117,7 @@ static char *extract_val(const char *str, const char *key)
-> >>                 k = strsep(&v, "=");
-> >>                 if (!k)
-> >>                         break;
-> >> +               k += strspn(k, " \t");
-> >>                 if  (strcmp(k, key) == 0) {
-> >>                         new = strdup(v);
-> >>                         break;
-> >> @@ -151,6 +152,7 @@ static bool found_key(const char *str, const char *key)
-> >>                 k = strsep(&s, ",");
-> >>                 if (!k)
-> >>                         break;
-> >> +               k += strspn(k, " \t");
-> >>                 if  (strcmp(k, key) == 0) {
-> >>                         result = true;
-> >>                         break;
-> >> --
-> >> 2.43.0
+  Merge tag 'u-boot-amlogic-20240701' of
+https://source.denx.de/u-boot/custodians/u-boot-amlogic into next
+(2024-07-01 08:44:28 -0600)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-next-2jul24
+
+for you to fetch changes up to 001af73bdc4cd975f087bfef6ccff30d6f510c83:
+
+  bootstd: cros: store partition type in an efi_guid_t (2024-07-02
+07:32:30 +0100)
+
+----------------------------------------------------------------
+buildman CI improvements
+binman fixes and assumed size
+partial tools fixes for Python 3.12
+patman enhancements
+
+----------------------------------------------------------------
+Brandon Maier (3):
+      tools: binman: fix deprecated Python unittest methods
+      tools: binman: fix deprecated Python ConfigParser methods
+      tools: patman: fix deprecated Python ConfigParser methods
+
+Heinrich Schuchardt (2):
+      sandbox: use sane access rights for files
+      acpi: set creator_revision in acpi_fill_header
+
+Ilias Apalodimas (2):
+      sandbox: cleanup linker scripts and sections
+      configs: enable setvariable at runtime on sandbox
+
+Jonathan Liu (1):
+      sandbox: enable support for the unlz4 command
+
+Quentin Schulz (4):
+      dm: core: fix misleading debug message when matching compatible
+      dm: core: fix signedness in debug messages
+      dm: core: migrate debug() messages to use dm_warn
+      dm: core: fix typo in SPL_DM_WARN prompt text
+
+Rasmus Villemoes (1):
+      global_data.h: drop write-only field dm_root_f
+
+Sean Anderson (3):
+      patman: Fix tests if add_maintainers is set to False
+      patman: Add Commit-cc as an alias for Patch-cc
+      patman: Add a tag for when a patch gets added to a series
+
+Simon Glass (19):
+      binman: efi: Correct entry docs
+      binman: Regenerate nxp docs
+      binman: ti: Regenerate entry docs
+      binman: Update the entrydocs header
+      binman: Support an assumed size for missing binaries
+      binman: Make Intel ME default to position 0x1000
+      x86: Set up some assumed sizes for binary blobs
+      buildman: Make mrproper an argument to _reconfigure()
+      buildman: Make mrproper an argument to _config_and_build()
+      buildman: Make mrproper an argument to run_commit()
+      buildman: Avoid rebuilding when --mrproper is used
+      buildman: Add a flag to force mrproper on failure
+      buildman: Retry the build for current source
+      buildman: Add a way to limit the number of buildmans
+      buildman: Add python3-coverage
+      buildman: Add python3-pycryptodome
+      buildman: Fix a few typos in toolchain code
+      buildman: Always use the full path in CROSS_COMPILE
+      u_boot_pylib: Use correct coverage tool within venv
+
+Vincent Stehl=C3=A9 (1):
+      bootstd: cros: store partition type in an efi_guid_t
+
+ arch/sandbox/cpu/os.c
+            |   6 +-
+ arch/sandbox/cpu/u-boot.lds
+            |  20 ++----
+ arch/sandbox/lib/Makefile
+            |   2 +-
+ arch/sandbox/lib/sections.c
+            |  13 ----
+ arch/x86/dts/u-boot.dtsi
+            |   5 ++
+ arch/x86/lib/acpi_table.c
+            |   2 -
+ boot/bootmeth_cros.c
+            |   4 +-
+ cmd/unlz4.c
+            |   4 +-
+ common/board_r.c
+            |   3 +-
+ configs/sandbox64_defconfig
+            |   1 +
+ configs/sandbox_defconfig
+            |   1 +
+ drivers/core/Kconfig
+            |   2 +-
+ drivers/core/device.c
+            |   2 +-
+ drivers/core/fdtaddr.c
+            |   7 +-
+ drivers/core/lists.c
+            |   7 +-
+ drivers/core/of_access.c
+            |  51 +++++++-------
+ drivers/core/of_addr.c
+            |  41 ++++++------
+ drivers/core/of_extra.c
+            |  33 +++++-----
+ drivers/core/ofnode.c
+            |  81 ++++++++++++-----------
+ drivers/core/regmap.c
+            |  57 ++++++++--------
+ drivers/core/root.c
+            |  14 ++--
+ drivers/core/uclass.c
+            |   4 +-
+ include/asm-generic/global_data.h
+            |   4 --
+ lib/acpi/acpi_table.c
+            |   2 +-
+ lib/acpi/ssdt.c
+            |   1 -
+ test/dm/acpi.c
+            |   3 +-
+ test/dm/core.c
+            |   1 -
+ tools/binman/binman.rst
+            |   7 ++
+ tools/binman/entries.rst
+            | 115 ++++++++++++++++++++++++--------
+ tools/binman/entry.py
+            |   3 +-
+ tools/binman/entry_test.py
+            |   6 +-
+ tools/binman/etype/blob.py
+            |   7 +-
+ tools/binman/etype/efi_capsule.py
+            |  40 +++++------
+ tools/binman/etype/efi_empty_capsule.py
+            |  22 ++++---
+ tools/binman/etype/intel_descriptor.py
+            |   2 +-
+ tools/binman/etype/ti_secure.py
+            |  45 ++++++-------
+ tools/binman/fdt_test.py
+            |  48 +++++++-------
+ tools/binman/ftest.py
+            |  70 ++++++++++++++------
+ tools/binman/test/326_assume_size.dts
+            |  16 +++++
+ tools/binman/test/327_assume_size_ok.dts
+            |  16 +++++
+ tools/buildman/bsettings.py
+            |   5 +-
+ tools/buildman/builder.py
+            |  23 ++++---
+ tools/buildman/builderthread.py
+            |  48 +++++++++-----
+ tools/buildman/buildman.rst
+            |   8 ++-
+ tools/buildman/cmdline.py
+            |   8 ++-
+ tools/buildman/control.py
+            | 145 ++++++++++++++++++++++++++++++++++++++--
+ tools/buildman/func_test.py
+            |  74 ++++++++++-----------
+ tools/buildman/pyproject.toml
+            |   6 +-
+ tools/buildman/requirements.txt
+            |   2 +
+ tools/buildman/test.py
+            | 198
+++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ tools/buildman/toolchain.py
+            |  24 ++++---
+ tools/patman/func_test.py
+            |  10 ++-
+ tools/patman/patchstream.py
+            |   7 ++
+ tools/patman/patman.rst
+            |  15 ++++-
+ tools/patman/settings.py
+            |   8 +--
+ tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_si=
+z.patch
+|   2 +
+ tools/patman/test/test01.txt
+            |   2 +
+ tools/u_boot_pylib/terminal.py
+            |   7 +-
+ tools/u_boot_pylib/test_util.py
+            |  11 +++-
+ 59 files changed, 942 insertions(+), 429 deletions(-)
+ delete mode 100644 arch/sandbox/lib/sections.c
+ create mode 100644 tools/binman/test/326_assume_size.dts
+ create mode 100644 tools/binman/test/327_assume_size_ok.dts
+
 Regards,
 Simon
