@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0267CC3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:00:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9268C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:00:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 740648850A;
+	by phobos.denx.de (Postfix) with ESMTP id E5A92885E4;
 	Tue,  2 Jul 2024 15:00:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T1A4Y9kF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LWZsg80o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77B25874AC; Tue,  2 Jul 2024 08:54:26 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 56653874AC; Tue,  2 Jul 2024 08:54:28 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94683841BC
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 08:54:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9099487D33
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 08:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-58ba3e38027so213001a12.1
- for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 23:54:24 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2ee794ec014so207991fa.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 23:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719903264; x=1720508064; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UHMt2ncuTtHonTuLdimx1zxT37IDvLAX3BAnYG5Y78Q=;
- b=T1A4Y9kF17QK6qJrYsCTKM6dk/Y5R2r06YTFoLK1onM06/ReTIy89c7Lw7RmVh/G7L
- kpvmx50qiJGJ4e9AreoPt6TWh6YpH1NbFx6xsCi04awo4y/06bQThi846QoTji9vt+OB
- 4kj0ewwtWrzQCgQ3aJOpU372EXcbFv58S6mUV95pfbKVmmXwGu4N4aUiZRzddGyMxm3Z
- thSpT7y5uBIltGr80Q35FY7QUqbiN/w7Hbpy3Qfh9K4SBfi2KTOVCKSU4W7iFesFbYN0
- PuaV8floxG5Xb3jAcZhfR3NOaCwZFSXsid2peHmgkPrquiFVoes1Iqj+/HaXbI96lwRI
- zLVg==
+ d=gmail.com; s=20230601; t=1719903265; x=1720508065; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MaQFIOJs6pBFcMOfXzsz2pqh/c5Mak4kmjpmRnoBu8Y=;
+ b=LWZsg80oFLv8Z6aLoQkX7pVHoQu/gjEC1f9CF2BrfE/c4U4FdKn4P/H5MfjTmSs82H
+ MOxbw2bRdP17QPd7ifnfgZF2JJzdJuXwCePQxAnK+4R8nYk1niqu5SouADt+kmYI1TXf
+ i9z8Lmz5SMdq5NvRYqaNF79F/jUstU07veH2dhYcGiOAI3EBDNKQvwqNEgNTB+/HKsEf
+ mZbwZ07RdeoLOjv4k5MF+fuO76Xx2luRYPaozns4W+r4AsKh3WbIAb+E9mdF3m52gBKj
+ qrbY3iTJBy8K4AzVwrRaVilENtcG5ZTIXGSz3Pj+z6DCT6qSIZoV+HNn98gkt+Gsnxlg
+ +q8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719903264; x=1720508064;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UHMt2ncuTtHonTuLdimx1zxT37IDvLAX3BAnYG5Y78Q=;
- b=pI+hKuRJ2YxubZOedqkvKrC2usL6gnBNJQKJz1JgmxDJ8rUmOKnKR+czarhI32rMUJ
- Q4G3uHlL1dbVtPinDHWfX5sVxQ9oxblwCWYceh7WleCo4luvgBHhz54UFvV6tCIHRHnB
- 2jepaYF9cZv3lSSwv9m311Di5+T1ZlHccmfCO/8P/JYnDvzKVuAELtOLg/euNDGFAi8W
- HEiuPxgRA8W0DkHEySKbHvqmZP0LE72EnEHYcFWItN6K8Ks/lmuUznj+ogMGCV/xJA9u
- t+fnIQn0DsDsKp9gdkdNDb7XoW5yBX81UNH8OILPGAS1xqJbTC1zDI6F87fH1YUGdTFW
- Z6TA==
-X-Gm-Message-State: AOJu0Yw1blbzRBeW8F46h/htP3pebVXd284tYCe908znhjUdAPn3wZWf
- l0Wlj+2kYBBdNrg5rmGK+K5Gt+C3MIA2CkjFyD+oRLpmgqSAAd7D
-X-Google-Smtp-Source: AGHT+IH1ojLAF4Yrnn0zBtMoZwfxRAizSuDGpAGvWiZBFKzmAmqt2ZsTPO8SEEn95FUAML/a/QMb3Q==
-X-Received: by 2002:a05:6402:3486:b0:57c:758d:86f8 with SMTP id
- 4fb4d7f45d1cf-5879f69c67fmr6329344a12.23.1719903263617; 
- Mon, 01 Jul 2024 23:54:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1719903265; x=1720508065;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MaQFIOJs6pBFcMOfXzsz2pqh/c5Mak4kmjpmRnoBu8Y=;
+ b=ZrjByLQ6AWSjQtxeLYPukP3eSImp0fcMOM2QN8xAT2yOI7eaPONmWpRwCKy65PfFsj
+ d0dpRYDlwyR2Y873ypNOvHA0PG7+2jYxfJYk1740q0nDFojxuuwQ9epYyIg4661tDP1t
+ 36ruLlBKZuENSTNdzIjN+WDekHvmNcFRsM6W8i+PALrwPJQX/01q1OXSmpBvqHf0s7jY
+ 5T+as+vDd6LQpWsrcvHld5f2f25+Y3/MJ3dRyEbyiP4+HLvzKj1JMd9COh3cTrUlpWEd
+ LJqreR2xuMW/QA5kl5KT8ErvN7hxJyMCSeiaRbGgMP6nWKtYmEiBnKty6OXG4HYNslFt
+ QQ5g==
+X-Gm-Message-State: AOJu0YyYe08A/LEZZBh3+Klyx6eoLx1LLcLhVUge6j+uXwPIIlTEOj9K
+ aB9mImGpG0shP1OBB81tpqVTj3Ji6jNiDOM1BoErxaEk0VgG1GsM
+X-Google-Smtp-Source: AGHT+IH2DUPb8tsvh5c7TFf/LtEUDpFxwunTnRj/ER4W7hpgVpMfW25PbheztDdLHmIw24mgqMYuug==
+X-Received: by 2002:a2e:a984:0:b0:2ec:53ad:464 with SMTP id
+ 38308e7fff4ca-2ee5e6cd723mr61638381fa.34.1719903264542; 
+ Mon, 01 Jul 2024 23:54:24 -0700 (PDT)
 Received: from 9a2819e34573.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
  [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-58613815e1csm5320954a12.44.2024.07.01.23.54.22
+ 4fb4d7f45d1cf-58613815e1csm5320954a12.44.2024.07.01.23.54.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jul 2024 23:54:23 -0700 (PDT)
+ Mon, 01 Jul 2024 23:54:24 -0700 (PDT)
 From: Lothar Rubusch <l.rubusch@gmail.com>
 To: marex@denx.de, simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
  xypron.glpk@gmx.de
 Cc: u-boot@lists.denx.de,
 	l.rubusch@gmail.com
-Subject: [PATCH] ARM: socfpga: fix broken function call for arria10
-Date: Tue,  2 Jul 2024 06:53:50 +0000
-Message-Id: <20240702065351.289968-1-l.rubusch@gmail.com>
+Subject: [PATCH] ARM: socfpga: show broken function call for arria10
+Date: Tue,  2 Jul 2024 06:53:51 +0000
+Message-Id: <20240702065351.289968-2-l.rubusch@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240702065351.289968-1-l.rubusch@gmail.com>
+References: <20240702065351.289968-1-l.rubusch@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 02 Jul 2024 15:00:15 +0200
@@ -92,41 +95,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove obsolete arguments in the function call. The call's argument list
-differs from its more recent definition. This breaks compilation of the
-'socfpga_arria10_defconfig' target, with additionally enabled:
+This patch only shows the problem on an existing platform. Turning on
+the cadence QSPI flash breaks the build for arria10. Can you reproduce?
 
-  CONFIG_CADENCE_QSPI=y'
-
-The removed arguments are obtained from device-tree declaration.
+  make socfpga_arria10_defconfig
+  make
 
 Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
 ---
-The patch makes the problem disappear. While messing with some old
-Intels, it looked to me as if this usually turned off code region of
-the misc_arria10.c still contains legacy arguments in the call. Thus
-broke my compilation. I'm unsure. Please verify.
----
- arch/arm/mach-socfpga/misc_arria10.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+NB: Don't apply this config/patch permanently! The Cadence QSPI
+flash can be tricky due to a write reset register instruction which can
+brick the board if interrupted. We experienced this situation.
+So, that's why I removed the config option in my boards (to be upstreamed
+soon). Hence, my boards won't show the above problem anymore.
 
-diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
-index 93c9e8b0..5c782f6b 100644
---- a/arch/arm/mach-socfpga/misc_arria10.c
-+++ b/arch/arm/mach-socfpga/misc_arria10.c
-@@ -211,11 +211,9 @@ int qspi_flash_software_reset(void)
- 	struct udevice *flash;
- 	int ret;
- 
--	/* Get the flash info */
-+	/* Get the flash info, speed and mode will be read from DT */
- 	ret = spi_flash_probe_bus_cs(CONFIG_SF_DEFAULT_BUS,
- 				     CONFIG_SF_DEFAULT_CS,
--				     CONFIG_SF_DEFAULT_SPEED,
--				     CONFIG_SF_DEFAULT_MODE,
- 				     &flash);
- 
- 	if (ret) {
+Anyway, I think the code section in misc_arria10.c have a bug. So, I
+presented the before patch.
+---
+ configs/socfpga_arria10_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
+index 6d27deeb..c7321bab 100644
+--- a/configs/socfpga_arria10_defconfig
++++ b/configs/socfpga_arria10_defconfig
+@@ -61,6 +61,7 @@ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_MII=y
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SPI=y
++CONFIG_CADENCE_QSPI=y
+ CONFIG_TIMER=y
+ CONFIG_SPL_TIMER=y
+ CONFIG_DESIGNWARE_APB_TIMER=y
 -- 
 2.25.1
 
