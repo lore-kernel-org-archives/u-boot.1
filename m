@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 833B1C3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 11:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89626C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 11:37:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABF6A87EDC;
-	Tue,  2 Jul 2024 13:01:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id B23B488096;
+	Tue,  2 Jul 2024 13:37:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="kBQXbkti";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="GJPvbULV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AEF48824C; Tue,  2 Jul 2024 13:01:26 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20707.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::707])
+ id D8BD08824C; Tue,  2 Jul 2024 13:37:10 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 648D087EDC
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 13:01:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=weidmueller.com
+ by phobos.denx.de (Postfix) with ESMTPS id B22128803A
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 13:37:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kR32impHUft0EJnng42K1D9L+auKcV+fcsSBunY/FbxXXflBsJXjOCIO6oGVm7bnBkUXYX8ZKB39dv96LjZCt0i08U+djtnOiBPtIS1AtZtnlfnMRHAZqAgkBXrp0/cIpNG1+FQNmeuS97sfQo/yPEscfAoSYnvLvApwy87OcIHautnfBZkaVye36BYb6jdh2J+S77MgqGZWaE8s2yMJWipkbuwe4hCCcPfK16Hn706iiATcsyvW2NDESTY/E1rKbwxh5Yx5oGn3M+PQNNTf2xMy/H/i8Utp9Ltun0a4GctA2JqYYP811b/tROJmCJosAsK8urLPK/sSzhCeHhHb1g==
+ b=Gs1xK2++3BWkFgwtMrazQ5QtrM/1S66mMSs0o0yEcgDnPLswznbBmuD8HacKfxXyKtCeENag59XHZlBq0TsJKphidI5/hCAyAzabv9qD1LQYukVtfxbgdSYSJo+EqeUzhg3vrGcLy7rFz+tPueMI6DDe7GVqy8YuXqUn41EwLYrKj13HpgwNh4Ut9Sdo+FM5Pq4wVJD1+iteDt61NLVBZMUs7bojTg6LLyE42rC8rYDurDsPRuxYpn5t/p1H/g/6gxGQ91kyAJtPEXq/bpAhic/6tA4Dk0S3EYmWf1wX1922XCkrdMCWHex7hu+VJTeZ4jDmrxyjsgX8LPLsVZirmw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LkO87whq1Ckc8ncU0g+iQ242Yo99uJFAfJYGhPNLfbk=;
- b=Y0xy0cFHHsmCXdD2GQ96uyaFMgM+ayHyB39lfkzjKLkqqKjVHwYd7Ahi4dp9Fg9Rg3SLgX3bWBBs5xAaoyG5cH1D3qoSvQeaahjl9euogeSlonEhjBR75DGi+CwzKnvD4izDZCqoD7JQcTAKuzh2NFBpTLZP1c+m1BWrUsbFKok2oUXHWBGZXfY52FzOPY2uAMqESXb22T/vl3apTwteKoTMFPQujC+KC7UAklKPHdVfiok/i/6tgQbD9UtWZPhMOxDTRQ6uSoC56yR/rwzQ891jDD3YGrmuRU2T/zxfPEnMtjJAJurJn8SW+y3Y6imbaWyMH4Q+WaPG6mme2rZAyA==
+ bh=Bi8O41PGLBGisFtzpy9LlrY1FVy0S3FkACokYeanULk=;
+ b=noCKc5Ie+Hqioa5OhujXqzfXiE6rHU39VOsPpRHZbqSWpV+ljMKa/FHR+FQvq0OLaBfNoIGqeqWM4tlNPT5pC3Q+pNbhjPlsvJjOpe4cmBSB3VTetqPj/U06ML2vWMZ8vV76xbN+8GDDp6XjD+ZE0owKfSCUorrnj/lYzdbLZXdUL2wiSHtNElkGDdCCUZi1KLlCjx47m2u0LS8FUrib2yb2ZbiTC6YDnuJ7tmb628ZEC8825bC+QpS9xQde6n4Wwda8peIERKhKJbhQkzAIp0JZK6zjErwrMEKWuJ5gH4HzkD0zEOpV24WF1uofIjJ2CC9LeyIpBujtvL2GeHxUtQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weidmueller.com;
- s=selector2;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LkO87whq1Ckc8ncU0g+iQ242Yo99uJFAfJYGhPNLfbk=;
- b=kBQXbktiRpU1TQkF29JSj8Ip507iG+DzhO/7xvDkcSQ8Uep+EjxVrSiRX6Uer9ulTBLYn2wWsScRXlEtwni6y9VLY5ZwACTqbf+BijKU47iXlTJLkdOzi0GiGtPcJ5SwMXN51hyCA0s5GVnrQXydwoEAVbZwNNcxjxnxly0DbizbS863/rulf8zvtp1Kaps8PSunKeVUMLqStb6cyEPXyq8F8uQ0c+XRYtVFePVZv6QxTvfBPt3TPKzoMR8/GH8IaD20oae5VB+QUVQuEerBw2+XLx9e7lIus2XUFSqZ4384PoIBpUbn2kBRQlhHIKaZJprdNKplFJhMgz0rCj3DLQ==
+ bh=Bi8O41PGLBGisFtzpy9LlrY1FVy0S3FkACokYeanULk=;
+ b=GJPvbULV//zrs6Cv828ovmt4q9gHzvWBcjOe2rl3fc17YERqOHJ9Xn66ysJqFS+fJov+Gf5LUMly7D+ysdZFvrWZyE2j6MCu3XDKToYH0cZSajt90slw6XaPkKVUPzMvSu4Y9+BS8n+dHfUVoxJfJEfeCt1yBAHGP0U7ldzDnnM=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by AS2PR08MB8748.eurprd08.prod.outlook.com (2603:10a6:20b:544::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.32; Tue, 2 Jul
- 2024 11:01:21 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::aeb:1738:d59a:cee6%2]) with mapi id 15.20.7719.028; Tue, 2 Jul 2024
- 11:01:21 +0000
-Message-ID: <6dc671c5-2f2e-4cd9-817b-5aa50e5a4232@weidmueller.com>
-Date: Tue, 2 Jul 2024 13:01:19 +0200
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
+ by PA2PR04MB10514.eurprd04.prod.outlook.com (2603:10a6:102:41e::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.23; Tue, 2 Jul
+ 2024 11:37:06 +0000
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7741.017; Tue, 2 Jul 2024
+ 11:37:06 +0000
+Message-ID: <7687e15d-c601-4f91-b07f-a4f9d5114362@cherry.de>
+Date: Tue, 2 Jul 2024 13:37:03 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 0/2] Import environment variables from FIT configuration
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+To: Lukas Funke <lukas.funke-oss@weidmueller.com>, u-boot@lists.denx.de
 Cc: Niko Mauno <niko.mauno@vaisala.com>,
  Lukas Funke <lukas.funke@weidmueller.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
@@ -79,102 +78,104 @@ Cc: Niko Mauno <niko.mauno@vaisala.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 References: <20240702064834.9543-1-lukas.funke-oss@weidmueller.com>
  <d609b656-19db-4dc3-956f-7dbec5de9975@cherry.de>
-From: Lukas Funke <lukas.funke-oss@weidmueller.com>
-In-Reply-To: <d609b656-19db-4dc3-956f-7dbec5de9975@cherry.de>
+ <6dc671c5-2f2e-4cd9-817b-5aa50e5a4232@weidmueller.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <6dc671c5-2f2e-4cd9-817b-5aa50e5a4232@weidmueller.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0019.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1c::6) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+X-ClientProxiedBy: WA0P291CA0004.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::14) To PA4PR04MB7982.eurprd04.prod.outlook.com
+ (2603:10a6:102:c4::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AS2PR08MB8748:EE_
-X-MS-Office365-Filtering-Correlation-Id: b880ddc1-b791-4d5d-a1af-08dc9a864e88
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|PA2PR04MB10514:EE_
+X-MS-Office365-Filtering-Correlation-Id: aded957c-14cf-4e31-8d9c-08dc9a8b4cf4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?K3BnUHJiQktOL3VMazNnS1gxWVhqOFhwSThBeWRPalVFdVR1TWcwZnFQSENO?=
- =?utf-8?B?bWxnY0VMazF5cGlpeS8ycmkxdFJTVTFUQ3VGVzdXYml2RXFEZXoxMVF4eFdr?=
- =?utf-8?B?RG1HNkJwaE8vRmpjdExsN05nY1QybCtZSE5BMUNtZXB0cGxhMERwd0NsU1hp?=
- =?utf-8?B?cklQUGhrdmM4VjlPZ0h3MzRNeHlvU0RrVkUwQ05GbnpDeVozWmR0ZXk2WDRW?=
- =?utf-8?B?dE5NWnNJUXYzc2RyZVZqb25lSmlrb1I0ckxveUQvcHRJUjA4V3JMTjByYmox?=
- =?utf-8?B?UUZ6OXRSQnBLWCtHaDVtclIzU29LdEpUNkxGTU9MWStwajhKU2VCc0dlcW54?=
- =?utf-8?B?WCsxL0N1S1oxUlYvTXNuWW5qdzZ2MnQrbEptSFdsdE1MUy96NkMyOXV1L0xz?=
- =?utf-8?B?R09acEpMTFlRTzdKZlByNCsrQ0NnazE1OEFaR1lRM2Z4K1N3OGhlSFhiOVY4?=
- =?utf-8?B?UUwxQ0xQS1NjNk51UTJjRWM3RjNqYjl0dlhxQk5ISk0xK0ZZOXMrVjUybjNk?=
- =?utf-8?B?Q1kvdVdDZEhsc25vbUJGYVhsWjBCK0hMTU1hMW84RWl2V3NrblJsejJVS1Qy?=
- =?utf-8?B?Q3lxSkhsY1hWMFN0NkpydVBtWUM3RlB3eExrSUNOUTRpWFVGRUpaVGMzK0xu?=
- =?utf-8?B?aWdnMUhmUjdnMjVadFpGbjJPWmZ6VVE0SERJZGRXN2RRc2ZYbndWVG05R1FU?=
- =?utf-8?B?aVVuMUIrUHIxRXA2N3J1RGxQMDhqSzF5SkdENnJocEZNQ1R2TFdoOUJiNHJW?=
- =?utf-8?B?WUJiVEFNY3ptY1hnQjhuZDNnZlVtQlpCUkU0Q05oWHJUTmZISTRJQmU2M0VT?=
- =?utf-8?B?bC9pRzFJSlA0aERPMHBaUHUxZmh1SHRYcEJvSE9xU1FDNXROYzEwTHB0NzJW?=
- =?utf-8?B?cFp0T1ZCUUxyblYxNmQrU0dOSUI1SEVHTjBFZSs1UTZQc1VmRkFQZWZtVWdD?=
- =?utf-8?B?QXUyck1FVHJXRHBTeTJqaFlmTEVQYjJ1Yk9YeXJxczRvUUhjVmllWUFER0ZN?=
- =?utf-8?B?TWpFMEdUNzFyRW1aalF1ZEhDWlYrMUhXSERSZ1R2Ylcvb1RsMEFPbFI1L0o0?=
- =?utf-8?B?eHRLUTVuSDJyNFM3SHZWcXFCeFRINE9uVFA1T0Ewdm91eUpBREg0dmR2YmpU?=
- =?utf-8?B?OExwNFZ1cVlndnNCRHFhTWdSWXhDeHk1MWdqTUdNYng0TUVOU3Z6VkJCMEhJ?=
- =?utf-8?B?WU1VWExETUhPUXYrSXRiSmMvb0Yyb1NmWTJkODMzTmhpdXVOaW5wTnhaRlpl?=
- =?utf-8?B?SHZMSnRrMlVWUWxoWGNzeWlySlR0T3lSanBaYk45MFE5N1FMRzJrSlVsb2NG?=
- =?utf-8?B?VU56cjJ0R0lLdUl6SUVNKzhLMVpJeTRHQVNTL0dYY0xDdFJocVB1c3RCQ2tL?=
- =?utf-8?B?a1lzaVpyZDBpTmxXNlpVcEpRaUpNaUlLQ25tRGs3QXhuUGlxMVZtT1pXYUI2?=
- =?utf-8?B?cnRzSm5hYU9VNjllTHVMR1RPRWNkaEVVcVFHNHdCZURMUkVPTVdHR1l0UlQr?=
- =?utf-8?B?NFJNd2hWNU45ZmdLMWtiUk93Ny84ZENKMzZDRklKZ2psV1hjNUtxSWZLdVlQ?=
- =?utf-8?B?V09mNm1pL00vRDljclZIYVhtQWk4aEgzcXdxQTdzOGZrZzlCNzVGbmR4OW1w?=
- =?utf-8?B?VzA4b1FIMUIwMWc0TUlJbVp5aWhGYmU1T1N5NUFLNGR5c25jWGErbXlTekcz?=
- =?utf-8?B?YmwwRTZzcTZMa0ZYSXh5b2daSTY0MlZlYkRzdnRGSldEZloyeFNYRTJUQzlp?=
- =?utf-8?B?VWdHRUlkQmU1S2p4RkFEM0xHckZCRVNaZHhmb05RY1YxZ1o1RjZBTW5IdXJO?=
- =?utf-8?B?dTloSXh2cVZoQk5qTmJWdz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UmtYU0N0U3REM2tNc1ExdFBsUEhOMy9sZUhaWDQ4bjZ0ejRPZHJIajVtWXMr?=
+ =?utf-8?B?dlRyK3RJRGI3UnJOR3RKeGlIWUtPcjRzNDI5bjN2QkJLejUrOXVINCtWTmJH?=
+ =?utf-8?B?NEJNd0lYTWxRUjl5RFZhY2RtOVFhY3dDMHlNQlIxTm9yU2RicnhlZGhVS3k2?=
+ =?utf-8?B?SnNlSUNJeGhPQVFxdzhjeDJrY3dqU3AxczR6NS8vWklINTNGcDVINnpKS0pz?=
+ =?utf-8?B?R0J6NVpaMG1Kc2VoMHRtS0V3SGtMNVhuQjJqcFNiUytBS0RzNktneURDWmdK?=
+ =?utf-8?B?T2hsa3QvWDB1bGI2MEwwMVVHdHBFMXRRdy94T3NyRXpJdnNLczR1UWNnajZC?=
+ =?utf-8?B?K1hQNGpTNnJiU2d0VTBTRzVkekMzZ1Y1eThMR3FDem5yVmUvN29ucXBRK1V1?=
+ =?utf-8?B?YXVMcUx1QU5XOEdYM05QV1FoODBKVU9Xd090MDJnUTBMWS9vVmkzUXFrcWN6?=
+ =?utf-8?B?U0dSUnAyeHZ4d2xKSDVEemJLL2FJN3JtWmwxRzVlbG5FOENwOGdDT0VUa0VQ?=
+ =?utf-8?B?cFR5Vld3dlZsT092YTlJTUdOUHlQc3VzdEpaK24zQ3JWNkNnQ0ZiUTBwTThD?=
+ =?utf-8?B?aUV4dUJzUGhSTFNCenNVaTlmUVNmSW9NSVVIcXNKTTRHVzVJL01WWm5QV2pm?=
+ =?utf-8?B?SDhSQ21Nc3EwQWdzY0ozU1VxaytWK0hhU2FEd1dUOHdQUjVxc1J2dk1yQmFF?=
+ =?utf-8?B?dkJ3YVViaEhrUUM1MEJkMVFVWS9yTnRYY2tWTjJEMm9tWWxTajJkQk9kdzky?=
+ =?utf-8?B?b3dCalFDTXZmamlqdExmSEwreUthR2lKc2k2dnhoRHVnaE9ZL1Z4NkJ6VVlo?=
+ =?utf-8?B?U1U5Z2V3dXdOczNNU094dWtnNnYwS3U0cmFHaTNLcFN2T0laYmowNEh0YVpK?=
+ =?utf-8?B?dytlRUdhc0JuN0YxdEV1MkN6Y2paU2hjNXJrbGdyWU9EcU5nMEpsTWVVYnBx?=
+ =?utf-8?B?WFNuMEN4Zk42RGt1dnFaVEZ1eGtjQXhyWTZzRTV2VUcwdjZaY3YzQkl5cm9E?=
+ =?utf-8?B?WUlobi9FNy9STUw2SFhtVTgzQzRndmJZNnlPYzJwZUZaZGF1OEdzVVhDcDRu?=
+ =?utf-8?B?UG1xdzJKRkF0b1dKMlhrK1RnRjdrVityT1Y1L1pVRHROdHZzbU0wU29pMUVK?=
+ =?utf-8?B?QlJMeHFZT3ltNzNnbkpjcTgyMlhoM1VmbjVCeE9Ic25JYkFSTXdsVVBaZk1x?=
+ =?utf-8?B?ZjBmazVIQ0hhbm43UTBWSGZndVRoK3ZKUVkxVFU0VWdqMXFzRGJnOHdxOWdU?=
+ =?utf-8?B?cDkwOW00Z1BwOU1rNDlrc0krQ1ZoSm16NlV2M0hTcUJpdGlFK3lTVlFsc1kw?=
+ =?utf-8?B?a05lZUJGdkt5dWNzb25KdFl6SVpON1dVNWJ3UWFYWmFDK0xQZStTQUpKaUZQ?=
+ =?utf-8?B?UXI1bFkwTFBaOGFJNGNCN25rcXViUkFEVWNWeVBaREc5TWs0TThCQVVsanFR?=
+ =?utf-8?B?UlY1TjVOR3BURFJpV2RVRFMxbmp6UG9FSFgxRVlrcjRkd29JbDVkUGkvVUg3?=
+ =?utf-8?B?c2M1N0dvc1dFYXhha2hUS0ZTNDNHa1A0RW80WGlIWVloczFYVTVzTEVIVjMr?=
+ =?utf-8?B?Q3ljbzJqYjhoZk5aRVo0eGlRTmVYdFY5cmp2cm5HT1hkRzZqYjIzekRoSkpB?=
+ =?utf-8?B?QjJ4ajV0NTJBNWNwUTdkalVkWHd2Y3hJeVpTdGVIaTJJZGNEa2tocWNyY0Y5?=
+ =?utf-8?B?cUJsL0FBSnBBcERWTmVBUVRUVkZaZ0c1Rk1YLzhpMm1oVnBJQzZkZ2VTZ092?=
+ =?utf-8?B?MEo4d0l4YVRQSjZLUmYxNzBNektvK3VWamJsbzZzZTd3cVVWVFR6ZFNYbG1P?=
+ =?utf-8?B?UDAvNDRzMTZkOVUyanJLUT09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(7416014)(376014)(366016); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MGZOdFFWNko4eUF6WExnNDhNc3JoL2xTOXhjQ0dlWHAxWkFnTUIwOXBZNW5H?=
- =?utf-8?B?SlNQcE5UNld1NDlublprUmhyVy9ZanZKNVRzMWVFcTMvMElmb1dBdUwzTDM2?=
- =?utf-8?B?OWdBczJwMUp6UEJWVGRpWitCTkRqYkJZNHFxT09QSXF3Nm1MTHlWTlp0UHRx?=
- =?utf-8?B?QlpEeGxGWFA0TDY4QlMvaS9UbUNHT3ozWkFzUm1LU1J2WGFEN2hWTTlVUTV3?=
- =?utf-8?B?bnJ0MTVrNDlQRjF1VzlGei9MZU9zajl0clNhbmRKVDJNME9oaDQ0US96cjBQ?=
- =?utf-8?B?Ui9uTlp3UVpIOXBZbHBaTlUvdExxYVp1ZWd5ZC9BaTV2R2lBamMrUTRuSGdk?=
- =?utf-8?B?MW9RNkoxS1RJT0hXR2JmSW9nMG5OYVRmaWVrandGTlAxbkh4MHZUaFhQUVJH?=
- =?utf-8?B?cHo2WlVUU2V4eTA5dUIvMEZ1WWFJN1JMZjBSWVhpNi9qTmVIVVUycUxtUE9U?=
- =?utf-8?B?N3RPTnd1YUJSVk5Ody9zSFN1WmpwTlVMWDVlQTFKYmdqRE14YjZyRXhpUmdy?=
- =?utf-8?B?WGVDTktGckpMT3FzRi9YaitOYWk5TmdXMytweGxDMXU2OUJjRC9xdW1OUzhP?=
- =?utf-8?B?QXY5Mi84QTB1czJUcmZha3NIZzFtc1pDeG90RDBBcUdRc2pGVzk4bFJKdDVv?=
- =?utf-8?B?ZGp4cnNybGYxSmxuM2VJdUVqcVBRb0F1NWpsU3BFREZsaUNWMU1uNmRpWEhN?=
- =?utf-8?B?TkVmRXZ5M2tFTFV3cnM3UFoxaVpmL0dVNGRObnVvMjJidjBGcWpRTTE0MzV1?=
- =?utf-8?B?UWFWUGwxOFE2L3dQREpQVFBKWDlmRm14VUN1aElzYjNzNGhxM1pIY1hFYmZU?=
- =?utf-8?B?aEZjRVk3YXp3VG0xR0lNTW03OG5iZFM4Q01mRWxEbWp6TVY3RXNLN1NDckxW?=
- =?utf-8?B?Q09vT0V4YUEyRDMyYVpDYkRneitobThteGkyR3VzZUlreFV0VU94azExZXVV?=
- =?utf-8?B?bUp1Nkw1UkxqaURaY0NMMTloSFJBcVZjUDdMc0owbkdyb1ZFWlJVVVRVaVBL?=
- =?utf-8?B?bXNta3Jod2dGYXJKSkEzMHJBSmV3UXNNaFREeEpLdGFmd1MxRHJadWFjZ1ky?=
- =?utf-8?B?WTl2cmc1ZEVDVktiV2huZTJDa09qNDF5RU1DbUQ5R3c2djNtMEFtc0R6SnIy?=
- =?utf-8?B?QkZ1d0pKTnpQTU4rY2t3OFArck5QMWlnZmwrSGtUZ3NEWjM4aEtVdTVFVXh3?=
- =?utf-8?B?NTNUVXNxczlXUjBHN1hRMmsyUDJyWS91eXRFUjhZdUNWL205alQrT0xJY2hI?=
- =?utf-8?B?VkdnMGpnbUdMRmJIRlFQK2lsNHBSN3I4U1ZiSXg3UVBINS9pcUR5OUEvaG5H?=
- =?utf-8?B?T0FyTEo2bXNNNnNIRFlaVy9oN3dlVW1oay9uaU00NTMrNC9xaXZGY2kyMGZ4?=
- =?utf-8?B?M3ErQ2doY1F5WUV1Mk1tRWlvUEZpS2R2NEN3b25tZE5lV3d1cWNLQndZYWVF?=
- =?utf-8?B?cEF3K2R1M3JUdXZYSDJaaC9tYXA3UnJzQUJEZFNYem1NVnB0d0NOSjFXZnhl?=
- =?utf-8?B?VXUzSVU5U0ZSaXVrSldmY3FHRVFybU03WEk5Nnd1cFRtM01HYWpzUVIxUG4z?=
- =?utf-8?B?S0orVzgvamFxNmlQR3JnVGJvVDlaWDBqdWF5Qkp3UEVrVW1YUU0rTFB6cFFm?=
- =?utf-8?B?MmV2L3ZVM3lFR2NMQ2pzaGtMWTlzQzdTaEJ0cEhFMWE2VFpHTE4yN1dLdUdE?=
- =?utf-8?B?Q2NjbWUxdE8rQ2J5N3A4bVd4dFVyOVE3eTljNnlkZmNTY2VYTzhQRnVWVmZZ?=
- =?utf-8?B?bnJNZmVxOUVma1JsdkFoRWRjaTVVUkpYWThxK09qV0RpanJUU1laaUdaQXdu?=
- =?utf-8?B?OTNXeFR0LytHS3Nwb3kzOWlmU2tUTHRDZS85b3RqSzRUS25JaXpXLzF3cWMy?=
- =?utf-8?B?bk8rSkRTbEhzSy9sWmlmRTZJdkY0THAvT3pPUUZRbEFwaUVOdmtMY1dCZHh3?=
- =?utf-8?B?cUpSMkF4SEprd0NZNU5JS0VaazZjTUxrUWZLTWVERU9lejRQZy82OGVTSmtL?=
- =?utf-8?B?eTZ5bjR0TklHU1ZNa1MxMlBjVGFqMHNwNDlZSVZGU2YwWUpxb0o5U3N5Ykhm?=
- =?utf-8?B?cnluUDV5dzBxdjlRWjBiSFQ1eTBQQ1JCZ2NkMHhKMDNLSnhaRDN5S3k4R0h1?=
- =?utf-8?B?ZXl2b05BeEdWbEM1T2gxTjNYYTR2amNBMDh6eE5sTWJ6cExWWlhxVldxUUZr?=
- =?utf-8?B?cnc9PQ==?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b880ddc1-b791-4d5d-a1af-08dc9a864e88
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YlNyOHo2eFphc1lRWXRJM0pTSUE1eWtIU3puQ0YxdGVGR1hCbTdKOEFvNFZq?=
+ =?utf-8?B?L29jeDVGSkkzS0x0WVlMWml4RktGUFQvbTlhSmJiMFVxVlFueHozSlpYNHVE?=
+ =?utf-8?B?UUpJbHpEYkFYUFAyMEJLeFdaTUhYNVpja3o4M1lkU2RkZmdLOVplMERxck5w?=
+ =?utf-8?B?VUZxK3llYXpuZk5md2hacGJRSUZLbXlzekJMZHNBTjhwTW1CcHJZRUlGQS9E?=
+ =?utf-8?B?QVZtQ1ZaVzBJZzNteHdsci8rcDZ1VnVTYnZEa0xQd1JTeElTc21JQndYUEtW?=
+ =?utf-8?B?Vm5WUEIwZkIyWkFCTTJJcVBHNlRNZGgvblF2MTVJSTk2ZnFaMk51T3ZZbmJI?=
+ =?utf-8?B?YmRuRlhDbVVlbVdFdkpOVUJ3NUNCcU1WUURnaW5jNUdESWk0Q0wwTjV3TFpD?=
+ =?utf-8?B?VExhM0NlSjVZT04vRjIzWEYvZlNONWwveTBBOGEvTTdoUmRzblNrUEdJL0FT?=
+ =?utf-8?B?cFhrSHJsOHBQU3RaUE1Cd1A2bW96ZXQva096WE5HOFBZRlA5dmRVR01NL2dJ?=
+ =?utf-8?B?RnlNRzdTL0xwWHg0MkN2RjFkQkdMeFZ6dnFoZFg4V29PWWJla1FIT2tYNktG?=
+ =?utf-8?B?RFNYYjBSdkkwVW43U3IxSnVrbnkyaTV4amo3SkZROUlKcEs0VW1CRzhLRDJv?=
+ =?utf-8?B?MzVEbHJlcnI2Nkx0Q01EbVM3ZWNaSFQyaWNjRmk0RFBPY3dEYnVkSnhOVTBu?=
+ =?utf-8?B?NkRsYjJLNFNmYS9XRGhCS1hteEo3RmhMeEpOTnVMTmRJSU5uNHNBTjdraGdZ?=
+ =?utf-8?B?NklCL1YvdUFCcElkelVrd3lHNURLZU40YW1CY2wwR1lOSHpHUk91WXNhOEdI?=
+ =?utf-8?B?ZE53UUJjK2dIWlpEV0FhTXhCdHVJMk1WVEJJMVRyVFdjNGV0WnBjbnlxR1Nm?=
+ =?utf-8?B?QkFRMXVBSGw1M29rTzkrTkF6a1lOSTZCdi9lVStrM01TcE12Q09xU3c3ZUJZ?=
+ =?utf-8?B?d3JuTjFabXNXZkRIQ2dJc2R4bld6Z3JXc05laTl1WkJnTDFBTU9SMTF4bHdx?=
+ =?utf-8?B?c1BOY3RuQXlIamRhTmdqK05zYzlmRGZYakNHeHV5WDFhMzgvclJBc0pPZ0JO?=
+ =?utf-8?B?UGxOVjVjZnVEUHBPK0lzRWtWTjIybGdEdGJ6RDhXQjFJaFVoYW40c0R2OXFB?=
+ =?utf-8?B?VW1ibXNzK3ZIWXVQSSsvSUpILzJwSnBiLzhXb3RlK2Z0V1cxc0R6b3JaY3N6?=
+ =?utf-8?B?OGx5blNSRWRIS2dEbXBYMVF4Mys5VDB2RzNIQmZwU2thMDQ4SlhrYTVLcE4x?=
+ =?utf-8?B?UUw3Rm84YkJ6WUhxWFhKNFpkN0tVa2IvU0V1cFZGK1RWQ0JBWnJFRGhJa1N1?=
+ =?utf-8?B?QzBqeGFVdlZ0NSt6c1dSa04za1hvbTl0VjFVMjljaC9zRVhQODRnRkRoWEhn?=
+ =?utf-8?B?UnFzbTNzRXJpcUlublE4Y2tZbkZORkNIeW1XNFQzMHRwWWlaTlRBSGVqbDQz?=
+ =?utf-8?B?MkVaZFhxZFRibVR3WEFYUzFiN1BNTW1wdXp0WlBWWDk1dFlRNStBalo4RjlK?=
+ =?utf-8?B?U0Z5ZldvRmNReEQyUW9zYXg0Ujh6MGNmQjhlUm1LMS9mKytqSXFNdWIxWE9K?=
+ =?utf-8?B?a25BSzlmQ0pkcU5kanBPTVU3MGRnVGhCcUNkTW0wUkdZek04bXZxTkFIeDNa?=
+ =?utf-8?B?NCtXRVp5Vmk3SGV2U2tma0pBSkUyVDh6bElVTDN4UnozUW85em1HeDVJeWZl?=
+ =?utf-8?B?M3dNZXJ1T1M1R2FjVDA2cVFZMHBUWFhPa1lLWnVkcUpzUmtQYm1WNTc3Skx6?=
+ =?utf-8?B?Slg4NU42ZUdadGNuc1hTdTdSbzRtV3hSMHBwZ1FkcFlCdTc1R2ZWOS9BNjkr?=
+ =?utf-8?B?WG1QNEJ5cmMvTGFjVUVVOVl6QnNBTy9HUHQyNzZCbDY0dmVWVXZVaFhUa2Vl?=
+ =?utf-8?B?OCtQSEdBMDJkbEpEbVdjN0JURjRiaktuRmhGUkxTR240RXV1c043enp1VEpX?=
+ =?utf-8?B?QzhKbU9oYTdZV1JibVRtOWRvSlZDak1xZ0ExYzNlWEo0ZkJZRmdVMWl0Yy92?=
+ =?utf-8?B?RVVmc0h1WXA2djFIV0c0UXFVbUNKcHRIQjZ4c0dmTDV4MU5VWndWSHVIbERP?=
+ =?utf-8?B?d1hWclNXN2tuVldJZU1lWFpSWUJMUTFGN2xRaTg0M1RYbmVFYzRzSmxISk93?=
+ =?utf-8?B?TTYza1ovYkowQ3Q3ZGxMa1BoQ0NoR3RLYjNoTTdjaDBEbzBjc3B2cjVTek54?=
+ =?utf-8?B?Q3c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: aded957c-14cf-4e31-8d9c-08dc9a8b4cf4
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2024 11:01:21.4645 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2024 11:37:06.3413 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5C1hCLbmbXnAcCVwz2fewXRatEAV/nF+Kfj6NT2xeCvsZnEpEPSLEssypwNR04P9TipLzUthCSWR+meTysXCbg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB8748
+X-MS-Exchange-CrossTenant-UserPrincipalName: YqKCGgNFKp6y+nypDLRYXXZuWjaPe6fPBy5l9votA6fz2SiI4EEpMzJSsil2ogXy5wCDRldn56YbLljqoSqIeLME000llkmjM+612n35B3k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10514
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -191,78 +192,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Lukas,
 
-On 02.07.2024 11:16, Quentin Schulz wrote:
-> Hi Lukas,
+On 7/2/24 1:01 PM, Lukas Funke wrote:
+> Hi Quentin,
 > 
-> On 7/2/24 8:48 AM, lukas.funke-oss@weidmueller.com wrote:
->> From: Lukas Funke <lukas.funke@weidmueller.com>
+> On 02.07.2024 11:16, Quentin Schulz wrote:
+>> Hi Lukas,
 >>
+>> On 7/2/24 8:48 AM, lukas.funke-oss@weidmueller.com wrote:
+>>> From: Lukas Funke <lukas.funke@weidmueller.com>
+>>>
+>>>
+>>> This series enables U-Boot to import environment variables from the
+>>> selectd FIT configuration. One use-case is that the overall build 
+>>> process
+>>> enriches the FIT configuration node with dm-verity information which
+>>> should be injected into the kernel commandline. U-Boot will then read
+>>> these (possibly signed) environment variables and put them into the
+>>> actual Kernel commandline using variable replacement
+>>> (see CONFIG_BOOTARGS_SUBST).
+>>>
+>>> Example:
+>>>
+>>> Config:
+>>> CONFIG_BOOTARGS_SUBST=y
+>>> CONFIG_ENV_IMPORT_FIT_CONF=y
+>>>
+>>> FIT:
+>>>      configurations {
+>>>          default = "conf-1";
+>>>              conf-1 {
+>>>                  kernel = "kernel-1";
+>>>                  fdt = "fdt-1";
+>>>                  env,dm-verity-args = "dm-mod.create=...";
+>>>                  env,bar = "someothervalue";
+>>>              };
+>>>      };
+>>>
+>>> U-Boot cmdline:
+>>> => env set bootargs="rootfstype=squashfs root=/dev/xyz 
+>>> ${dm-verity-args} ro"
+>>> => boot
+>>>
+>>> Kernel cmdline:
+>>> Kernel command line: rootfstype=squashfs ... dm-mod.create= ...
+>>>
+>>>
 >>
->> This series enables U-Boot to import environment variables from the
->> selectd FIT configuration. One use-case is that the overall build process
->> enriches the FIT configuration node with dm-verity information which
->> should be injected into the kernel commandline. U-Boot will then read
->> these (possibly signed) environment variables and put them into the
->> actual Kernel commandline using variable replacement
->> (see CONFIG_BOOTARGS_SUBST).
+>> I think FIT supports storing U-Boot scripts and running those via 
+>> `source` command (usually the file extension is .scr).
 >>
->> Example:
+>> I do not know if there's support for automatically loading this .scr 
+>> as part of a config node though, but if there isn't I guess it'd make 
+>> more sense to support this case than to come up with yet another 
+>> implementation?
 >>
->> Config:
->> CONFIG_BOOTARGS_SUBST=y
->> CONFIG_ENV_IMPORT_FIT_CONF=y
->>
->> FIT:
->>      configurations {
->>          default = "conf-1";
->>              conf-1 {
->>                  kernel = "kernel-1";
->>                  fdt = "fdt-1";
->>                  env,dm-verity-args = "dm-mod.create=...";
->>                  env,bar = "someothervalue";
->>              };
->>      };
->>
->> U-Boot cmdline:
->> => env set bootargs="rootfstype=squashfs root=/dev/xyz 
->> ${dm-verity-args} ro"
->> => boot
->>
->> Kernel cmdline:
->> Kernel command line: rootfstype=squashfs ... dm-mod.create= ...
->>
->>
+>> What do you think?
 > 
-> I think FIT supports storing U-Boot scripts and running those via 
-> `source` command (usually the file extension is .scr).
+> I wasn't aware of this, thanks for pointing it out!
 > 
-> I do not know if there's support for automatically loading this .scr as 
-> part of a config node though, but if there isn't I guess it'd make more 
-> sense to support this case than to come up with yet another implementation?
+> This patch was mainly inspired by the dm-vertiy use-case which requires 
+> just env-variables and no (complex) scripts.
 > 
-> What do you think?
-
-I wasn't aware of this, thanks for pointing it out!
-
-This patch was mainly inspired by the dm-vertiy use-case which requires 
-just env-variables and no (complex) scripts.
-
-There is currently no mechanism to source/run such scripts automatically.
-
-How would you distinguish between scripts that should run automatically 
-und scripts which are sourced by a specific board/shell-script 
-implementation? I guess there are good reasons to not run such scripts 
-per default. I would also change current behaviour. For env variables I 
-see no harm.
-
-Please let me know what you think.
-
-Cheers
-  - Lukas
-
+> There is currently no mechanism to source/run such scripts automatically.
 > 
-> Cheers,
-> Quentin
+> How would you distinguish between scripts that should run automatically 
+> und scripts which are sourced by a specific board/shell-script 
+> implementation? I guess there are good reasons to not run such scripts 
 
+Scripts in conf would be automatically run? Scripts not in conf needs to 
+be executed via `source` command for example?
+
+Not sure what to do if you want a script linked to a conf but not run 
+automatically though (and what would be the use-case?). I guess you 
+could have a script automatically run (so in conf node) that sets a 
+variable to know where to look for the other script that isn't 
+automatically executed?
+
+> per default. I would also change current behaviour. For env variables I 
+> see no harm.
+> 
+
+If the env properties in the FIT image are part of the checksum and 
+signature of the conf node, which is necessary for secure boot, I guess 
+"no harm" fits the bill.
+
+Cheers,
+Quentin
