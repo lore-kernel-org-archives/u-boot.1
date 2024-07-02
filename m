@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 912F0C30658
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 18:31:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1900DC30658
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 18:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A15588722;
-	Tue,  2 Jul 2024 20:31:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99ACE887C0;
+	Tue,  2 Jul 2024 20:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="urwQ3t0B";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xv0IcMe4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9230B87D74; Tue,  2 Jul 2024 20:31:38 +0200 (CEST)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id 1E685887CD; Tue,  2 Jul 2024 20:32:03 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11A1688722
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 20:31:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1564887D74
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 20:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-44639c3d8e7so26234331cf.1
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 11:31:36 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6f8d0a00a35so4255192a34.2
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 11:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719945095; x=1720549895; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719945115; x=1720549915; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D5YI8TE9N0JO/PSNPZXBdWDxF28bCmGQc/Zr4es0YuA=;
- b=urwQ3t0BJRpEyaKpqh+DB5z3d5d6clzdKRMRFAIV3Jt4GCKsO86bslqR3Pn+4IwFcZ
- Wv7zVLXHt/NBsskuWRFnrKgM6xygqPmY+PataSqwppT3kQAA11B/sVF+kB/x3Mzp7Prl
- qJ52quDhVlrSCtO3XdSNaRJ3OVy/WeKg6en1ccLwZinbBOyR+9WrknXSVmT0FixCsnIO
- t/WFdZBscc29PEBGPSNTg0mtAnEAWDyPy+oIvOXeCTTkDTRzLQWHE5u+afz//AHT3CP4
- feAYBQOopA3SxaCUa2UioOSmpln8yrbTWIUZTjDfoni4zGgI9lwk8AP7ixfJn2FZ/Z6E
- 8A3w==
+ bh=3PF091OcruIWFIVedk0xEdKWelHWz1rP8nNq0+l81Vc=;
+ b=xv0IcMe4VabBk7+AgrNNcbdoPmhEKFsw0MIgRRUVSf9KjnsZ4XANEaC/Hnu3Jm5Wng
+ FmZS3HZUtt003gk0WMPQahD+aHBNgD2eHPttgVMs+HM1lzQqj1SEngfH2KID+2SVuc96
+ 9co8dy3C7MlvoUzZwNYMs9F5d164xmrpxSjqsmLuhe5OHLCokM5iGcjIMDhUBsX2Bj9h
+ VIzHmH82kBJduwhKhlinQ/vhxyRb61fEzrcKDKluHsadjBh1aHUbID0TKCcEtRvwQK9g
+ Dgp2geXNg04m0y34ld9uHjv7raIotad9jei4rIx4vBb04mDMrUb2K2HL3fJnw+Ef/FJN
+ t2hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719945095; x=1720549895;
+ d=1e100.net; s=20230601; t=1719945115; x=1720549915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=D5YI8TE9N0JO/PSNPZXBdWDxF28bCmGQc/Zr4es0YuA=;
- b=Ch4dW3w9C6hJlV1DjjOghXYG7ACY1y/II6TQeojJZ+YSNnMj2+FL6QKM8Qt+YSsEQB
- wonUlGiGBKai3SlLBfvsNiDCaya2BOdQDKIByBAMa+ybVQhcCzJ3ciDnWztImK6vsviv
- iWSqWO5ilVPU/o40+KElbcZkRTjj/VISo1eL3V5neVivEov7HMcswnSOJFfj0DhGE5rH
- 1ekljO9n7AKGwC0Qmed/Y9lIkZsJfA+BzEJj/sco7d8pX5P11I1Q90RPXVuPE0OK1n18
- 3Y3cUT5GHjz9LpnSxYrXMyrHlwOfnthgneIU1WoVwSELu/FD0Thj1Vnr442mGlXnL6Ox
- h7RA==
-X-Gm-Message-State: AOJu0YwmDw2jQy7KZE/kiCi64wGzOQPCMPUFsDPHdwVg6LTdfgJZ3z53
- ItMgCzNhcZWAAkEZBkIvjK8om1H/Bj/Elv0pmXzMgMz/z4uyYzZVjCrHpaxrzRWgu7fGLKNwASX
- a
-X-Google-Smtp-Source: AGHT+IFfyhDAYnH4atPXlgjcoOavzy+IoEdca+mI+JjyZ+DE1YuXjCjmTC/NDZ06Qt6F+4SZw1DTrQ==
-X-Received: by 2002:ac8:5f82:0:b0:440:5f59:7c58 with SMTP id
- d75a77b69052e-44662e74a56mr128502301cf.47.1719945094596; 
- Tue, 02 Jul 2024 11:31:34 -0700 (PDT)
+ bh=3PF091OcruIWFIVedk0xEdKWelHWz1rP8nNq0+l81Vc=;
+ b=Iwr+5hWALv1vcgxFEWcRTK05iNZ6QzNDVt5i3Ic+fO3YD7WXpVKgWTpJATvddOXOOC
+ qgvEKWa0AAgW/D0jOKzHRgVXwTzSti/nH0ImNxuieNZSGYCNYeGRhFGRiStVNaj6BJlJ
+ QQ0EVEPOC/7+UmYYTdtofM7rAEzjaCPauejArUfhc37Lw3SKfGw+7ZvcFuh/C3EMTHOJ
+ QbdgBA7t7aZTElLBkBV8R6EJ8g+SmcUuZOpuM0ELGb6V85RYJWhi6+i9uo0htv4+KUBg
+ qI7plBaHYsy+LcA6lUXWNekMao1M0TSP2QGqlaEz8sDp5mf9eHT96Y86Z7iEXOzIPAJy
+ +T2Q==
+X-Gm-Message-State: AOJu0YxTmxxQrexpdEVlCnpnf0mR79JLUgNkHr1NwKqCRuR+ZuVkr0ak
+ 7PRH7LBoHfJv4JJ9NDoqJCEq4R09AvlWXXH48OxAe71vT9fjVPe6OJQxb/KkPqSDTbdUx/zltzE
+ d
+X-Google-Smtp-Source: AGHT+IEKSw0ENgs0MhezWbKV/Mz0HPUtED/kBvxnsY+rqHvQ2XoAp/xRDR215WBte/HW3PaM0Fvp5Q==
+X-Received: by 2002:a05:6808:1507:b0:3d5:5fdc:ac7c with SMTP id
+ 5614622812f47-3d6b30f52d9mr12607313b6e.15.1719945115235; 
+ Tue, 02 Jul 2024 11:31:55 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-446514b613dsm43316351cf.84.2024.07.02.11.31.32
+ d75a77b69052e-446514b613dsm43316351cf.84.2024.07.02.11.31.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 11:31:34 -0700 (PDT)
+ Tue, 02 Jul 2024 11:31:54 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
@@ -74,22 +74,23 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>, Jesse Taube <mr.bossman075@gmail.com>,
  Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Sergei Antonov <saproj@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Sergei Antonov <saproj@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v4 19/29] mbedtls: add X509 cert parser porting layer
-Date: Tue,  2 Jul 2024 11:22:55 -0700
-Message-Id: <20240702182325.2904421-20-raymond.mao@linaro.org>
+Subject: [PATCH v4 20/29] lib/crypto: Adapt x509_cert_parser to MbedTLS
+Date: Tue,  2 Jul 2024 11:22:56 -0700
+Message-Id: <20240702182325.2904421-21-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240702182325.2904421-1-raymond.mao@linaro.org>
 References: <20240702182325.2904421-1-raymond.mao@linaro.org>
@@ -111,552 +112,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add porting layer for X509 cert parser on top of MbedTLS X509
-library.
-Introduce _LEGACY and _MBEDTLS kconfigs for X509 cert parser legacy
-and MbedTLS implementations respectively.
+Previous patch has introduced MbedTLS porting layer for x509 cert parser,
+here to adjust the header and makefiles accordingly.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
 - Move the porting layer to MbedTLS dir.
 Changes in v3
-- None.
+- Update commit message.
 Changes in v4
-- Introduce _LEGACY and _MBEDTLS kconfigs for X509 cert parser legacy
-  and MbedTLS implementations respectively.
-- Move common functions to helper.
+- Control building legacy library via '_LEGACY' Kconfig.
+- Add function comments for the new APIs.
+- Update the dependence of ASYMMETRIC_KEY_TYPE.
+- Minor fix of the include directories.
 
- lib/mbedtls/Kconfig            |  18 ++
- lib/mbedtls/Makefile           |   4 +-
- lib/mbedtls/x509_cert_parser.c | 446 +++++++++++++++++++++++++++++++++
- 3 files changed, 467 insertions(+), 1 deletion(-)
- create mode 100644 lib/mbedtls/x509_cert_parser.c
+ include/crypto/x509_parser.h | 56 ++++++++++++++++++++++++++++++++++++
+ lib/crypto/Kconfig           |  2 +-
+ lib/crypto/Makefile          |  4 +--
+ lib/crypto/x509_public_key.c |  2 ++
+ 4 files changed, 61 insertions(+), 3 deletions(-)
 
-diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index 6f29b0c81a2..c62a556a39a 100644
---- a/lib/mbedtls/Kconfig
-+++ b/lib/mbedtls/Kconfig
-@@ -124,6 +124,7 @@ config LEGACY_CRYPTO_CERT
- 	bool "legacy certificate libraries"
- 	select ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY if \
- 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-+	select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
- 	select SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY if \
- 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE && SPL
- 	help
-@@ -138,6 +139,14 @@ config ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY
- 	  This option chooses legacy certificate library for asymmetric public
- 	  key crypto algorithm.
+diff --git a/include/crypto/x509_parser.h b/include/crypto/x509_parser.h
+index 4cbdc1d6612..3f917da5430 100644
+--- a/include/crypto/x509_parser.h
++++ b/include/crypto/x509_parser.h
+@@ -11,8 +11,36 @@
+ #include <linux/time.h>
+ #include <crypto/public_key.h>
+ #include <keys/asymmetric-type.h>
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
++#include <image.h>
++#include <mbedtls/error.h>
++#include <mbedtls/asn1.h>
++#endif
  
-+config X509_CERTIFICATE_PARSER_LEGACY
-+	bool "X.509 certificate parser with legacy certificate library"
-+	depends on ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY
-+	select ASN1_DECODER_LEGACY
-+	help
-+	  This option chooses legacy certificate library for X509 certificate
-+	  parser.
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
++/* Backup of part of the parsing context */
++struct x509_cert_mbedtls_ctx {
++	void	*tbs;			/* Signed data */
++	void	*raw_serial;		/* Raw serial number in ASN.1 */
++	void	*raw_issuer;		/* Raw issuer name in ASN.1 */
++	void	*raw_subject;		/* Raw subject name in ASN.1 */
++	void	*raw_skid;		/* Raw subjectKeyId in ASN.1 */
++};
++#endif
 +
- if SPL
- 
- config SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY
-@@ -260,6 +269,7 @@ config MBEDTLS_LIB_X509
- 	bool "MbedTLS certificate libraries"
- 	select ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS if \
- 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-+	select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
- 	select SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS if \
- 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE && SPL
- 	help
-@@ -273,6 +283,14 @@ config ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS
- 	  This option chooses MbedTLS certificate library for asymmetric public
- 	  key crypto algorithm.
- 
-+config X509_CERTIFICATE_PARSER_MBEDTLS
-+	bool "X.509 certificate parser with MbedTLS certificate library"
-+	depends on ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS
-+	select ASN1_DECODER_MBEDTLS
-+	help
-+	  This option chooses MbedTLS certificate library for X509 certificate
-+	  parser.
-+
- if SPL
- 
- config SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS
-diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-index f06d0704502..75d6a2cca07 100644
---- a/lib/mbedtls/Makefile
-+++ b/lib/mbedtls/Makefile
-@@ -24,6 +24,8 @@ hash_mbedtls-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += sha512.o
- obj-$(CONFIG_MBEDTLS_LIB_X509) += x509_mbedtls.o
- x509_mbedtls-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS) += \
- 	public_key.o
-+x509_mbedtls-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
-+	x509_cert_parser.o
- 
- # MbedTLS crypto library
- obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
-@@ -54,7 +56,7 @@ mbedtls_lib_x509-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/pk.o \
- 	$(MBEDTLS_LIB_DIR)/pk_wrap.o \
- 	$(MBEDTLS_LIB_DIR)/pkparse.o
--mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += \
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/x509_crl.o \
- 	$(MBEDTLS_LIB_DIR)/x509_crt.o
- mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += \
-diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_parser.c
-new file mode 100644
-index 00000000000..0323dea3152
---- /dev/null
-+++ b/lib/mbedtls/x509_cert_parser.c
-@@ -0,0 +1,446 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * X509 cert parser using MbedTLS X509 library
++ * MbedTLS integration Notes:
 + *
-+ * Copyright (c) 2024 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
++ * Fields we don't need to populate from MbedTLS:
++ * 'raw_sig' and 'raw_sig_size' are buffer for x509_parse_context,
++ * not needed for MbedTLS.
++ * 'signer' and 'seen' are used internally by pkcs7_verify.
++ * 'verified' is not inuse.
 + */
-+
-+#include <linux/err.h>
-+#include <crypto/public_key.h>
-+#include <crypto/x509_parser.h>
-+
-+static void x509_free_mbedtls_ctx(struct x509_cert_mbedtls_ctx *ctx)
-+{
-+	if (!ctx)
-+		return;
-+
-+	kfree(ctx->tbs);
-+	kfree(ctx->raw_serial);
-+	kfree(ctx->raw_issuer);
-+	kfree(ctx->raw_subject);
-+	kfree(ctx->raw_skid);
-+	kfree(ctx);
-+}
-+
-+static int x509_set_cert_flags(struct x509_certificate *cert)
-+{
-+	struct public_key_signature *sig = cert->sig;
-+
-+	if (!sig || !cert->pub) {
-+		pr_err("Signature or public key is not initialized\n");
-+		return -ENOPKG;
-+	}
-+
-+	if (!cert->pub->pkey_algo)
-+		cert->unsupported_key = true;
-+
-+	if (!sig->pkey_algo)
-+		cert->unsupported_sig = true;
-+
-+	if (!sig->hash_algo)
-+		cert->unsupported_sig = true;
-+
-+	/* TODO: is_hash_blacklisted()? */
-+
-+	/* Detect self-signed certificates and set self_signed flag */
-+	return x509_check_for_self_signed(cert);
-+}
-+
-+time64_t x509_get_timestamp(const mbedtls_x509_time *x509_time)
-+{
-+	unsigned int year, mon, day, hour, min, sec;
-+
-+	/* Adjust for year since 1900 */
-+	year = x509_time->year - 1900;
-+	/* Adjust for 0-based month */
-+	mon = x509_time->mon - 1;
-+	day = x509_time->day;
-+	hour = x509_time->hour;
-+	min = x509_time->min;
-+	sec = x509_time->sec;
-+
-+	return (time64_t)mktime64(year, mon, day, hour, min, sec);
-+}
-+
-+static char *x509_populate_dn_name_string(const mbedtls_x509_name *name)
-+{
-+	size_t len = 256;
-+	size_t wb;
-+	char *name_str;
-+
-+	do {
-+		name_str = kzalloc(len, GFP_KERNEL);
-+		if (!name_str)
-+			return NULL;
-+
-+		wb = mbedtls_x509_dn_gets(name_str, len, name);
-+		if (wb < 0) {
-+			pr_err("Get DN string failed, ret:-0x%04x\n",
-+			       (unsigned int)-wb);
-+			kfree(name_str);
-+			len = len * 2; /* Try with a bigger buffer */
-+		}
-+	} while (wb < 0);
-+
-+	name_str[wb] = '\0'; /* add the terminator */
-+
-+	return name_str;
-+}
-+
-+static int x509_populate_signature_params(const mbedtls_x509_crt *cert,
-+					  struct public_key_signature **sig)
-+{
-+	struct public_key_signature *s;
-+	struct image_region region;
-+	size_t akid_len;
-+	unsigned char *akid_data;
-+	int ret;
-+
-+	/* Check if signed data exist */
-+	if (!cert->tbs.p || !cert->tbs.len)
-+		return -EINVAL;
-+
-+	region.data = cert->tbs.p;
-+	region.size = cert->tbs.len;
-+
-+	s = kzalloc(sizeof(*s), GFP_KERNEL);
-+	if (!s)
-+		return -ENOMEM;
-+
-+	/*
-+	 * Get the public key algorithm.
-+	 * Note: ECRDSA (Elliptic Curve RedDSA) from Red Hat is not supported by
-+	 *	 MbedTLS.
-+	 */
-+	switch (cert->sig_pk) {
-+	case MBEDTLS_PK_RSA:
-+		s->pkey_algo = "rsa";
-+		break;
-+	default:
-+		ret = -EINVAL;
-+		goto error_sig;
-+	}
-+
-+	/* Get the hash algorithm */
-+	switch (cert->sig_md) {
-+	case MBEDTLS_MD_SHA1:
-+		s->hash_algo = "sha1";
-+		s->digest_size = SHA1_SUM_LEN;
-+		break;
-+	case MBEDTLS_MD_SHA256:
-+		s->hash_algo = "sha256";
-+		s->digest_size = SHA256_SUM_LEN;
-+		break;
-+	case MBEDTLS_MD_SHA384:
-+		s->hash_algo = "sha384";
-+		s->digest_size = SHA384_SUM_LEN;
-+		break;
-+	case MBEDTLS_MD_SHA512:
-+		s->hash_algo = "sha512";
-+		s->digest_size = SHA512_SUM_LEN;
-+		break;
-+	/* Unsupported algo */
-+	case MBEDTLS_MD_MD5:
-+	case MBEDTLS_MD_SHA224:
-+	default:
-+		ret = -EINVAL;
-+		goto error_sig;
-+	}
-+
-+	/*
-+	 * Optional attributes:
-+	 * auth_ids holds AuthorityKeyIdentifier (information of issuer),
-+	 * aka akid, which is used to match with a cert's id or skid to
-+	 * indicate that is the issuer when we lookup a cert chain.
-+	 *
-+	 * auth_ids[0]:
-+	 *	[PKCS#7 or CMS ver 1] - generated from "Issuer + Serial number"
-+	 *	[CMS ver 3] - generated from skid (subjectKeyId)
-+	 * auth_ids[1]: generated from skid (subjectKeyId)
-+	 *
-+	 * Assume that we are using PKCS#7 (msg->version=1),
-+	 * not CMS ver 3 (msg->version=3).
-+	 */
-+	akid_len = cert->authority_key_id.authorityCertSerialNumber.len;
-+	akid_data = cert->authority_key_id.authorityCertSerialNumber.p;
-+
-+	/* Check if serial number exists */
-+	if (akid_len && akid_data) {
-+		s->auth_ids[0] = asymmetric_key_generate_id(akid_data,
-+							    akid_len,
-+							    cert->issuer_raw.p,
-+							    cert->issuer_raw.len);
-+		if (!s->auth_ids[0]) {
-+			ret = -ENOMEM;
-+			goto error_sig;
-+		}
-+	}
-+
-+	akid_len = cert->authority_key_id.keyIdentifier.len;
-+	akid_data = cert->authority_key_id.keyIdentifier.p;
-+
-+	/* Check if subjectKeyId exists */
-+	if (akid_len && akid_data) {
-+		s->auth_ids[1] = asymmetric_key_generate_id(akid_data,
-+							    akid_len,
-+							    "", 0);
-+		if (!s->auth_ids[1]) {
-+			ret = -ENOMEM;
-+			goto error_sig;
-+		}
-+	}
-+
-+	/*
-+	 * Encoding can be pkcs1 or raw, but only pkcs1 is supported.
-+	 * Set the encoding explicitly to pkcs1.
-+	 */
-+	s->encoding = "pkcs1";
-+
-+	/* Copy the signature data */
-+	s->s = kmemdup(cert->sig.p, cert->sig.len, GFP_KERNEL);
-+	if (!s->s) {
-+		ret = -ENOMEM;
-+		goto error_sig;
-+	}
-+	s->s_size = cert->sig.len;
-+
-+	/* Calculate the digest of signed data (tbs) */
-+	s->digest = kzalloc(s->digest_size, GFP_KERNEL);
-+	if (!s->digest) {
-+		ret = -ENOMEM;
-+		goto error_sig;
-+	}
-+
-+	ret = hash_calculate(s->hash_algo, &region, 1, s->digest);
-+	if (!ret)
-+		*sig = s;
-+
-+	return ret;
-+
-+error_sig:
-+	public_key_signature_free(s);
-+	return ret;
-+}
-+
-+static int x509_save_mbedtls_ctx(const mbedtls_x509_crt *cert,
-+				 struct x509_cert_mbedtls_ctx **pctx)
-+{
-+	struct x509_cert_mbedtls_ctx *ctx;
-+
-+	ctx = kzalloc(sizeof(*ctx), GFP_KERNEL);
-+	if (!ctx)
-+		return -ENOMEM;
-+
-+	/* Signed data (tbs - The part that is To Be Signed)*/
-+	ctx->tbs = kmemdup(cert->tbs.p, cert->tbs.len,
-+			   GFP_KERNEL);
-+	if (!ctx->tbs)
-+		goto error_ctx;
-+
-+	/* Raw serial number */
-+	ctx->raw_serial = kmemdup(cert->serial.p,
-+				  cert->serial.len, GFP_KERNEL);
-+	if (!ctx->raw_serial)
-+		goto error_ctx;
-+
-+	/* Raw issuer */
-+	ctx->raw_issuer = kmemdup(cert->issuer_raw.p,
-+				  cert->issuer_raw.len, GFP_KERNEL);
-+	if (!ctx->raw_issuer)
-+		goto error_ctx;
-+
-+	/* Raw subject */
-+	ctx->raw_subject = kmemdup(cert->subject_raw.p,
-+				   cert->subject_raw.len, GFP_KERNEL);
-+	if (!ctx->raw_subject)
-+		goto error_ctx;
-+
-+	/* Raw subjectKeyId */
-+	ctx->raw_skid = kmemdup(cert->subject_key_id.p,
-+				cert->subject_key_id.len, GFP_KERNEL);
-+	if (!ctx->raw_skid)
-+		goto error_ctx;
-+
-+	*pctx = ctx;
-+
-+	return 0;
-+
-+error_ctx:
-+	x509_free_mbedtls_ctx(ctx);
-+	return -ENOMEM;
-+}
-+
-+/*
-+ * Free an X.509 certificate
+ struct x509_certificate {
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
++	struct x509_cert_mbedtls_ctx *mbedtls_ctx;
++#endif
+ 	struct x509_certificate *next;
+ 	struct x509_certificate *signer;	/* Certificate that signed this one */
+ 	struct public_key *pub;			/* Public key details */
+@@ -48,6 +76,32 @@ struct x509_certificate {
+  * x509_cert_parser.c
+  */
+ extern void x509_free_certificate(struct x509_certificate *cert);
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
++/**
++ * x509_populate_pubkey() - Populate public key from MbedTLS context
++ *
++ * @cert:	Pointer to MbedTLS X509 cert
++ * @pub_key:	Pointer to the populated public key handle
++ * Return: 0 on succcess, error code on failure
 + */
-+void x509_free_certificate(struct x509_certificate *cert)
-+{
-+	if (cert) {
-+		public_key_free(cert->pub);
-+		public_key_signature_free(cert->sig);
-+		kfree(cert->issuer);
-+		kfree(cert->subject);
-+		kfree(cert->id);
-+		kfree(cert->skid);
-+		x509_free_mbedtls_ctx(cert->mbedtls_ctx);
-+		kfree(cert);
-+	}
-+}
-+
-+int x509_populate_pubkey(mbedtls_x509_crt *cert, struct public_key **pub_key)
-+{
-+	struct public_key *pk;
-+
-+	pk = kzalloc(sizeof(*pk), GFP_KERNEL);
-+	if (!pk)
-+		return -ENOMEM;
-+
-+	pk->key = kzalloc(cert->pk_raw.len, GFP_KERNEL);
-+	if (!pk->key) {
-+		kfree(pk);
-+		return -ENOMEM;
-+	}
-+	memcpy(pk->key, cert->pk_raw.p, cert->pk_raw.len);
-+	pk->keylen = cert->pk_raw.len;
-+
-+	/*
-+	 * For ECC keys, params field might include information about the curve used,
-+	 * the generator point, or other algorithm-specific parameters.
-+	 * For RSA keys, it's common for the params field to be NULL.
-+	 * FIXME: Assume that we just support RSA keys with id_type X509.
-+	 */
-+	pk->params = NULL;
-+	pk->paramlen = 0;
-+
-+	pk->key_is_private = false;
-+	pk->id_type = "X509";
-+	pk->pkey_algo = "rsa";
-+	pk->algo = OID_rsaEncryption;
-+
-+	*pub_key = pk;
-+
-+	return 0;
-+}
-+
++int x509_populate_pubkey(mbedtls_x509_crt *cert, struct public_key **pub_key);
++/**
++ * x509_populate_cert() - Populate X509 cert from MbedTLS context
++ *
++ * @mbedtls_cert:	Pointer to MbedTLS X509 cert
++ * @pcert:		Pointer to the populated X509 cert handle
++ * Return: 0 on succcess, error code on failure
++ */
 +int x509_populate_cert(mbedtls_x509_crt *mbedtls_cert,
-+		       struct x509_certificate **pcert)
-+{
-+	struct x509_certificate *cert;
-+	struct asymmetric_key_id *kid;
-+	struct asymmetric_key_id *skid;
-+	int ret;
++		       struct x509_certificate **pcert);
++/**
++ * x509_get_timestamp() - Translate timestamp from MbedTLS context
++ *
++ * @x509_time:	Pointer to MbedTLS time
++ * Return: Time in time64_t format
++ */
++time64_t x509_get_timestamp(const mbedtls_x509_time *x509_time);
++#endif
+ extern struct x509_certificate *x509_cert_parse(const void *data, size_t datalen);
+ extern int x509_decode_time(time64_t *_t,  size_t hdrlen,
+ 			    unsigned char tag,
+@@ -56,6 +110,8 @@ extern int x509_decode_time(time64_t *_t,  size_t hdrlen,
+ /*
+  * x509_public_key.c
+  */
++#if !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+ extern int x509_get_sig_params(struct x509_certificate *cert);
++#endif
+ extern int x509_check_for_self_signed(struct x509_certificate *cert);
+ #endif /* _X509_PARSER_H */
+diff --git a/lib/crypto/Kconfig b/lib/crypto/Kconfig
+index 6e0656ad1c5..6106190677e 100644
+--- a/lib/crypto/Kconfig
++++ b/lib/crypto/Kconfig
+@@ -1,6 +1,6 @@
+ menuconfig ASYMMETRIC_KEY_TYPE
+ 	bool "Asymmetric (public-key cryptographic) key Support"
+-	depends on FIT_SIGNATURE
++	depends on LEGACY_CRYPTO_CERT || MBEDTLS_LIB_X509
+ 	help
+ 	  This option provides support for a key type that holds the data for
+ 	  the asymmetric keys used for public key cryptographic operations such
+diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+index 228ae443a27..7f5f04d582c 100644
+--- a/lib/crypto/Makefile
++++ b/lib/crypto/Makefile
+@@ -32,11 +32,11 @@ endif
+ # X.509 Certificate handling
+ #
+ obj-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += x509_key_parser.o
+-x509_key_parser-y := \
++x509_key_parser-y := x509_helper.o
++x509_key_parser-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_LEGACY) += \
+ 	x509.asn1.o \
+ 	x509_akid.asn1.o \
+ 	x509_cert_parser.o \
+-	x509_helper.o \
+ 	x509_public_key.o
+ 
+ $(obj)/x509_cert_parser.o: \
+diff --git a/lib/crypto/x509_public_key.c b/lib/crypto/x509_public_key.c
+index 4ba13c1adc3..310edbd21be 100644
+--- a/lib/crypto/x509_public_key.c
++++ b/lib/crypto/x509_public_key.c
+@@ -30,6 +30,8 @@
+ #include "x509_parser.h"
+ #endif
+ 
++#if !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
 +
-+	cert = kzalloc(sizeof(*cert), GFP_KERNEL);
-+	if (!cert)
-+		return -ENOMEM;
-+
-+	/* Public key details */
-+	ret = x509_populate_pubkey(mbedtls_cert, &cert->pub);
-+	if (ret)
-+		goto error_cert_pop;
-+
-+	/* Signature parameters */
-+	ret = x509_populate_signature_params(mbedtls_cert, &cert->sig);
-+	if (ret)
-+		goto error_cert_pop;
-+
-+	ret = -ENOMEM;
-+
-+	/* Name of certificate issuer */
-+	cert->issuer = x509_populate_dn_name_string(&mbedtls_cert->issuer);
-+	if (!cert->issuer)
-+		goto error_cert_pop;
-+
-+	/* Name of certificate subject */
-+	cert->subject = x509_populate_dn_name_string(&mbedtls_cert->subject);
-+	if (!cert->subject)
-+		goto error_cert_pop;
-+
-+	/* Certificate validity */
-+	cert->valid_from = x509_get_timestamp(&mbedtls_cert->valid_from);
-+	cert->valid_to = x509_get_timestamp(&mbedtls_cert->valid_to);
-+
-+	/* Save mbedtls context we need */
-+	ret = x509_save_mbedtls_ctx(mbedtls_cert, &cert->mbedtls_ctx);
-+	if (ret)
-+		goto error_cert_pop;
-+
-+	/* Signed data (tbs - The part that is To Be Signed)*/
-+	cert->tbs = cert->mbedtls_ctx->tbs;
-+	cert->tbs_size = mbedtls_cert->tbs.len;
-+
-+	/* Raw serial number */
-+	cert->raw_serial = cert->mbedtls_ctx->raw_serial;
-+	cert->raw_serial_size = mbedtls_cert->serial.len;
-+
-+	/* Raw issuer */
-+	cert->raw_issuer = cert->mbedtls_ctx->raw_issuer;
-+	cert->raw_issuer_size = mbedtls_cert->issuer_raw.len;
-+
-+	/* Raw subject */
-+	cert->raw_subject = cert->mbedtls_ctx->raw_subject;
-+	cert->raw_subject_size = mbedtls_cert->subject_raw.len;
-+
-+	/* Raw subjectKeyId */
-+	cert->raw_skid = cert->mbedtls_ctx->raw_skid;
-+	cert->raw_skid_size = mbedtls_cert->subject_key_id.len;
-+
-+	/* Generate cert issuer + serial number key ID */
-+	kid = asymmetric_key_generate_id(cert->raw_serial,
-+					 cert->raw_serial_size,
-+					 cert->raw_issuer,
-+					 cert->raw_issuer_size);
-+	if (IS_ERR(kid)) {
-+		ret = PTR_ERR(kid);
-+		goto error_cert_pop;
-+	}
-+	cert->id = kid;
-+
-+	/* Generate subject + subjectKeyId */
-+	skid = asymmetric_key_generate_id(cert->raw_skid, cert->raw_skid_size, "", 0);
-+	if (IS_ERR(skid)) {
-+		ret = PTR_ERR(skid);
-+		goto error_cert_pop;
-+	}
-+	cert->skid = skid;
-+
-+	/*
-+	 * Set the certificate flags:
-+	 * self_signed, unsupported_key, unsupported_sig, blacklisted
-+	 */
-+	ret = x509_set_cert_flags(cert);
-+	if (!ret) {
-+		*pcert = cert;
-+		return 0;
-+	}
-+
-+error_cert_pop:
-+	x509_free_certificate(cert);
-+	return ret;
-+}
-+
-+struct x509_certificate *x509_cert_parse(const void *data, size_t datalen)
-+{
-+	mbedtls_x509_crt mbedtls_cert;
-+	struct x509_certificate *cert = NULL;
-+	long ret;
-+
-+	/* Parse DER encoded certificate */
-+	mbedtls_x509_crt_init(&mbedtls_cert);
-+	ret = mbedtls_x509_crt_parse_der(&mbedtls_cert, data, datalen);
-+	if (ret)
-+		goto clean_up_ctx;
-+
-+	/* Populate x509_certificate from mbedtls_x509_crt */
-+	ret = x509_populate_cert(&mbedtls_cert, &cert);
-+	if (ret)
-+		goto clean_up_ctx;
-+
-+clean_up_ctx:
-+	mbedtls_x509_crt_free(&mbedtls_cert);
-+	if (!ret)
-+		return cert;
-+
-+	return ERR_PTR(ret);
-+}
+ /*
+  * Set up the signature parameters in an X.509 certificate.  This involves
+  * digesting the signed data and extracting the signature.
 -- 
 2.25.1
 
