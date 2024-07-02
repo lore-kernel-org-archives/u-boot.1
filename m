@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9615DC3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 10:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD40C3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 10:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9B0E8824C;
-	Tue,  2 Jul 2024 12:26:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 220D38824C;
+	Tue,  2 Jul 2024 12:53:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZVgFD76J";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IkJMyIRM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9B3687B30; Tue,  2 Jul 2024 12:26:26 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 02ED6883C3; Tue,  2 Jul 2024 12:53:21 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1745A8824C
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 12:26:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 222B68824C
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 12:53:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-58bac81f39bso539420a12.2
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 03:26:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52ce6abc2dbso416968e87.3
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 03:53:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1719915984; x=1720520784;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1719917598; x=1720522398; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pKSz/MAwZqiSx2IVYz9XZH7IHjTJaNMEgXrm4Jts/4E=;
- b=ZVgFD76JGeaAGMxlNbheC4gbLkqsm2XXcn9o2MEtaiLIZmxoZiJd2vZzHLAt+HnVQC
- 5GslfpUn2eKnnKTPmY33x6e5wRf5yLjD4NiM6tporKJleDXqAI6A7VbsFJdGTBw635da
- l4bxHa734jXXW5VJF2hScNaeLNbV1VUcjDBlc=
+ bh=wxzGoILhYZpbjbMXMYbdmj5WY3SyxC4rPVMFQYTe+Aw=;
+ b=IkJMyIRMdzQFleB61gj43t4L1OjfLVN5aXD+3P2yogXQGuAbm5OyJSVdr2A5FhYOsb
+ uQe54JJTNHtZ6ifhXLHi/hXp7VTkNqUPEPf2JJS8UtQeAwW1zVBCJjEPiMuwXc4rTCtv
+ FNXtggyuNwpI/p1w+XdCMVmjjri8tZOklwrTTebraJwyfgcyp4bs0ahs/dtT7VCGhfHh
+ 5K7LXNWcVV5tCtuTUv+Ut0W8Yi/hQ/DhQXSQF59mlMhoqbyH8wd2VoCHYguKq7dYpd+U
+ JSUR9uU0X6yhof3pE6HzkanzoIbbZXW6HuvBptHO/qU7RFxwvnFca1gEmanKWi8/eObd
+ ZxVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719915984; x=1720520784;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1719917598; x=1720522398;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pKSz/MAwZqiSx2IVYz9XZH7IHjTJaNMEgXrm4Jts/4E=;
- b=KGX9P+KFs2G3eZrt9NUrZ0WVCiZp9b0OQrNhe1QwR6CqyEVQYJ5Fn3IhmZHc99eGPn
- Gq1BtVthjy4xgg2fddLNv0ma9gNP/k8H1xJ7NSX2GMd+fChVyu2EEEQgW44wcAFydVB6
- YU8JFRVKwfjW9qsyRD/3xRd+vXQo5Wnyt695NmiT0kf3dHDOYu6E7/BP4o3JMyjuU1iu
- rgS9DfPxUpXc+lW4YMuGRaC6t9okHry69XRyBO1bvBroJh8NQYG5E3mBsHle9nKFCNk5
- zRuYlMUBZztYVxdWYquPPGHysfJ8pzNScnEw/eG69InZqZ4f9h7r6Wr4/uEwIwIEf6iL
- qYyA==
+ bh=wxzGoILhYZpbjbMXMYbdmj5WY3SyxC4rPVMFQYTe+Aw=;
+ b=VrFN7r2cK9agih/I6gpLdAOTXNyntkC02YrnhHaLAIpnomKpJebL61YPE6jAV0Cu39
+ 1yeh8H1hypeaz9sujqnk9zP8gtVX2oRkpgowl67U1Wxx4J5G/ol7FQvdLW0iSlGLpjOa
+ eVQ2UP611Wq2IWqufSE0jySreTnEyImhrtfN5otgfOKy/xwzt+aW+Mfgjo8INMR0hkiZ
+ 9+jLWh/ohQdERLBuo1zxjf6KfrDfK2suAL7dhsok//DBzzxBDGHOFkKdur59stybXETL
+ 92G2niX1nB/5lvsyYpW5IfmqSKqgSz89/8L5YKaztKqFZGGBes7yFPOLM1krrZ2A8lSO
+ Dx1w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXD7nN6YSYwLUlRvAFUbd9564amkGq3DAmxhhsvHFkIcG/T9A7srXSZmMfwwUQ7FNXBG/3l2I1Nh7D6oJ3ET1jNSSI62w==
-X-Gm-Message-State: AOJu0YyK4Zyg2PGBRXwucVai5sCudeSYROfShcgeUPFIf38QJkWfGif5
- qIeoj9tLyXlren8LumxVLHlmAynwQUEs6sKF6zoqXFluOmf+mqrhaWTXzRv6zYU=
-X-Google-Smtp-Source: AGHT+IH1BkYlwym5+BZsw3V6W111lh932a9ORFDQOCEyrDCCL6gSShh07t2Ufbz9bYI/vwL5JIQqIg==
-X-Received: by 2002:a17:906:c152:b0:a6f:57f1:cebb with SMTP id
- a640c23a62f3a-a75144857acmr728893166b.50.1719915984429; 
- Tue, 02 Jul 2024 03:26:24 -0700 (PDT)
-Received: from panicking.. ([2001:b07:6474:ebbf:8e6e:944f:275e:2a97])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72ae84b3d8sm391253066b.121.2024.07.02.03.26.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 03:26:24 -0700 (PDT)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: Lukasz Majewski <lukma@denx.de>,
-	Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH 2/2] clk: imx: Fix wrong flags assignment clk-composite-93
-Date: Tue,  2 Jul 2024 12:26:18 +0200
-Message-ID: <20240702102618.466652-2-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240702102618.466652-1-michael@amarulasolutions.com>
-References: <20240702102618.466652-1-michael@amarulasolutions.com>
+ AJvYcCVnx9m5DD5XHKlHFOO04aybr5vyOoFJWRbesHJ+H3Zk+MghxRs5Qa0yk8doexzgs6c7FfZHfx/8ZUqKIx5JCst2ej8K8A==
+X-Gm-Message-State: AOJu0YzHPXgXMkKLSK6ihlAwzxj10qexVhv4HZ/q8UZuv5JTM3Ovboh7
+ kWoWtaaNFE0jhU/lRRbkW1snCRg0iCXAsS0KijAYv4Or+NAKatejJjXXFTDeQpzD2yvceIdFf/9
+ UbrQ4ok5iEzOo8Y2nOW7js9Y/2LTHEd75
+X-Google-Smtp-Source: AGHT+IE2h7amaLM2DhpAVCdo4sjwCI/GxNPfDQ1kDCgLRSb3kpaLto24cx+iKlUY6LNYM6BJvYdfTV89Z6efnKIFRcc=
+X-Received: by 2002:a05:6512:15aa:b0:52c:dac6:107 with SMTP id
+ 2adb3069b0e04-52e8272d8c9mr4378131e87.3.1719917598052; Tue, 02 Jul 2024
+ 03:53:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240627112232.99507-1-mikhail.kshevetskiy@iopsys.eu>
+ <CAOMZO5CcOA6-w8QB3radO4NXUYNfWNEzs16ACf1yvvce6b2s-Q@mail.gmail.com>
+ <aa997893-82f0-4a6a-b2da-b8e542dea5a9@genexis.eu>
+In-Reply-To: <aa997893-82f0-4a6a-b2da-b8e542dea5a9@genexis.eu>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 2 Jul 2024 07:53:06 -0300
+Message-ID: <CAOMZO5DDECP2x5Mgi56T=BFdfJ+hyR8FHYDnhm5ZdzF0bGDA=A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] spi: soft_spi: fix miso gpio property name
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Fabio Estevam <festevam@denx.de>, 
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ William Zhang <william.zhang@broadcom.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,34 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mux flags (u8), div flags (u8), and gate flags (u8)  are not the clk
-flags (unsigned long). They have different meanings
+Hi Mikhail,
 
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
----
- drivers/clk/imx/clk-composite-93.c | 2 --
- 1 file changed, 2 deletions(-)
+On Tue, Jul 2, 2024 at 6:50=E2=80=AFAM Mikhail Kshevetskiy
+<mikhail.kshevetskiy@genexis.eu> wrote:
 
-diff --git a/drivers/clk/imx/clk-composite-93.c b/drivers/clk/imx/clk-composite-93.c
-index 6d71c0c03ff..34026c5e42f 100644
---- a/drivers/clk/imx/clk-composite-93.c
-+++ b/drivers/clk/imx/clk-composite-93.c
-@@ -103,7 +103,6 @@ struct clk *imx93_clk_composite_flags(const char *name,
- 	mux->mask = CCM_MUX_MASK;
- 	mux->num_parents = num_parents;
- 	mux->parent_names = parent_names;
--	mux->flags = flags;
- 
- 	div = kzalloc(sizeof(*div), GFP_KERNEL);
- 	if (!div)
-@@ -120,7 +119,6 @@ struct clk *imx93_clk_composite_flags(const char *name,
- 
- 	gate->reg = reg;
- 	gate->bit_idx = CCM_OFF_SHIFT;
--	gate->flags = flags;
- 
- 	clk = clk_register_composite(NULL, name,
- 				     parent_names, num_parents,
--- 
-2.43.0
+> This is exactly what the patch did. Actually it just fix a miss-print.
+> Other properties already have a proper fallback.
 
+Ah, you are right.
+
+I introduced this issue in commit 2e9fe73a883a ("spi: soft_spi:
+Support the recommended soft spi properties").
+
+Please add a commit log explaining this.
+
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
+
+Thanks
