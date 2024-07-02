@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5F3C30658
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 17:00:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20497C30658
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 17:46:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96F2A883AC;
-	Tue,  2 Jul 2024 19:00:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2C100886A0;
+	Tue,  2 Jul 2024 19:46:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pSE046xr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mo8rJQOJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22B8D883AC; Tue,  2 Jul 2024 19:00:33 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 399FE886A4; Tue,  2 Jul 2024 19:46:50 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBF25883A9
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 19:00:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10BC98836C
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 19:46:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-36703b0f914so2839545f8f.0
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 10:00:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-700cd43564eso2221395a34.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 10:46:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719939630; x=1720544430; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=djvdJnmDOeXWIocbLWvF02El5tJr8Fngi76wloKtEd8=;
- b=pSE046xrzCyCmB4MEJl2Pk/vH1n79Obg+upznd3+5r7snOKi/8pVnq8JCrY3A5X/Gw
- ULmcnONHSpAUFxTTzjDrZ2qfYBqnMtYCX1OjHicZ8QLwbxGQXEl/vErTh+CvbLWUMMym
- G3OsVglxBHG81ifnAmJGRfQ9KIO2gRYxxvyV3y/x/RkhHgc/37MtcQScssa2BU36+MjR
- RtoGEUcGrEDfGbwNn+mFiJLCTB5PjgaHjT0kPentt2QFQLaGDmkoiHuJo/vj52/kVa8M
- +qo4FT91pR+DJVMqqNc3pYXigWYJEdSQOW7dr6xSinQGfDxCDPaqyDFmezs6QTTALOCx
- nDUQ==
+ d=konsulko.com; s=google; t=1719942407; x=1720547207; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bOKz7Jti5jv7GLCdx2Rfy9t/FcPSGjcOCN6qZMuRUiE=;
+ b=mo8rJQOJc/0jlxkhMUIpiLl3tlyUkdaCIvbG+/9zQ1wwbREL3n+x4SmXj14m/Rw48b
+ BW5OP0Fe+EuRi3QGOzWVzx4pX1xUSkIV36uNehmtnFQrGnmyT0VDBpHWhqB2vbTgapBm
+ 1KmAVP861g1RwcvyIVuWLJWvjClo1dOcSp35A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719939630; x=1720544430;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=djvdJnmDOeXWIocbLWvF02El5tJr8Fngi76wloKtEd8=;
- b=UtWmJZdw7ZpNuJvlV1ygDnKaVt0cMUqPIEm+ccsr2b/vvtdLnR+CRYn4MIo/gW4iyl
- kGJzubMsNlqMd9Ybh0wcGJF45KWfecB69DjHR5VU1YBiKm2YgWoPB59N1Alps0yO54ww
- BHj58AKq3FXfIzetUiZhkcre9ut3qBjGHuu2bA2LMi/7ZGa1nGI+ZvRl0x+JGs8/zU0E
- 6dtm+J2ap+TD1VAdq2hCIA9RYYnUURD0oUtgEJBm2A0SrnK8NsiIeBAkrGuXahhjEnU4
- 2phBMc2Vim47qR+S9rfgRNKv9qK9rmijYMAXVvov8D/3sltIMlTSYpxbcT8r+rC1qg94
- i6nw==
-X-Gm-Message-State: AOJu0Yz8euftvlPD4onx4nNv9WE0IPoiO3WEZelaKBOHoPzcaHEn5Clw
- 6PHggF0+ju72DasbVNXFG7KLuk0ng5mZzQQByRYTWTyvrJL4Vk5TzNyN7zsspvLQ99gTauvNlVz
- +Gm0=
-X-Google-Smtp-Source: AGHT+IGS/C4zZ14GQK9Rm5mPTVuA7H9gLmKqQBzGQklXRJq6mPF6LUtTfO2OY+TlsKCrkyjKedP94Q==
-X-Received: by 2002:a05:6000:1f8e:b0:366:e09c:56be with SMTP id
- ffacd0b85a97d-36760a63050mr13190060f8f.6.1719939629879; 
- Tue, 02 Jul 2024 10:00:29 -0700 (PDT)
-Received: from artemis2.broadband ([2a0a:ef40:ea8:cd01:9aec:1017:ab08:a7e5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36784e3e0f5sm2532832f8f.11.2024.07.02.10.00.29
+ d=1e100.net; s=20230601; t=1719942407; x=1720547207;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bOKz7Jti5jv7GLCdx2Rfy9t/FcPSGjcOCN6qZMuRUiE=;
+ b=AXclS8rw+2rV1dYA0heSMoDmo6/TEoNgnCuwF0Xb+zFcco7gpeChJob2JFohc0jNBL
+ KZaVrtdRNOL3Cw2tGmt+ZCxuPE/0nH3Vqcd6idAgQdZydt2qu3fMGPiE89udRRccd/kQ
+ Y9xcfpZsOUH+0NytwjK+SPhY2WFE4tZAHP5aALzti69mJ4EsAKOeyHQ5PSc9YH0SDOCh
+ k2X152cp7m5ktszQ4A0sR/GjFJe3K44DbyqUSzxwIZVtoZAHTEs+y95MNbeNwsmrTuF3
+ caUiLjofh3RA2atiy+3s4s0mq+72Wq8wAIi/SGxsbqjSueL054hOub6xW9YgIGClYQTB
+ ilQg==
+X-Gm-Message-State: AOJu0YwkJ58e7mJTJLuK9mvQwiZAHjhkofWysdtKPhG6dKEu7f/03o84
+ 4uYDDy8alDU0HQTKnpDHDNbk8Xe6RuLpy5ZJPGaZR+GSbjgGccW2oG1jytWXjMo=
+X-Google-Smtp-Source: AGHT+IF5NGm/UBmyLvaedtcuOUthrUpUvFEQzPK5v/j84KPZ7YdxYXD5O7ZxeRhREJuodbrTRjeo2w==
+X-Received: by 2002:a05:6870:1609:b0:259:89a5:440d with SMTP id
+ 586e51a60fabf-25db347d081mr8019570fac.15.1719942406618; 
+ Tue, 02 Jul 2024 10:46:46 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-45.totalplay.net.
+ [189.203.106.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25d8e33b73esm2303498fac.37.2024.07.02.10.46.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 10:00:29 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] sandbox: Fix LTO to work with STACKPROTECTOR
-Date: Tue,  2 Jul 2024 18:00:09 +0100
-Message-Id: <20240702170009.484961-1-andrew.goodbody@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ Tue, 02 Jul 2024 10:46:46 -0700 (PDT)
+Date: Tue, 2 Jul 2024 11:46:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: Re: [PATCH v2] binman: Update cbfstool
+Message-ID: <20240702174643.GP38804@bill-the-cat>
+References: <20240702163729.2674096-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gyB25Nke171M7vBi"
+Content-Disposition: inline
+In-Reply-To: <20240702163729.2674096-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,35 +93,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the STACKPROTECTOR symbols to the script that generates the
-symbols that should not be removed by the use of LTO when linking
-a shared object. This prevents a fail to build due to link errors.
 
-https://source.denx.de/u-boot/u-boot/-/issues/35
+--gyB25Nke171M7vBi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
+On Tue, Jul 02, 2024 at 05:37:28PM +0100, Simon Glass wrote:
 
-Changes in v2:
-- Made the new match more specific and added it to the grep run rather
-  than run grep twice
+> Update to a newer version of this tool, 4.22.01. This runs OK with the
+> current binman tests and matches the one in CI.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
- scripts/gen_ll_addressable_symbols.sh | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-diff --git a/scripts/gen_ll_addressable_symbols.sh b/scripts/gen_ll_addressable_symbols.sh
-index 13f670ae0e..fc5ee0e9c0 100755
---- a/scripts/gen_ll_addressable_symbols.sh
-+++ b/scripts/gen_ll_addressable_symbols.sh
-@@ -11,5 +11,6 @@
- set -e
- 
- echo '#include <linux/compiler.h>'
--$@ 2>/dev/null | grep -oe '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*' | \
--	sort -u | sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
-+$@ 2>/dev/null | grep -oe '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*' \
-+	-e '__stack_chk_guard' | sort -u | \
-+	sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
--- 
-2.39.2
+--=20
+Tom
 
+--gyB25Nke171M7vBi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaEPP8ACgkQFHw5/5Y0
+tywIlwv9EFD4IVgR9W0Bln7GI19sluDYkVaOfWl3wj7BrFs6YTwdUftltn+c1tvQ
+u2LmhjEss1mDijOq1f+IuTfAPFzGFueCNk13Q+LP9L3q1tSsEAvT4jjQEYoiqZd1
+sGb1ws24sxGRL4Sfs6WaLyfD8znc1ZNrtAQaUARsl8sbd4URoQwuurFXG18IkLzY
+QclSLbXBTygXYyMDQRt/fVj7q2pQoEogmSYDjAv18br6eoviXO/Hmx9WrFaUzlaN
+aSEhKyx98MbcFcKQP1+CK/pPsBESVMVAwoPfQccdgJ0SGfGnYtA40F7gsb360SiU
+lRyawR+ma/Zy9UuByRo+2PzJm3s2yYjuVbVugNLuJdV5yHJkUPJjEey5PRzHkq/R
+CCPFB6FfLneNUZm7qbzNSncdOWggg4eKrmktmHNhmDSODk+ac4PiBsSHzGoh6wFQ
+31zJwZhxovca4SMt4zSDZ2mgWn/fQXDrviMUqS2RrTpfrxcW/2sm+AHeEddd5xrv
+ckeXeDdD
+=xhY1
+-----END PGP SIGNATURE-----
+
+--gyB25Nke171M7vBi--
