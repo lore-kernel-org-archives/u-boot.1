@@ -4,78 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA5F1C30653
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jul 2024 23:35:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E784C2BD09
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 01:14:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C319A88655;
-	Tue,  2 Jul 2024 01:35:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 478E88840F;
+	Tue,  2 Jul 2024 03:14:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TmUTPJtl";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ap9AA9U6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A700886B1; Tue,  2 Jul 2024 00:00:22 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F3D0E881E7; Tue,  2 Jul 2024 03:14:54 +0200 (CEST)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2409::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C8AC886BB
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 00:00:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FDB7881E7
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 03:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-52cdf2c7454so7388130e87.1
- for <u-boot@lists.denx.de>; Mon, 01 Jul 2024 15:00:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719871218; x=1720476018; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UHMt2ncuTtHonTuLdimx1zxT37IDvLAX3BAnYG5Y78Q=;
- b=TmUTPJtlby4y2IE2GXaj0L8tZUpt/V7xmmxI8SkJxRmYFzFBF8iVXJMeL1cvbU8s1S
- N1Bt0kVz+WNCgaZv7I1arMBF3YFrf9QicElSxSQ1gx8nQfP9FfT4bonsPUJmbaTK/5q8
- 7clL3jgdljVs1Vi8g2Jq+pF4184qjOLx2doq6F7viEDoi/DSdfKmSjbou1IvIkuR7Fg3
- QvdHE5pidLKUJ366i0DR7c0V1G+l/WtjKfAssQFfo2h9qKiq646Liker1sUbo7+qofvS
- gbNbvlGpwyZYBNr2vvw75reZMtLR3wEAQ7aYyldZHrKkCcAjgZWuALsToLM/Uty3LL+M
- s5Yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719871218; x=1720476018;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UHMt2ncuTtHonTuLdimx1zxT37IDvLAX3BAnYG5Y78Q=;
- b=YuseJK9p8tbHFPLo+d7c3YtgnVOp2X7fTDeIx5hL3lkbe2oAQJNHWF/SGH48pxKsOb
- BE0B9+y5Tow8HvkdnuWW4+eVeCfx3Ly9JuDKORdjB9zo/Kp8k2Vt3paqWKsfwv89jk06
- iEIlHdpyNpHPStj3zOTCxP6Yw4FJJMt489JGSE3xx5gLYXnxJyjtt32++jrEE181b03/
- 5mZqd4E3rLNWynrPCQA4CgjBNe8ejZvaA60xF8wPevVnM3fcYPDJ8s/iLeBUo1cQfHo0
- 7AOz+gwQkRvNrvHyyrgEIqFz8A4v+5RCHkM0VG9UCkGuSa53hImuKUyPjl0w/iM+02To
- wuFQ==
-X-Gm-Message-State: AOJu0Yxmv07PwA0vGO3m5u6i8Fp7/N1Ve+nqd9m1H591rKIjG5ZDnFRQ
- Kv7UEiIdtnkQjp9x8weMVrZStUA1ip+/lh/AyKROPjDGoDwwlJJ1
-X-Google-Smtp-Source: AGHT+IEsodzegFmUhI8K3+YoXe+Iw19w6LPfPwhHOb0WtFE0kc9wWZFzkZAyRNpe2G0jJArq6DTVaA==
-X-Received: by 2002:a05:6512:3b12:b0:52c:e3bd:c70e with SMTP id
- 2adb3069b0e04-52e8264aec7mr5636251e87.6.1719871217413; 
- Mon, 01 Jul 2024 15:00:17 -0700 (PDT)
-Received: from 9a2819e34573.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
- [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72aaf63981sm358079366b.82.2024.07.01.15.00.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jul 2024 15:00:16 -0700 (PDT)
-From: Lothar Rubusch <l.rubusch@gmail.com>
-To: marex@denx.de, simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
- trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de
-Cc: u-boot@lists.denx.de,
-	l.rubusch@gmail.com
-Subject: [PATCH] ARM: socfpga: fix broken function call for arria10
-Date: Mon,  1 Jul 2024 21:59:27 +0000
-Message-Id: <20240701215927.285961-1-l.rubusch@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ spf=fail smtp.mailfrom=Sam.Povilus@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=a9pBJmC0vYIDvZAcvdYqqSSBoNDsuPkhptD4c/wv7gQMOh3/7CYyuVYXiVhHquKgo7fpCaT4lqely+h/40u1vdyu2MGhZGG5+9I8xDJrg7t43m2acHuHCsQWtFmfrKe0OJbjLuSt5TNF/LlV1y9T68se+5NX4L/Y5sABiVI8x1HE4hcBtsu0Rw6Q5muDg1+P96SXw5aVWjYvcC9kdQy7LBl163GBhZWVVTaFB9+3AiAe1bkd/kCeinhrsq2vlUM4jGbVocth1QTzvdbZPrZKM+7lV5a9kZkvDkXEqvIvIuFhkx4z4xsKmQqasZg6vW9joGRm128Q03D3otBSFwI+bg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PpFUg079Ws2GFE3BoByjHc7cwcfG2uJSn02ByiR1W+A=;
+ b=gTxitg9E+pOkv/qbEGBxjGyyW5RM1zpYttNL6r9HyGReRR9t3wLkUaGw5Qaec7gaC9MEbelIQWzs+glPt3VhUPa3qdh4tvuB+d+T7Tk0iUqueCjiR1oJ2QBCltWNj+qeLnicR2dSZqjYlpKxYRD07vNROcbayDQEPf4bkVL4n9J1+voh/CHOsXod680fXCJ9UapwYxMV0IY7rZNA8puCbkqARmBq8ear3sq63lefNtylBU06/M/RWqDvwhP+fhPTewIG4DiPKB5KrjtfqmSxbsYjGucjWN5Iweu528FGJmVqmzpkXMkBQUqfcMihyWKgZzpcaiouZ2sGvtMgt6AzMQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PpFUg079Ws2GFE3BoByjHc7cwcfG2uJSn02ByiR1W+A=;
+ b=ap9AA9U6eOMUR/043orhJdptb11Do+j6o4OYnaOTYJ6WXKOR9t948Ut7kBcAcQihJbw5bA17mq5D4GBJwhVOQ75eMCMLB2ND1jU+7TQep/tYSrbl7Qd8N51TtXa2eFjB5dByEj0K7CikRuGP8/Wemvh/yi+klcSIwP5NTmx0yfQ=
+Received: from BN8PR03CA0024.namprd03.prod.outlook.com (2603:10b6:408:94::37)
+ by IA1PR12MB6531.namprd12.prod.outlook.com (2603:10b6:208:3a4::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.29; Tue, 2 Jul
+ 2024 01:14:49 +0000
+Received: from BN1PEPF00004688.namprd05.prod.outlook.com
+ (2603:10b6:408:94:cafe::4e) by BN8PR03CA0024.outlook.office365.com
+ (2603:10b6:408:94::37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.32 via Frontend
+ Transport; Tue, 2 Jul 2024 01:14:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN1PEPF00004688.mail.protection.outlook.com (10.167.243.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7741.18 via Frontend Transport; Tue, 2 Jul 2024 01:14:49 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 1 Jul
+ 2024 20:14:48 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 1 Jul
+ 2024 20:14:48 -0500
+Received: from xcoapps69.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Mon, 1 Jul 2024 20:14:48 -0500
+From: Sam Povilus <sam.povilus@amd.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <xypron.glpk@gmx.de>,
+ <u-boot@lists.denx.de>
+CC: <sam.povilus@amd.com>, <git@amd.com>
+Subject: [RFC v2 2/2] doc: add missing table of content links
+Date: Mon, 1 Jul 2024 19:14:40 -0600
+Message-ID: <20240702011440.2888308-3-sam.povilus@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240702011440.2888308-1-sam.povilus@amd.com>
+References: <20240702011440.2888308-1-sam.povilus@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 02 Jul 2024 01:35:34 +0200
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004688:EE_|IA1PR12MB6531:EE_
+X-MS-Office365-Filtering-Correlation-Id: 17663ab2-88b9-4596-d78b-08dc9a345e62
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wD2KrkN12opl26D4oEodXfFp6xGp/O1TY61GZF/WQl/cqtX6eDSFt0VaG0t/?=
+ =?us-ascii?Q?09x2FR34EFP/ph3ic7ldXA3pGAR5Klk49QZvP6uks6EwaimdRP5rh7KB0A58?=
+ =?us-ascii?Q?VlRMhd9ssdCxOV1N44ekWHXGswmmaTLuW1pVz2j0PNoMTg8NNuJr/ifMAgGu?=
+ =?us-ascii?Q?rRfznlivpNDLuQo4RFqkSaJ6fxvHAC1ru4xGRWYaFIvOd8btoU0nRej/wu6c?=
+ =?us-ascii?Q?zYIx9KoTDN93mTfeQP/BIdJmJMPhaBW46MLJAfv4Pjnr/7kzNrfLVw0QDlF3?=
+ =?us-ascii?Q?M7D3qeXSWF/M/uCaeqp1+2wdauM75tdqV1baqViqtRRSx8tg5usivK65vj5S?=
+ =?us-ascii?Q?48zY4ClT+w+PES4iTxsDSaCGWRD8LW+zbcmghnP0KCC3Cwk9c3+gjbSu29Pr?=
+ =?us-ascii?Q?TPZYXAp6OGPH0ipUvY6PLk/PRGpofRrnzNjFfKN+2bSEUVObEZgQhnTyMD2+?=
+ =?us-ascii?Q?p4Uuny3zISFpfbs7g7gaGtUryyz6AKMn4iQ/xdRPdYYw/Dj+j33QyJAywj8W?=
+ =?us-ascii?Q?p3MYFIf4pbbtReXIwIcrwYk9pmfl0U7Oml3HuSmfjU9fSWjK/pi4RmvjlALT?=
+ =?us-ascii?Q?HzL4SS/AvpVtwoyJP4Oz83EZQlnb7CQPd4sXa5MmVdercUKD9N03B4Dp8F/y?=
+ =?us-ascii?Q?YkBbcU5fnUdhd4nDWl+ThPWnUqwq0K4aAJ4inprV8Yna7wbQeCh0mjtRk/aU?=
+ =?us-ascii?Q?cJoWlgOTWLWnnAb1+QjUkJ9qbsEftey2SnQ2Xr2qAH6FobmuNd6JdaIp1mom?=
+ =?us-ascii?Q?PhMaeNLKrGIYwF1oGsguY40+ZsrwJXJc43M3P+vg/AXOIzNfVC/30IUe3nmy?=
+ =?us-ascii?Q?37t84FLHAeLaEeAAkwAbOw3pzohEFz8vn9d4u0wGLupYYRpYfKm9Kgxk1QW7?=
+ =?us-ascii?Q?04KD5csC2fE5cFbsa/kz9JEKdRb/4LzeJS+QEiz0hh9TNtZPq3St9qvODPKQ?=
+ =?us-ascii?Q?zLB8XY6J9CnLbTWQ1MzS4iMYUaCQ1rQhKdVrwblOHZldDeEK42lxykGerSp+?=
+ =?us-ascii?Q?f09nbl3vSSyxPebsTGDnVMez8cvFxsuMtNP/PEis/JFtATQUA0okWwizlgp/?=
+ =?us-ascii?Q?IFKOCrL/m0GGE+VhYUht1RQAZ428mI7v9uQ3vDuidcEJx1CZD6gELn9oqMSn?=
+ =?us-ascii?Q?lJFWd8yOSunovREA4i9cHvRXAG7r3m4+0e0ZQWWAnJxVPvZEgh1WHx88ycII?=
+ =?us-ascii?Q?wL/498e8s3nFKWGhEhrIV4/dV2qkVXa1acwretNlkDk/50XhguvSaeayGeCl?=
+ =?us-ascii?Q?hbfkBzHi2P+FsE7HMI6PwrfMXQNp4hmnAp2WtwcGxsRJ1JGb66QRYwVteRGQ?=
+ =?us-ascii?Q?tuVbGS+TWGaXvd09Vvnq3R4Bt8Bf2NE2+zHFHRCjzWzwAUIR+Oprhlw3oaFW?=
+ =?us-ascii?Q?Ts6Eyc0ZyhqE9d+TxnOM00o/acPVM/9iMqvobxSD0hHRtbwb269sFwKNw1RV?=
+ =?us-ascii?Q?lGhD6fFc/aouftqH8lc0QcMWWAIlTueT?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2024 01:14:49.1499 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 17663ab2-88b9-4596-d78b-08dc9a345e62
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004688.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6531
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +149,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove obsolete arguments in the function call. The call's argument list
-differs from its more recent definition. This breaks compilation of the
-'socfpga_arria10_defconfig' target, with additionally enabled:
-
-  CONFIG_CADENCE_QSPI=y'
-
-The removed arguments are obtained from device-tree declaration.
-
-Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
+Signed-off-by: Sam Povilus <sam.povilus@amd.com>
 ---
-The patch makes the problem disappear. While messing with some old
-Intels, it looked to me as if this usually turned off code region of
-the misc_arria10.c still contains legacy arguments in the call. Thus
-broke my compilation. I'm unsure. Please verify.
----
- arch/arm/mach-socfpga/misc_arria10.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ doc/usage/fit/index.rst | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
-index 93c9e8b0..5c782f6b 100644
---- a/arch/arm/mach-socfpga/misc_arria10.c
-+++ b/arch/arm/mach-socfpga/misc_arria10.c
-@@ -211,11 +211,9 @@ int qspi_flash_software_reset(void)
- 	struct udevice *flash;
- 	int ret;
- 
--	/* Get the flash info */
-+	/* Get the flash info, speed and mode will be read from DT */
- 	ret = spi_flash_probe_bus_cs(CONFIG_SF_DEFAULT_BUS,
- 				     CONFIG_SF_DEFAULT_CS,
--				     CONFIG_SF_DEFAULT_SPEED,
--				     CONFIG_SF_DEFAULT_MODE,
- 				     &flash);
- 
- 	if (ret) {
+diff --git a/doc/usage/fit/index.rst b/doc/usage/fit/index.rst
+index af2e481212..904f1593cb 100644
+--- a/doc/usage/fit/index.rst
++++ b/doc/usage/fit/index.rst
+@@ -16,3 +16,23 @@ images that it it reads and boots. Documentation about FIT is available in
+     verified-boot
+     beaglebone_vboot
+     overlay-fdt-boot
++    beaglebone_vboot
++    howto
++    kernel_fdt
++    kernel_fdts_compressed
++    kernel
++    multi
++    multi_spl
++    multi-with-fpga
++    multi-with-loadables
++    overlay-fdt-boot
++    sec_firmware_ppa
++    signature
++    sign-configs
++    sign-images
++    uefi
++    update3
++    update_uboot
++    verified-boot
++    x86-fit-boot
++
 -- 
-2.25.1
+2.34.1
 
