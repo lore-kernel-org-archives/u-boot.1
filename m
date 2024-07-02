@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 579FBC3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 14:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0ECC3064D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 15:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B18FD8854A;
-	Tue,  2 Jul 2024 16:01:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 78579883B6;
+	Tue,  2 Jul 2024 17:38:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SonNQrvI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FR2IBbVO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4550287FED; Tue,  2 Jul 2024 16:01:02 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8EE6A8852D; Tue,  2 Jul 2024 17:38:14 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F237B885E4
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 16:00:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADE7988495
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 17:38:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8C56B61DC2;
- Tue,  2 Jul 2024 14:00:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63175C2BD10;
- Tue,  2 Jul 2024 14:00:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1719928857;
- bh=hkbKKxgTZg3fW1cQsDzyu1L90hGhQrstuaZZEPC0cIE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SonNQrvILzihcxJG2jL3UEloSkFO7Xk2hOFwRlOFnJglEIEpnTKKgSGhI1Jn4Ra+1
- rvhAz9g4WKfhYgeUeLa9/JcjoqfMF5mecJx9qsbl8xeUm0jszSeI12Hn7tsS+w4z7S
- cSlFvPOyqqZj97mFca5+slZnkjQ/+uvsY1VohcO5WAkaBFQreIm9/fdmiL0pTvvRM0
- O/MCnofymBdnKd/QpSIEXATi+fA9mPPurGmLSIo3bg67kEEk0bZPxPNilZA202qF3c
- RpXNA7Eqd12euhfo+lHAio3k/K4yNpBovZcQdqiF6guHey+4KAFhif3n87nK7HzxFr
- XGHBa+mQ+WDKQ==
-Message-ID: <2a0e66d8-95d4-42be-916e-fc620dac6956@kernel.org>
-Date: Tue, 2 Jul 2024 17:00:52 +0300
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3678aa359b7so452185f8f.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 08:38:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1719934692; x=1720539492; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MDdylNRAMaJwbN8WvRyEeOB+toBEHdcPGadcMVzf4Ic=;
+ b=FR2IBbVOsXPHwQHfjeSbMbLPgjL9DKUsTZJ5oOqTvSbhq8Gw/qfgX5GTjxa4vnvObz
+ Iwq+tIF5APtujs4EzZjehP/f+RIZtC8JNv+S9CZbXoYII2T5WoakwgHCuSmFBhSVtJcv
+ TFxLO0ytyB/WYeNgYl2pyWWD05CXrd2tp26/4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719934692; x=1720539492;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MDdylNRAMaJwbN8WvRyEeOB+toBEHdcPGadcMVzf4Ic=;
+ b=DCUy/GbqHT7iDY66hWOWkZUuqR3NdBrgcsCbSkVbxjwIyotQRBSdUx5b47DXnYoCA6
+ 1Pu9/n8SIZt4bKRI+oC2WXqUSFlVWAFPDrygeBdPAvnayARLTU/MpjJRladgY9XQ+U+Z
+ mgI/5wYD4eOnSODMnRDNw70W36EFxmSc9VP+iVRafW4HY/ums+QHU+eX7XEWngLDB+Av
+ 3WnJmdnX2LEK29r7YsQedGcb2VhdfsAaE5a7RO1qPX/KLh89ych2wqcscqrOVlgKsMXk
+ nh6okgtKFuEPvYblVih+whLrzJ3CxuyRI+fW0jk7NhiuQ53oRcQe7QRKfC0senMf4INf
+ hj6A==
+X-Gm-Message-State: AOJu0YwxCP3LeZsgwJC45jjDJjGED4NAo62mQ982l6jnkIzyuY9LTW9r
+ AFVFfYF19Zg2e6Ck7x/OKm6GDzjgMJI6zq1X4fP0AW9MhaBLKDsE7IgLzxoIc7U0mv2xKEMPMkw
+ =
+X-Google-Smtp-Source: AGHT+IE1C8kWZeYVYI14JmCcInFMyAMVDNrsHyHWAVKGeL54DHZkPOg+jJ2qLeA6Tm8a5p+6P1ai1g==
+X-Received: by 2002:a5d:47c3:0:b0:362:69b3:8e4d with SMTP id
+ ffacd0b85a97d-36774f89a60mr9708616f8f.25.1719934691780; 
+ Tue, 02 Jul 2024 08:38:11 -0700 (PDT)
+Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3678c379cc6sm1235700f8f.49.2024.07.02.08.38.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jul 2024 08:38:11 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Fabio Estevam <festevam@gmail.com>,
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH] mx9: Correct repeatable build error
+Date: Tue,  2 Jul 2024 16:37:39 +0100
+Message-Id: <20240702153739.2651815-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: cdns3: continue probe even when USB PHY device does
- not exist
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: marex@denx.de, trini@konsulko.com, mkorpershoek@baylibre.com,
- u-boot@lists.denx.de, u-kumar1@ti.com, danishanwar@ti.com, srk@ti.com
-References: <20240702120724.368102-1-s-vadapalli@ti.com>
- <f75621af-cfcc-4909-bb79-dbbc9aeb30e2@kernel.org>
- <a7f7fccd-6c97-4617-be71-e5986e359adb@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <a7f7fccd-6c97-4617-be71-e5986e359adb@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,136 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+For some reason every second time imx93_11x11_evk is built it gives an
+error:
 
+   make O=/tmp/x BINMAN_ALLOW_MISSING=1
 
-On 02/07/2024 16:36, Siddharth Vadapalli wrote:
-> On Tue, Jul 02, 2024 at 04:20:43PM +0300, Roger Quadros wrote:
->>
->>
->> On 02/07/2024 15:07, Siddharth Vadapalli wrote:
->>> Prior to commit cd295286c786 ("usb: cdns3: avoid error messages if phys
->>> don't exist"), cdns3_probe() errors out only on failing to initialize the
->>> USB2/USB3 PHY. However, since commit cd295286c786, absence of the PHY
->>> device is also treated as an error, resulting in a regression.
->>>
->>> Extend commit cd295286c786 to treat -ENODEV as an acceptable return value
->>> of generic_phy_get_by_name() and continue device probe as was the case
->>> prior to the commit.
->>>
->>> Fixes: cd295286c786 ("usb: cdns3: avoid error messages if phys don't exist")
->>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
->>> ---
->>>
->>> Hello,
->>>
->>> This patch is based on commit
->>> b4cbd1a257 Merge tag 'u-boot-amlogic-20240701' of https://source.denx.de/u-boot/custodians/u-boot-amlogic into next
->>> of the next branch of U-Boot.
->>>
->>> Regards,
->>> Siddharth.
->>>
->>>  drivers/usb/cdns3/core.c | 4 ++--
->>>  1 file changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
->>> index b4e931646b..5b3e32953e 100644
->>> --- a/drivers/usb/cdns3/core.c
->>> +++ b/drivers/usb/cdns3/core.c
->>> @@ -338,7 +338,7 @@ static int cdns3_probe(struct cdns3 *cdns)
->>>  			dev_err(dev, "USB2 PHY init failed: %d\n", ret);
->>>  			return ret;
->>>  		}
->>> -	} else if (ret != -ENOENT && ret != -ENODATA) {
->>> +	} else if (ret != -ENOENT && ret != -ENODATA && ret != -ENODEV) {
->>
->> With this change we will not error out on a genuine error condition
->> that produces ENODEV.
-> 
-> It isn't necessarily a genuine error condition which is why it was a
-> "dev_warn" earlier for any error. If the previous stage has already
+It seems to sometimes skip generation of the .cfgout file and then
+eventually Binman complains:
 
-Earlier it was clearly wrong to warn for everything.
+   ValueError: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
+      spl/u-boot-spl.cfgout -T imx8image -e 0x2049A000
+      ./mkimage-out.spl.mkimage': Fail open first container file
+      mx93a1-ahab-container.img
 
-> configured the PHY, or if the PHY present in the device-tree in Linux is
-> not the same as the PHY being used at U-Boot (USB 2 PHY at U-Boot vs
-> SERDES in Linux), then it isn't an error.
-> 
->>
->> If PHY phandle is not present the API should return ENOENT right?
->>
->> static int __of_parse_phandle_with_args(const struct device_node *np,
->>
->>         /* Retrieve the phandle list property */
->>         list = of_get_property(np, list_name, &size);
->>         if (!list)
->>                 return -ENOENT;
-> 
-> The PHY phandle is present, but it isn't the one being used by U-Boot.
+Correct this by using if_changed instead of if_changed_dep
 
-OK. commit cd295286c786 was only addressing the case if USB PHY node is
-not present (-ENOENT case). So there is no regression there right?
+The only reason this hasn't come up in CI is that buildman did not retry
+failing builds of current source, but now it does.
 
-> The device-tree could be pointing to SERDES as the PHY, since Linux uses
-> USB with SERDES. So the entry exists, but the error is -ENODEV rather
-> than -ENOENT.
+Note: The logic in this Makefile should be moved to Binman, e.g. these
+warnings duplicate Binman functionality:
 
-If the device tree contains the PHY then it should be initialized and
-any error initializing it is an error condition we cannot ignore.
+  WARNING 'bl31.bin' not found, resulting binary may be not-functional
+  WARNING 'tee.bin' not found, resulting binary may be not-functional
 
-> 
->>
->> Can you please check and point where the -ENODEV error is coming from?
-> 
-> The sequence of function calls is as follows:
-> generic_phy_get_by_name
->   generic_phy_get_by_index
->     generic_phy_get_by_index_nodev
->       uclass_get_device_by_ofnode
->         uclass_find_device_by_ofnode
-> 	  -ENODEV
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
- uclass_find_device_by_ofnode()
-...
-        ret = uclass_get(id, &uc);
-        if (ret)
-                return ret;
+ arch/arm/mach-imx/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-        uclass_foreach_dev(dev, uc) {
-                log(LOGC_DM, LOGL_DEBUG_CONTENT, "      - checking %s\n",
-                    dev->name);
-                if (ofnode_equal(dev_ofnode(dev), node)) {
-                        *devp = dev;
-                        goto done;
-                }
-        }
-        ret = -ENODEV;
-
-
-This means the class driver was not registered yet?
-Do you know why that might be the case?
-Was the SERDES PHY driver enabled? Are there any error there?
-
-> 
-> In the above sequence, the device-tree contains SERDES PHY as the USB
-> PHY since Linux uses the same and U-Boot's device-tree is in sync with
-> Linux's. However, USB at U-Boot will use the USB 2 PHY. So one option is
-> to remove the SERDES PHY from USB node to have it fallback to USB 2 PHY.
-
-Ideally we would want u-boot to behave like Linux. If USB3 can be supported
-it should be made to work on u-boot as well.
-
-Any reason why USB3 cannot work on u-boot?
-
-> At the same time, if the previous stage has configured SERDES for example,
-> it might not be necessary to reconfigure SERDES. -ENODEV might be an
-> acceptable error in such a situation as well. Please let me know.
-
-Let's not assume error codes can be acceptable.
-
-There is patch on Linux to not re-initialize SERDES if it was already configured
-by previous stage. Maybe we could use something similar on u-boot?
-
+diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
+index ef0caed3f7f..640e332e78b 100644
+--- a/arch/arm/mach-imx/Makefile
++++ b/arch/arm/mach-imx/Makefile
+@@ -227,7 +227,7 @@ flash.bin: MKIMAGEOUTPUT = flash.log
+ 
+ spl/u-boot-spl.cfgout: $(IMX_CONFIG) FORCE
+ 	$(Q)mkdir -p $(dir $@)
+-	$(call if_changed_dep,cpp_cfg)
++	$(call if_changed_,cpp_cfg)
+ 	$(call if_changed,imx9_check)
+ 
+ spl/u-boot-spl-ddr.bin: spl/u-boot-spl.bin spl/u-boot-spl.cfgout FORCE
 -- 
-cheers,
--roger
+2.34.1
+
