@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F687C3064D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 678B0C30658
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jul 2024 13:31:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBE3C885E4;
-	Tue,  2 Jul 2024 15:30:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AFD888096;
+	Tue,  2 Jul 2024 15:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PLZ0TOlm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HsEU+Y8Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03AF1884FB; Tue,  2 Jul 2024 15:30:48 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 889C888712; Tue,  2 Jul 2024 15:30:49 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CC4B880AE
- for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 15:30:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81B9387CF8
+ for <u-boot@lists.denx.de>; Tue,  2 Jul 2024 15:30:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a72585032f1so458201166b.3
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 06:30:46 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a7241b2fe79so458178666b.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 06:30:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719927045; x=1720531845; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1719927047; x=1720531847; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=nScEoNskmv45Lt2tjO7j1jnaqGA5YnHfESShhKL5dEw=;
- b=PLZ0TOlmlB7RD+Jiuo8SWlopyjPkmmJwDDNcjq9bp0ni46S43Ez2YJhquMfy9eDqR3
- FGnwS9GZW2BlkoMWJZNlpN7Mj1qB9qIcVkjQIa/rU1zyvia9En3O4klPrrN9J58ElMR+
- zde5oma/DzEh+4J4Tp0gCaVp5T0q8471SAezcrWmXEDGkBvW3cmeS70rSLEETHEJ8k2e
- iFk7syOElMXxNb5kxj9S1f8ao9LTFdBm9K4qAe9HXVHUC3/Yl0QAnK688YHLSRVo/9nZ
- zzUcl6B1sGwwEqPqdITlG33ZJPMgYI4JxQjOaEgxuEmeSEyjgjUvKQ2GejuyOOaEHDIB
- 6ucw==
+ :reply-to; bh=yplIHPrFrd+E2vv2AnXg2YetFfTtD3L3FbyS9laYyOY=;
+ b=HsEU+Y8YY8LrBcnxaNGrIOXMYlDCk6/DmJldThikWUztEZB32Bhct1JaSf0U/0bZXZ
+ SZvmsJi+CC4+e8lTvA/jTi39FcgzsCAz06x43tYY0xAsGKzb6ab424b73frTMPmcHcpr
+ ItNc7bV4+kWPn5y/VqC8tpa6+2qMux6B+BLFhABAt5kg/tyJPKewegOK0v6CVarw1M8N
+ 4tqSjt1HUoju98Z1b2AkpVfG7rs5i5TwOh1HKc2O73dXKdC51Qxou0LrxDtRJFS+cnKN
+ xAp1eGXRjwy8bN013vIBe6lYrl09w3Zyx7CtbKpfEAQpYzTWpv6A2VCr5yKoRXW72pBb
+ ZnKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719927045; x=1720531845;
+ d=1e100.net; s=20230601; t=1719927047; x=1720531847;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nScEoNskmv45Lt2tjO7j1jnaqGA5YnHfESShhKL5dEw=;
- b=GCXQQQ4RFH2SSoLDRPrAvQrnuF31vnt6eaZwtUEAdzG9Dd6wsZeS/OkptSZ0o2pI5U
- OG+4VQIy9m2dO67DRUHW76dxWcQEIMHaOkqSNYA7rl/lGQqFTzkGA3EBtrhG643/+BJX
- YSI+dDVOfwd5/61eo80yJkQAS5sTE3bbos0OxpiiKbsXGcWT2j6dtWsX4+/UlrDaV/fd
- DOrG2S7yHnnIC3s5btIFbWH6tLFyW3tNYGtsAjiP0n+1a/qJ3JlYcVWSaWhMPrOm1oou
- 20yhYWHzKs0lVczHcnseP/CdoFDPdsOsRab7b2hLKfhm+b69RpYfiBMJQs220Vc3yXiv
- Bzaw==
+ bh=yplIHPrFrd+E2vv2AnXg2YetFfTtD3L3FbyS9laYyOY=;
+ b=u2qaTYVvf6LbqZTgXwr/5SY0TeObCUgAntPLJNRP/9Ogxd2E4YhUsGye/g5y5vkH7/
+ n5Ppbjiz+MWu/Tek7C+08/l8mXIQcTzw57mRa21S3udnwbubzlBDpOvaJrWWQ/7uMXCV
+ gkWGktxUNpXeqrp7WTritfQ5IkhCnFyUOt0euU1XhkU6OjVYBRfSwmxBg2L7XJNwIofY
+ NfTlFGRXnlzVsHL8NU8qOmpAbUcsLojQ0ZBEklXvBSByI3Gju44gUo6yKwx4sGsjDIYm
+ qTKJGF6Ziv1ktGs2hR8iNWC06rJpA23/tlK9vv38q/pmhzocGuSsOckF+cwqEs6/fyLP
+ 0yOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVH4FQMwAfbhgjPsvagnLI43dtqNIRVCFRFki1g8+gI8ZWr/6PbhRB7PL2OfoGnq48tIO6TMjH1GgI7xdG7Ve9pZg481w==
-X-Gm-Message-State: AOJu0YxGzY9Ksj7imCE2upnN/ZISJ5AX8Cntx4xuGWNa2+iQNd0Z4rfn
- H4IzUBVxi9uQpwj14yLQ0lyyhujSk2FB62joBVX8MTnBQ9qEGIDCtWBC+ZS6uok=
-X-Google-Smtp-Source: AGHT+IFRog+gx74J/Of7INg7/8CAnJfUVWxqmZnXEMxZ/iTp8E5it12yGIqzgsFDC5xiCYC0PAW8Mw==
-X-Received: by 2002:a17:907:d15:b0:a70:c031:3359 with SMTP id
- a640c23a62f3a-a7514438b44mr702738166b.34.1719927045505; 
- Tue, 02 Jul 2024 06:30:45 -0700 (PDT)
+ AJvYcCX5ruWyZgCukWKn0EDR0yj9H3cFVh94GbM2NZCJjydlROaobXRXeOKlY3EnV3dJYilR5vr4Eb2c0kKBspHtYwhO9HiikQ==
+X-Gm-Message-State: AOJu0Yz0cNxCq8t3TxOttPWl3X1D8w+Vf9xnvv6vJcrp8dYOpLjOkUmI
+ cLXNMOlY9YprRIkKheKZnG1yg/WmVAqREqBSrvCOwBIKRMN3AJ7Ncoyr/u8blLU=
+X-Google-Smtp-Source: AGHT+IFNN1XToQk2TF/BoFlQSyxCa9ipFrWW9TmzPTohlJwGXbxTCmsmW2bzPLzA0IWbjQS9D3WwYQ==
+X-Received: by 2002:a17:906:fccc:b0:a72:548a:6f42 with SMTP id
+ a640c23a62f3a-a751445451dmr563539866b.18.1719927046780; 
+ Tue, 02 Jul 2024 06:30:46 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7430367d55sm323796166b.87.2024.07.02.06.30.44
+ a640c23a62f3a-a7430367d55sm323796166b.87.2024.07.02.06.30.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 06:30:44 -0700 (PDT)
+ Tue, 02 Jul 2024 06:30:46 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 02 Jul 2024 15:30:41 +0200
-Subject: [PATCH v4 01/10] efi: define struct efi_guid
+Date: Tue, 02 Jul 2024 15:30:42 +0200
+Subject: [PATCH v4 02/10] lib: uuid: add UUID v5 support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240702-b4-dynamic-uuid-v4-1-a00c82d1f504@linaro.org>
+Message-Id: <20240702-b4-dynamic-uuid-v4-2-a00c82d1f504@linaro.org>
 References: <20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org>
 In-Reply-To: <20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -82,21 +82,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1137;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5402;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=b3W8BuVY9KVN80vqbSH3Ez6m6ALhP6/nGoPftuCgZMA=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmhAEBRCW+jAWLpN23dnEkUJW0XfD4JSTmOxkQ3
- GvembpFktiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZoQBAQAKCRAFgzErGV9k
- tiaWD/4vFykJJF9vTWtwsIsdIYtO6Cq082mbtqzzTs1EdTGtupxX0kqRTtIbVQ3HcO4y2no2cDh
- m822kS4sS5WSgoojHOtTIXtDIsWfZSMuXD2c235m1eBNr57McymYfxLJEmiMln0SMm4lqWlQa5p
- sccc55u/cWLap/xpHPPkz+5/jgjK3Ol5DagCMkxjTJQZQ66SgqQjHMTbMwD/swjhFeJDMESMIEV
- DX8hWtj0FWxpB9RgtkciXMY1+RoKsIl4XYgmZdJiagoxzozciHD+SA0lTwJ7ayqmPDJzUmy/Edz
- nUiBeSQFZBvbRQ0EEaGlO1RXQ5T0yXeCEX10kqD3jUVX8zoKWSNnIYWPkH6wNHTIIZ9F1FQ/VHx
- WO/WcQ/csgY+r264svSQaXPrUn4PG29wYQgteVvKSCJrir9ILlyZudXLUESVwMp3H3carry5oYV
- rAtyQGh75UjE7ALa/UDQuMGSiKQC8aa2QMUrJIswcHK2/NUcZagfx1DiRNAxyB3ZHq77voUhPPi
- k0skJDTOL93piWEVr44tJgSQn5BKqbmtq6KDYyAB9hzvgNmwsVgbYqCb2SOeUnVnZVI41nG7007
- lvM6e6FOZCLrStMu1pGKDk3BI9uaYKpGMY5fTRoWT6uwy2sR6OPlPC/7sYTetX6l1o6hz7P8S7/
- LnnsBWj8Jy3Nbkw==
+ bh=V+42NnDIi/jdM6oXb7A+84TKo7thIq/t0tX3x78iv9c=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmhAEC8YRwMwEayIYvp9j8ek0q1ZmTkQFLV6bUS
+ bpWS7ERj3qJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZoQBAgAKCRAFgzErGV9k
+ tkRtD/4r6YadqhQ7ZtTxg6er70+qFn6Q0H+KTO+5uNTf9xzZhRWis0LKeoJfEQ3dfrDnY28Ju0r
+ ebDMtEP6cvVt0uB6Cn7YwqKmOn7Gm7Ju7CCVOuKnKI+eDZnya6Jg95nh3pB+1Uk41OGmEev7ODE
+ jZwdiPAzDDJaLwFYMWY4KNGYw8+rHb8b9ao1iLVx9t04B/vgJ1zTHbWBXxiKBpqk47uEhYBhSAe
+ gFHswmNRaaTaEtMsyeeOfKpO8xlTzRvLH/U5/r+hDJA6voovIUwmGbKI4rBiuM5Eu709/1jWERr
+ /6XbmCXZhjfykif0Pb6G03NaMQRrD3SYt5XpX0Y5SjvexY3FTIAlE+hHYTfK52lJsY/0aDC3t2f
+ aXnCttx7ECQ9XanufJ/MaR3H/5fdve9IHxjmI8qAI/P1oh31//fr89QNOkIVJESTQU0c9j1ZsEz
+ q+YuUM8Jo2B0CKMCnph5X0+yRJFkBmmOpAhyKWVdFbTxV3x3lwK6WMg+DNJccKOPQ9lKBUq9oFJ
+ Imjqh2kEufL81iZR8Ce5PuiiGrw4YqwNqgTlUZ5Mnuz7hI/rKiVc/0QEaZRm9aT1qcgV7Q0YFa7
+ HM4WIdvuxIvPH8WbYnfaRDsYSCnx/eXdawGS+4FFK9sep2Qk8aezvI6T0Qj7xLcO+BzGJwrCcRA
+ eqt+NCjQEtgVhhQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,45 +115,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This let's us forward declare efi_guid_t in the UUID code without
-pulling in efi.h
+Add support for generating version 5 UUIDs, these are determistic and work
+by hashing a "namespace" UUID together with some unique data. One intended
+usecase is to allow for dynamically generate payload UUIDs for UEFI
+capsule updates, so that supported boards can have their own UUIDs
+without needing to hardcode them.
+
+In addition, move the common bit twiddling code from gen_ran_uuid into a
+separate function and rewrite it not to use clrsetbits (which is not
+available when building as part of host tools).
+
+Tests for this are added in an upcoming patch.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/efi.h      | 2 +-
- tools/eficapsule.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ include/uuid.h | 17 +++++++++++++++--
+ lib/Kconfig    |  1 +
+ lib/uuid.c     | 58 +++++++++++++++++++++++++++++++++++++++++++++++++++-------
+ 3 files changed, 67 insertions(+), 9 deletions(-)
 
-diff --git a/include/efi.h b/include/efi.h
-index c3c4b93f860a..b92c961a2afd 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -73,9 +73,9 @@ struct efi_device_path {
-  * EDK2 reference implementation both define EFI_GUID as
-  * struct { u32 a; u16; b; u16 c; u8 d[8]; }; which is 4-byte
-  * aligned.
+diff --git a/include/uuid.h b/include/uuid.h
+index f5a941250f48..1f4fa103b5e9 100644
+--- a/include/uuid.h
++++ b/include/uuid.h
+@@ -10,8 +10,9 @@
+ #ifndef __UUID_H__
+ #define __UUID_H__
+ 
+ #include <linux/bitops.h>
++#include <linux/kconfig.h>
+ 
+ /*
+  * UUID - Universally Unique IDentifier - 128 bits unique number.
+  *        There are 5 versions and one variant of UUID defined by RFC4122
+@@ -45,10 +46,10 @@
+  * where x is a hexadecimal character. Fields are separated by '-'s.
+  * When converting to a binary UUID, le means the field should be converted
+  * to little endian and be means it should be converted to big endian.
+  *
+- * UUID is also used as GUID (Globally Unique Identifier) with the same binary
+- * format but it differs in string format like below.
++ * UUID is also used as GUID (Globally Unique Identifier) with the same format
++ * but with some fields stored in little endian.
+  *
+  * GUID:
+  * 0        9    14   19   24
+  * xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+@@ -142,8 +143,20 @@ void gen_rand_uuid(unsigned char *uuid_bin);
+  * @param          - uuid output type: UUID - 0, GUID - 1
   */
--typedef struct {
-+typedef struct efi_guid {
- 	u8 b[16];
- } efi_guid_t __attribute__((aligned(4)));
+ void gen_rand_uuid_str(char *uuid_str, int str_format);
  
- #define EFI_BITS_PER_LONG	(sizeof(long) * 8)
-diff --git a/tools/eficapsule.h b/tools/eficapsule.h
-index 6efd07d2eb6b..97d077536d5b 100644
---- a/tools/eficapsule.h
-+++ b/tools/eficapsule.h
-@@ -23,9 +23,9 @@
- #endif
++struct efi_guid;
++
++/**
++ * gen_v5_guid() - generate little endian v5 GUID from namespace and other seed data.
++ *
++ * @namespace:   pointer to UUID namespace salt
++ * @guid:        pointer to allocated GUID output
++ * @...:         NULL terminated list of seed data as pairs of pointers
++ *               to data and their lengths
++ */
++void gen_v5_guid(const struct uuid *namespace, struct efi_guid *guid, ...);
++
+ /**
+  * uuid_str_to_le_bin() - Convert string UUID to little endian binary data.
+  * @uuid_str:	pointer to UUID string
+  * @uuid_bin:	pointer to allocated array for little endian output [16B]
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 189e6eb31aa1..9aa882d5f882 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -72,8 +72,9 @@ config HAVE_PRIVATE_LIBGCC
+ 	bool
  
- #define ARRAY_SIZE(x)		(sizeof(x) / sizeof((x)[0]))
+ config LIB_UUID
+ 	bool
++	select SHA1
  
--typedef struct {
-+typedef struct efi_guid {
- 	uint8_t b[16];
- } efi_guid_t __aligned(8);
+ config RANDOM_UUID
+ 	bool "GPT Random UUID generation"
+ 	select LIB_UUID
+diff --git a/lib/uuid.c b/lib/uuid.c
+index dfa2320ba267..7d0a8273d157 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -21,8 +21,9 @@
+ #include <part_efi.h>
+ #include <malloc.h>
+ #include <dm/uclass.h>
+ #include <rng.h>
++#include <u-boot/sha1.h>
  
- #define EFI_GUID(a, b, c, d0, d1, d2, d3, d4, d5, d6, d7) \
+ int uuid_str_valid(const char *uuid)
+ {
+ 	int i, valid;
+@@ -368,8 +369,57 @@ void uuid_bin_to_str(const unsigned char *uuid_bin, char *uuid_str,
+ 		}
+ 	}
+ }
+ 
++static void configure_uuid(struct uuid *uuid, unsigned char version)
++{
++	uint16_t tmp;
++
++	/* Configure variant/version bits */
++	tmp = be16_to_cpu(uuid->time_hi_and_version);
++	tmp = (tmp & ~UUID_VERSION_MASK) | (version << UUID_VERSION_SHIFT);
++	uuid->time_hi_and_version = cpu_to_be16(tmp);
++
++	uuid->clock_seq_hi_and_reserved &= ~UUID_VARIANT_MASK;
++	uuid->clock_seq_hi_and_reserved |= (UUID_VARIANT << UUID_VARIANT_SHIFT);
++}
++
++void gen_v5_guid(const struct uuid *namespace, struct efi_guid *guid, ...)
++{
++	sha1_context ctx;
++	va_list args;
++	const uint8_t *data;
++	uint32_t *tmp32;
++	uint16_t *tmp16;
++	uint8_t hash[SHA1_SUM_LEN];
++
++	sha1_starts(&ctx);
++	/* Hash the namespace UUID as salt */
++	sha1_update(&ctx, (unsigned char *)namespace, UUID_BIN_LEN);
++	va_start(args, guid);
++
++	while ((data = va_arg(args, const uint8_t *))) {
++		unsigned int len = va_arg(args, size_t);
++		sha1_update(&ctx, data, len);
++	}
++
++	va_end(args);
++	sha1_finish(&ctx, hash);
++
++	/* Truncate the hash into output UUID, it is already big endian */
++	memcpy(guid, hash, sizeof(*guid));
++
++	configure_uuid((struct uuid *)guid, 5);
++
++	/* Make little endian */
++	tmp32 = (uint32_t *)&guid->b[0];
++	*tmp32 = be32_to_cpu(*tmp32);
++	tmp16 = (uint16_t *)&guid->b[4];
++	*tmp16 = be16_to_cpu(*tmp16);
++	tmp16 = (uint16_t *)&guid->b[6];
++	*tmp16 = be16_to_cpu(*tmp16);
++}
++
+ #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
+ void gen_rand_uuid(unsigned char *uuid_bin)
+ {
+ 	u32 ptr[4];
+@@ -394,15 +444,9 @@ void gen_rand_uuid(unsigned char *uuid_bin)
+ 	/* Set all fields randomly */
+ 	for (i = 0; i < 4; i++)
+ 		ptr[i] = rand();
+ 
+-	clrsetbits_be16(&uuid->time_hi_and_version,
+-			UUID_VERSION_MASK,
+-			UUID_VERSION << UUID_VERSION_SHIFT);
+-
+-	clrsetbits_8(&uuid->clock_seq_hi_and_reserved,
+-		     UUID_VARIANT_MASK,
+-		     UUID_VARIANT << UUID_VARIANT_SHIFT);
++	configure_uuid(uuid, UUID_VERSION);
+ 
+ 	memcpy(uuid_bin, uuid, 16);
+ }
+ 
 
 -- 
 2.45.2
