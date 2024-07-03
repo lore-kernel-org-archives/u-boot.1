@@ -4,91 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8484C30653
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 08:56:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B79E6C2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 09:05:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FA40884FE;
-	Wed,  3 Jul 2024 10:56:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 26646887CA;
+	Wed,  3 Jul 2024 11:05:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MWcxw0vP";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="aOlKZppx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDD7688585; Wed,  3 Jul 2024 10:56:45 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 142A0887FA; Wed,  3 Jul 2024 11:05:18 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D2DF884FD
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 10:56:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B63887C1
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 11:05:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3d841a56e1dso1579963b6e.2
- for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 01:56:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a7541fad560so200474566b.0
+ for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 02:05:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719997002; x=1720601802; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PdFEZev/ILlQMBFWS32go+bvcnG5LBj5ok1H+/mhv+o=;
- b=MWcxw0vPW6Ovbdc7LuxC97JZlnm7gdyKORDu22B3sLE7gjv4JmRHsSbw/64IeCY6MC
- +4atgZS4+/cUz104icxbWg3RSlKIhva8g40r3zylW0mB7krEpHz2U9tE5gYFpcpC7/Nr
- WhyCJh/tL+rm16cqfOJHy7XvtblGSL+IldeMNQrauMbgccSDr9Pez//vMZLbaBSXvqer
- hSPjg3O8TWFWCFCL6xcEWSvOa2nGbL56IYhoc/4H7GAGUoMzHbRFUBTjgDiMHbfZxmrQ
- DNIrOIu5CvlcNQP0LAlQUC6uLYsWQ+qPTWB++Nrt5Pmt6xJtC4O3jAm/DG5jvxLbMoMh
- HRIg==
+ d=amarulasolutions.com; s=google; t=1719997515; x=1720602315;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mfPTeVB3NzRsQTJfcxwkIs7+YMouqHPrVYATIwK01OY=;
+ b=aOlKZppxMlZbfwI6EWsKplRsWEFHGmCeE+ycMIP8NkRBKqWH+0NKMwKOlONkGUeSOu
+ ZzZdu7tZN+hK//hnle/ynOoPCzTq0Hy/tKUrTtaOnBb4hPHhZ4KHuus35k+5L7Ei8cV1
+ Q452F+9F/mrqwQo2HItTPACMI0sPyrGr1q9do=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719997002; x=1720601802;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1719997515; x=1720602315;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PdFEZev/ILlQMBFWS32go+bvcnG5LBj5ok1H+/mhv+o=;
- b=A7GeKU2f16OI6bYvVxjjl6fRcOzLj7WqKSz+mqfWIYbmeo0cWnKO1QPUcZKjCf5zeH
- h+Ncg4hLC8ocydEtmOrw6xt28a3f1D4b+8NH/zxXz6uCtr42GiojmkwqJ4POS5gMzG0F
- eCwvmEAYtDLPHoCsR3YhRyGkiHKF49dPa4pQ2dJynf/IxypUvMHwIhWrE4jvMA74sr+L
- rpmSOdg8kCYlvICK9ZLCWyERD3MHsNqjEnt+Qg6m9CL7X67kcP/zRfHHNxtSr0YvG+nn
- y0t1iWkpLuWxG1tCVtXPE+WcczBiM/Ycr/CgOA1NLwk87CMg36of39CPkErgRS3P5DPK
- 7tiQ==
-X-Gm-Message-State: AOJu0Yx5hlJV+YTgcvrhW/zYKJlxQapTiPaHfIUoweJFZy7BLZIeWtOt
- U9LiB7UOm7CvfKmHdr7FxjzaN6gmFo97m2v+if6H9UfDE7rdrDQDtGuUMrrnQn4bNEmPtuWAuNg
- /T8APjpGA/OBWFstHbM2lVJD8d5rMp+DprFEo/g==
-X-Google-Smtp-Source: AGHT+IGim+M+NBNLHWfoIDS2W6eovbOk3JTsmevVXAifv5DzITA3x1duSLxgrzJkZBKHi+p7P1J7XR2e34iZ+7hp1bo=
-X-Received: by 2002:a05:6808:1408:b0:3d2:4fe3:50ef with SMTP id
- 5614622812f47-3d6b51b660bmr16650564b6e.41.1719997002236; Wed, 03 Jul 2024
- 01:56:42 -0700 (PDT)
+ bh=mfPTeVB3NzRsQTJfcxwkIs7+YMouqHPrVYATIwK01OY=;
+ b=t63ABbPYG26TXc6lFk0n6umCeuk6EdRKlGTNnudU4+wHtKjDItsyvcYehQXd4kVfzY
+ daZ9zXLDx90i4O9JztHnSbXdVWVW9W4CM+osGYp9n6X9BDj1jPO3DaxchWeR5L1UPZTE
+ hH3TER0i2SAhco32AMf6NMFKnA+hCrjLP7wlEPwb+fom6X7akRB+gt8f00V+lXLXyUg/
+ y1bKI/V0V69AQp57w+/Ayuvvpl8gZwdemU+Z9sbJssU1L7PO0XVNlnORfoRAQsfYo2ak
+ yJPutA4nJKqAdmSsWqf49SxxuQwdol+75VCZlPGSgnxdYTPOF00IC2oKfvxLFwDOg+Zf
+ zYng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUccmnFlCrEzTgqvrVNFa7+GcJVRXAyA6Kq5E2YPCou2cZNB8BumhRHeW4dgwfD/q6hCQqN2LN3cFasrxlwK2rkbETcZQ==
+X-Gm-Message-State: AOJu0YzOmmeVHevboup4M6dg9d5lLnpihhgs1Gorm/qpSxIifSpu+Vvb
+ qZr7o3jVkociBHKgHJ/yl0WZG4NYW2+Jdk1XtHIhNe51FU73eqsn1JO5LlFI1yw=
+X-Google-Smtp-Source: AGHT+IEkw3KTn9T6JKo6zUZgB1NmoOcdkhKprAo6SSTNBn7gLrh1qXQWS0fg/qwGjj0+4gnjuafcqQ==
+X-Received: by 2002:a17:907:5ca:b0:a75:3627:fccc with SMTP id
+ a640c23a62f3a-a753627ff82mr459350466b.51.1719997515160; 
+ Wed, 03 Jul 2024 02:05:15 -0700 (PDT)
+Received: from panicking.amarulasolutions.com
+ ([2001:b07:6474:ebbf:d622:a7f3:7832:9423])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a72aaf1bb6bsm491186866b.30.2024.07.03.02.05.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jul 2024 02:05:14 -0700 (PDT)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: Lukasz Majewski <lukma@denx.de>,
+	Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
+ u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH 0/2] Support imx8m composite mux
+Date: Wed,  3 Jul 2024 11:05:09 +0200
+Message-ID: <20240703090512.92636-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-9-raymond.mao@linaro.org>
-In-Reply-To: <20240702182325.2904421-9-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 3 Jul 2024 11:56:05 +0300
-Message-ID: <CAC_iWjLxSbtcSwM1iQjj7DG3sJLY5Q=3fnuOphkJKXcQyO4TtQ@mail.gmail.com>
-Subject: Re: [PATCH v4 08/29] hash: integrate hash on mbedtls
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Eddie James <eajames@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,207 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond
+The mux ops for i.MX8M composite clk needs to be specialized.
+In order to reduce the code duplication we need to make public some
+interface and write a specific function in the mux ops. Those patches
+implement the behavior
 
-On Tue, 2 Jul 2024 at 21:27, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Integrate common/hash.c on the hash shim layer so that hash APIs
-> from mbedtls can be leveraged by boot/image and efi_loader.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Use the original head files instead of creating new ones.
-> Changes in v3
-> - Add handle checkers for malloc.
-> Changes in v4
-> - None.
->
->  common/hash.c | 143 ++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 143 insertions(+)
->
-> diff --git a/common/hash.c b/common/hash.c
-> index ac63803fed9..96caf074374 100644
-> --- a/common/hash.c
-> +++ b/common/hash.c
-> @@ -35,6 +35,141 @@
->  #include <u-boot/sha512.h>
->  #include <u-boot/md5.h>
->
-> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
-> +
-> +static int hash_init_sha1(struct hash_algo *algo, void **ctxp)
-> +{
-> +       int ret;
-> +       mbedtls_sha1_context *ctx = malloc(sizeof(mbedtls_sha1_context));
-> +
-> +       if (!ctx)
-> +               return -ENOMEM;
-> +
-> +       mbedtls_sha1_init(ctx);
-> +       ret = mbedtls_sha1_starts(ctx);
-> +       if (!ret) {
-> +               *ctxp = ctx;
-> +       } else {
-> +               mbedtls_sha1_free(ctx);
-> +               free(ctx);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int hash_update_sha1(struct hash_algo *algo, void *ctx, const void *buf,
-> +                           unsigned int size, int is_last)
-> +{
-> +       return mbedtls_sha1_update((mbedtls_sha1_context *)ctx, buf, size);
-> +}
-> +
-> +static int
-> +hash_finish_sha1(struct hash_algo *algo, void *ctx, void *dest_buf, int size)
-> +{
-> +       int ret;
-> +
-> +       if (size < algo->digest_size)
-> +               return -1;
-> +
-> +       ret = mbedtls_sha1_finish((mbedtls_sha1_context *)ctx, dest_buf);
-> +       if (!ret) {
-> +               mbedtls_sha1_free((mbedtls_sha1_context *)ctx);
-> +               free(ctx);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int hash_init_sha256(struct hash_algo *algo, void **ctxp)
-> +{
-> +       int ret;
-> +       int is224 = algo->digest_size == SHA224_SUM_LEN ? 1 : 0;
-> +       mbedtls_sha256_context *ctx = malloc(sizeof(mbedtls_sha256_context));
+Michael Trimarchi (2):
+  clk: clk-mux: Make public the clk_fetch_parent_index
+  clk: imx: add mux ops for i.MX8M composite clk
 
-I prefer sizeof(*ctx) on all the allocations. Also since it's a crypto
-stack I prefer a calloc (sha384 for example will allocate more bytes)
+ drivers/clk/clk-mux.c              |  5 ++--
+ drivers/clk/imx/clk-composite-8m.c | 37 +++++++++++++++++++++++++++++-
+ include/linux/clk-provider.h       |  1 +
+ 3 files changed, 39 insertions(+), 4 deletions(-)
 
-> +
-> +       if (!ctx)
-> +               return -ENOMEM;
-> +
-> +       mbedtls_sha256_init(ctx);
-> +       ret = mbedtls_sha256_starts(ctx, is224);
-> +       if (!ret) {
-> +               *ctxp = ctx;
-> +       } else {
-> +               mbedtls_sha256_free(ctx);
-> +               free(ctx);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int hash_update_sha256(struct hash_algo *algo, void *ctx, const void *buf,
-> +                             uint size, int is_last)
-> +{
-> +       return mbedtls_sha256_update((mbedtls_sha256_context *)ctx, buf, size);
-> +}
-> +
-> +static int
-> +hash_finish_sha256(struct hash_algo *algo, void *ctx, void *dest_buf, int size)
-> +{
-> +       int ret;
-> +
-> +       if (size < algo->digest_size)
-> +               return -1;
-> +
-> +       ret = mbedtls_sha256_finish((mbedtls_sha256_context *)ctx, dest_buf);
-> +       if (!ret) {
-> +               mbedtls_sha256_free((mbedtls_sha256_context *)ctx);
-> +               free(ctx);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int hash_init_sha512(struct hash_algo *algo, void **ctxp)
-> +{
-> +       int ret;
-> +       int is384 = algo->digest_size == SHA384_SUM_LEN ? 1 : 0;
-> +       mbedtls_sha512_context *ctx = malloc(sizeof(mbedtls_sha512_context));
-> +
-> +       if (!ctx)
-> +               return -ENOMEM;
-> +
-> +       mbedtls_sha512_init(ctx);
-> +       ret = mbedtls_sha512_starts(ctx, is384);
-> +       if (!ret) {
-> +               *ctxp = ctx;
-> +       } else {
-> +               mbedtls_sha512_free(ctx);
-> +               free(ctx);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int hash_update_sha512(struct hash_algo *algo, void *ctx, const void *buf,
-> +                             uint size, int is_last)
-> +{
-> +       return mbedtls_sha512_update((mbedtls_sha512_context *)ctx, buf, size);
-> +}
-> +
-> +static int
-> +hash_finish_sha512(struct hash_algo *algo, void *ctx, void *dest_buf, int size)
-> +{
-> +       int ret;
-> +
-> +       if (size < algo->digest_size)
-> +               return -1;
-> +
-> +       ret = mbedtls_sha512_finish((mbedtls_sha512_context *)ctx, dest_buf);
-> +       if (!ret) {
-> +               mbedtls_sha512_free((mbedtls_sha512_context *)ctx);
-> +               free(ctx);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +#else /* CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO) */
-> +
->  static int __maybe_unused hash_init_sha1(struct hash_algo *algo, void **ctxp)
->  {
->         sha1_context *ctx = malloc(sizeof(sha1_context));
-> @@ -143,6 +278,8 @@ static int __maybe_unused hash_finish_sha512(struct hash_algo *algo, void *ctx,
->         return 0;
->  }
->
-> +#endif /* CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO) */
-> +
->  static int hash_init_crc16_ccitt(struct hash_algo *algo, void **ctxp)
->  {
->         uint16_t *ctx = malloc(sizeof(uint16_t));
-> @@ -267,10 +404,16 @@ static struct hash_algo hash_algo[] = {
->                 .hash_init      = hw_sha_init,
->                 .hash_update    = hw_sha_update,
->                 .hash_finish    = hw_sha_finish,
-> +#else
-> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
-> +               .hash_init      = hash_init_sha512,
-> +               .hash_update    = hash_update_sha512,
-> +               .hash_finish    = hash_finish_sha512,
+-- 
+2.43.0
 
-I don't have strong opinion here, but you could alternatively define
-sha384 wrappers for mbedTLS and avoid this ifdef.
-In any case I personally don't mind.
-
-
->  #else
->                 .hash_init      = hash_init_sha384,
->                 .hash_update    = hash_update_sha384,
->                 .hash_finish    = hash_finish_sha384,
-> +#endif
->  #endif
->         },
->  #endif
-> --
-> 2.25.1
->
