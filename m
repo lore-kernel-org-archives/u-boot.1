@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADBB4C30653
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 08:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B579EC30653
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 08:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F80B887C1;
-	Wed,  3 Jul 2024 10:08:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC56C887CA;
+	Wed,  3 Jul 2024 10:08:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G946Ysd3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g9Tf4Sx4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DB3B887E7; Wed,  3 Jul 2024 10:08:24 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 0A751887EE; Wed,  3 Jul 2024 10:08:26 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0B6988155
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 10:08:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFFD1887C7
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 10:08:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b5cf1b8b94so7961026d6.0
- for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 01:08:21 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6b5def3916bso2648906d6.3
+ for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 01:08:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719994101; x=1720598901; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1719994102; x=1720598902; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OIXg6rDGmSjP8hUj2ySvmH9uDPF9mzterb0iANbwML4=;
- b=G946Ysd3A2O6Y+MBvmayZw5EA4L9wG2/FLczmqd/AFzlcbgdPYUqZCs3/xiAhZLMCz
- NDYQYOsdgczEymWLBiZbbxbWXkRUo2n8Nn64XPnTdk7jNZ0upeWm8er6jSYLkWf//EQI
- WIV3QnpZTBLv2+ecKlkRisADbSBiPHi6MS98I=
+ bh=TEIWfPReKBquwPNRzza3fL0vaoJP43dEjIqXjhVy0Hw=;
+ b=g9Tf4Sx4fby1vxCIQ/5H1sr1gXJ/Sdn0EErJxSwYlGMkBrQ9jO7fNgTQtcSpV071QN
+ JPT1vHe5b9MO43xRqisTSGwX65z8sgm/7TrJf0IFPOcDd50CnO4jY5Ct+mGR+LlZ9Cwq
+ +luT77oxpBYhBhjGceTBHZ8Ztkv83NQ0xMKlY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719994101; x=1720598901;
+ d=1e100.net; s=20230601; t=1719994102; x=1720598902;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OIXg6rDGmSjP8hUj2ySvmH9uDPF9mzterb0iANbwML4=;
- b=EG7fnFuItjw2SDM/O6qgwrdDjdQm2TXisW1ikU8MEItzPrlTeNS3IcrbhQ3Sv3eu2E
- rjXEYs89oOKXZ1kava7yRWmd2ncsV4ecrGbJTH3oB2gtUuoa25wFlgSE4ldC8IVgSCj/
- B27QJhWuYWIoMf9oI8g9z0pnyyatrnQ9JpYLGgGgP5tq/QP7hSwkqn19aKko8yHq4dq0
- K+pXYP6Po/o1YaTZf9hMqrq40jQDpjdlL4x/jKcdCxfDFXwD4QQr9wFp4NdQzk8tQSxd
- R35WI5tP+/MhJ41eBhuqqU7+9fnBdgCW7aDzlp/MDQ17hWL6hxYJqYiO5Ccd2k30Qxt/
- 1wiA==
+ bh=TEIWfPReKBquwPNRzza3fL0vaoJP43dEjIqXjhVy0Hw=;
+ b=N9eFJW1cFdDOVzWZMiEtXaSI2HTfXJpifU1JPlzxtcy5IVxx0OSZK2k066846ZTE0v
+ rOCZkPjm/3SVTdsMsOlJny1YZpdvRnzyr++tHqxQ3ynhVmGdxyHttMMy42eU5jKxKfD2
+ 1ARxSfJfHsjBuI5nrbyRGkSdMDj/mXZONq4bu9l4W/qPDDhH9iIAabuvS2uOZcSAzyE9
+ 1ja3kwF6YENDaIpBv1ZF7WprVqQmsy/rlXBmZOuAbRFm5ELYV8+0juVaX8Bf6YXotlBe
+ qK8hYnzng8JwR8sWAiiMBIcgDqNtf7ZqoLtG114kXftQgJBPFF6HpuszX4BJLP272YBt
+ KLPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWqEEl1f/XIh8c70/u1XEkAtFMIzxRhmrYrY/bxQ/vI/t6owRdYbktyNUmVzZMcPVT4AhMmkEmUaBDTbq5xJxPX5kIBQ==
-X-Gm-Message-State: AOJu0Yx0iHQ7nSNalJSgN+3yQN5ersARoPFz+pCMdATwT8nD2zGkDpPi
- gMQ5KgOpQJSzfC3PGGfNmEysznLycmfkQszjROMOB3Bvik+SlKtBNjsMyHGZyM0VluXE7xGQKbn
- PCMQnIupAD1lyarSnOOUjdI/jazfbbAFL4GXr
-X-Google-Smtp-Source: AGHT+IEOkcHfYtsKGupMLvCTO3ljUG5up6TYe76AxQgNyp6b6h9KEhYy77yQimXkjIPzxA6MJODz/q9xN5qRSqxu23E=
-X-Received: by 2002:a05:6214:21a8:b0:6b5:df8d:4a3b with SMTP id
- 6a1803df08f44-6b5df8d4c6cmr17496166d6.18.1719994100729; Wed, 03 Jul 2024
- 01:08:20 -0700 (PDT)
+ AJvYcCVKkIn0yIP0jbGeWAWeoPhBdT6aDJmOHJ77umoUw69TjyaynjWf9anZS7aVhvT3vHDrZ5Ww6kGczHR3HVFqwbm9pR2Sfw==
+X-Gm-Message-State: AOJu0Ywr9r/HU4p1iZ/2bfDZljLi7Xa6T/SMKnGs5sS63iAdkHKiiRHp
+ aD9sFl+oDRLCL8hA4SfKsAQGhXfrzdSMXfSBBifOC7KFv6QXLP3a3SULN6C+WjYESv7bKIyPCIe
+ fDdEt1CZIs6mDyclFROw2ggHKbPMw8wC6Hn23
+X-Google-Smtp-Source: AGHT+IENYNy8Fg1c7YLRryjxzYhPG9qRFmQIdCrot/CUOUERRm83980XpsIQNI5d7pn0he4GZMaiDK+DX5kJQuiAaGU=
+X-Received: by 2002:a05:6214:d88:b0:6b0:90d8:b698 with SMTP id
+ 6a1803df08f44-6b5b7161ff6mr127583416d6.45.1719994101873; Wed, 03 Jul 2024
+ 01:08:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAFLszTihEQVMW==2V2Vq9GY_JffKWFgmarshmXSJFkCFyg4pXg@mail.gmail.com>
  <20240703010131.1735100-1-mikhail.kshevetskiy@iopsys.eu>
- <20240703010131.1735100-2-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20240703010131.1735100-2-mikhail.kshevetskiy@iopsys.eu>
+ <20240703010131.1735100-3-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240703010131.1735100-3-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 3 Jul 2024 09:08:10 +0100
-Message-ID: <CAFLszTh3ufDxkFkLWaYgP6Sd7kCL-0oMZWkjFtwHfztW_iYaJw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] led: Implement software led blinking
+Date: Wed, 3 Jul 2024 09:08:11 +0100
+Message-ID: <CAFLszTh-ACEnnR2t11aVrog_wAn1Zxt6GF99MBZo6vMK1M+n_A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] led: Add dts property to specify blinking of the led
 To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Cc: Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
@@ -97,246 +97,94 @@ On Wed, 3 Jul 2024 at 02:02, Mikhail Kshevetskiy
 >
 > From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
 >
-> If hardware (or driver) doesn't support leds blinking, it's
-> now possible to use software implementation of blinking instead.
-> This relies on cyclic functions.
+> The standard property
 >
-> v2 changes:
->  * Drop sw_blink_state structure, move its necessary fields to
->    led_uc_plat structure.
->  * Add cyclic_info pointer to led_uc_plat structure. This
->    simplify code a lot.
->  * Remove cyclic function search logic. Not needed anymore.
->  * Fix blinking period. It was twice large.
->  * Other cleanups.
+>     linux,default-trigger = "pattern";
+>
+> used to get an effect. No blinking parameters can be set yet.
 >
 > Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
 > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-
-LGTM except for the #ifdefs...I've put an idea below.
-
 > ---
->  drivers/led/Kconfig      |  14 ++++++
->  drivers/led/led-uclass.c | 102 +++++++++++++++++++++++++++++++++++++++
->  include/led.h            |  12 +++++
->  3 files changed, 128 insertions(+)
+>  drivers/led/led-uclass.c | 34 ++++++++++++++++++++++++++++++----
+>  1 file changed, 30 insertions(+), 4 deletions(-)
 >
-> diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-> index 9837960198d..1afb081df11 100644
-> --- a/drivers/led/Kconfig
-> +++ b/drivers/led/Kconfig
-> @@ -73,6 +73,20 @@ config LED_BLINK
->           This option enables support for this which adds slightly to the
->           code size.
->
-> +config LED_SW_BLINK
-> +       bool "Support software LED blinking"
-> +       depends on LED_BLINK
-> +       select CYCLIC
-> +       help
-> +         Turns on led blinking implemented in the software, useful when
-> +         the hardware doesn't support led blinking. Half of the period
-> +         led will be ON and the rest time it will be OFF. Standard
-> +         led commands can be used to configure blinking. Does nothing
-> +         if driver supports blinking.
-> +         WARNING: Blinking may be inaccurate during execution of time
-> +         consuming commands (ex. flash reading). Also it will completely
-> +         stops during OS booting.
-
-Drop the word 'will'
-
-> +
->  config SPL_LED
->         bool "Enable LED support in SPL"
->         depends on SPL_DM
 > diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-> index a4be56fc258..d021c3bbf20 100644
+> index d021c3bbf20..78d1a3d152b 100644
 > --- a/drivers/led/led-uclass.c
 > +++ b/drivers/led/led-uclass.c
-> @@ -52,6 +52,94 @@ int led_get_by_label(const char *label, struct udevice **devp)
->         return -ENODEV;
->  }
->
-> +#ifdef CONFIG_LED_SW_BLINK
-
-You can put this block into a separate file, like led_blink.c and
-export the functions, since it accesses members which are behind an
-#ifdef
-
-obj-$(CONFIG_LED_SW_BLINK) += led_blink.o
-
-> +static void led_sw_blink(void *data)
-> +{
-> +       struct udevice *dev = data;
-> +       struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +       struct led_ops *ops = led_get_ops(dev);
-> +
-> +       switch (uc_plat->sw_blink_state) {
-> +       case LED_SW_BLINK_ST_OFF:
-> +               uc_plat->sw_blink_state = LED_SW_BLINK_ST_ON;
-> +               ops->set_state(dev, LEDST_ON);
-> +               break;
-> +       case LED_SW_BLINK_ST_ON:
-> +               uc_plat->sw_blink_state = LED_SW_BLINK_ST_OFF;
-> +               ops->set_state(dev, LEDST_OFF);
-> +               break;
-> +       case LED_SW_BLINK_ST_NONE:
-> +               /*
-> +                * led_set_period has been called, but
-> +                * led_set_state(LDST_BLINK) has not yet,
-> +                * so doing nothing
-> +                */
-> +               break;
-> +       }
-> +}
-> +
-> +static int led_sw_set_period(struct udevice *dev, int period_ms)
-> +{
-> +       struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +       struct cyclic_info *cyclic = uc_plat->cyclic;
-> +       struct led_ops *ops = led_get_ops(dev);
-> +       char cyclic_name[64];
-> +       int half_period_us;
-> +
-> +       uc_plat->sw_blink_state = LED_SW_BLINK_ST_NONE;
-> +       ops->set_state(dev, LEDST_OFF);
-> +
-> +       half_period_us = period_ms * 1000 / 2;
-> +
-> +       if (cyclic) {
-> +               cyclic->delay_us = half_period_us;
-> +               cyclic->start_time_us = timer_get_us();
-> +       } else {
-> +               snprintf(cyclic_name, sizeof(cyclic_name),
-> +                        "led_sw_blink_%s", uc_plat->label);
-> +
-> +               cyclic = cyclic_register(led_sw_blink, half_period_us,
-> +                                        cyclic_name, dev);
-> +               if (!cyclic) {
-> +                       log_err("Registering of blinking function for %s failed\n",
-> +                               uc_plat->label);
-> +                       return -ENOMEM;
-> +               }
-> +
-> +               uc_plat->cyclic = cyclic;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static bool led_sw_is_blinking(struct udevice *dev)
-> +{
-> +       struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +
-> +       return (uc_plat->sw_blink_state != LED_SW_BLINK_ST_NONE);
-> +}
-> +
-> +static bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
-> +{
-> +       struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +
-> +       if (uc_plat->cyclic) {
-> +               if (state == LEDST_BLINK) {
-> +                       /* start blinking on next led_sw_blink() call */
-> +                       uc_plat->sw_blink_state = LED_SW_BLINK_ST_OFF;
-> +                       return true;
-> +               }
-> +
-> +               /* stop blinking */
-> +               cyclic_unregister(uc_plat->cyclic);
-> +               uc_plat->cyclic = NULL;
-> +               uc_plat->sw_blink_state = LED_SW_BLINK_ST_NONE;
-> +       }
-> +
-> +       return false;
-> +}
-> +#endif /* CONFIG_LED_SW_BLINK */
-> +
->  int led_set_state(struct udevice *dev, enum led_state_t state)
+> @@ -190,6 +190,9 @@ static int led_post_bind(struct udevice *dev)
 >  {
->         struct led_ops *ops = led_get_ops(dev);
-> @@ -59,6 +147,11 @@ int led_set_state(struct udevice *dev, enum led_state_t state)
->         if (!ops->set_state)
->                 return -ENOSYS;
+>         struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+>         const char *default_state;
+> +#ifdef CONFIG_LED_BLINK
+> +       const char *trigger;
+
+It looks like this is not used, so you can drop it and use a local
+variable here?
+
+> +#endif
 >
-> +#ifdef CONFIG_LED_SW_BLINK
+>         if (!uc_plat->label)
+>                 uc_plat->label = dev_read_string(dev, "label");
+> @@ -210,6 +213,13 @@ static int led_post_bind(struct udevice *dev)
+>         else
+>                 return 0;
+>
+> +#ifdef CONFIG_LED_BLINK
 
-Then these #ifdefs should be able to change to
+if (IS_ENABLED(CONFIG_LED_BLINK)
 
-if (IS_ENABLED(CONFIG_LED_SW_BLINK) &&
-    led_sw_on_state_change(dev, state))
-...
+> +       trigger = dev_read_string(dev, "linux,default-trigger");
+> +       if (trigger && !strncmp(trigger, "pattern", 7)) {
+> +               uc_plat->default_state = LEDST_BLINK;
+> +       }
 
-I suppose static inlines are another way if you prefer, but as there
-is only one caller it probably isn't worth it.
+No {} around single lines. You can use patman to send patches and it
+will check this for you (I hope!).
 
-> +       if (led_sw_on_state_change(dev, state))
-> +               return 0;
 > +#endif
 > +
->         return ops->set_state(dev, state);
->  }
+>         /*
+>          * In case the LED has default-state DT property, trigger
+>          * probe() to configure its default state during startup.
+> @@ -222,12 +232,28 @@ static int led_post_bind(struct udevice *dev)
+>  static int led_post_probe(struct udevice *dev)
+>  {
+>         struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> +       int rc = 0;
 >
-> @@ -69,6 +162,11 @@ enum led_state_t led_get_state(struct udevice *dev)
->         if (!ops->get_state)
->                 return -ENOSYS;
+> -       if (uc_plat->default_state == LEDST_ON ||
+> -           uc_plat->default_state == LEDST_OFF)
+> -               led_set_state(dev, uc_plat->default_state);
+> +       switch (uc_plat->default_state) {
+> +       case LEDST_ON:
+> +       case LEDST_OFF:
+> +               rc = led_set_state(dev, uc_plat->default_state);
+> +               break;
+> +#ifdef CONFIG_LED_BLINK
+> +       case LEDST_BLINK: {
+
+Here again you can use if IS_ENABLED(CONFIG_LED_BLINK) inside the case
+which should produce very similar code size, hopefully the same.
+
+> +               const int default_period_ms = 1000;
 >
-> +#ifdef CONFIG_LED_SW_BLINK
-> +       if (led_sw_is_blinking(dev))
-> +               return LEDST_BLINK;
+> -       return 0;
+> +               rc = led_set_period(dev, default_period_ms);
+> +               if (rc == 0)
+> +                       rc = led_set_state(dev, uc_plat->default_state);
+> +               break;
+> +       }
 > +#endif
+> +       default:
+> +               break;
+> +       }
 > +
->         return ops->get_state(dev);
+> +       return rc;
 >  }
 >
-> @@ -78,7 +176,11 @@ int led_set_period(struct udevice *dev, int period_ms)
->         struct led_ops *ops = led_get_ops(dev);
->
->         if (!ops->set_period)
-> +#ifdef CONFIG_LED_SW_BLINK
-> +               return led_sw_set_period(dev, period_ms);
-> +#else
->                 return -ENOSYS;
-> +#endif
->
->         return ops->set_period(dev, period_ms);
->  }
-> diff --git a/include/led.h b/include/led.h
-> index a6353166289..bd50fdf33ef 100644
-> --- a/include/led.h
-> +++ b/include/led.h
-> @@ -20,6 +20,14 @@ enum led_state_t {
->         LEDST_COUNT,
->  };
->
-> +#ifdef CONFIG_LED_SW_BLINK
-
-can drop this #ifdef
-
-> +enum led_sw_blink_state_t {
-> +       LED_SW_BLINK_ST_NONE = 0,
-> +       LED_SW_BLINK_ST_OFF = 1,
-> +       LED_SW_BLINK_ST_ON = 2,
-> +};
-> +#endif
-> +
->  /**
->   * struct led_uc_plat - Platform data the uclass stores about each device
->   *
-> @@ -29,6 +37,10 @@ enum led_state_t {
->  struct led_uc_plat {
->         const char *label;
->         enum led_state_t default_state;
-> +#ifdef CONFIG_LED_SW_BLINK
-> +       enum led_sw_blink_state_t sw_blink_state;
-> +       struct cyclic_info *cyclic;
-> +#endif
->  };
->
-
-Need to add function prototypes here for flashing API.
-
->  /**
+>  UCLASS_DRIVER(led) = {
 > --
 > 2.39.2
 >
