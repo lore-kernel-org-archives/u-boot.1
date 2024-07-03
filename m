@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EDCC30653
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 10:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B33C2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 10:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FA4888805;
+	by phobos.denx.de (Postfix) with ESMTP id DE3C988811;
 	Wed,  3 Jul 2024 12:13:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="WsRe6nGR";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="xD2DYAsS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF08F88802; Wed,  3 Jul 2024 12:13:09 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
+ id E72DF8880C; Wed,  3 Jul 2024 12:13:09 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E4548880C
+ by phobos.denx.de (Postfix) with ESMTPS id 0E9F988805
  for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 12:13:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9C2FB148A8F1; Wed,  3 Jul 2024 12:13:05 +0200 (CEST)
+ with ESMTPSA id 49E08148A648; Wed,  3 Jul 2024 12:13:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
  t=1720001585; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=PvzGQcTWYxE8hyNe1j7ZSXJH/oYZ2dasR3m8wWtSKpg=;
- b=WsRe6nGRDxSgzT9oghzrlPxa1XI5GnpnXdIRJp3zJpIr/4v3rBXnidoFNTpBvGOjg8KSaP
- 7K4a8Pwb73gweleDCj8oyYNKh2KA5m7T9Dcj+RIEnT6jEutHlG5pT5RRPxQqFXoARvSW6y
- ek9eOiUBWqDBpakn/6lr+59jAsmlYNc/+rddb5wOm9btmDqjYfhlHu57p5r4R5Qyt4ehKc
- QxByxXhjpvh/u9I8bCuYbEqY+/nL+CDojhtV3f1aaMFD+lAhjcKQEt2tcvwKXfMAyMVgpx
- 7fOOpl14xiSV5aknYIpDcrXPyecIBS6a/0BSVYsiBEt8mk4tvR+Pc1Ydez6y0A==
+ bh=pmUsb6P7kswX+kfzCcMBvixF7e5y7ynxBYoWPC3mNIs=;
+ b=xD2DYAsS6NUg9dnK+L2INaJ1QPNHhYeKndJWI6rqgyI43XbOgCIV0uOMv10HisSkE+6hq6
+ hwGq7v0weT1A0DX4JyCnxJJoXFROGThwTEm4q9P9jnRmGeIA7DR9WvDa4WeX9z4yXbTNrF
+ spMlb051q/2ncff4NHvQQZPOeMPcZAHgRQCt4vho+gknY7oh01y+Y34m2WkCzgC3iAEj17
+ 9lq6dLSErKrkzIjkQK3kOR2FeJehNQZSNdhwVHRaLrIxGXHMHQr6UBVig9RBIfy96k0MAw
+ q19T+08BjMNzM+ysLqqL+uiKAHCUUDRDjoIPmug3zo6M/CtHxW3RSSz6P+gVzA==
 From: Alexander Dahl <ada@thorsis.com>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <sr@denx.de>, Heiko Schocher <hs@denx.de>,
  Hans de Goede <hdegoede@redhat.com>
-Subject: [PATCH 2/4] fs: ubifs: Set pointers to NULL after free
-Date: Wed,  3 Jul 2024 12:12:56 +0200
-Message-Id: <20240703101258.1670825-3-ada@thorsis.com>
+Subject: [PATCH 1/4] fs: ubifs: Fix memleak and double free in u-boot wrapper
+ functions
+Date: Wed,  3 Jul 2024 12:12:55 +0200
+Message-Id: <20240703101258.1670825-2-ada@thorsis.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240703101258.1670825-1-ada@thorsis.com>
 References: <20240703101258.1670825-1-ada@thorsis.com>
@@ -64,68 +65,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Global superblock pointer 'ubifs_sb' and volume pointer 'ubi' of type
-struct ubi_volume_desc in private member sb->s_fs_info of type struct
-ubifs_info, can be allocated and freed at runtime, and allocated and
-freed again, depending which console or script commands are run.  In
-some cases ubifs_sb is even tested to determine if the filesystem is
-mounted.  Reset those pointers to NULL after free to clearly mark them
-as not valid.  This avoids potential double free on invalid pointers.
+When mounting ubifs e.g. through command 'ubifsmount' one global static
+superblock 'ubifs_sb' is used _and_ the requested volume is opened (like
+in Linux).  The pointer returned by 'ubifs_open_volume()' is stored in
+that superblock struct and freed later on cmd 'ubifsumount' or another
+call to 'ubifsmount' with a different volume, through ubifs_umount() and
+ubi_close_volume().
 
-(The ubifs_sb pointer was already reset, but that statement was moved
-now to directly after the free() to make it easier to understand.)
+In ubifs_ls(), ubifs_exists(), ubifs_size(), and ubifs_read() the volume
+was opened again, which is technically no problem with regard to
+refcounting, but here the still valid pointer in sb was overwritten,
+leading to a memory leak.  Even worse, when using one of those
+functions and calling ubifsumount later, ubi_close_volume() was called
+again but now on an already freed pointer, leading to a double free.
+This actually crashed with different invalid memory accesses on a board
+using the old distro boot and a rather long script handling RAUC
+updates.
 
+Example:
+
+    > ubi part UBI
+    > ubifsmount ubi0:boot
+    > test -e ubi ubi0:boot /boot.scr.uimg
+    > ubifsumount
+
+The ubifs specific commands 'ubifsls' and 'ubifsload' check for a
+mounted volume by themselves, for the generic fs variants 'ls', 'load',
+(and 'size', and 'test -e') this is covered by special ubifs handling in
+fs_set_blk_dev() and deeper down blk_get_device_part_str() then.  So for
+ubifs_ls(), ubifs_exists(), ubifs_size(), and ubifs_read() we can be
+sure the volume is opened and the necessary struct pointer in sb is
+valid, so it is not needed to open volume again.
+
+Fixes: 9eefe2a2b37 ("UBIFS: Implement read-only UBIFS support in U-Boot")
+Fixes: 29cc5bcadfc ("ubifs: Add functions for generic fs use")
 Signed-off-by: Alexander Dahl <ada@thorsis.com>
 ---
- fs/ubifs/super.c | 4 ++++
- fs/ubifs/ubifs.c | 1 -
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ fs/ubifs/ubifs.c | 12 ------------
+ 1 file changed, 12 deletions(-)
 
-diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
-index 788f88f0495..321c9b9351e 100644
---- a/fs/ubifs/super.c
-+++ b/fs/ubifs/super.c
-@@ -1758,11 +1758,13 @@ void ubifs_umount(struct ubifs_info *c)
- 	ubifs_debugging_exit(c);
- #ifdef __UBOOT__
- 	ubi_close_volume(c->ubi);
-+	c->ubi = NULL;
- 	mutex_unlock(&c->umount_mutex);
- 	/* Finally free U-Boot's global copy of superblock */
- 	if (ubifs_sb != NULL) {
- 		free(ubifs_sb->s_fs_info);
- 		free(ubifs_sb);
-+		ubifs_sb = NULL;
- 	}
- #endif
- }
-@@ -2061,6 +2063,7 @@ static void ubifs_put_super(struct super_block *sb)
- #ifndef __UBOOT__
- 	bdi_destroy(&c->bdi);
- 	ubi_close_volume(c->ubi);
-+	c->ubi = NULL;
- 	mutex_unlock(&c->umount_mutex);
- #endif
- }
-@@ -2340,6 +2343,7 @@ out_bdi:
- out_close:
- #endif
- 	ubi_close_volume(c->ubi);
-+	c->ubi = NULL;
- out:
- 	return err;
- }
 diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
-index 58b3f3659c1..506e29958c3 100644
+index 75de01e95f7..58b3f3659c1 100644
 --- a/fs/ubifs/ubifs.c
 +++ b/fs/ubifs/ubifs.c
-@@ -928,6 +928,5 @@ void uboot_ubifs_umount(void)
- 		printf("Unmounting UBIFS volume %s!\n",
- 		       ((struct ubifs_info *)(ubifs_sb->s_fs_info))->vi.name);
- 		ubifs_umount(ubifs_sb->s_fs_info);
--		ubifs_sb = NULL;
- 	}
+@@ -566,7 +566,6 @@ int ubifs_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info)
+ 
+ int ubifs_ls(const char *filename)
+ {
+-	struct ubifs_info *c = ubifs_sb->s_fs_info;
+ 	struct file *file;
+ 	struct dentry *dentry;
+ 	struct inode *dir;
+@@ -574,7 +573,6 @@ int ubifs_ls(const char *filename)
+ 	unsigned long inum;
+ 	int ret = 0;
+ 
+-	c->ubi = ubi_open_volume(c->vi.ubi_num, c->vi.vol_id, UBI_READONLY);
+ 	inum = ubifs_findfile(ubifs_sb, (char *)filename);
+ 	if (!inum) {
+ 		ret = -1;
+@@ -608,31 +606,24 @@ out_mem:
+ 		free(dir);
+ 
+ out:
+-	ubi_close_volume(c->ubi);
+ 	return ret;
  }
+ 
+ int ubifs_exists(const char *filename)
+ {
+-	struct ubifs_info *c = ubifs_sb->s_fs_info;
+ 	unsigned long inum;
+ 
+-	c->ubi = ubi_open_volume(c->vi.ubi_num, c->vi.vol_id, UBI_READONLY);
+ 	inum = ubifs_findfile(ubifs_sb, (char *)filename);
+-	ubi_close_volume(c->ubi);
+ 
+ 	return inum != 0;
+ }
+ 
+ int ubifs_size(const char *filename, loff_t *size)
+ {
+-	struct ubifs_info *c = ubifs_sb->s_fs_info;
+ 	unsigned long inum;
+ 	struct inode *inode;
+ 	int err = 0;
+ 
+-	c->ubi = ubi_open_volume(c->vi.ubi_num, c->vi.vol_id, UBI_READONLY);
+-
+ 	inum = ubifs_findfile(ubifs_sb, (char *)filename);
+ 	if (!inum) {
+ 		err = -1;
+@@ -650,7 +641,6 @@ int ubifs_size(const char *filename, loff_t *size)
+ 
+ 	ubifs_iput(inode);
+ out:
+-	ubi_close_volume(c->ubi);
+ 	return err;
+ }
+ 
+@@ -845,7 +835,6 @@ int ubifs_read(const char *filename, void *buf, loff_t offset,
+ 		return -1;
+ 	}
+ 
+-	c->ubi = ubi_open_volume(c->vi.ubi_num, c->vi.vol_id, UBI_READONLY);
+ 	/* ubifs_findfile will resolve symlinks, so we know that we get
+ 	 * the real file here */
+ 	inum = ubifs_findfile(ubifs_sb, (char *)filename);
+@@ -909,7 +898,6 @@ put_inode:
+ 	ubifs_iput(inode);
+ 
+ out:
+-	ubi_close_volume(c->ubi);
+ 	return err;
+ }
+ 
 -- 
 2.39.2
 
