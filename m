@@ -4,91 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D16C30653
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 11:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82928C30653
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 13:42:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46C3E887EA;
-	Wed,  3 Jul 2024 13:57:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6989A87E13;
+	Wed,  3 Jul 2024 15:42:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YHgXW9TU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gXJYla3X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F864887E7; Wed,  3 Jul 2024 13:57:08 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8CB2487F9F; Wed,  3 Jul 2024 15:42:46 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFE1B887FB
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 13:57:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDD0B87C68
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 15:42:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-718b714d362so2964931a12.0
- for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 04:57:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720007824; x=1720612624; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+I9TchBx23JDj+hUIieWsPqlF1ReNk4bsPTZ8/ar1GE=;
- b=YHgXW9TUyz4RtUBv0mF7A5+oC+Bl3qPFCTTJmb+bn1dnwzQmvEkCoKAAgGZUQW1eYc
- qTaovVlS7Y/P95ISwUjnTy2Zp2aJhV5sdOEH54YOr2+8X0He9ke5XFa+LEBe6kfp6s3i
- XtZdjYvtECzkpObrcqvk/pk7KZ1s3ueQ26wrfwgt6CJm9sVNSbx4ALnnMVCv3U2617lT
- oFdm79tavdNv+eK0b7qK3F34hVHt9iqQMEy59XCMDBax5F3NHGAJQi56Pfjqrs7iElm9
- FKhSsuxnCYJmXGll6ySmb4awyFMTx360XYmM3Ang/UzoTo5ZCD46NyK83Tt1yJ9NtbHJ
- fv5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720007824; x=1720612624;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+I9TchBx23JDj+hUIieWsPqlF1ReNk4bsPTZ8/ar1GE=;
- b=YjXnX7pT+opVVLkv31FlbMICV8CEIEJ0hWZTSR1hgFi/d/UPivyIvQ11MMzdiZ02pi
- ou0NbcOrCR0fPjl390hdxPVEU4bErSvgJPBqaYU3Yd37yWsK2NiiksJgeouWxtvsXSKa
- fANvTiiVxzJ+hSqqWyj9XWwCuYFWfBEAPAjKqlQFPE/x1+Vx2m+A1mvxrYTR30IRzJup
- NPJ01oLqSKkKsndFu2vyjQBtXXndxStm/Nu7UcSlKuH+itre2cMRFxUNR0OVJ5t3wsj7
- NXKh0MDLvhc0WyU2M8ssac57joUvXtzYm0bnB3FS2U7Mut7vSJqoDWnJv7Eyjbmub2tC
- oiCw==
-X-Gm-Message-State: AOJu0YxRexn+blOkPwfACeLxJNvto0PKGAkRIIw8oE+MrYXq6UbKIeSV
- GKXXi5mw75NuWYWljeT1T43VvL9t+YvVqPN5rp5IPUK6OBN4hlu34/uEOb9QqCq/sFDlX6O6GUU
- v7g3qe8lp6tk6KQ9ELwyT06xuedWAKWGfe1Z7+Q==
-X-Google-Smtp-Source: AGHT+IHCf4pQ+Ik8CKrt6N4XDsYr5XBl5YE2SenTW0JpJASuM/BLvatqi4eiXxoA1uqWI1g1Tk8kIZZnrqJUiRckFtc=
-X-Received: by 2002:a17:90a:2ecb:b0:2c9:6928:ac9b with SMTP id
- 98e67ed59e1d1-2c96928aeeamr2668008a91.15.1720007823976; Wed, 03 Jul 2024
- 04:57:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id D6E7CCE1B76;
+ Wed,  3 Jul 2024 13:42:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A315CC4AF07;
+ Wed,  3 Jul 2024 13:42:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1720014161;
+ bh=tVokBSXfvkEDrmlylBlAfG57iIHfV3oEyK2coV1fps4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gXJYla3Xu7jSYJTagUVc9n006hXvuVB2x/zdSL71XqsPwQ/SqkGVmguQdBNpNfUVQ
+ zKW9u8usFMuE1kgKKyk9uPxcUWznig7Idwirhbe7/YUhVVPNMz6972tkupVQ36g7AP
+ zNqj2CwfjmEcZpzLzr4gjY+opTb7L5v1zzXoko7T/Kxi5of4UoFHcWhED9KJj+gZPZ
+ eenTDHWUS/B8BhZCS/o4ulI0gxf0ZboKJYiXgr68COw3+FPgZdL1ahdP2y9JPa0I2q
+ GnGk+SeSDxkS9+n6/OrOJgfxdnic6GlTZ1XVA4Ym89pjdZyI4SzTJSwHEn7FYCmWfX
+ 7RE4nGJp3yVpA==
+Date: Wed, 3 Jul 2024 14:42:37 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Conor Dooley <conor.dooley@microchip.com>
+Cc: u-boot@lists.denx.de, Ivan Griffin <ivan.griffin@microchip.com>,
+ Padmarao Begari <padmarao.begari@microchip.com>,
+ Cyril Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v1] board: mpfs_icicle: implement board_fdt_blob_setup()
+Message-ID: <20240703-persecute-jumbo-cb910778c10c@spud>
+References: <20240625090806.1787287-2-conor.dooley@microchip.com>
 MIME-Version: 1.0
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-30-raymond.mao@linaro.org>
-In-Reply-To: <20240702182325.2904421-30-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 3 Jul 2024 14:56:27 +0300
-Message-ID: <CAC_iWjJmGnUm6Q1u_Yg0d8O4kgz79zK5pe6KvN_wxf6rWA5VOA@mail.gmail.com>
-Subject: Re: [PATCH v4 29/29] configs: enable MbedTLS as default setting
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="/TrPeNelyc9IXXzc"
+Content-Disposition: inline
+In-Reply-To: <20240625090806.1787287-2-conor.dooley@microchip.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,52 +70,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2 Jul 2024 at 21:35, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Enable MbedTLS as default setting for qemu arm64
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - None.
-> Changes in v3
-> - None.
-> Changes in v4
-> - removed the unused CONFIG_MBEDTLS_LIB_TLS.
->
->  configs/qemu_arm64_defconfig | 4 ++++
->  configs/sandbox_defconfig    | 3 +++
->  2 files changed, 7 insertions(+)
->
-> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> index 7e166f43908..9e2c490192c 100644
-> --- a/configs/qemu_arm64_defconfig
-> +++ b/configs/qemu_arm64_defconfig
-> @@ -67,4 +67,8 @@ CONFIG_TPM2_MMIO=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_EHCI_PCI=y
->  CONFIG_SEMIHOSTING=y
-> +CONFIG_MBEDTLS_LIB=y
-> +CONFIG_MBEDTLS_LIB_CRYPTO=y
-> +CONFIG_MBEDTLS_LIB_X509=y
->  CONFIG_TPM=y
-> +CONFIG_EFI_SECURE_BOOT=y
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 93b52f2de5c..679bbf69936 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -343,6 +343,9 @@ CONFIG_FS_CBFS=y
->  CONFIG_FS_CRAMFS=y
->  CONFIG_ADDR_MAP=y
->  CONFIG_CMD_DHRYSTONE=y
-> +CONFIG_MBEDTLS_LIB=y
-> +CONFIG_MBEDTLS_LIB_CRYPTO=y
-> +CONFIG_MBEDTLS_LIB_X509=y
->  CONFIG_ECDSA=y
->  CONFIG_ECDSA_VERIFY=y
->  CONFIG_TPM=y
-> --
-> 2.25.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+--/TrPeNelyc9IXXzc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jun 25, 2024 at 10:08:06AM +0100, Conor Dooley wrote:
+> The firmware on the Icicle is capable of providing a devicetree in a1 to
+> U-Boot, but until now the devicetree has been packaged in a "payload" [1]
+> alongside U-Boot (or other bootloaders/RTOSes) and appended to the image.
+> The address of this appended devicetree is placed in a1 by the firmware.
+> This meant that the mechanism used by OF_SEPARATE to locate the
+> devicetree at the end of the image would pick up the one provided by the
+> firmware when u-boot-nodtb.bin was in the payload and U-Boot's devicetree
+> when u-boot.bin was.
+>=20
+> The firmware is now going to be capable of providing a minimal devicetree
+> (quite cut down due to severe space constraints), but this devicetree is
+> linked into the firmware that runs out of the L2 rather than at the end
+> of the U-Boot image. Implement board_fdt_blob_setup() so that this
+> devicetree can be optionally used, and the devicetree provided in the
+> "payload" can be used without relying on "happening" to implement the
+> same strategy as OF_SEPARATE expects in combination with
+> u-boot-nodtb.bin. Unlike other RISC-V boards, the firmware provided
+> devicetree is only used when OF_BOARD is set, so that the almost
+> certainly more complete devicetree in U-Boot will be used unless
+> explicitly requested otherwise.
+>=20
+> Link: https://github.com/polarfire-soc/hart-software-services/blob/master=
+/tools/hss-payload-generator/README.md [1]
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+
+Off-list it was suggested to me to use MULTI_DTB_FIT in addition what
+what I've done here, to allow U-Boot to actually make use of the
+information in the firmware provided dtb to select a more complete dtb
+for the OS (or for itself). I whipped up the following quickly just to
+test that it works, but was super lazy about it as you can see:
+diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mp=
+fs_icicle/mpfs_icicle.c
+index ade150bec98..76f37a7199c 100644
+--- a/board/microchip/mpfs_icicle/mpfs_icicle.c
++++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
+@@ -52,6 +52,31 @@ static void read_device_serial_number(u8 *response, u8 r=
+esponse_size)
+ 		response_buf[idx] =3D readb(MPFS_SYS_SERVICE_MAILBOX + idx);
+ }
+=20
++#ifdef CONFIG_MULTI_DTB_FIT
++int board_fit_config_name_match(const char *name)
++{
++
++	char compat[256] =3D "microchip,";
++	size_t max =3D 256 - strlen("microchip,");
++	int ret;
++
++	/*
++	 * If there's not a HSS provided dtb, there's no point re-selecting
++	 * since we'd just end up re-selecting the same dtb again.
++	 */
++	if (!gd->arch.firmware_fdt_addr)
++		return -EINVAL;
++
++	strncat(compat, name, max);
++	ret =3D fdt_node_check_compatible((void *)gd->arch.firmware_fdt_addr, 0, =
+compat);
++	if (ret)
++		return -EINVAL;
++
++	debug("found a match for compat: %s\n", compat);
++	return 0;
++}
++#endif
++
+ void *board_fdt_blob_setup(int *err)
+ {
+ 	*err =3D 0;
+
+I'd rather invert the logic so that we compare the name of the config
+with the compatible strings sans vendor prefix - what's here would work
+for any of the boards were we are the vendor but not for the
+beaglev-fire. Granted that board is not supported in U-Boot right now,
+but I'll probably accompany a v2 of this that with an OF_UPSTREAM
+conversion for the PolarFire SoC boards.
+
+However, I don't really understand how I could make my implementation of
+board_fdt_blob_setup() play nicely. It appears that if I enable OF_BOARD
+then then the multi dtb stuff never kicks in (since we've updated the
+fdt pointer to that of the firmware provided dtb). Given that
+setup_multi_dtb_fit() is called almost immediately after
+board_fdt_blob_setup() in fdtdec_setup(), it seems like dropping
+board_fdt_blob_setup() entirely might be a better approach?
+
+I think that'll have the same behaviours we want w.r.t. firmware config
+options etc - except U-Boot will have to be built with functional
+devicetrees for all boards it wants to support. Maybe that's not a
+problem since it'd still be a single build for all boards. Maybe
+Heinrich has a better opinion there than I do..
+
+Thanks,
+Conor.
+
+
+> ---
+> CC: Ivan Griffin <ivan.griffin@microchip.com>
+> CC: Padmarao Begari <padmarao.begari@microchip.com>
+> CC: Cyril Jean <cyril.jean@microchip.com>
+> CC: Tom Rini <trini@konsulko.com>
+> CC: Conor Dooley <conor.dooley@microchip.com>
+> CC: u-boot@lists.denx.de
+> ---
+>  board/microchip/mpfs_icicle/mpfs_icicle.c | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>=20
+> diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/=
+mpfs_icicle/mpfs_icicle.c
+> index 4d7d843dfa3..2c1f7175f0e 100644
+> --- a/board/microchip/mpfs_icicle/mpfs_icicle.c
+> +++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
+> @@ -9,6 +9,7 @@
+>  #include <init.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+> +#include <asm/sections.h>
+> =20
+>  DECLARE_GLOBAL_DATA_PTR;
+> =20
+> @@ -50,6 +51,24 @@ static void read_device_serial_number(u8 *response, u8=
+ response_size)
+>  		response_buf[idx] =3D readb(MPFS_SYS_SERVICE_MAILBOX + idx);
+>  }
+> =20
+> +void *board_fdt_blob_setup(int *err)
+> +{
+> +	*err =3D 0;
+> +	/*
+> +	 * The devicetree provided by the previous stage is very minimal due to
+> +	 * severe space constraints. The firmware performs no fixups etc.
+> +	 * U-Boot, if providing a devicetree, almost certainly has a better
+> +	 * more complete one than the firmware so that provided by the firmware
+> +	 * is ignored for OF_SEPARATE.
+> +	 */
+> +	if (IS_ENABLED(CONFIG_OF_BOARD)) {
+> +		if (gd->arch.firmware_fdt_addr)
+> +			return (ulong *)(uintptr_t)gd->arch.firmware_fdt_addr;
+> +	}
+> +
+> +	return (ulong *)_end;
+> +}
+> +
+>  int board_init(void)
+>  {
+>  	/* For now nothing to do here. */
+> --=20
+> 2.43.2
+>=20
+
+--/TrPeNelyc9IXXzc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZoVVTQAKCRB4tDGHoIJi
+0lbcAQCdE3NmoFvr5eG5Ihs0wuuu+y8cwMkCWdqx7ZGapKUwZAEAoHSojVuKQ2T7
+bqwqPk/Zr3RULHZFROWhH9xRL81n7QU=
+=Ftsy
+-----END PGP SIGNATURE-----
+
+--/TrPeNelyc9IXXzc--
