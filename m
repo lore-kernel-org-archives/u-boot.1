@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 337CEC2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 17:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F4BC2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 17:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9464088814;
-	Wed,  3 Jul 2024 19:17:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id DA87988851;
+	Wed,  3 Jul 2024 19:57:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="tSmQ8od9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ay75O6oz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FC9088842; Wed,  3 Jul 2024 19:17:23 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EEED688855; Wed,  3 Jul 2024 19:57:45 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64A0188835
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 19:17:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDABE88818
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 19:57:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1720027041; x=1722619041;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5VChqJLL/yfEmuFDvyDFUy8Tjd03lPRiwB4HFJJXzjg=;
- b=tSmQ8od97yW8ZcUDt6SISXJvWTEvo7Pj/d8t4zToGVZ1o3MJYJ0sRpcRQvWgd7BW
- tAfw/doGsz72dWFgq5ITcV4gk471SpT4DCnfZiDk5UjHDyCVTleTUBzeQjdfFwVL
- DVvwWnPxqBrBaqLKxZwaCdBsVUoPWHOJlfkiCbRpn58=;
-X-AuditID: ac14000a-03251700000021bc-d4-668587a0ff4c
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id A4.C2.08636.0A785866;
- Wed,  3 Jul 2024 19:17:20 +0200 (CEST)
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 3 Jul 2024
- 19:17:19 +0200
-Message-ID: <685c5646-bdef-462f-b287-dece856ceab1@phytec.de>
-Date: Wed, 3 Jul 2024 19:17:18 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-72703dd2b86so633509a12.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 10:57:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1720029462; x=1720634262; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WsIz8RdAflFIdi94i0sF/9cYYrY2y3oGThPRud6PjoI=;
+ b=Ay75O6oz58ZjMDs9b1VFZOoy3MIWVz0AruFDr+rjoL94tab6hnguUUL9UWmdm43fwz
+ 5A1gI7gj8rqcpqobklFNzeg+e+VUY32vXwi5Mxa0KFj5gY5ONrU5nVcBPUzeKWTYXA6J
+ 1PhdF3n9oCZX1GOohTil0/+ZUNCagyAc00jZHijcuQaIulSrjcLwkW8o9c62cpBWEer6
+ NrbvklqHy5pP9ib2dHmqCzed59uLMDozF933Lq4yWEMI1tEXC1t4qYJ/Re+2IxE/HIVH
+ ORyZ+TYa1O5opiYc1caomzuD1IEmJysWY9LU7AWkGft0btZiDOvfgDFNd5Bjrwa5Cg55
+ rrvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720029462; x=1720634262;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WsIz8RdAflFIdi94i0sF/9cYYrY2y3oGThPRud6PjoI=;
+ b=tEzcBO0JR6Ocum0UTRmfLMVxF8lGCUKcOBVKNMUZ47jab1wVyYf21WgSTGrFv4Y8GI
+ 2q0ZVd4rrikjWb8T8x3OlheGm4X/GiI8W2fwET7+Lj3tz0eIe22R9uZoG0Y4wpTEVlvA
+ D1UDtVogPBYK5WdYv2hPPKXTzFyTDPnAQEOpm89zDmf3UtmVAPRXd8YKah4TjJr4C09+
+ fcYnEIOh4vkaTIFXqUfA9X6SP8Jfzy6d8I6Qf5ZbsMcinagD8hCtku9QIvkhbE1hoypF
+ hDMvYf+DpLNL3MJGOhumVybDl/3sCUOFjgl957W1A0CBh24WGENempR8KBS2Jwc6yPh4
+ QBSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUSP2A11EXy6I1UYyvHoxm6FE+6qQ8fKzfMr5CRIGMPNMeiL3aIUdS0RHD9mHvyXiN45WYyqU8PAyq8UAJbeykCkrNFfg==
+X-Gm-Message-State: AOJu0Yz5GSE1vqnl+HZ3Ndt5bE3Ff22T0yT6VGx3qGgCT8PzZQEHf+cQ
+ gOJ6af3q/S1xLGcWkHv8XiKiOGIh7FIEYFZJtknTwwO8eReKkYqu
+X-Google-Smtp-Source: AGHT+IGsLQ0Soo5ZcIik3/suM5HdVBhYsEjB83r0d4AqZrGM/UwO1S5VNAwCnyO4Ej742LZq/6Vh5Q==
+X-Received: by 2002:a05:6a20:7490:b0:1be:c3fc:1ccf with SMTP id
+ adf61e73a8af0-1bef60fac31mr15966640637.2.1720029462215; 
+ Wed, 03 Jul 2024 10:57:42 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b8a2:5329:f702:6533])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7080246f656sm10688788b3a.65.2024.07.03.10.57.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jul 2024 10:57:41 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: ian.ray@gehealthcare.com
+Cc: sbabic@denx.de,
+	u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] msc_sm2s_imx8mp: Adjust the initrd_addr location
+Date: Wed,  3 Jul 2024 14:57:27 -0300
+Message-Id: <20240703175727.446205-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/9] Generalize PHYTEC Overlay Handling
-To: Daniel Schultz <d.schultz@phytec.de>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>, <trini@konsulko.com>, <m.othacehe@gmail.com>,
- <joe.hershberger@ni.com>, <t.remmet@phytec.de>
-CC: <d-gole@ti.com>, <festevam@gmail.com>, <mkorpershoek@baylibre.com>,
- <sjg@chromium.org>
-References: <20240703054202.2812540-1-d.schultz@phytec.de>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20240703054202.2812540-1-d.schultz@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIIsWRmVeSWpSXmKPExsWyRpKBR3dBe2uawap2U4uWtR4WD6/6W3za
- +ZjVYsbNaWwWL47NZbf4tmUbo8XUSZvZLd7u7WS36H6n7sDp8f5GK7vH7IaLLB47Z91l93h1
- YBW7x9k7Oxg9+rtbWD2un9nO5HH8xnamAI4oLpuU1JzMstQifbsErowDLdtYCjZwVfSsn8rS
- wLiSo4uRk0NCwETi2KGFjF2MXBxCAkuYJJpnrGWGcO4wShxfeJIFpIpXwEbiSmcjE4jNIqAi
- saFrMitEXFDi5MwnYDWiAvIS92/NYO9i5OAQFrCWOLKrEmSOiMA+Rolrh3vAapgFYiQm/frM
- BFIjJGAlsfCPOURYXOLWk/lg49kE1CXubPgGNp4TaMzk38+ZIWosJBa/OcgOYctLbH87Bywu
- BGS/uLScBeIZeYlp514zQ9ihElu/bGeawCg8C8mls5Csm4Vk7CwkYxcwsqxiFMrNTM5OLcrM
- 1ivIqCxJTdZLSd3ECIo2EQauHYx9czwOMTJxMB5ilOBgVhLhlXrfnCbEm5JYWZValB9fVJqT
- WnyIUZqDRUmcd3VHcKqQQHpiSWp2ampBahFMlomDU6qB0TrCb5XqxllhFjfStr8s2Nyn2F/F
- YhZvmeuwe572nEmHDQRcmBcbi9iZ/dpzYeMURRneHfWv17ibpr7ev9ws2Z3N58inx/PKuljO
- PrrFsqZFcb34/zfXnhxYcXcrc8/X2U+FRb6t5fDQUJy24WmX5bfYDcwb8njrDvaturvhcdFN
- 89+LLzrM8lViKc5INNRiLipOBAABHgS7pAIAAA==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,34 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Fabio Estevam <festevam@denx.de>
 
+Booting an initramfs with the current address may lead to initramfs
+corruption and boot failure.
 
-Am 03.07.24 um 07:41 schrieb Daniel Schultz:
-> The overlays are specified in the bootenv.txt file that is loaded into
-> the environment. Then these overlays get loaded and applied via a script.
-> These scripts for loading and applying devicetree overlays are identical
-> for many phytec boards.
-> Create a common overlays.env that can be included.
-> Add support for devicetree overlays to phycore-imx8mp and include the
-> overlays.env for phycore-imx93.
-> Rename existing environment variables according to bootstd doc.
-> Move MMC boot logic into a common k3_mmc.env file and include the new
-> overlays.env file as well.
-> 
-> Benjamin Hahn (5):
->    include: env: phytec: Create env file for loading and applying
->      overlays
->    phycore-imx8mp: Add overlay and bootenv.txt support
->    phycore_imx93: include common overlays.env
->    board: phytec: renaming of variables according to bootstd doc
->    include: env: phytec: renaming of variables according to bootstd doc
-> 
-> Daniel Schultz (4):
->    include: env: phytec: Add common mmc boot for K3 SoMs
->    include: env: phytec: k3_mmc: Apply overlays during boot
->    board: phytec: phycore_am62x: Use k3_mmc.env logic
->    board: phytec: phycore_am64x: Use k3_mmc.env logic
+Move it 0x48000000 which avoids initramfs overlap and allows a
+successful initramfs boot.
 
-For this series,
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ include/configs/msc_sm2s_imx8mp.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+diff --git a/include/configs/msc_sm2s_imx8mp.h b/include/configs/msc_sm2s_imx8mp.h
+index 3c7d96cb3c0a..2a52455ace34 100644
+--- a/include/configs/msc_sm2s_imx8mp.h
++++ b/include/configs/msc_sm2s_imx8mp.h
+@@ -39,7 +39,7 @@
+ 	"fdt_addr_r=0x43000000\0"			\
+ 	"boot_fdt=try\0" \
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+-	"initrd_addr=0x43800000\0"		\
++	"initrd_addr=0x48000000\0"		\
+ 	"bootm_size=0x10000000\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+-- 
+2.34.1
+
