@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15122C2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 11:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0707C2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 11:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DA23887D5;
-	Wed,  3 Jul 2024 13:38:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7A0288811;
+	Wed,  3 Jul 2024 13:38:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7168C88813; Wed,  3 Jul 2024 13:38:08 +0200 (CEST)
+ id 15C0C882DB; Wed,  3 Jul 2024 13:38:09 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 068D6882DB
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 13:38:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 1CFB2887E3
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 13:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 68994367;
- Wed,  3 Jul 2024 04:38:30 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E4A71007;
+ Wed,  3 Jul 2024 04:38:31 -0700 (PDT)
 Received: from localhost.localdomain (X72Y076X74.nice.arm.com [10.34.125.15])
  by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id
- 811603F762; Wed,  3 Jul 2024 04:38:04 -0700 (PDT)
+ A7AA43F762; Wed,  3 Jul 2024 04:38:05 -0700 (PDT)
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2 0/2] Respin bootstd cros patch into a series of two
-Date: Wed,  3 Jul 2024 13:37:54 +0200
-Message-ID: <20240703113756.1293218-1-vincent.stehle@arm.com>
+Subject: [PATCH v2 1/2] efi: move guid helper functions to efi.h
+Date: Wed,  3 Jul 2024 13:37:55 +0200
+Message-ID: <20240703113756.1293218-2-vincent.stehle@arm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240627170629.2696427-1-vincent.stehle@arm.com>
+In-Reply-To: <20240703113756.1293218-1-vincent.stehle@arm.com>
 References: <20240627170629.2696427-1-vincent.stehle@arm.com>
+ <20240703113756.1293218-1-vincent.stehle@arm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -57,40 +58,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Move the guidcmp() and guidcpy() functions to efi.h, near the definition of
+the efi_guid_t type those functions deal with.
 
-This is a respin of this patch [1] after discussion [2]. Thanks to
-Simon and Heinrich for their reviews.
-
-To use the guidcmp() function, as suggested by Heinrich, we need to
-make it available to bootmeth_cros.c and I think that the cleanest way
-to do that is (arguably) to move the guid helper functions to efi.h
-near the efi_guid_t definition; this is why the original patch has now
-become a series of two patches.
-
-The alternative would be to include efi_loader.h from bootmeth_cros.c
-but I think this does not sound "right". If this is in fact the
-preferred approach just let me know and I will respin.
-
-There is no difference in the sandbox binaries before/after this
-series on Arm and on PC, and all the tests I have run on the sandbox
-are unchanged.
-
-Best regards,
-Vincent.
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240627170629.2696427-1-vincent.stehle@arm.com/
-[2] https://lists.denx.de/pipermail/u-boot/2024-June/557588.html
-
-Vincent Stehlé (2):
-  efi: move guid helper functions to efi.h
-  bootstd: cros: store partition type in an efi_guid_t
-
- boot/bootmeth_cros.c |  6 +++---
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
  include/efi.h        | 10 ++++++++++
  include/efi_loader.h | 10 ----------
- 3 files changed, 13 insertions(+), 13 deletions(-)
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
+diff --git a/include/efi.h b/include/efi.h
+index c3c4b93f860..d5af2139946 100644
+--- a/include/efi.h
++++ b/include/efi.h
+@@ -78,6 +78,16 @@ typedef struct {
+ 	u8 b[16];
+ } efi_guid_t __attribute__((aligned(4)));
+ 
++static inline int guidcmp(const void *g1, const void *g2)
++{
++	return memcmp(g1, g2, sizeof(efi_guid_t));
++}
++
++static inline void *guidcpy(void *dst, const void *src)
++{
++	return memcpy(dst, src, sizeof(efi_guid_t));
++}
++
+ #define EFI_BITS_PER_LONG	(sizeof(long) * 8)
+ 
+ /* Bit mask for EFI status code with error */
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 6c993e1a694..ca8fc0820f6 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -21,16 +21,6 @@
+ struct blk_desc;
+ struct jmp_buf_data;
+ 
+-static inline int guidcmp(const void *g1, const void *g2)
+-{
+-	return memcmp(g1, g2, sizeof(efi_guid_t));
+-}
+-
+-static inline void *guidcpy(void *dst, const void *src)
+-{
+-	return memcpy(dst, src, sizeof(efi_guid_t));
+-}
+-
+ #if CONFIG_IS_ENABLED(EFI_LOADER)
+ 
+ /**
 -- 
 2.43.0
 
