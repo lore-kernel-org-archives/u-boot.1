@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49DEC2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 18:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8688AC3271F
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 18:22:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8C2888405;
-	Wed,  3 Jul 2024 20:08:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DA24A88405;
+	Wed,  3 Jul 2024 20:22:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kFnf6g16";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bKDDo74h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5E5B88405; Wed,  3 Jul 2024 20:08:02 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id BF7AA88679; Wed,  3 Jul 2024 20:22:46 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E29588881C
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 20:08:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3683388864
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 20:22:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2ee7a4f67aeso2248581fa.2
- for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 11:08:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-701f397e8ffso3186912a34.0
+ for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 11:22:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720030080; x=1720634880; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3NVMYvTx0VBTwla6dT3x00USIs19xc58hylPRzBHbWQ=;
- b=kFnf6g16U1Oh/lfiL9pROJQFq9zUGWLpLyHjLxxpdB1hwYMBl5XvvDe/J33MDzrqq3
- CacJhYmdFBDXG0XHcnXUjvllBajXWk1qWd86Dgq3C7wbMMw+acWpT96uQ0yeKYe50LmW
- 0eCwznn9PG5x6aNoiPFxObjZt8wcQetlBjVMC/QqcjqabdHejjlM/yXdQSrzwZWZpi7K
- FWAEQGDijRG2MZjEfKgNrGaJx3AwYbKcig6zU1/NiEMKKlYvkfHEkMRpdxnMM898s6sz
- Q3w1yfweGc6iSoYAOBWvfsVq+ZC5+K5BH0RB4LN+BkQ0ereXsRFxUQ7S2DwlOyTZ5yTq
- 5ufg==
+ d=konsulko.com; s=google; t=1720030963; x=1720635763; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6I3NqkI3GDsJSllPGkLWLpigUCqlTfnRENM5IWZ050A=;
+ b=bKDDo74hIKDWdEQYNjWbZsvcVHEqlAKWwdgTY+jLOvu6GVppWXiaCY39IwBlgk+C84
+ 76fTalDz2k+wP/JpR9ezxqAOZ4QdoJqVIAsqlBq8XAN7dTgghgUkGrvSMTc4Gpb44L08
+ towRZRf8EHEuiISVCT309pao+D3F77gI75hX8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720030080; x=1720634880;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3NVMYvTx0VBTwla6dT3x00USIs19xc58hylPRzBHbWQ=;
- b=lP3cuTYTZDgacCFFd2iprWdNywAKTVpm4t4UyJlZ5VdFKKUOIy7y2t2Ec7ErCEy4Wu
- SAaKr1suXWwhDCFxo9zTtEL3ejqnpNcvzdOhhIg3j89vAGd/V8JK/wrpaa4hki2n8O/h
- bqVZ+El+rdKYCrSdEJkAEu4WZv/nrsZuAHduF3edlpHf/OcVnFNfkJzogM7cWnMcgjvd
- Kee/6PFr8vrSf41fLluiG2bojFXULOgGKSOHzzGVdI/D0YNJNdM0WAntJySIC0Mfflwj
- ISJtBjn82/8KhDsAzXovYhWuXt8BNjhW35IuJwK4bhTbepaT1Z4LdMCxMEh5n/DquxTT
- Yafw==
+ d=1e100.net; s=20230601; t=1720030963; x=1720635763;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6I3NqkI3GDsJSllPGkLWLpigUCqlTfnRENM5IWZ050A=;
+ b=eR/Va9p/FNCVZulHd997YGjR3goF0Pt6FTsVqBNcxc4Fht/2mvv6uDR1W7+Hx/gv9l
+ pNetkaVScsSAD5qD4cKpg1BFSkA34iBK9NnzgX7ehib+F0RRl4J7MfBxj7X9THc+PKdy
+ 8MxtKmlXI/0zPQqS4o4jhAhBQtYXW1ew1RrtTSdAqW2lH+G6+6v0s20skE289FJd94mR
+ vm3u2CD3eXJyibbzY79vdnq8NQefj8GCKivSetRXEDAMqQdD8VGAnm1dWRv0ezQEsHAU
+ UXSAUUOz1RstL+oX1aPnGEotDT9lVOft9M8gsXrVdN1izD7L7bQM6h9cpbnxs1NtCim1
+ YDZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUzCcNAj/stTAVGeFOga8TKR8EnFhTyz9GyIicELL0yvsJ3d//DM36wldsAcIxvgpbzggfMZet2ojOis2VUbVDMrrPb1Q==
-X-Gm-Message-State: AOJu0YzdFXaE4ujRiaTLJhqRnOliZssdNKuYxEbvabfogDBtCJR4aw5B
- Kvrwv518+a0fJGqPoBx+1rruWMaUGge+8ZZblpd6uuZg7aqXwVpcKg4lhQvZ+PmA/L2k8vab8Eg
- QWp/7iVHJSfhuXgmn54/VEDWIVAahIuAT
-X-Google-Smtp-Source: AGHT+IGaBoCtJcJUmuD/zR52z0jrpbad0uEY1bwZeJa03lJbvTau8dBzHoZ49bB1nt/eooHCegF8e0s02spof1SifWk=
-X-Received: by 2002:a05:6512:e88:b0:52c:d5a5:bf7 with SMTP id
- 2adb3069b0e04-52e8277120bmr8211847e87.4.1720030079695; Wed, 03 Jul 2024
- 11:07:59 -0700 (PDT)
-MIME-Version: 1.0
+ AJvYcCUZNmxgsrTOvPVRf0TSJvFUdaos9DUqqYOLcjwuMpc/3hzIAuBiZ9gWtXfWd8NR1GPkH96gV21z+PAUe/cXCkyUNAqo4Q==
+X-Gm-Message-State: AOJu0YyE5j4yyw7dCluAiMsaCiLTHm0aylyLh94M4bP1P48/vmoSQfhw
+ zs2G8eJUKxcg4CgO0qG8XEn2HwjOEiBKyivn5dCk6nOxRZ2cTSkM7XXuZIB1siE=
+X-Google-Smtp-Source: AGHT+IG+MrKb+DtxOjDdLtlmvY6erR6ish1iEwoKbix6raqUKZZI/G5aTYXLk+nR7Y2dKtNrJwFJ2w==
+X-Received: by 2002:a9d:7413:0:b0:701:ffd6:9499 with SMTP id
+ 46e09a7af769-70207709b09mr12700846a34.35.1720030962858; 
+ Wed, 03 Jul 2024 11:22:42 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
+ [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-701f7b20a0dsm2052091a34.55.2024.07.03.11.22.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jul 2024 11:22:41 -0700 (PDT)
+Date: Wed, 3 Jul 2024 12:22:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: ian.ray@gehealthcare.com, sbabic@denx.de, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: Re: [PATCH] msc_sm2s_imx8mp: Adjust the initrd_addr location
+Message-ID: <20240703182238.GC38804@bill-the-cat>
 References: <20240703175727.446205-1-festevam@gmail.com>
  <20240703180355.GB38804@bill-the-cat>
-In-Reply-To: <20240703180355.GB38804@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 3 Jul 2024 15:07:47 -0300
-Message-ID: <CAOMZO5Dej12iA7mX9MqMrrsj6oQ4SrNCAFN2vGuvOA_sq186aA@mail.gmail.com>
-Subject: Re: [PATCH] msc_sm2s_imx8mp: Adjust the initrd_addr location
-To: Tom Rini <trini@konsulko.com>
-Cc: ian.ray@gehealthcare.com, sbabic@denx.de, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAOMZO5Dej12iA7mX9MqMrrsj6oQ4SrNCAFN2vGuvOA_sq186aA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LXLNQqmIf7Bipf9x"
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5Dej12iA7mX9MqMrrsj6oQ4SrNCAFN2vGuvOA_sq186aA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,15 +94,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Wed, Jul 3, 2024 at 3:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+--LXLNQqmIf7Bipf9x
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Shouldn't fdt_addr_r change too? This is making me suspect the whole map
-> is too small for safety, how much memory does the platform have at
-> minimum?
+On Wed, Jul 03, 2024 at 03:07:47PM -0300, Fabio Estevam wrote:
+> Hi Tom,
+>=20
+> On Wed, Jul 3, 2024 at 3:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>=20
+> > Shouldn't fdt_addr_r change too? This is making me suspect the whole map
+> > is too small for safety, how much memory does the platform have at
+> > minimum?
+>=20
+> It has 2GB of RAM.
+>=20
+> Changing only initrd_addr and keeping fdt_addr_r unchanged allows a
+> successful initramfs boot.
 
-It has 2GB of RAM.
+How is the fdt at 0x43000000 not being clobbered if the initramfs at
+0x43800000 is? Is it because it's just enough of a bad spot that we
+relocate the fdt out of the way? With the kernel at 0x40480000
+everything else is too low. kernel address + 128MiB for fdt address, then
++512KiB (or a bit more, for nicer numbers) for initrd.
 
-Changing only initrd_addr and keeping fdt_addr_r unchanged allows a
-successful initramfs boot.
+--=20
+Tom
+
+--LXLNQqmIf7Bipf9x
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaFlucACgkQFHw5/5Y0
+tyxaVQwAsiY7PnNmuD3+h9kzPoYKIze4Tt6M5AeLcGHO8sTwyxO7SS3KQ4LisNZW
+ZkijbNeFAleWGrMowyTzQTX1adZF1Txxeq9ap74s7gv6ro50oWdCfsB7VK44FBDR
+bOhfAV/LySmD9vvN0HK7kScJVG3O/QwlpLUkWG+FZb4jKShIgaD46n+u61S9dlil
+4Sqz06knY41weioGtFJw4mgRVlu3Jzfsyuco2wv89tgM8gcJvIGdYNcccP/G1mqH
+18YomOYtweGR4ikgouj931dMBL7PvjESu6xBjOYCuCgfRhkTQNoHECPF/RrOVhbS
+OFKwhRtLAt/HSy8APObH0235uLY6xoQ3cQoU0xTxB1gDPEw4QPLxqMkVTKJ3h7z5
+YJVtgsVR80dX339zLYI0XYFAUa69g6Zm8O0so0XSMKOXkIFPqCaohp2ph0+6j8DW
+7vqXWMfLB/Phv02L3LnKodgsLI53OvSjQVDYyx1x1oHl+bFrmzLjwU5S4hEdsaA9
+HCg0UXBD
+=wCCK
+-----END PGP SIGNATURE-----
+
+--LXLNQqmIf7Bipf9x--
