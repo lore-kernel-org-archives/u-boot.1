@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C06C9C2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 15:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2615C2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 16:38:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C8F88842;
-	Wed,  3 Jul 2024 17:25:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BD8498871D;
+	Wed,  3 Jul 2024 18:38:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BcVpcdEW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IzwbyK+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 735E488842; Wed,  3 Jul 2024 17:25:10 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id B23E188846; Wed,  3 Jul 2024 18:38:45 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EC6D887E7
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 17:25:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51D1C8871D
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 18:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-36743a79dceso534450f8f.0
- for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 08:25:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5c427f3695cso2855804eaf.3
+ for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 09:38:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720020307; x=1720625107; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720024722; x=1720629522; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cK24eXpgiyVvGrESExTQ0T3xmt82AuTEKCKmAfbBZD0=;
- b=BcVpcdEWw6C730dGmuR8J7Jafgk+AiiJrOCbMOl9o6bAAU4oz1uGZMfuv7ag/TCJ/3
- bvSBfq5jzoLt+wy6HtENY1v/0YpsZVbRMGMr0dhHck4ku+JExRm3JzcsZwwndFCz8x+o
- bJ6fCM9dVlTijZcmPM/psb8EAJOcBHwrsJKC1zgtrUYgKgjpWqaaA/4owzjbb2VSOXyO
- lPLCROjYJO//DM5erfzymTJ2Ekht/ANkITClkAXYn3WmRl0f8dX8O3BwRlJD6VIIJrP0
- 4uLV2vNPVmYWABfqlNFCPE2D+a/DNJrIFMfP4KymX4c09P3efJ9zMNobisGSYZo4QUwW
- HtzA==
+ bh=cHv8Z/ny7cTgptWGU9ZSK3iAqkEBsFG1cFSRY64nF5Y=;
+ b=IzwbyK+2eOd+PZg6JK0uFWwPmyFObpds0vhqTz0+Y9lT92Za9WJGMUGObXJl0pgELv
+ hbQDwcqdGdjtlB6HYp1cY8RGFsErYeB9vlP5pIpFnoW6UMnc4jgHUeO+M9AySh8s0s7H
+ wqQ41hGrgER6eQ/pOHJG0eLJKm/uts/xediZI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720020307; x=1720625107;
+ d=1e100.net; s=20230601; t=1720024722; x=1720629522;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cK24eXpgiyVvGrESExTQ0T3xmt82AuTEKCKmAfbBZD0=;
- b=lt3FI/HtSZ5V5vypSxcc6qmBBHzPJxGbBu9BTmxgpj146fkdYL36n3WqNHXKItJwHJ
- gU8PoDw95kmE1r5TwJvWw4bTpYvYEKR6PT4R2BC3PA1JZ4DOLITgwwRICbyWvABzbRvv
- 2/UuhrShDZXQ+yzrHtIcIHr6Bh9cH5z1RhmLOVyFP3gxwzPHyEStcSPWT1OH03KKCOes
- +uud79qE4rDalxJtg9AMhGc0Tjchzqx3xyMcE/1SCBzKNIr9zcfail0XZT3tfPYxPoEL
- Bw+Qn1UNrvksNSqIxQhw2JZrBSdpcQMbO3xjQV/ujCcHCqeiV6LaRFbvasFtt3MxSWaA
- pM8A==
+ bh=cHv8Z/ny7cTgptWGU9ZSK3iAqkEBsFG1cFSRY64nF5Y=;
+ b=n0J5fexMTS3+k+vrlLRNaVziMtmf+vofyM+54RxfJHmO3WaywDKZCFpXJvSDpmTV3J
+ 8HV6E3uKWx9Cu9Q6LS38GZ0r3Ch2onG1Sw3YgSi7eLpkFoYS2MzLDcRKPdFHd0ozIdzF
+ xVxt4DaxiymVDUo0ELC6bTWVdzmHOvouHL6133BL0kJW0alSdGfKCzYsBvbPT73s8RHt
+ 7j+w7H/sVc2AFT9W+fPo+eJ+0aj5iUWuY8oBqtTVx6/EzYF6fNlyiMIZ2ibtUp8sRIjU
+ Yh39n8XcT+/t4dz2lGuuag7kLrgsyfXWvIPQMEyC1Qhl5d58PzIZkVhaww/uOjG4V/mt
+ UPtA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+7KRa7CRjH39QwPjPyx8NMXUwlOFoNfikPznGDG0W8kOCk0nC1qD2KyB9zxLfONqaGZG6/lQ4UlxOB92g7FR3T1al8w==
-X-Gm-Message-State: AOJu0Yzi+t2rrxPGApUB/9nqpPUfvJkzBv7YWypOlLSceiLW+FkELRid
- 94vdsgz2yJlzpv24lZ7QcP7VomS4N4U/5DuQOtfa2k1PE41HXvy15WXR5Z+ELY4=
-X-Google-Smtp-Source: AGHT+IHAyAzLHdH8CT0T2QfqU6TG/Mf/24Dk5Wk+4Z0O07qEEfDUiZlByIykA9/jG5v/OYRc+69pNw==
-X-Received: by 2002:a5d:42c8:0:b0:361:e909:60c3 with SMTP id
- ffacd0b85a97d-36794797f57mr1963608f8f.9.1720020307171; 
- Wed, 03 Jul 2024 08:25:07 -0700 (PDT)
-Received: from hades (ppp046103011142.access.hol.gr. [46.103.11.142])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3675a0cd784sm16235668f8f.7.2024.07.03.08.25.05
+ AJvYcCVgbGIFqpnKc2fbhRDuwtH/M97UCeTlOpHjiiK8QzGzzfA4OcyX3ulLJv/ykbQxVb4R2o9OKkmDjGXsSirxIx8k+XXLRw==
+X-Gm-Message-State: AOJu0YyLFFEjBqezMfcqQyLmGXPjSBNwcaM2bGnyVnQTtNpxvD21dC6a
+ sHP/ilRCwD/3mL7KQQ26v0POtQdvsKMHSaTUgYI9D2GlMQag/EcgtqZVcST0oYw=
+X-Google-Smtp-Source: AGHT+IGyRZJ0+2X186aeQIwrdXJG00t+563tWDyMYuIqlDBlbtCslOyD3Ybfk1wNGYXINBlcTONeDQ==
+X-Received: by 2002:a05:6870:2246:b0:254:c512:88c6 with SMTP id
+ 586e51a60fabf-25db35db53amr10845480fac.51.1720024721749; 
+ Wed, 03 Jul 2024 09:38:41 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
+ [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25e214892a1sm47545fac.32.2024.07.03.09.38.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jul 2024 08:25:06 -0700 (PDT)
-Date: Wed, 3 Jul 2024 18:25:03 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Jon Humphreys <j-humphreys@ti.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Wei Ming Chen <jj251510319013@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Joshua Watt <jpewhacker@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, Sean Anderson <seanga2@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Wed, 03 Jul 2024 09:38:41 -0700 (PDT)
+Date: Wed, 3 Jul 2024 10:38:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/2] scripts/Makefile.lib: EFI: Use capsule CRT
- instead of ESL
-Message-ID: <ZoVtTxDSU5qYLrYW@hades>
-References: <20240613202753.2528889-1-j-humphreys@ti.com>
- <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
- <86le37ihwu.fsf@udb0321960.dhcp.ti.com>
+ Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Marek Vasut <marex@denx.de>,
+ Baruch Siach <baruch@tkos.co.il>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
+Subject: Re: [PATCH 08/12] net/httpd: add httpd common code
+Message-ID: <20240703163838.GZ38804@bill-the-cat>
+References: <20240627113939.100620-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240627113939.100620-8-mikhail.kshevetskiy@iopsys.eu>
+ <CALeDE9NZFy_XFaWj=LOFw6BvqhcC=hs8QCwKg3VRfbCzcJFZkQ@mail.gmail.com>
+ <9228e420-86fb-45e8-baf7-8e19e9b0cbe6@genexis.eu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CRI/pKmxQ00ftffO"
 Content-Disposition: inline
-In-Reply-To: <86le37ihwu.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <9228e420-86fb-45e8-baf7-8e19e9b0cbe6@genexis.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,65 +109,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 14, 2024 at 11:54:41AM -0500, Jon Humphreys wrote:
-> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
-> 
-> > Hi Jonathan
-> >
-> > On Thu, 13 Jun 2024 at 23:28, Jonathan Humphreys <j-humphreys@ti.com> wrote:
-> >>
-> >> Use the capsule's public key certificate rather than a prebuilt ESL
-> >> generated from the certificate. The ESL is now generated as part of the
-> >> build.
-> >
-> > Is there a reason to do this? I understand that the .crt extension
-> > might be well known while the .esl is not, but OTOH the system you
-> > build on after this change *needs* to have cert-to-efi-sig-list
-> > installed
-> >
-> Hi Ilias,
-> 
-> In general, I am following the principle that it is better to not include
-> in your source repo derived binaries that can be built at buildtime.
-> 
-> As far as the need to have cert-to-efi-sig-list, it is part of efitools and
-> that is already documented as a requirement for the build host ([0] and
-> [1]), and our baseline Docker file also includes it.
 
-Ok we already have the tool on the CI
+--CRI/pKmxQ00ftffO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Wed, Jul 03, 2024 at 06:06:52AM +0400, Mikhail Kshevetskiy wrote:
+>=20
+> On 7/1/24 19:54, Peter Robinson wrote:
+> > Hi Mikhail,
+> >
+> >> This patch adds HTTP/1.1 compatible web-server that can be used
+> >> by other. Server supports GET, POST, and HEAD requests. On client
+> >> request it will call user specified GET/POST callback. Then results
+> >> will be transmitted to client.
+> > Why are we adding a HTTP server? I don't see a cover letter explaining
+> > overall what you're attempting to achieve with this patch set so
+> > please add that. Also I suggest you look at the LWIP patch set [1] as
+> > that may make what you wish to achieve more straight forward.
+> >
+> > Peter
+> >
+> > [1] https://lists.denx.de/pipermail/u-boot/2024-June/556526.html
+>=20
+> This patch series consist of
+> * TCP fixes. Current U-Boot implementation of TCP is bad. It is
+> especially bad for uploading. This patch series fixes TCP support. I
+> know about attempts to add LWIP to u-Boot, but it's not in U-Boot yet.
 
-> 
-> [0] https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#enabling-capsule-authentication
-> [1] https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#configuring-uefi-secure-boot
-> 
-> Jon
-> 
-> > Thanks
-> > /Ilias
-> >>
-> >> Changes from v1:
-> >> - Converted the single patch to a series to include a bug fix found during
-> >>   development.
-> >> - Created an explicit rule for creating the ESL file for proper makefile
-> >>   dependency tracking.  v1 had combined creating the ESL file and
-> >>   generating the .dtsi include in a single command.
-> >>
-> >> Jonathan Humphreys (2):
-> >>   scripts/Makefile.lib: fixes: Embed capsule public key in platform's
-> >>     dtb
-> >>   scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file
-> >>
-> >>  board/sandbox/capsule_pub_esl_good.esl | Bin 831 -> 0 bytes
-> >>  configs/sandbox_defconfig              |   2 +-
-> >>  configs/sandbox_flattree_defconfig     |   2 +-
-> >>  doc/develop/uefi/uefi.rst              |   8 ++++----
-> >>  lib/efi_loader/Kconfig                 |  12 +++++++-----
-> >>  scripts/Makefile.lib                   |  24 +++++++++++++++---------
-> >>  6 files changed, 28 insertions(+), 20 deletions(-)
-> >>  delete mode 100644 board/sandbox/capsule_pub_esl_good.esl
-> >>
-> >> --
-> >> 2.34.1
-> >>
+To be clear, baring some unforseen difficulty, lwIP will be merged. Is
+it ready today? No. But I would ask that if people have both networking
+background and desire to do U-Boot development they look in that
+direction rather than enhancing (rather than bugfixing) the legacy stack
+further.
+
+--=20
+Tom
+
+--CRI/pKmxQ00ftffO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaFfosACgkQFHw5/5Y0
+tyxW3Av/cYGJ+MMA5WLc2bEhjm4EuXsL5e4JYQzyLTvzGPpus7ZThV/KfD2+T3Sw
+STbjGPLskYzjSp/L0173WBSkr5VG0bDz40t3X/wvXdeDWoRKN/fLm16cTX0l7qM4
+cFuaShmZJOeInbtiooNo/9YLHt1qRzEKb6yb5q61ZkKvRy7AyaDJZSm1+arTq8Ns
+0u4uun3CT8zb9FNBa61ws8RsS4evesGrXOtOX4oogCdm+b1JXQ0MgIMypyzu/4CL
+5Dgp1/63hyQlkjVZ4QAGau6/qy3JltLt8W+c0PqJd00/tIPQDGT/GzLsny6yxmrc
+VnWVWK1CA28AmvbGIobTmzcOmWpguJw5G9OhaHDkc05PHfeOCBgsjE1er9PKGXAx
+ZFH9mJRfp3kWdHaPf8wmZR2BFkv2rq8icPe5yqTjRWxKHm+Os8P75vWTyxqcC4s9
+pe0DaSeoEIKlTGYUS9l8CCoxiiMDj/6RZOY3yNEOAGJnVKkS/QkGlqIEUJchpJwe
+OfDyA6UR
+=TsFV
+-----END PGP SIGNATURE-----
+
+--CRI/pKmxQ00ftffO--
