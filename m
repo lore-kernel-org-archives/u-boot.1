@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04484C2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 13:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87945C2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 13:46:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CF2D87E13;
-	Wed,  3 Jul 2024 15:44:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EF90287F8C;
+	Wed,  3 Jul 2024 15:46:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O6gfops8";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ZFMxCCSJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AFC187E13; Wed,  3 Jul 2024 15:44:27 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 71982887C6; Wed,  3 Jul 2024 07:42:28 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1A7987C68
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 15:44:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84B8588784
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 07:42:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2ec5e3799feso5053261fa.3
- for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 06:44:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720014263; x=1720619063; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Dzj6e4ISxFxdvA7coQ8TbrHVpjjAiusWaeNspfp5Rzs=;
- b=O6gfops8+Twg+y6QIlTFwIUT6Jlq3upeLje+/RKqgUXw+QKXh/qYQ21VSNQgxuMnW6
- fvvOV2m0RBRiKrQ/IfFMHpvTBCDH7OLKwhxjZNZnhD1a17Wcg5n7KJlfErOgZkzjZTtE
- K6WUIJOEWhrdpEmt4hr2L4BLEBGt9L7y0BAEv29TVTx5/HNahbGV+ZmQExziSj4dSzNM
- e2j5tTolLKtcy4qeFtDLCee1S87Q3B7d2AGI4Xv3WKaC4EpW1J96SHBBh93hETuUb/96
- hbtsFuDAP4AWop1So2SoSnttEor3rJSQJzhq6NOVZKLClKMYbmFUySnTVA/BO37xDTSn
- vo/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720014263; x=1720619063;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Dzj6e4ISxFxdvA7coQ8TbrHVpjjAiusWaeNspfp5Rzs=;
- b=W6YS+h3pH039N0V//mFrITzrixR5lgnFS7vaXfnS435gCxrUrwKcXw4rdsgCfRQQ6Z
- rNTy8zqQ2JR4cnlLiV4sx267IpGCfMUkvbj/DtCN1Tr7tizfhDoYmSi4zL2C4nOsBxjM
- Wt2SJFA/Ix/Jl20PeqcUtkE8lMUsoktB9REf/VxhTieaNADLQmL/AOm/4N2srNfv8s1Y
- FpCS94VJ0CXsKkuwIFRbCX66JCHtWgl4CkCEhIOaLMpDjw12PAeDVRfbllYRU239wHNw
- GuludJXIbYKimIhzYNMKZHnvliVRhxvmTxM/LgSI2lA5rcPEp+bPGm8MQpiPYD6HWj9l
- nP2A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhUerqRq8+ClHzf3+huoXFDZe62lM7o+H7L1mSTJnTbxLYjwOsVxh6odxqpAw/jIVPWtedKsSoeA3zBNC6TzEZcuObrA==
-X-Gm-Message-State: AOJu0Yyb/DFyb9Fs25UurpfYSZdPDOH9bQGTlAKiSnyq1V3apkFGQGFT
- l+j7Hij+kFS2a2iJS1ndWu2vgMrlvEGJrX7wyPnF9roth3I17wxSqVCR8U1KQZv144fs2G+lxKs
- gF5w+YlvV8Ds5yPUfo6Fg54yech1MNA==
-X-Google-Smtp-Source: AGHT+IG1/o/RvJLwsr8AO75hTpduxXgz5lEx4/1dNPwYkweEkxkYwVYUrnTzRflNIEpj/5lk+G5/dctBWdrraMzqlw4=
-X-Received: by 2002:a2e:a98d:0:b0:2ed:59fa:551e with SMTP id
- 38308e7fff4ca-2ee5e6f6a65mr86223251fa.4.1720014262583; Wed, 03 Jul 2024
- 06:44:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1719985345; x=1722577345;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=uc6R0w/WASFK93BbbSLFQIBPNllqIWRkW0cTsUu4ARc=;
+ b=ZFMxCCSJoD1vYEpJnA0dN0QPGBpY8R32Frfv4/qjW3Ipnkt44OmQDEaDUXvdC+qJ
+ zGDYJyvApn3LH2QFYyKOPeIIFeRlitnkNuOVeJXmmQyLK7JhMEWzcXrZiKLwICVi
+ sY85VKRtUm4Z3OcGzb5HgVJWTVK9uraIH+zDnKQvMI8=;
+X-AuditID: ac14000a-03251700000021bc-63-6684e4c1d726
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id EC.6D.08636.1C4E4866;
+ Wed,  3 Jul 2024 07:42:25 +0200 (CEST)
+Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 3 Jul 2024
+ 07:42:23 +0200
+From: Daniel Schultz <d.schultz@phytec.de>
+To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <trini@konsulko.com>, 
+ <m.othacehe@gmail.com>, <joe.hershberger@ni.com>, <w.egorov@phytec.de>,
+ <t.remmet@phytec.de>
+CC: <d-gole@ti.com>, <festevam@gmail.com>, <mkorpershoek@baylibre.com>,
+ <sjg@chromium.org>, Daniel Schultz <d.schultz@phytec.de>
+Subject: [PATCH 0/9] Generalize PHYTEC Overlay Handling
+Date: Tue, 2 Jul 2024 22:41:53 -0700
+Message-ID: <20240703054202.2812540-1-d.schultz@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240703090512.92636-1-michael@amarulasolutions.com>
- <20240703090512.92636-3-michael@amarulasolutions.com>
-In-Reply-To: <20240703090512.92636-3-michael@amarulasolutions.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 3 Jul 2024 10:44:10 -0300
-Message-ID: <CAOMZO5BLx+NPPZTpWajGe75iW+dm7-VE4dkTUeYk4cVvHPFiTw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] clk: imx: add mux ops for i.MX8M composite clk
-To: Michael Trimarchi <michael@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCLMWRmVeSWpSXmKPExsWyRpKBR/fgk5Y0g8bT5hYtaz0sHl71t/i0
+ 8zGrxYyb09gsXhyby27xbcs2RoupkzazW7zd28lu0f1O3YHT4/2NVnaP2Q0XWTx2zrrL7vHq
+ wCp2j7N3djB69He3sHpcP7OdyeP4je1MARxRXDYpqTmZZalF+nYJXBmfO6azFnzgreh8t42x
+ gXEZdxcjJ4eEgInEvjXbGbsYuTiEBJYwSTxdO5cdwrnHKDH7wyEmkCo2AS2JO1vmMoMkRATW
+ MUrMvbKJCcRhFmhilJjYchmsSljAXOLgih/sIDaLgIrE5Ic/2UBsXgEriW39r1gh9slLzLz0
+ nR0iLihxcuYTFhCbGSjevHU2M4QtIXHwxQswW0hAQWL2tsmMML3Tzr1mhrBDJbZ+2c40gVFg
+ FpJRs5CMmoVk1AJG5lWMQrmZydmpRZnZegUZlSWpyXopqZsYQTEhwsC1g7FvjschRiYOxkOM
+ EhzMSiK8Uu+b04R4UxIrq1KL8uOLSnNSiw8xSnOwKInzru4IThUSSE8sSc1OTS1ILYLJMnFw
+ SjUwdnMc1An5wlfgljarXWVam640z24DX6len+5zdbZ+0+oupewJ9E6sq7v/3bq0c8m09yta
+ 9rrynuNZ18ChunyJX3ei1LVP52PZJfy2Cn389FDvd7dKm8g2x7UrBbaVlghqSkx/ke+8YbnU
+ X9c4BnGtUt0t058bM0QaK1W9lGZ81+Bws93D9ZQSS3FGoqEWc1FxIgAlr/GTdwIAAA==
+X-Mailman-Approved-At: Wed, 03 Jul 2024 15:46:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,72 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+The overlays are specified in the bootenv.txt file that is loaded into
+the environment. Then these overlays get loaded and applied via a script.
+These scripts for loading and applying devicetree overlays are identical
+for many phytec boards.
+Create a common overlays.env that can be included.
+Add support for devicetree overlays to phycore-imx8mp and include the
+overlays.env for phycore-imx93.
+Rename existing environment variables according to bootstd doc.
+Move MMC boot logic into a common k3_mmc.env file and include the new
+overlays.env file as well.
 
-On Wed, Jul 3, 2024 at 6:15=E2=80=AFAM Michael Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Upstream Linux commit f90b68d6c8b0.
-....
+Benjamin Hahn (5):
+  include: env: phytec: Create env file for loading and applying
+    overlays
+  phycore-imx8mp: Add overlay and bootenv.txt support
+  phycore_imx93: include common overlays.env
+  board: phytec: renaming of variables according to bootstd doc
+  include: env: phytec: renaming of variables according to bootstd doc
 
-> The CORE/BUS root slice has following design, simplied graph:
-> The difference is core not have pre_div block.
-> A composite core/bus clk has 8 inputs for mux to select, saying clk[0-7].
->
-> It support target(smart) interface and normal interface. Target interface
-> is exported for programmer easy to configure ccm root. Normal interface
-> is also exported, but we not use it in our driver, because it will
-> introduce more complexity compared with target interface.
->
-> The normal interface simplified as below:
->             SEL_A  GA
->             +--+  +-+
->             |  +->+ +------+
-> CLK[0-7]--->+  |  +-+      |
->        |    |  |      +----v---+    +----+
->        |    +--+      |pre_diva+---->    |  +---------+
->        |              +--------+    |mux +--+post_div |
->        |    +--+      |pre_divb+--->+    |  +---------+
->        |    |  |      +----^---+    +----+
->        +--->+  |  +-+      |
->             |  +->+ +------+
->             +--+  +-+
->             SEL_B  GB
->
-> The mux in the upper pic is not the target interface MUX, target
-> interface MUX is hiding SEL_A and SEL_B. When you choose clk[0-7],
-> you are actually writing SEL_A or SEL_B depends on the internal
-> counter which will also control the internal "mux".
->
-> The target interface simplified as below which is used by Linux Kernel:
-> CLK[0-7]--->MUX-->Gate-->pre_div-->post_div
->
-> A requirement of the Target Interface's software is that the
-> target clock source is active, it means when setting SEL_A, the
-> current input clk to SEL_A must be active, same to SEL_B.
->
-> We touch target interface, but hardware logic actually also need
-> configure normal interface.
->
-> There will be system hang, when doing the following steps:
-> The initial state:
-> SEL_A/SEL_B are both sourcing from clk0, the internal counter
-> choose SEL_A.
-> 1. switch mux from clk0 to clk1
->    The hardware logic will choose SEL_B and configure SEL_B to clk1.
->    SEL_A no changed.
-> 2. gate off clk0
->    Disable clk0, then the input to SEL_A is off.
-> 3. switch from clk1 to clk2
->    The hardware logic will choose SEL_A and configure SEL_A to clk2,
->    however the current SEL_A input clk0 is off, the system hang.
->
-> The solution to fix the issue is in step 1, write twice to
-> target interface MUX, it will make SEL_A/SEL_B both sources
-> from clk1, then no need to care about the state of clk0. And
-> finally system performs well.
+Daniel Schultz (4):
+  include: env: phytec: Add common mmc boot for K3 SoMs
+  include: env: phytec: k3_mmc: Apply overlays during boot
+  board: phytec: phycore_am62x: Use k3_mmc.env logic
+  board: phytec: phycore_am64x: Use k3_mmc.env logic
 
-Shouldn't this also contain the original kernel commit author's Signed-off-=
-by?
+ board/phytec/phycore_am62x/phycore_am62x.env  | 11 +----
+ board/phytec/phycore_am64x/phycore_am64x.env  | 12 +----
+ .../phytec/phycore_imx8mp/phycore_imx8mp.env  | 27 ++++++++---
+ board/phytec/phycore_imx93/phycore_imx93.env  | 45 +++++--------------
+ configs/phycore-imx8mp_defconfig              |  6 +--
+ include/env/phytec/k3_mmc.env                 | 21 +++++++++
+ include/env/phytec/overlays.env               | 38 ++++++++++++++++
+ 7 files changed, 98 insertions(+), 62 deletions(-)
+ create mode 100644 include/env/phytec/k3_mmc.env
+ create mode 100644 include/env/phytec/overlays.env
 
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+-- 
+2.25.1
+
