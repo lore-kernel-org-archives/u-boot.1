@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41531C2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 13:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C4BC30653
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 13:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C36D48883E;
-	Wed,  3 Jul 2024 15:46:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A5EF8884A;
+	Wed,  3 Jul 2024 15:46:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="JogWrTI1";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ZW+9bMzK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D6E9887C7; Wed,  3 Jul 2024 07:42:34 +0200 (CEST)
+ id 87069887C6; Wed,  3 Jul 2024 07:42:37 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A912D88784
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 07:42:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9B4388784
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 07:42:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=D.Schultz@phytec.de
 DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1719985352; x=1722577352;
+ q=dns/txt; i=@phytec.de; t=1719985355; x=1722577355;
  h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uhFKAB/3SxcBtLcnmQxJOxF36nYs4qUMO07YQDjTzBc=;
- b=JogWrTI1Mgs0EODCzb/JIoxKC8uXlS4XpFKYRL1+NKoqNXVXdav3aYIT3eaB5Us2
- 0rYvkMZr1nw/aHRo+f7kqgb+Ql6HUgGzT8R7DrR2odRWohumWYZLvFQFCLgh0vzu
- lKGeUafcXtDfzh5wbP0aybUdAUHxi8sE0U9SR39KNHA=;
-X-AuditID: ac14000a-03e52700000021bc-6a-6684e4c868e2
+ bh=E2MeBmCR+979WKZye+Yzz2E0BVEH48+lzoVvqU9s8fQ=;
+ b=ZW+9bMzK6xEw9Cs4MeVZ74ebfXMTPYmSZy4/keAihiyVvvBoJhh9wrY/9iuAxRFv
+ BiXxZW9ST1Q1XudgijVKiWZ5rEBKRppRykYsn07wJVACTqtiIWE45rm2ojkHJGBx
+ RNpiAY5MxnAy8JGEAH1FzLdmOw8eGWemsRI00FnBCXU=;
+X-AuditID: ac14000a-03251700000021bc-6e-6684e4cbff34
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 70.7D.08636.8C4E4866;
- Wed,  3 Jul 2024 07:42:32 +0200 (CEST)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 42.7D.08636.BC4E4866;
+ Wed,  3 Jul 2024 07:42:35 +0200 (CEST)
 Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 3 Jul 2024
- 07:42:29 +0200
+ 07:42:32 +0200
 From: Daniel Schultz <d.schultz@phytec.de>
 To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <trini@konsulko.com>, 
  <m.othacehe@gmail.com>, <joe.hershberger@ni.com>, <w.egorov@phytec.de>,
@@ -52,9 +52,9 @@ To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <trini@konsulko.com>,
 CC: <d-gole@ti.com>, <festevam@gmail.com>, <mkorpershoek@baylibre.com>,
  <sjg@chromium.org>, Benjamin Hahn <B.Hahn@phytec.de>, Daniel Schultz
  <d.schultz@phytec.de>
-Subject: [PATCH 2/9] phycore-imx8mp: Add overlay and bootenv.txt support
-Date: Tue, 2 Jul 2024 22:41:55 -0700
-Message-ID: <20240703054202.2812540-3-d.schultz@phytec.de>
+Subject: [PATCH 3/9] phycore_imx93: include common overlays.env
+Date: Tue, 2 Jul 2024 22:41:56 -0700
+Message-ID: <20240703054202.2812540-4-d.schultz@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240703054202.2812540-1-d.schultz@phytec.de>
 References: <20240703054202.2812540-1-d.schultz@phytec.de>
@@ -64,18 +64,18 @@ Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrJLMWRmVeSWpSXmKPExsWyRpKBR/fEk5Y0g/VfFSxa1npYPLzqb/Fp
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNLMWRmVeSWpSXmKPExsWyRpKBR/f0k5Y0g22TZSxa1npYPLzqb/Fp
  52NWixk3p7FZvDg2l93i25ZtjBZTJ21mt3i7t5PdovudugOnx/sbrewesxsusnjsnHWX3ePV
- gVXsHmfv7GD06O9uYfW4fmY7k8fxG9uZAjiiuGxSUnMyy1KL9O0SuDLufX/NXtArVfHuwxKW
- BsZXol2MnBwSAiYSnTdXM4PYQgJLmCSWXZbsYuQCsu8xSnQt+wSWYBPQkrizZS4zSEJEYB2j
- xNwrm5hAHGaBZYwS52YcYAOpEhbwkDjydTlQFQcHi4CKxNqWYpAwr4CVROeseywQ2+QlZl76
- zg5icwpYS0z+/RysXAioZuEfc4hyQYmTM5+AlTMDlTdvnc0MYUtIHHzxAupQBYnZ2yYzwoyc
- du41M4QdKrH1y3amCYxCs5CMmoVk1CwkoxYwMq9iFMrNTM5OLcrM1ivIqCxJTdZLSd3ECIoe
- EQauHYx9czwOMTJxMB5ilOBgVhLhlXrfnCbEm5JYWZValB9fVJqTWnyIUZqDRUmcd3VHcKqQ
- QHpiSWp2ampBahFMlomDU6qBcZZb/WsFz8ab2nolc4qcRBMFU5fP3v15Udos99IJKhNXcoU5
- X0jseXZMcDbDXa1fx04rssdEfsj9ZL804a52+/bFCQzSHX1/bPr1nQwFWU6u3J6cLbRGLKPt
- toxg/BwFQS6pGderItTTalZd/Xd7jmZPgoaqm1ukwYJnvyaWbeHUCF95kbFfiaU4I9FQi7mo
- OBEA/hI4MowCAAA=
+ gVXsHmfv7GD06O9uYfW4fmY7k8fxG9uZAjiiuGxSUnMyy1KL9O0SuDLufn/EVvBXsOLk3nuM
+ DYzr+bsYOTkkBEwk9h1/zdjFyMUhJLCESeLA1iNMEM49Rok3788xgVSxCWhJ3NkylxkkISKw
+ jlFi7pVNYFXMAssYJc7NOMAGUiUsYC/x+MZrVhCbRUBF4t38mSwgNq+AlcSVg8cYIfbJS8y8
+ 9J0dxOYUsJaY/Ps50FQOoHVWEgv/mEOUC0qcnPkErJUZqLx562xmCFtC4uCLF2C2kICCxOxt
+ k+FGTjv3mhnCDpXY+mU70wRGoVlIRs1CMmoWklELGJlXMQrlZiZnpxZlZusVZFSWpCbrpaRu
+ YgRFkAgD1w7GvjkehxiZOBgPMUpwMCuJ8Eq9b04T4k1JrKxKLcqPLyrNSS0+xCjNwaIkzru6
+ IzhVSCA9sSQ1OzW1ILUIJsvEwSnVwLiM46uD0oMS8ac/8zLu3FQvuS+3VdYsarto8reQZVaG
+ MdtZfdh0NDjtLr12Pv0nVUY6M3eRWGdDRdmNDckc3E6udczvGBxeTMzf+/ref6t9lht6f224
+ 8MIy5FGm1uSPh31CZ9rM+7mww0P3jmjk/DLvJzurnx9k2LtCqum1ANemiYIZJ54sW6zEUpyR
+ aKjFXFScCADeNf+/jgIAAA==
 X-Mailman-Approved-At: Wed, 03 Jul 2024 15:46:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,110 +95,72 @@ X-Virus-Status: Clean
 
 From: Benjamin Hahn <B.Hahn@phytec.de>
 
-Add support for loading bootenv.txt as well as loading and applying
-overlays during boot from mmc and net.
-
-${no_bootenv}: Prevent loading external bootenv.txt environment. Use
-	       ${overlays} variable directly from u-boot environment.
-${no_overlay}: Do not load overlays defined in ${overlays} variable.
-	       Overlays loaded over the extension command are still
-	       being applied.
+Include the common overlays env file for phycore_imx93.
+The common overlays env file supports disabling loading overlays by
+setting the no_overlays variable.
 
 Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
 Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 ---
- board/phytec/phycore_imx8mp/phycore_imx8mp.env | 15 +++++++++++++++
- configs/phycore-imx8mp_defconfig               |  6 +++---
- 2 files changed, 18 insertions(+), 3 deletions(-)
+ board/phytec/phycore_imx93/phycore_imx93.env | 25 ++------------------
+ 1 file changed, 2 insertions(+), 23 deletions(-)
 
-diff --git a/board/phytec/phycore_imx8mp/phycore_imx8mp.env b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-index 7f6c5fd2c76..4ed5dc7e272 100644
---- a/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-+++ b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-@@ -1,4 +1,5 @@
- #include <env/phytec/rauc.env>
-+#include <env/phytec/overlays.env>
+diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
+index 27bfadfa140..09542f5aa7d 100644
+--- a/board/phytec/phycore_imx93/phycore_imx93.env
++++ b/board/phytec/phycore_imx93/phycore_imx93.env
+@@ -1,5 +1,7 @@
+ /* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
  
- bootcmd=
- 	if test ${dofastboot} = 1; then
-@@ -16,6 +17,8 @@ bootcmd=
- 		fi;
- 	fi;
- console=ttymxc0,115200
-+bootenv_addr=0x49100000
-+fdto_addr=0x49000000
- dofastboot=0
- emmc_dev=2
- fastboot_raw_partition_all=0 4194304
-@@ -32,8 +35,14 @@ mmcargs=
- mmcautodetect=yes
++#include <env/phytec/overlays.env>
++
+ image=Image
+ console=ttyLP0
+ fdt_addr=0x83000000
+@@ -7,8 +9,6 @@ fdto_addr=0x830c0000
+ bootenv_addr=0x83500000
+ fdt_file=CONFIG_DEFAULT_FDT_FILE
+ ip_dyn=yes
+-bootenv=bootenv.txt
+-mmc_load_bootenv=fatload mmc ${mmcdev}:${mmcpart} ${bootenv_addr} ${bootenv}
+ mmcdev=CONFIG_SYS_MMC_ENV_DEV
+ mmcpart=1
+ mmcroot=2
+@@ -17,16 +17,6 @@ mmcargs=setenv bootargs console=${console},${baudrate} earlycon
+ 	root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw
+ loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+ loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}
+-mmc_load_overlay=fatload mmc ${mmcdev}:${mmcpart} ${fdto_addr} ${overlay}
+-mmc_apply_overlays=
+-	fdt address ${fdt_addr};
+-	for overlay in ${overlays};
+-	do;
+-		if run mmc_load_overlay; then
+-			fdt resize ${filesize};
+-			fdt apply ${fdto_addr};
+-		fi;
+-	done;
  mmcboot=
  	echo Booting from mmc ...;
-+	if test ${no_bootenv} = 0; then
-+		if run mmc_load_bootenv; then
-+			env import -t ${bootenv_addr} ${filesize};
-+		fi;
-+	fi;
- 	run mmcargs;
- 	if run loadfdt; then
-+		run mmc_apply_overlays;
- 		booti ${loadaddr} - ${fdt_addr};
- 	else
- 		echo WARN: Cannot load the DT;
-@@ -51,9 +60,15 @@ netboot=
- 	else
- 		setenv get_cmd tftp;
- 	fi;
-+	if test ${no_bootenv} = 0; then
-+		if run net_load_bootenv; then
-+			env import -t ${bootenv_addr} ${filesize};
-+		fi;
-+	fi;
- 	${get_cmd} ${loadaddr} ${image};
+ 	if run mmc_load_bootenv; then
+@@ -42,17 +32,6 @@ mmcboot=
+ nfsroot=/nfs
+ netargs=setenv bootargs console=${console},${baudrate} earlycon
+ 	root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
+-net_load_bootenv=${get_cmd} ${bootenv_addr} ${bootenv}
+-net_load_overlay=${get_cmd} ${fdto_addr} ${overlay}
+-net_apply_overlays=
+-	fdt address ${fdt_addr};
+-	for overlay in ${overlays};
+-	do;
+-		if run net_load_overlay; then
+-			fdt resize ${filesize};
+-			fdt apply ${fdto_addr};
+-		fi;
+-	done;
+ netboot=
+ 	echo Booting from net ...;
  	run netargs;
- 	if ${get_cmd} ${fdt_addr} ${fdt_file}; then
-+		run net_apply_overlays;
- 		booti ${loadaddr} - ${fdt_addr};
- 	else
- 		echo WARN: Cannot load the DT;
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 7b16e8ef58e..e20a43e2674 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -5,6 +5,7 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_PHYTEC_SOM_DETECTION=y
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x3C0000
- CONFIG_SYS_I2C_MXC_I2C1=y
-@@ -12,7 +13,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mp-phyboard-pollux-rdk"
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_TARGET_PHYCORE_IMX8MP=y
--CONFIG_PHYTEC_SOM_DETECTION=y
-+CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -49,8 +50,6 @@ CONFIG_SPL_POWER=y
- CONFIG_SPL_WATCHDOG=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="u-boot=> "
--# CONFIG_CMD_EXPORTENV is not set
--# CONFIG_CMD_IMPORTENV is not set
- # CONFIG_CMD_CRC32 is not set
- CONFIG_CMD_EEPROM=y
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
-@@ -74,6 +73,7 @@ CONFIG_CMD_EXT2=y
- CONFIG_CMD_EXT4=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
 -- 
 2.25.1
 
