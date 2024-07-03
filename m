@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C4FC2BD09
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 13:49:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9771FC2BD09
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 14:35:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9851888877;
-	Wed,  3 Jul 2024 15:46:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 915218857D;
+	Wed,  3 Jul 2024 16:35:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BVwlGW3b";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yls1JbL+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 427CC88814; Wed,  3 Jul 2024 14:01:55 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6465A8881A; Wed,  3 Jul 2024 16:35:16 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D4D2887EA
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 14:01:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FA988838E
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 16:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sebin.francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 463C1n69004233;
- Wed, 3 Jul 2024 07:01:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720008109;
- bh=wPo3SiaDdOF+d8XHPvSMjD+kYyzuNm8PFpXtTRrGdE0=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=BVwlGW3buPqV33kwm6s2R4CT7DRTZFejKeg2t30HrA/VTsbtGk5r3U6fuA554eN+R
- ZOqVSh5JN2Qurc+ZMasn6rg5z5sBKf6M45CQGabyYrx+CNN6DFaJ9AZFZN8kKmIPpk
- 0RQpRnagaKtS+GT1G6fSdJlKrmSqBg5P+TcKjxd0=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 463C1nGk006408
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 3 Jul 2024 07:01:49 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
- Jul 2024 07:01:49 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 3 Jul 2024 07:01:49 -0500
-Received: from [10.24.69.195] (shark.dhcp.ti.com [10.24.69.195])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 463C1j41039999;
- Wed, 3 Jul 2024 07:01:46 -0500
-Message-ID: <629315ea-8198-45af-bf92-6a6e7860e1df@ti.com>
-Date: Wed, 3 Jul 2024 17:31:44 +0530
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-726d9b3bcf8so4144001a12.0
+ for <u-boot@lists.denx.de>; Wed, 03 Jul 2024 07:35:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720017312; x=1720622112; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y6b8nyWG9tvF5G/NMRDHIWeCN+dNGpS9YNzPs6jkH4E=;
+ b=yls1JbL+RJEAVcq+ZB0EaqC+sGcgfU+pIWIgTjA84KQF3JrIHjTZtyZSeQvYKPNidQ
+ jv0CHyOWo1sjEyLiVJkPb8cDs3/Kk2nrKZYEk0s+SxAmBn/SDzjEWA0yjJgEy6KuLNnU
+ IruRv2EBde+l/JaVRjAfKDAUkRB1sJxsbfWOff8R70ibqIU5JB/BbCh10YuHlXeXBDUf
+ 2lHLVl6pxfznJaPBsqt5gG4WDhKZSorgRR6+8JZHi5dTSYkXK03cZq/Ed8HD1xGXH7Ha
+ RtxUThX9ldoOPx9v1uaqzp36U4VZ3msht6fiGSrN3dMz1F15NdGrCp0NGLODFBSa1+w3
+ rn0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720017312; x=1720622112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Y6b8nyWG9tvF5G/NMRDHIWeCN+dNGpS9YNzPs6jkH4E=;
+ b=corM/lefGk2/n7Pe7cG0O78NWu+lZq/ZOlbyBAHtcPEzpEeD9HQMycNWHAy/7D4lCk
+ 7CDgiSdQjh0fXU5IYWaskQBLrAq3bfEfukAyaGlZ4WWxX0UpSlmRYJyAQcGRR7p7Jwu8
+ 0R9lzdcchBwBWkRqMu3a0w37J+MEII2DRhdkPSj2D3HGBBRWjJd0qOp+IgMpfnBigXDy
+ 4bgxUTnJnmDoDd60w7JVixe8Ba0Kh1iyZLr3359vhf11QW9ewKUgX6Wjw5FFMwzUqO02
+ RjU2brnfI2ysl0lfJRx2kWR8O1ERFhDuDiXnrsCukYMeOp3+ihczIr4Rzn9Tnoe3FuOt
+ z5GA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUy6fik8Dww6WagpxudhbiEDpR1DN5ZiDexaEqxeFDDSP7kNAwy1CLuopPb2R7XVw0OhMzVDtidmUZPZxi4NT8VPMsoVA==
+X-Gm-Message-State: AOJu0YxhICICh3QogDawo/zh6Xjb/opM9xJ+el/m6Cs0WmgHXy6HTXkI
+ NT3Swwqri1y4fYsAv+NWbTiD/dXeqqyOtLkUSUlSt+Oi0OMr4fensBz61VPGJ8x0ZrGq7AG61EZ
+ nGWs5KAwYTGBO6yH3W7B8eCx448hBcgtz2gOUYQ==
+X-Google-Smtp-Source: AGHT+IHzxDPdlYIkYknP4mrL+h28ZWR1BUEmq42xP5bjOrS56Sltqh25gy3CwQke0/KsLbX6vCGhIAmsgfFIyhKcN2Q=
+X-Received: by 2002:a05:6a20:9144:b0:1bd:234f:ea6c with SMTP id
+ adf61e73a8af0-1bef60e3f53mr13043146637.13.1720017312450; Wed, 03 Jul 2024
+ 07:35:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V3 0/4] Low Power Mode: Pakage TIFS Stub on BeaglePlay
-To: Nishanth Menon <nm@ti.com>
-CC: Dhruva Gole <d-gole@ti.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
- <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>,
- Vibhore Vardhan <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>
-References: <20240628093252.1864609-1-d-gole@ti.com>
- <20240628130323.vxy7rruh3bdcklxe@brownnose>
- <067d0bd4-867f-4d48-8852-f5d8e04ffc2a@ti.com>
- <20240628174008.tjdhwvzj7mxaka6z@destruct>
- <7769855e-8e08-47c0-b4a0-a466f44044de@ti.com>
- <20240701152419.zptqmwrqcwabyrx3@lethargic>
-Content-Language: en-US
-From: Sebin Francis <sebin.francis@ti.com>
-In-Reply-To: <20240701152419.zptqmwrqcwabyrx3@lethargic>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Wed, 03 Jul 2024 15:46:48 +0200
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-3-raymond.mao@linaro.org>
+ <20240702205658.GS38804@bill-the-cat>
+In-Reply-To: <20240702205658.GS38804@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 3 Jul 2024 10:35:00 -0400
+Message-ID: <CAEfUkUKqCaxaUh5yAQvr8KrJKwnHFLJiBJKiK7-iOxbdH3B4bw@mail.gmail.com>
+Subject: Re: [PATCH v4 02/29] mbedtls: Add script to update MbedTLS subtree
+To: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,26 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-On 01/07/24 20:54, Nishanth Menon wrote:
-> On 15:25-20240701, Sebin Francis wrote:
->> For HS-FS device we need to sign the fs-stub with customer key. DM firmware
->> cannot have a component which is signed using customer key.
-> Please explain please why DM cannot have a component signed using a
-> customer key for the public record?
+On Tue, 2 Jul 2024 at 16:57, Tom Rini <trini@konsulko.com> wrote:
 
-
-For HS device customer is owning the customer key and only customer
-
-has the access for the customer key. Because of this the signing has to 
-happen
-
-from the customer side.
-
-DM is release by TI, Since TI doesn't have access to the customer key it 
-cannot
-
-have a component that is signed by customer key.
-
-
+> On Tue, Jul 02, 2024 at 11:22:38AM -0700, Raymond Mao wrote:
 >
+> > lib/mbedtls/update-mbedtls-subtree.sh is a wrapper of git subtree
+> > commands.
+> > Usage from U-Boot top directory, run:
+> >
+> > $ ./lib/mbedtls/update-mbedtls-subtree.sh pull <release-tag>
+> > $ ./lib/mbedtls/update-mbedtls-subtree.sh pick <commit-id>
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Initial patch.
+> > Changes in v3
+> > - None.
+> > Changes in v4
+> > - Minor fix and move the script into tools dir.
+> >
+> >  tools/update-mbedtls-subtree.sh | 47 +++++++++++++++++++++++++++++++++
+> >  1 file changed, 47 insertions(+)
+> >  create mode 100755 tools/update-mbedtls-subtree.sh
+>
+> Given how amazingly close this is to dts/update-dts-subtree.sh and also
+> the lwIP version, can you and Jerome please co-ordinate on a short
+> series that you can then both depend on a pre-req that makes, I don't
+> know, tools/update-git-subtree.sh and that script takes upstream URI and
+> whatever else would be needed so that all 3 of our "update or
+> cherry-pick from a git subtree" scripts call that and are more or less
+> one line scripts themselves? Thanks.
+>
+> I agree. This is a good idea. I can make a prerequisite patch to merge
+these
+3 scripts.
+
+Regards,
+Raymond
