@@ -4,98 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F15C30658
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 00:16:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49335C30658
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 00:34:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 892A88877C;
-	Wed,  3 Jul 2024 02:16:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 682788875D;
+	Wed,  3 Jul 2024 02:34:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cTWLz+Di";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="OFsEQKy4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B83C687666; Wed,  3 Jul 2024 02:16:00 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7C56C8875D; Wed,  3 Jul 2024 02:34:25 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4883D88771
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 02:15:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49AF4887B2
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 02:34:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6f855b2499cso2810123a34.1
- for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 17:15:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1719965757; x=1720570557; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CNLarG/ERSzrFBYJdKhqn3rflGY31N/AiJr0FomNC3w=;
- b=cTWLz+Dia10QAyl4yICMIjKC9Lfev/NOY2T2+RrPq9unV3ymGoH4zf+e8R6DeEJNce
- WNc+hWKZJzkiAV4LrdaODi6dJK5TibHWSHbgaMWA4gCKkBLkY1PVk+wwi/ZW3SGGbjtA
- 0rpQFlmQUJgAfCw5CBhPflFE88YXznJWg0En0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719965757; x=1720570557;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CNLarG/ERSzrFBYJdKhqn3rflGY31N/AiJr0FomNC3w=;
- b=vfWBKSRgrc+0o8fH/5On79/AEZbdj2mA1IQ0AYlJPAuwcBY416puFSN9zwPmrCtbz/
- cEXZWpGnCp3fA27XGKnx2L3QXAr7CTm45XKVNNKX5ovhHA7zwLdbe//lM1DQCSjFoQHR
- zRgcmUnKCx7EkebWAQfjmJFSKz48RXTsYZObj9nlBLOQt2vykOrX3GAiaF578qvtOBgT
- 08e5BBbFGL2SJoHpHG8HAS2zNjMoVakYahvVHmq2L1/Ukr/tr5WR6nBRv6GMB6O9Jwjp
- Qp9vw97RqpMs68rTkAliq05N5lTOjGYjG7jhWGn7th3i2eVqI1BvVA5AUf/wOEnzzURB
- W3rg==
-X-Gm-Message-State: AOJu0YyrIAf9JMfkZpr254QBktnLRkzGTGyFt2dF6BVr+Up2kqiXz9oK
- NZ8DjiD7iHxIXz0LC2uugQxmKBABtTzp0AFQs5MU3uR7QA12ff13AWhRBHjsLXk=
-X-Google-Smtp-Source: AGHT+IH0VBxHwGtNCfWgxYZPQeCqF2Kk2NfS3TzJkhFI7r4HbIrAE/QRZWsTAMmK1fu+TJ9sdJYFpA==
-X-Received: by 2002:a05:6870:1493:b0:25d:5024:4fae with SMTP id
- 586e51a60fabf-25db35c0336mr9665242fac.45.1719965756911; 
- Tue, 02 Jul 2024 17:15:56 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-45.totalplay.net.
- [189.203.106.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25df6fe9150sm451141fac.42.2024.07.02.17.15.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jul 2024 17:15:56 -0700 (PDT)
-Date: Tue, 2 Jul 2024 18:15:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v4 04/29] lib: Adapt digest header files to MbedTLS
-Message-ID: <20240703001552.GW38804@bill-the-cat>
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-5-raymond.mao@linaro.org>
- <20240702224825.GT38804@bill-the-cat>
- <CAEfUkULVRD_SQWP9f9bjRutXi33aqiEaNhTWfdF9qKWvLhKJ1g@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cdsX0kMsL91dQUg/o8berVitbrik6t+pUvKz1uKASLZR3+2Eon74ujm+vDj1469bTNwRbmdhWKQCwxGF77cTZe9mP9Qbg5ZlmZCDbj3lokGEdhyiMtAO1ePC1XobyXfnOVWU5Z4hPPFuKUkJ3QLb6aHplxUG519PR4NNG/Ugadram4o99Znq7fMwl4n6owuq/sO3oMUHSWfGTHArzuQzCA3n1o4D/JDXc6FSv9YVH4nZNbwXgBrrUIuO7lU28J9clejgHIXLcwVE5/mhxAaNE0npCxia3dOv9S5UExKxp0QSvz8OXvXIM5AayWQIED4pOkE5v9Slixn0SJsZRYhZwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JwXISQaRQBOQQTTPCuCpo4JUbeAyR3050LYxaOj71uU=;
+ b=mymwxkqB66zccc9EfwRIbm20GUulvvIjoIQn5WyLN3B4kHYBBp+Q3XPq9AwSQR4bO4Ccpr/dGGdtTRxj1QW7jJmz7MvAb3z2e7liFN25ENVFREGSCT/b/Ej5Nb7GuuW6BzPDrN5STaqroGDWwz6KUajf7sUWXGbdpPoT68ytq3nkl+inlAmyy1bapcBVlyHUY6T7Cfx+pvJ391wal2tIK4hCp9yCZskoxdyyOqhntrOOMRuDh7ymGHyY2KKwpcdNksicB+yGflhgTUD3uzusaVdnsrDlb/eBr/f7PvBP1udFSmXoYwKCbv7Fiv6uqshAB1f/f0KdTY19ccj1O5kqSw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JwXISQaRQBOQQTTPCuCpo4JUbeAyR3050LYxaOj71uU=;
+ b=OFsEQKy4q6q1QcmsefE/nhPqTMAwGmtNN4/mMZEt4408Dc8tSAF2xCh86Y876/x+K8jzTgczPabcR1vFPC7hfHraFAuLDEOOgMOg7aOrGqzSBHE2vEr8k5Tosg/CgN/IMPvhb1s3k1mFTtbqw4yr/0Ug90OZPyjzBoaDk/UXElo=
+Received: from AM6PR04MB5941.eurprd04.prod.outlook.com (2603:10a6:20b:9e::16)
+ by GV1PR04MB9197.eurprd04.prod.outlook.com (2603:10a6:150:28::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.33; Wed, 3 Jul
+ 2024 00:34:19 +0000
+Received: from AM6PR04MB5941.eurprd04.prod.outlook.com
+ ([fe80::9f4e:b695:f5f0:5256]) by AM6PR04MB5941.eurprd04.prod.outlook.com
+ ([fe80::9f4e:b695:f5f0:5256%4]) with mapi id 15.20.7741.017; Wed, 3 Jul 2024
+ 00:34:19 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, Hiago
+ De Franco <hiago.franco@toradex.com>, Mathieu Othacehe
+ <m.othacehe@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>, Sean Anderson
+ <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>, Ye Li <ye.li@nxp.com>
+Subject: RE: [PATCH] mx9: Correct repeatable build error
+Thread-Topic: [PATCH] mx9: Correct repeatable build error
+Thread-Index: AQHazJXaLziDWcu+bUqP+8HszvuXd7HkKCgg
+Date: Wed, 3 Jul 2024 00:34:18 +0000
+Message-ID: <AM6PR04MB5941E0F4122EBA4EC4B2D78388DD2@AM6PR04MB5941.eurprd04.prod.outlook.com>
+References: <20240702153739.2651815-1-sjg@chromium.org>
+In-Reply-To: <20240702153739.2651815-1-sjg@chromium.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM6PR04MB5941:EE_|GV1PR04MB9197:EE_
+x-ms-office365-filtering-correlation-id: 70f14299-cba2-4c25-8e4f-08dc9af7e04b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?Jq5fJ8U6fpa78AVBUIxXVBfVcq0oDOYAF9bFN667inhHhnBK3ri33LjBMWUs?=
+ =?us-ascii?Q?hgK3DqieXQS0gvvN9v0YV/NlW8yY6fCRd2bTPNCYtRnqEFXX4XvrnlBC8Fo7?=
+ =?us-ascii?Q?jbDHiNPdqJbt1IWHqdc3QJZ7Jv5KONq7Avbqo2xtgJuyUqDgEHWxMsga+jMx?=
+ =?us-ascii?Q?RB9hG4/54mzse5dPWF97tMgnR9Zhh3wQAmicBUztIr/YGHzl5L+q64KfdNBf?=
+ =?us-ascii?Q?vv0gho2rEoJqyB8KAVa3Bpm9qEgbkxJyIE3e9s0uRWlfYaGq+DFaB07Gt7hQ?=
+ =?us-ascii?Q?yRnnNbNbh4ag00v72F3n/2h/F8CTX54C/5F0gnun1kDN8sbWjY7QG0uDV676?=
+ =?us-ascii?Q?TaqaqLyhNNV8kJ79NJb8nt1t1QS6180HVpgIvjGbtrQ1ZXXOwVsbeUW+dU0V?=
+ =?us-ascii?Q?V2M92JA8j6kLwFxHOrNSOzAfMsEQSI2enMsb/WqREqAT+L0pTgJVb6EZRGgp?=
+ =?us-ascii?Q?ME2GcBILLJqTu+HR4Flk1If8ih9KvtMop2tXmvpKwGHnSoXdhLe1DM3B7g2q?=
+ =?us-ascii?Q?jxvUoqGVmkoDK8EkelXaSlWAVmMHNb4P4r95OKdxmM7SJG1wEzqnUeAs/AH2?=
+ =?us-ascii?Q?bVciJEcbkryATw5bsMq2TkY0LKdez+GOvLFlsS2Sk/RwwPXab2PZUtiANwpX?=
+ =?us-ascii?Q?c1p5O7JgYqmJEokkbaf5/klWXCoVER/R+87YgrJmGjgEBa9A0doFpisKXOeI?=
+ =?us-ascii?Q?jfxbrMv+Uvin1SUXXa77RFUAs6P1hQiyl8cgz7aoz62HeVpJZaxmxjfvVSzs?=
+ =?us-ascii?Q?g7OA+PESCGXH7Yf0eBAwp9N3QEipN3riw4wedfB1L2v3DzI6U6wUyPxUwbeM?=
+ =?us-ascii?Q?32mICY3X/xbkbusi4O0YikWJ0+oJct/hG/SWt/NvMGiEglrwZrkT1DWGkfVL?=
+ =?us-ascii?Q?Glg1Foq6nlJWcBNEyd66Uy3qYHw7V7ON55owj+vPbo02MLfPrILgBdt+mjJT?=
+ =?us-ascii?Q?Sy9N26QGmTJE1H8AaA/pEM5UuQLfP0Fri7RwLZf2Tey0hNnv++OZ7DrWoSrj?=
+ =?us-ascii?Q?eAa4AlThFag0L5w2eRE+dKYDt8kdiZberu7RA5C27l+f7LRDvc7/Q0Bdhh0f?=
+ =?us-ascii?Q?j7hL82/FvoLrYKuE7OoGBYX7JkwqMbaK2ZGPwZecN5okAlQd8f3ndC8Wsi5v?=
+ =?us-ascii?Q?xty8Pf792sPbLYAmQEg7XjkfFIB2meWse5P7iToBHKwphl5rcKcaTfO7K/NQ?=
+ =?us-ascii?Q?quEl347TeUR+cxbsyaG+v/cdS3JrP/CDQ/oWz7IjoA9Xy18VA4qKTGdEz9ls?=
+ =?us-ascii?Q?mVltKVToTFqMUOrFAjN0Mxd4qpZIh6FTktzaKAAsbIGxYVG8asyxUjV/1EDV?=
+ =?us-ascii?Q?+xgeM7T1jk5j1Wh0lKwfxOmDkiUgEySWwCGcJ1DV2AnBx5kFHLUOVw4m0WGo?=
+ =?us-ascii?Q?tiLzgjXWQuA53ZZN23rZivH4LE3hGSgtBRwKE70h8QyuPxf9lQ=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM6PR04MB5941.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?g5GHIswj3nNT7XRm5r/U5KEk9sxj1KLRv4b6OX9uvugrvXzgqaU3557B+Kui?=
+ =?us-ascii?Q?MLOJ6S4lakr/J6KTDFOzmM+XCaJy/9qPRSaYxgpJFs8B/caCJFkgQG0mCrhI?=
+ =?us-ascii?Q?KDzbmDdWysT8WhpykWnQW6rqd4yALPmr+nFVWARLpiGQpJ91OkQOuRCDyHOt?=
+ =?us-ascii?Q?8e9KibeEn23szPFvP+R5mtT/+5UJcowt2t1Ovxw6lbG0AuHAddssh6TqjLQY?=
+ =?us-ascii?Q?6DJog7fAJR/L2njW07hlb1Qx3a6Ebf3S9Zn9Z2AvUPLp9k1H1K/dF9Mvv9WG?=
+ =?us-ascii?Q?P6kdGBD2uTKJJP/JTxhFT1DPKE+2hdovtJbv0V76xhaYnD9U03/qDZ+dZv6R?=
+ =?us-ascii?Q?ZT6Y1hvTAeTK8zthJ+/JU8SsTFY1+2w73L435VVh/0b9B9md+yCJCt1og74s?=
+ =?us-ascii?Q?AecJoRSARQ/MHZPl9aNnhtHLdOnL7LnmFESQf6tRi+l3fAPlUq9/oAt8mtTa?=
+ =?us-ascii?Q?lk4PEQ3/POBTn2HW0uFxd16t7PjwANchBiyOyTkPG+MzXB3hzYdw7OsOQRLQ?=
+ =?us-ascii?Q?9I+ljtrojNuw6mlWswSdK1mvK4LRX+BsQboMATEV+ahTfFaF6RUyQjv98iUk?=
+ =?us-ascii?Q?OLcCpHmeaDwhpWuw8KFsz3SfbE6BgSSg+8s9baNc6JJuwIfBWrfHpczQV0s+?=
+ =?us-ascii?Q?rMvpFIRlujgCRt+eVtQ5RS9KrWmOdTyB3uNEeWJMXh/LH0l/bEOYbtyatxsc?=
+ =?us-ascii?Q?CThKlvSkb65st8EAKKC3uuHonsRnDpbm+nuT9ao+vtS+nPUZ6VEmScaVXWTt?=
+ =?us-ascii?Q?8vOwnQekjM5MO05CcoNw419ookuLAdFDljgVpjZo+94Ny7c8pAr9wAiytpE5?=
+ =?us-ascii?Q?2NmI4nvvy8Mux+kyZylBzUZHk8e9HlhsiWw2SdSo2WnnJEYqLIxWjlM3WDXR?=
+ =?us-ascii?Q?R9XpY5TT9VTnrWk+5KI92VPWdjVdcXX0WkLWixyNC64YTeEf95mh13T9j9PE?=
+ =?us-ascii?Q?gY/VxiECGdLqQerx5bLsYjhLHS15aERW8eAR99AsPY/UiqKnmWEPk3ffTBsd?=
+ =?us-ascii?Q?o9oXn5BrIga1tPnO5OEkLY4f12alo2I7H1SvDzlDebVMzFGjHwOeTIkS7k2M?=
+ =?us-ascii?Q?JlXM2CdKwvo4WL/hI6eilrk3CWqki+dVlEwT+2F4hao/amEme9Dd2SGnxymT?=
+ =?us-ascii?Q?ScKw7ZrWC3cYMkZUeJUmqpMJKG9gqfupDDhfw8ADqeQLDTqxZkbWqMBOkOqc?=
+ =?us-ascii?Q?6X9EpNuzobFbvfS/vMpeBeVvr2dfej0Gyr2kqeV85W5yo4NGT93Iqj2pppg2?=
+ =?us-ascii?Q?XYym57/USGf45RmmFwq2c8C7/TiEW6JhR/VREUDaol1X9eXwEV4PLVc2ajX3?=
+ =?us-ascii?Q?9jaD8Sm4ue/ZZgbW3nPajdyDTaGNQ0Uoi3bSFjD/ky68uY+ZN0VAjLliw7Lb?=
+ =?us-ascii?Q?Qy023xgS2pu9JbeLbFAap3/pdqgGZvgkQSqIb3oCufgxGPK+D5EtyzKpgYGn?=
+ =?us-ascii?Q?lDZxD5txwn3yH3zNcqUYLHrqXz7jD6LI0v/2P5fMkM4eGLYBFFDvAxdTmU+p?=
+ =?us-ascii?Q?6dl2+adl4FC+vGpum723BOnYQeDSBSxt3MEtE+USYuuVc8wp8zSIMSySm/Xc?=
+ =?us-ascii?Q?o9U+4/Jvf2q+YUgyVzs=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dxdvodVeCyfBKR6/"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkULVRD_SQWP9f9bjRutXi33aqiEaNhTWfdF9qKWvLhKJ1g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM6PR04MB5941.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70f14299-cba2-4c25-8e4f-08dc9af7e04b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jul 2024 00:34:18.9832 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 7cIRJC9c8z5YUMkSqoYeC10vY19z9EJ156LZVf9nebuTaP5oRdlR47pRyC9/eMCGUekgXVVsALhziRFRLFjVcA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9197
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,198 +158,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---dxdvodVeCyfBKR6/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 02, 2024 at 08:02:37PM -0400, Raymond Mao wrote:
-> Hi Tom,
+> Subject: [PATCH] mx9: Correct repeatable build error
 >=20
-> On Tue, 2 Jul 2024 at 18:48, Tom Rini <trini@konsulko.com> wrote:
+> For some reason every second time imx93_11x11_evk is built it gives
+> an
+> error:
 >=20
-> > On Tue, Jul 02, 2024 at 11:22:40AM -0700, Raymond Mao wrote:
-> >
-> > > Adapt digest header files to support both original libs and MbedTLS
-> > > by switching on/off MBEDTLS_LIB_CRYPTO.
-> > > Introduce <alg>_LEGACY kconfig for legacy hash implementations.
-> > [snip]
-> > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> > > index 3e9057f1acf..6662a9d20f1 100644
-> > > --- a/lib/mbedtls/Kconfig
-> > > +++ b/lib/mbedtls/Kconfig
-> > > @@ -21,9 +21,105 @@ if LEGACY_CRYPTO
-> > >
-> > >  config LEGACY_CRYPTO_BASIC
-> > >       bool "legacy basic crypto libraries"
-> > > +     select MD5_LEGACY if MD5
-> > > +     select SHA1_LEGACY if SHA1
-> > > +     select SHA256_LEGACY if SHA256
-> > > +     select SHA512_LEGACY if SHA512
-> > > +     select SHA384_LEGACY if SHA384
-> > > +     select SPL_MD5_LEGACY if MD5 && SPL
-> > > +     select SPL_SHA1_LEGACY if SHA1 && SPL
-> > > +     select SPL_SHA256_LEGACY if SHA256 && SPL
-> > > +     select SPL_SHA512_LEGACY if SHA512 && SPL
-> > > +     select SPL_SHA384_LEGACY if SHA384 && SPL
-> > >       help
-> > >         Enable legacy basic crypto libraries.
-> > >
-> > > +if LEGACY_CRYPTO_BASIC
-> > > +
-> > > +config SHA1_LEGACY
-> > > +     bool "Enable SHA1 support with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SHA1
-> > > +     help
-> > > +       This option enables support of hashing using SHA1 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SHA256_LEGACY
-> > > +     bool "Enable SHA256 support with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SHA256
-> > > +     help
-> > > +       This option enables support of hashing using SHA256 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SHA512_LEGACY
-> > > +     bool "Enable SHA512 support with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SHA512
-> > > +     default y if TI_SECURE_DEVICE && FIT_SIGNATURE
-> > > +     help
-> > > +       This option enables support of hashing using SHA512 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SHA384_LEGACY
-> > > +     bool "Enable SHA384 support with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SHA384
-> > > +     select SHA512_LEGACY
-> > > +     help
-> > > +       This option enables support of hashing using SHA384 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config MD5_LEGACY
-> > > +     bool "Enable MD5 support with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && MD5
-> > > +     help
-> > > +       This option enables support of hashing using MD5 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +if SPL
-> > > +
-> > > +config SPL_SHA1_LEGACY
-> > > +     bool "Enable SHA1 support in SPL with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SPL_SHA1
-> > > +     default y if SHA1 && LEGACY_CRYPTO_BASIC
-> > > +     help
-> > > +       This option enables support of hashing using SHA1 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SPL_SHA256_LEGACY
-> > > +     bool "Enable SHA256 support in SPL with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SPL_SHA256
-> > > +     default y if SHA256 && LEGACY_CRYPTO_BASIC
-> > > +     help
-> > > +       This option enables support of hashing using SHA256 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SPL_SHA512_LEGACY
-> > > +     bool "Enable SHA512 support in SPL with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SPL_SHA512
-> > > +     default y if SHA512 && LEGACY_CRYPTO_BASIC
-> > > +     help
-> > > +       This option enables support of hashing using SHA512 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SPL_SHA384_LEGACY
-> > > +     bool "Enable SHA384 support in SPL with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SPL_SHA384
-> > > +     default y if SHA384 && LEGACY_CRYPTO_BASIC
-> > > +     select SPL_SHA512
-> > > +     help
-> > > +       This option enables support of hashing using SHA384 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +config SPL_MD5_LEGACY
-> > > +     bool "Enable MD5 support in SPL with legacy crypto library"
-> > > +     depends on LEGACY_CRYPTO_BASIC && SPL_MD5
-> > > +     default y if MD5 && LEGACY_CRYPTO_BASIC
-> > > +     help
-> > > +       This option enables support of hashing using MD5 algorithm
-> > > +       with legacy crypto library.
-> > > +
-> > > +endif # SPL
-> > > +
-> > > +endif # LEGACY_CRYPTO_BASIC
-> > > +
-> > >  config LEGACY_CRYPTO_CERT
-> > >       bool "legacy certificate libraries"
-> > >       help
-> >
-> > This is all certainly moving in the right direction, but there's
-> > dependency issues:
-> >    aarch64:  w+   xilinx_zynqmp_kria
-> > +(xilinx_zynqmp_kria)
-> > +(xilinx_zynqmp_kria) WARNING: unmet direct dependencies detected for
-> > SPL_MD5_LEGACY
-> > +(xilinx_zynqmp_kria)   Depends on [n]: LEGACY_CRYPTO [=3Dy] && SPL [=
-=3Dy] &&
-> > LEGACY_CRYPTO_BASIC [=3Dy] && SPL_MD5 [=3Dn]
-> > +(xilinx_zynqmp_kria)   Selected by [y]:
-> > +(xilinx_zynqmp_kria)   - LEGACY_CRYPTO_BASIC [=3Dy] && LEGACY_CRYPTO [=
-=3Dy]
-> > && MD5 [=3Dy] && SPL [=3Dy]
-> >
+>    make O=3D/tmp/x BINMAN_ALLOW_MISSING=3D1
 >=20
-> I am a bit confused by SPL_MD5, why it is [n] when both MD5 and SPL are [=
-y].
-> Of course we can replace 'SPL_MD5' with 'MD5 && SPL' to solve the warning,
-> but I guess the wrong dependence is on SPL_MD5 but not the new added ones.
-> ```
-> config SPL_MD5
-> bool "Support MD5 algorithm in SPL"
-> depends on SPL
-> ```
-> I think it should be 'default y if SPL && MD5' instead of 'depends on SPL=
-'.
+> It seems to sometimes skip generation of the .cfgout file and then
+> eventually Binman complains:
 >=20
-> Similarly SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE is not selected when both
-> ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-> and SPL are selected;
-> SPL_ASN1_DECODER is not selected when both ASN1_DECODER and SPL are
-> selected.
+>    ValueError: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
+>       spl/u-boot-spl.cfgout -T imx8image -e 0x2049A000
+>       ./mkimage-out.spl.mkimage': Fail open first container file
+>       mx93a1-ahab-container.img
 >=20
-> I think generally for each algorithm, 'SPL_<ALG>' config should be select=
-ed
-> when both 'SPL' and '<ALG>' are selected.
+> Correct this by using if_changed instead of if_changed_dep
 >=20
-> If you agree I can fix this in the next patch set.
+> The only reason this hasn't come up in CI is that buildman did not retry
+> failing builds of current source, but now it does.
+>=20
+> Note: The logic in this Makefile should be moved to Binman, e.g. these
+> warnings duplicate Binman functionality:
+>=20
+>   WARNING 'bl31.bin' not found, resulting binary may be not-functional
+>   WARNING 'tee.bin' not found, resulting binary may be not-functional
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Kconfig error messages are a bit difficult to understand at times, yes.
-Please figure out what exactly the depends on / default y combinations
-should be such that (a) there's no functional changes, and buildman size
-comparison builds are good for that and (b) no warnings like this are
-found.
-
---=20
-Tom
-
---dxdvodVeCyfBKR6/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaEmDUACgkQFHw5/5Y0
-tyxkYgv/YQ8uQzNOKCBKk+uV/nnIZbMPzR4ghbMo9Ba6xdodHeESYnvFfMFrbdd3
-/g4LvoWD9XBmu7RsBvA0PYIRo1aJux7Stmhat+4Zu3m+XELpE9TtyiwWmSRmWv7C
-UXh5aXYxl5QWLll9eW2ClKAWytmWjyWC4M6W98PWFaoXOcMrYa1rMiW8DNTxMlwD
-WMMawM4ELRFpmDrXNktH+mnddDB/v4lLG312HdF3YqRAqshrDuAOAVXGoXdy7zBx
-XxQu2rZDGLxMie2uxihriAitaDQZJSfN3319JZuRRO0M7HpujndaZqj05EGx9/cI
-d4f0+5OotE72syGhHQ7tkvlatmlvLDnEotK3Hp29CO/eOYTmxoKjZvTijriMVN+/
-FJwOAWGUYGYIj/b8rGYnWiidJ5nHW61qMmwNR1hb249ACOmZ/9YYki6ccPIpQfih
-iwqISZYobtfSIGdLtiCm/9o3g2ba4LBAo8RpJDcCorn5a1MTuPBgNO5R9dIVAoOR
-BuSbiO5P
-=vy3f
------END PGP SIGNATURE-----
-
---dxdvodVeCyfBKR6/--
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
