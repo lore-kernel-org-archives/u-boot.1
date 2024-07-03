@@ -4,144 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39A42C30658
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 01:10:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D40C3065C
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jul 2024 01:26:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 641B9887B6;
-	Wed,  3 Jul 2024 03:10:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 8FFDB8855B;
+	Wed,  3 Jul 2024 03:26:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="UYf565ut";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nIdw5s9i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7FE1887C7; Wed,  3 Jul 2024 03:10:07 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D92798855B; Wed,  3 Jul 2024 03:26:04 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D198887BB
- for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 03:09:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D692E8852A
+ for <u-boot@lists.denx.de>; Wed,  3 Jul 2024 03:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aT6oTJesqc+E+vVu80pCCGdc6RYgpzCmbTum7fso79Pd9LluE0B4oltJD3Y1epVQjqG0hbq1lTvo8NPmEtUdaRBiuNq/QRmRmuf29z+7m+PP2WL6ZkP/k/WA9Ic/W0lcCq+p8B/qI9GGd0ObGNqMT9O9GG/qvsAgkl1Dv+Bv+b5WWjT1USYUkUgmcXZ/bb7afZ5QPFXLeKyHs0l0M4bccVxv8cdfb/+bLSSDraWLnqWmEtDlyYQWew1zrLqiZfnqd9QyXm3vCi8VJFU6GlQBpmtfEoLsuDQuNVSLnWmintDsAvAnqDeo4L5lQFT8obIdDjW8z41tM96Ea41QBeHkoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q0ndmVAr72ruTSn7qa7UvOALi68jcboFzobZQ6WDI/o=;
- b=GsVfFCdVVDR3pGbBaJ5ermH3xbpC9wpsu815xnQR54CkS0czoAsaEbuZCDD+6VmsXLMpGdLETRiVOZ4lKxPIEsWTDlpyVV3N5N/Ksg67DH21eaftld4E/x5NlFFueRNV+lPPLeORpNxsXQ5veyzF4sAGwxWkEC8Y+rwpHQKxq1YXJH3vdpY0Mv2XknekXWp4olgJlwJia36CmtI292VDcltnI2/f+CWVHnl+Bkt+IzXXvnqMh8YgHtucJtH3yS9j4IU1C0KkWAY0LrXH/h5/Py2rw8QZI2/dB/IpQTH264O1rktPNc5aw7xQC2Wyczc/pHd2x+o4WULStb+PJ+ibxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q0ndmVAr72ruTSn7qa7UvOALi68jcboFzobZQ6WDI/o=;
- b=UYf565utj6VNyOXbADAFkCPvvjD9+JMPLt63l9v/L1xFn2LBrcLQe0L5399bxk7602fXyRiWkC+DKtCVJEWoRyxuZwGfDf/h1iIL5hzE4R6HoskjQX5W0mkb8kkNLKMZO6vBwbFnRGIuda58tYgk5B5IzBg7yzwNOwfmMDrpjSMa6vlcTr/9zYL06X8bU4CyUfOR01P+d5AdYdbDl7ylWB3gTM/zN3MYsNs3xwSG8sVcdBfM8fzZOeLXrnGiFHPQSGAvzh4GCiLwr1qwlEgL8Os2DjVs4w7sUnJq/Wiew764l6/WLH7ps8H/QEy2t7yyi6Ucy2aQVPkIqffwuXiMpw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by PA4PR08MB6013.eurprd08.prod.outlook.com (2603:10a6:102:eb::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.23; Wed, 3 Jul
- 2024 01:09:58 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7719.029; Wed, 3 Jul 2024
- 01:09:58 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Fabio Estevam <festevam@denx.de>,
- William Zhang <william.zhang@broadcom.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>, u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH 1/2] spi: soft_spi: fix miso gpio property name
-Date: Wed,  3 Jul 2024 05:09:33 +0400
-Message-Id: <20240703010934.1735889-1-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.39.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LNXP265CA0085.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:76::25) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-701eea2095eso2861838a34.2
+ for <u-boot@lists.denx.de>; Tue, 02 Jul 2024 18:26:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1719969959; x=1720574759; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bqYx0MYelc0PtihtWwEc+gVfRSqXKInGdDVmgo3EWAA=;
+ b=nIdw5s9iDDCwOTObuq/dns5rSLIJqGxK0PaJ7XFEg5XFvvrkLHnhFG+ubBSuHWvaGS
+ iQToTReCXiG2IRxXHKjevNhWhEI15xhjPkZNH4cPIvDw7LCNr9+GbNMv8NPwqJsRlj1B
+ Dia84bArdBVwbfRvp6pKwTkt28d0GFQ8kRpIA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719969959; x=1720574759;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bqYx0MYelc0PtihtWwEc+gVfRSqXKInGdDVmgo3EWAA=;
+ b=WE35tAkuqQdwgnVPW8H0vpjFg1M2yeolmprVnajzQ+cKEIiLCxMfNOACchk0f2pnwV
+ elDdKr1Hitev48vvMv6LfukoT5/kpuCZTJb0amgzWzXaLGlg560HT234SG5ZQdQCskiG
+ FTcWOiShIOJanUPNefLqWhE5V/0PHyIbb7J9DTLzoZ3oxvHfSqUOP6h8dNiIc8irz28b
+ rYg5ZIcPB4F5xPjxKZ7Qk0qllV8iRczqOQkkI0gXZfveK9xVADJaM2djT8Od5qBrVWSS
+ qTAwVDPeSAMmeNlpliHPQ7WSGXWTciD9XxmEmpHwIiOVb/I+0w6VNmkL7/+z0LqGHjBM
+ VDiw==
+X-Gm-Message-State: AOJu0YwTz4MVUzTLXQnr3VUdKpI+Qrjh0h3X7HR1XJ7eJ3YjnLzP2ZB6
+ tFN1rUUFHRFV5vORVNQ776Bnbl8PQsyN/DUjjOc1ms/1XqNL+HTVQcunf9iaW7I=
+X-Google-Smtp-Source: AGHT+IFjCSf5f69aUqyvGnmLRkB/2zkcK7Yg/gsXxDnUEIQ1rzHAIsLufhYnTnAaq6U/sCB0gJKGCw==
+X-Received: by 2002:a05:6808:221a:b0:3d6:2c22:4b20 with SMTP id
+ 5614622812f47-3d6b30f58cbmr12267606b6e.23.1719969959433; 
+ Tue, 02 Jul 2024 18:25:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-45.totalplay.net.
+ [189.203.106.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d62fa39442sm1904193b6e.38.2024.07.02.18.25.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jul 2024 18:25:58 -0700 (PDT)
+Date: Tue, 2 Jul 2024 19:25:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: Re: [PATCH v4 00/29] Integrate MbedTLS v3.6 LTS with U-Boot
+Message-ID: <20240703012555.GX38804@bill-the-cat>
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PA4PR08MB6013:EE_
-X-MS-Office365-Filtering-Correlation-Id: f8039f2a-e02d-4459-34f5-08dc9afcdb50
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?uO64k2q202kwhspgiVmb2Xhn+r/bSgRSkOkc4MFctrjfTYoSZNe6AMyb3FIS?=
- =?us-ascii?Q?BXcqNK2cAOwKFTdG8BH38VSFMhebgASYH0nRjqgWzP9UbEHjL4gu4FA29p8K?=
- =?us-ascii?Q?8waRmmJPYAXSUtMaUZmX2iJZx/mRF/VTOUH/jHEpCBJpDLJXYSyumgXuyp9Z?=
- =?us-ascii?Q?1uEz9MVFK+rtLQ28XVwoICxjAEOpZp810LFPUcwKIssOOr+MHqDFQVT2FZ5l?=
- =?us-ascii?Q?h9vMH/4mvZfGMDPD1bRtpxZxw21f3opzgda9gTfoKLL76PzvI63OcATFZsq1?=
- =?us-ascii?Q?YRaJFXLvG+LWj7Ixz/hJSK/myTXvjs+kw1gy4k0QfcAIiXWyFWWnZ9460wxL?=
- =?us-ascii?Q?Cn5fiufcjICpFV2Kh/L/O9tB0zJqqc6O6MhiVVlRDcTb1OsFtAeYucxVXp5U?=
- =?us-ascii?Q?ms8a9Vt8xiPglrYTG0U2nRhr3jwWjlMF0cWw0DIGsGBqPnqknaBiWjC+UO5x?=
- =?us-ascii?Q?qOjP2tByaENicegFfNVta5PijgRdJTcOJaBvLCYr28fIsv0Ax0V9JSyOum+s?=
- =?us-ascii?Q?llFXYFbMyRsL0XId23qU0jrJHsun7SSqGDQT9X9LYGRzxiMMq57DfP+clX1U?=
- =?us-ascii?Q?xkppJXFct8P4YFO+JohH2QGKGrHgMvfLLV47tdHG1ZLRVeS1vRWPhCoi0voL?=
- =?us-ascii?Q?OdzFgdx9o3mFVrE5y2TuhkYRcVusEWdB/FBzyusPRXBrbYYPYbukULQROBal?=
- =?us-ascii?Q?VS1/Hbq+Rv3fdwiLRj6oZRfHvtQ4WPt/f35Wu7f1JqDk5c12YygQ8G3j2AAb?=
- =?us-ascii?Q?k5eC2KLuqeeUdQsI6Ywbfi0M2HrGA1qb2lLX79WL+fLTh/pJyESuIoCqPTgC?=
- =?us-ascii?Q?sR+yrkh2MKrfEPQaubUj676zi3UzDgZdOAIsmivIWG3BsZeaiCvOmO2Lxybz?=
- =?us-ascii?Q?2hIuO3nzCgVeiR58cGS3sbFJRzUP5r4UcYhJAQzjZ5oLVWIxDpkDkVLtMX+N?=
- =?us-ascii?Q?u9sm1bVf3Kt5fBb5YToWIdAy+US36HTAKrEtNk8vnnRmqGomYJn0zUJ0ouJn?=
- =?us-ascii?Q?2ifD9yg8DrxAWRp7g5gGb262SgzPu4hNwxLvjfE2zuwQKZXYybgj8m+OG4Oo?=
- =?us-ascii?Q?sQSV/77RMPDwQiUctrI5BrqpB50f6vM9CX7dyPV1bekP8Y7VJ0DdicpkF0UI?=
- =?us-ascii?Q?Q2hknXG+SUhfUzf8vYiO/EFTJLZFhHfa5Wn5HRnDCiG7mMlhWOZKIpq7Ole5?=
- =?us-ascii?Q?7UDsK6kDmLO/OvV/ffMZYTyKGzmxmgoDPS6uY3qS0lchNzHDwRa0HpecGxLf?=
- =?us-ascii?Q?RGsF2caeJCLTjGJeNlmT/i3eHqwUUWFzyWpCQO4foe28D8KGbbknPUhQyLwO?=
- =?us-ascii?Q?zdF0bHXPXftnZ17mr79ifwyp22oFM4TrxNQK6647hyDEjWDID/r+o9+zcru+?=
- =?us-ascii?Q?pR2ffbUNW1Bj589KLUo3B2l/fdL3vdLVkrbHbsGegnQsJD1mBw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(52116014)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?R1/DX+s8jvra5E1yv65TUD6X988dM29EjXRxQrCYQfmrrCgn3HUpdDktOtbG?=
- =?us-ascii?Q?yqDMEHrlxUTNKrGVZ61v5/Z/kTJcdjJB/R2SbxZx85j9MOVOfIwuQ3zAGqa3?=
- =?us-ascii?Q?ZuAaEr+ZZTQVE1VcA3OoNTcRnt0pqEghjNt71ossKXUVgMyFThvOsOSzWi53?=
- =?us-ascii?Q?MyVj91LfcKfGFZ5TbAuyFA4XLhEdwBuNOJ+g7gIQvtQ26GI1la+iNSUErf2X?=
- =?us-ascii?Q?YV0aAFacYGdpLcQCxKDvOdGDK8UtM3lg60Hef84Sxe+ezwm0dPxP6VMnIxDc?=
- =?us-ascii?Q?5X2RSBfCYY1RzARelblrIO8mk7xtciwL8L8/94PoXxAGb6QFXui46fiwM8Ey?=
- =?us-ascii?Q?N7gIAvn+jaXBKLSwuCLD1tLKxNIi7ArUh2ahMwpFsjVxGcbS5kPdF0yXeJlC?=
- =?us-ascii?Q?qB7OypfRBrZpnnb0ZecO965OIGk77QeACQFonnraJMIxEU4rroZP3SIAoV1A?=
- =?us-ascii?Q?lb69gbbskkhTDaain9peU/eWyZgCGT0D7G8Sb3kwr5p9Wws52kKoEQP0cIU2?=
- =?us-ascii?Q?S84lSd2GFkeG0Y5lMiBU3mrS63VPP9ua61gjuNSVSEueo8Oaj0pb5/3TIbX/?=
- =?us-ascii?Q?ezbJzv5rKCQaZ9p0HVSR/xTaZ/flpDGhejTsWFigMQkQ/xagOFGy2kW+gUmX?=
- =?us-ascii?Q?NnFcm69jL+hg9MrqvoJjPvEdicshTMBzg4furYY5eSpBB9KtbMhOq3/y0Eg9?=
- =?us-ascii?Q?g38JgeagBoqhq7NnTQRXtRyjErJVebw2gV1OprLIN+8b/+UmtjbFVEoDcQ9D?=
- =?us-ascii?Q?wgru3GteuDNjFN20ef8I2c9teHHWX6WZGjIzY9stOldODtSeoH8iLiNuczx8?=
- =?us-ascii?Q?05OX7cq4rLwFSpxt6Vx9eLSn6Ha2DSIU4uybdaqeTSonTkH5N9kmxNJyh0z7?=
- =?us-ascii?Q?LZxJ57VtNbcTKI6hOO2t+dh6ia53T/+D0WXJnG0mXswO30oL8EvDjB37KtSw?=
- =?us-ascii?Q?O0j5K8LOrmNw5dlFlOuo3htKqxbM5+GPB7BKZekMTLn6RjLDHvhIzXz6r8eb?=
- =?us-ascii?Q?5KmvhGGBDAt3xHIdC2D+CEZElLEAT/r7OIMQlBsJrq7uvbI5Ru311bneMb0+?=
- =?us-ascii?Q?QIDQwko7Ap7BX+SCUynD+i0hqSEYzvwKJglCSXl2YMy1NA93L6/X3Kf85YEJ?=
- =?us-ascii?Q?3leJqq7tA1mcZqPL10NMtZEj9zH4LBTmsYsJxz6CoYd+0C7ppLY4ghV0H8np?=
- =?us-ascii?Q?mBbnmGGFRGUmSHH9Hyyscn8Ds759Jj0X4VTQbV7q1uxMDnaOOHUEImKpEx/R?=
- =?us-ascii?Q?QxSgvMzMQ21KNdDmhb4VmeVgYh2+zk9R8KiHGVXTMYDxLRbKeUHrrLWIhrRA?=
- =?us-ascii?Q?Nv01zJIG77NuXOerVbtFJ6g0ErrP+ajIZqY3D3+wrtL6YgYyRtDgTWxhQxmi?=
- =?us-ascii?Q?xvPzX/gSwOICGV/Q3re/FeOL1i3NbZMEJscnyPhB3XGGhuSG1Ih9FHJVlvyw?=
- =?us-ascii?Q?0p4cViECRE1I584nNh7Prm6S5QyVRzH1Whyd8gBgT7dPcwnt5JEjhlkEfh2J?=
- =?us-ascii?Q?fYXDeVtjtEkXFsR2qVOo0EkG5MahFy5XxLTq617ZwO4Wn6wyQCnS6TfQo+BG?=
- =?us-ascii?Q?FwZ/EQE1MZjTLNKSsaDcih5P+FapjX4760kYOVvMPDzwKQ4o8LyMlSAjOXxK?=
- =?us-ascii?Q?gg=3D=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: f8039f2a-e02d-4459-34f5-08dc9afcdb50
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2024 01:09:58.3867 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q4PR5Ycy3sew9mjB3lFY//mnjua5qjJ0ExZLD8rIF/YDfLM8fw4ztUSe/+NY3F/WZq9jjJDLMfb3+RLttvqlW75x7Dx2GTOccql16J67RwQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6013
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aEb+6Snorws5qTZA"
+Content-Disposition: inline
+In-Reply-To: <20240702182325.2904421-1-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,27 +109,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch fix a missprint introduced in commit 2e9fe73a883a ("spi: soft_spi:
-Support the recommended soft spi properties").
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
----
- drivers/spi/soft_spi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--aEb+6Snorws5qTZA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/spi/soft_spi.c b/drivers/spi/soft_spi.c
-index 0fa14339bdc..3fe62818a44 100644
---- a/drivers/spi/soft_spi.c
-+++ b/drivers/spi/soft_spi.c
-@@ -272,7 +272,7 @@ static int soft_spi_probe(struct udevice *dev)
- 	ret = gpio_request_by_name(dev, "gpio-miso", 0, &plat->miso,
- 				   GPIOD_IS_IN);
- 	if (ret)
--		ret = gpio_request_by_name(dev, "gpio-miso", 0, &plat->miso,
-+		ret = gpio_request_by_name(dev, "miso-gpios", 0, &plat->miso,
- 					   GPIOD_IS_IN);
- 	if (ret)
- 		plat->flags |= SPI_MASTER_NO_RX;
--- 
-2.39.2
+On Tue, Jul 02, 2024 at 11:22:36AM -0700, Raymond Mao wrote:
 
+> Integrate MbedTLS v3.6 LTS (currently v3.6.0-RC1) with U-Boot.
+>=20
+> Motivations:
+> ------------
+>=20
+> 1. MbedTLS is well maintained with LTS versions.
+> 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+> 3. MbedTLS recently switched license back to GPLv2.
+>=20
+> Prerequisite:
+> -------------
+>=20
+> This patch series requires mbedtls git repo to be added as a
+> subtree to the main U-Boot repo via:
+>     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+>           https://github.com/Mbed-TLS/mbedtls.git \
+>           v3.6.0 --squash
+> Moreover, due to the Windows-style files from mbedtls git repo,
+> we need to convert the CRLF endings to LF and do a commit manually:
+>     $ git add --renormalize .
+>     $ git commit
+>=20
+> New Kconfig options:
+> --------------------
+>=20
+> `MBEDTLS_LIB` is for MbedTLS general switch.
+> `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs with
+> MbedTLS.
+> `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
+> and Pubkey parser with MbedTLS.
+> `MBEDTLS_LIB_TLS` is for SSL/TLS (Disabled until LWIP port for MbedTLS is
+> ready).
+> `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto library.
+> `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
+> `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
+> For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
+> Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
+> introduced.
+>=20
+> In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
+> are by default enabled in qemu_arm64_defconfig for testing purpose.
+>=20
+> Patches for external MbedTLS project:
+> -------------------------------------
+>=20
+> Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+> executables which is not supported by MbedTLS at the moment,
+> addtional patches for MbedTLS are created to adapt with the EFI loader:=
+=20
+> 1. Decoding of Microsoft Authentication Code.
+> 2. Decoding of PKCS#9 Authenticate Attributes.
+> 3. Extending MbedTLS PKCS#7 lib to support multiple signer's certificates.
+> 4. MbedTLS native test suites for PKCS#7 signer's info.
+>=20
+> All above 4 patches (tagged with `mbedtls/external`) are submitted to
+> MbedTLS project and being reviewed, eventually they should be part of
+> MbedTLS LTS release.
+> But before that, please merge them into U-Boot, otherwise the building
+> will be broken when MBEDTLS_LIB_X509 is enabled.=20
+>=20
+> See below PR link for the reference:
+> https://github.com/Mbed-TLS/mbedtls/pull/9001
+>=20
+> Miscellaneous:
+> --------------
+>=20
+> Optimized MbedTLS library size by tailoring the config file
+> and disabling all unnecessary features for EFI loader.
+> From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha256,
+> sha512) are completely replaced when MbedTLS is enabled.
+> From v3, the size-growth is slightly reduced by refactoring Hash function=
+s.
+>=20
+> Target(QEMU arm64) size-growth when enabling MbedTLS:
+> v1: 6.03%
+> v2: 4.66%
+> v3 & v4: 4.55%
+>=20
+> Please see the latest output of bloat-o-meter for the reference of the
+> size-growth on QEMU arm64 target [1].
+>=20
+> Tests done:
+> -----------
+>=20
+> EFI Secure Boot test (EFI variables loading and verifying, EFI signed ima=
+ge
+> verifying and booting) via U-Boot console.
+> EFI Secure Boot and Capsule sandbox test passed.
+>=20
+> Known issues:
+> -------------
+>=20
+> None.
+>=20
+> [1]: bloat-o-meter output between disabling/enabling MbedTLS (QEMU arm64)
+> ```
+> add/remove: 206/81 grow/shrink: 19/17 up/down: 55548/-17495 (38053)
+
+bloat-o-meter is a bit off then, since buildman shows:
+u-boot: add: 243/-17, grow: 18/-17 bytes: 65723/-8480 (57243)
+
+(Please use buildman for the size comparisons in the future).
+
+And in both cases, there's a pretty big non-removal of code I was
+expecting since overall we're replacing a lot of functionality, not just
+enabling new functionality? If I'm wrong about that and we're doing
+both, please separate out "enables new features" from "feature parity
+with legacy" in commit updates to qemu_arm64 since buildman's handy
+"show the delta for each commit in a series" is quite helpful in
+spotting when we changed more/less than expected. And in this case
+perhaps qemu_army64 wasn't fully enabling stuff before? sandbox changes
+by only ~16Kib which is much better and I see pkcs7 and x509 related
+removals in the size comparison.
+
+Another note is that qemu-x86_64, which should be similar in EFI feature
+function only grows by 129 bytes. Which isn't zero, but isn't bad. I
+haven't done a for-each-commit build, but if we have generic bugfixes
+here, we should split those out.
+
+For example, I do see we're dropping some legacy hash related code, but
+I'd want to dig a bit to make sure it's all of it.
+
+And for v4 I'm not doing a world build comparison with mbedTLS being
+default rather than legacy since I think the logic there is where some
+of the Kconfig issues I mentioned are from and so I'm not confident the
+results would look good. But for v5, please pick some arbitrary
+platforms and switch them over and check the size change there as well.
+
+Thanks!
+
+--=20
+Tom
+
+--aEb+6Snorws5qTZA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaEqKAACgkQFHw5/5Y0
+tyy+aQwAgb7U6qOGJ6LIAHHfPEPXDt0COuIXIKa28CsTR0W6D+QtVQtg1nnTY3lf
+zUKe/WNjvO2VnqIRPKhGhiIMStf00a+VzYHXeBi/DqhGRXY0NT64HvEt8GkRXL89
+qLR07z3yhhia5d9/ZocEJD7JkpHnAZPes0M9RpYoSpQGvCRq/pWE0B6jR1ABV1I5
+W+S2Ayd4CKFnsv9/JlcB22s0DsEEooQxU6WW3niIISSdJI1ym5jR+RP0WTV0cy9c
+FYOLd4XB+D1piZ0ytZ9qkrRVlJRormqipKxDa42yKbKVKcFOhiicxXpgiZk7Jtwf
+6UGWIQ25KTJYkG0rEYfQMVkhpo5zdyjL0vFaIKes13fTgX36hYgaGpQLpmoO/1xg
+ruSCLIZ+i1wa/mQm+BbcEL//igzNkZzdXjBHXbJ/QN+MBXHpHPXrcqjPt7jQl/vE
+Ut6AVW0HMEPkyQ+z0tzKDa5tWHxvYZ5SvTXdWlLtplqke239Ke0FwoZFdQKfDXpx
+RGOauH+9
+=EpSL
+-----END PGP SIGNATURE-----
+
+--aEb+6Snorws5qTZA--
