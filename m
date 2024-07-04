@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3523C30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF96C3065C
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:38:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DDA5888EF;
-	Thu,  4 Jul 2024 09:36:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9CB2F888A4;
+	Thu,  4 Jul 2024 09:36:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B983888EC; Thu,  4 Jul 2024 09:36:49 +0200 (CEST)
+ id 12F258881D; Thu,  4 Jul 2024 09:36:51 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2F940888FD
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:36:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id CBE77888B7
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:36:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AE0AB367;
- Thu,  4 Jul 2024 00:37:09 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 573FB367;
+ Thu,  4 Jul 2024 00:37:13 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8A4B43F762;
- Thu,  4 Jul 2024 00:36:41 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 33A1F3F762;
+ Thu,  4 Jul 2024 00:36:44 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -34,10 +34,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH v2 11/48] lmb: pass a flag to image_setup_libfdt() for lmb
- reservations
-Date: Thu,  4 Jul 2024 13:05:07 +0530
-Message-Id: <20240704073544.670249-12-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH v2 12/48] lmb: allow for resizing lmb regions
+Date: Thu,  4 Jul 2024 13:05:08 +0530
+Message-Id: <20240704073544.670249-13-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
@@ -59,143 +58,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The image_setup_libfdt() function optionally calls the LMB API to
-reserve the region of memory occupied by the FDT blob. This was
-earlier determined through the presence of the pointer to the lmb
-structure, which is no longer present. Pass a flag to the
-image_setup_libfdt() function to indicate if the region occupied by
-the FDT blob is to be marked as reserved by the LMB module.
+Allow for resizing of LMB regions if the region attributes match. The
+current code returns a failure status on detecting an overlapping
+address. This worked up until now since the LMB calls were not
+persistent and global -- the LMB memory map was specific and private
+to a given caller of the LMB API's.
+
+With the change in the LMB code to make the LMB reservations
+persistent, there needs to be a check on whether the memory region can
+be resized, and then do it if so. To distinguish between memory that
+cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
+of memory with this attribute would indicate that the region cannot be
+resized.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1:
-* Use true/false identifiers for bool instead of 1/0
-* Fix the argument passed to the function in arch/mips/lib/bootm.c
+* Do the check for the region flags in lmb_resize_regions() and
+  lmb_merge_overlap_regions() to decide on merging the overlapping
+  regions.
 
- arch/mips/lib/bootm.c         | 2 +-
- boot/image-board.c            | 2 +-
- boot/image-fdt.c              | 7 +++----
- cmd/elf.c                     | 2 +-
- include/image.h               | 5 ++---
- lib/efi_loader/efi_dt_fixup.c | 2 +-
- lib/efi_loader/efi_helper.c   | 2 +-
- 7 files changed, 10 insertions(+), 12 deletions(-)
+ include/lmb.h |   1 +
+ lib/lmb.c     | 116 ++++++++++++++++++++++++++++++++++++++++++++------
+ 2 files changed, 103 insertions(+), 14 deletions(-)
 
-diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
-index 54d89e9cca..8fb3a3923f 100644
---- a/arch/mips/lib/bootm.c
-+++ b/arch/mips/lib/bootm.c
-@@ -247,7 +247,7 @@ static int boot_setup_fdt(struct bootm_headers *images)
- 	images->initrd_start = virt_to_phys((void *)images->initrd_start);
- 	images->initrd_end = virt_to_phys((void *)images->initrd_end);
+diff --git a/include/lmb.h b/include/lmb.h
+index 069c6af2a3..99fcf5781f 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -20,6 +20,7 @@
+ enum lmb_flags {
+ 	LMB_NONE		= 0x0,
+ 	LMB_NOMAP		= 0x4,
++	LMB_NOOVERWRITE		= 0x8,
+ };
  
--	return image_setup_libfdt(images, images->ft_addr, &images->lmb);
-+	return image_setup_libfdt(images, images->ft_addr, true);
+ /**
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 0d01e58a46..80945e3cae 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -230,12 +230,88 @@ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+ 	lmb_reserve_common(fdt_blob);
  }
  
- static void boot_prep_linux(struct bootm_headers *images)
-diff --git a/boot/image-board.c b/boot/image-board.c
-index e3cb418e3c..1f8c1ac69f 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -904,7 +904,7 @@ int image_setup_linux(struct bootm_headers *images)
++static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
++				   enum lmb_flags flags)
++{
++	return rgn->region[r1].flags == flags;
++}
++
++static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
++				      phys_addr_t base, phys_size_t size,
++				      enum lmb_flags flags)
++{
++	phys_size_t rgnsize;
++	unsigned long rgn_cnt, idx;
++	phys_addr_t rgnbase, rgnend;
++	phys_addr_t mergebase, mergeend;
++
++	rgn_cnt = 0;
++	idx = i;
++	/*
++	 * First thing to do is to identify how many regions does
++	 * the requested region overlap.
++	 * If the flags match, combine all these overlapping
++	 * regions into a single region, and remove the merged
++	 * regions.
++	 */
++	while (idx < rgn->cnt - 1) {
++		rgnbase = rgn->region[idx].base;
++		rgnsize = rgn->region[idx].size;
++
++		if (lmb_addrs_overlap(base, size, rgnbase,
++				      rgnsize)) {
++			if (!lmb_region_flags_match(rgn, idx, flags))
++				return -1;
++			rgn_cnt++;
++			idx++;
++		}
++	}
++
++	/* The merged region's base and size */
++	rgnbase = rgn->region[i].base;
++	mergebase = min(base, rgnbase);
++	rgnend = rgn->region[idx].base + rgn->region[idx].size;
++	mergeend = max(rgnend, (base + size));
++
++	rgn->region[i].base = mergebase;
++	rgn->region[i].size = mergeend - mergebase;
++
++	/* Now remove the merged regions */
++	while (--rgn_cnt)
++		lmb_remove_region(rgn, i + 1);
++
++	return 0;
++}
++
++static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
++			       phys_addr_t base, phys_size_t size,
++			       enum lmb_flags flags)
++{
++	long ret = 0;
++	phys_addr_t rgnend;
++
++	if (i == rgn->cnt - 1 ||
++		base + size < rgn->region[i + 1].base) {
++		if (!lmb_region_flags_match(rgn, i, flags))
++			return -1;
++
++		rgnend = rgn->region[i].base + rgn->region[i].size;
++		rgn->region[i].base = min(base, rgn->region[i].base);
++		rgnend = max(base + size, rgnend);
++		rgn->region[i].size = rgnend - rgn->region[i].base;
++	} else {
++		ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
++	}
++
++	return ret;
++}
++
+ /* This routine called with relocation disabled. */
+ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+ 				 phys_size_t size, enum lmb_flags flags)
+ {
+ 	unsigned long coalesced = 0;
+-	long adjacent, i;
++	long ret, i;
+ 
+ 	if (rgn->cnt == 0) {
+ 		rgn->region[0].base = base;
+@@ -260,23 +336,28 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+ 				return -1; /* regions with new flags */
+ 		}
+ 
+-		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+-		if (adjacent > 0) {
++		ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
++		if (ret > 0) {
+ 			if (flags != rgnflags)
+ 				break;
+ 			rgn->region[i].base -= size;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+-		} else if (adjacent < 0) {
++		} else if (ret < 0) {
+ 			if (flags != rgnflags)
+ 				break;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+ 		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+-			/* regions overlap */
+-			return -1;
++			ret = lmb_resize_regions(rgn, i, base, size,
++						 flags);
++			if (ret < 0)
++				return -1;
++
++			coalesced++;
++			break;
+ 		}
  	}
  
- 	if (CONFIG_IS_ENABLED(OF_LIBFDT) && of_size) {
--		ret = image_setup_libfdt(images, *of_flat_tree, lmb);
-+		ret = image_setup_libfdt(images, *of_flat_tree, true);
- 		if (ret)
- 			return ret;
+@@ -418,7 +499,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ }
+ 
+ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+-				    phys_addr_t max_addr)
++				    phys_addr_t max_addr, enum lmb_flags flags)
+ {
+ 	long i, rgn;
+ 	phys_addr_t base = 0;
+@@ -468,7 +549,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ {
+ 	phys_addr_t alloc;
+ 
+-	alloc = __lmb_alloc_base(size, align, max_addr);
++	alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
+ 
+ 	if (alloc == 0)
+ 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+@@ -477,11 +558,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ 	return alloc;
+ }
+ 
+-/*
+- * Try to allocate a specific address range: must be in defined memory but not
+- * reserved
+- */
+-phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
++static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
++				    enum lmb_flags flags)
+ {
+ 	long rgn;
+ 
+@@ -496,13 +574,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+ 				      lmb->memory.region[rgn].size,
+ 				      base + size - 1, 1)) {
+ 			/* ok, reserve the memory */
+-			if (lmb_reserve(base, size) >= 0)
++			if (lmb_reserve_flags(base, size, flags) >= 0)
+ 				return base;
+ 		}
  	}
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 943a3477a1..7c3d66bad7 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -566,8 +566,7 @@ __weak int arch_fixup_fdt(void *blob)
++
  	return 0;
  }
  
--int image_setup_libfdt(struct bootm_headers *images, void *blob,
--		       struct lmb *lmb)
-+int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
++/*
++ * Try to allocate a specific address range: must be in defined memory but not
++ * reserved
++ */
++phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
++{
++	return __lmb_alloc_addr(base, size, LMB_NONE);
++}
++
+ /* Return number of bytes from a given address that are free */
+ phys_size_t lmb_get_free_size(phys_addr_t addr)
  {
- 	ulong *initrd_start = &images->initrd_start;
- 	ulong *initrd_end = &images->initrd_end;
-@@ -667,7 +666,7 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
- 	}
- 
- 	/* Delete the old LMB reservation */
--	if (lmb)
-+	if (CONFIG_IS_ENABLED(LMB) && lmb)
- 		lmb_free(map_to_sysmem(blob), fdt_totalsize(blob));
- 
- 	ret = fdt_shrink_to_minimum(blob, 0);
-@@ -676,7 +675,7 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
- 	of_size = ret;
- 
- 	/* Create a new LMB reservation */
--	if (lmb)
-+	if (CONFIG_IS_ENABLED(LMB) && lmb)
- 		lmb_reserve(map_to_sysmem(blob), of_size);
- 
- #if defined(CONFIG_ARCH_KEYSTONE)
-diff --git a/cmd/elf.c b/cmd/elf.c
-index 32b7462f92..df53c5b0cb 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -68,7 +68,7 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		log_debug("Setting up FDT at 0x%08lx ...\n", fdt_addr);
- 		flush();
- 
--		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
-+		if (image_setup_libfdt(&img, (void *)fdt_addr, false))
- 			return 1;
- 	}
- #endif
-diff --git a/include/image.h b/include/image.h
-index 8036eae15c..47fd80bef4 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1018,11 +1018,10 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
-  *
-  * @images:	Images information
-  * @blob:	FDT to update
-- * @lmb:	Points to logical memory block structure
-+ * @lmb:	Flag indicating use of lmb for reserving FDT memory region
-  * Return: 0 if ok, <0 on failure
-  */
--int image_setup_libfdt(struct bootm_headers *images, void *blob,
--		       struct lmb *lmb);
-+int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb);
- 
- /**
-  * Set up the FDT to use for booting a kernel
-diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-index 9886e6897c..9d017804ee 100644
---- a/lib/efi_loader/efi_dt_fixup.c
-+++ b/lib/efi_loader/efi_dt_fixup.c
-@@ -172,7 +172,7 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
- 		}
- 
- 		fdt_set_totalsize(dtb, *buffer_size);
--		if (image_setup_libfdt(&img, dtb, NULL)) {
-+		if (image_setup_libfdt(&img, dtb, false)) {
- 			log_err("failed to process device tree\n");
- 			ret = EFI_INVALID_PARAMETER;
- 			goto out;
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 348612c3da..13e97fb741 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -513,7 +513,7 @@ efi_status_t efi_install_fdt(void *fdt)
- 		return EFI_OUT_OF_RESOURCES;
- 	}
- 
--	if (image_setup_libfdt(&img, fdt, NULL)) {
-+	if (image_setup_libfdt(&img, fdt, false)) {
- 		log_err("ERROR: failed to process device tree\n");
- 		return EFI_LOAD_ERROR;
- 	}
 -- 
 2.34.1
 
