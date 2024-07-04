@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01633C3065C
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 05:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE42DC30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 05:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1D79885BF;
-	Thu,  4 Jul 2024 07:50:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BE85888A0;
+	Thu,  4 Jul 2024 07:50:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D4C888885; Thu,  4 Jul 2024 07:50:33 +0200 (CEST)
+ id 008F988886; Thu,  4 Jul 2024 07:50:35 +0200 (CEST)
 Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
  (mail-sh0chn02on2070b.outbound.protection.partner.outlook.cn
  [IPv6:2406:e500:4420:2::70b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C82658888D
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 07:50:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EB1488001
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 07:50:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=minda.chen@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S1xFpza8U7WMAZYDnRtX4yE++i/S57bch/6Q/HtH4RGuBvSrUEuXwMEehk8xSf4/ngb7rwIduwjYguRCai0hjW35xPWfpMqGubFR47QX/A38GyX4Jiy7HNP9ceZDrjh1Wht6Enp4t30vdiHaZUSGB0zO7SSTyiQJC2KYwrH0Hbx3c1L3w5PFpqKK9ObpGNQFJv07yvq1i62A5z2wTXi1jXyxsS7051hA0DQnMnYmYC5UF50J27LS6PngU+n6CqjisUqx2l+/WzjoxaFatpvRutYv2WXdGaC+7qiD2/O3cNDyG13b9P/lclUM0jrp8zXsJdGGSi88n9DfMAiTQdJ0Sg==
+ b=fmIMvKQHIfvRFyNUdqyWPvRcDlW128joCOWR9c0p5qUfgq91rLk+2cjX14a11BQyKuG/J0O71CChxf7560FiWPHWBps9scZLCmbS3tay2Cd613hZ0BoTtpcDqxBM8hLkMjlgv2AXUD0VEzQT1Gt3ukFgtgV+tsd9MwJFd0c/gfA+Gij3j0p+7eI9XPGjrAWWTutIRWLO1w7WUcbdIRwsOY9te5rKmXGk0Qg/4VtWR7K1DunegzzPfbcRYfdLNAtxS7sBxMcUU3YURDh+IXZoifyD3XRE6kL3+WY7ToCcsJvzqFKqnFqP2CzNc86/Wg5qlyz2mfR4X5ABziJd2E+2fg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=m3OwfL+cz0add48gkmATESCH7dzfyEcUvrVlbZM57gE=;
- b=Nhd4nWHgmp8dmVtD5mJCgVs81R3qdYqVFrpprgQSnKJA+AcVn1lgPpU6rasFXTtiZHX9yfPa+sQWi2vaxvGgooH6Dk1IusdQ8eNFizEJ+LGEwKj+4l97pqQeAqSPQFXq2j7SwrEGxvBgDLAat6bWB52+ZBmLttg/x2I5CQg+G/GJQ6igiWeiMG3KQ+W/7u3uAQw6xlKmniIsKwWfkhPjZoCQb539DiV4g6gnWDVX8Uw+B09mutqe5aNlC+CIvIpLzZxo/1SeIgloUUcppKEZQiID2CNeOH0PMY3FfOA+p7Ge3PIRA6Z9701QMw5ft7GM0I06HkjJXzxJcwdbQS9qkw==
+ bh=SDdHzCQc5qDfJLE11ZEBBo2WEIlPcVFBVFDTts/pLlk=;
+ b=T30U/Hyz3yWQxejZh6lDQRPBe+zBolIJtyrkQJK2Lc10SBiYglkAimSuMyYPyROrNkK57A8/n3xHKKtF2asjBTH8VXpawTdN3csUJLhRtCHW3fjltpWQDlrvq0JV8lHh0uV6J+eBPTlRs7cCfTCXJqJMHCZ4C3f+/cdWYgqIYodxyEPDs5v0Ej5wmNtouYJez0tDCDZi4Q7cxi1kLoHLLLbfORREJyAewK23MEkwgss8+jecjCETWGP+eYl49DQquilcEcYkDyws0nEd+kmbbl3OrF+Y1+iMBYwmMZx/PitfEskrc4QpGjoLzsy7RviX3BadjQnDKTFRV1b5UdLHZA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
@@ -40,11 +40,11 @@ Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c311:25::15) by SHXPR01MB0766.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c311:25::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.32; Thu, 4 Jul
- 2024 05:50:25 +0000
+ 2024 05:50:26 +0000
 Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
  ([fe80::358e:d57d:439f:4e8a]) by
  SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::358e:d57d:439f:4e8a%7])
- with mapi id 15.20.7719.029; Thu, 4 Jul 2024 05:50:25 +0000
+ with mapi id 15.20.7719.029; Thu, 4 Jul 2024 05:50:26 +0000
 From: Minda Chen <minda.chen@starfivetech.com>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Roger Quadros <rogerq@kernel.org>,
@@ -56,9 +56,10 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>,
  Minda Chen <minda.chen@starfivetech.com>
-Subject: [PATCH v2 3/8] phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY driver
-Date: Thu,  4 Jul 2024 13:50:09 +0800
-Message-Id: <20240704055014.55117-4-minda.chen@starfivetech.com>
+Subject: [PATCH v2 5/8] pinctrl: starfive: Setup USB default disable
+ overcurrent pin
+Date: Thu,  4 Jul 2024 13:50:11 +0800
+Message-Id: <20240704055014.55117-6-minda.chen@starfivetech.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240704055014.55117-1-minda.chen@starfivetech.com>
 References: <20240704055014.55117-1-minda.chen@starfivetech.com>
@@ -69,54 +70,54 @@ X-ClientProxiedBy: NT0PR01CA0010.CHNPR01.prod.partner.outlook.cn
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SHXPR01MB0863:EE_|SHXPR01MB0766:EE_
-X-MS-Office365-Filtering-Correlation-Id: 18dc7a59-f4a8-465e-98ca-08dc9bed335f
+X-MS-Office365-Filtering-Correlation-Id: 0af5b365-1739-4b5e-5774-08dc9bed3454
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|41320700013|366016|1800799024|7416014|52116014|38350700014|921020;
-X-Microsoft-Antispam-Message-Info: 3LDhLMzu6PbNNQ68UgTXzmdxv+T72x5FDCKvnx/VXE9U+wbuOGz9dFb2bkc9bzKTVSFMxbdXjvUjTThT3G+i2NO4cKOMwjh6qZYL4OzpvQzlukFs2v7lVpU4bM823S4LoNN6l0c1i/wk5HBJzkyzXzOmf852aAR8zt50u1aerBQEhfthweda+t1y4afzrr3M4Y4XH6XiioNzTMlwcfPM9g5EZ1LIjJapHwP5ty2lhxUjnKSPMscpzC3fKWisRGiuJsBYr2S+aeKM1yv6+GxhoE+xgg7Uot8netCTGxYKcrL5C+UiQgjxNmDd/cC3nYA479IO6hPGtft20/Z7FeJsQjyeGeecshn7NsNbx6qieelupoLA0FYFN3YE6w9BbuExhvRqmOsZedvcYhFP6fEtlMzdU9Qe015ymbezyIUZZS0OM+LCfCmDDsEB7o1AqYTOcQiKh6ndTbCMqfrXEr69SZjMYqbYzC2HPaSX7iHeTVrxgcl7PWC1TEnPvTRJkkp7khx/lwkthPljoRLyBFodJdPlPX0IafFfnf8WwQJamxLwJQ8rK1CG3qYtmZNzDpDzpn46bvCgulWlZaqNDBTxa0Yhj6MkgojgJTM24zYafRfertOPgwiZyF6VPnn5kfObhw2rDWgC6f9r9SaAG/j3oA==
+X-Microsoft-Antispam-Message-Info: 0f0wr6s6iizWmXQVcQ3VC2lMC2z/bPzEcpL5zYXOSYZYgDPCfPDajQOUpZWdHOojWJXLrfvM3kBBxa8330Jarg6cWSQXnYSi03SuOOTN8SPwXvNJF1rg5Nfu/bCq2B0FyW8ZtP2JzQdMPNG14e1GFK+f3oSJB1BBUsNdlUOd7bsh8R8rRwEfZp9D1sTMmfj6hl2dfk8iVDOTm2/0fACWBrPK731tsa4YXPFV/uyGCppcGjb7jAOSwNbOQxKrCfNdequ4dqg/S+gwe0eauE2xeK4NTY1t/pzHETFvL+9AIHIz9Kr5itbkQcfO0sv+x7+pAoD1O82cuW2kwllBjQWoxhPNv8EUet5Q9nAsPbwXtFV8ew7jroW3LR0H9BJldhgwtnSKZqu17syUD66n6uA4tdTSZnzBumUX+BsOFIPriSOnNLtb1I04VjGnm00St2EsHFAml0Mu+tLcnRKqXfHWfvlJg2QHNRD7XvfFsIjYxeuPa69tVUoBStpJiOgQrS8tO3Fa1pnvdkpV65rIdPRXMKTCq6NQt40dMWsImMxA9Gf1CQSLvUGR+bcoUtkieaxJ6MK7Ke7X0dSB2ebd6F+2DP5Zsh80QzPdkUPFk+U2RyjnAQV97cxcOzuZw1eLe1mCiHxzeZ0ctPMbGQ8AkoHCzw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
  SFS:(13230040)(41320700013)(366016)(1800799024)(7416014)(52116014)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?sQonu8bkPpzHdqTwmigRAkPgg4ctOVNupnZsqkuxt9hJPm9Xnp4jFwCmEnJs?=
- =?us-ascii?Q?TsJQY5RPzHLlYrhAW8XimLK4/qV2Q6zCFnbvZ14XbaNObOot7N+DQ/v8CQZu?=
- =?us-ascii?Q?+YuET9bc9dK/KDveVDjYyHjoYzqtODwvvtZ/GC5rAG/lFKYgGzS1toGocEnG?=
- =?us-ascii?Q?0MVG+N/HZVuNo3u6HGL6e/epfm/e3hL3B/9ly3RWamTABxSuP2kUrOBgkR7b?=
- =?us-ascii?Q?mZNr3EwP+0bsQrRqczYoz2V6Qa+OFFjebYK4YAWFZvL1Us+ChgkUjU1mXD+1?=
- =?us-ascii?Q?WfysEvCBicIoDVI/4MNSi6FEZPxVgXs95zqQe0DVPl4ywGsF6vM9sp1gkNFu?=
- =?us-ascii?Q?FoTd03qi9mOpA4FmOzXo1Z1B2MFuFFuf46ioLmiwvpVuQS3bmJaEDurIEUJI?=
- =?us-ascii?Q?imc7KQkLxb6LAvB163W4PgepbwWEROBYJFfM82vEDmkIz9RFvjt/8HoupPDa?=
- =?us-ascii?Q?O0R2EGIXDZG02Prt/t7gIcwoHqjYKk8oJBInqlw+ez8nm4dnjuaXxwr+bjw4?=
- =?us-ascii?Q?TSCnTfG+7KQfJNFKBjTqnB9K6g3KMTBnFZHxLvEXP0EtTgorckkk4C2b+V+r?=
- =?us-ascii?Q?n6lEXpJw5A1wCKP6icygJxmndVqL2wICXw22oaA1YDTFZyDgV+J4frunEwwf?=
- =?us-ascii?Q?EGYSQcWxeW/qVPsqb6lvQlR4uVjv2HUEY81TXfvpunt5vsBjlL91LtV+J5Zx?=
- =?us-ascii?Q?C9s312nVeJk1Mmt1KtQwCIvbs8OBqq3S4R95fXt1Iabg7VyLBwbsXHxOXiDx?=
- =?us-ascii?Q?0xhdChASUe5MudsORib2F8L8+35F4FUYtrUrAAxB2OiDlzVTU3XwB/SE9x/M?=
- =?us-ascii?Q?G4q2eA0Rs6bHVw4lCBgpxSfUJ6HHDH3pTisV25aUIaaXGqcC54FImS5Fulnx?=
- =?us-ascii?Q?KZHwnV2jxBxx3wmYKSaGQUcnQg81MWiJ/riPPXr4jK0Msq+wfrb4MUycatCe?=
- =?us-ascii?Q?IUSg7g7T1hG7v5inUpzA02unN7BsL/MrSPlXDrEq3yhFiSgg5IlxzgFiYF12?=
- =?us-ascii?Q?78fCLh2E+Wo1vDQLeS2+UAjFlOD4C5X/e9MTjxUvr6lyR/bixOgIqfHzNpnL?=
- =?us-ascii?Q?J8NpgY1VwcifXPrA846gxr14EGiDadsSwFSO5jkYjwEJc/aYaRCwmO+yUT8Y?=
- =?us-ascii?Q?SAAVc0WUhoEEhGNmlmWNHtxb4X6tWFXXa8auuejpso1fBwk+uhzW4IYC/dIu?=
- =?us-ascii?Q?nWuxLIXoSAgz/yaa+11IA06voKb7qo88DnjYPtsRR76f83CIshVttD68D8aQ?=
- =?us-ascii?Q?1/K8BMVFE3x8D8t1Lamm0q8wWt3xdIzGATZd1RKSwO0Zxl20IejcOgUnb8pt?=
- =?us-ascii?Q?pozto6Hn7/e8Rf/efSQ2AcRvDisJpmZNd2k4yf9eJCrXSkXkDQ8qwPag8L+U?=
- =?us-ascii?Q?dDDzH3sjJBsDEHKIt2Rr0shwzPd9Qlm3bTmSagtNKwe/evu2Dqv0u4eUJZFJ?=
- =?us-ascii?Q?hzvMoYA+ffh6kQpt4wfbM03JrMusna+B4VNZLCq35yWY8Jwb143hjO/KjOXS?=
- =?us-ascii?Q?uIA1bf4HQowk+AHTIQB5eeTCZOArTU42qnliLgTsRf+bc7Wv2UGHpNHhpSMy?=
- =?us-ascii?Q?7vtYNZpBjpEukHk5zOR55Ayxhw31i220lyZm16ZvRSa+m663UJ9OiBvg+pqV?=
- =?us-ascii?Q?mw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?hPbR7X5H/lRsRMNKOS1LfJ+hudWCKaysAfsHlB4pHZbpn0zAl2WH2hu6PH31?=
+ =?us-ascii?Q?8pHY8UYcn3V3fWOx6A+puX1vPaxjwjPp0fMuOO0EO4Pj1EhUUsbD0B07vyve?=
+ =?us-ascii?Q?DwLDRyY9djbdSWLYgEqt0zjKS/yza5NDs8JgC8blG5/VkMVaGMxicvWomoci?=
+ =?us-ascii?Q?F4Y3VODfUWxwqyxgLAfWxb419N/jiY/5Mro6hcE5NrjGZFItRDdmsjw8RKVr?=
+ =?us-ascii?Q?3KMgC0Z0rgXGg1AK8678WTlsJ1UPdNC9p4izeqdClGyvUZ3nhwUWVaflnd8Y?=
+ =?us-ascii?Q?Jvlg4S+t3LZIelx0V47FmcdXyaSTfuw4LJPWwqf6evC/LhRyYw6laZApHxV6?=
+ =?us-ascii?Q?MTKrhCzNj0/2epDNcV43zbQdGJ8HT86lYD6c/89tWkjr8iXbE3CZY8wdjz+9?=
+ =?us-ascii?Q?V7nT29pivZgT4Lne1+siXqXBTNyDzLCDQq66036vuUtVA/0cZCxD2tAj+bd8?=
+ =?us-ascii?Q?xEe+TyKFftptuEZ7gIY35EYqlJBp20S2n6KvOz9Y65bs7NohQ94S4E4f+ggo?=
+ =?us-ascii?Q?Fa/mF9q7LFkXiOKNlNWVaEalzgrYg+gma2AwErznFw1xVJvv2mAbqq3KDre2?=
+ =?us-ascii?Q?Aunay4y02Fq0iHvwdbP3ktAO1AKNf6pEA8Piy28Ud0KfvooE+MSISegWeoHR?=
+ =?us-ascii?Q?GOgD/dkNTS8538pEW/Dk7NY7WQucBD0fExPrvafTqql37jOtLYmrsRSo4qP5?=
+ =?us-ascii?Q?2NRpyAev34QbxginFY1+UPBEbwJYiuqTWkjkK3wYBEh0M1u+JgBn11Lo7fPP?=
+ =?us-ascii?Q?XOsGjxuLJMD1sFaiACtNaVA1/9CSaOF4y6NuZw7TsdMXtgInoPGS9bIPhK5c?=
+ =?us-ascii?Q?bYUhLPuWkb/azYhYYQt7QAJRebgOiuouIRZkPpjaLx7a3Yc6/oQna+1XJ2WY?=
+ =?us-ascii?Q?m/dC4W8E8Vpc2tQ+lDrD1apEB4iyr4HAbJKw1FSxx4/0Flgdx3RMEkSz10DC?=
+ =?us-ascii?Q?2xG/THLomcLPWl+yr9qzuF70P8oPxy436XZkqCdLVUUpwlIzjQkrV0UqpFbo?=
+ =?us-ascii?Q?w7wHiDoF+Gl79LjIvM/zo3JsXLvTkWePJSW0OEPhjFwIZV7FARZCv93Ur2Xc?=
+ =?us-ascii?Q?nKpA+zn/Q7JYc0U6vdkFzsl/yy+z2uqEOFeGuQZP6N5iJou7tc6lVRTtTPgk?=
+ =?us-ascii?Q?/I02wTk7mAPYaIS2917cRMgD5+H68oY6WHsSxJMxsZb2vMrcXiQ0MVWX1qpx?=
+ =?us-ascii?Q?OxBlkeMpcXsBHOaaMptvrirwnfqE/Y+Y6fHJi6sbwh7rMGW6L3pQ4b2KH1TD?=
+ =?us-ascii?Q?A87YBPz5WmYPavCbYbsGyyKiN/wLwmYiYWOi39g/+HK5jAsFFxX/9lYp0gCm?=
+ =?us-ascii?Q?tU+SsfH9mEYsrLYNgkQjIOoPpM2EHLVoSP8IGQSR4HnGtaEyAL6gYrrZq76Y?=
+ =?us-ascii?Q?JlFh9HYnng/tdpOyUtF5qkIVIIqMLP6Ulzal/fjqpi8ttGTK+wvjEEpIj1BV?=
+ =?us-ascii?Q?aKuAyN6DWAp6aarwMref1qmbogDu0j2pOYbuCshCclvz4tuWSrRWeL/mFfJp?=
+ =?us-ascii?Q?wXVzLeBnDJ56P5SnY1rEcjFZFCUEnaxO/g/O/0YbT5vF6FUvj5qYYorOnqSJ?=
+ =?us-ascii?Q?U16XWLRiC895/C86c4MOAch/mDSaoCqe1TBPM3F79uwnpWUNUtGutJlo9Da6?=
+ =?us-ascii?Q?2g=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18dc7a59-f4a8-465e-98ca-08dc9bed335f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0af5b365-1739-4b5e-5774-08dc9bed3454
 X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2024 05:50:25.2198 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2024 05:50:26.8167 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JVXgF88egLr+rGT/llPE9DIm6sNInfAkRhSo01+C6MJADwPMjpYjOvheEZgtU0fEnVis+iWytPFvqWY9ofrTGMPnTSlnLlXZrpv6zOeCA5g=
+X-MS-Exchange-CrossTenant-UserPrincipalName: GdaleIJCB+A29Aka6jX7xNWR9iPTGgl3tHPC+5kq/mFpqDX91+X61J9wEZNqsIzzyDeYxxALU7cimjn79HwaYHBvIt2itFQHiMPisei5cE0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0766
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -134,253 +135,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Starfive JH7110 PCIe 2.0 PHY driver, which is generic
-PHY driver and can be used as USB 3.0 driver.
+For some JH7110 boards, USB host overcurent pin is not reserved,
+To make USB host work, overcurrent pin must be disabled. So set the
+pin default disabled.
 
 Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
 ---
- drivers/phy/starfive/Kconfig           |   7 +
- drivers/phy/starfive/Makefile          |   1 +
- drivers/phy/starfive/phy-jh7110-pcie.c | 202 +++++++++++++++++++++++++
- 3 files changed, 210 insertions(+)
- create mode 100644 drivers/phy/starfive/phy-jh7110-pcie.c
+ drivers/pinctrl/starfive/pinctrl-jh7110-sys.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/phy/starfive/Kconfig b/drivers/phy/starfive/Kconfig
-index 11a819f8b2..5d49684bc7 100644
---- a/drivers/phy/starfive/Kconfig
-+++ b/drivers/phy/starfive/Kconfig
-@@ -4,6 +4,13 @@
- 
- menu "Starfive PHY driver"
- 
-+config PHY_STARFIVE_JH7110_PCIE
-+        bool "Starfive JH7110 PCIe 2.0 PHY driver"
-+        select PHY
-+        help
-+          Enable this to support the Starfive JH7110 PCIE 2.0/USB 3.0 PHY.
-+	  Generic PHY driver JH7110 USB 3.0/ PCIe 2.0.
-+
- config PHY_STARFIVE_JH7110_USB2
- 	bool "Starfive JH7110 USB 2.0 PHY driver"
- 	select PHY
-diff --git a/drivers/phy/starfive/Makefile b/drivers/phy/starfive/Makefile
-index a405a75e34..82f25aa21b 100644
---- a/drivers/phy/starfive/Makefile
-+++ b/drivers/phy/starfive/Makefile
-@@ -3,4 +3,5 @@
- # Copyright (C) 2023 Starfive
- #
- 
-+obj-$(CONFIG_PHY_STARFIVE_JH7110_PCIE)	+= phy-jh7110-pcie.o
- obj-$(CONFIG_PHY_STARFIVE_JH7110_USB2)	+= phy-jh7110-usb2.o
-diff --git a/drivers/phy/starfive/phy-jh7110-pcie.c b/drivers/phy/starfive/phy-jh7110-pcie.c
-new file mode 100644
-index 0000000000..57d5d8bf53
---- /dev/null
-+++ b/drivers/phy/starfive/phy-jh7110-pcie.c
-@@ -0,0 +1,202 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * StarFive JH7110 PCIe 2.0 PHY driver
-+ *
-+ * Copyright (C) 2024 StarFive Technology Co., Ltd.
-+ * Author: Minda Chen <minda.chen@starfivetech.com>
-+ */
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <errno.h>
-+#include <generic-phy.h>
-+#include <regmap.h>
-+#include <soc.h>
-+#include <syscon.h>
-+#include <linux/bitops.h>
-+#include <linux/err.h>
-+
-+#define PCIE_KVCO_LEVEL_OFF		0x28
-+#define PCIE_USB3_PHY_PLL_CTL_OFF	0x7c
-+#define PCIE_USB3_PHY_SS_MODE		BIT(4)
-+#define PCIE_KVCO_TUNE_SIGNAL_OFF	0x80
-+#define PHY_KVCO_FINE_TUNE_LEVEL	0x91
-+#define PHY_KVCO_FINE_TUNE_SIGNALS	0xc
-+
-+#define USB_PDRSTN_SPLIT		BIT(17)
-+
-+#define PCIE_USB3_PHY_MODE		BIT(20)
-+#define PCIE_PHY_MODE_MASK		GENMASK(21, 20)
-+#define PCIE_USB3_BUS_WIDTH_MASK	GENMASK(3, 2)
-+#define PCIE_BUS_WIDTH			BIT(3)
-+#define PCIE_USB3_RATE_MASK		GENMASK(6, 5)
-+#define PCIE_USB3_RX_STANDBY_MASK	BIT(7)
-+#define PCIE_USB3_PHY_ENABLE		BIT(4)
-+
-+struct jh7110_pcie_phy {
-+	struct phy *phy;
-+	struct regmap *stg_syscon;
-+	struct regmap *sys_syscon;
-+	void __iomem *regs;
-+	u32 sys_phy_connect;
-+	u32 stg_pcie_mode;
-+	u32 stg_pcie_usb;
-+	enum phy_mode mode;
-+};
-+
-+static int phy_pcie_mode_set(struct jh7110_pcie_phy *data, bool usb_mode)
-+{
-+	unsigned int phy_mode, width, usb3_phy, ss_mode;
-+
-+	/* default is PCIe mode */
-+	if (!data->stg_syscon || !data->sys_syscon) {
-+		if (usb_mode) {
-+			dev_err(data->phy->dev, "doesn't support usb3 mode\n");
-+			return -EINVAL;
-+		}
-+		return 0;
-+	}
-+
-+	if (usb_mode) {
-+		phy_mode = PCIE_USB3_PHY_MODE;
-+		width = 0;
-+		usb3_phy = PCIE_USB3_PHY_ENABLE;
-+		ss_mode = PCIE_USB3_PHY_SS_MODE;
-+	} else {
-+		phy_mode = 0;
-+		width = PCIE_BUS_WIDTH;
-+		usb3_phy = 0;
-+		ss_mode = 0;
-+	}
-+
-+	regmap_update_bits(data->stg_syscon, data->stg_pcie_mode,
-+			   PCIE_PHY_MODE_MASK, phy_mode);
-+	regmap_update_bits(data->stg_syscon, data->stg_pcie_usb,
-+			   PCIE_USB3_BUS_WIDTH_MASK, width);
-+	regmap_update_bits(data->stg_syscon, data->stg_pcie_usb,
-+			   PCIE_USB3_PHY_ENABLE, usb3_phy);
-+	clrsetbits_le32(data->regs + PCIE_USB3_PHY_PLL_CTL_OFF,
-+			PCIE_USB3_PHY_SS_MODE, ss_mode);
-+
-+	regmap_update_bits(data->sys_syscon, data->sys_phy_connect,
-+			   USB_PDRSTN_SPLIT, 0);
-+
-+	return 0;
-+}
-+
-+static void phy_kvco_gain_set(struct jh7110_pcie_phy *phy)
-+{
-+	/* PCIe Multi-PHY PLL KVCO Gain fine tune settings: */
-+	writel(PHY_KVCO_FINE_TUNE_LEVEL, phy->regs + PCIE_KVCO_LEVEL_OFF);
-+	writel(PHY_KVCO_FINE_TUNE_SIGNALS, phy->regs + PCIE_KVCO_TUNE_SIGNAL_OFF);
-+}
-+
-+static int jh7110_pcie_phy_set_mode(struct phy *_phy,
-+				    enum phy_mode mode, int submode)
-+{
-+	struct udevice *dev = _phy->dev;
-+	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
+diff --git a/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c b/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+index dafba65eae..1102985ab9 100644
+--- a/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
++++ b/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+@@ -378,8 +378,15 @@ static int jh7110_sys_pinctrl_probe(struct udevice *dev)
+ {
+ 	struct starfive_pinctrl_soc_info *info =
+ 		(struct starfive_pinctrl_soc_info *)dev_get_driver_data(dev);
+-
+-	return starfive_pinctrl_probe(dev, info);
++	struct starfive_pinctrl_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
-+	if (mode == phy->mode)
-+		return 0;
-+
-+	switch (mode) {
-+	case PHY_MODE_USB_HOST:
-+	case PHY_MODE_USB_DEVICE:
-+	case PHY_MODE_USB_OTG:
-+		ret = phy_pcie_mode_set(phy, 1);
-+		if (ret)
-+			return ret;
-+		break;
-+	case PHY_MODE_PCIE:
-+		phy_pcie_mode_set(phy, 0);
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	dev_dbg(_phy->dev, "Changing phy mode to %d\n", mode);
-+	phy->mode = mode;
-+
-+	return 0;
-+}
-+
-+static const struct phy_ops jh7110_pcie_phy_ops = {
-+	.set_mode	= jh7110_pcie_phy_set_mode,
-+};
-+
-+static int starfive_pcie_phy_get_syscon(struct udevice *dev)
-+{
-+	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-+	struct ofnode_phandle_args sys_phandle, stg_phandle;
-+	int ret;
-+
-+	/* get corresponding syscon phandle */
-+	ret = dev_read_phandle_with_args(dev, "starfive,sys-syscon", NULL, 1, 0,
-+					 &sys_phandle);
-+
-+	if (ret < 0) {
-+		dev_err(dev, "Can't get sys cfg phandle: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = dev_read_phandle_with_args(dev, "starfive,stg-syscon", NULL, 2, 0,
-+					 &stg_phandle);
-+
-+	if (ret < 0) {
-+		dev_err(dev, "Can't get stg cfg phandle: %d\n", ret);
-+		return ret;
-+	}
-+
-+	phy->sys_syscon = syscon_node_to_regmap(sys_phandle.node);
-+	if (!IS_ERR_OR_NULL(phy->sys_syscon)) {
-+		/* get syscon register offset */
-+		phy->sys_phy_connect = sys_phandle.args[0];
-+	} else {
-+		phy->sys_syscon = NULL;
-+	}
-+
-+	phy->stg_syscon = syscon_node_to_regmap(stg_phandle.node);
-+	if (!IS_ERR_OR_NULL(phy->stg_syscon)) {
-+		phy->stg_pcie_mode = stg_phandle.args[0];
-+		phy->stg_pcie_usb = stg_phandle.args[1];
-+	} else {
-+		phy->stg_syscon = NULL;
-+	}
-+
-+	return 0;
-+}
-+
-+int jh7110_pcie_phy_probe(struct udevice *dev)
-+{
-+	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-+	int rc;
-+
-+	phy->regs = dev_read_addr_ptr(dev);
-+	if (!phy->regs)
-+		return -EINVAL;
-+
-+	rc = starfive_pcie_phy_get_syscon(dev);
-+	if (rc)
-+		return rc;
-+
-+	phy_kvco_gain_set(phy);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id jh7110_pcie_phy[] = {
-+	{ .compatible = "starfive,jh7110-pcie-phy"},
-+	{},
-+};
-+
-+U_BOOT_DRIVER(jh7110_pcie_phy) = {
-+	.name = "jh7110_pcie_phy",
-+	.id = UCLASS_PHY,
-+	.of_match = jh7110_pcie_phy,
-+	.probe = jh7110_pcie_phy_probe,
-+	.ops = &jh7110_pcie_phy_ops,
-+	.priv_auto	= sizeof(struct jh7110_pcie_phy),
-+};
-+
++	ret = starfive_pinctrl_probe(dev, info);
++	/* Set default the usb controller overcurrent signal. */
++	if (!ret)
++		clrsetbits_le32(priv->base + JH7110_SYS_GPI,
++				GENMASK(22, 16), BIT(16));
++	return ret;
+ }
+ 
+ static const struct udevice_id jh7110_sys_pinctrl_ids[] = {
 -- 
 2.17.1
 
