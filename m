@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B52CC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 12:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87284C30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 12:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8887188650;
-	Thu,  4 Jul 2024 14:03:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D571088650;
+	Thu,  4 Jul 2024 14:26:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W+J9i0Fy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S31da3JZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA289885D7; Thu,  4 Jul 2024 14:03:54 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 32A77885D7; Thu,  4 Jul 2024 14:26:03 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7699E88650
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 14:03:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 870F688650
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 14:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2c995aeb1ebso65445a91.2
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 05:03:52 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-52e994be1abso37168e87.2
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 05:25:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720094631; x=1720699431; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3H2ciaOSTgPQavrCSd9nkyNcwVkGWaMRlu3oCZM4NTk=;
- b=W+J9i0Fyg5LncZgyK9gYjEPrDCZKJ/l17X3azSyL+WOpIU1VBX+YjfmDt6GQ1xoCkO
- gz/wegTfH+/HCLEQz7Tanj/f4bfjd6976IM3NgC8gVN9hjaOGUy9mS5vS5WEDCaLMFZ1
- 01saVVOKCVM/3B+05c/j3mhU0PjhXQm3x/B7oLAbHb4aSfVFlW3D9RlYRUn1POt1THmf
- SxNR6KtU7KTGeWbsA52jLgxC5z5pv4FZdgvYiH8UyMxf2xtpgebFrFcrbavLbduONcLA
- ycnSpYbBTFd36R6e9N5qo6wIiWF+cM+B8A82H9MP7UH9IIsrOniNxeI1uJQ5w8PKJl/s
- Rsyw==
+ d=gmail.com; s=20230601; t=1720095956; x=1720700756; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WsH+7Rc89rPcebSRi0JEjxZdkVVDEvzCQLPYZ8mRNks=;
+ b=S31da3JZ1lOzjR7F2rLVlZMsDrXTblP2u+wHpejetAtuvRc+8wykQrW94ngW+70SsU
+ nvWW50fIAgwbDhsO3lTW5GJWgRQ1SnuF4FL3M+M5mdn25s6HOiiq4Yr7sGc5EScycDT5
+ AG7S7CnZo9AMlT1pmhIrUwhuW6YUGanIDFE9Xcmc5vQhqejcGgYqTEOyaewzPqJr/aGv
+ uUePwnwiqqofP4G5k1i1gl1TZN2hUusx/YhOfDoD9Pc2rUZRkozuEwja49H7yrc+fder
+ eGU59j0TMAHgXzJrl65C2GQpUP4q2wxfG2Xf2Y4x8Eo8r0lp2GELwgHatpN/1AoQZFfj
+ Tmhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720094631; x=1720699431;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3H2ciaOSTgPQavrCSd9nkyNcwVkGWaMRlu3oCZM4NTk=;
- b=ToUPItxJpID5K15iEUiq0mGmYVPLy3kq5mGDKu3VSMZvJpQmsHj3y1U4LvEJ1oISWx
- L+ktsVvZJf5tp8MMhwE61ecPnNzBObtMytrzbF8B9WwntqaOCgdacIIAbEqvjVHsvBuz
- ZDOM5xCporGIgMDBA3cIIcJ9VO/6MHtVKdQdTwytVqEdtpGZOl4hrUkLUKiUC62ehNQM
- OinrkiQHzx+p1CNUV9dE4sA8ZCCuI+F0BLInANvYGWJ5LAiGARB0MRjxwLf1dKDbnqFk
- 1w5pnSO61FCqiEQrDJ7dRn/vSZdkMRqvB7WLvmZaAIiRvfkuuNV1yYe4z2KiX3RMSRzR
- R2XA==
+ d=1e100.net; s=20230601; t=1720095956; x=1720700756;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WsH+7Rc89rPcebSRi0JEjxZdkVVDEvzCQLPYZ8mRNks=;
+ b=Fpm5SzxlcMZVchVkDDEA1aTr2WCi2pQ3PkjBCWAmPb4GWwjwk+gZPI8UPqk8iHCbbr
+ rr7Tjw/it/jqyviBbe6sr3cNhDfGrC5BzezfTpYYLjybRd7uK5ZLFcW609Meb46n5WDm
+ KJTHHTDSATns48NM1lrDMTHDEB4gf2r3CTycgosVOu6NtHxSxlqHbobfNPxvbaANZfz/
+ fZU6Qw5Ji1VOd39GTMWAU81DrEnmKBm1zHrdcygFuY799qliwBIyLaJb0KqX6veVnfgG
+ ZI1TWw7DiJxinGwvHj0chgLUSuruzo1ZmkzK6g+lgeHAL+jj8p2jFqq2wJm9uw453Vo1
+ PGHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWo2duIMP/I6f/LU+y+O1xF5U+H1FQkUpgh+YU3KQtNRUoE1DGIroWo3WG9dW78y0c0USFgjtIgAIsNWEICpEzSQclzCg==
-X-Gm-Message-State: AOJu0YwwzaWClkSZMWoIK7LxIYlo+6PTNRr7M9FDAJ3wuawY4Mwf8qbD
- ZTvZGB5VHbciv9q9oHuCSgSs1x+6CcgFUXq85ZTlVdrSEHr8QbtbHInhPQ==
-X-Google-Smtp-Source: AGHT+IGItSuENzUuuFSvSLlhTDODru4PmM5S0kFiYvsGCak5F4MT6YDMvtla9QeMXPGKCYENlYsv1Q==
-X-Received: by 2002:a17:90a:148:b0:2c9:8dc2:7768 with SMTP id
- 98e67ed59e1d1-2c99c841adcmr1333980a91.4.1720094630687; 
- Thu, 04 Jul 2024 05:03:50 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:4fd9:3a00:dbd0:b26d])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c99a9ce680sm1319929a91.40.2024.07.04.05.03.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 05:03:49 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: ian.ray@gehealthcare.com
-Cc: sbabic@denx.de, trini@konsulko.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2] msc_sm2s_imx8mp: Adjust the initrd_addr location
-Date: Thu,  4 Jul 2024 09:03:37 -0300
-Message-Id: <20240704120337.673211-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCULfj6dweiY6COZ+ypdgI5UR3J9FE11H+/WQ0apuid1/nrfvQ3y+8E/Gld1LJWJCkHMSX6RNu0M156LglDKaRuYJaYIeQ==
+X-Gm-Message-State: AOJu0YxR63iSMTAQi1/D+DmB8283PxON3npk0DRcNBya2oRTJSaWjIqn
+ bZCaHqtv5mNBYRvVQAQgrnfidUxcJe5dG0F2i6CbRgmaAmygJfJmNSKa7asZWhY8UvCFdn/xg/R
+ 8MtSo/6Ex45GcaVR0BCcg/OvbdYJaBg==
+X-Google-Smtp-Source: AGHT+IElqRlquvXsNkwG6CYuk+u4q7xsJSFgrfIlkp5hTKDDgJAjxOp1u6i5JueBtQ/fmh46YuWaizCU9frymIojdbA=
+X-Received: by 2002:a19:5218:0:b0:52e:9daa:25f4 with SMTP id
+ 2adb3069b0e04-52ea0641d7cmr962118e87.2.1720095955582; Thu, 04 Jul 2024
+ 05:25:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240703175727.446205-1-festevam@gmail.com>
+ <20240703180355.GB38804@bill-the-cat>
+ <CAOMZO5Dej12iA7mX9MqMrrsj6oQ4SrNCAFN2vGuvOA_sq186aA@mail.gmail.com>
+ <20240703182238.GC38804@bill-the-cat>
+In-Reply-To: <20240703182238.GC38804@bill-the-cat>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 4 Jul 2024 09:25:43 -0300
+Message-ID: <CAOMZO5BKMhL=K8DxWAZ3fBB-Mpx63QQUX7ycKKA1gJVMcc9ucw@mail.gmail.com>
+Subject: Re: [PATCH] msc_sm2s_imx8mp: Adjust the initrd_addr location
+To: Tom Rini <trini@konsulko.com>
+Cc: ian.ray@gehealthcare.com, sbabic@denx.de, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +93,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+Hi Tom,
 
-Booting an initramfs with the current initrd_addr address may lead to
-initramfs corruption and boot failure.
+On Wed, Jul 3, 2024 at 3:22=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 
-Fix the initramfs problem by applying the following layout
-suggested by Tom Rini:
+> How is the fdt at 0x43000000 not being clobbered if the initramfs at
+> 0x43800000 is? Is it because it's just enough of a bad spot that we
+> relocate the fdt out of the way? With the kernel at 0x40480000
+> everything else is too low. kernel address + 128MiB for fdt address, then
+> +512KiB (or a bit more, for nicer numbers) for initrd.
 
-loadaddr=0x40480000 --> Gets moved to 0x40600000 in run-time:
+Thanks for the suggestion, it works.
 
-   Uncompressing Kernel Image
-Moving Image from 0x40480000 to 0x40600000, end=41e80000
+I sent a v2 with that proposal.
 
-fdt_addr_r= moved loadaddr + 128 MiB = 0x48600000
-
-initrd_addr=fdt_addr_r + 512 KiB = 0x48680000
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
-Tested-by: Stefano Babic <sbabic@denx.de>
----
-Changes since v2:
-- Apply Tom's suggested layout.
-- Added Stefano's Tested-by.
-
- include/configs/msc_sm2s_imx8mp.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/include/configs/msc_sm2s_imx8mp.h b/include/configs/msc_sm2s_imx8mp.h
-index 3c7d96cb3c0..d0c5da7b98d 100644
---- a/include/configs/msc_sm2s_imx8mp.h
-+++ b/include/configs/msc_sm2s_imx8mp.h
-@@ -36,10 +36,10 @@
- 	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
- 	"image=Image\0" \
- 	"console=ttymxc1,115200\0" \
--	"fdt_addr_r=0x43000000\0"			\
-+	"fdt_addr_r=0x48600000\0"			\
- 	"boot_fdt=try\0" \
- 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
--	"initrd_addr=0x43800000\0"		\
-+	"initrd_addr=0x48680000\0"		\
- 	"bootm_size=0x10000000\0" \
- 	"mmcpart=1\0" \
- 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
--- 
-2.34.1
-
+Thanks
