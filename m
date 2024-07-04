@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A924DC3271F
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 18:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23FBC3271F
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 18:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 072CE88918;
+	by phobos.denx.de (Postfix) with ESMTP id 5AE988892A;
 	Thu,  4 Jul 2024 20:50:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RWlXvoSj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dOa1dnuQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06D1188926; Thu,  4 Jul 2024 20:50:50 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 0FCE788917; Thu,  4 Jul 2024 20:50:50 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00F0088917
+ by phobos.denx.de (Postfix) with ESMTPS id A45928891A
  for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 20:50:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-700cc97b220so483898a34.0
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 11:50:46 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6f8d0a00a35so771289a34.2
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 11:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1720119046; x=1720723846; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VveD9j0VjZ3nwSob4cRsMISkCVCU9Jq1BHks8bGwxvY=;
- b=RWlXvoSjxjepqq0wvECGiwDFr+tKsOSnpTJHLCJHNuSH83Ya1lCXKBp//vwNcajB1O
- pSRcZzPsXWVAA10F44/oT6WK6xEAJFIHrkO9QFvyFdlMpPGFaqU2KnyIS/42NhxDeY7v
- OpbStJUXwHziJ8Pdg/N+D46nP+BwhSf9dTcA0=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Y0cuNHebvrctjQQkxwvFx890p7doJUrVpNF2Bf5GQus=;
+ b=dOa1dnuQjMoclXCnQZ27reb5IQf45lIrKYyehmT0/ovD1H08XC8D53YJtf1IHCeI7S
+ zepiwZx+isklm5MC+d9EGmjNVEfuJj46f9CFfVc8w22b5u4bztqpOnYqIySu+A664aAu
+ dMSGEX/LQ2r7IVAEnLwPW/R6jXQac6SKr5Pv4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1720119046; x=1720723846;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VveD9j0VjZ3nwSob4cRsMISkCVCU9Jq1BHks8bGwxvY=;
- b=PNENe6chl6YcmLolkvEWRSm1/fFIb7yPt6upDpQSN3Oli7aistfQ9gt0Sml3mKcRAe
- 6k1O3TsyEP7nBeigfMU+Ks+urBSL5Qb8UG+mNOrCbaZQ+ICfh5YIdDOcHb29XtMJay1E
- 5W5IpCtpHrOmytIoFD7t3kbw7lURfk80Y4nQoNZFUKYqLXu8RL/HvV4brSc67y4z58lf
- 4JDb4HiVnXRdXRF7g4S+SJLXMkFnRZgRNiSmZjJ87QijaGyFvurDHfAREssqR6CD+T8C
- UQu5UAb41uq3YxpOnkquPDgIza6733P1/9vLoPntake8uCEzlr4m3LjH+JFbrxZYYX7d
- wSOw==
-X-Gm-Message-State: AOJu0YzPA1ZNGNmk1PdECYWFZ/QS88eSJwn0qUctXbsQPqZg+hdoYVu0
- NrK8dnwAy/vuFYgMXvUBX287KkMOskt9jkqtYO1fIeM2fBQ8zJVJfsndVp1iGZpRnoe+uD+iDW5
- zqI8=
-X-Google-Smtp-Source: AGHT+IFheQk05VJZreIBDhqJ26V+MaCVpLl5JCEXNi1ws+Qkt4QFiFaFio2SrYX4rQgYuT43cRl1eA==
-X-Received: by 2002:a9d:7f98:0:b0:700:cc42:74b7 with SMTP id
- 46e09a7af769-7034a74f3c9mr2792961a34.2.1720119045741; 
- Thu, 04 Jul 2024 11:50:45 -0700 (PDT)
+ bh=Y0cuNHebvrctjQQkxwvFx890p7doJUrVpNF2Bf5GQus=;
+ b=io68Qmx+atmLwzLr2ufKZJ1xC9oSkBpWzMOGVrrbPNMuraH51bPjh75dMCSpX33Qgv
+ a5dfB7p4T/jjCajXk6rAK8tsA6skby4xdjfDCEekF/AHwM0dNnLgEdPwA4YLQdT3euhX
+ H1TO3G9mbc4lt7bptKFcLs3ltiT9qP1g/3MoDWFDZsPOWPc7oKxBEbaO8+81Ht1z6Oci
+ cjc5GVBa+MAT8WN9Cfwiz1ulKRQPmqTzbnqXq0qfMPwBeEWvLhEh2QvNpWeoHJLVcBcj
+ 7ty77MddOr0P3Un6s1jt4tjv/aU2aKfw4YaK36w7mtUuyAMtKyyHf03Z9MzZIjCoUEdM
+ WQDQ==
+X-Gm-Message-State: AOJu0YxxnDCJ+Mo3RauUREsYKZggwuEMTZUH0sh6NtZiotGiapJKjlQJ
+ /wYxtCWEfSw8gbYCLvqS0HwrNacoBAoyL9e9GEULaq7XrgiEj3BXT2dDNUBsURsnXn7T0dJcCOB
+ C63s=
+X-Google-Smtp-Source: AGHT+IHc9veU1Lfsgn98WQhrdLQdgxevX47AJxMAL7GfzzUxYmQzsaMaryLz0XUOMP31qHxJjip+JQ==
+X-Received: by 2002:a05:6830:206:b0:700:cf6e:e261 with SMTP id
+ 46e09a7af769-7034a80cfbamr2692159a34.31.1720119046445; 
+ Thu, 04 Jul 2024 11:50:46 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-45.totalplay.net. [189.203.97.45])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-701f7ac8dccsm2454997a34.34.2024.07.04.11.50.44
+ 46e09a7af769-701f7ac8dccsm2454997a34.34.2024.07.04.11.50.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 11:50:45 -0700 (PDT)
+ Thu, 04 Jul 2024 11:50:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Love Kumar <love.kumar@amd.com>
-In-Reply-To: <20240618202343.3332529-1-trini@konsulko.com>
-References: <20240618202343.3332529-1-trini@konsulko.com>
-Subject: Re: [PATCH] test/py/tests: Update some network dependencies
-Message-Id: <172011904490.1502730.2321122459261449781.b4-ty@konsulko.com>
-Date: Thu, 04 Jul 2024 12:50:44 -0600
+In-Reply-To: <20240627134320.3518272-1-trini@konsulko.com>
+References: <20240627134320.3518272-1-trini@konsulko.com>
+Subject: Re: [PATCH] CI: Make pytest export JUnitXML
+Message-Id: <172011904591.1502730.9797560305807570602.b4-ty@konsulko.com>
+Date: Thu, 04 Jul 2024 12:50:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,14 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Jun 2024 14:23:43 -0600, Tom Rini wrote:
+On Thu, 27 Jun 2024 07:43:20 -0600, Tom Rini wrote:
 
-> On tests which require "tftpboot" we need to depend not on cmd_net but
-> rather cmd_tftpboot. And on tests which require cmd_pxe we do not need
-> to also depend on cmd_net as this should be handled already via Kconfig
-> logic.
+> Both GitLab and Azure (and other CI systems) have native support for
+> displaying JUnitXML test report results. The pytest framework that we
+> use can generate these reports. Change our CI tests so that they will
+> generate these reports and then have the respective CI platform pick
+> them up. We write to different locations because of where each CI is
+> (and isn't) able to easily pass things along.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
