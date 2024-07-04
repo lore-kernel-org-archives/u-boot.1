@@ -4,79 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC82AC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 14:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BBBC30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 15:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1069088669;
-	Thu,  4 Jul 2024 16:48:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B42438889D;
+	Thu,  4 Jul 2024 17:02:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="hkou/9Ql";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vYAaJVHm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCD8288669; Thu,  4 Jul 2024 16:48:45 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id B8722888F0; Thu,  4 Jul 2024 17:02:25 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A39FA885D7
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 16:48:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id C5D728889D
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 17:02:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a7541fad560so84473466b.0
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 07:48:42 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a724598cfe3so73034566b.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 08:02:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1720104522; x=1720709322;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XzBbDuYBhBud4fjVz0V/Rm580A84b5lNRGR8iiz0sH8=;
- b=hkou/9Qlk9JhgEvMtyp+e/czDIjkAYc2W4O6H0ByqHMeq4dBcq7dVFGUgiq+iU63p3
- z9Of6/jTnDtrppn3XYkkjxhbsn5JuAOaTFSXm0C3VIXhRUZ1JW7mKC6S7fx88l9UR1sn
- dAZ8UZ1X18GWqazsZl6WO3Vz7XVgnfQuO051Q=
+ d=linaro.org; s=google; t=1720105343; x=1720710143; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GhSHZF5RagnmatuVZPtfJ/F0BdNyPCtqFO85wEnxU0k=;
+ b=vYAaJVHmr0fIi24qcJFU6PtsYF+psMrbgrR7myJ14Sq0eZzujxgq5f45sRv9iHqUsR
+ 3upmRcyt2yN6U/s6LNfPOmB6mWr76kYhzp8H+7UD37NFXi1ATo6/zX7aN/l4otMbgWLH
+ wrHhHdXC011Viy7H+TFd7Hmp7PCm5JhM+u4xowgRG1Zm9sXzqEgK9MN8Nn3fB0fSC1gT
+ K4FYdKV56wap5bt+rkjR7yrQvwNITjoXm+D7rdjFGjN8K76KU4obqZ/egLHxBnyGi03l
+ NFx/nernm6lnn1lMIRSzJ3R4GmC051+c+aiESI6KpFEJSzU2J3pv1ZUp3CR9VBCfFv7P
+ Qp+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720104522; x=1720709322;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XzBbDuYBhBud4fjVz0V/Rm580A84b5lNRGR8iiz0sH8=;
- b=h0ksnIuO8KF3+B7ig5X4ozN7IPwmY3LNxprIkenK2SLpykx7eR+JOWRMPmPhUXPkwp
- G6kzUQOZ44Gkz3dvKAq2mxw7afM966CWmvJ8A3KxMyldmr8wp9CbsuEnic8L4CPeRjG7
- kTjbtP8V7GC7VlbB5hQ0G2Sf1u1QzCMQyPJbC94y+EJSvDaZHaM2BlyBVqqCTyncvtTb
- y60Joxd4ndPwNRXZr2HYDWMzG9kWVH6Lje6Si31+zbtYYMYCs+AFNYcoleplsW0iV+22
- Xvwcl99sF5rZ/2m4kmMw/17P57eCiklUknBNUN0d6XcKZSbOwoqyAkjqqwQkEZwdjKlP
- 3Wig==
+ d=1e100.net; s=20230601; t=1720105343; x=1720710143;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GhSHZF5RagnmatuVZPtfJ/F0BdNyPCtqFO85wEnxU0k=;
+ b=Efkvb1okdhRLEr81d7VKBV30DOJoqSL2dlFgA7s7HRSthR9YgxxK3FyDKZ+JwN+ttl
+ JgFQz1z67PKw9j7K5SeKpYS7Uu7U+yVn/LNXwj1tEykPWoUMg1jjccy1DXvWMHVcz89j
+ FVqxcEeaEdn26KicwrCjPJXNF+0Il5PBHAE5inoYfaGDVlLPQHy2g23Y60Wd1FWTYavL
+ 5hY3/f2tHvB3QrYpjtOiCl6bj5jyrWhpax2hogi3IijMIzuKXAwQszab5k4InFeqlLgs
+ VWnBwmNluMVe6Yd/jacTBceQz9j5EasPVSlJRYZxZ0k2ptA7oVyH7/pDdZVDW6CoDTGB
+ aiKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV5iC0bsZzkpPJ3mWaNYsYrUotILLZUY+8EB1GZB3P41RTkVZKv9uUQNA3jL/kRZVYji5Q4/g8L+HmDAz5ie19fJo+iag==
-X-Gm-Message-State: AOJu0Yww0cKiri/DBWS9WWjYXYjFd1+mLMvSTm6aXjLEeTZm5X+STuMH
- M3mYh4FBjwhK9ctBuHIB2MycTZjq1PAicfQKQ1jfHUk6AqXggvXJN/TPZjtV4fg=
-X-Google-Smtp-Source: AGHT+IFTGPNtOltmCKavEYbohNMWL9JpE6d2LgKbDgtbC9zL3jAz8ZMSjpU1fw4qKJ1whXJxv5bx6g==
-X-Received: by 2002:a17:907:b9c4:b0:a72:7e1e:6301 with SMTP id
- a640c23a62f3a-a77ba7e1a06mr139535066b.61.1720104521911; 
- Thu, 04 Jul 2024 07:48:41 -0700 (PDT)
-Received: from panicking.. ([2001:b07:6474:ebbf:bff3:19f9:cf51:6157])
+ AJvYcCUVaBsj5tVHdDKgj8gdF33YYPj97fRF7YiyNdk7/FmVXExQzUWZLG+tUAoVMnRJm5auP+Cbk3ybF/DIpxNURLrmS5FVCQ==
+X-Gm-Message-State: AOJu0Yz1c3En7ntJma0JFbL1y6Z6pz6OR37HeqaLaBh5b6Djlm9AH7iN
+ Y/rsVqR8jZCP5hCP88S1px0/kz4KqbYkKSZ7rMuMle8L0RNvg9vA6x6r8k0SxfE=
+X-Google-Smtp-Source: AGHT+IHEhlkKwzRY22ul+18MDr6oYvIM6ou+l8d6VyAY7NOXeu9Hys3XH0uYqGeR57imOM67xBj4zA==
+X-Received: by 2002:a17:907:7f1f:b0:a72:42df:cd27 with SMTP id
+ a640c23a62f3a-a77ba72baf7mr147942966b.71.1720105343151; 
+ Thu, 04 Jul 2024 08:02:23 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::18f8? ([2a02:8109:aa0d:be00::18f8])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72ab06519dsm605987666b.99.2024.07.04.07.48.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 07:48:41 -0700 (PDT)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: Lukasz Majewski <lukma@denx.de>,
-	Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present
- for gate and mux
-Date: Thu,  4 Jul 2024 16:48:38 +0200
-Message-ID: <20240704144838.196350-1-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+ a640c23a62f3a-a77c54d96f3sm10646166b.189.2024.07.04.08.02.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 04 Jul 2024 08:02:22 -0700 (PDT)
+Message-ID: <99e94938-492a-434a-844b-00f979abdf95@linaro.org>
+Date: Thu, 4 Jul 2024 17:02:18 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/5] sandbox: Increase cyclic CPU-time limit
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anatolij Gustschin <agust@denx.de>, Jagan Teki <jagan@amarulasolutions.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Samuel Dionne-Riel <samuel@dionne-riel.com>, Stefan Roese <sr@denx.de>,
+ Ying Sun <sunying@nj.iscas.ac.cn>
+References: <20240704074859.2956745-1-sjg@chromium.org>
+ <20240704074859.2956745-5-sjg@chromium.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240704074859.2956745-5-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,109 +102,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Gate and mux does not have .set_rate operation, but they could have
-CLK_SET_PARENT_RATE flag set. In that case it's usually possible to find a
-parent up the tree which is capable of setting the rate (div, pll, etc).
-Add clk_generic_set_rate to allow them to trasverse the clock tree.
+Hi Simon,
 
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
----
- drivers/clk/clk-gate.c   |  1 +
- drivers/clk/clk-mux.c    |  2 +-
- drivers/clk/clk-uclass.c | 20 ++++++++++++++++++++
- drivers/clk/clk.c        |  9 +++++++++
- 4 files changed, 31 insertions(+), 1 deletion(-)
+On 04/07/2024 09:48, Simon Glass wrote:
+> Now that sandbox is using cyclic for video, it trips the 1us time
+> limit. Updating the sandbox display often takes 20ms or more.
+> 
+> Increase the limit to 100ms to avoid a warning.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v1)
+> 
+>   common/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/common/Kconfig b/common/Kconfig
+> index 87b0ec3ea8f..83c81edac20 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -636,6 +636,7 @@ config SPL_CYCLIC
+>   
+>   config CYCLIC_MAX_CPU_TIME_US
+>   	int "Sets the max allowed time for a cyclic function in us"
+> +	default 100000 if SANDBOX  # sandbox video is quite slow
 
-diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
-index cfd90b717e7..c86083ac5a3 100644
---- a/drivers/clk/clk-gate.c
-+++ b/drivers/clk/clk-gate.c
-@@ -116,6 +116,7 @@ const struct clk_ops clk_gate_ops = {
- 	.enable = clk_gate_enable,
- 	.disable = clk_gate_disable,
- 	.get_rate = clk_generic_get_rate,
-+	.set_rate = clk_generic_set_rate,
- };
- 
- struct clk *clk_register_gate(struct device *dev, const char *name,
-diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-index e3481be95fa..f99a67ebd35 100644
---- a/drivers/clk/clk-mux.c
-+++ b/drivers/clk/clk-mux.c
-@@ -151,13 +151,13 @@ static int clk_mux_set_parent(struct clk *clk, struct clk *parent)
- #else
- 	writel(reg, mux->reg);
- #endif
--
- 	return 0;
- }
- 
- const struct clk_ops clk_mux_ops = {
- 	.get_rate = clk_generic_get_rate,
- 	.set_parent = clk_mux_set_parent,
-+	.set_rate = clk_generic_set_rate,
- };
- 
- struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index ed6e60bc484..638864e6774 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -517,6 +517,26 @@ ulong clk_get_parent_rate(struct clk *clk)
- 	return pclk->rate;
- }
- 
-+ulong clk_set_parent_rate(struct clk *clk, ulong rate)
-+{
-+	const struct clk_ops *ops;
-+	struct clk *pclk;
-+
-+	debug("%s(clk=%p)\n", __func__, clk);
-+	if (!clk_valid(clk))
-+		return 0;
-+
-+	pclk = clk_get_parent(clk);
-+	if (IS_ERR(pclk))
-+		return -ENODEV;
-+
-+	ops = clk_dev_ops(pclk->dev);
-+	if (!ops->set_rate)
-+		return -ENOSYS;
-+
-+	return clk_set_rate(pclk, rate);
-+}
-+
- ulong clk_round_rate(struct clk *clk, ulong rate)
- {
- 	const struct clk_ops *ops;
-diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-index 6ede1b4d4dc..febd5314df2 100644
---- a/drivers/clk/clk.c
-+++ b/drivers/clk/clk.c
-@@ -14,6 +14,7 @@
- #include <dm/uclass.h>
- #include <dm/lists.h>
- #include <dm/device-internal.h>
-+#include <linux/clk-provider.h>
- 
- int clk_register(struct clk *clk, const char *drv_name,
- 		 const char *name, const char *parent_name)
-@@ -61,6 +62,14 @@ ulong clk_generic_get_rate(struct clk *clk)
- 	return clk_get_parent_rate(clk);
- }
- 
-+ulong clk_generic_set_rate(struct clk *clk, ulong rate)
-+{
-+	if (clk->flags & CLK_SET_RATE_PARENT)
-+		return clk_set_parent_rate(clk, rate);
-+
-+	return clk_get_parent_rate(clk);
-+}
-+
- const char *clk_hw_get_name(const struct clk *hw)
- {
- 	assert(hw);
+Won't this be the case for other boards as well? Maybe it would make 
+sense to bump this unconditionally or adjust the cyclic API so users 
+could provide a hint about how long they'll take to run.
+
+Isn't 100ms a bit excessive just to flush a buffer?
+>   	default 5000
+>   	help
+>   	  The max allowed time for a cyclic function in us. If a functions
+
 -- 
-2.43.0
-
+// Caleb (they/them)
