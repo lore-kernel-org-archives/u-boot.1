@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75722C30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:43:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 070BAC3065C
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A79E78897C;
-	Thu,  4 Jul 2024 09:38:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14871888C2;
+	Thu,  4 Jul 2024 09:38:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1850688974; Thu,  4 Jul 2024 09:38:23 +0200 (CEST)
+ id 998D3888C2; Thu,  4 Jul 2024 09:38:26 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DFCC98895E
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id A515E8897B
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6D54EDA7;
- Thu,  4 Jul 2024 00:38:45 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 320FADA7;
+ Thu,  4 Jul 2024 00:38:49 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 325D63F762;
- Thu,  4 Jul 2024 00:38:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EBABD3F762;
+ Thu,  4 Jul 2024 00:38:20 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -34,9 +34,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH v2 37/48] event: add event to notify lmb memory map changes
-Date: Thu,  4 Jul 2024 13:05:33 +0530
-Message-Id: <20240704073544.670249-38-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH v2 38/48] lib: Kconfig: add a config symbol for getting
+ lmb memory map updates
+Date: Thu,  4 Jul 2024 13:05:34 +0530
+Message-Id: <20240704073544.670249-39-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
@@ -58,65 +59,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an event which would be used for notifying changes in the
-LMB modules' memory map. This is to be used for having a
-synchronous view of the memory that is currently in use, and that is
-available for allocations.
+Add a Kconfig symbol to enable getting updates on any memory map
+changes that might be done by the LMB module. This notification
+mechanism can then be used to have a synchronous view of allocated and
+free memory.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1:
-* Remove the event for EFI notifications.
+* Change the description to highlight only LMB notifications.
+* Add a separate line for dependencies.
 
- common/event.c  |  2 ++
- include/event.h | 14 ++++++++++++++
- 2 files changed, 16 insertions(+)
+ lib/Kconfig | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/common/event.c b/common/event.c
-index dda569d447..fc8002603c 100644
---- a/common/event.c
-+++ b/common/event.c
-@@ -48,6 +48,8 @@ const char *const type_name[] = {
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 7eea517b3b..b422183a0f 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -74,6 +74,16 @@ config HAVE_PRIVATE_LIBGCC
+ config LIB_UUID
+ 	bool
  
- 	/* main loop events */
- 	"main_loop",
++config MEM_MAP_UPDATE_NOTIFY
++	bool "Get notified of any changes to the LMB memory map"
++	depends on EVENT && LMB && EFI_LOADER
++	default y
++	help
++	  Enable this option to get notification on any changes to the
++	  memory that is allocated or freed by the LMB module. This will
++	  allow different modules that allocate memory or maintain a memory
++	  map to have a synchronous view of available and allocated memory.
 +
-+	"lmb_map_update",
- };
- 
- _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
-diff --git a/include/event.h b/include/event.h
-index fb353ad623..fce7e96170 100644
---- a/include/event.h
-+++ b/include/event.h
-@@ -153,6 +153,14 @@ enum event_t {
- 	 */
- 	EVT_MAIN_LOOP,
- 
-+	/**
-+	 * @EVT_LMB_MAP_UPDATE:
-+	 * This event is triggered on an update to the LMB reserved memory
-+	 * region. This can be used to notify about any LMB memory allocation
-+	 * or freeing of memory having occurred.
-+	 */
-+	EVT_LMB_MAP_UPDATE,
-+
- 	/**
- 	 * @EVT_COUNT:
- 	 * This constants holds the maximum event number + 1 and is used when
-@@ -203,6 +211,12 @@ union event_data {
- 		oftree tree;
- 		struct bootm_headers *images;
- 	} ft_fixup;
-+
-+	struct event_lmb_map_update {
-+		u64 base;
-+		u64 size;
-+		u8 op;
-+	} lmb_map;
- };
- 
- /**
+ config RANDOM_UUID
+ 	bool "GPT Random UUID generation"
+ 	select LIB_UUID
 -- 
 2.34.1
 
