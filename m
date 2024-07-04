@@ -4,83 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D14FC31D97
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 10:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BB57C41513
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 11:27:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73996884A7;
-	Thu,  4 Jul 2024 12:47:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=bade.nz
+	by phobos.denx.de (Postfix) with ESMTP id 87D0088476;
+	Thu,  4 Jul 2024 13:27:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=bade.nz header.i=@bade.nz header.b="UvJiHujK";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="TNvKJJgq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C1D387FC8; Thu,  4 Jul 2024 12:47:25 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6FDFE88363; Thu,  4 Jul 2024 13:27:40 +0200 (CEST)
+Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E836884A7
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 12:47:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2282588476
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 13:27:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=bade.nz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leith@leithalweapon.geek.nz
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5c479e5f6faso252728eaf.3
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 03:47:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bade.nz; s=google; t=1720090039; x=1720694839; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y1UpDtKkEAKs7pPx3mM0bJR/0Gij0lT+SrysUbNP0h0=;
- b=UvJiHujKxJyJhsuxQiwTL41bgLQzvn7fSHhDQCHgjrxhqr00pckEm0VaD7KO64WOmd
- vUml30tQHS10A54scx2u3tY9TmgbRpsGOn7+xhLKBz7jEn9JlbnEdlRqNukO0l+m2/ys
- SzxxdaB0GqsWJSMTu81yqbwP6VXwFO31W/JyputH07KTy/qo5fjQC8GRZEhDudWPi0mg
- qg0Sc9mPshcEYvNxXrJW7HJ5nkUTGhf6ds0QasLGY3BSRn4iwE+mm2o6yEEpQFE/8lg6
- OYBx4FFdkNIM1fP/J2+2DJvzxhFClIM/cm21PzGEDywipPdlF2l9sN/xWBVCIHz31SjH
- 4WXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720090039; x=1720694839;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y1UpDtKkEAKs7pPx3mM0bJR/0Gij0lT+SrysUbNP0h0=;
- b=YcIgxbIb3weu1iIfTJbBXp8YBZWcj/k4uB1mZKgcUT+/VAJm6QmrvjzbdGE9vBqPK4
- ltgmVRn5f7X0L4+8V9dmKECJ/RCNcS+SWSbPnDB3eI1KS2Np1dbWIu9bx94GgHxyST6S
- QJWrOb/gSniVtubvw1zxuO3NQBL3rwqjopI2xyURlq5ghNycTHvYuNn9ctGKcGirXxTj
- +M9ix7Pt12sWLz5V9SiJT7E1noe4SHN4f13SBufMBe9as9qehsrMRKKb5WRJhlsnoG/C
- Hh9pSP5JLptDLCQMOLCOSdD55VKxrgKtCiQf6awUAnZkUZw/KA05UJd0MstAmg29ld0I
- WOUg==
-X-Gm-Message-State: AOJu0Yxa/Dw0Nym8wce/U+K3xKTBcXOWoaQVCQeUBSRuWr8j3VmRsU2B
- ZxRJYtoZwC9G0jR/tJHM+2jrapxTMhPVjCgcALZaLB8oAcULlWDsfbosHT5F8FDW6YauacyvzTZ
- DshSkHoLrTjInL1+OFESNviKNKpU8YR8SMtyn
-X-Google-Smtp-Source: AGHT+IGw3E6iu+n/nPmM0vam+LR8HMBR0TYgzl3SWZIzs8deeDApbntIy+Y3S8qJde0kEZuTc9vDPGpqSufqJ3K8Flk=
-X-Received: by 2002:a4a:55c9:0:b0:5c2:222f:7e33 with SMTP id
- 006d021491bc7-5c646e1a0c2mr1895140eaf.3.1720090039543; Thu, 04 Jul 2024
- 03:47:19 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=nwl.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
+ s=mail2022; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=DiLazdoQZw4yzwkoshhntsfexF3AD6AdsudZG9Ug77I=; b=TNvKJJgqR5/RBMSqj6TpBDQazD
+ UGsK2xnT32zcpk6L8FSEHMsLg9TyImd/J1T4lgqCSXkNmtaBelj4HlAvk+DFrZUforJl2Hh9Zy81z
+ yJ2h3BSpG4NiXzM5pz2t74EvzbXDgpPtWGmS8F4sUAV86s0kyDVRHJgTTmA6GATMh6MTMRYQqRkSE
+ x/G11gnqquWg3dyxrp/OK+345sdE2FnrRX5nqpPnRNZZxNQJddqLybOe81WqL6nRtCO7Eje7qzwMW
+ dY2EZH2PFo/NkSGHIgLMXWnmkxwbPtL7dgMRmZvr5kPVFZi/D6HCY1ycDnshyvpIrJaY/ok9iqJuc
+ KnSf/HiQ==;
+Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.97.1)
+ (envelope-from <phil@nwl.cc>) id 1sPKcj-000000007g4-0Bg9;
+ Thu, 04 Jul 2024 13:27:37 +0200
+Date: Thu, 4 Jul 2024 13:27:36 +0200
+From: Phil Sutter <phil@nwl.cc>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] arm: mvebu: Enable bootstd and other modernization
+ for Synology DS414 (Armada XP) board
+Message-ID: <ZoaHKCfd0zB7gzFK@orbyte.nwl.cc>
+Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20240615220654.10648-1-mibodhi@gmail.com>
+ <Znvt9_7xbdccZkFd@orbyte.nwl.cc>
+ <CAJaLiFyTWfmsAVT4NO_Nvq1eHC73dNhxmF7KtYCR4VwOUg8Z3w@mail.gmail.com>
+ <CAJaLiFz0GW1-TWmZ_gGWGEri1vJH9uHtehr7fXmB36vPAV-0aQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240703084035.2891892-1-leith@bade.nz>
- <d33065b98c1e610f766dc6c322c2760d5d4810f5.camel@mediatek.com>
-In-Reply-To: <d33065b98c1e610f766dc6c322c2760d5d4810f5.camel@mediatek.com>
-From: Leith Bade <leith@bade.nz>
-Date: Thu, 4 Jul 2024 20:47:08 +1000
-Message-ID: <CAPDEroUmBW3YVSxNg713rz01TRzeJ6C00+46SGxfgwKHPwsWBg@mail.gmail.com>
-Subject: Re: [PATCH] arm: mediatek: split config into separate options for the
- board and SoC
-To: =?UTF-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?= <Weijie.Gao@mediatek.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "jh80.chung@samsung.com" <jh80.chung@samsung.com>, 
- "lukma@denx.de" <lukma@denx.de>,
- =?UTF-8?B?U2FtIFNoaWggKOWPsueiqeS4iSk=?= <Sam.Shih@mediatek.com>, 
- =?UTF-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>, 
- "trini@konsulko.com" <trini@konsulko.com>, 
- "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>,
- "jmasson@baylibre.com" <jmasson@baylibre.com>, 
- "seanga2@gmail.com" <seanga2@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <Ryder.Lee@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJaLiFz0GW1-TWmZ_gGWGEri1vJH9uHtehr7fXmB36vPAV-0aQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,33 +75,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Weijie,
+Hi Tony,
 
-> I have a better example for reference:
-> arch/mips/mach-mtmips
->
-> ARCH_MTMIPS is defined for the entire MediaTek MIPS platform, same as
-> ARCH_MEDIATEK.
->
-> The mtmips then defined its SoC families:
-> SOC_MT7620, SOC_MT7621 and SOC_MT7628
->
-> Each SoC has its own folder and Kconfig, e.g.:
-> arch/mips/mach-mtmips/mt7620/Kconfig
->
-> Every SoC then defined its own boards, e.g.:
-> BOARD_MT7620_RFB and BOARD_MT7620_MT7530_RFB
->
-> So you can define configs like SOC_MT7622 (not just MT7622), and treat
-> TARGET_MT7622 as a board, selecting SOC_MT7622. This will make sure
-> all mediatek chips have unified SOC_MTxxxx
->
-> Other device driver can then be changed to depend on SOC_MTxxxx
+On Fri, Jun 28, 2024 at 03:44:01PM -0700, Tony Dinh wrote:
+> On Fri, Jun 28, 2024 at 3:04 PM Tony Dinh <mibodhi@gmail.com> wrote:
+> > On Wed, Jun 26, 2024 at 3:31 AM Phil Sutter <phil@nwl.cc> wrote:
+> > > On Sat, Jun 15, 2024 at 03:06:54PM -0700, Tony Dinh wrote:
+> > > [...]
+> > > > diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
+> > > > index abe6f9eb5e..f0b55fa095 100644
+> > > > --- a/board/Synology/ds414/ds414.c
+> > > > +++ b/board/Synology/ds414/ds414.c
+> > > > @@ -181,18 +181,9 @@ int board_init(void)
+> > > >       return 0;
+> > > >  }
+> > > >
+> > > > -int misc_init_r(void)
+> > > > +int board_late_init(void)
+> > > >  {
+> > > > -     if (!env_get("ethaddr")) {
+> > > > -             puts("Incomplete environment, populating from SPI flash\n");
+> > > > -             do_syno_populate(0, NULL);
+> > > > -     }
+> > > > -     return 0;
+> > > > -}
+> > >
+> > > Could you please leave misc_init_r() in place (along with MISC_INIT_R in
+> > > defconfig)? A closer look at doc/README.enetaddr suggests that
+> > > implementing this board-specific function which acts if the environment
+> > > does not have ethaddr defined already is exactly the right thing to do.
+> > > Also, it doesn't conflict with NET_RANDOM_ETHADDR: If do_syno_populate()
+> > > succeeds, no random MAC addresses are generated. If I manually remove
+> > > the call, random MACs come into play. So having this option enabled
+> > > serves as a fallback for boxes which lack the data in flash.
+> >
+> > Sure I will do that. I was mistaken in assuming that network random
+> > addresses were already generated before misc_init_r(). Thanks!
 
-Thank you for the quick response!
+It's nice that we may keep both so there's a fallback if data extraction
+from flash fails.
 
-I will go study that folder and update my patch to be similar so there
-is consistency with the other MediaTek SoCs.
+> > > > -int checkboard(void)
+> > > > -{
+> > > > -     puts("Board: DS414\n");
+> > > > -
+> > > > +     /* Do late init to ensure successful enumeration of XHCI devices */
+> > > > +     pci_init();
+> > > >       return 0;
+> > > >  }
+> > >
+> > > FWIW, booting from rear USB port worked fine for me!
+> >
+> > Cool! That was the main thing I was interested in for sending in this
+> > patch. One thing led to another... :)
 
-Thanks,
-Leith
+Which is a bit odd TBH: Scrolling through git history, I found commit
+c57f920504297 ("arm: mvebu: configs: ds414: Enable XHCI_PCI by default")
+in which I claimed the rear USB ports to be functional after enabling
+XHCI_PCI. Took me only three years to forget all the details. :(
+
+> > > > diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
+> > > > index ecf9501ba5..501ed51129 100644
+> > > > --- a/configs/ds414_defconfig
+> > > > +++ b/configs/ds414_defconfig
+> > > [...]
+> > > > @@ -25,44 +26,40 @@ CONFIG_SPL_BSS_MAX_SIZE=0x4000
+> > > >  CONFIG_SPL=y
+> > > >  CONFIG_DEBUG_UART_BASE=0xf1012000
+> > > >  CONFIG_DEBUG_UART_CLOCK=250000000
+> > > > +CONFIG_IDENT_STRING="\nSynology DS214+/DS414 2/4-Bay Diskstation"
+> > > >  CONFIG_SYS_LOAD_ADDR=0x800000
+> > > >  CONFIG_PCI=y
+> > > >  CONFIG_DEBUG_UART=y
+> > > > +CONFIG_BOOTSTD_FULL=y
+> > > >  CONFIG_BOOTDELAY=3
+> > > >  CONFIG_USE_BOOTARGS=y
+> > > > -CONFIG_BOOTARGS="console=ttyS0,115200 ip=off initrd=0x8000040,8M root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 flash_size=8 SataLedSpecial=1 HddHotplug=1"
+> > > > -CONFIG_USE_BOOTCOMMAND=y
+> > > > -CONFIG_BOOTCOMMAND="sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; sf read ${ramdisk_addr_r} 0x3a0000 0x430000; bootm ${loadaddr} ${ramdisk_addr_r}"
+> > >
+> > > So these should not be necessary anymore with BOOTSTD. I wonder if it is
+> > > possible to provide a static bootmeth (or bootflow?) with low priority
+> > > which boots the legacy OS from flash. It could hold all the details
+> > > instead of the *_legacy env vars introduced below.
+> >
+> > I recall from bootstd documentation that it is possible to have a
+> > bootflow on flash. But it seems a bit too much for this patch. I think
+> > we'll have to repartition or find some space on the flash to store
+> > that bootflow script.
+> >
+> 
+> Sorry I've misread your comment "it is possible to provide a static
+> bootmeth (or bootflow?) ". I think by "static bootflow" you must have
+> meant we would define it in the board code, and convince bootstd to
+> use it as the last boot method (without hunting for it on flash). I'm
+> not sure. Perhaps "global bootflow" is something that can be defined
+> and used here. I'll have to dig into bootstd documentation a bit more.
+
+Yes, that would be great. Booting legacy should be fairly simple by
+calling 'run bootcmd_legacy', though automatically falling back to it is
+even better.
+
+BTW: $bootcmd_legacy contains 'run bootargs_legacy' instruction. Are you
+sure this is going to work? Shouldn't this be 'setenv bootargs
+$bootargs_legacy' instead?
+
+> > > A pending issue for me is inability to 'saveenv' - the flash seems
+> > > read-only in that spot. Does it work for you?
+> >
+> > Yes it does work for me. With the latest u-boot SPI flash driver, as I
+> > recall, the entire flash is automatically unprotected at
+> > initialization. But we need to be careful using saveenv running stock
+> > FW, because it could overwrite the rootfs on flash. It is common for
+> > Synology NAS that the envs location is at the same place as the stock
+> > rootfs. Since I don't care about stock FW, I saved the envs and used
+> > the location for u-boot envs in Linux /etc/fw_env.config. I'm not sure
+> > if my DS214+ box can boot stock FW anymore :)
+
+The saveenv problem exists only with stock u-boot as Synology apparently
+didn't care to adjust CONFIG_ENV_OFFSET (or they failed). If I got that
+right, it should be set to 0x100000 and thus points into "zImage" area.
+
+Upstream we have ENV_OFFSET at 0x7E0000, i.e. the start of "RedBoot
+config" (which is unused by stock firmware).
+
+What's odd though, is that I fail to write to SPI flash using u-boot
+built from current HEAD. Trying legacy boot had failed with "Ramdisk
+image is corrupt or invalid" message, so I tried flashing a dump of
+rd.gz and ended with "flash area is locked" error message. Despite
+calling 'sf protect unlock ...' in beforehand. I wonder why you don't
+have these issues. What does 'sf probe' print on your box?
+
+> > > >  # CONFIG_DISPLAY_BOARDINFO is not set
+> > > >  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> > > > -CONFIG_MISC_INIT_R=y
+> > > > +CONFIG_BOARD_LATE_INIT=y
+> > > >  CONFIG_SPL_MAX_SIZE=0x1bfd0
+> > > >  CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+> > > >  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> > > >  CONFIG_SPL_I2C=y
+> > > > +CONFIG_SYS_PROMPT="DS414> "
+> > >
+> > > Can we detect whether it is 414 or 214, BTW? bootargs_legacy contains
+> > > 414-specific info as well.
+> >
+> > It's a bit hard to do without creating another defconfig. AFAICT, the
+> > only difference between DS414 and DS214+ is the number of SATA bays.
+> > But currently u-boot SATA does not work for this box. U-Boot sata_mv
+> > driver is a subset of Linux sata_mv, and we don't have support for the
+> > right PCIe SATA chip in u-boot sata_mv.
+
+Back in 2015, u-boot's sata_mv didn't have PCI support to begin with. I
+see you spent much more time with sata_mv than I did. What's missing to
+support the Marvell 88SX7042 in u-boot?
+
+> > > [...]
+> > > > diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> > > > index 9446acba79..89e55bf0d4 100644
+> > > > --- a/include/configs/ds414.h
+> > > > +++ b/include/configs/ds414.h
+> > > [...]
+> > > > @@ -16,14 +17,9 @@
+> > > >   * U-Boot into it.
+> > > >   */
+> > > >
+> > > > -/* I2C */
+> > > >  #define CFG_I2C_MVTWSI_BASE0         MVEBU_TWSI_BASE
+> > > >
+> > > > -/*
+> > > > - * mv-common.h should be defined after CMD configs since it used them
+> > > > - * to enable certain macros
+> > > > - */
+> > > > -#include "mv-common.h"
+> > > > +#define PHY_ANEG_TIMEOUT     16000   /* PHY needs a longer aneg time */
+> > >
+> > > AIUI, this is a limitation of my local NIC, not the DS414 one. It just
+> > > took too long for link detection and autoneg when directly connected. A
+> > > switch should have helped. Or do you have more details?
+> >
+> > Ah! The typical PHY_ANEG_TIMEOUT on other Armada 38x boards is 8000. I
+> > thought the 16000 was for Armada XP when I saw that code. I think it's
+> > OK to use a larger timeout. It really does not hurt?
+
+It does not - this change merely makes u-boot wait for longer until
+giving up waiting for link. My setup involves a direct link between the
+DS414 and a Realtek NIC, so it is rather surprising 16s timeout is
+sufficient. ;)
+
+Ah, one more thing: You mentioned mtdparts to define a flash map which
+should simplify flashing u-boot into the right spot. I haven't had any
+luck doing so for SPI flash, do you?
+
+Cheers, Phil
