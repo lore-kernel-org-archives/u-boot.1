@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FCD2C30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E79C3065C
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A706888CC;
-	Thu,  4 Jul 2024 09:38:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87B298896B;
+	Thu,  4 Jul 2024 09:38:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EADFC888CC; Thu,  4 Jul 2024 09:38:07 +0200 (CEST)
+ id E4A0E8896A; Thu,  4 Jul 2024 09:38:11 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DFDF88895F
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id AC4EC88962
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6CC34367;
- Thu,  4 Jul 2024 00:38:30 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 303D8367;
+ Thu,  4 Jul 2024 00:38:34 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3BE873F762;
- Thu,  4 Jul 2024 00:38:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EA4B83F762;
+ Thu,  4 Jul 2024 00:38:05 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -34,9 +34,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH v2 33/48] test: bdinfo: dump the global LMB memory map
-Date: Thu,  4 Jul 2024 13:05:29 +0530
-Message-Id: <20240704073544.670249-34-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH v2 34/48] lmb: add versions of the lmb API with flags
+Date: Thu,  4 Jul 2024 13:05:30 +0530
+Message-Id: <20240704073544.670249-35-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
@@ -58,95 +58,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB code has been changed to make the memory reservations
-persistent and global. Make corresponding change the the
-lmb_test_dump_all() function to print the global LMB available and
-used memory.
+The LMB module is to be used as a backend for allocating and freeing
+up memory requested from other modules like EFI. These memory requests
+are different from the typical LMB reservations in that memory
+required by the EFI module cannot be overwritten, or re-requested. Add
+versions of the LMB API functions with flags for allocating and
+freeing up memory. The caller can then use these API's for specifying
+the type of memory that is required. For now, these functions will be
+used by the EFI memory module.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since V1:
-* Corresponding changes needed to work with alist based lmb lists.
+Changes since V1: New patch
 
- test/cmd/bdinfo.c | 28 ++++++++++++++++------------
- 1 file changed, 16 insertions(+), 12 deletions(-)
+ include/lmb.h |  6 ++++++
+ lib/lmb.c     | 39 ++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 1cd81a195b..3184aaf629 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -5,6 +5,7 @@
-  * Copyright 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
-  */
+diff --git a/include/lmb.h b/include/lmb.h
+index d9d5e3f3cb..afab04426d 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -74,8 +74,13 @@ long lmb_reserve(phys_addr_t base, phys_size_t size);
+ long lmb_reserve_flags(phys_addr_t base, phys_size_t size,
+ 		       enum lmb_flags flags);
+ phys_addr_t lmb_alloc(phys_size_t size, ulong align);
++phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags);
+ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr);
++phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
++				 phys_addr_t max_addr, uint flags);
+ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size);
++phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
++				 uint flags);
+ phys_size_t lmb_get_free_size(phys_addr_t addr);
  
-+#include <alist.h>
- #include <console.h>
- #include <mapmem.h>
- #include <asm/global_data.h>
-@@ -21,6 +22,7 @@
- #include <asm/cache.h>
- #include <asm/global_data.h>
- #include <display_options.h>
-+#include <linux/kernel.h>
+ /**
+@@ -91,6 +96,7 @@ phys_size_t lmb_get_free_size(phys_addr_t addr);
+ int lmb_is_reserved_flags(phys_addr_t addr, int flags);
  
- DECLARE_GLOBAL_DATA_PTR;
+ long lmb_free(phys_addr_t base, phys_size_t size);
++long lmb_free_flags(phys_addr_t base, phys_size_t size, uint flags);
  
-@@ -99,19 +101,20 @@ static int test_video_info(struct unit_test_state *uts)
+ void lmb_dump_all(void);
+ void lmb_dump_all_force(void);
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 4480710d73..d2edb3525a 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -468,7 +468,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+ 	return lmb_add_region(lmb_rgn_lst, base, size);
  }
  
- static int lmb_test_dump_region(struct unit_test_state *uts,
--				struct lmb_region *rgn, char *name)
-+				struct alist *lmb_rgn_lst, char *name)
+-long lmb_free(phys_addr_t base, phys_size_t size)
++static long __lmb_free(phys_addr_t base, phys_size_t size)
  {
-+	struct lmb_region *rgn = lmb_rgn_lst->data;
- 	unsigned long long base, size, end;
- 	enum lmb_flags flags;
- 	int i;
- 
--	ut_assert_nextline(" %s.cnt = 0x%lx / max = 0x%lx", name, rgn->cnt, rgn->max);
-+	ut_assert_nextline(" %s.count = 0x%hx", name, lmb_rgn_lst->count);
- 
--	for (i = 0; i < rgn->cnt; i++) {
--		base = rgn->region[i].base;
--		size = rgn->region[i].size;
-+	for (i = 0; i < lmb_rgn_lst->count; i++) {
-+		base = rgn[i].base;
-+		size = rgn[i].size;
- 		end = base + size - 1;
--		flags = rgn->region[i].flags;
-+		flags = rgn[i].flags;
- 
- 		if (!IS_ENABLED(CONFIG_SANDBOX) && i == 3) {
- 			ut_assert_nextlinen(" %s[%d]\t[", name, i);
-@@ -124,11 +127,14 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
- 	return 0;
+ 	struct lmb_region *rgn;
+ 	struct alist *lmb_rgn_lst = &lmb_used_mem;
+@@ -519,6 +519,17 @@ long lmb_free(phys_addr_t base, phys_size_t size)
+ 				    rgn[i].flags);
  }
  
--static int lmb_test_dump_all(struct unit_test_state *uts, struct lmb *lmb)
-+static int lmb_test_dump_all(struct unit_test_state *uts)
- {
-+	extern struct alist lmb_free_mem;
-+	extern struct alist lmb_used_mem;
++long lmb_free(phys_addr_t base, phys_size_t size)
++{
++	return __lmb_free(base, size);
++}
 +
- 	ut_assert_nextline("lmb_dump_all:");
--	ut_assertok(lmb_test_dump_region(uts, &lmb->memory, "memory"));
--	ut_assertok(lmb_test_dump_region(uts, &lmb->reserved, "reserved"));
-+	ut_assertok(lmb_test_dump_region(uts, &lmb_free_mem, "memory"));
-+	ut_assertok(lmb_test_dump_region(uts, &lmb_used_mem, "reserved"));
- 
- 	return 0;
++long lmb_free_flags(phys_addr_t base, phys_size_t size,
++		    __always_unused uint flags)
++{
++	return __lmb_free(base, size);
++}
++
+ long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
+ {
+ 	struct alist *lmb_rgn_lst = &lmb_used_mem;
+@@ -602,6 +613,12 @@ phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+ 	return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE);
  }
-@@ -190,9 +196,7 @@ static int bdinfo_test_all(struct unit_test_state *uts)
- #endif
  
- 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
--		struct lmb lmb;
--
--		ut_assertok(lmb_test_dump_all(uts, &lmb));
-+		ut_assertok(lmb_test_dump_all(uts));
- 		if (IS_ENABLED(CONFIG_OF_REAL))
- 			ut_assert_nextline("devicetree  = %s", fdtdec_get_srcname());
- 	}
++phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags)
++{
++	return __lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE,
++				flags);
++}
++
+ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ {
+ 	phys_addr_t alloc;
+@@ -615,6 +632,20 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ 	return alloc;
+ }
+ 
++phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
++				 phys_addr_t max_addr, uint flags)
++{
++	phys_addr_t alloc;
++
++	alloc = __lmb_alloc_base(size, align, max_addr, flags);
++
++	if (alloc == 0)
++		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
++		       (ulong)size, (ulong)max_addr);
++
++	return alloc;
++}
++
+ static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+ 				    enum lmb_flags flags)
+ {
+@@ -649,6 +680,12 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+ 	return __lmb_alloc_addr(base, size, LMB_NONE);
+ }
+ 
++phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
++				 uint flags)
++{
++	return __lmb_alloc_addr(base, size, flags);
++}
++
+ /* Return number of bytes from a given address that are free */
+ phys_size_t lmb_get_free_size(phys_addr_t addr)
+ {
 -- 
 2.34.1
 
