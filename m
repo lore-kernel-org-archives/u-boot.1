@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7DEC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DD5FC3065C
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:43:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9C548897F;
-	Thu,  4 Jul 2024 09:38:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C9C488972;
+	Thu,  4 Jul 2024 09:38:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DD7888973; Thu,  4 Jul 2024 09:38:34 +0200 (CEST)
+ id 431DD88966; Thu,  4 Jul 2024 09:38:38 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3647688972
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id E9B3688986
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AD16A1063;
- Thu,  4 Jul 2024 00:38:56 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 73129DA7;
+ Thu,  4 Jul 2024 00:39:00 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 732163F762;
- Thu,  4 Jul 2024 00:38:28 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 36A6C3F762;
+ Thu,  4 Jul 2024 00:38:31 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -34,9 +34,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH v2 40/48] lmb: notify of any changes to the LMB memory map
-Date: Thu,  4 Jul 2024 13:05:36 +0530
-Message-Id: <20240704073544.670249-41-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH v2 41/48] efi_memory: add an event handler to update
+ memory map
+Date: Thu,  4 Jul 2024 13:05:37 +0530
+Message-Id: <20240704073544.670249-42-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
@@ -58,139 +59,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In U-Boot, LMB and EFI are two primary modules who provide memory
-allocation and reservation API's. Both these modules operate with the
-same regions of memory for allocations. Use the LMB memory map update
-event to notify other interested listeners about a change in it's
-memory map. This can then be used by the other module to keep track of
-available and used memory.
+There are events that would be used to notify other interested modules
+of any changes in available and occupied memory. This would happen
+when a module allocates or reserves memory, or frees up memory. These
+changes in memory map should be notified to other interested modules
+so that the allocated memory does not get overwritten. Add an event
+handler in the EFI memory module to update the EFI memory map
+accordingly when such changes happen. As a consequence, any subsequent
+memory request would honour the updated memory map and only available
+memory would be allocated from.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1:
-* Notify addition of memory to the LMB memory map.
-* Add a function lmb_notify() to check if notification has to be sent.
+* Handle the addition of memory to the LMB memory map.
+* Pass the overlap_only_ram parameter to the efi_add_memory_map_pg()
+  based on the type of operation.
 
- lib/lmb.c | 61 ++++++++++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 58 insertions(+), 3 deletions(-)
+ lib/efi_loader/Kconfig      |  1 +
+ lib/efi_loader/efi_memory.c | 34 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index d2edb3525a..387ec2ac65 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -8,6 +8,7 @@
- 
- #include <alist.h>
- #include <efi_loader.h>
-+#include <event.h>
- #include <image.h>
- #include <mapmem.h>
- #include <lmb.h>
-@@ -21,12 +22,36 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index bdf5732974..2d90bcef2f 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -16,6 +16,7 @@ config EFI_LOADER
+ 	select CHARSET
+ 	# We need to send DM events, dynamically, in the EFI block driver
+ 	select DM_EVENT
++	select EVENT
+ 	select EVENT_DYNAMIC
+ 	select LIB_UUID
+ 	select LMB
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 5691b5da03..bd12504f72 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -45,6 +45,10 @@ static LIST_HEAD(efi_mem);
+ void *efi_bounce_buffer;
+ #endif
  
 +#define MAP_OP_RESERVE		(u8)0x1
 +#define MAP_OP_FREE		(u8)0x2
 +#define MAP_OP_ADD		(u8)0x3
 +
- #define LMB_ALLOC_ANYWHERE	0
- #define LMB_ALIST_INITIAL_SIZE	4
+ /**
+  * struct efi_pool_allocation - memory block allocated from pool
+  *
+@@ -928,3 +932,33 @@ int efi_memory_init(void)
  
- struct alist lmb_free_mem;
- struct alist lmb_used_mem;
- 
-+extern bool is_addr_in_ram(uintptr_t addr);
-+
-+static bool lmb_notify(enum lmb_flags flags)
-+{
-+	return !(flags & LMB_NONOTIFY);
-+}
-+
-+static void lmb_map_update_notify(phys_addr_t addr, phys_size_t size,
-+				  u8 op)
-+{
-+	struct event_lmb_map_update lmb_map = {0};
-+
-+	lmb_map.base = addr;
-+	lmb_map.size = size;
-+	lmb_map.op = op;
-+
-+	if (is_addr_in_ram((uintptr_t)addr))
-+		event_notify(EVT_LMB_MAP_UPDATE, &lmb_map, sizeof(lmb_map));
-+}
-+
- static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
- {
- 	struct lmb_region *rgn = lmb_rgn_lst->data;
-@@ -463,9 +488,17 @@ static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
- /* This routine may be called with relocation disabled. */
- long lmb_add(phys_addr_t base, phys_size_t size)
- {
-+	long ret;
- 	struct alist *lmb_rgn_lst = &lmb_free_mem;
- 
--	return lmb_add_region(lmb_rgn_lst, base, size);
-+	ret = lmb_add_region(lmb_rgn_lst, base, size);
-+	if (ret)
-+		return ret;
-+
-+	if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY))
-+		lmb_map_update_notify(base, size, MAP_OP_ADD);
-+
-+	return 0;
+ 	return 0;
  }
- 
- static long __lmb_free(phys_addr_t base, phys_size_t size)
-@@ -521,7 +554,16 @@ static long __lmb_free(phys_addr_t base, phys_size_t size)
- 
- long lmb_free(phys_addr_t base, phys_size_t size)
- {
--	return __lmb_free(base, size);
-+	long ret;
 +
-+	ret = __lmb_free(base, size);
-+	if (ret < 0)
-+		return ret;
++#if CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY)
++static int lmb_mem_map_update_sync(void *ctx, struct event *event)
++{
++	u8 op;
++	u64 addr;
++	u64 pages;
++	efi_status_t status;
++	struct event_lmb_map_update *lmb_map = &event->data.lmb_map;
 +
-+	if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY))
-+		lmb_map_update_notify(base, size, MAP_OP_FREE);
++	addr = (uintptr_t)map_sysmem(lmb_map->base, 0);
++	pages = efi_size_in_pages(lmb_map->size + (addr & EFI_PAGE_MASK));
++	op = lmb_map->op;
++	addr &= ~EFI_PAGE_MASK;
 +
-+	return 0;
- }
- 
- long lmb_free_flags(phys_addr_t base, phys_size_t size,
-@@ -532,9 +574,17 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
- 
- long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
- {
-+	long ret = 0;
- 	struct alist *lmb_rgn_lst = &lmb_used_mem;
- 
--	return lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
-+	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
-+	if (ret < 0)
++	if (op != MAP_OP_RESERVE && op != MAP_OP_FREE && op != MAP_OP_ADD) {
++		log_debug("Invalid map update op received (%d)\n", op);
 +		return -1;
++	}
 +
-+	if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) && lmb_notify(flags))
-+		lmb_map_update_notify(base, size, MAP_OP_RESERVE);
++	status = efi_add_memory_map_pg(addr, pages,
++				       op == MAP_OP_RESERVE ?
++				       EFI_BOOT_SERVICES_DATA :
++				       EFI_CONVENTIONAL_MEMORY,
++				       op == MAP_OP_RESERVE ? true : false);
 +
-+	return ret;
- }
- 
- long lmb_reserve(phys_addr_t base, phys_size_t size)
-@@ -596,6 +646,11 @@ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
- 				if (lmb_add_region_flags(&lmb_used_mem, base,
- 						   size, flags) < 0)
- 					return 0;
-+
-+				if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) &&
-+				    lmb_notify(flags))
-+					lmb_map_update_notify(base, size,
-+							      MAP_OP_RESERVE);
- 				return base;
- 			}
- 
++	return status == EFI_SUCCESS ? 0 : -1;
++}
++EVENT_SPY_FULL(EVT_LMB_MAP_UPDATE, lmb_mem_map_update_sync);
++#endif /* MEM_MAP_UPDATE_NOTIFY */
 -- 
 2.34.1
 
