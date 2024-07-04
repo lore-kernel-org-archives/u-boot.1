@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0D00C30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 14:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC82AC30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 14:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F84888669;
-	Thu,  4 Jul 2024 16:43:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1069088669;
+	Thu,  4 Jul 2024 16:48:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="chcU44DT";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="hkou/9Ql";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0E95885D7; Thu,  4 Jul 2024 16:43:23 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id BCD8288669; Thu,  4 Jul 2024 16:48:45 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB2AB888EC
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 16:43:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A39FA885D7
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 16:48:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52e9f863c46so725750e87.1
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 07:43:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a7541fad560so84473466b.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 07:48:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720104201; x=1720709001; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1720104522; x=1720709322;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rMXBoBsBa5mrNSPlxlX1unK3g8soUkrm3vzpEwKw36c=;
- b=chcU44DTe2wSVcCspGqSlqbX5ZK95kRkwVsjaDKxCOFifCzgKjfmxfiuR31a2We0Jk
- trDtuAicSKf2x8RkF+AS0mUw2D+JRpB4TZbewU6Z+cg5OUpjd/75sZhPYZ+AAho6Rf+r
- uCRBrYV6NPkPxkqM+Cjzb6orJvfEX2dkERM/k+jchbullM+SPvEkr7Qn9UstV0vTEbbg
- 2WHoJ3yL/RmJCjZLnoK3JSMzMwHqUDsd4x9fCPuMKOFLpDlJxeXLaEYuXvR/eDwSZknH
- F4Tc4L5p/n/eBpodw6+Sj2a4fbmekNpaY4Qd5ZBF9XYQmawRXmVwFXTKsgPDNwFAXwiH
- q2Kg==
+ bh=XzBbDuYBhBud4fjVz0V/Rm580A84b5lNRGR8iiz0sH8=;
+ b=hkou/9Qlk9JhgEvMtyp+e/czDIjkAYc2W4O6H0ByqHMeq4dBcq7dVFGUgiq+iU63p3
+ z9Of6/jTnDtrppn3XYkkjxhbsn5JuAOaTFSXm0C3VIXhRUZ1JW7mKC6S7fx88l9UR1sn
+ dAZ8UZ1X18GWqazsZl6WO3Vz7XVgnfQuO051Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720104201; x=1720709001;
+ d=1e100.net; s=20230601; t=1720104522; x=1720709322;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rMXBoBsBa5mrNSPlxlX1unK3g8soUkrm3vzpEwKw36c=;
- b=ipuc2IUTFvHRQ5aumoxU5r9UevHli/gbQhKOUVrs6ReytdkI3klqVzB2pqplYeaQNj
- BPOyxEbj0+IOFR1BQ2cZYHM1c9M922SYQa6hFVGIXY5LQsIlhfzH5TBw2ECkXZ82lqa4
- bxivqxtHnComiSFoboLWh6Ra3E51fVVn2k6WSdmGfka+YCZsq/Xv/Z6mRuTO8IJNApWo
- PnKszHKwZkF396/qqzLXNnjmNVZ4sVGegih4bIzVdIT3FwLGfrHZsrsVfq5FSOdgLC5L
- FsiFaPOi5pkJSZo6qEt/wU+qGb6JqjbWOQwg2jS3K0weLdmpQ0qWZpxTwsLJeOEpls3u
- ALJg==
-X-Gm-Message-State: AOJu0YwXSGrpUjxFQPD/vyrUIAzF/Dnt54SGK8CKzAvlu4OX6PreDqx1
- TTlyTo+T2ygJKkO2bx6cRCFVbJDZcNwdvu52A/jorKQfjutFmSkcCDN8C25hedM=
-X-Google-Smtp-Source: AGHT+IFLGqLPgtDkR/muu3T44JlwpqcHUR/JgqJwLrSeZDGXe+vZzclE5FYUE9zwzF2xmJbnj8uhhw==
-X-Received: by 2002:a05:6512:3618:b0:52e:9d2c:1c81 with SMTP id
- 2adb3069b0e04-52ea06185eamr1275094e87.13.1720104199659; 
- Thu, 04 Jul 2024 07:43:19 -0700 (PDT)
-Received: from hades.. (ppp046103011142.access.hol.gr. [46.103.11.142])
+ bh=XzBbDuYBhBud4fjVz0V/Rm580A84b5lNRGR8iiz0sH8=;
+ b=h0ksnIuO8KF3+B7ig5X4ozN7IPwmY3LNxprIkenK2SLpykx7eR+JOWRMPmPhUXPkwp
+ G6kzUQOZ44Gkz3dvKAq2mxw7afM966CWmvJ8A3KxMyldmr8wp9CbsuEnic8L4CPeRjG7
+ kTjbtP8V7GC7VlbB5hQ0G2Sf1u1QzCMQyPJbC94y+EJSvDaZHaM2BlyBVqqCTyncvtTb
+ y60Joxd4ndPwNRXZr2HYDWMzG9kWVH6Lje6Si31+zbtYYMYCs+AFNYcoleplsW0iV+22
+ Xvwcl99sF5rZ/2m4kmMw/17P57eCiklUknBNUN0d6XcKZSbOwoqyAkjqqwQkEZwdjKlP
+ 3Wig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5iC0bsZzkpPJ3mWaNYsYrUotILLZUY+8EB1GZB3P41RTkVZKv9uUQNA3jL/kRZVYji5Q4/g8L+HmDAz5ie19fJo+iag==
+X-Gm-Message-State: AOJu0Yww0cKiri/DBWS9WWjYXYjFd1+mLMvSTm6aXjLEeTZm5X+STuMH
+ M3mYh4FBjwhK9ctBuHIB2MycTZjq1PAicfQKQ1jfHUk6AqXggvXJN/TPZjtV4fg=
+X-Google-Smtp-Source: AGHT+IFTGPNtOltmCKavEYbohNMWL9JpE6d2LgKbDgtbC9zL3jAz8ZMSjpU1fw4qKJ1whXJxv5bx6g==
+X-Received: by 2002:a17:907:b9c4:b0:a72:7e1e:6301 with SMTP id
+ a640c23a62f3a-a77ba7e1a06mr139535066b.61.1720104521911; 
+ Thu, 04 Jul 2024 07:48:41 -0700 (PDT)
+Received: from panicking.. ([2001:b07:6474:ebbf:bff3:19f9:cf51:6157])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4264a1d0bd6sm27420905e9.8.2024.07.04.07.43.18
+ a640c23a62f3a-a72ab06519dsm605987666b.99.2024.07.04.07.48.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 07:43:19 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: u-boot@lists.denx.de,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2] test: test for ignore OsIndications
-Date: Thu,  4 Jul 2024 17:43:16 +0300
-Message-ID: <20240704144316.251029-1-ilias.apalodimas@linaro.org>
+ Thu, 04 Jul 2024 07:48:41 -0700 (PDT)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: Lukasz Majewski <lukma@denx.de>,
+	Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
+ u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present
+ for gate and mux
+Date: Thu,  4 Jul 2024 16:48:38 +0200
+Message-ID: <20240704144838.196350-1-michael@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -89,62 +93,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The tests we currently have expect the firmware update to fail
-when OsIndications is not set properly. However, we have a Kconfig flag
-that explicitly ignores that variable. Adjust the tests accordingly
+Gate and mux does not have .set_rate operation, but they could have
+CLK_SET_PARENT_RATE flag set. In that case it's usually possible to find a
+parent up the tree which is capable of setting the rate (div, pll, etc).
+Add clk_generic_set_rate to allow them to trasverse the clock tree.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 ---
-Changes since v1:
-- v1 was rebased incorrectly and only sent half of the patch
- .../test_capsule_firmware_raw.py              | 21 ++++++++++++++-----
- 1 file changed, 16 insertions(+), 5 deletions(-)
+ drivers/clk/clk-gate.c   |  1 +
+ drivers/clk/clk-mux.c    |  2 +-
+ drivers/clk/clk-uclass.c | 20 ++++++++++++++++++++
+ drivers/clk/clk.c        |  9 +++++++++
+ 4 files changed, 31 insertions(+), 1 deletion(-)
 
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-index a5b5c8a3853a..f3a2dff5c2c8 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-@@ -76,7 +76,7 @@ class TestEfiCapsuleFirmwareRaw:
-             self, u_boot_config, u_boot_console, efi_capsule_data):
-         """ Test Case 2
-         Update U-Boot and U-Boot environment on SPI Flash but with OsIndications unset
--        No update should happen
-+        No update should happen unless CONFIG_EFI_IGNORE_OSINDICATIONS is set
-         0x100000-0x150000: U-Boot binary (but dummy)
-         0x150000-0x200000: U-Boot environment (but dummy)
-         """
-@@ -91,16 +91,27 @@ class TestEfiCapsuleFirmwareRaw:
-         # reboot
-         u_boot_console.restart_uboot()
-
-+        ignore_os_indications = u_boot_config.buildconfig.get(
-+            'config_efi_ignore_osindications')
-+        need_reboot = True if ignore_os_indications else False
+diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
+index cfd90b717e7..c86083ac5a3 100644
+--- a/drivers/clk/clk-gate.c
++++ b/drivers/clk/clk-gate.c
+@@ -116,6 +116,7 @@ const struct clk_ops clk_gate_ops = {
+ 	.enable = clk_gate_enable,
+ 	.disable = clk_gate_disable,
+ 	.get_rate = clk_generic_get_rate,
++	.set_rate = clk_generic_set_rate,
+ };
+ 
+ struct clk *clk_register_gate(struct device *dev, const char *name,
+diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
+index e3481be95fa..f99a67ebd35 100644
+--- a/drivers/clk/clk-mux.c
++++ b/drivers/clk/clk-mux.c
+@@ -151,13 +151,13 @@ static int clk_mux_set_parent(struct clk *clk, struct clk *parent)
+ #else
+ 	writel(reg, mux->reg);
+ #endif
+-
+ 	return 0;
+ }
+ 
+ const struct clk_ops clk_mux_ops = {
+ 	.get_rate = clk_generic_get_rate,
+ 	.set_parent = clk_mux_set_parent,
++	.set_rate = clk_generic_set_rate,
+ };
+ 
+ struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index ed6e60bc484..638864e6774 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -517,6 +517,26 @@ ulong clk_get_parent_rate(struct clk *clk)
+ 	return pclk->rate;
+ }
+ 
++ulong clk_set_parent_rate(struct clk *clk, ulong rate)
++{
++	const struct clk_ops *ops;
++	struct clk *pclk;
 +
-+        capsule_auth = u_boot_config.buildconfig.get(
-+            'config_efi_capsule_authenticate')
++	debug("%s(clk=%p)\n", __func__, clk);
++	if (!clk_valid(clk))
++		return 0;
 +
-         capsule_early = u_boot_config.buildconfig.get(
-             'config_efi_capsule_on_disk_early')
-         with u_boot_console.log.section('Test Case 2-b, after reboot'):
-             if not capsule_early:
--                exec_manual_update(u_boot_console, disk_img, capsule_files, False)
-+                exec_manual_update(u_boot_console, disk_img, capsule_files, need_reboot)
-
--            check_file_exist(u_boot_console, disk_img, capsule_files)
-+            if not ignore_os_indications:
-+                check_file_exist(u_boot_console, disk_img, capsule_files)
-
--            verify_content(u_boot_console, '100000', 'u-boot:Old')
--            verify_content(u_boot_console, '150000', 'u-boot-env:Old')
-+            expected = 'u-boot:New' if (ignore_os_indications and not capsule_auth) else 'u-boot:Old'
-+            verify_content(u_boot_console, '100000', expected)
++	pclk = clk_get_parent(clk);
++	if (IS_ERR(pclk))
++		return -ENODEV;
 +
-+            expected = 'u-boot-env:New' if (ignore_os_indications and not capsule_auth) else 'u-boot-env:Old'
-+            verify_content(u_boot_console, '150000', expected)
-
-     def test_efi_capsule_fw3(
-             self, u_boot_config, u_boot_console, efi_capsule_data):
---
++	ops = clk_dev_ops(pclk->dev);
++	if (!ops->set_rate)
++		return -ENOSYS;
++
++	return clk_set_rate(pclk, rate);
++}
++
+ ulong clk_round_rate(struct clk *clk, ulong rate)
+ {
+ 	const struct clk_ops *ops;
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index 6ede1b4d4dc..febd5314df2 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -14,6 +14,7 @@
+ #include <dm/uclass.h>
+ #include <dm/lists.h>
+ #include <dm/device-internal.h>
++#include <linux/clk-provider.h>
+ 
+ int clk_register(struct clk *clk, const char *drv_name,
+ 		 const char *name, const char *parent_name)
+@@ -61,6 +62,14 @@ ulong clk_generic_get_rate(struct clk *clk)
+ 	return clk_get_parent_rate(clk);
+ }
+ 
++ulong clk_generic_set_rate(struct clk *clk, ulong rate)
++{
++	if (clk->flags & CLK_SET_RATE_PARENT)
++		return clk_set_parent_rate(clk, rate);
++
++	return clk_get_parent_rate(clk);
++}
++
+ const char *clk_hw_get_name(const struct clk *hw)
+ {
+ 	assert(hw);
+-- 
 2.43.0
 
