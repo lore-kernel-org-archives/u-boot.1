@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B2FC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A7AEC3065C
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E480888B2;
+	by phobos.denx.de (Postfix) with ESMTP id 9D750888FC;
 	Thu,  4 Jul 2024 09:49:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oy/ppJLV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VsZgmU7U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA0C2888F5; Thu,  4 Jul 2024 09:49:13 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 5D4C4888EC; Thu,  4 Jul 2024 09:49:14 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7E71888CF
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:49:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A3D1888FC
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:49:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-42564316479so1857205e9.2
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 00:49:10 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-424acfff613so2718835e9.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 00:49:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720079350; x=1720684150; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720079351; x=1720684151; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=heeNVSuPfmKGlf8ZfBiv+awmb/TEadwE07nfjXnqUpI=;
- b=Oy/ppJLV5EDItDrWHorfWT0rW/5Ngp6CsrGm7LkyjGuwpuwkSgjPim35C64VflSYuA
- RL6Xqd/ccyW3HWZVnE/IiGP0Y2AIQMUqrTEuQO1QcUQNW2m4iqjDT6OYxrzekJZpkpxq
- 1/b/WaCHU7sD2NIaYnBGqkv2GA1pIhPcvgI6M=
+ bh=dLAe3+PdXcNntF6HHKEzTzB26YxxirSGeryH0nQjYqo=;
+ b=VsZgmU7UNNHKDFYI0B1weUoS2Vlj9BDgD3VOImSnhWPfEl/3a+SCbAmMEye7vpo6N6
+ KUDeWGYBEWT5ucFal6NBgh7xdWpU81aHPwy675PP9hjjeVeQ0rjFQ1oOcIPhmiCi7KLR
+ b6VR8GcEo7dnf7um1Eyw5SsaciOLLAk7aWuiA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720079350; x=1720684150;
+ d=1e100.net; s=20230601; t=1720079351; x=1720684151;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=heeNVSuPfmKGlf8ZfBiv+awmb/TEadwE07nfjXnqUpI=;
- b=iAQqSCMOvF5EvL5d8wnITCzghwGTxnHGIpADq/MPyye3b9a/Oxf7o9VG3Mt8vMd59v
- 0M4GyzZRc8n2aZYN57oWwRAA6CSj7jxKsQ3NbnGUKrhjVGyyKR7F0zCpncZE/dWZi8EV
- k8E71XfPROIiLbZWo/+Ik4uK4ucR/Cz7fW/ZzcAWgIqBC4XzEX4GKbhBMrI3ucjK+uZY
- x7rbmtaSyk5WAvyysA8T8uUVQ4DvU4P6xlnYe/wVvM0uWhayKOgOc9jXZuZxOqakazKj
- j8NJvpvHUMn21asPkgG6TXReb82m0cu/R/agToTKBXlYaJ1Lc83zB2nwQPgt4tejvcrA
- ZHGQ==
-X-Gm-Message-State: AOJu0YwChnWQWDxbJVAw9Rv7Q//6mxOFjjqxZTXUQ0/3YNwpRBAV+MIv
- XTlUnghsp3QEjTGabWz6+0bqV+r0dNI4FURjeT+Fggu1o97o/+T8fxH4YukHOkOem6XPp0mXyGk
+ bh=dLAe3+PdXcNntF6HHKEzTzB26YxxirSGeryH0nQjYqo=;
+ b=Jkp03kzW+VJfA7eljD/8czpv0AuvLaxTdzSsTFWsiR4doHhYrWcj6/DNd4vDf1G9es
+ 4PI64ClRDgChUhWMU1oh+FtzIWHuRU4Xra4BbXEB7upML+shDpZoeI6/iiEg0M+cY1Dx
+ v9oBDAk3Pq0f7vz2AYJjJEzCtRkSw7LKkFVz6fVdjsFRyHT+EW9R6edlut39Rf7MM4CM
+ D4/aBAG1v4+46C1I65CNFI2E5CQuS4F1m2NIaaL6JZeJybH2lPpT6AycURy2WyZH7KzL
+ B5KvnriHY896YY+QT1MRA2A1R9C2KraicfMfctyrvSwakma/ZwT1QCrMIGKjU4qBqw8U
+ welg==
+X-Gm-Message-State: AOJu0Yz3YeyxWrkkrJ4HfWuF1BKv+HW2pkBVZ9e77RcjUzl0IMpOmuue
+ Zm3rOS6UQ6eDqmhipC98Wy1bSEZ23ht0Zc94t68ZivhGIncYIYM/G/1UDHsU23ttSGkqO/nihtA
  =
-X-Google-Smtp-Source: AGHT+IGt5qCcPmEDyRoDF7V0q24PvjiJpxsHtpqLp//HZvlsKhYDaBvFjDdvDcFqX68TMDxx8KDcMw==
-X-Received: by 2002:a7b:cd95:0:b0:426:4186:efae with SMTP id
- 5b1f17b1804b1-4264a3d1d13mr7336625e9.14.1720079350025; 
+X-Google-Smtp-Source: AGHT+IHjLUAnJiXiymbhCTVVVaNH1/Oyyst4pIijEXEgOeQc4NjRzQOAlU+UH2O6lwCrMYyylDR/jQ==
+X-Received: by 2002:a05:600c:4205:b0:424:aa40:88ae with SMTP id
+ 5b1f17b1804b1-4264a3bc392mr9528655e9.3.1720079350800; 
  Thu, 04 Jul 2024 00:49:10 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4264a2ca5casm12885515e9.32.2024.07.04.00.49.09
+ 5b1f17b1804b1-4264a2ca5casm12885515e9.32.2024.07.04.00.49.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 00:49:09 -0700 (PDT)
+ Thu, 04 Jul 2024 00:49:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Samuel Dionne-Riel <samuel@dionne-riel.com>, Stefan Roese <sr@denx.de>,
- Ying Sun <sunying@nj.iscas.ac.cn>
-Subject: [PATCH v3 4/5] sandbox: Increase cyclic CPU-time limit
-Date: Thu,  4 Jul 2024 08:48:58 +0100
-Message-Id: <20240704074859.2956745-5-sjg@chromium.org>
+ Peter Robinson <pbrobinson@gmail.com>, Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v3 5/5] sandbox: Drop video-sync in serial driver
+Date: Thu,  4 Jul 2024 08:48:59 +0100
+Message-Id: <20240704074859.2956745-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704074859.2956745-1-sjg@chromium.org>
 References: <20240704074859.2956745-1-sjg@chromium.org>
@@ -95,31 +90,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that sandbox is using cyclic for video, it trips the 1us time
-limit. Updating the sandbox display often takes 20ms or more.
+With sandbox, when U-Boot is waiting for input it syncs the video
+display, since presumably the user has finished typing.
 
-Increase the limit to 100ms to avoid a warning.
+Now that cyclic is used for video syncing, we can drop this. Cyclic
+will automatically call the video_idle() function when idle.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v2:
+- Fix 'groth' and 'work-around' typos in cover letter
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 87b0ec3ea8f..83c81edac20 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -636,6 +636,7 @@ config SPL_CYCLIC
+ drivers/serial/sandbox.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/serial/sandbox.c b/drivers/serial/sandbox.c
+index ec0068e33d3..77a1558db68 100644
+--- a/drivers/serial/sandbox.c
++++ b/drivers/serial/sandbox.c
+@@ -138,8 +138,6 @@ static int sandbox_serial_pending(struct udevice *dev, bool input)
+ 		return 0;
  
- config CYCLIC_MAX_CPU_TIME_US
- 	int "Sets the max allowed time for a cyclic function in us"
-+	default 100000 if SANDBOX  # sandbox video is quite slow
- 	default 5000
- 	help
- 	  The max allowed time for a cyclic function in us. If a functions
+ 	os_usleep(100);
+-	if (IS_ENABLED(CONFIG_VIDEO) && !IS_ENABLED(CONFIG_SPL_BUILD))
+-		video_sync_all();
+ 	avail = membuff_putraw(&priv->buf, 100, false, &data);
+ 	if (!avail)
+ 		return 1;	/* buffer full */
 -- 
 2.34.1
 
