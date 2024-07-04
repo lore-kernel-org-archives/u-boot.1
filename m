@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49BB9C3065C
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 08:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04451C30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 08:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED251888D9;
-	Thu,  4 Jul 2024 10:44:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54275888F6;
+	Thu,  4 Jul 2024 10:44:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ul53Uku1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x2x3WboN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 374D0888EB; Thu,  4 Jul 2024 10:44:03 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id E384C888D9; Thu,  4 Jul 2024 10:44:03 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0998188679
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 10:43:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BE5A888CC
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 10:44:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4648hmJ7021754;
- Thu, 4 Jul 2024 03:43:48 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4648hxfo041417;
+ Thu, 4 Jul 2024 03:43:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720082628;
- bh=USsx6FkTOQ/zE1MLny8IYl/fl6oLDT2zfnY6IbjHbCw=;
+ s=ti-com-17Q1; t=1720082639;
+ bh=F7FAMIYTljuV34U6xUvibxHSrqZ8ZRpuYu6/ekVATjE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ul53Uku1s2+Lv2ob3oDbIAJg0t7ik6ydubxOHStgmerRe/y+b4g5g52j32fQTcg6c
- hRyjVGwH6xsPI1zxF9B2kUHmtv1NvYhGqp/+5bMuP5TjlAlmLmlT3MZuONx6uURhL3
- e9aRTozOoK43CS1kfmtg3NgimrsExDD2AXPRsd58=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4648hmO9011017
+ b=x2x3WboNtqa/SfnsnXWSCmu7+EHeMeDXuTS8XukpULr69C7cV+uopyOaWFT6K1883
+ g/wd283aoyh+2YaBppEYctohDEBmApx17N2pTaW6kTwZYiUnUtrmb8+hK5Pn0CXe0+
+ ElkzOKQIXE3FF6bCUzF4lzultNPSHmvNi+xBb5Ko=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4648hxnZ038836
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jul 2024 03:43:48 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Jul 2024 03:43:59 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 03:43:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 03:43:58 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 03:43:47 -0500
+ Frontend Transport; Thu, 4 Jul 2024 03:43:58 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4648hPV7010413;
- Thu, 4 Jul 2024 03:43:43 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4648hPV9010413;
+ Thu, 4 Jul 2024 03:43:54 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
@@ -59,10 +59,10 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
  Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V4 3/6] doc: beagle: am62x_beagleplay: Add TIFS Stub in image
- format
-Date: Thu, 4 Jul 2024 14:12:05 +0530
-Message-ID: <20240704084207.2211801-4-d-gole@ti.com>
+Subject: [PATCH V4 5/6] doc: ti: am62*: Mention TIFS Stub in img fmts and boot
+ flow
+Date: Thu, 4 Jul 2024 14:12:07 +0530
+Message-ID: <20240704084207.2211801-6-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704084207.2211801-1-d-gole@ti.com>
 References: <20240704084207.2211801-1-d-gole@ti.com>
@@ -86,387 +86,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mention the TIFS Stub in the TISP image format
+Since AM62x, AM62P and AM62A all use similar boot flows and their low
+power mode s/w ARCH is also similar in the way that they make use of the
+TIFS Stub, update their documentation to show where TIFS Stub is.
 
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- doc/board/beagle/am62x_beagleplay.rst      |   2 +-
- doc/board/ti/img/tifsstub_dm_tispl.bin.svg | 353 +++++++++++++++++++++
- 2 files changed, 354 insertions(+), 1 deletion(-)
- create mode 100644 doc/board/ti/img/tifsstub_dm_tispl.bin.svg
+ doc/board/ti/am62ax_sk.rst | 4 ++--
+ doc/board/ti/am62px_sk.rst | 4 ++--
+ doc/board/ti/am62x_sk.rst  | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
-index 375f26fc5f3e..e7347610173e 100644
---- a/doc/board/beagle/am62x_beagleplay.rst
-+++ b/doc/board/beagle/am62x_beagleplay.rst
-@@ -86,7 +86,7 @@ Image formats
+diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
+index 60726b6652ce..92da6f65f9d5 100644
+--- a/doc/board/ti/am62ax_sk.rst
++++ b/doc/board/ti/am62ax_sk.rst
+@@ -47,7 +47,7 @@ Boot Flow:
+ ----------
+ Below is the pictorial representation of boot flow:
+ 
+-.. image:: img/boot_diagram_k3_current.svg
++.. image:: img/boot_diagram_am62.svg
+   :alt: Boot flow diagram
+ 
+ - Here TIFS acts as master and provides all the critical services. R5/A53
+@@ -144,7 +144,7 @@ Image formats:
  
  - tispl.bin
  
--.. image:: ../ti/img/dm_tispl.bin.svg
-+.. image:: ../ti/img/tifsstub_dm_tispl.bin.svg
+-.. image:: img/dm_tispl.bin.svg
++.. image:: img/tifsstub_dm_tispl.bin.svg
    :alt: tispl.bin image format
  
- Additional hardware for U-Boot development
-diff --git a/doc/board/ti/img/tifsstub_dm_tispl.bin.svg b/doc/board/ti/img/tifsstub_dm_tispl.bin.svg
-new file mode 100644
-index 000000000000..5d56d81f6674
---- /dev/null
-+++ b/doc/board/ti/img/tifsstub_dm_tispl.bin.svg
-@@ -0,0 +1,353 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231px"
-+   height="351px"
-+   viewBox="-0.5 -0.5 231 351"
-+   id="svg72"
-+   sodipodi:docname="tifsstub_dm_tispl.bin.svg"
-+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns:xlink="http://www.w3.org/1999/xlink"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg"
-+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.3561254"
-+     inkscape:cx="115.65599"
-+     inkscape:cy="276.72551"
-+     inkscape:window-width="1920"
-+     inkscape:window-height="1008"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="1"
-+     inkscape:current-layer="svg72" />
-+  <defs
-+     id="defs2" />
-+  <g
-+     id="g62">
-+    <rect
-+       x="0"
-+       y="0"
-+       width="230"
-+       height="350"
-+       rx="34.5"
-+       ry="34.5"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4" />
-+    <rect
-+       x="40"
-+       y="30"
-+       width="160"
-+       height="60"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect6" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g12">
-+      <switch
-+         id="switch10">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 60px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">FIT Header</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="64"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text8">FIT Header</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="160"
-+       width="160"
-+       height="50"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect14" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g20">
-+      <switch
-+         id="switch18">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 185px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TIFS Stub<xhtml:br />
-+(GP, HS-FS, HS-SE)</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="189"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text16">TIFS Stub...</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="90"
-+       width="160"
-+       height="30"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect22" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g28">
-+      <switch
-+         id="switch26">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 105px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TF-A</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="109"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text24">TF-A</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="120"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect30" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g36">
-+      <switch
-+         id="switch34">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 140px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">OP-TEE</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="144"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text32">OP-TEE</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="210"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect38" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g44">
-+      <switch
-+         id="switch42">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 230px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">R5 DM FW</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="234"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text40">R5 DM FW</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="250"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect46" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g52">
-+      <switch
-+         id="switch50">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 270px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Cortex-A SPL</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="274"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text48">Cortex-A SPL</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="290"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="rgb(0, 0, 0)"
-+       pointer-events="all"
-+       id="rect54" />
-+    <g
-+       transform="translate(-0.5 -0.5)"
-+       id="g60">
-+      <switch
-+         id="switch58">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 310px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">SPL DTB 1..N</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="314"
-+           fill="rgb(0, 0, 0)"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text56">SPL DTB 1..N</text>
-+      </switch>
-+    </g>
-+  </g>
-+  <switch
-+     id="switch70">
-+    <g
-+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+       id="g64" />
-+    <a
-+       transform="translate(0,-5)"
-+       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
-+       target="_blank"
-+       id="a68">
-+      <text
-+         text-anchor="middle"
-+         font-size="10px"
-+         x="50%"
-+         y="100%"
-+         id="text66">Text is not SVG - cannot display</text>
-+    </a>
-+  </switch>
-+</svg>
+ Switch Setting for Boot Mode
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index c80b50681176..3396aae471c6 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -55,7 +55,7 @@ Boot Flow:
+ The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
+ family. Below is the pictorial representation:
+ 
+-.. image:: img/boot_diagram_k3_current.svg
++.. image:: img/boot_diagram_am62.svg
+   :alt: Boot flow diagram
+ 
+ - Here TIFS acts as master and provides all the critical services. R5/A53
+@@ -153,7 +153,7 @@ Image formats:
+ 
+ - tispl.bin
+ 
+-.. image:: img/dm_tispl.bin.svg
++.. image:: img/tifsstub_dm_tispl.bin.svg
+   :alt: tispl.bin image format
+ 
+ OSPI:
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index 2a25e84f6c97..68ddd2ac94ff 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -46,7 +46,7 @@ Boot Flow:
+ ----------
+ Below is the pictorial representation of boot flow:
+ 
+-.. image:: img/boot_diagram_k3_current.svg
++.. image:: img/boot_diagram_am62.svg
+   :alt: Boot flow diagram
+ 
+ - Here TIFS acts as master and provides all the critical services. R5/A53
+@@ -161,7 +161,7 @@ Image formats:
+ 
+ - tispl.bin
+ 
+-.. image:: img/dm_tispl.bin.svg
++.. image:: img/tifsstub_dm_tispl.bin.svg
+   :alt: tispl.bin image format
+ 
+ OSPI:
 -- 
 2.34.1
 
