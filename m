@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F632C3065C
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0999CC30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C28488984;
-	Thu,  4 Jul 2024 09:38:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F19908889D;
+	Thu,  4 Jul 2024 09:38:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1A288889D; Thu,  4 Jul 2024 09:38:41 +0200 (CEST)
+ id 10ACB88979; Thu,  4 Jul 2024 09:38:47 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A76BA88979
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7035D8897A
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34899DA7;
- Thu,  4 Jul 2024 00:39:04 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EC84FDA7;
+ Thu,  4 Jul 2024 00:39:07 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EE7F53F762;
- Thu,  4 Jul 2024 00:38:35 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B24603F762;
+ Thu,  4 Jul 2024 00:38:39 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -34,10 +34,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH v2 42/48] ti: k3: remove efi_add_known_memory() function
- definition
-Date: Thu,  4 Jul 2024 13:05:38 +0530
-Message-Id: <20240704073544.670249-43-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH v2 43/48] layerscape: use the lmb API's to add RAM memory
+Date: Thu,  4 Jul 2024 13:05:39 +0530
+Message-Id: <20240704073544.670249-44-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
@@ -59,38 +58,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The efi_add_known_memory() function for the TI K3 platforms is adding
-the EFI_CONVENTIONAL_MEMORY type. This memory is now being handled
-through the LMB module -- the lmb_add_memory() adds this memory to the
-memory map. Remove the definition of the now superfluous
-efi_add_known_memory() function.
+The EFI memory allocations are now being done through the LMB module,
+and hence the memory map is maintained by the LMB module. Use the
+lmb_add_memory() API function to add the usable RAM memory to the
+LMB's memory map.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1: New patch
 
- arch/arm/mach-k3/common.c | 11 -----------
- 1 file changed, 11 deletions(-)
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index eaa7d36176..a5c0170cd2 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -310,14 +310,3 @@ void setup_qos(void)
- 		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+index d2dbfdd08a..dacb95f1a8 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+@@ -10,6 +10,7 @@
+ #include <env.h>
+ #include <init.h>
+ #include <hang.h>
++#include <lmb.h>
+ #include <log.h>
+ #include <net.h>
+ #include <vsprintf.h>
+@@ -1525,8 +1526,8 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
+-#if CONFIG_IS_ENABLED(EFI_LOADER)
+-void efi_add_known_memory(void)
++#if CONFIG_IS_ENABLED(LMB)
++void lmb_add_memory(void)
+ {
+ 	int i;
+ 	phys_addr_t ram_start;
+@@ -1548,8 +1549,7 @@ void efi_add_known_memory(void)
+ 		    gd->arch.resv_ram < ram_start + ram_size)
+ 			ram_size = gd->arch.resv_ram - ram_start;
+ #endif
+-		efi_add_memory_map(ram_start, ram_size,
+-				   EFI_CONVENTIONAL_MEMORY);
++		lmb_add(ram_start, ram_size);
+ 	}
  }
  #endif
--
--void efi_add_known_memory(void)
--{
--	if (IS_ENABLED(CONFIG_EFI_LOADER))
--		/*
--		 * Memory over ram_top can be used by various firmware
--		 * Declare to EFI only memory area below ram_top
--		 */
--		efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
--				   EFI_CONVENTIONAL_MEMORY);
--}
 -- 
 2.34.1
 
