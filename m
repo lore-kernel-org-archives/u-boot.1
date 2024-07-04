@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92BE5C30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B269CC30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 07:37:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DA28888C3;
-	Thu,  4 Jul 2024 09:36:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7DFA1888A7;
+	Thu,  4 Jul 2024 09:36:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3257F888AF; Thu,  4 Jul 2024 09:36:25 +0200 (CEST)
+ id 9C2AA888AA; Thu,  4 Jul 2024 09:36:28 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 098E7888C2
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:36:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id A8625888B8
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 09:36:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8B0DA367;
- Thu,  4 Jul 2024 00:36:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34CEA367;
+ Thu,  4 Jul 2024 00:36:51 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 676253F762;
- Thu,  4 Jul 2024 00:36:19 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 10C883F762;
+ Thu,  4 Jul 2024 00:36:22 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -34,9 +34,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH v2 05/48] alist: add a couple of helper functions
-Date: Thu,  4 Jul 2024 13:05:01 +0530
-Message-Id: <20240704073544.670249-6-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH v2 06/48] alist: add a function declaration for
+ alist_expand_by()
+Date: Thu,  4 Jul 2024 13:05:02 +0530
+Message-Id: <20240704073544.670249-7-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
@@ -58,48 +59,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a couple of helper functions to detect an empty and full alist.
+The alist_expand_by() function is a global function. Add a declaration
+for the function in the header.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1: New patch
 
- include/alist.h | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ include/alist.h | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/include/alist.h b/include/alist.h
-index a68afc9fff..bab146c35d 100644
+index bab146c35d..d7cc27c14c 100644
 --- a/include/alist.h
 +++ b/include/alist.h
-@@ -82,6 +82,28 @@ static inline bool alist_err(struct alist *lst)
- 	return lst->flags & ALISTF_FAIL;
- }
+@@ -224,4 +224,13 @@ void *alist_uninit_move_ptr(struct alist *alist, size_t *countp);
+  */
+ void alist_uninit(struct alist *alist);
  
 +/**
-+ * alist_full() - Check if the alist is full
++ * alist_expand_by() - Expand a list by the given amount
 + *
-+ * @lst: List to check
-+ * Return: true if full, false otherwise
++ * @lst: alist to expand
++ * @inc_by: Amount to expand by
++ * Return: true if OK, false if out of memory
 + */
-+static inline bool alist_full(struct alist *lst)
-+{
-+	return lst->count == lst->alloc;
-+}
++bool alist_expand_by(struct alist *lst, uint inc_by);
 +
-+/**
-+ * alist_empty() - Check if the alist is empty
-+ *
-+ * @lst: List to check
-+ * Return: true if empty, false otherwise
-+ */
-+static inline bool alist_empty(struct alist *lst)
-+{
-+	return !lst->count && lst->alloc;
-+}
-+
- /**
-  * alist_get_ptr() - Get the value of a pointer
-  *
+ #endif /* __ALIST_H */
 -- 
 2.34.1
 
