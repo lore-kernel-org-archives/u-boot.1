@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CECDC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 08:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143DBC3065C
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 08:44:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8BEA88910;
-	Thu,  4 Jul 2024 10:44:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4246B888CC;
+	Thu,  4 Jul 2024 10:44:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GzSQechI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ico9pSqV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAB3F888CC; Thu,  4 Jul 2024 10:44:04 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 4A6AD888EB; Thu,  4 Jul 2024 10:44:17 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95A9F888E4
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 10:44:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5289988679
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 10:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4648hrvi021762;
- Thu, 4 Jul 2024 03:43:53 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4648i6xF105008;
+ Thu, 4 Jul 2024 03:44:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720082633;
- bh=Llt+ZiRoW4OczpFqiA/tq0i+0WDrqbhjbTBf3elV7sQ=;
+ s=ti-com-17Q1; t=1720082646;
+ bh=EuBFkTzLVc9RKUL+BsCrNpOOJUwUUExoNyet8Ne9L84=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=GzSQechIyAmD2srtzS96D1nMcaw/tbce0DnSlc+u7U8Lc0wBoFsuxdnL7Qb4ddcqm
- QLWqRcl38emXYDC5Q5l650nu4Fp56cnra21Px8qM7/klODMTIksHcolQO2mCrlIHNF
- pdNJJ7PltAiQZNlqkLAM19pmr32Re9VtAskGrMZI=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4648hrB8018969
+ b=Ico9pSqVHqlqDNdr7/wgTtme12vuXfns6s8nzf019oTQuq4dBubpqb4Nt5CcAyUlm
+ I4s6WOsNjCMOMR9knDM11tBh5wJK9gC4KC8ePcSOXyL1qHySg5CLmUQaIyVCNp8yvo
+ w7sk7AdGZVPdOtaCDP61lTAztMty7s8r3URiZmI8=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4648i6pU011259
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jul 2024 03:43:53 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Jul 2024 03:44:06 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 03:43:53 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 03:44:06 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 03:43:53 -0500
+ Frontend Transport; Thu, 4 Jul 2024 03:44:06 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4648hPV8010413;
- Thu, 4 Jul 2024 03:43:49 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4648hPVA010413;
+ Thu, 4 Jul 2024 03:44:02 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
@@ -59,9 +59,9 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
  Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V4 4/6] doc: ti: k3: Add TIFS Stub documentation
-Date: Thu, 4 Jul 2024 14:12:06 +0530
-Message-ID: <20240704084207.2211801-5-d-gole@ti.com>
+Subject: [PATCH V4 6/6] MAINTAINERS: Include the TI docs under ARM TI
+Date: Thu, 4 Jul 2024 14:12:08 +0530
+Message-ID: <20240704084207.2211801-7-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704084207.2211801-1-d-gole@ti.com>
 References: <20240704084207.2211801-1-d-gole@ti.com>
@@ -85,30 +85,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation to briefly explain the role of TIFS Stub in relevant
-K3 SoC's.
+Add entry for the TI boards documentation under ARM TI
 
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- doc/board/ti/k3.rst | 5 +++++
- 1 file changed, 5 insertions(+)
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 67b066a07d3a..2f63852b3801 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -193,6 +193,11 @@ online
-     device resources such as power, clock, interrupts, dma etc. This firmware
-     runs on a dedicated or multi-use microcontroller outside the security
-     enclave.
-+  * **TIFS Stub** - A small piece of code that helps restore the remaining
-+    context and resume the TIFS firmware when resuming from Low Power Modes
-+    like Suspend-to-RAM/ Deep Sleep. It is loaded into the ATCM (Tightly
-+    Coupled Memory 'A' of the DM R5) during DM startup. This applies only
-+    to AM62x, AM62A and AM62P based devices.
- 
-  OR
- 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 6b32a6d94644..da730c6e4840 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -733,6 +733,7 @@ F:	arch/arm/mach-omap2/
+ F:	arch/arm/include/asm/arch-omap*/
+ F:	arch/arm/include/asm/ti-common/
+ F:	board/ti/
++F:	doc/board/ti/
+ F:	drivers/dma/ti*
+ F:	drivers/dma/ti*/
+ F:	drivers/firmware/ti_sci.*
 -- 
 2.34.1
 
