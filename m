@@ -4,64 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A4DC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 14:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3CA8C3271E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 14:10:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9402688581;
-	Thu,  4 Jul 2024 16:07:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A26E886A6;
+	Thu,  4 Jul 2024 16:10:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C1upybqZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07E8C8867A; Thu,  4 Jul 2024 16:07:09 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 1325188889; Thu,  4 Jul 2024 16:10:42 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADF41884C5
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 16:07:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA8BC88499
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 16:10:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7B1BD62644;
- Thu,  4 Jul 2024 14:07:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10E07C3277B;
- Thu,  4 Jul 2024 14:07:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1720102025;
- bh=7WU+MEy2VF2nOWvHTzxVUFTVUkC6VqYUFbqaEz1xDtY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=C1upybqZFYko/QW5DtvrHBDhCbNbkiw0d5n3tN04Kuvfqa60Q5oO6zVDA0LfUKq2s
- AJ2rBo7KHLrdk7GdbzWS8b8PZ42ysNxnHWGO7bg+SK/cFSx+g5IlqMvVwZVaD4Uqh2
- /ROqAMozhMyO2PC+gAGWL4pWrgtH6MXHNm6UJYvFDJ2XrBame52rj8Hx9I+VPc8V2E
- 2/Hf9aHR0/KO+g/15J1dzVho87387EVN3vnJP7y4o6hfzYJ3d3Orw1YyyVaZ8YHNNN
- aJWDdL0OJDTgaeK0tTxhg3pkPwSNw+3Sjcg7LhNEhlpYssjbTNbBx4DMvgvNUpBMD8
- wpl/2QA/FS4hA==
-Message-ID: <13288500-d4b2-4cc0-9b5a-7d6db9d0a81b@kernel.org>
-Date: Thu, 4 Jul 2024 17:06:59 +0300
+ dmarc=fail (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+Received: from i53875ac2.versanet.de ([83.135.90.194] helo=diego.localnet)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1sPNAM-0001nC-42; Thu, 04 Jul 2024 16:10:30 +0200
+From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
+To: Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Klaus Goger <klaus.goger@cherry.de>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 1/3] arm64: dts: rockchip: add PCIe3 support on
+ rk3588-jaguar
+Date: Thu, 04 Jul 2024 16:10:29 +0200
+Message-ID: <1928504.IobQ9Gjlxr@diego>
+In-Reply-To: <20240704-tsd-rk3588-nvme-v1-1-fb9e8dde9570@cherry.de>
+References: <20240704-tsd-rk3588-nvme-v1-0-fb9e8dde9570@cherry.de>
+ <20240704-tsd-rk3588-nvme-v1-1-fb9e8dde9570@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/8] phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY
- driver
-To: Minda Chen <minda.chen@starfivetech.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>, Rick Chen <rick@andestech.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
-References: <20240704055014.55117-1-minda.chen@starfivetech.com>
- <20240704055014.55117-4-minda.chen@starfivetech.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240704055014.55117-4-minda.chen@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,275 +61,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 04/07/2024 08:50, Minda Chen wrote:
-> Add Starfive JH7110 PCIe 2.0 PHY driver, which is generic
-> PHY driver and can be used as USB 3.0 driver.
+Am Donnerstag, 4. Juli 2024, 14:53:31 CEST schrieb Quentin Schulz:
+> From: Heiko Stuebner <heiko.stuebner@cherry.de>
 > 
-> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> The Jaguar SBC provides an M.2 slot connected to the pcie3 controller.
+> In contrast to a number of other boards the pcie-refclk is gpio-controlled,
+> so the necessary clock and is added to the list of pcie3 clocks.
+> 
+> Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
+> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> Link: https://lore.kernel.org/r/20240423074956.2622318-1-heiko@sntech.de
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> 
+> [ upstream commit: 0ec7e1096332bc2b9bc881c21cfd234058f747b3 ]
+> 
+> (cherry picked from commit 76a89655ae740dddb57187b5b52071ed99187452)
+
+on a rk3588-jaguar
+Tested-by: Heiko Stuebner <heiko@sntech.de>
+
 > ---
->  drivers/phy/starfive/Kconfig           |   7 +
->  drivers/phy/starfive/Makefile          |   1 +
->  drivers/phy/starfive/phy-jh7110-pcie.c | 202 +++++++++++++++++++++++++
->  3 files changed, 210 insertions(+)
->  create mode 100644 drivers/phy/starfive/phy-jh7110-pcie.c
+>  dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts | 59 +++++++++++++++++++++++
+>  1 file changed, 59 insertions(+)
 > 
-> diff --git a/drivers/phy/starfive/Kconfig b/drivers/phy/starfive/Kconfig
-> index 11a819f8b2..5d49684bc7 100644
-> --- a/drivers/phy/starfive/Kconfig
-> +++ b/drivers/phy/starfive/Kconfig
-> @@ -4,6 +4,13 @@
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts b/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
+> index 7d7303f8ecb..678ed8b4dcc 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
+> @@ -72,6 +72,27 @@
+>  		};
+>  	};
 >  
->  menu "Starfive PHY driver"
+> +	/*
+> +	 * 100MHz reference clock for PCIe peripherals from PI6C557-05BLE
+> +	 * clock generator.
+> +	 * The clock output is gated via the OE pin on the clock generator.
+> +	 * This is modeled as a fixed-clock plus a gpio-gate-clock.
+> +	 */
+> +	pcie_refclk_gen: pcie-refclk-gen-clock {
+> +		compatible = "fixed-clock";
+> +		#clock-cells = <0>;
+> +		clock-frequency = <100000000>;
+> +	};
+> +
+> +	pcie_refclk: pcie-refclk-clock {
+> +		compatible = "gpio-gate-clock";
+> +		clocks = <&pcie_refclk_gen>;
+> +		#clock-cells = <0>;
+> +		enable-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_LOW>; /* PCIE30X4_CLKREQN_M0 */
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pcie30x4_clkreqn_m0>;
+> +	};
+> +
+>  	pps {
+>  		compatible = "pps-gpio";
+>  		gpios = <&gpio0 RK_PD5 GPIO_ACTIVE_HIGH>;
+> @@ -353,6 +374,30 @@
+>  	status = "okay";
+>  };
 >  
-> +config PHY_STARFIVE_JH7110_PCIE
-> +        bool "Starfive JH7110 PCIe 2.0 PHY driver"
-> +        select PHY
-> +        help
-> +          Enable this to support the Starfive JH7110 PCIE 2.0/USB 3.0 PHY.
-> +	  Generic PHY driver JH7110 USB 3.0/ PCIe 2.0.
-
-Should be aligned to previous line.
-
+> +&pcie30phy {
+> +	status = "okay";
+> +};
 > +
->  config PHY_STARFIVE_JH7110_USB2
->  	bool "Starfive JH7110 USB 2.0 PHY driver"
->  	select PHY
-> diff --git a/drivers/phy/starfive/Makefile b/drivers/phy/starfive/Makefile
-> index a405a75e34..82f25aa21b 100644
-> --- a/drivers/phy/starfive/Makefile
-> +++ b/drivers/phy/starfive/Makefile
-> @@ -3,4 +3,5 @@
->  # Copyright (C) 2023 Starfive
->  #
+> +&pcie3x4 {
+> +	/*
+> +	 * The board has a gpio-controlled "pcie_refclk" generator,
+> +	 * so add it to the list of clocks.
+> +	 */
+> +	clocks = <&cru ACLK_PCIE_4L_MSTR>, <&cru ACLK_PCIE_4L_SLV>,
+> +		 <&cru ACLK_PCIE_4L_DBI>, <&cru PCLK_PCIE_4L>,
+> +		 <&cru CLK_PCIE_AUX0>, <&cru CLK_PCIE4L_PIPE>,
+> +		 <&pcie_refclk>;
+> +	clock-names = "aclk_mst", "aclk_slv",
+> +		      "aclk_dbi", "pclk",
+> +		      "aux", "pipe",
+> +		      "ref";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie30x4_waken_m0 &pcie30x4_perstn_m0>;
+> +	reset-gpios = <&gpio0 RK_PD0 GPIO_ACTIVE_HIGH>; /* PCIE30X4_PERSTN_M0 */
+> +	vpcie3v3-supply = <&vcc3v3_mdot2>;
+> +	status = "okay";
+> +};
+> +
+>  &pinctrl {
+>  	emmc {
+>  		emmc_reset: emmc-reset {
+> @@ -371,6 +416,20 @@
+>  			rockchip,pins = <1 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
+>  		};
+>  	};
+> +
+> +	pcie30x4 {
+> +		pcie30x4_clkreqn_m0: pcie30x4-clkreqn-m0 {
+> +			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie30x4_perstn_m0: pcie30x4-perstn-m0 {
+> +			rockchip,pins = <0 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie30x4_waken_m0: pcie30x4-waken-m0 {
+> +			rockchip,pins = <0 RK_PC7 12 &pcfg_pull_none>;
+> +		};
+> +	};
+>  };
 >  
-> +obj-$(CONFIG_PHY_STARFIVE_JH7110_PCIE)	+= phy-jh7110-pcie.o
->  obj-$(CONFIG_PHY_STARFIVE_JH7110_USB2)	+= phy-jh7110-usb2.o
-> diff --git a/drivers/phy/starfive/phy-jh7110-pcie.c b/drivers/phy/starfive/phy-jh7110-pcie.c
-> new file mode 100644
-> index 0000000000..57d5d8bf53
-> --- /dev/null
-> +++ b/drivers/phy/starfive/phy-jh7110-pcie.c
-> @@ -0,0 +1,202 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * StarFive JH7110 PCIe 2.0 PHY driver
-> + *
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + * Author: Minda Chen <minda.chen@starfivetech.com>
-> + */
-> +#include <asm/io.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <errno.h>
-> +#include <generic-phy.h>
-> +#include <regmap.h>
-> +#include <soc.h>
-> +#include <syscon.h>
-> +#include <linux/bitops.h>
-> +#include <linux/err.h>
-> +
-> +#define PCIE_KVCO_LEVEL_OFF		0x28
-> +#define PCIE_USB3_PHY_PLL_CTL_OFF	0x7c
-> +#define PCIE_USB3_PHY_SS_MODE		BIT(4)
+>  &saradc {
+> 
+> 
 
-extra tab?
 
-> +#define PCIE_KVCO_TUNE_SIGNAL_OFF	0x80
-> +#define PHY_KVCO_FINE_TUNE_LEVEL	0x91
-> +#define PHY_KVCO_FINE_TUNE_SIGNALS	0xc
-> +
-> +#define USB_PDRSTN_SPLIT		BIT(17)
-> +
-> +#define PCIE_USB3_PHY_MODE		BIT(20)
-> +#define PCIE_PHY_MODE_MASK		GENMASK(21, 20)
-> +#define PCIE_USB3_BUS_WIDTH_MASK	GENMASK(3, 2)
-> +#define PCIE_BUS_WIDTH			BIT(3)
-> +#define PCIE_USB3_RATE_MASK		GENMASK(6, 5)
-> +#define PCIE_USB3_RX_STANDBY_MASK	BIT(7)
-> +#define PCIE_USB3_PHY_ENABLE		BIT(4)
 
-Why not use define and use regmap_fields? You are already using regmap.
 
-> +
-> +struct jh7110_pcie_phy {
-> +	struct phy *phy;
-> +	struct regmap *stg_syscon;
-> +	struct regmap *sys_syscon;
-> +	void __iomem *regs;
-> +	u32 sys_phy_connect;
-> +	u32 stg_pcie_mode;
-> +	u32 stg_pcie_usb;
-> +	enum phy_mode mode;
-> +};
-> +
-> +static int phy_pcie_mode_set(struct jh7110_pcie_phy *data, bool usb_mode)
-> +{
-> +	unsigned int phy_mode, width, usb3_phy, ss_mode;
-> +
-> +	/* default is PCIe mode */
-> +	if (!data->stg_syscon || !data->sys_syscon) {
-> +		if (usb_mode) {
-> +			dev_err(data->phy->dev, "doesn't support usb3 mode\n");
-> +			return -EINVAL;
-> +		}
-> +		return 0;
-> +	}
-> +
-> +	if (usb_mode) {
-> +		phy_mode = PCIE_USB3_PHY_MODE;
-> +		width = 0;
-> +		usb3_phy = PCIE_USB3_PHY_ENABLE;
-> +		ss_mode = PCIE_USB3_PHY_SS_MODE;
-> +	} else {
-> +		phy_mode = 0;
-> +		width = PCIE_BUS_WIDTH;
-> +		usb3_phy = 0;
-> +		ss_mode = 0;
-> +	}
-> +
-> +	regmap_update_bits(data->stg_syscon, data->stg_pcie_mode,
-> +			   PCIE_PHY_MODE_MASK, phy_mode);
-> +	regmap_update_bits(data->stg_syscon, data->stg_pcie_usb,
-> +			   PCIE_USB3_BUS_WIDTH_MASK, width);
-> +	regmap_update_bits(data->stg_syscon, data->stg_pcie_usb,
-> +			   PCIE_USB3_PHY_ENABLE, usb3_phy);
-> +	clrsetbits_le32(data->regs + PCIE_USB3_PHY_PLL_CTL_OFF,
-> +			PCIE_USB3_PHY_SS_MODE, ss_mode);
-> +
-> +	regmap_update_bits(data->sys_syscon, data->sys_phy_connect,
-> +			   USB_PDRSTN_SPLIT, 0);
-> +
-> +	return 0;
-> +}
-> +
-> +static void phy_kvco_gain_set(struct jh7110_pcie_phy *phy)
-> +{
-> +	/* PCIe Multi-PHY PLL KVCO Gain fine tune settings: */
-> +	writel(PHY_KVCO_FINE_TUNE_LEVEL, phy->regs + PCIE_KVCO_LEVEL_OFF);
-> +	writel(PHY_KVCO_FINE_TUNE_SIGNALS, phy->regs + PCIE_KVCO_TUNE_SIGNAL_OFF);
-> +}
-> +
-> +static int jh7110_pcie_phy_set_mode(struct phy *_phy,
-> +				    enum phy_mode mode, int submode)
-> +{
-> +	struct udevice *dev = _phy->dev;
-> +	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	if (mode == phy->mode)
-> +		return 0;
-> +
-> +	switch (mode) {
-> +	case PHY_MODE_USB_HOST:
-> +	case PHY_MODE_USB_DEVICE:
-> +	case PHY_MODE_USB_OTG:
-> +		ret = phy_pcie_mode_set(phy, 1);
-> +		if (ret)
-> +			return ret;
-> +		break;
-> +	case PHY_MODE_PCIE:
-> +		phy_pcie_mode_set(phy, 0);
-> +		break;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +
-> +	dev_dbg(_phy->dev, "Changing phy mode to %d\n", mode);
-> +	phy->mode = mode;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct phy_ops jh7110_pcie_phy_ops = {
-> +	.set_mode	= jh7110_pcie_phy_set_mode,
-> +};
-> +
-> +static int starfive_pcie_phy_get_syscon(struct udevice *dev)
-> +{
-> +	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-> +	struct ofnode_phandle_args sys_phandle, stg_phandle;
-> +	int ret;
-> +
-> +	/* get corresponding syscon phandle */
-> +	ret = dev_read_phandle_with_args(dev, "starfive,sys-syscon", NULL, 1, 0,
-> +					 &sys_phandle);
-> +
-> +	if (ret < 0) {
-> +		dev_err(dev, "Can't get sys cfg phandle: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = dev_read_phandle_with_args(dev, "starfive,stg-syscon", NULL, 2, 0,
-> +					 &stg_phandle);
-> +
-> +	if (ret < 0) {
-> +		dev_err(dev, "Can't get stg cfg phandle: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	phy->sys_syscon = syscon_node_to_regmap(sys_phandle.node);
-> +	if (!IS_ERR_OR_NULL(phy->sys_syscon)) {
-> +		/* get syscon register offset */
-> +		phy->sys_phy_connect = sys_phandle.args[0];
-> +	} else {
-> +		phy->sys_syscon = NULL;
-
-Why not error out if you could not get the sys_syscon regmap?
-
-> +	}
-> +
-> +	phy->stg_syscon = syscon_node_to_regmap(stg_phandle.node);
-> +	if (!IS_ERR_OR_NULL(phy->stg_syscon)) {
-> +		phy->stg_pcie_mode = stg_phandle.args[0];
-> +		phy->stg_pcie_usb = stg_phandle.args[1];
-> +	} else {
-> +		phy->stg_syscon = NULL;
-
-same here?
-
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +int jh7110_pcie_phy_probe(struct udevice *dev)
-> +{
-> +	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-> +	int rc;
-> +
-> +	phy->regs = dev_read_addr_ptr(dev);
-> +	if (!phy->regs)
-> +		return -EINVAL;
-> +
-> +	rc = starfive_pcie_phy_get_syscon(dev);
-> +	if (rc)
-> +		return rc;
-> +
-> +	phy_kvco_gain_set(phy);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id jh7110_pcie_phy[] = {
-> +	{ .compatible = "starfive,jh7110-pcie-phy"},
-> +	{},
-> +};
-> +
-> +U_BOOT_DRIVER(jh7110_pcie_phy) = {
-> +	.name = "jh7110_pcie_phy",
-> +	.id = UCLASS_PHY,
-> +	.of_match = jh7110_pcie_phy,
-> +	.probe = jh7110_pcie_phy_probe,
-> +	.ops = &jh7110_pcie_phy_ops,
-> +	.priv_auto	= sizeof(struct jh7110_pcie_phy),
-
-need space instead of tab?
-
-> +};
-> +
-
--- 
-cheers,
--roger
