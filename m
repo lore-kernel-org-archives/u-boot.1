@@ -4,78 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36491C30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 18:35:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FCC7C30653
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 18:50:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64319888DE;
-	Thu,  4 Jul 2024 20:35:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AB21F888DE;
+	Thu,  4 Jul 2024 20:50:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e/SaRCij";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tYq2fKom";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C2B888C2; Thu,  4 Jul 2024 17:49:42 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 2837288924; Thu,  4 Jul 2024 20:50:48 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1376D888EB
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 17:49:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AAE7888DE
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 20:50:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4256aee6d4fso4720965e9.3
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 08:49:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-701f397e8ffso517742a34.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 11:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720108179; x=1720712979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vDN2EE74D67OuxvnkewPY8hW7zFLVI0XwEl93AFZsEE=;
- b=e/SaRCijiIm64+3Z7g6roFS269637tliQVq35M0vsqcM41SRCDZp5j31o6aJdxcb8p
- WWMpclxncN2qe3bj3TCp1xZ89JuokyiLe/oan3qmoDoPFRzhex1caCh1HYcW+GzMWa2D
- Rr8mxzumy5t+3V/9/pyCcZq/7yqpXEX0W0qPYe6h0D2HBoQ1PZ8/WnD3J0UtNQBSBMo/
- D/FnStHfkJpTgRwq/mIXjJ4ci5SQ87YRqPbYmrD8EqIqKo88mWbpwHbjC6ztc8QAQCL/
- /E2s4cCSpgHFhHwzrpzIjGujZlJ/eXrS3Aq0wTpK944Bx/UtdhdJiTIeGoQZreNUUf6A
- bWxQ==
+ d=konsulko.com; s=google; t=1720119045; x=1720723845; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OlPKAxcdp7uHTf40f9Qzt4qAZY3oOYLTi3e7PH68b6k=;
+ b=tYq2fKomCOqr9g1TethciS0b3BYP6uBV8zOCwuAuU8sFXq8BfNNanzRbvjdo/lTshJ
+ oHP0I3Eo3E/bxWvJBqZMZOFx4pfMuFSDKcDS85ETy+dSAnixahzhuAajZLPWwolJunJu
+ bW2IbySyllVjSqWoWN0AucZ/PF/OBpM75KicQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720108179; x=1720712979;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vDN2EE74D67OuxvnkewPY8hW7zFLVI0XwEl93AFZsEE=;
- b=CxayBbdYuJMLgiVSr7Vbg91yESb3S7DsaeTwmi5IFqxC6iSValv4rWRDQEXhfsn5cW
- RcKFpjKVVNI2ICWu+A24icHQWo7oGD4Cp02P97NcwZ/ouwQqqp1GyAGiMBUCQg2vN9yb
- OpFE5TkYuVWtSm/FeUs9qGc0gNlAZuq/AV2c89pDYUw+r+lEMuRQzjpGtzpNbV4eyISI
- 52YHAkU3w43aePd+cJr2VfQY7ZDw9l3LMSE/5rhn2oJvAoFEWT2aVazamKt75wCwoCgF
- Q0/ysjnNuWhZ5rqLGLgkfOnIik9yz5HHYHQroMEuifp003VFxl7vULX8YKvrEf2ovkhn
- RdIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUugGnmjqSWSQj2oBKXEzkmH+bXerjC9wKPV/GFvFVMZUGQ1bHKJ+mvApurumZeb3onZtIKpVXcqoAiGY9m8+EwHRXiHA==
-X-Gm-Message-State: AOJu0YwjRgTNRI9y2clsRsJovO1jzq7ATW/ZgP3FndI4x58ZZxYDoZQG
- dKSmj2KG9RBClrXvaHt6xcfCi/cep6TTvoitLkLYR9M0dZEH2yMp
-X-Google-Smtp-Source: AGHT+IFMI895zAZjyJb3QQEit0wMv81Vuizgncr08qnfVCREOeVgrV3HokMne0oRx3G9ow2YaE98dA==
-X-Received: by 2002:adf:ed12:0:b0:367:9639:66d3 with SMTP id
- ffacd0b85a97d-3679dd1584fmr1438895f8f.5.1720108179117; 
- Thu, 04 Jul 2024 08:49:39 -0700 (PDT)
-Received: from vitor-nb.Home ([2001:8a0:e622:f700:1bcb:c524:3ed6:f20d])
+ d=1e100.net; s=20230601; t=1720119045; x=1720723845;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OlPKAxcdp7uHTf40f9Qzt4qAZY3oOYLTi3e7PH68b6k=;
+ b=GRrOrqcLSdmgmnzZhuVVRayeVn1hS6KYWMSWzUUDIy5LvIVf+fwOIIxm7CP6Zcw61q
+ Z5bHwDGZX5R4ebp2/iPUoxQQAZEchqOFyuOn2mN+xNdBVS/AICoeNukrdiryPQEwNV45
+ N8oGAUZt9LFouQfH8DH/Ytxl4Sfjp6VsIIEx24HJMSGMQhMcF/TFPl9tj1oIBIvefjHf
+ pkN7ZbaW6P7U6UGLhNcuwLs9O7cRLNvKz+Fkgp5EVYpV/GQFUpfrRvd0cyzpQK0FPmjE
+ 8lB/8RmwQkeeh+FjmbXobriTQF6bY7I8GgHkrvztpxkDnsNawFqnCIZDutws5yTyOttx
+ 0L+A==
+X-Gm-Message-State: AOJu0YyeMDxDbJsz9e8TZ9Jyom7tKgTcWuVYoS4JHB1EmqBJSm1ZGed8
+ jbFTsJ2HPloKHH5eCARUpgAW+ftuLTNNN1VMgts3R2JQDVQfl7f4zTrziTRZwNc=
+X-Google-Smtp-Source: AGHT+IFKMYVLcYTDxMgwlnWohBLxAXBZRdaTWzdn2w8R0XGhRVBR91/lpfH2H4+m6At8eYov9A0RFw==
+X-Received: by 2002:a05:6830:206:b0:700:cf6e:e261 with SMTP id
+ 46e09a7af769-7034a80cfbamr2692107a34.31.1720119044693; 
+ Thu, 04 Jul 2024 11:50:44 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-45.totalplay.net. [189.203.97.45])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3679b1e5f31sm2259284f8f.33.2024.07.04.08.49.35
+ 46e09a7af769-701f7ac8dccsm2454997a34.34.2024.07.04.11.50.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 08:49:36 -0700 (PDT)
-From: Vitor Soares <ivitro@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Vitor Soares <vitor.soares@toradex.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1] verdin-am62: add DFU, USB and UUU fastboot support
-Date: Thu,  4 Jul 2024 16:49:32 +0100
-Message-Id: <20240704154932.434266-1-ivitro@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Thu, 04 Jul 2024 11:50:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Alexander Gendin <agendin@matrox.com>, 
+ Allen Martin <amartin@nvidia.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Jerome Brunet <jbrunet@baylibre.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, 
+ =?utf-8?q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, 
+ Pavel Herrmann <morpheus.ibis@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Trevor Woerner <twoerner@gmail.com>, 
+ u-boot-amlogic@groups.io
+In-Reply-To: <20240623203033.1566505-1-sjg@chromium.org>
+References: <20240623203033.1566505-1-sjg@chromium.org>
+Subject: Re: (subset) [PATCH 00/14] testb: Various tweaks and fixes for Labgrid
+Message-Id: <172011904231.1502730.5769264481687986280.b4-ty@konsulko.com>
+Date: Thu, 04 Jul 2024 12:50:42 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 Jul 2024 20:35:52 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,183 +108,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Soares <vitor.soares@toradex.com>
+On Sun, 23 Jun 2024 14:30:19 -0600, Simon Glass wrote:
 
-Enable USB host as well as USB gadget and DFU support for a53 and r5
-configs. Also, enable UUU fastboot support to download files with
-the UUU tool from a53.
+> This series includes a number of mostly unrelated changes which are in
+> service of running U-Boot on a lab using Labgrid.
+> 
+> Changes in v2:
+> - Add new patch to update u-boot.cfg with CFG_... options
+> 
+> Simon Glass (14):
+>   trace: Update test to tolerate different trace-cmd version
+>   dm: core: Enhance comments on bind_drivers_pass()
+>   initcall: Correct use of relocation offset
+>   am33xx: Provide a function to set up the debug UART
+>   sunxi: Mark scp as optional
+>   google: Disable TPMv2 on most Chromebooks
+>   meson: Correct driver declaration for meson_axg_gpio
+>   test: Make bootstd init run only on sandbox
+>   log: Allow tests to pass with CONFIG_LOGF_FUNC_PAD set
+>   test: dm: Show failing driver name
+>   test: Decode exceptions only with sandbox
+>   test: Check help output
+>   Update u-boot.cfg to include CFG also
+>   smbios: Correct error handling when writing tables
+> 
+> [...]
 
-Additionally, configure usb0 to peripheral mode and add extra
-environment for DFU use.
+Applied to u-boot/master, thanks!
 
-Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
----
- .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  | 11 ++++++++
- configs/verdin-am62_a53_defconfig             | 27 +++++++++++++++++++
- configs/verdin-am62_r5_defconfig              | 20 +++++++++++++-
- include/configs/verdin-am62.h                 |  9 +++++++
- 4 files changed, 66 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-index 9ecb30527404..b3d237c86979 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-@@ -173,6 +173,17 @@
- 	status = "disabled";
- };
- 
-+&usb0 {
-+	dr_mode = "peripheral";
-+	/* Since role switching is not supported in U-Boot */
-+	/delete-property/ extcon;
-+	bootph-pre-ram;
-+};
-+
-+&usbss0 {
-+	bootph-pre-ram;
-+};
-+
- /* Verdin UART_2 */
- &wkup_uart0 {
- 	bootph-all;
-diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
-index 03730b498fd0..464d0bbb159d 100644
---- a/configs/verdin-am62_a53_defconfig
-+++ b/configs/verdin-am62_a53_defconfig
-@@ -73,12 +73,15 @@ CONFIG_MD5SUM_VERIFY=y
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_BCB=y
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
- CONFIG_CMD_DM=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_READ=y
- CONFIG_CMD_REMOTEPROC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_BOOTCOUNT=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_TIME=y
-@@ -115,8 +118,15 @@ CONFIG_BOOTCOUNT_ENV=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_CLK_TI_SCI=y
-+CONFIG_DFU_RAM=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
- CONFIG_DMA_CHANNELS=y
- CONFIG_TI_K3_NAVSS_UDMA=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
- CONFIG_TI_SCI_PROTOCOL=y
- CONFIG_GPIO_HOG=y
- CONFIG_SPL_GPIO_HOG=y
-@@ -178,5 +188,22 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_TI_SCI=y
- CONFIG_DM_THERMAL=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_AM62=y
-+CONFIG_USB_DWC3_AM62=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Toradex"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
-+CONFIG_SPL_DFU=y
- CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_HEXDUMP=y
-diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
-index 8266a7f6e8f1..e39ee2ac6fea 100644
---- a/configs/verdin-am62_r5_defconfig
-+++ b/configs/verdin-am62_r5_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
-+CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_I2C=y
- CONFIG_SPL_DM_MAILBOX=y
- CONFIG_SPL_DM_RESET=y
-@@ -68,19 +69,22 @@ CONFIG_SPL_DM=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
-+CONFIG_SYSCON=y
-+CONFIG_SPL_SYSCON=y
- CONFIG_SPL_OF_TRANSLATE=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_SPL_CLK_CCF=y
- CONFIG_SPL_CLK_K3_PLL=y
- CONFIG_SPL_CLK_K3=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
- CONFIG_TI_SCI_PROTOCOL=y
- CONFIG_DA8XX_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_OMAP24XX=y
- CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
--CONFIG_SPL_MISC=y
-+CONFIG_MISC=y
- CONFIG_ESM_K3=y
- CONFIG_SPL_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-@@ -105,5 +109,19 @@ CONFIG_SOC_TI=y
- CONFIG_TIMER=y
- CONFIG_SPL_TIMER=y
- CONFIG_OMAP_TIMER=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_AM62=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Toradex"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_SPL_DFU=y
- CONFIG_LIB_RATIONAL=y
- CONFIG_SPL_LIB_RATIONAL=y
-diff --git a/include/configs/verdin-am62.h b/include/configs/verdin-am62.h
-index ac44809fdfa5..e8bc22d4c352 100644
---- a/include/configs/verdin-am62.h
-+++ b/include/configs/verdin-am62.h
-@@ -35,9 +35,18 @@
- 	""
- #endif /* CONFIG_TARGET_VERDIN_AM62_A53 */
- 
-+#define EXTRA_ENV_DFUARGS \
-+	"dfu_alt_info_ram=" \
-+	"tispl.bin ram 0x80080000 0x200000;" \
-+	"u-boot.img ram 0x81000000 0x400000;" \
-+	"loadaddr ram " __stringify(CONFIG_SYS_LOAD_ADDR) " 0x80000;" \
-+	"scriptaddr ram " __stringify(SCRIPTADDR) " 0x80000;" \
-+	"ramdisk_addr_r ram " __stringify(RAMDISK_ADDR_R) " 0x8000000\0"
-+
- /* Incorporate settings into the U-Boot environment */
- #define CFG_EXTRA_ENV_SETTINGS \
- 	BOOTENV \
-+	EXTRA_ENV_DFUARGS \
- 	MEM_LAYOUT_ENV_SETTINGS \
- 	"boot_script_dhcp=boot.scr\0" \
- 	"console=ttyS2\0" \
 -- 
-2.34.1
+Tom
+
 
