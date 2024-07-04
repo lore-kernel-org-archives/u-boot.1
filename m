@@ -4,86 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BBBC30653
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 15:02:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5C22C38150
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jul 2024 15:17:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B42438889D;
-	Thu,  4 Jul 2024 17:02:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16FA7888FD;
+	Thu,  4 Jul 2024 17:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vYAaJVHm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L1U2EIkv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8722888F0; Thu,  4 Jul 2024 17:02:25 +0200 (CEST)
+ id 3837E88916; Thu,  4 Jul 2024 17:17:18 +0200 (CEST)
 Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
  [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5D728889D
- for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 17:02:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40B3388926
+ for <u-boot@lists.denx.de>; Thu,  4 Jul 2024 17:17:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
 Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a724598cfe3so73034566b.1
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 08:02:23 -0700 (PDT)
+ a640c23a62f3a-a724598cfe3so74614766b.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 08:17:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720105343; x=1720710143; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1720106235; x=1720711035; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=GhSHZF5RagnmatuVZPtfJ/F0BdNyPCtqFO85wEnxU0k=;
- b=vYAaJVHmr0fIi24qcJFU6PtsYF+psMrbgrR7myJ14Sq0eZzujxgq5f45sRv9iHqUsR
- 3upmRcyt2yN6U/s6LNfPOmB6mWr76kYhzp8H+7UD37NFXi1ATo6/zX7aN/l4otMbgWLH
- wrHhHdXC011Viy7H+TFd7Hmp7PCm5JhM+u4xowgRG1Zm9sXzqEgK9MN8Nn3fB0fSC1gT
- K4FYdKV56wap5bt+rkjR7yrQvwNITjoXm+D7rdjFGjN8K76KU4obqZ/egLHxBnyGi03l
- NFx/nernm6lnn1lMIRSzJ3R4GmC051+c+aiESI6KpFEJSzU2J3pv1ZUp3CR9VBCfFv7P
- Qp+g==
+ bh=usyKFC8Xc5iU1zn9ow5cZELWLMA9wCCu4Dh9JHCpke8=;
+ b=L1U2EIkvGt/p+qHDTkfAbxasXWd21IaHhHEaRL1xEddIpScvXaaw7Zz1emHZSFjP4C
+ jM4/O5U7bd6+Pk38XwW/zcuZVWlobKAIeFs0YgyEdhXChjBWTFjX2iG8Rh7ZYXsMDwZp
+ cnlq+GEIURg0m4bvERZIKnBPn2zHfRV6r414KMQQAzR4wJvB7UpBYYr1439TBc0T9+H7
+ Ig03ADmW8rlyIOOQEZhp2ya/YowHmFsoFL3QbadZb5LCVdw/T1bl+XgSRdS7Y+oo0ePh
+ rdF4legWz8Ifqt02F3g8FRXI4C8MTKLXqW+TrLperyEnuWOIoqTO6n04hJ+fZyS5UY9Z
+ 9W3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720105343; x=1720710143;
+ d=1e100.net; s=20230601; t=1720106235; x=1720711035;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GhSHZF5RagnmatuVZPtfJ/F0BdNyPCtqFO85wEnxU0k=;
- b=Efkvb1okdhRLEr81d7VKBV30DOJoqSL2dlFgA7s7HRSthR9YgxxK3FyDKZ+JwN+ttl
- JgFQz1z67PKw9j7K5SeKpYS7Uu7U+yVn/LNXwj1tEykPWoUMg1jjccy1DXvWMHVcz89j
- FVqxcEeaEdn26KicwrCjPJXNF+0Il5PBHAE5inoYfaGDVlLPQHy2g23Y60Wd1FWTYavL
- 5hY3/f2tHvB3QrYpjtOiCl6bj5jyrWhpax2hogi3IijMIzuKXAwQszab5k4InFeqlLgs
- VWnBwmNluMVe6Yd/jacTBceQz9j5EasPVSlJRYZxZ0k2ptA7oVyH7/pDdZVDW6CoDTGB
- aiKA==
+ bh=usyKFC8Xc5iU1zn9ow5cZELWLMA9wCCu4Dh9JHCpke8=;
+ b=sB2IM/7oav6O+ZFjMoh8iE7CWE5JxwfVKEfOL66iTSXmrkXDcLsjCREiKfAk1Dqslp
+ CSBQOSS3772IcJnmOaoTjn0d8iux0IQF4thkkL6o28C39mGhLECaKD2TO7548j/YTvt9
+ Y8PYXL55gM6iGhYNpas5sg3ZeoWJb8lc+uhP+8KMx2b2KREiPF64TpzhyDOvgU3VpFBj
+ vXBVCct8hWQOhfgz0hDsB2wnz+9FH8AWbF/FSi2RLTrNZTam3mrgAJD6cNNVbte7jByr
+ xT7WL54htTUCOjU0zsryRO5H7LjvPr+K/SL6hlrGiwOsUBmvdDPLSKuEmAG6dZal3O/g
+ SuwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUVaBsj5tVHdDKgj8gdF33YYPj97fRF7YiyNdk7/FmVXExQzUWZLG+tUAoVMnRJm5auP+Cbk3ybF/DIpxNURLrmS5FVCQ==
-X-Gm-Message-State: AOJu0Yz1c3En7ntJma0JFbL1y6Z6pz6OR37HeqaLaBh5b6Djlm9AH7iN
- Y/rsVqR8jZCP5hCP88S1px0/kz4KqbYkKSZ7rMuMle8L0RNvg9vA6x6r8k0SxfE=
-X-Google-Smtp-Source: AGHT+IHEhlkKwzRY22ul+18MDr6oYvIM6ou+l8d6VyAY7NOXeu9Hys3XH0uYqGeR57imOM67xBj4zA==
-X-Received: by 2002:a17:907:7f1f:b0:a72:42df:cd27 with SMTP id
- a640c23a62f3a-a77ba72baf7mr147942966b.71.1720105343151; 
- Thu, 04 Jul 2024 08:02:23 -0700 (PDT)
+ AJvYcCW3JJnK2UMLinxGl15qYz5D4f96czobiJXenkm+xUp5eblOun/poY3/Tfdtvnxf/GLPCDMy99PLRLcxye65ZQ8inTCT4w==
+X-Gm-Message-State: AOJu0YxLqXKaS4PVzznD9eNJixzlEHYQt/NLQFD/FbaCBv9mDjiPaoRS
+ +kGfCgMC7i4UdDwOGlIY5MsL1zQjOOdmHBCP1MhvpFEcHmskz1pY1H+ROVpSqFM=
+X-Google-Smtp-Source: AGHT+IEtUkbqQ1eENtQAkJbyG4kMM2R4YgjVan+WUubBgCmC+juVIKe2SV7OwquNKZ8AzykGKLxzzw==
+X-Received: by 2002:a17:907:969e:b0:a5c:eafb:5288 with SMTP id
+ a640c23a62f3a-a77ba46f87dmr177623166b.31.1720106234670; 
+ Thu, 04 Jul 2024 08:17:14 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::18f8? ([2a02:8109:aa0d:be00::18f8])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a77c54d96f3sm10646166b.189.2024.07.04.08.02.22
+ a640c23a62f3a-a752d634721sm328637666b.105.2024.07.04.08.17.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Jul 2024 08:02:22 -0700 (PDT)
-Message-ID: <99e94938-492a-434a-844b-00f979abdf95@linaro.org>
-Date: Thu, 4 Jul 2024 17:02:18 +0200
+ Thu, 04 Jul 2024 08:17:14 -0700 (PDT)
+Message-ID: <972fadc0-1334-43bf-9c67-409de01b14c0@linaro.org>
+Date: Thu, 4 Jul 2024 17:17:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/5] sandbox: Increase cyclic CPU-time limit
+Subject: Re: [PATCH v3 0/5] video: Improve syncing performance with cyclic
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>, Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Anton Bambura <jenneron@protonmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Nikhil M Jain
+ <n-jain1@ti.com>, Ondrej Jirman <megi@xff.cz>,
+ Peter Robinson <pbrobinson@gmail.com>, Randolph <randolph@andestech.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Samuel Dionne-Riel <samuel@dionne-riel.com>, Stefan Roese <sr@denx.de>,
- Ying Sun <sunying@nj.iscas.ac.cn>
+ Samuel Dionne-Riel <samuel@dionne-riel.com>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Roese <sr@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>, Ying Sun <sunying@nj.iscas.ac.cn>
 References: <20240704074859.2956745-1-sjg@chromium.org>
- <20240704074859.2956745-5-sjg@chromium.org>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240704074859.2956745-5-sjg@chromium.org>
+In-Reply-To: <20240704074859.2956745-1-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,37 +116,83 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 04/07/2024 09:48, Simon Glass wrote:
-> Now that sandbox is using cyclic for video, it trips the 1us time
-> limit. Updating the sandbox display often takes 20ms or more.
+> Now that U-Boot has a background-processing feature, it is possible to
+> reduce the amount of 'foreground' syncing of the display. At present
+> this happens quite often.
 > 
-> Increase the limit to 100ms to avoid a warning.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
->   common/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/common/Kconfig b/common/Kconfig
-> index 87b0ec3ea8f..83c81edac20 100644
-> --- a/common/Kconfig
-> +++ b/common/Kconfig
-> @@ -636,6 +636,7 @@ config SPL_CYCLIC
->   
->   config CYCLIC_MAX_CPU_TIME_US
->   	int "Sets the max allowed time for a cyclic function in us"
-> +	default 100000 if SANDBOX  # sandbox video is quite slow
+> Foreground syncing blocks all other processing, sometimes for 10ms or
+> more. When pasting commands into U-Boot over the UART, this typically
+> result in characters being dropped. For example, on rpi_4 it isn't
+> possible to paste in more than 35 characters before things fail. This
+> makes updating the environment or entering long commands very painful
+> over the console, since text must be pasted in chunks, or the
+> vidconsole device must be dropped from stdout.
 
-Won't this be the case for other boards as well? Maybe it would make 
-sense to bump this unconditionally or adjust the cyclic API so users 
-could provide a hint about how long they'll take to run.
+I'm not intimately familiar with U-Boots event loop, but to me this 
+sounds more like a bug in the console code. I can confirm this issue 
+appears on Qualcomm platforms with the GENI serial driver, I tried 
+enabling CONFIG_SERIAL_RX_BUFFER and it seemed to help significantly 
+(though there were still a few dropped characters when pasting).
 
-Isn't 100ms a bit excessive just to flush a buffer?
->   	default 5000
->   	help
->   	  The max allowed time for a cyclic function in us. If a functions
+Of note, the USB ACM serial driver doesn't seem to have any issues here, 
+presumably since it isn't restricted by the baud rate.
+
+If there is an abort, does this approach still ensure that it gets 
+printed properly on the video console?
+
+Kind regards,
+> 
+> This series introduces background syncing, enabled by default for
+> boards which use video. The sync rates for foreground and background
+> are configurable.
+> 
+> With this series it is possible to paste in any amount of text to the
+> command line. Some sandbox-specific workarounds can now be removed and
+> sandbox video (./u-boot -Dl) is significantly more responsive.
+> 
+> This obviously increases code size, since it enables a subsystem not
+> normally used by default. However it only applies to boards which have
+> VIDEO enabled, which are presumably less worried about memory space
+> since the video code is fairly large.
+> 
+> Also it is possible to disable CMD_CYCLIC and reduce the growth to:
+> 
+>     aarch64: (for 1/1 boards) all +1081.0 rodata +65.0 text +1016.0
+>         arm: (for 1/1 boards) all +945.0 rodata +65.0 text +880.0
+> 
+> Without that, the increase doubles.
+> 
+> It is of course possible to disable CYCLIC and still use VIDEO but this
+> reverts to the current behaviour
+> 
+> Changes in v3:
+> - Drop inclusion of kconfig.h in cyclic.h
+> - Adapt to new cyclic API
+> 
+> Changes in v2:
+> - Add an SPL_CYCLIC symbol
+> - Add a lot more explanation about the header files
+> - Expand help for CONFIG_VIDEO
+> - Fix 'groth' and 'work-around' typos in cover letter
+> 
+> Simon Glass (5):
+>    cyclic: Add a symbol for SPL
+>    video: Move last_sync to private data
+>    video: Use cyclic to handle video sync
+>    sandbox: Increase cyclic CPU-time limit
+>    sandbox: Drop video-sync in serial driver
+> 
+>   common/Kconfig                    |  9 ++++++
+>   common/Makefile                   |  2 +-
+>   drivers/serial/sandbox.c          |  2 --
+>   drivers/video/Kconfig             | 35 +++++++++++++++++++++
+>   drivers/video/video-uclass.c      | 52 +++++++++++++++++++++++++------
+>   drivers/watchdog/Kconfig          |  1 +
+>   include/asm-generic/global_data.h |  2 +-
+>   include/cyclic.h                  |  5 +--
+>   include/video.h                   |  2 ++
+>   9 files changed, 95 insertions(+), 15 deletions(-)
+> 
 
 -- 
 // Caleb (they/them)
