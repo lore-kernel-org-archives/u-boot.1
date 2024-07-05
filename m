@@ -4,68 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2057C38150
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 12:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CF12C3DA41
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 12:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA01C88981;
-	Fri,  5 Jul 2024 14:10:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49A8B8899D;
+	Fri,  5 Jul 2024 14:10:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="s4TOr8Yt";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="SQ2LHhw2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C4488961; Fri,  5 Jul 2024 14:10:44 +0200 (CEST)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::700])
+ id E743388986; Fri,  5 Jul 2024 14:10:45 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2070f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::70f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82BA788984
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 14:10:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 185F38898B
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 14:10:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iGevPX10p8SBHhlVnt1cWJbjB7PWPvc9dpaNhJ3o0wOoL+etQz1rIcW5DcbS6+Snn002J2JszvHLJvB1I417dFWLQQCSb1CYsPrxuUQraV798bvS0vownXw1lFEMQ3J+swgkxh7L7foHyn3665nichXd1swNpbjISaRKrb1+PZwN9/P6KiAUWQuu++YnE7WX/ZZRRo2UodSxceaZXnGTKptCLR3HVe/PDI6MR4MCZTehdYGuS2biwwNe85xkIgapgQvTdlab/j8Cd248a0CK8vYUPpeAJm+t1srTxSDqeUZUO1dw1TYRzGk8514BQ5HVrFWg5Ar3+m4odsWuvJ1s2A==
+ b=ZtIHlhh1VXBrY7+E6YzBrM6Q/r7g+h1Cv5+BhHuzj7PiBUV+9gJ7iiZq9McBsHjyuTfYFCWbz0Vt4dhgJeMGcuuhixpP/fQFMCOD3SBdwr1mv3uiZgjv3owdwDu9i/TLThknGB4fA+IzGrm072PTrih4bUWvKkWKEaFimaemATJ6zc8QhU+nH2sThCI4kpzlUXLAD4a24Rhi5v3oMXtnIU39g1TN8iik22Jse6xP7zTXWLWruZdFEFowK1qLtJigZ61j+ILLnURdmZ7xqclsvpbrHBxmy60Y75R5ntn23fbD5+8OH659hQOlu5kFyoizGDaKzGVi8JlW/Ocf8e2cwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5q3k0eLQEq4TUrTs1WS36+JKxdgM7GOv3OG27InjsyU=;
- b=LHmQm+AP67ZzlSZyWY1ntJc9I38vdf35YbVKA8R20ysfyhrwKILbUdcXDaNMp/EJsbyHTn10Vg4yZUmk1auII5D+JaxIVLR+WN3W81H1Nzlm5RblLKuLqa01ZXMfLcK+NTJlFNkTqS/xlJyrgNN4gpExU+yqMROUomwMi7K0ttr6vGY8bBkaCBfFujvC+CyYp0E7k+mWA+k6eKkkFEP4xma7ZGXBRZUoFSQboXGOT7naZ1XKoG97d6bIZt+jI1jR7SeWh/8O9Oh8HEYemUj390oYxGyHV8Tvr+wT2Yi2luxJKQsK8ebRtTHYQ+NyvpiVAOgfAMKJt6s6d2T/9Z6CrQ==
+ bh=H5Z2ZQsiZA31C52b1cCw/EqWHziDo/ZIFBpFzk7ijrI=;
+ b=PA2f9mEyT8iUO3xdPO/9QFwbWYFK1/nbZow6B9KuNPr4zwy3t8bkkxC7Ha91h50e8fzcx+RAVlscvOcCS3b7z/QfUVxQKEOcN+f3OdIATV8hyUF8fsi+r5j+uiFQX3/P+alzymqIOSmOXK2UIDoitnrF4O1KGJQ0YyVC+DwUwdM+zcFTDUa+l+W8jjUBhl829bG+5RGI560AP9+dVdtA9WeqU6PWnU+DAe0lIw6FIjklEspB7zJAZrTVMlTKoP6r297lUTcf//2E1ER+H918q+6Y3rXPRNXF8HSdefl+Yh7LcVFITMkI9K3CdfpyjtWPER7xJnDHn+0jGikIvilQKw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5q3k0eLQEq4TUrTs1WS36+JKxdgM7GOv3OG27InjsyU=;
- b=s4TOr8YtfKboFaPmbZkIsRq0R9AaASdzQ/CKva6BRy/C1VAavh01XdhdN9K24k9Styy9oIUz0n+CJ3qPVvhQCGYlkYJyZvwvIrKQCz7L0jS+X/IvSbiiTQQtX0fyI7e5Wt6BT6Sy6dVezJEZYWss6/3DtY6rTp3L0J+gZWfaUCy+7PTbPDUpGO+8PSuAewGcU4YpLJcae9CiCzFfDCOAVCidmTm6/Whva3mCoEwa3NNqunQXy9cMRZepZAmzqzSJI0GgGrRM+ctY4gNC1aTvsSEeKAW20B4Mmg2xHJkgL5GGoORJiFWdTRbSEL+PrAhrIISaQeQCPEpoSbbaBvsIcg==
+ bh=H5Z2ZQsiZA31C52b1cCw/EqWHziDo/ZIFBpFzk7ijrI=;
+ b=SQ2LHhw2K1fnoB2Vjgj9mrXTUwmGtT2L1q7Fou8WkArZDX3Rs9d4BF7FiPUS4KqGMfh8zNZXKxtarAqjBUx6WPDw7kzrdpyvR37RIU09iFFueUUOsp6ANwGEeQ4Pudny/fbJlq+r+N00S01lr7XHT0mbY6LanmUIRQ3tS/cYZlauArL9a+NaTYTM1dpKYDZOo+a+7bH2I6PLMdcQqhTxOn5xEqUX1Mr2guvyelCEN7UYnfzZ6tae8MijLATtPPCkOGHGMFFRVBMc8QuiRjHsWoQE8+weKr09AXpIUdjiyKG+IcKAuzru6kPwHa4N/yVfYdHHLyMyie1YIpB0IwvxYw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by DU0PR08MB9395.eurprd08.prod.outlook.com (2603:10a6:10:422::17)
+ by GV1PR08MB7315.eurprd08.prod.outlook.com (2603:10a6:150:1e::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.25; Fri, 5 Jul
- 2024 12:10:36 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.29; Fri, 5 Jul
+ 2024 12:10:33 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7741.027; Fri, 5 Jul 2024
- 12:10:36 +0000
+ 12:10:33 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
  Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de,
  Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>
-Cc: Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v4 1/2] led: Implement software led blinking
-Date: Fri,  5 Jul 2024 16:10:22 +0400
-Message-Id: <20240705121023.2266479-2-mikhail.kshevetskiy@iopsys.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v4 0/2] led: implement software blinking
+Date: Fri,  5 Jul 2024 16:10:21 +0400
+Message-Id: <20240705121023.2266479-1-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240705121023.2266479-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20240705121023.2266479-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: LO4P123CA0060.GBRP123.PROD.OUTLOOK.COM
@@ -73,79 +70,79 @@ X-ClientProxiedBy: LO4P123CA0060.GBRP123.PROD.OUTLOOK.COM
  (2603:10a6:150:7d::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB9395:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22d81b2d-fd9a-48f7-89d6-08dc9ceb7a06
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV1PR08MB7315:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8e95ce6-6b75-43af-c160-08dc9ceb78ac
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?K9EKt3U4bJ3fhXw3ywt83EdDnYxRwQEjHBbo7EBNj1tIZXrBrezhsbiBTF47?=
- =?us-ascii?Q?i3wNtTFL2dMMIGzu9arz3wMVrxj/szMsgZEKbLg8S3U43FwWSMle87LZ4zKd?=
- =?us-ascii?Q?+qvmIwPb8oH6UWVBq3YQr+o8oFyfMQTQEZoXi8dCMbUMswA7PkLp9TaUp9jt?=
- =?us-ascii?Q?10xY3MNUpQYDtRw1uKyTUIdeHrnMG/2HWpYWRAGoRT6KjiVS7zLITL90sjLB?=
- =?us-ascii?Q?fY2ddqGzwLF+CtLrYqcRZKPYOV0CDTS9iCpIAmedE66bjjftU8xToP0L0IJK?=
- =?us-ascii?Q?rXP56y5J71R4AwCX5wFhafkRD1HYUtM4M14sf2b1pFkeFFRratjIRQHGcpyf?=
- =?us-ascii?Q?aDkjOY+3YOLafjPvacBE5O8NsPJlgjWm0rhcVW7OivU/fylBhYpoMkM4rKWF?=
- =?us-ascii?Q?axQPrS4AoB+ntjcnxAXft6dXw6x9KdXKzeWQRaPTsEYZFFTmxydM6c98qu/R?=
- =?us-ascii?Q?1qh5oqA4RcoHn929oCot7Zsdqk5JUbIlgN2PuQaFH4FCNwESG68b/wJSLOzc?=
- =?us-ascii?Q?dv+G5nMG5FiP6Tlb8uqqVWTSZ8NCHdt8QIqFXZHTPXdVqO20V9bOxQvzBHIy?=
- =?us-ascii?Q?FLvYYZKMybcSSgA4YhfXh7U8ggDjhpsDnK5QScFlzkCvBYjFjdOG3j8fRPjw?=
- =?us-ascii?Q?sYQPNoy3KlNossJTr1j3Y+DXH5y6mUfM81Z08qbcP1oGb6iOcsqQXLP7rUGh?=
- =?us-ascii?Q?yNWSbENFkZMbls/GUYvIpTNwDUapt6JY+wIAokVh2ZwuZNaR8euEpjGC+tOc?=
- =?us-ascii?Q?rjgX5UsaZq75f0oEPHlNQKCwBV7X6Hn6f2b3lTMK2dmKJNWScLpDda9l1Uh7?=
- =?us-ascii?Q?6XZYWG3gGJN0k3+k5TKlPhXKe+Hszvr7WvHC0R6yZE4lP9lXF4HNK7qx+5Go?=
- =?us-ascii?Q?nkj+DPMBnPIrwtJXoyjFWI+hu5mJ/+Flg9wl/LvWDo/ApCeAvDd1zKyf/IZr?=
- =?us-ascii?Q?GMYUddb8igZDoSAm4U2cc90GvUOdoJejNvKfZ+DnHooWMI00FgdV2jpZHE/a?=
- =?us-ascii?Q?9E/LjvMLyHr1P7/OU4qR2KVh0jhPWZOXFr/iwVtAQNo6AFtFgb/c6F2Aehik?=
- =?us-ascii?Q?TSS7Ck4p0BNyM23T8VAMfhx7OQKEZT2UwMyLwig/lrwIgT9he66RT6Fc23AZ?=
- =?us-ascii?Q?AGYQbz/XrMSs907s35KKBEqG959I40UTyRahBBY8Zm8810j4JSJugLMvrvTG?=
- =?us-ascii?Q?YqOk3ZjGSlo5k7d+3eYGm7aMCTQ25z4fGcL6kOLgQr8fxu0c+4M53coz7Kxi?=
- =?us-ascii?Q?SJmYeI64MG8VHqkRPukX+hXwzBOSP/pEFTKkyrL1hSC7tQhAtNDCggS8SSvD?=
- =?us-ascii?Q?j0Of2ZGU+QOENg+3oqqCPTk8vHKOfbqZ95pKWUIcoEZvoecs0u4IKyB5VHP/?=
- =?us-ascii?Q?NPcISsJ6B1DLV6B+RSf/QTrhOmXFmjvoRcqaVtx+Zg6rM0VPgA=3D=3D?=
+ ARA:13230040|1800799024|376014|52116014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aJTUXa8vu4tbB6B7giDYnicsnsTIshVRz+ZGAIIBW7RpVq39jDYbnT+8LXVW?=
+ =?us-ascii?Q?WN7EorEF+aUHNck/OWJtKQC9uvvcnRWiI7MtX1IUcrvH1qX1W3rOW0YzpF2K?=
+ =?us-ascii?Q?fbO+ZV9hqdoCUOQA308YDDRvqHOnjF6T9UoEWUCOJU7SfSd0CeejuZX0vO2h?=
+ =?us-ascii?Q?jhL1yd3GUOeoWFBBaX9JuNeMaZfbksADlkacfAztrikTjdtO/ylLRqVdVuux?=
+ =?us-ascii?Q?EwrTWDFX3Uw84/zy0szDcGchy31DYt+4PvxgliTrW+5XJf5Ug45Yxjv4xPuf?=
+ =?us-ascii?Q?UhIa62UxGcgn0uUQI6VJaYMlqnH7x6mi+znRbCmAVzLsKF80kJNpddqW5kT2?=
+ =?us-ascii?Q?5LgPnaAAXnCyPBItO1K148Fj/0euAuoORODnGKPasRrQXlHxDLx3crZAG202?=
+ =?us-ascii?Q?P1mSBOf9bm/ZLgm1SiY2dkS6jnKdK6W2JOise5KAmynRQ5N/JxOuEbtOwRKB?=
+ =?us-ascii?Q?F12YIKX4VpwmBdLxMihMkTR5JXWWZcsyWnWCFb697xagABtkhsG0KUI5zUYT?=
+ =?us-ascii?Q?1/wojFdFB557j8fx4jlKMuGH2k05aWIZDUcIyqWCx+m+y7yf/e+BmV6x90jX?=
+ =?us-ascii?Q?FdrxzLyrOjhq2qfl37ZrFh8LId02vG1XFyC5byw+kKBckYIUb1fDhsDYSOqO?=
+ =?us-ascii?Q?AbQAkx9bYX1j5qqpxu+YxWD/9Ids14amDldB2gprNQTs7of/FOE4wVHdAZJD?=
+ =?us-ascii?Q?WM2+w9SdGddl+K9dk1PopXXOgEEI+mMVa0+0y1czCO4o1whqvwN/euzqXwzr?=
+ =?us-ascii?Q?ZBvJMWJn2lE8cEi33A2IvQNXsIqE8uC3ZpAc7Ir1X+wHCpTpFsOqvEsXZPli?=
+ =?us-ascii?Q?Qick8huc5lbR7L7yvXib87t/Pe5pcm6ZPlZU+XDb/aAAPWIuJ7meO3CXGIvn?=
+ =?us-ascii?Q?4qWo4sXsCYDOhQZ22+TuU28bwDKetvtHPYG0Ixe4a4OIsDgwHC/+K5lJ2HV0?=
+ =?us-ascii?Q?oxldJsczf/eW63qoGGgkqMyd4rvZDDdLW68hIdEsapzDuUSaFmz5+BewJi6v?=
+ =?us-ascii?Q?z9yFU4PKvqQm9S08D8Ior4sJoo/Wy7crZN0lSNBJDMBtJNPc8ms2tqwh88UP?=
+ =?us-ascii?Q?44Hbnwm77O+Qx9f4GzTVb3fBzXAcZ6sZm5ZAUE0xQZW+UfZDc8NxSrhMuezZ?=
+ =?us-ascii?Q?TdTCObr7U+Bada+IJgbdymOOOggb3QeR2Mls6wZu0ivPGqZ4/JJvZFNtlE3Z?=
+ =?us-ascii?Q?r9jRRGjHZfVUDVqobmrF2qiycnr2xzRb7CbZkG+otnLVIbH/U51Wy7+Dk6Ip?=
+ =?us-ascii?Q?fVsPsd4cyJzx9zSN2XC0Im9MbU10RWTqQVSKXC33SEKLGJ6QGaMjC/GBLiUQ?=
+ =?us-ascii?Q?oduaRNmKroPjR+j+tag3ZWcHii6riDrq8ULurqXsV0C6cM0lSn5kYUtEiM1d?=
+ =?us-ascii?Q?b9MjsvCYihx6Lq/VPkz2jbBzTHe92PaQubkHRG1Je8lIkNhJ9A=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014); DIR:OUT;
+ SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?B4BZEPV7tu3qlnoSZG+bBcXm686lOYqRWTXS3e1djmv0S6oyh/Ln/GZECrut?=
- =?us-ascii?Q?Wtv2bsW2eu5ZS9qpwHAW8PpyyTrBIk0D2+IBsyxaVB7zF1UggosCuSO9ssm2?=
- =?us-ascii?Q?N0hbJcpqq3XRRiZcNZJqtdK/xXP0zPa37lh1hQRP71zPvwQ1gUqZ9rpz0l1X?=
- =?us-ascii?Q?uwGHSk5O/wyEGRkh+/I2bxypKgTMptQXnVKYNWGEICC+uDvqSNOfS2H8CN9r?=
- =?us-ascii?Q?a1EuFSymt2zm5fmzCk7YwCYZ7caDi8EVn8QyUMILZbp7L1dtF/Q1Y3X5BJUS?=
- =?us-ascii?Q?ITMe54wJtLsgWIFf9MY67MbfD7YNGfxQRUj/x3zIX5kfZ4/B20zGH28cnqKU?=
- =?us-ascii?Q?XPgOmtELDnTvwvp3MlIKcMC1t/7FWcBoXLBoTPCMlAwuA5Tt1Jmwm/gyAjd4?=
- =?us-ascii?Q?mycN/YtSJP6oPecsxnb2VLBqCp8bpUfKWpf2GgWPz1TVAWDlUfzl10b/IFxR?=
- =?us-ascii?Q?8x5SfVxAa76gGBq5WMHIjDr9ngwDvI0jaRENnOqux0j8XSx37bnDj3ZmIc4F?=
- =?us-ascii?Q?P1zDXVvcyVKtRHsyrytm0kSrsBs3b7D8XQO5d0suug4jQDLdsCFTXzq0WS4R?=
- =?us-ascii?Q?xZeuLxdf96Ksm1cAO70L5aPnh1n/TaAHtfYbBG7CL5Y2HEAriKRwouRSQI6K?=
- =?us-ascii?Q?X/3JV4xeO7KVMzTBblAy9wNtQjqQG2uqwc+90Uf4aH0FGqf7hTTYnbUnHL2y?=
- =?us-ascii?Q?lAM4FlvXKGef6ir5p47kNCDQLOX0pA8QGYzA50EIsXBXXLadawGL8ADjciea?=
- =?us-ascii?Q?//d5owpo7QjlNCr/xoGdbvmhJ8XQUpE0dKr9JULJ+XYb7YtPVWzOHuygwYkx?=
- =?us-ascii?Q?+cJgyiozafQZ5piwVebSJWlC5Lmv4XQvP0zZpByjdOYzC+0V4+ZIoMqGeSzj?=
- =?us-ascii?Q?oTh1+R/ZZGbpisziVcxJJnQ7JXgZ1gKK7VWet7bZnrCNEJK625X3iQdXns6J?=
- =?us-ascii?Q?g4iETrBAaFgsYsYU31y1L7yvY/Aj3l4GkZWzfXb6q641U6bSigI7IM8xhpBw?=
- =?us-ascii?Q?9gk8bWAU0rJH5oBFb/aRowPbVs6lRa5QePADVXdJN2d/4Bp/kClFaCOyaoft?=
- =?us-ascii?Q?2P/Kpk8PpjF9U/2Y01J3xTfa7ybJCUdQLQgOwjyirQNK1vWaAaZPb8r0dD0H?=
- =?us-ascii?Q?ZU00kax10up/MNsyruvSV0bOJXvGslNwGIzWNxFeWqWIsPWmv336HJYFNrLk?=
- =?us-ascii?Q?+TYO4INq6ygMA4T+TZw952w2sMiN35eN9wif1clBpi26RNoUteCzjIOrrrIZ?=
- =?us-ascii?Q?wTlF76qCBWCecy6RP4SX/xWqj9vo9m7iaBaKb44SfCFZqtmKqIkH5I7YB6vZ?=
- =?us-ascii?Q?ZaN7kqpsgXhF23nLr+rA70fUr0wTuMLrtFw24HByMK9yAfmsntpvkSovGfuR?=
- =?us-ascii?Q?+XmXNZHSmtyWAw4Mc6gA/8RHC34um0uFyugOcvo2A/0ADkNS859FC1U8boyh?=
- =?us-ascii?Q?O9YXrQaIvWqSXzQlhgPPzM1ug5Eof0p/+iWhUL0aXNh+LAL29DlF6VgraajH?=
- =?us-ascii?Q?cv+JsP4tupS96KkVNiLQf8yLOGnnzr8lxTd0AQ7Dre81upo+otXfPFFtzujZ?=
- =?us-ascii?Q?W6chvHl8KDmYPInlaW01oW19dyCvAdg0TOb2NAYTc5OXzeBttvEkYQZ6G3rK?=
- =?us-ascii?Q?zhkDoKc6VFyednpCvrFTUAc=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?db0kKcGDH00W1MOD0uCm/eo1u5yPeBM3Iuo8b11rEHsCBrkZ8V+EXzMwGlHG?=
+ =?us-ascii?Q?fLni8RseS7s4lUEjj8DjPBrRMHHinc8FHMlU/t1uoWcjbl+icy0uIkoYawGk?=
+ =?us-ascii?Q?z0UgKJ3yNIOrZ5CLefE2WdeNpbofW0onGKmMdZv/O61yITfeTCNSy4qaFWRw?=
+ =?us-ascii?Q?3dqMJH7R9v16zqff8V20f7PtJ1jgOSri2RU0Mp+vEqV7ekL8Y7ywfIZCqVk/?=
+ =?us-ascii?Q?409tyEPvU2V2zYEGcHEV1/ztneHkB8izHwJfG5sg0IRWmt4F4cVHK+oBuDre?=
+ =?us-ascii?Q?iIsboig6oUgduaonUp6R+qk5/Zq0EVrmLrYa7YxYhksY3OrwuMI4yKG26Fy+?=
+ =?us-ascii?Q?Y4ewgwF7hWTVpanxm9r/ad4iJGzyF0bDXsAJ+zBpqIpGsCKmTPzmYuVWvp0p?=
+ =?us-ascii?Q?yNdn0t1w/rAqW7wY5n+5ct1KneYfc7TtmiMlk4EmbuPBzEL2ik0o3vh/mJWW?=
+ =?us-ascii?Q?A9szTwnNDp11P+IMAQKqrNx0XMPmONQw1VGQkcQQyC4R/5yu2uh5q5ynV5tz?=
+ =?us-ascii?Q?VHRlEar5reLb04tbZZ2EZWir7GrxBVtTdXWttv4FyedZbvtf+hoCNQf/G4fN?=
+ =?us-ascii?Q?KqTNyBcfy15IZJ5uME3G9V0p4weaIFRzEs4t1ldYREmjCg75esVeumqYEdFM?=
+ =?us-ascii?Q?69O0ct4B79XXtcdWKd04jRGEomcYb5tAWWnhAss1jgCipE4geOVo9w+k1zkD?=
+ =?us-ascii?Q?Ig/GX/v1UWbm75vlzuzhhs9Hw2yZBKsf5Ep+lnaEBov5FOxk7WLVY0xDlTAn?=
+ =?us-ascii?Q?kMmOSKXhMNzOMm/eaAAB4RQWSHR8vW34e01Z/RbWZdvN6e6DAcyNUbfNNU5L?=
+ =?us-ascii?Q?0couuAwlcmyc3X6uX/9hJVXVYSbF31aWQDzPPYV4bKOvKalskYZcd+cPkRkE?=
+ =?us-ascii?Q?1jPFgTHIYjJk2TrCxTGFBZfnqkWqSUjubbcTDfcRpcnQ9d2V4PLmCpcBSlj7?=
+ =?us-ascii?Q?A+bOIlXgHWtKThl9VdLbVATLd53RZJaH5LRpkuLMKyQoRcDcZvAz2ZjR3wGd?=
+ =?us-ascii?Q?jhdFow4uKOT2RvU49iHoM3MMFPQ/LnIKeHPIj/AO6ewcVcguWyyRc9YiuPMV?=
+ =?us-ascii?Q?lGAEL2bFd74NlB6VBxl7KR9tmhcu90F946rD0hYbRQFr393tULpIxLd4dpCb?=
+ =?us-ascii?Q?IW9GswzqNwhX0I+hQ3vMCSeMV0KIaKjRlyMYurrllNrh43pt86ZVxWvzDP9F?=
+ =?us-ascii?Q?m18/zN0ZoU9Ltop6QyOQ3AuuNh2kizbg6kpwvPMoXDzxKD4BPQY+3dZsN44f?=
+ =?us-ascii?Q?T+yZJMKTlasnTvcFPRVSLl/PGdnXy5jGTr6+adBLrHK1KEmGQpxxa2kMdOuw?=
+ =?us-ascii?Q?D2h8iexbUgHKNkMwhqTLPuvpM7fWSux3u8FyUfRe4x+88cuLbHMO4I1AqLgT?=
+ =?us-ascii?Q?4G5GcwW49coRzcrxuNyLJW6AXd1oJetJaod2bZCI4g65DrNylVjJAoI8+FdI?=
+ =?us-ascii?Q?hAWVm9vuKPmu93ajqwe6Bdll1B8NZpBIx0pzuyCPxqI4e89wIBFmIz1xcivi?=
+ =?us-ascii?Q?+mZ5X3FaFcHUtMVZ2j4BTTv45dqXT+QZ6AZgncHE1SuQ6fnAOn2GqFdNEsXV?=
+ =?us-ascii?Q?WuN2ig/XvHBc6bPFODhw4jcpLvlmQtDKoeWH435abxZY+AixEJugd2FMKqOw?=
+ =?us-ascii?Q?ww=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22d81b2d-fd9a-48f7-89d6-08dc9ceb7a06
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8e95ce6-6b75-43af-c160-08dc9ceb78ac
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 12:10:35.9844 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 12:10:33.7380 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uoMFgeGAd7cKcrzXy39MPBfX31sm/FMhMzcPJK6YCuzAjby1t5qlhe0n6Bt/MdTyXGwS7Q7yIe5BkWSsmE6tfcFaYrzA1H2ue/bzB60poUw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9395
+X-MS-Exchange-CrossTenant-UserPrincipalName: QsOft0X/lPyxRUtwheWjTPS1IrMPeR5GYLfbicrmEvDaZNLoGw+uzoeUXV71oA6XlmeIgP9veQNGdCFFUiREpXLtt5hfQpBdfx5ybBNukX0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB7315
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,255 +159,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+v2 changes:
+ * Drop sw_blink_state structure, move its necessary fields to
+   led_uc_plat structure.
+ * Add cyclic_info pointer to led_uc_plat structure. This
+   simplify code a lot.
+ * Remove cyclic function search logic. Not needed anymore.
+ * Fix blinking period. It was twice large.
+ * Other cleanups.
 
-If hardware (or driver) doesn't support leds blinking, it's
-now possible to use software implementation of blinking instead.
-This relies on cyclic functions.
+v3 changes:
+ * Adapt code to recent cyclic function changes
+ * Move software blinking functions to separate file
+ * Other small changes
 
-Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
----
+v4 changes:
+ * refactoring of led_set_period() function
+
+Michael Polyntsov (2):
+  led: Implement software led blinking
+  led: Add dts property to specify blinking of the led
+
  drivers/led/Kconfig        |  14 +++++
  drivers/led/Makefile       |   1 +
- drivers/led/led-uclass.c   |  17 ++++--
+ drivers/led/led-uclass.c   |  50 ++++++++++++++---
  drivers/led/led_sw_blink.c | 106 +++++++++++++++++++++++++++++++++++++
  include/led.h              |  17 ++++++
- 5 files changed, 152 insertions(+), 3 deletions(-)
+ 5 files changed, 181 insertions(+), 7 deletions(-)
  create mode 100644 drivers/led/led_sw_blink.c
 
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 9837960198d..dc9d4c8a757 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -73,6 +73,20 @@ config LED_BLINK
- 	  This option enables support for this which adds slightly to the
- 	  code size.
- 
-+config LED_SW_BLINK
-+	bool "Support software LED blinking"
-+	depends on LED_BLINK
-+	select CYCLIC
-+	help
-+	  Turns on led blinking implemented in the software, useful when
-+	  the hardware doesn't support led blinking. Half of the period
-+	  led will be ON and the rest time it will be OFF. Standard
-+	  led commands can be used to configure blinking. Does nothing
-+	  if driver supports blinking.
-+	  WARNING: Blinking may be inaccurate during execution of time
-+	  consuming commands (ex. flash reading). Also it completely
-+	  stops during OS booting.
-+
- config SPL_LED
- 	bool "Enable LED support in SPL"
- 	depends on SPL_DM
-diff --git a/drivers/led/Makefile b/drivers/led/Makefile
-index 2bcb8589087..e27aa488482 100644
---- a/drivers/led/Makefile
-+++ b/drivers/led/Makefile
-@@ -4,6 +4,7 @@
- # Written by Simon Glass <sjg@chromium.org>
- 
- obj-y += led-uclass.o
-+obj-$(CONFIG_LED_SW_BLINK) += led_sw_blink.o
- obj-$(CONFIG_LED_BCM6328) += led_bcm6328.o
- obj-$(CONFIG_LED_BCM6358) += led_bcm6358.o
- obj-$(CONFIG_LED_BCM6753) += led_bcm6753.o
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index f37bf6a1550..03907a12407 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -58,6 +58,10 @@ int led_set_state(struct udevice *dev, enum led_state_t state)
- 	if (!ops->set_state)
- 		return -ENOSYS;
- 
-+	if (IS_ENABLED(CONFIG_LED_SW_BLINK) &&
-+	    led_sw_on_state_change(dev, state))
-+		return 0;
-+
- 	return ops->set_state(dev, state);
- }
- 
-@@ -68,6 +72,10 @@ enum led_state_t led_get_state(struct udevice *dev)
- 	if (!ops->get_state)
- 		return -ENOSYS;
- 
-+	if (IS_ENABLED(CONFIG_LED_SW_BLINK) &&
-+	    led_sw_is_blinking(dev))
-+		return LEDST_BLINK;
-+
- 	return ops->get_state(dev);
- }
- 
-@@ -76,10 +84,13 @@ int led_set_period(struct udevice *dev, int period_ms)
- {
- 	struct led_ops *ops = led_get_ops(dev);
- 
--	if (!ops->set_period)
--		return -ENOSYS;
-+	if (ops->set_period)
-+		return ops->set_period(dev, period_ms);
-+
-+	if (IS_ENABLED(CONFIG_LED_SW_BLINK))
-+		return led_sw_set_period(dev, period_ms);
- 
--	return ops->set_period(dev, period_ms);
-+	return -ENOSYS;
- }
- #endif
- 
-diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
-new file mode 100644
-index 00000000000..ab56111a60b
---- /dev/null
-+++ b/drivers/led/led_sw_blink.c
-@@ -0,0 +1,106 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Software blinking helpers
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+
-+#include <dm.h>
-+#include <led.h>
-+#include <time.h>
-+#include <stdlib.h>
-+
-+static void led_sw_blink(struct cyclic_info *c)
-+{
-+	struct led_uc_plat *uc_plat;
-+	struct udevice *dev;
-+	struct led_ops *ops;
-+
-+	uc_plat = container_of(c, struct led_uc_plat, cyclic);
-+	dev = uc_plat->dev;
-+	ops = led_get_ops(dev);
-+
-+	switch (uc_plat->sw_blink_state) {
-+	case LED_SW_BLINK_ST_OFF:
-+		uc_plat->sw_blink_state = LED_SW_BLINK_ST_ON;
-+		ops->set_state(dev, LEDST_ON);
-+		break;
-+	case LED_SW_BLINK_ST_ON:
-+		uc_plat->sw_blink_state = LED_SW_BLINK_ST_OFF;
-+		ops->set_state(dev, LEDST_OFF);
-+		break;
-+	case LED_SW_BLINK_ST_NOT_READY:
-+		/*
-+		 * led_set_period has been called, but
-+		 * led_set_state(LDST_BLINK) has not yet,
-+		 * so doing nothing
-+		 */
-+		break;
-+	default:
-+		break;
-+	}
-+}
-+
-+int led_sw_set_period(struct udevice *dev, int period_ms)
-+{
-+	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-+	struct cyclic_info *cyclic = &uc_plat->cyclic;
-+	struct led_ops *ops = led_get_ops(dev);
-+	int half_period_us;
-+	char *name;
-+	int len;
-+
-+	half_period_us = period_ms * 1000 / 2;
-+
-+	name = (char *)cyclic->name;
-+	if (name == NULL) {
-+		len = snprintf(NULL, 0, "led_sw_blink_%s", uc_plat->label);
-+		if (len <= 0)
-+			return -ENOMEM;
-+
-+		name = malloc(len + 1);
-+		if (!name)
-+			return -ENOMEM;
-+
-+		snprintf(name, len + 1, "led_sw_blink_%s", uc_plat->label);
-+	}
-+
-+	if (uc_plat->sw_blink_state == LED_SW_BLINK_ST_DISABLED) {
-+		uc_plat->dev = dev;
-+		cyclic_register(cyclic, led_sw_blink, half_period_us, name);
-+	} else {
-+		cyclic->delay_us = half_period_us;
-+		cyclic->start_time_us = timer_get_us();
-+	}
-+
-+	uc_plat->sw_blink_state = LED_SW_BLINK_ST_NOT_READY;
-+	ops->set_state(dev, LEDST_OFF);
-+
-+	return 0;
-+}
-+
-+bool led_sw_is_blinking(struct udevice *dev)
-+{
-+	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-+
-+	return (uc_plat->sw_blink_state > LED_SW_BLINK_ST_NOT_READY);
-+}
-+
-+bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
-+{
-+	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-+
-+	if (uc_plat->sw_blink_state != LED_SW_BLINK_ST_DISABLED) {
-+		if (state == LEDST_BLINK) {
-+			/* start blinking on next led_sw_blink() call */
-+			uc_plat->sw_blink_state = LED_SW_BLINK_ST_OFF;
-+			return true;
-+		}
-+
-+		/* stop blinking */
-+		cyclic_unregister(&uc_plat->cyclic);
-+		uc_plat->sw_blink_state = LED_SW_BLINK_ST_DISABLED;
-+	}
-+
-+	return false;
-+}
-diff --git a/include/led.h b/include/led.h
-index a6353166289..26955269d3e 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -20,6 +20,13 @@ enum led_state_t {
- 	LEDST_COUNT,
- };
- 
-+enum led_sw_blink_state_t {
-+	LED_SW_BLINK_ST_DISABLED,
-+	LED_SW_BLINK_ST_NOT_READY,
-+	LED_SW_BLINK_ST_OFF,
-+	LED_SW_BLINK_ST_ON,
-+};
-+
- /**
-  * struct led_uc_plat - Platform data the uclass stores about each device
-  *
-@@ -29,6 +36,11 @@ enum led_state_t {
- struct led_uc_plat {
- 	const char *label;
- 	enum led_state_t default_state;
-+#ifdef CONFIG_LED_SW_BLINK
-+	struct udevice *dev;
-+	struct cyclic_info cyclic;
-+	enum led_sw_blink_state_t sw_blink_state;
-+#endif
- };
- 
- /**
-@@ -118,4 +130,9 @@ int led_set_period(struct udevice *dev, int period_ms);
-  */
- int led_bind_generic(struct udevice *parent, const char *driver_name);
- 
-+/* Internal functions for software blinking. Do not use them in your code */
-+int led_sw_set_period(struct udevice *dev, int period_ms);
-+bool led_sw_is_blinking(struct udevice *dev);
-+bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state);
-+
- #endif
 -- 
 2.39.2
 
