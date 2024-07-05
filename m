@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3EFC3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 22:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D61C38150
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 22:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2232F889D2;
-	Sat,  6 Jul 2024 00:39:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88F9C889E6;
+	Sat,  6 Jul 2024 00:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AC0MuW3w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jo6ot7Fm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD57E889D4; Sat,  6 Jul 2024 00:39:38 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 54899889DB; Sat,  6 Jul 2024 00:39:43 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CE1488630
- for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 00:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34F35889DB
+ for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 00:39:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-700d3ffc28cso1123542a34.2
- for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 15:39:36 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5c652d56313so681601eaf.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 15:39:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720219175; x=1720823975; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720219180; x=1720823980; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=inaqnmCoHA2sOxix9421U+bE54I8EvZZug9W9FWbn5o=;
- b=AC0MuW3wj5vJLL0VWX59I5asKTkgvPvPbcoaQubs6jCULmgXSgSEQT29Fws4/o2A/p
- NtJEozVI8iKqMjpWpM8wieTCU0Itnk6s/gbJ0VmidG9p9cii9j8diwz3XPL9Bjjgaht8
- oo1huNKkmG4o4Rgez+DNSzfQgywrPL8gz2xUQ=
+ bh=m3Qf2q4lIwOnSOSiXdJEJYTBsQoTubJ1kT7pqUkd76Q=;
+ b=Jo6ot7FmkVAi9EzIcRiC6/DKZm6Kg95C+D5Zdms3TiANalVehzQeolH/oUVcHCqtFx
+ xCminJBb6x+7o+TsMZGSt9BCNZhPDeFC1lSfH94jmZG+YcFBhqcRM3XweAAlxzqbEjkD
+ zVC41lJ8l8Cx1NdcnvQZeePpni0Na0NB6I5Mk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720219175; x=1720823975;
+ d=1e100.net; s=20230601; t=1720219180; x=1720823980;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=inaqnmCoHA2sOxix9421U+bE54I8EvZZug9W9FWbn5o=;
- b=r5+z9PW48BLGZ5Et1/uwhMBUFLTEKzcaTFjfW7GcJOnm71grk44MpqYazuHmeh/oap
- nDK8+mjN+yewJmZeN//UeRCns1F+bqpYMPy2SQyliMz5PVswnw8DHgAQ5VCZnjVzPsOB
- Pg5xn9Yu2YJ55RRTaXBl2XJSZUguhHxLEin+K9gR0UCzB5uvD/zpaPv25cB2t8Odx27r
- ZQ9IQPynAgBR2mjkUM3M8fR/K4tYAUEo1CPMM9jzhtk/4iylyUKnxf6xDS6hltFeH/fK
- WbWgTR6JvC4tvBglwr/6IfIWwMK3SuRPfdENwg8kQp0rAauo4DJfjlGGq2ZERvwXOnCz
- rSdQ==
-X-Gm-Message-State: AOJu0Yy7nL0F67lGaIefWzUqHtr8jCvW/hMkEYvzHLcsbddgBGnPf1hX
- EFC/ZsqsEa5Edp6duKxl1Lw+eWv4IhFX0nFSalL+Vk0/qMudj2M1gYVKkhtcG1I=
-X-Google-Smtp-Source: AGHT+IGrB96/hexZ4kMxgiEaZx8n/MU0Gj378AuskDMtVicUbzMOaWayXTPw90PgrTH7B7McRIo0LA==
-X-Received: by 2002:a05:6870:350b:b0:254:b3cc:a6da with SMTP id
- 586e51a60fabf-25e2bb897d3mr4927468fac.29.1720219175222; 
- Fri, 05 Jul 2024 15:39:35 -0700 (PDT)
+ bh=m3Qf2q4lIwOnSOSiXdJEJYTBsQoTubJ1kT7pqUkd76Q=;
+ b=grlX1teyBWZSDzy4NgE0J503SmE0WANdoTiG4o7DlzOsFe2saH30vjU4pWA3Yyvrxy
+ yJQvMOtjurDK1/W+OpNZEFn6eDF7+YCgYFk69jduAq4i+eMljDEiaJRvyBY4+QLY6bXJ
+ elCTFEw7ItgABDrdYTI5hefqqkA3OXHCphKY1HPcSVsqucmZGunjDroYEp/KXYxhe5uq
+ 07F/7sH9YguascSd/rxXqIrJaAIx4U0WvqptJ1t6iRVTwkUa9ZzPRkw4Y4cGw36DsF2a
+ 4dNc3QL/vXgTNs2Y6KmLtRPMtLIXStDy0h02bzHX6wNbynjYBPICsru1fZZoQTm4SWV6
+ Tvmg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX0ChbHaEkhIWByY2P7jNrxxctOPPnUqLsXfIdZn+JoniuiG4bvvMbWqA1o/aAxfDoX7+KLBRAiY1YvKnS1uRQLf+l0RQ==
+X-Gm-Message-State: AOJu0YxaihPgZTnfMReKd3Kf3P5zmYt5dvbs8EeJ1W5fUFoxfqwEcl/g
+ Io7fbXBFTYrGaTl29hNxYSJXVi3livYXJOv+P0LU2pzTb9oXpd60vmcCVXSeHfA=
+X-Google-Smtp-Source: AGHT+IGmtdobx/T+OXhoXyzyD9nJ3zL3fTY1YdriaEzUfGKCLEHhKeDzKL2MbwLM3qFTiJuPTTceiQ==
+X-Received: by 2002:a05:6820:1c9c:b0:5c6:53ea:9042 with SMTP id
+ 006d021491bc7-5c653ea926emr5331205eaf.4.1720219179883; 
+ Fri, 05 Jul 2024 15:39:39 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
  [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25e567a4473sm227813fac.39.2024.07.05.15.39.34
+ 006d021491bc7-5c41480bf8bsm2135379eaf.1.2024.07.05.15.39.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 15:39:34 -0700 (PDT)
-Date: Fri, 5 Jul 2024 16:39:32 -0600
+ Fri, 05 Jul 2024 15:39:39 -0700 (PDT)
+Date: Fri, 5 Jul 2024 16:39:37 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Alexander Dahl <ada@thorsis.com>
-Cc: u-boot@lists.denx.de, Massimo Pegorer <massimo.pegorer@vimar.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH] mkimage: Allow 'auto-conf' signing of scripts
-Message-ID: <20240705223932.GS38804@bill-the-cat>
-References: <20240620142059.2348379-1-ada@thorsis.com>
+To: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: quentin.schulz@theobroma-systems.com, sjg@chromium.org,
+ u-boot@lists.denx.de, xypron.glpk@gmx.de,
+ Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+Subject: Re: [PATCH v5] cmd: bootm: add ELF file support
+Message-ID: <20240705223937.GT38804@bill-the-cat>
+References: <20240621114210.51101-1-Maxim.Moskalets@kaspersky.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NR0fpDiVZwxHbbkc"
+ protocol="application/pgp-signature"; boundary="goqEJN+/GTAsq8U5"
 Content-Disposition: inline
-In-Reply-To: <20240620142059.2348379-1-ada@thorsis.com>
+In-Reply-To: <20240621114210.51101-1-Maxim.Moskalets@kaspersky.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,55 +94,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---NR0fpDiVZwxHbbkc
+--goqEJN+/GTAsq8U5
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 20, 2024 at 04:20:59PM +0200, Alexander Dahl wrote:
+On Fri, Jun 21, 2024 at 02:42:10PM +0300, Maxim Moskalets wrote:
 
-> U-Boot configured for verified boot with the "required" option set to
-> "conf" also checks scripts put in FIT images for a valid signature, and
-> refuses to source and run such a script if the signature for the
-> configuration is bad or missing.  Such a script could not be packaged
-> before, because mkimage failed like this:
+> Some operating systems (e.g. seL4) and embedded applications are ELF
+> images. It is convenient to use FIT-images to implement trusted boot.
+> Added "elf" image type for booting using bootm command.
 >=20
->     % tools/mkimage -T script -C none -d tmp/my.scr -f auto-conf -k tmp -=
-g dev -o sha256,rsa4096 my.uimg
->     Failed to find any images for configuration 'conf-1/signature'
->     tools/mkimage Can't add hashes to FIT blob: -1
->     Error: Bad parameters for FIT image type
->=20
-> This is especially unfortunate if LEGACY_IMAGE_FORMAT is disabled as
-> recommended.
->=20
-> Listing the script configuration in a "sign-images" subnode instead,
-> would have added even more complexity to the already complex auto fit
-> generation code.
->=20
-> Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---NR0fpDiVZwxHbbkc
+--goqEJN+/GTAsq8U5
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIdiQACgkQFHw5/5Y0
-tyypqgv+JCtamVBxtzXJVKb51tzQb+T1tacg8Ca9fXKOiIbynun40Bbqz2Hm/q27
-ylEzTh4uHwaUcyaoBbOJuviL24tqJPR1v/GsGkF9Dz7suhegI86mtq78eEOxYCnE
-3DxTrOPs/+LvR3q0KBh3Rf3mgPQT8TOqC85h1XkS1zP82gkpgkMZOMCNGWEcolgd
-cn0LKPiLMjYEwg1KF1US2NPA0fHAJCphEjEQ26We6LpmOODLTO0u51+sM7KZ867Z
-LS9aT/3/VwlLRbkGL6CWYZLqD2SynJG2JBIjsg/dKymliO0Y4Yqfd3AIidS2C/4T
-OQYs2zsDLDMdA5m83SMLgwUKQbWTeT5VQxXajqIeAfrxOuCM1GNMc6tJsWQq5jk/
-QgfEPA3GydI6IbhxI986T93qEuzM5XuM4LHcShgUUXd8gWHWNl/NzJbi01EFoDvY
-sT/AhKizHS4To2fUzjIeHqXODStsFymjXAkNqfZH+6vlmmpqCR8nDq9V0foiFqge
-Yn1ZNtY+
-=wUF5
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIdikACgkQFHw5/5Y0
+tyzrFAwAueenCPTe8fogEa6r6VeycRNMd/JQ8FiNcZmZcvMDvZI6sINd8pwGibwe
+DEU3mjdGGNq2VLRNXVw123pncV7QQQpuNTZdZt9+z1Zf6VN4I+7TjRk8tFnIllmr
+mIGmX4mhtrHd00v9SjesWjWW5c6whMATrM2BtTYg19rje6C5nVRN1NUlPRhdni2+
+0ixQLPcVlVw5UghN7QRUcoZ5fmMxYUQ+taUB41bwuU6C58AKWNDxnpdaEH6Ebrya
+b9sB8mKnH+tiMBEkevtjumwgCBe+eD0javFZaKszGblIgfLLo83TDrDyqEovT4bR
+kHoxC3bPuviYR91NyQ+iAJske3NVCSYB+m1L2JAZzaHcpN/yCRfa/c5Qj2KnaJGp
+9UaB5JdLIVAXa//8l0Goetckh2u9EcTRvxkol4vCuKK4h2e1OsRmxFgmdvBWNGov
+HvevB6kW+KvGT6EYhVnNDxTH3PkBs2gXRg2WX5TEtc61UYnJvol5m3wS9Kg2T5fQ
+k/DTtyfw
+=aLYd
 -----END PGP SIGNATURE-----
 
---NR0fpDiVZwxHbbkc--
+--goqEJN+/GTAsq8U5--
