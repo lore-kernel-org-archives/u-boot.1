@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF8BC30658
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:51:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B08C3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:51:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F051885FF;
-	Fri,  5 Jul 2024 06:51:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B23AF8897C;
+	Fri,  5 Jul 2024 06:51:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uRMvVrai";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qS9sKNv5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2071187D14; Fri,  5 Jul 2024 06:51:02 +0200 (CEST)
+ id 60DF888970; Fri,  5 Jul 2024 06:51:03 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C98287D14
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 06:50:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFD13885F2
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 06:51:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654oZkj088817;
- Thu, 4 Jul 2024 23:50:35 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654odGf088849;
+ Thu, 4 Jul 2024 23:50:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720155035;
- bh=xH4pMhvIHjo+Fh4nX/7YHUL7PDZ5UzrMSlrwwDK/1bY=;
- h=From:To:CC:Subject:Date;
- b=uRMvVraiBHMLGvGJ5Ooa/QQApVBRRGVy41ZPngKQVyEzUAktdUsPG+p7A7zrJGiyM
- SpXGr2k0pSOGclBIfJcAo/BHoHHgUQn09xk/4f5n5+uoVxb2dOOQyNenaGLi0dkzvW
- wYEdgZn/AS88mDRLSEwNtDBHiPgCpurYo6iks4dk=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654oZpI024024
+ s=ti-com-17Q1; t=1720155039;
+ bh=XHxGuh3mHUP/p4aF4iU7c6wjumXkUOnKJmIUG78aK1Q=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=qS9sKNv5UPNAa+tiApvhrQJMG9TS7RMKqcCQdJEMjocjKDJPm7C0DctvsEDRpL/vo
+ unToQFflDpt8N2Lvu8Q5pkKKe/JQPG5SVKLoQTGqalGvXtfjD4yQZ414c+hJ3iXDGm
+ /8x6S2cNJ5au4vCVhvE63kh8gD1PmpOJN6CRKn3Q=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654odNR113996
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jul 2024 23:50:35 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Jul 2024 23:50:39 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 23:50:34 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 23:50:39 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 23:50:34 -0500
+ Frontend Transport; Thu, 4 Jul 2024 23:50:38 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654oXlU112173;
- Thu, 4 Jul 2024 23:50:34 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654ocUa032629;
+ Thu, 4 Jul 2024 23:50:38 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Vignesh Raghavendra
@@ -69,10 +69,13 @@ To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  <mripard@kernel.org>, Nishanth Menon <nm@ti.com>, Tom Rini
  <trini@konsulko.com>
 CC: <srk@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 00/10] Add support for Ethernet Boot on SK-AM62
-Date: Fri, 5 Jul 2024 10:20:20 +0530
-Message-ID: <20240705045030.1141934-1-c-vankar@ti.com>
+Subject: [PATCH v3 03/10] soc: ti: k3-navss-ringacc: Initialize base address
+ of ring cfg registers
+Date: Fri, 5 Jul 2024 10:20:23 +0530
+Message-ID: <20240705045030.1141934-4-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240705045030.1141934-1-c-vankar@ti.com>
+References: <20240705045030.1141934-1-c-vankar@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -93,59 +96,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables Ethernet Boot on SK-AM62 device.
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
-This series is based on commit "b4cbd1a257d4" of origin/next branch
-of u-boot.
+Initialize base address of ring config registers required to natively
+setup ring cfg registers in the absence of Device Manager (DM) services
+at R5 SPL stage. Since register property is defined as "ring" for PKTDMA
+and "cfg" for UDMA, configure base address of ring configuration register
+accordingly.
+
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+---
 
 Link to v2:
-https://lore.kernel.org/r/20240425120822.2048012-1-c-vankar@ti.com/
+https://lore.kernel.org/r/20240425120822.2048012-4-c-vankar@ti.com/
 
-TestLogs:
-https://gist.github.com/chintanv133/76de0a51fd532b34fea686f4c7bd75c6
-
-Changes frpom v2 to v3:
+Changes from v2 to v3:
 - Since register property is defined as "ring" for PKTDMA and "cfg"
-  for UDMA, change the condition to configure the base address of ring
+  for UDMA, change conditon to configure the base address of ring
   configuration register accordingly.
-- Since "phy_gmii_sel" with "bootph-all" property is merged at upstream
-  Linux for am62x-sk-common with commit "ba50141137fa", [PATCH 10/10]
-  can be drop with next DT-Sync.
 
-Chintan Vankar (2):
-  common: spl: spl: Init DRAM size in R5/A53 SPL
-  arch: arm: dts: k3-am62-sk-u-boot: Add missing "bootph-all" property
-    to phy_gmii_sel node
+ drivers/soc/ti/k3-navss-ringacc.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-Kishon Vijay Abraham I (6):
-  firmware: ti_sci: Add No-OP for "RX_FL_CFG"
-  soc: ti: k3-navss-ringacc: Initialize base address of ring cfg
-    registers
-  dma: ti: k3-udma: Add support for native configuration of chan/flow
-  arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
-  configs: am62: Add configs for enabling ETHBOOT in R5SPL
-  configs: am62: Enable configs required for Ethboot
-
-Siddharth Vadapalli (1):
-  arm: dts: k3-am625-r5-sk: Enable DM services for main_pktdma
-
-Vignesh Raghavendra (1):
-  soc: ti: k3-navss-ringacc: Fix reset ring API
-
- arch/arm/dts/k3-am625-r5-sk.dts          |  5 +++++
- arch/arm/dts/k3-am625-sk-u-boot.dtsi     |  4 ++++
- arch/arm/mach-k3/am62x/am625_init.c      | 10 ++++++++++
- common/spl/spl.c                         |  2 +-
- configs/am62x_evm_a53_ethboot_defconfig  | 12 ++++++++++++
- configs/am62x_evm_r5_ethboot_defconfig   | 20 ++++++++++++++++++++
- drivers/dma/ti/k3-udma.c                 |  6 ++++++
- drivers/firmware/ti_sci.c                |  8 +++++++-
- drivers/soc/ti/k3-navss-ringacc-u-boot.c |  9 ++++++++-
- drivers/soc/ti/k3-navss-ringacc.c        | 17 ++++++++++++++++-
- 10 files changed, 89 insertions(+), 4 deletions(-)
- create mode 100644 configs/am62x_evm_a53_ethboot_defconfig
- create mode 100644 configs/am62x_evm_r5_ethboot_defconfig
-
+diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
+index d3f3d4761c..8ffb6137df 100644
+--- a/drivers/soc/ti/k3-navss-ringacc.c
++++ b/drivers/soc/ti/k3-navss-ringacc.c
+@@ -1029,8 +1029,8 @@ static int k3_nav_ringacc_init(struct udevice *dev, struct k3_nav_ringacc *ringa
+ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+ 						struct k3_ringacc_init_data *data)
+ {
++	void __iomem *base_rt, *base_cfg;
+ 	struct k3_nav_ringacc *ringacc;
+-	void __iomem *base_rt;
+ 	int i;
+ 
+ 	ringacc = devm_kzalloc(dev, sizeof(*ringacc), GFP_KERNEL);
+@@ -1048,6 +1048,20 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+ 	if (!base_rt)
+ 		return ERR_PTR(-EINVAL);
+ 
++	/*
++	 * Since register property is defined as "ring" for PKTDMA and
++	 * "cfg" for UDMA, configure base address of ring configuration
++	 * register accordingly.
++	 */
++	base_cfg = dev_remap_addr_name(dev, "ring");
++	pr_debug("ring %p\n", base_cfg);
++	if (!base_cfg) {
++		base_cfg = dev_remap_addr_name(dev, "cfg");
++		pr_debug("cfg %p\n", base_cfg);
++		if (!base_cfg)
++			return ERR_PTR(-EINVAL);
++	}
++
+ 	ringacc->rings = devm_kzalloc(dev,
+ 				      sizeof(*ringacc->rings) *
+ 				      ringacc->num_rings * 2,
+@@ -1062,6 +1076,7 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+ 	for (i = 0; i < ringacc->num_rings; i++) {
+ 		struct k3_nav_ring *ring = &ringacc->rings[i];
+ 
++		ring->cfg = base_cfg + KNAV_RINGACC_CFG_REGS_STEP * i;
+ 		ring->rt = base_rt + K3_DMARING_RING_RT_REGS_STEP * i;
+ 		ring->parent = ringacc;
+ 		ring->ring_id = i;
 -- 
 2.34.1
 
