@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55079C3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 15:38:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68177C3DA42
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 15:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEB11889BE;
-	Fri,  5 Jul 2024 17:38:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC7A0884A9;
+	Fri,  5 Jul 2024 17:39:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OZ09kHJl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F0eFJcXy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41AD488619; Fri,  5 Jul 2024 17:38:41 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 0CE1888619; Fri,  5 Jul 2024 17:39:26 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5BC188395
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 17:38:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A97388395
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 17:39:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7034d975f18so865902a34.3
- for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 08:38:38 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5c661bcb9a0so117353eaf.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 08:39:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720193917; x=1720798717; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720193962; x=1720798762; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kT8S24QVu5L+H18glSlImjdYgQ+hJx2Ldsv5Ah3n2M8=;
- b=OZ09kHJlbyDgNhDH7v6n0I0Fps5YxnAmsJT249gDtDyxsypyBxPMrPshULO4Xto5Va
- kvBW12rnvrcUVrEVgp3jf78N5igqo8oDiUsEEcd5LYYjHbjTrV5yEmd79nRHRvjVJFU7
- +6u70BAG4BfmAgptxDoK4/PJ+mtkf/p3RLib8=
+ bh=ql5MEilqUhYmJ0uo4MgRS3ZeTJi2tXURR5Bcdxd0tjc=;
+ b=F0eFJcXyBM6WtaVrba1l7nOwpdMGqCMizBfsBipfu9bC7nhasDH00cg2KrLVLav9mc
+ tw/xSMYFoExmGLhx1iiYQt2/0kr6nYp7EZNZNpVwl+/fQA0VhgqlgA6IqPWXDxBcMFTC
+ BRCRN82t3N3O0hPl7/OCnvxv8sl+xs+pv/aLA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720193917; x=1720798717;
+ d=1e100.net; s=20230601; t=1720193962; x=1720798762;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kT8S24QVu5L+H18glSlImjdYgQ+hJx2Ldsv5Ah3n2M8=;
- b=g12h+P3zz/fkKOq+HBz1voElxXTkmPleN3c+0D0vpqKKIHjKA9vbs+/a1FKSKvpqNZ
- dXcsBntu2aUaScE/Q7EZ5LIe2FkogbCV0qZf9sdJER28drWXOOEWvZHwYPT6VK5u792W
- sL1J+oSKckyXCxl3v+hu3KhSw5MvgTkAkkSs3PvB7DpckRsX+ybs1SB3IpP6REas2BhY
- nc/laM1NyRLvRuotjEZEAs8aRFRfxV9TPdhFwimjtqxJPGY8vtTaTr0VrNXAA+K7saA3
- sN4zincqJp/vFxAO7pBYEDdm4bnlXHdW41yFNblXKzV3IskNQ9Q9n6XiuLQXw64NQ5kF
- 5o1w==
+ bh=ql5MEilqUhYmJ0uo4MgRS3ZeTJi2tXURR5Bcdxd0tjc=;
+ b=xEAdHod1m6i3eTqQm9Z+OGP/4mwnwyd1uoE0Q/yYSPFrajJay/YKmKzUGHKj0zaUKo
+ MFB2d/9HyW2TyCeIZj7XrV4LtqQz45VaNer4CcWQRBF+CHMAHXC0eq5JMkpJ5QT2zWlk
+ +tL7ZODp5rUiyNzSEGWUpr5kaI/EbyiOH+l/mXVOScdjvcpyfBh5RffloFtpvAErQei9
+ r63jYD3DAKP4TgBuVHEbFZax9zer1VZsVyaMdmaQE9ZHYFkNnaK9HEWjCishkWsfNW6B
+ UvBf+ULBjnV6tu2cUdvfyTgMOa3gJsPN+G+OOygyfVWsVRHo4BUI1m0Gu9joSNRWdC0U
+ GHig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWW7DuSgoNHfRyHSyV6O/7PfnuAdMYqHdFaoRegtjDTqg9n7MGcXPyI4zL3cg8T3aSKV3iovbr+Sc9N75sT88WUFnV3Dw==
-X-Gm-Message-State: AOJu0YydtFgH1hpvJJhJr0hlAU328ASO/FxGKJs/HQg0amkGjpD0KC0Q
- DjxPL7hTKas9lL99zAcEjnhCr2eBZbJP8cComBW5rqParmB3vDWSnpk8yVBjHaY=
-X-Google-Smtp-Source: AGHT+IHN1G7KkXuZHQoUWQBZIYU7eVx3E1CTpTlsGpe+YAIyLq65Q+HKngjkLOvLHk8XBhrm/tqlYw==
-X-Received: by 2002:a05:6870:96a2:b0:254:997e:ea4c with SMTP id
- 586e51a60fabf-25e2bb7ecc7mr4062130fac.31.1720193917517; 
- Fri, 05 Jul 2024 08:38:37 -0700 (PDT)
+ AJvYcCWoc5396AbxRDN5iCpq3Z0qGb1HH4WY1QMFh1Ayg18gf/nIuQde/e0m9sYh6jP0Bzdbgk8z9ziZ4xz09ejjlBycx+Fl3g==
+X-Gm-Message-State: AOJu0YyipKnAqEVpXJf/dytzUPHjyfcDqERchWC77xMKiwW4E/VMWf5K
+ 9mx8Ti7WCM28N2oO5aaULGikriqsFYRMSev25nm4AK8TOI6CDiJe0I2JcA77Cr0=
+X-Google-Smtp-Source: AGHT+IFwlSQyBYmlWWQ8Od/TNEokhARBHnVxaSEsNoo3NogsG0X4OqA7p1tGsaD6SeM4dNFDAC5ddA==
+X-Received: by 2002:a4a:a9c3:0:b0:5bd:ae80:865b with SMTP id
+ 006d021491bc7-5c6470be63dmr5019256eaf.9.1720193961660; 
+ Fri, 05 Jul 2024 08:39:21 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
  [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25e4659b5d9sm334184fac.12.2024.07.05.08.38.35
+ 006d021491bc7-5c4543b9aeesm1222694eaf.19.2024.07.05.08.39.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 08:38:37 -0700 (PDT)
-Date: Fri, 5 Jul 2024 09:38:33 -0600
+ Fri, 05 Jul 2024 08:39:21 -0700 (PDT)
+Date: Fri, 5 Jul 2024 09:39:18 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Chintan Vankar <c-vankar@ti.com>
 Cc: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
@@ -83,16 +83,16 @@ Cc: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  Simon Glass <sjg@chromium.org>, Roger Quadros <rogerq@kernel.org>,
  Maxime Ripard <mripard@kernel.org>, Nishanth Menon <nm@ti.com>,
  srk@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 08/10] configs: am62: Enable configs required for
- Ethboot
-Message-ID: <20240705153833.GI38804@bill-the-cat>
+Subject: Re: [PATCH v3 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
+ "bootph-all" property to phy_gmii_sel node
+Message-ID: <20240705153918.GJ38804@bill-the-cat>
 References: <20240705045030.1141934-1-c-vankar@ti.com>
- <20240705045030.1141934-9-c-vankar@ti.com>
+ <20240705045030.1141934-11-c-vankar@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="omcJ0891BenCv9Bn"
+ protocol="application/pgp-signature"; boundary="v6eMhVd280bs6KuA"
 Content-Disposition: inline
-In-Reply-To: <20240705045030.1141934-9-c-vankar@ti.com>
+In-Reply-To: <20240705045030.1141934-11-c-vankar@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,62 +111,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---omcJ0891BenCv9Bn
+--v6eMhVd280bs6KuA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 05, 2024 at 10:20:28AM +0530, Chintan Vankar wrote:
+On Fri, Jul 05, 2024 at 10:20:30AM +0530, Chintan Vankar wrote:
 
-> From: Kishon Vijay Abraham I <kishon@ti.com>
+> Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
 >=20
-> Enable config options needed to support Ethernet boot on AM62x SK.
->=20
-> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 > Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 > ---
 >=20
 > Link to v2:
-> https://lore.kernel.org/r/20240425120822.2048012-9-c-vankar@ti.com/
+> https://lore.kernel.org/r/20240425120822.2048012-11-c-vankar@ti.com/
 >=20
 > Changes from v2 to v3:
-> - No changes.
+> - Since "phy_gmii_sel" with "bootph-all" property is merged at upstream
+>   Linux for am62x-sk-common with commit "ba50141137fa", this patch can be
+>   drop with next DT-Sync.
 >=20
->  configs/am62x_evm_a53_ethboot_defconfig | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
->  create mode 100644 configs/am62x_evm_a53_ethboot_defconfig
->=20
-> diff --git a/configs/am62x_evm_a53_ethboot_defconfig b/configs/am62x_evm_=
-a53_ethboot_defconfig
-> new file mode 100644
-> index 0000000000..1f9ad63571
-> --- /dev/null
-> +++ b/configs/am62x_evm_a53_ethboot_defconfig
-> @@ -0,0 +1,12 @@
-> +#include <configs/am62x_evm_a53_defconfig>
+>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-Same problem as the other defconfig.
+Please use the cherry-pick option to bring this change forward so
+there's nothing to do on the next re-sync, thanks.
 
 --=20
 Tom
 
---omcJ0891BenCv9Bn
+--v6eMhVd280bs6KuA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIE3kACgkQFHw5/5Y0
-tyyKrQv/eYZR8hDglFZpsuwPNRE94FlswDSGRn38YFLnoZF1R6wM+29XwBVeCYPx
-6ok3ymKew4EKJtaNDWitqp0yoq5+/q5ab9YGDj+bYDThya0LRStpScsE0QgeAARp
-7WLAK0IhAWVhm2foZZMXTlpv1/jBzMpf6bVewgFg3ykyx02Nog31jagXMkMKvoC8
-8QzHsFcZ2mvO7tp0FOmZrNwMSRl/Q9K8Ygmb43+/gJ1uPioXxJYGnhtWkf5uvXyw
-MwpZit5LwMWUfnMTXBuLp6bJ0vkMNqAZ0GgldYISHIUjI9THsAQK01TovCe0/+4M
-ASJSJ9XmACE8wXAEsRuzeRh1Q00CoQAluOv3W/3Vw46HyHU3telNWEa12xy1URP/
-wi2yI/Kp/LnqOe5uSwOONufUc8pSPHQK4PWCbAOH7p7KEJStbAzdN55ALWDryEBh
-eOiECLIAhOdqzUwOBsmEkBwq16mgBqJFlHQeQzrUDYfEWsdSLhcwQJWDOZ4ucI4m
-z23y1llF
-=cUEN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIE6YACgkQFHw5/5Y0
+tyx5Rgv+OgSW+Jb2ke8MCui+PMOjmQUgQ2yJxCB+NL7evJYvRcKhH2DQaVmSxFAB
+L0630b8Qq6RgHOcaY5GAQG0l+RjwBRXDZZAuZ2kxJEIbrbIk88AC/tsZPortnbTA
+noUQ7XxATH55ZCW0JXShDN/9xGW70vfPuta7uKcq8e/5wkSn6HFz/DMja85PC4yj
+4ojoAdJaNji/ePgJfIbNPunEuVg0l8myUReZ1cXj/Ej7Vg3Fn2u68nsly1n01aay
+uzum96cbDtI54QApZmtUjzKkUCJ3F9AalNV/25FwA4fQHCCGb+rHSp6hrhVcbJ7q
+0gRJLgxu05L+A6gkxyjzLViJsY1O4Hzs+5xmlhKKQysgsWI2fwIygcE+IbCyrP/t
+r1Ce5T4CydbtEFBPUFGEtGc42x8BOAIPv8zKLZOmTdnxK3vTgvUh/4B95nTa7pjx
+gK/+S5IOjfT7V/4fqrbUZ+kV9WVUmREcDQY5GNuwM3Uv7iFl3duJ9244PebD6GQJ
+JijbdFRN
+=PBdY
 -----END PGP SIGNATURE-----
 
---omcJ0891BenCv9Bn--
+--v6eMhVd280bs6KuA--
