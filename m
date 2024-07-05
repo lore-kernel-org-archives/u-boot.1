@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE948C30658
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 07:20:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74AB0C30658
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 07:20:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B02388938;
+	by phobos.denx.de (Postfix) with ESMTP id B650D8896C;
 	Fri,  5 Jul 2024 09:20:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="SHzAjYEs";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VBu+pG7K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73FA388934; Fri,  5 Jul 2024 09:20:00 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 6AACC88961; Fri,  5 Jul 2024 09:20:02 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CDEB88579
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 09:19:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 792E288579
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 09:20:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a689ad8d1f6so141442366b.2
- for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 00:19:58 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a6fd513f18bso138754266b.3
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 00:20:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1720163998; x=1720768798;
+ d=amarulasolutions.com; s=google; t=1720164000; x=1720768800;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2dkxFQJzYnb+dgGS9iTvwMViIRrrTTItBM2tkRW6Jvs=;
- b=SHzAjYEsmRWo9aWSM5yOMWoaIaTPiTmeBWiiPcB5/CHJ0MzMjNlSs44IjWGHADj7FS
- FWzyDEzjdFAwlYYaZpj9CrFZ+S+NKxplHHIA5NnUWJmoE+PyP9NQQxy0yG8gkjpB2ptr
- vxr7u1OJHmpKhBZ4rzCgx8u+emBB/v2XMkXtQ=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cjPyDwYxW8ixxUOfF5BImnGofyLtSOc9yNE6LGakbDc=;
+ b=VBu+pG7Kl/IGfK+wzSmUSfvyP/3mawzOszZlFyE2bZdzJLIAWZEJa7LTXHFujyrxj6
+ w+9TEqxajum/S6/s1J9wUcd5i8UWkd8Pp+DLSvhfnjnAYdFnE7FBSgDzvuRwziiIqBfG
+ yNMYqV6dHDY97EbH6+8+GjDFFHbMcCUnGZyYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720163998; x=1720768798;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2dkxFQJzYnb+dgGS9iTvwMViIRrrTTItBM2tkRW6Jvs=;
- b=DacxOUY7DuD0/NXkH8d5wfbpwnFVDLZPySYeHZ+TALwc7OJwybLyEwK13ECUHo89fm
- mhLRfq+u3ak7j4nxi11O+lGgyMW4V54WKqRcCz/p1VTuFaWVRxwcaTAQlV+BjmgyEan4
- mZ6uK2Vr4B1Tt8KHhu2bgW5/MLFsRaoo5jWCfwa5Y45+nLUKgtErLsCY4lGF080pdarq
- dDQN+ouPXVFS/xI3k/l8h0CdblouR+yMQnw6SEy+pVcG2craGaof89FE0jzb41sQ9hb0
- +vpDWgGC1zQ4xuTqkCavyOnY9l0MHb8qPJhKQQ/j81zdfdWCchjMnZb2ryLSIU2E6lFj
- YWNg==
+ d=1e100.net; s=20230601; t=1720164000; x=1720768800;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cjPyDwYxW8ixxUOfF5BImnGofyLtSOc9yNE6LGakbDc=;
+ b=R1OgJkv/Ey+MhdXSX9G8oBsxW9DO0PYN2Se+A2m2nYl/+w3lxOUGtWFwJFIzDQFdBF
+ t6EbrINCUQ4HsLGb422GRNAQVNjQzPdtcsuOBd8z/RqwhF8ZxvfMiCflEmbNlXoC5XrB
+ pTE9XxVtDXn2K50A0HKlv6GRGdME14pEvYJEODZKCvP9ymARYkOU2IBvjrsl3NnDWx67
+ ir0cC4gtad2Tx0LVZD6kLGtaBRzBm4jX0kvkgfieHbjZkrbAfe4ZgjcIHHLDX9+aYArF
+ apxh4ACDnqs1cwcS7EvUfXOSRe4cqp9Xq5fBn8tkZl4TwQ04vI6HLno/A1rQYYkbYLfn
+ BQrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1i3JHlS0bU0OLDb3raljmbQ5Qh4s7whzRaL03Cec+Pg9Xfj1CaI1PcpZRiKWjY+6PspIrRS5QOuqDPAlcROVj+JJ1ew==
-X-Gm-Message-State: AOJu0Yy+GGq0Fbz4QPHVbN70C/qXnOm8NMWTS3BSKAvKj6DICQ9a0p//
- 1t0SeO7tMUv1Zi9fDouxD4i44dEEAfJp2d5QDBT4Ok9DepQ/h6aDA7d4JenqadjUm+HuUDMWoPc
- ZGqY=
-X-Google-Smtp-Source: AGHT+IE+kYWhF2CActpb/j0613WR4YIMh612Gci2J9dmbW9NmZpcXGDRCGuI626195kIDZmf9UgUhQ==
-X-Received: by 2002:a17:907:60d3:b0:a72:8b89:f878 with SMTP id
- a640c23a62f3a-a77ba72d80amr321857766b.76.1720163997711; 
- Fri, 05 Jul 2024 00:19:57 -0700 (PDT)
+ AJvYcCUQPnMN8hjvPpNxtF1BbBMVWm2UssxCpJQDXycNQhJ+webTto0ZlijOR0ybASdCyIb7GfPprn0tmMPTUkEE8ULYOmW7yg==
+X-Gm-Message-State: AOJu0Yzoi9pPRAE0xi9b78wJCOo/+POxy+HaFKUjO3z26mTo+EHGiCYO
+ C1vgIyvz+AIpkt6hS8iwpSHcqVHDvhLkdKfOEVB1obxcw9rRbuLmWa/jtP18y+6pSwrdKiAn4/M
+ e7FY=
+X-Google-Smtp-Source: AGHT+IEKnGotFE8YBK/coudrIYA31OumKzh9HBgj0IBT9mBgwgcxWORjT5qgobhV3rdK9xNQwOsXvA==
+X-Received: by 2002:a17:906:4751:b0:a74:5b82:7f28 with SMTP id
+ a640c23a62f3a-a77ba4787a5mr251579166b.23.1720163999821; 
+ Fri, 05 Jul 2024 00:19:59 -0700 (PDT)
 Received: from panicking.. ([2001:b07:6474:ebbf:a3e:4288:e106:2eef])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72ab0b84d5sm655158066b.223.2024.07.05.00.19.57
+ a640c23a62f3a-a72ab0b84d5sm655158066b.223.2024.07.05.00.19.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 00:19:57 -0700 (PDT)
+ Fri, 05 Jul 2024 00:19:59 -0700 (PDT)
 From: Michael Trimarchi <michael@amarulasolutions.com>
 To: Lukasz Majewski <lukma@denx.de>,
 	Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
  u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH V2 0/2] Support imx8m composite mux
-Date: Fri,  5 Jul 2024 09:19:50 +0200
-Message-ID: <20240705071952.12245-1-michael@amarulasolutions.com>
+Subject: [PATCH V2 1/2] clk: clk-mux: Make public the clk_fetch_parent_index
+Date: Fri,  5 Jul 2024 09:19:51 +0200
+Message-ID: <20240705071952.12245-2-michael@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240705071952.12245-1-michael@amarulasolutions.com>
+References: <20240705071952.12245-1-michael@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,22 +95,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mux ops for i.MX8M composite clk needs to be specialized.
-In order to reduce the code duplication we need to make public some
-interface and write a specific function in the mux ops. Those patches
-implement the behavior.
+Make public the clk_fetch_parent_index and rename it. This allow
+us to be reused in driver specialization
 
-Addressed comment in V1
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
+V1->V2:
+	Nothing changed
+---
+ drivers/clk/clk-mux.c        | 5 ++---
+ include/linux/clk-provider.h | 1 +
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-Michael Trimarchi (2):
-  clk: clk-mux: Make public the clk_fetch_parent_index
-  clk: imx: add mux ops for i.MX8M composite clk
-
- drivers/clk/clk-mux.c              |  5 ++--
- drivers/clk/imx/clk-composite-8m.c | 37 +++++++++++++++++++++++++++++-
- include/linux/clk-provider.h       |  1 +
- 3 files changed, 39 insertions(+), 4 deletions(-)
-
+diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
+index f410518461e..e3481be95fa 100644
+--- a/drivers/clk/clk-mux.c
++++ b/drivers/clk/clk-mux.c
+@@ -102,8 +102,7 @@ u8 clk_mux_get_parent(struct clk *clk)
+ 	return clk_mux_val_to_index(clk, mux->table, mux->flags, val);
+ }
+ 
+-static int clk_fetch_parent_index(struct clk *clk,
+-				  struct clk *parent)
++int clk_mux_fetch_parent_index(struct clk *clk, struct clk *parent)
+ {
+ 	struct clk_mux *mux = to_clk_mux(clk);
+ 
+@@ -127,7 +126,7 @@ static int clk_mux_set_parent(struct clk *clk, struct clk *parent)
+ 	u32 val;
+ 	u32 reg;
+ 
+-	index = clk_fetch_parent_index(clk, parent);
++	index = clk_mux_fetch_parent_index(clk, parent);
+ 	if (index < 0) {
+ 		log_err("Could not fetch index\n");
+ 		return index;
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index b8acacd49ee..59f9c241b84 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -74,6 +74,7 @@ struct clk_mux {
+ #define to_clk_mux(_clk) container_of(_clk, struct clk_mux, clk)
+ extern const struct clk_ops clk_mux_ops;
+ u8 clk_mux_get_parent(struct clk *clk);
++int clk_mux_fetch_parent_index(struct clk *clk, struct clk *parent);
+ 
+ /**
+  * clk_mux_index_to_val() - Convert the parent index to the register value
 -- 
 2.43.0
 
