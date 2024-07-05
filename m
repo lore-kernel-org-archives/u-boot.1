@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724C1C3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56D0CC30658
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 05:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B65048898B;
-	Fri,  5 Jul 2024 06:51:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A113A884FC;
+	Fri,  5 Jul 2024 07:32:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FINuFzfB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JP/Byji4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D83C88969; Fri,  5 Jul 2024 06:51:13 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 16DB1885F6; Fri,  5 Jul 2024 07:32:42 +0200 (CEST)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD91E88974
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 06:51:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBB4F883AF
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 07:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654om6H034975;
- Thu, 4 Jul 2024 23:50:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720155048;
- bh=hTGwKM/j1yI4WNJSC+e/GTksZOyp4PVDVefn6N8w3f8=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FINuFzfBAs09wxeA6w1SrcwXlXeHnvBaMzvcR1H4mAudK2WLDc9nt/VIH6vCRkNLd
- sN+SsOcZxLfvjS8s92UH9ZeWrWnOLM5wevkQacrSqEktmbh4FOxYHSs7WnkQfkx8R+
- qju8szUnJ06dZs9DcZYO6ezS45OZSF6hK5BeoSZ0=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654omAY024127
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jul 2024 23:50:48 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 23:50:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 23:50:48 -0500
-Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654ol5f032796;
- Thu, 4 Jul 2024 23:50:47 -0500
-From: Chintan Vankar <c-vankar@ti.com>
-To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Vignesh Raghavendra
- <vigneshr@ti.com>, Andrew Davis <afd@ti.com>, MD Danish Anwar
- <danishanwar@ti.com>, Udit Kumar <u-kumar1@ti.com>, Matthias Schiffer
- <matthias.schiffer@ew.tq-group.com>,
- Andreas Dannenberg <dannenberg@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar <devarsht@ti.com>, "Sean
- Anderson" <seanga2@gmail.com>, Kishon Vijay Abraham I <kishon@ti.com>,
- "Nikhil M Jain" <n-jain1@ti.com>, Joao Paulo Goncalves
- <joao.goncalves@toradex.com>, Wadim Egorov <w.egorov@phytec.de>, Chintan
- Vankar <c-vankar@ti.com>, "Sjoerd Simons" <sjoerd@collabora.com>, Mattijs
- Korpershoek <mkorpershoek@baylibre.com>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Dhruva Gole <d-gole@ti.com>, "Simon
- Glass" <sjg@chromium.org>, Roger Quadros <rogerq@kernel.org>, Maxime Ripard
- <mripard@kernel.org>, Nishanth Menon <nm@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <srk@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 09/10] arm: dts: k3-am625-r5-sk: Enable DM services for
- main_pktdma
-Date: Fri, 5 Jul 2024 10:20:29 +0530
-Message-ID: <20240705045030.1141934-10-c-vankar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240705045030.1141934-1-c-vankar@ti.com>
-References: <20240705045030.1141934-1-c-vankar@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-48ffdfae096so26616137.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 22:32:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720157558; x=1720762358; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ck2R5r7bNhyg+9EjMp8Fbb9LVBBSJaz15qtBLDPiYuw=;
+ b=JP/Byji4tdcFHsXecEezMqPW08Zc718DMv2z94J+vob2pOyELrq77ncxIIs73ULUlA
+ akaJmOnKJE4NKthxfhc+gpUX570xgaB8xnN8LaqWj23Ookybc9ZAHdwe8YazTT3lgiU5
+ xYQq14zb9HYCuZkzknw747dBky7HXRy+o29vsPUQZCreB5F0n2HZgzBWlCVk5bZeqLKd
+ v/1VoGzacvQDEI1gtSXknWZUFMH8/16p73DDwODK5B69fiR186ja/+z9t7Hw0vb2JFVu
+ HfpYISecyiBAtSjUs3uj+GEbxiUyzpiDHRbvNoQhk57LZpk/FeWJzU+zsF1gkS2qF8au
+ jR8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720157558; x=1720762358;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ck2R5r7bNhyg+9EjMp8Fbb9LVBBSJaz15qtBLDPiYuw=;
+ b=SFtAqYddDSYzBt0Hwish4O8CyZI/Tz78wgyY09gUxLYWEnr2GNoLmXZ4wqLSMPYdUb
+ ao2CchVB5YUCfqyVvZVjvhefT+3Bpywed1nfa9GlHjIunMEkl2OTN6n0EJM2wcfZHtxT
+ V7oRZ1j3Y2lHYBVLAul3DUzkkvqzQrey1hMAeCvG4qIrCtfj2CrXAnI0I7EzjAKbJYVz
+ XctfIjeUZD/8RkwvJEvHFfbWY5G/FBHaqnKQyOx6lFas4nRBfHbvPIydbIuJPtHkmXfI
+ oSmF6CidPlffX8Ne5Q6C3qVfEL4AT40VuZhQuJ2j1a0dELb4JiZIBkAGn54QPXPYYLDu
+ Wv+A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWuMs9qGYv1anfuGPb0yi5EHEFFE+7vvJdkrEq1QsL0mlrv71hQ4vxEttQ4kYshyNUY+GBj0MtVpq8PazoFGNQfiwXsXA==
+X-Gm-Message-State: AOJu0YyGpFG/B0MtZEOBBPpVMsonMRYciWDfHXCKyKF7IQBGgbvyiQhx
+ LBP6YAFRJpGqW+r1iWvRVBdmEP3xmtTA9f5qyDPBym+SRhBN94PdF+BLTy8sWLAeSoiIshtIMIK
+ NDYZOILf1G+v6TEWFpavfBau4mynKBmS3GLEVHdg1f49RRq3U2OM=
+X-Google-Smtp-Source: AGHT+IEzOmJVzgAUpRJwiUtwoiL1buSvJLIIHKM52PldUpj5A2YwGQ/1AX3KG84DCbZaE1hXEnN8Fnj0mnNIAQDoMZI=
+X-Received: by 2002:a67:ea8e:0:b0:48f:a749:56d9 with SMTP id
+ ada2fe7eead31-48fee6c39ddmr3180953137.5.1720157558626; Thu, 04 Jul 2024
+ 22:32:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240704-tsd-rk3588-nvme-v1-0-fb9e8dde9570@cherry.de>
+In-Reply-To: <20240704-tsd-rk3588-nvme-v1-0-fb9e8dde9570@cherry.de>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 5 Jul 2024 11:02:27 +0530
+Message-ID: <CAFA6WYPSxKbxO5itbNFBPPk+Qz=DxY1DUUpv0hruQaPqdB926g@mail.gmail.com>
+Subject: Re: [PATCH 0/3] rockchip: enable PCIe/NVMe support for Theobroma
+ RK3588 devices
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Klaus Goger <klaus.goger@cherry.de>, Heiko Stuebner <heiko.stuebner@cherry.de>,
+ u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Heiko Stuebner <heiko@sntech.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,36 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
+Hi Quentin,
 
-Enable DM services for main_pktdma during R5 SPL stage.
+On Thu, 4 Jul 2024 at 18:23, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>
+> Jaguar has an M.2 M-KEY slot for NVMes and Tiger exposes the signals to
+> the Q7 connector which is then routed on the Haikou devkit's `PCI
+> Express` connector. With the help of a PCIe to NVMe adapter, NVMes can
+> be used on Tiger Haikou as well.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Heiko Stuebner (1):
+>       arm64: dts: rockchip: add PCIe3 support on rk3588-jaguar
+>
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-Signed-off-by: Chintan Vankar <c-vankar@ti.com>
----
+Feels really nice to see subtree cherry picking in action here.
 
-Link to v2:
-https://lore.kernel.org/r/20240425120822.2048012-10-c-vankar@ti.com/
+> Quentin Schulz (2):
+>       rockchip: jaguar-rk3588: add PCIe M.2 M-KEY NVMe support
+>       rockchip: tiger-rk3588: add PCIe support
+>
+>  configs/jaguar-rk3588_defconfig                   |  5 ++
+>  configs/tiger-rk3588_defconfig                    |  4 ++
+>  dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts | 59 +++++++++++++++++++++++
+>  3 files changed, 68 insertions(+)
 
-Changes from v2 to v3:
-- No changes.
+FWIW, for the series:
 
- arch/arm/dts/k3-am625-r5-sk.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+Acked-by: Sumit Garg <sumit.garg@linaro.org>
 
-diff --git a/arch/arm/dts/k3-am625-r5-sk.dts b/arch/arm/dts/k3-am625-r5-sk.dts
-index 6b9f40e555..0912b953db 100644
---- a/arch/arm/dts/k3-am625-r5-sk.dts
-+++ b/arch/arm/dts/k3-am625-r5-sk.dts
-@@ -83,3 +83,8 @@
- 	reg = <0x00 0x0fc40000 0x00 0x100>,
- 	      <0x00 0x60000000 0x00 0x08000000>;
- };
-+
-+&main_pktdma {
-+	ti,sci = <&dm_tifs>;
-+	bootph-all;
-+};
--- 
-2.34.1
+-Sumit
 
+> ---
+> base-commit: 0f073e022ddc5070e5df1d053e4bdc1874fbcc0f
+> change-id: 20240704-tsd-rk3588-nvme-aa133c24cb9e
+>
+> Best regards,
+> --
+> Quentin Schulz <quentin.schulz@cherry.de>
+>
