@@ -4,68 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B54C3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 14:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969D2C30658
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 15:04:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18D76882E2;
-	Fri,  5 Jul 2024 16:48:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id C114A882FA;
+	Fri,  5 Jul 2024 17:04:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="SNti93fO";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="QWbjY87e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AADAA887EA; Fri,  5 Jul 2024 16:48:33 +0200 (CEST)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3458988855; Fri,  5 Jul 2024 17:04:46 +0200 (CEST)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20731.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::731])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE4DA882B6
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 16:48:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 42002882FA
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 17:04:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chris.obbard@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1720190910;
- bh=dOfoX83z6NZcwthmgpDNuSrPprdSgvJyFuVtOgzNt1g=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=SNti93fO9nNiVPvLVzoF7Ilr8dzzJylkQmZQ8qWzh/1cf3bLzXDKfkSzzvgO8LpvH
- KdCN0Ig/Nz+XA8uAAYJfkx/YhFdIAM80S6IRa4JKuOW/DcgCltEyxsZye5P2r7Yfz5
- OY0FY183dh94zUNibPtYiDInCQf2BG5ZDvLxzb4466OoKgddIDTRDOQ8oba6NYNEyT
- 0kpqtRvfcuVBd9RWNBEOSm+OZ7BKjsFEiaWlfplb3Pkj9qhQd2af/jdIF7RK++xesY
- +B7YUcd1zkn4JKhWLA7sQogSczZhfrLKC/MJpAezt5UycuJTubKwSDN/73URYY7kwh
- NKRWbhDqdKGtg==
-Received: from [100.77.12.232] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- (Authenticated sender: obbardc)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id BCFE93782190;
- Fri,  5 Jul 2024 14:48:29 +0000 (UTC)
-Message-ID: <1ac94ef8c4a00738cda6b1464d93223a6b08249b.camel@collabora.com>
-Subject: Re: [PATCH 1/5] board: rockchip: Add Pine64 Quartz64-A Board
-From: Christopher Obbard <chris.obbard@collabora.com>
-To: Jonas Karlman <jonas@kwiboo.se>, Peter Geis <pgwipeout@gmail.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de, Nicolas
- Frattaroli <frattaroli.nicolas@gmail.com>
-Date: Fri, 05 Jul 2024 15:48:29 +0100
-In-Reply-To: <261d3994b44dc01ed68ea2ed7856caef635c9809.camel@collabora.com>
-References: <20230723145504.2967971-1-jonas@kwiboo.se>
- <20230723145504.2967971-2-jonas@kwiboo.se>
- <1e3634df-593c-506d-5254-332c44ca7c4d@kwiboo.se>
- <9ba7a208113eed26c61d3373f1659b866c1f8c85.camel@collabora.com>
- <c6acb79a-aa4c-f6e0-648e-7890e75ff714@kwiboo.se>
- <bf74c779670c2dc249278b5a52620d7fcebafe98.camel@collabora.com>
- <36a3377463cc2a167534574a096cb5097ea7c242.camel@collabora.com>
- <3b496548-04be-a2b2-5b98-6925b96933f0@kwiboo.se>
- <0b4315a9-849a-1b50-d622-1a47be602e3f@kwiboo.se>
- <261d3994b44dc01ed68ea2ed7856caef635c9809.camel@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3-1 
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZMRcvZKrbHV6KbJqm+bODJmdfsaLRMjWXKYMK57TF4ONPJRTa6K4v7NVxY/k18l+/ugZub/YC+jS9ooIMMmFzq8cm8n50qgiXX3J386YiQ0+FTwxX8OmUnM0G62VMJjhsx3huZxvDXGelnZRYNKWn3vD1sJQOchyaYSVS8AdrGFSH9c0jlloQefqm6WhLZhd444shnl2A9cYdtxngtiLpAhDAApMxAHtFTDEA6VBQlX13rg/Q8X6uHqxB9faE0Nl+pAi9t4K/9ikYccW2AxkODfdt+eu3IAA1BcK1njS2v5/0zHA+g90bnZXtHqz2aP++g6Cj9qmX63GTSSmoZZzGg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UEyx/dDBRa3ODVEGQP7f/To1YK7GOZu3p0R1Sbe9gl0=;
+ b=jCpmau3QpZegCOCwQe9+iz44CHF7m3qHiWYz69LokCvzygw5XlXOkRFdAkglQN6zuTVOL/b096Enxpjna8+8A7dzSzda87rqBs7q3wNO1pzVhP0Prs9tygu2aRMVwd9joTi234NGtV7fQJo1SKXMUONIBZmEDeCsVRn8FGUcYLxiV3Bnl5savRH6DvQx6yZxX3DROMP+Uw6bv1KgkVg8u9cBBVLMUvNwYR3r9KnB26k7dLWdIH6UnWhQx/Q8rQ5qkTbiXELwQmjLaZRDesJe5WIidQ+0Kt2JdUrABIyiNGYIscLts5B0vxnVQbWDZ86BvJN3Fe7zcrEvasTrYQVIew==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UEyx/dDBRa3ODVEGQP7f/To1YK7GOZu3p0R1Sbe9gl0=;
+ b=QWbjY87eVlvjp+md7coour3kEDEB/LmdLsaQPeefNWPkf2U9p7NfjFhZpHQymUXqwjLVwuKbqoCJZf25B/zTb4BT8iVT8pfU9unbqPlNWkKuL949/e5unH6nG7ps61oxyXrwDuqMYYgPG0lZELhseP7+qQnNG7aJSgvWCR4PKOxEc2PMHObvE8AgkBSlGv2V1iw9+KBG8aIGTKsSNmdv5MreBvsfNKd3ltfC2eHBTDK0GZ9G7peq5QCQEMdI3BBnd30LeCdumk0bBYHIgH9jkadZLywTZ41y6oeA05gKYrXJRB+LTl3sN3/TST9ODmGW6LA+93ui86LDthh94fxM6g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by PAWPR08MB9808.eurprd08.prod.outlook.com (2603:10a6:102:2ea::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.31; Fri, 5 Jul
+ 2024 15:04:42 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7741.027; Fri, 5 Jul 2024
+ 15:04:41 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Marek Vasut <marex@denx.de>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v2 0/8] net: tcp: improve tcp support
+Date: Fri,  5 Jul 2024 19:04:22 +0400
+Message-Id: <20240705150431.2274662-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.39.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: LO2P123CA0058.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1::22) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAWPR08MB9808:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0b50ab39-f3dd-4300-cd8c-08dc9d03cc31
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|7416014|52116014|38350700014|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?NyMALzKoP8qPrBWk54viw0AoYsAOTk9oZsgAqoOcwK6C6gWlTS8Tz6wsdFXs?=
+ =?us-ascii?Q?zzeJlcatHs94kS85l+hQE1YowCx7kIOiqJj1ydBKfeIlAbJtMUX8yH/GNdEz?=
+ =?us-ascii?Q?R2QFowXP0Te5mQJMEJYoat9K6luifuatlmcKfr2jMRMNabz/IZk1Vt487wxm?=
+ =?us-ascii?Q?/vaYc9PF0RQfujgCIJH1V5Aa9ok6AwYXAFviaxfFvDAE5Xf0KFjy5mOcqqmu?=
+ =?us-ascii?Q?J8z643nc6OJYb8TrypX8RV2lrieDR1iD6vLNMpo+J97oP8OLnU1yeuyrSEXd?=
+ =?us-ascii?Q?1yL85kMa2dpPJMaAdax5YZeSbnZeRpmlu2faagdwNkMzVhYMYFNFvJyyoVG3?=
+ =?us-ascii?Q?9Ia0fA7DkQGJ+hFSoVqDXVfoM154x06UCegPgzUq8NigEOyzmpoiji3DwDQX?=
+ =?us-ascii?Q?EJE+SmY8gGpreH5i9rDX+ZSM1BbER0fuCCvGdj6w1YuzGPvj/0JjZOgPhozm?=
+ =?us-ascii?Q?yYmNF06NO1wKzzlwLbAS+yzB76ezVM1OzBml4yGFnCTt8D5AdzZgb7wQad24?=
+ =?us-ascii?Q?t0r4lae0yQHF3hkgtEcYZsdIu0QP0azQ14B2cNIDPuDC3P/Ydj9AjM/sXTpB?=
+ =?us-ascii?Q?1IdbpPZgP0ghw8UF4POZdahXh/ZWOz5Gl18YUUxW7edYBZw5fXDgfbjma9tY?=
+ =?us-ascii?Q?HxZ+F0CmPfiH6sQLOSalaRGGm62QV8Sv4d6IsPTeUf87VHyiVmqeG6fKT6z5?=
+ =?us-ascii?Q?PrR1xTy1BpBY8bagN2dij0tGffLqds6SUMWGxnl7rLblPMwkh0MAoOYg9UqM?=
+ =?us-ascii?Q?eIXkC+UpCyDaIbi9OEYF4FWsQG+kBDB17nhwc4kp7/PqxKNZHCXoQZ9I6TON?=
+ =?us-ascii?Q?GIitVRJem7nhp7hmfUWf9Brln5PFavHhRrcNIPO8nqp1bOvOp9hD4pRjOh20?=
+ =?us-ascii?Q?BUvWml7ZpCvPm5+DyZV2a58n9//Ddwyy8iAbDpS09dzABsMqWXztb3sRCg6J?=
+ =?us-ascii?Q?YDSdSikIzurwelbEhFLh106ueYAymWSmS0e+KwNiJamXIbC1QVter+S3eBGL?=
+ =?us-ascii?Q?NhFKRWz96gTNo2sjBbQdJPc0/yE9k2XumucDfttnk4mbyYoAyAkzOE2W5OI5?=
+ =?us-ascii?Q?XBVXrhVjQaYwrCIDyFPX3Din+mAoNo8sJlpAUKFKPzmTtB/dS5NzP7qyl/oD?=
+ =?us-ascii?Q?4nraVyMCMCQ4ZIpoZVydZjk7i/fnEZHwaVtsCovdKTAJjtA8o+zPHatd8VOr?=
+ =?us-ascii?Q?HqCzvDGleodZcgLpzA16A7UrkOervxXfu4Et/30uWwyqzrVYkbcrOebhBlEs?=
+ =?us-ascii?Q?6O+M07QzUeXplzbTYyiOlUYJnq8wPzvftH9SOH/GJzsf4tgeBG6i0kEcP+Dw?=
+ =?us-ascii?Q?o0v45IEl1rqZICjBH4MNP8z98jRknhGajI2LffCoX7a1Y1WRt1gdRa6rGftr?=
+ =?us-ascii?Q?z9iClDXsnOVqWkmigYYfB1yYFBReupgIMnVU36b6KAI/yo7OBjAs8X4SkkF+?=
+ =?us-ascii?Q?ihzO35ZlxHg=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(7416014)(52116014)(38350700014)(921020);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?laNntyoNDkrOzT4KbekaP6BR1GWJrbt8McX50fF+WDI82NAkCanLc43Y4D6o?=
+ =?us-ascii?Q?a3gvjpZPNLD6BaSvjwu2bsQfU60B1uixQyiu8WpDGEXdBU9Bjjhz5XblNqhe?=
+ =?us-ascii?Q?J33jRJ510CFLAgKTvkyJonvQvsgdTEPuCT7sflEahfqr7C9in+6Mm+ofdTIy?=
+ =?us-ascii?Q?kGh8Sb0vmHignbbXv64EijvAafTUUhdTfe/W40F1TBezE6Kq50SRHW3oluCF?=
+ =?us-ascii?Q?2SYGm3Bq4OoQ0N9WQz3Io80bysK+S6N4mMn+NIG1HBL6xDaK7wE1FIF46CnC?=
+ =?us-ascii?Q?CYrVJuPlZ2RfmMgY+e6CtEx7p/LIYTKYXSxKskY9Zjs+fj9gkbAqhCPlWJI8?=
+ =?us-ascii?Q?fyEA07eRP63emLXtZa5cWBrVihWxYzKXOHwWEoX1iUGF3Ord6zH2p+Kfqil+?=
+ =?us-ascii?Q?a4nspq3JvEPYmPd9YtJF+g/CSwzqLppUksm8jPQ+GxSjxgc2WEGw4vWiPFDT?=
+ =?us-ascii?Q?ZpLR/JbEsiAfKWK+iROPYCPMs1p+xXCTjAeDqsTJXWntpsUl8PYiUSpbZlJA?=
+ =?us-ascii?Q?cMn/n9QPcVBBwNYtG376m/Rtpoua7IR7KhIkSTvAoNoPHV3eVx4/G0Dd2tG9?=
+ =?us-ascii?Q?2/xELx9+Rw1c+tlamA+icN7ux6m+0Y4Wfi9DDrDOp4GAXl2+B13m8p2Kf+Dy?=
+ =?us-ascii?Q?JbwQgB/j7BrsMSCWVf+BF0jYItA9qDGj/ceoe+T+dXYn6RaDxKeYVFFaq5Cn?=
+ =?us-ascii?Q?sVTMW7e7kzG6+UuYbTG+1Tk5PQxcagWYCsxwtbpAKYZHj7lCf2aQal9HC8MQ?=
+ =?us-ascii?Q?SRgnngKGBUurhAZLq33EpMrdMTNeNp4IoStJwOmijXrLjhzlUoKo5neMu05f?=
+ =?us-ascii?Q?Tmz98eoHUvF27uNBrrS7CNqppI20h9julWmet/Z0mNF2Jh1UnQTk2Nk2Yri2?=
+ =?us-ascii?Q?aemHiACif80e/BntLsrg3lC0nnXv6dKYXpErvm4HzAFDktvEyfdqyzlIVYX2?=
+ =?us-ascii?Q?YMFWREborXiBqXuOdiWhnjiynLBdxJKLd5FamYIxgZSY58+tj/jHftBH6keM?=
+ =?us-ascii?Q?ErZU+RxrK9CPNhiMYiIMLDN7Q+aeU7t4gMtxrFyEG5Rk+qP8ays/SZsizf/Q?=
+ =?us-ascii?Q?w0FnthC8hnZbR4576npbWwnEBTvMG+J9yM3bXwfIFJTFNMgvXCjfOFcdQftU?=
+ =?us-ascii?Q?RF45kUAddMTs8M/LtCKDysUvx+SaEFjMe9SV/wocpkJM9TPlkY1Fug54Ky/M?=
+ =?us-ascii?Q?rpc3grF1kkSCroMU1fGb5xerHclRczwuEFKz2n3tSIs5LszQBL8r/vOp1FCM?=
+ =?us-ascii?Q?F2XJpfbCHUvOwKh+9PeA+Hv7yGDuhq7SMvqvufoft7RnUvPfk1BtwqSAwGXd?=
+ =?us-ascii?Q?PJ3t69cgzF7eSv+wxgegzJZCyg6FcFjovQgrMi7GkkYEahcrQhCjGycIWt1P?=
+ =?us-ascii?Q?Vy56U3Nvc2CDwXnty4HYN0GKWyI0pWN6WbeiUpzBjJ1PhuR5CaP+3KAuKZkk?=
+ =?us-ascii?Q?kuW2X+xU8Ft7HrBD2UJhdpa2tKPysZ+4Y3NMwLYumaSqUp/tg0azKfkziHHU?=
+ =?us-ascii?Q?qYX2NSvKj4tzV7pyr4Qru+MDU0ioumUUvVunFPTmMk1TWQxraebSMLD+dWRo?=
+ =?us-ascii?Q?1recxdFcDXGIH+ToLsakr02R+Y8sfYz0RqOL1n7lak4YSx+Pq+dnSzQPig7U?=
+ =?us-ascii?Q?yxqdAvSTUNPzc1oKIFUKe+k=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b50ab39-f3dd-4300-cd8c-08dc9d03cc31
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 15:04:41.8099 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CgrWRQl7zfiKQ9ZD/eCgbg0NUq/mq5mkv1eYeZvqpk3AYpon5MLDixJJ8e9nsLez9obE1e7VhDpGwbCSAbdLcopGrV6V/B5hBMdlQkf2Shs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB9808
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,696 +167,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+This series of patches greatly improve TCP support.
 
-On Tue, 2023-10-17 at 10:02 +0100, Christopher Obbard wrote:
-> Hi Jonas,
->=20
-> On Sat, 2023-10-14 at 21:22 +0200, Jonas Karlman wrote:
-> > On 2023-10-14 20:58, Jonas Karlman wrote:
-> > > Hi Christopher,
-> > >=20
-> > > On 2023-10-12 13:46, Christopher Obbard wrote:
-> > > > Hi Jonas,
-> > > >=20
-> > > > On Thu, 2023-10-12 at 10:51 +0100, Christopher Obbard wrote:
-> > > > > Hi Jonas,
-> > > > >=20
-> > > > > Sorry for the late response, I've been meaning to test this for a
-> > > > > while but not got around to it.
-> > > > >=20
-> > > > > On Thu, 2023-08-17 at 23:56 +0000, Jonas Karlman wrote:
-> > > > > > Hi Christopher,
-> > > > > >=20
-> > > > > > On 2023-08-08 16:25, Christopher Obbard wrote:
-> > > > > > > Hi Jonas,
-> > > > > > >=20
-> > > > > > > On Sun, 2023-07-23 at 15:04 +0000, Jonas Karlman wrote:
-> > > > > > > > On 2023-07-23 16:55, Jonas Karlman wrote:
-> > > > > > > > > The Pine64 Quartz64 Model A is a single-board computer ba=
-sed
-> > > > > > > > > on the
-> > > > > > > > > Rockchip RK3566 SoC. The board features USB3, SATA, PCIe,
-> > > > > > > > > HDMI, USB2.0,
-> > > > > > > > > CSI, DSI, eDP, eMMC, SD, and an e-paper parallel port, as
-> > > > > > > > > well as a
-> > > > > > > > > 20 pin GPIO header.
-> > > > > > > > >=20
-> > > > > > > > > Features tested on a Quartz64-A 8GB v2.0 2021-04-27:
-> > > > > > > > > - SD-card boot
-> > > > > > > > > - eMMC boot
-> > > > > > > > > - PCIe/NVMe/AHCI
-> > > > > > > > > - USB host
-> > > > > > > > >=20
-> > > > > > > > > Device tree is imported from linux v6.4.
-> > > > > > > > >=20
-> > > > > > > > > Co-developed-by: Nicolas Frattaroli
-> > > > > > > > > <frattaroli.nicolas@gmail.com>
-> > > > > > > > > Signed-off-by: Nicolas Frattaroli
-> > > > > > > > > <frattaroli.nicolas@gmail.com>
-> > > > > > > > > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > > > > > > > > ---
-> > > > > > > >=20
-> > > > > > > > [...]
-> > > > > > > >=20
-> > > > > > > > Boot log with ROCKCHIP_TPL=3Drk3566_ddr_1056MHz_v1.17.bin a=
-nd
-> > > > > > > > BL31=3Drk3568_bl31_v1.43.elf:
-> > > > > > > >=20
-> > > > > > > > [...]
-> > > > > > > >=20
-> > > > > > > > U-Boot 2023.07 (Jul 23 2023 - 12:42:18 +0000)
-> > > > > > > >=20
-> > > > > > > > Model: Pine64 RK3566 Quartz64-A Board
-> > > > > > > > DRAM:=C2=A0 8 GiB (effective 7.7 GiB)
-> > > > > > > > PMIC:=C2=A0 RK8170 (on=3D0x10, off=3D0x00)
-> > > > > > > > Core:=C2=A0 321 devices, 27 uclasses, devicetree: separate
-> > > > > > > > MMC:=C2=A0=C2=A0 rockchip_sdhci_probe clk set rate fail!
-> > > > > > > > mmc@fe2b0000: 1, mmc@fe2c0000: 2, mmc@fe310000: 0
-> > > > > > > > Loading Environment from nowhere... OK
-> > > > > > > > In:=C2=A0=C2=A0=C2=A0 serial@fe660000
-> > > > > > > > Out:=C2=A0=C2=A0 serial@fe660000
-> > > > > > > > Err:=C2=A0=C2=A0 serial@fe660000
-> > > > > > > > Model: Pine64 RK3566 Quartz64-A Board
-> > > > > > > > Net:=C2=A0=C2=A0 No ethernet found.
-> > > > > > > >=20
-> > > > > > > > Hit any key to stop autoboot:=C2=A0 0
-> > > > > > > > =3D>
-> > > > > > >=20
-> > > > > > >=20
-> > > > > > > I just tried booting U-Boot v2023.10-rc2 with
-> > > > > > > ROCKCHIP_TPL=3Drk3566_ddr_1056MHz_v1.17.bin and
-> > > > > > > BL31=3Drk3568_bl31_v1.43.elf, on my Quartz64-A but it fails d=
-uring
-> > > > > > > loading of some parts. I removed the output of the RK TPL fro=
-m
-> > > > > > > my logs as there were no errors.
-> > > > > >=20
-> > > > > > Try with latest rk3566_ddr_1056MHz_v1.18.bin and see if that ma=
-kes
-> > > > > > any
-> > > > > > difference.
-> > > > >=20
-> > > > > No difference.
-> > > > >=20
-> > > > > I've also checked, there is no other maskrom bootable media such =
-as
-> > > > > SPI flash connected to the board.
-> > > > >=20
-> > > > > >=20
-> > > > > > > This is when booting from eMMC.
-> > > > > >=20
-> > > > > > Does it boot with SD-card or other eMMC modules?
-> > > > >=20
-> > > > > Booting from SD card (without eMMC connected), everything works
-> > > > > fine.
-> > > > >=20
-> > > > > >=20
-> > > > >=20
-> > > > > > > I also tried building your branch from
-> > > > > > > https://github.com/Kwiboo/u-boot-rockchip/tree/rk3568-2023.10=
-=C2=A0
-> > > > > >=20
-> > > > > > Please try with a GitHub actions built u-boot-rockchip.bin base=
-d
-> > > > > > on my
-> > > > > > rk3568-2023.07.02 branch at
-> > > > > > https://github.com/Kwiboo/u-boot-build/actions/runs/5777761235
-> > > > >=20
-> > > > > With that exact artifact, flashed with:
-> > > > >=20
-> > > > > > rkdeveloptool db rk356x_spl_loader_v1.18.113.bin
-> > > > > > rkdeveloptool ef
-> > > > > > rkdeveloptool wl 64 u-boot-rockchip.bin
-> > > > > > rkdeveloptool rd
-> > > > >=20
-> > > > > it fails to boot with with:
-> > > > >=20
-> > > > > > DDR V1.18 f366f69a7d typ 23/07/17-15:48:58
-> > > > > > ln
-> > > > > > LP4/4x derate en, other dram:1x trefi
-> > > > > > SRX
-> > > > > > ddrconfig:7
-> > > > > > LPDDR4X, 324MHz
-> > > > > > BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D17 CS1 Row=3D17 CS=3D2 Die BW=
-=3D8 Size=3D8192MB
-> > > > > >=20
-> > > > > > change to: 324MHz
-> > > > > > clk skew:0x60
-> > > > > >=20
-> > > > > > change to: 528MHz
-> > > > > > clk skew:0x58
-> > > > > >=20
-> > > > > > change to: 780MHz
-> > > > > > clk skew:0x58
-> > > > > >=20
-> > > > > > change to: 1056MHz(final freq)
-> > > > > > clk skew:0x32
-> > > > > > out
-> > > > > >=20
-> > > > > > U-Boot SPL 2023.07.02-g09919887 (Aug 06 2023 - 16:59:31 +0000)
-> > > > > > Trying to boot from MMC1
-> > > > > > spl: mmc init failed with error: -70
-> > > > > > Trying to boot from MMC2
-> > > > > > Card did not respond to voltage select! : -110
-> > > > > > spl: mmc init failed with error: -95
-> > > > > > Trying to boot from MMC1
-> > > > > > mmc fail to send stop cmd
-> > > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > > SPL: failed to boot from all boot devices
-> > > > > > ### ERROR ### Please RESET the board ###
-> > > > >=20
-> > > > > I also tried a second eMMC, but it also failed to boot with the s=
-ame
-> > > > > "mmc block read error" message.
-> > > >=20
-> > > >=20
-> > > > I tried with your latest branch
-> > > > https://github.com/Kwiboo/u-boot-rockchip/commits/rk3568-2023.10
-> > > >=20
-> > > > and this time a different error message, loading from the eMMC appe=
-ars
-> > > > to get a bit further:
-> > > >=20
-> > > > > U-Boot SPL 2023.10-00054-gef68159087 (Oct 12 2023 - 12:14:22 +010=
-0)
-> > > > > Trying to boot from MMC1
-> > > > > ## Checking hash(es) for config config-1 ... OK
-> > > > > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > > > > spl_load_simple_fit: can't load image loadables index 0 (ret =3D =
--5)
-> > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > Trying to boot from MMC2
-> > > > > Card did not respond to voltage select! : -110
-> > > > > spl: mmc init failed with error: -95
-> > > > > Trying to boot from MMC1
-> > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > SPL: failed to boot from all boot devices
-> > > > > ### ERROR ### Please RESET the board ###
-> > > >=20
-> > > > So this is pointing to an issue reading from the MMC...
-> > > >=20
-> > > > I found
-> > > > https://lists.denx.de/pipermail/u-boot/2023-April/514315.html=C2=A0=
-(which
-> > > > is applied to your branch) and added the following to defconfig:
-> > > >=20
-> > > > CONFIG_MMC_SDHCI_SDMA=3Dy
-> > > > +# CONFIG_SPL_MMC_SDHCI_SDMA is not set
-> > > >=20
-> > > > but this seemed to make the loading less reliable:
-> > > >=20
-> > > > > U-Boot SPL 2023.10-00054-gef68159087-dirty (Oct 12 2023 - 12:23:1=
-0
-> > > > > +0100)
-> > > > > Trying to boot from MMC1
-> > > > > ## Checking hash(es) for config config-1 ... OK
-> > > > > mmc fail to send stop cmd
-> > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > Trying to boot from MMC2
-> > > > > Card did not respond to voltage select! : -110
-> > > > > spl: mmc init failed with error: -95
-> > > > > Trying to boot from MMC1
-> > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > SPL: failed to boot from all boot devices
-> > > > > ### ERROR ### Please RESET the board ###
-> > > >=20
-> > > >=20
-> > >=20
-> > > Thanks for testing different combinations.
-> > >=20
-> > > I did find an issue with emmc write using ddr52 and hs400 modes on
-> > > rk3568. On rk3588 emmc write only worked reliable after hs200 mode ha=
-d
-> > > been used.
-> > >=20
-> > > Please try the changes from following commit, or my rk35xx-2024.01
-> > > work-in-progress branch:
-> > >=20
-> > > WIP: rockchip: rk35xx: improve emmc write
-> > > https://github.com/Kwiboo/u-boot-rockchip/commit/aa6156179bb2034e8ba2=
-6753e05285e276327d78
-> > >=20
-> > > Most rk356x boards currently default to ddr52 mode, and possible emmc
-> > > read is also affected with similar issue as emmc write.
-> > >=20
-> > > I have also discovered a strange issue on an Amlogic soc related to
-> > > U-Boot mmc commands and gcc optimization, please see following patch:
-> > > https://patchwork.ozlabs.org/patch/1839392/
-> >=20
-> > Posted link to wrong patch, I meant the following patch:
-> >=20
-> > [RFC] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
-> > https://patchwork.ozlabs.org/patch/1841495/
->=20
->=20
-> I just tried with your branch & this patch on top, it still fails to boot
-> and seems to be random how far it gets through the loading phase. Again I=
-'ve
-> removed the ddr training log.
-> It seems to get further this time though...
->=20
-> Boot #1:
-> > U-Boot SPL 2023.10-00055-g29313fff30 (Oct 17 2023 - 09:44:21 +0100)
-> > Trying to boot from MMC1
-> > ## Checking hash(es) for config config-1 ... OK
-> > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > ## Checking hash(es) for Image u-boot ... sha256+ OK
-> > <crash>
->=20
->=20
-> Boot #2:
-> > U-Boot SPL 2023.10-00055-g29313fff30 (Oct 17 2023 - 09:44:21 +0100)
-> > Trying to boot from MMC1
-> > ## Checking hash(es) for config config-1 ... OK
-> > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > ## Checking hash(es) for Image u-boot ... sha256+ OK
-> > ## Checking hash(es) for Image fdt-1 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-2 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-3 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-4 ... sha256+ OK
-> > spl_load_simple_fit: can't load image loadables index 4 (ret =3D -5)
-> > mmc_load_image_raw_sector: mmc block read error
-> > Trying to boot from MMC2
-> > Card did not respond to voltage select! : -110
-> > spl: mmc init failed with error: -95
-> > Trying to boot from MMC1
-> > mmc_load_image_raw_sector: mmc block read error
-> > SPL: failed to boot from all boot devices
-> > ### ERROR ### Please RESET the board ###
->=20
->=20
-> Boot #3:
-> > U-Boot SPL 2023.10-00055-g29313fff30 (Oct 17 2023 - 09:44:21 +0100)
-> > Trying to boot from MMC1
-> > ## Checking hash(es) for config config-1 ... OK
-> > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > ## Checking hash(es) for Image u-boot ... sha256+ OK
-> > ## Checking hash(es) for Image fdt-1 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-2 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-3 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-4 ... sha256+ OK
-> > spl_load_simple_fit: can't load image loadables index 4 (ret =3D -5)
-> > mmc_load_image_raw_sector: mmc block read error
-> > Trying to boot from MMC2
-> > Card did not respond to voltage select! : -110
-> > spl: mmc init failed with error: -95
-> > Trying to boot from MMC1
-> > mmc_load_image_raw_sector: mmc block read error
-> > SPL: failed to boot from all boot devices
-> > ### ERROR ### Please RESET the board ###
-> >=20
->=20
-> For reference I am using gcc from Debian unstable:
-> > $ aarch64-linux-gnu-gcc --version
-> > aarch64-linux-gnu-gcc (Debian 13.2.0-2) 13.2.0
->=20
->=20
-> I can test with alternative cross-compiler if that would be useful.
+The benefits:
+ * a lot of bug was fixed
+ * tcp cliens becomes smaller/simpler
+ * fix data uploading (now it's possible to transmit a huge
+   array of data from the board to external server)
+ * data downloading/uploading with netcat over tcp was added
 
+Mikhail Kshevetskiy (9):
+  net/tcp: fix TCP options processing
+  net/tcp: fix selective acknowledge
+  net/tcp: put connection specific data into a tcp_stream structure
+  net/tcp: add connection info to tcp_stream structure
+  net/tcp: rename ack_edge and seq_init to more common rcv_nxt and irs
+  net/tcp: improve tcp framework, use better state machine
+  net/tcp: simplify tcp header filling code
+  net/tcp: define a fallback value for rcv_wnd size
+  net/netcat: add netcat over tcp support
 
-Sorry to revive an old thread, but I managed to do some more testing with t=
-his
-board. I found that my Quartz64-a booting from eMMC is still broken with U-
-Boot main branch, as well as your WIP branches on GitHub. It fails with e.g=
-:
+ cmd/Kconfig          |    7 +
+ cmd/net.c            |   34 +-
+ include/net.h        |    7 +-
+ include/net/netcat.h |   20 +
+ include/net/tcp.h    |  227 +++++++-
+ include/net/wget.h   |    8 -
+ net/Makefile         |    1 +
+ net/fastboot_tcp.c   |  190 +++----
+ net/net.c            |   30 +-
+ net/netcat.c         |  159 ++++++
+ net/tcp.c            | 1253 +++++++++++++++++++++++++++++-------------
+ net/wget.c           |  479 +++++-----------
+ 12 files changed, 1538 insertions(+), 877 deletions(-)
+ create mode 100644 include/net/netcat.h
+ create mode 100644 net/netcat.c
 
-  U-Boot SPL 2024.07-rc4-00480-g51c2936ec989 (Jul 05 2024 - 15:30:33 +0100)
-  Trying to boot from MMC1
-  spl: mmc init failed with error: -110
-  Trying to boot from MMC2
-  Card did not respond to voltage select! : -110
-  spl: mmc init failed with error: -95
-  Trying to boot from MMC1
-  spl: mmc init failed with error: -70
-  SPL: failed to boot from all boot devices
-  ### ERROR ### Please RESET the board ###
-
-
-
-The only thing which I have found to work, is pgwipeout's U-Boot branch, wi=
-th
-the following binary blobs (The same U-Boot branch doesn't seem to work wit=
-h
-the latest version of the BL31 blob. Seems to need that specific BL31. This=
- is
-very, very strange to me.)
-
-The DDR bin seems to be unaffected, but I included a working version below
-anyway.
-https://github.com/rockchip-linux/rkbin/raw/6186debcac95553f6b311cee10669e1=
-2c9c9963d/bin/rk35/rk3568_bl31_v1.28.elf
-
-https://github.com/rockchip-linux/rkbin/raw/ddf03c1d80b33dac72a33c4f732fc58=
-49b47ff99/bin/rk35/rk3568_ddr_1560MHz_v1.13.bin
-
-To make Peter's branch build, you need to set BL31 and move the DDR bin to
-ram_init.bin
-
-I tried to forward-port some of the changes to U-Boot mainline, but the sam=
-e
-error.
-
-@Peter, can you try and confirm the error booting from eMMC on Quartz64-A w=
-ith
-mainline U-Boot ?
-
-
-
->=20
-> Thanks,
-> Chris
->=20
-> >=20
-> > Regards,
-> > Jonas
-> >=20
-> > >=20
-> > > Please try with CONFIG_MMC_TRACE=3Dy to see what commands fails on yo=
-ur
-> > > device.
-> > >=20
-> > > If above patches does not work also try with following options applie=
-d:
-> > >=20
-> > > CONFIG_MMC_HS200_SUPPORT=3Dy
-> > > CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
-> > >=20
-> > > Use of HS200 seem to be the most reliable option on rk35xx based on m=
-y
-> > > limited testing.
-> > >=20
-> > > > ...
-> > > >=20
-> > > > > >=20
-> > > > > > What happens if you write u-boot-rockchip.bin to eMMC module
-> > > > > > usinga USB adapter:
-> > > > > >=20
-> > > > > > =C2=A0 dd if=3Du-boot-rockchip.bin of=3D/dev/<device> bs=3D32k =
-seek=3D1
-> > > > > > conv=3Dfsync
-> > > > > >=20
-> > > > > > or using U-Boot cmd when booted from a SD-card?
-> > > > > >=20
-> > > > > > =C2=A0 # Read u-boot-rockchip.bin from first partition of a SD =
-card
-> > > > > > =C2=A0 load mmc 1:1 10000000 u-boot-rockchip.bin
-> > > > > >=20
-> > > > > > =C2=A0 # Change to eMMC
-> > > > > > =C2=A0 mmc dev 0
-> > > > > >=20
-> > > > > > =C2=A0 # Write 10 MiB (0x5000 blocks) at sector 64 (0x40)
-> > > > > > =C2=A0 mmc write $fileaddr 40 5000
-> > > > > >=20
-> > > > > > Does that make any difference?
-> > > > >=20
-> > > > > I don't think I have an eMMC writer for Pine64 eMMCs, I will try =
-to
-> > > > > get hold of one this week.
-> > > >=20
-> > > > I have two USB writers. Anyway, the first boot, it fails with:
-> > > >=20
-> > > > > U-Boot SPL 2023.10-00054-gef68159087 (Oct 12 2023 - 12:30:14 +010=
-0)
-> > > > > Trying to boot from MMC1
-> > > > > ## Checking hash(es) for config config-1 ... OK
-> > > > > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > > > > ## Checking hash(es) for Image u-boot ... sha256+ OK
-> > > > > <hang>
-> > > >=20
-> > > >=20
-> > > > Then again after a reset:
-> > > >=20
-> > > > > U-Boot SPL 2023.10-00054-gef68159087 (Oct 12 2023 - 12:30:14 +010=
-0)
-> > > > > Trying to boot from MMC1
-> > > > > mmc fail to send stop cmd
-> > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > Trying to boot from MMC2
-> > > > > Card did not respond to voltage select! : -110
-> > > > > spl: mmc init failed with error: -95
-> > > > > Trying to boot from MMC1
-> > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > SPL: failed to boot from all boot devices
-> > > > > ### ERROR ### Please RESET the board ###
-> > > >=20
-> > > >=20
-> > > >=20
-> > > >=20
-> > > > > But it fails to write to the eMMC with:
-> > > > >=20
-> > > > > > =3D> load mmc 1:2 10000000 u-boot-rockchip.bin
-> > > > > > 9510400 bytes read in 791 ms (11.5 MiB/s)
-> > > > > >=20
-> > > > > > =3D> mmc dev 0
-> > > > > > switch to partitions #0, OK
-> > > > > > mmc0(part 0) is current device
-> > > > > >=20
-> > > > > >=20
-> > > > > > =3D> mmc write $fileaddr 40 5000
-> > > > > > MMC write: dev # 0, block # 64, count 20480 ... mmc write faile=
-d
-> > > > > > 0 blocks written: ERROR
-> > > > > >=20
-> > > > > > =3D> mmc info
-> > > > > > Device: mmc@fe310000
-> > > > > > Manufacturer ID: 45
-> > > > > > OEM: 0
-> > > > > > Name: DF4016=20
-> > > > > > Bus Speed: 52000000
-> > > > > > Mode: MMC DDR52 (52MHz)
-> > > > > > Rd Block Len: 512
-> > > > > > MMC version 5.1
-> > > > > > High Capacity: Yes
-> > > > > > Capacity: 14.7 GiB
-> > > > > > Bus Width: 8-bit DDR
-> > > > > > Erase Group Size: 512 KiB
-> > > > > > HC WP Group Size: 8 MiB
-> > > > > > User Capacity: 14.7 GiB WRREL
-> > > > > > Boot Capacity: 4 MiB ENH
-> > > > > > RPMB Capacity: 4 MiB ENH
-> > > > >=20
-> > > > > I think this points to some issue with the mmc driver in U-Boot, =
-or
-> > > > > possibly some issue with my board. But I find that hard to believ=
-e
-> > > > > because the Rockchip usbloader seems to write to the eMMC
-> > > > > just
-> > > > > fine ?
-> > >=20
-> > > Probably related to sdhci driver and rx/tx tap and/or delay num etc.
-> > >=20
-> > > > >=20
-> > > > > >=20
-> > > > > > >=20
-> > > > > > > Boot log (v2023.10-rc2):
-> > > > > > >=20
-> > > > > > > U-Boot SPL 2023.10-rc2 (Aug 08 2023 - 14:02:34 +0100)
-> > > > > > > rockchip_sdhci_probe clk set rate fail!
-> > > > > > > Trying to boot from MMC1
-> > > > > > > spl: mmc init failed with error: -110
-> > > > > > > Trying to boot from MMC2
-> > > > > > > Card did not respond to voltage select! : -110
-> > > > > > > spl: mmc init failed with error: -95
-> > > > > > > Trying to boot from MMC1
-> > > > > >=20
-> > > > > > Strange that second try of eMMC (MMC1) gets little bit longer.
-> > > > > >=20
-> > > > > > > ## Checking hash(es) for config config-1 ... OK
-> > > > > > > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > > > > > > spl_load_simple_fit: can't load image loadables index 0 (ret =
-=3D -
-> > > > > > > 5)
-> > > > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > > > SPL: failed to boot from all boot devices
-> > > > > > > ### ERROR ### Please RESET the board ###
-> > > > > > >=20
-> > > > > > >=20
-> > > > > > > Boot log (your branch):
-> > > > > > >=20
-> > > > > > > U-Boot SPL 2023.10-rc1-00368-g16cb31d427 (Aug 08 2023 - 15:17=
-:35
-> > > > > > > +0100)
-> > > > > > > Trying to boot from MMC1
-> > > > > > > spl: mmc init failed with error: -70
-> > > > > > > Trying to boot from MMC2
-> > > > > > > Card did not respond to voltage select! : -110
-> > > > > > > spl: mmc init failed with error: -95
-> > > > > > > Trying to boot from MMC1
-> > > > > > > ## Checking hash(es) for config config-1 ... OK
-> > > > > > > mmc_load_image_raw_sector: mmc block read error
-> > > > > > > SPL: failed to boot from all boot devices
-> > > > > > > ### ERROR ### Please RESET the board ###
-> > > > > >=20
-> > > > > > I have not been able to reproduce this kind of issue on any of =
-my
-> > > > > > two
-> > > > > > Quartz64-A boards, tested with different eMMC modules.
-> > > > > >=20
-> > > > > > Does your eMMC module have some compatibility issue?
-> > > > > > Do you have any more details on the eMMC module you have tested
-> > > > > > with?
-> > > > >=20
-> > > > > I have two eMMCs, one from FORESEE which came with a Pine64 and o=
-ne
-> > > > > marked SanDisk (which I posted the mmc info for above).
-> > >=20
-> > > My eMMC modules is also FORESEE or SanDisk, from Pine64, Radxa and
-> > > Hardkernel.
-> > >=20
-> > > > >=20
-> > > > > My hardware is marked Quartz64-RK3399-V2.0 2021-04-27
-> > > > > Maybe there is some difference with your board?
-> > >=20
-> > > Should match my board, I have the hw revision where SATA port is
-> > > removed.
-> > > (boards with/without SATA have same version silk on the board)
-> > >=20
-> > > > >=20
-> > > > > I will also try an image with vendor u-boot as a next step.
-> > > >=20
-> > > > I tried latest Armbian (which seems to use ) from
-> > > > https://github.com/armbian/build/releases/=C2=A0and flashed the eMM=
-C with
-> > > > the USB writer. It ended up booting to Linux, which proves that the
-> > > > hardware I
-> > > > have is most likey in a good working order ;-)!
-> > >=20
-> > > Hopefully the issue is related to the peephole2 optimization issue or
-> > > the use of a not fully supported ddr52 mode.
-> > >=20
-> > > Regards,
-> > > Jonas
-> > >=20
-> > > >=20
-> > > >=20
-> > > > > U-Boot SPL 2022.10-rc4-armbian (Feb 11 2023 - 22:25:16 +0000)
-> > > > > saradc@fe720000: Can't update Vdd. Error: -38saradc@fe720000: Can=
-'t
-> > > > > update Vss. Error: -38can't get vref-supply: -38
-> > > > > rockchip_dnl_key_pressed: adc_channel_single_shot fail!
-> > > > > Trying to boot from MMC2
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 Preloader serial: 2
-> > > > > NOTICE:=C2=A0 BL31: v2.3():v2.3-152-g4e725b15f:cl
-> > > > > NOTICE:=C2=A0 BL31: Built : 10:51:13, Jul 15 2021
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 GICv3 without legacy support detected.
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 ARM GICv3 driver initialized in EL3
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 pmu v1 is valid
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_param[0].freq_mhz=3D 1560MHz
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_param[1].freq_mhz=3D 324MHz
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_param[2].freq_mhz=3D 528MHz
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_param[3].freq_mhz=3D 780MHz
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 Using opteed sec cpu_context!
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 boot cpu mask: 0
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 BL31: Initializing runtime services
-> > > > > WARNING: No OPTEE provided by BL2 boot loader, Booting device
-> > > > > without OPTEE initialization. SMC`s destined for OPTEE will retur=
-n
-> > > > > SMC_UNK
-> > > > > ERROR:=C2=A0=C2=A0 Error initializing runtime service opteed_fast
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 BL31: Preparing for EL3 exit to normal wo=
-rld
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 Entry point address =3D 0xa00000
-> > > > > INFO:=C2=A0=C2=A0=C2=A0 SPSR =3D 0x3c9
-> > > > >=20
-> > > > >=20
-> > > > > U-Boot 2022.10-rc4-armbian (Feb 11 2023 - 22:25:16 +0000)
-> > > > >=20
-> > > > > Model: Pine64 RK3566 Quartz64-A Board
-> > > > > DRAM:=C2=A0 2 GiB
-> > > > > PMIC:=C2=A0 RK8170 (on=3D0x10, off=3D0x00)
-> > > > > Core:=C2=A0 266 devices, 21 uclasses, devicetree: separate
-> > > > > MMC:=C2=A0=C2=A0 mmc@fe2b0000: 1, mmc@fe310000: 0
-> > > > > Loading Environment from nowhere... OK
-> > > > > In:=C2=A0=C2=A0=C2=A0 serial@fe660000
-> > > > > Out:=C2=A0=C2=A0 serial@fe660000
-> > > > > Err:=C2=A0=C2=A0 serial@fe660000
-> > > > > Model: Pine64 RK3566 Quartz64-A Board
-> > > > > can't get vref-supply: -2
-> > > > > rockchip_dnl_key_pressed: adc_channel_single_shot fail!
-> > > > > Net:=C2=A0=C2=A0 No ethernet found.
-> > > > > Hit any key to stop autoboot:=C2=A0 0=20
-> > > > > starting USB...
-> > > > > Bus usb@fcc00000: Port not available.
-> > > > > Bus usb@fd000000: Port not available.
-> > > > > Bus usb@fd800000: USB EHCI 1.00
-> > > > > Bus usb@fd840000: USB OHCI 1.0
-> > > > > Bus usb@fd880000: USB EHCI 1.00
-> > > > > Bus usb@fd8c0000: USB OHCI 1.0
-> > > > > scanning bus usb@fd800000 for devices... 1 USB Device(s) found
-> > > > > scanning bus usb@fd840000 for devices... ERROR:=C2=A0 USB-error:
-> > > > > DEVICENOTRESPONDING: Device did not respond to token (IN) or did
-> > > > > not provide a handshake (OUT) (5)
-> > > > > ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to
-> > > > > token (IN) or did
-> > > > > not provide a handshake (OUT) (5)
-> > > > > unable to get device descriptor (error=3D-1)
-> > > > > 1 USB Device(s) found
-> > > > > scanning bus usb@fd880000 for devices... 1 USB Device(s) found
-> > > > > scanning bus usb@fd8c0000 for devices... 1 USB Device(s) found
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 scanning usb for storage dev=
-ices... 0 Storage Device(s) found
-> > > > >=20
-> > > > > Device 0: unknown device
-> > > > > Card did not respond to voltage select! : -110
-> > > > > switch to partitions #0, OK
-> > > > > mmc0(part 0) is current device
-> > > > > Scanning mmc 0:1...
-> > > > > Found /boot/extlinux/extlinux.conf
-> > > > > Retrieving file: /boot/extlinux/extlinux.conf
-> > > > > 1:	Armbian
-> > > > > Retrieving file: /boot/uInitrd
-> > > > > Retrieving file: /boot/Image
-> > > > > append: root=3DUUID=3D7f9c9970-93ba-46ca-9f03-f3241712ead8
-> > > > > console=3DttyS02,1500000 console=3Dtty0 rw no_console_suspend
-> > > > > consoleblank=3D0 fsck.fix=3Dyes fsck.repair=3Dyes net.ifnames=3D0=
- splash
-> > > > > plymouth.ignore-
-> > > > > serial-consoles
-> > > > > Retrieving file: /boot/dtb/rockchip/rk3566-quartz64-a.dtb
-> > > > > Moving Image from 0x2080000 to 0x2200000, end=3D3de0000
-> > > > > ## Loading init Ramdisk from Legacy Image at 0a200000 ...
-> > > > > =C2=A0=C2=A0 Image Name:=C2=A0=C2=A0 uInitrd
-> > > > > =C2=A0=C2=A0 Image Type:=C2=A0=C2=A0 AArch64 Linux RAMDisk Image =
-(gzip compressed)
-> > > > > =C2=A0=C2=A0 Data Size:=C2=A0=C2=A0=C2=A0 34402446 Bytes =3D 32.8=
- MiB
-> > > > > =C2=A0=C2=A0 Load Address: 00000000
-> > > > > =C2=A0=C2=A0 Entry Point:=C2=A0 00000000
-> > > > > =C2=A0=C2=A0 Verifying Checksum ... OK
-> > > > > ## Flattened Device Tree blob at 0a100000
-> > > > > =C2=A0=C2=A0 Booting using the fdt blob at 0xa100000
-> > > > > =C2=A0=C2=A0 Loading Ramdisk to 7be16000, end 7dee508e ... OK
-> > > > > =C2=A0=C2=A0 Loading Device Tree to 000000007bdf7000, end 0000000=
-07be158e2 ...
-> > > > > OK
-> > > > >=20
-> > > > > Starting kernel ...
-> > > > >=20
-> > > > > efi_free_pool: illegal free 0x000000007cee7040
-> > > > > efi_free_pool: illegal free 0x000000007cee4040
-> > > > > [=C2=A0=C2=A0=C2=A0 0.000000] Booting Linux on physical CPU 0x000=
-0000000
-> > > > > [0x412fd050]
-> > > > > [=C2=A0=C2=A0=C2=A0 0.000000] Linux version 6.2.0-rc6-media (root=
-@d00a59921686)
-> > > > > (aarch64-linux-gnu-gcc (GNU Toolchain for the A-profile Architect=
-ure
-> > > > > 8.3-2019.03 (arm-rel-8.36)) 8.3.0, GNU ld (GNU Toolchain
-> > > > > for the
-> > > > > A-profile Architecture 8.3-2019.03 (arm-rel-8.36)) 2.32.0.2019032=
-1)
-> > > > > #trunk.0252 SMP PREEMPT_DYNAMIC Sat Feb 11 22:41:21 UTC 2023
-> > > > > [=C2=A0=C2=A0=C2=A0 0.000000] Machine model: Pine64 RK3566 Quartz=
-64-A Board
-> > > > >=20
-> > > >=20
-> > > >=20
-> > > >=20
-> > > >=20
-> > > > Thanks!
-> > > >=20
-> > > > Chris
-> > >=20
-> >=20
+-- 
+2.39.2
 
