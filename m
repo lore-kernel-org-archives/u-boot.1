@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B61DEC38150
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 16:57:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D39C3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 17:57:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81E9B8899C;
-	Fri,  5 Jul 2024 18:57:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 516E388905;
+	Fri,  5 Jul 2024 19:57:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PKS6Yhf/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P9D7iEPa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 781BF8899F; Fri,  5 Jul 2024 18:57:24 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 617F8889B9; Fri,  5 Jul 2024 19:57:02 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B6CA889C0
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 18:57:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7ED4288905
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 19:57:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5c47ad9967cso947965eaf.2
- for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 09:57:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-57cbc66a0a6so3315123a12.1
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 10:57:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720198640; x=1720803440; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4fxjDCTJoBsJcGPwT9vCIK+suw8JJW6I9W6xeFIxpmU=;
- b=PKS6Yhf/ToMExB7ZauI0NhEO2q68qH0+UyCDxvjJnkJ7BwLvqWG7xMmd0sR6clvAEp
- flyS6n0cte2Xt04OxofTMfSAKWA7m8GBpq8i7KnJJNDxO3UAl9q3orwSYITJOZnqixvb
- zamoguwA7cb4MtqunddnwKV6myUs+yxsHtn7M=
+ d=gmail.com; s=20230601; t=1720202220; x=1720807020; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uXvPg8atQcBo3ULyIAsWJ239G37p1Wf0N/VdxQ1bmz0=;
+ b=P9D7iEPaA3wGLWU7vcOuksZm+MJfIYUuU1E9c2BaVZkOiKXLTcuxihp+wBrbyTN0JU
+ ucPiEHHp3VK00LzDqhX+WZCj6fgauTZgNxPiF6pAP/G+0r4GhhYn2SWS4vVVDjChQYjl
+ Lw0PGTa/2byc04x75RmMeL40N6UyaYQew4YDyTZn5eXMEYqzfmbHx08t0t5t/LiN8GHs
+ Szg8nIrPigmas+XA6dgwbGIXvPwGfmn4FsGfPQKhaQO9Ox2Y4t/bCv6fJGFUAgxhqwMF
+ ZVlJrRsxzqmZI7q6GNOsdNW04U1YiKW6T02ckG611M72FCqI2y/xbJvDZwoPq9HKPwkk
+ cMAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720198640; x=1720803440;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4fxjDCTJoBsJcGPwT9vCIK+suw8JJW6I9W6xeFIxpmU=;
- b=O0790KjgPW3o4Rwey3Xe7fA1ltiAVflScJPlNVfbp0EKUp5coC0/v7tI9aC+t7xej9
- B9mHLBL/8dzx+Ak0Rb6yCCo/HQpX/qwUSWmh11OUMPEYZyovwpQOaFwtD8vsbMkUKQ8T
- SEKnKKA2Doj1/R++sHnpFhxg0EWhRVpgpmkSuIvVKUkcTsfLPoUE42wIBp8BWTQ0qSH/
- 1ENsvZwzr5+MWQu8yYxiuj7HToXv1fdpWY0Rki35hm7Z1WhwS65NxcBmoOqiOKM2a4+o
- Fd13SEZtqHEEpFQcsREOg5zr/vrziHIDzEKSZw8SwcEUXBUcN2+hFpgGm7xQPpqPIWUD
- BGWA==
+ d=1e100.net; s=20230601; t=1720202220; x=1720807020;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uXvPg8atQcBo3ULyIAsWJ239G37p1Wf0N/VdxQ1bmz0=;
+ b=LJ7oaypjp69xuKYv4iRi+KXc5grZF61shas++Yc8uI8Tq0QIq3qA/WoQk0g3aES5TL
+ kJ+V48M9wq5wp/ph6KOkDEvJ4BJy2YDRyar7QpHo+HD9nZHTucbRx9Wjo0TUIsMUW3Xt
+ ayFqbSgRrQc0mceIFEc1mHZU0eZhE03NtKrV/7givKoEYJs4U6sFxBc1BPC3LEMtQYzl
+ bOTJ+yhA9MpyTQHiDM7BHhF0DuLssigTiVjurzxeYVVz1eibNvgMsQcfiE1bFPjMMYKz
+ PeYJMdaic8JQvt5keZVFEqIqEGrnR/efWZkKTfyKbvKNsZZUAvVnoCiZDAi6SwcRnitK
+ sVEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbmeIOkni4ZpldnCfJiUyysi26P+B9gpmXL2Qn+zIphGyF3Mx+HWhrpT3MCWVanRwdwQj/p2InabSwyzF3phMkpC9gWw==
-X-Gm-Message-State: AOJu0Yxv/888lOtdhGqZAnLjhXax0n46sh3RnQ+MCOCprMWNUk/c0olw
- mJmQKJy3+rniOmiNbEEAU9x+/DKbmllE43MgxlnW0V7XmDqo2MHo3j+GogVELJo=
-X-Google-Smtp-Source: AGHT+IF/krpk51/+HoraVL3CY12BCKt78THOvF5AMYwmtNzqR/2R6HXpHIsL+4RM4TMqJ+TIMnCNyw==
-X-Received: by 2002:a05:6870:a68a:b0:25e:2a65:59c6 with SMTP id
- 586e51a60fabf-25e2ba221dfmr4313930fac.20.1720198640227; 
- Fri, 05 Jul 2024 09:57:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
- [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25d8e235febsm3758511fac.33.2024.07.05.09.57.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 09:57:19 -0700 (PDT)
-Date: Fri, 5 Jul 2024 10:57:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PULL] Early Qualcomm changes for v2024.10
-Message-ID: <20240705165717.GM38804@bill-the-cat>
-References: <20240705112414.655154-2-caleb.connolly@linaro.org>
+ AJvYcCXWn9lpIQKyf3WOZlhpbrP6ntT8xCGimeRH0aJYdz/bf3chtXCdKo9FrU8+vrg6TN3p2CMW7mcOiwFbPBRknqxC6W92xw==
+X-Gm-Message-State: AOJu0YzEDOnlbjE+aHLZfPBWjG0p3EF4A5JLRlD6XlkyPtRGrEHvLdaw
+ H5ozh4c4LDaTNS5wTK0h8SEWvPROifWetz47ZglN0EqsVlutL86reRN3aZ6ACDgIEbqUzKtTjhk
+ V6qUJtzjQP7/RQL51jDm6rOcWPcA=
+X-Google-Smtp-Source: AGHT+IHIHALsJbTJPghFzMSTY4iEKY493BviUTMJVlTfDCN3mGnQ1MrdDMvns4FSyI6Pzfkh5/sUkKaldZy6qnPz8kw=
+X-Received: by 2002:a05:6402:2696:b0:57c:7f3a:6c81 with SMTP id
+ 4fb4d7f45d1cf-58e7b1198dbmr4039418a12.8.1720202219639; Fri, 05 Jul 2024
+ 10:56:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nBpGTX+vs3Cpiuo9"
-Content-Disposition: inline
-In-Reply-To: <20240705112414.655154-2-caleb.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240705150431.2274662-1-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240705150431.2274662-1-mikhail.kshevetskiy@iopsys.eu>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 5 Jul 2024 18:56:48 +0100
+Message-ID: <CALeDE9OrLw4h_iZKb=1BFHUJKPLrPFirVwEb67ynh7dFNJV0Sg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/8] net: tcp: improve tcp support
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Marek Vasut <marex@denx.de>, Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,63 +97,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Mikhail,
 
---nBpGTX+vs3Cpiuo9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This series of patches greatly improve TCP support.
 
-On Fri, Jul 05, 2024 at 01:22:46PM +0200, Caleb Connolly wrote:
+Where's the changelog of what changed from v1?
 
-> Hi Tom,
->=20
-> Various minor fixes and improvements:
->=20
-> * Fix Qualcomm SPMI v5 support
-> * Move default environment to a file
-> * Add support for special pins (e.g ufs/mmc reset/data pins)
-> * IPQ moves to OF_UPSTREAM and receives some cleanup and MAINTAINERS chan=
-ges
-> * Add a reset driver for devices without PSCI
-> * msm8916 USB clock improvements for mobile devices
->=20
-> The following changes since commit 7c9c5c0562347dccb8ac89148784a34de402ea=
-9e:
->=20
->   Merge patch series "xtensa: Enable qemu-xtensa board" (2024-07-04 16:11=
-:08 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git qcom-main
->=20
-> for you to fetch changes up to 69b37f1625ac0c9d0c867d591564af91c0b52d18:
->=20
->   spmi: msm: correct max_channels for v5 controllers (2024-07-05 12:07:37=
- +0200)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---nBpGTX+vs3Cpiuo9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIJe0ACgkQFHw5/5Y0
-tyxUGwwAsZczxs67aokDQvxhiSSE2OlLl0rq6wa+AwkyZAB+flBabXoJ3VTH+S8L
-xRAfnVcv43XDDCNGh+GYy2zjWnbuikmYKtOfxqfqP/eaGGRvEyjmBGVbmQgS+fkf
-UFySpWI+IRbl3rKW1M8LQR3IfZ6sFffY3T/Dbxkbn3d3+nGFaj+s7U83G2zVqeF0
-4mf6lyDTq0zOqL4IqBVjAtjWAaIt8F/O43FIFZP8SCanwExh2AnkrmVzvVxZRzVS
-A3fbUn5dWoNNioaa4vEFu1BVLGdovJEmNSebrHSELAP68Spy/kC0sRnku8LeoVBC
-aEMJaQacEX6uU/M+nxCMtD2PU5ly58R9WAItil3/o1m410WCZ+oYl/pro/PYk8Kp
-2VbZTsNe7dLaXTTn9IMrG/s/S2FsPlEoB3LsPD1XTA6ujAD0hds8nOdJoQQDKnd+
-YSstYDacLQplA+pASgEpNRFfLJW5k1jEBRHryDcFZ6+FSKoD7uaF6p3cUiQoMPoG
-AQa3Y2UZ
-=wRBB
------END PGP SIGNATURE-----
-
---nBpGTX+vs3Cpiuo9--
+> The benefits:
+>  * a lot of bug was fixed
+>  * tcp cliens becomes smaller/simpler
+>  * fix data uploading (now it's possible to transmit a huge
+>    array of data from the board to external server)
+>  * data downloading/uploading with netcat over tcp was added
+>
+> Mikhail Kshevetskiy (9):
+>   net/tcp: fix TCP options processing
+>   net/tcp: fix selective acknowledge
+>   net/tcp: put connection specific data into a tcp_stream structure
+>   net/tcp: add connection info to tcp_stream structure
+>   net/tcp: rename ack_edge and seq_init to more common rcv_nxt and irs
+>   net/tcp: improve tcp framework, use better state machine
+>   net/tcp: simplify tcp header filling code
+>   net/tcp: define a fallback value for rcv_wnd size
+>   net/netcat: add netcat over tcp support
+>
+>  cmd/Kconfig          |    7 +
+>  cmd/net.c            |   34 +-
+>  include/net.h        |    7 +-
+>  include/net/netcat.h |   20 +
+>  include/net/tcp.h    |  227 +++++++-
+>  include/net/wget.h   |    8 -
+>  net/Makefile         |    1 +
+>  net/fastboot_tcp.c   |  190 +++----
+>  net/net.c            |   30 +-
+>  net/netcat.c         |  159 ++++++
+>  net/tcp.c            | 1253 +++++++++++++++++++++++++++++-------------
+>  net/wget.c           |  479 +++++-----------
+>  12 files changed, 1538 insertions(+), 877 deletions(-)
+>  create mode 100644 include/net/netcat.h
+>  create mode 100644 net/netcat.c
+>
+> --
+> 2.39.2
+>
