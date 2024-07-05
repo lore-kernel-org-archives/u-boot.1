@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE96CC30653
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 00:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4119FC3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 01:05:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10F5C888F0;
-	Fri,  5 Jul 2024 02:01:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 713018851C;
+	Fri,  5 Jul 2024 03:05:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=bade.nz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uR+4fCKK";
+	dkim=pass (2048-bit key; secure) header.d=bade.nz header.i=@bade.nz header.b="gRITvi5p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9D8288934; Fri,  5 Jul 2024 02:01:46 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 1A2BD8851C; Fri,  5 Jul 2024 03:05:48 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CED7885EC
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 02:01:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC0738892E
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 03:05:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=bade.nz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3d566d5eda9so534840b6e.0
- for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 17:01:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=leith@leithalweapon.geek.nz
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5c47b8c662aso542082eaf.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jul 2024 18:05:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720137703; x=1720742503; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Mq++KdySjwFWnpsPNG2foiWtoqo5GX7qrU/eIaISuQk=;
- b=uR+4fCKKiPjilZ4+t5r8gRmdvnwj0Po0JBwS/gwzfs9hec+aIQ1IklNrl585oGk5ob
- B2BZ3tCO7iMnjCjHI6MPyMFERWGkatoM4bICGoW2kBl2cQCJY5g3eij9EbHBXPOy0sSI
- 9VBedTW67bFYaQiXcfDWSTQFvRleuGcY6lIZE=
+ d=bade.nz; s=google; t=1720141542; x=1720746342; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=9svVTZYYKihYln/y+0tFCqoy2MkTGyiqk2xKxdlVNoc=;
+ b=gRITvi5pGcuVVVS34kZJBkxJfiLiR+JbIFll6s5jEPLowrpCGEfCZEsA1gSfTmj771
+ HhDAvEfPkgnYwXre3w/zoQEee0g0SoElLpzue+Fyik8nRtVYnaMMIbb7d9adKF8QpmWQ
+ IPvXV+FqeOPDEjdOX87vP40ZboAonzYDhOxAJUQJdEfYr5k86tNmYTWDqe+SiM1z0vnB
+ XJvFbyw9oVqjDKvPJhD5OvR9gvuO2fyO79Fph/sZpvoyqtJ6xPTn6+piBSVUfO5pswDv
+ yul570sZn6C3loQOiBDAIgiB7sdn3ZsLoHUmK/TLnRm8AMrDAKdiPbglekfRXHjGLdA2
+ 28Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720137703; x=1720742503;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Mq++KdySjwFWnpsPNG2foiWtoqo5GX7qrU/eIaISuQk=;
- b=trhKHrZo2qUxs5+wRbd0XbvAOI8obA1gglvvb90xlDrDuolRnNWvR52x7XOijTWZQ2
- c68EN7Lmy3IkejXWgnq7ydN0XZn8Ov1GEbepdwSsVx1yhY9YI1HH7m5cAeeDNyRDXCA5
- SF+YBYmw1ciSEl0hFHl3k6nqpXKoSD1UoztnINeiWk/R8n8JwMZLa6zh6c8k/7qgn7i7
- NmnHu03LggczbdyUmQQdBeK4foF0KtzX63SIUQ2ZbCH7iwEdPSdNRqCtykAP1CWzAwDk
- RXYBDEaZM8tXolAADDHWc6RTkaiyw0js6ZLoOLT+7lcX7F4d/2Up5L0Ll+UckCZ0eGuN
- yXtw==
-X-Gm-Message-State: AOJu0YzSneV1yHqT8e1RJVq5Egv7cWcpW8AblTt9sNiffuYZ53oOaK05
- yRbQacvZhsuFImd47T/GJ2TeuiDu3bfKoQAGgFH3lUZ3RVjW+upxNiv+75nd6fM=
-X-Google-Smtp-Source: AGHT+IG1FyCl7dMFgfpu0h6udYRuc7lnG51VqCRoJyphc5osKDbKxSKObgNHs3AJOUms1IFR6muwaA==
-X-Received: by 2002:a05:6808:f92:b0:3d8:49a5:7c99 with SMTP id
- 5614622812f47-3d914eab9f9mr3464626b6e.54.1720137702255; 
- Thu, 04 Jul 2024 17:01:42 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-45.totalplay.net. [189.203.97.45])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d62fa3984esm2568485b6e.44.2024.07.04.17.01.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jul 2024 17:01:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Max Filippov <jcmvbkbc@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
-References: <20240618-qemu-xtensa-v3-0-f5af5e6fdd23@flygoat.com>
-Subject: Re: [PATCH v3 00/12] xtensa: Enable qemu-xtensa board
-Message-Id: <172013770136.1516714.1427723044278371009.b4-ty@konsulko.com>
-Date: Thu, 04 Jul 2024 18:01:41 -0600
+ d=1e100.net; s=20230601; t=1720141542; x=1720746342;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9svVTZYYKihYln/y+0tFCqoy2MkTGyiqk2xKxdlVNoc=;
+ b=Z1LLfBFr+dvskmGMHgWOpica9sHK8qr00NocDibnXTi9KHA84eRDExBIm+rIZXKRLY
+ AvgpNoK7npqX4viwaxlWBP0hMbE/gDuaso3LirKxwfmZhCRtz+GI5D25+8srci7YmdFv
+ r0tKncJL3vjLdrs+Pq6lWnBNJF+UdvDuikbF7Xz21Aga4mlGfk+PJIptrO93WYBqbUSz
+ K1yxovDa+Bfga8tCBjjvldJYWrAtzaqa0OvfLJobIHGL7IEYo0ZSwxuDJ51N5hl92Cgu
+ damVhWj0rfpNk9DH7yKv2mBioO3EMYTsuCyq11MrMRbfkeLhDxuZ3rfLbuva2xmqzASF
+ Kb1A==
+X-Gm-Message-State: AOJu0Yx/qPOjIst9jo1XvoJ4KJZeVHsOpywmhp/WtWha02Mzc1qoxFGK
+ We+ggs0qYE08lNt/X8+03OsUkHEJ6opkDte9RJDuiXnPWTSgPxROYgUZK87jMlvzcV5RACY3bnh
+ 7+lmWh57Cx7oIaP1vekHHFISmfdq0AHzTNUHc5PIxnK3QevDAySzFJKE=
+X-Google-Smtp-Source: AGHT+IGYiIhZqjKi/L0VF3ZQo1Oe7iJeG4XBgYzP+AjxqY8Alv/yHmEIVJhOlcJQPaAQUYXNgbIodfilDYgDNkIytSQ=
+X-Received: by 2002:a4a:5509:0:b0:5c4:7aea:5160 with SMTP id
+ 006d021491bc7-5c646e41c0amr3727194eaf.2.1720141542205; Thu, 04 Jul 2024
+ 18:05:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+From: Leith Bade <leith@bade.nz>
+Date: Fri, 5 Jul 2024 11:05:31 +1000
+Message-ID: <CAPDEroVSDDqQwqGCn__V6TkAP-WH1uiezLeW6dW+uW7EkNnbYg@mail.gmail.com>
+Subject: Missing eth1addr for Banana Pi BPI-R3
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,21 +81,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Jun 2024 14:56:00 +0100, Jiaxun Yang wrote:
+Hi,
 
-> This series enabled qemu-xtensa board.
-> 
-> For dc232b CPU it needs to be built with toolchain[1].
-> 
-> This is a side product of me investigating architectures
-> physical address != virtual address in U-Boot. Now we can
-> get it covered under CI and regular tests.
-> 
-> [...]
+I have been investigating how to stop the MAC addresses on my Banana
+Pi BPI-R3 from changing on every boot.
 
-Applied to u-boot/master, thanks!
+It appears the ethaddr and eth1addr environment variables are used for
+this purpose as they are randomly generated on first boot, then become
+fixed after being saved to the environment storage.
 
--- 
-Tom
+However on my BPI-R3 I only see ethaddr which corresponds to the
+MT7530 switch device. There is no eth1addr for the other Ethernet
+device which is the SFP port. Thus Linux keeps generating a new MAC
+address for the SFP port.
 
+How do I get U-boot to generate eth1addr and assign a permanent MAC
+address to the SFP port?
 
+Thanks,
+Leith Bade
+leith@bade.nz
