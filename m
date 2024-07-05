@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74AB0C30658
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 07:20:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0DBC3271F
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 07:20:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B650D8896C;
-	Fri,  5 Jul 2024 09:20:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 304F888934;
+	Fri,  5 Jul 2024 09:20:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VBu+pG7K";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MtZhg+id";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AACC88961; Fri,  5 Jul 2024 09:20:02 +0200 (CEST)
+ id 2AA218896F; Fri,  5 Jul 2024 09:20:05 +0200 (CEST)
 Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
  [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 792E288579
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 09:20:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8962B88579
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 09:20:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
 Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a6fd513f18bso138754266b.3
- for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 00:20:00 -0700 (PDT)
+ a640c23a62f3a-a724958f118so154665166b.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 00:20:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1720164000; x=1720768800;
+ d=amarulasolutions.com; s=google; t=1720164002; x=1720768802;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cjPyDwYxW8ixxUOfF5BImnGofyLtSOc9yNE6LGakbDc=;
- b=VBu+pG7Kl/IGfK+wzSmUSfvyP/3mawzOszZlFyE2bZdzJLIAWZEJa7LTXHFujyrxj6
- w+9TEqxajum/S6/s1J9wUcd5i8UWkd8Pp+DLSvhfnjnAYdFnE7FBSgDzvuRwziiIqBfG
- yNMYqV6dHDY97EbH6+8+GjDFFHbMcCUnGZyYI=
+ bh=N85XRfDcPcplvNL7bzPUkL1l2YYn2nyqS5OiAu7J43s=;
+ b=MtZhg+iddb7j04fL/LjSa3yIjoRB/+fpNU7ewL2sBCZq9PDFl1djwcKUkQrZIvx3KV
+ G8FhyWmQt4PHCFkWtreY5i+Oas07+ML72z1v7oJMH3RVMm9Tcj3YXjqgnC8qKDRTeaXK
+ C/hHpxnMsK9gt0j9JnBDmQVV3NXISP75hRcIw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720164000; x=1720768800;
+ d=1e100.net; s=20230601; t=1720164002; x=1720768802;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cjPyDwYxW8ixxUOfF5BImnGofyLtSOc9yNE6LGakbDc=;
- b=R1OgJkv/Ey+MhdXSX9G8oBsxW9DO0PYN2Se+A2m2nYl/+w3lxOUGtWFwJFIzDQFdBF
- t6EbrINCUQ4HsLGb422GRNAQVNjQzPdtcsuOBd8z/RqwhF8ZxvfMiCflEmbNlXoC5XrB
- pTE9XxVtDXn2K50A0HKlv6GRGdME14pEvYJEODZKCvP9ymARYkOU2IBvjrsl3NnDWx67
- ir0cC4gtad2Tx0LVZD6kLGtaBRzBm4jX0kvkgfieHbjZkrbAfe4ZgjcIHHLDX9+aYArF
- apxh4ACDnqs1cwcS7EvUfXOSRe4cqp9Xq5fBn8tkZl4TwQ04vI6HLno/A1rQYYkbYLfn
- BQrQ==
+ bh=N85XRfDcPcplvNL7bzPUkL1l2YYn2nyqS5OiAu7J43s=;
+ b=isLl87U7QJSZx9ddB1TRD25RVrEAcbD5TjUoNTyrnzL2K2bjYg1HoaMwgOx26ZMIaW
+ dAFl3wtdC4RNL7lJq+KAfVNwTSFEyIkYsn2sGRyXp6RueNV3q5Iq4TL9hmTrOB6QeX9a
+ XpFBB+qbQISnDtKZvHBGTx0RGNRM3HN8w3I0It+OR2GZpEtS2mvHsCTp4wqo51Evl8FV
+ D3auALkqg7fuchhN13OtmNtE3OGTQJafQyzk39KVqlTPtqMPcgUSdBaGX3NISrMP8PxX
+ bHEnKIJj8TuqJDg4l7Qj5M4rto5X9xPjJcQtGt+mH29b7pjbE7s5z8joBtn6RGwgQ99M
+ 5XEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQPnMN8hjvPpNxtF1BbBMVWm2UssxCpJQDXycNQhJ+webTto0ZlijOR0ybASdCyIb7GfPprn0tmMPTUkEE8ULYOmW7yg==
-X-Gm-Message-State: AOJu0Yzoi9pPRAE0xi9b78wJCOo/+POxy+HaFKUjO3z26mTo+EHGiCYO
- C1vgIyvz+AIpkt6hS8iwpSHcqVHDvhLkdKfOEVB1obxcw9rRbuLmWa/jtP18y+6pSwrdKiAn4/M
- e7FY=
-X-Google-Smtp-Source: AGHT+IEKnGotFE8YBK/coudrIYA31OumKzh9HBgj0IBT9mBgwgcxWORjT5qgobhV3rdK9xNQwOsXvA==
-X-Received: by 2002:a17:906:4751:b0:a74:5b82:7f28 with SMTP id
- a640c23a62f3a-a77ba4787a5mr251579166b.23.1720163999821; 
- Fri, 05 Jul 2024 00:19:59 -0700 (PDT)
+ AJvYcCUXtIfzmr+RpLrnbAI7Y89Gmr9AoiGDqG0CQj2ma8Dy5aOmLJMMxw9rKhWdKkLOfKYH5kPrmVH3W54xO2GWbU1XSZutAw==
+X-Gm-Message-State: AOJu0YwplTGWc3q+Rwk6EGvz2lZBKoKt/0R2BIguWOhajLj/WPPm+00w
+ fycXoFhbMZjMnpDwrjUV+qA1bJd+XGxg1BiBprpSCK1pb6nn//qg9j87/AIYauI=
+X-Google-Smtp-Source: AGHT+IGMyZN/zGE9Om2i8GUgTPd9lQ6DSTsvOdf/heA6QQw61Fy8ddYhzrA11x78arJdPaC6NgHKIQ==
+X-Received: by 2002:a17:907:7e89:b0:a72:40e7:c6e1 with SMTP id
+ a640c23a62f3a-a77ba48d504mr283970866b.44.1720164001702; 
+ Fri, 05 Jul 2024 00:20:01 -0700 (PDT)
 Received: from panicking.. ([2001:b07:6474:ebbf:a3e:4288:e106:2eef])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a72ab0b84d5sm655158066b.223.2024.07.05.00.19.59
+ a640c23a62f3a-a72ab0b84d5sm655158066b.223.2024.07.05.00.20.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 00:19:59 -0700 (PDT)
+ Fri, 05 Jul 2024 00:20:01 -0700 (PDT)
 From: Michael Trimarchi <michael@amarulasolutions.com>
 To: Lukasz Majewski <lukma@denx.de>,
 	Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
  u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH V2 1/2] clk: clk-mux: Make public the clk_fetch_parent_index
-Date: Fri,  5 Jul 2024 09:19:51 +0200
-Message-ID: <20240705071952.12245-2-michael@amarulasolutions.com>
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Peng Fan <peng.fan@nxp.com>, Dong Aisheng <aisheng.dong@nxp.com>,
+ Shawn Guo <shawnguo@kernel.org>
+Subject: [PATCH V2] clk: imx: add mux ops for i.MX8M composite clk
+Date: Fri,  5 Jul 2024 09:19:52 +0200
+Message-ID: <20240705071952.12245-3-michael@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240705071952.12245-1-michael@amarulasolutions.com>
 References: <20240705071952.12245-1-michael@amarulasolutions.com>
@@ -95,53 +96,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make public the clk_fetch_parent_index and rename it. This allow
-us to be reused in driver specialization
+Upstream Linux commit f90b68d6c8b0.
 
+The CORE/BUS root slice has following design, simplied graph:
+The difference is core not have pre_div block.
+A composite core/bus clk has 8 inputs for mux to select, saying clk[0-7].
+
+It support target(smart) interface and normal interface. Target interface
+is exported for programmer easy to configure ccm root. Normal interface
+is also exported, but we not use it in our driver, because it will
+introduce more complexity compared with target interface.
+
+The normal interface simplified as below:
+            SEL_A  GA
+            +--+  +-+
+            |  +->+ +------+
+CLK[0-7]--->+  |  +-+      |
+       |    |  |      +----v---+    +----+
+       |    +--+      |pre_diva+---->    |  +---------+
+       |              +--------+    |mux +--+post_div |
+       |    +--+      |pre_divb+--->+    |  +---------+
+       |    |  |      +----^---+    +----+
+       +--->+  |  +-+      |
+            |  +->+ +------+
+            +--+  +-+
+            SEL_B  GB
+
+The mux in the upper pic is not the target interface MUX, target
+interface MUX is hiding SEL_A and SEL_B. When you choose clk[0-7],
+you are actually writing SEL_A or SEL_B depends on the internal
+counter which will also control the internal "mux".
+
+The target interface simplified as below which is used by Linux Kernel:
+CLK[0-7]--->MUX-->Gate-->pre_div-->post_div
+
+A requirement of the Target Interface's software is that the
+target clock source is active, it means when setting SEL_A, the
+current input clk to SEL_A must be active, same to SEL_B.
+
+We touch target interface, but hardware logic actually also need
+configure normal interface.
+
+There will be system hang, when doing the following steps:
+The initial state:
+SEL_A/SEL_B are both sourcing from clk0, the internal counter
+choose SEL_A.
+1. switch mux from clk0 to clk1
+   The hardware logic will choose SEL_B and configure SEL_B to clk1.
+   SEL_A no changed.
+2. gate off clk0
+   Disable clk0, then the input to SEL_A is off.
+3. switch from clk1 to clk2
+   The hardware logic will choose SEL_A and configure SEL_A to clk2,
+   however the current SEL_A input clk0 is off, the system hang.
+
+The solution to fix the issue is in step 1, write twice to
+target interface MUX, it will make SEL_A/SEL_B both sources
+from clk1, then no need to care about the state of clk0. And
+finally system performs well.
+
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+Reviewed-by: Dong Aisheng <aisheng.dong@nxp.com>
+Signed-off-by: Shawn Guo <shawnguo@kernel.org>
 Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 ---
 V1->V2:
-	Nothing changed
+	add original submitter in linux kernel, suggested by Fabio
+	Estevam
 ---
- drivers/clk/clk-mux.c        | 5 ++---
- include/linux/clk-provider.h | 1 +
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/clk/imx/clk-composite-8m.c | 37 +++++++++++++++++++++++++++++-
+ 1 file changed, 36 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-index f410518461e..e3481be95fa 100644
---- a/drivers/clk/clk-mux.c
-+++ b/drivers/clk/clk-mux.c
-@@ -102,8 +102,7 @@ u8 clk_mux_get_parent(struct clk *clk)
- 	return clk_mux_val_to_index(clk, mux->table, mux->flags, val);
- }
+diff --git a/drivers/clk/imx/clk-composite-8m.c b/drivers/clk/imx/clk-composite-8m.c
+index 560d74aac80..2cb7d135000 100644
+--- a/drivers/clk/imx/clk-composite-8m.c
++++ b/drivers/clk/imx/clk-composite-8m.c
+@@ -117,6 +117,41 @@ static const struct clk_ops imx8m_clk_composite_divider_ops = {
+ 	.set_rate = imx8m_clk_composite_divider_set_rate,
+ };
  
--static int clk_fetch_parent_index(struct clk *clk,
--				  struct clk *parent)
-+int clk_mux_fetch_parent_index(struct clk *clk, struct clk *parent)
- {
- 	struct clk_mux *mux = to_clk_mux(clk);
- 
-@@ -127,7 +126,7 @@ static int clk_mux_set_parent(struct clk *clk, struct clk *parent)
- 	u32 val;
- 	u32 reg;
- 
--	index = clk_fetch_parent_index(clk, parent);
++static int imx8m_clk_mux_set_parent(struct clk *clk, struct clk *parent)
++{
++	struct clk_mux *mux = to_clk_mux(clk);
++	int index;
++	u32 val;
++	u32 reg;
++
 +	index = clk_mux_fetch_parent_index(clk, parent);
- 	if (index < 0) {
- 		log_err("Could not fetch index\n");
- 		return index;
-diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
-index b8acacd49ee..59f9c241b84 100644
---- a/include/linux/clk-provider.h
-+++ b/include/linux/clk-provider.h
-@@ -74,6 +74,7 @@ struct clk_mux {
- #define to_clk_mux(_clk) container_of(_clk, struct clk_mux, clk)
- extern const struct clk_ops clk_mux_ops;
- u8 clk_mux_get_parent(struct clk *clk);
-+int clk_mux_fetch_parent_index(struct clk *clk, struct clk *parent);
++	if (index < 0) {
++		log_err("Could not fetch index\n");
++		return index;
++	}
++
++	val = clk_mux_index_to_val(mux->table, mux->flags, index);
++
++	reg = readl(mux->reg);
++	reg &= ~(mux->mask << mux->shift);
++	val = val << mux->shift;
++	reg |= val;
++
++	/*
++	 * write twice to make sure non-target interface
++	 * SEL_A/B point the same clk input.
++	 */
++	writel(reg, mux->reg);
++	writel(reg, mux->reg);
++
++	return 0;
++}
++
++const struct clk_ops imx8m_clk_mux_ops = {
++	.get_rate = clk_generic_get_rate,
++	.set_parent = imx8m_clk_mux_set_parent,
++};
++
+ struct clk *imx8m_clk_composite_flags(const char *name,
+ 				      const char * const *parent_names,
+ 				      int num_parents, void __iomem *reg,
+@@ -155,7 +190,7 @@ struct clk *imx8m_clk_composite_flags(const char *name,
  
- /**
-  * clk_mux_index_to_val() - Convert the parent index to the register value
+ 	clk = clk_register_composite(NULL, name,
+ 				     parent_names, num_parents,
+-				     &mux->clk, &clk_mux_ops, &div->clk,
++				     &mux->clk, &imx8m_clk_mux_ops, &div->clk,
+ 				     &imx8m_clk_composite_divider_ops,
+ 				     &gate->clk, &clk_gate_ops, flags);
+ 	if (IS_ERR(clk))
 -- 
 2.43.0
 
