@@ -4,141 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17369C3814E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 13:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14F9C3814E
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 13:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C963C88663;
-	Sat,  6 Jul 2024 15:37:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E22288685;
+	Sat,  6 Jul 2024 15:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="X0j/IC0Z";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="JhE6PKR4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 026C0889D4; Fri,  5 Jul 2024 22:30:15 +0200 (CEST)
+ id 05AC2889E1; Fri,  5 Jul 2024 22:30:15 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
  (mail-db8eur05on20619.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:7e1a::619])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E85A889CE
+ by phobos.denx.de (Postfix) with ESMTPS id 93E35889D6
  for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 22:30:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VLFFmtaOyA9Rq+56TAdGJAIUc/iccM1lMf3/KmMQi3IFcjST/P3zd2IpIaKdJ2sLT0jCEMREvUR7KusW/TONVk2Blyom2bAMwSCSTF36N5V9fGzkIRogIkULJGm+X8RNJthxKkGvu1+DIF6S6SH21ldPHiQntWhlffuoD4VWvKm+xj+Ehr76VFPA8XfLHtvFoSaXaO0fqwxUKy47b+a+90gx/fqaBIPziHOdFZV/dGfX74G2C/C3pgAeTCse1qB+FagTQ5LlQkmEkyjWcXpmmdzVn7s/lbv3SmEtbK7V8zK0jjVZIhYwEzy045iXQb67hgl1NE9ipjX39GRkKcwH9g==
+ b=obYlJ3UvLMDGooPULFnDG/p5agMSgQb4daFCJdTxdXeNfZkYQcTrxvYbFd2+11KmBivIHoSRZhBRfCo5NCe9mX1Fn9lZnGK0e216XpkQpVr+ewa1ICp+7enAcaDzI5kKbv2oFU+18IF3olMPUHKbnK5AITeXKr4cVPu513ShQH22WJ8le35FJQ2x+YyP1u86HcFx+qJKXnHyV9yteDSBz6lf4bWpUk/Om57QC+s5SBQQk1WzJxqC7mWXRljij/uh1RGGBR73KlQpzvnwMS/NsJVrTj66+9E7N8YkuvX3E+uryZjy0kb/YPqEVPkUfZC7bJ7hN+3uFVITZ/+oG9zaGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gS9jNvjLNPXXgXnaj943yrz1zH74LYFOL2fZrLj5H2E=;
- b=ZgXAmnJg/PE6VvG+bs2zAzagWVgjb4WLDNrMdOScksHcruCgvYRDzJk74Ib3DaSUEbYUcDcWBB5azF5/XqJklqvYuutpxaNeGfyuW6UvQX5F6s98/2eRLt9BfpTfedSXV8P4P0oPhDbjGv6URgUOJPnD3w4Dp8nRaOOwU29l6vEEVPVQgFBPodSXR0O97e2edTij6r8ScM78sWfp8S+hYxni1iHiyvbQBTFtudFdNi8D4A1VNGXoMZFgh7al5hpfe3tQeMWtriVl3UhpZyowI7Z0mHDVjG5+YA/x7Ls6jtCnv1wUotr1iztLHj2IPnAkox9iZ9Ryi5YUWvxT/PeZ2w==
+ bh=7cI2JEv5VbqdLHHdJv9Q9c6Qs+kJNaSkK9wGITUb2kY=;
+ b=aLdS8DnSgi9Nk5jRPrD6diWWpy258WE5z3WC97Uv0e3NoVsTAz4nhaE4881rH+ruOxu3vbbOOifiiUo+KzKjh/uy3bmH1bM4+L/U6T9CCdDxd71zV4PUKlmBXkjmNCYnG+c48R5tnQjS6BFG69F6COvZiwHcahG+GwVfy68VZXv6u5qiAZ7sLbvCgpeb1Gpi+JGAsC50CChc2ljeN283brZOVof1AqDS6XLWsYkhG9bk8oZVN7sw3EKvbTbPsUkHlHz6H4FsUYSmP+lbPZZTZVnJPQIUrg9ojkrdvMlpq3mm05we7JqffWd8z+oYWuBKDEvC4g7lKLR6xmjH/XUYQA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gS9jNvjLNPXXgXnaj943yrz1zH74LYFOL2fZrLj5H2E=;
- b=X0j/IC0ZuRqbzM9HekEqKtFEq1oprZRbv8XdUaVFBUGZeilNbe9xX46HyXxWbIVnrvxQt6xW71esdi6tS4Xf3HBjrDLB39gdFcIP1q2bxs/TI6+TlGmKm4N1o6SJWRKXkrFFLgNEWd0jZ9t76tFyVcc376kjo1DEW2P7w3v8ZWA=
+ bh=7cI2JEv5VbqdLHHdJv9Q9c6Qs+kJNaSkK9wGITUb2kY=;
+ b=JhE6PKR4LSJzp9e8boE9VyrCU47pLoeD6yduX5EAIdvNsvEEYVXLPN8XIm8xggZa6WhCnEZvHkp2E/CV7R03ltnJU9a4eSOq0n/IShLcBpypSg98Q5X37iBabx0FgiLt8Bkd2tmsvWRE8g6j9j3oY3hgqosWPO37FJh0TZqdQ78=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
  by GV2PR10MB6307.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:7b::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.23; Fri, 5 Jul
- 2024 20:30:06 +0000
+ 2024 20:30:09 +0000
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691%4]) with mapi id 15.20.7741.017; Fri, 5 Jul 2024
- 20:30:05 +0000
+ 20:30:09 +0000
 From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH 0/5] finish using .dtso for overlay source files
-Date: Fri,  5 Jul 2024 22:29:49 +0200
-Message-ID: <20240705202954.1149590-1-rasmus.villemoes@prevas.dk>
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Maxime Ripard <maxime.ripard@free-electrons.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 3/5] test: overlay: rename overlay source files to .dtso
+Date: Fri,  5 Jul 2024 22:29:52 +0200
+Message-ID: <20240705202954.1149590-4-rasmus.villemoes@prevas.dk>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240705202954.1149590-1-rasmus.villemoes@prevas.dk>
+References: <20240705202954.1149590-1-rasmus.villemoes@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0039.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::31) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: MM0P280CA0036.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::34) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:10:45a::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|GV2PR10MB6307:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f5757ad-d496-425d-0fc3-08dc9d31411f
+X-MS-Office365-Filtering-Correlation-Id: 740e8a01-821e-4c8f-1779-08dc9d314361
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|1800799024|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3qdtuWsoA6/elyFQxD/t1Cy/6yRX6SjFPhNZa0szWQt4K3q5QP2HkcD1H5bd?=
- =?us-ascii?Q?t+OkTU3Ksp3tcUcbqvpO8VYoRCiRbzzxH5ew5kE7I/rsjergMFXNV7WXcrwO?=
- =?us-ascii?Q?hLWo41L7WYA2teMGB0MRwIlM4Im1meKzme03CzOos+jocovS42G3sG4OlrpE?=
- =?us-ascii?Q?MzgIjNLyZnwVcsZmD2Rx3zX53YEDvGnoqf+dq5UUHEpyb8zJDQfx/9ibAcY9?=
- =?us-ascii?Q?l4Wd1E0CLjarBxxPUz1UbrdLAtlxQlTK+uvf17wVuAdQSzfJ96n6Gm0CC5h4?=
- =?us-ascii?Q?EvqSXf45Eskiama3v+mJy3vuxUL2XkS50PisFtaCUV7Y0PWlrfXYiGhMiXJw?=
- =?us-ascii?Q?1l9iUKZxJfzFwgUez08QNbo6VbVNvldTpHaYjapkn50n2ZYnJq0azfDJ0GCA?=
- =?us-ascii?Q?lOrNOze3eMfUxwnunDaDR7rrUZhIVgMJIJ2cW4elPtZV7GlhPL8BtW2hP+ct?=
- =?us-ascii?Q?iilnfLE+Qxw/dWQWfa5aKyAdqpgh+C5xSEGAfXsnV3wd6x9D0UggGGHJM5mK?=
- =?us-ascii?Q?IOmz4Mb08KN5YGhap6rKBebSjrvJBmSpPkJg0izHFQZGS6fhIumPJsfvo2QE?=
- =?us-ascii?Q?lk4d2Ec2ElmcywBZQg1otoFXNXv8eNibz+Y9XCzRj5fdkMnodnzDQh1T1O8P?=
- =?us-ascii?Q?aSkDteP0qRxU4tB6m0HNMFwWUy/27ab+UOKOmqBOwxbetBSRSxhuqg4ScAN6?=
- =?us-ascii?Q?63xPngUy4SxbHM1ZAyerb3uBcQDwg3d2lr1zE4c8SPmO5OHxJEq7TdxHLebO?=
- =?us-ascii?Q?YsZ3w7Umr802aFl/HTlX+QhjHFjQs8/MHlukMEXyglqkfexDG7FAjVJy1Xxv?=
- =?us-ascii?Q?XBFmTZW7GBrIrstI/Cs+YgJsNVLhi7gPtooC9aXTf62qrHHw0WCemCWKOXYP?=
- =?us-ascii?Q?NIh2NLba8gufQUzOGjyEljeUUpf+RxWLm2pifAYJ4g1d5SnOXQgjspIDWdlF?=
- =?us-ascii?Q?IGfjQEg2e9jB/c6hEbrUojZU1vD2TfTLcZwsDHr8ynwW7YnVT+etzd18AG7h?=
- =?us-ascii?Q?diWiQWeaU3FlkJBR0Uq1aVm7xoGAzTKcpXFz08P3tD8DuWCx7977xBb++yT2?=
- =?us-ascii?Q?Q5FvkRzISuE9ZFlrTPJwFLjFZAEyDXz7CiR/CM89fhP01emsOa1E/GMM+Cnm?=
- =?us-ascii?Q?nXBsSVza7yO+LJ3mPVtNpG6AB26Kbc668ClVG2lH14xRZX/yKIdVWVXX2NHs?=
- =?us-ascii?Q?RT91b5YXAyxQPdJEHvmIjd43/0NYfTJt8KysSXuT01n/kM0MCU/f/ZoTedpS?=
- =?us-ascii?Q?YM6FxbqsYVRZ3sNzEp+HT6CzCmkZEF/8yw6iGic93SYSihJgMaVMhlGP+w4J?=
- =?us-ascii?Q?t6WYp+/TBfV49BWGgFtpPjOGpibWEjU5RLDYrIWTRmcHVHhyt3g+mirxlscc?=
- =?us-ascii?Q?bNoeR3cUt6d8Wo322z/2pyIAgZql+KR5/1cbWmhDVWDiTHsuEw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xbyokwUEK1X0tUyYtRNLoW5xksTAsNvH3YRqGiJFEP6gvwAndxtd/VR8nAKA?=
+ =?us-ascii?Q?kh/fg6XtSOyIhcdH+tF6wzOc3mc6AoylyktQvWIB9PtRsqs/uiiEHJl1Fz7P?=
+ =?us-ascii?Q?oNCdZu2Jzhyw7de0VnllKNG/ofNznon0yqamuUTFBd52xM1mVSsUg8S0J5VE?=
+ =?us-ascii?Q?WXa/5sGaigEpUoyXN22Xf6aUNMGIiZ2yvM6a/Ko6aAfhsREVgTyXmGCP1e9T?=
+ =?us-ascii?Q?QK5UVi8+0+mGc8XKVpD3M7QPHPqpsi+9TWsn+KpNKElrUH8ydouamO6MkIzb?=
+ =?us-ascii?Q?Hid1u/6XH+3qQRi0m+nT646o8QJf54qqk+MprmmeYkaJBm4mXg46EYilEHZh?=
+ =?us-ascii?Q?yJyZgE8BSbIxyILvU1zboLIUNUBB3MILqBx1HqyjHfEqtFhmCIkCPTHn11nn?=
+ =?us-ascii?Q?/K3YtLW/duKsrTHdaqkYfxMHmX6JsKHP5X1FBpcNBxX401UgZM9mn63HO4GF?=
+ =?us-ascii?Q?jx0CPGVJU5pnaZpTNDWkEXAukgk0bXAUHP/3hlUGQQXeGZPFjey0AVNnZY6L?=
+ =?us-ascii?Q?OO5NCbwYNnxDtaGXCkzSwloSRI5vz6pmuGA83rw7k0KFV/5x0CsIZEEKHi8Z?=
+ =?us-ascii?Q?lHm3QCHuSZUo4z9wd22MNgkZayPoRqoBduGQOM4ZAU1HDs4L1f/EOiXiTbTO?=
+ =?us-ascii?Q?4lzEMp+sJaAERzQO+hHjU1vM016giLeBKgBKUSg7oz/Vgkdn4w9i2zZPELMM?=
+ =?us-ascii?Q?dLcQLwq0AaVRhEQMz0L27wk0LIg9picyt1+TxS6tVe5xIevUA/Z9f/6vuZlr?=
+ =?us-ascii?Q?o+cPrPjz6+49mYRTYPRnbVczOGr6VhjUBSZ+gHodvHOuAYmMSWAGosU8NyJR?=
+ =?us-ascii?Q?RzZELog2NdHkIYLsCJbhHIlzKYQ02t6ioqHsOrLbiTsIpEKi0GbrAzRaR8Ik?=
+ =?us-ascii?Q?blmvIbkkCqgzBHmwqd6FUhDPZuLwvWaZ1knA55IAAkbyaGRiCrtpQEHpyLjS?=
+ =?us-ascii?Q?yd2d15uzOcN52J30Q+RfjojZ/zb3fI/Djj4IyugayZd8kOneuleqazV/GfgW?=
+ =?us-ascii?Q?GUQDu5AfuIBivxYcqvlm5Tz56bZJXxfTqBZ0DO7Q+zQByjZ31T+EJcR4C2TL?=
+ =?us-ascii?Q?/2FbQy1rl+43lfHdtpu/dLmHrUXtBoynid+OhVApcepGiWwBY+BILXlUS8F2?=
+ =?us-ascii?Q?wUGiB/oeZyDwjWCj2hW2smpzxLwvSnGl33tThuX1pkrxwGx3V6pspyXOd/I3?=
+ =?us-ascii?Q?qpFiCK26Wj/bsElJMxIIji6G90HL+9UIs+To8AruUrme3djo8Mjyh/uAwYoY?=
+ =?us-ascii?Q?SxaOkV8blWE08yGJjm2tOgjL0z6VlaI2h7Ukl6ymKnNNMHlArGiHqdeEflCK?=
+ =?us-ascii?Q?DzL9Wou2R5oyGWVNifFc6tLPbi3UYcQ4/flkEBQTFu7h2mzFni68kM2Lk/g7?=
+ =?us-ascii?Q?UJ5k17BuM+iHnGispG9DKKAhmRU1hS55RC9gw9d0dF4OEA0ZLw=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(52116014)(366016)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DqSTfG0SZvJkjaSanXcpGMyYx7b5ukbdzgmXICiJeYZ2ePLFYuVZUCZ8R/a0?=
- =?us-ascii?Q?39yOBteD+eaTVa+IdHFSdy951nkiTxzSpsWPxOd/WA060+paacWPcH4HT8w7?=
- =?us-ascii?Q?YOxl7tLC4Pn1X1pAYXwnV85oQpT+ZwBFuRyYBUUwrmSAxRcFSRRMU5T1yl2b?=
- =?us-ascii?Q?KK0kKw+dVpbZ3O1+j0CVUEmcVC23LYvO41EFBEoEGfWJNWHCxFbVjpIER3YP?=
- =?us-ascii?Q?I7i6XLRHqmrLGEAFevjCAVU3iNUXpBsS7BaTrdceaJaK0OAQWf5roxb0b7XE?=
- =?us-ascii?Q?/I+ZQ1MBl5AaGXA3HueWXsLt3Tkh3+iU/bvJzyFbGH9/YZPIrky6K7Ohhiwg?=
- =?us-ascii?Q?3tDlNMiaQMISkBTFX5efY7lmAUJ7acmQlDZtpfFRl27YfqffaqJcmYPTZXjX?=
- =?us-ascii?Q?x4ZtozZwl9PvsNfDzYYZCR7nR3WYkSNLtEmveoSOXY9eHibyGs3TEdsgFvQa?=
- =?us-ascii?Q?EvzQEd5mpo0xmE+pbICSdyKD3pOItI/Yb6gBR/YfPGM3Jt4ysqrQA5YEZdmE?=
- =?us-ascii?Q?biSrH82u4YcRXGzJVoRh9QL5Q+0SVnNey/4szJ3NwAELDU2hrw0U2e5Qj63p?=
- =?us-ascii?Q?KxoZ7EVHCNFTDLpPweJ9MpE7KRwvXcwSDqqxyGfaS9GuQJMcV6iSOlNj7vvA?=
- =?us-ascii?Q?dnuQsrmMsCjevjYzehqewIQhroLae5zcbBaOdGmCyZo5eHEquW94bE4QFpFJ?=
- =?us-ascii?Q?5Evgk98LCD9td1bOtOdv1hU7YubyWJ3lQSk0MqsUnpbS7esqMasCFck47nfX?=
- =?us-ascii?Q?AyNga1+UDk5MipC6H0LRQI1l8/t+waDnA5iWktP6RZdHvg019XXmIgkcECPR?=
- =?us-ascii?Q?W/dAAgFsA3quuGdtL+QhM9uzTT/IKcxTZ/g3OZAB0KPrfqtR4A4SDMw15GOC?=
- =?us-ascii?Q?kJ2Wujz87H4UPp5UyEBNtY91EpXZSHyVKAKP/gfAjaKlk8AwB9fbEFnfAb9T?=
- =?us-ascii?Q?UyCG2reL6q6lYqMoXO+0ZGFyRJ1T58yMziN9EyXnSKep+BP7UuqgckzAT+cR?=
- =?us-ascii?Q?NsTVT3uXLO2hYpFxTnFP9HVciNFRG/vb/k8aLLXgFwKTurtsp3FmZqck9xI2?=
- =?us-ascii?Q?yCVG0Yq+IOUqe2QK3/HsBe6/P/njHs9uZpReS3LftPyAbB4q4heFoRI1g5Pe?=
- =?us-ascii?Q?e218DQAnRhchUXGhVCoxL68RNh/7Vp0fREPSCDavWSXCzrzO70FsO7gWBdLm?=
- =?us-ascii?Q?+jAMGuzBWQ/zMkdjeQp8HG4ymO6N6e5pL9nBeoSKt7k9vqD0W6dP0N0eEnMn?=
- =?us-ascii?Q?u6HOtU+n7mJd5+fNZ7/RTZyHa9w0ZyvBh84FlrqC5Iiad23Z5MyCDFhk4I4z?=
- =?us-ascii?Q?r3Ys3vccQy1Le99xco/0zFf7varujXIznPRUvI76iKsioLU4O9D4S1yTrmjO?=
- =?us-ascii?Q?rdR+ZFElouqf6wCA7bm8hSpZmkx6lX5JQZfUsff9wKQwQ2SGruEmB0f+GYpY?=
- =?us-ascii?Q?pvbwC/SY94BIarLvvW8vpRCL517JByn6oqkvOiww4aYcI7tC57W8fwzRrfU5?=
- =?us-ascii?Q?GyJhK9ZaeTVgMEWacuxdmIam7CnJuSG3kUgX4EQDR6DEi+MRTwXi4DlpUi3G?=
- =?us-ascii?Q?OaELYfTsGV7LlD/TGUT1kXZpXi3zoZ2QGDB0SgEGTmWLG7VMWMtT12FJSoVK?=
- =?us-ascii?Q?tw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Kz/yESMnIUhDg+OqqXs++ZrN/OiCvq0ehCHiCzzo3f+N2BXtn8J0VYt+tSRE?=
+ =?us-ascii?Q?ml6DMGVnNKZ4B58L4tH00g7DV2XlxzCB+QQMzAxBfZNQfzSjnRgj7yYUU/gA?=
+ =?us-ascii?Q?h0IixVyiNe+lgi9RrTglVx1gz4JsKe9dmmQeijwh9bVyyosNsbexmy4LRXtn?=
+ =?us-ascii?Q?1y3nc8d7AwbpEbRUwH4R7J/My3CXnk9jOMf9V9le25fMK3s52Ala5Npyh4gE?=
+ =?us-ascii?Q?3fasCUIMPoo5za6GSr51EcWNJzHc+faeE78OhDum7Rfilo54+Kzv3Tw3KOEf?=
+ =?us-ascii?Q?Nl0cBNXaQIOqCELfIsL2zHjvYUym8KcFJX0V+WGUGRw3pweXTfsucCJkBQf/?=
+ =?us-ascii?Q?BfHh4hvS0PWgZ+1hp9m4HpVK7ix6Tz8RV6gm/zmWGN01u0FBN3btigScIqDq?=
+ =?us-ascii?Q?/gv/q4HoY9jd4t+ePbcydKE7gcTavvZSHCmN85hPMkCrR7quAbDGQ6fhFwiH?=
+ =?us-ascii?Q?Mm2F2ETtvk57U/VDWnbsAs25rj+RU86IUmm4upWbcQN8dbTHoyoFjqp1q8VT?=
+ =?us-ascii?Q?hMRQ1hHHvpUPzei129urWMwVLveEWLIJuU9ok7XjWEUr0jDGPuKiktHxTkCD?=
+ =?us-ascii?Q?T9sC9NirBLqgG/ewgMSHcwYxf6NmsXyjmpJBmD0RXlznaH7UehjA8Uj4dPxn?=
+ =?us-ascii?Q?w0Lf4bSxG9Bh4G2pCgvfYBuo3NZWKaXAWW0iYap3YWAcxVqRPP1doygIFr3r?=
+ =?us-ascii?Q?eoqij5ZGSJhJIm2PLGzHjv0sud4eUyM1ZRuaMeLF7PxgeOzpEUZCBKbl8dN/?=
+ =?us-ascii?Q?1fmix8mfsKyATveOrv8/+FS5HohFMZGbALyQJ05IIDIQyenjE93TBX854waZ?=
+ =?us-ascii?Q?lq3NX0HvJzAs8ZZwX1bkdeHAdboqrnoipKUQyykYPP9wYk5UOEOR6T2zqv2h?=
+ =?us-ascii?Q?blJlD/7pRbablxxNgMMBi1De9Bpg3AyGhobv3mzWN0x89cKNFx/sUV+ATNdX?=
+ =?us-ascii?Q?2GckU0zDssApfketLL+PO4bFkVIc6iAcPdvFy8Nzc0Pe0YwFWIxOLkd892S4?=
+ =?us-ascii?Q?sqiYrTUQZi0u4khYTKmFOujfFrxrSDr4IQkGYw/qgLuRVEVZ8pFR510zHCiC?=
+ =?us-ascii?Q?2xr6dSLm78t3+BolVpZuOwNP6K7wtXcg6FyGbXfxnLhIYi0H0zPKiE+3ZSKT?=
+ =?us-ascii?Q?YHLNnFcTOAcHv0P/3D7SqQXbt/Jgd28KyiahpXp0HUx3dSiY6UaeB4TtcBjw?=
+ =?us-ascii?Q?ye9wuW+g6YJ5oloPEbJ5H3WyuF2GuHWN5rVdN6YxOsBISUiPvzFqlFi9b2qd?=
+ =?us-ascii?Q?WV9EFOxa1pU57iv3zQJLsIdMfoXwG/qlnxRdV1n9C0r9bNxDLo3qrcOk6Zf1?=
+ =?us-ascii?Q?3GS7jGhnbapKxRi02uMUsYIlrkZl5UZygWTz6vauBxpi4lfVhJOAAOYVixwJ?=
+ =?us-ascii?Q?Vl4EuU6tCGGu/OhXfeNYKtzDfRypv6T5PXI3cn4SF/eCChg1Syz9dAfZzZXZ?=
+ =?us-ascii?Q?4HA7ePuTyP19nD0E7lmZppyqI9DKMPrK71QFvlVNTmy8/fYNAa0UgMMczfQ9?=
+ =?us-ascii?Q?H2Yt/X/FvUWB0cSXo24VwT8kzdsaYfzI1pEjwPtwVrjP91C8A90fIBHCNmiM?=
+ =?us-ascii?Q?7FVc/sN5i91ZAppTuJCkydQOMMyRkSfyalJiQ94C8g78pFS4UnLejhSSTGF2?=
+ =?us-ascii?Q?2A=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f5757ad-d496-425d-0fc3-08dc9d31411f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 740e8a01-821e-4c8f-1779-08dc9d314361
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 20:30:05.1863 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 20:30:09.0281 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ctX1btXYDD+EOfqkOO78bC72mMY3WKx00iD6GwT77MAzbUy6xLD1Bx5RYDZmua4lh65lXUUqZoabNDqBjZ32/YjNrsQ5Zc5W9XR0PuWA3S8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9Ftu+bWxAPlYvUrL7vL2cdZTjuBWwFdtSsKnwSnfJ1gwb+7pHnkLmRqnslfRW16AHTfMXaA6T1Zftq699/d+5Kv9RFhDB59Cc3n7LQGWGyE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6307
 X-Mailman-Approved-At: Sat, 06 Jul 2024 15:37:18 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -157,43 +161,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a followup to the patches that landed in 2024.01 and nearly
-made sure that source files for producing .dtbo files use the .dtso
-extension. In the same release, a few new .dts files snuck in, and
-there was also some test code involving .dtbo -> .dtbo.S -> .dtbo.o I
-didn't really know how to handle at the time. This should finish the
-job, bring us in sync with linux (at least in this respect), and drop
-the .dts -> .dtbo build rule.
+Distinguish more clearly between source files meant for producing .dtb
+from those meant for producing .dtbo.
 
-Patch 3 depends on 2, and patch 5 depends on the rest.
+In this case, the files are really meant to be compiled to .dtbo ->
+.dtbo.S -> .dtbo.o that get embedded in the image, which means that
+the begin/end symbols generated by the makefile rule changes to
+__dtbo_ rather than __dtb, so the consuming .c file needs updating,
+but this should not result in any functional change.
 
-Rasmus Villemoes (5):
-  arm64: dts: imx8mp: rename DHCOM SoM overlays to .dtso
-  kbuild: Allow DTB overlays to built into .dtbo.S files
-  test: overlay: rename overlay source files to .dtso
-  test/py: efi_capsule: rename device tree overlay source to .dtso
-  kbuild: Disallow DTB overlays to built from .dts named source files
+Note that in the linux tree, all device tree overlay sources have been
+renamed to .dtso, and the .dts->.dtbo rule is gone since v6.5 (commit
+81d362732bac). So this is also a step towards staying closer to linux
+with respect to both Kbuild and device tree sources.
 
- ...> imx8mp-dhcom-pdk-overlay-eth2xfast.dtso} |  0
- ... => imx8mp-dhcom-pdk3-overlay-rev100.dtso} |  0
- ...> imx8mp-dhcom-som-overlay-eth1xfast.dtso} |  0
- ...s => imx8mp-dhcom-som-overlay-rev100.dtso} |  0
- scripts/Makefile.lib                          | 23 +++++++++++++++----
- test/overlay/Makefile                         |  4 ++--
- test/overlay/cmd_ut_overlay.c                 |  8 +++----
- ...cked.dts => test-fdt-overlay-stacked.dtso} |  0
- ...-fdt-overlay.dts => test-fdt-overlay.dtso} |  0
- test/py/tests/test_efi_capsule/conftest.py    |  6 ++---
- .../{version.dts => version.dtso}             |  0
- 11 files changed, 28 insertions(+), 13 deletions(-)
- rename arch/arm/dts/{imx8mp-dhcom-pdk-overlay-eth2xfast.dts => imx8mp-dhcom-pdk-overlay-eth2xfast.dtso} (100%)
- rename arch/arm/dts/{imx8mp-dhcom-pdk3-overlay-rev100.dts => imx8mp-dhcom-pdk3-overlay-rev100.dtso} (100%)
- rename arch/arm/dts/{imx8mp-dhcom-som-overlay-eth1xfast.dts => imx8mp-dhcom-som-overlay-eth1xfast.dtso} (100%)
- rename arch/arm/dts/{imx8mp-dhcom-som-overlay-rev100.dts => imx8mp-dhcom-som-overlay-rev100.dtso} (100%)
+Cc: Maxime Ripard <maxime.ripard@free-electrons.com>
+Cc: Simon Glass <sjg@chromium.org>
+Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+---
+ test/overlay/Makefile                                     | 4 ++--
+ test/overlay/cmd_ut_overlay.c                             | 8 ++++----
+ ...-overlay-stacked.dts => test-fdt-overlay-stacked.dtso} | 0
+ .../{test-fdt-overlay.dts => test-fdt-overlay.dtso}       | 0
+ 4 files changed, 6 insertions(+), 6 deletions(-)
  rename test/overlay/{test-fdt-overlay-stacked.dts => test-fdt-overlay-stacked.dtso} (100%)
  rename test/overlay/{test-fdt-overlay.dts => test-fdt-overlay.dtso} (100%)
- rename test/py/tests/test_efi_capsule/{version.dts => version.dtso} (100%)
 
+diff --git a/test/overlay/Makefile b/test/overlay/Makefile
+index 2deec929abf..47937e3c108 100644
+--- a/test/overlay/Makefile
++++ b/test/overlay/Makefile
+@@ -10,5 +10,5 @@ DTC_FLAGS += -@
+ 
+ # DT overlays
+ obj-y += test-fdt-base.dtb.o
+-obj-y += test-fdt-overlay.dtb.o
+-obj-y += test-fdt-overlay-stacked.dtb.o
++obj-y += test-fdt-overlay.dtbo.o
++obj-y += test-fdt-overlay-stacked.dtbo.o
+diff --git a/test/overlay/cmd_ut_overlay.c b/test/overlay/cmd_ut_overlay.c
+index bcb29a26e21..256afd115d2 100644
+--- a/test/overlay/cmd_ut_overlay.c
++++ b/test/overlay/cmd_ut_overlay.c
+@@ -21,8 +21,8 @@
+ #define FDT_COPY_SIZE	(4 * SZ_1K)
+ 
+ extern u32 __dtb_test_fdt_base_begin;
+-extern u32 __dtb_test_fdt_overlay_begin;
+-extern u32 __dtb_test_fdt_overlay_stacked_begin;
++extern u32 __dtbo_test_fdt_overlay_begin;
++extern u32 __dtbo_test_fdt_overlay_stacked_begin;
+ 
+ static void *fdt;
+ 
+@@ -216,8 +216,8 @@ int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(overlay_test);
+ 	struct unit_test_state *uts;
+ 	void *fdt_base = &__dtb_test_fdt_base_begin;
+-	void *fdt_overlay = &__dtb_test_fdt_overlay_begin;
+-	void *fdt_overlay_stacked = &__dtb_test_fdt_overlay_stacked_begin;
++	void *fdt_overlay = &__dtbo_test_fdt_overlay_begin;
++	void *fdt_overlay_stacked = &__dtbo_test_fdt_overlay_stacked_begin;
+ 	void *fdt_overlay_copy, *fdt_overlay_stacked_copy;
+ 	int ret = -ENOMEM;
+ 
+diff --git a/test/overlay/test-fdt-overlay-stacked.dts b/test/overlay/test-fdt-overlay-stacked.dtso
+similarity index 100%
+rename from test/overlay/test-fdt-overlay-stacked.dts
+rename to test/overlay/test-fdt-overlay-stacked.dtso
+diff --git a/test/overlay/test-fdt-overlay.dts b/test/overlay/test-fdt-overlay.dtso
+similarity index 100%
+rename from test/overlay/test-fdt-overlay.dts
+rename to test/overlay/test-fdt-overlay.dtso
 -- 
 2.45.2
 
