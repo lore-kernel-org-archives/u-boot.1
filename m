@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646A0C3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 16:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BB8C3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 16:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1E24889D4;
-	Fri,  5 Jul 2024 18:49:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D10A6889A4;
+	Fri,  5 Jul 2024 18:57:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tvA2gMIX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iRWClesA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A758889D2; Fri,  5 Jul 2024 18:49:58 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5E2F588168; Fri,  5 Jul 2024 18:57:16 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E1B889DC
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 18:49:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2A8B8899F
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 18:57:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 465GnshU051072;
- Fri, 5 Jul 2024 11:49:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720198194;
- bh=EuBFkTzLVc9RKUL+BsCrNpOOJUwUUExoNyet8Ne9L84=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=tvA2gMIX3aV4R3EpB7AmubCNs+1HcLml0AhhDR6sHTFrUt/sTgbv6einoefG2eUU9
- z+nQ44Uu2xtxHHXkeok7ypETFTpxzLrxe6FgFfgmvbHlwv17XG38qeSeIr+2KscByl
- rW1VWenzlZZrnWqX3etwU+9Uk7lLIvAuNQuXK7yg=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 465GnrjS006255
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 5 Jul 2024 11:49:53 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
- Jul 2024 11:49:53 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 5 Jul 2024 11:49:53 -0500
-Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 465Gmhd5028675;
- Fri, 5 Jul 2024 11:49:49 -0500
-From: Dhruva Gole <d-gole@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
- Menon <nm@ti.com>, <c-shilwant@ti.com>, <m-chawdhry@ti.com>,
- <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vibhore Vardhan
- <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>, Sebin Francis
- <sebin.francis@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
- <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
- Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V5 6/6] MAINTAINERS: Include the TI docs under ARM TI
-Date: Fri, 5 Jul 2024 22:18:33 +0530
-Message-ID: <20240705164833.2386549-7-d-gole@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240705164833.2386549-1-d-gole@ti.com>
-References: <20240705164833.2386549-1-d-gole@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7035b717880so225934a34.1
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 09:57:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1720198633; x=1720803433; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tv+bXqRylwPoK8JlZ11Hlo+0KNfMkJDRaJnTeTcnHfw=;
+ b=iRWClesAS6kcZAD7DA18Nn8tI+8GvOx9rtw3anro/xuaD7tMyaC64livadSsfiuR5Q
+ JZq7S+ghSrKiwSC/HQ1I4g9jLzTmRm5UrTrCd3Kifr/pfGSMzTE8T9wCPUTTz3qRgGu0
+ bETzk4xjbIkdWkZuleT1oEuajRQ1hvmypqgQA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720198633; x=1720803433;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tv+bXqRylwPoK8JlZ11Hlo+0KNfMkJDRaJnTeTcnHfw=;
+ b=gSrlSqw6A3WWf6U5g3RWgvTnfcDH8J7VgYwhM6MZbl3sU+S8jovlJ6YokuE4Vfd2Gs
+ 0kao8w+5dbhCz0lSitV76IR7RXQoZMTztGQhw4g19dhlZ+zMGjNGeSC9sBns9907bvp0
+ 7suFyFUczrxS5Y1jBYfuCWFPMoG19gv121bZvUguVGPJBMOJR2I2Rfbz8XvDpKUqJCkv
+ Ni8L+soLqUyjJ9ABIg+PruCgnIQrE2hdoHtL7XYPWZlozqChW8qQeZC8/3P4w1wUYnLS
+ MebHL68c0LBkMRB8KfNgadnWLlIzaXQJaWZIdvJeQH3la62XutgHE3dqQAVHJ5VoUng8
+ zbcA==
+X-Gm-Message-State: AOJu0YwK0E4HkNRX9FY9wK94o5ZvJ979KYlKS9bcNqbKvZzqo0YNhaoI
+ d2q3B7GZAVCUswwvXpRcs9zvNVVTiMGy8BmaYzDDYMOL7vvDX/IEWVgjdMRGBpU=
+X-Google-Smtp-Source: AGHT+IFJsQNMfQbCXOMBOLXoexVZ+Qbgza1KXbARqBediKW3VsQnKVcZz9un6XoUeJz4aXSLB18OBA==
+X-Received: by 2002:a9d:7643:0:b0:700:cd0f:6cc5 with SMTP id
+ 46e09a7af769-7034b99fb14mr2216739a34.7.1720198632686; 
+ Fri, 05 Jul 2024 09:57:12 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
+ [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-701f7a99a3fsm2662439a34.16.2024.07.05.09.57.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Jul 2024 09:57:12 -0700 (PDT)
+Date: Fri, 5 Jul 2024 10:57:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Please pull u-boot-tegra staging
+Message-ID: <20240705165710.GL38804@bill-the-cat>
+References: <20240705131541.4434-1-clamor95@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CI3zF9+TzZn/WptW"
+Content-Disposition: inline
+In-Reply-To: <20240705131541.4434-1-clamor95@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,25 +89,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add entry for the TI boards documentation under ARM TI
 
-Signed-off-by: Dhruva Gole <d-gole@ti.com>
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+--CI3zF9+TzZn/WptW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6b32a6d94644..da730c6e4840 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -733,6 +733,7 @@ F:	arch/arm/mach-omap2/
- F:	arch/arm/include/asm/arch-omap*/
- F:	arch/arm/include/asm/ti-common/
- F:	board/ti/
-+F:	doc/board/ti/
- F:	drivers/dma/ti*
- F:	drivers/dma/ti*/
- F:	drivers/firmware/ti_sci.*
--- 
-2.34.1
+On Fri, Jul 05, 2024 at 04:15:40PM +0300, Svyatoslav Ryhel wrote:
 
+> Dear Tom,
+>=20
+> The following changes since commit 7c9c5c0562347dccb8ac89148784a34de402ea=
+9e:
+>=20
+>   Merge patch series "xtensa: Enable qemu-xtensa board" (2024-07-04 16:11=
+:08 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+>=20
+> for you to fetch changes up to f6fb6b2608214b3ee2aef955ec18cf97c14f562e:
+>=20
+>   board: lenovo: ideapad-yoga-11: add Lenovo Ideapad Yoga 11 support (202=
+4-07-05 10:18:36 +0300)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--CI3zF9+TzZn/WptW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIJeMACgkQFHw5/5Y0
+tyy4fwv/T+r6SO5B8qI4SkR4xvJYOhQEsZpjQTEGqmLIS5xb60kew/NnsaTR2pE9
+/919LK8rpo+82qob5C+yg/mlbD8blvCK/y48TM49eqMb/4wq8mvL5RgIouyxnRCg
+bklwSkXdp1PuqOWXveWlq0tMxWzPpewwRuqwpGIRjdb/buIqO4HN0IaJtkNlBJZ9
+w7HbyahKb/Im0tKgTK9U/4yBKJ3E2unkUcehLRmhpaUKWTp+IEXTE7EI33+7U2sO
+4Xf2FpSxgUEKRV1uGvpGEkZ8v/wbabtJYST/lF29CFrt/9TXKRpSfFstJCeJPqUf
+9mIZ2dNBP3Y21d2Y08HrmKtvIhktIez3JQHwhPhziOQ1vC9HcqsL8xoFPeJZzMYg
+4pzYqoW+8aqdINQUCwI0VxpuCGpH8Z8Rrvk0NEr2XhtRh4IyhCARW5ZJwvnVBSoT
+sM+9Claq0SJvWfzN7ROfAb9AxJD7Z2oTWiSLjDA/7GKOX+wV47QGZm5Diu8tFhjH
+a0MAhGOF
+=YsJb
+-----END PGP SIGNATURE-----
+
+--CI3zF9+TzZn/WptW--
