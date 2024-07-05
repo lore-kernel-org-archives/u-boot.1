@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A54F9C3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 14:26:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04576C3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 14:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4006889B8;
-	Fri,  5 Jul 2024 16:25:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39E38889BD;
+	Fri,  5 Jul 2024 16:25:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="Mu9zHH3Z";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="MH3FG+6r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97C71889AF; Fri,  5 Jul 2024 16:25:28 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20711.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::711])
+ id 279A4889BD; Fri,  5 Jul 2024 16:25:33 +0200 (CEST)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CB78889AE
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 16:25:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F15188256
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 16:25:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GvCX8CxBhO9QST9Rqk+qevpqKrLlYZXxoJQxS0Rfkwvv9XUVr3K9S+TG+nMOfzHUEhaldF3HhY7SzGV1auaxv8rZCsEVnzBm2RnXI67qaTOdQQgKOD6RAQI5GtQJcyKRuM7ri21IQOFtsvxH+t2N4Vma/P6latgePe2HtMm3/acKU28D68Dz3ET0L7gqO32uogVp3DxzgcSknd6CdL4GSnw4CianBV4muA3DhwRsZegDwjVRjconJt9YrTJXl0C83+wcKabDAEu1GtznWq5B136jchAMXr5cCig+Ltp2sRVFjzlQG4C6XS5sVzfxkr+7zHkdnNMFTB9NBgBYALvSoA==
+ b=MfJtET9Est4fmn4UlgcPrm5CfOeGEFMiKVPC93cyl3hnsWnlNLIAP5SWwqdLDxRgemgEhDDGujC7U0o5qv+344LrzuKuK0OeDbSZlMfe4QbCt/8S74w42dzzOeE3rnnFqgolQeIncn73/z+SrxsRMycHhW+qJn1WEdKVUJ8KFssklYNMV10UeAzKPt+2CIr9a0yf9zv+9dN8pt/XCSjRFe0JiAxWKjxUO8u7xTvvv4eu+EadGCTjA4bTmZQTG46SM/67F+20lp9MtUcP+kjOM4mAg3BiqO1TejziSflO0CVqWKIXovrm4Db5uGTzaA/+n+eKPVvvHs1iP2JSu/yYUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qjo+fQCL8BeBP8eLqIebanaZhbZ+C3EaAzXLKy++LtM=;
- b=VtdDUlon7ORuNbNcVkMCFW9sqYC/EFt35sSdwnII96Crr18Tjt3zhQDuKOKz/2wMmdj03uKEMjPpunlIYKZq/MWB2vcZMKFKitXDVQRm/NLkJfCN5COUkZTZNvF29eWXTCoVSSPfItzCZOrWInyujFVUA85+XNB/4+ABGFfM+qsMT+sbKFmph7m6RpMIowV2QV3iiLkpN/6qVPIQuS6hPum1SQCrSvhTJ9eIWx16PMyTlb7Bao9rhGPcYLIupJ8AbOuwY7hbO5JAlK2f71NbiAlslUEtwomQv+/UqAGuUz0680iAaNGoZRyUmdRJv9FAhx3mFwOv8XNgj3/fPP8n1w==
+ bh=1s5RmecPTZ1pkKaUtMKmZ/lgeznwboccxjWWdnpoUOA=;
+ b=UZMsrITILb37BwDMlweBIXptT2oHoedG0phrtyFLaMO4re2zZ4ExAIjnFyfmMVMsDEfIlQ7ZASNuZMd4wrfUEom4p35sMm+g+jIufZtGZO+HNcAw1x2rsL9h/L4rP5G7ergjIqlm7R3jPl3qOaSZGDWGo9m3Uj8uXRrLTULMYRW7+gl4rIq2YYXtK/a+iHi/mrXTiTqa4sosEOcut+5LjviHZHZSkHTKoPjFBhGpGmcTfRhXEnZz8pd9G6p7+s/wmkX78AOsyzHyLPgKGhlqF6fytUedCwG4gyzOjy10UjpVC4BmFwk6hbRWFerAblXbezPChSrkvmJZYTnLuPfWXg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qjo+fQCL8BeBP8eLqIebanaZhbZ+C3EaAzXLKy++LtM=;
- b=Mu9zHH3ZvA7GnGdV9KLpjOmccXs7QvqNYxqWDQlN7Mi0HhRkGl241o9nchg9rIbYWy2PA6ajSMG3fEB8KfPmCiF4LAT4hwt+vfRXspK797E1exnH2aJCCxI7+ga/XO1mTfiwY1eVfRSUUJsh8GD64X/vxFImuj82eSDrqIzVyfmk9CoYYhRInF3vEyokLhy1MvMzrcMmOh6QUGSECiA0h0dlglZHIraujMUqCMZPPlp05xyPa21oqW3bF2TWiFH6dTBwhly//UFfXY7OSu8eDz2IRDSX83UEFKclftL8sIIPgEuS2/a6eteIJDU1ko4L09myUqQBvHYNUJzeJ6T72g==
+ bh=1s5RmecPTZ1pkKaUtMKmZ/lgeznwboccxjWWdnpoUOA=;
+ b=MH3FG+6rvNVgDgrtoXV3V7dagRdYSEUW5x2tvT5MpfvheyWl+EFh0fqBmiTJ2HGr4QmQZw2a4XMKAC4MuymrE1RzmgDybixNECP0WK/RbfHnXfkb2V08RA5wl0BhD6IXn7wLthrDmoTixoA1uW8RsMhUCMvqgHDjcKo+Rf/DsNF7EikwgP8wBQT0mE/lMiN/cS+yKwTkHyLVromyMHXOt2ZCnK3znhfqIeKZHuXXd6aHKC8/dxnKkIt0BCM42EbSNGTr7qz9p+fkxXSiIKXSafBk2fYOK3e6RW6wccaGiJZ3BORnBWGmIaJIdOQE+WjvZG93oGDFXd0ow590H8MxFw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by DBBPR08MB5978.eurprd08.prod.outlook.com (2603:10a6:10:1f5::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.29; Fri, 5 Jul
- 2024 14:25:24 +0000
+ 2024 14:25:28 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7741.027; Fri, 5 Jul 2024
- 14:25:24 +0000
+ 14:25:28 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -67,9 +67,9 @@ To: Tom Rini <trini@konsulko.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v2 4/7] mtd: spinand: preparation for ecc engine adding
-Date: Fri,  5 Jul 2024 18:24:57 +0400
-Message-Id: <20240705142500.2272803-5-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v2 5/7] mtd: nand: add initial ecc engine support
+Date: Fri,  5 Jul 2024 18:24:58 +0400
+Message-Id: <20240705142500.2272803-6-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240705142500.2272803-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240705142500.2272803-1-mikhail.kshevetskiy@iopsys.eu>
@@ -81,78 +81,78 @@ X-ClientProxiedBy: LO3P123CA0020.GBRP123.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DBBPR08MB5978:EE_
-X-MS-Office365-Filtering-Correlation-Id: cdc4ee8e-c58f-4d93-8c60-08dc9cfe4f54
+X-MS-Office365-Filtering-Correlation-Id: e235cd66-3dff-49a0-86f1-08dc9cfe5129
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|52116014|7416014|1800799024|376014|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?l2JBmZFuTh6sNxdGFlP6TawktpRo4gOkta6cOnLTwmZPeQg9CHQNumPKXtyv?=
- =?us-ascii?Q?QjzR9N/GNgMvF6tIeXgHZJBon4b4xQ25yzbaLjKVfKwkGuQE780ryzVEzeWD?=
- =?us-ascii?Q?ZgkQSir8sA2OP5ZGO8Xus4IsX3/uZnvqYJv5XtB8EYVGwP0ZYW++2qBa5p2X?=
- =?us-ascii?Q?hKxuAo3xKYPem1zE2X+5HLBtyagStqDS/5BOgSPwxVtaagxzXcQ2BwRQJg6/?=
- =?us-ascii?Q?KWJu21HiUXakd2F9x1Kl6c8vgpbnXYrej4un109BDEnZL0b0tRwTCgOEcJST?=
- =?us-ascii?Q?3kaNstXcaYeqGk/tsRioSXGpeT1+Kcl8bMmHhmkXIRiBIvzPny/LM0cehwPI?=
- =?us-ascii?Q?qRVdhuqXz/2cHHcAXVVsAY/DledfQno3BlpUJi0jJX4j9eR+s6eLa+UwAcoP?=
- =?us-ascii?Q?LdJXxG5jGmf6bY4Or6Iz5vuwry/JHoHt9t0HZHPS3lk/s0AaLbtazyyZ5Z8+?=
- =?us-ascii?Q?2VcJ0rmCq50EhEsuBmzXnEUK3OmyeseTL+fDAAG/pFy061ANfbaHAjaWuvme?=
- =?us-ascii?Q?cp0kIbthfX/W7NlpDbvHhgsxLZcVPm6u7GXV0RWt/8x7bpJmDw0JoSoS1TYu?=
- =?us-ascii?Q?HsNtNXtUdmKQzC0gKwg6AKvM+AsnPU7XGAK1mSnV6mLA6KIQrC2YFUn+07ZP?=
- =?us-ascii?Q?CvdqJfrjOkFQHNdpOnoAp6dPWdIvgWPi2JqYJ+qixDXHjkK87xlpwHpanVOc?=
- =?us-ascii?Q?cwym8Dd9+SeSwQ7PW1o5RUciTfXuvbqXDuUNLQwKRXJJ7cT8LFKeD0AzBpjs?=
- =?us-ascii?Q?rhNHmyRgSybQR+If9QH6gs0uOLAxy1pjL/hh4evWuv7YSseGi2sK9ehT1Qdr?=
- =?us-ascii?Q?cw7KUEr3qBQhaOIRNhhPFTsCb25hY/F45zA46TaXfYWk9KC6lOqagY8a+tfW?=
- =?us-ascii?Q?LUDhggHiD8SIm+JKoylCbpKrS85fGSZWVUsy3+0FHY594tyCpgFCemCcnA6/?=
- =?us-ascii?Q?GDzwQ1tx7wNzBw+Yep4293ws0mHsXolITzf5uzkfNtrtBYIbSod9UkMupRWZ?=
- =?us-ascii?Q?kSsKmoQUPHj+X4xRYNWhvazywBbHUik9xevKd4sCIBa0kB6KZwc96XZk0MLC?=
- =?us-ascii?Q?FaS0EaWyEcL9MQQ/CcDg2rCk3JwbUrweoF6DN+HhL20Od/MNjYkprQr9YqSZ?=
- =?us-ascii?Q?EqUb+rma5tLGPK1ZT2ucoBau1OtQKZCz+BpdQ4sLLkLpI3waYj5he2RvJOrx?=
- =?us-ascii?Q?Pwb2IhSJTXVA62S/rHwY9mHrVMhdyuEwXLuGSOV6G6fGlND5a954S229FmZY?=
- =?us-ascii?Q?35MoIgDkhAOhiavmO7qwzquU9L/F1ECo5oR6GERu35box536F/T8Y0HUQoCP?=
- =?us-ascii?Q?JDRr4YIG7xGLiqX1epUGeWfs0RIuS+Cy07YD9EW8+wc8tfdfJpUFqsbMyr4n?=
- =?us-ascii?Q?c17xjzZIYIP04kO8GYjeuST/QK15jVqDnMbf14OntAbLdxHGlW3QiQ0rrhwS?=
- =?us-ascii?Q?ao3WXZg5uJM=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7G7BP9CpVMSNwJCfgIho22WnpafqxV51FIWq3y/bB17esyY9oLzfgsr1VwLh?=
+ =?us-ascii?Q?4hjrXtB/+kcD5tcfBA58X1goAsRro44E45KW9oVwzL+q/qeJgtzTveYd5Mwn?=
+ =?us-ascii?Q?TMs8Wa5MxSKCiJmD8Q+LJ/Cj+zkSQ0xTNKpke+Q0uGCiSBb3B4C5v0cPZIBu?=
+ =?us-ascii?Q?R9YC5YKo6PYbAHbCSTZmzJo98avE/jtdefQfhJCeL4/2itwNR2Xh+mio5H5P?=
+ =?us-ascii?Q?iRMjCbz09req1+8nLsHK7kSoISLpp0EwZ1CkPRdCA9hC4Xta3EqZBiLPRxi3?=
+ =?us-ascii?Q?0E9bzfN3SJdsm2l270pdi4HX6u/qU9p5Y5OePvINsqLbvrrUZpjsKyVYQnNQ?=
+ =?us-ascii?Q?U6cqbojsaIa9SwxSqd7YTHqiNPcfdYsxL2ytohW1HtrAatP03qSRd4+91o81?=
+ =?us-ascii?Q?w3v73pmlFbwhuuR14E+ylyDGteiFXfu8TIAcoRJD4fkZtIEuSic+i7EVrUWy?=
+ =?us-ascii?Q?sInMScZSljtnNCA/xAxUX87oZSgQujxt2SNm6gCwHOM4gYdc+/MiVcyEkjlI?=
+ =?us-ascii?Q?Y7ax4T7Jzx7rWChvEwJKWREFoMyka/AiBxhCWiSIkNqVXa+7nBXlnhewL69z?=
+ =?us-ascii?Q?KKA5db57aKzOnfFNmIZ7e/Bm7SS/IxoNgzqJqHteBXHmSAXdnfQDd+n9QNfW?=
+ =?us-ascii?Q?A7v0ho6QVvzSaertS790vW7AA6OOyReNP3wKbtws2UvN/RChBcNedFwLBlX+?=
+ =?us-ascii?Q?DjRWXS9NnyJZ4mnNVvazcnrJ4pt5xwrsRBPS9xJVlt5kEGFp+XRDqMMVsMe7?=
+ =?us-ascii?Q?dRe5Ffdwi1EMPfhxAe6dxPUDXaIoKgcm0IVmIXUjX1tbpGNtB3gO68/T6/Qw?=
+ =?us-ascii?Q?0xUJXhEFC9ufxAiIGUlDuOfq9/1HPllexJCMEwnt0NehdQO/qqUr5CHsZfws?=
+ =?us-ascii?Q?lE5qgTfR8xnSLOEFitE9KVj+SNwJdAZNkaevHNK95XEuKJQarrHW361i9LtV?=
+ =?us-ascii?Q?uPQ1pqUlKFuXzIumtDmVwpe80Ok9Uh4FM3/1lkOjQUec5gF9ifawHH/rt13S?=
+ =?us-ascii?Q?TihGcc6WyFz10kJ88Em9oRtBaoW7WTiFCI9nB+YMP2A2ozhJXXL7XihKregx?=
+ =?us-ascii?Q?jcB4nxSflwhXimgVDhhEo6lrM0E2eMscbYh/UeM/mcX0ITe/TGPBLVxl5W0k?=
+ =?us-ascii?Q?sevkpbP8HC6KIah05DUTOiFW9Ou5o9t9jVxyFOi6/lvAbxeJdmsS0fDQBOXG?=
+ =?us-ascii?Q?V0qfWRdtouML8SPd9oOhE3HjyEtHAQjInmfqr7I5W9fLEDXiH64n/GqaqEcV?=
+ =?us-ascii?Q?3TBbKZ2WamFR/SWDz5wj68Szxr8ym072K3dDFb57Js3anBkdUdINqKuy7uOV?=
+ =?us-ascii?Q?/YYJcTgsYmvXTI57csXTixxEXmX62iSba1rRTsQnBz2UCdkP2YgsOQIaBiNg?=
+ =?us-ascii?Q?rnxInC2UCoHO7TClxsh6tkpT8d6Epbkm7oBdMn3IUrdkpDJIni5wKcLXUEgR?=
+ =?us-ascii?Q?6LIMvqxi1ZA=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(52116014)(7416014)(1800799024)(376014)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?wAhmDYcB2j49AJ/6bjOoUKAHVewn29r0YWnxcmG/SL3CxoqVTlD9fyp++hpp?=
- =?us-ascii?Q?NIi2l8Iisv3JEa4Rjq1EG0e6SWa+hocJMMUyRy8dBNT7K9o9za3KbmaU6SVY?=
- =?us-ascii?Q?H9evwiFYJoOrs2hJaWMpqAhlugaT8HdpdQOF0F/qkAbZ7bh1hPuSsZAgijuF?=
- =?us-ascii?Q?0wZswx+YcV7UfbsEFSOkW5iYRkg9zm49C4q96AMB/G1PmKbRAGAOMW2Hf4iW?=
- =?us-ascii?Q?XmWTZA5cyRRnQ6MkjmH9ankAAK/a11qS/zrvKVXBHK65THwRF+oWWcF21fpz?=
- =?us-ascii?Q?7WAyilyzr31zlXqzt3mbUZInGIh4Y/m9mJTtSDhbEkFSWyKC07tzJ3fz6ufE?=
- =?us-ascii?Q?EXAKCv347BqfLH02CVXao5qZaP4/ECT9uhw0i64Z7AXBbFUILt4yx65xorgY?=
- =?us-ascii?Q?KafEWSG/2AZQTmDPHT5cItRlD5DKptgfA175r4FH4GZtHDSyh/6pfpHQGL33?=
- =?us-ascii?Q?Uxt4R4guVut1FJTxwBq4ImDfdw29625Af/Ce3w7XPxjkUKthLRqAjs0r6DuA?=
- =?us-ascii?Q?HCYRe1lGHrm1sU9Amo0zVPU4Xo2HjC1YO14nsBI1ytfU5TEvAF9E5X98vqfz?=
- =?us-ascii?Q?vSz5h2HLS3Uv7tNz3Tovi+cvPPeWfbzAUnHU9s8rwmd15ivj/T/HZQAmblyo?=
- =?us-ascii?Q?o3FniISECX6m6XQyE5xD2m7kso9n5u+rhioNExUYG/Fh/TESF3QZ0rm0fmIi?=
- =?us-ascii?Q?TJFj5FwiQzoKPYRPqYbyDWFOkeAs/OJlHFYFxWi2dMS/rmhUANRplrVd0FKE?=
- =?us-ascii?Q?2oEIX2Q5JI+UCkJlHSbZ+BM+P73BkmV7TovL8QbdQOTtGhsoEUIeAhyM6LBB?=
- =?us-ascii?Q?utitPPVmWPKfl23BRTwXG/LGOdUijm5DOiZsoe23c9exeTZj47tD9wGCBgO2?=
- =?us-ascii?Q?8fIUUr4WEd11Brj+fh+mIHY4Nw/oCr+t+rn4O1bRNhWaEiRbCYzwTHeNYVGP?=
- =?us-ascii?Q?Lm0UjEEfAKKczrq+cqYGgpD3wLkzmoKCbiukMujUiOIlKf/hhuUh87m80Mc8?=
- =?us-ascii?Q?RKLSaiV9bp+u/E8vcw+BmXNTPTh+kHLvJoeDg68sKsLrr/7MeDK3nPd/II2o?=
- =?us-ascii?Q?W0D85M3+epYqnrtfHTibX/a2aryKBcfzbAux6FoZjJ2fH+tze5k+41Cudy1w?=
- =?us-ascii?Q?bDZMunEmMgfh/WiljecsM055QmtmRSEev7oPXM/w+40u1b3jXuJ5hgxDQzwt?=
- =?us-ascii?Q?Z+M1xcKSj+npWO+rkLh17G7JO3eHtV4WQDCh5zG4Xg+EVHUZbeA0wp/zh7B2?=
- =?us-ascii?Q?L3GnjO/r8YTnUPp2WL+xmpGkEtcR9uN9Xy8IaBv6nnE2iB8qUa2DxSlR8lgQ?=
- =?us-ascii?Q?jJF+AJYYzjGibC71kldVEDplBulnwq+VICv393y82dEZqHaFTXQQJ9efMIMc?=
- =?us-ascii?Q?N9Vs3ZyZCJaiJt18DCFsMSZZVAyealovH/oTCBi1lYPbr348NHk9t56SsyKW?=
- =?us-ascii?Q?z2QGiKstdJiWoviZnbh9at2n6+9usZA2qezq3M1MdZEEP9t4fP/fCqqpZv/K?=
- =?us-ascii?Q?00lb5itc4IEeKeumZyH9tYl8qZIqyoCUR7UNCnDK4Egq4iHy8D2WAY+79poM?=
- =?us-ascii?Q?i01rF+bhfwmxSAEZOV4DgrK+hANw3WN5x6VG1NUWRyQPZkdvYBLMPjpMXRGD?=
- =?us-ascii?Q?eBtayuKXvtme/Mzd6MsWB0o=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?fOG1V8NK8rXXNWgBm2R4dNF3n13qxb0Bd07amBM5FEA97kuA+BTbwfM+2w4m?=
+ =?us-ascii?Q?FlHV1YlowSPBk+OLK1IxcqwxkpDPnvap8YI1q2F3+YzbLn6xZCzLE+V1gbAI?=
+ =?us-ascii?Q?jF54QJmUjNbzWltuH5ROLH4iOIWb9QVmIDgoGxJ6ALqF1dVht9VRYBln1/gC?=
+ =?us-ascii?Q?o6dUuNvX4M0IaS5isJo9hcuY+NKa8ifaIpOdfdCjsx3YUjsQD4LXOhuTfzta?=
+ =?us-ascii?Q?J6JISHbcIoQLV4MSpNnfx0P5/W07oJzyj7Wzg+FfzbMp0FYh80PBlTtTjGCf?=
+ =?us-ascii?Q?U0weyw4Y877VyznO93Q4gfvrKb1rLTY7T8FesT60x+GxRA81nZOcJhaBLu6s?=
+ =?us-ascii?Q?tqIanL6WPmM8UKuTgGV23UsEdeYfh8rdQPKUgBjDH0QPpikFstrvHoiOVfIn?=
+ =?us-ascii?Q?5aI34ZB2I0EFYDlCIXoqfEikNtNE1CXyyfhRjK2sYs67EHBjXugBX/CU4kEr?=
+ =?us-ascii?Q?ddPouQ86cNmnbCNLywPdcrqViQVAoCG2yvJe+mi7t53zhw51nX/041CmpJM8?=
+ =?us-ascii?Q?lQHD+tYpybu4cbgwMA1o2gG8WshtoDIWGl/8Gq9k1UiyV8ffdaKenArI1xCj?=
+ =?us-ascii?Q?/Ut26vW0wdqDUVvx+Dez3kOBY63/QGuymahU5qQRlzbTn4G83ukK1m86/jlo?=
+ =?us-ascii?Q?TQ1U6+5KbQYqT6pw8rx289btL5v0hVualRTKqrIscXmJIkFqHwL6xTGmmhmW?=
+ =?us-ascii?Q?oCV8ZL5JPW4Cr9mpJ6JVB6Ju4A1ZrxAn5oTF6YFsaP3XF6okQLNiE7tpXRhI?=
+ =?us-ascii?Q?P/g6kOBnAZ9HMrxQdPJDKvfl3zymaofuE/Hd8ho3Zb+/Kz7JXbObRg/bFOJh?=
+ =?us-ascii?Q?6HB0WvDKH1zbcRw30+nVGQcm/7vnUGXWnfCsJznESM3eXFrWMHsp4QmL+sFx?=
+ =?us-ascii?Q?uV1d0ZiwQygOr09hKa4Wny7xdt2M8DEl1fwoo0Gh57G4dUqADqyzQ41tL3z3?=
+ =?us-ascii?Q?9S4YCI5jkMEmq/IwZXH2g5GT/htOwE4sLmcHQY0ZrmnUXjy+wkuLAGNxHVIQ?=
+ =?us-ascii?Q?WlaBPzWywtoPhMJqGzKblPF9mSAgbviVByYOhrE/LclvntOc4cep9DQG1uLK?=
+ =?us-ascii?Q?UFE9WiYArCVh8nMXAeL/jrrhooSaPNTv49HH3M4LHRf8stXlk0gDmIJEcaXD?=
+ =?us-ascii?Q?IfagU6Mj2tl1S4db3s4TK6pw79VfUc9KzggkkXFmWPSSzmcT+h9RMG0McrFy?=
+ =?us-ascii?Q?aJ1rMKBcgRcXsbgDTvU0pyy/ROd+51O/UUJfWGjgdG+rzYoL0usFLOt6TRE/?=
+ =?us-ascii?Q?IkgtC+yGh6MXnCu8OJUWRb0f7Xcdt7IJwusvfm6Ew3u2uUm5epoUhvEmqiyY?=
+ =?us-ascii?Q?j27brLlsQynU+FKX5vbG+sjf+T8rPDw5sNRBtBVm3ep1TD7fxvMbQgBT0ON6?=
+ =?us-ascii?Q?N05E5sMw60Cc0OtUMsIhxkUbsQYX4fF6CGx/8z8NrG1RpMQKT5xpZ1EeYwKa?=
+ =?us-ascii?Q?9q9BbgjDLg1r8d8zA+mHSef5osBXATjC/6SYGu0mSPqUH+rXAzrXaD472wns?=
+ =?us-ascii?Q?abU47tf2impVnu0bDGIFYorMGHHY0ndFINFnsJFgl0An7D6PVNdnivbOjWIw?=
+ =?us-ascii?Q?unUA17xomhJGuReYQJ7LNW4Ocf5CWdW7am412mYJzJhfGjy21YfxJAkRbLzV?=
+ =?us-ascii?Q?XTMibYtpLv18Gqhs4+EbYNU=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: cdc4ee8e-c58f-4d93-8c60-08dc9cfe4f54
+X-MS-Exchange-CrossTenant-Network-Message-Id: e235cd66-3dff-49a0-86f1-08dc9cfe5129
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 14:25:24.8049 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 14:25:27.9511 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nbJGd/O1XhR0s8hgK7Mt/eu4WkA7BYtK1OuL/Xxe9nyStr6o3f1MVL/ukMwnvtr/i1S9cOKZgGs1yb6l/RYQ++6nR7WSYVxIKPkKoez5Gmg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: UCXZ+3nN0+wxLDbLs01XMVTwTCYYZo9oulIi1tm8Hlwa+WDbBEbWTnYiH2FHK88cGq3PiQs2KJBDPmb3hLjoRHnLR+gAQoMkqkxgTnN/+VQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB5978
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -170,458 +170,1209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Changes:
- * add missed MODULE_DEVICE_TABLE()
- * update mtd stats after data reading
-
-Code reorganization:
- * use spinand_to_nand() and spinand_to_mtd() helpers instead of
-   nanddev_to_mtd() and direct access to spinand structure fields
- * rename enable_ecc variable to disable_ecc and update corresponding logic
- * move reading of spinand cfg to spinand_read_cfg() function
- * move spinand flash initialization to spinand_init_flash() function
- * move creation of dirmaps to other place
- * move to other place:
-     spinand_check_ecc_status(),
-     spinand_noecc_ooblayout_ecc(),
-     spinand_noecc_ooblayout_free(),
-     spinand_noecc_ooblayout
+just now only spinand on_die ecc is supported
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/mtd/nand/spi/core.c | 259 +++++++++++++++++++++---------------
- 1 file changed, 151 insertions(+), 108 deletions(-)
+ drivers/mtd/nand/Makefile       |   2 +-
+ drivers/mtd/nand/core.c         | 130 +++++++++++++++-
+ drivers/mtd/nand/ecc.c          | 150 ++++++++++++++++++
+ drivers/mtd/nand/spi/core.c     | 206 ++++++++++++++++++++-----
+ drivers/mtd/nand/spi/macronix.c |   7 +-
+ drivers/mtd/nand/spi/micron.c   |   2 +-
+ drivers/mtd/nand/spi/toshiba.c  |  10 +-
+ drivers/mtd/nand/spi/winbond.c  |  10 +-
+ include/linux/mtd/nand.h        | 260 ++++++++++++++++++++++++++++++--
+ include/linux/mtd/spinand.h     |  13 +-
+ include/spi-mem.h               |   2 +
+ 11 files changed, 724 insertions(+), 68 deletions(-)
+ create mode 100644 drivers/mtd/nand/ecc.c
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 8664e882753..1b2eefc9041 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -156,20 +156,12 @@ int spinand_select_target(struct spinand_device *spinand, unsigned int target)
- 	return 0;
- }
+diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
+index 96e186600a1..56179188e92 100644
+--- a/drivers/mtd/nand/Makefile
++++ b/drivers/mtd/nand/Makefile
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
--static int spinand_init_cfg_cache(struct spinand_device *spinand)
-+static int spinand_read_cfg(struct spinand_device *spinand)
+ ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+-nandcore-objs := core.o bbt.o
++nandcore-objs := core.o bbt.o ecc.o
+ obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
+ obj-$(CONFIG_MTD_RAW_NAND) += raw/
+ obj-$(CONFIG_MTD_SPI_NAND) += spi/
+diff --git a/drivers/mtd/nand/core.c b/drivers/mtd/nand/core.c
+index f6d9c584f78..62bbc12c662 100644
+--- a/drivers/mtd/nand/core.c
++++ b/drivers/mtd/nand/core.c
+@@ -130,7 +130,7 @@ EXPORT_SYMBOL_GPL(nanddev_isreserved);
+  *
+  * Return: 0 in case of success, a negative error code otherwise.
+  */
+-static int nanddev_erase(struct nand_device *nand, const struct nand_pos *pos)
++int nanddev_erase(struct nand_device *nand, const struct nand_pos *pos)
  {
- 	struct nand_device *nand = spinand_to_nand(spinand);
--	struct udevice *dev = spinand->slave->dev;
- 	unsigned int target;
- 	int ret;
+ 	unsigned int entry;
  
--	spinand->cfg_cache = devm_kzalloc(dev,
--					  sizeof(*spinand->cfg_cache) *
--					  nand->memorg.ntargets,
--					  GFP_KERNEL);
--	if (!spinand->cfg_cache)
--		return -ENOMEM;
--
- 	for (target = 0; target < nand->memorg.ntargets; target++) {
- 		ret = spinand_select_target(spinand, target);
- 		if (ret)
-@@ -188,6 +180,21 @@ static int spinand_init_cfg_cache(struct spinand_device *spinand)
- 	return 0;
+@@ -188,6 +188,134 @@ int nanddev_mtd_erase(struct mtd_info *mtd, struct erase_info *einfo)
  }
+ EXPORT_SYMBOL_GPL(nanddev_mtd_erase);
  
-+static int spinand_init_cfg_cache(struct spinand_device *spinand)
++/**
++ * nanddev_get_ecc_engine() - Find and get a suitable ECC engine
++ * @nand: NAND device
++ */
++static int nanddev_get_ecc_engine(struct nand_device *nand)
 +{
-+	struct nand_device *nand = spinand_to_nand(spinand);
-+	struct udevice *dev = spinand->slave->dev;
++	int engine_type;
 +
-+	spinand->cfg_cache = devm_kcalloc(dev,
-+					  nand->memorg.ntargets,
-+					  sizeof(*spinand->cfg_cache),
-+					  GFP_KERNEL);
-+	if (!spinand->cfg_cache)
-+		return -ENOMEM;
++	/* Read the user desires in terms of ECC engine/configuration */
++	of_get_nand_ecc_user_config(nand);
++
++	engine_type = nand->ecc.user_conf.engine_type;
++	if (engine_type == NAND_ECC_ENGINE_TYPE_INVALID)
++		engine_type = nand->ecc.defaults.engine_type;
++
++	switch (engine_type) {
++	case NAND_ECC_ENGINE_TYPE_NONE:
++		return 0;
++	case NAND_ECC_ENGINE_TYPE_SOFT:
++		nand->ecc.engine = nand_ecc_get_sw_engine(nand);
++		break;
++	case NAND_ECC_ENGINE_TYPE_ON_DIE:
++		nand->ecc.engine = nand_ecc_get_on_die_hw_engine(nand);
++		break;
++	case NAND_ECC_ENGINE_TYPE_ON_HOST:
++		nand->ecc.engine = nand_ecc_get_on_host_hw_engine(nand);
++		if (PTR_ERR(nand->ecc.engine) == -EPROBE_DEFER)
++			return -EPROBE_DEFER;
++		break;
++	default:
++		pr_err("Missing ECC engine type\n");
++	}
++
++	if (!nand->ecc.engine)
++		return  -EINVAL;
 +
 +	return 0;
 +}
 +
- static int spinand_init_quad_enable(struct spinand_device *spinand)
- {
- 	bool enable = false;
-@@ -211,6 +218,59 @@ static int spinand_ecc_enable(struct spinand_device *spinand,
- 			       enable ? CFG_ECC_ENABLE : 0);
- }
- 
-+static int spinand_check_ecc_status(struct spinand_device *spinand, u8 status)
++/**
++ * nanddev_put_ecc_engine() - Dettach and put the in-use ECC engine
++ * @nand: NAND device
++ */
++static int nanddev_put_ecc_engine(struct nand_device *nand)
 +{
-+	struct nand_device *nand = spinand_to_nand(spinand);
-+
-+	if (spinand->eccinfo.get_status)
-+		return spinand->eccinfo.get_status(spinand, status);
-+
-+	switch (status & STATUS_ECC_MASK) {
-+	case STATUS_ECC_NO_BITFLIPS:
-+		return 0;
-+
-+	case STATUS_ECC_HAS_BITFLIPS:
-+		/*
-+		 * We have no way to know exactly how many bitflips have been
-+		 * fixed, so let's return the maximum possible value so that
-+		 * wear-leveling layers move the data immediately.
-+		 */
-+		return nand->eccreq.strength;
-+
-+	case STATUS_ECC_UNCOR_ERROR:
-+		return -EBADMSG;
-+
++	switch (nand->ecc.ctx.conf.engine_type) {
++	case NAND_ECC_ENGINE_TYPE_ON_HOST:
++		nand_ecc_put_on_host_hw_engine(nand);
++		break;
++	case NAND_ECC_ENGINE_TYPE_NONE:
++	case NAND_ECC_ENGINE_TYPE_SOFT:
++	case NAND_ECC_ENGINE_TYPE_ON_DIE:
 +	default:
 +		break;
 +	}
 +
-+	return -EINVAL;
++	return 0;
 +}
 +
-+static int spinand_noecc_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				       struct mtd_oob_region *region)
++/**
++ * nanddev_find_ecc_configuration() - Find a suitable ECC configuration
++ * @nand: NAND device
++ */
++static int nanddev_find_ecc_configuration(struct nand_device *nand)
 +{
-+	return -ERANGE;
-+}
++	int ret;
 +
-+static int spinand_noecc_ooblayout_free(struct mtd_info *mtd, int section,
-+					struct mtd_oob_region *region)
-+{
-+	if (section)
-+		return -ERANGE;
++	if (!nand->ecc.engine)
++		return -ENOTSUPP;
 +
-+	/* Reserve 2 bytes for the BBM. */
-+	region->offset = 2;
-+	region->length = 62;
++	ret = nand_ecc_init_ctx(nand);
++	if (ret)
++		return ret;
++
++	if (!nand_ecc_is_strong_enough(nand))
++		pr_warn("WARNING: %s: the ECC used on your system is too weak compared to the one required by the NAND chip\n",
++			nand->mtd->name);
 +
 +	return 0;
 +}
 +
-+static const struct mtd_ooblayout_ops spinand_noecc_ooblayout = {
-+	.ecc = spinand_noecc_ooblayout_ecc,
-+	.rfree = spinand_noecc_ooblayout_free,
++/**
++ * nanddev_ecc_engine_init() - Initialize an ECC engine for the chip
++ * @nand: NAND device
++ */
++int nanddev_ecc_engine_init(struct nand_device *nand)
++{
++	int ret;
++
++	/* Look for the ECC engine to use */
++	ret = nanddev_get_ecc_engine(nand);
++	if (ret) {
++		if (ret != -EPROBE_DEFER)
++			pr_err("No ECC engine found\n");
++
++		return ret;
++	}
++
++	/* No ECC engine requested */
++	if (!nand->ecc.engine)
++		return 0;
++
++	/* Configure the engine: balance user input and chip requirements */
++	ret = nanddev_find_ecc_configuration(nand);
++	if (ret) {
++		pr_err("No suitable ECC configuration\n");
++		nanddev_put_ecc_engine(nand);
++
++		return ret;
++	}
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(nanddev_ecc_engine_init);
++
++/**
++ * nanddev_ecc_engine_cleanup() - Cleanup ECC engine initializations
++ * @nand: NAND device
++ */
++void nanddev_ecc_engine_cleanup(struct nand_device *nand)
++{
++	if (nand->ecc.engine)
++		nand_ecc_cleanup_ctx(nand);
++
++	nanddev_put_ecc_engine(nand);
++}
++EXPORT_SYMBOL_GPL(nanddev_ecc_engine_cleanup);
++
+ /**
+  * nanddev_init() - Initialize a NAND device
+  * @nand: NAND device
+diff --git a/drivers/mtd/nand/ecc.c b/drivers/mtd/nand/ecc.c
+new file mode 100644
+index 00000000000..7c86e9871ad
+--- /dev/null
++++ b/drivers/mtd/nand/ecc.c
+@@ -0,0 +1,150 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#ifndef __UBOOT__
++#include <linux/module.h>
++#include <linux/slab.h>
++#include <linux/of.h>
++#include <linux/of_device.h>
++#include <linux/of_platform.h>
++#endif
++#include <linux/mtd/nand.h>
++
++/**
++ * nand_ecc_init_ctx - Init the ECC engine context
++ * @nand: the NAND device
++ *
++ * On success, the caller is responsible of calling @nand_ecc_cleanup_ctx().
++ */
++int nand_ecc_init_ctx(struct nand_device *nand)
++{
++	if (!nand->ecc.engine || !nand->ecc.engine->ops->init_ctx)
++		return 0;
++
++	return nand->ecc.engine->ops->init_ctx(nand);
++}
++EXPORT_SYMBOL(nand_ecc_init_ctx);
++
++/**
++ * nand_ecc_cleanup_ctx - Cleanup the ECC engine context
++ * @nand: the NAND device
++ */
++void nand_ecc_cleanup_ctx(struct nand_device *nand)
++{
++	if (nand->ecc.engine && nand->ecc.engine->ops->cleanup_ctx)
++		nand->ecc.engine->ops->cleanup_ctx(nand);
++}
++EXPORT_SYMBOL(nand_ecc_cleanup_ctx);
++
++/**
++ * nand_ecc_prepare_io_req - Prepare an I/O request
++ * @nand: the NAND device
++ * @req: the I/O request
++ */
++int nand_ecc_prepare_io_req(struct nand_device *nand,
++			    struct nand_page_io_req *req)
++{
++	if (!nand->ecc.engine || !nand->ecc.engine->ops->prepare_io_req)
++		return 0;
++
++	return nand->ecc.engine->ops->prepare_io_req(nand, req);
++}
++EXPORT_SYMBOL(nand_ecc_prepare_io_req);
++
++/**
++ * nand_ecc_finish_io_req - Finish an I/O request
++ * @nand: the NAND device
++ * @req: the I/O request
++ */
++int nand_ecc_finish_io_req(struct nand_device *nand,
++			   struct nand_page_io_req *req)
++{
++	if (!nand->ecc.engine || !nand->ecc.engine->ops->finish_io_req)
++		return 0;
++
++	return nand->ecc.engine->ops->finish_io_req(nand, req);
++}
++EXPORT_SYMBOL(nand_ecc_finish_io_req);
++
++void of_get_nand_ecc_user_config(struct nand_device *nand)
++{
++	nand->ecc.user_conf.engine_type = NAND_ECC_ENGINE_TYPE_ON_DIE;
++	nand->ecc.user_conf.algo = NAND_ECC_ALGO_UNKNOWN;
++	nand->ecc.user_conf.placement = NAND_ECC_PLACEMENT_UNKNOWN;
++}
++EXPORT_SYMBOL(of_get_nand_ecc_user_config);
++
++/**
++ * nand_ecc_is_strong_enough - Check if the chip configuration meets the
++ *                             datasheet requirements.
++ *
++ * @nand: Device to check
++ *
++ * If our configuration corrects A bits per B bytes and the minimum
++ * required correction level is X bits per Y bytes, then we must ensure
++ * both of the following are true:
++ *
++ * (1) A / B >= X / Y
++ * (2) A >= X
++ *
++ * Requirement (1) ensures we can correct for the required bitflip density.
++ * Requirement (2) ensures we can correct even when all bitflips are clumped
++ * in the same sector.
++ */
++bool nand_ecc_is_strong_enough(struct nand_device *nand)
++{
++	const struct nand_ecc_props *reqs = nanddev_get_ecc_requirements(nand);
++	const struct nand_ecc_props *conf = nanddev_get_ecc_conf(nand);
++	struct mtd_info *mtd = nanddev_to_mtd(nand);
++	int corr, ds_corr;
++
++	if (conf->step_size == 0 || reqs->step_size == 0)
++		/* Not enough information */
++		return true;
++
++	/*
++	 * We get the number of corrected bits per page to compare
++	 * the correction density.
++	 */
++	corr = (mtd->writesize * conf->strength) / conf->step_size;
++	ds_corr = (mtd->writesize * reqs->strength) / reqs->step_size;
++
++	return corr >= ds_corr && conf->strength >= reqs->strength;
++}
++EXPORT_SYMBOL(nand_ecc_is_strong_enough);
++
++struct nand_ecc_engine *nand_ecc_get_sw_engine(struct nand_device *nand)
++{
++	unsigned int algo = nand->ecc.user_conf.algo;
++
++	if (algo == NAND_ECC_ALGO_UNKNOWN)
++		algo = nand->ecc.defaults.algo;
++
++	switch (algo) {
++	case NAND_ECC_ALGO_HAMMING:
++		return nand_ecc_sw_hamming_get_engine();
++	case NAND_ECC_ALGO_BCH:
++		return nand_ecc_sw_bch_get_engine();
++	default:
++		break;
++	}
++
++	return NULL;
++}
++EXPORT_SYMBOL(nand_ecc_get_sw_engine);
++
++struct nand_ecc_engine *nand_ecc_get_on_die_hw_engine(struct nand_device *nand)
++{
++	return nand->ecc.ondie_engine;
++}
++EXPORT_SYMBOL(nand_ecc_get_on_die_hw_engine);
++
++struct nand_ecc_engine *nand_ecc_get_on_host_hw_engine(struct nand_device *nand)
++{
++	return NULL;
++}
++EXPORT_SYMBOL(nand_ecc_get_on_host_hw_engine);
++
++void nand_ecc_put_on_host_hw_engine(struct nand_device *nand)
++{
++}
++EXPORT_SYMBOL(nand_ecc_put_on_host_hw_engine);
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 1b2eefc9041..c60c3dfad68 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -235,7 +235,7 @@ static int spinand_check_ecc_status(struct spinand_device *spinand, u8 status)
+ 		 * fixed, so let's return the maximum possible value so that
+ 		 * wear-leveling layers move the data immediately.
+ 		 */
+-		return nand->eccreq.strength;
++		return nanddev_get_ecc_conf(nand)->strength;
+ 
+ 	case STATUS_ECC_UNCOR_ERROR:
+ 		return -EBADMSG;
+@@ -271,6 +271,92 @@ static const struct mtd_ooblayout_ops spinand_noecc_ooblayout = {
+ 	.rfree = spinand_noecc_ooblayout_free,
+ };
+ 
++static int spinand_ondie_ecc_init_ctx(struct nand_device *nand)
++{
++	struct spinand_device *spinand = nand_to_spinand(nand);
++	struct mtd_info *mtd = nanddev_to_mtd(nand);
++	struct spinand_ondie_ecc_conf *engine_conf;
++
++	nand->ecc.ctx.conf.engine_type = NAND_ECC_ENGINE_TYPE_ON_DIE;
++	nand->ecc.ctx.conf.step_size = nand->ecc.requirements.step_size;
++	nand->ecc.ctx.conf.strength = nand->ecc.requirements.strength;
++
++	engine_conf = kzalloc(sizeof(*engine_conf), GFP_KERNEL);
++	if (!engine_conf)
++		return -ENOMEM;
++
++	nand->ecc.ctx.priv = engine_conf;
++
++	if (spinand->eccinfo.ooblayout)
++		mtd_set_ooblayout(mtd, spinand->eccinfo.ooblayout);
++	else
++		mtd_set_ooblayout(mtd, &spinand_noecc_ooblayout);
++
++	return 0;
++}
++
++static void spinand_ondie_ecc_cleanup_ctx(struct nand_device *nand)
++{
++	kfree(nand->ecc.ctx.priv);
++}
++
++static int spinand_ondie_ecc_prepare_io_req(struct nand_device *nand,
++					    struct nand_page_io_req *req)
++{
++	struct spinand_device *spinand = nand_to_spinand(nand);
++	bool enable = (req->mode != MTD_OPS_RAW);
++
++	memset(spinand->oobbuf, 0xff, nanddev_per_page_oobsize(nand));
++
++	/* Only enable or disable the engine */
++	return spinand_ecc_enable(spinand, enable);
++}
++
++static int spinand_ondie_ecc_finish_io_req(struct nand_device *nand,
++					   struct nand_page_io_req *req)
++{
++	struct spinand_ondie_ecc_conf *engine_conf = nand->ecc.ctx.priv;
++	struct spinand_device *spinand = nand_to_spinand(nand);
++	struct mtd_info *mtd = spinand_to_mtd(spinand);
++	int ret;
++
++	if (req->mode == MTD_OPS_RAW)
++		return 0;
++
++	/* Nothing to do when finishing a page write */
++	if (req->type == NAND_PAGE_WRITE)
++		return 0;
++
++	/* Finish a page read: check the status, report errors/bitflips */
++	ret = spinand_check_ecc_status(spinand, engine_conf->status);
++	if (ret == -EBADMSG)
++		mtd->ecc_stats.failed++;
++	else if (ret > 0)
++		mtd->ecc_stats.corrected += ret;
++
++	return ret;
++}
++
++static struct nand_ecc_engine_ops spinand_ondie_ecc_engine_ops = {
++	.init_ctx = spinand_ondie_ecc_init_ctx,
++	.cleanup_ctx = spinand_ondie_ecc_cleanup_ctx,
++	.prepare_io_req = spinand_ondie_ecc_prepare_io_req,
++	.finish_io_req = spinand_ondie_ecc_finish_io_req,
 +};
++
++static struct nand_ecc_engine spinand_ondie_ecc_engine = {
++	.ops = &spinand_ondie_ecc_engine_ops,
++};
++
++static void spinand_ondie_ecc_save_status(struct nand_device *nand, u8 status)
++{
++	struct spinand_ondie_ecc_conf *engine_conf = nand->ecc.ctx.priv;
++
++	if (nand->ecc.ctx.conf.engine_type == NAND_ECC_ENGINE_TYPE_ON_DIE &&
++	    engine_conf)
++		engine_conf->status = status;
++}
 +
  static int spinand_write_enable_op(struct spinand_device *spinand)
  {
  	struct spi_mem_op op = SPINAND_WR_EN_DIS_OP(true);
-@@ -232,7 +292,7 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
- 				      const struct nand_page_io_req *req)
- {
- 	struct nand_device *nand = spinand_to_nand(spinand);
--	struct mtd_info *mtd = nanddev_to_mtd(nand);
-+	struct mtd_info *mtd = spinand_to_mtd(spinand);
- 	struct spi_mem_dirmap_desc *rdesc;
- 	unsigned int nbytes = 0;
- 	void *buf = NULL;
-@@ -290,7 +350,7 @@ static int spinand_write_to_cache_op(struct spinand_device *spinand,
- 				     const struct nand_page_io_req *req)
- {
- 	struct nand_device *nand = spinand_to_nand(spinand);
--	struct mtd_info *mtd = nanddev_to_mtd(nand);
-+	struct mtd_info *mtd = spinand_to_mtd(spinand);
- 	struct spi_mem_dirmap_desc *wdesc;
- 	unsigned int nbytes, column = 0;
- 	void *buf = spinand->databuf;
-@@ -352,7 +412,7 @@ static int spinand_program_op(struct spinand_device *spinand,
- static int spinand_erase_op(struct spinand_device *spinand,
- 			    const struct nand_pos *pos)
- {
--	struct nand_device *nand = &spinand->base;
-+	struct nand_device *nand = spinand_to_nand(spinand);
- 	unsigned int row = nanddev_pos_to_row(nand, pos);
- 	struct spi_mem_op op = SPINAND_BLK_ERASE_OP(row);
+@@ -313,7 +399,10 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
+ 		}
+ 	}
  
-@@ -402,9 +462,8 @@ out:
- static int spinand_read_id_op(struct spinand_device *spinand, u8 naddr,
- 			      u8 ndummy, u8 *buf)
- {
--	struct spi_mem_op op = SPINAND_READID_OP(naddr, ndummy,
--						 spinand->scratchbuf,
--						 SPINAND_MAX_ID_LEN);
-+	struct spi_mem_op op = SPINAND_READID_OP(
-+		naddr, ndummy, spinand->scratchbuf, SPINAND_MAX_ID_LEN);
- 	int ret;
+-	rdesc = spinand->dirmaps[req->pos.plane].rdesc;
++	if (req->mode == MTD_OPS_RAW)
++		rdesc = spinand->dirmaps[req->pos.plane].rdesc;
++	else
++		rdesc = spinand->dirmaps[req->pos.plane].rdesc_ecc;
  
- 	ret = spi_mem_exec_op(spinand->slave, &op);
-@@ -434,35 +493,6 @@ static int spinand_lock_block(struct spinand_device *spinand, u8 lock)
- 	return spinand_write_reg_op(spinand, REG_BLOCK_LOCK, lock);
+ 	while (nbytes) {
+ 		ret = spi_mem_dirmap_read(rdesc, column, nbytes, buf);
+@@ -362,9 +451,12 @@ static int spinand_write_to_cache_op(struct spinand_device *spinand,
+ 	 * must fill the page cache entirely even if we only want to program
+ 	 * the data portion of the page, otherwise we might corrupt the BBM or
+ 	 * user data previously programmed in OOB area.
++	 *
++	 * Only reset the data buffer manually, the OOB buffer is prepared by
++	 * ECC engines ->prepare_io_req() callback.
+ 	 */
+ 	nbytes = nanddev_page_size(nand) + nanddev_per_page_oobsize(nand);
+-	memset(spinand->databuf, 0xff, nbytes);
++	memset(spinand->databuf, 0xff, nanddev_page_size(nand));
+ 
+ 	if (req->datalen)
+ 		memcpy(spinand->databuf + req->dataoffs, req->databuf.out,
+@@ -381,7 +473,10 @@ static int spinand_write_to_cache_op(struct spinand_device *spinand,
+ 			       req->ooblen);
+ 	}
+ 
+-	wdesc = spinand->dirmaps[req->pos.plane].wdesc;
++	if (req->mode == MTD_OPS_RAW)
++		wdesc = spinand->dirmaps[req->pos.plane].wdesc;
++	else
++		wdesc = spinand->dirmaps[req->pos.plane].wdesc_ecc;
+ 
+ 	while (nbytes) {
+ 		ret = spi_mem_dirmap_write(wdesc, column, nbytes, buf);
+@@ -494,12 +589,16 @@ static int spinand_lock_block(struct spinand_device *spinand, u8 lock)
  }
  
--static int spinand_check_ecc_status(struct spinand_device *spinand, u8 status)
--{
--	struct nand_device *nand = spinand_to_nand(spinand);
--
--	if (spinand->eccinfo.get_status)
--		return spinand->eccinfo.get_status(spinand, status);
--
--	switch (status & STATUS_ECC_MASK) {
--	case STATUS_ECC_NO_BITFLIPS:
+ static int spinand_read_page(struct spinand_device *spinand,
+-			     const struct nand_page_io_req *req,
+-			     bool ecc_enabled)
++			     const struct nand_page_io_req *req)
+ {
++	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 status;
+ 	int ret;
+ 
++	ret = nand_ecc_prepare_io_req(nand, (struct nand_page_io_req *)req);
++	if (ret)
++		return ret;
++
+ 	ret = spinand_load_page_op(spinand, req);
+ 	if (ret)
+ 		return ret;
+@@ -511,22 +610,26 @@ static int spinand_read_page(struct spinand_device *spinand,
+ 	if (ret < 0)
+ 		return ret;
+ 
++	spinand_ondie_ecc_save_status(nand, status);
++
+ 	ret = spinand_read_from_cache_op(spinand, req);
+ 	if (ret)
+ 		return ret;
+ 
+-	if (!ecc_enabled)
 -		return 0;
 -
--	case STATUS_ECC_HAS_BITFLIPS:
--		/*
--		 * We have no way to know exactly how many bitflips have been
--		 * fixed, so let's return the maximum possible value so that
--		 * wear-leveling layers move the data immediately.
--		 */
--		return nand->eccreq.strength;
--
--	case STATUS_ECC_UNCOR_ERROR:
--		return -EBADMSG;
--
--	default:
--		break;
--	}
--
--	return -EINVAL;
--}
--
- static int spinand_read_page(struct spinand_device *spinand,
- 			     const struct nand_page_io_req *req,
- 			     bool ecc_enabled)
-@@ -524,30 +554,36 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
+-	return spinand_check_ecc_status(spinand, status);
++	return nand_ecc_finish_io_req(nand, (struct nand_page_io_req *)req);
+ }
+ 
+ static int spinand_write_page(struct spinand_device *spinand,
+ 			      const struct nand_page_io_req *req)
+ {
++	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 status;
+ 	int ret;
+ 
++	ret = nand_ecc_prepare_io_req(nand, (struct nand_page_io_req *)req);
++	if (ret)
++		return ret;
++
+ 	ret = spinand_write_enable_op(spinand);
+ 	if (ret)
+ 		return ret;
+@@ -546,7 +649,7 @@ static int spinand_write_page(struct spinand_device *spinand,
+ 	if (!ret && (status & STATUS_PROG_FAILED))
+ 		return -EIO;
+ 
+-	return ret;
++	return nand_ecc_finish_io_req(nand, (struct nand_page_io_req *)req);
+ }
+ 
+ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
+@@ -554,7 +657,6 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
  {
  	struct spinand_device *spinand = mtd_to_spinand(mtd);
  	struct nand_device *nand = mtd_to_nanddev(mtd);
-+	struct mtd_ecc_stats old_stats;
+-	struct mtd_ecc_stats old_stats;
  	unsigned int max_bitflips = 0;
  	struct nand_io_iter iter;
--	bool enable_ecc = false;
-+	bool disable_ecc = false;
- 	bool ecc_failed = false;
- 	int ret = 0;
- 
--	if (ops->mode != MTD_OPS_RAW && spinand->eccinfo.ooblayout)
--		enable_ecc = true;
-+	if (ops->mode == MTD_OPS_RAW || !spinand->eccinfo.ooblayout)
-+		disable_ecc = true;
- 
- #ifndef __UBOOT__
+ 	bool disable_ecc = false;
+@@ -568,8 +670,6 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
  	mutex_lock(&spinand->lock);
  #endif
  
-+	old_stats = mtd->ecc_stats;
-+
+-	old_stats = mtd->ecc_stats;
+-
  	nanddev_io_for_each_page(nand, NAND_PAGE_READ, from, ops, &iter) {
  		schedule();
-+		if (disable_ecc)
-+			iter.req.mode = MTD_OPS_RAW;
-+
- 		ret = spinand_select_target(spinand, iter.req.pos.target);
+ 		if (disable_ecc)
+@@ -579,11 +679,7 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
  		if (ret)
  			break;
  
--		ret = spinand_ecc_enable(spinand, enable_ecc);
-+		ret = spinand_ecc_enable(spinand, !disable_ecc);
- 		if (ret)
- 			break;
- 
--		ret = spinand_read_page(spinand, &iter.req, enable_ecc);
-+		ret = spinand_read_page(spinand, &iter.req, !disable_ecc);
+-		ret = spinand_ecc_enable(spinand, !disable_ecc);
+-		if (ret)
+-			break;
+-
+-		ret = spinand_read_page(spinand, &iter.req, !disable_ecc);
++		ret = spinand_read_page(spinand, &iter.req);
  		if (ret < 0 && ret != -EBADMSG)
  			break;
  
-@@ -564,6 +600,13 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
+@@ -600,13 +696,6 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
  		ops->oobretlen += iter.req.ooblen;
  	}
  
-+	if (ops->stats) {
-+		ops->stats->uncorrectable_errors +=
-+			mtd->ecc_stats.failed - old_stats.failed;
-+		ops->stats->corrected_bitflips +=
-+			mtd->ecc_stats.corrected - old_stats.corrected;
-+	}
-+
+-	if (ops->stats) {
+-		ops->stats->uncorrectable_errors +=
+-			mtd->ecc_stats.failed - old_stats.failed;
+-		ops->stats->corrected_bitflips +=
+-			mtd->ecc_stats.corrected - old_stats.corrected;
+-	}
+-
  #ifndef __UBOOT__
  	mutex_unlock(&spinand->lock);
  #endif
-@@ -579,11 +622,11 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
- 	struct spinand_device *spinand = mtd_to_spinand(mtd);
- 	struct nand_device *nand = mtd_to_nanddev(mtd);
- 	struct nand_io_iter iter;
--	bool enable_ecc = false;
-+	bool disable_ecc = false;
- 	int ret = 0;
+@@ -641,10 +730,6 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
+ 		if (ret)
+ 			break;
  
--	if (ops->mode != MTD_OPS_RAW && mtd->ooblayout)
--		enable_ecc = true;
-+	if (ops->mode == MTD_OPS_RAW || !mtd->ooblayout)
-+		disable_ecc = true;
+-		ret = spinand_ecc_enable(spinand, !disable_ecc);
+-		if (ret)
+-			break;
+-
+ 		ret = spinand_write_page(spinand, &iter.req);
+ 		if (ret)
+ 			break;
+@@ -673,7 +758,7 @@ static bool spinand_isbad(struct nand_device *nand, const struct nand_pos *pos)
+ 	};
  
- #ifndef __UBOOT__
- 	mutex_lock(&spinand->lock);
-@@ -591,11 +634,14 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
+ 	spinand_select_target(spinand, pos->target);
+-	spinand_read_page(spinand, &req, false);
++	spinand_read_page(spinand, &req);
+ 	if (marker[0] != 0xff || marker[1] != 0xff)
+ 		return true;
  
- 	nanddev_io_for_each_page(nand, NAND_PAGE_WRITE, to, ops, &iter) {
- 		schedule();
-+		if (disable_ecc)
-+			iter.req.mode = MTD_OPS_RAW;
+@@ -841,6 +926,36 @@ static int spinand_create_dirmap(struct spinand_device *spinand,
+ 
+ 	spinand->dirmaps[plane].rdesc = desc;
+ 
++	if (nand->ecc.engine->integration != NAND_ECC_ENGINE_INTEGRATION_PIPELINED) {
++		spinand->dirmaps[plane].wdesc_ecc = spinand->dirmaps[plane].wdesc;
++		spinand->dirmaps[plane].rdesc_ecc = spinand->dirmaps[plane].rdesc;
 +
- 		ret = spinand_select_target(spinand, iter.req.pos.target);
- 		if (ret)
- 			break;
- 
--		ret = spinand_ecc_enable(spinand, enable_ecc);
-+		ret = spinand_ecc_enable(spinand, !disable_ecc);
- 		if (ret)
- 			break;
- 
-@@ -1039,35 +1085,55 @@ static int spinand_detect(struct spinand_device *spinand)
++		return 0;
++	}
++
++	info.op_tmpl = *spinand->op_templates.update_cache;
++	info.op_tmpl.data.ecc = true;
++	desc = spi_mem_dirmap_create(spinand->slave, &info);
++	if (IS_ERR(desc)) {
++		spi_mem_dirmap_destroy(spinand->dirmaps[plane].wdesc);
++		spi_mem_dirmap_destroy(spinand->dirmaps[plane].rdesc);
++		return PTR_ERR(desc);
++	}
++
++	spinand->dirmaps[plane].wdesc_ecc = desc;
++
++	info.op_tmpl = *spinand->op_templates.read_cache;
++	info.op_tmpl.data.ecc = true;
++	desc = spi_mem_dirmap_create(spinand->slave, &info);
++	if (IS_ERR(desc)) {
++		spi_mem_dirmap_destroy(spinand->dirmaps[plane].wdesc);
++		spi_mem_dirmap_destroy(spinand->dirmaps[plane].rdesc);
++		spi_mem_dirmap_destroy(spinand->dirmaps[plane].wdesc_ecc);
++		return PTR_ERR(desc);
++	}
++
++	spinand->dirmaps[plane].rdesc_ecc = desc;
++
  	return 0;
  }
  
--static int spinand_noecc_ooblayout_ecc(struct mtd_info *mtd, int section,
--				       struct mtd_oob_region *region)
-+static int spinand_init_flash(struct spinand_device *spinand)
- {
--	return -ERANGE;
--}
-+	struct udevice *dev = spinand->slave->dev;
-+	struct nand_device *nand = spinand_to_nand(spinand);
-+	int ret, i;
+@@ -1022,7 +1137,7 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 			continue;
  
--static int spinand_noecc_ooblayout_free(struct mtd_info *mtd, int section,
--					struct mtd_oob_region *region)
--{
--	if (section)
--		return -ERANGE;
-+	ret = spinand_read_cfg(spinand);
-+	if (ret)
-+		return ret;
- 
--	/* Reserve 2 bytes for the BBM. */
--	region->offset = 2;
--	region->length = 62;
-+	ret = spinand_init_quad_enable(spinand);
-+	if (ret)
-+		return ret;
- 
--	return 0;
--}
-+	ret = spinand_upd_cfg(spinand, CFG_OTP_ENABLE, 0);
-+	if (ret)
-+		return ret;
- 
--static const struct mtd_ooblayout_ops spinand_noecc_ooblayout = {
--	.ecc = spinand_noecc_ooblayout_ecc,
--	.rfree = spinand_noecc_ooblayout_free,
--};
-+	ret = spinand_manufacturer_init(spinand);
-+	if (ret) {
-+		dev_err(dev,
-+			"Failed to initialize the SPI NAND chip (err = %d)\n",
-+			ret);
-+		return ret;
-+	}
-+
-+	/* After power up, all blocks are locked, so unlock them here. */
-+	for (i = 0; i < nand->memorg.ntargets; i++) {
-+		ret = spinand_select_target(spinand, i);
-+		if (ret)
-+			break;
-+
-+		ret = spinand_lock_block(spinand, BL_ALL_UNLOCKED);
-+		if (ret)
-+			break;
-+	}
-+
-+	if (ret)
-+		spinand_manufacturer_cleanup(spinand);
-+
-+	return ret;
-+}
- 
- static int spinand_init(struct spinand_device *spinand)
- {
-+	struct udevice *dev = spinand->slave->dev;
- 	struct mtd_info *mtd = spinand_to_mtd(spinand);
- 	struct nand_device *nand = mtd_to_nanddev(mtd);
--	int ret, i;
-+	int ret;
- 
- 	/*
- 	 * We need a scratch buffer because the spi_mem interface requires that
-@@ -1100,49 +1166,14 @@ static int spinand_init(struct spinand_device *spinand)
- 	if (ret)
- 		goto err_free_bufs;
- 
--	ret = spinand_init_quad_enable(spinand);
-+	ret = spinand_init_flash(spinand);
- 	if (ret)
- 		goto err_free_bufs;
- 
--	ret = spinand_upd_cfg(spinand, CFG_OTP_ENABLE, 0);
--	if (ret)
--		goto err_free_bufs;
--
--	ret = spinand_manufacturer_init(spinand);
--	if (ret) {
--		dev_err(spinand->slave->dev,
--			"Failed to initialize the SPI NAND chip (err = %d)\n",
--			ret);
--		goto err_free_bufs;
--	}
--
--	ret = spinand_create_dirmaps(spinand);
--	if (ret) {
--		dev_err(spinand->slave->dev,
--			"Failed to create direct mappings for read/write operations (err = %d)\n",
--			ret);
--		goto err_manuf_cleanup;
--	}
--
--	/* After power up, all blocks are locked, so unlock them here. */
--	for (i = 0; i < nand->memorg.ntargets; i++) {
--		ret = spinand_select_target(spinand, i);
--		if (ret)
--			goto err_manuf_cleanup;
--
--		ret = spinand_lock_block(spinand, BL_ALL_UNLOCKED);
--		if (ret)
--			goto err_manuf_cleanup;
--	}
--
- 	ret = nanddev_init(nand, &spinand_ops, THIS_MODULE);
+ 		nand->memorg = table[i].memorg;
+-		nand->eccreq = table[i].eccreq;
++		nanddev_set_ecc_requirements(nand, &table[i].eccreq);
+ 		spinand->eccinfo = table[i].eccinfo;
+ 		spinand->flags = table[i].flags;
+ 		spinand->id.len = 1 + table[i].devid.len;
+@@ -1174,6 +1289,15 @@ static int spinand_init(struct spinand_device *spinand)
  	if (ret)
  		goto err_manuf_cleanup;
  
--	/*
--	 * Right now, we don't support ECC, so let the whole oob
--	 * area is available for user.
--	 */
++	/* SPI-NAND default ECC engine is on-die */
++	nand->ecc.defaults.engine_type = NAND_ECC_ENGINE_TYPE_ON_DIE;
++	nand->ecc.ondie_engine = &spinand_ondie_ecc_engine;
++
++	spinand_ecc_enable(spinand, false);
++	ret = nanddev_ecc_engine_init(nand);
++	if (ret)
++		goto err_cleanup_nanddev;
++
  	mtd->_read_oob = spinand_mtd_read;
  	mtd->_write_oob = spinand_mtd_write;
  	mtd->_block_isbad = spinand_mtd_block_isbad;
-@@ -1161,8 +1192,18 @@ static int spinand_init(struct spinand_device *spinand)
+@@ -1181,17 +1305,18 @@ static int spinand_init(struct spinand_device *spinand)
+ 	mtd->_block_isreserved = spinand_mtd_block_isreserved;
+ 	mtd->_erase = spinand_mtd_erase;
+ 
+-	if (spinand->eccinfo.ooblayout)
+-		mtd_set_ooblayout(mtd, spinand->eccinfo.ooblayout);
+-	else
+-		mtd_set_ooblayout(mtd, &spinand_noecc_ooblayout);
+-
+-	ret = mtd_ooblayout_count_freebytes(mtd);
+-	if (ret < 0)
+-		goto err_cleanup_nanddev;
++	if (nand->ecc.engine) {
++		ret = mtd_ooblayout_count_freebytes(mtd);
++		if (ret < 0)
++			goto err_cleanup_ecc_engine;
++	}
  
  	mtd->oobavail = ret;
  
-+	ret = spinand_create_dirmaps(spinand);
-+	if (ret) {
-+		dev_err(dev,
-+			"Failed to create direct mappings for read/write operations (err = %d)\n",
-+			ret);
-+		goto err_cleanup_ecc_engine;
-+	}
++	/* Propagate ECC information to mtd_info */
++	mtd->ecc_strength = nanddev_get_ecc_conf(nand)->strength;
++	mtd->ecc_step_size = nanddev_get_ecc_conf(nand)->step_size;
 +
+ 	ret = spinand_create_dirmaps(spinand);
+ 	if (ret) {
+ 		dev_err(dev,
+@@ -1203,6 +1328,7 @@ static int spinand_init(struct spinand_device *spinand)
  	return 0;
  
-+err_cleanup_ecc_engine:
-+
+ err_cleanup_ecc_engine:
++	nanddev_ecc_engine_cleanup(nand);
+ 
  err_cleanup_nanddev:
  	nanddev_cleanup(nand);
+diff --git a/drivers/mtd/nand/spi/macronix.c b/drivers/mtd/nand/spi/macronix.c
+index 86bffc2800b..064a9d6b2fe 100644
+--- a/drivers/mtd/nand/spi/macronix.c
++++ b/drivers/mtd/nand/spi/macronix.c
+@@ -87,10 +87,11 @@ static int mx35lf1ge4ab_ecc_get_status(struct spinand_device *spinand,
+ 		 * data around if it's not necessary.
+ 		 */
+ 		if (mx35lf1ge4ab_get_eccsr(spinand, &eccsr))
+-			return nand->eccreq.strength;
++			return nanddev_get_ecc_conf(nand)->strength;
  
-@@ -1262,12 +1303,14 @@ static const struct spi_device_id spinand_ids[] = {
- 	{ .name = "spi-nand" },
- 	{ /* sentinel */ },
+-		if (WARN_ON(eccsr > nand->eccreq.strength || !eccsr))
+-			return nand->eccreq.strength;
++		if (WARN_ON(eccsr > nanddev_get_ecc_conf(nand)->strength ||
++			    !eccsr))
++			return nanddev_get_ecc_conf(nand)->strength;
+ 
+ 		return eccsr;
+ 
+diff --git a/drivers/mtd/nand/spi/micron.c b/drivers/mtd/nand/spi/micron.c
+index b538213ed8e..01c177facfb 100644
+--- a/drivers/mtd/nand/spi/micron.c
++++ b/drivers/mtd/nand/spi/micron.c
+@@ -14,7 +14,7 @@
+ 
+ #define SPINAND_MFR_MICRON		0x2c
+ 
+-#define MICRON_STATUS_ECC_MASK		GENMASK(7, 4)
++#define MICRON_STATUS_ECC_MASK		GENMASK(6, 4)
+ #define MICRON_STATUS_ECC_NO_BITFLIPS	(0 << 4)
+ #define MICRON_STATUS_ECC_1TO3_BITFLIPS	(1 << 4)
+ #define MICRON_STATUS_ECC_4TO6_BITFLIPS	(3 << 4)
+diff --git a/drivers/mtd/nand/spi/toshiba.c b/drivers/mtd/nand/spi/toshiba.c
+index b9908e79271..d264cdf32ce 100644
+--- a/drivers/mtd/nand/spi/toshiba.c
++++ b/drivers/mtd/nand/spi/toshiba.c
+@@ -76,7 +76,7 @@ static int tx58cxgxsxraix_ecc_get_status(struct spinand_device *spinand,
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 mbf = 0;
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(0x30, &mbf);
++	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(0x30, spinand->scratchbuf);
+ 
+ 	switch (status & STATUS_ECC_MASK) {
+ 	case STATUS_ECC_NO_BITFLIPS:
+@@ -93,12 +93,12 @@ static int tx58cxgxsxraix_ecc_get_status(struct spinand_device *spinand,
+ 		 * data around if it's not necessary.
+ 		 */
+ 		if (spi_mem_exec_op(spinand->slave, &op))
+-			return nand->eccreq.strength;
++			return nanddev_get_ecc_conf(nand)->strength;
+ 
+-		mbf >>= 4;
++		mbf = *(spinand->scratchbuf) >> 4;
+ 
+-		if (WARN_ON(mbf > nand->eccreq.strength || !mbf))
+-			return nand->eccreq.strength;
++		if (WARN_ON(mbf > nanddev_get_ecc_conf(nand)->strength || !mbf))
++			return nanddev_get_ecc_conf(nand)->strength;
+ 
+ 		return mbf;
+ 
+diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
+index dd4ed257a83..5fe35e35ed5 100644
+--- a/drivers/mtd/nand/spi/winbond.c
++++ b/drivers/mtd/nand/spi/winbond.c
+@@ -111,7 +111,7 @@ static int w25n02kv_ecc_get_status(struct spinand_device *spinand,
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	u8 mbf = 0;
+-	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(0x30, &mbf);
++	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(0x30, spinand->scratchbuf);
+ 
+ 	switch (status & STATUS_ECC_MASK) {
+ 	case STATUS_ECC_NO_BITFLIPS:
+@@ -127,12 +127,12 @@ static int w25n02kv_ecc_get_status(struct spinand_device *spinand,
+ 		 * data around if it's not necessary.
+ 		 */
+ 		if (spi_mem_exec_op(spinand->slave, &op))
+-			return nand->eccreq.strength;
++			return nanddev_get_ecc_conf(nand)->strength;
+ 
+-		mbf >>= 4;
++		mbf = *(spinand->scratchbuf) >> 4;
+ 
+-		if (WARN_ON(mbf > nand->eccreq.strength || !mbf))
+-			return nand->eccreq.strength;
++		if (WARN_ON(mbf > nanddev_get_ecc_conf(nand)->strength || !mbf))
++			return nanddev_get_ecc_conf(nand)->strength;
+ 
+ 		return mbf;
+ 
+diff --git a/include/linux/mtd/nand.h b/include/linux/mtd/nand.h
+index 0afdaed5715..76808559b72 100644
+--- a/include/linux/mtd/nand.h
++++ b/include/linux/mtd/nand.h
+@@ -12,6 +12,8 @@
+ 
+ #include <linux/mtd/mtd.h>
+ 
++struct nand_device;
++
+ /**
+  * struct nand_memory_organization - Memory organization structure
+  * @bits_per_cell: number of bits per NAND cell
+@@ -126,17 +128,72 @@ struct nand_page_io_req {
  };
-+MODULE_DEVICE_TABLE(spi, spinand_ids);
  
- #ifdef CONFIG_OF
- static const struct of_device_id spinand_of_ids[] = {
- 	{ .compatible = "spi-nand" },
- 	{ /* sentinel */ },
+ /**
+- * struct nand_ecc_req - NAND ECC requirements
++ * enum nand_ecc_engine_type - NAND ECC engine type
++ * @NAND_ECC_ENGINE_TYPE_INVALID: Invalid value
++ * @NAND_ECC_ENGINE_TYPE_NONE: No ECC correction
++ * @NAND_ECC_ENGINE_TYPE_SOFT: Software ECC correction
++ * @NAND_ECC_ENGINE_TYPE_ON_HOST: On host hardware ECC correction
++ * @NAND_ECC_ENGINE_TYPE_ON_DIE: On chip hardware ECC correction
++ */
++enum nand_ecc_engine_type {
++	NAND_ECC_ENGINE_TYPE_INVALID,
++	NAND_ECC_ENGINE_TYPE_NONE,
++	NAND_ECC_ENGINE_TYPE_SOFT,
++	NAND_ECC_ENGINE_TYPE_ON_HOST,
++	NAND_ECC_ENGINE_TYPE_ON_DIE,
++};
++
++/**
++ * enum nand_ecc_placement - NAND ECC bytes placement
++ * @NAND_ECC_PLACEMENT_UNKNOWN: The actual position of the ECC bytes is unknown
++ * @NAND_ECC_PLACEMENT_OOB: The ECC bytes are located in the OOB area
++ * @NAND_ECC_PLACEMENT_INTERLEAVED: Syndrome layout, there are ECC bytes
++ *                                  interleaved with regular data in the main
++ *                                  area
++ */
++enum nand_ecc_placement {
++	NAND_ECC_PLACEMENT_UNKNOWN,
++	NAND_ECC_PLACEMENT_OOB,
++	NAND_ECC_PLACEMENT_INTERLEAVED,
++};
++
++/**
++ * enum nand_ecc_algo - NAND ECC algorithm
++ * @NAND_ECC_ALGO_UNKNOWN: Unknown algorithm
++ * @NAND_ECC_ALGO_HAMMING: Hamming algorithm
++ * @NAND_ECC_ALGO_BCH: Bose-Chaudhuri-Hocquenghem algorithm
++ * @NAND_ECC_ALGO_RS: Reed-Solomon algorithm
++ */
++enum nand_ecc_algo {
++	NAND_ECC_ALGO_UNKNOWN,
++	NAND_ECC_ALGO_HAMMING,
++	NAND_ECC_ALGO_BCH,
++	NAND_ECC_ALGO_RS,
++};
++
++/**
++ * struct nand_ecc_props - NAND ECC properties
++ * @engine_type: ECC engine type
++ * @placement: OOB placement (if relevant)
++ * @algo: ECC algorithm (if relevant)
+  * @strength: ECC strength
+- * @step_size: ECC step/block size
++ * @step_size: Number of bytes per step
++ * @flags: Misc properties
+  */
+-struct nand_ecc_req {
++struct nand_ecc_props {
++	enum nand_ecc_engine_type engine_type;
++	enum nand_ecc_placement placement;
++	enum nand_ecc_algo algo;
+ 	unsigned int strength;
+ 	unsigned int step_size;
++	unsigned int flags;
  };
-+MODULE_DEVICE_TABLE(of, spinand_of_ids);
- #endif
  
- static struct spi_mem_driver spinand_drv = {
+ #define NAND_ECCREQ(str, stp) { .strength = (str), .step_size = (stp) }
+ 
++/* NAND ECC misc flags */
++#define NAND_ECC_MAXIMIZE_STRENGTH BIT(0)
++
+ /**
+  * struct nand_bbt - bad block table object
+  * @cache: in memory BBT cache
+@@ -145,8 +202,6 @@ struct nand_bbt {
+ 	unsigned long *cache;
+ };
+ 
+-struct nand_device;
+-
+ /**
+  * struct nand_ops - NAND operations
+  * @erase: erase a specific block. No need to check if the block is bad before
+@@ -169,11 +224,129 @@ struct nand_ops {
+ 	bool (*isbad)(struct nand_device *nand, const struct nand_pos *pos);
+ };
+ 
++/**
++ * struct nand_ecc_context - Context for the ECC engine
++ * @conf: basic ECC engine parameters
++ * @nsteps: number of ECC steps
++ * @total: total number of bytes used for storing ECC codes, this is used by
++ *         generic OOB layouts
++ * @priv: ECC engine driver private data
++ */
++struct nand_ecc_context {
++	struct nand_ecc_props conf;
++	unsigned int nsteps;
++	unsigned int total;
++	void *priv;
++};
++
++/**
++ * struct nand_ecc_engine_ops - ECC engine operations
++ * @init_ctx: given a desired user configuration for the pointed NAND device,
++ *            requests the ECC engine driver to setup a configuration with
++ *            values it supports.
++ * @cleanup_ctx: clean the context initialized by @init_ctx.
++ * @prepare_io_req: is called before reading/writing a page to prepare the I/O
++ *                  request to be performed with ECC correction.
++ * @finish_io_req: is called after reading/writing a page to terminate the I/O
++ *                 request and ensure proper ECC correction.
++ */
++struct nand_ecc_engine_ops {
++	int (*init_ctx)(struct nand_device *nand);
++	void (*cleanup_ctx)(struct nand_device *nand);
++	int (*prepare_io_req)(struct nand_device *nand,
++			      struct nand_page_io_req *req);
++	int (*finish_io_req)(struct nand_device *nand,
++			     struct nand_page_io_req *req);
++};
++
++/**
++ * enum nand_ecc_engine_integration - How the NAND ECC engine is integrated
++ * @NAND_ECC_ENGINE_INTEGRATION_INVALID: Invalid value
++ * @NAND_ECC_ENGINE_INTEGRATION_PIPELINED: Pipelined engine, performs on-the-fly
++ *                                         correction, does not need to copy
++ *                                         data around
++ * @NAND_ECC_ENGINE_INTEGRATION_EXTERNAL: External engine, needs to bring the
++ *                                        data into its own area before use
++ */
++enum nand_ecc_engine_integration {
++	NAND_ECC_ENGINE_INTEGRATION_INVALID,
++	NAND_ECC_ENGINE_INTEGRATION_PIPELINED,
++	NAND_ECC_ENGINE_INTEGRATION_EXTERNAL,
++};
++
++/**
++ * struct nand_ecc_engine - ECC engine abstraction for NAND devices
++ * @dev: Host device
++ * @node: Private field for registration time
++ * @ops: ECC engine operations
++ * @integration: How the engine is integrated with the host
++ *               (only relevant on %NAND_ECC_ENGINE_TYPE_ON_HOST engines)
++ * @priv: Private data
++ */
++struct nand_ecc_engine {
++	struct device *dev;
++	struct list_head node;
++	struct nand_ecc_engine_ops *ops;
++	enum nand_ecc_engine_integration integration;
++	void *priv;
++};
++
++int nand_ecc_init_ctx(struct nand_device *nand);
++void nand_ecc_cleanup_ctx(struct nand_device *nand);
++int nand_ecc_prepare_io_req(struct nand_device *nand,
++			    struct nand_page_io_req *req);
++int nand_ecc_finish_io_req(struct nand_device *nand,
++			   struct nand_page_io_req *req);
++bool nand_ecc_is_strong_enough(struct nand_device *nand);
++
++struct nand_ecc_engine *nand_ecc_get_sw_engine(struct nand_device *nand);
++struct nand_ecc_engine *nand_ecc_get_on_die_hw_engine(struct nand_device *nand);
++struct nand_ecc_engine *nand_ecc_get_on_host_hw_engine(struct nand_device *nand);
++void nand_ecc_put_on_host_hw_engine(struct nand_device *nand);
++struct device *nand_ecc_get_engine_dev(struct device *host);
++
++#if defined(CONFIG_MTD_NAND_ECC_SW_HAMMING)
++struct nand_ecc_engine *nand_ecc_sw_hamming_get_engine(void);
++#else
++static inline struct nand_ecc_engine *nand_ecc_sw_hamming_get_engine(void)
++{
++	return NULL;
++}
++#endif
++
++#if defined(CONFIG_MTD_NAND_ECC_SW_BCH)
++struct nand_ecc_engine *nand_ecc_sw_bch_get_engine(void);
++#else
++static inline struct nand_ecc_engine *nand_ecc_sw_bch_get_engine(void)
++{
++	return NULL;
++}
++#endif
++
++/**
++ * struct nand_ecc - Information relative to the ECC
++ * @defaults: Default values, depend on the underlying subsystem
++ * @requirements: ECC requirements from the NAND chip perspective
++ * @user_conf: User desires in terms of ECC parameters
++ * @ctx: ECC context for the ECC engine, derived from the device @requirements
++ *       the @user_conf and the @defaults
++ * @ondie_engine: On-die ECC engine reference, if any
++ * @engine: ECC engine actually bound
++ */
++struct nand_ecc {
++	struct nand_ecc_props defaults;
++	struct nand_ecc_props requirements;
++	struct nand_ecc_props user_conf;
++	struct nand_ecc_context ctx;
++	struct nand_ecc_engine *ondie_engine;
++	struct nand_ecc_engine *engine;
++};
++
+ /**
+  * struct nand_device - NAND device
+  * @mtd: MTD instance attached to the NAND device
+  * @memorg: memory layout
+- * @eccreq: ECC requirements
++ * @ecc: NAND ECC object attached to the NAND device
+  * @rowconv: position to row address converter
+  * @bbt: bad block table info
+  * @ops: NAND operations attached to the NAND device
+@@ -181,8 +354,8 @@ struct nand_ops {
+  * Generic NAND object. Specialized NAND layers (raw NAND, SPI NAND, OneNAND)
+  * should declare their own NAND object embedding a nand_device struct (that's
+  * how inheritance is done).
+- * struct_nand_device->memorg and struct_nand_device->eccreq should be filled
+- * at device detection time to reflect the NAND device
++ * struct_nand_device->memorg and struct_nand_device->ecc.requirements should
++ * be filled at device detection time to reflect the NAND device
+  * capabilities/requirements. Once this is done nanddev_init() can be called.
+  * It will take care of converting NAND information into MTD ones, which means
+  * the specialized NAND layers should never manually tweak
+@@ -191,7 +364,7 @@ struct nand_ops {
+ struct nand_device {
+ 	struct mtd_info *mtd;
+ 	struct nand_memory_organization memorg;
+-	struct nand_ecc_req eccreq;
++	struct nand_ecc ecc;
+ 	struct nand_row_converter rowconv;
+ 	struct nand_bbt bbt;
+ 	const struct nand_ops *ops;
+@@ -332,7 +505,7 @@ static inline unsigned int nanddev_ntargets(const struct nand_device *nand)
+ }
+ 
+ /**
+- * nanddev_neraseblocks() - Get the total number of erasablocks
++ * nanddev_neraseblocks() - Get the total number of eraseblocks
+  * @nand: NAND device
+  *
+  * Return: the total number of eraseblocks exposed by @nand.
+@@ -370,6 +543,60 @@ nanddev_get_memorg(struct nand_device *nand)
+ 	return &nand->memorg;
+ }
+ 
++/**
++ * nanddev_get_ecc_conf() - Extract the ECC configuration from a NAND device
++ * @nand: NAND device
++ */
++static inline const struct nand_ecc_props *
++nanddev_get_ecc_conf(struct nand_device *nand)
++{
++	return &nand->ecc.ctx.conf;
++}
++
++/**
++ * nanddev_get_ecc_nsteps() - Extract the number of ECC steps
++ * @nand: NAND device
++ */
++static inline unsigned int
++nanddev_get_ecc_nsteps(struct nand_device *nand)
++{
++	return nand->ecc.ctx.nsteps;
++}
++
++/**
++ * nanddev_get_ecc_bytes_per_step() - Extract the number of ECC bytes per step
++ * @nand: NAND device
++ */
++static inline unsigned int
++nanddev_get_ecc_bytes_per_step(struct nand_device *nand)
++{
++	return nand->ecc.ctx.total / nand->ecc.ctx.nsteps;
++}
++
++/**
++ * nanddev_get_ecc_requirements() - Extract the ECC requirements from a NAND
++ *                                  device
++ * @nand: NAND device
++ */
++static inline const struct nand_ecc_props *
++nanddev_get_ecc_requirements(struct nand_device *nand)
++{
++	return &nand->ecc.requirements;
++}
++
++/**
++ * nanddev_set_ecc_requirements() - Assign the ECC requirements of a NAND
++ *                                  device
++ * @nand: NAND device
++ * @reqs: Requirements
++ */
++static inline void
++nanddev_set_ecc_requirements(struct nand_device *nand,
++			     const struct nand_ecc_props *reqs)
++{
++	nand->ecc.requirements = *reqs;
++}
++
+ int nanddev_init(struct nand_device *nand, const struct nand_ops *ops,
+ 		 struct module *owner);
+ void nanddev_cleanup(struct nand_device *nand);
+@@ -598,7 +825,7 @@ static inline void nanddev_pos_next_eraseblock(struct nand_device *nand,
+ }
+ 
+ /**
+- * nanddev_pos_next_eraseblock() - Move a position to the next page
++ * nanddev_pos_next_page() - Move a position to the next page
+  * @nand: NAND device
+  * @pos: the position to update
+  *
+@@ -708,8 +935,18 @@ static inline bool nanddev_io_iter_end(struct nand_device *nand,
+ 
+ bool nanddev_isbad(struct nand_device *nand, const struct nand_pos *pos);
+ bool nanddev_isreserved(struct nand_device *nand, const struct nand_pos *pos);
++int nanddev_erase(struct nand_device *nand, const struct nand_pos *pos);
+ int nanddev_markbad(struct nand_device *nand, const struct nand_pos *pos);
+ 
++/* ECC related functions */
++int nanddev_ecc_engine_init(struct nand_device *nand);
++void nanddev_ecc_engine_cleanup(struct nand_device *nand);
++
++static inline void *nand_to_ecc_ctx(struct nand_device *nand)
++{
++	return nand->ecc.ctx.priv;
++}
++
+ /* BBT related functions */
+ enum nand_bbt_block_status {
+ 	NAND_BBT_BLOCK_STATUS_UNKNOWN,
+@@ -760,5 +997,6 @@ static inline bool nanddev_bbt_is_initialized(struct nand_device *nand)
+ 
+ /* MTD -> NAND helper functions. */
+ int nanddev_mtd_erase(struct mtd_info *mtd, struct erase_info *einfo);
++int nanddev_mtd_max_bad_blocks(struct mtd_info *mtd, loff_t offs, size_t len);
+ 
+ #endif /* __LINUX_MTD_NAND_H */
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index b701d25f73d..cb32bd44a9a 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -316,6 +316,15 @@ struct spinand_ecc_info {
+ #define SPINAND_HAS_QE_BIT		BIT(0)
+ #define SPINAND_HAS_CR_FEAT_BIT		BIT(1)
+ 
++/**
++ * struct spinand_ondie_ecc_conf - private SPI-NAND on-die ECC engine structure
++ * @status: status of the last wait operation that will be used in case
++ *          ->get_status() is not populated by the spinand device.
++ */
++struct spinand_ondie_ecc_conf {
++	u8 status;
++};
++
+ /**
+  * struct spinand_info - Structure used to describe SPI NAND chips
+  * @model: model name
+@@ -339,7 +348,7 @@ struct spinand_info {
+ 	struct spinand_devid devid;
+ 	u32 flags;
+ 	struct nand_memory_organization memorg;
+-	struct nand_ecc_req eccreq;
++	struct nand_ecc_props eccreq;
+ 	struct spinand_ecc_info eccinfo;
+ 	struct {
+ 		const struct spinand_op_variants *read_cache;
+@@ -388,6 +397,8 @@ struct spinand_info {
+ struct spinand_dirmap {
+ 	struct spi_mem_dirmap_desc *wdesc;
+ 	struct spi_mem_dirmap_desc *rdesc;
++	struct spi_mem_dirmap_desc *wdesc_ecc;
++	struct spi_mem_dirmap_desc *rdesc_ecc;
+ };
+ 
+ /**
+diff --git a/include/spi-mem.h b/include/spi-mem.h
+index 3c8e95b6f53..82dbe21fd5a 100644
+--- a/include/spi-mem.h
++++ b/include/spi-mem.h
+@@ -91,6 +91,7 @@ enum spi_mem_data_dir {
+  * @dummy.dtr: whether the dummy bytes should be sent in DTR mode or not
+  * @data.buswidth: number of IO lanes used to send/receive the data
+  * @data.dtr: whether the data should be sent in DTR mode or not
++ * @data.ecc: whether error correction is required or not
+  * @data.dir: direction of the transfer
+  * @data.buf.in: input buffer
+  * @data.buf.out: output buffer
+@@ -119,6 +120,7 @@ struct spi_mem_op {
+ 	struct {
+ 		u8 buswidth;
+ 		u8 dtr : 1;
++		u8 ecc : 1;
+ 		enum spi_mem_data_dir dir;
+ 		unsigned int nbytes;
+ 		/* buf.{in,out} must be DMA-able. */
 -- 
 2.39.2
 
