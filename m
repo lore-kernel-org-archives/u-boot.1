@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DF4C38150
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 22:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14A0C38150
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 22:40:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D15E8889F8;
-	Sat,  6 Jul 2024 00:40:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4EF4C88254;
+	Sat,  6 Jul 2024 00:40:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J5Z1MDyv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qJAlX4Sj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CBDF889F1; Sat,  6 Jul 2024 00:40:23 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 3385A88254; Sat,  6 Jul 2024 00:40:28 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A30C889EF
- for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 00:40:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0FEE889FF
+ for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 00:40:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-70226277bc0so1291754a34.0
- for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 15:40:21 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3d9229486efso318405b6e.3
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 15:40:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720219220; x=1720824020; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720219225; x=1720824025; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=//rnqDLUX+P9mgUV89BuTlJHRU8tqMHI1rk2w3Vn9Tk=;
- b=J5Z1MDyvGve4xYb/rZlgI6DIYpM5yezuQYNgfVu9Oi4wzi69GRWcXZujDEwMbDz07b
- zVlH0ISNpCPW5uTKNiPEmSo8547Uw2tVFFX5vfdHnI+Agrkm0B6HRuoE137w8+rhzQgQ
- DWCCTLVUjP9TfJLO7O94L1VrjpPIUiHGp5qn0=
+ bh=IsYX2Bnumb88dOeeB3PHJnodVVXWi2qJP4PnQFXdDc8=;
+ b=qJAlX4Sj1NUo8vvrrMpzY4f1lCVag39mw405yENTfiVuLzh8YLPGeZ6iA3Oc8Wqf9I
+ 9m3zxiux4cnJgutvTQo0l0veanvyPi8WQbLBSFwD9cnSWYfz391ZXe5HE0QGKlP/bHpG
+ +qnN7Xx3Ol0PnEaWKgAgXSgkc1dhi4xQ1UGrg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720219220; x=1720824020;
+ d=1e100.net; s=20230601; t=1720219225; x=1720824025;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=//rnqDLUX+P9mgUV89BuTlJHRU8tqMHI1rk2w3Vn9Tk=;
- b=e62HBp2vxBnSoEYCAXIfjPD0v2SBg7p96l4wfMvAacLfiHQpEVIQHcYSnLsgQaFSIM
- ypOR4r2lrbW9i2dAG/581lE5EdGoYoYUcLQLvvlUYASa399HXeWsoDqm454FLS8UDX6j
- jq3neqyA5D+FeMiUPcB3pSNzHIBvxRba5MxCzOukhnKKWaVTJ6heWkb9AeLspNLSBvcs
- 73iQ969KnGunUBsKkVHREMCAirILhFyY2PcrHRrAHzRXePmJPZEzvE/wTs6/iY3vIDQ4
- UIELD7mXvX+WPR/m/0RYwUHIG1niND9JX4zCPvsCUcA30QJfOk0t1FH1JFcRH6FlKQl7
- O9mw==
-X-Gm-Message-State: AOJu0YxiNoR1rk88aNEUB/2gO94f1EH9khis2PfzcIxjM0ts8L0+l1VL
- QHhg/GDLy3RS69gVMyhiO7284HDArDzOIN5kJSAiXEBWnKhzR38XvjMb83osTq7yvYR1rof3fuH
- RyXpa2w==
-X-Google-Smtp-Source: AGHT+IHwpA2ms3h+Nn4p3kjjO5EcRGHU10SRGZi0dK9kslac5D0EQOQV7H/cqiDGqrPWqpdGfCUkpA==
-X-Received: by 2002:a9d:76c6:0:b0:701:b765:ad75 with SMTP id
- 46e09a7af769-7034a81a113mr6553515a34.33.1720219220151; 
- Fri, 05 Jul 2024 15:40:20 -0700 (PDT)
+ bh=IsYX2Bnumb88dOeeB3PHJnodVVXWi2qJP4PnQFXdDc8=;
+ b=FuLyIPuN+2p1A9QCjWAghKPJyi+6la8w+LBsOuCJ2Jr/vJasisqZ5xJLDxijQyrsj2
+ wmGlgPAc3+m6R2uVJVfV7L4FBb3T4SL2oaAk7zTFBKg1WYEa80dP/s6WjALGA0um8aww
+ T3qPTnKosngSi8ltMMI6ce+NP2q8RyetLC8me8FK8Odtjwe6UewnJpj4fNiuOpgLJbfV
+ baS/2h1gEYDtqjLiKyXnlVeIgQ+ncEh2NpHPGKUSv3Vu0MPGwmhXCGPeIo2MffK3EuTm
+ NvCcYcPUevz9Mz0ngCZqbBT7rPh0Axd8JBDnYcy7GGicTglQLngsR/A60BjW6ydaq+Xb
+ vYhA==
+X-Gm-Message-State: AOJu0YwQS/hC01OTsY1uXWz9xZCRZWDrtuu7hj9xxA7x0UE/D+Mz2lu3
+ d35JDPPcTIduGNJ9ZkN7TzM2x6jvHuZY6hjbZEmT0FgQdVfnvnH+G8q7l9u8GWUtFmixqqScfVZ
+ V71lkfg==
+X-Google-Smtp-Source: AGHT+IHHox0SaOHo3JIstEqOEFjUWnPtLOnUtZOYtyaZhv1aHcKQjh2e5L6PcBt56Lg21SB1Yatwiw==
+X-Received: by 2002:a05:6808:1b24:b0:3d8:a93a:33e3 with SMTP id
+ 5614622812f47-3d914c8e06bmr7777495b6e.25.1720219224688; 
+ Fri, 05 Jul 2024 15:40:24 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
  [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-702292a18b8sm969174a34.36.2024.07.05.15.40.19
+ 5614622812f47-3d62fa3984esm2857766b6e.44.2024.07.05.15.40.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 15:40:19 -0700 (PDT)
-Date: Fri, 5 Jul 2024 16:40:17 -0600
+ Fri, 05 Jul 2024 15:40:24 -0700 (PDT)
+Date: Fri, 5 Jul 2024 16:40:22 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marjolaine Amate <marjolaine.amate@odyssee-systemes.fr>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] pci_ids: fix i225 unprogrammed value
-Message-ID: <20240705224017.GX38804@bill-the-cat>
-References: <20240624194907.81341-1-marjolaine.amate@odyssee-systemes.fr>
+Subject: Re: [PATCH] watchdog: mpc8xxx: Fix timer value
+Message-ID: <20240705224022.GY38804@bill-the-cat>
+References: <31a49f86032687601e617da89f831a162303f283.1719476762.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RcCS0LWswnZYnoJs"
+ protocol="application/pgp-signature"; boundary="R+W2EQQaUvSZcLqT"
 Content-Disposition: inline
-In-Reply-To: <20240624194907.81341-1-marjolaine.amate@odyssee-systemes.fr>
+In-Reply-To: <31a49f86032687601e617da89f831a162303f283.1719476762.git.christophe.leroy@csgroup.eu>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,40 +91,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RcCS0LWswnZYnoJs
+--R+W2EQQaUvSZcLqT
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 24, 2024 at 07:49:07PM +0000, Marjolaine Amate wrote:
+On Thu, Jun 27, 2024 at 10:26:08AM +0200, Christophe Leroy wrote:
 
-> This patch fixes the I225 hardware default value
-> at 0x15FD meaning empty flash image
-> or the NVM configuration loading failed
+> Timer value is a 16 bits calculated from the wanted timeout and the
+> system clock. On powerpc/8xx, a timeout of 2s gives a value which
+> is over U16_MAX so U16_MAX shall be used. But the calculation is
+> casted to u16 so at the end the result is 63770 instead of 128906.
 >=20
-> Signed-off-by: Marjolaine Amate <marjolaine.amate@odyssee-systemes.fr>
+> So the timer gets loaded with 63770 instead of 65535. It is not
+> a big difference in that case, but lets make the code correct and
+> cast to u32 instead of u16.
+>=20
+> Fixes: 26e8ebcd7cb7 ("watchdog: mpc8xxx: Make it generic")
+> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---RcCS0LWswnZYnoJs
+--R+W2EQQaUvSZcLqT
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIdlEACgkQFHw5/5Y0
-tyxiCAv/eWC+yUBx/hjh/Zs8V+f0HiKxMsMI/UjgxZSwFlhg1zzxNtT7JAy5PJfe
-/acupRoewcM49Q9S5yUZpm+fzzw4zA+YRPyNi6IrZ1CH1lJDy4pTo8YVTjQb9wA4
-HLneqicy7hCkQ/6yoWmsF9eaiReiK00L3vgNXrvbyifWcRQ41KL5eAUm2jvXz+QW
-+kaxiGs98uNx2kFNLNCuZt2L0NOSLqvIDHjsl4DtEPy5F5x9+n6sh3nQEdp3v4l5
-CbpDZQHlvzYR6qa2yzlYtcOVtD/uGuNx0dcycrSvHnUFg58VeM+gkWPk9liTFDOY
-LlwNkGAw0t0+Voh/MKq2M4D39Gi0R99TWj3gVHs58/L+X/1MnuBEg2JtjmMJeVlH
-s1aPLla2NZgBfcTfwx1rDlzsVX7uXvkDq1TJtBVSxi/yqVyI/qNSAhv0edaddg63
-nf0D92ZtB2d+rSGouH+2liArgxfGT18cPuUdQIHJqkbwzlkD0cP4Rfgi8XkdOO9t
-OxpxwdId
-=CQ2g
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaIdlYACgkQFHw5/5Y0
+tyyW/Qv/SUgscws5vMzQvZE5wo+Dg7tvJWnkNnfPHJYFs5zHplUymUHDBX70wjmJ
+Uwj/fjJGzZ4Zm66AnCAzhkgzpNznKXnaif9QPQquvbpseyCJSoMgjwWNnSG7+EoU
+3MgMwKxK6WIMonvEwPbMjpRxeFWlHIHD4DJbTHcI59NN4oxkF5MqMw1JmdhBCm/m
+ncp+nCjfc9IsX7jVJ9dSaTJ4oRw1OuDGCjV8zxBC8kRf5Y55oS4XoS39TrHp4pSR
+9KQNePXPvIjfSymvJ9NOkAbGehL44iegV7oXwkNQOgnAcukTRXAZpZRa8dun9WEn
+7gSiN+BQrlz7rONSMgExcb5ik+Q8YLi4+VSXmodGGFgiJK6yCFO8XY/i6LPeqGta
+mFNRP2OTUEHbncM4lFt4VyOmbc6VOU12+x98V3rySymQvwOdlI0EU7fR/bpmYo0V
+6Zp3A+Ju1KEKcaZoAI0am2or4pD4ifTdrC52yZKj+mgzIvvRVAJmQ5MDHNqBAKEN
+RNnG5/8Z
+=hBkB
 -----END PGP SIGNATURE-----
 
---RcCS0LWswnZYnoJs--
+--R+W2EQQaUvSZcLqT--
