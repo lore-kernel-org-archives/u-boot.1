@@ -4,133 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B261C30658
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 08:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E384DC30658
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 08:29:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74CD088974;
-	Fri,  5 Jul 2024 10:23:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 13C1B88254;
+	Fri,  5 Jul 2024 10:29:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E0A15883BA; Fri,  5 Jul 2024 10:23:54 +0200 (CEST)
-Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
- (mail-sh0chn02on20724.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4420:2::724])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BF748897C
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 10:23:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minda.chen@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Mu3eP1Vh5rLI1h8mfYZKa+k5qQSon5WXRWiCdaKBQYgtpY6mCCe/4fh4khsYjmFXCmWhxVwx0TI79dLDa6M8fedY9OdzYgApxciQmBWbMg99Zy0ESc+JlGbRUPdcyOsJT8dAfQqTtm9thJx6FFfdaCgIhll7n442yKO0eBsX6eNV+L5pNM0IPIyixjZ7CkGeLQ0HCkTkDLqnEp220H/+akQNJkaCUKJ7OW8FjsdYWIm6F+oT9TP5m11/iUn9Ce6Us6v5btBt2u4QDxnw7J/24UYNCpnUQKzOFg3RgmNG/KWsFSSr92b6vYi+XMu86Oc+/4Gai3nnsdZlgH02dVyz/A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ts7FDjy4VxURL7Q3cxnax6r5SkA2r2GgBPE0AJoSE5Q=;
- b=U+/z7PHpIsToJMIPzycUY5mc5meqX7uquuZfWXQmMALs6IflOub92+1U9VEFQHE91fAXnXPWQCeCFXio6pp7sWk5uCv6aP7WLHNlHu6Kr12hp+5sg85wqv8KcTbJCpQuz0JQ195vIslpSR6b1SAdnj3seYyeK7i7o9pqR6fMHaz7JdaKhPyR/igyo2AR1FhzYxJIM1qMNS+7qjCW/S7Y784lLE/7OSptdiH92RwWC+7lYN3jdLl3NamrmlRpn7NkbFf3BYsGrszbv7dlHjOGTyaXsO9+lxMnw2cw11Fr7FuWWTEMH3R3NdADNlCV4SgFpj6xlwWQRIDS5Bq2T8dXJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:25::15) by SHXPR01MB0816.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:27::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.41; Fri, 5 Jul
- 2024 08:23:46 +0000
-Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- ([fe80::bd9e:fb57:ebf7:9d71]) by
- SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::bd9e:fb57:ebf7:9d71%4])
- with mapi id 15.20.7719.036; Fri, 5 Jul 2024 08:23:46 +0000
-From: Minda Chen <minda.chen@starfivetech.com>
-To: Roger Quadros <rogerq@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, Alexey
- Romanov <avromanov@salutedevices.com>, Sumit Garg <sumit.garg@linaro.org>,
- Mark Kettenis <kettenis@openbsd.org>, Nishanth Menon <nm@ti.com>, Rick Chen
- <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, E Shattow
- <lucent@gmail.com>
-Subject: Re: [PATCH v2 1/8] usb: cdns3: Set USB PHY mode in
- cdns3_core_init_role()
-Thread-Topic: [PATCH v2 1/8] usb: cdns3: Set USB PHY mode in
- cdns3_core_init_role()
-Thread-Index: AQHazdYPHF4R1FhI30KBtlh4OQf2WbHmkOIAgAE8wPA=
-Date: Fri, 5 Jul 2024 08:23:46 +0000
-Message-ID: <SHXPR01MB086363C32D96A51018E6543EE6DF2@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
-References: <20240704055014.55117-1-minda.chen@starfivetech.com>
- <20240704055014.55117-2-minda.chen@starfivetech.com>
- <cacb69e4-1710-4162-8ec6-3850ec5f4a80@kernel.org>
-In-Reply-To: <cacb69e4-1710-4162-8ec6-3850ec5f4a80@kernel.org>
-Accept-Language: en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SHXPR01MB0863:EE_|SHXPR01MB0816:EE_
-x-ms-office365-filtering-correlation-id: 4f503fbd-3df8-4ce5-c5fc-08dc9ccbca56
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|7416014|1800799024|41320700013|38070700018|921020; 
-x-microsoft-antispam-message-info: 56+iedMFSRcvF7QeFLZaCbq+qK1VObPn17IxLn1eDQaASPXpTI5K54DuZL/OD3xk9nQ8ntIv+G9/e90RiRklbDnuliNbjaXt0xlD7jEqbZ2wHFjfdZ/fyk30s6+Yj8R0JBWKKqtDhZdv/Cx5mp+cuy4XKxIvAuHcbmTcewY0wUTQ4d2gjI043QCPsBDbGx/F/HKc2PZL9d3s3IXsa5ZxG5W4UzK4PCdx9/Uc/CS66wNSqvEjPVQqoqJRA2Gbu0eq9QYx07oWE9ljGA5975a4CE+yEiBR6+xYFW2EZkWqDzTWI9G8TmAJmxTGP/O+h6RKtEgzSJJn+r2hLp/1WPJgnk35P+aW2Kz/1sb6vdjpNfxfyaPO9niuAgettJClfbsTAwYprp8ulA196Jpr9e13Dm91v9AmTS2InESzLTPc7txOpIqgZSGe4iMNoRfTPfA/D3HKR70pklslyAUekBpFrfRITx/WoX7X6LUC8RYVLnEsEpDl1iFWfpmog3cUe7oXXn1yWs/W/Vwi1qMeaAibqsL11o/R4xXXeiE2DHSowZ/H0uuXx/mKEyZ/j11VYFL7R3qoOeJYeqJgYi8xwejlz/sAlEy5Dpt7RCumqZZzzH+gGwEIenbXXKP9G74VxzLg8VDYD6zuvl5ToH77Ue3RJA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(7416014)(1800799024)(41320700013)(38070700018)(921020);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dmJHSzlxT0w4VVU3YUVXa1JDM2VBakJPSjRwL0w4dldSUVFJakloMmd6SzlD?=
- =?utf-8?B?cUYxa3FYdHBTaDdqUEluY050OEZSOGtsa2JJRkh3THQ2TzlmdWtINjRhaWVr?=
- =?utf-8?B?UmwvSUFDVDJSa3Mzdlo2NnYzNWZ3MEJCcXVVc2p6aXZHTTlOOHZZUW9SZHRr?=
- =?utf-8?B?RHRVSjlEOUZIOGUzcDYxYUw5aXZmWkMvWWVUTEVHOG9ZdXAwNkRWNFNYMkcy?=
- =?utf-8?B?TVR0OEtKL0IrRUIyV2dteDhQYXFzZE9sK2Q5Y1VBRk9nMGRZTjdxYk1iN0xJ?=
- =?utf-8?B?VStCaC9JTEJGUHhaVXE5NldXZWZ0TTRsdjJPRzlINUV2OUtJM1lLWDJUTllm?=
- =?utf-8?B?S2o3TkgyRnNkNjlCdzR1UkFhcWI0U093SmNnejhzR2NHUmd3Mzc3bC9ZRnJJ?=
- =?utf-8?B?OWNkUWozNnJ4ZFU0UWpuazdJNndZa1ljd01BZ3NsS0J2YXFKTXJ4VDhRSkVG?=
- =?utf-8?B?cDVzWEJHcGVCRXRJdjM4c3dzczh0Y3RjdUdFaHc3b1M4RUVDMy9DVG9oZFVP?=
- =?utf-8?B?Y0oxbHQ2K21Pc2ZEWFVXaUQvbUlYaUNFbndweWZtZmRBYkZwRjNlZ2JhbmZQ?=
- =?utf-8?B?MjExbURiOXpheFoxWVBpR0xNWGtidlIrazZEbU1kRG1WYVJPakFBWm92OUho?=
- =?utf-8?B?Z2tieVNPdEd2WWhSWWJBaCtjL2hTaVRWYzZnMlBIbEs0NU0ycFQrTTFRb1cz?=
- =?utf-8?B?L0tUaXFLbVl5MmQyRzR2c3VIZU42aHZodTJTWFRHa3pwZ3VSbVA4OW1rYWFr?=
- =?utf-8?B?RnBnd25oaWkxbnA4aHF4OTVUdnNmRVBLbVRKZlFoVnZ4MXhwNms3VjhGTyty?=
- =?utf-8?B?a05YSzJGRmdqRU1KOHRQU0xFRUdIMWVaSU9OM2xYMkVzWEhiLzNEbjFEMmRa?=
- =?utf-8?B?c0RaQWRwUHBPV2xuWlJ5RElOS3NUazFSbnJMTHVxZzZjdml6K0w0Mkl4Ni9O?=
- =?utf-8?B?aG5qR296Z0RRMFU1Q1M1UlIrbUs0R2ZCM1lUOXJGaHdTRUNOKzk2Z2I3MlEx?=
- =?utf-8?B?eEJhVzB2K2Zmd0Q0NjdNV2pkaW5ZVE1YR3U1VGRGaTROUmkvUEx2a2w4SlRM?=
- =?utf-8?B?SWxBY1lGVjhMeW04czR0dnZUUkRKclhBVXF2ZjN0ZU40WWVLdm5jU2lkV3N2?=
- =?utf-8?B?dDlWN1B6b0Z2RE1RN1ZyYmFaWmtBRnBTTmN4QmZKM1RUUlh1MGh2SkhjMndE?=
- =?utf-8?B?Myt5MmlvNXhiVjJxelhHQUZDeFdQWlpxTzJjTmVvZys1WlVvZGNRenVqYzF5?=
- =?utf-8?B?RHpaVEdLTlhEQ0RMUWFJT1NOSWduSHl5ZkpsVDhjNzlNWVYvejJBcndacmVB?=
- =?utf-8?B?WGVoWldCdEpmV0xlbHgxUDkrNzhTM3BZcTdhTEJiV1ZJZDFoaHNTZ2xDbTRx?=
- =?utf-8?B?bW9nVmdWNXg5RnJPQzlDZlJrUTZpS1dWSmRCb1VRS2Y0LytNMS8xVjAvQzlM?=
- =?utf-8?B?ZWtmd2dYWFRkamVSK1JsVzVrelcrRHNwVVJMTldKcGE5ZTgwK2o0aDYwNnUy?=
- =?utf-8?B?VDlYcGdRVlI5TDJxRDRRc2t0c2lnNGUrOXFSem96Q1Y4aFgvMVUzTjNPTkxE?=
- =?utf-8?B?L0RrNWVsdklVMktJMFpmaGUwRE1JUUNrY2lZb3NDeTgvQXFJKzg2aGk0cTgw?=
- =?utf-8?B?aDRteCtDaGk1UlcrQTl4UHhXR1h6K1E5T0NXV2E0QU1xS0NjK0g5L1B3TGZh?=
- =?utf-8?B?d1Y5M014R04rNUJ3MFgzOE5QRFFJa2Zyc2NGWm1TUWFSN1ByUG9QWFpDU0E5?=
- =?utf-8?B?ckZHakJQWVBuSVpNOWI0cG5IU1B4ZWlFL29BVjVPOUMzRXlEZEwyVjNwdFFB?=
- =?utf-8?B?eEwzQWhkUDZ4TXB6SVFleXBVM3JDREhvMXVodE0rc1luaHRMdHJJbFRPb3hZ?=
- =?utf-8?B?TkFLZ01XRTd6VEl4Z21SM1ZHWmtWT3dDWnM1eitZZUhmVHN4K0xSVGtiak1s?=
- =?utf-8?B?YUNYYUdjUUsvYnBjRGM2aEFLK0xrdGlrUjhqWFY0cjdDTlF0eUFlWkF2RXQz?=
- =?utf-8?B?Q0xCb2RnWGJXZFFyRzl4RTdvWUtLbzNLVkdxYlVIQ2V4Q2RvNmw2bkpvaFpl?=
- =?utf-8?B?Z2N3VVAxeko3cGtLeEtidUVhdGhYNEkrU21UWm5LakFDMjRzQlJPd1A5Wi9k?=
- =?utf-8?Q?Bv0tc/F3SS76/dbw79/cDYC1H?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f503fbd-3df8-4ce5-c5fc-08dc9ccbca56
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Jul 2024 08:23:46.6318 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: QXTc2j5FjWJN1v1+CxspLdZOkhsaOMktV6u3uPTsnRaBdt73NDH9Pb3eGqlZ8BsXP4n9OITII8qke32m4GKNc5sWZB+uJKP/tkpxznLw3oQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0816
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="c7MxI4DR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id EB060883AF; Fri,  5 Jul 2024 10:29:54 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BD52C88254
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 10:29:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: bf92bd7c-3aa8-11ef-903b-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id bf92bd7c-3aa8-11ef-903b-005056992ed3;
+ Fri, 05 Jul 2024 10:29:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=cBIKXTK2sYOrXWWPBrFzgkze/ETyX0Tx2L9DCpECAx0=;
+ b=c7MxI4DR+C3zoAwDmK0R56dHkxv/WhOQDiRbKplAm10GdEUvohraazUUFPD/cmmadBsOGFgErZs1U
+ JEiiS11xGe5j6J7i0A2pxcRZeOZtiYOimRn9VkVonuhIQyDgbxxHGg4tfJ6twU1UFZNZxskJxWzBz1
+ 45AsckBVq5BQX/Spaj4dCYfNQTzP/8EYUacnMMxGgLFUboSrFsheg5PUTTOBtSWWUGTYMczZ/BJ0D1
+ UKEDeKLhuJyZaKkijhd3TwDV7CM5jY3bWwmQZ6WKvRlmXeTjyxawrrSEiH+hR2i+I88Y5O6LXNKdTN
+ 1btgI7P6zsJbEQUJunLwIxvDDMVdwow==
+X-KPN-MID: 33|uZ4Ecof4Q+ScKAn4SPb52SU4NvEnRyCrgwpseahHI0N040JWJM7Tsxoe1OAPAM1
+ IggV2Gak277Gc00zzZfBQlf1L0S3hS3nDvsYJOfjAOdk=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|i9k9UU7DbLGHj56ejb5W+dckcnNrOII+AAG4+fIFg8p+10BmfyfTZjVmFf2sORk
+ 3kDNyBaH8gxb234SL3lfkWA==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id bf6c6036-3aa8-11ef-8b5f-00505699b758;
+ Fri, 05 Jul 2024 10:29:51 +0200 (CEST)
+Date: Fri, 05 Jul 2024 10:29:51 +0200
+Message-Id: <87cynskzr4.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: trini@konsulko.com, rasmus.villemoes@prevas.dk,
+ douglas.zobel@climate.com, marex@denx.de,
+ christian.gmeiner@gmail.com, u-boot@lists.denx.de,
+ ansuelsmth@gmail.com, michael.polyntsov@iopsys.eu,
+ mikhail.kshevetskiy@iopsys.eu
+In-Reply-To: <20240705022625.2249734-1-mikhail.kshevetskiy@iopsys.eu> (message
+ from Mikhail Kshevetskiy on Fri, 5 Jul 2024 06:26:24 +0400)
+Subject: Re: [PATCH 1/2] led: Implement software led blinking
+References: <20240705022625.2249734-1-mikhail.kshevetskiy@iopsys.eu>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,38 +77,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQoNCj4gDQo+IEhpLA0KPiANCj4gT24gMDQvMDcvMjAyNCAwODo1MCwgTWluZGEgQ2hlbiB3cm90
-ZToNCj4gPiBVU0IgUEhZIG1heWJlIG5lZWQgdG8gc2V0IFBIWSBtb2RlIGluIGRpZmZlcmVudCBV
-U0IgZHIgbW9kZS4gU28NCj4gPiB0cmFuc2xhdGUgdG8gZ2VuZXJpYyBQSFkgbW9kZSBhbmQgY2Fs
-bCBnZW5lcmljX3BoeV9zZXRfbW9kZSgpLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogTWluZGEg
-Q2hlbiA8bWluZGEuY2hlbkBzdGFyZml2ZXRlY2guY29tPg0KPiA+IC0tLQ0KPiA+ICBkcml2ZXJz
-L3VzYi9jZG5zMy9jb3JlLmMgfCAyNSArKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIDEg
-ZmlsZSBjaGFuZ2VkLCAyNSBpbnNlcnRpb25zKCspDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvZHJp
-dmVycy91c2IvY2RuczMvY29yZS5jIGIvZHJpdmVycy91c2IvY2RuczMvY29yZS5jIGluZGV4DQo+
-ID4gMTJhNzQxYzZlYS4uMWU4NjNiZWQ4OSAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3VzYi9j
-ZG5zMy9jb3JlLmMNCj4gPiArKysgYi9kcml2ZXJzL3VzYi9jZG5zMy9jb3JlLmMNCj4gPiBAQCAt
-MTA3LDYgKzEwNyw3IEBAIHN0YXRpYyBpbnQgY2RuczNfY29yZV9pbml0X3JvbGUoc3RydWN0IGNk
-bnMzDQo+ID4gKmNkbnMpICB7DQo+ID4gIAlzdHJ1Y3QgdWRldmljZSAqZGV2ID0gY2Rucy0+ZGV2
-Ow0KPiA+ICAJZW51bSB1c2JfZHJfbW9kZSBiZXN0X2RyX21vZGU7DQo+ID4gKwlpbnQgbW9kZSA9
-IFBIWV9NT0RFX0lOVkFMSUQ7DQo+ID4gIAllbnVtIHVzYl9kcl9tb2RlIGRyX21vZGU7DQo+ID4g
-IAlpbnQgcmV0ID0gMDsNCj4gPg0KPiA+IEBAIC0xNzMsNiArMTc0LDMwIEBAIHN0YXRpYyBpbnQg
-Y2RuczNfY29yZV9pbml0X3JvbGUoc3RydWN0IGNkbnMzDQo+ID4gKmNkbnMpDQo+ID4NCj4gPiAg
-CWNkbnMtPmRyX21vZGUgPSBkcl9tb2RlOw0KPiA+DQo+ID4gKwlpZiAoY2Rucy0+ZHJfbW9kZSA9
-PSBVU0JfRFJfTU9ERV9IT1NUKSB7DQo+ID4gKwkJbW9kZSA9IFBIWV9NT0RFX1VTQl9IT1NUOw0K
-PiA+ICsJfSBlbHNlIGlmIChjZG5zLT5kcl9tb2RlID09IFVTQl9EUl9NT0RFX1BFUklQSEVSQUwp
-IHsNCj4gPiArCQltb2RlID0gUEhZX01PREVfVVNCX0RFVklDRTsNCj4gPiArCX0gZWxzZSBpZiAo
-Y2Rucy0+ZHJfbW9kZSA9PSBVU0JfRFJfTU9ERV9PVEcpIHsNCj4gPiArCQltb2RlID0gUEhZX01P
-REVfVVNCX09URzsNCj4gPiArCX0gZWxzZSB7DQo+ID4gKwkJZGV2X2VycihkZXYsICJVbmtub3du
-IGRyIG1vZGUgJWRcbiIsIGNkbnMtPmRyX21vZGUpOw0KPiA+ICsJCXJldCA9IC1FSU5WQUw7DQo+
-ID4gKwkJZ290byBlcnI7DQo+ID4gKwl9DQo+ID4gKw0KPiA+ICsJcmV0ID0gZ2VuZXJpY19waHlf
-c2V0X21vZGUoJmNkbnMtPnVzYjJfcGh5LCBtb2RlLCAwKTsNCj4gPiArCWlmIChyZXQpIHsNCj4g
-PiArCQlkZXZfZXJyKGRldiwgIlNldCB1c2IgMi4wIFBIWSBtb2RlIGZhaWxlZCAlZFxuIiwgcmV0
-KTsNCj4gPiArCQlnb3RvIGVycjsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwlyZXQgPSBnZW5lcmlj
-X3BoeV9zZXRfbW9kZSgmY2Rucy0+dXNiM19waHksIG1vZGUsIDApOw0KPiA+ICsJaWYgKHJldCkg
-ew0KPiA+ICsJCWRldl9lcnIoZGV2LCAiU2V0IHVzYiAzLjAgUEhZIG1vZGUgZmFpbGVkICVkXG4i
-LCByZXQpOw0KPiA+ICsJCWdvdG8gZXJyOw0KPiA+ICsJfQ0KPiA+ICsNCj4gDQo+IFNob3VsZCB3
-ZSBiZSBkb2luZyB0aGUgYWJvdmUgaW5zaWRlIGNkbnMzX2RyZF91cGRhdGVfbW9kZSgpIHNvIHRo
-YXQgdGhlIFBIWQ0KPiBjYW4gYmUgcHV0IGluIHRoZSBjb3JyZWN0IHN0YXRlIGV2ZW4gZHVyaW5n
-IHJvbGUgc3dpdGNoZXM/DQo+IA0KT0vvvIwgVGhhbmtzLiAgDQo+ID4gIAlyZXQgPSBjZG5zM19k
-cmRfdXBkYXRlX21vZGUoY2Rucyk7DQo+ID4gIAlpZiAocmV0KQ0KPiA+ICAJCWdvdG8gZXJyOw0K
-PiANCj4gLS0NCj4gY2hlZXJzLA0KPiAtcm9nZXINCg==
+> From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> Date: Fri,  5 Jul 2024 06:26:24 +0400
+> 
+> From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> 
+> If hardware (or driver) doesn't support leds blinking, it's
+> now possible to use software implementation of blinking instead.
+> This relies on cyclic functions.
+> 
+> v2 changes:
+>  * Drop sw_blink_state structure, move its necessary fields to
+>    led_uc_plat structure.
+>  * Add cyclic_info pointer to led_uc_plat structure. This
+>    simplify code a lot.
+>  * Remove cyclic function search logic. Not needed anymore.
+>  * Fix blinking period. It was twice large.
+>  * Other cleanups.
+> 
+> v3 changes:
+>  * Adapt code to recent cyclic function changes
+>  * Move software blinking functions to separate file
+>  * Other small changes
+> 
+> Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> ---
+>  drivers/led/Kconfig        |  14 +++++
+>  drivers/led/Makefile       |   1 +
+>  drivers/led/led-uclass.c   |  16 +++++-
+>  drivers/led/led_sw_blink.c | 106 +++++++++++++++++++++++++++++++++++++
+>  include/led.h              |  17 ++++++
+>  5 files changed, 152 insertions(+), 2 deletions(-)
+>  create mode 100644 drivers/led/led_sw_blink.c
+> 
+> diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
+> index 9837960198d..dc9d4c8a757 100644
+> --- a/drivers/led/Kconfig
+> +++ b/drivers/led/Kconfig
+> @@ -73,6 +73,20 @@ config LED_BLINK
+>  	  This option enables support for this which adds slightly to the
+>  	  code size.
+>  
+> +config LED_SW_BLINK
+> +	bool "Support software LED blinking"
+> +	depends on LED_BLINK
+> +	select CYCLIC
+> +	help
+> +	  Turns on led blinking implemented in the software, useful when
+> +	  the hardware doesn't support led blinking. Half of the period
+> +	  led will be ON and the rest time it will be OFF. Standard
+> +	  led commands can be used to configure blinking. Does nothing
+> +	  if driver supports blinking.
+> +	  WARNING: Blinking may be inaccurate during execution of time
+> +	  consuming commands (ex. flash reading). Also it completely
+> +	  stops during OS booting.
+
+Doesn't that make this feature pretty much pointless?
+
+>  config SPL_LED
+>  	bool "Enable LED support in SPL"
+>  	depends on SPL_DM
+> diff --git a/drivers/led/Makefile b/drivers/led/Makefile
+> index 2bcb8589087..e27aa488482 100644
+> --- a/drivers/led/Makefile
+> +++ b/drivers/led/Makefile
+> @@ -4,6 +4,7 @@
+>  # Written by Simon Glass <sjg@chromium.org>
+>  
+>  obj-y += led-uclass.o
+> +obj-$(CONFIG_LED_SW_BLINK) += led_sw_blink.o
+>  obj-$(CONFIG_LED_BCM6328) += led_bcm6328.o
+>  obj-$(CONFIG_LED_BCM6358) += led_bcm6358.o
+>  obj-$(CONFIG_LED_BCM6753) += led_bcm6753.o
+> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+> index f37bf6a1550..37dc99cecdc 100644
+> --- a/drivers/led/led-uclass.c
+> +++ b/drivers/led/led-uclass.c
+> @@ -58,6 +58,10 @@ int led_set_state(struct udevice *dev, enum led_state_t state)
+>  	if (!ops->set_state)
+>  		return -ENOSYS;
+>  
+> +	if (IS_ENABLED(CONFIG_LED_SW_BLINK) &&
+> +	    led_sw_on_state_change(dev, state))
+> +		return 0;
+> +
+>  	return ops->set_state(dev, state);
+>  }
+>  
+> @@ -68,6 +72,10 @@ enum led_state_t led_get_state(struct udevice *dev)
+>  	if (!ops->get_state)
+>  		return -ENOSYS;
+>  
+> +	if (IS_ENABLED(CONFIG_LED_SW_BLINK) &&
+> +	    led_sw_is_blinking(dev))
+> +		return LEDST_BLINK;
+> +
+>  	return ops->get_state(dev);
+>  }
+>  
+> @@ -76,8 +84,12 @@ int led_set_period(struct udevice *dev, int period_ms)
+>  {
+>  	struct led_ops *ops = led_get_ops(dev);
+>  
+> -	if (!ops->set_period)
+> -		return -ENOSYS;
+> +	if (!ops->set_period) {
+> +		if (IS_ENABLED(CONFIG_LED_SW_BLINK))
+> +			return led_sw_set_period(dev, period_ms);
+> +		else
+> +			return -ENOSYS;
+> +	}
+>  
+>  	return ops->set_period(dev, period_ms);
+>  }
+> diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
+> new file mode 100644
+> index 00000000000..ab56111a60b
+> --- /dev/null
+> +++ b/drivers/led/led_sw_blink.c
+> @@ -0,0 +1,106 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Software blinking helpers
+> + * Copyright (C) 2024 IOPSYS Software Solutions AB
+> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> + */
+> +
+> +#include <dm.h>
+> +#include <led.h>
+> +#include <time.h>
+> +#include <stdlib.h>
+> +
+> +static void led_sw_blink(struct cyclic_info *c)
+> +{
+> +	struct led_uc_plat *uc_plat;
+> +	struct udevice *dev;
+> +	struct led_ops *ops;
+> +
+> +	uc_plat = container_of(c, struct led_uc_plat, cyclic);
+> +	dev = uc_plat->dev;
+> +	ops = led_get_ops(dev);
+> +
+> +	switch (uc_plat->sw_blink_state) {
+> +	case LED_SW_BLINK_ST_OFF:
+> +		uc_plat->sw_blink_state = LED_SW_BLINK_ST_ON;
+> +		ops->set_state(dev, LEDST_ON);
+> +		break;
+> +	case LED_SW_BLINK_ST_ON:
+> +		uc_plat->sw_blink_state = LED_SW_BLINK_ST_OFF;
+> +		ops->set_state(dev, LEDST_OFF);
+> +		break;
+> +	case LED_SW_BLINK_ST_NOT_READY:
+> +		/*
+> +		 * led_set_period has been called, but
+> +		 * led_set_state(LDST_BLINK) has not yet,
+> +		 * so doing nothing
+> +		 */
+> +		break;
+> +	default:
+> +		break;
+> +	}
+> +}
+> +
+> +int led_sw_set_period(struct udevice *dev, int period_ms)
+> +{
+> +	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> +	struct cyclic_info *cyclic = &uc_plat->cyclic;
+> +	struct led_ops *ops = led_get_ops(dev);
+> +	int half_period_us;
+> +	char *name;
+> +	int len;
+> +
+> +	half_period_us = period_ms * 1000 / 2;
+> +
+> +	name = (char *)cyclic->name;
+> +	if (name == NULL) {
+> +		len = snprintf(NULL, 0, "led_sw_blink_%s", uc_plat->label);
+> +		if (len <= 0)
+> +			return -ENOMEM;
+> +
+> +		name = malloc(len + 1);
+> +		if (!name)
+> +			return -ENOMEM;
+> +
+> +		snprintf(name, len + 1, "led_sw_blink_%s", uc_plat->label);
+> +	}
+> +
+> +	if (uc_plat->sw_blink_state == LED_SW_BLINK_ST_DISABLED) {
+> +		uc_plat->dev = dev;
+> +		cyclic_register(cyclic, led_sw_blink, half_period_us, name);
+> +	} else {
+> +		cyclic->delay_us = half_period_us;
+> +		cyclic->start_time_us = timer_get_us();
+> +	}
+> +
+> +	uc_plat->sw_blink_state = LED_SW_BLINK_ST_NOT_READY;
+> +	ops->set_state(dev, LEDST_OFF);
+> +
+> +	return 0;
+> +}
+> +
+> +bool led_sw_is_blinking(struct udevice *dev)
+> +{
+> +	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> +
+> +	return (uc_plat->sw_blink_state > LED_SW_BLINK_ST_NOT_READY);
+> +}
+> +
+> +bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
+> +{
+> +	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> +
+> +	if (uc_plat->sw_blink_state != LED_SW_BLINK_ST_DISABLED) {
+> +		if (state == LEDST_BLINK) {
+> +			/* start blinking on next led_sw_blink() call */
+> +			uc_plat->sw_blink_state = LED_SW_BLINK_ST_OFF;
+> +			return true;
+> +		}
+> +
+> +		/* stop blinking */
+> +		cyclic_unregister(&uc_plat->cyclic);
+> +		uc_plat->sw_blink_state = LED_SW_BLINK_ST_DISABLED;
+> +	}
+> +
+> +	return false;
+> +}
+> diff --git a/include/led.h b/include/led.h
+> index a6353166289..26955269d3e 100644
+> --- a/include/led.h
+> +++ b/include/led.h
+> @@ -20,6 +20,13 @@ enum led_state_t {
+>  	LEDST_COUNT,
+>  };
+>  
+> +enum led_sw_blink_state_t {
+> +	LED_SW_BLINK_ST_DISABLED,
+> +	LED_SW_BLINK_ST_NOT_READY,
+> +	LED_SW_BLINK_ST_OFF,
+> +	LED_SW_BLINK_ST_ON,
+> +};
+> +
+>  /**
+>   * struct led_uc_plat - Platform data the uclass stores about each device
+>   *
+> @@ -29,6 +36,11 @@ enum led_state_t {
+>  struct led_uc_plat {
+>  	const char *label;
+>  	enum led_state_t default_state;
+> +#ifdef CONFIG_LED_SW_BLINK
+> +	struct udevice *dev;
+> +	struct cyclic_info cyclic;
+> +	enum led_sw_blink_state_t sw_blink_state;
+> +#endif
+>  };
+>  
+>  /**
+> @@ -118,4 +130,9 @@ int led_set_period(struct udevice *dev, int period_ms);
+>   */
+>  int led_bind_generic(struct udevice *parent, const char *driver_name);
+>  
+> +/* Internal functions for software blinking. Do not use them in your code */
+> +int led_sw_set_period(struct udevice *dev, int period_ms);
+> +bool led_sw_is_blinking(struct udevice *dev);
+> +bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state);
+> +
+>  #endif
+> -- 
+> 2.39.2
+> 
+> 
