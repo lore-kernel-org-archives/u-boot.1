@@ -4,145 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CF12C3DA41
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 12:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65BFBC30658
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 12:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49A8B8899D;
-	Fri,  5 Jul 2024 14:10:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id AB69288986;
+	Fri,  5 Jul 2024 14:10:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="SQ2LHhw2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="EpKp6Whw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E743388986; Fri,  5 Jul 2024 14:10:45 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2070f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::70f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F2E988896C; Fri,  5 Jul 2024 14:10:48 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 185F38898B
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 14:10:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B211E88992
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 14:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZtIHlhh1VXBrY7+E6YzBrM6Q/r7g+h1Cv5+BhHuzj7PiBUV+9gJ7iiZq9McBsHjyuTfYFCWbz0Vt4dhgJeMGcuuhixpP/fQFMCOD3SBdwr1mv3uiZgjv3owdwDu9i/TLThknGB4fA+IzGrm072PTrih4bUWvKkWKEaFimaemATJ6zc8QhU+nH2sThCI4kpzlUXLAD4a24Rhi5v3oMXtnIU39g1TN8iik22Jse6xP7zTXWLWruZdFEFowK1qLtJigZ61j+ILLnURdmZ7xqclsvpbrHBxmy60Y75R5ntn23fbD5+8OH659hQOlu5kFyoizGDaKzGVi8JlW/Ocf8e2cwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=H5Z2ZQsiZA31C52b1cCw/EqWHziDo/ZIFBpFzk7ijrI=;
- b=PA2f9mEyT8iUO3xdPO/9QFwbWYFK1/nbZow6B9KuNPr4zwy3t8bkkxC7Ha91h50e8fzcx+RAVlscvOcCS3b7z/QfUVxQKEOcN+f3OdIATV8hyUF8fsi+r5j+uiFQX3/P+alzymqIOSmOXK2UIDoitnrF4O1KGJQ0YyVC+DwUwdM+zcFTDUa+l+W8jjUBhl829bG+5RGI560AP9+dVdtA9WeqU6PWnU+DAe0lIw6FIjklEspB7zJAZrTVMlTKoP6r297lUTcf//2E1ER+H918q+6Y3rXPRNXF8HSdefl+Yh7LcVFITMkI9K3CdfpyjtWPER7xJnDHn+0jGikIvilQKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H5Z2ZQsiZA31C52b1cCw/EqWHziDo/ZIFBpFzk7ijrI=;
- b=SQ2LHhw2K1fnoB2Vjgj9mrXTUwmGtT2L1q7Fou8WkArZDX3Rs9d4BF7FiPUS4KqGMfh8zNZXKxtarAqjBUx6WPDw7kzrdpyvR37RIU09iFFueUUOsp6ANwGEeQ4Pudny/fbJlq+r+N00S01lr7XHT0mbY6LanmUIRQ3tS/cYZlauArL9a+NaTYTM1dpKYDZOo+a+7bH2I6PLMdcQqhTxOn5xEqUX1Mr2guvyelCEN7UYnfzZ6tae8MijLATtPPCkOGHGMFFRVBMc8QuiRjHsWoQE8+weKr09AXpIUdjiyKG+IcKAuzru6kPwHa4N/yVfYdHHLyMyie1YIpB0IwvxYw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by GV1PR08MB7315.eurprd08.prod.outlook.com (2603:10a6:150:1e::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.29; Fri, 5 Jul
- 2024 12:10:33 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7741.027; Fri, 5 Jul 2024
- 12:10:33 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v4 0/2] led: implement software blinking
-Date: Fri,  5 Jul 2024 16:10:21 +0400
-Message-Id: <20240705121023.2266479-1-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.39.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0060.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:153::11) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3678aa359b7so1695833f8f.1
+ for <u-boot@lists.denx.de>; Fri, 05 Jul 2024 05:10:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1720181446; x=1720786246;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NlIN2N0/d+JyUoXEs72mS4z1JC8oJzEDH37yxTgPgrE=;
+ b=EpKp6WhwrUfCoBFqqofGNx7S49j8qjUVROgveRSp6zerSdFKtyFodBMYSO0G6ilVG5
+ /Vm58gy6SgJYJxttrt7XY8XWERb7fQ+7u8ZCNb+BCLmgpuNg/1BpsMWunnb0xIacVHS3
+ vQfcHsUiPG/o30hI//qk59h2DoH08ovxrL0aerh6hXkqHoueFfsvJZUBSc5iynxgREDN
+ NesJ8yH6zhYuNfFZZ3ZtgqzxIBRfZjmGgKM2hkOzRd2as2IE9CbeONURk0OSsN4weNcl
+ aDD6oWe52onfj68lmTdS65xVeP9YxV6WUJsUVX508Z4lwPgX3rXUhXtJvwR7cyT4R3IK
+ RZQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720181446; x=1720786246;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NlIN2N0/d+JyUoXEs72mS4z1JC8oJzEDH37yxTgPgrE=;
+ b=Invz/XjMDCPXswN3uGpznilhHcF8tZD7+rphi4ixptJomVxqMO20dsB8pE3qFvqZLx
+ 9FgjivAM7KmhzEMHBBWvPRwVoEXFem32YBTmEVE5u+0sUEx8n3r4SFXhDNFuXvnkmU1C
+ qm72YwN76QXuYlz+kveZItcuBaOd1PHlA7+giOKJcpZdfyxfjFfCQ8FsqVqG4ZIIs1RL
+ P6k6Aka9toQ0J3VqCBtBqHraFeQGQG7tJ1551PUVMH89d80EYulEOY9Tov0sB1eaUDnp
+ reM8003rYb1iEdx+rMDw5JG3TWK2FjrWkfkCreYybHSSBKmT/LRD4oHfjJtr4zhww+28
+ /l+A==
+X-Gm-Message-State: AOJu0YzR8xer3Cgc6lY1EZAFzgdlcckweKva45hNiZxrn6aS51rwM7qv
+ DmsNSw+B1y41e7AM1b52aXagQ4vjP15gchTehPktt1rFerVkjQZ7tIpq6wDbokIGNDo3fJKo4BZ
+ B
+X-Google-Smtp-Source: AGHT+IFta6ZasWeYgD0hQ5DriE2PI3T2VfIL6OOWNfx5D4SO45nQkUtCV0fgfqQCFig1bOAJwTqPXw==
+X-Received: by 2002:adf:ef89:0:b0:367:9268:bfca with SMTP id
+ ffacd0b85a97d-3679f75c4famr3991869f8f.22.1720181445697; 
+ Fri, 05 Jul 2024 05:10:45 -0700 (PDT)
+Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4264a21d2adsm59275785e9.29.2024.07.05.05.10.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Jul 2024 05:10:44 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Felipe Balbi <felipe.balbi@linux.intel.com>, 
+ Lukasz Majewski <lukma@denx.de>, Nishanth Menon <nm@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, 
+ Tom Rini <trini@konsulko.com>
+In-Reply-To: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
+References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 00/11] usb: gadget: Introduce handle_interrupts ops to
+ USB_GADGET_GENERIC uclass
+Message-Id: <172018144450.2142299.9049881669126268493.b4-ty@baylibre.com>
+Date: Fri, 05 Jul 2024 14:10:44 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV1PR08MB7315:EE_
-X-MS-Office365-Filtering-Correlation-Id: a8e95ce6-6b75-43af-c160-08dc9ceb78ac
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aJTUXa8vu4tbB6B7giDYnicsnsTIshVRz+ZGAIIBW7RpVq39jDYbnT+8LXVW?=
- =?us-ascii?Q?WN7EorEF+aUHNck/OWJtKQC9uvvcnRWiI7MtX1IUcrvH1qX1W3rOW0YzpF2K?=
- =?us-ascii?Q?fbO+ZV9hqdoCUOQA308YDDRvqHOnjF6T9UoEWUCOJU7SfSd0CeejuZX0vO2h?=
- =?us-ascii?Q?jhL1yd3GUOeoWFBBaX9JuNeMaZfbksADlkacfAztrikTjdtO/ylLRqVdVuux?=
- =?us-ascii?Q?EwrTWDFX3Uw84/zy0szDcGchy31DYt+4PvxgliTrW+5XJf5Ug45Yxjv4xPuf?=
- =?us-ascii?Q?UhIa62UxGcgn0uUQI6VJaYMlqnH7x6mi+znRbCmAVzLsKF80kJNpddqW5kT2?=
- =?us-ascii?Q?5LgPnaAAXnCyPBItO1K148Fj/0euAuoORODnGKPasRrQXlHxDLx3crZAG202?=
- =?us-ascii?Q?P1mSBOf9bm/ZLgm1SiY2dkS6jnKdK6W2JOise5KAmynRQ5N/JxOuEbtOwRKB?=
- =?us-ascii?Q?F12YIKX4VpwmBdLxMihMkTR5JXWWZcsyWnWCFb697xagABtkhsG0KUI5zUYT?=
- =?us-ascii?Q?1/wojFdFB557j8fx4jlKMuGH2k05aWIZDUcIyqWCx+m+y7yf/e+BmV6x90jX?=
- =?us-ascii?Q?FdrxzLyrOjhq2qfl37ZrFh8LId02vG1XFyC5byw+kKBckYIUb1fDhsDYSOqO?=
- =?us-ascii?Q?AbQAkx9bYX1j5qqpxu+YxWD/9Ids14amDldB2gprNQTs7of/FOE4wVHdAZJD?=
- =?us-ascii?Q?WM2+w9SdGddl+K9dk1PopXXOgEEI+mMVa0+0y1czCO4o1whqvwN/euzqXwzr?=
- =?us-ascii?Q?ZBvJMWJn2lE8cEi33A2IvQNXsIqE8uC3ZpAc7Ir1X+wHCpTpFsOqvEsXZPli?=
- =?us-ascii?Q?Qick8huc5lbR7L7yvXib87t/Pe5pcm6ZPlZU+XDb/aAAPWIuJ7meO3CXGIvn?=
- =?us-ascii?Q?4qWo4sXsCYDOhQZ22+TuU28bwDKetvtHPYG0Ixe4a4OIsDgwHC/+K5lJ2HV0?=
- =?us-ascii?Q?oxldJsczf/eW63qoGGgkqMyd4rvZDDdLW68hIdEsapzDuUSaFmz5+BewJi6v?=
- =?us-ascii?Q?z9yFU4PKvqQm9S08D8Ior4sJoo/Wy7crZN0lSNBJDMBtJNPc8ms2tqwh88UP?=
- =?us-ascii?Q?44Hbnwm77O+Qx9f4GzTVb3fBzXAcZ6sZm5ZAUE0xQZW+UfZDc8NxSrhMuezZ?=
- =?us-ascii?Q?TdTCObr7U+Bada+IJgbdymOOOggb3QeR2Mls6wZu0ivPGqZ4/JJvZFNtlE3Z?=
- =?us-ascii?Q?r9jRRGjHZfVUDVqobmrF2qiycnr2xzRb7CbZkG+otnLVIbH/U51Wy7+Dk6Ip?=
- =?us-ascii?Q?fVsPsd4cyJzx9zSN2XC0Im9MbU10RWTqQVSKXC33SEKLGJ6QGaMjC/GBLiUQ?=
- =?us-ascii?Q?oduaRNmKroPjR+j+tag3ZWcHii6riDrq8ULurqXsV0C6cM0lSn5kYUtEiM1d?=
- =?us-ascii?Q?b9MjsvCYihx6Lq/VPkz2jbBzTHe92PaQubkHRG1Je8lIkNhJ9A=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?db0kKcGDH00W1MOD0uCm/eo1u5yPeBM3Iuo8b11rEHsCBrkZ8V+EXzMwGlHG?=
- =?us-ascii?Q?fLni8RseS7s4lUEjj8DjPBrRMHHinc8FHMlU/t1uoWcjbl+icy0uIkoYawGk?=
- =?us-ascii?Q?z0UgKJ3yNIOrZ5CLefE2WdeNpbofW0onGKmMdZv/O61yITfeTCNSy4qaFWRw?=
- =?us-ascii?Q?3dqMJH7R9v16zqff8V20f7PtJ1jgOSri2RU0Mp+vEqV7ekL8Y7ywfIZCqVk/?=
- =?us-ascii?Q?409tyEPvU2V2zYEGcHEV1/ztneHkB8izHwJfG5sg0IRWmt4F4cVHK+oBuDre?=
- =?us-ascii?Q?iIsboig6oUgduaonUp6R+qk5/Zq0EVrmLrYa7YxYhksY3OrwuMI4yKG26Fy+?=
- =?us-ascii?Q?Y4ewgwF7hWTVpanxm9r/ad4iJGzyF0bDXsAJ+zBpqIpGsCKmTPzmYuVWvp0p?=
- =?us-ascii?Q?yNdn0t1w/rAqW7wY5n+5ct1KneYfc7TtmiMlk4EmbuPBzEL2ik0o3vh/mJWW?=
- =?us-ascii?Q?A9szTwnNDp11P+IMAQKqrNx0XMPmONQw1VGQkcQQyC4R/5yu2uh5q5ynV5tz?=
- =?us-ascii?Q?VHRlEar5reLb04tbZZ2EZWir7GrxBVtTdXWttv4FyedZbvtf+hoCNQf/G4fN?=
- =?us-ascii?Q?KqTNyBcfy15IZJ5uME3G9V0p4weaIFRzEs4t1ldYREmjCg75esVeumqYEdFM?=
- =?us-ascii?Q?69O0ct4B79XXtcdWKd04jRGEomcYb5tAWWnhAss1jgCipE4geOVo9w+k1zkD?=
- =?us-ascii?Q?Ig/GX/v1UWbm75vlzuzhhs9Hw2yZBKsf5Ep+lnaEBov5FOxk7WLVY0xDlTAn?=
- =?us-ascii?Q?kMmOSKXhMNzOMm/eaAAB4RQWSHR8vW34e01Z/RbWZdvN6e6DAcyNUbfNNU5L?=
- =?us-ascii?Q?0couuAwlcmyc3X6uX/9hJVXVYSbF31aWQDzPPYV4bKOvKalskYZcd+cPkRkE?=
- =?us-ascii?Q?1jPFgTHIYjJk2TrCxTGFBZfnqkWqSUjubbcTDfcRpcnQ9d2V4PLmCpcBSlj7?=
- =?us-ascii?Q?A+bOIlXgHWtKThl9VdLbVATLd53RZJaH5LRpkuLMKyQoRcDcZvAz2ZjR3wGd?=
- =?us-ascii?Q?jhdFow4uKOT2RvU49iHoM3MMFPQ/LnIKeHPIj/AO6ewcVcguWyyRc9YiuPMV?=
- =?us-ascii?Q?lGAEL2bFd74NlB6VBxl7KR9tmhcu90F946rD0hYbRQFr393tULpIxLd4dpCb?=
- =?us-ascii?Q?IW9GswzqNwhX0I+hQ3vMCSeMV0KIaKjRlyMYurrllNrh43pt86ZVxWvzDP9F?=
- =?us-ascii?Q?m18/zN0ZoU9Ltop6QyOQ3AuuNh2kizbg6kpwvPMoXDzxKD4BPQY+3dZsN44f?=
- =?us-ascii?Q?T+yZJMKTlasnTvcFPRVSLl/PGdnXy5jGTr6+adBLrHK1KEmGQpxxa2kMdOuw?=
- =?us-ascii?Q?D2h8iexbUgHKNkMwhqTLPuvpM7fWSux3u8FyUfRe4x+88cuLbHMO4I1AqLgT?=
- =?us-ascii?Q?4G5GcwW49coRzcrxuNyLJW6AXd1oJetJaod2bZCI4g65DrNylVjJAoI8+FdI?=
- =?us-ascii?Q?hAWVm9vuKPmu93ajqwe6Bdll1B8NZpBIx0pzuyCPxqI4e89wIBFmIz1xcivi?=
- =?us-ascii?Q?+mZ5X3FaFcHUtMVZ2j4BTTv45dqXT+QZ6AZgncHE1SuQ6fnAOn2GqFdNEsXV?=
- =?us-ascii?Q?WuN2ig/XvHBc6bPFODhw4jcpLvlmQtDKoeWH435abxZY+AixEJugd2FMKqOw?=
- =?us-ascii?Q?ww=3D=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8e95ce6-6b75-43af-c160-08dc9ceb78ac
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 12:10:33.7380 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QsOft0X/lPyxRUtwheWjTPS1IrMPeR5GYLfbicrmEvDaZNLoGw+uzoeUXV71oA6XlmeIgP9veQNGdCFFUiREpXLtt5hfQpBdfx5ybBNukX0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB7315
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,35 +99,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-v2 changes:
- * Drop sw_blink_state structure, move its necessary fields to
-   led_uc_plat structure.
- * Add cyclic_info pointer to led_uc_plat structure. This
-   simplify code a lot.
- * Remove cyclic function search logic. Not needed anymore.
- * Fix blinking period. It was twice large.
- * Other cleanups.
+Hi,
 
-v3 changes:
- * Adapt code to recent cyclic function changes
- * Move software blinking functions to separate file
- * Other small changes
+On Fri, 14 Jun 2024 02:51:15 +0200, Marek Vasut wrote:
+> Introduce .ops for USB_GADGET_GENERIC uclass. The first new ops is
+> .handle_interrupts which must be implemented by DM capable USB gadget
+> controller drivers and must implement interrupt handling similar to
+> dm_usb_gadget_handle_interrupts(). For DM USB gadget drivers this is
+> a replacement for dm_usb_gadget_handle_interrupts(). Convert the DM
+> USB gadget drivers to this new ops instead.
+> 
+> [...]
 
-v4 changes:
- * refactoring of led_set_period() function
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-Michael Polyntsov (2):
-  led: Implement software led blinking
-  led: Add dts property to specify blinking of the led
+[01/11] usb: gadget: Introduce handle_interrupts ops to USB_GADGET_GENERIC uclass
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/d36ef5cbedd08e9a11c6a719d853f1003173133e
+[02/11] usb: gadget: cdns3: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/356542d6dd72f66031bc0fbe174a99c360ee318a
+[03/11] usb: gadget: dwc2: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/2329109fbd7e48c559594c089238dc57d7fea166
+[04/11] usb: gadget: dwc3: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/75f94ed82ff0a8c021decaa9a0eda56d48cba716
+[05/11] usb: gadget: max3420: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a75753327399d821ba70d8cb493d1bc12d1034cc
+[06/11] usb: gadget: mtu3: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/2c2d7c2bab0ec6e4cd93db242822a57986680917
+[07/11] usb: gadget: omap2430: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/521bc756cb5fea0ca8c159bd812da063e08bd351
+[08/11] usb: gadget: musb: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/281eaf1ed83a09bfce6b82b86775e11d4269ad08
+[09/11] usb: gadget: ux500: Convert interrupt handling to usb_gadget_generic_ops
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/ac4bf5d48a9e85e79ced3b7195a8599c21c0a16d
+[10/11] usb: gadget: sandbox: Drop dm_usb_gadget_handle_interrupts()
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/ed8e638de1ef0ab2bf87c6c83882b275b66b292f
+[11/11] usb: gadget: Mark dm_usb_gadget_handle_interrupts as non-weak for DM_USB_GADGET
+        https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/9e2c14804e4aaefe7cbb43d444f5dc83ba76c86d
 
- drivers/led/Kconfig        |  14 +++++
- drivers/led/Makefile       |   1 +
- drivers/led/led-uclass.c   |  50 ++++++++++++++---
- drivers/led/led_sw_blink.c | 106 +++++++++++++++++++++++++++++++++++++
- include/led.h              |  17 ++++++
- 5 files changed, 181 insertions(+), 7 deletions(-)
- create mode 100644 drivers/led/led_sw_blink.c
-
--- 
-2.39.2
-
+--
+Mattijs
