@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E91F8C38150
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 16:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 739D1C3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 16:50:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDFD1889C0;
-	Fri,  5 Jul 2024 18:49:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 612B1889D5;
+	Fri,  5 Jul 2024 18:49:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="agA2P8uZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uYl2GIdi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E64FC889C0; Fri,  5 Jul 2024 18:49:52 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id C043188905; Fri,  5 Jul 2024 18:49:53 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A570C889CE
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 18:49:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2AF7889D0
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 18:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 465GnmR1091458;
- Fri, 5 Jul 2024 11:49:48 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 465GngiL062295;
+ Fri, 5 Jul 2024 11:49:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720198188;
- bh=F7FAMIYTljuV34U6xUvibxHSrqZ8ZRpuYu6/ekVATjE=;
+ s=ti-com-17Q1; t=1720198182;
+ bh=aurFAScMU217vUsKajocEDQGAXW75duGzLIdQ6WRjoc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=agA2P8uZXv0AwNlN/zv2sSlHfNDj/HT20KV05prSEW6eBPhAVo02mAjvRjg4dvrnW
- Hy1m8SlfQr+6TAs9zM4UmRlNbLxns2epOzMKw/Llw+BW2um5pUsD445308VVwnU680
- iv5ZMrzcCg5TDFZcAQx43FpOX/9Ua9GAU7hiWV0M=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 465GnmJD114114
+ b=uYl2GIdibByZrRxX4vcPFU30QaQwMvzNW4EaCvrg9sRUaaM6y/WUD74+eYmHkn8MF
+ z9RzAGMuE4BK9/YrojeH7F5FuauvKDNTSwAz+8vIF397wgp0wDUmr2cVzvGQR8i1Qb
+ RmsJfxAuACqrx921OpTVSNkGdIDpeG374ahFA7B8=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 465GngB5001356
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 5 Jul 2024 11:49:48 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 5 Jul 2024 11:49:42 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
- Jul 2024 11:49:48 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 11:49:42 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 5 Jul 2024 11:49:47 -0500
+ Frontend Transport; Fri, 5 Jul 2024 11:49:42 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 465Gmhd4028675;
- Fri, 5 Jul 2024 11:49:43 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 465Gmhd3028675;
+ Fri, 5 Jul 2024 11:49:38 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
@@ -59,10 +59,9 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishant
  Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V5 5/6] doc: ti: am62*: Mention TIFS Stub in img fmts and boot
- flow
-Date: Fri, 5 Jul 2024 22:18:32 +0530
-Message-ID: <20240705164833.2386549-6-d-gole@ti.com>
+Subject: [PATCH V5 4/6] doc: ti: k3: Add TIFS Stub documentation
+Date: Fri, 5 Jul 2024 22:18:31 +0530
+Message-ID: <20240705164833.2386549-5-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240705164833.2386549-1-d-gole@ti.com>
 References: <20240705164833.2386549-1-d-gole@ti.com>
@@ -86,83 +85,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since AM62x, AM62P and AM62A all use similar boot flows and their low
-power mode s/w ARCH is also similar in the way that they make use of the
-TIFS Stub, update their documentation to show where TIFS Stub is.
+Add documentation to briefly explain the role of TIFS Stub in relevant
+K3 SoC's.
+This also sheds light on why TIFS Stub isn't package with the DM firmware
+itself.
 
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- doc/board/ti/am62ax_sk.rst | 4 ++--
- doc/board/ti/am62px_sk.rst | 4 ++--
- doc/board/ti/am62x_sk.rst  | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ doc/board/ti/k3.rst | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
-index 60726b6652ce..92da6f65f9d5 100644
---- a/doc/board/ti/am62ax_sk.rst
-+++ b/doc/board/ti/am62ax_sk.rst
-@@ -47,7 +47,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 67b066a07d3a..c80060662074 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -193,6 +193,17 @@ online
+     device resources such as power, clock, interrupts, dma etc. This firmware
+     runs on a dedicated or multi-use microcontroller outside the security
+     enclave.
++  * **TIFS Stub** - A small piece of code that helps restore the remaining
++    context and resume the TIFS firmware when resuming from Low Power Modes
++    like Suspend-to-RAM/ Deep Sleep. It is loaded into the ATCM (Tightly
++    Coupled Memory 'A' of the DM R5) during DM startup. The reason it isn't
++    merged with DM is because in HS devices we need to sign the tifs-stub with
++    customer key. The DM cannot have a component signed using a customer key
++    because a HS device customer owns the customer key and only customer
++    has the access for the customer key. Since TIFS Stub signing has to happen
++    from the customer side but DM is released by TI, we need to allow binman to
++    sign the TIFS Stub and only then package it alongside other firmwares.
++    This applies only to AM62x, AM62A and AM62P based devices.
  
--.. image:: img/boot_diagram_k3_current.svg
-+.. image:: img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
+  OR
  
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -144,7 +144,7 @@ Image formats:
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. image:: img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- Switch Setting for Boot Mode
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index c80b50681176..3396aae471c6 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -55,7 +55,7 @@ Boot Flow:
- The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
- family. Below is the pictorial representation:
- 
--.. image:: img/boot_diagram_k3_current.svg
-+.. image:: img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -153,7 +153,7 @@ Image formats:
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. image:: img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- OSPI:
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index 2a25e84f6c97..68ddd2ac94ff 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -46,7 +46,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_k3_current.svg
-+.. image:: img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -161,7 +161,7 @@ Image formats:
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. image:: img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- OSPI:
 -- 
 2.34.1
 
