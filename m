@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E0BC30658
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:52:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724C1C3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:52:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EA7C88969;
+	by phobos.denx.de (Postfix) with ESMTP id B65048898B;
 	Fri,  5 Jul 2024 06:51:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HwYEP48C";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FINuFzfB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3487788969; Fri,  5 Jul 2024 06:51:13 +0200 (CEST)
+ id 4D83C88969; Fri,  5 Jul 2024 06:51:13 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B58608896D
+ by phobos.denx.de (Postfix) with ESMTPS id CD91E88974
  for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 06:51:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654on4G035096;
- Thu, 4 Jul 2024 23:50:49 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654om6H034975;
+ Thu, 4 Jul 2024 23:50:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720155049;
- bh=kluFjeAMYPun90VoFZN71N/e/3BWoKamlWNd1gZ49j8=;
+ s=ti-com-17Q1; t=1720155048;
+ bh=hTGwKM/j1yI4WNJSC+e/GTksZOyp4PVDVefn6N8w3f8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=HwYEP48CKOp38zVFkIfeDL6PQOHnuva7i5/o7hNyu6McXJHhjPYuVDutf1AhW6lAJ
- Bl0pHG+wzJGW8kMp50dMMou794An16cuJhkm6ga5K1pWR6EdxMYX1P6TkDwgeR/GII
- c1qzGfohFOeRBVVvjSrD1cOW9nCfN8nfJnmT7pIk=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654onL4024208
+ b=FINuFzfBAs09wxeA6w1SrcwXlXeHnvBaMzvcR1H4mAudK2WLDc9nt/VIH6vCRkNLd
+ sN+SsOcZxLfvjS8s92UH9ZeWrWnOLM5wevkQacrSqEktmbh4FOxYHSs7WnkQfkx8R+
+ qju8szUnJ06dZs9DcZYO6ezS45OZSF6hK5BeoSZ0=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654omAY024127
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jul 2024 23:50:49 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Jul 2024 23:50:48 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 23:50:49 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 23:50:47 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 23:50:49 -0500
+ Frontend Transport; Thu, 4 Jul 2024 23:50:48 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654omOv032818;
- Thu, 4 Jul 2024 23:50:49 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654ol5f032796;
+ Thu, 4 Jul 2024 23:50:47 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Vignesh Raghavendra
@@ -69,10 +69,10 @@ To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  <mripard@kernel.org>, Nishanth Menon <nm@ti.com>, Tom Rini
  <trini@konsulko.com>
 CC: <srk@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
- "bootph-all" property to phy_gmii_sel node
-Date: Fri, 5 Jul 2024 10:20:30 +0530
-Message-ID: <20240705045030.1141934-11-c-vankar@ti.com>
+Subject: [PATCH v3 09/10] arm: dts: k3-am625-r5-sk: Enable DM services for
+ main_pktdma
+Date: Fri, 5 Jul 2024 10:20:29 +0530
+Message-ID: <20240705045030.1141934-10-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240705045030.1141934-1-c-vankar@ti.com>
 References: <20240705045030.1141934-1-c-vankar@ti.com>
@@ -96,37 +96,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
 
+Enable DM services for main_pktdma during R5 SPL stage.
+
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v2:
-https://lore.kernel.org/r/20240425120822.2048012-11-c-vankar@ti.com/
+https://lore.kernel.org/r/20240425120822.2048012-10-c-vankar@ti.com/
 
 Changes from v2 to v3:
-- Since "phy_gmii_sel" with "bootph-all" property is merged at upstream
-  Linux for am62x-sk-common with commit "ba50141137fa", this patch can be
-  drop with next DT-Sync.
+- No changes.
 
- arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/dts/k3-am625-r5-sk.dts | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index 1fc0d407cb..18412688bb 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -12,6 +12,10 @@
- 	};
+diff --git a/arch/arm/dts/k3-am625-r5-sk.dts b/arch/arm/dts/k3-am625-r5-sk.dts
+index 6b9f40e555..0912b953db 100644
+--- a/arch/arm/dts/k3-am625-r5-sk.dts
++++ b/arch/arm/dts/k3-am625-r5-sk.dts
+@@ -83,3 +83,8 @@
+ 	reg = <0x00 0x0fc40000 0x00 0x100>,
+ 	      <0x00 0x60000000 0x00 0x08000000>;
  };
- 
-+&phy_gmii_sel {
++
++&main_pktdma {
++	ti,sci = <&dm_tifs>;
 +	bootph-all;
 +};
-+
- &main_timer0 {
- 	clock-frequency = <25000000>;
- };
 -- 
 2.34.1
 
