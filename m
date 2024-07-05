@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C500C3271E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609CCC3271E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jul 2024 04:51:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 018B8885FE;
-	Fri,  5 Jul 2024 06:51:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C5F888934;
+	Fri,  5 Jul 2024 06:51:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rQkUJ9tB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SoXpy4D5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 945A1885F1; Fri,  5 Jul 2024 06:50:59 +0200 (CEST)
+ id 78929885F1; Fri,  5 Jul 2024 06:51:00 +0200 (CEST)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99C18885F6
- for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 06:50:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BE89885F2
+ for <u-boot@lists.denx.de>; Fri,  5 Jul 2024 06:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654oerH112776;
- Thu, 4 Jul 2024 23:50:40 -0500
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654ojp1112784;
+ Thu, 4 Jul 2024 23:50:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720155040;
- bh=WvOLDTGvCWVkZfVe+laD7RtT6kHUwiCxWKOHOg7qskc=;
+ s=ti-com-17Q1; t=1720155045;
+ bh=mQveobueXBleE/XNQ4VWmlDn1j/qXjkVMAJ7f6qOu5M=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=rQkUJ9tBNuxT8I8bVrmXZEOHdDpPZgSQfcW8t3mtM5Pm1cWC4Z9BEyJOFaWERyTyy
- yypJme4XLFH0wyQFSEulVjnzyXkSphpRMvNUnMdF/YGsA8VxsuCmOveFHmLTlx7I1s
- iwvDyzACXm7yYEjCKbPguEk9BiMMF3obCUfoPHS0=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654oe3L024048
+ b=SoXpy4D5yF8aWK7bVpGhOch90hISn8Jz+5VyvabdCPVxx5I5ZhUEeSQ49N9Rcj0Di
+ lNdwUwgvEC6lgm5GVKRVohJnbrfKd3qms6byFBYo0gGLmW055qME2N0q2zfKzdF/G2
+ sn+xRUnZwcdbpQjw9i6tTmhzUzQBg78unuph50rg=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654ojlx024079
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jul 2024 23:50:40 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Jul 2024 23:50:45 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 23:50:40 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 23:50:45 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 23:50:40 -0500
+ Frontend Transport; Thu, 4 Jul 2024 23:50:45 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654odpH112261;
- Thu, 4 Jul 2024 23:50:40 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654oida032736;
+ Thu, 4 Jul 2024 23:50:44 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Vignesh Raghavendra
@@ -69,9 +69,10 @@ To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
  <mripard@kernel.org>, Nishanth Menon <nm@ti.com>, Tom Rini
  <trini@konsulko.com>
 CC: <srk@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 04/10] soc: ti: k3-navss-ringacc: Fix reset ring API
-Date: Fri, 5 Jul 2024 10:20:24 +0530
-Message-ID: <20240705045030.1141934-5-c-vankar@ti.com>
+Subject: [PATCH v3 07/10] configs: am62: Add configs for enabling ETHBOOT in
+ R5SPL
+Date: Fri, 5 Jul 2024 10:20:27 +0530
+Message-ID: <20240705045030.1141934-8-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240705045030.1141934-1-c-vankar@ti.com>
 References: <20240705045030.1141934-1-c-vankar@ti.com>
@@ -95,47 +96,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vignesh Raghavendra <vigneshr@ti.com>
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
-Expectation of k3_ringacc_ring_reset_raw() is to reset the ring to
-requested size and not to 0. Fix this.
+Add configs for enabling ETHBOOT in R5SPL.
 
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v2:
-https://lore.kernel.org/r/20240425120822.2048012-5-c-vankar@ti.com/
+https://lore.kernel.org/r/20240425120822.2048012-8-c-vankar@ti.com/
 
 Changes from v2 to v3:
 - No changes.
 
- drivers/soc/ti/k3-navss-ringacc-u-boot.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ configs/am62x_evm_r5_ethboot_defconfig | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 configs/am62x_evm_r5_ethboot_defconfig
 
-diff --git a/drivers/soc/ti/k3-navss-ringacc-u-boot.c b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-index f958239c2a..5d650b9de7 100644
---- a/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-+++ b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-@@ -25,9 +25,16 @@ struct k3_nav_ring_cfg_regs {
- #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_MASK		GENMASK(26, 24)
- #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_SHIFT		(24)
- 
-+#define KNAV_RINGACC_CFG_RING_SIZE_MASK			GENMASK(15, 0)
+diff --git a/configs/am62x_evm_r5_ethboot_defconfig b/configs/am62x_evm_r5_ethboot_defconfig
+new file mode 100644
+index 0000000000..7b1932b215
+--- /dev/null
++++ b/configs/am62x_evm_r5_ethboot_defconfig
+@@ -0,0 +1,20 @@
++#include<configs/am62x_evm_r5_defconfig>
 +
- static void k3_ringacc_ring_reset_raw(struct k3_nav_ring *ring)
- {
--	writel(0, &ring->cfg->size);
-+	u32 reg;
-+
-+	reg = readl(&ring->cfg->size);
-+	reg &= KNAV_RINGACC_CFG_RING_SIZE_MASK;
-+	reg |= ring->size;
-+	writel(reg, &ring->cfg->size);
- }
- 
- static void k3_ringacc_ring_reconfig_qmode_raw(struct k3_nav_ring *ring, enum k3_nav_ring_mode mode)
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_MMC=n
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_BSS_MAX_SIZE=0X3100
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_ETH=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_NET=y
++CONFIG_SPL_NET_VCI_STRING="AM62X U-Boot R5 SPL"
++CONFIG_CMD_DHCP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_DM_I2C=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_TI_AM65_CPSW_NUSS=y
 -- 
 2.34.1
 
