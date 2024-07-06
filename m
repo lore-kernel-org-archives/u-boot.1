@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF2EC2BD09
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 20:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808C7C2BD09
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 20:55:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12737881AD;
-	Sat,  6 Jul 2024 22:50:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB0EF885A8;
+	Sat,  6 Jul 2024 22:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j3Pf/zyM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xj02aQD7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EDD88850A; Sat,  6 Jul 2024 22:50:33 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id DA3848858B; Sat,  6 Jul 2024 22:55:14 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C1B3881AD
- for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 22:50:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99E6B885A8
+ for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 22:55:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-52e9901f858so298536e87.1
- for <u-boot@lists.denx.de>; Sat, 06 Jul 2024 13:50:31 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2ee92e3a4efso3091351fa.0
+ for <u-boot@lists.denx.de>; Sat, 06 Jul 2024 13:55:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720299031; x=1720903831; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1720299311; x=1720904111; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6YWfWDccSkmjLbiZ+bUp4Hq1iA8tV3ea3bolPPT6pKs=;
- b=j3Pf/zyMyIuwnUPZzJSQIrFhuCw5rbA9vGfqX1kOwTX41+lSjuZoswNoc9PktGaMMX
- ULqQ9pStIOjFjTGVfbUsxngkHFvB8aEyYxJC6agUhI8aRSQG3UsaG8WLPtU1UGP0ZuO/
- UL5M9a/ih+nAuEiWOjtSYmAhrugKUS3TjBV+a7kXoXGj0ntzkFdheCreu8SdEqCPFi46
- yZ4PzbqtDKaQA4lR9DiIRml3nDd4WyZJVnQEgUPMMxexHFJ2ThlKwxUjXYfjq6ZuXi/N
- YBRb3DKzk/1WRlPlECXhEeDGUaNZLK4P3madlv6unuouk0R1jSYqchRDyGnlUb4x32Sx
- l4kA==
+ bh=Co+E7uDRZ4LjqgU5CjA+4bq/z8/tj+FCl2LKkuxXeYA=;
+ b=Xj02aQD7bX8a59fRIxIBmgoQ1dVbBgy2N5KXLT/x956uOjl1E8Vs0k4GWwzydxQGZd
+ mYY57HPO1F8UOZS8m2Jeleczs5FYVEqp4sOThDcypVl6oMs//VIszughGitSdxs6jo4m
+ et16riyv5x3muPGtdLmjIKuUWJQ0WefPuvKtLmeCiYAAL9TU5z8MZFTvefF/VuwrkutL
+ TMl8+oc3uYhQa8E8Bfx1clCDeNhzStzB9rRlsHeHtD8ys2G+piDdL2DhOz3Glc7QUxWw
+ ZSUx2pVOejQUV8Vo8lvNkrP+q0zH7eUpEURub/ZXpbVj599Qv8I78DesrfMVXBBO9/xx
+ fjWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720299031; x=1720903831;
+ d=1e100.net; s=20230601; t=1720299311; x=1720904111;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6YWfWDccSkmjLbiZ+bUp4Hq1iA8tV3ea3bolPPT6pKs=;
- b=vyH8XZ3/a+sCfi6pU0kXfqw7pNF+Y17mkR8ajo9JqwrU48TUN53w9H45JbgSa9Aaio
- Cuwt3/o+WYllfV/yOy32oHBai4STO4ro1ppADKHtLhPn3LvOBULWaKFCtGIs1ZZR2FxC
- Raw8sTf61DpDyw4Dei4sMOpzwCnLWKd61bnFqh1HCIf3PmD4EVcFoT47mBpguOV7gLK3
- R83xJ4vezEUNgNg/D0ZFDxm5dEFhyjEpZF19LJJDOg1T/fVqFyv0Cd09IAPGucBWxdU7
- IrX1IBJjBEYFmT8CAg7LZD0TVcYfgVTxG3QjagfI40YBI5WCFn1ZxlcP4MYA/TKQhnfG
- D0/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVTN1mKLn+X/RN2lOQtDZ7qySKQDuaM3YDs1B++QwNX3X66xNVgII3OPKqB9KWDsYZjsdxRsFSDeBjTLQ8UOI9i/XxR7g==
-X-Gm-Message-State: AOJu0Yw0qiHIyvKKbynV70mLXLc0cF0rZYwzRwjZdr9DBIFlvS/7P8Nb
- J4cQNqtURX5JWHmw6FJd5f2xA3DAoGbxDs5CRtum4tJBPCPycqoC/FFpc5PWUdFirz4z56PBPXB
- AAn69NTyAE7pR3ZwNhQmCiMmzZUU=
-X-Google-Smtp-Source: AGHT+IEjiOA6x7usSx+k5UXBFzrAml8pWWcz56f1gXLFBG8XqjH6L4Eax5hbk5QZGXlieQd5J9YAE5b63Wbsigq5AJg=
-X-Received: by 2002:a19:5218:0:b0:52e:9daa:25f4 with SMTP id
- 2adb3069b0e04-52ea0641d7cmr4822531e87.2.1720299030675; Sat, 06 Jul 2024
- 13:50:30 -0700 (PDT)
+ bh=Co+E7uDRZ4LjqgU5CjA+4bq/z8/tj+FCl2LKkuxXeYA=;
+ b=EH/MzxdtBSTJBYjlTF/Mi89EATjJ/SV6SYa6xyahMnFHWiM8vSsTd1IIzJsIG4h4qC
+ eI3B1g/U5MgEMquur+0gXUfmpG5R11AEag63nUNV2TL4qXlVdxrCuZG3jFY6Ql39dW4D
+ /xVSxyWVUbBf3/Y5iNRin7RRmRxwP6O/NZHPz8O8Dbor68eMGF/6pJzoshqNNKwI4m4R
+ FaQTyvel/f2TLyV288nPjDv9aVOaz3OYb5WgDuM4ZB5LgUYB4qVdYQDCjoQuwEUdKgr2
+ 12en9MrEEOIh2l+OP7b+sUGlnUfuIkRuH3BbL0uKP9Pzsc/FQ7VVaI+oBwlj6eWd1x3N
+ o6Mw==
+X-Gm-Message-State: AOJu0Yyg60drDNz6YQT8gONxz+1qTrwZChxgeQbQFra6xF0ESkTjuRs8
+ WkeVPqmyz4DYvUDBX9bv8FK1cudZmbqk2UNrNoOSKAT4tVjcspgtBbE1balI8wRP+6HD0FUi6oz
+ v1OEYGmLqlme+pkLXmnBG3E9aKI8=
+X-Google-Smtp-Source: AGHT+IEbbwU/RUAK4qs9A8b27fVlsGlB+C9NpajRWodIMma1ZyhGnp0M7ndlH+mISdj15foxv6ERFDOfXB9WsZMRmvg=
+X-Received: by 2002:ac2:4ec9:0:b0:52c:d5a5:bf7 with SMTP id
+ 2adb3069b0e04-52ea073559amr4586589e87.4.1720299310655; Sat, 06 Jul 2024
+ 13:55:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240705071952.12245-1-michael@amarulasolutions.com>
-In-Reply-To: <20240705071952.12245-1-michael@amarulasolutions.com>
+References: <20240702153739.2651815-1-sjg@chromium.org>
+In-Reply-To: <20240702153739.2651815-1-sjg@chromium.org>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 6 Jul 2024 17:50:19 -0300
-Message-ID: <CAOMZO5C4xKRCwgov9avRss0hzyYrTYhMArBcksAET9VY_3+fOA@mail.gmail.com>
-Subject: Re: [PATCH V2 0/2] Support imx8m composite mux
-To: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Sat, 6 Jul 2024 17:54:59 -0300
+Message-ID: <CAOMZO5A0fgwuX_EFwUoi2EZkw0MYXEhyX7jzBctXbmxeEM_p6g@mail.gmail.com>
+Subject: Re: [PATCH] mx9: Correct repeatable build error
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefano Babic <sbabic@denx.de>, Ye Li <ye.li@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,18 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 5, 2024 at 4:30=E2=80=AFAM Michael Trimarchi
-<michael@amarulasolutions.com> wrote:
+On Tue, Jul 2, 2024 at 12:38=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> The mux ops for i.MX8M composite clk needs to be specialized.
-> In order to reduce the code duplication we need to make public some
-> interface and write a specific function in the mux ops. Those patches
-> implement the behavior.
+> For some reason every second time imx93_11x11_evk is built it gives an
+> error:
 >
-> Addressed comment in V1
+>    make O=3D/tmp/x BINMAN_ALLOW_MISSING=3D1
 >
-> Michael Trimarchi (2):
->   clk: clk-mux: Make public the clk_fetch_parent_index
->   clk: imx: add mux ops for i.MX8M composite clk
+> It seems to sometimes skip generation of the .cfgout file and then
+> eventually Binman complains:
+>
+>    ValueError: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
+>       spl/u-boot-spl.cfgout -T imx8image -e 0x2049A000
+>       ./mkimage-out.spl.mkimage': Fail open first container file
+>       mx93a1-ahab-container.img
+>
+> Correct this by using if_changed instead of if_changed_dep
+>
+> The only reason this hasn't come up in CI is that buildman did not retry
+> failing builds of current source, but now it does.
+>
+> Note: The logic in this Makefile should be moved to Binman, e.g. these
+> warnings duplicate Binman functionality:
+>
+>   WARNING 'bl31.bin' not found, resulting binary may be not-functional
+>   WARNING 'tee.bin' not found, resulting binary may be not-functional
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Applied both, thanks.
+This breaks imx93_11x11_evk_defconfig:
+
+  BINMAN  .binman_stamp
+Wrote map file './spl.map' to show errors
+binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
+spl/u-boot-spl.cfgout -T imx8image -e 0x2049A000
+./mkimage-out.spl.mkimage': Error: spl/u-boot-spl.cfgout - Can't open
+cfg file
+
+make: *** [Makefile:1126: .binman_stamp] Error 1
