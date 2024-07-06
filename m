@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B19F5C38150
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 20:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A57AC38150
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 20:48:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11EFA8827A;
-	Sat,  6 Jul 2024 22:47:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A4691882E2;
+	Sat,  6 Jul 2024 22:47:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FKpdTuHZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZKwof6LY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17F4882D4; Sat,  6 Jul 2024 22:47:34 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 4D74C882EF; Sat,  6 Jul 2024 22:47:59 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A78B8827A
- for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 22:47:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CE16881AD
+ for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 22:47:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-52e9d61a4b4so300298e87.3
- for <u-boot@lists.denx.de>; Sat, 06 Jul 2024 13:47:33 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52ea5185ba7so250895e87.3
+ for <u-boot@lists.denx.de>; Sat, 06 Jul 2024 13:47:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720298852; x=1720903652; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1720298877; x=1720903677; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=soCagfvs0MzcgvunptIXfkVXO4M19V/j3q3a9MS3Jmo=;
- b=FKpdTuHZUfgpbYrDfDItdEeGreeLcOqJx/fCAMIBtN0vmH4qF+dZS6/T66WSyjAFFM
- El4l+CCipUzjJzb0+YYXCbEFxGYvQQadvwJceTGr/m8PNOISwEKuZNqadKo7QYMWQ6x3
- kdxStgGOeovdZi7lj4dGWRAGWU3+l5tDnzAdti5yCOR5e2EZ8TxZQjXCtwecAbrHGvgd
- /pN8ymBrat4S1KS+mnbruiTaE63emm8dWPwM+akuTquAaUKJ0UlBOf+J93Cy47amlHHP
- cQw6mJbqprM4TkfKKm6599HF6eXHBJDTLcVxMQ/JY1yo2IX4K6MsR+pfmXZwSwo7gs/o
- xhKg==
+ bh=R/54uw++Kzb6rOKKsibjmEXEFT/XPytKX1rlQUvCtGM=;
+ b=ZKwof6LYzdJKRtleW7WmX62CeD3RI0POewuqHtdSJSotJwsoCWAkHwqrtvTcZC/bGw
+ RiNM2+tUWDnmyBzEpgUC8dr4muPxNSN22It+pPQGc80v0P8JoLWfmMCWihk18jSkJ0Fl
+ 2OZtyCrJkIi+F3WPBPDlmlkkcp9TDfXB2xRI6Uj011tsUcjxd5Ug1JZrBYOBmmJTfmWc
+ 0oN61463nGa1xst1UWLZqXPAkW4UvDtC+OQBcM10YhO58gJge9QKtBem2IRPi/iQ8fGS
+ CkCfMazoWk25qLKZxUQ8qHOxC/fCl6uv8nQKh3GZYrTdRPZPklWGw5jPrLTkScg/Rmzi
+ GapA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720298852; x=1720903652;
+ d=1e100.net; s=20230601; t=1720298877; x=1720903677;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=soCagfvs0MzcgvunptIXfkVXO4M19V/j3q3a9MS3Jmo=;
- b=EPxzP6xlcZ1tjv4un5wVPVXJ6fJtazu7DlSg0AyJB7r5mK3xY0TVTirCHrrH7rRJDu
- ilKhRVHpk8DIVjzLU5shoILRX4ykd8U2Dkf0HGKbR/qFiIZzLJbDDzbBcJBr0QQ1scqT
- ILekFJOLPmBcezDeRyU+MsUCmV8BTIAmv6AOb2mStGkC9du4V1PTozrpYgL5AV7ONm2s
- nVJ2DfxrF0oYovrp2sx+PyXlzy4LyrYINynuZvOdqPzUtcMZBhjdyzOVlPW8ppAKJAwR
- tSajOdbYDhmYIPAkS8T6ZRw4oiIL9Prt9DztKncLNkmx9Q3zSjBDknLoIvw+YZHwJumk
- 3FJg==
+ bh=R/54uw++Kzb6rOKKsibjmEXEFT/XPytKX1rlQUvCtGM=;
+ b=nha5YqDHq/h6dwy9YPWRxwMW+0w3THoew3QjEfSkTlzyctcm7v84htFn1Bzt0j3EL0
+ KE83Xb/Cb2ih3n9Vzcweb/z9dPQajBopalwXt1sC8RKeur7a8tRv0FpSAP5oUfcyyPh6
+ yMNLx+PqDBuyyvr+6erzDcMILuMFp63BU7mTBFBRTXSIkjiftHIfFjMJVyvzAK2wMP4j
+ AzCDN7AcMWWQDrY0ysf7g9qsi6DWE6J1ipu0FVLCeVU02Dby1FxjmY6sEmb7148fXGHp
+ 4FKksVb2/r4ceD4JE/q6BIyM2iFDWpv9FgbJyT1Mpb1C3+MA2uVQZDnYNIVU9xf4+1Q+
+ Ec9g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVaJSFCC0qjSpedK+By0VadMCt524kYmHxhNZaOVc2fuepnG5i5cTD6cky4H21uGGkxOjwKrcBU4MzYjoIK7YuLzIclfw==
-X-Gm-Message-State: AOJu0Yw5gqs7Bd8OWeRMswLSUfQGTef8IuFkGtrNx89SQXh5p1aETfey
- vuWasXnfuTVL31fd/QDdsu1hlVWpV0VgNzV71MvEDDmMKIYj0yaiT1PgpsoFWQs+6UznDXQdj77
- jwTGo8073cZJSnjUoaoMo8qx74dU=
-X-Google-Smtp-Source: AGHT+IGrBdyT+31kT6pU8jpw3E5p/3vtnoDhjGhQkRfRBLxIp6EcWoj4/hcJRQ7JfhodlUPgcxcKXZBCodG7Mxtebqc=
-X-Received: by 2002:ac2:4115:0:b0:52c:6b51:2e9a with SMTP id
- 2adb3069b0e04-52ea062998dmr4773667e87.2.1720298852181; Sat, 06 Jul 2024
- 13:47:32 -0700 (PDT)
+ AJvYcCWa3AGYtSe43otTNAcfX7Ztxr8EWiUmF+aLm/pr6OszBC63fvBZPjqpesu+hZTrLUGrFSVGyg9YluXdLfIJ1HuPvmrnDQ==
+X-Gm-Message-State: AOJu0YyrW3iVDLGseiBo/2iY/Ylnzp1E3bRWmA8ayz+mYDkZ1XoSQTl0
+ hIqB0W8b+/pdA7ClPtfb3vPdjFaDiHzVE6lSKkUdWK8nRMDRWS/ef07Ms4RjcvT9OC4KhvgLo/B
+ LEoOkvnjdW6DdAb8Tpwh0RjnqiA8=
+X-Google-Smtp-Source: AGHT+IHns67k3JivVe9MG5xsaBT0nQnUDbTNBRvSsWyp0fuKk45Ll+dKg86d5biwB0rEun+5aZcXVd9tNLLBnBdJVFA=
+X-Received: by 2002:ac2:5051:0:b0:52c:dd58:1a97 with SMTP id
+ 2adb3069b0e04-52ea0762b99mr5565609e87.5.1720298876439; Sat, 06 Jul 2024
+ 13:47:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240704120337.673211-1-festevam@gmail.com>
-In-Reply-To: <20240704120337.673211-1-festevam@gmail.com>
+References: <20240705121121.3829244-1-l.anderweit@phytec.de>
+In-Reply-To: <20240705121121.3829244-1-l.anderweit@phytec.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 6 Jul 2024 17:47:21 -0300
-Message-ID: <CAOMZO5AMr1QsedmnGSQHvM=w7t9z34R6pHfqQsHyLPKh=ryvyA@mail.gmail.com>
-Subject: Re: [PATCH v2] msc_sm2s_imx8mp: Adjust the initrd_addr location
-To: ian.ray@gehealthcare.com
-Cc: sbabic@denx.de, trini@konsulko.com, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>
+Date: Sat, 6 Jul 2024 17:47:45 -0300
+Message-ID: <CAOMZO5B1inxUinDgabX+DJ3uF=wRohiU9z-utqM9LeAcvQXR5Q@mail.gmail.com>
+Subject: Re: [PATCH] configs: phycore-imx8mp_defconfig: Initialize caam
+To: Leonard Anderweit <l.anderweit@phytec.de>
+Cc: Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, Yannic Moog <y.moog@phytec.de>,
+ u-boot@lists.denx.de, upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,27 +91,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 4, 2024 at 9:03=E2=80=AFAM Fabio Estevam <festevam@gmail.com> w=
-rote:
+On Fri, Jul 5, 2024 at 9:11=E2=80=AFAM Leonard Anderweit <l.anderweit@phyte=
+c.de> wrote:
 >
-> From: Fabio Estevam <festevam@denx.de>
+> Initialize the Cryptographic Accelerator and Assurance Module.
 >
-> Booting an initramfs with the current initrd_addr address may lead to
-> initramfs corruption and boot failure.
->
-> Fix the initramfs problem by applying the following layout
-> suggested by Tom Rini:
->
-> loadaddr=3D0x40480000 --> Gets moved to 0x40600000 in run-time:
->
->    Uncompressing Kernel Image
-> Moving Image from 0x40480000 to 0x40600000, end=3D41e80000
->
-> fdt_addr_r=3D moved loadaddr + 128 MiB =3D 0x48600000
->
-> initrd_addr=3Dfdt_addr_r + 512 KiB =3D 0x48680000
->
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> Tested-by: Stefano Babic <sbabic@denx.de>
+> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
 
 Applied, thanks.
