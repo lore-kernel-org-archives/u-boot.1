@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A57AC38150
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 20:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DAD3C38150
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jul 2024 20:48:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4691882E2;
-	Sat,  6 Jul 2024 22:47:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F0AA88373;
+	Sat,  6 Jul 2024 22:48:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZKwof6LY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bAyEVdzi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D74C882EF; Sat,  6 Jul 2024 22:47:59 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 5CF6788403; Sat,  6 Jul 2024 22:48:51 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CE16881AD
- for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 22:47:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73DB5881AD
+ for <u-boot@lists.denx.de>; Sat,  6 Jul 2024 22:48:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-52ea5185ba7so250895e87.3
- for <u-boot@lists.denx.de>; Sat, 06 Jul 2024 13:47:57 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-52e9901f858so298377e87.1
+ for <u-boot@lists.denx.de>; Sat, 06 Jul 2024 13:48:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720298877; x=1720903677; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1720298929; x=1720903729; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R/54uw++Kzb6rOKKsibjmEXEFT/XPytKX1rlQUvCtGM=;
- b=ZKwof6LYzdJKRtleW7WmX62CeD3RI0POewuqHtdSJSotJwsoCWAkHwqrtvTcZC/bGw
- RiNM2+tUWDnmyBzEpgUC8dr4muPxNSN22It+pPQGc80v0P8JoLWfmMCWihk18jSkJ0Fl
- 2OZtyCrJkIi+F3WPBPDlmlkkcp9TDfXB2xRI6Uj011tsUcjxd5Ug1JZrBYOBmmJTfmWc
- 0oN61463nGa1xst1UWLZqXPAkW4UvDtC+OQBcM10YhO58gJge9QKtBem2IRPi/iQ8fGS
- CkCfMazoWk25qLKZxUQ8qHOxC/fCl6uv8nQKh3GZYrTdRPZPklWGw5jPrLTkScg/Rmzi
- GapA==
+ bh=UDHc+jvVYC0pQCHJ6+3CXG5ZouMeyMn/cMt6doLaY54=;
+ b=bAyEVdzi/lCCczLPewBsz4PGmYLNlMf6giKqoIOFu5/ynKAlgnGgwML7hQO3yIBl5l
+ eqGmtoY/Nt4+d/HHJdnzzrc/f9HXopRU8zdnwNbxm+XIuupvspTkdKNJnJN0liUjvL/0
+ HlXOWG+ouT2D3hHP9j1ljPntxq6gjik0O4zx7oJWUOpkezf3DRy96SIkyU8v9ea/fhcf
+ du+C8wY6nCUlU+aV9Is1H6Z2uJRddzINZ/2hCzmZyVXn1zB5geIUS1wn0exz3SygbgR2
+ gusEEt9ppPNE6TlW7VEH18JDw85UOlvYJR/10v5VDsYpbkRnA/gjvRrJaMGQWsl5J6qt
+ Tdwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720298877; x=1720903677;
+ d=1e100.net; s=20230601; t=1720298929; x=1720903729;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R/54uw++Kzb6rOKKsibjmEXEFT/XPytKX1rlQUvCtGM=;
- b=nha5YqDHq/h6dwy9YPWRxwMW+0w3THoew3QjEfSkTlzyctcm7v84htFn1Bzt0j3EL0
- KE83Xb/Cb2ih3n9Vzcweb/z9dPQajBopalwXt1sC8RKeur7a8tRv0FpSAP5oUfcyyPh6
- yMNLx+PqDBuyyvr+6erzDcMILuMFp63BU7mTBFBRTXSIkjiftHIfFjMJVyvzAK2wMP4j
- AzCDN7AcMWWQDrY0ysf7g9qsi6DWE6J1ipu0FVLCeVU02Dby1FxjmY6sEmb7148fXGHp
- 4FKksVb2/r4ceD4JE/q6BIyM2iFDWpv9FgbJyT1Mpb1C3+MA2uVQZDnYNIVU9xf4+1Q+
- Ec9g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWa3AGYtSe43otTNAcfX7Ztxr8EWiUmF+aLm/pr6OszBC63fvBZPjqpesu+hZTrLUGrFSVGyg9YluXdLfIJ1HuPvmrnDQ==
-X-Gm-Message-State: AOJu0YyrW3iVDLGseiBo/2iY/Ylnzp1E3bRWmA8ayz+mYDkZ1XoSQTl0
- hIqB0W8b+/pdA7ClPtfb3vPdjFaDiHzVE6lSKkUdWK8nRMDRWS/ef07Ms4RjcvT9OC4KhvgLo/B
- LEoOkvnjdW6DdAb8Tpwh0RjnqiA8=
-X-Google-Smtp-Source: AGHT+IHns67k3JivVe9MG5xsaBT0nQnUDbTNBRvSsWyp0fuKk45Ll+dKg86d5biwB0rEun+5aZcXVd9tNLLBnBdJVFA=
+ bh=UDHc+jvVYC0pQCHJ6+3CXG5ZouMeyMn/cMt6doLaY54=;
+ b=b3n4u5rOh2AMjRvUYiCsu4552HD/llsXooOluhnRgX1jeN+GxW03gHngGmEJ+wwBfP
+ Sdmm9VaUKEiSm+L+FUqdUSZ/48jrIsWc5KQsf009TnXYl3avipIb5iC/fqR7NYi5jvvf
+ 76ZVu/djtJDOtiFiXuFwtCht+BIFJAjlkz2NSTs4qoloPXTgFSGAsJkV3DokWxoy2s2m
+ LcN4XfdsdINFWO5SpwGVuvdcGNzxtsKT7gIJD1Kz1cDOU/KY2ImqquJjfY0KCn8vbSuy
+ 4Bpl+Hgx880ZVRIgb/3tR3fIdkHO0cZBJMqOwoZ2RACXBfpz0JRpJrXQLDDnp+Tm7BNe
+ NECQ==
+X-Gm-Message-State: AOJu0YwBlqNszokkAnKEJOEZo6QlLA8cLndrtRjbvwFn9jBGQ3DLynyt
+ aN1sWDYk7fsKiUIwzqRIX6Unt4D/rJa2NI1LcUug0w2xrAHhPr6v5gliDAQR46pLzURUb+GFqbt
+ Bk1QMHgWW0hjBFhWQlY6dOdPuhYhlkQ==
+X-Google-Smtp-Source: AGHT+IGLGIXVvAPUykMDK0rRaal2KvCgJFvgDawDiFJ+4/sLbTI3hFBCbNBBEyzz1vWiIpmyYG/OaTuTFZzsATcMXr8=
 X-Received: by 2002:ac2:5051:0:b0:52c:dd58:1a97 with SMTP id
- 2adb3069b0e04-52ea0762b99mr5565609e87.5.1720298876439; Sat, 06 Jul 2024
- 13:47:56 -0700 (PDT)
+ 2adb3069b0e04-52ea0762b99mr5566294e87.5.1720298928475; Sat, 06 Jul 2024
+ 13:48:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240705121121.3829244-1-l.anderweit@phytec.de>
-In-Reply-To: <20240705121121.3829244-1-l.anderweit@phytec.de>
+References: <20240625082638.8867-1-marex@denx.de>
+In-Reply-To: <20240625082638.8867-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 6 Jul 2024 17:47:45 -0300
-Message-ID: <CAOMZO5B1inxUinDgabX+DJ3uF=wRohiU9z-utqM9LeAcvQXR5Q@mail.gmail.com>
-Subject: Re: [PATCH] configs: phycore-imx8mp_defconfig: Initialize caam
-To: Leonard Anderweit <l.anderweit@phytec.de>
-Cc: Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>, 
- Benjamin Hahn <B.Hahn@phytec.de>, Yannic Moog <y.moog@phytec.de>,
- u-boot@lists.denx.de, upstream@lists.phytec.de
+Date: Sat, 6 Jul 2024 17:48:36 -0300
+Message-ID: <CAOMZO5DY0ohwDJiDxput6wwvVc7DSmuJrxngcJXFD7jnhrRoBw@mail.gmail.com>
+Subject: Re: [PATCH v3] ARM: imx: verdin-imx8mm: Set CAN oscillator frequency
+ based on model
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,11 +91,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 5, 2024 at 9:11=E2=80=AFAM Leonard Anderweit <l.anderweit@phyte=
-c.de> wrote:
+On Tue, Jun 25, 2024 at 5:26=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> Initialize the Cryptographic Accelerator and Assurance Module.
+> The older i.MX8M Mini Verdin SoMs may came with 20 MHz SPI CAN controller
+> oscillator, the newer SoMs always use 40 MHz oscillator. Handle both by
+> overriding the oscillator frequency just before booting the kernel.
 >
-> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
+> These are the known variants with 20 MHz oscillator:
+> - 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
+> - 0059, V1.1A and V1.1B, use a 20MHz oscillator
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
 Applied, thanks.
