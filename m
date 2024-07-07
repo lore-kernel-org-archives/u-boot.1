@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199E5C38150
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jul 2024 00:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D64BC30653
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jul 2024 08:20:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D34C8858B;
-	Sun,  7 Jul 2024 02:55:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6A9D588427;
+	Sun,  7 Jul 2024 10:20:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1720313739;
-	bh=L5sgq2rjPyzyYMF0H1OocBU4xuED1PWtOmI++BxC2Xw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TP0FqedJuWf83jr/c4nlZ4BozZuFz+iV6bo4JRWJ/MjJAg2NFoKsm1vBCKezXX38j
-	 KJJgsCXWmCaORpnvrXhXEv/5X3feeaVEfAHt5yxHGJHFmBkuPGJLZS6VJXuQe2mDgr
-	 WfnzHN1pFpncw7cCfuJUpzTzbozPJt8YUeQurJSuIuIGBqvWVpyD+uR18jFobZP33I
-	 A7QYM8BrVw0livl3wdicqPu47spNmnyyShC2bSqbb2yXP1BO5cSZObhHuNU6MKYk3c
-	 38gqi3h3kGfws00U/Vs0uczZiBe/qR/lNE+6G0xXODjRrd9nJ87K8WYdrVki8uqb/n
-	 sJ0h3bydFydYQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="qsLDZ2Zm";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3E1FB881AD; Sun,  7 Jul 2024 10:20:09 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4A9E388415;
- Sun,  7 Jul 2024 02:55:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1720313737;
- bh=L5sgq2rjPyzyYMF0H1OocBU4xuED1PWtOmI++BxC2Xw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=QSP31cpyN8XnBMvFhgFoIE3+7vV1FpiYL8ajeMiYD4m7W9UaE5XDGOgrq9HG//VW4
- WKI7NSSLe2L/8Xwyq8G/ygOHV/nnma9fvFHcXBW+QFzH+ux23Cwy09T3nQUd+ZCl0c
- AtUKijy/J2N14lQFWMTP/aPnli/8yx21T035Gq785oW1M+Qe+04AxMBXKg0fHlqTpQ
- 0hyMY1fjbwn1JkX5739ZYt4nfhZgqQY6ZxnPiKup5jh8o3cRqkEB6GSJkbX76n/kwU
- Txj7HzSisPjamWRm49ZYY1NW1slXKNsoclh1FtqgHYZE2w9+FVz3B/GBZjR7iQ9/m4
- Ho5faSlyDVaAw==
-Message-ID: <e534b055-eb45-47e1-94d4-6e840a4e7d20@denx.de>
-Date: Sun, 7 Jul 2024 02:53:06 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E3618882B8
+ for <u-boot@lists.denx.de>; Sun,  7 Jul 2024 10:20:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a77cbb5e987so207090266b.3
+ for <u-boot@lists.denx.de>; Sun, 07 Jul 2024 01:20:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1720340406; x=1720945206;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qq4IE2LqkFUiiBPDh8OElQvcVLMBfb5hlV+0J9G5jls=;
+ b=qsLDZ2Zmsm3lULyWN97qbZ7Gz3fnshdxlcnlK7d67GAk24X7DkcQbbL4mRZhVIsrmN
+ dF7ku8pwjWcscKFADyokYwwsaQ75dKJrlcKURrPVa0XcqjHuil5wktMcNpOFHel8CW0A
+ JFfl5UG46TcoH1+0FCmXFJGrkGfPHLcW/OggM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720340406; x=1720945206;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qq4IE2LqkFUiiBPDh8OElQvcVLMBfb5hlV+0J9G5jls=;
+ b=GShR161uC53FiVio6Zhd6WwApIKWA9iwR5jstN0mVAa6xGjdWOOps+blMIDgl+ELRc
+ VH/zei8aitgeU7RLPQqy8OnRlrH3MyvE8dLo8ZyHZh+1b2fagBKYCYd9SSvjkMWVrjOG
+ Cz+oKOS5e8ciQ9iOtTm5xBkhWr/MwKxHxPNQk1gjx8n48R8iUwyly7MoiMkbKuexItza
+ DsgsIPl5BnxhklrJXw1k5wJRmU76kh7BY6dtnNDZPWqXEB1mpl63bGYbtvdimZ/6Ktvn
+ iP0Srmmcu0YYELP01lV9dGluk9Vtz+37vJ/mzTCCostWxFJdbcEpU7yNORC0mCyPtTbL
+ rICw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQTgkH3lLN0v11RsnFM+eA4B2cKRlPqlrqXNtwpwZlIFMjE1WJ0X/7yllXzRulpF/S54oYJniK+1lt8Yr7pRZxkR4qBA==
+X-Gm-Message-State: AOJu0YxfbZk80wrw3Cizy0ayNVzsObHB8RyOqqHYz0ZUq1Umqw/jpGRc
+ yI5ZtMp194Do91ul2KSHIc89bPzjgKEozfLn6GQlfcXMnH80aLCZYqFJi0uGU92/Flq8LYw7D16
+ csK8=
+X-Google-Smtp-Source: AGHT+IF+J0btHsrn5tWBT603FFkXVVkyssq7exZWPGRqZPtab+M5cdp0TSVw7X9KNg/4jLhwX8epnw==
+X-Received: by 2002:a17:907:991a:b0:a77:b3c4:cd28 with SMTP id
+ a640c23a62f3a-a77ba44d1ccmr634167266b.9.1720340405964; 
+ Sun, 07 Jul 2024 01:20:05 -0700 (PDT)
+Received: from panicking.. ([109.52.6.228]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a77e4a8092dsm111708666b.58.2024.07.07.01.20.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Jul 2024 01:20:05 -0700 (PDT)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: Fabio Estevam <festevam@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
+ u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH 0/4] IMX8 series small clock update
+Date: Sun,  7 Jul 2024 10:19:57 +0200
+Message-ID: <20240707082001.20746-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXT] Re: [RFC] usb: xhci: Some USB devices fail to initialize
-To: Elena Popa <elena.popa@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-References: <AM7PR04MB69685A41537BA13AB3D32C7590F02@AM7PR04MB6968.eurprd04.prod.outlook.com>
- <a00e3b3f-2248-48a6-ba48-544ac09f2dc1@denx.de>
- <AM7PR04MB6968BB208B38C3DA9F11B9D890F12@AM7PR04MB6968.eurprd04.prod.outlook.com>
- <9ef2b0f0-13b7-4caf-8f99-7803dffc2afb@denx.de>
- <AM7PR04MB6968EB78F957243D25BDD80890FD2@AM7PR04MB6968.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <AM7PR04MB6968EB78F957243D25BDD80890FD2@AM7PR04MB6968.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,26 +91,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/1/24 4:23 PM, Elena Popa wrote:
-> Hi Marek,
+This series is cover other part of my internal review work, that
+will allow us to support the video subsystem of imx8mn. During this work
+I found some small issues that fix several small problems but it will
+help as preparation for the video one
 
-Hi,
+Michael Trimarchi (4):
+  clk: imx: clk-imx8mn Fix nand and spi clock parent
+  clk: imx8mn: Make parent names arrays const pointers
+  clk: imx8mm: Make parent names arrays const pointers
+  clk: imx8mp: Make parent names arrays const pointers
 
-sorry for the really late reply.
+ drivers/clk/imx/clk-imx8mm.c | 157 ++++++++++++++---------
+ drivers/clk/imx/clk-imx8mn.c | 151 +++++++++++++---------
+ drivers/clk/imx/clk-imx8mp.c | 242 +++++++++++++++++------------------
+ 3 files changed, 303 insertions(+), 247 deletions(-)
 
->> Does it also work if you 'setenv usb_pgood_delay 2000' ?
->>
-> No, the USB stick is still not initialized.
-> 
->> Can you include the 5ms patch ?
-> 
-> I've attached the patch which makes it work. Of course, I'm not sure if this is the correct way to fix the problem. You can apply the patch on the master branch.
+-- 
+2.43.0
 
-Does this delay have to be added to every control message (unlikely) or 
-to some specific control message (likely) ?
-
-Could you try and use the debug() statement in xhci_submit_control_msg() 
-, as well as move the mdelay(5) there , to find out which exact control 
-message requires this extra delay ? I also suspect this may not really 
-be related to a specific control message, but instead some early part of 
-initialization .
