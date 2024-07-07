@@ -4,60 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA2EC2BD09
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jul 2024 00:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199E5C38150
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jul 2024 00:56:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD4FD884F1;
-	Sun,  7 Jul 2024 02:55:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D34C8858B;
+	Sun,  7 Jul 2024 02:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1720313738;
-	bh=ndP8+0nV+oaJjJuOJpAcmNQirEZAODAvZBVTUC1Pnd8=;
+	s=phobos-20191101; t=1720313739;
+	bh=L5sgq2rjPyzyYMF0H1OocBU4xuED1PWtOmI++BxC2Xw=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yXGmQcAI86gvJ8yrDqahziiJFyYmVvrEBXggQ/NSYm/gXx38Z7uRQ+3TmGCGlcgPX
-	 g4ReDYHf+uimelnwPmbsUxBskr7NtHuK6aixmJt78/mJ0HAka8LJn/qRKyFtVvTrTn
-	 jELGTHf34vJQ9h+qkQAQtUTD+Neg3b26xa21fiz1bafn03bPb3fugSK8Qa+6sguIdi
-	 r7i8RANp9JvJbRYwSaDWBnz4CCRI2SAhB5LN/yLcQYLal2SMkvgPwc1vCQjMKuUdX1
-	 O3p96riLjF4QeezPtu47c57rFRXp8p0TKBnIAH3/KCFfGnqu2NPfJpXv0A+LoosR7L
-	 51wsaUPXGnwqw==
+	b=TP0FqedJuWf83jr/c4nlZ4BozZuFz+iV6bo4JRWJ/MjJAg2NFoKsm1vBCKezXX38j
+	 KJJgsCXWmCaORpnvrXhXEv/5X3feeaVEfAHt5yxHGJHFmBkuPGJLZS6VJXuQe2mDgr
+	 WfnzHN1pFpncw7cCfuJUpzTzbozPJt8YUeQurJSuIuIGBqvWVpyD+uR18jFobZP33I
+	 A7QYM8BrVw0livl3wdicqPu47spNmnyyShC2bSqbb2yXP1BO5cSZObhHuNU6MKYk3c
+	 38gqi3h3kGfws00U/Vs0uczZiBe/qR/lNE+6G0xXODjRrd9nJ87K8WYdrVki8uqb/n
+	 sJ0h3bydFydYQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 866908808B;
- Sun,  7 Jul 2024 02:55:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4A9E388415;
+ Sun,  7 Jul 2024 02:55:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1720313737;
- bh=ndP8+0nV+oaJjJuOJpAcmNQirEZAODAvZBVTUC1Pnd8=;
+ bh=L5sgq2rjPyzyYMF0H1OocBU4xuED1PWtOmI++BxC2Xw=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=tkTNJwteSNOYeff4Hnv4l0KdMKMrLXsJ2EtS3bDbEY4/pILd/a/11z+kRQqFpNkh3
- tiAlDMgmyjpakeyb0S7g/soEsvHbn+e0QKDVeUIxJ6UyRipW5Tclbspg5+BpQErfvh
- QJFWW8G3t5mRyH3VgKmx30ADKmM6lsA83Lgz+RFFLIkBrTCVSHoExQROIjeWxq3Xpp
- ETxRQNcV3/b8uan8jjwXAwrz+WffrYqgdXNLJfd5nxtUOwX/F3lctJs99n2W3n5Z+F
- bQPbwa5fm4CnSp+zsvb/WVg6ytG9voaaDPbX0HCyPOLyOOljc3d7ByJxnL3iDFF6Ax
- GfxypSJX7DYyw==
-Message-ID: <211b7562-c0ca-4d57-9fb0-0305b14b0b66@denx.de>
-Date: Sun, 7 Jul 2024 02:29:48 +0200
+ b=QSP31cpyN8XnBMvFhgFoIE3+7vV1FpiYL8ajeMiYD4m7W9UaE5XDGOgrq9HG//VW4
+ WKI7NSSLe2L/8Xwyq8G/ygOHV/nnma9fvFHcXBW+QFzH+ux23Cwy09T3nQUd+ZCl0c
+ AtUKijy/J2N14lQFWMTP/aPnli/8yx21T035Gq785oW1M+Qe+04AxMBXKg0fHlqTpQ
+ 0hyMY1fjbwn1JkX5739ZYt4nfhZgqQY6ZxnPiKup5jh8o3cRqkEB6GSJkbX76n/kwU
+ Txj7HzSisPjamWRm49ZYY1NW1slXKNsoclh1FtqgHYZE2w9+FVz3B/GBZjR7iQ9/m4
+ Ho5faSlyDVaAw==
+Message-ID: <e534b055-eb45-47e1-94d4-6e840a4e7d20@denx.de>
+Date: Sun, 7 Jul 2024 02:53:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spl: fit: List DTOs applied by SPL in U-Boot control DT
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-References: <20240626235857.272264-1-marex@denx.de>
- <d31b4e88-a59c-4ec7-aa05-1293ab8139d9@cherry.de>
- <7c53dff2-9703-4a59-9a90-ec2d64cdb3fa@denx.de>
- <274c876c-4d42-4af4-a68c-5b51c20bfdb8@cherry.de>
- <f873b919-a4de-4d06-9f6c-b964cf0699b7@denx.de>
- <d8d6995c-a66b-45dc-8d1c-3debbb9e757e@cherry.de>
+Subject: Re: [EXT] Re: [RFC] usb: xhci: Some USB devices fail to initialize
+To: Elena Popa <elena.popa@nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>
+References: <AM7PR04MB69685A41537BA13AB3D32C7590F02@AM7PR04MB6968.eurprd04.prod.outlook.com>
+ <a00e3b3f-2248-48a6-ba48-544ac09f2dc1@denx.de>
+ <AM7PR04MB6968BB208B38C3DA9F11B9D890F12@AM7PR04MB6968.eurprd04.prod.outlook.com>
+ <9ef2b0f0-13b7-4caf-8f99-7803dffc2afb@denx.de>
+ <AM7PR04MB6968EB78F957243D25BDD80890FD2@AM7PR04MB6968.eurprd04.prod.outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <d8d6995c-a66b-45dc-8d1c-3debbb9e757e@cherry.de>
+In-Reply-To: <AM7PR04MB6968EB78F957243D25BDD80890FD2@AM7PR04MB6968.eurprd04.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,58 +73,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/1/24 10:42 AM, Quentin Schulz wrote:
+On 6/1/24 4:23 PM, Elena Popa wrote:
 > Hi Marek,
 
 Hi,
 
->>>>> Shouldn't this rather be in /config node?
->>>>
->>>> This is what I had there originally, but then I realized that some 
->>>> DTs might not have the /config node in them (or am I mistaken?), so 
->>>> I moved the new properties into the root node, which surely exists.
->>>>
->>>> It also keeps the code simpler, as it doesn't have to fiddle with 
->>>> creation of the /config node if it doesn't exist.
->>>>
->>>
->>> I don't think we should pollute the root node with this. If we want 
->>> to be able to expose this in a proper binding to the upstream DT 
->>> binding repo, I'm not sure this is going to fly :/
->>
->> The other option is to add more code into SPL, that's not great.
->>
->> I can check if /config node exists, and if so, add it there, otherwise 
->> do nothing. That should be some sort of compromise between bloat and 
->> config node. What do you think ?
->>
->> [...]
->>
-> 
-> Considering that we're trying to have the same DT for U-Boot and Linux 
-> kernel in the long run and that `git grep "\s+config {"` returns nothing 
-> in dts/upstream/src, I'm not sure this amounts to anything but 
-> dead-code? We could also always insert this node as pre/post process of 
-> the DT compilation? But I think some people want to reuse the exact same 
-> DTB (like, the binary itself) between U-Boot and the Linux kernel.
+sorry for the really late reply.
 
-In my case, the /config node is inserted via *-u-boot.dtsi , I don't 
-think those DT extras are going away anytime soon, esp. because of the 
-'bootph-*' properties.
-
-> I guess we can start with checking if the /config node exists and we can 
-> figure something smarter once we need it?
-> 
-> [...]
-> 
->>> 2- Add info about which DTBOs were applied to the kernel DTB?
+>> Does it also work if you 'setenv usb_pgood_delay 2000' ?
 >>
->> SPL DTOs or DTOs applied from kernel fitImage ? Or a merging of those ?
+> No, the USB stick is still not initialized.
 > 
-> DTOs that U-Boot proper applies to the kernel DTB either via fitimage 
-> configs, maybe also via syslinux (via 
-> `fdtoverlays`/`devicetree-overlay`) and the like?
+>> Can you include the 5ms patch ?
+> 
+> I've attached the patch which makes it work. Of course, I'm not sure if this is the correct way to fix the problem. You can apply the patch on the master branch.
 
-Isn't that something that would be better (=more flexible and fixable if 
-broken without bootloader update) done in a boot script which could be 
-embedded in a fitImage ?
+Does this delay have to be added to every control message (unlikely) or 
+to some specific control message (likely) ?
+
+Could you try and use the debug() statement in xhci_submit_control_msg() 
+, as well as move the mdelay(5) there , to find out which exact control 
+message requires this extra delay ? I also suspect this may not really 
+be related to a specific control message, but instead some early part of 
+initialization .
