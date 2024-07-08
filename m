@@ -4,81 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79FDC3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 14:11:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C64CC3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 14:14:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D2B788768;
-	Mon,  8 Jul 2024 16:11:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BB62188758;
+	Mon,  8 Jul 2024 16:14:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gPY2DGwa";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1720448059;
+	bh=BC4ZuTWUirLEcB84bKR1trzhKQu6vqfL78vbyoIIs7Q=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=nAOUTb2SittdomVnqds0U7hbcq6a0wX8IRSQToYgVgqiAoThRoJi9W8KupKDgTy/g
+	 V/jFJ+7AZ3+lTw5cBb2IFOsVHNtcstOuL0covd7CVKoELRBu04/LdwmtJImee07KoG
+	 /Y53AZ91rbJO4yTWA7bFE3Pn5a7+1uk+BbOMSNaY/eObQUkUQvbfjKK5WepPWbKECE
+	 7Gc8H/k+U4dtlWjAXjQwFbAbVYjLA3jfCJaJLENhH8GOHcMDA9aAWC/lSjoCrwntCh
+	 s32TJWqJuUlyBeVBFCNYbcAzuKKkaBFx+LfMm2zgoFzH7wMkiahRysOQLFfHeYEVVK
+	 VndtCkuMnD0FQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BE668875B; Mon,  8 Jul 2024 16:11:50 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D65B588763; Mon,  8 Jul 2024 16:14:18 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E95F8875B
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 16:11:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3AA488756
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 16:14:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5c229aa4d35so1952484eaf.3
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 07:11:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720447907; x=1721052707; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jEvgMOliL3QlcC+i0eA3P3nz41qpeOhfATfaeHW/XUA=;
- b=gPY2DGwaJR+vST2C5izEGUIGvkwqG+9CjbLcJhAFBIVOht3wDVDzlKGKVzLgOuAPvn
- tkVaecBPxeob4PMwHfWG0Mfq4a4xsLm0jVq6kG2c8Ss/caIXON1ibpkyQuGoeAjt5/vR
- zr/u5JW9iW7OSk+wicFxAJ6YO4n8WsD1sHgmE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720447907; x=1721052707;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jEvgMOliL3QlcC+i0eA3P3nz41qpeOhfATfaeHW/XUA=;
- b=Wnbsxfs1FLfqwvd4iyPtQx18EnGgawoy2BBc7bUjG175lFDXdd8aW8OV8Y3n1fBgz9
- p8QYW7QY4PM6+gDf4laRID0SXKgpjsqQ5AzvhYVpN1wD4ESK1MV/HnZZ0UZJ0IlD0NFu
- HkoMInBdHRXVSDD89EMWWgtDV2UGrMdDknpMCwdWX+OntmK1Z3UbPLhYRRq8aqneSeP2
- pw01SEGjE+zfbixNQ0zY5oG7gZCEB5LcVucWU/bCp2Ot1Lp9VYBqvAos8162QqbQJPZc
- 98yBSTtY7rHmDn/86IXoAUu44Su0daSnLAO7/hD623q1sgVYxNy/EKOIhuETHAUmoXpE
- XNPA==
-X-Gm-Message-State: AOJu0YwLzF7Ef8zptd+0RhVkQIl/8+Zzyt4XsiOu48fQvT1Fgt1phuwO
- XJPAnoOQHGHjz2B3CZjZ+qf8cjTxiMkLa265cZm45CjBzD++1tnIuRT0PZ0tbtY=
-X-Google-Smtp-Source: AGHT+IHf6+FiNj2S1oKsZ/k0+095VI8kUcmPmWVYQqt7LCXHdDSgKE+LMUxfTZtAjUqBQNJGFGATfQ==
-X-Received: by 2002:a05:6870:5ba7:b0:254:bd24:de83 with SMTP id
- 586e51a60fabf-25e2b8cee7amr10332745fac.12.1720447906916; 
- Mon, 08 Jul 2024 07:11:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
- [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25ea9fe85bdsm8076fac.15.2024.07.08.07.11.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 07:11:46 -0700 (PDT)
-Date: Mon, 8 Jul 2024 08:11:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
-Subject: Re: [RFC PATCH v2 18/48] lmb: introduce a function to add memory to
- the lmb memory map
-Message-ID: <20240708141142.GB38804@bill-the-cat>
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-19-sughosh.ganu@linaro.org>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4WHmMV55LCz9tBs;
+ Mon,  8 Jul 2024 16:14:14 +0200 (CEST)
+Message-ID: <8ecbf593-fee0-4b34-82c2-6c1d1d6da821@denx.de>
+Date: Mon, 8 Jul 2024 16:14:13 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YxCx89w9/NqkQGco"
-Content-Disposition: inline
-In-Reply-To: <20240704073544.670249-19-sughosh.ganu@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v3] configs: add mvebu_espressobin_ultra-88f3720_defconfig
+Content-Language: en-US
+To: Benjamin Schneider <bschnei@gmail.com>, u-boot@lists.denx.de
+Cc: Benjamin Schneider <ben@bens.haus>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <20240530044815.176360-1-ben@bens.haus>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240530044815.176360-1-ben@bens.haus>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,52 +71,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/30/24 06:47, Benjamin Schneider wrote:
+> Add support for a Marvell Armada 3720 device variant
+> 
+> Signed-off-by: Benjamin Schneider <ben@bens.haus>
 
---YxCx89w9/NqkQGco
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Applied to u-boot-marvell/master
 
-On Thu, Jul 04, 2024 at 01:05:14PM +0530, Sughosh Ganu wrote:
+Thanks,
+Stefan
 
-> Introduce a function lmb_add_memory() to add available memory to the
-> LMB memory map. Call this function during board init once the LMB data
-> structures have been initialised.
->=20
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since V1:
-> * Add memory only till ram_top to the LMB memory map, instead of all
->   enumerated memory.
->=20
->  include/lmb.h | 11 +++++++++++
->  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 53 insertions(+)
+> 
+> Changes in v3:
+> - Fix typo in MAINTAINERS
+> 
+>   board/Marvell/mvebu_armada-37xx/MAINTAINERS   |   5 +
+>   .../mvebu_espressobin_ultra-88f3720_defconfig | 106 ++++++++++++++++++
+>   2 files changed, 111 insertions(+)
+>   create mode 100644 configs/mvebu_espressobin_ultra-88f3720_defconfig
+> 
+> diff --git a/board/Marvell/mvebu_armada-37xx/MAINTAINERS b/board/Marvell/mvebu_armada-37xx/MAINTAINERS
+> index 9b0afeef10..e96499e161 100644
+> --- a/board/Marvell/mvebu_armada-37xx/MAINTAINERS
+> +++ b/board/Marvell/mvebu_armada-37xx/MAINTAINERS
+> @@ -9,3 +9,8 @@ ESPRESSOBin BOARD
+>   M:	Konstantin Porotchkin <kostap@marvell.com>
+>   S:	Maintained
+>   F:	configs/mvebu_espressobin-88f3720_defconfig
+> +
+> +ESPRESSOBin Ultra BOARD
+> +M:	Ben Schneider <ben@bens.haus>
+> +S:	Maintained
+> +F:	configs/mvebu_espressobin_ultra-88f3720_defconfig
+> diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> new file mode 100644
+> index 0000000000..c6ffaaabca
+> --- /dev/null
+> +++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> @@ -0,0 +1,106 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_CPU_INIT=y
+> +CONFIG_ARCH_MVEBU=y
+> +CONFIG_TEXT_BASE=0x00000000
+> +CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
+> +CONFIG_TARGET_MVEBU_ARMADA_37XX=y
+> +CONFIG_SF_DEFAULT_SPEED=40000000
+> +CONFIG_ENV_SIZE=0x10000
+> +CONFIG_ENV_OFFSET=0x3F0000
+> +CONFIG_ENV_SECT_SIZE=0x10000
+> +CONFIG_DM_GPIO=y
+> +CONFIG_OF_UPSTREAM=y
+> +CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-3720-espressobin-ultra"
+> +CONFIG_SYS_LOAD_ADDR=0x6000000
+> +CONFIG_PCI=y
+> +CONFIG_AHCI=y
+> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +CONFIG_DISTRO_DEFAULTS=y
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +# CONFIG_DISPLAY_BOARDINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_BOARD_EARLY_INIT_F=y
+> +CONFIG_BOARD_LATE_INIT=y
+> +CONFIG_SYS_MAXARGS=32
+> +CONFIG_CMD_FUSE=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_MTD=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_SATA=y
+> +CONFIG_CMD_SPI=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_WDT=y
+> +CONFIG_CMD_TFTPPUT=y
+> +CONFIG_CMD_CACHE=y
+> +CONFIG_CMD_TIME=y
+> +CONFIG_CMD_BTRFS=y
+> +CONFIG_CMD_EXT4_WRITE=y
+> +CONFIG_CMD_SQUASHFS=y
+> +CONFIG_CMD_FS_UUID=y
+> +CONFIG_MAC_PARTITION=y
+> +CONFIG_ENV_OVERWRITE=y
+> +CONFIG_ENV_IS_IN_SPI_FLASH=y
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_ARP_TIMEOUT=200
+> +CONFIG_NET_RETRY_COUNT=50
+> +CONFIG_NET_RANDOM_ETHADDR=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_AHCI_MVEBU=y
+> +CONFIG_LBA48=y
+> +CONFIG_SYS_64BIT_LBA=y
+> +CONFIG_CLK=y
+> +CONFIG_CLK_MVEBU=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_MV=y
+> +CONFIG_MISC=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_XENON=y
+> +CONFIG_MTD=y
+> +CONFIG_DM_MTD=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_ISSI=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_SPANSION=y
+> +CONFIG_SPI_FLASH_STMICRO=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_MTD=y
+> +CONFIG_PHY_MARVELL=y
+> +CONFIG_PHY_FIXED=y
+> +CONFIG_PHY_GIGE=y
+> +CONFIG_DM_DSA=y
+> +CONFIG_MV88E6XXX=y
+> +CONFIG_MVNETA=y
+> +CONFIG_MVMDIO=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCI_AARDVARK=y
+> +CONFIG_PHY=y
+> +CONFIG_MVEBU_COMPHY_SUPPORT=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_ARMADA_37XX=y
+> +CONFIG_DM_REGULATOR_GPIO=y
+> +CONFIG_DEFAULT_ENV_IS_RW=y
+> +CONFIG_MVEBU_A3700_UART=y
+> +CONFIG_MVEBU_A3700_SPI=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ARMADA_37XX=y
+> +CONFIG_SHA1=y
+> +CONFIG_DM_RTC=y
+> +CONFIG_RTC_PCF8563=y
+> +# CONFIG_DEBUG_UART=y
+> +# CONFIG_DEBUG_UART_BASE=0xd0012000
+> +# CONFIG_DEBUG_UART_CLOCK=25804800
+> +# CONFIG_DEBUG_UART_SHIFT=2
+> +# CONFIG_DEBUG_UART_ANNOUNCE=y
 
-Checkpatch:
-ERROR: space prohibited before that close parenthesis ')'
-#78: FILE: lib/lmb.c:274:
-+                       if (rgn_top > ram_top )
+Viele Grüße,
+Stefan Roese
 
---=20
-Tom
-
---YxCx89w9/NqkQGco
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaL854ACgkQFHw5/5Y0
-tyxgdwv+INGFGUP+Z9SzLZrh/I+K1KsGSUEHsL86ZwRzNsvYlUnQm6iKOiAlze0v
-C1Qjxz6UAueB2PQWie//aKFiUG+kss0cX+pd8sMKo0Z81kwctOMP7SfJaTM3SniJ
-GxZABQIFTC5QqsvBft1sGQ5fIUuwRDcOJWDsoQjQBokiAVFG/Zz13jHGzGB24hC6
-daeFzp+BQAmct7KFzkivV2no8ClSshsrdNBT1hTC3JSfjXBXG94JSafNMplOG7aT
-du+20pW4jD5YVsQtXa20budrYisrXQKfBK9bkgjdI4/xQtK1TGSTTFBuEzQhnPIk
-WAzieJwJ0YfAbq31zoPuHDgyeWuMYYHmQZuEK8EuXuB7I7783PSzt9hjOjQ5kkyS
-UGCL6J6Wbi2CMw6jT7kw98NoBmBdohNErUinxNloCQO7KtEaZmesMfX9wBJEcubK
-/O83vtif5XRcMUjFRjdNKYeA/8WqqBBFLxNNlEjIq3vZFM4W7PKtAc5DwiOtwGHf
-vCTCdKCz
-=MWed
------END PGP SIGNATURE-----
-
---YxCx89w9/NqkQGco--
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
