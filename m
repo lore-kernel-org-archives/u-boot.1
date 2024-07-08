@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E04F5C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 17:42:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F77C3DA41
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 17:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50FF188811;
-	Mon,  8 Jul 2024 19:41:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B6B75887F5;
+	Mon,  8 Jul 2024 19:42:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HL6lqdn0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kA+J7cin";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D742887F5; Mon,  8 Jul 2024 19:41:55 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 30D5687919; Mon,  8 Jul 2024 19:42:00 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEB6A8880B
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 19:41:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CDB988823
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 19:41:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-70361745053so1001367a34.0
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 10:41:52 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5c661e75fcfso1101044eaf.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 10:41:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720460512; x=1721065312; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720460516; x=1721065316; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OmvplBiiU3YPMIIO17qgICrTowL0pxOcg8fYVcauVd4=;
- b=HL6lqdn0Vr208TkSr0EsS0RvTrr25zXGIlPPcMG9z6QZZef5rVcDnGFphYrsSFmP2T
- dGpFzJZWdwabLO7lUepZWN7sREJtlzG1EZ3po8J4Divwfjlx0T8wryfuyVvhLrx3ZtDM
- Xn3oWLmM3J8VDBpJuV0f4lG/mnrfz4TppWoeg=
+ bh=BTuimonjaI64dF1Cysd6j2KcCTavGS9MAUd8g7BynR8=;
+ b=kA+J7cinDqbiYHjQjUsVzFjAUgygpH7sIvw0ZryElh4RAJLV6kViTgodVHg152r9QZ
+ ZKg2MptUIIyOSiHSboRlqJIcvAVnRGg3FkO+9Qxyjkz5fWy2XBkyJpTcBF9NZZ3kcwZb
+ bCdDpmz87SSVOijotmfh59Y6VEKk+QwffGtpc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720460512; x=1721065312;
+ d=1e100.net; s=20230601; t=1720460516; x=1721065316;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OmvplBiiU3YPMIIO17qgICrTowL0pxOcg8fYVcauVd4=;
- b=Yj6nbpaN5oaI5SQCOA3PjVh8TopeZgIEqt7WmW+NffVhXlzGARnht95xUuIG8/zAna
- D7qzRygyCyDnb6iqR4JhH79Ki5i0Evd5fb8RSlp2w040Ukm66UvwpiS/P1yZ8ZEUWVUf
- jsZm1gBz7Xq8p0B/fBJQtBkMJyXaY7zEB6OD3ng8DU9RyJPyE9CEsgyXkkzNTm+0JLN/
- OQIt4bKtCEPMkyl2/zpXwFwEgPHB70hISZHHfLuh9WdC2rVqetJly7akSO0GobD0XO92
- cMzx2wgfD0ke/PyJ9UhvtdhgsVK9IMhCdPg7K3fQ/icz+8vRh7IVnmqU5jOP7VLWulzb
- f9qg==
-X-Gm-Message-State: AOJu0YxeSD1D3LgyGTBgF8bx+s/XrZZkzd6MpYuiGCI9BB30xGqBFpaJ
- CzTK0TZfpliIY6+cVaCpLJXD143msLvTWItlV5ur1c1OxxG29iC/9PbqfN0D8po23EyftjMPvJo
- SHnY=
-X-Google-Smtp-Source: AGHT+IHO1LaDBJs7GxG/aJnbb8qfqavRz9VTwhYtzT/mjTxBAPQSwcMoMlS6NiQNQ6JJYJ1Il4VnWw==
-X-Received: by 2002:a05:6830:18f0:b0:700:cb2c:1867 with SMTP id
- 46e09a7af769-70375fc9ed2mr18281a34.18.1720460511715; 
- Mon, 08 Jul 2024 10:41:51 -0700 (PDT)
+ bh=BTuimonjaI64dF1Cysd6j2KcCTavGS9MAUd8g7BynR8=;
+ b=scdXZQtAzXFMtCffNeuatYqImqUL70nqnxUJmfhB4Gtwp6hCr0tOvBmhy5NtrJ0J+I
+ wphrvUHF6NCWECDMM8ZGeu7Po8ft3rEjhAsuYjfrFw0sc2HXoIZsnLrdeN/x1G34nhnu
+ vmVUulPydL4Aiqm+Z7I6rm8jJMkzb2cUWZWIoYJ+f82LG6BceedhWdV8GeVBwEKurx57
+ IvhfKmxTp55qv3Bs++Gt/Yn+Syl7cObW9h61oaJmMk3vbH/6Hk66NTZnQc9HmB8QXA/Z
+ 1qZEixliW2uoM/ciC2WYe/yz32nb/dxJyq8/QrMaujvUz0AB0enP/NA6GoomOHX4Gm7f
+ vLyw==
+X-Gm-Message-State: AOJu0Yx+jkwsh0Zr4yVfiqin7ll5gA9SqmldgC0d+qx0yqyDk+t7lFpv
+ ao4UNwCLrD8ZBsX+VCIGi5aLk+6yR616L4Rzd/dpg5xDAmu59Tl+9WnOasznA7Y=
+X-Google-Smtp-Source: AGHT+IFYAcnqZja53UH9D4RCcT/AJnFKohL9fOy7V31MpnDB4Y9pmB+IDaSR0/rkAPIAs+2Orvwl3w==
+X-Received: by 2002:a05:6871:24e0:b0:25e:56a:9665 with SMTP id
+ 586e51a60fabf-25eaebc6866mr48331fac.43.1720460515808; 
+ Mon, 08 Jul 2024 10:41:55 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
  [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70374fc0b18sm73733a34.55.2024.07.08.10.41.51
+ 586e51a60fabf-25eaa22588dsm89360fac.37.2024.07.08.10.41.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 10:41:51 -0700 (PDT)
-Date: Mon, 8 Jul 2024 11:41:49 -0600
+ Mon, 08 Jul 2024 10:41:55 -0700 (PDT)
+Date: Mon, 8 Jul 2024 11:41:53 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Philip Oberfichtner <pro@denx.de>
-Subject: Re: [PULL] u-boot-usb/master
-Message-ID: <20240708174149.GJ38804@bill-the-cat>
-References: <20240706154651.63607-1-marex@denx.de>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20240706
+Message-ID: <20240708174153.GK38804@bill-the-cat>
+References: <20240706204547.15708-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0RISTZTo8qX4Fr2x"
+ protocol="application/pgp-signature"; boundary="nIrtPQli23GBVSA2"
 Content-Disposition: inline
-In-Reply-To: <20240706154651.63607-1-marex@denx.de>
+In-Reply-To: <20240706204547.15708-1-festevam@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,13 +90,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0RISTZTo8qX4Fr2x
+--nIrtPQli23GBVSA2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jul 06, 2024 at 05:46:39PM +0200, Marek Vasut wrote:
+On Sat, Jul 06, 2024 at 05:45:47PM -0300, Fabio Estevam wrote:
 
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/master, thanks.
+>=20
 > The following changes since commit fd46ea0e701920eb205c2bce9d527bf0dec10b=
 59:
 >=20
@@ -105,35 +108,37 @@ On Sat, Jul 06, 2024 at 05:46:39PM +0200, Marek Vasut wrote:
 >=20
 > are available in the Git repository at:
 >=20
->   git://source.denx.de/u-boot-usb.git master
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-master-20240706
 >=20
-> for you to fetch changes up to 2fc8638403c740e2dffb8d338bb58694779fd0f9:
+> for you to fetch changes up to 3d4c29258f8b4c4a5cf4ce79fb1ac80f66e4cf65:
 >=20
->   usb: Assimilate usb_get_descriptor() to linux (2024-07-06 14:45:34 +020=
-0)
+>   clk: imx: add mux ops for i.MX8M composite clk (2024-07-06 15:40:04 -03=
+00)
 >=20
+> u-boot-imx-master-20240706
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---0RISTZTo8qX4Fr2x
+--nIrtPQli23GBVSA2
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaMJN0ACgkQFHw5/5Y0
-tyxHAQv+L32xTp8nQlNX5xcRqqgFb4FG57XDVHZZtobOxRDpIPAo2wJoYe1yCdkC
-EA1a8OhkXSzkwHWNCenULKPvXEyoBDnie6gyIviuoBAr0q1h3tJ8xalzOReP4Jly
-kVHQfx/nE97aRMeX82E5YxYQjI/V9LSAmOVIgb/mFqKUtjUw2qpPrqK5R9oMWTVG
-geQpjPBUPO7WzJfHUyJ1qR8C7pNKktoB2jQhg+chfle5G8zkEwqRwmHy54obZjvv
-WkElmN8HFdIvHkV2fNQLLj0Ijn8kmQw16ZGgA42YNE9If55dcSWbJYR+TkDmkuuQ
-xOTBLJTWfP12EuHic9xoq6eGtbqM/MeLXe5/A2z3xkMogxv8uIyCiEicv/U4fsjo
-jFRulLQ5FjIypyQIVPkHBnGcEKy6QobiD1yhZtdSE9yTTEi5IZb87TX1wfukvaSl
-lAODeXTGNTuRPdxAGEBTXWcony8jfu5rPJAkrf+0tRaYT3pcK2kO1E7iohbh7EPf
-5Z5lfjnC
-=Q4s8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaMJOEACgkQFHw5/5Y0
+tyy2MwwAlGH15ELaRgtVrjzPBBZq6BT8Uov1PcqzVT6r3j+8rkPoMAYeooepRmee
+kRGXta4fNZ9ODDCLwlA7XBEdEI6eeJfKezjMjCmOcPh7oloDR1fepBhx6Kh7PD5o
+zKbZNSSgKbSHCYvtl7nufvNSgkVM2xx/M7k5C9ZCIAEPsbrWF+kusPpjA0iYPApI
+SMZAZgGzbopsca2/sj8fzyi9SIVHIChN7/6tNlk+1gQQSSiEbOghx3oRGO0gt2MD
+zP/n1mUGSKJb+poal1I/hCSrFW3pwZJ5/zwp46rnTeq6KB2zYiYiOhMR/zRiMvF5
+VWOAPw8hjmRLGVvESK97EFm/ONXQ+K9G39gDtLt+vxgIOtVELkRWZE44gQaJeFnj
+PD8Q/nMK3/gqKY1Nq7pGkfa29DEj5XKzWI6yskSG6Qh/bC6XKwacGG614hI3CZdQ
+tLbAqFLxfCDowflfWwjAhGaRKP+X4EM0x6Zo4fFbfIj/JLsJqk4F9jGQrEfzyblB
+eHqYLG/8
+=7pM3
 -----END PGP SIGNATURE-----
 
---0RISTZTo8qX4Fr2x--
+--nIrtPQli23GBVSA2--
