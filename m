@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61E68C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B321C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:44:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C202E87EBD;
-	Mon,  8 Jul 2024 08:32:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 54CED87B4D;
+	Mon,  8 Jul 2024 08:44:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="fzG1gRqm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 928F3884DC; Mon,  8 Jul 2024 08:32:12 +0200 (CEST)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6EAC487B84; Mon,  8 Jul 2024 08:44:39 +0200 (CEST)
+Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA63E83333
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:32:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 222568792A
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:44:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id C2FCA240002;
- Mon,  8 Jul 2024 06:32:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1720420329;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Zswb2gaNk97IllrUQU0TFGiZRh24Vb8Y3fvPz5plUKU=;
- b=fzG1gRqmIDEWc3fYATYksDzGI8ZrqUI/CfhwYuLiIopj8ghqO3wCtDZ8/imikhLkjXIKPs
- W1ITFue87n7DHbcqz3vN/DgUebRyjMCbCjUuacSWTzUa9tycPA51XtiNbr8mG9b1IMwBrr
- jACBN/4ZB8B8ft3woQFQGgpODB+DvdCeeAo2x/4SwoG+0WzTT9eafTX7J6NWCdPlUZSjew
- McPfkYaTTzZnY7HfxW97VqLGF8T88JivBP2KWitplNheLfKK3+QUu+3Evs76sq+/8i790u
- Ua3TZXSml0RTF20SvzP8zDvUccqmeJVPu6bHLiP7xCZGkFo6DxFC3N08HOnXQg==
-Date: Mon, 8 Jul 2024 08:32:08 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Michael Walle <michael@walle.cc>, devicetree@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- u-boot@lists.denx.de, linux-kernel@vger.kernel.org, =?UTF-8?B?UmFmYcWC?=
- =?UTF-8?B?IE1pxYJlY2tp?= <rafal@milecki.pl>
-Subject: Re: [PATCH] dt-bindings: nvmem: convert U-Boot env to a layout
-Message-ID: <20240708083208.322f4418@xps-13>
-In-Reply-To: <20240705225821.13196-1-zajec5@gmail.com>
-References: <20240705225821.13196-1-zajec5@gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
+Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
+ by localhost (Postfix) with ESMTP id 4WHZNh40l4z9sSf;
+ Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
+Received: from pegase2.c-s.fr ([172.26.127.65])
+ by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5_ddA9nvCo88; Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4WHZNh33Fjz9sSH;
+ Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 573898B76C;
+ Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id Iez7dRzS1t9s; Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
+Received: from [172.25.230.108] (unknown [172.25.230.108])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 226C18B763;
+ Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
+Message-ID: <706aea50-d577-4694-980b-3c8f32b23653@csgroup.eu>
+Date: Mon, 8 Jul 2024 08:44:36 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] zlib: Fix big performance regression
+To: Tom Rini <trini@konsulko.com>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
+ <20240627193455.GE38804@bill-the-cat> <20240627194006.GG38804@bill-the-cat>
+ <d53c76b8-2962-4b8e-b2d5-b969a0cf08cf@csgroup.eu>
+ <20240630145422.GH38804@bill-the-cat>
+ <a40866e3-025f-493c-b1f7-db3bb1bb5bb2@csgroup.eu>
+ <c88fbe6b-1205-4b73-ae16-2a4ae1fa9df7@csgroup.eu>
+ <20240705154712.GK38804@bill-the-cat>
+Content-Language: fr-FR
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+In-Reply-To: <20240705154712.GK38804@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,35 +75,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rafa=C5=82,
 
-zajec5@gmail.com wrote on Sat,  6 Jul 2024 00:58:21 +0200:
 
-> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
->=20
-> U-Boot environment variables can be stored in various data sources. MTD
-> is just one of available options. Refactor DT binding into a layout so
-> it can be used with UBI volumes and other NVMEM devices.
->=20
-> Link: https://lore.kernel.org/all/20231221173421.13737-1-zajec5@gmail.com/
-> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
-> ---
-> I'm sending this PATCH without Linux changes to see if this is the
-> right approach - for developers and (DT) maintainers to review it first.
->=20
-> My previous attempt (see above Link) turned out in refusal so I'm just
-> trying to save some time in case this one goes wrong as well.
->=20
-> Hopefully the included example (which I really think we should add)
-> explains well how I think this binding should be used with layouts.
->=20
-> If I get some positive feedback I'll work on V2 with actual Linux
-> changes.
->=20
+Le 05/07/2024 à 17:47, Tom Rini a écrit :
+> On Sun, Jun 30, 2024 at 08:49:08PM +0200, Christophe Leroy wrote:
+>>
+>>
+>> Le 30/06/2024 à 20:28, Christophe Leroy a écrit :
+>>>
+>>>
+>>> Le 30/06/2024 à 16:54, Tom Rini a écrit :
+>>>> On Sun, Jun 30, 2024 at 10:47:06AM +0200, Christophe Leroy wrote:
+>>>>>
+>>>>>
+>>>>> Le 27/06/2024 à 21:40, Tom Rini a écrit :
+>>>>>> On Thu, Jun 27, 2024 at 01:34:55PM -0600, Tom Rini wrote:
+>>>>>>> On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
+>>>>>>>
+>>>>>>>> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+>>>>>>>> brings a big performance regression in inflate_fast(), which leads
+>>>>>>>> to watchdog timer reset on powerpc 8xx.
+>>>>>>>>
+>>>>>>>> It looks like that commit does more than what it describe, it
+>>>>>>>> especially removed an important optimisation that was doing copies
+>>>>>>>> using halfwords instead of bytes. That unexpected change multiplied
+>>>>>>>> by almost 4 the time spent in inflate_fast() and increased by 40%
+>>>>>>>> the overall time needed to uncompress linux kernel image.
+>>>>>>>>
+>>>>>>>> So partially revert that commit but keep post incrementation as it
+>>>>>>>> is the initial purpose of said commit.
+>>>>>>>>
+>>>>>>>> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+>>>>>>>> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+>>>>>>>> ---
+>>>>>>>>     lib/zlib/inffast.c | 51
+>>>>>>>> ++++++++++++++++++++++++++++++++++++----------
+>>>>>>>>     1 file changed, 40 insertions(+), 11 deletions(-)
+>>>>>>>
+>>>>>>> Both this, and my mostly revert lead to CI failures around compression
+>>>>>>> tests:
+>>>>>>> https://source.denx.de/u-boot/u-boot/-/jobs/859329
+>>>>>>
+>>>>>> A full revert however, is fine.
+>>>>>>
+>>>>>
+>>>>> Is it that ? :
+>>>>>
+>>>>> FAILED
+>>>>> test/py/tests/test_ut.py::test_ut[ut_compression_compression_test_gzip]
+>>>>>
+>>>>> It seems like when the optimisation was added by commit
+>>>>> cd514aeb996e ("zlib:
+>>>>> Optimize decompression"), only the pre-increment implementation was
+>>>>> available.
+>>>>>
+>>>>> When POSTINC was added by commit e89516f031db ("zlib: split up to match
+>>>>> original source tree"), I guess it was not verified because POSTINC is
+>>>>> #undef by zlib.h.
+>>>>>
+>>>>> With the following change I don't get the FAILED
+>>>>> ut_compression_compression_test_gzip CI anymore
+>>>>> (https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/jobs/859937)
+>>>>>
+>>>>> diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
+>>>>> index c271d85ea1..5dc0574202 100644
+>>>>> --- a/lib/zlib/inffast.c
+>>>>> +++ b/lib/zlib/inffast.c
+>>>>> @@ -257,7 +257,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+>>>>>                           sfrom = (unsigned short *)(from - OFF);
+>>>>>                           loops = len >> 1;
+>>>>>                           do
+>>>>> -                           PUP(sout) = get_unaligned(++sfrom);
+>>>>> +                           PUP(sout) = get_unaligned(sfrom++);
+>>>>>                           while (--loops);
+>>>>>                           out = (unsigned char *)sout + OFF;
+>>>>>                           from = (unsigned char *)sfrom + OFF;
+>>>>
+>>>> Ah, thanks! Testing again now.
+>>>>
+>>>
+>>> That's probably not enough. I thought other failures were unrelated but
+>>> I gave it a try with a full revert and I get no failure at all with that
+>>> so there must be other things.
+>>>
+>>> I find that pat16 = *(sout-2+2*OFF) suspicious, sout being a short it
+>>> means -4 bytes which is not what is expected I think.
+>>
+>> That's it. I get all green with the following, see
+>> https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/pipelines/21391
+>>
+>> diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
+>> index c271d85ea1..69268caee8 100644
+>> --- a/lib/zlib/inffast.c
+>> +++ b/lib/zlib/inffast.c
+>> @@ -257,14 +257,14 @@ void inflate_fast(z_streamp strm, unsigned start)
+>>   			sfrom = (unsigned short *)(from - OFF);
+>>   			loops = len >> 1;
+>>   			do
+>> -			    PUP(sout) = get_unaligned(++sfrom);
+>> +			    PUP(sout) = get_unaligned(sfrom++);
+>>   			while (--loops);
+>>   			out = (unsigned char *)sout + OFF;
+>>   			from = (unsigned char *)sfrom + OFF;
+>>   		    } else { /* dist == 1 or dist == 2 */
+>>   			unsigned short pat16;
+>>
+>> -			pat16 = *(sout-2+2*OFF);
+>> +			pat16 = *(sout-1+OFF);
+>>   			if (dist == 1)
+>>   #if defined(__BIG_ENDIAN)
+>>   			    pat16 = (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
+> 
+> Now that the release is out, can you please do a new patch to
+> re-introduce the optimization required on your platform? A revert of
+> "bbacdd3ef7762fbdeab43ceea5205d1fd0f25bbd" is required first (and
+> separate) and I'll push that shortly. If you don't have time currently,
+> I can try and v2 your original patch with these changes included, thanks!
+> 
 
-I am still in favor of this change. I know from a binding perspective
-it might be questionable; but from an OS perspective it makes total
-sense to deprecated the old U-Boot env "device" driver in favor of this.
-
-Thanks,
-Miqu=C3=A8l
+I will try to send something tomorrow.
