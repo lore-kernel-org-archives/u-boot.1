@@ -4,61 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B321C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:44:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF01C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54CED87B4D;
-	Mon,  8 Jul 2024 08:44:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
+	by phobos.denx.de (Postfix) with ESMTP id 8070987D2F;
+	Mon,  8 Jul 2024 08:49:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=imag.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=imag.fr header.i=@imag.fr header.b="xoGnG2cs";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EAC487B84; Mon,  8 Jul 2024 08:44:39 +0200 (CEST)
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
+ id C024A882AA; Mon,  8 Jul 2024 08:49:30 +0200 (CEST)
+Received: from zm-mta-out-3.u-ga.fr (zm-mta-out-3.u-ga.fr [152.77.200.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 222568792A
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:44:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=csgroup.eu
+ by phobos.denx.de (Postfix) with ESMTPS id BE96187D2F
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
-Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4WHZNh40l4z9sSf;
- Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5_ddA9nvCo88; Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4WHZNh33Fjz9sSH;
- Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 573898B76C;
- Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id Iez7dRzS1t9s; Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
-Received: from [172.25.230.108] (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 226C18B763;
- Mon,  8 Jul 2024 08:44:36 +0200 (CEST)
-Message-ID: <706aea50-d577-4694-980b-3c8f32b23653@csgroup.eu>
-Date: Mon, 8 Jul 2024 08:44:36 +0200
+ dmarc=none (p=none dis=none) header.from=imag.fr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=etienne.duble@imag.fr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=imag.fr; s=2022;
+ t=1720421368; bh=HMY5D0HaOhqjB8z7PofcTX1KKZaKm1eabMZ3lLWgzRA=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=xoGnG2cskAEfvtUC2IzExXa/7eAGDQQTbKCR2W0KbNVDgyjv5P0aiObY3YkCcqjJQ
+ 8PasAKWxq3GL1AbF3fS8AU21UUtglWrEvfPB+X/sIEO5m1IB/EtQtqrkyds/lV25cQ
+ EzWa2xC6ZUfd+s2T92eLK96svElcKECJlZzceVR26+7os98kRcj2WvFKAgQeSrPU4Q
+ 3U50CeuY3N9yUazP3IVAvgDTDUweuFTRR3pjN1gtFnmOmYciP+AGQbyzDcIHsYyJBK
+ LnmQzyxpcC7bDSMjSPkYfx6+VWiiAUQoxKKWzwzAx6/NDWGEsXeJYX+aJxn09nI7+M
+ 2T86lQSXsAeUQ==
+Received: from mailhub.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 6015A4022A;
+ Mon,  8 Jul 2024 08:49:28 +0200 (CEST)
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhub.u-ga.fr (Postfix) with ESMTP id 5B899100068;
+ Mon,  8 Jul 2024 08:49:28 +0200 (CEST)
+Received: from [129.88.53.250] (pimlig-dock-duble.imag.fr [129.88.53.250])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: dublee@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id DA51C140093;
+ Mon,  8 Jul 2024 08:49:26 +0200 (CEST)
+Message-ID: <a5070d95-e444-4ed3-bba8-24377c5d75d7@imag.fr>
+Date: Mon, 8 Jul 2024 08:49:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] zlib: Fix big performance regression
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-References: <9756b956da953de2c32278a81f711cf3ac281bad.1719476684.git.christophe.leroy@csgroup.eu>
- <20240627193455.GE38804@bill-the-cat> <20240627194006.GG38804@bill-the-cat>
- <d53c76b8-2962-4b8e-b2d5-b969a0cf08cf@csgroup.eu>
- <20240630145422.GH38804@bill-the-cat>
- <a40866e3-025f-493c-b1f7-db3bb1bb5bb2@csgroup.eu>
- <c88fbe6b-1205-4b73-ae16-2a4ae1fa9df7@csgroup.eu>
- <20240705154712.GK38804@bill-the-cat>
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-In-Reply-To: <20240705154712.GK38804@bill-the-cat>
+Subject: Re: [PATCH 2/3] rockchip: fix wrong PCI range address in rk3568 dtsi
+From: =?UTF-8?Q?Etienne_Dubl=C3=A9?= <etienne.duble@imag.fr>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ joe hershberger <joe.hershberger@ni.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot <u-boot@lists.denx.de>
+References: <1506177052.15003206.1719232828107.JavaMail.zimbra@univ-grenoble-alpes.fr>
+ <6e542e4b-9785-4ce5-b10a-7ed1b54131a8@cherry.de>
+ <2b902244-0688-432b-bd04-061a083a0fbd@imag.fr>
+ <8224b226-49ba-4a6a-a736-3c0dfee0aa57@kwiboo.se>
+ <b238dae1-17f8-48c4-a75c-5d6002a9bea7@imag.fr>
+ <12057632-0ea4-45c5-8c98-8f689c0338db@kwiboo.se>
+ <9b6692fb-6856-4cd7-ab18-19a33eef1db4@imag.fr>
+Content-Language: en-US
+In-Reply-To: <9b6692fb-6856-4cd7-ab18-19a33eef1db4@imag.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Greylist: Whitelist-UGA SMTP Authentifie (dublee@univ-grenoble-alpes.fr) via
+ smtps-465 ACL (42)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,120 +93,34 @@ X-Virus-Status: Clean
 
 
 
-Le 05/07/2024 à 17:47, Tom Rini a écrit :
-> On Sun, Jun 30, 2024 at 08:49:08PM +0200, Christophe Leroy wrote:
+Le 25/06/2024 à 13:31, Etienne Dublé a écrit :
+>> The bus addresses should be isolated to each pci controller if I am not
+>> mistaken, so changing the bus address was probably just done as a
+>> workaround because of some other unknown bug.
+>
+> OK.
+>
+>> Hum, could be an issue in pci core of U-Boot that expect unique bus
+>> addresses across all pci controllers.
 >>
->>
->> Le 30/06/2024 à 20:28, Christophe Leroy a écrit :
->>>
->>>
->>> Le 30/06/2024 à 16:54, Tom Rini a écrit :
->>>> On Sun, Jun 30, 2024 at 10:47:06AM +0200, Christophe Leroy wrote:
->>>>>
->>>>>
->>>>> Le 27/06/2024 à 21:40, Tom Rini a écrit :
->>>>>> On Thu, Jun 27, 2024 at 01:34:55PM -0600, Tom Rini wrote:
->>>>>>> On Thu, Jun 27, 2024 at 10:25:21AM +0200, Christophe Leroy wrote:
->>>>>>>
->>>>>>>> Commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
->>>>>>>> brings a big performance regression in inflate_fast(), which leads
->>>>>>>> to watchdog timer reset on powerpc 8xx.
->>>>>>>>
->>>>>>>> It looks like that commit does more than what it describe, it
->>>>>>>> especially removed an important optimisation that was doing copies
->>>>>>>> using halfwords instead of bytes. That unexpected change multiplied
->>>>>>>> by almost 4 the time spent in inflate_fast() and increased by 40%
->>>>>>>> the overall time needed to uncompress linux kernel image.
->>>>>>>>
->>>>>>>> So partially revert that commit but keep post incrementation as it
->>>>>>>> is the initial purpose of said commit.
->>>>>>>>
->>>>>>>> Fixes: 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
->>>>>>>> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
->>>>>>>> ---
->>>>>>>>     lib/zlib/inffast.c | 51
->>>>>>>> ++++++++++++++++++++++++++++++++++++----------
->>>>>>>>     1 file changed, 40 insertions(+), 11 deletions(-)
->>>>>>>
->>>>>>> Both this, and my mostly revert lead to CI failures around compression
->>>>>>> tests:
->>>>>>> https://source.denx.de/u-boot/u-boot/-/jobs/859329
->>>>>>
->>>>>> A full revert however, is fine.
->>>>>>
->>>>>
->>>>> Is it that ? :
->>>>>
->>>>> FAILED
->>>>> test/py/tests/test_ut.py::test_ut[ut_compression_compression_test_gzip]
->>>>>
->>>>> It seems like when the optimisation was added by commit
->>>>> cd514aeb996e ("zlib:
->>>>> Optimize decompression"), only the pre-increment implementation was
->>>>> available.
->>>>>
->>>>> When POSTINC was added by commit e89516f031db ("zlib: split up to match
->>>>> original source tree"), I guess it was not verified because POSTINC is
->>>>> #undef by zlib.h.
->>>>>
->>>>> With the following change I don't get the FAILED
->>>>> ut_compression_compression_test_gzip CI anymore
->>>>> (https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/jobs/859937)
->>>>>
->>>>> diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
->>>>> index c271d85ea1..5dc0574202 100644
->>>>> --- a/lib/zlib/inffast.c
->>>>> +++ b/lib/zlib/inffast.c
->>>>> @@ -257,7 +257,7 @@ void inflate_fast(z_streamp strm, unsigned start)
->>>>>                           sfrom = (unsigned short *)(from - OFF);
->>>>>                           loops = len >> 1;
->>>>>                           do
->>>>> -                           PUP(sout) = get_unaligned(++sfrom);
->>>>> +                           PUP(sout) = get_unaligned(sfrom++);
->>>>>                           while (--loops);
->>>>>                           out = (unsigned char *)sout + OFF;
->>>>>                           from = (unsigned char *)sfrom + OFF;
->>>>
->>>> Ah, thanks! Testing again now.
->>>>
->>>
->>> That's probably not enough. I thought other failures were unrelated but
->>> I gave it a try with a full revert and I get no failure at all with that
->>> so there must be other things.
->>>
->>> I find that pat16 = *(sout-2+2*OFF) suspicious, sout being a short it
->>> means -4 bytes which is not what is expected I think.
->>
->> That's it. I get all green with the following, see
->> https://source.denx.de/u-boot/custodians/u-boot-mpc8xx/-/pipelines/21391
->>
->> diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
->> index c271d85ea1..69268caee8 100644
->> --- a/lib/zlib/inffast.c
->> +++ b/lib/zlib/inffast.c
->> @@ -257,14 +257,14 @@ void inflate_fast(z_streamp strm, unsigned start)
->>   			sfrom = (unsigned short *)(from - OFF);
->>   			loops = len >> 1;
->>   			do
->> -			    PUP(sout) = get_unaligned(++sfrom);
->> +			    PUP(sout) = get_unaligned(sfrom++);
->>   			while (--loops);
->>   			out = (unsigned char *)sout + OFF;
->>   			from = (unsigned char *)sfrom + OFF;
->>   		    } else { /* dist == 1 or dist == 2 */
->>   			unsigned short pat16;
->>
->> -			pat16 = *(sout-2+2*OFF);
->> +			pat16 = *(sout-1+OFF);
->>   			if (dist == 1)
->>   #if defined(__BIG_ENDIAN)
->>   			    pat16 = (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
-> 
-> Now that the release is out, can you please do a new patch to
-> re-introduce the optimization required on your platform? A revert of
-> "bbacdd3ef7762fbdeab43ceea5205d1fd0f25bbd" is required first (and
-> separate) and I'll push that shortly. If you don't have time currently,
-> I can try and v2 your original patch with these changes included, thanks!
-> 
+>> Will run some quick tests on my R5C later.
+>
+> OK, thanks for looking at it.
+>
 
-I will try to send something tomorrow.
+Hello Jonas,
+
+Could you have a look at this issue with the 2nd interface on the nanopi 
+r5c, and your idea about a possible issue in U-Boot core about 
+non-unique PCI bus addresses?
+
+Thanks,
+Etienne
+
+
+-- 
+Etienne Dublé
+CNRS / LIG - Bâtiment IMAG
+700 avenue Centrale - 38401 St Martin d'Hères
+Bureau 426 - Tel 0457421431
+
