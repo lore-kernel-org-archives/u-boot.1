@@ -4,135 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 021A3C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE0F3C3DA42
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95749887CB;
-	Mon,  8 Jul 2024 17:39:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 64CA788700;
+	Mon,  8 Jul 2024 17:47:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BvdmZ2qm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N1f2Kog7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 036DE8879C; Mon,  8 Jul 2024 17:39:57 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20618.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::618])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B593488701; Mon,  8 Jul 2024 17:47:03 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81E42887C4
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:39:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 484138869A
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:47:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Sam.Povilus@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LLFmuC2HIZjvC8unzWOt5u0d38GOtj77M6ylBaDvHvHYaoavW3D7KKtLZfKE7tZJqqLm8GZYkyBY5xPHLyazRWTGLm9HO+EWrcVCEV1bzLpCE+k89/7EhhlKTUNKaklualT5e+V214B9F887FHU+QhHwudgJGZnlr5OAkkInoC0Rfkf3l0sdSJGE7dOY7Udedq+vLHaVMRSF34225ZerKQdewm/zgALwVeft7E8icJcN9KbTHIhHsKMpIwyg0VnN5SCm32j4ZQ9XG2dsEKaoyhJWAcgHT2FxuiyabQ36W3YKeyIPl5pSJBf44Gdqi57yyvl250kzuFXjT67d93l5NA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3mjPBT76d9UHSGcdTV4sQmKQakAlG2FfasQ0b5Luq7Q=;
- b=GkClv2o7SzbqRlcH9ezj+lBP4K48guyzBjKcQ7eSuhzNOXummKpFuO6C/FwAVnS5/R2uO0MB9x7jyffKFPmmUnIgwhUNUCVvkGF3fmvulPfOJVXEPs/AC/8XnsrP3ojJpS9qRiqcxdW1wopkMTL1XvuWXfQfF2p1GLS0P7m9O9sI7n8rq69sLOdMyae9pryL5ieW0yPS13+mExjSFyFzlwK2sio+xaIuLRPKvsxSLJLLV7bKk4z6cbwAuh8qRQRY4WlicgG+WtNzrYDeJMvoy0NVwJVu9pro75GbqHDzu1II3xRf7jtJoHt77xK1AGPu/WF0P4DODfTk9Px+Wwm3pg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3mjPBT76d9UHSGcdTV4sQmKQakAlG2FfasQ0b5Luq7Q=;
- b=BvdmZ2qmYam3Y4S0MWxl2FSumMIKF7ZwbN695fRYO2Fhr3Snpj1cP9QGS2Mwh0h98IaZ7X3tVlqw7+T0mdFFnv4rwl3TBtep/jDHamopJpxU8XzZcXEkvHqo4/z4ituqq//GoLhAxELPecMKa5t5zDLLZKZcL1Xm45iFuq1FtTU=
-Received: from SN6PR2101CA0023.namprd21.prod.outlook.com
- (2603:10b6:805:106::33) by PH0PR12MB8824.namprd12.prod.outlook.com
- (2603:10b6:510:26f::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.33; Mon, 8 Jul
- 2024 15:39:47 +0000
-Received: from SA2PEPF00001509.namprd04.prod.outlook.com
- (2603:10b6:805:106:cafe::fe) by SN6PR2101CA0023.outlook.office365.com
- (2603:10b6:805:106::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.11 via Frontend
- Transport; Mon, 8 Jul 2024 15:39:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7762.17 via Frontend Transport; Mon, 8 Jul 2024 15:39:47 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 8 Jul
- 2024 10:39:44 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 8 Jul
- 2024 10:39:44 -0500
-Received: from xcoapps69.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 8 Jul 2024 10:39:43 -0500
-From: Sam Povilus <sam.povilus@amd.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <xypron.glpk@gmx.de>,
- <u-boot@lists.denx.de>
-CC: <sam.povilus@amd.com>, <git@amd.com>
-Subject: [RFC v3 0/2]  FIT documentation link vs copy
-Date: Mon, 8 Jul 2024 09:39:39 -0600
-Message-ID: <20240708153941.1045588-1-sam.povilus@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6f8d0a00a35so4005657a34.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 08:47:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1720453620; x=1721058420; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KnqwTYO/AwU9pZEMCtmzQEZAKKlxe3jPU+lHwLGz3R4=;
+ b=N1f2Kog7A2TyKyn8S1qPsc+4q86ant7tK9i/0lFPijl/choW0vwFCB8kRFpEiTZGXa
+ s+aPU0+AIoZHS4Oc+7uSoYD4sbBLiYPAJ8gFXSGZlifcgwskGO8ccYdT2ZM73lJM+p7O
+ usVbzB8MyNRhOoxByRQfdm55w+jHTFX+XInxM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720453620; x=1721058420;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KnqwTYO/AwU9pZEMCtmzQEZAKKlxe3jPU+lHwLGz3R4=;
+ b=Adm3RZvzklmYQ3NKh607WHT80Y5sJQGVKPdY2TsEhbKi6c/kXFMxy8WCZWTX4UxhQb
+ rXUnKIuYBbS7BQucx2vIbOKD4uNAP6ARBd++hOP5IJQllSGc02P5waBAM/oYxMOFpClf
+ ujESx37HRhFodAPAUQ90IdXd+To++jj5YOrx+LjHspS9DQVhzczb9YuFcEneq9nVfBl+
+ A912kg3DGO5SWJj2ruj1/6Q4p/vxkpxb/YspHWbwPor7qegYL/D+z/8EVHHQpqPadFcW
+ ivzIBkny9jrdpMjS5FaZNAyIY6d7GTfDo7/ToD06rhRJ1efrHev0KsrwwsP5mgB/e756
+ gNtQ==
+X-Gm-Message-State: AOJu0YyOMEn3YrM0xPquq+IMGOHQuf9HGKCe5tjhZ42BqR4/LZW5i16B
+ Vez0CDXI2qk4HMwUxhCjSKUvwUCY0uBVhdA52xhz7NeU4ExlcDxsYJ7szQ82yVA=
+X-Google-Smtp-Source: AGHT+IEPDrYU3WSPs9rzH53754YfRQeIOL18OJS4BCxI9l03ZxRk/rkfVZuaqTKgrmZLPSFJdg0UuA==
+X-Received: by 2002:a05:6870:5ba7:b0:25e:281e:190f with SMTP id
+ 586e51a60fabf-25e2bb47545mr11439253fac.23.1720453619820; 
+ Mon, 08 Jul 2024 08:46:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
+ [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25eaa225461sm39761fac.45.2024.07.08.08.46.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jul 2024 08:46:59 -0700 (PDT)
+Date: Mon, 8 Jul 2024 09:46:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Scaria Kochidanadu <s-kochidanadu@ti.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, mkorpershoek@baylibre.com,
+ abdellatif.elkhlifi@arm.com, sumit.garg@linaro.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ semen.protsenko@linaro.org, marek.vasut+renesas@mailbox.org,
+ nathan.morrison@timesys.com, devarsht@ti.com, j-luthra@ti.com,
+ vigneshr@ti.com, praneeth@ti.com, nm@ti.com, khasim@ti.com,
+ rogerq@kernel.org, francesco.dolcini@toradex.com, afd@ti.com,
+ jan.kiszka@siemens.com
+Subject: Re: [PATCH 1/6] sound: ti: Add sound support for am625 board in Uboot
+Message-ID: <20240708154656.GE38804@bill-the-cat>
+References: <20240708075207.37207-1-s-kochidanadu@ti.com>
+ <20240708075207.37207-2-s-kochidanadu@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: sam.povilus@amd.com does not designate
- permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|PH0PR12MB8824:EE_
-X-MS-Office365-Filtering-Correlation-Id: e6d41763-7410-41dc-362d-08dc9f6432c9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4vZH0E1Kq/G2Mj0j8lQ1qtpS3ryPLqMgyglleUz2nj9Z87OlzShiihKkUeag?=
- =?us-ascii?Q?liFulhXDcxM/UsqD+NVUU1UzjM11rFmzZcYAEtPasAPfcO5CPcyobFMkk9oF?=
- =?us-ascii?Q?fiCeVIp10I1KnUxcJ7Ykp28dQ3zQPAjUlWJYCVborJ54LFa47pA7pWNXrFoq?=
- =?us-ascii?Q?OdmA1LmSdR/jZnOxomhMcCIKhn82hbpVYgBLfXd/9YYkZrkkNLocQ5Nr13uK?=
- =?us-ascii?Q?PGTi5sSGv6EFNllmXAunMwcti051Yqrzwkhx7RIpyuEy/Zy9gp+Ad7/0SyDS?=
- =?us-ascii?Q?oDaR2mE4jdKDSQQw6wOqfXZ6PW9C5hwvmF7UUgUtrGzSykG5vwBdizVJIrfn?=
- =?us-ascii?Q?Ul66aIxiwXpPLdQ5vbxayw9ow3mFJ/8yIMknOi04WIHnZzQUIEecOHA+CvvF?=
- =?us-ascii?Q?o/neH35+6YpnoOTcDw9X5ANCNSPWVwpT2ROgFSYvXcrW1eADmgu4W4y+4IU6?=
- =?us-ascii?Q?NXntyEoSfbnRN6vyjT/77h5QVd1DCsH1OV6/XH1Eqf08RgxRAm/q6itP5iit?=
- =?us-ascii?Q?g31LnWvhQbu6ID3VCfAaEYs2vKHpW0uaMnb/yFlCw+izYGnDTf74OA4ORRn8?=
- =?us-ascii?Q?Ti6PdE4FkMJ8uKhCPiM3gqtizaTlu/k13MN2f7TFau4jKFo7MboUX432bYZQ?=
- =?us-ascii?Q?qKbtCLr2hX8soPqJUqpXa+pIA6yxtLOOwDbf01PzJhNOr56k0C1Hldsy1QDE?=
- =?us-ascii?Q?28LJ0rZBcuJU/2tHXRUa8yUlvEqOnU0bmb0uahjl295zaOWw4fSGrlOKIass?=
- =?us-ascii?Q?xJpg6sX9nHLKB1fOsoT7a2pV3xA0gWHmGDozTuH7kpkqDXTxKvlIvomNPirE?=
- =?us-ascii?Q?7vtQZm/Op6LSoG+1yz/AXIwUvWe6JbzWznbtS7knq53quY0diXb9uVwGZYk0?=
- =?us-ascii?Q?1t7sPPr+RhGER1+NRlaekYutgL/7iJOslvOMmrks67L3XXexcHrRI9P0DrOj?=
- =?us-ascii?Q?AmWxISeKCiMroxXhN6JzcEZOEcyy3aJfJvGIAde6VVmHA9BzwDBTA2uU+5W9?=
- =?us-ascii?Q?W00p11DvaaYHX+2bVsxKvIl3DSKejYxLqdyFExlm2mW64E5sjrR3yac/pVb6?=
- =?us-ascii?Q?L9ouXPXDA/P43FqTL0LjT2gYRWTtx4S6xYOs0W1QTr+l8QEHw7fu+cWHwSzn?=
- =?us-ascii?Q?e3QrRFHREV6eqn3uyaefdsibra1vBq1KobwUmkx2Nrm64S1RvYWlaF1q/ZCH?=
- =?us-ascii?Q?/IBoXQ49RdGbUAfoQ5UnFE9bE8HN5LOrqbahuDKLIh+6c11tuTXIwJl6s18o?=
- =?us-ascii?Q?hCl+IZX6K6qUn5sQwq7xewnLKuYxzA0gBUMXVDyFnaknn4Y9hTQgVcqS2nIo?=
- =?us-ascii?Q?shDJK7K1B75J176HRfogHlJGyUEfTd13jP9ZvaesVo84yNvsarIEXj2bcnSr?=
- =?us-ascii?Q?25d9S/EdMKxp9UBN5glyuWTe64MCIvd9gE8kOOnbMgAagq9Lg4lG7FI+FqQJ?=
- =?us-ascii?Q?b/t0knDIV0BZgRID1KKCsHloa8y9ehpL?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2024 15:39:47.4861 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e6d41763-7410-41dc-362d-08dc9f6432c9
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8824
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="x0tlmS9iQlV1v3ZK"
+Content-Disposition: inline
+In-Reply-To: <20240708075207.37207-2-s-kochidanadu@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,19 +97,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm proposing linking the FIT documentation instead of double book keeping it, it does have the disadvantage of making it more difficult to see the documentation especially if offline. 
 
-v2: update table of contents instead of removing
-v3: remove duplicate entries, provide commit message
+--x0tlmS9iQlV1v3ZK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Sam Povilus (2):
-  doc: Remove FIT documentation that is elsewhere
-  doc: add missing table of content links
+On Mon, Jul 08, 2024 at 01:22:02PM +0530, Scaria Kochidanadu wrote:
 
- doc/usage/fit/index.rst              |  26 +-
- doc/usage/fit/source_file_format.rst | 682 +--------------------------
- 2 files changed, 23 insertions(+), 685 deletions(-)
+> Add a UCLASS_SOUND driver for Texas Instruments SoCs which ties together
+> the tlv320aic3106 audio codec and MCASP I2S controller. Enable audio
+> playback functionality by taking a data pointer and data size as the
+> sound data. The uboot sound play command takes time and frequency as
+> input and creates the data for a beep sound with the given parameters,
+> which is then passed to the sound play function.
+[snip]
+> +++ b/drivers/sound/ti_sound.c
+> @@ -0,0 +1,119 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2024 Texas Instruments Incorporated - https://www.ti.co=
+m/
+> + * Scaria M Kochidanadu, s-kochidanadu@ti.com
+> + *
+> + * based on the uboot samsung sound driver, which is
+> + *
+> + * Copyright 2018 Google, LLC
+> + * Written by Simon Glass <sjg@chromium.org>
+> + */
+> +
+> +#include <asm/u-boot.h> /* boot information for Linux kernel */
+> +/* Pull in stuff for the build system */
+> +#ifdef DO_DEPS_ONLY
+> +#include <env_internal.h>
+> +#endif
+> +#include <audio_codec.h>
+> +#include <dm.h>
+> +#include <i2s.h>
+> +#include <log.h>
+> +#include <sound.h>
+> +#include <asm/gpio.h>
 
--- 
-2.34.1
+Please audit this list. I really am confused by <env_internal.h>.
 
+> +static int ti_sound_stop_play(struct udevice *dev)
+> +{
+> +	/* This function is necassary to satisfy the function calls
+> +	 * in the Uboot command: sound play
+> +	 */
+> +	return 0;
+
+/*
+ * Like this...
+ */
+
+[snip]
+> +static const struct udevice_id ti_sound_ids[] =3D {
+> +	{ .compatible =3D "simple-audio-card" },
+> +	{ }
+> +};
+
+Adding an actual simple-audio-card framework for U-Boot would be great.
+This driver implies (and is?) TI-centric, instead. So lets rework this
+to be split appropriately? Thanks.
+
+--=20
+Tom
+
+--x0tlmS9iQlV1v3ZK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaMCe0ACgkQFHw5/5Y0
+tyxzSAv+JrdO7y0B55HXONCHN9VXzgICq/pRjI1CzgLw1CAHLM9RvF8sCueNW2x1
+kG21jXwZ8gPyaxqJzXL8FlAOqI2SN9Was0lCCEUmkdaTOuYbKyA5tCnZ7ycKd3Vk
+wph7pFwqRm+u0SzVhZpJsBPWa7VGxrmxJlIGFMltcrycTJQZBxlUlGPl2f7595SZ
+zEk5HxudpZc1hQs8GGwKDnAd6UVmj7NNccnn5pjJJdVtfZ9BcXh9YIB7wFB8LwFz
+BVgSGa0dwsm1Fvirz3secaLbC1qW1OeqZ2vLWGBhsHkQpm2bx0MsaTW8lr0qwPH6
+vqMddOMjagpEfavMkeZzDeyaPzQuCUkQxMvTnopOJr571zOFI5Q2989au15n19oE
+d7wAwxRuF9mdOn8eIVZLHEMe0p0QXnz7kmc2BslxL7sUazPzvBcWVdgIHj9bepvm
+3W5W+J3Ba9pbG9mJafYoFuQ2cr8gRJ62/Ym7pRZAgwQBZn30v99uufwIhaUDNu9J
+Niyv9dqM
+=vUnf
+-----END PGP SIGNATURE-----
+
+--x0tlmS9iQlV1v3ZK--
