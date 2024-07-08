@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B5A1C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E21C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 16:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2484887E8;
-	Mon,  8 Jul 2024 17:49:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EA208870C;
+	Mon,  8 Jul 2024 18:04:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mn5rYA0p";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="N98s4Bh7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC3DB887EA; Mon,  8 Jul 2024 17:49:48 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0980F886C8; Mon,  8 Jul 2024 18:04:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D49F8869A
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:49:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1614B887B9
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 18:04:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-24c9f892aeaso2001587fac.2
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 08:49:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720453785; x=1721058585; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+jlE6bYDmjcdHw2e1/srlyy2UVG1+aE0P7LSVK5cG2I=;
- b=mn5rYA0pCibRBlhZcnxW2d1iFBHXauBbguNylUMZs3gvQLg/NJwdkacuKA4d5mLiT8
- COXNRuDMJ20281hiNtxUQwzoCNbItEt0U8yifwKgmasDcEfrEu4JzC9zwG0xSIR3AK+a
- b9C5DPAMmhD2ecSPlL9OhRUuKtqnVN96DWREs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720453785; x=1721058585;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+jlE6bYDmjcdHw2e1/srlyy2UVG1+aE0P7LSVK5cG2I=;
- b=AyfdTYetvnlCf9KZOcXdWj3dlv42SMxybaFwnzRnXegpNJkz84XRwdvxbqoLhcnF4i
- 8KDQiNyhN7H5Gi8T66KftLeWTetTiItWMIWSDREGLDIYaluUYnRsw9Uu7vhjMWumSiQ5
- n/iy2uwSPWhnpkBCNwVO2nW2bGvangEG2SK+Rof8pPdlOPfhn2zuQHKdPKH1OxPvJedB
- C7wH1xG25iFxx+Nf+Rih9qmY6PEs/euobVaLhxvQ0wSy9LiStAPK65COZEnNnmZI6ytH
- ixdycMcEQlxHxar3ohD6xYNhFRdLGUsnUbHQzFC0jMbdYjsjXsaew9dIPBANUspL948b
- qYTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcX0SVecDn+GOr/K5Yeao4iJtmX7UWGR0WoS/yJXTRd8ykaoQKrrW004eYlhFb9BCYYUUePttHUjpTx9sx3q/tqKmLFQ==
-X-Gm-Message-State: AOJu0YxBYW5ARIhexNUcYoLbswQNx1Tq2N8OsanaN2LhbyJDvnuJKb9P
- Jno/DRAVnsst3Tf+Dbwc2iQzwO+MZ5rvsswpw095QkWUr6hdeUlykkoMsXnif/E=
-X-Google-Smtp-Source: AGHT+IGRHpzVuBic1ZyYXk0Xp4XEDnIPwT6m4IwmVcABNG3RTbhlqnjwlmQsS5SthIi0JbN8R52o+g==
-X-Received: by 2002:a05:6870:b01e:b0:25b:6d53:d294 with SMTP id
- 586e51a60fabf-25e2bb475a0mr12318086fac.23.1720453785402; 
- Mon, 08 Jul 2024 08:49:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
- [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25ea9f8792fsm45359fac.4.2024.07.08.08.49.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 08:49:45 -0700 (PDT)
-Date: Mon, 8 Jul 2024 09:49:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Subject: Re: [PATCH v3 1/5] linux/bitmap.h: add bitmap_empty helper
-Message-ID: <20240708154942.GH38804@bill-the-cat>
-References: <20240708-b4-qcom-rpmh-v3-0-846cc6c5b728@linaro.org>
- <20240708-b4-qcom-rpmh-v3-1-846cc6c5b728@linaro.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1720454678; x=1721059478; i=xypron.glpk@gmx.de;
+ bh=WQZy1FZiu8FU7Y99DyFlnhl9LMDNYzlN1nOokIl5C1M=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=N98s4Bh7J0cN2zmRxccmqF8UBpvHVU0hklhtjSdH23ixvrgl0NKv3xmH36GomzC5
+ HT4Gu5y1DDsZgEcyUO9P//jPGubyHi1i+F/FiGN9nKE8YgNhyLqL9KLbs5qx02Anh
+ nXtWPNNGC0uIUsMZmZ7KYpAHMVZ7iTjvq+CdRML+noMZYU2qlKBS/BRtUeIgP8ITN
+ Bh0aFy/uCGa3HXZfrEJ3MI1vcd4dBeF+MkDw5QNncILnTCGGtUgaOHaOMDCmW910Y
+ Yb8JRpVoyE/9HZK1p2HOOI0V4zaQzQAPy/RIt9hcYYSBmHhuCekn8g7eWzVL0BXMq
+ Hc3RiANUSXtMqnhaBg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M5fIW-1sTbjz49fe-007xu2; Mon, 08
+ Jul 2024 18:04:38 +0200
+Message-ID: <99203b22-a57e-4f78-b4ad-221726fbf56b@gmx.de>
+Date: Mon, 8 Jul 2024 18:04:37 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="32XcNIO4ECTfBwCa"
-Content-Disposition: inline
-In-Reply-To: <20240708-b4-qcom-rpmh-v3-1-846cc6c5b728@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC v3 2/2] doc: add missing table of content links
+To: Sam Povilus <sam.povilus@amd.com>, trini@konsulko.com, sjg@chromium.org,
+ u-boot@lists.denx.de
+Cc: git@amd.com
+References: <20240708153941.1045588-1-sam.povilus@amd.com>
+ <20240708153941.1045588-3-sam.povilus@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240708153941.1045588-3-sam.povilus@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:NxONCtFtTNiTjJ5ve75uyjwCxvnCdDQyA1BZDPtyxy+Ag0I8lyU
+ w6gTT6069j8DlJ01YfcdvUu3vTFhPq/HX+TDJ9fFMaQv/xEySKaA9QuH+AbrfehDoynnip9
+ yUFNV2SBjXQtRL4g5WlIxK6dpyxOYWylJUYkl5bKtgb6ODwCT+YM5v4E6JQPX6oh0vPeyPl
+ Dgvw2vC7nUx/C48EoYGzQ==
+UI-OutboundReport: notjunk:1;M01:P0:+j9I6ZxBheA=;6U+jrzoFo3V0PdNqgv/FDEK/cXv
+ WEeasEUdS4VzhC3fR1mA7tzHSk5JLuJymMPHqjeAW25yVUYbwUD6GAIFjhl/kRJmMgN5B8JS5
+ cloLWSPnRYh/N4gaFaQNFI/10nFlAP8sNCWiyopkKLjrDug5yBnfMgVc1MvQpJ5blLH6VrDUp
+ swRHBaO009KNs+1OgcSnFGNqBAGSjzfsPSkVl5+jRVQrqGViNvyif3CRFow+1WtsFk2HRvinB
+ 5detxfv8Yu7vzYFSPzzQjC0lcbydHdNVq63f/Zyl9pcRCwa0EWLUuEbs11M0MKc+nPdclXx5l
+ 3+uaaVlxEOgHK7hD4O1zRkxIb+ETQ1/7w5IOrJbuWbYEWj92H3KWZxhrtsQVWxi0mW6VdSy9t
+ ZHaRvpdgwzJ8/aaq9z2evj0wRISN+d6SrispPYxPsad++2cxS5cJvYWsLTKIWFDDBGjGelvXx
+ 2ehYty+CY4lH93xE1gmeTUsaw+ETqIGE7adW1AJNqnl9EbgMfhaM2O5aQvY39+eP1gl7+iuEX
+ 0UR9ku+fWBfz6/a47swL2m63FvaO57PQeDj7Y9Rfasr1+A6cqYIVAWh2r5Emdtm/zc3ohRhce
+ PYpHKVylf//GtfGbB1bptTa21npw3aNvg+cLKGoHmp3vEtrwUXe2Gz1ZyyX0ro5lpl8Uo8Rkg
+ FD2Tjwt/WWuYb+zZizeasoDcCTt5vX+7srT82pWcyzF5KkR+Q8GJoUakA0o1N6fmJMhlvg0XN
+ LQPRR7bTwTcAq9gDJpfanWv2gwvctLTZm0M8EpzlupeBeKq/iZJWJLBgq+WgmickHg9gUpOdj
+ 9tmwXznVKZeRH0oq90PZR0JDNk4Siq4/vkaZlEM1jlbmg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,40 +91,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 08.07.24 17:39, Sam Povilus wrote:
+> add missing table of content links, make alphabetical
+>
+> Signed-off-by: Sam Povilus <sam.povilus@amd.com>
+> ---
+>   doc/usage/fit/index.rst | 21 ++++++++++++++++++---
+>   1 file changed, 18 insertions(+), 3 deletions(-)
+>
+> diff --git a/doc/usage/fit/index.rst b/doc/usage/fit/index.rst
+> index af2e481212..ed28dc89ae 100644
+> --- a/doc/usage/fit/index.rst
+> +++ b/doc/usage/fit/index.rst
+> @@ -10,9 +10,24 @@ images that it it reads and boots. Documentation abou=
+t FIT is available in
+>   .. toctree::
+>       :maxdepth: 1
+>
+> +    beaglebone_vboot
+>       howto
+> -    x86-fit-boot
+> +    kernel_fdt
+> +    kernel_fdts_compressed
+> +    kernel
+> +    multi
+> +    multi_spl
+> +    multi-with-fpga
+> +    multi-with-loadables
+> +    overlay-fdt-boot
+> +    sec_firmware_ppa
+>       signature
+> +    sign-configs
+> +    sign-images
+> +    source_file_format
 
---32XcNIO4ECTfBwCa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In patch 1 you delete this page.
 
-On Mon, Jul 08, 2024 at 02:20:23PM +0200, Caleb Connolly wrote:
+Run 'make html' fails on this.
 
-> Import this function from Linux.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+When changing documentation, please, build it.
 
-Since I just told someone else this too, please note that tag you're
-taking this from in the Linux Kernel, thanks.
+> +    uefi
+> +    update3
+> +    update_uboot
+>       verified-boot
+> -    beaglebone_vboot
+> -    overlay-fdt-boot
+> +    x86-fit-boot
+> +
 
---=20
-Tom
+We should avoid trailing blank lines at the end of files.
 
---32XcNIO4ECTfBwCa
-Content-Type: application/pgp-signature; name="signature.asc"
+Otherwise looks good to me.
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaMCpYACgkQFHw5/5Y0
-tyzIEwv9Gl/QUlKZnt1umcBXPSyeOL7TB8F4pdS79rXzj7RYU7hHn3JdCF8EMysQ
-TlgWFONydhfGcVh6+NS7uPr0Qy4BlbzKoaBlmmdgdTR/6TWaCjRDPnietYlwPWc6
-uxoagxqE94/VMHzuHIn2y7hNAOB8dDd1+r/vfspFk2yVaZ2rDB2296F6is3xvgRK
-8acZGZiy45J9oDLe2G0GVu2pIKDDnK01+njiyA6GH/2q7TeeW47xYCiPlkSamfVL
-trQNXyMB8EysGQ/qdhNwP19EAgJRLhHC09ap7n+uJMYD0NUv17Ubn1Wp4pNy6YBo
-SMGwYiogRNdjf4ni7tR2ydhREMXyf9lqPEAK0f1vv1NI2ISPFe4dPyY29hpRd/Yx
-5rh/PhcFFi7Pf9TCD/TZ6mogafBL4Dhg+7n4JEZHdMCH+ai8qceHVv9S46ksz/Qw
-qxwCiDJASObHslfLU0zKcNsetD0C2zwCLXmKteIGCZMZGX62p4WSJm7Rs3MYHQ3s
-jAELccoO
-=l7Rb
------END PGP SIGNATURE-----
+Heinrich
 
---32XcNIO4ECTfBwCa--
