@@ -4,77 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E90C3DA42
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 11:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607B4C3DA44
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 11:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F20188706;
-	Mon,  8 Jul 2024 13:37:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C6B1D886EE;
+	Mon,  8 Jul 2024 13:43:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dSi0juqR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 24A6A88706; Mon,  8 Jul 2024 13:37:01 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1720439039;
+	bh=pFos5dthmBQ8aWDdYOEHpJBAdqmUEX0q6stsFS39s+c=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=kiM3XauaBMN1O1b0HxjJQgNBe+QOCkrj4P7Su9yUJKm/AUQxsMmjKoRqx3taPnhdk
+	 NSOiMUHZKsezi58wZR/UiucInboihLbGKAg9MIQ8BBpvx3AZkqklzGGm0BK/E0qogz
+	 /YJAGE2GgcSXi7+AKpt4xAJPcCN8Ybc1ttjKpS0wfiYHtK/xI1BUg8E4v5bbv/2hZF
+	 7cqkmDV2RCHjJ8Mlbp10y8BljCPgTx22jh3sc9CeqXFkdvWRQbioqX8EUPiN/FFAL3
+	 u0ddj0azyl0q8KPNGDMnLVmN/hSXUyQJEShzC4/4zCKsbfqmqZ6zVmtIVhv4R5MBZT
+	 2aXWlOhtJSkHw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC35288702
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 13:36:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-57cbc2a2496so4331687a12.0
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 04:36:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720438617; x=1721043417; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OIC0Ix26GHXA/dD/sSoBgYtl8g4CoranOI/dk7mOBug=;
- b=dSi0juqRsj3pNBcWhlP5pdadqSvWrOGcEcqtH+RLu4MWHlNmK7bdpCeKRX7i4N8hF4
- BT8EHZ0WE1NKXJnETF5ZADXmkJG4Iyq02Jdwb06EOhvEiuOrg0hUkRKGIcgHbupqB6Ih
- vC88DVks28945HSqxaaYgSJJW5UXM9B8OinPa/Qu/HsmZJjd1R46CPrbf6ow9rWb5YcG
- FQnKYzmkgSC9RufQggDdVk0tHxSAAeu5Y7fwf4wdbeIZKBHx2SmPRCIseL+DbL7Fn4mf
- ebx+s7Y2VC2D1A2trx3m1/WzWdCZDpSZSX62ZoGmsCCWwRX5qX99CsldTwDEQOAS7ezU
- Iphw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720438617; x=1721043417;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OIC0Ix26GHXA/dD/sSoBgYtl8g4CoranOI/dk7mOBug=;
- b=LxTbX+8LX2VD5wbP933uSH+L9BWPoQcFYr34rM2t9lOwl2rdXR8YxoPueem08OziEN
- ehKWfRL9jTxgnU5lPK1J2VENBz7uq1EzvcO4wl+eAyn8TE415y1/tIHzqlsa6n1tdnSh
- XnmH4tt0zzfbK2/AvuijiIDOsPZsXyJTX7CK+v0InTNHIealOhFxFPOmjAZeAYQJIaU2
- H1J7/Ak54Zxfv0ifOWuj4+ggfAdtz7iSXo48Nn6g59+9N21pSgt5L/Rii0NnYKtnu7m9
- WRQGcTrnx4JFgRmHDkLWGie5f3eNeWUW0ABX/PNjdCfXwOSyuBV/nGbNKT2Jz1ufTTsJ
- jMXw==
-X-Gm-Message-State: AOJu0YysjFrZxOz0wxmv8S41gQs9UfP4GaNp2K0TinwzcTNIjp8U/MvW
- i0eK8iWdv7WJ8Ok0xidJyQlU4d7mgCYW34ZNM2iJAkURY/FGMfz/NW0NodyzU44fSpDCyzEU6za
- YohIZPaEjEfwC05nP9dlVbg2WBJOGpSBZaZWCrA==
-X-Google-Smtp-Source: AGHT+IFhL37gwkGWwL4KqgX48yhowzSs5uQXZH2r/Ds4LqWzufc0F9FaeUMftEKAx/f0qzJLSE/m2q+pilx3bn3OvoU=
-X-Received: by 2002:a05:6402:50c7:b0:57d:2c9:6497 with SMTP id
- 4fb4d7f45d1cf-58e5a7f0fd0mr10454662a12.3.1720438617105; Mon, 08 Jul 2024
- 04:36:57 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3ED4E886F0;
+ Mon,  8 Jul 2024 13:43:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1720439038;
+ bh=pFos5dthmBQ8aWDdYOEHpJBAdqmUEX0q6stsFS39s+c=;
+ h=From:To:Cc:Subject:Date:From;
+ b=VukovIlduOef0qDa6ZNsZgtctmbEZMv7Vl50c03xjy+FALG9eWbshwijZj5VECNkn
+ 6OvdBLro8fuKHzNhj3L+yLeRk9b1DF94PQ8KpO3oD8h4HYAn91JiUllXlx7RykiUvF
+ ZpQ8jKEPW/XpA6vD9t7fRhkM+XiL+LA6mYeM2z73Plk5y178tAv6JL+akZIarb9uRV
+ eSzECjaW+/ucds4be5Ojh3BuK6W2LpdbaGTuVpg5gGOpSbnLpcgLCciIViObM1klNb
+ u7iRsGSun+wupQO/MWzmebLHPYZFVHG6sP7jlfcZGgWUxQA/1pMOma6dKPLwezOpiv
+ 6Lx5pyyftrkog==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Fix secure_waitbits() mask check
+Date: Mon,  8 Jul 2024 13:43:23 +0200
+Message-ID: <20240708114344.18354-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-17-sughosh.ganu@linaro.org>
- <20240705194841.GO38804@bill-the-cat>
-In-Reply-To: <20240705194841.GO38804@bill-the-cat>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 8 Jul 2024 17:06:45 +0530
-Message-ID: <CADg8p95b2XybOZSB=YcX6hwP6mQrvxZs4tLNjhT5g3AeKve4cA@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 16/48] lmb: config: add lmb config symbols for SPL
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,62 +65,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 6 Jul 2024 at 01:18, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Jul 04, 2024 at 01:05:12PM +0530, Sughosh Ganu wrote:
->
-> > Add separate config symbols for enabling the LMB module for the SPL
-> > phase. The LMB module implementation now relies on alloced list data
-> > structure which requires heap area to be present. Add specific config
-> > symbol for the SPL phase of U-Boot so that this can be enabled on
-> > platforms which support a heap in SPL.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V1: New patch
-> >
-> >  lib/Kconfig | 12 +++++++++++-
-> >  1 file changed, 11 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/lib/Kconfig b/lib/Kconfig
-> > index 072ed0ecfa..7eea517b3b 100644
-> > --- a/lib/Kconfig
-> > +++ b/lib/Kconfig
-> > @@ -1103,7 +1103,17 @@ config LMB
-> >       default y if ARC || ARM || M68K || MICROBLAZE || MIPS || \
-> >                    NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
-> >       help
-> > -       Support the library logical memory blocks.
-> > +       Support the library logical memory blocks. This will require
-> > +       a malloc() implementation for defining the data structures
-> > +       needed for maintaining the LMB memory map.
->
-> Even today, LMB really should be def_bool y rather than an option, so
-> this series should correct that. That said...
+Do not apply bitwise AND to register value and expected value, only
+apply bitwise AND to register value and mask, and only then compare
+the result with expected value that the function polls for.
 
-Okay
+Fixes: b49105320a5b ("stm32mp: psci: Implement PSCI system suspend and DRAM SSR")
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ arch/arm/mach-stm32mp/stm32mp1/psci.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
->
-> > +config SPL_LMB
-> > +     bool "Enable LMB module for SPL"
-> > +     depends on SPL && SPL_FRAMEWORK && SPL_SYS_MALLOC
-> > +     help
-> > +       Enable support for Logical Memory Block library routines in
-> > +       SPL. This will require a malloc() implementation for defining
-> > +       the data structures needed for maintaining the LMB memory map.
->
-> The question I guess becomes when do we need LMB in SPL, exactly? And I
-> guess it's another case where it should be def_bool y (but still depends
-> on what you have here) since we need to make sure we don't overwrite
-> running SPL.
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+index e99103910d9..ffdafea464d 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+@@ -393,8 +393,7 @@ static int __secure secure_waitbits(u32 reg, u32 mask, u32 val)
+ 	asm volatile("mrrc p15, 0, %Q0, %R0, c14" : "=r" (start));
+ 	for (;;) {
+ 		tmp = readl(reg);
+-		tmp &= mask;
+-		if ((tmp & val) == val)
++		if ((tmp & mask) == val)
+ 			return 0;
+ 		asm volatile("mrrc p15, 0, %Q0, %R0, c14" : "=r" (end));
+ 		if ((end - start) > delay)
+-- 
+2.43.0
 
-So this is a question even I had. Do we really need to enable LMB in
-SPL ? The main reason for introducing the symbol was to have more
-granularity to remove the LMB code from SPL, but should this really be
-enabled in SPL is something that I am not too sure about.
-
--sughosh
-
->
-> --
-> Tom
