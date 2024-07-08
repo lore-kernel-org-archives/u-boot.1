@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A69C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 04:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D528C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:07:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF00C884F4;
-	Mon,  8 Jul 2024 06:39:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E07888644;
+	Mon,  8 Jul 2024 08:07:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="caQb3LCT";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="oYihJ4fQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A273788247; Mon,  8 Jul 2024 06:39:21 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D2DD88858B; Mon,  8 Jul 2024 08:07:52 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49AC1884F4
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 06:39:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E999C884C6
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3d9303ae2f2so397602b6e.2
- for <u-boot@lists.denx.de>; Sun, 07 Jul 2024 21:39:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720413557; x=1721018357; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9LSCTbw3/PLQZ73HlOvC+FI2dwT/S6IeOHvbiWdbedk=;
- b=caQb3LCT5DIhVAk9M1//2YzPTMxYgGzZXA0C2Fx++q7FaDeRR9GdKsFRu6YkOQ9IAU
- cIvY+j/TAg2uEKXaS47yFg36trVpjCq35WZVmhFGGDRkGPwavNZzQyDjWCnRUwQCfx38
- Pm4Zb/OJtdrg3rvLkjdD3HxZ4+mzyX43vkySZ5M9k5fSy8CbkbzNbbr7vCOtFgXpaD3a
- 9+J/+CflsV6Pmy/5vxoQF0H/YwisGRNTUosQ7qzzM5pQp2+SBdMCgEmgeeRCa9U1zGgv
- kYAmEWLpsFtiCxF2pXJRl8yQu9sZXf0TW9UU1G25/CItAFYv0t8vCaKl/uErxoVhxzx9
- Ypew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720413557; x=1721018357;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9LSCTbw3/PLQZ73HlOvC+FI2dwT/S6IeOHvbiWdbedk=;
- b=g1xeSUrXH4AlJQeilHYsh0iuCllail0DyPc7noJZYwIEFEqC9TEGPv4jmxdNNcobal
- Rbdch6bEa0PbkYNPe6inA+qIMMGJgBjJy3HSbAOC9nbopwKuSj2636+tdn0ECNDhb73F
- 2S6zy/N92jXLE+lipmuZE1feoenWlxMOX4QEwKfU0sQbvJD5NhUgdBtEXpCi1etpkest
- KcOdMEmLNVbA8n4svxpFua/In7Vba81sp1zQT7Y7Opfn1eiMNfUDRTWXfq5BP4+dYdSA
- N1+DvFbvhkWlFOWBNvhqtwrfpkGUUBqXPIbcY8/jQidFIfODWlehzw5mGf2XutU5LRc4
- HxRA==
-X-Gm-Message-State: AOJu0Yz2cKvahhQGBpiYM44fwVadJ0GCXL08BXcmQeRB3PI6oLjv3yTh
- 7ShIDJe1APZHJysAqlXRFQBTAWleY0uZEiJjbSBO54mhP4BaCgqGcJS9yg==
-X-Google-Smtp-Source: AGHT+IGV46O1KF+0w9/01F2pAntBvEsBSSipdm8syndD+CoWGpV8DWDNjlrJKwFtRjwnZWFP0g9NtQ==
-X-Received: by 2002:a05:6870:fb89:b0:23c:bc3a:6ccb with SMTP id
- 586e51a60fabf-25e2ba0402bmr10144598fac.19.1720413557214; 
- Sun, 07 Jul 2024 21:39:17 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25e22761de0sm2366735fac.54.2024.07.07.21.39.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jul 2024 21:39:16 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Phil Sutter <phil@nwl.cc>
-Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v3] arm: mvebu: Enable bootstd and other modernization for
- Synology DS414 (Armada XP) board
-Date: Sun,  7 Jul 2024 21:39:03 -0700
-Message-Id: <20240708043904.5100-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1720418870; x=1723010870;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=2H4tyr0DlbxaHG28lbq9x790tBkBUXVWbDlHAWahRLA=;
+ b=oYihJ4fQBaFV++9tdoxFAJ/lWKgevv8OS+cQAyHLduVMTT5ZMXUaAblzabQiKf4i
+ ktowqttFkQN3/oxdgiJsxjgk4onKhRFSKIRTO2/Mnl45kTCOlyjPAQCRb+0oyz9U
+ U66YaI1t12Qn3cAunw5I7K/IDrv8J0wuXAV9DovFfBE=;
+X-AuditID: ac14000a-03e52700000021bc-3f-668b8236ac35
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 1A.11.08636.6328B866;
+ Mon,  8 Jul 2024 08:07:50 +0200 (CEST)
+Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 8 Jul 2024
+ 08:07:46 +0200
+From: Daniel Schultz <d.schultz@phytec.de>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <joe.hershberger@ni.com>,
+ <w.egorov@phytec.de>
+CC: <d-gole@ti.com>, <nm@ti.com>, <mkorpershoek@baylibre.com>,
+ <upstream@lists.phytec.de>, <t.remmet@phytec.de>, <y.moog@phytec.de>,
+ <m-chawdhry@ti.com>, <kamlesh@ti.com>, <jm@ti.com>, <B.Hahn@phytec.de>,
+ Daniel Schultz <d.schultz@phytec.de>
+Subject: [PATCH 0/6] Extend SOM detection
+Date: Sun, 7 Jul 2024 23:07:28 -0700
+Message-ID: <20240708060734.4029040-1-d.schultz@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrFLMWRmVeSWpSXmKPExsWyRpKBR9esqTvNYMojIYuWtR4Wnz5kWnza
+ +ZjV4mj/GmaLSw9SLV4cm8tu8ebHWSaLqZM2s1u83dvJbtH9Tt2By+P9jVZ2j1cHVrF7nL2z
+ g9Gjv7uF1eP6me1MHsdvbGcKYIvisklJzcksSy3St0vgyjh+4QNTwS+OitknjjM3MC5j72Lk
+ 5JAQMJH42/SZrYuRi0NIYAmTRGvzX1aQhJDAPUaJ4y15IDabgJbEnS1zmUFsEYEkiWUXO1lB
+ GpgFvjNKvPj4C8jh4BAW0JQ4970MxGQRUJG41WQEUs4rYCUx5fYxJohd8hIzL31nh4gLSpyc
+ +YQFxGYGijdvnc0MYUtIHHzxghniBAWJ2dsmM8L0Tjv3mhnCDpU4smk10wRGgVlIRs1CMmoW
+ klELGJlXMQrlZiZnpxZlZusVZFSWpCbrpaRuYgSFvwgD1w7GvjkehxiZOBgPMUpwMCuJ8J5+
+ 3J4mxJuSWFmVWpQfX1Sak1p8iFGag0VJnHd1R3CqkEB6YklqdmpqQWoRTJaJg1OqgdGh4e3H
+ wBUZSv8u8xq9mh4s9uTLSsf8b1P2MU58WC5Ut3u2yGTeHXUZuyUvPn3I2CuvMPFhxSUOkTuL
+ hD78sPx3JSTU5E1T8d2dR+uffput7GYcY8KxuaCa6WJy2n9j/ZL3W10dFG0lDkg1Tr+e//fI
+ 0nMLpy6e4i8r9Iqjeu2fpze4sr/PdMpSYinOSDTUYi4qTgQA5pFqzW0CAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,227 +89,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Switch to standard boot (in include/configs/ds414.h and
-configs/ds414_defconfig)
-- Implement board_late_init() to ensure successful enumeration
-of USB3 devices
-- Remove unnecessary checkboard()
-- Updated IDENT_STRING to indicate this u-boot supports both Synology
-DS414 and DS214+ boards
-- Add SYS_THUMB_BUILD to reduce binary size
-- Add NET_RANDOM_ETHADDR
-- Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
+This patchset extends PHYTEC's SOM detection for the
+K3 platforms.
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+It adds generic support to apply overlays via the
+extension framework inside the overlays.env file. Additionally,
+the K3 mmc boot environment applies these overlays now.
 
-Changes in v3:
-- Restore misc_init_r() to support booting legacy FW.
-- Correct scripting error in EXTRA_ENV_SETTINGS_LEGACY in
-/include/configs/ds414.h
-- Remove CONFIG_PHY_ANEG_TIMEOUT from /include/configs/ds414.h. This symbol
-has been moved to Kconfig.
+It also adds the 'extension_board_scan' hook to the K3 board
+code and adds all missing configs in the phyCORE-AM62x and
+-AM64x A53 defconfigs.
 
-Changes in v2:
-- Define EXTRA_ENV_SETTINGS_LEGACY to restore default envs support for
-booting legacy FW.
+Daniel Schultz (6):
+  include: env: phytec: overlays: Add extension command
+  include: env: phytec: k3_mmc: Apply extension overlays
+  board: phytec: common: k3: Add SOM detection overlays
+  board: phytec: common: Kconfig: Enable SUPPORT_EXTENSION_SCAN
+  configs: phytec_am62x_a53_defconfig: Set CONFIG_CMD_EXTENSION
+  configs: phycore_am64x_a53_defconfig: Enable SOM detection
 
- board/Synology/ds414/ds414.c | 14 ++++----
- configs/ds414_defconfig      | 19 +++++------
- include/configs/ds414.h      | 65 +++++++++++++++++++++++++-----------
- 3 files changed, 61 insertions(+), 37 deletions(-)
+ board/phytec/common/Kconfig         |  2 ++
+ board/phytec/common/k3/board.c      | 45 +++++++++++++++++++++++++++++
+ configs/phycore_am62x_a53_defconfig |  1 +
+ configs/phycore_am64x_a53_defconfig |  2 ++
+ include/env/phytec/k3_mmc.env       |  1 +
+ include/env/phytec/overlays.env     | 20 +++++++++++++
+ 6 files changed, 71 insertions(+)
 
-diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
-index 8db810ad3e..1a4cea87e1 100644
---- a/board/Synology/ds414/ds414.c
-+++ b/board/Synology/ds414/ds414.c
-@@ -180,6 +180,13 @@ int board_init(void)
- 	return 0;
- }
- 
-+int board_late_init(void)
-+{
-+	/* Do late init to ensure successful enumeration of XHCI devices */
-+	pci_init();
-+	return 0;
-+}
-+
- int misc_init_r(void)
- {
- 	if (!env_get("ethaddr")) {
-@@ -188,10 +195,3 @@ int misc_init_r(void)
- 	}
- 	return 0;
- }
--
--int checkboard(void)
--{
--	puts("Board: DS414\n");
--
--	return 0;
--}
-diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
-index 18c741d4f2..6391c43474 100644
---- a/configs/ds414_defconfig
-+++ b/configs/ds414_defconfig
-@@ -1,5 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_CPU_INIT=y
-+CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_MVEBU=y
- CONFIG_SUPPORT_PASSING_ATAGS=y
- CONFIG_CMDLINE_TAG=y
-@@ -25,44 +26,41 @@ CONFIG_SPL_BSS_MAX_SIZE=0x4000
- CONFIG_SPL=y
- CONFIG_DEBUG_UART_BASE=0xf1012000
- CONFIG_DEBUG_UART_CLOCK=250000000
-+CONFIG_IDENT_STRING="\nSynology DS214+/DS414 2/4-Bay Diskstation"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=3
- CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 ip=off initrd=0x8000040,8M root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 flash_size=8 SataLedSpecial=1 HddHotplug=1"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; sf read ${ramdisk_addr_r} 0x3a0000 0x430000; bootm ${loadaddr} ${ramdisk_addr_r}"
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_BOARD_LATE_INIT=y
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x1bfd0
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_I2C=y
-+CONFIG_SYS_PROMPT="DS414> "
- CONFIG_SYS_MAXARGS=32
- CONFIG_CMD_I2C=y
- CONFIG_CMD_PCI=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
- CONFIG_CMD_TFTPPUT=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
- CONFIG_CMD_TIME=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
- CONFIG_CMD_JFFS2=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_CMD_UBI=y
--CONFIG_ISO_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_SPI_MAX_HZ=50000000
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ARP_TIMEOUT=200
- CONFIG_NET_RETRY_COUNT=50
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_LBA48=y
-+CONFIG_SYS_64BIT_LBA=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_MVTWSI=y
- # CONFIG_MMC is not set
-@@ -84,4 +82,3 @@ CONFIG_USB_XHCI_HCD=y
- # CONFIG_USB_XHCI_MVEBU is not set
- CONFIG_USB_XHCI_PCI=y
- CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_STORAGE=y
-diff --git a/include/configs/ds414.h b/include/configs/ds414.h
-index 6fbcec0898..9525657558 100644
---- a/include/configs/ds414.h
-+++ b/include/configs/ds414.h
-@@ -1,5 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-+ * Copyright (C) 2024 Tony Dinh <mibodhi@gmail.com>
-  * Copyright (C) 2014 Stefan Roese <sr@denx.de>
-  */
- 
-@@ -16,15 +17,8 @@
-  * U-Boot into it.
-  */
- 
--/* I2C */
- #define CFG_I2C_MVTWSI_BASE0		MVEBU_TWSI_BASE
- 
--/*
-- * mv-common.h should be defined after CMD configs since it used them
-- * to enable certain macros
-- */
--#include "mv-common.h"
--
- /*
-  * Memory layout while starting into the bin_hdr via the
-  * BootROM:
-@@ -38,21 +32,54 @@
-  * L2 cache thus cannot be used.
-  */
- 
--/* SPL */
--/* Defines for SPL */
-+/* Keep device tree and initrd in lower memory so the kernel can access them */
-+#define RELOCATION_LIMITS_ENV_SETTINGS  \
-+	"fdt_high=0x10000000\0"         \
-+	"initrd_high=0x10000000\0"
- 
--/* Default Environment */
-+/*
-+ * mv-common.h should be defined after CMD configs since it used them
-+ * to enable certain macros
-+ */
-+#include "mv-common.h"
-+
-+#ifndef CONFIG_SPL_BUILD
- 
--#define CFG_EXTRA_ENV_SETTINGS				\
--	"initrd_high=0xffffffff\0"				\
--	"ramdisk_addr_r=0x8000000\0"				\
--	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"	\
--	"ethmtu=1500\0eth1mtu=1500\0"				\
--	"update_uboot=sf probe; dhcp; "				\
--		"mw.b ${loadaddr} 0x0 0xd0000; "		\
--		"tftpboot ${loadaddr} u-boot-with-spl.kwb; "	\
-+#define KERNEL_ADDR_R	__stringify(0x1000000)
-+#define FDT_ADDR_R	__stringify(0x2000000)
-+#define RAMDISK_ADDR_R	__stringify(0x2200000)
-+#define SCRIPT_ADDR_R	__stringify(0x1800000)
-+#define PXEFILE_ADDR_R	__stringify(0x1900000)
-+
-+#define EXTRA_ENV_SETTINGS_LEGACY \
-+	"bootargs_legacy=console=ttyS0,115200 ip=off initrd=0x8000040,8M " \
-+		"root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 " \
-+		"flash_size=8 SataLedSpecial=1 HddHotplug=1\0" \
-+	"bootcmd_legacy=sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; " \
-+		"sf read ${ramdisk_addr_r} 0x3a0000 0x430000; " \
-+		"setenv bootargs $bootargs_legacy; " \
-+		"bootm ${loadaddr} ${ramdisk_addr_r}\0"	\
-+	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0" \
-+	"ethmtu=1500\0eth1mtu=1500\0" \
-+	"update_uboot=sf probe; dhcp; "	\
-+		"mw.b ${loadaddr} 0x0 0xd0000; " \
-+		"tftpboot ${loadaddr} u-boot-with-spl.kwb; " \
- 		"sf update ${loadaddr} 0x0 0xd0000\0"
- 
--/* increase autoneg timeout, my NIC sucks */
-+#define LOAD_ADDRESS_ENV_SETTINGS \
-+	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
-+	"fdt_addr_r=" FDT_ADDR_R "\0" \
-+	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
-+	"scriptaddr=" SCRIPT_ADDR_R "\0" \
-+	"pxefile_addr_r=" PXEFILE_ADDR_R "\0"
-+
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	RELOCATION_LIMITS_ENV_SETTINGS \
-+	LOAD_ADDRESS_ENV_SETTINGS \
-+	EXTRA_ENV_SETTINGS_LEGACY \
-+	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-+	"console=ttyS0,115200\0"
-+
-+#endif /* CONFIG_SPL_BUILD */
- 
- #endif /* _CONFIG_SYNOLOGY_DS414_H */
 -- 
-2.39.2
+2.25.1
 
