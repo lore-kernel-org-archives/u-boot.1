@@ -4,50 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC348C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 12:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E562C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 12:25:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 297C188712;
+	by phobos.denx.de (Postfix) with ESMTP id 9356588739;
 	Mon,  8 Jul 2024 14:24:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SGC6P63k";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DF888858B; Mon,  8 Jul 2024 08:07:26 +0200 (CEST)
-Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
+ id 2F6638861D; Mon,  8 Jul 2024 09:52:25 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37D22884C6
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:07:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=aspeedtech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5562D88444
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 09:52:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jacky_chou@aspeedtech.com
-Received: from TWMBX02.aspeed.com (192.168.0.24) by TWMBX01.aspeed.com
- (192.168.0.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.1258.12; Mon, 8 Jul
- 2024 14:07:18 +0800
-Received: from TWMBX01.aspeed.com (192.168.0.62) by TWMBX02.aspeed.com
- (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 8 Jul
- 2024 14:07:19 +0800
-Received: from twmbx02.aspeed.com (192.168.10.10) by TWMBX01.aspeed.com
- (192.168.0.62) with Microsoft SMTP Server id 15.2.1258.12 via Frontend
- Transport; Mon, 8 Jul 2024 14:07:18 +0800
-From: Jacky Chou <jacky_chou@aspeedtech.com>
-To: <ryan_chen@aspeedtech.com>, <chiawei_wang@aspeedtech.com>,
- <BMC-SW@aspeedtech.com>, <joel@jms.id.au>, <joe.hershberger@ni.com>,
- <rfried.dev@gmail.com>, <trini@konsulko.com>, <sjg@chromium.org>,
- <kobedylan@gmail.com>, <jacky_chou@aspeedtech.com>, <u-boot@lists.denx.de>
-Subject: [PATCH] net: ftgmac100: Add Aspeed AST2700 support
-Date: Mon, 8 Jul 2024 14:07:18 +0800
-Message-ID: <20240708060718.186075-1-jacky_chou@aspeedtech.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-kochidanadu@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4687qC4J055624;
+ Mon, 8 Jul 2024 02:52:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1720425132;
+ bh=6RZGEbXaS9kOR8Lth6Nrxdu1Whfh2PAXMLS55pKfkos=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=SGC6P63kWheAvZae8GES8p3VJzwKVzabsxitdsa8rcQC0e4/bgbFN7P36knuUlknn
+ zph+8LhxywnxZXRaMYZbuXrwXv3EiXJCVomFn17KflDOOA16hvfbio8iY9FdOvVkqT
+ em5HXOboRLKqM22sd17ANTcrNCWaZ1rOCz83S6Iw=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4687qCLa025615
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 8 Jul 2024 02:52:12 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ Jul 2024 02:52:11 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 8 Jul 2024 02:52:11 -0500
+Received: from localhost (scaria-hp-zbook-15-g5.dhcp.ti.com [172.24.31.134])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4687qBef115920;
+ Mon, 8 Jul 2024 02:52:11 -0500
+From: Scaria Kochidanadu <s-kochidanadu@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
+ <abdellatif.elkhlifi@arm.com>, <sumit.garg@linaro.org>,
+ <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
+ <semen.protsenko@linaro.org>, <marek.vasut+renesas@mailbox.org>,
+ <nathan.morrison@timesys.com>, <s-kochidanadu@ti.com>,
+ <devarsht@ti.com>, <j-luthra@ti.com>, <vigneshr@ti.com>,
+ <praneeth@ti.com>, <nm@ti.com>, <khasim@ti.com>, <rogerq@kernel.org>,
+ <francesco.dolcini@toradex.com>, <afd@ti.com>, <jan.kiszka@siemens.com>
+Subject: [PATCH 1/6] sound: ti: Add sound support for am625 board in Uboot
+Date: Mon, 8 Jul 2024 13:22:02 +0530
+Message-ID: <20240708075207.37207-2-s-kochidanadu@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240708075207.37207-1-s-kochidanadu@ti.com>
+References: <20240708075207.37207-1-s-kochidanadu@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: Fail (TWMBX02.aspeed.com: domain of jacky_chou@aspeedtech.com
- does not designate 192.168.10.10 as permitted sender)
- receiver=TWMBX02.aspeed.com; client-ip=192.168.10.10;
- helo=twmbx02.aspeed.com;
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-Mailman-Approved-At: Mon, 08 Jul 2024 14:24:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -65,233 +87,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support of Aspeed AST2700 SoC.  AST2700 is based on ARM64 so modify
-the DMA address related code to fit both ARM and ARM64.  Besides, the
-RMII/RGMII mode control register is moved from SCU500 to MAC50 so
-initialize the register in ftgmac100_start correspondingly.
+Add a UCLASS_SOUND driver for Texas Instruments SoCs which ties together
+the tlv320aic3106 audio codec and MCASP I2S controller. Enable audio
+playback functionality by taking a data pointer and data size as the
+sound data. The uboot sound play command takes time and frequency as
+input and creates the data for a beep sound with the given parameters,
+which is then passed to the sound play function.
 
-Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
+The code is based on the samsung sound driver[1] in uboot.
+
+Link: https://gitlab.com/u-boot/u-boot/-/blob/master/drivers/sound/samsung_sound.c [1]
+
+Signed-off-by: Scaria Kochidanadu <s-kochidanadu@ti.com>
 ---
- drivers/net/ftgmac100.c | 66 +++++++++++++++++++++++++++++++++--------
- drivers/net/ftgmac100.h | 12 ++++++++
- 2 files changed, 65 insertions(+), 13 deletions(-)
+ MAINTAINERS              |   1 +
+ drivers/sound/Kconfig    |  10 ++++
+ drivers/sound/Makefile   |   1 +
+ drivers/sound/ti_sound.c | 119 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 131 insertions(+)
+ create mode 100644 drivers/sound/ti_sound.c
 
-diff --git a/drivers/net/ftgmac100.c b/drivers/net/ftgmac100.c
-index 9fb8c12838..a909a0b309 100644
---- a/drivers/net/ftgmac100.c
-+++ b/drivers/net/ftgmac100.c
-@@ -27,6 +27,7 @@
- #include <linux/io.h>
- #include <linux/iopoll.h>
- #include <linux/printk.h>
-+#include <linux/bitfield.h>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f8afd7d51e..785afff1a7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -738,6 +738,7 @@ F:	drivers/reset/reset-ti-sci.c
+ F:	drivers/rtc/davinci.c
+ F:	drivers/serial/serial_omap.c
+ F:	drivers/soc/ti/
++F:	drivers/sound/ti_sound.c
+ F:	drivers/sysreset/sysreset-ti-sci.c
+ F:	drivers/thermal/ti-bandgap.c
+ F:	drivers/timer/omap-timer.c
+diff --git a/drivers/sound/Kconfig b/drivers/sound/Kconfig
+index 0948d8caab..be9f18b6c7 100644
+--- a/drivers/sound/Kconfig
++++ b/drivers/sound/Kconfig
+@@ -148,4 +148,14 @@ config SOUND_WM8994
+ 	  audio data and I2C for codec control. At present it only works
+ 	  with the Samsung I2S driver.
  
- #include "ftgmac100.h"
- 
-@@ -58,6 +59,15 @@
- enum ftgmac100_model {
- 	FTGMAC100_MODEL_FARADAY,
- 	FTGMAC100_MODEL_ASPEED,
-+	FTGMAC100_MODEL_ASPEED_AST2700,
++config I2S_TI
++        bool "Enable I2S support for AM62x SoCs"
++        depends on I2S
++        help
++          TI AM62x SoCs support an I2S interface for sending audio
++          data to an audio codec. This option enables support for this,
++          using one of the available audio codec drivers. Enabling this
++          option provides an implementation for sound_init() and
++          sound_play().
++
+ endmenu
+diff --git a/drivers/sound/Makefile b/drivers/sound/Makefile
+index 9b40c8012f..95aaa8521c 100644
+--- a/drivers/sound/Makefile
++++ b/drivers/sound/Makefile
+@@ -23,3 +23,4 @@ obj-$(CONFIG_SOUND_I8254)	+= i8254_beep.o
+ obj-$(CONFIG_SOUND_RT5677)	+= rt5677.o
+ obj-$(CONFIG_INTEL_BROADWELL)	+= broadwell_i2s.o broadwell_sound.o
+ obj-$(CONFIG_SOUND_IVYBRIDGE)	+= ivybridge_sound.o
++obj-$(CONFIG_I2S_TI)    += ti_sound.o
+diff --git a/drivers/sound/ti_sound.c b/drivers/sound/ti_sound.c
+new file mode 100644
+index 0000000000..a424a99b72
+--- /dev/null
++++ b/drivers/sound/ti_sound.c
+@@ -0,0 +1,119 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2024 Texas Instruments Incorporated - https://www.ti.com/
++ * Scaria M Kochidanadu, s-kochidanadu@ti.com
++ *
++ * based on the uboot samsung sound driver, which is
++ *
++ * Copyright 2018 Google, LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#include <asm/u-boot.h> /* boot information for Linux kernel */
++/* Pull in stuff for the build system */
++#ifdef DO_DEPS_ONLY
++#include <env_internal.h>
++#endif
++#include <audio_codec.h>
++#include <dm.h>
++#include <i2s.h>
++#include <log.h>
++#include <sound.h>
++#include <asm/gpio.h>
++
++static int ti_sound_setup(struct udevice *dev)
++{
++	struct sound_uc_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct i2s_uc_priv *i2s_priv = dev_get_uclass_priv(uc_priv->i2s);
++	int ret;
++
++	if (uc_priv->setup_done)
++		return -EALREADY;
++
++	ret = audio_codec_set_params(uc_priv->codec, i2s_priv->id,
++				     i2s_priv->samplingrate,
++				     i2s_priv->samplingrate * i2s_priv->rfs,
++				     i2s_priv->bitspersample,
++				     i2s_priv->channels);
++
++	if (ret) {
++		return ret;
++		printf("failed in set_params\n");
++	}
++	uc_priv->setup_done = true;
++
++	return 0;
++}
++
++static int ti_sound_play(struct udevice *dev, void *data, uint data_size)
++{
++	struct sound_uc_priv *uc_priv = dev_get_uclass_priv(dev);
++
++	return i2s_tx_data(uc_priv->i2s, data, data_size);
++}
++
++static int ti_sound_stop_play(struct udevice *dev)
++{
++	/* This function is necassary to satisfy the function calls
++	 * in the Uboot command: sound play
++	 */
++	return 0;
++}
++
++static int ti_sound_probe(struct udevice *dev)
++{
++	struct sound_uc_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct ofnode_phandle_args args;
++	ofnode node;
++	int ret;
++
++	ret = uclass_get_device_by_phandle(UCLASS_AUDIO_CODEC, dev,
++					   "ti,codec",
++					   &uc_priv->codec);
++	if (ret) {
++		debug("Failed to probe audio codec\n");
++		return ret;
++	}
++
++	node = ofnode_find_subnode(dev_ofnode(dev), "simple-audio-card,cpu");
++	if (!ofnode_valid(node)) {
++		debug("Failed to find /cpu subnode\n");
++		return -EINVAL;
++	}
++
++	ret = ofnode_parse_phandle_with_args(node, "sound-dai",
++					     "#sound-dai-cells", 0, 0, &args);
++	if (ret) {
++		debug("Cannot find phandle: %d\n", ret);
++		return ret;
++	}
++
++	ret = uclass_get_device_by_ofnode(UCLASS_I2S, args.node, &uc_priv->i2s);
++	if (ret) {
++		debug("Cannot find i2s: %d\n", ret);
++		return ret;
++	}
++	debug("Probed sound '%s' with codec '%s' and i2s '%s'\n", dev->name,
++	      uc_priv->codec->name, uc_priv->i2s->name);
++
++	return 0;
++}
++
++static const struct sound_ops ti_sound_ops = {
++	.setup	= ti_sound_setup,
++	.play	= ti_sound_play,
++	.stop_play	= ti_sound_stop_play,
 +};
 +
-+union ftgmac100_dma_addr {
-+	dma_addr_t addr;
-+	struct {
-+		u32 lo;
-+		u32 hi;
-+	};
- };
- 
- /**
-@@ -97,6 +107,8 @@ struct ftgmac100_data {
- 	/* End of RX/TX ring buffer bits. Depend on model */
- 	u32 rxdes0_edorr_mask;
- 	u32 txdes0_edotr_mask;
++static const struct udevice_id ti_sound_ids[] = {
++	{ .compatible = "simple-audio-card" },
++	{ }
++};
 +
-+	bool is_ast2700;
- };
- 
- /*
-@@ -321,6 +333,7 @@ static int ftgmac100_start(struct udevice *dev)
- 	struct eth_pdata *plat = dev_get_plat(dev);
- 	struct ftgmac100_data *priv = dev_get_priv(dev);
- 	struct ftgmac100 *ftgmac100 = priv->iobase;
-+	union ftgmac100_dma_addr dma_addr = {.hi = 0, .lo = 0};
- 	struct phy_device *phydev = priv->phydev;
- 	unsigned int maccr, dblac, desc_size;
- 	ulong start, end;
-@@ -342,6 +355,7 @@ static int ftgmac100_start(struct udevice *dev)
- 	priv->rx_index = 0;
- 
- 	for (i = 0; i < PKTBUFSTX; i++) {
-+		priv->txdes[i].txdes2 = 0;
- 		priv->txdes[i].txdes3 = 0;
- 		priv->txdes[i].txdes0 = 0;
- 	}
-@@ -352,7 +366,14 @@ static int ftgmac100_start(struct udevice *dev)
- 	flush_dcache_range(start, end);
- 
- 	for (i = 0; i < PKTBUFSRX; i++) {
--		priv->rxdes[i].rxdes3 = (unsigned int)net_rx_packets[i];
-+		unsigned int ip_align = 0;
-+
-+		dma_addr.addr = (dma_addr_t)net_rx_packets[i];
-+		priv->rxdes[i].rxdes2 = FIELD_PREP(FTGMAC100_RXDES2_RXBUF_BADR_HI, dma_addr.hi);
-+		/* For IP alignment */
-+		if ((dma_addr.lo & (PKTALIGN - 1)) == 0)
-+			ip_align = 2;
-+		priv->rxdes[i].rxdes3 = dma_addr.lo + ip_align;
- 		priv->rxdes[i].rxdes0 = 0;
- 	}
- 	priv->rxdes[PKTBUFSRX - 1].rxdes0 = priv->rxdes0_edorr_mask;
-@@ -362,10 +383,14 @@ static int ftgmac100_start(struct udevice *dev)
- 	flush_dcache_range(start, end);
- 
- 	/* transmit ring */
--	writel((u32)priv->txdes, &ftgmac100->txr_badr);
-+	dma_addr.addr = (dma_addr_t)priv->txdes;
-+	writel(dma_addr.lo, &ftgmac100->txr_badr);
-+	writel(dma_addr.hi, &ftgmac100->txr_badr_hi);
- 
- 	/* receive ring */
--	writel((u32)priv->rxdes, &ftgmac100->rxr_badr);
-+	dma_addr.addr = (dma_addr_t)priv->rxdes;
-+	writel(dma_addr.lo, &ftgmac100->rxr_badr);
-+	writel(dma_addr.hi, &ftgmac100->rxr_badr_hi);
- 
- 	/* Configure TX/RX decsriptor size
- 	 * This size is calculated based on cache line.
-@@ -394,6 +419,10 @@ static int ftgmac100_start(struct udevice *dev)
- 		FTGMAC100_MACCR_RX_RUNT |
- 		FTGMAC100_MACCR_RX_BROADPKT;
- 
-+	if (priv->is_ast2700 && (priv->phydev->interface == PHY_INTERFACE_MODE_RMII ||
-+				 priv->phydev->interface == PHY_INTERFACE_MODE_NCSI))
-+		maccr |= FTGMAC100_MACCR_RMII_ENABLE;
-+
- 	writel(maccr, &ftgmac100->maccr);
- 
- 	ret = phy_startup(phydev);
-@@ -443,9 +472,11 @@ static int ftgmac100_recv(struct udevice *dev, int flags, uchar **packetp)
- 	ulong des_start = ((ulong)curr_des) & ~(ARCH_DMA_MINALIGN - 1);
- 	ulong des_end = des_start +
- 		roundup(sizeof(*curr_des), ARCH_DMA_MINALIGN);
--	ulong data_start = curr_des->rxdes3;
-+	union ftgmac100_dma_addr data_start = { .lo = 0, .hi = 0 };
- 	ulong data_end;
- 
-+	data_start.hi = FIELD_GET(FTGMAC100_RXDES2_RXBUF_BADR_HI, curr_des->rxdes2);
-+	data_start.lo = curr_des->rxdes3;
- 	invalidate_dcache_range(des_start, des_end);
- 
- 	if (!(curr_des->rxdes0 & FTGMAC100_RXDES0_RXPKT_RDY))
-@@ -465,9 +496,9 @@ static int ftgmac100_recv(struct udevice *dev, int flags, uchar **packetp)
- 	       __func__, priv->rx_index, rxlen);
- 
- 	/* Invalidate received data */
--	data_end = data_start + roundup(rxlen, ARCH_DMA_MINALIGN);
--	invalidate_dcache_range(data_start, data_end);
--	*packetp = (uchar *)data_start;
-+	data_end = data_start.addr + roundup(rxlen, ARCH_DMA_MINALIGN);
-+	invalidate_dcache_range(data_start.addr, data_end);
-+	*packetp = (uchar *)data_start.addr;
- 
- 	return rxlen;
- }
-@@ -493,6 +524,7 @@ static int ftgmac100_send(struct udevice *dev, void *packet, int length)
- 	struct ftgmac100_data *priv = dev_get_priv(dev);
- 	struct ftgmac100 *ftgmac100 = priv->iobase;
- 	struct ftgmac100_txdes *curr_des = &priv->txdes[priv->tx_index];
-+	union ftgmac100_dma_addr dma_addr;
- 	ulong des_start = ((ulong)curr_des) & ~(ARCH_DMA_MINALIGN - 1);
- 	ulong des_end = des_start +
- 		roundup(sizeof(*curr_des), ARCH_DMA_MINALIGN);
-@@ -511,10 +543,12 @@ static int ftgmac100_send(struct udevice *dev, void *packet, int length)
- 
- 	length = (length < ETH_ZLEN) ? ETH_ZLEN : length;
- 
--	curr_des->txdes3 = (unsigned int)packet;
-+	dma_addr.addr = (dma_addr_t)packet;
-+	curr_des->txdes2 = FIELD_PREP(FTGMAC100_TXDES2_TXBUF_BADR_HI, dma_addr.hi);
-+	curr_des->txdes3 = dma_addr.lo;
- 
- 	/* Flush data to be sent */
--	data_start = curr_des->txdes3;
-+	data_start = (ulong)dma_addr.addr;
- 	data_end = data_start + roundup(length, ARCH_DMA_MINALIGN);
- 	flush_dcache_range(data_start, data_end);
- 
-@@ -577,6 +611,11 @@ static int ftgmac100_of_to_plat(struct udevice *dev)
- 	if (dev_get_driver_data(dev) == FTGMAC100_MODEL_ASPEED) {
- 		priv->rxdes0_edorr_mask = BIT(30);
- 		priv->txdes0_edotr_mask = BIT(30);
-+		priv->is_ast2700 = false;
-+	} else if (dev_get_driver_data(dev) == FTGMAC100_MODEL_ASPEED_AST2700) {
-+		priv->rxdes0_edorr_mask = BIT(30);
-+		priv->txdes0_edotr_mask = BIT(30);
-+		priv->is_ast2700 = true;
- 	} else {
- 		priv->rxdes0_edorr_mask = BIT(15);
- 		priv->txdes0_edotr_mask = BIT(15);
-@@ -667,10 +706,11 @@ static const struct eth_ops ftgmac100_ops = {
- };
- 
- static const struct udevice_id ftgmac100_ids[] = {
--	{ .compatible = "faraday,ftgmac100",  .data = FTGMAC100_MODEL_FARADAY },
--	{ .compatible = "aspeed,ast2500-mac", .data = FTGMAC100_MODEL_ASPEED  },
--	{ .compatible = "aspeed,ast2600-mac", .data = FTGMAC100_MODEL_ASPEED  },
--	{ }
-+	{ .compatible = "faraday,ftgmac100", .data = FTGMAC100_MODEL_FARADAY },
-+	{ .compatible = "aspeed,ast2500-mac", .data = FTGMAC100_MODEL_ASPEED },
-+	{ .compatible = "aspeed,ast2600-mac", .data = FTGMAC100_MODEL_ASPEED },
-+	{ .compatible = "aspeed,ast2700-mac", .data = FTGMAC100_MODEL_ASPEED_AST2700 },
-+	{}
- };
- 
- U_BOOT_DRIVER(ftgmac100) = {
-diff --git a/drivers/net/ftgmac100.h b/drivers/net/ftgmac100.h
-index 37c029aded..c38b57c954 100644
---- a/drivers/net/ftgmac100.h
-+++ b/drivers/net/ftgmac100.h
-@@ -66,6 +66,13 @@ struct ftgmac100 {
- 	unsigned int	rx_runt;	/* 0xc0 */
- 	unsigned int	rx_crcer_ftl;	/* 0xc4 */
- 	unsigned int	rx_col_lost;	/* 0xc8 */
-+	unsigned int	reserved[43];	/* 0xcc - 0x174 */
-+	unsigned int	txr_badr_lo;	/* 0x178, defined in ast2700 */
-+	unsigned int	txr_badr_hi;	/* 0x17c, defined in ast2700 */
-+	unsigned int	hptxr_badr_lo;	/* 0x180, defined in ast2700 */
-+	unsigned int	hptxr_badr_hi;	/* 0x184, defined in ast2700 */
-+	unsigned int	rxr_badr_lo;	/* 0x188, defined in ast2700 */
-+	unsigned int	rxr_badr_hi;	/* 0x18c, defined in ast2700 */
- };
- 
- /*
-@@ -158,6 +165,7 @@ struct ftgmac100 {
- #define FTGMAC100_MACCR_RX_BROADPKT	BIT(17)
- #define FTGMAC100_MACCR_DISCARD_CRCERR	BIT(18)
- #define FTGMAC100_MACCR_FAST_MODE	BIT(19)
-+#define FTGMAC100_MACCR_RMII_ENABLE	BIT(20)	/* defined in ast2700 */
- #define FTGMAC100_MACCR_SW_RST		BIT(31)
- 
- /*
-@@ -202,6 +210,8 @@ struct ftgmac100_txdes {
- #define FTGMAC100_TXDES1_TX2FIC		BIT(30)
- #define FTGMAC100_TXDES1_TXIC		BIT(31)
- 
-+#define FTGMAC100_TXDES2_TXBUF_BADR_HI	GENMASK(18, 16)
-+
- /*
-  * Receive descriptor, aligned to 16 bytes
-  */
-@@ -241,4 +251,6 @@ struct ftgmac100_rxdes {
- #define FTGMAC100_RXDES1_UDP_CHKSUM_ERR	BIT(26)
- #define FTGMAC100_RXDES1_IP_CHKSUM_ERR	BIT(27)
- 
-+#define FTGMAC100_RXDES2_RXBUF_BADR_HI	GENMASK(18, 16)
-+
- #endif /* __FTGMAC100_H */
++U_BOOT_DRIVER(ti_sound) = {
++	.name		= "ti_sound",
++	.id		= UCLASS_SOUND,
++	.of_match	= ti_sound_ids,
++	.probe		= ti_sound_probe,
++	.ops		= &ti_sound_ops,
++};
 -- 
-2.25.1
+2.34.1
 
