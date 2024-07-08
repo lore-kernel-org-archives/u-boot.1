@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE0F3C3DA42
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:47:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B534C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:48:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64CA788700;
-	Mon,  8 Jul 2024 17:47:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DEAB388701;
+	Mon,  8 Jul 2024 17:48:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N1f2Kog7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EAWex3ww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B593488701; Mon,  8 Jul 2024 17:47:03 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 998EC887D3; Mon,  8 Jul 2024 17:48:26 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484138869A
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:47:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70A628869A
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-6f8d0a00a35so4005657a34.2
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 08:47:01 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5c6775ea6a3so691534eaf.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 08:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720453620; x=1721058420; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720453703; x=1721058503; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KnqwTYO/AwU9pZEMCtmzQEZAKKlxe3jPU+lHwLGz3R4=;
- b=N1f2Kog7A2TyKyn8S1qPsc+4q86ant7tK9i/0lFPijl/choW0vwFCB8kRFpEiTZGXa
- s+aPU0+AIoZHS4Oc+7uSoYD4sbBLiYPAJ8gFXSGZlifcgwskGO8ccYdT2ZM73lJM+p7O
- usVbzB8MyNRhOoxByRQfdm55w+jHTFX+XInxM=
+ bh=7K2NzAbK62zAWMvmyHzJhB1898ebPedtE0hz51I0Uq8=;
+ b=EAWex3wwPdlmRKZ2sMSVVVsgKb3Ard06YNsWijNxcJndGm5GTiuH/dkDGb+VXhE17X
+ ucL14KGP3nDqvx/yS/kAapQ0twQdOJNtWIixz3QyAYEI6ltH2XoByTDsx9TEuK3hYshH
+ 4ZZ0aaLi+1IUrS5+61SIVHw+tNi1cKn15vP6s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720453620; x=1721058420;
+ d=1e100.net; s=20230601; t=1720453703; x=1721058503;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KnqwTYO/AwU9pZEMCtmzQEZAKKlxe3jPU+lHwLGz3R4=;
- b=Adm3RZvzklmYQ3NKh607WHT80Y5sJQGVKPdY2TsEhbKi6c/kXFMxy8WCZWTX4UxhQb
- rXUnKIuYBbS7BQucx2vIbOKD4uNAP6ARBd++hOP5IJQllSGc02P5waBAM/oYxMOFpClf
- ujESx37HRhFodAPAUQ90IdXd+To++jj5YOrx+LjHspS9DQVhzczb9YuFcEneq9nVfBl+
- A912kg3DGO5SWJj2ruj1/6Q4p/vxkpxb/YspHWbwPor7qegYL/D+z/8EVHHQpqPadFcW
- ivzIBkny9jrdpMjS5FaZNAyIY6d7GTfDo7/ToD06rhRJ1efrHev0KsrwwsP5mgB/e756
- gNtQ==
-X-Gm-Message-State: AOJu0YyOMEn3YrM0xPquq+IMGOHQuf9HGKCe5tjhZ42BqR4/LZW5i16B
- Vez0CDXI2qk4HMwUxhCjSKUvwUCY0uBVhdA52xhz7NeU4ExlcDxsYJ7szQ82yVA=
-X-Google-Smtp-Source: AGHT+IEPDrYU3WSPs9rzH53754YfRQeIOL18OJS4BCxI9l03ZxRk/rkfVZuaqTKgrmZLPSFJdg0UuA==
-X-Received: by 2002:a05:6870:5ba7:b0:25e:281e:190f with SMTP id
- 586e51a60fabf-25e2bb47545mr11439253fac.23.1720453619820; 
- Mon, 08 Jul 2024 08:46:59 -0700 (PDT)
+ bh=7K2NzAbK62zAWMvmyHzJhB1898ebPedtE0hz51I0Uq8=;
+ b=mdwWZzkPno3+ftsquokNCurN6Z9qtM1I9HdacPjXNthwHWbGeEdummCqVhp/YojuL4
+ 6AyYZp0kIkMafen6o61tLpCZik5kvxxexMixRDHqMPu3Po/gCKKCh+VH3ScJIxWtGc2f
+ gx8qVHXoQmcFwM1hHfsIF/ht/FOvLr/rsWWxyBFMFFYag/OybIRTDloktePPmYOSyfDG
+ 2hOhKvFGgBNnkJcoJ4PmgJZyXPal/h8chGfozHCCQFmyOGT9J58409qcy/sUR1lVPWXR
+ N/nmIzBya172kQrIp6PbMY4sEhCTf5/9+D9UFmwUAMznSIGhDYFSXann+Q8Gs+lS4npW
+ tCiQ==
+X-Gm-Message-State: AOJu0Yw1ua8xqsKj8xk5KVWf6rl3L0uwweoQy7AvSJyK2jrqEr8N5Taf
+ WW2vWi/ErZnGf/1H4qwuhGY/v6Z+QMgdz7BD2Juti3qm9TAPkQ4Qr8bfC2BV+GbrEZUZLMqrEj6
+ PbLc=
+X-Google-Smtp-Source: AGHT+IFAOwJ7IooHh9rr+u/4l9e00G5wByy0lroeFagGWkoNvPl16dcc7z7+BKWikJbXuDjtHIqECA==
+X-Received: by 2002:a4a:5501:0:b0:5c6:8458:5743 with SMTP id
+ 006d021491bc7-5c684586215mr2053068eaf.1.1720453703185; 
+ Mon, 08 Jul 2024 08:48:23 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
  [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25eaa225461sm39761fac.45.2024.07.08.08.46.58
+ 006d021491bc7-5c68cd72bc2sm16837eaf.5.2024.07.08.08.48.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 08:46:59 -0700 (PDT)
-Date: Mon, 8 Jul 2024 09:46:56 -0600
+ Mon, 08 Jul 2024 08:48:22 -0700 (PDT)
+Date: Mon, 8 Jul 2024 09:48:20 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Scaria Kochidanadu <s-kochidanadu@ti.com>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, mkorpershoek@baylibre.com,
@@ -71,15 +72,16 @@ Cc: u-boot@lists.denx.de, sjg@chromium.org, mkorpershoek@baylibre.com,
  vigneshr@ti.com, praneeth@ti.com, nm@ti.com, khasim@ti.com,
  rogerq@kernel.org, francesco.dolcini@toradex.com, afd@ti.com,
  jan.kiszka@siemens.com
-Subject: Re: [PATCH 1/6] sound: ti: Add sound support for am625 board in Uboot
-Message-ID: <20240708154656.GE38804@bill-the-cat>
+Subject: Re: [PATCH 4/6] arm: dts: k3-am625-sk-u-boot.dtsi: Add sound driver
+ nodes
+Message-ID: <20240708154820.GF38804@bill-the-cat>
 References: <20240708075207.37207-1-s-kochidanadu@ti.com>
- <20240708075207.37207-2-s-kochidanadu@ti.com>
+ <20240708075207.37207-5-s-kochidanadu@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="x0tlmS9iQlV1v3ZK"
+ protocol="application/pgp-signature"; boundary="XEXBaJxfE9qCIg/J"
 Content-Disposition: inline
-In-Reply-To: <20240708075207.37207-2-s-kochidanadu@ti.com>
+In-Reply-To: <20240708075207.37207-5-s-kochidanadu@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,88 +100,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---x0tlmS9iQlV1v3ZK
+--XEXBaJxfE9qCIg/J
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 08, 2024 at 01:22:02PM +0530, Scaria Kochidanadu wrote:
+On Mon, Jul 08, 2024 at 01:22:05PM +0530, Scaria Kochidanadu wrote:
 
-> Add a UCLASS_SOUND driver for Texas Instruments SoCs which ties together
-> the tlv320aic3106 audio codec and MCASP I2S controller. Enable audio
-> playback functionality by taking a data pointer and data size as the
-> sound data. The uboot sound play command takes time and frequency as
-> input and creates the data for a beep sound with the given parameters,
-> which is then passed to the sound play function.
-[snip]
-> +++ b/drivers/sound/ti_sound.c
-> @@ -0,0 +1,119 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2024 Texas Instruments Incorporated - https://www.ti.co=
-m/
-> + * Scaria M Kochidanadu, s-kochidanadu@ti.com
-> + *
-> + * based on the uboot samsung sound driver, which is
-> + *
-> + * Copyright 2018 Google, LLC
-> + * Written by Simon Glass <sjg@chromium.org>
-> + */
-> +
-> +#include <asm/u-boot.h> /* boot information for Linux kernel */
-> +/* Pull in stuff for the build system */
-> +#ifdef DO_DEPS_ONLY
-> +#include <env_internal.h>
-> +#endif
-> +#include <audio_codec.h>
-> +#include <dm.h>
-> +#include <i2s.h>
-> +#include <log.h>
-> +#include <sound.h>
-> +#include <asm/gpio.h>
+> Update the am625-sk-u-boot device tree to incorporate the sound card and
+> sound drivers: MCASP and TLV320AIC3106 Codec
+>=20
+> Signed-off-by: Scaria Kochidanadu <s-kochidanadu@ti.com>
+> ---
+>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 85 ++++++++++++++++++++++++++++
+>  1 file changed, 85 insertions(+)
 
-Please audit this list. I really am confused by <env_internal.h>.
-
-> +static int ti_sound_stop_play(struct udevice *dev)
-> +{
-> +	/* This function is necassary to satisfy the function calls
-> +	 * in the Uboot command: sound play
-> +	 */
-> +	return 0;
-
-/*
- * Like this...
- */
-
-[snip]
-> +static const struct udevice_id ti_sound_ids[] =3D {
-> +	{ .compatible =3D "simple-audio-card" },
-> +	{ }
-> +};
-
-Adding an actual simple-audio-card framework for U-Boot would be great.
-This driver implies (and is?) TI-centric, instead. So lets rework this
-to be split appropriately? Thanks.
+Where's all of this in the upstream dts?
 
 --=20
 Tom
 
---x0tlmS9iQlV1v3ZK
+--XEXBaJxfE9qCIg/J
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaMCe0ACgkQFHw5/5Y0
-tyxzSAv+JrdO7y0B55HXONCHN9VXzgICq/pRjI1CzgLw1CAHLM9RvF8sCueNW2x1
-kG21jXwZ8gPyaxqJzXL8FlAOqI2SN9Was0lCCEUmkdaTOuYbKyA5tCnZ7ycKd3Vk
-wph7pFwqRm+u0SzVhZpJsBPWa7VGxrmxJlIGFMltcrycTJQZBxlUlGPl2f7595SZ
-zEk5HxudpZc1hQs8GGwKDnAd6UVmj7NNccnn5pjJJdVtfZ9BcXh9YIB7wFB8LwFz
-BVgSGa0dwsm1Fvirz3secaLbC1qW1OeqZ2vLWGBhsHkQpm2bx0MsaTW8lr0qwPH6
-vqMddOMjagpEfavMkeZzDeyaPzQuCUkQxMvTnopOJr571zOFI5Q2989au15n19oE
-d7wAwxRuF9mdOn8eIVZLHEMe0p0QXnz7kmc2BslxL7sUazPzvBcWVdgIHj9bepvm
-3W5W+J3Ba9pbG9mJafYoFuQ2cr8gRJ62/Ym7pRZAgwQBZn30v99uufwIhaUDNu9J
-Niyv9dqM
-=vUnf
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaMCkQACgkQFHw5/5Y0
+tyy3xAv/WO8qgZq3RpOpwhnrlPZa5BsIRnBXtclw/1NimWaAS84ZoZOJkS2uRudh
+9mRCgYczD3x5dExWjhF3VjxtKAM+I2+gYfuE8T8nxVsa21tUexR+f55PjJRsFc6+
+Yn5jX488qz7JkjaLc/9W5MzROCTi/JWdI3izKjbYL95OxWCzHDWdPVN43XH+D235
+kudFA872rDOMlKoHM9Enqw/zE6X0+IAVgk6erkvnwtr1WaGUHVm1tLd9JA4GmNxp
+xWieT4nk6au6HqzyDNtlp9/SXPVnpOeMahadwlFGxrZIvbLSt9UtMqBTAdatVOt8
+C7ceSn4wuoRdDT7NddakweOCqHZt5xjoc0vCSlSh7MLyGmLL4QkxT7VQh+6ucJCn
+bYOwZl2WwU8b+avHmmOlMKpC4oxypPzGb1h9rlPRarFCo4j0FJqmY2s9EbCmjxtV
+cdHxBk2mtOfXH5ygAcSCafbgeHrajW0BugyVEPMBDrb5PXIyyfF7bdyjDizrOlit
+QWwX8TKh
+=TWD4
 -----END PGP SIGNATURE-----
 
---x0tlmS9iQlV1v3ZK--
+--XEXBaJxfE9qCIg/J--
