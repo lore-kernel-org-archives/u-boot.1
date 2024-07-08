@@ -4,93 +4,201 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2C0C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 07:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D242FC3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 07:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BD89886E9;
-	Mon,  8 Jul 2024 09:26:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D11388444;
+	Mon,  8 Jul 2024 09:58:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="GqBOU8U3";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="c5oGD39d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CD2C88676; Mon,  8 Jul 2024 09:26:12 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id F4126884CC; Mon,  8 Jul 2024 09:58:49 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::631])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 788B687FA7
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 09:26:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 42FD9881DB
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 09:58:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 09D30100006;
- Mon,  8 Jul 2024 10:26:10 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 09D30100006
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1720423570;
- bh=1ZgOD44RrLiewpGqSsIvzySZ9YhmmbSHGi8ygd60HyM=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=GqBOU8U3RKsFchNzvseAe1UwDHsrTcLhOrA0LHWAgoNusI41KBDbUzCB3GnP6jfPe
- Qrb/5g8wjwaR6mw0k7ta8nGDxviC3aZ7ygXPMgDYMmY3ipGpQqLLZcA1HnKxp2HTtf
- WNVm8xYNnnbfurBCJGXlYs4Ww5potKfffNKdYyNVF7ls3GHNfyejipRD1Mn831vmvI
- M/K8NDVVPXL2mpmBsipGRl3Y+kR57KdNkhZygARspW//5LnZJIZDkUbNsjUn59dUs2
- fyu+UR8BzAhPcejzn1juo++T820Myq+RjUsmZnAosLtaRxFyNnAh55HsS0CM7WkohL
- CSN5rOVq3YiLQ==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  8 Jul 2024 10:26:09 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Mon, 8 Jul 2024 10:26:09 +0300
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>,
- Sean Anderson <seanga2@gmail.com>
-CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
- <kernel@sberdevices.ru>, <oxffffaa@gmail.com>, <avkrasnov@salutedevices.com>
-Subject: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot ROM
- pages
-Date: Mon, 8 Jul 2024 10:13:52 +0300
-Message-ID: <20240708071352.3022327-4-avkrasnov@salutedevices.com>
-X-Mailer: git-send-email 2.35.0
-In-Reply-To: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
-References: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RYMdcs6erLLEMlksReeU1W0e81XSpnaUPwx7lyuUBZdGtKFed2YNToTDfsk5IXkhLYwsd+RMZzLJ9RyDNZrGJ5NKujNuy1CdQuAcpFxv23RqkUulNTaG3tuo1qq9L94B6yx5xK0ebLenZgjfI2oXhjlo8Ed6+Q/kHm587SmEm/piztCuFFDORojhm93vm8tRBTNa8dTakNvXub5N7/xavPjaY5h+24DRJkVxWb61f0EOFpEL4l3yAZEiiH0CbR807GgrHoNlYYwTK1SVdA4DLejOMlnFCiUVmXQpGFfVAtxjLBK9k9Ri+t0TMlwKr7uxAXlilELvdq/iiUeeSyn4OA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=obY3CtHbw/MMLcfYvIoNdlQ01/fcLO/TFDQR/FQCSjM=;
+ b=dVjeU9VNixyaVj9jMwRntep2zcg41fepUwaUr0EZ2g92zLQAvHUAvmTSrANcupq66sZA34N65QQeR//LGfs9X9L0Qb/eDK+4EAxa7p9Gh+HPs4HlndxL0eVJMbebCgrtJQ6mybhTHFXrz8bdWPYc70uGsG1hpee+oUB4lSjviwKOWeyhtnr0SQfWIq6TEZh5yG/nGa9gdSwIrtepfGpq36e1+VbLeT4XIzk0z7j8fRYTFEKkHDL58aIs5j3lfwQnsgwRmGIQoBqPpmfWiPLYv0poaRqa7dc145ATFxXa+ShbNPz3XzpAd3zXxSzCgxHGIMz7iVFWHwEhU3uqvZhauA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=obY3CtHbw/MMLcfYvIoNdlQ01/fcLO/TFDQR/FQCSjM=;
+ b=c5oGD39dOGFq0HMhuv4pZ3yWJ2XxtDQBT204j1V43WNLb/7xMJIlqnJTyUXw9rZfFyM+JhOvOcO5JGx5sRHviTjIBvcIjidwwxyJsAxLNO1Vceu4Jx7GjZpIrzuXNZL6olwEAKswxGp0DGIcGCBVotT3pxVMLCCn+3JbMVBZUwA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by SN7PR12MB7021.namprd12.prod.outlook.com (2603:10b6:806:262::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.31; Mon, 8 Jul
+ 2024 07:58:43 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.7741.033; Mon, 8 Jul 2024
+ 07:58:43 +0000
+Message-ID: <03cdf568-7be3-446c-a1f4-daa8d55af0ef@amd.com>
+Date: Mon, 8 Jul 2024 09:58:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Revert "zlib: Port fix for CVE-2016-9841 to U-Boot"
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
+References: <20240627154909.3536095-1-trini@konsulko.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
+ howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
+ svSoH4WcApYNqvB3rcMtJIna+HUhx8xOk+XCfyKJDnrSuKgx0Svj446qgM5fe7RyFOlGX/wF
+ Ae63Hs0RkFo3I/+hLLJP6kwPnOEo3lkvzm3FMMy0D9VxT9e6Y3afe1UTQuhkg8PbABxhowzj
+ SEnl0ICoqpBqqROV/w1fOlPrm4WSNlZJunYV4gTEustZf8j9FWncn3QzRhnQOSuzTPFbsbH5
+ WVxwDvgHLRTmBuMw1sqvCc7CofjsD1XM9bP3HOBwCxKaTyOxbPJh3D4AdD1u+cF/lj9Fj255
+ Es9aATHPvoDQmOzyyRNTQzupN8UtZ+/tB4mhgxWzorpbdItaSXWgdDPDtssJIC+d5+hskys8
+ B3jbv86lyM+4jh2URpnL1gqOPwnaf1zm/7sqoN3r64cml94q68jfY4lNTwjA/SnaS1DE9XXa
+ XQlkhHgjSLyRjjsMsz+2A4otRLrBbumEUtSMlPfhTi8xUsj9ZfPIUz3fji8vmxZG/Da6jx/c
+ a0UQdFFCL4Ay/EMSoGbQouzhC69OQLWNH3rMQbBvrRbiMJbEZwARAQABzSlNaWNoYWwgU2lt
+ ZWsgKEFNRCkgPG1pY2hhbC5zaW1la0BhbWQuY29tPsLBlAQTAQgAPgIbAwULCQgHAgYVCgkI
+ CwIEFgIDAQIeAQIXgBYhBGc1DJv1zO6bU2Q1ajd8fyH+PR+RBQJkK9VOBQkWf4AXAAoJEDd8
+ fyH+PR+ROzEP/1IFM7J4Y58SKuvdWDddIvc7JXcal5DpUtMdpuV+ZiHSOgBQRqvwH4CVBK7p
+ ktDCWQAoWCg0KhdGyBjfyVVpm+Gw4DkZovcvMGUlvY5p5w8XxTE5Xx+cj/iDnj83+gy+0Oyz
+ VFU9pew9rnT5YjSRFNOmL2dsorxoT1DWuasDUyitGy9iBegj7vtyAsvEObbGiFcKYSjvurkm
+ MaJ/AwuJehZouKVfWPY/i4UNsDVbQP6iwO8jgPy3pwjt4ztZrl3qs1gV1F4Zrak1k6qoDP5h
+ 19Q5XBVtq4VSS4uLKjofVxrw0J+sHHeTNa3Qgk9nXJEvH2s2JpX82an7U6ccJSdNLYbogQAS
+ BW60bxq6hWEY/afbT+tepEsXepa0y04NjFccFsbECQ4DA3cdA34sFGupUy5h5la/eEf3/8Kd
+ BYcDd+aoxWliMVmL3DudM0Fuj9Hqt7JJAaA0Kt3pwJYwzecl/noK7kFhWiKcJULXEbi3Yf/Y
+ pwCf691kBfrbbP9uDmgm4ZbWIT5WUptt3ziYOWx9SSvaZP5MExlXF4z+/KfZAeJBpZ95Gwm+
+ FD8WKYjJChMtTfd1VjC4oyFLDUMTvYq77ABkPeKB/WmiAoqMbGx+xQWxW113wZikDy+6WoCS
+ MPXfgMPWpkIUnvTIpF+m1Nyerqf71fiA1W8l0oFmtCF5oTMkzsFNBFFuvDEBEACXqiX5h4IA
+ 03fJOwh+82aQWeHVAEDpjDzK5hSSJZDE55KP8br1FZrgrjvQ9Ma7thSu1mbr+ydeIqoO1/iM
+ fZA+DDPpvo6kscjep11bNhVa0JpHhwnMfHNTSHDMq9OXL9ZZpku/+OXtapISzIH336p4ZUUB
+ 5asad8Ux70g4gmI92eLWBzFFdlyR4g1Vis511Nn481lsDO9LZhKyWelbif7FKKv4p3FRPSbB
+ vEgh71V3NDCPlJJoiHiYaS8IN3uasV/S1+cxVbwz2WcUEZCpeHcY2qsQAEqp4GM7PF2G6gtz
+ IOBUMk7fjku1mzlx4zP7uj87LGJTOAxQUJ1HHlx3Li+xu2oF9Vv101/fsCmptAAUMo7KiJgP
+ Lu8TsP1migoOoSbGUMR0jQpUcKF2L2jaNVS6updvNjbRmFojK2y6A/Bc6WAKhtdv8/e0/Zby
+ iVA7/EN5phZ1GugMJxOLHJ1eqw7DQ5CHcSQ5bOx0Yjmhg4PT6pbW3mB1w+ClAnxhAbyMsfBn
+ XxvvcjWIPnBVlB2Z0YH/gizMDdM0Sa/HIz+q7JR7XkGL4MYeAM15m6O7hkCJcoFV7LMzkNKk
+ OiCZ3E0JYDsMXvmh3S4EVWAG+buA+9beElCmXDcXPI4PinMPqpwmLNcEhPVMQfvAYRqQp2fg
+ 1vTEyK58Ms+0a9L1k5MvvbFg9QARAQABwsF8BBgBCAAmAhsMFiEEZzUMm/XM7ptTZDVqN3x/
+ If49H5EFAmQr1YsFCRZ/gFoACgkQN3x/If49H5H6BQ//TqDpfCh7Fa5v227mDISwU1VgOPFK
+ eo/+4fF/KNtAtU/VYmBrwT/N6clBxjJYY1i60ekFfAEsCb+vAr1W9geYYpuA+lgR3/BOkHlJ
+ eHf4Ez3D71GnqROIXsObFSFfZWGEgBtHBZ694hKwFmIVCg+lqeMV9nPQKlvfx2n+/lDkspGi
+ epDwFUdfJLHOYxFZMQsFtKJX4fBiY85/U4X2xSp02DxQZj/N2lc9OFrKmFJHXJi9vQCkJdIj
+ S6nuJlvWj/MZKud5QhlfZQsixT9wCeOa6Vgcd4vCzZuptx8gY9FDgb27RQxh/b1ZHalO1h3z
+ kXyouA6Kf54Tv6ab7M/fhNqznnmSvWvQ4EWeh8gddpzHKk8ixw9INBWkGXzqSPOztlJbFiQ3
+ YPi6o9Pw/IxdQJ9UZ8eCjvIMpXb4q9cZpRLT/BkD4ttpNxma1CUVljkF4DuGydxbQNvJFBK8
+ ywyA0qgv+Mu+4r/Z2iQzoOgE1SymrNSDyC7u0RzmSnyqaQnZ3uj7OzRkq0fMmMbbrIvQYDS/
+ y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
+ l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
+ 3i3l5DA=
+In-Reply-To: <20240627154909.3536095-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P189CA0025.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:802:2a::38) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 186360 [Jul 08 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 21 0.3.21
- ebee5449fc125b2da45f1a6a6bc2c5c0c3ad0e05,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- smtp.sberdevices.ru:7.1.1,5.0.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- salutedevices.com:7.1.1;
- 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/07/08 05:54:00 #25895811
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SN7PR12MB7021:EE_
+X-MS-Office365-Filtering-Correlation-Id: c241b318-9068-4fce-e996-08dc9f23c9b3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WmtHYVZHQWpyaEZkSEdHVkV3eW8xL3cwcWNQMzRRc1FjRWxuUlg4Tk9GMTQ4?=
+ =?utf-8?B?UHVXTGtiZFNlMkgrY2NWbnF6V2VtOTRrcmUwSzJPUGFVN1NFOU5qM3FZNHdl?=
+ =?utf-8?B?Y09QWlJ3V20xT080dFFUTzVkcUlWTVp5U3NwWUtpYXBVcWhpbW5VQlJCKzUr?=
+ =?utf-8?B?Q015Y2V2NXpQZW8vYm1RRXZCRHZKZ2tVM00rbEVSaCs1eWhabjRQOG82cjJH?=
+ =?utf-8?B?VFYyZDljMjBoRHdkVEdFSmkxSTY0TndINFhuMk1kT25SV3lYWmQ3USs0dmky?=
+ =?utf-8?B?UmZPT3FRTVdnWHMrODNTOFdlZWlGa3Q0SGZ5dmpneTVqYUxBejRlRm51Mk5D?=
+ =?utf-8?B?QktOd3c4MTNpL2RhMlYyc2ZIRWpzMnRGMlp6Vnh5eDlqS2dHT3RuWG5iWkhC?=
+ =?utf-8?B?a2t0c0o2Rk5Pd3JKa2xIK0RybldOd2w4azI1dmsyRThHY3RmdXJNUUNxbyt1?=
+ =?utf-8?B?VHpTUlhRRlk4VnRtRmZpdURWbDdWVm5HdHdBS2wyWUFpS3BtRzNHUENqRUF2?=
+ =?utf-8?B?aEVMUlJlQnAzVDBNTnBnTkxwbldhNFp1Rnp3OWgycVlEZ1IxUTJzWmo3WWFX?=
+ =?utf-8?B?ZGVwU3ZiNTMzYUpZSDdoamRHY3h0KzByR25GeXhmK1ZmSy8zZU4wMEVUVXJX?=
+ =?utf-8?B?SGZsbytkWUcrdUZnN3Jia2M2elkxOUkrZU10c09QMzNSWUF5cVVDd0xtUWs2?=
+ =?utf-8?B?dnRrY1RHaVpScnZuVDhDYWdhcm9vaG42NVNxVEVKT2NONC9PMWpsQ0I2cC8z?=
+ =?utf-8?B?ak1DNlFITUU2OU1YYkJVY0JwMlZGZXB5ai9OY2x2V0pzU1d5OHI5SzF3UHlQ?=
+ =?utf-8?B?VlBWRHljV3g0dU5XSElIS3BDOWlOT0UraDNLdDIreXF5Zkl3NE80OGdJZ0ZQ?=
+ =?utf-8?B?aFN3V09FNWhHdzhMK29rcVdOSnFtK1oyNDdqQlVVckhKVVZGaDBoMkpvZlJR?=
+ =?utf-8?B?RDdCNmxlK0k1WjEyekkzMCtVaGw5aEJvZC94dDNRandwc3k2QktnZ0srZXZi?=
+ =?utf-8?B?OGZQdGtob0lMQi90WHJHaXBxaWJQNHhHMEF1bGVGZ3NuT0pTNzhFclUwS3lp?=
+ =?utf-8?B?MEQ2OEFwWFY1eHBBWEFzcVVNYlBkYy9BVVpSS3dGUFExdWRYVlVSb1A1anFX?=
+ =?utf-8?B?WGxmc3F1ZTliazNaYks3Qm1kSFJQZy9tcHRmRStWY0JTUWQxSC9wcE44TVpN?=
+ =?utf-8?B?NVNsK0tSbVZER1lxMFV6d0RSeFBtU0ZCaHVDY2k0MjVXUHhMeEE0Z3FjY25C?=
+ =?utf-8?B?QStVeGtJQWM3ZE5YZXphVktEblM0OXRxNjkrMGlLUWJZYjBMRHljait6YlVF?=
+ =?utf-8?B?NHVKWHllZUg1S2JTL293aGhxMmpQZGIxY3V1M3hsNHlWOGUrd2xsdjA4Q3cy?=
+ =?utf-8?B?UW9XSjRSNm9uT21LY09Od3ZZaEtpT1lzUDgzdUVuOEVsVGpEQmdqZGNNWE43?=
+ =?utf-8?B?SFoyYy9iNFBwbnI3all2R2NSZEdnRER3YS84dEhES0lIZHdHYURvakZiUU5V?=
+ =?utf-8?B?YTF4dHJ6QXhGR3pmTUpvV2l5aHBXVERTY2E5dExhTWtYWDYzRWRFQngwTEVt?=
+ =?utf-8?B?MEpqS3I5NHBvNVR0T0xRbkxIWjUxdkR4bitGZGovL0RqakhvYnJYeG1tSGNI?=
+ =?utf-8?B?SllrM3FlS1ZRZVVKSllLYnBwRnVoUktBT3YzR0d2a2RqdnphQ2R6Qm43dUxm?=
+ =?utf-8?B?cWNwWkpCMTg2a05LaUJFR3VId3gvVXZJS0I4ZzIvRGwvWkwwVzJhVUREQnQz?=
+ =?utf-8?B?VjYrMnd5Vjc0bjNRUHBvTU4vdVBQTzQ3S2w0a1Jrc2tEcUNPYy9Kb0N5TlV1?=
+ =?utf-8?B?RnVTSUtidjMxUmFseDEvdz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eldwTzJIU0FxRi9QdkEvVERHY3pydnpGbXR2K05QWjZnSndyMCtuaWptV0tG?=
+ =?utf-8?B?VE51TWNkRVlWSDI2dVhEQWMvemRnZVhKMk1qVkY2NHBnMGg4eFNQSlFGRDRM?=
+ =?utf-8?B?VUhuY3RSM0Rxejdoc1ZYbzJ4RTREa1NJM1U1dng5UEdLeHRIUTRySE4wQllv?=
+ =?utf-8?B?U2FLMm1UOHA1aUtVcmVtVEg3bCs3cDNQUmZ4R0J4VHVDcjlNek93bzBBUlpu?=
+ =?utf-8?B?S1RiVDQ2OFp6cDhaOWI0M2pWQ295QVNoa1ZDekQ0eElDdUVOOWE0ZzlCZnQx?=
+ =?utf-8?B?dUh6aDRFeGFleGJRM1l2MW1nbENWUjk3NHZlNnFPd2FUYkZ1UGcvcWI2U2hp?=
+ =?utf-8?B?M1JQeElLaVlJME5CWnY1U0h4bTlKQWdScGVpbGNTSkkxOUFlNTBxYk44OCtK?=
+ =?utf-8?B?RldSSVRPVXYvV1F6cTJ6U3hkRDdPM0VNWGtBeXFZeGplUVpqZEoxU2Y2bnNR?=
+ =?utf-8?B?VUU1bUpoRE5UQkNFZktCZktQVkNFSmo0bkZYSVRUREVHZ0YvaXd3UkV1OGZJ?=
+ =?utf-8?B?UUFZUVMyVGFxOTR0RDJQVFhuTFJtUll1L3AvMzlzaVd3QXpUajlyenBFM1Zt?=
+ =?utf-8?B?TjRtb1NQVitVL0ZCa2JQTUJOUENnY21USFpiRlUwT1NaTFJlREhNWTVSQ09F?=
+ =?utf-8?B?MWNPYTBjUnNDRkNseXZQdjZhdzZiTzd6MThsNnRVRittK1M4RzdUemRxNTgr?=
+ =?utf-8?B?YXVLRWV1TzlhYWphNkt1bnZ1aG5FUkI0eTYrSWlGWU0wellENmpLNUNsWk9B?=
+ =?utf-8?B?Nk11QmV2Y09zdHYvN3ByL1ZlSjVkcEFkaVlFd3ZwWmlZQnBDUXR2aTBqb2Nn?=
+ =?utf-8?B?N0xQYWpCcTRYR0ZxR0ZLNXdVcVVVcHNlbDJiU0ZHS2VMdDlaM1cwVXFtYk11?=
+ =?utf-8?B?akE1UXg4ZVpNdHZNV251SXUvVEtsemhOUUdjYURhUkV1YjArYXo5cHdyNTR0?=
+ =?utf-8?B?MGpsOGV0S2NpSVlQbGZZWmRyZkVFUi9kNC8wSTd3b05TNU96NUs4THUydWJw?=
+ =?utf-8?B?dVExVkt2S1dETytDemhCbzgxVVdpa0RSV0s0VzZTQTZlSWpHMnNNUEF2MTdm?=
+ =?utf-8?B?VEVLZHlmK1BheFVQWXRNbmQvYnllZS9kOVVlQzN2ekMrZzNxYnFFQjZjT1Jr?=
+ =?utf-8?B?ald3ZnZFOGRCQVhDaFFlQ2QxS0NBazZwTUpqUXcwL2JoMWhiZ1ptTlhBVSt0?=
+ =?utf-8?B?TnNkU2RlQ1lDV0J4OGVtZ0xXdFdsVFYxQ2s0aXJRcE9HRGNDMmpYZTM2Zmc5?=
+ =?utf-8?B?NkNaNGhPcWc5RUh5MzQ2SURPNWVoTHE1WitlQ2I2OTdmNVRlVFlpc241Vm8z?=
+ =?utf-8?B?Rk0rVmtPd0RGNEZ0QXUraE15U1FCTjRTYnBuSzJmT1MrdEIwYWJyT2ZKcTA5?=
+ =?utf-8?B?K2ErcHVmSHRMMHpBSUlZaDBEUk9pcEVXSHF6NmlseGV2MHk5UDJPNm1FSGl3?=
+ =?utf-8?B?cVNaWis4bUFjQ05YTVIxbGRKQ25qeWVmaTVGTHVndCtlek1FV1NjUzNnTXE4?=
+ =?utf-8?B?Mkh6TjJOSEc2Q0c4elhRMjZVaDg5TjBDSExmQ01sa1dLSGhuNVhFTklQcGow?=
+ =?utf-8?B?UVBCS09EWTlqMzZxTmt5bnBJcklzS1JTZzd1bFpXT0tNY0xGT2JsQVFVSEZX?=
+ =?utf-8?B?RTYzMG5YN05OT3FkRm8zTHZzbTVPcW5rRDdKSjRsbHhSOWEwWlh6RjZGWE5n?=
+ =?utf-8?B?Wk9FZ2dSRDdaSWtSQU1hVWVFdVpxK296MHcxUWZhMnlVQzZBeGY3alZzZ2NM?=
+ =?utf-8?B?RGl4WFAyU011TmorUjNzREI0dmdaUHRsZC9keC8rdnF2UUYzREJLU0NMZXZJ?=
+ =?utf-8?B?ekZNejdJYzVrMWRQTUVTc2hKamxmNERMYllUc3lBSFdVV0QrQ2lNWTZZb1hv?=
+ =?utf-8?B?ODVYRDZFK3QzTkNRcVUzbVRzOXFQQVNTWnVxQTJBNWF1VklNdk5zQ1JvTVp6?=
+ =?utf-8?B?TDZML1NSVTZuWjA4U3I5TFgxMFVpeVdHcnZ0eUtEWVF2b1lwaWpUSlZ4MnFQ?=
+ =?utf-8?B?T1BWZm13Zzdaa2c3NTBpVVRoT0RMTU95UDhyanRqYS9rYUJtbUZ2SDBXdzgw?=
+ =?utf-8?B?dXNtb0FwUGdkTVp4dXpSQUVrR2JUaytwWFdJYlhyMTIzZGJhRXorNVYxd0pS?=
+ =?utf-8?Q?d144wCgXVwHP7yG7DSpX1SY4v?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c241b318-9068-4fce-e996-08dc9f23c9b3
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2024 07:58:43.8770 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bJIp2QGRWlri54ozVzZ0iWyb1iKlSI8NbQ0Hq/HUmGRygZxq49MublzuRn28CKYR
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7021
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,135 +215,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boot ROM on Meson needs some pages to be read/written in a special mode:
-384 byte ECC mode (so called "short" by Amlogic) and with scrambling
-enabled. Such pages are located on the chip in the following way (for
-example):
 
-[ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
-  ^           ^           ^           ^
 
-pX is page number "X". "^" means "special" page used by boot ROM - e.g.
-every 2nd page in the range of [0, 7]. Step (2 here) and last page in
-range is read from the device tree.
+On 6/27/24 17:49, Tom Rini wrote:
+> In commit 340fdf1303dc ("zlib: Port fix for CVE-2016-9841 to U-Boot")
+> Michal brings in (correctly) the upstream fix for CVE-2016-9841.
+> However, when upstream was fixing this issue they also removed a
+> necessary optimization for some CPU classes as part of simplifying the
+> code. This in turn leads to boot failures on the platforms as they now
+> take too long to decompress images and so the watchdog sees the system
+> as stuck.
+> 
+> The long term fix here is as Christophe has posted, which is to restore
+> the optimization. Given the nearness of the release, what I do here is
+> very similar, result wise, but less so, code wise. This is a revert of
+> Michal's commit _except_ we only allow for post-increment in the code,
+> thus keeping the CVE resolved. For the next release this commit shall be
+> reverted and then Christophe's patch applied.
 
-Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
----
- drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
- 1 file changed, 46 insertions(+), 10 deletions(-)
+Sorry I was out and sorry for problems. Good to see this patch.
+I pretty much think that long term goal should be to use upstream zlib
+and sync it up regularly.
 
-diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
-index 19f005202b..54ea035d8d 100644
---- a/drivers/mtd/nand/raw/meson_nand.c
-+++ b/drivers/mtd/nand/raw/meson_nand.c
-@@ -40,6 +40,7 @@
- #define NFC_CMD_RB			BIT(20)
- #define NFC_CMD_SCRAMBLER_ENABLE	BIT(19)
- #define NFC_CMD_SCRAMBLER_DISABLE	0
-+#define NFC_CMD_SHORTMODE_ENABLE	1
- #define NFC_CMD_SHORTMODE_DISABLE	0
- #define NFC_CMD_RB_INT			BIT(14)
- #define NFC_CMD_RB_INT_NO_PIN		((0xb << 10) | BIT(18) | BIT(16))
-@@ -78,6 +79,8 @@
- 
- #define DMA_DIR(dir)		((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
- 
-+#define NFC_SHORT_MODE_ECC_SZ	384
-+
- #define ECC_CHECK_RETURN_FF	-1
- 
- #define NAND_CE0		(0xe << 10)
-@@ -141,6 +144,8 @@
- struct meson_nfc_nand_chip {
- 	struct list_head node;
- 	struct nand_chip nand;
-+	u32 boot_pages;
-+	u32 boot_page_step;
- 
- 	u32 bch_mode;
- 	u8 *data_buf;
-@@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
- 	       nfc->reg_base + NFC_REG_CMD);
- }
- 
-+static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
-+{
-+	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
-+
-+	return (nand->options & NAND_IS_BOOT_MEDIUM) &&
-+	       !(page % meson_chip->boot_page_step) &&
-+	       (page < meson_chip->boot_pages);
-+}
-+
- static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
- {
-+	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
- 	struct mtd_info *mtd = nand_to_mtd(nand);
- 	const struct meson_nfc *nfc = nand_get_controller_data(mtd_to_nand(mtd));
--	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
--	u32 bch = meson_chip->bch_mode, cmd;
- 	int len = mtd->writesize, pagesize, pages;
- 	int scrambler;
-+	u32 cmd;
- 
- 	if (nand->options & NAND_NEED_SCRAMBLING)
- 		scrambler = NFC_CMD_SCRAMBLER_ENABLE;
- 	else
- 		scrambler = NFC_CMD_SCRAMBLER_DISABLE;
- 
--	pagesize = nand->ecc.size;
--
- 	if (raw) {
- 		len = mtd->writesize + mtd->oobsize;
- 		cmd = len | scrambler | DMA_DIR(dir);
--		writel(cmd, nfc->reg_base + NFC_REG_CMD);
--		return;
--	}
-+	} else if (meson_nfc_is_boot_page(nand, page)) {
-+		pagesize = NFC_SHORT_MODE_ECC_SZ >> 3;
-+		pages = mtd->writesize / 512;
- 
--	pages = len / nand->ecc.size;
-+		scrambler = NFC_CMD_SCRAMBLER_ENABLE;
-+		cmd = CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K,
-+			       NFC_CMD_SHORTMODE_ENABLE, pagesize, pages);
-+	} else {
-+		pagesize = nand->ecc.size >> 3;
-+		pages = len / nand->ecc.size;
- 
--	cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
--		       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
-+		cmd = CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch_mode,
-+			       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
-+	}
- 
- 	if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
- 		meson_nfc_cmd_seed(nfc, page);
-@@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udevice *dev, struct meson_nfc *nfc,
- 		goto err_chip_buf_free;
- 	}
- 
-+	if (nand->options & NAND_IS_BOOT_MEDIUM) {
-+		ret = ofnode_read_u32(node, "amlogic,boot-pages",
-+				      &meson_chip->boot_pages);
-+		if (ret) {
-+			dev_err(dev, "could not retrieve 'amlogic,boot-pages' property: %d",
-+				ret);
-+			goto err_chip_buf_free;
-+		}
-+
-+		ret = ofnode_read_u32(node, "amlogic,boot-page-step",
-+				      &meson_chip->boot_page_step);
-+		if (ret) {
-+			dev_err(dev, "could not retrieve 'amlogic,boot-page-step' property: %d",
-+				ret);
-+			goto err_chip_buf_free;
-+		}
-+	}
-+
- 	ret = nand_register(0, mtd);
- 	if (ret) {
- 		dev_err(dev, "'nand_register()' failed: %d\n", ret);
--- 
-2.30.1
+Thanks,
+Michal
 
