@@ -4,50 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B71FC3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 14:23:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B407C3DA42
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 14:35:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D54698876E;
-	Mon,  8 Jul 2024 16:22:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9435188771;
+	Mon,  8 Jul 2024 16:35:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1720448579;
-	bh=RepSeukUJFzuBgZGy9umBiP4FrQUoB8mvr+vRZdLwaA=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=RD7mwO2/Rsf2H8zGhYMhkpopsHJCuu+JXW1HyC2woKAub4boB5DyAoNBS4NwLOqtL
-	 V2l+Rlhq6Z/SeTl4wR7R4m+YZEqIKhSF81CShn2IzEbDSEgRe0UOIuXmTXcl579Y6v
-	 TdPgv+A1WKCEIu+saiA91kV0hTLALwG9y0svSz5ZtcK96WiKVK2J0Jq4Be8wPdmxqR
-	 GMlBiE3kVz1jND4UGjGwaHzCIsijGmA0pfXfHri23ERRSuco+SvmDhoAEnUc/tMEi1
-	 WsDDtYX8UPgzrZXj70ihbpO210VRC6Jf9ZcTrHowdpfnpgxXSNjQCBl40/gaRgK2r8
-	 frCuXRifU7a8w==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C665288771; Mon,  8 Jul 2024 16:22:57 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C4F988756
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 16:22:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IhRnO2cV";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7858D8752A; Mon,  8 Jul 2024 16:35:26 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4WHmYS6s5Zz9sdS;
- Mon,  8 Jul 2024 16:22:52 +0200 (CEST)
-Message-ID: <63f91338-51d5-494d-bca8-c9e2b075ec67@denx.de>
-Date: Mon, 8 Jul 2024 16:22:52 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id EDF9C88771
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 16:35:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3d932f991f6so557971b6e.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 07:35:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1720449321; x=1721054121; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=280rrqZxmrfQbUlXSWhopO4YjIsmqfvoD76ol3mVPiY=;
+ b=IhRnO2cV5MFDgzrxv/P0ZY2hskYPxbGWsq6o+L7oUZtICBwYVZJZ84K8NjIC9aUm8S
+ BKx43lXj0XVSS1go7u2XmRc4+WyB7eE+LXTlI0RaSBu0KWuxkhbHWzxsiod4e3m+u505
+ YhqLT8qECpCXZZ9o2IfTxP1aG7+ilOo37UXd0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720449321; x=1721054121;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=280rrqZxmrfQbUlXSWhopO4YjIsmqfvoD76ol3mVPiY=;
+ b=pBMHc3jdZnyQmc8hutEq49ZCtlCwztXt2BiGKRrAC0ohI8WMrgfuospmqAsla65ML7
+ 58vc7AuXtFcWxNWErG72U791t10u6+GMIoof40PndwC1HrqSnQfaounWicpfFrx2vQA6
+ ff/GA43Sckh0awFOdNTWedZFLlKQLB7OAYd/Jk+sq0klBFs+Lp1yxGHHeuS+RRpvIL2X
+ 39TOZh/hJotkFjCHfnfM0nr22iwsoeZWzELgz7CCYPcSpQaV/EZYKtncVYckpqm133aU
+ iy5nfCOr8H64a0VpnNoOXqya8+G6mTgFY6Y8c05jm7Zp6JM3Ko9rzKDnFfJMsXKubRxt
+ LWEQ==
+X-Gm-Message-State: AOJu0Yz0h2tSSkTEdOecndKiyu8OWdkctVU2N3PLv9K0Tj+f1sy7lhdN
+ YUoVWxojx+3CgUupVpYkSE+haoa6+dT4Mfn3MpW/uTcZai+a3Yv3hqsByNLx45M=
+X-Google-Smtp-Source: AGHT+IGVUA8CkVZ1bC6ulsIYiecrhguFcnW4OYr4jW0yzJHuQ2erMD0P3vao83y9W5mWVx9FHFDIlg==
+X-Received: by 2002:a05:6808:23d2:b0:3d9:32c8:46d5 with SMTP id
+ 5614622812f47-3d932c8516bmr2582236b6e.39.1720449321622; 
+ Mon, 08 Jul 2024 07:35:21 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
+ [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d93ad13733sm11454b6e.16.2024.07.08.07.35.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jul 2024 07:35:21 -0700 (PDT)
+Date: Mon, 8 Jul 2024 08:35:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
+Message-ID: <20240708143518.GC38804@bill-the-cat>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0mXt8Bm6NMjQOabh"
+Content-Disposition: inline
+In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,180 +93,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-please pull the following Marvell MVEBU related patches into master:
+--0mXt8Bm6NMjQOabh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-----------------------------------------------------------------
-- Add mvebu_espressobin_ultra-88f3720_defconfig (Benjamin)
-- Update DTS for Thecus N2350 board (Tony)
-- Add "old" Marvell DDR3 training for Armada 38x and Turris Omnia
-   (Marek)
-- Misc turris_omnia changes (Marek)
-----------------------------------------------------------------
+On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
 
-Here the Azure build, without any issues:
+> The aim of this patch series is to fix the current state of
+> incoherence between modules when it comes to memory usage. The primary
+> issue that this series is trying to fix is that the EFI memory module
+> which is responsible for allocating and freeing memory, does not have
+> any visibility of the memory that is being used by the LMB
+> module. This is further complicated by the fact that the LMB
+> allocations are caller specific -- the LMB memory map is not global
+> nor persistent. This means that the memory "allocated" by the LMB
+> module might be relevant only for a given function. Hence one of the
+> requirements for making the memory usage visible across modules is to
+> make LMB allocations persistent and global, and then have means to
+> communicate the use of memory across modules.
+>=20
+> The first set of patches in this series work on making the LMB memory
+> map persistent and global. This is being done keeping in mind the
+> usage of LMB memory by platforms where the same memory region can be
+> used to load multiple different images. What is not allowed is to
+> overwrite memory that has been allocated by the other module,
+> currently the EFI memory module. This is being achieved by introducing
+> a new flag, LMB_NOOVERWRITE, which represents memory which cannot be
+> re-requested once allocated.
+>=20
+> A review comment on the earlier version was to do away with the static
+> arrays for the LMB lists of free and used memory. This version
+> uses the alloced list data structure for the LMB lists.
+>=20
+> The second set of patches are making changes to the EFI memory module
+> to make use of the LMB functions to allocate and free memory. A
+> *_flags() version of LMB API's has been introduced for the same. The
+> earlier version was using notification mechanism from both LMB and EFI
+> modules to maintain memory coherence. This version makes use of the
+> LMB API functions for the memory allocations. This is based on review
+> comments of EFI maintainers.
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=372&view=results
+Please re-work so that the series is bisectable. For example
+xilinx_zynqmp_r5 fails that check currently. And I found that looking in
+to why it grows by ~1500 bytes overall. This likely is due to
+CONFIG_EFI_LOADER=3Dn and so while the case where EFI_LOADER is enabled
+tends to be a size win (reduction) or wash we need to look at the
+CONFIG_EFI_LOADER=3Dn case more. The alist code will be a little growth
+and that's fine enough. But realloc and do_bdinfo are the two big
+growths at the top, in this case.
 
-Thanks,
-Stefan
+--=20
+Tom
 
-The following changes since commit fd46ea0e701920eb205c2bce9d527bf0dec10b59:
+--0mXt8Bm6NMjQOabh
+Content-Type: application/pgp-signature; name="signature.asc"
 
-   Merge branch '2024-07-05-assorted-updates' (2024-07-05 16:36:43 -0600)
+-----BEGIN PGP SIGNATURE-----
 
-are available in the Git repository at:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaL+SIACgkQFHw5/5Y0
+tyzdvgv8C1JHwJ8oi9v3Ugv7BDhFl4ZPl3k9mHs1jiSGsKOYYfkyWsWYR7eBksmt
+lSfzfWEwYFPOJWsEDE1ckrAsUNf4jOc53qpgobp9vQ+LNQHzZ5I3LnekSEJy34ij
+fM2zWnvIKKtZw4v4Y9SL4RUsX5pfLdt7xIa6Fc0MYBV7x85pNrdPGTbvtccoeX5z
+vCsYbw7HIu+e2qA11pWeA9ZxibI2VZjDzNZypFJ4w8NdyFls6f6uHM0a2icKS181
+PSNrlKZJQOLASvQrUaKjg2l2Rocya1ELEU2W6/6iPsWE82uDXaPsLnxiiNwTDExM
+/tvVqGdTauUffnbchdl+uFdxr4y7myp8XA4eEr9s3uI+0IJ1/1LFQMsJMFsGVXGg
+i6Kw+wYZA7j0N759a08AvLSgS9JGLdWiSP2c3LPzXel32uI+mGs9Ca6nxAxpznLc
+5DBc3HmX24Or98XPceGY3PfS1hZG4bxsQRI3CqFFU8z/fVMR3EDy0OLHOcd4n7dC
+475I/S1d
+=iQgn
+-----END PGP SIGNATURE-----
 
-   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
-
-for you to fetch changes up to 711443eafe0d8064744f6ee69cef08b032346c74:
-
-   mvebu: armada-8k: respect CONFIG_DISTRO_DEFAULTS (2024-07-08 08:20:58 
-+0200)
-
-----------------------------------------------------------------
-Benjamin Schneider (1):
-       configs: add mvebu_espressobin_ultra-88f3720_defconfig
-
-Marek Behún (16):
-       arm: mvebu: turris_omnia: Disable ext4 write support in defconfig
-       ddr: marvell: a38x: debug: return from ddr3_tip_print_log() early 
-if we won't print anything
-       ddr: marvell: a38x: debug: Remove unused variables
-       ddr: marvell: a38x: debug: Define DDR_VIEWER_TOOL variables only 
-if needed, and make them static
-       ddr: marvell: a38x: debug: Allow compiling with immutable debug 
-settings to reduce binary size
-       arm: mvebu: turris_omnia: Enable immutable debug settings in DDR3 
-training by default
-       arm: mvebu: turris_omnia: Fix ethernet PHY reset gpio FDT fixup
-       arm: mvebu: turris_omnia: Implement EEPROM layout for the 
-'eeprom' command
-       arm: mvebu: turris_omnia: Enable the 'eeprom' command
-       arm: mvebu: turris_omnia: Extend EEPROM info structure
-       arm: mvebu: turris_omnia: Read DDR speed from EEPROM
-       ddr: marvell: a38x: Import old DDR training code from 2017 
-version of U-Boot
-       ddr: marvell: a38x: old: Fix some compiler warning of the old code
-       ddr: marvell: a38x: old: Backport immutable debug settings
-       arm: mvebu: a38x: Add optional support for using old DDR3 
-training code
-       arm: mvebu: turris_omnia: Support old DDR3 training
-
-Robert Marko (1):
-       mvebu: armada-8k: respect CONFIG_DISTRO_DEFAULTS
-
-Tony Dinh (2):
-       arm: mvebu: env_sf_get_env_addr() missing check for 
-CONFIG_ENV_IS_IN_SPI_FLASH
-       arm: dts: mvebu: Update DTS for Thecus N2350 board
-
-  arch/arm/dts/armada-385-thecus-n2350.dts           |   10 +-
-  arch/arm/mach-mvebu/Kconfig                        |   15 +
-  arch/arm/mach-mvebu/cpu.c                          |    2 +-
-  arch/arm/mach-mvebu/include/mach/cpu.h             |    1 +
-  arch/arm/mach-mvebu/spl.c                          |   37 +-
-  board/CZ.NIC/turris_omnia/Makefile                 |    2 +
-  board/CZ.NIC/turris_omnia/eeprom.c                 |  190 ++
-  board/CZ.NIC/turris_omnia/old_ddr3_training.c      |   63 +
-  board/CZ.NIC/turris_omnia/turris_omnia.c           |  199 +-
-  board/Marvell/mvebu_armada-37xx/MAINTAINERS        |    5 +
-  configs/mvebu_espressobin_ultra-88f3720_defconfig  |  106 +
-  configs/turris_omnia_defconfig                     |    6 +-
-  drivers/ddr/marvell/a38x/Makefile                  |    2 +
-  drivers/ddr/marvell/a38x/ddr3_debug.c              |   30 +-
-  drivers/ddr/marvell/a38x/ddr3_init.c               |    3 +-
-  drivers/ddr/marvell/a38x/ddr3_init.h               |   43 +-
-  drivers/ddr/marvell/a38x/old/Makefile              |   29 +
-  drivers/ddr/marvell/a38x/old/ddr3_a38x.c           |  737 ++++++
-  drivers/ddr/marvell/a38x/old/ddr3_a38x.h           |   93 +
-  drivers/ddr/marvell/a38x/old/ddr3_a38x_mc_static.h |  226 ++
-  drivers/ddr/marvell/a38x/old/ddr3_a38x_topology.h  |   22 +
-  drivers/ddr/marvell/a38x/old/ddr3_a38x_training.c  |   39 +
-  drivers/ddr/marvell/a38x/old/ddr3_debug.c          | 1546 ++++++++++++
-  .../ddr/marvell/a38x/old/ddr3_hws_hw_training.c    |  147 ++
-  .../ddr/marvell/a38x/old/ddr3_hws_hw_training.h    |   49 +
-  .../marvell/a38x/old/ddr3_hws_hw_training_def.h    |  464 ++++
-  .../ddr/marvell/a38x/old/ddr3_hws_sil_training.h   |   17 +
-  drivers/ddr/marvell/a38x/old/ddr3_init.c           |  769 ++++++
-  drivers/ddr/marvell/a38x/old/ddr3_init.h           |  405 +++
-  drivers/ddr/marvell/a38x/old/ddr3_logging_def.h    |  101 +
-  drivers/ddr/marvell/a38x/old/ddr3_patterns_64bit.h |  924 +++++++
-  drivers/ddr/marvell/a38x/old/ddr3_topology_def.h   |   76 +
-  drivers/ddr/marvell/a38x/old/ddr3_training.c       | 2650 
-++++++++++++++++++++
-  drivers/ddr/marvell/a38x/old/ddr3_training_bist.c  |  288 +++
-  .../a38x/old/ddr3_training_centralization.c        |  711 ++++++
-  drivers/ddr/marvell/a38x/old/ddr3_training_db.c    |  651 +++++
-  .../ddr/marvell/a38x/old/ddr3_training_hw_algo.c   |  685 +++++
-  .../ddr/marvell/a38x/old/ddr3_training_hw_algo.h   |   14 +
-  drivers/ddr/marvell/a38x/old/ddr3_training_ip.h    |  178 ++
-  .../ddr/marvell/a38x/old/ddr3_training_ip_bist.h   |   54 +
-  .../a38x/old/ddr3_training_ip_centralization.h     |   15 +
-  drivers/ddr/marvell/a38x/old/ddr3_training_ip_db.h |   34 +
-  .../ddr/marvell/a38x/old/ddr3_training_ip_def.h    |  173 ++
-  .../ddr/marvell/a38x/old/ddr3_training_ip_engine.c | 1354 ++++++++++
-  .../ddr/marvell/a38x/old/ddr3_training_ip_engine.h |   85 +
-  .../ddr/marvell/a38x/old/ddr3_training_ip_flow.h   |  349 +++
-  .../ddr/marvell/a38x/old/ddr3_training_ip_pbs.h    |   41 +
-  .../ddr/marvell/a38x/old/ddr3_training_ip_prv_if.h |  107 +
-  .../ddr/marvell/a38x/old/ddr3_training_ip_static.h |   31 +
-  .../ddr/marvell/a38x/old/ddr3_training_leveling.c  | 1836 ++++++++++++++
-  .../ddr/marvell/a38x/old/ddr3_training_leveling.h  |   17 +
-  drivers/ddr/marvell/a38x/old/ddr3_training_pbs.c   |  994 ++++++++
-  .../ddr/marvell/a38x/old/ddr3_training_static.c    |  537 ++++
-  drivers/ddr/marvell/a38x/old/ddr_topology_def.h    |  121 +
-  drivers/ddr/marvell/a38x/old/ddr_training_ip_db.h  |   16 +
-  drivers/ddr/marvell/a38x/old/glue_symbol_renames.h |  247 ++
-  drivers/ddr/marvell/a38x/old/silicon_if.h          |   17 +
-  drivers/ddr/marvell/a38x/old/xor.h                 |   92 +
-  include/configs/mvebu_armada-8k.h                  |    5 +-
-  59 files changed, 17596 insertions(+), 64 deletions(-)
-  create mode 100644 board/CZ.NIC/turris_omnia/eeprom.c
-  create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
-  create mode 100644 configs/mvebu_espressobin_ultra-88f3720_defconfig
-  create mode 100644 drivers/ddr/marvell/a38x/old/Makefile
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_mc_static.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_topology.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_training.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_debug.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training_def.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_sil_training.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_init.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_init.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_logging_def.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_patterns_64bit.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_topology_def.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_bist.c
-  create mode 100644 
-drivers/ddr/marvell/a38x/old/ddr3_training_centralization.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_db.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_hw_algo.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_hw_algo.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_bist.h
-  create mode 100644 
-drivers/ddr/marvell/a38x/old/ddr3_training_ip_centralization.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_db.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_def.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_engine.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_engine.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_flow.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_pbs.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_prv_if.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_static.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_leveling.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_leveling.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_pbs.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_static.c
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr_topology_def.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/ddr_training_ip_db.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/glue_symbol_renames.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/silicon_if.h
-  create mode 100644 drivers/ddr/marvell/a38x/old/xor.h
+--0mXt8Bm6NMjQOabh--
