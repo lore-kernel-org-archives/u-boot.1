@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A53C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 13:33:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B5F4C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 14:02:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 953D08871A;
-	Mon,  8 Jul 2024 15:33:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 019FE8874E;
+	Mon,  8 Jul 2024 16:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e25bFFOl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HPE9dIlZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE30F88748; Mon,  8 Jul 2024 15:33:54 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 9E64888730; Mon,  8 Jul 2024 16:02:48 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B68FF886F9
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 15:33:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 728D18874E
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 16:02:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7036daa0704so526734a34.3
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 06:33:52 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5c66b5325bbso953501eaf.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 07:02:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720445631; x=1721050431; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720447365; x=1721052165; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R+WdjNAE5++ztkdUgRmfcOQxjB79UrGD1048sjT9oWA=;
- b=e25bFFOlNHin2pgHxXBLJ1UI20grKDQCgzBbLX9Gml4gvI60GKxEbUi0/Q2SOI3ug3
- Ifa9AGNIWYCBcs6Pt1mI0uISm+8TwwMuACq+RU7992s+wVK6bvhRyA9pt5SSwhUuzk24
- +Dy98MjUeJ1YPSXBV2tzPnG1tZ/mlI60ensok=
+ bh=Qvo1zLjI+QRzDs9fNRohbVerpzCjgxaPEcdfCFFNh5Q=;
+ b=HPE9dIlZ6RtPjjF4L4ZBLb6ts6PIrfQKxbb2/CU6J1EvMTEwiqxdVAEu55eC6MhDhZ
+ 4FMvfYej6Wa0Uvpar3tMARNfer7qFpyfXh4uLfL5kUozxCsalmDneGLzDlHLsbs5RDVv
+ lGlpC/TQKAEEdgqkF0KEaQwQtScFYIhubaUoc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720445631; x=1721050431;
+ d=1e100.net; s=20230601; t=1720447365; x=1721052165;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R+WdjNAE5++ztkdUgRmfcOQxjB79UrGD1048sjT9oWA=;
- b=P6Vd6rvfnkkVqVgrgrfSZf7okElaDUD1Y3adc4e5GnVFC+dNQKjqjQtzLrGmwNSSw0
- MmbhyjTxc91LD0A3rl5Uu3JBq4IVqEkRzOEhjqsA1Lxk3R1TtdE43JCOSGRd05Ea7kcb
- EE+qMLWP2nLQed7v8HXnMcpoYQ/q299OVDvNrn+vq2HVrdZD/sOU0PgjCWS2J5WfBHTJ
- ufv4tbAak+mFVcB4E3DF3YDg8mBR3BhQtYQUOtXIwAL1NN/hgHq9ZHilZ70zx6fRI76a
- Nz6Bul4ALs6/LwrJHc3CSPe/oMyUcaqLcK/pfLJrXydc497XRd8hI8hxQvP2ECn5ehwL
- NSNg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5XYC8zVdEz6OZjMFSxeTvy349g/DJCVLC4/AbQm/ZpmY5fQVBBSMO75m4CwGkVkkrpOp3l3KVlrSZ2q9yxj9DLDn5dQ==
-X-Gm-Message-State: AOJu0Yzg9d6ImaR6K3YVrg/gbboyGYIOP5+Zco3mO1FdKkcRF5Usxrkb
- P2T3ZjGZitL5YGBRRQvLXm2ISRG1OlfO3JJCH3YEjHAF5eeThepMWGSGSgescLY=
-X-Google-Smtp-Source: AGHT+IHJFRYtKUE3VSs+4DN4Lt7gZsJ85e37zoK3CmcDpkvhlUGdIO8UcP8KNIawJ8qr84u9yJrT6A==
-X-Received: by 2002:a05:6830:13:b0:703:59b7:d16e with SMTP id
- 46e09a7af769-70359b7d33emr10055148a34.5.1720445631415; 
- Mon, 08 Jul 2024 06:33:51 -0700 (PDT)
+ bh=Qvo1zLjI+QRzDs9fNRohbVerpzCjgxaPEcdfCFFNh5Q=;
+ b=hGX9/ako1JjMGFfTAjXgft4DprOnJVMjiepMqxVUm0OgykzszzsPSUlK1YRUd/ixEK
+ DBIFarfyLMjNPKmLUmHQRk9EYRw6ufht7Fmxfrvbsqypd1z9rpTeAQOd16MQoW0lyjRs
+ kGhxwBN8gV9FEcNrI2Qe+9NJrSO6zZqC42NnzdMyTP9+EMdLKUJVCuySJV5vMAJTBc5H
+ fhgE6aRt+ekoezLWc8H39zyz1R8bWaiS+hETnZjEDaR2B4OAMTN8zGkDn9KP61FM+hWw
+ zLhwW/944+tVGSswh07ymy0NN7YAf0peZVy2HzaOdkaX8ojs/Xu63ZuRydnBzxxL/Ayx
+ akqg==
+X-Gm-Message-State: AOJu0YxYVncxBsBdhXm7PXQVTlAZF/E4kbUU7LM948SWVDEA4EEYZy75
+ ZoajohnUqbvH4X4KQXMDVp1MrKaJcQG2uyU4+HMJFIvmJyTjO2X/ba2AKMkHeqc=
+X-Google-Smtp-Source: AGHT+IElOmAktEOLdHaPQlDnndSLNU9amNKxQrbhpKrR62T9ZaLZ1Y9KGpsWjYPEY87LpBO+D8LyNw==
+X-Received: by 2002:a05:6870:4728:b0:254:930c:fa08 with SMTP id
+ 586e51a60fabf-25e2b8dfefbmr10062740fac.12.1720447365051; 
+ Mon, 08 Jul 2024 07:02:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-45.totalplay.net.
  [189.203.97.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-701f7ab19efsm3849166a34.25.2024.07.08.06.33.50
+ 586e51a60fabf-25ea9f8219asm5073fac.12.2024.07.08.07.02.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 06:33:50 -0700 (PDT)
-Date: Mon, 8 Jul 2024 07:33:48 -0600
+ Mon, 08 Jul 2024 07:02:44 -0700 (PDT)
+Date: Mon, 8 Jul 2024 08:02:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Kamlesh Gurudasani <kamlesh@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>, u-boot@lists.denx.de, vigneshr@ti.com,
- praneeth@ti.com, u-kumar1@ti.com, m-chawdhry@ti.com
-Subject: Re: [PATCH] configs: am62x_evm_a53_defconfig: Remove
- CONFIG_SYS_BOOTM_LEN
-Message-ID: <20240708133348.GZ38804@bill-the-cat>
-References: <20240708-remove-bootm-len-v1-1-2a537061426c@ti.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
+Message-ID: <20240708140242.GA38804@bill-the-cat>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qwl5G8Rv6TI/zEPh"
+ protocol="application/pgp-signature"; boundary="OaA0q7eV590CDDuV"
 Content-Disposition: inline
-In-Reply-To: <20240708-remove-bootm-len-v1-1-2a537061426c@ti.com>
+In-Reply-To: <20240704073544.670249-1-sughosh.ganu@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,58 +94,92 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qwl5G8Rv6TI/zEPh
+--OaA0q7eV590CDDuV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 08, 2024 at 05:20:40PM +0530, Kamlesh Gurudasani wrote:
+On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
 
-> Increase the maximum size of the buffer that is used to decompress
-> the OS image in to.
+> The aim of this patch series is to fix the current state of
+> incoherence between modules when it comes to memory usage. The primary
+> issue that this series is trying to fix is that the EFI memory module
+> which is responsible for allocating and freeing memory, does not have
+> any visibility of the memory that is being used by the LMB
+> module. This is further complicated by the fact that the LMB
+> allocations are caller specific -- the LMB memory map is not global
+> nor persistent. This means that the memory "allocated" by the LMB
+> module might be relevant only for a given function. Hence one of the
+> requirements for making the memory usage visible across modules is to
+> make LMB allocations persistent and global, and then have means to
+> communicate the use of memory across modules.
 >=20
-> If image size is greater than the buffer, boot
-> will fail with following error,
-> "Error: inflate() returned -5"
-> "gzip compressed: uncompress error -1"
+> The first set of patches in this series work on making the LMB memory
+> map persistent and global. This is being done keeping in mind the
+> usage of LMB memory by platforms where the same memory region can be
+> used to load multiple different images. What is not allowed is to
+> overwrite memory that has been allocated by the other module,
+> currently the EFI memory module. This is being achieved by introducing
+> a new flag, LMB_NOOVERWRITE, which represents memory which cannot be
+> re-requested once allocated.
 >=20
-> Default limit for ARM64 platforms is 0x4000000, remove
-> CONFIG_SYS_BOOTM_LEN=3D0x8000000, so that it follows default limit.
+> A review comment on the earlier version was to do away with the static
+> arrays for the LMB lists of free and used memory. This version
+> uses the alloced list data structure for the LMB lists.
 >=20
-> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
-> ---
->  configs/am62x_evm_a53_defconfig | 1 -
->  1 file changed, 1 deletion(-)
+> The second set of patches are making changes to the EFI memory module
+> to make use of the LMB functions to allocate and free memory. A
+> *_flags() version of LMB API's has been introduced for the same. The
+> earlier version was using notification mechanism from both LMB and EFI
+> modules to maintain memory coherence. This version makes use of the
+> LMB API functions for the memory allocations. This is based on review
+> comments of EFI maintainers.
 
-Please check and correct all of the TI K3 platforms. We have at least
-this from a quick grep on am6*:
-configs/am62x_beagleplay_a53_defconfig:CONFIG_SYS_BOOTM_LEN=3D0x800000
-configs/am62x_evm_a53_defconfig:CONFIG_SYS_BOOTM_LEN=3D0x800000
-configs/am65x_evm_r5_defconfig:CONFIG_SYS_BOOTM_LEN=3D0x4000000
-configs/am65x_evm_r5_usbdfu_defconfig:CONFIG_SYS_BOOTM_LEN=3D0x4000000
-configs/am65x_evm_r5_usbmsc_defconfig:CONFIG_SYS_BOOTM_LEN=3D0x4000000
+On am64x_evm_a53, the last test in test/py/tests/test_net_boot.py fails
+due to:
+=2E..
+TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+Filename 'pxelinux.cfg/default-arm-k3'.
+Load address: 0x80100000
+Loading: ##################################################  64 Bytes
+         8.8 KiB/s
+done
+Bytes transferred =3D 64 (40 hex)
+  1  pxe          ready   ethernet     0  port@1.bootdev.0          extlinu=
+x/extlinux.conf
+** Booting bootflow 'port@1.bootdev.0' with pxe
+Retrieving file: pxelinux.cfg/default-arm
+am65_cpsw_nuss_port ethernet@8000000port@1: K3 CPSW: rflow_id_base: 16
+link up on port 1, speed 1000, full duplex
+Using ethernet@8000000port@1 device
+TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+Filename 'pxelinux.cfg/default-arm'.
 
-(And so are those larger values on the R5 core actually needed?)
+TFTP error: trying to overwrite reserved memory...
+Couldn't retrieve pxelinux.cfg/default-arm
+
+And note that the pxelinux.cfg files are created as defined by the
+example within the test. This test is also still fine on Pi 4.
 
 --=20
 Tom
 
---qwl5G8Rv6TI/zEPh
+--OaA0q7eV590CDDuV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaL6rkACgkQFHw5/5Y0
-tyx0Nwv9Gqst+T4YVDHViSHOn7ml4ZlmTY/XAYd6E+ChDpyAHAIuRYHKpO1K0N7w
-Gxs8NUEQJl8jkgkKpDiYaV6Jb9P9/oPKxUYbKhP3oK4mBToNaIHhKl9vlmGVK30H
-tgO4ZNIoSQUSKQXZM05/fnGadrZwoYQcCa4EuvRI71ot1JIHnxu/Mb5VjJxX3zFL
-k4Mz3cU/OrrdBADv0c5yqhEk6Sb9GHdKKdlItm+RzPcHpqA+bPrLXm0+2s32DKrp
-Tc5D5C/xP03vNXT3heXCZiFbfJ9muDG9Xg+uVT8ExAfoDzgCkKEOoiSOFx+isaEZ
-bWvOD+j7hxypw7mQAMfC/D0fH7VnvF4H0aGzp7GYhL8S/CN271ZVJ91EeD5Q997B
-YCbahy4iwcbOh0k6fvmI3Npimyzy5d9y+u38v9zh55Z2Bapim0a59SpzINqQHNAi
-wO5x/Cxr/gZKY1GpiB7vu/DQwU5JggMAt+22bg2MfRzYxIUSMxF8WSnBaKzm1wdN
-4qabalSo
-=fQ2n
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaL8XsACgkQFHw5/5Y0
+tywwFAv8CqPkIxiBH3paHQOuczsAqFlAHdnvRv9lNw8Mnv2Fh5XdKcSze5dsGkFU
+zrsDZlIYtGcPitm4a/R7BSqVCcGSB8z8p6dMtFThEOAVW8giQPjJIcqg2+Zr5Rxg
+29dPj4+cKGy6m4UcVEW+WyLbV3bqv2TaPqH/yfuD1QCnWNajisri7zI+4HKf7WOp
+rDe/gAaXy96/3D+igpHxfT2QnE2o98oXrvotPYk+wCZr+vTOhLVSkTcqI+gnmyAr
+otCnpM9Y1zJQ66lYFPWQB8fiMg0dRn5LDUoezWuNZtp5eMDZ4DIY11mBODdun+SV
+1bcOjWBk9KAHTWWHHhS371RZXuGmWomG53cnbZyJ1r/1b1UzC4IBi74652D+p8/f
+BsIZT6Ermh/Ldxa8Rp/ZW3po0vuPdRbDDERCsPVA1dNwogWpzqLcmSCts3Syvavx
+2UbHb+0IcEQHRpCOSnr8BzbxuIxw+nXU/pX2gTZKkbMXU6yDIpzbsYP8Qw/nS4gf
+zpaRyAfg
+=bdmu
 -----END PGP SIGNATURE-----
 
---qwl5G8Rv6TI/zEPh--
+--OaA0q7eV590CDDuV--
