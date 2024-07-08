@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E480C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:08:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 610CBC3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 06:08:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6FF788655;
-	Mon,  8 Jul 2024 08:07:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22DE488685;
+	Mon,  8 Jul 2024 08:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="DChsMD5t";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="eFgrVW14";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81E928865E; Mon,  8 Jul 2024 08:07:55 +0200 (CEST)
+ id 0A7E488663; Mon,  8 Jul 2024 08:07:59 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7826884C6
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:07:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3550688663
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 08:07:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=D.Schultz@phytec.de
 DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1720418873; x=1723010873;
+ q=dns/txt; i=@phytec.de; t=1720418877; x=1723010877;
  h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CVc5V+AceU/bNECHn5/R7VBDxcZ8DKSM0DqM9NHLLgU=;
- b=DChsMD5tVk7KKq2PBxA2wgw3xDQUJFYstmjlz/ITo1Pzno9+U8uCKf0IyDMXZOnH
- dQZOZbS8xRxwRgeVVelp0TreMEiKQeZGY/he/lRy33Wi36zSPovwwo1Rv8eHFNco
- DRiK5HSCnVIVH4xpLbttvg2wOfsdMJzOJPE+rqGYk3g=;
-X-AuditID: ac14000a-03251700000021bc-46-668b8239af41
+ bh=Czy1JiyExXvrW22vWvISyI1O+6N8WCUjZ8dOteBeKH0=;
+ b=eFgrVW14jtLBCD1DZ+uN7vljPFjcjQpjo47FK5eWY07wn2V/agG3momkFCZQn/NN
+ +poYiK/hFWnoBdnavBk9zgefS6PubjmmRFy+aYcWB0D2o3YBnRmXEtNWztBbufBR
+ 9vnhDp1FJCxxF2cy2yPpAJIQkrX3gjOIJlK5OhLppQ0=;
+X-AuditID: ac14000a-03e52700000021bc-4b-668b823c0f54
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id CB.11.08636.9328B866;
- Mon,  8 Jul 2024 08:07:53 +0200 (CEST)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id ED.11.08636.C328B866;
+ Mon,  8 Jul 2024 08:07:56 +0200 (CEST)
 Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 8 Jul 2024
- 08:07:50 +0200
+ 08:07:53 +0200
 From: Daniel Schultz <d.schultz@phytec.de>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <joe.hershberger@ni.com>,
  <w.egorov@phytec.de>
@@ -52,9 +52,9 @@ CC: <d-gole@ti.com>, <nm@ti.com>, <mkorpershoek@baylibre.com>,
  <upstream@lists.phytec.de>, <t.remmet@phytec.de>, <y.moog@phytec.de>,
  <m-chawdhry@ti.com>, <kamlesh@ti.com>, <jm@ti.com>, <B.Hahn@phytec.de>,
  Daniel Schultz <d.schultz@phytec.de>
-Subject: [PATCH 1/6] include: env: phytec: overlays: Add extension command
-Date: Sun, 7 Jul 2024 23:07:29 -0700
-Message-ID: <20240708060734.4029040-2-d.schultz@phytec.de>
+Subject: [PATCH 2/6] include: env: phytec: k3_mmc: Apply extension overlays
+Date: Sun, 7 Jul 2024 23:07:30 -0700
+Message-ID: <20240708060734.4029040-3-d.schultz@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240708060734.4029040-1-d.schultz@phytec.de>
 References: <20240708060734.4029040-1-d.schultz@phytec.de>
@@ -64,18 +64,18 @@ Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrCLMWRmVeSWpSXmKPExsWyRpKBR9eyqTvNoP+ZvEXLWg+LTx8yLT7t
- fMxqcbR/DbPFpQepFi+OzWW3ePPjLJPF1Emb2S3e7u1kt+h+p+7A5fH+Riu7x6sDq9g9zt7Z
- wejR393C6nH9zHYmj+M3tjMFsEVx2aSk5mSWpRbp2yVwZVz8cYWl4DR3xdv3jUwNjD84uxg5
- OSQETCRO3vzJ3MXIxSEksIRJ4vqN1ewgCSGBe4wS07YngNhsAloSd7bMZQaxRQSSJJZd7GQF
- aWAW+M4o8eLjL1aQhLCAl8S7u//AmlkEVCQmHlnJBGLzClhJbOiZzwyxTV5i5qXvYDWcAtYS
- j6Z1skAss5KYO3kDG0S9oMTJmU/A4sxA9c1bZzND2BISB1+8YIaoV5CYvW0yI8zMaedeQ80P
- lTiyaTXTBEahWUhGzUIyahaSUQsYmVcxCuVmJmenFmVm6xVkVJakJuulpG5iBMWMCAPXDsa+
- OR6HGJk4GA8xSnAwK4nwnn7cnibEm5JYWZValB9fVJqTWnyIUZqDRUmcd3VHcKqQQHpiSWp2
- ampBahFMlomDU6qBUcxToPgm74znaxW/7Ph42Cg1N+/0wZiZL/plxUPXrdrq06K0wXPv8SUR
- K00lS33+x9gkpCwRkdiTbH/gj9aHH3EJZ+5wzU0T3Fs7S3PGqpP7k0+H1s7U578me6cxKz6D
- 5+m9wPRd7M9trk06mp6RcP2iavTKw9tFlA+f+bM6PsL4dk21TrCyhxJLcUaioRZzUXEiAKeW
- mROHAgAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrMLMWRmVeSWpSXmKPExsWyRpKBR9emqTvNYN5rU4uWtR4Wnz5kWnza
+ +ZjV4mj/GmaLSw9SLV4cm8tu8ebHWSaLqZM2s1u83dvJbtH9Tt2By+P9jVZ2j1cHVrF7nL2z
+ g9Gjv7uF1eP6me1MHsdvbGcKYIvisklJzcksSy3St0vgymh7soq54DJLxbcpW1kbGL8xdzFy
+ ckgImEi86d/KCGILCSxhkrgwLw/CvscocX1FMIjNJqAlcWfLXLB6EYEkiWUXO1m7GLk4mAW+
+ M0q8+PiLFSQhLOAt0bFtLQuIzSKgInHx/jKwobwCVhKn3zSzQiyTl5h56Ts7iM0pYC3xaFon
+ C8QyK4m5kzewQdQLSpyc+QQszgxU37x1NjOELSFx8MULZoh6BYnZ2yYzwsycdu411DOhEkc2
+ rWaawCg0C8moWUhGzUIyagEj8ypGodzM5OzUosxsvYKMypLUZL2U1E2MoIgRYeDawdg3x+MQ
+ IxMH4yFGCQ5mJRHe04/b04R4UxIrq1KL8uOLSnNSiw8xSnOwKInzru4IThUSSE8sSc1OTS1I
+ LYLJMnFwSjUwamy4qXkm3/qszGrnx158Ycw3+hlOP321LGFR6nIXgazKGUK6ZYvnVwXyrLbe
+ oOu+dvMBZ4MEjm8PuCTSztf4TGVmqp6xZEPHMX05w3UcSyp7/1m/PHOpbcr9KZ7XffirBXzm
+ c60ub53t/f+TH6vb6rvFEjeOc9k/+VYornN3x3mmG03JM6R3K7EUZyQaajEXFScCAKmYuHGG
+ AgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,50 +92,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new environment routine to apply extensions. Our SOM detection
-adds overlays via the extension framework to alter the kernel
-device-tree according to the flashed EEPROM image.
+Run the mmc_apply_extensions routine to apply overlays
+added by the extension framework.
 
 Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 ---
- include/env/phytec/overlays.env | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ include/env/phytec/k3_mmc.env | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/env/phytec/overlays.env b/include/env/phytec/overlays.env
-index 78721cde654..50110e731bd 100644
---- a/include/env/phytec/overlays.env
-+++ b/include/env/phytec/overlays.env
-@@ -23,6 +23,16 @@ mmc_apply_overlays=
- 			fi;
- 		done;
- 	fi;
-+#ifdef CONFIG_CMD_EXTENSION
-+mmc_apply_extensions=
-+	setenv extension_overlay_addr ${fdtoverlay_addr_r};
-+	setenv extension_overlay_cmd 'load mmc ${mmcdev}:${mmcpart}
-+	  ${fdtoverlay_addr_r} ${extension_overlay_name}';
-+	extension scan;
-+	extension apply all;
-+#else
-+mmc_apply_extensions=echo "no extension command"
-+#endif
- net_load_bootenv=${get_cmd} ${bootenv_addr_r} ${bootenv}
- net_load_overlay=${get_cmd} ${fdtoverlay_addr_r} ${overlay}
- net_apply_overlays=
-@@ -36,3 +46,13 @@ net_apply_overlays=
- 			fi;
- 		done;
- 	fi;
-+#ifdef CONFIG_CMD_EXTENSION
-+net_apply_extensions=
-+	setenv extension_overlay_addr ${fdtoverlay_addr_r};
-+	setenv extension_overlay_cmd '${get_cmd} ${fdtoverlay_addr_r}
-+	 ${extension_overlay_name}';
-+	extension scan;
-+	extension apply all;
-+#else
-+net_apply_extensions=echo "no extension command"
-+#endif
+diff --git a/include/env/phytec/k3_mmc.env b/include/env/phytec/k3_mmc.env
+index 3d3595ceb7e..3c0b1359dda 100644
+--- a/include/env/phytec/k3_mmc.env
++++ b/include/env/phytec/k3_mmc.env
+@@ -18,4 +18,5 @@ mmcboot=run mmcargs;
+ 	run loadimage;
+ 	run loadfdt;
+ 	run mmc_apply_overlays;
++	run mmc_apply_extensions;
+ 	booti ${loadaddr} - ${fdt_addr_r}
 -- 
 2.25.1
 
