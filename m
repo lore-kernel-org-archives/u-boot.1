@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4112C3271E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 09:42:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E07C8C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 10:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 388B888210;
-	Mon,  8 Jul 2024 11:42:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 025B8884F9;
+	Mon,  8 Jul 2024 12:43:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CK+FHE0u";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dZlWy2Rh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99A228839A; Mon,  8 Jul 2024 11:42:39 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id CA189886D7; Mon,  8 Jul 2024 12:43:10 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E70F87DEA
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 11:42:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C058C88370
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 12:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-57cd26347d3so4702317a12.1
- for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 02:42:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-52ea2ce7abaso4898122e87.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 03:43:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720431757; x=1721036557; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1720435388; x=1721040188; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=pPFgBOg0BwvjqhaIzOQzuUDIJVPwIY9J0BPpaCd2cV8=;
- b=CK+FHE0uQvmgqYbOYxEJEEz5C2btUVTBGGAGzymfL5+Tfc2sHwVW9MH10w5xU1gF5P
- qkMZnJt2en/DB1hxtsxtGA3qXRgbh8CFgnKvtx3urCf08rPWJirmeeRdqt4uuhv8HlP9
- WX0deYQxQqRkqPmMVGYymqgqJUCPB7qDGqXZnFgry3QkEXQwLHvbWT3+rO9VD3lyOGOU
- V+wLSIiA/oq87MJH3L1PLbdcMokXcONiU+Ava0v0+Vfa/kGFmEWNImXfhwlr5UonRQA3
- ap+silu28hbS3ElzhhcjPpfzGwIl2V2r7VDvV1MRiOVgUqwHlwwCnPG4+JsBqWJD4vSs
- rRvA==
+ bh=XyRdlq6oRrK0VM7RU+8pSBpB5t2TOK9NKlSSpagR9hg=;
+ b=dZlWy2RhOscpv2SbfsyWnaQewxkQ+8WkMLybLEskwA04WBa7d8cA2AKhpgv/2Thq5q
+ m0UuJnWMuMXcjp6WG99SlpLdhCzs3pjlUH+3bG0rGYkX6+msFBgKd32YmEpowOnXySLn
+ ZPS2t7o+izFOL+T1nCnImf2MPr1jGHRLrnLa6b+94spimK8m1fSIPUPFblKvj7CEkK+R
+ S0KKQuBBVFx4g/YxytSLER7n4pBJhOYTbnbJdawAso79Pvbpjm4ppH/6iEuYoIn4j3Wz
+ qiLZiuXt1YUG9/u1/7UZeKRMtkCpV8DrEigW7R3dD8sh8RnbFG/iu0ngfuzsKqWA1wEV
+ 8GUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720431757; x=1721036557;
+ d=1e100.net; s=20230601; t=1720435388; x=1721040188;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pPFgBOg0BwvjqhaIzOQzuUDIJVPwIY9J0BPpaCd2cV8=;
- b=IBfT0TJFjw5Er1wRRAz+MPnXo4bxq/6NMvSh5PGuERZ1cVBO0QbJNPPUYmNwsbG0ho
- cyTppUjsI8VGODtuYhDV5ck5Mz6rXH9krbOzqv8wHTXN/6FxAxPLkjo96RQ80b8v78ix
- lbnFyaNQAsDCPZ5O4oFGXYMOMTVy4RYzcWcn0TlGVpv1U/2x20E/1kaACyZ47uVhO+oe
- 6NMkIaHQyzf22+IALDvzizPfZgXB0ZDxGzZEXfay5b27lGpqJb1YaMbGdIGw4WfMb8zc
- hvu/wno5unR18Z8MUgp88dsrHjvQXcY0xjXM/vDu7UAOQGCklI+Xexl1Ly6Iv15GtOMc
- thMw==
+ bh=XyRdlq6oRrK0VM7RU+8pSBpB5t2TOK9NKlSSpagR9hg=;
+ b=AOjttf4MFBP48Vbbt4DpmX4KO9NadRWrUKFp2a95TF7r2bwGC5K7IXmsQBhuFl3d+1
+ 45gHoG+Q5R/zp/tDXdXlRZwwdh53YRKvJYY64TIVfS4PrVFmAW1JsQmVipKqEYHAx/En
+ frtP2S7ZRgXapLmoQQqK9pVaoY6WamgImZAC5l2FukUGUVqmbymOFRapSXsWhdKCUi5U
+ GHEOdJ9s0esKZpaN/h8qIORyYDIkUk4yE9L2O4i0rGrwcW5y+SMnG0JhG38rFv4aUUE9
+ A3oAKZXhaZWmH8hZxe79cXE4ih18B7SiiYpQzbPR7XTh026KuUkDk3nbbaZp6WWKfFxN
+ +5LA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6rDM4vGFK0h7muuO9lGFCt1VbGjxWgz8V42CowMg/DrO6pAjhIen19VYltc32aqV6SXZetuNwiKMiuNe3z85HuIWGdw==
-X-Gm-Message-State: AOJu0YxqKxS9U00wunGhLTcGU1Y75QrR1rI6HfLQP+nx0ELOEtaLriEN
- 0Tc/+jk0oexiuq7z38X7mOiW0DNJYlbxfkt3hK08qtqC+p58quoJ
-X-Google-Smtp-Source: AGHT+IGJTVwfxRPLlqsy1KIoSb8jqnFfw/igQQIrxqMOb9EfhE4RP8yDb4xRHk0zohcC0359UuhRFw==
-X-Received: by 2002:a05:6402:2349:b0:57c:aac9:cd8 with SMTP id
- 4fb4d7f45d1cf-58e5a7e8b66mr7953030a12.8.1720431756473; 
- Mon, 08 Jul 2024 02:42:36 -0700 (PDT)
-Received: from [192.168.26.149] (031011218106.poznan.vectranet.pl.
- [31.11.218.106]) by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-5925eb01124sm1539068a12.32.2024.07.08.02.42.34
+ AJvYcCUWZZh/JGOEVuY+BVhDFhgGp7qLjV65TFGP7Zo17dpwezAp7UeELcc2368O6h5+Ig2QPs+ppYi1vSqCtKkzAhFFP4O0zw==
+X-Gm-Message-State: AOJu0YwnCRodx68T665Q2CSTqexCWW4yTEmk0NURV4whrgs+1684rxrH
+ epjPnPKgW0v846BLSYSrAInQHtY7yU1JW8cdI/ESf2few2pRcCS6Xh8hkDqu/ns=
+X-Google-Smtp-Source: AGHT+IHfEeE6QdmIbqmYhhFioLu7vvEImHMuAdnu3a/sz4qHFG2tI/zyz5Lq41FE2OQ+ZOqxgfa9Bg==
+X-Received: by 2002:ac2:4ec9:0:b0:52e:9c66:5fc6 with SMTP id
+ 2adb3069b0e04-52ea063b04amr8198659e87.34.1720435387982; 
+ Mon, 08 Jul 2024 03:43:07 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::18f8? ([2a02:8109:aa0d:be00::18f8])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-58e2f7c0e00sm5225812a12.6.2024.07.08.03.43.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jul 2024 02:42:35 -0700 (PDT)
-Message-ID: <329fefa1-5274-4f74-8d7a-aaf8d2a65189@gmail.com>
-Date: Mon, 8 Jul 2024 11:42:33 +0200
+ Mon, 08 Jul 2024 03:43:07 -0700 (PDT)
+Message-ID: <b18f0af5-c066-467f-81f6-11ce8a181ae3@linaro.org>
+Date: Mon, 8 Jul 2024 12:43:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dt-bindings: nvmem: convert U-Boot env to a layout
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Michael Walle <michael@walle.cc>, devicetree@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- u-boot@lists.denx.de, linux-kernel@vger.kernel.org,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
-References: <20240705225821.13196-1-zajec5@gmail.com>
- <20240708083208.322f4418@xps-13>
+Subject: Re: [PATCH 2/3] soc: qcom: rpmh and cmd-db drivers
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
+ <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+ <CAFA6WYM9hPFpb9F=nYSe-UkFbGMuUuJBiBfMiUzrSowSxvOUNQ@mail.gmail.com>
 Content-Language: en-US
-From: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-In-Reply-To: <20240708083208.322f4418@xps-13>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYM9hPFpb9F=nYSe-UkFbGMuUuJBiBfMiUzrSowSxvOUNQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,44 +99,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8.07.2024 08:32, Miquel Raynal wrote:
-> zajec5@gmail.com wrote on Sat,  6 Jul 2024 00:58:21 +0200:
+Hi Sumit,
+
+Sorry for the late response.
+
+In general, I'd rather keep this port closer to the Linux original, so 
+that future cherry-picking of new features and fixes is easier. This is 
+quite standard practice in U-Boot (and why the compatibility macro's are 
+included in the first place).
+
+Otherwise, we end up with our own quite different implementation, with 
+the higher maintenance burden that comes with it.
+
+This port doesn't do a perfect job at keeping close to upstream, but 
+still I don't think we should stray further without a good justification.
+
+Kind regards,
+
+>> +EXPORT_SYMBOL(cmd_db_read_addr);
 > 
->> From: Rafał Miłecki <rafal@milecki.pl>
->>
->> U-Boot environment variables can be stored in various data sources. MTD
->> is just one of available options. Refactor DT binding into a layout so
->> it can be used with UBI volumes and other NVMEM devices.
->>
->> Link: https://lore.kernel.org/all/20231221173421.13737-1-zajec5@gmail.com/
->> Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
->> ---
->> I'm sending this PATCH without Linux changes to see if this is the
->> right approach - for developers and (DT) maintainers to review it first.
->>
->> My previous attempt (see above Link) turned out in refusal so I'm just
->> trying to save some time in case this one goes wrong as well.
->>
->> Hopefully the included example (which I really think we should add)
->> explains well how I think this binding should be used with layouts.
->>
->> If I get some positive feedback I'll work on V2 with actual Linux
->> changes.
->>
+> Export symbols aren't required in U-Boot here and other instances in this patch.
+
+...
+
+>> +       /*
+>> +        * Wait until we read back the same value.  Use a counter rather than
+>> +        * ktime for timeout since this may be called after timekeeping stops.
+>> +        */
+>> +       for (i = 0; i < USEC_PER_SEC; i++) {
+>> +               if (readl(addr) == data)
+>> +                       return;
+>> +               udelay(1);
+>> +       }
 > 
-> I am still in favor of this change. I know from a binding perspective
-> it might be questionable; but from an OS perspective it makes total
-> sense to deprecated the old U-Boot env "device" driver in favor of this.
+> Can we rather use readx_poll_sleep_timeout() here instead?
 
-Please note that at this point I didn't decide to deprecate the old
-binding (using "u-boot,env" for flash device partition). That would
-require mixing "nvmem-layout" with "partitions" which I believe Rob
-objected to.
+...
+>> +       for (i = 0; i < 5 * USEC_PER_SEC; i++) {
+>> +               if (readl(tcs_reg_addr(drv, reg, tcs_id)) & BIT(tcs_id))
+>> +                       break;
+>> +               udelay(1);
+>> +       }
+> 
+> Can we rather use readx_poll_sleep_timeout() here instead?
 
-My PATCH in its current form just allows reusing this binding with
-"nvmem-layout"s which is needed for cases where we agreed to allow
-"nvmem-layout" (UBI volumes and pure - non-MTD - NVMEM devices).
+...
 
-If we want to refactor this binding in MTD partitions context I hope we
-can handle that at different time if we agree on some solution. I hope
-and I don't think this should be a blocked for this PATCH.
+>> +
+>> +       spin_lock_irqsave(&drv->lock, flags);
+> 
+> Locks aren't needed in U-Boot, can be dropped here and other places.
+> 
+
+...
+
+>> +
+>> +       spin_lock_init(&drv->lock);
+>> +       init_waitqueue_head(&drv->tcs_wait);
+> 
+> Similarly waitqueue should be dropped too.
+> 
+> -Sumit
+
+-- 
+// Caleb (they/them)
