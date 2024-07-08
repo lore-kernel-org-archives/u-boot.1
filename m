@@ -4,133 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC388C3DA42
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:40:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 021A3C3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 15:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3244B887C3;
+	by phobos.denx.de (Postfix) with ESMTP id 95749887CB;
 	Mon,  8 Jul 2024 17:39:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="k+D6O/cN";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BvdmZ2qm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDC8F8879C; Mon,  8 Jul 2024 17:39:56 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::600])
+ id 036DE8879C; Mon,  8 Jul 2024 17:39:57 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::618])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B286E8879C
- for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:39:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81E42887C4
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 17:39:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Sam.Povilus@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lLcFAeBv+pd9fy4mcGf8fwJSx6NjD5kj33sY9s87iXqUWbWATtw6VEh5kERgAwFzeOQCqXjWEKUfPoXl+lFG4kqdnqrCLo4/zQvh2ijri5O4fHMxYx4MvJRQ9Co5gc1AoeO5A+mQyKOemOwOQDdsoCwkB8jeEX5TzpAr7+dpXOjjw+dc/SUA/607XW/VUS3wT/SfikhZdQ1mOLXMA1ddVWtaQnWJ7eyXI1NlKCo/5b+Rbwzjcpvp9Oah+6/D3fdekpxIhgV1naIJk4/NuW84d8xb96+Cbt4J9g9Ht47mcGVI12n28yfIxlzGUFMbxgBF+fx/6SXGuuLFU8dOOZrOTw==
+ b=LLFmuC2HIZjvC8unzWOt5u0d38GOtj77M6ylBaDvHvHYaoavW3D7KKtLZfKE7tZJqqLm8GZYkyBY5xPHLyazRWTGLm9HO+EWrcVCEV1bzLpCE+k89/7EhhlKTUNKaklualT5e+V214B9F887FHU+QhHwudgJGZnlr5OAkkInoC0Rfkf3l0sdSJGE7dOY7Udedq+vLHaVMRSF34225ZerKQdewm/zgALwVeft7E8icJcN9KbTHIhHsKMpIwyg0VnN5SCm32j4ZQ9XG2dsEKaoyhJWAcgHT2FxuiyabQ36W3YKeyIPl5pSJBf44Gdqi57yyvl250kzuFXjT67d93l5NA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lLtzhsH9LCzOTQvYZp3NlYJO6q2cSBq7N5P8udbWhJw=;
- b=U0MRYqmtirmoin5eE+LYXiLF12AlKYwEeoNv4Ao7LW66iI0dmhmUoIHCVCskWd7HgZYB2N53qXtioCiSL8BhHTig7Yu3WEcWfIeXMs2RebvxtrkUqyYbxHOBeXvrfEm9H2WIX8d48al2nac+5Flh6sGlsTLcnyfSwZ2E3eHsmfyNTEWDgAFxj/z7chWMpUm/UBqWE98VDdQTfV9YZnMXOh13GBW+RIAHhCS8szmNzTuoMlqScaUOzGJ36zK3KAe/6Py2+BAv3FwnxjqWA1PWz9IRG+K/AREZJ4udM6iONo+/9HmD4Q/oGectQHjBKblmB7N4xgb4EKnjx+oaDQNQwA==
+ bh=3mjPBT76d9UHSGcdTV4sQmKQakAlG2FfasQ0b5Luq7Q=;
+ b=GkClv2o7SzbqRlcH9ezj+lBP4K48guyzBjKcQ7eSuhzNOXummKpFuO6C/FwAVnS5/R2uO0MB9x7jyffKFPmmUnIgwhUNUCVvkGF3fmvulPfOJVXEPs/AC/8XnsrP3ojJpS9qRiqcxdW1wopkMTL1XvuWXfQfF2p1GLS0P7m9O9sI7n8rq69sLOdMyae9pryL5ieW0yPS13+mExjSFyFzlwK2sio+xaIuLRPKvsxSLJLLV7bKk4z6cbwAuh8qRQRY4WlicgG+WtNzrYDeJMvoy0NVwJVu9pro75GbqHDzu1II3xRf7jtJoHt77xK1AGPu/WF0P4DODfTk9Px+Wwm3pg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lLtzhsH9LCzOTQvYZp3NlYJO6q2cSBq7N5P8udbWhJw=;
- b=k+D6O/cNzOrkMx0C1lBm1xQuAzAp0f0NXIVf8+qIlFunALfLPD6OgGxjpJoNCOOaSWazyJQ7yoaJPKFiHSAZ2c+6deonEmaEPuWU5ntoVkDWUW4QeOaasepZgMGmbBgdQgJAZ9ma9l0G3z6ayYrup+FpdPls4ncWsWgqOawutdw=
-Received: from DM6PR08CA0020.namprd08.prod.outlook.com (2603:10b6:5:80::33) by
- SN7PR12MB7909.namprd12.prod.outlook.com (2603:10b6:806:340::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.36; Mon, 8 Jul
- 2024 15:39:49 +0000
-Received: from DS2PEPF00003448.namprd04.prod.outlook.com
- (2603:10b6:5:80:cafe::d8) by DM6PR08CA0020.outlook.office365.com
- (2603:10b6:5:80::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.36 via Frontend
- Transport; Mon, 8 Jul 2024 15:39:48 +0000
+ bh=3mjPBT76d9UHSGcdTV4sQmKQakAlG2FfasQ0b5Luq7Q=;
+ b=BvdmZ2qmYam3Y4S0MWxl2FSumMIKF7ZwbN695fRYO2Fhr3Snpj1cP9QGS2Mwh0h98IaZ7X3tVlqw7+T0mdFFnv4rwl3TBtep/jDHamopJpxU8XzZcXEkvHqo4/z4ituqq//GoLhAxELPecMKa5t5zDLLZKZcL1Xm45iFuq1FtTU=
+Received: from SN6PR2101CA0023.namprd21.prod.outlook.com
+ (2603:10b6:805:106::33) by PH0PR12MB8824.namprd12.prod.outlook.com
+ (2603:10b6:510:26f::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.33; Mon, 8 Jul
+ 2024 15:39:47 +0000
+Received: from SA2PEPF00001509.namprd04.prod.outlook.com
+ (2603:10b6:805:106:cafe::fe) by SN6PR2101CA0023.outlook.office365.com
+ (2603:10b6:805:106::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.11 via Frontend
+ Transport; Mon, 8 Jul 2024 15:39:47 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003448.mail.protection.outlook.com (10.167.17.75) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7762.17 via Frontend Transport; Mon, 8 Jul 2024 15:39:48 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7762.17 via Frontend Transport; Mon, 8 Jul 2024 15:39:47 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 8 Jul
- 2024 10:39:47 -0500
+ 2024 10:39:44 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 8 Jul
+ 2024 10:39:44 -0500
 Received: from xcoapps69.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 8 Jul 2024 10:39:47 -0500
+ Transport; Mon, 8 Jul 2024 10:39:43 -0500
 From: Sam Povilus <sam.povilus@amd.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <xypron.glpk@gmx.de>,
  <u-boot@lists.denx.de>
 CC: <sam.povilus@amd.com>, <git@amd.com>
-Subject: [RFC v3 2/2] doc: add missing table of content links
-Date: Mon, 8 Jul 2024 09:39:41 -0600
-Message-ID: <20240708153941.1045588-3-sam.povilus@amd.com>
+Subject: [RFC v3 0/2]  FIT documentation link vs copy
+Date: Mon, 8 Jul 2024 09:39:39 -0600
+Message-ID: <20240708153941.1045588-1-sam.povilus@amd.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240708153941.1045588-1-sam.povilus@amd.com>
-References: <20240708153941.1045588-1-sam.povilus@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: sam.povilus@amd.com does not designate
+Received-SPF: None (SATLEXMB05.amd.com: sam.povilus@amd.com does not designate
  permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003448:EE_|SN7PR12MB7909:EE_
-X-MS-Office365-Filtering-Correlation-Id: f87dfa17-72a3-41ed-761c-08dc9f643379
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|PH0PR12MB8824:EE_
+X-MS-Office365-Filtering-Correlation-Id: e6d41763-7410-41dc-362d-08dc9f6432c9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nrQ4UnViZkEEXaYFnK7r/q89klO+uksgH5c4cuULIrU8/iiextPtX9qziqeg?=
- =?us-ascii?Q?y2TBr0ABx6dDrWiNJnTWia5hftr0KKrJ951xxQJl1XcNWoJnPwhfNX4nZxII?=
- =?us-ascii?Q?wgtFu+QaKsnraGru4ksfzM7Ja/zUDAitfWOYToRRHgXPecq4sqdHjC7TNRhL?=
- =?us-ascii?Q?PAsyrPpZx5vR+vEsCmeGiHMo5e9xxp/rZTYWdPAYcmX1h8OdbXwAMPJUl3PJ?=
- =?us-ascii?Q?dnDZCfGFTT+49Ix08QpBIsiDm6k9m5DettgkIVVJnLFOOGoz+pVXN5ekKfUE?=
- =?us-ascii?Q?/2UpCH5alhGja0rJVfBdACj7d2LrCsWUAM41DsepNhiwnAQhNLDWRhVvta2V?=
- =?us-ascii?Q?P+3mIsrCEwQl2lpwWDVgjhxxAAuAnbjzQFHeUpD6BMEQ7kOS/acSmkEikJMj?=
- =?us-ascii?Q?t1MBA6j0Qz20j2y7afr7BySlXB7qDNzqv2IAl3VWf2OENzOj2LoII1s68QFM?=
- =?us-ascii?Q?dqH8/qw/BStYcRyADO4dNhX+X253/Q8NWyA+avfJQOA56dDG/tHV5pfkUlBd?=
- =?us-ascii?Q?FLZotIWZmS7K7YJSqeY23akMtiepdkufD/EOxiACgfzPvU2tT+T8WyV/QMDc?=
- =?us-ascii?Q?E2sqy6WQlNWdT+A//6d174R7dsqMd8S/JKra6N9vYn41GGzPXYfzj6BCJ3Er?=
- =?us-ascii?Q?3UVUanz7bD/PbdYYVst6eTfd7vNfSVcu2no/o1agtWUUSkmkcpVQa0Wi8HKy?=
- =?us-ascii?Q?fhh9vpVCmEvlv75aqUygN4KvvbZpzcG9lEu49/U9ifSiGIZGFXoGjdoZR+gS?=
- =?us-ascii?Q?gdBIaOnzn96eDM1IptisLg7QgC5Wqsf1OqLLKTxt+j6Xbm4ApjD9Pg76Yp/7?=
- =?us-ascii?Q?d5MaYUmtw7CQxTP2xnh9hhl6cHDn6lsPADZCUoyMx0YCLKQGTyL464P9hPzO?=
- =?us-ascii?Q?NYbROYbAq+0ZR54L6mUpr593iWtLGdtjlvY/yuI/79UAqBNJl9pw25zwKTim?=
- =?us-ascii?Q?AlVokIYM2pxa5HDhei/d/ItflJYVvwEslkK9rtGepOnyYMemY4boo66VwV/o?=
- =?us-ascii?Q?MR3/kI3GL2m0/WlTShbdiZrUN0/K1G7C+xttezSw9wFy1WJD2SWP2SSKTq/z?=
- =?us-ascii?Q?bx17GS/2fECOZQ3hAHvlZeieSRNdUmfNtqQkmvrAc4Jv9VnCvpNTH72iQso/?=
- =?us-ascii?Q?/mncoNSS7bxVF5+XQtCC2ZbbUv8noTa7MBV3OifnC/pVk1vbz2jc+viSK9oF?=
- =?us-ascii?Q?/56NVZsBOJpg7OUZOuNJWFptobNIr76Y2GiAXbnsZwJhVwWXfh0k0sg3zkFx?=
- =?us-ascii?Q?drcejWm2o+EI+6BxNjFhxvvAb5+5opBHMFM/YFVClGITwwUZMK3Wl5AXpbYj?=
- =?us-ascii?Q?mIM5NtH18qOv0dwEFjOSM3O/sk4D2qoz2V5xtr28cFdaLOrCFcCpdSTFuXSc?=
- =?us-ascii?Q?xIQe2xUbt/ivdCyRs/8WncyZx2IPe0/GFbjFqHloTW2kVjOkqcCN1ilQ7VwR?=
- =?us-ascii?Q?uzpZt7ADdCY4tltQzB9jkFLztG9ZxPiO?=
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4vZH0E1Kq/G2Mj0j8lQ1qtpS3ryPLqMgyglleUz2nj9Z87OlzShiihKkUeag?=
+ =?us-ascii?Q?liFulhXDcxM/UsqD+NVUU1UzjM11rFmzZcYAEtPasAPfcO5CPcyobFMkk9oF?=
+ =?us-ascii?Q?fiCeVIp10I1KnUxcJ7Ykp28dQ3zQPAjUlWJYCVborJ54LFa47pA7pWNXrFoq?=
+ =?us-ascii?Q?OdmA1LmSdR/jZnOxomhMcCIKhn82hbpVYgBLfXd/9YYkZrkkNLocQ5Nr13uK?=
+ =?us-ascii?Q?PGTi5sSGv6EFNllmXAunMwcti051Yqrzwkhx7RIpyuEy/Zy9gp+Ad7/0SyDS?=
+ =?us-ascii?Q?oDaR2mE4jdKDSQQw6wOqfXZ6PW9C5hwvmF7UUgUtrGzSykG5vwBdizVJIrfn?=
+ =?us-ascii?Q?Ul66aIxiwXpPLdQ5vbxayw9ow3mFJ/8yIMknOi04WIHnZzQUIEecOHA+CvvF?=
+ =?us-ascii?Q?o/neH35+6YpnoOTcDw9X5ANCNSPWVwpT2ROgFSYvXcrW1eADmgu4W4y+4IU6?=
+ =?us-ascii?Q?NXntyEoSfbnRN6vyjT/77h5QVd1DCsH1OV6/XH1Eqf08RgxRAm/q6itP5iit?=
+ =?us-ascii?Q?g31LnWvhQbu6ID3VCfAaEYs2vKHpW0uaMnb/yFlCw+izYGnDTf74OA4ORRn8?=
+ =?us-ascii?Q?Ti6PdE4FkMJ8uKhCPiM3gqtizaTlu/k13MN2f7TFau4jKFo7MboUX432bYZQ?=
+ =?us-ascii?Q?qKbtCLr2hX8soPqJUqpXa+pIA6yxtLOOwDbf01PzJhNOr56k0C1Hldsy1QDE?=
+ =?us-ascii?Q?28LJ0rZBcuJU/2tHXRUa8yUlvEqOnU0bmb0uahjl295zaOWw4fSGrlOKIass?=
+ =?us-ascii?Q?xJpg6sX9nHLKB1fOsoT7a2pV3xA0gWHmGDozTuH7kpkqDXTxKvlIvomNPirE?=
+ =?us-ascii?Q?7vtQZm/Op6LSoG+1yz/AXIwUvWe6JbzWznbtS7knq53quY0diXb9uVwGZYk0?=
+ =?us-ascii?Q?1t7sPPr+RhGER1+NRlaekYutgL/7iJOslvOMmrks67L3XXexcHrRI9P0DrOj?=
+ =?us-ascii?Q?AmWxISeKCiMroxXhN6JzcEZOEcyy3aJfJvGIAde6VVmHA9BzwDBTA2uU+5W9?=
+ =?us-ascii?Q?W00p11DvaaYHX+2bVsxKvIl3DSKejYxLqdyFExlm2mW64E5sjrR3yac/pVb6?=
+ =?us-ascii?Q?L9ouXPXDA/P43FqTL0LjT2gYRWTtx4S6xYOs0W1QTr+l8QEHw7fu+cWHwSzn?=
+ =?us-ascii?Q?e3QrRFHREV6eqn3uyaefdsibra1vBq1KobwUmkx2Nrm64S1RvYWlaF1q/ZCH?=
+ =?us-ascii?Q?/IBoXQ49RdGbUAfoQ5UnFE9bE8HN5LOrqbahuDKLIh+6c11tuTXIwJl6s18o?=
+ =?us-ascii?Q?hCl+IZX6K6qUn5sQwq7xewnLKuYxzA0gBUMXVDyFnaknn4Y9hTQgVcqS2nIo?=
+ =?us-ascii?Q?shDJK7K1B75J176HRfogHlJGyUEfTd13jP9ZvaesVo84yNvsarIEXj2bcnSr?=
+ =?us-ascii?Q?25d9S/EdMKxp9UBN5glyuWTe64MCIvd9gE8kOOnbMgAagq9Lg4lG7FI+FqQJ?=
+ =?us-ascii?Q?b/t0knDIV0BZgRID1KKCsHloa8y9ehpL?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2024 15:39:48.6255 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f87dfa17-72a3-41ed-761c-08dc9f643379
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2024 15:39:47.4861 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6d41763-7410-41dc-362d-08dc9f6432c9
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003448.namprd04.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7909
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8824
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,45 +149,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add missing table of content links, make alphabetical 
+I'm proposing linking the FIT documentation instead of double book keeping it, it does have the disadvantage of making it more difficult to see the documentation especially if offline. 
 
-Signed-off-by: Sam Povilus <sam.povilus@amd.com>
----
- doc/usage/fit/index.rst | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+v2: update table of contents instead of removing
+v3: remove duplicate entries, provide commit message
 
-diff --git a/doc/usage/fit/index.rst b/doc/usage/fit/index.rst
-index af2e481212..ed28dc89ae 100644
---- a/doc/usage/fit/index.rst
-+++ b/doc/usage/fit/index.rst
-@@ -10,9 +10,24 @@ images that it it reads and boots. Documentation about FIT is available in
- .. toctree::
-     :maxdepth: 1
- 
-+    beaglebone_vboot
-     howto
--    x86-fit-boot
-+    kernel_fdt
-+    kernel_fdts_compressed
-+    kernel
-+    multi
-+    multi_spl
-+    multi-with-fpga
-+    multi-with-loadables
-+    overlay-fdt-boot
-+    sec_firmware_ppa
-     signature
-+    sign-configs
-+    sign-images
-+    source_file_format
-+    uefi
-+    update3
-+    update_uboot
-     verified-boot
--    beaglebone_vboot
--    overlay-fdt-boot
-+    x86-fit-boot
-+
+Sam Povilus (2):
+  doc: Remove FIT documentation that is elsewhere
+  doc: add missing table of content links
+
+ doc/usage/fit/index.rst              |  26 +-
+ doc/usage/fit/source_file_format.rst | 682 +--------------------------
+ 2 files changed, 23 insertions(+), 685 deletions(-)
+
 -- 
 2.34.1
 
