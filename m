@@ -4,51 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607B4C3DA44
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 11:44:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A43CC3271E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jul 2024 11:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6B1D886EE;
-	Mon,  8 Jul 2024 13:43:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7B8EC886F0;
+	Mon,  8 Jul 2024 13:51:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1720439039;
-	bh=pFos5dthmBQ8aWDdYOEHpJBAdqmUEX0q6stsFS39s+c=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=kiM3XauaBMN1O1b0HxjJQgNBe+QOCkrj4P7Su9yUJKm/AUQxsMmjKoRqx3taPnhdk
-	 NSOiMUHZKsezi58wZR/UiucInboihLbGKAg9MIQ8BBpvx3AZkqklzGGm0BK/E0qogz
-	 /YJAGE2GgcSXi7+AKpt4xAJPcCN8Ybc1ttjKpS0wfiYHtK/xI1BUg8E4v5bbv/2hZF
-	 7cqkmDV2RCHjJ8Mlbp10y8BljCPgTx22jh3sc9CeqXFkdvWRQbioqX8EUPiN/FFAL3
-	 u0ddj0azyl0q8KPNGDMnLVmN/hSXUyQJEShzC4/4zCKsbfqmqZ6zVmtIVhv4R5MBZT
-	 2aXWlOhtJSkHw==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pGqEXunE";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D6412886F0; Mon,  8 Jul 2024 13:51:11 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3ED4E886F0;
- Mon,  8 Jul 2024 13:43:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1720439038;
- bh=pFos5dthmBQ8aWDdYOEHpJBAdqmUEX0q6stsFS39s+c=;
- h=From:To:Cc:Subject:Date:From;
- b=VukovIlduOef0qDa6ZNsZgtctmbEZMv7Vl50c03xjy+FALG9eWbshwijZj5VECNkn
- 6OvdBLro8fuKHzNhj3L+yLeRk9b1DF94PQ8KpO3oD8h4HYAn91JiUllXlx7RykiUvF
- ZpQ8jKEPW/XpA6vD9t7fRhkM+XiL+LA6mYeM2z73Plk5y178tAv6JL+akZIarb9uRV
- eSzECjaW+/ucds4be5Ojh3BuK6W2LpdbaGTuVpg5gGOpSbnLpcgLCciIViObM1klNb
- u7iRsGSun+wupQO/MWzmebLHPYZFVHG6sP7jlfcZGgWUxQA/1pMOma6dKPLwezOpiv
- 6Lx5pyyftrkog==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Fix secure_waitbits() mask check
-Date: Mon,  8 Jul 2024 13:43:23 +0200
-Message-ID: <20240708114344.18354-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 724518862E
+ for <u-boot@lists.denx.de>; Mon,  8 Jul 2024 13:51:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 468Bp5jY069706;
+ Mon, 8 Jul 2024 06:51:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1720439465;
+ bh=zIIRLRVSGI5VkVlalOslN29Ug7uRwymkMRcBESuV2wA=;
+ h=From:Date:Subject:To:CC;
+ b=pGqEXunEpQUkJPUVWwjCSts7xZLBNfNbvxqplN82ulsKOt61NAfIEFfGAC0fm2ZqM
+ e5ce6ee3kSSXT/CzJmqm7K8FZK+g9oan0CAN4aLmWi21WhUdEAEFvcXC6LkAHWGe9G
+ Dnsy8JtmJOyPv5pHeLSQBHMmqLKtcDzHEfkYhhvE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 468Bp5i5043432
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 8 Jul 2024 06:51:05 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ Jul 2024 06:51:04 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 8 Jul 2024 06:51:04 -0500
+Received: from localhost (kamlesh.dhcp.ti.com [172.24.227.123])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 468Bp4Kv084798;
+ Mon, 8 Jul 2024 06:51:04 -0500
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+Date: Mon, 8 Jul 2024 17:20:40 +0530
+Subject: [PATCH] configs: am62x_evm_a53_defconfig: Remove CONFIG_SYS_BOOTM_LEN
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240708-remove-bootm-len-v1-1-2a537061426c@ti.com>
+X-B4-Tracking: v=1; b=H4sIAI/Si2YC/x2NzQrCMBAGX6Xs2YVYY/x5FfGQ1E+7YBLZLUUof
+ XdTj8MwzEIGFRhdu4UUs5jU0mC/62gYY3mB5dGYetd7d3JnVuQ6g1OtU+Y3Csfk4YM7XMIxUMt
+ StKY1lmHcwhxtgm7io3jK9/+63df1B2JOXPx7AAAA
+To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <praneeth@ti.com>,
+ <u-kumar1@ti.com>, <m-chawdhry@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>
+X-Mailer: b4 0.12.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1720439463; l=1150;
+ i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
+ bh=/0l8Xr/zMg5u0X/dem7Frdphr8VfV4Mn1GxPJJH5yxU=;
+ b=rDcBa4BiAivdJ7eEUYk1WOQY6SscANSD3OG8nGBhyxlh7TqTGv52s9yE/ixZo/jRJHCroSIqR
+ CQdO0uphtdQBRCCQ98S9e+PEJTulXpNYEAZlZcOKyDu86I8YWhURKIH
+X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
+ pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,36 +87,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do not apply bitwise AND to register value and expected value, only
-apply bitwise AND to register value and mask, and only then compare
-the result with expected value that the function polls for.
+Increase the maximum size of the buffer that is used to decompress
+the OS image in to.
 
-Fixes: b49105320a5b ("stm32mp: psci: Implement PSCI system suspend and DRAM SSR")
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- arch/arm/mach-stm32mp/stm32mp1/psci.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+If image size is greater than the buffer, boot
+will fail with following error,
+"Error: inflate() returned -5"
+"gzip compressed: uncompress error -1"
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
-index e99103910d9..ffdafea464d 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
-@@ -393,8 +393,7 @@ static int __secure secure_waitbits(u32 reg, u32 mask, u32 val)
- 	asm volatile("mrrc p15, 0, %Q0, %R0, c14" : "=r" (start));
- 	for (;;) {
- 		tmp = readl(reg);
--		tmp &= mask;
--		if ((tmp & val) == val)
-+		if ((tmp & mask) == val)
- 			return 0;
- 		asm volatile("mrrc p15, 0, %Q0, %R0, c14" : "=r" (end));
- 		if ((end - start) > delay)
+Default limit for ARM64 platforms is 0x4000000, remove
+CONFIG_SYS_BOOTM_LEN=0x8000000, so that it follows default limit.
+
+Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+---
+ configs/am62x_evm_a53_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index ca993b427b..dfa5ecc847 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -32,7 +32,6 @@ CONFIG_SPL_SPI=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+ CONFIG_BOOTSTD_FULL=y
+-CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x58000
+
+---
+base-commit: fd46ea0e701920eb205c2bce9d527bf0dec10b59
+change-id: 20240708-remove-bootm-len-ab4e46039656
+
+Best regards,
 -- 
-2.43.0
+Kamlesh Gurudasani <kamlesh@ti.com>
 
