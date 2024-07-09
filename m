@@ -4,86 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C163EC3DA41
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 09:33:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 055BBC2BD09
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 09:34:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AC2C87EEE;
-	Tue,  9 Jul 2024 11:33:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A894885A5;
+	Tue,  9 Jul 2024 11:34:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dhPgC7FU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EmD++bx9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 306C687F5C; Tue,  9 Jul 2024 11:33:15 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 665ED88599; Tue,  9 Jul 2024 11:34:49 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C36BC87EBD
- for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 11:33:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF6E187EBD
+ for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 11:34:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-426602e8050so19422915e9.2
- for <u-boot@lists.denx.de>; Tue, 09 Jul 2024 02:33:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a77c080b521so542140366b.3
+ for <u-boot@lists.denx.de>; Tue, 09 Jul 2024 02:34:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1720517592; x=1721122392;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=fkOcvZMsaPuGJ05gZQblSrQrkYx2+JsCD16MX/l2fQY=;
- b=dhPgC7FUV70wXPew/DN1mjdAag/9TRGlIKb6EypYCmad02V0t7WV8qhqfHuDBy3oRq
- sxzwcViWrseW2oPxJ+uFELk7YEIXJfkJ0+/EmyoAUSScjhLwfn/H4ezT8hhquPtMlxdL
- gVtRvrAI/+cQQiYjPFyoc9N8UEpS7zJbbRsjyJBVzwPWZx5Fifec7mgtCaHB6jjP16qv
- LYGUMf3i/DoxP43c33SDp4k7aVmKsmTsLEOWEwIhUXb/zgtUYvctKnT9GKlgI4Lt/ra+
- 8t/+PcNYcMcaKExx/fjCe6+l05cnXNnZ3f81QV5nKWPhdSvq+qB13WAkzwl8TN1+bEyO
- tq2g==
+ d=linaro.org; s=google; t=1720517686; x=1721122486; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eAlyGTFWRDqkzIDAjuDOHU+l78bZFQKZP+tZTlJK+C4=;
+ b=EmD++bx9bCvfa9ZlNkHr5BuCS8pRydklVxflzkmQXTVBAvx96k3ZyxqUMs1ORLB1o0
+ KhEgcKdbTYXIPWu+qI4+DiQYXzyo5KcfYmRKTlYPI+CM4BXlt7VcglcnCFZS47pwP8YS
+ 3chpaesR4sirP4dAg9s4xOGq0utCaqhexhdYJ/yJgPZ4n4XaDfaIrbg9rFX3QRPNSfCi
+ BK+HNLTawST2+4H8zbf6lGwX/vNS2ZC7EHOK995V188KtE31g8KE1Zm9QrgBNySe6MSD
+ d96mKMBK3rL4i3Em2CSwA7xiIUQXRy+ET04hpBL5xBVfnFV/YAdGLbWyLIybEv+pCWvw
+ y8hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720517592; x=1721122392;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fkOcvZMsaPuGJ05gZQblSrQrkYx2+JsCD16MX/l2fQY=;
- b=Kg3/z1Vdd3QlikLVff+3vXDhPnHVdr2x/NjVGE5KapiOu2ZeleSc0CdqORY2fiqEpx
- BvTCTpKqPCRCQyFdSt50irfZPX43mLWV+1zitPnw82jczHSLTSwNCIdPCKkHuRtg8ROJ
- Z/6IpG0O6oSVMyU+dI1mrUIsiqpWmb3TmwryQ0EiWWeuxg+WnSGaVhMPgkZSJzR36QnS
- czZxaE5o/7XXWx8+JSIeTe+0gZ48gh7mgLPLHR3UKUtg0ei+JTy9PtrTjzFCDHW1j3sK
- Q1GyBQh/spNBPB0cNlS9nr2xiAgeL3CDpzN0GAQZHjLKgRVb8YLKJtIoun43JMCWbqet
- CuxA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVJbaH/S2ufzAqzNWRr6Xua8mKlhCVzz+mkCpmsOjPfkA3T8uLfLignlMr19Pq/MvUCZQXC7d+mnpeFSkfB6IO9bZvxZw==
-X-Gm-Message-State: AOJu0YzKFlmJ2DjFUez5b1LX5/SUG85jQuiqi/kRAjP3wlKy+Dy/O8C7
- 6elHUCTLcKod1Nn+brtm1Ytuu9XR8fNYEnHMwCywUSZ0IKYX+cwqlsVecGyHSI0=
-X-Google-Smtp-Source: AGHT+IHAs4jORzKOyb0OsU90YHmJY0heFzV30ooLeiuG4tQQnpaiPLDx+X3DxrgHBC1MoHOml3hflg==
-X-Received: by 2002:a05:600c:2247:b0:426:5dc8:6a6a with SMTP id
- 5b1f17b1804b1-426707d7fd6mr13616365e9.21.1720517591994; 
- Tue, 09 Jul 2024 02:33:11 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4266857c28esm84767895e9.2.2024.07.09.02.33.11
+ d=1e100.net; s=20230601; t=1720517686; x=1721122486;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eAlyGTFWRDqkzIDAjuDOHU+l78bZFQKZP+tZTlJK+C4=;
+ b=ljNf6Y0GrlbU2zc65v4fVsO96yswukTQEG4PtlkzjGRoc5olpzAXb76E0VupZGFriI
+ kFEDqDtWjTy3P1UkY82XMVHc9S6fA2QWUhFjJ8vZmXGrsQnf/Cne3mVJDayD4K6ZYmCz
+ gKCNtjAnzpy4GMvLOf4n9MoY3WXNY8XzQTi4odI1lHBdfRkSVDkZedGXwj9qW20cqmCA
+ wgYu6IFxNtpEeALUA08aF/u22uJurwhcKD0QrFQW/1Q1q1K7yrVCS7f1Oxx/ineDqsII
+ R06saOnnaT7tIxq/FiPFYkD+LnqpmRh8y1gIqkYu/NWYkHfSueS/RW2rkCYlaK5xRF5d
+ W0hQ==
+X-Gm-Message-State: AOJu0YwWoG4lRndQX392mg15N4E1XBGF7bfViTZSzw4Lob49PxRRrZCo
+ PVSZxg2y2jbBpBVxuvcO+az2Rq537BL/GMhojunUtRtBt7qbjwy10fkRrxg0z0w=
+X-Google-Smtp-Source: AGHT+IFV5QE61DqBYP5uN0asHXPzxq85uIR3/eJAbt00gQ3VdCKk1xambJ3GXqwkdymGHHYCRaL3hw==
+X-Received: by 2002:a17:906:b319:b0:a72:676a:7d7b with SMTP id
+ a640c23a62f3a-a780b688906mr152375766b.9.1720517686306; 
+ Tue, 09 Jul 2024 02:34:46 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::18f8])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a780a7fefaasm62884566b.140.2024.07.09.02.34.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 02:33:11 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Fabio Estevam <festevam@gmail.com>, Fabrice
- Gasnier <fabrice.gasnier@foss.st.com>, Jonas Karlman <jonas@kwiboo.se>,
- Mathieu Othacehe <othacehe@gnu.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Sean Anderson <seanga2@gmail.com>, Simon Glass
- <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, Tim Harvey
- <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, Xavier Drudis
- Ferran <xdrudis@tinet.cat>, u-boot-qcom@groups.io
-Subject: Re: [PATCH v2 3/3] phy: test: Implement sandbox PHY .set_mode and
- DM test
-In-Reply-To: <20240617173740.80822-3-marek.vasut+renesas@mailbox.org>
-References: <20240617173740.80822-1-marek.vasut+renesas@mailbox.org>
- <20240617173740.80822-3-marek.vasut+renesas@mailbox.org>
-Date: Tue, 09 Jul 2024 11:33:09 +0200
-Message-ID: <87msmqj4fe.fsf@baylibre.com>
+ Tue, 09 Jul 2024 02:34:45 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v4 00/21] qcom: rpmh core and regulator support
+Date: Tue, 09 Jul 2024 11:34:28 +0200
+Message-Id: <20240709-b4-qcom-rpmh-v4-0-c06d0a26644a@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACQEjWYC/33M0QrCIBiG4VsJjzP01+nWUfcRHahzm9Dm0pBi7
+ N5zg4gVdPh98LwTijY4G9FxN6Fgk4vOD3nw/Q6ZTg2txa7OGwEBTgSlWHN8M77HYew73JimZqA
+ MVJygTMZgG/dYc+dL3p2Ldx+eaz3R5X2H5DaUKCZY18CYqIBZok5XN6jgDz60aCkl+GhJyi8NW
+ ZfaSFEIImwhfjT7p9miuTBGmEJLKDd6nucXdAouWiUBAAA=
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5289;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=Kpynd7jxHLUZ7TorJzw928y/GJRG3l17oUhZw5WTk7c=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmjQQyikXWxh+uWl7RTaVk0ZS+b9aN6aqFco4p9
+ +ncEIoUd0aJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZo0EMgAKCRAFgzErGV9k
+ tm0rD/9AZIv2io5i8s3CWsU0qsUOPtI2Sc+e1mNsdeNFigUaxc6wcn6Xi66I1d13MNcMcvB8ve9
+ QB0jG6knXfoKqt472PerrufPlFunZo5AOGysREcyMdqbsxvfbsSHfsINVPDZCLlclTpbzTnC26k
+ g0QbJo8BYEwhWQWiC5UHdOc5FFX0xVxDUw5H5c6eZQhjj0Lht6M9PzaDAqZLv/asHLIdi0/gE+z
+ GCUFn388WvGafjcscA1JB+ZO06AJnx+pUL2FE2kCjUO/a8xTe8a7vsSZ55Lq0JATiRhUUty0uG9
+ nljHN9xhf+5OKBAfWacYikk3IyMDaJ+Jhx0Bummcjcgsrwm3ewQT7GxirD6ns7OYood6KLeQbaG
+ zKU8D9JnxlrofCZn07jET/+mVU2O3G4wwDyBYxtO06DQLErrCbwgkdV7MwgMxZEnlgNgTBdlGH8
+ tMPlUVesNv/ht5Uc6AiJ6WoUJgzEcBJLKE6Wn5LQAmhegjc8aaYqGy8sFn4qJueJEGr/m9H15Tk
+ kQbLa7DuEuscyZ8AaoEuBEf+J2TMBlFqrL8UXyU0E0sShlWGPLl0cVpf8Av9AwRMNlwTC9CmoUe
+ qZ7I4Iauc8BgGwN0svpoEerdbyJg/ayWTDofbuZ+8rXT2DczVNUX1OMpRbET/BCsWvug7uz7jeR
+ 7Z7iA0TUSGCBhbg==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,99 +113,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+This series introduces support for the RPMh (Resource Power Manager
+(hardened)) co-processor and associated regulator driver found on most
+modern Qualcomm platforms (since ~2017).
 
-Thank you for the patch.
+Even though most regulators are controlled via SPMI, the specific
+regions on the PMICs for controlling the regulators are restricted and
+can't be accessed by the Applications Processor (AP/HLOS). Instead,
+these resources are proxied via the RPMh where they can be voted on by
+multiple subsystems (Linux, the modem, and the other DSPs). This is done
+for security (to protect clocks, power domains, and regulators that are
+specifically relevant for the trustzone) as well as to simplify the
+management of shared peripherals and to allow for handover of
+peripherals like the USB controller.
 
-On lun., juin 17, 2024 at 19:36, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+For U-Boot, our main concern is the regulators. Since all regulators on
+the system are controlled via the RPMh, it is necessary to support it to
+enable USB VBUS on some platforms, and may be needed for other
+peripherals in the future.
 
-> Implement trivial extension to the sandbox PHY, which makes it pretend
-> to support selecting USB Host mode and nothing else. Any other mode is
-> rejected with -EINVAL. Any submode except for default submode 0 is
-> rejected with -EOPNOTSUPP . The implementation behaves in this trivial
-> way to permit easy unit testing using test which is also added in this
-> commit.
->
-> To run the test, use e.g. sandbox64_defconfig and run U-Boot as follows:
-> $ ./u-boot -Tc 'ut dm phy_setup'
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Communicating with the RPMh additional requires accessing the cmd-db
+shared memory region, this contains key/value maps to determine the
+address of specific resources on the RPMh.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Introduce support for the cmd-db, the RPMh framework, and some of the
+regulators that are necessary to enable USB VBUS on the RB5 development
+board.
 
-> ---
-> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Mathieu Othacehe <othacehe@gnu.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
-> Cc: u-boot-qcom@groups.io
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: New patch
-> ---
->  drivers/phy/sandbox-phy.c | 13 +++++++++++++
->  test/dm/phy.c             |  7 +++++++
->  2 files changed, 20 insertions(+)
->
-> diff --git a/drivers/phy/sandbox-phy.c b/drivers/phy/sandbox-phy.c
-> index b159147a765..e70d20432e0 100644
-> --- a/drivers/phy/sandbox-phy.c
-> +++ b/drivers/phy/sandbox-phy.c
-> @@ -72,6 +72,18 @@ static int sandbox_phy_exit(struct phy *phy)
->  	return 0;
->  }
->  
-> +static int
-> +sandbox_phy_set_mode(struct phy *phy, enum phy_mode mode, int submode)
-> +{
-> +	if (submode)
-> +		return -EOPNOTSUPP;
-> +
-> +	if (mode != PHY_MODE_USB_HOST)
-> +		return -EINVAL;
-> +
-> +	return 0;
-> +}
-> +
->  static int sandbox_phy_bind(struct udevice *dev)
->  {
->  	if (dev_get_driver_data(dev) != DRIVER_DATA)
-> @@ -96,6 +108,7 @@ static struct phy_ops sandbox_phy_ops = {
->  	.power_off = sandbox_phy_power_off,
->  	.init = sandbox_phy_init,
->  	.exit = sandbox_phy_exit,
-> +	.set_mode = sandbox_phy_set_mode,
->  };
->  
->  static const struct udevice_id sandbox_phy_ids[] = {
-> diff --git a/test/dm/phy.c b/test/dm/phy.c
-> index a90881b12ab..a93aa83ab10 100644
-> --- a/test/dm/phy.c
-> +++ b/test/dm/phy.c
-> @@ -246,6 +246,13 @@ static int dm_test_phy_setup(struct unit_test_state *uts)
->  	ut_assertok(generic_setup_phy(parent, &phy, 0, PHY_MODE_USB_HOST, 0));
->  	ut_assertok(generic_shutdown_phy(&phy));
->  
-> +	/* set_mode as USB Host passes, anything else is not supported */
-> +	ut_assertok(generic_setup_phy(parent, &phy, 0, PHY_MODE_USB_HOST, 0));
-> +	ut_assertok(generic_phy_set_mode(&phy, PHY_MODE_USB_HOST, 0));
-> +	ut_asserteq(-EOPNOTSUPP, generic_phy_set_mode(&phy, PHY_MODE_USB_HOST, 1));
-> +	ut_asserteq(-EINVAL, generic_phy_set_mode(&phy, PHY_MODE_USB_DEVICE, 0));
-> +	ut_assertok(generic_shutdown_phy(&phy));
-> +
->  	/* power_off fail with -EIO */
->  	ut_assertok(generic_setup_phy(parent, &phy, 1, PHY_MODE_USB_HOST, 0));
->  	ut_asserteq(-EIO, generic_shutdown_phy(&phy));
-> -- 
-> 2.43.0
+These drivers are taken from Linux, then modified and simplified for
+U-Boot. The original Linux drivers contain heavy optimisations related
+to multithreading and asynchronous probing, as well as support for idle
+and suspend states which we don't need to deal with here. This unused
+code is removed before finally adjusting the drivers to properly build
+for U-Boot and use its device model.
+
+The U-Boot version of the driver supports a single ACTIVE_ONLY TCS and
+waits for it to be cleared after use. We don't support programming
+low power states.
+
+---
+Changes in v4:
+- Denote original Linux version in bitmap.h patch
+- Rebased on Linux 6.10-rc6 and re-apply U-Boot changes preserving git
+  history. Allowing for future changes to the Linux drivers to be ported
+  over more easily.
+- Add missing check to wait for the TCS to be cleared after use (seems
+  we were just racing the RPMh before, oops!).
+- Fix missing n_modes in pmic5_pldo regulator.
+- Link to v3: https://lore.kernel.org/r/20240708-b4-qcom-rpmh-v3-0-846cc6c5b728@linaro.org
+
+Changes in v3:
+- Don't call dm_scan_fdt_dev(), since DM core will scan.
+- Link to v2: https://lore.kernel.org/r/20240708-b4-qcom-rpmh-v2-0-8bc765606e56@linaro.org
+
+Changes in v2:
+- Implement Neil's suggestions and fixes for SM8[56]50
+- Slightly refactor cmd_db_init() for better abstraction.
+- Improve logging (printf -> log_err/dev_err)
+- Add missing error check in rpmh_regulators_bind()
+- Link to v1: https://lore.kernel.org/r/20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org
+
+---
+Caleb Connolly (21):
+      linux/bitmap.h: add bitmap_empty helper
+      soc: qcom: import rpmh and cmd-db drivers from Linux
+      soc: qcom: cmd-db: adjust headers for U-Boot
+      soc: qcom: cmd-db: drop unused functions
+      soc: qcom: cmd-db: replace cmd_db_ready() with cmd_db_init()
+      soc: qcom: cmd-db: adjust for U-Boot API
+      soc: qcom: rpmh-rsc: drop unused multi-threading and non-active TCS support
+      soc: qcom: rpmh-rsc: adjust headers for U-Boot
+      soc: qcom: rpmh-rsc: adjust probe for U-Boot
+      soc: qcom: rpmh-rsc: remaining U-Boot API changes
+      soc: qcom: rpmh: adjust headers for U-Boot
+      soc: qcom: rpmh: drop unused functions
+      soc: qcom: rpmh: U-Boot API changes
+      power: regulator: import qcom-rpmh-regulator from Linux
+      power: regulator: adjust headers for U-Boot
+      power: regulator: qcom-rpmh-regulator: port over lineage_range helpers
+      power: regulator: adjust structs for U-Boot
+      power: regulator: qcom-rpmh-regulator: remove unused regulators
+      power: regulator: qcom-rpmh-regulator: port ops to U-Boot
+      power: regulator: qcom-rpmh-regulator: adjust probe for U-Boot
+      qcom_defconfig: enable rpmh regulators
+
+ configs/qcom_defconfig                        |   5 +
+ drivers/power/regulator/Kconfig               |   8 +
+ drivers/power/regulator/Makefile              |   1 +
+ drivers/power/regulator/qcom-rpmh-regulator.c | 544 ++++++++++++++++++++++++++
+ drivers/soc/Kconfig                           |   1 +
+ drivers/soc/Makefile                          |   1 +
+ drivers/soc/qcom/Kconfig                      |  27 ++
+ drivers/soc/qcom/Makefile                     |   4 +
+ drivers/soc/qcom/cmd-db.c                     | 213 ++++++++++
+ drivers/soc/qcom/rpmh-internal.h              | 138 +++++++
+ drivers/soc/qcom/rpmh-rsc.c                   | 518 ++++++++++++++++++++++++
+ drivers/soc/qcom/rpmh.c                       | 110 ++++++
+ include/linux/bitmap.h                        |   8 +
+ include/soc/qcom/cmd-db.h                     |  33 ++
+ include/soc/qcom/rpmh.h                       |  28 ++
+ include/soc/qcom/tcs.h                        |  81 ++++
+ 16 files changed, 1720 insertions(+)
+---
+change-id: 20240611-b4-qcom-rpmh-fcfd32ac2940
+base-commit: 50adc932e7aa34e6d9c738ec13ed09382a9d109a
+
+// Caleb (they/them)
+
