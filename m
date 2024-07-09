@@ -4,41 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8311EC3DA42
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 21:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6D36C2BD09
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 23:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86F6088655;
-	Tue,  9 Jul 2024 23:35:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E3B60882D7;
+	Wed, 10 Jul 2024 01:07:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NvoTuJZw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 873538862E; Tue,  9 Jul 2024 22:21:04 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 077C08854A
- for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 22:21:02 +0200 (CEST)
+ id 66F2088671; Wed, 10 Jul 2024 01:07:15 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 35345871C7
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 01:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yeoreum.yun@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 54A1B12FC;
- Tue,  9 Jul 2024 13:21:26 -0700 (PDT)
-Received: from e129823.cambridge.arm.com (e129823.arm.com [10.1.197.6])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8D4443F641;
- Tue,  9 Jul 2024 13:20:59 -0700 (PDT)
-From: Levi Yun <yeoreum.yun@arm.com>
-To: trini@konsulko.com, sjg@chromium.org, raymond.mao@linaro.org,
- ilias.apalodimas@linaro.org, bmeng.cn@gmail.com
-Cc: nd@arm.com,
-	u-boot@lists.denx.de,
-	Levi Yun <yeoreum.yun@arm.com>
-Subject: [PATCH v3 1/1] bloblist: Fix bloblist convention checking.
-Date: Tue,  9 Jul 2024 21:20:57 +0100
-Message-Id: <20240709202057.2538776-1-yeoreum.yun@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3d9c487b2b5so341585b6e.3
+ for <u-boot@lists.denx.de>; Tue, 09 Jul 2024 16:07:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1720566432; x=1721171232; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=C8XKCuU8t1AaZA+/vPeMo8A/cekbc1mN/lba/Hx09VY=;
+ b=NvoTuJZw1m1UDJSN9IbfmsdzkoKvkh6++RPk7sfsroD6CJ3oLeSISSb/qm1EKpf8ms
+ 6l59nBRxMLIu7md6B0aXwoXAWopcfphGca8fDfWSkpOUfDkbsfhej/yQ95t7MTUMGXX6
+ EahFQu/q6vB5erg3H4JBPPeKHucuGZZWQRDOU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720566432; x=1721171232;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=C8XKCuU8t1AaZA+/vPeMo8A/cekbc1mN/lba/Hx09VY=;
+ b=iF/x7g3OmNvWkoIW8LeU52xXOPcxWTs9CSAi79FQr6PUwJjCBEr37ZKNdOfNSJeOtz
+ /V/3NN+MO8IIMiwo0h8uvjVJxU7+C/VcngHKCMoMj+4eq1m244jxYqqJUr5ZjR/kkDY8
+ 9Ym3rICNuOHcMbfv4PB7t9zbtq73u5CjaMNSEroQmBgIUcFFUtIoXvuwrg7PzJRU3AxJ
+ FycC5MF6hf9P6X5WNh1tP1+Zsh5OukyVwGfg967O5NTrOBb/qoFWli8UKjPFA8Ssws3u
+ 8C0AWpj3iq6ML3ni9dJ0Sc/H0xndiOGFh6n0AMLWtX9J2zDsQuEjVviH5LyE2c/opv5V
+ uctg==
+X-Gm-Message-State: AOJu0YzfhgzZCwWiBFpuGFz5ilQDTpstJRLHgk8q0jzzFffWeHupIh+a
+ 1N/++yBRAHymudR3ZwA2p1DCJI61R8C/ErS+bbGg+NSz0jahzGLMcfuPY7CUHYato69/YJ07a1I
+ y8cIemA==
+X-Google-Smtp-Source: AGHT+IE5G2pMlQSoRxY1tPLvSuAAYKcJMY/nwXdqg6TzgGB0BX261zm2wYLXZvro2vXdtAtuEE5wDg==
+X-Received: by 2002:a05:6808:1312:b0:3d9:24b1:74ae with SMTP id
+ 5614622812f47-3d93c041072mr5063792b6e.23.1720566431914; 
+ Tue, 09 Jul 2024 16:07:11 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net
+ (fixed-189-203-97-45.totalplay.net. [189.203.97.45])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d93ad145c2sm586452b6e.21.2024.07.09.16.07.11
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jul 2024 16:07:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] test/py/requirements.txt: Bump zipp to current release
+Date: Tue,  9 Jul 2024 17:07:09 -0600
+Message-Id: <20240709230709.2228061-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 09 Jul 2024 23:35:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,86 +86,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to recently firmware handsoff spec [1]'s "Register usage at handoff
-boundary", Transfer List's signature value was changed from 0x40_b10b
-(3 bytes) to 4a0f_b10b (4 bytes).
+A security issue exists with zipp before v3.19.1, and the current
+release is now v3.19.2. While the change in versions numbers is large, a
+manual inspection of the changelog shows that it's not as big as might
+be implied.
 
-As updating of TL's signature, register value of x1/r1 should be:
-
-In aarch32's r1 value should be
-    R1[23:0]: set to the TL signature (4a0f_b10b -> masked range value: 0f_b10b)
-    R1[31:24]: version of the register convention ==  1
-
-and
-
-In aarch64's x1 value should be
-    X1[31:0]: set to the TL signature (4a0f_b10b)
-    X1[39:32]: version of the register convention ==  1
-    X1[63:40]: MBZ
-(See the [2] and [3]).
-
-This patch fix problems:
-   1. breaking X1 value with updated specification in aarch64
-        - change of length of signature field.
-
-   2. previous error value set in R1 in arm32.
-        - length of signature should be 24, but it uses 32bit signature.
-
-[1] https://github.com/FirmwareHandoff/firmware_handoff
-[2] https://github.com/FirmwareHandoff/firmware_handoff/issues/32
-[3] https://github.com/FirmwareHandoff/firmware_handoff/commit/5aa7aa1d3a1db75213e458d392b751f0707de027
-
-Signed-off-by: Levi Yun <yeoreum.yun@arm.com>
+Reported-by: GitHub dependabot
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-v3:
-  - Restore arch/arm/lib/xferlist.c.
+ test/py/requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-v2:
-  - Modify commit message.
-  - Remove wrong swaping check in xferlist_from_boot_arg().
-
- common/bloblist.c  | 11 ++++++++++-
- include/bloblist.h |  5 ++++-
- 2 files changed, 14 insertions(+), 2 deletions(-)
-
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 11d6422b69..2008ab4d25 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -576,7 +576,16 @@ int bloblist_maybe_init(void)
-
- int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
- {
--	if (rzero || rsig != (BLOBLIST_MAGIC | BLOBLIST_REGCONV_VER) ||
-+	ulong version = BLOBLIST_REGCONV_VER;
-+	ulong sigval;
-+
-+	sigval = (IS_ENABLED(CONFIG_64BIT)) ?
-+			((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
-+			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64)) :
-+			((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
-+			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
-+
-+	if (rzero || rsig != sigval ||
- 	    rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
- 		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
- 		return -EIO;
-diff --git a/include/bloblist.h b/include/bloblist.h
-index 7fbdd622bc..f4849f22a0 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -83,7 +83,10 @@ enum {
- 	 * Register convention version should be placed into a higher byte
- 	 * https://github.com/FirmwareHandoff/firmware_handoff/issues/32
- 	 */
--	BLOBLIST_REGCONV_VER	= 1 << 24,
-+	BLOBLIST_REGCONV_SHIFT_64 = 32,
-+	BLOBLIST_REGCONV_SHIFT_32 = 24,
-+	BLOBLIST_REGCONV_MASK = 0xff,
-+	BLOBLIST_REGCONV_VER = 1,
-
- 	BLOBLIST_BLOB_ALIGN_LOG2 = 3,
- 	BLOBLIST_BLOB_ALIGN	 = 1 << BLOBLIST_BLOB_ALIGN_LOG2,
---
-LEVI:{C3F47F37-75D8-414A-A8BA-3980EC8A46D7}
+diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+index c1dd636931f7..6d3030cf90cd 100644
+--- a/test/py/requirements.txt
++++ b/test/py/requirements.txt
+@@ -27,4 +27,4 @@ testtools==2.3.0
+ traceback2==1.4.0
+ unittest2==1.1.0
+ wcwidth==0.1.7
+-zipp==0.6.0
++zipp==3.19.2
+-- 
+2.34.1
 
