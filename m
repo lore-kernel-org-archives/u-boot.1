@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CA7C2BD09
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 09:37:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44637C2BD09
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 09:37:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47054886E7;
-	Tue,  9 Jul 2024 11:35:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33940886DA;
+	Tue,  9 Jul 2024 11:35:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HjgmKOo5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hNssE/qU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4F77886CE; Tue,  9 Jul 2024 11:35:04 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id EABF6886E2; Tue,  9 Jul 2024 11:35:05 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85ACE87EEE
- for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 11:35:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C64EC88664
+ for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 11:35:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a77e6dd7f72so308168366b.3
- for <u-boot@lists.denx.de>; Tue, 09 Jul 2024 02:35:02 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a6fd513f18bso493200866b.3
+ for <u-boot@lists.denx.de>; Tue, 09 Jul 2024 02:35:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720517702; x=1721122502; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1720517703; x=1721122503; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=a4qIlHFLHRT0uHZsGsFMmVG2NxA1uSx/6ao4WMUHK48=;
- b=HjgmKOo5UY6x96CLR0Or3crP87+7yp8MyXLRdEBJEPW1UGMlmKFyzQ8JzfX13J/3CI
- vaMbKKPC5JfqXIdgJO7HU9lLiUtDsRr2SJ9aIn9ytFOqBjyYN+B0tWyEhGj1ZVDokm3N
- sj1fUCt652MUi4pthkqxLCv4IywD+qVKDOJu/QV1efzcj/VQwPjf1TYd4UCCnheoiZT1
- Yft8HQzBsnYASkUZy9/05JOuJxQV2T579f2g3yPsPG2e3K2GcXbdlXBu/AeRbBpjWHBQ
- DwQ+4v3W/g8CaRZpDHWmWOl53Wl+rSWUsVkd2aM/9VoUW5yvHRxEkYDKb8MFZyWaiJLI
- s3qw==
+ :reply-to; bh=PBRV9HtCAioY8W6KRuovgHIWG2DQPIA8+so2CUToZuw=;
+ b=hNssE/qUpzJQFCgfdLJhqRUsbUiIJqyUZizaEq0vqOzxOUwzhX5tuBosqskmDsRqi9
+ JISCFWQM1kbWt0+YL+RCMHkupuBGlA9AnCMU3yFkoKYbThUEUmroSBTKlXbVTZ2wc0TK
+ qOKDz7MDDKwEa+7aJiwauJsmkifGx94/9ezelqAI+75bDZ9eHqe6vD4bdw9VPLg3uWFz
+ /NJPzlEo6QNPitwndeINTE/hU2E6G2R5n0jtFyMgWzLNA80Kgrkk0lJf8CnCaAJtHJzr
+ YSgIiikuaSVkBkFSYmMwhjEOxj3cOUM00XyOM4AcMHkyBNboSsU3X8tD/tkYd78jVKQJ
+ b5ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720517702; x=1721122502;
+ d=1e100.net; s=20230601; t=1720517703; x=1721122503;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a4qIlHFLHRT0uHZsGsFMmVG2NxA1uSx/6ao4WMUHK48=;
- b=MfH5sbbMwTkpivoYtp+Uxn144ECh8BG3Mdysk+owxYNajFqEozEP7+ZWoyyWRpEK6n
- lK2um9+3v/rQXBTkjVLMhTdO+VvlzZewlf3bsPULsCnGvwo2VSUqjttOQzh/nL43geYq
- Jja5IrVKDTsxZloTiAns1891NHdfEjpeYkjIqLeQTdHMdFeFXPQ7xpBV4hxj80X4yc0P
- t6qhFkhT3+aOwg4m0S+/ZiCL9Q1HLPmDvAD7D5VUuBwiSffUKwS7sEA+gYi0H1PIN+Aj
- qTvFzoz1543l9VWCuXF5IwP8XITEbwV5XKX+FcmW9XSLq3RlmoKMyiAsOGFckb1ZV4FG
- t6Cg==
-X-Gm-Message-State: AOJu0Yxq+rHTOetC+gNOuCSF3e0L7Oud5p2G8xHXFa9PC3uLFCR3a1i6
- S3ajbrk1IBOBW8UeJigK8L7DTswhTvDMYkfS3aHSHL0KNv+JqEg2xylccfzHfAY=
-X-Google-Smtp-Source: AGHT+IG1CjlFSLBhkgRjnYLaajE6+sq+nBXzoW5FM/XjdMy81dduqFXaRAKU5fuxgRtOopA69m/75Q==
-X-Received: by 2002:a17:906:4c57:b0:a6f:ab9c:7778 with SMTP id
- a640c23a62f3a-a780b6fd1e3mr119580866b.34.1720517702046; 
- Tue, 09 Jul 2024 02:35:02 -0700 (PDT)
+ bh=PBRV9HtCAioY8W6KRuovgHIWG2DQPIA8+so2CUToZuw=;
+ b=V94ZTNCywvFpAgiMfSIMSdArQ7LHrc9k21lOd3P14LpAaVtcn6OmM4wNG9Gi7hgyn8
+ xKHKi7YdU9zuxpQXGzr0gE4IpueHnUbOgX4hD2leFMSIeDcLaCgizndkOWkRlNBMTuF0
+ cA82Wm9mqKkl9rfwJxYCOCh2q21+KPOcPOiMvWUAFYxupw6wWHkzTe+Ej2p4ClutTG/m
+ vufaMbYPwkB6A4X8MLPMC/mPM3iyCD0xtUrMd9Tfsagzil+okHe9jeMo6W/+gxI4cmwP
+ GyLTNgo82zPVKNHVlabklEZS/2SNt4MR6EhGTVV3rzga261mwQxz7QjC8w0TIe/KrrLs
+ WHCg==
+X-Gm-Message-State: AOJu0Yz8Gf9RvUlfCA9deYqD5l/jx4pvmB8F/R1QLS5XSD9/maqw7t0E
+ Af0tgP2JmXNXtWu4tmKDCH3PYtqkwe5E9Frytrzoyt5Zr88fIsgGIIOT+HJPrN4=
+X-Google-Smtp-Source: AGHT+IHhYVrJO7YXs+LkriDccZwE41//SD1fmXRDj1sLp7I+igyDK5YMiMrTDZr+to/MNRKRRxa8DA==
+X-Received: by 2002:a17:907:7da8:b0:a6f:e456:4207 with SMTP id
+ a640c23a62f3a-a780b88498fmr170927066b.61.1720517703246; 
+ Tue, 09 Jul 2024 02:35:03 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::18f8])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a7fefaasm62884566b.140.2024.07.09.02.35.01
+ a640c23a62f3a-a780a7fefaasm62884566b.140.2024.07.09.02.35.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 02:35:01 -0700 (PDT)
+ Tue, 09 Jul 2024 02:35:02 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 09 Jul 2024 11:34:43 +0200
-Subject: [PATCH v4 15/21] power: regulator: adjust headers for U-Boot
+Date: Tue, 09 Jul 2024 11:34:44 +0200
+Subject: [PATCH v4 16/21] power: regulator: qcom-rpmh-regulator: port over
+ lineage_range helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240709-b4-qcom-rpmh-v4-15-c06d0a26644a@linaro.org>
+Message-Id: <20240709-b4-qcom-rpmh-v4-16-c06d0a26644a@linaro.org>
 References: <20240709-b4-qcom-rpmh-v4-0-c06d0a26644a@linaro.org>
 In-Reply-To: <20240709-b4-qcom-rpmh-v4-0-c06d0a26644a@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -78,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1136;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2079;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=ytcguWBaqxitdrPBpkIwdvgqeKhCqrQCzGV/uOlIWAk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmjQQ0RWpqs3GUI9vF8GDKNGV3xmxvpachpl/JK
- iIqGcrS1umJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZo0ENAAKCRAFgzErGV9k
- tvnfEACO/UkCD7j+TbHm7E2QkuhwmErqhhBHjdvJmNh4vkTTGndcaYw4hPBC+d8jJQCtlX4AiL4
- 4KuIctWNFzipLyHDx6xH8d+S4zHWUrUO0F/eA7N3/EUZJ6jdmOfqc8w/kyWvgJQtuODQTVaoR/J
- FowyeuXJOeRfEJurxD48toKb+IgK5sYeYDVHpYwPlxVOt1zEzQ6PHTCO7cgbFouHk/lYFaccXEh
- gr0f5b8lv4L4VCWDE/rTQZfZW3g5hw5F0LTmGPik35hOVRUSkODOzmgn2fU0X+8nSxGOAj5jcY7
- PxkisQ0plZg2kfJntUyoSfiqUaU2z94vvljHTdev3c3FrCUK5styIxtf/ircr0EOc7UlLokzgKx
- wTF2wqvh0MtFfpgiERl/CsfQhclywG8yIcQr8BVqQGw6t5cK4UeXcreDVNu1qoYaMR5IykTwuCQ
- kaFFdIGy9kzVqGCd28ACCgTRmRZzLhO6IlIuDBSFzeGZ/lHXkmByvpTqGCo8XpUJg73/RJMK1n6
- IgAXQl/rXRMY+RfwRxVfY8v2U7odAZXYs+WihYKGelOQH+MdSWvV9XSW7e18jl3XvR4+qA1JPR1
- zhaygJG1hhTLKVq4TJmIW8CuBRvTrPRx0iVimK4Gb327DWso4fLEMvQ9YJ6lAmX65uutB6lMSug
- 3UeRVP2p6rw5+aA==
+ bh=5Z/DU99kQYFH1eROtd3LbcjUhXJFE12rJaGmm5hJdLY=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmjQQ0ppIjYkt3kKBiZNZYjAXh7eZk2I6877dHF
+ kbx4u/6bt2JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZo0ENAAKCRAFgzErGV9k
+ thrcD/9IPv4D/A35mSbnMO0710jPjHUEOyR22s8J64JnYaH1DqiR8ahwUu0DPePwYIHuRdTKtHr
+ zXHS7h+3EUcU/ISxyFm7/ixLVYjURPKweiEezBqyrw8Op/UUvYU9Gl6Qb8scL52+S5/gJAKG42K
+ nk/Dx828KSi60ThGV01XvIY2WvKNTeAy0/Fs3Mjhk7GERo+O0Oya1ZspXBKlXI0lI1am2iETbjT
+ 481yK41+bitKpDrGo57AdKKNeeAuJZuRtzT2db7xDpjsX2ixREjfj+t+S1zxJK8ulZ2CIBj2Wf8
+ SkiWrI4PjXZexEXMDmrrZ2Cz7Rk/VXiB+VLky7uvOt2mflejqNBsj1w00tOPhr1g5TKLNOoyIsH
+ lJ6IspNkrM8aLzDJ1PQ+wjg/J9tJDTL6kOVa638e6HTJ7j6jD+i8XKdSGg+l5SR5wJnsQtfGIoF
+ 0NmdTgIYA6Y3bevSezuYFZxXhvTxgI6n0ZKsLpmLM0nWvsBEbvkRUo5KMRvPSdYPisdtZd0k8qB
+ rbNiMXeaLTrGbdNVc+xXbQkXvOQ3yyvJvsfGy0s1gWJVcKwSOw0MgsrrsR4vZqzdsNfVFazLRWK
+ SxKkaSxaZb2xaFbffMCWNn8tLEP0OQpbBrqj7pPQGNwvGo2AZcQFnIy8icjcvovBDwlI49Y/nbx
+ kynYunsVhr/UnPg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,41 +112,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove unused/unsupported Linux headers and add necessary U-Boot ones.
+Import struct linear_range() and builder macro from Linux regulator
+core.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/power/regulator/qcom-rpmh-regulator.c | 15 ++++++---------
- 1 file changed, 6 insertions(+), 9 deletions(-)
+ drivers/power/regulator/qcom-rpmh-regulator.c | 37 +++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
 diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-index 80e304711345..5f522de44734 100644
+index 5f522de44734..d0acee9f558e 100644
 --- a/drivers/power/regulator/qcom-rpmh-regulator.c
 +++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-@@ -4,17 +4,14 @@
+@@ -28,8 +28,15 @@ enum rpmh_regulator_type {
+ 	VRM,
+ 	XOB,
+ };
  
- #define pr_fmt(fmt) "%s: " fmt, __func__
++enum rpmh_regulator_mode {
++	REGULATOR_MODE_RETENTION,
++	REGULATOR_MODE_LPM,
++	REGULATOR_MODE_AUTO,
++	REGULATOR_MODE_HPM,
++};
++
+ #define RPMH_REGULATOR_REG_VRM_VOLTAGE		0x0
+ #define RPMH_REGULATOR_REG_ENABLE		0x4
+ #define RPMH_REGULATOR_REG_VRM_MODE		0x8
  
- #include <linux/err.h>
--#include <linux/kernel.h>
--#include <linux/module.h>
--#include <linux/of.h>
--#include <linux/platform_device.h>
--#include <linux/slab.h>
--#include <linux/string.h>
--#include <linux/regulator/driver.h>
--#include <linux/regulator/machine.h>
--#include <linux/regulator/of_regulator.h>
-+#include <dm/device_compat.h>
-+#include <dm/device.h>
-+#include <dm/devres.h>
-+#include <dm/lists.h>
-+#include <power/regulator.h>
-+#include <log.h>
+@@ -60,8 +67,38 @@ enum rpmh_regulator_type {
+ #define PMIC5_BOB_MODE_PFM			4
+ #define PMIC5_BOB_MODE_AUTO			6
+ #define PMIC5_BOB_MODE_PWM			7
  
- #include <soc/qcom/cmd-db.h>
- #include <soc/qcom/rpmh.h>
- 
++
++/**
++ * struct linear_range - table of selector - value pairs
++ *
++ * Define a lookup-table for range of values. Intended to help when looking
++ * for a register value matching certaing physical measure (like voltage).
++ * Usable when increment of one in register always results a constant increment
++ * of the physical measure (like voltage).
++ *
++ * @min:  Lowest value in range
++ * @min_sel: Lowest selector for range
++ * @max_sel: Highest selector for range
++ * @step: Value step size
++ */
++struct linear_range {
++	unsigned int min;
++	unsigned int min_sel;
++	unsigned int max_sel;
++	unsigned int step;
++};
++
++/* Initialize struct linear_range for regulators */
++#define REGULATOR_LINEAR_RANGE(_min_uV, _min_sel, _max_sel, _step_uV)	\
++{									\
++	.min		= _min_uV,					\
++	.min_sel	= _min_sel,					\
++	.max_sel	= _max_sel,					\
++	.step		= _step_uV,					\
++}
++
+ /**
+  * struct rpmh_vreg_hw_data - RPMh regulator hardware configurations
+  * @regulator_type:		RPMh accelerator type used to manage this
+  *				regulator
 
 -- 
 2.45.2
