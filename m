@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31C85C2BD09
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 06:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B072C2BD09
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 06:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88AAE88370;
-	Tue,  9 Jul 2024 08:49:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id B6F09884D2;
+	Tue,  9 Jul 2024 08:59:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="lPLDi1oN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Bsh5GZt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C97A87B30; Tue,  9 Jul 2024 08:49:53 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 93C33884D0; Tue,  9 Jul 2024 08:59:46 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F8B987B30
- for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 08:49:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D47C187B77
+ for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 08:59:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1720507791; x=1723099791;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ckHN9VIEMaistiITaUBZ5OmWR+WYk/vKWfs8knZsNPQ=;
- b=lPLDi1oNI2ODxEseDkegbegq2lVMs43mezzC7nJH7cowx46/mfc8mwHpmifJ6LJd
- J+niV3EqkoLpjrUYSkm3TF0eGWdYP3nVwxejJ7W4ciTy0SqoJ99yx+xfkatWctEE
- yCHC8S/TkYhtREbeiV3MwMmboywCSX2vzR0BX+3rMxM=;
-X-AuditID: ac14000a-03e52700000021bc-3e-668cdd8e9568
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id C0.F6.08636.E8DDC866;
- Tue,  9 Jul 2024 08:49:51 +0200 (CEST)
-Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 9 Jul 2024
- 08:49:50 +0200
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Tue, 9 Jul 2024 08:49:50 +0200
-From: Yannic Moog <Y.Moog@phytec.de>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Daniel Schultz
- <D.Schultz@phytec.de>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "trini@konsulko.com" <trini@konsulko.com>, Wadim Egorov <W.Egorov@phytec.de>
-CC: "kamlesh@ti.com" <kamlesh@ti.com>, "d-gole@ti.com" <d-gole@ti.com>,
- Benjamin Hahn <B.Hahn@phytec.de>, "m-chawdhry@ti.com" <m-chawdhry@ti.com>,
- "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>, "jm@ti.com"
- <jm@ti.com>, PHYTEC Upstream <upstream@lists.phytec.de>, "nm@ti.com"
- <nm@ti.com>, Teresa Remmet <T.Remmet@phytec.de>
-Subject: Re: [PATCH 1/6] include: env: phytec: overlays: Add extension command
-Thread-Topic: [PATCH 1/6] include: env: phytec: overlays: Add extension command
-Thread-Index: AQHa0P0rcHVTUT8xk0mk9dSCmXMhhLHt1OIA
-Date: Tue, 9 Jul 2024 06:49:50 +0000
-Message-ID: <510c99dfff5e17768df3fde691d96d848e288583.camel@phytec.de>
-References: <20240708060734.4029040-1-d.schultz@phytec.de>
- <20240708060734.4029040-2-d.schultz@phytec.de>
-In-Reply-To: <20240708060734.4029040-2-d.schultz@phytec.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <9E2B73CC54E8454FAFC3495638E93F7F@phytec.de>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4696xO3L035275;
+ Tue, 9 Jul 2024 01:59:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1720508364;
+ bh=VQvGunPuVX0aW1E6xDT0xp54Mh902Vw5sRBe857vhe0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Bsh5GZt9IZ5w5M8Vn7HFlcF39VgjCsLVxAOKegmyFh3bk7ANNR904IbHLAH/hSm2j
+ To8j0Tarx1uohV/WczD364OAie1m2irTIjU6id2PxHQlzvOfpoEazdJvE5HJgQZzsO
+ rfTojl9N8yiIC2LEl/qDkWLBsMcUmiQ9RM3UWSf0=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4696xOAT128605
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 9 Jul 2024 01:59:24 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
+ Jul 2024 01:59:24 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 9 Jul 2024 01:59:24 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4696xGeo004310;
+ Tue, 9 Jul 2024 01:59:16 -0500
+Message-ID: <e6b94491-f186-42f8-ba54-11651811db31@ti.com>
+Date: Tue, 9 Jul 2024 12:29:15 +0530
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRmVeSWpSXmKPExsWyRpKBR7f/bk+awblci5a1HhafPmRafNr5
- mNXiaP8aZotLD1ItXhyby27x5sdZJoupkzazW7zd28lu0f1O3YHL4/2NVnaPVwdWsXucvbOD
- 0aO/u4XV4/qZ7Uwex29sZwpgi+KySUnNySxLLdK3S+DKmPS8k7lghnDFqbkKDYw3hLoYOTkk
- BEwk/i79zt7FyMUhJLCESeL7uUYWCOceo8T11pVQmfWMErP2PmEFaWETUJE4OeMSI0hCROAO
- o8SU1i9gDrPAFSaJj41NTCBVwgJ+EtPufGHuYuQAqgqUaH7uABIWETCSuHlhPjOIzQI0aNv0
- Q2DlvAJuElOf/2MHsYUEciT6zqwEa+UUsJY4eyQXJMwoICuxYcN5sFZmAXGJTc++s0K8ICCx
- ZA9EXEJAVOLl439QcXmJE7emMYGMYRbQlFi/Sx+i1ULiS1sb1BhFiSndD9khLhCUODnzCcsE
- RvFZSDbMQuiehaR7FpLuWUi6FzCyrmIUys1Mzk4tyszWK8ioLElN1ktJ3cQIimoRBq4djH1z
- PA4xMnEwHmKU4GBWEuGdf6M7TYg3JbGyKrUoP76oNCe1+BCjNAeLkjjv6o7gVCGB9MSS1OzU
- 1ILUIpgsEwenVAOjqaz4jSdGmhcsLvr//cZftO2cU4uJzi/rfTtkPr8xUTr0/trktpcfftUy
- 2LDeOb3PwcH4iNvT/hZt0dDcM/v/lS1znfHjlcpHRbfq9buc9jm9ebRAJk83o03igOzCZU+/
- MU3TLYuLO3CFxTM89LnTSbUJYQa7NgnW9B/ZvvXDlfsvCz7/tezzU2Ipzkg01GIuKk4EAMvY
- T6LYAgAA
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 07/10] configs: am62: Add configs for enabling ETHBOOT
+ in R5SPL
+To: Tom Rini <trini@konsulko.com>
+CC: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Andrew Davis <afd@ti.com>, MD Danish Anwar
+ <danishanwar@ti.com>, Udit Kumar <u-kumar1@ti.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>,
+ Andreas Dannenberg <dannenberg@ti.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar <devarsht@ti.com>, "Sean
+ Anderson" <seanga2@gmail.com>, Kishon Vijay Abraham I <kishon@ti.com>,
+ "Nikhil M Jain" <n-jain1@ti.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Wadim Egorov <w.egorov@phytec.de>, Sjoerd
+ Simons <sjoerd@collabora.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Alexander Sverdlin
+ <alexander.sverdlin@siemens.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Dhruva Gole <d-gole@ti.com>, "Simon
+ Glass" <sjg@chromium.org>, Roger Quadros <rogerq@kernel.org>, Maxime Ripard
+ <mripard@kernel.org>, Nishanth Menon <nm@ti.com>,
+ <srk@ti.com>, <u-boot@lists.denx.de>
+References: <20240705045030.1141934-1-c-vankar@ti.com>
+ <20240705045030.1141934-8-c-vankar@ti.com>
+ <20240705153721.GF38804@bill-the-cat>
+Content-Language: en-US
+From: Chintan Vankar <c-vankar@ti.com>
+In-Reply-To: <20240705153721.GF38804@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,35 +99,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gRGFuaWVsLA0KDQpPbiBTdW4sIDIwMjQtMDctMDcgYXQgMjM6MDcgLTA3MDAsIERhbmll
-bCBTY2h1bHR6IHdyb3RlOg0KPiBBZGQgYSBuZXcgZW52aXJvbm1lbnQgcm91dGluZSB0byBhcHBs
-eSBleHRlbnNpb25zLiBPdXIgU09NIGRldGVjdGlvbg0KPiBhZGRzIG92ZXJsYXlzIHZpYSB0aGUg
-ZXh0ZW5zaW9uIGZyYW1ld29yayB0byBhbHRlciB0aGUga2VybmVsDQo+IGRldmljZS10cmVlIGFj
-Y29yZGluZyB0byB0aGUgZmxhc2hlZCBFRVBST00gaW1hZ2UuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5
-OiBEYW5pZWwgU2NodWx0eiA8ZC5zY2h1bHR6QHBoeXRlYy5kZT4NCj4gLS0tDQo+IMKgaW5jbHVk
-ZS9lbnYvcGh5dGVjL292ZXJsYXlzLmVudiB8IDIwICsrKysrKysrKysrKysrKysrKysrDQo+IMKg
-MSBmaWxlIGNoYW5nZWQsIDIwIGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQgYS9pbmNs
-dWRlL2Vudi9waHl0ZWMvb3ZlcmxheXMuZW52IGIvaW5jbHVkZS9lbnYvcGh5dGVjL292ZXJsYXlz
-LmVudg0KPiBpbmRleCA3ODcyMWNkZTY1NC4uNTAxMTBlNzMxYmQgMTAwNjQ0DQo+IC0tLSBhL2lu
-Y2x1ZGUvZW52L3BoeXRlYy9vdmVybGF5cy5lbnYNCj4gKysrIGIvaW5jbHVkZS9lbnYvcGh5dGVj
-L292ZXJsYXlzLmVudg0KPiBAQCAtMjMsNiArMjMsMTYgQEAgbW1jX2FwcGx5X292ZXJsYXlzPQ0K
-PiDCoAkJCWZpOw0KPiDCoAkJZG9uZTsNCj4gwqAJZmk7DQo+ICsjaWZkZWYgQ09ORklHX0NNRF9F
-WFRFTlNJT04NCj4gK21tY19hcHBseV9leHRlbnNpb25zPQ0KPiArCXNldGVudiBleHRlbnNpb25f
-b3ZlcmxheV9hZGRyICR7ZmR0b3ZlcmxheV9hZGRyX3J9Ow0KPiArCXNldGVudiBleHRlbnNpb25f
-b3ZlcmxheV9jbWQgJ2xvYWQgbW1jICR7bW1jZGV2fToke21tY3BhcnR9DQo+ICsJwqAgJHtmZHRv
-dmVybGF5X2FkZHJfcn0gJHtleHRlbnNpb25fb3ZlcmxheV9uYW1lfSc7DQo+ICsJZXh0ZW5zaW9u
-IHNjYW47DQo+ICsJZXh0ZW5zaW9uIGFwcGx5IGFsbDsNCj4gKyNlbHNlDQo+ICttbWNfYXBwbHlf
-ZXh0ZW5zaW9ucz1lY2hvICJubyBleHRlbnNpb24gY29tbWFuZCINCg0KRG8geW91IHRoaW5rIGl0
-IG1ha2VzIHNlbnNlIHRvIG1ha2UgdGhpcyBmYWlsPyBJIHdvdWxkIHRoaW5rICJhcHBseV9leHRl
-bnNpb25zIiB3b3VsZCBiZQ0KdW5zdWNjZXNzZnVsIGlmIGV4dGVuc2lvbnMgYXJlIG5vdCB3b3Jr
-aW5nLg0KDQpZYW5uaWMNCg0KPiArI2VuZGlmDQo+IMKgbmV0X2xvYWRfYm9vdGVudj0ke2dldF9j
-bWR9ICR7Ym9vdGVudl9hZGRyX3J9ICR7Ym9vdGVudn0NCj4gwqBuZXRfbG9hZF9vdmVybGF5PSR7
-Z2V0X2NtZH0gJHtmZHRvdmVybGF5X2FkZHJfcn0gJHtvdmVybGF5fQ0KPiDCoG5ldF9hcHBseV9v
-dmVybGF5cz0NCj4gQEAgLTM2LDMgKzQ2LDEzIEBAIG5ldF9hcHBseV9vdmVybGF5cz0NCj4gwqAJ
-CQlmaTsNCj4gwqAJCWRvbmU7DQo+IMKgCWZpOw0KPiArI2lmZGVmIENPTkZJR19DTURfRVhURU5T
-SU9ODQo+ICtuZXRfYXBwbHlfZXh0ZW5zaW9ucz0NCj4gKwlzZXRlbnYgZXh0ZW5zaW9uX292ZXJs
-YXlfYWRkciAke2ZkdG92ZXJsYXlfYWRkcl9yfTsNCj4gKwlzZXRlbnYgZXh0ZW5zaW9uX292ZXJs
-YXlfY21kICcke2dldF9jbWR9ICR7ZmR0b3ZlcmxheV9hZGRyX3J9DQo+ICsJICR7ZXh0ZW5zaW9u
-X292ZXJsYXlfbmFtZX0nOw0KPiArCWV4dGVuc2lvbiBzY2FuOw0KPiArCWV4dGVuc2lvbiBhcHBs
-eSBhbGw7DQo+ICsjZWxzZQ0KPiArbmV0X2FwcGx5X2V4dGVuc2lvbnM9ZWNobyAibm8gZXh0ZW5z
-aW9uIGNvbW1hbmQiDQo+ICsjZW5kaWYNCg0K
+
+
+On 05/07/24 21:07, Tom Rini wrote:
+> On Fri, Jul 05, 2024 at 10:20:27AM +0530, Chintan Vankar wrote:
+> 
+>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>
+>> Add configs for enabling ETHBOOT in R5SPL.
+>>
+>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+>> Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>> ---
+>>
+>> Link to v2:
+>> https://lore.kernel.org/r/20240425120822.2048012-8-c-vankar@ti.com/
+>>
+>> Changes from v2 to v3:
+>> - No changes.
+>>
+>>   configs/am62x_evm_r5_ethboot_defconfig | 20 ++++++++++++++++++++
+>>   1 file changed, 20 insertions(+)
+>>   create mode 100644 configs/am62x_evm_r5_ethboot_defconfig
+>>
+>> diff --git a/configs/am62x_evm_r5_ethboot_defconfig b/configs/am62x_evm_r5_ethboot_defconfig
+>> new file mode 100644
+>> index 0000000000..7b1932b215
+>> --- /dev/null
+>> +++ b/configs/am62x_evm_r5_ethboot_defconfig
+>> @@ -0,0 +1,20 @@
+>> +#include<configs/am62x_evm_r5_defconfig>
+>> +
+>> +CONFIG_SPL_GPIO=y
+> 
+> You need a few other options set in order for buildman to work in this
+> case, please look at the other #include users.
+> 
+
+Are you referring to include "configs/k3_efi_capsule.config" ?
