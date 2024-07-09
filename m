@@ -4,67 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E99C2BD09
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 04:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3194FC2BD09
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jul 2024 05:28:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D4CE8848D;
-	Tue,  9 Jul 2024 06:43:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D84688403;
+	Tue,  9 Jul 2024 07:28:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BAJrH2p+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZuqvQo0U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6073F884B0; Tue,  9 Jul 2024 06:43:52 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DF20588405; Tue,  9 Jul 2024 07:28:23 +0200 (CEST)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D75687F5C
- for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 06:43:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5E3D87B84
+ for <u-boot@lists.denx.de>; Tue,  9 Jul 2024 07:28:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4694hlY8122114;
- Mon, 8 Jul 2024 23:43:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720500227;
- bh=J6fkjHsU3YI5isiiN3nqTeS77V2J0yNcEjeQKv+uFxY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=BAJrH2p+jX4cNGGAw+nOXapwrW/qakn63hOirL7V+rmrd0bLGBbU5JVxGiV8zaQSU
- D2nDXvqNQtDIS9G6pKjqqD7pkx1q3NYme0qCHrdTCt5fkur7x7qlXlpoux07J0auZZ
- 4GJl7VTyYt/1rrQhgTr6hkIovp2FdEi+aRItUe3w=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4694hlHr027260
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Jul 2024 23:43:47 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jul 2024 23:43:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jul 2024 23:43:47 -0500
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4694hkZS058068;
- Mon, 8 Jul 2024 23:43:47 -0500
-Date: Tue, 9 Jul 2024 10:13:46 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Kamlesh Gurudasani <kamlesh@ti.com>
-CC: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <praneeth@ti.com>,
- <u-kumar1@ti.com>
-Subject: Re: [PATCH] configs: am62x_evm_a53_defconfig: Remove
- CONFIG_SYS_BOOTM_LEN
-Message-ID: <20240709044346.jyntpefkhpgdfd2x@uda0497581>
-References: <20240708-remove-bootm-len-v1-1-2a537061426c@ti.com>
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-81015861ca6so1153523241.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jul 2024 22:28:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720502900; x=1721107700; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=94WmoPm2BLA3ahNE0dmTB2N1RTTt/AU7g0VfG7OjEZ0=;
+ b=ZuqvQo0Ut2v9SRgnlVjaxH+BPkyQ9bDSZKulpN05sNgFQ/X3ndWWsjn41XNprKfOj4
+ C1LQGxBFQ9MgwCx8QqF6gTLarySBw1jZ4p6YuU4e7Syvz8o80omONukbxBx8Nhlm7LfM
+ qQTsa2qyJGqlcXwIyvBRNsog+8ISApE/g0GdozF4THlURvSdJVBzzB7vTJTqEKuJOwC3
+ zuuKZNZXOqsBTU3kUwREaCBz6EgCfk+wX7yoPDGPWQAF0OXtV9Jau9VA9K4e26r5D6+2
+ Fd7c/HBOEfJKXgo573jyTZMTg6sj+nkjyk5UXzRolCb4yxPNVGqN3L8FVrMAkWOZLd4/
+ Trkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720502900; x=1721107700;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=94WmoPm2BLA3ahNE0dmTB2N1RTTt/AU7g0VfG7OjEZ0=;
+ b=IBRD0DWDdyJc2Ibhr+tW2/xwQrreNndRqeQv3sMmYG3v8ahGN97SpbcGNl3ZesTCpQ
+ bB7dn6TJJurrkl3y8SPp78Fda80crlqep02FO3lMxBvaHskE1l2X9VgnaQXiFBJBkjpW
+ 5yOPyzkN6wELNr11yskiYNxAcLlvnbC58lMNdNqfUb7KCr51PKUuri87uvqKVw9ofu4u
+ IMTrEMSwW4oLOuAqUjJuD6urkZdLbXvJOE/bdDVE+a3eqG8eLWT5RjceZ6sjibdk59eW
+ 3qVW5Yq2niAxrOCoiIEcdS1qHS+FnHHMq+5AJU1YucscLAQ8xhr1qKlw8s4h9yUNvgp8
+ 41jw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUHUYc/CPMfe4aTwEj5GYJOEoG8QlbXAoaj7EwH8G62+1/Ni4HxilO1BDQAJpp4B/kZJSaMVi/5X5gepJO+UioYnFisjQ==
+X-Gm-Message-State: AOJu0Yz6wwZlbb41MAr5+ORA/dETfTj16IfeDeIssfAFap8ywXaZn5jP
+ b+SMdewxv+/iBMr3Al9HPIY45P3fQMk2ZiMAK9EfMknsGZ46AFtvrOAmqE2yydL+xTvWXmp/M8J
+ ngmxQQu/FJcEZxqkQF41kSKtL2BlSlxlPF8SGwQ==
+X-Google-Smtp-Source: AGHT+IEayM0qWnI+46qlpI3E4el7gsxf2xzjcyvyHkP40IA1u+ltRWOGkFLZhV6HZLJCTsf0dWfrISb6mFfSrbCv0Ec=
+X-Received: by 2002:a05:6102:1624:b0:48f:eb5f:84d8 with SMTP id
+ ada2fe7eead31-4903220af5fmr1714007137.27.1720502900487; Mon, 08 Jul 2024
+ 22:28:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240708-remove-bootm-len-v1-1-2a537061426c@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org>
+ <20240617-b4-qcom-rpmh-v1-2-bd2336923e0a@linaro.org>
+ <CAFA6WYM9hPFpb9F=nYSe-UkFbGMuUuJBiBfMiUzrSowSxvOUNQ@mail.gmail.com>
+ <b18f0af5-c066-467f-81f6-11ce8a181ae3@linaro.org>
+In-Reply-To: <b18f0af5-c066-467f-81f6-11ce8a181ae3@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 9 Jul 2024 10:58:09 +0530
+Message-ID: <CAFA6WYP0ZWLpnT9__HCOi6NsED5M2Z4Z=Ffy_Oj=P=JXi5wYTw@mail.gmail.com>
+Subject: Re: [PATCH 2/3] soc: qcom: rpmh and cmd-db drivers
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,49 +92,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kamlesh,
+Hi Caleb,
 
-On 17:20-20240708, Kamlesh Gurudasani wrote:
-> Increase the maximum size of the buffer that is used to decompress
-> the OS image in to.
-> 
-> If image size is greater than the buffer, boot
-> will fail with following error,
-> "Error: inflate() returned -5"
-> "gzip compressed: uncompress error -1"
-> 
-> Default limit for ARM64 platforms is 0x4000000, remove
-> CONFIG_SYS_BOOTM_LEN=0x8000000, so that it follows default limit.
+On Mon, 8 Jul 2024 at 16:13, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Hi Sumit,
+>
+> Sorry for the late response.
+>
+> In general, I'd rather keep this port closer to the Linux original, so
+> that future cherry-picking of new features and fixes is easier. This is
+> quite standard practice in U-Boot (and why the compatibility macro's are
+> included in the first place).
+>
+> Otherwise, we end up with our own quite different implementation, with
+> the higher maintenance burden that comes with it.
+>
+> This port doesn't do a perfect job at keeping close to upstream, but
+> still I don't think we should stray further without a good justification.
+>
 
-Why were we failing with a larger buffer size..?
+As per your cover letter:
 
-Regards,
-Manorit
+Quote:
+   "These drivers were originally taken from Linux, however they have been
+    heavily modified and simplified for U-Boot. Since the original Linux
+    drivers contained heavy optimisations related to multithreading and
+    asynchronous probing, as well as support for idle and suspend states
+    which we don't need to deal with here."
 
-> 
-> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
-> ---
->  configs/am62x_evm_a53_defconfig | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-> index ca993b427b..dfa5ecc847 100644
-> --- a/configs/am62x_evm_a53_defconfig
-> +++ b/configs/am62x_evm_a53_defconfig
-> @@ -32,7 +32,6 @@ CONFIG_SPL_SPI=y
->  CONFIG_SPL_LOAD_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
->  CONFIG_BOOTSTD_FULL=y
-> -CONFIG_SYS_BOOTM_LEN=0x800000
->  CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
->  CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SPL_MAX_SIZE=0x58000
-> 
-> ---
-> base-commit: fd46ea0e701920eb205c2bce9d527bf0dec10b59
-> change-id: 20240708-remove-bootm-len-ab4e46039656
-> 
-> Best regards,
-> -- 
-> Kamlesh Gurudasani <kamlesh@ti.com>
-> 
+This made me think the driver is nowhere close to Linux driver
+functionality wise. Also, the commit message doesn't say which Linux
+commit this driver is influenced from. I am not really sure if
+cherry-picking will be straight forward. IMHO, if we are heavily
+modifying a driver port for U-Boot then it should be done properly as
+per U-Boot needs. A middle ground approach which you have taken is
+only going to lead to confusion and rather negatively impact
+maintenance.
+
+-Sumit
+
+> Kind regards,
+>
+> >> +EXPORT_SYMBOL(cmd_db_read_addr);
+> >
+> > Export symbols aren't required in U-Boot here and other instances in this patch.
+>
+> ...
+>
+> >> +       /*
+> >> +        * Wait until we read back the same value.  Use a counter rather than
+> >> +        * ktime for timeout since this may be called after timekeeping stops.
+> >> +        */
+> >> +       for (i = 0; i < USEC_PER_SEC; i++) {
+> >> +               if (readl(addr) == data)
+> >> +                       return;
+> >> +               udelay(1);
+> >> +       }
+> >
+> > Can we rather use readx_poll_sleep_timeout() here instead?
+>
+> ...
+> >> +       for (i = 0; i < 5 * USEC_PER_SEC; i++) {
+> >> +               if (readl(tcs_reg_addr(drv, reg, tcs_id)) & BIT(tcs_id))
+> >> +                       break;
+> >> +               udelay(1);
+> >> +       }
+> >
+> > Can we rather use readx_poll_sleep_timeout() here instead?
+>
+> ...
+>
+> >> +
+> >> +       spin_lock_irqsave(&drv->lock, flags);
+> >
+> > Locks aren't needed in U-Boot, can be dropped here and other places.
+> >
+>
+> ...
+>
+> >> +
+> >> +       spin_lock_init(&drv->lock);
+> >> +       init_waitqueue_head(&drv->tcs_wait);
+> >
+> > Similarly waitqueue should be dropped too.
+> >
+> > -Sumit
+>
+> --
+> // Caleb (they/them)
