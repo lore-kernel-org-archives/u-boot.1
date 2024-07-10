@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76B33C3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 13:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD59EC3DA41
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 13:43:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7C8088657;
-	Wed, 10 Jul 2024 15:43:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 3AE4088711;
+	Wed, 10 Jul 2024 15:43:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="pPr9AQm/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gCQfuezH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73DDE88667; Wed, 10 Jul 2024 15:43:31 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E7B388710; Wed, 10 Jul 2024 15:43:35 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DEE888606
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 15:43:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 4EFEA88711
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 15:43:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1720619008; x=1721223808; i=frank-w@public-files.de;
- bh=lG6kjitS7TQtkJTongZd++iPiky/70ZsEFV5iPw/4t4=;
- h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Cc:Subject:
- Content-Type:Date:cc:content-transfer-encoding:content-type:date:
- from:message-id:mime-version:reply-to:subject:to;
- b=pPr9AQm/Grx/ImwWAHLIUR8b0q7jflD35xFZ3lfInCl9Zg84mLDIguS8q4WmAVtS
- qKZX+6TRPmvt+m4q0FaP9z2gKcRt+sc1NUfGerV9uw2ZAi2l/CeiSXQF9Vz+wj7q/
- S8PbDWFffjsENhHR+u5z+sVuC7XP851osDfTnz+Mjwp4Epaz1EU1uq/QaeQcRp2or
- 2rJ//BRdjYWySknXrK6ZM8aaNfiu0ZaAUwTtwZPq1mEAP7KhgKFgE/+qn6dDJZX1W
- FM52IwVF8pgjoh3qDXBk8KRtVwuAJvZKLgYaU5jznKrPmweS/86MyyZFrV77DqFvb
- HjNyEJyxA8NmQPNcWQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [217.61.158.245] ([217.61.158.245]) by web-mail.gmx.net
- (3c-app-gmx-bs04.server.lan [172.19.170.53]) (via HTTP); Wed, 10 Jul 2024
- 15:43:27 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2ee98a224b8so3593971fa.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 06:43:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1720619012; x=1721223812; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cWCTh05RWsmry2ti4334mWqWEsEo239sD897N5GUhxg=;
+ b=gCQfuezH+e1Kp3ETVWEg18oJrbEMeJzCmKvE5Fg3nYbAAlMrKZjBRv1orx616S512R
+ +FnL+I1so2E5Cwe3shB+02yCurTML+qYli7p2gLBugkZROAjmBf/fYB/vtaBYLbLTQEr
+ gVSPi1S2KH83r4HXU/7+4Cp100u7+ADLO9LQugd4g2EMZqHgustJHU0CP1Hzb1smsfCt
+ NE1z88DMqtN8l43XAdW93YGT1TfCXmyAHiObSttT3A5RI9xDdzPLX8Kdd5H0g3uUVP8U
+ NFh+jIKCF1Ll8mb1nlGJPevZU1mwMfT3lA64UCszrjrUgSWgQ/PUts7RqzbOjypOwWKN
+ mgvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720619012; x=1721223812;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cWCTh05RWsmry2ti4334mWqWEsEo239sD897N5GUhxg=;
+ b=pcZ3FxYFRc7sbvzFcxIKZ3Prx1AjiH5rYjGxwxFXC5X8A6oVfM6OxJWQRw1qZjaHUQ
+ jbbK0TePWapMAuJF7CjE74dkSdacsV+if3+IdGKxq2SqDRyh2tYMhYAwFRusnF3ICtVE
+ 5jVOepYoFyjCBpBWi86s5wyDGEHqFHNUpf701j+MH0Zh4/U6PhFnXAiu261u/biJm8e6
+ HdS1jJW4Rd1t18tjiSOLYPU1hKOWV7suv31zUbjPJYraREAAmWKL4e/7NV5J/MGMLIo0
+ JBSmYph/E17ksLnNZU6XfNYSaVm7QMdQFmnDAR0pnjUhINzlxRMPAyyAvgl/f8AHuo7e
+ LU1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHIWeRYdSUIrp9JeXDmMpc8kwB0MIVIlYuONybNOLyO9SXQyRX/4P5KEPrxsmcg2OrdZT2M5+XQHqjuRt2sT9FbZSlrQ==
+X-Gm-Message-State: AOJu0YzXiaXg7ZBCXwCLkez+U8S83SQI8jmnf87w2gyU48Lc+00iyalj
+ 7rTmKBAVzM+YzCKZRuT0i6r7PE09OrmX4APOx7zLxX9/WWZRY2nusCqJuZf2da6Yu7Svo4tSrCi
+ MY8dyBob2ca0oCGdgbHRIVNnQB5S/VQsD
+X-Google-Smtp-Source: AGHT+IHT7NNdjiLr7o8Y1kEt4zcAeqkmN1YQ/kPXNMnq7V5SjDz1JgQNDnneNUacMJ/Eb4SYFsUuBdZqq4CnMde+4QU=
+X-Received: by 2002:a05:651c:198c:b0:2ec:18c7:169d with SMTP id
+ 38308e7fff4ca-2eeb30ba1afmr36494031fa.1.1720619012324; Wed, 10 Jul 2024
+ 06:43:32 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <trinity-c68bf542-baa7-4122-858b-c6d5ef8bf843-1720619007870@3c-app-gmx-bs04>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: u-boot@lists.denx.de
-Cc: Daniel Golle <daniel@makrotopia.org>, "Christian Marangi (Ansuel)"
- <ansuelsmth@gmail.com>, John Crispin <john@phrozen.org>
-Subject: avoid syscon fallback class for getting regmap
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 10 Jul 2024 15:43:27 +0200
-Importance: normal
-Sensitivity: Normal
-X-Priority: 3
-X-Provags-ID: V03:K1:zDa1qhVkDvuqq/m8LKiU6YOlh4G42NIZXRtIQ3wif3hpfiAxt2gFdN+byF2tYxkYTuLxt
- BYUY7XSwMq3p9wIrsQZ7Gg3+O0wkNpXR0Q81VzWvokZvu2vFKzSRAUe6LYdH4iwpjRFGDelLOwdR
- 98FA3eqt7ZNxdYJn3G26pPAP11rGmd0h13VT7rcSqZvsyMl74dFP1eTwwiwMF5+ZfHxbw50m8lPb
- +yoJSghZ3tP1UqdbntBoNQuzV9MLzG9s2NUi3ZO1JSPOHPz8SUUJnRlkHKLVoRlOfLyMPC6l/QLN
- 0U=
-UI-OutboundReport: notjunk:1;M01:P0:+UmebA/u3XA=;06IlNwQ+aLqPOT6GHyGlclKGg/C
- n+19fHUCAX50iBmtvQ2S11fS25L2LlnaVeOhXn6AB9be37P80P8Ug+0jZw0aLshJQG2OH7QrS
- w10m0sVmxfIg/RiXiBppJbaxjpOtMFujOmCbvdO+mmhRXwKF/DDZkhW/GcyyedzsknWbDCnnK
- LCjLC3b0qJEtgH/z3BsyNosizt9EAvKAPn1LAwrc88YY2eruYbVS8d2T19s3O1D1y4+EPEllr
- GSJd9L7Ned1oMvK9XGf/aegs8IgBfNrn8RSWbsfthnFzjA2MvA0KxMe/K+/Srp2MuMlbigUTu
- 2OEyraVSzjmKCV/otBjA2jtEssm4ysHE1xUlOztaCSBLuLYr+MsAkzyex0MzewDLRleJaREjN
- olNmmDaqVb005XINVDFHhdoWVHt122dOgqUQqwxs6ZNgP5qM0BoRIDFW8h4R0VcaVF5Xlc/Qp
- nijIeQTQWCh06h8rGMSkO/4QTi7IT1Az7IZ5GPHm2LQkT6g3Ijti9wEoTzzInUnsJA2WYA7Ka
- w6lqnEComkn24cAptm5tVK1Kv+vn6yc3H1NWEFAWg87EvbatA7OY3qT1sp4X3ZOK7ZcioiZzr
- 3I09JbbdobmVMSmmZk4HeLMczocH2c+doPkpwdNRRA+6Nt1VMBkZ5HHWc1p07RpYZykrbPkOj
- a7ZK2L7pR0zb+Fih/i+8XnQyelX7PDOHy40NB1kqbg==
+References: <20240707082001.20746-1-michael@amarulasolutions.com>
+ <20240707082001.20746-2-michael@amarulasolutions.com>
+ <CAOMZO5Ddm_2rerosTctkCzcd_+ku7VfsrxfXOEU1NynEOgoQbA@mail.gmail.com>
+ <CAOf5uw=wktwcRrPOXmCjehKSsQvzAAhmM4KKsbdxyE6cRVBMrw@mail.gmail.com>
+In-Reply-To: <CAOf5uw=wktwcRrPOXmCjehKSsQvzAAhmM4KKsbdxyE6cRVBMrw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 10 Jul 2024 10:43:21 -0300
+Message-ID: <CAOMZO5CyFvpa_Fkfjmte9FvPROdNyTS3X1gzweeatu_Evpz2_A@mail.gmail.com>
+Subject: Re: [PATCH 1/4] clk: imx: clk-imx8mn Fix nand and spi clock parent
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, 
+ linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,22 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Wed, Jul 10, 2024 at 10:39=E2=80=AFAM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
 
-i'm working on OF_UPSTREAM for mediatek boards and noticed missing syscon-fallback on some (mt7988) devicetree nodes.
+> clk dump
+>
+> It's how uboot is registering the clk in dts. My idea now was not to
+> change it to not impact other architectures.
+> I have a lot of changes but I don't want to address regression and fix
+> and test before send more patches
 
-i know that u-boot uses this fallback to get the regmap shared across drivers, but only initializing once with the syscon_uclass.
+Ok, I see that 'clock-osc-24m' is already used in U-Boot by the other
+peripherals.
 
-i tried adding the syscon-fallback to linux device tree and got pointed [1] back to uboot to solve the issue there...
+Your change looks correct.
 
-are there any ways to avoid syscon in device tree and get the regmap of different node?
-
-i guess i could use [2], but then it is possible to aquire same regmap multiple times which may result in issues (e.g. race-conditions).
-I also want to avoid creating multiple drivers doing the exactily same thing like syscon.
-
-one easy (but maybe unwanted way) is to add all compatibles for affected syscons to the syscon driver...but then it is no more generic (baed on compatibles then vendor-specific).
-
-regards Frank
-
-[1] https://lkml.org/lkml/2024/7/10/669
-[2] https://elixir.bootlin.com/u-boot/latest/source/drivers/core/regmap.c#L242
+Ideally, we should use 'osc_24m' in the future to align with the
+kernel, but that's a different task.
