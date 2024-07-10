@@ -4,108 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A02B6C3DA41
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 22:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5362EC3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 23:20:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A845E8874A;
-	Thu, 11 Jul 2024 00:51:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+	by phobos.denx.de (Postfix) with ESMTP id AEC0888738;
+	Thu, 11 Jul 2024 01:20:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="qHVnL0oH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SCgUvx7t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A4D88729; Wed, 10 Jul 2024 23:37:48 +0200 (CEST)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03olkn20800.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2e0d::800])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 99CAD8872D; Thu, 11 Jul 2024 01:20:06 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64E2D8847B
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 23:37:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F7528870C
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 01:20:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oVC0/fsci3GOFoQNjOL45cdlJpxuW1d/UhCv+E9jzxUu+spyaNRMVCNsgn5K6Uql7Jg7TdBNXvg9Mr0hI79ioqdKbA7QES/S91lTUHE8n8Wf8JFdLhEIgDWUO/7rUPejGe98V0JOOjV4IQfv3j1PAaSUJSb+Oi1pqWnW6r3yU0/IU9UrZZ+hcB4YRFHJtBf0xix6TWDMOl/al068JDp7DFVdbW5YZf3hzp046Vpq9xLfOZI2xgcahduXxfcTrqJPs++sFRhJwUKqvi3rZNX3682t7QP17/yZfkgaEBB23KMEX9ad7xmlsjHvLzlrGZcUrIApmmV1+0oGIGFErNCi7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b+qmviFJQapkt6dVlLRmuj3seK0VkqrIIvWvOLaDzBY=;
- b=dhlTylJXVsRvML3+cWM/NjHVWF7h2dertYLvU3I0epLmyHe61vL1Zfl7syo53r6MP+X3+NJzd0KnerqHkRTkPhsNk2BWfrUpymdANMquivho5isquuIVlCmd6vnAQmzuznfBmGwIUU5wwLpx77l0x/FG1p+qyWe1JksRDY4ld7KLzxWnrKiaIuUn5PZUfBp8bCKDqbFdaisOzV/u/utQuGGHg2Ir6KhKWr4DrYulo6nexixjGhW1se4SruAvjNH0YKbEG49bKcXqSYryD8Lt3a1vf9O3jj/Yj1M3cPkw9W1X/gYt2QJmOYVr3w/BAhgLe2XU1xKyxx8J93zdeq5yrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b+qmviFJQapkt6dVlLRmuj3seK0VkqrIIvWvOLaDzBY=;
- b=qHVnL0oHCILFDe5GKnTNH/IDvEhQvYbE9eyb/8jEaEm9QYSEvKLgr1MQS9xCmZXL3T2moWmI7tG/WW0PnERFFjpTVN7+WhkU0vfnZyJsa90jclD8HYlmCyaE0bcWqrsGyP/mHlvTiaKDVE7NpfvAW4cflqsPcM4KD/HbvOBdD9KXFJz/N2uWB8hf1DJUtna4m6DV5KSyqUy/ViQVO5YJhb6vLnKNNz1eKSRhWHlu5QArMFuhbqpeQaGDjmTIjS8dXLKaS+LI4oct4aRJmqR/HEki+Ffv0BLKnQXhwpOUVrhu19mWWnc03WJCwOY8k4B2o772MBllxopIoNN11boN3Q==
-Received: from PAWP194MB2055.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:337::6)
- by PR3P194MB1527.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:14e::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.20; Wed, 10 Jul
- 2024 21:37:45 +0000
-Received: from PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
- ([fe80::3a33:7614:4563:6c99]) by PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
- ([fe80::3a33:7614:4563:6c99%6]) with mapi id 15.20.7762.016; Wed, 10 Jul 2024
- 21:37:45 +0000
-From: Francois Berder <fberder@outlook.fr>
-To: u-boot@lists.denx.de
-Cc: Shengzhou.Liu@nxp.com, trini@konsulko.com,
- Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] board: freescale: Replace invalid usage of sprintf by strcat
-Date: Wed, 10 Jul 2024 23:37:35 +0200
-Message-ID: <PAWP194MB2055C82705BDFCD5C0C4DF8EDAA42@PAWP194MB2055.EURP194.PROD.OUTLOOK.COM>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TMN: [TwIrC+ZtOkfBIZCU62lQIZyLMD9dXqhR7+LL0T2lCVs=]
-X-ClientProxiedBy: DU6P191CA0045.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:10:53f::26) To PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:102:337::6)
-X-Microsoft-Original-Message-ID: <20240710213735.1154171-1-fberder@outlook.fr>
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5c6661bca43so161756eaf.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 16:20:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1720653603; x=1721258403; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=2ijvrZzT8cXYcsNPx5TsQl01OrZPhHfu5BtRdUxd3g4=;
+ b=SCgUvx7tdYNJiCi9VIZvPMq0fff9v2ruZBBd1b8SXsEpWtX5ULvTzd6aUT0XaR03py
+ MBeLEQGaB36pxuRFNgTUthWmTwOha8btHZaoLNV4NUOgMIPGrBFj0poyInGT6Ic9+93k
+ qHnYwHfAYPOpClcEzZTtkgGdelp92DAr0Q4G/7kWlL18/2Wx9OKPSeABqNoqEw/nFkK2
+ Oe/meZWnEuKt5ykvVwsUz9zA4P94lws8GZN9k6E2QCxvnFKj9W6wsjei2fmPWl+W7Dlc
+ ZH+IFqkTGZf5lfC2V3ZO3B14X7pbMaW3oZ4KA8chyKuQriXi5fn5m6bL/EawDLNexjmt
+ Uqeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720653603; x=1721258403;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2ijvrZzT8cXYcsNPx5TsQl01OrZPhHfu5BtRdUxd3g4=;
+ b=imtp1tMcLIVxRg4UZIr5s4QAnyw6lBH6CqBu/x5ObqKGTBZwreIeIvwjMcAokegw8H
+ iVb0GqRZfKzX10xDpL0sPChuDZyPiisfpBNWomU9cRAeI1/schL/NQiALuJHdaxqYB3H
+ eq7rK6Y33LrLoRybPHaw280QiZVQ9EeVl1xMcMxjS2//hB13OF4t1z6keAnsG5AmMcHd
+ xYfbwI0k1MfqbPYGAVWelzul5P1Xt18EeMGQhMvEwClTeShWmcDxiEbPYVXitscL/6hi
+ yNDMoHsaYOQoYdrSxxUZaPUTfkxUFphtj8hKRROq3qz15P0xgmW3giMiSrFMLQhGWTxd
+ /Rkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU/GSunA5NfUDrO9IcqQjAGKou5GxthYdadvp9mp4nuvtxICEPCRSYv7RKloEKwTW9OLe+TDEytfVwUfYwX7c2J+biOBA==
+X-Gm-Message-State: AOJu0YxQOJ6Y6DljWVEG/BvMsqPKxgBUzvwJpSvAj+erV3aQxjSGuGY7
+ Nl4VBPQYJwyNA6UjehcFvzWdLah67MnwKX96B4c5+lZbzySTlsF6
+X-Google-Smtp-Source: AGHT+IEsXH3XgrHGbwJkkM6k3DOOaXXD1NsFsNspC9Ye1PRP/hleEj0cnB7VqQAQ2J1glmqhxv305w==
+X-Received: by 2002:a4a:4e04:0:b0:5c4:396e:438c with SMTP id
+ 006d021491bc7-5c68dfaf8b9mr6269073eaf.0.1720653602935; 
+ Wed, 10 Jul 2024 16:20:02 -0700 (PDT)
+Received: from neuromancer. ([2600:1700:fb0:1bcf:4def:7e53:67cc:4ec0])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5c7ad96b6ebsm477658eaf.4.2024.07.10.16.20.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jul 2024 16:20:02 -0700 (PDT)
+Message-ID: <668f1722.4a0a0220.666c8.2819@mx.google.com>
+X-Google-Original-Message-ID: <Zo8XIXIeC/MmI+pN@neuromancer.>
+Date: Wed, 10 Jul 2024 18:20:01 -0500
+From: Chris Morgan <macroalpha82@gmail.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Ryan Walklin <ryan@testtoast.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 3/6] power: pmic: sunxi: replace AXP717 SPL driver
+References: <20240515234839.26898-1-andre.przywara@arm.com>
+ <20240515234839.26898-4-andre.przywara@arm.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAWP194MB2055:EE_|PR3P194MB1527:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e83ce31-9979-4366-b700-08dca12888e2
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|8060799006|19110799003|461199028|3412199025|440099028|1710799026;
-X-Microsoft-Antispam-Message-Info: tBWmngAMWQ757ULdaxsiRzN+0fc0yQNuqjEd0KOWBJLbk2qokh9Rv/bkJbv7Y3kGCtcD1Z5nehPgquSqaoodb8k4u6FsMFXfY8IjZ/Ob8PR5DvDb6slWauD4dsotX0zuX7+9dLqfvCMUzPQnYKdIhsCfl3Kbn5FiY/AstEBsWLTl6mWawoQw0DDr6uJ78yjV39yRGsFaG1JnuDm6+o/wasL+wzXBc5i8lqyAAxTVwoFFl2acua/6CSaQ/sGTStXl3HKTKxbzfghZN0Lj+92NFcxnqpM9LwHLNgtHmDy+QEwX046ZLOXfTOg0NRLwvW9Gg2wTAKul6klHitvP3DrCCYVaAzZCjo8Sty5zgwNlK1elD/+GePSiw6AQwsOiHtUyzVawMQM1YO2TfZUSMvFHblQOkYR5L49zHy6OKFDwCmUOKqGCaPhotHMp14OP/X21UKk/m4yzveQhacFbGOcR73hL0dOKOWpkBKWTgtbNqSS7+olNs271H+NKctyPwwUHyV/tfNgB8FO9sLHJMMoSXJvjS6moNENyj/Q5hzvzQnF2oDauN24w8sik5FmWMw4pTQePZqennCf8jIWKy9NOGSo4PfDmZLsIZftnGLdAc2nLgWVDeKVEezo8A0+e6Qld8w6JrUmEJPSlb4ljASJmbAAWJno7OwyH3GxcCrYPM0w=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0ClW4KrAvPPfFtiP6585tz7iFJ1C/gGIHFOG0dga4hPFeiIEZCkUQbKRkhUN?=
- =?us-ascii?Q?DpnygDktPM3HF5is6xGxzJoXHwdtthgYxElpyeBkVdphH+N8pR/75NN4L8Ym?=
- =?us-ascii?Q?82t1YyyZm7kHWsh3xkerFeZeU9MoaDiO0stbl5gzWqV1c5AGGUdxNRZEN03K?=
- =?us-ascii?Q?RIdCuNYaC9G7nelqA9NX8ybjx3PODK0V1fR2S/AhzVuXOpfRVlcrZCHUtUUf?=
- =?us-ascii?Q?TUjTK+eyJFUprbMLSFDXAdz7+Z/JUYfIdnRGh65s8KEoDcucNoaEkAbtAADd?=
- =?us-ascii?Q?t2I8vDwDImt0ckZB5HNgBYDpeqE8TG4COwH1SKBqXaXeLhfYcPe5aDfDEdRe?=
- =?us-ascii?Q?0LKzLoOKC5oe6BR+xQstVZ0jdcxg+r8bjhWonKhdr6ieOj7R5yX4GXbqxoJG?=
- =?us-ascii?Q?JdFiW8DqwcE0liRresnG7TeiDH0wV9kGaGc42qGbi1m/EX7mpuD9rFT05rlc?=
- =?us-ascii?Q?hhWH8bxu6ksqMd7HpceWXSZLsZDQGE8G93rCyPc/qpnBgyyQfaS8RpEiRgrI?=
- =?us-ascii?Q?cPlxt7dxMseImlt3H/lZmUB0AcUczpDLt2nj2heDEWEiC340sy9HoV94eh5Y?=
- =?us-ascii?Q?6qtx/2+MXfDhK11mXoqE5N8F4aZPaybbI7LliR3liSGqEdaopH7q4OVfc++1?=
- =?us-ascii?Q?B0w8A6c5uqWKDTrtb6oxj54GvkE88D+SB1YdfeJ2x678MtIXx42a4Gv9NOxc?=
- =?us-ascii?Q?6xgZAHtirJ+BHqCbDFwc+8+C1IWkPZNzp4c0hxTNUEBBNDUeOZqBLKFFACPX?=
- =?us-ascii?Q?5unaXQc+hA433GeyUSbU8bXvyto11hDmx/zTLsCEnQhZTqM6aujaCMeK+efz?=
- =?us-ascii?Q?/We9PAr2NprXChsaEQ/FlXfVbl+3mp8O50w6vmHn0F12CrY/5qQFP1fkRO3D?=
- =?us-ascii?Q?Pjkj7aZkCbb0AhorZWCGeM6vm5pPDfXH0VbmBN/Sn4YQ4k48Iqj4QWlIJ4Dp?=
- =?us-ascii?Q?mNOAcKS6wSv5N6W8Duuhx4GR7QVgbZek9ilk6lrpHclLJNkfjPOMupQKrjCe?=
- =?us-ascii?Q?45c2Oqhga2BP7qL9KcQ7UYKQn3U+sv2NQ2awtenRdMocAWqh00KLmPAkmj3W?=
- =?us-ascii?Q?430GGy7JfZBuSyCzUSRflxr6GzpYS5EuJzvoVO+ks2/52tVZECkEXPTlWJmk?=
- =?us-ascii?Q?QEhZxrGBBCsJ/xqz8ykU/Snp4GCCMO6xK+B1EyGRiNdkawlBhzYXAJf01Qo5?=
- =?us-ascii?Q?boUFvSKXmTmAszMRJbvCfDYCOYNKTItC18bS6yJDdK9zYr2BWz9HUm2yMEw?=
- =?us-ascii?Q?=3D?=
-X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-43ca8.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e83ce31-9979-4366-b700-08dca12888e2
-X-MS-Exchange-CrossTenant-AuthSource: PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2024 21:37:45.2174 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P194MB1527
-X-Mailman-Approved-At: Thu, 11 Jul 2024 00:51:03 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240515234839.26898-4-andre.przywara@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,130 +100,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-buf was used as destination and as parameter to sprintf
-which triggers an undefined behaviour.
-This commit removes this usage of sprintf and uses strcat
-to append strings to buf variable.
+On Thu, May 16, 2024 at 12:48:36AM +0100, Andre Przywara wrote:
+> We now have a generic AXP SPL driver implementation, that already covers
+> the DC/DC converters of the AXP717 PMIC.
+> 
+> Remove the old, dedicated driver and switch to the new generic driver.
+> This should not introduce any change in behaviour.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  drivers/power/Makefile |  2 +-
+>  drivers/power/axp717.c | 92 ------------------------------------------
+>  2 files changed, 1 insertion(+), 93 deletions(-)
+>  delete mode 100644 drivers/power/axp717.c
+> 
+> diff --git a/drivers/power/Makefile b/drivers/power/Makefile
+> index 9d1f4c65262..6df23a81c29 100644
+> --- a/drivers/power/Makefile
+> +++ b/drivers/power/Makefile
+> @@ -14,7 +14,7 @@ obj-$(CONFIG_AXP209_POWER)	+= axp209.o
+>  obj-$(CONFIG_AXP221_POWER)	+= axp221.o
+>  obj-$(CONFIG_AXP305_POWER)	+= axp305.o
+>  obj-$(CONFIG_AXP313_POWER)	+= axp313.o
+> -obj-$(CONFIG_AXP717_POWER)	+= axp717.o
+> +obj-$(CONFIG_AXP717_POWER)	+= axp_spl.o
+>  obj-$(CONFIG_AXP809_POWER)	+= axp809.o
+>  obj-$(CONFIG_AXP818_POWER)	+= axp818.o
+>  endif
+> diff --git a/drivers/power/axp717.c b/drivers/power/axp717.c
+> deleted file mode 100644
+> index 7c77c09ea8f..00000000000
+> --- a/drivers/power/axp717.c
+> +++ /dev/null
+> @@ -1,92 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * AXP717 SPL driver
+> - * (C) Copyright 2024 Arm Ltd.
+> - */
+> -
+> -#include <common.h>
+> -#include <command.h>
+> -#include <errno.h>
+> -#include <asm/arch/pmic_bus.h>
+> -#include <axp_pmic.h>
+> -
+> -enum axp717_reg {
+> -	AXP717_CHIP_VERSION = 0x3,
+> -	AXP717_SHUTDOWN = 0x27,
+> -	AXP717_OUTPUT_CTRL1 = 0x80,
+> -	AXP717_DCDC1_VOLTAGE = 0x83,
+> -};
+> -
+> -#define AXP717_CHIP_VERSION_MASK	0xc8
+> -#define AXP717_DCDC_1220MV_OFFSET	71
+> -#define AXP717_POWEROFF			(1U << 0)
+> -#define DCDC_DVM_ENABLE			(1U << 7)
+> -
+> -static u8 axp_mvolt_to_cfg(int mvolt, int min, int max, int div)
+> -{
+> -	if (mvolt < min)
+> -		mvolt = min;
+> -	else if (mvolt > max)
+> -		mvolt = max;
+> -
+> -	return (mvolt - min) / div;
+> -}
+> -
+> -static int axp_set_dcdc(int dcdc_num, unsigned int mvolt)
+> -{
+> -	int ret;
+> -	u8 cfg = DCDC_DVM_ENABLE;
+> -
+> -	if (dcdc_num < 1 || dcdc_num > 3)
+> -		return -EINVAL;
+> -
+> -	if (mvolt >= 1220)
+> -		cfg |= AXP717_DCDC_1220MV_OFFSET +
+> -			axp_mvolt_to_cfg(mvolt, 1220,
+> -					 dcdc_num == 3 ? 1840 : 1540, 20);
+> -	else
+> -		cfg |= axp_mvolt_to_cfg(mvolt, 500, 1200, 10);
+> -
+> -	if (mvolt == 0)
+> -		return pmic_bus_clrbits(AXP717_OUTPUT_CTRL1,
+> -					1U << (dcdc_num -1));
+> -
+> -	ret = pmic_bus_write(AXP717_DCDC1_VOLTAGE + dcdc_num - 1, cfg);
+> -	if (ret)
+> -		return ret;
+> -
+> -	return pmic_bus_setbits(AXP717_OUTPUT_CTRL1, 1U << (dcdc_num - 1));
+> -}
+> -
+> -int axp_set_dcdc1(unsigned int mvolt)
+> -{
+> -	return axp_set_dcdc(1, mvolt);
+> -}
+> -
+> -int axp_set_dcdc2(unsigned int mvolt)
+> -{
+> -	return axp_set_dcdc(2, mvolt);
+> -}
+> -
+> -int axp_set_dcdc3(unsigned int mvolt)
+> -{
+> -	return axp_set_dcdc(3, mvolt);
+> -}
+> -
+> -int axp_init(void)
+> -{
+> -	return pmic_bus_init();
+> -}
+> -
+> -#if !CONFIG_IS_ENABLED(ARM_PSCI_FW) && !IS_ENABLED(CONFIG_SYSRESET_CMD_POWEROFF)
+> -int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -	pmic_bus_setbits(AXP717_SHUTDOWN, AXP717_POWEROFF);
+> -
+> -	/* infinite loop during shutdown */
+> -	while (1) {}
+> -
+> -	/* not reached */
+> -	return 0;
+> -}
+> -#endif
+> -- 
+> 2.35.8
+> 
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
----
- board/freescale/t208xqds/eth_t208xqds.c | 40 ++++++++++++-------------
- 1 file changed, 20 insertions(+), 20 deletions(-)
+I've been using this for the past week or so on my RG35XX-H for which
+I've been testing some code and it has worked well for me.
 
-diff --git a/board/freescale/t208xqds/eth_t208xqds.c b/board/freescale/t208xqds/eth_t208xqds.c
-index 9f299227e2..b55078c8fe 100644
---- a/board/freescale/t208xqds/eth_t208xqds.c
-+++ b/board/freescale/t208xqds/eth_t208xqds.c
-@@ -210,8 +210,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						   "phy_1gkx1");
- 				fdt_status_okay_by_alias(fdt, "1gkx_pcs_mdio1");
--				sprintf(buf, "%s%s%s", buf, "lane-c,",
--						(char *)lane_mode[0]);
-+				strcat(buf, "lane-c,");
-+				strcat(buf, (char *)lane_mode[0]);
- 				out_be32(&srds_regs->srdspccr1, srds1_pccr1 |
- 					 PCCR1_SGMIIH_KX_MASK);
- 				break;
-@@ -222,8 +222,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						   "phy_1gkx2");
- 				fdt_status_okay_by_alias(fdt, "1gkx_pcs_mdio2");
--				sprintf(buf, "%s%s%s", buf, "lane-d,",
--						(char *)lane_mode[0]);
-+				strcat(buf, "lane-d,");
-+				strcat(buf, (char *)lane_mode[0]);
- 				out_be32(&srds_regs->srdspccr1, srds1_pccr1 |
- 					 PCCR1_SGMIIG_KX_MASK);
- 				break;
-@@ -234,8 +234,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						   "phy_1gkx9");
- 				fdt_status_okay_by_alias(fdt, "1gkx_pcs_mdio9");
--				sprintf(buf, "%s%s%s", buf, "lane-a,",
--						(char *)lane_mode[0]);
-+				strcat(buf, "lane-a,");
-+				strcat(buf, (char *)lane_mode[0]);
- 				out_be32(&srds_regs->srdspccr1, srds1_pccr1 |
- 					 PCCR1_SGMIIE_KX_MASK);
- 				break;
-@@ -247,8 +247,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 						   "phy_1gkx10");
- 				fdt_status_okay_by_alias(fdt,
- 							 "1gkx_pcs_mdio10");
--				sprintf(buf, "%s%s%s", buf, "lane-b,",
--						(char *)lane_mode[0]);
-+				strcat(buf, "lane-b,");
-+				strcat(buf, (char *)lane_mode[0]);
- 				out_be32(&srds_regs->srdspccr1, srds1_pccr1 |
- 					 PCCR1_SGMIIF_KX_MASK);
- 				break;
-@@ -269,8 +269,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						   "phy_1gkx5");
- 				fdt_status_okay_by_alias(fdt, "1gkx_pcs_mdio5");
--				sprintf(buf, "%s%s%s", buf, "lane-g,",
--						(char *)lane_mode[0]);
-+				strcat(buf, "lane-g,");
-+				strcat(buf, (char *)lane_mode[0]);
- 				out_be32(&srds_regs->srdspccr1, srds1_pccr1 |
- 					 PCCR1_SGMIIC_KX_MASK);
- 				break;
-@@ -281,8 +281,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						   "phy_1gkx6");
- 				fdt_status_okay_by_alias(fdt, "1gkx_pcs_mdio6");
--				sprintf(buf, "%s%s%s", buf, "lane-h,",
--						(char *)lane_mode[0]);
-+				strcat(buf, "lane-h,");
-+				strcat(buf, (char *)lane_mode[0]);
- 				out_be32(&srds_regs->srdspccr1, srds1_pccr1 |
- 					 PCCR1_SGMIID_KX_MASK);
- 				break;
-@@ -328,8 +328,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						"phy_xfi9");
- 				fdt_status_okay_by_alias(fdt, "xfi_pcs_mdio9");
--				sprintf(buf, "%s%s%s", buf, "lane-a,",
--						(char *)lane_mode[1]);
-+				strcat(buf, "lane-a,");
-+				strcat(buf, (char *)lane_mode[1]);
- 			}
- 				break;
- 			case FM1_10GEC2:
-@@ -339,8 +339,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						"phy_xfi10");
- 				fdt_status_okay_by_alias(fdt, "xfi_pcs_mdio10");
--				sprintf(buf, "%s%s%s", buf, "lane-b,",
--						(char *)lane_mode[1]);
-+				strcat(buf, "lane-b,");
-+				strcat(buf, (char *)lane_mode[1]);
- 			}
- 				break;
- 			case FM1_10GEC3:
-@@ -350,8 +350,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						"phy_xfi1");
- 				fdt_status_okay_by_alias(fdt, "xfi_pcs_mdio1");
--				sprintf(buf, "%s%s%s", buf, "lane-c,",
--						(char *)lane_mode[1]);
-+				strcat(buf, "lane-c,");
-+				strcat(buf, (char *)lane_mode[1]);
- 			}
- 				break;
- 			case FM1_10GEC4:
-@@ -361,8 +361,8 @@ void board_ft_fman_fixup_port(void *fdt, char *compat, phys_addr_t addr,
- 				fdt_set_phy_handle(fdt, compat, addr,
- 						"phy_xfi2");
- 				fdt_status_okay_by_alias(fdt, "xfi_pcs_mdio2");
--				sprintf(buf, "%s%s%s", buf, "lane-d,",
--						(char *)lane_mode[1]);
-+				strcat(buf, "lane-d,");
-+				strcat(buf, (char *)lane_mode[1]);
- 			}
- 				break;
- 			default:
--- 
-2.34.1
-
+Tested-by: Chris Morgan <macromorgan@hotmail.com>
