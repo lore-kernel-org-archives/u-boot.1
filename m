@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6E0C3DA41
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 14:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1D23C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 14:50:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D3DA88719;
-	Wed, 10 Jul 2024 16:49:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C70FA8870E;
+	Wed, 10 Jul 2024 16:49:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hc/Vhm7a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XUruOlyx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 341EF88702; Wed, 10 Jul 2024 16:49:39 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id E170F8871E; Wed, 10 Jul 2024 16:49:40 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C964F886B6
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 16:49:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D02788870D
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 16:49:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2ec1ac1aed2so68769601fa.3
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 07:49:36 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4266b1f1b21so21407375e9.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 07:49:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720622975; x=1721227775; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9E0JMT6cj2PIMFLADV2UzwQGIpCukNxRWCSXo39eUdo=;
- b=Hc/Vhm7auKyge5uKFxFRb5dF6EQXqkxhLWqa1Zc8cQ9IneDDUQkNXQpmvaKmNWchRK
- g34mJPpvTRmNxz89vV8sHhoTw/uyn3hq9d0YqGjXEn90X3RTmmGn7uonShkweetrOfRK
- kUhT/4l67dHskPhV0sZYPuvKZu9WqKUaslxyw=
+ d=chromium.org; s=google; t=1720622977; x=1721227777; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LiorbJr5W30iyqHwCPgZi6RbEbcE4DwrMZBLGDyP3qw=;
+ b=XUruOlyxndoEBd8hQr2aBsUsr4+VDGGkF3MtaOSjK5pIdqnxxKOfHmDUYKG0k2fj0i
+ vKMhTn/iz1zvnKW4qxN3VXdhEdOneRNMYMBRNWwg4BzAOUbAjOQX3+VQPhbAVSZPOxUX
+ PnAjNlrFyqJXfJYSUmvi4TIp2136oehI80vzA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720622975; x=1721227775;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9E0JMT6cj2PIMFLADV2UzwQGIpCukNxRWCSXo39eUdo=;
- b=U3X5vEPaBwDliAcfoLu7t5ymi9O7fTTp8hPeBSuP9xFoBh3iq6ZpUYnbv3V/Il8qkp
- Agu+rJNtmxXQzgrRWGTND6tqRHyo23hdVCMwAVlg7baxVFFKwUwHqjd0JfgaB0nD00yH
- Puvc8UaxiQCYLGW4RcxpQsGoJvrrbKu2Xs1kOzcDo2us5+lWv6zXZmBbzG71AqZNROFT
- nIIG+z5CQihJumRpG/oqoovt/bbX7sFf1vZlHyuSp8zvVEh1oHGCOYWcVPBjWfj8WDsq
- wQVFxGgCN4Yz0KDLwmBWwYZNhpYsoN1EIgz6LEUgCmI6KvtYMnOYYvn+JXBaZR9RBD7I
- otPQ==
-X-Gm-Message-State: AOJu0YyZatI7uj185QP0jzXrSnJLivO1Oq6Ii8F3X196LId1kdlE6Puv
- H6WPyE14ZVWDtvq0ih5fnclqZSS7bc/BiH/mRKoCDH2OMids1x/Rdo3El9uuOu77Eqv9j7zXKJA
+ d=1e100.net; s=20230601; t=1720622977; x=1721227777;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LiorbJr5W30iyqHwCPgZi6RbEbcE4DwrMZBLGDyP3qw=;
+ b=j5mPkG+zXBb278hC3v1iXst/lHZmsJTudulGtXC3oTdJQVM7+2y7t533Hp117Vriiv
+ VF/PqhuuhiQ2tcMMH4TGWtmKzeVW2TcrwMWTD1hQxRDsLO0LHbVgDz211PqL9Vipt+fW
+ BJwQGi1saCzW8UoTbtHm4XBKKCFuaxVXABadpwM3LDVg4yIMZE/Q+h4Ru4CH7hgn/yMw
+ zlarpzv85FJGUiI9Uak6AfUZfnuUR5xLmqaPpaUEG9vM7fqu3yqXigMzhOsvdKaZsLHo
+ jaoVYuzy3bKwvEjM8ZM9WFOruk4W8Vt3Ty2C/+QJ/KluqZ4buLpjRaDzXoJx0/XTFdua
+ i4Pg==
+X-Gm-Message-State: AOJu0YxrzNkxt5suE3i9PgvrsqX8pNxlQ6EnEPQc3pNPwMC3lPKvLAUj
+ qtoRA6N1iKlI29sMQJqmo87PQ6dBlm0ARKBn+Si8d+fOJ/Ty/hoTOx7xBl7/rRNGZoWDv89VUV4
  =
-X-Google-Smtp-Source: AGHT+IFwe1Aa3TrPrvV04yQav/3NdQEfnU+pzPBJVXmkSpDMqqQ/YgGlUfaCZPEwGSs+9atpou3LLg==
-X-Received: by 2002:a2e:8710:0:b0:2ee:6cda:6380 with SMTP id
- 38308e7fff4ca-2eeb30e3cbbmr38946961fa.18.1720622975558; 
- Wed, 10 Jul 2024 07:49:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGLe32ePE0PIfjxj0bDttrvA1NwSTVJqTd0I8oUi6bzQzL0Xqm4LGb7I/2KFXTiSyOgpB3eFA==
+X-Received: by 2002:a05:600c:5748:b0:426:597c:7d58 with SMTP id
+ 5b1f17b1804b1-426708fabf5mr35349135e9.39.1720622977142; 
+ Wed, 10 Jul 2024 07:49:37 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-426615876bbsm171534355e9.6.2024.07.10.07.49.34
+ 5b1f17b1804b1-426615876bbsm171534355e9.6.2024.07.10.07.49.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jul 2024 07:49:35 -0700 (PDT)
+ Wed, 10 Jul 2024 07:49:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bo Gan <ganboing@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <seanga2@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 0/4] alist: Implement a pointer list / array of structs
-Date: Wed, 10 Jul 2024 15:49:23 +0100
-Message-Id: <20240710144927.3940789-1-sjg@chromium.org>
+Subject: [PATCH v3 2/4] lib: Handle a special case with str_to_list()
+Date: Wed, 10 Jul 2024 15:49:25 +0100
+Message-Id: <20240710144927.3940789-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240710144927.3940789-1-sjg@chromium.org>
+References: <20240710144927.3940789-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,56 +89,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This data structure provides a list of pointers / array of structures.
-I was planning to use it for the lmb restructure, to allow it to
-support any number of entries, but then I gave up on it.
+The current implementation can return an extra result at the end when
+the string ends with a space. Fix this by adding a special case.
 
-There are quite a few places in U-Boot where such a list would be
-useful, since it supports growing the array.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-The series includes a patch to convert an existing function to use
-this.
+(no changes since v1)
 
-It adds a little under 300 bytes of code with Thumb2.
+ lib/strto.c   | 4 +++-
+ test/str_ut.c | 4 +---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-Example:
-
- struct my_struct obj;
- struct my_struct *ptr = alist_add(&lst, &obj, struct my_struct);
-
- // now ptr is in the list
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=371258&state=*
-
-Changes in v3:
-- Add prototype for alist_expand_by()
-- Update for alist_add() API change
-
-Changes in v2:
-- Fix 'typeee' typo
-- Make alist_get_ptr() take a const alist *
-- Make alist_add() take a struct rather than a pointer
-- Declare alist_expand_by() as static
-
-Simon Glass (4):
-  malloc: Support testing with realloc()
-  lib: Handle a special case with str_to_list()
-  alist: Add support for an allocated pointer list
-  lib: Convert str_to_list() to use alist
-
- common/dlmalloc.c |   4 +
- include/alist.h   | 214 ++++++++++++++++++++++++++++++++++++++++++++++
- lib/Makefile      |   1 +
- lib/alist.c       | 147 +++++++++++++++++++++++++++++++
- lib/strto.c       |  33 ++++---
- test/lib/Makefile |   1 +
- test/lib/alist.c  | 197 ++++++++++++++++++++++++++++++++++++++++++
- test/str_ut.c     |   4 +-
- 8 files changed, 584 insertions(+), 17 deletions(-)
- create mode 100644 include/alist.h
- create mode 100644 lib/alist.c
- create mode 100644 test/lib/alist.c
-
+diff --git a/lib/strto.c b/lib/strto.c
+index 5157332d6c1..f83ac67c666 100644
+--- a/lib/strto.c
++++ b/lib/strto.c
+@@ -236,12 +236,14 @@ const char **str_to_list(const char *instr)
+ 		return NULL;
+ 
+ 	/* count the number of space-separated strings */
+-	for (count = *str != '\0', p = str; *p; p++) {
++	for (count = 0, p = str; *p; p++) {
+ 		if (*p == ' ') {
+ 			count++;
+ 			*p = '\0';
+ 		}
+ 	}
++	if (p != str && p[-1])
++		count++;
+ 
+ 	/* allocate the pointer array, allowing for a NULL terminator */
+ 	ptr = calloc(count + 1, sizeof(char *));
+diff --git a/test/str_ut.c b/test/str_ut.c
+index 389779859a3..96e048975d8 100644
+--- a/test/str_ut.c
++++ b/test/str_ut.c
+@@ -342,9 +342,7 @@ static int test_str_to_list(struct unit_test_state *uts)
+ 	ut_asserteq_str("space", ptr[3]);
+ 	ut_assertnonnull(ptr[4]);
+ 	ut_asserteq_str("", ptr[4]);
+-	ut_assertnonnull(ptr[5]);
+-	ut_asserteq_str("", ptr[5]);
+-	ut_assertnull(ptr[6]);
++	ut_assertnull(ptr[5]);
+ 	str_free_list(ptr);
+ 	ut_assertok(ut_check_delta(start));
+ 
 -- 
 2.34.1
 
