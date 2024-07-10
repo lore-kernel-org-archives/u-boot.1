@@ -4,41 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30CBC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 15:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0F1C3DA41
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 15:35:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4310788703;
-	Wed, 10 Jul 2024 17:33:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0353C88680;
+	Wed, 10 Jul 2024 17:35:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="DokO0jyH";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC009886B6; Wed, 10 Jul 2024 15:53:27 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9146088657
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 15:53:25 +0200 (CEST)
+ id E14C188709; Wed, 10 Jul 2024 17:35:29 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AED0287EBD
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 17:35:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yeoreum.yun@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 257A3106F;
- Wed, 10 Jul 2024 06:53:50 -0700 (PDT)
-Received: from e129823.cambridge.arm.com (e129823.arm.com [10.1.197.6])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id DC63D3F762;
- Wed, 10 Jul 2024 06:53:23 -0700 (PDT)
-From: Levi Yun <yeoreum.yun@arm.com>
-To: trini@konsulko.com, sjg@chromium.org, raymond.mao@linaro.org,
- ilias.apalodimas@linaro.org, bmeng.cn@gmail.com
-Cc: nd@arm.com,
-	u-boot@lists.denx.de,
-	Levi Yun <yeoreum.yun@arm.com>
-Subject: [PATCH v4] bloblist: fix bloblist convention check.
-Date: Wed, 10 Jul 2024 14:53:20 +0100
-Message-Id: <20240710135320.2697805-1-yeoreum.yun@arm.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
+ s=s31663417; t=1720625726; x=1721230526; i=frank-w@public-files.de;
+ bh=HdSQxfB88on1Vy/52Lc5ejSe4EuK9W1Mi8FChWaP1Ek=;
+ h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Subject:
+ Content-Type:Date:cc:content-transfer-encoding:content-type:date:
+ from:message-id:mime-version:reply-to:subject:to;
+ b=DokO0jyHRJcrQnWRcA0LhDvHCiHqoUEHBeNP17Y2nMv/BzhrvS6Tgl5/DYk5Nn7W
+ hIRNKlT7CtLkGeqIW79BcyqNonsDENJgZA35Go3lHfaKzLu3blMZ8Rk2g5bxrt777
+ zLWIANQlX3fVG6ih6Q4ldVvafVZSS/0IG0vPFIyy9E0D2ae7c5w5ckFC6RZo6SxZV
+ K2RnWF/33ZwHsdIR0z9LlPDiQGcN81AgMczmeN7aX4bXv8XE3KntAafierf6U1ITx
+ VsTtRAGbwn731YPH2KNGOI3NKySCGhR/fwFep3JRyaxVYw9PXjxMI0QIGhFxgniQR
+ BkyM47iak3Ia+BmwtA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [217.61.158.245] ([217.61.158.245]) by web-mail.gmx.net
+ (3c-app-gmx-bs04.server.lan [172.19.170.53]) (via HTTP); Wed, 10 Jul 2024
+ 17:35:26 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 10 Jul 2024 17:33:42 +0200
+Message-ID: <trinity-a8e5b1d7-ca6f-4148-a618-95cfb529d919-1720625726767@3c-app-gmx-bs04>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Subject: adding fdt-overlay function - help needed
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 10 Jul 2024 17:35:26 +0200
+Importance: normal
+Sensitivity: Normal
+X-Priority: 3
+X-Provags-ID: V03:K1:HZRuha/pD30GZ/XS5y+VvF2Qk5xXhW8Kwzs6TfMvmJXWrf/LWltk5cXPZPiHVPOCLCtJS
+ hgNd55L7ASH6SqjlLiz+8i14Y3xb0EOjzcVu43df+rxlt/8TTwzKI4U9gVJ6oAtptfTaOOQSq9J1
+ wWCbhrke/Yiq76ubG4aI6rABioUYuvb9QOstUxfuYW7X71bthHPOqIg2zhQHOjqboTFtG7KzjwRO
+ H/pUh4iGaKyHa+elCjXrzZ+wu+pmTs/f0ZtdwL0qUwUkocd4Oligrs1l4lYesVWD0iSGuXUFuuMT
+ Hc=
+UI-OutboundReport: notjunk:1;M01:P0:wh9Yk3vAzbs=;25YsN3zT62qP5h1hrqHXa5PCqoy
+ JLuGFVWlzyQCIyN9Ji3RnoKbwiW6L4VWb1wMMyiJ/60vhw10WBSQEPAPvTe6PsVjGfR+pSge0
+ lt774XD8X+kgyfZfTJgXtW/bbTetAoaVuUh237PK041OoPO6hnGNySaLDr9Vgtjx1u5MYshOU
+ yoL/Z5FbanfM7siBaJCohY2sjbho60ZujOR2fVgU63S28VJvYJV/YiJup8k3KTwmm4bQ77Dmd
+ qLrlXQrwTaJst01yFI4c4YNkPqTcU7KhHVmqrOppgx3gf1PX2utHZBat8zJV7PuOjbX58XbaW
+ 9bHx/DOR4FE/zOGdtFm7uSbGpzxgrIu1krS5txqRbFpCGB0pVtljuMUPRETzpo8SKKiH2092O
+ nZIzlR9b1pzsjsZLJL1Wvf2alCxT+haBwIKW7ME5xYL2ValBTP0oXXV0ijI3mafolVwFUgk8U
+ nEgf6A2RbFBgSWXWoRd6wPwkuBFiVb7Bi/dd2w+GcVhaA7Qv4h+m4JP/7So4Sv8MxVrhb/KeZ
+ 5Ux10dZg/rkyftHUUtw/YfW+UTFtcNeDYEM6rMSz0NyH8tUTE8NxT6cKTvpxGn+j3AohJrCG/
+ HtNlCalnx7ReKqTqaOUdai854ti2agrDTCgdjhqFZDp/BkWY54YedoEaLaG7auGtfat2HQchx
+ yjpptEqxeyx3ENyNRhQRohkz8JX2H4KduPbSmrox/A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,96 +83,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to recently firmware handsoff spec [1]'s "Register usage at handoff
-boundary", Transfer List's signature value was changed from 0x40_b10b
-(3 bytes) to 4a0f_b10b (4 bytes).
+Hi,
 
-As updating of TL's signature, register value of x1/r1 should be:
+i try to get overlay-merging working in uboot (for OF_UPSTREAM conversion), but failing on missing Makefile knowledge
 
-In aarch32's r1 value should be
-    R1[23:0]: set to the TL signature (4a0f_b10b -> masked range value: 0f_b10b)
-    R1[31:24]: version of the register convention ==  1
+i have the state now, that upstream dtso get compiled to dtbo files (that needed further changes).
 
-and
+now i added this from linux-tree:
 
-In aarch64's x1 value should be
-    X1[31:0]: set to the TL signature (4a0f_b10b)
-    X1[39:32]: version of the register convention ==  1
-    X1[63:40]: MBZ
-(See the [2] and [3]).
+#merge CONFIG_DEFAULT_DEVICE_TREE + OF_OVERLAY_LIST_BASEDT to target DTB
+#manual:
+# dtc -I dtb -O dts dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtbo
+# fdtoverlay -i dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3.dtb -o dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtb dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtbo
+# dtc -I dtb -O dts dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtb | less
 
-This patch fix problems:
-   1. breaking X1 value with updated specification in aarch64
-        - change of length of signature field.
+#currently linux-version
+quiet_cmd_fdtoverlay = DTOVL   $@
+      cmd_fdtoverlay = $(objtree)/scripts/dtc/fdtoverlay -o $@ -i $(real-prereqs)
 
-   2. previous error value set in R1 in arm32.
-        - length of signature should be 24, but it uses 32bit signature.
+$(multi-dtb-y): FORCE
+	$(call if_changed,fdtoverlay)
+$(call multi_depend, $(multi-dtb-y), .dtb, -dtbs)
 
-This patch is a breaking change. It works only TF-A is updated.
+and created an config-option CONFIG_OF_OVERLAY_LIST_BASEDT which holds a space separated list of the dtbo-files without path, in my test
 
-Link: https://github.com/FirmwareHandoff/firmware_handoff [1]
-Link: https://github.com/FirmwareHandoff/firmware_handoff/issues/32 [2]
-Link: https://github.com/FirmwareHandoff/firmware_handoff/commit/5aa7aa1d3a1db75213e458d392b751f0707de027 [3]
-Signed-off-by: Levi Yun <yeoreum.yun@arm.com>
----
-v4:
-  - Remove FIXME tags on xfterlist.h
-  - Modify commit message
+CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt7986a-bananapi-bpi-r3"
+CONFIG_OF_OVERLAY_LIST_BASEDT="mt7986a-bananapi-bpi-r3-nand.dtbo mt7986a-bananapi-bpi-r3-nor.dtbo mt7986a-bananapi-bpi-r3-sd.dtbo"
 
-v3:
-  - Restore arch/arm/lib/xferlist.c
+i now want the list passed to the quiet_cmd_fdtoverlay which should handle each item and add the dtbo to a base-devicetree (like in comments above)....
 
-v2:
-  - Modify commit message
-  - Remove wrong swaping check in xferlist_from_boot_arg()
+maybe anyone here can help getting this to work?
 
- common/bloblist.c  | 11 ++++++++++-
- include/bloblist.h | 10 ++++------
- 2 files changed, 14 insertions(+), 7 deletions(-)
+if my source is needed: https://github.com/frank-w/u-boot/commits/2024-07-bpi-ofupstream-all/
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 11d6422b69..2008ab4d25 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -576,7 +576,16 @@ int bloblist_maybe_init(void)
-
- int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
- {
--	if (rzero || rsig != (BLOBLIST_MAGIC | BLOBLIST_REGCONV_VER) ||
-+	ulong version = BLOBLIST_REGCONV_VER;
-+	ulong sigval;
-+
-+	sigval = (IS_ENABLED(CONFIG_64BIT)) ?
-+			((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
-+			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64)) :
-+			((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
-+			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
-+
-+	if (rzero || rsig != sigval ||
- 	    rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
- 		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
- 		return -EIO;
-diff --git a/include/bloblist.h b/include/bloblist.h
-index 7fbdd622bc..b0706b5637 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -78,12 +78,10 @@ enum {
- 	BLOBLIST_VERSION	= 1,
- 	BLOBLIST_MAGIC		= 0x4a0fb10b,
-
--	/*
--	 * FIXME:
--	 * Register convention version should be placed into a higher byte
--	 * https://github.com/FirmwareHandoff/firmware_handoff/issues/32
--	 */
--	BLOBLIST_REGCONV_VER	= 1 << 24,
-+	BLOBLIST_REGCONV_SHIFT_64 = 32,
-+	BLOBLIST_REGCONV_SHIFT_32 = 24,
-+	BLOBLIST_REGCONV_MASK = 0xff,
-+	BLOBLIST_REGCONV_VER = 1,
-
- 	BLOBLIST_BLOB_ALIGN_LOG2 = 3,
- 	BLOBLIST_BLOB_ALIGN	 = 1 << BLOBLIST_BLOB_ALIGN_LOG2,
---
-LEVI:{C3F47F37-75D8-414A-A8BA-3980EC8A46D7}
+regards Frank
 
