@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C137C3DA41
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 14:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B498C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 14:49:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CA0988738;
-	Wed, 10 Jul 2024 16:39:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC6D2886D1;
+	Wed, 10 Jul 2024 16:49:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z3EFy94N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f1Uw0I/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D14288702; Wed, 10 Jul 2024 16:39:04 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 0E1BC88712; Wed, 10 Jul 2024 16:49:39 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61D4D88714
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 16:39:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B6A988702
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 16:49:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-36796d2e5a9so4270599f8f.3
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 07:39:02 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-42793fc0a6dso5414515e9.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 07:49:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720622341; x=1721227141; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720622976; x=1721227776; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ia3EdFVcMyePdPJ8allmepkCpXdBNxe3/qyB1EGi44A=;
- b=Z3EFy94NMVjZVlmmWHIp4cnIy9B4XbCks4E+MeEDeBHFL3MO0GCtLuTS2emXIbcVKZ
- 80Rra/t5jt+g9glp5cCME1sqsNU9EWwLRUcakbKZkrZ5/P/vqsGP/D77M9zRYLCjMXWe
- 3sF2spmHv6yWvGuePqk+47wXgTxuZVQc04bi8=
+ bh=IyjEfVaMEMdjvdWW1aJDTs/IKplrIBJotIiCmLQm/TY=;
+ b=f1Uw0I/2Wr27oslyzEOTNYZHHNd08D9Bor7LiM+Ef8G5rhRH7d1PFUbz35IGBFI0PE
+ vp9ikNBUBkhupPhX2kI1CihIEXkTFCdHkuHGjq/13f/5kgEHt0X9WQu1n0Ssd5S+QsXA
+ aOSBEJP+2lrXcb1hls/kr1diPCUek0UefH9FA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720622341; x=1721227141;
+ d=1e100.net; s=20230601; t=1720622976; x=1721227776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ia3EdFVcMyePdPJ8allmepkCpXdBNxe3/qyB1EGi44A=;
- b=DAmOE6RN0/6gLT9DFL2FW9cq6IpR+4TRwilxQFiu6YOZNYGp1GtJdqLTRH5QlGqL5n
- hVNyYemYQ4U8MDvf3/2aIX4SuuZ3jmOxnWlSPePGFLfkQOv3vYm7Ck/PrdY6jzqf0RXh
- xkteX1wOlGyavF89OmYfwIRfPIQ9zkz417ugzuGaN7/1HT1lCKSfQz2rfVH9BF7bC9MZ
- l8taQYhGvF4d5R81PRpoE151iNcr8MUYBxRL3sgqSE0O/nMx3h45WUDQkO7FPjxY260x
- TTSVTuXoohR/mmaDnAz54dIQsafeAC+LErJLIDRuv8f0glR9zfzUkR/x0wFErdh9ujO1
- vGFg==
-X-Gm-Message-State: AOJu0Yw0X3AMgpNFa8aSLiEDpRGHXI0Xc25fwzNb0GfjZ7VAbZzawijO
- bp5/SespJLz4TjGmWPl7Bdi8zLWCALroI6VQxYURaHLv9xGDWR3MkISX7aDaWrFjEq8XAYXTUA8
+ bh=IyjEfVaMEMdjvdWW1aJDTs/IKplrIBJotIiCmLQm/TY=;
+ b=DAGdNqeilrtJw1bLV7ipNwUyDm/YG7U344YEDoiV7fYC0PbKl8zH3lbtSAhZbPsQD+
+ DHij8i+L8YzHf+lY9Aol8Yq+UiiYb96nJvlrscokOGTCwzjfqjAp064Wfi+zuQ1Alg3n
+ SmSHFnRqzN+CvO3rh9/ugZuTcm0aT89VFxfRwhqG9tNp6UGXqvDm/5uVb4BDtvZdrEdF
+ Ut4IJZewYhq9TpJbj1yEroyWHIV4vPLcob9661SguvFVIcy7ECEea0WRZzecvdyv6v4m
+ xtii1VuKD7q3xrCHt5uqg8wnN331ZzivD362HqB8So0OsecCUfZ5cfigIdadxoG2NsnH
+ CfZg==
+X-Gm-Message-State: AOJu0YwAt4U6rvcpTIF1YbbYu3rodtpS+GuipkVW8TKyHpSUCsqoJHEj
+ r/zuZrFH9YuJEkZuazxQi/9lbu07Ql71fzXfGlAUfXyM/vOS18Xk7mYC9YDTqhPTc0L+UU87YHM
  =
-X-Google-Smtp-Source: AGHT+IFsHcyWdT7hygRMAnAv/oJWxs9iExnuu70XrvAd6irhjAHcLqAGcnwaYMjRHKLZdlLtD89A1Q==
-X-Received: by 2002:a5d:4d51:0:b0:366:f469:a8d with SMTP id
- ffacd0b85a97d-367cea9206cmr3879072f8f.35.1720622341729; 
- Wed, 10 Jul 2024 07:39:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHnhYxMzloUixuKMtSUlh7WUBKon43uFMZo2rG+e3QqFSepPsR3mNvhBxK1VQ4ht8DOM3SFpw==
+X-Received: by 2002:a05:600c:1c8e:b0:426:58ca:5a3 with SMTP id
+ 5b1f17b1804b1-426708f18famr40046825e9.30.1720622976287; 
+ Wed, 10 Jul 2024 07:49:36 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cdfa07dasm5471374f8f.87.2024.07.10.07.39.01
+ 5b1f17b1804b1-426615876bbsm171534355e9.6.2024.07.10.07.49.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jul 2024 07:39:01 -0700 (PDT)
+ Wed, 10 Jul 2024 07:49:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bo Gan <ganboing@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 4/4] lib: Convert str_to_list() to use alist
-Date: Wed, 10 Jul 2024 15:38:54 +0100
-Message-Id: <20240710143854.3905259-5-sjg@chromium.org>
+Subject: [PATCH v3 1/4] malloc: Support testing with realloc()
+Date: Wed, 10 Jul 2024 15:49:24 +0100
+Message-Id: <20240710144927.3940789-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240710143854.3905259-1-sjg@chromium.org>
-References: <20240710143854.3905259-1-sjg@chromium.org>
+In-Reply-To: <20240710144927.3940789-1-sjg@chromium.org>
+References: <20240710144927.3940789-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,84 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use this new data structure in the utility function.
+At present in tests it is possible to cause an out-of-memory condition
+with malloc() but not realloc(). Add support to realloc() too, so code
+which uses that function can be tested.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/strto.c | 35 +++++++++++++++++++----------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+ common/dlmalloc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/lib/strto.c b/lib/strto.c
-index f83ac67c666..f059408755a 100644
---- a/lib/strto.c
-+++ b/lib/strto.c
-@@ -9,6 +9,7 @@
-  * Wirzenius wrote this portably, Torvalds fucked it up :-)
-  */
- 
-+#include <alist.h>
- #include <errno.h>
- #include <malloc.h>
- #include <vsprintf.h>
-@@ -226,37 +227,39 @@ void str_to_upper(const char *in, char *out, size_t len)
- 
- const char **str_to_list(const char *instr)
- {
--	const char **ptr;
--	char *str, *p;
--	int count, i;
-+	struct alist alist;
-+	char *str, *p, *start;
- 
- 	/* don't allocate if the string is empty */
- 	str = *instr ? strdup(instr) : (char *)instr;
- 	if (!str)
- 		return NULL;
- 
--	/* count the number of space-separated strings */
--	for (count = 0, p = str; *p; p++) {
-+	alist_init_struct(&alist, char *);
-+
-+	if (*str)
-+		alist_add(&alist, &str, char *);
-+	for (start = str, p = str; *p; p++) {
- 		if (*p == ' ') {
--			count++;
- 			*p = '\0';
-+			start = p + 1;
-+			if (*start)
-+				alist_add(&alist, &start, char *);
- 		}
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index 9549c59f358..65b130fabcd 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -1758,6 +1758,10 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
+ 		panic("pre-reloc realloc() is not supported");
  	}
--	if (p != str && p[-1])
--		count++;
+ #endif
++  if (CONFIG_IS_ENABLED(UNIT_TEST) && malloc_testing) {
++    if (--malloc_max_allocs < 0)
++      return NULL;
++  }
  
--	/* allocate the pointer array, allowing for a NULL terminator */
--	ptr = calloc(count + 1, sizeof(char *));
--	if (!ptr) {
--		if (*str)
-+	/* terminate list */
-+	p = NULL;
-+	alist_add(&alist, &p, char *);
-+	if (alist_err(&alist)) {
-+		alist_uninit(&alist);
-+
-+		if (*instr)
- 			free(str);
- 		return NULL;
- 	}
- 
--	for (i = 0, p = str; i < count; p += strlen(p) + 1, i++)
--		ptr[i] = p;
--
--	return ptr;
-+	return alist_uninit_move(&alist, NULL, const char *);
- }
- 
- void str_free_list(const char **ptr)
+   newp    = oldp    = mem2chunk(oldmem);
+   newsize = oldsize = chunksize(oldp);
 -- 
 2.34.1
 
