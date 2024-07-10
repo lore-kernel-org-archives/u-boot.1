@@ -4,57 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 645F2C38150
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 06:26:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C95C38150
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 06:53:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6083886A8;
-	Wed, 10 Jul 2024 08:26:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A2669886F9;
+	Wed, 10 Jul 2024 08:53:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1720592779;
-	bh=L913Ly8+DIN9H4jgYivcoEUJpb6tJcpqldNE9D6vB9s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=tbfFwBZcDcsDe1MMBK06etZtQ/vB6py//UlPAUuHud3+IZU3lm78BRZtn5dAdqIGq
-	 UVMbH9y0r77QZ9f00IgA+N4pngr7GRtc4gKDeZSzZef9QNS9t7gjD4MUq10QpMzG/g
-	 hEjcfcsokTA6fP59x6B96vIOeDCXRIxjLKyXCpsG37Qnwh1bWGy/FbCgo5NYnpTISz
-	 /KY3cr8oTtE9yl+e0iTd6747rsllZdgx/xf7ao9EVftyc7Lc9fxRukpJToYoQ2bHsU
-	 mG+HhRCtzhpzO1+sMismZBJz1MP64bybFf+HQrcjatAZxL9uV+DzEciA9Opypm4Zmd
-	 LmoRFpwwONnzw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="hK6idTkT";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8270B886EB; Wed, 10 Jul 2024 08:26:18 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 6669388700; Wed, 10 Jul 2024 08:53:29 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D45388680
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 08:26:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 220DA886F1
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 08:53:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4WJntb6WfLz9sqK;
- Wed, 10 Jul 2024 08:26:15 +0200 (CEST)
-Message-ID: <1866ab7f-eee5-4ae9-b679-70f0d431499f@denx.de>
-Date: Wed, 10 Jul 2024 08:26:12 +0200
+ dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eballetb@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1720594405;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=VtbYCdTT+mRuL9Fw+Q7XpJDbYBClCFnETr+9hapaMrE=;
+ b=hK6idTkTq/HgKxxbUmpXLDXS4pyHBNaeByJBAPrwFu8W34rLcVhfJ3c0JKzCuevTmVp7jb
+ ztBe8d4wRrHKKARJ9SYSHFBu6d51js/kafqf47RMJm/GVLKkeqswNvTodsvtu7tHnqE/Ab
+ YfMKZ2F6SYRvOM8U7LfVYv/0Q35xJ80=
+Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com
+ [209.85.161.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-61-xsK_m3nWMgeqJUUle_O0VQ-1; Wed, 10 Jul 2024 02:53:23 -0400
+X-MC-Unique: xsK_m3nWMgeqJUUle_O0VQ-1
+Received: by mail-oo1-f72.google.com with SMTP id
+ 006d021491bc7-5c7b7c50028so136952eaf.1
+ for <u-boot@lists.denx.de>; Tue, 09 Jul 2024 23:53:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720594402; x=1721199202;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VtbYCdTT+mRuL9Fw+Q7XpJDbYBClCFnETr+9hapaMrE=;
+ b=ectLvp1cD0DnIi6fJ3Pc+zTyqCzBYiIDcRyvoV2Qw6oIlkazJNuWRsvUfRmB8TIKXb
+ ilTelrt2oeV10Plw52VGfNFDE5Ztmkt0wa0/bO0behezMYQrOEYM7jdtraE2l2Wbp5Ht
+ pCsjkUYqWSfwvVVIP37FvrqPp4+hMdbw3kz5B1+YKRVJsghCuvnK3VpxB2y80CMDGgBj
+ GIWSNmuudLd5QgLc3Mzsj5W7gzs3uEFHULK0Qbwp18kkMDCIbd7FWLPt5CDp2QHScbfa
+ hKIqzIenP6ZLR1NUPPbLvgq7Zh46AeQBMzpkiuORFTL5BJZ5rVHKIkbwRhD7SuiMBBKM
+ 4+Gw==
+X-Gm-Message-State: AOJu0YwktFUx3ig0+9zuIaD6ST7aA+ViYBZUVlGGmNo1nvsk4DZTbIQH
+ M721XmP3i2sfUYJOhG00Rn+/awCnLIgnDxdY0y8MmA2nI9rxFi6OueePDYE6gPdkp8FcSjIupKs
+ g5Rki89xE4mfAWxDiFEUoUNFwRWRj0Xpevql88JM3/G9gYfGJWMxWbzEaQMnPqg5MrhmnTZD2/L
+ Y8rS+gNt4VWik1NByhvJ5J8EBGbQ==
+X-Received: by 2002:a05:6870:288e:b0:25e:1e11:aa4b with SMTP id
+ 586e51a60fabf-25eaec16b2dmr4195623fac.46.1720594402257; 
+ Tue, 09 Jul 2024 23:53:22 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IExSIYGFfJhVqnMywyzabEXXaKL5JHvyasR+sl5sBa9N2F9GyMTUU+o3QVHNh6ygbo4GYaPld/HZ9UkhDDwAco=
+X-Received: by 2002:a05:6870:288e:b0:25e:1e11:aa4b with SMTP id
+ 586e51a60fabf-25eaec16b2dmr4195611fac.46.1720594401968; Tue, 09 Jul 2024
+ 23:53:21 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] arm: mvebu: Enable bootstd and other modernization for
- Synology DS414 (Armada XP) board
-Content-Language: en-US
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Phil Sutter <phil@nwl.cc>
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20240708043904.5100-1-mibodhi@gmail.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240708043904.5100-1-mibodhi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240628231707.195389-1-javier@dowhile0.org>
+In-Reply-To: <20240628231707.195389-1-javier@dowhile0.org>
+From: Enric Balletbo i Serra <eballetb@redhat.com>
+Date: Wed, 10 Jul 2024 08:53:11 +0200
+Message-ID: <CALE0LRua-obPE0_cPPUmYfj7GFv2JsJ8UHGMSxUOhB1v9AAP1g@mail.gmail.com>
+Subject: Re: [PATCH] omap3: igep0x00: Switch to the I2C driver model
+To: Javier Martinez Canillas <javier@dowhile0.org>
+Cc: u-boot@lists.denx.de, Javier Martinez Canillas <javierm@redhat.com>, 
+ Enric Balletbo i Serra <eballetbo@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,241 +99,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/8/24 06:39, Tony Dinh wrote:
-> - Switch to standard boot (in include/configs/ds414.h and
-> configs/ds414_defconfig)
-> - Implement board_late_init() to ensure successful enumeration
-> of USB3 devices
-> - Remove unnecessary checkboard()
-> - Updated IDENT_STRING to indicate this u-boot supports both Synology
-> DS414 and DS214+ boards
-> - Add SYS_THUMB_BUILD to reduce binary size
-> - Add NET_RANDOM_ETHADDR
-> - Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
-> 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+Hi Javier,
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Many thanks for still maintaining this.
 
-@Phil, is this ready to be merged from your point of view as well?
 
-Thanks,
-Stefan
+On Sat, Jun 29, 2024 at 1:17=E2=80=AFAM Javier Martinez Canillas
+<javier@dowhile0.org> wrote:
+>
+> From: Javier Martinez Canillas <javierm@redhat.com>
+>
+> When building with the igep00x0_defconfig, the following warning is shown=
+:
+>
+>   $ make -j $(nproc)
+>   ...
+>     LD      spl/u-boot-spl
+>     OBJCOPY spl/u-boot-spl-nodtb.bin
+>     SYM     spl/u-boot-spl.sym
+>     CAT     spl/u-boot-spl-dtb.bin
+>     COPY    spl/u-boot-spl.bin
+>     MKIMAGE MLO
+>   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING=
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>   This board does not use CONFIG_DM_I2C (Driver Model
+>   for I2C drivers). Please update the board to use
+>   CONFIG_DM_I2C before the v2022.04 release. Failure to
+>   update by the deadline may result in board removal.
+>   See doc/develop/driver-model/migration.rst for more info.
+>   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+>
+> The only reason why I2C is enabled for the IGEP boards is that the TWL403=
+0
+> driver requires it.
+>
+> But both the TWL4034 and the OMAP I2C controller drivers were converted t=
+o
+> the driver model by commits daa69ffe3d4d ("drivers: i2c: omap24xx_i2c:
+> adopt omap_i2c driver to driver model") and fb1b7712ad3f power: make most
+> tps drivers and the twl4030 driver compatible with DM_I2C") respectively.
+>
+> So there's no reason anymore to keep using the I2C legacy API and instead
+> the DM_I2C option could just be enabled.
+>
+> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+
+The changes looks good to me so:
+
+Reviewed-by: Enric Balletbo i Serra <eballetbo@gmail.com>
+
 
 > ---
-> 
-> Changes in v3:
-> - Restore misc_init_r() to support booting legacy FW.
-> - Correct scripting error in EXTRA_ENV_SETTINGS_LEGACY in
-> /include/configs/ds414.h
-> - Remove CONFIG_PHY_ANEG_TIMEOUT from /include/configs/ds414.h. This symbol
-> has been moved to Kconfig.
-> 
-> Changes in v2:
-> - Define EXTRA_ENV_SETTINGS_LEGACY to restore default envs support for
-> booting legacy FW.
-> 
->   board/Synology/ds414/ds414.c | 14 ++++----
->   configs/ds414_defconfig      | 19 +++++------
->   include/configs/ds414.h      | 65 +++++++++++++++++++++++++-----------
->   3 files changed, 61 insertions(+), 37 deletions(-)
-> 
-> diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
-> index 8db810ad3e..1a4cea87e1 100644
-> --- a/board/Synology/ds414/ds414.c
-> +++ b/board/Synology/ds414/ds414.c
-> @@ -180,6 +180,13 @@ int board_init(void)
->   	return 0;
->   }
->   
-> +int board_late_init(void)
-> +{
-> +	/* Do late init to ensure successful enumeration of XHCI devices */
-> +	pci_init();
-> +	return 0;
-> +}
-> +
->   int misc_init_r(void)
->   {
->   	if (!env_get("ethaddr")) {
-> @@ -188,10 +195,3 @@ int misc_init_r(void)
->   	}
->   	return 0;
->   }
-> -
-> -int checkboard(void)
-> -{
-> -	puts("Board: DS414\n");
-> -
-> -	return 0;
-> -}
-> diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
-> index 18c741d4f2..6391c43474 100644
-> --- a/configs/ds414_defconfig
-> +++ b/configs/ds414_defconfig
-> @@ -1,5 +1,6 @@
->   CONFIG_ARM=y
->   CONFIG_ARCH_CPU_INIT=y
-> +CONFIG_SYS_THUMB_BUILD=y
->   CONFIG_ARCH_MVEBU=y
->   CONFIG_SUPPORT_PASSING_ATAGS=y
->   CONFIG_CMDLINE_TAG=y
-> @@ -25,44 +26,41 @@ CONFIG_SPL_BSS_MAX_SIZE=0x4000
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BASE=0xf1012000
->   CONFIG_DEBUG_UART_CLOCK=250000000
-> +CONFIG_IDENT_STRING="\nSynology DS214+/DS414 2/4-Bay Diskstation"
->   CONFIG_SYS_LOAD_ADDR=0x800000
->   CONFIG_PCI=y
->   CONFIG_DEBUG_UART=y
-> +CONFIG_BOOTSTD_FULL=y
->   CONFIG_BOOTDELAY=3
->   CONFIG_USE_BOOTARGS=y
-> -CONFIG_BOOTARGS="console=ttyS0,115200 ip=off initrd=0x8000040,8M root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 flash_size=8 SataLedSpecial=1 HddHotplug=1"
-> -CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; sf read ${ramdisk_addr_r} 0x3a0000 0x430000; bootm ${loadaddr} ${ramdisk_addr_r}"
->   # CONFIG_DISPLAY_BOARDINFO is not set
->   CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_BOARD_LATE_INIT=y
->   CONFIG_MISC_INIT_R=y
->   CONFIG_SPL_MAX_SIZE=0x1bfd0
->   CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->   # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->   CONFIG_SPL_I2C=y
-> +CONFIG_SYS_PROMPT="DS414> "
->   CONFIG_SYS_MAXARGS=32
->   CONFIG_CMD_I2C=y
->   CONFIG_CMD_PCI=y
->   CONFIG_CMD_SPI=y
->   CONFIG_CMD_USB=y
-> -# CONFIG_CMD_SETEXPR is not set
-> -CONFIG_CMD_DHCP=y
->   CONFIG_CMD_TFTPPUT=y
-> -CONFIG_CMD_MII=y
-> -CONFIG_CMD_PING=y
->   CONFIG_CMD_TIME=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_FAT=y
->   CONFIG_CMD_JFFS2=y
->   CONFIG_CMD_MTDPARTS=y
->   CONFIG_CMD_UBI=y
-> -CONFIG_ISO_PARTITION=y
->   CONFIG_ENV_OVERWRITE=y
->   CONFIG_ENV_SPI_MAX_HZ=50000000
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ARP_TIMEOUT=200
->   CONFIG_NET_RETRY_COUNT=50
-> +CONFIG_NET_RANDOM_ETHADDR=y
->   CONFIG_SPL_OF_TRANSLATE=y
-> +CONFIG_LBA48=y
-> +CONFIG_SYS_64BIT_LBA=y
->   CONFIG_DM_I2C=y
->   CONFIG_SYS_I2C_MVTWSI=y
->   # CONFIG_MMC is not set
-> @@ -84,4 +82,3 @@ CONFIG_USB_XHCI_HCD=y
->   # CONFIG_USB_XHCI_MVEBU is not set
->   CONFIG_USB_XHCI_PCI=y
->   CONFIG_USB_EHCI_HCD=y
-> -CONFIG_USB_STORAGE=y
-> diff --git a/include/configs/ds414.h b/include/configs/ds414.h
-> index 6fbcec0898..9525657558 100644
-> --- a/include/configs/ds414.h
-> +++ b/include/configs/ds414.h
-> @@ -1,5 +1,6 @@
->   /* SPDX-License-Identifier: GPL-2.0+ */
->   /*
-> + * Copyright (C) 2024 Tony Dinh <mibodhi@gmail.com>
->    * Copyright (C) 2014 Stefan Roese <sr@denx.de>
->    */
->   
-> @@ -16,15 +17,8 @@
->    * U-Boot into it.
->    */
->   
-> -/* I2C */
->   #define CFG_I2C_MVTWSI_BASE0		MVEBU_TWSI_BASE
->   
-> -/*
-> - * mv-common.h should be defined after CMD configs since it used them
-> - * to enable certain macros
-> - */
-> -#include "mv-common.h"
-> -
->   /*
->    * Memory layout while starting into the bin_hdr via the
->    * BootROM:
-> @@ -38,21 +32,54 @@
->    * L2 cache thus cannot be used.
->    */
->   
-> -/* SPL */
-> -/* Defines for SPL */
-> +/* Keep device tree and initrd in lower memory so the kernel can access them */
-> +#define RELOCATION_LIMITS_ENV_SETTINGS  \
-> +	"fdt_high=0x10000000\0"         \
-> +	"initrd_high=0x10000000\0"
->   
-> -/* Default Environment */
-> +/*
-> + * mv-common.h should be defined after CMD configs since it used them
-> + * to enable certain macros
-> + */
-> +#include "mv-common.h"
-> +
-> +#ifndef CONFIG_SPL_BUILD
->   
-> -#define CFG_EXTRA_ENV_SETTINGS				\
-> -	"initrd_high=0xffffffff\0"				\
-> -	"ramdisk_addr_r=0x8000000\0"				\
-> -	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"	\
-> -	"ethmtu=1500\0eth1mtu=1500\0"				\
-> -	"update_uboot=sf probe; dhcp; "				\
-> -		"mw.b ${loadaddr} 0x0 0xd0000; "		\
-> -		"tftpboot ${loadaddr} u-boot-with-spl.kwb; "	\
-> +#define KERNEL_ADDR_R	__stringify(0x1000000)
-> +#define FDT_ADDR_R	__stringify(0x2000000)
-> +#define RAMDISK_ADDR_R	__stringify(0x2200000)
-> +#define SCRIPT_ADDR_R	__stringify(0x1800000)
-> +#define PXEFILE_ADDR_R	__stringify(0x1900000)
-> +
-> +#define EXTRA_ENV_SETTINGS_LEGACY \
-> +	"bootargs_legacy=console=ttyS0,115200 ip=off initrd=0x8000040,8M " \
-> +		"root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 " \
-> +		"flash_size=8 SataLedSpecial=1 HddHotplug=1\0" \
-> +	"bootcmd_legacy=sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; " \
-> +		"sf read ${ramdisk_addr_r} 0x3a0000 0x430000; " \
-> +		"setenv bootargs $bootargs_legacy; " \
-> +		"bootm ${loadaddr} ${ramdisk_addr_r}\0"	\
-> +	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0" \
-> +	"ethmtu=1500\0eth1mtu=1500\0" \
-> +	"update_uboot=sf probe; dhcp; "	\
-> +		"mw.b ${loadaddr} 0x0 0xd0000; " \
-> +		"tftpboot ${loadaddr} u-boot-with-spl.kwb; " \
->   		"sf update ${loadaddr} 0x0 0xd0000\0"
->   
-> -/* increase autoneg timeout, my NIC sucks */
-> +#define LOAD_ADDRESS_ENV_SETTINGS \
-> +	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
-> +	"fdt_addr_r=" FDT_ADDR_R "\0" \
-> +	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
-> +	"scriptaddr=" SCRIPT_ADDR_R "\0" \
-> +	"pxefile_addr_r=" PXEFILE_ADDR_R "\0"
-> +
-> +#define CFG_EXTRA_ENV_SETTINGS \
-> +	RELOCATION_LIMITS_ENV_SETTINGS \
-> +	LOAD_ADDRESS_ENV_SETTINGS \
-> +	EXTRA_ENV_SETTINGS_LEGACY \
-> +	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-> +	"console=ttyS0,115200\0"
-> +
-> +#endif /* CONFIG_SPL_BUILD */
->   
->   #endif /* _CONFIG_SYNOLOGY_DS414_H */
+>
+>  configs/igep00x0_defconfig | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+> index 87fd2797eace..473891607b0f 100644
+> --- a/configs/igep00x0_defconfig
+> +++ b/configs/igep00x0_defconfig
+> @@ -68,8 +68,8 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+>  CONFIG_VERSION_VARIABLE=3Dy
+>  # CONFIG_NET is not set
+>  CONFIG_SPL_DM=3Dy
+> -CONFIG_SYS_I2C_LEGACY=3Dy
+> -CONFIG_SPL_SYS_I2C_LEGACY=3Dy
+> +CONFIG_DM_I2C=3Dy
+> +CONFIG_I2C_SET_DEFAULT_BUS_NUM=3Dy
+>  CONFIG_MMC_OMAP_HS=3Dy
+>  CONFIG_MTD=3Dy
+>  CONFIG_SYS_MTDPARTS_RUNTIME=3Dy
+> --
+> 2.45.2
+>
 
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
