@@ -4,69 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0F1C3DA41
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 15:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B414BC3DA41
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 16:26:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0353C88680;
-	Wed, 10 Jul 2024 17:35:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id D0ECB885F5;
+	Wed, 10 Jul 2024 18:26:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="DokO0jyH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yBLOmgsA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E14C188709; Wed, 10 Jul 2024 17:35:29 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8523F88025; Wed, 10 Jul 2024 18:26:42 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AED0287EBD
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 17:35:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 9970B885F5
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 18:26:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1720625726; x=1721230526; i=frank-w@public-files.de;
- bh=HdSQxfB88on1Vy/52Lc5ejSe4EuK9W1Mi8FChWaP1Ek=;
- h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Subject:
- Content-Type:Date:cc:content-transfer-encoding:content-type:date:
- from:message-id:mime-version:reply-to:subject:to;
- b=DokO0jyHRJcrQnWRcA0LhDvHCiHqoUEHBeNP17Y2nMv/BzhrvS6Tgl5/DYk5Nn7W
- hIRNKlT7CtLkGeqIW79BcyqNonsDENJgZA35Go3lHfaKzLu3blMZ8Rk2g5bxrt777
- zLWIANQlX3fVG6ih6Q4ldVvafVZSS/0IG0vPFIyy9E0D2ae7c5w5ckFC6RZo6SxZV
- K2RnWF/33ZwHsdIR0z9LlPDiQGcN81AgMczmeN7aX4bXv8XE3KntAafierf6U1ITx
- VsTtRAGbwn731YPH2KNGOI3NKySCGhR/fwFep3JRyaxVYw9PXjxMI0QIGhFxgniQR
- BkyM47iak3Ia+BmwtA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [217.61.158.245] ([217.61.158.245]) by web-mail.gmx.net
- (3c-app-gmx-bs04.server.lan [172.19.170.53]) (via HTTP); Wed, 10 Jul 2024
- 17:35:26 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-58be2b8b6b2so8274428a12.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 09:26:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720628800; x=1721233600; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5L/oIEp8BuPbA5/x6FBO/nnZzURFUSmD/fvOSCPuJ28=;
+ b=yBLOmgsAonWTxuCKTtPZVDnXKzopjC5GEgQt9rcaEKjlDL8lcndw1OMDpGU6i0gT+H
+ seAB6q+lsn8FX31BE28XtSq8v6ypxujUZkD2ssqVwowXb1tytymR5Cu3TABDJLqOGEQ+
+ IjoUQvTg7dfRqQ0oBjUpp/cmIgl74SWV0Uq2uLu00RYDdbiX6niljDTTuf1e7Is/F+rd
+ dpgvapJC8k33VbDyxnBXogSJQyG+lwsx6fOPvmwGyf2nG/97qVDH0oPT83x9t/lBP2k6
+ CUdrKEKyfH7dO9SBRXIvPF1KkXAsDzcCLgBmT0z7TaTjntfI9B5ldd5U/kwL38xgZGFL
+ A80w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720628800; x=1721233600;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5L/oIEp8BuPbA5/x6FBO/nnZzURFUSmD/fvOSCPuJ28=;
+ b=R3qTF7gJRTuQsYPCX6rW2yD5vBBh1cyfUgdaZO9CkUnLBilj5PvqcwDlc3ZvHReEi/
+ /6q8nxdg+s3Liyq7Fyn50h/upGRzeuxRO9a+IuzkLPZkJvhGbpVtK9O++MeJe17I5Iqs
+ x6nv8qr7bk0UCfZd3kLsvUMYEjY+Y2NUNSCap1E4N7tFVfpJwjYuUSxoYoShX6TOQBJv
+ QscRA7QuxK7Vrc14vn9/krJ+LCYzvtgf5+NzW94hMGMrPc0RbdZdUyRDZ8GCnkXcwi9f
+ 7OrQwYZDGEnvBybSwKotV2YYkYTPKQ12EqNrPcd7I/OtAVClbksb86+/fEWHKtYS9z3A
+ SQ+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXL7q1MYqXDZaQtt6TbUei2WXNMmttDDYOhimcizZZ4LdwmjVWy07RPdtdCy0qN3Xi0wHd1V8xcG99TXCYC0G22Sw99yQ==
+X-Gm-Message-State: AOJu0Ywy4dQb1/ouxlWnpuuFxBslYH1WtmOw6xAXqAPtgKRqEsC/zaxR
+ NpafW6rf9LDdcj8fJKODSS8zoEo+VwkqN1swP/rQIV/FGS3Bu4yEFdwid+mBHrw2ySPrQ7zK5TA
+ 1
+X-Google-Smtp-Source: AGHT+IFz/yEfWOiqVSIW0xu20TjTJ7vOMZ18f2AACHfVflDo++Jby9z6iHf6Re11Umqkxlw0qkB6jQ==
+X-Received: by 2002:a05:6402:1eca:b0:57d:5098:c7a0 with SMTP id
+ 4fb4d7f45d1cf-594baf9120emr3999735a12.17.1720628799675; 
+ Wed, 10 Jul 2024 09:26:39 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-594bc4e8255sm2370348a12.48.2024.07.10.09.26.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jul 2024 09:26:39 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH RFC 0/3] ARM64: add symbol name lookup and print a
+ backtrace on exception
+Date: Wed, 10 Jul 2024 18:26:17 +0200
+Message-Id: <20240710-arm64-backtrace-v1-0-5a2ba50485dd@linaro.org>
 MIME-Version: 1.0
-Message-ID: <trinity-a8e5b1d7-ca6f-4148-a618-95cfb529d919-1720625726767@3c-app-gmx-bs04>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Subject: adding fdt-overlay function - help needed
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 10 Jul 2024 17:35:26 +0200
-Importance: normal
-Sensitivity: Normal
-X-Priority: 3
-X-Provags-ID: V03:K1:HZRuha/pD30GZ/XS5y+VvF2Qk5xXhW8Kwzs6TfMvmJXWrf/LWltk5cXPZPiHVPOCLCtJS
- hgNd55L7ASH6SqjlLiz+8i14Y3xb0EOjzcVu43df+rxlt/8TTwzKI4U9gVJ6oAtptfTaOOQSq9J1
- wWCbhrke/Yiq76ubG4aI6rABioUYuvb9QOstUxfuYW7X71bthHPOqIg2zhQHOjqboTFtG7KzjwRO
- H/pUh4iGaKyHa+elCjXrzZ+wu+pmTs/f0ZtdwL0qUwUkocd4Oligrs1l4lYesVWD0iSGuXUFuuMT
- Hc=
-UI-OutboundReport: notjunk:1;M01:P0:wh9Yk3vAzbs=;25YsN3zT62qP5h1hrqHXa5PCqoy
- JLuGFVWlzyQCIyN9Ji3RnoKbwiW6L4VWb1wMMyiJ/60vhw10WBSQEPAPvTe6PsVjGfR+pSge0
- lt774XD8X+kgyfZfTJgXtW/bbTetAoaVuUh237PK041OoPO6hnGNySaLDr9Vgtjx1u5MYshOU
- yoL/Z5FbanfM7siBaJCohY2sjbho60ZujOR2fVgU63S28VJvYJV/YiJup8k3KTwmm4bQ77Dmd
- qLrlXQrwTaJst01yFI4c4YNkPqTcU7KhHVmqrOppgx3gf1PX2utHZBat8zJV7PuOjbX58XbaW
- 9bHx/DOR4FE/zOGdtFm7uSbGpzxgrIu1krS5txqRbFpCGB0pVtljuMUPRETzpo8SKKiH2092O
- nZIzlR9b1pzsjsZLJL1Wvf2alCxT+haBwIKW7ME5xYL2ValBTP0oXXV0ijI3mafolVwFUgk8U
- nEgf6A2RbFBgSWXWoRd6wPwkuBFiVb7Bi/dd2w+GcVhaA7Qv4h+m4JP/7So4Sv8MxVrhb/KeZ
- 5Ux10dZg/rkyftHUUtw/YfW+UTFtcNeDYEM6rMSz0NyH8tUTE8NxT6cKTvpxGn+j3AohJrCG/
- HtNlCalnx7ReKqTqaOUdai854ti2agrDTCgdjhqFZDp/BkWY54YedoEaLaG7auGtfat2HQchx
- yjpptEqxeyx3ENyNRhQRohkz8JX2H4KduPbSmrox/A==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACq2jmYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDc0MD3cSiXDMT3aTE5OySosTkVF0jSyOzNHMzk5SklGQloK6CotS0zAq
+ widFKQW7OSrG1tQAPccp9ZgAAAA==
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2749;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=1jixm16E07C3IhW/OBt7Yx5vOk5TV3n7SllsKFzzLGs=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmjrY+UoneA1WfOLu5zZyPTfBjriGrqQIINLhBS
+ ZicPC7bv4OJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZo62PgAKCRAFgzErGV9k
+ tpHID/9zU6+ye93OER2YelQb3RoGLZLdaHAp9wztJfDURBOHr5vhdFVqlP+eC3a49Qw5u86GZNY
+ 4fUreHK57zMCx83eHogVfB2h6G2cHLDg+gm8GWj8rDgkQJc2cc4+JjsCENKryj3NYOPrtcKlnif
+ wv8zNFf7h7iSFCoIMnJsyAjawygXMfx+y6EoiOwm782tTcCGzD4UjhXoH4jKOjN0J+CAgf8egIh
+ YjGNsXxjg+aDc4ImA5b7sphffljSLtLhE+yrSBV7nU8Ij1ZDI3r/o9SEpRNJkSGtoSJYp/CmnOC
+ vQcsOcqb79TuA9G2LJ62M3E0+o86C7+uefbbLifs7sE0WTrhhVFFcEmrLz+6hPdg0QeeqXJ/kiy
+ oB3vSntjhNL5CWoTRMPNiM//eZcHFkek+j6eZgBLYkY77S/ZfBfzR/nMUNeJEDukHun11enzMKd
+ H9Gj9LYAIeddAshlRaLGdidveWCqHo5ZJ9VWhN/neEy9KpllaGL1ntAbxeeawFF1+YW2Kku8jmS
+ eNADNrjr+1fJ4PcU8LiQH16P5Qufr4QngjMPM1Zd8JF6xHixztDR6tuUUSXzWdUp4R3p0mAKJA/
+ 6sye28H/pgxB+B39zQzJHuAb9cG25OQ/ITvrIgTUvLCm9cRWQvWVef/VUDHYSJa4e/3bC8WuDrt
+ KBIxpaKCTVPxKUg==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,38 +117,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+U-Boot already emits frame pointers on ARM64, but lacks the code to
+parse them, as well as a mechanism for looking up symbol names at
+runtime.
 
-i try to get overlay-merging working in uboot (for OF_UPSTREAM conversion), but failing on missing Makefile knowledge
+There was some (seemingly?) leftover code for symbols lookups in
+common/kallsyms.c and associated parts in the makefile, however it
+appears to be entirely unused and unsupported. It relied on generating
+one long string of all symbol addresses and names.
 
-i have the state now, that upstream dtso get compiled to dtbo files (that needed further changes).
+The approach taken here is instead largely based on the implementation
+in the Xen hypervisor, it performs basic compression using non-ASCII
+bytes to tokenize repeated string segments which can later be expanded
+back out at runtime.
 
-now i added this from linux-tree:
+This is then utilized in the ARM64 interrupt handling routine to dump a
+backtrace in the show_regs() debug function. As well as providing a
+general purpose unwind_stack() function which can be used for debugging.
 
-#merge CONFIG_DEFAULT_DEVICE_TREE + OF_OVERLAY_LIST_BASEDT to target DTB
-#manual:
-# dtc -I dtb -O dts dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtbo
-# fdtoverlay -i dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3.dtb -o dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtb dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtbo
-# dtc -I dtb -O dts dts/upstream/src/arm64/mediatek/mt7986a-bananapi-bpi-r3-sd.dtb | less
+== Relocation ==
 
-#currently linux-version
-quiet_cmd_fdtoverlay = DTOVL   $@
-      cmd_fdtoverlay = $(objtree)/scripts/dtc/fdtoverlay -o $@ -i $(real-prereqs)
+Since U-Boot relocates itself at runtime, and can be built to be
+position independent in the first place (effectively "relocating" itself
+when it first starts too), we can't really rely on gd->reloc_off.
 
-$(multi-dtb-y): FORCE
-	$(call if_changed,fdtoverlay)
-$(call multi_depend, $(multi-dtb-y), .dtb, -dtbs)
+The approach taken here is to subtract CONFIG_TEXT_BASE from the address
+of each symbol in the lookup table (while it's being generated), then
+when decoding we just subtract the address of the _start label. Since
+this label address is updated to make U-Boot position independent and
+during relocation, it allows us to avoid re-implementing the relocation
+state handling stuff in the symbol decoder.
 
-and created an config-option CONFIG_OF_OVERLAY_LIST_BASEDT which holds a space separated list of the dtbo-files without path, in my test
+== Size ==
 
-CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt7986a-bananapi-bpi-r3"
-CONFIG_OF_OVERLAY_LIST_BASEDT="mt7986a-bananapi-bpi-r3-nand.dtbo mt7986a-bananapi-bpi-r3-nor.dtbo mt7986a-bananapi-bpi-r3-sd.dtbo"
+By default this feature is off, and will not effect the size of U-Boot
+binaries. The generated symbols object file is ~85k with the (fairly
+hefty) qcom_defconfig, so there is certainly a cost to be taken into
+account.
 
-i now want the list passed to the quiet_cmd_fdtoverlay which should handle each item and add the dtbo to a base-devicetree (like in comments above)....
+I hope that this implementation can be later extended for other
+platforms. However this is currently beyond my (skill, time)
+capabilities.
 
-maybe anyone here can help getting this to work?
+---
+Caleb Connolly (3):
+      drop unused kallsyms support
+      add support for symbol lookups
+      arm64: unwind stack on exception
 
-if my source is needed: https://github.com/frank-w/u-boot/commits/2024-07-bpi-ofupstream-all/
+ Makefile                      |  24 +-
+ arch/arm/include/asm/ptrace.h |   4 +
+ arch/arm/lib/interrupts_64.c  |  76 +++++
+ common/Makefile               |   1 -
+ common/kallsyms.c             |  43 ---
+ common/system_map.c           |   8 -
+ include/symbols.h             |  19 ++
+ lib/Kconfig                   |   8 +
+ lib/Makefile                  |   1 +
+ lib/symbols.c                 | 126 ++++++++
+ tools/Makefile                |   3 +
+ tools/symbols.c               | 646 ++++++++++++++++++++++++++++++++++++++++++
+ 12 files changed, 896 insertions(+), 63 deletions(-)
+---
+change-id: 20240710-arm64-backtrace-2926f764dbdc
+base-commit: 13f9c5668411aa18ef64846d5bc86e9e6be52082
 
-regards Frank
+// Caleb (they/them)
 
