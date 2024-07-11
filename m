@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09AF9C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 12:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94832C3DA41
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 13:10:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3898288025;
-	Thu, 11 Jul 2024 14:42:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id D1C5288126;
+	Thu, 11 Jul 2024 15:10:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="iPItgjmr";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Fa2PF41F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2111088025; Thu, 11 Jul 2024 14:42:46 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 91F1F87F5C; Thu, 11 Jul 2024 15:10:06 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8482B87F5C
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 14:42:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-650866942aeso8627487b3.0
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 05:42:43 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1796888126
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 15:10:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42122ac2f38so5419855e9.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 06:10:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1720701762; x=1721306562;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1720703402; x=1721308202;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XXsMUMFCH2EliTx31XrxgsAEmf+f0UoEs3lRtN9NxVc=;
- b=iPItgjmrW6jGMulkVZl0QctY6GdaVKlHHt4VnqYiezD9vGwMnR/0EfiRt9AEkcnO5l
- +W4Ca+yV4E4DNawrCxeaYbTvzIsYw7yzGFjEaLuhxr/HH14Atsg/Qe752s1ZafR0KNUQ
- QNb345wJFj2rwNkiJuvNvlHoHJCpGSj0VYQwE=
+ h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=u5UtoFtvrs9/JRzXP4i4P8EchTbr9C0vnQRZrrW0YyM=;
+ b=Fa2PF41FSg4Z9MBeI7ZAg5HYVVEhFVA1gib7snM6ywYKAojgy65StK1kdFv5RnXBFk
+ Pqw1VTiRtk9UgKUXEtKtkcC4AGSAW9ucX7SF6mq4YwVwB5GysAkau1vuxjA0+kBulEfi
+ bZsUTjyUHmo1kyaPU2Si3iGejLrtJFlKV93MEFbJMnysD9lgmuyVYkYfcfbA/j5WVBNt
+ fOqHzLRQSJuGAe0IHwAJoclZN3EmqVJPtxL5pjT/wqSpLvVPZ2Yhxl2It1t3IseWY4tn
+ fJV5iROKxq0Z84cMgG58BVDXLgcYLjvVSGwNunRVqp43YX9vXCLRAMIRpoLxWOut3IDj
+ LrUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720701762; x=1721306562;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XXsMUMFCH2EliTx31XrxgsAEmf+f0UoEs3lRtN9NxVc=;
- b=JOAgz5lO1kw6cxUEoj8ZtSiWcw3SAHWpusy9/w2nTPhV1Qda6373FV2rvIc2AO0kW9
- g+Q/31ghfGoHCW3Sn6Imvz5tZh/BGlG+pMjcAk6iY6ZS/LawQX0PFhxXagd0L/UPyrJ6
- JwGqwKSL4Mm8KE3Uv1TV5Zs9WQkMx9O2wiLTHt8MNVtuLqyRp+8Vtr4EdvKRoraD+4rv
- LY2ZPlQy2hMUsRmZJ/3oM3gxF8oAqRa/pQA5KL1LG7Rov0G0FLhgD1qSZQByWJWtf2TF
- +fdbrSt4wEXCxEC/FUzC8DbQsFy9621bMPXiK/cEj56RTt5fQloT48ZdOROIfrdOkMB+
- h9Tg==
+ d=1e100.net; s=20230601; t=1720703402; x=1721308202;
+ h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=u5UtoFtvrs9/JRzXP4i4P8EchTbr9C0vnQRZrrW0YyM=;
+ b=Y6f0vmIjb3c3jClVMAXZbVALr7lg14MLlY5AtYffmGLabTNh1Jb20xkprBrQ9l0svm
+ a+S6phmN/L8psP33M5Ye/YRXhyg81qrjhy6VoTzttCEnI7uDDh7QyNA8Z/q/VsE1WZ91
+ b9MvJFf/w3eIMjksQRhb7ww0dxIsjER8881yvIeGUZE4aCrx4fX2oc+9uLAqAjfDw904
+ +RE4gxfFvCtIJHuEUW/8iANG5dsxo4VzsRzLPGl7t/SYIGHLkrsatjg2tnPekpQbMTMJ
+ 3ElWWQj0hn319dpZO1JoC+1rmaHVzTjRhNCl+ek4wz2rHg3UrnGdjzYaBsCd5psDM43A
+ EcpQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWmiHnuWg3zc3zC/3IgIqECnWqpI/Dra4uofW4a/bpxsCvjsFkbgtl+jNUc2xg6oyjqYMNFTn9hAHKm65bQc9jq0nAQ7w==
-X-Gm-Message-State: AOJu0Yy65hcOikJcyIFXiVNKQvvC+H1mxK6O+eKqX3PgRA4cgZYb0eYb
- nyprZu94hnRSrH7f+ldi95lfacrqJtBQdfbZ9JwDMq+ceH2rjENEr2FYkI6EeEErHH4QcI0zE3R
- WveC8Y41ZGQ5esnuBy4xLCaqCPNHvpaaQfbf7qg==
-X-Google-Smtp-Source: AGHT+IEEbMKRNBgDtai9b1HHMlIzgxmI1EmKf2dSkesOd4pQtsdpAmd9UfVrCKhkVwrGwS+CRkwc7cezi8c0+Cfk+BQ=
-X-Received: by 2002:a05:690c:6d0e:b0:648:3c1d:36d6 with SMTP id
- 00721157ae682-658ee7905b4mr117792357b3.10.1720701762372; Thu, 11 Jul 2024
- 05:42:42 -0700 (PDT)
+ AJvYcCUIdA6Ji+9p4zDmmrddKz1U0zKkvNrnGtbGu/gBrlPDWOGExav3v/o2V/05a4XlrFBLwoTupyqBunRh7G4G2wIUK2cqoQ==
+X-Gm-Message-State: AOJu0Yy77u39cm3kqQmZ7j97G5HvU6bJXDcmaw8TPLIYEW5bQ1wHDbdr
+ J3KylRKY9AUtR7VfluHfI4aoGtaTV/XCCy4X2QJv9TmLihmjsJalecm7trwl7OQ=
+X-Google-Smtp-Source: AGHT+IHAoyPBqP7wLysVK2qqq94eNcOo1Vd5Q5GBFgqixKL8JWZTD4rSjgIMicNwLj4LqEBLtQ8zEg==
+X-Received: by 2002:a05:600c:181c:b0:424:a7f1:ba2 with SMTP id
+ 5b1f17b1804b1-427981f2dd6mr22719025e9.17.1720703402207; 
+ Thu, 11 Jul 2024 06:10:02 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4279669d882sm53605115e9.4.2024.07.11.06.10.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jul 2024 06:10:01 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-dfu-20240711
+Date: Thu, 11 Jul 2024 15:09:58 +0200
+Message-ID: <87bk34m5w9.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240626104440.2811686-1-avromanov@salutedevices.com>
- <20240708100756.j34cftjmjkl2hiv3@cab-wsm-0029881.sigma.sbrf.ru>
-In-Reply-To: <20240708100756.j34cftjmjkl2hiv3@cab-wsm-0029881.sigma.sbrf.ru>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 11 Jul 2024 14:42:31 +0200
-Message-ID: <CABGWkvpHJW9z7dPRkwydwdAsVfBvzr9+p=HLMd01xKADr2h6zA@mail.gmail.com>
-Subject: Re: [PATCH v6 0/3] Introduce mtdblock device
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: "michael@amarulasolutions.com" <michael@amarulasolutions.com>, 
- "frieder.schrempf@kontron.de" <frieder.schrempf@kontron.de>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>, 
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>, 
- "bmeng@tinylab.org" <bmeng@tinylab.org>,
- "tobias@waldekranz.com" <tobias@waldekranz.com>, 
- "jpewhacker@gmail.com" <jpewhacker@gmail.com>, 
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>, 
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "jbx6244@gmail.com" <jbx6244@gmail.com>, 
- "abdellatif.elkhlifi@arm.com" <abdellatif.elkhlifi@arm.com>,
- "michal.simek@amd.com" <michal.simek@amd.com>, 
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>, 
- "patrice.chotard@foss.st.com" <patrice.chotard@foss.st.com>,
- kernel <kernel@sberdevices.ru>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,156 +90,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alexey,
+Hi Tom,
 
-On Mon, Jul 8, 2024 at 12:08=E2=80=AFPM Alexey Romanov
-<avromanov@salutedevices.com> wrote:
->
-> Hello, ping.
+Please find some new developments for master:
 
-I ran the CI tests, but they failed once again.
+Usb gadget:
+- A welcome cleanup: epautoconf workaround is dropped to use
+  .match_ep() instead
+- Introduce handle_interrupts() op for USB_GADGET_GENERIC, which
+  allows a per-driver interrupt handling
 
-The "Introduce mtdblock device" series fails the "build all 32bit ARM
-platforms" test and
-raises "exceeds file size limit" errors like the following:
+Fastboot:
+- Fix mssing include when building with TCP only
 
-arm: + mx6sabresd
-1056+u-boot.img exceeds file size limit:
-1057+ limit: 0xaebf6 bytes
-1058+ actual: 0xaef88 bytes
-1059+ excess: 0x392 bytes
-1060+make[1]: *** [Makefile:1478: u-boot.img] Error 1
-1061+make[1]: *** Deleting file 'u-boot.img'
-1062+make: *** [Makefile:177: sub-make] Error 2
+Thi CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/21552
 
-While the "Introduce UBI block device", applied over the  "Introduce
-mtdblock device" falis the
-following tests:
-- vexpress_ca9x4:
-- xilinx_zynq_virt:
-- build all 32bit ARM platforms
+Thanks,
+Mattijs
 
-All with the following error:
-    1450+arm-linux-gnueabi-ld.bfd: drivers/mtd/ubi/part.o: in function
-`part_get_info_ubi':
-    1451+drivers/mtd/ubi/part.c:55:(.text.part_get_info_ubi+0x4c):
-undefined reference to `__aeabi_ldivmod'
+The following changes since commit 7c9c5c0562347dccb8ac89148784a34de402ea9e:
 
-Furthermore the "Introduce mtdblock device" series has to be rebased.
+  Merge patch series "xtensa: Enable qemu-xtensa board" (2024-07-04 16:11:08 -0600)
 
-Please, run the buildman tests before submitting the patches.
+are available in the Git repository at:
 
-Thanks and regards,
-Dario
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20240711
 
->
-> On Wed, Jun 26, 2024 at 01:44:37PM +0300, Alexey Romanov wrote:
-> > Hello!
-> >
-> > This series adds support for the mtdblock device, which
-> > allows to read/write data block by block. For example,
-> > it can now be used for BCB or Android AB command:
-> >
-> >   $ bcb load mtd 0 part_name
-> >
-> > Tested only on SPI NAND, so bind is made only for
-> > SPI NAND drivers.
-> >
-> > ---
-> >
-> > Changes V1 -> V2 [1]:
-> >
-> >   - Drop patch [2].
-> >   - Add warning if bind NAND mtdblock device.
-> >   - Move documentation of mtdblock implementation
-> >     from commit message to the source code.
-> >   - Remove __maybe_unused from mtd partition functions
-> >     description.
-> >   - Use blk_enabled() instead of #ifdefs.
-> >
-> > Changes V2 -> V3 [2]:
-> >
-> >   - Rebased over [3].
-> >   - Rename mtd_bread/bwrite -> mtd_blk_read/write.
-> >   - Fix GPL-2.0 license short name definiton in headers.
-> >   - Add empty line after MTD_ENTRY_NUMBERS define.
-> >
-> > Changes V3 -> V4 [4]:
-> >
-> >   - Fix build warnings: use LBAF printf format string for lbaint_t type=
-s.
-> >
-> > Changes V4 -> V5 [5]:
-> >
-> >   - Rebased over u-boot/master.
-> >   - Fix build errors and warnings if CONFIG_BLK isn't enabled.
-> >   - Fix failed tests in cases is mtdblock device isn't binded.
-> >
-> > Changes V5 -> V6 [6]:
-> >
-> >   - Rebased over u-boot/master.
-> >   - Fix build errors when CONFIG_MTD isn't enabled.
-> >   - Use auto blk device devnum generation when call
-> >     blk_create_devicef (pass -1 parameter instead of dev_seq(dev)).
-> >
-> > Links:
-> >
-> >   - [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@=
-salutedevices.com/
-> >   - [2] https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@=
-salutedevices.com/
-> >   - [3] https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.=
-schuchardt@canonical.com/T/#u
-> >   - [4] https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@=
-salutedevices.com/
-> >   - [5] https://lore.kernel.org/all/20240524102920.2631731-1-avromanov@=
-salutedevices.com/
-> >   - [6] https://lore.kernel.org/all/20240603155702.1840464-1-avromanov@=
-salutedevices.com/
-> >
-> > Alexey Romanov (3):
-> >   disk: support MTD partitions
-> >   drivers: introduce mtdblock abstraction
-> >   spinand: bind mtdblock
-> >
-> >  disk/part.c                 |   3 +-
-> >  drivers/block/blk-uclass.c  |   1 +
-> >  drivers/mtd/Kconfig         |   1 +
-> >  drivers/mtd/Makefile        |   3 +
-> >  drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
-> >  drivers/mtd/mtdpart.c       |  76 ++++++++++++
-> >  drivers/mtd/nand/spi/core.c |  20 ++++
-> >  include/linux/mtd/mtd.h     |  25 ++++
-> >  include/part.h              |   3 +
-> >  9 files changed, 358 insertions(+), 1 deletion(-)
-> >  create mode 100644 drivers/mtd/mtdblock.c
-> >
-> > --
-> > 2.34.1
-> >
->
-> --
-> Thank you,
-> Alexey
+for you to fetch changes up to b091d3872833a4b8d088ee41348a2d4ff48067cc:
 
+  include/fastboot.h: add missing types.h include (2024-07-09 09:15:37 +0200)
 
+----------------------------------------------------------------
+u-boot-dfu-20240711
 
---=20
+Usb gadget:
+- A welcome cleanup: epautoconf workaround is dropped to use
+  .match_ep() instead
+- Introduce handle_interrupts() op for USB_GADGET_GENERIC, which
+  allows a per-driver interrupt handling
 
-Dario Binacchi
+Fastboot:
+- Fix mssing include when building with TCP only
 
-Senior Embedded Linux Developer
+----------------------------------------------------------------
+Caleb Connolly (1):
+      include/fastboot.h: add missing types.h include
 
-dario.binacchi@amarulasolutions.com
+Marek Vasut (17):
+      usb: gadget: g_dnl: Drop usb_gadget_controller_number()
+      usb: gadget: ether: Drop usb_gadget_controller_number()
+      usb: gadget: Drop usb_gadget_controller_number()
+      usb: gadget: Drop all gadget_is_*() functions
+      usb: gadget: Add full ep_matches() check past .match_ep() callback
+      usb: dwc3: gadget: Convert epautoconf workaround to match_ep callback
+      usb: gadget: Introduce handle_interrupts ops to USB_GADGET_GENERIC uclass
+      usb: gadget: cdns3: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: dwc2: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: dwc3: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: max3420: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: mtu3: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: omap2430: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: musb: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: ux500: Convert interrupt handling to usb_gadget_generic_ops
+      usb: gadget: sandbox: Drop dm_usb_gadget_handle_interrupts()
+      usb: gadget: Mark dm_usb_gadget_handle_interrupts as non-weak for DM_USB_GADGET
 
-__________________________________
+ drivers/usb/cdns3/core.c            |  24 +++++
+ drivers/usb/cdns3/gadget-export.h   |   2 +
+ drivers/usb/cdns3/gadget.c          |  11 +-
+ drivers/usb/dwc3/dwc3-generic.c     |  23 ++--
+ drivers/usb/dwc3/dwc3-layerscape.c  |  21 ++--
+ drivers/usb/dwc3/gadget.c           |  33 ++++++
+ drivers/usb/gadget/dwc2_udc_otg.c   |  20 +++-
+ drivers/usb/gadget/epautoconf.c     |  81 +-------------
+ drivers/usb/gadget/ether.c          |  25 ++---
+ drivers/usb/gadget/g_dnl.c          |  17 +--
+ drivers/usb/gadget/gadget_chips.h   | 210 ------------------------------------
+ drivers/usb/gadget/max3420_udc.c    |  19 ++--
+ drivers/usb/gadget/udc/udc-uclass.c |  24 +++++
+ drivers/usb/host/usb-sandbox.c      |   7 +-
+ drivers/usb/mtu3/mtu3_plat.c        |  23 ++--
+ drivers/usb/musb-new/omap2430.c     |  26 +++--
+ drivers/usb/musb-new/ti-musb.c      |  23 ++--
+ drivers/usb/musb-new/ux500.c        |  22 ++--
+ include/fastboot.h                  |   2 +
+ include/linux/usb/gadget.h          |   8 ++
+ 20 files changed, 219 insertions(+), 402 deletions(-)
+ delete mode 100644 drivers/usb/gadget/gadget_chips.h
 
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
