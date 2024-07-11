@@ -4,57 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D32C3DA41
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 08:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE3AC3DA41
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 08:10:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81E8588785;
-	Thu, 11 Jul 2024 10:10:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 080B1887E8;
+	Thu, 11 Jul 2024 10:10:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1720685405;
-	bh=1zhrftpVXm+YRRYKsy18UQQHrP+TcJGvnrxMHiW3wmA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=erSilkt/NOCBYn5dmKLqO3Iplw16Gmgtaey/9ZXkAEAX1TB93GoDl4SytzL+3jbXn
-	 d1hTOcV/rYfpVKk/DRHPsvuB3tTdH+9O/GqN4Df8VrZHBybM4K246n9ff7BTACNQ6q
-	 dqE4vbiKy2YYlr9EVs7IGh0mF93vh+DwP5o1eSCSrcsMB6U6FfW+OByVoWmCDaLfoA
-	 OAJa8gY9xSUSXUseJyX1/sN3J1+yh6NfBGba0e9xrLbyJX9Z/G2WY0dFzzwqudBOA3
-	 wjz/IJLdoCop/D6JowBlobGCILnHmSWKSVUceCKIULdkgCXZCg7Dg9LNq+KlQCGJgU
-	 ZW2Es3rSfUJow==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id DA87F887C0; Thu, 11 Jul 2024 10:10:04 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE8F88876D
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 10:10:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YbVKJ9j9";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 19AC98876D; Thu, 11 Jul 2024 10:10:10 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4WKS7r66N7z9t0c;
- Thu, 11 Jul 2024 10:10:00 +0200 (CEST)
-Message-ID: <21449f91-45f1-4e07-b57e-c4c89706687f@denx.de>
-Date: Thu, 11 Jul 2024 10:10:00 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 0254C887E4
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 10:10:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2ee9b098bd5so7965951fa.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 01:10:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1720685407; x=1721290207; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oQXT6ZtTn+9IjvfbghAR+B8w13LT7Svp7kE08x9G16M=;
+ b=YbVKJ9j9lNqpb1hlYvIv0TpmDPZCRv85UDvs3etEug0xHDmzDjHKGP82qkn07SEo5t
+ atiS1MHW5lzd5jgH8xMv+fNR3r8vtHSUn2gz4QKy+suyMTuh02DsfBk6JiLDfi+v/UJM
+ n5R36uzPd5LYzHV13mFp9plTIzv/EL0AofM5Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720685407; x=1721290207;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oQXT6ZtTn+9IjvfbghAR+B8w13LT7Svp7kE08x9G16M=;
+ b=hZQ8v5a1D/JhDTeOlzLFFWg9ElCGWKCyPISo5WrXPgn/r/M1i37sVwMGimAC2RTlUb
+ pmacWN42on9zw1bMqZf4N2uIHw0UhHcIbsyDQziyqazGrYEve7jSB1D8vh6a4mUA611j
+ LOx4OCb7a6VbVFwMa5mwmIDMTVEK3dtFOjEGUvnpavWsrCPmrUILGEJTLc53EBxDEv3M
+ zsL3kDs8++KJpWwMIFg7IdLOzek1APasDh7k9juOPuilnQYtk4caDsFXwb2e+tHjhuXf
+ o9m7/5B0qdx4U5D2d2rjSDd5WZMLMgiGqiQbsVt/nB8T+9sB9EWdPDQsCQDoa3bm3kd0
+ dKHQ==
+X-Gm-Message-State: AOJu0YztOHF9w/In2q6z78MhLnIAqeRPLKJlyj6AXGGazBCUR9kImi4m
+ vGlZmEJi3Mx/7ukJ0lB0mCdOz36jFipl7ue2gRvh+4MNTgZOecJJ0qHiFLpTmELCRTLozgOZIP8
+ =
+X-Google-Smtp-Source: AGHT+IF9yRIGrVaoG/L5TqxrbS/4N/18xVfizbxgIvsKB/NOqv9AXZuf8aVE0a1lzkRc8e6NoweKrg==
+X-Received: by 2002:a2e:95cf:0:b0:2ee:7af6:54ec with SMTP id
+ 38308e7fff4ca-2eeb30b9a59mr54299841fa.1.1720685406628; 
+ Thu, 11 Jul 2024 01:10:06 -0700 (PDT)
+Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4264d5101ffsm262927685e9.16.2024.07.11.01.10.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jul 2024 01:10:06 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH] buildman: Show board list with -x
+Date: Thu, 11 Jul 2024 09:10:04 +0100
+Message-Id: <20240711081004.304917-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] board: rpi: remove leftover CONFIG_HW_WATCHDOG block
-Content-Language: en-US
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Cc: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20240710211730.2635847-1-rasmus.villemoes@prevas.dk>
- <20240710211730.2635847-2-rasmus.villemoes@prevas.dk>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240710211730.2635847-2-rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4WKS7r66N7z9t0c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,47 +86,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/10/24 23:17, Rasmus Villemoes wrote:
-> This was added in commit 45a6d231b2f (bcm2835_wdt: support for the
-> BCM2835/2836 watchdog), which did do 'select HW_WATCHDOG'. That
-> incarnation of the watchdog driver later got removed in
-> c7adc0b5f98 (watchdog: bcm2835_wdt: Remove unused BCM283x watchdog
-> driver and its references), but this block was left behind.
-> 
-> Another rpi watchdog driver has since been added, but that does not
-> select HW_WATCHDOG, so this remains dead and unused. Remove it.
-> 
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+When -x is used, buildman does not show the list of boards that will be
+built, since there are no terms which cause boards to be added, only
+terms which cause them to be removed.
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Add a special case to fix this.
 
-Thanks,
-Stefan
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-> ---
->   board/raspberrypi/rpi/rpi.c | 4 ----
->   1 file changed, 4 deletions(-)
-> 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index d996eb0cf69..9a83cf2d6a7 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -493,10 +493,6 @@ static void get_board_revision(void)
->   
->   int board_init(void)
->   {
-> -#ifdef CONFIG_HW_WATCHDOG
-> -	hw_watchdog_init();
-> -#endif
-> -
->   	get_board_revision();
->   
->   	gd->bd->bi_boot_params = 0x100;
+ tools/buildman/control.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Viele Grüße,
-Stefan Roese
-
+diff --git a/tools/buildman/control.py b/tools/buildman/control.py
+index 464835c5be5..d3d027f02ab 100644
+--- a/tools/buildman/control.py
++++ b/tools/buildman/control.py
+@@ -124,7 +124,8 @@ def show_actions(series, why_selected, boards_selected, output_dir,
+             print(commit.subject)
+     print()
+     for arg in why_selected:
+-        if arg != 'all':
++        # When -x is used, only the 'all' member exists
++        if arg != 'all' or len(why_selected) == 1:
+             print(arg, f': {len(why_selected[arg])} boards')
+             if verbose:
+                 print(f"   {' '.join(why_selected[arg])}")
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+2.34.1
+
