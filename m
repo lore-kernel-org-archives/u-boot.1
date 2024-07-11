@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34ECCC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jul 2024 23:23:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646A1C3DA41
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 03:34:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67D808871E;
-	Thu, 11 Jul 2024 01:23:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3E72588626;
+	Thu, 11 Jul 2024 05:34:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="afB4OpuA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PBBRWz+y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 365758872D; Thu, 11 Jul 2024 01:23:50 +0200 (CEST)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id A68FE88703; Thu, 11 Jul 2024 05:33:59 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEA358871D
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 01:23:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C353488606
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 05:33:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e02c4983bfaso274488276.2
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 16:23:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-58c947a6692so566948a12.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 20:33:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720653826; x=1721258626; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1720668837; x=1721273637; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xTXiWaaBXqAFy2Bj33U85w+pgUEQPyS/Tqf2hrBbFoE=;
- b=afB4OpuAeeiLpdnhEwkud6tJY/KYXK0tNU/9RWZzCtHAeSdzVYLUeBEsSdfB59Q3uX
- gnhIp4/5y8dm629u+EtV8bgop/4jK15ST0UcCVkfflRZ/TdQCz6NDaHeZ7UE+o/Je0bF
- IpH8ebxyLuzy05F9NQVZUy0lhBCTV6YZpfXUAlIBmMSNOqlH5o1Tw6TaTPXpssfpbe0j
- P1Iw9sQDbwfaigziq9Hn80ddEImQyJiqABdFR9egaG1qEjW9sybaiQ9X8hQtNH5KDB9A
- nS64CdiLzey1b3Dqk+6qToDySJOHP7vDKYcciQz1f2QKKCStYGgnbIQUQU4UcS/BRzdX
- eGxg==
+ bh=8mBpAWKCbLhblfEAFuwpj5MXiMPJCDmQjFH7slg5nPA=;
+ b=PBBRWz+yruoEUz6n3kbOQ6bHe3IOfPpand9KZgKUOmTJGvV8wHxvCryu4Tkh5Jy6xk
+ UuksfzOXNaVbF2biicIqOXj2lZ9AsRpvqkp0QXqN8BbQ36mNM05xuwzj0WbqJEOpwNFn
+ +VdrEkqZ0+K0xcpmIehryqI22TJ00Y11/LJAY56QgXDcr2dm3n2YiJYeflcmoGDeOXpp
+ THXQYXqEEcu3wvFBv8malvhfxasKoWKp9zfIUTzqvzkofrLNev3XvHHOK0CdHCUaU5Vm
+ FOMmuCUmukitPp9H0v17ZeCCHXQkSIh8lQU6mOjZhviUjpnqX3Zq1VM6g60BtefyluHS
+ wfyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720653826; x=1721258626;
+ d=1e100.net; s=20230601; t=1720668837; x=1721273637;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xTXiWaaBXqAFy2Bj33U85w+pgUEQPyS/Tqf2hrBbFoE=;
- b=Ee1HMKUvReD6T3wfUsoWV/6tpr/B+SlNjznOLeko84RI3ZlVr0gFTYgBgnBOPRgIqg
- 15vumyuaO/b1zeuX+Mxei6MMNTojb/YlcZxAu2rm9655C+JW+hgAd+EHbv2xJkWQFtql
- HfRL2oNO5XZnZLK/dGUBdHbbGogL7O9YxCO3x55bN/Wx63HVq0xEJLnQYQgAFMnP5b5+
- i9sHGSkqgqpChWa0ZyCxcaFqWK4WgXsPudnZVkwVInTNz6fiUvE1wfRVChOLUTY15GOk
- EqzfPH8Npj6KkeevyD1TXxc5Q0BxirOGZCCgvVxtPGDmTzhcMwmEXRxyuLMZUmWnZjrw
- OsXw==
+ bh=8mBpAWKCbLhblfEAFuwpj5MXiMPJCDmQjFH7slg5nPA=;
+ b=wP8IFdt8j4QFoHwU1bfmbwD824TcNpb3YkOqIK6mXzD56oiMo/QPTgH1TG44661++b
+ SX4hJN6BKdrPCYHV87R99VNbNq6bwSsXQbVhaRtQ4f+vj8iAPhKqSfXV9T1DxNl2twVV
+ gTQ/Oa7V2dgbk+g2zyZBCeNwFQf9FKv1XhiVsInEhp5jNt/UiNf4z4lHmk8goD169VHG
+ Pq1zy+5G1oNd53aZWA0J8M55Cx86LgAiBDn3KW5B0iy/sz/tuW/fhZEgq6Wh9A1Y9pZq
+ yq5fHYe11m4x6W18bNkOBaRLV4BAjzKgS2rbNa/aUlql/cnFUlMkwnUm85JHI9dD4Z68
+ SdkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSZg0guMXoOOCWC9YKVYVK14NRnSn/YIpkBbcvWZAaNBByEKyMGW45NGF7h9v5eaWqfdNFlQsRmfd59ga99qacrQHWwQ==
-X-Gm-Message-State: AOJu0YxNoBI1SEPEB0mFRM6wpGKyiMDOiGtML5lrSHv7HkvKmmKFZJ8p
- /eGpa0ctp5MrMJmScCKBKrJVogSJJPLMZBUOk+lfA3E7j9wZN5HKzXzaSoVfYzYBaR/m+A7zCZb
- UucnxAtq1PbXdki78rave7wP7Z7w0r3qJOPRaiA==
-X-Google-Smtp-Source: AGHT+IEls7os/pScl0b5Dj8NP0xQZoM6YCukEwYpCPLNm1Uaaifa65ztjc5LsT9OWqwJC7SYO5sRB1ZLPaoPNExp5S4=
-X-Received: by 2002:a25:6911:0:b0:dfb:2ba4:91d with SMTP id
- 3f1490d57ef6-e041b0965c0mr8069564276.17.1720653826507; Wed, 10 Jul 2024
- 16:23:46 -0700 (PDT)
+ AJvYcCVU/n+56egpcVHjYxRWlBS/4zpo2V5c0AzbIt3Olftq+1mHXr9RaaPaQbXgFN5CHtGG2+kROAaibkK5OEjCC6ckcsY6uw==
+X-Gm-Message-State: AOJu0YyqUtrpzrcSJEfC6d6N+VkTFPClB8/Ht+j5QZvwITBmH9dl6bRt
+ LS0vPwZMST2L+HVfOBWXklMYnMnR9HPIqmNc/04c7j7ho++m4Q37APrWPgQdE8tFs4sAKNzM+Nn
+ pcyXYVkykXtZb5/V2TpIU4t1nprM=
+X-Google-Smtp-Source: AGHT+IHHUqNw12g8xClDWF6CYmnBIvYJMKWBAO/NtIx50A8gZQA34KrYip2SkBuoXm0oR4JJnMB3jfToRtLlyUTnMpg=
+X-Received: by 2002:aa7:c384:0:b0:57c:5874:4f74 with SMTP id
+ 4fb4d7f45d1cf-594bb869f32mr3909465a12.28.1720668836333; Wed, 10 Jul 2024
+ 20:33:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240627112904.99969-1-mikhail.kshevetskiy@iopsys.eu>
- <CAPLW+4=n5B39=KnUma7=ZedAnX1FBiw1AtoRTnFO7UNfkecsJQ@mail.gmail.com>
-In-Reply-To: <CAPLW+4=n5B39=KnUma7=ZedAnX1FBiw1AtoRTnFO7UNfkecsJQ@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Wed, 10 Jul 2024 18:23:35 -0500
-Message-ID: <CAPLW+4m=3JSFRjf+ZjHHYRZhtBkZe7v3cRt+NothGJjJjvojxg@mail.gmail.com>
-Subject: Re: [PATCH] gpt: allow spaces in partition list
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Joshua Watt <jpewhacker@gmail.com>,
- Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>, 
- u-boot@lists.denx.de, Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+References: <20240709162309.1531981-1-leo.yan@arm.com>
+In-Reply-To: <20240709162309.1531981-1-leo.yan@arm.com>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Thu, 11 Jul 2024 11:33:45 +0800
+Message-ID: <CAHk0HosoO4FXXuH3Fke8FHDoOQC=GV7QUi+pRjCH8EKNOcxURg@mail.gmail.com>
+Subject: Re: [PATCH] driver: rng: Do not check ARM_SMCCC_TRNG_VERSION
+To: Leo Yan <leo.yan@arm.com>
+Cc: Etienne Carriere <etienne.carriere@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,82 +92,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 9, 2024 at 9:00=E2=80=AFPM Sam Protsenko <semen.protsenko@linar=
-o.org> wrote:
+On Wed, Jul 10, 2024 at 12:23=E2=80=AFAM Leo Yan <leo.yan@arm.com> wrote:
 >
-> On Thu, Jun 27, 2024 at 6:29=E2=80=AFAM Mikhail Kshevetskiy
-> <mikhail.kshevetskiy@iopsys.eu> wrote:
-> >
-> > This allows spliting partition list to several lines in environment fil=
-e
-> >
-> > ex:
-> > --------------------
-> > gpt_partition_list=3D
-> >         name=3Dboot1,size=3D5MiB,start=3D0x100000;
-> >         name=3Dboot2,size=3D5MiB;
-> >         name=3Drootfs1,size=3D70MiB;
-> >         name=3Drootfs2,size=3D70MiB;
-> >         name=3Doverlay1,size=3D20MiB;
-> >         name=3Doverlay2,size=3D20MiB;
-> >         name=3Dart,size=3D4MiB;
-> >
-> > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> > ---
+> As described in the document SMC Calling Convention (ARM DEN 0028 1.5 F),
+> section 7 "Arm Architecture Calls", the SMC call SMCCC_ARCH_FEATURES is
+> not expected to support the function ID ARM_SMCCC_TRNG_VERSION. Trusted
+> Firmware-A follows up the specification in its implementation.
 >
-> Feel free to add:
->
-> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
-> Tested-by: Sam Protsenko <semen.protsenko@linaro.org>
->
-> With this patch the next command succeeds, when having $partitions
-> described in multi-line variable in .env file:
->
->     =3D> gpt verify mmc 0 "$partitions"
->
-> I wonder if it makes sense to also change cmd_gen_envp command in
-> Makefile to avoid adding spaces in place of newlines, in the first
-> place? It would allow us to specify unbroken multi-line variables in
-> .env, though I'm not sure if anyone actually relies on that behavior
-> in their .env files.
->
+> This commit removes the invocation to avoid the failure - which is a
+> wrong calling in U-boot. The later code invokes ARM_SMCCC_TRNG_VERSION
+> for retrieving the TRNG version, except it can read back the version
+> number, it also can be used to detect whether the TRNG is supported or
+> not.
 
-Tom, can you please apply this one? I think it actually fixes this existing=
- env:
+LGTM.
+Reviewed-by: Weizhao Ouyang <o451686892@gmail.com>
 
-    board/sifive/unmatched/unmatched.env
+BR,
+Weizhao
 
-which has multi-line $partitions definition in it. I'd also want to
-keep $partitions in .env file (as opposed to .h) for E850-96 board in
-my new series, which requires this patch to be applied as well.
-
-Thanks!
-
-> >  cmd/gpt.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/cmd/gpt.c b/cmd/gpt.c
-> > index 7aaf1889a5a..2b29ab98ccc 100644
-> > --- a/cmd/gpt.c
-> > +++ b/cmd/gpt.c
-> > @@ -117,6 +117,7 @@ static char *extract_val(const char *str, const cha=
-r *key)
-> >                 k =3D strsep(&v, "=3D");
-> >                 if (!k)
-> >                         break;
-> > +               k +=3D strspn(k, " \t");
-> >                 if  (strcmp(k, key) =3D=3D 0) {
-> >                         new =3D strdup(v);
-> >                         break;
-> > @@ -151,6 +152,7 @@ static bool found_key(const char *str, const char *=
-key)
-> >                 k =3D strsep(&s, ",");
-> >                 if (!k)
-> >                         break;
-> > +               k +=3D strspn(k, " \t");
-> >                 if  (strcmp(k, key) =3D=3D 0) {
-> >                         result =3D true;
-> >                         break;
-> > --
-> > 2.43.0
-> >
+>
+> Signed-off-by: Leo Yan <leo.yan@arm.com>
+> ---
+>  drivers/rng/smccc_trng.c | 4 ----
+>  1 file changed, 4 deletions(-)
+>
+> diff --git a/drivers/rng/smccc_trng.c b/drivers/rng/smccc_trng.c
+> index f59b80666b..1da1affd8e 100644
+> --- a/drivers/rng/smccc_trng.c
+> +++ b/drivers/rng/smccc_trng.c
+> @@ -135,10 +135,6 @@ static bool smccc_trng_is_supported(void (*invoke_fn=
+)(unsigned long a0, unsigned
+>  {
+>         struct arm_smccc_res res;
+>
+> -       (*invoke_fn)(ARM_SMCCC_ARCH_FEATURES, ARM_SMCCC_TRNG_VERSION, 0, =
+0, 0, 0, 0, 0, &res);
+> -       if (res.a0 =3D=3D ARM_SMCCC_RET_NOT_SUPPORTED)
+> -               return false;
+> -
+>         (*invoke_fn)(ARM_SMCCC_TRNG_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+>         if (res.a0 & BIT(31))
+>                 return false;
+> --
+> 2.34.1
+>
