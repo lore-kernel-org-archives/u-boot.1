@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30966C3DA45
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 14:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4EEEC3DA41
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 14:53:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B96CC88381;
-	Thu, 11 Jul 2024 16:52:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D13688452;
+	Thu, 11 Jul 2024 16:52:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X0odFlbY";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="F/qzFUHI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09A21883CE; Thu, 11 Jul 2024 16:52:27 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 1081C88496; Thu, 11 Jul 2024 16:52:58 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1939888049
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 16:52:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15E8588049
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 16:52:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B8C2D61D2E;
- Thu, 11 Jul 2024 14:52:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD70EC116B1;
- Thu, 11 Jul 2024 14:52:22 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 6FFB9CE18D7;
+ Thu, 11 Jul 2024 14:52:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7118C32782;
+ Thu, 11 Jul 2024 14:52:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1720709543;
+ s=k20201202; t=1720709573;
  bh=uxs+nS4ovmqfmgWsESycOMJFJWQ0CwLd1wPsOwEBxnA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=X0odFlbY5dIyHjNYzn045nZNJFWU8E9nzn6miu+dSG3zu+OueYllnghIspB35e357
- sMVpNsuIjidyxQtsdANax/1yL2+41KSeD4o7zovS2lPhv1Et6b5DaaiFHumvCbstrh
- zgrpJB7CyeLbYSRsCDjDQz6T9kEz86egXaetbHxNt6HfS9jQQ0MhewHpUlvq9Zo1+d
- UC+kXux8lLTAKinJ/YI0Ua4/RRxfVak82bZX/QQpshV8PhrZRzHuYjlh2UBpUFTyiV
- 2GiD8Xbi/kvZJQkKyXUoOE87AXpq6PV4tfIwFMKqz/c8EUEGfB0mzcFr0Ldv7WLJNU
- ez27z9z3qcXIw==
-Date: Thu, 11 Jul 2024 16:52:20 +0200
+ b=F/qzFUHIqXR7We7T9yVWY2ef43nUPauSJPTSZBLoUmJ+MGhAHbkfcFqvfXKUx0IH9
+ G8fGJNfPGAVgWoWrjZbL5iF5ajx+XZuAXvPIenbMemnsRExzr2yY+UTgokOSeI/++o
+ PrBkMloEpEQ25s2bPA0jDMWYEfWVJZYvaD/IIEy9ARLoBrsFR0uItXzXQ+grAvZdrA
+ LXjsKHED6Bd72yLyU3gJXuUJKg6KUBuAM6T/SPmQ4BEmo6ZW6KEQzDemfsJLyrg6Jd
+ VAwOePQZPXZ8mPB4I7xiAg4fczUzfyDNHAZOBZVo02RQQQSofsMe1+Np+CP0KgHxIG
+ heq2Y5xNSEhAQ==
+Date: Thu, 11 Jul 2024 16:52:50 +0200
 From: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>
 To: Marek =?utf-8?B?TW9qw61r?= <marek.mojik@nic.cz>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 4/6] powerpc: mpc85xx: use CONFIG_VAL() for
- SYS_MONITOR_BASE in start.s
-Message-ID: <7yepxyzp6pw4f7pysdtudl5eel3mbxnnqocqvz66vodw72rmoq@c7bgqj32czzm>
+Subject: Re: [PATCH 5/6] powerpc: use CONFIG_IS_ENABLED() when checking for
+ DM_SERIAL in include/asm/config.h
+Message-ID: <ilgzjpsga6kkpppjqadascdny5tjmtat5kjwu6yuk73shw4ima@kxugjzaa46kl>
 References: <20240606163326.386950-1-marek.mojik@nic.cz>
- <20240606163326.386950-5-marek.mojik@nic.cz>
+ <20240606163326.386950-6-marek.mojik@nic.cz>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240606163326.386950-5-marek.mojik@nic.cz>
+In-Reply-To: <20240606163326.386950-6-marek.mojik@nic.cz>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
