@@ -4,97 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782CAC3DA45
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96339C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACA1C8880C;
-	Thu, 11 Jul 2024 18:47:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0231B883AD;
+	Thu, 11 Jul 2024 18:59:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zqR8NCR4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rt4D23Dg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCFE688805; Thu, 11 Jul 2024 18:47:11 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0A6A4883CE; Thu, 11 Jul 2024 18:59:11 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::612])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D66A088791
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:47:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ABB4883A4
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:59:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a77cbb5e987so146014566b.3
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 09:47:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720716429; x=1721321229; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9fS17EJfpRajXdHZM+aigrI8s0lABvMSNi6Hs5iNv8s=;
- b=zqR8NCR4Te0OJ9wgQZk0aKjpXTosAWLRYUOxGCxnVBE1ZbQumfI34rMUj3Ug9WKE1A
- KaIoYwjtk+QPslB8SX1UaPZSPYTZtuftgRpyBYH80tN5L9sNbcPIWRvEEsM/ODAWVG68
- XXYE3QoZKmOZ8rRjAs8yix1DrAkmb5FPkktCbExIFhsb2+4D9YX+Nd2+tIiRTKb9txsR
- dmnsv7cXA1C2MRDF0yLM3xBFNfSDOg90k22dmt9Ij6fB80Fy2ncmYu6FV+F2PUSr4/Ji
- vA62hXHM74kHLDQffL8eXWJfhPKUF4fyaM6MtYr9UtrJGuKAz5isUJOsNnslXlkZeK9d
- 6b9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720716429; x=1721321229;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9fS17EJfpRajXdHZM+aigrI8s0lABvMSNi6Hs5iNv8s=;
- b=EI9s7tdJWMCVonA+sdbjqEK2ip3ybMcTHi+sk4mXuvFTJxjmlQv0rkvDZfeuXH8bTt
- II/iUBKNDX7noWZmSdJYTI0fgPm8mEixKpXhWBKduqsubrZ3ws+RLo9byIWu0XCq7D8T
- 4ViSjv27BQsv4jUIApGC1GrjhmHWLmeh/+tBEgurU3K/XeAQOXFPm8S9wfEJNQrLs4At
- l/YJqnVVoEJMDL4LikFYA++WnxNsV6UdnifVnQYNHuqSz5T+b5EfkzhP3fzbZqJU82vK
- woeblq6j4hCoYIvB0g+UInNAIQ8hZLhKjDBWJmrm7Btfz3sHT9IF3lSwSMlQmVsl6+eb
- IR2Q==
-X-Gm-Message-State: AOJu0Yx212W+Uv4hFptUW8rL9gQKDB/IFGJxJy9IfZSmSFWeh574vqb2
- YyeqUOpAzxMLz1nwMVjWr1qae+UagwwyA9CcYsNByQMB0p8MN+CRf4/t+1FN0BQ=
-X-Google-Smtp-Source: AGHT+IHwariRbvYkR7+euNNNELwYoKSbvU6ejWle3OU9EIflke4Y2T1/tBKfzXBDTOeKMVNd9ZLe9w==
-X-Received: by 2002:a17:907:7e82:b0:a77:cd51:3b32 with SMTP id
- a640c23a62f3a-a780b8854e1mr658945066b.62.1720716429452; 
- Thu, 11 Jul 2024 09:47:09 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a8545adsm268454166b.159.2024.07.11.09.47.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 09:47:08 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 11 Jul 2024 18:46:55 +0200
-Subject: [PATCH v5 23/23] qcom_defconfig: enable rpmh regulators
+ spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fa36C7FOgvB9cmHMqenzEC78/Gd8+VxUgm4o6DdP2iEdyib26fCc7MRzj4phLdT2HS3IpnNVJo8PLeWBWangZ1l7y9f50/UxAX1z16BPLMmtXJCZdiuMctIzWMjSO5jVK8FtNH1kuYke8Brf/3J3PBl2Y3ozur4SzxpoVB+zaq3hFO+61MAFRsdJqS7ywCFW3KnjEJa5bVFhbQlUIX/0sxJ8FC7qsiQHOghtp7eKBrviTEGZYAGliF9TOA4PXjJYjoSDEiYZnTLu4ZtvcB762G/oiA1x0hKq85beTJ8JfMdgwXnE2TOXgXvHWdBs00Ln+H9n14T/WA5+9Qa5b0TYXQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mZZCv/6oQ3zn4QTciBT4tqLuf0Bwr7tWbENuF80A3m8=;
+ b=MRG/ucvIz0PFY8OdFzrmCJGvTaQFrZwJD5quunL9j+kTrQxCYwEOmADVf2CtiaQthaX+9RFppzjev7bzYezJ12+Wz0zNrTT2XlsdBE7KamjoukwHvdhc7onn1QnA1LX/J4eGL5PlutN6tCIcEYHNh8RnrZfiAx6buU3jCBkeeHtk8SddRxFEjLMKr2D3r+v5vsZx+5zxZ8KxhlTwHbo0mBZ2aNgsiyJxEvtN9MbN0PQRN0lKDWrEe8+Zyd92Txy5t+CGPkOd/8Zyyg6c2v5YWU1kPXXe8UjH3WMQ39WaaGmo1gIAoi6fM7YN0w+cr7WaMuWiMy7Fh/XkvQikuWnL5Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mZZCv/6oQ3zn4QTciBT4tqLuf0Bwr7tWbENuF80A3m8=;
+ b=rt4D23DgwbM23O3zOJV7zPinJDBlAmOG1jWJ1w4e+tIFbdzhEnGjXIXmzLieUZVcV4QiiX4grd7NmAWlRrSd0Ez3X2Ewdc9d/gcNBMeplGZQSwYH6JJ0D1kFb1s4YppzZow3pkiId21bX91Fa8w4RMoExsDtFpagTcZTt808cAM=
+Received: from BN9PR03CA0801.namprd03.prod.outlook.com (2603:10b6:408:13f::26)
+ by SA1PR12MB6752.namprd12.prod.outlook.com (2603:10b6:806:259::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.34; Thu, 11 Jul
+ 2024 16:59:04 +0000
+Received: from BL6PEPF0001AB51.namprd04.prod.outlook.com
+ (2603:10b6:408:13f:cafe::f8) by BN9PR03CA0801.outlook.office365.com
+ (2603:10b6:408:13f::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.21 via Frontend
+ Transport; Thu, 11 Jul 2024 16:59:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB51.mail.protection.outlook.com (10.167.242.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7762.17 via Frontend Transport; Thu, 11 Jul 2024 16:59:03 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 11 Jul
+ 2024 11:58:49 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 11 Jul
+ 2024 11:58:48 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 11 Jul 2024 11:58:46 -0500
+From: Prasad Kummari <prasad.kummari@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>, <git@xilinx.com>,
+ <jagan@amarulasolutions.com>, <n-francis@ti.com>, <d-gole@ti.com>, "Prasad
+ Kummari" <prasad.kummari@amd.com>
+Subject: [PATCH v2] amd: Enable the NFS command for Versal Gen 2
+Date: Thu, 11 Jul 2024 22:27:35 +0530
+Message-ID: <20240711165734.1561933-1-prasad.kummari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240711-b4-qcom-rpmh-v5-23-fbf04ce6a7e8@linaro.org>
-References: <20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org>
-In-Reply-To: <20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1068;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=L0Z3UjALgAoIr8Xjx+Xnl++TWCG7gLgrnDFM/1FfGKY=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmkAxwJ+x8c+sMuZcbem27IN1sJlY3adSt/fKd3
- kMV2zkTImyJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpAMcAAKCRAFgzErGV9k
- tlyoD/9/WQw9TeoaYIY/DPG+Gf30X3RA27KfwTGxxSe3Zthi7p2MAWWA3ZmW5QNKKvfG3mNBbaY
- ZQ7Gxna731JdQHODPgAcbCu6MUTNUzUBqREpkPfr8MkTawH854yAxK8Z7/mkX08GoXSLGZx1OFJ
- 6n44R7/HBPqEezOg2PkTPqO8FJ4Kc/lqaCKW8VS1+HYnoKKLaRSHPFsDI+7cif/Z6bciY8cAzoK
- MKMA0SHkiaoDCyFyawk3baCH4N9FFvhHBgFyx+wCwhix+nSpYMyPMPjfYEJhKkrxd9yR5jJ3qPp
- IG0+aBPFbnUYbMIgZ4heC2YoStOuEIZitZ/mB5KGNuFA5Z+AeLGFQSJWysItaZsb56UPnWa1fPG
- KV474Qnv67MnJdHEpJ4bbiUhln5AJs6QImZCj3OGqmkV99l2BWN73wKDep0e0D3Ix7Fw5xIGFlK
- D/v+blovV+83HpEADF6MV7gEXDvb70cU2hTYyPIcWEh4nq1hl+Yow/sUSmAP6OqYFH4lCWGW5Pb
- VgBLE0WFDtGax1VsJbjNQzyA5Wu67OuttsAbaaiyAlSA1Id4MhzFYOSWIU9kxa28BVNYWxm7a1Y
- ztX++k7UOYpJcUAkmAGyPyfHmogN7liQPUnuk3H7p+N4W4a52IwyYIoQNXhll5vRnQxGZH0Xw6j
- UJ/loAvcixQ22Rw==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: prasad.kummari@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB51:EE_|SA1PR12MB6752:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2e5ad148-0698-4207-5782-08dca1cac517
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aBdOS6CxFNBTQ4VpEBanuz0rm5vGuAHa4SNi4ehLpP7nXT/5EsqswJdyPCMr?=
+ =?us-ascii?Q?QEou9NcwQ+CY8nmbH+MaQygU2ZESp2hnN2HX0a6lurJ+J5P2Xx2aWq1+nE45?=
+ =?us-ascii?Q?PLrh170fp+M41D6I4Foi5Gi9QshBnLZnX2e87Ja7yUxGVgh2r6xnCJ+ngTQA?=
+ =?us-ascii?Q?88m7eY4tMzYWwAAiZNZGrZk659sbwkq3Q+P1ITXmw+BgPwdG/33BQxYUaAMU?=
+ =?us-ascii?Q?0F0NB8z9ighQBHOQXwkds8Pf6V8NmwH+Wnido8z4uAuPbzucUW17I0aP6kaL?=
+ =?us-ascii?Q?dlEoCasP2mv7+BydvYVp6SbWc6BpNxmoTmsQTKd6EaYcZ6MXjoPTuQnX5FNx?=
+ =?us-ascii?Q?5xsVa2RstdwCVDpZGDzaLY5Rx7umsRJEjWdzuE9VmAwhFgPNJK70ud7kAwZc?=
+ =?us-ascii?Q?sboTZgBkBeXkOz8z/MEIp4o2Vwf8iokB2CDYYy+XvfQx323BKAOYGA5zCeg9?=
+ =?us-ascii?Q?LjsY460KZC0zJ2wcpVygflyigwVmet3LcWBRzGW+kdUL/Njsk5TCcZBECfuw?=
+ =?us-ascii?Q?SQ+++xcWu9kZ/mmKKN+qU5FsJ7TtObKOiILBwDQrJAaJax/4PgivGmEG5DbF?=
+ =?us-ascii?Q?niQSrmur662fMHrKIoPA9sbS152mQS25zctxxxbgKXcungJKaTlL1vLj6YYu?=
+ =?us-ascii?Q?nygDwHLUem52/fSwuOyJyxdvYTfoWf5E+vuJsoZqOGeTbFhS+Tdexd+vBAbz?=
+ =?us-ascii?Q?pDFe3a0128hEbuxQHAd+wexMS+z3HgH/66HZEAc/cpTCe8ImpWAE4Mr6oU85?=
+ =?us-ascii?Q?Uty48Cugb73hXze4UtZGCDgSbKbPbdJrjg0JSdT8K3kSnf/YRKwHZXQp2Ce+?=
+ =?us-ascii?Q?b+kFdRQQFaoR5W26uiWmaHHJRHHCzbopOYd47Q5jDQ82/LVtT7AvVpNilyFp?=
+ =?us-ascii?Q?61aLoQ9kZ71Ozr/bfcOIxOXaFm2qz2EFg0b27vXQ4uSuMClzVe0P3EXza+Sr?=
+ =?us-ascii?Q?40WElqBt0ndxKdYSREkCwFegFJynJd8IMryjgna/CT5due96pKihLNm0ce+g?=
+ =?us-ascii?Q?SDMPJ/JtAswv51uemmR1KM+6miBvBij+QUE90P23YvGJ8wUMKjxsT3kNPwFo?=
+ =?us-ascii?Q?A/ruA6jANm2MJSYtGn6uXY9cZNR6q/umypA1bHdkwvVN0TIeF+g7A8IVgQFt?=
+ =?us-ascii?Q?CiYaELdUwGNdC39Uegl5WZlgqp9SEj97w5pfjuTAae2XSO5aEHgK6Dj5aGe0?=
+ =?us-ascii?Q?3GZ5FG0aHoywZA1a9MKauNPs6xgDZtkBwF6bVk8mN3Lh8uQ5jeKQnLeE7nNu?=
+ =?us-ascii?Q?OF1SmOcYZW0Y0ZEmVunmGiwugSXvAswT/1y+eVV3ML4aB5IB3afdHZYELrue?=
+ =?us-ascii?Q?KoSvKhmTuiw1KXzqXDaoBsJ/GGdD5aOvAAl7erux+U3y86b/BtMgHBZY4URy?=
+ =?us-ascii?Q?TrD+T3nKWG9qD0cA7M0KDf2yJfc8/58IRxuiJIgV4MBf4P47t4Bgu7WzWS/p?=
+ =?us-ascii?Q?mzBEQp0G6JZAeT6ZzHJspkjp0/LaLCeh?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2024 16:59:03.9374 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e5ad148-0698-4207-5782-08dca1cac517
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB51.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6752
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,46 +151,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable RPMh, cmd-db, and RPMh regulators. Additionally enable
-CMD_REGULATOR for debugging.
+Enabled the default utilization of the NFS command on Versal Gen 2
+platform to facilitate booting images through the network using
+the NFS protocol
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
 ---
- configs/qcom_defconfig | 5 +++++
- 1 file changed, 5 insertions(+)
+Changes in v2:
+- corrected commit description.
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index ac5ffe772ade..1cbad9db72eb 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -35,8 +35,9 @@ CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_CAT=y
- CONFIG_CMD_BMP=y
+ configs/amd_versal2_virt_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index 2d611f84cd..bbe7db4fb3 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -46,6 +46,7 @@ CONFIG_CMD_USB=y
+ CONFIG_BOOTP_MAY_FAIL=y
+ CONFIG_BOOTP_BOOTFILESIZE=y
+ CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_NFS=y
+ CONFIG_CMD_CACHE=y
  CONFIG_CMD_EFIDEBUG=y
-+CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_LOG=y
- CONFIG_OF_LIVE=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
-@@ -90,11 +91,15 @@ CONFIG_PINCTRL_QCOM_SM8650=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_QCOM_RPMH=y
- CONFIG_SCSI=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_QCOM_COMMAND_DB=y
-+CONFIG_QCOM_RPMH=y
- CONFIG_SPMI_MSM=y
- CONFIG_SYSINFO=y
- CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB=y
-
+ CONFIG_CMD_TIME=y
 -- 
-2.45.2
+2.25.1
 
