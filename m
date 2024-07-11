@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C30D4C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:50:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B1BCC3DA45
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:50:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B611888765;
-	Thu, 11 Jul 2024 18:47:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E15688777;
+	Thu, 11 Jul 2024 18:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KoJA4RH4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QxLK4j2D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B317887D9; Thu, 11 Jul 2024 18:47:07 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id 0F828887E4; Thu, 11 Jul 2024 18:47:08 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A61788795
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:47:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF2C188786
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:47:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2eea8ea8bb0so20067891fa.1
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 09:47:03 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a6265d3ba8fso138991566b.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 09:47:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720716423; x=1721321223; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1720716425; x=1721321225; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GRz+XTlCpnsYYi0KK9pzBnfO6FEF2vig2L6TEuG8pO8=;
- b=KoJA4RH4Ggegk59UiWB+WcLdkYX08RauZ5bk0ZSzIkC2/1msjCaNhBt6NHy3lFWesX
- 54Xz/GmcojeiGTn1Clwiuzrbae4DkOo6FoVmvrHHL0w0aFpDwBuIGwnWjS/KMxqo8cOA
- LlGos7Mv9j1i7s9BXOYfnDCoxIoebv2f6dy75GerL+osI/Toi2Ej2Kn8zGJ0bZxi9N+V
- 1tY/RVsL2M28jukZO0Cib4Cs4fGpsnyDnqhgdxQkAzJuz8as8Q8co/qSkINsdmeZAL84
- Modt+g4voI1h49BAl3v8iTV5O0Ii2jQ+lt2WIEizTIWmCWH1fP9HKTRWdCFcK8ieo/FJ
- f23Q==
+ :reply-to; bh=ucK3zIA7EbO5G9x/Ruo1tW04nQP6COUjq51be8zAaoM=;
+ b=QxLK4j2DSSEkC19Ve3ZSlTM7vjjVuyv/emzuh+p5AUuYh/DqIwBvs9RMQ3g5aO37Nw
+ MsSF3oMqjluoF1mCeh/eEsfjZ0Fp7bscLenOgc3cUYOlnM1yxDJ0eaRksmghhETcep/t
+ Zpsn+84NCAvNCK9iNq9T29ISzDD5ZFn9y6peaKLIWyKEbH50iNbH3QF4BRgqRnsciCxq
+ siirw5ITmpzDFtYhYyMhQwbIby+GuQoNG6Ci0hKMqhn1++s++Jtv4GQ2WNtWY9aIHVaf
+ Cd2ZLBQVhPZ6oKisgir2aC7aW6N90Eo5+OVdrV3MQUfmfrTLalsQ/5rdcc12bNXMn9gq
+ 7mXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720716423; x=1721321223;
+ d=1e100.net; s=20230601; t=1720716425; x=1721321225;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GRz+XTlCpnsYYi0KK9pzBnfO6FEF2vig2L6TEuG8pO8=;
- b=DwMzlU0J7ZNPRi1A/AU9KwBEfkz5p+GTZ4ac9ZgBRzZc5zVkQ7lWpBwjKpb+Q452Mg
- j9XvVnWCtkhIeycBNdVe9nTCxn7BYtaHGzysyy0Ihj15vHLXp9vUB+KjFjLv2qkltuYw
- IHkfJntnt7vgd3lHeNCjDcv+r7eZrOEujaDXSSzYvSLx2VSL8bPtp9CI1Q/90Bx/ELru
- 2LUbymTlsh5w4Aknqcpicjr1I4DrPg/Y7VfcV158u9XTFhfB1KCVTlKGPGtev5Eb19tj
- NMJHtDeEtfBVTEK9Lj54aC9/uicR+rijMGUkyDlDdsigMnzqcxvzDOgzfFWN6xBstx+5
- eolA==
-X-Gm-Message-State: AOJu0Yy2iJLZhIbtggr5asgcqVNu2TBLsy5Rhd9ts3fHIj/QFn78IgVz
- xmxTUGwo5gIgOsv/vYaE29Tz83yg7fUSuDD4IROZGMXOBdaoPD6RYaiz6mz6AJnAF1yAB6iftU3
- G
-X-Google-Smtp-Source: AGHT+IHhdZvsNl4SJsrD0rAFA5lqjgp16NuE1l8PDYMdI1XbXzMjMY24x8i36/oTt0TVRYoF+Iv5Qw==
-X-Received: by 2002:a2e:b901:0:b0:2ec:5ff1:2271 with SMTP id
- 38308e7fff4ca-2eeb30e459dmr73968601fa.18.1720716422932; 
- Thu, 11 Jul 2024 09:47:02 -0700 (PDT)
+ bh=ucK3zIA7EbO5G9x/Ruo1tW04nQP6COUjq51be8zAaoM=;
+ b=Iin1xQLx69bSpTThyKts3jZq0e18Zv5JY8LJcKfCRbF1YWX6RBX+40lcYpFRfCsUQv
+ Wwg/wy5HVIE2YZgZAFMyewVx+PVqbArX34G9KwAWonb5Z5hxUav5WmJ5z5qx4VZOmtt7
+ DAR7ynmTml19Sl7GwJ+PKoAxpaKAHRm4jzPZPO3cDhW1GzPBkPOMbm+S9GIKnkBYcJZ5
+ IE+DGk6rIGZpaDedlIJgUxB14ZFHWQ1678M6T2i/OJ85QmL/ZxspDas6U8ovGHu51B3N
+ 7mDhgCVNxRmT5vpDTOYYfR8CjMXeaL7Bcgt2LiTpqY8XutJI1gpVHW4NgtCXlJYkGNUV
+ wIrw==
+X-Gm-Message-State: AOJu0YyMYPZQXbYn8XrDhBzkIsqP+gMUf0w0dy7iDmX1YyJuzQiHbL8A
+ 3V6bM1xF/yg+tYMrEBE/4dGk2HQMdiI0xFY2noB4lkCrmKKEwx7IjXsJIUDgZ/4=
+X-Google-Smtp-Source: AGHT+IETmM3TzxF0yDxBG6pvnqE2YBkGs+S5fQNm26DaFng3J3/SGr/Ra/mQSJk7/GEmCNYZiYqKeg==
+X-Received: by 2002:a17:907:2da1:b0:a71:ddb8:9394 with SMTP id
+ a640c23a62f3a-a780b6fe3e7mr831517066b.40.1720716425423; 
+ Thu, 11 Jul 2024 09:47:05 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a8545adsm268454166b.159.2024.07.11.09.47.01
+ a640c23a62f3a-a780a8545adsm268454166b.159.2024.07.11.09.47.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 09:47:02 -0700 (PDT)
+ Thu, 11 Jul 2024 09:47:04 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 11 Jul 2024 18:46:50 +0200
-Subject: [PATCH v5 18/23] power: regulator: qcom-rpmh-regulator: adjust
- structs for U-Boot
+Date: Thu, 11 Jul 2024 18:46:52 +0200
+Subject: [PATCH v5 20/23] power: regulator: qcom-rpmh-regulator: port ops
+ to U-Boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240711-b4-qcom-rpmh-v5-18-fbf04ce6a7e8@linaro.org>
+Message-Id: <20240711-b4-qcom-rpmh-v5-20-fbf04ce6a7e8@linaro.org>
 References: <20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org>
 In-Reply-To: <20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3076;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9430;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=U6yGComMBKaDzfG1OpRVhDZGEEuD6iB3cAcmWsZo69M=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmkAxwEKw+6GEKeB584FAR2h0o7+1l53GR44Sgw
- 4Iy4FIiEJqJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpAMcAAKCRAFgzErGV9k
- trjaEACZyFdi4SypaeuJx9sEVBwEVMMFnI0epnBRqLE/S78uuq7P/rvcI6MHsRfGDnBLTYJGDMx
- FeU4uEwdgxLFmGtYDeoRg/SWIVoOdmyiCA+mf79xx/8AdIy3mS9OdFh3ZgFOkbSJJ6CJSq0vQDm
- hM9sbMClm53HxHW3oI50ome9nDBQ4LBF0Y7fK5yTFx+OgtK1g3v/Fhzkj/OC/2x96UnFrRmrjuo
- GFQ409VV/Dz+DFgjj3dGudBlh6KV7KAcxD3JO8bs0fmLAqwf9vnl00KYMYfg1Kp9uF53tK6SZR+
- esnq8T3RslDTd/Lv0Z9MpbS8DUHyAUB4UWyvJb7/DPYgdY4XH5wxaH3tUCK+66y3v/3Ru+Z46aE
- UYVbjUAtrctimQt40YW+rj6TW8e6COf+zxCnv2VkB30tLgGEIxId2rwL35qGcq/LvYThOJ0oysw
- oCyGKVXYWATf/oic7r6jDtmffx2pJ0OqHcobT0Xy5yXAhImInu6ho6femxZrft4CB4OxQKjUvOi
- iHI0J/ObfDPtilTrVLzppY+wlP6ezpzrxf4ULbWAFczolR3yXW5FMru/als5pDeRgH4dZV24S6l
- KtW/uzEv4B1UZrWk0dS8efGijLSGuo4vi+bPgFtasFUja1JL5loXPIz1Kky6jNr909IL6l2ZO7i
- quFONvugdgrNtuw==
+ bh=Sr0fFMnSXPacpM/eQM/aMYto6EZyS+TqU9f8AYSIiQo=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmkAxwV+x8tsVQLT7laltx4Qm3OB9FwdYN9fHCu
+ KZkq639/YKJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpAMcAAKCRAFgzErGV9k
+ tt8BD/44gHnKsZgROoRCc29Q9mAELaaU5nKAqH96oMV/yvkSt9uof/DDcDRAvD21ElKZfzzC58A
+ D1GTvVdkfcpGhyQr/pc5KeGB65yYeu4G4gzYBcuaIIfa8hLyewbmt/fz6qLBNGnL9U+JVcHf34s
+ /Un7pSQpFZ1nv0Nl4fS/EY5RIBEUxLMvK7/ZqsolFLyDJQEkzhqGCcjDbCIFJaRKlAJbcVkGkcr
+ t4wwU6IwE8LQ7xDtnEmNbvT9mcYgQDiyGlLcc679Eyur2P/7WIYIVGpUJTFT0v8+AsWXHDQDi+K
+ dmIvL9wjt8PUFwe8vCajoA1bOVNwv//H0DlibrjuNEclEd5XkRRPijGwAU2n40qpMZyaJIz/hUo
+ uIH2+uu34Us2W1pJRo3oC3r9E8sLCTfqfAPMfT9qaR7oBhU3SBkxnEcPmTNVJaDH6g3O+AwnOtX
+ VHKcciASxpkE3J5i28rElz8JEoI2A3VFfJrApQH7pDoHzewI/cwjfJA/V08GiGFuhQX9z8toIvZ
+ 9WrE9chEECwTWUxtvarpHQFtKkBMegPURZBbU+RhkuFcYLZxYVQ4TBZLvVk+KPiwnUHLuYQCpq+
+ +/EckPbFBkMPAjZZGE7Gu5beSyEvYlEI8XasBzPU/gAtCzmOWcosqe4kG52kJgbdyXkDPDcOoYc
+ OFnAJQutakXqY3A==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,86 +112,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to our linear_range helpers and remove unused/unsupported
-linux-isms.
+Port over the regulator ops to U-Boot's regulator API. Add back the
+pmic5 mode map using U-Boot dm_regulator_mode API and adjust the
+pmic5_pldo and pmic5_pldo_lv definitions. No functional changes.
 
 Acked-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/power/regulator/qcom-rpmh-regulator.c | 28 +++++++++++++--------------
- 1 file changed, 13 insertions(+), 15 deletions(-)
+ drivers/power/regulator/qcom-rpmh-regulator.c | 158 ++++++++++++++------------
+ 1 file changed, 87 insertions(+), 71 deletions(-)
 
 diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-index d0acee9f558e..089623f3a2b9 100644
+index 2a8e8f9ac444..b716b380c148 100644
 --- a/drivers/power/regulator/qcom-rpmh-regulator.c
 +++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-@@ -102,13 +102,12 @@ struct linear_range {
-  * struct rpmh_vreg_hw_data - RPMh regulator hardware configurations
-  * @regulator_type:		RPMh accelerator type used to manage this
-  *				regulator
-  * @ops:			Pointer to regulator ops callback structure
-- * @voltage_ranges:		The possible ranges of voltages supported by this
-- * 				PMIC regulator type
-- * @n_linear_ranges:		Number of entries in voltage_ranges
-+ * @voltage_range:		The single range of voltages supported by this
-+ *				PMIC regulator type
-  * @n_voltages:			The number of unique voltage set points defined
-- *				by voltage_ranges
-+ *				by voltage_range
-  * @hpm_min_load_uA:		Minimum load current in microamps that requires
-  *				high power mode (HPM) operation.  This is used
-  *				for LDO hardware type regulators only.
-  * @pmic_mode_map:		Array indexed by regulator framework mode
-@@ -119,15 +118,15 @@ struct linear_range {
-  *				in device tree to a regulator framework mode
+@@ -192,87 +192,96 @@ struct rpmh_vreg_init_data {
+  *
+  * Return: 0 on success, errno on failure
   */
- struct rpmh_vreg_hw_data {
- 	enum rpmh_regulator_type		regulator_type;
--	const struct regulator_ops		*ops;
--	const struct linear_range		*voltage_ranges;
--	int					n_linear_ranges;
-+	const struct dm_regulator_ops		*ops;
-+	struct linear_range			voltage_range;
- 	int					n_voltages;
- 	int					hpm_min_load_uA;
--	const int				*pmic_mode_map;
--	unsigned int			      (*of_map_mode)(unsigned int mode);
-+	struct dm_regulator_mode		*pmic_mode_map;
-+	int					n_modes;
-+	unsigned int				(*of_map_mode)(unsigned int mode);
+ static int rpmh_regulator_send_request(struct rpmh_vreg *vreg,
+-			struct tcs_cmd *cmd, bool wait_for_ack)
++				       const struct tcs_cmd *cmd, bool wait_for_ack)
+ {
+ 	int ret;
+ 
+ 	if (wait_for_ack || vreg->always_wait_for_ack)
+-		ret = rpmh_write(vreg->dev, RPMH_ACTIVE_ONLY_STATE, cmd, 1);
++		ret = rpmh_write(vreg->dev->parent, RPMH_ACTIVE_ONLY_STATE, cmd, 1);
+ 	else
+-		ret = rpmh_write_async(vreg->dev, RPMH_ACTIVE_ONLY_STATE, cmd,
+-					1);
++		ret = rpmh_write_async(vreg->dev->parent, RPMH_ACTIVE_ONLY_STATE, cmd, 1);
+ 
+ 	return ret;
+ }
+ 
+-static int _rpmh_regulator_vrm_set_voltage_sel(struct regulator_dev *rdev,
+-				unsigned int selector, bool wait_for_ack)
++static int _rpmh_regulator_vrm_set_value(struct udevice *rdev,
++					 int uv, bool wait_for_ack)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
+ 	struct tcs_cmd cmd = {
+ 		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_VOLTAGE,
+ 	};
+ 	int ret;
++	unsigned int selector;
+ 
+-	/* VRM voltage control register is set with voltage in millivolts. */
+-	cmd.data = DIV_ROUND_UP(regulator_list_voltage_linear_range(rdev,
+-							selector), 1000);
++	selector = (uv - vreg->hw_data->voltage_range.min) / vreg->hw_data->voltage_range.step;
++	cmd.data = DIV_ROUND_UP(vreg->hw_data->voltage_range.min +
++				selector * vreg->hw_data->voltage_range.step, 1000);
+ 
+ 	ret = rpmh_regulator_send_request(vreg, &cmd, wait_for_ack);
+ 	if (!ret)
+-		vreg->voltage_selector = selector;
++		vreg->uv = cmd.data * 1000;
+ 
+ 	return ret;
+ }
+ 
+-static int rpmh_regulator_vrm_set_voltage_sel(struct regulator_dev *rdev,
+-					unsigned int selector)
++static int rpmh_regulator_vrm_set_value(struct udevice *rdev,
++					int uv)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++
++	debug("%s: set_value %d (current %d)\n", rdev->name, uv, vreg->uv);
+ 
+ 	if (vreg->enabled == -EINVAL) {
+ 		/*
+ 		 * Cache the voltage and send it later when the regulator is
+ 		 * enabled or disabled.
+ 		 */
+-		vreg->voltage_selector = selector;
++		vreg->uv = uv;
+ 		return 0;
+ 	}
+ 
+-	return _rpmh_regulator_vrm_set_voltage_sel(rdev, selector,
+-					selector > vreg->voltage_selector);
++	return _rpmh_regulator_vrm_set_value(rdev, uv,
++					uv > vreg->uv);
+ }
+ 
+-static int rpmh_regulator_vrm_get_voltage_sel(struct regulator_dev *rdev)
++static int rpmh_regulator_vrm_get_value(struct udevice *rdev)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
+ 
+-	return vreg->voltage_selector;
++	debug("%s: get_value %d\n", rdev->name, vreg->uv);
++
++	return vreg->uv;
+ }
+ 
+-static int rpmh_regulator_is_enabled(struct regulator_dev *rdev)
++static int rpmh_regulator_is_enabled(struct udevice *rdev)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
+ 
+-	return vreg->enabled;
++	debug("%s: is_enabled %d\n", rdev->name, vreg->enabled);
++
++	return vreg->enabled > 0;
+ }
+ 
+-static int rpmh_regulator_set_enable_state(struct regulator_dev *rdev,
+-					bool enable)
++static int rpmh_regulator_set_enable_state(struct udevice *rdev,
++					   bool enable)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
+ 	struct tcs_cmd cmd = {
+ 		.addr = vreg->addr + RPMH_REGULATOR_REG_ENABLE,
+ 		.data = enable,
+ 	};
+ 	int ret;
+ 
++	debug("%s: set_enable %d (current %d)\n", rdev->name, enable,
++	      vreg->enabled);
++
+ 	if (vreg->enabled == -EINVAL &&
+-	    vreg->voltage_selector != -ENOTRECOVERABLE) {
+-		ret = _rpmh_regulator_vrm_set_voltage_sel(rdev,
+-						vreg->voltage_selector, true);
++	    vreg->uv != -ENOTRECOVERABLE) {
++		ret = _rpmh_regulator_vrm_set_value(rdev,
++						    vreg->uv, true);
+ 		if (ret < 0)
+ 			return ret;
+ 	}
+ 
+@@ -282,47 +291,46 @@ static int rpmh_regulator_set_enable_state(struct regulator_dev *rdev,
+ 
+ 	return ret;
+ }
+ 
+-static int rpmh_regulator_enable(struct regulator_dev *rdev)
+-{
+-	return rpmh_regulator_set_enable_state(rdev, true);
+-}
+-
+-static int rpmh_regulator_disable(struct regulator_dev *rdev)
+-{
+-	return rpmh_regulator_set_enable_state(rdev, false);
+-}
+-
+ static int rpmh_regulator_vrm_set_mode_bypass(struct rpmh_vreg *vreg,
+-					unsigned int mode, bool bypassed)
++					      unsigned int mode, bool bypassed)
+ {
+ 	struct tcs_cmd cmd = {
+ 		.addr = vreg->addr + RPMH_REGULATOR_REG_VRM_MODE,
+ 	};
+-	int pmic_mode;
++	struct dm_regulator_mode *pmic_mode;
++	int i;
+ 
+-	if (mode > REGULATOR_MODE_STANDBY)
++	if (mode > REGULATOR_MODE_HPM)
+ 		return -EINVAL;
+ 
+-	pmic_mode = vreg->hw_data->pmic_mode_map[mode];
+-	if (pmic_mode < 0)
+-		return pmic_mode;
++	for (i = 0; i < vreg->hw_data->n_modes; i++) {
++		pmic_mode = &vreg->hw_data->pmic_mode_map[i];
++		if (pmic_mode->id == mode)
++			break;
++	}
++	if (pmic_mode->id != mode) {
++		printf("Invalid mode %d\n", mode);
++		return -EINVAL;
++	}
+ 
+ 	if (bypassed)
+ 		cmd.data = PMIC4_BOB_MODE_PASS;
+ 	else
+-		cmd.data = pmic_mode;
++		cmd.data = pmic_mode->id;
+ 
+ 	return rpmh_regulator_send_request(vreg, &cmd, true);
+ }
+ 
+-static int rpmh_regulator_vrm_set_mode(struct regulator_dev *rdev,
+-					unsigned int mode)
++static int rpmh_regulator_vrm_set_mode(struct udevice *rdev,
++				       int mode)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
+ 	int ret;
+ 
++	debug("%s: set_mode %d (current %d)\n", rdev->name, mode, vreg->mode);
++
+ 	if (mode == vreg->mode)
+ 		return 0;
+ 
+ 	ret = rpmh_regulator_vrm_set_mode_bypass(vreg, mode, vreg->bypassed);
+@@ -331,51 +339,59 @@ static int rpmh_regulator_vrm_set_mode(struct regulator_dev *rdev,
+ 
+ 	return ret;
+ }
+ 
+-static unsigned int rpmh_regulator_vrm_get_mode(struct regulator_dev *rdev)
++static int rpmh_regulator_vrm_get_mode(struct udevice *rdev)
+ {
+-	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
++	struct rpmh_vreg *vreg = dev_get_priv(rdev);
++
++	debug("%s: get_mode %d\n", rdev->name, vreg->mode);
+ 
+ 	return vreg->mode;
+ }
++static const struct dm_regulator_ops rpmh_regulator_vrm_drms_ops = {
++	.get_value = rpmh_regulator_vrm_get_value,
++	.set_value = rpmh_regulator_vrm_set_value,
++	.set_enable = rpmh_regulator_set_enable_state,
++	.get_enable = rpmh_regulator_is_enabled,
++	.set_mode = rpmh_regulator_vrm_set_mode,
++	.get_mode = rpmh_regulator_vrm_get_mode,
++};
+ 
+-static const struct regulator_ops rpmh_regulator_vrm_drms_ops = {
+-	.enable			= rpmh_regulator_enable,
+-	.disable		= rpmh_regulator_disable,
+-	.is_enabled		= rpmh_regulator_is_enabled,
+-	.set_voltage_sel	= rpmh_regulator_vrm_set_voltage_sel,
+-	.get_voltage_sel	= rpmh_regulator_vrm_get_voltage_sel,
+-	.list_voltage		= regulator_list_voltage_linear_range,
+-	.set_mode		= rpmh_regulator_vrm_set_mode,
+-	.get_mode		= rpmh_regulator_vrm_get_mode,
+-	.get_optimum_mode	= rpmh_regulator_vrm_get_optimum_mode,
++static struct dm_regulator_mode pmic_mode_map_pmic5_ldo[] = {
++	{
++		.id = REGULATOR_MODE_RETENTION,
++		.register_value = PMIC5_LDO_MODE_RETENTION,
++		.name = "PMIC5_LDO_MODE_RETENTION"
++	}, {
++		.id = REGULATOR_MODE_LPM,
++		.register_value = PMIC5_LDO_MODE_LPM,
++		.name = "PMIC5_LDO_MODE_LPM"
++	}, {
++		.id = REGULATOR_MODE_HPM,
++		.register_value = PMIC5_LDO_MODE_HPM,
++		.name = "PMIC5_LDO_MODE_HPM"
++	},
  };
  
- /**
-  * struct rpmh_vreg - individual RPMh regulator data structure encapsulating a
-@@ -148,23 +147,22 @@ struct rpmh_vreg_hw_data {
-  *				not
-  * @bypassed:			Boolean indicating if the regulator is in
-  *				bypass (pass-through) mode or not.  This is
-  *				only used by BOB rpmh-regulator resources.
-- * @voltage_selector:		Selector used for get_voltage_sel() and
-- *				set_voltage_sel() callbacks
-+ * @uv:				Selector used for get_voltage_sel() and
-+ *				set_value() callbacks
-  * @mode:			RPMh VRM regulator current framework mode
-  */
- struct rpmh_vreg {
--	struct device			*dev;
-+	struct udevice			*dev;
- 	u32				addr;
--	struct regulator_desc		rdesc;
- 	const struct rpmh_vreg_hw_data	*hw_data;
- 	bool				always_wait_for_ack;
- 
- 	int				enabled;
- 	bool				bypassed;
--	int				voltage_selector;
--	unsigned int			mode;
-+	int				uv;
-+	int			mode;
+ static const struct rpmh_vreg_hw_data pmic5_pldo = {
+ 	.regulator_type = VRM,
+ 	.ops = &rpmh_regulator_vrm_drms_ops,
+-	.voltage_ranges = (struct linear_range[]) {
+-		REGULATOR_LINEAR_RANGE(1504000, 0, 255, 8000),
+-	},
+-	.n_linear_ranges = 1,
++	.voltage_range = REGULATOR_LINEAR_RANGE(1504000, 0, 255, 8000),
+ 	.n_voltages = 256,
+ 	.hpm_min_load_uA = 10000,
+ 	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
+-	.of_map_mode = rpmh_regulator_pmic4_ldo_of_map_mode,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
  };
  
- /**
-  * struct rpmh_vreg_init_data - initialization data for an RPMh regulator
+ static const struct rpmh_vreg_hw_data pmic5_pldo_lv = {
+ 	.regulator_type = VRM,
+ 	.ops = &rpmh_regulator_vrm_drms_ops,
+-	.voltage_ranges = (struct linear_range[]) {
+-		REGULATOR_LINEAR_RANGE(1504000, 0, 62, 8000),
+-	},
+-	.n_linear_ranges = 1,
++	.voltage_range = REGULATOR_LINEAR_RANGE(1504000, 0, 62, 8000),
+ 	.n_voltages = 63,
+ 	.hpm_min_load_uA = 10000,
+ 	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
+-	.of_map_mode = rpmh_regulator_pmic4_ldo_of_map_mode,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
+ };
+ 
+ #define RPMH_VREG(_name, _resource_name, _hw_data, _supply_name) \
+ { \
 
 -- 
 2.45.2
