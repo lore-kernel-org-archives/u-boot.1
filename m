@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 948CBC3DA45
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 20:51:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 584E9C3DA45
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 21:27:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E119088276;
-	Thu, 11 Jul 2024 22:51:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 757BD87D07;
+	Thu, 11 Jul 2024 23:27:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lAn7Uo5L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AIUZmkF/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 928EE88354; Thu, 11 Jul 2024 22:51:10 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2563E88009; Thu, 11 Jul 2024 23:27:17 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E727C87FC7
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 22:51:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCB4487B77
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 23:27:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46BKp1QQ051739;
- Thu, 11 Jul 2024 15:51:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1720731061;
- bh=vz3nezIvQGoLib1JoO2Lj2KsKgYewqtAVMJt8AiPakM=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=lAn7Uo5LRFs5ulFy4VTFUWVMz79xsth/a44mQORDQIMBdxYTN7Z6sZWMTaF6AR/mT
- 9Ttmfo1bxqGf3kI8zxutP8H3jxfRIX/VWOLEdObnyKswtu+1iVBUMK8nrSuy+iZ9Zr
- SKwq6wRzhDRcrzBUmPpQzvmOyMlrnIjjnqE4fqmI=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46BKp1rI129880
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 11 Jul 2024 15:51:01 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- Jul 2024 15:51:00 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 Jul 2024 15:51:00 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46BKp0Bd038459;
- Thu, 11 Jul 2024 15:51:00 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Martyn Welch <martyn.welch@collabora.com>, Tom Rini <trini@konsulko.com>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>
-CC: Sjoerd Simons <sjoerd@collabora.com>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
-In-Reply-To: <960ce74500b53f9bdd7e608afecc9c1bb8b790e4.camel@collabora.com>
-References: <20240506143846.1252377-1-martyn.welch@collabora.com>
- <20240506143846.1252377-5-martyn.welch@collabora.com>
- <86h6eocmvo.fsf@udb0321960.dhcp.ti.com>
- <960ce74500b53f9bdd7e608afecc9c1bb8b790e4.camel@collabora.com>
-Date: Thu, 11 Jul 2024 15:51:00 -0500
-Message-ID: <86ttgvtzyj.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7035e281970so1012967a34.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 14:27:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1720733233; x=1721338033; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=p4npsEqWrdw7CgOg8m29Ai2uy5PB4kVET0r7FNuzJQg=;
+ b=AIUZmkF/ZO2IgXFY6yNkBxY2cxXtpFG2KNJTMxGrEYe/oZViy1WU3YDpAj3sRfrck4
+ KBRTfBM89mVm7X4KRNj7Is54twxfS1U5wMHIoIp3hBJZ2ZgZqh8d/bOeMoHlfxXc0peB
+ bRCu6Wk6YQxNM4IUJWZwcOHpSoxgphD4thVbI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720733233; x=1721338033;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=p4npsEqWrdw7CgOg8m29Ai2uy5PB4kVET0r7FNuzJQg=;
+ b=qnifR7dNN2fMpGmd8S2p6yjSKjzrnFHqx3mdIk+ML0Ac7l7oC2T/I3f1ubylNaoKhS
+ t3Ow9lALMtqsXh8gBAH1nO0K2NJqXImDTCTnMrKo91fyC8S4om/MViOqixNcpkxM3hMj
+ wOntICXvTCZ/fP8AnFyoCWuYr/jAyX4SElP39GwbGbJOjR7nNVLh5261nP5JxfT9PQMY
+ mq9R2kuK18Oi7TNeYR/3S5KoZqGCzSiI5//OGd4FFllfd8xta3lunnTqfdgcpDIKUnqP
+ pi9ZY+wakl5Abw/aCbcn7yA2ONm+Zp3MmM3C78m2bca2+n5nPxtYH8BXUtnTdkxJJnQO
+ ZIYA==
+X-Gm-Message-State: AOJu0YxTlYXR+FlnVTOjijVyEizz8mzWPO5+2zs1jm7vtB6iDVZP4jp8
+ /fYNNoKXoD0EH3Cj9D1ettOdQy/VCkJz0QUc+4oI2s/UYbZdEIBmJGEpR6vOU00wuDYb2FIY08G
+ DIew0oA==
+X-Google-Smtp-Source: AGHT+IErPvx+c2JYcjNj7x5WyKX2IvgKRZAJvZLVBdsfjKaq3LWYqxly3KVHRcSdASa8mK50BTqEiw==
+X-Received: by 2002:a9d:7695:0:b0:703:66bb:5a1 with SMTP id
+ 46e09a7af769-708b51fa37dmr417020a34.18.1720733233424; 
+ Thu, 11 Jul 2024 14:27:13 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net
+ (fixed-189-203-100-45.totalplay.net. [189.203.100.45])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-70374f882f0sm1340268a34.39.2024.07.11.14.27.12
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jul 2024 14:27:12 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [v2] bootstash: Do not provide a default address for all
+Date: Thu, 11 Jul 2024 15:27:10 -0600
+Message-Id: <20240711212710.2743991-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240703212338.1436606-1-trini@konsulko.com>
+References: <20240703212338.1436606-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,239 +89,256 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Martyn Welch <martyn.welch@collabora.com> writes:
+A valid memory location to stash bootstage information at will be
+architecture dependent. Move the existing defaults to the main Kconfig
+file for this option and set 0x0 as the default only for sandbox.
 
-> On Thu, 2024-05-23 at 15:08 -0500, Jon Humphreys wrote:
->> Martyn Welch <martyn.welch@collabora.com> writes:
->>=20
->> > From: Sjoerd Simons <sjoerd@collabora.com>
->> >=20
->> > Provide config fragments to enable USB host as well as USB gadget
->> > and DFU
->> > support for a53 and r5. This relevant fragment is included into the
->> > am62x EVM a53 defconfig. For the r5, due to the smaller available
->> > size,
->> > the config fragment also disables support for persistent storage to
->> > free
->> > up space for USB support. This fragment needs to be included is DFU
->> > booting is desired.
->> >=20
->> > The CONFIG_DFU_SF option is placed in the defconfig rather than the
->> > fragment as this is known not to be supported on all boards that
->> > can
->> > support DFU.
->> >=20
->> > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
->> > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
->> > ---
->> > Changes in v5:
->> > - Switch to config fragment for a53 most DFU configuration
->> >=20
->> > Changes in v4:
->> > - Move R5 dfu config to a config fragment rather then a full
->> > defconfig
->> > - Don't enable XHCI for the R5 SPL, unneeded
->> >=20
->> > Changes in v3:
->> > - Run savedefconfig to adjust to more recent u-boot
->> >=20
->> > Changes in v2:
->> > - Create a seperate defconfig for R5
->> >=20
->> >=20
->> >=20
->> > =C2=A0configs/am62x_a53_usbdfu.config | 30
->> > ++++++++++++++++++++++++++++++
->> > =C2=A0configs/am62x_evm_a53_defconfig |=C2=A0 2 ++
->> > =C2=A0configs/am62x_r5_usbdfu.config=C2=A0 | 28 ++++++++++++++++++++++=
-++++++
->> > =C2=A03 files changed, 60 insertions(+)
->> > =C2=A0create mode 100644 configs/am62x_a53_usbdfu.config
->> > =C2=A0create mode 100644 configs/am62x_r5_usbdfu.config
->> >=20
->> > diff --git a/configs/am62x_a53_usbdfu.config
->> > b/configs/am62x_a53_usbdfu.config
->> > new file mode 100644
->> > index 0000000000..3a19cf2328
->> > --- /dev/null
->> > +++ b/configs/am62x_a53_usbdfu.config
->> > @@ -0,0 +1,29 @@
->> > +CONFIG_SYS_MALLOC_LEN=3D0x2000000
->> > +CONFIG_SPL_ENV_SUPPORT=3Dy
->> > +CONFIG_SPL_RAM_SUPPORT=3Dy
->> > +CONFIG_SPL_RAM_DEVICE=3Dy
->> > +CONFIG_SPL_USB_GADGET=3Dy
->> > +CONFIG_SPL_DFU=3Dy
->> > +CONFIG_CMD_DFU=3Dy
->> > +CONFIG_CMD_USB=3Dy
->> > +CONFIG_SYSCON=3Dy
->> > +CONFIG_SPL_SYSCON=3Dy
->> > +CONFIG_DFU_MMC=3Dy
->> > +CONFIG_DFU_RAM=3Dy
->> > +CONFIG_SYS_DFU_DATA_BUF_SIZE=3D0x5000
->> > +CONFIG_SYS_DFU_MAX_FILE_SIZE=3D0x800000
->> > +CONFIG_USB=3Dy
->> > +CONFIG_DM_USB_GADGET=3Dy
->> > +CONFIG_SPL_DM_USB_GADGET=3Dy
->> > +CONFIG_USB_XHCI_HCD=3Dy
->> > +CONFIG_USB_XHCI_DWC3=3Dy
->> > +CONFIG_USB_DWC3=3Dy
->> > +CONFIG_USB_DWC3_GENERIC=3Dy
->> > +CONFIG_SPL_USB_DWC3_GENERIC=3Dy
->> > +CONFIG_SPL_USB_DWC3_AM62=3Dy
->> > +CONFIG_USB_DWC3_AM62=3Dy
->> > +CONFIG_USB_GADGET=3Dy
->> > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
->> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
->> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
->> > +CONFIG_USB_GADGET_DOWNLOAD=3Dy
->> > diff --git a/configs/am62x_evm_a53_defconfig
->> > b/configs/am62x_evm_a53_defconfig
->> > index 6c708dcb05..16294a6a79 100644
->> > --- a/configs/am62x_evm_a53_defconfig
->> > +++ b/configs/am62x_evm_a53_defconfig
->> > @@ -68,6 +68,7 @@ CONFIG_SPL_OF_TRANSLATE=3Dy
->> > =C2=A0CONFIG_CLK=3Dy
->> > =C2=A0CONFIG_SPL_CLK=3Dy
->> > =C2=A0CONFIG_CLK_TI_SCI=3Dy
->> > +CONFIG_DFU_SF=3Dy
->> > =C2=A0CONFIG_DMA_CHANNELS=3Dy
->> > =C2=A0CONFIG_TI_K3_NAVSS_UDMA=3Dy
->> > =C2=A0CONFIG_TI_SCI_PROTOCOL=3Dy
->> > @@ -111,3 +112,5 @@ CONFIG_SPL_SYSRESET=3Dy
->> > =C2=A0CONFIG_SYSRESET_TI_SCI=3Dy
->> > =C2=A0CONFIG_FS_FAT_MAX_CLUSTSIZE=3D16384
->> > =C2=A0CONFIG_EFI_SET_TIME=3Dy
->> > +
->> > +#include <configs/am62x_a53_usbdfu.config>
->> > diff --git a/configs/am62x_r5_usbdfu.config
->> > b/configs/am62x_r5_usbdfu.config
->> > new file mode 100644
->> > index 0000000000..772bb2ab93
->> > --- /dev/null
->> > +++ b/configs/am62x_r5_usbdfu.config
->> > @@ -0,0 +1,28 @@
->> > +CONFIG_SPL_ENV_SUPPORT=3Dy
->> > +CONFIG_SYSCON=3Dy
->> > +CONFIG_SPL_SYSCON=3Dy
->> > +CONFIG_SYS_DFU_DATA_BUF_SIZE=3D0x5000
->> > +CONFIG_MISC=3Dy
->> > +CONFIG_USB=3Dy
->> > +CONFIG_DM_USB_GADGET=3Dy
->> > +CONFIG_SPL_DM_USB_GADGET=3Dy
->> > +CONFIG_USB_DWC3=3Dy
->> > +CONFIG_USB_DWC3_GENERIC=3Dy
->> > +CONFIG_SPL_USB_DWC3_GENERIC=3Dy
->> > +CONFIG_SPL_USB_DWC3_AM62=3Dy
->> > +CONFIG_USB_GADGET=3Dy
->> > +CONFIG_SPL_USB_GADGET=3Dy
->> > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
->> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
->> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
->> > +CONFIG_USB_GADGET_DOWNLOAD=3Dy
->> > +CONFIG_SPL_DFU=3Dy
->> > +# CONFIG_SPL_MMC is not set
->> > +# CONFIG_SPL_FS_FAT is not set
->> > +# CONFIG_SPL_LIBDISK_SUPPORT is not set
->> > +# CONFIG_SPL_SPI is not set
->> > +# CONFIG_SPL_SYS_MALLOC is not set
->> > +# CONFIG_CMD_GPT is not set
->> > +# CONFIG_CMD_MMC is not set
->> > +# CONFIG_CMD_FAT is not set
->> > +# CONFIG_MMC_SDHCI is not set
->> > --=20
->> > 2.43.0
->>=20
->> Hi all, it appears that this patch breaks OSPI DFU on the board.=C2=A0 In
->> particular, changing the CONFIG_SYS_DFU_DATA_BUF_SIZE seems to be the
->> culprit.
->>=20
->> I see the error as a DFU timeout when applying capsules.
->>=20
->> =C2=A0 SF: Detected s28hs512t with page size 256 Bytes, erase size 256
->> KiB, total 64 MiB
->> =C2=A0 ############jedec_spi_nor flash@0: flash operation timed out
->> =C2=A0 #DFU write failed
->>=20
->
-> I'm not seeing this failure using the `-next` branch from yesterday
-> (2f96033923).
->
-> I've attempted to use both the `uboot-capsule.bin` produced with and
-> without the DFU config enabled whilst booting the SK-AM62 via DFU and
-> from an SD card. I seem to be consistently getting the following:
->
-> =3D> ext2ls mmc 1:1=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20
-> <DIR>       4096 .=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20
-> <DIR>       4096 ..=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20
-> <DIR>      16384 lost+found=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20
->          1132791 uboot-capsule.bin=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> =3D> load mmc 1:1 ${loadaddr} /uboot-capsule.bin=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> 1132791 bytes read in 57 ms (19 MiB/s)=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> =3D> efidebug capsule update ${loadaddr}=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> ** File not found ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to load EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20
-> ** Unable to write file ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to persist EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> ** Unable to write file ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to persist EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> ** Unable to write file ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to persist EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> ** Unable to write file ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to persist EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> ** Unable to write file ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to persist EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB,
-> total 64 Mi
-> B=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> ########################################################=20=20=20=20=20=
-=20=20=20=20=20=20=20=20
-> ** Unable to write file ubootefi.var **=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> Failed to persist EFI variables=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-> =3D>
->
-> TBH, I'm not sure if this is good or bad at this point, but I'm not
-> seeing the error that you reported. As can be seen above, I don't have
-> a `ubootefi.var` file, but then I don't boot using EFI mechanisms, so I
-> guess that's expected?
->
-> But then, the commands I've used above aren't applying the capsule
-> either right?
->
-> Martyn
->
->> Jon
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- Seeing that BOOTSTAGE_STASH_ADDR did not depend on BOOTSTAGE_STASH in
+  turn lead to discovering that (minor) BOOTSTAGE_STASH_SIZE was also
+  missing a depends on line and then that a number of places built code
+  with BOOTSTAGE_STASH_ADDR=0x0 as a compiles-but-likely-fails option.
+  Rework a number of spots to guard usage around BOOTSTAGE_STASH being
+  enabled.
+---
+ arch/arm/mach-rockchip/tpl.c      |  4 ++--
+ arch/arm/mach-stm32mp/Kconfig.13x |  3 ---
+ arch/arm/mach-stm32mp/Kconfig.15x |  3 ---
+ arch/arm/mach-stm32mp/Kconfig.25x |  3 ---
+ arch/x86/cpu/cpu.c                |  2 ++
+ boot/Kconfig                      |  6 +++++-
+ cmd/bootstage.c                   |  8 +++++++-
+ common/board_f.c                  |  2 ++
+ common/bootstage.c                |  2 ++
+ common/spl/spl.c                  |  2 ++
+ include/bootstage.h               | 14 ++++++++------
+ 11 files changed, 30 insertions(+), 19 deletions(-)
 
-Hi Martyn, against upstream/next, I no longer see the failure.  Thanks for
-looking into it.
+diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
+index 50f04f9474a0..a47cba5163ab 100644
+--- a/arch/arm/mach-rockchip/tpl.c
++++ b/arch/arm/mach-rockchip/tpl.c
+@@ -92,10 +92,10 @@ void board_init_f(ulong dummy)
+ int board_return_to_bootrom(struct spl_image_info *spl_image,
+ 			    struct spl_boot_device *bootdev)
+ {
+-#ifdef CONFIG_BOOTSTAGE_STASH
+-	int ret;
++	int __maybe_unused ret;
+ 
+ 	bootstage_mark_name(BOOTSTAGE_ID_END_TPL, "end tpl");
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ 	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+ 			      CONFIG_BOOTSTAGE_STASH_SIZE);
+ 	if (ret)
+diff --git a/arch/arm/mach-stm32mp/Kconfig.13x b/arch/arm/mach-stm32mp/Kconfig.13x
+index 4d74b35055b8..bc8b3f8cf77f 100644
+--- a/arch/arm/mach-stm32mp/Kconfig.13x
++++ b/arch/arm/mach-stm32mp/Kconfig.13x
+@@ -28,9 +28,6 @@ config PRE_CON_BUF_ADDR
+ config PRE_CON_BUF_SZ
+ 	default 4096
+ 
+-config BOOTSTAGE_STASH_ADDR
+-	default 0xC3000000
+-
+ if BOOTCOUNT_GENERIC
+ config SYS_BOOTCOUNT_SINGLEWORD
+ 	default y
+diff --git a/arch/arm/mach-stm32mp/Kconfig.15x b/arch/arm/mach-stm32mp/Kconfig.15x
+index d99aa9fd694a..42da36a73e85 100644
+--- a/arch/arm/mach-stm32mp/Kconfig.15x
++++ b/arch/arm/mach-stm32mp/Kconfig.15x
+@@ -86,9 +86,6 @@ config PRE_CON_BUF_ADDR
+ config PRE_CON_BUF_SZ
+ 	default 4096
+ 
+-config BOOTSTAGE_STASH_ADDR
+-	default 0xC3000000
+-
+ if BOOTCOUNT_GENERIC
+ config SYS_BOOTCOUNT_SINGLEWORD
+ 	default y
+diff --git a/arch/arm/mach-stm32mp/Kconfig.25x b/arch/arm/mach-stm32mp/Kconfig.25x
+index 2c0f691f8b54..7d2d8171845b 100644
+--- a/arch/arm/mach-stm32mp/Kconfig.25x
++++ b/arch/arm/mach-stm32mp/Kconfig.25x
+@@ -24,9 +24,6 @@ config PRE_CON_BUF_ADDR
+ config PRE_CON_BUF_SZ
+ 	default 4096
+ 
+-config BOOTSTAGE_STASH_ADDR
+-	default 0x87000000
+-
+ if DEBUG_UART
+ 
+ config DEBUG_UART_BOARD_INIT
+diff --git a/arch/x86/cpu/cpu.c b/arch/x86/cpu/cpu.c
+index c8433360f28e..7ce6443cc77e 100644
+--- a/arch/x86/cpu/cpu.c
++++ b/arch/x86/cpu/cpu.c
+@@ -75,8 +75,10 @@ int __weak x86_cleanup_before_linux(void)
+ 	ret = mp_park_aps();
+ 	if (ret)
+ 		return log_msg_ret("park", ret);
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ 	bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+ 			CONFIG_BOOTSTAGE_STASH_SIZE);
++#endif
+ 
+ 	return 0;
+ }
+diff --git a/boot/Kconfig b/boot/Kconfig
+index ffcae840a506..ba8bddd14219 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1002,13 +1002,17 @@ config BOOTSTAGE_STASH
+ 
+ config BOOTSTAGE_STASH_ADDR
+ 	hex "Address to stash boot timing information"
+-	default 0x0
++	depends on BOOTSTAGE_STASH
++	default 0xC3000000 if STM32MP13X || STM32MP15X
++	default 0x87000000 if STM32MP25X
++	default 0x0 if SANDBOX
+ 	help
+ 	  Provide an address which will not be overwritten by the OS when it
+ 	  starts, so that it can read this information when ready.
+ 
+ config BOOTSTAGE_STASH_SIZE
+ 	hex "Size of boot timing stash region"
++	depends on BOOTSTAGE_STASH
+ 	default 0x1000
+ 	help
+ 	  This should be large enough to hold the bootstage stash. A value of
+diff --git a/cmd/bootstage.c b/cmd/bootstage.c
+index 5246924f39a4..4ae09a6fd03d 100644
+--- a/cmd/bootstage.c
++++ b/cmd/bootstage.c
+@@ -15,6 +15,7 @@ static int do_bootstage_report(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return 0;
+ }
+ 
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ static int get_base_size(int argc, char *const argv[], ulong *basep,
+ 			 ulong *sizep)
+ {
+@@ -58,11 +59,14 @@ static int do_bootstage_stash(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	return 0;
+ }
++#endif
+ 
+ static struct cmd_tbl cmd_bootstage_sub[] = {
+ 	U_BOOT_CMD_MKENT(report, 2, 1, do_bootstage_report, "", ""),
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ 	U_BOOT_CMD_MKENT(stash, 4, 0, do_bootstage_stash, "", ""),
+ 	U_BOOT_CMD_MKENT(unstash, 4, 0, do_bootstage_stash, "", ""),
++#endif
+ };
+ 
+ /*
+@@ -91,6 +95,8 @@ U_BOOT_CMD(bootstage, 4, 1, do_boostage,
+ 	"Boot stage command",
+ 	" - check boot progress and timing\n"
+ 	"report                      - Print a report\n"
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ 	"stash [<start> [<size>]]    - Stash data into memory\n"
+-	"unstash [<start> [<size>]]  - Unstash data from memory"
++	"unstash [<start> [<size>]]  - Unstash data from memory\n"
++#endif
+ );
+diff --git a/common/board_f.c b/common/board_f.c
+index 212ffb3090b2..37ae1641f1f0 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -809,6 +809,7 @@ static int initf_bootstage(void)
+ 	ret = bootstage_init(!from_spl);
+ 	if (ret)
+ 		return ret;
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ 	if (from_spl) {
+ 		const void *stash = map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR,
+ 					       CONFIG_BOOTSTAGE_STASH_SIZE);
+@@ -819,6 +820,7 @@ static int initf_bootstage(void)
+ 			return ret;
+ 		}
+ 	}
++#endif
+ 
+ 	bootstage_mark_name(BOOTSTAGE_ID_START_UBOOT_F, "board_init_f");
+ 
+diff --git a/common/bootstage.c b/common/bootstage.c
+index fb6befcbc4a8..5e6462cd0a34 100644
+--- a/common/bootstage.c
++++ b/common/bootstage.c
+@@ -501,6 +501,7 @@ int bootstage_unstash(const void *base, int size)
+ 	return 0;
+ }
+ 
++#if IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
+ int _bootstage_stash_default(void)
+ {
+ 	return bootstage_stash(map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR, 0),
+@@ -514,6 +515,7 @@ int _bootstage_unstash_default(void)
+ 
+ 	return bootstage_unstash(stash, CONFIG_BOOTSTAGE_STASH_SIZE);
+ }
++#endif
+ 
+ int bootstage_get_size(void)
+ {
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 7794ddccade1..47db4ead5050 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -472,11 +472,13 @@ static int spl_common_init(bool setup_malloc)
+ 		      ret);
+ 		return ret;
+ 	}
++#if CONFIG_IS_ENABLED(BOOTSTAGE)
+ 	if (!u_boot_first_phase()) {
+ 		ret = bootstage_unstash_default();
+ 		if (ret)
+ 			log_debug("Failed to unstash bootstage: ret=%d\n", ret);
+ 	}
++#endif
+ 	bootstage_mark_name(get_bootstage_id(true),
+ 			    spl_phase_name(spl_phase()));
+ #if CONFIG_IS_ENABLED(LOG)
+diff --git a/include/bootstage.h b/include/bootstage.h
+index f4e77b09d747..2d4987f31414 100644
+--- a/include/bootstage.h
++++ b/include/bootstage.h
+@@ -462,18 +462,20 @@ int _bootstage_unstash_default(void);
+ 
+ static inline int bootstage_stash_default(void)
+ {
+-	if (CONFIG_IS_ENABLED(BOOTSTAGE) && IS_ENABLED(CONFIG_BOOTSTAGE_STASH))
+-		return _bootstage_stash_default();
+-
++#if CONFIG_IS_ENABLED(BOOTSTAGE) && IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
++	return _bootstage_stash_default();
++#else
+ 	return 0;
++#endif
+ }
+ 
+ static inline int bootstage_unstash_default(void)
+ {
+-	if (CONFIG_IS_ENABLED(BOOTSTAGE) && IS_ENABLED(CONFIG_BOOTSTAGE_STASH))
+-		return _bootstage_unstash_default();
+-
++#if CONFIG_IS_ENABLED(BOOTSTAGE) && IS_ENABLED(CONFIG_BOOTSTAGE_STASH)
++	return _bootstage_unstash_default();
++#else
+ 	return 0;
++#endif
+ }
+ 
+ /* Helper macro for adding a bootstage to a line of code */
+-- 
+2.34.1
 
-Jon
