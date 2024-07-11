@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D7FEC3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E161C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:48:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C99B88756;
-	Thu, 11 Jul 2024 18:46:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0FB78875F;
+	Thu, 11 Jul 2024 18:46:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wl/iQ62A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LE5ikNCP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C105F8870D; Thu, 11 Jul 2024 18:46:55 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id B299D8875F; Thu, 11 Jul 2024 18:46:56 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82FDA87E50
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:46:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92EF2883CE
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:46:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a77d85f7fa3so170875466b.0
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 09:46:53 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-59559ea9cfdso1437703a12.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 09:46:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720716413; x=1721321213; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1720716414; x=1721321214; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=j83FX+V4p5gP/a66drZv7nLTJA0We1N2VitHfXVN/sc=;
- b=Wl/iQ62AowjI21MXy15qk3yPN8BFZUMGwjFGCfw2hLGpica9Ic/4Ok7faoPAk16VQn
- 3sgV4UmEP3ZOTmjOi1vANa5butLXoeyi4X5JoL5SKkMBH88zVxbJLwIpVllb+C1gM2Nq
- uueZjEkStm0knGGKbysay/ctxLmx3+V+J8LeA9AR0NTi55IG53hC7X03txp/vPaN496d
- 9BiOnAeGVJLOF3ehVf1GSQ8H8DZFqOvVkf//EuUwgLbxIOHDeUj7hFP+hBXZQITwUsWH
- qIroEIjACUoobM2NGP4bSL0GT9NhLAtbmAFL1LtnRvnLOlVFUPW/pbd1mOf7Didk7Tfl
- FWUQ==
+ :reply-to; bh=gpCQH0xF7r1C45qbWyvMYPCvevH2LoiD4m7Hi5vCVgU=;
+ b=LE5ikNCPmTSkyAwHOLkJYYVKshzyR7Jge4AShOPmkdzeCnfLv6qU6xA+F/KGYsPDSE
+ 5TiqloAMIP0T9wnjXLQaj6f2CKesJ6VF1tqPikBhXpw5QSKiXGl24u9Cq4/e2dUv54qH
+ gCEmRd5ZiCB7/ZCTTFUZZWKnG5W0QPafacXW+52bIJ30AWG20vIbQUjnoHyC5PtmCgsG
+ p0wdJxh1XV0MaByaJ3MWbJEAjszxO6HOVi8LUgg9UWeoahZEyR7/L9xdrYl8vNIGsAvr
+ hDcBbdHBy9azRAOGxI87hbqjMFvmjhB7aa/usDumPIRcPz5nTL6WKKk45AekRycr1FgO
+ +J9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720716413; x=1721321213;
+ d=1e100.net; s=20230601; t=1720716414; x=1721321214;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j83FX+V4p5gP/a66drZv7nLTJA0We1N2VitHfXVN/sc=;
- b=UAE5OkwWCVR9P63O+DgWsifZwaObKDiZPxDRxJQNWX/1w239y4Oouv0PrsdYM9p2o8
- I5LDwAKEiwVmYeRUmiaw1XJUwGG068PMiubgwX1afSCtZTw7HWHD4xgxqfz9pDgf0Ev0
- pPiEOZs1IN50uR8/rm8JzJ+lGXkVimsXwIKYGWh0/rLr2xMKITAF7MWy+adxp/NI0sBE
- xcfnLn6wsvLg1csjbfwHhKTAyMoESYuLACE/14QvkHs52kA017G1/10M0Atel/XL222J
- Q1k5HUek3Chn7oDuWsjPD0aqHCM3UeGOzyFRnQNHRB8PZK852Pr43MfcWZbCqIb9NSr5
- 0SnA==
-X-Gm-Message-State: AOJu0Yyb0dCbBIfEvYLPmtVX+2Y/urfvfQONQnTRQWokYGe0oEmjnpf0
- ZBRqxASqxGEFZZoCafgX82HriAbC+5W7I4vIBwr6iAtnamUOxPsUV/u9gibAiz8KAJQh34GIAoT
- +
-X-Google-Smtp-Source: AGHT+IGHlxTxLeD7eNchbp8vVtBGnk3B5c4/4swhedyhiZpBDTSfSaBpRpgvHt4vPfjSCs8rSkfBWA==
-X-Received: by 2002:a17:906:3387:b0:a75:1923:eb2e with SMTP id
- a640c23a62f3a-a799cc54286mr16116366b.14.1720716412986; 
- Thu, 11 Jul 2024 09:46:52 -0700 (PDT)
+ bh=gpCQH0xF7r1C45qbWyvMYPCvevH2LoiD4m7Hi5vCVgU=;
+ b=Tm/3scBMEIHcVaW73F9fO1f//54jXIuVNfF5BuIqF/BlHCETdn7cUf+IHFUaKxPpMD
+ 4zWiQBe56xGvOem45YWlBOPvVXFtiaSeJ5TXY6gyDLpLfKn91HeaexBrdtgihp2EKME9
+ Tzqd4DxxNIdAWoTg/QosBP5lTikog8rLk3US6gp4hnrlqUgimIdOSpexKVv70eLC7pcf
+ oWPbCMm7lOQrGEtOlzcbcOa4ZnncVk223bPN9lDy/Y7foTL8DAa/pcepxg8l1vhyEV3D
+ JwxzDXLgGMVY/2sDNTuPfVm1fYegZ5jermIE96fq2ObDGIgma9VIae2FRG6MzFJ3bnCZ
+ A63Q==
+X-Gm-Message-State: AOJu0YwNmfevzTOtkb42CXd8ewNDRm4HiZsDgvgdQYAOca7V26SISjkO
+ 3EZ+wsT+ywd5HaFWSEF7p1IInl7QDUhb5ZN4BrYlx3Q9oG+cmk3qEBsA/cST8Tw=
+X-Google-Smtp-Source: AGHT+IFfN76pPk7dI7+SI5qEgFXticTZ0JJT4QouRiZmDuTNstZjE8H7EEiGLRR5L6O4E8tVxoiv0w==
+X-Received: by 2002:a17:906:fcb1:b0:a6f:bf5d:b365 with SMTP id
+ a640c23a62f3a-a780b6fe485mr691863366b.33.1720716414054; 
+ Thu, 11 Jul 2024 09:46:54 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a780a8545adsm268454166b.159.2024.07.11.09.46.52
+ a640c23a62f3a-a780a8545adsm268454166b.159.2024.07.11.09.46.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 09:46:52 -0700 (PDT)
+ Thu, 11 Jul 2024 09:46:53 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 11 Jul 2024 18:46:41 +0200
-Subject: [PATCH v5 09/23] soc: qcom: rpmh-rsc: adjust probe for U-Boot
+Date: Thu, 11 Jul 2024 18:46:42 +0200
+Subject: [PATCH v5 10/23] soc: qcom: rpmh-rsc: remaining U-Boot API changes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240711-b4-qcom-rpmh-v5-9-fbf04ce6a7e8@linaro.org>
+Message-Id: <20240711-b4-qcom-rpmh-v5-10-fbf04ce6a7e8@linaro.org>
 References: <20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org>
 In-Reply-To: <20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,21 +78,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8710;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5823;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=Ky0fOUtI91makbTMhsF7p8QKbRgcTL3KEIaTmSwOHZU=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmkAxupGpCBb39/oEwcrHo8mrDNOXlCgZSTlVOz
- lDRzZIIZAWJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpAMbgAKCRAFgzErGV9k
- tixsD/9987oOnNZXjh8c/YrGEyihFheQdTVwh7IbJeimx72UwtVsOx+M+Ux8riHwJBKoZK5xJpB
- Ub+El1zsk1nNd4QqGevwvbnf+K3sjWShIeiMA/mHLwOshXAGEGnBM6T6t1TjZBXpJdvWSka+qKp
- TJ122zOrkcyccDa8Ho8t1sCeerujZDh4x08XQx/o/jLaiI8dfcGY9VZ78WLilNJSKA2skvy7Oc7
- uD652z/0yQHRIstB/Wqx2SR2i/1DeKrasdOzD2RulE1pXnnJs3nafr+IZww0QDDq6O+/Rd5FSzx
- 1ykeuzRMSf1oCpPm/NJ5Y2QuKFxMg0zyHzCsHbxgwLQNiDZ04WBxcDJUcs3zh91s0O5DjT/BPT9
- SDoaobuVAG65tb18q/7BUk4uJLA9xkOwxqDyOcRv+HojLjA5dDvxhrruCSdUT3w23IoCb0lEkfW
- 5Mp/ALadT4NCwL10iaolXfySE/myClm/oDg8377edieOIKK106B2OuoApoCBJtIdw8haRGASQs3
- +GBsJxCYCYTpxSdPHQkfFzpLF8H5TIdDCNACAjXEkYxLadgDKKJ/0ZnFC01iF4rAZiGK+oogjTm
- u+pdluzDqJq4tF2HLn1kbhiYLROFM5fx5tGpOORmnn/rdTLew/Ieaeh7wqpJVLqETIN7nxciZhM
- wFUaIBiafJmB6Vw==
+ bh=GhVJ5Qiy7a0vsfphlw+CERSm/D7vS8KmSmDS9bP0sTk=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmkAxvOqftuWmuRK6sCn2ZyqjBhabpr9Uyu6zI5
+ gLUrT8Pb02JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpAMbwAKCRAFgzErGV9k
+ tlv1D/0aa4KJVzQA+lv2rkBL+LmOqcWFtr5SmkDp8GtjnKzSx4jKbq+67Scq1xz+EnKjR6ahLDl
+ YExrh0rkFBuBJwm9pnruVk85fTuFCy954I40msU5W0SX6lU4hXnmjjlaOd9mc6wCGGI+GlVwe2O
+ 3TQ1n0EWgR/5dUrnBVoEOVSk3VlRIWHso2t7EfSjSphMlMAwtoEmbafHBS+/3U4UlUWN2pcUPr3
+ RyYev6V9BOgeuCOticcolgSeLQwYK6mQDZzsQcnZt1uRMA0jKTAvETtLo5fAsushDIMpOnm6gBt
+ ACNCXfD8Wt2vkpSoQctw+D2ZBpHScZirKz1LkA+unTVOlsMv4YNMh/iBEtTAg/u1nQX36JFeWMJ
+ 1s2Yp+RjoDB2RyvZWy59nzQhJDenjsI8N6zKSEz0vxqSBxhb/gmZKf2DqP6fhfEw4irbgOaJtVy
+ biUQpZFD6mdOJA9w4ltYlTEkeR3tEpQll78YsRXKVGNLw07AvHr+UVVoSe1FcQZbk/boJBb6Iq/
+ xSWh3hlhcVDlzMj1Dz1kNRCQs7wHXZ5DzpXK6t7Go55LcYe/Ly2Nvoqk9V1TuOGEXujOFBLAx8E
+ Uf4Kv5+L0WnjAtdw63NMTSnCLxnY+BQF+PnL//d6OtLtL+k9wjkwsDRqG5arD4+H41Y7fqFw/Lj
+ PxxXh9iE5GJDINw==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,306 +111,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rework the rpmh-rsc initialization to use U-Boot's driver model and
-initialize cmd-db.
+Minor adjustments to fix building with U-Boot and work correctly as a
+synchronous driver without interrupts. RPMh is fast enough that we can
+get away with just firing off requests and assuming they complete.
+
+U-Boot behaviour changes are annotated with a "U-Boot:" comment.
 
 Acked-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/soc/qcom/rpmh-internal.h |  14 ++--
- drivers/soc/qcom/rpmh-rsc.c      | 143 +++++++++++++--------------------------
- 2 files changed, 50 insertions(+), 107 deletions(-)
+ drivers/soc/qcom/rpmh-rsc.c | 78 +++++++++++++++++----------------------------
+ 1 file changed, 29 insertions(+), 49 deletions(-)
 
-diff --git a/drivers/soc/qcom/rpmh-internal.h b/drivers/soc/qcom/rpmh-internal.h
-index 12c5b8d9cf86..ac8f6c35a7a4 100644
---- a/drivers/soc/qcom/rpmh-internal.h
-+++ b/drivers/soc/qcom/rpmh-internal.h
-@@ -7,17 +7,18 @@
- #ifndef __RPM_INTERNAL_H__
- #define __RPM_INTERNAL_H__
- 
- #include <linux/bitmap.h>
--#include <linux/wait.h>
- #include <soc/qcom/tcs.h>
- 
- #define TCS_TYPE_NR			4
- #define MAX_CMDS_PER_TCS		16
- #define MAX_TCS_PER_TYPE		3
- #define MAX_TCS_NR			(MAX_TCS_PER_TYPE * TCS_TYPE_NR)
- #define MAX_TCS_SLOTS			(MAX_CMDS_PER_TCS * MAX_TCS_PER_TYPE)
- 
-+#define USEC_PER_SEC			1000000UL
-+
- struct rsc_drv;
- 
- /**
-  * struct tcs_group: group of Trigger Command Sets (TCS) to send state requests
-@@ -63,10 +64,9 @@ struct tcs_group {
-  */
- struct rpmh_request {
- 	struct tcs_request msg;
- 	struct tcs_cmd cmd[MAX_RPMH_PAYLOAD];
--	struct completion *completion;
--	const struct device *dev;
-+	const struct udevice *dev;
- 	bool needs_free;
- };
- 
- /**
-@@ -78,9 +78,8 @@ struct rpmh_request {
-  * @batch_cache: Cache sleep and wake requests sent as batch
-  */
- struct rpmh_ctrlr {
- 	struct list_head cache;
--	spinlock_t cache_lock;
- 	bool dirty;
- 	struct list_head batch_cache;
- };
- 
-@@ -122,17 +121,12 @@ struct rsc_drv {
- 	void __iomem *base;
- 	void __iomem *tcs_base;
- 	int id;
- 	int num_tcs;
--	struct notifier_block rsc_pm;
--	struct notifier_block genpd_nb;
--	atomic_t cpus_in_pm;
- 	struct tcs_group tcs[TCS_TYPE_NR];
- 	DECLARE_BITMAP(tcs_in_use, MAX_TCS_NR);
--	spinlock_t lock;
--	wait_queue_head_t tcs_wait;
- 	struct rpmh_ctrlr client;
--	struct device *dev;
-+	struct udevice *dev;
- 	struct rsc_ver ver;
- 	u32 *regs;
- };
- 
 diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index c09214552cfb..d4ef88dda184 100644
+index d4ef88dda184..566fa16baba9 100644
 --- a/drivers/soc/qcom/rpmh-rsc.c
 +++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -386,20 +386,20 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
+@@ -134,16 +134,8 @@ enum {
+  *  |                      ......                       |
+  *  +---------------------------------------------------+
+  */
  
- 	return 0;
- }
- 
--static int rpmh_probe_tcs_config(struct platform_device *pdev, struct rsc_drv *drv)
-+static int rpmh_probe_tcs_config(struct udevice *dev, struct rsc_drv *drv)
- {
- 	struct tcs_type_config {
- 		u32 type;
- 		u32 n;
- 	} tcs_cfg[TCS_TYPE_NR] = { { 0 } };
--	struct device_node *dn = pdev->dev.of_node;
-+	ofnode dn = dev_ofnode(dev);
- 	u32 config, max_tcs, ncpt, offset;
- 	int i, ret, n, st = 0;
- 	struct tcs_group *tcs;
- 
--	ret = of_property_read_u32(dn, "qcom,tcs-offset", &offset);
-+	ret = ofnode_read_u32(dn, "qcom,tcs-offset", &offset);
- 	if (ret)
- 		return ret;
- 	drv->tcs_base = drv->base + offset;
- 
-@@ -411,24 +411,15 @@ static int rpmh_probe_tcs_config(struct platform_device *pdev, struct rsc_drv *d
- 
- 	ncpt = config & (DRV_NCPT_MASK << DRV_NCPT_SHIFT);
- 	ncpt = ncpt >> DRV_NCPT_SHIFT;
- 
--	n = of_property_count_u32_elems(dn, "qcom,tcs-config");
--	if (n != 2 * TCS_TYPE_NR)
--		return -EINVAL;
-+	n = ofnode_read_u32_array(dn, "qcom,tcs-config", (u32 *)tcs_cfg, 2 * TCS_TYPE_NR);
-+	if (n < 0) {
-+		log_err("RPMh: %s: error reading qcom,tcs-config %d\n", dev->name, n);
-+		return n;
-+	}
- 
- 	for (i = 0; i < TCS_TYPE_NR; i++) {
--		ret = of_property_read_u32_index(dn, "qcom,tcs-config",
--						 i * 2, &tcs_cfg[i].type);
--		if (ret)
--			return ret;
--		if (tcs_cfg[i].type >= TCS_TYPE_NR)
--			return -EINVAL;
+-#define USECS_TO_CYCLES(time_usecs)			\
+-	xloops_to_cycles((time_usecs) * 0x10C7UL)
 -
--		ret = of_property_read_u32_index(dn, "qcom,tcs-config",
--						 i * 2 + 1, &tcs_cfg[i].n);
--		if (ret)
--			return ret;
- 		if (tcs_cfg[i].n > MAX_TCS_PER_TYPE)
- 			return -EINVAL;
+-static inline unsigned long xloops_to_cycles(u64 xloops)
+-{
+-	return (xloops * loops_per_jiffy * HZ) >> 32;
+-}
+-
+ static u32 rpmh_rsc_reg_offset_ver_2_7[] = {
+ 	[RSC_DRV_TCS_OFFSET]		= 672,
+ 	[RSC_DRV_CMD_OFFSET]		= 20,
+ 	[DRV_SOLVER_CONFIG]		= 0x04,
+@@ -248,37 +240,18 @@ static void write_tcs_reg_sync(const struct rsc_drv *drv, int reg, int tcs_id,
+  */
+ static struct tcs_group *get_tcs_for_msg(struct rsc_drv *drv,
+ 					 const struct tcs_request *msg)
+ {
+-	int type;
+-	struct tcs_group *tcs;
+-
+-	switch (msg->state) {
+-	case RPMH_ACTIVE_ONLY_STATE:
+-		type = ACTIVE_TCS;
+-		break;
+-	case RPMH_WAKE_ONLY_STATE:
+-		type = WAKE_TCS;
+-		break;
+-	case RPMH_SLEEP_STATE:
+-		type = SLEEP_TCS;
+-		break;
+-	default:
++	/*
++	 * U-Boot: since we're single threaded and running synchronously we can
++	 * just always used the first active TCS.
++	 */
++	if (msg->state != RPMH_ACTIVE_ONLY_STATE) {
++		log_err("WARN: only ACTIVE_ONLY state supported\n");
+ 		return ERR_PTR(-EINVAL);
  	}
  
-@@ -457,43 +448,39 @@ static int rpmh_probe_tcs_config(struct platform_device *pdev, struct rsc_drv *d
+-	/*
+-	 * If we are making an active request on a RSC that does not have a
+-	 * dedicated TCS for active state use, then re-purpose a wake TCS to
+-	 * send active votes. This is safe because we ensure any active-only
+-	 * transfers have finished before we use it (maybe by running from
+-	 * the last CPU in PM code).
+-	 */
+-	tcs = &drv->tcs[type];
+-	if (msg->state == RPMH_ACTIVE_ONLY_STATE && !tcs->num_tcs)
+-		tcs = &drv->tcs[WAKE_TCS];
+-
+-	return tcs;
++	return &drv->tcs[ACTIVE_TCS];
+ }
  
+ /**
+  * __tcs_buffer_write() - Write to TCS hardware from a request; don't trigger.
+@@ -298,11 +271,8 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
+ 	u32 cmd_enable = 0;
+ 	struct tcs_cmd *cmd;
+ 	int i, j;
+ 
+-	/* Convert all commands to RR when the request has wait_for_compl set */
+-	cmd_msgid |= msg->wait_for_compl ? CMD_MSGID_RESP_REQ : 0;
+-
+ 	for (i = 0, j = cmd_id; i < msg->num_cmds; i++, j++) {
+ 		cmd = &msg->cmds[i];
+ 		cmd_enable |= BIT(j);
+ 		msgid = cmd_msgid;
+@@ -314,9 +284,11 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
+ 
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, j, msgid);
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, j, cmd->addr);
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
+-		trace_rpmh_send_msg(drv, tcs_id, msg->state, j, msgid, cmd);
++		debug("tcs(m): %d [%s] cmd(n): %d msgid: %#x addr: %#x data: %#x complete: %d\n",
++		      tcs_id, msg->state == RPMH_ACTIVE_ONLY_STATE ? "active" : "?", j, msgid,
++		      cmd->addr, cmd->data, cmd->wait);
+ 	}
+ 
+ 	cmd_enable |= read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id);
+ 	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, cmd_enable);
+@@ -346,34 +318,28 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
+  */
+ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
+ {
+ 	struct tcs_group *tcs;
+-	int tcs_id;
+-
+-	might_sleep();
++	int tcs_id, i;
++	u32 addr;
+ 
+ 	tcs = get_tcs_for_msg(drv, msg);
+ 	if (IS_ERR(tcs))
+ 		return PTR_ERR(tcs);
+ 
+-	spin_lock_irq(&drv->lock);
+-
+-	/* Wait forever for a free tcs. It better be there eventually! */
+-	wait_event_lock_irq(drv->tcs_wait,
+-			    (tcs_id = claim_tcs_for_req(drv, tcs, msg)) >= 0,
+-			    drv->lock);
++	/* u-boot is single-threaded, always use the first TCS as we'll never conflict */
++	tcs_id = tcs->offset;
+ 
+ 	tcs->req[tcs_id - tcs->offset] = msg;
+-	set_bit(tcs_id, drv->tcs_in_use);
++	generic_set_bit(tcs_id, drv->tcs_in_use);
+ 	if (msg->state == RPMH_ACTIVE_ONLY_STATE && tcs->type != ACTIVE_TCS) {
+ 		/*
+ 		 * Clear previously programmed WAKE commands in selected
+ 		 * repurposed TCS to avoid triggering them. tcs->slots will be
+ 		 * cleaned from rpmh_flush() by invoking rpmh_rsc_invalidate()
+ 		 */
+ 		write_tcs_reg_sync(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, 0);
+ 	}
+-	spin_unlock_irq(&drv->lock);
+ 
+ 	/*
+ 	 * These two can be done after the lock is released because:
+ 	 * - We marked "tcs_in_use" under lock.
+@@ -383,8 +349,22 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
+ 	 *   of __tcs_set_trigger() below.
+ 	 */
+ 	__tcs_buffer_write(drv, tcs_id, 0, msg);
+ 
++	/* U-Boot: Now wait for the TCS to be cleared, indicating that we're done */
++	for (i = 0; i < USEC_PER_SEC; i++) {
++		addr = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], i, 0);
++		if (addr != msg->cmds[0].addr)
++			break;
++		udelay(1);
++	}
++
++	if (i == USEC_PER_SEC) {
++		log_err("%s: error writing %#x to %d:%#x\n", drv->name,
++			msg->cmds[0].addr, tcs_id, drv->regs[RSC_DRV_CMD_ADDR]);
++		return -EINVAL;
++	}
++
  	return 0;
  }
  
--static int rpmh_rsc_probe(struct platform_device *pdev)
-+static int rpmh_rsc_bind(struct udevice *dev)
- {
--	struct device_node *dn = pdev->dev.of_node;
--	struct rsc_drv *drv;
--	char drv_id[10] = {0};
--	int ret, irq;
--	u32 solver_config;
--	u32 rsc_id;
-+	int ret;
- 
--	/*
--	 * Even though RPMh doesn't directly use cmd-db, all of its children
--	 * do. To avoid adding this check to our children we'll do it now.
--	 */
--	ret = cmd_db_ready();
--	if (ret) {
--		if (ret != -EPROBE_DEFER)
--			dev_err(&pdev->dev, "Command DB not available (%d)\n",
--									ret);
--		return ret;
--	}
--
--	drv = devm_kzalloc(&pdev->dev, sizeof(*drv), GFP_KERNEL);
--	if (!drv)
--		return -ENOMEM;
--
--	ret = of_property_read_u32(dn, "qcom,drv-id", &drv->id);
-+	ret = cmd_db_init();
- 	if (ret)
- 		return ret;
- 
--	drv->name = of_get_property(dn, "label", NULL);
-+	return 0;
-+}
-+
-+static int rpmh_rsc_probe(struct udevice *dev)
-+{
-+	ofnode dn = dev_ofnode(dev);
-+	struct rsc_drv *drv;
-+	char drv_id[10] = {0};
-+	int ret;
-+	u32 rsc_id;
-+
-+	drv = dev_get_priv(dev);
-+
-+	ret = ofnode_read_u32(dn, "qcom,drv-id", &drv->id);
-+	if (ret)
-+		return ret;
-+
-+	drv->name = ofnode_get_property(dn, "label", NULL);
- 	if (!drv->name)
--		drv->name = dev_name(&pdev->dev);
-+		drv->name = dev->name;
- 
- 	snprintf(drv_id, ARRAY_SIZE(drv_id), "drv-%d", drv->id);
--	drv->base = devm_platform_ioremap_resource_byname(pdev, drv_id);
-+	drv->base = (void __iomem *)dev_read_addr_name(dev, drv_id);
- 	if (IS_ERR(drv->base))
- 		return PTR_ERR(drv->base);
- 
- 	rsc_id = readl_relaxed(drv->base + RSC_DRV_ID);
-@@ -506,84 +493,46 @@ static int rpmh_rsc_probe(struct platform_device *pdev)
- 		drv->regs = rpmh_rsc_reg_offset_ver_3_0;
- 	else
- 		drv->regs = rpmh_rsc_reg_offset_ver_2_7;
- 
--	ret = rpmh_probe_tcs_config(pdev, drv);
-+	ret = rpmh_probe_tcs_config(dev, drv);
- 	if (ret)
- 		return ret;
- 
- 	spin_lock_init(&drv->lock);
- 	init_waitqueue_head(&drv->tcs_wait);
- 	bitmap_zero(drv->tcs_in_use, MAX_TCS_NR);
- 
--	irq = platform_get_irq(pdev, drv->id);
--	if (irq < 0)
--		return irq;
--
--	ret = devm_request_irq(&pdev->dev, irq, tcs_tx_done,
--			       IRQF_TRIGGER_HIGH | IRQF_NO_SUSPEND,
--			       drv->name, drv);
--	if (ret)
--		return ret;
--
--	/*
--	 * CPU PM/genpd notification are not required for controllers that support
--	 * 'HW solver' mode where they can be in autonomous mode executing low
--	 * power mode to power down.
--	 */
--	solver_config = readl_relaxed(drv->base + drv->regs[DRV_SOLVER_CONFIG]);
--	solver_config &= DRV_HW_SOLVER_MASK << DRV_HW_SOLVER_SHIFT;
--	solver_config = solver_config >> DRV_HW_SOLVER_SHIFT;
--	if (!solver_config) {
--		if (pdev->dev.pm_domain) {
--			ret = rpmh_rsc_pd_attach(drv, &pdev->dev);
--			if (ret)
--				return ret;
--		} else {
--			drv->rsc_pm.notifier_call = rpmh_rsc_cpu_pm_callback;
--			cpu_pm_register_notifier(&drv->rsc_pm);
--		}
--	}
--
- 	/* Enable the active TCS to send requests immediately */
- 	writel_relaxed(drv->tcs[ACTIVE_TCS].mask,
- 		       drv->tcs_base + drv->regs[RSC_DRV_IRQ_ENABLE]);
- 
- 	spin_lock_init(&drv->client.cache_lock);
- 	INIT_LIST_HEAD(&drv->client.cache);
- 	INIT_LIST_HEAD(&drv->client.batch_cache);
- 
--	dev_set_drvdata(&pdev->dev, drv);
--	drv->dev = &pdev->dev;
-+	dev_set_drvdata(dev, drv);
-+	drv->dev = dev;
- 
--	ret = devm_of_platform_populate(&pdev->dev);
--	if (ret && pdev->dev.pm_domain) {
--		dev_pm_genpd_remove_notifier(&pdev->dev);
--		pm_runtime_disable(&pdev->dev);
--	}
-+	log_debug("RPMh: %s: v%d.%d\n", dev->name, drv->ver.major, drv->ver.minor);
- 
- 	return ret;
- }
- 
--static const struct of_device_id rpmh_drv_match[] = {
--	{ .compatible = "qcom,rpmh-rsc", },
-+static const struct udevice_id qcom_rpmh_ids[] = {
-+	{ .compatible = "qcom,rpmh-rsc" },
- 	{ }
- };
--MODULE_DEVICE_TABLE(of, rpmh_drv_match);
- 
--static struct platform_driver rpmh_driver = {
--	.probe = rpmh_rsc_probe,
--	.driver = {
--		  .name = "rpmh",
--		  .of_match_table = rpmh_drv_match,
--		  .suppress_bind_attrs = true,
--	},
-+U_BOOT_DRIVER(qcom_rpmh_rsc) = {
-+	.name		= "qcom_rpmh_rsc",
-+	.id		= UCLASS_MISC,
-+	.priv_auto	= sizeof(struct rsc_drv),
-+	.probe		= rpmh_rsc_probe,
-+	.bind		= rpmh_rsc_bind,
-+	.of_match	= qcom_rpmh_ids,
-+	/* rpmh is under CLUSTER_PD which we don't support, so skip trying to enable PDs */
-+	.flags		= DM_FLAG_DEFAULT_PD_CTRL_OFF,
- };
- 
--static int __init rpmh_driver_init(void)
--{
--	return platform_driver_register(&rpmh_driver);
--}
--core_initcall(rpmh_driver_init);
--
- MODULE_DESCRIPTION("Qualcomm Technologies, Inc. RPMh Driver");
- MODULE_LICENSE("GPL v2");
+ static int rpmh_probe_tcs_config(struct udevice *dev, struct rsc_drv *drv)
 
 -- 
 2.45.2
