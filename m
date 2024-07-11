@@ -4,137 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96339C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 16:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5A8C3DA45
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 19:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0231B883AD;
-	Thu, 11 Jul 2024 18:59:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 80778882DC;
+	Thu, 11 Jul 2024 21:55:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rt4D23Dg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iDK5viBK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A6A4883CE; Thu, 11 Jul 2024 18:59:11 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::612])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 31E34882F0; Thu, 11 Jul 2024 21:55:20 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ABB4883A4
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 18:59:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB7B7880DB
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 21:55:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fa36C7FOgvB9cmHMqenzEC78/Gd8+VxUgm4o6DdP2iEdyib26fCc7MRzj4phLdT2HS3IpnNVJo8PLeWBWangZ1l7y9f50/UxAX1z16BPLMmtXJCZdiuMctIzWMjSO5jVK8FtNH1kuYke8Brf/3J3PBl2Y3ozur4SzxpoVB+zaq3hFO+61MAFRsdJqS7ywCFW3KnjEJa5bVFhbQlUIX/0sxJ8FC7qsiQHOghtp7eKBrviTEGZYAGliF9TOA4PXjJYjoSDEiYZnTLu4ZtvcB762G/oiA1x0hKq85beTJ8JfMdgwXnE2TOXgXvHWdBs00Ln+H9n14T/WA5+9Qa5b0TYXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mZZCv/6oQ3zn4QTciBT4tqLuf0Bwr7tWbENuF80A3m8=;
- b=MRG/ucvIz0PFY8OdFzrmCJGvTaQFrZwJD5quunL9j+kTrQxCYwEOmADVf2CtiaQthaX+9RFppzjev7bzYezJ12+Wz0zNrTT2XlsdBE7KamjoukwHvdhc7onn1QnA1LX/J4eGL5PlutN6tCIcEYHNh8RnrZfiAx6buU3jCBkeeHtk8SddRxFEjLMKr2D3r+v5vsZx+5zxZ8KxhlTwHbo0mBZ2aNgsiyJxEvtN9MbN0PQRN0lKDWrEe8+Zyd92Txy5t+CGPkOd/8Zyyg6c2v5YWU1kPXXe8UjH3WMQ39WaaGmo1gIAoi6fM7YN0w+cr7WaMuWiMy7Fh/XkvQikuWnL5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mZZCv/6oQ3zn4QTciBT4tqLuf0Bwr7tWbENuF80A3m8=;
- b=rt4D23DgwbM23O3zOJV7zPinJDBlAmOG1jWJ1w4e+tIFbdzhEnGjXIXmzLieUZVcV4QiiX4grd7NmAWlRrSd0Ez3X2Ewdc9d/gcNBMeplGZQSwYH6JJ0D1kFb1s4YppzZow3pkiId21bX91Fa8w4RMoExsDtFpagTcZTt808cAM=
-Received: from BN9PR03CA0801.namprd03.prod.outlook.com (2603:10b6:408:13f::26)
- by SA1PR12MB6752.namprd12.prod.outlook.com (2603:10b6:806:259::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.34; Thu, 11 Jul
- 2024 16:59:04 +0000
-Received: from BL6PEPF0001AB51.namprd04.prod.outlook.com
- (2603:10b6:408:13f:cafe::f8) by BN9PR03CA0801.outlook.office365.com
- (2603:10b6:408:13f::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.21 via Frontend
- Transport; Thu, 11 Jul 2024 16:59:04 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL6PEPF0001AB51.mail.protection.outlook.com (10.167.242.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7762.17 via Frontend Transport; Thu, 11 Jul 2024 16:59:03 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 11 Jul
- 2024 11:58:49 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 11 Jul
- 2024 11:58:48 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 11 Jul 2024 11:58:46 -0500
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>, <git@xilinx.com>,
- <jagan@amarulasolutions.com>, <n-francis@ti.com>, <d-gole@ti.com>, "Prasad
- Kummari" <prasad.kummari@amd.com>
-Subject: [PATCH v2] amd: Enable the NFS command for Versal Gen 2
-Date: Thu, 11 Jul 2024 22:27:35 +0530
-Message-ID: <20240711165734.1561933-1-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-52ea2f58448so1757082e87.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 12:55:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1720727717; x=1721332517; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YLAZBHi2CaMX9QC8UyLfw9io2cpN7wO5PpzYd2hYuDI=;
+ b=iDK5viBKUNF3DryERAauvgz31EOA4mU/y61H6XJFnLZRyWoLMfI7u9LLdXUAU1rcHL
+ H6+Uv0aJHzcV+1VUBAdU5sHF0mPhb9HPz082Fv/zKKdXOjwMH5N0j53G86L+YivNDVWe
+ NiDeAT8MlcnpJ0QFKiaCBAXaDU/Hivfteu5i1A0niS9Px7mK6hr9Xs8oaQQL5DJJi2eu
+ fBZFpJ+u6THcsoUE2o2YAQRS60BP3BLhgnc4OqaflL6QRnQnfPcdzINI0Kc5iWSW/1oF
+ LxZcl6Gr4jnbhSrT++zMraEPW1v0kSnv4tZVZzv/Yoyp1khJQg4zZfhrax475utgjPCm
+ M/Eg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720727717; x=1721332517;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YLAZBHi2CaMX9QC8UyLfw9io2cpN7wO5PpzYd2hYuDI=;
+ b=BWscNh1q4orL8avbKjiq7Ne4K0MVNdb0J6aPtYg/DqKxCCfNxOnrltDdd6OZtiyUcM
+ vJ0afoumo8rWnqhTDRlPJ+fCmauw6L43xR/qgnYF7oFAD10D9FkaPVOaxhOQtSjw6IfM
+ qV9hpdfHcP+FeZ0rHVKaemwo/Om/FQ3OBoODagqlXZKaOkLK1GyahX2MT/ICLGtARTGE
+ QXNLPLr84+6iYuozq3aqlzzpD/P2B1/K50diUN/sDVWZdjqBtijQcRpLU4EyIBSCEmOZ
+ 8zee9owm+jO0fHz0aV8epqOTbit7SLy0NUPiXiZv7B6+mn54D8/+RQJ+HFKuZmiC8uml
+ nibw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV7yOVRc/3rB8eYgUrF6jVpHmEKFG91G9vXxWCgFz879joofcNlYkm9AruM8EtgRPckfo2eTSa1zySKiQi/7g2oMEoq6g==
+X-Gm-Message-State: AOJu0Yw+9Ovbmzy6g4HWZ+5OuQupOrl+q1KJ56p4GGweBn69F2nK1ZFa
+ rUNbVuuoI9txRXzOJePe6gZnlUBpfvplLumaa7R47GHTylrxVJwYF5VGrq0yoxQDvVZa3wrqOCl
+ 14zIR9HvGbvDVSOrWTYDJRgD8Jls=
+X-Google-Smtp-Source: AGHT+IHRyt/hsVgynvJOcXcxetSP51Ir5F6qk+rdgkRcxJownkjnQwJaMarUQJU3IOjWuU4P2/rX0VWuY9FYFYCgtds=
+X-Received: by 2002:ac2:4648:0:b0:52c:cd0b:f0a9 with SMTP id
+ 2adb3069b0e04-52eb99d2754mr5217142e87.58.1720727716771; Thu, 11 Jul 2024
+ 12:55:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: prasad.kummari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB51:EE_|SA1PR12MB6752:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2e5ad148-0698-4207-5782-08dca1cac517
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aBdOS6CxFNBTQ4VpEBanuz0rm5vGuAHa4SNi4ehLpP7nXT/5EsqswJdyPCMr?=
- =?us-ascii?Q?QEou9NcwQ+CY8nmbH+MaQygU2ZESp2hnN2HX0a6lurJ+J5P2Xx2aWq1+nE45?=
- =?us-ascii?Q?PLrh170fp+M41D6I4Foi5Gi9QshBnLZnX2e87Ja7yUxGVgh2r6xnCJ+ngTQA?=
- =?us-ascii?Q?88m7eY4tMzYWwAAiZNZGrZk659sbwkq3Q+P1ITXmw+BgPwdG/33BQxYUaAMU?=
- =?us-ascii?Q?0F0NB8z9ighQBHOQXwkds8Pf6V8NmwH+Wnido8z4uAuPbzucUW17I0aP6kaL?=
- =?us-ascii?Q?dlEoCasP2mv7+BydvYVp6SbWc6BpNxmoTmsQTKd6EaYcZ6MXjoPTuQnX5FNx?=
- =?us-ascii?Q?5xsVa2RstdwCVDpZGDzaLY5Rx7umsRJEjWdzuE9VmAwhFgPNJK70ud7kAwZc?=
- =?us-ascii?Q?sboTZgBkBeXkOz8z/MEIp4o2Vwf8iokB2CDYYy+XvfQx323BKAOYGA5zCeg9?=
- =?us-ascii?Q?LjsY460KZC0zJ2wcpVygflyigwVmet3LcWBRzGW+kdUL/Njsk5TCcZBECfuw?=
- =?us-ascii?Q?SQ+++xcWu9kZ/mmKKN+qU5FsJ7TtObKOiILBwDQrJAaJax/4PgivGmEG5DbF?=
- =?us-ascii?Q?niQSrmur662fMHrKIoPA9sbS152mQS25zctxxxbgKXcungJKaTlL1vLj6YYu?=
- =?us-ascii?Q?nygDwHLUem52/fSwuOyJyxdvYTfoWf5E+vuJsoZqOGeTbFhS+Tdexd+vBAbz?=
- =?us-ascii?Q?pDFe3a0128hEbuxQHAd+wexMS+z3HgH/66HZEAc/cpTCe8ImpWAE4Mr6oU85?=
- =?us-ascii?Q?Uty48Cugb73hXze4UtZGCDgSbKbPbdJrjg0JSdT8K3kSnf/YRKwHZXQp2Ce+?=
- =?us-ascii?Q?b+kFdRQQFaoR5W26uiWmaHHJRHHCzbopOYd47Q5jDQ82/LVtT7AvVpNilyFp?=
- =?us-ascii?Q?61aLoQ9kZ71Ozr/bfcOIxOXaFm2qz2EFg0b27vXQ4uSuMClzVe0P3EXza+Sr?=
- =?us-ascii?Q?40WElqBt0ndxKdYSREkCwFegFJynJd8IMryjgna/CT5due96pKihLNm0ce+g?=
- =?us-ascii?Q?SDMPJ/JtAswv51uemmR1KM+6miBvBij+QUE90P23YvGJ8wUMKjxsT3kNPwFo?=
- =?us-ascii?Q?A/ruA6jANm2MJSYtGn6uXY9cZNR6q/umypA1bHdkwvVN0TIeF+g7A8IVgQFt?=
- =?us-ascii?Q?CiYaELdUwGNdC39Uegl5WZlgqp9SEj97w5pfjuTAae2XSO5aEHgK6Dj5aGe0?=
- =?us-ascii?Q?3GZ5FG0aHoywZA1a9MKauNPs6xgDZtkBwF6bVk8mN3Lh8uQ5jeKQnLeE7nNu?=
- =?us-ascii?Q?OF1SmOcYZW0Y0ZEmVunmGiwugSXvAswT/1y+eVV3ML4aB5IB3afdHZYELrue?=
- =?us-ascii?Q?KoSvKhmTuiw1KXzqXDaoBsJ/GGdD5aOvAAl7erux+U3y86b/BtMgHBZY4URy?=
- =?us-ascii?Q?TrD+T3nKWG9qD0cA7M0KDf2yJfc8/58IRxuiJIgV4MBf4P47t4Bgu7WzWS/p?=
- =?us-ascii?Q?mzBEQp0G6JZAeT6ZzHJspkjp0/LaLCeh?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2024 16:59:03.9374 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2e5ad148-0698-4207-5782-08dca1cac517
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB51.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6752
+References: <1709694011-683-1-git-send-email-ganboing@gmail.com>
+ <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+ <CANV2PTMPrQVZhWvNFxi8-RA0ZC4UAF1sHBbHiipUc01aWx6oqg@mail.gmail.com>
+ <0eda64cb-4ca8-f8bc-7515-6d2a2d3d4638@gmail.com>
+ <CANV2PTP3o1Q2JPCZO8Ewfye+oz9f3TVNTYhYZ3EAKtdYAhvkHg@mail.gmail.com>
+ <f355e582-cb52-e4c5-538b-26bcf69f0a2c@gmail.com>
+ <CANV2PTOzgyzYSbNRJXuvLnMDAT-mDL8o1tU7d72qTKQDMdt_Uw@mail.gmail.com>
+In-Reply-To: <CANV2PTOzgyzYSbNRJXuvLnMDAT-mDL8o1tU7d72qTKQDMdt_Uw@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 11 Jul 2024 12:55:05 -0700
+Message-ID: <CANV2PTP2hpd5m17+_T7zp2V6w03d=0rgAuwukyC0LHVYxLtRuw@mail.gmail.com>
+Subject: Re: [PATCH] riscv: dts: jh7110: Enable PLL node in SPL
+To: Bo Gan <ganboing@gmail.com>
+Cc: Hal Feng <hal.feng@starfivetech.com>,
+ "rick@andestech.com" <rick@andestech.com>, 
+ "ycliang@andestech.com" <ycliang@andestech.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ "duwe@suse.de" <duwe@suse.de>, "namcao@linutronix.de" <namcao@linutronix.de>, 
+ Xingyu Wu <xingyu.wu@starfivetech.com>, Mason Huo <mason.huo@starfivetech.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,30 +102,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enabled the default utilization of the NFS command on Versal Gen 2
-platform to facilitate booting images through the network using
-the NFS protocol
+Ping. This regression still exists and is now in stable release.
+Should we revert this change or how must it be fixed?
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
-Changes in v2:
-- corrected commit description.
+-E
 
- configs/amd_versal2_virt_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 2d611f84cd..bbe7db4fb3 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -46,6 +46,7 @@ CONFIG_CMD_USB=y
- CONFIG_BOOTP_MAY_FAIL=y
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_NFS=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
--- 
-2.25.1
-
+On Sat, Apr 20, 2024 at 3:56=E2=80=AFAM E Shattow <lucent@gmail.com> wrote:
+>
+> On Fri, Apr 19, 2024 at 5:51=E2=80=AFPM Bo Gan <ganboing@gmail.com> wrote=
+:
+> >
+> ...snip...
+> >
+> > If without the change (reverted), can you read/write the same SD media =
+in U-boot
+> > proper? (U-boot proper will switch BUS_ROOT to PLL2).
+>
+> I tested again this change in commit e6b7aeef, before this change in
+> parent commit e6b7aeef~, af04f37a HEAD from today 19th Apr 2024 (which
+> due to not matching EEPROM product_id will be in the fall-through case
+> of board/starfive/visionfive2/spl.c), af04f37a with applied patchset
+> "board: starfive: add Milk-V Mars CM support" from 15th Apr 2024, and
+> af04f37a reverting changes from e6b7aeef also with applied patchset
+> "board: starfive: add Milk-V Mars CM support" from 15th Apr 2024.
+>
+> In all builds is OpenSBI at commit d4d2582e HEAD from today 19 Apr 2024.
+>
+> For each build tested per vendor Milk-V the Mars CM Lite (SD Card only
+> non-eMMC) has pinmux of GPIO22 instead of GPIO62:
+>
+> -- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> @@ -233,7 +233,7 @@
+>
+>         mmc0_pins: mmc0-pins {
+>                  mmc0-pins-rest {
+> -                       pinmux =3D <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+> +                       pinmux =3D <GPIOMUX(22, GPOUT_SYS_SDIO0_RST,
+>                                               GPOEN_ENABLE, GPI_NONE)>;
+>                         bias-pull-up;
+>                         drive-strength =3D <12>;
+>
+> U-Boot config is simply starfive_visionfive2_defconfig.
+>
+> Results are as follows.
+>
+> StarFive # mac
+> --------EEPROM INFO--------
+> Vendor : MILK-V
+> Product full SN: MARC-V10-2340-D004E000-000006DF
+> data version: 0x2
+> PCB revision: 0xc1
+> BOM revision: A
+> Ethernet MAC0 address: 6c:cf:39:00:83:11
+> Ethernet MAC1 address: 6c:cf:39:00:83:12
+> --------EEPROM INFO--------
+>
+> e6b7aeef: 2GB microSD (no speed class markings)
+> af04f37a: 2GB microSD (no speed class markings)
+> af04f37a with Mars CM patchset: 2GB microSD (no speed class markings)
+> StarFive # mmc rescan ; mmc info
+> unable to select a mode
+> unable to select a mode
+>
+> e6b7aeef~: 2GB microSD (no speed class markings)
+> af04f37a revert e6b7aeef with Mars CM patchset: 2GB microSD (no speed
+> class markings)
+> StarFive # mmc rescan ; mmc info
+> Device: mmc@16010000
+> Manufacturer ID: 1c
+> OEM: 5356
+> Name: USD
+> Bus Speed: 50000000
+> Mode: SD High Speed (50MHz)
+> Rd Block Len: 512
+> SD version 2.0
+> High Capacity: No
+> Capacity: 1.9 GiB
+> Bus Width: 1-bit
+> Erase Group Size: 512 Bytes
+>
+> e6b7aeef: 8GB microSD Class 4
+> e6b7aeef~: 8GB microSD Class 4
+> af04f37a: 8GB microSD Class 4
+> af04f37a with Mars CM patchset: 8GB microSD Class 4
+> af04f37a revert e6b7aeef with Mars CM patchset: 8GB microSD Class 4
+> StarFive # mmc rescan ; mmc info
+> Device: mmc@16010000
+> Manufacturer ID: 2
+> OEM: 544d
+> Name: SA08G
+> Bus Speed: 50000000
+> Mode: SD High Speed (50MHz)
+> Rd Block Len: 512
+> SD version 3.0
+> High Capacity: Yes
+> Capacity: 7.4 GiB
+> Bus Width: 1-bit
+> Erase Group Size: 512 Bytes
+>
+> e6b7aeef: 8GB microSD Class 10
+> e6b7aeef~: 8GB microSD Class 10
+> af04f37a: 8GB microSD Class 10
+> af04f37a with Mars CM patchset: 8GB microSD Class 10
+> af04f37a revert e6b7aeef with Mars CM patchset: 8GB microSD Class 10
+> StarFive # mmc rescan ; mmc info
+> Device: mmc@16010000
+> Manufacturer ID: 74
+> OEM: 4a60
+> Name: USD
+> Bus Speed: 50000000
+> Mode: SD High Speed (50MHz)
+> Rd Block Len: 512
+> SD version 3.0
+> High Capacity: Yes
+> Capacity: 7.5 GiB
+> Bus Width: 1-bit
+> Erase Group Size: 512 Bytes
+>
+> e6b7aeef: 32GB microSD Class 10 A1 U1 HC1
+> e6b7aeef~: 32GB microSD Class 10 A1 U1 HC1
+> af04f37a: 32GB microSD Class 10 A1 U1 HC1
+> af04f37a with Mars CM patchset: 32GB microSD Class 10 A1 U1 HC1
+> af04f37a revert e6b7aeef with Mars CM patchset: 32GB microSD Class 10 A1 =
+U1 HC1
+> StarFive # mmc rescan ; mmc info
+> Device: mmc@16010000
+> Manufacturer ID: 3
+> OEM: 5344
+> Name: SC32G
+> Bus Speed: 50000000
+> Mode: SD High Speed (50MHz)
+> Rd Block Len: 512
+> SD version 3.0
+> High Capacity: Yes
+> Capacity: 29.7 GiB
+> Bus Width: 1-bit
+> Erase Group Size: 512 Bytes
+>
+> e6b7aeef: 200GB microSD Class 10 A1 U1 XC1
+> e6b7aeef~: 200GB microSD Class 10 A1 U1 XC1
+> af04f37a: 200GB microSD Class 10 A1 U1 XC1
+> af04f37a with Mars CM patchset: 200GB microSD Class 10 A1 U1 XC1
+> af04f37a revert e6b7aeef with Mars CM patchset: 200GB microSD Class 10 A1=
+ U1 XC1
+> StarFive # mmc rescan ; mmc info
+> Device: mmc@16010000
+> Manufacturer ID: 3
+> OEM: 5344
+> Name: SC200
+> Bus Speed: 50000000
+> Mode: SD High Speed (50MHz)
+> Rd Block Len: 512
+> SD version 3.0
+> High Capacity: Yes
+> Capacity: 183.3 GiB
+> Bus Width: 1-bit
+> Erase Group Size: 512 Bytes
+>
+> e6b7aeef: 256GB microSD Class U3 XC1
+> e6b7aeef~: 256GB microSD Class U3 XC1
+> af04f37a: 256GB microSD Class U3 XC1
+> af04f37a with Mars CM patchset: 256GB microSD Class U3 XC1
+> af04f37a revert e6b7aeef with Mars CM patchset: 256GB microSD Class U3 XC=
+1
+> StarFive # mmc rescan ; mmc info
+> Device: mmc@16010000
+> Manufacturer ID: 1b
+> OEM: 534d
+> Name: GE4S5
+> Bus Speed: 50000000
+> Mode: SD High Speed (50MHz)
+> Rd Block Len: 512
+> SD version 3.0
+> High Capacity: Yes
+> Capacity: 238.8 GiB
+> Bus Width: 1-bit
+> Erase Group Size: 512 Bytes
+>
+> > One potential problem I
+> > could think of is perhaps the SPL built is without SPL_PINCTRL_STARFIVE=
+/JH7110
+> > or the u-boot dts is missing the pinctrl that properly sets drive-stren=
+gth and
+> > other properties of the mmc0/1 pins. What dtb are you using? I tested t=
+his with
+> > visionfive2 and it's working fine. Can you share the tree/config you us=
+ed to
+> > built for Milk-V Mars CM Lite? I don't see the corresponding dts being =
+checked-
+> > in to u-boot tree, so it helps if you can share the code. Thanks!
+> >
+> > Bo
+>
+> As described, this is upstream U-Boot. Does this 'mmc info' testing
+> help give some ideas to suggest?
+>
+> -E
