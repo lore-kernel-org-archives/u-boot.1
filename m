@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9117C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 21:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9895C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 21:28:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 218188874E;
+	by phobos.denx.de (Postfix) with ESMTP id D19F388756;
 	Thu, 11 Jul 2024 23:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k2OzmvW/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KKLKp1Cp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD275886B6; Thu, 11 Jul 2024 23:27:58 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 14E2E88703; Thu, 11 Jul 2024 23:28:00 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB73C88606
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 23:27:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1C9E88680
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 23:27:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-5c670e5469aso684370eaf.1
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 14:27:56 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-25d6dd59170so732068fac.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 14:27:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720733275; x=1721338075; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720733276; x=1721338076; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KhB//8CjtUZB7w/U0DA6hawcTa2uORLfbHPzLSxLIkM=;
- b=k2OzmvW/Sw8Q/+XYVbM2nSNdDJ374wGCtg7bWy8Qo13aUwAbAeevwINas7t28uxK1I
- 0OWlue4Th5LWUC++TgJhCC8wW+B07ijPgAZIzbUNG3OeWaGVpSHTXSWwACPk9zBJbNK5
- 54isWKlB4BmoIMoQIgDO5vveshqOvS7eAfQGg=
+ bh=KpRQ/30zPxNJXo8t+93y59YRt2YYyyEAaTyDcA0jEqY=;
+ b=KKLKp1Cp4F5DknQcnAR39iM2ASQuuPaSRZv+/E8Fv7jHYS0s88+mFi0ZlW8PDgYxYx
+ Y6BQDXPsP+UEm8zcp/JrYMNJ6/nmVVBXqb1n1fyRoHWAGvHlF/oUaTFSp3t5IXVCSE8G
+ n7RuUp3O12gyV9trUAxhkXlVk0kZtOIyq5OZg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720733275; x=1721338075;
+ d=1e100.net; s=20230601; t=1720733276; x=1721338076;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KhB//8CjtUZB7w/U0DA6hawcTa2uORLfbHPzLSxLIkM=;
- b=aEgk12Vmy0HXaB2ZUTTuSBMw2fFNAN9HP5z1wnkp1+vsyCWaS4jISWlq8XiCR3V/Hc
- /y+krWeTth/dPJEjW34fUHB+nxrvRCXOKj5SPSxC6vGcu2LQVKITmC/zcw5MEEyiYNIe
- Ce5ewxJgSwwJ7MxZRy9Dyw4louuyytsOrGAyizAFBnfg2517/qqZ4oUN6i53dfnCPTN/
- cA+vr6zCaO3dIxrgnX7/pZ8UOCwPj2dxsJMYJfFbinUN5n6qJPkUCC53u0taVW4Dp98v
- bUZRieYEZTFAZy13Wb/KkskbPc8TJb4Zd2l/e6nOyl1BCOv/rUIRjBTXco0kqa3AguQX
- OpNQ==
-X-Gm-Message-State: AOJu0Yx7brJdNQx6PzU4FkHBmLAC66hfeqhaikuBxGV1Ssmt7M/L/I0L
- k9y++zPQoBGuD5i+e0Io1hLc19RpAyKtIBinCdO128fIxTTQOvgaOkM+ZzueVmM=
-X-Google-Smtp-Source: AGHT+IHvJz108x6pls6NM3nndspIFeEP10QkMAqLWjZVjUdtUx+9A+Fdah17VxxJpRe6H6mPwRStnA==
-X-Received: by 2002:a05:6870:4154:b0:254:7a82:cb3f with SMTP id
- 586e51a60fabf-25eae8462bdmr8375761fac.25.1720733275467; 
- Thu, 11 Jul 2024 14:27:55 -0700 (PDT)
+ bh=KpRQ/30zPxNJXo8t+93y59YRt2YYyyEAaTyDcA0jEqY=;
+ b=gtaDreoG03hk6otZIXWdEvxTi12iepBuJnRv78UwErAzVz0b0YyJ6PNqLqvqSakLtY
+ vKiKSrq6uITaWSkjCtwOCmciWZlMGzmZZXrBxhhVOn4EabnlSzY8iX2FmgbOhPfONQTT
+ h7gkxcbfmBeLFC4h/NQf66qFB2uMyNDxzMgaGe/RdPdJpxVb2jQE1Kg18W/HEnKa5JTo
+ PHCq4fRDJk61h5Nq9Buee2a973bfvJfsjrlFBLn9sb09U0eG9ySl+RwiFHORKeyYrp61
+ ts5dWl75en1vG+yZRyODia9BZrob/j8Cofp2P2MYrAPAmrKlRcnns1TRcOYfLY7gryr/
+ bMnQ==
+X-Gm-Message-State: AOJu0Yw54esxEKCwaFHdzT4wFBia2q+hSmkWwqn5G6OUU0lmeOmT379+
+ JflimwsEbuD/CJyFHdzxXIvaLqO9dJ0qJ8O76N78X2VOCkVGTU4xHLXraQ9Cl34=
+X-Google-Smtp-Source: AGHT+IGsrxaZ0AEl67uwkMKe2kvVvhfcctFE6YEVlGdBbLqwTgPvOuNj9eYQCrjh5gWKpTt9K0Mc8w==
+X-Received: by 2002:a05:6870:3117:b0:254:b318:8a05 with SMTP id
+ 586e51a60fabf-25eaec74a0cmr7710408fac.57.1720733276400; 
+ Thu, 11 Jul 2024 14:27:56 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25eaa29478bsm1824155fac.46.2024.07.11.14.27.54
+ 586e51a60fabf-25eaa29478bsm1824155fac.46.2024.07.11.14.27.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 14:27:55 -0700 (PDT)
+ Thu, 11 Jul 2024 14:27:56 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, upstream@lists.phytec.de, 
- Dominik Haller <d.haller@phytec.de>
-Cc: w.egorov@phytec.de, jma@phytec.com
-In-Reply-To: <20240702092240.34349-1-d.haller@phytec.de>
-References: <20240702092240.34349-1-d.haller@phytec.de>
-Subject: Re: [PATCH] board: phytec: k3: k3_ddrss_patch: Add ddr phy reg count
-Message-Id: <172073327488.2744109.1462358855031641154.b4-ty@konsulko.com>
-Date: Thu, 11 Jul 2024 15:27:54 -0600
+To: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Judith Mendez <jm@ti.com>, Nishanth Menon <nm@ti.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Aswath Govindraju <a-govindraju@ti.com>
+In-Reply-To: <20240702195429.985628-1-ghidoliemanuele@gmail.com>
+References: <20240702195429.985628-1-ghidoliemanuele@gmail.com>
+Subject: Re: [PATCH v1] mmc: am654_sdhci: Add the quirk to set TESTCD bit
+Message-Id: <172073327562.2744109.10056841742024246729.b4-ty@konsulko.com>
+Date: Thu, 11 Jul 2024 15:27:55 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,12 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Jul 2024 11:22:40 +0200, Dominik Haller wrote:
+On Tue, 02 Jul 2024 21:54:29 +0200, Emanuele Ghidoli wrote:
 
-> Add and use the correct number of ddr phy registers to update the
-> corresponding settings.
+> The ARASAN MMC controller on Keystone 3 class of devices need the SDCD
+> line to be connected for proper functioning.
 > 
+> In cases where this can't be connected, add a quirk to force the
+> controller into test mode and set the TESTCD bit. Use the flag
+> "ti,fails-without-test-cd", to implement this above quirk when required.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
