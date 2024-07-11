@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F39EEC3DA45
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 21:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9117C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 21:28:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEFF8886E7;
-	Thu, 11 Jul 2024 23:27:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 218188874E;
+	Thu, 11 Jul 2024 23:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C2788B8A";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k2OzmvW/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C97886B6; Thu, 11 Jul 2024 23:27:58 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id CD275886B6; Thu, 11 Jul 2024 23:27:58 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0233A88621
+ by phobos.denx.de (Postfix) with ESMTPS id BB73C88606
  for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 23:27:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-25e31d0a753so720146fac.1
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 14:27:55 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5c670e5469aso684370eaf.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 14:27:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1720733275; x=1721338075; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ixlMC1wTLrVyPN+YjLCF9mVi59RGrPDXru4ZziqDyc8=;
- b=C2788B8AYEG9sMlXLJAawss2uR+SX+vEz40trGwunT1taRATGnVsEx2Fx6kMg1L9l+
- fyQdcY8ebXajZzR37JuGV/uuPwgWrG+0hfUkwZGv23ZNL66rmweKhWh46uTg5kg3W/eW
- kT1QyHz/HaPRX9YzR/nxQz69H34L9SE1g9Y0w=
+ bh=KhB//8CjtUZB7w/U0DA6hawcTa2uORLfbHPzLSxLIkM=;
+ b=k2OzmvW/Sw8Q/+XYVbM2nSNdDJ374wGCtg7bWy8Qo13aUwAbAeevwINas7t28uxK1I
+ 0OWlue4Th5LWUC++TgJhCC8wW+B07ijPgAZIzbUNG3OeWaGVpSHTXSWwACPk9zBJbNK5
+ 54isWKlB4BmoIMoQIgDO5vveshqOvS7eAfQGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1720733275; x=1721338075;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ixlMC1wTLrVyPN+YjLCF9mVi59RGrPDXru4ZziqDyc8=;
- b=jHFiRQryf7slLEz6rPF8S0XS+tV6MiKjtZlyD/zOGshVJ8SXFNCLFPbBPMRR+Azdv9
- AgKOgoy2IIR3b38qqF+W1P4aT0OsUeAwKVCmMubAf3N3Ef1TXJ5ISl2UE7D9d6rwB6Om
- +6ljTuEGjmwX+soJ462xdNsS1eRvoKDiVPBCnRa70Yy9N4jN90TztrpLgN3eBkvKhZ9x
- nLTPGL2dljSmlcdc4iOsEx9c8XxLDbE6PW0o8Js2Ir/IN045qPoaMHQOrts1OlRh/LF2
- 00NCy1lNGOSmW6sX3huSz5IdnTy2m39Yo3bvHQhDGQkR+oMqyDgoL6yBdcpaMuZE2afh
- 6lPg==
-X-Gm-Message-State: AOJu0YxkYD8auXOfMdtETDq6GuvZAe175sAFov6FycyNFxIRZm/4qu23
- xsVHo2y0yvUbzVQ8fHqQDX4XReJgMRwh3SleXwTDmDU9LZQUDx2Q6DvL1m5v4yE=
-X-Google-Smtp-Source: AGHT+IEFySdpJ9qOSQweZWs01rzKLrpI9DV+48dWFOdnKCMMDmPeOBgfV9Qag+fW6lnYeAFt4VaWXw==
-X-Received: by 2002:a05:6870:6587:b0:25e:1061:6541 with SMTP id
- 586e51a60fabf-25eae75e8f4mr8220624fac.7.1720733274695; 
- Thu, 11 Jul 2024 14:27:54 -0700 (PDT)
+ bh=KhB//8CjtUZB7w/U0DA6hawcTa2uORLfbHPzLSxLIkM=;
+ b=aEgk12Vmy0HXaB2ZUTTuSBMw2fFNAN9HP5z1wnkp1+vsyCWaS4jISWlq8XiCR3V/Hc
+ /y+krWeTth/dPJEjW34fUHB+nxrvRCXOKj5SPSxC6vGcu2LQVKITmC/zcw5MEEyiYNIe
+ Ce5ewxJgSwwJ7MxZRy9Dyw4louuyytsOrGAyizAFBnfg2517/qqZ4oUN6i53dfnCPTN/
+ cA+vr6zCaO3dIxrgnX7/pZ8UOCwPj2dxsJMYJfFbinUN5n6qJPkUCC53u0taVW4Dp98v
+ bUZRieYEZTFAZy13Wb/KkskbPc8TJb4Zd2l/e6nOyl1BCOv/rUIRjBTXco0kqa3AguQX
+ OpNQ==
+X-Gm-Message-State: AOJu0Yx7brJdNQx6PzU4FkHBmLAC66hfeqhaikuBxGV1Ssmt7M/L/I0L
+ k9y++zPQoBGuD5i+e0Io1hLc19RpAyKtIBinCdO128fIxTTQOvgaOkM+ZzueVmM=
+X-Google-Smtp-Source: AGHT+IHvJz108x6pls6NM3nndspIFeEP10QkMAqLWjZVjUdtUx+9A+Fdah17VxxJpRe6H6mPwRStnA==
+X-Received: by 2002:a05:6870:4154:b0:254:7a82:cb3f with SMTP id
+ 586e51a60fabf-25eae8462bdmr8375761fac.25.1720733275467; 
+ Thu, 11 Jul 2024 14:27:55 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25eaa29478bsm1824155fac.46.2024.07.11.14.27.53
+ 586e51a60fabf-25eaa29478bsm1824155fac.46.2024.07.11.14.27.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 14:27:54 -0700 (PDT)
+ Thu, 11 Jul 2024 14:27:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Javier Martinez Canillas <javier@dowhile0.org>
-Cc: Javier Martinez Canillas <javierm@redhat.com>, 
- Enric Balletbo i Serra <eballetbo@gmail.com>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <20240628231707.195389-1-javier@dowhile0.org>
-References: <20240628231707.195389-1-javier@dowhile0.org>
-Subject: Re: [PATCH] omap3: igep0x00: Switch to the I2C driver model
-Message-Id: <172073327356.2744109.13150721086730732199.b4-ty@konsulko.com>
-Date: Thu, 11 Jul 2024 15:27:53 -0600
+To: u-boot@lists.denx.de, upstream@lists.phytec.de, 
+ Dominik Haller <d.haller@phytec.de>
+Cc: w.egorov@phytec.de, jma@phytec.com
+In-Reply-To: <20240702092240.34349-1-d.haller@phytec.de>
+References: <20240702092240.34349-1-d.haller@phytec.de>
+Subject: Re: [PATCH] board: phytec: k3: k3_ddrss_patch: Add ddr phy reg count
+Message-Id: <172073327488.2744109.1462358855031641154.b4-ty@konsulko.com>
+Date: Thu, 11 Jul 2024 15:27:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,27 +90,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 29 Jun 2024 01:17:04 +0200, Javier Martinez Canillas wrote:
+On Tue, 02 Jul 2024 11:22:40 +0200, Dominik Haller wrote:
 
-> When building with the igep00x0_defconfig, the following warning is shown:
+> Add and use the correct number of ddr phy registers to update the
+> corresponding settings.
 > 
->   $ make -j $(nproc)
->   ...
->     LD      spl/u-boot-spl
->     OBJCOPY spl/u-boot-spl-nodtb.bin
->     SYM     spl/u-boot-spl.sym
->     CAT     spl/u-boot-spl-dtb.bin
->     COPY    spl/u-boot-spl.bin
->     MKIMAGE MLO
->   ===================== WARNING ======================
->   This board does not use CONFIG_DM_I2C (Driver Model
->   for I2C drivers). Please update the board to use
->   CONFIG_DM_I2C before the v2022.04 release. Failure to
->   update by the deadline may result in board removal.
->   See doc/develop/driver-model/migration.rst for more info.
->   ====================================================
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
