@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6FBC3DA41
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 05:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA05EC3271E
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jul 2024 07:36:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 227648877E;
-	Thu, 11 Jul 2024 07:56:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id BABF38852E;
+	Thu, 11 Jul 2024 09:36:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Zbs+XLfc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J9URU/li";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 811FD88763; Thu, 11 Jul 2024 07:56:58 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 7431588790; Thu, 11 Jul 2024 07:50:43 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97C118877E
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 07:56:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8CA9583989
+ for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 07:50:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a77c2d89af8so60747166b.2
- for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 22:56:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=indrek.kruusa@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-52e99060b0dso525020e87.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jul 2024 22:50:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1720677415; x=1721282215;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TjuiH3iKGOIW+8qsbGqoicLVrNNPwdh6Plbid0WJ6+Q=;
- b=Zbs+XLfcUwiF53ZhWQ8ixT4WDOCzVG7r7KYAGY+D8nSwa15CqrGdn/oNpiUx8gZhiw
- +sa7uOavprKlRi/4Kvlc5Qk5vmW6Wkq3Y6FBI7blP2BY5hjihRJ4tNtCfwPtyjg5Jpvx
- u55t0mdKDIArGWmzkXBd95KznPl1j4duV0kR8=
+ d=gmail.com; s=20230601; t=1720677041; x=1721281841; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ysNk2grdCZSaxbKtvUBxf9dTah9VE1dA73Gx3AeZKAE=;
+ b=J9URU/li2jwRM9axZIEVIgGsOwF+es8fD8MgMj9G+HzuRQr4KSI6bypt38qoMAX6um
+ KpOVsrRXbPm2DZLOAYaJDGEabKFlwB/K3nqtrAqxf+nrMWN+b5JSA4rc03429I/vi3w9
+ 0kNJEdy2pKAI0MkumzhgKgdBMKMrKfxRkPIfOXHzWSjxZfMN/gC57+Pn8U31vGa2pvsJ
+ FZZj2yL6hpRpFl+QHRh1dJHaqtph/MVKC9Dg1cuVN+g+msFRyY5HG5sLVos9W5/oIgJo
+ ZQvvuWclewAaTNtCCKxycLBrRJujWglNILGCUHc5HHFzCwvpFd3d2uQf4tY499nzSeVV
+ F/Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720677415; x=1721282215;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TjuiH3iKGOIW+8qsbGqoicLVrNNPwdh6Plbid0WJ6+Q=;
- b=M9A1oNh2U6lhr3PEH4lyCxBdYGbYCJeCmptiwyiUjLp3Ea2Rd/VvfaEeOOaNCKtTAg
- I5/ert/PXwY/S+HRdLv1XD2qWTmAdU2CFNNub3Vqiq8CiPLLUANfRsGk/Gr2qf1I4RX4
- 5SuUl52NutL3xCJhgkFe3rLjivpbeF8HT1rcWGfQgNGI5/IL13d4j8qZflO//uUXPisC
- XOgMil+CxNu+ro0IGSOp8+bf0ozCnyu0a40RixMng1LefO38xS6PpmVY3TUYPA6L+Eu8
- EiHPa92l1kl7ESjD8sPKH0kWvPKNbcLelpeKhfQm/6bncZfw4NntFUWTm/y4Hzf1c5Tz
- wEvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+bdVKtr+1ffhzGITUZEIk9AbS0iErpAX4OPWsdj8v2vB1jIhj86aX1VWyxhJNUpMC0ycl6bbqi0sPLdmnDh8HOfqWJA==
-X-Gm-Message-State: AOJu0YxzlM8COflcMepTGavypvyZQNNgd6eGVBTnPxtoc4NHPgn0SypG
- SPz2epy575Mzn/hMpjqP3rQxCh1SaqNQAdqm2r5txcrZPisShq8scOWJSCy8FvQDZ0YvJs3W+9s
- WAmfOIpLlh0fvEYzO/5skPL/i6OsLDYjOpJjc0Q==
-X-Google-Smtp-Source: AGHT+IFLMvwyiDKWRhkpGmZI4qY9kZljGRIHGQIyF7dWnTsWU7x3/o0RApb2i2C1uWUIPopxdGorss65zc7B8h3mBTw=
-X-Received: by 2002:a17:906:35cf:b0:a74:78d1:847 with SMTP id
- a640c23a62f3a-a780b89f67cmr488804166b.76.1720677414921; Wed, 10 Jul 2024
- 22:56:54 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1720677041; x=1721281841;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ysNk2grdCZSaxbKtvUBxf9dTah9VE1dA73Gx3AeZKAE=;
+ b=lBVw4f6oXxSTEx3JG4IcLds+Pfdt/f4fLoAVZVwK+USVgTn64M3hmrPxhqiYNr+Uq3
+ mimaA6VDYfPVjz6bpx9UbBisx4TL32136wxcmqKC6+dXPE6Uv9t3RTc287MWqpHrB72S
+ SwnaYmIpYIK2k/lDkw8BvRMu1CKLt96B3PXgmPd3Is5h3zMVshk7dfNusT5uvCNFa44g
+ wzMK6vLrPcL60L5F+iRwg+Ad/UmOvzbZIouFwLV2r8Hqe5SHxKjAQFQRmXKxmgYUu3Im
+ oveqqTw8vMDZsdUvAuEeopy9DFct5gRk4pcGkR/6jVjSEls/EcSQQM6AXQEMU7vhWVpe
+ m5YQ==
+X-Gm-Message-State: AOJu0Yzjhi8UTpE1Hm6ltY+/CkAU10BRYsjnKYg8qnG7hBN6DZh1n2ur
+ rIc7RkwDWcrZDtexWz/ELsVbPtuSK2gNBAbrEQtH4Rq+OYMK/hruFhUQfL0W
+X-Google-Smtp-Source: AGHT+IHuAw63kwdsprhzu7IQs8sb6OhEnhkxYLiJm8nzGHMZpUoz0K7bQ6qDVJwY0n+XUxB4dif35g==
+X-Received: by 2002:ac2:5b01:0:b0:52c:dc6f:75a3 with SMTP id
+ 2adb3069b0e04-52eb99a310bmr4382260e87.40.1720677040591; 
+ Wed, 10 Jul 2024 22:50:40 -0700 (PDT)
+Received: from localhost.localdomain (145.14.21.104.cable.starman.ee.
+ [145.14.21.104]) by smtp.googlemail.com with ESMTPSA id
+ 2adb3069b0e04-52eb8e34595sm863795e87.54.2024.07.10.22.50.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jul 2024 22:50:40 -0700 (PDT)
+From: indrek.kruusa@gmail.com
+To: indrek.kruusa@gmail.com
+Cc: u-boot@lists.denx.de, andre.przywara@arm.com, cfsworks@gmail.com,
+ samuel@sholland.org, uwu@icenowy.me
+Subject: sunxi DRAM init: Allwinner D1s: auto scan dram rank & width failed
+Date: Thu, 11 Jul 2024 08:50:35 +0300
+Message-Id: <20240711055035.16270-1-indrek.kruusa@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240707082001.20746-1-michael@amarulasolutions.com>
- <20240707082001.20746-2-michael@amarulasolutions.com>
- <CAOMZO5Ddm_2rerosTctkCzcd_+ku7VfsrxfXOEU1NynEOgoQbA@mail.gmail.com>
- <CAOf5uw=wktwcRrPOXmCjehKSsQvzAAhmM4KKsbdxyE6cRVBMrw@mail.gmail.com>
- <CAOMZO5CyFvpa_Fkfjmte9FvPROdNyTS3X1gzweeatu_Evpz2_A@mail.gmail.com>
-In-Reply-To: <CAOMZO5CyFvpa_Fkfjmte9FvPROdNyTS3X1gzweeatu_Evpz2_A@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 11 Jul 2024 07:56:42 +0200
-Message-ID: <CAOf5uw=_dqeehnj7xk9J_M430nt8OAU78gyTi7eEOTLLn0tqEw@mail.gmail.com>
-Subject: Re: [PATCH 1/4] clk: imx: clk-imx8mn Fix nand and spi clock parent
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 11 Jul 2024 09:36:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,43 +90,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Fabio
+Hi,
 
-On Wed, Jul 10, 2024 at 3:43=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> On Wed, Jul 10, 2024 at 10:39=E2=80=AFAM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->
-> > clk dump
-> >
-> > It's how uboot is registering the clk in dts. My idea now was not to
-> > change it to not impact other architectures.
-> > I have a lot of changes but I don't want to address regression and fix
-> > and test before send more patches
->
-> Ok, I see that 'clock-osc-24m' is already used in U-Boot by the other
-> peripherals.
->
-> Your change looks correct.
->
-> Ideally, we should use 'osc_24m' in the future to align with the
-> kernel, but that's a different task.
+I am testing this new unified sunxi DRAM initialization on my Mangopi MQ board (Allwinner D1s) and can't get it working.
+I'm on S. Holland's u-boot branch d1-wip. I created a config for the board and modified dram_sun20i_d1.c with values Andre suggested here:
 
-I will rephrase the commit message
+"
+According to the dump of some MangoPi MQ-1 firmware, the D1s should work with:
+CONFIG_SUNXI_DRAM_DDR2=y
+CONFIG_DRAM_CLK=528
+CONFIG_DRAM_ZQ=8092665
+CONFIG_DRAM_SUNXI_ODT_EN=0
+CONFIG_DRAM_SUNXI_TPR0=0x00471992
+CONFIG_DRAM_SUNXI_TPR11=0x30010
+CONFIG_DRAM_SUNXI_TPR12=0x35
+CONFIG_DRAM_SUNXI_TPR13=0x34000000
+"
 
-Michael
+Boot fails like this:
 
+U-Boot SPL 2024.01-rc1 (Jul 11 2024 - 06:29:02 +0300)
+sunxi_ram_probe: dram-controller@3102000: probing
+DRAM BOOT DRIVE INFO: V0.24
+DRAM CLK = 528 MHz
+DRAM Type = 2 (2:DDR2,3:DDR3)
+DRAMC read ODT off
+ZQ value = 0x30
+DDR efuse: 0xa
+DX0 state: 3
+DX1 state: 0
+ERROR: auto scan dram rank & width failed
+auto_scan_dram_config() FAILED
+DRAM init failed
+spl_board_init_f() failed: -19
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+resetting ...
+reset not supported yet
+### ERROR ### Please RESET the board ###
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Am I the only one who is facing such problem? :) When I'm switching to this old asm based init code then the DRAM init works.
+
+br,
+Indrek
