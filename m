@@ -4,67 +4,203 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7493BC2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 07:51:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4FDC2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 07:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64A83885EB;
-	Fri, 12 Jul 2024 09:51:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 03924885EB;
+	Fri, 12 Jul 2024 09:59:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Ti01HGQo";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="2PyzqPnL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E82FD87FF7; Fri, 12 Jul 2024 09:51:18 +0200 (CEST)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 21B4C8870D; Fri, 12 Jul 2024 09:59:14 +0200 (CEST)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:240a::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A28888725
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 09:51:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0B987FF7
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 09:59:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martyn.welch@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1720770676;
- bh=7l6MUfH8CIxGsViX/Dllh+7sPyFuYQXdcLzfhaM6YpI=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=Ti01HGQoUAf9ayH9uhC28Uw6/rtZvldI0dGaXSvHC9eQrmcZN3/uWntuFsTox5FCH
- 9S5cjHdBWiVwbkWCyG9alXN/1dy9yg7AdDuTng1RhVKx7PcgCIAaAVNw8yLU3/DnT8
- 4NEySsbdGhUAHkrpzhWDefbxdUSwzWibsl2n6aOUOecuKR1UAME2xXj3YgBlRTzABt
- sqsXPwUrTk2ZJ0LHlgIu2v470cUmvGS6h8FJXrcUWjJuKWC7EKey0WcmrOyWeslHDS
- 5mOgsirS3bjiUX28zFXvi9b1PfWhS4IFr5OZ/kqg/5G7cEuUmhzHJdaLr46DEMmbGJ
- X/EGEbFDMkEvA==
-Received: from [100.117.211.133]
- (ec2-34-240-57-77.eu-west-1.compute.amazonaws.com [34.240.57.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- (Authenticated sender: martyn)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 91EF43780BDB;
- Fri, 12 Jul 2024 07:51:15 +0000 (UTC)
-Message-ID: <1a6f8adec5928ee618350a1132daee2d073ff33e.camel@collabora.com>
-Subject: Re: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
-From: Martyn Welch <martyn.welch@collabora.com>
-To: Jon Humphreys <j-humphreys@ti.com>, Tom Rini <trini@konsulko.com>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>
-Cc: Sjoerd Simons <sjoerd@collabora.com>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Date: Fri, 12 Jul 2024 08:51:14 +0100
-In-Reply-To: <86r0bztxn6.fsf@udb0321960.dhcp.ti.com>
-References: <20240506143846.1252377-1-martyn.welch@collabora.com>
- <20240506143846.1252377-5-martyn.welch@collabora.com>
- <86h6eocmvo.fsf@udb0321960.dhcp.ti.com>
- <960ce74500b53f9bdd7e608afecc9c1bb8b790e4.camel@collabora.com>
- <86ttgvtzyj.fsf@udb0321960.dhcp.ti.com>
- <86r0bztxn6.fsf@udb0321960.dhcp.ti.com>
-Organization: Collabora Ltd.
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.2-2 
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HnsTDFdrYDo4FFO6R3VFocsFNtdc4UFb2UdDZYyONh30/BjOJMHW9X2U2frso9BSxQYPi5Sbd2PGY1XggKBgOwkfmGcrYMmAnLI7L3rcItuyzW1d9LGLwH4rtq0NWFmay/boEeTFyP/WX5CONmf353+OAmmPkG0cqIrg2IhG3jrsZQQH5csJp2dcHqwOVWCbaHtmCzo0CAk4Js9Hk/QX9Kkd/N7wGDEsIBa4Ow2tR3ofk7W0KsesalJnqSo9HxhFfF7W26cuoE7yr5cRiobYcisXpXQ4yYSTMEJtkSwnN27xNLcaXWEP9eJzFhIjCRylSVkfHtEulZGi93jxUmmOEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RJ3X4V8doYKUfLzhPsVi05ghti9soX+Zt6Nn61iMtiA=;
+ b=y+v2Pv3+vhKxZawcjfYzX9srrp6n29gcVZgU/GzKaxcxlQBkVVZ/g1eWJSdKIHpD/vY7Ov58ilqU1OnS+SVvk9vOe6Tw+Tl7pC71tNpJEKUmyIsu5QPCkysOgrRuPOYk0Suf7sajlJwqNsIs8lvAOC8oEA8EQgC4a21rnElvGU4KdU9wJ+RIgL5u/Rtl+Ip2U4M+CCsLX/DC6PgprGNYQyZaCPkWkq9MKR8/4YL9y0JNHMzZA0tj/hLEZyLs0dspoZ7vXl5AAwPJNCrLjiaA5LR7QRbvGZ//f5WASGalWlMiNLB0AJkSH7TCKrvUvpbu1/QF1yVE2Wb8z86IgXE4dg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RJ3X4V8doYKUfLzhPsVi05ghti9soX+Zt6Nn61iMtiA=;
+ b=2PyzqPnLA8gYQkzdFb5P5tyJQ04+5cLHJtroPh90WFF1e+KvHVYH+/1dt/qSR6HVxHP4xhyOiKEP83LzQex3arW1lnbwFjHQn4ZWKrlBMtPsfRzQ9JMag+lO1Lt74hOGcLJe8LDBbCyaBB2YWdBECsMF0bM4QuNc39UJN4oKmQM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by PH7PR12MB8040.namprd12.prod.outlook.com (2603:10b6:510:26b::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.20; Fri, 12 Jul
+ 2024 07:59:08 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.7762.020; Fri, 12 Jul 2024
+ 07:59:08 +0000
+Message-ID: <c10e25ed-5b67-46e1-b5c3-5772a42071fc@amd.com>
+Date: Fri, 12 Jul 2024 09:58:54 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] amd: Enable the NFS command for Versal Gen 2
+To: Prasad Kummari <prasad.kummari@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: venkatesh.abbarapu@amd.com, git@xilinx.com, jagan@amarulasolutions.com,
+ n-francis@ti.com, d-gole@ti.com
+References: <20240711165734.1561933-1-prasad.kummari@amd.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20240711165734.1561933-1-prasad.kummari@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P191CA0009.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:800:1ba::13) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH7PR12MB8040:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42736cf9-7938-46e2-269e-08dca24881c6
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TXZxam1rOURJRHVzd2UxWFVlcERVRmdaTFlkTUFmdC9yRDByMkRzZDBzeFRi?=
+ =?utf-8?B?UDZzWTdvYnl0dTdDVFUvSit6ZzAwU2hhTHhvTmVxdUorL3ZOQmx4c2docHhO?=
+ =?utf-8?B?SXovR01iZ2tFTVhYZ1ZqUm55bTdlT2pXZVlJenlaVWcrcmpienh3OE1zb1lW?=
+ =?utf-8?B?V1BMamFPT0lha1NUaGE2M3ZudjFaSFdITXpVNzRwVnFoWlp3U05tYXZxQXpk?=
+ =?utf-8?B?L05ObHBRYURGYkcyRE95MldSSTlRNUZvRFF2M1lOdXpBcUtPTk1wRTdDcGRE?=
+ =?utf-8?B?VXVTRnMzSGlQbWtMTnZOc2lDeTBJSGZGRjRhV0oremNhU1N2RHEzWDBPWElq?=
+ =?utf-8?B?dUo3RndpUU81dXRjQnBSMFNTa3hIYjRJcTZJYTdUekRocWJpd1Y1Vmk0eVVD?=
+ =?utf-8?B?V3A5RTkrdVVzNlVNTFpoZlR0L09ac1VDeHFYZkc2R3NnSExCY2FUQkhHKzd0?=
+ =?utf-8?B?WDVabEFqTERteWJjK3ZHbTBCQ3FiWUhmcVpOdzZ6VXpjS1pldVh2OVNVbUtY?=
+ =?utf-8?B?VGg5elh4cHp0eW5oZjB5OHg5NGRkdFEvTHZLNzluY0xQZkM0RDVmek1TZ0tQ?=
+ =?utf-8?B?R2UrRVBiTjBkTHQ1MnJLME83RlE4SFFtZm96K0liSmt3QTYzbFpGanQ2K2pq?=
+ =?utf-8?B?cXZEOGI3WU5ESTg0UnRXR1JNZFhRdG5pa0N2VitDMlhpbmdqWHZsTXB6SHNW?=
+ =?utf-8?B?Q2RIZGdaaTlOV0NQUURMMlhZSXZaM3dLT3g3UndIWVlENWpjd25ZZTFBTGxy?=
+ =?utf-8?B?a0JXbUVnVEJFYUw5bFhjRnNKQ2NLbTF5OEo4NFFjdVRIMmQ0MEJwbDJwUEQ5?=
+ =?utf-8?B?Z3U2WVpucE5yMlNKRVk2UjNuaFFWVThjVFVGYnZnTEg4UFVlQi9OWkFYa29R?=
+ =?utf-8?B?enhuSXp3NGx1aG1hNllSWko0K0sxUmJGOE9LbXIzeGc3VXRqUmVocis3MElt?=
+ =?utf-8?B?MnJuQll2cDRBRlB1cnhzZFluZnRWb29KNk1SYVNWd1JqTEFZdUhYMlFpK0dw?=
+ =?utf-8?B?ckUxVlF5QzhobFlsM0VzWDZweDJ1ektPR0ZuZVlYQWFsSVZ3UWVja0lrc1F1?=
+ =?utf-8?B?S0xjaHdlWWI0WUMxYm5TalR3VmRLZWl3eHp5YlVXUHpBRnhjMTQwQ2NjcFlT?=
+ =?utf-8?B?WURFTHJ0d3NHdGRuUEdLTjZBVmJ4aG9WRUtUMUIyajYvTHRDRE9hUDNpbG5D?=
+ =?utf-8?B?WGRXL0x4QTFMUFZnb0ZtK296WU56T2p5amlUWFQ3cWdOVjBqeVorSWVWK1E4?=
+ =?utf-8?B?RmV3TWdlQnArV1AxTDB5NVhLeS9oZ2EwWFZrRC9FQ1AyVUNkY3RPekY3MnE4?=
+ =?utf-8?B?eEgxakZBbjZYZm9hUVFUWVpxamhNaTNBUHliN2JvZ3ZjM1J0bWdKQ1BxOUVx?=
+ =?utf-8?B?b1U4Q0FHTzIvT3VDUC8wZTVNYmJsR2RMTHhtZUZTbDVMakEwUnVEMlRQcDJB?=
+ =?utf-8?B?cW1QOHpGQXF3V0tBSko5Y1ZxMzdsWDdwa3l1eVVOR2FYeDl1V2RDQ3FWNGc4?=
+ =?utf-8?B?bWFhLzJHL011dnVuQXZsWXppaGJnZ3cyM29RQlBnU1RmU0lWUXhzVkEwQTYw?=
+ =?utf-8?B?V1VubkFHSjlKaTlJY0hzS2VuRE51YVRCNDl5WFhGM3l2V1BJRlFEUXZ1NXY4?=
+ =?utf-8?B?RmpQSVJCb2lSR0plWEk0d3Rid01DSGxnemNGcTAyOXdWRmhDbUttYXpHUEUr?=
+ =?utf-8?B?NTZjNUR0eVpkelZZUTZmdk5ZVWlPTFhYQWE0MEt1MExMbzZVNExyYy9jUUF5?=
+ =?utf-8?B?RDc1K3NrNjhqVW5pb2h4cjdNYjRzUFlJYWpmQnNxMEtwUFEvY1ZVdUtSeGx4?=
+ =?utf-8?B?T3dXalBxd1ZZWjVpZFlndz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VmhUL3M2WTJ1VWRMcWl1MVFmanNSdExoam1HSkoxN09TQU8xN2RCWjB4dG85?=
+ =?utf-8?B?d1Zwd0VSWmRKdlJyUnlQeHFSZzRpQWNSYVdqeDhmZVBiblFoYXA3RngwRWtX?=
+ =?utf-8?B?NlljakdGNk54aWd4VENDRGZQK2NZd3lyN1FNT3lOZXdkNVVzckJmOHo5RjJK?=
+ =?utf-8?B?OHpVOWFRWElWZ1pySU54ZzF4NkZNNk5FSkltOFJpYUczMXQvMlF3RUErWHRo?=
+ =?utf-8?B?MjhyUWpscm01cExxZkIwelNyelR0Z0tCOUpLbk90N2Nlb0JvQk9paGw5am1O?=
+ =?utf-8?B?OEdCUjRrTDhyZjZiRDBBM1o0VUEzSVlSZUdDYmdicXVJUExYbVRwSEx4N0Fy?=
+ =?utf-8?B?N1pQQ3FJa0c4UHRUcXdxRzFramVzcUxXdGRKam9Mc0t6QXc4UDZ1NlFSNTIy?=
+ =?utf-8?B?dHRNNGVleFQwekN3dUxGM0RtdXhRaTVsMitkL3JzbEJEeTNha2FZN2l1YUwz?=
+ =?utf-8?B?a3lsUGZ3bW9zZzlIVFluK242c1hTaVF2YzJteVFhVEJzQkVuSGpDTm5jekNI?=
+ =?utf-8?B?dmZxQTdTc3RXQzc3SUowQ2lSSDJ1V1JFUUdEOUxqellEckxpMXRxaWF2WWZC?=
+ =?utf-8?B?YUgrRzErU0d1ZkdwMTkrTE5FWXdUVGdDRy9zaHl3WDhnMHZEYUp6SXVMeGlD?=
+ =?utf-8?B?dlIrM2lzbmRyaFlXN0pYcnVBTFpKcTh6NVIvR1ZsemxoZ0Y0R1RyNGI3alZT?=
+ =?utf-8?B?NkxkdUg0c1lETG5mbnBiUHR0MXM1ZnhvQmFHR3paWUpwWUs4aDFrVUtWZkJC?=
+ =?utf-8?B?VE4yQ2drMlpzcDRBOVBaZHhzWU5kcUpyeHhIT2o0TTduU3pjelNvN1hqQUpU?=
+ =?utf-8?B?MFQ2NWhnNm9SaFhCVWJ3VGo5WTR0V1JiVTVDVDNkK21IaHprRklKN2pNdXBU?=
+ =?utf-8?B?U1p5U1dULzB6a0VZUFpFaEkzZnNnbWlCRkx2amN1VnFtZy9WT2pmbXFCdTNE?=
+ =?utf-8?B?Nzl4UUtFdVFlZUtiNkJWZE43Vk5HR0htY2IrTGo4WE1OWHVCdkF2RFdvRU1v?=
+ =?utf-8?B?WFBDcmkxNnJEYkw2eHdBQnJaSlVBejBYOVd3bmlhY3g2RjZVWVRueVhkUVI3?=
+ =?utf-8?B?RWZnbFZ3U3lMMzRVcGNRM2xYSUpMMWo5Vms4RnRWSStRUUZ5R29UWGhzSjBh?=
+ =?utf-8?B?RStZOXZjQ01oTXhGMU5RV0tyMmR2SVkzUGlVYUhtRlUxTkViVFl1UTU3Y3c1?=
+ =?utf-8?B?THJqbGROR0Z6NkcrWnladjF5VFZxVmlNVjR2NUhyTzlTRE95VW9pZjBqTjdZ?=
+ =?utf-8?B?aEFXRTdUdStic1F0OVlxN2dlUWJ2Z1hKb1I0VlRKMEtoRU5ldkUzd0lVQytS?=
+ =?utf-8?B?ZklKbXBQdDZHRjF1bEJOOHBUZE9Sb0Z3Uk1jTWVOOUpkYjJhVW14RStjU1dv?=
+ =?utf-8?B?dmthVzFzZmFVdTRtMjRna3lNd2JjNDhWQ0drVWdrbDFOc0lxUE40Nm5HQTNr?=
+ =?utf-8?B?SjMwaFVvRXhWcFM5REpLSS9JTWVtSkkvaWYwbFozSGRGU25IaUpJZm1odzE2?=
+ =?utf-8?B?TU5JMVNxYWo2RlNHVmZtelZ1TGRReU0wMFlXRzhLQWRydVRvZ0V6ZlRYZFZF?=
+ =?utf-8?B?cUhhdDhCZEpveGw3N1FKdDQ5SDVYdlUwS1ExOEc2ZWY0Y2VGeVI2SnNvRHRt?=
+ =?utf-8?B?WVgwZmo4cHprOWV1enJ0c094ejB4YzZLSTdPbnRBL3hFMFRmMXgyWHJLWHR5?=
+ =?utf-8?B?SWVYY3NlblkrRUFKdDM4SWwxbzRVeGg3RkRJMVhhOUM2MS9KR280KytLZEc2?=
+ =?utf-8?B?bVJHN2pCcWJLdmVFNXRNc3JyRlFqdW01MkRVMlI1RThXWnl2SG5xbkZWTXVs?=
+ =?utf-8?B?UDRaTFFYdU1YSzNzb0NvN3NJUkN2SXdxYWZ5clBSS2xPNDlTR3NyT3FNSXFS?=
+ =?utf-8?B?ZzJZSU80RHhzM2h0V1hudms1UENlVkZWcDVMNXp5ZTJvcFNZdUpSUzVyRmkz?=
+ =?utf-8?B?ZjViT1N2RnZnMHJxSUtUbmZzODNVYXlUZlFpWGcwRGpPTHpkaTd0ZWtNSHBQ?=
+ =?utf-8?B?KzF0VHdZMWJvTzlVVWg1dkt4bE9scFp1MEtkK2dMbUJJeHJzRjllak9vYUUx?=
+ =?utf-8?B?MFBBaXJ6a21rRENycWZrUzJTY2UvR0h0Q1BqSk85Z0I1WVR0ajYrSHRzRjJP?=
+ =?utf-8?Q?tBKNRSA8TveqIHbz5lOm+OLMQ?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42736cf9-7938-46e2-269e-08dca24881c6
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2024 07:59:08.0784 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Vc2FYRjyHmztpXDcJlNM6amlkEN/6NXs7YhoFSBVBX9dBNKolreukDVlRAevOwfv
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8040
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,370 +217,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2024-07-11 at 16:41 -0500, Jon Humphreys wrote:
-> Jon Humphreys <j-humphreys@ti.com> writes:
->=20
-> > Martyn Welch <martyn.welch@collabora.com> writes:
-> >=20
-> > > On Thu, 2024-05-23 at 15:08 -0500, Jon Humphreys wrote:
-> > > > Martyn Welch <martyn.welch@collabora.com> writes:
-> > > >=20
-> > > > > From: Sjoerd Simons <sjoerd@collabora.com>
-> > > > >=20
-> > > > > Provide config fragments to enable USB host as well as USB
-> > > > > gadget
-> > > > > and DFU
-> > > > > support for a53 and r5. This relevant fragment is included
-> > > > > into the
-> > > > > am62x EVM a53 defconfig. For the r5, due to the smaller
-> > > > > available
-> > > > > size,
-> > > > > the config fragment also disables support for persistent
-> > > > > storage to
-> > > > > free
-> > > > > up space for USB support. This fragment needs to be included
-> > > > > is DFU
-> > > > > booting is desired.
-> > > > >=20
-> > > > > The CONFIG_DFU_SF option is placed in the defconfig rather
-> > > > > than the
-> > > > > fragment as this is known not to be supported on all boards
-> > > > > that
-> > > > > can
-> > > > > support DFU.
-> > > > >=20
-> > > > > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> > > > > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
-> > > > > ---
-> > > > > Changes in v5:
-> > > > > - Switch to config fragment for a53 most DFU configuration
-> > > > >=20
-> > > > > Changes in v4:
-> > > > > - Move R5 dfu config to a config fragment rather then a full
-> > > > > defconfig
-> > > > > - Don't enable XHCI for the R5 SPL, unneeded
-> > > > >=20
-> > > > > Changes in v3:
-> > > > > - Run savedefconfig to adjust to more recent u-boot
-> > > > >=20
-> > > > > Changes in v2:
-> > > > > - Create a seperate defconfig for R5
-> > > > >=20
-> > > > >=20
-> > > > >=20
-> > > > > =C2=A0configs/am62x_a53_usbdfu.config | 30
-> > > > > ++++++++++++++++++++++++++++++
-> > > > > =C2=A0configs/am62x_evm_a53_defconfig |=C2=A0 2 ++
-> > > > > =C2=A0configs/am62x_r5_usbdfu.config=C2=A0 | 28
-> > > > > ++++++++++++++++++++++++++++
-> > > > > =C2=A03 files changed, 60 insertions(+)
-> > > > > =C2=A0create mode 100644 configs/am62x_a53_usbdfu.config
-> > > > > =C2=A0create mode 100644 configs/am62x_r5_usbdfu.config
-> > > > >=20
-> > > > > diff --git a/configs/am62x_a53_usbdfu.config
-> > > > > b/configs/am62x_a53_usbdfu.config
-> > > > > new file mode 100644
-> > > > > index 0000000000..3a19cf2328
-> > > > > --- /dev/null
-> > > > > +++ b/configs/am62x_a53_usbdfu.config
-> > > > > @@ -0,0 +1,29 @@
-> > > > > +CONFIG_SYS_MALLOC_LEN=3D0x2000000
-> > > > > +CONFIG_SPL_ENV_SUPPORT=3Dy
-> > > > > +CONFIG_SPL_RAM_SUPPORT=3Dy
-> > > > > +CONFIG_SPL_RAM_DEVICE=3Dy
-> > > > > +CONFIG_SPL_USB_GADGET=3Dy
-> > > > > +CONFIG_SPL_DFU=3Dy
-> > > > > +CONFIG_CMD_DFU=3Dy
-> > > > > +CONFIG_CMD_USB=3Dy
-> > > > > +CONFIG_SYSCON=3Dy
-> > > > > +CONFIG_SPL_SYSCON=3Dy
-> > > > > +CONFIG_DFU_MMC=3Dy
-> > > > > +CONFIG_DFU_RAM=3Dy
-> > > > > +CONFIG_SYS_DFU_DATA_BUF_SIZE=3D0x5000
-> > > > > +CONFIG_SYS_DFU_MAX_FILE_SIZE=3D0x800000
-> > > > > +CONFIG_USB=3Dy
-> > > > > +CONFIG_DM_USB_GADGET=3Dy
-> > > > > +CONFIG_SPL_DM_USB_GADGET=3Dy
-> > > > > +CONFIG_USB_XHCI_HCD=3Dy
-> > > > > +CONFIG_USB_XHCI_DWC3=3Dy
-> > > > > +CONFIG_USB_DWC3=3Dy
-> > > > > +CONFIG_USB_DWC3_GENERIC=3Dy
-> > > > > +CONFIG_SPL_USB_DWC3_GENERIC=3Dy
-> > > > > +CONFIG_SPL_USB_DWC3_AM62=3Dy
-> > > > > +CONFIG_USB_DWC3_AM62=3Dy
-> > > > > +CONFIG_USB_GADGET=3Dy
-> > > > > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
-> > > > > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
-> > > > > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
-> > > > > +CONFIG_USB_GADGET_DOWNLOAD=3Dy
-> > > > > diff --git a/configs/am62x_evm_a53_defconfig
-> > > > > b/configs/am62x_evm_a53_defconfig
-> > > > > index 6c708dcb05..16294a6a79 100644
-> > > > > --- a/configs/am62x_evm_a53_defconfig
-> > > > > +++ b/configs/am62x_evm_a53_defconfig
-> > > > > @@ -68,6 +68,7 @@ CONFIG_SPL_OF_TRANSLATE=3Dy
-> > > > > =C2=A0CONFIG_CLK=3Dy
-> > > > > =C2=A0CONFIG_SPL_CLK=3Dy
-> > > > > =C2=A0CONFIG_CLK_TI_SCI=3Dy
-> > > > > +CONFIG_DFU_SF=3Dy
-> > > > > =C2=A0CONFIG_DMA_CHANNELS=3Dy
-> > > > > =C2=A0CONFIG_TI_K3_NAVSS_UDMA=3Dy
-> > > > > =C2=A0CONFIG_TI_SCI_PROTOCOL=3Dy
-> > > > > @@ -111,3 +112,5 @@ CONFIG_SPL_SYSRESET=3Dy
-> > > > > =C2=A0CONFIG_SYSRESET_TI_SCI=3Dy
-> > > > > =C2=A0CONFIG_FS_FAT_MAX_CLUSTSIZE=3D16384
-> > > > > =C2=A0CONFIG_EFI_SET_TIME=3Dy
-> > > > > +
-> > > > > +#include <configs/am62x_a53_usbdfu.config>
-> > > > > diff --git a/configs/am62x_r5_usbdfu.config
-> > > > > b/configs/am62x_r5_usbdfu.config
-> > > > > new file mode 100644
-> > > > > index 0000000000..772bb2ab93
-> > > > > --- /dev/null
-> > > > > +++ b/configs/am62x_r5_usbdfu.config
-> > > > > @@ -0,0 +1,28 @@
-> > > > > +CONFIG_SPL_ENV_SUPPORT=3Dy
-> > > > > +CONFIG_SYSCON=3Dy
-> > > > > +CONFIG_SPL_SYSCON=3Dy
-> > > > > +CONFIG_SYS_DFU_DATA_BUF_SIZE=3D0x5000
-> > > > > +CONFIG_MISC=3Dy
-> > > > > +CONFIG_USB=3Dy
-> > > > > +CONFIG_DM_USB_GADGET=3Dy
-> > > > > +CONFIG_SPL_DM_USB_GADGET=3Dy
-> > > > > +CONFIG_USB_DWC3=3Dy
-> > > > > +CONFIG_USB_DWC3_GENERIC=3Dy
-> > > > > +CONFIG_SPL_USB_DWC3_GENERIC=3Dy
-> > > > > +CONFIG_SPL_USB_DWC3_AM62=3Dy
-> > > > > +CONFIG_USB_GADGET=3Dy
-> > > > > +CONFIG_SPL_USB_GADGET=3Dy
-> > > > > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
-> > > > > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
-> > > > > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
-> > > > > +CONFIG_USB_GADGET_DOWNLOAD=3Dy
-> > > > > +CONFIG_SPL_DFU=3Dy
-> > > > > +# CONFIG_SPL_MMC is not set
-> > > > > +# CONFIG_SPL_FS_FAT is not set
-> > > > > +# CONFIG_SPL_LIBDISK_SUPPORT is not set
-> > > > > +# CONFIG_SPL_SPI is not set
-> > > > > +# CONFIG_SPL_SYS_MALLOC is not set
-> > > > > +# CONFIG_CMD_GPT is not set
-> > > > > +# CONFIG_CMD_MMC is not set
-> > > > > +# CONFIG_CMD_FAT is not set
-> > > > > +# CONFIG_MMC_SDHCI is not set
-> > > > > --=20
-> > > > > 2.43.0
-> > > >=20
-> > > > Hi all, it appears that this patch breaks OSPI DFU on the
-> > > > board.=C2=A0 In
-> > > > particular, changing the CONFIG_SYS_DFU_DATA_BUF_SIZE seems to
-> > > > be the
-> > > > culprit.
-> > > >=20
-> > > > I see the error as a DFU timeout when applying capsules.
-> > > >=20
-> > > > =C2=A0 SF: Detected s28hs512t with page size 256 Bytes, erase size
-> > > > 256
-> > > > KiB, total 64 MiB
-> > > > =C2=A0 ############jedec_spi_nor flash@0: flash operation timed out
-> > > > =C2=A0 #DFU write failed
-> > > >=20
-> > >=20
-> > > I'm not seeing this failure using the `-next` branch from
-> > > yesterday
-> > > (2f96033923).
-> > >=20
-> > > I've attempted to use both the `uboot-capsule.bin` produced with
-> > > and
-> > > without the DFU config enabled whilst booting the SK-AM62 via DFU
-> > > and
-> > > from an SD card. I seem to be consistently getting the following:
-> > >=20
-> > > =3D> ext2ls mmc
-> > > 1:1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=20
-> > > <DIR>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 4096
-> > > .=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=20
-> > > <DIR>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 4096
-> > > ..=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=20
-> > > <DIR>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 16384
-> > > lost+found=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 1132791 uboot-
-> > > capsule.bin=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=20
-> > > =3D> load mmc 1:1 ${loadaddr} /uboot-
-> > > capsule.bin=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=20
-> > > 1132791 bytes read in 57 ms (19
-> > > MiB/s)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > =3D> efidebug capsule update
-> > > ${loadaddr}=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > ** File not found ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to load EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > ** Unable to write file ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to persist EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=20
-> > > ** Unable to write file ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to persist EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=20
-> > > ** Unable to write file ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to persist EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=20
-> > > ** Unable to write file ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to persist EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=20
-> > > ** Unable to write file ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to persist EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=20
-> > > SF: Detected s28hs512t with page size 256 Bytes, erase size 256
-> > > KiB,
-> > > total 64 Mi
-> > > B=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0
-> > > =C2=A0=C2=A0=C2=A0=20
-> > > ########################################################=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> > > =C2=A0=C2=A0=C2=A0=20
-> > > ** Unable to write file ubootefi.var
-> > > **=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> > > Failed to persist EFI
-> > > variables=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=20
-> > > =3D>
-> > >=20
-> > > TBH, I'm not sure if this is good or bad at this point, but I'm
-> > > not
-> > > seeing the error that you reported. As can be seen above, I don't
-> > > have
-> > > a `ubootefi.var` file, but then I don't boot using EFI
-> > > mechanisms, so I
-> > > guess that's expected?
-> > >=20
-> > > But then, the commands I've used above aren't applying the
-> > > capsule
-> > > either right?
-> > >=20
-> > > Martyn
-> > >=20
-> > > > Jon
-> >=20
-> > Hi Martyn, against upstream/next, I no longer see the failure.=C2=A0
-> > Thanks for
-> > looking into it.
-> >=20
-> > Jon
->=20
-> Sorry, I wasn't running what I thought I was.=C2=A0 I can confirm that I
-> see the failure when I build against 2f960339235.
->=20
-> Here are my steps:
->=20
-> =3D> ls mmc 1
-> =C2=A0=C2=A0 288978=C2=A0=C2=A0 tiboot3.bin
-> =C2=A0 1017959=C2=A0=C2=A0 tispl.bin
-> =C2=A0 1130635=C2=A0=C2=A0 u-boot.img
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 307=C2=A0=C2=A0 uEnv.txt
-> =C2=A0 1133143=C2=A0=C2=A0 uboot-capsule.bin
->=20
-> 5 file(s), 0 dir(s)
->=20
-> =3D> load mmc 1:1 ${loadaddr} /uboot-capsule.bin
-> 1133143 bytes read in 60 ms (18 MiB/s)
-> =3D> efidebug capsule update ${loadaddr}
-> Cannot read EFI system partition
-> Cannot read EFI system partition
-> Failed to persist EFI variables
-> Cannot read EFI system partition
-> Failed to persist EFI variables
-> Cannot read EFI system partition
-> Failed to persist EFI variables
-> Cannot read EFI system partition
-> Failed to persist EFI variables
-> Cannot read EFI system partition
-> Failed to persist EFI variables
-> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB,
-> total 64 MiB
-> ############jedec_spi_nor flash@0: flash operation timed out
-> #DFU write failed
-> Firmware update failed: <NULL>
-> Cannot handle a capsule at 0000000082000000
-> =3D>=20
->=20
-> What board rev of the sk-am62 are you using?=C2=A0 I am using PROC142A.
->=20
->=20
 
-Hi Jon,
 
-The board I have here is PROC114E3.
+On 7/11/24 18:57, Prasad Kummari wrote:
+> Enabled the default utilization of the NFS command on Versal Gen 2
+> platform to facilitate booting images through the network using
+> the NFS protocol
+> 
+> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+> ---
+> Changes in v2:
+> - corrected commit description.
+> 
+>   configs/amd_versal2_virt_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+> index 2d611f84cd..bbe7db4fb3 100644
+> --- a/configs/amd_versal2_virt_defconfig
+> +++ b/configs/amd_versal2_virt_defconfig
+> @@ -46,6 +46,7 @@ CONFIG_CMD_USB=y
+>   CONFIG_BOOTP_MAY_FAIL=y
+>   CONFIG_BOOTP_BOOTFILESIZE=y
+>   CONFIG_CMD_TFTPPUT=y
+> +CONFIG_CMD_NFS=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+>   CONFIG_CMD_TIME=y
 
-Martyn
-
-> Jon
->=20
-
+Applied.
+M
