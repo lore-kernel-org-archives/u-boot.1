@@ -4,85 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFEF8C3DA45
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 05:06:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A33EEC3DA45
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 05:25:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1DB3885EB;
-	Fri, 12 Jul 2024 07:05:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cknow.org
+	by phobos.denx.de (Postfix) with ESMTP id 1134788725;
+	Fri, 12 Jul 2024 07:25:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=cknow.org header.i=@cknow.org header.b="Ja/3yozb";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="suuXXhvt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7161A87FC7; Thu, 11 Jul 2024 21:38:24 +0200 (CEST)
-Received: from out-184.mta1.migadu.com (out-184.mta1.migadu.com
- [IPv6:2001:41d0:203:375::b8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0234F88725; Fri, 12 Jul 2024 07:25:25 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 681DB8827D
- for <u-boot@lists.denx.de>; Thu, 11 Jul 2024 21:38:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cknow.org
+ by phobos.denx.de (Postfix) with ESMTPS id DEF6B886E7
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 07:25:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=didi.debian@cknow.org
-X-Envelope-To: kever.yang@rock-chips.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cknow.org; s=key1;
- t=1720726700;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=1nNzB71q3ef9KInPezsmlQA4fWC2/378osp8+0tA2v0=;
- b=Ja/3yozbUBKtmp+1hEduKrRQrr2yfA+O0Q+4evBVLNxkiQPOIwVtnRvJtqAJbKUvFFyqxj
- pG1SSAErRzW028S82et2dHOu4Bo+0K8N88BPc1TPmgS8jp1bDmIUK8bVHBttkUC8NWGcpf
- WUoZKez7diyDcUimGsySXP7qbJfWz70KpTXj398qZ7dj/CwtbAicvlQ/n216F1T2I1k7c9
- Z7QE1DhIMwHyOZoj9bwSoFckWoq8PJG1BANA0dC1fcbYBCerZ2z/G15qCJJYHmvwhjnUFL
- z4cd7QoCscYtmQ8SJ3el4IUa6ChCaORGjfSSY1Zy1/HZ7PSkgxFF7PTJtW7z/w==
-X-Envelope-To: sjg@chromium.org
-X-Envelope-To: philipp.tomsich@vrull.eu
-X-Envelope-To: chenjh@rock-chips.com
-X-Envelope-To: andyshrk@163.com
-X-Envelope-To: cnsztl@gmail.com
-X-Envelope-To: jonas@kwiboo.se
-X-Envelope-To: frattaroli.nicolas@gmail.com
-X-Envelope-To: jagan@amarulasolutions.com
-X-Envelope-To: gajjar04akash@gmail.com
-X-Envelope-To: u-boot@lists.denx.de
-X-Envelope-To: david.wu@rock-chips.com
-X-Envelope-To: eugen.hristev@collabora.com
-X-Envelope-To: frank-w@public-files.de
-X-Envelope-To: u-boot@lists.denx.de
-X-Envelope-To: jonas@kwiboo.se
-X-Envelope-To: stefan@agner.ch
-X-Envelope-To: didi.debian@cknow.org
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Diederik de Haas <didi.debian@cknow.org>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Joseph Chen <chenjh@rock-chips.com>, Andy Yan <andyshrk@163.com>,
- Tianling Shen <cnsztl@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de
-Cc: David Wu <david.wu@rock-chips.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Stefan Agner <stefan@agner.ch>,
- Diederik de Haas <didi.debian@cknow.org>
-Subject: Re: [PATCH v2 6/7] configs: rockchip: Enable ethernet driver on
- RK356x boards
-Date: Thu, 11 Jul 2024 21:38:08 +0200
-Message-ID: <2086393.9F9pDXStbY@bagend>
-Organization: Connecting Knowledge
-In-Reply-To: <20231001191730.4167035-7-jonas@kwiboo.se>
-References: <20231001191730.4167035-1-jonas@kwiboo.se>
- <20231001191730.4167035-7-jonas@kwiboo.se>
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NCDjERALciX/fvCZnFZbz7ZkJ8FHmR6081ByfZbcjVzpgWyCaGK/byERQhVyNh6vRseCSpy0f45C7aRLwqtCBNy1/OHoxWqPb8sZ6ndallOK9JQBo1CJosgQ0NmYhcTvnxw9cGeb4KQki4uLyKDjZAR6oBfyQncArzl9aJ8RtSIxVaGh+iCZgVl0EiKxeq++64QPYwCYYzEVB8aOoSinBAUzuqoSu0sWUulXl8xQYFsIIv+Ab3Ovs9zFBs9wKAU3U8sO/Zm0/Irdtj1kfgBUjE4l/mdb+sGLacocMnJDmUBT8UfFjmf+iR+zU31/OHC6vl8ykix8c7XHw8/Qoyqnag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Idq02EtFKWuQem6FpsbNznqobVu6V2IFFVX30DXQqkk=;
+ b=OSYW/iS/oViISttOOmP5WDpOrLV4Xq3kO6tcIL8Dqc89+EsEuxACxr5Fzs1oT9zoMpPytfWNE4C0IqjVLOaFzCtiJ5iQvc/ZL8abbOKPnIZyslCeLlqRFMzwnPNsqPS9CneJBOPxzmMb5HgmPxdozAdEBToo8tqiXKeJ34DPpPO7CCv8XVm4IRjwt1SEhswjspiZCq0dsu2STVj3s4hc5ABJ6jA7a3u3zUX8EQ9Fegf2+Hh7VxhyjYL4Eg+lITNg4sLhN90f1xiXinJt7ObkLvVyoyv87FacZflKXW1r+pgU4UW0ESF78oGm/QJVbX6VSblpXxrbkmWXFOQnbhK/BA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Idq02EtFKWuQem6FpsbNznqobVu6V2IFFVX30DXQqkk=;
+ b=suuXXhvtrSceG4ioi1WcXPnkfT+GAlObGJg0tNuhkxMgyPJMylm961x5R4q4VtSF7kxN7iBx3ioxzY75EiugOo8f8bOP654Z5H4oAlnm6q8d2n4khkz6OV4AcAJq6ia8blHrWShgqPpwS3qqh3qkOU9l5lDqKVEoref1JEhxDavT1kifalQdttwq5W5Mf0CBUr6sOF9nNo47y037U70P4i1vqccsU31WFs40p/QBWV3SwJ7UUHu25TtVq05ujIXf9SAg/W5nR+O3cByHQur6QoXMDC2E+zsVh9zHEPkCwf/0iac5ZwPpsFUZc/7jHgEJY0OQgHEVTqlsOcCcrX12cg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AM8PR08MB5796.eurprd08.prod.outlook.com (2603:10a6:20b:1d1::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.22; Fri, 12 Jul
+ 2024 05:25:21 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7762.020; Fri, 12 Jul 2024
+ 05:25:20 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v5 0/2] led: implement software blinking
+Date: Fri, 12 Jul 2024 09:25:05 +0400
+Message-Id: <20240712052507.2496669-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.39.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: LO4P123CA0178.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18a::21) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart2276470.1dZ1CPmI8s";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Fri, 12 Jul 2024 07:05:58 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AM8PR08MB5796:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a6eb14d-08bb-4c24-41ad-08dca23305d0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|52116014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?g+uyqxmYDjrkslxQfP0C7MjnmuCWjV9qpSP4wm50eNtmmqUYGDwu1Z6I084o?=
+ =?us-ascii?Q?IegvbzYsyYNpJHCKXfn91/2GqrDIVrFCGjVuxaL6b7QEmrNJEI1zBM3VateF?=
+ =?us-ascii?Q?aXDciFvkc5L8BRwySxgNKyHq7Rg5JbsS2FcqmGGUdfW7sENR36uPh/r3jpsT?=
+ =?us-ascii?Q?/MhOjFDI5mpMttjZ1f3FuQlPu8GRKuYBMkj29FoJzGLoEX6LRREC9OsDz4WX?=
+ =?us-ascii?Q?OC8KV6KOq0d5Jy0n2yEL+bwc+QUhwJGKz17N0C9/aqFCantQxxOVcBJr0TTC?=
+ =?us-ascii?Q?TD3aZYH6YbUehvEdUG+nEsPhETLog+wqWeBfTO57Zk8BWsVsLvBOpM9HP5rP?=
+ =?us-ascii?Q?5sT6AyTXvlQQBHTgFtEeqhY56T04dvr5iUMXTNXGivyqL9vsq2uqbq3zdAtK?=
+ =?us-ascii?Q?Vx2twApLrqwms31fejFP/7YJwjqL3pP7JfCpN/Mf4/t6QChUShWwSh6vnHXE?=
+ =?us-ascii?Q?mHImxatFL6+4coR+eSjehMuJFuxTwYgUE0aNrc9X2g/EzLZnIwFcyqhlL0Fc?=
+ =?us-ascii?Q?LyczFl/kS9NEhhcfdBxYLWOeZSVwqFQaTN7bzf141FQNItjehu3eF7Nx4hAN?=
+ =?us-ascii?Q?ySpylNWT1IKQR4GKFzFnpdIo0fgerFU68Wo/z/o/jEpCceYz+oajCL8a7L+p?=
+ =?us-ascii?Q?1W+qVWkHqgZlioIKnh7TckpT6KKegZBmv3ivJv+Rdd9WJ195zkLTPeID8bVc?=
+ =?us-ascii?Q?ORRCLggewI7Ds2fmrPv9eRNuV3osZOQqS0aDVYnsaDQrxomPtpOE1VlgOxaL?=
+ =?us-ascii?Q?hK4KyZNyu9xeR55yxz5yZc1Pf7cAAXXQh0Lln8hUMwKX9wPEcQ6Bs53nExz/?=
+ =?us-ascii?Q?c5hSfGpOVsOiK4T1vOkuwlTXt287cyxtitlei6sOdxBAT0YaoERuHoAOMW7E?=
+ =?us-ascii?Q?HewJl0VbK1wY4Eo/W1UG4mmJd80w9J49uVZJOdR+R207q89tOgZLk3EKK1ih?=
+ =?us-ascii?Q?/h7iUdcfC4vlIEnqL9Uri0xi2qUoVs3+8VDeYm00FSwPg3A0iPMUCtucNJwi?=
+ =?us-ascii?Q?badCsjXTLJ/dvnnDo7QUwPyoEhxsVVUBePjJY4fyIxPP9pn+guGfjtHOPQNy?=
+ =?us-ascii?Q?YCP8a9yhpeTkjdchtGiwkq1y0TQEljGSHS9rvopr+A8DwlWyE1nmurYFKEMh?=
+ =?us-ascii?Q?gdfMqW1KVEgJfhwhhYxqF6pqFbBc2t4HwMNKJ35jCrSU9JjvLLtOokuA2tFO?=
+ =?us-ascii?Q?GdfoJOqRRs0NS5vdphm5JCZNFH8ujmqKahbBxear3YBvcr6lxH37mHHopF8G?=
+ =?us-ascii?Q?mDXxZi7+nZ7TaFEswa+8PVw+lyRAHRkUY+nKcfLo4+kp2Es1SsxUiRMFJOSb?=
+ =?us-ascii?Q?QbHhEqO5RFvMD+ySIZnMnSLqd6HxNQzva0kJgXXbfCeg8mbbV2IX3Jy0P/kb?=
+ =?us-ascii?Q?phlnySVDPHDjF4sOAUqEfy93npAslQC7Q0I1+bmyJU2/xCAI/g=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(52116014)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KR81hWpi8HxPJa0jRXUy0G4UZE56Y2sf9GZApTaBRmc5ZsHiPZmF3YwIc3I2?=
+ =?us-ascii?Q?zYWiVRWq8el41GR2hlcEdNyRYs6FtVfiUdrb+VyFlCpR2tFRIq6eWtciTkdh?=
+ =?us-ascii?Q?YlqLvrj/r2NaEXA2U6SRrDcZNqnw6PkNpYy+vAafHY5EONwhlHZ9j/ojNSpb?=
+ =?us-ascii?Q?pTHqmIm1BuiYKDvotgqYhObb4sDCfqoy1rRCetUvHSrn59zkC8j4ExeWIutY?=
+ =?us-ascii?Q?pT/ZNanLX8zuuSw25HHUWLeTcaRfKAB4t1M3iiKYTtcn77093wCmof24fDgD?=
+ =?us-ascii?Q?AsQnwNXl14qXtHs4Bc/iT1fKjhSzQxfDWiRTnXIzVz5pEUn7oruAiA0JLw/R?=
+ =?us-ascii?Q?YroyrxGbdYnuO+eLz9Zd2SLqdtQnkYxBNEMp1eFC4eqdBzo6JdU1t1gu5qWb?=
+ =?us-ascii?Q?ni7Hl6mQOy08XP8Rx8kUQzy3tDuUKJBW91eB8bBYWSLEC9yAQv8nH7lCBkvw?=
+ =?us-ascii?Q?fReSFkfzzGd1+MrQo6xf8CeY8TKQlReNAUeON7Z0trMvbH4zFOZ1dHXrNvY5?=
+ =?us-ascii?Q?gcvlkAt2aDvGVlzqBqRMOb4mZicQEEhoaUs9AwkDU7syoMYRaqJp5bN1sbTv?=
+ =?us-ascii?Q?akk5vm5vv0aT0g5tGiPKauwJbFae7Kc9yNkgxrMD37jb6rJyZb0TxqHokJOi?=
+ =?us-ascii?Q?ZnZiqHJ6nip3WFIrhfvsXRKVgF2VFbJeBPJHLHVPaAsSA0cLwnFes0MbIytX?=
+ =?us-ascii?Q?piReuJIap8U5DkoQmFjhqn4JkaQAe0pEtGyz7K1WXE1Y3+uyqI/2/EgzJBNO?=
+ =?us-ascii?Q?um/cezqv+090RXIs2/g3WDIulyDfUr5TFvcMfHRlEiqotv9xyJPvdkDXUV9A?=
+ =?us-ascii?Q?aI71+eFHFSn2vPOL6q2qw0zf1cvvJeCR+68q2qENA1TOdzGQDIZ3forrMRJH?=
+ =?us-ascii?Q?ehDwDdneY7w7TuUA2kz5+couq7I/KcIMDjpGH5+f8EbtvZeyMlCStcW4308a?=
+ =?us-ascii?Q?zk1xTfKLwsygasNLpjxhQs6S3xGopiH2ktygBX0s492byIqluFMp+4ooI45k?=
+ =?us-ascii?Q?j04RTOiZSGh74PDWLQ3n0Gs4vt3Ukw6WdWFcjCBcad5S61EZOCFvY6mLJIv5?=
+ =?us-ascii?Q?L9s6pu+lIqIrk9RlV9HQDzgZx0gYWIpshIStp6fkzQ419KlsFx1Y/DuSrRUa?=
+ =?us-ascii?Q?08CKeKX4HQDZDGV2C1QdNRHwXLHMA7iKIxVWxB7pBeZzVflcVFn8arTr1dSc?=
+ =?us-ascii?Q?HAU12VAsoNZQeRtqWYWO5KPvi1+ljBul9zjRkIZG4BhzrCypLJ8yP4JVl4Qk?=
+ =?us-ascii?Q?X1sOsaAwkokSTysYcCYrMVJP9LLwlyjfZTEzWJi0gT9oNZ2zNHyOKxFdVCet?=
+ =?us-ascii?Q?ay3pAJ3NwezMQDbqn7LKTYPJlVu5xlbH0YxidFE8Y9VDkDuEuJIsaY/P9cIy?=
+ =?us-ascii?Q?vyX5DZtkOibaWsIqjh9syOco2eAseA2NZJmR4LdEaYjqktrO+WIlbDlM4bBY?=
+ =?us-ascii?Q?z1hZP37V+P4WSUDmL53sG59Zmd+t9ATleZAna9edFl3zGyGNBT/yMTcSyodl?=
+ =?us-ascii?Q?rK/tUEL9/GHEkeEjsXyHEloW22zKB45q2bUzLCpsiE6/HPp5+mOVbhuZRLgq?=
+ =?us-ascii?Q?eoDsoOqkBOzL+FZ6kldyO0Vf6CLFbXhqCqgoKZHtXC78Jpime0SjpBPgNQJB?=
+ =?us-ascii?Q?6A=3D=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a6eb14d-08bb-4c24-41ad-08dca23305d0
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2024 05:25:20.7281 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FqXe6ibtuLruYim7r8myyazBWTDMvmPIxKRy65dcYYnp7x9hQ0trLk19zUNJRfKhxKGay3qoZuKVrCl5tHRIHsVYRKEgvXZPJFpug4b6zt4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5796
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,156 +160,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---nextPart2276470.1dZ1CPmI8s
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"; protected-headers="v1"
-From: Diederik de Haas <didi.debian@cknow.org>
-Date: Thu, 11 Jul 2024 21:38:08 +0200
-Message-ID: <2086393.9F9pDXStbY@bagend>
-Organization: Connecting Knowledge
-In-Reply-To: <20231001191730.4167035-7-jonas@kwiboo.se>
-MIME-Version: 1.0
+v2 changes:
+ * Drop sw_blink_state structure, move its necessary fields to
+   led_uc_plat structure.
+ * Add cyclic_info pointer to led_uc_plat structure. This
+   simplify code a lot.
+ * Remove cyclic function search logic. Not needed anymore.
+ * Fix blinking period. It was twice large.
+ * Other cleanups.
 
-Hi,
+v3 changes:
+ * Adapt code to recent cyclic function changes
+ * Move software blinking functions to separate file
+ * Other small changes
 
-On Sunday, 1 October 2023 21:17:21 CEST Jonas Karlman wrote:
-> Enable DWC_ETH_QOS_ROCKCHIP and related PHY driver on RK356x boards that
-> have an enabled gmac node.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-> ---
-> ...
->  configs/odroid-m1-rk3568_defconfig        | 3 +++
->  configs/quartz64-a-rk3566_defconfig       | 3 +++
->  configs/quartz64-b-rk3566_defconfig       | 3 +++
->  ...
->  configs/soquartz-blade-rk3566_defconfig   | 3 +++
->  configs/soquartz-cm4-rk3566_defconfig     | 3 +++
->  configs/soquartz-model-a-rk3566_defconfig | 3 +++
->  11 files changed, 35 insertions(+), 6 deletions(-)
-> ...
-> diff --git a/configs/odroid-m1-rk3568_defconfig
-> b/configs/odroid-m1-rk3568_defconfig index 3dda5c1f9170..96b4e9ecdaff
-> 100644
-> --- a/configs/odroid-m1-rk3568_defconfig
-> +++ b/configs/odroid-m1-rk3568_defconfig
-> @@ -82,6 +82,9 @@ CONFIG_SF_DEFAULT_BUS=4
->  CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_MTD=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->  CONFIG_NVME_PCI=y
->  CONFIG_PCIE_DW_ROCKCHIP=y
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/quartz64-a-rk3566_defconfig
-> b/configs/quartz64-a-rk3566_defconfig index 6853cd6c44b4..bf4d4cd2b8ed
-> 100644
-> --- a/configs/quartz64-a-rk3566_defconfig
-> +++ b/configs/quartz64-a-rk3566_defconfig
-> @@ -81,6 +81,9 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->  CONFIG_SPI_FLASH_GIGADEVICE=y
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_PHY_MOTORCOMM=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->  CONFIG_NVME_PCI=y
->  CONFIG_PCIE_DW_ROCKCHIP=y
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/quartz64-b-rk3566_defconfig
-> b/configs/quartz64-b-rk3566_defconfig index aa29fff14643..358687ab5d7f
-> 100644
-> --- a/configs/quartz64-b-rk3566_defconfig
-> +++ b/configs/quartz64-b-rk3566_defconfig
-> @@ -79,6 +79,9 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->  CONFIG_SPI_FLASH_GIGADEVICE=y
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->  CONFIG_NVME_PCI=y
->  CONFIG_PCIE_DW_ROCKCHIP=y
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+v4 changes:
+ * refactoring of led_set_period() function
 
-Some time ago I reported to Jonas privately that I had a problem with
-my Quartz64 Model A and B and that I bisected it to this commit.
-I just verified that the problem is still present in 2024.07, so I
-guess it's time to report it to the (right) Mailing List.
+v5 changes
+ * fix compilation if CONFIG_LED_BLINK is not defined
 
-The problem: packet loss, varying, but sometimes massive
-Q64-A: The packet loss was usually between 8% and 30%
-Q64-B: Packet loss up to 80% sometimes and this also resulted (then) in
-its inability to receive a DHCP address.
+Michael Polyntsov (2):
+  led: Implement software led blinking
+  led: Add dts property to specify blinking of the led
 
-https://lore.kernel.org/linux-rockchip/27139798.WhXITi6ROJ@bagend/
-is where I brought this issue (also) up publicly, but that was on the 
-linux-rockchip ML. The discussion that followed may provide some clues.
+ drivers/led/Kconfig        |  14 +++++
+ drivers/led/Makefile       |   1 +
+ drivers/led/led-uclass.c   |  52 +++++++++++++++---
+ drivers/led/led_sw_blink.c | 106 +++++++++++++++++++++++++++++++++++++
+ include/led.h              |  17 ++++++
+ 5 files changed, 183 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/led/led_sw_blink.c
 
-When looking up the mail I'm now replying too, I noticed a reply by
-Stefan Agner with very similar symptoms, but on Odroid M1.
-
-And the fix in my case has always been easy:
-
-diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
-index 1ea8e0f40cc..641452f9162 100644
---- a/configs/quartz64-a-rk3566_defconfig
-+++ b/configs/quartz64-a-rk3566_defconfig
-@@ -67,9 +67,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
- CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_SPI_FLASH_WINBOND=y
--CONFIG_PHY_MOTORCOMM=y
--CONFIG_DWC_ETH_QOS=y
--CONFIG_DWC_ETH_QOS_ROCKCHIP=y
- CONFIG_NVME_PCI=y
- CONFIG_PCIE_DW_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
-index f61b2c181a1..aae5d66edeb 100644
---- a/configs/quartz64-b-rk3566_defconfig
-+++ b/configs/quartz64-b-rk3566_defconfig
-@@ -65,9 +65,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
- CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_SPI_FLASH_WINBOND=y
--CONFIG_PHY_REALTEK=y
--CONFIG_DWC_ETH_QOS=y
--CONFIG_DWC_ETH_QOS_ROCKCHIP=y
- CONFIG_NVME_PCI=y
- CONFIG_PCIE_DW_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-
-IOW: a (partial) revert of commit 25f56459aebc
-
-It _could_ be that the issue is also present on the various SOQuartz
-devices/boards, but I don't have those, so I can't check that.
-But AFAIK they are rather similar to Q64-A and the change has also
-been the same ... as was the case for Odroid-M1.
-
-In case it's useful I have a log from the serial session with the
-Q64-A (212.5 KiB) available.
-Serial on Q64-B doesn't work, so I don't have that.
-
-Cheers,
-  Diederik
---nextPart2276470.1dZ1CPmI8s
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQT1sUPBYsyGmi4usy/XblvOeH7bbgUCZpA0oAAKCRDXblvOeH7b
-bspYAQC+qFW4JlXsFvfMHanmtsoSCAHo2AqNqTbymzf+i49DngEAw5y20UpSmncw
-ugf0c8ggJ+V4H7W/fitKix0KqelozwI=
-=fpOR
------END PGP SIGNATURE-----
-
---nextPart2276470.1dZ1CPmI8s--
-
-
+-- 
+2.39.2
 
