@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 055E0C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 11:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D606C3DA4B
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 13:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FED288709;
-	Fri, 12 Jul 2024 13:56:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6BDEB881BA;
+	Fri, 12 Jul 2024 15:16:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="e8sfV0/H";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 29EAE8871F; Fri, 12 Jul 2024 13:56:05 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1720790169;
+	bh=CMZaJgbdcl3BXLlwuIv8IyvKNv9NdLrFthldG32fp2M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qNpuJmeumMEKvPfwZ0lNP0jlI6ynUzl/J45Mv/WVL1tBkoqbrGx2HtS15waEK7n7j
+	 291WMDjfvl2tLbrvK3rTjzFhy0+JmG49NUDE9Y86ESbpamQWh9szwQS5EoOGH5zNiG
+	 7Si5Noqtmfm3z3IvpemFkLX0qx7f4DmEEZ9cS9em7a7uYf6N2DsN6ymxSOwY/CPXvd
+	 lyMFuv5lBxBxT9+kL0INE1GAdB5m25KzqyMhGdIbBdmimPo+FWro/Vt2rp2du67vG1
+	 foWLyBtS1RVkb4ij++PTTUlHAsCEZxEHaGFZWEzYVluFF82WECIxvMc5WVfyrmmDRq
+	 hduabZWnF8CuA==
+Received: from eryximachos (lmontsouris-657-1-115-25.w82-127.abo.wanadoo.fr
+ [82.127.153.25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C2FF87DEB
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 13:56:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1720785359; x=1721390159; i=xypron.glpk@gmx.de;
- bh=8XtFDOPdz+v6ehv32qQ0lkL9a2XQ8s2lO8sjUu5Og0M=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=e8sfV0/Hb7l+TAUFjVCBE733iyUEyq1/bKzzg7eCTBVVOOPGLQSHfuIbm7QlAFRt
- oZ6qU5h/cJv7OvUecaQb3zU+tcwjZzPr1sCMXQhzBw/NIRLuQrtdJn8wKnkboUhRc
- pa30LosHBDn1OgUq8/BHFD97+l9v7+IAB/M0tYhhI3Gm+pSRgDZfXgDIgdfKp37LF
- jRc51y8iysuHzIEcZDDzTpzn28fPgXHJDueGAOC7MD7DiINiaYyTWwyK7bVh+OMIo
- /pYLk9lQzGnWY/31RyMpbQ3ctwjRohvjvq1s+Pj8354YvuJ4wtzMVjnxENG7p/HHe
- UF2afiWBRh/Is251rw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MAwXh-1sczKA3CKv-002vQy; Fri, 12
- Jul 2024 13:55:59 +0200
-Message-ID: <40f5e668-e477-4685-9cfa-90f01f3e73c4@gmx.de>
-Date: Fri, 12 Jul 2024 13:55:59 +0200
+ (No client certificate requested) (Authenticated sender: pro@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E270187B8D;
+ Fri, 12 Jul 2024 15:16:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1720790168;
+ bh=CMZaJgbdcl3BXLlwuIv8IyvKNv9NdLrFthldG32fp2M=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RmC2Aj6moQoDSysyfFH2y9IDV4QwDeLMoAwBjwx7XEpkmk2ury1wAL2lm6Zq74Nkh
+ yWZw51rr4jLvDIrAeYngmrFOpCU3tU5iDomvDn5eElStSTIzGh7+Ta12mfI8eZLVwQ
+ dgntl6xa6Uq+0qa7Uu1XZwEI1QLOBOT1eO8mPS7K/rqkY91R0rcPCpZhkpC5Jj90qV
+ r0VmyFIhSAc9x5AQ+xUKRtV3FiEsETS0QYvr1kqb7OcgiarMyvMSY+L2ZFwycNltk5
+ 9KuULhuu7kFkZe+bXkaVMqW9rX5OU+Y259i0t9R9h0UswjxAzqyVrCzQwWgnrcJYKV
+ +IVJPeIgnWjUA==
+Date: Fri, 12 Jul 2024 15:16:03 +0200
+From: Philip Oberfichtner <pro@denx.de>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, bmeng.cn@gmail.com, caleb.connolly@linaro.org,
+ christophe.roullier@foss.st.com, epsi@gmx.de,
+ eugen.hristev@collabora.com, festevam@gmail.com,
+ forbidden405@outlook.com, ivprusov@salutedevices.com,
+ joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
+ leyfoon.tan@starfivetech.com, marek.vasut+renesas@mailbox.org,
+ marjolaine.amate@odyssee-systemes.fr, neil.armstrong@linaro.org,
+ n-francis@ti.com, patrice.chotard@foss.st.com,
+ patrick.delaunay@foss.st.com, philipp.tomsich@vrull.eu,
+ rfried.dev@gmail.com, seanga2@gmail.com,
+ sebastian.reichel@collabora.com, sebastien.szymanski@armadeus.com,
+ sjg@chromium.org, sumit.garg@linaro.org, trini@konsulko.com,
+ xypron.glpk@gmx.de
+Subject: Re: [RESEND PATCH v2 3/5] net: dwc_eth_qos: Adapt probe() for PCI
+ devices
+Message-ID: <ZpEsk6CiMwttu9cB@eryximachos>
+References: <20240624083450.90297-1-pro@denx.de>
+ <20240624083450.90297-4-pro@denx.de>
+ <94f5509d-2a99-49cb-96b4-f405a6143ee7@denx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fat: fat2rtc: Sanitize timestamps
-To: Richard Weinberger <richard@sigma-star.at>
-Cc: Richard Weinberger <richard@nod.at>, ilias.apalodimas@linaro.org,
- sjg@chromium.org, christian.taedcke@weidmueller.com, trini@konsulko.com,
- upstream+uboot@sigma-star.at, upstream@sigma-star.at, u-boot@lists.denx.de
-References: <20240712082454.8752-1-richard@nod.at>
- <E6A299D7-6DA8-4FA7-8864-BB6F346B4394@gmx.de>
- <2549250.Sgy9Pd6rRy@somecomputer>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <2549250.Sgy9Pd6rRy@somecomputer>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1iRI7f7YvtDoiyFi/t6yIFt+zcGkmQxDTfXA0DKtBclqU5M0587
- KWdhGU0vLxud6TK80YNIedmzv/DtJz6ApghPKsyxhwgZNGQ+sUKoaTfHYO8Lo8B7iPYtZez
- +80fB+iBjeL6/qDlmecdku3gcMpv2RLhluVxaMxDfNBS1qli+NpK+bCdl7Tul6eLMfolf6m
- vDItbjqrgmJfKMrql+LuQ==
-UI-OutboundReport: notjunk:1;M01:P0:axk/KfzXfF0=;ylp6pIta22x9W3D2AUIy1dLQlGO
- mdIfVGgQ6/K+IuTs2z+/RtZ+UlhDTLkZXXTo/UeIni5U6v9UE0KdpKI2DW6FhHvzlJWkG/rUz
- hC+XMgMciCKN/AQJGDkVc1JAEx+rSJj/zkqEjSZzyDXSLdyVT0/ZIv7FUrR2aXGiXi0e1XIdb
- ejVhf79zqcmWfUKG2Tn7Z554CvVjnPmT3mPwwtBPF8JaLeeZf2g5ufTBksKI2w26gnCH1CkGv
- oae0pZ5qzYpYvFcpYO1S1u3Xw8GsHCApXh+8AWnn2ZgKMj8UTCAucO0ZivU9Edno8xqQCI0RB
- +98aUQ5/T8wnnCu7vLGXFUb8oikMQfoWgdsbVxSqSvpgsTdk0F2D5Gf194+zkGBQexKKBuGws
- FlX2hdqfxU1zE9Yxsi/3/TjpsspZBMFUgg5Mr3pTGDGumvo/S+hloNRbk1SDYiCj6m0YHB6FM
- ++vJ7zcIFQ9Ve/rnqRItdoh1cyzkMwvCIfEf7/AM9oNKeKHx7UPW/4ho4PT338b9mZYMyEqJX
- I20kM3Vq+ZaV0HciRXb4IZL8oGzNpTjI2xdR8Ty+FAlo2UiG1kAA3eP8k/FaA/7mbUOxQvEpA
- +CMLBUq+yL7JHr6PPb+KMQ+DKYuYGkGudaQvQcCJ34fjTIHhbVA66jZjPRAqW7SvZhpe9UmXs
- zaIOqBR8kWpT0rQUQYKY0wWbZo1DV77LGo3aJUcHOzy4P+CRTmOtG8K8jhn5tDD9HfPuK/pnu
- Pyn0AwmFWhHEVEV2vZLnED7rWy1dOX95XsHJJ0u7yj4IP9yxvlB06keJgsgQwmDUxK5JMDKoY
- SXpNB5pGOU+m/N0dXeQvilEg==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <94f5509d-2a99-49cb-96b4-f405a6143ee7@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,39 +81,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.07.24 11:51, Richard Weinberger wrote:
-> Am Freitag, 12. Juli 2024, 11:46:08 CEST schrieb 'Heinrich Schuchardt' v=
-ia upstream:
->> Am 12. Juli 2024 10:24:54 MESZ schrieb Richard Weinberger <richard@nod.=
-at>:
->>> Make sure that tm_mday and tm_mon are within the expected
->>> range. Upper layers such as rtc_calc_weekday() will use
->>> them as lookup keys for arrays and this can cause out of
->>> bounds memory accesses.
->>
->> rtc_calc_weekday() might receive invalid input from other sources. Shou=
-ldn't the function always validate its input before array access?
->
-> It depends on the overall design.
-> Functions like strlen() also assume that you provide a valid string,
-> so rtc_calc_weekday() can assume too that the passed rtc_time structure =
-contains valid data.
->
-> In doubt, let's fix both FAT and rtc_calc_weekday().
 
-Other source locations where the content of struct rtc_time is not
-(fully) validated before calling rtc_calc_weekday are
+Hi Marek,
 
-mc146818_get()
-mk_date()
+Thank you for the review!
 
-to name a few.
+On Sun, Jun 30, 2024 at 07:33:33AM +0200, Marek Vasut wrote:
+> On 6/24/24 10:34 AM, Philip Oberfichtner wrote:
+> > PCI devices do not necessarily use a device tree. In that case, the
+> > driver currently fails to find eqos->config and eqos->regs.
+> > 
+> > This commit factors out the respective functionality. Device tree usage
+> > remains default, but board specific implementations will be possible as
+> > well.
+> > 
+> > Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> > ---
+> >   drivers/net/dwc_eth_qos.c          | 28 +++++++++++++++++++++++++---
+> >   drivers/net/dwc_eth_qos.h          |  3 +++
+> >   drivers/net/dwc_eth_qos_imx.c      |  1 +
+> >   drivers/net/dwc_eth_qos_qcom.c     |  1 +
+> >   drivers/net/dwc_eth_qos_rockchip.c |  1 +
+> >   drivers/net/dwc_eth_qos_starfive.c |  1 +
+> >   drivers/net/dwc_eth_qos_stm32.c    |  1 +
+> >   7 files changed, 33 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+> > index b87634f1f5..34e29301cc 100644
+> > --- a/drivers/net/dwc_eth_qos.c
+> > +++ b/drivers/net/dwc_eth_qos.c
+> > @@ -1376,6 +1376,21 @@ static int eqos_remove_resources_tegra186(struct udevice *dev)
+> >   	return 0;
+> >   }
+> > +/*
+> > + * Get driver data based on the device tree. Boards not using a device tree can
+> > + * overwrite this function.
+> > + */
+> > +__weak void *eqos_get_driver_data(struct udevice *dev)
+> > +{
+> > +	return (void *)dev_get_driver_data(dev);
+> > +}
+> > +
+> > +/* Function to get base address, useable for all boards having a device tree. */
+> > +fdt_addr_t eqos_get_base_addr_dt(struct udevice *dev)
+> > +{
+> > +	return dev_read_addr(dev);
+> > +}
+> > +
+> >   static int eqos_probe(struct udevice *dev)
+> >   {
+> >   	struct eqos_priv *eqos = dev_get_priv(dev);
+> > @@ -1384,13 +1399,19 @@ static int eqos_probe(struct udevice *dev)
+> >   	debug("%s(dev=%p):\n", __func__, dev);
+> >   	eqos->dev = dev;
+> > -	eqos->config = (void *)dev_get_driver_data(dev);
+> > -	eqos->regs = dev_read_addr(dev);
+> > +	eqos->config = eqos_get_driver_data(dev);
+> > +	if (!eqos->config) {
+> > +		pr_err("Failed to get driver data.\n");
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	eqos->regs = eqos->config->ops->eqos_get_base_addr(dev);
+> >   	if (eqos->regs == FDT_ADDR_T_NONE) {
+> > -		pr_err("dev_read_addr() failed\n");
+> > +		pr_err("Failed to get device address.\n");
+> >   		return -ENODEV;
+> >   	}
+> > +
+> >   	eqos->mac_regs = (void *)(eqos->regs + EQOS_MAC_REGS_BASE);
+> >   	eqos->mtl_regs = (void *)(eqos->regs + EQOS_MTL_REGS_BASE);
+> >   	eqos->dma_regs = (void *)(eqos->regs + EQOS_DMA_REGS_BASE);
+> 
+> Could you factor out the entirety of:
+> 
+>          eqos->regs = dev_read_addr(dev);
+>          if (eqos->regs == FDT_ADDR_T_NONE) {
+>                  pr_err("dev_read_addr() failed\n");
+>                  return -ENODEV;
+>          }
+>          eqos->mac_regs = (void *)(eqos->regs + EQOS_MAC_REGS_BASE);
+>          eqos->mtl_regs = (void *)(eqos->regs + EQOS_MTL_REGS_BASE);
+>          eqos->dma_regs = (void *)(eqos->regs + EQOS_DMA_REGS_BASE);
+>          eqos->tegra186_regs = (void *)(eqos->regs +
+> EQOS_TEGRA186_REGS_BASE);
+> 
+> into some common function, like eqos_get_base_addr_dt() , and call it from
+> .eqos_probe_resources callback instead ? That way you wouldn't have to add
+> new callback specifically for register address.
 
-Other RTC drivers might also be placing garbage in a struct rtc_time, e.g.
+Good point. I'll include it in V3.
 
-omap_rtc_get()
-m41t62_update_rtc_time()
+Best regards,
+Philip
 
-Best regards
 
-Heinrich
+-- 
+=====================================================================
+DENX Software Engineering GmbH,        Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-22  Fax: +49-8142-66989-80   Email: pro@denx.de
+=====================================================================
