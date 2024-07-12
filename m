@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F00C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 09:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD5BC2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 10:21:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4140188176;
-	Fri, 12 Jul 2024 11:51:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
+	by phobos.denx.de (Postfix) with ESMTP id B8A9A88009;
+	Fri, 12 Jul 2024 12:21:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="WaqwB7Nf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jltSMVPI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8966886E7; Fri, 12 Jul 2024 11:51:10 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 2F40388667; Fri, 12 Jul 2024 12:21:31 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C01D287FF7
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 11:51:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4932188009
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 12:21:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard@sigma-star.at
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-367a464e200so1016327f8f.2
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 02:51:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-595856e2336so3087182a12.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 03:21:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1720777868; x=1721382668; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ssHG2CqFeEK6uWa76U3ERKKz12tC0ZwdlojmsrwNhMA=;
- b=WaqwB7NfdCqkMzpRsU39siK/OFe6xdY2tZxCgWVGFRjHWqVJ6BTbX4nbBcDabLc4u/
- SfaH5P9e30O5ALee5f3V9GKHRVWzaB2m5mAbm5BN+1h/aA6tofts1qcAIRMTX2WrL82l
- uWFycPcvQB9zgtKVLuHU6f4dW6e2mQuFE+IF6yRYZEzkYs455hGEHOwm6mMcTzfLyDDh
- 19/HsVs58FgvK5NMGR/agb83sef81qT1QOUdDWzBPEuD0gYOSkn9sXqh1QJeaCP1iC0+
- 17r6fTg/vRSa0A+mspoHJWb9ZB+fOmWKCECVSqRok6rUFLYdHjNL36AHbI1cw5Hw82lJ
- LvyA==
+ d=gmail.com; s=20230601; t=1720779689; x=1721384489; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VlWO6OsxVguYbW1idGTp/TPMA7t5OLHCGmw14F9osfo=;
+ b=jltSMVPIwhEl4zqukAn4MdVr8yUB8lG/647bLPNiLpB9evuTTrptwueixOUki9/qVU
+ CV4H4GMng1HnlYOmgwTuan2Zwbkh8fp5LwIdXLnQovnBeXSkwadFDfON56dOVN09RxJU
+ 19sOPshSgoBAR4TT27NBcyPDZ/h3KlqIcy41Z6uiPzecrGKnM2MrdTLF+NhPu2cZoQIv
+ ZAZxV9LgLcHV3qH48ga6/pZyN7HGP0rYCofQzj/xRbt8jwEN41Oo6dMtU2+fv9EecVg6
+ mTo4rCMSvy6O1qX8/LN8arwBy88HesAWXJAY6DB+zaJIUkaO3npJemg3cSA/S6ewIHz4
+ WDqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720777868; x=1721382668;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ssHG2CqFeEK6uWa76U3ERKKz12tC0ZwdlojmsrwNhMA=;
- b=Yu10gPkAmuCbXazzwjOyqpkNn7FpC5KpV63o7NiTlWJ++7HBmbA/70f13RWQR3JeRx
- jjbOpPduoluCAWFAqXptsrnE9wy4fEe7bxx0s/7jVv8Z9jIBj8opSvJrYwAxGNzheI73
- 7vzK9ieYK+AFVk0mEmXju0/UFCw8iRHX084z7KU2BOdU82oOxpiMVI+888+76TrrQPuj
- KKcC+4KlAYtPZrV+3fwHKE7eJlY22ViGgQYo29SBMtd2Q8186ysqERvv+35oZlBQLtlP
- G+Fhry/jbxraqsQ+H2mqMKFYy1uxDFkWRO7HyhsNdrIJfOqxK66rZN246yhcf8Ya/d2o
- 9/OQ==
-X-Gm-Message-State: AOJu0YwPa0niIoeEY1hjLtTnAl/v+Mg141n7fFydDAYEOl+L7+v5o+Dq
- /SFBws/nu+6Q+uTzdWlGYw7k4yrwxoDDFrgt7D5zL8z05CUy4fuaB6UGGTEneT9qCha7QBCvqcQ
- h
-X-Google-Smtp-Source: AGHT+IHIFyS5Cr6wYNCP91nZy+EIBz10qAlzBlBgZ6h7VOkoJUozBOHXsbbTM6rSWG0rggY2OtHr1w==
-X-Received: by 2002:a5d:5f83:0:b0:366:ea17:94de with SMTP id
- ffacd0b85a97d-367cea46abfmr8895539f8f.5.1720777868176; 
- Fri, 12 Jul 2024 02:51:08 -0700 (PDT)
-Received: from blindfold.localnet (84-115-238-31.cable.dynamic.surfer.at.
- [84.115.238.31]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cde89128sm9802650f8f.57.2024.07.12.02.51.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jul 2024 02:51:07 -0700 (PDT)
-From: Richard Weinberger <richard@sigma-star.at>
-To: u-boot@lists.denx.de, upstream@sigma-star.at
-Cc: Richard Weinberger <richard@nod.at>, ilias.apalodimas@linaro.org,
- sjg@chromium.org, christian.taedcke@weidmueller.com, trini@konsulko.com,
- upstream+uboot@sigma-star.at, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH] fat: fat2rtc: Sanitize timestamps
-Date: Fri, 12 Jul 2024 11:51:06 +0200
-Message-ID: <2549250.Sgy9Pd6rRy@somecomputer>
-In-Reply-To: <E6A299D7-6DA8-4FA7-8864-BB6F346B4394@gmx.de>
-References: <20240712082454.8752-1-richard@nod.at>
- <E6A299D7-6DA8-4FA7-8864-BB6F346B4394@gmx.de>
+ d=1e100.net; s=20230601; t=1720779689; x=1721384489;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VlWO6OsxVguYbW1idGTp/TPMA7t5OLHCGmw14F9osfo=;
+ b=brmKF7LxAL0FPitPHS7ubKRw3addEN+XvzfZBgVHGZI/SVNgJ4cZuoKpioW6/bRnFC
+ an0OhGg2rgV5VLX7TmX3GNUjmrnMb2ndmFBOCzVFBD4QhijhO46eqnA66IUtIm/EnXF/
+ ebd1NaDN8kuUqmzK0ZUxjVhodW8y3RsC+x/iKEFUBGvAa8u0CEzDVN7InnTVi7Owc8+c
+ bsMYFAcDT0gJXIyHQaTKCKXZ0gDP41dofVukblZOUvDClkZAivobTMsQUVlinYV0PmyS
+ DAaGh3NU30b/IOXuhVyOEWxqVBFZlwyWu5aKOyLDJLPFyqUQ2MsXQrTBlLngF511+Fpf
+ LJ0A==
+X-Gm-Message-State: AOJu0YyjXUFQHZwMYA649BWr521fkOhBjgKfB14Qm73PnPFaNE7f3w3N
+ jF9d+cN8QXwMRlSJc8HIwrw/6lv+RMfmAODI162wnpO4RPJ+nGQIK3n7PpIimC+E+zdouj+0AmZ
+ ArnDfOYaLTZAUMlABuMDcQYuET1aeou6K
+X-Google-Smtp-Source: AGHT+IEeOwYYaZp+BMxQVr4l2C6zcMyZ8cIXZFqrC82B/RniKUtVY2zoYN3FMV1URxMOkNMi1MgxULPwZny5w/73riw=
+X-Received: by 2002:a05:6402:35ce:b0:57c:bec1:ff4b with SMTP id
+ 4fb4d7f45d1cf-599647adfedmr2060639a12.10.1720779688448; Fri, 12 Jul 2024
+ 03:21:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20240712090725.2093317-1-rasmus.villemoes@prevas.dk>
+ <20240712090725.2093317-2-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20240712090725.2093317-2-rasmus.villemoes@prevas.dk>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 12 Jul 2024 11:21:17 +0100
+Message-ID: <CALeDE9NFn8OPwzGxHKV5f1Pe0XoGwL7TjyODRe8R8itQS5487g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] arm: bcm283x: remove unused empty
+ hw_watchdog_disable
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
+ Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,31 +88,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Freitag, 12. Juli 2024, 11:46:08 CEST schrieb 'Heinrich Schuchardt' via =
-upstream:=20
-> Am 12. Juli 2024 10:24:54 MESZ schrieb Richard Weinberger <richard@nod.at=
->:
-> >Make sure that tm_mday and tm_mon are within the expected
-> >range. Upper layers such as rtc_calc_weekday() will use
-> >them as lookup keys for arrays and this can cause out of
-> >bounds memory accesses.
->=20
-> rtc_calc_weekday() might receive invalid input from other sources. Should=
-n't the function always validate its input before array access?
+On Fri, 12 Jul 2024 at 10:07, Rasmus Villemoes
+<rasmus.villemoes@prevas.dk> wrote:
+>
+> This empty stub was originally added as one branch of an #ifdef in
+> commit 45a6d231b2f (bcm2835_wdt: support for the BCM2835/2836
+> watchdog). That incarnation of the rpi watchdog driver was later
+> removed in c7adc0b5f98 (watchdog: bcm2835_wdt: Remove unused BCM283x
+> watchdog driver and its references), but this now unused stub was left
+> behind. The later (re-)added rpi watchdog driver does not define a
+> hw_watchdog_disable() function, as that is properly integrated in the
+> watchdog framework.
+>
+> Reviewed-by: Stefan Roese <sr@denx.de>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
-It depends on the overall design.
-=46unctions like strlen() also assume that you provide a valid string,
-so rtc_calc_weekday() can assume too that the passed rtc_time structure con=
-tains valid data.
+Thanks!
 
-In doubt, let's fix both FAT and rtc_calc_weekday().
-
-Thanks,
-//richard
-
-=2D-=20
-=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
-=2DGasse 6, 6020 Innsbruck, AUT
-UID/VAT Nr: ATU 66964118 | FN: 374287y
-
-
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> ---
+>  arch/arm/mach-bcm283x/reset.c | 7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
+>
+> diff --git a/arch/arm/mach-bcm283x/reset.c b/arch/arm/mach-bcm283x/reset.c
+> index 9199234917f..1dc7ce50d1d 100644
+> --- a/arch/arm/mach-bcm283x/reset.c
+> +++ b/arch/arm/mach-bcm283x/reset.c
+> @@ -25,8 +25,6 @@
+>  /* max ticks timeout */
+>  #define BCM2835_WDOG_MAX_TIMEOUT       0x000fffff
+>
+> -void hw_watchdog_disable(void) {}
+> -
+>  __efi_runtime_data struct bcm2835_wdog_regs *wdog_regs;
+>
+>  static void __efi_runtime
+> @@ -34,10 +32,9 @@ __reset_cpu(struct bcm2835_wdog_regs *wdog_regs, ulong ticks)
+>  {
+>         uint32_t rstc, timeout;
+>
+> -       if (ticks == 0) {
+> -               hw_watchdog_disable();
+> +       if (ticks == 0)
+>                 timeout = RESET_TIMEOUT;
+> -       } else
+> +       else
+>                 timeout = ticks & BCM2835_WDOG_MAX_TIMEOUT;
+>
+>         rstc = readl(&wdog_regs->rstc);
+> --
+> 2.45.2
+>
