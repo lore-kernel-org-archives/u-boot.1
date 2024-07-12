@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA612C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 10:41:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834C4C2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 11:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23E038859B;
-	Fri, 12 Jul 2024 12:41:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CFA258871F;
+	Fri, 12 Jul 2024 13:10:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GHqRw5Hv";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jVwtBbM7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F20638859B; Fri, 12 Jul 2024 12:41:44 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7671788756; Fri, 12 Jul 2024 13:10:46 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 101DA87F19
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 12:41:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78C8488667
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 13:10:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-595856e2336so3117852a12.1
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 03:41:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720780902; x=1721385702; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pAnDB3I6WatuAicYE/+7GUI6qZNiQaY2sz+Xb3Y4liE=;
- b=GHqRw5Hv4r3RBBElrtfPzLeKz5VMgdN63yOLnnluVKvQBQqyYMcwb430ol48itRQ86
- DBuSq50WZ+s7GNwCdIcAntrkjdc7UDjWpEdur/BwPaglohJxlDbT27xmI1zmUwmkg75T
- 9Jv+wF4Auo53/zzfjr9wDkJzVA2NPA1g+lHyLpz4f1BKWgwlSFrSh7l5Tqs75tMOA8mG
- yD9Lmyemqx2o1ajPW1LLrwIQolTTaedmR1Wrlr7+jr/AVrTY7164M3ELT0oFmTwGH76a
- PZkQLQL4NcJV0vfhp4jtrX2sVEHQNnQXcFB7DtObAm0kySamWr/oas7/EG+4+GUSp2I9
- Fqng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720780902; x=1721385702;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pAnDB3I6WatuAicYE/+7GUI6qZNiQaY2sz+Xb3Y4liE=;
- b=o/mzf1qSERvlPvPgDbNxeESkxxd3KdJ6fw+COztY76TxqZsjwn4EI+iX2QZmIp0mve
- 4o1LcqIcU10dz6zBhbsXckKcN0UC9BkSHRWuLHTe83LyxMlwYoYdZ/2mwMlmPEOMjBPM
- FdQCYmbR/5VNM/i5UbcQ0c110oeSSImld6Hlxpr5MHRSUKEU60zjCMpTg+E3hZ9g3X6t
- 3lOeAwjWhorneTWVS9+GAwy2nYpOrhep5ODe5eKWAV8+QPwvGlsDODyF6Gl0C4qkj2VH
- gGGGTCm4JetYv13kd/VujLE6aRDdzsx+CILzRnRgHWdsuMcNiw7AOmJis9lfedHPjo8u
- 77IQ==
-X-Gm-Message-State: AOJu0YzBgVFwcG99jvKyfSM3r4yBZONhh3zDLQ9ymYP9SKlAku83PXfM
- pZTAdkmTE9slAH3TIAESifwUXrxy757sYbBUfQcjzq3aZZI3w1rQVBczKxiYdbE97riaLO45Vj9
- F1npWaka49YcxhqvpOwmj+CqJhSE=
-X-Google-Smtp-Source: AGHT+IEmd+7hKO3m80K1y1rlsz8dZqeOpkVnMVpPGYzJucCjwwoRnIIPHUJZV4LA584SZ3mgyNQyTPJHw1KoPCAMRqE=
-X-Received: by 2002:a05:6402:35ce:b0:57c:bec1:ff4b with SMTP id
- 4fb4d7f45d1cf-599647adfedmr2107379a12.10.1720780902423; Fri, 12 Jul 2024
- 03:41:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1720782618; x=1721387418; i=xypron.glpk@gmx.de;
+ bh=sHB7V5SVBX/+QJPc/pjTyzu8tmeHXKKgvc6S1M5OyX8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=jVwtBbM73LNw2NPDb8DgipTkXURT8DK7DIF78HHUxtb6oOsTNzhWFhayuZSU4Kne
+ TrHXcbMf0JOEG1fk4nbeRPa+3vvn+EwsZcYEKMR6ylA+PVupw4wNSkJ9kyTVlhEL5
+ YIBZp57QJ1PRTly7c9RUXc6xcwE5rbC1R6ZyvYRHRx2RxeRT05+eE0+ofO/5OTZEu
+ 1hEaCLvagg85qpJv3vMNtjgjrEMW8UCTJBQpzL0OJerJSeDO3/EIEWvA90iqW+K4A
+ /+rXdcDxu+3iGE3FY9UTwCRQ+IfEt569vVBEmfHjpgd9EPT5Vf7UFtfCiIKVeENZ7
+ /PClnf689QNa7vdV3g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MyKDU-1s9jwE1fkS-016vWj; Fri, 12
+ Jul 2024 13:10:18 +0200
+Message-ID: <96973f0e-a185-4758-8e8c-837206c6bdde@gmx.de>
+Date: Fri, 12 Jul 2024 13:10:12 +0200
 MIME-Version: 1.0
-References: <PAWP194MB20554D5B2D9D47E02E35F062DADB2@PAWP194MB2055.EURP194.PROD.OUTLOOK.COM>
-In-Reply-To: <PAWP194MB20554D5B2D9D47E02E35F062DADB2@PAWP194MB2055.EURP194.PROD.OUTLOOK.COM>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 12 Jul 2024 11:41:31 +0100
-Message-ID: <CALeDE9MNjZRFEVYjCcnPStvz1rnzWC0JEx3ouFzag3mnchO01g@mail.gmail.com>
-Subject: Re: [PATCH] board: raspberrypi: Fix format specifier for printing
- rev_scheme
-To: Francois Berder <fberder@outlook.fr>
-Cc: u-boot@lists.denx.de, mbrugger@suse.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] ext4: Fix integer overflow in ext4fs_read_symlink()
+To: Richard Weinberger <richard@nod.at>
+Cc: Jixiong.Hu@mediatek.com, sjg@chromium.org, patrick.delaunay@foss.st.com,
+ ilias.apalodimas@linaro.org, seanga2@gmail.com, trini@konsulko.com,
+ upstream+uboot@sigma-star.at, u-boot@lists.denx.de
+References: <20240702194223.31998-1-richard@nod.at>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240702194223.31998-1-richard@nod.at>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:tI3OflzTWLJSinGeLe2uiUa+ZprAg6Dota6zVqQ/Q5eBcsxu7w2
+ rQAOMOa8WEqut5wKC97YyvBDh7f0ltLCwQaJSEwgEgWXI0mgFKv9PrGR1g3iPGtNMvJkYKg
+ ZgnfK5IAFVj4gvhvro2vO2HsCgK0gBOGfbCed1KW3Bs4yvbN35vNjLhmITsel0B7Ik459PH
+ QBYwdXtup4Sp4RDA4Gj+A==
+UI-OutboundReport: notjunk:1;M01:P0:T/WxdI2LIQ4=;8XFs2C63GPl/HxcLGI5Lt7XZ4st
+ yiNuJM28c0DfHGjN5HU8cC3D4k704mS/C+hFztuvx2U6gOBfft9EJ8J6CQDryahi1Qdac3JbL
+ /20gd7SX96HtDqKe8leW94YKIQXbHicy7jqX2KhOkiMczOmJXVF6/DInvar7W2QXcpKz2K9PZ
+ Ob0LL9O+EUk0BT+jFUhsF6Z9+yBxy43EGaWFFaN8LhJ3lu0Fx2kpI1Jkq0Nbaw92oANaFZOHL
+ r/sPFG/vxixzeNM6prYYi5Gcm769m84Pj+mV92og5ohi8JyBFJr9kuqhJFiBqV4cONaOfTXVN
+ lF42inXO7eb+uy0taJIxQF5H4kP7CATFc/0GMhzz0ozBl7cQhbkE+2W2VhxYAgRjIEdBLx3QH
+ OM0qKNh2uCZn6hsSwl0yzyPiUZ+QlxuT1teAYCYloDDROVkcl591oppnlEBAGc/AfZnY818NT
+ HHLTz2PbjuTi8grECQP+ttgkqoorDLgEZCFiFNUW8pplZxh7Zz1elr0epkoA8elu0wseUwVNt
+ HsxyN9KrjftSkr6VujNeQwubLqYzkZ0PUfB+o6MpWFb2eZYqBps9CN+fthuWgODtEZTa2E1dM
+ KUCqD2jTD2VcfMjaLQ0X7YREpBVkaiThv6/nHM5K6M7W5l05n7kfp8O3yQKWeKhi6KThyyfOz
+ nYNamxbJoupb0o1RHde61XMqZX5VLTzVMnhSTqlRycQEUC/M3+Fjz+zQUtRdd+Mxic+0NlXBe
+ Ig+QNvE51Sk+n5i67pRiqW9V8M88rHgSeETh74kD8bzPVv0i3/5A0+YcKhldF2eqyxSDzg/PJ
+ QFLo8G4/CvTi3CNv25gaJVjQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,30 +91,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Jul 2024 at 13:20, Francois Berder <fberder@outlook.fr> wrote:
+On 02.07.24 21:42, Richard Weinberger wrote:
+> While zalloc() takes a size_t type, adding 1 to the le32 variable
+> will overflow.
+> A carefully crafted ext4 filesystem can exhibit an inode size of 0xfffff=
+fff
+> and as consequence zalloc() will do a zero allocation.
 >
-> rev_scheme is an unsigned integer and must not be printed
-> as a signed integer.
+> Later in the function the inode size is again used for copying data.
+> So an attacker can overwrite memory.
 >
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> Avoid the overflow by using the __builtin_add_overflow() helper.
+>
+> Signed-off-by: Richard Weinberger <richard@nod.at>
 > ---
->  board/raspberrypi/rpi/rpi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>   fs/ext4/ext4_common.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
 >
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index d996eb0cf6..caa4483117 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -381,7 +381,7 @@ static void set_board_info(void)
+> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+> index 2ff0dca249..32364b72fb 100644
+> --- a/fs/ext4/ext4_common.c
+> +++ b/fs/ext4/ext4_common.c
+> @@ -2183,13 +2183,18 @@ static char *ext4fs_read_symlink(struct ext2fs_n=
+ode *node)
+>   	struct ext2fs_node *diro =3D node;
+>   	int status;
+>   	loff_t actread;
+> +	size_t alloc_size;
 >
->         snprintf(s, sizeof(s), "0x%X", revision);
->         env_set("board_revision", s);
-> -       snprintf(s, sizeof(s), "%d", rev_scheme);
-> +       snprintf(s, sizeof(s), "%u", rev_scheme);
->         env_set("board_rev_scheme", s);
->         /* Can't rename this to board_rev_type since it's an ABI for scripts */
->         snprintf(s, sizeof(s), "0x%X", rev_type);
-> --
-> 2.34.1
+>   	if (!diro->inode_read) {
+>   		status =3D ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
+>   		if (status =3D=3D 0)
+>   			return NULL;
+>   	}
+> -	symlink =3D zalloc(le32_to_cpu(diro->inode.size) + 1);
+> +
+> +	if (__builtin_add_overflow(le32_to_cpu(diro->inode.size), 1, &alloc_si=
+ze))
+
+U-Boot is freestanding code. You cannot use built-ins.
+
+Best regards
+
+Heinrich
+
+> +		return NULL;
+> +
+> +	symlink =3D zalloc(alloc_size);
+>   	if (!symlink)
+>   		return NULL;
 >
+
