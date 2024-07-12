@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88439C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 16:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45BBAC2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 16:49:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 451BB887CE;
-	Fri, 12 Jul 2024 18:48:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B886788791;
+	Fri, 12 Jul 2024 18:49:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ADwUYtx4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kNpfBWom";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B01998875D; Fri, 12 Jul 2024 18:48:15 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id E10CF88791; Fri, 12 Jul 2024 18:49:08 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97BFD887E2
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 18:48:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90DF388204
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 18:49:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3d9dfc7c5f6so1001324b6e.0
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 09:48:13 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7036ab4a2acso1107979a34.2
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 09:49:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720802892; x=1721407692; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1720802945; x=1721407745; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7eYw5nlU0mrWjxg1F6KA7wMNTtNIcKYlmh4JBevRNqs=;
- b=ADwUYtx4MkCbquyTEJet+anFg3POyJlYtSrl3UBiaLQ/RgKJkMDwvOQ/nrexki+TCM
- j7ixVrXcSvuAmKwmZrLxr1wjNggUvWWP1diNGFw1LqS4WTuEqKyhZR1OHoZh87sn1x1R
- VyPanG43jrRy/1AG8vDRz0qvz0suPHG9uRvDM=
+ bh=pIPdU5hbH7NAEDo0AswVZB1cDodlhs/KM9LXRrdy9WA=;
+ b=kNpfBWom8tDePCvSRh8KnsrHhCu+vZT+n2E14voFero3QItgPt99YPn9kQrLbxxFFy
+ PKMrH6RBFJ/jXyZe+Rcxff0XGTejM3LJbahDL8R0D60MaKS4jix839eWDeNNmvdaqzXe
+ vw3qerKX0oqlNHYhV0+myI+t1nrJ981jH8lVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720802892; x=1721407692;
+ d=1e100.net; s=20230601; t=1720802945; x=1721407745;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7eYw5nlU0mrWjxg1F6KA7wMNTtNIcKYlmh4JBevRNqs=;
- b=rK7pFmT5Lj5Yc/WecNBGmmEbuJYuwXiIjCTz50n8DF3PJLYP0USVdVIbQX08cjNZth
- M2IIwL4BHFkEO/OPdztt5GN09SKgrq8DBQb1LCOtJIzwYmpMVsVMnZG+0CW44Krrzq56
- RT+7HRWqQTm++p8q6QO4a/szPplZRWxn3+L+NJaPHKuv2cwSRTnH+7MB/u45bdCOaAQs
- 5NCUSGOnaAPWgQpsny6rwTgvo2UXYvIx9Ur7olk8wlBvV+jawM0LQPeMCNeI4d3aSuJ+
- yY8f2O7t6xtQssXhSDUhiyIwMRpfMxPxImbc2UQg3gRMMnqUSr/3DycO9tpc5hnHGYfb
- ChnA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+56okUO7LIVKiGKDM4PXuXvLs/dd1Y/iaOdPsvh2ZnRGS0NmtqB8ym2pMexlCiA0mz/iJLi5y5Jr6gq67qXBJF4YynQ==
-X-Gm-Message-State: AOJu0YySwk9Bhd3SL3jH6DRnf8rC2pzH6sTZOmOA3gAqgy7g0A26ZiC+
- pbeLN6OJDcBGG/sFvzTEOqwz3mlqYa4gWgYkT63vOTxGk8nC89hSx9xTHU9Zy5Y=
-X-Google-Smtp-Source: AGHT+IEHSKECA5m21KBv+FK5Y9YKKdfduFJxmgmMT8zcthKIgP6mvBYrN/g+DVLozLZc3a9upITyPw==
-X-Received: by 2002:a05:6870:7251:b0:25d:fef8:ac0a with SMTP id
- 586e51a60fabf-25eae88c8f6mr10647597fac.30.1720802892403; 
- Fri, 12 Jul 2024 09:48:12 -0700 (PDT)
+ bh=pIPdU5hbH7NAEDo0AswVZB1cDodlhs/KM9LXRrdy9WA=;
+ b=ll81dSmRQRljcC0BrFuSKagUhb3szjMs9FQqFbSrrN6Wwr4AunHa66fnHLDrLVyPIA
+ kd47kN0qhE4whkKKRTWUT04bx1yWAv6Hag6nvkZjzuvjcxbKdsU/an0iNH1MshEEMb/e
+ FGAzVHQVV8ZU5NOJrjeUYCdTxThKCtw4Pz/e7y9N3IvIuLMJ8JOhGqU28KE64yiBoeCc
+ su8z8rP+ttzs6qXAGGY+KQ4u3ZMHaowS3qfkCi9WbJRQSx0+xsXmuYpTn7lRUIRo0jpJ
+ Q0MmtBbVZsX3URxbC+lMczG+9rt1RMNfnZtgrK57U6N5WqWXVQlAvE+b57w9w7WYBqmi
+ A3LA==
+X-Gm-Message-State: AOJu0Ywnr1knhg9rPSOd9wh4tvHedmg71Z/trpSpLVo3oJKm94/hhzqy
+ bg2k4wCFY3u8EE/Bfyu59A2Q6i5WN+RXnj0hXJhflgVoue38U1hygFMxCYyJLQc=
+X-Google-Smtp-Source: AGHT+IEG6Ltse9IIAq8RrmQCaO1QJoy9g2jthZV1qyyZxts2VhYy34clpkbTiQuS8J2noYrZkokFoA==
+X-Received: by 2002:a05:6830:1118:b0:6f9:6577:71c3 with SMTP id
+ 46e09a7af769-70375a0bb28mr14141438a34.6.1720802945087; 
+ Fri, 12 Jul 2024 09:49:05 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25ea9f8fce4sm2313157fac.8.2024.07.12.09.48.11
+ 46e09a7af769-70374fc0985sm1625222a34.52.2024.07.12.09.49.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jul 2024 09:48:12 -0700 (PDT)
-Date: Fri, 12 Jul 2024 10:48:09 -0600
+ Fri, 12 Jul 2024 09:49:04 -0700 (PDT)
+Date: Fri, 12 Jul 2024 10:49:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC 0/3] ARM64: add symbol name lookup and print a
- backtrace on exception
-Message-ID: <20240712164809.GV38804@bill-the-cat>
-References: <20240710-arm64-backtrace-v1-0-5a2ba50485dd@linaro.org>
+To: Frank Wunderlich <frank-w@public-files.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: adding fdt-overlay function - help needed
+Message-ID: <20240712164902.GW38804@bill-the-cat>
+References: <trinity-a8e5b1d7-ca6f-4148-a618-95cfb529d919-1720625726767@3c-app-gmx-bs04>
+ <trinity-43100c7e-7010-40e5-998f-5fcfe548d29f-1720697012080@3c-app-gmx-bap43>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="e2nmZAVda9bDR0LD"
+ protocol="application/pgp-signature"; boundary="eNISpiUW4ju0Yqhq"
 Content-Disposition: inline
-In-Reply-To: <20240710-arm64-backtrace-v1-0-5a2ba50485dd@linaro.org>
+In-Reply-To: <trinity-43100c7e-7010-40e5-998f-5fcfe548d29f-1720697012080@3c-app-gmx-bap43>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,53 +91,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---e2nmZAVda9bDR0LD
+--eNISpiUW4ju0Yqhq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 10, 2024 at 06:26:17PM +0200, Caleb Connolly wrote:
+On Thu, Jul 11, 2024 at 01:23:32PM +0200, Frank Wunderlich wrote:
 
-> U-Boot already emits frame pointers on ARM64, but lacks the code to
-> parse them, as well as a mechanism for looking up symbol names at
-> runtime.
+> Hi,
 >=20
-> There was some (seemingly?) leftover code for symbols lookups in
-> common/kallsyms.c and associated parts in the makefile, however it
-> appears to be entirely unused and unsupported. It relied on generating
-> one long string of all symbol addresses and names.
+> i got a bit further and noticed, that required command is not available i=
+n uboot...this is normally part of the dtc package [1], so why is it missin=
+g in u-boot?
+> I guess later added or dropped to reduce compile time/make porting easier=
+=2E..
 >=20
-> The approach taken here is instead largely based on the implementation
-> in the Xen hypervisor, it performs basic compression using non-ASCII
-> bytes to tokenize repeated string segments which can later be expanded
-> back out at runtime.
+> regards Frank
 >=20
-> This is then utilized in the ARM64 interrupt handling routine to dump a
-> backtrace in the show_regs() debug function. As well as providing a
-> general purpose unwind_stack() function which can be used for debugging.
+> https://github.com/qemu/dtc/blob/master/fdtoverlay.c
 
-Just a few minor comments from me in general, and I'm glad to see this.
-Please submit the next version non-RFC, thanks.
+We're behind on re-syncing with the kernel's version of dtc, yes. It
+might be easiest to just cherry-pick what you need for now?
 
 --=20
 Tom
 
---e2nmZAVda9bDR0LD
+--eNISpiUW4ju0Yqhq
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaRXkkACgkQFHw5/5Y0
-tyxrrAwAoMZU5OwzZrXxuPbAv/xj6jCFc/p6a8X4Mf2DtLRrKfNXnAWJtDI9Ol+S
-eJADLiMMCTLB/+r0CIjqNiWRTrs09Uf7UJ6GG08rd6uDyv+rHAGM3gtaDX34ECnF
-AP1mcYiGqU5/ZmqdIkduACW2680bEzTp4y14Osv60AfCQvOUdlNSDV9t65wImLJ5
-IYn9jSgsNkgbvSGlaszrUKj8qAaStOkXf864jB8Gyes3pN/3ycdFkIwo9TL1MyE/
-lok8o/V9zy/Z/TDObCyBXWjqYhYp5Bk9504XzJruuaLo/V1COFGWphvYPOJ458B/
-Gl6ED5E6hbYN/jR4zO3dksutMaeiofgrKWcHJ97JXkd3ZocMma3ITNE33zAbbM2T
-qiBtOsMpGVhvbwSdj2adDupujNLC768z9vsYm0ruHu1M/kvKyx0offKBvHzJ5nTo
-TRMImf1+hIHGaup6pOE39JtsK1dfE+rr1KT/hfvNOuYAbc2WhBBKSC4Bl9PJaopd
-A7vtkWlj
-=3C3k
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaRXn4ACgkQFHw5/5Y0
+tywoFgv9FA8GszfHLU2E4zcIJDXONR3YPtE84H+w+k+z2Ihau6lLfxLTeZkb+1xq
+LsntGeOEbtIoBEWKwArrM1DSTOTveYx+2kqJN9pdRwb82KKMmyoHQh0WUJHlpBkN
+G/J3rO3L/3A6XGoe3t5azpWiH13xtxn34kS8XxslS0wDEbUihcOOIzmHKUrW0oIJ
+r6iCZs29PpYPShabXUgo1Rph82P28E/ueBfIou5cKMaw18G37k0Id0+zvLSaSHHx
+hN9/Srx2GzDkLl1Y88WnrXllD3mFM4c/lKQLFOdwup6GfxN9x9kL3Pn3ViOszfOD
+t4Lbxj8AH3lYMv9mJpCN2nIsMYHrpoSBjKtQokjUnxJ3FVama7bSBxuJnA7rXrAV
+m7W8uPRoLkX2J6XUFNfQI0MVvvJlMoEWZ1xpq66lO6Pa184/ZD5WdyfulgKBQ1bZ
+CTps6NwuPsQaoQNnYRjQFBGFrUCqIZbTmS2aeH/f75KCzD/5NNlzuiCX+Q+j/fpE
+RMumAMOZ
+=DxTD
 -----END PGP SIGNATURE-----
 
---e2nmZAVda9bDR0LD--
+--eNISpiUW4ju0Yqhq--
