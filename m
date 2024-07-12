@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD5BC2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 10:21:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2025C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 10:22:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8A9A88009;
-	Fri, 12 Jul 2024 12:21:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 378C68808B;
+	Fri, 12 Jul 2024 12:22:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jltSMVPI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EwKoicTb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F40388667; Fri, 12 Jul 2024 12:21:31 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 698088871F; Fri, 12 Jul 2024 12:22:10 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4932188009
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 12:21:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EE8B87FCD
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 12:22:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-595856e2336so3087182a12.1
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 03:21:29 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-58b447c51bfso2333666a12.2
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 03:22:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720779689; x=1721384489; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1720779728; x=1721384528; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VlWO6OsxVguYbW1idGTp/TPMA7t5OLHCGmw14F9osfo=;
- b=jltSMVPIwhEl4zqukAn4MdVr8yUB8lG/647bLPNiLpB9evuTTrptwueixOUki9/qVU
- CV4H4GMng1HnlYOmgwTuan2Zwbkh8fp5LwIdXLnQovnBeXSkwadFDfON56dOVN09RxJU
- 19sOPshSgoBAR4TT27NBcyPDZ/h3KlqIcy41Z6uiPzecrGKnM2MrdTLF+NhPu2cZoQIv
- ZAZxV9LgLcHV3qH48ga6/pZyN7HGP0rYCofQzj/xRbt8jwEN41Oo6dMtU2+fv9EecVg6
- mTo4rCMSvy6O1qX8/LN8arwBy88HesAWXJAY6DB+zaJIUkaO3npJemg3cSA/S6ewIHz4
- WDqQ==
+ bh=eJ8ejE0KRAgaLS7buSmDK0VBe75UjT+BFqb4Jiii2Rc=;
+ b=EwKoicTbM4F7Q+aCFuQbhql2ymu2wFNYw4B4iUCFfC8li44qDmvFUlHl8TMwEAL2uB
+ ppSXolc5Wt4xp3wX2yKnffuYD/TjJculzLbvghuDQ8E1a2w+EyZR4/vA2miDLxs6eS6l
+ qUDqp2SH1ANfTVnEzbVFBhJniZ1ltI01SYMbe4BzcdoCUq4SmfO+gLZPD0QNeXyppTVK
+ bwf/Y2s3IrftkX0+vDu5wuu8hBzx+5ngiAM4hDuhBwCVz2lfg22XOAaLbm4bq77Ll+xq
+ 9l5tiX0uEi4m5JGEtKXmjf+H4OS7fuTl0Fz0Ol7FNjLQ/xzLQaYj5G9GXlNQOqE5HK9t
+ b5ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720779689; x=1721384489;
+ d=1e100.net; s=20230601; t=1720779728; x=1721384528;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VlWO6OsxVguYbW1idGTp/TPMA7t5OLHCGmw14F9osfo=;
- b=brmKF7LxAL0FPitPHS7ubKRw3addEN+XvzfZBgVHGZI/SVNgJ4cZuoKpioW6/bRnFC
- an0OhGg2rgV5VLX7TmX3GNUjmrnMb2ndmFBOCzVFBD4QhijhO46eqnA66IUtIm/EnXF/
- ebd1NaDN8kuUqmzK0ZUxjVhodW8y3RsC+x/iKEFUBGvAa8u0CEzDVN7InnTVi7Owc8+c
- bsMYFAcDT0gJXIyHQaTKCKXZ0gDP41dofVukblZOUvDClkZAivobTMsQUVlinYV0PmyS
- DAaGh3NU30b/IOXuhVyOEWxqVBFZlwyWu5aKOyLDJLPFyqUQ2MsXQrTBlLngF511+Fpf
- LJ0A==
-X-Gm-Message-State: AOJu0YyjXUFQHZwMYA649BWr521fkOhBjgKfB14Qm73PnPFaNE7f3w3N
- jF9d+cN8QXwMRlSJc8HIwrw/6lv+RMfmAODI162wnpO4RPJ+nGQIK3n7PpIimC+E+zdouj+0AmZ
- ArnDfOYaLTZAUMlABuMDcQYuET1aeou6K
-X-Google-Smtp-Source: AGHT+IEeOwYYaZp+BMxQVr4l2C6zcMyZ8cIXZFqrC82B/RniKUtVY2zoYN3FMV1URxMOkNMi1MgxULPwZny5w/73riw=
-X-Received: by 2002:a05:6402:35ce:b0:57c:bec1:ff4b with SMTP id
- 4fb4d7f45d1cf-599647adfedmr2060639a12.10.1720779688448; Fri, 12 Jul 2024
- 03:21:28 -0700 (PDT)
+ bh=eJ8ejE0KRAgaLS7buSmDK0VBe75UjT+BFqb4Jiii2Rc=;
+ b=KyimIa1WfGTlacg0I+8WllA4V1hf68UzRDh7f0Mmy4719Vh9iEKMZXwiGy8o+Sp1jy
+ iZfCyK+N5p6VBaKF8slhE5qzpfs+FFZqJy9C6CvtpuTAaUi73LqDmoFWNlgB84/Kwsb6
+ Esry/qXQOjdNRKBl64LzGZaoi7nUUUkNRSkMvpqeDLQPJgA8n6DTiwo6oGY7F1Ujhj3F
+ GxA5u6FJ6GXlN+2vy3eQbVa9ztHIdHSqN2/gG/d0ybXeJjQ6PLdF9QG3VTe9axCSZD/J
+ EyKPC30Wznem36uJSGVhFefvJu2qhiBbVcwzfwEze8BsKpFoP8hDGiU647ls0EA61JOg
+ bRSw==
+X-Gm-Message-State: AOJu0YxVzvMMnNgW+5vQD1fsv4dg8vmQXmD5f2BwCqk1po7OgmWTBGZv
+ eJtFdSliFB4turGatjx0BRLiUPLghgRr5vuJZA/Kms+umGG2XseTLYceKdzGmOL1b/UJqv6AZ5S
+ UmelhRHM8z9sbhr5gOVT5R/XOpEs=
+X-Google-Smtp-Source: AGHT+IHA+WNEbyAObOgLj25PrpdLusz+iqT5Zyo9GHl4lfbwhhzom60PFXdl8/TpUJY744KA/geTyDLYc/wP/Le7sK4=
+X-Received: by 2002:a05:6402:524f:b0:585:357a:87c0 with SMTP id
+ 4fb4d7f45d1cf-594ba98efdemr8913031a12.3.1720779727819; Fri, 12 Jul 2024
+ 03:22:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240712090725.2093317-1-rasmus.villemoes@prevas.dk>
- <20240712090725.2093317-2-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20240712090725.2093317-2-rasmus.villemoes@prevas.dk>
+ <20240712090725.2093317-3-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20240712090725.2093317-3-rasmus.villemoes@prevas.dk>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 12 Jul 2024 11:21:17 +0100
-Message-ID: <CALeDE9NFn8OPwzGxHKV5f1Pe0XoGwL7TjyODRe8R8itQS5487g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] arm: bcm283x: remove unused empty
- hw_watchdog_disable
+Date: Fri, 12 Jul 2024 11:21:56 +0100
+Message-ID: <CALeDE9O4X2_kKP0+gM1vmSxxq+Qv85vkMWMJXkAZqvh1cm+FTA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] board: rpi: remove leftover CONFIG_HW_WATCHDOG
+ block
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
  Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
@@ -91,51 +91,41 @@ X-Virus-Status: Clean
 On Fri, 12 Jul 2024 at 10:07, Rasmus Villemoes
 <rasmus.villemoes@prevas.dk> wrote:
 >
-> This empty stub was originally added as one branch of an #ifdef in
-> commit 45a6d231b2f (bcm2835_wdt: support for the BCM2835/2836
-> watchdog). That incarnation of the rpi watchdog driver was later
-> removed in c7adc0b5f98 (watchdog: bcm2835_wdt: Remove unused BCM283x
-> watchdog driver and its references), but this now unused stub was left
-> behind. The later (re-)added rpi watchdog driver does not define a
-> hw_watchdog_disable() function, as that is properly integrated in the
-> watchdog framework.
+> This was added in commit 45a6d231b2f (bcm2835_wdt: support for the
+> BCM2835/2836 watchdog), which did do 'select HW_WATCHDOG'. That
+> incarnation of the watchdog driver later got removed in
+> c7adc0b5f98 (watchdog: bcm2835_wdt: Remove unused BCM283x watchdog
+> driver and its references), but this block was left behind.
+>
+> Another rpi watchdog driver has since been added, but that does not
+> select HW_WATCHDOG, so this remains dead and unused. Remove it.
 >
 > Reviewed-by: Stefan Roese <sr@denx.de>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
-Thanks!
+Thanks for the cleanup and updated commit.
+
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
 > Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 > ---
->  arch/arm/mach-bcm283x/reset.c | 7 ++-----
->  1 file changed, 2 insertions(+), 5 deletions(-)
+>  board/raspberrypi/rpi/rpi.c | 4 ----
+>  1 file changed, 4 deletions(-)
 >
-> diff --git a/arch/arm/mach-bcm283x/reset.c b/arch/arm/mach-bcm283x/reset.c
-> index 9199234917f..1dc7ce50d1d 100644
-> --- a/arch/arm/mach-bcm283x/reset.c
-> +++ b/arch/arm/mach-bcm283x/reset.c
-> @@ -25,8 +25,6 @@
->  /* max ticks timeout */
->  #define BCM2835_WDOG_MAX_TIMEOUT       0x000fffff
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index d996eb0cf69..9a83cf2d6a7 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -493,10 +493,6 @@ static void get_board_revision(void)
 >
-> -void hw_watchdog_disable(void) {}
-> -
->  __efi_runtime_data struct bcm2835_wdog_regs *wdog_regs;
->
->  static void __efi_runtime
-> @@ -34,10 +32,9 @@ __reset_cpu(struct bcm2835_wdog_regs *wdog_regs, ulong ticks)
+>  int board_init(void)
 >  {
->         uint32_t rstc, timeout;
+> -#ifdef CONFIG_HW_WATCHDOG
+> -       hw_watchdog_init();
+> -#endif
+> -
+>         get_board_revision();
 >
-> -       if (ticks == 0) {
-> -               hw_watchdog_disable();
-> +       if (ticks == 0)
->                 timeout = RESET_TIMEOUT;
-> -       } else
-> +       else
->                 timeout = ticks & BCM2835_WDOG_MAX_TIMEOUT;
->
->         rstc = readl(&wdog_regs->rstc);
+>         gd->bd->bi_boot_params = 0x100;
 > --
 > 2.45.2
 >
