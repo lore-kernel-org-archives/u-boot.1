@@ -4,46 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87206C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 16:55:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A39C3DA45
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 16:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13289887CF;
-	Fri, 12 Jul 2024 18:54:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 77F88887EB;
+	Fri, 12 Jul 2024 18:54:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JcgOyBGY";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 277848881D; Fri, 12 Jul 2024 18:54:11 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DFCD3887CF
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 18:54:08 +0200 (CEST)
+ id ECA9088791; Fri, 12 Jul 2024 18:54:49 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B68E788829
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 18:54:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8D15B1042;
- Fri, 12 Jul 2024 09:54:33 -0700 (PDT)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.20])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DD4103F766;
- Fri, 12 Jul 2024 09:54:06 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Chris Morgan <macromorgan@hotmail.com>, Ryan Walklin <ryan@testtoast.com>,
- Philippe Simons <simons.philippe@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: [PATCH v2 6/6] power: pmic: sunxi: use generic AXP SPL driver for
- AXP305
-Date: Fri, 12 Jul 2024 17:53:52 +0100
-Message-Id: <20240712165352.3767166-7-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240712165352.3767166-1-andre.przywara@arm.com>
-References: <20240712165352.3767166-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-708b273b437so999160a34.0
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 09:54:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1720803286; x=1721408086; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6SOCTIXgAXc7PTlCW37cTH2NrZqJkCs+ltF6m4tIoIU=;
+ b=JcgOyBGYgGwmbQ25gCnSeEnuthgPavqz6TorO3bor7yAZgfhrCFwqB1mU6bJgWVxZa
+ z25p7BNPa5v3G7jZG3Kk7PeLbrqj7mpJI9HpNJobO0hZI03CUWdFFoVpRc6utzHHcOq/
+ uLKejO4G4gA+wtk/tVLokcBcPIro4Bq6owkRk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720803286; x=1721408086;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6SOCTIXgAXc7PTlCW37cTH2NrZqJkCs+ltF6m4tIoIU=;
+ b=NobFydRJYwY7EZQgGl6G/sQeH+UUOwMqd8jHUTJl2dGONl4y1e5fONSD/SCuPjf4EQ
+ N7cLhaHIVMLnHFoI46fQDx6Q2xWc2QfHwt6klHddY9YoR8qr9E3vYG/utziqXjRNZQTP
+ leQWU0Kup+UkQYH+tBFcS/fPkAq45zPLRAYKWcAE8+TdyKb21W+2b3x9IROCti7mhyIE
+ GYO53aCCYN/9WOoSCL9qHJjfynQQc/3eCmTCdNeQBuNscyABnu2SEbCmRXVApWRZDzd8
+ 8Bu2T+PbvOGK1cw67a11I1u/+XGDCgvKdu093Q0WkfDp9ZqQs8/0OjC09S3qwBbVtPRA
+ Saxw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWuY5iXMQveUAazZJchZBSUOt9lmfEepLl6uX04J5Kop2BJQ7P6tk5T8uH42TSo08N69toPU+eUVd8mj8BV/6+9OxDQIg==
+X-Gm-Message-State: AOJu0YxXgPlPultjpGE7KrlmnaDrqNhM63+Po/tZPN5OT3Ja/ujJEBMR
+ BGGQ/UxVOHDVSuVXqN4S8AuDcQnRTYVbBGlG8AtnyvO8hGuCaFJ65wvly0BNRd4=
+X-Google-Smtp-Source: AGHT+IElo9dTlmnnx3cgk3irzpKSMsAdZqr9VKSXVJ1VpY5/DLLSnddhXfzqx5aiMFheN9JH3oVSgQ==
+X-Received: by 2002:a05:6870:e0cc:b0:254:a7ef:b714 with SMTP id
+ 586e51a60fabf-25eaec95a90mr9621377fac.58.1720803286416; 
+ Fri, 12 Jul 2024 09:54:46 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25ea9fe9fb9sm2270586fac.14.2024.07.12.09.54.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jul 2024 09:54:46 -0700 (PDT)
+Date: Fri, 12 Jul 2024 10:54:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Jixiong.Hu@mediatek.com,
+ sjg@chromium.org, patrick.delaunay@foss.st.com,
+ ilias.apalodimas@linaro.org, seanga2@gmail.com,
+ upstream+uboot@sigma-star.at, u-boot@lists.denx.de,
+ upstream@sigma-star.at, Richard Weinberger <richard@nod.at>
+Subject: Re: [PATCH 1/2] ext4: Fix integer overflow in ext4fs_read_symlink()
+Message-ID: <20240712165443.GY38804@bill-the-cat>
+References: <20240702194223.31998-1-richard@nod.at>
+ <3244366.vfdyTQepKt@somecomputer>
+ <59ebc379-66f7-493a-b024-fcc3224b320c@gmx.de>
+ <3325697.VqM8IeB0Os@somecomputer>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fykEE2gMm4xgmyPd"
+Content-Disposition: inline
+In-Reply-To: <3325697.VqM8IeB0Os@somecomputer>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,152 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The generic AXP SPL driver implementation can cover all regulators we
-need for the AXP305.
 
-Add the descriptions for four of the six DC/DC regulators of the AXP305,
-and enable that when CONFIG_AXP305_POWER is enabled. We won't need DCDC2
-and DCDC3, but by using the position in the array for the index we keep
-the code cleaner.
-Also remove the old driver, and switch the Makefile to include the new,
-generic driver.
+--fykEE2gMm4xgmyPd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- drivers/power/Makefile  |  2 +-
- drivers/power/axp305.c  | 82 -----------------------------------------
- drivers/power/axp_spl.c | 16 ++++++++
- 3 files changed, 17 insertions(+), 83 deletions(-)
- delete mode 100644 drivers/power/axp305.c
+On Fri, Jul 12, 2024 at 01:26:35PM +0200, Richard Weinberger wrote:
+> Am Freitag, 12. Juli 2024, 13:19:32 CEST schrieb Heinrich Schuchardt:
+> > > Hm, I see man built-ins in the U-Boot source.
+> > > Why is this one special?
+> >=20
+> > See the definition of COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW in
+> > include/linux/compiler-clang.h.
+>=20
+> So I can't use __builtin_add_overflow() because
+> u-boot is still supporting outdated compilers that don't offer __builtin_=
+add_overflow()?
+>=20
+> Maybe this is the ideal moment to raise the bar?
+> __builtin_add_overflow() is supported by gcc >=3D 5.1 and clang >=3D 8.
 
-diff --git a/drivers/power/Makefile b/drivers/power/Makefile
-index 30e0daf0621..8d36f87ed32 100644
---- a/drivers/power/Makefile
-+++ b/drivers/power/Makefile
-@@ -12,7 +12,7 @@ ifdef CONFIG_SPL_BUILD
- obj-$(CONFIG_AXP152_POWER)	+= axp152.o
- obj-$(CONFIG_AXP209_POWER)	+= axp209.o
- obj-$(CONFIG_AXP221_POWER)	+= axp221.o
--obj-$(CONFIG_AXP305_POWER)	+= axp305.o
-+obj-$(CONFIG_AXP305_POWER)	+= axp_spl.o
- obj-$(CONFIG_AXP313_POWER)	+= axp_spl.o
- obj-$(CONFIG_AXP717_POWER)	+= axp_spl.o
- obj-$(CONFIG_AXP809_POWER)	+= axp809.o
-diff --git a/drivers/power/axp305.c b/drivers/power/axp305.c
-deleted file mode 100644
-index 0312ad9af76..00000000000
---- a/drivers/power/axp305.c
-+++ /dev/null
-@@ -1,82 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * AXP305 driver
-- *
-- * (C) Copyright 2020 Jernej Skrabec <jernej.skrabec@siol.net>
-- *
-- * Based on axp221.c
-- * (C) Copyright 2014 Hans de Goede <hdegoede@redhat.com>
-- * (C) Copyright 2013 Oliver Schinagl <oliver@schinagl.nl>
-- */
--
--#include <command.h>
--#include <errno.h>
--#include <asm/arch/pmic_bus.h>
--#include <axp_pmic.h>
--
--#define AXP305_DCDC4_1600MV_OFFSET 46
--
--static u8 axp305_mvolt_to_cfg(int mvolt, int min, int max, int div)
--{
--	if (mvolt < min)
--		mvolt = min;
--	else if (mvolt > max)
--		mvolt = max;
--
--	return  (mvolt - min) / div;
--}
--
--int axp_set_dcdc4(unsigned int mvolt)
--{
--	int ret;
--	u8 cfg;
--
--	if (mvolt >= 1600)
--		cfg = AXP305_DCDC4_1600MV_OFFSET +
--			axp305_mvolt_to_cfg(mvolt, 1600, 3300, 100);
--	else
--		cfg = axp305_mvolt_to_cfg(mvolt, 600, 1500, 20);
--
--	if (mvolt == 0)
--		return pmic_bus_clrbits(AXP305_OUTPUT_CTRL1,
--					AXP305_OUTPUT_CTRL1_DCDCD_EN);
--
--	ret = pmic_bus_write(AXP305_DCDCD_VOLTAGE, cfg);
--	if (ret)
--		return ret;
--
--	return pmic_bus_setbits(AXP305_OUTPUT_CTRL1,
--				AXP305_OUTPUT_CTRL1_DCDCD_EN);
--}
--
--int axp_init(void)
--{
--	u8 axp_chip_id;
--	int ret;
--
--	ret = pmic_bus_init();
--	if (ret)
--		return ret;
--
--	ret = pmic_bus_read(AXP305_CHIP_VERSION, &axp_chip_id);
--	if (ret)
--		return ret;
--
--	if ((axp_chip_id & AXP305_CHIP_VERSION_MASK) != 0x40)
--		return -ENODEV;
--
--	return ret;
--}
--
--#if !CONFIG_IS_ENABLED(ARM_PSCI_FW) && !IS_ENABLED(CONFIG_SYSRESET_CMD_POWEROFF)
--int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	pmic_bus_write(AXP305_SHUTDOWN, AXP305_POWEROFF);
--
--	/* infinite loop during shutdown */
--	while (1) {}
--
--	/* not reached */
--	return 0;
--}
--#endif
-diff --git a/drivers/power/axp_spl.c b/drivers/power/axp_spl.c
-index 68cbf60eedf..3c86eb20ab4 100644
---- a/drivers/power/axp_spl.c
-+++ b/drivers/power/axp_spl.c
-@@ -50,6 +50,22 @@ static const struct axp_reg_desc_spl axp_spl_dcdc_regulators[] = {
- #define AXP_SHUTDOWN_REG	0x1a
- #define AXP_SHUTDOWN_MASK	BIT(7)
- 
-+#elif defined(CONFIG_AXP305_POWER)				/* AXP305 */
-+
-+static const struct axp_reg_desc_spl axp_spl_dcdc_regulators[] = {
-+	{ 0x10, BIT(0), 0x12, 0x7f,  600, 1520,  10, 50 },
-+	{ 0x10, BIT(1), 0x13, 0x1f, 1000, 2550,  50, NA },
-+	{ 0x10, BIT(2), 0x14, 0x7f,  600, 1520,  10, 50 },
-+	{ 0x10, BIT(3), 0x15, 0x3f,  600, 1500,  20, NA },
-+	{ 0x10, BIT(4), 0x16, 0x1f, 1100, 3400, 100, NA },
-+};
-+
-+#define AXP_CHIP_VERSION	0x3
-+#define AXP_CHIP_VERSION_MASK	0xcf
-+#define AXP_CHIP_ID		0x40
-+#define AXP_SHUTDOWN_REG	0x32
-+#define AXP_SHUTDOWN_MASK	BIT(7)
-+
- #else
- 
- 	#error "Please define the regulator registers in axp_spl_regulators[]."
--- 
-2.25.1
+We already fail on gcc older than 6, for ARM. And we don't have a
+minimum clang specifically, but it's probably newer than 8. So this
+should be fine.
 
+--=20
+Tom
+
+--fykEE2gMm4xgmyPd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaRX9MACgkQFHw5/5Y0
+tywbUQv/TYCtJd5Kz1MPErgUFBVJUvIU6L6HB+pEn2C3mb2x2Yzd7HPj3juLE6R7
+5tDUNndwUtQtB94XOSpbCvQG8P8pJN/CZEyjEkh153L8dAQ7PYCDDMg7dT2O7mxF
+ls3f9T/c4nlJecs5mehsto6Q4m8foPu+vZuvXTnqF3O9gmAa1skEhePP9keMumX6
+sOqybQBqJKRC4q1fgJJSrNW9N8zqCmBmXhc8H/sKd0wzmTNGesrhrgX4dpg62qLf
+1Z98D62K0oRwHvcDVxf2mPfB9t4xTBMlbZ7JEfH+jgTZjeiFlkzDFlV9rmClUAoN
+FDvrSv90l3q72wLjiptAL2H0h5rpULbBKfmH9tRC326sbPrGjVHrQsVHj+oXkyx6
+8i6v+lNM9507lRghM8eqsSWPZfbwrKDJfyynuOq4kGwGQFLKKv//vnCIQgttk80s
+3vGRDRdyskGm/OmjfZ6k3bAopcqBwXxhy3x5/dOD+UzNMjFPjzvk258pKIjDB1h3
+OPJtWr2W
+=hLYY
+-----END PGP SIGNATURE-----
+
+--fykEE2gMm4xgmyPd--
