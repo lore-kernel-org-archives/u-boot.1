@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6314DC2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 16:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F743C2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 17:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6967887CF;
-	Fri, 12 Jul 2024 18:58:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D2B8388667;
+	Fri, 12 Jul 2024 19:07:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ylw0BBuN";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="Tfi7XhB2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D50B887CF; Fri, 12 Jul 2024 18:58:28 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC15B887C0; Fri, 12 Jul 2024 19:07:30 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B055887CD
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 18:58:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF8FD88176
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 19:07:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-704473c0698so1072749a34.3
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 09:58:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720803505; x=1721408305; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OdkzIAn0TNvSAZpIEBdpbXuKzLB869bCYiVzCDyL+KQ=;
- b=Ylw0BBuNDXiera5jRGJZL/toiJjQSJzPwt8pPYZWUE9KQb72ZZM/bPYroTZbZmUEcp
- u3F4wvdOaAcHOBF/zDxDmslbIseE6dqt1zCIjE8E8wRRQOehRAk6Bsmn7rn9V+wzV7g+
- rt35ghhoekuvNkTWNHIXZriBKgnFlfpqb2NZM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720803505; x=1721408305;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OdkzIAn0TNvSAZpIEBdpbXuKzLB869bCYiVzCDyL+KQ=;
- b=wQY8WWUTjfon6XbglMIDv5LlZDmWg3/pxI0RtL9cc4E1spJDAPoljRRmpAtbgWw26S
- BLihLGGBENl9XwZsyIPK9VZYMF+kLyKux0+ez/SsIeJ54FLl35TIFBD9Xy8e0ok/jDgQ
- 0sXv7k2cTz+dm6dAM/VHGYhDLvkeR28PPDAdkKiKxKQsPVt60AcQHFX8rGolxY2AhVC2
- lh7jap9AfyI7NXRjsLsYskkS7usFpejnNTd6IEllYS6czAgGVBxOBhJFiWAAD4UHnYZf
- 7v/yGMdRogLXQo2SbYUkk0QURU5zA8oLCwD8wD+cuerbVJsM4OQ03KymxJERUjJwypgt
- ntCQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVp1S3dKZsdQ0oJilePlnzNZn47uFPR5TO+VIIVfMuFoznBfnbzzItMC10MX2Se19UVCk0mU8TnX38zizlLf69SQOIqzQ==
-X-Gm-Message-State: AOJu0YwHTVFoZvABmsxRKZoumclOl2CkqCqgT1f1nD2FsdX5J9yXWUg0
- ei/PYidIUCLvfmxUEZ1NGBVkGAsGT2SUvhLgpVu2ta6kOgyrDeeet3Fo7SHevKqfxmcTsOQk3PS
- a4qbRig==
-X-Google-Smtp-Source: AGHT+IFQW3HCMUw527lnTLdoW/putAmFCi4acafsol418xFiYj055jUt5Tsxlhtg1lR4WJMV317aUg==
-X-Received: by 2002:a05:6830:3b8e:b0:708:b100:3a35 with SMTP id
- 46e09a7af769-708b10f7cc2mr5770676a34.21.1720803504232; 
- Fri, 12 Jul 2024 09:58:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70374f6b4acsm1622437a34.9.2024.07.12.09.58.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jul 2024 09:58:23 -0700 (PDT)
-Date: Fri, 12 Jul 2024 10:58:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Geert Uytterhoeven <geert+renesas@glider.be>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- linux-renesas-soc@vger.kernel.org
-Subject: Re: [PATCH uboot] dt-bindings: clock: rcar-gen2: Remove obsolete
- header files
-Message-ID: <20240712165821.GA38804@bill-the-cat>
-References: <6355fbaa5e3c40d6790cb5aa6ffc1c573c1f08ed.1720790104.git.geert+renesas@glider.be>
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
+ s=s31663417; t=1720804047; x=1721408847; i=frank-w@public-files.de;
+ bh=vN87iGsFVd/uATPbD5D8CJYOBfP1x3jQRm8e+WUnV1Q=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:Reply-to:In-Reply-To:
+ References:Message-ID:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Tfi7XhB2MqAvOwUP7Jc07D8DQlewJOtUBFUZ0TAWpuf9LPH/1tLjdeWKv4SMXMCH
+ SIN+23fBUAonreM15w/z/o6V4ketLT9U2WBowF1UWx1KWoVa59awV5+oHxDhWF4sK
+ Df2ThBhyW0HnSnFCxEsGHhyNB0ZiyvlgFl+KNBpZbwYUmro5g3D2f2q+OPM4eKwn1
+ 6vTNT7IUpjRT2rxHfCXTXDl/fFqyC6gWFJ+ER4maKZXBhxS/+lII4Nm9+Yu3Us6qO
+ n47vqoYe0++U2xHWfdpU83rUxtZ4QjimNuBzpDYvKtZ29h228LuPNfHm+FGZEgaO+
+ o16lOx8dbNC/6vYE9A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([217.61.158.209]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N9Mta-1sGH0t22vk-012nBC; Fri, 12
+ Jul 2024 19:07:27 +0200
+Date: Fri, 12 Jul 2024 19:07:25 +0200
+From: Frank Wunderlich <frank-w@public-files.de>
+To: Tom Rini <trini@konsulko.com>
+CC: u-boot@lists.denx.de
+Subject: Re: adding fdt-overlay function - help needed
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240712164902.GW38804@bill-the-cat>
+References: <trinity-a8e5b1d7-ca6f-4148-a618-95cfb529d919-1720625726767@3c-app-gmx-bs04>
+ <trinity-43100c7e-7010-40e5-998f-5fcfe548d29f-1720697012080@3c-app-gmx-bap43>
+ <20240712164902.GW38804@bill-the-cat>
+Message-ID: <5514F1B6-7F5F-4013-8576-F9BA526091BC@public-files.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="20NhckF+NpALL0uk"
-Content-Disposition: inline
-In-Reply-To: <6355fbaa5e3c40d6790cb5aa6ffc1c573c1f08ed.1720790104.git.geert+renesas@glider.be>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:wSegdEQeQHDaE/f9om9zi4Dd3nMA/nrAiiXLZX/MHhOU62M30et
+ M5dciZW8KOkLMFE3Kieum3hjfs9oXgocXEnrcEDOFdW/BpxcyhpL+BYIwFVkgJkC50jLRIz
+ dR7yYTfw3cpS3mulKcAGlbKDyu5lasQIPxIHdow41XeUeMghiC6n85Gr63TsE8rrG67oLbJ
+ bRPgyLuu6Ts+oyB6cJxig==
+UI-OutboundReport: notjunk:1;M01:P0:Cvgu3lr6hxQ=;Cj07Fo8UkWhOlbf8tJLi15kLQbq
+ HBDuRiHiNPNaQKw3IY1mElU170JGZ8cwuN/JRULp8oQ85wDwysDIV/FVzY5+q5Kmy8U3LWTYK
+ Bkw/x5AvOp76Ng5Oc9OeR1zbVwWjKmBN7CoAQMzjUmdutb9jw89h+OHvJQ4pkpkSHbGO3SXXm
+ w1U+2IO2F9sLWBP9rlh/Sonv3WmmxQDfOihbcfCJN2z2fuBxIVZbqRf7O7jbA2v/zHj+dk2Np
+ 77UCqnBsuW6VuoKTuWwP5sJgcP6PA90+40PQfcHqkv+txe7GIwchBIoEDDBNx6zcH3pgKOR0k
+ rXi3PS1HUu1U1ewKIHkzeallE+UZ8Jtq753CZwckC0xL+HsPA8ZgOLM/fY7/r29r8RndLa2cg
+ T8wxj67xr/R1x2MEWsf9aXcMvix57Jl4ExvOGhYttNK5C9n3M2GzZ5CjZSIbMKVlZruvwBvvE
+ mQbDoFqq1gGL2hXaBuqHpQNDr8YpAX2lWZEToKJvOsCKeZqNZr9xsEwtxfjm6qvukwol7Hce0
+ tgAVTo0RnrvZYZGdE4xlBv/mfSmUTOA1JkDP8Yw2Y4wjsmXa90iGrUcNaOcF8Vc8rr8mXuqL4
+ XKcsV4rOvFD83Tms+3Vug84+2uiTkuArsftMj+TCOQM06xbkTqjUZurqIsN8MVSJTMGMbCGjI
+ 7a+EXuBUxFFNfWnOJp2s4FAm9rvEAcHzoqkOU2g+7pwZVtQn0T0GHucTlr7wCxLApOeF7AbX0
+ GDtaIpRTIvQsf9k6WDbikthGZREnG1ZJUgeglCV8zRf/u/dW/58VZim4dsT1GBzsGQD7EwjeT
+ HOSu83qZ0XTaUSOM1BZP7Hrw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,67 +86,45 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: frank-w@public-files.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 12=2E Juli 2024 18:49:02 MESZ schrieb Tom Rini <trini@konsulko=2Ecom>:
+>On Thu, Jul 11, 2024 at 01:23:32PM +0200, Frank Wunderlich wrote:
+>
+>> Hi,
+>>=20
+>> i got a bit further and noticed, that required command is not available=
+ in uboot=2E=2E=2Ethis is normally part of the dtc package [1], so why is i=
+t missing in u-boot?
+>> I guess later added or dropped to reduce compile time/make porting easi=
+er=2E=2E=2E
+>>=20
+>> regards Frank
+>>=20
+>> https://github=2Ecom/qemu/dtc/blob/master/fdtoverlay=2Ec
+>
+>We're behind on re-syncing with the kernel's version of dtc, yes=2E It
+>might be easiest to just cherry-pick what you need for now?
+>
 
---20NhckF+NpALL0uk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I tried multiple things but the only thing worked so far was copying all c=
+/h from linux and modifying makefile to build fdtoverlay binary
 
-On Fri, Jul 12, 2024 at 03:17:38PM +0200, Geert Uytterhoeven wrote:
-> The clock definitions in <dt-bindings/clock/r8a779?-clock.h> were
-> superseded by those in <dt-bindings/clock/r8a779?-cpg-mssr.h> a long
-> time ago.
->=20
-> In fact U-Boot never used <dt-bindings/clock/r8a779?-clock.h>.
-> The unused headers, their replacements, and the corresponding
-> r8a779?.dtsi files were introduced together in U-Boot v2018.03.
->=20
-> Fixes: 16b6e4aa3732cee1 ("ARM: dts: rmobile: Import R8A7790 DTS from Linu=
-x 4.15-rc8")
-> Fixes: edd15fcffba31452 ("ARM: dts: rmobile: Import R8A7791 DTS from Linu=
-x 4.15-rc8")
-> Fixes: a3fb9ff3b33fae05 ("ARM: dts: rmobile: Import R8A7792 DTS from Linu=
-x 4.15-rc8")
-> Fixes: 92aa09959271d08f ("ARM: dts: rmobile: Import R8A7793 DTS from Linu=
-x 4.15-rc8")
-> Fixes: 9a26fc5a73fe2369 ("ARM: dts: rmobile: Import R8A7794 DTS from Linu=
-x 4.15-rc8")
-> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> ---
-> Cfr. https://git.kernel.org/pub/scm/linux/kernel/git/clk/linux.git/commit=
-/?h=3Dclk-next&id=3Dd6c5fc9add9eb7a0d5bd179ab07cbf43e32b28d8
->=20
-> I assume the corresponding header files under
-> dts/upstream/include/dt-bindings/clock/ will be removed automatically
-> in a future "Subtree merge tag 'v6.11-dts' of devicetree-rebasing repo
-> [1] into dts/upstream" commit?
+<https://github=2Ecom/frank-w/u-boot/commit/d01e15acecd4dcf1584e4601c54323=
+1d5dbb6379>
 
-Yes, it should get deleted when we move to v6.11-dts, thanks!
+But i have the buildchain not so far that the merging itself works (seems =
+to need targets for dtbo we have not in linux),but fdtoverlay itself is bui=
+lt without errors=2E
 
---=20
-Tom
+The repo i linked before seems to be completely incompatible with the dtc/=
+fdtutils from uboot/linux (missing constants and some more)=2E
 
---20NhckF+NpALL0uk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaRYK0ACgkQFHw5/5Y0
-tyzFSgwAgat3BTLqor+fihRaVpy8QU39wVsPh77vst89kJvCTSC6kYBCKT0qaZ97
-VcjJfPaiEqGZqZOnB23+ulhScOZjcLYDhARayquV07DmyATR8nuNZ+pyEYeh843b
-0kkWYUi9GIH5vvsztyGjXRM1EnSnzyU3B7I4/llYB22XPYdSVaupBFwfBeJcawml
-J7GnwiSNhpQFQOz4CCOrqf6kLKtuDpliKbO3DUj2zhx3oG8egbpOWZWUygZVm81K
-co4M2oqOFrQQAAPkJVrpUN4D4LfeOnm3hxWYFORyqGS7K6k6nDJCAYF+xEfW2AZr
-SpTboM6nO3ryqnaLyNFGNTGfDijD9f7/XYzh1kVzkLeDDhP57fmCTWpLIMFRo1RV
-KFIIk6BcRRaVeNZpeOUoEb5fON+sfBxZ98tOsCCWg7Gp9un6gapcvON95SIBA7v2
-q9VuJYNfo35/TdTZyfuLssy0vHvnBSAGAqN3G3hlLPc/uagBIW4st9gpy93tXqec
-eCuKJHGW
-=jcnK
------END PGP SIGNATURE-----
-
---20NhckF+NpALL0uk--
+If i have it running completely i can replace my testcommit with the cherr=
+y-pick from linux to preserve author-information,but first the merging need=
+s to work=2E
+regards Frank
