@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73E42C3DA45
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 08:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10114C2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 08:24:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E52E8875D;
-	Fri, 12 Jul 2024 10:24:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A3318874F;
+	Fri, 12 Jul 2024 10:24:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA62C88176; Fri, 12 Jul 2024 10:23:58 +0200 (CEST)
+ id A5F1288765; Fri, 12 Jul 2024 10:24:00 +0200 (CEST)
 Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 035DA886DB
+ by phobos.denx.de (Postfix) with ESMTPS id 623328871F
  for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 10:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id CA9FC61966A4;
- Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
+ by lithops.sigma-star.at (Postfix) with ESMTP id 3A80B61966A5;
+ Fri, 12 Jul 2024 10:23:57 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id t7QVMd0TI8EQ; Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
+ with ESMTP id ud07MbS9DpOs; Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 78C666195FF7;
+ by lithops.sigma-star.at (Postfix) with ESMTP id C7B7861966A3;
  Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id NwuqzD3X8Uh7; Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
+ with ESMTP id 03ZMVlycBD0C; Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
 Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
- by lithops.sigma-star.at (Postfix) with ESMTPSA id 4339F6195FD7;
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id 72D6F6195FC4;
  Fri, 12 Jul 2024 10:23:56 +0200 (CEST)
 From: Richard Weinberger <richard@nod.at>
 To: u-boot@lists.denx.de
 Cc: jmcosta944@gmail.com, thomas.petazzoni@bootlin.com,
  miquel.raynal@bootlin.com, trini@konsulko.com,
  upstream+uboot@sigma-star.at, Richard Weinberger <richard@nod.at>
-Subject: [PATCH 2/4] squashfs: Fix integer overflow in sqfs_inode_size()
-Date: Fri, 12 Jul 2024 10:23:42 +0200
-Message-Id: <20240712082344.8655-2-richard@nod.at>
+Subject: [PATCH 3/4] squashfs: Check sqfs_find_inode() return value
+Date: Fri, 12 Jul 2024 10:23:43 +0200
+Message-Id: <20240712082344.8655-3-richard@nod.at>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240712082344.8655-1-richard@nod.at>
 References: <20240712082344.8655-1-richard@nod.at>
@@ -65,41 +65,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A carefully crafted squashfs filesystem can exhibit an extremly large
-inode size and overflow the calculation in sqfs_inode_size().
-As a consequence, the squashfs driver will read from wrong locations.
-
-Fix by using __builtin_add_overflow() to detect the overflow.
+The function can fail and return NULL.
 
 Signed-off-by: Richard Weinberger <richard@nod.at>
 ---
- fs/squashfs/sqfs_inode.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ fs/squashfs/sqfs.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
-index d25cfb53e7..bb3ccd37e3 100644
---- a/fs/squashfs/sqfs_inode.c
-+++ b/fs/squashfs/sqfs_inode.c
-@@ -78,11 +78,16 @@ int sqfs_inode_size(struct squashfs_base_inode *inode=
-, u32 blk_size)
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 16a07c0622..fa99d514f2 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -474,6 +474,8 @@ static int sqfs_search_dir(struct squashfs_dir_stream=
+ *dirs, char **token_list,
+ 	/* Start by root inode */
+ 	table =3D sqfs_find_inode(dirs->inode_table, le32_to_cpu(sblk->inodes),
+ 				sblk->inodes, sblk->block_size);
++	if (!table)
++		return -EINVAL;
 =20
- 	case SQFS_SYMLINK_TYPE:
- 	case SQFS_LSYMLINK_TYPE: {
-+		int size;
-+
- 		struct squashfs_symlink_inode *symlink =3D
- 			(struct squashfs_symlink_inode *)inode;
-=20
--		return sizeof(*symlink) +
--			get_unaligned_le32(&symlink->symlink_size);
-+		if (__builtin_add_overflow(sizeof(*symlink),
-+		    get_unaligned_le32(&symlink->symlink_size), &size))
+ 	dir =3D (struct squashfs_dir_inode *)table;
+ 	ldir =3D (struct squashfs_ldir_inode *)table;
+@@ -529,6 +531,8 @@ static int sqfs_search_dir(struct squashfs_dir_stream=
+ *dirs, char **token_list,
+ 		/* Get reference to inode in the inode table */
+ 		table =3D sqfs_find_inode(dirs->inode_table, new_inode_number,
+ 					sblk->inodes, sblk->block_size);
++		if (!table)
 +			return -EINVAL;
-+
-+		return size;
- 	}
+ 		dir =3D (struct squashfs_dir_inode *)table;
 =20
- 	case SQFS_BLKDEV_TYPE:
+ 		/* Check for symbolic link and inode type sanity */
+@@ -1025,6 +1029,8 @@ int sqfs_readdir(struct fs_dir_stream *fs_dirs, str=
+uct fs_dirent **dentp)
+ 	i_number =3D dirs->dir_header->inode_number + dirs->entry->inode_offset=
+;
+ 	ipos =3D sqfs_find_inode(dirs->inode_table, i_number, sblk->inodes,
+ 			       sblk->block_size);
++	if (!ipos)
++		return -SQFS_STOP_READDIR;
+=20
+ 	base =3D (struct squashfs_base_inode *)ipos;
+=20
+@@ -1381,6 +1387,10 @@ int sqfs_read(const char *filename, void *buf, lof=
+f_t offset, loff_t len,
+ 	i_number =3D dirs->dir_header->inode_number + dirs->entry->inode_offset=
+;
+ 	ipos =3D sqfs_find_inode(dirs->inode_table, i_number, sblk->inodes,
+ 			       sblk->block_size);
++	if (!ipos) {
++		ret =3D -EINVAL;
++		goto out;
++	}
+=20
+ 	base =3D (struct squashfs_base_inode *)ipos;
+ 	switch (get_unaligned_le16(&base->inode_type)) {
+@@ -1629,6 +1639,13 @@ int sqfs_size(const char *filename, loff_t *size)
+ 	i_number =3D dirs->dir_header->inode_number + dirs->entry->inode_offset=
+;
+ 	ipos =3D sqfs_find_inode(dirs->inode_table, i_number, sblk->inodes,
+ 			       sblk->block_size);
++
++	if (!ipos) {
++		*size =3D 0;
++		ret =3D -EINVAL;
++		goto free_strings;
++	}
++
+ 	free(dirs->entry);
+ 	dirs->entry =3D NULL;
+=20
 --=20
 2.35.3
 
