@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B7F9C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 23:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A9E8C2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 23:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EB128871F;
+	by phobos.denx.de (Postfix) with ESMTP id E9244887E2;
 	Sat, 13 Jul 2024 01:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gJIJWzMi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CyGHNSMv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0EDC887DB; Sat, 13 Jul 2024 01:43:11 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id B1D51887CD; Sat, 13 Jul 2024 01:43:11 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C5CE887E2
+ by phobos.denx.de (Postfix) with ESMTPS id B6336887E7
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 01:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-704494efa7cso1492366a34.3
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 16:43:07 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5c694d5c5adso1206596eaf.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 16:43:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1720827787; x=1721432587; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WHqxuw5i2VufbzjblRZ2BmuXj+jBO8HWxGf+ApIz+3c=;
- b=gJIJWzMikYdwNweNIhSLtqErqj7eKkDTH6LSRWCrCgezF8Qy5w/2YkF7PxGAkhEUhF
- k5X18R9p/Qvjkyqfgy1o/pg6QkhqsgRrjx1pR+0Ar4l/0CUj1zRhVs7y6yBnn5g/BqHP
- w7f+aEUUFIGYVS4egEQwiQj1rm5yjoorEdJmiCXXTtWFlNbDVVJC7Q7Bgh4CBARNKO0j
- 650vGakqXRmUk8vZfoafNeX1JdFNpWBHJZNyNK78OWWkl5ran/ynzIBcNyZ/3d5TgeZB
- y/jQuxi1FJ7MF4zh7nAaQzlBL5yKDDyQH9ipmIO6AYgtXhQYQnRifNM6DvlUvw8Z6WXc
- Vt/w==
+ bh=hmDaa4Bknu4RRO/KQa7LMh+N3EDLCW3g9jzs5tsbOG4=;
+ b=CyGHNSMvm5nNj0/mthl79HoibShi0y0NczUFNQwwJODw0ReOFlzrOuwBobFsc7yP/K
+ g10PPdBF4yOENIu7XT/KElntvblG26QurKzH5eAzAPtEhOtAxIBAo9zNwnrL4qTiA2qC
+ zTGQGU7U3C9YMBe158VPbH4nMj/hIrG1r8OuEoLkrtCUB6EzTeBpplNah8NnAKypEpse
+ 898mdN4DsO4VQHpSOrcWVR+AkzTWVqUANBHpilv5PJ6KcaBycSHXIzi/TAO32Eoi6rUF
+ nLHPR84XAiFLZgyrSkUGlZT7DS1vOpjp4chZyLzqt/pv0UUgsmZs2G+pC3XsG7fDFaGq
+ Jitg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1720827787; x=1721432587;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WHqxuw5i2VufbzjblRZ2BmuXj+jBO8HWxGf+ApIz+3c=;
- b=DLuoM1K62LJRQcfdogwuYnshiJD7FyvyPCTjpu9wxXsMtxbbrR9cuZotgPBG90VbMH
- SZcf1jFWuUxI/Fy4w5f4b4/NpGOSTglXK+WkOZML5oFf6lvH+8v+btkz/GK+UrAtO/wK
- opJ6qdxb8n0pGs0YGZ0+A+AS0CKvue4vyvmHXtjV7w+Gh/aqSS1YxCrhUZ2ooG3gQB74
- j/NeC6Wyuhctd0MoR2mOK+5KlUv9yzB1ldR5LveVeOuEY3Ph3H2I2GJ7p0N95ggMlUvb
- K1U/ONVRkk6s6lU/wpzJo3q7rMzYbHmsBH5g82YM8o18sc7a4LrSj6EAwdMd7zjb8HKt
- i60w==
+ bh=hmDaa4Bknu4RRO/KQa7LMh+N3EDLCW3g9jzs5tsbOG4=;
+ b=ZK6L/6X8xtE9AwwmI3n4ZeYCJDqTrxcNYjLynp6GHT39VzJ4CDfLYMYbeKVcQcwLeL
+ 6rKJRVYoODxdYRBuQN4Og+bDRvi8iwzMrOeIlincTcBNRtm8EPQSrQ/scqov6X69FvCO
+ XjwmPPB9lv5hOIAMP9bTGQGJ6dWt3l365AkL9xhmhGNuV9BOo7DsiIej5+a5vEkMCnaU
+ R8LNT0YI+C2V88xzeM56FxaMiDrL/XvsXUFcVxsbMvuyDO3bLHWrx/c34zv11ol7mF75
+ uQMPMpAbN6p66BFb+CDrhiKtq2yvzmVhxnbfhKVBWO+eVlshEGSDuIOCoJae26r3MMAZ
+ 0A/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmP7Yyy4zdc65FvBY7DMDUydwhDixd9KiUukb7CyThx8MhjL+lvIYOOznVQU+1JRLoR3HGmIeN7otfsoQSedv9JgaHYg==
-X-Gm-Message-State: AOJu0Yyd7OQDw4RQ3fWFXpMix7RsoM5qQkXxAHxjIxc/dbQP7Xgowo6A
- BiNyzNyLuwICsKFKvze9Yt57wRZJCxlKuBv6rRkUs4z5CpEUrbGXb2SMosti/NQ=
-X-Google-Smtp-Source: AGHT+IFsiCtT4S9ahfwCX1z33GH9fr9vN29izkIcVT+XPCAGJG3KR+34n2iuvrMS8R1Lu3sfCBy44g==
-X-Received: by 2002:a05:6830:908:b0:704:498f:7a67 with SMTP id
- 46e09a7af769-704498f7d46mr13608767a34.23.1720827786737; 
- Fri, 12 Jul 2024 16:43:06 -0700 (PDT)
+ AJvYcCVxFiF4evIJD+cdyqXM07eyoHU90sEuGor3AxP0UiTSMLsImvVyyegmcH16ac4rmy24mLgBSnmvcNtzAiI+lpgZUyjVeg==
+X-Gm-Message-State: AOJu0Yzu+8r7qihvsu7zcmnQH/S0eI7tCCE8fv61f6brNZvHYZgpaPLx
+ zImdyVB/gQuGVQpPKVlFsPlVe7L0vHRPJmaKS9NMMTGeq/IHAAZtzyRp6zHHcnT/Uom6cXSwm7H
+ a0DQ=
+X-Google-Smtp-Source: AGHT+IEr2x1N+pbUs+YwDEaL8umVAiBP+YJBvtMfCrnLK8kuKKoFFwmYWasYFYQ0CV6UfmoSa/bqjQ==
+X-Received: by 2002:a05:6820:2686:b0:5cc:642c:a9e9 with SMTP id
+ 006d021491bc7-5cce3722993mr4110397eaf.1.1720827787449; 
+ Fri, 12 Jul 2024 16:43:07 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708c0c62f0fsm36822a34.20.2024.07.12.16.43.06
+ 006d021491bc7-5ce74df062asm17530eaf.1.2024.07.12.16.43.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jul 2024 16:43:06 -0700 (PDT)
+ Fri, 12 Jul 2024 16:43:07 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>,
 	Minkyu Kang <mk7.kang@samsung.com>
@@ -73,9 +74,9 @@ Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sumit Garg <sumit.garg@linaro.org>,
  Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
-Subject: [PATCH 2/5] board: samsung: e850-96: Load LDFW firmware on board init
-Date: Fri, 12 Jul 2024 18:43:01 -0500
-Message-Id: <20240712234304.9675-3-semen.protsenko@linaro.org>
+Subject: [PATCH 3/5] clk: exynos: Add SSS clocks for Exynos850
+Date: Fri, 12 Jul 2024 18:43:02 -0500
+Message-Id: <20240712234304.9675-4-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240712234304.9675-1-semen.protsenko@linaro.org>
 References: <20240712234304.9675-1-semen.protsenko@linaro.org>
@@ -97,226 +98,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-LDFW is a Loadable Firmware which provides additional security
-capabilities in EL3 monitor. For example, True Random Number Generator
-(TRNG) block registers can't be accessed from EL1 (where U-Boot and
-Linux kernel are running), but it's possible to access TRNG capabilities
-via corresponding SMC calls, which in turn are handled by LDFW. To do
-so, LDFW firmware has to be loaded first. It's stored on a raw eMMC
-partition, so it has to be read into NWD (Normal World) RAM buffer, and
-then loaded to SWD (Secure World) memory using the special SMC call to
-EL3 monitor program. EL3_MON will load LDFW to SWD memory, more
-specifically to the area starting at 0xbf700000 (with size of 7.5 MiB).
-That memory area is reserved in device tree, so there shouldn't be any
-collisions. After that LDFW becomes functional.
-
-Implement LDFW firmware loading on board init. While at it, fix the
-copyright date in header comments, as this board support was actually
-added in 2024, not in 2020: it was probably a copy-paste mistake.
+Add ACLK (operating clock) and PCLK (bus clock) for Security Sub System
+(SSS) in Exynos850. Those clocks are needed for RNG enablement.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- board/samsung/e850-96/Makefile  |   4 +-
- board/samsung/e850-96/e850-96.c |   6 +-
- board/samsung/e850-96/fw.c      | 131 ++++++++++++++++++++++++++++++++
- board/samsung/e850-96/fw.h      |  12 +++
- 4 files changed, 149 insertions(+), 4 deletions(-)
- create mode 100644 board/samsung/e850-96/fw.c
- create mode 100644 board/samsung/e850-96/fw.h
+ drivers/clk/exynos/clk-exynos850.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/board/samsung/e850-96/Makefile b/board/samsung/e850-96/Makefile
-index 301c22337119..71d46ea3d2b4 100644
---- a/board/samsung/e850-96/Makefile
-+++ b/board/samsung/e850-96/Makefile
-@@ -1,6 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
--# Copyright (C) 2020, Linaro Limited
-+# Copyright (C) 2024, Linaro Limited
- # Sam Protsenko <semen.protsenko@linaro.org>
+diff --git a/drivers/clk/exynos/clk-exynos850.c b/drivers/clk/exynos/clk-exynos850.c
+index 0c09ba02de4a..8cbc626f31e8 100644
+--- a/drivers/clk/exynos/clk-exynos850.c
++++ b/drivers/clk/exynos/clk-exynos850.c
+@@ -323,14 +323,18 @@ U_BOOT_DRIVER(exynos850_cmu_peri) = {
+ /* Register Offset definitions for CMU_CORE (0x12000000) */
+ #define PLL_CON0_MUX_CLKCMU_CORE_BUS_USER	0x0600
+ #define PLL_CON0_MUX_CLKCMU_CORE_MMC_EMBD_USER	0x0620
++#define PLL_CON0_MUX_CLKCMU_CORE_SSS_USER	0x0630
+ #define CLK_CON_DIV_DIV_CLK_CORE_BUSP		0x1800
+ #define CLK_CON_GAT_GOUT_CORE_MMC_EMBD_I_ACLK	0x20e8
+ #define CLK_CON_GAT_GOUT_CORE_MMC_EMBD_SDCLKIN	0x20ec
++#define CLK_CON_GAT_GOUT_CORE_SSS_I_ACLK	0x2128
++#define CLK_CON_GAT_GOUT_CORE_SSS_I_PCLK	0x212c
  
--obj-y	:= e850-96.o
-+obj-y	:= e850-96.o fw.o
-diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
-index a00d81b5d4c3..c5cef6f19d22 100644
---- a/board/samsung/e850-96/e850-96.c
-+++ b/board/samsung/e850-96/e850-96.c
-@@ -1,10 +1,11 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright (C) 2020, Linaro Limited
-- * Sam Protsenko <semen.protsenko@linaro.org>
-+ * Copyright (c) 2024, Linaro Ltd.
-+ * Author: Sam Protsenko <semen.protsenko@linaro.org>
-  */
+ /* List of parent clocks for Muxes in CMU_CORE */
+ PNAME(mout_core_bus_user_p)		= { "clock-oscclk", "dout_core_bus" };
+ PNAME(mout_core_mmc_embd_user_p)	= { "clock-oscclk",
+ 					    "dout_core_mmc_embd" };
++PNAME(mout_core_sss_user_p)		= { "clock-oscclk", "dout_core_sss" };
  
- #include <init.h>
-+#include "fw.h"
+ static const struct samsung_mux_clock core_mux_clks[] = {
+ 	MUX(CLK_MOUT_CORE_BUS_USER, "mout_core_bus_user", mout_core_bus_user_p,
+@@ -338,6 +342,8 @@ static const struct samsung_mux_clock core_mux_clks[] = {
+ 	MUX_F(CLK_MOUT_CORE_MMC_EMBD_USER, "mout_core_mmc_embd_user",
+ 	      mout_core_mmc_embd_user_p, PLL_CON0_MUX_CLKCMU_CORE_MMC_EMBD_USER,
+ 	      4, 1, CLK_SET_RATE_PARENT, 0),
++	MUX(CLK_MOUT_CORE_SSS_USER, "mout_core_sss_user", mout_core_sss_user_p,
++	    PLL_CON0_MUX_CLKCMU_CORE_SSS_USER, 4, 1),
+ };
  
- int dram_init(void)
- {
-@@ -18,5 +19,6 @@ int dram_init_banksize(void)
+ static const struct samsung_div_clock core_div_clks[] = {
+@@ -351,6 +357,10 @@ static const struct samsung_gate_clock core_gate_clks[] = {
+ 	GATE(CLK_GOUT_MMC_EMBD_SDCLKIN, "gout_mmc_embd_sdclkin",
+ 	     "mout_core_mmc_embd_user", CLK_CON_GAT_GOUT_CORE_MMC_EMBD_SDCLKIN,
+ 	     21, CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_SSS_ACLK, "gout_sss_aclk", "mout_core_sss_user",
++	     CLK_CON_GAT_GOUT_CORE_SSS_I_ACLK, 21, 0, 0),
++	GATE(CLK_GOUT_SSS_PCLK, "gout_sss_pclk", "dout_core_busp",
++	     CLK_CON_GAT_GOUT_CORE_SSS_I_PCLK, 21, 0, 0),
+ };
  
- int board_init(void)
- {
-+	load_ldfw();
- 	return 0;
- }
-diff --git a/board/samsung/e850-96/fw.c b/board/samsung/e850-96/fw.c
-new file mode 100644
-index 000000000000..82a0b224c670
---- /dev/null
-+++ b/board/samsung/e850-96/fw.c
-@@ -0,0 +1,131 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024 Linaro Ltd.
-+ * Author: Sam Protsenko <semen.protsenko@linaro.org>
-+ *
-+ * Firmware loading code.
-+ */
-+
-+#include <part.h>
-+#include <linux/arm-smccc.h>
-+#include "fw.h"
-+
-+#define EMMC_IFACE		"mmc"
-+#define EMMC_DEV_NUM		0
-+
-+/* LDFW constants */
-+#define LDFW_PART_NAME		"ldfw"
-+#define LDFW_NWD_ADDR		0x88000000
-+#define LDFW_MAGIC		0x10adab1e
-+#define SMC_CMD_LOAD_LDFW	-0x500
-+#define SDM_HW_RESET_STATUS	0x1230
-+#define SDM_SW_RESET_STATUS	0x1231
-+#define SB_ERROR_PREFIX		0xfdaa0000
-+
-+struct ldfw_header {
-+	u32 magic;
-+	u32 size;
-+	u32 init_entry;
-+	u32 entry_point;
-+	u32 suspend_entry;
-+	u32 resume_entry;
-+	u32 start_smc_id;
-+	u32 version;
-+	u32 set_runtime_entry;
-+	u32 reserved[3];
-+	char fw_name[16];
-+};
-+
-+static int read_fw(const char *part_name, void *buf)
-+{
-+	struct blk_desc *blk_desc;
-+	struct disk_partition part;
-+	unsigned long cnt;
-+	int part_num;
-+
-+	blk_desc = blk_get_dev(EMMC_IFACE, EMMC_DEV_NUM);
-+	if (!blk_desc) {
-+		debug("%s: Can't get eMMC device\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	part_num = part_get_info_by_name(blk_desc, part_name, &part);
-+	if (part_num < 0) {
-+		debug("%s: Can't get LDWF partition\n", __func__);
-+		return -ENOENT;
-+	}
-+
-+	cnt = blk_dread(blk_desc, part.start, part.size, buf);
-+	if (cnt != part.size) {
-+		debug("%s: Can't read LDFW partition\n", __func__);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+int load_ldfw(void)
-+{
-+	const phys_addr_t addr = (phys_addr_t)LDFW_NWD_ADDR;
-+	struct ldfw_header *hdr;
-+	struct arm_smccc_res res;
-+	void *buf = (void *)addr;
-+	u64 size = 0;
-+	int err, i;
-+
-+	/* Load LDFW from the block device partition into RAM buffer */
-+	err = read_fw(LDFW_PART_NAME, buf);
-+	if (err)
-+		return err;
-+
-+	/* Validate LDFW by magic number in its header */
-+	hdr = buf;
-+	if (hdr->magic != LDFW_MAGIC) {
-+		debug("%s: Wrong LDFW magic; is LDFW flashed?\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	/* Calculate actual total size of all LDFW blobs */
-+	for (i = 0; hdr->magic == LDFW_MAGIC; ++i) {
-+#ifdef DEBUG
-+		char name[17] = { 0 };
-+
-+		strncpy(name, hdr->fw_name, 16);
-+		debug("%s: ldfw #%d: version = 0x%x, name = %s\n", __func__, i,
-+		      hdr->version, name);
-+#endif
-+
-+		size += (u64)hdr->size;
-+		hdr = (struct ldfw_header *)((u64)hdr + (u64)hdr->size);
-+	}
-+	debug("%s: The whole size of all LDFWs: 0x%llx\n", __func__, size);
-+
-+	/* Load LDFW firmware to SWD (Secure World) memory via EL3 monitor */
-+	arm_smccc_smc(SMC_CMD_LOAD_LDFW, addr, size, 0, 0, 0, 0, 0, &res);
-+	err = (int)res.a0;
-+	if (err == -1 || err == SDM_HW_RESET_STATUS) {
-+		debug("%s: Can't load LDFW in dump_gpr state\n", __func__);
-+		return -EIO;
-+	} else if (err == SDM_SW_RESET_STATUS) {
-+		debug("%s: Can't load LDFW in kernel panic (SW RESET) state\n",
-+		      __func__);
-+		return -EIO;
-+	} else if (err < 0 && (err & 0xffff0000) == SB_ERROR_PREFIX) {
-+		debug("%s: LDFW signature is corrupted! ret=0x%x\n", __func__,
-+		      (u32)err);
-+		return -EIO;
-+	} else if (err == 0) {
-+		debug("%s: No LDFW is inited\n", __func__);
-+		return -EIO;
-+	}
-+
-+#ifdef DEBUG
-+	u32 tried = res.a0 & 0xffff;
-+	u32 failed = (res.a0 >> 16) & 0xffff;
-+
-+	debug("%s: %d/%d LDFWs have been loaded successfully\n", __func__,
-+	      tried - failed, tried);
-+#endif
-+
-+	return 0;
-+}
-diff --git a/board/samsung/e850-96/fw.h b/board/samsung/e850-96/fw.h
-new file mode 100644
-index 000000000000..472664e4ed21
---- /dev/null
-+++ b/board/samsung/e850-96/fw.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024 Linaro Ltd.
-+ * Sam Protsenko <semen.protsenko@linaro.org>
-+ */
-+
-+#ifndef __E850_96_FW_H
-+#define __E850_96_FW_H
-+
-+int load_ldfw(void);
-+
-+#endif /* __E850_96_FW_H */
+ static const struct samsung_clk_group core_cmu_clks[] = {
 -- 
 2.39.2
 
