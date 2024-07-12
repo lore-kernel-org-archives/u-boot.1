@@ -4,50 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5413FC2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 23:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 050EBC2BD09
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 23:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B180887DB;
-	Sat, 13 Jul 2024 01:10:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B9706887FA;
+	Sat, 13 Jul 2024 01:43:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="QsjvwQmz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bMfVvNHI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A782A88792; Fri, 12 Jul 2024 16:19:42 +0200 (CEST)
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5EFA488427; Sat, 13 Jul 2024 01:43:09 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 555FB88637
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 16:19:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8D2BD88609
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 01:43:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=emil.kronborg@protonmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1720793978; x=1721053178;
- bh=Trhb0GdswufVxTlvdjs78uQ+vZ8IAe2K7lhevuJN0t0=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=QsjvwQmzMEnsVhv5ue4c+oDpFHHCYHu9U7Sih39nxpVkPvxSJ196mpTX0Fd+7RU0J
- 9s+92fSzIw3LyF9UMZrhyw2wsloGj57GFWdka6HfXIZCZawwT+/LdnstdknzYX6iyZ
- 8PuI5mTWxo03qGTRWKmUsTrLkfJvuBWljvnnLK8X7z1qL7IsRgQG63wuER4QuBNfee
- CmYyGeq+6U+gxOx0N8ymZQEZISRzI8v5nhIBet/NlDXn64sTUwRUs4uP8/JY3WbpD9
- zY7GnXsqKG2cTbzpJpR6TdFgBYshpxz7EqN7B0xL/mH34ZVH7u6NBDg2y/+f36xeyT
- Yd0V8LH4YnFSw==
-Date: Fri, 12 Jul 2024 14:19:25 +0000
-To: lukma@denx.de, seanga2@gmail.com
-From: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: trini@konsulko.com, rasmus.villemoes@prevas.dk, u-boot@lists.denx.de
-Subject: [PATCH] clk: imx6q: Add definition for IMX6QDL_CLK_PWM1
-Message-ID: <20240712141922.27739-1-emil.kronborg@protonmail.com>
-Feedback-ID: 20949900:user:proton
-X-Pm-Message-ID: 4c7fe8178654265bf4a4acf37c022b81190a6b37
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5ca9835db95so1433192eaf.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 16:43:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720827785; x=1721432585; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EyTMlOkRbE8fiCLWxzZ7VGroqbI/uR1qk+gHE22RDx0=;
+ b=bMfVvNHItq0CxmXbKAaZmBgpxmBi3AQLsn8vPU1YFFv1p/5shAVdcJiR5FxLN1Q8wB
+ NPolL3qqp/FBwFccuUnBkzuGlDLVupbIk0mhB237GanWzVUZcedeTvGmx3DxGYmmUv0m
+ nuftTautF2XqSaVpX/ZaVcCQL1dipjsJOeWnblda6yTmPUC07DtOMFGy64l06ILAWCSY
+ 7/pPK5qVzfnVQkUeIUPkd2hXVtrBZl/Sp863/SezKRqArrzqYl3jsbLKzgl21QD7ZeJc
+ 66Qrgrl/fDC63v0XL+VX15K23XFd2xu67TQHBE8YX7y1tHaCUuG614O+UPTKiPazIBVk
+ yWGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720827785; x=1721432585;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EyTMlOkRbE8fiCLWxzZ7VGroqbI/uR1qk+gHE22RDx0=;
+ b=TW44Xtcbjk3IqPIoTNRYFO5yiA+fZUQ6VudQpf6/3Hp/yBXMGmzrxs5v7ehvedxcsU
+ P3MCf6yX7Ijs1SPQ1B+VrKao/sMD4/t0BCAMQ/4Iu2vCPIbw5f+J57L6OjKvd3h5h9vb
+ cUQoCh0WfX513E1xihw0L+86/dkLWMO1ABoC+P6pf7S9MuJlnnaEwnXEOuUk0wEEz6H1
+ 4nt8A6huagA4fxS3ORZSr3mxiD5Po3A6BAHmxsu+nDrZP5WVBTKw7tTLu3hVlsEVMI+g
+ 8loXLfo5HdJwslm0QO7iVgWHB5rIrVBX+kxqoY5KF4G++E2MTpO3SPnxlW9KBRa+Ui5H
+ K5Gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaZolMeov/umHDk5Dp4eCzX6Fxsw1UDn2AoUBxr9QRD6iTlpgblX7Y2K65nBrNzLq0a82JCOQMGOovKZ6svHQDtmjXEA==
+X-Gm-Message-State: AOJu0YzagJs0NtlVkW/yOCbt7on5k2XNI/ZjJtJhlyYomMzsO+JEDCjK
+ ySNoflZUySxXIN+XZmE6L+RDrYdhscpDbe/kMyLTUd47rut4hmrX/h5qscsv7o0=
+X-Google-Smtp-Source: AGHT+IE0to2KTNhP/rR+L2RChrlN5eyEnUoV4vYxZKK0jLyiAVmh4QLQ1OUt9qeQu7tTM4SH0X78Lw==
+X-Received: by 2002:a05:6820:1e14:b0:5c2:1bdc:669c with SMTP id
+ 006d021491bc7-5cce6b55ae5mr3166705eaf.6.1720827785339; 
+ Fri, 12 Jul 2024 16:43:05 -0700 (PDT)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5ce774dbde3sm15329eaf.43.2024.07.12.16.43.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jul 2024 16:43:05 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+	Minkyu Kang <mk7.kang@samsung.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/5] arm: exynos: Enable TRNG for E850-96 board
+Date: Fri, 12 Jul 2024 18:42:59 -0500
+Message-Id: <20240712234304.9675-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Jul 2024 01:10:01 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,41 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enabling CONFIG_CMD_PWM, and consequently CONFIG_DM_PWM, causes the pwm
-command to fail due to a missing clock.
+This series enables True Random Number Generator (TRNG) for E850-96
+board. Here is a short breakdown of features implemented in this series:
 
-    =3D> pwm enable 0 0
-    Enable clock-controller@20c4000 failed
-    Failed to enable per_clk
-    pwm: '0' not found
-    Command 'pwm' failed: Error -2
+  1. Load LDFW (Loadable Firmware) on E850-96 board. It's needed to make
+     TRNG SMC commands functional. To do so, add the default eMMC
+     partition table and implement reading and applying LDFW in
+     board_init().
+  2. Add Exynos TRNG driver
+  3. Enable Exynos TRNG driver on E850-96 board. It requires SSS clocks
+     to be enabled, so add those clocks as well.
 
-Note that it is trivial to also add the clocks for PWM2, PWM3, and PWM4.
-However, I only tested PWM1 and thus only added the clock for that
-signal.
+With this series it's possible to generate random numbers in U-Boot
+(e.g. using 'rng' command). The main reason for RNG enablement on
+E850-96 board -- it's needed for EFI_RNG_PROTOCOL and kaslr, so it's one
+of the requirements to enable EFI boot support on E850-96 board, which
+in turn is needed (among other things) for EBBR spec and SystemReady
+certification. With this series it's also possible to use TRNG in Linux
+kernel (which was recently added, see [1] for details), as Linux kernel
+Exynos TRNG driver also relies on LDFW firmware to be loaded in the
+bootloader.
 
-Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
----
- drivers/clk/imx/clk-imx6q.c | 2 ++
- 1 file changed, 2 insertions(+)
+[1] https://lore.kernel.org/all/20240618003743.2975-1-semen.protsenko@linaro.org/T/#me6ba1762a254ca438a9715f011d32820babfe2d8
 
-diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
-index ba9923d8f6fa..b057b30c621e 100644
---- a/drivers/clk/imx/clk-imx6q.c
-+++ b/drivers/clk/imx/clk-imx6q.c
-@@ -128,6 +128,8 @@ static int imx6q_clk_probe(struct udevice *dev)
- =09       imx_clk_gate2("i2c1", "ipg_per", base + 0x70, 6));
- =09clk_dm(IMX6QDL_CLK_I2C2,
- =09       imx_clk_gate2("i2c2", "ipg_per", base + 0x70, 8));
-+=09clk_dm(IMX6QDL_CLK_PWM1,
-+=09       imx_clk_gate2("pwm1", "ipg_per", base + 0x78, 16));
-=20
- =09clk_dm(IMX6QDL_CLK_ENET, imx_clk_gate2("enet", "ipg", base + 0x6c, 10))=
-;
- =09clk_dm(IMX6QDL_CLK_ENET_REF,
+Sam Protsenko (5):
+  board: samsung: e850-96: Add default partitions
+  board: samsung: e850-96: Load LDFW firmware on board init
+  clk: exynos: Add SSS clocks for Exynos850
+  rng: Add Exynos TRNG driver
+  arm: exynos: Enable TRNG on E850-96 board
 
-base-commit: b4cbd1a257d4027038b4f997d73bdb0a066db045
---=20
-2.45.2
+ arch/arm/dts/exynos850-e850-96-u-boot.dtsi |  11 +
+ arch/arm/mach-exynos/Kconfig               |   2 +
+ board/samsung/e850-96/Makefile             |   4 +-
+ board/samsung/e850-96/e850-96.c            |   6 +-
+ board/samsung/e850-96/e850-96.env          |  26 ++
+ board/samsung/e850-96/fw.c                 | 131 ++++++++++
+ board/samsung/e850-96/fw.h                 |  12 +
+ configs/e850-96_defconfig                  |   1 +
+ drivers/clk/exynos/clk-exynos850.c         |  10 +
+ drivers/rng/Kconfig                        |   7 +
+ drivers/rng/Makefile                       |   1 +
+ drivers/rng/exynos-trng.c                  | 275 +++++++++++++++++++++
+ 12 files changed, 482 insertions(+), 4 deletions(-)
+ create mode 100644 board/samsung/e850-96/e850-96.env
+ create mode 100644 board/samsung/e850-96/fw.c
+ create mode 100644 board/samsung/e850-96/fw.h
+ create mode 100644 drivers/rng/exynos-trng.c
 
+-- 
+2.39.2
 
