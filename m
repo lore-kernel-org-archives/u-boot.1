@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A96C2BD09
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jul 2024 23:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74635C2BD09
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 00:23:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A263887B4;
-	Sat, 13 Jul 2024 01:43:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9845C88789;
+	Sat, 13 Jul 2024 02:23:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qNX10gYS";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="GT+G8clW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C435B887B4; Sat, 13 Jul 2024 01:43:13 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 6C7C788765; Sat, 13 Jul 2024 02:23:26 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E37E88427
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 01:43:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C6ED88789
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 02:23:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7036e383089so1446198a34.2
- for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 16:43:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a77c7d3e8bcso344027166b.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jul 2024 17:23:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720827788; x=1721432588; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1720830202; x=1721435002; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RdQHmfC8gyWvR+hSS4j4Zru8PA8uhmcA9jOx0371Ytg=;
- b=qNX10gYS43IKoxMhiDY0ZH/y0uzgMOu0s+fc0rp6b7QDzw+BZjUhzDQi2lzeX44/rc
- Pyc24Tn7vWi7yYLmeA4mQqdVrHLOXE7TBEZZwGqyVo5Rhpn3hML/3jJMa3vcU5qBf8a9
- zMuPfVDv5cPNMXPP2hPUjBxgNWZKws86Q8Lk7/vbu+kFTyEYwG0ClTAJ0RgVOgurwWO/
- XnfKJvWGH5enWwn+kGrM51bumMC3GuP56LnEtsdl9RwRdE4yoUNhPdW4i1Q3WBzOAP92
- 2QjGvBD10RDYLMR6A0ZSRLcmEYDbqBRXDvOaB5KcQDvPOTd9jgNzeWHDMQV84amsmOwo
- 6nzQ==
+ bh=rf86SDKvGLAWtinCCCNRtmD8Hbn3dF48w12MiQDncxc=;
+ b=GT+G8clW3yFDMWe+PVAbiwdmIxB9iX7wbasKKdT0A2WMuwuOBNdkuI4eTk6w3rt+Kj
+ wgP6oRmbvxGfHroicPanApPwJEGSgadikoDtj7z79FjNXt9D5l9WT8dukT0NLGIPmaBU
+ 6UhXheEQV/67T/6CQHdvp/151GXVknKZXwhp5hwUwTKEWaSViCz6/F88A1Wv9iiIsM2i
+ S70T7DbH8og1S27Etcwp8RkNc12m9V4t9stqVXN7igc2HGDheyUgwAIhWKI2vARmDgK6
+ Y0rT5dwt19LQ42qh3w1bET04AjgjvFW+KsDdlbw7+l2cmQcGlnGnCzDs4wMkwzIBLgKT
+ wUBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720827788; x=1721432588;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1720830202; x=1721435002;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RdQHmfC8gyWvR+hSS4j4Zru8PA8uhmcA9jOx0371Ytg=;
- b=BKfj6OXmzcjnfd4Z4SJRarJQyqVzocPDsBwrlmoSQNH2Ii0wZ+MnMlTthga7poqrNR
- sG15pURF9nDthK2lr4Kr31plE7mZlalI7xuATXp6kohBiUSzmwAlNJrPqCe76Lb1Yiso
- Pkw0F4sMsYLrbji4RkLc0qWE6FL4BRVNyxCs2fevXB77fpedFhVjmYN1EVVjT7+wzz5U
- 3rSjc7vwL2/WqOmgx2uKHEZsY6uLIVZbBTcfb1JL1+aGl6LuFKv6eFy8Cp4jmjZByIjo
- hmmRtQn35T8ZIcqZaDhHFb6qShH4Swq5gbT5h/MWHU2809We3N4SZOo9LkaCvPpH18Yh
- mRVA==
+ bh=rf86SDKvGLAWtinCCCNRtmD8Hbn3dF48w12MiQDncxc=;
+ b=F8Oye1POsvR2Lkpt7Fqk9f+gakwSuEPbDEB1/q7AHb0I30SO0a2HeSS3B8rdoTXlPs
+ nPJjm+5Ox6b/43JVdXr45E4AEVe0VfRJUWXwO9OCjBz/0k3+uOGoYDyH0NpAO2itxubd
+ kJt9fyJrTmPY1igKx1Yy/zhGEbExI2n3h55VtlOOTHB2R8CLGzcEYvg0TFfLv4UXeo1G
+ 4ta6zvGEQ1F6CF4wSgylRsyzQ6mBKqgNM3ZvZiLs74i4sC6MiaRjVC8QzyRMa4EEXoU1
+ twfUcRRBZ2EOjqaOFG/R9JbYyyRxEZNvEmI6mJN5bzwkpPSTKx27W2CTqAAl/JGChwBo
+ 6Viw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSaAustFPIS7ontbJemy7A/Rk4/hvsypEog3kbg4J8/i4487sR8Pl6KFtfuxohaVhiua86qLJQPxxop/uDioal/qmFwg==
-X-Gm-Message-State: AOJu0YyDeWmzhowI55OvIIxqXDl5Ec/KyzQXmZzrO7+QHHtJGWRkEQzw
- 2y5/KZndm22ZMphyxgkrRn5fk7DjYu7rsqjAW1+3JWJ4WeHqAn5RtPIuDEPLMrU=
-X-Google-Smtp-Source: AGHT+IEoiMAWt0FMogqW9IAkiyRMz7OqHVvymdhasJXMY+7IYJnDLlfhNBSqV/DbcvpTYVfrQDNTyw==
-X-Received: by 2002:a05:6870:c1cb:b0:25d:f654:9cd6 with SMTP id
- 586e51a60fabf-25eaec168d6mr10695919fac.38.1720827788149; 
- Fri, 12 Jul 2024 16:43:08 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708c0d01d1dsm33694a34.62.2024.07.12.16.43.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jul 2024 16:43:07 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Minkyu Kang <mk7.kang@samsung.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sumit Garg <sumit.garg@linaro.org>,
- Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
-Subject: [PATCH 4/5] rng: Add Exynos TRNG driver
-Date: Fri, 12 Jul 2024 18:43:03 -0500
-Message-Id: <20240712234304.9675-5-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240712234304.9675-1-semen.protsenko@linaro.org>
-References: <20240712234304.9675-1-semen.protsenko@linaro.org>
+ AJvYcCVtxaEqFXk0xknHZfy3lML5GhVn3hWtxSGJiXEKpiRPr9nhoDEuL/Uq1NxgxiGA/ZPb4B1kYy3frR4ugC2bY4KbHmqz+w==
+X-Gm-Message-State: AOJu0YwJZUW63YJaSsVkkKcDKcQV/fEqzLOQG6NKBdlL80qGuYn0uq15
+ 5IG+jK2nKxisp5CAcjGv/g7E5FLimR/uiuI/V5r6agAtWguHPa+E+Mo9r0aQUmIbpNOTzrW61Yc
+ TKl7qrnaLiR8cqr+oZEjLhpZd+4Asc5VX/CacEA==
+X-Google-Smtp-Source: AGHT+IFj8O8pInZ5+vvqbR4/5XwoJf3JYrd6GcSjjLCTfQ2frMhbFqe9Gsllh4FZoLXQOM1o0BY0P778Mmai3YwaF8Y=
+X-Received: by 2002:a17:906:2758:b0:a77:cc90:7733 with SMTP id
+ a640c23a62f3a-a780b6b3ae7mr729206566b.31.1720830201795; Fri, 12 Jul 2024
+ 17:23:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240604163546.60225-1-sebastian.reichel@collabora.com>
+ <20240604163546.60225-2-sebastian.reichel@collabora.com>
+In-Reply-To: <20240604163546.60225-2-sebastian.reichel@collabora.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 12 Jul 2024 17:23:10 -0700
+Message-ID: <CAJ+vNU0T_yd9mVrj7kDaub_4KtD+7acLDi+k9YpzY5qQMuMvSg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] usb: tcpm: add core framework
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
+ Eugen Hristev <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Simon Glass <sjg@chromium.org>, Soeren Moch <smoch@web.de>,
+ Wang Jie <dave.wang@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,338 +95,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add True Random Number Generator (TRNG) driver for Exynos chips. This
-implementation is heavily based on Linux kernel's counterpart [1]. It
-also follows upstream dt-bindings [2].
+On Tue, Jun 4, 2024 at 9:36=E2=80=AFAM Sebastian Reichel
+<sebastian.reichel@collabora.com> wrote:
+>
+> This adds TCPM framework in preparation for fusb302 support, which can
+> handle USB power delivery messages. This is needed to solve issues with
+> devices, that are running from a USB-C port supporting USB-PD, but not
+> having a battery.
+>
+> Such a device currently boots to the kernel without interacting with
+> the power-supply at all. If there are no USB-PD message replies within
+> 5 seconds, the power-supply assumes the peripheral is not capable of
+> USB-PD. It usually takes more than 5 seconds for the system to reach
+> the kernel and probe the I2C based fusb302 chip driver. Thus the
+> system always runs into this state. The power-supply's solution to
+> fix this error state is a hard reset, which involves removing the
+> power from VBUS. Boards without a battery (or huge capacitors) will
+> reset at this point resulting in a boot loop.
+>
+> This imports the TCPM framework from the kernel. The porting has
+> originally been done by Rockchip using hardware timers and the Linux
+> kernel's TCPM code from some years ago.
+>
+> I had a look at upgrading to the latest TCPM kernel code, but that
+> beast became a lot more complex due to adding more USB-C features.
+> I believe these features are not needed in U-Boot and with multiple
+> kthreads and hrtimers being involved it is non-trivial to port them.
+> Instead I worked on stripping down features from the Rockchip port
+> to an even more basic level. Also the TCPM code has been reworked
+> to avoid complete use of any timers (Rockchip used SoC specific
+> hardware timers + IRQ to implement delayed work mechanism). Instead
+> the delayed state changes are handled directly from the poll loop.
+>
+> Note, that (in contrast to the original Rockchip port) the state
+> machine has the same hard reset quirk, that the kernel has - i.e.
+> it avoids disabling the CC pin resistors for devices that are not
+> self-powered. Without that quirk, the Radxa Rock 5B will not just
+> end up doing a machine reset when a hard reset is triggered, but will
+> not even recover, because the CPU will loose power and the FUSB302
+> will keep this state because of leak voltage arriving through the RX
+> serial pin (assuming a serial adapter is connected).
+>
+> This also includes a 'tcpm' command, which can be used to get
+> information about the current state and the negotiated voltage
+> and current.
+>
+> Co-developed-by: Wang Jie <dave.wang@rock-chips.com>
+> Signed-off-by: Wang Jie <dave.wang@rock-chips.com>
+> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> ---
+>  Makefile                         |    1 +
+>  cmd/Kconfig                      |    7 +
+>  cmd/Makefile                     |    1 +
+>  cmd/tcpm.c                       |  142 ++
+>  drivers/usb/Kconfig              |    2 +
+>  drivers/usb/tcpm/Kconfig         |    8 +
+>  drivers/usb/tcpm/Makefile        |    3 +
+>  drivers/usb/tcpm/tcpm-internal.h |  174 +++
+>  drivers/usb/tcpm/tcpm-uclass.c   |  102 ++
+>  drivers/usb/tcpm/tcpm.c          | 2251 ++++++++++++++++++++++++++++++
+>  include/dm/uclass-id.h           |    1 +
+>  include/usb/pd.h                 |  516 +++++++
+>  include/usb/tcpm.h               |   99 ++
+>  13 files changed, 3307 insertions(+)
+>  create mode 100644 cmd/tcpm.c
+>  create mode 100644 drivers/usb/tcpm/Kconfig
+>  create mode 100644 drivers/usb/tcpm/Makefile
+>  create mode 100644 drivers/usb/tcpm/tcpm-internal.h
+>  create mode 100644 drivers/usb/tcpm/tcpm-uclass.c
+>  create mode 100644 drivers/usb/tcpm/tcpm.c
+>  create mode 100644 include/usb/pd.h
+>  create mode 100644 include/usb/tcpm.h
+>
 
-TRNG block is usually a part of SSS (Security Sub System) IP-core on
-Exynos chips. Because SSS access on Exynos850 is protected by TZPC
-(TrustZone Protection Control), it's not possible to read/write TRNG
-registers from U-Boot, as it's running in EL1 mode. Instead, the
-corresponding SMC calls should be used to make the secure software
-running in EL3 mode access it for us. Those SMC calls are handled by
-LDFW (Loadable Firmware), which has to be loaded first. For example, for
-E850-96 board it's done in its board_init(), so by the time RNG
-capabilities are needed the LDFW should be already loaded and TRNG
-should be functional.
+Hi Sebastian,
 
-[1] drivers/char/hw_random/exynos-trng.c
-[2] dts/upstream/Bindings/rng/samsung,exynos5250-trng.yaml
+I have a board that has a STMicroelectronics STUSB4500 USB PD sink
+controller [1] on it that I would be interested in writing a driver
+for using this TCPM class. This device is a USB PD sink controller
+which has a nice 'auto-run' feature that has 3 updatable NVM backed
+PDO's that it negotiates on its own with the the PD source so that you
+get basic functionality without needing a driver.
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- drivers/rng/Kconfig       |   7 +
- drivers/rng/Makefile      |   1 +
- drivers/rng/exynos-trng.c | 275 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 283 insertions(+)
- create mode 100644 drivers/rng/exynos-trng.c
+I am struggling a bit to get the stusb4500 working in a driver that
+fits into your framework and I think its the fact that the STUSB4500
+has no buffering capability so the processing of messages during the
+PD negotiation is extremely timing critical and I'm often missing the
+SRC_CAP message. To help me understand the correct operation of the
+tcpm state machine can you by chance enable DEBUG in fusb302.c and
+tcpm.c and share the output with me?
 
-diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-index 5758ae192a66..18cd8fe91f68 100644
---- a/drivers/rng/Kconfig
-+++ b/drivers/rng/Kconfig
-@@ -120,4 +120,11 @@ config RNG_TURRIS_RWTM
- 	  on other Armada-3700 devices (like EspressoBin) if Secure
- 	  Firmware from CZ.NIC is used.
- 
-+config RNG_EXYNOS
-+	bool "Samsung Exynos True Random Number Generator support"
-+	depends on DM_RNG
-+	help
-+	  Enable support for True Random Number Generator (TRNG)
-+	  available in Exynos SoCs.
-+
- endif
-diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-index c1f1c616e009..30553c9d6e99 100644
---- a/drivers/rng/Makefile
-+++ b/drivers/rng/Makefile
-@@ -18,3 +18,4 @@ obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
- obj-$(CONFIG_TPM_RNG) += tpm_rng.o
- obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
- obj-$(CONFIG_RNG_TURRIS_RWTM) += turris_rwtm_rng.o
-+obj-$(CONFIG_RNG_EXYNOS) += exynos-trng.o
-diff --git a/drivers/rng/exynos-trng.c b/drivers/rng/exynos-trng.c
-new file mode 100644
-index 000000000000..6de27a2acd44
---- /dev/null
-+++ b/drivers/rng/exynos-trng.c
-@@ -0,0 +1,275 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2024 Linaro Ltd.
-+ * Author: Sam Protsenko <semen.protsenko@linaro.org>
-+ *
-+ * Samsung Exynos TRNG driver (True Random Number Generator).
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <rng.h>
-+#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <asm/io.h>
-+#include <linux/arm-smccc.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+#include <linux/time.h>
-+
-+#define EXYNOS_TRNG_CLKDIV		0x0
-+#define EXYNOS_TRNG_CLKDIV_MASK		GENMASK(15, 0)
-+#define EXYNOS_TRNG_CLOCK_RATE		500000
-+
-+#define EXYNOS_TRNG_CTRL		0x20
-+#define EXYNOS_TRNG_CTRL_RNGEN		BIT(31)
-+
-+#define EXYNOS_TRNG_POST_CTRL		0x30
-+#define EXYNOS_TRNG_ONLINE_CTRL		0x40
-+#define EXYNOS_TRNG_ONLINE_STAT		0x44
-+#define EXYNOS_TRNG_ONLINE_MAXCHI2	0x48
-+#define EXYNOS_TRNG_FIFO_CTRL		0x50
-+#define EXYNOS_TRNG_FIFO_0		0x80
-+#define EXYNOS_TRNG_FIFO_1		0x84
-+#define EXYNOS_TRNG_FIFO_2		0x88
-+#define EXYNOS_TRNG_FIFO_3		0x8c
-+#define EXYNOS_TRNG_FIFO_4		0x90
-+#define EXYNOS_TRNG_FIFO_5		0x94
-+#define EXYNOS_TRNG_FIFO_6		0x98
-+#define EXYNOS_TRNG_FIFO_7		0x9c
-+#define EXYNOS_TRNG_FIFO_LEN		8
-+#define EXYNOS_TRNG_FIFO_TIMEOUT	(1 * USEC_PER_SEC)
-+
-+#define EXYNOS_SMC_CALL_VAL(func_num)			\
-+	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,		\
-+			   ARM_SMCCC_SMC_32,		\
-+			   ARM_SMCCC_OWNER_SIP,		\
-+			   func_num)
-+
-+/* SMC command for DTRNG access */
-+#define SMC_CMD_RANDOM			EXYNOS_SMC_CALL_VAL(0x1012)
-+
-+/* SMC_CMD_RANDOM: arguments */
-+#define HWRNG_INIT			0x0
-+#define HWRNG_EXIT			0x1
-+#define HWRNG_GET_DATA			0x2
-+
-+/* SMC_CMD_RANDOM: return values */
-+#define HWRNG_RET_OK			0x0
-+#define HWRNG_RET_RETRY_ERROR		0x2
-+
-+#define HWRNG_MAX_TRIES			100
-+
-+struct exynos_trng_variant {
-+	bool smc;
-+	int (*init)(struct udevice *dev);
-+	void (*exit)(struct udevice *dev);
-+	int (*read)(struct udevice *dev, void *data, size_t len);
-+};
-+
-+struct exynos_trng {
-+	void __iomem *base;
-+	struct clk *clk;	/* operating clock */
-+	struct clk *pclk;	/* bus clock */
-+	const struct exynos_trng_variant *data;
-+};
-+
-+static int exynos_trng_read_reg(struct udevice *dev, void *data, size_t len)
-+{
-+	struct exynos_trng *trng = dev_get_priv(dev);
-+	int val;
-+
-+	len = min_t(size_t, len, EXYNOS_TRNG_FIFO_LEN * 4);
-+	writel_relaxed(len * 8, trng->base + EXYNOS_TRNG_FIFO_CTRL);
-+	val = readl_poll_timeout(trng->base + EXYNOS_TRNG_FIFO_CTRL, val,
-+				 val == 0, EXYNOS_TRNG_FIFO_TIMEOUT);
-+	if (val < 0)
-+		return val;
-+
-+	memcpy_fromio(data, trng->base + EXYNOS_TRNG_FIFO_0, len);
-+
-+	return 0;
-+}
-+
-+static int exynos_trng_read_smc(struct udevice *dev, void *data, size_t len)
-+{
-+	struct arm_smccc_res res;
-+	unsigned int copied = 0;
-+	u32 *buf = data;
-+	int tries = 0;
-+
-+	while (copied < len) {
-+		arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_GET_DATA, 0, 0, 0, 0, 0, 0,
-+			      &res);
-+		switch (res.a0) {
-+		case HWRNG_RET_OK:
-+			*buf++ = res.a2;
-+			*buf++ = res.a3;
-+			copied += 8;
-+			tries = 0;
-+			break;
-+		case HWRNG_RET_RETRY_ERROR:
-+			if (++tries >= HWRNG_MAX_TRIES)
-+				return -EIO;
-+			udelay(10);
-+			break;
-+		default:
-+			return -EIO;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static int exynos_trng_init_reg(struct udevice *dev)
-+{
-+	const u32 max_div = EXYNOS_TRNG_CLKDIV_MASK;
-+	struct exynos_trng *trng = dev_get_priv(dev);
-+	unsigned long sss_rate;
-+	u32 div;
-+
-+	sss_rate = clk_get_rate(trng->clk);
-+
-+	/*
-+	 * For most TRNG circuits the clock frequency of under 500 kHz is safe.
-+	 * The clock divider should be an even number.
-+	 */
-+	div = sss_rate / EXYNOS_TRNG_CLOCK_RATE;
-+	div -= div % 2; /* make sure it's even */
-+	if (div > max_div) {
-+		dev_err(dev, "Clock divider too large: %u", div);
-+		return -ERANGE;
-+	}
-+	writel_relaxed(div, trng->base + EXYNOS_TRNG_CLKDIV);
-+
-+	/* Enable the generator */
-+	writel_relaxed(EXYNOS_TRNG_CTRL_RNGEN, trng->base + EXYNOS_TRNG_CTRL);
-+
-+	/* Disable post-processing */
-+	writel_relaxed(0, trng->base + EXYNOS_TRNG_POST_CTRL);
-+
-+	return 0;
-+}
-+
-+static int exynos_trng_init_smc(struct udevice *dev)
-+{
-+	struct arm_smccc_res res;
-+	int ret = 0;
-+
-+	arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_INIT, 0, 0, 0, 0, 0, 0, &res);
-+	if (res.a0 != HWRNG_RET_OK) {
-+		dev_err(dev, "SMC command for TRNG init failed (%d)\n",
-+			(int)res.a0);
-+		ret = -EIO;
-+	}
-+	if ((int)res.a0 == -1)
-+		dev_info(dev, "Make sure LDFW is loaded\n");
-+
-+	return ret;
-+}
-+
-+static void exynos_trng_exit_smc(struct udevice *dev)
-+{
-+	struct arm_smccc_res res;
-+
-+	arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_EXIT, 0, 0, 0, 0, 0, 0, &res);
-+}
-+
-+static int exynos_trng_read(struct udevice *dev, void *data, size_t len)
-+{
-+	struct exynos_trng *trng = dev_get_priv(dev);
-+
-+	return trng->data->read(dev, data, len);
-+}
-+
-+static int exynos_trng_of_to_plat(struct udevice *dev)
-+{
-+	struct exynos_trng *trng = dev_get_priv(dev);
-+
-+	trng->data = (struct exynos_trng_variant *)dev_get_driver_data(dev);
-+	if (!trng->data->smc) {
-+		trng->base = dev_read_addr_ptr(dev);
-+		if (!trng->base)
-+			return -ENODEV;
-+	}
-+
-+	trng->clk = devm_clk_get(dev, "secss");
-+	if (IS_ERR(trng->clk))
-+		return -ENODEV;
-+
-+	trng->pclk = devm_clk_get_optional(dev, "pclk");
-+	if (IS_ERR(trng->pclk))
-+		return -ENODEV;
-+
-+	return 0;
-+}
-+
-+static int exynos_trng_probe(struct udevice *dev)
-+{
-+	struct exynos_trng *trng = dev_get_priv(dev);
-+	int err;
-+
-+	err = clk_enable(trng->pclk);
-+	if (err)
-+		return err;
-+
-+	err = clk_enable(trng->clk);
-+	if (err)
-+		return err;
-+
-+	if (trng->data->init)
-+		err = trng->data->init(dev);
-+
-+	return err;
-+}
-+
-+static int exynos_trng_remove(struct udevice *dev)
-+{
-+	struct exynos_trng *trng = dev_get_priv(dev);
-+
-+	if (trng->data->exit)
-+		trng->data->exit(dev);
-+
-+	/* Keep SSS clocks enabled, they are needed for EL3_MON and kernel */
-+
-+	return 0;
-+}
-+
-+static const struct dm_rng_ops exynos_trng_ops = {
-+	.read	= exynos_trng_read,
-+};
-+
-+static const struct exynos_trng_variant exynos5250_trng_data = {
-+	.init	= exynos_trng_init_reg,
-+	.read	= exynos_trng_read_reg,
-+};
-+
-+static const struct exynos_trng_variant exynos850_trng_data = {
-+	.smc	= true,
-+	.init	= exynos_trng_init_smc,
-+	.exit	= exynos_trng_exit_smc,
-+	.read	= exynos_trng_read_smc,
-+};
-+
-+static const struct udevice_id exynos_trng_match[] = {
-+	{
-+		.compatible = "samsung,exynos5250-trng",
-+		.data = (ulong)&exynos5250_trng_data,
-+	}, {
-+		.compatible = "samsung,exynos850-trng",
-+		.data = (ulong)&exynos850_trng_data,
-+	},
-+	{ },
-+};
-+
-+U_BOOT_DRIVER(exynos_trng) = {
-+	.name		= "exynos-trng",
-+	.id		= UCLASS_RNG,
-+	.of_match	= exynos_trng_match,
-+	.of_to_plat	= exynos_trng_of_to_plat,
-+	.probe		= exynos_trng_probe,
-+	.remove		= exynos_trng_remove,
-+	.ops		= &exynos_trng_ops,
-+	.priv_auto	= sizeof(struct exynos_trng),
-+};
--- 
-2.39.2
+I'm trying to understand the required state machine transitions. It
+looks to me like for a SINK the state machine should go like this:
+INVALID_STATE -> SNK_UNATTACHED
+SNK_UNATTACHED -> SNK_ATTACH_WAIT
+^^^ during tcpm_init
+SNK_ATTACH_WAIT -> SNK_DEBOUNCED
+SNK_DEBOUNCED -> SNK_ATTACHED
+SNK_ATTACHED -> SNK_STARTUP
+SNK_STARTUP -> SNK_DISCOVERY
+SNK_DISCOVERY -> SNK_WAIT_CAPABILITIES
 
+At this point drvops->set_pd_rx(on) is called to allow your driver to
+accept PD messages but I don't understand the following logic:
+        case SNK_WAIT_CAPABILITIES:
+                ret =3D drvops->set_pd_rx(dev, true);
+                if (ret < 0) {
+                        tcpm_set_state(dev, SNK_READY, 0);
+                        break;
+                }
+                /*
+                 * If VBUS has never been low, and we time out waiting
+                 * for source cap, try a soft reset first, in case we
+                 * were already in a stable contract before this boot.
+                 * Do this only once.
+                 */
+                if (port->vbus_never_low) {
+                        port->vbus_never_low =3D false;
+                        tcpm_set_state(dev, SOFT_RESET_SEND,
+                                       PD_T_SINK_WAIT_CAP);
+                } else {
+                        tcpm_set_state(dev, hard_reset_state(port),
+                                       PD_T_SINK_WAIT_CAP);
+                }
+
+Why on error would you go straight to SNK_READY? The comment indicates
+a return value of >=3D0 is a timeout. Why on success would you either go
+straight to a hard/soft reset? What does fusb302.c return from
+set_pd_rx and do after that call?
+
+Also I would like to add the ability to show the PDO descriptions and
+the current negotiated PD contract in cmd/tcpm.c do_print_info so I
+will work on that. I would also like to add the capability to modify
+for the STUSB4500 the 3 stored PDO's and request a new contract (for
+example to up the wattage requested by and delivered to a board before
+enabling a higher power peripheral) and to store the modified PDO's in
+NVM. Do you think it would make sense for me to add a command handler
+operation to the tcpm class so non-common device-specific commands
+could be added or do you think I should just add my own
+U_BOOT_CMD(stusb4500, ...) for this in my driver?
+
+Best Regards,
+
+Tim
+[1] https://www.st.com/resource/en/datasheet/stusb4500.pdf
+https://www.st.com/resource/en/user_manual/um2650-the-stusb4500-software-pr=
+ograming-guide-stmicroelectronics.pdf
