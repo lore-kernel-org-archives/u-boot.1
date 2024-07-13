@@ -4,71 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FDC4C3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:15:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B5A2C3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:15:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2C048888E;
-	Sat, 13 Jul 2024 17:14:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B324888A4;
+	Sat, 13 Jul 2024 17:14:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HMqm7mzq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A+9UZgTl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 297EA87E13; Sat, 13 Jul 2024 17:14:15 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 5E1168884F; Sat, 13 Jul 2024 17:14:19 +0200 (CEST)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED9838885D
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C18F888A1
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-70b0e7f6f8bso2607338b3a.3
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:12 -0700 (PDT)
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-70af8128081so2311424b3a.1
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720883651; x=1721488451; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720883656; x=1721488456; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lrGt6It4tXgfrhn/hjsNbdvDxiP+V/5J7RPFzMOKkF4=;
- b=HMqm7mzqwNEABtIw1Kp8cZa7d2tIX8jZo8iz7v4FLh2+myQHGlI4Ddb/7H5c9PtlEb
- 8ly4pnoYY89YRMFie7jxwyjbTO+yc06zaesg7OwRK8ZP+iMfadiYQl2SCTIRz6vCcFN5
- V4RZf+2p9tiuLrSlnpFCd6df4IFeuZssQk9uM=
+ bh=gwZEgIfkeK8udQTdpnbmNGqIjXZ6Z8Tgdd4j9sy0o5o=;
+ b=A+9UZgTlGXpT+2CUPggeKjx38zf54n7yEHpA9xZo9RqJRRUO9Sa/VdDikc/doWAwPT
+ vK+zWM2dbOl1IW7KRf8UHR4WdIBKcjFzOpsYhH0Gi1n1sKPQrXEOP0sKMwdkVPgIOYgu
+ 3plMGFkEb9joHNq++tAoecAu4x0XUOUknas9E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720883651; x=1721488451;
+ d=1e100.net; s=20230601; t=1720883656; x=1721488456;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lrGt6It4tXgfrhn/hjsNbdvDxiP+V/5J7RPFzMOKkF4=;
- b=LgeSY7iuByQckTKytvfEOTX3hkRKlaSRd9thNdgURHZ3uXuKD6a0EG9eZpVf7KPYwM
- cVL422u0C2nPl5VkOKSbgkntZ5zj0HkDtvG6CnurPjEOePaCFx7HY42s+b4KN/8ljrhq
- XI6MVB9tKUVJ9TqavPozEGyVwUuLxcqnCzvBxzATxm/qfSH5QW92IiMVTz46mZtshLcO
- 6ARbvG4GQpW+6VBMsoT/vebnBCiJu9pfR5A84E8bHQbgqEzwRcwr91r1zKoJCDvBOtfg
- jjBkuEMnHtqzb8KWhz3XUXTnJYhuvCmALLZ/pKhtIbLr7RORTPDDjsjkPu7SUm6i4gGF
- Rz/A==
-X-Gm-Message-State: AOJu0Yyq1rJwonRINjPWaP9MDHVMQtWFJhFPV7+un4M6k0hoH/cIrI/7
- NTCpQseB28nLzuOhGHNKOtYgJHXffHLfAvPYJAG7qIado9qtY8PVh4Jp4cSb01RkjbIEAWcSxyt
- vwiQvMqpOLeKVO7vr3keixnjOTFSU80fYwU16
-X-Google-Smtp-Source: AGHT+IEu0xo2mzgsVx0yLTMhhWNFnhDyflynDa4seoTLkylDbaCTSyG8BWjPXcpEiVeAlSJsBdgTO5z4QiYusX/yDqQ=
-X-Received: by 2002:a05:6a21:3393:b0:1b6:d9fa:8be with SMTP id
- adf61e73a8af0-1c298398347mr18169637637.40.1720883651501; Sat, 13 Jul 2024
- 08:14:11 -0700 (PDT)
+ bh=gwZEgIfkeK8udQTdpnbmNGqIjXZ6Z8Tgdd4j9sy0o5o=;
+ b=dGQU/M3mNf/+W9Unu4sUfUXHhhRuB8VRJbW/jxdF8xZqijkfDzh1/mOs//UDvtXUUR
+ 48bJT1vnYH4mTUEUt7UMbpRt5TriJS3LU+kwF1QBIvp8myraAr4/YoNpPANS8VzsyLds
+ bTXWR7RwtZP5BluBZCBLMxchEKwsX08DGJcD/hfI/f0A5WbYVHpjujZPRSm+T1WCnyfN
+ n15XXPsc8RJc4pJ0H6eO0oxSUbMu3gU/P60pWE0WbAntOstW0da+anJOWM3oaXmwK8bI
+ sJqbXpqMbxJ93cRcIRZSJFMjV2DH26d8iTROGiuDXngJ7ddxQH+Bs4te/L9NJD+4hmyb
+ kz0w==
+X-Gm-Message-State: AOJu0YxO9oPmcIIh1mD7LNt5ZnYmsThqFkkqNkuaKk2/k2lX8Zu/FJCW
+ Xw3j5XqqBZ9hme81A6M9tIwdI5i4lffX6uWXqt/vm6DScujBFLGV13GtHsvNR79z5cSOqxI965K
+ eji/dYuSvhKTn3jDuGUum+bhF2/q5dtOKo/d+JLhlkkGcwVw=
+X-Google-Smtp-Source: AGHT+IG9OSHmdIl/xPBaDtESlcuLjlVgU5EjaCXecqTuqKpmiCJi89QeE+Nmdd6RMLs4L8s8c1BrwJ4H9pLr3DYK1Fs=
+X-Received: by 2002:a05:6a21:9997:b0:1c0:e652:1b2f with SMTP id
+ adf61e73a8af0-1c29824e443mr16638060637.33.1720883655696; Sat, 13 Jul 2024
+ 08:14:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-9-sughosh.ganu@linaro.org>
-In-Reply-To: <20240704073544.670249-9-sughosh.ganu@linaro.org>
+References: <trinity-c68bf542-baa7-4122-858b-c6d5ef8bf843-1720619007870@3c-app-gmx-bs04>
+In-Reply-To: <trinity-c68bf542-baa7-4122-858b-c6d5ef8bf843-1720619007870@3c-app-gmx-bs04>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:13:56 +0100
-Message-ID: <CAFLszTjDpnbHMtwgKXFfwz4Vcx78KRj0VsKXDr3t0-Dw_NurZQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 08/48] lmb: staticize __lmb_alloc_base()
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Date: Sat, 13 Jul 2024 16:13:48 +0100
+Message-ID: <CAFLszTiBhrQPMJNS8sjY-jnq8TFnqdWxutyU2NXPit2RZJczhA@mail.gmail.com>
+Subject: Re: avoid syscon fallback class for getting regmap
+To: Frank Wunderlich <frank-w@public-files.de>
+Cc: u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>, 
+ "Christian Marangi (Ansuel)" <ansuelsmth@gmail.com>,
+ John Crispin <john@phrozen.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,20 +83,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> The __lmb_alloc_base() function is only called from within the lmb
-> module. Moreover, the lmb_alloc() and lmb_alloc_base() API's are good
-> enough for the allocation API calls. Make the __lmb_alloc_base()
-> function static.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> Changes since V1: None
->
->  include/lmb.h |  2 --
->  lib/lmb.c     | 39 ++++++++++++++++++++-------------------
->  2 files changed, 20 insertions(+), 21 deletions(-)
+Hi Frank,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, 10 Jul 2024 at 14:43, Frank Wunderlich <frank-w@public-files.de> wrote:
+>
+> Hi,
+>
+> i'm working on OF_UPSTREAM for mediatek boards and noticed missing syscon-fallback on some (mt7988) devicetree nodes.
+>
+> i know that u-boot uses this fallback to get the regmap shared across drivers, but only initializing once with the syscon_uclass.
+>
+> i tried adding the syscon-fallback to linux device tree and got pointed [1] back to uboot to solve the issue there...
+>
+> are there any ways to avoid syscon in device tree and get the regmap of different node?
+>
+> i guess i could use [2], but then it is possible to aquire same regmap multiple times which may result in issues (e.g. race-conditions).
+> I also want to avoid creating multiple drivers doing the exactily same thing like syscon.
+>
+> one easy (but maybe unwanted way) is to add all compatibles for affected syscons to the syscon driver...but then it is no more generic (baed on compatibles then vendor-specific).
+
+One option is to create a new driver in a new file and have its ops
+use the syscon ops. See for example
+arch/arm/mach-rockchip/rk3399/syscon_rk3399.c
+
+Regards,
+Simon
