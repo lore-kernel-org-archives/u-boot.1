@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C4CFC3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B5CBC3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB91A88898;
-	Sat, 13 Jul 2024 17:14:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 606E088831;
+	Sat, 13 Jul 2024 17:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VC/mNf6R";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hpcw/VyI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79C7887E13; Sat, 13 Jul 2024 17:14:22 +0200 (CEST)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
+ id 60002888B4; Sat, 13 Jul 2024 17:14:24 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E1938889A
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E6B7888AD
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-70b0e7f6f8bso2607373b3a.3
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:20 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2c9a10728abso2127023a91.0
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720883659; x=1721488459; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720883661; x=1721488461; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=duy3pGMoCtgk5D+5+htXwjl/B/fObhv/vJQ3MpeBfW8=;
- b=VC/mNf6REt3mvFSntUeOtiyDUzrUjNzLKtVRBfJvgoebBtdom0ZUHj4oAUndSCyrB+
- 0A20d37CZOyXT0wNf+ulWF+UAG4DVUvvcP5NHuY4igC+hjY8WnL2/CQmkzzsLki+rmwj
- oi+dVJfQPrXj9jUeC1G+cvY4rL3m+zH1raMd8=
+ bh=6jQI/Gzr4JI55Rk050o1r0+F+EJI3JRewo02OACICRg=;
+ b=hpcw/VyIlTteBKfWNNJwXH23j0sHP2Bx+4rfidrdnC5FMDOa9gmioAVEfOngbOypCo
+ D9KsfQLbaG/QeDkOijylbQ2NvN4+d4MuV++qOd8uZWJmgKj8G5s9ZcgW9XZTbuS7z+Bc
+ UVyB7NEp1lhqi94wsfYyt56h9LP85nDWfHFZc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720883659; x=1721488459;
+ d=1e100.net; s=20230601; t=1720883661; x=1721488461;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=duy3pGMoCtgk5D+5+htXwjl/B/fObhv/vJQ3MpeBfW8=;
- b=WPzVMuXJnyrhzfI4FDUdjN5frlIlamYu1jzu8YWdRXenW9OA9/BkuXDxEkTtbYg2UT
- L7iywTPYY1JaKL0AwCIRO7qQw4HuatQFH421FQJ6U2FoioaRMitgPNYcaPjyXn8AxM6n
- 3paR5Ohdj4D+t9gZd5bbLXfHmaNCr7hDesyGqOjGUSzjP5b/uTexKBFKE4fJSYXHEkRb
- UryXOB9n9qmGNXD7G4pZpDvN4wKh+uodllr5/Bj4/5HgblA49qKlXdib52D5OaksNwhi
- VVMdMta5VHcGJg8LgxkfVNAQqB+0SYvYqqm0rSpdEvPeSzx5siUZRhMHOXGOsVI33zDg
- 2HZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWheUtnS0U1SXBJpNV8lnd0wIRRbsI3x+DzButcNptbNM2JsRl7zKrD6DB2qSprSl1zjcjlmyAweNF9PLlF4kmhPI69mg==
-X-Gm-Message-State: AOJu0YxxZtpQaRBhJB7ug0nk8gr2rNRTs892Iz2brg/+3PlAtToLtNly
- MpXuJDSheCvmBMeADl1QDNE1sR3R43IT0/3/z09PVQ0m5KLNSLLTcsCfyLT5UqXYNvHuBWlRDOt
- ZZJ2itB6E19dRO+qPNR595F9OKZ1hUZ0zPg0L
-X-Google-Smtp-Source: AGHT+IHKliWBDeNyHMlcSpJSDaKqvmwmPW6eSHs7+PNatImq4tVWlVqb3jIZhIigmGlCGmvzfQZQ2/tyr0h7BGTJJz4=
-X-Received: by 2002:a05:6a20:7f98:b0:1c2:8eb7:19bf with SMTP id
- adf61e73a8af0-1c29822de09mr17050822637.37.1720883658812; Sat, 13 Jul 2024
- 08:14:18 -0700 (PDT)
+ bh=6jQI/Gzr4JI55Rk050o1r0+F+EJI3JRewo02OACICRg=;
+ b=NZzB0lkcchC8y/YWdNNp81qKFoU6JdI103NWbCE1nF+VvkM9nGsifR2av6uSkpjeEU
+ 8EEPmzNvntoCTjLPyzDpHVLKyS5i1lWGngnHpZNyW/SU3f+Jqy1yuxpt/v6/Qax2ozE1
+ sFoHIvc1fWrhB7JOHAqNTa3jFIHmen8UNbw2JvqUG2ulNu8zVonziMwF/mLHovlykcSF
+ 5Ft4e2dqEYUOfWyenGPwykmONeo9QjyU0PUPvKVQEx/9sOLr8BVrFqJXFuHpvEmpOrSF
+ 9EAR8UhKdJJTpLgsT2pSutPbkv/Zf8ryMKOSNs4le4FIvLH6JdPPOyICP+MPr/bfWPBK
+ i7wQ==
+X-Gm-Message-State: AOJu0YzbrLtcqVvqVV+Le1b5ErBiun86GDncJNsIjQUDw0RTTwdYC81P
+ kdxlAuUbfO/tzrKyVUsd/qwtfOPMKL0wSS4v9jKrMsGCpPlJjxabGbG0hk99J2LIPi1vajm4ACU
+ ilkt/cIf0bOeYbJtDwKPSKvOa3I6WXYnhaD+2
+X-Google-Smtp-Source: AGHT+IG1LlJCaXtnej7fupDNurvPzk8c+QJpKMY8lcV90+AHR1IPKJussxcn6bCFMcXXanbNQn+CthxlbN+HQbgbXxU=
+X-Received: by 2002:a17:90a:9ce:b0:2c9:81d3:65d5 with SMTP id
+ 98e67ed59e1d1-2ca35c6ea02mr10354984a91.24.1720883660794; Sat, 13 Jul 2024
+ 08:14:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240710-bootmeth-android-v3-0-b99406e22da3@baylibre.com>
- <20240710-bootmeth-android-v3-2-b99406e22da3@baylibre.com>
-In-Reply-To: <20240710-bootmeth-android-v3-2-b99406e22da3@baylibre.com>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240704073544.670249-8-sughosh.ganu@linaro.org>
+In-Reply-To: <20240704073544.670249-8-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:13:45 +0100
-Message-ID: <CAFLszTiY71XHozYOGA8iy1Y9EXFDTQz2C2R2bU1GSdK4y2x8Bw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] bootstd: Add bootflow_iter_check_mmc() helper
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Julien Masson <jmasson@baylibre.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Dmitrii Merkurev <dimorinny@google.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
+Date: Sat, 13 Jul 2024 16:13:56 +0100
+Message-ID: <CAFLszTgLkdJJXfL7uJDNenzti76xm0WXHge9v+WhJq+1ehtPRA@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 07/48] lmb: remove the unused lmb_is_reserved()
+ function
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,22 +87,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Jul 2024 at 09:40, Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
+On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Some bootflows might be able to only boot from MMC devices.
+> The lmb_is_reserved() API is not used. There is another API,
+> lmb_is_reserved_flags() which can be used to check if a particular
+> memory region is reserved. Remove the unused API.
 >
-> Add a helper function these bootflows can use.
->
-> Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> Reviewed-by: Julien Masson <jmasson@baylibre.com>
-> Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
-> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
->  boot/bootflow.c    | 12 ++++++++++++
->  include/bootflow.h |  9 +++++++++
->  2 files changed, 21 insertions(+)
+> Changes since V1: None
+>
+>  include/lmb.h | 11 -----------
+>  lib/lmb.c     |  5 -----
+>  2 files changed, 16 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
