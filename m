@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D45B9C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CD6C3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 667D888919;
-	Sat, 13 Jul 2024 17:15:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC56B88915;
+	Sat, 13 Jul 2024 17:15:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BMl2wMQJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xm6a4LQN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57EB488914; Sat, 13 Jul 2024 17:15:53 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 450C388907; Sat, 13 Jul 2024 17:15:55 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CB3588901
+ by phobos.denx.de (Postfix) with ESMTPS id 5EBDD88908
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:15:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-78006198aeeso1845669a12.1
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-75c3acf90f0so2155055a12.2
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:15:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1720883750; x=1721488550; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K6+YP7vKi80MGJ/i3IuNjlIRmi47V2F+qxTecSeC9AQ=;
- b=BMl2wMQJlYkvZNgx9T8sRhn0J/G0ujdmCjW/8GEXi9niQQrbUbJGSzvfoEUD5jzvu8
- gA7g2X5uk/FEleJLusiSVWYAfuPSXaE3S/Sxm4oLBJz0v8IiK3oKNfBge9kj/Rn2EVxm
- TaGQuLrBlkd6FZlBEYSf9FqHRk3CsYa24i2zc=
+ bh=kHsX/tZ9DwG3BZswwac9x6A24mB48SgeANFuKgGLbZw=;
+ b=Xm6a4LQNV2zxLGQXZL6gd0huFmJgtVJrYzkh5GvpQyEcy0UPHMs0wy7ZLKjIeagn/Z
+ a/SbIcPq/Dzjs8dUjmQRHx3Ku6jPxDSlZ7EdaUj+fAzwClViP6BMZNTcmOXQPKW3BA96
+ 847inBg9YMTkO0JvsS1evjoOFJVowKRGnathU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1720883750; x=1721488550;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K6+YP7vKi80MGJ/i3IuNjlIRmi47V2F+qxTecSeC9AQ=;
- b=Xbc7zWD93nZI9G/qevfsxETS87WAMFHLVLnKbic5jli+Ky0te+u1JmIn/DTlxr7ddB
- cPxalMP1yzCYTOT21aEnLScN5UJPXEhCwN+QIrZdJ+umo6a7ym94L0/hILW/jsBv3PWg
- d2VquS88jvurE2IUQy7u01G7GyesHV0pEpMEyQt2QTADVnW1mzHq1U4K0q1dYmMMR+hp
- Rc3jfUhcG/aCCrNv7zMtR8Q5LRzMzwjZO+dhw7JZIq/y3D9zaB1CQnMrpzNZl7DXJnL4
- ANyMwwl5mRcTXS+l06ZtOdJa4LRmR47P459dV9CC0SSsA/0WyqAXlJ/esrRpqXwtN6KI
- jzDQ==
-X-Gm-Message-State: AOJu0YzKoohCLkYRwcmT1Zn3xfJfbwHhmN5QoMnlGjWVbEAjy9ruSird
- p1N7Og70qC5XdUiYPaDikJtOU9apZd5/GhVYOYxBUZTb5RF9fLDM6HnEpjbyzXp986OvCDMfMY9
- llEshf2pRM4cCYg4Sp3gIJ9RFYKvp02lan+xqfYnWk2XDYa0=
-X-Google-Smtp-Source: AGHT+IG3vfTsyEHSVtmmqXnQl/uvxP7fjlPfIaGRVupRdIq5QcrZRVsRGNj4FvzhVAA/u2ftnCp+OaGh2fY5Yt/S344=
-X-Received: by 2002:a17:90a:d485:b0:2c8:4b95:465d with SMTP id
- 98e67ed59e1d1-2caeea90decmr2518065a91.11.1720883749788; Sat, 13 Jul 2024
+ bh=kHsX/tZ9DwG3BZswwac9x6A24mB48SgeANFuKgGLbZw=;
+ b=qXRUq7zOfjQ+syjZWdd53ACujqev8clihzAExF35shQvk7XIu38tBb0rMpGMUP5Zb0
+ IWWUMKxaTVksQgIWIqWdXXYpHpEE2zLVCHVimZfq5ei673TJzltody4XL1OnVOavlD2m
+ qespbq1Q9RkVEX6LvklGfp5mTH4VD0lGZk+eXXcj583PLSZihCA5RSoiUI2P3zE7744p
+ b6TyqRkzFRmhLxujrHUeF0oieePy0HTotoC0n9eo2iBtqwidvYvpUJiMeS9T6sGp7Mfl
+ F2TcUaOJO+twkIi4jyMkCfcabpfEF2LcAWHAvrA4JkyjgwKQLOMMc0L2gOTzm8Pdwq+I
+ SVjA==
+X-Gm-Message-State: AOJu0YzmO4fl0vKzY1Qti5U5jSIV1nkxjeTgJ2YKCAfSANDXrwAAjtoC
+ L8xjBw2RWiXUQ+nZRo4QnUUh6bwTnkCCXKRlESAuApcMPk75AkpAIqGwz34voA3ejXrIL9aPw0g
+ Ud+0TmoEfKqFt4F+ByIte5pk3HohelaiNXH13
+X-Google-Smtp-Source: AGHT+IFYjdMrrfciuuznNLPHsruuEANQpZsp43bYsL4J5yhhynhJ5aSr73IfpCWPawodxNw1GuE3NS7bEvpW4XN+s3E=
+X-Received: by 2002:a05:6a20:7484:b0:1c0:f23b:d360 with SMTP id
+ adf61e73a8af0-1c29822092cmr15439744637.20.1720883749952; Sat, 13 Jul 2024
  08:15:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-11-sughosh.ganu@linaro.org>
-In-Reply-To: <20240704073544.670249-11-sughosh.ganu@linaro.org>
+ <20240704073544.670249-15-sughosh.ganu@linaro.org>
+In-Reply-To: <20240704073544.670249-15-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:15:32 +0100
-Message-ID: <CAFLszTgR4SbhdpT-jNgR+XUNu4B3bH4ijTapOw5w1q2fxfxGMQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 10/48] lmb: remove local instances of the lmb
- structure variable
+Date: Sat, 13 Jul 2024 16:15:30 +0100
+Message-ID: <CAFLszThSMxe0uXOpPfQMHkdOvee9xF_ahxJqf5YM6wFaO065Ew@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 14/48] lmb: remove config symbols used for lmb
+ region count
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -87,59 +87,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
 On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> With the move of the LMB structure to a persistent state, there is no
-> need to declare the variable locally, and pass it as part of the LMB
-> API's. Remove all local variable instances and change the API's
-> correspondingly.
+> The LMB memory maps are now being maintained through a couple of
+> alloced lists, one for the available(added) memory, and one for the
+> used memory. These lists are not static arrays but can be extended at
+> runtime. Remove the config symbols which were being used to define the
+> size of these lists with the earlier implementation of static arrays.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since V1: None
+> Changes since V1: New patch
 >
->  arch/arc/lib/cache.c                 |   4 +-
->  arch/arm/lib/stack.c                 |   4 +-
->  arch/arm/mach-apple/board.c          |  17 ++-
->  arch/arm/mach-snapdragon/board.c     |  17 ++-
->  arch/arm/mach-stm32mp/dram_init.c    |   7 +-
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
->  arch/m68k/lib/bootm.c                |   7 +-
->  arch/microblaze/lib/bootm.c          |   4 +-
->  arch/mips/lib/bootm.c                |   9 +-
->  arch/nios2/lib/bootm.c               |   4 +-
->  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
->  arch/powerpc/include/asm/mp.h        |   4 +-
->  arch/powerpc/lib/bootm.c             |  14 +-
->  arch/riscv/lib/bootm.c               |   4 +-
->  arch/sh/lib/bootm.c                  |   4 +-
->  arch/x86/lib/bootm.c                 |   4 +-
->  arch/xtensa/lib/bootm.c              |   4 +-
->  board/xilinx/common/board.c          |   7 +-
->  boot/bootm.c                         |  26 ++--
->  boot/bootm_os.c                      |   5 +-
->  boot/image-board.c                   |  32 ++---
->  boot/image-fdt.c                     |  29 ++---
->  cmd/bdinfo.c                         |   6 +-
->  cmd/booti.c                          |   2 +-
->  cmd/bootz.c                          |   2 +-
->  cmd/load.c                           |   7 +-
->  drivers/iommu/apple_dart.c           |   7 +-
->  drivers/iommu/sandbox_iommu.c        |  15 +--
->  fs/fs.c                              |   7 +-
->  include/image.h                      |  22 +---
->  include/lmb.h                        |  39 +++---
->  lib/lmb.c                            |  81 ++++++------
->  net/tftp.c                           |   5 +-
->  net/wget.c                           |   5 +-
->  test/cmd/bdinfo.c                    |   2 +-
->  test/lib/lmb.c                       | 187 +++++++++++++--------------
->  36 files changed, 270 insertions(+), 333 deletions(-)
+>  configs/a3y17lte_defconfig           |  1 -
+>  configs/a5y17lte_defconfig           |  1 -
+>  configs/a7y17lte_defconfig           |  1 -
+>  configs/apple_m1_defconfig           |  1 -
+>  configs/mt7981_emmc_rfb_defconfig    |  1 -
+>  configs/mt7981_rfb_defconfig         |  1 -
+>  configs/mt7981_sd_rfb_defconfig      |  1 -
+>  configs/mt7986_rfb_defconfig         |  1 -
+>  configs/mt7986a_bpir3_emmc_defconfig |  1 -
+>  configs/mt7986a_bpir3_sd_defconfig   |  1 -
+>  configs/mt7988_rfb_defconfig         |  1 -
+>  configs/mt7988_sd_rfb_defconfig      |  1 -
+>  configs/qcom_defconfig               |  1 -
+>  configs/stm32mp13_defconfig          |  3 ---
+>  configs/stm32mp15_basic_defconfig    |  3 ---
+>  configs/stm32mp15_defconfig          |  3 ---
+>  configs/stm32mp15_trusted_defconfig  |  3 ---
+>  configs/stm32mp25_defconfig          |  3 ---
+>  configs/th1520_lpi4a_defconfig       |  1 -
+>  lib/Kconfig                          | 34 ----------------------------
+>  20 files changed, 63 deletions(-)
 
-From this commit until 'test: bdinfo: dump the global LMB memory map'
-,snow breaks.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
