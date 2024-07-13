@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3C5C3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8FEC3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A8A8888D3;
+	by phobos.denx.de (Postfix) with ESMTP id E31BE888BF;
 	Sat, 13 Jul 2024 15:21:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Do74nH9w";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XGyQcWL1";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MOaGsKLu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="km5Y50RY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC54F888C7; Sat, 13 Jul 2024 15:21:38 +0200 (CEST)
+ id CC16A888CB; Sat, 13 Jul 2024 15:21:39 +0200 (CEST)
 Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E47FC88872
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE365888B7
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WLpyS5Ddqz9sTd;
- Sat, 13 Jul 2024 15:21:36 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WLpyT5DbLz9sTd;
+ Sat, 13 Jul 2024 15:21:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876896;
+ s=mail20150812; t=1720876897;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=11PGt5JXK8/tYQIURDRCq69u0jz4qZVowGZw+sajkGI=;
- b=Do74nH9w27Yklvz2jujXqTBVuoI9SQdCq5hw9G8Em7YgIi0821yZ7lyxjo5HcOMIBD/atZ
- KqyxOJNy6wbOr1ut57fhUBfgfPoVkLGjRRDjkK2dAD6fi5aB4OE/6AahXG9g+mqmBp2vrg
- rqeiZeIMeXJa6EkdHQV9Vn8MjeF7EJIZ7pQP45sxhtMZIdqTlMYq0QbIFfacYB+yX1BOJc
- MfMPlq37DPIvOlhpWOdbsAcw+EcPVQxK3GIGbImYsGn5x8Ytn78IUonSL0jWXA29Bj1wQc
- FSu58g64cPm424mgJLbYqNc6BNzcVw26ofvLDntC64wj4sOMqH9G7sRMco9big==
+ bh=HuQeHeVQZqrJLG8ON9zAcMexkRwxWCgfOa18Jo6Nl9c=;
+ b=MOaGsKLuJws/1LU3F/xiRtcBMdm8gDtHNvpzm4WEgWPAKlDibrueOFiVFZ9gXa7wp0R58B
+ TLeXvAs3extr3TA/eb4GHN0zTW1gjEyG6bNZ/WG1pfETY1BsdFr945ehYBt7Q4lJrC/7cO
+ YjKh0sP/SkA/Q+Y/jXbGtmdxgVo2yNFU8Ag9/Qo8jTsM6K02fux9ul/3JWLjfNLvpiPCMn
+ jyKjtK5vVT744lNX59ogjnU8BSjXhW2lxXrqhKj0MkbIj92esUryA2ZBZJYIDnvYV2yDWc
+ qJtaQ2NMieI1e+fwKjiP03tmkIXDXCHHjWAtQw7lb4IHhV3kpkDhP4HLfE78pA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876894;
+ s=mail20150812; t=1720876895;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=11PGt5JXK8/tYQIURDRCq69u0jz4qZVowGZw+sajkGI=;
- b=XGyQcWL1afA1f7E12hBCjnk+sHVTkZIzLHsCLUGFVHTCzbPGQRIIg53Ds8dUoJuM4JveaU
- 7wp3QM81tOK6lF0Dnf/i5Dfyw1jhIEDidyS3cb7B8xtAu05oZtEaaI3VgV7h4WX7MXQ1D/
- k2lfzak1b2h91BfjJkwj9/V3D4FZeYAMNwNKv0AvqeV455WQHjSB3deoOvQeAtVKx6qZ1x
- BNmV2cCqkWglhwTfTBbqbTM56p4XYUHSuOD2Yxrdk2kNnLRY7VreFGw/JCy3xVuvNF9hwb
- 9f1q61tLJFLjj5vX1gG6nlfxxpC3m784LQOSMLNAk1APHX1g50nCCEqxntn8Yg==
+ bh=HuQeHeVQZqrJLG8ON9zAcMexkRwxWCgfOa18Jo6Nl9c=;
+ b=km5Y50RYlAdUWqnzJ2iALCLjzR/cgWGtWpjOFkfKmW4jRQkpF0PJvuppp+7RlFwMIiIYUa
+ epL8XgmfFJd4pHhGhf5u2+HZnWhHz4k1oGFlh2bJFmfLCdsX/KSKwy8EpFQbBZNVYGE6Oe
+ 5r5nri/6GvTHMlXSawPQ7cqNE6orwRcQu1bK58Ql4slN2whYstVWcAOcRiwJYvygZGOxiZ
+ iqvgye386fH1av2ua75APbzcuWBakDk3QSf+dRdnlTVoHd2HTEtINwLgKpll18JGhJyATC
+ 1Dg3c7g7GR4ftIKXYxpd3suRGvxg8Tj/IFwdalAtxa/0iQf4CChqtNWQCjyirQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 28/45] env: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:19 +0200
-Message-ID: <20240713132021.57650-28-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 29/45] examples: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:20 +0200
+Message-ID: <20240713132021.57650-29-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2a163d0ebbd71a7fb7d
-X-MBO-RS-META: qt71bfownszwkwomhoseycupndoqbxo7
+X-MBO-RS-ID: 5f01d3976b08760c2c1
+X-MBO-RS-META: icec8iuquegx6eackp7mk3f8dkp5ps3i
+X-Rspamd-Queue-Id: 4WLpyT5DbLz9sTd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,29 +99,50 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- env/common.c | 2 --
- 1 file changed, 2 deletions(-)
+ examples/api/glue.c         | 1 -
+ examples/standalone/sched.c | 3 ---
+ 2 files changed, 4 deletions(-)
 
-diff --git a/env/common.c b/env/common.c
-index d8c276dddfd..8d47d726059 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -394,7 +394,6 @@ void env_set_default(const char *s, int flags)
- 	gd->flags |= GD_FLG_ENV_DEFAULT;
+diff --git a/examples/api/glue.c b/examples/api/glue.c
+index 08c21a8cb9c..0aaa82bccb2 100644
+--- a/examples/api/glue.c
++++ b/examples/api/glue.c
+@@ -153,7 +153,6 @@ unsigned long ub_get_timer(unsigned long base)
+ 	return cur;
  }
  
 -
- /* [re]set individual variables to their value in the default environment */
- int env_set_default_vars(int nvars, char * const vars[], int flags)
- {
-@@ -588,7 +587,6 @@ int env_complete(char *var, int maxv, char *cmdv[], int bufsz, char *buf,
- 	found = 0;
- 	cmdv[0] = NULL;
+ /****************************************************************************
+  *
+  * devices
+diff --git a/examples/standalone/sched.c b/examples/standalone/sched.c
+index d507163f6f3..57ae67e1a5b 100644
+--- a/examples/standalone/sched.c
++++ b/examples/standalone/sched.c
+@@ -21,7 +21,6 @@
+  * timer interrupts.
+  */
  
 -
- 	while ((idx = hmatch_r(var, idx, &match, &env_htab))) {
- 		int vallen = strlen(match->key) + 1;
+ #define MAX_THREADS 8
  
+ #define CTX_SIZE 512
+@@ -55,7 +54,6 @@ struct lthread {
+ static volatile struct lthread lthreads[MAX_THREADS];
+ static volatile int current_tid = MASTER_THREAD;
+ 
+-
+ static uchar dbg = 0;
+ 
+ #define PDEBUG(fmt, args...)	 {					\
+@@ -162,7 +160,6 @@ static int testthread (void *name)
+ 	return *(int *) name + 1;
+ }
+ 
+-
+ static void sched_init (void)
+ {
+ 	int i;
 -- 
 2.43.0
 
