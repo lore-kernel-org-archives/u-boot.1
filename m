@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC781C3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:23:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D66C3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:23:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76E3688875;
+	by phobos.denx.de (Postfix) with ESMTP id DA56A88881;
 	Sat, 13 Jul 2024 15:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gD+8QrNl";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uHdfrpDG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WhAjEaqw";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SuOoOJpS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A3D88872; Sat, 13 Jul 2024 15:21:25 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 27D0388873; Sat, 13 Jul 2024 15:21:26 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32509887E3
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BED188836
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WLpyB6Fmlz9scZ;
- Sat, 13 Jul 2024 15:21:22 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WLpyC6wC6z9sZv;
+ Sat, 13 Jul 2024 15:21:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1720876884;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6QWhi2aoTA+/hxp4li/ycCZkl33oKnjU0EYDBsA//Ok=;
+ b=WhAjEaqwUXYJBwj07U+XTKZDfPHx9eF8OjXIipnD4hq8ulr0UDOVJLcHrkSz21RQbyVOCw
+ SXebzpdr9vD3dBdmIpS6u/xsC9GpX3yGGj5iRMI5A1xgqlWFcDN+X+AcOGs/c8EJEBFYWl
+ kJarYGrVpX7jvQL9o9mYdUTp+ITdMqTlI4hCxDdfYu04NBtQR5fAcW3APVxkFnYmBSub4j
+ c5A2+nQ3jFmM/ka2qqt7btgIYoKqNLolzYw69rwbQx1hsMBCJgnHrYmiTIlMr29nQyjZni
+ ljYmTULm0uQDl/HzbSu2N15si8Z35cwG0mJBqVyaSPTJ28Gic8ct+ePmHZ3htg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1720876882;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WZnbl5MLFqhRirDgf7MMxu+AKiOk30ZbI21XUdwwD3M=;
- b=gD+8QrNlybUN6/B2BvzdD4COs/WQ8ic+RYLhfflFLxo/UM/csD5hABjrfGznIPc0Y3dHFM
- X07lKIDda5HuSX3w67JbdRfcILg+0/OjRII1ylw0WZXFhupNJsnybon6xJ8LcMyEUjf9WP
- 1+0XA2uvzntg1TsOOtDbcsUdhhMUNjsvp7XXqD2dhRPQwNhhXb2rX8ohVQhcV8lv8fbSl6
- wYTG+EGlqjVbNnqB31pkTYXfQDWStp4bxVDIWKqOuXNDhm6vcKhAnxd2yiDLOKGQ2jG+Q+
- OfEmz/vgSVSHUhnRITv+UdNdJwASTAz0Paa74iUXUCvL/LrakgKYl4BV5ZWwNQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876880;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=WZnbl5MLFqhRirDgf7MMxu+AKiOk30ZbI21XUdwwD3M=;
- b=uHdfrpDGKjczaAb1op5DRAO1Fn86N2MWl7ykucr9yqSxOrBSFzIxWU1pzEXo0wFuHLkpl2
- kGDfdl+/AR6zuhEaSpe4dL7/YusColZdvbCATwY1qLrj4VbLeDk8TBTAyZV0DxxvF5E8WJ
- tN9q6xdbTUzN38O2Bgt6ia7mmbBUClpQzFml2q7cho7fMExULmsAYtKCp4EM++7n9MhvMi
- 2isz0O6uNCuMzOggVKPfK/iR2HlCSb3TcdApHeCef3Mr/KyilkDdbnVBLC+eRU6K2OoQzU
- r5eqJCXOMUOf98tyiiWh9Xu03p6XEExSMqwqdoW1PwcH4kirtpMt3YVPHshDQQ==
+ bh=6QWhi2aoTA+/hxp4li/ycCZkl33oKnjU0EYDBsA//Ok=;
+ b=SuOoOJpSmi0MQ5yumKp3L/eAo7u4IgVUorWo9ZkqWmwi5PiYIuazRjNmepyIka5w4nZjq+
+ EmrH2adMCcovIkhpjT646E1+wMzdrB6hGk3jTWOVkcC1QDeJvQwVmdxWZyDQyTX5uuWJnD
+ 1+MCl6tMqsjS7PNwR1DtxCVO5Z5uka5eVtNAPHOCSQVJclUJ7tBnWK2w+iCUzdOdNjl3+k
+ QZZ/Vfdt02ehDqHXcP7UvIOSeiKYQ6KxxnmSKCVY0KgfGUfGdkFmVOu5nblvVV6y0xQT3S
+ h5BxzYQGS1o7vxm2sjuWozc38jF6ToimzMFaQTsC8oPWEdLfP4JIEN1pyFU29g==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/45] arm: mach: at91: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:06 +0200
-Message-ID: <20240713132021.57650-15-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 16/45] arm: mach: ti: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:07 +0200
+Message-ID: <20240713132021.57650-16-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: db417fc8a5dd00104ad
-X-MBO-RS-META: pru8r5ocge5hgbqe4tzakca3ubqgrt8i
+X-MBO-RS-ID: 955eb053888bacf5bb5
+X-MBO-RS-META: ks7q3ai9aebqqhnfmt1xq6rdzk3hn9sa
+X-Rspamd-Queue-Id: 4WLpyC6wC6z9sZv
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,47 +100,133 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/mach-at91/include/mach/at91_pio.h     | 1 -
- arch/arm/mach-at91/include/mach/atmel_mpddrc.h | 1 -
- arch/arm/mach-at91/mpddrc.c                    | 1 -
- 3 files changed, 3 deletions(-)
+ arch/arm/mach-davinci/da850_lowlevel.c         | 1 -
+ arch/arm/mach-keystone/include/mach/psc_defs.h | 1 -
+ arch/arm/mach-keystone/msmc.c                  | 1 -
+ arch/arm/mach-omap2/am33xx/chilisom.c          | 1 -
+ arch/arm/mach-omap2/am33xx/clock.c             | 1 -
+ arch/arm/mach-omap2/am33xx/sys_info.c          | 1 -
+ arch/arm/mach-omap2/clocks-common.c            | 1 -
+ arch/arm/mach-omap2/hwinit-common.c            | 2 --
+ arch/arm/mach-omap2/omap3/board.c              | 1 -
+ 9 files changed, 10 deletions(-)
 
-diff --git a/arch/arm/mach-at91/include/mach/at91_pio.h b/arch/arm/mach-at91/include/mach/at91_pio.h
-index f51e47e55d5..6ca2c4ae6ff 100644
---- a/arch/arm/mach-at91/include/mach/at91_pio.h
-+++ b/arch/arm/mach-at91/include/mach/at91_pio.h
-@@ -13,7 +13,6 @@
- #ifndef AT91_PIO_H
- #define AT91_PIO_H
+diff --git a/arch/arm/mach-davinci/da850_lowlevel.c b/arch/arm/mach-davinci/da850_lowlevel.c
+index 936b5e11667..78d50d4e719 100644
+--- a/arch/arm/mach-davinci/da850_lowlevel.c
++++ b/arch/arm/mach-davinci/da850_lowlevel.c
+@@ -146,7 +146,6 @@ static int da850_pll_init(struct davinci_pllc_regs *reg, unsigned long pllmult)
+ 	 */
+ 	setbits_le32(&reg->pllctl, PLLCTL_PLLEN);
  
 -
- #define AT91_ASM_PIO_RANGE	0x200
- #define AT91_ASM_PIOC_ASR	\
- 	(ATMEL_BASE_PIO + AT91_PIO_PORTC * AT91_ASM_PIO_RANGE + 0x70)
-diff --git a/arch/arm/mach-at91/include/mach/atmel_mpddrc.h b/arch/arm/mach-at91/include/mach/atmel_mpddrc.h
-index 40ec87e2ff9..6beab397ae1 100644
---- a/arch/arm/mach-at91/include/mach/atmel_mpddrc.h
-+++ b/arch/arm/mach-at91/include/mach/atmel_mpddrc.h
-@@ -59,7 +59,6 @@ struct atmel_mpddr {
- 	u32 version;		/* 0xfc: IP version */
+ 	/*
+ 	 * clear EMIFA and EMIFB clock source settings, let them
+ 	 * run off SYSCLK
+diff --git a/arch/arm/mach-keystone/include/mach/psc_defs.h b/arch/arm/mach-keystone/include/mach/psc_defs.h
+index f164f95bf24..e5d70d2931e 100644
+--- a/arch/arm/mach-keystone/include/mach/psc_defs.h
++++ b/arch/arm/mach-keystone/include/mach/psc_defs.h
+@@ -26,7 +26,6 @@
+ #define PSC_REG_MDSTAT(x)       (0x800 + (4 * (x)))
+ #define PSC_REG_MDCTL(x)        (0xa00 + (4 * (x)))
+ 
+-
+ static inline u32 _boot_bit_mask(u32 x, u32 y)
+ {
+ 	u32 val = (1 << (x - y + 1)) - 1;
+diff --git a/arch/arm/mach-keystone/msmc.c b/arch/arm/mach-keystone/msmc.c
+index a20e0c98865..51c994f972f 100644
+--- a/arch/arm/mach-keystone/msmc.c
++++ b/arch/arm/mach-keystone/msmc.c
+@@ -53,7 +53,6 @@ struct msms_regs {
+ 	struct mpax ses[16][8];
  };
  
 -
- int ddr2_init(const unsigned int base,
- 	      const unsigned int ram_address,
- 	      const struct atmel_mpddrc_config *mpddr_value);
-diff --git a/arch/arm/mach-at91/mpddrc.c b/arch/arm/mach-at91/mpddrc.c
-index ac6a719d9c0..acd7cc9301b 100644
---- a/arch/arm/mach-at91/mpddrc.c
-+++ b/arch/arm/mach-at91/mpddrc.c
-@@ -35,7 +35,6 @@ static int ddr2_decodtype_is_seq(const unsigned int base, u32 cr)
- 	return 1;
+ void msmc_share_all_segments(int priv_id)
+ {
+ 	struct msms_regs *msmc = (struct msms_regs *)KS2_MSMC_CTRL_BASE;
+diff --git a/arch/arm/mach-omap2/am33xx/chilisom.c b/arch/arm/mach-omap2/am33xx/chilisom.c
+index 4765ce0adee..515b6f1b87c 100644
+--- a/arch/arm/mach-omap2/am33xx/chilisom.c
++++ b/arch/arm/mach-omap2/am33xx/chilisom.c
+@@ -102,7 +102,6 @@ void chilisom_spl_board_init(void)
+ 	/* Get the frequency */
+ 	dpll_mpu_opp100.m = am335x_get_efuse_mpu_max_freq(cdev);
+ 
+-
+ 	if (i2c_probe(TPS65217_CHIP_PM))
+ 		return;
+ 
+diff --git a/arch/arm/mach-omap2/am33xx/clock.c b/arch/arm/mach-omap2/am33xx/clock.c
+index f07003c95bc..cc955345db9 100644
+--- a/arch/arm/mach-omap2/am33xx/clock.c
++++ b/arch/arm/mach-omap2/am33xx/clock.c
+@@ -213,7 +213,6 @@ void do_disable_clocks(u32 *const *clk_domains,
+ {
+ 	u32 i, max = 100;
+ 
+-
+ 	/* Clock modules that need to be put in SW_DISABLE */
+ 	for (i = 0; (i < max) && clk_modules_disable && clk_modules_disable[i];
+ 	     i++)
+diff --git a/arch/arm/mach-omap2/am33xx/sys_info.c b/arch/arm/mach-omap2/am33xx/sys_info.c
+index 87afc096602..7ac67cb4899 100644
+--- a/arch/arm/mach-omap2/am33xx/sys_info.c
++++ b/arch/arm/mach-omap2/am33xx/sys_info.c
+@@ -74,7 +74,6 @@ u32 get_sys_clk_index(void)
+ 			CTRL_SYSBOOT_15_14_SHIFT);
  }
  
 -
- int ddr2_init(const unsigned int base,
- 	      const unsigned int ram_address,
- 	      const struct atmel_mpddrc_config *mpddr_value)
+ #ifdef CONFIG_DISPLAY_CPUINFO
+ static char *cpu_revs[] = {
+ 		"1.0",
+diff --git a/arch/arm/mach-omap2/clocks-common.c b/arch/arm/mach-omap2/clocks-common.c
+index 2a0c22841d0..18d099145c5 100644
+--- a/arch/arm/mach-omap2/clocks-common.c
++++ b/arch/arm/mach-omap2/clocks-common.c
+@@ -896,7 +896,6 @@ void do_disable_clocks(u32 const *clk_domains,
+ {
+ 	u32 i, max = 100;
+ 
+-
+ 	/* Clock modules that need to be put in SW_DISABLE */
+ 	for (i = 0; (i < max) && clk_modules_disable[i]; i++)
+ 		disable_clock_module(clk_modules_disable[i],
+diff --git a/arch/arm/mach-omap2/hwinit-common.c b/arch/arm/mach-omap2/hwinit-common.c
+index 138501602c3..bb67e50fd56 100644
+--- a/arch/arm/mach-omap2/hwinit-common.c
++++ b/arch/arm/mach-omap2/hwinit-common.c
+@@ -268,7 +268,6 @@ void watchdog_init(void)
+ 	writel(WD_UNLOCK2, &wd2_base->wspr);
+ }
+ 
+-
+ /*
+  * This function finds the SDRAM size available in the system
+  * based on DMM section configurations
+@@ -315,7 +314,6 @@ u32 omap_sdram_size(void)
+ 	return total_size;
+ }
+ 
+-
+ /*
+  * Routine: dram_init
+  * Description: sets uboots idea of sdram size
+diff --git a/arch/arm/mach-omap2/omap3/board.c b/arch/arm/mach-omap2/omap3/board.c
+index c5ada607f97..1de343ff48e 100644
+--- a/arch/arm/mach-omap2/omap3/board.c
++++ b/arch/arm/mach-omap2/omap3/board.c
+@@ -405,7 +405,6 @@ void v7_arch_cp15_set_acr(u32 acr, u32 cpu_midr, u32 cpu_rev_comb,
+ 	asm volatile ("mcr p15, 0, %0, c1, c0, 1" : : "r" (acr));
+ }
+ 
+-
+ #ifndef CONFIG_SYS_L2CACHE_OFF
+ static void omap3_update_aux_cr(u32 set_bits, u32 clear_bits)
+ {
 -- 
 2.43.0
 
