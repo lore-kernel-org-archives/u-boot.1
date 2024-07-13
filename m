@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC30C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71882C3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:25:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61931888C2;
-	Sat, 13 Jul 2024 15:21:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4C5F888C1;
+	Sat, 13 Jul 2024 15:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yRxHT9yw";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bMpPaX3B";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rsl+U/dq";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tACxDS2z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FE68888C2; Sat, 13 Jul 2024 15:21:36 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 664A88887A; Sat, 13 Jul 2024 15:21:37 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D206388872
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01DB2888B7
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,48 +31,48 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WLpyP4BRNz9sTd;
- Sat, 13 Jul 2024 15:21:33 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4WLpyQ51gGz9scS;
+ Sat, 13 Jul 2024 15:21:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876893;
+ s=mail20150812; t=1720876894;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dfKfcecKVw+vGCZzl+0CxWvSNIsofD7GKgAqAZip2Ac=;
- b=yRxHT9ywxx7VcToKk6fzl1PyJSSugHUoZ/Dx/x62q6hRcOZgN6P3FuyfOdww7jYN7Cm7Ft
- eXMST4xkX0MU+a8CHGOcwwzjX0j8V4lh482mMWzApeibcb+XB/lZkDFU2OMwIBp8tS3v64
- ekRE+h4/MWk34XB/0L4RTOOO6k2vNtnIb0CvG09IZ+06tvT0v2PmQi8XW1az7L4xxVWSXT
- HFKGGNFb0OiMZ37uQ7YkeUMYCgsmGcdwhDCNQdj3YS86xCcir9Fs47HHx90SueUzX2jMT2
- NyK1nABftYmAz2xT3JCcUa33RgsEievsv4TJm3r/eL+/EwruJjQ79zVA3tX/ug==
+ bh=fmkGkkwK+aT71o/23aS64JWWuO7bBoOwxANq7i+kI1k=;
+ b=rsl+U/dq6KEcsqdc4Dz+Gcl3QoV+hO+t66+erHgaoUh43Y+upuSQdLXNjnVoU4pDBL3ocI
+ U9CfSYnprrtgJNJsRW3XNBSbKFa5gi23yaCeg5YsD/lEU+Vc80fV68e2irUViotAyAs1Vv
+ 5/7SKVOU3QiWbzLXid4oJF9pIQWN9iZK6kUvM0MpPQqgSRYK+XNsgdnyBZqtLvI2YdSTTs
+ h1fmbyhzgd2xKnXS/zJvzlCW1fuigWDIWwKXsSJDNGQnRuUGLu27wrzEJOkkGzekZ97kLJ
+ i/Mkg98SMi/tRQi0wDttBLq/z1uL1vIyWV2Rr+MhImtrUczOS75jtqGCq1EeJg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876891;
+ s=mail20150812; t=1720876892;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dfKfcecKVw+vGCZzl+0CxWvSNIsofD7GKgAqAZip2Ac=;
- b=bMpPaX3BgLK2pYugqSzGk31SbZ5gZeuPiEjX/UypcWlYXjusVRNDp0DxBLbULSjz///OYr
- UciOObs1vmAFBa5Yi+7zeOu6dNCTHWq2xxn9rqDUrqE/VCS3TBAOnMurFsPK8dJ20vlgex
- V8WnKJRmGEQnArU/B+S5TlNllfUvwEL6geOfx5h2DEPImwGN5MXN/OqyV3BHgW9feSYMAP
- NQc92pz9nlPsKHI8Nt+ahtG7ZQFE6/zeAu9xLqMKrEK6neAIiCbCvm2U/1WLIQ2wsy/sZD
- 1aQUMLL0mNzQ8bf3+0WWsvuXyLuuukXipYdSPzwPd6Dja3k1qVrllo3tuGV4cw==
+ bh=fmkGkkwK+aT71o/23aS64JWWuO7bBoOwxANq7i+kI1k=;
+ b=tACxDS2zlXuV8zhiaMoMr468YJORU2LxbzyS27GpynrNkGOhf8MQawgb6WqGKqCb4rETN/
+ HBRuONifrMNL1m9Vsjsb7War6wYuLM70Lv5hfVoaK3AvaE6Re4w1FptKZLKKBMJWN5wCOm
+ 8oy4lVlk2FfGPUqIZq65+FkT7IrM4TlQhiB8zn8ABz9xdPMUlsPVTS1ICthcEBlBiezt2P
+ GWVa+BLZHewbZ402yjO/sgWtauuRX3kcFw3Jsd9ai2gHwAwasM96sEg1qFzQRnxmT9s+a8
+ fMmW/yzxvN/nFTdO2gHB6eXn3XMkVub8GB/h8MIDVAbfyhXx6ddhcJLWkRXlCg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 25/45] cmd: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:16 +0200
-Message-ID: <20240713132021.57650-25-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 26/45] common: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:17 +0200
+Message-ID: <20240713132021.57650-26-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: cf48b408525e6f70bfb
-X-MBO-RS-META: ne8xedh1k7jrbm3x1u7nx4qc1wogkx5q
-X-Rspamd-Queue-Id: 4WLpyP4BRNz9sTd
+X-MBO-RS-ID: b3cbe29218f4bf2f4fb
+X-MBO-RS-META: hxh9pg9ygeejg6si41t7bh6hfywi5grt
+X-Rspamd-Queue-Id: 4WLpyQ51gGz9scS
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,474 +99,874 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- cmd/ab_select.c       | 1 -
- cmd/bootm.c           | 2 --
- cmd/bootstage.c       | 1 -
- cmd/cache.c           | 1 -
- cmd/console.c         | 1 -
- cmd/cramfs.c          | 2 --
- cmd/extension_board.c | 1 -
- cmd/fat.c             | 1 -
- cmd/font.c            | 1 -
- cmd/load.c            | 8 --------
- cmd/mem.c             | 2 --
- cmd/mp.c              | 1 -
- cmd/mtdparts.c        | 4 ----
- cmd/net.c             | 1 -
- cmd/spl.c             | 1 -
- cmd/terminal.c        | 1 -
- cmd/tpm_test.c        | 1 -
- cmd/ubifs.c           | 1 -
- cmd/universe.c        | 6 ------
- cmd/usb.c             | 2 --
- cmd/ximg.c            | 1 -
- cmd/yaffs2.c          | 1 -
- cmd/zfs.c             | 3 ---
- 23 files changed, 44 deletions(-)
+ common/bootstage.c         |  1 -
+ common/cli_hush.c          |  4 --
+ common/cli_hush_upstream.c | 26 ------------
+ common/dlmalloc.c          | 84 --------------------------------------
+ common/edid.c              |  1 -
+ common/kallsyms.c          |  1 -
+ common/kgdb.c              |  1 -
+ common/menu.c              |  1 -
+ common/update.c            |  1 -
+ common/usb.c               |  8 ----
+ common/usb_hub.c           |  1 -
+ common/usb_storage.c       |  4 --
+ common/xyzModem.c          |  2 -
+ 13 files changed, 135 deletions(-)
 
-diff --git a/cmd/ab_select.c b/cmd/ab_select.c
-index faeb83816e5..7c178c728ca 100644
---- a/cmd/ab_select.c
-+++ b/cmd/ab_select.c
-@@ -35,7 +35,6 @@ static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_FAILURE;
- 	}
- 
--
- 	ret = ab_select_slot(dev_desc, &part_info, dec_tries);
- 	if (ret < 0) {
- 		printf("Android boot failed, error %d.\n", ret);
-diff --git a/cmd/bootm.c b/cmd/bootm.c
-index 545b0c3d823..bee683d0580 100644
---- a/cmd/bootm.c
-+++ b/cmd/bootm.c
-@@ -256,7 +256,6 @@ U_BOOT_CMD(
- 
- #endif
- 
--
- /*******************************************************************/
- /* iminfo - print header info for a requested image */
- /*******************************************************************/
-@@ -361,7 +360,6 @@ U_BOOT_CMD(
- );
- #endif
- 
--
- /*******************************************************************/
- /* imls - list all images found in flash */
- /*******************************************************************/
-diff --git a/cmd/bootstage.c b/cmd/bootstage.c
-index 5246924f39a..c47679d69d6 100644
---- a/cmd/bootstage.c
-+++ b/cmd/bootstage.c
-@@ -86,7 +86,6 @@ static int do_boostage(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_USAGE;
- }
- 
--
- U_BOOT_CMD(bootstage, 4, 1, do_boostage,
- 	"Boot stage command",
- 	" - check boot progress and timing\n"
-diff --git a/cmd/cache.c b/cmd/cache.c
-index 7a2068296ef..3049f5c305f 100644
---- a/cmd/cache.c
-+++ b/cmd/cache.c
-@@ -86,7 +86,6 @@ static int parse_argv(const char *s)
- 	return -1;
- }
- 
--
- U_BOOT_CMD(
- 	icache,   2,   1,     do_icache,
- 	"enable or disable instruction cache",
-diff --git a/cmd/console.c b/cmd/console.c
-index 12fc92061a1..a8133ee3fa3 100644
---- a/cmd/console.c
-+++ b/cmd/console.c
-@@ -47,7 +47,6 @@ static int do_coninfo(struct cmd_tbl *cmd, int flag, int argc,
- 	return 0;
- }
- 
--
- /***************************************************/
- 
- U_BOOT_CMD(
-diff --git a/cmd/cramfs.c b/cmd/cramfs.c
-index b57e2815926..baff50d1bd6 100644
---- a/cmd/cramfs.c
-+++ b/cmd/cramfs.c
-@@ -6,7 +6,6 @@
-  *	Add support for a CRAMFS located in RAM
+diff --git a/common/bootstage.c b/common/bootstage.c
+index fb6befcbc4a..df83eb684c0 100644
+--- a/common/bootstage.c
++++ b/common/bootstage.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2011, Google Inc. All rights reserved.
   */
  
 -
  /*
-  * CRAMFS support
-  */
-@@ -32,7 +31,6 @@
- # define DEBUGF(fmt, args...)
- #endif
- 
--
- #ifndef CONFIG_MTD_NOR_FLASH
- # define OFFSET_ADJUSTMENT	0
- #else
-diff --git a/cmd/extension_board.c b/cmd/extension_board.c
-index f43bf680858..6c14d0ddebd 100644
---- a/cmd/extension_board.c
-+++ b/cmd/extension_board.c
-@@ -98,7 +98,6 @@ static int extension_scan(bool show)
- 	return extension_num;
+  * This module records the progress of boot and arbitrary commands, and
+  * permits accurate timestamping of each.
+diff --git a/common/cli_hush.c b/common/cli_hush.c
+index 96a98209b9d..a6a8edce1f4 100644
+--- a/common/cli_hush.c
++++ b/common/cli_hush.c
+@@ -732,7 +732,6 @@ static int builtin_jobs(struct child_prog *child)
+ 	return EXIT_SUCCESS;
  }
  
 -
- static int do_extension_scan(struct cmd_tbl *cmdtp, int flag,
- 			     int argc, char *const argv[])
+ /* built-in 'pwd' handler */
+ static int builtin_pwd(struct child_prog *dummy)
  {
-diff --git a/cmd/fat.c b/cmd/fat.c
-index ad0e5ed7d60..1655e80e945 100644
---- a/cmd/fat.c
-+++ b/cmd/fat.c
-@@ -32,7 +32,6 @@ int do_fat_fsload(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return do_load(cmdtp, flag, argc, argv, FS_TYPE_FAT);
+@@ -784,7 +783,6 @@ static int builtin_set(struct child_prog *child)
+ 		return EXIT_SUCCESS;
  }
  
 -
- U_BOOT_CMD(
- 	fatload,	7,	0,	do_fat_fsload,
- 	"load binary file from a dos filesystem",
-diff --git a/cmd/font.c b/cmd/font.c
-index ebde094b0a5..eb13fb12f79 100644
---- a/cmd/font.c
-+++ b/cmd/font.c
-@@ -77,7 +77,6 @@ static int do_font_size(struct cmd_tbl *cmdtp, int flag, int argc,
+ /* Built-in 'shift' handler */
+ static int builtin_shift(struct child_prog *child)
+ {
+@@ -1732,7 +1730,6 @@ static int run_pipe_real(struct pipe *pi)
+ 			pseudo_exec(child);
+ 		}
+ 
+-
+ 		/* put our child in the process group whose leader is the
+ 		   first process in this pipe */
+ 		if (pi->pgrp < 0) {
+@@ -3409,7 +3406,6 @@ int hush_main(int argc, char * const *argv)
+ 
+ 	last_return_code=EXIT_SUCCESS;
+ 
+-
+ 	if (argv[0] && argv[0][0] == '-') {
+ 		debug_printf("\nsourcing /etc/profile\n");
+ 		if ((input = fopen("/etc/profile", "r")) != NULL) {
+diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
+index ca40bbb2cd8..7874b399d14 100644
+--- a/common/cli_hush_upstream.c
++++ b/common/cli_hush_upstream.c
+@@ -392,7 +392,6 @@
+ #define BASH_TEST2         (ENABLE_HUSH_BASH_COMPAT && ENABLE_HUSH_TEST)
+ #define BASH_READ_D        ENABLE_HUSH_BASH_COMPAT
+ 
+-
+ /* Build knobs */
+ #define LEAK_HUNTING 0
+ #define BUILD_AS_NOMMU 0
+@@ -413,7 +412,6 @@
+  */
+ #define ENABLE_HUSH_DOLLAR_OPS 1
+ 
+-
+ #if BUILD_AS_NOMMU
+ # undef BB_MMU
+ # undef USE_FOR_NOMMU
+@@ -519,7 +517,6 @@ typedef struct nommu_save_t {
+ } nommu_save_t;
+ #endif
+ 
+-
+ enum {
+ 	RES_NONE  = 0,
+ #if ENABLE_HUSH_IF
+@@ -829,7 +826,6 @@ struct function {
+ };
+ #endif
+ 
+-
+ /* set -/+o OPT support. (TODO: make it optional)
+  * bash supports the following opts:
+  * allexport       off
+@@ -1118,7 +1114,6 @@ struct globals *ptr_to_globals;
+ } while (0)
+ #endif /* !__U_BOOT__ */
+ 
+-
+ #ifndef __U_BOOT__
+ /* Function prototypes for builtins */
+ static int builtin_cd(char **argv) FAST_FUNC;
+@@ -1416,7 +1411,6 @@ static void debug_print_strings(const char *prefix, char **vv)
+ # define debug_print_strings(prefix, vv) ((void)0)
+ #endif
+ 
+-
+ /* Leak hunting. Use hush_leaktool.sh for post-processing.
+  */
+ #if LEAK_HUNTING
+@@ -1449,7 +1443,6 @@ static void xxfree(void *ptr)
+ # define free(p)        xxfree(p)
+ #endif
+ 
+-
+ /* Syntax and runtime errors. They always abort scripts.
+  * In interactive use they usually discard unparsed and/or unexecuted commands
+  * and return to the prompt.
+@@ -1689,7 +1682,6 @@ static int xdup_CLOEXEC_and_close(int fd, int avoid_fd)
+ 	return newfd;
+ }
+ 
+-
+ /* Manipulating HFILEs */
+ static HFILE *hfopen(const char *name)
+ {
+@@ -1882,7 +1874,6 @@ static void restore_G_args(save_arg_t *sv, char **argv)
+ }
+ #endif /* !__U_BOOT__ */
+ 
+-
+ #ifndef __U_BOOT__
+ /* Basic theory of signal handling in shell
+  * ========================================
+@@ -2331,7 +2322,6 @@ static int check_and_run_traps(void)
+ 	return last_sig;
+ }
+ 
+-
+ static const char *get_cwd(int force)
+ {
+ 	if (force || G.cwd == NULL) {
+@@ -2653,7 +2643,6 @@ static int unset_local_var(const char *name)
+ }
+ #endif
+ 
+-
+ #ifndef __U_BOOT__
+ /*
+  * Helpers for "var1=val1 var2=val2 cmd" feature
+@@ -2728,7 +2717,6 @@ static void set_vars_and_save_old(char **strings)
+ 	free(strings);
+ }
+ 
+-
+ /*
+  * Unicode helper
+  */
+@@ -3236,7 +3224,6 @@ static void setup_string_in_str(struct in_str *i, const char *s)
+ 	i->p = s;
+ }
+ 
+-
+ /*
+  * o_string support
+  */
+@@ -3997,7 +3984,6 @@ static void free_pipe_list(struct pipe *pi)
+ 	}
+ }
+ 
+-
+ /*** Parsing routines ***/
+ 
+ #ifndef debug_print_tree
+@@ -4648,7 +4634,6 @@ static int done_word(struct parse_context *ctx)
  	return 0;
  }
  
 -
- U_BOOT_LONGHELP(font,
- 	"list       - list available fonts\n"
- 	"font select <name> [<size>] - select font to use\n"
-diff --git a/cmd/load.c b/cmd/load.c
-index ace1c52f90a..d773a25d70c 100644
---- a/cmd/load.c
-+++ b/cmd/load.c
-@@ -417,7 +417,6 @@ static int write_record(char *buf)
- 
- #endif
+ #ifndef __U_BOOT__
+ /* Peek ahead in the input to find out if we have a "&n" construct,
+  * as in "2>&1", that represents duplicating a file descriptor.
+@@ -4958,7 +4943,6 @@ static int fetch_heredocs(o_string *as_string, struct pipe *pi, int heredoc_cnt,
+ 	return heredoc_cnt;
+ }
  
 -
- #if defined(CONFIG_CMD_LOADB)
- /*
-  * loadb command (load binary) included
-@@ -441,7 +440,6 @@ static void set_kerm_bin_mode(unsigned long *);
- static int k_recv(void);
- static ulong load_serial_bin(ulong offset);
+ static int run_list(struct pipe *pi);
+ #if BB_MMU
+ #define parse_stream(pstring, heredoc_cnt_ptr, input, end_trigger) \
+@@ -5175,7 +5159,6 @@ static int add_till_double_quote(o_string *dest, struct in_str *input)
+ 	}
+ }
  
 -
- static char his_eol;        /* character he needs at end of packet */
- static int  his_pad_count;  /* number of pad chars he needs */
- static char his_pad_char;   /* pad chars he needs */
-@@ -557,7 +555,6 @@ static int do_load_serial_bin(struct cmd_tbl *cmdtp, int flag, int argc,
+ /* Process `cmd` - copy contents until "`" is seen. Complicated by
+  * \` quoting.
+  * "Within the backquoted style of command substitution, backslash
+@@ -6477,7 +6460,6 @@ static struct pipe *parse_stream(char **pstring,
+ 	}
+ }
+ 
+-
+ /*** Execution routines ***/
+ 
+ /* Expansion can recurse, need forward decls: */
+@@ -7778,7 +7760,6 @@ static char **expand_assignments(char **argv, int count)
+ 	return p;
+ }
+ 
+-
+ static void switch_off_special_sigs(unsigned mask)
+ {
+ 	unsigned sig = 0;
+@@ -8297,7 +8278,6 @@ static int process_command_subs(o_string *dest, const char *s)
+ }
+ #endif /* ENABLE_HUSH_TICK */
+ 
+-
+ static void setup_heredoc(struct redir_struct *redir)
+ {
+ 	struct fd_pair pair;
+@@ -9006,7 +8986,6 @@ static int run_function(const struct function *funcp, char **argv)
+ }
+ #endif /* ENABLE_HUSH_FUNCTIONS */
+ 
+-
+ #ifndef __U_BOOT__
+ #if BB_MMU
+ #define exec_builtin(to_free, x, argv) \
+@@ -9042,7 +9021,6 @@ static void exec_builtin(char ***to_free,
+ }
+ #endif /* !__U_BOOT__ */
+ 
+-
+ #ifndef __U_BOOT__
+ static void execvp_or_die(char **argv) NORETURN;
+ static void execvp_or_die(char **argv)
+@@ -10839,7 +10817,6 @@ static int run_and_free_list(struct pipe *pi)
  	return rcode;
  }
  
 -
- static ulong load_serial_bin(ulong offset)
+ #ifndef __U_BOOT__
+ static void install_sighandlers(unsigned mask)
  {
- 	int size, i;
-@@ -652,7 +649,6 @@ static void send_nack(int n)
- 	s1_sendpacket(a_b);
+@@ -11524,8 +11501,6 @@ int hush_main(int argc, char **argv)
+ 	hush_exit(G.last_exitcode);
  }
  
 -
- static void (*os_data_init)(void);
- static void (*os_data_char)(char new_char);
- static int os_data_state, os_data_state_saved;
-@@ -693,7 +689,6 @@ static void set_kerm_bin_mode(unsigned long *addr)
- 	os_data_char = bin_data_char;
- }
- 
 -
- /* k_data_* simply handles the kermit escape translations */
- static int k_data_escape, k_data_escape_saved;
- static void k_data_init(void)
-@@ -1066,7 +1061,6 @@ static ulong load_serial_ymodem(ulong offset, int mode)
- 	xyzModem_stream_terminate(false, &getcxmodem);
- 	xyzModem_stream_close(&err);
- 
--
- 	flush_cache(offset, ALIGN(size, ARCH_DMA_MINALIGN));
- 
- 	printf("## Total Size      = 0x%08x = %d Bytes\n", size, size);
-@@ -1141,7 +1135,6 @@ U_BOOT_CMD(
-  * SAVES always requires LOADS support, but not vice versa
+ /*
+  * Built-ins
   */
+@@ -13004,7 +12979,6 @@ static int FAST_FUNC builtin_memleak(char **argv UNUSED_PARAM)
+ 	if (l < (unsigned long)p) l = (unsigned long)p;
+ 	free(p);
  
 -
- #if defined(CONFIG_CMD_SAVES)
- #ifdef	CONFIG_SYS_LOADS_BAUD_CHANGE
- U_BOOT_CMD(
-@@ -1162,7 +1155,6 @@ U_BOOT_CMD(
- #endif	/* CONFIG_CMD_SAVES */
- #endif	/* CONFIG_CMD_LOADS */
+ # if 0  /* debug */
+ 	{
+ 		struct mallinfo mi = mallinfo();
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index 9549c59f358..62e8557daa7 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -53,7 +53,6 @@ static inline void MALLOC_COPY(void *dest, const void *src, size_t sz) { memcpy(
+   Thanks to Martin Fong and others for supplying this.
+ */
  
 -
- #if defined(CONFIG_CMD_LOADB)
- U_BOOT_CMD(
- 	loadb, 3, 0,	do_load_serial_bin,
-diff --git a/cmd/mem.c b/cmd/mem.c
-index 4989d27f2ab..274348068c2 100644
---- a/cmd/mem.c
-+++ b/cmd/mem.c
-@@ -1316,14 +1316,12 @@ U_BOOT_CMD(
- 	"[.b, .w, .l" HELP_Q "] address [# of objects]"
- );
+ #ifdef WIN32
  
--
- U_BOOT_CMD(
- 	mm,	2,	1,	do_mem_mm,
- 	"memory modify (auto-incrementing address)",
- 	"[.b, .w, .l" HELP_Q "] address"
- );
+ #define AlignPage(add) (((add) + (malloc_getpagesize-1)) & \
+@@ -155,7 +154,6 @@ void* findRegion (void* start_address, unsigned long size)
  
--
- U_BOOT_CMD(
- 	nm,	2,	1,	do_mem_nm,
- 	"memory modify (constant address)",
-diff --git a/cmd/mp.c b/cmd/mp.c
-index b9b5e016246..261bb8a07d4 100644
---- a/cmd/mp.c
-+++ b/cmd/mp.c
-@@ -42,7 +42,6 @@ cpu_cmd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return 1;
- 	}
- 
--
- 	if (argc == 3) {
- 		if (strncmp(argv[2], "reset", 5) == 0)
- 			cpu_reset(cpuid);
-diff --git a/cmd/mtdparts.c b/cmd/mtdparts.c
-index f57d84dbb3a..a021b2d198d 100644
---- a/cmd/mtdparts.c
-+++ b/cmd/mtdparts.c
-@@ -291,7 +291,6 @@ static void current_save(void)
- 	index_partitions();
  }
  
 -
- /**
-  * Produce a mtd_info given a type and num.
-  *
-@@ -401,7 +400,6 @@ static int part_validate_eraseblock(struct mtdids *id, struct part_info *part)
- 	return 0;
- }
+ void* wsbrk (long size)
+ {
+ 	void* tmp;
+@@ -236,13 +234,10 @@ gAllocatedSize))
  
--
- /**
-  * Performs sanity check for supplied partition. Offset and size are
-  * verified to be within valid range. Partition type is checked and
-@@ -1128,7 +1126,6 @@ static int generate_mtdparts(char *buf, u32 buflen)
- 			p += len;
- 			maxlen -= len;
- 
--
- 			/* add offset only when there is a gap between
- 			 * partitions */
- 			if ((!prev_part && (offset != 0)) ||
-@@ -1709,7 +1706,6 @@ static int parse_mtdids(const char *const ids)
- 	return 0;
- }
- 
--
- /**
-  * Parse and initialize global mtdids mapping and create global
-  * device/partition list.
-diff --git a/cmd/net.c b/cmd/net.c
-index b206ff58e68..53ce2bc5d0c 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -97,7 +97,6 @@ U_BOOT_CMD(
- );
  #endif
  
 -
- #ifdef CONFIG_CMD_RARP
- int do_rarpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
-diff --git a/cmd/spl.c b/cmd/spl.c
-index d1f47c7316b..76fe33762df 100644
---- a/cmd/spl.c
-+++ b/cmd/spl.c
-@@ -66,7 +66,6 @@ static int call_bootm(int argc, char *const argv[], const char *subcommand[])
- 		bootm_argv[2] = argv[0]; /* kernel addr */
- 	}
+-
+ /*
+   Type declarations
+ */
  
 -
- 	/*
- 	 * - do the work -
- 	 * exec subcommands of do_bootm to init the images
-diff --git a/cmd/terminal.c b/cmd/terminal.c
-index 369a755e0f5..d803bc6c896 100644
---- a/cmd/terminal.c
-+++ b/cmd/terminal.c
-@@ -66,7 +66,6 @@ int do_terminal(struct cmd_tbl *cmd, int flag, int argc, char *const argv[])
+ struct malloc_chunk
+ {
+   INTERNAL_SIZE_T prev_size; /* Size of previous chunk (if free). */
+@@ -270,7 +265,6 @@ typedef struct malloc_chunk* mchunkptr;
+ 
+     An allocated chunk looks like this:
+ 
+-
+     chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 	    |             Size of previous chunk, if allocated            | |
+ 	    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+@@ -284,7 +278,6 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 	    |             Size of chunk                                     |
+ 	    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+-
+     Where "chunk" is the front of the chunk for the purpose of most of
+     the malloc code, but "mem" is the pointer that is returned to the
+     user.  "Nextchunk" is the beginning of the next contiguous chunk.
+@@ -401,14 +394,10 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+ #define aligned_OK(m)    (((unsigned long)((m)) & (MALLOC_ALIGN_MASK)) == 0)
+ 
+-
+-
+-
+ /*
+   Physical chunk operations
+ */
+ 
+-
+ /* size field is or'ed with PREV_INUSE when previous adjacent chunk in use */
+ 
+ #define PREV_INUSE 0x1
+@@ -421,7 +410,6 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+ #define SIZE_BITS (PREV_INUSE|IS_MMAPPED)
+ 
+-
+ /* Ptr to next physical malloc_chunk. */
+ 
+ #define next_chunk(p) ((mchunkptr)( ((char*)(p)) + ((p)->size & ~PREV_INUSE) ))
+@@ -431,14 +419,10 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ #define prev_chunk(p)\
+    ((mchunkptr)( ((char*)(p)) - ((p)->prev_size) ))
+ 
+-
+ /* Treat space at ptr + offset as a chunk */
+ 
+ #define chunk_at_offset(p, s)  ((mchunkptr)(((char*)(p)) + (s)))
+ 
+-
+-
+-
+ /*
+   Dealing with use bits
+ */
+@@ -475,9 +459,6 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ #define clear_inuse_bit_at_offset(p, s)\
+  (((mchunkptr)(((char*)(p)) + (s)))->size &= ~(PREV_INUSE))
+ 
+-
+-
+-
+ /*
+   Dealing with size fields
+ */
+@@ -498,10 +479,6 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+ #define set_foot(p, s)   (((mchunkptr)((char*)(p) + (s)))->prev_size = (s))
+ 
+-
+-
+-
+-
+ /*
+    Bins
+ 
+@@ -555,7 +532,6 @@ typedef struct malloc_chunk* mbinptr;
+ #define top            (av_[2])          /* The topmost chunk */
+ #define last_remainder (bin_at(1))       /* remainder from last split */
+ 
+-
+ /*
+    Because top initially points to its own bin with initial
+    zero size, thus forcing extension on the first malloc request,
+@@ -671,8 +647,6 @@ void mem_malloc_init(ulong start, ulong size)
+ 
+ #define is_small_request(nb) (nb < MAX_SMALLBIN_SIZE - SMALLBIN_WIDTH)
+ 
+-
+-
+ /*
+     To help compensate for the large number of bins, a one-level index
+     structure is used for bin-by-bin searching.  `binblocks' is a
+@@ -694,10 +668,6 @@ void mem_malloc_init(ulong start, ulong size)
+ #define mark_binblock(ii)   (binblocks_w = (mbinptr)(binblocks_r | idx2binblock(ii)))
+ #define clear_binblock(ii)  (binblocks_w = (mbinptr)(binblocks_r & ~(idx2binblock(ii))))
+ 
+-
+-
+-
+-
+ /*  Other static bookkeeping data */
+ 
+ /* variables holding tunable values */
+@@ -770,7 +740,6 @@ static void malloc_init(void)
+ 
+ #ifdef DEBUG
+ 
+-
+ /*
+   These routines make a number of assertions about the states
+   of data structures that should be true at all times. If any
+@@ -799,7 +768,6 @@ static void do_check_chunk(p) mchunkptr p;
+ 
+ }
+ 
+-
+ #if __STD_C
+ static void do_check_free_chunk(mchunkptr p)
+ #else
+@@ -885,13 +853,11 @@ static void do_check_malloced_chunk(p, s) mchunkptr p; INTERNAL_SIZE_T s;
+   /* ... and alignment */
+   assert(aligned_OK(chunk2mem(p)));
+ 
+-
+   /* ... and was allocated at front of an available chunk */
+   assert(prev_inuse(p));
+ 
+ }
+ 
+-
+ #define check_free_chunk(P)  do_check_free_chunk(P)
+ #define check_inuse_chunk(P) do_check_inuse_chunk(P)
+ #define check_chunk(P) do_check_chunk(P)
+@@ -903,13 +869,10 @@ static void do_check_malloced_chunk(p, s) mchunkptr p; INTERNAL_SIZE_T s;
+ #define check_malloced_chunk(P,N)
+ #endif
+ 
+-
+-
+ /*
+   Macro-based internal utilities
+ */
+ 
+-
+ /*
+   Linking chunks in bin lists.
+   Call these only with variables, not arbitrary expressions, as arguments.
+@@ -920,7 +883,6 @@ static void do_check_malloced_chunk(p, s) mchunkptr p; INTERNAL_SIZE_T s;
+   putting it ahead of others of same size.
+ */
+ 
+-
+ #define frontlink(P, S, IDX, BK, FD)                                          \
+ {                                                                             \
+   if (S < MAX_SMALLBIN_SIZE)                                                  \
+@@ -950,7 +912,6 @@ static void do_check_malloced_chunk(p, s) mchunkptr p; INTERNAL_SIZE_T s;
+   }                                                                           \
+ }
+ 
+-
+ /* take a chunk off a list */
+ 
+ #define unlink(P, BK, FD)                                                     \
+@@ -974,10 +935,6 @@ static void do_check_malloced_chunk(p, s) mchunkptr p; INTERNAL_SIZE_T s;
+ #define clear_last_remainder \
+   (last_remainder->fd = last_remainder->bk = last_remainder)
+ 
+-
+-
+-
+-
+ /* Routines dealing with mmap(). */
+ 
+ #if HAVE_MMAP
+@@ -1219,12 +1176,8 @@ static void malloc_extend_top(nb) INTERNAL_SIZE_T nb;
+   assert(((unsigned long)((char*)top + top_size) & (pagesz - 1)) == 0);
+ }
+ 
+-
+-
+-
+ /* Main public routines */
+ 
+-
+ /*
+   Malloc Algorthim:
+ 
+@@ -1275,7 +1228,6 @@ static void malloc_extend_top(nb) INTERNAL_SIZE_T nb;
+ 	 contiguous memory. Thus, it should be safe to intersperse
+ 	 mallocs with other sbrk calls.
+ 
+-
+       All allocations are made from the the `lowest' part of any found
+       chunk. (The implementation invariant is that prev_inuse is
+       always true of any allocated chunk; i.e., that each allocated
+@@ -1514,7 +1466,6 @@ Void_t* mALLOc_impl(bytes) size_t bytes;
+     }
+   }
+ 
+-
+   /* Try to use top chunk */
+ 
+   /* Require that there be a remainder, ensuring top always exists  */
+@@ -1545,9 +1496,6 @@ Void_t* mALLOc_impl(bytes) size_t bytes;
+ 
+ }
+ 
+-
+-
+-
+ /*
+ 
+   free() algorithm :
+@@ -1569,7 +1517,6 @@ Void_t* mALLOc_impl(bytes) size_t bytes;
+ 
+ */
+ 
+-
+ STATIC_IF_MCHECK
+ #if __STD_C
+ void fREe_impl(Void_t* mem)
+@@ -1665,17 +1612,12 @@ void fREe_impl(mem) Void_t* mem;
+       unlink(next, bck, fwd);
+   }
+ 
+-
+   set_head(p, sz | PREV_INUSE);
+   set_foot(p, sz);
+   if (!islr)
+     frontlink(p, sz, idx, bck, fwd);
+ }
+ 
+-
+-
+-
+-
+ /*
+ 
+   Realloc algorithm:
+@@ -1708,10 +1650,8 @@ void fREe_impl(mem) Void_t* mem;
+     and allowing it would also allow too many other incorrect
+     usages of realloc to be sensible.
+ 
+-
+ */
+ 
+-
+ STATIC_IF_MCHECK
+ #if __STD_C
+ Void_t* rEALLOc_impl(Void_t* oldmem, size_t bytes)
+@@ -1762,7 +1702,6 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
+   newp    = oldp    = mem2chunk(oldmem);
+   newsize = oldsize = chunksize(oldp);
+ 
+-
+   nb = request2size(bytes);
+ 
+ #if HAVE_MMAP
+@@ -1910,7 +1849,6 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
+     VALGRIND_MAKE_MEM_DEFINED(oldmem, bytes);
+   }
+ 
+-
+  split:  /* split off extra room in old or expanded chunk */
+ 
+   if (newsize - nb >= MINSIZE) /* split off remainder */
+@@ -1934,9 +1872,6 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
+   return chunk2mem(newp);
+ }
+ 
+-
+-
+-
+ /*
+ 
+   memalign algorithm:
+@@ -1955,7 +1890,6 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
+ 
+ */
+ 
+-
+ STATIC_IF_MCHECK
+ #if __STD_C
+ Void_t* mEMALIGn_impl(size_t alignment, size_t bytes)
+@@ -2104,9 +2038,6 @@ Void_t* mEMALIGn_impl(alignment, bytes) size_t alignment; size_t bytes;
+ 
+ }
+ 
+-
+-
+-
+ /*
+     valloc just invokes memalign with alignment argument equal
+     to the page size of the system (or as near to this as can
+@@ -2127,7 +2058,6 @@ Void_t* vALLOc(bytes) size_t bytes;
+   that will accommodate request
+ */
+ 
+-
+ #if __STD_C
+ Void_t* pvALLOc(size_t bytes)
+ #else
+@@ -2156,7 +2086,6 @@ Void_t* cALLOc_impl(n, elem_size) size_t n; size_t elem_size;
+ 
+   INTERNAL_SIZE_T sz = n * elem_size;
+ 
+-
+   /* check if expand_top called, in which case don't need to clear */
+ #if CONFIG_IS_ENABLED(SYS_MALLOC_CLEAR_ON_INIT)
+ #if MORECORE_CLEARS
+@@ -2182,7 +2111,6 @@ Void_t* cALLOc_impl(n, elem_size) size_t n; size_t elem_size;
+ 
+     /* Two optional cases in which clearing not necessary */
+ 
+-
+ #if HAVE_MMAP
+     if (chunk_is_mmapped(p)) return mem;
+ #endif
+@@ -2223,7 +2151,6 @@ void cfree(mem) Void_t *mem;
+ }
+ #endif
+ 
+-
+ #ifdef MCHECK_HEAP_PROTECTION
+  #include "mcheck_core.inc.h"
+  #if !__STD_C
+@@ -2308,7 +2235,6 @@ enum mcheck_status mprobe(void *__ptr) { return mcheck_mprobe(__ptr); }
+ // mcheck API }
+ #endif
+ 
+-
+ /*
+ 
+     Malloc_trim gives memory back to the system (via negative
+@@ -2388,8 +2314,6 @@ int malloc_trim(pad) size_t pad;
+   }
+ }
+ 
+-
+-
+ /*
+   malloc_usable_size:
+ 
+@@ -2423,9 +2347,6 @@ size_t malloc_usable_size(mem) Void_t* mem;
+   }
+ }
+ 
+-
+-
+-
+ /* Utility to update current_mallinfo for malloc_stats and mallinfo() */
+ 
+ #ifdef DEBUG
+@@ -2468,8 +2389,6 @@ static void malloc_update_mallinfo(void)
+ }
+ #endif	/* DEBUG */
+ 
+-
+-
+ /*
+ 
+   malloc_stats:
+@@ -2514,9 +2433,6 @@ struct mallinfo mALLINFo(void)
+ }
+ #endif	/* DEBUG */
+ 
+-
+-
+-
+ /*
+   mallopt:
+ 
+diff --git a/common/edid.c b/common/edid.c
+index 865ba9daa78..48a737690db 100644
+--- a/common/edid.c
++++ b/common/edid.c
+@@ -268,7 +268,6 @@ int edid_get_timing(u8 *buf, int buf_size, struct display_timing *timing,
+ 					panel_bits_per_colourp, NULL, NULL);
+ }
+ 
+-
+ /**
+  * Snip the tailing whitespace/return of a string.
+  *
+diff --git a/common/kallsyms.c b/common/kallsyms.c
+index 49b3897078a..91594414099 100644
+--- a/common/kallsyms.c
++++ b/common/kallsyms.c
+@@ -5,7 +5,6 @@
+  * Licensed under the GPL-2 or later.
+  */
+ 
+-
+ /* We need the weak marking as this symbol is provided specially */
+ extern const char system_map[] __attribute__((weak));
+ 
+diff --git a/common/kgdb.c b/common/kgdb.c
+index 01a09f17628..ed2798bea24 100644
+--- a/common/kgdb.c
++++ b/common/kgdb.c
+@@ -446,7 +446,6 @@ handle_exception (struct pt_regs *regs)
+ 			}
+ 			break;
+ 
+-
+ 		case 'k':    /* kill the program, actually return to monitor */
+ 			kd.extype = KGDBEXIT_KILL;
+ 			*regs = entry_regs;
+diff --git a/common/menu.c b/common/menu.c
+index e48424995b6..8cc9bf06d9c 100644
+--- a/common/menu.c
++++ b/common/menu.c
+@@ -398,7 +398,6 @@ struct menu *menu_create(char *title, int timeout, int prompt,
+ 	} else
+ 		m->title = NULL;
+ 
+-
+ 	INIT_LIST_HEAD(&m->items);
+ 
+ 	return m;
+diff --git a/common/update.c b/common/update.c
+index eb0b60a2ce4..6801b49479d 100644
+--- a/common/update.c
++++ b/common/update.c
+@@ -254,7 +254,6 @@ int update_tftp(ulong addr, char *interface, char *devstring)
+ 	else
+ 		addr = CONFIG_UPDATE_LOAD_ADDR;
+ 
+-
+ 	if (update_load(filename, CONFIG_UPDATE_TFTP_MSEC_MAX,
+ 					CONFIG_UPDATE_TFTP_CNT_MAX, addr)) {
+ 		printf("Can't load update file, aborting auto-update\n");
+diff --git a/common/usb.c b/common/usb.c
+index f5b21c883f3..7a8435296c6 100644
+--- a/common/usb.c
++++ b/common/usb.c
+@@ -190,7 +190,6 @@ int usb_disable_asynch(int disable)
+ }
+ #endif /* !CONFIG_IS_ENABLED(DM_USB) */
+ 
+-
+ /*-------------------------------------------------------------------
+  * Message wrappers.
+  *
+@@ -293,7 +292,6 @@ int usb_bulk_msg(struct usb_device *dev, unsigned int pipe,
+ 		return -EIO;
+ }
+ 
+-
+ /*-------------------------------------------------------------------
+  * Max Packet stuff
+  */
+@@ -559,7 +557,6 @@ int usb_clear_halt(struct usb_device *dev, int pipe)
  	return 0;
  }
  
 -
- /***************************************************/
- 
- U_BOOT_CMD(
-diff --git a/cmd/tpm_test.c b/cmd/tpm_test.c
-index 9c8b1c74384..af83d78c3fe 100644
---- a/cmd/tpm_test.c
-+++ b/cmd/tpm_test.c
-@@ -424,7 +424,6 @@ static int test_startup(struct udevice *dev)
- 	} \
- } while (0)
- 
--
- static int test_timing(struct udevice *dev)
- {
- 	uint8_t in[20], out[20];
-diff --git a/cmd/ubifs.c b/cmd/ubifs.c
-index 8fd39032ecc..22e95db8ca5 100644
---- a/cmd/ubifs.c
-+++ b/cmd/ubifs.c
-@@ -4,7 +4,6 @@
-  * Stefan Roese, DENX Software Engineering, sr@denx.de.
+ /**********************************************************************
+  * get_descriptor type
   */
- 
--
- /*
-  * UBIFS command support
-  */
-diff --git a/cmd/universe.c b/cmd/universe.c
-index d1a712829d0..1445d5301f2 100644
---- a/cmd/universe.c
-+++ b/cmd/universe.c
-@@ -14,7 +14,6 @@
- #define PCI_VENDOR PCI_VENDOR_ID_TUNDRA
- #define PCI_DEVICE PCI_DEVICE_ID_TUNDRA_CA91C042
- 
--
- typedef struct _UNI_DEV UNI_DEV;
- 
- struct _UNI_DEV {
-@@ -26,7 +25,6 @@ struct _UNI_DEV {
- 
- static UNI_DEV   *dev;
- 
--
- int universe_init(void)
- {
- 	int j, result;
-@@ -112,7 +110,6 @@ int universe_init(void)
+@@ -768,7 +765,6 @@ static int usb_get_string(struct usb_device *dev, unsigned short langid,
  	return result;
  }
  
 -
- /*
-  * Create pci slave window (access: pci -> vme)
-  */
-@@ -209,7 +206,6 @@ int universe_pci_slave_window(unsigned int pciAddr, unsigned int vmeAddr, int si
- 	return -result;
- }
- 
--
- /*
-  * Create vme slave window (access: vme -> pci)
-  */
-@@ -294,7 +290,6 @@ int universe_vme_slave_window(unsigned int vmeAddr, unsigned int pciAddr, int si
- 	return -result;
- }
- 
--
- /*
-  * Tundra Universe configuration
-  */
-@@ -342,7 +337,6 @@ int do_universe(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return 0;
- }
- 
--
- U_BOOT_CMD(
- 	universe,	8,	1,	do_universe,
- 	"initialize and configure Turndra Universe",
-diff --git a/cmd/usb.c b/cmd/usb.c
-index 225d9291765..16c081bf128 100644
---- a/cmd/usb.c
-+++ b/cmd/usb.c
-@@ -549,7 +549,6 @@ static int usb_test(struct usb_device *dev, int port, char* arg)
+ static void usb_try_string_workarounds(unsigned char *buf, int *length)
+ {
+ 	int newlength, oldlength = *length;
+@@ -783,7 +779,6 @@ static void usb_try_string_workarounds(unsigned char *buf, int *length)
  	}
  }
  
 -
- /******************************************************************************
-  * usb boot command intepreter. Derived from diskboot
-  */
-@@ -737,7 +736,6 @@ U_BOOT_CMD(
- #endif /* CONFIG_USB_STORAGE */
- );
+ static int usb_string_sub(struct usb_device *dev, unsigned int langid,
+ 		unsigned int index, unsigned char *buf)
+ {
+@@ -818,7 +813,6 @@ static int usb_string_sub(struct usb_device *dev, unsigned int langid,
+ 	return rc;
+ }
  
 -
- #ifdef CONFIG_USB_STORAGE
- U_BOOT_CMD(
- 	usbboot,	3,	1,	do_usbboot,
-diff --git a/cmd/ximg.c b/cmd/ximg.c
-index c79e8a07860..1c96f5a0a1f 100644
---- a/cmd/ximg.c
-+++ b/cmd/ximg.c
-@@ -7,7 +7,6 @@
-  * Kai-Uwe Bloem, Auerswald GmbH & Co KG, <linux-development@auerswald.de>
+ /********************************************************************
+  * usb_string:
+  * Get string index and translate it to ascii.
+@@ -874,7 +868,6 @@ int usb_string(struct usb_device *dev, int index, char *buf, size_t size)
+ 	return err;
+ }
+ 
+-
+ /********************************************************************
+  * USB device handling:
+  * the USB device are static allocated [USB_MAX_DEVICE].
+@@ -1388,5 +1381,4 @@ void usb_find_usb2_hub_address_port(struct usb_device *udev,
+ }
+ #endif
+ 
+-
+ /* EOF */
+diff --git a/common/usb_hub.c b/common/usb_hub.c
+index 807f490bb60..6a4bcec00bc 100644
+--- a/common/usb_hub.c
++++ b/common/usb_hub.c
+@@ -162,7 +162,6 @@ int usb_get_port_status(struct usb_device *dev, int port, void *data)
+ 	return ret;
+ }
+ 
+-
+ static void usb_hub_power_on(struct usb_hub_device *hub)
+ {
+ 	int i;
+diff --git a/common/usb_storage.c b/common/usb_storage.c
+index a79ed2e23a4..ac331f1c1b0 100644
+--- a/common/usb_storage.c
++++ b/common/usb_storage.c
+@@ -31,7 +31,6 @@
+  * only been tested with USB memory sticks.
   */
  
 -
- /*
-  * Multi Image extract
-  */
-diff --git a/cmd/yaffs2.c b/cmd/yaffs2.c
-index d0724d9bea8..daa44abeb72 100644
---- a/cmd/yaffs2.c
-+++ b/cmd/yaffs2.c
-@@ -13,7 +13,6 @@
-  *  ...
-  */
- 
--
- #include <config.h>
+ #include <blk.h>
+ #include <bootdev.h>
  #include <command.h>
- 
-diff --git a/cmd/zfs.c b/cmd/zfs.c
-index 2f831532c2e..471c63f2150 100644
---- a/cmd/zfs.c
-+++ b/cmd/zfs.c
-@@ -119,7 +119,6 @@ static int do_zfs_load(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -352,7 +351,6 @@ static int usb_stor_irq(struct usb_device *dev)
  	return 0;
  }
  
 -
- int zfs_print(const char *entry, const struct zfs_dirhook_info *data)
- {
- 	printf("%s %s\n",
-@@ -128,7 +127,6 @@ int zfs_print(const char *entry, const struct zfs_dirhook_info *data)
- 	return 0; /* 0 continue, 1 stop */
+ #ifdef	DEBUG
+ 
+ static void usb_show_srb(struct scsi_cmd *pccb)
+@@ -664,7 +662,6 @@ static int usb_stor_CB_comdat(struct scsi_cmd *srb, struct us_data *us)
+ 	return result;
  }
  
 -
- static int do_zfs_ls(struct cmd_tbl *cmdtp, int flag, int argc,
- 		     char *const argv[])
+ static int usb_stor_CBI_get_status(struct scsi_cmd *srb, struct us_data *us)
  {
-@@ -157,7 +155,6 @@ static int do_zfs_ls(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
+ 	int timeout;
+@@ -1116,7 +1113,6 @@ static int usb_write_10(struct scsi_cmd *srb, struct us_data *ss,
+ 	return ss->transport(srb, ss);
  }
  
 -
- U_BOOT_CMD(zfsls, 4, 1, do_zfs_ls,
- 		   "list files in a directory (default /)",
- 		   "<interface> <dev[:part]> [directory]\n"
+ #ifdef CONFIG_USB_BIN_FIXUP
+ /*
+  * Some USB storage devices queried for SCSI identification data respond with
+diff --git a/common/xyzModem.c b/common/xyzModem.c
+index 9feb240de28..09f74a1f0c7 100644
+--- a/common/xyzModem.c
++++ b/common/xyzModem.c
+@@ -62,7 +62,6 @@ static struct
+ #define xyzModem_MAX_RETRIES_WITH_CRC    10
+ #define xyzModem_CAN_COUNT                3	/* Wait for 3 CAN before quitting */
+ 
+-
+ typedef int cyg_int32;
+ static int
+ CYGACC_COMM_IF_GETC_TIMEOUT (char chan, char *c)
+@@ -177,7 +176,6 @@ parse_num (char *s, unsigned long *val, char **es, char *delim)
+   return true;
+ }
+ 
+-
+ #if defined(DEBUG) && !CONFIG_IS_ENABLED(USE_TINY_PRINTF)
+ /*
+  * Note: this debug setup works by storing the strings in a fixed buffer
 -- 
 2.43.0
 
