@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E496C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 14:38:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87BD3C3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2243887E7;
-	Sat, 13 Jul 2024 16:38:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B128888818;
+	Sat, 13 Jul 2024 17:13:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TW4WHFQM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iEWX3Aof";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BBC3887FA; Sat, 13 Jul 2024 16:38:45 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id B159388817; Sat, 13 Jul 2024 17:13:52 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 735CE887D3
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 16:38:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76189887F3
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:13:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-70361c6fd50so1471370a34.0
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 07:38:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6b2c6291038so25248256d6.0
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:13:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1720881522; x=1721486322; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q3o48vOLnlgz6zAzVzQN8LAsLfCKTxvM2FO0BZMv5Zk=;
- b=TW4WHFQMTq0KTYmN2MerbXIB4G6GAIS1GZekoRzl7ZkdwQbSUwVB6x4VqHikGpeUJl
- srUaHNUqTMORwC/ri2Inde238ZVlpLIAH0ZRl/jre3V94qDJir0N/bjEXu++BIJOUU56
- vC26RpKbT+mSmYuQGAUA3xsjUKvxVeJ0/M75M=
+ d=chromium.org; s=google; t=1720883629; x=1721488429; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7oJu1Likw+IyeQKNfI5hGRurhFllv6HqdVaDHHzcdrE=;
+ b=iEWX3AofwmKU0miGMBgdgsXjuSEE1k+XkCk5TaRGS/zl3WyMa/Ohu7BlZFAvEpK3Ag
+ wiwXZTgzeK4g+vBjQGZrfZ0v+zxMkPm1+QPz/78LgijQbRU54F323eNIOO6x3bQeOanL
+ HoSriItqntBv5zCmI9arFdQ5fC5RLsdw2Drcw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720881522; x=1721486322;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q3o48vOLnlgz6zAzVzQN8LAsLfCKTxvM2FO0BZMv5Zk=;
- b=REgtgw9I7QzSa97aylrB6eVXa8MRhfYuZg3nW9kqFTo1Y0M+0tOTu98xkshPdiXh9s
- 6U/LVq4LXiS7T2b4CuumzV0zE7G4nAKbb8TzBkfJl1n8l7yOgdsMmjfwoOof3OadCqdt
- bdiU7avO4n3jLmfZwMa8Y3sLomhCwfH7wMmR1h+sWtGEWVYIz0lNQ4iV78jGzogbbJkh
- XXiOIGVcetxu6EvFgemNhjkzwKqvxqDkAmB6Zl2y5eptCfZB3XISVtTR297l+B5/ncmJ
- 6PQ4D+w2JDzcq/nIIK7fgeB+ZvcFdHf5ECKo9vCMpaZ2A0dUtRca+Ng3I319SolPtr7i
- gDHA==
-X-Gm-Message-State: AOJu0Yyd0q2NnlNAAuECJ2Wn1dYYtkZ+RAim7B7yWdRHdljhewA6ULn8
- GLgJV9PjImn8/wOA2sj+1Dw2W2szcqLkf2ZqjphSepjDZuBHOAyOCYvbKy/5Mj0=
-X-Google-Smtp-Source: AGHT+IFGY0gDLLAk2r7ullkI+F+KuW5blLpJPopH12v6oDP95igQygfGqTOEl29DD6yJ6+oIJlGz0g==
-X-Received: by 2002:a9d:6852:0:b0:704:47dc:cd22 with SMTP id
- 46e09a7af769-70447dcd2d8mr13429695a34.25.1720881522150; 
- Sat, 13 Jul 2024 07:38:42 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708c0c52c84sm264463a34.7.2024.07.13.07.38.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jul 2024 07:38:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, =?utf-8?q?Marek_Moj=C3=ADk?= <marek.mojik@nic.cz>
-Cc: kabel@kernel.org
-In-Reply-To: <20240606163326.386950-1-marek.mojik@nic.cz>
-References: <20240606163326.386950-1-marek.mojik@nic.cz>
-Subject: Re: [PATCH 0/6] Add Turris 1.x board
-Message-Id: <172088152161.3049814.9131872605543695712.b4-ty@konsulko.com>
-Date: Sat, 13 Jul 2024 08:38:41 -0600
+ d=1e100.net; s=20230601; t=1720883629; x=1721488429;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7oJu1Likw+IyeQKNfI5hGRurhFllv6HqdVaDHHzcdrE=;
+ b=BCXQkVLyqZ+bdiVBSVNQsCPfctKdcAmZC0zyl6MRr1v0dXpiUkaqWP6QvyI/Fg97+u
+ R8+Cbi12D7WBRoRa/9ZjyrRe6Bksg2NSSvUwcsJawTqfBsgvJdici/AVI9ZNYsO1Lah9
+ DCBXARHx42wLhl+QgSwUJeF1tBNOPdFAX2O/r2AVYlmVXPv3ID/K34MyLAm54Hibr6YG
+ aQq0x2zvijxc69CO3UDKCvz4fkdYMv8X80YR0o4ppL2swWM4XwKuplcQ9hQzGeCQc4ku
+ uejNiE0JT6tdFEVMw8rFZRHQFpxCDBCkXvYg52t/y5gQH1zGHAz5u3YSMHgNG+uGytFh
+ 6x8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQS11p59Uv4mg18I4LEHAYCY537el/DHNc5e8c4YAv+6a6yBo0cC3/yqGtwADsW0/JZT909ROpych1ZZ/veZw0t9HmTQ==
+X-Gm-Message-State: AOJu0YwUxCJF8q5lRdoVmGcisoHwEdaWnPo3hnxxneIn8mewO5njwP0T
+ 893C93kekDJA999GxsWUnDL1Lpv/s2BQMzdRh2W7oQ5B32rZ0tLKpbqtocKwP8LKub2lfGD1bKS
+ 1IMjrPNN4Hp+3O4ms6lJI+jmeeYmxqeKAqlxM
+X-Google-Smtp-Source: AGHT+IHRvmiGUdiK770cnMgWVkAF88I1jJSfnC3p7EhkN8aLwF/cUIACXav69kgEd044Af8ahekD4xIIEDUYcgod8KY=
+X-Received: by 2002:a05:6214:1415:b0:6b5:1cea:649d with SMTP id
+ 6a1803df08f44-6b754b9f737mr77612186d6.11.1720883629279; Sat, 13 Jul 2024
+ 08:13:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.13.0
+References: <20240604163546.60225-1-sebastian.reichel@collabora.com>
+ <20240604163546.60225-2-sebastian.reichel@collabora.com>
+In-Reply-To: <20240604163546.60225-2-sebastian.reichel@collabora.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 13 Jul 2024 16:13:37 +0100
+Message-ID: <CAFLszTiZsNVpRrzd0PfA_d369TN-HFpKe_5pZq1eXbLc34dZ3w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] usb: tcpm: add core framework
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
+ Eugen Hristev <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Soeren Moch <smoch@web.de>, Wang Jie <dave.wang@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,24 +88,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 06 Jun 2024 18:33:20 +0200, Marek Mojík wrote:
+00000000000000000000000000000000000000000000000000000000000000000000Hi
+Sebastian,
 
-> this is a continuation of previous work by Pali to add support for the
-> Turris 1.x board. As the patches were based on u-boot v2022.04, a
-> nontrivial rebasing was needed.
-> 
-> Some notes:
-> - Some options that are in SD defconfig are disabled in NOR defconfig
->   because over the years u-boot grew and the old NOR defconfig will not
->   fit into NOR memory.
-> - SD boot with RAM larger than 2GB will only allocate 2GB of RAM (We
->   were not able to fix this yet)
-> 
-> [...]
+On Tue, 4 Jun 2024 at 17:35, Sebastian Reichel
+<sebastian.reichel@collabora.com> wrote:
+>
+> This adds TCPM framework in preparation for fusb302 support, which can
+> handle USB power delivery messages. This is needed to solve issues with
+> devices, that are running from a USB-C port supporting USB-PD, but not
+> having a battery.
+>
+> Such a device currently boots to the kernel without interacting with
+> the power-supply at all. If there are no USB-PD message replies within
+> 5 seconds, the power-supply assumes the peripheral is not capable of
+> USB-PD. It usually takes more than 5 seconds for the system to reach
+> the kernel and probe the I2C based fusb302 chip driver. Thus the
+> system always runs into this state. The power-supply's solution to
+> fix this error state is a hard reset, which involves removing the
+> power from VBUS. Boards without a battery (or huge capacitors) will
+> reset at this point resulting in a boot loop.
+>
+> This imports the TCPM framework from the kernel. The porting has
+> originally been done by Rockchip using hardware timers and the Linux
+> kernel's TCPM code from some years ago.
+>
+> I had a look at upgrading to the latest TCPM kernel code, but that
+> beast became a lot more complex due to adding more USB-C features.
+> I believe these features are not needed in U-Boot and with multiple
+> kthreads and hrtimers being involved it is non-trivial to port them.
+> Instead I worked on stripping down features from the Rockchip port
+> to an even more basic level. Also the TCPM code has been reworked
+> to avoid complete use of any timers (Rockchip used SoC specific
+> hardware timers + IRQ to implement delayed work mechanism). Instead
+> the delayed state changes are handled directly from the poll loop.
+>
+> Note, that (in contrast to the original Rockchip port) the state
+> machine has the same hard reset quirk, that the kernel has - i.e.
+> it avoids disabling the CC pin resistors for devices that are not
+> self-powered. Without that quirk, the Radxa Rock 5B will not just
+> end up doing a machine reset when a hard reset is triggered, but will
+> not even recover, because the CPU will loose power and the FUSB302
+> will keep this state because of leak voltage arriving through the RX
+> serial pin (assuming a serial adapter is connected).
+>
+> This also includes a 'tcpm' command, which can be used to get
+> information about the current state and the negotiated voltage
+> and current.
+>
+> Co-developed-by: Wang Jie <dave.wang@rock-chips.com>
+> Signed-off-by: Wang Jie <dave.wang@rock-chips.com>
+> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> ---
+>  Makefile                         |    1 +
+>  cmd/Kconfig                      |    7 +
+>  cmd/Makefile                     |    1 +
+>  cmd/tcpm.c                       |  142 ++
+>  drivers/usb/Kconfig              |    2 +
+>  drivers/usb/tcpm/Kconfig         |    8 +
+>  drivers/usb/tcpm/Makefile        |    3 +
+>  drivers/usb/tcpm/tcpm-internal.h |  174 +++
+>  drivers/usb/tcpm/tcpm-uclass.c   |  102 ++
+>  drivers/usb/tcpm/tcpm.c          | 2251 ++++++++++++++++++++++++++++++
+>  include/dm/uclass-id.h           |    1 +
+>  include/usb/pd.h                 |  516 +++++++
+>  include/usb/tcpm.h               |   99 ++
+>  13 files changed, 3307 insertions(+)
+>  create mode 100644 cmd/tcpm.c
+>  create mode 100644 drivers/usb/tcpm/Kconfig
+>  create mode 100644 drivers/usb/tcpm/Makefile
+>  create mode 100644 drivers/usb/tcpm/tcpm-internal.h
+>  create mode 100644 drivers/usb/tcpm/tcpm-uclass.c
+>  create mode 100644 drivers/usb/tcpm/tcpm.c
+>  create mode 100644 include/usb/pd.h
+>  create mode 100644 include/usb/tcpm.h
 
-Applied to u-boot/master, thanks!
+Can you please add docs for the command (and perhaps the whole feature)?
 
--- 
-Tom
+How is this tested? It should be possible to write a simple i2c
+emulator for the chip as a way to cover this in CI (search for
+UCLASS_I2C_EMUL to see examples).
 
-
+Regards,
+Simon
