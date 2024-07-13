@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9581C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:14:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF2AC3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:14:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81F8C88836;
+	by phobos.denx.de (Postfix) with ESMTP id DF2A588850;
 	Sat, 13 Jul 2024 17:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RfWFwUx+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AYKHmlXt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 108A3887F3; Sat, 13 Jul 2024 17:13:56 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id D1CB488820; Sat, 13 Jul 2024 17:13:56 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4796A8880C
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:13:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C738B88823
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b5e6eded83so18119276d6.0
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:13:51 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-447feb144dfso16829471cf.2
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720883630; x=1721488430; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720883632; x=1721488432; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q+G9Us9DKcvY5VBBoWVwfBwlbnP0fZMVX2m1Qs7bRVM=;
- b=RfWFwUx+kHNg2cKbJQy9Tjlh2MNj+TkiJ2JoXvQIurwev0HpVUUkMU8mEVkLcTLvZI
- nkcof1YntD9KhwjD+fmrdsjXq/Odf900uM6bSCIKeEubjlldqdEopl/3TUIqhOeBE4D0
- WS92X0Db7xqalEquyBHqBE9dZvFPaUdcZl6wY=
+ bh=T+3zZQvRM5rhBDfxHhhnNfuo8TXr5bowh872NNHVlPk=;
+ b=AYKHmlXtDHOtjQQINzVj/tNCCZJ7EO+EncukhbZCWRy8FUKC1CVI8SSRQdt8munw+I
+ fnus9I147ENxV85DJp8G6B7d0/w7DWfiHUvARCRVeCIT8wBMpn0qOkGxbp9S8M8fNGkH
+ wbKAD43szlU4yzbYxVLLZcV1RUzIJiJU8iiZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720883630; x=1721488430;
+ d=1e100.net; s=20230601; t=1720883632; x=1721488432;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Q+G9Us9DKcvY5VBBoWVwfBwlbnP0fZMVX2m1Qs7bRVM=;
- b=v38cGzH/q60Axj5ASH7FXzjNtZRU/emEhgrvnNv0nCcmi5Cam1VIf0Aw0Gcxw0IkwP
- iV35vaFY6nCgIGkji2NHqnL0BYEIdET/q/MMuBQjtvZMeKzQxZ1sIrAU4uozdJlXIhEa
- Hyck7XftCtueaxt95wzyClCGsyO3SwEJAWFdb4uON4iYeyLz4bO5VHGpLAh1nmUuRoME
- Q8JVq+bzCClB9B7s7Gob7f2/OzCwXHRemEQ+IoILZCedyd97qR4JXIpIe2mrLSDdkEJC
- y/W4dzsRSMnGLQ3Z2QXqXU9mnRw5VLz7rVMQMkSmahXStSPgIl9tq+WvX3IRBuomjHL3
- OMkQ==
+ bh=T+3zZQvRM5rhBDfxHhhnNfuo8TXr5bowh872NNHVlPk=;
+ b=vNB3SjGwWq5bFzYyqdcTn6qjNpgAaQWkT4ybKGGxnZm/GjtJrt7OwVImN3QKjszwyI
+ kut84MqpWFQ+KOnsZD7c22h7dzhPpKSniW/AsuTR+bfmjWpMdCluNXGPoatgkFd2Z5Ja
+ mYfhT5PrZG18sTSh/L0xxLniy5V+Lpw4lQkB/zB4mQ8hhOmWv0QOna3B0R2n+ubFeXO1
+ xAXVXTMMF/Oj8ER0twXO4Nwj9VNgYdLwZWi5fvnjfUZXy9fajdyH3oM4DQo0b1NC5iib
+ oUQBr6SB+z266QVr/jwSBsCnK2KA1VmjEvitvujgIck0tiqZByUpvfYKqLfSG6nRCRwV
+ pwoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW27VfbH+aiotrmh19H8JgmTzq5EI8IXtfI3Ytq8SaqsRCZyPIFrlztFMUZRxEEx94ePcgIt3ErebxlWlaN6y/RslLlfA==
-X-Gm-Message-State: AOJu0Yyo79vXwOaO6dP4s16ep6vtxTqOSXwdz0w0dCahAQtAIafHeq3z
- 2BJHwalNqP5Oughd6T88XsFz3b6iOIATd8Qax+dhEe0D61oBrcLVAWQcPpfHTvRD4cK4cbeAcGX
- 3d5QEi8CoNzdgOm7kgTuTOPtYmIxsoAfuWDMw
-X-Google-Smtp-Source: AGHT+IEvK0BpcHDzXKDahjwfDRVcv67WIQnJYeukZ9a8JvprAlIPWZmSCZ/GTqaS9ofol7J953gMC1AbN6smPwBqcK8=
-X-Received: by 2002:a05:6214:acb:b0:6b5:4249:7c0 with SMTP id
- 6a1803df08f44-6b61bc7e869mr184223186d6.5.1720883630115; Sat, 13 Jul 2024
- 08:13:50 -0700 (PDT)
+ AJvYcCW9Q41A4rvDT4FBkTmnUjNbF1ptNBHKEZ52Fj+7/oNRKHCvj8BXHSJwiJHkOung676OEf47JiYM0zSoa3DufFJGOSHCgQ==
+X-Gm-Message-State: AOJu0YwcsTGhjFYahHUDBz6g5fSlRegJbVuCNIbjUuuZhwf+WE6mfOnA
+ zS++jtM4dCWQg5OqTtAkUXr0nS2rK/rZmum5Pf866JPe6wf7VKodlffevxVAxXxFD+u1bexeG5o
+ +oDo2cmn+yce8h8vlDYeKQoYpxIw4V2tZdzxl
+X-Google-Smtp-Source: AGHT+IHRFxJYDJYi1sEetBzrmLW5EL3rZ6M+Cud/bsIniFWvJyAR8BPUnBhnBMtyHY56Q+cXvgIITWJk8vZOtUe57RE=
+X-Received: by 2002:a05:6214:2521:b0:6b4:ffa9:c320 with SMTP id
+ 6a1803df08f44-6b61bce07d9mr191144776d6.22.1720883632732; Sat, 13 Jul 2024
+ 08:13:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240712234304.9675-1-semen.protsenko@linaro.org>
- <20240712234304.9675-5-semen.protsenko@linaro.org>
-In-Reply-To: <20240712234304.9675-5-semen.protsenko@linaro.org>
+References: <20240712052507.2496669-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240712052507.2496669-3-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240712052507.2496669-3-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:13:39 +0100
-Message-ID: <CAFLszTgDFB6ivRdPfV9PnKgke+5TRwmpveicb-a2vOr-H-VPbg@mail.gmail.com>
-Subject: Re: [PATCH 4/5] rng: Add Exynos TRNG driver
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sumit Garg <sumit.garg@linaro.org>, Chanho Park <chanho61.park@samsung.com>,
- u-boot@lists.denx.de
+Date: Sat, 13 Jul 2024 16:13:41 +0100
+Message-ID: <CAFLszThBPaojbFHZf_OpJz=Ub+ikcMZeoa11GeJ422HNPa-s9A@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] led: Add dts property to specify blinking of the
+ led
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,367 +91,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+Hi Mikhail,
 
-On Sat, 13 Jul 2024 at 00:44, Sam Protsenko <semen.protsenko@linaro.org> wrote:
+On Fri, 12 Jul 2024 at 06:25, Mikhail Kshevetskiy
+<mikhail.kshevetskiy@iopsys.eu> wrote:
 >
-> Add True Random Number Generator (TRNG) driver for Exynos chips. This
-> implementation is heavily based on Linux kernel's counterpart [1]. It
-> also follows upstream dt-bindings [2].
+> From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
 >
-> TRNG block is usually a part of SSS (Security Sub System) IP-core on
-> Exynos chips. Because SSS access on Exynos850 is protected by TZPC
-> (TrustZone Protection Control), it's not possible to read/write TRNG
-> registers from U-Boot, as it's running in EL1 mode. Instead, the
-> corresponding SMC calls should be used to make the secure software
-> running in EL3 mode access it for us. Those SMC calls are handled by
-> LDFW (Loadable Firmware), which has to be loaded first. For example, for
-> E850-96 board it's done in its board_init(), so by the time RNG
-> capabilities are needed the LDFW should be already loaded and TRNG
-> should be functional.
+> The standard property
 >
-> [1] drivers/char/hw_random/exynos-trng.c
-> [2] dts/upstream/Bindings/rng/samsung,exynos5250-trng.yaml
+>     linux,default-trigger = "pattern";
 >
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> used to get an effect. No blinking parameters can be set yet.
+>
+> Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
->  drivers/rng/Kconfig       |   7 +
->  drivers/rng/Makefile      |   1 +
->  drivers/rng/exynos-trng.c | 275 ++++++++++++++++++++++++++++++++++++++
->  3 files changed, 283 insertions(+)
->  create mode 100644 drivers/rng/exynos-trng.c
+>  drivers/led/led-uclass.c | 33 +++++++++++++++++++++++++++++----
+>  1 file changed, 29 insertions(+), 4 deletions(-)
 >
-> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> index 5758ae192a66..18cd8fe91f68 100644
-> --- a/drivers/rng/Kconfig
-> +++ b/drivers/rng/Kconfig
-> @@ -120,4 +120,11 @@ config RNG_TURRIS_RWTM
->           on other Armada-3700 devices (like EspressoBin) if Secure
->           Firmware from CZ.NIC is used.
+> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+> index 4f5dd66765e..90047ad35ba 100644
+> --- a/drivers/led/led-uclass.c
+> +++ b/drivers/led/led-uclass.c
+> @@ -100,6 +100,9 @@ static int led_post_bind(struct udevice *dev)
+>  {
+>         struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+>         const char *default_state;
+> +#ifdef CONFIG_LED_BLINK
+> +       const char *trigger;
+> +#endif
 >
-> +config RNG_EXYNOS
-> +       bool "Samsung Exynos True Random Number Generator support"
-> +       depends on DM_RNG
-> +       help
-> +         Enable support for True Random Number Generator (TRNG)
-> +         available in Exynos SoCs.
+>         if (!uc_plat->label)
+>                 uc_plat->label = dev_read_string(dev, "label");
+> @@ -120,6 +123,12 @@ static int led_post_bind(struct udevice *dev)
+>         else
+>                 return 0;
+>
+> +#ifdef CONFIG_LED_BLINK
+> +       trigger = dev_read_string(dev, "linux,default-trigger");
+> +       if (trigger && !strncmp(trigger, "pattern", 7))
+> +               uc_plat->default_state = LEDST_BLINK;
+> +#endif
 
-Can you mention the needed firmware here?
+I still wonder whether you can use IS_ENABLED() instead of adding #ifdefs?
 
 > +
->  endif
-> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> index c1f1c616e009..30553c9d6e99 100644
-> --- a/drivers/rng/Makefile
-> +++ b/drivers/rng/Makefile
-> @@ -18,3 +18,4 @@ obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
->  obj-$(CONFIG_TPM_RNG) += tpm_rng.o
->  obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
->  obj-$(CONFIG_RNG_TURRIS_RWTM) += turris_rwtm_rng.o
-> +obj-$(CONFIG_RNG_EXYNOS) += exynos-trng.o
-> diff --git a/drivers/rng/exynos-trng.c b/drivers/rng/exynos-trng.c
-> new file mode 100644
-> index 000000000000..6de27a2acd44
-> --- /dev/null
-> +++ b/drivers/rng/exynos-trng.c
-> @@ -0,0 +1,275 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2024 Linaro Ltd.
-> + * Author: Sam Protsenko <semen.protsenko@linaro.org>
-> + *
-> + * Samsung Exynos TRNG driver (True Random Number Generator).
-> + */
-> +
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <rng.h>
-> +#include <dm/device.h>
-> +#include <dm/device_compat.h>
-> +#include <asm/io.h>
-> +#include <linux/arm-smccc.h>
-> +#include <linux/bitops.h>
-> +#include <linux/delay.h>
-> +#include <linux/iopoll.h>
-> +#include <linux/time.h>
-> +
-> +#define EXYNOS_TRNG_CLKDIV             0x0
-> +#define EXYNOS_TRNG_CLKDIV_MASK                GENMASK(15, 0)
-> +#define EXYNOS_TRNG_CLOCK_RATE         500000
-> +
-> +#define EXYNOS_TRNG_CTRL               0x20
-> +#define EXYNOS_TRNG_CTRL_RNGEN         BIT(31)
-> +
-> +#define EXYNOS_TRNG_POST_CTRL          0x30
-> +#define EXYNOS_TRNG_ONLINE_CTRL                0x40
-> +#define EXYNOS_TRNG_ONLINE_STAT                0x44
-> +#define EXYNOS_TRNG_ONLINE_MAXCHI2     0x48
-> +#define EXYNOS_TRNG_FIFO_CTRL          0x50
-> +#define EXYNOS_TRNG_FIFO_0             0x80
-> +#define EXYNOS_TRNG_FIFO_1             0x84
-> +#define EXYNOS_TRNG_FIFO_2             0x88
-> +#define EXYNOS_TRNG_FIFO_3             0x8c
-> +#define EXYNOS_TRNG_FIFO_4             0x90
-> +#define EXYNOS_TRNG_FIFO_5             0x94
-> +#define EXYNOS_TRNG_FIFO_6             0x98
-> +#define EXYNOS_TRNG_FIFO_7             0x9c
-> +#define EXYNOS_TRNG_FIFO_LEN           8
-> +#define EXYNOS_TRNG_FIFO_TIMEOUT       (1 * USEC_PER_SEC)
-> +
-> +#define EXYNOS_SMC_CALL_VAL(func_num)                  \
-> +       ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,         \
-> +                          ARM_SMCCC_SMC_32,            \
-> +                          ARM_SMCCC_OWNER_SIP,         \
-> +                          func_num)
-> +
-> +/* SMC command for DTRNG access */
-> +#define SMC_CMD_RANDOM                 EXYNOS_SMC_CALL_VAL(0x1012)
-> +
-> +/* SMC_CMD_RANDOM: arguments */
-> +#define HWRNG_INIT                     0x0
-> +#define HWRNG_EXIT                     0x1
-> +#define HWRNG_GET_DATA                 0x2
-> +
-> +/* SMC_CMD_RANDOM: return values */
-> +#define HWRNG_RET_OK                   0x0
-> +#define HWRNG_RET_RETRY_ERROR          0x2
-> +
-> +#define HWRNG_MAX_TRIES                        100
-> +
-> +struct exynos_trng_variant {
-
-please add comments
-
-> +       bool smc;
-> +       int (*init)(struct udevice *dev);
-> +       void (*exit)(struct udevice *dev);
-> +       int (*read)(struct udevice *dev, void *data, size_t len);
-> +};
-> +
-> +struct exynos_trng {
-
-The convention is to add a _priv suffix
-
-> +       void __iomem *base;
-> +       struct clk *clk;        /* operating clock */
-> +       struct clk *pclk;       /* bus clock */
-> +       const struct exynos_trng_variant *data;
-> +};
-> +
-> +static int exynos_trng_read_reg(struct udevice *dev, void *data, size_t len)
-> +{
-> +       struct exynos_trng *trng = dev_get_priv(dev);
-> +       int val;
-> +
-> +       len = min_t(size_t, len, EXYNOS_TRNG_FIFO_LEN * 4);
-> +       writel_relaxed(len * 8, trng->base + EXYNOS_TRNG_FIFO_CTRL);
-> +       val = readl_poll_timeout(trng->base + EXYNOS_TRNG_FIFO_CTRL, val,
-> +                                val == 0, EXYNOS_TRNG_FIFO_TIMEOUT);
-> +       if (val < 0)
-> +               return val;
-> +
-> +       memcpy_fromio(data, trng->base + EXYNOS_TRNG_FIFO_0, len);
-> +
-> +       return 0;
-> +}
-> +
-> +static int exynos_trng_read_smc(struct udevice *dev, void *data, size_t len)
-> +{
-> +       struct arm_smccc_res res;
-> +       unsigned int copied = 0;
-> +       u32 *buf = data;
-> +       int tries = 0;
-> +
-> +       while (copied < len) {
-> +               arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_GET_DATA, 0, 0, 0, 0, 0, 0,
-> +                             &res);
-> +               switch (res.a0) {
-> +               case HWRNG_RET_OK:
-> +                       *buf++ = res.a2;
-> +                       *buf++ = res.a3;
-> +                       copied += 8;
-> +                       tries = 0;
-> +                       break;
-> +               case HWRNG_RET_RETRY_ERROR:
-> +                       if (++tries >= HWRNG_MAX_TRIES)
-> +                               return -EIO;
-> +                       udelay(10);
-> +                       break;
-> +               default:
-> +                       return -EIO;
-> +               }
+>         /*
+>          * In case the LED has default-state DT property, trigger
+>          * probe() to configure its default state during startup.
+> @@ -132,12 +141,28 @@ static int led_post_bind(struct udevice *dev)
+>  static int led_post_probe(struct udevice *dev)
+>  {
+>         struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> +       int rc = 0;
+>
+> -       if (uc_plat->default_state == LEDST_ON ||
+> -           uc_plat->default_state == LEDST_OFF)
+> -               led_set_state(dev, uc_plat->default_state);
+> +       switch (uc_plat->default_state) {
+> +       case LEDST_ON:
+> +       case LEDST_OFF:
+> +               rc = led_set_state(dev, uc_plat->default_state);
+> +               break;
+> +#ifdef CONFIG_LED_BLINK
+> +       case LEDST_BLINK: {
+> +               const int default_period_ms = 1000;
+>
+> -       return 0;
+> +               rc = led_set_period(dev, default_period_ms);
+> +               if (rc == 0)
+> +                       rc = led_set_state(dev, uc_plat->default_state);
+> +               break;
+> +       }
+> +#endif
+> +       default:
+> +               break;
 > +       }
 > +
-> +       return 0;
-> +}
-> +
-> +static int exynos_trng_init_reg(struct udevice *dev)
-> +{
-> +       const u32 max_div = EXYNOS_TRNG_CLKDIV_MASK;
-> +       struct exynos_trng *trng = dev_get_priv(dev);
-> +       unsigned long sss_rate;
-> +       u32 div;
-> +
-> +       sss_rate = clk_get_rate(trng->clk);
-> +
-> +       /*
-> +        * For most TRNG circuits the clock frequency of under 500 kHz is safe.
-> +        * The clock divider should be an even number.
-> +        */
-> +       div = sss_rate / EXYNOS_TRNG_CLOCK_RATE;
-> +       div -= div % 2; /* make sure it's even */
-> +       if (div > max_div) {
-> +               dev_err(dev, "Clock divider too large: %u", div);
-> +               return -ERANGE;
-> +       }
-> +       writel_relaxed(div, trng->base + EXYNOS_TRNG_CLKDIV);
-> +
-> +       /* Enable the generator */
-> +       writel_relaxed(EXYNOS_TRNG_CTRL_RNGEN, trng->base + EXYNOS_TRNG_CTRL);
-> +
-> +       /* Disable post-processing */
-> +       writel_relaxed(0, trng->base + EXYNOS_TRNG_POST_CTRL);
-> +
-> +       return 0;
-> +}
-> +
-> +static int exynos_trng_init_smc(struct udevice *dev)
-> +{
-> +       struct arm_smccc_res res;
-> +       int ret = 0;
-> +
-> +       arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_INIT, 0, 0, 0, 0, 0, 0, &res);
-> +       if (res.a0 != HWRNG_RET_OK) {
-> +               dev_err(dev, "SMC command for TRNG init failed (%d)\n",
-> +                       (int)res.a0);
-> +               ret = -EIO;
-> +       }
-> +       if ((int)res.a0 == -1)
-> +               dev_info(dev, "Make sure LDFW is loaded\n");
-
-return error here?
-
-> +
-> +       return ret;
-> +}
-> +
-> +static void exynos_trng_exit_smc(struct udevice *dev)
-> +{
-> +       struct arm_smccc_res res;
-> +
-> +       arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_EXIT, 0, 0, 0, 0, 0, 0, &res);
-> +}
-> +
-> +static int exynos_trng_read(struct udevice *dev, void *data, size_t len)
-> +{
-> +       struct exynos_trng *trng = dev_get_priv(dev);
-> +
-> +       return trng->data->read(dev, data, len);
-> +}
-> +
-> +static int exynos_trng_of_to_plat(struct udevice *dev)
-> +{
-> +       struct exynos_trng *trng = dev_get_priv(dev);
-> +
-> +       trng->data = (struct exynos_trng_variant *)dev_get_driver_data(dev);
-> +       if (!trng->data->smc) {
-> +               trng->base = dev_read_addr_ptr(dev);
-> +               if (!trng->base)
-> +                       return -ENODEV;
-
-That has a special meaning in U-Boot (i.e. that there is no device).
-Devicetree problems should return -EINVAL
-
-> +       }
-> +
-> +       trng->clk = devm_clk_get(dev, "secss");
-> +       if (IS_ERR(trng->clk))
-> +               return -ENODEV;
-
-Should return the actual error
-
-> +
-> +       trng->pclk = devm_clk_get_optional(dev, "pclk");
-> +       if (IS_ERR(trng->pclk))
-> +               return -ENODEV;
-
-same here
-
-> +
-> +       return 0;
-> +}
-> +
-> +static int exynos_trng_probe(struct udevice *dev)
-> +{
-> +       struct exynos_trng *trng = dev_get_priv(dev);
-> +       int err;
-
-s/err/ret/
-
-> +
-> +       err = clk_enable(trng->pclk);
-> +       if (err)
-> +               return err;
-> +
-> +       err = clk_enable(trng->clk);
-> +       if (err)
-> +               return err;
-> +
-> +       if (trng->data->init)
-> +               err = trng->data->init(dev);
-> +
-> +       return err;
-> +}
-> +
-> +static int exynos_trng_remove(struct udevice *dev)
-> +{
-> +       struct exynos_trng *trng = dev_get_priv(dev);
-> +
-> +       if (trng->data->exit)
-> +               trng->data->exit(dev);
-> +
-> +       /* Keep SSS clocks enabled, they are needed for EL3_MON and kernel */
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct dm_rng_ops exynos_trng_ops = {
-> +       .read   = exynos_trng_read,
-> +};
-> +
-> +static const struct exynos_trng_variant exynos5250_trng_data = {
-> +       .init   = exynos_trng_init_reg,
-> +       .read   = exynos_trng_read_reg,
-> +};
-> +
-> +static const struct exynos_trng_variant exynos850_trng_data = {
-> +       .smc    = true,
-> +       .init   = exynos_trng_init_smc,
-> +       .exit   = exynos_trng_exit_smc,
-> +       .read   = exynos_trng_read_smc,
-> +};
-> +
-> +static const struct udevice_id exynos_trng_match[] = {
-> +       {
-> +               .compatible = "samsung,exynos5250-trng",
-> +               .data = (ulong)&exynos5250_trng_data,
-> +       }, {
-> +               .compatible = "samsung,exynos850-trng",
-> +               .data = (ulong)&exynos850_trng_data,
-> +       },
-> +       { },
-> +};
-> +
-> +U_BOOT_DRIVER(exynos_trng) = {
-> +       .name           = "exynos-trng",
-> +       .id             = UCLASS_RNG,
-> +       .of_match       = exynos_trng_match,
-> +       .of_to_plat     = exynos_trng_of_to_plat,
-> +       .probe          = exynos_trng_probe,
-> +       .remove         = exynos_trng_remove,
-> +       .ops            = &exynos_trng_ops,
-> +       .priv_auto      = sizeof(struct exynos_trng),
-> +};
+> +       return rc;
+>  }
+>
+>  UCLASS_DRIVER(led) = {
 > --
 > 2.39.2
 >
