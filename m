@@ -4,87 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B60C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C4CFC3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:16:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E7C3888AC;
-	Sat, 13 Jul 2024 17:14:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB91A88898;
+	Sat, 13 Jul 2024 17:14:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MtLz0XL+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VC/mNf6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66EC788831; Sat, 13 Jul 2024 17:14:19 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 79C7887E13; Sat, 13 Jul 2024 17:14:22 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5795F8889B
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1938889A
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-5ce739c2650so319031eaf.1
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:16 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-70b0e7f6f8bso2607373b3a.3
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720883655; x=1721488455; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720883659; x=1721488459; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=btjpa1xvS/ZL6mLWmt6RuQusFCkEL8n10f9/4+y9K0E=;
- b=MtLz0XL+gAY9AhjTwGeooJPlld/fPdX1wSMm5xl9s9PGqYnrUBnESyeXOrufMO8Cpv
- 4z6cB5cujfTERQbWpZQeGvjAisNlDlwO3kDyhxTjQuGzl3rfkeoPRKYU2bT7rV+fsMSa
- BehQbc0jg8M7hExYEjMjxFjIA1iP0NOOpAKWY=
+ bh=duy3pGMoCtgk5D+5+htXwjl/B/fObhv/vJQ3MpeBfW8=;
+ b=VC/mNf6REt3mvFSntUeOtiyDUzrUjNzLKtVRBfJvgoebBtdom0ZUHj4oAUndSCyrB+
+ 0A20d37CZOyXT0wNf+ulWF+UAG4DVUvvcP5NHuY4igC+hjY8WnL2/CQmkzzsLki+rmwj
+ oi+dVJfQPrXj9jUeC1G+cvY4rL3m+zH1raMd8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720883655; x=1721488455;
+ d=1e100.net; s=20230601; t=1720883659; x=1721488459;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=btjpa1xvS/ZL6mLWmt6RuQusFCkEL8n10f9/4+y9K0E=;
- b=RgS9fta6BSGV5quDTEU/P4MwtUHpt5daJS0Ak5KopBT/E7tLbpOV9R8iJd1iUtGTef
- cGRv4G9uyXnu3B8oIzios4at07xo2EowhsqcFerv2zZhZnvMFyV2+KXco3jYGz+yvGPx
- I+nmboZT8jQzOuwJ7tBJrMwnJ2/MycpdArM5L2tAlsfanK7vJKO9vqi+O3WwLhtDZot/
- jZtL63SIbTRgyHYsTk+LXhlfkcym9BCGmCSJBxoofCEIy/DUpx/Xe0PaL6HhXAl+s0mz
- +tT/hk7p7zhTPiI0mGYABm4P546jmCcG7huiAWgTgnw/Pka4x1d7qubn+szt8RhjssGN
- 6lEQ==
-X-Gm-Message-State: AOJu0YzuuToacAT8ix9Y0zI4b3CyY6XMrDZ0rFhn0RaeHvI4R8tzixAW
- 1WpJONznByYr5xqZo+iZyHpgpyjaLTHEZyMkAdDgTwNxqVktjVHnM/c9wUgbZC04kklQ5hxaQrW
- T0/y9Ieo9DgDUhJ9S5ExJud548M0Gspnpnn8j
-X-Google-Smtp-Source: AGHT+IEXAYkDQAQGIMPamPZw8TkkB8MCZdO85rS8OC0uOCXbJW6SIvoavMLe5Fupo5jU3ZPQjEWVbrgXs1w/IWQ5mTc=
-X-Received: by 2002:a05:6359:5f8e:b0:1ac:62de:6c16 with SMTP id
- e5c5f4694b2df-1ac62de6d60mr157752455d.8.1720883655020; Sat, 13 Jul 2024
- 08:14:15 -0700 (PDT)
+ bh=duy3pGMoCtgk5D+5+htXwjl/B/fObhv/vJQ3MpeBfW8=;
+ b=WPzVMuXJnyrhzfI4FDUdjN5frlIlamYu1jzu8YWdRXenW9OA9/BkuXDxEkTtbYg2UT
+ L7iywTPYY1JaKL0AwCIRO7qQw4HuatQFH421FQJ6U2FoioaRMitgPNYcaPjyXn8AxM6n
+ 3paR5Ohdj4D+t9gZd5bbLXfHmaNCr7hDesyGqOjGUSzjP5b/uTexKBFKE4fJSYXHEkRb
+ UryXOB9n9qmGNXD7G4pZpDvN4wKh+uodllr5/Bj4/5HgblA49qKlXdib52D5OaksNwhi
+ VVMdMta5VHcGJg8LgxkfVNAQqB+0SYvYqqm0rSpdEvPeSzx5siUZRhMHOXGOsVI33zDg
+ 2HZg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWheUtnS0U1SXBJpNV8lnd0wIRRbsI3x+DzButcNptbNM2JsRl7zKrD6DB2qSprSl1zjcjlmyAweNF9PLlF4kmhPI69mg==
+X-Gm-Message-State: AOJu0YxxZtpQaRBhJB7ug0nk8gr2rNRTs892Iz2brg/+3PlAtToLtNly
+ MpXuJDSheCvmBMeADl1QDNE1sR3R43IT0/3/z09PVQ0m5KLNSLLTcsCfyLT5UqXYNvHuBWlRDOt
+ ZZJ2itB6E19dRO+qPNR595F9OKZ1hUZ0zPg0L
+X-Google-Smtp-Source: AGHT+IHKliWBDeNyHMlcSpJSDaKqvmwmPW6eSHs7+PNatImq4tVWlVqb3jIZhIigmGlCGmvzfQZQ2/tyr0h7BGTJJz4=
+X-Received: by 2002:a05:6a20:7f98:b0:1c2:8eb7:19bf with SMTP id
+ adf61e73a8af0-1c29822de09mr17050822637.37.1720883658812; Sat, 13 Jul 2024
+ 08:14:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240704074859.2956745-1-sjg@chromium.org>
- <972fadc0-1334-43bf-9c67-409de01b14c0@linaro.org>
-In-Reply-To: <972fadc0-1334-43bf-9c67-409de01b14c0@linaro.org>
+References: <20240710-bootmeth-android-v3-0-b99406e22da3@baylibre.com>
+ <20240710-bootmeth-android-v3-2-b99406e22da3@baylibre.com>
+In-Reply-To: <20240710-bootmeth-android-v3-2-b99406e22da3@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:13:53 +0100
-Message-ID: <CAFLszTjx_O8PhW6vsas6LFRaoQkAFtEQUXD9UUZxDwRDYorppg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/5] video: Improve syncing performance with cyclic
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>, 
- Angelo Dureghello <angelo@kernel-space.org>,
- Anton Bambura <jenneron@protonmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Chanho Park <chanho61.park@samsung.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>, Devarsh Thakkar <devarsht@ti.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nikhil M Jain <n-jain1@ti.com>, Ondrej Jirman <megi@xff.cz>,
- Peter Robinson <pbrobinson@gmail.com>, Randolph <randolph@andestech.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Samuel Dionne-Riel <samuel@dionne-riel.com>,
- Sean Anderson <sean.anderson@seco.com>, 
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Troy Kisky <troykiskyboundary@gmail.com>, Ying Sun <sunying@nj.iscas.ac.cn>
+Date: Sat, 13 Jul 2024 16:13:45 +0100
+Message-ID: <CAFLszTiY71XHozYOGA8iy1Y9EXFDTQz2C2R2bU1GSdK4y2x8Bw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/5] bootstd: Add bootflow_iter_check_mmc() helper
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>,
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,106 +88,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
-On Thu, 4 Jul 2024 at 16:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Wed, 10 Jul 2024 at 09:40, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
 >
-> Hi Simon,
+> Some bootflows might be able to only boot from MMC devices.
 >
-> On 04/07/2024 09:48, Simon Glass wrote:
-> > Now that U-Boot has a background-processing feature, it is possible to
-> > reduce the amount of 'foreground' syncing of the display. At present
-> > this happens quite often.
-> >
-> > Foreground syncing blocks all other processing, sometimes for 10ms or
-> > more. When pasting commands into U-Boot over the UART, this typically
-> > result in characters being dropped. For example, on rpi_4 it isn't
-> > possible to paste in more than 35 characters before things fail. This
-> > makes updating the environment or entering long commands very painful
-> > over the console, since text must be pasted in chunks, or the
-> > vidconsole device must be dropped from stdout.
+> Add a helper function these bootflows can use.
 >
-> I'm not intimately familiar with U-Boots event loop, but to me this
-> sounds more like a bug in the console code. I can confirm this issue
-> appears on Qualcomm platforms with the GENI serial driver, I tried
-> enabling CONFIG_SERIAL_RX_BUFFER and it seemed to help significantly
-> (though there were still a few dropped characters when pasting).
-
-Thanks for digging into this. Yes I agree.
-
-The fix I have been contemplating is to adjust video_sync() to only
-flush the cache if 'force' is given, then have vidconsole_putc() pass
-force=true if a newline is written.
-
+> Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> Reviewed-by: Julien Masson <jmasson@baylibre.com>
+> Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  boot/bootflow.c    | 12 ++++++++++++
+>  include/bootflow.h |  9 +++++++++
+>  2 files changed, 21 insertions(+)
 >
-> Of note, the USB ACM serial driver doesn't seem to have any issues here,
-> presumably since it isn't restricted by the baud rate.
 
-Or it might just have a large serial buffer?
-
->
-> If there is an abort, does this approach still ensure that it gets
-> printed properly on the video console?
-
-What sort of abort?
-
->
-> Kind regards,
-> >
-> > This series introduces background syncing, enabled by default for
-> > boards which use video. The sync rates for foreground and background
-> > are configurable.
-> >
-> > With this series it is possible to paste in any amount of text to the
-> > command line. Some sandbox-specific workarounds can now be removed and
-> > sandbox video (./u-boot -Dl) is significantly more responsive.
-> >
-> > This obviously increases code size, since it enables a subsystem not
-> > normally used by default. However it only applies to boards which have
-> > VIDEO enabled, which are presumably less worried about memory space
-> > since the video code is fairly large.
-> >
-> > Also it is possible to disable CMD_CYCLIC and reduce the growth to:
-> >
-> >     aarch64: (for 1/1 boards) all +1081.0 rodata +65.0 text +1016.0
-> >         arm: (for 1/1 boards) all +945.0 rodata +65.0 text +880.0
-> >
-> > Without that, the increase doubles.
-> >
-> > It is of course possible to disable CYCLIC and still use VIDEO but this
-> > reverts to the current behaviour
-> >
-> > Changes in v3:
-> > - Drop inclusion of kconfig.h in cyclic.h
-> > - Adapt to new cyclic API
-> >
-> > Changes in v2:
-> > - Add an SPL_CYCLIC symbol
-> > - Add a lot more explanation about the header files
-> > - Expand help for CONFIG_VIDEO
-> > - Fix 'groth' and 'work-around' typos in cover letter
-> >
-> > Simon Glass (5):
-> >    cyclic: Add a symbol for SPL
-> >    video: Move last_sync to private data
-> >    video: Use cyclic to handle video sync
-> >    sandbox: Increase cyclic CPU-time limit
-> >    sandbox: Drop video-sync in serial driver
-> >
-> >   common/Kconfig                    |  9 ++++++
-> >   common/Makefile                   |  2 +-
-> >   drivers/serial/sandbox.c          |  2 --
-> >   drivers/video/Kconfig             | 35 +++++++++++++++++++++
-> >   drivers/video/video-uclass.c      | 52 +++++++++++++++++++++++++------
-> >   drivers/watchdog/Kconfig          |  1 +
-> >   include/asm-generic/global_data.h |  2 +-
-> >   include/cyclic.h                  |  5 +--
-> >   include/video.h                   |  2 ++
-> >   9 files changed, 95 insertions(+), 15 deletions(-)
-> >
->
-> --
-> // Caleb (they/them)
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
