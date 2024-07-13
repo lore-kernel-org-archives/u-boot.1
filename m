@@ -4,78 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3437FC3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:51:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 587A7C3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 11:30:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D4B988511;
-	Sat, 13 Jul 2024 09:51:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 74161884C3;
+	Sat, 13 Jul 2024 13:30:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QHjoA96k";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SmgpLlzB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB2DD885F1; Sat, 13 Jul 2024 09:51:42 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A7D1088676; Sat, 13 Jul 2024 13:30:44 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80AF38850A
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 09:51:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 908C786BF1
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 13:30:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5c651c521f2so1418855eaf.1
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 00:51:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720857099; x=1721461899; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8zSx+xCRRVbQ42S/J7nZklNJuMZipTpXdjf4cApV8kI=;
- b=QHjoA96kp/UpgNorLnDLTqKx/13FaOU2Lt9GHmJoldXvcQGzoTt4VFnk0pMDNpyUL6
- 3t9SMwRy9XBfOkKFq/FNYdK0fBfRU/hYDKi2skydbvU9sRgMzeJC6mCUjmARCMmguaia
- JB5Adw1NkZFMXcRifbq76FNpYSarklGjpocGRPAXS6Xg5V9QRhlXCdQxCs6mGeocRRrL
- KLviCqSxRRPraF9FAoNOkMw8qXvWN/04duNvF2jCpJoc/qeVZLLzTYXZIXlTBow+hH5Z
- xstuC1Uzi0e6zkL+bhuD4NQryxaS700QFleq0X+77+X0poverqskS2lWaP3Xzd8QS9TR
- 21Nw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 7D0873F6B6
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 11:30:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1720870240;
+ bh=gxOa+ISv//vzJ+IVAFjUmAgVcAJJiN9BVvOxU3gHeTY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=SmgpLlzBPjBZIO825uXjD/vtwGTkcq7K+I6OqZX05iAlSscdAkMnBrByXxLk8xu6q
+ p4rNjnsuKBXPFm1QMwY9QUwKXAzLjNcMzloSJNAQddnRgnS0fTv/f8H4xeowqxydUZ
+ xJaxo+tgy3z8HHs5Ng+UAYJXoPdu9CeGnrl/zh2tducAOr8gcaTfUjaNoEDXE+kw58
+ L6Mey1yITCBieWgoagOqkjx2qAQot1J784ctbPFYtUdNlKInwcZWff8Z3GN7yUUfp7
+ rscvZp1q9bviB+MPaCVMZZmRHIR0Az3llB/3nHBw1TbZDldpktprelDuJHIrjwHcIL
+ 4gZAZ04cOyiMw==
+Received: by mail-lf1-f69.google.com with SMTP id
+ 2adb3069b0e04-52e96ca162dso2742561e87.3
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 04:30:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720857099; x=1721461899;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8zSx+xCRRVbQ42S/J7nZklNJuMZipTpXdjf4cApV8kI=;
- b=Yz5A/SRWZviaBvQWxjgJTN+T6vHtEym9ZHZu1yWwYn7/szNHOwdFBo3Q+O2SqGxtUY
- VmPorZiosE64osuZ7eDk/zuO908K4mDAlWmf62YNVhn0UJrI1Hg+LXVep/4rZHTCmsU9
- ZN943pj4Cdks71iv01cqimMZw1N6Jxco7Xb9tgUXu6kCqzoj6Z0Xy/82sI41xRtMGCDs
- enSXodNcn9f+mdmzxKp8xegNcKjzRV+Qq1ShFm8UazFbRvv7fCRy6a1M9e/AvOeRRQjT
- uImG5ComMhlYdVdziKUzM93fx3jyFMAQw3SyFp0vW0dQjCldbFOhMzp2EZ4LJeWqgGwI
- OmWw==
+ d=1e100.net; s=20230601; t=1720870239; x=1721475039;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gxOa+ISv//vzJ+IVAFjUmAgVcAJJiN9BVvOxU3gHeTY=;
+ b=JeWCe/KNOYiVtdZ7O+OxqHpVKiBls0NCCohTGgi67KaXWeD4w1SIxXfXAYOghUrwuk
+ gj5KENlNHQ05LT3MgCVAg7XW02JYpg0WX27VfJlxnKHqN1YLmg2/xNcGgL5++4nl6A6q
+ G+nfsa6rhjsnYZOcmvSNgb/y7H0hx0w0GxaSs+V1TiD3eJmFdQykXRoMfLDrecZs44Kq
+ oS+e0uEIyzQRvDpfUQaUxBHUJAjYHKSGjiHC9P9LRdHZYcWZWwQwIdrySjheugkLyrDN
+ gFlP2J6TmGYWvcxCR+gmErNTFuZfe0FbJAasH8ZdJwfMvicDqkID4InayQIzvI7Iu+rV
+ 5xgg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdInAU9EZUXFmaDwGZsk7SF/CpNkQr3d5sQj7fQ/jCscBlMw3fowarsYp5vsMhC12ZPEyAhSLWQkZyjpeg5unN6EXZQQ==
-X-Gm-Message-State: AOJu0YzagUqphZghvdflGt+Fz2RXz/9/FN7DOELZQ3nWQvXhMXeyvXf4
- nYAABRAMNG8GjtLyliRI+Ob2RXR/R5ttEIp63mIw/2fFUNq+zijlV6xyX+tUH9PRCimOwJW1I1L
- 5ZTgFjCf7ZtYn3wL6SBWKYKEENo0=
-X-Google-Smtp-Source: AGHT+IEM5E0i1YYJChkTJWtT4OjcHAx8IZovZg/21Yu6VnWRU/vKlxdyAVplxffEfRiX5Ni7CxXc9InKjH5XFGAg7QM=
-X-Received: by 2002:a05:6820:2914:b0:5ce:d2e3:b18 with SMTP id
- 006d021491bc7-5ced2e30d42mr359116eaf.8.1720857099146; Sat, 13 Jul 2024
- 00:51:39 -0700 (PDT)
+ AJvYcCVnBOqCRLsO9nofMpllTS6iQ2j3mNTtfyFCcekDN6SlQktCixTLHyB/wLRO8AZsel8TigYRO+cD/elp9jbW9ksWBC803A==
+X-Gm-Message-State: AOJu0Yyru4LOrTN8MajjwC439s/bfRAZZMkolpJCk3nxnGbGucZPNDYo
+ NYysVV6YLN87l/pSeFZaPNDgIkYvhWunRer5vwJRmpUNm0giN3+y8PPbEdVpZffqbINk3QLmeR9
+ o9lRY1mLp0+4noK38TMKBW6h8cAWVDNYSIqpZWpQ/QTMPI/T+lJs/8Fs1SuWmBug7/VY=
+X-Received: by 2002:a05:6512:401a:b0:52e:9423:867f with SMTP id
+ 2adb3069b0e04-52eb99a137bmr10573815e87.36.1720870239131; 
+ Sat, 13 Jul 2024 04:30:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE7LW4p2xazB8RN33kW3/70Acilp+YITjWnU4SPVfRH4bCRIPC8vPAm5t+dRC0N+Fb3bQeVFg==
+X-Received: by 2002:a05:6512:401a:b0:52e:9423:867f with SMTP id
+ 2adb3069b0e04-52eb99a137bmr10573795e87.36.1720870238437; 
+ Sat, 13 Jul 2024 04:30:38 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-093-080.um16.pools.vodafone-ip.de. [62.143.93.80])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4279f2cc244sm51368535e9.37.2024.07.13.04.30.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Jul 2024 04:30:37 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: E Shattow <lucent@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: find distro device-path for media devices
+Date: Sat, 13 Jul 2024 13:30:29 +0200
+Message-ID: <20240713113029.78262-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240626151522.83561-1-linux.amoon@gmail.com>
- <CAPLW+4kqcLVFxxdGL8V66TquKEtPz0VX7NyejAYS=reJmjJWEQ@mail.gmail.com>
-In-Reply-To: <CAPLW+4kqcLVFxxdGL8V66TquKEtPz0VX7NyejAYS=reJmjJWEQ@mail.gmail.com>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Sat, 13 Jul 2024 13:21:23 +0530
-Message-ID: <CANAwSgT3nEwKytX-6D3YSWvEu8G=PxAk-SCp8YBaNf+SFjCywA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] dm: exynos: Correct CONFIG_SYS_BOARD setting for
- Odroid XU3 boards
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>,
- --Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,66 +102,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi All,
+The auto-generated load options for media device do not contain a partition
+node. We cannot expect the simple file protocol here.
 
-On Wed, 26 Jun 2024 at 21:07, Sam Protsenko <semen.protsenko@linaro.org> wr=
-ote:
->
-> On Wed, Jun 26, 2024 at 10:15=E2=80=AFAM Anand Moon <linux.amoon@gmail.co=
-m> wrote:
-> >
-> > Fix the issue where CONFIG_SYS_BOARD was incorrectly set on
-> > Odroid XU3 boards, causing boot failure. This was resolved by
-> > correcting the SYS_BOARD entry in Kconfig to load the correct
-> > device tree source (dts) for the Odroid Exynos5422 Platforms.
-> >
-> > Fixes: f76750d11133 ("Convert CONFIG_CONS_INDEX et al to Kconfig")
-> > Signed-off-by: Anand Moon <linux.amoon@gmail.com>
-> > ---
-> > U-Boot 2024.07-rc5-00042-g80a111f426 (Jun 26 2024 - 15:03:09 +0530) for=
- ODROID-XU3/XU4/HC1/HC2
-> >
-> > CPU:   Exynos5422 @ 800 MHz
-> > DRAM:  2 GiB
-> > Core:  74 devices, 12 uclasses, devicetree: separate
-> > MMC:   mmc@12200000: 0, mmc@12220000: 2
-> > Loading Environment from MMC... Reading from MMC(2)... *** Warning - ba=
-d CRC, using default environment
-> >
-> > In:    serial
-> > Out:   serial
-> > Err:   serial
-> > Model: Odroid XU3/XU4/HC1/HC2 based on Exynos5422
-> > Type:  xu4
-> > Boot device: MMC(2)
-> > Net:   No ethernet found.
-> > Hit any key to stop autoboot:  0
-> > switch to partitions #0, OK
-> > mmc2 is current device
-> > Scanning mmc 2:1...
-> > Found U-Boot script /boot/boot.scr
-> > 2046 bytes read in 22 ms (90.8 KiB/s)
-> > 8104280 bytes read in 519 ms (14.9 MiB/s)
-> > Failed to load '/boot/dtbs/exynos5422-smdk5420xu4.dtb'
-> > SCRIPT FAILED: continuing...
-> > No EFI system partition
-> > No EFI system partition
-> > Failed to persist EFI variables
-> > No EFI system partition
-> > Failed to persist EFI variables
-> > No EFI system partition
-> > Failed to persist EFI variables
-> > Loading Boot0000 'mmc 2' failed
-> > EFI boot manager: Cannot load any image
-> > MMC Device 1 not found
-> > no mmc device at slot 1
-> > ---
->
-> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
->
-Thanks
+Get the partition device-path via the loaded image protocol.
 
-Gentle ping?
+Fixes: e91b68fd6b83 ("efi_loader: load distro dtb in bootmgr")
+Reported-by: E Shattow <lucent@gmail.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ include/efi_loader.h         |  2 +-
+ lib/efi_loader/efi_bootmgr.c |  2 +-
+ lib/efi_loader/efi_fdt.c     | 33 +++++++++++++++++++--------------
+ 3 files changed, 21 insertions(+), 16 deletions(-)
 
-Thanks
--Anand
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 6c993e1a694..2a06fbe4704 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -1205,6 +1205,6 @@ efi_status_t efi_load_option_dp_join(struct efi_device_path **dp,
+ 
+ int efi_get_distro_fdt_name(char *fname, int size, int seq);
+ 
+-void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size);
++void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *fdt_size);
+ 
+ #endif /* _EFI_LOADER_H */
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 304ed43595c..589d3996b68 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -1277,7 +1277,7 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 		if (fdt_lo)
+ 			fdt = fdt_lo;
+ 		if (!fdt) {
+-			efi_load_distro_fdt(&fdt_distro, &fdt_size);
++			efi_load_distro_fdt(handle, &fdt_distro, &fdt_size);
+ 			fdt = fdt_distro;
+ 		}
+ 	}
+diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
+index 86ba00c2bdd..4ccf2055be3 100644
+--- a/lib/efi_loader/efi_fdt.c
++++ b/lib/efi_loader/efi_fdt.c
+@@ -75,28 +75,34 @@ int efi_get_distro_fdt_name(char *fname, int size, int seq)
+ /**
+  * efi_load_distro_fdt() - load distro device-tree
+  *
++ * @handle:	handle of loaded image
+  * @fdt:	on return device-tree, must be freed via efi_free_pages()
+  * @fdt_size:	buffer size
+  */
+-void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size)
++void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *fdt_size)
+ {
+-	struct efi_device_path *rem, *dp;
++	struct efi_device_path *dp;
+ 	efi_status_t  ret;
++	struct efi_handler *handler;
++	struct efi_loaded_image *loaded_image;
+ 	efi_handle_t device;
+ 
+ 	*fdt = NULL;
+ 
+-	dp = efi_get_dp_from_boot(NULL);
+-	if (!dp)
++	/* Get boot device from loaded image protocol */
++	ret = efi_search_protocol(handle, &efi_guid_loaded_image, &handler);
++	if (ret != EFI_SUCCESS)
+ 		return;
+-	device = efi_dp_find_obj(dp, NULL, &rem);
+-	ret = efi_search_protocol(device, &efi_simple_file_system_protocol_guid,
+-				  NULL);
++	loaded_image = handler->protocol_interface;
++	device = loaded_image->device_handle;
++
++	/* Get device path of boot device */
++	ret = efi_search_protocol(device, &efi_guid_device_path, &handler);
+ 	if (ret != EFI_SUCCESS)
+-		goto err;
+-	memcpy(rem, &END, sizeof(END));
++		return;
++	dp = handler->protocol_interface;
+ 
+-	/* try the various available names */
++	/* Try the various available names */
+ 	for (int seq = 0; ; ++seq) {
+ 		struct efi_device_path *file;
+ 		char buf[255];
+@@ -108,10 +114,9 @@ void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size)
+ 			break;
+ 		ret = efi_load_image_from_path(true, file, fdt, fdt_size);
+ 		efi_free_pool(file);
+-		if (ret == EFI_SUCCESS)
++		if (ret == EFI_SUCCESS) {
++			log_debug("Fdt %pD loaded\n", file);
+ 			break;
++		}
+ 	}
+-
+-err:
+-	efi_free_pool(dp);
+ }
+-- 
+2.45.2
+
