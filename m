@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBCFDC3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:24:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689D2C3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:24:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4317A88877;
+	by phobos.denx.de (Postfix) with ESMTP id ABAA088894;
 	Sat, 13 Jul 2024 15:21:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ERfUNkfi";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eiqzaYjQ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bLiXJLgm";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uu2fiulm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A77088875; Sat, 13 Jul 2024 15:21:27 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 338F688888; Sat, 13 Jul 2024 15:21:28 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31B84887E3
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F96088836
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,48 +32,48 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4WLpyD6sC4z9spD;
- Sat, 13 Jul 2024 15:21:24 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WLpyG0lJyz9sTd;
+ Sat, 13 Jul 2024 15:21:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876885;
+ s=mail20150812; t=1720876886;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ALMgM5yryIVvl2wySQP5cWfScbSCVgpGp6zK/hMn0Zs=;
- b=ERfUNkfikatOxSgJiJQCuW7clS9lugqTgUfFl8pQPgR9/M2Q1MPnDq73Xk4cp9nMTZX/o0
- mgsdiag6jjdMz4cZCepbzGlV7pm4BFyrzAP66F9623KP1BIVbiJWAc9Zwl67Cf4ls14xsn
- b8fwxwUVG/X8zD9w9rnGu2PKnf8PsLy1kGqRdzmXHKbrjG47/SlGefpPvqZgtb00GTUf3s
- nKcJ0386Ou7IwMCYEv/rfcjlFOit8P6pz/55vx4tgsF4zMAw8Z+sAu56PKV6YISAcN5xbY
- t2hw+tOjk2FKTaBEHgo7tZiutC9DZmrwORVcPzcovC5z8SeG/ECpP2/4oL1FLg==
+ bh=NHh0C0FsPO2C6Ac0kyfdsiJAuNAn4f+xnozrdyaUYR4=;
+ b=bLiXJLgmIotd/oyMMv1frsmUmY8xcWSa2PK5rFVywiOl/r0P0eGWOiWZ6G8TmShCe5PkpM
+ PjJjTlw23+bUII84sypaJNnFEngLLNZ6QCiyny1l/pg1MxTajZ0/nntrbP/Q+z8ti8R/1U
+ GlOKjh/t+3bkaHhcSqAQkcX2JxNYNqkyk7iVEGfrDQ2E68V17vv1Qt6XMNMDFQ5XZqO5eN
+ KMIa9kUCQlJXWR/9JF2Go6zIj/lSJO6AN40mw1CEJhwIc45bTUk7dkTwdbX5HfxuE4TkDq
+ aLMnvclB5j0UYYtlDhwtKRUJt4InOs96yQvCbhqTTJ0dwVzH3SSjZt47oR+JIA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876883;
+ s=mail20150812; t=1720876884;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ALMgM5yryIVvl2wySQP5cWfScbSCVgpGp6zK/hMn0Zs=;
- b=eiqzaYjQS8BGBwD8gxzbQz+CQDJdkxT3CsUCV0vomywxbEKHLMhrkpCHPdXNY/yDJLvnWP
- Qk3RRtxGYO1P/Tj7MzRSHq1+MUzyk9BJgUarhFru0VMXeG+H1WGlp/Xtl2zLxi24YGNhcq
- bWD8lMaKP7Og6/LnvpHSY7+wqlrgr20/tIx+nuE++tAkQo5kq5onFeyrc5/IwBPEY9c7/u
- zzGEAasdv9kjE4UDMrZMIcVYdCffGByWY56n56fcxbfp9vVpgNgDKv0sdxflfr73x62Gba
- 1Jniv2J8CRLh718iXAqc0FQcvhXLCRAbi1cCIv7wyTZuX74EjXdQDklkpPu1EA==
+ bh=NHh0C0FsPO2C6Ac0kyfdsiJAuNAn4f+xnozrdyaUYR4=;
+ b=uu2fiulmkN1y+ui/nhVM59bKFGJRkiAIsC+Q9/AyfaUYxhMXwWoCnCUy/xHIjvvtzkhE5b
+ s2nqT4HXB0D1W2ptdAqzenm/g/YCapQxfhlHnP34x4H3UV81ihkqLdGy/JMVCEYV9IfHwx
+ XOGZ4k0CJkEMZFYACgQ9txiRDXHEMJVW/ZFmyiFhoqA7MHjDKR5BeTZkp6Hr7zx7uhCYZw
+ OCtvE0itlzp2ZM0aJUndqAEbgxJHUTmh9GMi3cgi9qsKY/0mK3dg3WE2mgzSgNK7zTQwTR
+ 5t3Q7G0p3oD78OxLGqOPlT2oz+38FHywu6B4bKtv35seYn4W5p305XPJl//yNw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 17/45] arm: mach: exynos: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:08 +0200
-Message-ID: <20240713132021.57650-17-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 18/45] arm: mach: imx: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:09 +0200
+Message-ID: <20240713132021.57650-18-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1d8e362a7cd6af927e1
-X-MBO-RS-META: 3eox3y8zys7k7t8qwfy1pu966u3byu4w
-X-Rspamd-Queue-Id: 4WLpyD6sC4z9spD
+X-MBO-RS-ID: d62a4652aeb53dcbce2
+X-MBO-RS-META: samjumyz3ii6f3s6o4sycrzs4e6a3xmu
+X-Rspamd-Queue-Id: 4WLpyG0lJyz9sTd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,178 +100,89 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/mach-exynos/common_setup.h         | 1 -
- arch/arm/mach-exynos/exynos4_setup.h        | 2 --
- arch/arm/mach-exynos/exynos5_setup.h        | 4 ----
- arch/arm/mach-exynos/include/mach/cpu.h     | 1 -
- arch/arm/mach-exynos/include/mach/dp_info.h | 1 -
- arch/arm/mach-exynos/include/mach/power.h   | 1 -
- arch/arm/mach-exynos/include/mach/sound.h   | 1 -
- arch/arm/mach-exynos/pinmux.c               | 1 -
- arch/arm/mach-exynos/power.c                | 2 --
- arch/arm/mach-s5pc1xx/include/mach/cpu.h    | 1 -
- 10 files changed, 15 deletions(-)
+ arch/arm/mach-imx/cache.c              | 1 -
+ arch/arm/mach-imx/imx8/cpu.c           | 2 --
+ arch/arm/mach-imx/imx8m/clock_imx8mq.c | 1 -
+ arch/arm/mach-imx/mx6/litesom.c        | 1 -
+ arch/arm/mach-imx/mx7ulp/scg.c         | 2 --
+ 5 files changed, 7 deletions(-)
 
-diff --git a/arch/arm/mach-exynos/common_setup.h b/arch/arm/mach-exynos/common_setup.h
-index 4f56160ee50..a3fc7d9fbeb 100644
---- a/arch/arm/mach-exynos/common_setup.h
-+++ b/arch/arm/mach-exynos/common_setup.h
-@@ -61,7 +61,6 @@ enum l2_cache_params {
- 	CACHE_ENABLE_FORCE_L2_LOGIC = (1 << 27)
- };
+diff --git a/arch/arm/mach-imx/cache.c b/arch/arm/mach-imx/cache.c
+index b368db49fce..7b3eacb43ed 100644
+--- a/arch/arm/mach-imx/cache.c
++++ b/arch/arm/mach-imx/cache.c
+@@ -86,7 +86,6 @@ void v7_outer_cache_enable(void)
+ 	struct iomuxc *iomux = (struct iomuxc *)IOMUXC_BASE_ADDR;
+ 	unsigned int val, cache_id;
  
 -
- #if !defined(CONFIG_SYS_L2CACHE_OFF) && defined(CONFIG_EXYNOS5420)
- /*
-  * Configure L2CTLR to get timings that keep us from hanging/crashing.
-diff --git a/arch/arm/mach-exynos/exynos4_setup.h b/arch/arm/mach-exynos/exynos4_setup.h
-index 23c9011fbc6..1a287a4ef6a 100644
---- a/arch/arm/mach-exynos/exynos4_setup.h
-+++ b/arch/arm/mach-exynos/exynos4_setup.h
-@@ -284,7 +284,6 @@
- #define MFC_0_SEL		MFC_SEL_MPLL
- #define CLK_SRC_MFC_VAL		((MFC_SEL << 8) | (MFC_0_SEL))
+ 	/*
+ 	 * Must disable the L2 before changing the latency parameters
+ 	 * and auxiliary control register.
+diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
+index 627baa1d83f..accba502e49 100644
+--- a/arch/arm/mach-imx/imx8/cpu.c
++++ b/arch/arm/mach-imx/imx8/cpu.c
+@@ -519,7 +519,6 @@ phys_size_t get_effective_memsize(void)
+ 	board_mem_get_layout(&phys_sdram_1_start, &phys_sdram_1_size,
+ 			     &phys_sdram_2_start, &phys_sdram_2_size);
  
 -
- /* CLK_DIV_MFC */
- #define MFC_RATIO		3
- #define CLK_DIV_MFC_VAL		(MFC_RATIO)
-@@ -498,7 +497,6 @@ struct mem_timings {
- 				| ADD_LAT_PALL | MEM_TYPE_DDR3 | MEM_WIDTH_32\
- 				| NUM_CHIP_2 | BL_8)
+ 	end1 = (sc_faddr_t)phys_sdram_1_start + phys_sdram_1_size;
+ 	for (mr = 0; mr < 64; mr++) {
+ 		err = get_owned_memreg(mr, &start, &end);
+@@ -699,7 +698,6 @@ static u64 get_block_size(sc_faddr_t addr_start, sc_faddr_t addr_end)
+ 	board_mem_get_layout(&phys_sdram_1_start, &phys_sdram_1_size,
+ 			     &phys_sdram_2_start, &phys_sdram_2_size);
  
 -
- #define CHIP_BANK_8		(0x3 << 0)
- #define CHIP_ROW_14		(0x2 << 4)
- #define CHIP_COL_10		(0x3 << 8)
-diff --git a/arch/arm/mach-exynos/exynos5_setup.h b/arch/arm/mach-exynos/exynos5_setup.h
-index 4e508edba0c..6fa80221c8d 100644
---- a/arch/arm/mach-exynos/exynos5_setup.h
-+++ b/arch/arm/mach-exynos/exynos5_setup.h
-@@ -685,7 +685,6 @@
- #define PWM_RATIO		8
- #define CLK_DIV_PERIC3_VAL	(PWM_RATIO << 0)
+ 	end1 = (sc_faddr_t)phys_sdram_1_start + phys_sdram_1_size;
+ 	end2 = (sc_faddr_t)phys_sdram_2_start + phys_sdram_2_size;
  
--
- /* CLK_DIV_PERIC4 */
- #define CLK_DIV_PERIC4_VAL	NOT_AVAILABLE
- 
-@@ -710,7 +709,6 @@
- /* MPLL_CON1 */
- #define MPLL_CON1_VAL   (0x0020F300)
- 
--
- /* CPLL_CON1 */
- #define CPLL_CON1_VAL	0x0020f300
- 
-@@ -720,7 +718,6 @@
- /* GPLL_CON1 */
- #define GPLL_CON1_VAL	(NOT_AVAILABLE)
- 
--
- /* EPLL_CON1, CON2 */
- #define EPLL_CON1_VAL	0x00000000
- #define EPLL_CON2_VAL	0x00000080
-@@ -750,7 +747,6 @@
- #define CLK_DIV_ISP0_VAL	0x13131300
- #define CLK_DIV_ISP1_VAL	0xbb110202
- 
--
- /* CLK_FSYS */
- #define CLK_SRC_FSYS0_VAL              0x33033300
- #define CLK_DIV_FSYS0_VAL	       0x0
-diff --git a/arch/arm/mach-exynos/include/mach/cpu.h b/arch/arm/mach-exynos/include/mach/cpu.h
-index dab148e3320..cf4580be189 100644
---- a/arch/arm/mach-exynos/include/mach/cpu.h
-+++ b/arch/arm/mach-exynos/include/mach/cpu.h
-@@ -190,7 +190,6 @@
- #define EXYNOS5420_MODEM_BASE		DEVICE_NOT_AVAILABLE
- #define EXYNOS5420_USB_HOST_XHCI_BASE	DEVICE_NOT_AVAILABLE
- 
--
- #ifndef __ASSEMBLY__
- #include <asm/io.h>
- /* CPU detection macros */
-diff --git a/arch/arm/mach-exynos/include/mach/dp_info.h b/arch/arm/mach-exynos/include/mach/dp_info.h
-index 3226eb95f01..a7f7667afd6 100644
---- a/arch/arm/mach-exynos/include/mach/dp_info.h
-+++ b/arch/arm/mach-exynos/include/mach/dp_info.h
-@@ -183,7 +183,6 @@ enum {
- 	VIDEO_TIMING_FROM_REGISTER
- };
- 
--
- struct exynos_dp_platform_data {
- 	struct exynos_dp_priv *edp_dev_info;
- };
-diff --git a/arch/arm/mach-exynos/include/mach/power.h b/arch/arm/mach-exynos/include/mach/power.h
-index 757e1586bde..32534116cf8 100644
---- a/arch/arm/mach-exynos/include/mach/power.h
-+++ b/arch/arm/mach-exynos/include/mach/power.h
-@@ -1752,7 +1752,6 @@ void set_xclkout(void);
-  */
- uint32_t get_reset_status(void);
- 
--
- /* Read the resume function and call it */
- void power_exit_wakeup(void);
- 
-diff --git a/arch/arm/mach-exynos/include/mach/sound.h b/arch/arm/mach-exynos/include/mach/sound.h
-index 1a40e35f0b5..9672e977f07 100644
---- a/arch/arm/mach-exynos/include/mach/sound.h
-+++ b/arch/arm/mach-exynos/include/mach/sound.h
-@@ -4,7 +4,6 @@
-  * Rajeshwari Shinde <rajeshwari.s@samsung.com>
-  */
- 
--
- #ifndef __SOUND_ARCH_H__
- #define __SOUND_ARCH_H__
- 
-diff --git a/arch/arm/mach-exynos/pinmux.c b/arch/arm/mach-exynos/pinmux.c
-index 4061dd4aafa..07d19fd17ba 100644
---- a/arch/arm/mach-exynos/pinmux.c
-+++ b/arch/arm/mach-exynos/pinmux.c
-@@ -391,7 +391,6 @@ static void exynos5420_i2s_config(int peripheral)
- 	}
+diff --git a/arch/arm/mach-imx/imx8m/clock_imx8mq.c b/arch/arm/mach-imx/imx8m/clock_imx8mq.c
+index 7e6c3748716..43e677deae2 100644
+--- a/arch/arm/mach-imx/imx8m/clock_imx8mq.c
++++ b/arch/arm/mach-imx/imx8m/clock_imx8mq.c
+@@ -733,7 +733,6 @@ static int frac_pll_init(u32 pll, enum frac_pll_out_val val)
+ 	return 0;
  }
  
 -
- void exynos5_spi_config(int peripheral)
+ int clock_init(void)
  {
- 	int cfg = 0, pin = 0, i;
-diff --git a/arch/arm/mach-exynos/power.c b/arch/arm/mach-exynos/power.c
-index 599d3ccff60..1b61da6dc1a 100644
---- a/arch/arm/mach-exynos/power.c
-+++ b/arch/arm/mach-exynos/power.c
-@@ -20,7 +20,6 @@ static void exynos4_mipi_phy_control(unsigned int dev_index,
- 	else
- 		addr = (unsigned int)&pmu->mipi_phy1_control;
+ 	u32 grade;
+diff --git a/arch/arm/mach-imx/mx6/litesom.c b/arch/arm/mach-imx/mx6/litesom.c
+index ab5de266577..03e1214c060 100644
+--- a/arch/arm/mach-imx/mx6/litesom.c
++++ b/arch/arm/mach-imx/mx6/litesom.c
+@@ -83,7 +83,6 @@ int litesom_mmc_init(struct bd_info *bis)
+ #include <spl.h>
+ #include <asm/arch/mx6-ddr.h>
  
 -
- 	cfg = readl(addr);
- 	if (enable)
- 		cfg |= (EXYNOS_MIPI_PHY_MRESETN | EXYNOS_MIPI_PHY_ENABLE);
-@@ -174,7 +173,6 @@ void set_ps_hold_ctrl(void)
- 		exynos5_set_ps_hold_ctrl();
+ static struct mx6ul_iomux_grp_regs mx6_grp_ioregs = {
+ 	.grp_addds = 0x00000030,
+ 	.grp_ddrmode_ctl = 0x00020000,
+diff --git a/arch/arm/mach-imx/mx7ulp/scg.c b/arch/arm/mach-imx/mx7ulp/scg.c
+index d4fb5389cac..59da7300dd6 100644
+--- a/arch/arm/mach-imx/mx7ulp/scg.c
++++ b/arch/arm/mach-imx/mx7ulp/scg.c
+@@ -428,7 +428,6 @@ static u32 scg_nic_get_rate(enum scg_clk clk)
+ 	return rate;
  }
  
 -
- static void exynos5_set_xclkout(void)
- {
- 	struct exynos5_power *power =
-diff --git a/arch/arm/mach-s5pc1xx/include/mach/cpu.h b/arch/arm/mach-s5pc1xx/include/mach/cpu.h
-index 78c905b866b..4b1b7118268 100644
---- a/arch/arm/mach-s5pc1xx/include/mach/cpu.h
-+++ b/arch/arm/mach-s5pc1xx/include/mach/cpu.h
-@@ -45,7 +45,6 @@
- #define S5PC110_PHY_BASE	0xEC100000
- #define S5PC110_USB_PHY_CONTROL 0xE010E80C
+ static enum scg_clk scg_scs_array[4] = {
+ 	SCG_SOSC_CLK, SCG_SIRC_CLK, SCG_FIRC_CLK, SCG_ROSC_CLK,
+ };
+@@ -807,7 +806,6 @@ int scg_enable_usb_pll(bool usb_control)
+ 	return 0;
+ }
  
 -
- #ifndef __ASSEMBLY__
- #include <asm/io.h>
- /* CPU detection macros */
+ /* A7 domain system clock source is SPLL */
+ #define SCG1_RCCR_SCS_NUM	((SCG_SCS_SYS_PLL) << SCG_CCR_SCS_SHIFT)
+ 
 -- 
 2.43.0
 
