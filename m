@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA01C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E6D3C3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3FDF888FB;
-	Sat, 13 Jul 2024 15:21:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26DA088913;
+	Sat, 13 Jul 2024 15:21:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Y5le1DXT";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="E1SExfFb";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LzaTIdbR";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ypLB+nHf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF6BA888FC; Sat, 13 Jul 2024 15:21:47 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id E47E3888EE; Sat, 13 Jul 2024 15:21:48 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5871888D7
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 064C7888FA
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WLpyd5Lnyz9sZv;
- Sat, 13 Jul 2024 15:21:45 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WLpyf5h7jz9sZF;
+ Sat, 13 Jul 2024 15:21:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876905;
+ s=mail20150812; t=1720876906;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Gx2zxYnvnTr1vWIcGJzIc2DgkIpJU9wz0Pg4F1FrEoo=;
- b=Y5le1DXTH8K2UJtV6CU3dwDSkQ5W3dTyHQnBnkdHi9oShG8eypPG3as2ndCs39/mr1s2BH
- wQTww86hzvaV/s5ftxVBzX9woK+tEFBQ3SkYLOxczd2xg9WX3T3bkd6c6nwsGpSZmsszYq
- kzookqlWb5RXxtOLO0hQiGu+vZlPmuxrIPIsZFPfp2TA5Gn2j3dsURDDvEoZ216yPOEsbl
- /Rl1yLtz1z+pP5zQt8WCRuUBo35wcKlX9spuxL85wVz/V5jDQxnK4P3xP/AF4RKaVIKupD
- zt1MuCckStlWxRj7vkaeqe19+lTXimVCxWAy/flDhzhnFPFKVz/Fk/M4t5Qr+w==
+ bh=GFrleFeD2Cqp7p1+my/K56Jr4ZaV/Y97wEvdakthUL0=;
+ b=LzaTIdbR9lF4GckhbXwLqtp8+5NBl466LFZikn/MspxgyKxFqhAFqXj4s2W5xiV3jSUdPd
+ QDCvZhE/40SAxP0SV5x6YfTmm48ScQPiOa8wXcY6lwpmJB5aLP9xqOs77gtkTVuIFrSsEm
+ tXi4z5wIeskmeNLuDsjiQ/NiOzN1PgL2dGTM/drnvMUiaEoJpP3Yjl2WRxe5EUiJkZ+HPV
+ l0xN3BqUqkLJepdSv2cA5AqF+KKdFheZXy6Ah+3i0HGJnjDTZTpl6hwyHFXj91YQcaFjbJ
+ lecjeBwigrj94ImnhkrlqGqsYGqNC3HyqwX0bkOP4Z3U3vEZ0cigYoDFnPALCw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876903;
+ s=mail20150812; t=1720876904;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Gx2zxYnvnTr1vWIcGJzIc2DgkIpJU9wz0Pg4F1FrEoo=;
- b=E1SExfFbEg4BmCizi7O9UomTrdnYeMlkDnmn9xuuJ9LIKa3E6rrR2e4Bz2mH5usnCxbi5a
- sYhOo1zNrJyGIaWjS7asI9156pW13QoLAESIP6tK5C14e3vuAUQTImegP0L6Q4epll6iyw
- 47k/YKE2/iOzZllGVt6UjRM3hIrdgx33irr/i9u7K6UPHA+FDvHpG8Sxmcw5GctBThjqwN
- h2QpfbbzMrUUooUW5V64B/ZEPDBg+FVsBxCSlkBnkzdH6X8rquoUO8Wh625ikAxucyZ2hs
- WOGcSfDtKTz8ylgdUlqglU7jlikyKz24HtJSrRydUq4XdzgbE4mqDmw9Icgm3w==
+ bh=GFrleFeD2Cqp7p1+my/K56Jr4ZaV/Y97wEvdakthUL0=;
+ b=ypLB+nHfZj1ORQa9RiguXmp08QPzwIHfx1HIvbz9EGg4CQlDk0i44FKe3Mj2ICeCoa2jag
+ dTryrv0yshHkj7pD+kYaE0eDiQD7WtHSw+JV5a9PIkdcCXGr30xdKH24jw7qQnTkWLKm03
+ VCvd7HC0nqAPhEVGtuTOUi2R5Rg/7NlWIN3Vr9eAMGpACGuCGUh2iySDm9rQKCEKQMYkIl
+ nXR8JhMNlyIGoo6eApMCCraSdBb9su7K6g+IYj2traInSZtRwH+kqgU7ecHigU7yNlA0iP
+ bDxfXtkVP0jsIdnEIZYEtLl+bdaCnAQ72XB18GF2t7oxqY9EdjN/1ZidSe7odA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 36/45] nios2: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:27 +0200
-Message-ID: <20240713132021.57650-36-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 37/45] post: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:28 +0200
+Message-ID: <20240713132021.57650-37-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1e9c81dfc9ebd524990
-X-MBO-RS-META: mokg7jh3uaw1mgtqafgh531ysdz51zxh
-X-Rspamd-Queue-Id: 4WLpyd5Lnyz9sZv
+X-MBO-RS-ID: 665492e44de751f98fd
+X-MBO-RS-META: d5cs9c3wbex1xhr5nszj6s4p16gqhp86
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,105 +97,66 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/nios2/cpu/interrupts.c            | 2 --
- arch/nios2/include/asm/bitops/atomic.h | 1 -
- arch/nios2/include/asm/ptrace.h        | 1 -
- arch/nios2/lib/libgcc.c                | 6 ------
- 4 files changed, 10 deletions(-)
+ post/drivers/flash.c       | 1 -
+ post/drivers/memory.c      | 2 --
+ post/lib_powerpc/cpu_asm.h | 1 -
+ post/tests.c               | 1 -
+ 4 files changed, 5 deletions(-)
 
-diff --git a/arch/nios2/cpu/interrupts.c b/arch/nios2/cpu/interrupts.c
-index 27093c4faa3..c98d40a49b5 100644
---- a/arch/nios2/cpu/interrupts.c
-+++ b/arch/nios2/cpu/interrupts.c
-@@ -98,7 +98,6 @@ void irq_install_handler(int irq, interrupt_handler_t *hdlr, void *arg)
- 	if (flag) enable_interrupts();
- }
+diff --git a/post/drivers/flash.c b/post/drivers/flash.c
+index 21e2f940fe9..7638a99f2eb 100644
+--- a/post/drivers/flash.c
++++ b/post/drivers/flash.c
+@@ -12,7 +12,6 @@
+ #include <post.h>
+ #include <flash.h>
  
 -
- int interrupt_init(void)
- {
- 	int i;
-@@ -114,7 +113,6 @@ int interrupt_init(void)
- 	return (0);
- }
+ /*
+  * This code will walk over the declared sectors erasing them,
+  * then programming them, then verifying the written contents.
+diff --git a/post/drivers/memory.c b/post/drivers/memory.c
+index 8d4ae6fc6f1..2e41c4619e0 100644
+--- a/post/drivers/memory.c
++++ b/post/drivers/memory.c
+@@ -157,7 +157,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ #warning "Injecting address line errors for testing purposes"
+ #endif
  
 -
- /*************************************************************************/
- #if defined(CONFIG_CMD_IRQ)
- int do_irqinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-diff --git a/arch/nios2/include/asm/bitops/atomic.h b/arch/nios2/include/asm/bitops/atomic.h
-index c8946465e63..0130fd47d39 100644
---- a/arch/nios2/include/asm/bitops/atomic.h
-+++ b/arch/nios2/include/asm/bitops/atomic.h
-@@ -31,7 +31,6 @@ extern raw_spinlock_t __atomic_hash[ATOMIC_HASH_SIZE] __lock_aligned;
- 	local_irq_restore(f);				\
- } while(0)
- 
--
- #else
- #  define _atomic_spin_lock_irqsave(l,f) do { local_irq_save(f); } while (0)
- #  define _atomic_spin_unlock_irqrestore(l,f) do { local_irq_restore(f); } while (0)
-diff --git a/arch/nios2/include/asm/ptrace.h b/arch/nios2/include/asm/ptrace.h
-index 317d8ae09b4..b1feb338886 100644
---- a/arch/nios2/include/asm/ptrace.h
-+++ b/arch/nios2/include/asm/ptrace.h
-@@ -12,5 +12,4 @@ struct pt_regs {
- 	unsigned status;
+ /*
+  * This function performs a double word move from the data at
+  * the source pointer to the location at the destination pointer.
+@@ -199,7 +198,6 @@ const static unsigned long long pattern[] = {
  };
+ const unsigned long long otherpattern = 0x0123456789abcdefULL;
  
 -
- #endif /* __ASM_NIOS2_PTRACE_H_ */
-diff --git a/arch/nios2/lib/libgcc.c b/arch/nios2/lib/libgcc.c
-index a45b3e82efc..30b846179c0 100644
---- a/arch/nios2/lib/libgcc.c
-+++ b/arch/nios2/lib/libgcc.c
-@@ -16,7 +16,6 @@ typedef unsigned long long DSItype;
- 
- #include "longlong.h"
- 
--
- typedef int word_type;
- typedef long Wtype;
- typedef long long DWtype;
-@@ -46,7 +45,6 @@ const UQItype __clz_tab[256] =
-   8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
- };
- 
--
- DWtype
- __ashldi3 (DWtype u, word_type b)
+ static int memory_post_dataline(unsigned long long * pmem)
  {
-@@ -388,7 +386,6 @@ __negdi2 (DWtype u)
-   return w.ll;
- }
+ 	unsigned long long temp64 = 0;
+diff --git a/post/lib_powerpc/cpu_asm.h b/post/lib_powerpc/cpu_asm.h
+index 75cf71b6370..d1e3f68faa7 100644
+--- a/post/lib_powerpc/cpu_asm.h
++++ b/post/lib_powerpc/cpu_asm.h
+@@ -203,5 +203,4 @@
+ #define ASM_STSWI(rd, rs, simm)		ASM_11IF(OP_STSWI, rd, rs, simm)
+ #define ASM_STSWX(rd, rs1, rs2)		ASM_12(OP_STSWX, rd, rs1, rs2)
  
 -
- DWtype
- __muldi3 (DWtype u, DWtype v)
- {
-@@ -440,7 +437,6 @@ __ucmpdi2 (DWtype a, DWtype b)
-   return 1;
- }
+ #endif /* _CPU_ASM_H */
+diff --git a/post/tests.c b/post/tests.c
+index 208710a48ba..cdd088a32f2 100644
+--- a/post/tests.c
++++ b/post/tests.c
+@@ -43,7 +43,6 @@ extern int sysmon_init_f (void);
+ 
+ extern void sysmon_reloc (void);
  
 -
- UDWtype
- __udivdi3 (UDWtype n, UDWtype d)
+ struct post_test post_list[] =
  {
-@@ -507,14 +503,12 @@ __divsi3 (SItype a, SItype b)
-   return res;
- }
- 
--
- SItype
- __udivsi3 (SItype a, SItype b)
- {
-   return udivmodsi4 (a, b, 0);
- }
- 
--
- SItype
- __modsi3 (SItype a, SItype b)
- {
+ #if CFG_POST & CFG_SYS_POST_OCM
 -- 
 2.43.0
 
