@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E32C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:28:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9487C3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E1A688912;
+	by phobos.denx.de (Postfix) with ESMTP id 669FB8892E;
 	Sat, 13 Jul 2024 15:21:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="V9vTOvuh";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nKdOZyzD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ESJfSEEM";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vI+GLiOq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B331E8892A; Sat, 13 Jul 2024 15:21:54 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id A5F5C88901; Sat, 13 Jul 2024 15:21:55 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 889038891A
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98AA688905
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4WLpym2DSyz9scS;
- Sat, 13 Jul 2024 15:21:52 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WLpyn2SBTz9sZF;
+ Sat, 13 Jul 2024 15:21:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876912;
+ s=mail20150812; t=1720876913;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dugnfrAdWVCYrN3kWmXN2sxDqpt+ffnOzNe+KWb+DcY=;
- b=V9vTOvuh1Osvm1DHMiK1amFj8zjdr+9jF56AubbsAOcfDzEDwf38q6mVkJX5vOZ6fuX3eq
- btqde8rD/tbF+OnNyy2de0jXuJZk8yTDJLCoqqxz5arD6FTUDtn/9GXGUgxqgozAjqyqjy
- AvN9mgaD6PsOkDRe6FFk+u+j2ZfQtrNFISX+JOQoA5gktajkZbEYkVw/x50sPacdd7TJT0
- lXG8EHnPFpgsPIFR/lqPmJbNBcpH1RCtAdePRYQD/Yk6qOGZHDZQBQCENUKrNlEpMCx61i
- RwlS6EIil75UL7TuMjenijfe5ZqW+uCQo/oEYfGAT8WhPSHycBVZkjXf1d6L5Q==
+ bh=8Zk0Z0melEQhQhOkRqelm/841CkRCs53eAbZXMknfvM=;
+ b=ESJfSEEM+f3yx3KOfT2L1pcPZShGJsYGgR+MpDUw5O5oWXCn4if3QH7I0WPPdn+pPd3EfO
+ cgv9CK49cDVl1R0C1iW93jq49iTSyUUCguPD2kiByxd6oPGnhJRXY2EDv9dEFaoJyvQW6j
+ 1lcPudYx+5GyE0iEgsyKxidzB0Tl6FWnNBraJC3lnNJlxQTMGULxKEjPahirXCfsoMLzLS
+ NTncYOzkBHg4uYE6jg4sPV6Nrre3rLzCStSwAGQz8EtpIus4La1x9YUwyzaW/QFaAWBBdi
+ +631GrE1eup6QIBW7HQCQPIvWp/VdQyDVafFZBnolvPQJ/qHavQnQsPql13+hQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876910;
+ s=mail20150812; t=1720876911;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dugnfrAdWVCYrN3kWmXN2sxDqpt+ffnOzNe+KWb+DcY=;
- b=nKdOZyzD8WILauQeNVweWIAYBxhx41lLI50/dd1BMMWbWNWB/nH4xvakE/LlAQX1C0EyYY
- 5G28wx1NofVLHr/KK6OYQcbgO0oj/YH8abUFhS4ARB7fZshXklIEHxhDmonitQRFNpw5Ra
- JGdtAHwQ3M820vUaP7TTo4UkCQ+Iy39xyXKjbqMJh6f0ZotimdQPLJyti8nxeSAaYO+0ss
- f/3cSv0x809mbIx1dvtl69jmO40jdtRQgiksVxpnHC4KpjBskiFpWGXELZj/HNpqr8fJZW
- CuAM1stfLV2CAsqnDoqGy98ygzkw7VaG1M+WT2NQbR4EvGI3dT1vjvoHD4DRrg==
+ bh=8Zk0Z0melEQhQhOkRqelm/841CkRCs53eAbZXMknfvM=;
+ b=vI+GLiOqHgexRLPwmilHD+kzYooXErtxaseWXZYPjDHKTNlfdtxlkwg6vMGKCw8QHgIjJW
+ lDOTq/tB0JMqLQbM6QAk6aAzQFAfX/d3Prq+L707d/g0fFEIEuDFT88Vnmgwtx2W0FzcYw
+ SeY1jd5+nQrh6JZEkQb3x3ZTJtp58Ci8VwKJopraA83v40Wrj2yFTbAMdfoKrC0+375uEL
+ cTq6Lmaug/R/PwtUeqVVIj40RdbyChAzKTI6xkamkctNDvpPXHcTtbP8oKdkVBLXKl9/Ag
+ FwYLTpCHn2b0UWBh/DIHznT8he7NQyEQRMIzocbu694KRjeJCWOeYOUoFWLMCw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 42/45] test: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:33 +0200
-Message-ID: <20240713132021.57650-42-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 43/45] tools: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:34 +0200
+Message-ID: <20240713132021.57650-43-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1639a39fd6fc2f4c6c8
-X-MBO-RS-META: panm8e143e7mjofzc96cuzgs935p1s6f
+X-MBO-RS-ID: 239539a3f91ef7461c7
+X-MBO-RS-META: 95kctzim8a1zqzo1yot3mrfspw55gxuk
+X-Rspamd-Queue-Id: 4WLpyn2SBTz9sZF
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,112 +99,225 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- test/boot/bootdev.c  | 1 -
- test/cmd/setexpr.c   | 1 -
- test/compression.c   | 1 -
- test/dm/devres.c     | 1 -
- test/dm/fwu_mdata.c  | 1 -
- test/dm/remoteproc.c | 1 -
- test/dm/spmi.c       | 1 -
- test/dm/usb.c        | 1 -
- 8 files changed, 8 deletions(-)
+ tools/env/fw_env.h | 2 --
+ tools/envcrc.c     | 1 -
+ tools/fdtgrep.c    | 1 -
+ tools/gdb/remote.c | 2 --
+ tools/imagetool.h  | 1 -
+ tools/img2srec.c   | 9 ---------
+ tools/imx8mimage.c | 1 -
+ tools/imximage.c   | 2 --
+ tools/kwbimage.c   | 1 -
+ tools/mxsimage.c   | 1 -
+ 10 files changed, 21 deletions(-)
 
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index 6e940002f84..1bf5929c396 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -680,7 +680,6 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
- BOOTSTD_TEST(bootdev_test_next_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
- 	     UT_TESTF_ETH_BOOTDEV | UT_TESTF_SF_BOOTDEV);
+diff --git a/tools/env/fw_env.h b/tools/env/fw_env.h
+index 78c803c9447..060eea542cc 100644
+--- a/tools/env/fw_env.h
++++ b/tools/env/fw_env.h
+@@ -94,7 +94,6 @@ int fw_env_set(int argc, char *argv[], struct env_opts *opts);
+  */
+ int fw_parse_script(char *fname, struct env_opts *opts);
  
 -
- /* Check iterating to the next prioirty in a list */
- static int bootdev_test_next_prio(struct unit_test_state *uts)
- {
-diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
-index d50ce5803c3..4c6cc3cf09e 100644
---- a/test/cmd/setexpr.c
-+++ b/test/cmd/setexpr.c
-@@ -329,7 +329,6 @@ static int setexpr_test_str(struct unit_test_state *uts)
+ /**
+  * fw_env_open() - read enviroment from flash into RAM cache
+  *
+@@ -151,7 +150,6 @@ int fw_env_flush(struct env_opts *opts);
+  */
+ int fw_env_close(struct env_opts *opts);
+ 
+-
+ /**
+  * fw_env_version - return the current version of the library
+  *
+diff --git a/tools/envcrc.c b/tools/envcrc.c
+index 550f31038bd..09051800364 100644
+--- a/tools/envcrc.c
++++ b/tools/envcrc.c
+@@ -48,7 +48,6 @@
+ 
+ #define ENV_SIZE (CONFIG_ENV_SIZE - ENV_HEADER_SIZE)
+ 
+-
+ #ifdef ENV_IS_EMBEDDED
+ # include <env_internal.h>
+ extern unsigned int env_size;
+diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+index f1ff1946bd4..037176bc9ef 100644
+--- a/tools/fdtgrep.c
++++ b/tools/fdtgrep.c
+@@ -102,7 +102,6 @@ static void print_ansi_colour(FILE *fout, int col)
+ 		fprintf(fout, "\033[1;%dm", col + 30);
  }
- SETEXPR_TEST(setexpr_test_str, UT_TESTF_CONSOLE_REC);
  
 -
- /* Test 'setexpr' command with concatenating strings */
- static int setexpr_test_str_oper(struct unit_test_state *uts)
+ /**
+  * value_add() - Add a new value to our list of things to grep for
+  *
+diff --git a/tools/gdb/remote.c b/tools/gdb/remote.c
+index 3cd04213514..f17bb06fb4c 100644
+--- a/tools/gdb/remote.c
++++ b/tools/gdb/remote.c
+@@ -45,7 +45,6 @@ extern "C" {
+ #endif
+ #endif /* alloca not defined.  */
+ 
+-
+ #include "serial.h"
+ #include "error.h"
+ #include "remote.h"
+@@ -313,7 +312,6 @@ static int remote_binary_checked;
+ 		 ? (REGISTER_BYTES * 2 + 32) \
+ 		 : 400)
+ 
+-
+ /* This variable sets the number of bytes to be written to the target
+    in a single packet.  Normally PBUFSIZ is satisfactory, but some
+    targets need smaller values (perhaps because the receiving end
+diff --git a/tools/imagetool.h b/tools/imagetool.h
+index a766aa2ae91..57be608210a 100644
+--- a/tools/imagetool.h
++++ b/tools/imagetool.h
+@@ -256,7 +256,6 @@ time_t imagetool_get_source_date(
+  * for ex. default_image.c, fit_image.c
+  */
+ 
+-
+ void pbl_load_uboot(int fd, struct image_tool_params *mparams);
+ int zynqmpbif_copy_image(int fd, struct image_tool_params *mparams);
+ int imx8image_copy_image(int fd, struct image_tool_params *mparams);
+diff --git a/tools/img2srec.c b/tools/img2srec.c
+index 75efd76e0e3..5a6d3259f3e 100644
+--- a/tools/img2srec.c
++++ b/tools/img2srec.c
+@@ -109,7 +109,6 @@ static char* ExtractDecimal (uint32_t* value,  char* getPtr)
+   return getPtr;
+ } /* ExtractDecimal */
+ 
+-
+ static void ExtractNumber (uint32_t* value,  char* getPtr)
  {
-diff --git a/test/compression.c b/test/compression.c
-index aa1d38bb7bc..618a1936955 100644
---- a/test/compression.c
-+++ b/test/compression.c
-@@ -139,7 +139,6 @@ static const char zstd_compressed[] =
- 	"\x01\xe4\xf4\x6e\xfa";
- static const unsigned long zstd_compressed_size = sizeof(zstd_compressed) - 1;
+   bool  neg = false;
+@@ -129,7 +128,6 @@ static void ExtractNumber (uint32_t* value,  char* getPtr)
+   if (neg) *value = -(*value);
+ } /* ExtractNumber */
  
 -
- #define TEST_BUFFER_SIZE	512
+ static uint8_t* ExtractWord(uint16_t* value, uint8_t* buffer)
+ {
+   uint16_t x;
+@@ -139,7 +137,6 @@ static uint8_t* ExtractWord(uint16_t* value, uint8_t* buffer)
+   return buffer;
+ } /* ExtractWord */
  
- typedef int (*mutate_func)(struct unit_test_state *uts, void *, unsigned long,
-diff --git a/test/dm/devres.c b/test/dm/devres.c
-index 95a470b9f1c..7a3a669ddd4 100644
---- a/test/dm/devres.c
-+++ b/test/dm/devres.c
-@@ -69,7 +69,6 @@ static int dm_test_devres_free(struct unit_test_state *uts)
+-
+ static uint8_t* ExtractLong(uint32_t* value, uint8_t* buffer)
+ {
+   uint32_t x;
+@@ -151,14 +148,12 @@ static uint8_t* ExtractLong(uint32_t* value, uint8_t* buffer)
+   return buffer;
+ } /* ExtractLong */
+ 
+-
+ static uint8_t* ExtractBlock(uint16_t count, uint8_t* data, uint8_t* buffer)
+ {
+   while (count--) *data++ = *buffer++;
+   return buffer;
+ } /* ExtractBlock */
+ 
+-
+ static char* WriteHex(char* pa, uint8_t value, uint16_t* pCheckSum)
+ {
+   uint16_t  temp;
+@@ -173,7 +168,6 @@ static char* WriteHex(char* pa, uint8_t value, uint16_t* pCheckSum)
+   return pa;
  }
- DM_TEST(dm_test_devres_free, UT_TESTF_SCAN_PDATA);
  
 -
- /* Test that kzalloc() returns memory that is zeroed */
- static int dm_test_devres_kzalloc(struct unit_test_state *uts)
+ static char* BuildSRecord(char* pa, uint16_t sType, uint32_t addr,
+ 			  const uint8_t* data, int nCount)
  {
-diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
-index 0be7f4519e2..6154480ba83 100644
---- a/test/dm/fwu_mdata.c
-+++ b/test/dm/fwu_mdata.c
-@@ -129,7 +129,6 @@ static int dm_test_fwu_mdata_write(struct unit_test_state *uts)
- 	 */
- 	event_notify_null(EVT_MAIN_LOOP);
- 
--
- 	ut_assertok(uclass_first_device_err(UCLASS_FWU_MDATA, &dev));
- 
- 	ut_assertok(fwu_init());
-diff --git a/test/dm/remoteproc.c b/test/dm/remoteproc.c
-index ef9e8e5a0df..444c4dce083 100644
---- a/test/dm/remoteproc.c
-+++ b/test/dm/remoteproc.c
-@@ -28,7 +28,6 @@ static int dm_test_remoteproc_base(struct unit_test_state *uts)
- 	/* Ensure we are initialized */
- 	ut_asserteq(true, rproc_is_initialized());
- 
--
- 	/* platform data device 1 */
- 	ut_assertok(rproc_stop(0));
- 	ut_assertok(rproc_reset(0));
-diff --git a/test/dm/spmi.c b/test/dm/spmi.c
-index e10ae8db4d3..ee444f3b9b1 100644
---- a/test/dm/spmi.c
-+++ b/test/dm/spmi.c
-@@ -70,7 +70,6 @@ static int dm_test_spmi_access(struct unit_test_state *uts)
+@@ -223,7 +217,6 @@ static char* BuildSRecord(char* pa, uint16_t sType, uint32_t addr,
+   return pa;
  }
- DM_TEST(dm_test_spmi_access, UT_TESTF_SCAN_FDT);
  
 -
- /* Test if it's possible to access GPIO that should be in pmic */
- static int dm_test_spmi_access_peripheral(struct unit_test_state *uts)
+ static void ConvertELF(char* fileName, uint32_t loadOffset)
  {
-diff --git a/test/dm/usb.c b/test/dm/usb.c
-index 9a571938b81..0bbea219ec9 100644
---- a/test/dm/usb.c
-+++ b/test/dm/usb.c
-@@ -423,7 +423,6 @@ static int dm_test_usb_keyb(struct unit_test_state *uts)
- 		{0x00, 0x00, "\0"}
- 	};
+   FILE*         file;
+@@ -240,7 +233,6 @@ static void ConvertELF(char* fileName, uint32_t loadOffset)
+   char          srecLine[128];
+   char		*hdr_name;
  
 -
- 	state_set_skip_delays(true);
- 	ut_assertok(usb_init());
+   /* open file */
+   if ((file = fopen(fileName,"rb")) == NULL) {
+     fprintf (stderr, "Can't open %s: %s\n", fileName, strerror(errno));
+@@ -348,7 +340,6 @@ static void ConvertELF(char* fileName, uint32_t loadOffset)
+   fclose(file);
+ } /* ConvertELF */
  
+-
+ /*************************************************************************
+ |  MAIN
+ |*************************************************************************/
+diff --git a/tools/imx8mimage.c b/tools/imx8mimage.c
+index 939f829a9f7..d60d293e649 100644
+--- a/tools/imx8mimage.c
++++ b/tools/imx8mimage.c
+@@ -5,7 +5,6 @@
+  * Peng Fan <peng.fan@nxp.com>
+  */
+ 
+-
+ #include "imagetool.h"
+ #include <image.h>
+ #include "imximage.h"
+diff --git a/tools/imximage.c b/tools/imximage.c
+index 2df4c7dd491..467d9f27d2a 100644
+--- a/tools/imximage.c
++++ b/tools/imximage.c
+@@ -793,7 +793,6 @@ static uint32_t parse_cfg_file(struct imx_header *imxhdr, char *name)
+ 	return dcd_len;
+ }
+ 
+-
+ static int imximage_check_image_types(uint8_t type)
+ {
+ 	if (type == IH_TYPE_IMXIMAGE)
+@@ -1057,7 +1056,6 @@ static int imximage_generate(struct image_tool_params *params,
+ 	return pad_len;
+ }
+ 
+-
+ /*
+  * imximage parameters
+  */
+diff --git a/tools/kwbimage.c b/tools/kwbimage.c
+index 4dce495ff03..d1cbced28fc 100644
+--- a/tools/kwbimage.c
++++ b/tools/kwbimage.c
+@@ -804,7 +804,6 @@ static int kwb_sign_and_verify(RSA *key, void *data, int datasz,
+ 	return 0;
+ }
+ 
+-
+ static int kwb_dump_fuse_cmds_38x(FILE *out, struct secure_hdr_v1 *sec_hdr)
+ {
+ 	struct hash_v1 kak_pub_hash;
+diff --git a/tools/mxsimage.c b/tools/mxsimage.c
+index ead61d0cd63..42df0698ca2 100644
+--- a/tools/mxsimage.c
++++ b/tools/mxsimage.c
+@@ -2058,7 +2058,6 @@ static int sb_verify_image_end(struct sb_image_ctx *ictx,
+ 	return ret;
+ }
+ 
+-
+ static int sb_build_tree_from_img(struct sb_image_ctx *ictx)
+ {
+ 	long filesize;
 -- 
 2.43.0
 
