@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAC2C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:06:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5678FC3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:07:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6017288863;
-	Sat, 13 Jul 2024 09:04:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D56E0887E3;
+	Sat, 13 Jul 2024 09:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E37DZUgk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UyQ+hhOU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42FCA88861; Sat, 13 Jul 2024 09:04:00 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id B764088789; Sat, 13 Jul 2024 09:04:01 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F9FA88842
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 09:03:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D171F88850
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 09:03:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4266f3e0df8so17915485e9.2
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 00:03:57 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-52ea0f18500so2733902e87.3
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 00:03:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720854236; x=1721459036; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720854238; x=1721459038; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/bLnFuS0aZWJkifhH0Qryx5VpIJGA0hEJ2OTlge3/Os=;
- b=E37DZUgkpFcuwz7umDELb0vbZSKQbC0s/VQebRTqiKvaREvlRkR1XhQNm8Z4tnb+Xz
- 7vJDRiJM+Nld2j5qBnP1JsscZu10TDLQoR/15AUPJwU/Bt5TySOxHazkBh+jS2OI1qwa
- eocKZF/SzzvXPLGfT7qdcFxfeRy91r0jQqA9g=
+ bh=PMDeghO/Y6K45EmdAp4dwoHR9L9HRTg6eyWhSMrrDKY=;
+ b=UyQ+hhOUYdxOvrFZVr8z2MfE92RewF/wsnfEQ5CBHOjd48hrOZ9MEwfRWd7bolnS5w
+ C6FVU4Nki7ad22RlAfwZxcEQyCOYNynCikfxjWL5qaIQSn99SGZrS8LXELrG1vTCFsA+
+ svvB3WZL5BT9WL5h+rpOGVGBki6I2uY5s7JMU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720854236; x=1721459036;
+ d=1e100.net; s=20230601; t=1720854238; x=1721459038;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/bLnFuS0aZWJkifhH0Qryx5VpIJGA0hEJ2OTlge3/Os=;
- b=etHtftVOGo+8LqsDsEMQ5A5himsqbIKU21UOSs1gGq90DTVRT9gDgsGZsuVtITudja
- VSIft/mBn8BqwAAVq9mjFzsWJg2aInBZQHLyF8fu9fVslQIf13bTRKVGbn2MwBZerSIk
- geGKYMynegPFhi07fms0BomR602ZbHfiP8xtu3BWpIKrkBu2MuLftHbGeQS1bkt5yGqP
- CTb66PTiQlwA5lBYS+I6iCyhkhfW3K/JLjB4uB9Bb/gMpJMxZzb/2R3u9rSpq0Y9pGzL
- Dh29Kp5S2KLTs76xrWysK7UKv7izTunNoyyNmkSfKjGJOY56qbdxu0y+WoseieecrV4K
- 7PNw==
-X-Gm-Message-State: AOJu0YwVbVNquQObBSCpj7/QclnuvINCHRF9q3OfefwsS07t+k//LfYj
- 2IOItRN3xnzpPOIFH6ynctGwvHgi1UjYMscCFY6tIYgzSKOoATx1MnEpxJ6ybZZHApsjxnjMVMA
+ bh=PMDeghO/Y6K45EmdAp4dwoHR9L9HRTg6eyWhSMrrDKY=;
+ b=E7OT+ZVzgO1xkXapbVyxVaUBOUn0c80ASIPmjj+nTt75CHjjeRE+OQh0NUwCzz6/ds
+ AezRVl8K3Pd8Y0yhBFn5eShX3bHmQ3RiUN25ORBwYJImdE/zGS4W34hY/fARfa/FHs9g
+ c7kYd1nvVh7olzt7DOKTJadDNCMItiOPLKbi8CovQffyRpHFRqyh9TgyJdpeszwb4ZtQ
+ PoIvjfm/E7nqmfzmLtwPmWr5GAIIyOqnngnqzwrifmq6EL9WjaQy7VLNjCRQVS6iX8O5
+ 8x0ZX4+Z1YHku9bNjcGMup14zdT4nI4pfafLOARHwzALPHeag15VSCxP6ERGjhSSYkSZ
+ 9cJA==
+X-Gm-Message-State: AOJu0YwQSpVUeNL/rdYU0xXEKsUWUGE/lLyaBd3mvqeLo5EpNhLLfMc7
+ vB0UIZ5Pr6P9zsn+Fx76+ZCRoeyryAbOV8ze/O8pIg3Fj7bczLYhHTd23MJNR6qBGziRdpQuBWM
  =
-X-Google-Smtp-Source: AGHT+IF/mgXITjSVPntEq+9l5d55WhXXhVYoUUF6AUEpqpfvoklS6wrAxFkxh2uNXjxeez1IRfezXQ==
-X-Received: by 2002:a05:600c:2248:b0:426:641f:25e2 with SMTP id
- 5b1f17b1804b1-426708f14d7mr97816775e9.25.1720854236461; 
- Sat, 13 Jul 2024 00:03:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFgFUgEz0A7u+UgC4lv2Vun4w31mWqFKSe+94ZaWXEJhvZS4n8xn6zFQA/7fww1dCWUz+az2A==
+X-Received: by 2002:a05:6512:688:b0:52c:df51:20bc with SMTP id
+ 2adb3069b0e04-52eb99942b2mr9242669e87.16.1720854237971; 
+ Sat, 13 Jul 2024 00:03:57 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427a5ef550asm9973165e9.46.2024.07.13.00.03.55
+ 5b1f17b1804b1-427a5ef550asm9973165e9.46.2024.07.13.00.03.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jul 2024 00:03:56 -0700 (PDT)
+ Sat, 13 Jul 2024 00:03:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Simon Glass <sjg@chromium.org>,
- Joshua Watt <jpewhacker@gmail.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 17/21] sandbox_vpl: Enable Universal Payload
-Date: Sat, 13 Jul 2024 08:00:51 +0100
-Message-Id: <20240713070055.2172883-18-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 19/21] sandbox: Add a flag to enable UPL
+Date: Sat, 13 Jul 2024 08:00:53 +0100
+Message-Id: <20240713070055.2172883-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240713070055.2172883-1-sjg@chromium.org>
 References: <20240713070055.2172883-1-sjg@chromium.org>
@@ -92,78 +90,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the sandbox_vpl build to test UPL since it supports a real devicetree
-in SPL. The sandbox_spl build uses OF_PLATDATA.
-
-Enable writing the UPL handoff in SPL and reading it in U-Boot proper.
-Provide a test to check that this handoff works.
-
-Note that the test uses the standard devicetree rather than the test one,
-since it is a lot smaller and fits in the existing bloblist.
+UPL significantly alters the boot flow for sandbox. Add a flag to enable
+this so that it can be enabled only on tests which need it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- configs/sandbox_vpl_defconfig |  4 ++++
- test/py/tests/test_upl.py     | 25 +++++++++++++++++++++++++
- 2 files changed, 29 insertions(+)
- create mode 100644 test/py/tests/test_upl.py
+ arch/sandbox/cpu/start.c         | 13 ++++++++++++-
+ arch/sandbox/include/asm/state.h |  1 +
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index 72483d8ba10..96e9211bd19 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -27,6 +27,9 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_FIT_BEST_MATCH=y
- CONFIG_SPL_LOAD_FIT=y
-+CONFIG_UPL=y
-+CONFIG_UPL_IN=y
-+CONFIG_SPL_UPL_OUT=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-@@ -35,6 +38,7 @@ CONFIG_BOOTSTAGE_STASH_SIZE=0x4096
- CONFIG_CONSOLE_RECORD=y
- CONFIG_CONSOLE_RECORD_OUT_SIZE=0x1000
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_BLOBLIST_SIZE=0x5000
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_HANDOFF=y
- CONFIG_SPL_BOARD_INIT=y
-diff --git a/test/py/tests/test_upl.py b/test/py/tests/test_upl.py
-new file mode 100644
-index 00000000000..171079f8dba
---- /dev/null
-+++ b/test/py/tests/test_upl.py
-@@ -0,0 +1,25 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2024 Google LLC
-+#
-+# Test addition of Universal Payload
+diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
+index 0920ed55965..9ad5d46271a 100644
+--- a/arch/sandbox/cpu/start.c
++++ b/arch/sandbox/cpu/start.c
+@@ -431,6 +431,14 @@ static int sandbox_cmdline_cb_autoboot_keyed(struct sandbox_state *state,
+ }
+ SANDBOX_CMDLINE_OPT(autoboot_keyed, 0, "Allow keyed autoboot");
+ 
++static int sandbox_cmdline_cb_upl(struct sandbox_state *state, const char *arg)
++{
++	state->upl = true;
 +
-+import os
++	return 0;
++}
++SANDBOX_CMDLINE_OPT(upl, 0, "Enable Universal Payload (UPL)");
 +
-+import pytest
-+import u_boot_utils
+ static void setup_ram_buf(struct sandbox_state *state)
+ {
+ 	/* Zero the RAM buffer if we didn't read it, to keep valgrind happy */
+@@ -540,6 +548,9 @@ int sandbox_main(int argc, char *argv[])
+ 			goto err;
+ 	}
+ 
++	if (state->upl)
++		gd->flags |= GD_FLG_UPL;
 +
-+@pytest.mark.boardspec('sandbox_vpl')
-+def test_upl_handoff(u_boot_console):
-+    cons = u_boot_console
-+    ram = os.path.join(cons.config.build_dir, 'ram.bin')
-+    fdt = os.path.join(cons.config.build_dir, 'u-boot.dtb')
-+
-+    # Remove any existing RAM file, so we don't have old data present
-+    if os.path.exists(ram):
-+        os.remove(ram)
-+    flags = ['-m', ram, '-d', fdt]
-+    cons.restart_uboot_with_flags(flags, use_dtb=False)
-+
-+    # Make sure that Universal Payload is detected in U-Boot proper
-+    output = cons.run_command('upl info')
-+    assert output == 'UPL state: active'
+ #if CONFIG_IS_ENABLED(SYS_MALLOC_F)
+ 	gd->malloc_base = CFG_MALLOC_F_ADDR;
+ #endif
+@@ -558,7 +569,7 @@ int sandbox_main(int argc, char *argv[])
+ 	log_debug("debug: %s\n", __func__);
+ 
+ 	/* Do pre- and post-relocation init */
+-	board_init_f(0);
++	board_init_f(gd->flags);
+ 
+ 	board_init_r(gd->new_gd, 0);
+ 
+diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
+index c84a1f7060f..6b50473ed41 100644
+--- a/arch/sandbox/include/asm/state.h
++++ b/arch/sandbox/include/asm/state.h
+@@ -97,6 +97,7 @@ struct sandbox_state {
+ 	bool autoboot_keyed;		/* Use keyed-autoboot feature */
+ 	bool disable_eth;		/* Disable Ethernet devices */
+ 	bool disable_sf_bootdevs;	/* Don't bind SPI flash bootdevs */
++	bool upl;			/* Enable Universal Payload (UPL) */
+ 
+ 	/* Pointer to information for each SPI bus/cs */
+ 	struct sandbox_spi_info spi[CONFIG_SANDBOX_SPI_MAX_BUS]
 -- 
 2.34.1
 
