@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C86DC3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6A3EC3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:23:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5779F88846;
+	by phobos.denx.de (Postfix) with ESMTP id B0F8988868;
 	Sat, 13 Jul 2024 15:21:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MB1TE7M6";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Dy/be0WP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WHFPW5Ut";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jIGlNURX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B29388868; Sat, 13 Jul 2024 15:21:21 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 878CC887E3; Sat, 13 Jul 2024 15:21:22 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C3948884F
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A20B888855
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,47 +31,47 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4WLpy722VZz9sq7;
- Sat, 13 Jul 2024 15:21:19 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WLpy82P8Bz9sTd;
+ Sat, 13 Jul 2024 15:21:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876879;
+ s=mail20150812; t=1720876880;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=60Pgtm0sbTCVUfiItHfK2ZOTaoYiOaNn/g7Tq3xw718=;
- b=MB1TE7M63vDbeJMXB1SBep94Ua8uGD6z+nZLi95X1GahbmsQ1chAxNHLcckqQ6P39e+DyD
- +sTeL8zA6/9/fw7CI3ZeiD67U8cnUU6kAg/Tp3EFnieFAY8YIO60doIfFlYdFGwZ7dPMDK
- gzEyqggKn6AlmnvZ46de2ztYnrrul2A6+p0ra6Yco9bhcOqK8mYNncl927z4yVv9r3TSjr
- Pm4pR/BaMwLPEMXPaBPNIZoz/o9QGlkcviFbVS4ZzXJ8XZZnmlf9mWkKhiGI5M1PXeMt4Y
- wb7gVF5Y2Z05ik9MwfzqQQs+tQruQfI5zT0Jnl7BclRLbcaR9b0qKHIfRRdOng==
+ bh=CJkhoHQVFfc03jBM7zbecF703jq91UXrYe9IaLc2/p8=;
+ b=WHFPW5UtMF4fdrC3fXXcCsOLt5kcJSXG8zevECvbXW5zr8sC+piIxsdSczAyJ0tYX2Bnw6
+ 6nRPnwDsKBLywhQ889LR9U3XcdOGeMgVE+GiXT04qjUrt6oL/S1OuCWBFjhmEOTQNPssKA
+ NfVngRKg/GyMweaTmGE+FRYI83zntoUt9IzyYf88nL6dKdtx/ixb9id2BzzWV7EfEHJiF8
+ wsHTzLQeM1HeX9gBsNochStnOSkB4W4PbJb8NbHn8kgrvhGgn3YKHtCkW0rw05IA/Dh3eu
+ c6FV6jE63NM56GnCVxgVxAVDEjltIHu0hWNu5cm8UdrqmgvkCAN9Il2V/++sYw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876877;
+ s=mail20150812; t=1720876878;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=60Pgtm0sbTCVUfiItHfK2ZOTaoYiOaNn/g7Tq3xw718=;
- b=Dy/be0WPCkyRQcsS1fnif9tIn2iTLL7FToJvkH8YbprIyfEqcZXXNNEmAmFtnf6LhzXW17
- UxxOx2kGJhUofChquXj8OdNCkyf/w/acFcbOZ5J8SS250Pz4GItpz9P5ISLZsJm95bf7Y7
- zYk/WqGtHYxVDz/BBaZfhCFTZjM1RysvfcTdc7szNQYuGd/6ZsPstCa371AZcRf+LQzcTs
- 42HiQg7Cv4Vbn8MKHh83u3lznIs1vpSfvxSEqdLFMXNdBIo81orBmRyza5OkJcc1C5PIsq
- EpI3uuHaXI0ETVosvbmbSejqtsxLd5sasgoXuu4zCHybkyprM/FaRyO221ytYA==
+ bh=CJkhoHQVFfc03jBM7zbecF703jq91UXrYe9IaLc2/p8=;
+ b=jIGlNURXLGrOq8ffbbHeNkB/Mhst0BMDatPvK7ywnIehgc1VSedhYHoxEiEvWC11h+qMsB
+ L7+qKhM46P1UCdiofAn5POTfSGnPXZmSH2L7s0xxvAm4BEMFi+Qigp+Hu3cv3/l/JMvc/8
+ bG35s3ck/gU7ZtER6+YMWZV/5sLEXfAOHlJuweIi1/1ZIxEVLyVSc68OIKa4uHC9f51FSd
+ jIbGJD3oIoQeenrP+XORGIm3fk5nm7PZgBtzBTQNHT7CSEwQdtHA7u5aUFGDA0W67bde/i
+ rhYZCNXyq+3AtHyPQEj43igjJhmlsnlf4iXWTBd0Xn9sgTvwqQC7sEM/Q+RFsw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/45] arm: include: sunxi: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:03 +0200
-Message-ID: <20240713132021.57650-12-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 13/45] arm: include: tegra: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:04 +0200
+Message-ID: <20240713132021.57650-13-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: fa484bbf862b51786b2
-X-MBO-RS-META: 7us7y77zbsjzfsaf1j7rxfdpx6m14131
+X-MBO-RS-ID: 917739ce4ea3b1b97fa
+X-MBO-RS-META: 3cwgyyzh8su454uruq7w9jn8a7kt3ff5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,89 +98,63 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h | 2 --
- arch/arm/include/asm/arch-sunxi/clock_sun9i.h      | 1 -
- arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h   | 1 -
- arch/arm/include/asm/arch-sunxi/dram_sun8i_a83t.h  | 1 -
- arch/arm/include/asm/arch-sunxi/dram_sun9i.h       | 2 --
- 5 files changed, 7 deletions(-)
+ arch/arm/include/asm/arch-tegra/bpmp_abi.h | 3 ---
+ arch/arm/include/asm/arch-tegra/clock.h    | 1 -
+ arch/arm/include/asm/arch-tegra/warmboot.h | 1 -
+ 3 files changed, 5 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
-index 14df3cc8f46..35ca0491ac9 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
-@@ -262,7 +262,6 @@ struct sunxi_ccm_reg {
- #define CCM_DRAM_GATE_OFFSET_DE_BE0	26
- #define CCM_DRAM_GATE_OFFSET_DE_BE1	27
+diff --git a/arch/arm/include/asm/arch-tegra/bpmp_abi.h b/arch/arm/include/asm/arch-tegra/bpmp_abi.h
+index 373da526ed6..924361bab8d 100644
+--- a/arch/arm/include/asm/arch-tegra/bpmp_abi.h
++++ b/arch/arm/include/asm/arch-tegra/bpmp_abi.h
+@@ -29,7 +29,6 @@
+  * @file
+  */
  
 -
- #define MBUS_CLK_DEFAULT		0x81000002 /* PLL6 / 2 */
- 
- #define MBUS_CLK_GATE			(0x1 << 31)
-@@ -295,7 +294,6 @@ struct sunxi_ccm_reg {
- #define APB2_RESET_TWI_SHIFT		(0)
- #define APB2_RESET_TWI_MASK		(0xf << APB2_RESET_TWI_SHIFT)
- 
--
- #ifndef __ASSEMBLY__
- void clock_set_pll1(unsigned int hz);
- void clock_set_pll5(unsigned int clk);
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
-index 0264bfe1c50..006f7761fc6 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
-@@ -217,7 +217,6 @@ struct sunxi_ccm_reg {
- #define APB1_RESET_TWI_SHIFT		0
- #define APB1_RESET_TWI_MASK		(0xf << APB1_RESET_TWI_SHIFT)
+ /**
+  * @defgroup MRQ MRQ Messages
+  * @brief Messages sent to/from BPMP via IPC
+@@ -167,7 +166,6 @@ struct mrq_response {
+  * @}
+  */
  
 -
- #ifndef __ASSEMBLY__
- void clock_set_pll1(unsigned int clk);
- void clock_set_pll6(unsigned int clk);
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
-index be02655cdd5..f0caecc807d 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
-@@ -323,7 +323,6 @@ struct dram_para {
- 	const u8 dx_write_delays[NR_OF_BYTE_LANES][WR_LINES_PER_BYTE_LANE];
+ /**
+  * @ingroup MRQ_Codes
+  * @def MRQ_PING
+@@ -616,7 +614,6 @@ struct mrq_debugfs_response {
+ #define DEBUGFS_S_IWUSR	(1 << 7)
+ /** @} */
+ 
+-
+ /**
+  * @ingroup MRQ_Codes
+  * @def MRQ_RESET
+diff --git a/arch/arm/include/asm/arch-tegra/clock.h b/arch/arm/include/asm/arch-tegra/clock.h
+index 61ef81e7fe4..2957b97e6a5 100644
+--- a/arch/arm/include/asm/arch-tegra/clock.h
++++ b/arch/arm/include/asm/arch-tegra/clock.h
+@@ -130,7 +130,6 @@ void reset_periph(enum periph_id periph_id, int us_delay);
+  */
+ void reset_set_enable(enum periph_id periph_id, int enable);
+ 
+-
+ /* CLK_RST_CONTROLLER_RST_CPU_CMPLX_SET/CLR_0 */
+ enum crc_reset_id {
+ 	/* Things we can hold in reset for each CPU */
+diff --git a/arch/arm/include/asm/arch-tegra/warmboot.h b/arch/arm/include/asm/arch-tegra/warmboot.h
+index bfde4c30ac0..9a53456370f 100644
+--- a/arch/arm/include/asm/arch-tegra/warmboot.h
++++ b/arch/arm/include/asm/arch-tegra/warmboot.h
+@@ -117,7 +117,6 @@ union scratch3_reg {
+ 	u32 word;
  };
  
 -
- static inline int ns_to_t(int nanoseconds)
- {
- 	const unsigned int ctrl_freq = CONFIG_DRAM_CLK / 2;
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun8i_a83t.h b/arch/arm/include/asm/arch-sunxi/dram_sun8i_a83t.h
-index 2a879963547..28b6560ff5b 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun8i_a83t.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun8i_a83t.h
-@@ -146,7 +146,6 @@ struct sunxi_mctl_ctl_reg {
- 	u32 perfwr1;		/* 0x1d8 */
- };
- 
--
- #define ZQnPR(x)	(SUNXI_DRAM_CTL0_BASE + 0x00000144 + 0x10 * x)
- #define ZQnDR(x)	(SUNXI_DRAM_CTL0_BASE + 0x00000148 + 0x10 * x)
- #define ZQnSR(x)	(SUNXI_DRAM_CTL0_BASE + 0x0000014c + 0x10 * x)
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun9i.h b/arch/arm/include/asm/arch-sunxi/dram_sun9i.h
-index 41df5fe5b6f..a77daecb107 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun9i.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun9i.h
-@@ -40,7 +40,6 @@ struct sunxi_mctl_com_reg {
- 	u32 mdfstcr;		/* 0x14c */
- };
- 
--
- struct sunxi_mctl_ctl_reg {
- 	u32 mstr;		/* 0x00 master register */
- 	u32 stat;		/* 0x04 operating mode status register */
-@@ -92,7 +91,6 @@ struct sunxi_mctl_ctl_reg {
- 	u32 perfwr1;		/* 0x26c write CAM register 1 */
- };
- 
--
- struct sunxi_mctl_phy_reg {
- 	u8 res0[0x04];		/* 0x00 revision id ??? */
- 	u32 pir;		/* 0x04 PHY initialisation register */
+ /**
+  * Save warmboot memory settings for a later resume
+  *
 -- 
 2.43.0
 
