@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DEF7C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D033AC3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 381148882F;
-	Sat, 13 Jul 2024 09:03:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C391388804;
+	Sat, 13 Jul 2024 09:03:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jJChLC7q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hoM2fWA8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27FCA88817; Sat, 13 Jul 2024 09:03:51 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id CE9F18855E; Sat, 13 Jul 2024 09:03:52 +0200 (CEST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D2D088789
+ by phobos.denx.de (Postfix) with ESMTPS id EE31E88806
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 09:03:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2ebe40673e8so36985491fa.3
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2eebc76119aso30397531fa.2
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 00:03:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720854228; x=1721459028; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720854229; x=1721459029; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K4BSLL7mbwg4IHPX70BZtmCNRkg7h78Ln46WjA9w3BQ=;
- b=jJChLC7qS89wrkwgK2uUO5XOW+ZHnybQXcrfAYDNVv7OS7Maa0neg/xHF0uub6bWqa
- suCBAM9r20IWb9V2PqU2hJUiotCXLIVtrfEyAf7gTnjUg+O9firsYv6VCVfhvxsVPTW7
- JPKD5eD+qysjogKL8704NqildX8ZsZsfcIRs8=
+ bh=spZHfR6nUyJdkwY/1j0TIIYOp3ly9C8+WGByeLEyfm4=;
+ b=hoM2fWA8OZ3Z/pe4BFppgv+TzPBfp5sMp93adRZz+LlbMEBKnTpBPk0l5Jp/o7gLf3
+ 0EzKzVis6FCkqn35MktgaM60SSUbhiE7WBQ5ic34imLc3abVhTgHlOixLMztQPuUJ/Gi
+ ek6FimMKqVz9z0m60goNtKinrxiMFj95r8tMI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720854228; x=1721459028;
+ d=1e100.net; s=20230601; t=1720854229; x=1721459029;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K4BSLL7mbwg4IHPX70BZtmCNRkg7h78Ln46WjA9w3BQ=;
- b=K7K0gpBZ7BHwmH+ioApQFneX641bN7iyyKVo0PBhPB3I2Clkh54qHUxdR4qfWbUDId
- yDktT5YO8zqvQRpu1nXjt41xmLC3nDOtOlVsGj3s3zFhv1CXuXBdK2wILSDWVIPWB8wr
- Ep5+L04weuHvijmFCQZhIKAusnV0inlyy9wESPQKyYY8C2+fSrzmAKrbzVTbEgkQlj4I
- IoFiTxaQwdft5ILPi4OaRoP5gi6DzqRbNPWZxFbBywe+e0+uCUaPWBY4H0I36CDiXQMn
- S0ChxCEUSJNGf17elIG/HDTcxOJ1GXzdRNndYjSvAMzHQNE/gjLAWrOlI0cdorwoRJw7
- 7fRw==
-X-Gm-Message-State: AOJu0Yx9jz5HfVshAGr85nexXWGrUJSUbbvl/6ancODOvf5NZn1HWHbp
- 1ozZJ+6rk9K2FCJUvHVOH58RZELKLZhH138kVjsPtL9AGBxes4tMyn68UMFRSARCk2LhfNoDyik
+ bh=spZHfR6nUyJdkwY/1j0TIIYOp3ly9C8+WGByeLEyfm4=;
+ b=M11uvfqE+E2HXfFu4DwPWw6QbIJLJiUpij8D8QZy5o3bqHFjtFeccBI1QWnFzLTQkN
+ NVMrI4xLg4fEBm2O697JHvM9xiqEhD2zw+fZ7A2380rEC/48RiDiL0sbsgHVu/kSfNwO
+ JRWkVK/HZOZjZrTm0bX4NFUql3XfB6ghkGQYKpCRhdDtrIaxaDRaO+nFobb5jqUJDxuc
+ DbD23R1sr34R0B9wHv0yYZPWghxYKUDQP9o8uPKrZ/hPEBZfbCwx3Y2w+LpyIi4CMSnb
+ qfvZ9Mg3Axb/5q9OKQAz5FTlrOMjpJQJEIsGvObUvkTFScmRARpE4maDgmcghOi/icmA
+ tMTg==
+X-Gm-Message-State: AOJu0YxXJHAd1AHezp2jh0xV13Pav+LzeTRP3nvLLYC6ePQ/asLcdN7G
+ VFOvR66lTRZ5htQREKVGI+QJ4yI90++g4YOWW0R6LBM04jgmTlD0zJHdtYDm6t4+cgCyFw+3h/c
  =
-X-Google-Smtp-Source: AGHT+IHi+l6ZUvxeacxZOVdpaQKjCHyqD76UCV8BV/EkyHzAZl/SvStqB1qTY7Y3Urh4aqSTMuiBPA==
-X-Received: by 2002:a05:6512:3b82:b0:52c:dba6:b4cb with SMTP id
- 2adb3069b0e04-52eb9990f7cmr8950292e87.13.1720854228111; 
- Sat, 13 Jul 2024 00:03:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFr51Kk1JQtaFYsGWMH7K2lu2jYQH+XCFdEMbcJ3SWSojjbryJlqZkK/p6HROe7aqBb8wFq7g==
+X-Received: by 2002:a05:6512:39c7:b0:52c:d8c7:49ce with SMTP id
+ 2adb3069b0e04-52eb9991682mr10362860e87.22.1720854229044; 
+ Sat, 13 Jul 2024 00:03:49 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427a5ef550asm9973165e9.46.2024.07.13.00.03.47
+ 5b1f17b1804b1-427a5ef550asm9973165e9.46.2024.07.13.00.03.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jul 2024 00:03:47 -0700 (PDT)
+ Sat, 13 Jul 2024 00:03:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Simon Glass <sjg@chromium.org>,
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 08/21] sandbox: Add ELF file to VPL u-boot.img
-Date: Sat, 13 Jul 2024 08:00:42 +0100
-Message-Id: <20240713070055.2172883-9-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 09/21] sandbox: Set up global_data earlier
+Date: Sat, 13 Jul 2024 08:00:43 +0100
+Message-Id: <20240713070055.2172883-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240713070055.2172883-1-sjg@chromium.org>
 References: <20240713070055.2172883-1-sjg@chromium.org>
@@ -94,39 +90,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present sandbox builds package up u-boot.bin in the .img file. This
-cannot actually be executed, since it is not an ELF file.
+It is possible for U-Boot functions such as printf() to be called
+within state_init(). This can end up checking gd->flags (e.g. in putc())
+before global_data is set up.
 
-For sandbox_vpl we want to be able to run the full boot flow.
-
-Adjust the build rule for sandbox_vpl to package the ELF file and
-thereby allow full testing of the sandbox transition from SPL to U-Boot
-proper.
+Move the setup earlier to avoid this. This fixes the suppression of some
+debug output in memory allocation (when enabled).
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- Makefile | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ arch/sandbox/cpu/start.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index f5b2512f369..f364cd31ade 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1470,8 +1470,10 @@ u-boot.bin.lzma: u-boot.bin FORCE
- u-boot-lzma.img: u-boot.bin.lzma FORCE
- 	$(call if_changed,mkimage)
+diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
+index dce80416529..0920ed55965 100644
+--- a/arch/sandbox/cpu/start.c
++++ b/arch/sandbox/cpu/start.c
+@@ -483,6 +483,9 @@ int sandbox_main(int argc, char *argv[])
  
-+fit_image := $(if $(CONFIG_SANDBOX_VPL),u-boot,u-boot-nodtb.bin)
+ 	text_base = os_find_text_base();
+ 
++	memset(&data, '\0', sizeof(data));
++	gd = &data;
 +
- u-boot-dtb.img u-boot.img u-boot.kwb u-boot.pbl u-boot-ivt.img: \
--		$(if $(CONFIG_SPL_LOAD_FIT),u-boot-nodtb.bin \
-+		$(if $(CONFIG_SPL_LOAD_FIT),$(fit_image) \
- 			$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_SANDBOX),dts/dt.dtb) \
- 		,$(UBOOT_BIN)) FORCE
- 	$(call if_changed,mkimage)
+ 	/*
+ 	 * This must be the first invocation of os_malloc() to have
+ 	 * state->ram_buf in the low 4 GiB.
+@@ -501,8 +504,6 @@ int sandbox_main(int argc, char *argv[])
+ 		os_exit(1);
+ 	memcpy(os_argv, argv, size);
+ 
+-	memset(&data, '\0', sizeof(data));
+-	gd = &data;
+ 	gd->arch.text_base = text_base;
+ 
+ 	state = state_get_current();
 -- 
 2.34.1
 
