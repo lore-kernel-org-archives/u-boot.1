@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D3BC3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA73DC3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 13:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1377A888D7;
+	by phobos.denx.de (Postfix) with ESMTP id 6BEE488906;
 	Sat, 13 Jul 2024 15:21:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wUamKQjg";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mHkJnGf2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xQftN/2h";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aVTJQXq9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E774888CC; Sat, 13 Jul 2024 15:21:45 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id A3FA8888F6; Sat, 13 Jul 2024 15:21:46 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 923B4888D7
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC39F888C8
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 15:21:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4WLpyb33dRz9sV1;
- Sat, 13 Jul 2024 15:21:43 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WLpyc4MkCz9sTd;
+ Sat, 13 Jul 2024 15:21:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876903;
+ s=mail20150812; t=1720876904;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iUKa/ToD7aswAS04hiDdk5wWGXcf002Rtbe/IAsK2FY=;
- b=wUamKQjg5x9sje9eC9IE62TdkVUk/cCkP0ssgZf0qDayVQQKvpr7z7XYR6jkxpinXzx+B5
- siinEREyJRn+lJrTWdCRh+AvX97D+JVr/YQpDWeEX5DiIBu7U7i1robcB6/k8LPMg71Smb
- Fzu56DKXHvuNlllmU9M6yY5QZyFeXu1ZVDjwhjp/dpwIYFFXBL0aW7HAOFzTPdp30YEG/g
- UDBioESeFXMZGz0fpEGVfpE5UtkTxcZVhVoelSlK37OLJ0/TFaNtNV2zMhF1VVwNIrmSr/
- PwEIiYBUqRMNQ7dlui3TZwUmqrV1lF6zX6Nw5DBf0+ZQyXa7a0JY9MSFRGN0rA==
+ bh=RjGUCiVk+CREnzxPEmzEqCxWnZX9yv6LpTQAM+yE3As=;
+ b=xQftN/2hqSRmBN4rASLUAWGNHL5CwD2wpMsfW3m+e2Ip9BQ1r7XlDKAcOJNsZtD+C1XYYz
+ xCf2h5i9SwoNxYqQqJTAiNTjVwXY/vPXo+B4+ATkhWiYHrvhTJJNOGiaTJSF33NaVVV9Z+
+ lBiG3Uyp4eIAefsWWyHdwl2uSohr69NSNAcxut19dHa2nL4IXR3+5ti4ag47kN8KGhKuDW
+ g8szDPnZXMb3lw4OFbrmNrdnPGHuq3wxOhKh3wuVtmGk8NKeq+JU6eB2FW+e8NQ9e/wO8d
+ rhb4kjhIpdvByxPBSWV1WXQsSCR9xQi/bJefv2C7RQx5dJc36PQHlGM+9Y206A==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1720876901;
+ s=mail20150812; t=1720876902;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iUKa/ToD7aswAS04hiDdk5wWGXcf002Rtbe/IAsK2FY=;
- b=mHkJnGf2SRu5+pqSvAk80C8cPdTNVoxGA962WTN7UFNT47gmn7NoRc3jfNOLXTVPSK0zuQ
- oiL6vQqGL7qcZkVowCG/NwTjsFM6/eNjetsZNFfFWFqXqLBeTrym7ol8JwZQnCJF/yYl1Y
- oJo1MKwcEHVBbGGdoWRwTkoc9hVse/736HPb9bDxNrlf/iijBblV8TMNour8xPps8LYbup
- 2rp4T/Bxcx8yDrdwkdIK5rhENKP5W//XcUTnxc4wcVE7m7wTP0r+h8cwxaLwZYAE4DITkv
- L+2pCjQLbna4R9aTFiLN+4Pi/opA6nMZJ5VI0//9MqmTCdScyCQZfdfpwBAa1Q==
+ bh=RjGUCiVk+CREnzxPEmzEqCxWnZX9yv6LpTQAM+yE3As=;
+ b=aVTJQXq9VQIk72XjSkm0RkTba9tcs2mLPPVVPJaQ6EJzoMaOMfd59rufdPoblKS7TCPWr3
+ 6miysS2NFQ32ZVPapUEgGk1SBkJAfOyfOLPZokqre9YZpVZcsY5hPMamdmXoD+xTEQuzYO
+ J80THzi/OLuJ1XAi54A85LMKq8woObA5UFRSBVD08fBQITwQbyZsBcB3Kz+HfOrP1gO9UE
+ jBoVaIQFuc+xfnOCYvwjRHGg7G3FJBsncgn1P8KpRIuUL17/sCFjvtt1VrzbX7+oR3DThJ
+ 6NJrKeOWOAJRqQ/Eja3DqPELhUKcBaQeO7c3FeszdZ6c+MGGvQmuyoHHsW1Sdw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 34/45] mips: Remove duplicate newlines
-Date: Sat, 13 Jul 2024 15:19:25 +0200
-Message-ID: <20240713132021.57650-34-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 35/45] net: Remove duplicate newlines
+Date: Sat, 13 Jul 2024 15:19:26 +0200
+Message-ID: <20240713132021.57650-35-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2edc357aa80629c3d14
-X-MBO-RS-META: j4xon5qzetfb8u7eop7yzcrtoh3xgoao
-X-Rspamd-Queue-Id: 4WLpyb33dRz9sV1
+X-MBO-RS-ID: a1fab749c9e32d478d3
+X-MBO-RS-META: uq7z9cu4opykd9e4t88toctq7k3mensi
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,132 +98,107 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/mips/include/asm/io.h                  | 1 -
- arch/mips/include/asm/isa-rev.h             | 1 -
- arch/mips/include/asm/mipsregs.h            | 6 ------
- arch/mips/include/asm/pgtable-bits.h        | 2 --
- arch/mips/mach-ath79/qca953x/clk.c          | 1 -
- arch/mips/mach-octeon/include/mangle-port.h | 1 -
- 6 files changed, 12 deletions(-)
+ net/bootp.h | 1 -
+ net/dns.c   | 1 -
+ net/net.c   | 1 -
+ net/nfs.c   | 1 -
+ net/nfs.h   | 1 -
+ net/rarp.c  | 2 --
+ net/tftp.c  | 1 -
+ 7 files changed, 8 deletions(-)
 
-diff --git a/arch/mips/include/asm/io.h b/arch/mips/include/asm/io.h
-index 3774acaadc3..4acc439ccfb 100644
---- a/arch/mips/include/asm/io.h
-+++ b/arch/mips/include/asm/io.h
-@@ -485,7 +485,6 @@ BUILDSTRING(q, u64)
- #define outsq outsq
- #endif
+diff --git a/net/bootp.h b/net/bootp.h
+index 4e32b19d424..521d38f3528 100644
+--- a/net/bootp.h
++++ b/net/bootp.h
+@@ -65,7 +65,6 @@ struct bootp_hdr {
+ extern u32	bootp_id;		/* ID of cur BOOTP request	*/
+ extern int	bootp_try;
  
 -
- #ifdef CONFIG_CPU_CAVIUM_OCTEON
- #define mmiowb() wmb()
- #else
-diff --git a/arch/mips/include/asm/isa-rev.h b/arch/mips/include/asm/isa-rev.h
-index 683ea3454dc..8afa6aefc54 100644
---- a/arch/mips/include/asm/isa-rev.h
-+++ b/arch/mips/include/asm/isa-rev.h
-@@ -20,5 +20,4 @@
- #define MIPS_ISA_REV 0
- #endif
+ /* Send a BOOTP request */
+ void bootp_reset(void);
+ void bootp_request(void);
+diff --git a/net/dns.c b/net/dns.c
+index c2f0ab98c8d..08ad54a04d5 100644
+--- a/net/dns.c
++++ b/net/dns.c
+@@ -121,7 +121,6 @@ static void dns_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	char ip_str[22];
+ 	struct in_addr ip_addr;
  
 -
- #endif /* __MIPS_ASM_ISA_REV_H__ */
-diff --git a/arch/mips/include/asm/mipsregs.h b/arch/mips/include/asm/mipsregs.h
-index 3db3965fcff..d02b1e50bdf 100644
---- a/arch/mips/include/asm/mipsregs.h
-+++ b/arch/mips/include/asm/mipsregs.h
-@@ -125,7 +125,6 @@
+ 	debug("%s\n", __func__);
+ 	if (dest != dns_our_port)
+ 		return;
+diff --git a/net/net.c b/net/net.c
+index 23b5d3356af..d9bc9df643f 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -80,7 +80,6 @@
+  *	Next step:	none
   */
- #define CP0_TX39_CACHE	$7
  
 -
- /* Generic EntryLo bit definitions */
- #define ENTRYLO_G		(_ULCAST_(1) << 0)
- #define ENTRYLO_V		(_ULCAST_(1) << 1)
-@@ -987,7 +986,6 @@
- #define CP1_FENR	$28
- #define CP1_STATUS	$31
+ #include <bootstage.h>
+ #include <command.h>
+ #include <console.h>
+diff --git a/net/nfs.c b/net/nfs.c
+index acc7106f10d..537d4c62de2 100644
+--- a/net/nfs.c
++++ b/net/nfs.c
+@@ -913,7 +913,6 @@ static void nfs_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	}
+ }
  
 -
- /*
-  * Bits in the MIPS32/64 coprocessor 1 (FPU) revision register.
-  */
-@@ -1102,7 +1100,6 @@
- #define FPU_CSR_RU	0x2	/* towards +Infinity */
- #define FPU_CSR_RD	0x3	/* towards -Infinity */
+ void nfs_start(void)
+ {
+ 	debug("%s\n", __func__);
+diff --git a/net/nfs.h b/net/nfs.h
+index 68ada0efeb9..6bf1cb76bd5 100644
+--- a/net/nfs.h
++++ b/net/nfs.h
+@@ -81,7 +81,6 @@ struct rpc_t {
+ };
+ void nfs_start(void);	/* Begin NFS */
  
 -
- #ifndef __ASSEMBLY__
+ /**********************************************************************/
  
- /*
-@@ -1261,7 +1258,6 @@ static inline void tlbinvf(void)
- 		".set pop");
+ #endif /* __NFS_H__ */
+diff --git a/net/rarp.c b/net/rarp.c
+index a6b564e314d..a346e067cb9 100644
+--- a/net/rarp.c
++++ b/net/rarp.c
+@@ -45,7 +45,6 @@ void rarp_receive(struct ip_udp_hdr *ip, unsigned len)
+ 	}
  }
  
 -
  /*
-  * Functions to access the R10000 performance counters.	 These are basically
-  * mfc0 and mtc0 instructions from and to coprocessor register with a 5-bit
-@@ -1307,7 +1303,6 @@ do {								\
- 	: "r" (val), "i" (counter));				\
- } while (0)
- 
--
- /*
-  * Macros to access the system control coprocessor
+  *	Timeout on BOOTP request.
   */
-@@ -2403,7 +2398,6 @@ do {									\
- 	mfhi3;								\
- })
+@@ -60,7 +59,6 @@ static void rarp_timeout_handler(void)
+ 	}
+ }
  
 -
- #define mtlo0(x)							\
- ({									\
- 	__asm__(							\
-diff --git a/arch/mips/include/asm/pgtable-bits.h b/arch/mips/include/asm/pgtable-bits.h
-index 481d2ef6c2f..2dacdbbcdbe 100644
---- a/arch/mips/include/asm/pgtable-bits.h
-+++ b/arch/mips/include/asm/pgtable-bits.h
-@@ -7,7 +7,6 @@
- #ifndef _ASM_PGTABLE_BITS_H
- #define _ASM_PGTABLE_BITS_H
+ void rarp_request(void)
+ {
+ 	uchar *pkt;
+diff --git a/net/tftp.c b/net/tftp.c
+index 6b16bdcbe4c..65c39d7fb70 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -694,7 +694,6 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	}
+ }
  
 -
- /*
-  * Note that we shift the lower 32bits of each EntryLo[01] entry
-  * 6 bits to the left. That way we can convert the PFN into the
-@@ -189,7 +188,6 @@
-  *   32-bit, R2 or later:       CCC D V G RI/R XI M A W P
-  */
- 
--
- #ifndef __ASSEMBLY__
- /*
-  * pte_to_entrylo converts a page table entry (PTE) into a Mips
-diff --git a/arch/mips/mach-ath79/qca953x/clk.c b/arch/mips/mach-ath79/qca953x/clk.c
-index 379085f1ff7..e9a80c6f12f 100644
---- a/arch/mips/mach-ath79/qca953x/clk.c
-+++ b/arch/mips/mach-ath79/qca953x/clk.c
-@@ -61,7 +61,6 @@ int get_clocks(void)
- 			& QCA953X_PLL_CLK_CTRL_CPU_POST_DIV_MASK) + 1;
- 	gd->cpu_clk = pll / div;
- 
--
- 	val = readl(regs + QCA953X_PLL_DDR_CONFIG_REG);
- 	/* VCOOUT = XTAL * DIV_INT */
- 	div = (val >> QCA953X_PLL_DDR_CONFIG_REFDIV_SHIFT)
-diff --git a/arch/mips/mach-octeon/include/mangle-port.h b/arch/mips/mach-octeon/include/mangle-port.h
-index 7e95dcef5af..554bdc55cf2 100644
---- a/arch/mips/mach-octeon/include/mangle-port.h
-+++ b/arch/mips/mach-octeon/include/mangle-port.h
-@@ -43,7 +43,6 @@ static inline bool __should_swizzle_addr(u64 p)
- 
- #endif /* __BIG_ENDIAN */
- 
--
- # define ioswabb(a, x)		(x)
- # define __mem_ioswabb(a, x)	(x)
- # define ioswabw(a, x)		(__should_swizzle_bits(a) ? le16_to_cpu(x) : x)
+ static void tftp_timeout_handler(void)
+ {
+ 	if (++timeout_count > timeout_count_max) {
 -- 
 2.43.0
 
