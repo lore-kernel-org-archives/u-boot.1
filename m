@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2503C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B2BC3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:16:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCBE8888B3;
-	Sat, 13 Jul 2024 17:14:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 204F0888BE;
+	Sat, 13 Jul 2024 17:14:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T9seOslQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kjJWxviG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEB2B888AB; Sat, 13 Jul 2024 17:14:25 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id EA71F87E13; Sat, 13 Jul 2024 17:14:25 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F8A987E13
+ by phobos.denx.de (Postfix) with ESMTPS id B691D88831
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-78006198aeeso1845295a12.1
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2c964f5a037so2134843a91.0
  for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1720883662; x=1721488462; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5pV4G9e3zkwuKQv9CCTUTj0XHSLiJbex+QCqCPL81LY=;
- b=T9seOslQgIySsla0WzWaCZEv0hh+Lk/8TjfQSlsXUI4tVncwzk/Yi1ukWOXk1MJB7d
- 1qeNKK/fyx2f7G8fOg/Eu14d2WeJV8gA74OinOrR4USBnmBaTvOoAHurznfkrA85u7aC
- w/E5UJlYy8RcldnJ4luWMIiNqF1zMEugoL/eA=
+ bh=vZrjQ8hRvfO+5KfkMLopCCvcfkg7XDTs8HTA3Buim24=;
+ b=kjJWxviGUvW6uG9VredccFuiT6iFmUDZV5lKSbz/kBrNp+5bE66Z3xi0jH42oAtjf9
+ AFVVqb3c30b2YRTAuHgPA7e7+DxxWVGCtJDUmTWzWq2t6dBJCyRpIrKHgi8hKL7zjY2V
+ u3EulDO6pAAWTJsVGPhx+uNVA+wuA5ptBi4EQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1720883662; x=1721488462;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5pV4G9e3zkwuKQv9CCTUTj0XHSLiJbex+QCqCPL81LY=;
- b=u6nUHLV/uGw7SUPpKH0gz75iDwX1lCyDgJr7Lo+E+8Sc6BTjRsJdfGSR5hCwOp8pui
- cb4DtkFo+i1isy8hc5/8nt08HHDHRpOq3jx86y5sAknme/dN4sRAYPGNwNmHIUxhkw1T
- jSnb63qR7MjHtxXc5RYkrnow/CKixDF93M2GR0l7msIL4C6CSH64tBJP67kKHcv60zd9
- vW8DD1PKpZGjdNq0r9bun6a3qFaHO6zhzCkqpm561WXKePjVsfr+lXkk2l2qh/SaXZsT
- 7fcGguxszGTBuOsjNq8nrcNjz/yh8rlw93iPyFA4clwptTsUflVhBHHFvuyx0dztglhx
- 4Stg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVnFB5byuUWYdwZmzJvSAPVZbQZ4K7kfFZwJmyMzCd0Ctzpjd8LpCVnuTYb8eSFZb5zukiJS2L/fSaHsZSyAVPJeVmM2g==
-X-Gm-Message-State: AOJu0Yxjp0SmpCLmF+zJcuxYO6L0TQxX8SRwy6q1X94s5m3Izen3eW03
- qJ+5y58Y7/XL1/n34Z5Vsr7zpebJWiiPwWezVWPiYBOApkkYqWZUjeTNVY8q4nrSe2hodEXBKRh
- 8FxDgWdLf49r3bgt6CYNMbxsnMPx52OLBHajY
-X-Google-Smtp-Source: AGHT+IHX6xmZzs/cIk4c04SZMtTjF1+ZNhZJOudWqIA+n+5KGVY7WyAvJMlASCWGPAcqjPGEF0J7IWs2Kf7IuFhh364=
-X-Received: by 2002:a17:90a:de8f:b0:2c9:6abd:ca64 with SMTP id
- 98e67ed59e1d1-2caeea56f4emr2538764a91.9.1720883661645; Sat, 13 Jul 2024
- 08:14:21 -0700 (PDT)
+ bh=vZrjQ8hRvfO+5KfkMLopCCvcfkg7XDTs8HTA3Buim24=;
+ b=wyrYd5iECeiLFeWzEMZW6UgihlumwKolTTQYC+Z364fzk2RA86vkjQ5pxn9VxBk+xg
+ 75eBOlwWOHC9dkr23xAWYhtZmTvRU/MxYvoVJEbMTIqw8PGMiiFsY5AwIyMyAaMv7497
+ FbVVr9My6udAIUiJION2NlfOuaU0uqKDGXLQNaVLaDQnOwE4wUIe98KFvLZTcfjZnsMr
+ nrAM/PtCoMPnUZie4ZjtnatMYasAZsBpqDSq5dtymKg0McUg8KMd3TetytTt4/h5iIYT
+ Nxs+LtyqiE60m/dRUy4vk6VjkQsNW/422A4QxDRZZxNIqCKvOMv8RVrAEhUwmzDJPch1
+ TutA==
+X-Gm-Message-State: AOJu0YzTLWr2v/+OrK/pjxDhNWZDQHfcYHBZigkuJJwHZF0n33xBC3uy
+ Up7C8Zz7XDmaL22Tiw7bd/Apl4QYdNG6I93hn7FNmjcZWuinPK4XplZ4/hicB2YWbUmu8pnuWHT
+ BX3y+b7kYia1oMhyd/9IMrJPKjXv4FLu8CXML
+X-Google-Smtp-Source: AGHT+IGKRSvrAx8lGVmhJLUKu/NBpMQLJID5qW0Mu9t0NPLYpCtj9JHbvojaDB+JAeykOQm5KfsgOM16ZDzTmRM9CzU=
+X-Received: by 2002:a17:90a:17e4:b0:2c9:6928:ac9b with SMTP id
+ 98e67ed59e1d1-2ca35c27e18mr11850252a91.15.1720883662220; Sat, 13 Jul 2024
+ 08:14:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240710135320.2697805-1-yeoreum.yun@arm.com>
- <CAEfUkUJ0XVAQZ0pqQeOVEcHH_QZg+Dk5B0aMOVK6p+U4noU1pA@mail.gmail.com>
-In-Reply-To: <CAEfUkUJ0XVAQZ0pqQeOVEcHH_QZg+Dk5B0aMOVK6p+U4noU1pA@mail.gmail.com>
+References: <20240712081118.29189-1-richard@nod.at>
+In-Reply-To: <20240712081118.29189-1-richard@nod.at>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:13:49 +0100
-Message-ID: <CAFLszThm7SBv7puZbAJWj9_yokOZ5N7cQMbku45uJ0FSVck6kA@mail.gmail.com>
-Subject: Re: [PATCH v4] bloblist: fix bloblist convention check.
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Levi Yun <yeoreum.yun@arm.com>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, 
- bmeng.cn@gmail.com, nd@arm.com, u-boot@lists.denx.de
+Date: Sat, 13 Jul 2024 16:13:50 +0100
+Message-ID: <CAFLszTg-bqTTv2NtVC-3m2O2nw+9eczcM9_wn41u6XMcujqNEQ@mail.gmail.com>
+Subject: Re: [PATCH] reloc_bootstage: Fix out-of-bounds read
+To: Richard Weinberger <richard@nod.at>
+Cc: u-boot@lists.denx.de, patrick.delaunay@foss.st.com, 
+ yangshiji66@outlook.com, raymond.mao@linaro.org, n-jain1@ti.com, 
+ eugeneuriev@gmail.com, ilias.apalodimas@linaro.org, devarsht@ti.com, 
+ bmeng.cn@gmail.com, trini@konsulko.com, upstream+uboot@sigma-star.at
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,117 +84,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Jul 2024 at 17:46, Raymond Mao <raymond.mao@linaro.org> wrote:
+Hi Richard,
+
+On Fri, 12 Jul 2024 at 09:11, Richard Weinberger <richard@nod.at> wrote:
 >
-> Hi Levi,
+> bootstage_get_size() returns the total size of the data structure
+> including associated records.
+> When copying from gd->bootstage, only the allocation size of gd->bootstage
+> must be used. Otherwise too much memory is copied.
 >
-> On Wed, 10 Jul 2024 at 09:53, Levi Yun <yeoreum.yun@arm.com> wrote:
->>
->> According to recently firmware handsoff spec [1]'s "Register usage at handoff
->> boundary", Transfer List's signature value was changed from 0x40_b10b
->> (3 bytes) to 4a0f_b10b (4 bytes).
->>
->> As updating of TL's signature, register value of x1/r1 should be:
->>
->> In aarch32's r1 value should be
->>     R1[23:0]: set to the TL signature (4a0f_b10b -> masked range value: 0f_b10b)
->>     R1[31:24]: version of the register convention ==  1
->>
->> and
->>
->> In aarch64's x1 value should be
->>     X1[31:0]: set to the TL signature (4a0f_b10b)
->>     X1[39:32]: version of the register convention ==  1
->>     X1[63:40]: MBZ
->> (See the [2] and [3]).
->>
->> This patch fix problems:
->>    1. breaking X1 value with updated specification in aarch64
->>         - change of length of signature field.
->>
->>    2. previous error value set in R1 in arm32.
->>         - length of signature should be 24, but it uses 32bit signature.
->>
->> This patch is a breaking change. It works only TF-A is updated.
->>
->> Link: https://github.com/FirmwareHandoff/firmware_handoff [1]
->> Link: https://github.com/FirmwareHandoff/firmware_handoff/issues/32 [2]
->> Link: https://github.com/FirmwareHandoff/firmware_handoff/commit/5aa7aa1d3a1db75213e458d392b751f0707de027 [3]
->> Signed-off-by: Levi Yun <yeoreum.yun@arm.com>
->> ---
->> v4:
->>   - Remove FIXME tags on xfterlist.h
->>   - Modify commit message
->>
->> v3:
->>   - Restore arch/arm/lib/xferlist.c
->>
->> v2:
->>   - Modify commit message
->>   - Remove wrong swaping check in xferlist_from_boot_arg()
->>
->>  common/bloblist.c  | 11 ++++++++++-
->>  include/bloblist.h | 10 ++++------
->>  2 files changed, 14 insertions(+), 7 deletions(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
->>
->> diff --git a/common/bloblist.c b/common/bloblist.c
->> index 11d6422b69..2008ab4d25 100644
->> --- a/common/bloblist.c
->> +++ b/common/bloblist.c
->> @@ -576,7 +576,16 @@ int bloblist_maybe_init(void)
->>
->>  int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
->>  {
->> -       if (rzero || rsig != (BLOBLIST_MAGIC | BLOBLIST_REGCONV_VER) ||
->> +       ulong version = BLOBLIST_REGCONV_VER;
->> +       ulong sigval;
->> +
->> +       sigval = (IS_ENABLED(CONFIG_64BIT)) ?
->> +                       ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
->> +                        ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64)) :
->> +                       ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
->> +                        ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
->> +
->> +       if (rzero || rsig != sigval ||
->>             rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
-
-I'd argue that this is unnecessary, since the point of passing fdt in
-a register is to avoid having to search the bloblist for it.
-
->>                 gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
->>                 return -EIO;
->> diff --git a/include/bloblist.h b/include/bloblist.h
->> index 7fbdd622bc..b0706b5637 100644
->> --- a/include/bloblist.h
->> +++ b/include/bloblist.h
->> @@ -78,12 +78,10 @@ enum {
->>         BLOBLIST_VERSION        = 1,
->>         BLOBLIST_MAGIC          = 0x4a0fb10b,
->>
->> -       /*
->> -        * FIXME:
->> -        * Register convention version should be placed into a higher byte
->> -        * https://github.com/FirmwareHandoff/firmware_handoff/issues/32
->> -        */
->> -       BLOBLIST_REGCONV_VER    = 1 << 24,
->> +       BLOBLIST_REGCONV_SHIFT_64 = 32,
->> +       BLOBLIST_REGCONV_SHIFT_32 = 24,
->> +       BLOBLIST_REGCONV_MASK = 0xff,
->> +       BLOBLIST_REGCONV_VER = 1,
->>
->>         BLOBLIST_BLOB_ALIGN_LOG2 = 3,
->>         BLOBLIST_BLOB_ALIGN      = 1 << BLOBLIST_BLOB_ALIGN_LOG2,
->> --
->> LEVI:{C3F47F37-75D8-414A-A8BA-3980EC8A46D7}
->>
-> Feel free to add tag:
-> Reviewed-by: Raymond Mao <raymond.mao@linaro.org>
+> This bug caused no harm so far because gd->new_bootstage is always
+> large enough and reading beyond the allocation length of gd->bootstage
+> caused no problem due to the U-Boot memory layout.
 >
-> Regards,
-> Raymond
+> Fix by using the correct size and perform the initial copy directly
+> in bootstage_relocate() to have the whole relocation process in the
+> same function.
+
+Nice commit message.
+
+Can you use 'bootstage' as the commit tag?
+
+>
+> Signed-off-by: Richard Weinberger <richard@nod.at>
+> ---
+>  common/board_f.c   | 6 ------
+>  common/bootstage.c | 7 ++++++-
+>  2 files changed, 6 insertions(+), 7 deletions(-)
+>
+> diff --git a/common/board_f.c b/common/board_f.c
+> index 039d6d712d..f4d87692b9 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -683,12 +683,6 @@ static int reloc_bootstage(void)
+>         if (gd->flags & GD_FLG_SKIP_RELOC)
+>                 return 0;
+>         if (gd->new_bootstage) {
+> -               int size = bootstage_get_size();
+> -
+> -               debug("Copying bootstage from %p to %p, size %x\n",
+> -                     gd->bootstage, gd->new_bootstage, size);
+> -               memcpy(gd->new_bootstage, gd->bootstage, size);
+> -               gd->bootstage = gd->new_bootstage;
+>                 bootstage_relocate();
+>         }
+>  #endif
+> diff --git a/common/bootstage.c b/common/bootstage.c
+> index 0e6d80718f..aea5a318df 100644
+> --- a/common/bootstage.c
+> +++ b/common/bootstage.c
+> @@ -58,10 +58,15 @@ struct bootstage_hdr {
+>
+>  int bootstage_relocate(void)
+>  {
+> -       struct bootstage_data *data = gd->bootstage;
+> +       struct bootstage_data *data;
+>         int i;
+>         char *ptr;
+>
+> +       debug("Copying bootstage from %p to %p\n", gd->bootstage,
+> +             gd->new_bootstage);
+> +       memcpy(gd->new_bootstage, gd->bootstage, sizeof(struct bootstage_data));
+
+I would like to have the relocation addresses in board_f like with
+other relocations, so it is easy to see what is happening, in one
+file. So how about passing the old address to bootstage_relocate() so
+it doesn't need to access gd->new_bootstage ?
+
+> +       data = gd->bootstage = gd->new_bootstage;
+> +
+>         /* Figure out where to relocate the strings to */
+>         ptr = (char *)(data + 1);
+>
+> --
+> 2.35.3
 >
 
 Regards,
