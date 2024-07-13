@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74BD7C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:15:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE1BC3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:15:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEE4088804;
-	Sat, 13 Jul 2024 17:14:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65BC188856;
+	Sat, 13 Jul 2024 17:14:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bXceaOcC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oSI0DLeg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E0C187E13; Sat, 13 Jul 2024 17:14:08 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 4C7508889A; Sat, 13 Jul 2024 17:14:14 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C7F488804
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6725588831
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:14:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-77d3f00778cso2204262a12.3
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:05 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2c9785517c0so2191490a91.0
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:14:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720883644; x=1721488444; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720883649; x=1721488449; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O4PxtvIoTZtDI9yeK9ibek/zpG81uhP/1bz02Jo/GT0=;
- b=bXceaOcCGshOdg2W2TWjsDZBENyPabonBUphbS+oUeD/Xz0Fta7JPpwgPWD3Wa1u98
- pOJwgBq/b3v833y3yiq2fe35AtlLmJu9mbNg2O74ZnT8G+v2Xgf+LsRG2T7vb7rc8/wk
- xu9JoqsoxRpQsScQTE+E/gh+MfeONRBUxN13c=
+ bh=8k6HE85EbCtA6hzAfsuQnLFnphjjQuptU6pRrYupkVY=;
+ b=oSI0DLegHCdXhGdNlzXdMIT2WbaWzm3ZwctGjBYZ69qu+M2FDfYS+DzJvPMddVz2TA
+ IU9lUcV2uWz8WL23GLVa5jeFfnB9mP0PQdFm+t8WWq7E/FhiEb6SWNZD3y1qO81LlrRd
+ gz9blmNzaHVwjH9Shej3D5ouQDOi50NAyFqk8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720883644; x=1721488444;
+ d=1e100.net; s=20230601; t=1720883649; x=1721488449;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=O4PxtvIoTZtDI9yeK9ibek/zpG81uhP/1bz02Jo/GT0=;
- b=I9ysKpyhDiSDZakM9My2iu3kX8Src5QIylrxOnZJmFxi1Wym9Np8iXkTqQeRl4He9p
- mbMmsJtenR5L+/oEmiFecY/0fxvHCOh7xS7loUBF23G3H6fVqfRKI6XLRn+CExEx843Y
- ALhI6x9y2z4dDR7l87gW+isiwZ/Om/glI1/aVcHmDqZSzKvizhrCUNF7UgQb9vUIgjld
- 3p3JJaMoqtpfPqRV/uf4LtamKwr6m/yN7pkhDm7d3yGQHP79fOBcNEd06qJmtdOUSGwW
- IW5aNqP9s0ojSP1ro4d5wMK7u3O4L5OQ8JqRFaJiRjtxkrlYr91EZyoJptVLdLuQCoxA
- oC7Q==
-X-Gm-Message-State: AOJu0Yw332q2OYj9nzDhCY6RMRqbnio36PkScBcRgU+UMla1AvdLjXqy
- Yd6BzIAgRgOippWFf1EFps2sQtgAe+lCNIC9IEw4zWCNRxozUgBe5FpA7EZfKUDHRsCdcZq3SO6
- 65Q/XRfucDBLkOrzFQIP8skxnq+RONkI22F92lc0BiFeDMuQ=
-X-Google-Smtp-Source: AGHT+IHDGFXeF8rL0hYnZNy+sPS3kTKSjmf33pAk2rJFJbppxangnMp1uqXKcoukiczAlochgWmDMjuAbVjlz2gDPcI=
-X-Received: by 2002:a05:6a20:6d96:b0:1bd:27b9:b63f with SMTP id
- adf61e73a8af0-1c29824d657mr12169421637.37.1720883644597; Sat, 13 Jul 2024
- 08:14:04 -0700 (PDT)
+ bh=8k6HE85EbCtA6hzAfsuQnLFnphjjQuptU6pRrYupkVY=;
+ b=wPMTv+Ap293oYFJ9GkjxuFUjPWZ7sxJnxM27G6Hlz3u6f1l0KLCHeG7Amkcg8uQ6wh
+ /Kqlg4z1Pr/aCmeZAXLvUx90T7/rKHjwEvioOuMDxWYX72PbPnss+1s1UgGjO6eHiP1P
+ vGaXCiWKX0/AhpWnUzlc65fw82LKOL97I7nMx7fX4/osqjb0pr702TygRzKwrGO9Goff
+ MmnVEyMPbe0V9vmUUb+ll4AJrKzn3N8y0DCvSczC8Y7g9siOvGk9sLSbmNP2Kf//r4Vl
+ BQ5QQHLya4++uqurZIdOXwl58/+H80+TZhJxzVhDuSLikuPmKmTlk0+NtEOdG1SkxztA
+ SsWw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVSkxJgjrwCrRm2UolAwvehGKFdNd2yA6SP7v5EhSWiU7jThZbHz65bdKT+zRRjGpe3Z4bM9z8Wr7RYTWP92aAKiRhdpQ==
+X-Gm-Message-State: AOJu0YwVE63ovzbKnOqKkDQtNyK/CfvVUfwFW99Qnxy0Z3Xtm4SsLQZR
+ 6c0SdOP0LZvaci3xIu/j2cMrQ9iL/Qpwye0Oq6Mn3gJQJPYizvpP9hA6lvkz8Fpy828E7hfkwWG
+ jHWTjUyXONwoKzxD/PE/mfbyevejVoJkwTfQ7
+X-Google-Smtp-Source: AGHT+IG/P1xvSotpnJd2NUQwwiGs6ynAp6zDPSYe7p94XtIvkN4gGUBdNpCpxVmegEAK7Q/dIGlXrv2vRgVEx6DHX7E=
+X-Received: by 2002:a17:90a:e654:b0:2c9:6187:98ca with SMTP id
+ 98e67ed59e1d1-2ca35c7bcd1mr10984764a91.22.1720883648948; Sat, 13 Jul 2024
+ 08:14:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240708151813.2137042-1-trini@konsulko.com>
-In-Reply-To: <20240708151813.2137042-1-trini@konsulko.com>
+References: <20240709092454.949260-1-jkeeping@inmusicbrands.com>
+In-Reply-To: <20240709092454.949260-1-jkeeping@inmusicbrands.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:13:47 +0100
-Message-ID: <CAFLszTjBKR8Nd2TYi4XNC2aRKS6FuKVXUOsRjj4cXLkysJNePg@mail.gmail.com>
-Subject: Re: [PATCH] doc/sphinx/requirements.txt: Bump certifi and urllib3
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 13 Jul 2024 16:13:54 +0100
+Message-ID: <CAFLszTgC11k38OeDi0PjwVAZvOMJvfpg3-EZ+p33osvNxLXx-g@mail.gmail.com>
+Subject: Re: [PATCH] regulator: fixed: fix regulator-fixed-clock
+To: John Keeping <jkeeping@inmusicbrands.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Philippe Schenker <philippe.schenker@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,16 +86,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 8 Jul 2024 at 16:18, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 9 Jul 2024 at 10:25, John Keeping <jkeeping@inmusicbrands.com> wrote:
 >
-> As reported by GitHub dependabot, both of these packages should be
-> bumped to their latest versions to address security issues (neither of
-> which has a CVE assigned).
+> For regulator-fixed-clock, the device's private data is never set so in
+> fixed_clock_regulator_set_enable() is null and the function cannot
+> complete successfully.
 >
-> Reported-by: GitHub dependabot
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Rename the _plat structure to _priv to better represent its role and set
+> this as the private data.  As shown by the set_enable() function and by
+> using the same .of_to_plat hook as regulator-fixed, the platform data is
+> regulator_common_plat so also set .plat_auto correctly.
+>
+> Finally, set up the private data by adding a .probe function to look up
+> the clock and set the member variable.
+>
+> Fixes: f3b5100aff3 ("regulator: fixed: add possibility to enable by clock")
+> Signed-off-by: John Keeping <jkeeping@inmusicbrands.com>
 > ---
->  doc/sphinx/requirements.txt | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  drivers/power/regulator/fixed.c | 21 +++++++++++++++++----
+>  1 file changed, 17 insertions(+), 4 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
