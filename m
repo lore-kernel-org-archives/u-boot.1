@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BFFEC3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2894AC3DA45
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 15:19:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E214788912;
-	Sat, 13 Jul 2024 17:16:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AD178891F;
+	Sat, 13 Jul 2024 17:16:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kNESGyD6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GuApgcYo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0075088936; Sat, 13 Jul 2024 17:16:19 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id D20F18885D; Sat, 13 Jul 2024 17:16:20 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A37588912
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:16:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36E1888932
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 17:16:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2c98660fc91so2117636a91.1
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:16:15 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2c961b5f215so2113758a91.0
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 08:16:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720883774; x=1721488574; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720883776; x=1721488576; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kMii+ZiUcH7PnBOcHyVu9b7rPrhsnVCG74FTipWRZ/s=;
- b=kNESGyD6b1kwiMhYG58iAAIyVVEPoc4jU2NoYFXE/mJjySU+naD2BBxF9QeNf9hpMW
- nXbb/qgEA03mxDVCWUq+vISnYFFLvMtzSpaqU0RfFV1frRzSIXXCKftsr0zCIsdL/IJi
- xe5x3RHnn6RdSkvJBaXikdsdxLkdDCtCm8QYM=
+ bh=aPIqSnLy1i+0omUjby06MpkpQDbmBs6xBi5VFSfLAf8=;
+ b=GuApgcYowad3h4YvHi8w7tr3vOBrLyMaj9j9Qx1ytIlQJ4umAkEDFXpr8bjfUWt1x4
+ 3R4vS7dFR5ifOtxpAIfWgeO+Jz86p+frolrZPGSQBhwnNCvTK5cwIyo34tycHyvr3MSc
+ L7zlhO8GlS8/LmsX/i1i/ZLbk2uRlwrAyWu1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720883774; x=1721488574;
+ d=1e100.net; s=20230601; t=1720883776; x=1721488576;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kMii+ZiUcH7PnBOcHyVu9b7rPrhsnVCG74FTipWRZ/s=;
- b=OvMOIhPkRATaA8NZ11v7aqo3kNIoBQhEoOkxd8QCwHSb9P7//9y/YHXv0nzahjehwZ
- qRuyJiMvXGnbPdNhxe0X39hQgNHAOeQDik/97ILcnLdLPk+8jHZHcJPu6TSjoHSGdbif
- NfEFQ42V3q4PIFk6q/NO6vnC4An1Eht1fQOQu+VWLE6zh5l0PZokjZ0mROrhQy+hkrtW
- 9aiIEQzNFWLhY/wyxjwXsqPP1fttTSBrotIzbWJXS4ZpLboBw4PIqXEpS+YcWvu4GraA
- z17nWGeRgV54XG6FMm4jZdK44qZvjktwyvAHr+VLz1QHBCJVFTShHitDPuqcY40BsSoq
- 8pQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAb1bX1bPbALZz9eTXwL503rvPr1MWH3bADsUfhC2DGvT8b40oL8bf6CbRKlkrYIBc7z3fMd8Pc7JDfy31C7+4T7RFhg==
-X-Gm-Message-State: AOJu0YwvFr07L0/Wkl70zdEW1SHxvFuZEECCKxQBlFd9xXoNgrDgsEDm
- dfPxQcHVHVoK6PGHxKYYp4CxDWwf3fXWkQdYp2JBkEnOKoRgxYqdXuoOpUi9rBReiSyzWB7zVjt
- oHzy12/A87Vmp6nclLd2SHhCyOb8kXO/6xAtfKbEE6VrXRBA=
-X-Google-Smtp-Source: AGHT+IFWjwQZ51drsOWxgpjxeH2v6PkNySOIqjXzpfGY3J2wYwlK+Mmpz7iivpXCggdAzwis3UGgLlyihDY+G+FI768=
-X-Received: by 2002:a17:90b:1086:b0:2c6:ee50:5af4 with SMTP id
- 98e67ed59e1d1-2ca35bdeb0amr11296032a91.6.1720883774062; Sat, 13 Jul 2024
- 08:16:14 -0700 (PDT)
+ bh=aPIqSnLy1i+0omUjby06MpkpQDbmBs6xBi5VFSfLAf8=;
+ b=eAVlA29uOUZ4wRjkTcvxuQql1EkafQrvBdIJlso4nmS0kBNWmjmJwihzfbnVW/skTu
+ irQgqAcpuWVnBHxzc7QWbUD62rviSGHZLQ88qgM3ch+j3pmKEkIGiiqtsy2Hjet2G2RC
+ jKWAyzpuLmUlRbywgpDlqVQtqf30DdRwFn2MMJUafXavoAobCx/q4LCUmTPutFs9eDYw
+ 2bbB8l8vLg4dWyyx+XvKiqBZxQoKx3Uc1H4+94ffTq3JsZrHnmSNhnxJqOGPM/mO7gvO
+ tzo78l6CfU0o+3/17u4IvLQvx5UDFFJb2I0LUAlmEDNwk90rbrja18uS3lYjIl6gjMG3
+ HYNQ==
+X-Gm-Message-State: AOJu0Yz94eQI8id7F4eFq8uP1dEsgXlU/4QxZrqYFOFyTjz5Y5LaDuLI
+ Vo/fBWAoCtuZaU9Zx5NYunPapbj2CqExHj7eIPZDtOxZwRPaHf9b4enNebTYFKRixPqkRtOh+cq
+ +TeMlW1iwJIBmtaKbqsVWaHhyCRIziebmxtAV
+X-Google-Smtp-Source: AGHT+IHwQVBwrsfNtwZXWkr0d5VNnB2B9grbxVhuD/CcpBWShd8ZZCF5Rb0j82IRQKRdcgKKRoY75hRZPO8lpoU5ZsM=
+X-Received: by 2002:a17:90a:a385:b0:2c9:9f06:bb2f with SMTP id
+ 98e67ed59e1d1-2ca35bdc2d5mr11229507a91.6.1720883775815; Sat, 13 Jul 2024
+ 08:16:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-17-sughosh.ganu@linaro.org>
- <20240705194841.GO38804@bill-the-cat>
- <CADg8p95b2XybOZSB=YcX6hwP6mQrvxZs4tLNjhT5g3AeKve4cA@mail.gmail.com>
- <20240708144626.GD38804@bill-the-cat>
-In-Reply-To: <20240708144626.GD38804@bill-the-cat>
+ <20240704073544.670249-20-sughosh.ganu@linaro.org>
+In-Reply-To: <20240704073544.670249-20-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 13 Jul 2024 16:15:52 +0100
-Message-ID: <CAFLszTif7d1v6O3w2w2STm-NsTM=E5MzYp30SrWipejx_MzKOQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 16/48] lmb: config: add lmb config symbols for SPL
-To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+Date: Sat, 13 Jul 2024 16:15:58 +0100
+Message-ID: <CAFLszTgMEnv2d4AnYidd5SUWjMMwx_ETo=ULtG6TFXvO=umqFg@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 19/48] lmb: remove the lmb_init_and_reserve()
+ function
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
@@ -91,70 +87,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Mon, 8 Jul 2024 at 15:46, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 4 Jul 2024 at 08:37, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Mon, Jul 08, 2024 at 05:06:45PM +0530, Sughosh Ganu wrote:
-> > On Sat, 6 Jul 2024 at 01:18, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Jul 04, 2024 at 01:05:12PM +0530, Sughosh Ganu wrote:
-> > >
-> > > > Add separate config symbols for enabling the LMB module for the SPL
-> > > > phase. The LMB module implementation now relies on alloced list data
-> > > > structure which requires heap area to be present. Add specific config
-> > > > symbol for the SPL phase of U-Boot so that this can be enabled on
-> > > > platforms which support a heap in SPL.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > > Changes since V1: New patch
-> > > >
-> > > >  lib/Kconfig | 12 +++++++++++-
-> > > >  1 file changed, 11 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/lib/Kconfig b/lib/Kconfig
-> > > > index 072ed0ecfa..7eea517b3b 100644
-> > > > --- a/lib/Kconfig
-> > > > +++ b/lib/Kconfig
-> > > > @@ -1103,7 +1103,17 @@ config LMB
-> > > >       default y if ARC || ARM || M68K || MICROBLAZE || MIPS || \
-> > > >                    NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
-> > > >       help
-> > > > -       Support the library logical memory blocks.
-> > > > +       Support the library logical memory blocks. This will require
-> > > > +       a malloc() implementation for defining the data structures
-> > > > +       needed for maintaining the LMB memory map.
-> > >
-> > > Even today, LMB really should be def_bool y rather than an option, so
-> > > this series should correct that. That said...
-> >
-> > Okay
-> >
-> > >
-> > > > +config SPL_LMB
-> > > > +     bool "Enable LMB module for SPL"
-> > > > +     depends on SPL && SPL_FRAMEWORK && SPL_SYS_MALLOC
-> > > > +     help
-> > > > +       Enable support for Logical Memory Block library routines in
-> > > > +       SPL. This will require a malloc() implementation for defining
-> > > > +       the data structures needed for maintaining the LMB memory map.
-> > >
-> > > The question I guess becomes when do we need LMB in SPL, exactly? And I
-> > > guess it's another case where it should be def_bool y (but still depends
-> > > on what you have here) since we need to make sure we don't overwrite
-> > > running SPL.
-> >
-> > So this is a question even I had. Do we really need to enable LMB in
-> > SPL ? The main reason for introducing the symbol was to have more
-> > granularity to remove the LMB code from SPL, but should this really be
-> > enabled in SPL is something that I am not too sure about.
+> With the changes to make the LMB reservations persistent, the common
+> memory regions are being added during board init. Remove the
+> now superfluous lmb_init_and_reserve() function.
 >
-> Yes, we need to ensure we obey reservations in SPL, both for U-Boot and
-> for when we boot the OS from SPL.
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> Changes since V1:
+> * Removed the replacement of lmb_init_and_reserve() with
+>   lmb_add_memory(), as memory gets added during board init.
+>
+>  arch/arm/mach-apple/board.c          |  2 --
+>  arch/arm/mach-snapdragon/board.c     |  2 --
+>  arch/arm/mach-stm32mp/stm32mp1/cpu.c |  3 ---
+>  cmd/bdinfo.c                         |  1 -
+>  cmd/load.c                           |  2 --
+>  fs/fs.c                              |  1 -
+>  lib/lmb.c                            | 13 -------------
+>  net/tftp.c                           |  2 --
+>  net/wget.c                           |  2 --
+>  test/cmd/bdinfo.c                    |  9 ---------
+>  10 files changed, 37 deletions(-)
 
-I believe we will use it, e.g. in VPL. But we don't have (nor perhaps
-even want) a mechanism for passing the lmb from one phase to the next.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
