@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F408BC3DA45
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:07:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6293C3DA42
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 07:07:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 512C18884F;
-	Sat, 13 Jul 2024 09:04:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F4418886A;
+	Sat, 13 Jul 2024 09:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g1XN7GIq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ldqqnp23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 017D688846; Sat, 13 Jul 2024 09:04:02 +0200 (CEST)
+ id 6B4D988861; Sat, 13 Jul 2024 09:04:02 +0200 (CEST)
 Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
  [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27A0588805
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 09:03:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A22BB88859
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 09:03:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-52eafec1e84so3817774e87.0
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 00:03:58 -0700 (PDT)
+ 2adb3069b0e04-52ea2f58448so3758050e87.1
+ for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 00:03:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1720854237; x=1721459037; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1720854239; x=1721459039; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1wdxjgYzJA/UA1K9CdPW8SRIyMk2ngfmq96F/t9Oxdc=;
- b=g1XN7GIqmgQ65l0x+y26e7R8zBgMmb1xLiPqDLwPAd17cBW+SIWmehbNpsvHHS63fi
- dpfrGBfZPElsKe4MXDxM/mTsVBqULtl/GalRkxVx6Uk7GOrSg6UARVJFRPsB20saSyQP
- 2guNZyOe0sp3s7BD2ekptyZAtgph15Wk4Ok34=
+ bh=xFgTqhymdsA59TInJYjd2lbJmXZLU5QrVc/VNTrVs9I=;
+ b=ldqqnp23ml+yBOYjyyaD3O6kvOyIeAc5j2jZi4H9n3M+BXc+9m4iHpXyfFgi1dl6M8
+ iGccli7DD1xmWzxrG30p+men1s5LJINVJjeFwvgKwjWrLozlmKoMK5ous40eB2V259zL
+ D7wsMumjlTA9Xz+eiyoLouTYehYP+7fs4XJwE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720854237; x=1721459037;
+ d=1e100.net; s=20230601; t=1720854239; x=1721459039;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1wdxjgYzJA/UA1K9CdPW8SRIyMk2ngfmq96F/t9Oxdc=;
- b=cxUBvZtleSLEOXhI7afCQWhyIp8SZwxRKZ/IYkZRGG/J1xjfDqhbpBV7oefwTusMEC
- XDv0799l580/JiChUCI/m5Xk9vPA5eahLzIQnPJ9IT615z11qv45QFcjpFfhOn4Bp43v
- LNtYSVx3jyL+yIiMMXnFw8DU/31ZkM6NaR501nr3VBYJwR7rGXgCeGi3/dLiNFtcmLZ0
- 2zcMa/4lohZ9ijD/FWFwfIsx67q1PpaeTSoJvgKa9nVXVtGbC6yE29wiJ4xnZX75HcfX
- Hmd5MnodQuKcK5oWbLiMcY39h1cRrBi4cDh0d79iLBBT1xf0UiwYvPl80bZnPB4MuCVl
- k4QQ==
-X-Gm-Message-State: AOJu0YwOY50emCvQ2zR6LOIjdsdQoZj4L+1nJrwn5Ix8IdEnR5qT516R
- Cw9h0LbYpt1qTGgu2NgAU2jlQabH+fkVZ2BcqumhjGp+7EEpM0MhZzBCsDt7/SUVvSe9B+hyV08
+ bh=xFgTqhymdsA59TInJYjd2lbJmXZLU5QrVc/VNTrVs9I=;
+ b=NjIxYRD+h1B43CDob35K9GrSWDISOrTmVZzXTojKhb11vKJs0zJZyxwKhWfjOzrtM3
+ F/UUoS3Unx4yF+bJUiSYUjBEhOYkCkNjEDGsOsS4b711PoCQ19efL9hVGZVW0iRYNmCO
+ uETkrxZeJljkHoGZxNBNgJxzY8ffU1RfPEr9SAE5a58n1OQvNuJuD3k0QvDqsdJ1Puhn
+ e2OVVkOo5PRh1IMhwzkiEmRC9Gfi80Kp3atAm6uh5Y8AUAJvWySI29bd7tSKbYYKPUjK
+ qOmnoKXf44sG1lxyfHVPfWTcyVwBSxsOM8o5FLQEOH0wIbNvgMGfqxH0K1I4IJjV8Sft
+ BBqQ==
+X-Gm-Message-State: AOJu0Yx+uYkhLonjkyHSPCaUVW9UJBJcVUiZb7YY04f+E8aBEyWN+lyV
+ 5MkRvEbZFvxLvMQtNjZtwj7FKLfkFn6yX3GNhkakddimsgf/UpFIK7ouBzoDpep5gIberabnCT4
  =
-X-Google-Smtp-Source: AGHT+IG0RuWW1iw4Dylyaoa3sEBMwVEUc/4311bMUIUJcCC1ldgagVuiXYz3V6zy7sKmy/tYXkpFaw==
-X-Received: by 2002:a05:6512:3b87:b0:52e:9d2c:1c81 with SMTP id
- 2adb3069b0e04-52eb9990ccamr10209795e87.13.1720854237249; 
- Sat, 13 Jul 2024 00:03:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG4tylesrITcYMsoJfYZPZ87S4y2GTcq+BOEqy6HMKvbVt3/3tTPCYlRTP3xDiM1/LOCBi+RQ==
+X-Received: by 2002:a05:6512:110e:b0:52d:b1e4:b337 with SMTP id
+ 2adb3069b0e04-52eb999165cmr11054384e87.21.1720854238743; 
+ Sat, 13 Jul 2024 00:03:58 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427a5ef550asm9973165e9.46.2024.07.13.00.03.56
+ 5b1f17b1804b1-427a5ef550asm9973165e9.46.2024.07.13.00.03.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jul 2024 00:03:56 -0700 (PDT)
+ Sat, 13 Jul 2024 00:03:58 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joshua Watt <jpewhacker@gmail.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 18/21] upl: Add initial documentation
-Date: Sat, 13 Jul 2024 08:00:52 +0100
-Message-Id: <20240713080049.v2.18.I7abd8fe6045ce8ed9eeb7b94c8441a451a72cd97@changeid>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 20/21] sandbox: Add an SPL loader for UPL
+Date: Sat, 13 Jul 2024 08:00:54 +0100
+Message-Id: <20240713070055.2172883-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240713070055.2172883-1-sjg@chromium.org>
 References: <20240713070055.2172883-1-sjg@chromium.org>
@@ -99,114 +90,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some documentation to explain the basic concept along with a link
-to the full spec.
+Add support for loading a UPL image from SPL. This uses the simple FIT
+implementation, but also loads the full FIT just to permit more testing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add a link to the spec
-- Add a link to the command
+(no changes since v1)
 
- MAINTAINERS           |  1 +
- doc/usage/cmd/upl.rst |  4 ++--
- doc/usage/index.rst   |  1 +
- doc/usage/upl.rst     | 46 +++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 50 insertions(+), 2 deletions(-)
- create mode 100644 doc/usage/upl.rst
+ arch/sandbox/cpu/spl.c         | 49 +++++++++++++++++++++++++++++++++-
+ arch/sandbox/include/asm/spl.h |  1 +
+ 2 files changed, 49 insertions(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5078e8c30f0..96faa9e1acc 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1701,6 +1701,7 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-dm.git
- F:	boot/upl*
- F:	cmd/upl.c
- F:	common/spl/spl_upl.c
-+F:	doc/usage/upl.rst
- F:	doc/usage/cmd/upl.rst
- F:	include/upl.h
- F:	test/boot/upl.c
-diff --git a/doc/usage/cmd/upl.rst b/doc/usage/cmd/upl.rst
-index a64063d42d5..8d6ea5daa37 100644
---- a/doc/usage/cmd/upl.rst
-+++ b/doc/usage/cmd/upl.rst
-@@ -16,8 +16,8 @@ Description
- -----------
+diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+index 39869f27a7b..f665f86d64c 100644
+--- a/arch/sandbox/cpu/spl.c
++++ b/arch/sandbox/cpu/spl.c
+@@ -3,14 +3,18 @@
+  * Copyright (c) 2016 Google, Inc
+  */
  
- The *upl* command is used to test U-Boot's support for the Universal Payload
--Specification (UPL) firmware standard. It allows creation of a fake handoff for
--use in testing.
-+Specification (UPL) firmware standard (see :doc:`../upl`). It allows creation of
-+a fake handoff for use in testing.
++#define LOG_CATEGORY	LOGC_BOOT
++
+ #include <dm.h>
+ #include <hang.h>
+ #include <handoff.h>
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
++#include <mapmem.h>
+ #include <os.h>
+ #include <spl.h>
++#include <upl.h>
+ #include <asm/global_data.h>
+ #include <asm/spl.h>
+ #include <asm/state.h>
+@@ -52,7 +56,8 @@ void board_init_f(ulong flag)
+ void board_boot_order(u32 *spl_boot_list)
+ {
+ 	spl_boot_list[0] = BOOT_DEVICE_VBE;
+-	spl_boot_list[1] = BOOT_DEVICE_BOARD;
++	spl_boot_list[1] = BOOT_DEVICE_UPL;
++	spl_boot_list[2] = BOOT_DEVICE_BOARD;
+ }
  
+ static int spl_board_load_file(struct spl_image_info *spl_image,
+@@ -246,3 +251,45 @@ int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image)
  
- upl write
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 43f8588e695..28d5dcd3e30 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -15,6 +15,7 @@ Use U-Boot
-    cmdline
-    semihosting
-    measured_boot
-+   upl
+ 	return 0;
+ }
++
++static int upl_load_from_image(struct spl_image_info *spl_image,
++			       struct spl_boot_device *bootdev)
++{
++	long long size;
++	char *fname;
++	int ret, fd;
++	ulong addr;
++
++	if (!CONFIG_IS_ENABLED(UPL_OUT))
++		return -ENOTSUPP;
++
++	spl_upl_init();
++	fname = os_malloc(256);
++
++	ret = sandbox_spl_load_fit(fname, 256, spl_image);
++	if (ret)
++		return log_msg_ret("fit", ret);
++	spl_image->flags = SPL_SANDBOXF_ARG_IS_BUF;
++	spl_image->arg = map_sysmem(spl_image->load_addr, 0);
++	/* size is set by load_simple_fit(), offset is left as 0 */
++
++	/* now read the whole FIT into memory */
++	fd = os_open(fname, OS_O_RDONLY);
++	if (fd < 0)
++		return log_msg_ret("op2", -ENOENT);
++	if (os_get_filesize(fname,  &size))
++		return log_msg_ret("fis", -ENOENT);
++
++	/* place it after the loaded image, allowing plenty of space */
++	addr = ALIGN(spl_image->load_addr + size, 0x1000);
++	log_debug("Loading whole FIT to %lx\n", addr);
++	if (os_read(fd, map_sysmem(addr, 0), size) != size)
++		return log_msg_ret("rea", -EIO);
++	os_close(fd);
++
++	/* tell UPL where it is */
++	upl_set_fit_addr(addr);
++
++	return 0;
++}
++SPL_LOAD_IMAGE_METHOD("upl", 4, BOOT_DEVICE_UPL, upl_load_from_image);
+diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
+index d50d9ad6b48..d824b2123a2 100644
+--- a/arch/sandbox/include/asm/spl.h
++++ b/arch/sandbox/include/asm/spl.h
+@@ -18,6 +18,7 @@ enum {
+ 	BOOT_DEVICE_NOR,
+ 	BOOT_DEVICE_SPI,
+ 	BOOT_DEVICE_NAND,
++	BOOT_DEVICE_UPL,
+ };
  
- Shell commands
- --------------
-diff --git a/doc/usage/upl.rst b/doc/usage/upl.rst
-new file mode 100644
-index 00000000000..3c4a10c862c
---- /dev/null
-+++ b/doc/usage/upl.rst
-@@ -0,0 +1,46 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Universal Payload
-+-----------------
-+
-+`Universal Payload (UPL) <https://universalpayload.github.io/spec/index.html>`_
-+is an Industry Standard for firmware components. UPL
-+is designed to improve interoperability within the firmware industry, allowing
-+mixing and matching of projects with less friction and fewer project-specific
-+implementations. UPL is cross-platform, supporting ARM, x86 and RISC-V
-+initially.
-+
-+UPL is defined in termns of two firmware components:
-+
-+`Platform Init`
-+	Perhaps initial setup of the hardware and jumps to the payload.
-+
-+`Payload`
-+	Selects the OS to boot
-+
-+In practice UPL can be used to handle any number of handoffs through the
-+firmware startup process, with one program acting as platform init and another
-+acting as the payload.
-+
-+UPL provides a standard for three main pieces:
-+
-+- file format for the payload, which may comprise multiple images to load
-+- handoff format for the information the payload needs, such as serial port,
-+  memory layout, etc.
-+- machine state and register settings at the point of handoff
-+
-+See also the :doc:`cmd/upl`.
-+
-+UPL in U-Boot
-+~~~~~~~~~~~~~
-+
-+U-Boot supports:
-+
-+- writing a UPL handoff (devicetree) in SPL
-+- reading a UPL handoff in U-Boot proper
-+- creating a FIT
-+
-+There are some new FIT features in UPL which are not yet supported in U-Boot.
-+
-+.. sectionauthor:: Simon Glass <sjg@chromium.org>
-+.. July 2024
+ /**
 -- 
 2.34.1
 
