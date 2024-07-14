@@ -4,56 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC31C3DA49
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jul 2024 21:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C913CC3DA42
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jul 2024 21:28:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A768885A0;
-	Sun, 14 Jul 2024 23:28:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC93C8859A;
+	Sun, 14 Jul 2024 23:28:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="mHUA5sYZ";
+	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="0hL91MpX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14C3E87D74; Sun, 14 Jul 2024 23:28:14 +0200 (CEST)
+ id C1C8188403; Sun, 14 Jul 2024 23:28:15 +0200 (CEST)
 Received: from shout02.mail.de (shout02.mail.de [IPv6:2001:868:100:600::217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFAC6880F9
- for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 23:28:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 485E188403
+ for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 23:28:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=mail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=seb-dev@mail.de
-Received: from postfix03.mail.de (postfix03.bt.mail.de [10.0.121.127])
- by shout02.mail.de (Postfix) with ESMTP id 2F83F240CC2;
+Received: from postfix01.mail.de (postfix01.bt.mail.de [10.0.121.125])
+ by shout02.mail.de (Postfix) with ESMTP id EF359240CC4;
  Sun, 14 Jul 2024 23:28:11 +0200 (CEST)
 Received: from smtp01.mail.de (smtp04.bt.mail.de [10.0.121.214])
- by postfix03.mail.de (Postfix) with ESMTP id 11E1080226;
+ by postfix01.mail.de (Postfix) with ESMTP id D47CA80298;
  Sun, 14 Jul 2024 23:28:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mail.de;
  s=mailde202009; t=1720992491;
- bh=q9tbfcUkv6y3JOocXdSLywa3MrgjgXyqdcZXdIPbGGo=;
+ bh=fSq60ryYsVVFPzNGlbJFrravXrSeUxzXecoHvqnpHy8=;
  h=From:To:Cc:Subject:Date:Message-ID:From:To:CC:Subject:Reply-To;
- b=mHUA5sYZa55UrBL/NrwIm4lhxSYswvjCSiR5tnparnlD15SWK1HVktsSgZYPkMGtP
- q14896hseFdjV9XXxZy3XdsWQTK/HH2z55ZbxeL6u6JDn3QQ23LwR6PRPN8Rc3cfxY
- fpm84yamnBiHh3MkzAboRpCv49WLFh2WX8c1AwgrZmMhF88zyfb6No2ttkqAOiOncl
- KodwuZo9DM20kh5gPnbKabFbmZ9fMmeP4gMsEbjSNPPyPbXUbpXBOQoRt8uZJOAGD7
- iPj8T8SqAtrHC2CiO2s0jKWfSDqcleNoDQIEy8Bqd0qOyXXo7kjwIdEhGZKz3iXLZ0
- +YchIyZq/ftvg==
+ b=0hL91MpXKokUEmAKxo4aklJhXCgH2OCdwJhVR6hENuQCY9g6FpO5T5r3trO+ebuQe
+ +u1LA86ivKyK0o8lWtDuWQ2T09bpUA3Xyxi0beheu5e19GFg7pqI/nDSdMbY/9fuVk
+ m/66W0RaIvRnZmhVaWNJ6GbOwNth8J8jsaAfAkAqqQNleo+lS+nX/PoVup5MJesgfd
+ wQVOegk47foyl0fMo3eKRX8/SbLE5pgfUoHHU7IJG8l/O+iUx+AVvcm64HG9aDHP3u
+ aAsXoT77tmqiwbsAovBnC/bAqgAbVQGORNUFtrDI2aBGl3ftaqg+3GVGd6K5e0bs1V
+ szDVxBbFDAOjA==
 Received: from [127.0.0.1] (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp01.mail.de (Postfix) with ESMTPSA id 070AF240BD8;
- Sun, 14 Jul 2024 23:28:08 +0200 (CEST)
+ by smtp01.mail.de (Postfix) with ESMTPSA id 8271D240BD8;
+ Sun, 14 Jul 2024 23:28:11 +0200 (CEST)
 From: Sebastian Kropatsch <seb-dev@mail.de>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>
 Cc: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 0/4] phy: rockchip: snps-pcie3: Fix bifurcation and spelling
-Date: Sun, 14 Jul 2024 23:23:39 +0200
-Message-ID: <cover.1720988760.git.seb-dev@mail.de>
+Subject: [PATCH 2/4] phy: rockchip: snps-pcie3: Fix "rockchip" spelling
+Date: Sun, 14 Jul 2024 23:23:41 +0200
+Message-ID: <6b71eee1acdc0069880755673a4a52194045ad9f.1720988760.git.seb-dev@mail.de>
+In-Reply-To: <cover.1720988760.git.seb-dev@mail.de>
+References: <cover.1720988760.git.seb-dev@mail.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-purgate: clean
@@ -64,8 +66,8 @@ X-purgate-Ad: Categorized by eleven eXpurgate (R) http://www.eleven.de
 X-purgate: This mail is considered clean (visit http://www.eleven.de for
  further information)
 X-purgate: clean
-X-purgate-size: 1237
-X-purgate-ID: 154282::1720992490-E37EF338-84E95EB0/0/0
+X-purgate-size: 1864
+X-purgate-ID: 154282::1720992491-E37EF338-7DC56D25/0/0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,33 +84,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Several fixes for RK3588's PCIe PHY from upstream Linux [1][2], which
-uses a very similar driver.
-Tested on a FriendlyElec CM3588 NAS which uses PCIe bifurcation in
-1x1x1x1 mode to enable four M.2 NVMe sockets. With these fixes applied,
-NVMe SSDs get properly recognized in U-Boot.
+Several identifiers use "rochchip" instead of "rockchip".
+Fix this by replacing every instance of "rochchip" with "rockchip".
 
-While at it, correct a few instances where "rockchip" was written as
-"rochchip" in two Rockchip PHY files.
-
-Cheers,
-Sebastian
-
-Links:
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c?id=f8020dfb311d2b6cf657668792aaa5fa8863a7dd
-[2] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c?id=55491a5fa163bf15158f34f3650b3985f25622b9
-
+Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
 ---
-Sebastian Kropatsch (4):
-  phy: rockchip: naneng-combphy: Fix "rockchip" spelling
-  phy: rockchip: snps-pcie3: Fix "rockchip" spelling
-  phy: rockchip: snps-pcie3: Fix bifurcation for RK3588
-  phy: rockchip: snps-pcie3: Fix clearing PHP_GRF_PCIESEL_CON bits
+ drivers/phy/rockchip/phy-rockchip-snps-pcie3.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
- .../rockchip/phy-rockchip-naneng-combphy.c    |  4 +-
- .../phy/rockchip/phy-rockchip-snps-pcie3.c    | 42 ++++++++-----------
- 2 files changed, 20 insertions(+), 26 deletions(-)
-
+diff --git a/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c b/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
+index 2737bd81dd..1c94875aaa 100644
+--- a/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
++++ b/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
+@@ -164,7 +164,7 @@ static const struct rockchip_p3phy_ops rk3588_ops = {
+ 	.phy_init = rockchip_p3phy_rk3588_init,
+ };
+ 
+-static int rochchip_p3phy_init(struct phy *phy)
++static int rockchip_p3phy_init(struct phy *phy)
+ {
+ 	struct rockchip_p3phy_ops *ops =
+ 		(struct rockchip_p3phy_ops *)dev_get_driver_data(phy->dev);
+@@ -185,7 +185,7 @@ static int rochchip_p3phy_init(struct phy *phy)
+ 	return ret;
+ }
+ 
+-static int rochchip_p3phy_exit(struct phy *phy)
++static int rockchip_p3phy_exit(struct phy *phy)
+ {
+ 	struct rockchip_p3phy_priv *priv = dev_get_priv(phy->dev);
+ 
+@@ -251,9 +251,9 @@ static int rockchip_p3phy_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static struct phy_ops rochchip_p3phy_ops = {
+-	.init = rochchip_p3phy_init,
+-	.exit = rochchip_p3phy_exit,
++static struct phy_ops rockchip_p3phy_ops = {
++	.init = rockchip_p3phy_init,
++	.exit = rockchip_p3phy_exit,
+ };
+ 
+ static const struct udevice_id rockchip_p3phy_of_match[] = {
+@@ -272,7 +272,7 @@ U_BOOT_DRIVER(rockchip_pcie3phy) = {
+ 	.name		= "rockchip_pcie3phy",
+ 	.id		= UCLASS_PHY,
+ 	.of_match	= rockchip_p3phy_of_match,
+-	.ops		= &rochchip_p3phy_ops,
++	.ops		= &rockchip_p3phy_ops,
+ 	.probe		= rockchip_p3phy_probe,
+ 	.priv_auto	= sizeof(struct rockchip_p3phy_priv),
+ };
 -- 
 2.43.0
 
