@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84250C3DA42
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jul 2024 19:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54A4C3DA49
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jul 2024 19:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93F4A88168;
-	Sun, 14 Jul 2024 21:47:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57B3088168;
+	Sun, 14 Jul 2024 21:50:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lJThlXKX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e9JSmO8Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 800DE8780A; Sun, 14 Jul 2024 21:47:40 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id F3A30883AC; Sun, 14 Jul 2024 21:50:16 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 310ED88498
- for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 21:47:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF2218780A
+ for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 21:50:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a77b60cafecso433330966b.1
- for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 12:47:38 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a7527afa23cso438243666b.2
+ for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 12:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720986458; x=1721591258; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NbqQpRW8Nd7uAC5EQgFSwOwXb7Z/pEDEvXX/NlO61F0=;
- b=lJThlXKXmahisw69kdF1hi92TxzMQH/SNKVczERKK0pzZfVXv8YPbJEzlkaIUWuYSP
- sDjPp1EIkDkgXkLivBldLaIXL/7BPl4qHld06GqsCOdv9DjTAjkdWWyz9x8EIQ9wdpUd
- FOdGt4l2a6yfXzBGWy1G/yLMLderV+28Xmt9511kNpkZ322UzrP/e+OXtzauwpMTCN0W
- 4EtivEFYFriNO8EUPWfJglSh6KlS4AbA4IohtK2434uzHFkL0ywsbQQ1HaJEr7xJ0611
- vMlHJOUrjpicnFBnyFeQb88fs9fp3O2gYOIu7/eH6FTJr4UyNd34AGx1YFOkSPLQv7ec
- 1gIg==
+ d=linaro.org; s=google; t=1720986614; x=1721591414; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rvSHxBLY3I0soeeO+CMW9EjW4B8Tehw4jM+stn+a8wg=;
+ b=e9JSmO8QRlCzStbAa5RMkvhqB9zqB6lc41AshK7xXaV4iONqMSVUxx/Lg2Pj+tW1vm
+ O0ha5NQu27veJpryzYSBtx5tmZrCK/wCd5FjBhbIQmmihk0yWlh3Zd4iSQen3Wq3bCRu
+ OB2+XJ2V1KhDlkxnwcaVIcB4cxa1OwyBfs0u3y6OT+zr5isAvi88HMkvQeXDig85uiRG
+ IZ65w7M25rjoZhfrHtqpwKfark3LtwTxMuo+S6l8o+haRzbn8mBFMGznDtQmTywraPMY
+ D+VW/ii1YNYpFQaeeuEhVv4SxrkFiYXfd7nU5hShor3OmKpDBOOWSiTTkot/jMT2gHfz
+ EMjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720986458; x=1721591258;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NbqQpRW8Nd7uAC5EQgFSwOwXb7Z/pEDEvXX/NlO61F0=;
- b=GEXZthhyZIO13lPr9SryMXm1FP+g28X2net5zAU8ZcqRHx5WHi7k80Ob48w66SC3IW
- Z9s4f9QZXEZuMzBfxiAki6351Vu+cIjjHiPaUC6qR/2wrLo1pVhAvCE3NmU0rAA5Nkrp
- Deusw4PHI+rM4KIasMS7Op/VC/gw8wddLtWcykNJwXJPEhlIChu+Pf0RfnSUgK5vRe6V
- 09Q7k/x9R/Xf91YaNAIb8ZVA6ppOp7bc3lC+ITyGcixMjgSxfYHhNnepesrOKQbu4fuI
- UBwY13F4jW1+iIBUMjr6q3Q2J/z/WPOsp9MbvDC7m8ZcuY+b13x/LQ835rzFON64e4yo
- Pk4A==
+ d=1e100.net; s=20230601; t=1720986614; x=1721591414;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rvSHxBLY3I0soeeO+CMW9EjW4B8Tehw4jM+stn+a8wg=;
+ b=WvahMMmZNC4KGS58jtMAbe2kr7hgOqIU1oViGiE032cfE42vMcjueCEIDs/o5ZAAjS
+ ul39jP3ZxQepqrIG9tyjY6NorNe1AECQLeIQyDcDApjrfMECmPKiSEc/KRQmDWkOoEgv
+ xjDNpi32aLk3qgZr0v5e1kzqIJftj6lGogjEzWqvPzPOaxvrICpMQMYaNVvUIFMsbGHi
+ EwYtugw9hTC0nUXdvv3LUeZ6tTLEwS4aXaGYMJgpJZoAz1B2q+a3BgfMqIwS3T2Ez63G
+ ooWINAevTnYOBQA7Y3i5/N3OVxqtsCxvQpcGpGmblHw5eSs05hmCTnLISaLkjL5iDQmz
+ 1/fQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7ry1DQZ0kKPZHsmkyCr5CWp8JCbB+kScCvi9IaKjv7RxCflxjHc649ZZa/KuEVnilT68lLqpuZRzla0w+IQtZD9/4cg==
-X-Gm-Message-State: AOJu0YxGGrx0nYNU5Y1y6KRXpJ+8W3DN5v8RAHkaXqOObAhPd5m8NdAG
- ryrtZC51qffnJcT+X07J6F9HsPDaHwoVZit+7NswaMDRlSpQeCa0Ta4UsnJ8QS8=
-X-Google-Smtp-Source: AGHT+IEkEfk0H0d+K3nr+SVovEyRWt0nXAyu/gRqO8JrrWhLpjdl+q9sbvtrgCJnikOBW1sIofnh+Q==
-X-Received: by 2002:a17:907:94d1:b0:a77:b726:4fc with SMTP id
- a640c23a62f3a-a780b6883ffmr1476070166b.1.1720986457618; 
- Sun, 14 Jul 2024 12:47:37 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::7424? ([2a02:8109:aa0d:be00::7424])
+ AJvYcCX8Z2oirYeI7EBNgE7cGCLo+IYzjh9EWrSlZPGGE7KItoqEGaFVlUUQsY5pMwbVO35rszjiDLqFF491tzKaJz25lXE9zg==
+X-Gm-Message-State: AOJu0Yyu89OEbEAbxm913HAou/bA/qkKmoZDiL2GmSgd5eFhWp6oJeYi
+ B39zo+LwcM8JhXjdaP5X+ObF3OOx1MHeeFoRKdI8vNtD/eE5xUv8pqjx/1sW9sk=
+X-Google-Smtp-Source: AGHT+IFVZ/uIvZTIZkhri7u3ZIJ+XPaEDls0PzljZzBCtzBnFG9ehe+fiT47/q70gdVBu6VK8VItrw==
+X-Received: by 2002:a17:906:27d6:b0:a72:74d5:8a9a with SMTP id
+ a640c23a62f3a-a780b89cc52mr1185358666b.65.1720986614420; 
+ Sun, 14 Jul 2024 12:50:14 -0700 (PDT)
+Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc80101fsm159078666b.179.2024.07.14.12.47.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 14 Jul 2024 12:47:37 -0700 (PDT)
-Message-ID: <fdf9e992-d5cd-4c04-bcbe-613fb81e87b2@linaro.org>
-Date: Sun, 14 Jul 2024 21:47:36 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 0/3] ARM64: add symbol name lookup and print a
- backtrace on exception
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-References: <20240710-arm64-backtrace-v1-0-5a2ba50485dd@linaro.org>
- <20240712164809.GV38804@bill-the-cat>
-Content-Language: en-US
+ a640c23a62f3a-a79bc820e92sm152948566b.205.2024.07.14.12.50.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Jul 2024 12:50:13 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240712164809.GV38804@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io,
+	u-boot@lists.denx.de
+Subject: [PATCH] dm: button: support remapping phone keys
+Date: Sun, 14 Jul 2024 21:49:19 +0200
+Message-ID: <20240714194948.1271135-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,57 +94,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+We don't have audio support in U-Boot, but we do have boot menus. Add an
+option to re-map the volume and power buttons to up/down/enter so that
+in situations where these are the only available buttons (such as on
+mobile phones) it's still possible to navigate menus built in U-Boot or
+an external EFI app like GRUB or systemd-boot.
 
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+Cc: u-boot-qcom@groups.io
+---
+ drivers/button/Kconfig         | 11 +++++++++++
+ drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
+ 2 files changed, 32 insertions(+), 1 deletion(-)
 
-On 12/07/2024 18:48, Tom Rini wrote:
-> On Wed, Jul 10, 2024 at 06:26:17PM +0200, Caleb Connolly wrote:
-> 
->> U-Boot already emits frame pointers on ARM64, but lacks the code to
->> parse them, as well as a mechanism for looking up symbol names at
->> runtime.
->>
->> There was some (seemingly?) leftover code for symbols lookups in
->> common/kallsyms.c and associated parts in the makefile, however it
->> appears to be entirely unused and unsupported. It relied on generating
->> one long string of all symbol addresses and names.
->>
->> The approach taken here is instead largely based on the implementation
->> in the Xen hypervisor, it performs basic compression using non-ASCII
->> bytes to tokenize repeated string segments which can later be expanded
->> back out at runtime.
->>
->> This is then utilized in the ARM64 interrupt handling routine to dump a
->> backtrace in the show_regs() debug function. As well as providing a
->> general purpose unwind_stack() function which can be used for debugging.
-> 
-> Just a few minor comments from me in general, and I'm glad to see this.
-> Please submit the next version non-RFC, thanks.
-
-Thanks for the review.
-
-One thing I'm a little unsure about before sending the next version: is 
-it better to print the address in the link register or the address of 
-the function in the backtrace?
-
-In the example below I print the function address offset by _start, but 
-that doesn't seem very useful for either interactive debugging or 
-decompilation. Maybe the absolute address in the link register would be 
-more useful.
-
-I'm leaning towards the latter, but open to ideas.
-
-Backtrace:
-         <0x0000000001bb4c> do_mem_mw+0xbc
-         <0x000000bb729cec> cmd_process+0x130
-         <0x000000bb7213f8> run_list_real+0x6d0
-         <0x000000bb721b08> parse_stream_outer+0x14c
-         <0x000000bb722164> parse_file_outer+0x34
-         <0x000000bb72929c> cli_loop+0x1c
-         <0x000000bb71f1dc> main_loop+0x54
-         <0x000000bb7229dc> run_main_loop+0x14
-         <0x000000bb777664> initcall_run_list+0x7c
-         <0x000000bb722bf8> board_init_r+0x34
-> 
-
+diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+index 3918b05ae03e..6cae16fcc8bf 100644
+--- a/drivers/button/Kconfig
++++ b/drivers/button/Kconfig
+@@ -8,8 +8,19 @@ config BUTTON
+ 	  U-Boot provides a uclass API to implement this feature. Button drivers
+ 	  can provide access to board-specific buttons. Use of the device tree
+ 	  for configuration is encouraged.
+ 
++config BUTTON_REMAP_PHONE_KEYS
++	bool "Remap phone keys for navigation"
++	depends on BUTTON
++	help
++	  Enable remapping of phone keys to navigation keys. This is useful for
++	  devices with phone keys that are not used in U-Boot. The phone keys
++	  are remapped to the following navigation keys:
++	  - Volume up: Up
++	  - Volume down: Down
++	  - Power: Enter
++
+ config BUTTON_ADC
+ 	bool "Button adc"
+ 	depends on BUTTON
+ 	depends on ADC
+diff --git a/drivers/button/button-uclass.c b/drivers/button/button-uclass.c
+index cda243389df3..729983d58701 100644
+--- a/drivers/button/button-uclass.c
++++ b/drivers/button/button-uclass.c
+@@ -9,8 +9,9 @@
+ 
+ #include <button.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
++#include <dt-bindings/input/linux-event-codes.h>
+ 
+ int button_get_by_label(const char *label, struct udevice **devp)
+ {
+ 	struct udevice *dev;
+@@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct udevice *dev)
+ 
+ 	return ops->get_state(dev);
+ }
+ 
++static int button_remap_phone_keys(int code)
++{
++	switch (code) {
++	case KEY_VOLUMEUP:
++		return KEY_UP;
++	case KEY_VOLUMEDOWN:
++		return KEY_DOWN;
++	case KEY_POWER:
++		return KEY_ENTER;
++	default:
++		return code;
++	}
++}
++
+ int button_get_code(struct udevice *dev)
+ {
+ 	struct button_ops *ops = button_get_ops(dev);
++	int code;
+ 
+ 	if (!ops->get_code)
+ 		return -ENOSYS;
+ 
+-	return ops->get_code(dev);
++	code = ops->get_code(dev);
++	if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
++		return button_remap_phone_keys(code);
++	else
++		return code;
+ }
+ 
+ UCLASS_DRIVER(button) = {
+ 	.id		= UCLASS_BUTTON,
 -- 
-// Caleb (they/them)
+2.45.2
+
