@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7FC9C3DA42
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jul 2024 23:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F06F6C3DA49
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jul 2024 06:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B163F882AA;
-	Sun, 14 Jul 2024 01:59:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C34587DC7;
+	Sun, 14 Jul 2024 08:39:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QmlO6lGH";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="I/KMOmTR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C0A588765; Sat, 13 Jul 2024 21:41:18 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id C187387E13; Sun, 14 Jul 2024 08:39:54 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFA2F8855E
- for <u-boot@lists.denx.de>; Sat, 13 Jul 2024 21:41:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74F6287D87
+ for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 08:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1720899627; x=1721504427; i=xypron.glpk@gmx.de;
- bh=CTmCrXeqqA504h67pHgz8PShdAqkHL1+F0XDIVzZ3yI=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=QmlO6lGHHyUE9+g5Z/hzRuf2IkMLCl6jHH3/Tv9cm+FYyufLoSwzVpwshgelEhQv
- 1vdmx0kRkJU7Xsy17Tc2W3felznQBejpQTNA1LKoGL6kgyelpz0QvGJlB1k7EaSqH
- de7XUzJdCW275EwMQjNQ1rxF/48m8qI+WPdgOPxieil9RrCXeFP38w8XVZhfvqpPP
- svby3nloREpHIz8DV4EMGUepv4iwNKUhCBQNGgRe0DQN6moBq2TPo2T2c5xh9w0Gr
- ec8/JFsAcb5TnTTidOxYylXmtCL8CJkBYVBA9d72mwhp0Vt29I5gMNuI6kFnkx+Gn
- 8dDvXf+IEznNepRxwQ==
+ s=s31663417; t=1720939190; x=1721543990; i=xypron.glpk@gmx.de;
+ bh=SZ8gFtsVUdHatkyMNfmWKaiZu0iguzeaiqbcJIVDeJU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=I/KMOmTR08zQu3qCEKa7Mqi0y9j8yg+Z/sEQcjKiiLlo7WehUHi8cqqIY51sxcOY
+ iN/oRfN7aOZmL7LhT4sf/Ox6mDu/NcNuWnxZEiddl6Nj4GRLBu/ZO+LPsGbSscvFi
+ 3IATrA3/dyMZRs4OKPO2VNwQqGPkApxH2Rm1cDW+Scjao94P4FxnP+45bdMNg3nT9
+ ggIqR64vyNF+32g2c75t78C5tgeqyjR7Ih5s8TvQip9R42Qsl0gpwNh+SFYOCFqZF
+ Wx9KUDITh1FnAHvlQ/uTnnRDWoR9o2L7ncX2nJ6fyjGgSgqL2VYnN2a/GnX45DBwK
+ 6yUUezAUVfBV/b6WWw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([62.143.93.80]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mlw7f-1s1wgy1N1H-00ao08; Sat, 13
- Jul 2024 21:40:27 +0200
-Date: Sat, 13 Jul 2024 21:40:17 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
-CC: u-boot@lists.denx.de, michal.simek@amd.com, seanga2@gmail.com,
- sheng.tan@9elements.com, sjg@chromium.org, akashi.tkhro@gmail.com,
- abdellatif.elkhlifi@arm.com, agendin@matrox.com, linux.amoon@gmail.com,
- andre.przywara@arm.com, afd@ti.com, artur@conclusive.pl, bmeng.cn@gmail.com,
- bb@ti.com, caleb.connolly@linaro.org, chanho61.park@samsung.com,
- devarsht@ti.com, eajames@linux.ibm.com, etienne.carriere@foss.st.com,
- francis.laniel@amarulasolutions.com, ilias.apalodimas@linaro.org,
- vanbaren@cideas.com, mr.bossman075@gmail.com, jonas@kwiboo.se,
- jpewhacker@gmail.com, kever.yang@rock-chips.com, leon@georgemail.eu,
- lukas.funke@weidmueller.com, abbaraju.manojsai@amarulasolutions.com,
- marek.vasut+renesas@mailbox.org, marex@denx.de, mkorpershoek@baylibre.com,
- n-jain1@ti.com, nm@ti.com, oleksandr.suvorov@foundries.io,
- pbrobinson@gmail.com, rasmus.villemoes@prevas.dk, raymond.mao@linaro.org,
- semen.protsenko@linaro.org, samuel@sholland.org, yangshiji66@outlook.com,
- sughosh.ganu@linaro.org, sumit.garg@linaro.org, sunil@amarulasolutions.com,
- tom@tom-fitzhenry.me.uk, trini@konsulko.com, troykiskyboundary@gmail.com
-Subject: Re: [PATCH v2 00/21] Universal Payload initial series
-User-Agent: K-9 Mail for Android
-In-Reply-To: <87a5iliubh.fsf@bloch.sibelius.xs4all.nl>
-References: <20240713070055.2172883-1-sjg@chromium.org>
- <87a5iliubh.fsf@bloch.sibelius.xs4all.nl>
-Message-ID: <09FB197A-06C8-4162-AAB6-3823BA2840B3@gmx.de>
+Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MY6Cl-1srnlD14Qf-00PUeE; Sun, 14
+ Jul 2024 08:39:50 +0200
+Message-ID: <fce841a3-b44b-4653-8e47-1246c359ed54@gmx.de>
+Date: Sun, 14 Jul 2024 08:39:54 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] part: efi: Rely on a definition to specify the primary
+ GPT position
+To: Roman Stratiienko <r.stratiienko@gmail.com>
+Cc: sjg@chromium.org, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240519153542.2572014-1-r.stratiienko@gmail.com>
+ <b4549859-022e-4992-8a44-9dc9a21d943b@gmx.de>
+ <CAGphcdnTFZvxdZf+ZT1aAmbh6t9=nAa+gWmW_PQD+7t2EQy29g@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAGphcdnTFZvxdZf+ZT1aAmbh6t9=nAa+gWmW_PQD+7t2EQy29g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lc11j8Nh6W5CXr/ngcY3TcJkLkiQja5B3Zj6v7Jpt+bNRD2MxCQ
- tWJ5M54noo4S3+fiXrTTl3hSsx+oGxdMexRfEeqrjH7FcDglIfVO6GJrv3SAwcmDJtJXlWu
- vzNSPr3WBTFbbxbLcmiCfYlEMrGTSoyYBWkXKhcSNd7buem++PF68DWCaC/HKvLUKjDNqFa
- M+1czmURBUiH6w/4ty87w==
-UI-OutboundReport: notjunk:1;M01:P0:JB8F2lT2PWo=;leWTvZQ0BHVjLZruNroCApP2RJD
- JfFD7OuNNILUR9TeNx4fltyVyssLFcYiYZJ+GVM7KvW2DLcScjsoK1chesLVJG50yBUaVAC7e
- WngyBSgjD+sxGuoDdYiC/8ViaUX4EWoeCzw1rkixajBne4gmdvo2Y6I25c7QDAXxeeXW81Egp
- 7r1j5wir6gr70RQt3U73msB2VRwMg7DsHFoQZIy8vEf+xbLcW8fPOycQae2IxK4uezgOVWkbf
- 8nk0ub/bhNR7RcJ9WUVCM4qn6V7Jl7Zr9HprPxJhlZsDuEQYjuUF1dEpddzbZJUy9ZHZSYud0
- NlYzxn8bsywyXMHIto+sYLI1+B5jYb3/q/eiITILd4ynqssEgQZlycM8UW5QCsN0oLHeC0WYp
- GTtuDqnqynutOSzThxfO9ISj/33tGYjlb0O4rqmx2LM7RNEa76cRhQ3IpUu1yudSM/qEIz/h/
- cp9QDSFRtbX6ptaPxyy3fVi3W79iJV3Pz4QqAbwKrPqmYrKCSubJL/9KAhPzRGyFp8+89MtRp
- uORMlVk+AFoIidQk3vRxur5I2QTZsnZp08CPlb1i2KZrQPILOmD/89sOza9d1Lm+CmM53O6x4
- 2FfES8n9prqVdD/jchgRasKsNuOLY9hniSnIgAjGajnYLOCRiZV8bXNrTQ3p3gua26ZqpHeJi
- 8FyKDsErm3NBn4bAjWS4omTJQOG/Kn+zGHvK/OsVJxFrBZq5FvM6DEmw1TnM02xosnTn/sAD8
- EBpNUJNKIk8MQJ5cDMsZ2aw5YUXkvApbvIj5lUSiSvUyBzISC8AmGQAZyR7aJJ3ZZnGkyKQvb
- uqvwzmVbkPKjAXvIbus5jKcw==
-X-Mailman-Approved-At: Sun, 14 Jul 2024 01:59:54 +0200
+X-Provags-ID: V03:K1:DCBGpqmSR03s9i/QZd+OGG1+Ru9aj4hFQboKOnVcBTyTKyVMeXb
+ PfUhLYvm2+JzgJbvQmP8ffmgHF0q5FY8VanlNVvhTf27pVWG/QqIkF04wYXt8BHsMRZFaSj
+ Udm5y8H13+TYDLlCTFJtYGRUtGw9DziQt95ZM4NTsYIfGwjOAExOg1KomPaSXmtEVfiN5pk
+ pohQmp2hKk+GOGFy09L2Q==
+UI-OutboundReport: notjunk:1;M01:P0:tNteKHvtBlg=;Up5+LekttZ45HvUy3F7pg/L3kSb
+ 5BW1QoBy0uwXXGitpJNJQJaNeVgPUzCEbPUpf+rk2yCrslPI/aEhdzO0VCmngQbXwlBxb3t8Q
+ isygq0BokENFtX9XUKai42g7nXukUVUr2j2vHpFXFsHDp5NT4zaMJva9NmcHCVX+2VZ0MKcNh
+ JeGoKrIXWg99LIdrWXiJ7BB3pxZ75oQDBflN9XZqBGTvSiXFZ8ayxuSZHrNwdHYp0Rhucyb5o
+ JuYi47I4mjnQoiB4szpUwA4iQwnNWpMjiuBgIQo9wOCSgmqXpCIWD+6wYDtMOaFsIp3FInfra
+ YS7aeO0dAujiHurmOz77d0UlM7vd1D7E5c/NyFicHZaEsSuyHr6q8j0oYJHRQUTmZQ9i1zhix
+ 6xw4GtzEu1bhsbPe5Wa3TJwE+u/NWRbZSDczLClrFyWkVCYzMhCyU2wrk0zQP9bif35MUpqPm
+ meLiYy2NY4RUStWvzhjzyc+9v7355lbVyhea5gxl7UySf9A2Ke5sBRtDymY79PDePd2n2fzuV
+ l39SGz/cFOhOv7duFWxZ3y+xt7Jx97R1/RBalMKx7/SUlGSqRvOf1kyNCX0Dtwe3Zc+eqJLgL
+ 3XCyeswNvELts/q9e5oGmOl2sUYCfg+AFBkdLuO+HjNATT5wTWP8Ltn2bWaCP43br/OduEgev
+ oOJszHwDFJoIFZ60zNPvtysh9JpUMHcBTRCwvqTTS7FXKBPe5ZGtCUvK3ouTYBVFpfktDHdBl
+ A+ECb/pS7NkFGpDWRT71wUYaZh0CzYDATq3fr/yaVm4sXaZjZrlKExBTnR+LhpYePsTBMvqwA
+ /RF8afiYQefrUlLD4zpBSYrg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,160 +93,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-Am 13=2E Juli 2024 10:12:50 MESZ schrieb Mark Kettenis <mark=2Ekettenis@xs=
-4all=2Enl>:
->> From: Simon Glass <sjg@chromium=2Eorg>
->> Date: Sat, 13 Jul 2024 08:00:34 +0100
->>=20
->> Universal Payload (UPL) is an Industry Standard for firmware
->> components[1]=2E
+On 7/13/24 23:16, Roman Stratiienko wrote:
+> Hello Heinrich,
 >
->I think you have some trouble understanding the concept of industry
->standard ;)=2E  I guess you want this to become an industry standard=2E
->Firmly https://xkcd=2Ecom/927/ territory if you ask me=2E
+> Thank you for your comments.
 >
->> UPL is designed to improve interoperability within the
->> firmware industry, allowing mixing and matching of projects with less
->> friction and fewer project-specific implementations=2E UPL is
->> cross-platform, supporting ARM, x86 and RISC-V initially=2E
->>=20
->> This series provides some initial support for this, targeting 0=2E9=2E1=
- and
->> sandbox only=2E
->>=20
->> Features still to come include:
->> - Support for architectures
->> - FIT validation
->> - Handoff validation
->> - Interoperability tests
->>=20
->> This series is available at dm/uplb-working and requires the alist
->> series at dm/alist-working[2]
+> Just a few thoughts about this patch.
+>
+> 1. I was also sending this patch as a noninvasive, semi-cosmetic
+> change. Relying on hardcoded values is usually not a good practice.
+> 2. Shifting of primary GPT works in u-boot and Linux kernel with minor
+> tweaks. See patches [1] and [2] for more context. I'm not going to
+> upstream them.
+> 3. Accepting this patch upstream helps me to reduce the dependency
+> chain and potential conflicts during the rebase.
 
-Why is this series needed?
+Hello Roman,
 
-SPL loading a FIT image as described in the "universal" payload spec is al=
-ready implemented in U-Boot and for instance works fine for running EDK II =
-on RISC-V=2E
-
-I cannot see what functionality is missing in U-Boot=2E
-
-The UPL seems to be half cooked:
-
-The FIT file format is already described elsewhere=2E
-
-The relocation chapter describes that it should better be removed=2E
-
-The device-tree chapter duplicates content of the device-tree specificatio=
-n and ignores the existing standardization via the Linux project=2E
-
-The authors seem not to have given any thought to ACPI=2E
-
-So let us wait if that UPL thing ever lifts off before wasting a code line=
- on it=2E
+could you, please, answer my questions below.
 
 Best regards
 
 Heinrich
 
->>=20
->> [1] https://universalpayload=2Egithub=2Eio/spec/
->> [2] https://patchwork=2Eozlabs=2Eorg/project/uboot/list/?series=3D41464=
-2
->>=20
->> Changes in v2:
->> - Put the upl tests under their own subcommand to avoid bootstd init
->> - Add a function to init the UPL process in SPL
->> - Hang when something goes wrong, to avoid a broken boot
->> - Add a runtime flag to enable UPL
->> - Add a link to the spec
->> - Add a link to the command
->> - Support CI testing
->> - Rework to use alist instead of fixed-length arrays
->>=20
->> Simon Glass (21):
->>   sandbox: Use const in os_jump_to_file()
->>   sandbox: Fix a comment in os_find_u_boot()
->>   test: Move some SPL-loading test-code into sandbox common
->>   sandbox: Enable SPL_LOAD_BLOCK
->>   fdt: Don't overwrite bloblist devicetree
->>   sandbox: fdt: Avoid overwriting an existing fdt
->>   sandbox: Return error code from read/write/seek
->>   sandbox: Add ELF file to VPL u-boot=2Eimg
->>   sandbox: Set up global_data earlier
->>   upl: Add support for reading a upl handoff
->>   upl: Add support for writing a upl handoff
->>   upl: Add basic tests
->>   upl: Add a command
->>   upl: Add support for Universal Payload in SPL
->>   spl: Plumb in the Universal Payload handoff
->>   upl: Plumb in universal payload to the init process
->>   sandbox_vpl: Enable Universal Payload
->>   upl: Add initial documentation
->>   sandbox: Add a flag to enable UPL
->>   sandbox: Add an SPL loader for UPL
->>   upl: Add an end-to-end test
->>=20
->>  MAINTAINERS                       |  13 +
->>  Makefile                          |   4 +-
->>  arch/sandbox/cpu/cpu=2Ec            |   2 +
->>  arch/sandbox/cpu/os=2Ec             |  30 +-
->>  arch/sandbox/cpu/spl=2Ec            | 116 +++++-
->>  arch/sandbox/cpu/start=2Ec          |  18 +-
->>  arch/sandbox/include/asm/spl=2Eh    |  15 +
->>  arch/sandbox/include/asm/state=2Eh  |   1 +
->>  boot/Kconfig                      |  70 ++++
->>  boot/Makefile                     |   4 +
->>  boot/upl_common=2Ec                 |  60 +++
->>  boot/upl_common=2Eh                 |  24 ++
->>  boot/upl_read=2Ec                   | 588 ++++++++++++++++++++++++++++
->>  boot/upl_write=2Ec                  | 622 ++++++++++++++++++++++++++++=
-++
->>  cmd/Kconfig                       |   7 +
->>  cmd/Makefile                      |   1 +
->>  cmd/upl=2Ec                         | 118 ++++++
->>  common/board_f=2Ec                  |  22 ++
->>  common/board_r=2Ec                  |   2 +
->>  common/spl/Kconfig                |   1 +
->>  common/spl/Makefile               |   2 +
->>  common/spl/spl=2Ec                  |   8 +
->>  common/spl/spl_fit=2Ec              |  22 ++
->>  common/spl/spl_upl=2Ec              | 171 ++++++++
->>  configs/sandbox_defconfig         |   1 +
->>  configs/sandbox_vpl_defconfig     |   4 +
->>  doc/usage/cmd/upl=2Erst             | 186 +++++++++
->>  doc/usage/index=2Erst               |   2 +
->>  doc/usage/upl=2Erst                 |  46 +++
->>  drivers/block/sandbox=2Ec           |   4 +-
->>  drivers/usb/emul/sandbox_flash=2Ec  |   2 +-
->>  fs/sandbox/sandboxfs=2Ec            |   6 +-
->>  include/asm-generic/global_data=2Eh |  19 +
->>  include/os=2Eh                      |   6 +-
->>  include/spl=2Eh                     |  16 +
->>  include/test/suites=2Eh             |   1 +
->>  include/upl=2Eh                     | 361 +++++++++++++++++
->>  lib/fdtdec=2Ec                      |   1 +
->>  test/boot/Makefile                |   2 +
->>  test/boot/upl=2Ec                   | 436 +++++++++++++++++++++
->>  test/cmd_ut=2Ec                     |   3 +
->>  test/image/spl_load_os=2Ec          |  53 +--
->>  test/py/tests/test_upl=2Epy         |  38 ++
->>  43 files changed, 3036 insertions(+), 72 deletions(-)
->>  create mode 100644 boot/upl_common=2Ec
->>  create mode 100644 boot/upl_common=2Eh
->>  create mode 100644 boot/upl_read=2Ec
->>  create mode 100644 boot/upl_write=2Ec
->>  create mode 100644 cmd/upl=2Ec
->>  create mode 100644 common/spl/spl_upl=2Ec
->>  create mode 100644 doc/usage/cmd/upl=2Erst
->>  create mode 100644 doc/usage/upl=2Erst
->>  create mode 100644 include/upl=2Eh
->>  create mode 100644 test/boot/upl=2Ec
->>  create mode 100644 test/py/tests/test_upl=2Epy
->>=20
->> --=20
->> 2=2E34=2E1
->>=20
->>=20
+>
+> BR, Roman.
+>
+> [1]: https://github.com/GloDroidCommunity/amlogic-series/blob/8cc5ee7df1=
+358092f77f43aa0c9661883473e5af/patches-aosp/glodroid/bootloader/u-boot/000=
+5-GLODROID-Shift-GPT-position-to-support-Amlogic-platf.patch
+> [2]: https://github.com/GloDroidCommunity/amlogic-series/blob/8cc5ee7df1=
+358092f77f43aa0c9661883473e5af/patches-aosp/glodroid/kernel/common-android=
+14-6.1-lts/0001-GLODROID-Allow-placing-primary-GPT-to-2MiB-offset-to.patch
+>
+> =D0=BF=D0=BD, 10 =D1=87=D0=B5=D1=80=D0=B2. 2024=E2=80=AF=D1=80. =D0=BE 1=
+5:22 Heinrich Schuchardt <xypron.glpk@gmx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+>>
+>> On 19.05.24 17:35, Roman Stratiienko wrote:
+>>> Use GPT_PRIMARY_PARTITION_TABLE_LBA as the only source for a primary G=
+PT
+>>> location instead of hardcoding it every time.
+>>>
+>>> Sometimes, we need to shift the primary GPT location.
+>>> Having the location in the single place simplifies such shifting.
+>>
+>> In gdisk there is an expert command "j - move the main partition table"=
+.
+>> This corresponds to CONFIG_EFI_PARTITION_ENTRIES_OFF. It does not move
+>> the GPT primary header but only the partition entries. So sector 1 is
+>> still occupied.
+>>
+>> If I read you correctly, CONFIG_EFI_PARTITION_ENTRIES_OFF is not doing
+>> what you need. Instead of only moving the partition entries of the
+>> primary partition table, you want to move the complete primary GPT tabl=
+e.
+>>
+>> Somehow the operating system must find the primary GPT table.
+>>
+>> When writing the partition table shouldn't the offset be reflected in
+>> the protective MBR fields StartingCHS and StartingLBA? See Table 5.4
+>> "Protective MBR Partition Record protecting the entire disk*" of the
+>> UEFI 2.10 specification.
+>>
+>> Does Linux support this? For testing remove the backup partition table!
+>>
+>> GPT_PRIMARY_PARTITION_TABLE_LBA should be made configurable in this cas=
+e.
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>>
+>>> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+>>> ---
+>>>    disk/part_efi.c | 10 +++++-----
+>>>    1 file changed, 5 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/disk/part_efi.c b/disk/part_efi.c
+>>> index 4ce9243ef2..b55e251ea1 100644
+>>> --- a/disk/part_efi.c
+>>> +++ b/disk/part_efi.c
+>>> @@ -387,7 +387,7 @@ int write_gpt_table(struct blk_desc *desc, gpt_hea=
+der *gpt_h, gpt_entry *gpt_e)
+>>>        gpt_h->header_crc32 =3D cpu_to_le32(calc_crc32);
+>>>
+>>>        /* Write the First GPT to the block right after the Legacy MBR =
+*/
+>>> -     if (blk_dwrite(desc, 1, 1, gpt_h) !=3D 1)
+>>> +     if (blk_dwrite(desc, (lbaint_t)le64_to_cpu(gpt_h->my_lba), 1, gp=
+t_h) !=3D 1)
+>>>                goto err;
+>>>
+>>>        if (blk_dwrite(desc, le64_to_cpu(gpt_h->partition_entry_lba),
+>>> @@ -534,7 +534,7 @@ int gpt_fill_pte(struct blk_desc *desc,
+>>>
+>>>    static uint32_t partition_entries_offset(struct blk_desc *desc)
+>>>    {
+>>> -     uint32_t offset_blks =3D 2;
+>>> +     uint32_t offset_blks =3D GPT_PRIMARY_PARTITION_TABLE_LBA + 1;
+>>>        uint32_t __maybe_unused offset_bytes;
+>>>        int __maybe_unused config_offset;
+>>>
+>>> @@ -572,8 +572,8 @@ static uint32_t partition_entries_offset(struct bl=
+k_desc *desc)
+>>>         * The earliest LBA this can be at is LBA#2 (i.e. right behind
+>>>         * the (protective) MBR and the GPT header.
+>>>         */
+>>> -     if (offset_blks < 2)
+>>> -             offset_blks =3D 2;
+>>> +     if (offset_blks < (GPT_PRIMARY_PARTITION_TABLE_LBA + 1))
+>>> +             offset_blks =3D GPT_PRIMARY_PARTITION_TABLE_LBA + 1;
+>>>
+>>>        return offset_blks;
+>>>    }
+>>> @@ -584,7 +584,7 @@ int gpt_fill_header(struct blk_desc *desc, gpt_hea=
+der *gpt_h, char *str_guid,
+>>>        gpt_h->signature =3D cpu_to_le64(GPT_HEADER_SIGNATURE_UBOOT);
+>>>        gpt_h->revision =3D cpu_to_le32(GPT_HEADER_REVISION_V1);
+>>>        gpt_h->header_size =3D cpu_to_le32(sizeof(gpt_header));
+>>> -     gpt_h->my_lba =3D cpu_to_le64(1);
+>>> +     gpt_h->my_lba =3D cpu_to_le64(GPT_PRIMARY_PARTITION_TABLE_LBA);
+>>>        gpt_h->alternate_lba =3D cpu_to_le64(desc->lba - 1);
+>>>        gpt_h->last_usable_lba =3D cpu_to_le64(desc->lba - 34);
+>>>        gpt_h->partition_entry_lba =3D
+>>
+
