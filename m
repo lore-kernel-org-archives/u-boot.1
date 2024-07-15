@@ -4,110 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C80BC3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 12:29:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 721CFC3DA4B
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:03:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB54F8882C;
-	Mon, 15 Jul 2024 14:29:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3DB008881F;
+	Mon, 15 Jul 2024 15:03:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BRD4j35y";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="MFjxLhqE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E7EE88831; Mon, 15 Jul 2024 14:29:39 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CE8488837; Mon, 15 Jul 2024 15:03:21 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::629])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CE6A887E2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 14:29:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39EC08881F
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:03:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3679df4cb4cso2660891f8f.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 05:29:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721046577; x=1721651377; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=wEeAyIRJst9sDxyqsdKoPQlrbIwLQPAbxc6P2ys/4IM=;
- b=BRD4j35y9fLeznsA+SoNN+LbvTrag+Q7VjkKyfB8pk0f/4s0ZcZePS1G3xoC8xgKx4
- +6o502V7PfXwOWMp2SnZb5jR9/54OLfsOcGVHN74mZ1VVVgtB+RywY6e6/7k4PAg6u08
- GxfkUPVBv/T3L16Dqy+xF3ptDFuitXiWLfnio7M7utOqPyXyoZnuPRJL2xaAdcpw1mHQ
- eSYRnNl9dHPg5jX4FrCx6dYyjCfGHCtMu4+hvLZ7ZmtdZIqTCKiohk3sZmw3iNMfQegG
- UIlF8iib1r8oTTGi0uX/yVtjQormd2qvsyc/QVFIy7+1d3x1IzHAf7/3eEhdyXrUWqHi
- GLZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721046577; x=1721651377;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wEeAyIRJst9sDxyqsdKoPQlrbIwLQPAbxc6P2ys/4IM=;
- b=QNAPbqf0RqB+OGqi36yJeHKnDody13D6pBSMJHnXFawVAHBH3XTo/q2sL8uEs/l/3w
- lLzl6Z58oeDo2tooUScNkx7SZrPvJ3FNfvoAmwqTIYaQEbmp6/lS26JBtKn4zP0q6KJ5
- n9NBVauMB98a6BHRnh53F30Q3gUIQpPF+Ff+QJ1VGeQ0Ewov3Rtm12uhX2Dg3gxGqEPP
- 09lX4OGiwipkKNSmjmknio/RdDu4Iryr/+ZB4i3L5Cq0FZh3JVEEirjUNCG9rUnUKBDJ
- LtTI4SixIXckZn4GXE/VwKSauauG6t4MZVmtif2LVvsyDvWxIyddhL7ocqjhpdrixKan
- cZ8w==
-X-Gm-Message-State: AOJu0YxF5co6J7E9vw9d0BXRSk9zfqQmuRvKI9/UbYywQ/DymTA4H0az
- v6+zVmh4xX1TsfX+lF6/0k3Bwj/D6/BJO8xSjwOxct1buzF4XxTbZz68JKZV76A=
-X-Google-Smtp-Source: AGHT+IHqM+z4YRdoN4gIL/J5x2AKoSTF4SbBkxzUXrcp4RBxbuZQSTPcwdXvbYckuvi7EE7W6ZYj/A==
-X-Received: by 2002:a5d:584d:0:b0:365:aec0:e191 with SMTP id
- ffacd0b85a97d-367ff705388mr10160841f8f.21.1721046576807; 
- Mon, 15 Jul 2024 05:29:36 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:79bb:5f59:8e51:52d4?
- ([2a01:e0a:982:cbb0:79bb:5f59:8e51:52d4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafbf4bsm6282483f8f.73.2024.07.15.05.29.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jul 2024 05:29:36 -0700 (PDT)
-Message-ID: <268511f7-a79c-46f4-89eb-a46dd53a292b@linaro.org>
-Date: Mon, 15 Jul 2024 14:29:35 +0200
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kIAdIyXbEUMgDEP/0RZ/zjFAMtWmbu0KadW/s9C4sAGuGF9U/lK1NuogTBaF0vSYaY/KXDxFYKREo4Gmj+YQlLkDgb5ePbAIP5ZW1WavHws1DqpMFuUBOU6VCjoR38rc3wIuQOkZqHjCwzvUE7OurgVFLA2qQLTB2xBzyfQnKhy0NXxBPhdFLDSrFlzIwRG6lMt7WjScbwlav5fNXZ5acHA1ek49CVAdWkHuXDQhLA9fGnGH9Xjm/0yrOvxeXHF61A3xE9pTqCMbhAsshOFfwA/kDCF+p14ebQ7tCGopICey+1O/x2Wm6V//eGn5fP3JrIOuA6cScwHXYGfw21GPug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7QrWVsM+Mpucr4H6m6VUOpohSkbhjWo6POHblkK8QHM=;
+ b=m/7+LQJiwX40kbkz1gwlixFq/lQjKtJkS1EwT6aUF6Mqy/RcmfqkFcY9omjN6vwgT/FlqrLd1lqTDUeOR1/4jRIGBgDg9i8rqvbPnjNq7ZuPL4xQxbvSE/l9JdUCCN5tSTeJD0VBMOdIkCb5TjqFYbyYKEJ4cpPIriO+Q0qcWxA5EjfOQqa10WUIOMp151OMbZhhLhBtwVz9uOOJGAnaVzc2bpNViniBTwb1v/gpJ36j02EHAkhyD9QE/sWGvQBCR0WsrbTkmUVYH7/14MpABwlSOR0xTedOdhVs3qFWzXujVZBBh7UQ68g9K71G9u1WRyz+hH4PpmBszeQ2USK1Fg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7QrWVsM+Mpucr4H6m6VUOpohSkbhjWo6POHblkK8QHM=;
+ b=MFjxLhqE5MCfYXr9MXgP8x0ce2/O6JuE1GyVAfU60NeSKV0cYrTkkc2tUBhz7Uy20IJZTFLfTAT+quwvbFgHpqh+cMwLIVJLjYqdSE4iJX5FhUHAJTQi6Q4bOTPtt+S1R7VmQ7e2ROTVkRe9qQPptEbos7yNTFrJYK+E8oYVXgo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by PR3PR10MB3769.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:48::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.28; Mon, 15 Jul
+ 2024 13:03:14 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9fcc:5df3:197:6691%5]) with mapi id 15.20.7762.027; Mon, 15 Jul 2024
+ 13:03:14 +0000
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+To: Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de,  Tom Rini <trini@konsulko.com>,  Matthias Brugger
+ <mbrugger@suse.com>,  Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH v2 0/2] a little RPi watchdog cleanup
+In-Reply-To: <0586321e-b2b0-40f6-87cd-6da74b79fc40@denx.de> (Stefan Roese's
+ message of "Mon, 15 Jul 2024 08:57:44 +0200")
+References: <20240712090725.2093317-1-rasmus.villemoes@prevas.dk>
+ <0586321e-b2b0-40f6-87cd-6da74b79fc40@denx.de>
+Date: Mon, 15 Jul 2024 15:03:13 +0200
+Message-ID: <87a5ii959q.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0002.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:a::27) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v6 23/24] power: regulator: qcom-rpmh-regulator: add build
- infra
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
- <20240715-b4-qcom-rpmh-v6-23-0c948a25d018@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240715-b4-qcom-rpmh-v6-23-0c948a25d018@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|PR3PR10MB3769:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95b82c7d-345e-4639-23ea-08dca4ce7d10
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|366016|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dEGyhSOPOK72+2jW2Ta/rJXgWHVSJ5YCoQq+R5Q7UUHr3D3YyYv08hzVdDro?=
+ =?us-ascii?Q?r2I2h7xdvYmNTOb9xlW8uVT8xcZkLXLzdJCMXLvzkv9gqhKHEPs565tC0/Hv?=
+ =?us-ascii?Q?qrV37P56Y3FbFh/2Ij3vT1ff8LYkJ2rVg+KxLscrZldTv/CvNI0y456g4Q0a?=
+ =?us-ascii?Q?c0CAUJWMnylUZXLcg6sht+LrKLYNdh5z8vK/hszsz06Ax5uzlJm8UXOMI8jW?=
+ =?us-ascii?Q?K6pPSDvbvW5PIKG4nwcxDhRoUziStYT+JMUc8+vSQokl/SLEh91pWmKl65rY?=
+ =?us-ascii?Q?/kCif/rfT4qHEy6zuZQZgmYs+4YSHUjuyXU1k/mBQMJqP/8vNQ+n6lK7b8Vp?=
+ =?us-ascii?Q?urfdcnvHj2+Kh88Hz0LapKbTGDpoRm2iSx0zrE5pMlf6ETjnwhwndfQwaO0n?=
+ =?us-ascii?Q?PHmejDQIk7mc4E28Xq6299xeiXn0e6OYtGXwdfLBEwTe0L4aiEpPhlYSBSlJ?=
+ =?us-ascii?Q?aNNQYFypXcuNDiQDea8jhWARIDNwE0Sd9NKGcJWgziK0voWa9XAF/bYEMH1i?=
+ =?us-ascii?Q?Zls7pT1yjl4khVs9UVieHSVEx2uAMt/enzvXNSVGFCQ5ehlwIIFUXFEo+cMZ?=
+ =?us-ascii?Q?4camwGBW1KX81YbW/tuXQCvrQV50n7rM6GZ5PSeFAF3mZoWTojmBC3Id71c1?=
+ =?us-ascii?Q?8LftK8BRTrd6k1oh7f266SPASf46r78dc3jb4yExVKVEPd3ih2I9qb/whyoy?=
+ =?us-ascii?Q?RlPLTHCuOQrJLvohaWRF558Qpc76EQmQADFYmFp7DP8iomV5aT5aoIVLxWr/?=
+ =?us-ascii?Q?JXoPDue5pK1mk506XfZBs/WTaSObuUAvsyUxztC6K3CX8f03A+bUsI3m27GS?=
+ =?us-ascii?Q?GST99AtpIwFw/ROwwHDOrd6SlVdeBMGKvygYHNjVH6FRfjIhESM1Q8FFMyzG?=
+ =?us-ascii?Q?HxvQHWg253ceuvzkuHbxoS3OU0Lhi+MGC3g9G4/B4Zk0Jt9p4tNoaBIgiNhB?=
+ =?us-ascii?Q?oudh77IH9nkHVDtdJzcQX6jrqGNyoPLHuowPe+XQYk3sidTPIjMsNmaj6A+v?=
+ =?us-ascii?Q?VvIvaZdF1MjA98OZE1iHTCszeenipi+48BWNDU8AQ4Xq2TUJTvGpn0UmzY7m?=
+ =?us-ascii?Q?25/KpR7wL/PPVUILuCfiCB04W0VjstYY0uncJPky0DfbnT1KsYl9gUUUT4qE?=
+ =?us-ascii?Q?qKNSyRzdkRWD7C/qVTmFms3m3dIWFG+9rvqr5pB/9FPCwfkYVcBsZlcLlavF?=
+ =?us-ascii?Q?1ZNuiDkDFy7P/94Zcwljs5i5XjUnlRHAjtJuWJufv2fZockSm8f24kvw/0cN?=
+ =?us-ascii?Q?dOTg5tnZE8mmt7DBXArzZGmMQAoTj5XbiSb+SND/aoSKX8tV8/Kg8un3XyTw?=
+ =?us-ascii?Q?ET58FK0/+nmgSftSgf+f9PZdibZe35B20T4hnqfiQWdAfA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(366016)(376014)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xN/K/Atlta4EfnwAiG0P1OdReuI+dorojtuMUtS/VD14C8kUgmBhxDEwYsRw?=
+ =?us-ascii?Q?NIM2xOlInTxdHyhkHLIdGIRjoeVuiBgarDpi4YrEQGIrN7THdNIkN3VxZPDB?=
+ =?us-ascii?Q?m2qmEr/hWu402OrsbZ1CihFHzV8SP/zLDnSd23OywXc6UKyOfqSp6WdOISu9?=
+ =?us-ascii?Q?bi+Cexsgx4E47TWqrp47WrFsN0/cnMbhDsO5FdYA2C1zANLmC+5ZIVBSUBCX?=
+ =?us-ascii?Q?dUqGjx3t/xqYake8yuDfqTRj62u1teqMf+uO7J2gxJzZ6kZeTUHSIYmXB/vP?=
+ =?us-ascii?Q?qhQq4PL3mFUQQAOnGy+hP2dGz2w2PDQYmeaucWIaqPoBntcJaucoGID6W5XG?=
+ =?us-ascii?Q?yhTNx5iIIW3o8JwCTsV2n5oVG4H1FYIdWWGsynH28CT3C6HLD0F74mFvrMah?=
+ =?us-ascii?Q?34djWbV/8m4lRGlsjdnBr6Zuz4epr54885ThriUr3UY7gkuUmCGr7CRVQ/rl?=
+ =?us-ascii?Q?yO+F+DxZUEyA7wl2pG6TiMoxMV0htgKzNy4775GK+thE+ygQEEK2BF42f4Pf?=
+ =?us-ascii?Q?e8DQUo97JyfEY0KRBW7g3t+XVIj4Kqh3/PHz65MwHGe8SJ2CZ2wzQUYJc5g5?=
+ =?us-ascii?Q?hZXK8YDwEYvlpEdu34AiNP0HKC147fBS/HkCiWJJakgu0tI94yNc3F0tnSyn?=
+ =?us-ascii?Q?wk9I+9hCvNG+fKzkfv9X9BvZQAAhzhKxIb5GffAlRMkZpVSVR0TY/c04zMNv?=
+ =?us-ascii?Q?siuQIOnBIYRzusTdlozk85cCoQGa9vrpSzQMDFkUwQ1Sz+wb8o2SRYvj+esk?=
+ =?us-ascii?Q?WLwvhKrDC4BpL00N3Mg4YLvNPhu/f7HyST0dM2hrO3243Oo9jRPt3YrpzjBS?=
+ =?us-ascii?Q?zG81FwWflSCKTeVLk9+MQ6BSEmzlpO43F1gMnS17HRfQ20NYsG4zBQFLkpT6?=
+ =?us-ascii?Q?ADZMcAnWoCooq6zucv6UxK7SLgsMA2is2A6GYtoCO9eCid+oaD5r2vgJ7ALl?=
+ =?us-ascii?Q?/cY6fQshv6b3/Qq41eOaokAMkR0fO6CBgrEs2d33q4XatDBQc7pebrZ6ShGY?=
+ =?us-ascii?Q?A885SvDf8DeYHbl7VPFGdsNbINAu0dhaLuzc/ED7wGT0mKPURaDWU+Ro5CZ7?=
+ =?us-ascii?Q?rojDpa1f/CJMmg9yW3LJFmVvdrxgVaLyTNr8vK85XTfWPY5Fv40qmJ5qnax3?=
+ =?us-ascii?Q?gloqXcV1/n3K4oCO7CiR3uLlxwC+dzgKAJK5KR3HuAru9g0AZZSCRuyXoBZk?=
+ =?us-ascii?Q?O3IkSvf7LknS6cHhxxECcvvLvyC3H/yz9UPpuizUqUWG3Q9rH+fW6WmFuowJ?=
+ =?us-ascii?Q?tOdes9rJWMtGeKYrvsy4yrDdL8jKPA994qv0vEdt49YwBpilRPpJmLkQof06?=
+ =?us-ascii?Q?fLMrSnSrj7ioouVz0q9LB44PZL4quMkc1A9Q0j9F1EjlH+6cklUN0HNwsSI8?=
+ =?us-ascii?Q?3dRXPAiZFvQRytZepSB97/KynM4e6GjHV0xB6O5rtFdUEDqtdnAL/SfbEcqE?=
+ =?us-ascii?Q?mACNUHfgH4a0GUShXqLB7LQXPsrvxuD/MUp7zaCih3qjIftcykuBItvll2O9?=
+ =?us-ascii?Q?NFh0o/OXqO+vpw+LMmg1DlvYj+o64Uw3h7aqxyeMNz2K++hLndtrCvXd0EOT?=
+ =?us-ascii?Q?WhNkXMJZY+yLMkKYiyRedEtiPL1E+OQ/x4wll2BHTAnKdz5WdDoyHWU/YyC2?=
+ =?us-ascii?Q?tg=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95b82c7d-345e-4639-23ea-08dca4ce7d10
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2024 13:03:14.9387 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7+xb1vv0ZHRVJw2Gq2gQ1bGMl0Zl+ZiCDCS6IWW5KhlFDds9Qtrxf3yZTgXCSNLH1Yi8P4oH+gmwc9krh10nRXU0zyZgXY6lqOJgEX/KIUg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3769
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,57 +153,23 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15/07/2024 12:08, Caleb Connolly wrote:
-> Add Kconfig and Makefile entries for this driver now that it can build
-> for U-Boot.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/power/regulator/Kconfig  | 8 ++++++++
->   drivers/power/regulator/Makefile | 1 +
->   2 files changed, 9 insertions(+)
-> 
-> diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-> index 102ec7bc5f89..bc061c20d75e 100644
-> --- a/drivers/power/regulator/Kconfig
-> +++ b/drivers/power/regulator/Kconfig
-> @@ -215,8 +215,16 @@ config DM_REGULATOR_GPIO
->   	This config enables implementation of driver-model regulator uclass
->   	features for gpio regulators. The driver implements get/set for
->   	voltage value.
->   
-> +config DM_REGULATOR_QCOM_RPMH
-> +	bool "Enable driver model for Qualcomm RPMh regulator"
-> +	depends on DM_REGULATOR && QCOM_RPMH
-> +	---help---
-> +	  Enable support for the Qualcomm RPMh regulator. The driver
-> +	  implements get/set api for a limited set of regulators used
-> +	  by u-boot.
-> +
->   config SPL_DM_REGULATOR_GPIO
->   	bool "Enable Driver Model for GPIO REGULATOR in SPL"
->   	depends on DM_REGULATOR_GPIO && SPL_GPIO
->   	select SPL_DM_REGULATOR_COMMON
-> diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-> index f79932d83307..56a527612b74 100644
-> --- a/drivers/power/regulator/Makefile
-> +++ b/drivers/power/regulator/Makefile
-> @@ -20,8 +20,9 @@ obj-$(CONFIG_$(SPL_)REGULATOR_PWM) += pwm_regulator.o
->   obj-$(CONFIG_$(SPL_)DM_REGULATOR_FAN53555) += fan53555.o
->   obj-$(CONFIG_$(SPL_)DM_REGULATOR_COMMON) += regulator_common.o
->   obj-$(CONFIG_$(SPL_)DM_REGULATOR_FIXED) += fixed.o
->   obj-$(CONFIG_$(SPL_)DM_REGULATOR_GPIO) += gpio-regulator.o
-> +obj-$(CONFIG_DM_REGULATOR_QCOM_RPMH) += qcom-rpmh-regulator.o
->   obj-$(CONFIG_$(SPL_TPL_)REGULATOR_RK8XX) += rk8xx.o
->   obj-$(CONFIG_DM_REGULATOR_S2MPS11) += s2mps11_regulator.o
->   obj-$(CONFIG_REGULATOR_S5M8767) += s5m8767.o
->   obj-$(CONFIG_DM_REGULATOR_SANDBOX) += sandbox.o
-> 
+Stefan Roese <sr@denx.de> writes:
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> @Tom,
+>
+> I can't find these patches (and v1) in patchworks. Do you have an
+> idea, why this is the case?
+>
+
+Perhaps because they (v2) have already been merged to master via a PR from
+Peter?  commit 1ca216522d4.
+
+So one has to change 'state' from 'action required' to see them:
+https://patchwork.ozlabs.org/project/uboot/list/?series=&submitter=&state=*&q=hw_watchdog&archive=&delegate=
+
+Rasmus
