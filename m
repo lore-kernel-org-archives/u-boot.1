@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73701C3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:35:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B0EC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C6C78893B;
+	by phobos.denx.de (Postfix) with ESMTP id A066388950;
 	Mon, 15 Jul 2024 15:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L4sDRMPe";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Df8HAOp1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F508888EA; Mon, 15 Jul 2024 15:31:56 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id EDA5D88927; Mon, 15 Jul 2024 15:31:56 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34A258892E
+ by phobos.denx.de (Postfix) with ESMTPS id D6FBB888CF
  for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6b772455ab4so7780566d6.0
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-79f1b569ab7so255339285a.3
  for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721050313; x=1721655113; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721050314; x=1721655114; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YwPJAAJwRHDi4/J43zCM4znCpkNwgSTn5XHwOBxD/0Y=;
- b=L4sDRMPe/WQcJ2ku3Xv8l//cixYXqxnoUshu4oDvYACvcCTdXUSC2jmmLOmcA1mu3y
- +a0sqRyBZavgUWdTQtrbqPdMJHrr7FFT0cFfrZaaKKyeN5VaexjURp52dpNLXyZx+EVd
- UIrn+AR5OyzM3ejq+l/zTkclJwEr6ZMoxLZ7o=
+ bh=kusLbx5+1dCEiO6aYkzN7JncsCLDvIVD3LUj96c53h4=;
+ b=Df8HAOp18Gpqwk5H0NwLA5Tbq/aMTqMz4Kgbi5eMFYJ6MxoBWEBmxRj4VRcideQ2Ts
+ PPjGJrQngio7a4cOzSbHp2Ho9bgR04rGmJcWNyfuHgCQ501ixzXdBHnOyFrb1ZyPAQeR
+ MbdE7D6ZVyXkALbTJx9II9jSpZf/EhFrv65VY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721050313; x=1721655113;
+ d=1e100.net; s=20230601; t=1721050314; x=1721655114;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YwPJAAJwRHDi4/J43zCM4znCpkNwgSTn5XHwOBxD/0Y=;
- b=ialJrzmKJJP11Ax/9mqDOb3YRIeF/io6dP2gnqjHeKUkzX5gAbAYsTUC8GbrMaC5il
- btK7/42Gv/ApkPIaDVHqREkLdskR602+clsPsCYVGhvyB7gPmr/xuZ6T/el9MbXIQFVy
- gP0xLsvKnAYiozr7oDnhc3RNQPn2SKToFRYXzXSY0CzCdOkwzCsLRVmWGVm6bBk2PAfT
- vhUKOGEVqxUVD99iyCJBGehgeKgU4u3CZjj2Wu2O5c7KaaLGv+YHXgC5Ip6NHdRtY7bw
- sT4F7XXlL/JY6qIlCuP0VKGlXJb8Q+oLCAh/SvILsBGG5WXoDqGXahLKJXNy/+9vh9J3
- LSqw==
-X-Gm-Message-State: AOJu0YxaY60n3xhm41EPoo3Uon66a3asH1hqnb9zujUjTykhpSPMSEOc
- hPslNUNIzbJ9njcqmJlnIn+4BUWrWDIdc4H/b3VfDNje+L3IHVBVxqoIKg6mMoytVmq44UcNe6L
- JSacvb0zOqcVwdCijob0EH825ZhHsKvcczs+9
-X-Google-Smtp-Source: AGHT+IGrsUO2v1OEEe+a3N3isRzYBan2e9gWaIT69dLtK6OhhRvjeAYZW3cB2tgtLPooviCpzl9Kpn2WZ8Rqsobi4W4=
-X-Received: by 2002:a05:6214:ca6:b0:6b5:1584:62bf with SMTP id
- 6a1803df08f44-6b754b6bf06mr171162996d6.6.1721050313121; Mon, 15 Jul 2024
+ bh=kusLbx5+1dCEiO6aYkzN7JncsCLDvIVD3LUj96c53h4=;
+ b=Q3rYl8+n+v0GXfZ8refAAlZRR9VhYv/jF05zvL4d6AscyQOaBbfcZc/kaJorylmgf7
+ p1JhKmHYBsydzvGOUVRdwNqohGp6ZEn3QPuPwt+mdVcY06jFKWnxdvtSJ7ZvdahuyH5d
+ Xd+7CVl/685f78FqkrmrbrvhujP6e+IOfg0QJpVx7VOO1FE6MEN8mjOf1q2T+Mna7oMR
+ fAzKRHEsGci7GCkAO8RmiMMRq7CjlW4zObq544g405QMFYJKAJj0RI1TrPyge8h64jDM
+ GSC8x64BLHfIVBu8jI8jvZeRb03xxgSVCBOB9YEny+gdeMmjDvQ0HgKYmlWVdoQUW0RD
+ /kWg==
+X-Gm-Message-State: AOJu0YzNb9aRP+2lGUwjwW6PfwcthTAznYlhc3L0ocBrVeNgAf69DULv
+ qSWS0L5GgzMQXiGJNbVCyGTBq+X9C6QQt8hyEjKG1TRJLis9eRE+1aA5yoqgdZ4zwLoQ/IAeJ93
+ wYSnY+7zpq1I5mEEFaTB9QAZiOJrohYJT/PhL4pUtex5/e48=
+X-Google-Smtp-Source: AGHT+IF8gWKgnujL3QmZdVHFY9AG81nzapdE/VB3/e9Lz9vl/UntSh1nNNMJrcQljMq6ENg+O1xS/Ob0Kcnuoq9HdQQ=
+X-Received: by 2002:a05:6214:27c7:b0:6b5:8f79:7bc with SMTP id
+ 6a1803df08f44-6b61bc803d9mr207991506d6.1.1721050313810; Mon, 15 Jul 2024
  06:31:53 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 15 Jul 2024 06:31:52 -0700
+ HTTPREST; Mon, 15 Jul 2024 06:31:53 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTg-z4TgQ1Y9hjsOhGsKczJ_A9_0j4Cm73e69Bvnu1jZKA@mail.gmail.com>
-References: <CAFLszTg-z4TgQ1Y9hjsOhGsKczJ_A9_0j4Cm73e69Bvnu1jZKA@mail.gmail.com>
- <20240604161607.1133032-1-brandon.maier@collins.com>
-Date: Mon, 15 Jul 2024 06:31:52 -0700
-X-Google-Sender-Auth: 0NVireR2c75m_bN_qkNEi89e2_Y
-Message-ID: <CAFLszTj_T76VULtZF=pfXE9ZCnuJKuCXd9DCth5nhMmm_8gr0Q@mail.gmail.com>
-Subject: Re: [PATCH 1/3] tools: binman: fix deprecated Python unittest methods
+In-Reply-To: <CAFLszThQPiyH+3L07=aufMLocL3YGiHaL20LMCvmx=BV28+7NA@mail.gmail.com>
+References: <CAFLszThQPiyH+3L07=aufMLocL3YGiHaL20LMCvmx=BV28+7NA@mail.gmail.com>
+ <20240527200417.2108290-1-rasmus.villemoes@prevas.dk>
+Date: Mon, 15 Jul 2024 06:31:53 -0700
+X-Google-Sender-Auth: XRy36uULgSuixqahF_eXSGGi-Q0
+Message-ID: <CAFLszThy6mjfxOc_OwJGU-4+=pikODsvV+AzFw1ozZTeFiZmeg@mail.gmail.com>
+Subject: Re: [PATCH] global_data.h: drop write-only field dm_root_f
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Brandon Maier <brandon.maier@collins.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,27 +86,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 4 Jun 2024 at 10:16, Brandon Maier <brandon.maier@collins.com> wrote:
+On Mon, 27 May 2024 at 14:04, Rasmus Villemoes
+<rasmus.villemoes@prevas.dk> wrote:
 >
-> The methods `unittest.assertEquals()` and
-> `unittest.assertRegexpMatches()` are marked deprecated[1].
+> The dm_root_f field seems to be entirely write-only and hence
+> redundant, unless 'git grep' fails to find some access generated via
+> preprocessor token concatenation or similar.
 >
-> In Python 3.12 these aliases have been removed, so do a sed to replace
-> them with their new names.
->
-> [1] https://docs.python.org/3.11/library/unittest.html#deprecated-aliases
->
-> Signed-off-by: Brandon Maier <brandon.maier@collins.com>
-> CC: Simon Glass <sjg@chromium.org>
-> CC: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 > ---
->  tools/binman/entry_test.py  |  6 +--
->  tools/binman/fdt_test.py    | 48 ++++++++++++------------
->  tools/binman/ftest.py       | 42 ++++++++++-----------
->  tools/buildman/func_test.py | 74 ++++++++++++++++++-------------------
->  tools/buildman/test.py      |  2 +-
->  5 files changed, 86 insertions(+), 86 deletions(-)
+>  common/board_r.c                  | 3 +--
+>  include/asm-generic/global_data.h | 4 ----
+>  test/dm/core.c                    | 1 -
+>  3 files changed, 1 insertion(+), 7 deletions(-)
+>
+
+It is used for accessing the pre-relocation devices in case that is
+useful / possible. But it seems that we haven't had many use cases, so
+I am OK with dropping this and adding it back later if needed.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
 
 Applied to u-boot-dm, thanks!
