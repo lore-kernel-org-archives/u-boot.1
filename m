@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1238BC3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:42:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F6AEC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:48:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84FC588403;
-	Mon, 15 Jul 2024 11:42:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7353887E2;
+	Mon, 15 Jul 2024 11:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dxGp7AW+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BhwbROtO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD5BF88403; Mon, 15 Jul 2024 11:42:13 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 04496887FA; Mon, 15 Jul 2024 11:48:38 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B890582B86
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:42:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EB2D883DE
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:48:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-58b0beaf703so5044889a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:42:11 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-595850e7e11so5023156a12.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:48:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721036531; x=1721641331; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721036914; x=1721641714; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nWiYO0naaql+Glj/IU0SQymT7gDqsT3HfSfVZ9whUd8=;
- b=dxGp7AW+btIJFQjEiHPLMeygdRUi5NYqeDQMW4Q6B+dU/8yX6pY4YaZRQP2wh96J6X
- 0s8Kgs1LX7t8J077QyuSP9X5byjqgHQNnU0BRUJ0TDC/86bMe31qHx9NniKLHDzyDD71
- EWnFbfZX+WzKDehjDKjcWnbBRRz5Ov4MT6b6g3nNE8Fmd0zSgY496WIw8650pMfrus4n
- P69Ulr2QfMVGloiGsgCxDowZslfA0Pz/sDS9wytep9hmpV2SPTj2VMiPdWFUlrsAcHvj
- Rp2k3EScZFeV2s5Ek96CNvqpjSHag2xMnnfXtDeMcAw82gNCYvfPQHLReVNvs717RSNR
- BgxQ==
+ bh=46hQka6IgN2K7KwU6Ldh2qMv5TCMfrchtV+kJ4F7QYk=;
+ b=BhwbROtOpEYYTk6hGCFpkzazsd+ysGYoc5QJVYlsBj3I71Uex6ZUn9Kua7FHuynadl
+ KU7YlEhfYSZkC/IjHqh7/+ci2zINekP/tf72Ue3I7Vy0QJ5EbdXH2oVlPs43PuHjQe5I
+ PHyeHtPMjw7P1kWXgymD6jPSdK9gkUGZjpneYa9cu5EPovWw0/CNvIsBj2kd7Xt+nDwC
+ crVLkJnL22vz/4vCIa0grO6n4E5LU1fxgoBPxsSxbcGSx/2RmDdMVaMJxEkPIKzvG54j
+ V+5FPom3WMDxjVZm5kGexmbFUmklQQoaQX2U0pJ0EGjk08VkP7u0EtLTDyDWzncs+CkH
+ z3uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721036531; x=1721641331;
+ d=1e100.net; s=20230601; t=1721036915; x=1721641715;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nWiYO0naaql+Glj/IU0SQymT7gDqsT3HfSfVZ9whUd8=;
- b=RA209LVdfo1hmPP81wtkEWCrCzR9naGgG8HQilcrFyyeP0XOIlmR710i/OWuTP5xud
- eRGDGhx+PSu0mPWE5luvutTcupI2DmMVNmeqAIJZkifeb+L77DP3dUoyDEuypCEyuhXc
- MLUlmANPy4jWP1jsMA31a0Rqi6/IvltN2gdBUJEkyVMFEx7TcXCoHRmlFfimXHEvcmY3
- iWhoGtmd1icrpnNh0sghwgxrEuSX0dOWFaGBfISi0FmIrN37sOLm6uu8W9w98xyWiiKw
- YQf0KA9Mve+rxMSj/ba0CYYRNq3VLoGdQ4ypxTL5Jh7jgS8dxiwB/SoGhAY74aO14TcH
- OV/w==
-X-Gm-Message-State: AOJu0YzUzAO2UOFr8ffLilSBcYTcw6RrSUmx8GmVAAt+k+5uDW6uLrdQ
- FbLXMmqzrgqbg3GdNMdVYbJGSu8FjiqJGZPGlRNK/UTRXQucOd8qz1fxY+GOH29ZQjXyYlKdiEh
- SpyQmr2y4JBJcsowhxod8myFl+75X5YlWGjaryQ==
-X-Google-Smtp-Source: AGHT+IFnzGV1iJ4wduw9QsvjQsdNQvHzfq0ZV3SY0ObjNM82K6IIxETt0avlv19qRYXYAY1wCo4CqYmNlGthgc2KxZg=
-X-Received: by 2002:a05:6402:5256:b0:58d:31f6:2162 with SMTP id
- 4fb4d7f45d1cf-594bcab1320mr13095254a12.36.1721036531089; Mon, 15 Jul 2024
- 02:42:11 -0700 (PDT)
+ bh=46hQka6IgN2K7KwU6Ldh2qMv5TCMfrchtV+kJ4F7QYk=;
+ b=v+nYWAjZQCRRf5VYa/GIhpcQdNo6C3bgkSFI4TKNCdgjtt6f0c4gQKh56qq4OtYQpV
+ 9C783W9P8QS1kAFx1zrkmxRlqj5GAHrLQZSSZQAm0Js5Ap0e99H1lGPGENqTdQXIQ83k
+ pw/jQGlZhgKSS4KPxahJjFGrWMC2k0Rs2DGkD2keHkee8/Jo6iG/e4071/Hf7V9GD+Vj
+ Kz+3wsfUhKohb8Uznw8kbfhsEyRLLb5Bdfo7wdxOZuTqV4pCe5aKhPw3qt5GkkA0SvF2
+ Ft806x927HljxHOidbrn86OasgEINtkwbjYOdRrzkvepc/epXg4Zcbsou7kDx2BVwESA
+ xShg==
+X-Gm-Message-State: AOJu0YzD7+3y7j/ClGZo6iI7DsBmjG50buoXD0pBoVzop0w7pnwYRhQL
+ iwouYcbZc/N9hBA34wBhz+KU+vedNxDxE2BEE4IJXl/g3ogkaBvTFAnuaSySteIvANXbQWibiKa
+ KwfePvuhKU7hy8L444cEB94nAQBcmbB/OVJ3nkw==
+X-Google-Smtp-Source: AGHT+IEeYXnAWTQVY4pTm961AQoATH798HMjLvQ6jjoecyeT71llQY7ZwTdeYgGb9a/xs5b0y2eEF2sZzXds7DwXrQ0=
+X-Received: by 2002:a50:8a93:0:b0:579:e7c5:1001 with SMTP id
+ 4fb4d7f45d1cf-594ba59fdafmr10031570a12.23.1721036914482; Mon, 15 Jul 2024
+ 02:48:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-47-sughosh.ganu@linaro.org>
- <CAFLszThvVSuUMOavz=MqpE5GSm5Yr2CBBUvMkvV7RbNGQEPDVg@mail.gmail.com>
-In-Reply-To: <CAFLszThvVSuUMOavz=MqpE5GSm5Yr2CBBUvMkvV7RbNGQEPDVg@mail.gmail.com>
+ <20240704073544.670249-14-sughosh.ganu@linaro.org>
+ <CAFLszTjPtFX60ZvJtcG=3z-waRpQMYad9-bsVPUsP0MmHkJ7jA@mail.gmail.com>
+In-Reply-To: <CAFLszTjPtFX60ZvJtcG=3z-waRpQMYad9-bsVPUsP0MmHkJ7jA@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 15 Jul 2024 15:11:59 +0530
-Message-ID: <CADg8p96xj1MCKnrhKL5JoyrJfbr3xYqmQ00JJtMLAT_hyNKqQA@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 46/48] lmb: mark the EFI runtime memory regions as
- reserved
+Date: Mon, 15 Jul 2024 15:18:23 +0530
+Message-ID: <CADg8p96u23yVvksHqGnVsNKqcQd=VpHsM4utktujzUqpwv3Ggg@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 13/48] lmb: make LMB memory map persistent and
+ global
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -98,99 +98,189 @@ On Sat, 13 Jul 2024 at 20:46, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sughosh,
 >
-> On Thu, 4 Jul 2024 at 08:38, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Mark the EFI runtime memory region as reserved memory during board
-> > init so that it does not get allocated by the LMB module on subsequent
-> > memory requests.
+> > The current LMB API's for allocating and reserving memory use a
+> > per-caller based memory view. Memory allocated by a caller can then be
+> > overwritten by another caller. Make these allocations and reservations
+> > persistent using the alloced list data structure.
+> >
+> > Two alloced lists are declared -- one for the available(free) memory,
+> > and one for the used memory. Once full, the list can then be extended
+> > at runtime.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> > Changes since V1: New patch
+> > Changes since V1:
+> > * Use alloced list structure for the available and reserved memory
+> >   lists instead of static arrays.
+> > * Corresponding changes in the code made as a result of the above
+> >   change.
+> > * Rename the reserved memory list as 'used'.
 > >
-> >  lib/lmb.c | 41 ++++++++++++++++++++---------------------
-> >  1 file changed, 20 insertions(+), 21 deletions(-)
->
-> I see again that this is getting circular. Can you look at what is
-> actually allocated by EFI on init (i.e. before anything is booted)?
-
-This code is simply ensuring that the EFI runtime regions are marked
-as reserved by the LMB module to prevent that region from being
-allocated. Do you have any other way by which this can be communicated
-to the LMB module ?
-
--sughosh
-
->
+> >  include/lmb.h |  77 +++--------
+> >  lib/lmb.c     | 346 ++++++++++++++++++++++++++++++--------------------
+> >  2 files changed, 224 insertions(+), 199 deletions(-)
 > >
+> > diff --git a/include/lmb.h b/include/lmb.h
+> > index 99fcf5781f..27cdb18c37 100644
+> > --- a/include/lmb.h
+> > +++ b/include/lmb.h
+> > @@ -24,78 +24,18 @@ enum lmb_flags {
+> >  };
+> >
+> >  /**
+> > - * struct lmb_property - Description of one region.
+> > + * struct lmb_region - Description of one region.
+> >   *
+> >   * @base:      Base address of the region.
+> >   * @size:      Size of the region
+> >   * @flags:     memory region attributes
+> >   */
+> > -struct lmb_property {
+> > +struct lmb_region {
+> >         phys_addr_t base;
+> >         phys_size_t size;
+> >         enum lmb_flags flags;
+> >  };
+> >
+> > -/*
+> > - * For regions size management, see LMB configuration in KConfig
+> > - * all the #if test are done with CONFIG_LMB_USE_MAX_REGIONS (boolean)
+> > - *
+> > - * case 1. CONFIG_LMB_USE_MAX_REGIONS is defined (legacy mode)
+> > - *         => CONFIG_LMB_MAX_REGIONS is used to configure the region size,
+> > - *         directly in the array lmb_region.region[], with the same
+> > - *         configuration for memory and reserved regions.
+> > - *
+> > - * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
+> > - *         region is configurated *independently* with
+> > - *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
+> > - *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
+> > - *         lmb_region.region is only a pointer to the correct buffer,
+> > - *         initialized in lmb_init(). This configuration is useful to manage
+> > - *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
+> > - */
+> > -
+> > -/**
+> > - * struct lmb_region - Description of a set of region.
+> > - *
+> > - * @cnt: Number of regions.
+> > - * @max: Size of the region array, max value of cnt.
+> > - * @region: Array of the region properties
+> > - */
+> > -struct lmb_region {
+> > -       unsigned long cnt;
+> > -       unsigned long max;
+> > -#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+> > -       struct lmb_property region[CONFIG_LMB_MAX_REGIONS];
+> > -#else
+> > -       struct lmb_property *region;
+> > -#endif
+> > -};
+> > -
+> > -/**
+> > - * struct lmb - Logical memory block handle.
+> > - *
+> > - * Clients provide storage for Logical memory block (lmb) handles.
+> > - * The content of the structure is managed by the lmb library.
+> > - * A lmb struct is  initialized by lmb_init() functions.
+> > - * The lmb struct is passed to all other lmb APIs.
+> > - *
+> > - * @memory: Description of memory regions.
+> > - * @reserved: Description of reserved regions.
+> > - * @memory_regions: Array of the memory regions (statically allocated)
+> > - * @reserved_regions: Array of the reserved regions (statically allocated)
+> > - */
+> > -struct lmb {
+> > -       struct lmb_region memory;
+> > -       struct lmb_region reserved;
+> > -#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+> > -       struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
+> > -       struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
+> > -#endif
+> > -};
+> > -
+> > -void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
+> > -void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+> > -                               void *fdt_blob);
+> >  long lmb_add(phys_addr_t base, phys_size_t size);
+> >  long lmb_reserve(phys_addr_t base, phys_size_t size);
+> >  /**
+> > @@ -134,6 +74,19 @@ void board_lmb_reserve(void);
+> >  void arch_lmb_reserve(void);
+> >  void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align);
+> >
+> > +/**
+> > + * lmb_mem_regions_init() - Initialise the LMB memory
+> > + *
+> > + * Initialise the LMB subsystem related data structures. There are two
+> > + * alloced lists that are initialised, one for the free memory, and one
+> > + * for the used memory.
+> > + *
+> > + * Initialise the two lists as part of board init.
+> > + *
+> > + * Return: 0 if OK, -ve on failure.
+> > + */
+> > +int lmb_mem_regions_init(void);
+> > +
+> >  #endif /* __KERNEL__ */
+> >
+> >  #endif /* _LINUX_LMB_H */
 > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 387ec2ac65..6018f1de31 100644
+> > index 80945e3cae..a46bc8a7a3 100644
 > > --- a/lib/lmb.c
 > > +++ b/lib/lmb.c
-> > @@ -19,6 +19,7 @@
+> > @@ -6,6 +6,7 @@
+> >   * Copyright (C) 2001 Peter Bergner.
+> >   */
+> >
+> > +#include <alist.h>
+> >  #include <efi_loader.h>
+> >  #include <image.h>
+> >  #include <mapmem.h>
+> > @@ -15,24 +16,30 @@
+> >
 > >  #include <asm/global_data.h>
 > >  #include <asm/sections.h>
-> >  #include <linux/kernel.h>
-> > +#include <linux/sizes.h>
+> > +#include <linux/kernel.h>
 > >
 > >  DECLARE_GLOBAL_DATA_PTR;
 > >
-> > @@ -212,33 +213,31 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
-> >  /**
-> >   * efi_lmb_reserve() - add reservations for EFI memory
-> >   *
-> > - * Add reservations for all EFI memory areas that are not
-> > - * EFI_CONVENTIONAL_MEMORY.
-> > + * Add reservations for EFI runtime services memory
-> >   *
-> > - * Return:     0 on success, 1 on failure
-> > + * Return: None
-> >   */
-> > -static __maybe_unused int efi_lmb_reserve(void)
-> > +static __maybe_unused void efi_lmb_reserve(void)
-> >  {
-> > -       struct efi_mem_desc *memmap = NULL, *map;
-> > -       efi_uintn_t i, map_size = 0;
-> > -       efi_status_t ret;
-> > +       phys_addr_t runtime_start, runtime_end;
-> > +       unsigned long runtime_mask = EFI_PAGE_MASK;
+> >  #define LMB_ALLOC_ANYWHERE     0
+> > +#define LMB_ALIST_INITIAL_SIZE 4
 > >
-> > -       ret = efi_get_memory_map_alloc(&map_size, &memmap);
-> > -       if (ret != EFI_SUCCESS)
-> > -               return 1;
-> > +#if defined(__aarch64__)
-> > +       /*
-> > +        * Runtime Services must be 64KiB aligned according to the
-> > +        * "AArch64 Platforms" section in the UEFI spec (2.7+).
-> > +        */
-> >
-> > -       for (i = 0, map = memmap; i < map_size / sizeof(*map); ++map, ++i) {
-> > -               if (map->type != EFI_CONVENTIONAL_MEMORY) {
-> > -                       lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
-> > -                                                       map->physical_start),
-> > -                                         map->num_pages * EFI_PAGE_SIZE,
-> > -                                         map->type == EFI_RESERVED_MEMORY_TYPE
-> > -                                             ? LMB_NOMAP : LMB_NONE);
-> > -               }
-> > -       }
-> > -       efi_free_pool(memmap);
-> > +       runtime_mask = SZ_64K - 1;
-> > +#endif
-> >
-> > -       return 0;
-> > +       /* Reserve the EFI runtime services memory */
-> > +       runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
-> > +       runtime_end = (uintptr_t)__efi_runtime_stop;
-> > +       runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
-> > +
-> > +       lmb_reserve_flags(runtime_start, runtime_end - runtime_start,
-> > +                         LMB_NOOVERWRITE | LMB_NONOTIFY);
-> >  }
-> >
-> >  static void lmb_reserve_common(void *fdt_blob)
-> > --
-> > 2.34.1
-> >
+> > -static void lmb_dump_region(struct lmb_region *rgn, char *name)
+> > +struct alist lmb_free_mem;
+> > +struct alist lmb_used_mem;
+>
+> I think these should be in a struct, e.g. struct lmb, allocated with
+> malloc() and pointed to by gd->lmb so we can avoid making the tests
+> destructive, and allow use of lmb in SPL.
+
+Can you elaborate on the point of allowing use of lmb in SPL. Why
+would the current design not work in SPL ? I tested this on the
+sandbox SPL variant, and the two lists do get initialised as part of
+the SPL initialisation routine. Is there some corner-case that I am
+not considering ?
+
+Also, regarding putting the lmb structure pointer as part of gd, iirc
+Tom had a different opinion on this. Tom, can you please chime in here
+?
+
+ > There is a
+> arch_reset_for_test() which can reset the lmb back to its original
+> state, or perhaps just swap the pointer for tests.
+>
+> I know this series is already long, but this patch seems to do quite a
+> bit. Perhaps it could be split into two?
+
+Sorry, do you mean the patch, or the series. If the later, I am going
+to split the non-rfc version which comes next into two parts. The
+first part being the lmb changes.
+
+-sughosh
+
 >
 > Regards,
 > Simon
