@@ -4,161 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D59DAC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 08:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A00BC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:24:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2650984374;
-	Mon, 15 Jul 2024 10:56:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 9891D87F9F;
+	Mon, 15 Jul 2024 11:24:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="AIwC4RvK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q8xNdRNf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E429831A1; Mon, 15 Jul 2024 10:56:44 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A88B6887CB; Mon, 15 Jul 2024 11:24:17 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FA068780A
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 10:56:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7D7D787F9F
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:24:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SuB/z20yW2wFK8/V9M/fseH9uJVAmd3faMvPvkaGTNO9wUzgsuPsO8ND51OF6p9SrJCbvp61cCCnhy2KwxgIVVkNbF264kaTHLk41MSeQQrEAGwygxlW2HUnV6+/BJ+fcwpxo8JFH920mwA8zNZrfWO3XhQ6k/b2/iJYer0yDmGVaINBsd3OkJ/j3y90o2KJIetmauyE6NSeKXibbgKQyvJ35T4uUl+ZiSh0tEHDvDfZZqciZ/pz14H2o1jlwQrEnJfFq+9BmWaonLn90DSWC9E4lFv4P9mrFuX4KGskxRcrH5TYdZUGtsWKz7lG1Af2UldfcAWt4h/FdCsBO+cpQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0/cUcyWR0jjWkOIFFQwmLO2oKTbg5vTiA7+8hlWbAfQ=;
- b=Oay3aDx8+RJyf4KSNxizmD7PXwoLq6k6yLVq10hBy8Hi6tcN+06r5XY45+1amxWZv0PoAEp4wT3b+DiT6LIflhhZ2fhHgRyZYCmwtzJeylgDcDq7YhaborMSAYrmzj51e1IzMyLBLLze9YeTnyFzyW0fRloMaMF6iThe/o7xMcD8SuKY+ANZyhwLP7WQ+0mAsMrAC+aOG2rcl0DQ+Vad2s8gw00ie0HU8dNBnOXG2rK8FdNl9QnORTPJCDwQFl89af2SysNm41WYC/v/ta1YhJyt15ei4DEpNe/Vlq1Rd0vnBhp8+3kPlxcN/i9WoCCW9wa4c/PnBawbNhF2gnRcKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0/cUcyWR0jjWkOIFFQwmLO2oKTbg5vTiA7+8hlWbAfQ=;
- b=AIwC4RvKZoJwblMX1JVAuNUO32pFCHVb+E4SSPp1DelQdYN/s0jGhNfkKDADS4HEZ+mu6m2HKFDFevdpS1CJWG++9URm8mdffFXHWBFqwSqHZNlOhG603wSYr+ZGglerCPFctt4DGAdjn9Ar8FDSfrlLBhaxqiwnfUsI/aqO/UQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VE1PR04MB7294.eurprd04.prod.outlook.com (2603:10a6:800:1a3::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.24; Mon, 15 Jul
- 2024 08:56:38 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.7762.020; Mon, 15 Jul 2024
- 08:56:38 +0000
-Message-ID: <97d63ed0-e26c-40a1-9422-81453617d02a@cherry.de>
-Date: Mon, 15 Jul 2024 10:56:35 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dm: button: support remapping phone keys
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
- <bea25c3e-3257-4316-b7c7-ec3fa8d5bfb0@cherry.de>
- <4d222507-3e68-411e-ad8a-c355ed1b8b9c@linaro.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <4d222507-3e68-411e-ad8a-c355ed1b8b9c@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA0P291CA0024.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::26) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-58ef19aa6c4so5224120a12.2
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:24:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721035455; x=1721640255; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NX2W7wEPMNfBBH23mRlOdu7CHF1NBNsM76Xxr3p+Wow=;
+ b=q8xNdRNfQUfIgnWn35ZTx4slTNreo4Oo15HlkQDbPexZyJfhrviXea1E6eKlYpuOvh
+ 0IfjLEczZ/EBqroiEqJjMrLCx6EiXiuYSxAcHD9OaS1axfB7gfdC+SVFlySaZNKhKlEQ
+ suPZ8JnMqiJ/6J5oue0jmfd3ru5cibklQrtYNN4KIgWFtFAZsPjWs2fK24X619d5iwYf
+ E7dVLGccGD/rgX1mEPWVt1oeTc3aAhajlGY/2WgaLE7uirUUwhOtebyba/UZkYw9SuUX
+ VjyZ4CkF0oxAli2FxsP8GHMTcRnzTXweWDuJ3A/mFEZ0VXvINTzxqd596vJ1ry+HRiRk
+ +INA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721035455; x=1721640255;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NX2W7wEPMNfBBH23mRlOdu7CHF1NBNsM76Xxr3p+Wow=;
+ b=lJMLWhR9Dl3WcrgsePDCS3VYbY0eWz6sxc/dC/an2w4LDHj2SeDppIAmGaqYHs/h4M
+ E+eD9U88d9kbtaLS33pTvoswbopIkthW10P61R9WhH9B7EaiqVzTk8aExSPlOK4MAEPN
+ mj5IMjYIItNSA4pYiA1xCIRGvlnIgYrQFrZZlWrr3IcKZspHqmiQRE5I7FBi5ZUlj0s8
+ JBIB7jKKkTdXfkWzhXOBkvlXTJADgHd4Zi/Us+/Oprm7l+8x/izrz5VdWxwxgVoXosYh
+ CIVYM8+riChvmer7svSyddblzYEv0i9rjX7wMuP7WeENR16Vi6EqQn2smC6aIsSD0eol
+ VzDw==
+X-Gm-Message-State: AOJu0YyqNLmHwK5wupH41NEXbGUTLBmLQVUDifvig9Rzs5Q4ALkQ44yS
+ 3YemSLq2YB6RHRHfcoxFdwGUS+uG1RhSjI7fHo371jIX4eSnJcCZRN36Pl26PrPUI1BgWRslTmW
+ KqZcsrW8ab+EZdXeU7D8kRiFR0vWBzLwMb7sKCg==
+X-Google-Smtp-Source: AGHT+IEk3/bsIIzbY5V97fPAjW8IXUZq2BSAHOAyah13FFEhKb2zNspTfxfeQpBL0j6FkJjECYhSUgQefDwGX1m9RgI=
+X-Received: by 2002:a50:9f0d:0:b0:586:f49:1762 with SMTP id
+ 4fb4d7f45d1cf-594bc7c819cmr10498214a12.26.1721035454854; Mon, 15 Jul 2024
+ 02:24:14 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VE1PR04MB7294:EE_
-X-MS-Office365-Filtering-Correlation-Id: 79546ed8-2ebe-449d-d78a-08dca4ac099b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cWkrNjRGakpsTG9RbHMvaVFnMEgyejN1L3hCVVZMNmVhM0dhRE13bUxFQmF3?=
- =?utf-8?B?V0tGbXRRUkRtVDhXVFZreVJzS01WcUdldG5Id3VJM0FSQkorc3ZjWHprbnRU?=
- =?utf-8?B?ZVpHaHN6ZHdiRDVTRG5Ka3U1dkU1b2tLdmt4QWpXME1xUjI0Z2ZEeEF2WlA4?=
- =?utf-8?B?Ui9neFViQWhjM3RiMXhla096YnN3amV1eWNxc1ZDQnhHUHJBWkpXR3Q3U1M2?=
- =?utf-8?B?djZ4Z2hoS0lJd29DRjdMNVNqUUdQdy9VK29zYXVMTjJtbVYzQkZwQ3dNaXlw?=
- =?utf-8?B?NjFJakVtM3RvT2VKNGlCT0QwbFA2a3B0Rmk0Y0ZoNzlvdkFoSHB1MFhMczBN?=
- =?utf-8?B?dlUvNG9GZ2tKOUk1SVJLZ000WDlCOTFpejlCa2NsRTVKdTF1bVo4eDlacGFE?=
- =?utf-8?B?MmI5ZjhwUlBja3dNd2syN01PM2RYSGFkOXJzYnlUcVdzd1lXckRCN1RJa2pB?=
- =?utf-8?B?cTV6bllRNnFFZ1dJa3gwV0luSGpJclV5OC82eU9jU0hCZHIrY2ZrOXVYU1hn?=
- =?utf-8?B?R2Z4eVZ2WlpTbnR3YUJPeTRCbFhZc1VkQ2dVU09lM1JmRDVpSDk1QTA1aHVl?=
- =?utf-8?B?cWdCMjBDeFpac2MwSzhYanVLQTJhRytReXpZa1Iva3ptTWFkOXh1THgvdm0r?=
- =?utf-8?B?MkJRd1h1ektYZ25xSWt3bk4rZXY2dk4yY0xRL3kvbG1NU3Fnd3Nua0ViVW9D?=
- =?utf-8?B?NG5hM21vUXNIU255SWxpTDd4Q2NCTzdQSHF2ZEt0WHRaaVFLR1pSek1aa1U0?=
- =?utf-8?B?RThIRWplaFRRc2ZhUTgxTWtRdDgvaW4xQWg0VGhPTGczK1VJOWZMb3g3ZXdO?=
- =?utf-8?B?bDRhTnVqWHdBeWpEdmFKVlIwaGN6eVcyMm03OTV3TmhPRGlURDUzSlpsSENV?=
- =?utf-8?B?L1NDYzUwc3dPUUIvODZ5anVySWRrVDNEUEZuMDROSXVCK0QwcUZNYmlvVEhS?=
- =?utf-8?B?T3BMRURUSkxDbG1adDRRUGZXb1grbEhQdmtoNnVrVTdZcXpKUU1rZDNZMkg4?=
- =?utf-8?B?WERjTWhxKzI0dnpqU0E4bWdEVFRkQk5CMjJHSHh6TUZvaDZ5S0ZBd0lyMVQz?=
- =?utf-8?B?UXZvcFJGOHB6RnJ6YnZ3S1RVN3hPUVZ3VzI3djhaNEkvR2kwdjhaVVRmQ2hM?=
- =?utf-8?B?eUFUczBadTJNTlBud05RaHNhenZXTERxaml2cjZUVlBjUmsybnpnZS9iVHNY?=
- =?utf-8?B?clRFQzUzR0twaFlsTWdyOG1YL0xoZHovMEh5UUR1MFJNMVZoWjZmaktjVkZt?=
- =?utf-8?B?dDgvWmZVNlplYk1FS3ltMjVzRlRodHZaemp4TCtkWmNkVGxLcGhsdytZcmdL?=
- =?utf-8?B?VkpQWnF6VXpYRkdUWFFYSjFHd09TeXJRdzA2NTJXSkpqa01tcDZCTjVFb3E1?=
- =?utf-8?B?ZHR1cVgxVFpSQWVXVWc2VVk1WmpJckxENGtHZHRSVThHOTZQVlgrcG5nc2lw?=
- =?utf-8?B?WkhBTW1HYXZnVzJuTWxrUm5TdlR0YyswS2k1RElMYkVrbm5lcUMyOW5QUVpr?=
- =?utf-8?B?SHFnTlFuemgrS0c0cWVoOHRjc2FLd1N2Y2xROVUrM3h0UE1YeklSYU1iQ1VD?=
- =?utf-8?B?aC9FUDZnblB0L08wQkUveHNkYjNTazdhNXB0eFo5MklYZmdhUWNRMXB1dVhY?=
- =?utf-8?B?U1ZLQWoveVlVK0s3dHdVZERUaHpMOVphdmxRclJqZjdQZHZicDdUSGxBR0tI?=
- =?utf-8?B?SzVpWUVheTBaa0ZGSHk3M2JjTS9ENWxxYWJmcStsU1RBTnhrblY1eWNHMTJB?=
- =?utf-8?Q?95fFUYKIVCj/MBFN2g=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S1FCWlJTcjM4b1hGTjE4SU5OaElMaURqMHZVVXJrSHdVbjZ6SDAxZ0JHcDNk?=
- =?utf-8?B?UjRnTEp0eituVWhMMS9FTThRbmdQbFlPemNMeUNrZk54Z016RkNMcitNU1Zi?=
- =?utf-8?B?Tkxkbm1oWXlVQksrWG1jc1RuRmxQcWRGOG1ONU1tYTZIT3IwUExzckVjNDBk?=
- =?utf-8?B?Z0J5RVoyZXJkbmVva3pFUWpPTUdOelBPUVFXbzlWeFZLRFVTL3NjRkFXZGtD?=
- =?utf-8?B?eTVZRWc3NTdtK01MdjBsK3ZOdWM4S1ZXK3BMOEdBQVAzdXN4WWhPNHRUUnAz?=
- =?utf-8?B?bnFQc2wvWE5QYzN4QndrY2l2NlYzdTlseWlZTWhWSnIySXQ1WmJDOVl4UmpZ?=
- =?utf-8?B?Tjlhdm94YS9xRFdNNUZsNmg0OVNESWd2NjFIVGo4dWFlZnNHSEFwWjZKTWNy?=
- =?utf-8?B?cnhYSllFNlk4VlMzckZyYUwzZUlRUG1LdWNGaHRDNjJFNDIxZ1gydTdvSnpZ?=
- =?utf-8?B?YkhpTFFTSDMwWFhOZW5DeUZTSHppZitIVDJEaHpRaDhLOCtmQVlHRG5XNmc0?=
- =?utf-8?B?L1pNcmt3MVBnb2tqMzJ4QmY5bW12UVQ0VDNNam4rSkJVb2tjNC81SEJPSjh1?=
- =?utf-8?B?YTBGQTJLU3Fwc2lYRGpMeEV2d1Q0L3kzQjluUExUZWNDSkt6L0VuTTVsSXdJ?=
- =?utf-8?B?NEJza2tQYTJzWjJSUlVLQjQvM3VLeUV5T1MzaFIxMWhsYWpjZDJHTWxGaWIv?=
- =?utf-8?B?RkNJWDB5dENweFFZeGxaY2g0RWg4eWxKQjF3d3J4US8vNVZ0YW0yV0xvb0cx?=
- =?utf-8?B?L0tDbE5xV3FOaFV5SkZyRXlKNnJ6dGUzaWNVWnp0UUZYeE8xbXExN3pKVURz?=
- =?utf-8?B?R0lWOVZucWtxajBabDZxSXBJNXZUbmJyMnVQVjdmdDRWTUYzODdQdll2d2JG?=
- =?utf-8?B?R1FYSWV6ODdWSHNHTk83UHZsdVh3cE5hbklPZ2F6Z1E1MGx6bFB5MDBQVjdz?=
- =?utf-8?B?TmhuOXcxQmJ1am1IU1ErbkJ4ZU03amhGMm82bjdrMzVBK3AzZW1GN25lR0wr?=
- =?utf-8?B?ejBUMHdOV013L1pMd2dhNWF0azZNZ1dBZEZuOHFFVy9yMEZ0OHNBV2dGWXVC?=
- =?utf-8?B?TXBudk9vaXRMZ3FpbjgvSTA5bnNIL2x2K0szaGEwRGxzOWdtWTJ0V3R0WFY4?=
- =?utf-8?B?N3BYSUpJbk0yTmNMQTNOZlQreFNXMFM5bm9VVllCekNzeEQxUU0yMGJCdGd4?=
- =?utf-8?B?VjVIdjJhTm5lblFkT3hMUnBGbFkwYmVNSi9RYSttcUVhNVF1ZUYwU0liUGhn?=
- =?utf-8?B?alp0YjRKdmJtb0o1YXRGWFY2T3E1LzV4VUV0akU3Y3FzUEVYd1NKd0Z5ZkJI?=
- =?utf-8?B?RTZUUGx4RENxYVc0TVhjZ0h6dStFaW9YclRsTWg2VWtuZWNWdWFSalNjNWU4?=
- =?utf-8?B?bEE3Y1hncXdWWHZabmF5ekVVQjlrb0xrNXhqLzFhRmExZlJSaTNqbXhyNXkx?=
- =?utf-8?B?ZFpNSVhIV2cweEhIMXBZLzVySnMvTUtJU1NKYlFGYnAvYVpZdDlwWDVGYlY4?=
- =?utf-8?B?V1JjMGV0TXNRU0RFQXNTZFVyRys5NkNMK0RVdmlGSWt1SWpTdTFzZUJsNzg4?=
- =?utf-8?B?QkhSVEVtMDNSc3k2cHBlUWhMRlZzdTFlUDI2MVZVR0o0eGZQZTdPdUJSSWJh?=
- =?utf-8?B?ZjE4end0WmE0azlqQ0p3aWxMUEwwL2sra0txL3Y2OWZGTi9BR2FwYTdsZGw2?=
- =?utf-8?B?L0tVUTVkNTdMK3ZKb0tURGNZYlJNNWhwK0tMYTNadTdiVmUxRnpyaGU4dlNk?=
- =?utf-8?B?N1ZVVlZRaklWSWpFS0tMUExhQkFPOXYraVY2VzdWVGFaT2MwQVpDTTVmSDZx?=
- =?utf-8?B?dUJmQkg5dm9pZjFEWC91WHQxMEg0K0F5WlV5MjVob1l6eWpPTjZNVEJZWTNJ?=
- =?utf-8?B?akx5WWRhR0RVMjBsYWVIR0hOaTV1SmE4NlhUQmQ0amt3ZExmY29YcFZhcGFz?=
- =?utf-8?B?V2tvSmpaR1cwY2Y3dS9kM0M5aUk4UTVTbFlrdkxKcDFjQnVJaXd3aEcxZzE1?=
- =?utf-8?B?VzNnay9vZVJWL1ZHV2c3UlJySHV2dHl0bVE2Q0E4MW9iS2p6cVRBM2I4OG9M?=
- =?utf-8?B?QWtMUUI0SkF1WlRQamNXSmRtTG1XbzBrYVg2R2pkNyt0ZVRmUEdFbGVNU2xJ?=
- =?utf-8?B?VlM2SXNvWWdFd241TnBXQks2a2pBNWRJNlJzZXhBenhUQklZdXl0S1NQa0xz?=
- =?utf-8?B?T2c9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 79546ed8-2ebe-449d-d78a-08dca4ac099b
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2024 08:56:38.3756 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KehSIMn9F8+wROFqDhNoYj9aVsmj6NsFC3hia5uwDJ4bXaIwSm6Gjz3JWxKNdieIsiVkYpL+cc1w6USQQ8QBItyp8hy7cJPiAVBj7D3QIFY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7294
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240704073544.670249-18-sughosh.ganu@linaro.org>
+ <CAFLszTiaskAronpTqPEeTcizbOj6YoPi0WZsVT29ZwH09iuP_g@mail.gmail.com>
+In-Reply-To: <CAFLszTiaskAronpTqPEeTcizbOj6YoPi0WZsVT29ZwH09iuP_g@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 15 Jul 2024 14:54:03 +0530
+Message-ID: <CADg8p95of+Tk1wXSkWQ1SFtyyWYXVtU0Ct7zmc1OFGVKdTi=-Q@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 17/48] lmb: allow lmb module to be used in SPL
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,140 +91,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+hi Simon,
 
-On 7/15/24 10:38 AM, Caleb Connolly wrote:
-> Hi Quentin,
-> 
-> On 15/07/2024 10:16, Quentin Schulz wrote:
->> Hi Caleb,
->>
->> On 7/14/24 9:49 PM, Caleb Connolly wrote:
->>> We don't have audio support in U-Boot, but we do have boot menus. Add an
->>> option to re-map the volume and power buttons to up/down/enter so that
->>> in situations where these are the only available buttons (such as on
->>> mobile phones) it's still possible to navigate menus built in U-Boot or
->>> an external EFI app like GRUB or systemd-boot.
->>>
->>
->> Are those event codes properly defined in the DT already?
->>
->> e.g. 
->> https://elixir.bootlin.com/linux/latest/source/arch/arm64/boot/dts/rockchip/px30-ringneck-haikou.dts#L31
->>
->> If so, what prevents us from simply patching the U-Boot DT to change 
->> that code? No additional code required anywhere, no need to maintain a 
->> list of mapping, etc...
-> 
-> Many platforms in U-Boot are now switching to upstream DT, and 
-> SystemReady compliance requires that the bootloader provide a DT to the 
-> kernel.
-> 
+On Sat, 13 Jul 2024 at 20:45, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Thu, 4 Jul 2024 at 08:37, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > With the introduction of separate config symbols for the SPL phase of
+> > U-Boot, the condition checks need to be tweaked so that platforms that
+> > enable the LMB module in SPL are also able to call the LMB API's. Use
+> > the appropriate condition checks to achieve this.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1: New patch
+> >
+> >  board/xilinx/common/board.c | 2 +-
+> >  boot/bootm.c                | 4 ++--
+> >  boot/image-board.c          | 2 +-
+> >  fs/fs.c                     | 4 ++--
+> >  lib/Makefile                | 2 +-
+> >  net/tftp.c                  | 6 +++---
+> >  net/wget.c                  | 4 ++--
+> >  7 files changed, 12 insertions(+), 12 deletions(-)
+> >
+> > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> > index 4056884400..f04c92a70f 100644
+> > --- a/board/xilinx/common/board.c
+> > +++ b/board/xilinx/common/board.c
+> > @@ -665,7 +665,7 @@ int embedded_dtb_select(void)
+> >  }
+> >  #endif
+> >
+> > -#if defined(CONFIG_LMB)
+> > +#if IS_ENABLED(CONFIG_LMB)
+> >
+> >  #ifndef MMU_SECTION_SIZE
+> >  #define MMU_SECTION_SIZE        (1 * 1024 * 1024)
+> > diff --git a/boot/bootm.c b/boot/bootm.c
+> > index 7b3fe551de..5ce84b73b5 100644
+> > --- a/boot/bootm.c
+> > +++ b/boot/bootm.c
+> > @@ -239,7 +239,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+> >         return 0;
+> >  }
+> >
+> > -#ifdef CONFIG_LMB
+> > +#if CONFIG_IS_ENABLED(LMB)
+>
+> Can you avoid #ifdefs where possible?
 
-I guess you meant to say "the same DT" to the kernel here?
+Okay
 
-But yeah, that's what I was afraid of.
+>
+> >  static void boot_start_lmb(void)
+> >  {
+> >         phys_addr_t     mem_start;
+> > @@ -1048,7 +1048,7 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+> >                 }
+> >         }
+> >  #endif
+> > -#if CONFIG_IS_ENABLED(OF_LIBFDT) && defined(CONFIG_LMB)
+> > +#if CONFIG_IS_ENABLED(OF_LIBFDT) && CONFIG_IS_ENABLED(LMB)
+> >         if (!ret && (states & BOOTM_STATE_FDT)) {
+> >                 boot_fdt_add_mem_rsv_regions(images->ft_addr);
+> >                 ret = boot_relocate_fdt(&images->ft_addr, &images->ft_len);
+> > diff --git a/boot/image-board.c b/boot/image-board.c
+> > index 1f8c1ac69f..99ee7968ba 100644
+> > --- a/boot/image-board.c
+> > +++ b/boot/image-board.c
+> > @@ -883,7 +883,7 @@ int image_setup_linux(struct bootm_headers *images)
+> >         int ret;
+> >
+> >         /* This function cannot be called without lmb support */
+> > -       if (!IS_ENABLED(CONFIG_LMB))
+> > +       if (!CONFIG_IS_ENABLED(LMB))
+> >                 return -EFAULT;
+> >         if (CONFIG_IS_ENABLED(OF_LIBFDT))
+> >                 boot_fdt_add_mem_rsv_regions(*of_flat_tree);
+> > diff --git a/fs/fs.c b/fs/fs.c
+> > index 2c835eef86..3fb00590be 100644
+> > --- a/fs/fs.c
+> > +++ b/fs/fs.c
+> > @@ -526,7 +526,7 @@ int fs_size(const char *filename, loff_t *size)
+> >         return ret;
+> >  }
+> >
+> > -#ifdef CONFIG_LMB
+> > +#if CONFIG_IS_ENABLED(LMB)
+> >  /* Check if a file may be read to the given address */
+> >  static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
+> >                              loff_t len, struct fstype_info *info)
+> > @@ -567,7 +567,7 @@ static int _fs_read(const char *filename, ulong addr, loff_t offset, loff_t len,
+> >         void *buf;
+> >         int ret;
+> >
+> > -#ifdef CONFIG_LMB
+> > +#if CONFIG_IS_ENABLED(LMB)
+> >         if (do_lmb_check) {
+> >                 ret = fs_read_lmb_check(filename, addr, offset, len, info);
+> >                 if (ret)
+> > diff --git a/lib/Makefile b/lib/Makefile
+> > index 81b503ab52..398c11726e 100644
+> > --- a/lib/Makefile
+> > +++ b/lib/Makefile
+> > @@ -118,7 +118,7 @@ obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
+> >  obj-y += hang.o
+> >  obj-y += linux_compat.o
+> >  obj-y += linux_string.o
+> > -obj-$(CONFIG_LMB) += lmb.o
+> > +obj-$(CONFIG_$(SPL_)LMB) += lmb.o
+> >  obj-y += membuff.o
+> >  obj-$(CONFIG_REGEX) += slre.o
+> >  obj-y += string.o
+> > diff --git a/net/tftp.c b/net/tftp.c
+> > index 5e27fd4aa9..5c75d9d04f 100644
+> > --- a/net/tftp.c
+> > +++ b/net/tftp.c
+> > @@ -82,7 +82,7 @@ static ulong  tftp_block_wrap;
+> >  static ulong   tftp_block_wrap_offset;
+> >  static int     tftp_state;
+> >  static ulong   tftp_load_addr;
+> > -#ifdef CONFIG_LMB
+> > +#if CONFIG_IS_ENABLED(LMB)
+> >  static ulong   tftp_load_size;
+> >  #endif
+> >  #ifdef CONFIG_TFTP_TSIZE
+> > @@ -160,7 +160,7 @@ static inline int store_block(int block, uchar *src, unsigned int len)
+> >         ulong store_addr = tftp_load_addr + offset;
+> >         void *ptr;
+> >
+> > -#ifdef CONFIG_LMB
+> > +#if CONFIG_IS_ENABLED(LMB)
+> >         ulong end_addr = tftp_load_addr + tftp_load_size;
+> >
+> >         if (!end_addr)
+> > @@ -710,7 +710,7 @@ static void tftp_timeout_handler(void)
+> >  /* Initialize tftp_load_addr and tftp_load_size from image_load_addr and lmb */
+> >  static int tftp_init_load_addr(void)
+> >  {
+> > -#ifdef CONFIG_LMB
+> > +#if CONFIG_IS_ENABLED(LMB)
+>
+> here too
 
-> U-Boot doesn't really have a generic way to apply specific adjustments 
-> to FDT for U-Boot without them being carried over to the kernel.
-> 
-> Patching FDT is in and of itself somewhat treacherous without using 
-> OF_LIVE, which isn't set up until after bind(), making it unsuitable. 
-> It's also vastly slower to patch FDT than to patch a livetree.
-> 
-> I couldn't conceive of a way to do via patching DT that wouldn't require 
-> solving the above problems, I also couldn't think of another example 
-> that would justify making this patch more generic or configurable.
-> 
-> Kind regards,
->>
->> If that isn't possible, .........
->>
->>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>> ---
->>> Cc: u-boot-qcom@groups.io
->>> ---
->>>   drivers/button/Kconfig         | 11 +++++++++++
->>>   drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
->>>   2 files changed, 32 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
->>> index 3918b05ae03e..6cae16fcc8bf 100644
->>> --- a/drivers/button/Kconfig
->>> +++ b/drivers/button/Kconfig
->>> @@ -8,8 +8,19 @@ config BUTTON
->>>         U-Boot provides a uclass API to implement this feature. 
->>> Button drivers
->>>         can provide access to board-specific buttons. Use of the 
->>> device tree
->>>         for configuration is encouraged.
->>> +config BUTTON_REMAP_PHONE_KEYS
->>> +    bool "Remap phone keys for navigation"
->>> +    depends on BUTTON
->>> +    help
->>> +      Enable remapping of phone keys to navigation keys. This is 
->>> useful for
->>> +      devices with phone keys that are not used in U-Boot. The phone 
->>> keys
->>> +      are remapped to the following navigation keys:
->>> +      - Volume up: Up
->>> +      - Volume down: Down
->>> +      - Power: Enter
->>> +
+Okay
 
-Should this be alphabetically sorted (I don't know if we have any rule 
-for Kconfig options?) in the Kconfig file?
+-sughosh
 
->>>   config BUTTON_ADC
->>>       bool "Button adc"
->>>       depends on BUTTON
->>>       depends on ADC
->>> diff --git a/drivers/button/button-uclass.c 
->>> b/drivers/button/button-uclass.c
->>> index cda243389df3..729983d58701 100644
->>> --- a/drivers/button/button-uclass.c
->>> +++ b/drivers/button/button-uclass.c
->>> @@ -9,8 +9,9 @@
->>>   #include <button.h>
->>>   #include <dm.h>
->>>   #include <dm/uclass-internal.h>
->>> +#include <dt-bindings/input/linux-event-codes.h>
-
-Does this work for boards without OF_UPSTREAM? Otherwise I suggest to 
-use <linux/input.h> instead.
-
-Nit: Missing newline between headers and first function?
-
->>>   int button_get_by_label(const char *label, struct udevice **devp)
->>>   {
->>>       struct udevice *dev;
->>> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct 
->>> udevice *dev)
->>>       return ops->get_state(dev);
->>>   }
->>> +static int button_remap_phone_keys(int code)
->>> +{
->>> +    switch (code) {
->>> +    case KEY_VOLUMEUP:
->>> +        return KEY_UP;
->>> +    case KEY_VOLUMEDOWN:
->>> +        return KEY_DOWN;
->>> +    case KEY_POWER:
->>> +        return KEY_ENTER;
->>> +    default:
->>> +        return code;
->>> +    }
->>> +}
->>> +
->>
->> ....... I suggest to make this a weak function that can be overridden 
->> by boards (should it maybe be only defined in boards C file?) so that 
->> it's easy for people to come up with their own mapping without having 
->> to deal with two people/the maintainer disagreeing with what should be 
->> the one and true mapping for that key.
->>
-
-I guess this could be done the day we need it to be more generic.
-
-Thanks,
-Quentin
+>
+> >         phys_size_t max_size;
+> >
+> >         lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+> > diff --git a/net/wget.c b/net/wget.c
+> > index 7cf809a8ef..b8ea43e7f0 100644
+> > --- a/net/wget.c
+> > +++ b/net/wget.c
+> > @@ -98,7 +98,7 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+> >         ulong newsize = offset + len;
+> >         uchar *ptr;
+> >
+> > -       if (IS_ENABLED(CONFIG_LMB)) {
+> > +       if (CONFIG_IS_ENABLED(LMB)) {
+> >                 ulong end_addr = image_load_addr + wget_load_size;
+> >
+> >                 if (!end_addr)
+> > @@ -496,7 +496,7 @@ void wget_start(void)
+> >         debug_cond(DEBUG_WGET,
+> >                    "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+> >
+> > -       if (IS_ENABLED(CONFIG_LMB)) {
+> > +       if (CONFIG_IS_ENABLED(LMB)) {
+> >                 if (wget_init_load_size()) {
+> >                         printf("\nwget error: ");
+> >                         printf("trying to overwrite reserved memory...\n");
+> > --
+> > 2.34.1
+> >
+>
+> Regards,
+> Simon
