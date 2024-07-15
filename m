@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C9CCC3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 19:32:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8985FC3DA4B
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 19:32:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E87487B84;
-	Mon, 15 Jul 2024 21:32:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D36DD87EFA;
+	Mon, 15 Jul 2024 21:32:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IUfmUbI+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UWelz1EJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2778D8752A; Mon, 15 Jul 2024 21:32:22 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id CAC6288765; Mon, 15 Jul 2024 21:32:28 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E986C87B84
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 21:32:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B7FF87FC8
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 21:32:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6b5dc36b895so28498536d6.1
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:32:18 -0700 (PDT)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e03a8955ae3so4504466276.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:32:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721071938; x=1721676738; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ulXvMtYMp6oP+PBCiFJzl4QtEyzHXvXAyBYkmHZSavs=;
- b=IUfmUbI+nVcLoTMZLxVZ13lqgRONwYqWhe6GgatlzvMfuw3RMqT6thaSyIUapx192h
- i7QmK6M+bx7fg/aQD99O2VCvl9zplJG8iFezvM/OteGV14/Z4SuBCG7O1VoSNoJWtm2u
- 9xrzw0YT+H4GuZ7N0ZTv9gLJGSRB9pz591nZI=
+ d=chromium.org; s=google; t=1721071944; x=1721676744; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EXyM9UbXo74jj9MWJKM0C2UdGHUwNDLif4l72/ZDTHI=;
+ b=UWelz1EJqj7+wKaP/jkKCQbAqspb+MCm9fP55wmtIUo9vIfbLg0JGI0SosnnHRugYD
+ lMtjswZz2GOa0oEG5WVKI0jDDXfsxPAjW1UYq8kA5gotG9OJV7MA/bTKnqeqmCx3KdkV
+ SOZJXlX8CUlJ9TLiMFUTDkoEqVkqSvynslrAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721071938; x=1721676738;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ulXvMtYMp6oP+PBCiFJzl4QtEyzHXvXAyBYkmHZSavs=;
- b=srDH8zgwDM9ZMh/rK1G/Qo/E2xMVc3Ijto+0geootkHeA28bTj4M0BI+HW9MUeTjPZ
- zj34P0SbRmEI7cuWhPOZEVPk3OdZ+QMfkj5COpY+9GmfdTPqmh/JJauo8/9qhIXcPfYu
- lwB8wbnkIE3jcEg0/6mbwpb6fhMuDK37zs9q/HW0WMwda/+rwp+y5z7KWr169q/HVnGV
- Rdpfxy3W2uEECUPbuC2aZ4xLcIMGnSYBPGEVmoDHAA7up7t2KR24raU3fwFszPpP5V1n
- iQhRCNLzCiHIk8fvocL1AOs2O6xIlKjVDTsHcAYBb2+eDRUXf7LfY7sX5Yyl/OYzbTdw
- qFJw==
+ d=1e100.net; s=20230601; t=1721071944; x=1721676744;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EXyM9UbXo74jj9MWJKM0C2UdGHUwNDLif4l72/ZDTHI=;
+ b=OT/0RaSNSBrBAqZBmPtK+sEIs8Wa89uFjW6oE8AYZlkMpMyj3JTypIk5DzuZEySVIK
+ S0yLZFiIOFY+1btCz2BypyAoW1CTfKDK8gZZijfu5G9mAXXOJy4weN0/FcCjlw+iyNR0
+ vdBx7d2SvpwCfd5eQn20im2EcEFxvrrah1tc2jYstVfvkXG6De0Zfubin1Ny4GLe3h/Y
+ OK22/WEOOGXObkfsPmY5Lx4DKOEwj3SutlohEyQPOta/pA7fnFmDKDrF6p71vLicqejv
+ YVlG9bCtthe4Qt1ZDryFs9ab5AKbfw3unD4ySFlMyQX92k9xGS5T343ZAPUhhualRtmm
+ 6ExA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVdx9jgltWQRHwvLIuXiAF2v6wymLqNL9afMpUmd+AIGH0GQKp8YaLQubKHJO0ZIV7Bjwwy59AyVDeSemF6WWNsFp183g==
-X-Gm-Message-State: AOJu0Yy1RDZg+2Vw8R2OS22ZhJ1XCnIMHOC84xTpwYvmG9jSJfe3xKmm
- dKyx/qWQsdZwH37KbH0xqLSn+FPaUj07KId2mzwjQWPPuM0obYfYgq2u5MNZ2yyI0heFhulSZuL
- ZcwszMexFfTLLYDQjj6pKQC4mjv+qFGW7HtqW
-X-Google-Smtp-Source: AGHT+IGaZrcIsx0c75STtPWuAW8pYGb8n4ePBHKjO9bLUEtiAazt3cQVu0Pd/ojacNNAsHvA3YDTVPOQKDua166d7rs=
-X-Received: by 2002:a05:6214:c65:b0:6b5:2b33:5445 with SMTP id
- 6a1803df08f44-6b77f4ca4b3mr1907136d6.25.1721071937756; Mon, 15 Jul 2024
- 12:32:17 -0700 (PDT)
+ AJvYcCW+zJ3vpLTHB/iYQJxyVWPFxgAYNNPsO1oBFnIOGGboTOFQjo6QbEpaTv3tOXDybzC1tGv4eBosYfqyk94NYYAcivGIdA==
+X-Gm-Message-State: AOJu0YyJcf5GGbVFAU7hRQTvaflXbR4NgAKBOmNod2mUHhVbvGQPICd9
+ tKZ+BYEUB/RR9xr2Sn3sdbClzbrpZT8ujawmu67VZdZxuKhyYhEeAHehPXdBX/0ZkhTIAyaY4QC
+ ZxkPbs/sY2BrtvEWX0GIHT1ehuPSxInQMhqTn
+X-Google-Smtp-Source: AGHT+IGNsdg7Skq9OitIzPl1asSKtyt6MERHAmp2EQB7RbG/h+7YDfzf3RRMPZyUMevdxCl7iq+ET0mpawDHOsT4mW0=
+X-Received: by 2002:a05:6902:2706:b0:e03:af3d:d4d6 with SMTP id
+ 3f1490d57ef6-e05d57ea7d1mr122432276.42.1721071944072; Mon, 15 Jul 2024
+ 12:32:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-14-sughosh.ganu@linaro.org>
- <CAFLszTjPtFX60ZvJtcG=3z-waRpQMYad9-bsVPUsP0MmHkJ7jA@mail.gmail.com>
- <CADg8p96u23yVvksHqGnVsNKqcQd=VpHsM4utktujzUqpwv3Ggg@mail.gmail.com>
- <CAFLszThVsbLLLDnCyhObLbj=zMjXnzX8ncOxT8TfPkOi05GOPw@mail.gmail.com>
- <20240715175833.GL38804@bill-the-cat>
-In-Reply-To: <20240715175833.GL38804@bill-the-cat>
+References: <20240712052507.2496669-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240712052507.2496669-3-mikhail.kshevetskiy@iopsys.eu>
+ <CAFLszThBPaojbFHZf_OpJz=Ub+ikcMZeoa11GeJ422HNPa-s9A@mail.gmail.com>
+ <654fbb9b-dcea-4c07-85a1-47e48d3057d0@genexis.eu>
+ <CAFLszTgzgMuB70YRnFUuKvdn9UH3K9ifrSDThDbioQAoaeMMmA@mail.gmail.com>
+ <be9e5850-098a-4856-a421-5a4b8cf06c2e@genexis.eu>
+In-Reply-To: <be9e5850-098a-4856-a421-5a4b8cf06c2e@genexis.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 15 Jul 2024 20:32:06 +0100
-Message-ID: <CAFLszTifWESeT0DVmnvZcsThTR4NtVx5sH=jcAh1UfFSauOs6g@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 13/48] lmb: make LMB memory map persistent and
- global
-To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Date: Mon, 15 Jul 2024 20:32:13 +0100
+Message-ID: <CAFLszTieo9-LuRRSkEC9E5vD8wGSvSCdOLL6g8rCdtp3R9N2Yw@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] led: Add dts property to specify blinking of the
+ led
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>, 
+ Marek Vasut <marex@denx.de>, Christian Gmeiner <christian.gmeiner@gmail.com>,
+ u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,235 +98,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Mon, 15 Jul 2024 at 18:58, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 15 Jul 2024 at 14:23, Mikhail Kshevetskiy
+<mikhail.kshevetskiy@genexis.eu> wrote:
 >
-> On Mon, Jul 15, 2024 at 12:39:35PM +0100, Simon Glass wrote:
-> > Hi Sughosh,
+>
+> On 7/15/24 11:11, Simon Glass wrote:
+> > Hi Mikhail,
 > >
-> > On Mon, 15 Jul 2024 at 10:48, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > hi Simon,
-> > >
-> > > On Sat, 13 Jul 2024 at 20:46, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Sughosh,
-> > > >
-> > > > On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > >
-> > > > > The current LMB API's for allocating and reserving memory use a
-> > > > > per-caller based memory view. Memory allocated by a caller can then be
-> > > > > overwritten by another caller. Make these allocations and reservations
-> > > > > persistent using the alloced list data structure.
-> > > > >
-> > > > > Two alloced lists are declared -- one for the available(free) memory,
-> > > > > and one for the used memory. Once full, the list can then be extended
-> > > > > at runtime.
-> > > > >
-> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > ---
-> > > > > Changes since V1:
-> > > > > * Use alloced list structure for the available and reserved memory
-> > > > >   lists instead of static arrays.
-> > > > > * Corresponding changes in the code made as a result of the above
-> > > > >   change.
-> > > > > * Rename the reserved memory list as 'used'.
-> > > > >
-> > > > >  include/lmb.h |  77 +++--------
-> > > > >  lib/lmb.c     | 346 ++++++++++++++++++++++++++++++--------------------
-> > > > >  2 files changed, 224 insertions(+), 199 deletions(-)
-> > > > >
-> > > > > diff --git a/include/lmb.h b/include/lmb.h
-> > > > > index 99fcf5781f..27cdb18c37 100644
-> > > > > --- a/include/lmb.h
-> > > > > +++ b/include/lmb.h
-> > > > > @@ -24,78 +24,18 @@ enum lmb_flags {
-> > > > >  };
-> > > > >
-> > > > >  /**
-> > > > > - * struct lmb_property - Description of one region.
-> > > > > + * struct lmb_region - Description of one region.
-> > > > >   *
-> > > > >   * @base:      Base address of the region.
-> > > > >   * @size:      Size of the region
-> > > > >   * @flags:     memory region attributes
-> > > > >   */
-> > > > > -struct lmb_property {
-> > > > > +struct lmb_region {
-> > > > >         phys_addr_t base;
-> > > > >         phys_size_t size;
-> > > > >         enum lmb_flags flags;
-> > > > >  };
-> > > > >
-> > > > > -/*
-> > > > > - * For regions size management, see LMB configuration in KConfig
-> > > > > - * all the #if test are done with CONFIG_LMB_USE_MAX_REGIONS (boolean)
-> > > > > - *
-> > > > > - * case 1. CONFIG_LMB_USE_MAX_REGIONS is defined (legacy mode)
-> > > > > - *         => CONFIG_LMB_MAX_REGIONS is used to configure the region size,
-> > > > > - *         directly in the array lmb_region.region[], with the same
-> > > > > - *         configuration for memory and reserved regions.
-> > > > > - *
-> > > > > - * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
-> > > > > - *         region is configurated *independently* with
-> > > > > - *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
-> > > > > - *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
-> > > > > - *         lmb_region.region is only a pointer to the correct buffer,
-> > > > > - *         initialized in lmb_init(). This configuration is useful to manage
-> > > > > - *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
-> > > > > - */
-> > > > > -
-> > > > > -/**
-> > > > > - * struct lmb_region - Description of a set of region.
-> > > > > - *
-> > > > > - * @cnt: Number of regions.
-> > > > > - * @max: Size of the region array, max value of cnt.
-> > > > > - * @region: Array of the region properties
-> > > > > - */
-> > > > > -struct lmb_region {
-> > > > > -       unsigned long cnt;
-> > > > > -       unsigned long max;
-> > > > > -#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> > > > > -       struct lmb_property region[CONFIG_LMB_MAX_REGIONS];
-> > > > > -#else
-> > > > > -       struct lmb_property *region;
-> > > > > -#endif
-> > > > > -};
-> > > > > -
-> > > > > -/**
-> > > > > - * struct lmb - Logical memory block handle.
-> > > > > - *
-> > > > > - * Clients provide storage for Logical memory block (lmb) handles.
-> > > > > - * The content of the structure is managed by the lmb library.
-> > > > > - * A lmb struct is  initialized by lmb_init() functions.
-> > > > > - * The lmb struct is passed to all other lmb APIs.
-> > > > > - *
-> > > > > - * @memory: Description of memory regions.
-> > > > > - * @reserved: Description of reserved regions.
-> > > > > - * @memory_regions: Array of the memory regions (statically allocated)
-> > > > > - * @reserved_regions: Array of the reserved regions (statically allocated)
-> > > > > - */
-> > > > > -struct lmb {
-> > > > > -       struct lmb_region memory;
-> > > > > -       struct lmb_region reserved;
-> > > > > -#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> > > > > -       struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
-> > > > > -       struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
-> > > > > -#endif
-> > > > > -};
-> > > > > -
-> > > > > -void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
-> > > > > -void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
-> > > > > -                               void *fdt_blob);
-> > > > >  long lmb_add(phys_addr_t base, phys_size_t size);
-> > > > >  long lmb_reserve(phys_addr_t base, phys_size_t size);
-> > > > >  /**
-> > > > > @@ -134,6 +74,19 @@ void board_lmb_reserve(void);
-> > > > >  void arch_lmb_reserve(void);
-> > > > >  void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align);
-> > > > >
-> > > > > +/**
-> > > > > + * lmb_mem_regions_init() - Initialise the LMB memory
-> > > > > + *
-> > > > > + * Initialise the LMB subsystem related data structures. There are two
-> > > > > + * alloced lists that are initialised, one for the free memory, and one
-> > > > > + * for the used memory.
-> > > > > + *
-> > > > > + * Initialise the two lists as part of board init.
-> > > > > + *
-> > > > > + * Return: 0 if OK, -ve on failure.
-> > > > > + */
-> > > > > +int lmb_mem_regions_init(void);
-> > > > > +
-> > > > >  #endif /* __KERNEL__ */
-> > > > >
-> > > > >  #endif /* _LINUX_LMB_H */
-> > > > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > > > > index 80945e3cae..a46bc8a7a3 100644
-> > > > > --- a/lib/lmb.c
-> > > > > +++ b/lib/lmb.c
-> > > > > @@ -6,6 +6,7 @@
-> > > > >   * Copyright (C) 2001 Peter Bergner.
-> > > > >   */
-> > > > >
-> > > > > +#include <alist.h>
-> > > > >  #include <efi_loader.h>
-> > > > >  #include <image.h>
-> > > > >  #include <mapmem.h>
-> > > > > @@ -15,24 +16,30 @@
-> > > > >
-> > > > >  #include <asm/global_data.h>
-> > > > >  #include <asm/sections.h>
-> > > > > +#include <linux/kernel.h>
-> > > > >
-> > > > >  DECLARE_GLOBAL_DATA_PTR;
-> > > > >
-> > > > >  #define LMB_ALLOC_ANYWHERE     0
-> > > > > +#define LMB_ALIST_INITIAL_SIZE 4
-> > > > >
-> > > > > -static void lmb_dump_region(struct lmb_region *rgn, char *name)
-> > > > > +struct alist lmb_free_mem;
-> > > > > +struct alist lmb_used_mem;
-> > > >
-> > > > I think these should be in a struct, e.g. struct lmb, allocated with
-> > > > malloc() and pointed to by gd->lmb so we can avoid making the tests
-> > > > destructive, and allow use of lmb in SPL.
-> > >
-> > > Can you elaborate on the point of allowing use of lmb in SPL. Why
-> > > would the current design not work in SPL ? I tested this on the
-> > > sandbox SPL variant, and the two lists do get initialised as part of
-> > > the SPL initialisation routine. Is there some corner-case that I am
-> > > not considering ?
-> >
-> > Just that some boards don't have their BSS available until later on in
-> > SPL. In general we try to avoid local variables with driver model...I
-> > think lmb should be the same, particularly as there it is fairly cheap
-> > to allocate a struct with malloc().
+> > On Sat, 13 Jul 2024 at 17:32, Mikhail Kshevetskiy
+> > <mikhail.kshevetskiy@genexis.eu> wrote:
+> >>
+> >> On 13.07.2024 18:13, Simon Glass wrote:
+> >>> Hi Mikhail,
+> >>>
+> >>> On Fri, 12 Jul 2024 at 06:25, Mikhail Kshevetskiy
+> >>> <mikhail.kshevetskiy@iopsys.eu> wrote:
+> >>>> From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> >>>>
+> >>>> The standard property
+> >>>>
+> >>>>     linux,default-trigger =3D "pattern";
+> >>>>
+> >>>> used to get an effect. No blinking parameters can be set yet.
+> >>>>
+> >>>> Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> >>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> >>>> ---
+> >>>>  drivers/led/led-uclass.c | 33 +++++++++++++++++++++++++++++----
+> >>>>  1 file changed, 29 insertions(+), 4 deletions(-)
+> >>>>
+> >>>> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+> >>>> index 4f5dd66765e..90047ad35ba 100644
+> >>>> --- a/drivers/led/led-uclass.c
+> >>>> +++ b/drivers/led/led-uclass.c
+> >>>> @@ -100,6 +100,9 @@ static int led_post_bind(struct udevice *dev)
+> >>>>  {
+> >>>>         struct led_uc_plat *uc_plat =3D dev_get_uclass_plat(dev);
+> >>>>         const char *default_state;
+> >>>> +#ifdef CONFIG_LED_BLINK
+> >>>> +       const char *trigger;
+> >>>> +#endif
+> >>>>
+> >>>>         if (!uc_plat->label)
+> >>>>                 uc_plat->label =3D dev_read_string(dev, "label");
+> >>>> @@ -120,6 +123,12 @@ static int led_post_bind(struct udevice *dev)
+> >>>>         else
+> >>>>                 return 0;
+> >>>>
+> >>>> +#ifdef CONFIG_LED_BLINK
+> >>>> +       trigger =3D dev_read_string(dev, "linux,default-trigger");
+> >>>> +       if (trigger && !strncmp(trigger, "pattern", 7))
+> >>>> +               uc_plat->default_state =3D LEDST_BLINK;
+> >>>> +#endif
+> >>> I still wonder whether you can use IS_ENABLED() instead of adding #if=
+defs?
+> >> LEDST_BLINK depends on CONFIG_LED_BLINK, so the code will not compile =
+if CONFIG_LED_BLINK is not defined.
+> >> Defining a LEDST_BLINK unconditionally will produce an issue with cmd/=
+led.c
+> > We should not use #ifdefs around such declarations. What issue is
+> > caused by defining it always?
 >
-> We also have limited malloc space, in those cases. But, yes, we likely
-> need LMB available to use earlier in the SPL case now than we did
-> before, so malloc is likely better, as Simon suggests.
+> We need to patch cmd/led.c. Without it we will get:
+> * something like out of boundary access
+> * enumeration value =E2=80=98LEDST_BLINK=E2=80=99 not handled in switch
 >
-> > > Also, regarding putting the lmb structure pointer as part of gd, iirc
-> > > Tom had a different opinion on this. Tom, can you please chime in here
-> > > ?
-> >
-> > or you could point to the discussion?
->
-> It was in reply to the last posting of this series.
->
-> While there's a strong implication that tests in post/ (as it is short
-> for 'power on self test') need to be non-destructive, that's not the
-> case for test/ code.
->
-> So my thoughts are:
-> - Since there's only one list for real use, calls are cleaner if we
->   aren't passing a pointer to the one and only thing everyone could use.
-> - I don't think we have a test case that's hindered by not doing this,
->   only "now boot normally" may be harder/hindered.
-> - Taking things out of gd is usually good?
->
-> At the end of the day, if this is a big sticking point with the new
-> scheme, no, OK, we can go back to gd->lmb. I don't think we need it, but
-> I can't convince myself Everyone Else Is Wrong about it either.
+> can be fixed, but probably it should be a separate patch
 
-I don't think we need to keep lmb as a parameter to the API. My real
-interest is in putting the lmb 'state' in a struct such that it can be
-swapped in/out for tests, allocated in malloc(), etc., like we do with
-livetree and so on.
+Sounds good
 
-I will note that dropping the first parameter does not necessarily
-reduce code size. Accessing a global variable is typically more
-expensive than passing a parameter. But so long as the static
-functions in lmb are passed the pointer, it might be a win to not pass
-gd->lmb everywhere...? Anyway, it is easier for callers and since
-there is (normally, except for testing) only one lmb, it makes sense
-to me.
-
-The issue of where to store the pointer is therefore a separate
-one...I'd argue for gd->lmb, but since it is easy to change later, a
-global var is fine for now, if that is more palatable.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
