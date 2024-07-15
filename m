@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C801C3DA5E
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28447C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5649A888AC;
-	Mon, 15 Jul 2024 12:14:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5D028889B;
+	Mon, 15 Jul 2024 12:14:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PtC6WGlv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R3ntReAX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFF3E888B2; Mon, 15 Jul 2024 12:14:06 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 8E472888B7; Mon, 15 Jul 2024 12:14:07 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 901F2887EE
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:14:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F00B8889B
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-42660b8dd27so27258165e9.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:14:04 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3679df4cb4cso2543875f8f.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:14:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1721038444; x=1721643244; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ER8WNnl4oQ5Zu8/brMbGAaOYfh+6mSl488l1hDRfuuY=;
- b=PtC6WGlvwAdQsMFdbRywfWGZEgnldQgN1LWfgAWmPNycdtUvhtCpa/YPTCogBZ9w0+
- cAekPdOrliVGUHe+bXKYboTohHALJmw11O3FD5T1YZL/u3Up1pJCmPd0MRKPhdCGB3ui
- VL0or64LKgBg4rw5lC6NuJYmMhtfymy1Kczb8=
+ bh=Ji24cnwekH8rAO7TZQtHsRlpti1CEOVP02ZOYAPoh28=;
+ b=R3ntReAXw6LXlQzPBskIhHeT3BRPTuvBSIOOhVv3JhJ+M7NuWd9EP0o3QCtxnftrOf
+ jkLqIAz1Iu9GoyTGTPQZX+1KeiB5BcGdySMcrYdCkGqZ22g6OQzubl+D2XIrgC9fYa5J
+ Q4K7+frCJ8zS9nx+Y2yxJHmfSQFpL1TXUyY2M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721038444; x=1721643244;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ER8WNnl4oQ5Zu8/brMbGAaOYfh+6mSl488l1hDRfuuY=;
- b=aAg+CKn0ohItPv7alN+S5jrwrIaKFbi960GMZXJgN9R8QKbMF40WNkCJ8WE1EvsZmB
- 75enw5A0CtA7ZJDKbEzPFshqy7AzKkH0DvSt5S4H+RGD76HJKLefZ/TaIf+G//TxXCg2
- FtYKRP6+hKcyRF5l0TOfHIGe1+U1hbE4TSJSVDSroGdDM7Hb4rKMaopAZ6keIUNt/iSB
- Th5lEdm8dtEfYyErYNZL2cdjIfKQtarQ4FLNyscusAJJ3QakDSJ/wyrCmjVKKOjbTGiG
- n0NUTl4OH8OHe7+bvyFYv9jREE5n5YQ9Fls17fz8eoEUlt36eGiDMJCKGul/JoT5Mxtc
- hKGw==
-X-Gm-Message-State: AOJu0YxYjHpxJKtIKSxPhh/tY0x3JojNzyVOw59PEmSGetXzQNHNX6rW
- 3CDGwk+xCDobuW5bLLoBbPH44U2X1wl+WyXGUVoBlPIqZHzDFiY2i+rK68BffbXvrt4jpKWuJQY
+ bh=Ji24cnwekH8rAO7TZQtHsRlpti1CEOVP02ZOYAPoh28=;
+ b=cbWC/sAeKqHkS4daWFbnom+V+1ZjW2ESPgQCbjwPSFzd7F9c48ClhFM/yjwGvaUfag
+ IkXxuJUAFOLpnA2eoCSuVHm9kGvU8LLURIH3xl/6cJm/BlSj/8RTM9MiC7e143ZTVifi
+ /XYVKtz39/ggaP4sDn/W3x/b6cP5BQMdo+YcL3zoIPG63gn9fmV6+EvPsfMpGyhQRRDl
+ rMe6YCv5dioYxY2F+WPZRoyNVl8+789P1YWi0Iwlh7bG0MUUXvgnvLs2DRrSskrGVuy0
+ JzVkcfK3BRLIMLyXnHS7gN75FEyxUuk4JyyvGdRv/Qkh6bX9pHY/bIFE07m32c0sYm3e
+ RzdQ==
+X-Gm-Message-State: AOJu0Yz74IdI2+SSlC7ykM7EGJOVCkTh+Z4IUDu/SNbqvKMxiSLWWLmF
+ TUTw3Lq9j+yAybfmx+wFmpjFgoh9KICHCHhQwuBZfl85fsw0lLQPn2EgqBcVKK95EiXQYg+qVo8
  =
-X-Google-Smtp-Source: AGHT+IFtUMf4qu+NPV2aEwL1mekkwcVtzEmqI64aZ85O3sEw4jXTaEI+HGVkp1AgHATRjNINJVoR4A==
-X-Received: by 2002:a05:600c:468d:b0:426:8884:2c58 with SMTP id
- 5b1f17b1804b1-42688842d2fmr133862355e9.4.1721038443973; 
- Mon, 15 Jul 2024 03:14:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH4tfzRINJ8vdm3QYQHh9euATMhRtGPwAHf+26WKu8os5iLo2aJNO6I5D+8WXyY3Oc8EfqI9w==
+X-Received: by 2002:a5d:526d:0:b0:367:42ce:f004 with SMTP id
+ ffacd0b85a97d-367ff7053a8mr7356633f8f.23.1721038444692; 
+ Mon, 15 Jul 2024 03:14:04 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.14.03
+ 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.14.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 03:14:03 -0700 (PDT)
+ Mon, 15 Jul 2024 03:14:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -68,9 +68,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Nam Cao <namcao@linutronix.de>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH 05/13] doc: Add a description for bootmeth_qfw
-Date: Mon, 15 Jul 2024 11:13:46 +0100
-Message-Id: <20240715101354.97895-6-sjg@chromium.org>
+Subject: [PATCH 06/13] doc: Add a description for bootmeth_cros
+Date: Mon, 15 Jul 2024 11:13:47 +0100
+Message-Id: <20240715101354.97895-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240715101354.97895-1-sjg@chromium.org>
 References: <20240715101354.97895-1-sjg@chromium.org>
@@ -92,82 +92,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the qfw bootmeth.
-
-Fix up the compatible string to drop the 'extlinux' part, which is not
-relevant to this bootmeth.
+Add documentation for the cros bootmeth.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootmeth_qfw.c              |  2 +-
+ doc/develop/bootstd/cros.rst     | 33 ++++++++++++++++++++++++++++++++
  doc/develop/bootstd/index.rst    |  1 +
  doc/develop/bootstd/overview.rst |  1 +
- doc/develop/bootstd/qfw.rst      | 21 +++++++++++++++++++++
- 4 files changed, 24 insertions(+), 1 deletion(-)
- create mode 100644 doc/develop/bootstd/qfw.rst
+ 3 files changed, 35 insertions(+)
+ create mode 100644 doc/develop/bootstd/cros.rst
 
-diff --git a/boot/bootmeth_qfw.c b/boot/bootmeth_qfw.c
-index dfaa944594e..2f8e00cf350 100644
---- a/boot/bootmeth_qfw.c
-+++ b/boot/bootmeth_qfw.c
-@@ -88,7 +88,7 @@ static struct bootmeth_ops qfw_bootmeth_ops = {
- };
- 
- static const struct udevice_id qfw_bootmeth_ids[] = {
--	{ .compatible = "u-boot,qfw-extlinux" },
-+	{ .compatible = "u-boot,qfw-bootmeth" },
- 	{ }
- };
- 
-diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
-index 5052afe448f..f8fce7207ce 100644
---- a/doc/develop/bootstd/index.rst
-+++ b/doc/develop/bootstd/index.rst
-@@ -9,3 +9,4 @@ Standard Boot
-    overview
-    extlinux
-    pxelinux
-+   qfw
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index fd0692daf0d..bcc2c00c775 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -418,6 +418,7 @@ Bootmeth drivers are provided for:
-    - EFI boot using bootefi from disk
-    - VBE
-    - EFI boot using boot manager
-+   - :doc:`QFW <qfw>`: QEMU firmware interface
- 
- 
- Command interface
-diff --git a/doc/develop/bootstd/qfw.rst b/doc/develop/bootstd/qfw.rst
+diff --git a/doc/develop/bootstd/cros.rst b/doc/develop/bootstd/cros.rst
 new file mode 100644
-index 00000000000..b0d47fd246a
+index 00000000000..96f148837ac
 --- /dev/null
-+++ b/doc/develop/bootstd/qfw.rst
-@@ -0,0 +1,21 @@
++++ b/doc/develop/bootstd/cros.rst
+@@ -0,0 +1,33 @@
 +.. SPDX-License-Identifier: GPL-2.0+:
 +
-+QFW Bootmeth
-+============
++ChromiumOS Bootmeth
++===================
 +
-+`QEMU <hhttps://www.qemu.org/>`_ is a system emulator which is able to boot
-+Operating Systems. QEMU provides specific support for booting an OS image
-+provided on the QEMU command line.
++ChromiumOS provides a mechanism for booting its Operating System from a block
++device, described
++`here <https://www.chromium.org/chromium-os/chromiumos-design-docs/verified-boot/>`_.
 +
-+When invoked on a bootdev for UCLASS_QFW, this bootmeth reads the kernel
-+provided by the QEMU `-kernel` argument, the iniital ramdisk and provided by
-+`-initrd` and the boot arguments (command line) provided by `-append` into
-+memory ready for booting.
++U-Boot includes support for reading the associated data structures from the
++device and identifying a bootable ChromiumOS image. This structure includes the
++kernel itself, boot arguments (kernel command line), as well as the x86 setup
++block (for x86 only).
 +
-+When the bootflow is booted, the bootmeth tries the `booti` command first, then
-+falls back to the `bootz` command. U-Boot's 'control' devicetree is passed
-+through to the kernel.
++When invoked on a bootdev, this bootmeth searches for kernel partitions with
++the appropriate GUID (Globally Unique Identifier). When found, the information
++is loaded and a bootflow is created.
 +
-+The compatible string "u-boot,qfw-bootmeth" is used for the driver. The driver
-+is automatically instantiated if there are no bootmeth drivers in the
-+devicetree.
++When the bootflow is booted, the bootmeth reads the kernel and boot arguments.
++It then boots the kernel using zboot (on x86) or bootm (on ARM). The boot
++arguments are adjusted to replace %U with the UUID of the selected kernel
++partition. This results in the correct root disk being used, which is the next
++partition after the kernel partition.
++
++For ARM, a :doc:`/usage/fit/index` is used. The `CONFIG_FIT_BEST_MATCH` option
++must be enabled for U-Boot to select the correct devicetree to boot with.
++
++Note that a ChromiumOS image typically has two copies of the OS, each with its
++own kernel and root disk. There is no initial ramdisk (initrd). This means that
++this bootmeth typically locates two separate images.
++
++The compatible string "u-boot,cros" is used for the driver. The driver is
++automatically instantiated if there are no bootmeth drivers in the devicetree.
+diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
+index f8fce7207ce..69fd3c2d2eb 100644
+--- a/doc/develop/bootstd/index.rst
++++ b/doc/develop/bootstd/index.rst
+@@ -10,3 +10,4 @@ Standard Boot
+    extlinux
+    pxelinux
+    qfw
++   cros
+diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+index bcc2c00c775..f12e93236a7 100644
+--- a/doc/develop/bootstd/overview.rst
++++ b/doc/develop/bootstd/overview.rst
+@@ -417,6 +417,7 @@ Bootmeth drivers are provided for:
+    - U-Boot scripts from disk, network or SPI flash
+    - EFI boot using bootefi from disk
+    - VBE
++   - :doc:`ChromiumOS <cros>` ChromiumOS boot from a disk
+    - EFI boot using boot manager
+    - :doc:`QFW <qfw>`: QEMU firmware interface
+ 
 -- 
 2.34.1
 
