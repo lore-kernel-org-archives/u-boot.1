@@ -4,60 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A58C8C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 18:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C667C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 18:14:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0304487B84;
-	Mon, 15 Jul 2024 20:07:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F0DDF87F9F;
+	Mon, 15 Jul 2024 20:14:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="wtnAIpxE";
+	dkim=pass (2048-bit key; unprotected) header.d=st.com header.i=@st.com header.b="NjLGzU8m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3FAC87D14; Mon, 15 Jul 2024 20:07:36 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 16F8188889; Mon, 15 Jul 2024 15:33:28 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C55BC87919
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 20:07:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0BA9F88820
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:33:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=reject dis=none) header.from=st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7926f054d7=benjamin.baratte@st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46FChwId031567;
+ Mon, 15 Jul 2024 15:33:21 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=STMicroelectronics; bh=U2GhB4QafY78A
+ rYjzvXXxI9myWSgpZN/cToOIUu4ufc=; b=NjLGzU8mDg9Vl/7sa7x69O4lrnZNs
+ gvZG51rQPJAdITnuXXWGFSztR+afn+/qTnbDkdXY6+za95xTI15r3oE8PKieB388
+ puWzdEhjfygJHSgXf2DlDXRuTMmP9SnfczasCpC6ufUTCvIgDEkWfq0GAqWKEmIG
+ NNO5JJquTldg/YM94bE0cdSn3cqFLZGFqG49nOPHkVEAhtqbErR9WjvthlJi3HFw
+ z1pG9fn12KSb/fHUeeCn9awG0hmRuprCp4zYGEryxAL71SiPbQGiTklDOv5JUWuT
+ 5vCr56gLyv4Xrp/rX/p1ADd2WhFA0Adi5xUwYgw8VsW5tExDoVzSamoAQ==
+Received: from eur05-am6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2105.outbound.protection.outlook.com [104.47.18.105])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 40c4hhvqc8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Jul 2024 15:33:20 +0200 (MEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=T+gCsNjkl2yJVj7GqEJOhM2UHvdp8ISREmi+H1+1TSwYIdrCwrYD0CZegsi8ZNmVJr35ZgmFC8jbyDHe0sZ1wePzqf6WshkzVFBzs8mSON60j3Lw0Z4zhVRuwEs2KOpvIU7VXmZHIaVK14MYRKYZBv/U74TkcGVG/D5/ToKmPYajOD3hOyRnWyCTw1qOEh8pMe1qKR4+8MSE124Ld680o/28yuj5q1MSBqqgvhCpQNEipyfen1EOMliAf4mVabJLHaunbfvyFRh0Qbq2aZH+jLcjGbZaG8tlswYyUi04Vz9z1kErvlEJi4ibEurb/wJyYlInwFbyZAQfZb7oSNbS6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U2GhB4QafY78ArYjzvXXxI9myWSgpZN/cToOIUu4ufc=;
+ b=UmcpeNcUdTvT4gSXbYW2Tay6dyas+DWV/O+fkJ6rg6GndaP4YNehfsJGt2RvdM4MWAWRXhkMqbO/IESphVSJj1399Nf0nf3tRyRBiF21mJPNY8Ffq0VuM9nwd9yYIjpnhT5YJSL/qT0RvGcHnHr9hAIHaYR3qg2rXznBgbP7H/XVw0PlPjPYpnND+F2HIIgcdlDfwZtFR0/v+As0evgLnH9iH8iLS7ppi1Jr8ESBxmU3LaOpfF0OlEdZH5XFzYX0++65HAqGXR7r7cwu8vumbT76gzkaczRhl1zkB+8YqVr48XdPGqUiZ9oh3zm2BRblwmnqLfkiT93M6SHbFB1SCw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=st.com; dmarc=pass action=none header.from=st.com; dkim=pass
+ header.d=st.com; arc=none
+Received: from DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:34c::22)
+ by DU0PR10MB7120.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:44f::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.28; Mon, 15 Jul
+ 2024 13:33:17 +0000
+Received: from DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::4ad9:b4fe:13d6:e370]) by DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::4ad9:b4fe:13d6:e370%4]) with mapi id 15.20.7762.027; Mon, 15 Jul 2024
+ 13:33:16 +0000
+From: Benjamin BARATTE <benjamin.baratte@st.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "eajames@linux.ibm.com" <eajames@linux.ibm.com>, "sjg@chromium.org"
+ <sjg@chromium.org>, "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ "trini@konsulko.com" <trini@konsulko.com>
+Subject: [PATCH 1/3] tpm: update tpm hash algorithm according to tpm2.0 spec
+ 1.59
+Thread-Topic: [PATCH 1/3] tpm: update tpm hash algorithm according to tpm2.0
+ spec 1.59
+Thread-Index: AdrWuwuPmQIPYxknQiq5ajbKCa7YLA==
+Date: Mon, 15 Jul 2024 13:33:16 +0000
+Message-ID: <DU0PR10MB52445073A01A8668C66ADAA0E1A12@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_ActionId=6cece400-f5e6-41c2-b6a3-b0dadae244c0;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_ContentBits=0;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_Enabled=true;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_Method=Standard;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_Name=23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_SetDate=2024-07-15T13:27:32Z;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_SiteId=75e027c9-20d5-47d5-b82f-77d7cd041e8f;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU0PR10MB5244:EE_|DU0PR10MB7120:EE_
+x-ms-office365-filtering-correlation-id: 7f0ec479-9692-4dc6-4754-08dca4d2af09
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?UGLCe0Rl60XG8RfFT/sjVsTiWuSgg09pbQAtyQyOmMO3KQIqNvow2xXkIeWE?=
+ =?us-ascii?Q?lwdM5eyXv8AUlu40t1V7GQJzc2op32uoCXi5AQ6zLBp2YYIii1nR7YeYJ/Rp?=
+ =?us-ascii?Q?tGYcGDwwj8a/C3tRaPUptTmBJrjR3WZvqyFyGf/b1wBGnZVwH4CxDgIjfpLx?=
+ =?us-ascii?Q?DR5toAnHabpSazVKa3EXTqot4A/neWxyppKfUJ22Eu8GymJeHIQa6gpBjN7v?=
+ =?us-ascii?Q?tdZpXOD6LPAbUZqCPlELVWv5befhfn2R0gX5DjMkhg9mdkKSDp1SR+m24jgY?=
+ =?us-ascii?Q?KXOPvqARwbXIkWNZ+qXaD68aJgt/onWkrVZPWmnGLM2x5TgrtmnUjeHHfZ1Z?=
+ =?us-ascii?Q?pEykgd6Pkpzm2b3TnvslDN8tKI+SvcpP5lMN9JiPdD0EEfljX2JnGwGI+G5g?=
+ =?us-ascii?Q?3MxN4xU7GGCxGVYiUreM5Pm+/qJyTJBGNGNz3clEZAXdUeroNsgnkU8zB0GT?=
+ =?us-ascii?Q?Cu5liuFaAx2X3M7BEebIeiG5YGyO9urXasQP9I24WtYXl5btZdQzLouj8Hex?=
+ =?us-ascii?Q?xwK05DvBHRuG3CJA+Z02IS0E80WKb0s8gtRNuzVyedfs/1WPtYYsQgF11Br9?=
+ =?us-ascii?Q?wBJQW8VJrqmoIZ8hRdkBT2z4vCIL/RcODnLcJ/tgoZEFWd/mWjwufww47gbf?=
+ =?us-ascii?Q?w4RkyKgr82k1nB8E4XfFFcOSRtnn5Oy4c0rcZsoLWy9w/ssD0QjbqAXIFpmh?=
+ =?us-ascii?Q?iKCP3lywg6GQ0jreYy2W5c8jIx1RNxlFyxVP0pMcMflj6F1U8UOrJg3ynbfv?=
+ =?us-ascii?Q?eobP3SarhVbvZCsBLiIuOWDg76k7E1AxrPMtdnr2N0SJpN+hab9qK6Lr5MqU?=
+ =?us-ascii?Q?Xeb0pnSdnsQkUB++NEzJUZvPr33RrrvCqiRI2ZJS+vDsYBDdGcKc+oTh7edy?=
+ =?us-ascii?Q?UgIUh7Z19n/DVl3U0CZPUtylqhesMp95NL4959NSMmhuAWTjdtmu6+WoxbPj?=
+ =?us-ascii?Q?5FCFz5ODHjzY4+g984RaNg+Zi6oyxKKV1s2gkukXoXlui9GRI7RrHiGb7OC4?=
+ =?us-ascii?Q?zJOdFklAzEGQ/d+h0iIoKJm3roJikdthZSokRsUsENQ5a5MQyC29yjRC290D?=
+ =?us-ascii?Q?TgJBwgvWc6rQ6EsPfHqF58sGYdHBU1xA4uGIqHJz9FWXVfJgW4FJr/JJTtP/?=
+ =?us-ascii?Q?gy+NznN6C0ppPBnUCpcYuVvytCEl5ZXErRKaL4n+Hv8pZuQ6BgxfXMTwdSjt?=
+ =?us-ascii?Q?MrK6RjwUCOUvi0EMdT0o/GlpGBJKglnonsbLzDnRCjl/pp9Yg3kCdDDJZ5ov?=
+ =?us-ascii?Q?mZboaaSHrFMLVOPIX0LUfqVAfvkVSBarmLjW0iF+YR16mmJqkbJB+iX1T52w?=
+ =?us-ascii?Q?YIdjS7hRkldPSoV1sOqjz1ZFMWf3lENkcFMguFLjZNootsmWvIPGAcbcKwA3?=
+ =?us-ascii?Q?UGK0Txf73AiHXuy9tV4bX3YDOez1VCuwiBtiLL/49hMcxjpF6g=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?qiGGP5GD1aQlt9Q9YCAeUIxDbKBw1O9kDMIUo82F5eybyBlm0WWnEJs6F9Mk?=
+ =?us-ascii?Q?hWC2LUIHPEV9YHzDy/VVt5LMOzPCbafzjbtqETRPYzDSkvkwziIwZudxgsXv?=
+ =?us-ascii?Q?bPuSBgFxGNdM0d88AjF0YpbEOjipTcA8QizrKzzcf+AP2GOWNKlyS/PsqfZs?=
+ =?us-ascii?Q?zOI7cgccnUBR+fKh2pXajf+DgfCYIlydp0PKk/C7+6QOuZFg/BFHq+pBdRYm?=
+ =?us-ascii?Q?td+mSzx0L7HwE45HNpkCb0+EbNC8yxWCmyy9gQ7rx7iMsaNqtxwinzsVffnL?=
+ =?us-ascii?Q?DMSBqNG5akqTLdRVIKMQEMiuEDGGi8qFEAXimkdLGySgEatG5+Ri1j8Hq3Jq?=
+ =?us-ascii?Q?Ws4A5n8sw5h94W4GsHNhuVZ4nGqTk30sWukk5bVvBSrAKcRsNDE5ohQqrhXK?=
+ =?us-ascii?Q?v9jNhS+FwASK9J75P/dH5luFQRhmhwTZxsp9QO5dJiiXxdZ7BF2U7xvyiwqr?=
+ =?us-ascii?Q?OTgUJlJUfOW/ld3Ui+GSuEFn4lytFLIQgj6L+Q8DnxviOmFpvUya+aMwUENc?=
+ =?us-ascii?Q?mLeVWHcBn6GOBKk/nWh+2ZcQtivEJcwJIm0UhlhJgustL0ENV4rtmD+tp1dh?=
+ =?us-ascii?Q?Lnp/2/KQ6z+Ua5hqfdX7753h5YSo/v5MIxCgSCt8APRjKTofgOMCtEE24PWA?=
+ =?us-ascii?Q?TdSSlJJGl4DK98CzCJMPqavjN2lj0bawcxcySm9bojrp5JgISo7n4Tw7mSvP?=
+ =?us-ascii?Q?wbKi8JE68xDQY4+lMjyeI433E3sSE6q/TbQycZXE5Bni4cOIMOnoaeN1864G?=
+ =?us-ascii?Q?CiEX/pORUVagJ+FCzSYcyk4XtuCuoSvsPvFCgec5gTvHGWLksKe3H/wOasbc?=
+ =?us-ascii?Q?ks8zbDtk/6BkbJ8CJAQXGqv70WSr9Tk3p6SX6u2ilYM9CoEGz94FH2wqsZZW?=
+ =?us-ascii?Q?tDhJlmA0GgZFeWYJ67cWbFEWalL0/lN80JofRKwKPjx0urMeZbDM+6ot3uSi?=
+ =?us-ascii?Q?zFRcb1tMZlQLeuHkWV/nFqi/ATW4zH/wvEHNBPxk11NsfXRVXxcCuUG9zvVF?=
+ =?us-ascii?Q?Go/C7zDHXtCRbeqwKWMK22RM1mqkXmuaAi0rO+VE+egoAXtSdHL3NnPCtMH9?=
+ =?us-ascii?Q?Nf84VZfbHqX5wXVoZs43hzY/HYUKU4cJsOPxd4PG5fSOAocrThxfCzaS1gL8?=
+ =?us-ascii?Q?hw/Sfaq9OBXbysRF3y46G7lw9CV1uyXEi1MPUixBnwKrG3wWaGd398OaIqrq?=
+ =?us-ascii?Q?SbfQNNxLyvf5iweJGBph8AGuT+IFan9xygK56T5TUY8KbyLArbhLcHr+qKpW?=
+ =?us-ascii?Q?utHXrpcjmOk8RvcaSyOTM+Lu12HSO2lPRMAY7nTNZr5+BiRqfCFcuuSKgk0C?=
+ =?us-ascii?Q?DOSS+rnQRwHcNU+JnBHo8QsYdQC63yp7cnsBg5kOYUDjN/slUhqtgat+Ro5G?=
+ =?us-ascii?Q?FZR26KlBlCf1rFA4Fj/p/DANED8msRKQ07fQNrSkfflDH4RnhbIFcI0bQHAr?=
+ =?us-ascii?Q?AlL0PH/KkPauXGjGmDPNXzvYbL8e1OvbudiUWKS4NkNBEKJIVfDajKxyc5nL?=
+ =?us-ascii?Q?mbiNkdCOwKEimVUmWcDALN6dvAwIdCiWoUPtog38SxqSvwzveSQxYUYZkx6s?=
+ =?us-ascii?Q?hwAczOkpk6Xj0gA1yc2yQVqP20K8h2JkUCo+KP2W?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1721066853;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MqJZerhsSV9ddqqNuVw8D5APMxQFg6adTzHf/A7bvKo=;
- b=wtnAIpxEcILSNVKllW+Z3kMhQpsJAN8NMPf5lhN6OaaDLpsX8Y42FeRuoH6Ak4n1iz0ePd
- szSblYM1upsRDGZta2zmSGxXu3AeV5Tsf8gpJF+Je4exWPj/BnXpD34GON92oFNeE7r/V5
- sgb46WycmpWgv6yFV6r813g5uyDlFDgX+wgQlPfFfs/BlrnxhlsEhqBHQe3HR2birB6dPq
- i07NITDoM5zcYGt6CHVzgilvkRxKWsMGV9IU9Z+Cf1Z0L6YD+tLYzmbTUjgDm44WTqtUuH
- K1yRAw96bkauyshOwEwynjdFpHuPGeRhT3JnkdoILqUtkLbpZKD/602Nnba5JA==
-Date: Mon, 15 Jul 2024 20:07:33 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: E Shattow <lucent@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH] dm: button: support remapping phone keys
-In-Reply-To: <CANV2PTN7Ch+PyxycqUT8MWjhD9Lf6X+P9H_Y2A5=-g1ypQu4NQ@mail.gmail.com>
-References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
- <c8e6a53d96a89e54585bfe28a647f44f@manjaro.org>
- <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
- <CANV2PTN7Ch+PyxycqUT8MWjhD9Lf6X+P9H_Y2A5=-g1ypQu4NQ@mail.gmail.com>
-Message-ID: <e12c93ac9b8d0df0a447e1ba9424ff65@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-OriginatorOrg: ST.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7f0ec479-9692-4dc6-4754-08dca4d2af09
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jul 2024 13:33:16.5995 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: j0hKEtS2mOfMnyVjjpCbLOTEtUzOjL825EcTteKWaUdT8aiIF45S/Ecaz/TFw2Rw2dVt3vQ6SDit81eiz/fb6A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB7120
+X-Proofpoint-GUID: -zq7xQ25-9O9nXfYAPav2-A-WYi5sOhF
+X-Proofpoint-ORIG-GUID: -zq7xQ25-9O9nXfYAPav2-A-WYi5sOhF
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-15_08,2024-07-11_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
+ malwarescore=0
+ suspectscore=0 impostorscore=0 priorityscore=1501 adultscore=0 mlxscore=0
+ spamscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2406140001
+ definitions=main-2407150107
+X-Mailman-Approved-At: Mon, 15 Jul 2024 20:14:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,174 +187,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Shattow,
+The hash algorithm structure shall reflect the TCG specification for
+TPM2.0
+With vesion 1.59, the SHA3 algorithm has been added and shall be
+reflected in this structure.
+The fact that U-Boot does or does not support SHA3 algo yet is not
+relevant for this structure.
+It's up to the end user to configure the active PCR bank to supported
+hash algorithm by all boot chain component.
+Also, by default, TPM2.0 shall support at least SHA256 and SHA384, in
+practice dTPM support 2 actives banks with this 2 hash algorithms
 
-On 2024-07-15 20:02, E Shattow wrote:
-> Adding my casual opinion to this naming decision:
-> 
-> On Sun, Jul 14, 2024 at 11:24 PM Caleb Connolly
-> <caleb.connolly@linaro.org> wrote:
->> On 14/07/2024 22:47, Dragan Simic wrote:
->> > On 2024-07-14 21:49, Caleb Connolly wrote:
->> >> We don't have audio support in U-Boot, but we do have boot menus. Add an
->> >> option to re-map the volume and power buttons to up/down/enter so that
->> >> in situations where these are the only available buttons (such as on
->> >> mobile phones) it's still possible to navigate menus built in U-Boot or
->> >> an external EFI app like GRUB or systemd-boot.
->> >>
->> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> >> ---
->> >> Cc: u-boot-qcom@groups.io
->> >
->> > Very nice, thanks for this patch!  Looking good to me, with a few
->> > suggestions available below.  Anyway, please feel free to add:
->> >
->> > Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->> >
->> >> ---
->> >>  drivers/button/Kconfig         | 11 +++++++++++
->> >>  drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
->> >>  2 files changed, 32 insertions(+), 1 deletion(-)
->> >>
->> >> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
->> >> index 3918b05ae03e..6cae16fcc8bf 100644
->> >> --- a/drivers/button/Kconfig
->> >> +++ b/drivers/button/Kconfig
->> >> @@ -8,8 +8,19 @@ config BUTTON
->> >>        U-Boot provides a uclass API to implement this feature. Button
->> >> drivers
->> >>        can provide access to board-specific buttons. Use of the device
->> >> tree
->> >>        for configuration is encouraged.
->> >>
->> >> +config BUTTON_REMAP_PHONE_KEYS
->> >> +    bool "Remap phone keys for navigation"
->> >> +    depends on BUTTON
->> >> +    help
->> >> +      Enable remapping of phone keys to navigation keys. This is
->> >> useful for
->> >> +      devices with phone keys that are not used in U-Boot. The phone
->> >> keys
->> >> +      are remapped to the following navigation keys:
->> >> +      - Volume up: Up
->> >> +      - Volume down: Down
->> >> +      - Power: Enter
->> >> +
->> >
->> > Frankly, "phone keys" sounds a bit strange to me, maybe because there
->> > are also tablets that have the same style of reduced-set keys.  Thus,
->> > I'd suggest that the following language is used:
->> >
->> > - "BUTTON_REMAP_PHONE_KEYS" instead of "BUTTON_REMAP_REDUCED_KEYS"
->> > - "reduced smartphone-style keys" instead of "phone keys"
->> 
->> I would have assumed that anyone working on a tablet would immediately
->> guess what this option does and that it might be useful given the 
->> name.
->> I would argue that seeing "BUTTON_REMAP_REDUCED_KEYS" instead makes it
->> harder to guess what this option does.
->> 
->> I think of it not as "this option remaps the keys on your phone" but 
->> as
->> "this option remaps the keys that phones have", as in, the volume and
->> power buttons.
->> 
->> If you'd prefer, maybe we can meet somewhere in the middle with 
->> "mobile"?
->> 
-> 
->> how's BUTTON_REMAP_MOBILE_KEYS?
-> 
-> The distinction is about what it is not, rather than what it is. It is
-> not a full keyboard layout but there may be some limited keyboard or
-> button events. That is not necessarily a mobile device, nor a phone,
-> or any other specific device. Certainly "reduced" makes sense but may
-> not translate well for all people who would need to interact with this
-> code.
-> 
-> What I have known over the existence of keyboards is that "media keys"
-> are describing functionality that is not typical for a keyboard input
-> device. The other thought is "menu" keys which is more UX-derived but
-> confusingly may be assumed to be arrow or pagination keys that do
-> exist on a full keyboard layout. Most keyboards sold (circa 2024) now
-> include these media keys and are listed as such, so would be familiar.
+Signed-off-by: Benjamin BARATTE mailto:benjamin.baratte@st.com
+---
 
-Yeah, BUTTON_REMAP_MEDIA_KEYS already crossed my mind, because of the
-failiarity with the modern PC keyboards that have become the standard.
-Though, is a power key still a media key?  IDK. :)
+ include/tpm-v2.h | 35 ++++++++++++++++++++++++++++++-----
+ 1 file changed, 30 insertions(+), 5 deletions(-)
 
->> > Using "reduced" would also allow us to have this remapping logic more
->> > easily extended to also cover some other buttons found on some other
->> > devices with reduced-set keys.
->> 
->> If such a device exists and gains support in U-Boot, the switch/case
->> could be extended, or a new option added if it doesn't make sense to
->> lump everything together. Without knowing about such a device I think
->> it's impossible to make a judgement here.
->> 
->> >
->> >>  config BUTTON_ADC
->> >>      bool "Button adc"
->> >>      depends on BUTTON
->> >>      depends on ADC
->> >> diff --git a/drivers/button/button-uclass.c
->> >> b/drivers/button/button-uclass.c
->> >> index cda243389df3..729983d58701 100644
->> >> --- a/drivers/button/button-uclass.c
->> >> +++ b/drivers/button/button-uclass.c
->> >> @@ -9,8 +9,9 @@
->> >>
->> >>  #include <button.h>
->> >>  #include <dm.h>
->> >>  #include <dm/uclass-internal.h>
->> >> +#include <dt-bindings/input/linux-event-codes.h>
->> >>
->> >>  int button_get_by_label(const char *label, struct udevice **devp)
->> >>  {
->> >>      struct udevice *dev;
->> >> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct
->> >> udevice *dev)
->> >>
->> >>      return ops->get_state(dev);
->> >>  }
->> >>
->> >> +static int button_remap_phone_keys(int code)
->> >
->> > Pretty much the same suggestion as above applies here.
->> >
->> >> +{
->> >> +    switch (code) {
->> >> +    case KEY_VOLUMEUP:
->> >> +        return KEY_UP;
->> >> +    case KEY_VOLUMEDOWN:
->> >> +        return KEY_DOWN;
->> >> +    case KEY_POWER:
->> >> +        return KEY_ENTER;
->> >> +    default:
->> >> +        return code;
->> >> +    }
->> >> +}
->> >> +
->> >>  int button_get_code(struct udevice *dev)
->> >>  {
->> >>      struct button_ops *ops = button_get_ops(dev);
->> >> +    int code;
->> >>
->> >>      if (!ops->get_code)
->> >>          return -ENOSYS;
->> >>
->> >> -    return ops->get_code(dev);
->> >> +    code = ops->get_code(dev);
->> >> +    if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
->> >> +        return button_remap_phone_keys(code);
->> >> +    else
->> >> +        return code;
->> >>  }
->> >>
->> >>  UCLASS_DRIVER(button) = {
->> >>      .id        = UCLASS_BUTTON,
->> 
->> --
->> // Caleb (they/them)
-> 
-> -E
+diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+index 4fd19c52fd..9848e1fd10 100644
+--- a/include/tpm-v2.h
++++ b/include/tpm-v2.h
+@@ -253,6 +253,9 @@ enum tpm2_algorithms {
+        TPM2_ALG_SHA512         =3D 0x0D,
+        TPM2_ALG_NULL           =3D 0x10,
+        TPM2_ALG_SM3_256        =3D 0x12,
++       TPM2_ALG_SHA3_256       =3D 0x27,
++       TPM2_ALG_SHA3_384       =3D 0x28,
++       TPM2_ALG_SHA3_512       =3D 0x29,
+ };
+
+ /**
+@@ -271,11 +274,15 @@ struct digest_info {
+ };
+
+ /* Algorithm Registry */
+-#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
+-#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
+-#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
+-#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
+-#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
++#define TCG2_BOOT_HASH_ALG_SHA1     0x00000001
++#define TCG2_BOOT_HASH_ALG_SHA256   0x00000002
++#define TCG2_BOOT_HASH_ALG_SHA384   0x00000004
++#define TCG2_BOOT_HASH_ALG_SHA512   0x00000008
++#define TCG2_BOOT_HASH_ALG_SM3_256  0x00000010
++#define TCG2_BOOT_HASH_ALG_SHA3_256 0x00000020
++#define TCG2_BOOT_HASH_ALG_SHA3_384 0x00000040
++#define TCG2_BOOT_HASH_ALG_SHA3_512 0x00000080
++
+
+ static const struct digest_info hash_algo_list[] =3D {
+ #if IS_ENABLED(CONFIG_SHA1)
+@@ -310,6 +317,24 @@ static const struct digest_info hash_algo_list[] =3D {
+                TPM2_SHA512_DIGEST_SIZE,
+        },
+ #endif
++       {
++               "sha3_256",
++               TPM2_ALG_SHA3_256,
++               TCG2_BOOT_HASH_ALG_SHA3_256,
++               TPM2_SHA256_DIGEST_SIZE,
++       },
++       {
++               "sha3_384",
++               TPM2_ALG_SHA3_384,
++               TCG2_BOOT_HASH_ALG_SHA3_384,
++               TPM2_SHA384_DIGEST_SIZE,
++       },
++       {
++               "sha3_512",
++               TPM2_ALG_SHA3_512,
++               TCG2_BOOT_HASH_ALG_SHA3_512,
++               TPM2_SHA512_DIGEST_SIZE,
++       },
+ };
+
+ /* NV index attributes */
+--
+2.34.1
+
+ST Restricted
