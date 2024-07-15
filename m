@@ -4,98 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77291C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:12:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AE5C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:14:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9665C888B3;
-	Mon, 15 Jul 2024 12:09:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7450A8882D;
+	Mon, 15 Jul 2024 12:14:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J1yMZI1x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G5NKfpPW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2884188897; Mon, 15 Jul 2024 12:08:59 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 48A7588820; Mon, 15 Jul 2024 12:14:02 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D52288840
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87FFA8884A
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:13:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a77c4309fc8so525902766b.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-427aeebaecdso4931685e9.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:13:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721038137; x=1721642937; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9fS17EJfpRajXdHZM+aigrI8s0lABvMSNi6Hs5iNv8s=;
- b=J1yMZI1x0HS9XfHP3SstVBP4fAjJbXa6XyexMX8EOT6jv1VT3Qkw7LCq4pABDFkP4i
- dUcGzm17GFQp44TCrygXFfo/MqGwU3mpQhoSp+Zkcjq/7XduvopvZK66BmIXPE8ZYoHK
- sljzSSsSYTuW8Wtl5Z1FqK03jtXTeJeW+SbsevYBQdB0BRZbYr+xX3njXo1FycNxQ13Z
- 49xMUilYgdHCM8WlPLlAc5tpdPeOuuaZoNUsLUoL8diPaVr7gRQEkjnlBwqXaWrk9sXu
- EjbUtTgxPHkWDOPP+DH/r8oTjiYvtDPSpRCmIdimo6u3w6aYzBjQ5IgctQ5TW5GGh0Ed
- 8/6g==
+ d=chromium.org; s=google; t=1721038439; x=1721643239; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jon6/z+lIgH7ru10lNPYXh8zVegmWDy75NeAA7ZEOiY=;
+ b=G5NKfpPWis6onE37mgpeauehXHnEN0K3fY7U3vtLuL4F3OJ+zwlyKnPsPpGMAjav0t
+ mq5hZPEU9eN03Fuq4EjXGMaC7wJr1ybQEofFHYDkQF5ucBo99ubU9i2U2EnvyDCJ3M+r
+ u3f+UX0MJm8Y7SMsXWUV1tnOxOZceHXJj30PM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721038137; x=1721642937;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721038439; x=1721643239;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9fS17EJfpRajXdHZM+aigrI8s0lABvMSNi6Hs5iNv8s=;
- b=pP9LL9N4yQMNoH6jesfrhUTEZn1EbrNUQw9ncO6DKrVIM0Wks/+IeT8ei0YBpfyqGZ
- OKFovK/AXep6vo2EHTW8SuI7JNNqZGTNknCV4Esi8jA2i/GqW2AVYDKxJ/cwhSoOaw2+
- 0X5/aLzFgLNS9cXWgWDyx/dBIR10H96rG5e98TRrPCTCaBIziMvNF/hCWUtI3p78rcc0
- G1+DbIKP4hu4eEHHyKiIExK6T7qoG83ikZBQMwKq6xVMMR7Te6na7kk/Sp6BWdSCWBop
- Ik9kTFCvY0Dp2SI83NnnrcJLyf24Fi3WMsv6Je9TGautzN0mBxhbQS9eC057/NuOvAh6
- GLPg==
-X-Gm-Message-State: AOJu0YyRYLC9eqfOTXJslV465bQijFHC59iEVQ9HrBrNNG/AX/a5sxDC
- oU5BNXHFMTv6Qfe5Zqt+3Iq/YgmPv857UKGksa3vZi0s9/HkAoTEsC0faxurdwM=
-X-Google-Smtp-Source: AGHT+IHpgmgTrPLjvR1DSnzYNuwJ8r8og0zXkMv7PwRB2/xCJjNqudkcT3ZqMNSuJhPIuIOxhX/mQQ==
-X-Received: by 2002:a17:906:8c3:b0:a74:e717:4259 with SMTP id
- a640c23a62f3a-a780b704f06mr1094240866b.41.1721038136787; 
- Mon, 15 Jul 2024 03:08:56 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ bh=jon6/z+lIgH7ru10lNPYXh8zVegmWDy75NeAA7ZEOiY=;
+ b=QGnsdJvhkvacbw1Aay2xIve1GwEwGeT2IUdqRu9JBkTJFPvC80KNt1L9Ll8BwLzSty
+ PQagjA9nWgF0gE4yHmWbTswh7ve9C+CaihcUSbjJT72WyvaOjJPYFx89yyXiKauvXXTM
+ UnPgGOhaJejUIw4dSut3idfwdDMD6/TRz5qa6xaKO9cPq3j/yW9Ps3WoGVhL8zX2hOPr
+ CESSqtB/7HR/BCOkwUzeySFNSDSwtHuRJLVESMfAus33kHd/TgxcE9R24Net3Dn3F0KG
+ t/IqgsGnZgrvBRRbgFINeBzYb5IKLYjC+3Omi8TG/a2PhC5Qm2g7u6sF1R8P4jv9kypR
+ obrw==
+X-Gm-Message-State: AOJu0YzFYJEDCYFqUzNX29Qo0+N0eg7oxq7QGawyBkiFGesegabxgPea
+ H9C1p9zVc3EOL5ceuK8Ki+X/6e3xAFLqIt2seQJRJ5efEYHvR1UYttnpLHbtSqXM8RqgOn1u808
+ =
+X-Google-Smtp-Source: AGHT+IH+0CPWvsC36jDVnwwKYBiujb/NtRaRLX2cf54Qh6Z+pjA7e02UTtxmU4E/rw8vYrNlo82gnA==
+X-Received: by 2002:a05:600c:2284:b0:426:6416:aa73 with SMTP id
+ 5b1f17b1804b1-426707d89d9mr122940705e9.12.1721038438765; 
+ Mon, 15 Jul 2024 03:13:58 -0700 (PDT)
+Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.55
+ 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.13.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 03:08:56 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 15 Jul 2024 12:08:23 +0200
-Subject: [PATCH v6 24/24] qcom_defconfig: enable rpmh regulators
+ Mon, 15 Jul 2024 03:13:58 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH 01/13] MAINTAINERS: Rename BOOTDEVICE
+Date: Mon, 15 Jul 2024 11:13:42 +0100
+Message-Id: <20240715101354.97895-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240715101354.97895-1-sjg@chromium.org>
+References: <20240715101354.97895-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240715-b4-qcom-rpmh-v6-24-0c948a25d018@linaro.org>
-References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
-In-Reply-To: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1068;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=L0Z3UjALgAoIr8Xjx+Xnl++TWCG7gLgrnDFM/1FfGKY=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUIakXZaY5tkFwRidvYEkF1JjwE5+/k3Cf0j
- cgICpHtJ9iJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1CAAKCRAFgzErGV9k
- tro5EACi+BQKT6M5zFel4Ze8ksflYfzcHUl5Itu4nbCb8PF6MFTQ1Y5olEA9K5VCUvOTKdjZWr4
- 5qmZHJ08DCKkV/mteSKqF1TCWVtc+E8a9a2afLHMyqG58/QIkR1ePYyGyN3pPiHR2SK3STMDsWo
- 65SaMzcRCeG7jqgT+BWegiBi38TjvZ0nh82a9Wc7FbvvydnR6YpCxECTx1Xcdm0cfdTMKIAzSi2
- JHl+DqIgsajEhmjOGOko3sxhAnPnfBPWNqHE/0z6hXxqRwpgfNyqVHUifGeBAElwr+4q7muboH3
- nY7HXtYGS5VBiBJ3u+Uh6s7KXi9CcvipTWAa6+H4xGGZQiFjL+Kwpy29nO4Vm64n/ssm1u9R2kC
- S11N9ObgSMvQlFOulnaofrB6sFekj1SOVzeRFfBH0t6D4cxhLRTl1B4doq+jjRkqmtImteoHRpm
- Vnmap8Lyy0FDUDrFvHFZvHuD07vY34TxaRKrWvj5fCr3rHpVk+JVFiTt3PQOilepfTXJqo1AGe+
- 5MKeam3Lp43gTump2OKkHdPZp/fkAcITk9rp7MFqHrPACRuFoQx29Mr0R7KMsunWirrsyODNbRR
- kXpLgQMYqISJGS4tUO/56zY5WHfg0vIlg9P/0GOpwWBZVgtxGf0TmmMFnbjOMVVrv1ZdQFpdB/v
- dy11tyhwRaaf87Q==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,46 +94,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable RPMh, cmd-db, and RPMh regulators. Additionally enable
-CMD_REGULATOR for debugging.
+Rename this to BOOTSTD which is the normal name for the feature.
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- configs/qcom_defconfig | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index ac5ffe772ade..1cbad9db72eb 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -35,8 +35,9 @@ CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_CAT=y
- CONFIG_CMD_BMP=y
- CONFIG_CMD_EFIDEBUG=y
-+CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_LOG=y
- CONFIG_OF_LIVE=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
-@@ -90,11 +91,15 @@ CONFIG_PINCTRL_QCOM_SM8650=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_QCOM_RPMH=y
- CONFIG_SCSI=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_QCOM_COMMAND_DB=y
-+CONFIG_QCOM_RPMH=y
- CONFIG_SPMI_MSM=y
- CONFIG_SYSINFO=y
- CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB=y
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 2c6de3a1d84..9bee9284cca 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -918,7 +918,7 @@ F:	drivers/block/blkmap.c
+ F:	include/blkmap.h
+ F:	test/dm/blkmap.c
+ 
+-BOOTDEVICE
++BOOTSTD
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	boot/bootdev*.c
 -- 
-2.45.2
+2.34.1
 
