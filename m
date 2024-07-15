@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2581AC3DA5E
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 19:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757F5C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 19:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86F0988898;
-	Mon, 15 Jul 2024 21:36:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6126E888DD;
+	Mon, 15 Jul 2024 21:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FF/oIs4n";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hq/DGFAd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA562888CC; Mon, 15 Jul 2024 21:36:04 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id AA44387EFA; Mon, 15 Jul 2024 21:36:08 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16DE58888F
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 21:36:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FAE287EFA
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 21:36:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7035b717880so2832883a34.1
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:36:02 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-25e171122fcso2050807fac.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:36:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721072161; x=1721676961; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721072162; x=1721676962; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UxVh37p70MKsFa6rS1cWTEPb4NmVhUOAcEfqKkLGbcE=;
- b=FF/oIs4nZrYubKRAWXt9KpmJGNFocxlpPKKpSW5kRP8nIzfLOK1bNMGwQ+6mqc/Pg0
- GdBXMC9Ryd1ldcs0bTTESDl1G3uoGUvetGIcVdQaIhQWCQgS4QdQyttm560WbARoExcS
- OBSBKKDZ2wgP68Px5hck1bCRLjYpmbAZOgFWs=
+ bh=B1RzAWNkYUKPXlEf1Mu6XY/VzibUI9Sxb4L4S4P6vtM=;
+ b=hq/DGFAddl0cjCg+sd7dVee2w7vkskDy3YfEBFpXgdgl3NbiM/pBmqLEpWmuvMznzD
+ BJ7ZQ29Jqk40AiygdmIVqOx/K4rfoNwrxdPJRlbMfv1JDPLsS93/QkuVTxdCL+/uAXR+
+ QBy+vmICtARFoivVudT2CSwxzdW6YssfJn3dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721072161; x=1721676961;
+ d=1e100.net; s=20230601; t=1721072162; x=1721676962;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UxVh37p70MKsFa6rS1cWTEPb4NmVhUOAcEfqKkLGbcE=;
- b=DsQGmORIwp3hpcYpdCVEMPp11cN3dBJ/lrsvxOxmytE8YSt1NaABbrD45xcCUmzB4S
- R0Jfz+yj0s6tRqxhhtRX3V+n8nqcXuD1n9qgCJ9+mLY5RC3Z6yrEI5LfrOgdefdnv0b7
- pheehH4cbYjrFQ+ssvq/yKxoBYDHBAiJp4+P3wX4tZDH1lIQ0A9TRM5UxESfB02VEuqZ
- p4Ra5G9VnXAcARgm8V7MLvmQ1NW/qb5VSHGt8JicY38Vv8K7OxJXVJzWssFITuaU+Ha1
- gD053bRSwxCS53BVtSUzaF4Ng5dOIRAVo5ABAz4Ko8bm9Pf4nHEDjbGaDGGqwKlfqhPM
- HIkQ==
-X-Gm-Message-State: AOJu0YzTa7I+sOZnA8tJ2RUCFJ8lXxdjY6Au42pv3qaMOQsAtXhYUDZm
- iE9CXxxP5pmqEMyqldmJhEOdAml+TW3aMlJtAVS0ARiag2kvd9E386AT8iHuF8waAIXuW+WjAJJ
- N
-X-Google-Smtp-Source: AGHT+IFpUTKXJ6vyYYXhuzqRMzU4EpLJFh6aI81w9MLRkxTtUCb7B5RUWqAajNqdO6lInikFfbaf8g==
-X-Received: by 2002:a05:6870:4153:b0:260:2571:2782 with SMTP id
- 586e51a60fabf-260b5f980ccmr345567fac.2.1721072160668; 
- Mon, 15 Jul 2024 12:36:00 -0700 (PDT)
+ bh=B1RzAWNkYUKPXlEf1Mu6XY/VzibUI9Sxb4L4S4P6vtM=;
+ b=itBAQPyOJJ4LaGShY7VKwjj9uz8+BbEo3Ry0FZQDrDHzJU6xbrjpik9DrWyCVB+JsJ
+ 6mBqpiN4paoIz/upXNkdgEnylbtXVsv1lhemeuQ5YAq7paGxLHAmWkI8kgrr4JPy8ix5
+ aXrebZ5weMRzWNfNH4bdWTG3rWxTmk6bs4cWm5S+MIwD+d+dCmhWx6elL8RFKGCEN0TW
+ /W5u99TesFd+ivXnDm/9+PDcrzXfvvx09DiV4rncYfg5Vy7BB9YGvUzX8yIStkzScUJT
+ 6mR9vPsPs7Pfzz0FMYO2piLuLtlOXzB2ynV+A5aUUwkpGWsd8DjYuRK8bOvWHnqAotfe
+ DLbg==
+X-Gm-Message-State: AOJu0YxD/NtaS13bB6R+OC67dTXoOsLDfZew9LsJdPCILNS9oSs8g5N3
+ x9JnPfHomZZW5y+LrxJvycEe366r5UFgSZMu5Iz11cTBRkXJaO2YbmUqlYURBnXLovqgmOCzxVN
+ Q
+X-Google-Smtp-Source: AGHT+IGeOAg94uOXCV/Ax0R+EH5NqSkZgMIM5VKtOEsp0AEnSPViWyMVTloZo8plHBUJWT4yfkX8mg==
+X-Received: by 2002:a05:6870:3516:b0:260:286c:ca07 with SMTP id
+ 586e51a60fabf-260b601c4d3mr398769fac.12.1721072161580; 
+ Mon, 15 Jul 2024 12:36:01 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (fixed-189-203-103-45.totalplay.net. [189.203.103.45])
  by smtp.gmail.com with ESMTPSA id
  586e51a60fabf-260752a6059sm1084531fac.37.2024.07.15.12.36.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 12:36:00 -0700 (PDT)
+ Mon, 15 Jul 2024 12:36:01 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Vladimir Zapolskiy <vz@mleia.com>
-Subject: [PATCH 4/5] arm: Remove devkit3250 board
-Date: Mon, 15 Jul 2024 13:35:54 -0600
-Message-Id: <20240715193555.564528-4-trini@konsulko.com>
+Cc: Robert Nelson <robertcnelson@gmail.com>
+Subject: [PATCH 5/5] arm: Remove omap3_beagle board
+Date: Mon, 15 Jul 2024 13:35:55 -0600
+Message-Id: <20240715193555.564528-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240715193555.564528-1-trini@konsulko.com>
 References: <20240715193555.564528-1-trini@konsulko.com>
@@ -95,450 +95,2520 @@ Remove it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Vladimir Zapolskiy <vz@mleia.com>
+Cc: Robert Nelson <robertcnelson@gmail.com>
 ---
- arch/arm/mach-lpc32xx/Kconfig           |  4 --
- board/timll/devkit3250/Kconfig          | 12 ----
- board/timll/devkit3250/MAINTAINERS      |  6 --
- board/timll/devkit3250/Makefile         |  7 --
- board/timll/devkit3250/devkit3250.c     | 83 ----------------------
- board/timll/devkit3250/devkit3250_spl.c | 66 -----------------
- configs/devkit3250_defconfig            | 93 ------------------------
- include/configs/devkit3250.h            | 94 -------------------------
- 8 files changed, 365 deletions(-)
- delete mode 100644 board/timll/devkit3250/Kconfig
- delete mode 100644 board/timll/devkit3250/MAINTAINERS
- delete mode 100644 board/timll/devkit3250/Makefile
- delete mode 100644 board/timll/devkit3250/devkit3250.c
- delete mode 100644 board/timll/devkit3250/devkit3250_spl.c
- delete mode 100644 configs/devkit3250_defconfig
- delete mode 100644 include/configs/devkit3250.h
+ arch/arm/dts/Makefile                       |   5 -
+ arch/arm/dts/omap3-beagle-u-boot.dtsi       |  14 -
+ arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi |  14 -
+ arch/arm/dts/omap3-beagle-xm-ab.dts         |  13 -
+ arch/arm/dts/omap3-beagle-xm-u-boot.dtsi    |  14 -
+ arch/arm/dts/omap3-beagle-xm.dts            | 406 ---------------
+ arch/arm/dts/omap3-beagle.dts               | 433 ----------------
+ arch/arm/mach-omap2/omap3/Kconfig           |  10 -
+ board/beagle/beagle/Kconfig                 |  12 -
+ board/beagle/beagle/MAINTAINERS             |   6 -
+ board/beagle/beagle/Makefile                |   7 -
+ board/beagle/beagle/beagle.c                | 503 ------------------
+ board/beagle/beagle/beagle.h                | 545 --------------------
+ board/beagle/beagle/led.c                   |  70 ---
+ configs/omap3_beagle_defconfig              | 115 -----
+ include/configs/omap3_beagle.h              | 200 -------
+ 16 files changed, 2367 deletions(-)
+ delete mode 100644 arch/arm/dts/omap3-beagle-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/omap3-beagle-xm-ab.dts
+ delete mode 100644 arch/arm/dts/omap3-beagle-xm-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/omap3-beagle-xm.dts
+ delete mode 100644 arch/arm/dts/omap3-beagle.dts
+ delete mode 100644 board/beagle/beagle/Kconfig
+ delete mode 100644 board/beagle/beagle/MAINTAINERS
+ delete mode 100644 board/beagle/beagle/Makefile
+ delete mode 100644 board/beagle/beagle/beagle.c
+ delete mode 100644 board/beagle/beagle/beagle.h
+ delete mode 100644 board/beagle/beagle/led.c
+ delete mode 100644 configs/omap3_beagle_defconfig
+ delete mode 100644 include/configs/omap3_beagle.h
 
-diff --git a/arch/arm/mach-lpc32xx/Kconfig b/arch/arm/mach-lpc32xx/Kconfig
-index 185bda41c224..f34c6728f420 100644
---- a/arch/arm/mach-lpc32xx/Kconfig
-+++ b/arch/arm/mach-lpc32xx/Kconfig
-@@ -6,9 +6,6 @@ config SYS_SOC
- choice
- 	prompt "NXP LPC32xx board select"
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 24a65c45a933..7936188f79e6 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1010,11 +1010,6 @@ dtb-$(CONFIG_TARGET_OMAP3_EVM) += \
+ 	omap3-evm-37xx.dtb \
+ 	omap3-evm.dtb
  
--config TARGET_DEVKIT3250
--	bool "Timll DevKit3250"
+-dtb-$(CONFIG_TARGET_OMAP3_BEAGLE) += \
+-	omap3-beagle-xm-ab.dtb \
+-	omap3-beagle-xm.dtb \
+-	omap3-beagle.dtb
 -
- config TARGET_WORK_92105
- 	bool "Work Microwave Work_92105"
+ dtb-$(CONFIG_TARGET_DEVKIT8000) += omap3-devkit8000.dtb
  
-@@ -17,7 +14,6 @@ config TARGET_EA_LPC3250DEVKITV2
- 
- endchoice
- 
--source "board/timll/devkit3250/Kconfig"
- source "board/work-microwave/work_92105/Kconfig"
- source "board/ea/ea-lpc3250devkitv2/Kconfig"
- 
-diff --git a/board/timll/devkit3250/Kconfig b/board/timll/devkit3250/Kconfig
+ dtb-$(CONFIG_TARGET_SAMA7G5EK) += \
+diff --git a/arch/arm/dts/omap3-beagle-u-boot.dtsi b/arch/arm/dts/omap3-beagle-u-boot.dtsi
 deleted file mode 100644
-index 5129c2dcae54..000000000000
---- a/board/timll/devkit3250/Kconfig
+index 2c03701c896a..000000000000
+--- a/arch/arm/dts/omap3-beagle-u-boot.dtsi
++++ /dev/null
+@@ -1,14 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * U-Boot additions
+- *
+- * (C) Copyright 2017 Derald D. Woods <woods.technical@gmail.com>
+- */
+-
+-#include "omap3-u-boot.dtsi"
+-
+-/ {
+-	chosen {
+-		stdout-path = &uart3;
+-	};
+-};
+diff --git a/arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi b/arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi
+deleted file mode 100644
+index 2c03701c896a..000000000000
+--- a/arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi
++++ /dev/null
+@@ -1,14 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * U-Boot additions
+- *
+- * (C) Copyright 2017 Derald D. Woods <woods.technical@gmail.com>
+- */
+-
+-#include "omap3-u-boot.dtsi"
+-
+-/ {
+-	chosen {
+-		stdout-path = &uart3;
+-	};
+-};
+diff --git a/arch/arm/dts/omap3-beagle-xm-ab.dts b/arch/arm/dts/omap3-beagle-xm-ab.dts
+deleted file mode 100644
+index cb6968a8bce8..000000000000
+--- a/arch/arm/dts/omap3-beagle-xm-ab.dts
++++ /dev/null
+@@ -1,13 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-
+-#include "omap3-beagle-xm.dts"
+-
+-/ {
+-	/* HS USB Port 2 Power enable was inverted with the xM C */
+-	hsusb2_power: hsusb2_power_reg {
+-		enable-active-high;
+-	};
+-};
+diff --git a/arch/arm/dts/omap3-beagle-xm-u-boot.dtsi b/arch/arm/dts/omap3-beagle-xm-u-boot.dtsi
+deleted file mode 100644
+index 2c03701c896a..000000000000
+--- a/arch/arm/dts/omap3-beagle-xm-u-boot.dtsi
++++ /dev/null
+@@ -1,14 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * U-Boot additions
+- *
+- * (C) Copyright 2017 Derald D. Woods <woods.technical@gmail.com>
+- */
+-
+-#include "omap3-u-boot.dtsi"
+-
+-/ {
+-	chosen {
+-		stdout-path = &uart3;
+-	};
+-};
+diff --git a/arch/arm/dts/omap3-beagle-xm.dts b/arch/arm/dts/omap3-beagle-xm.dts
+deleted file mode 100644
+index 73152f6fa82b..000000000000
+--- a/arch/arm/dts/omap3-beagle-xm.dts
++++ /dev/null
+@@ -1,406 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-/dts-v1/;
+-
+-#include "omap36xx.dtsi"
+-
+-/ {
+-	model = "TI OMAP3 BeagleBoard xM";
+-	compatible = "ti,omap3-beagle-xm", "ti,omap36xx", "ti,omap3";
+-
+-	cpus {
+-		cpu@0 {
+-			cpu0-supply = <&vcc>;
+-		};
+-	};
+-
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x80000000 0x20000000>; /* 512 MB */
+-	};
+-
+-	aliases {
+-		display0 = &dvi0;
+-		display1 = &tv0;
+-		ethernet = &ethernet;
+-	};
+-
+-	led-controller-1 {
+-		compatible = "gpio-leds";
+-
+-		led-1 {
+-			label = "beagleboard::usr0";
+-			gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* 150 -> D6 LED */
+-			linux,default-trigger = "heartbeat";
+-		};
+-
+-		led-2 {
+-			label = "beagleboard::usr1";
+-			gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>; /* 149 -> D7 LED */
+-			linux,default-trigger = "mmc0";
+-		};
+-	};
+-
+-	led-controller-2 {
+-		compatible = "pwm-leds";
+-
+-		led-3 {
+-			label = "beagleboard::pmu_stat";
+-			pwms = <&twl_pwmled 1 7812500>;
+-			max-brightness = <127>;
+-		};
+-	};
+-
+-	sound {
+-		compatible = "ti,omap-twl4030";
+-		ti,model = "omap3beagle";
+-
+-		ti,mcbsp = <&mcbsp2>;
+-	};
+-
+-	gpio_keys {
+-		compatible = "gpio-keys";
+-
+-		user {
+-			label = "user";
+-			gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+-			linux,code = <0x114>;
+-			wakeup-source;
+-		};
+-
+-	};
+-
+-	/* HS USB Port 2 Power */
+-	hsusb2_power: hsusb2_power_reg {
+-		compatible = "regulator-fixed";
+-		regulator-name = "hsusb2_vbus";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&twl_gpio 18 GPIO_ACTIVE_HIGH>;	/* GPIO LEDA */
+-		startup-delay-us = <70000>;
+-	};
+-
+-	/* HS USB Host PHY on PORT 2 */
+-	hsusb2_phy: hsusb2_phy {
+-		compatible = "usb-nop-xceiv";
+-		reset-gpios = <&gpio5 19 GPIO_ACTIVE_LOW>; /* gpio_147 */
+-		vcc-supply = <&hsusb2_power>;
+-		#phy-cells = <0>;
+-	};
+-
+-	tfp410: encoder0 {
+-		compatible = "ti,tfp410";
+-		powerdown-gpios = <&twl_gpio 2 GPIO_ACTIVE_LOW>;
+-
+-		/* XXX pinctrl from twl */
+-
+-		ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			port@0 {
+-				reg = <0>;
+-
+-				tfp410_in: endpoint {
+-					remote-endpoint = <&dpi_out>;
+-				};
+-			};
+-
+-			port@1 {
+-				reg = <1>;
+-
+-				tfp410_out: endpoint {
+-					remote-endpoint = <&dvi_connector_in>;
+-				};
+-			};
+-		};
+-	};
+-
+-	dvi0: connector0 {
+-		compatible = "dvi-connector";
+-		label = "dvi";
+-
+-		digital;
+-
+-		ddc-i2c-bus = <&i2c3>;
+-
+-		port {
+-			dvi_connector_in: endpoint {
+-				remote-endpoint = <&tfp410_out>;
+-			};
+-		};
+-	};
+-
+-	tv0: connector1 {
+-		compatible = "svideo-connector";
+-		label = "tv";
+-
+-		port {
+-			tv_connector_in: endpoint {
+-				remote-endpoint = <&venc_out>;
+-			};
+-		};
+-	};
+-
+-	etb@5401b000 {
+-		compatible = "arm,coresight-etb10", "arm,primecell";
+-		reg = <0x5401b000 0x1000>;
+-
+-		clocks = <&emu_src_ck>;
+-		clock-names = "apb_pclk";
+-		port {
+-			etb_in: endpoint {
+-				slave-mode;
+-				remote-endpoint = <&etm_out>;
+-			};
+-		};
+-	};
+-
+-	etm@54010000 {
+-		compatible = "arm,coresight-etm3x", "arm,primecell";
+-		reg = <0x54010000 0x1000>;
+-
+-		clocks = <&emu_src_ck>;
+-		clock-names = "apb_pclk";
+-		port {
+-			etm_out: endpoint {
+-				remote-endpoint = <&etb_in>;
+-			};
+-		};
+-	};
+-};
+-
+-&omap3_pmx_wkup {
+-	gpio1_pins: pinmux_gpio1_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_WKUP_IOPAD(0x2a0e, PIN_INPUT | PIN_OFF_WAKEUPENABLE | MUX_MODE4) /* sys_boot2.gpio_4 */
+-		>;
+-	};
+-
+-	dss_dpi_pins2: pinmux_dss_dpi_pins1 {
+-		pinctrl-single,pins = <
+-			OMAP3_WKUP_IOPAD(0x2a0a, PIN_OUTPUT | MUX_MODE3)   /* sys_boot0.dss_data18 */
+-			OMAP3_WKUP_IOPAD(0x2a0c, PIN_OUTPUT | MUX_MODE3)   /* sys_boot1.dss_data19 */
+-			OMAP3_WKUP_IOPAD(0x2a10, PIN_OUTPUT | MUX_MODE3)   /* sys_boot3.dss_data20 */
+-			OMAP3_WKUP_IOPAD(0x2a12, PIN_OUTPUT | MUX_MODE3)   /* sys_boot4.dss_data21 */
+-			OMAP3_WKUP_IOPAD(0x2a14, PIN_OUTPUT | MUX_MODE3)   /* sys_boot5.dss_data22 */
+-			OMAP3_WKUP_IOPAD(0x2a16, PIN_OUTPUT | MUX_MODE3)   /* sys_boot6.dss_data23 */
+-		>;
+-	};
+-};
+-
+-&omap3_pmx_core {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <
+-			&hsusb2_pins
+-	>;
+-
+-	uart3_pins: pinmux_uart3_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x219e, PIN_INPUT | MUX_MODE0)	/* uart3_rx_irrx.uart3_rx_irrx */
+-			OMAP3_CORE1_IOPAD(0x21a0, PIN_OUTPUT | MUX_MODE0)	/* uart3_tx_irtx.uart3_tx_irtx OUTPUT | MODE0 */
+-		>;
+-	};
+-
+-	hsusb2_pins: pinmux_hsusb2_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21d4, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi1_cs3.hsusb2_data2 */
+-			OMAP3_CORE1_IOPAD(0x21d6, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_clk.hsusb2_data7 */
+-			OMAP3_CORE1_IOPAD(0x21d8, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_simo.hsusb2_data4 */
+-			OMAP3_CORE1_IOPAD(0x21da, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_somi.hsusb2_data5 */
+-			OMAP3_CORE1_IOPAD(0x21dc, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_cs0.hsusb2_data6 */
+-			OMAP3_CORE1_IOPAD(0x21de, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_cs1.hsusb2_data3 */
+-		>;
+-	};
+-
+-	dss_dpi_pins1: pinmux_dss_dpi_pins2 {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x20d4, PIN_OUTPUT | MUX_MODE0)   /* dss_pclk.dss_pclk */
+-			OMAP3_CORE1_IOPAD(0x20d6, PIN_OUTPUT | MUX_MODE0)   /* dss_hsync.dss_hsync */
+-			OMAP3_CORE1_IOPAD(0x20d8, PIN_OUTPUT | MUX_MODE0)   /* dss_vsync.dss_vsync */
+-			OMAP3_CORE1_IOPAD(0x20da, PIN_OUTPUT | MUX_MODE0)   /* dss_acbias.dss_acbias */
+-
+-			OMAP3_CORE1_IOPAD(0x20e8, PIN_OUTPUT | MUX_MODE0)   /* dss_data6.dss_data6 */
+-			OMAP3_CORE1_IOPAD(0x20ea, PIN_OUTPUT | MUX_MODE0)   /* dss_data7.dss_data7 */
+-			OMAP3_CORE1_IOPAD(0x20ec, PIN_OUTPUT | MUX_MODE0)   /* dss_data8.dss_data8 */
+-			OMAP3_CORE1_IOPAD(0x20ee, PIN_OUTPUT | MUX_MODE0)   /* dss_data9.dss_data9 */
+-			OMAP3_CORE1_IOPAD(0x20f0, PIN_OUTPUT | MUX_MODE0)   /* dss_data10.dss_data10 */
+-			OMAP3_CORE1_IOPAD(0x20f2, PIN_OUTPUT | MUX_MODE0)   /* dss_data11.dss_data11 */
+-			OMAP3_CORE1_IOPAD(0x20f4, PIN_OUTPUT | MUX_MODE0)   /* dss_data12.dss_data12 */
+-			OMAP3_CORE1_IOPAD(0x20f6, PIN_OUTPUT | MUX_MODE0)   /* dss_data13.dss_data13 */
+-			OMAP3_CORE1_IOPAD(0x20f8, PIN_OUTPUT | MUX_MODE0)   /* dss_data14.dss_data14 */
+-			OMAP3_CORE1_IOPAD(0x20fa, PIN_OUTPUT | MUX_MODE0)   /* dss_data15.dss_data15 */
+-			OMAP3_CORE1_IOPAD(0x20fc, PIN_OUTPUT | MUX_MODE0)   /* dss_data16.dss_data16 */
+-			OMAP3_CORE1_IOPAD(0x20fe, PIN_OUTPUT | MUX_MODE0)   /* dss_data17.dss_data17 */
+-
+-			OMAP3_CORE1_IOPAD(0x2100, PIN_OUTPUT | MUX_MODE3)   /* dss_data18.dss_data0 */
+-			OMAP3_CORE1_IOPAD(0x2102, PIN_OUTPUT | MUX_MODE3)   /* dss_data19.dss_data1 */
+-			OMAP3_CORE1_IOPAD(0x2104, PIN_OUTPUT | MUX_MODE3)   /* dss_data20.dss_data2 */
+-			OMAP3_CORE1_IOPAD(0x2106, PIN_OUTPUT | MUX_MODE3)   /* dss_data21.dss_data3 */
+-			OMAP3_CORE1_IOPAD(0x2108, PIN_OUTPUT | MUX_MODE3)   /* dss_data22.dss_data4 */
+-			OMAP3_CORE1_IOPAD(0x210a, PIN_OUTPUT | MUX_MODE3)   /* dss_data23.dss_data5 */
+-		>;
+-	};
+-};
+-
+-&omap3_pmx_core2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <
+-			&hsusb2_2_pins
+-	>;
+-
+-	hsusb2_2_pins: pinmux_hsusb2_2_pins {
+-		pinctrl-single,pins = <
+-			OMAP3630_CORE2_IOPAD(0x25f0, PIN_OUTPUT | MUX_MODE3)		/* etk_d10.hsusb2_clk */
+-			OMAP3630_CORE2_IOPAD(0x25f2, PIN_OUTPUT | MUX_MODE3)		/* etk_d11.hsusb2_stp */
+-			OMAP3630_CORE2_IOPAD(0x25f4, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d12.hsusb2_dir */
+-			OMAP3630_CORE2_IOPAD(0x25f6, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d13.hsusb2_nxt */
+-			OMAP3630_CORE2_IOPAD(0x25f8, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d14.hsusb2_data0 */
+-			OMAP3630_CORE2_IOPAD(0x25fa, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d15.hsusb2_data1 */
+-		>;
+-	};
+-};
+-
+-&i2c1 {
+-	clock-frequency = <2600000>;
+-
+-	twl: twl@48 {
+-		reg = <0x48>;
+-		interrupts = <7>; /* SYS_NIRQ cascaded to intc */
+-		interrupt-parent = <&intc>;
+-
+-		twl_audio: audio {
+-			compatible = "ti,twl4030-audio";
+-			codec {
+-			};
+-		};
+-
+-		twl_power: power {
+-			compatible = "ti,twl4030-power-beagleboard-xm", "ti,twl4030-power-idle-osc-off";
+-			ti,use_poweroff;
+-		};
+-	};
+-};
+-
+-#include "twl4030.dtsi"
+-#include "twl4030_omap3.dtsi"
+-
+-&i2c2 {
+-	clock-frequency = <400000>;
+-};
+-
+-&i2c3 {
+-	clock-frequency = <100000>;
+-};
+-
+-&mmc1 {
+-	vmmc-supply = <&vmmc1>;
+-	vqmmc-supply = <&vsim>;
+-	bus-width = <8>;
+-};
+-
+-&mmc2 {
+-	status = "disabled";
+-};
+-
+-&mmc3 {
+-	status = "disabled";
+-};
+-
+-&twl_gpio {
+-	ti,use-leds;
+-	/* pullups: BIT(1) */
+-	ti,pullups = <0x000002>;
+-	/*
+-	 * pulldowns:
+-	 * BIT(2), BIT(6), BIT(7), BIT(8), BIT(13)
+-	 * BIT(15), BIT(16), BIT(17)
+-	 */
+-	ti,pulldowns = <0x03a1c4>;
+-};
+-
+-&usb_otg_hs {
+-	interface-type = <0>;
+-	usb-phy = <&usb2_phy>;
+-	phys = <&usb2_phy>;
+-	phy-names = "usb2-phy";
+-	mode = <3>;
+-	power = <50>;
+-};
+-
+-&uart3 {
+-	interrupts-extended = <&intc 74 &omap3_pmx_core OMAP3_UART3_RX>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart3_pins>;
+-};
+-
+-&gpio1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&gpio1_pins>;
+-};
+-
+-&usbhshost {
+-	port2-mode = "ehci-phy";
+-};
+-
+-&usbhsehci {
+-	phys = <0 &hsusb2_phy>;
+-
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-
+-	hub@2 {
+-		compatible = "usb424,9514";
+-		reg = <2>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		ethernet: ethernet@1 {
+-			compatible = "usb424,ec00";
+-			reg = <1>;
+-		};
+-	};
+-};
+-
+-&vaux2 {
+-	regulator-name = "usb_1v8";
+-	regulator-min-microvolt = <1800000>;
+-	regulator-max-microvolt = <1800000>;
+-	regulator-always-on;
+-};
+-
+-&mcbsp2 {
+-	status = "okay";
+-};
+-
+-&dss {
+-	status = "okay";
+-
+-	pinctrl-names = "default";
+-	pinctrl-0 = <
+-		&dss_dpi_pins1
+-		&dss_dpi_pins2
+-	>;
+-
+-	port {
+-		dpi_out: endpoint {
+-			remote-endpoint = <&tfp410_in>;
+-			data-lines = <24>;
+-		};
+-	};
+-};
+-
+-&venc {
+-	status = "okay";
+-
+-	vdda-supply = <&vdac>;
+-
+-	port {
+-		venc_out: endpoint {
+-			remote-endpoint = <&tv_connector_in>;
+-			ti,channels = <2>;
+-		};
+-	};
+-};
+diff --git a/arch/arm/dts/omap3-beagle.dts b/arch/arm/dts/omap3-beagle.dts
+deleted file mode 100644
+index 321b6d7448ac..000000000000
+--- a/arch/arm/dts/omap3-beagle.dts
++++ /dev/null
+@@ -1,433 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- * Copyright (C) 2012 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-/dts-v1/;
+-
+-#include "omap34xx.dtsi"
+-
+-/ {
+-	model = "TI OMAP3 BeagleBoard";
+-	compatible = "ti,omap3-beagle", "ti,omap3";
+-
+-	cpus {
+-		cpu@0 {
+-			cpu0-supply = <&vcc>;
+-		};
+-	};
+-
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x80000000 0x10000000>; /* 256 MB */
+-	};
+-
+-	aliases {
+-		display0 = &dvi0;
+-		display1 = &tv0;
+-	};
+-
+-	leds {
+-		compatible = "gpio-leds";
+-		led-pmu-stat {
+-			label = "beagleboard::pmu_stat";
+-			gpios = <&twl_gpio 19 GPIO_ACTIVE_HIGH>; /* LEDB */
+-		};
+-
+-		led-heartbeat {
+-			label = "beagleboard::usr0";
+-			gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* 150 -> D6 LED */
+-			linux,default-trigger = "heartbeat";
+-		};
+-
+-		led-mmc {
+-			label = "beagleboard::usr1";
+-			gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>; /* 149 -> D7 LED */
+-			linux,default-trigger = "mmc0";
+-		};
+-	};
+-
+-	/* HS USB Port 2 Power */
+-	hsusb2_power: hsusb2_power_reg {
+-		compatible = "regulator-fixed";
+-		regulator-name = "hsusb2_vbus";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&twl_gpio 18 GPIO_ACTIVE_HIGH>;	/* GPIO LEDA */
+-		startup-delay-us = <70000>;
+-	};
+-
+-	/* HS USB Host PHY on PORT 2 */
+-	hsusb2_phy: hsusb2_phy {
+-		compatible = "usb-nop-xceiv";
+-		reset-gpios = <&gpio5 19 GPIO_ACTIVE_LOW>;	/* gpio_147 */
+-		vcc-supply = <&hsusb2_power>;
+-		#phy-cells = <0>;
+-	};
+-
+-	sound {
+-		compatible = "ti,omap-twl4030";
+-		ti,model = "omap3beagle";
+-
+-		ti,mcbsp = <&mcbsp2>;
+-	};
+-
+-	gpio_keys {
+-		compatible = "gpio-keys";
+-
+-		user {
+-			label = "user";
+-			gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+-			linux,code = <0x114>;
+-			wakeup-source;
+-		};
+-
+-	};
+-
+-	tfp410: encoder0 {
+-		compatible = "ti,tfp410";
+-		powerdown-gpios = <&gpio6 10 GPIO_ACTIVE_LOW>;	/* gpio_170 */
+-
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&tfp410_pins>;
+-
+-		ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			port@0 {
+-				reg = <0>;
+-
+-				tfp410_in: endpoint {
+-					remote-endpoint = <&dpi_out>;
+-				};
+-			};
+-
+-			port@1 {
+-				reg = <1>;
+-
+-				tfp410_out: endpoint {
+-					remote-endpoint = <&dvi_connector_in>;
+-				};
+-			};
+-		};
+-	};
+-
+-	dvi0: connector0 {
+-		compatible = "dvi-connector";
+-		label = "dvi";
+-
+-		digital;
+-
+-		ddc-i2c-bus = <&i2c3>;
+-
+-		port {
+-			dvi_connector_in: endpoint {
+-				remote-endpoint = <&tfp410_out>;
+-			};
+-		};
+-	};
+-
+-	tv0: connector1 {
+-		compatible = "svideo-connector";
+-		label = "tv";
+-
+-		port {
+-			tv_connector_in: endpoint {
+-				remote-endpoint = <&venc_out>;
+-			};
+-		};
+-	};
+-
+-	etb@540000000 {
+-		compatible = "arm,coresight-etb10", "arm,primecell";
+-		reg = <0x5401b000 0x1000>;
+-
+-		clocks = <&emu_src_ck>;
+-		clock-names = "apb_pclk";
+-		port {
+-			etb_in: endpoint {
+-				slave-mode;
+-				remote-endpoint = <&etm_out>;
+-			};
+-		};
+-	};
+-
+-	etm@54010000 {
+-		compatible = "arm,coresight-etm3x", "arm,primecell";
+-		reg = <0x54010000 0x1000>;
+-
+-		clocks = <&emu_src_ck>;
+-		clock-names = "apb_pclk";
+-		port {
+-			etm_out: endpoint {
+-				remote-endpoint = <&etb_in>;
+-			};
+-		};
+-	};
+-};
+-
+-&omap3_pmx_wkup {
+-	gpio1_pins: pinmux_gpio1_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_WKUP_IOPAD(0x2a14, PIN_INPUT | PIN_OFF_WAKEUPENABLE | MUX_MODE4) /* sys_boot5.gpio_7 */
+-		>;
+-	};
+-};
+-
+-&omap3_pmx_core {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <
+-			&hsusb2_pins
+-	>;
+-
+-	hsusb2_pins: pinmux_hsusb2_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21d4, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi1_cs3.hsusb2_data2 */
+-			OMAP3_CORE1_IOPAD(0x21d6, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_clk.hsusb2_data7 */
+-			OMAP3_CORE1_IOPAD(0x21d8, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_simo.hsusb2_data4 */
+-			OMAP3_CORE1_IOPAD(0x21da, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_somi.hsusb2_data5 */
+-			OMAP3_CORE1_IOPAD(0x21dc, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_cs0.hsusb2_data6 */
+-			OMAP3_CORE1_IOPAD(0x21de, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* mcspi2_cs1.hsusb2_data3 */
+-		>;
+-	};
+-
+-	uart3_pins: pinmux_uart3_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x219e, PIN_INPUT | PIN_OFF_WAKEUPENABLE | MUX_MODE0) /* uart3_rx_irrx.uart3_rx_irrx */
+-			OMAP3_CORE1_IOPAD(0x21a0, PIN_OUTPUT | MUX_MODE0) /* uart3_tx_irtx.uart3_tx_irtx */
+-		>;
+-	};
+-
+-	tfp410_pins: pinmux_tfp410_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21c6, PIN_OUTPUT | MUX_MODE4)	/* hdq_sio.gpio_170 */
+-		>;
+-	};
+-
+-	dss_dpi_pins: pinmux_dss_dpi_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x20d4, PIN_OUTPUT | MUX_MODE0)   /* dss_pclk.dss_pclk */
+-			OMAP3_CORE1_IOPAD(0x20d6, PIN_OUTPUT | MUX_MODE0)   /* dss_hsync.dss_hsync */
+-			OMAP3_CORE1_IOPAD(0x20d8, PIN_OUTPUT | MUX_MODE0)   /* dss_vsync.dss_vsync */
+-			OMAP3_CORE1_IOPAD(0x20da, PIN_OUTPUT | MUX_MODE0)   /* dss_acbias.dss_acbias */
+-			OMAP3_CORE1_IOPAD(0x20dc, PIN_OUTPUT | MUX_MODE0)   /* dss_data0.dss_data0 */
+-			OMAP3_CORE1_IOPAD(0x20de, PIN_OUTPUT | MUX_MODE0)   /* dss_data1.dss_data1 */
+-			OMAP3_CORE1_IOPAD(0x20e0, PIN_OUTPUT | MUX_MODE0)   /* dss_data2.dss_data2 */
+-			OMAP3_CORE1_IOPAD(0x20e2, PIN_OUTPUT | MUX_MODE0)   /* dss_data3.dss_data3 */
+-			OMAP3_CORE1_IOPAD(0x20e4, PIN_OUTPUT | MUX_MODE0)   /* dss_data4.dss_data4 */
+-			OMAP3_CORE1_IOPAD(0x20e6, PIN_OUTPUT | MUX_MODE0)   /* dss_data5.dss_data5 */
+-			OMAP3_CORE1_IOPAD(0x20e8, PIN_OUTPUT | MUX_MODE0)   /* dss_data6.dss_data6 */
+-			OMAP3_CORE1_IOPAD(0x20ea, PIN_OUTPUT | MUX_MODE0)   /* dss_data7.dss_data7 */
+-			OMAP3_CORE1_IOPAD(0x20ec, PIN_OUTPUT | MUX_MODE0)   /* dss_data8.dss_data8 */
+-			OMAP3_CORE1_IOPAD(0x20ee, PIN_OUTPUT | MUX_MODE0)   /* dss_data9.dss_data9 */
+-			OMAP3_CORE1_IOPAD(0x20f0, PIN_OUTPUT | MUX_MODE0)   /* dss_data10.dss_data10 */
+-			OMAP3_CORE1_IOPAD(0x20f2, PIN_OUTPUT | MUX_MODE0)   /* dss_data11.dss_data11 */
+-			OMAP3_CORE1_IOPAD(0x20f4, PIN_OUTPUT | MUX_MODE0)   /* dss_data12.dss_data12 */
+-			OMAP3_CORE1_IOPAD(0x20f6, PIN_OUTPUT | MUX_MODE0)   /* dss_data13.dss_data13 */
+-			OMAP3_CORE1_IOPAD(0x20f8, PIN_OUTPUT | MUX_MODE0)   /* dss_data14.dss_data14 */
+-			OMAP3_CORE1_IOPAD(0x20fa, PIN_OUTPUT | MUX_MODE0)   /* dss_data15.dss_data15 */
+-			OMAP3_CORE1_IOPAD(0x20fc, PIN_OUTPUT | MUX_MODE0)   /* dss_data16.dss_data16 */
+-			OMAP3_CORE1_IOPAD(0x20fe, PIN_OUTPUT | MUX_MODE0)   /* dss_data17.dss_data17 */
+-			OMAP3_CORE1_IOPAD(0x2100, PIN_OUTPUT | MUX_MODE0)   /* dss_data18.dss_data18 */
+-			OMAP3_CORE1_IOPAD(0x2102, PIN_OUTPUT | MUX_MODE0)   /* dss_data19.dss_data19 */
+-			OMAP3_CORE1_IOPAD(0x2104, PIN_OUTPUT | MUX_MODE0)   /* dss_data20.dss_data20 */
+-			OMAP3_CORE1_IOPAD(0x2106, PIN_OUTPUT | MUX_MODE0)   /* dss_data21.dss_data21 */
+-			OMAP3_CORE1_IOPAD(0x2108, PIN_OUTPUT | MUX_MODE0)   /* dss_data22.dss_data22 */
+-			OMAP3_CORE1_IOPAD(0x210a, PIN_OUTPUT | MUX_MODE0)   /* dss_data23.dss_data23 */
+-		>;
+-	};
+-};
+-
+-&omap3_pmx_core2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <
+-			&hsusb2_2_pins
+-	>;
+-
+-	hsusb2_2_pins: pinmux_hsusb2_2_pins {
+-		pinctrl-single,pins = <
+-			OMAP3430_CORE2_IOPAD(0x25f0, PIN_OUTPUT | MUX_MODE3)		/* etk_d10.hsusb2_clk */
+-			OMAP3430_CORE2_IOPAD(0x25f2, PIN_OUTPUT | MUX_MODE3)		/* etk_d11.hsusb2_stp */
+-			OMAP3430_CORE2_IOPAD(0x25f4, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d12.hsusb2_dir */
+-			OMAP3430_CORE2_IOPAD(0x25f6, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d13.hsusb2_nxt */
+-			OMAP3430_CORE2_IOPAD(0x25f8, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d14.hsusb2_data0 */
+-			OMAP3430_CORE2_IOPAD(0x25fa, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d15.hsusb2_data1 */
+-		>;
+-	};
+-};
+-
+-&i2c1 {
+-	clock-frequency = <2600000>;
+-
+-	twl: twl@48 {
+-		reg = <0x48>;
+-		interrupts = <7>; /* SYS_NIRQ cascaded to intc */
+-		interrupt-parent = <&intc>;
+-
+-		twl_audio: audio {
+-			compatible = "ti,twl4030-audio";
+-			codec {
+-			};
+-		};
+-	};
+-};
+-
+-#include "twl4030.dtsi"
+-#include "twl4030_omap3.dtsi"
+-
+-&i2c3 {
+-	clock-frequency = <100000>;
+-};
+-
+-&mmc1 {
+-	vmmc-supply = <&vmmc1>;
+-	vqmmc-supply = <&vsim>;
+-	bus-width = <8>;
+-};
+-
+-&mmc2 {
+-	status = "disabled";
+-};
+-
+-&mmc3 {
+-	status = "disabled";
+-};
+-
+-&usbhshost {
+-	port2-mode = "ehci-phy";
+-};
+-
+-&usbhsehci {
+-	phys = <0 &hsusb2_phy>;
+-};
+-
+-&twl_gpio {
+-	ti,use-leds;
+-	/* pullups: BIT(1) */
+-	ti,pullups = <0x000002>;
+-	/*
+-	 * pulldowns:
+-	 * BIT(2), BIT(6), BIT(7), BIT(8), BIT(13)
+-	 * BIT(15), BIT(16), BIT(17)
+-	 */
+-	ti,pulldowns = <0x03a1c4>;
+-};
+-
+-&uart3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart3_pins>;
+-	interrupts-extended = <&intc 74 &omap3_pmx_core OMAP3_UART3_RX>;
+-};
+-
+-&gpio1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&gpio1_pins>;
+-};
+-
+-&usb_otg_hs {
+-	interface-type = <0>;
+-	usb-phy = <&usb2_phy>;
+-	phys = <&usb2_phy>;
+-	phy-names = "usb2-phy";
+-	mode = <3>;
+-	power = <50>;
+-};
+-
+-&vaux2 {
+-	regulator-name = "vdd_ehci";
+-	regulator-min-microvolt = <1800000>;
+-	regulator-max-microvolt = <1800000>;
+-	regulator-always-on;
+-};
+-
+-&mcbsp2 {
+-	status = "okay";
+-};
+-
+-/* Needed to power the DPI pins */
+-&vpll2 {
+-	regulator-always-on;
+-};
+-
+-&dss {
+-	status = "okay";
+-
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&dss_dpi_pins>;
+-
+-	port {
+-		dpi_out: endpoint {
+-			remote-endpoint = <&tfp410_in>;
+-			data-lines = <24>;
+-		};
+-	};
+-};
+-
+-&venc {
+-	status = "okay";
+-
+-	vdda-supply = <&vdac>;
+-
+-	port {
+-		venc_out: endpoint {
+-			remote-endpoint = <&tv_connector_in>;
+-			ti,channels = <2>;
+-		};
+-	};
+-};
+-
+-&gpmc {
+-	status = "okay";
+-	ranges = <0 0 0x30000000 0x1000000>;	/* CS0 space, 16MB */
+-
+-	/* Chip select 0 */
+-	nand@0,0 {
+-		compatible = "ti,omap2-nand";
+-		reg = <0 0 4>;		/* NAND I/O window, 4 bytes */
+-		interrupt-parent = <&gpmc>;
+-		interrupts = <0 IRQ_TYPE_NONE>, /* fifoevent */
+-			     <1 IRQ_TYPE_NONE>;	/* termcount */
+-		ti,nand-ecc-opt = "ham1";
+-		rb-gpios = <&gpmc 0 GPIO_ACTIVE_HIGH>; /* gpmc_wait0 */
+-		nand-bus-width = <16>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-
+-		gpmc,device-width = <2>;
+-		gpmc,cs-on-ns = <0>;
+-		gpmc,cs-rd-off-ns = <36>;
+-		gpmc,cs-wr-off-ns = <36>;
+-		gpmc,adv-on-ns = <6>;
+-		gpmc,adv-rd-off-ns = <24>;
+-		gpmc,adv-wr-off-ns = <36>;
+-		gpmc,oe-on-ns = <6>;
+-		gpmc,oe-off-ns = <48>;
+-		gpmc,we-on-ns = <6>;
+-		gpmc,we-off-ns = <30>;
+-		gpmc,rd-cycle-ns = <72>;
+-		gpmc,wr-cycle-ns = <72>;
+-		gpmc,access-ns = <54>;
+-		gpmc,wr-access-ns = <30>;
+-
+-		partition@0 {
+-			label = "X-Loader";
+-			reg = <0 0x80000>;
+-		};
+-		partition@80000 {
+-			label = "U-Boot";
+-			reg = <0x80000 0x1e0000>;
+-		};
+-		partition@1c0000 {
+-			label = "U-Boot Env";
+-			reg = <0x260000 0x20000>;
+-		};
+-		partition@280000 {
+-			label = "Kernel";
+-			reg = <0x280000 0x400000>;
+-		};
+-		partition@780000 {
+-			label = "Filesystem";
+-			reg = <0x680000 0xf980000>;
+-		};
+-	};
+-};
+diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap3/Kconfig
+index 850ee76746ee..f15f44fe7d4b 100644
+--- a/arch/arm/mach-omap2/omap3/Kconfig
++++ b/arch/arm/mach-omap2/omap3/Kconfig
+@@ -34,15 +34,6 @@ config TARGET_AM3517_EVM
+ 	select DM_SERIAL
+ 	imply CMD_DM
+ 
+-config TARGET_OMAP3_BEAGLE
+-	bool "TI OMAP3 BeagleBoard"
+-	select DM
+-	select DM_GPIO
+-	select DM_SERIAL
+-	select OMAP3_GPIO_5
+-	select OMAP3_GPIO_6
+-	imply CMD_DM
+-
+ config TARGET_CM_T35
+ 	bool "CompuLab CM-T3530 and CM-T3730 boards"
+ 	select OMAP3_GPIO_2
+@@ -153,7 +144,6 @@ config SYS_SOC
+ 	default "omap3"
+ 
+ source "board/logicpd/am3517evm/Kconfig"
+-source "board/beagle/beagle/Kconfig"
+ source "board/timll/devkit8000/Kconfig"
+ source "board/ti/omap3evm/Kconfig"
+ source "board/isee/igep00x0/Kconfig"
+diff --git a/board/beagle/beagle/Kconfig b/board/beagle/beagle/Kconfig
+deleted file mode 100644
+index eade599dc934..000000000000
+--- a/board/beagle/beagle/Kconfig
 +++ /dev/null
 @@ -1,12 +0,0 @@
--if TARGET_DEVKIT3250
+-if TARGET_OMAP3_BEAGLE
 -
 -config SYS_BOARD
--	default "devkit3250"
+-	default "beagle"
 -
 -config SYS_VENDOR
--	default "timll"
+-	default "beagle"
 -
 -config SYS_CONFIG_NAME
--	default "devkit3250"
+-	default "omap3_beagle"
 -
 -endif
-diff --git a/board/timll/devkit3250/MAINTAINERS b/board/timll/devkit3250/MAINTAINERS
+diff --git a/board/beagle/beagle/MAINTAINERS b/board/beagle/beagle/MAINTAINERS
 deleted file mode 100644
-index cb93563feda5..000000000000
---- a/board/timll/devkit3250/MAINTAINERS
+index c7fa87acfcc8..000000000000
+--- a/board/beagle/beagle/MAINTAINERS
 +++ /dev/null
 @@ -1,6 +0,0 @@
--DEVKIT3250 BOARD
--M:	Vladimir Zapolskiy <vz@mleia.com>
+-BEAGLE BOARD
+-M:	Tom Rini <trini@konsulko.com>
 -S:	Maintained
--F:	board/timll/devkit3250/
--F:	include/configs/devkit3250.h
--F:	configs/devkit3250_defconfig
-diff --git a/board/timll/devkit3250/Makefile b/board/timll/devkit3250/Makefile
+-F:	board/beagle/beagle/
+-F:	include/configs/omap3_beagle.h
+-F:	configs/omap3_beagle_defconfig
+diff --git a/board/beagle/beagle/Makefile b/board/beagle/beagle/Makefile
 deleted file mode 100644
-index 056813995eb8..000000000000
---- a/board/timll/devkit3250/Makefile
+index fc9288cf1863..000000000000
+--- a/board/beagle/beagle/Makefile
 +++ /dev/null
 @@ -1,7 +0,0 @@
 -# SPDX-License-Identifier: GPL-2.0+
 -#
--# Copyright (C) 2011 by Vladimir Zapolskiy <vz@mleia.com>
--# Copyright (C) 2008, Guennadi Liakhovetski <lg@denx.de>
+-# (C) Copyright 2000, 2001, 2002
+-# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
 -
--obj-y	:= devkit3250.o
--obj-$(CONFIG_SPL_BUILD) += devkit3250_spl.o
-diff --git a/board/timll/devkit3250/devkit3250.c b/board/timll/devkit3250/devkit3250.c
+-obj-y	:= beagle.o
+-obj-$(CONFIG_LED_STATUS) += led.o
+diff --git a/board/beagle/beagle/beagle.c b/board/beagle/beagle/beagle.c
 deleted file mode 100644
-index f0c0f03deeb8..000000000000
---- a/board/timll/devkit3250/devkit3250.c
+index ac2f89cf213a..000000000000
+--- a/board/beagle/beagle/beagle.c
 +++ /dev/null
-@@ -1,83 +0,0 @@
+@@ -1,503 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Embest/Timll DevKit3250 board support
+- * (C) Copyright 2004-2011
+- * Texas Instruments, <www.ti.com>
 - *
-- * Copyright (C) 2011-2015 Vladimir Zapolskiy <vz@mleia.com>
+- * Author :
+- *	Sunil Kumar <sunilsaini05@gmail.com>
+- *	Shashi Ranjan <shashiranjanmca05@gmail.com>
+- *
+- * Derived from Beagle Board and 3430 SDP code by
+- *	Richard Woodruff <r-woodruff2@ti.com>
+- *	Syed Mohammed Khasim <khasim@ti.com>
+- *
 - */
--
 -#include <config.h>
+-#include <bootstage.h>
+-#include <dm.h>
+-#include <env.h>
 -#include <init.h>
--#include <asm/arch/sys_proto.h>
--#include <asm/arch/clk.h>
--#include <asm/arch/cpu.h>
--#include <asm/arch/emc.h>
--#include <asm/arch/wdt.h>
+-#include <net.h>
+-#include <ns16550.h>
+-#include <serial.h>
+-#ifdef CONFIG_LED_STATUS
+-#include <status_led.h>
+-#endif
+-#include <twl4030.h>
 -#include <asm/global_data.h>
+-#include <linux/mtd/rawnand.h>
 -#include <asm/io.h>
--#include <linux/delay.h>
+-#include <asm/arch/mmc_host_def.h>
+-#include <asm/arch/mux.h>
+-#include <asm/arch/mem.h>
+-#include <asm/arch/sys_proto.h>
+-#include <asm/gpio.h>
+-#include <asm/mach-types.h>
+-#include <asm/omap_musb.h>
+-#include <linux/errno.h>
+-#include <linux/usb/ch9.h>
+-#include <linux/usb/gadget.h>
+-#include <linux/usb/musb.h>
+-#include "beagle.h"
+-#include <command.h>
+-
+-#define TWL4030_I2C_BUS			0
+-#define EXPANSION_EEPROM_I2C_BUS	1
+-#define EXPANSION_EEPROM_I2C_ADDRESS	0x50
+-
+-#define TINCANTOOLS_ZIPPY		0x01000100
+-#define TINCANTOOLS_ZIPPY2		0x02000100
+-#define TINCANTOOLS_TRAINER		0x04000100
+-#define TINCANTOOLS_SHOWDOG		0x03000100
+-#define KBADC_BEAGLEFPGA		0x01000600
+-#define LW_BEAGLETOUCH			0x01000700
+-#define BRAINMUX_LCDOG			0x01000800
+-#define BRAINMUX_LCDOGTOUCH		0x02000800
+-#define BBTOYS_WIFI			0x01000B00
+-#define BBTOYS_VGA			0x02000B00
+-#define BBTOYS_LCD			0x03000B00
+-#define BCT_BRETTL3			0x01000F00
+-#define BCT_BRETTL4			0x02000F00
+-#define LSR_COM6L_ADPT			0x01001300
+-#define BEAGLE_NO_EEPROM		0xffffffff
 -
 -DECLARE_GLOBAL_DATA_PTR;
 -
--static struct emc_regs *emc = (struct emc_regs *)EMC_BASE;
--static struct clk_pm_regs *clk = (struct clk_pm_regs *)CLK_PM_BASE;
--static struct wdt_regs *wdt = (struct wdt_regs *)WDT_BASE;
+-static struct {
+-	unsigned int device_vendor;
+-	unsigned char revision;
+-	unsigned char content;
+-	char fab_revision[8];
+-	char env_var[16];
+-	char env_setting[64];
+-} expansion_config;
 -
--void reset_periph(void)
--{
--	/* This function resets peripherals by triggering RESOUT_N */
--	setbits_le32(&clk->timclk_ctrl, CLK_TIMCLK_WATCHDOG);
--	writel(WDTIM_MCTRL_RESFRC1, &wdt->mctrl);
--	udelay(300);
--
--	writel(0, &wdt->mctrl);
--	clrbits_le32(&clk->timclk_ctrl, CLK_TIMCLK_WATCHDOG);
--
--	/* Such a long delay is needed to initialize SMSC phy */
--	udelay(10000);
--}
--
--int board_early_init_f(void)
--{
--	lpc32xx_uart_init(CONFIG_CONS_INDEX);
--	lpc32xx_i2c_init(1);
--	lpc32xx_i2c_init(2);
--	lpc32xx_ssp_init();
--	lpc32xx_mac_init();
--
--	/*
--	 * nWP may be controlled by GPO19, but unpopulated by default R23
--	 * makes no sense to configure this GPIO level, nWP is always high
--	 */
--	lpc32xx_slc_nand_init();
--
--	return 0;
--}
--
+-/*
+- * Routine: board_init
+- * Description: Early hardware init.
+- */
 -int board_init(void)
 -{
--	/* adress of boot parameters */
--	gd->bd->bi_boot_params  = CFG_SYS_SDRAM_BASE + 0x100;
+-	gpmc_init(); /* in SRAM or SDRAM, finish GPMC */
+-	/* board id for Linux */
+-	gd->bd->bi_arch_number = MACH_TYPE_OMAP3_BEAGLE;
+-	/* boot param addr */
+-	gd->bd->bi_boot_params = (OMAP34XX_SDRC_CS0 + 0x100);
 -
--#ifdef CONFIG_SYS_FLASH_CFI
--	/* Use 16-bit memory interface for NOR Flash */
--	emc->stat[0].config	= EMC_STAT_CONFIG_PB | EMC_STAT_CONFIG_16BIT;
--
--	/* Change the NOR timings to optimum value to get maximum bandwidth */
--	emc->stat[0].waitwen	= EMC_STAT_WAITWEN(1);
--	emc->stat[0].waitoen	= EMC_STAT_WAITOEN(0);
--	emc->stat[0].waitrd	= EMC_STAT_WAITRD(12);
--	emc->stat[0].waitpage	= EMC_STAT_WAITPAGE(12);
--	emc->stat[0].waitwr	= EMC_STAT_WAITWR(5);
--	emc->stat[0].waitturn	= EMC_STAT_WAITTURN(2);
+-#if defined(CONFIG_LED_STATUS) && defined(CONFIG_LED_STATUS_BOOT_ENABLE)
+-	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_ON);
 -#endif
 -
 -	return 0;
 -}
 -
--int dram_init(void)
+-#if defined(CONFIG_SPL_OS_BOOT)
+-int spl_start_uboot(void)
 -{
--	gd->ram_size = get_ram_size((void *)CFG_SYS_SDRAM_BASE,
--				    CFG_SYS_SDRAM_SIZE);
+-	/* break into full u-boot on 'c' */
+-	if (serial_tstc() && serial_getc() == 'c')
+-		return 1;
 -
 -	return 0;
 -}
-diff --git a/board/timll/devkit3250/devkit3250_spl.c b/board/timll/devkit3250/devkit3250_spl.c
-deleted file mode 100644
-index 07a367c3ad15..000000000000
---- a/board/timll/devkit3250/devkit3250_spl.c
-+++ /dev/null
-@@ -1,66 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Timll DevKit3250 board support, SPL board configuration
-- *
-- * (C) Copyright 2015 Vladimir Zapolskiy <vz@mleia.com>
-- */
--
--#include <asm/io.h>
--#include <asm/arch/sys_proto.h>
--#include <asm/arch/cpu.h>
--#include <asm/arch/emc.h>
--#include <asm/arch-lpc32xx/gpio.h>
--#include <spl.h>
--
--static struct gpio_regs *gpio = (struct gpio_regs *)GPIO_BASE;
+-#endif /* CONFIG_SPL_OS_BOOT */
 -
 -/*
-- * SDRAM K4S561632N-LC60 settings are selected in assumption that
-- * SDRAM clock may be set up to 166 MHz, however at the moment
-- * it is 104 MHz. Most delay values are converted to be a multiple of
-- * base clock, and precise pinned values are not needed here.
+- * Routine: get_board_revision
+- * Description: Detect if we are running on a Beagle revision Ax/Bx,
+- *		C1/2/3, C4, xM Ax/Bx or xM Cx. This can be done by reading
+- *		the level of GPIO173, GPIO172 and GPIO171. This should
+- *		result in
+- *		GPIO173, GPIO172, GPIO171: 1 1 1 => Ax/Bx
+- *		GPIO173, GPIO172, GPIO171: 1 1 0 => C1/2/3
+- *		GPIO173, GPIO172, GPIO171: 1 0 1 => C4
+- *		GPIO173, GPIO172, GPIO171: 0 1 0 => xM Cx
+- *		GPIO173, GPIO172, GPIO171: 0 0 0 => xM Ax/Bx
 - */
--struct emc_dram_settings dram_64mb = {
--	.cmddelay	= 0x0001C000,
--	.config0	= 0x00005682,
--	.rascas0	= 0x00000302,
--	.rdconfig	= 0x00000011,	/* undocumented but crucial value */
--
--	.trp	= 83333333,
--	.tras	= 23809524,
--	.tsrex	= 12500000,
--	.twr	= 83000000,		/* tWR = tRDL = 2 CLK */
--	.trc	= 15384616,
--	.trfc	= 15384616,
--	.txsr	= 12500000,
--	.trrd	= 1,
--	.tmrd	= 1,
--	.tcdlr	= 0,
--
--	.refresh	= 130000,	/* 800 clock cycles */
--
--	.mode	= 0x00018000,
--	.emode	= 0x02000000,
--};
--
--void spl_board_init(void)
+-static int get_board_revision(void)
 -{
--	/* First of all silence buzzer controlled by GPO_20 */
--	writel((1 << 20), &gpio->p3_outp_clr);
+-	static int revision = -1;
 -
--	lpc32xx_uart_init(CONFIG_CONS_INDEX);
--	preloader_console_init();
+-	if (revision == -1) {
+-		if (!gpio_request(171, "rev0") &&
+-		    !gpio_request(172, "rev1") &&
+-		    !gpio_request(173, "rev2")) {
+-			gpio_direction_input(171);
+-			gpio_direction_input(172);
+-			gpio_direction_input(173);
 -
--	ddr_init(&dram_64mb);
+-			revision = gpio_get_value(173) << 2 |
+-				gpio_get_value(172) << 1 |
+-				gpio_get_value(171);
+-		} else {
+-			printf("Error: unable to acquire board revision GPIOs\n");
+-		}
+-	}
+-
+-	return revision;
+-}
+-
+-#ifdef CONFIG_SPL_BUILD
+-/*
+- * Routine: get_board_mem_timings
+- * Description: If we use SPL then there is no x-loader nor config header
+- * so we have to setup the DDR timings ourself on both banks.
+- */
+-void get_board_mem_timings(struct board_sdrc_timings *timings)
+-{
+-	int pop_mfr, pop_id;
 -
 -	/*
--	 * NAND initialization is done by nand_init(),
--	 * here just enable NAND SLC clocks
+-	 * We need to identify what PoP memory is on the board so that
+-	 * we know what timings to use.  If we can't identify it then
+-	 * we know it's an xM.  To map the ID values please see nand_ids.c
 -	 */
--	lpc32xx_slc_nand_init();
+-	identify_nand_chip(&pop_mfr, &pop_id);
+-
+-	timings->mr = MICRON_V_MR_165;
+-	switch (get_board_revision()) {
+-	case REVISION_C4:
+-		if (pop_mfr == NAND_MFR_STMICRO && pop_id == 0xba) {
+-			/* 512MB DDR */
+-			timings->mcfg = NUMONYX_V_MCFG_165(512 << 20);
+-			timings->ctrla = NUMONYX_V_ACTIMA_165;
+-			timings->ctrlb = NUMONYX_V_ACTIMB_165;
+-			timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
+-			break;
+-		} else if (pop_mfr == NAND_MFR_MICRON && pop_id == 0xba) {
+-			/* Beagleboard Rev C4, 512MB Nand/256MB DDR*/
+-			timings->mcfg = MICRON_V_MCFG_165(128 << 20);
+-			timings->ctrla = MICRON_V_ACTIMA_165;
+-			timings->ctrlb = MICRON_V_ACTIMB_165;
+-			timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
+-			break;
+-		} else if (pop_mfr == NAND_MFR_MICRON && pop_id == 0xbc) {
+-			/* Beagleboard Rev C5, 256MB DDR */
+-			timings->mcfg = MICRON_V_MCFG_200(256 << 20);
+-			timings->ctrla = MICRON_V_ACTIMA_200;
+-			timings->ctrlb = MICRON_V_ACTIMB_200;
+-			timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_200MHz;
+-			break;
+-		}
+-	case REVISION_XM_AB:
+-	case REVISION_XM_C:
+-		if (pop_mfr == 0) {
+-			/* 256MB DDR */
+-			timings->mcfg = MICRON_V_MCFG_200(256 << 20);
+-			timings->ctrla = MICRON_V_ACTIMA_200;
+-			timings->ctrlb = MICRON_V_ACTIMB_200;
+-			timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_200MHz;
+-		} else {
+-			/* 512MB DDR */
+-			timings->mcfg = NUMONYX_V_MCFG_165(512 << 20);
+-			timings->ctrla = NUMONYX_V_ACTIMA_165;
+-			timings->ctrlb = NUMONYX_V_ACTIMB_165;
+-			timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
+-		}
+-		break;
+-	default:
+-		/* Assume 128MB and Micron/165MHz timings to be safe */
+-		timings->mcfg = MICRON_V_MCFG_165(128 << 20);
+-		timings->ctrla = MICRON_V_ACTIMA_165;
+-		timings->ctrlb = MICRON_V_ACTIMB_165;
+-		timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
+-	}
+-}
+-#endif
+-
+-/*
+- * Routine: get_expansion_id
+- * Description: This function checks for expansion board by checking I2C
+- *		bus 1 for the availability of an AT24C01B serial EEPROM.
+- *		returns the device_vendor field from the EEPROM
+- */
+-static unsigned int get_expansion_id(void)
+-{
+-	i2c_set_bus_num(EXPANSION_EEPROM_I2C_BUS);
+-
+-	/* return BEAGLE_NO_EEPROM if eeprom doesn't respond */
+-	if (i2c_probe(EXPANSION_EEPROM_I2C_ADDRESS) == 1) {
+-		i2c_set_bus_num(TWL4030_I2C_BUS);
+-		return BEAGLE_NO_EEPROM;
+-	}
+-
+-	/* read configuration data */
+-	i2c_read(EXPANSION_EEPROM_I2C_ADDRESS, 0, 1, (u8 *)&expansion_config,
+-		 sizeof(expansion_config));
+-
+-	/* retry reading configuration data with 16bit addressing */
+-	if ((expansion_config.device_vendor == 0xFFFFFF00) ||
+-	    (expansion_config.device_vendor == 0xFFFFFFFF)) {
+-		printf("EEPROM is blank or 8bit addressing failed: retrying with 16bit:\n");
+-		i2c_read(EXPANSION_EEPROM_I2C_ADDRESS, 0, 2, (u8 *)&expansion_config,
+-			 sizeof(expansion_config));
+-	}
+-
+-	i2c_set_bus_num(TWL4030_I2C_BUS);
+-
+-	return expansion_config.device_vendor;
 -}
 -
--u32 spl_boot_device(void)
+-#ifdef CONFIG_VIDEO_OMAP3
+-/*
+- * Configure DSS to display background color on DVID
+- * Configure VENC to display color bar on S-Video
+- */
+-static void beagle_display_init(void)
 -{
--	return BOOT_DEVICE_NAND;
+-	omap3_dss_venc_config(&venc_config_std_tv, VENC_HEIGHT, VENC_WIDTH);
+-	switch (get_board_revision()) {
+-	case REVISION_AXBX:
+-	case REVISION_CX:
+-	case REVISION_C4:
+-		omap3_dss_panel_config(&dvid_cfg);
+-		break;
+-	case REVISION_XM_AB:
+-	case REVISION_XM_C:
+-	default:
+-		omap3_dss_panel_config(&dvid_cfg_xm);
+-		break;
+-	}
 -}
-diff --git a/configs/devkit3250_defconfig b/configs/devkit3250_defconfig
+-
+-/*
+- * Enable DVI power
+- */
+-static void beagle_dvi_pup(void)
+-{
+-	uchar val;
+-
+-	switch (get_board_revision()) {
+-	case REVISION_AXBX:
+-	case REVISION_CX:
+-	case REVISION_C4:
+-		gpio_request(170, "dvi");
+-		gpio_direction_output(170, 0);
+-		gpio_set_value(170, 1);
+-		break;
+-	case REVISION_XM_AB:
+-	case REVISION_XM_C:
+-	default:
+-		#define GPIODATADIR1 (TWL4030_BASEADD_GPIO+3)
+-		#define GPIODATAOUT1 (TWL4030_BASEADD_GPIO+6)
+-
+-		i2c_read(TWL4030_CHIP_GPIO, GPIODATADIR1, 1, &val, 1);
+-		val |= 4;
+-		i2c_write(TWL4030_CHIP_GPIO, GPIODATADIR1, 1, &val, 1);
+-
+-		i2c_read(TWL4030_CHIP_GPIO, GPIODATAOUT1, 1, &val, 1);
+-		val |= 4;
+-		i2c_write(TWL4030_CHIP_GPIO, GPIODATAOUT1, 1, &val, 1);
+-		break;
+-	}
+-}
+-#endif
+-
+-/*
+- * Routine: misc_init_r
+- * Description: Configure board specific parts
+- */
+-int misc_init_r(void)
+-{
+-	struct gpio *gpio5_base = (struct gpio *)OMAP34XX_GPIO5_BASE;
+-	struct gpio *gpio6_base = (struct gpio *)OMAP34XX_GPIO6_BASE;
+-	struct control_prog_io *prog_io_base = (struct control_prog_io *)OMAP34XX_CTRL_BASE;
+-	bool generate_fake_mac = false;
+-	u32 value;
+-
+-	/* Enable i2c2 pullup resisters */
+-	value = readl(&prog_io_base->io1);
+-	value &= ~(PRG_I2C2_PULLUPRESX);
+-	writel(value, &prog_io_base->io1);
+-
+-	switch (get_board_revision()) {
+-	case REVISION_AXBX:
+-		printf("Beagle Rev Ax/Bx\n");
+-		env_set("beaglerev", "AxBx");
+-		break;
+-	case REVISION_CX:
+-		printf("Beagle Rev C1/C2/C3\n");
+-		env_set("beaglerev", "Cx");
+-		MUX_BEAGLE_C();
+-		break;
+-	case REVISION_C4:
+-		printf("Beagle Rev C4\n");
+-		env_set("beaglerev", "C4");
+-		MUX_BEAGLE_C();
+-		/* Set VAUX2 to 1.8V for EHCI PHY */
+-		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
+-					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
+-					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+-					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+-		break;
+-	case REVISION_XM_AB:
+-		printf("Beagle xM Rev A/B\n");
+-		env_set("beaglerev", "xMAB");
+-		MUX_BEAGLE_XM();
+-		/* Set VAUX2 to 1.8V for EHCI PHY */
+-		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
+-					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
+-					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+-					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+-		generate_fake_mac = true;
+-		break;
+-	case REVISION_XM_C:
+-		printf("Beagle xM Rev C\n");
+-		env_set("beaglerev", "xMC");
+-		MUX_BEAGLE_XM();
+-		/* Set VAUX2 to 1.8V for EHCI PHY */
+-		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
+-					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
+-					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+-					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+-		generate_fake_mac = true;
+-		break;
+-	default:
+-		printf("Beagle unknown 0x%02x\n", get_board_revision());
+-		MUX_BEAGLE_XM();
+-		/* Set VAUX2 to 1.8V for EHCI PHY */
+-		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
+-					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
+-					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+-					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+-		generate_fake_mac = true;
+-	}
+-
+-	switch (get_expansion_id()) {
+-	case TINCANTOOLS_ZIPPY:
+-		printf("Recognized Tincantools Zippy board (rev %d %s)\n",
+-			expansion_config.revision,
+-			expansion_config.fab_revision);
+-		MUX_TINCANTOOLS_ZIPPY();
+-		env_set("buddy", "zippy");
+-		break;
+-	case TINCANTOOLS_ZIPPY2:
+-		printf("Recognized Tincantools Zippy2 board (rev %d %s)\n",
+-			expansion_config.revision,
+-			expansion_config.fab_revision);
+-		MUX_TINCANTOOLS_ZIPPY();
+-		env_set("buddy", "zippy2");
+-		break;
+-	case TINCANTOOLS_TRAINER:
+-		printf("Recognized Tincantools Trainer board (rev %d %s)\n",
+-			expansion_config.revision,
+-			expansion_config.fab_revision);
+-		MUX_TINCANTOOLS_ZIPPY();
+-		MUX_TINCANTOOLS_TRAINER();
+-		env_set("buddy", "trainer");
+-		break;
+-	case TINCANTOOLS_SHOWDOG:
+-		printf("Recognized Tincantools Showdow board (rev %d %s)\n",
+-			expansion_config.revision,
+-			expansion_config.fab_revision);
+-		/* Place holder for DSS2 definition for showdog lcd */
+-		env_set("defaultdisplay", "showdoglcd");
+-		env_set("buddy", "showdog");
+-		break;
+-	case KBADC_BEAGLEFPGA:
+-		printf("Recognized KBADC Beagle FPGA board\n");
+-		MUX_KBADC_BEAGLEFPGA();
+-		env_set("buddy", "beaglefpga");
+-		break;
+-	case LW_BEAGLETOUCH:
+-		printf("Recognized Liquidware BeagleTouch board\n");
+-		env_set("buddy", "beagletouch");
+-		break;
+-	case BRAINMUX_LCDOG:
+-		printf("Recognized Brainmux LCDog board\n");
+-		env_set("buddy", "lcdog");
+-		break;
+-	case BRAINMUX_LCDOGTOUCH:
+-		printf("Recognized Brainmux LCDog Touch board\n");
+-		env_set("buddy", "lcdogtouch");
+-		break;
+-	case BBTOYS_WIFI:
+-		printf("Recognized BeagleBoardToys WiFi board\n");
+-		MUX_BBTOYS_WIFI()
+-		env_set("buddy", "bbtoys-wifi");
+-		break;
+-	case BBTOYS_VGA:
+-		printf("Recognized BeagleBoardToys VGA board\n");
+-		break;
+-	case BBTOYS_LCD:
+-		printf("Recognized BeagleBoardToys LCD board\n");
+-		break;
+-	case BCT_BRETTL3:
+-		printf("Recognized bct electronic GmbH brettl3 board\n");
+-		break;
+-	case BCT_BRETTL4:
+-		printf("Recognized bct electronic GmbH brettl4 board\n");
+-		break;
+-	case LSR_COM6L_ADPT:
+-		printf("Recognized LSR COM6L Adapter Board\n");
+-		MUX_BBTOYS_WIFI()
+-		env_set("buddy", "lsr-com6l-adpt");
+-		break;
+-	case BEAGLE_NO_EEPROM:
+-		printf("No EEPROM on expansion board\n");
+-		env_set("buddy", "none");
+-		break;
+-	default:
+-		printf("Unrecognized expansion board: %x\n",
+-			expansion_config.device_vendor);
+-		env_set("buddy", "unknown");
+-	}
+-
+-	if (expansion_config.content == 1)
+-		env_set(expansion_config.env_var, expansion_config.env_setting);
+-
+-	twl4030_power_init();
+-	twl4030_power_mmc_init(0);
+-
+-	switch (get_board_revision()) {
+-	case REVISION_XM_AB:
+-		twl4030_led_init(TWL4030_LED_LEDEN_LEDBON);
+-		break;
+-	default:
+-		twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
+-		break;
+-	}
+-
+-	/* Set GPIO states before they are made outputs */
+-	writel(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
+-		&gpio6_base->setdataout);
+-	writel(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
+-		GPIO15 | GPIO14 | GPIO13 | GPIO12, &gpio5_base->setdataout);
+-
+-	/* Configure GPIOs to output */
+-	writel(~(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
+-	writel(~(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
+-		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
+-
+-	omap_die_id_display();
+-
+-#ifdef CONFIG_VIDEO_OMAP3
+-	beagle_dvi_pup();
+-	beagle_display_init();
+-	omap3_dss_enable();
+-#endif
+-
+-	if (generate_fake_mac)
+-		omap_die_id_usbethaddr();
+-
+-#if defined(CONFIG_MTDIDS_DEFAULT) && defined(CONFIG_MTDPARTS_DEFAULT)
+-	if (strlen(CONFIG_MTDIDS_DEFAULT))
+-		env_set("mtdids", CONFIG_MTDIDS_DEFAULT);
+-
+-	if (strlen(CONFIG_MTDPARTS_DEFAULT))
+-		env_set("mtdparts", CONFIG_MTDPARTS_DEFAULT);
+-#endif
+-
+-	return 0;
+-}
+-
+-/*
+- * Routine: set_muxconf_regs
+- * Description: Setting up the configuration Mux registers specific to the
+- *		hardware. Many pins need to be moved from protect to primary
+- *		mode.
+- */
+-void set_muxconf_regs(void)
+-{
+-	MUX_BEAGLE();
+-}
+diff --git a/board/beagle/beagle/beagle.h b/board/beagle/beagle/beagle.h
 deleted file mode 100644
-index 569b156c9970..000000000000
---- a/configs/devkit3250_defconfig
+index ce78ea661b9f..000000000000
+--- a/board/beagle/beagle/beagle.h
 +++ /dev/null
-@@ -1,93 +0,0 @@
+@@ -1,545 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2008
+- * Dirk Behme <dirk.behme@gmail.com>
+- */
+-#ifndef _BEAGLE_H_
+-#define _BEAGLE_H_
+-
+-#include <asm/arch/dss.h>
+-
+-const omap3_sysinfo sysinfo = {
+-	DDR_STACKED,
+-	"OMAP3 Beagle board",
+-#if defined(CONFIG_ENV_IS_IN_ONENAND)
+-	"OneNAND",
+-#else
+-	"NAND",
+-#endif
+-};
+-
+-/* BeagleBoard revisions */
+-#define REVISION_AXBX	0x7
+-#define REVISION_CX	0x6
+-#define REVISION_C4	0x5
+-#define REVISION_XM_AB	0x0
+-#define REVISION_XM_C	0x2
+-
+-/*
+- * IEN  - Input Enable
+- * IDIS - Input Disable
+- * PTD  - Pull type Down
+- * PTU  - Pull type Up
+- * DIS  - Pull type selection is inactive
+- * EN   - Pull type selection is active
+- * M0   - Mode 0
+- * The commented string gives the final mux configuration for that pin
+- */
+-#define MUX_BEAGLE() \
+- /*SDRC*/\
+-	MUX_VAL(CP(SDRC_D0),		(IEN  | PTD | DIS | M0)) /*SDRC_D0*/\
+-	MUX_VAL(CP(SDRC_D1),		(IEN  | PTD | DIS | M0)) /*SDRC_D1*/\
+-	MUX_VAL(CP(SDRC_D2),		(IEN  | PTD | DIS | M0)) /*SDRC_D2*/\
+-	MUX_VAL(CP(SDRC_D3),		(IEN  | PTD | DIS | M0)) /*SDRC_D3*/\
+-	MUX_VAL(CP(SDRC_D4),		(IEN  | PTD | DIS | M0)) /*SDRC_D4*/\
+-	MUX_VAL(CP(SDRC_D5),		(IEN  | PTD | DIS | M0)) /*SDRC_D5*/\
+-	MUX_VAL(CP(SDRC_D6),		(IEN  | PTD | DIS | M0)) /*SDRC_D6*/\
+-	MUX_VAL(CP(SDRC_D7),		(IEN  | PTD | DIS | M0)) /*SDRC_D7*/\
+-	MUX_VAL(CP(SDRC_D8),		(IEN  | PTD | DIS | M0)) /*SDRC_D8*/\
+-	MUX_VAL(CP(SDRC_D9),		(IEN  | PTD | DIS | M0)) /*SDRC_D9*/\
+-	MUX_VAL(CP(SDRC_D10),		(IEN  | PTD | DIS | M0)) /*SDRC_D10*/\
+-	MUX_VAL(CP(SDRC_D11),		(IEN  | PTD | DIS | M0)) /*SDRC_D11*/\
+-	MUX_VAL(CP(SDRC_D12),		(IEN  | PTD | DIS | M0)) /*SDRC_D12*/\
+-	MUX_VAL(CP(SDRC_D13),		(IEN  | PTD | DIS | M0)) /*SDRC_D13*/\
+-	MUX_VAL(CP(SDRC_D14),		(IEN  | PTD | DIS | M0)) /*SDRC_D14*/\
+-	MUX_VAL(CP(SDRC_D15),		(IEN  | PTD | DIS | M0)) /*SDRC_D15*/\
+-	MUX_VAL(CP(SDRC_D16),		(IEN  | PTD | DIS | M0)) /*SDRC_D16*/\
+-	MUX_VAL(CP(SDRC_D17),		(IEN  | PTD | DIS | M0)) /*SDRC_D17*/\
+-	MUX_VAL(CP(SDRC_D18),		(IEN  | PTD | DIS | M0)) /*SDRC_D18*/\
+-	MUX_VAL(CP(SDRC_D19),		(IEN  | PTD | DIS | M0)) /*SDRC_D19*/\
+-	MUX_VAL(CP(SDRC_D20),		(IEN  | PTD | DIS | M0)) /*SDRC_D20*/\
+-	MUX_VAL(CP(SDRC_D21),		(IEN  | PTD | DIS | M0)) /*SDRC_D21*/\
+-	MUX_VAL(CP(SDRC_D22),		(IEN  | PTD | DIS | M0)) /*SDRC_D22*/\
+-	MUX_VAL(CP(SDRC_D23),		(IEN  | PTD | DIS | M0)) /*SDRC_D23*/\
+-	MUX_VAL(CP(SDRC_D24),		(IEN  | PTD | DIS | M0)) /*SDRC_D24*/\
+-	MUX_VAL(CP(SDRC_D25),		(IEN  | PTD | DIS | M0)) /*SDRC_D25*/\
+-	MUX_VAL(CP(SDRC_D26),		(IEN  | PTD | DIS | M0)) /*SDRC_D26*/\
+-	MUX_VAL(CP(SDRC_D27),		(IEN  | PTD | DIS | M0)) /*SDRC_D27*/\
+-	MUX_VAL(CP(SDRC_D28),		(IEN  | PTD | DIS | M0)) /*SDRC_D28*/\
+-	MUX_VAL(CP(SDRC_D29),		(IEN  | PTD | DIS | M0)) /*SDRC_D29*/\
+-	MUX_VAL(CP(SDRC_D30),		(IEN  | PTD | DIS | M0)) /*SDRC_D30*/\
+-	MUX_VAL(CP(SDRC_D31),		(IEN  | PTD | DIS | M0)) /*SDRC_D31*/\
+-	MUX_VAL(CP(SDRC_CLK),		(IEN  | PTD | DIS | M0)) /*SDRC_CLK*/\
+-	MUX_VAL(CP(SDRC_DQS0),		(IEN  | PTD | DIS | M0)) /*SDRC_DQS0*/\
+-	MUX_VAL(CP(SDRC_DQS1),		(IEN  | PTD | DIS | M0)) /*SDRC_DQS1*/\
+-	MUX_VAL(CP(SDRC_DQS2),		(IEN  | PTD | DIS | M0)) /*SDRC_DQS2*/\
+-	MUX_VAL(CP(SDRC_DQS3),		(IEN  | PTD | DIS | M0)) /*SDRC_DQS3*/\
+- /*GPMC*/\
+-	MUX_VAL(CP(GPMC_A1),		(IDIS | PTD | DIS | M0)) /*GPMC_A1*/\
+-	MUX_VAL(CP(GPMC_A2),		(IDIS | PTD | DIS | M0)) /*GPMC_A2*/\
+-	MUX_VAL(CP(GPMC_A3),		(IDIS | PTD | DIS | M0)) /*GPMC_A3*/\
+-	MUX_VAL(CP(GPMC_A4),		(IDIS | PTD | DIS | M0)) /*GPMC_A4*/\
+-	MUX_VAL(CP(GPMC_A5),		(IDIS | PTD | DIS | M0)) /*GPMC_A5*/\
+-	MUX_VAL(CP(GPMC_A6),		(IDIS | PTD | DIS | M0)) /*GPMC_A6*/\
+-	MUX_VAL(CP(GPMC_A7),		(IDIS | PTD | DIS | M0)) /*GPMC_A7*/\
+-	MUX_VAL(CP(GPMC_A8),		(IDIS | PTD | DIS | M0)) /*GPMC_A8*/\
+-	MUX_VAL(CP(GPMC_A9),		(IDIS | PTD | DIS | M0)) /*GPMC_A9*/\
+-	MUX_VAL(CP(GPMC_A10),		(IDIS | PTD | DIS | M0)) /*GPMC_A10*/\
+-	MUX_VAL(CP(GPMC_D0),		(IEN  | PTD | DIS | M0)) /*GPMC_D0*/\
+-	MUX_VAL(CP(GPMC_D1),		(IEN  | PTD | DIS | M0)) /*GPMC_D1*/\
+-	MUX_VAL(CP(GPMC_D2),		(IEN  | PTD | DIS | M0)) /*GPMC_D2*/\
+-	MUX_VAL(CP(GPMC_D3),		(IEN  | PTD | DIS | M0)) /*GPMC_D3*/\
+-	MUX_VAL(CP(GPMC_D4),		(IEN  | PTD | DIS | M0)) /*GPMC_D4*/\
+-	MUX_VAL(CP(GPMC_D5),		(IEN  | PTD | DIS | M0)) /*GPMC_D5*/\
+-	MUX_VAL(CP(GPMC_D6),		(IEN  | PTD | DIS | M0)) /*GPMC_D6*/\
+-	MUX_VAL(CP(GPMC_D7),		(IEN  | PTD | DIS | M0)) /*GPMC_D7*/\
+-	MUX_VAL(CP(GPMC_D8),		(IEN  | PTD | DIS | M0)) /*GPMC_D8*/\
+-	MUX_VAL(CP(GPMC_D9),		(IEN  | PTD | DIS | M0)) /*GPMC_D9*/\
+-	MUX_VAL(CP(GPMC_D10),		(IEN  | PTD | DIS | M0)) /*GPMC_D10*/\
+-	MUX_VAL(CP(GPMC_D11),		(IEN  | PTD | DIS | M0)) /*GPMC_D11*/\
+-	MUX_VAL(CP(GPMC_D12),		(IEN  | PTD | DIS | M0)) /*GPMC_D12*/\
+-	MUX_VAL(CP(GPMC_D13),		(IEN  | PTD | DIS | M0)) /*GPMC_D13*/\
+-	MUX_VAL(CP(GPMC_D14),		(IEN  | PTD | DIS | M0)) /*GPMC_D14*/\
+-	MUX_VAL(CP(GPMC_D15),		(IEN  | PTD | DIS | M0)) /*GPMC_D15*/\
+-	MUX_VAL(CP(GPMC_NCS0),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS0*/\
+-	MUX_VAL(CP(GPMC_NCS1),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS1*/\
+-	MUX_VAL(CP(GPMC_NCS2),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS2*/\
+-	MUX_VAL(CP(GPMC_NCS3),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS3*/\
+-	MUX_VAL(CP(GPMC_NCS4),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS4*/\
+-	MUX_VAL(CP(GPMC_NCS5),		(IDIS | PTD | DIS | M0)) /*GPMC_nCS5*/\
+-	MUX_VAL(CP(GPMC_NCS6),		(IEN  | PTD | DIS | M1)) /*SYS_nDMA_REQ2*/\
+-	MUX_VAL(CP(GPMC_NCS7),		(IEN  | PTU | EN  | M1)) /*SYS_nDMA_REQ3*/\
+-	MUX_VAL(CP(GPMC_NBE1),		(IEN  | PTD | DIS | M0)) /*GPMC_nBE1*/\
+-	MUX_VAL(CP(GPMC_WAIT2),		(IEN  | PTU | EN  | M0)) /*GPMC_WAIT2*/\
+-	MUX_VAL(CP(GPMC_WAIT3),		(IEN  | PTU | EN  | M0)) /*GPMC_WAIT3*/\
+-	MUX_VAL(CP(GPMC_CLK),		(IDIS | PTD | DIS | M0)) /*GPMC_CLK*/\
+-	MUX_VAL(CP(GPMC_NADV_ALE),	(IDIS | PTD | DIS | M0)) /*GPMC_nADV_ALE*/\
+-	MUX_VAL(CP(GPMC_NOE),		(IDIS | PTD | DIS | M0)) /*GPMC_nOE*/\
+-	MUX_VAL(CP(GPMC_NWE),		(IDIS | PTD | DIS | M0)) /*GPMC_nWE*/\
+-	MUX_VAL(CP(GPMC_NBE0_CLE),	(IDIS | PTD | DIS | M0)) /*GPMC_nBE0_CLE*/\
+-	MUX_VAL(CP(GPMC_NWP),		(IEN  | PTD | DIS | M0)) /*GPMC_nWP*/\
+-	MUX_VAL(CP(GPMC_WAIT0),		(IEN  | PTU | EN  | M0)) /*GPMC_WAIT0*/\
+-	MUX_VAL(CP(GPMC_WAIT1),		(IEN  | PTU | EN  | M0)) /*GPMC_WAIT1*/\
+- /*DSS*/\
+-	MUX_VAL(CP(DSS_PCLK),		(IDIS | PTD | DIS | M0)) /*DSS_PCLK*/\
+-	MUX_VAL(CP(DSS_HSYNC),		(IDIS | PTD | DIS | M0)) /*DSS_HSYNC*/\
+-	MUX_VAL(CP(DSS_VSYNC),		(IDIS | PTD | DIS | M0)) /*DSS_VSYNC*/\
+-	MUX_VAL(CP(DSS_ACBIAS),		(IDIS | PTD | DIS | M0)) /*DSS_ACBIAS*/\
+-	MUX_VAL(CP(DSS_DATA0),		(IDIS | PTD | DIS | M0)) /*DSS_DATA0*/\
+-	MUX_VAL(CP(DSS_DATA1),		(IDIS | PTD | DIS | M0)) /*DSS_DATA1*/\
+-	MUX_VAL(CP(DSS_DATA2),		(IDIS | PTD | DIS | M0)) /*DSS_DATA2*/\
+-	MUX_VAL(CP(DSS_DATA3),		(IDIS | PTD | DIS | M0)) /*DSS_DATA3*/\
+-	MUX_VAL(CP(DSS_DATA4),		(IDIS | PTD | DIS | M0)) /*DSS_DATA4*/\
+-	MUX_VAL(CP(DSS_DATA5),		(IDIS | PTD | DIS | M0)) /*DSS_DATA5*/\
+-	MUX_VAL(CP(DSS_DATA6),		(IDIS | PTD | DIS | M0)) /*DSS_DATA6*/\
+-	MUX_VAL(CP(DSS_DATA7),		(IDIS | PTD | DIS | M0)) /*DSS_DATA7*/\
+-	MUX_VAL(CP(DSS_DATA8),		(IDIS | PTD | DIS | M0)) /*DSS_DATA8*/\
+-	MUX_VAL(CP(DSS_DATA9),		(IDIS | PTD | DIS | M0)) /*DSS_DATA9*/\
+-	MUX_VAL(CP(DSS_DATA10),		(IDIS | PTD | DIS | M0)) /*DSS_DATA10*/\
+-	MUX_VAL(CP(DSS_DATA11),		(IDIS | PTD | DIS | M0)) /*DSS_DATA11*/\
+-	MUX_VAL(CP(DSS_DATA12),		(IDIS | PTD | DIS | M0)) /*DSS_DATA12*/\
+-	MUX_VAL(CP(DSS_DATA13),		(IDIS | PTD | DIS | M0)) /*DSS_DATA13*/\
+-	MUX_VAL(CP(DSS_DATA14),		(IDIS | PTD | DIS | M0)) /*DSS_DATA14*/\
+-	MUX_VAL(CP(DSS_DATA15),		(IDIS | PTD | DIS | M0)) /*DSS_DATA15*/\
+-	MUX_VAL(CP(DSS_DATA16),		(IDIS | PTD | DIS | M0)) /*DSS_DATA16*/\
+-	MUX_VAL(CP(DSS_DATA17),		(IDIS | PTD | DIS | M0)) /*DSS_DATA17*/\
+-	MUX_VAL(CP(DSS_DATA18),		(IDIS | PTD | DIS | M0)) /*DSS_DATA18*/\
+-	MUX_VAL(CP(DSS_DATA19),		(IDIS | PTD | DIS | M0)) /*DSS_DATA19*/\
+-	MUX_VAL(CP(DSS_DATA20),		(IDIS | PTD | DIS | M0)) /*DSS_DATA20*/\
+-	MUX_VAL(CP(DSS_DATA21),		(IDIS | PTD | DIS | M0)) /*DSS_DATA21*/\
+-	MUX_VAL(CP(DSS_DATA22),		(IDIS | PTD | DIS | M0)) /*DSS_DATA22*/\
+-	MUX_VAL(CP(DSS_DATA23),		(IDIS | PTD | DIS | M0)) /*DSS_DATA23*/\
+- /*CAMERA*/\
+-	MUX_VAL(CP(CAM_HS),		(IEN  | PTU | EN  | M0)) /*CAM_HS */\
+-	MUX_VAL(CP(CAM_VS),		(IEN  | PTU | EN  | M0)) /*CAM_VS */\
+-	MUX_VAL(CP(CAM_XCLKA),		(IDIS | PTD | DIS | M0)) /*CAM_XCLKA*/\
+-	MUX_VAL(CP(CAM_PCLK),		(IEN  | PTU | EN  | M0)) /*CAM_PCLK*/\
+-	MUX_VAL(CP(CAM_FLD),		(IDIS | PTD | DIS | M4)) /*GPIO_98*/\
+-	MUX_VAL(CP(CAM_D0),		(IEN  | PTD | DIS | M0)) /*CAM_D0*/\
+-	MUX_VAL(CP(CAM_D1),		(IEN  | PTD | DIS | M0)) /*CAM_D1*/\
+-	MUX_VAL(CP(CAM_D2),		(IEN  | PTD | DIS | M0)) /*CAM_D2*/\
+-	MUX_VAL(CP(CAM_D3),		(IEN  | PTD | DIS | M0)) /*CAM_D3*/\
+-	MUX_VAL(CP(CAM_D4),		(IEN  | PTD | DIS | M0)) /*CAM_D4*/\
+-	MUX_VAL(CP(CAM_D5),		(IEN  | PTD | DIS | M0)) /*CAM_D5*/\
+-	MUX_VAL(CP(CAM_D6),		(IEN  | PTD | DIS | M0)) /*CAM_D6*/\
+-	MUX_VAL(CP(CAM_D7),		(IEN  | PTD | DIS | M0)) /*CAM_D7*/\
+-	MUX_VAL(CP(CAM_D8),		(IEN  | PTD | DIS | M0)) /*CAM_D8*/\
+-	MUX_VAL(CP(CAM_D9),		(IEN  | PTD | DIS | M0)) /*CAM_D9*/\
+-	MUX_VAL(CP(CAM_D10),		(IEN  | PTD | DIS | M0)) /*CAM_D10*/\
+-	MUX_VAL(CP(CAM_D11),		(IEN  | PTD | DIS | M0)) /*CAM_D11*/\
+-	MUX_VAL(CP(CAM_XCLKB),		(IDIS | PTD | DIS | M0)) /*CAM_XCLKB*/\
+-	MUX_VAL(CP(CAM_WEN),		(IEN  | PTD | DIS | M4)) /*GPIO_167*/\
+-	MUX_VAL(CP(CAM_STROBE),		(IDIS | PTD | DIS | M0)) /*CAM_STROBE*/\
+-	MUX_VAL(CP(CSI2_DX0),		(IEN  | PTD | DIS | M0)) /*CSI2_DX0*/\
+-	MUX_VAL(CP(CSI2_DY0),		(IEN  | PTD | DIS | M0)) /*CSI2_DY0*/\
+-	MUX_VAL(CP(CSI2_DX1),		(IEN  | PTD | DIS | M0)) /*CSI2_DX1*/\
+-	MUX_VAL(CP(CSI2_DY1),		(IEN  | PTD | DIS | M0)) /*CSI2_DY1*/\
+- /*Audio Interface */\
+-	MUX_VAL(CP(MCBSP2_FSX),		(IEN  | PTD | DIS | M0)) /*McBSP2_FSX*/\
+-	MUX_VAL(CP(MCBSP2_CLKX),	(IEN  | PTD | DIS | M0)) /*McBSP2_CLKX*/\
+-	MUX_VAL(CP(MCBSP2_DR),		(IEN  | PTD | DIS | M0)) /*McBSP2_DR*/\
+-	MUX_VAL(CP(MCBSP2_DX),		(IDIS | PTD | DIS | M0)) /*McBSP2_DX*/\
+- /*Expansion card */\
+-	MUX_VAL(CP(MMC1_CLK),		(IDIS | PTU | EN  | M0)) /*MMC1_CLK*/\
+-	MUX_VAL(CP(MMC1_CMD),		(IEN  | PTU | EN  | M0)) /*MMC1_CMD*/\
+-	MUX_VAL(CP(MMC1_DAT0),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT0*/\
+-	MUX_VAL(CP(MMC1_DAT1),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT1*/\
+-	MUX_VAL(CP(MMC1_DAT2),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT2*/\
+-	MUX_VAL(CP(MMC1_DAT3),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT3*/\
+-	MUX_VAL(CP(MMC1_DAT4),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT4*/\
+-	MUX_VAL(CP(MMC1_DAT5),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT5*/\
+-	MUX_VAL(CP(MMC1_DAT6),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT6*/\
+-	MUX_VAL(CP(MMC1_DAT7),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT7*/\
+- /*Wireless LAN */\
+-	MUX_VAL(CP(MMC2_CLK),		(IEN  | PTU | EN  | M4)) /*GPIO_130*/\
+-	MUX_VAL(CP(MMC2_CMD),		(IEN  | PTU | EN  | M4)) /*GPIO_131*/\
+-	MUX_VAL(CP(MMC2_DAT0),		(IEN  | PTU | EN  | M4)) /*GPIO_132*/\
+-	MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTU | EN  | M4)) /*GPIO_133*/\
+-	MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTU | EN  | M4)) /*GPIO_134*/\
+-	MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTU | EN  | M4)) /*GPIO_135*/\
+-	MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M4)) /*GPIO_136*/\
+-	MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M4)) /*GPIO_137*/\
+-	MUX_VAL(CP(MMC2_DAT6),		(IEN  | PTU | EN  | M4)) /*GPIO_138*/\
+-	MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTU | EN  | M4)) /*GPIO_139*/\
+- /*Bluetooth*/\
+-	MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTD | DIS | M1)) /*UART2_CTS*/\
+-	MUX_VAL(CP(MCBSP3_DR),		(IDIS | PTD | DIS | M1)) /*UART2_RTS*/\
+-	MUX_VAL(CP(MCBSP3_CLKX),	(IDIS | PTD | DIS | M1)) /*UART2_TX*/\
+-	MUX_VAL(CP(MCBSP3_FSX),		(IEN  | PTD | DIS | M1)) /*UART2_RX*/\
+-	MUX_VAL(CP(UART2_CTS),		(IEN  | PTD | DIS | M4)) /*GPIO_144*/\
+-	MUX_VAL(CP(UART2_RTS),		(IEN  | PTD | DIS | M4)) /*GPIO_145*/\
+-	MUX_VAL(CP(UART2_TX),		(IEN  | PTD | DIS | M4)) /*GPIO_146*/\
+-	MUX_VAL(CP(UART2_RX),		(IEN  | PTD | DIS | M4)) /*GPIO_147*/\
+- /*Modem Interface */\
+-	MUX_VAL(CP(UART1_TX),		(IDIS | PTD | DIS | M0)) /*UART1_TX*/\
+-	MUX_VAL(CP(UART1_RTS),		(IDIS | PTD | DIS | M4)) /*GPIO_149*/ \
+-	MUX_VAL(CP(UART1_CTS),		(IDIS | PTD | DIS | M4)) /*GPIO_150*/ \
+-	MUX_VAL(CP(UART1_RX),		(IEN  | PTD | DIS | M0)) /*UART1_RX*/\
+-	MUX_VAL(CP(MCBSP4_CLKX),	(IEN  | PTD | DIS | M1)) /*SSI1_DAT_RX*/\
+-	MUX_VAL(CP(MCBSP4_DR),		(IEN  | PTD | DIS | M1)) /*SSI1_FLAG_RX*/\
+-	MUX_VAL(CP(MCBSP4_DX),		(IEN  | PTD | DIS | M1)) /*SSI1_RDY_RX*/\
+-	MUX_VAL(CP(MCBSP4_FSX),		(IEN  | PTD | DIS | M1)) /*SSI1_WAKE*/\
+-	MUX_VAL(CP(MCBSP1_CLKR),	(IDIS | PTD | DIS | M4)) /*GPIO_156*/\
+-	MUX_VAL(CP(MCBSP1_FSR),		(IDIS | PTU | EN  | M4)) /*GPIO_157*/\
+-	MUX_VAL(CP(MCBSP1_DX),		(IDIS | PTD | DIS | M4)) /*GPIO_158*/\
+-	MUX_VAL(CP(MCBSP1_DR),		(IDIS | PTD | DIS | M4)) /*GPIO_159*/\
+-	MUX_VAL(CP(MCBSP_CLKS),		(IEN  | PTU | DIS | M0)) /*McBSP_CLKS*/\
+-	MUX_VAL(CP(MCBSP1_FSX),		(IDIS | PTD | DIS | M4)) /*GPIO_161*/\
+-	MUX_VAL(CP(MCBSP1_CLKX),	(IDIS | PTD | DIS | M4)) /*GPIO_162*/\
+- /*Serial Interface*/\
+-	MUX_VAL(CP(UART3_CTS_RCTX),	(IEN  | PTD | EN  | M0)) /*UART3_CTS_RCTX*/\
+-	MUX_VAL(CP(UART3_RTS_SD),	(IDIS | PTD | DIS | M0)) /*UART3_RTS_SD */\
+-	MUX_VAL(CP(UART3_RX_IRRX),	(IEN  | PTD | DIS | M0)) /*UART3_RX_IRRX*/\
+-	MUX_VAL(CP(UART3_TX_IRTX),	(IDIS | PTD | DIS | M0)) /*UART3_TX_IRTX*/\
+-	MUX_VAL(CP(HSUSB0_CLK),		(IEN  | PTD | DIS | M0)) /*HSUSB0_CLK*/\
+-	MUX_VAL(CP(HSUSB0_STP),		(IDIS | PTU | EN  | M0)) /*HSUSB0_STP*/\
+-	MUX_VAL(CP(HSUSB0_DIR),		(IEN  | PTD | DIS | M0)) /*HSUSB0_DIR*/\
+-	MUX_VAL(CP(HSUSB0_NXT),		(IEN  | PTD | DIS | M0)) /*HSUSB0_NXT*/\
+-	MUX_VAL(CP(HSUSB0_DATA0),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA0*/\
+-	MUX_VAL(CP(HSUSB0_DATA1),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA1*/\
+-	MUX_VAL(CP(HSUSB0_DATA2),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA2*/\
+-	MUX_VAL(CP(HSUSB0_DATA3),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA3*/\
+-	MUX_VAL(CP(HSUSB0_DATA4),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA4*/\
+-	MUX_VAL(CP(HSUSB0_DATA5),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA5*/\
+-	MUX_VAL(CP(HSUSB0_DATA6),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA6*/\
+-	MUX_VAL(CP(HSUSB0_DATA7),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA7*/\
+-	MUX_VAL(CP(I2C1_SCL),		(IEN  | PTU | EN  | M0)) /*I2C1_SCL*/\
+-	MUX_VAL(CP(I2C1_SDA),		(IEN  | PTU | EN  | M0)) /*I2C1_SDA*/\
+-	MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M0)) /*I2C2_SCL*/\
+-	MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M0)) /*I2C2_SDA*/\
+-	MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M0)) /*I2C3_SCL*/\
+-	MUX_VAL(CP(I2C3_SDA),		(IEN  | PTU | EN  | M0)) /*I2C3_SDA*/\
+-	MUX_VAL(CP(I2C4_SCL),		(IEN  | PTU | EN  | M0)) /*I2C4_SCL*/\
+-	MUX_VAL(CP(I2C4_SDA),		(IEN  | PTU | EN  | M0)) /*I2C4_SDA*/\
+-	MUX_VAL(CP(HDQ_SIO),		(IDIS | PTU | EN  | M4)) /*GPIO_170*/\
+-	MUX_VAL(CP(MCSPI1_CLK),		(IEN  | PTU | EN  | M4)) /*GPIO_171*/\
+-	MUX_VAL(CP(MCSPI1_SIMO),	(IEN  | PTU | EN  | M4)) /*GPIO_172*/\
+-	MUX_VAL(CP(MCSPI1_SOMI),	(IEN  | PTU | EN  | M4)) /*GPIO_173*/\
+-	MUX_VAL(CP(MCSPI1_CS0),		(IEN  | PTD | EN  | M0)) /*McSPI1_CS0*/\
+-	MUX_VAL(CP(MCSPI1_CS1),		(IDIS | PTD | EN  | M0)) /*McSPI1_CS1*/\
+-	MUX_VAL(CP(MCSPI1_CS2),		(IDIS | PTD | DIS | M4)) /*GPIO_176*/\
+- /* USB EHCI (port 2) */\
+-	MUX_VAL(CP(MCSPI1_CS3),		(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA2*/\
+-	MUX_VAL(CP(MCSPI2_CLK),		(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA7*/\
+-	MUX_VAL(CP(MCSPI2_SIMO),	(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA4*/\
+-	MUX_VAL(CP(MCSPI2_SOMI),	(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA5*/\
+-	MUX_VAL(CP(MCSPI2_CS0),		(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA6*/\
+-	MUX_VAL(CP(MCSPI2_CS1),		(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA3*/\
+-	MUX_VAL(CP(ETK_D10_ES2),	(IDIS | PTD | DIS | M3)) /*HSUSB2_CLK*/\
+-	MUX_VAL(CP(ETK_D11_ES2),	(IDIS | PTD | DIS | M3)) /*HSUSB2_STP*/\
+-	MUX_VAL(CP(ETK_D12_ES2),	(IEN  | PTD | EN  | M3)) /*HSUSB2_DIR*/\
+-	MUX_VAL(CP(ETK_D13_ES2),	(IEN  | PTD | EN  | M3)) /*HSUSB2_NXT*/\
+-	MUX_VAL(CP(ETK_D14_ES2),	(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA0*/\
+-	MUX_VAL(CP(ETK_D15_ES2),	(IEN  | PTD | EN  | M3)) /*HSUSB2_DATA1*/\
+- /*Control and debug */\
+-	MUX_VAL(CP(SYS_32K),		(IEN  | PTD | DIS | M0)) /*SYS_32K*/\
+-	MUX_VAL(CP(SYS_CLKREQ),		(IEN  | PTD | DIS | M0)) /*SYS_CLKREQ*/\
+-	MUX_VAL(CP(SYS_NIRQ),		(IEN  | PTU | EN  | M0)) /*SYS_nIRQ*/\
+-	MUX_VAL(CP(SYS_BOOT0),		(IEN  | PTD | DIS | M4)) /*GPIO_2*/\
+-	MUX_VAL(CP(SYS_BOOT1),		(IEN  | PTD | DIS | M4)) /*GPIO_3*/\
+-	MUX_VAL(CP(SYS_BOOT2),		(IEN  | PTD | DIS | M4)) /*GPIO_4 - MMC1_WP*/\
+-	MUX_VAL(CP(SYS_BOOT3),		(IEN  | PTD | DIS | M4)) /*GPIO_5*/\
+-	MUX_VAL(CP(SYS_BOOT4),		(IEN  | PTD | DIS | M4)) /*GPIO_6*/\
+-	MUX_VAL(CP(SYS_BOOT5),		(IEN  | PTD | DIS | M4)) /*GPIO_7*/\
+-	MUX_VAL(CP(SYS_BOOT6),		(IDIS | PTD | DIS | M4)) /*GPIO_8*/ \
+-	MUX_VAL(CP(SYS_OFF_MODE),	(IEN  | PTD | DIS | M0)) /*SYS_OFF_MODE*/\
+-	MUX_VAL(CP(SYS_CLKOUT1),	(IEN  | PTD | DIS | M0)) /*SYS_CLKOUT1*/\
+-	MUX_VAL(CP(SYS_CLKOUT2),	(IEN  | PTU | EN  | M4)) /*GPIO_186*/\
+-	MUX_VAL(CP(ETK_CLK_ES2),	(IDIS | PTU | EN  | M3)) /*HSUSB1_STP*/\
+-	MUX_VAL(CP(ETK_CTL_ES2),	(IDIS | PTU | DIS | M3)) /*HSUSB1_CLK*/\
+-	MUX_VAL(CP(ETK_D0_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA0*/\
+-	MUX_VAL(CP(ETK_D1_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA1*/\
+-	MUX_VAL(CP(ETK_D2_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA2*/\
+-	MUX_VAL(CP(ETK_D3_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA7*/\
+-	MUX_VAL(CP(ETK_D4_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA4*/\
+-	MUX_VAL(CP(ETK_D5_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA5*/\
+-	MUX_VAL(CP(ETK_D6_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA6*/\
+-	MUX_VAL(CP(ETK_D7_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DATA3*/\
+-	MUX_VAL(CP(ETK_D8_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_DIR*/\
+-	MUX_VAL(CP(ETK_D9_ES2),		(IEN  | PTU | DIS | M3)) /*HSUSB1_NXT*/\
+-	MUX_VAL(CP(D2D_MCAD1),		(IEN  | PTD | EN  | M0)) /*d2d_mcad1*/\
+-	MUX_VAL(CP(D2D_MCAD2),		(IEN  | PTD | EN  | M0)) /*d2d_mcad2*/\
+-	MUX_VAL(CP(D2D_MCAD3),		(IEN  | PTD | EN  | M0)) /*d2d_mcad3*/\
+-	MUX_VAL(CP(D2D_MCAD4),		(IEN  | PTD | EN  | M0)) /*d2d_mcad4*/\
+-	MUX_VAL(CP(D2D_MCAD5),		(IEN  | PTD | EN  | M0)) /*d2d_mcad5*/\
+-	MUX_VAL(CP(D2D_MCAD6),		(IEN  | PTD | EN  | M0)) /*d2d_mcad6*/\
+-	MUX_VAL(CP(D2D_MCAD7),		(IEN  | PTD | EN  | M0)) /*d2d_mcad7*/\
+-	MUX_VAL(CP(D2D_MCAD8),		(IEN  | PTD | EN  | M0)) /*d2d_mcad8*/\
+-	MUX_VAL(CP(D2D_MCAD9),		(IEN  | PTD | EN  | M0)) /*d2d_mcad9*/\
+-	MUX_VAL(CP(D2D_MCAD10),		(IEN  | PTD | EN  | M0)) /*d2d_mcad10*/\
+-	MUX_VAL(CP(D2D_MCAD11),		(IEN  | PTD | EN  | M0)) /*d2d_mcad11*/\
+-	MUX_VAL(CP(D2D_MCAD12),		(IEN  | PTD | EN  | M0)) /*d2d_mcad12*/\
+-	MUX_VAL(CP(D2D_MCAD13),		(IEN  | PTD | EN  | M0)) /*d2d_mcad13*/\
+-	MUX_VAL(CP(D2D_MCAD14),		(IEN  | PTD | EN  | M0)) /*d2d_mcad14*/\
+-	MUX_VAL(CP(D2D_MCAD15),		(IEN  | PTD | EN  | M0)) /*d2d_mcad15*/\
+-	MUX_VAL(CP(D2D_MCAD16),		(IEN  | PTD | EN  | M0)) /*d2d_mcad16*/\
+-	MUX_VAL(CP(D2D_MCAD17),		(IEN  | PTD | EN  | M0)) /*d2d_mcad17*/\
+-	MUX_VAL(CP(D2D_MCAD18),		(IEN  | PTD | EN  | M0)) /*d2d_mcad18*/\
+-	MUX_VAL(CP(D2D_MCAD19),		(IEN  | PTD | EN  | M0)) /*d2d_mcad19*/\
+-	MUX_VAL(CP(D2D_MCAD20),		(IEN  | PTD | EN  | M0)) /*d2d_mcad20*/\
+-	MUX_VAL(CP(D2D_MCAD21),		(IEN  | PTD | EN  | M0)) /*d2d_mcad21*/\
+-	MUX_VAL(CP(D2D_MCAD22),		(IEN  | PTD | EN  | M0)) /*d2d_mcad22*/\
+-	MUX_VAL(CP(D2D_MCAD23),		(IEN  | PTD | EN  | M0)) /*d2d_mcad23*/\
+-	MUX_VAL(CP(D2D_MCAD24),		(IEN  | PTD | EN  | M0)) /*d2d_mcad24*/\
+-	MUX_VAL(CP(D2D_MCAD25),		(IEN  | PTD | EN  | M0)) /*d2d_mcad25*/\
+-	MUX_VAL(CP(D2D_MCAD26),		(IEN  | PTD | EN  | M0)) /*d2d_mcad26*/\
+-	MUX_VAL(CP(D2D_MCAD27),		(IEN  | PTD | EN  | M0)) /*d2d_mcad27*/\
+-	MUX_VAL(CP(D2D_MCAD28),		(IEN  | PTD | EN  | M0)) /*d2d_mcad28*/\
+-	MUX_VAL(CP(D2D_MCAD29),		(IEN  | PTD | EN  | M0)) /*d2d_mcad29*/\
+-	MUX_VAL(CP(D2D_MCAD30),		(IEN  | PTD | EN  | M0)) /*d2d_mcad30*/\
+-	MUX_VAL(CP(D2D_MCAD31),		(IEN  | PTD | EN  | M0)) /*d2d_mcad31*/\
+-	MUX_VAL(CP(D2D_MCAD32),		(IEN  | PTD | EN  | M0)) /*d2d_mcad32*/\
+-	MUX_VAL(CP(D2D_MCAD33),		(IEN  | PTD | EN  | M0)) /*d2d_mcad33*/\
+-	MUX_VAL(CP(D2D_MCAD34),		(IEN  | PTD | EN  | M0)) /*d2d_mcad34*/\
+-	MUX_VAL(CP(D2D_MCAD35),		(IEN  | PTD | EN  | M0)) /*d2d_mcad35*/\
+-	MUX_VAL(CP(D2D_MCAD36),		(IEN  | PTD | EN  | M0)) /*d2d_mcad36*/\
+-	MUX_VAL(CP(D2D_CLK26MI),	(IEN  | PTD | DIS | M0)) /*d2d_clk26mi*/\
+-	MUX_VAL(CP(D2D_NRESPWRON),	(IEN  | PTD | EN  | M0)) /*d2d_nrespwron*/\
+-	MUX_VAL(CP(D2D_NRESWARM),	(IEN  | PTU | EN  | M0)) /*d2d_nreswarm */\
+-	MUX_VAL(CP(D2D_ARM9NIRQ),	(IEN  | PTD | DIS | M0)) /*d2d_arm9nirq */\
+-	MUX_VAL(CP(D2D_UMA2P6FIQ),	(IEN  | PTD | DIS | M0)) /*d2d_uma2p6fiq*/\
+-	MUX_VAL(CP(D2D_SPINT),		(IEN  | PTD | EN  | M0)) /*d2d_spint*/\
+-	MUX_VAL(CP(D2D_FRINT),		(IEN  | PTD | EN  | M0)) /*d2d_frint*/\
+-	MUX_VAL(CP(D2D_DMAREQ0),	(IEN  | PTD | DIS | M0)) /*d2d_dmareq0*/\
+-	MUX_VAL(CP(D2D_DMAREQ1),	(IEN  | PTD | DIS | M0)) /*d2d_dmareq1*/\
+-	MUX_VAL(CP(D2D_DMAREQ2),	(IEN  | PTD | DIS | M0)) /*d2d_dmareq2*/\
+-	MUX_VAL(CP(D2D_DMAREQ3),	(IEN  | PTD | DIS | M0)) /*d2d_dmareq3*/\
+-	MUX_VAL(CP(D2D_N3GTRST),	(IEN  | PTD | DIS | M0)) /*d2d_n3gtrst*/\
+-	MUX_VAL(CP(D2D_N3GTDI),		(IEN  | PTD | DIS | M0)) /*d2d_n3gtdi*/\
+-	MUX_VAL(CP(D2D_N3GTDO),		(IEN  | PTD | DIS | M0)) /*d2d_n3gtdo*/\
+-	MUX_VAL(CP(D2D_N3GTMS),		(IEN  | PTD | DIS | M0)) /*d2d_n3gtms*/\
+-	MUX_VAL(CP(D2D_N3GTCK),		(IEN  | PTD | DIS | M0)) /*d2d_n3gtck*/\
+-	MUX_VAL(CP(D2D_N3GRTCK),	(IEN  | PTD | DIS | M0)) /*d2d_n3grtck*/\
+-	MUX_VAL(CP(D2D_MSTDBY),		(IEN  | PTU | EN  | M0)) /*d2d_mstdby*/\
+-	MUX_VAL(CP(D2D_SWAKEUP),	(IEN  | PTD | EN  | M0)) /*d2d_swakeup*/\
+-	MUX_VAL(CP(D2D_IDLEREQ),	(IEN  | PTD | DIS | M0)) /*d2d_idlereq*/\
+-	MUX_VAL(CP(D2D_IDLEACK),	(IEN  | PTU | EN  | M0)) /*d2d_idleack*/\
+-	MUX_VAL(CP(D2D_MWRITE),		(IEN  | PTD | DIS | M0)) /*d2d_mwrite*/\
+-	MUX_VAL(CP(D2D_SWRITE),		(IEN  | PTD | DIS | M0)) /*d2d_swrite*/\
+-	MUX_VAL(CP(D2D_MREAD),		(IEN  | PTD | DIS | M0)) /*d2d_mread*/\
+-	MUX_VAL(CP(D2D_SREAD),		(IEN  | PTD | DIS | M0)) /*d2d_sread*/\
+-	MUX_VAL(CP(D2D_MBUSFLAG),	(IEN  | PTD | DIS | M0)) /*d2d_mbusflag*/\
+-	MUX_VAL(CP(D2D_SBUSFLAG),	(IEN  | PTD | DIS | M0)) /*d2d_sbusflag*/\
+-	MUX_VAL(CP(SDRC_CKE0),		(IDIS | PTU | EN  | M0)) /*sdrc_cke0*/\
+-	MUX_VAL(CP(SDRC_CKE1),		(IDIS | PTU | EN  | M0)) /*sdrc_cke1*/
+-
+-#define MUX_BEAGLE_C() \
+-	MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTD | DIS | M4)) /*GPIO_140*/\
+-	MUX_VAL(CP(MCBSP3_DR),		(IEN  | PTD | DIS | M4)) /*GPIO_142*/\
+-	MUX_VAL(CP(MCBSP3_CLKX),	(IEN  | PTD | DIS | M4)) /*GPIO_141*/\
+-	MUX_VAL(CP(UART2_CTS),		(IEN  | PTU | EN  | M0)) /*UART2_CTS*/\
+-	MUX_VAL(CP(UART2_RTS),		(IDIS | PTD | DIS | M0)) /*UART2_RTS*/\
+-	MUX_VAL(CP(UART2_TX),		(IDIS | PTD | DIS | M0)) /*UART2_TX*/\
+-	MUX_VAL(CP(UART2_RX),		(IDIS | PTU | EN  | M4)) /*GPIO_147*/
+-
+-#define MUX_BEAGLE_XM() \
+-	MUX_VAL(CP(GPMC_NCS5),		(IDIS | PTD | EN  | M4)) /*GPIO_56*/\
+-	MUX_VAL(CP(GPMC_WAIT1),		(IDIS | PTU | EN  | M4)) /*GPIO_63*/\
+-	MUX_VAL(CP(MMC1_DAT7),		(IDIS | PTU | EN  | M4)) /*GPIO_129*/\
+-	MUX_VAL(CP(HDQ_SIO),		(IDIS | PTU | EN  | M4)) /*GPIO_170*/\
+-	MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTD | DIS | M4)) /*GPIO_140*/\
+-	MUX_VAL(CP(MCBSP3_DR),		(IEN  | PTD | DIS | M4)) /*GPIO_142*/\
+-	MUX_VAL(CP(MCBSP3_CLKX),	(IEN  | PTD | DIS | M4)) /*GPIO_141*/\
+-	MUX_VAL(CP(UART2_CTS),		(IEN  | PTU | EN  | M0)) /*UART2_CTS*/\
+-	MUX_VAL(CP(UART2_RTS),		(IDIS | PTD | DIS | M0)) /*UART2_RTS*/\
+-	MUX_VAL(CP(UART2_TX),		(IDIS | PTD | DIS | M0)) /*UART2_TX*/\
+-	MUX_VAL(CP(DSS_DATA0),		(IDIS | PTD | DIS | M7)) /*safe_mode*/\
+-	MUX_VAL(CP(DSS_DATA1),		(IDIS | PTD | DIS | M7)) /*safe_mode*/\
+-	MUX_VAL(CP(DSS_DATA2),		(IDIS | PTD | DIS | M7)) /*safe_mode*/\
+-	MUX_VAL(CP(DSS_DATA3),		(IDIS | PTD | DIS | M7)) /*safe_mode*/\
+-	MUX_VAL(CP(DSS_DATA4),		(IDIS | PTD | DIS | M7)) /*safe_mode*/\
+-	MUX_VAL(CP(DSS_DATA5),		(IDIS | PTD | DIS | M7)) /*safe_mode*/\
+-	MUX_VAL(CP(DSS_DATA18),		(IDIS | PTD | DIS | M3)) /*DSS_DATA0*/\
+-	MUX_VAL(CP(DSS_DATA19),		(IDIS | PTD | DIS | M3)) /*DSS_DATA1*/\
+-	MUX_VAL(CP(DSS_DATA20),		(IDIS | PTD | DIS | M3)) /*DSS_DATA2*/\
+-	MUX_VAL(CP(DSS_DATA21),		(IDIS | PTD | DIS | M3)) /*DSS_DATA3*/\
+-	MUX_VAL(CP(DSS_DATA22),		(IDIS | PTD | DIS | M3)) /*DSS_DATA4*/\
+-	MUX_VAL(CP(DSS_DATA23),		(IDIS | PTD | DIS | M3)) /*DSS_DATA5*/\
+-	MUX_VAL(CP(SYS_BOOT0),		(IDIS | PTD | DIS | M3)) /*DSS_DATA18*/\
+-	MUX_VAL(CP(SYS_BOOT1),		(IDIS | PTD | DIS | M3)) /*DSS_DATA19*/\
+-	MUX_VAL(CP(SYS_BOOT3),		(IDIS | PTD | DIS | M3)) /*DSS_DATA20*/\
+-	MUX_VAL(CP(SYS_BOOT4),		(IDIS | PTD | DIS | M3)) /*DSS_DATA21*/\
+-	MUX_VAL(CP(SYS_BOOT5),		(IDIS | PTD | DIS | M3)) /*DSS_DATA22*/\
+-	MUX_VAL(CP(SYS_BOOT6),		(IDIS | PTD | DIS | M3)) /*DSS_DATA23*/
+-
+-#define MUX_TINCANTOOLS_ZIPPY() \
+-	MUX_VAL(CP(MMC2_CLK),       (IEN  | PTU | EN  | M0)) /*MMC2_CLK*/\
+-	MUX_VAL(CP(MMC2_CMD),       (IEN  | PTU | EN  | M0)) /*MMC2_CMD*/\
+-	MUX_VAL(CP(MMC2_DAT0),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT0*/\
+-	MUX_VAL(CP(MMC2_DAT1),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT1*/\
+-	MUX_VAL(CP(MMC2_DAT2),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT2*/\
+-	MUX_VAL(CP(MMC2_DAT3),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT3*/\
+-	MUX_VAL(CP(MMC2_DAT4),      (IEN  | PTU | EN  | M1)) /*MMC2_DIR_DAT0*/\
+-	MUX_VAL(CP(MMC2_DAT5),      (IEN  | PTU | EN  | M1)) /*MMC2_DIR_DAT1*/\
+-	MUX_VAL(CP(MMC2_DAT6),      (IEN  | PTU | EN  | M1)) /*MMC2_DIR_CMD*/\
+-	MUX_VAL(CP(MMC2_DAT7),      (IEN  | PTU | EN  | M1)) /*MMC2_CLKIN*/\
+-	MUX_VAL(CP(MCBSP1_CLKR),    (IEN  | PTU | EN  | M1)) /*MCSPI4_CLK*/\
+-	MUX_VAL(CP(MCBSP1_FSR),     (IEN  | PTU | EN  | M4)) /*GPIO_157*/\
+-	MUX_VAL(CP(MCBSP1_DX),      (IEN  | PTD | EN  | M1)) /*MCSPI4_SIMO*/\
+-	MUX_VAL(CP(MCBSP1_DR),      (IEN  | PTD | DIS | M1)) /*MCSPI4_SOMI*/\
+-	MUX_VAL(CP(MCBSP1_FSX),     (IEN  | PTD | EN  | M1)) /*MCSPI4_CS0*/\
+-	MUX_VAL(CP(MCBSP1_CLKX),    (IEN  | PTD | DIS | M4)) /*GPIO_162*/\
+-	MUX_VAL(CP(MCBSP3_DX),      (IEN  | PTD | DIS | M4)) /*GPIO_140*/\
+-	MUX_VAL(CP(MCBSP3_DR),      (IEN  | PTD | DIS | M4)) /*GPIO_142*/\
+-	MUX_VAL(CP(MCBSP3_CLKX),    (IEN  | PTD | DIS | M4)) /*GPIO_141*/
+-
+-#define MUX_TINCANTOOLS_TRAINER() \
+-	MUX_VAL(CP(MMC2_CLK),       (IEN  | PTU | EN  | M4)) /*GPIO_130*/\
+-	MUX_VAL(CP(MMC2_CMD),       (IEN  | PTU | EN  | M4)) /*GPIO_131*/\
+-	MUX_VAL(CP(MMC2_DAT0),      (IEN  | PTU | EN  | M4)) /*GPIO_132*/\
+-	MUX_VAL(CP(MMC2_DAT1),      (IEN  | PTU | EN  | M4)) /*GPIO_133*/\
+-	MUX_VAL(CP(MMC2_DAT2),      (IEN  | PTU | EN  | M4)) /*GPIO_134*/\
+-	MUX_VAL(CP(MMC2_DAT3),      (IEN  | PTU | EN  | M4)) /*GPIO_135*/\
+-	MUX_VAL(CP(MMC2_DAT4),      (IEN  | PTU | EN  | M4)) /*GPIO_136*/\
+-	MUX_VAL(CP(MMC2_DAT5),      (IEN  | PTU | EN  | M4)) /*GPIO_137*/\
+-	MUX_VAL(CP(MMC2_DAT6),      (IEN  | PTU | EN  | M4)) /*GPIO_138*/\
+-	MUX_VAL(CP(MMC2_DAT7),      (IEN  | PTU | EN  | M4)) /*GPIO_139*/\
+-	MUX_VAL(CP(MCBSP3_DX),      (IEN  | PTU | EN  | M4)) /*GPIO_140*/\
+-	MUX_VAL(CP(MCBSP3_CLKX),    (IEN  | PTU | EN  | M4)) /*GPIO_141*/\
+-	MUX_VAL(CP(MCBSP1_CLKX),    (IEN  | PTU | EN  | M4)) /*GPIO_162*/
+-
+-#define MUX_KBADC_BEAGLEFPGA() \
+-	MUX_VAL(CP(MCBSP1_CLKR),    (IEN  | PTU | DIS | M1)) /*MCSPI4_CLK*/\
+-	MUX_VAL(CP(MCBSP1_DX),      (IDIS | PTU | DIS | M1)) /*MCSPI4_SIMO*/\
+-	MUX_VAL(CP(MCBSP1_DR),      (IEN  | PTU | EN  | M1)) /*MCSPI4_SOMI*/\
+-	MUX_VAL(CP(MCBSP1_FSX),     (IDIS | PTU | DIS | M1)) /*MCSPI4_CS0*/
+-
+-#define MUX_BBTOYS_WIFI() \
+-	MUX_VAL(CP(MMC2_CLK),       (IEN  | PTU | EN  | M0)) /*MMC2_CLK*/\
+-	MUX_VAL(CP(MMC2_CMD),       (IEN  | PTU | EN  | M0)) /*MMC2_CMD*/\
+-	MUX_VAL(CP(MMC2_DAT0),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT0*/\
+-	MUX_VAL(CP(MMC2_DAT1),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT1*/\
+-	MUX_VAL(CP(MMC2_DAT2),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT2*/\
+-	MUX_VAL(CP(MMC2_DAT3),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT3*/\
+-	MUX_VAL(CP(MMC2_DAT4),      (IDIS | PTU | EN  | M4)) /*GPIO_136 FM_EN/BT_WU*/\
+-	MUX_VAL(CP(MMC2_DAT5),      (IEN  | PTU | EN  | M4)) /*GPIO_137 WLAN_IRQ*/\
+-	MUX_VAL(CP(MMC2_DAT6),      (IDIS | PTU | EN  | M4)) /*GPIO_138 BT_EN*/\
+-	MUX_VAL(CP(MMC2_DAT7),      (IDIS | PTU | EN  | M4)) /*GPIO_139 WLAN_EN*/
+-
+-/*
+- * Display Configuration
+- */
+-
+-#define DVI_BEAGLE_ORANGE_COL		0x00FF8000
+-#define VENC_HEIGHT			0x00ef
+-#define VENC_WIDTH			0x027f
+-
+-/*
+- * Configure VENC in DSS for Beagle to generate Color Bar
+- *
+- * Kindly refer to OMAP TRM for definition of these values.
+- */
+-static const struct venc_regs venc_config_std_tv = {
+-	.status					= 0x0000001B,
+-	.f_control				= 0x00000040,
+-	.vidout_ctrl				= 0x00000000,
+-	.sync_ctrl				= 0x00008000,
+-	.llen					= 0x00008359,
+-	.flens					= 0x0000020C,
+-	.hfltr_ctrl				= 0x00000000,
+-	.cc_carr_wss_carr			= 0x043F2631,
+-	.c_phase				= 0x00000024,
+-	.gain_u					= 0x00000130,
+-	.gain_v					= 0x00000198,
+-	.gain_y					= 0x000001C0,
+-	.black_level				= 0x0000006A,
+-	.blank_level				= 0x0000005C,
+-	.x_color				= 0x00000000,
+-	.m_control				= 0x00000001,
+-	.bstamp_wss_data			= 0x0000003F,
+-	.s_carr					= 0x21F07C1F,
+-	.line21					= 0x00000000,
+-	.ln_sel					= 0x00000015,
+-	.l21__wc_ctl				= 0x00001400,
+-	.htrigger_vtrigger			= 0x00000000,
+-	.savid__eavid				= 0x069300F4,
+-	.flen__fal				= 0x0016020C,
+-	.lal__phase_reset			= 0x00060107,
+-	.hs_int_start_stop_x			= 0x008D034E,
+-	.hs_ext_start_stop_x			= 0x000F0359,
+-	.vs_int_start_x				= 0x01A00000,
+-	.vs_int_stop_x__vs_int_start_y		= 0x020501A0,
+-	.vs_int_stop_y__vs_ext_start_x		= 0x01AC0024,
+-	.vs_ext_stop_x__vs_ext_start_y		= 0x020D01AC,
+-	.vs_ext_stop_y				= 0x00000006,
+-	.avid_start_stop_x			= 0x03480079,
+-	.avid_start_stop_y			= 0x02040024,
+-	.fid_int_start_x__fid_int_start_y	= 0x0001008A,
+-	.fid_int_offset_y__fid_ext_start_x	= 0x01AC0106,
+-	.fid_ext_start_y__fid_ext_offset_y	= 0x01060006,
+-	.tvdetgp_int_start_stop_x		= 0x00140001,
+-	.tvdetgp_int_start_stop_y		= 0x00010001,
+-	.gen_ctrl				= 0x00FF0000,
+-	.output_control				= 0x0000000D,
+-	.dac_b__dac_c				= 0x00000000
+-};
+-
+-/*
+- * Configure Timings for DVI D
+- */
+-static const struct panel_config dvid_cfg = {
+-	.timing_h	= 0x0ff03f31, /* Horizontal timing */
+-	.timing_v	= 0x01400504, /* Vertical timing */
+-	.pol_freq	= 0x00007028, /* Pol Freq */
+-	.divisor	= 0x00010006, /* 72Mhz Pixel Clock */
+-	.lcd_size	= 0x02ff03ff, /* 1024x768 */
+-	.panel_type	= 0x01, /* TFT */
+-	.data_lines	= 0x03, /* 24 Bit RGB */
+-	.load_mode	= 0x02, /* Frame Mode */
+-	.panel_color	= DVI_BEAGLE_ORANGE_COL, /* ORANGE */
+-	.gfx_format	= GFXFORMAT_RGB24_UNPACKED,
+-};
+-
+-static const struct panel_config dvid_cfg_xm = {
+-	.timing_h	= 0x1a4024c9, /* Horizontal timing */
+-	.timing_v	= 0x02c00509, /* Vertical timing */
+-	.pol_freq	= 0x00007028, /* Pol Freq */
+-	.divisor	= 0x00010001, /* 96MHz Pixel Clock */
+-	.lcd_size	= 0x02ff03ff, /* 1024x768 */
+-	.panel_type	= 0x01, /* TFT */
+-	.data_lines	= 0x03, /* 24 Bit RGB */
+-	.load_mode	= 0x02, /* Frame Mode */
+-	.panel_color	= DVI_BEAGLE_ORANGE_COL, /* ORANGE */
+-	.gfx_format	= GFXFORMAT_RGB24_UNPACKED,
+-};
+-#endif
+diff --git a/board/beagle/beagle/led.c b/board/beagle/beagle/led.c
+deleted file mode 100644
+index efbd7c1e0e36..000000000000
+--- a/board/beagle/beagle/led.c
++++ /dev/null
+@@ -1,70 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright (c) 2010 Texas Instruments, Inc.
+- * Jason Kridner <jkridner@beagleboard.org>
+- */
+-#include <status_led.h>
+-#include <asm/arch/cpu.h>
+-#include <asm/io.h>
+-#include <asm/arch/sys_proto.h>
+-#include <asm/gpio.h>
+-
+-/* GPIO pins for the LEDs */
+-#define BEAGLE_LED_USR0	150
+-#define BEAGLE_LED_USR1	149
+-
+-#ifdef CONFIG_LED_STATUS_GREEN
+-void green_led_off(void)
+-{
+-	__led_set(CONFIG_LED_STATUS_GREEN, 0);
+-}
+-
+-void green_led_on(void)
+-{
+-	__led_set(CONFIG_LED_STATUS_GREEN, 1);
+-}
+-#endif
+-
+-static int get_led_gpio(led_id_t mask)
+-{
+-#ifdef CONFIG_LED_STATUS0
+-	if (CONFIG_LED_STATUS_BIT & mask)
+-		return BEAGLE_LED_USR0;
+-#endif
+-#ifdef CONFIG_LED_STATUS1
+-	if (CONFIG_LED_STATUS_BIT1 & mask)
+-		return BEAGLE_LED_USR1;
+-#endif
+-
+-	return 0;
+-}
+-
+-void __led_init (led_id_t mask, int state)
+-{
+-	int toggle_gpio;
+-
+-	toggle_gpio = get_led_gpio(mask);
+-
+-	if (toggle_gpio && !gpio_request(toggle_gpio, "led"))
+-		__led_set(mask, state);
+-}
+-
+-void __led_toggle (led_id_t mask)
+-{
+-	int state, toggle_gpio;
+-
+-	toggle_gpio = get_led_gpio(mask);
+-	if (toggle_gpio) {
+-		state = gpio_get_value(toggle_gpio);
+-		gpio_direction_output(toggle_gpio, !state);
+-	}
+-}
+-
+-void __led_set (led_id_t mask, int state)
+-{
+-	int toggle_gpio;
+-
+-	toggle_gpio = get_led_gpio(mask);
+-	if (toggle_gpio)
+-		gpio_direction_output(toggle_gpio, state);
+-}
+diff --git a/configs/omap3_beagle_defconfig b/configs/omap3_beagle_defconfig
+deleted file mode 100644
+index 8a709243a900..000000000000
+--- a/configs/omap3_beagle_defconfig
++++ /dev/null
+@@ -1,115 +0,0 @@
 -CONFIG_ARM=y
--CONFIG_SKIP_LOWLEVEL_INIT=y
--CONFIG_SYS_ICACHE_OFF=y
--CONFIG_SYS_DCACHE_OFF=y
--CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_LPC32XX=y
--CONFIG_TEXT_BASE=0x83F00000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SYS_MALLOC_F_LEN=0x400
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-# CONFIG_SPL_USE_ARCH_MEMCPY is not set
+-# CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_OMAP2PLUS=y
+-CONFIG_SYS_MALLOC_F_LEN=0x4000
 -CONFIG_NR_DRAM_BANKS=2
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80000f20
--CONFIG_ENV_SIZE=0x20000
--CONFIG_ENV_OFFSET=0xA0000
--CONFIG_SPL_TEXT_BASE=0x00000000
--CONFIG_SYS_MONITOR_LEN=393216
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK=0xfff8
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+-CONFIG_DEFAULT_DEVICE_TREE="omap3-beagle"
+-CONFIG_SPL_TEXT_BASE=0x40200000
+-CONFIG_TARGET_OMAP3_BEAGLE=y
+-CONFIG_SYS_MONITOR_LEN=262144
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
 -CONFIG_SPL=y
--CONFIG_SYS_LOAD_ADDR=0x80008000
--CONFIG_BOOTDELAY=1
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200n8"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="dhcp; tftp ${loadaddr} ${serverip}:${tftpdir}/${bootfile}; tftp ${dtbaddr} ${serverip}:${tftpdir}/devkit3250.dtb; setenv nfsargs ip=dhcp root=/dev/nfs nfsroot=${serverip}:${nfsroot},tcp; setenv bootargs ${bootargs} ${nfsargs} ${userargs}; bootm ${loadaddr} - ${dtbaddr}"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_SPL_MAX_SIZE=0x20000
--CONFIG_SPL_NO_BSS_LIMIT=y
--CONFIG_SPL_BOARD_INIT=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTCOMMAND="run findfdt; run distro_bootcmd"
+-CONFIG_USE_PREBOOT=y
+-CONFIG_DEFAULT_FDT_FILE="omap3-beagle.dtb"
+-CONFIG_SYS_PBSIZE=1055
+-CONFIG_SYS_CONSOLE_INFO_QUIET=y
+-CONFIG_SPL_MAX_SIZE=0xec00
 -CONFIG_SPL_SYS_MALLOC_SIMPLE=y
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_NAND_SUPPORT=y
--CONFIG_SPL_NAND_RAW_ONLY=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
+-# CONFIG_SPL_FS_EXT4 is not set
+-CONFIG_SPL_MTD=y
 -CONFIG_SPL_NAND_DRIVERS=y
 -CONFIG_SPL_NAND_ECC=y
--CONFIG_SPL_NAND_SOFTECC=y
 -CONFIG_SPL_NAND_SIMPLE=y
--CONFIG_CMD_IMLS=y
+-CONFIG_SPL_NAND_BASE=y
+-CONFIG_SYS_PROMPT="BeagleBoard # "
+-CONFIG_CMD_SPL=y
+-CONFIG_CMD_SPL_NAND_OFS=0x280000
+-CONFIG_CMD_SPL_WRITE_SIZE=0x20000
+-CONFIG_CMD_ASKENV=y
 -CONFIG_CMD_GPIO=y
 -CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
--CONFIG_SYS_DISABLE_AUTOLOAD=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
+-CONFIG_CMD_NAND_TRIMFFS=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_JFFS2=y
+-CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_CMD_FS_UUID=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(spl),1920k(u-boot),128k(u-boot-env),128k(dtb),6m(kernel),-(rootfs)"
+-CONFIG_CMD_UBI=y
+-# CONFIG_ISO_PARTITION is not set
+-# CONFIG_SPL_EFI_PARTITION is not set
+-CONFIG_SPL_PARTITION_UUIDS=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_SPL_REMOVE_PROPS="clocks clock-names interrupt-parent"
+-CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
 -CONFIG_VERSION_VARIABLE=y
--CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
--CONFIG_DMA_LPC32XX=y
--CONFIG_LPC32XX_GPIO=y
+-CONFIG_SPL_DM=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_USB_FUNCTION_FASTBOOT=y
+-CONFIG_FASTBOOT_BUF_ADDR=0x82000000
 -CONFIG_SYS_I2C_LEGACY=y
 -CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_SYS_I2C_LPC32XX=y
--# CONFIG_MMC is not set
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=1
+-CONFIG_LED_STATUS_STATE=2
+-CONFIG_LED_STATUS1=y
+-CONFIG_LED_STATUS_BIT1=2
+-CONFIG_LED_STATUS_STATE1=2
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=1
+-CONFIG_LED_STATUS_GREEN_ENABLE=y
+-CONFIG_LED_STATUS_GREEN=2
+-CONFIG_LED_STATUS_CMD=y
+-CONFIG_TWL4030_LED=y
+-CONFIG_MMC_OMAP_HS=y
 -CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_FLASH_SHOW_PROGRESS=0
--CONFIG_SYS_FLASH_PROTECTION=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_MAX_FLASH_SECT=71
 -CONFIG_MTD_RAW_NAND=y
--CONFIG_SYS_NAND_USE_FLASH_BBT=y
--CONFIG_NAND_LPC32XX_SLC=y
+-CONFIG_NAND_OMAP_ECCSCHEME_HAM1_CODE_HW=y
 -CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
 -CONFIG_SYS_NAND_PAGE_SIZE=0x800
 -CONFIG_SYS_NAND_OOBSIZE=0x40
--# CONFIG_SYS_NAND_5_ADDR_CYCLE is not set
+-CONFIG_SYS_NAND_BUSWIDTH_16BIT=y
 -CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x40000
--CONFIG_PHYLIB=y
--CONFIG_PHY_ADDR_ENABLE=y
--CONFIG_PHY_ADDR=31
--CONFIG_PHY_SMSC=y
--CONFIG_RMII=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_CONS_INDEX=5
--CONFIG_SYS_NS16550=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x80000
+-CONFIG_PINCTRL=y
+-CONFIG_PINCTRL_SINGLE=y
+-CONFIG_DM_PMIC=y
+-# CONFIG_SPL_PMIC_CHILDREN is not set
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
 -CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_OMAP3_SPI=y
 -CONFIG_USB=y
--CONFIG_SYS_USB_OHCI_SLOT_NAME="lpc32xx-ohci"
--CONFIG_USB_OHCI_LPC32XX=y
--CONFIG_OF_LIBFDT=y
-diff --git a/include/configs/devkit3250.h b/include/configs/devkit3250.h
+-# CONFIG_SPL_DM_USB is not set
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_USB_OMAP3=y
+-CONFIG_USB_MUSB_GADGET=y
+-CONFIG_USB_MUSB_OMAP2PLUS=y
+-CONFIG_TWL4030_USB=y
+-CONFIG_USB_HOST_ETHER=y
+-CONFIG_USB_ETHER_ASIX=y
+-CONFIG_USB_ETHER_MCS7830=y
+-CONFIG_USB_ETHER_SMSC95XX=y
+-CONFIG_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="TI"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+-CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+-CONFIG_USB_ETHER=y
+-CONFIG_BCH=y
+diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
 deleted file mode 100644
-index d85aeaafe519..000000000000
---- a/include/configs/devkit3250.h
+index af7cb3513f8f..000000000000
+--- a/include/configs/omap3_beagle.h
 +++ /dev/null
-@@ -1,94 +0,0 @@
+@@ -1,200 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Embest/Timll DevKit3250 board configuration file
+- * (C) Copyright 2006-2008
+- * Texas Instruments.
+- * Richard Woodruff <r-woodruff2@ti.com>
+- * Syed Mohammed Khasim <x0khasim@ti.com>
 - *
-- * Copyright (C) 2011-2015 Vladimir Zapolskiy <vz@mleia.com>
+- * Configuration settings for the TI OMAP3530 Beagle board.
 - */
 -
--#ifndef __CONFIG_DEVKIT3250_H__
--#define __CONFIG_DEVKIT3250_H__
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* SoC and board defines */
--#include <linux/sizes.h>
--#include <asm/arch/cpu.h>
+-#include <configs/ti_omap3_common.h>
 -
 -/*
-- * Memory configurations
-- */
--#define CFG_SYS_SDRAM_BASE		EMC_DYCS0_BASE
--#define CFG_SYS_SDRAM_SIZE		SZ_64M
--
--/*
-- * DMA
+- * We are only ever GP parts and will utilize all of the "downloaded image"
+- * area in SRAM which starts at 0x40200000 and ends at 0x4020FFFF (64KB).
 - */
 -
--/*
-- * GPIO
-- */
+-/* NAND */
+-#if defined(CONFIG_MTD_RAW_NAND)
+-#define CFG_SYS_FLASH_BASE		NAND_BASE
+-#define CFG_SYS_NAND_ECCPOS          {2, 3, 4, 5, 6, 7, 8, 9,\
+-                                         10, 11, 12, 13}
+-#define CFG_SYS_NAND_ECCSIZE         512
+-#define CFG_SYS_NAND_ECCBYTES        3
+-/* NAND: SPL falcon mode configs */
+-#endif /* CONFIG_MTD_RAW_NAND */
 -
--/*
-- * NOR Flash
-- */
--#define CFG_SYS_FLASH_BASE		EMC_CS0_BASE
--#define CFG_SYS_FLASH_SIZE		SZ_4M
+-/* Enable Multi Bus support for I2C */
+-#define CFG_I2C_MULTI_BUS
 -
--/*
-- * NAND controller
-- */
--#define CFG_SYS_NAND_BASE		SLC_NAND_BASE
--#define CFG_SYS_NAND_BASE_LIST	{ CFG_SYS_NAND_BASE }
+-/* DSS Support */
 -
--/*
-- * NAND chip timings
-- */
--#define CFG_LPC32XX_NAND_SLC_WDR_CLKS	14
--#define CFG_LPC32XX_NAND_SLC_WWIDTH		66666666
--#define CFG_LPC32XX_NAND_SLC_WHOLD		200000000
--#define CFG_LPC32XX_NAND_SLC_WSETUP		50000000
--#define CFG_LPC32XX_NAND_SLC_RDR_CLKS	14
--#define CFG_LPC32XX_NAND_SLC_RWIDTH		66666666
--#define CFG_LPC32XX_NAND_SLC_RHOLD		200000000
--#define CFG_LPC32XX_NAND_SLC_RSETUP		50000000
+-/* TWL4030 LED Support */
 -
--/*
-- * USB
-- */
--#define CFG_USB_ISP1301_I2C_ADDR		0x2d
+-#define MEM_LAYOUT_ENV_SETTINGS \
+-	DEFAULT_LINUX_BOOT_ENV
 -
--/*
-- * U-Boot General Configurations
-- */
+-#define BOOTENV_DEV_LEGACY_MMC(devtypeu, devtypel, instance) \
+-	"bootcmd_" #devtypel #instance "=" \
+-	"setenv mmcdev " #instance "; " \
+-	"run mmcboot\0"
+-#define BOOTENV_DEV_NAME_LEGACY_MMC(devtypeu, devtypel, instance) \
+-	#devtypel #instance " "
 -
--/*
-- * Pass open firmware flat tree
-- */
+-#if defined(CONFIG_MTD_RAW_NAND)
 -
--/*
-- * Environment
-- */
+-#define BOOTENV_DEV_NAND(devtypeu, devtypel, instance) \
+-	"bootcmd_" #devtypel #instance "=" \
+-	"if test ${mtdids} = '' || test ${mtdparts} = '' ; then " \
+-		"echo NAND boot disabled: No mtdids and/or mtdparts; " \
+-	"else " \
+-		"run nandboot; " \
+-	"fi\0"
+-#define BOOTENV_DEV_NAME_NAND(devtypeu, devtypel, instance) \
+-	#devtypel #instance " "
 -
--#define CFG_EXTRA_ENV_SETTINGS		\
--	"ethaddr=00:01:90:00:C0:81\0"		\
--	"dtbaddr=0x81000000\0"			\
--	"nfsroot=/opt/projects/images/vladimir/oe/devkit3250/rootfs\0"	\
--	"tftpdir=vladimir/oe/devkit3250\0"	\
--	"userargs=oops=panic\0"
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(MMC, mmc, 0) \
+-	func(LEGACY_MMC, legacy_mmc, 0) \
+-	func(UBIFS, ubifs, 0, rootfs, rootfs) \
+-	func(NAND, nand, 0)
 -
--/*
-- * U-Boot Commands
-- */
+-#else /* !CONFIG_MTD_RAW_NAND */
 -
--/* U-Boot will be 0x60000 bytes, loaded and run at CONFIG_TEXT_BASE */
--#define CFG_SYS_NAND_U_BOOT_SIZE	0x60000
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(MMC, mmc, 0) \
+-	func(LEGACY_MMC, legacy_mmc, 0)
 -
--#define CFG_SYS_NAND_U_BOOT_START	CONFIG_TEXT_BASE
--#define CFG_SYS_NAND_U_BOOT_DST	CONFIG_TEXT_BASE
+-#endif /* CONFIG_MTD_RAW_NAND */
 -
--/* See common/spl/spl.c  spl_set_header_raw_uboot() */
+-#include <config_distro_bootcmd.h>
 -
--/*
-- * Include SoC specific configuration
-- */
--#include <asm/arch/config.h>
+-#define CFG_EXTRA_ENV_SETTINGS \
+-	MEM_LAYOUT_ENV_SETTINGS \
+-	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+-	"fdt_high=0xffffffff\0" \
+-	"console=ttyO2,115200n8\0" \
+-	"bootdir=/boot\0" \
+-	"bootenv=uEnv.txt\0" \
+-	"bootfile=zImage\0" \
+-	"bootpart=0:2\0" \
+-	"usbtty=cdc_acm\0" \
+-	"mpurate=auto\0" \
+-	"buddy=none\0" \
+-	"camera=none\0" \
+-	"vram=12M\0" \
+-	"dvimode=640x480MR-16@60\0" \
+-	"defaultdisplay=dvi\0" \
+-	"defaultargs=setenv defargs " \
+-		"mpurate=${mpurate} " \
+-		"buddy=${buddy} "\
+-		"camera=${camera} "\
+-		"vram=${vram} " \
+-		"omapfb.mode=dvi:${dvimode} " \
+-		"omapdss.def_disp=${defaultdisplay}\0" \
+-	"optargs=\0" \
+-	"findfdt=" \
+-		"if test $beaglerev = AxBx; then " \
+-			"setenv fdtfile omap3-beagle.dtb; fi; " \
+-		"if test $beaglerev = Cx; then " \
+-			"setenv fdtfile omap3-beagle.dtb; fi; " \
+-		"if test $beaglerev = C4; then " \
+-			"setenv fdtfile omap3-beagle.dtb; fi; " \
+-		"if test $beaglerev = xMAB; then " \
+-			"setenv fdtfile omap3-beagle-xm-ab.dtb; fi; " \
+-		"if test $beaglerev = xMC; then " \
+-			"setenv fdtfile omap3-beagle-xm.dtb; fi; " \
+-		"if test $fdtfile = undefined; then " \
+-			"echo WARNING: Could not determine device tree to use; fi\0" \
+-	"mmcdev=0\0" \
+-	"mmcpart=2\0" \
+-	"mmcroot=/dev/mmcblk0p2 rw\0" \
+-	"mmcrootfstype=ext4 rootwait\0" \
+-	"mmcargs=run defaultargs; setenv bootargs console=${console} " \
+-		"${mtdparts} " \
+-		"${defargs} " \
+-		"${optargs} " \
+-		"root=${mmcroot} " \
+-		"rootfstype=${mmcrootfstype}\0" \
+-	"userbutton_xm=gpio input 4;\0" \
+-	"userbutton_nonxm=gpio input 7;\0" \
+-	"userbutton=if gpio input 173; then " \
+-			"run userbutton_xm; " \
+-		"else " \
+-			"run userbutton_nonxm; " \
+-		"fi;\0" \
+-	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenv}\0" \
+-	"ext4bootenv=ext4load mmc ${bootpart} ${loadaddr} ${bootdir}/${bootenv}\0" \
+-	"importbootenv=echo Importing environment from mmc${mmcdev} ...; " \
+-		"env import -t ${loadaddr} ${filesize}\0" \
+-	"mmcbootenv=setenv bootpart ${mmcdev}:${mmcpart}; " \
+-		"mmc dev ${mmcdev}; " \
+-		"if mmc rescan; then " \
+-			"if run userbutton; then " \
+-				"setenv bootenv uEnv.txt;" \
+-			"else " \
+-				"setenv bootenv user.txt;" \
+-			"fi;" \
+-			"run loadbootenv && run importbootenv; " \
+-			"run ext4bootenv && run importbootenv; " \
+-			"if test -n $uenvcmd; then " \
+-				"echo Running uenvcmd ...; " \
+-				"run uenvcmd; " \
+-			"fi; " \
+-		"fi\0" \
+-	"validatefdt=" \
+-		"if test $beaglerev = xMAB; then " \
+-			"if test ! -e mmc ${bootpart} ${bootdir}/${fdtfile}; then " \
+-				"setenv fdtfile omap3-beagle-xm.dtb; " \
+-			"fi; " \
+-		"fi; \0" \
+-	"loadimage=ext4load mmc ${bootpart} ${loadaddr} ${bootdir}/${bootfile}\0" \
+-	"loaddtb=run validatefdt; ext4load mmc ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}\0" \
+-	"mmcboot=run mmcbootenv; " \
+-		"if run loadimage && run loaddtb; then " \
+-			"echo Booting ${bootdir}/${bootfile} from mmc ${bootpart} ...; " \
+-			"run mmcargs; " \
+-			"if test ${bootfile} = uImage; then " \
+-				"bootm ${loadaddr} - ${fdtaddr}; " \
+-			"fi; " \
+-			"if test ${bootfile} = zImage; then " \
+-				"bootz ${loadaddr} - ${fdtaddr}; " \
+-			"fi; " \
+-		"fi\0" \
+-	"nandroot=ubi0:rootfs ubi.mtd=rootfs rw\0" \
+-	"nandrootfstype=ubifs rootwait\0" \
+-	"nandargs=run defaultargs; setenv bootargs console=${console} " \
+-		"${mtdparts} " \
+-		"${defargs} " \
+-		"${optargs} " \
+-		"root=${nandroot} " \
+-		"rootfstype=${nandrootfstype}\0" \
+-	"nandboot=if nand read ${loadaddr} kernel && nand read ${fdtaddr} dtb; then " \
+-			"echo Booting uImage from NAND MTD 'kernel' partition ...; " \
+-			"run nandargs; " \
+-			"bootm ${loadaddr} - ${fdtaddr}; " \
+-		"fi\0" \
+-	"loadramdisk=ext4load mmc ${bootpart} ${rdaddr} ${bootdir}/${ramdisk}\0" \
+-	"ramdisk=rootfs.ext2.gz.uboot\0" \
+-	"ramdisk_size=16384\0" \
+-	"ramroot=/dev/ram rw\0" \
+-	"ramrootfstype=ext2\0" \
+-	"ramargs=run defaultargs; setenv bootargs console=${console} " \
+-		"${mtdparts} " \
+-		"${defargs} " \
+-		"${optargs} " \
+-		"root=${ramroot} ramdisk_size=${ramdisk_size} " \
+-		"rootfstype=${ramrootfstype}\0" \
+-	"ramboot=run mmcbootenv; " \
+-		"if run loadimage && run loaddtb && run loadramdisk; then " \
+-			"echo Booting ${bootdir}/${bootfile} from mmc ${bootpart} w/ramdisk ...; " \
+-			"run ramargs; " \
+-			"bootz ${loadaddr} ${rdaddr} ${fdtaddr}; " \
+-		"fi\0" \
+-	BOOTENV
 -
--#endif  /* __CONFIG_DEVKIT3250_H__*/
+-#endif /* __CONFIG_H */
 -- 
 2.34.1
 
