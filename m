@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A38C7C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 22:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E957C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 22:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF17888266;
-	Tue, 16 Jul 2024 00:42:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 732928851E;
+	Tue, 16 Jul 2024 00:56:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QF8han8y";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UpAzLubY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C66588908; Tue, 16 Jul 2024 00:42:45 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 253B988633; Tue, 16 Jul 2024 00:56:48 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B1C587FC8
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:42:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4DCF87D74
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:56:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1721083359; x=1721688159; i=xypron.glpk@gmx.de;
- bh=HXYOH8nAyIsYmEIp8mBKNebrg8tZ9sCUVXsK+zrXUsY=;
+ s=s31663417; t=1721084202; x=1721689002; i=xypron.glpk@gmx.de;
+ bh=l+PqHsP7Nrx9Wb1zW9hGJmJzai8D5G4XjnRlOBvDYho=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=QF8han8y1x32hTlM/l2lImodXMoKQyWMPh1Trfyer5D0F6rw8lh2rQwL4DQny9PH
- mrbDM+Cgw+ovVyJiSGNnxYfU3C+PM1QDNWOEvKqbLvd7secBA9mwz8w6OHCXhTIVU
- FLNHHSsnWxQybVex+N9py0ALeHYs2KR1cLs0pKoPxrJoK+fZNhl/QhOAFnrf2cuyZ
- /SawLTUS8e1o6sY9fMWPcVJz8tiR+O7gJpjSJAm11q5J+hRk9cdyz2n6sU5Ko8j5t
- wa17iY3VNSteQkkiK1MgSwrW4CvzmPQm9FZydrYhi+ixX/UDUy+UKMeYjRRDIEsdk
- DscuGf755p5ymXO7jw==
+ b=UpAzLubY3QZ+eCFozNrADtUxQ8fu6G5OnM21QyPm3pGbjxuJiVkd0rW7pO71KEZi
+ HYNMKgABzvoHWVAQKhRy8IE8D0IqvCkfkgP0CafjGe8ObPTfZajBP2bmmVl1zKb/c
+ Bo9mNH8HI4NoSUpWsfH8TxuQxhsoek5/ITqzoB/jlMYnu42lZX4yZMk1gFdNPKwUJ
+ Fs9h1pDRMoqfZb2FTUPys9eg07rB3sBv/NRbE4yzz1VI3CqhbIapRzW8lLTuRKjJM
+ LmHfTkWN33QFe7ueUJTh9oA8Skgvm3e2Cx5rl5jZPYMB+hGnxi8NUDBSarkC+l+Yg
+ U4dxQJA+jsQmPUaXPw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M42jK-1sTUP10o0u-009I94; Tue, 16
- Jul 2024 00:42:39 +0200
-Message-ID: <846128e4-2833-43e6-8af9-9f57d9025475@gmx.de>
-Date: Tue, 16 Jul 2024 00:42:48 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MSKuA-1sw7JS2CU4-00KGHf; Tue, 16
+ Jul 2024 00:56:42 +0200
+Message-ID: <a3aad2bc-863a-493d-9446-a65f28fcc09a@gmx.de>
+Date: Tue, 16 Jul 2024 00:56:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/13] doc: Add a description for bootmeth_pxe
+Subject: Re: [PATCH 05/13] doc: Add a description for bootmeth_qfw
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -55,29 +55,29 @@ Cc: Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20240715101354.97895-1-sjg@chromium.org>
- <20240715101354.97895-5-sjg@chromium.org>
+ <20240715101354.97895-6-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240715101354.97895-5-sjg@chromium.org>
+In-Reply-To: <20240715101354.97895-6-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:CNqnaQnRdRnHZtyuyKyE9zlx/8JbsIppMActkRBWebhjYaF/l2I
- KIGeZe9/5XvlzV+U0eDjGCFHwrkBdUd0IH3xlCGPNpaOFqEcvumfauBcbGV1rIIeHh67e/k
- wmt42SmfV9hZAHtICk66Br07E/IcIHMIvkIZZJLEJ7YCbbCo4yVpxJ3LrMOFGaQiJSRbVuL
- FuLlh2egPeaTc4mPSVL8g==
-UI-OutboundReport: notjunk:1;M01:P0:F/269QX6+CY=;WcTTGHjcFXwenq0bCIsQQrIgu/Q
- LnkAy/qhPa1D5ZVTrDOb2T+lECKAzGOkwenxcCJYBDMS3WYsWgUugtx2d6HaBk9iqVyxocCNx
- gMkB9u86GEFNa2ZYEZm4d9PSDkZZb/FmClRd2Hxb9J5787Pz24A56PnqXYlC9erlguuo/gDid
- XEeI3koyMlPVVJ3qORhCGchXf7MmeZ3QzVMPb+EIn5VKllFHko8Cx/sZThREMVqIUH/qJhNKY
- O7KfMHSsj7U47fdszsmh5GDvla+VLrf43q8M7K4/vzAUf88/wJCdZHOD5G6BCJtOLY9wHNX8H
- LLnm7wZAnEZmxzxethBoAHZuKKdGyeHS1cQBXjUEAtKh6N4pRTnQMMVgYrcJWMSboLuxB2Cdt
- fF6MxJpkFIs9eCIgUcMVLEuxUYsHtBwpPYJa+BfqGuWrf7YeFbERA/SbNcHfPATSxWGouZjjM
- /yhQnpA1Emm5l6ZsfX9XgJQat5ghO3Mx/XF4ucwTif51RdzEHngHjXYS3HX9gGasQl4+ELK/S
- Y7CZfnhvlUdklslsh4d3n5D3/N2CewS1JmdwYJgpZcGoZ7Ycw3Shc4rv33afuuY1qxCL0ASzy
- RqrLWdgQbZ/cBCkjztTOkhJfoQ1Tfen5h3yaF0J0/FyLjq7vQLSFPOFq67aiTqeQV81D36RLf
- RX3RplMdn2pdqQId2g/T8FOd+GKm1Zb31j5Q/GG6BPbrqcVQKtRgK+z03CQwGEe+ynPVJrLzm
- WD2A28glCBk08EOOCrjkQwGp/SbOzFdWioQeM8LsiQ2MG6o4O+lBynaStEx4giLa2tbjGMg5+
- RG39X6vCJH8n9yirD/pBGQ8w==
+X-Provags-ID: V03:K1:Tc5AFWKf6CY61ukni2yAquWjEFT0PMjRrWpDByy9MN1v/CW75RN
+ HLawCHHFzDoK9Xy33tfDr6fQU87joBc2RPGcRWnnnqKtNiNWWuCIOBeaR3ef5idwZT3gCtu
+ 9He1A5iSPLtgGh/gZZjvSc0HZqSpZW38IwDuEGIKNitTAP9jjIrxIO9aqq4C/+MpJYNOYaY
+ LxYKJFCPLRj3Cb5bxI3Vg==
+UI-OutboundReport: notjunk:1;M01:P0:KNC+k0S8GtM=;2pbY/86HTsWB945xnk8D9+xbboM
+ P+vaFzSKDVuZGZAvAlCG6O1gHhTza/ogkW4T+o01gnz815SVKlR4/j3aXln3tHNtwH6s2s2ie
+ QavUmotBQBrgAFf5lgdVRdes5zh4g/d34jnpKLzuHYkYTrSMEAJStofYMIW5F2sOoa1X2N3MD
+ 8Qiy+kqOeRV+x2OeOqTJg8L8MxTqbpip7TVyjZIvgGXs+29A4nXPyNMvbhW8AOr/3g1xVFz/X
+ X2Dux3Ytrt81S4nvZ+o7nVF6XIP8vyChMZlaqv3u97tJpYhKUajguYWj0nA/gqHKKUVmpm6Yv
+ ulUwL5lHM8fWLVER0TbvdR3Ckb0tO58wyrimmF0+TMXsbjerCeHLLvP+gQTWQkhkjN+IpbrcH
+ 8Jz2CuJHR8H6ibmv0ypWKqQnASnQcQkrOZTgHmJKoFyJShCj1Kdh87vJZ+OzDOGYc6XLnchPf
+ p+Na4b3+sITnT9V9tdF3hMWsp1FCtA03sWgxtZ0qtOeB2q5lqvNmXFsiw3gIoFLd/KqYVUMdJ
+ RYskkiWCb7SuKmNpZWFx/SnAtjTTJEa4PQ4kLb78nDoCUZ6EuHmXIQvW+upOipsqu4oo/ILdY
+ QM3cwqAnu0fQc/DCnTYeBDVGkFkVu2OTZXK1Qo4EmRgNzvcg5DCCzY/F/LMfhckTE42Y1ktHD
+ YXaTIc7mUPfQ1yjO/UQuC8Ks3Ey9HDyWcUhvsOh86rRcKHzBeJb08NWgzs8DG2sB0O0C8IRUS
+ kwSV/Hp/tw0gD2Ry/1qkzNNxJ9T7OuFuKXG9n9NGcfpp8yKIpN+sn5j1HwlDmmA1SkU5BROk8
+ elhgxjAnznMj1jgErxlRgf8A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,122 +95,117 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/15/24 12:13, Simon Glass wrote:
-> Add documentation for the pxe bootmeth.
+> Add documentation for the qfw bootmeth.
+>
+
+%s/bootmeth/boot method/
+
+
+> Fix up the compatible string to drop the 'extlinux' part, which is not
+> relevant to this bootmeth.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
+>   boot/bootmeth_qfw.c              |  2 +-
 >   doc/develop/bootstd/index.rst    |  1 +
->   doc/develop/bootstd/overview.rst |  2 +-
->   doc/develop/bootstd/pxelinux.rst | 27 +++++++++++++++++++++++++++
->   3 files changed, 29 insertions(+), 1 deletion(-)
->   create mode 100644 doc/develop/bootstd/pxelinux.rst
+>   doc/develop/bootstd/overview.rst |  1 +
+>   doc/develop/bootstd/qfw.rst      | 21 +++++++++++++++++++++
+>   4 files changed, 24 insertions(+), 1 deletion(-)
+>   create mode 100644 doc/develop/bootstd/qfw.rst
+>
+> diff --git a/boot/bootmeth_qfw.c b/boot/bootmeth_qfw.c
+> index dfaa944594e..2f8e00cf350 100644
+> --- a/boot/bootmeth_qfw.c
+> +++ b/boot/bootmeth_qfw.c
+> @@ -88,7 +88,7 @@ static struct bootmeth_ops qfw_bootmeth_ops =3D {
+>   };
+>
+>   static const struct udevice_id qfw_bootmeth_ids[] =3D {
+> -	{ .compatible =3D "u-boot,qfw-extlinux" },
+> +	{ .compatible =3D "u-boot,qfw-bootmeth" },
+>   	{ }
+>   };
 >
 > diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.r=
 st
-> index 5bbb3d633a3..5052afe448f 100644
+> index 5052afe448f..f8fce7207ce 100644
 > --- a/doc/develop/bootstd/index.rst
 > +++ b/doc/develop/bootstd/index.rst
-> @@ -8,3 +8,4 @@ Standard Boot
->
+> @@ -9,3 +9,4 @@ Standard Boot
 >      overview
 >      extlinux
-> +   pxelinux
+>      pxelinux
+> +   qfw
 > diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/over=
 view.rst
-> index 086a0b1281d..fd0692daf0d 100644
+> index fd0692daf0d..bcc2c00c775 100644
 > --- a/doc/develop/bootstd/overview.rst
 > +++ b/doc/develop/bootstd/overview.rst
-> @@ -413,7 +413,7 @@ Available bootmeth drivers
->   Bootmeth drivers are provided for:
->
->      - :doc:`extlinux / syslinux <extlinux>` boot from a disk
-> -   - extlinux boot from a network (PXE)
-> +   - :doc:`extlinux / syslinux <extlinux>` boot from a network (PXE)
->      - U-Boot scripts from disk, network or SPI flash
+> @@ -418,6 +418,7 @@ Bootmeth drivers are provided for:
 >      - EFI boot using bootefi from disk
 >      - VBE
-> diff --git a/doc/develop/bootstd/pxelinux.rst b/doc/develop/bootstd/pxel=
-inux.rst
+>      - EFI boot using boot manager
+> +   - :doc:`QFW <qfw>`: QEMU firmware interface
+>
+>
+>   Command interface
+> diff --git a/doc/develop/bootstd/qfw.rst b/doc/develop/bootstd/qfw.rst
 > new file mode 100644
-> index 00000000000..08ba67e09c5
+> index 00000000000..b0d47fd246a
 > --- /dev/null
-> +++ b/doc/develop/bootstd/pxelinux.rst
-> @@ -0,0 +1,27 @@
+> +++ b/doc/develop/bootstd/qfw.rst
+> @@ -0,0 +1,21 @@
 > +.. SPDX-License-Identifier: GPL-2.0+:
 > +
-> +PXE Bootmeth
+> +QFW Bootmeth
 > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 > +
-> +PXE (Preboot eXecution-Environment) provides a way to boot an Operating=
- System
-
-%s/Operating System/operating system/
-
-> +over a network interface. The PXE bootmeth supports PXELINUX and allows=
- U-Boot to
-
-%s/bootmeth/boot method/
-
-> +provide a menu of possible Operating Systems from which the user can ch=
-oose.
-
-PXELINUX is a binary. Does U-Boot really provide a menu when the
-PXELINUX binary is downloaded and executed?
-
+> +`QEMU <hhttps://www.qemu.org/>`_ is a system emulator which is able to =
+boot
+> +Operating Systems. QEMU provides specific support for booting an OS ima=
+ge
+> +provided on the QEMU command line.
 > +
-> +U-Boot includes a parser for the `extlinux.conf` file described
-> +`here <https://uapi-group.org/specifications/specs/boot_loader_specific=
-ation>`_.
-> +It consists primarily of a list of named OSes along with the kernel, in=
-itial
-> +ramdisk and other settings. The file is retrieved from a network server=
- using
-> +tftpboot.
+> +When invoked on a bootdev for UCLASS_QFW, this bootmeth reads the kerne=
+l
+> +provided by the QEMU `-kernel` argument, the iniital ramdisk and provid=
+ed by
 
-Does this paragraph relate to PXELINUX?
+%s/iniital/initial/
 
-tftpboot is a command and not a protocol. Shouldn't boot methods work
-when the command line interface is disabled? I guess you want to replace
-
-%s/tftpboot/the TFTP protocol/
-
+> +`-initrd` and the boot arguments (command line) provided by `-append` i=
+nto
+> +memory ready for booting.
 > +
-> +When invoked on a bootdev, this bootmeth searches for the file and crea=
-tes a
+> +When the bootflow is booted, the bootmeth tries the `booti` command fir=
+st, then
 
-%s/bootdev/boot device/
-%s/bootmeth/boot method/
+Boot methods should work if the command line is deactivated. We should
+not use run_command() but extract the functionality into library code.
 
-> +bootflow if found. See
+Why would you first try to run booti and then bootz irrespective of the
+availability of the commands? Function qfw_boot() needs rework.
 
-%s/bootflow/boot flow/
+There should be a configuration symbol to disable the boot method when
+CONFIG_QFW is enabled.
 
-> +`PXELINUX <https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX>`_=
- for
-> +a full description of the search procedure.
+The bootmethod should no be built if booti and bootz are not available
+
+> +falls back to the `bootz` command. U-Boot's 'control' devicetree is pas=
+sed
+> +through to the kernel.
 > +
-> +When the bootflow is booted, the bootmeth calls pxe_setup_ctx() to set =
-up the
-> +context, then pxe_process() to process the file. Depending on the conte=
-nts, this
-> +may boot an OS or provide a list of options to the user, perhaps with a=
- timeout.
-> +
-> +The compatible string "u-boot,extlinux-pxe" is used for the driver. The=
+> +The compatible string "u-boot,qfw-bootmeth" is used for the driver. The=
  driver
 > +is automatically instantiated if there are no bootmeth drivers in the
 > +devicetree.
 
-Device-trees contain compatible strings for drivers, not the drivers
-themselves.
+This paragraph should be moved to the overview.
 
-If every configured boot method is enabled if there is no compatible
-string for boot methods in the device-tree, why don't we mention this in
-the overview instead of repeating ourselves?
-
-Please, mention the relevant configuration option.
+Please, mention the configuration requirements.
 
 Best regards
 
 Heinrich
+
