@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55EAC3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3021EC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:35:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09B728891F;
+	by phobos.denx.de (Postfix) with ESMTP id 716E88895F;
 	Mon, 15 Jul 2024 15:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oWvURvUK";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SG/NEvmL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5452B8891E; Mon, 15 Jul 2024 15:32:00 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 2279A88939; Mon, 15 Jul 2024 15:32:03 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 442DA8892C
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41C2F888CF
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6b73f7b855bso26601836d6.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:58 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-6561850a7bcso39245537b3.3
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721050317; x=1721655117; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721050316; x=1721655116; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rfGlxC5XW46MnWAwaqM+wQOOmD1acPejd/yMaJA/g9c=;
- b=oWvURvUKPM5a/MpWlplW49ZvV86/o7IItAqbMZKTOz3sXkOXEYWrJkiexCXbKVQHU+
- 3u0eusrWQspSufeqy4y4diDbiH4evCatNToSrRwEEamTUT1I8S+NCk1+6nfzcfgx+c5E
- NcimMZmoMAnq2WEsHdBQFbcQsvE7YufYOJpro=
+ bh=D8O/gwHcPNAkFFbY48XfHR8Szw0kBI4Vyg5AzURWn1c=;
+ b=SG/NEvmLgD9Fv0lMCXzCMIaKA8+r68SieeyJd0QUxogwnupY5a9jUNehOto80BbeTt
+ Y1F3ZuqxMBk5fu045YvJnxf9EAd3bUQOcXOc6lGZ82ZE6mmaV/058bDC3zt5/63kIqMh
+ owxJIRZyeAzAFSibxQLabet1csDfgHaOcJDYU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721050317; x=1721655117;
+ d=1e100.net; s=20230601; t=1721050316; x=1721655116;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rfGlxC5XW46MnWAwaqM+wQOOmD1acPejd/yMaJA/g9c=;
- b=quMdQ69xN5Y4C76yxOJLaeigL3D183obwfDWxH83uAdZY8ybisndbnxjiW0E0BHEDE
- IrIhSizNqr60WhvtJRZOWMuZMmIoD9sqR6fiNb2W1N8pyNJ27Cb1CXtaL2gnfISYK2LD
- Cwym+YTp7CyhgUJErUKEMls9g8+LeoyTZyaaGN0XaYc9aDEdIzfCjpoycz4BxxJgPjO2
- NtKBYqlFkHBdCTvVT5mqK0vz7rdbGlbqdm3iipEYlQnBabkNhFKCLX+W2Gmhwk+fBA87
- rIEAMEzK01rR/0X8SGrZTRU7r3Ie60BE2npZOIQl7ULlSmw+0PeKnTqqL3H95i1dWq07
- LFMA==
-X-Gm-Message-State: AOJu0Yw4hFx8B/Fg1CoVWVyg2UqleQFufhYAOZ2Iw5coOjHfqZrVfRQn
- YSm1Qcp1Rz2ffJZnpRxc8X6eWLfQrQQApXRKb8btrzeXbd2iD3KVERKrqOksQILDWEFrUpt3/0a
- WN7crsT+Xr/SWL3lfh0RABIq9cYOVCSm6/ZFb
-X-Google-Smtp-Source: AGHT+IFD7LoYisFm1XCEbQlr7rhRDJm6u3aqovfJKWOPw6Li7lfujLu3aN3+L0wZF92xUPaiJUQNlOuqpVnss5LXcXU=
-X-Received: by 2002:a05:6214:410d:b0:6b7:4398:594c with SMTP id
- 6a1803df08f44-6b743985d1cmr182883236d6.38.1721050317286; Mon, 15 Jul 2024
- 06:31:57 -0700 (PDT)
+ bh=D8O/gwHcPNAkFFbY48XfHR8Szw0kBI4Vyg5AzURWn1c=;
+ b=WQb9zgucdf7ajLCZNHzE98fd4LjVjrr4F0kDmyaOQhYRV99fNJDeZBlAWN7Lkz6MJc
+ F0WAxVwQUiUQz8G8BF0HEVdctAuhvk4uMDRFJl3niKFWBbvZG+PSkpmmYQC40G2tMTjJ
+ 4T3cSp2F3t+HomfGhG8e6gUAcqbqzI3Y4W8xa6Xzau6o60ROPmPCAU46d2XBtZzITjOr
+ ZmfFzWfd6mMmd6v7CQnmrs5duEtCMCeyPchbrDHLaDhk1nT/JigfcQcb28I58Q0jJPeB
+ HtlZ8rre2Tn2YwXlIAN7Fp4lAYrqCYhv89Rml3lfPsq8AZsXvXIsbDifd++scoP49U/9
+ aBTw==
+X-Gm-Message-State: AOJu0Yw7D5Ae1P8Sfqc1fWAYwDFk/v/ktEtAVjLfoIzYAaKPOKycU98a
+ A+888lGc7Fda1MY9j5qmaHszzSzUfH5Io+xpFWB29GikUCB5hCtik9pR2JPmwDAujVhOOWZ2kDY
+ PlnITbroDoYTswfFtz3sd4WY1ajwU7y1trF1b
+X-Google-Smtp-Source: AGHT+IEyTVg73XYUyT+mTSYw30iA8+Qj/L7NL7b3xNXYf65vwIrk1RdiNeEmF3gs5SIJXdDpzTqn6SkgbRy+ZjdTiak=
+X-Received: by 2002:a05:690c:296:b0:649:8f00:525d with SMTP id
+ 00721157ae682-658f09c9123mr234451947b3.35.1721050316145; Mon, 15 Jul 2024
+ 06:31:56 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 15 Jul 2024 08:31:56 -0500
+ HTTPREST; Mon, 15 Jul 2024 08:31:55 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszThrC2DnGw1PBh09Bx7PYvfuLXcM2yUNpeBYiub6ebRsOQ@mail.gmail.com>
-References: <CAFLszThrC2DnGw1PBh09Bx7PYvfuLXcM2yUNpeBYiub6ebRsOQ@mail.gmail.com>
- <20240419023632.29078-1-seanga2@gmail.com>
- <20240419023632.29078-2-seanga2@gmail.com>
-Date: Mon, 15 Jul 2024 08:31:56 -0500
-X-Google-Sender-Auth: YLsPN9y7XBCg_HzdSPaeI642BcU
-Message-ID: <CAFLszTiVrznOrrW0Ld8JVxU3Bh0-Q_jLCiGkiea3crkm7uu-zw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] patman: Fix tests if add_maintainers is set to False
+In-Reply-To: <CAFLszTizGyw3WYKu22Y1sPaUrmCnpoBVfVuOM-Ra97fEnd+byg@mail.gmail.com>
+References: <CAFLszTizGyw3WYKu22Y1sPaUrmCnpoBVfVuOM-Ra97fEnd+byg@mail.gmail.com>
+ <20240525081053.2818481-1-net147@gmail.com>
+Date: Mon, 15 Jul 2024 08:31:55 -0500
+X-Google-Sender-Auth: FMSwuW1Ri3uNRverRT0Ub9z0iE0
+Message-ID: <CAFLszThU=QE7-eV1qDSUpghOR8cGzn7jtwF4+3Dv7Z9zzoAJcg@mail.gmail.com>
+Subject: Re: [PATCH] sandbox: enable support for the unlz4 command
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Jonathan Liu <net147@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,19 +86,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Apr 2024 at 03:36, Sean Anderson <seanga2@gmail.com> wrote:
+On Sat, 25 May 2024 at 02:11, Jonathan Liu <net147@gmail.com> wrote:
 >
-> If add_maintainers is set to False in the user's ~/.patman config, it will
-> cause the custom_get_maintainer_script to fail since that test expects
-> maintainers to be added. Set add_maintainer to True in the .patman config
-> to prevent this.
+> This does not work with sandbox at present. Fix it up to use map_sysmem()
+> to convert an address to a pointer.
 >
-> Fixes: 8c042fb7f9f ("patman: add '--get-maintainer-script' argument")
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> Signed-off-by: Jonathan Liu <net147@gmail.com>
 > ---
->
->  tools/patman/func_test.py | 3 ++-
+>  cmd/unlz4.c | 3 ++-
 >  1 file changed, 2 insertions(+), 1 deletion(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
