@@ -4,59 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F2BC3DA45
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 07:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4FD1C3DA45
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 07:11:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25F5988403;
-	Mon, 15 Jul 2024 09:03:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 20AA588669;
+	Mon, 15 Jul 2024 09:11:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="J/244MBI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gtiD08YH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAB1B885D7; Mon, 15 Jul 2024 09:03:54 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 516DD882D7; Mon, 15 Jul 2024 09:11:25 +0200 (CEST)
+Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
+ [IPv6:2607:f8b0:4864:20::930])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D620D87EFA
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 09:03:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 62F6D88669
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 09:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-81057a258d4so1332577241.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 00:11:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1721027481; x=1721632281; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yAo3q6RWFe9Nr5RHoidNCx1CR01HqUBlPC/JjYr2rok=;
+ b=gtiD08YH7WbgaU1lwqW+TXkuI1U6fZLtYybIqHozcCUhAlS1tAIqtwA6JmTnEDq4B0
+ 1evzGTDxCzs/xOR59CPUB5fAx7d+ZOzxMGxQ461HyF4p24/T3lAwa8ltjBVPBKvYSCqc
+ W8EFzwheJDpC4f6N8p+r9EOHuhLalO5PUU3+k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721027481; x=1721632281;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yAo3q6RWFe9Nr5RHoidNCx1CR01HqUBlPC/JjYr2rok=;
+ b=wHSjk8XX8DU21YQXx8JGGlRMj7S+cm0a4He8KLPgZRBL4D4UPMPIasZCeQgpcoo592
+ 2xm/2SqgmiEpgr0hh6e1cGegsT/TRpzCkTuGYfYtMUsY6ig5JLQAQ4tx+9MaIuMLqevH
+ x1Ih12pATVdujJbuhhWimPFIvNkgE2y/AAArgzOCVlpzvQ9Zm1VMDllwdBKhFFFjdHnt
+ njIA5/aIgHMIG9P9EHmonCLhiKmPOrPlFvaXqlfrNEeGKstlLEEg+mlRtxOkF5A3rFTO
+ Iv39tLPKB9xhBMiFbV87S5GM7JOJhVHKpdzb+fjPrWG7YVzElAGyFTj1xlpLm4CHQd6D
+ XU7g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjhPupHwSUNvx79Zn9Ky0iGk8szOcAu9ZsZ4uxrtyKoS+y8jyUhCWXWT7CCP/IebmN/DUw/Xz2AXDMAOwOhshwjHHzSQ==
+X-Gm-Message-State: AOJu0YwsXzKL1JZyuX9oqipCoFsrf2B2cP6FM+OG3QTCjvHITZLVnFuf
+ Tgva2LZ/MmiF+1OdbyU4Eir7WZ8kF1GxNkkjvtH1DOz7t3zD9gmKQvNwdV8nEBIZVhS8tgkQRMZ
+ /MYGL0bJQ/pQxRquIHZS9rPz91O1sKNuP4WC0
+X-Google-Smtp-Source: AGHT+IHBz/B3/QYeLq9UEn3G1jPmsnMwt1/pVOTVhWYqqDdqDix9Tcgg2uZ6sYO8x6lMY8UOuumzV+RZc94vRAt41g4=
+X-Received: by 2002:a05:6102:b14:b0:48f:e267:53dc with SMTP id
+ ada2fe7eead31-49032134ddcmr21051954137.8.1721027481134; Mon, 15 Jul 2024
+ 00:11:21 -0700 (PDT)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1721027032;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fgpq2npGqeZU/3QbXSvacxxy6ji0Td0d4KVUEYJf2zo=;
- b=J/244MBIo7D8alE/2qhTJCgHv0eurpCj+9D0tzrad4fo9b1OcxbFtvlXTq3/xQEQlUl3dZ
- 3d6pxYgwsgVCfLBA3oFIFX9He/97oeSRa3xaYc29zQ297OokPm3UtCX2Pn93MWL4YPFySp
- mll/7xzVYh9fEWtKGDBtSqkQ0T66z9t2wwFR5SWRDDxhUwkAv2nMEA0u7nMaYC1f3J1z0c
- ewnoIVJonp/e17ursH34+MkneBYyV/wnpfP9PA6XT6pnKwIxFOlmDF8Pmy2yBjUUIgxUrW
- rve0QRqnlqz6DUEK5qB2IHswBb5WFPZDafycNK8o4dos4TvXLyTZkAJVmWyr4Q==
-Date: Mon, 15 Jul 2024 09:03:50 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, Sumit Garg
- <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH] dm: button: support remapping phone keys
-In-Reply-To: <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
-References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
- <c8e6a53d96a89e54585bfe28a647f44f@manjaro.org>
- <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
-Message-ID: <76f99e2dba4a83b36cc3db4ecc8a6fb1@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+References: <20240712052507.2496669-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240712052507.2496669-3-mikhail.kshevetskiy@iopsys.eu>
+ <CAFLszThBPaojbFHZf_OpJz=Ub+ikcMZeoa11GeJ422HNPa-s9A@mail.gmail.com>
+ <654fbb9b-dcea-4c07-85a1-47e48d3057d0@genexis.eu>
+In-Reply-To: <654fbb9b-dcea-4c07-85a1-47e48d3057d0@genexis.eu>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 15 Jul 2024 08:11:10 +0100
+Message-ID: <CAFLszTgzgMuB70YRnFUuKvdn9UH3K9ifrSDThDbioQAoaeMMmA@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] led: Add dts property to specify blinking of the
+ led
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>, 
+ Marek Vasut <marex@denx.de>, Christian Gmeiner <christian.gmeiner@gmail.com>,
+ u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,158 +94,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Caleb,
+Hi Mikhail,
 
-On 2024-07-15 08:24, Caleb Connolly wrote:
-> On 14/07/2024 22:47, Dragan Simic wrote:
->> On 2024-07-14 21:49, Caleb Connolly wrote:
->>> We don't have audio support in U-Boot, but we do have boot menus. Add 
->>> an
->>> option to re-map the volume and power buttons to up/down/enter so 
->>> that
->>> in situations where these are the only available buttons (such as on
->>> mobile phones) it's still possible to navigate menus built in U-Boot 
->>> or
->>> an external EFI app like GRUB or systemd-boot.
->>> 
->>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>> ---
->>> Cc: u-boot-qcom@groups.io
->> 
->> Very nice, thanks for this patch!  Looking good to me, with a few
->> suggestions available below.  Anyway, please feel free to add:
->> 
->> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->> 
->>> ---
->>>  drivers/button/Kconfig         | 11 +++++++++++
->>>  drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
->>>  2 files changed, 32 insertions(+), 1 deletion(-)
->>> 
->>> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
->>> index 3918b05ae03e..6cae16fcc8bf 100644
->>> --- a/drivers/button/Kconfig
->>> +++ b/drivers/button/Kconfig
->>> @@ -8,8 +8,19 @@ config BUTTON
->>>        U-Boot provides a uclass API to implement this feature. Button 
->>> drivers
->>>        can provide access to board-specific buttons. Use of the 
->>> device tree
->>>        for configuration is encouraged.
->>> 
->>> +config BUTTON_REMAP_PHONE_KEYS
->>> +    bool "Remap phone keys for navigation"
->>> +    depends on BUTTON
->>> +    help
->>> +      Enable remapping of phone keys to navigation keys. This is 
->>> useful for
->>> +      devices with phone keys that are not used in U-Boot. The phone 
->>> keys
->>> +      are remapped to the following navigation keys:
->>> +      - Volume up: Up
->>> +      - Volume down: Down
->>> +      - Power: Enter
->>> +
->> 
->> Frankly, "phone keys" sounds a bit strange to me, maybe because there
->> are also tablets that have the same style of reduced-set keys.  Thus,
->> I'd suggest that the following language is used:
->> 
->> - "BUTTON_REMAP_PHONE_KEYS" instead of "BUTTON_REMAP_REDUCED_KEYS"
->> - "reduced smartphone-style keys" instead of "phone keys"
-> 
-> I would have assumed that anyone working on a tablet would immediately
-> guess what this option does and that it might be useful given the
-> name. I would argue that seeing "BUTTON_REMAP_REDUCED_KEYS" instead
-> makes it harder to guess what this option does.
-> 
-> I think of it not as "this option remaps the keys on your phone" but
-> as "this option remaps the keys that phones have", as in, the volume
-> and power buttons.
-> 
-> If you'd prefer, maybe we can meet somewhere in the middle with 
-> "mobile"?
-> 
-> how's BUTTON_REMAP_MOBILE_KEYS?
+On Sat, 13 Jul 2024 at 17:32, Mikhail Kshevetskiy
+<mikhail.kshevetskiy@genexis.eu> wrote:
+>
+>
+> On 13.07.2024 18:13, Simon Glass wrote:
+> > Hi Mikhail,
+> >
+> > On Fri, 12 Jul 2024 at 06:25, Mikhail Kshevetskiy
+> > <mikhail.kshevetskiy@iopsys.eu> wrote:
+> >> From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> >>
+> >> The standard property
+> >>
+> >>     linux,default-trigger = "pattern";
+> >>
+> >> used to get an effect. No blinking parameters can be set yet.
+> >>
+> >> Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+> >> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> >> ---
+> >>  drivers/led/led-uclass.c | 33 +++++++++++++++++++++++++++++----
+> >>  1 file changed, 29 insertions(+), 4 deletions(-)
+> >>
+> >> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+> >> index 4f5dd66765e..90047ad35ba 100644
+> >> --- a/drivers/led/led-uclass.c
+> >> +++ b/drivers/led/led-uclass.c
+> >> @@ -100,6 +100,9 @@ static int led_post_bind(struct udevice *dev)
+> >>  {
+> >>         struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> >>         const char *default_state;
+> >> +#ifdef CONFIG_LED_BLINK
+> >> +       const char *trigger;
+> >> +#endif
+> >>
+> >>         if (!uc_plat->label)
+> >>                 uc_plat->label = dev_read_string(dev, "label");
+> >> @@ -120,6 +123,12 @@ static int led_post_bind(struct udevice *dev)
+> >>         else
+> >>                 return 0;
+> >>
+> >> +#ifdef CONFIG_LED_BLINK
+> >> +       trigger = dev_read_string(dev, "linux,default-trigger");
+> >> +       if (trigger && !strncmp(trigger, "pattern", 7))
+> >> +               uc_plat->default_state = LEDST_BLINK;
+> >> +#endif
+> > I still wonder whether you can use IS_ENABLED() instead of adding #ifdefs?
+>
+> LEDST_BLINK depends on CONFIG_LED_BLINK, so the code will not compile if CONFIG_LED_BLINK is not defined.
+> Defining a LEDST_BLINK unconditionally will produce an issue with cmd/led.c
 
-Hmm, if I had to choose between BUTTON_REMAP_PHONE_KEYS and
-BUTTON_REMAP_MOBILE_KEYS, I'd still choose BUTTON_REMAP_PHONE_KEYS.
-As you're against BUTTON_REMAP_REDUCED_KEYS, for which you provided
-valid arguments, I'm still fine with your original word choice.
+We should not use #ifdefs around such declarations. What issue is
+caused by defining it always?
 
-In other words, there are no reasons for the word choice to hold
-this nice patch back from becoming accepted.
-
->> Using "reduced" would also allow us to have this remapping logic more
->> easily extended to also cover some other buttons found on some other
->> devices with reduced-set keys.
-> 
-> If such a device exists and gains support in U-Boot, the switch/case
-> could be extended, or a new option added if it doesn't make sense to
-> lump everything together. Without knowing about such a device I think
-> it's impossible to make a judgement here.
-
-I see, but I just tried to make it a bit more future-proof by using
-more general terms.  However, as I already wrote above, I'm fine with
-keeping the patch in its original form.
-
->>>  config BUTTON_ADC
->>>      bool "Button adc"
->>>      depends on BUTTON
->>>      depends on ADC
->>> diff --git a/drivers/button/button-uclass.c 
->>> b/drivers/button/button-uclass.c
->>> index cda243389df3..729983d58701 100644
->>> --- a/drivers/button/button-uclass.c
->>> +++ b/drivers/button/button-uclass.c
->>> @@ -9,8 +9,9 @@
->>> 
->>>  #include <button.h>
->>>  #include <dm.h>
->>>  #include <dm/uclass-internal.h>
->>> +#include <dt-bindings/input/linux-event-codes.h>
->>> 
->>>  int button_get_by_label(const char *label, struct udevice **devp)
->>>  {
->>>      struct udevice *dev;
->>> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct 
->>> udevice *dev)
->>> 
->>>      return ops->get_state(dev);
->>>  }
->>> 
->>> +static int button_remap_phone_keys(int code)
->> 
->> Pretty much the same suggestion as above applies here.
->> 
->>> +{
->>> +    switch (code) {
->>> +    case KEY_VOLUMEUP:
->>> +        return KEY_UP;
->>> +    case KEY_VOLUMEDOWN:
->>> +        return KEY_DOWN;
->>> +    case KEY_POWER:
->>> +        return KEY_ENTER;
->>> +    default:
->>> +        return code;
->>> +    }
->>> +}
->>> +
->>>  int button_get_code(struct udevice *dev)
->>>  {
->>>      struct button_ops *ops = button_get_ops(dev);
->>> +    int code;
->>> 
->>>      if (!ops->get_code)
->>>          return -ENOSYS;
->>> 
->>> -    return ops->get_code(dev);
->>> +    code = ops->get_code(dev);
->>> +    if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
->>> +        return button_remap_phone_keys(code);
->>> +    else
->>> +        return code;
->>>  }
->>> 
->>>  UCLASS_DRIVER(button) = {
->>>      .id        = UCLASS_BUTTON,
+Regards,
+Simon
