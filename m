@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A576BC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61987C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:08:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6F1D8880E;
-	Mon, 15 Jul 2024 12:08:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1ABE488823;
+	Mon, 15 Jul 2024 12:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DHW3iEPM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bSWfSOUP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2225E887FD; Mon, 15 Jul 2024 12:08:14 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 3FBCF8881C; Mon, 15 Jul 2024 12:08:16 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC0E088753
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 565C5887FE
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-59559ea9cfdso5121214a12.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:11 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a77e85cb9b4so465205366b.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721038091; x=1721642891; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721038094; x=1721642894; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bcZVa+VDuJji/8aNFxPP1iBM+h15a7B0d/YaMGub7Uw=;
- b=DHW3iEPMWk3B3FigX3j65+fjOFULv6TjT21bvhUE9AQ4/bjIj1Xlqu+Hys8WUVRkrW
- CM6ieWI/uzfohF1umuGYJz3SjYXtWhAkpHZbISodGQ0IOg1Z5qvfCGbElbozn5fkUqXv
- TCiSS6IaQvxMb9Vc9AxqP6kRYYW0zlAe5da7Zsof4ZmdXHawNjc+/polCk/P9QsH7p7L
- /+oG49xUAFpyDfdmk86W3roGWz+9TpzYmFriyYrZ0Fw1HdWal/tVoVuFBazvE9+aoV4w
- 4vkTOQEfu032V6HMwmMjOkfIZk87byOYanSGvPhA2xSS9hOLeoUk7P6tmNc/uqTMGSoJ
- zpiQ==
+ :reply-to; bh=ltZEpYWPL6a/RXFmFUmPQKBWq/KTJ3u1HmWmvStedEY=;
+ b=bSWfSOUPH6cCQ32+xPPFlmamU3NusOi0aqXmtttFtFAh0yBFOxG7UeE6FCg31Wjnzp
+ kxY4lCovA7PI4UgLPHWx3BQ8mIhkK+uM0pmHnGQlWjFEs31suPztY4rH908VKyjAIu+v
+ hoM55GPwizbQtCC3Yfj3goDc5MKSXh1NS8gbTpbkoWxMNCmmtlDJhMlR+2dnq6lxxCpC
+ RH5b+V71ANR15H5gnumhS9afBh0tp30Qhw7pGA5Z/GMFsEA2h2Lgayh1xMB0h2gPRlFw
+ axizAZ+oukeu07micPoLySVoGumNLnNFlaZ3o9xxRaZ/le4e30nKE+Ng5znpd5EEDKV3
+ JFkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721038091; x=1721642891;
+ d=1e100.net; s=20230601; t=1721038094; x=1721642894;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bcZVa+VDuJji/8aNFxPP1iBM+h15a7B0d/YaMGub7Uw=;
- b=A1V1SqgzdnTSyOy+InhlG/ZjnQiCmNFACFJ1K2oX5lYSZycBqAIdEmiOVneU0ewrOd
- jmnp8XDRsuH5QH9rOQlxhJv2YGFE7c0ANKOX6E8lUz9H4jlQt/iRjZx7K1vj5cXmu38A
- yeNNVJGIKKouN7pgxw7ozOxY4oT6rwwcI49LyEQDBQegy259g7jq4G22FOg2F6E3hNkp
- Qn0ID3UHYJMiVdMEnHuSPbX44F4FN4xYI4t56vOcLvJqmVSXhuRfgBTI864pK8AB63yb
- khVNUyFRFDLbZV0xE7OtIwuJoK8wo+QzaGfqIeNomjFwBh/nsPLMrL1V8XrGFVHyrlxJ
- Iugg==
-X-Gm-Message-State: AOJu0YzJzHJiKOzMph/anmkYv07qAHH035/QVpQZSwlC4p0QAkxPGaVD
- mUARf8bPGgNqF+gTwyM+Xbc9WUi4RSArnL4EQzG6EBzIkXBM5SwDC5qahTy7Hok=
-X-Google-Smtp-Source: AGHT+IHi7d3PjDKW8DNv3Uw59Z8s8XngICHrbsYM1jXKy8TfDzQ3zrIp+TsvTk/KVfYgtM8uZQv2+A==
-X-Received: by 2002:a17:907:9711:b0:a77:b0a4:7d88 with SMTP id
- a640c23a62f3a-a780b689270mr1826883166b.10.1721038091298; 
- Mon, 15 Jul 2024 03:08:11 -0700 (PDT)
+ bh=ltZEpYWPL6a/RXFmFUmPQKBWq/KTJ3u1HmWmvStedEY=;
+ b=egwWzWKYpN1yS43wVpWF4iqICi4lpaKBPRdSe3oEtpU1N0L76xaNfYT3sjvfWGeOo7
+ dIKlWVKwPqJCVSxlwdm1RV5pG+SeijtpD/zZRCRLpi7qGW9SkR8OSsnGyMqjAOKtiS95
+ /LBVhkbULKGCito4ZWNiBzXuJOa82kCX3BGKU6Y6k1cpWl18k1em2VluSFuF8VkQ/7f1
+ IWW8kTcQLxh/9IfNPp8JBNCsbwsAu1MUUpWErqEW58b0v2H9IoBu+vcRzr8MIb+tTJk1
+ 3w+T11Q3+Fd50Nlzd0EfowhM+pWjynznJf+isf4Kr0Y3z2sJFnjdW5UGkWWBWArVoMp8
+ D12w==
+X-Gm-Message-State: AOJu0YzNscYafbIbSBRW5JUio8aX1fN2U51QQw/72RVRNZQZpJeqoVDL
+ QXCuwgVcnoiX6EDD+ptxjq73XbZRvs1UYMCSSqDf07nIzEiNzPnB/svlLivWgsQ=
+X-Google-Smtp-Source: AGHT+IGpxYgd8AYaTKDn2e3YcXAafOjqEb9Qg4BAdqfUBwUUz8iSLDt6lRBN7YwMAacg9D9AINS6cQ==
+X-Received: by 2002:a17:906:e56:b0:a77:e7b9:fda0 with SMTP id
+ a640c23a62f3a-a780b68a231mr1188082566b.14.1721038093838; 
+ Mon, 15 Jul 2024 03:08:13 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.10
+ a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 03:08:10 -0700 (PDT)
+ Mon, 15 Jul 2024 03:08:13 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 15 Jul 2024 12:08:01 +0200
-Subject: [PATCH v6 02/24] linux/bitmap.h: add bitmap_empty helper
+Date: Mon, 15 Jul 2024 12:08:03 +0200
+Subject: [PATCH v6 04/24] soc: qcom: cmd-db: adjust headers for U-Boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240715-b4-qcom-rpmh-v6-2-0c948a25d018@linaro.org>
+Message-Id: <20240715-b4-qcom-rpmh-v6-4-0c948a25d018@linaro.org>
 References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 In-Reply-To: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=986;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1217;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=PxfbD3T2xPQP1uXV5S6na22BOVQpSqa42vcVud4EfCI=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUFr19Fc8y1LQnF9K196NjB0jt+ShmdGkyg8
- 3HZeMtMcsCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1BQAKCRAFgzErGV9k
- tjwBD/4wAiZ8umvoqwpJ+r1PSKZmt0UQm0PG3MJjoZRyCN/D+dh3lovxC0YAFMCySa+gxpHzcIM
- oc+Ea20B4V9J1dROfKYySKHXa8ZWIVbtN5RaO/5hfQrZXo6ZLPHkwoKkslBQq9mfS4O+v4705AH
- 7GiNPxbGRTxGw6PxM3Ri7M+iw8zrIM4HnuPLM8rGNtXUzglY/oUqOS/WIXy+kfcE8i3rsxc7XYG
- rfUs3yEcq9TzKPDmJsNF+o189ZekSPT0S5s2cdODeQmF1fWJYirHZEc/GvPkP2Z19U1ER18Re7W
- O7avYYj8VmLGeSoIj4b1KWajUBfCDk4mhKtgFoG86XcMDzdrv3SuteGEa9YQgUn7o6lK1Gjt9fe
- hOu6Q5BZJnfGZCkMtRl87Y+vCJiKy69/VQYfiIPzl+D/VWtJDYiYqMKKubYpSAjg/bfsOo2L098
- wFzElQem23xwvITz/T1d7KS+U1FM4yW0bPzWT2irTv3lGJgXG3wbI0xFM2PMrUZBWGOVbCsHwc3
- 7DojMb9cPRIxP1ycpO5FQ5ei3JzJCnQi8kTe+Q5lkCQ0plt4WP7huzYy4tX6B7kWzgJi25Wku8Q
- hpqlgoQwXAPyXn6N1JnT08HA7p8htSDde20M52GNVCV+JWtHRbCmoMBrR3SGAem0fUZ4ue55C7V
- VoQOQlPRWp4Ey9g==
+ bh=KqQWvKqWen77D+Indz1qnmLFZFG0noaBAnSGS2eyqtI=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUFwf6qiWJedRZvvYn71V0TamJZ9SZRgA6Pz
+ F6UGKt5WfeJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1BQAKCRAFgzErGV9k
+ ts+dD/46T3glAfvA/L8zQ7PDW1uW8XObvJ16SMxJh1svSlSykI1v/DvdiMv7mMBt/ex4iZCN7Vu
+ Ee9QW+8D89a2D1pE8LFO3dN37QT7jIHth8IUQdOa3hhr+7FbkzV05GyCaOdLDFRdPkxIcNqd+Zw
+ P3nPrUYnD78ImPruvIJGnVfXfiRYEyLE+K7/ySU22tuD8PQ2PNcqm2RW8cm/HD8R0kkHg9yzP9a
+ bmvqPbc+hIwuWWJQ2U4qTpoeSO4W7c4KpB//IIfvvp+0VCzGepqJkuoCRxpGjlUgoiPaucoeAu+
+ S0J9dOeqburIba2NFsIVo25dRYX8ZJBESE2CBqGhZAm4AsUudrp8YmIgz5whQjyu6hh42l+0kHz
+ cWFz1oHez+sJp2mwkXTOxQqxG9KRMgBX+5eeTkwHcpoqQ8SRIq6t+SeJi/hEX7LE4XCfJ7wWqRE
+ 4YvEOkt2S3hal7i7qooy3P6g0+mN6brHIO09E1Xxfu1GXul6KWV7XIDJ5eGElDdmEMzjLmxsc0v
+ /bXkUmtPkVl9KKSRiFpUhJL+bKeVgBPkCRFgjLU37YkX4wYPgEyTScNjSd1aE50nFEWYzEQG80A
+ IkI0C2pwpgG/tJHEwrWswJhoL83bywazgrsbrbDbSXaLsgFRm2EFPBn1wLaWpJy8hTMo+gnWdsk
+ EtVtXJ9Ck4oLang==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,36 +112,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Import this function from Linux as of 6.10-rc6
+Replace unused/unsupported Linux headers with appropriate U-Boot
+alternatives.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Acked-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/linux/bitmap.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/soc/qcom/cmd-db.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/include/linux/bitmap.h b/include/linux/bitmap.h
-index 0a8503af9f14..40ca2212cb40 100644
---- a/include/linux/bitmap.h
-+++ b/include/linux/bitmap.h
-@@ -195,8 +195,16 @@ static inline void bitmap_fill(unsigned long *dst, unsigned int nbits)
- 		memset(dst, 0xff, len);
- 	}
- }
+diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
+index d84572662017..b25f3549c18f 100644
+--- a/drivers/soc/qcom/cmd-db.c
++++ b/drivers/soc/qcom/cmd-db.c
+@@ -3,18 +3,17 @@
+  * Copyright (c) 2016-2018, 2020, The Linux Foundation. All rights reserved.
+  * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
+  */
  
-+static inline bool bitmap_empty(const unsigned long *src, unsigned int nbits)
-+{
-+	if (small_const_nbits(nbits))
-+		return !(*src & BITMAP_LAST_WORD_MASK(nbits));
+-#include <linux/bitfield.h>
+-#include <linux/debugfs.h>
++#define pr_fmt(fmt) "cmd-db: " fmt
 +
-+	return find_first_bit(src, nbits) == nbits;
-+}
-+
- static inline void bitmap_or(unsigned long *dst, const unsigned long *src1,
- 			     const unsigned long *src2, unsigned int nbits)
- {
- 	if (small_const_nbits(nbits))
++#include <dm.h>
++#include <dm/ofnode.h>
++#include <dm/device_compat.h>
+ #include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/of.h>
+-#include <linux/of_address.h>
+-#include <linux/of_reserved_mem.h>
+-#include <linux/platform_device.h>
+-#include <linux/seq_file.h>
+ #include <linux/types.h>
++#include <linux/ioport.h>
++#include <linux/byteorder/generic.h>
+ 
+ #include <soc/qcom/cmd-db.h>
+ 
+ #define NUM_PRIORITY		2
 
 -- 
 2.45.2
