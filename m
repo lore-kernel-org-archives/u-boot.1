@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B28C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 07:23:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E17BC2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 07:25:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8431288747;
-	Mon, 15 Jul 2024 09:23:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 281AC88671;
+	Mon, 15 Jul 2024 09:25:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="E/Fmqt5K";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="oxVihKcg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CF62885EE; Mon, 15 Jul 2024 09:23:45 +0200 (CEST)
-Received: from mail-m1036.netease.com (mail-m1036.netease.com [154.81.10.36])
+ id 4D86788671; Mon, 15 Jul 2024 09:25:43 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 931FC887BB
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 09:23:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 42942885EE
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 09:25:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=E/Fmqt5K+V1Zvsd9bz+sWc9v6f+kmHj+KNMQfTcihnwULlgnLed6atdYpL5yAjKlyDAir5eMRIMuFpr4LKHW9ToFZ1p/4Ts+spS1fM6Ev7scBREfJJXkdsvp7P+j7DYIZAD/sc67HZTvbyo9vwj/egOYlr+lyeU9X2tnCfKuddw=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=pgUriBB3ri9+P/X28nYbVgqSV4v85GJY46UhbX7T6Eo=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 3B14090010F;
- Mon, 15 Jul 2024 15:23:32 +0800 (CST)
-Message-ID: <c11e03f5-577d-48f2-89cd-b5a99fbda402@rock-chips.com>
-Date: Mon, 15 Jul 2024 15:23:31 +0800
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] rockchip: tiger-rk3588: add PCIe support
-To: Quentin Schulz <foss+uboot@0leil.net>, Sumit Garg
- <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Klaus Goger <klaus.goger@cherry.de>,
- Heiko Stuebner <heiko.stuebner@cherry.de>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20240704-tsd-rk3588-nvme-v1-0-fb9e8dde9570@cherry.de>
- <20240704-tsd-rk3588-nvme-v1-3-fb9e8dde9570@cherry.de>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240704-tsd-rk3588-nvme-v1-3-fb9e8dde9570@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxpKTVYfSx0aGh9DTU1PTU9WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
- JVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90b54677d703a9kunm3b14090010f
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OSI6ECo*EjI3KiEfTCoLOhIv
- AyoKChdVSlVKTElKS0lDSUpISkhCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISU5MNwY+
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1721028340;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wE2HG3FJf5LinOC9/ogKgUW9j6//25jNaa0Q0c3bFEc=;
+ b=oxVihKcg5LxtX148P6SyZ6cKP/AQ/2Rr+/PcVUGn1Mdy9gz5/hbFepe4npQk74C0z3F2Cs
+ OAJzJTvZD271L+DjkNZ6Qnn2qEQo57JfaHaH324s19EApoeBuTB2eHVIpv5oYjkSIXl0qi
+ nnFvzrsM2xSDH2yLiuFyygYrsfqwAEp8VWoM202vEq6Vw40xvwFwFXORTXXdO7I1PmkFOf
+ cAUmPzSKkYU5F1WjUGCqWgTLv/uEtD8klUMKpEXKZuilcpgczMsooMIczOGZFDWWA07NjX
+ aAt+kmqiDv9O7+tZvDilAJjZxWQ2P/WmvxpWPC2A1iGAg3XyXQfEN28xERe3Eg==
+Date: Mon, 15 Jul 2024 09:25:40 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, Sumit Garg
+ <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH] dm: button: support remapping phone keys
+In-Reply-To: <1424316d-919b-4063-b0ed-72aedef2d40e@linaro.org>
+References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
+ <c8e6a53d96a89e54585bfe28a647f44f@manjaro.org>
+ <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
+ <76f99e2dba4a83b36cc3db4ecc8a6fb1@manjaro.org>
+ <1424316d-919b-4063-b0ed-72aedef2d40e@linaro.org>
+Message-ID: <78110a71ffb21fc064cafc218b9f0808@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,54 +75,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2024-07-15 09:15, Caleb Connolly wrote:
+> On 15/07/2024 09:03, Dragan Simic wrote:
+>> On 2024-07-15 08:24, Caleb Connolly wrote:
+>>> On 14/07/2024 22:47, Dragan Simic wrote:
+>>>> On 2024-07-14 21:49, Caleb Connolly wrote:
+>>>>> We don't have audio support in U-Boot, but we do have boot menus. 
+>>>>> Add an
+>>>>> option to re-map the volume and power buttons to up/down/enter so 
+>>>>> that
+>>>>> in situations where these are the only available buttons (such as 
+>>>>> on
+>>>>> mobile phones) it's still possible to navigate menus built in 
+>>>>> U-Boot or
+>>>>> an external EFI app like GRUB or systemd-boot.
+>>>>> 
+>>>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>>>> ---
+>>>>> Cc: u-boot-qcom@groups.io
+>>>> 
+>>>> Very nice, thanks for this patch!  Looking good to me, with a few
+>>>> suggestions available below.  Anyway, please feel free to add:
+>>>> 
+>>>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+>>>> 
+>>>>> ---
+>>>>>  drivers/button/Kconfig         | 11 +++++++++++
+>>>>>  drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
+>>>>>  2 files changed, 32 insertions(+), 1 deletion(-)
+>>>>> 
+>>>>> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+>>>>> index 3918b05ae03e..6cae16fcc8bf 100644
+>>>>> --- a/drivers/button/Kconfig
+>>>>> +++ b/drivers/button/Kconfig
+>>>>> @@ -8,8 +8,19 @@ config BUTTON
+>>>>>        U-Boot provides a uclass API to implement this feature. 
+>>>>> Button drivers
+>>>>>        can provide access to board-specific buttons. Use of the 
+>>>>> device tree
+>>>>>        for configuration is encouraged.
+>>>>> 
+>>>>> +config BUTTON_REMAP_PHONE_KEYS
+>>>>> +    bool "Remap phone keys for navigation"
+>>>>> +    depends on BUTTON
+>>>>> +    help
+>>>>> +      Enable remapping of phone keys to navigation keys. This is 
+>>>>> useful for
+>>>>> +      devices with phone keys that are not used in U-Boot. The 
+>>>>> phone keys
+>>>>> +      are remapped to the following navigation keys:
+>>>>> +      - Volume up: Up
+>>>>> +      - Volume down: Down
+>>>>> +      - Power: Enter
+>>>>> +
+>>>> 
+>>>> Frankly, "phone keys" sounds a bit strange to me, maybe because 
+>>>> there
+>>>> are also tablets that have the same style of reduced-set keys.  
+>>>> Thus,
+>>>> I'd suggest that the following language is used:
+>>>> 
+>>>> - "BUTTON_REMAP_PHONE_KEYS" instead of "BUTTON_REMAP_REDUCED_KEYS"
+>>>> - "reduced smartphone-style keys" instead of "phone keys"
+>>> 
+>>> I would have assumed that anyone working on a tablet would 
+>>> immediately
+>>> guess what this option does and that it might be useful given the
+>>> name. I would argue that seeing "BUTTON_REMAP_REDUCED_KEYS" instead
+>>> makes it harder to guess what this option does.
+>>> 
+>>> I think of it not as "this option remaps the keys on your phone" but
+>>> as "this option remaps the keys that phones have", as in, the volume
+>>> and power buttons.
+>>> 
+>>> If you'd prefer, maybe we can meet somewhere in the middle with 
+>>> "mobile"?
+>>> 
+>>> how's BUTTON_REMAP_MOBILE_KEYS?
+>> 
+>> Hmm, if I had to choose between BUTTON_REMAP_PHONE_KEYS and
+>> BUTTON_REMAP_MOBILE_KEYS, I'd still choose BUTTON_REMAP_PHONE_KEYS.
+>> As you're against BUTTON_REMAP_REDUCED_KEYS, for which you provided
+>> valid arguments, I'm still fine with your original word choice.
+>> 
+>> In other words, there are no reasons for the word choice to hold
+>> this nice patch back from becoming accepted.
+> 
+> Ok, thanks :)
+> 
+> Sorry for the tone, I'm afraid I misread your original email.
 
-On 2024/7/4 20:53, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->
-> This enables PCIe support on Tiger as exposed on
-> Q7_PCIE[0123]_[RT]X_[PN] signals and more specifically on the `PCI
-> Express` connector on the Haikou devkit.
->
-> This was tested with a PCIe to NVMe adapter (e.g.
-> https://www.amazon.de/dp/B07RZZ3TJG).
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+No worries.  My intention was never to split hairs, or to hold the
+patch back from becoming accepted.
 
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Thanks,
-- Kever
-> ---
->   configs/tiger-rk3588_defconfig | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/configs/tiger-rk3588_defconfig b/configs/tiger-rk3588_defconfig
-> index 8fcdd063a3d..8eb1027e449 100644
-> --- a/configs/tiger-rk3588_defconfig
-> +++ b/configs/tiger-rk3588_defconfig
-> @@ -14,6 +14,7 @@ CONFIG_DEBUG_UART_BASE=0xfeb50000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   # CONFIG_DEBUG_UART_BOARD_INIT is not set
->   CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
->   CONFIG_DEBUG_UART=y
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
-> @@ -41,6 +42,7 @@ CONFIG_CMD_I2C=y
->   # CONFIG_CMD_LOADB is not set
->   # CONFIG_CMD_LOADS is not set
->   CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
->   # CONFIG_CMD_SF is not set
->   CONFIG_CMD_USB=y
->   # CONFIG_CMD_SETEXPR is not set
-> @@ -89,6 +91,8 @@ CONFIG_PHY_MICREL=y
->   CONFIG_PHY_MICREL_KSZ90X1=y
->   CONFIG_DWC_ETH_QOS=y
->   CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->   CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
->   CONFIG_PHY_ROCKCHIP_USBDP=y
->
+>>>> Using "reduced" would also allow us to have this remapping logic 
+>>>> more
+>>>> easily extended to also cover some other buttons found on some other
+>>>> devices with reduced-set keys.
+>>> 
+>>> If such a device exists and gains support in U-Boot, the switch/case
+>>> could be extended, or a new option added if it doesn't make sense to
+>>> lump everything together. Without knowing about such a device I think
+>>> it's impossible to make a judgement here.
+>> 
+>> I see, but I just tried to make it a bit more future-proof by using
+>> more general terms.  However, as I already wrote above, I'm fine with
+>> keeping the patch in its original form.
+>> 
+>>>>>  config BUTTON_ADC
+>>>>>      bool "Button adc"
+>>>>>      depends on BUTTON
+>>>>>      depends on ADC
+>>>>> diff --git a/drivers/button/button-uclass.c 
+>>>>> b/drivers/button/button-uclass.c
+>>>>> index cda243389df3..729983d58701 100644
+>>>>> --- a/drivers/button/button-uclass.c
+>>>>> +++ b/drivers/button/button-uclass.c
+>>>>> @@ -9,8 +9,9 @@
+>>>>> 
+>>>>>  #include <button.h>
+>>>>>  #include <dm.h>
+>>>>>  #include <dm/uclass-internal.h>
+>>>>> +#include <dt-bindings/input/linux-event-codes.h>
+>>>>> 
+>>>>>  int button_get_by_label(const char *label, struct udevice **devp)
+>>>>>  {
+>>>>>      struct udevice *dev;
+>>>>> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct 
+>>>>> udevice *dev)
+>>>>> 
+>>>>>      return ops->get_state(dev);
+>>>>>  }
+>>>>> 
+>>>>> +static int button_remap_phone_keys(int code)
+>>>> 
+>>>> Pretty much the same suggestion as above applies here.
+>>>> 
+>>>>> +{
+>>>>> +    switch (code) {
+>>>>> +    case KEY_VOLUMEUP:
+>>>>> +        return KEY_UP;
+>>>>> +    case KEY_VOLUMEDOWN:
+>>>>> +        return KEY_DOWN;
+>>>>> +    case KEY_POWER:
+>>>>> +        return KEY_ENTER;
+>>>>> +    default:
+>>>>> +        return code;
+>>>>> +    }
+>>>>> +}
+>>>>> +
+>>>>>  int button_get_code(struct udevice *dev)
+>>>>>  {
+>>>>>      struct button_ops *ops = button_get_ops(dev);
+>>>>> +    int code;
+>>>>> 
+>>>>>      if (!ops->get_code)
+>>>>>          return -ENOSYS;
+>>>>> 
+>>>>> -    return ops->get_code(dev);
+>>>>> +    code = ops->get_code(dev);
+>>>>> +    if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
+>>>>> +        return button_remap_phone_keys(code);
+>>>>> +    else
+>>>>> +        return code;
+>>>>>  }
+>>>>> 
+>>>>>  UCLASS_DRIVER(button) = {
+>>>>>      .id        = UCLASS_BUTTON,
