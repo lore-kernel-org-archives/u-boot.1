@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3128BC3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05221C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:10:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 762878887D;
-	Mon, 15 Jul 2024 12:08:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBAC688860;
+	Mon, 15 Jul 2024 12:08:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PHLmL9I0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LcXsUO0a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 985B78885E; Mon, 15 Jul 2024 12:08:48 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id C582388875; Mon, 15 Jul 2024 12:08:49 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94802887EB
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9088888856
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a77c7d3e8bcso514701666b.1
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:46 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-59a47d5c22aso3923151a12.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721038126; x=1721642926; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721038127; x=1721642927; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dJaGTgWa9/FxJkGCdJJNpQpycUtWvWdlTFBYrGhJ9co=;
- b=PHLmL9I0Wmxk4jLXLYsgV9nOyGoWiKklruo3nJ1ZFPttXRsv1XinEqMCN3A1alUp4A
- v3vPBnuaXi19zXZWEJSm5bVSTapQ/HGsz4S/PqypsVv5Ji8CeeZHJT4bgee4qZBoDV/6
- MGC0GcmA1934yT/uB0quPBr1HXYY7JC963pj7D2+55ZEVGTV4rzFBp0vbZowybGIsqYf
- mVDUF8NZLyOrOq72jOmGShzUqfD1/2BpIVkbmXzTdsZzVmqM2RStjoSqhIvz+7mRuas+
- 0hd8zt67nbTxwhd284FmMk4nfCn6Motj4w7Bi/vSVnPPAah3fhM69v2iAyGdh6ZQ7KQX
- wtAw==
+ :reply-to; bh=EI1m/5KlruCoT6RpfHcQgeJV034qnLNtuNds708jBqM=;
+ b=LcXsUO0aLKZzd+kgBiPpHcxKQpPVqgZnWzpL9OMo0xNFTFRPLxel0oRR/pLCU62IGF
+ CfJYgr0ARYFAtOKdlK2Mzz8EvNO0A43cjRG1dvGlfA8rKXTYXNYpx73IRy1IDwnFnyx9
+ jjrV3mktRFgfgioKcFnUeosB+gMtremgZAJCfB6Iq3Ys8EREIzwAA3V+QQkg9174ggmv
+ NDlLaFxClcalfVKL+Gx36fPbpyK2skD/JaYCuMduI7xxLMnx+8ndTe7RcuxvwgdwkXkE
+ SxbQztBVht3XrfMrYBJiHBmJCC2fkNOAtwJhubD84sCZYrA8GwR34GdEfMRRxMyO8hvs
+ SCdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721038126; x=1721642926;
+ d=1e100.net; s=20230601; t=1721038127; x=1721642927;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dJaGTgWa9/FxJkGCdJJNpQpycUtWvWdlTFBYrGhJ9co=;
- b=TwjcTW1LilWCO/duIJF7ODERVwNXE15iZa45RFv1HPubNM9kuw8hiesE9WCGiakspN
- gLyU8Ims6PXkVMP5IBYR+QRGCHmdCceEAMbLlVre14w1c+UHGxu3wqEiSgyA5OUcdGdv
- 4bWP6OTevpX1H96MgnH8hYWUafuy2eBZzkCb2409PdCce6ZzVvaDSkp1RgH89jMMxoH7
- SoQF+dN2LDD0C1SqGGf4K2DgmCB0quGXWdcwZTeW4TtjXI6hOFbvLDkzFGqyiXRn9Mj8
- 7hlJuAQ3WPmQ34tDyTEzDrC1dkZGDYFTu+z3I70uB5QCwVpCJaULEc+/8X4J0mvTfMEi
- FpiQ==
-X-Gm-Message-State: AOJu0YxRoIGHTkKUtcdrbx5s8OjhryhCI1Kd3TetYtSinVx7Z+a6FFPD
- jXRlhm0XxBzNMkiwGZ9hZPRnp5lL9hToazH+Af8kzyHCW6xua1rK+Ink43/gVkP4WvgvCFUPmYS
- mYmI=
-X-Google-Smtp-Source: AGHT+IF4GIpzWkKMq7S4dp00ZPGLFYvnIYqD2Y/hAxx1MV/96iLB/1fQuZLjG66HXdQ1hnbC8URayA==
-X-Received: by 2002:a17:906:31c1:b0:a77:cc6f:e791 with SMTP id
- a640c23a62f3a-a780b705299mr1059446266b.38.1721038126041; 
- Mon, 15 Jul 2024 03:08:46 -0700 (PDT)
+ bh=EI1m/5KlruCoT6RpfHcQgeJV034qnLNtuNds708jBqM=;
+ b=QZKrKUAp5t+CkjB94oXNzgwhXI44vDDcyU6GuzoZcPxzpETGBGfs8KokPdz2pwfJM+
+ l9GXE9A/oTpIOhS5FtoTTymWH4d754buJKxcjHVUyAuzhPXC1Rl5xQeVhAfgRt3mnYEC
+ Cq32PpDZSRl55kz2R3y1HNGB1vLJtwkeJFloHR6aBh/E1Y1TR95NzP39H23f77+judcW
+ xCM93gH3x+o1tD5/93QZzPbBkN4utk58w6xi2VQR7pI2rytDsj5av8zaJswqhDPESaks
+ WvakO4YmyoGTUCsT4OFGtSJ1GuNYUrI7CHDS6Qeh45mJ0LdbwxoggzBZhCIpoTXb23MQ
+ K9vg==
+X-Gm-Message-State: AOJu0YwxnDzmVPa+aSy30thRsQV/Z5PA1KnHjKUm7lXoypRvxhikj/2L
+ ueqPyaFtcg13YZaoZKgjQTCmrbnUUxapVJl23qd3frs3PGFDmjqbKmQfBfhzEAE=
+X-Google-Smtp-Source: AGHT+IEt66anvoe36tCrMFZk94DJHq7Z8Q1DGx3hVpgoo9OZAnPOShZwzqXjQ96IHEmPg0wPdAKBnQ==
+X-Received: by 2002:a17:906:37d6:b0:a77:db36:1ccc with SMTP id
+ a640c23a62f3a-a780b6b2f58mr1139255666b.24.1721038127069; 
+ Mon, 15 Jul 2024 03:08:47 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.45
+ a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 03:08:45 -0700 (PDT)
+ Mon, 15 Jul 2024 03:08:46 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 15 Jul 2024 12:08:13 +0200
-Subject: [PATCH v6 14/24] soc: qcom: rpmh: U-Boot API changes
+Date: Mon, 15 Jul 2024 12:08:14 +0200
+Subject: [PATCH v6 15/24] soc: qcom: add build infrastructure
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240715-b4-qcom-rpmh-v6-14-0c948a25d018@linaro.org>
+Message-Id: <20240715-b4-qcom-rpmh-v6-15-0c948a25d018@linaro.org>
 References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 In-Reply-To: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4758;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2682;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=camnfp1HM4gJk6LZyxdzL5PXbyXYt46syEdY1LHofyA=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUGF/TeruIzt/PDlt+bz9nxQ0QPXD8YGNV/Q
- fYctBLTjDGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1BgAKCRAFgzErGV9k
- tlJED/0X29eKQSO0K3+35bhR68VMD8sQFtchFgwUjrjZN/74J/4Mxcfg0ES7eO+gqGMLikDzoky
- Yrj2xgzYg7UbUNHg3t8/bGQm2wSiDm0Hj1h1leYv1A4BZAVLMNxLtaex9GcUqDgm+PCWduYaJ/6
- tAmIp9QPQsWxaWmJjB/0bTfuTxzJ03odPI+SIs5tFCa35Rwk9I6zA45zyyEpUhyypPylGduhgXm
- ik7ghqgIAZYej9cUrRWxS+fGhq5s2LafbZg5GXt4LsNFxTkmOE6r9X2dijzLwaOTuqlER/DSoPY
- 8nmwn4WFWnU+MLvovu7nukjJB+RytFBMkWe4AI1zPhbXzu5rNTfzdWUGOLhJkQ11AE+EsgtdpGl
- PC4mSMmtLIIkNdLqa7z7KfUpLjuA5JqPV4bxCO8gsDMf0uHFkmnCpWyn+oXyZJ+y4HgeO4eUEC3
- rvLFGGqr/sCMAMBfy6rLlPqJonHrcz5TR1qmfA+SiSvhdDLWK4jVtLZTvwh1t8hVeDN2l/G86Eg
- mGBO7ylXg1zddFD3KbBeECEDNZskwmVbKMZM8UDpJV9i4l+AxSPCaNygrsy8fEMY+9CnuS7MinI
- EQyU/5ovEriDurflJmUuMJECMw+haikasZ97jy7hNM7RJ3NGdlAq3D3UNsexLvPYkLM6tuZKBrS
- AACOK/GVPn5YDTQ==
+ bh=XGgpCAr8XHdPFMKI5HuxXuToi062u+tLuE4azL5XNXs=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUG26XiR04MWK1RiWSUEYen/dhXKFe+PgQ+3
+ iZnnoWwaMGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1BgAKCRAFgzErGV9k
+ thK1EACHpV9p29oJTuQ/NjSWozR5aV2oSdl3ODZTcN1LNOOawBKMnrwGjT36d6DF4GLIjxUBcdM
+ efTV3epqr7ExQk1ASnqSUHkxFJfe0utEivRqWfsdS4xNwSA9xHrPKx5sfweJL27GkiQ+ZuwvC66
+ cBSD96KfJMvjytqCrH8tfn+HeXfxora/VZV/2HSdLPqq3jKcSLFM3cbDuNmAi2lWpF8+sUyY5wi
+ aHBHuBOV4PaTHcN8ByeGohmAzLRq1yghHRRsQSEn4o05SFlAGnCByptEDZCYW4vzf3iggyN7S1s
+ EgSoEg6a3p3L2nL1E4ch07ZL/flHmchMFw19Ao0KF86IlYKWTtrCu+mgpNYzqndJZ7/zaJUkaRJ
+ 0JoJNUkZigSIP0Jnx9/lJi8vKys9faV9uUsNk/OW/nsiicm6ogvceZSsGKUc+8OWgRcFVaXPAO9
+ /wse2RxXcRv4o4a4hJxJ9932lXj87LP9EcMEnn6ONk8dfaFRfSE0BToJ4T4vBDm46gwrpVpr/07
+ fi9MC6RH8enfX+7QhnsxXkpkhQ3kJTny/f6AhXk6Uxuwtn/ymaCOb6jOmBKwia4xFKNKYs3OJbh
+ oH7lxjuXgspDg9CI9ZHECbhqWa0Qgstdl5UWNCn4EVEFsqPntjRnP9DmpfoM420ZKnYkg6H1Sq8
+ bPDkDfggPGO0SKA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,159 +112,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix build errors, add some debug logging.
+Add Kconfig / Makefiles to build rpmh and cmd-db drivers.
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/soc/qcom/rpmh.c | 53 +++++++++++++++++++------------------------------
- include/soc/qcom/rpmh.h |  4 ++--
- 2 files changed, 22 insertions(+), 35 deletions(-)
+ drivers/soc/Kconfig       |  1 +
+ drivers/soc/Makefile      |  1 +
+ drivers/soc/qcom/Kconfig  | 27 +++++++++++++++++++++++++++
+ drivers/soc/qcom/Makefile |  4 ++++
+ 4 files changed, 33 insertions(+)
 
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-index 22605e0291a1..96f14a9afdf2 100644
---- a/drivers/soc/qcom/rpmh.c
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -15,27 +15,30 @@
- #include "rpmh-internal.h"
+diff --git a/drivers/soc/Kconfig b/drivers/soc/Kconfig
+index cee506fe4747..8ef408d9ba1b 100644
+--- a/drivers/soc/Kconfig
++++ b/drivers/soc/Kconfig
+@@ -47,8 +47,9 @@ config SOC_XILINX_VERSAL_NET
+ 	  Enable this option to select SoC device id driver for Xilinx Versal NET.
+ 	  This allows other drivers to verify the SoC familiy & revision using
+ 	  matching SoC attributes.
  
- #define RPMH_TIMEOUT_MS			msecs_to_jiffies(10000)
++source "drivers/soc/qcom/Kconfig"
+ source "drivers/soc/samsung/Kconfig"
+ source "drivers/soc/ti/Kconfig"
  
--#define DEFINE_RPMH_MSG_ONSTACK(device, s, q, name)	\
-+#define DEFINE_RPMH_MSG_ONSTACK(device, s, name)	\
- 	struct rpmh_request name = {			\
- 		.msg = {				\
- 			.state = s,			\
- 			.cmds = name.cmd,		\
- 			.num_cmds = 0,			\
--			.wait_for_compl = true,		\
- 		},					\
- 		.cmd = { { 0 } },			\
--		.completion = q,			\
- 		.dev = device,				\
--		.needs_free = false,				\
-+		.needs_free = false,			\
- 	}
+ endmenu
+diff --git a/drivers/soc/Makefile b/drivers/soc/Makefile
+index 5ec89a053165..00e6a5ac8e2b 100644
+--- a/drivers/soc/Makefile
++++ b/drivers/soc/Makefile
+@@ -2,8 +2,9 @@
+ #
+ # Makefile for the U-Boot SOC specific device drivers.
  
- #define ctrlr_to_drv(ctrlr) container_of(ctrlr, struct rsc_drv, client)
- 
--static struct rpmh_ctrlr *get_rpmh_ctrlr(const struct device *dev)
-+static struct rpmh_ctrlr *get_rpmh_ctrlr(const struct udevice *dev)
- {
--	struct rsc_drv *drv = dev_get_drvdata(dev->parent);
-+	struct rsc_drv *drv = (struct rsc_drv *)dev_get_priv(dev->parent);
+ obj-$(CONFIG_SOC_AMD_VERSAL2) += soc_amd_versal2.o
++obj-$(CONFIG_SOC_QCOM) += qcom/
+ obj-$(CONFIG_SOC_SAMSUNG) += samsung/
+ obj-$(CONFIG_SOC_TI) += ti/
+ obj-$(CONFIG_SOC_DEVICE) += soc-uclass.o
+ obj-$(CONFIG_SOC_DEVICE_TI_K3) += soc_ti_k3.o
+diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+new file mode 100644
+index 000000000000..4aa7833930c7
+--- /dev/null
++++ b/drivers/soc/qcom/Kconfig
+@@ -0,0 +1,27 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# QCOM Soc drivers
++#
++menuconfig SOC_QCOM
++	bool "Qualcomm SOC drivers support"
++	help
++	  Say Y here if you want to enable Qualcomm SOC drivers support.
 +
-+	if (!drv) {
-+		log_err("BUG: no RPMh driver for %s (parent %s)\n", dev->name, dev->parent->name);
-+		BUG();
-+	}
- 
- 	return &drv->client;
- }
- 
-@@ -49,36 +52,23 @@ static struct rpmh_ctrlr *get_rpmh_ctrlr(const struct device *dev)
-  * Cache the RPMH request and send if the state is ACTIVE_ONLY.
-  * SLEEP/WAKE_ONLY requests are not sent to the controller at
-  * this time. Use rpmh_flush() to send them to the controller.
-  */
--static int __rpmh_write(const struct device *dev, enum rpmh_state state,
-+static int __rpmh_write(const struct udevice *dev, enum rpmh_state state,
- 			struct rpmh_request *rpm_msg)
- {
- 	struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
--	int ret = -EINVAL;
--	struct cache_req *req;
--	int i;
- 
--	/* Cache the request in our store and link the payload */
--	for (i = 0; i < rpm_msg->msg.num_cmds; i++) {
--		req = cache_rpm_request(ctrlr, state, &rpm_msg->msg.cmds[i]);
--		if (IS_ERR(req))
--			return PTR_ERR(req);
-+	if (state != RPMH_ACTIVE_ONLY_STATE) {
-+		log_err("only ACTIVE_ONLY state supported\n");
-+		return -EINVAL;
- 	}
- 
--	if (state == RPMH_ACTIVE_ONLY_STATE) {
--		ret = rpmh_rsc_send_data(ctrlr_to_drv(ctrlr), &rpm_msg->msg);
--	} else {
--		/* Clean up our call by spoofing tx_done */
--		ret = 0;
--		rpmh_tx_done(&rpm_msg->msg);
--	}
--
--	return ret;
-+	return rpmh_rsc_send_data(ctrlr_to_drv(ctrlr), &rpm_msg->msg);
- }
- 
- static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
--		const struct tcs_cmd *cmd, u32 n)
-+			   const struct tcs_cmd *cmd, u32 n)
- {
- 	if (!cmd || !n || n > MAX_RPMH_PAYLOAD)
- 		return -EINVAL;
- 
-@@ -87,8 +77,10 @@ static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
- 	req->msg.state = state;
- 	req->msg.cmds = req->cmd;
- 	req->msg.num_cmds = n;
- 
-+	debug("rpmh_msg: %d, %d cmds [first %#x/%#x]\n", state, n, cmd->addr, cmd->data);
++if SOC_QCOM
 +
- 	return 0;
- }
- 
- /**
-@@ -100,24 +92,19 @@ static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
-  * @n: The number of elements in @cmd
-  *
-  * May sleep. Do not call from atomic contexts.
-  */
--int rpmh_write(const struct device *dev, enum rpmh_state state,
-+int rpmh_write(const struct udevice *dev, enum rpmh_state state,
- 	       const struct tcs_cmd *cmd, u32 n)
- {
--	DECLARE_COMPLETION_ONSTACK(compl);
--	DEFINE_RPMH_MSG_ONSTACK(dev, state, &compl, rpm_msg);
-+	DEFINE_RPMH_MSG_ONSTACK(dev, state, rpm_msg);
- 	int ret;
- 
- 	ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n);
- 	if (ret)
- 		return ret;
- 
- 	ret = __rpmh_write(dev, state, &rpm_msg);
--	if (ret)
--		return ret;
- 
--	ret = wait_for_completion_timeout(&compl, RPMH_TIMEOUT_MS);
--	WARN_ON(!ret);
--	return (ret > 0) ? 0 : -ETIMEDOUT;
-+	return ret;
- }
- EXPORT_SYMBOL_GPL(rpmh_write);
-diff --git a/include/soc/qcom/rpmh.h b/include/soc/qcom/rpmh.h
-index 9a5c5d992e04..3421fbf1ee3e 100644
---- a/include/soc/qcom/rpmh.h
-+++ b/include/soc/qcom/rpmh.h
-@@ -5,14 +5,14 @@
- 
- #ifndef __SOC_QCOM_RPMH_H__
- #define __SOC_QCOM_RPMH_H__
- 
-+#include <dm/device-internal.h>
- #include <soc/qcom/tcs.h>
--#include <linux/platform_device.h>
- 
- 
- #if IS_ENABLED(CONFIG_QCOM_RPMH)
--int rpmh_write(const struct device *dev, enum rpmh_state state,
-+int rpmh_write(const struct udevice *dev, enum rpmh_state state,
- 	       const struct tcs_cmd *cmd, u32 n);
- 
- #else
- 
++config QCOM_COMMAND_DB
++	bool "Qualcomm Command DB"
++	help
++	  Command DB queries shared memory by key string for shared system
++	  resources. Platform drivers that require to set state of a shared
++	  resource on a RPM-hardened platform must use this database to get
++	  SoC specific identifier and information for the shared resources.
++
++config QCOM_RPMH
++	bool "Qualcomm RPMh support"
++	depends on QCOM_COMMAND_DB
++	help
++	  Say y here to support the Qualcomm RPMh (resource peripheral manager)
++	  if you need to control regulators on Qualcomm platforms, say y here.
++
++endif # SOC_QCOM
+diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
+new file mode 100644
+index 000000000000..78fae8bbfa16
+--- /dev/null
++++ b/drivers/soc/qcom/Makefile
+@@ -0,0 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-$(CONFIG_QCOM_COMMAND_DB) += cmd-db.o
++obj-$(CONFIG_QCOM_RPMH) += rpmh-rsc.o rpmh.o
 
 -- 
 2.45.2
