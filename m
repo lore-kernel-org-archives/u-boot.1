@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E31D4C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:15:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07C2C3DA5E
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:15:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28076888BE;
+	by phobos.denx.de (Postfix) with ESMTP id 85FE8888D2;
 	Mon, 15 Jul 2024 12:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RLS1lt+t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AzVOTdzA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4967D887FD; Mon, 15 Jul 2024 12:14:08 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id AF497888C9; Mon, 15 Jul 2024 12:14:08 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2B7C888AB
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:14:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB0D888868
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:14:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-426717a2d12so23990895e9.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:14:05 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42679f33fefso27107095e9.2
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:14:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721038445; x=1721643245; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721038446; x=1721643246; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lB5ZDOkOkf+2KgWtXcMf2gZCEiYVoz42wYTaKJLZS1M=;
- b=RLS1lt+t3XA9GF9NUqmdZbtZ6y4aLZIPsJADb8uGlgS9b1QPs1e7Me6EHQg5CK++3O
- 1Wnxv6EvvUJ5Zc+5t8AfAjZCDh9tN44bleEwwJQJg+vuw31WOKJ3qsULIOgSir06qP5A
- HGFVzdjiRaApsWks2pEnNJTkUzM4YULlPMMzk=
+ bh=jV0y5SQVxrvtj2Cw8kmlXS/bUDW/pHBiDgLs4UYsUrE=;
+ b=AzVOTdzAJ/CYuIHvAH6TtdihrtJi6RXAm10pzlMAlspZ5nMe0gxRETopFw1CyxJcsX
+ FJqNiqEhdIX6oD3FS4TwTtNw/AEJ12wp8p1HKX05F9O1u9HBKZujnoxdQct3y/oS2FWN
+ yrnWaQDBMce7Xrn63RAf9xi9PqQhzWZPKeVsk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721038445; x=1721643245;
+ d=1e100.net; s=20230601; t=1721038446; x=1721643246;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lB5ZDOkOkf+2KgWtXcMf2gZCEiYVoz42wYTaKJLZS1M=;
- b=PxYRB1J9AuWCh2wiB+zUg9LHTSkGkQ5YiSBa4mUH6xwXXIWca13857cRYJ1BPHIg77
- rBb6hbk3j8VV8f8JR4zp1p/2RhuUTLgDxUuOSnFat5RGfEgGziF5AS2qlmca9zTvWepQ
- zRRDtJifjRdmS0ITsvJHUcCy9cJqiY3wi/Aip1lPjzYa1ik3baJBHOBgX40UP/xBbKDm
- BcW9tUjTW7DO/73D6bfUQa3rg8Ffmp8b0IdBPmqUJcxIiT/ZRDn3SgYLfbv0GTGwMLnI
- 9i3CeRYvCWymfrgcS7zmAQ6UnAi4AMDACh9ZALa7XP3qfsoLmNtX9nN9CpLZ1d281sho
- NLWg==
-X-Gm-Message-State: AOJu0YwSZSeL43SZO9B3TTs3Nnrw17yzHA/f529GdFmax6koVWVg9qS3
- rg0xJ8jnI2j6oMsmyahvy9erAncjqv5EL7+Oj0G8vPPZ9E+6qH3rH5JM/YbLAclaI7lMeEgoprk
+ bh=jV0y5SQVxrvtj2Cw8kmlXS/bUDW/pHBiDgLs4UYsUrE=;
+ b=Qj3Orhr1MU6H69314aqaqvKMv+A2YtG5mqMQHsloHBt7MAh+L3jnvuirZRK0mWgfAj
+ JYhMuHCVEFotIH3Ilwa//48V+uHGlg6TR0c0+omkJWqYKerEoFx9HRMijWtD1ajQ9dea
+ fq7k5cRd+whfvyATheerHFfBlz8ozCfrXXsf2i/mKZfBh4jPy3tyrMrtOlLVQrkrSSgr
+ f4T4sEtlTPFkkFOxQ9E1JHcE/HDh4+4UTtftzirBsUc5Za4YgQoFR7QhXy6dtkDOURsY
+ BmJB2gzOLGSwP2NYoAYF+JpSFtSi/UvyUa04ny8CRVUkHJBBxMYI1vwJa671XNRmt7Sy
+ Uaeg==
+X-Gm-Message-State: AOJu0YzZs+93gMyMRajE22+91QFljTJVxm3yjDpJhZ9mJ/JdFYMCotdH
+ SaEmPkkO76w4KbQ44g6bR1VeD5gWgrfnU6ChL7paYNsJC9fH70MmZiFknbjjrioZBYnBASYxQe8
  =
-X-Google-Smtp-Source: AGHT+IEWNwnsLDbkCXvm3a7jA5eEnWt1nG7RLMOxMIhriQBXtjaskj3Fb8PzmsYNfnEl6SzGKwjq7w==
-X-Received: by 2002:a05:600c:4f49:b0:424:aa83:ef27 with SMTP id
- 5b1f17b1804b1-4279d9f289emr92196315e9.1.1721038445327; 
- Mon, 15 Jul 2024 03:14:05 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHqebFjmlk0NWijoB1bass1l01vHTBMODp42xCy17LF3El1W6hB6IkYFYBMzXXpvemtHlutMA==
+X-Received: by 2002:a05:600c:524f:b0:427:9dad:8063 with SMTP id
+ 5b1f17b1804b1-4279dad8478mr65183855e9.12.1721038446101; 
+ Mon, 15 Jul 2024 03:14:06 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.14.04
+ 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.14.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 15 Jul 2024 03:14:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH 07/13] doc: Add a description for bootmeth_sandbox
-Date: Mon, 15 Jul 2024 11:13:48 +0100
-Message-Id: <20240715101354.97895-8-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>, John Clark <inindev@gmail.com>,
+ Shantur Rathore <i@shantur.com>, Stefan Roese <sr@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH 08/13] bootstd: Tidy up comments on the boothmeth drivers
+Date: Mon, 15 Jul 2024 11:13:49 +0100
+Message-Id: <20240715101354.97895-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240715101354.97895-1-sjg@chromium.org>
 References: <20240715101354.97895-1-sjg@chromium.org>
@@ -91,79 +95,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the sandbox bootmeth.
-
-Fix up the compatible string to drop the 'extlinux' part, which is not
-relevant to this bootmeth.
+Fix a typo in the comment and add one to the EFI driver too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootmeth_sandbox.c          |  2 +-
- doc/develop/bootstd/index.rst    |  1 +
- doc/develop/bootstd/overview.rst |  1 +
- doc/develop/bootstd/sandbox.rst  | 18 ++++++++++++++++++
- 4 files changed, 21 insertions(+), 1 deletion(-)
- create mode 100644 doc/develop/bootstd/sandbox.rst
+ boot/bootmeth_efi.c      | 1 +
+ boot/bootmeth_extlinux.c | 2 +-
+ boot/bootmeth_script.c   | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/boot/bootmeth_sandbox.c b/boot/bootmeth_sandbox.c
-index 0bc8f688e30..26c713bb5f3 100644
---- a/boot/bootmeth_sandbox.c
-+++ b/boot/bootmeth_sandbox.c
-@@ -55,7 +55,7 @@ static struct bootmeth_ops sandbox_bootmeth_ops = {
- };
- 
- static const struct udevice_id sandbox_bootmeth_ids[] = {
--	{ .compatible = "u-boot,sandbox-extlinux" },
-+	{ .compatible = "u-boot,sandbox-bootmeth" },
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index 5a4c125835a..56a6e47f5b2 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -394,6 +394,7 @@ static const struct udevice_id distro_efi_bootmeth_ids[] = {
  	{ }
  };
  
-diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
-index 69fd3c2d2eb..2c5d2d3fade 100644
---- a/doc/develop/bootstd/index.rst
-+++ b/doc/develop/bootstd/index.rst
-@@ -11,3 +11,4 @@ Standard Boot
-    pxelinux
-    qfw
-    cros
-+   sandbox
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index f12e93236a7..58acaa4d3ce 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -420,6 +420,7 @@ Bootmeth drivers are provided for:
-    - :doc:`ChromiumOS <cros>` ChromiumOS boot from a disk
-    - EFI boot using boot manager
-    - :doc:`QFW <qfw>`: QEMU firmware interface
-+   - :doc:`sandbox <sandbox>` used only for testing
++/* Put a number before 'efi' to provide a default ordering */
+ U_BOOT_DRIVER(bootmeth_4efi) = {
+ 	.name		= "bootmeth_efi",
+ 	.id		= UCLASS_BOOTMETH,
+diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+index 9b55686948f..fbb05ef928e 100644
+--- a/boot/bootmeth_extlinux.c
++++ b/boot/bootmeth_extlinux.c
+@@ -183,7 +183,7 @@ static const struct udevice_id extlinux_bootmeth_ids[] = {
+ 	{ }
+ };
  
+-/* Put an number before 'extlinux' to provide a default ordering */
++/* Put a number before 'extlinux' to provide a default ordering */
+ U_BOOT_DRIVER(bootmeth_1extlinux) = {
+ 	.name		= "bootmeth_extlinux",
+ 	.id		= UCLASS_BOOTMETH,
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index 0e05d28d4d9..24da47c7259 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -250,7 +250,7 @@ static const struct udevice_id script_bootmeth_ids[] = {
+ 	{ }
+ };
  
- Command interface
-diff --git a/doc/develop/bootstd/sandbox.rst b/doc/develop/bootstd/sandbox.rst
-new file mode 100644
-index 00000000000..508f0fd5baa
---- /dev/null
-+++ b/doc/develop/bootstd/sandbox.rst
-@@ -0,0 +1,18 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+Sandbox Bootmeth
-+================
-+
-+The sandbox bootmeth is only used for testing. It does not provide any facility
-+for booting an OS. While sandbox can do all the processing before the actual
-+boot, it is not connected in this bootmeth.
-+
-+When invoked on a bootdev, this bootmeth pretends to find a bootflow and creates
-+the associated structure.
-+
-+When the bootflow is booted, the bootmeth returns -EENOTSUPP indicating that it
-+is not supported.
-+
-+The compatible string "u-boot,sandbox-bootmeth" is used for the driver. The
-+driver is automatically instantiated if there are no bootmeth drivers in the
-+devicetree.
+-/* Put an number before 'script' to provide a default ordering */
++/* Put a number before 'script' to provide a default ordering */
+ U_BOOT_DRIVER(bootmeth_2script) = {
+ 	.name		= "bootmeth_script",
+ 	.id		= UCLASS_BOOTMETH,
 -- 
 2.34.1
 
