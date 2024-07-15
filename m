@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9805FC3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 22:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A38C7C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 22:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C19D488765;
-	Tue, 16 Jul 2024 00:30:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF17888266;
+	Tue, 16 Jul 2024 00:42:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OuZoyTpk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QF8han8y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09FF5887E6; Tue, 16 Jul 2024 00:30:29 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 9C66588908; Tue, 16 Jul 2024 00:42:45 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAE3F886F5
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:30:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B1C587FC8
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:42:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1721082623; x=1721687423; i=xypron.glpk@gmx.de;
- bh=ysOLR2/KOEXTjo4lZ7oe+Km3VF0mgUV/wW2lclq9m0M=;
+ s=s31663417; t=1721083359; x=1721688159; i=xypron.glpk@gmx.de;
+ bh=HXYOH8nAyIsYmEIp8mBKNebrg8tZ9sCUVXsK+zrXUsY=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=OuZoyTpksycoApwMy1Qhp3+IZgoRS2hUfB5lfLONYnVmro7SIG8npFYzZ0w6DZnN
- 2KAZkJ0W38xZYgvXcLGcfIkAimj9ZWmDF7lbtcdVJ86alyoUK1AWrJKhrL693aBTS
- 2QGAtfa/3tHiQxnSTsj+wSNCp47gNvxHYjZh+0vFcsfdvB1KiFuTK3s2oc6VOC1H+
- b5t89ratmjHougCYpSAwjyqOCXe67QEH9Uwo5kF2qN4cNxy1sGHVxj3vxvnpdsUIK
- mLMqG8avxPq/5eaxyFOuIfnM03DUmi4LeOQqf00CbK/SYkRgNBW4NdwoKUB/m5JkC
- UMhzv0MetUv/U7CHMA==
+ b=QF8han8y1x32hTlM/l2lImodXMoKQyWMPh1Trfyer5D0F6rw8lh2rQwL4DQny9PH
+ mrbDM+Cgw+ovVyJiSGNnxYfU3C+PM1QDNWOEvKqbLvd7secBA9mwz8w6OHCXhTIVU
+ FLNHHSsnWxQybVex+N9py0ALeHYs2KR1cLs0pKoPxrJoK+fZNhl/QhOAFnrf2cuyZ
+ /SawLTUS8e1o6sY9fMWPcVJz8tiR+O7gJpjSJAm11q5J+hRk9cdyz2n6sU5Ko8j5t
+ wa17iY3VNSteQkkiK1MgSwrW4CvzmPQm9FZydrYhi+ixX/UDUy+UKMeYjRRDIEsdk
+ DscuGf755p5ymXO7jw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MkYXs-1s4Zm51L9q-00dQej; Tue, 16
- Jul 2024 00:30:23 +0200
-Message-ID: <b89a7250-3453-4580-8ee6-eddfe83ad10a@gmx.de>
-Date: Tue, 16 Jul 2024 00:30:32 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M42jK-1sTUP10o0u-009I94; Tue, 16
+ Jul 2024 00:42:39 +0200
+Message-ID: <846128e4-2833-43e6-8af9-9f57d9025475@gmx.de>
+Date: Tue, 16 Jul 2024 00:42:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/13] doc: Add a description for bootmeth_extlinux
+Subject: Re: [PATCH 04/13] doc: Add a description for bootmeth_pxe
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -55,29 +55,29 @@ Cc: Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20240715101354.97895-1-sjg@chromium.org>
- <20240715101354.97895-4-sjg@chromium.org>
+ <20240715101354.97895-5-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240715101354.97895-4-sjg@chromium.org>
+In-Reply-To: <20240715101354.97895-5-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:V7EhriTKtYkRVOPo8aJdnmjxMGUZdz5kDLKxRJHQWcQOKVhfCa3
- gYNu2uV+XpSntkUJUiCJpRqzytyYu1gBKBnJiIfmaSytfh1oP0xX0amRdmcpsgsGaRkY0zC
- yAt/tcz/4p64bPKwCoH7UkNpVGuqHwa6TugpP20B+kSic4QRxa8eUeR6lvbmQbtIjBD43kO
- 0kWohqu0HYWB4NCrAiKsQ==
-UI-OutboundReport: notjunk:1;M01:P0:yvYyJhwIcyE=;w38fmzNnKI8q3fB6jMPD2rZcA2d
- sVA1UODla7Rku/M6y37LWeWA4XPl+wBo6sBbvyYsQx17VaBnN4fTmB25q3HRvawMsNPWZey0Q
- lOjLU7OPy7eJj7ZL0Ppc7XJo7mBUvrGeg2ALqoGI//iEmst8DtkXJq5BUxO52dNYL20wfwI09
- wFlLjn2/v/cBHcG7X/J10rQt2oXxBzPg3DuYZd6OEOtKCjSSjsWTr9Iy2aHuZGqW7vgwOEE3H
- XdA83mBo+zl+tEr8NcWLbn4tZm4ZIVRKMyvHi3bTJ9WRrgEFQR0G3YKzh5ZHoniHL5/dqplMA
- DsbQHxxNirAb0WiBq89qH9WOiGKtA954Lo4zbhgMOHfi+OBzMNauHKgCf+7bAUJll2zagrgfn
- 9yz6lU5MfOaR5ucdRNOpG7Mk1xC8Ja5V6G54ufYhGRt6R78ovI3j4OfApMGoyjMxFlxuFxoVp
- mQ71mRayH+rdHTWMrKk04zzbs7pR79d6QUa85C8Z8/f+sE4KPJezjg8ZkFBH2JZS0Je4V+QOb
- gDT+KsQLsQJcIAZhD91ZAqxb3nPVWLPUQrSMp4K1gaH8++YccGBcOZY+h0MXHmfyZK4ICsLi3
- 0CrkKBkfn14JndsXyyNODne/PRm+FEiN3aYf6ja3vLpVsSuGL4xh9Ud3WcsA2dbXaWr+kGQG/
- FgosxbjPY0r3MUDJGpko9sM8YwvC4FmcYszjJ3VFV1ASS6mI4d8HXWUvfPgfP/y6slm1T266t
- YugY9vbCAtNXY4xtCo3B3iafL86Acs+Mb9G0qhBGr+oKpwq+EqYXGBtQT0CNVBheHa+x8TB5R
- jkJvz68I382mqlQ2FURXWSvA==
+X-Provags-ID: V03:K1:CNqnaQnRdRnHZtyuyKyE9zlx/8JbsIppMActkRBWebhjYaF/l2I
+ KIGeZe9/5XvlzV+U0eDjGCFHwrkBdUd0IH3xlCGPNpaOFqEcvumfauBcbGV1rIIeHh67e/k
+ wmt42SmfV9hZAHtICk66Br07E/IcIHMIvkIZZJLEJ7YCbbCo4yVpxJ3LrMOFGaQiJSRbVuL
+ FuLlh2egPeaTc4mPSVL8g==
+UI-OutboundReport: notjunk:1;M01:P0:F/269QX6+CY=;WcTTGHjcFXwenq0bCIsQQrIgu/Q
+ LnkAy/qhPa1D5ZVTrDOb2T+lECKAzGOkwenxcCJYBDMS3WYsWgUugtx2d6HaBk9iqVyxocCNx
+ gMkB9u86GEFNa2ZYEZm4d9PSDkZZb/FmClRd2Hxb9J5787Pz24A56PnqXYlC9erlguuo/gDid
+ XEeI3koyMlPVVJ3qORhCGchXf7MmeZ3QzVMPb+EIn5VKllFHko8Cx/sZThREMVqIUH/qJhNKY
+ O7KfMHSsj7U47fdszsmh5GDvla+VLrf43q8M7K4/vzAUf88/wJCdZHOD5G6BCJtOLY9wHNX8H
+ LLnm7wZAnEZmxzxethBoAHZuKKdGyeHS1cQBXjUEAtKh6N4pRTnQMMVgYrcJWMSboLuxB2Cdt
+ fF6MxJpkFIs9eCIgUcMVLEuxUYsHtBwpPYJa+BfqGuWrf7YeFbERA/SbNcHfPATSxWGouZjjM
+ /yhQnpA1Emm5l6ZsfX9XgJQat5ghO3Mx/XF4ucwTif51RdzEHngHjXYS3HX9gGasQl4+ELK/S
+ Y7CZfnhvlUdklslsh4d3n5D3/N2CewS1JmdwYJgpZcGoZ7Ycw3Shc4rv33afuuY1qxCL0ASzy
+ RqrLWdgQbZ/cBCkjztTOkhJfoQ1Tfen5h3yaF0J0/FyLjq7vQLSFPOFq67aiTqeQV81D36RLf
+ RX3RplMdn2pdqQId2g/T8FOd+GKm1Zb31j5Q/GG6BPbrqcVQKtRgK+z03CQwGEe+ynPVJrLzm
+ WD2A28glCBk08EOOCrjkQwGp/SbOzFdWioQeM8LsiQ2MG6o4O+lBynaStEx4giLa2tbjGMg5+
+ RG39X6vCJH8n9yirD/pBGQ8w==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,75 +95,100 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/15/24 12:13, Simon Glass wrote:
-> Add documentation for the extlinux bootmeth.
+> Add documentation for the pxe bootmeth.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->   doc/develop/bootstd/extlinux.rst | 27 +++++++++++++++++++++++++++
 >   doc/develop/bootstd/index.rst    |  1 +
 >   doc/develop/bootstd/overview.rst |  2 +-
+>   doc/develop/bootstd/pxelinux.rst | 27 +++++++++++++++++++++++++++
 >   3 files changed, 29 insertions(+), 1 deletion(-)
->   create mode 100644 doc/develop/bootstd/extlinux.rst
+>   create mode 100644 doc/develop/bootstd/pxelinux.rst
 >
-> diff --git a/doc/develop/bootstd/extlinux.rst b/doc/develop/bootstd/extl=
+> diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.r=
+st
+> index 5bbb3d633a3..5052afe448f 100644
+> --- a/doc/develop/bootstd/index.rst
+> +++ b/doc/develop/bootstd/index.rst
+> @@ -8,3 +8,4 @@ Standard Boot
+>
+>      overview
+>      extlinux
+> +   pxelinux
+> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/over=
+view.rst
+> index 086a0b1281d..fd0692daf0d 100644
+> --- a/doc/develop/bootstd/overview.rst
+> +++ b/doc/develop/bootstd/overview.rst
+> @@ -413,7 +413,7 @@ Available bootmeth drivers
+>   Bootmeth drivers are provided for:
+>
+>      - :doc:`extlinux / syslinux <extlinux>` boot from a disk
+> -   - extlinux boot from a network (PXE)
+> +   - :doc:`extlinux / syslinux <extlinux>` boot from a network (PXE)
+>      - U-Boot scripts from disk, network or SPI flash
+>      - EFI boot using bootefi from disk
+>      - VBE
+> diff --git a/doc/develop/bootstd/pxelinux.rst b/doc/develop/bootstd/pxel=
 inux.rst
 > new file mode 100644
-> index 00000000000..28490f38899
+> index 00000000000..08ba67e09c5
 > --- /dev/null
-> +++ b/doc/develop/bootstd/extlinux.rst
+> +++ b/doc/develop/bootstd/pxelinux.rst
 > @@ -0,0 +1,27 @@
 > +.. SPDX-License-Identifier: GPL-2.0+:
 > +
-> +Extlinux Bootmeth
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +PXE Bootmeth
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 > +
-> +`Extlinux <https://uapi-group.org/specifications/specs/boot_loader_spec=
-ification>`_
-> +(sometimes called syslinux) allows U-Boot to provide a menu of possible
+> +PXE (Preboot eXecution-Environment) provides a way to boot an Operating=
+ System
 
-%s/possible/available/
+%s/Operating System/operating system/
 
-> +Operating Systems from which the user can choose.
+> +over a network interface. The PXE bootmeth supports PXELINUX and allows=
+ U-Boot to
 
-%s/Operating Systems/operating systems/
+%s/bootmeth/boot method/
 
-> +
-> +U-Boot includes a parser for the `extlinux.conf` file. It consists prim=
-arily of
-> +a list of named OSes along with the kernel, initial ramdisk and other s=
-ettings.
+> +provide a menu of possible Operating Systems from which the user can ch=
+oose.
 
-Please, avoid abbreviations.
-
-%s/OSes/operating systems/
-
-> +The file is stored in the `extlinux/` subdirectory, possibly under the =
-`boot/`
-> +subdirectory. This list of prefixes ({"/", "/boot"} by default) can be =
-selected
-> +with the `filename-prefixes` property in the bootstd device.
-
-%s/bootstd/boot standard/
+PXELINUX is a binary. Does U-Boot really provide a menu when the
+PXELINUX binary is downloaded and executed?
 
 > +
-> +Note that PXE (Preboot eXecution-Environment) uses the same file format=
-, but in
-> +a network context.
+> +U-Boot includes a parser for the `extlinux.conf` file described
+> +`here <https://uapi-group.org/specifications/specs/boot_loader_specific=
+ation>`_.
+> +It consists primarily of a list of named OSes along with the kernel, in=
+itial
+> +ramdisk and other settings. The file is retrieved from a network server=
+ using
+> +tftpboot.
+
+Does this paragraph relate to PXELINUX?
+
+tftpboot is a command and not a protocol. Shouldn't boot methods work
+when the command line interface is disabled? I guess you want to replace
+
+%s/tftpboot/the TFTP protocol/
+
 > +
 > +When invoked on a bootdev, this bootmeth searches for the file and crea=
 tes a
 
-Please, replace throughout the text:
-
 %s/bootdev/boot device/
 %s/bootmeth/boot method/
 
+> +bootflow if found. See
 
-> +bootflow if found.
+%s/bootflow/boot flow/
 
-%s/bootflow/bootflow/
-
+> +`PXELINUX <https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX>`_=
+ for
+> +a full description of the search procedure.
 > +
 > +When the bootflow is booted, the bootmeth calls pxe_setup_ctx() to set =
 up the
@@ -171,58 +196,21 @@ up the
 nts, this
 > +may boot an OS or provide a list of options to the user, perhaps with a=
  timeout.
-
-%/OS/operating system/
-
 > +
-> +The compatible string "u-boot,extlinux" is used for the driver. The dri=
-ver is
-> +automatically instantiated if there are no bootmeth drivers in the devi=
-cetree.
+> +The compatible string "u-boot,extlinux-pxe" is used for the driver. The=
+ driver
+> +is automatically instantiated if there are no bootmeth drivers in the
+> +devicetree.
 
-Device-tree never contain boot method drivers. Do you mean:
+Device-trees contain compatible strings for drivers, not the drivers
+themselves.
 
-If no boot method driver is selected by a compatible string in the
-device-tree and CONFIG_BOOTMETH_EXTLINUX=3Dy, the extlinux boot method
-driver is enabled by default.
+If every configured boot method is enabled if there is no compatible
+string for boot methods in the device-tree, why don't we mention this in
+the overview instead of repeating ourselves?
 
-Please, mention that the driver is only available if
-CONFIG_BOOTMETH_EXTLINUX=3Dy.
-
-> diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.r=
-st
-> index f4f87c7787c..5bbb3d633a3 100644
-> --- a/doc/develop/bootstd/index.rst
-> +++ b/doc/develop/bootstd/index.rst
-> @@ -7,3 +7,4 @@ Standard Boot
->      :maxdepth: 2
->
->      overview
-> +   extlinux
-> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/over=
-view.rst
-> index 761f61a573b..086a0b1281d 100644
-> --- a/doc/develop/bootstd/overview.rst
-> +++ b/doc/develop/bootstd/overview.rst
-> @@ -412,7 +412,7 @@ Available bootmeth drivers
->
->   Bootmeth drivers are provided for:
-
-%s/Bootmeth/Boot method/
-
->
-> -   - extlinux / syslinux boot from a disk
- > +   - :doc:`extlinux / syslinux <extlinux>` boot from a disk
-
-After "provided for:" I would expect "booting from a storage device".
-
-You can't use the infinitive here. The days of disks are counted.
+Please, mention the relevant configuration option.
 
 Best regards
 
 Heinrich
-
->      - extlinux boot from a network (PXE)
->      - U-Boot scripts from disk, network or SPI flash
->      - EFI boot using bootefi from disk
-
