@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F9CC3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D9ECC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5667E87D87;
-	Mon, 15 Jul 2024 11:27:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0662F887EB;
+	Mon, 15 Jul 2024 11:29:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AYYVmiuM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M3qqKkFy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08B6F87C7E; Mon, 15 Jul 2024 11:27:36 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 262F1887F5; Mon, 15 Jul 2024 11:29:46 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C77DC87D87
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:27:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E941F87D87
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:29:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2ec61eeed8eso53079141fa.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:27:32 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a77af4cd570so249086266b.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:29:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721035652; x=1721640452; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721035783; x=1721640583; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jh8KetcihlGCpSS8ond8DYwz3gvhdtz6QCA6YNwaV/w=;
- b=AYYVmiuMX51aMklf/fbZMOIUCZUWwlABEmP/evM+BL1QATrQeyChdDSS3nBmZVL70X
- 3Ru3Uon3o5gQJCDZlN6hyYAY0GnvKTJqoWlFlE6ocgSj8F5wUgd50lULqAxcjiyeQvs3
- RVxv4nUdNVJUf8a7J+9qv97042iMV8qiX/9MoF8IDrtlAXOlCi+Yk97EBkUnWB/cLH2B
- WGrnBfVh66gYtV06HZUdw17UfyCplnrPjkxAfTjQIYWJ7Ao98VIt+gIOofB5IeXYP/Wq
- rfj8i2ApWiz1snh0JlzCVUvlgQC+hh71/Hv1NNbTdhYW3L8Ob98PqMiXTa24umFpv+c3
- 5nyQ==
+ bh=OHS6xIC5mx8U73/H1j753eTvXdbNxLjYqSLPBZVCGRs=;
+ b=M3qqKkFyTJ0M6YHuRv/jzGrFUALshWV/RcEFbCaYaXDxmgSy3LPLI8snti1j/pbCn/
+ oQuszokbLh0T5AC+lsDn4aFS514ESwPrVANsZa6aif1ByRG4kjz40m5oncQknfY+wekP
+ aaGgayC2AVycp+oe+mmq5/s+6nWueOzK9bFD7L+irc62X3pfn/yiDvFsAbUvCIh4p9A6
+ BBV6WM6sPc/rQ0D+tW+tKoyed5uIvo/BxyNtWeFfRTmmgG/W8ot54225oP2gTG8jT+wc
+ jUcPRwVCe0vNbfKWBjvdcAwY6CwfgSvTdXnVaVhjCLq62zwWo3L2DiKNSMA8kFCsoXgf
+ 8qlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721035652; x=1721640452;
+ d=1e100.net; s=20230601; t=1721035783; x=1721640583;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jh8KetcihlGCpSS8ond8DYwz3gvhdtz6QCA6YNwaV/w=;
- b=xHwDQfRWwZn7tjFs9YkgaNXX1fS2JPTUved7R9uyvziO5QOe7EN5Vrn5VcAcnUbrs7
- 0areM2luODI4KPRJztRlcimc94KH2tdWxM0OqsjTXBd9BdIxgMHHv3AJ0axbcZNXjAlt
- QaEBRsblXhnHHKEzSffXRtkF75LzRut18lakDLWtmDjqTIhFTZD0G7QR04zAVmvmA4m0
- EIMp6lWybsGC7aDeMrrWtuwZ/dlOyPP8LXeQ6e23+awiUict3mIM+mivWZjXby4EiD/b
- Xq5AFfDGq/hyFx86M2TUqR7xHNsIX2vV1YQnoCBSpYaewE8hQAcc7SIuXrY5Re9ACH/V
- JwQw==
-X-Gm-Message-State: AOJu0YytaGnYcj+TS4HwE1e75LFm0RXbLYrJVauSAgmguXd6UkFbATHl
- nJJJcCKbXWLJUyL/DCHiO9rEqoyodaAw5jph0xgm0RqOe8ZcH6hge6J88pR/QcVd/yhwn9idWQM
- hw1G57ZCXBuyya1vznjKueHG+XwS6KZRixSVmdQ==
-X-Google-Smtp-Source: AGHT+IHpg8RPQM2oibdkwF8ELoQepF59ERDwq529etxk15fhZBUv7O7n82IRNpY+5Ti5TenNifvqG9prKDcsp1OR/c0=
-X-Received: by 2002:a2e:a4d8:0:b0:2ee:92ea:8d0a with SMTP id
- 38308e7fff4ca-2eeb3102734mr107105901fa.23.1721035651994; Mon, 15 Jul 2024
- 02:27:31 -0700 (PDT)
+ bh=OHS6xIC5mx8U73/H1j753eTvXdbNxLjYqSLPBZVCGRs=;
+ b=Is7PyMjWXTeqByIIjXfqCm/6VkMAzj2KEvcnDjUV6pqk103tMo/p29MHQCvvpIQG+q
+ y/yMrI1GBsr6VtHL+WixgXU6ooWJgLMcU68iCwJeYFkCYReTYVfSrvVTBVnQ+KJ06QuX
+ fsTIPPzedfoPRW1nv2MdiVJ3QMetY7H9rNzZdh2QjtYdt5t9rS/BjZndgfcQEmPOfda0
+ j47ojbb/Hx+zw+tQ6te2tmQG+ijBQhN6sQKOn3tvyNrOTn8/alU9nf4iXxpzQVUcHPwQ
+ M0E6opVSqvtCrnoEMTOJn9TIQYj5Nx91AQKXAOHuoaBFAX97NfWSsMjRqCQP9ENQeeUw
+ tqcQ==
+X-Gm-Message-State: AOJu0YwTwCorYQunn3JqoGfNJIOiOgdVjB+vqobIKa4610I4GDjMGER+
+ ZjdspJEHGOM+8Kmr0QVUPX3xbI/5Oa1UgcHRxh4jQZc6FfLO/eCdLA4f+prJ7IzVXlx2aAGFf1D
+ lEMbM9ArjfeP8ucjCivUVtVrS0uxl9Fr+WQ4djA==
+X-Google-Smtp-Source: AGHT+IFfYHabqyNbRqBtMWxB/QbI1zhf2e5KRqLzBzmxrMcZCqm7O7XheFTWd6Etv4zWF3XQR2lIv/sibe8XlYpRFvI=
+X-Received: by 2002:aa7:d0d5:0:b0:58e:2f7c:a9c with SMTP id
+ 4fb4d7f45d1cf-594bc7cab19mr13330372a12.26.1721035783339; Mon, 15 Jul 2024
+ 02:29:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-13-sughosh.ganu@linaro.org>
- <CAFLszTgp4GQydJY611gTOBnUk+Ce6o4vkVqNKtgcwKVzW9X6WQ@mail.gmail.com>
-In-Reply-To: <CAFLszTgp4GQydJY611gTOBnUk+Ce6o4vkVqNKtgcwKVzW9X6WQ@mail.gmail.com>
+ <20240704073544.670249-11-sughosh.ganu@linaro.org>
+ <CAFLszTgR4SbhdpT-jNgR+XUNu4B3bH4ijTapOw5w1q2fxfxGMQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgR4SbhdpT-jNgR+XUNu4B3bH4ijTapOw5w1q2fxfxGMQ@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 15 Jul 2024 14:57:20 +0530
-Message-ID: <CADg8p94u_CYkek8tnPGtM8JOAn4QjMh5oLKCqvhRdj0M=H8GDA@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 12/48] lmb: allow for resizing lmb regions
+Date: Mon, 15 Jul 2024 14:59:32 +0530
+Message-ID: <CADg8p97zTQGddF-=xc20VHMaMnFP6iWYSRLK4vxoKsmNsn5x1w@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 10/48] lmb: remove local instances of the lmb
+ structure variable
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -99,203 +100,61 @@ On Sat, 13 Jul 2024 at 20:45, Simon Glass <sjg@chromium.org> wrote:
 >
 > On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Allow for resizing of LMB regions if the region attributes match. The
-> > current code returns a failure status on detecting an overlapping
-> > address. This worked up until now since the LMB calls were not
-> > persistent and global -- the LMB memory map was specific and private
-> > to a given caller of the LMB API's.
-> >
-> > With the change in the LMB code to make the LMB reservations
-> > persistent, there needs to be a check on whether the memory region can
-> > be resized, and then do it if so. To distinguish between memory that
-> > cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
-> > of memory with this attribute would indicate that the region cannot be
-> > resized.
+> > With the move of the LMB structure to a persistent state, there is no
+> > need to declare the variable locally, and pass it as part of the LMB
+> > API's. Remove all local variable instances and change the API's
+> > correspondingly.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> > Changes since V1:
-> > * Do the check for the region flags in lmb_resize_regions() and
-> >   lmb_merge_overlap_regions() to decide on merging the overlapping
-> >   regions.
+> > Changes since V1: None
 > >
-> >  include/lmb.h |   1 +
-> >  lib/lmb.c     | 116 ++++++++++++++++++++++++++++++++++++++++++++------
-> >  2 files changed, 103 insertions(+), 14 deletions(-)
-> >
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index 069c6af2a3..99fcf5781f 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -20,6 +20,7 @@
-> >  enum lmb_flags {
-> >         LMB_NONE                = 0x0,
-> >         LMB_NOMAP               = 0x4,
-> > +       LMB_NOOVERWRITE         = 0x8,
+> >  arch/arc/lib/cache.c                 |   4 +-
+> >  arch/arm/lib/stack.c                 |   4 +-
+> >  arch/arm/mach-apple/board.c          |  17 ++-
+> >  arch/arm/mach-snapdragon/board.c     |  17 ++-
+> >  arch/arm/mach-stm32mp/dram_init.c    |   7 +-
+> >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
+> >  arch/m68k/lib/bootm.c                |   7 +-
+> >  arch/microblaze/lib/bootm.c          |   4 +-
+> >  arch/mips/lib/bootm.c                |   9 +-
+> >  arch/nios2/lib/bootm.c               |   4 +-
+> >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
+> >  arch/powerpc/include/asm/mp.h        |   4 +-
+> >  arch/powerpc/lib/bootm.c             |  14 +-
+> >  arch/riscv/lib/bootm.c               |   4 +-
+> >  arch/sh/lib/bootm.c                  |   4 +-
+> >  arch/x86/lib/bootm.c                 |   4 +-
+> >  arch/xtensa/lib/bootm.c              |   4 +-
+> >  board/xilinx/common/board.c          |   7 +-
+> >  boot/bootm.c                         |  26 ++--
+> >  boot/bootm_os.c                      |   5 +-
+> >  boot/image-board.c                   |  32 ++---
+> >  boot/image-fdt.c                     |  29 ++---
+> >  cmd/bdinfo.c                         |   6 +-
+> >  cmd/booti.c                          |   2 +-
+> >  cmd/bootz.c                          |   2 +-
+> >  cmd/load.c                           |   7 +-
+> >  drivers/iommu/apple_dart.c           |   7 +-
+> >  drivers/iommu/sandbox_iommu.c        |  15 +--
+> >  fs/fs.c                              |   7 +-
+> >  include/image.h                      |  22 +---
+> >  include/lmb.h                        |  39 +++---
+> >  lib/lmb.c                            |  81 ++++++------
+> >  net/tftp.c                           |   5 +-
+> >  net/wget.c                           |   5 +-
+> >  test/cmd/bdinfo.c                    |   2 +-
+> >  test/lib/lmb.c                       | 187 +++++++++++++--------------
+> >  36 files changed, 270 insertions(+), 333 deletions(-)
 >
-> How about LMB_PERSIST ?
+> From this commit until 'test: bdinfo: dump the global LMB memory map'
+> ,snow breaks.
 
-Isn't LMB_NOOVERWRITE more suitable here ? I mean this is indicating
-that the said region of memory is not to be re-used/re-requested.
-
->
-> These could be adjusted to use BIT()
-
-I am changing these to use the BIT macro in a subsequent commit.
-
->
-> >  };
-> >
-> >  /**
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 0d01e58a46..80945e3cae 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -230,12 +230,88 @@ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
-> >         lmb_reserve_common(fdt_blob);
-> >  }
-> >
-> > +static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
->
-> At some point the index should change to an int (or uint), rather than
-> unsigned long. I had a series that did that, but it died.
->
-> > +                                  enum lmb_flags flags)
-> > +{
-> > +       return rgn->region[r1].flags == flags;
-> > +}
-> > +
-> > +static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
-> > +                                     phys_addr_t base, phys_size_t size,
-> > +                                     enum lmb_flags flags)
-> > +{
-> > +       phys_size_t rgnsize;
-> > +       unsigned long rgn_cnt, idx;
-> > +       phys_addr_t rgnbase, rgnend;
-> > +       phys_addr_t mergebase, mergeend;
-> > +
-> > +       rgn_cnt = 0;
-> > +       idx = i;
-> > +       /*
-> > +        * First thing to do is to identify how many regions does
-> > +        * the requested region overlap.
->
-> how many regions the requested region overlaps
-
-Okay
-
->
-> > +        * If the flags match, combine all these overlapping
-> > +        * regions into a single region, and remove the merged
-> > +        * regions.
-> > +        */
-> > +       while (idx < rgn->cnt - 1) {
-> > +               rgnbase = rgn->region[idx].base;
-> > +               rgnsize = rgn->region[idx].size;
-> > +
-> > +               if (lmb_addrs_overlap(base, size, rgnbase,
-> > +                                     rgnsize)) {
-> > +                       if (!lmb_region_flags_match(rgn, idx, flags))
-> > +                               return -1;
-> > +                       rgn_cnt++;
-> > +                       idx++;
-> > +               }
-> > +       }
-> > +
-> > +       /* The merged region's base and size */
-> > +       rgnbase = rgn->region[i].base;
-> > +       mergebase = min(base, rgnbase);
-> > +       rgnend = rgn->region[idx].base + rgn->region[idx].size;
-> > +       mergeend = max(rgnend, (base + size));
-> > +
-> > +       rgn->region[i].base = mergebase;
-> > +       rgn->region[i].size = mergeend - mergebase;
-> > +
-> > +       /* Now remove the merged regions */
-> > +       while (--rgn_cnt)
-> > +               lmb_remove_region(rgn, i + 1);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
-> > +                              phys_addr_t base, phys_size_t size,
-> > +                              enum lmb_flags flags)
-> > +{
-> > +       long ret = 0;
-> > +       phys_addr_t rgnend;
-> > +
-> > +       if (i == rgn->cnt - 1 ||
-> > +               base + size < rgn->region[i + 1].base) {
-> > +               if (!lmb_region_flags_match(rgn, i, flags))
-> > +                       return -1;
-> > +
-> > +               rgnend = rgn->region[i].base + rgn->region[i].size;
-> > +               rgn->region[i].base = min(base, rgn->region[i].base);
-> > +               rgnend = max(base + size, rgnend);
-> > +               rgn->region[i].size = rgnend - rgn->region[i].base;
-> > +       } else {
-> > +               ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
-> > +       }
-> > +
-> > +       return ret;
-> > +}
-> > +
-> >  /* This routine called with relocation disabled. */
-> >  static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> >                                  phys_size_t size, enum lmb_flags flags)
->
-> This could really use a function comment
-
-Okay
+Okay, I am making certain changes to the patches to see that the
+patches are bisectable. I will check that on snow as well.
 
 -sughosh
 
->
-> >  {
-> >         unsigned long coalesced = 0;
-> > -       long adjacent, i;
-> > +       long ret, i;
-> >
-> >         if (rgn->cnt == 0) {
-> >                 rgn->region[0].base = base;
-> > @@ -260,23 +336,28 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> >                                 return -1; /* regions with new flags */
-> >                 }
-> >
-> > -               adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> > -               if (adjacent > 0) {
-> > +               ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> > +               if (ret > 0) {
-> >                         if (flags != rgnflags)
-> >                                 break;
-> >                         rgn->region[i].base -= size;
-> >                         rgn->region[i].size += size;
-> >                         coalesced++;
-> >                         break;
-> > -               } else if (adjacent < 0) {
-> > +               } else if (ret < 0) {
-> >                         if (flags != rgnflags)
-> >                                 break;
-> >                         rgn->region[i].size += size;
-> >                         coalesced++;
-> >                         break;
-> >                 } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> > -                       /* regions overlap */
-> > -                       return -1;
-> > +                       ret = lmb_resize_regions(rgn, i, base, size,
-> > +                                                flags);
-> > +                       if (ret < 0)
-> > +                               return -1;
-> > +
-> > +                       coalesced++;
-> > +                       break;
-> >                 }
-> >         }
-> >
-> > @@ -418,7 +499,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
-> >  }
-> >
 >
 > Regards,
 > Simon
