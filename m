@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9337C3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73701C3DA4B
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9AD588924;
-	Mon, 15 Jul 2024 15:31:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C6C78893B;
+	Mon, 15 Jul 2024 15:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="STKWIgYa";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L4sDRMPe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C16A88927; Mon, 15 Jul 2024 15:31:56 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 8F508888EA; Mon, 15 Jul 2024 15:31:56 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FAD188827
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34A258892E
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5ce74defe42so834087eaf.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:53 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6b772455ab4so7780566d6.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721050312; x=1721655112; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721050313; x=1721655113; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lxSLh3QDR0CGFSCMnVXFLeeRX5IO+NVVCfPkliJMSzk=;
- b=STKWIgYab7dRFr72uqBBbGB9epPjQWUI9YoWkIUi+yRUlkuoH2hQM46Zoc8ZSIqmej
- 438bvxj2TCJMiFKDyppoYa5JHJi6k9PiI0L335mpZVil8IOaF8vClgAYZvDBxxSYycAv
- 1LATwpcGiFC6ChekEu2qHH8AzQyFEhL4/0bCA=
+ bh=YwPJAAJwRHDi4/J43zCM4znCpkNwgSTn5XHwOBxD/0Y=;
+ b=L4sDRMPe/WQcJ2ku3Xv8l//cixYXqxnoUshu4oDvYACvcCTdXUSC2jmmLOmcA1mu3y
+ +a0sqRyBZavgUWdTQtrbqPdMJHrr7FFT0cFfrZaaKKyeN5VaexjURp52dpNLXyZx+EVd
+ UIrn+AR5OyzM3ejq+l/zTkclJwEr6ZMoxLZ7o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721050312; x=1721655112;
+ d=1e100.net; s=20230601; t=1721050313; x=1721655113;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lxSLh3QDR0CGFSCMnVXFLeeRX5IO+NVVCfPkliJMSzk=;
- b=RmyBda/OoLosyLgKCQFHtgVc4TtIa9MojbWzbTJbKhrGY0v8TmSvke0eMMRu0HsP/d
- /bU8Bw4ZpYlDfLwhmkWmisKgmHHjEcOb1Bl3+h1pd9Im8gmevYIoQxh6pGyQAE+ji//F
- vzk+qiHyzRSP2NQvMAl7yTkA9pgbvJZxdLh+EK+EHqwl9nSTPkXUSYofOBD/pwvLtSEF
- kF6X2GaV+5HWcjK9+vIwwBZsgkuxDgVLzCzox3RTv0/dC4wwizKx81rAWUb7eK+q7gLF
- OllsFu86qvW0VUt3E9Ist0wX1bp4ZKzyzcsGb5wut3/OnF3Au7JWrczKT2N0MN1Nyg3j
- rl0g==
-X-Gm-Message-State: AOJu0YzA2I+ZrNyiBcTtQ3U1ii1nIk7wqc6LiOE+OwzvPy0ADvt3G8TG
- dUMAyXeXNB0wATuudJB84gb6Bn3qwpXqkseIoZjJ0oCsqC5E75N8hD0KXoaH+NEahOT2zfoQTxG
- W+r2gGOsxCTiw6Cb2ghwvqhZ8mT62HX4gcz81
-X-Google-Smtp-Source: AGHT+IEbx/f2RCmB6GfsuBYlxKWtvgZYY4w8J/tVIMR7lYxTUH50et83+WeAc6ZCjq4Cgl5Q3sXo6zQ2haLVn6Gmvys=
-X-Received: by 2002:a05:6820:1e04:b0:5c2:2033:db1a with SMTP id
- 006d021491bc7-5cce6d5453dmr9255791eaf.4.1721050312202; Mon, 15 Jul 2024
- 06:31:52 -0700 (PDT)
+ bh=YwPJAAJwRHDi4/J43zCM4znCpkNwgSTn5XHwOBxD/0Y=;
+ b=ialJrzmKJJP11Ax/9mqDOb3YRIeF/io6dP2gnqjHeKUkzX5gAbAYsTUC8GbrMaC5il
+ btK7/42Gv/ApkPIaDVHqREkLdskR602+clsPsCYVGhvyB7gPmr/xuZ6T/el9MbXIQFVy
+ gP0xLsvKnAYiozr7oDnhc3RNQPn2SKToFRYXzXSY0CzCdOkwzCsLRVmWGVm6bBk2PAfT
+ vhUKOGEVqxUVD99iyCJBGehgeKgU4u3CZjj2Wu2O5c7KaaLGv+YHXgC5Ip6NHdRtY7bw
+ sT4F7XXlL/JY6qIlCuP0VKGlXJb8Q+oLCAh/SvILsBGG5WXoDqGXahLKJXNy/+9vh9J3
+ LSqw==
+X-Gm-Message-State: AOJu0YxaY60n3xhm41EPoo3Uon66a3asH1hqnb9zujUjTykhpSPMSEOc
+ hPslNUNIzbJ9njcqmJlnIn+4BUWrWDIdc4H/b3VfDNje+L3IHVBVxqoIKg6mMoytVmq44UcNe6L
+ JSacvb0zOqcVwdCijob0EH825ZhHsKvcczs+9
+X-Google-Smtp-Source: AGHT+IGrsUO2v1OEEe+a3N3isRzYBan2e9gWaIT69dLtK6OhhRvjeAYZW3cB2tgtLPooviCpzl9Kpn2WZ8Rqsobi4W4=
+X-Received: by 2002:a05:6214:ca6:b0:6b5:1584:62bf with SMTP id
+ 6a1803df08f44-6b754b6bf06mr171162996d6.6.1721050313121; Mon, 15 Jul 2024
+ 06:31:53 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 15 Jul 2024 06:31:51 -0700
+ HTTPREST; Mon, 15 Jul 2024 06:31:52 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <BN0P110MB167322053D93D4F977CF9061EBF9A@BN0P110MB1673.NAMP110.PROD.OUTLOOK.COM>
-References: <BN0P110MB167322053D93D4F977CF9061EBF9A@BN0P110MB1673.NAMP110.PROD.OUTLOOK.COM>
+In-Reply-To: <CAFLszTg-z4TgQ1Y9hjsOhGsKczJ_A9_0j4Cm73e69Bvnu1jZKA@mail.gmail.com>
+References: <CAFLszTg-z4TgQ1Y9hjsOhGsKczJ_A9_0j4Cm73e69Bvnu1jZKA@mail.gmail.com>
  <20240604161607.1133032-1-brandon.maier@collins.com>
- <20240604161607.1133032-2-brandon.maier@collins.com>
- <CAFLszTi1G44DPY8rMH_+sPkmSOfotxGSEJM=ec64VQzCr2==Bg@mail.gmail.com>
-Date: Mon, 15 Jul 2024 06:31:51 -0700
-X-Google-Sender-Auth: tIh--nWphEmJ1V9NEkHuAQRLvYI
-Message-ID: <CAFLszThs1wvaqWcDq3WMmJKcbW=_NKYtpJ=y+5cLw4fQwiLWwQ@mail.gmail.com>
-Subject: Re: RE: [External] Re: [PATCH 2/3] tools: binman: fix deprecated
- Python ConfigParser methods
-To: "Maier, Brandon L Collins" <Brandon.Maier@collins.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>
+Date: Mon, 15 Jul 2024 06:31:52 -0700
+X-Google-Sender-Auth: 0NVireR2c75m_bN_qkNEi89e2_Y
+Message-ID: <CAFLszTj_T76VULtZF=pfXE9ZCnuJKuCXd9DCth5nhMmm_8gr0Q@mail.gmail.com>
+Subject: Re: [PATCH 1/3] tools: binman: fix deprecated Python unittest methods
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Brandon Maier <brandon.maier@collins.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,44 +86,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Tue, 4 Jun 2024 at 10:16, Brandon Maier <brandon.maier@collins.com> wrote:
+>
+> The methods `unittest.assertEquals()` and
+> `unittest.assertRegexpMatches()` are marked deprecated[1].
+>
+> In Python 3.12 these aliases have been removed, so do a sed to replace
+> them with their new names.
+>
+> [1] https://docs.python.org/3.11/library/unittest.html#deprecated-aliases
+>
+> Signed-off-by: Brandon Maier <brandon.maier@collins.com>
+> CC: Simon Glass <sjg@chromium.org>
+> CC: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> ---
+>  tools/binman/entry_test.py  |  6 +--
+>  tools/binman/fdt_test.py    | 48 ++++++++++++------------
+>  tools/binman/ftest.py       | 42 ++++++++++-----------
+>  tools/buildman/func_test.py | 74 ++++++++++++++++++-------------------
+>  tools/buildman/test.py      |  2 +-
+>  5 files changed, 86 insertions(+), 86 deletions(-)
 
-> -----Original Message-----
-> From: Simon Glass <sjg@chromium.org>
-> Sent: Tuesday, June 4, 2024 9:14 PM
-> To: Maier, Brandon L Collins <Brandon.Maier@collins.com>
-> Cc: u-boot@lists.denx.de
-> Subject: [External] Re: [PATCH 2/3] tools: binman: fix deprecated Python
-> ConfigParser methods
->
-> Hi Brandon,
->
-> On Tue, 4 Jun 2024 at 10:16, Brandon Maier <brandon.maier@collins.com>
-> wrote:
-> >
-> > The method `ConfigParser.readfp()` is marked deprecated[1].
-> >
-> > In Python 3.12 this method have been removed, so replace it with
-> > `ConfigParser.read_file()`.
-> >
-> > [1]
-> https://docs.python.org/3.11/library/configparser.html#configparser.ConfigParser.read_file
-> > Signed-off-by: Brandon Maier <brandon.maier@collins.com>
-> > CC: Simon Glass <sjg@chromium.org>
-> > ---
-> >  tools/buildman/bsettings.py | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Does this still work in earlier Pythons?
-
-The Python docs say ConfigParser.read_file() was added in Python 3.2.
-The tools/buildman/pyproject.toml says `requires-python = ">=3.7"` so
-I assume this is fine.
-
->
-> Regards,
-> Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot-dm, thanks!
