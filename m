@@ -4,77 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93299C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:31:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9FE0C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:36:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9DFE87D87;
-	Mon, 15 Jul 2024 11:31:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 190BE87D87;
+	Mon, 15 Jul 2024 11:36:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=testtoast.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TWL94slE";
+	dkim=pass (2048-bit key; unprotected) header.d=testtoast.com header.i=@testtoast.com header.b="t2Mlm74X";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="SQsrvkwa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9C6286BF1; Mon, 15 Jul 2024 11:31:47 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 81DB6886CC; Mon, 15 Jul 2024 11:36:14 +0200 (CEST)
+Received: from fhigh4-smtp.messagingengine.com
+ (fhigh4-smtp.messagingengine.com [103.168.172.155])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ED3A87D87
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:31:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F34986BF1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:36:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=testtoast.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-58b447c511eso5040908a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:31:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721035905; x=1721640705; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OAsqEtAuXCMVb3p+k7l92XxJcUMIEKV/du/dp43mJrc=;
- b=TWL94slEwSCHy1UXOxZ+LkePe5fZDjkO/Qa+vbHYyzwKKT2jpvGVSX0UhoNtgGPiEQ
- jYGemBO/xFpmg/aEdOhmfRvqtd3xjTqUOGmmkbqUc+LO2F/z88VB0N22bccOJ5XWycdj
- WYu9sx1Wixug6LvMaBgjneC7Twfc72fZYMONlwi6GThOMGh24LppS3l1QsXW4uvB09ll
- Yy/dqJfJ6+JRUpubNns2io7gFv5ExBcJ7b1yXzMnWl+575lTcDehsIyvIky9skIIZxEV
- ySv951o8DdL34FC6lHCTNre+RrnsjIgTj8gqKUhOsPjgHtdz35YC2Xrz3skjfrGuS9KY
- XYSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721035905; x=1721640705;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OAsqEtAuXCMVb3p+k7l92XxJcUMIEKV/du/dp43mJrc=;
- b=iOA1iKH5hak5YJUB1B0ap52gG55KpF6zVXcEVeeJFRDkHHOehZaC0Dec4Ad2JJFkhY
- GP5Xj4Bz9nTjOYW8gCkZVGhVLEUfh+MmyKnhKf0EaRm6emd8eGXVwznLCaBHWiZm660M
- FM6PA2o8rFF+iPD4MKV+AsQ1Urk0JpSXW7eaczoxKz/SUXAY7jxV11ohamyROR7EzBPI
- t0aBb1Vz2XNPw165Hy+YA5MgjWVaHO/koP0eaKjuEO+ze1DUDZufp8wozQvD35IiukOK
- rNMLjpNvAQKmKn3iMum0L83p+DQV6jIW2j2pY9bY0rODc1Lqv9OCCj2BkU3lyei4+xil
- o4Rg==
-X-Gm-Message-State: AOJu0YyvXtCsRIyCJzXASQ2PS9Y3Fmj4fXRBae3GhkefFdUoGo9QxelK
- LhphMQZ38Xrlrn4JACEv2RSpuvx59k+XSlg4tQFHiiRSyZU2Va5ka1Hj3q4seUlS8J1i5LU+Ytq
- qkuelpFtvqqtgY71WHTeluGTjXLV3vnMCGIrFoQ==
-X-Google-Smtp-Source: AGHT+IFS27SRfDh+PXzQD0C5asi4sfwzNUKn1tJnUl4y2OM/U2hzeSMhGz7goF6WeDrfJ9UAV/eHQkF7BgsDuHEZBnk=
-X-Received: by 2002:a05:6402:1286:b0:57d:4f47:d9ee with SMTP id
- 4fb4d7f45d1cf-594bc7c88e8mr12141730a12.31.1721035904891; Mon, 15 Jul 2024
- 02:31:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=ryan@testtoast.com
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 741881148132;
+ Mon, 15 Jul 2024 05:36:10 -0400 (EDT)
+Received: from imap47 ([10.202.2.97])
+ by compute5.internal (MEProxy); Mon, 15 Jul 2024 05:36:10 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=testtoast.com;
+ h=cc:cc:content-type:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=fm2; t=1721036170; x=
+ 1721122570; bh=AJqWanax9nsGiA3+G3Gx6nYHD45gfl1M3npGo9eZueA=; b=t
+ 2Mlm74XhOQ9pevDRw2TO8NQsk+SITGBQ9YIdtJCuH8h0eauKLamxEriXHNRTlAKE
+ T+2rNbU50sQ6W/01ufAiwvM71MYHSqdTMXHSL66Nyk+oEU1dT4V//N3AoUcXu7w8
+ Z6SZo8EdZY+tOZ7El/MAl/1e35E1EjKHBKEGTV+Z1TRmta2Idpr+cMOfnuDenKNc
+ bLF1906NYcy0f7uGmYEchBSGCY+ENf5vj5zFIiGd1HCGe8DQTp9zGmt3TE2cBt/G
+ +a7bD8W4CU+vyuRCvNgi6U1dJUQafdYP5Fo+/Fv31oAwj1dGxdegATyvbl/R+s5q
+ O6R8MmqUP3/3hqwRxcybQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1721036170; x=1721122570; bh=AJqWanax9nsGiA3+G3Gx6nYHD45g
+ fl1M3npGo9eZueA=; b=SQsrvkwa3llT8LyHAVAPhcDGUz+T9+9Xm6NxXPQmOLIk
+ 5pI1oIxPAQaAOHZyRxqugtd9NQ6zsiojr17/yB0wjYOckSTHdFIwPf8yqQYEuU14
+ Ggdb233WRhWoH1nSRuFl+R7oUAOI6A9sgkTnL/VAjfBI21X7Z5KFUq6NBJkKhKqz
+ OUsstwUBja5XlMzSgUPfg260n2MpUS64aBixwLCO644/2DdCLFrxAY8KrfTkRMFW
+ Z3RC9Qy+TStj6Qwk3AInVXeviY4pnZ5v9IjxYGoJsOLaL6wcQLcPeeuXBFlZORm8
+ mzb7FuxAE+OFJNucS8f7qxb9OcrWIJbQM6Q4ksqUSg==
+X-ME-Sender: <xms:ie2UZiSyhTx7xEuT-GrczxS7BnkXF6EBQfXaNQ76zn78HJuWCJXWxQ>
+ <xme:ie2UZnxNH5x00VRr4g8-N_8n09dbp4SAA6_lGfKgv4YAF0LTJwoIeFHvE0_DLXVh9
+ -7RdGFJXuiAmjkWCw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgedvgddukecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdfthigr
+ nhcuhggrlhhklhhinhdfuceorhihrghnsehtvghsthhtohgrshhtrdgtohhmqeenucggtf
+ frrghtthgvrhhnpeehvdevieegudejueefgeffhefhffevudfhieejgfdtffetlefgteeu
+ veeiudeijeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhroh
+ hmpehrhigrnhesthgvshhtthhorghsthdrtghomh
+X-ME-Proxy: <xmx:ie2UZv29oYYzhfAhQ2a2n4r1Yyvlui-Fop5yStbgS8l1YgArRXAF6Q>
+ <xmx:ie2UZuCernONcXNn9hZm9ZaYAMs0ysUgFluDSrkb1NZ1fRMUFuOIGg>
+ <xmx:ie2UZrip2haQ3PrpO_i10BtSLGksmyiBhhmGAtaUEF5dhprBt5Kj9w>
+ <xmx:ie2UZqovHLaQELgpnbPN9vLuIN5viWdXkukm_nz9AT2qHqLf4ZZVzQ>
+ <xmx:iu2UZqM3KdcuOvLvD4Bzaikk7QyF9bATNUpXyB4knEfimMSJzjvDrLqk>
+Feedback-ID: idc0145fc:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 36CDFA60078; Mon, 15 Jul 2024 05:36:09 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-568-g843fbadbe-fm-20240701.003-g843fbadb
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-10-sughosh.ganu@linaro.org>
- <CAFLszTiN1K4tazqaBBCS37VHVtJ0ise2RQC2AGaLKg1SMFj9JQ@mail.gmail.com>
-In-Reply-To: <CAFLszTiN1K4tazqaBBCS37VHVtJ0ise2RQC2AGaLKg1SMFj9JQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 15 Jul 2024 15:01:33 +0530
-Message-ID: <CADg8p974419Rqisf0qwH46FVobDYsxuLjnD5UV4kGRPcK7_vCg@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 09/48] lmb: remove call to lmb_init()
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Message-Id: <c11f219e-8260-4f81-a09a-31ec3136ca76@app.fastmail.com>
+In-Reply-To: <20240715003811.2892c08d@minigeek.lan>
+References: <20240712165352.3767166-1-andre.przywara@arm.com>
+ <20240712165352.3767166-5-andre.przywara@arm.com>
+ <f970326b-3763-4179-a6ca-fd30a27fc793@app.fastmail.com>
+ <20240715003811.2892c08d@minigeek.lan>
+Date: Mon, 15 Jul 2024 21:35:50 +1200
+From: "Ryan Walklin" <ryan@testtoast.com>
+To: "Andre Przywara" <andre.przywara@arm.com>
+Cc: "Tom Rini" <trini@konsulko.com>, "Jaehoon Chung" <jh80.chung@samsung.com>, 
+ "Jagan Teki" <jagan@amarulasolutions.com>,
+ "Jernej Skrabec" <jernej.skrabec@gmail.com>,
+ "Samuel Holland" <samuel@sholland.org>,
+ "Chris Morgan" <macromorgan@hotmail.com>,
+ "Philippe Simons" <simons.philippe@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v2 4/6] power: pmic: sunxi: add AXP717 SPL support
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,40 +111,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Simon,
-
-On Sat, 13 Jul 2024 at 20:45, Simon Glass <sjg@chromium.org> wrote:
+On Mon, 15 Jul 2024, at 11:38 AM, Andre Przywara wrote:
+> On Sun, 14 Jul 2024 20:20:44 +1200
+> "Ryan Walklin" <ryan@testtoast.com> wrote:
 >
-> kHi Sughosh,
+> Hi Ryan,
 >
-> On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > The LMB module will be changed to have persistent and global memory
-> > maps of available and used memory. With this change, there won't be
-> > any need to explicitly initialise the LMB memory maps. Remove the call
-> > to the lmb_init() function.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V1: New patch
-> >
-> >  arch/arm/mach-stm32mp/dram_init.c |  1 -
-> >  board/xilinx/common/board.c       |  1 -
-> >  drivers/iommu/apple_dart.c        |  1 -
-> >  drivers/iommu/sandbox_iommu.c     |  1 -
-> >  include/lmb.h                     |  1 -
-> >  lib/lmb.c                         | 18 ------------------
-> >  test/lib/lmb.c                    | 18 ------------------
-> >  7 files changed, 41 deletions(-)
->
-> I can't actually find the call to lmb_init(). Where is it?
+> I consider the fact that the AXP209 and the AXP717 use the same I2C
+> address a sheer coincidence, so would like to keep the code readable
+> and maintainable. This "IS_ENABLED(AXPyyy) return AXPyyy_I2C_ADDR"
+> patterns seems to be easy to understand and copy, IMHO. If you are
+> concerned about generated code size: this whole function is optimised
+> away, and is replaced with a single "mov w0, #0x34" assembly
+> instruction, just before the respective i2c function calls. This is due
+> to the fact that those "if" statements have compile-time constant
+> input, so the compiler knows the final result already, and just
+> replaces the function call with this constant load. That's a neat
+> feature of IS_ENABLED(), and a pattern we are exercising in U-Boot for
+> years, to keep the code both readable, but also minimal.
 
-Sorry, I do not understand this question. This patch removes the
-lmb_init() definition, as well as calls to the function from the rest
-of the files.
+I did wonder if the compiler might optimise this down to a single instruction, makes perfect sense in that case and agree regarding code clarity.
 
--sughosh
+In that case, and having also checked the DCDC voltage defaults are reasonable for known AXP717-integrating devices in the updated Kconfig:
 
->
-> Regards,
-> Simon
+Reviewed-by: Ryan Walklin <ryan@testtoast.com>
+
+Regards,
+
+Ryan
