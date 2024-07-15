@@ -4,49 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AACF8C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C85DC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 11:16:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F36CE887EB;
-	Mon, 15 Jul 2024 12:59:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8A3D4887EE;
+	Mon, 15 Jul 2024 13:16:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721041150;
-	bh=Ag0ekUi6RTMFjN2TmDYfHqALjBK2G5mE/S/OxXNaVgo=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=aNOmChwZhkyxlPUoxauDuq6POqCUu4NAOYxxhdEA3Zrc4DWnFYav7ALx6nxKi2GJR
-	 Wn9qoZaO5vH3Jb3mNImMJKKUeLcmh9LYPQE0Zm1lCA4s6MxlFRIBeEi50wTbvSk/A5
-	 faUgKUrPVznnIK4FMe2qh9I2gW+n7EZfOpfJF65ca/gvDKU2SRX69ZGt/Bhyko/af1
-	 jl/2hsKzq+TE9vt1lRTqSOQF+Yn3aBNnLdRScW1LLpD3U519MSeLqXVA/ZVuoWPcnL
-	 JfVDioD8+Cx/FF1czs6A1XBh53a18hD8HEP3WOS1sJCCUhN5Aat5wk9yhXCLxQ5+Yz
-	 IsFrjgxA/CyXQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EB091887EE; Mon, 15 Jul 2024 12:59:08 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0D1487F9F
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:59:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EDswm3/a";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AB70C887F3; Mon, 15 Jul 2024 13:16:00 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4WMzj42sCzz9sSd;
- Mon, 15 Jul 2024 12:59:04 +0200 (CEST)
-Message-ID: <412c7fd9-1495-447b-98c3-a0136950182c@denx.de>
-Date: Mon, 15 Jul 2024 12:59:03 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 1AB0D88747
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 13:15:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46FBFrTl009880;
+ Mon, 15 Jul 2024 06:15:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1721042153;
+ bh=4tI16KmbKvk70S9W7woozcdqssKDSz2AhxoW1UAMRIU=;
+ h=From:To:CC:Subject:Date;
+ b=EDswm3/alw0eJO7VBE9YxE/YTrv8FMQ+vEiDJI4Yinq08L5hBuX0Gj+7GjWQzrQQH
+ 1fUo7YSRizOmSw4U1DDVP5Ex/hkwSJrO79CwvwSQp7D5slbckXRFcnMRhyAUu5+/EL
+ AkHYd1bK6oO2XYff950pa6FjRQNCp4s6QFbh+7Hs=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46FBFrGg073107
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 15 Jul 2024 06:15:53 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
+ Jul 2024 06:15:53 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 15 Jul 2024 06:15:53 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46FBFoXR115688;
+ Mon, 15 Jul 2024 06:15:51 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>
+CC: <bb@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [RESEND PATCH] soc: ti: k3-socinfo: Add support for J721E SR2.0
+Date: Mon, 15 Jul 2024 16:45:50 +0530
+Message-ID: <20240715111550.543037-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,49 +78,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Add support for identifying J721E SR2.0
 
-please pull this small batch of Marvell related patches:
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+Resending as it was not sent to the mailing-list earlier, sorry for the
+spam.
 
-----------------------------------------------------------------
-- mvebu: Migrate to upstream DT for Synology DS116 (Armada 385) board (Tony)
-- mvebu: Enable bootstd and other modernization for Synology DS414 
-(Armada XP) board (Tony)
-----------------------------------------------------------------
+Boot logs:
+https://gist.github.com/nehamalcom/e5c3884961c3eb70464321aa4bfbcf78
 
-Here the Azure build, without any issues:
+ drivers/soc/soc_ti_k3.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=373&view=results
+diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
+index f948914d218..a3acca4d394 100644
+--- a/drivers/soc/soc_ti_k3.c
++++ b/drivers/soc/soc_ti_k3.c
+@@ -61,7 +61,7 @@ static const char *get_family_string(u32 idreg)
+ }
+ 
+ static char *j721e_rev_string_map[] = {
+-	"1.0", "1.1",
++	"1.0", "1.1", "2.0",
+ };
+ 
+ static char *typical_rev_string_map[] = {
+-- 
+2.34.1
 
-Thanks,
-Stefan
-
-The following changes since commit b182816c1fb436916661949213c543bf4d42250b:
-
-   turris_1x: Normalize Kconfig usage (2024-07-13 10:42:15 -0600)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
-
-for you to fetch changes up to 51d4eb8bbaf35d14d4e30b885863ae00fbc47258:
-
-   arm: mvebu: Enable bootstd and other modernization for Synology DS414 
-(Armada XP) board (2024-07-15 08:42:04 +0200)
-
-----------------------------------------------------------------
-Tony Dinh (2):
-       arm: dts: mvebu: Migrate to upstream DT for Synology DS116 
-(Armada 385) board
-       arm: mvebu: Enable bootstd and other modernization for Synology 
-DS414 (Armada XP) board
-
-  arch/arm/dts/Makefile                      |   1 -
-  arch/arm/dts/armada-385-synology-ds116.dts | 291 
------------------------------
-  board/Synology/ds414/ds414.c               |  14 +-
-  configs/ds116_defconfig                    |   3 +-
-  configs/ds414_defconfig                    |  19 +-
-  include/configs/ds414.h                    |  65 +++++--
-  6 files changed, 63 insertions(+), 330 deletions(-)
-  delete mode 100644 arch/arm/dts/armada-385-synology-ds116.dts
