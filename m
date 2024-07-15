@@ -4,55 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F754C2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 06:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F2BC3DA45
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 07:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCBFD885EE;
-	Mon, 15 Jul 2024 08:57:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 25F5988403;
+	Mon, 15 Jul 2024 09:03:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721026671;
-	bh=Oi7fHFwLlJ1juiF/1fPLWD7YSDLMuOC3btku/AvA+mY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SxyHbuUhtS3AvcdQKF0v7nCYv0iqaPLY7ZaH0lf5WBfeutHbhZWnpm1wlWvqeUlQD
-	 OPdO+EaJz99CBniDKDgRqElPjGYfpNWp3Zdbi2Gu6i+x6ger5c2QsbKEB7dtYfEQpL
-	 4qBSxxk+iM7/Ggzr4Pu7QN34EZwyMp7GFXFMJF21R7QyBG9uzambw6THeAJXUqIA3A
-	 yQeO+CBqzHHm6lDfNRaUvcpI44fDWzYo4i+QN4iIt//K1LXYz8KZ05MBlUdNLuzuWg
-	 ZIs4egqbJUewMAliUe7A5Kgku8JCvZ6wuSvzz4gq29Xwh6+GnSUVcPtp5RtZUPslMB
-	 8XkpsRu/9Hc7w==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="J/244MBI";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30AC188614; Mon, 15 Jul 2024 08:57:50 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id EAB1B885D7; Mon, 15 Jul 2024 09:03:54 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09357885D7
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 08:57:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D620D87EFA
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 09:03:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4WMtLd4nLNz9sSP;
- Mon, 15 Jul 2024 08:57:45 +0200 (CEST)
-Message-ID: <0586321e-b2b0-40f6-87cd-6da74b79fc40@denx.de>
-Date: Mon, 15 Jul 2024 08:57:44 +0200
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 0/2] a little RPi watchdog cleanup
-Content-Language: en-US
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
-References: <20240712090725.2093317-1-rasmus.villemoes@prevas.dk>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240712090725.2093317-1-rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1721027032;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fgpq2npGqeZU/3QbXSvacxxy6ji0Td0d4KVUEYJf2zo=;
+ b=J/244MBIo7D8alE/2qhTJCgHv0eurpCj+9D0tzrad4fo9b1OcxbFtvlXTq3/xQEQlUl3dZ
+ 3d6pxYgwsgVCfLBA3oFIFX9He/97oeSRa3xaYc29zQ297OokPm3UtCX2Pn93MWL4YPFySp
+ mll/7xzVYh9fEWtKGDBtSqkQ0T66z9t2wwFR5SWRDDxhUwkAv2nMEA0u7nMaYC1f3J1z0c
+ ewnoIVJonp/e17ursH34+MkneBYyV/wnpfP9PA6XT6pnKwIxFOlmDF8Pmy2yBjUUIgxUrW
+ rve0QRqnlqz6DUEK5qB2IHswBb5WFPZDafycNK8o4dos4TvXLyTZkAJVmWyr4Q==
+Date: Mon, 15 Jul 2024 09:03:50 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, Sumit Garg
+ <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH] dm: button: support remapping phone keys
+In-Reply-To: <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
+References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
+ <c8e6a53d96a89e54585bfe28a647f44f@manjaro.org>
+ <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
+Message-ID: <76f99e2dba4a83b36cc3db4ecc8a6fb1@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,37 +73,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-@Tom,
+Hello Caleb,
 
-I can't find these patches (and v1) in patchworks. Do you have an
-idea, why this is the case?
+On 2024-07-15 08:24, Caleb Connolly wrote:
+> On 14/07/2024 22:47, Dragan Simic wrote:
+>> On 2024-07-14 21:49, Caleb Connolly wrote:
+>>> We don't have audio support in U-Boot, but we do have boot menus. Add 
+>>> an
+>>> option to re-map the volume and power buttons to up/down/enter so 
+>>> that
+>>> in situations where these are the only available buttons (such as on
+>>> mobile phones) it's still possible to navigate menus built in U-Boot 
+>>> or
+>>> an external EFI app like GRUB or systemd-boot.
+>>> 
+>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>> ---
+>>> Cc: u-boot-qcom@groups.io
+>> 
+>> Very nice, thanks for this patch!  Looking good to me, with a few
+>> suggestions available below.  Anyway, please feel free to add:
+>> 
+>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+>> 
+>>> ---
+>>>  drivers/button/Kconfig         | 11 +++++++++++
+>>>  drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
+>>>  2 files changed, 32 insertions(+), 1 deletion(-)
+>>> 
+>>> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+>>> index 3918b05ae03e..6cae16fcc8bf 100644
+>>> --- a/drivers/button/Kconfig
+>>> +++ b/drivers/button/Kconfig
+>>> @@ -8,8 +8,19 @@ config BUTTON
+>>>        U-Boot provides a uclass API to implement this feature. Button 
+>>> drivers
+>>>        can provide access to board-specific buttons. Use of the 
+>>> device tree
+>>>        for configuration is encouraged.
+>>> 
+>>> +config BUTTON_REMAP_PHONE_KEYS
+>>> +    bool "Remap phone keys for navigation"
+>>> +    depends on BUTTON
+>>> +    help
+>>> +      Enable remapping of phone keys to navigation keys. This is 
+>>> useful for
+>>> +      devices with phone keys that are not used in U-Boot. The phone 
+>>> keys
+>>> +      are remapped to the following navigation keys:
+>>> +      - Volume up: Up
+>>> +      - Volume down: Down
+>>> +      - Power: Enter
+>>> +
+>> 
+>> Frankly, "phone keys" sounds a bit strange to me, maybe because there
+>> are also tablets that have the same style of reduced-set keys.  Thus,
+>> I'd suggest that the following language is used:
+>> 
+>> - "BUTTON_REMAP_PHONE_KEYS" instead of "BUTTON_REMAP_REDUCED_KEYS"
+>> - "reduced smartphone-style keys" instead of "phone keys"
+> 
+> I would have assumed that anyone working on a tablet would immediately
+> guess what this option does and that it might be useful given the
+> name. I would argue that seeing "BUTTON_REMAP_REDUCED_KEYS" instead
+> makes it harder to guess what this option does.
+> 
+> I think of it not as "this option remaps the keys on your phone" but
+> as "this option remaps the keys that phones have", as in, the volume
+> and power buttons.
+> 
+> If you'd prefer, maybe we can meet somewhere in the middle with 
+> "mobile"?
+> 
+> how's BUTTON_REMAP_MOBILE_KEYS?
 
-Thanks,
-Stefan
+Hmm, if I had to choose between BUTTON_REMAP_PHONE_KEYS and
+BUTTON_REMAP_MOBILE_KEYS, I'd still choose BUTTON_REMAP_PHONE_KEYS.
+As you're against BUTTON_REMAP_REDUCED_KEYS, for which you provided
+valid arguments, I'm still fine with your original word choice.
 
-On 7/12/24 11:07, Rasmus Villemoes wrote:
-> Two related leftovers I found while looking at remaining
-> hw_watchdog/CONFIG_HW_WATCHDOG items.
-> 
-> v2: Add Stefan's R-bs. Trim commit log in patch 1. No code changes.
-> 
-> CI: https://dev.azure.com/u-boot/u-boot/_build/results?buildId=8910&view=results
-> 
-> I'm pretty sure the only failures are the false positive 'cyclic ...' ones.
-> 
-> Rasmus Villemoes (2):
->    arm: bcm283x: remove unused empty hw_watchdog_disable
->    board: rpi: remove leftover CONFIG_HW_WATCHDOG block
-> 
->   arch/arm/mach-bcm283x/reset.c | 7 ++-----
->   board/raspberrypi/rpi/rpi.c   | 4 ----
->   2 files changed, 2 insertions(+), 9 deletions(-)
-> 
+In other words, there are no reasons for the word choice to hold
+this nice patch back from becoming accepted.
 
-Viele Grüße,
-Stefan Roese
+>> Using "reduced" would also allow us to have this remapping logic more
+>> easily extended to also cover some other buttons found on some other
+>> devices with reduced-set keys.
+> 
+> If such a device exists and gains support in U-Boot, the switch/case
+> could be extended, or a new option added if it doesn't make sense to
+> lump everything together. Without knowing about such a device I think
+> it's impossible to make a judgement here.
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+I see, but I just tried to make it a bit more future-proof by using
+more general terms.  However, as I already wrote above, I'm fine with
+keeping the patch in its original form.
+
+>>>  config BUTTON_ADC
+>>>      bool "Button adc"
+>>>      depends on BUTTON
+>>>      depends on ADC
+>>> diff --git a/drivers/button/button-uclass.c 
+>>> b/drivers/button/button-uclass.c
+>>> index cda243389df3..729983d58701 100644
+>>> --- a/drivers/button/button-uclass.c
+>>> +++ b/drivers/button/button-uclass.c
+>>> @@ -9,8 +9,9 @@
+>>> 
+>>>  #include <button.h>
+>>>  #include <dm.h>
+>>>  #include <dm/uclass-internal.h>
+>>> +#include <dt-bindings/input/linux-event-codes.h>
+>>> 
+>>>  int button_get_by_label(const char *label, struct udevice **devp)
+>>>  {
+>>>      struct udevice *dev;
+>>> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct 
+>>> udevice *dev)
+>>> 
+>>>      return ops->get_state(dev);
+>>>  }
+>>> 
+>>> +static int button_remap_phone_keys(int code)
+>> 
+>> Pretty much the same suggestion as above applies here.
+>> 
+>>> +{
+>>> +    switch (code) {
+>>> +    case KEY_VOLUMEUP:
+>>> +        return KEY_UP;
+>>> +    case KEY_VOLUMEDOWN:
+>>> +        return KEY_DOWN;
+>>> +    case KEY_POWER:
+>>> +        return KEY_ENTER;
+>>> +    default:
+>>> +        return code;
+>>> +    }
+>>> +}
+>>> +
+>>>  int button_get_code(struct udevice *dev)
+>>>  {
+>>>      struct button_ops *ops = button_get_ops(dev);
+>>> +    int code;
+>>> 
+>>>      if (!ops->get_code)
+>>>          return -ENOSYS;
+>>> 
+>>> -    return ops->get_code(dev);
+>>> +    code = ops->get_code(dev);
+>>> +    if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
+>>> +        return button_remap_phone_keys(code);
+>>> +    else
+>>> +        return code;
+>>>  }
+>>> 
+>>>  UCLASS_DRIVER(button) = {
+>>>      .id        = UCLASS_BUTTON,
