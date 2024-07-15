@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97775C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 11:39:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F398AC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 11:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECE7D88835;
-	Mon, 15 Jul 2024 13:39:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 61FE588845;
+	Mon, 15 Jul 2024 13:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CC4Zmnix";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kWKIoVGw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0868D8882C; Mon, 15 Jul 2024 13:39:43 +0200 (CEST)
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
- [IPv6:2607:f8b0:4864:20::a36])
+ id 67571887FA; Mon, 15 Jul 2024 13:39:43 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 803E4887FA
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 13:39:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5091088806
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 13:39:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-4f2f31a9410so1574942e0c.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 04:39:40 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-65cd720cee2so37771877b3.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 04:39:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721043579; x=1721648379; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721043580; x=1721648380; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=26XzJ0PYeZ2z2nJwrANa11Fgb/nqiGXBzn/iwax/d80=;
- b=CC4ZmnixjiaxTzCHIlBZfW/cHGuP0iLa6qXt7Qa6b8rypuHWvdJUqEl2rQGgAkMWKn
- yjIh7EsW0CAcxqTPzlOtXgfmZgoS2C0sJ9G/RqZIK8lypJTsrZwNYfIKdU/l4dtVN7bx
- tkUI06q/Xc49+dBynPq0wT+zu7Wd61enRAbrM=
+ bh=vctDLNdpamhMNY/fJ255v7aYl4wcd6d0PWjDid+wdQI=;
+ b=kWKIoVGw3Azbg7KFUgpMBjPyJ/QpmpSuDc4veGvPgvKos/PkbZNaMBII851pra2Ahc
+ OkmQZ0iOfa17Xj/JSSZqgyO4jNX8DIGzI03eLQMkcd1FaiG4UvK2zU7jjN6SziC1dPAm
+ S6bSjxS6zZx3cZKdpVgHwSUUTriTZQy3eG+6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721043579; x=1721648379;
+ d=1e100.net; s=20230601; t=1721043580; x=1721648380;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=26XzJ0PYeZ2z2nJwrANa11Fgb/nqiGXBzn/iwax/d80=;
- b=W4MaSUfGBMFEM1Q/mfcmo7mo9jnHDuiyYRyBY0QvRoXBVWgEBw9a3yZcXISjDkSb/w
- I5BVJxGtClKtvn+pBjwALHpmodA0teRtdnMNRPOcS7wI6fxQkwWAqyGqKFn9d2uVJ19t
- YmBtJS0ePonAdwBmoXiVYbDrQJvCLLzeOoZPylhVMjlTr2x6Aq81yrJ/wSe3h4Ju//bD
- h42XMA2BpVBTBPJ/aiejXhlyOJ089rHUxVJdx1+nHxY32xVbaZxaWtXj8Plpq0BTriM1
- kmeRt4P8X0we30YAxKqFTlbzTPoI2ad7kSZEfcvDeMOXF3pNHm38PrZpJP522V/BeIAb
- SVww==
+ bh=vctDLNdpamhMNY/fJ255v7aYl4wcd6d0PWjDid+wdQI=;
+ b=PIn/rLuUu3kZO+Z0m9axESl9rsBKJIqg7IblAhCoTh+BRLPGZbo+XOZnJ4sXjtyWNr
+ Py+hHCIKaUhB39tfTUHCZvzUNzTLU6oe8k9w7oEkiQWZfXvWVnlq4rZ3HAWsdYFtqZSz
+ Hv1/cRv4GqKrmf3xjmuIxfCyk7oGsZIXols/JWPsvaNg6cGGNnxR/Eth/bTb+CJWkrwb
+ WL/KO9eaK5S+5SWXZBfIjIIQbP3e/1pJxPHs5R5rp1bhFtE4+36lBcCETKls3ymz/qtR
+ qyokw9zD9EoVhHQcKInbHsX4RKuoR/82u4qBJVJGzOyx4tQWB6I0VsOmNsd41uBwFT4i
+ lUUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpv1lTGH77Zsx5vDlmYTT+NKuHH7uC/ICYzXyWi2XvljbqUxWzsje8TZFILiynOX5UiZk/D8iynz12k2DH8pffuqPOUg==
-X-Gm-Message-State: AOJu0YyuF6s0ZlLjkFLt+J28uA9Ds9ozWLfbuP0gICn5I9KSc86ZKsiF
- Fq19uYEGtWPUwxi5ZdR9QeDzcAAXqRopa1OSj+GjRMc3lvrVI2ReRw3SM+Myggs9psYx+OYpJpe
- eVMZk3qPXF+3wwHXdcNs6RNBq1kFGdlWYAYjW
-X-Google-Smtp-Source: AGHT+IHOZpXF4//BuIXZEGTSFzWGVsV28WFHaHNwPkixN6LfGN3MI2gh2014JQoCrMKoR1x3TXf9/6KRWiSqb331mfo=
-X-Received: by 2002:a05:6122:4109:b0:4d3:36b9:2c26 with SMTP id
- 71dfb90a1353d-4f33f31b0abmr24888690e0c.14.1721043579357; Mon, 15 Jul 2024
- 04:39:39 -0700 (PDT)
+ AJvYcCUtitLxYYlAOzCw29BvrFLWLoRfu8kLqq+OsQ8dLWVYev2Re24TRPv0c4TloItt73VIxOgldf+SCxuzYIIZz99rGj4iPQ==
+X-Gm-Message-State: AOJu0YzYyVkcR3uLJb6mGamEmBKVdTgBKSOc2v0mSWgYZeDE67lKnXq6
+ +FoNiJSgEIF9ll+W+f9kI6rVpUkS5TWcGUhGGGct+Pw4B8aYEHzokgOWT9WgPhaRhnUvsJTg8Hk
+ yzXyURJqx1ZlcJn2UOAWhp64sBGd0tecNK3Am
+X-Google-Smtp-Source: AGHT+IF1aYwUZPENfAQC6eOnaAXaDMNcpdgcSor24/wfJBItIVB+CBubfdCqvXzEQaMqvbn1+irjBB7U4TzfMJxC/Uo=
+X-Received: by 2002:a81:ae1e:0:b0:65b:a403:9eba with SMTP id
+ 00721157ae682-65ba403a03emr163377337b3.11.1721043580233; Mon, 15 Jul 2024
+ 04:39:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
- <20240715-b4-qcom-rpmh-v6-1-0c948a25d018@linaro.org>
-In-Reply-To: <20240715-b4-qcom-rpmh-v6-1-0c948a25d018@linaro.org>
+ <20240715-b4-qcom-rpmh-v6-6-0c948a25d018@linaro.org>
+In-Reply-To: <20240715-b4-qcom-rpmh-v6-6-0c948a25d018@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 15 Jul 2024 12:39:28 +0100
-Message-ID: <CAFLszThF_q7qVcrv5bvVckZK6r=_b7GApWcmwfomUMA77V3f-w@mail.gmail.com>
-Subject: Re: [PATCH v6 01/24] dm: core: scan reserved-memory nodes
+Date: Mon, 15 Jul 2024 12:39:29 +0100
+Message-ID: <CAFLszTgz-SOFR+aV7f45+pfByLztAYU1kvFPZof665=QwjjoPQ@mail.gmail.com>
+Subject: Re: [PATCH v6 06/24] soc: qcom: cmd-db: adjust probe for U-Boot
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -88,20 +88,23 @@ X-Virus-Status: Clean
 
 On Mon, 15 Jul 2024 at 11:08, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Qualcomm platforms may have drivers that bind to reserved memory nodes
-> (cmd-db [1] and smem [2]) which are relevant to U-Boot. Include
-> /reserved-memory in dm_extended_scan() so that these will be handled
-> correctly.
+> Integrate cmd-db into the U-Boot driver model.
 >
-> [1]: https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/qcom%2Ccmd-db.yaml
-> [2]: https://www.kernel.org/doc/Documentation/devicetree/bindings/soc/qcom/qcom%2Csmem.yaml
+> This is just a wrapper around an in-memory database, so we just need to
+> get the address and validate that cmd-db is there.
+>
+> Since cmd_db_header will be stored in the .data section we can skip
+> bind if it's already set.
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > To: Simon Glass <sjg@chromium.org>
 > ---
->  drivers/core/root.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  drivers/soc/qcom/cmd-db.c | 72 +++++++++++++++--------------------------------
+>  include/soc/qcom/cmd-db.h |  3 --
+>  2 files changed, 23 insertions(+), 52 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+BTW, this is a MISC driver. Does it implement the read() operation?
