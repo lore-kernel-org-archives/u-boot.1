@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D83C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:12:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C76C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9BA18889C;
-	Mon, 15 Jul 2024 12:09:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65FB3888AC;
+	Mon, 15 Jul 2024 12:09:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CrNiPCpN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="susHVvLV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E84488873; Mon, 15 Jul 2024 12:08:57 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 38C2288897; Mon, 15 Jul 2024 12:08:58 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633C988655
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 451B088853
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a77e6dd7f72so494259166b.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:55 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-58c947a6692so5207191a12.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721038135; x=1721642935; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721038136; x=1721642936; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ykNwaqwHkPIApVOJLoxhbPlmMoTloM+XmuakNGCqPoo=;
- b=CrNiPCpNdJStWokfG2y+IluHDvMeTPo7TwfZw9I6wY1a5FXCIpmaryZQ5BRAOb4mdV
- n7PvQe3eaeXim8NQ0XPt/WI1RiS493ZM2GUjp+1WtgPwTv/CsGC3dsiDtBGFsqp51muz
- LxC1ns5CIDEJIjqkyfNYHrooogeTFuu4S0i9gNShejiae2IbGlXnOZ+rDeU1ZSwX+3Da
- iQVE0XUGYZR6189Cd+w5bdTQ0NnXVDsKqLyAYb7+sml6f2nfdYDMJAF0+yjM9cotKy33
- OjoMxGrRDOupm734vnEIi+6zSRp8ii7JzXi/OSQI2IKL4FZvIg9+Ip+ikkIUQUPf9wZl
- TH4Q==
+ :reply-to; bh=OF76tLlohvDjPr8qGLbtCRZpdV9zcWQISuqlg021S0o=;
+ b=susHVvLV1Ib0h5XAck+GylMCLiT+15E7jUO9QQ608if39mNeS/fN9M7ntXtj9dV0ij
+ slz/755yvPvftGn5DsGsS8MtEk8wXGd74JMNLy0kQtvjRmhWh8MXzw6NzSYwvzhqI5xf
+ IwBM7n1RMS/EasA4tCn4QzylbDSGC3llR3GZSIxqipilDF9ravlhZ7TX+qOsirxHYckz
+ 6VVG969hqVU4So+8Z07LS+vmW2c77bfbO0SKedVAf8S8uEDKYDZhoi3uadnJMdLaz8+9
+ S6ryMWAB+m/W9nt792ifR2mHIPjKTqvISWdeN8Kw2FHPXchlzqXQbey9jKwAq0TxOSof
+ w+Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721038135; x=1721642935;
+ d=1e100.net; s=20230601; t=1721038136; x=1721642936;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ykNwaqwHkPIApVOJLoxhbPlmMoTloM+XmuakNGCqPoo=;
- b=IWbbYUUQ1Z2729POefH8ebZRnqJvfoMKrv2DfJF9C5Gd7/zyf8rEy9R98HwOMYhhpm
- zeAytwpamTinaA3uj2Xo3knZLjcir92SX54pWNVbuhgpaCqegnctIPpePyNEMBpQXPTB
- zUSZiuoP9KkYziktxdiz2FJ0EJlAs2zoHOmqPpmJ492alVsfGJv8xlEoakPEwFdDistV
- 3tdzIElsqVZtXRXDh0HwD5KEhumZ/3iwD3EWsq/rFTK/UbpvE9P8YpxxFnttMrjABnlM
- xBBEB5kXse53KpN0JoeP4WyjNQqGYFizxX1IWkdvoabLLw6M9MWCtl2Q2ud7o4SndkIG
- ptdg==
-X-Gm-Message-State: AOJu0YyI49dXo2DaY3yM3mRW5t0sz0TKOmvxYq4sz65V6rffgSUvDKBH
- XatZ3hUeuXNKgKcQ+7+QfO0BjYMYWjxk8+MBYyRqEuoRyOIB49JZULL9s0+/HfA=
-X-Google-Smtp-Source: AGHT+IEOWXdxPtux9KaWCqDz5o2Md+KM8H0nSYAdFqTHm7nnJlfKqfqx40LeWsYFE6KYNKlpaG4qrg==
-X-Received: by 2002:a17:906:7d1:b0:a6f:e47d:a965 with SMTP id
- a640c23a62f3a-a780b6ff0ecmr1178911266b.41.1721038134903; 
- Mon, 15 Jul 2024 03:08:54 -0700 (PDT)
+ bh=OF76tLlohvDjPr8qGLbtCRZpdV9zcWQISuqlg021S0o=;
+ b=hEaUvvGjYM/1ajvk00HPcxUcz98NTpzauKhDhmw6Hw8DuydQ8+FcVGq/mohH4V8en5
+ gld6aqfhAT2oD0yfUHcwmsD1H0gQxEJ/B2wGMjLEkqVpxfQnTYKDm7LiC9pr59JPrP7N
+ NA62zYTyqt6Mm0yaIB4dZD5zXLC19ZU+o5An33nqtS22M+uC8vhvHwM1DYhw6+I1ERBL
+ 2E7/D1mPKgdrG7kEbDcjQjw8jKd/tcLcEjJv4h00wi/+egRrepaozSxpoBLngTWUrwlQ
+ 4+imq77DRqs7zJC+cqkHi+qBwiMK6evU/i9rvzXa9WBbB5/vqHmEY9z1oVVcDIf2oiTY
+ 7AAw==
+X-Gm-Message-State: AOJu0Yy+KAgdbeBypYLRVt2GnJC6DBmuYKu8aSXxwMQt1KiG3tvFCIi0
+ b1UlGoT1PByj4YTHdmyGW4R72rL6++ft5ATglIPKmzxFgYHYTZBIOGbBaFHBJ7o=
+X-Google-Smtp-Source: AGHT+IFOfdxbCZQpIq9MLoWxfw1Q9D80Me7vCzFgWRVBi2u5uTWBLZzGtDl6i8q3gIGwNsPEaxltbA==
+X-Received: by 2002:a17:906:4f01:b0:a6f:2ee7:b21a with SMTP id
+ a640c23a62f3a-a780b89f406mr1261780766b.65.1721038135867; 
+ Mon, 15 Jul 2024 03:08:55 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.53
+ a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 03:08:54 -0700 (PDT)
+ Mon, 15 Jul 2024 03:08:55 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 15 Jul 2024 12:08:21 +0200
-Subject: [PATCH v6 22/24] power: regulator: qcom-rpmh-regulator: adjust
- probe for U-Boot
+Date: Mon, 15 Jul 2024 12:08:22 +0200
+Subject: [PATCH v6 23/24] power: regulator: qcom-rpmh-regulator: add build
+ infra
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240715-b4-qcom-rpmh-v6-22-0c948a25d018@linaro.org>
+Message-Id: <20240715-b4-qcom-rpmh-v6-23-0c948a25d018@linaro.org>
 References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 In-Reply-To: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,21 +80,21 @@ To: Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5762;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1943;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=w5wfaxbbfnG/DU1q1d1PAsyrg5lHl41WCxBF+lLEiQs=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUHmNUevwISHw+h3WpELnzo/Tl72K6ZpVCjn
- jVnaIAFUnKJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1BwAKCRAFgzErGV9k
- tj5vD/0TttS8q1iwDNF7Knm8e7+FaBxfb0dA/yWpqFPondoKd+jXjSg5TQMcIZBJRhEt0myOGsJ
- XerUbK70trXfTYFBRW4eKTwujU1WPE7abLOEfp7Yqv9S1Mf9xEWwxGXWYwx+ObZQ0OLoJQ/d1FV
- 770wj7Rml5YE5DhiGVbBL5sogJtznFq+5Y84JZ2Y1mBYpMcMG2uUsI/3wOX4fGpkl33cziiaDym
- i9uC973VQ55dBWYuu9KZ9vHaZrRo4oq0MKn9L9hnIgMGY7Ihtgk4RFQ2vmXTlcyuFZMU3RX5ctU
- 5K3NkkacyXjHkMp+A5ZgLKWgeZhzSkir9eWN/8VANjsjn5t9I13alvJztQNkuX5Ba+UFKrtdIch
- C/MkJ9PYnboGjzn37uXuThFUF8Lgzxa54Xj/e6mUNCpPGOXyuuuyiLxZbX8TfrEkOdYqxo6tzhF
- h/39B58xTmT0LkXrKZmzULRfI80MNtiZLrSRrAQIAfYe0jFUu04xf11MhdBaxtDaX47zAuSiVZM
- dTo8EVByZdI4YB3zACovFqTGzfsEHgOFpKFQuAb6FOHhzV+PpnsprPFZdaB/+l3MnM96nUowUD4
- nuGGX7IIXdw3zuDMLGMpD/qaQYhesr8VT+w5ejQ9QMMGPPPVlnFpRerMc01O3wuoxuIknKrIYJH
- M0r46QFdhd4nT4Q==
+ bh=Pso8b/uVAl+mlHoL5Qsl7woxZlxMQtfdivEwIMBQyfo=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmlPUHMVeLzjpThGvy6F+v5iPAgNRxeR4Zb3vCz
+ IHsJtSL0zCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZpT1BwAKCRAFgzErGV9k
+ thHTD/9mE6vCqg7ptB2SxBRarFyg78cM6eKgD/SfCefmalLQgljV/exyjkfRIKT7pGN4ecbrqN7
+ 5TSd1bdLaiFznRU50SYfu5FoORcxonwGC8r80U+vhp4/nE+VqHu31hFcwkXAMO8lAsBxsppUBvo
+ 0dKly7vXHbyk++q1iJZdbzk+zWQAs7gjvgWcPS5fNY38AmUfPnxTV/1xSqsfibPTuA4XdXv1G4b
+ TRtb/YafYJ77uYtXOLZxjTnmV0iOtoR3bTjpdnUjuAaac+rzsr0tSNgY6QXpoHMZLmyXwYMls7m
+ xC2nD8RL5aTS45BIyJHhYW0lH6CQnmuCyZ8anj58X2VQIZfo6Qu5aE3sE9IZ9vxnshD9sFIjutq
+ LkULwlHyye/uYTtH9rqjGI6a5TPcoPgE6g6r//VZSqxiTOdaEh/X9EGcFW4wXy5Q64h0tqnJQEZ
+ 6nCcHxPlfH85+KPv6YtzNw54/3ClW+Dc+nsjN3Lyv7Y1X6MXjs5D9c+z/yQ7W7eI3PbB6bRYXfd
+ glZJY471VAEtHBkEX37cCcmUCWSg8w+q6K5qsV1GOHBHKer6YRESeCK1N7q1DHzPjq4vj0e2FyY
+ vHb5nGSxa9vNuVQXV4vZsqO9/4NmT8y1x5LO/024u+4wwjw7BKxiGvBJSH1M854Lwnd+rsPMfs1
+ meoV1q8vr6d0KCg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,187 +113,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor initialization to use U-Boot's driver model and API.
+Add Kconfig and Makefile entries for this driver now that it can build
+for U-Boot.
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/power/regulator/qcom-rpmh-regulator.c | 136 +++++++++++++++++++-------
- 1 file changed, 102 insertions(+), 34 deletions(-)
+ drivers/power/regulator/Kconfig  | 8 ++++++++
+ drivers/power/regulator/Makefile | 1 +
+ 2 files changed, 9 insertions(+)
 
-diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-index b716b380c148..06fd3f31956f 100644
---- a/drivers/power/regulator/qcom-rpmh-regulator.c
-+++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-@@ -411,66 +411,134 @@ static const struct rpmh_vreg_init_data pm8150l_vreg_data[] = {
- 	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_pldo,      "vdd-l7-l11"),
- 	{}
- };
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 102ec7bc5f89..bc061c20d75e 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -215,8 +215,16 @@ config DM_REGULATOR_GPIO
+ 	This config enables implementation of driver-model regulator uclass
+ 	features for gpio regulators. The driver implements get/set for
+ 	voltage value.
  
--static int rpmh_regulator_probe(struct platform_device *pdev)
-+/* probe an individual regulator */
-+static int rpmh_regulator_probe(struct udevice *dev)
- {
--	struct device *dev = &pdev->dev;
--	const struct rpmh_vreg_init_data *vreg_data;
--	struct device_node *node;
--	struct rpmh_vreg *vreg;
--	const char *pmic_id;
--	int ret;
-+	const struct rpmh_vreg_init_data *init_data;
-+	struct rpmh_vreg *priv;
-+	struct dm_regulator_uclass_plat *plat_data;
- 
--	vreg_data = of_device_get_match_data(dev);
--	if (!vreg_data)
-+	init_data = (const struct rpmh_vreg_init_data *)dev_get_driver_data(dev);
-+	priv = dev_get_priv(dev);
-+	plat_data = dev_get_uclass_plat(dev);
++config DM_REGULATOR_QCOM_RPMH
++	bool "Enable driver model for Qualcomm RPMh regulator"
++	depends on DM_REGULATOR && QCOM_RPMH
++	---help---
++	  Enable support for the Qualcomm RPMh regulator. The driver
++	  implements get/set api for a limited set of regulators used
++	  by u-boot.
 +
-+	priv->dev = dev;
-+	priv->addr = cmd_db_read_addr(dev->name);
-+	if (!priv->addr) {
-+		dev_err(dev, "Failed to read RPMh address for %s\n", dev->name);
- 		return -ENODEV;
--
--	ret = of_property_read_string(dev->of_node, "qcom,pmic-id", &pmic_id);
--	if (ret < 0) {
--		dev_err(dev, "qcom,pmic-id missing in DT node\n");
--		return ret;
- 	}
- 
--	for_each_available_child_of_node(dev->of_node, node) {
--		vreg = devm_kzalloc(dev, sizeof(*vreg), GFP_KERNEL);
--		if (!vreg) {
--			of_node_put(node);
-+	priv->hw_data = init_data->hw_data;
-+	priv->enabled = -EINVAL;
-+	priv->uv = -ENOTRECOVERABLE;
-+	if (ofnode_read_u32(dev_ofnode(dev), "regulator-initial-mode", &priv->mode))
-+		priv->mode = -EINVAL;
-+
-+	plat_data->mode = priv->hw_data->pmic_mode_map;
-+	plat_data->mode_count = priv->hw_data->n_modes;
-+
-+	return 0;
-+}
-+
-+/* for non-drm, xob, or bypass regulators add additional driver definitions */
-+U_BOOT_DRIVER(rpmh_regulator_drm) = {
-+	.name = "rpmh_regulator_drm",
-+	.id = UCLASS_REGULATOR,
-+	.probe = rpmh_regulator_probe,
-+	.priv_auto = sizeof(struct rpmh_vreg),
-+	.ops = &rpmh_regulator_vrm_drms_ops,
-+};
-+
-+/* This driver intentionally only supports a subset of the available regulators.
-+ * This function checks to see if a given regulator node in DT matches a regulator
-+ * defined in the driver.
-+ */
-+static const struct rpmh_vreg_init_data *
-+vreg_get_init_data(const struct rpmh_vreg_init_data *init_data, ofnode node)
-+{
-+	const struct rpmh_vreg_init_data *data;
-+
-+	for (data = init_data; data->name; data++) {
-+		if (!strcmp(data->name, ofnode_get_name(node)))
-+			return data;
-+	}
-+
-+	return NULL;
-+}
-+
-+static int rpmh_regulators_bind(struct udevice *dev)
-+{
-+	const struct rpmh_vreg_init_data *init_data, *data;
-+	const char *pmic_id;
-+	char *name;
-+	struct driver *drv;
-+	ofnode node;
-+	int ret;
-+	size_t namelen;
-+
-+	init_data = (const struct rpmh_vreg_init_data *)dev_get_driver_data(dev);
-+	if (!init_data) {
-+		dev_err(dev, "No RPMh regulator init data\n");
-+		return -ENODEV;
-+	}
-+
-+	pmic_id = ofnode_read_string(dev_ofnode(dev), "qcom,pmic-id");
-+	if (!pmic_id) {
-+		dev_err(dev, "No PMIC ID\n");
-+		return -ENODEV;
-+	}
-+
-+	drv = lists_driver_lookup_name("rpmh_regulator_drm");
-+
-+	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
-+		data = vreg_get_init_data(init_data, node);
-+		if (!data)
-+			continue;
-+
-+		/* %s is replaced with pmic_id, so subtract 2, then add 1 for the null terminator */
-+		namelen = strlen(data->resource_name) + strlen(pmic_id) - 1;
-+		name = devm_kzalloc(dev, namelen, GFP_KERNEL);
-+		ret = snprintf(name, namelen, data->resource_name, pmic_id);
-+		if (ret < 0 || ret >= namelen) {
-+			dev_err(dev, "Failed to create RPMh regulator name\n");
- 			return -ENOMEM;
- 		}
- 
--		ret = rpmh_regulator_init_vreg(vreg, dev, node, pmic_id,
--						vreg_data);
-+		ret = device_bind_with_driver_data(dev, drv, name, (ulong)data,
-+						   node, NULL);
- 		if (ret < 0) {
--			of_node_put(node);
-+			dev_err(dev, "Failed to bind RPMh regulator %s: %d\n", name, ret);
- 			return ret;
- 		}
- 	}
- 
- 	return 0;
- }
- 
--static const struct of_device_id __maybe_unused rpmh_regulator_match_table[] = {
-+static const struct udevice_id rpmh_regulator_ids[] = {
- 	{
- 		.compatible = "qcom,pm8150-rpmh-regulators",
--		.data = pm8150_vreg_data,
-+		.data = (ulong)pm8150_vreg_data,
- 	},
- 	{
- 		.compatible = "qcom,pm8150l-rpmh-regulators",
--		.data = pm8150l_vreg_data,
-+		.data = (ulong)pm8150l_vreg_data,
- 	},
--	{}
-+	{ /* sentinal */ },
- };
--MODULE_DEVICE_TABLE(of, rpmh_regulator_match_table);
- 
--static struct platform_driver rpmh_regulator_driver = {
--	.driver = {
--		.name = "qcom-rpmh-regulator",
--		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
--		.of_match_table	= of_match_ptr(rpmh_regulator_match_table),
--	},
--	.probe = rpmh_regulator_probe,
-+/* Driver for a 'bank' of regulators. This creates devices for each
-+ * individual regulator
-+ */
-+U_BOOT_DRIVER(rpmh_regulators) = {
-+	.name = "rpmh_regulators",
-+	.id = UCLASS_MISC,
-+	.bind = rpmh_regulators_bind,
-+	.of_match = rpmh_regulator_ids,
-+	.ops = &rpmh_regulator_vrm_drms_ops,
- };
--module_platform_driver(rpmh_regulator_driver);
- 
- MODULE_DESCRIPTION("Qualcomm RPMh regulator driver");
- MODULE_LICENSE("GPL v2");
+ config SPL_DM_REGULATOR_GPIO
+ 	bool "Enable Driver Model for GPIO REGULATOR in SPL"
+ 	depends on DM_REGULATOR_GPIO && SPL_GPIO
+ 	select SPL_DM_REGULATOR_COMMON
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index f79932d83307..56a527612b74 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -20,8 +20,9 @@ obj-$(CONFIG_$(SPL_)REGULATOR_PWM) += pwm_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_FAN53555) += fan53555.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_COMMON) += regulator_common.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_FIXED) += fixed.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_GPIO) += gpio-regulator.o
++obj-$(CONFIG_DM_REGULATOR_QCOM_RPMH) += qcom-rpmh-regulator.o
+ obj-$(CONFIG_$(SPL_TPL_)REGULATOR_RK8XX) += rk8xx.o
+ obj-$(CONFIG_DM_REGULATOR_S2MPS11) += s2mps11_regulator.o
+ obj-$(CONFIG_REGULATOR_S5M8767) += s5m8767.o
+ obj-$(CONFIG_DM_REGULATOR_SANDBOX) += sandbox.o
 
 -- 
 2.45.2
