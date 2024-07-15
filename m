@@ -4,43 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F31DC3DA49
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jul 2024 23:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4D4C3DA42
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 00:02:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D353D8789F;
-	Mon, 15 Jul 2024 01:40:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C16187CFE;
+	Mon, 15 Jul 2024 02:02:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D49887D14; Mon, 15 Jul 2024 01:40:25 +0200 (CEST)
+ id 60F1888370; Mon, 15 Jul 2024 02:02:34 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 31F29874AC
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 01:40:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4A5688789F
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CED17FEC;
- Sun, 14 Jul 2024 16:40:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFCB2FEC;
+ Sun, 14 Jul 2024 17:02:56 -0700 (PDT)
 Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 365B53F762;
- Sun, 14 Jul 2024 16:40:21 -0700 (PDT)
-Date: Mon, 15 Jul 2024 00:38:11 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 06EAB3F73F;
+ Sun, 14 Jul 2024 17:02:30 -0700 (PDT)
+Date: Mon, 15 Jul 2024 01:00:22 +0100
 From: Andre Przywara <andre.przywara@arm.com>
-To: "Ryan Walklin" <ryan@testtoast.com>
-Cc: "Tom Rini" <trini@konsulko.com>, "Jaehoon Chung"
- <jh80.chung@samsung.com>, "Jagan Teki" <jagan@amarulasolutions.com>,
- "Jernej Skrabec" <jernej.skrabec@gmail.com>, "Samuel Holland"
- <samuel@sholland.org>, "Chris Morgan" <macromorgan@hotmail.com>, "Philippe
- Simons" <simons.philippe@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 4/6] power: pmic: sunxi: add AXP717 SPL support
-Message-ID: <20240715003811.2892c08d@minigeek.lan>
-In-Reply-To: <f970326b-3763-4179-a6ca-fd30a27fc793@app.fastmail.com>
-References: <20240712165352.3767166-1-andre.przywara@arm.com>
- <20240712165352.3767166-5-andre.przywara@arm.com>
- <f970326b-3763-4179-a6ca-fd30a27fc793@app.fastmail.com>
+To: Tobias Schramm <t.schramm@manjaro.org>
+Cc: u-boot@lists.denx.de, Hans de Goede <hdegoede@redhat.com>, Jagan Teki
+ <jagan@amarulasolutions.com>
+Subject: Re: [PATCH] arm: sunxi: add support for I2C1 on V3s-based SoCs
+Message-ID: <20240715010022.38a9f61c@minigeek.lan>
+In-Reply-To: <20240531142138.14129-1-t.schramm@manjaro.org>
+References: <20240531142138.14129-1-t.schramm@manjaro.org>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -62,146 +56,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Jul 2024 20:20:44 +1200
-"Ryan Walklin" <ryan@testtoast.com> wrote:
+On Fri, 31 May 2024 16:21:38 +0200
+Tobias Schramm <t.schramm@manjaro.org> wrote:
 
-Hi Ryan,
+Hi Tobias,
 
-> On Sat, 13 Jul 2024, at 4:53 AM, Andre Przywara wrote:
-> 
-> >  #define AXP209_I2C_ADDR			0x34
-> > +#define AXP717_I2C_ADDR			0x34
-> > 
-> >  #define AXP305_I2C_ADDR			0x36
-> >  #define AXP313_I2C_ADDR			0x36
-> > @@ -36,6 +37,8 @@ static int pmic_i2c_address(void)
-> >  		return AXP305_I2C_ADDR;
-> >  	if (IS_ENABLED(CONFIG_AXP313_POWER))
-> >  		return AXP313_I2C_ADDR;
-> > +	if (IS_ENABLED(CONFIG_AXP717_POWER))
-> > +		return AXP717_I2C_ADDR;
-> > 
-> >  	/* Other AXP2xx and AXP8xx variants */
-> >  	return AXP209_I2C_ADDR;  
-> 
-> Small point, but is this check strictly necessary, given that the AXP717 uses the same I2C address as the AXP209? If CONFIG_AXP717_POWER is not checked here, this logic will still fall through to the default AXP209 address, which will also be correct for the 717.
+> Previously enabling I2C1 when using a V3s-based SoC had no effect.
+> Set pinmux on PE21 and PE22 to I2C1 function when enabling I2C1 on
+> V3s-based SoCs.
 
-I consider the fact that the AXP209 and the AXP717 use the same I2C
-address a sheer coincidence, so would like to keep the code readable
-and maintainable. This "IS_ENABLED(AXPyyy) return AXPyyy_I2C_ADDR"
-patterns seems to be easy to understand and copy, IMHO. If you are
-concerned about generated code size: this whole function is optimised
-away, and is replaced with a single "mov w0, #0x34" assembly
-instruction, just before the respective i2c function calls. This is due
-to the fact that those "if" statements have compile-time constant
-input, so the compiler knows the final result already, and just
-replaces the function call with this constant load. That's a neat
-feature of IS_ENABLED(), and a pattern we are exercising in U-Boot for
-years, to keep the code both readable, but also minimal.
+Can you say what this patch is about?
+Is there any V3s board that has the PMIC connected to I2C1?
+Please note that this code is only for the SPL, where we only use I2C
+for the PMIC. Anything in U-Boot proper should be covered by the DT.
 
-Thanks for the Tested-by: tag!
+I am a bit reluctant to add more to this already nasty part of the
+code, unless there is a good reason: a defconfig for a board requiring
+this would be one.
 
 Cheers,
 Andre
 
+> Signed-off-by: Tobias Schramm <t.schramm@manjaro.org>
+> ---
+>  board/sunxi/board.c  | 4 ++++
+>  include/sunxi_gpio.h | 1 +
+>  2 files changed, 5 insertions(+)
 > 
-> > diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> > index ed86f1df5dc..9928069c0eb 100644
-> > --- a/board/sunxi/board.c
-> > +++ b/board/sunxi/board.c
-> > @@ -562,7 +562,7 @@ void sunxi_board_init(void)
-> >  #if defined CONFIG_AXP152_POWER || defined CONFIG_AXP209_POWER || \
-> >  	defined CONFIG_AXP221_POWER || defined CONFIG_AXP305_POWER || \
-> >  	defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER || \
-> > -	defined CONFIG_AXP313_POWER
-> > +	defined CONFIG_AXP313_POWER || defined CONFIG_AXP717_POWER
-> >  	power_failed = axp_init();
-> > 
-> >  	if (IS_ENABLED(CONFIG_AXP_DISABLE_BOOT_ON_POWERON) && !power_failed) {
-> > diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-> > index 33b8bc1214d..5556a22cf69 100644
-> > --- a/drivers/power/Kconfig
-> > +++ b/drivers/power/Kconfig
-> > @@ -109,6 +109,13 @@ config AXP313_POWER
-> >  	Select this to enable support for the AXP313 PMIC found on some
-> >  	H616 boards.
-> > 
-> > +config AXP717_POWER
-> > +	bool "axp717 pmic support"
-> > +	select AXP_PMIC_BUS
-> > +	select CMD_POWEROFF
-> > +	---help---
-> > +	Select this to enable support for the AXP717 PMIC found on some boards.
-> > +
-> >  config AXP809_POWER
-> >  	bool "axp809 pmic support"
-> >  	depends on MACH_SUN9I
-> > @@ -151,10 +158,11 @@ config AXP_DCDC1_VOLT
-> > 
-> >  config AXP_DCDC2_VOLT
-> >  	int "axp pmic dcdc2 voltage"
-> > -	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || 
-> > AXP809_POWER || AXP818_POWER || AXP313_POWER
-> > +	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || 
-> > AXP809_POWER || AXP818_POWER || AXP313_POWER || AXP717_POWER
-> >  	default 900 if AXP818_POWER
-> >  	default 1400 if AXP152_POWER || AXP209_POWER
-> >  	default 1000 if AXP313_POWER
-> > +	default 1000 if AXP717_POWER
-> >  	default 1200 if MACH_SUN6I
-> >  	default 1100 if MACH_SUN8I
-> >  	default 0 if MACH_SUN9I
-> > @@ -167,11 +175,11 @@ config AXP_DCDC2_VOLT
-> >  	On A80 boards dcdc2 powers the GPU and can be left off.
-> >  	On A83T boards dcdc2 is used for VDD-CPUA(cluster 0) and should be 
-> > 0.9V.
-> >  	On R40 boards dcdc2 is VDD-CPU and should be 1.1V
-> > -	On boards using the AXP313 it's often VDD-CPU.
-> > +	On boards using the AXP313 or AXP717 it's often VDD-CPU.
-> > 
-> >  config AXP_DCDC3_VOLT
-> >  	int "axp pmic dcdc3 voltage"
-> > -	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || 
-> > AXP809_POWER || AXP818_POWER || AXP313_POWER
-> > +	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || 
-> > AXP809_POWER || AXP818_POWER || AXP313_POWER || AXP717_POWER
-> >  	default 900 if AXP809_POWER || AXP818_POWER
-> >  	default 1500 if AXP152_POWER
-> >  	default 1250 if AXP209_POWER
-> > @@ -188,7 +196,8 @@ config AXP_DCDC3_VOLT
-> >  	On A80 boards dcdc3 is used for VDD-CPUA(cluster 0) and should be 
-> > 0.9V.
-> >  	On A83T boards dcdc3 is used for VDD-CPUB(cluster 1) and should be 
-> > 0.9V.
-> >  	On R40 boards dcdc3 is VDD-SYS and VDD-GPU and should be 1.1V.
-> > -	On boards using the AXP313 it's often VDD-DRAM and should be 1.1V for 
-> > LPDDR4.
-> > +	On boards using the AXP313 or AXP717 it's often VDD-DRAM and should
-> > +	be 1.1V for LPDDR4.
-> > 
-> >  config AXP_DCDC4_VOLT
-> >  	int "axp pmic dcdc4 voltage"
-> > diff --git a/drivers/power/Makefile b/drivers/power/Makefile
-> > index 0f39459dec4..6df23a81c29 100644
-> > --- a/drivers/power/Makefile
-> > +++ b/drivers/power/Makefile
-> > @@ -14,6 +14,7 @@ obj-$(CONFIG_AXP209_POWER)	+= axp209.o
-> >  obj-$(CONFIG_AXP221_POWER)	+= axp221.o
-> >  obj-$(CONFIG_AXP305_POWER)	+= axp305.o
-> >  obj-$(CONFIG_AXP313_POWER)	+= axp313.o
-> > +obj-$(CONFIG_AXP717_POWER)	+= axp_spl.o
-> >  obj-$(CONFIG_AXP809_POWER)	+= axp809.o
-> >  obj-$(CONFIG_AXP818_POWER)	+= axp818.o
-> >  endif
-> > -- 
-> > 2.25.1  
-> 
-> Tested with RG35XX-H and RG35XX-Plus boards (Allwinner H700 with AXP717). Confirmed both DCDC2 and DCDC3 are set correctly in SPL, allowing successful DRAM init and boot.
-> 
-> Tested-by: Ryan Walklin <ryan@testtoast.com>
-> 
-> Regards,
-> 
-> Ryan
-> 
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index 1313b01dce..df2faba3e5 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -98,6 +98,10 @@ void i2c_init_board(void)
+>  	sunxi_gpio_set_cfgpin(SUNXI_GPH(16), SUN6I_GPH_TWI1);
+>  	sunxi_gpio_set_cfgpin(SUNXI_GPH(17), SUN6I_GPH_TWI1);
+>  	clock_twi_onoff(1, 1);
+> +#elif defined(CONFIG_MACH_SUN8I_V3S)
+> +	sunxi_gpio_set_cfgpin(SUNXI_GPE(21), SUN8I_V3S_GPE_TWI1);
+> +	sunxi_gpio_set_cfgpin(SUNXI_GPE(22), SUN8I_V3S_GPE_TWI1);
+> +	clock_twi_onoff(1, 1);
+>  #elif defined(CONFIG_MACH_SUN8I)
+>  	sunxi_gpio_set_cfgpin(SUNXI_GPH(4), SUN8I_GPH_TWI1);
+>  	sunxi_gpio_set_cfgpin(SUNXI_GPH(5), SUN8I_GPH_TWI1);
+> diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
+> index db3742c039..175b13a887 100644
+> --- a/include/sunxi_gpio.h
+> +++ b/include/sunxi_gpio.h
+> @@ -113,6 +113,7 @@ enum sunxi_gpio_number {
+>  #define SUN4I_GPB_TWI1		2
+>  #define SUN5I_GPB_TWI1		2
+>  #define SUN8I_V3S_GPB_TWI0	2
+> +#define SUN8I_V3S_GPE_TWI1	3
+>  #define SUN4I_GPB_UART0		2
+>  #define SUN5I_GPB_UART0		2
+>  #define SUN8I_GPB_UART2		2
 
