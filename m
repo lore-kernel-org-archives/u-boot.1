@@ -4,86 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A90EC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB3DC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 14:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C34C8885C;
-	Mon, 15 Jul 2024 15:56:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A997E887F3;
+	Mon, 15 Jul 2024 16:12:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bMdhXMmv";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="OojZg7m+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AADE3888A3; Mon, 15 Jul 2024 15:56:18 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 06B5687B84; Mon, 15 Jul 2024 16:12:39 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5709288835
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:56:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EEE7887F3
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 16:12:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a77e2f51496so520482966b.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:56:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721051776; x=1721656576; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/x83uhAgtPmXyFX07eC/O7WLqpmAACzSVrglNL9NB4Q=;
- b=bMdhXMmvxajYgvhl69PzN2ZQcprFXCGQ0Kyn7cCkASkL7Uii4xRPaCaNqQo4c3jF7f
- byoMla3t8KZndRFZ+s80FCbUUB4QCHN1uhCneZrcRRclDwAI/Ejob54CjuOcdbI9b0s2
- RBweWEReGvUPOIwQNkRbOAZO+rd5r8f8oo3iJmzlQyUGrQywHofNpfg7R5OH19GGRGzM
- qgCfcFZHrgvLd/JyBjcJQ/qw5LbRjj5mxQaNO0x/L6RNf7LLbpjON8CqqckT3Mj6jDIw
- RxVZ3Tg389NZMzQlkHWKKIo2e/QDpdgE9gh5SDMhjk6rOFriEOND+TyCObcvZRamJM00
- MYEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721051776; x=1721656576;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/x83uhAgtPmXyFX07eC/O7WLqpmAACzSVrglNL9NB4Q=;
- b=Zk2hpb3B5kLVByIhNzdqoQLcyd0Ss9fojTAo7A2SJOtLJ29pjaJu7ZoCZkMezodxts
- LNX0li/7LfJGD78xj71Us1PcpjA/r4bX6V9JIHDlqvsHBIHFYYF4w8JsLyWnLPJGlba8
- AZsEeAmj6RZbh9psPYdq7def1SOQj+Jl0HDhbbFLEbvBAJpnfxvTjki26Jk2KD4d5/8c
- NPv02whIh9JbCAHs+NLmpTXTeMjDcuwRf4ka8rwnVBJjaIFrV3dg3/ykqERrsGWxi0tf
- y2Cj2IWG9OD3iPAMOIKRdWvZlmyni4GgcElVFOE+fpeHF1FqdXCzHkiGUN6O73IF1nK5
- DEHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVaUdESTW1s1PYZrymjjVVRnXURbmc6jXW2S1O0R2/Os6FkHlorsJlLZ00+F0Vt/83GLVAIBGQ0wgCEJ5ROeYixc+wClw==
-X-Gm-Message-State: AOJu0Yyvh/jCdQGhZ6g51n8uc+ru8kAXfmLh150TtXmp88hCjIyi2Q0M
- AJ81eypvxSh/tkN1J9crBjbW79CmrJW4LhSDD7I5DUsGPjWpGNxj
-X-Google-Smtp-Source: AGHT+IHPpD+P62FtzVEMDnMZgeFr1JSMF4gFq5zl6R2/HnDqhZRyMPOo8WRtL5f7veqS69z5F1pdXg==
-X-Received: by 2002:a17:907:7d8a:b0:a6f:59dc:4ece with SMTP id
- a640c23a62f3a-a780b68a9ecmr1482293066b.2.1721051775581; 
- Mon, 15 Jul 2024 06:56:15 -0700 (PDT)
-Received: from localhost.lan (031011218106.poznan.vectranet.pl.
- [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc820fb5sm214152666b.212.2024.07.15.06.56.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 06:56:15 -0700 (PDT)
-From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
-To: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Michael Walle <michael@walle.cc>,
- Miquel Raynal <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- u-boot@lists.denx.de, linux-kernel@vger.kernel.org,
- =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
-Subject: [PATCH 2/2] nvmem: layouts: add U-Boot env layout
-Date: Mon, 15 Jul 2024 15:54:34 +0200
-Message-Id: <20240715135434.24992-2-zajec5@gmail.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240715135434.24992-1-zajec5@gmail.com>
-References: <20240715135434.24992-1-zajec5@gmail.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wm4VaQUSBgB62qJaL7dZuzZAR3i7iK1oY18gElTpaSDmi0nq2t2XeDIFeefTc0DgnzzURSgfpp0Z0frs7Y0r2eEUPwFw4rZrXPl+Vp4D4BHsS8EdvZ/L+W1H2/bTU7Vo0YL9yl+Too/iHlp6PjiB1XAzOSGlI1nQEiFbzRsmWQUHPlMRGsuDrXkSnSQy4HrdtJ4+6fSmztRyqH71gP4GiD32V8eQwpGZccCl/LreKD1KNyo0BNrxgBo/Kt9bB7OKiH2dF41o7jN6VwTpvDvSZNzpnNp43seQZ+D5VqYul6QnOEj2bDttOxtkiDrPS9jjA5TPWZkrSaPQzY5ot23Siw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KM1ez58Zi0AF08z8D/Z2SY2vMlLRmYC0O5qU5nuciXo=;
+ b=AAxusghJVpWRqvXZj8n82DwnXoDLdrjL1nHjsKZGl+7OY935cn5ld1EvXasyOZ3JO/JEDA8b19rsCKxhPF6lHWl/gucaSA84EFlXLhp0QlunaLntteGUtnPtFsE5wtmseoqnYqtPyDPUsrXY1zYvqpLWJV2hXvx9CuhBM7bQujIUQAqu04S48WYOFzcovnV0EPZFKPV4XCjYsH+3bc3OLb8nH9Nj71karAu957cX2R45/PKkmrMXHFcqCdxkQ2Kb7L8YqxwuPz3k+MeLKENGy9BIwfPQChGs6hiriAe0aOOLq8PDrpXixFN28UL1Cm5uNAqI4aB4RqDleXvu/P1xrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KM1ez58Zi0AF08z8D/Z2SY2vMlLRmYC0O5qU5nuciXo=;
+ b=OojZg7m+se6gaSpJe/f2IQeUo6xpF0guEajvIOrWZwZGxSmsVbkTnrV327J92ni4hyWgrlpCo855kc2/958+P0IG54w1P7RcAwwc24Fhjgbj5DhsW44RM7d0pdXicinnorMPDIVhPnQq6dx8SSRN+4KcAT9mm4MC/9Ag0r78Kuc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU4PR04MB10885.eurprd04.prod.outlook.com (2603:10a6:10:587::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.36; Mon, 15 Jul
+ 2024 14:12:35 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.7762.020; Mon, 15 Jul 2024
+ 14:12:35 +0000
+Message-ID: <783d9dfc-4372-4332-991f-2b06fdf2cdfb@cherry.de>
+Date: Mon, 15 Jul 2024 16:12:32 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/13] doc: Move bootstd into its own directory
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Dahl <ada@thorsis.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ E Shattow <lucent@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaewon Jung <jaewon8868@gmail.com>, Janne Grunau <j@jannau.net>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+References: <20240715101354.97895-1-sjg@chromium.org>
+ <20240715101354.97895-3-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240715101354.97895-3-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR04CA0122.eurprd04.prod.outlook.com
+ (2603:10a6:803:f0::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU4PR04MB10885:EE_
+X-MS-Office365-Filtering-Correlation-Id: 013d3bbb-13d0-4953-1bbb-08dca4d82cc5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NUZnUXN4cE1JUElQcFdybFc4bzk5QWRGUG11RFBvRlBkUCtqQ1I5Vk4zdHFr?=
+ =?utf-8?B?Ly83SEQ4WXJNeVNEYUlKbXFsN3BqcXhxY0VmaTFVVnM5NXhmWHRoNFpzYkdC?=
+ =?utf-8?B?TDZEM1BOWjNyUHA2WEdvc05TUk5kSWpNcXpJMmdTVFc4amxjVWhPTEVWMlVG?=
+ =?utf-8?B?Um1zSmhmcmZwVm5meFAwSHBjSGhta0dwQWZRQVFFOHgybnNoSHVobHQwVGkv?=
+ =?utf-8?B?c09GTGZpQ0owd053UVRpZ3lLSVBwRHd2UWU3RTZMNUVFaTFtTml0Nzh4T2xj?=
+ =?utf-8?B?cVFBeCs1cXBERUVmdFlDcnpFd29KQ0IzTHlqSDNLS2hpTHU5elFXV3IxOFMz?=
+ =?utf-8?B?cWNWTGVReVB6d0xnZE5xQ2pNaE9OSGx4Y21HKy95YUZrdks4SmVIN0pJSWph?=
+ =?utf-8?B?ZnR1VnhzVmx3bnRydUNtNlNJTE51NXVralljRmtMZkRWN1pIWitoZVcvSjE2?=
+ =?utf-8?B?VU9sYWIvNktKaHNFaUw0SnNQTXFFM2xWMEJDd1UvdHRzOHR0bFJ4RVdqZk43?=
+ =?utf-8?B?WFBEL1QxS1gvRUdFYW5sckJoTzQvVmtvamNGY1B0dlhMK1lyd1Uxb2ljeFhX?=
+ =?utf-8?B?R01MTWh1ZVZNdzVMeFZZb2YzNmJ3THIyNnN3dGpwN3BhRks2b3RJNll5cGlW?=
+ =?utf-8?B?ejU4Qk8zRUpRNWhkQitBcFZnTUxIaVA3UTZQbmUrVExqNllDWWtDblNxdlB5?=
+ =?utf-8?B?Z0hPUDlieUpucDM3TTdXTFBOYlhSMzhUdE5rMi8vL0I4TzZZTnY2cVhvWldG?=
+ =?utf-8?B?MVR6cHRodWVTSE9HTTFZZDg1VG9XL203QWM0b3Fpc2Y2aUtHaEkvYkF6Y0pz?=
+ =?utf-8?B?bmhMdFQ3OElQRUZvQ2tjMnZMWXNRWm5OWTVFZXdBeHFMNmt0Y0psUGk4cXRi?=
+ =?utf-8?B?V1pOdWFuQmZkc3ZIaGNKZDIzMjVVRVJsU1JFKzlzSDBCdm5keVlvZHlNWVlZ?=
+ =?utf-8?B?VTcvQXRMckNvZ1NaTXdCaUV2Y3daamZkenRWS3doYlVLaUVKdjlxQWdFRUZ0?=
+ =?utf-8?B?ZXF2dndpSnFEamVRUzdYK1BwWlN4ZTA0QlNaUFcreFErd0pmK0lSUVQ5RmZS?=
+ =?utf-8?B?OGI5cXpYVUdNUm1zYjBuaUFpZmRBVEo3T0ZidWhXM0trbU50NHFRdDIzWUpu?=
+ =?utf-8?B?TnFiZi9hcFRuTk1zd1ArTkZqZDQzSGxvd0RCSnVSNGlJKzdjYnpPN0pUREJE?=
+ =?utf-8?B?RU9FUzBrbnd4bXpvTnlONjJnNTlHdFFlaVF0WXE5M2dLMzRoalNzaUV1aGVa?=
+ =?utf-8?B?V3ZENWN5dlhMQTF6Ull3N1hyaWRqaVpUTHJaK3B3alZJSmpoSm4xcjZyTnFR?=
+ =?utf-8?B?L0tLYmhZYWp3MVk3NmNKUzhmUy9yUnAwcnVTL2ZqcFBHRlJVd0E4R3JDTHI5?=
+ =?utf-8?B?VTArOTU4UzNsWGsxRElHcE03WTh3a2taVDh0Wm5wMFhEL2llQnh4Rk51dEUw?=
+ =?utf-8?B?aW1vNmFYckQ4MGpGUFVrNUIyUVlkZjJDaXZueDFWZUJIYVFTV1Q3RzdTVXRo?=
+ =?utf-8?B?RnpJMGEwS2hrdVAvZVl0VWdPSk0yRXBBSWFtY2tUTm5TdlhicmNGaDdhQzgz?=
+ =?utf-8?B?c0hYcGg5QTVDMndVVXg0ejhtVVpWSmhiei9xenpMbTN0ajF1a0tRTEZQK3NR?=
+ =?utf-8?B?WndDQjdNTEhHR2hVT0dQa01oUDRlUkRIM3RBZGM1ZFZmbWg5REZTbDhGWE5X?=
+ =?utf-8?B?Q1U4WDc3OVMrMHpnY0dvdnRDdlNIdzNrQVE1T09wNGZYYUZQL1RCcWYwSktS?=
+ =?utf-8?B?YWRPSXJ3bDZLeEp6KzB0aE1iM2dUYURrczQvSk5iODBsMVYwczdKZitZNkph?=
+ =?utf-8?B?OVlZUkwrNWtuVkVMTkVpZz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V1l1a09QSVZtL3VKUmRSZ1ExZHhlck8rcGxGelJkUnVCN3oxK0xtUUZEMEty?=
+ =?utf-8?B?WmpibXVrdmZWM3ZQcjdHdDFvSi9kRDdnS3EycHhpY3ZxOWUyUUdHT3dCK05u?=
+ =?utf-8?B?V1lKTExFaWJOeVcwbVBVZWR4eExQMzIza2lyOElUZzAxb3JjaVdhNXl1aUlB?=
+ =?utf-8?B?enBNbkYxWEhoZWJUaTNGWWhnQ1ExWFlLVUZrL29yUmZkS1daMXFaUER5R3Zm?=
+ =?utf-8?B?YnN2ak9SbVk3enhIOFdOUVFDR1lQNG42ZGpQV09XNzY1LysvRi83cHllb3Bj?=
+ =?utf-8?B?OEJQSnVoSjZrcDF6ZlR2a1dzcFdKaDJyQmx3SExtbzFxM3RRd2I1REMvb0l5?=
+ =?utf-8?B?d3JDTHFTQ0ZFZHZWNEJkVUtDQlZ6OGtqMGdNcVVhRjRuQzA4eHlDVmVSYVpG?=
+ =?utf-8?B?RGFYcHdKNHRXRkVyLzQ0U25WYUZaS3JqeUR0anBNaTZLZm1ISGkrcEMyTkZ0?=
+ =?utf-8?B?OEhCRHc3d2tIMUdHVG1vdHdwVDJJamF5YmhUV2VlZVBoYXUvMW9nMUJESjk2?=
+ =?utf-8?B?cnZINUYvekVXUFdndForRTkvYXhtVTd5aTk0cU1Na2hJY0pTaGNnNVJHUHho?=
+ =?utf-8?B?R0JXeWZSODNhZjdVdkNTYi96VmV6cnRER3puemRGemZ2NU9GWkNKQmNHVkpu?=
+ =?utf-8?B?OXFRRklmeTdJbXhhd0txaUlTbk0yVVZjclBLR0lRTWdSLzlDNFNIWGRuYXNR?=
+ =?utf-8?B?WVN0SmJxeTdTWC9wMWhuQ2dzY1E4bGpiTnRGZ2NrTWFvQmJwUEo0NWRyNS83?=
+ =?utf-8?B?bG9zRC9Pek05cmZ3RXR2YkxsUi9pQi8wWndBZjA2OHRBQytNQlluWE9SZ1F0?=
+ =?utf-8?B?dGZrd0M2VXVqaHp3dnpSdHFYOFBvSWNxcXlvczJQQWFkcENJcm5nUWhxcU1C?=
+ =?utf-8?B?WmFmSmJUZDZ6NHJvK1lvVHlzbm9ZVHFObGdzcm1UTEM5TU5IdXpLRW1XS3Rr?=
+ =?utf-8?B?aDVyL0VWOWU5OFA5RUI5Rkh2Y2pCR0J0azdvYTBYWXpLZHJzOHBqTzc1ZjVS?=
+ =?utf-8?B?eEVGT2hzdlZYRUYxOTd0WHc0N2FoS21RazBCcmJmbW5FZnU0SUVlVW1hVDNn?=
+ =?utf-8?B?eG5MRUVJUHlSMDJGRGR5YUpCTExIR0dWSTR3SWd5NlgwWDc5Z1doMnM2MERk?=
+ =?utf-8?B?bm5zUS80NTNMcDNJR0h4RG1ZZmVBSld2SGdJbHlmQmx5N2RBVkNkSEkxQk4v?=
+ =?utf-8?B?cStrZk1RZ0N6eEM4anhML2ZBLys4TzY4Mkszbzd3cUsxTmd3VzVpejRrWG1V?=
+ =?utf-8?B?ZlZVVURZelVpYXRWZkpCQXBZcVpKWlc0NEZ5WFBHTFZjZTBLaFBwMEV4dDZT?=
+ =?utf-8?B?RENqbFppeVg3OC9peHlBOThpTEkvQnVETjN3ckkrSXliOEYvTVZUZGJWSkU5?=
+ =?utf-8?B?Sjc1dW04MzcyMjhUUWJReVhDeTFIRUk1TEFuY1BMcFZJNUFEb0dWZGVxWGNY?=
+ =?utf-8?B?S245SjhRMjJKZlpqbXUydVNrQXQzcGxyOEFMSmxoaGJLZlNRZDlaQ1RGd0tN?=
+ =?utf-8?B?Qk4za1dkMTBtZWJBRmlXQmtURVE0em9JYWsrR2xjcXF2K1VHcVRudC9QQUNO?=
+ =?utf-8?B?c01YRUJDQ3lFN0xpa2o4WUxTakRCZE1pSG9INmYvWW8wYmdjRmNSVDJMeXlW?=
+ =?utf-8?B?cmgvUDNZbWkxQ0tUMG5zTmF5THkzRDFwY2I4dWlpcTZ4WnBFamVhNHhSRG1V?=
+ =?utf-8?B?QlI1RGJvb1kxZVVuTDQzTXV4UC9WUHZaSFVQL0tWQStCQ2VReXpRbFJxcEtv?=
+ =?utf-8?B?MWRiVm56MWxIKzUxVzZIVUlWRlM1QXdieUNEdXA5blVjNzA5SnRkM1VpYzYy?=
+ =?utf-8?B?ekRiSFZsbkFpczhhb0xIaTdUUCtMbTRoVWhEMklpNDNQRFFWTmdQOEFNb1RZ?=
+ =?utf-8?B?NFlaVUVjUjZWdVM5ZDhmdmZVclQ3M2lpNG9TMTBvZGE1Q3lXNnpTb2ZFbFlT?=
+ =?utf-8?B?bHM2cDNKblUwRVNOSlpzV0F1QUx4aUU3MUxJcmVra0RhQTMrMWJnVEhRc05C?=
+ =?utf-8?B?TDhWejVBTkR4WTh0SHl4bjA3UTNaZlpGcldGTktRZXFPbkRVUWZhZktBWmkz?=
+ =?utf-8?B?S3QxTnc1NDlTYlgydGlJSFhNQmR3QW1SSlNvZWNKWmZ2aW4zb2pJT3pTSHB5?=
+ =?utf-8?B?RXlJdVRvSklkY2dmbEUxVmMvNlpHM1VJVG1MT1l5WDZaOG5oS3ZuRHFEaytv?=
+ =?utf-8?B?SEE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 013d3bbb-13d0-4953-1bbb-08dca4d82cc5
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2024 14:12:35.1818 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cjjOzbTxN5dZzktcpj+ANJ0Qpd8F2C6WEg4iImi4gohDBlSAoxTizpQQKfTnT1cRLoewhg/rVt2W8HYSVfC8tx4id6r+RoFVwTOXeWQgZrQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10885
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,532 +184,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Rafał Miłecki <rafal@milecki.pl>
+Hi Simon,
 
-U-Boot environment variables are stored in a specific format. Actual
-data can be placed in various storage sources (MTD, UBI volume, EEPROM,
-NVRAM, etc.).
+On 7/15/24 12:13 PM, Simon Glass wrote:
+> Before adding more files, move the bootstd docs into a new directory,
+> with an index.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Move all generic (NVMEM device independent) code from NVMEM device
-driver to an NVMEM layout driver. Then add a simple NVMEM layout code on
-top of it.
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-This allows using NVMEM layout for parsing U-Boot env data stored in any
-kind of NVMEM device.
-
-The old NVMEM glue driver stays in place for handling bindings in the
-MTD context. To avoid code duplication it uses exported layout parsing
-function. Please note that handling MTD & NVMEM layout bindings may be
-refactored in the future.
-
-Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
-Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
-This change was originally sent (and approved by Miquel) as a
-[PATCH V3 6/6] nvmem: layouts: add U-Boot env layout
-
-I just adjusted it to the approved binding and updated commit message.
-I kept Miquel's Reviewed-by tag due to minimal changes.
-
-I've successfully tested this code using it in both ways: as NVMEM
-device driver & NVMEM layout.
-
- MAINTAINERS                        |   1 +
- drivers/nvmem/Kconfig              |   3 +-
- drivers/nvmem/layouts/Kconfig      |  11 ++
- drivers/nvmem/layouts/Makefile     |   1 +
- drivers/nvmem/layouts/u-boot-env.c | 203 +++++++++++++++++++++++++++++
- drivers/nvmem/layouts/u-boot-env.h |  15 +++
- drivers/nvmem/u-boot-env.c         | 158 +---------------------
- 7 files changed, 234 insertions(+), 158 deletions(-)
- create mode 100644 drivers/nvmem/layouts/u-boot-env.c
- create mode 100644 drivers/nvmem/layouts/u-boot-env.h
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 31fb0031a5e8..630d16c480dd 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -23331,6 +23331,7 @@ U-BOOT ENVIRONMENT VARIABLES
- M:	Rafał Miłecki <rafal@milecki.pl>
- S:	Maintained
- F:	Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
-+F:	drivers/nvmem/layouts/u-boot-env.c
- F:	drivers/nvmem/u-boot-env.c
- 
- UACCE ACCELERATOR FRAMEWORK
-diff --git a/drivers/nvmem/Kconfig b/drivers/nvmem/Kconfig
-index 283134498fbc..d2c384f58028 100644
---- a/drivers/nvmem/Kconfig
-+++ b/drivers/nvmem/Kconfig
-@@ -363,8 +363,7 @@ config NVMEM_SUNXI_SID
- config NVMEM_U_BOOT_ENV
- 	tristate "U-Boot environment variables support"
- 	depends on OF && MTD
--	select CRC32
--	select GENERIC_NET_UTILS
-+	select NVMEM_LAYOUT_U_BOOT_ENV
- 	help
- 	  U-Boot stores its setup as environment variables. This driver adds
- 	  support for verifying & exporting such data. It also exposes variables
-diff --git a/drivers/nvmem/layouts/Kconfig b/drivers/nvmem/layouts/Kconfig
-index 9c6e672fc350..5e586dfebe47 100644
---- a/drivers/nvmem/layouts/Kconfig
-+++ b/drivers/nvmem/layouts/Kconfig
-@@ -26,6 +26,17 @@ config NVMEM_LAYOUT_ONIE_TLV
- 
- 	  If unsure, say N.
- 
-+config NVMEM_LAYOUT_U_BOOT_ENV
-+	tristate "U-Boot environment variables layout"
-+	select CRC32
-+	select GENERIC_NET_UTILS
-+	help
-+	  U-Boot stores its setup as environment variables. This driver adds
-+	  support for verifying & exporting such data. It also exposes variables
-+	  as NVMEM cells so they can be referenced by other drivers.
-+
-+	  If unsure, say N.
-+
- endmenu
- 
- endif
-diff --git a/drivers/nvmem/layouts/Makefile b/drivers/nvmem/layouts/Makefile
-index 2974bd7d33ed..4940c9db0665 100644
---- a/drivers/nvmem/layouts/Makefile
-+++ b/drivers/nvmem/layouts/Makefile
-@@ -5,3 +5,4 @@
- 
- obj-$(CONFIG_NVMEM_LAYOUT_SL28_VPD) += sl28vpd.o
- obj-$(CONFIG_NVMEM_LAYOUT_ONIE_TLV) += onie-tlv.o
-+obj-$(CONFIG_NVMEM_LAYOUT_U_BOOT_ENV) += u-boot-env.o
-diff --git a/drivers/nvmem/layouts/u-boot-env.c b/drivers/nvmem/layouts/u-boot-env.c
-new file mode 100644
-index 000000000000..5217dc4a52f8
---- /dev/null
-+++ b/drivers/nvmem/layouts/u-boot-env.c
-@@ -0,0 +1,203 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2022 - 2023 Rafał Miłecki <rafal@milecki.pl>
-+ */
-+
-+#include <linux/crc32.h>
-+#include <linux/etherdevice.h>
-+#include <linux/export.h>
-+#include <linux/if_ether.h>
-+#include <linux/nvmem-consumer.h>
-+#include <linux/nvmem-provider.h>
-+#include <linux/of.h>
-+#include <linux/slab.h>
-+
-+#include "u-boot-env.h"
-+
-+struct u_boot_env_image_single {
-+	__le32 crc32;
-+	uint8_t data[];
-+} __packed;
-+
-+struct u_boot_env_image_redundant {
-+	__le32 crc32;
-+	u8 mark;
-+	uint8_t data[];
-+} __packed;
-+
-+struct u_boot_env_image_broadcom {
-+	__le32 magic;
-+	__le32 len;
-+	__le32 crc32;
-+	DECLARE_FLEX_ARRAY(uint8_t, data);
-+} __packed;
-+
-+static int u_boot_env_read_post_process_ethaddr(void *context, const char *id, int index,
-+						unsigned int offset, void *buf, size_t bytes)
-+{
-+	u8 mac[ETH_ALEN];
-+
-+	if (bytes != 3 * ETH_ALEN - 1)
-+		return -EINVAL;
-+
-+	if (!mac_pton(buf, mac))
-+		return -EINVAL;
-+
-+	if (index)
-+		eth_addr_add(mac, index);
-+
-+	ether_addr_copy(buf, mac);
-+
-+	return 0;
-+}
-+
-+static int u_boot_env_parse_cells(struct device *dev, struct nvmem_device *nvmem, uint8_t *buf,
-+				  size_t data_offset, size_t data_len)
-+{
-+	char *data = buf + data_offset;
-+	char *var, *value, *eq;
-+
-+	for (var = data;
-+	     var < data + data_len && *var;
-+	     var = value + strlen(value) + 1) {
-+		struct nvmem_cell_info info = {};
-+
-+		eq = strchr(var, '=');
-+		if (!eq)
-+			break;
-+		*eq = '\0';
-+		value = eq + 1;
-+
-+		info.name = devm_kstrdup(dev, var, GFP_KERNEL);
-+		if (!info.name)
-+			return -ENOMEM;
-+		info.offset = data_offset + value - data;
-+		info.bytes = strlen(value);
-+		info.np = of_get_child_by_name(dev->of_node, info.name);
-+		if (!strcmp(var, "ethaddr")) {
-+			info.raw_len = strlen(value);
-+			info.bytes = ETH_ALEN;
-+			info.read_post_process = u_boot_env_read_post_process_ethaddr;
-+		}
-+
-+		nvmem_add_one_cell(nvmem, &info);
-+	}
-+
-+	return 0;
-+}
-+
-+int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
-+		     enum u_boot_env_format format)
-+{
-+	size_t crc32_data_offset;
-+	size_t crc32_data_len;
-+	size_t crc32_offset;
-+	__le32 *crc32_addr;
-+	size_t data_offset;
-+	size_t data_len;
-+	size_t dev_size;
-+	uint32_t crc32;
-+	uint32_t calc;
-+	uint8_t *buf;
-+	int bytes;
-+	int err;
-+
-+	dev_size = nvmem_dev_size(nvmem);
-+
-+	buf = kzalloc(dev_size, GFP_KERNEL);
-+	if (!buf) {
-+		err = -ENOMEM;
-+		goto err_out;
-+	}
-+
-+	bytes = nvmem_device_read(nvmem, 0, dev_size, buf);
-+	if (bytes < 0) {
-+		err = bytes;
-+		goto err_kfree;
-+	} else if (bytes != dev_size) {
-+		err = -EIO;
-+		goto err_kfree;
-+	}
-+
-+	switch (format) {
-+	case U_BOOT_FORMAT_SINGLE:
-+		crc32_offset = offsetof(struct u_boot_env_image_single, crc32);
-+		crc32_data_offset = offsetof(struct u_boot_env_image_single, data);
-+		data_offset = offsetof(struct u_boot_env_image_single, data);
-+		break;
-+	case U_BOOT_FORMAT_REDUNDANT:
-+		crc32_offset = offsetof(struct u_boot_env_image_redundant, crc32);
-+		crc32_data_offset = offsetof(struct u_boot_env_image_redundant, data);
-+		data_offset = offsetof(struct u_boot_env_image_redundant, data);
-+		break;
-+	case U_BOOT_FORMAT_BROADCOM:
-+		crc32_offset = offsetof(struct u_boot_env_image_broadcom, crc32);
-+		crc32_data_offset = offsetof(struct u_boot_env_image_broadcom, data);
-+		data_offset = offsetof(struct u_boot_env_image_broadcom, data);
-+		break;
-+	}
-+	crc32_addr = (__le32 *)(buf + crc32_offset);
-+	crc32 = le32_to_cpu(*crc32_addr);
-+	crc32_data_len = dev_size - crc32_data_offset;
-+	data_len = dev_size - data_offset;
-+
-+	calc = crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
-+	if (calc != crc32) {
-+		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n", calc, crc32);
-+		err = -EINVAL;
-+		goto err_kfree;
-+	}
-+
-+	buf[dev_size - 1] = '\0';
-+	err = u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_len);
-+
-+err_kfree:
-+	kfree(buf);
-+err_out:
-+	return err;
-+}
-+EXPORT_SYMBOL_GPL(u_boot_env_parse);
-+
-+static int u_boot_env_add_cells(struct nvmem_layout *layout)
-+{
-+	struct device *dev = &layout->dev;
-+	enum u_boot_env_format format;
-+
-+	format = (uintptr_t)device_get_match_data(dev);
-+
-+	return u_boot_env_parse(dev, layout->nvmem, format);
-+}
-+
-+static int u_boot_env_probe(struct nvmem_layout *layout)
-+{
-+	layout->add_cells = u_boot_env_add_cells;
-+
-+	return nvmem_layout_register(layout);
-+}
-+
-+static void u_boot_env_remove(struct nvmem_layout *layout)
-+{
-+	nvmem_layout_unregister(layout);
-+}
-+
-+static const struct of_device_id u_boot_env_of_match_table[] = {
-+	{ .compatible = "u-boot,env", .data = (void *)U_BOOT_FORMAT_SINGLE, },
-+	{ .compatible = "u-boot,env-redundant-bool", .data = (void *)U_BOOT_FORMAT_REDUNDANT, },
-+	{ .compatible = "u-boot,env-redundant-count", .data = (void *)U_BOOT_FORMAT_REDUNDANT, },
-+	{ .compatible = "brcm,env", .data = (void *)U_BOOT_FORMAT_BROADCOM, },
-+	{},
-+};
-+
-+static struct nvmem_layout_driver u_boot_env_layout = {
-+	.driver = {
-+		.name = "u-boot-env-layout",
-+		.of_match_table = u_boot_env_of_match_table,
-+	},
-+	.probe = u_boot_env_probe,
-+	.remove = u_boot_env_remove,
-+};
-+module_nvmem_layout_driver(u_boot_env_layout);
-+
-+MODULE_AUTHOR("Rafał Miłecki");
-+MODULE_LICENSE("GPL");
-+MODULE_DEVICE_TABLE(of, u_boot_env_of_match_table);
-diff --git a/drivers/nvmem/layouts/u-boot-env.h b/drivers/nvmem/layouts/u-boot-env.h
-new file mode 100644
-index 000000000000..dd5f280ac047
---- /dev/null
-+++ b/drivers/nvmem/layouts/u-boot-env.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef _LINUX_NVMEM_LAYOUTS_U_BOOT_ENV_H
-+#define _LINUX_NVMEM_LAYOUTS_U_BOOT_ENV_H
-+
-+enum u_boot_env_format {
-+	U_BOOT_FORMAT_SINGLE,
-+	U_BOOT_FORMAT_REDUNDANT,
-+	U_BOOT_FORMAT_BROADCOM,
-+};
-+
-+int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
-+		     enum u_boot_env_format format);
-+
-+#endif  /* ifndef _LINUX_NVMEM_LAYOUTS_U_BOOT_ENV_H */
-diff --git a/drivers/nvmem/u-boot-env.c b/drivers/nvmem/u-boot-env.c
-index 936e39b20b38..ced414fc9e60 100644
---- a/drivers/nvmem/u-boot-env.c
-+++ b/drivers/nvmem/u-boot-env.c
-@@ -3,23 +3,15 @@
-  * Copyright (C) 2022 Rafał Miłecki <rafal@milecki.pl>
-  */
- 
--#include <linux/crc32.h>
--#include <linux/etherdevice.h>
--#include <linux/if_ether.h>
- #include <linux/mod_devicetable.h>
- #include <linux/module.h>
- #include <linux/mtd/mtd.h>
--#include <linux/nvmem-consumer.h>
- #include <linux/nvmem-provider.h>
- #include <linux/of.h>
- #include <linux/platform_device.h>
- #include <linux/slab.h>
- 
--enum u_boot_env_format {
--	U_BOOT_FORMAT_SINGLE,
--	U_BOOT_FORMAT_REDUNDANT,
--	U_BOOT_FORMAT_BROADCOM,
--};
-+#include "layouts/u-boot-env.h"
- 
- struct u_boot_env {
- 	struct device *dev;
-@@ -29,24 +21,6 @@ struct u_boot_env {
- 	struct mtd_info *mtd;
- };
- 
--struct u_boot_env_image_single {
--	__le32 crc32;
--	uint8_t data[];
--} __packed;
--
--struct u_boot_env_image_redundant {
--	__le32 crc32;
--	u8 mark;
--	uint8_t data[];
--} __packed;
--
--struct u_boot_env_image_broadcom {
--	__le32 magic;
--	__le32 len;
--	__le32 crc32;
--	DECLARE_FLEX_ARRAY(uint8_t, data);
--} __packed;
--
- static int u_boot_env_read(void *context, unsigned int offset, void *val,
- 			   size_t bytes)
- {
-@@ -69,134 +43,6 @@ static int u_boot_env_read(void *context, unsigned int offset, void *val,
- 	return 0;
- }
- 
--static int u_boot_env_read_post_process_ethaddr(void *context, const char *id, int index,
--						unsigned int offset, void *buf, size_t bytes)
--{
--	u8 mac[ETH_ALEN];
--
--	if (bytes != 3 * ETH_ALEN - 1)
--		return -EINVAL;
--
--	if (!mac_pton(buf, mac))
--		return -EINVAL;
--
--	if (index)
--		eth_addr_add(mac, index);
--
--	ether_addr_copy(buf, mac);
--
--	return 0;
--}
--
--static int u_boot_env_add_cells(struct u_boot_env *priv, uint8_t *buf,
--				size_t data_offset, size_t data_len)
--{
--	struct nvmem_device *nvmem = priv->nvmem;
--	struct device *dev = priv->dev;
--	char *data = buf + data_offset;
--	char *var, *value, *eq;
--
--	for (var = data;
--	     var < data + data_len && *var;
--	     var = value + strlen(value) + 1) {
--		struct nvmem_cell_info info = {};
--
--		eq = strchr(var, '=');
--		if (!eq)
--			break;
--		*eq = '\0';
--		value = eq + 1;
--
--		info.name = devm_kstrdup(dev, var, GFP_KERNEL);
--		if (!info.name)
--			return -ENOMEM;
--		info.offset = data_offset + value - data;
--		info.bytes = strlen(value);
--		info.np = of_get_child_by_name(dev->of_node, info.name);
--		if (!strcmp(var, "ethaddr")) {
--			info.raw_len = strlen(value);
--			info.bytes = ETH_ALEN;
--			info.read_post_process = u_boot_env_read_post_process_ethaddr;
--		}
--
--		nvmem_add_one_cell(nvmem, &info);
--	}
--
--	return 0;
--}
--
--static int u_boot_env_parse(struct u_boot_env *priv)
--{
--	struct nvmem_device *nvmem = priv->nvmem;
--	struct device *dev = priv->dev;
--	size_t crc32_data_offset;
--	size_t crc32_data_len;
--	size_t crc32_offset;
--	__le32 *crc32_addr;
--	size_t data_offset;
--	size_t data_len;
--	size_t dev_size;
--	uint32_t crc32;
--	uint32_t calc;
--	uint8_t *buf;
--	int bytes;
--	int err;
--
--	dev_size = nvmem_dev_size(nvmem);
--
--	buf = kzalloc(dev_size, GFP_KERNEL);
--	if (!buf) {
--		err = -ENOMEM;
--		goto err_out;
--	}
--
--	bytes = nvmem_device_read(nvmem, 0, dev_size, buf);
--	if (bytes < 0) {
--		err = bytes;
--		goto err_kfree;
--	} else if (bytes != dev_size) {
--		err = -EIO;
--		goto err_kfree;
--	}
--
--	switch (priv->format) {
--	case U_BOOT_FORMAT_SINGLE:
--		crc32_offset = offsetof(struct u_boot_env_image_single, crc32);
--		crc32_data_offset = offsetof(struct u_boot_env_image_single, data);
--		data_offset = offsetof(struct u_boot_env_image_single, data);
--		break;
--	case U_BOOT_FORMAT_REDUNDANT:
--		crc32_offset = offsetof(struct u_boot_env_image_redundant, crc32);
--		crc32_data_offset = offsetof(struct u_boot_env_image_redundant, data);
--		data_offset = offsetof(struct u_boot_env_image_redundant, data);
--		break;
--	case U_BOOT_FORMAT_BROADCOM:
--		crc32_offset = offsetof(struct u_boot_env_image_broadcom, crc32);
--		crc32_data_offset = offsetof(struct u_boot_env_image_broadcom, data);
--		data_offset = offsetof(struct u_boot_env_image_broadcom, data);
--		break;
--	}
--	crc32_addr = (__le32 *)(buf + crc32_offset);
--	crc32 = le32_to_cpu(*crc32_addr);
--	crc32_data_len = dev_size - crc32_data_offset;
--	data_len = dev_size - data_offset;
--
--	calc = crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
--	if (calc != crc32) {
--		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n", calc, crc32);
--		err = -EINVAL;
--		goto err_kfree;
--	}
--
--	buf[dev_size - 1] = '\0';
--	err = u_boot_env_add_cells(priv, buf, data_offset, data_len);
--
--err_kfree:
--	kfree(buf);
--err_out:
--	return err;
--}
--
- static int u_boot_env_probe(struct platform_device *pdev)
- {
- 	struct nvmem_config config = {
-@@ -228,7 +74,7 @@ static int u_boot_env_probe(struct platform_device *pdev)
- 	if (IS_ERR(priv->nvmem))
- 		return PTR_ERR(priv->nvmem);
- 
--	return u_boot_env_parse(priv);
-+	return u_boot_env_parse(dev, priv->nvmem, priv->format);
- }
- 
- static const struct of_device_id u_boot_env_of_match_table[] = {
--- 
-2.35.3
-
+Thanks!
+Quentin
