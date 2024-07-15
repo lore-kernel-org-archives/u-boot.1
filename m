@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07C2C3DA5E
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33067C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:15:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85FE8888D2;
+	by phobos.denx.de (Postfix) with ESMTP id E5D04888E0;
 	Mon, 15 Jul 2024 12:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AzVOTdzA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Eg711EzL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF497888C9; Mon, 15 Jul 2024 12:14:08 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 1A3F7888D1; Mon, 15 Jul 2024 12:14:10 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB0D888868
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:14:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75A22888B2
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:14:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-42679f33fefso27107095e9.2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:14:06 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-426636ef8c9so27266575e9.2
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721038446; x=1721643246; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721038447; x=1721643247; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jV0y5SQVxrvtj2Cw8kmlXS/bUDW/pHBiDgLs4UYsUrE=;
- b=AzVOTdzAJ/CYuIHvAH6TtdihrtJi6RXAm10pzlMAlspZ5nMe0gxRETopFw1CyxJcsX
- FJqNiqEhdIX6oD3FS4TwTtNw/AEJ12wp8p1HKX05F9O1u9HBKZujnoxdQct3y/oS2FWN
- yrnWaQDBMce7Xrn63RAf9xi9PqQhzWZPKeVsk=
+ bh=5X0dmkMeEyCBhVQLWWRh7P8Sd8qOAFul2Ob9fTHI1SE=;
+ b=Eg711EzLFo/8naK44EAqeSFFPtVBSa+OdJdD1J53C5TI2uGZypPCCjrYJFkkT3j0qv
+ kuGQUOfd4d2HlcrdWV25mZJ+S7RqYmyIOWUIA5B/5s9SJHl+M4sYP37KlJxFVSuzAP41
+ h9ZLjGQu5xmyd0hq0tUoqEzs9C4OMuzK32/0A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721038446; x=1721643246;
+ d=1e100.net; s=20230601; t=1721038447; x=1721643247;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jV0y5SQVxrvtj2Cw8kmlXS/bUDW/pHBiDgLs4UYsUrE=;
- b=Qj3Orhr1MU6H69314aqaqvKMv+A2YtG5mqMQHsloHBt7MAh+L3jnvuirZRK0mWgfAj
- JYhMuHCVEFotIH3Ilwa//48V+uHGlg6TR0c0+omkJWqYKerEoFx9HRMijWtD1ajQ9dea
- fq7k5cRd+whfvyATheerHFfBlz8ozCfrXXsf2i/mKZfBh4jPy3tyrMrtOlLVQrkrSSgr
- f4T4sEtlTPFkkFOxQ9E1JHcE/HDh4+4UTtftzirBsUc5Za4YgQoFR7QhXy6dtkDOURsY
- BmJB2gzOLGSwP2NYoAYF+JpSFtSi/UvyUa04ny8CRVUkHJBBxMYI1vwJa671XNRmt7Sy
- Uaeg==
-X-Gm-Message-State: AOJu0YzZs+93gMyMRajE22+91QFljTJVxm3yjDpJhZ9mJ/JdFYMCotdH
- SaEmPkkO76w4KbQ44g6bR1VeD5gWgrfnU6ChL7paYNsJC9fH70MmZiFknbjjrioZBYnBASYxQe8
+ bh=5X0dmkMeEyCBhVQLWWRh7P8Sd8qOAFul2Ob9fTHI1SE=;
+ b=puzZMD6fknhuDswiRNfdE9lIXVLW7ofnyDfiSgo+sTwT263HwF2BAQXyQCMusmKrFe
+ E+jewnxlqIe0EsoBfU+jRxEmeQqmwLcwMCO8iEBrfZryj3d9PdQss4aGveUQ2Ee5pud8
+ wJqG/6biZtOaNVLjTTIh4GP/PDj17FRYkl8u9G+TWdQYrnWy3rxjUnmSBFhPgOgmcnf4
+ 69yqPl/V5BMu6wtRjK7qpSzDiqkyVzJ1n4M0N/+uxtT7dYIphR9R3+wUfujWOcYrmTnY
+ lK118HWEXOYSusU3dGfnhT3jmo164mE488LOfI9KdiY2/+Gki7A9BxOtdPG46g7ETjUh
+ q6lA==
+X-Gm-Message-State: AOJu0Yw6SyiijBpnozAWyqpKb8E8jyonMzCUP0fdmL4klQsvHWHzL9cK
+ BH4iekJ8kqXzTu3lggPLTqyDZfs2wjVfsaYScXamykj73ZWOFQyDINrNG+cZLSe+ZQqCtViUYnw
  =
-X-Google-Smtp-Source: AGHT+IHqebFjmlk0NWijoB1bass1l01vHTBMODp42xCy17LF3El1W6hB6IkYFYBMzXXpvemtHlutMA==
-X-Received: by 2002:a05:600c:524f:b0:427:9dad:8063 with SMTP id
- 5b1f17b1804b1-4279dad8478mr65183855e9.12.1721038446101; 
+X-Google-Smtp-Source: AGHT+IEugyGz6VVjandWkpQHAYB4KIH8K8KhQdGtYTDyCoRM4/a/GSspcXL1rW5pDnOpwfufn3nitQ==
+X-Received: by 2002:a05:600c:54e7:b0:426:5f06:5462 with SMTP id
+ 5b1f17b1804b1-426708fa7e9mr122106235e9.37.1721038446800; 
  Mon, 15 Jul 2024 03:14:06 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.14.05
+ 5b1f17b1804b1-4279f27a265sm114293605e9.28.2024.07.15.03.14.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 03:14:05 -0700 (PDT)
+ Mon, 15 Jul 2024 03:14:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>, John Clark <inindev@gmail.com>,
- Shantur Rathore <i@shantur.com>, Stefan Roese <sr@denx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH 08/13] bootstd: Tidy up comments on the boothmeth drivers
-Date: Mon, 15 Jul 2024 11:13:49 +0100
-Message-Id: <20240715101354.97895-9-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, John Clark <inindev@gmail.com>,
+ Stefan Roese <sr@denx.de>, Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH 09/13] bootstd: Correct handling of script from network
+Date: Mon, 15 Jul 2024 11:13:50 +0100
+Message-Id: <20240715101354.97895-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240715101354.97895-1-sjg@chromium.org>
 References: <20240715101354.97895-1-sjg@chromium.org>
@@ -95,54 +91,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a typo in the comment and add one to the EFI driver too.
+When reading a script from a network, no block device is available.
+Update the implementation to support this correctly, avoiding setting
+environment variables which relate only to block devices.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootmeth_efi.c      | 1 +
- boot/bootmeth_extlinux.c | 2 +-
- boot/bootmeth_script.c   | 2 +-
- 3 files changed, 3 insertions(+), 2 deletions(-)
+ boot/bootmeth_script.c | 51 +++++++++++++++++++++++++-----------------
+ 1 file changed, 31 insertions(+), 20 deletions(-)
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index 5a4c125835a..56a6e47f5b2 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -394,6 +394,7 @@ static const struct udevice_id distro_efi_bootmeth_ids[] = {
- 	{ }
- };
- 
-+/* Put a number before 'efi' to provide a default ordering */
- U_BOOT_DRIVER(bootmeth_4efi) = {
- 	.name		= "bootmeth_efi",
- 	.id		= UCLASS_BOOTMETH,
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index 9b55686948f..fbb05ef928e 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -183,7 +183,7 @@ static const struct udevice_id extlinux_bootmeth_ids[] = {
- 	{ }
- };
- 
--/* Put an number before 'extlinux' to provide a default ordering */
-+/* Put a number before 'extlinux' to provide a default ordering */
- U_BOOT_DRIVER(bootmeth_1extlinux) = {
- 	.name		= "bootmeth_extlinux",
- 	.id		= UCLASS_BOOTMETH,
 diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-index 0e05d28d4d9..24da47c7259 100644
+index 24da47c7259..c5cbf18c2e6 100644
 --- a/boot/bootmeth_script.c
 +++ b/boot/bootmeth_script.c
-@@ -250,7 +250,7 @@ static const struct udevice_id script_bootmeth_ids[] = {
- 	{ }
- };
+@@ -185,31 +185,42 @@ static int script_set_bootflow(struct udevice *dev, struct bootflow *bflow,
  
--/* Put an number before 'script' to provide a default ordering */
-+/* Put a number before 'script' to provide a default ordering */
- U_BOOT_DRIVER(bootmeth_2script) = {
- 	.name		= "bootmeth_script",
- 	.id		= UCLASS_BOOTMETH,
+ static int script_boot(struct udevice *dev, struct bootflow *bflow)
+ {
+-	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
++	struct blk_desc *desc;
+ 	ulong addr;
+ 	int ret = 0;
+ 
+-	if (desc->uclass_id == UCLASS_USB) {
+-		ret = env_set("devtype", "usb");
++	if (bflow->blk) {
++		desc = dev_get_uclass_plat(bflow->blk);
++		if (desc->uclass_id == UCLASS_USB) {
++			ret = env_set("devtype", "usb");
++		} else {
++			/*
++			 * If the uclass is AHCI, but the driver is ATA
++			 * (not scsi), set devtype to sata
++			 */
++			if (IS_ENABLED(CONFIG_SATA) &&
++			    desc->uclass_id == UCLASS_AHCI)
++				ret = env_set("devtype", "sata");
++			else
++				ret = env_set("devtype", blk_get_devtype(bflow->blk));
++		}
++		if (!ret)
++			ret = env_set_hex("devnum", desc->devnum);
++		if (!ret)
++			ret = env_set_hex("distro_bootpart", bflow->part);
++		if (!ret)
++			ret = env_set("prefix", bflow->subdir);
++		if (!ret && IS_ENABLED(CONFIG_ARCH_SUNXI) &&
++		    !strcmp("mmc", blk_get_devtype(bflow->blk)))
++			ret = env_set_hex("mmc_bootdev", desc->devnum);
+ 	} else {
+-		/* If the uclass is AHCI, but the driver is ATA
+-		 * (not scsi), set devtype to sata
+-		 */
+-		if (IS_ENABLED(CONFIG_SATA) &&
+-		    desc->uclass_id == UCLASS_AHCI)
+-			ret = env_set("devtype", "sata");
+-		else
+-			ret = env_set("devtype", blk_get_devtype(bflow->blk));
++		const struct udevice *media = dev_get_parent(bflow->dev);
++
++		ret = env_set("devtype",
++			      uclass_get_name(device_get_uclass_id(media)));
++		if (!ret)
++			ret = env_set_hex("devnum", dev_seq(media));
+ 	}
+-	if (!ret)
+-		ret = env_set_hex("devnum", desc->devnum);
+-	if (!ret)
+-		ret = env_set_hex("distro_bootpart", bflow->part);
+-	if (!ret)
+-		ret = env_set("prefix", bflow->subdir);
+-	if (!ret && IS_ENABLED(CONFIG_ARCH_SUNXI) &&
+-	    !strcmp("mmc", blk_get_devtype(bflow->blk)))
+-		ret = env_set_hex("mmc_bootdev", desc->devnum);
+ 	if (ret)
+ 		return log_msg_ret("env", ret);
+ 
 -- 
 2.34.1
 
