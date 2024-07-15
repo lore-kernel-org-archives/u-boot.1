@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F32C3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 23:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA7CC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 23:31:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22CFC8892E;
-	Tue, 16 Jul 2024 01:11:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 29836885E7;
+	Tue, 16 Jul 2024 01:31:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gCKYQw4u";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aPN5vayC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1112388937; Tue, 16 Jul 2024 01:11:38 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 4E3E7888A7; Tue, 16 Jul 2024 01:31:46 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC2BF88925
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 01:11:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10CAD88216
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 01:31:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5cce7626c87so1405110eaf.2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 16:11:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-65f9e25fffaso25164197b3.3
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 16:31:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721085094; x=1721689894; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1721086303; x=1721691103; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y4VT1TVqoocQ4WIZeZa50Hh02V43rJFABDp6b7qICMk=;
- b=gCKYQw4usdgmloQIoYhsZVIsKZ3ZJ4Y4eyvGh4KQ22Y62z33E5j/5sudSpg1kVBU1E
- hG3SAUtMu1Iin5TVYygCck7f5TiAz8LmFMdIg2gXugCUDu9O/kyAOTJ12vXHbabGOccc
- ckeX80mLLtYhJXVGfk6Z+U6JQI+85WuY3wh0A=
+ bh=zytChzUSZ8zJvlHb0zwqGy+a8v8qThHsM9dFwW/Mg0Q=;
+ b=aPN5vayCwlQ8p83Exxb8d0TXEtWGnFxQhkiIs+RdTy3AITtYIvobHS9IpnGeGYtJVn
+ nJf8jAdlisvnBonK2PcZ47yowpdD1cCsxLt1CcXWNej+bqqXV9B5X6kbbqy+c/yClW8L
+ 0qZVszb5p+MQo5EQG40cjTuwCfW2OvS9VafJfsLN845q9mSiVPLfynF3YaA0KHMqP9+I
+ ET9YhJS1EABpeQO/LOj/Egu2WJbZkQdBy8SJ49eVb2oTQftVzbL1KRHBw6gz7E2xD8rv
+ bU5mwJXE3qzYbZYh61hdqY596DBeb7OyTQcyEdeoAijJpO/WA+k7+XF87HHinTSHdRzu
+ 2Wgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721085094; x=1721689894;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721086303; x=1721691103;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y4VT1TVqoocQ4WIZeZa50Hh02V43rJFABDp6b7qICMk=;
- b=EYK0CR0yjABA2Lk7JCn6wIiuf1udw86WUInclfMUy9CdWkZRkrPieBELpCffHVXn17
- oVvtBmt3eotXb/SxVhzmIN/hSQ8KOq0QNa0yCYBA3X7Mx5WjkLKvo7CJomNsos+fjfTi
- OysCOjFKjOTAAp2UFtpTmWWpvgc2bMsZj/01hlmM99LXWaUY4oENjWoH0nyCSF5mVOVQ
- uXtaZuqRkDmyaHjDVZmCuIQ0SKwI0wpZEUmNf9IUdFCD3rnVNXBX2WD5TRI5cgZEmbEy
- puIKMV8dU6azvfW2ALHTw/7FrLE1qGYUEzXtxONXq8+huLJZAeUDxHoh/D9C0BMMTxD6
- nmvw==
-X-Gm-Message-State: AOJu0YzYyfZmJEUD8GTvuWywREGAeylTTrT3WeFe39dQ+PIcUKkRPV2n
- oSPNnUbqNhZ1wRCSdMLMR9htzlvDw5eiWOVL339j4EaVY9yYj7mf2VnWzWKOyZU=
-X-Google-Smtp-Source: AGHT+IGR/AqdAVlcMSX7uV7ehX1qYkp0k0nYQ2ex8K7+Fyf4LuzpIxaLI1uz0yzNhEDdnzshaTvlzA==
-X-Received: by 2002:a05:6820:99c:b0:5c4:57d:691e with SMTP id
- 006d021491bc7-5d288c6483amr681492eaf.2.1721085094539; 
- Mon, 15 Jul 2024 16:11:34 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5ce758a36cfsm932954eaf.25.2024.07.15.16.11.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 16:11:34 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
-References: <20240713132021.57650-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 01/45] api: Remove duplicate newlines
-Message-Id: <172108509389.579757.8273689189158768172.b4-ty@konsulko.com>
-Date: Mon, 15 Jul 2024 17:11:33 -0600
+ bh=zytChzUSZ8zJvlHb0zwqGy+a8v8qThHsM9dFwW/Mg0Q=;
+ b=FRgtq8By+1RXHHxbRUTE8ZdqQSCe2Qq6yk5sIgU7V11BBFVsBWVQ3/eklUlCG+aM3A
+ qAt40Ej30i2/hJCSrILIq5e2+UC080OAGNVYOvR6mgsJq8K19/6/BTs7XO8IEXMO/r2F
+ XY1+jMWCvxBKazeC6ZzWeb0gK2cAC1V/Aa+iBYMeivxuYgw3UjpwabTRDKlUcKXgyHd+
+ hNyIMAtkNRS9BDc8dw9pTZPk40KoX420OD2B2oZ8A+VSRpKKTVPs5RslWPfpa+XY31Hi
+ TLpZnoiF73Op4HS4H0cC2MMBFqRMhWgVGVmB2XhEg/nVgzCOTPJaZC3Ipiy/a9bCR2HT
+ 9ovg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWfM/cBlZVu1QHGjw5H9Hc31XWFVZaumnfZ92N3MUZSGQT7sGzTwbZocM4LrgaOfplBfZZUdu9OUQ4JIV86RBAgkWBmJg==
+X-Gm-Message-State: AOJu0YzLJJy2n1CbBF6Mwr+wqLJn85ON3e9RV2pFOOTASvMDwG8BFXc7
+ BXBXRcQ4bOVe/8qLRRpiLmJQdtYFNCp+/JkXhiUKNe180T/PqBkCvScV+TOuH8L+B4szAmidh4/
+ qs72zjA6ZQ9DFXqBss8KXFXdtQX9FABWaKA6ZXA==
+X-Google-Smtp-Source: AGHT+IHJOKtaBWpE0xzx2KMuTqMXpQuELjsAk16IXW2kjU6JRu7GE5TSKmrBbDlE36SWHzKVwM6usCNXoxXt3345sbc=
+X-Received: by 2002:a0d:de04:0:b0:64a:90fe:9108 with SMTP id
+ 00721157ae682-66380c110d6mr5943187b3.30.1721086302098; Mon, 15 Jul 2024
+ 16:31:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <20240712234304.9675-1-semen.protsenko@linaro.org>
+ <20240712234304.9675-5-semen.protsenko@linaro.org>
+ <CAFLszTgDFB6ivRdPfV9PnKgke+5TRwmpveicb-a2vOr-H-VPbg@mail.gmail.com>
+In-Reply-To: <CAFLszTgDFB6ivRdPfV9PnKgke+5TRwmpveicb-a2vOr-H-VPbg@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Mon, 15 Jul 2024 18:31:31 -0500
+Message-ID: <CAPLW+4noPcfRXcUx++Yjf0O0wbxCZsKJw0DiWWGzodC-8i-_Mg@mail.gmail.com>
+Subject: Re: [PATCH 4/5] rng: Add Exynos TRNG driver
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,15 +96,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 13 Jul 2024 15:18:52 +0200, Marek Vasut wrote:
+On Sat, Jul 13, 2024 at 10:13=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
+te:
+>
+> Hi Sam,
+>
 
-> Drop all duplicate newlines. No functional change.
-> 
-> 
+Hi Simon,
 
-Applied to u-boot/master, thanks!
+Thank you for the review!
 
--- 
-Tom
+> On Sat, 13 Jul 2024 at 00:44, Sam Protsenko <semen.protsenko@linaro.org> =
+wrote:
+> > +config RNG_EXYNOS
+> > +       bool "Samsung Exynos True Random Number Generator support"
+> > +       depends on DM_RNG
+> > +       help
+> > +         Enable support for True Random Number Generator (TRNG)
+> > +         available in Exynos SoCs.
+>
+> Can you mention the needed firmware here?
+>
 
+Will do in v2.
 
+> > +
+> > +struct exynos_trng_variant {
+>
+> please add comments
+>
+
+Will do in v2.
+
+> > +       bool smc;
+> > +       int (*init)(struct udevice *dev);
+> > +       void (*exit)(struct udevice *dev);
+> > +       int (*read)(struct udevice *dev, void *data, size_t len);
+> > +};
+> > +
+> > +struct exynos_trng {
+>
+> The convention is to add a _priv suffix
+>
+
+Will add in v2.
+
+> > +static int exynos_trng_init_smc(struct udevice *dev)
+> > +{
+> > +       struct arm_smccc_res res;
+> > +       int ret =3D 0;
+> > +
+> > +       arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_INIT, 0, 0, 0, 0, 0, 0, &re=
+s);
+> > +       if (res.a0 !=3D HWRNG_RET_OK) {
+> > +               dev_err(dev, "SMC command for TRNG init failed (%d)\n",
+> > +                       (int)res.a0);
+> > +               ret =3D -EIO;
+> > +       }
+> > +       if ((int)res.a0 =3D=3D -1)
+> > +               dev_info(dev, "Make sure LDFW is loaded\n");
+>
+> return error here?
+>
+
+It's already done above: (res.a0 !=3D HWRNG_RET_OK) condition includes
+-1 case. This line is basically only to help user figure out what
+might be wrong.
+
+> > +static int exynos_trng_of_to_plat(struct udevice *dev)
+> > +{
+> > +       struct exynos_trng *trng =3D dev_get_priv(dev);
+> > +
+> > +       trng->data =3D (struct exynos_trng_variant *)dev_get_driver_dat=
+a(dev);
+> > +       if (!trng->data->smc) {
+> > +               trng->base =3D dev_read_addr_ptr(dev);
+> > +               if (!trng->base)
+> > +                       return -ENODEV;
+>
+> That has a special meaning in U-Boot (i.e. that there is no device).
+> Devicetree problems should return -EINVAL
+>
+
+Will fix in v2.
+
+> > +       }
+> > +
+> > +       trng->clk =3D devm_clk_get(dev, "secss");
+> > +       if (IS_ERR(trng->clk))
+> > +               return -ENODEV;
+>
+> Should return the actual error
+>
+
+Will fix in v2.
+
+> > +
+> > +       trng->pclk =3D devm_clk_get_optional(dev, "pclk");
+> > +       if (IS_ERR(trng->pclk))
+> > +               return -ENODEV;
+>
+> same here
+>
+
+Will fix in v2.
+
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int exynos_trng_probe(struct udevice *dev)
+> > +{
+> > +       struct exynos_trng *trng =3D dev_get_priv(dev);
+> > +       int err;
+>
+> s/err/ret/
+>
+
+Will fix in v2.
+
+[snip]
+
+>
+> Regards,
+> Simon
