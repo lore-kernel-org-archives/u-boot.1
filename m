@@ -4,85 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA31CC2BD09
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 06:24:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63FBFC2BD09
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 06:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0262487C68;
-	Mon, 15 Jul 2024 08:24:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BEC8A88677;
+	Mon, 15 Jul 2024 08:49:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PKpQfthf";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="X6B+inpR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A43787D14; Mon, 15 Jul 2024 08:24:18 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5764A8867C; Mon, 15 Jul 2024 08:49:11 +0200 (CEST)
+Received: from mail-m12744.qiye.163.com (mail-m12744.qiye.163.com
+ [115.236.127.44])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5627B87919
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 08:24:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA37A88675
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 08:49:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a797c62565aso408424666b.2
- for <u-boot@lists.denx.de>; Sun, 14 Jul 2024 23:24:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721024656; x=1721629456; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=E1WiaTbg9Pu0NpqogQGxirqyAzc0UW2uzgorhKkLk6k=;
- b=PKpQfthf30Y+9LXs7udS8yhzulKiyY+7VHTUaB4wRl2+guvThRpqY6/qJzHi/bQMo3
- sGZAnyeZDcOpeKtZGs/1kCmNWNxrxHVJC96bjEYU92hthqtlVnD64XGwli2l4kccojUx
- oIOR7WOm6LCDNp/P/RARspv+dR08mPIZyy9BDloIJoxV/0kXnyJM42lOedZhIjgnI95X
- 1ivFTFPMFWnb8YY2pjekbYhaSIebxzdUy+sy+FFuZjKuftppabxN7Pxga7cMeS1GH/fr
- QPHDXBn4VsPDksHXhuW7b9cFc8oXXvfUe1fCPgsjOzPM62GW664ZT6iMFWKcxJzQIFwM
- s1AA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721024656; x=1721629456;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=E1WiaTbg9Pu0NpqogQGxirqyAzc0UW2uzgorhKkLk6k=;
- b=Qrv4kcQcdk8tN93KVyQ6Ygxe3h3K+w+14yol29KmTgUXvzFp3+5ou/yCXChSpuy5jT
- U8IeY/g2/e79FjsMf4AK00AwV+HBEBtQgC4pg8CBtGG+8DLBco6/0Hd64YmiDVDOya5y
- R+hTz1M+ul1oYfk2UUXqZPI8acuuvHtLUSyZ//KOdJNPvPbRW+ff3AQkJGuS495i5odp
- eQ5qvTenud6NzYtwz8gEfnlkpXprbNXZ0F5e6clUB0CoriwFzbUY8QG17QCgADqv53Uz
- rX2hT+/CFXIxqXPm/ohjLfbMME7vK3QQiPAJ9YqlKKX0iM9ekE86exzpmgx2X3/+xtfk
- ptEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzhVSTZXSx32iaw1M5yaDVlhW4dh6N9D8nRovw1veEEGfIKkvn3przNOSWP1F9+3o1xr8IpkaLnEfNCPl0CihY4HMZOQ==
-X-Gm-Message-State: AOJu0Yy1nbvU8ZRyVuNJ7VQ+fUhRClz8sY/rxYrSZRutQGsPYNlWNG1U
- XnqY/DzJOhAMmkaUVjzellYSo2AcW8kEqH9LKdh+7cana8/GyVnW7VZbimS/3gA=
-X-Google-Smtp-Source: AGHT+IG5ab1//qXxDqAQKSVax5hzadj0IdfmqIL1j+jk5C5qsmRDI9n4UhzsdFRQ0g5Ja9SCJHAWqA==
-X-Received: by 2002:a17:907:e90:b0:a6e:d339:c095 with SMTP id
- a640c23a62f3a-a780b884b3amr1371319766b.47.1721024655564; 
- Sun, 14 Jul 2024 23:24:15 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::7424? ([2a02:8109:aa0d:be00::7424])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7e79sm182407066b.88.2024.07.14.23.24.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 14 Jul 2024 23:24:15 -0700 (PDT)
-Message-ID: <948a0d04-a0a2-4c36-8c8d-5f3ad70dfdeb@linaro.org>
-Date: Mon, 15 Jul 2024 08:24:12 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=X6B+inpRF0mDnPX9vEg2eLXdgJDObmS+u9+IsI2lmwuJVab9kYN4bgiB+kNpD9QzxyprjOctvUCVTJpmGg5njODOuWz3CM9qa+CnYbuyw5S/Uzm1uuxYvroNNvQZpBshO6puA+uVoaeUEP6Kl/g9lPKco7JJR14lWPTGsg+NJiE=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=KLmbDtA66wC1d4u9kkD/zFR094HeBqhfyBor/D+rOUY=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id A797C90052B;
+ Mon, 15 Jul 2024 14:48:54 +0800 (CST)
+Message-ID: <44d1ef8a-df02-438b-a137-6fc7df90e1f2@rock-chips.com>
+Date: Mon, 15 Jul 2024 14:48:53 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dm: button: support remapping phone keys
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
- <c8e6a53d96a89e54585bfe28a647f44f@manjaro.org>
+Subject: Re: [PATCH 1/4] phy: rockchip: naneng-combphy: Fix "rockchip" spelling
+To: Sebastian Kropatsch <seb-dev@mail.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <cover.1720988760.git.seb-dev@mail.de>
+ <eb291d082df409153be526b7f755ac0096a4d29e.1720988760.git.seb-dev@mail.de>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <c8e6a53d96a89e54585bfe28a647f44f@manjaro.org>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <eb291d082df409153be526b7f755ac0096a4d29e.1720988760.git.seb-dev@mail.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0NDSFZDGExCSE1PQ0tCH0NWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a90b526c39203a9kunma797c90052b
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Njo6NBw5FDIyDCEKGjcBISow
+ KA4aCg5VSlVKTElKS0lNSkhOSExCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTE5NNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,147 +74,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dragan,
 
-On 14/07/2024 22:47, Dragan Simic wrote:
-> Hello Caleb,
-> 
-> On 2024-07-14 21:49, Caleb Connolly wrote:
->> We don't have audio support in U-Boot, but we do have boot menus. Add an
->> option to re-map the volume and power buttons to up/down/enter so that
->> in situations where these are the only available buttons (such as on
->> mobile phones) it's still possible to navigate menus built in U-Boot or
->> an external EFI app like GRUB or systemd-boot.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->> Cc: u-boot-qcom@groups.io
-> 
-> Very nice, thanks for this patch!  Looking good to me, with a few
-> suggestions available below.  Anyway, please feel free to add:
-> 
-> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-> 
->> ---
->>  drivers/button/Kconfig         | 11 +++++++++++
->>  drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
->>  2 files changed, 32 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
->> index 3918b05ae03e..6cae16fcc8bf 100644
->> --- a/drivers/button/Kconfig
->> +++ b/drivers/button/Kconfig
->> @@ -8,8 +8,19 @@ config BUTTON
->>        U-Boot provides a uclass API to implement this feature. Button 
->> drivers
->>        can provide access to board-specific buttons. Use of the device 
->> tree
->>        for configuration is encouraged.
->>
->> +config BUTTON_REMAP_PHONE_KEYS
->> +    bool "Remap phone keys for navigation"
->> +    depends on BUTTON
->> +    help
->> +      Enable remapping of phone keys to navigation keys. This is 
->> useful for
->> +      devices with phone keys that are not used in U-Boot. The phone 
->> keys
->> +      are remapped to the following navigation keys:
->> +      - Volume up: Up
->> +      - Volume down: Down
->> +      - Power: Enter
->> +
-> 
-> Frankly, "phone keys" sounds a bit strange to me, maybe because there
-> are also tablets that have the same style of reduced-set keys.  Thus,
-> I'd suggest that the following language is used:
-> 
-> - "BUTTON_REMAP_PHONE_KEYS" instead of "BUTTON_REMAP_REDUCED_KEYS"
-> - "reduced smartphone-style keys" instead of "phone keys"
+On 2024/7/15 05:23, Sebastian Kropatsch wrote:
+> Replace "rochchip" by "rockchip" in two instances.
+>
+> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-I would have assumed that anyone working on a tablet would immediately 
-guess what this option does and that it might be useful given the name. 
-I would argue that seeing "BUTTON_REMAP_REDUCED_KEYS" instead makes it 
-harder to guess what this option does.
-
-I think of it not as "this option remaps the keys on your phone" but as 
-"this option remaps the keys that phones have", as in, the volume and 
-power buttons.
-
-If you'd prefer, maybe we can meet somewhere in the middle with "mobile"?
-
-how's BUTTON_REMAP_MOBILE_KEYS?
-> 
-> Using "reduced" would also allow us to have this remapping logic more
-> easily extended to also cover some other buttons found on some other
-> devices with reduced-set keys.
-
-If such a device exists and gains support in U-Boot, the switch/case 
-could be extended, or a new option added if it doesn't make sense to 
-lump everything together. Without knowing about such a device I think 
-it's impossible to make a judgement here.
-
-> 
->>  config BUTTON_ADC
->>      bool "Button adc"
->>      depends on BUTTON
->>      depends on ADC
->> diff --git a/drivers/button/button-uclass.c 
->> b/drivers/button/button-uclass.c
->> index cda243389df3..729983d58701 100644
->> --- a/drivers/button/button-uclass.c
->> +++ b/drivers/button/button-uclass.c
->> @@ -9,8 +9,9 @@
->>
->>  #include <button.h>
->>  #include <dm.h>
->>  #include <dm/uclass-internal.h>
->> +#include <dt-bindings/input/linux-event-codes.h>
->>
->>  int button_get_by_label(const char *label, struct udevice **devp)
->>  {
->>      struct udevice *dev;
->> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct 
->> udevice *dev)
->>
->>      return ops->get_state(dev);
->>  }
->>
->> +static int button_remap_phone_keys(int code)
-> 
-> Pretty much the same suggestion as above applies here.
-> 
->> +{
->> +    switch (code) {
->> +    case KEY_VOLUMEUP:
->> +        return KEY_UP;
->> +    case KEY_VOLUMEDOWN:
->> +        return KEY_DOWN;
->> +    case KEY_POWER:
->> +        return KEY_ENTER;
->> +    default:
->> +        return code;
->> +    }
->> +}
->> +
->>  int button_get_code(struct udevice *dev)
->>  {
->>      struct button_ops *ops = button_get_ops(dev);
->> +    int code;
->>
->>      if (!ops->get_code)
->>          return -ENOSYS;
->>
->> -    return ops->get_code(dev);
->> +    code = ops->get_code(dev);
->> +    if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
->> +        return button_remap_phone_keys(code);
->> +    else
->> +        return code;
->>  }
->>
->>  UCLASS_DRIVER(button) = {
->>      .id        = UCLASS_BUTTON,
-
--- 
-// Caleb (they/them)
+Thanks,
+- Kever
+> ---
+>   drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> index 3ad339bccc..1b85cbcce8 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> @@ -225,7 +225,7 @@ static int rockchip_combphy_xlate(struct phy *phy, struct ofnode_phandle_args *a
+>   	return 0;
+>   }
+>   
+> -static const struct phy_ops rochchip_combphy_ops = {
+> +static const struct phy_ops rockchip_combphy_ops = {
+>   	.init = rockchip_combphy_init,
+>   	.exit = rockchip_combphy_exit,
+>   	.of_xlate = rockchip_combphy_xlate,
+> @@ -535,7 +535,7 @@ U_BOOT_DRIVER(rockchip_naneng_combphy) = {
+>   	.name		= "naneng-combphy",
+>   	.id		= UCLASS_PHY,
+>   	.of_match	= rockchip_combphy_ids,
+> -	.ops		= &rochchip_combphy_ops,
+> +	.ops		= &rockchip_combphy_ops,
+>   	.probe		= rockchip_combphy_probe,
+>   	.priv_auto	= sizeof(struct rockchip_combphy_priv),
+>   };
