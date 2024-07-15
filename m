@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C33A3C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07EC9C3DA4B
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E01D88887;
+	by phobos.denx.de (Postfix) with ESMTP id EACD38886D;
 	Mon, 15 Jul 2024 15:31:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ajrasNdD";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E5lTygzE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09E5388886; Mon, 15 Jul 2024 15:31:26 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 502A488856; Mon, 15 Jul 2024 15:31:26 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94EC188856
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D6E088865
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e03a17a50a9so4400410276.1
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:23 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6b6199ef089so26160576d6.3
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721050282; x=1721655082; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721050283; x=1721655083; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UEkpkVOf+JZ0gmtZXpZUAlqmqxwy0ol33VaQqh0W2cg=;
- b=ajrasNdDph1zJzKdpr5neOIwh+2lFxFjozoEMGul5XpUQH2Eqem8wiw65YcwQ4x13m
- ynQ5V23n9nMEOVWcwooYXIwkrOeFfP3oLM65VfPB1g4mIou2D5yb89hdZOHAvvw6anE8
- G3TNC6Iv3NTFDg/nDBCohb5PNCX3cpF9dtnbo=
+ bh=KhPEvzlSZDQkmAA1NXVU+0MlmAELmEXFUFq3+y6lTn8=;
+ b=E5lTygzEA3kQ7Yq6BQStnrVnl9KH/u4iS2xyPjMGIsJw9A3wjj1ntl/c2/fbZbspZ8
+ GOjuvE6kJzOh9mhjRjaVpSouu+vunW3PcnVEAObVc3Njftb6V10SYxhw/DbNHJIOfENj
+ LxlRNNuKEr2Ov+B70JckVxl48y3V7maqq75Zs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721050282; x=1721655082;
+ d=1e100.net; s=20230601; t=1721050283; x=1721655083;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UEkpkVOf+JZ0gmtZXpZUAlqmqxwy0ol33VaQqh0W2cg=;
- b=Ip2X+QN2XuIqFXLEhe3CsBLkf0q44gfLU2wocO+f1UWyQ6hwD2fALa0h27uAKSPIvc
- yDCVqZFMXUtVKMQr3SPz+FD53o3yCUExdx+Xqp1X7ndjfGaeo1s5xiKIzVqWoqEtUXZ0
- t3U4MKAPR6ftkZJyKA0Q+mvfme3I8EblBbKkM0L6kk2C4qBUfTa5cqNVfymzzTcTV+8Y
- Rs83HB7QlEoMKuQML/ldvNkqNdywhGY/CnLcIoROXGdYx9vu4PRbR8qhVBmD6QdwsqBH
- wK4ZPgXOZ2MTQ2jCftC+wVApejAA1Qy56MlQQQjCYAzvRGA1F1ymtqAOnsWT8ve9B0cM
- U7mA==
-X-Gm-Message-State: AOJu0YxHLqqkxB17+zUzpawwvsMfjgWdVj00cUJx7dkstMv0B4y2MdUV
- /eWhF5mbr6CUefJn3BdX2OI8R2bTnjiJkiNZvwVjjesl/jCQPhxXaWaguBLKo8X00R8E45Wl8LD
- YzBFyurCY6TjWfrd8MTIDDekvCOYdQgJcS3F8
-X-Google-Smtp-Source: AGHT+IEBQ3qt/1BjVxV7GMGfrmM7k6zFYZUqGPJjqay+tqtt643LnAJ4kdB40/FTWBF3LDXt/YTqYZkg68UFLqdE7c4=
-X-Received: by 2002:a25:c5d0:0:b0:e03:5f05:7566 with SMTP id
- 3f1490d57ef6-e041b079cd3mr20610355276.34.1721050282453; Mon, 15 Jul 2024
+ bh=KhPEvzlSZDQkmAA1NXVU+0MlmAELmEXFUFq3+y6lTn8=;
+ b=WdpVoOzFB3TBR0W6GQcR0IuyIk8oXj0AdtS/BwYuWqcatTy9456Xv6o+pucAT6L0Si
+ Qh56Kr3Putn2MonxW5OEd1K5iUu4kptddDNSEfbITlUbq0uNJJsbGvVQv3quau/LglFQ
+ yLx4EXSnq34mqrz4YliSZqJPLhAF6jCuxQwJIt0aLTU6Jx6gZknIacv6pfAbEeRYs/EJ
+ AcfPvwV0rjqBy+Htf5RaAvSIEyRYIMX8xPHxUWKpT/CevuzPFKOCv4kkWGPlc3UwLV+1
+ MLCP1ACuiMf5tbohdLJSjLjDd9pFb6smV12BFzTuC/fSN3/SLWuMtkwXjaVzAyacxsRD
+ FfCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW7/WR6mE6Gid0nFohIgPM2LbRtUPHDpOSDEklPpzRIvzdHIAuoszttYDe0unHXZhNjiJkDOzw3OhMA7VZJvLv3yiCAtQ==
+X-Gm-Message-State: AOJu0YwuHVrwGOSeJSbf52hMB3Z69fYuDXpQdm8S2P/CbHEucEjMlclF
+ N46KnFlrT9Kh5ieRGqKTDCJrBXKT/s+13pwc0gqg3B/gHSI9Zual8dJedClibnHODPzPBee0uIi
+ 4r3d5kHMSkpzv2YsTG+Wp3YTah8DfDtMKo5vP
+X-Google-Smtp-Source: AGHT+IEg/rGDE0Zz62uNRt/ByFMozgqYWQs8ST/gJxAW13fYLKaOhg06kIj/BBKXoPt23lMjYCb0jJXMm0Jje72D1Nc=
+X-Received: by 2002:ad4:5be8:0:b0:6b5:4098:abe2 with SMTP id
+ 6a1803df08f44-6b61c1f5264mr263205216d6.52.1721050282897; Mon, 15 Jul 2024
  06:31:22 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 15 Jul 2024 06:31:21 -0700
+ HTTPREST; Mon, 15 Jul 2024 06:31:22 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <ZnvUoW85DxzAIDJP@toradex.com>
-References: <ZnvUoW85DxzAIDJP@toradex.com>
+In-Reply-To: <20240623175622.1468600-4-sjg@chromium.org>
+References: <20240623175622.1468600-4-sjg@chromium.org>
  <20240623175622.1468600-1-sjg@chromium.org>
- <20240623175622.1468600-5-sjg@chromium.org> <ZnoKCXS5+Z0tM7Wb@toradex.com>
- <CAFLszTgKvEUVEGOUnuiSzVD3TQE2UjwdFS9Dm8sBpwbw9guaww@mail.gmail.com>
- <ZnrfTOKroizhiPvY@toradex.com>
- <CAFLszTjTxRE03kX51L9cK_=LZXFPDWQLzyXM9swe=7aEYDmkKw@mail.gmail.com>
-Date: Mon, 15 Jul 2024 06:31:21 -0700
-X-Google-Sender-Auth: J9xuJ5cqVLITCK6evks7d9GNaPo
-Message-ID: <CAFLszTiELZMfr=dxW6E4yRxwvA3P4R_Av=g+Zhrb1wgQ1ciW+w@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] buildman: Always use the full path in CROSS_COMPILE
-To: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Date: Mon, 15 Jul 2024 06:31:22 -0700
+X-Google-Sender-Auth: AnsrvPQV1zOqqDZQsqOB6aMCUi4
+Message-ID: <CAFLszThDtDs2xOU7hTd0S0+FdZyAa0fUMBhQRfWkFDnPC2KrdA@mail.gmail.com>
+Subject: Re: [PATCH v3 3/6] buildman: Fix a few typos in toolchain code
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Alexey Brodkin <abrodkin@synopsys.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,42 +89,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 26, 2024 at 09:00:43AM +0100, Simon Glass wrote:
-> Hi Andrejs,
->
-> On Tue, 25 Jun 2024 at 16:16, Andrejs Cainikovs
-> <andrejs.cainikovs@toradex.com> wrote:
-> >
-> > On Tue, Jun 25, 2024 at 01:38:07PM +0100, Simon Glass wrote:
-> > > Hi Andrejs,
-> > >
-> > > On Tue, 25 Jun 2024 at 01:06, Andrejs Cainikovs
-> > > <andrejs.cainikovs@toradex.com> wrote:
-> > > >
-> > > > On Sun, Jun 23, 2024 at 11:56:20AM -0600, Simon Glass wrote:
-> > > > > The feature to set the toolchain path does not seem to be needed. It
-> > > > > causes problems with venv (see [1]). Let's remove it.
-> > > > >
-> > > > > Add some tests while we are here.
-> > > > >
-> > > > > It does not look like any docs changes are needed for this.
-> > > > >
-> > > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240621131423.2363294-6-sjg@chromium.org/
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > Suggested-by: Tom Rini <trini@konsulko.com>
-> > > > > ---
-> > > > >
-> > > > > Changes in v3:
-> > > > > - Drop the PATH modification altogether
-> > > > >
-> > > > >  tools/buildman/bsettings.py     |  3 ++
-> > > > >  tools/buildman/builder.py       |  5 +--
-> > > > >  tools/buildman/builderthread.py |  4 +-
-> > > > >  tools/buildman/cmdline.py       |  2 -
-> > > > >  tools/buildman/control.py       |  6 +--
-> > > > >  tools/buildman/test.py          | 75 +++++++++++++++++++++++++++++++++
-> > > > >  tools/buildman/toolchain.py     | 20 ++++-----
-> > > > >  7 files changed, 92 insertions(+), 23 deletions(-)
-> > > > >
+Fix 'Thie' and capitalise 'unicode'.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+
+(no changes since v2)
+
+Changes in v2:
+- Add new patch to fix a few typos in toolchain code
+
+ tools/buildman/toolchain.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
 Applied to u-boot-dm, thanks!
