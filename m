@@ -4,78 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F6AEC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9886BC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7353887E2;
-	Mon, 15 Jul 2024 11:48:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E676588655;
+	Mon, 15 Jul 2024 12:08:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BhwbROtO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cpk+tP/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04496887FA; Mon, 15 Jul 2024 11:48:38 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 3C75E887F3; Mon, 15 Jul 2024 12:08:12 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EB2D883DE
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:48:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C307F88639
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:08:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-595850e7e11so5023156a12.1
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:48:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a77b550128dso516733566b.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 03:08:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721036914; x=1721641714; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=46hQka6IgN2K7KwU6Ldh2qMv5TCMfrchtV+kJ4F7QYk=;
- b=BhwbROtOpEYYTk6hGCFpkzazsd+ysGYoc5QJVYlsBj3I71Uex6ZUn9Kua7FHuynadl
- KU7YlEhfYSZkC/IjHqh7/+ci2zINekP/tf72Ue3I7Vy0QJ5EbdXH2oVlPs43PuHjQe5I
- PHyeHtPMjw7P1kWXgymD6jPSdK9gkUGZjpneYa9cu5EPovWw0/CNvIsBj2kd7Xt+nDwC
- crVLkJnL22vz/4vCIa0grO6n4E5LU1fxgoBPxsSxbcGSx/2RmDdMVaMJxEkPIKzvG54j
- V+5FPom3WMDxjVZm5kGexmbFUmklQQoaQX2U0pJ0EGjk08VkP7u0EtLTDyDWzncs+CkH
- z3uA==
+ d=linaro.org; s=google; t=1721038089; x=1721642889; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NW6nLEZDZHvBK/qD3zEo7NY82tibdmVHyrZVVRGfSck=;
+ b=Cpk+tP/XuoYFLS0gqUjLH4nLcJIcDlXcJIizwb72S3Oq7aH2eU9kATPk6GgvRxV4fq
+ UJsp5z/+V0V+b5bxxXjPajsKMpFF2lOPn+0pLZivT+zzMIlvmVjmEP4FPTGrU5jIGMYp
+ 1F11mQnCHyXaa3PH9RRmihR6rMy43VoajRR5Fy8apVr8JVVwt02AzbvUJcK0pomlRDv1
+ pLAJv/jRv7BRtJxL4/BkAZauIUWJUkJ+QU0Hhlz943v/+iLbdD0cFRfFp/xTI1xmh1tj
+ xyoNj6VtEf2nMQ8vzT6UGZikfCGyVavo/ut45j/8FLJfOXDesQ1ASXsqujMjBIfRhO+J
+ g8xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721036915; x=1721641715;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1721038089; x=1721642889;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=46hQka6IgN2K7KwU6Ldh2qMv5TCMfrchtV+kJ4F7QYk=;
- b=v+nYWAjZQCRRf5VYa/GIhpcQdNo6C3bgkSFI4TKNCdgjtt6f0c4gQKh56qq4OtYQpV
- 9C783W9P8QS1kAFx1zrkmxRlqj5GAHrLQZSSZQAm0Js5Ap0e99H1lGPGENqTdQXIQ83k
- pw/jQGlZhgKSS4KPxahJjFGrWMC2k0Rs2DGkD2keHkee8/Jo6iG/e4071/Hf7V9GD+Vj
- Kz+3wsfUhKohb8Uznw8kbfhsEyRLLb5Bdfo7wdxOZuTqV4pCe5aKhPw3qt5GkkA0SvF2
- Ft806x927HljxHOidbrn86OasgEINtkwbjYOdRrzkvepc/epXg4Zcbsou7kDx2BVwESA
- xShg==
-X-Gm-Message-State: AOJu0YzD7+3y7j/ClGZo6iI7DsBmjG50buoXD0pBoVzop0w7pnwYRhQL
- iwouYcbZc/N9hBA34wBhz+KU+vedNxDxE2BEE4IJXl/g3ogkaBvTFAnuaSySteIvANXbQWibiKa
- KwfePvuhKU7hy8L444cEB94nAQBcmbB/OVJ3nkw==
-X-Google-Smtp-Source: AGHT+IEeYXnAWTQVY4pTm961AQoATH798HMjLvQ6jjoecyeT71llQY7ZwTdeYgGb9a/xs5b0y2eEF2sZzXds7DwXrQ0=
-X-Received: by 2002:a50:8a93:0:b0:579:e7c5:1001 with SMTP id
- 4fb4d7f45d1cf-594ba59fdafmr10031570a12.23.1721036914482; Mon, 15 Jul 2024
- 02:48:34 -0700 (PDT)
+ bh=NW6nLEZDZHvBK/qD3zEo7NY82tibdmVHyrZVVRGfSck=;
+ b=pvAjVKLRi1n/iernKTWC1qMF7bPEFHPtNqvjOJMMd1g5lAOrJL5fM8vSH6BhPJ7aAG
+ ONYNY31dwLtuV7Pq2d/v8k9HtaGJXZeko6trV7VieM/H+sIatdV1n5U5RUsnas19hiTs
+ /JcodLxAGxr5KcEkcldGCZRCANHpowkqpe8VKUQwYoqMHPSUwG6F7vMJgxl61EVwByVI
+ xOOo2SRhCpA4khiqX5guAISqkWcILxYYlhUaLQOd+C+5vE9Q3LpB07l7qoTQ9kzozVm2
+ 3DFB257De6W3jU11aWIESAw14BAMZKms3KUWBAOXgUejNxPjSIbenFRSHIj2qpFo7KOQ
+ vOWw==
+X-Gm-Message-State: AOJu0Yy/3czf9K7L3TzuYJrUNZeTlms35IxV/F/7feCvOnvIj9weCrKR
+ /Acn3U4M9u3btucbF50ums3Q2ZzxKmIS7o8SpCdW8T7XtgY4PyUeinKJ7FZDETC8WJ71tTFIwfq
+ E/z4=
+X-Google-Smtp-Source: AGHT+IH1ZW3YxMTD8Mk5ijANtXmJ75UGUhOG25Uoszd+5k57kRe5UDfyt858nyqQt0j7B0fyb8x9DA==
+X-Received: by 2002:a17:906:493:b0:a77:eb34:3b42 with SMTP id
+ a640c23a62f3a-a780b689212mr1278483866b.12.1721038089159; 
+ Mon, 15 Jul 2024 03:08:09 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a79bc5b7eb4sm198102266b.60.2024.07.15.03.08.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jul 2024 03:08:08 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v6 00/24] qcom: rpmh core and regulator support
+Date: Mon, 15 Jul 2024 12:07:59 +0200
+Message-Id: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-14-sughosh.ganu@linaro.org>
- <CAFLszTjPtFX60ZvJtcG=3z-waRpQMYad9-bsVPUsP0MmHkJ7jA@mail.gmail.com>
-In-Reply-To: <CAFLszTjPtFX60ZvJtcG=3z-waRpQMYad9-bsVPUsP0MmHkJ7jA@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 15 Jul 2024 15:18:23 +0530
-Message-ID: <CADg8p96u23yVvksHqGnVsNKqcQd=VpHsM4utktujzUqpwv3Ggg@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 13/48] lmb: make LMB memory map persistent and
- global
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP/0lGYC/33Q0WrDIBTG8VcpXs9xcjTHpFd7j7ELPdFGWGNnh
+ myUvPtMYaxNYJef8PsrXsXsc/SzOB6uIvsS55imOujpIHi008nLONQtEFADNY10Wn5wOst8OY8
+ ycBgUWsZeg6jkkn2IX7fc61vdY5w/U/6+1Uuznv6GzGOoNBKkG1Ap6lF5sC/vcbI5Pad8Emup4
+ J820G00Vt05NtQSkG9pp9V/Wq1aEzNx6wx2O63vdb/RumoGGsAikdb7l7d3evuBpa06uACaPVn
+ jH+9eluUH79jSF6EBAAA=
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6306;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=7urYku25BdYWs3Pf2f26RONAGs4l81OOy6nfF5Ce3Wg=;
+ b=kA0DAAgBBYMxKxlfZLYByyZiAGaU9QSiweMUbQq5ui35A4i8IaaLiIByR5Q/WFHX/tfi520xI
+ okCMwQAAQgAHRYhBLZRoUY8ar7QaQxVzQWDMSsZX2S2BQJmlPUEAAoJEAWDMSsZX2S2Iz0P/3UX
+ d2/I8YOMRSjifgXACInL2s9mOipxLFaVx0Vzx+GXlP4vrCp8YXX6p4fLrey3uegRAc6doyKlm8Y
+ 0NoNvNoY9JD83fDKsrp3KAYYabCOU6YXRvtchRmoev3et0udvFrz6TUVB45Ci1igqtGSiBiZGXc
+ yuFIme12Ig7kAiBL68jC2TRWzYho/eST8FqEtq4nhT9smU7NjBSW4WiP1TznNCQp8ZO2jsQ7lw2
+ QEkp0mbi3JQvMlQczs/aGqE8cLn/jnmVjzJPMjQ/2j0UK1rutR4s3RbHKH+eNV97zvRvzV9l9na
+ +IzKbjg/k4bu8UbeiLD7FdnTaTxGPW8iaRx13Wn+PzJhRAftzBDp1IdbN87yRULdfKKpRoZ7bQb
+ Ymb/X4CQ6sXubzpU0KIoiB22Yp7pNev7mMtMByHbyXa8UOKwXuYOU3ELaUO7UkiLX21ZCOWg7sE
+ aTtuGwvGvoWtlKRIo0yWWEz0V/1a/nZW8xrrau+RiZdNJ9eRK+WrMggQ0qXHngAjwI0vKIoKrZs
+ gjrT6C9ZztWWgMXasxdfpwI4v9QkggrJgoLOIB8lJf67XWzDesiq1kXbhGjC8DboJUsnDdMFf02
+ Vetwl694d67l3wDRrkFJU8z65jFHdK/KbPLhuRLdPhfu99bxEJySFfUDJeNjiZV+QgHXwRLBrYe
+ b8Hoi
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,195 +116,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Simon,
+This series introduces support for the RPMh (Resource Power Manager
+(hardened)) co-processor and associated regulator driver found on most
+modern Qualcomm platforms (since ~2017).
 
-On Sat, 13 Jul 2024 at 20:46, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > The current LMB API's for allocating and reserving memory use a
-> > per-caller based memory view. Memory allocated by a caller can then be
-> > overwritten by another caller. Make these allocations and reservations
-> > persistent using the alloced list data structure.
-> >
-> > Two alloced lists are declared -- one for the available(free) memory,
-> > and one for the used memory. Once full, the list can then be extended
-> > at runtime.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V1:
-> > * Use alloced list structure for the available and reserved memory
-> >   lists instead of static arrays.
-> > * Corresponding changes in the code made as a result of the above
-> >   change.
-> > * Rename the reserved memory list as 'used'.
-> >
-> >  include/lmb.h |  77 +++--------
-> >  lib/lmb.c     | 346 ++++++++++++++++++++++++++++++--------------------
-> >  2 files changed, 224 insertions(+), 199 deletions(-)
-> >
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index 99fcf5781f..27cdb18c37 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -24,78 +24,18 @@ enum lmb_flags {
-> >  };
-> >
-> >  /**
-> > - * struct lmb_property - Description of one region.
-> > + * struct lmb_region - Description of one region.
-> >   *
-> >   * @base:      Base address of the region.
-> >   * @size:      Size of the region
-> >   * @flags:     memory region attributes
-> >   */
-> > -struct lmb_property {
-> > +struct lmb_region {
-> >         phys_addr_t base;
-> >         phys_size_t size;
-> >         enum lmb_flags flags;
-> >  };
-> >
-> > -/*
-> > - * For regions size management, see LMB configuration in KConfig
-> > - * all the #if test are done with CONFIG_LMB_USE_MAX_REGIONS (boolean)
-> > - *
-> > - * case 1. CONFIG_LMB_USE_MAX_REGIONS is defined (legacy mode)
-> > - *         => CONFIG_LMB_MAX_REGIONS is used to configure the region size,
-> > - *         directly in the array lmb_region.region[], with the same
-> > - *         configuration for memory and reserved regions.
-> > - *
-> > - * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
-> > - *         region is configurated *independently* with
-> > - *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
-> > - *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
-> > - *         lmb_region.region is only a pointer to the correct buffer,
-> > - *         initialized in lmb_init(). This configuration is useful to manage
-> > - *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
-> > - */
-> > -
-> > -/**
-> > - * struct lmb_region - Description of a set of region.
-> > - *
-> > - * @cnt: Number of regions.
-> > - * @max: Size of the region array, max value of cnt.
-> > - * @region: Array of the region properties
-> > - */
-> > -struct lmb_region {
-> > -       unsigned long cnt;
-> > -       unsigned long max;
-> > -#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> > -       struct lmb_property region[CONFIG_LMB_MAX_REGIONS];
-> > -#else
-> > -       struct lmb_property *region;
-> > -#endif
-> > -};
-> > -
-> > -/**
-> > - * struct lmb - Logical memory block handle.
-> > - *
-> > - * Clients provide storage for Logical memory block (lmb) handles.
-> > - * The content of the structure is managed by the lmb library.
-> > - * A lmb struct is  initialized by lmb_init() functions.
-> > - * The lmb struct is passed to all other lmb APIs.
-> > - *
-> > - * @memory: Description of memory regions.
-> > - * @reserved: Description of reserved regions.
-> > - * @memory_regions: Array of the memory regions (statically allocated)
-> > - * @reserved_regions: Array of the reserved regions (statically allocated)
-> > - */
-> > -struct lmb {
-> > -       struct lmb_region memory;
-> > -       struct lmb_region reserved;
-> > -#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> > -       struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
-> > -       struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
-> > -#endif
-> > -};
-> > -
-> > -void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
-> > -void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
-> > -                               void *fdt_blob);
-> >  long lmb_add(phys_addr_t base, phys_size_t size);
-> >  long lmb_reserve(phys_addr_t base, phys_size_t size);
-> >  /**
-> > @@ -134,6 +74,19 @@ void board_lmb_reserve(void);
-> >  void arch_lmb_reserve(void);
-> >  void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align);
-> >
-> > +/**
-> > + * lmb_mem_regions_init() - Initialise the LMB memory
-> > + *
-> > + * Initialise the LMB subsystem related data structures. There are two
-> > + * alloced lists that are initialised, one for the free memory, and one
-> > + * for the used memory.
-> > + *
-> > + * Initialise the two lists as part of board init.
-> > + *
-> > + * Return: 0 if OK, -ve on failure.
-> > + */
-> > +int lmb_mem_regions_init(void);
-> > +
-> >  #endif /* __KERNEL__ */
-> >
-> >  #endif /* _LINUX_LMB_H */
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 80945e3cae..a46bc8a7a3 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -6,6 +6,7 @@
-> >   * Copyright (C) 2001 Peter Bergner.
-> >   */
-> >
-> > +#include <alist.h>
-> >  #include <efi_loader.h>
-> >  #include <image.h>
-> >  #include <mapmem.h>
-> > @@ -15,24 +16,30 @@
-> >
-> >  #include <asm/global_data.h>
-> >  #include <asm/sections.h>
-> > +#include <linux/kernel.h>
-> >
-> >  DECLARE_GLOBAL_DATA_PTR;
-> >
-> >  #define LMB_ALLOC_ANYWHERE     0
-> > +#define LMB_ALIST_INITIAL_SIZE 4
-> >
-> > -static void lmb_dump_region(struct lmb_region *rgn, char *name)
-> > +struct alist lmb_free_mem;
-> > +struct alist lmb_used_mem;
->
-> I think these should be in a struct, e.g. struct lmb, allocated with
-> malloc() and pointed to by gd->lmb so we can avoid making the tests
-> destructive, and allow use of lmb in SPL.
+Even though most regulators are controlled via SPMI, the specific
+regions on the PMICs for controlling the regulators are restricted and
+can't be accessed by the Applications Processor (AP/HLOS). Instead,
+these resources are proxied via the RPMh where they can be voted on by
+multiple subsystems (Linux, the modem, and the other DSPs). This is done
+for security (to protect clocks, power domains, and regulators that are
+specifically relevant for the trustzone) as well as to simplify the
+management of shared peripherals and to allow for handover of
+peripherals like the USB controller.
 
-Can you elaborate on the point of allowing use of lmb in SPL. Why
-would the current design not work in SPL ? I tested this on the
-sandbox SPL variant, and the two lists do get initialised as part of
-the SPL initialisation routine. Is there some corner-case that I am
-not considering ?
+For U-Boot, our main concern is the regulators. Since all regulators on
+the system are controlled via the RPMh, it is necessary to support it to
+enable USB VBUS on some platforms, and may be needed for other
+peripherals in the future.
 
-Also, regarding putting the lmb structure pointer as part of gd, iirc
-Tom had a different opinion on this. Tom, can you please chime in here
-?
+Communicating with the RPMh additional requires accessing the cmd-db
+shared memory region, this contains key/value maps to determine the
+address of specific resources on the RPMh.
 
- > There is a
-> arch_reset_for_test() which can reset the lmb back to its original
-> state, or perhaps just swap the pointer for tests.
->
-> I know this series is already long, but this patch seems to do quite a
-> bit. Perhaps it could be split into two?
+Introduce support for the cmd-db, the RPMh framework, and some of the
+regulators that are necessary to enable USB VBUS on the RB5 development
+board.
 
-Sorry, do you mean the patch, or the series. If the later, I am going
-to split the non-rfc version which comes next into two parts. The
-first part being the lmb changes.
+These drivers are taken from Linux, then modified and simplified for
+U-Boot. The original Linux drivers contain heavy optimisations related
+to multithreading and asynchronous probing, as well as support for idle
+and suspend states which we don't need to deal with here. This unused
+code is removed before finally adjusting the drivers to properly build
+for U-Boot and use its device model.
 
--sughosh
+The U-Boot version of the driver supports a single ACTIVE_ONLY TCS and
+waits for it to be cleared after use. We don't support programming
+low power states.
 
->
-> Regards,
-> Simon
+To: Tom Rini <trini@konsulko.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+To: Sumit Garg <sumit.garg@linaro.org>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Cc: u-boot-qcom@groups.io
+
+Changes in v6:
+- Use the driver model for cmd-db
+- Extend dm_extended_scan() to scan nodes under /reserved-memory so that
+  cmd-db will be bound.
+- Link to v5: https://lore.kernel.org/r/20240711-b4-qcom-rpmh-v5-0-fbf04ce6a7e8@linaro.org
+
+Changes in v5:
+- Add Kconfig / Makefiles after introducing drivers to avoid breaking
+  compilation when bisecting (Thanks Neil).
+- Link to v4: https://lore.kernel.org/r/20240709-b4-qcom-rpmh-v4-0-c06d0a26644a@linaro.org
+
+Changes in v4:
+- Denote original Linux version in bitmap.h patch
+- Rebased on Linux 6.10-rc6 and re-apply U-Boot changes preserving git
+  history. Allowing for future changes to the Linux drivers to be ported
+  over more easily.
+- Add missing check to wait for the TCS to be cleared after use (seems
+  we were just racing the RPMh before, oops!).
+- Fix missing n_modes in pmic5_pldo regulator.
+- Link to v3: https://lore.kernel.org/r/20240708-b4-qcom-rpmh-v3-0-846cc6c5b728@linaro.org
+
+Changes in v3:
+- Don't call dm_scan_fdt_dev(), since DM core will scan.
+- Link to v2: https://lore.kernel.org/r/20240708-b4-qcom-rpmh-v2-0-8bc765606e56@linaro.org
+
+Changes in v2:
+- Implement Neil's suggestions and fixes for SM8[56]50
+- Slightly refactor cmd_db_init() for better abstraction.
+- Improve logging (printf -> log_err/dev_err)
+- Add missing error check in rpmh_regulators_bind()
+- Link to v1: https://lore.kernel.org/r/20240617-b4-qcom-rpmh-v1-0-bd2336923e0a@linaro.org
+
+---
+Caleb Connolly (24):
+      dm: core: scan reserved-memory nodes
+      linux/bitmap.h: add bitmap_empty helper
+      soc: qcom: import rpmh and cmd-db drivers from Linux
+      soc: qcom: cmd-db: adjust headers for U-Boot
+      soc: qcom: cmd-db: drop unused functions
+      soc: qcom: cmd-db: adjust probe for U-Boot
+      soc: qcom: cmd-db: adjust for U-Boot API
+      soc: qcom: rpmh-rsc: drop unused multi-threading and non-active TCS support
+      soc: qcom: rpmh-rsc: adjust headers for U-Boot
+      soc: qcom: rpmh-rsc: adjust probe for U-Boot
+      soc: qcom: rpmh-rsc: remaining U-Boot API changes
+      soc: qcom: rpmh: adjust headers for U-Boot
+      soc: qcom: rpmh: drop unused functions
+      soc: qcom: rpmh: U-Boot API changes
+      soc: qcom: add build infrastructure
+      power: regulator: import qcom-rpmh-regulator from Linux
+      power: regulator: qcom-rpmh-regulator: adjust headers for U-Boot
+      power: regulator: qcom-rpmh-regulator: port over lineage_range helpers
+      power: regulator: qcom-rpmh-regulator: adjust structs for U-Boot
+      power: regulator: qcom-rpmh-regulator: remove unused regulators
+      power: regulator: qcom-rpmh-regulator: port ops to U-Boot
+      power: regulator: qcom-rpmh-regulator: adjust probe for U-Boot
+      power: regulator: qcom-rpmh-regulator: add build infra
+      qcom_defconfig: enable rpmh regulators
+
+ configs/qcom_defconfig                        |   5 +
+ drivers/core/root.c                           |   3 +-
+ drivers/power/regulator/Kconfig               |   8 +
+ drivers/power/regulator/Makefile              |   1 +
+ drivers/power/regulator/qcom-rpmh-regulator.c | 544 ++++++++++++++++++++++++++
+ drivers/soc/Kconfig                           |   1 +
+ drivers/soc/Makefile                          |   1 +
+ drivers/soc/qcom/Kconfig                      |  27 ++
+ drivers/soc/qcom/Makefile                     |   4 +
+ drivers/soc/qcom/cmd-db.c                     | 225 +++++++++++
+ drivers/soc/qcom/rpmh-internal.h              | 138 +++++++
+ drivers/soc/qcom/rpmh-rsc.c                   | 505 ++++++++++++++++++++++++
+ drivers/soc/qcom/rpmh.c                       | 110 ++++++
+ include/linux/bitmap.h                        |   8 +
+ include/soc/qcom/cmd-db.h                     |  30 ++
+ include/soc/qcom/rpmh.h                       |  28 ++
+ include/soc/qcom/tcs.h                        |  81 ++++
+ 17 files changed, 1718 insertions(+), 1 deletion(-)
+---
+change-id: 20240611-b4-qcom-rpmh-fcfd32ac2940
+base-commit: 834df20b4ef50cda26936fbc435689fa0c5d47b1
+
+// Caleb (they/them)
+
