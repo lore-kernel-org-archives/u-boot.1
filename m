@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39632C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:33:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B344C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:34:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E206F88906;
-	Mon, 15 Jul 2024 15:31:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D39B8890A;
+	Mon, 15 Jul 2024 15:31:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XrL0QTyu";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MeJwRoxw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F4B2888E7; Mon, 15 Jul 2024 15:31:42 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id DA34C88914; Mon, 15 Jul 2024 15:31:43 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2A2A888F6
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5780C88906
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b5db7936b3so25982386d6.1
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:38 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b6199ef089so26162276d6.3
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721050297; x=1721655097; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721050298; x=1721655098; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LNlH8VSi9WL4di3pZibjbodtb+OWzJlXbb8hwTUmqWQ=;
- b=XrL0QTyuZfJfnbzyZABMnqbXK/gSYRsl1+LIKYp7b+aHFZnMVZlrYjvO8sw0WzeAOt
- at9WYGlh153WK8Jkj+Yn/PpuVu5INk6WKcd7Ziyqf1Z/WSJOn2OgX8zSAdLt0TWuUkKl
- vbyKCe5QrESSZO5z46PmRXdRxCtWEzjs2zDfY=
+ bh=dbY8w1+1zb+SlHUoULJubZrrVdbz2CKfT5Vyv4scMw8=;
+ b=MeJwRoxwVORZcKsSolHcHpL/mF6wiFrbS14WPlIKvUZ41hK69cOdqzOvgDKat5BrJD
+ CaiVNAyYBcNkVq+/cLMD6G/R8FZTpT1tWbH3aML1UzVsUrHhQ2p5OSZodCPH1Bo0+x6Y
+ IPM+NdH749yMzKGlD2pY5O9ptl+Qq2qGGJDVQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721050297; x=1721655097;
+ d=1e100.net; s=20230601; t=1721050298; x=1721655098;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LNlH8VSi9WL4di3pZibjbodtb+OWzJlXbb8hwTUmqWQ=;
- b=pPERhJz6KK2+BTlmyJEu1CCMfvp2yia7smxvRkYYk42OddoGdIyDT2nzi/NH5Qi3HP
- /dLlfwacpPsLlwZGHG7I5Yy+WsPyxD4SQczgEsL7XY8LFnIy8EuSBoZ8ZeiuSZGJCGJZ
- Vqr1lDStqvOOA4eF0msXa0byXrQGjTyXizafFnqmLQKIOp2/4ZvpQ0t/m77sxw3eKx6v
- rvzhsw+9rCVJfmYNEy7LNRGTVupSIU65PjaJLFepaqCJObU3SrZX18ebuJd9/iy8wflA
- /mxL5qU1yaiOHHiWs5Jz7bFUKeo0JIKqeE0iN2j4C1ZELcEg4ji0O5wih8jYDMq5V3py
- tvaA==
+ bh=dbY8w1+1zb+SlHUoULJubZrrVdbz2CKfT5Vyv4scMw8=;
+ b=QGfxNhfV9ofZSmfIxi06XqNNuFYCpY7exo7Y+l7bQswxyy4rsY0FEHzGeNzUi5pJhi
+ IhJA1+OJ9aFUoPtl1n6kvj2GD8SGdh4TJC/NEnZLpk2u2l1jN8OedVGxmhj9ojXlxued
+ 8w6pOEmIaOp3V6Hewbcr8v/piUEc+KM8YlJYYmGONpsrD75ip9RC0aYaL2QVYBROyDZm
+ kFpoiA0IfNat9WxN5MH0dSzFlozW6cH9WHkEbGQZgsvZ+5ceYj+xFkZ5DZiTHvBwb6lo
+ lAN6OSlD1U3GqangNv7akvomfh6XXvxG/eecTJWmTkPLsIax4Dm0+JN5IlZex0O1X4xF
+ IYtw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUenpW7iZNEIlh8Jno36KKCZ7D3X+3Pa1QmA2Jab3wykEefrwSsX+uc5WvmLGqxGlj77oMJjSm9GBjaWeaKv9QrkLMeNA==
-X-Gm-Message-State: AOJu0Yx9jiGYCVsOZ5l8gdI/UTSmUJZSjtlTMIBqzRN3RUsz+BcN1Qg5
- W8850zt6NbaEYQ/gK4V9Ti22rsLBUCCvI6GNkyKjIWpPffWMxE7xOGyJ1MkkSfiRvpuJOTAr9uA
- eMO9M52fQt+cBJLSW7nZ1CT71tkL4RtyMlxFh
-X-Google-Smtp-Source: AGHT+IF9Eqx+o6ZrsMDsaZxmE1JsaIdrjsYudenSkGfNp76UJA8+yiYacnQGc++y6IYPPfskpTykPkGxBvMTTOrJquY=
-X-Received: by 2002:a05:6214:240f:b0:6b5:e58a:6388 with SMTP id
- 6a1803df08f44-6b61c1c50f0mr235908206d6.46.1721050297602; Mon, 15 Jul 2024
- 06:31:37 -0700 (PDT)
+ AJvYcCV5OtDgycfBk1tCe3QZcN05GnrdQzdPjt4Q2W61+AEUjxXzfYVh9Tdsr/qOWxiSbNyDUQaoIrsRPut0sXUhIUhaZZOlBQ==
+X-Gm-Message-State: AOJu0YxQ/cbKa5Ep9sTOCj9vQW+CqT2MBVP3mkl3XMzBml35Nv6SajM3
+ 4ASCXf2QbAgxfD/Zfs+J2WoOhx76VNls6M0LKK6K5h7niHODryBwT9Vk2bha2u2Tk387yYCXWZC
+ SnpHfNy5XYEUkpbuqKqcysEtMHU0HnbQlGDUg
+X-Google-Smtp-Source: AGHT+IHatmGdh7U8kbZ9RwO6AH7I9wbcQhEzlg+nDBIZ9oOF4apf02FT48ozHMPgBk4lrWJUxEWmW9xYAZw78exm9wU=
+X-Received: by 2002:a05:6214:f28:b0:6b5:4573:4ac5 with SMTP id
+ 6a1803df08f44-6b61c1c5cf5mr230981226d6.45.1721050298221; Mon, 15 Jul 2024
+ 06:31:38 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 15 Jul 2024 09:31:37 -0400
+ HTTPREST; Mon, 15 Jul 2024 06:31:37 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240623175515.1466908-5-sjg@chromium.org>
-References: <20240623175515.1466908-5-sjg@chromium.org>
+In-Reply-To: <20240623175515.1466908-4-sjg@chromium.org>
+References: <20240623175515.1466908-4-sjg@chromium.org>
  <20240623175515.1466908-1-sjg@chromium.org>
-Date: Mon, 15 Jul 2024 09:31:37 -0400
-X-Google-Sender-Auth: lzlwqE5IKFHHalK3uF32lXTZwK0
-Message-ID: <CAFLszTgMbRCTfXw6ui2zh8LQEYpRPR4G=69jbYtufR9qa=Cp5A@mail.gmail.com>
-Subject: Re: [PATCH v2 04/14] binman: Update the entrydocs header
+Date: Mon, 15 Jul 2024 06:31:37 -0700
+X-Google-Sender-Auth: T7epZTx6Fu7TVyCPzO8UBlkhV4s
+Message-ID: <CAFLszTj5vkqtz7W_YA6o3cgMoxDs9rv1sX5Ey-3hTEROWPmZcg@mail.gmail.com>
+Subject: Re: [PATCH v2 03/14] binman: ti: Regenerate entry docs
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Marek Vasut <marex@denx.de>, Neha Malcom Francis <n-francis@ti.com>,
- Peng Fan <peng.fan@nxp.com>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
  Philippe Reynes <philippe.reynes@softathome.com>, 
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Vignesh Raghavendra <vigneshr@ti.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -93,15 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reduce the length of the underline for this header, to match the
-heading itself.
+Correct formatting errors in the documentation.
+
+Regenerate the entries.rst file to include this recent addition.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/binman/entry.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/binman/entries.rst        | 35 +++++++++++++++++++++++++
+ tools/binman/etype/ti_secure.py | 45 +++++++++++++++++----------------
+ 2 files changed, 58 insertions(+), 22 deletions(-)
 
 Applied to u-boot-dm, thanks!
