@@ -4,61 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC835C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA829C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 10:56:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB13E887EB;
-	Mon, 15 Jul 2024 12:56:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E08188806;
+	Mon, 15 Jul 2024 12:56:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721040965;
-	bh=Xz1j2Rn7wsfidrKv9A1lyuMWW+L/n60VXp1FmYgVwjc=;
+	s=phobos-20191101; t=1721040980;
+	bh=V9c7l7TBGt5vcKlxbpCeAmr1MMvKnCAa8rT0hP9E+7I=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=dmRF4Y2xIrI4UKK+6ofZ5xE4+jlMjMd5o1tiQSfYZn0h+u5i7vt07Zq0kqPRLCM44
-	 GvEUxJkuPG7IHtv4IXnKgP2YWw2qu8eTfTgaonHsSTGbDt3dklpvccYNrBDWmepM+F
-	 GJwHbw2VQSXLrmeEfka2RJmPc/L790LoK7gRQU5QYY1vgbJTLdUiMw9c5Ka1x8eu5M
-	 8L70MY/54e4rnZavFHzv7KX6Vr4klZp+ywena6/MGnQjvmhZJ2XoQu2oBjF1BzGlS8
-	 y7Jfg3IcATaOulBZYVz0uQwP/REdVNhZg+rJH5i53QifFAwro2QYorjpO7rnp5XATH
-	 cqcOt8ve/6j/Q==
+	b=St8zfz22mu8y7ZJxpQJLVjgbz+DSGV5tKV3ElEbSAi1ABIDpWRY4z9ekPzKypGX+t
+	 lcodrwKiL+xmC8wfLU5Salvz5YV1D/7S0jv3Sc7ot1avsuTy5IRV+wqlUDjp5RFZIo
+	 zqnpQbe8VD+won6+00V4I+NLReSWC5kFmaM4m34Tbh3tiBHIp9UuTD50LgLdBUStmz
+	 brz3xWFAyVHbbdFY0lZ8Q4zbXH/yk3moe8tOrtfiRdLwYrVYgdHH/wqnpEYm68pRSQ
+	 8bWA7ldGUIjWV54kZch6TYtAhbVym2KWNL9IcDTJia7Z1j4QB+6LneBALX1ITCd6H9
+	 rQONsy1B0+vow==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DFA887EE; Mon, 15 Jul 2024 12:56:04 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id EB9518880C; Mon, 15 Jul 2024 12:56:18 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6942387E13
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:56:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEAEB8880E
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 12:56:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4WMzdY68Qqz9sWx;
- Mon, 15 Jul 2024 12:56:01 +0200 (CEST)
-Message-ID: <af7e1133-8c08-4385-8349-9c97d68c8e48@denx.de>
-Date: Mon, 15 Jul 2024 12:55:57 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4WMzdr51NNz9sd0;
+ Mon, 15 Jul 2024 12:56:16 +0200 (CEST)
+Message-ID: <3bedd45e-b0d9-49eb-80a6-e8a5a9750363@denx.de>
+Date: Mon, 15 Jul 2024 12:56:14 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: dts: mvebu: Migrate to upstream DT for Synology
- DS116 (Armada 385) board
+Subject: Re: [PATCH v3] arm: mvebu: Enable bootstd and other modernization for
+ Synology DS414 (Armada XP) board
 Content-Language: en-US
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>
-References: <20240522215200.16199-1-mibodhi@gmail.com>
+To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Phil Sutter <phil@nwl.cc>
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20240708043904.5100-1-mibodhi@gmail.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240522215200.16199-1-mibodhi@gmail.com>
+In-Reply-To: <20240708043904.5100-1-mibodhi@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4WMzdY68Qqz9sWx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,10 +71,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/22/24 23:51, Tony Dinh wrote:
-> Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
-> DEFAULT_DEVICE_TREE in DS116 defconfig. Remove current DTS in
-> arch/arm/dts/ directory.
+On 7/8/24 06:39, Tony Dinh wrote:
+> - Switch to standard boot (in include/configs/ds414.h and
+> configs/ds414_defconfig)
+> - Implement board_late_init() to ensure successful enumeration
+> of USB3 devices
+> - Remove unnecessary checkboard()
+> - Updated IDENT_STRING to indicate this u-boot supports both Synology
+> DS414 and DS214+ boards
+> - Add SYS_THUMB_BUILD to reduce binary size
+> - Add NET_RANDOM_ETHADDR
+> - Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
 > 
 > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 
@@ -89,342 +92,213 @@ Stefan
 
 > ---
 > 
->   arch/arm/dts/Makefile                      |   1 -
->   arch/arm/dts/armada-385-synology-ds116.dts | 291 ---------------------
->   configs/ds116_defconfig                    |   3 +-
->   3 files changed, 2 insertions(+), 293 deletions(-)
->   delete mode 100644 arch/arm/dts/armada-385-synology-ds116.dts
+> Changes in v3:
+> - Restore misc_init_r() to support booting legacy FW.
+> - Correct scripting error in EXTRA_ENV_SETTINGS_LEGACY in
+> /include/configs/ds414.h
+> - Remove CONFIG_PHY_ANEG_TIMEOUT from /include/configs/ds414.h. This symbol
+> has been moved to Kconfig.
 > 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index a5c82ebf7a..75f7e616b4 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -155,7 +155,6 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
->   	armada-385-atl-x530.dtb			\
->   	armada-385-atl-x530DP.dtb		\
->   	armada-385-db-88f6820-amc.dtb		\
-> -	armada-385-synology-ds116.dtb		\
->   	armada-385-thecus-n2350.dtb		\
->   	armada-385-turris-omnia.dtb		\
->   	armada-388-clearfog.dtb			\
-> diff --git a/arch/arm/dts/armada-385-synology-ds116.dts b/arch/arm/dts/armada-385-synology-ds116.dts
-> deleted file mode 100644
-> index 82a0373f7f..0000000000
-> --- a/arch/arm/dts/armada-385-synology-ds116.dts
-> +++ /dev/null
-> @@ -1,291 +0,0 @@
-> -// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> -/*
-> - * Device Tree file for Synology DS116 NAS
-> - *
-> - * Copyright (C) 2017 Willy Tarreau <w@1wt.eu>
-> - */
+> Changes in v2:
+> - Define EXTRA_ENV_SETTINGS_LEGACY to restore default envs support for
+> booting legacy FW.
+> 
+>   board/Synology/ds414/ds414.c | 14 ++++----
+>   configs/ds414_defconfig      | 19 +++++------
+>   include/configs/ds414.h      | 65 +++++++++++++++++++++++++-----------
+>   3 files changed, 61 insertions(+), 37 deletions(-)
+> 
+> diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
+> index 8db810ad3e..1a4cea87e1 100644
+> --- a/board/Synology/ds414/ds414.c
+> +++ b/board/Synology/ds414/ds414.c
+> @@ -180,6 +180,13 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> +int board_late_init(void)
+> +{
+> +	/* Do late init to ensure successful enumeration of XHCI devices */
+> +	pci_init();
+> +	return 0;
+> +}
+> +
+>   int misc_init_r(void)
+>   {
+>   	if (!env_get("ethaddr")) {
+> @@ -188,10 +195,3 @@ int misc_init_r(void)
+>   	}
+>   	return 0;
+>   }
 > -
-> -/dts-v1/;
-> -#include "armada-385.dtsi"
-> -#include <dt-bindings/gpio/gpio.h>
+> -int checkboard(void)
+> -{
+> -	puts("Board: DS414\n");
 > -
-> -/ {
-> -	model = "Synology DS116";
-> -	compatible = "marvell,a385-gp", "marvell,armada385", "marvell,armada380";
-> -
-> -	chosen {
-> -		stdout-path = "serial0:115200n8";
-> -	};
-> -
-> -	memory {
-> -		device_type = "memory";
-> -		reg = <0x00000000 0x40000000>; /* 1 GB */
-> -	};
-> -
-> -	soc {
-> -		ranges = <MBUS_ID(0xf0, 0x01) 0 0xf1000000 0x100000
-> -			  MBUS_ID(0x01, 0x1d) 0 0xfff00000 0x100000
-> -			  MBUS_ID(0x09, 0x19) 0 0xf1100000 0x10000
-> -			  MBUS_ID(0x09, 0x15) 0 0xf1110000 0x10000
-> -			  MBUS_ID(0x0c, 0x04) 0 0xf1200000 0x100000>;
-> -
-> -		internal-regs {
-> -			i2c@11000 {
-> -				pinctrl-names = "default";
-> -				pinctrl-0 = <&i2c0_pins>;
-> -				status = "okay";
-> -				clock-frequency = <100000>;
-> -
-> -				eeprom@57 {
-> -					compatible = "atmel,24c64";
-> -					reg = <0x57>;
-> -				};
-> -			};
-> -
-> -			serial@12000 {
-> -				pinctrl-names = "default";
-> -				pinctrl-0 = <&uart0_pins>;
-> -				status = "okay";
-> -			};
-> -
-> -			serial@12100 {
-> -				/* A PIC16F1829 is connected to uart1 at 9600 bps,
-> -				 * and takes single-character orders :
-> -				 *   "1" : power off // already handled by the poweroff node
-> -				 *   "2" : short beep
-> -				 *   "3" : long beep
-> -				 *   "4" : turn the power LED ON
-> -				 *   "5" : flash the power LED
-> -				 *   "6" : turn the power LED OFF
-> -				 *   "7" : turn the status LED OFF
-> -				 *   "8" : turn the status LED ON
-> -				 *   "9" : flash the status LED
-> -				 *   "A" : flash the motherboard LED (D8)
-> -				 *   "B" : turn the motherboard LED OFF
-> -				 *   "C" : hard reset
-> -				 */
-> -				pinctrl-names = "default";
-> -				pinctrl-0 = <&uart1_pins>;
-> -				status = "okay";
-> -			};
-> -
-> -			poweroff@12100 {
-> -				compatible = "synology,power-off";
-> -				reg = <0x12100 0x100>;
-> -				clocks = <&coreclk 0>;
-> -			};
-> -
-> -			ethernet@70000 {
-> -				pinctrl-names = "default";
-> -				phy = <&phy0>;
-> -				phy-mode = "sgmii";
-> -				buffer-manager = <&bm>;
-> -				bm,pool-long = <0>;
-> -				status = "okay";
-> -			};
-> -
-> -			mdio@72004 {
-> -				pinctrl-names = "default";
-> -				pinctrl-0 = <&mdio_pins>;
-> -
-> -				phy0: ethernet-phy@1 {
-> -					reg = <1>;
-> -				};
-> -			};
-> -
-> -			sata@a8000 {
-> -				pinctrl-names = "default";
-> -				pinctrl-0 = <&sata0_pins>;
-> -				status = "okay";
-> -				#address-cells = <1>;
-> -				#size-cells = <0>;
-> -
-> -				sata0: sata-port@0 {
-> -					reg = <0>;
-> -					target-supply = <&reg_5v_sata0>;
-> -				};
-> -			};
-> -
-> -			bm@c8000 {
-> -				status = "okay";
-> -			};
-> -
-> -			usb3@f0000 {
-> -				usb-phy = <&usb3_0_phy>;
-> -				status = "okay";
-> -			};
-> -
-> -			usb3@f8000 {
-> -				usb-phy = <&usb3_1_phy>;
-> -				status = "okay";
-> -			};
-> -		};
-> -
-> -		bm-bppi {
-> -			status = "okay";
-> -		};
-> -
-> -		gpio-fan {
-> -			compatible = "gpio-fan";
-> -			gpios = <&gpio1 18 GPIO_ACTIVE_HIGH>,
-> -				<&gpio1 17 GPIO_ACTIVE_HIGH>,
-> -				<&gpio1 16 GPIO_ACTIVE_HIGH>;
-> -			gpio-fan,speed-map = <   0 0
-> -					      1500 1
-> -					      2500 2
-> -					      3000 3
-> -					      3400 4
-> -					      3700 5
-> -					      3900 6
-> -					      4000 7>;
-> -			#cooling-cells = <2>;
-> -		};
-> -
-> -		gpio-leds {
-> -			compatible = "gpio-leds";
-> -
-> -			/* The green part is on gpio0.20 which is also used by
-> -			 * sata0, and accesses to SATA disk 0 make it blink so it
-> -			 * doesn't need to be declared here.
-> -			 */
-> -			orange {
-> -				gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
-> -				label = "ds116:orange:disk";
-> -				default-state = "off";
-> -			};
-> -		};
-> -	};
-> -
-> -	usb3_0_phy: usb3_0_phy {
-> -		compatible = "usb-nop-xceiv";
-> -		vcc-supply = <&reg_usb3_0_vbus>;
-> -		#phy-cells = <0>;
-> -	};
-> -
-> -	usb3_1_phy: usb3_1_phy {
-> -		compatible = "usb-nop-xceiv";
-> -		vcc-supply = <&reg_usb3_1_vbus>;
-> -		#phy-cells = <0>;
-> -	};
-> -
-> -	reg_usb3_0_vbus: usb3-vbus0 {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "usb3-vbus0";
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&xhci0_vbus_pins>;
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -		enable-active-high;
-> -		gpio = <&gpio1 26 GPIO_ACTIVE_HIGH>;
-> -	};
-> -
-> -	reg_usb3_1_vbus: usb3-vbus1 {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "usb3-vbus1";
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&xhci1_vbus_pins>;
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -		enable-active-high;
-> -		gpio = <&gpio1 27 GPIO_ACTIVE_HIGH>;
-> -	};
-> -
-> -	reg_sata0: pwr-sata0 {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "pwr_en_sata0";
-> -		regulator-min-microvolt = <12000000>;
-> -		regulator-max-microvolt = <12000000>;
-> -		enable-active-high;
-> -		regulator-boot-on;
-> -		gpio = <&gpio0 15 GPIO_ACTIVE_HIGH>;
-> -	};
-> -
-> -	reg_5v_sata0: v5-sata0 {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "v5.0-sata0";
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -		vin-supply = <&reg_sata0>;
-> -	};
-> -
-> -	reg_12v_sata0: v12-sata0 {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "v12.0-sata0";
-> -		regulator-min-microvolt = <12000000>;
-> -		regulator-max-microvolt = <12000000>;
-> -		vin-supply = <&reg_sata0>;
-> -	};
-> -};
-> -
-> -&spi0 {
-> -	pinctrl-names = "default";
-> -	pinctrl-0 = <&spi0_pins>;
-> -	status = "okay";
-> -
-> -	spi-flash@0 {
-> -		#address-cells = <1>;
-> -		#size-cells = <1>;
-> -		compatible = "macronix,mx25l6405d", "jedec,spi-nor";
-> -		reg = <0>; /* Chip select 0 */
-> -		spi-max-frequency = <50000000>;
-> -		m25p,fast-read;
-> -
-> -		/* Note: there is a redboot partition table despite u-boot
-> -		 * being used. The names presented here are the same as those
-> -		 * found in the FIS directory. There is also a small device
-> -		 * tree in the last 64kB of the RedBoot partition which is not
-> -		 * enumerated. The MAC address and the serial number are listed
-> -		 * in the "vendor" partition.
-> -		 */
-> -		partition@0 {
-> -			label = "RedBoot";
-> -			reg = <0x00000000 0x000f0000>;
-> -			read-only;
-> -		};
-> -
-> -		partition@c0000 {
-> -			label = "zImage";
-> -			reg = <0x000f0000 0x002d0000>;
-> -		};
-> -
-> -		partition@390000 {
-> -			label = "rd.gz";
-> -			reg = <0x003c0000 0x00410000>;
-> -		};
-> -
-> -		partition@7d0000 {
-> -			label = "vendor";
-> -			reg = <0x007d0000 0x00010000>;
-> -			read-only;
-> -		};
-> -
-> -		partition@7e0000 {
-> -			label = "RedBoot config";
-> -			reg = <0x007e0000 0x00010000>;
-> -			read-only;
-> -		};
-> -
-> -		partition@7f0000 {
-> -			label = "FIS directory";
-> -			reg = <0x007f0000 0x00010000>;
-> -			read-only;
-> -		};
-> -	};
-> -};
-> -
-> -&pinctrl {
-> -	/* use only one pin for UART1, as mpp20 is used by sata0 */
-> -	uart1_pins: uart-pins-1 {
-> -		marvell,pins = "mpp19";
-> -		marvell,function = "ua1";
-> -	};
-> -
-> -	xhci0_vbus_pins: xhci0_vbus_pins {
-> -		marvell,pins = "mpp58";
-> -		marvell,function = "gpio";
-> -	};
-> -	xhci1_vbus_pins: xhci1_vbus_pins {
-> -		marvell,pins = "mpp59";
-> -		marvell,function = "gpio";
-> -	};
-> -};
-> diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
-> index 1fc7380216..bcc5f00fe5 100644
-> --- a/configs/ds116_defconfig
-> +++ b/configs/ds116_defconfig
-> @@ -16,7 +16,7 @@ CONFIG_SF_DEFAULT_SPEED=50000000
->   CONFIG_ENV_SIZE=0x10000
->   CONFIG_ENV_OFFSET=0x7E0000
->   CONFIG_ENV_SECT_SIZE=0x10000
-> -CONFIG_DEFAULT_DEVICE_TREE="armada-385-synology-ds116"
-> +CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-385-synology-ds116"
->   CONFIG_SPL_TEXT_BASE=0x40000030
->   CONFIG_SPL_SERIAL=y
->   CONFIG_SPL_STACK=0x4002c000
-> @@ -56,6 +56,7 @@ CONFIG_CMD_CACHE=y
+> -	return 0;
+> -}
+> diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
+> index 18c741d4f2..6391c43474 100644
+> --- a/configs/ds414_defconfig
+> +++ b/configs/ds414_defconfig
+> @@ -1,5 +1,6 @@
+>   CONFIG_ARM=y
+>   CONFIG_ARCH_CPU_INIT=y
+> +CONFIG_SYS_THUMB_BUILD=y
+>   CONFIG_ARCH_MVEBU=y
+>   CONFIG_SUPPORT_PASSING_ATAGS=y
+>   CONFIG_CMDLINE_TAG=y
+> @@ -25,44 +26,41 @@ CONFIG_SPL_BSS_MAX_SIZE=0x4000
+>   CONFIG_SPL=y
+>   CONFIG_DEBUG_UART_BASE=0xf1012000
+>   CONFIG_DEBUG_UART_CLOCK=250000000
+> +CONFIG_IDENT_STRING="\nSynology DS214+/DS414 2/4-Bay Diskstation"
+>   CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_PCI=y
+>   CONFIG_DEBUG_UART=y
+> +CONFIG_BOOTSTD_FULL=y
+>   CONFIG_BOOTDELAY=3
+>   CONFIG_USE_BOOTARGS=y
+> -CONFIG_BOOTARGS="console=ttyS0,115200 ip=off initrd=0x8000040,8M root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 flash_size=8 SataLedSpecial=1 HddHotplug=1"
+> -CONFIG_USE_BOOTCOMMAND=y
+> -CONFIG_BOOTCOMMAND="sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; sf read ${ramdisk_addr_r} 0x3a0000 0x430000; bootm ${loadaddr} ${ramdisk_addr_r}"
+>   # CONFIG_DISPLAY_BOARDINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_BOARD_LATE_INIT=y
+>   CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x1bfd0
+>   CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+>   # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>   CONFIG_SPL_I2C=y
+> +CONFIG_SYS_PROMPT="DS414> "
+>   CONFIG_SYS_MAXARGS=32
+>   CONFIG_CMD_I2C=y
+>   CONFIG_CMD_PCI=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_USB=y
+> -# CONFIG_CMD_SETEXPR is not set
+> -CONFIG_CMD_DHCP=y
+>   CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_MII=y
+> -CONFIG_CMD_PING=y
 >   CONFIG_CMD_TIME=y
+> -CONFIG_CMD_EXT2=y
+> -CONFIG_CMD_FAT=y
+>   CONFIG_CMD_JFFS2=y
 >   CONFIG_CMD_MTDPARTS=y
->   CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:1m(u-boot),7040k(kernel),64k(u-boot-env),-(data)"
-> +CONFIG_OF_UPSTREAM=y
+>   CONFIG_CMD_UBI=y
+> -CONFIG_ISO_PARTITION=y
 >   CONFIG_ENV_OVERWRITE=y
+>   CONFIG_ENV_SPI_MAX_HZ=50000000
 >   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_VERSION_VARIABLE=y
+>   CONFIG_ARP_TIMEOUT=200
+>   CONFIG_NET_RETRY_COUNT=50
+> +CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_SPL_OF_TRANSLATE=y
+> +CONFIG_LBA48=y
+> +CONFIG_SYS_64BIT_LBA=y
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_MVTWSI=y
+>   # CONFIG_MMC is not set
+> @@ -84,4 +82,3 @@ CONFIG_USB_XHCI_HCD=y
+>   # CONFIG_USB_XHCI_MVEBU is not set
+>   CONFIG_USB_XHCI_PCI=y
+>   CONFIG_USB_EHCI_HCD=y
+> -CONFIG_USB_STORAGE=y
+> diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> index 6fbcec0898..9525657558 100644
+> --- a/include/configs/ds414.h
+> +++ b/include/configs/ds414.h
+> @@ -1,5 +1,6 @@
+>   /* SPDX-License-Identifier: GPL-2.0+ */
+>   /*
+> + * Copyright (C) 2024 Tony Dinh <mibodhi@gmail.com>
+>    * Copyright (C) 2014 Stefan Roese <sr@denx.de>
+>    */
+>   
+> @@ -16,15 +17,8 @@
+>    * U-Boot into it.
+>    */
+>   
+> -/* I2C */
+>   #define CFG_I2C_MVTWSI_BASE0		MVEBU_TWSI_BASE
+>   
+> -/*
+> - * mv-common.h should be defined after CMD configs since it used them
+> - * to enable certain macros
+> - */
+> -#include "mv-common.h"
+> -
+>   /*
+>    * Memory layout while starting into the bin_hdr via the
+>    * BootROM:
+> @@ -38,21 +32,54 @@
+>    * L2 cache thus cannot be used.
+>    */
+>   
+> -/* SPL */
+> -/* Defines for SPL */
+> +/* Keep device tree and initrd in lower memory so the kernel can access them */
+> +#define RELOCATION_LIMITS_ENV_SETTINGS  \
+> +	"fdt_high=0x10000000\0"         \
+> +	"initrd_high=0x10000000\0"
+>   
+> -/* Default Environment */
+> +/*
+> + * mv-common.h should be defined after CMD configs since it used them
+> + * to enable certain macros
+> + */
+> +#include "mv-common.h"
+> +
+> +#ifndef CONFIG_SPL_BUILD
+>   
+> -#define CFG_EXTRA_ENV_SETTINGS				\
+> -	"initrd_high=0xffffffff\0"				\
+> -	"ramdisk_addr_r=0x8000000\0"				\
+> -	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"	\
+> -	"ethmtu=1500\0eth1mtu=1500\0"				\
+> -	"update_uboot=sf probe; dhcp; "				\
+> -		"mw.b ${loadaddr} 0x0 0xd0000; "		\
+> -		"tftpboot ${loadaddr} u-boot-with-spl.kwb; "	\
+> +#define KERNEL_ADDR_R	__stringify(0x1000000)
+> +#define FDT_ADDR_R	__stringify(0x2000000)
+> +#define RAMDISK_ADDR_R	__stringify(0x2200000)
+> +#define SCRIPT_ADDR_R	__stringify(0x1800000)
+> +#define PXEFILE_ADDR_R	__stringify(0x1900000)
+> +
+> +#define EXTRA_ENV_SETTINGS_LEGACY \
+> +	"bootargs_legacy=console=ttyS0,115200 ip=off initrd=0x8000040,8M " \
+> +		"root=/dev/md0 rw syno_hw_version=DS414r1 ihd_num=4 netif_num=2 " \
+> +		"flash_size=8 SataLedSpecial=1 HddHotplug=1\0" \
+> +	"bootcmd_legacy=sf probe; sf read ${loadaddr} 0xd0000 0x2d0000; " \
+> +		"sf read ${ramdisk_addr_r} 0x3a0000 0x430000; " \
+> +		"setenv bootargs $bootargs_legacy; " \
+> +		"bootm ${loadaddr} ${ramdisk_addr_r}\0"	\
+> +	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0" \
+> +	"ethmtu=1500\0eth1mtu=1500\0" \
+> +	"update_uboot=sf probe; dhcp; "	\
+> +		"mw.b ${loadaddr} 0x0 0xd0000; " \
+> +		"tftpboot ${loadaddr} u-boot-with-spl.kwb; " \
+>   		"sf update ${loadaddr} 0x0 0xd0000\0"
+>   
+> -/* increase autoneg timeout, my NIC sucks */
+> +#define LOAD_ADDRESS_ENV_SETTINGS \
+> +	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
+> +	"fdt_addr_r=" FDT_ADDR_R "\0" \
+> +	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
+> +	"scriptaddr=" SCRIPT_ADDR_R "\0" \
+> +	"pxefile_addr_r=" PXEFILE_ADDR_R "\0"
+> +
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +	RELOCATION_LIMITS_ENV_SETTINGS \
+> +	LOAD_ADDRESS_ENV_SETTINGS \
+> +	EXTRA_ENV_SETTINGS_LEGACY \
+> +	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
+> +	"console=ttyS0,115200\0"
+> +
+> +#endif /* CONFIG_SPL_BUILD */
+>   
+>   #endif /* _CONFIG_SYNOLOGY_DS414_H */
 
 Viele Grüße,
 Stefan Roese
