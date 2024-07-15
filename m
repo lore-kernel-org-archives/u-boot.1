@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372ECC3DA4B
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C49C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 13:31:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B483C8881F;
-	Mon, 15 Jul 2024 15:25:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3664E88874;
+	Mon, 15 Jul 2024 15:31:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZhgiYXYm";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hAbUZtH+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C7548885E; Mon, 15 Jul 2024 15:25:03 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 692AA88835; Mon, 15 Jul 2024 15:31:24 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0EA887F9F
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:25:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41D9B88835
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 15:31:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5854ac817afso5370252a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:25:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e03a6196223so4224940276.3
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 06:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721049900; x=1721654700; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1721050281; x=1721655081; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jlJWKMKuLhrEsnNGF3bTmjxX7JTBboX6csdvghT2tbo=;
- b=ZhgiYXYmVQp8XIV4xFsQWr23jPnDA3XJW/IwvFO2wv3QEmFJqD9gjNetEgn2p8tuDi
- PRzATqJqhmtglW1ZknFd/sWh4AXKMd8s3k0F+x0kdjwd8dX6p7aBAc1H61OnzB1134MI
- p0uvXITr++v+NNlw0cRkgbmZe0zdLG9n9T0V1mR40j5O2c7fyUKWJJgmYMa35+LNGyIV
- QBgzC1PtDTWj5qhcInC9fVwWTSKiHPGtjAvEv8sqM+6v8qeMUl18fJr/OGVlzqANI+q6
- UYD7wAdruyoyUlEecjybZoXCf4e65C964KxhlNo2+v/rYpwRk4ozIuKEmyYkL8CcbSa8
- Xp8Q==
+ bh=6w5RRmcXlvjpITmYhPz/UqGCdmHkoiSqAoL9x5UrG4Q=;
+ b=hAbUZtH+ggh5Dn4qQCAhv9E9gaUi3/DYd3Jso6wTtLrZ2/yq7I8jDMPDwgvlVHLxsG
+ J6Wm+JBqQ+DTLDpsalRSpOKyqGaxMDv2IMFGMfAa9VtBeLIiR7kJbULUj90trdNanekg
+ gxuy8LYfSvKdAz6K7uS0uET6Sh/uchU7XFX9Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721049900; x=1721654700;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1721050281; x=1721655081;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jlJWKMKuLhrEsnNGF3bTmjxX7JTBboX6csdvghT2tbo=;
- b=RA6pzjdTkkFZM2YNRa7ihfFQpTTm7uO8VmksUNtmVDXtBheOnJiQbsVlcMe6Fk0axi
- 2eNPcvUogq8PixTuAlpkSi2NLRt2tluTqDbKVbDpJZYROIKRGzcY4EgiKKsCtAnBL9w8
- CM0TLfEUJxUr0ShlUA+ywmicoSqlD+suFVdodLrc34h2CWvU6ZhErBl8k3R79Gm1wWbQ
- TkKGd9HA7Xf2a7oK5snpajn8A/TaxN5WYzFbncqueUeGEpezPcd502bC2zAkXiwrI07F
- cYNmwOAJiGfbz5mUUOC5SRh9BP3+yyfbXcfhwZCFGrDoDIXqmEjZ6HZyubUSQ7or79gU
- wiTQ==
+ bh=6w5RRmcXlvjpITmYhPz/UqGCdmHkoiSqAoL9x5UrG4Q=;
+ b=Bh/9YvTc1alEyqevHRFczUINlK/ptCHeGFEYu+/i+3bTWi0s2tDtAGtwV7ZA15desk
+ Z9qi+ME6kth8G2Hznk1ImLYL2oLpNTVxs8INKuhcgrAzlmoL3LQK/Vtoo5L+5hsyYXbz
+ Chg1uo0eJJ9Ztbtwvwc1b4TZD8OU7G4qt5nOuiGruc5IzlTbMJ41VO+tXKwkQNqUqTWa
+ HgOqe6fUMe4VEZUqRzzG7H6m/7qN5gXdZwXKiwaN6GKzVdOdaJpFAX3oszv8ZJXh6RBf
+ 4fK5ClCwyA9NU0HyDw7pc/DCZfHZgyhiGLUYBsspol1RSoxxXuy2wnbHYcg0OuP0AGv1
+ XOhg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUt1x/67KEuCeIcxN6FQjlYfxWd9BvL3gEejLi8etYu2JbvwZQh4yyZ1PDWYMku966D+6TwOylxrj/nG+k0S8oFyqR2Q==
-X-Gm-Message-State: AOJu0Yy6FLDnqo4aSEwvpeknehKrupUvbgB7HqLpbgm8AslltJI5u+Ny
- +gJSDYoI2ZfRvAQHNxqXWeaWDYnwtwsCTHBN9QHoQ7l+CRZyFxSk3nZjs11RfWDVfDSqe3yn2FQ
- EitKeUcWKHId4AyPDpH1dKHvha/xkyw==
-X-Google-Smtp-Source: AGHT+IEzjIHkwXDtR0a8xaonr9Hgs6LLrwdnhAQkGbADcfOwzm/QwbyCbXOSEPsscQ52ABXqC0ysVl34bkzyop8X5r0=
-X-Received: by 2002:a05:6402:3406:b0:58a:e73f:6edb with SMTP id
- 4fb4d7f45d1cf-594bcab0181mr11530633a12.40.1721049900210; Mon, 15 Jul 2024
- 06:25:00 -0700 (PDT)
+ AJvYcCUGYx97slW7da1X/llX1rOww4/ELKmXfoGIMPlnQkVfpFWnsUKuCwzf7ysE+fcX5VZ8ki80StfXveg0q3+SLY+3RvNk4g==
+X-Gm-Message-State: AOJu0YxWQ1B14oskAosGJBbu3W4j8qeK911PqgDWZDSQLBAJqzTgEvZk
+ HjZ9JeVS63iMPJFA2cpkE+m/ULVovpDknCLWb+uoAtwT8apW8hzy1N+Wxr3O7JQJZJui4GPIn91
+ /vG5IJWfTiat8pxUwFQAtnQoFa3swaMIQMurw
+X-Google-Smtp-Source: AGHT+IG+vhdpQ0xssSmOyIjalyqgsZ74iH/o1SGbUiS9hXbpv9C4kIOtguOe1iT4w2oobr8zEI7ANjq6cTJcaHjpuQc=
+X-Received: by 2002:a25:8391:0:b0:e02:74aa:fa with SMTP id
+ 3f1490d57ef6-e041b173223mr19473532276.54.1721050280987; 
+ Mon, 15 Jul 2024 06:31:20 -0700 (PDT)
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 15 Jul 2024 06:31:20 -0700
 MIME-Version: 1.0
-References: <20240712090725.2093317-1-rasmus.villemoes@prevas.dk>
- <0586321e-b2b0-40f6-87cd-6da74b79fc40@denx.de> <87a5ii959q.fsf@prevas.dk>
-In-Reply-To: <87a5ii959q.fsf@prevas.dk>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 15 Jul 2024 14:24:48 +0100
-Message-ID: <CALeDE9MsL-DR5+6ce97r4osSwNNo9SAaepYf3rsr2-ZdLuD5bQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] a little RPi watchdog cleanup
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Stefan Roese <sr@denx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Matthias Brugger <mbrugger@suse.com>
+From: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20240623175622.1468600-6-sjg@chromium.org>
+References: <20240623175622.1468600-6-sjg@chromium.org>
+ <20240623175622.1468600-1-sjg@chromium.org>
+Date: Mon, 15 Jul 2024 06:31:20 -0700
+X-Google-Sender-Auth: TZS62WOqDmXndaiveqbUjZsLfY4
+Message-ID: <CAFLszTh_3C8XYSdLnaije8iy0pgKPPLjAEQqqL05zQ+hUmwOHw@mail.gmail.com>
+Subject: Re: [PATCH v3 5/6] u_boot_pylib: Use correct coverage tool within venv
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,17 +87,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > I can't find these patches (and v1) in patchworks. Do you have an
-> > idea, why this is the case?
-> >
->
-> Perhaps because they (v2) have already been merged to master via a PR from
-> Peter?  commit 1ca216522d4.
+When running within a Python venv we must use the 'coverage' tool (which
+is within the venv) so that the venv packages are used in preference to
+system packages. Otherwise the coverage tests run in a different
+environment from the normal tests and may fail due to missing packages.
 
-They were there, although weirdly they weren't assigned to me and I
-had to dig for therm.
+Handle this by detecting the venv and changing the tool name.
 
-> So one has to change 'state' from 'action required' to see them:
-> https://patchwork.ozlabs.org/project/uboot/list/?series=&submitter=&state=*&q=hw_watchdog&archive=&delegate=
->
-> Rasmus
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+(no changes since v1)
+
+ tools/u_boot_pylib/test_util.py | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+Applied to u-boot-dm, thanks!
