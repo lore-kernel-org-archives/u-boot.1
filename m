@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A00BC3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F9CC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 09:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9891D87F9F;
-	Mon, 15 Jul 2024 11:24:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5667E87D87;
+	Mon, 15 Jul 2024 11:27:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q8xNdRNf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AYYVmiuM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A88B6887CB; Mon, 15 Jul 2024 11:24:17 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 08B6F87C7E; Mon, 15 Jul 2024 11:27:36 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D7D787F9F
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:24:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C77DC87D87
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 11:27:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-58ef19aa6c4so5224120a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:24:15 -0700 (PDT)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ec61eeed8eso53079141fa.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 02:27:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721035455; x=1721640255; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721035652; x=1721640452; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NX2W7wEPMNfBBH23mRlOdu7CHF1NBNsM76Xxr3p+Wow=;
- b=q8xNdRNfQUfIgnWn35ZTx4slTNreo4Oo15HlkQDbPexZyJfhrviXea1E6eKlYpuOvh
- 0IfjLEczZ/EBqroiEqJjMrLCx6EiXiuYSxAcHD9OaS1axfB7gfdC+SVFlySaZNKhKlEQ
- suPZ8JnMqiJ/6J5oue0jmfd3ru5cibklQrtYNN4KIgWFtFAZsPjWs2fK24X619d5iwYf
- E7dVLGccGD/rgX1mEPWVt1oeTc3aAhajlGY/2WgaLE7uirUUwhOtebyba/UZkYw9SuUX
- VjyZ4CkF0oxAli2FxsP8GHMTcRnzTXweWDuJ3A/mFEZ0VXvINTzxqd596vJ1ry+HRiRk
- +INA==
+ bh=jh8KetcihlGCpSS8ond8DYwz3gvhdtz6QCA6YNwaV/w=;
+ b=AYYVmiuMX51aMklf/fbZMOIUCZUWwlABEmP/evM+BL1QATrQeyChdDSS3nBmZVL70X
+ 3Ru3Uon3o5gQJCDZlN6hyYAY0GnvKTJqoWlFlE6ocgSj8F5wUgd50lULqAxcjiyeQvs3
+ RVxv4nUdNVJUf8a7J+9qv97042iMV8qiX/9MoF8IDrtlAXOlCi+Yk97EBkUnWB/cLH2B
+ WGrnBfVh66gYtV06HZUdw17UfyCplnrPjkxAfTjQIYWJ7Ao98VIt+gIOofB5IeXYP/Wq
+ rfj8i2ApWiz1snh0JlzCVUvlgQC+hh71/Hv1NNbTdhYW3L8Ob98PqMiXTa24umFpv+c3
+ 5nyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721035455; x=1721640255;
+ d=1e100.net; s=20230601; t=1721035652; x=1721640452;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NX2W7wEPMNfBBH23mRlOdu7CHF1NBNsM76Xxr3p+Wow=;
- b=lJMLWhR9Dl3WcrgsePDCS3VYbY0eWz6sxc/dC/an2w4LDHj2SeDppIAmGaqYHs/h4M
- E+eD9U88d9kbtaLS33pTvoswbopIkthW10P61R9WhH9B7EaiqVzTk8aExSPlOK4MAEPN
- mj5IMjYIItNSA4pYiA1xCIRGvlnIgYrQFrZZlWrr3IcKZspHqmiQRE5I7FBi5ZUlj0s8
- JBIB7jKKkTdXfkWzhXOBkvlXTJADgHd4Zi/Us+/Oprm7l+8x/izrz5VdWxwxgVoXosYh
- CIVYM8+riChvmer7svSyddblzYEv0i9rjX7wMuP7WeENR16Vi6EqQn2smC6aIsSD0eol
- VzDw==
-X-Gm-Message-State: AOJu0YyqNLmHwK5wupH41NEXbGUTLBmLQVUDifvig9Rzs5Q4ALkQ44yS
- 3YemSLq2YB6RHRHfcoxFdwGUS+uG1RhSjI7fHo371jIX4eSnJcCZRN36Pl26PrPUI1BgWRslTmW
- KqZcsrW8ab+EZdXeU7D8kRiFR0vWBzLwMb7sKCg==
-X-Google-Smtp-Source: AGHT+IEk3/bsIIzbY5V97fPAjW8IXUZq2BSAHOAyah13FFEhKb2zNspTfxfeQpBL0j6FkJjECYhSUgQefDwGX1m9RgI=
-X-Received: by 2002:a50:9f0d:0:b0:586:f49:1762 with SMTP id
- 4fb4d7f45d1cf-594bc7c819cmr10498214a12.26.1721035454854; Mon, 15 Jul 2024
- 02:24:14 -0700 (PDT)
+ bh=jh8KetcihlGCpSS8ond8DYwz3gvhdtz6QCA6YNwaV/w=;
+ b=xHwDQfRWwZn7tjFs9YkgaNXX1fS2JPTUved7R9uyvziO5QOe7EN5Vrn5VcAcnUbrs7
+ 0areM2luODI4KPRJztRlcimc94KH2tdWxM0OqsjTXBd9BdIxgMHHv3AJ0axbcZNXjAlt
+ QaEBRsblXhnHHKEzSffXRtkF75LzRut18lakDLWtmDjqTIhFTZD0G7QR04zAVmvmA4m0
+ EIMp6lWybsGC7aDeMrrWtuwZ/dlOyPP8LXeQ6e23+awiUict3mIM+mivWZjXby4EiD/b
+ Xq5AFfDGq/hyFx86M2TUqR7xHNsIX2vV1YQnoCBSpYaewE8hQAcc7SIuXrY5Re9ACH/V
+ JwQw==
+X-Gm-Message-State: AOJu0YytaGnYcj+TS4HwE1e75LFm0RXbLYrJVauSAgmguXd6UkFbATHl
+ nJJJcCKbXWLJUyL/DCHiO9rEqoyodaAw5jph0xgm0RqOe8ZcH6hge6J88pR/QcVd/yhwn9idWQM
+ hw1G57ZCXBuyya1vznjKueHG+XwS6KZRixSVmdQ==
+X-Google-Smtp-Source: AGHT+IHpg8RPQM2oibdkwF8ELoQepF59ERDwq529etxk15fhZBUv7O7n82IRNpY+5Ti5TenNifvqG9prKDcsp1OR/c0=
+X-Received: by 2002:a2e:a4d8:0:b0:2ee:92ea:8d0a with SMTP id
+ 38308e7fff4ca-2eeb3102734mr107105901fa.23.1721035651994; Mon, 15 Jul 2024
+ 02:27:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-18-sughosh.ganu@linaro.org>
- <CAFLszTiaskAronpTqPEeTcizbOj6YoPi0WZsVT29ZwH09iuP_g@mail.gmail.com>
-In-Reply-To: <CAFLszTiaskAronpTqPEeTcizbOj6YoPi0WZsVT29ZwH09iuP_g@mail.gmail.com>
+ <20240704073544.670249-13-sughosh.ganu@linaro.org>
+ <CAFLszTgp4GQydJY611gTOBnUk+Ce6o4vkVqNKtgcwKVzW9X6WQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgp4GQydJY611gTOBnUk+Ce6o4vkVqNKtgcwKVzW9X6WQ@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 15 Jul 2024 14:54:03 +0530
-Message-ID: <CADg8p95of+Tk1wXSkWQ1SFtyyWYXVtU0Ct7zmc1OFGVKdTi=-Q@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 17/48] lmb: allow lmb module to be used in SPL
+Date: Mon, 15 Jul 2024 14:57:20 +0530
+Message-ID: <CADg8p94u_CYkek8tnPGtM8JOAn4QjMh5oLKCqvhRdj0M=H8GDA@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 12/48] lmb: allow for resizing lmb regions
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -97,178 +97,204 @@ On Sat, 13 Jul 2024 at 20:45, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sughosh,
 >
-> On Thu, 4 Jul 2024 at 08:37, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > With the introduction of separate config symbols for the SPL phase of
-> > U-Boot, the condition checks need to be tweaked so that platforms that
-> > enable the LMB module in SPL are also able to call the LMB API's. Use
-> > the appropriate condition checks to achieve this.
+> > Allow for resizing of LMB regions if the region attributes match. The
+> > current code returns a failure status on detecting an overlapping
+> > address. This worked up until now since the LMB calls were not
+> > persistent and global -- the LMB memory map was specific and private
+> > to a given caller of the LMB API's.
+> >
+> > With the change in the LMB code to make the LMB reservations
+> > persistent, there needs to be a check on whether the memory region can
+> > be resized, and then do it if so. To distinguish between memory that
+> > cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
+> > of memory with this attribute would indicate that the region cannot be
+> > resized.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> > Changes since V1: New patch
+> > Changes since V1:
+> > * Do the check for the region flags in lmb_resize_regions() and
+> >   lmb_merge_overlap_regions() to decide on merging the overlapping
+> >   regions.
 > >
-> >  board/xilinx/common/board.c | 2 +-
-> >  boot/bootm.c                | 4 ++--
-> >  boot/image-board.c          | 2 +-
-> >  fs/fs.c                     | 4 ++--
-> >  lib/Makefile                | 2 +-
-> >  net/tftp.c                  | 6 +++---
-> >  net/wget.c                  | 4 ++--
-> >  7 files changed, 12 insertions(+), 12 deletions(-)
+> >  include/lmb.h |   1 +
+> >  lib/lmb.c     | 116 ++++++++++++++++++++++++++++++++++++++++++++------
+> >  2 files changed, 103 insertions(+), 14 deletions(-)
 > >
-> > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> > index 4056884400..f04c92a70f 100644
-> > --- a/board/xilinx/common/board.c
-> > +++ b/board/xilinx/common/board.c
-> > @@ -665,7 +665,7 @@ int embedded_dtb_select(void)
-> >  }
-> >  #endif
-> >
-> > -#if defined(CONFIG_LMB)
-> > +#if IS_ENABLED(CONFIG_LMB)
-> >
-> >  #ifndef MMU_SECTION_SIZE
-> >  #define MMU_SECTION_SIZE        (1 * 1024 * 1024)
-> > diff --git a/boot/bootm.c b/boot/bootm.c
-> > index 7b3fe551de..5ce84b73b5 100644
-> > --- a/boot/bootm.c
-> > +++ b/boot/bootm.c
-> > @@ -239,7 +239,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
-> >         return 0;
-> >  }
-> >
-> > -#ifdef CONFIG_LMB
-> > +#if CONFIG_IS_ENABLED(LMB)
+> > diff --git a/include/lmb.h b/include/lmb.h
+> > index 069c6af2a3..99fcf5781f 100644
+> > --- a/include/lmb.h
+> > +++ b/include/lmb.h
+> > @@ -20,6 +20,7 @@
+> >  enum lmb_flags {
+> >         LMB_NONE                = 0x0,
+> >         LMB_NOMAP               = 0x4,
+> > +       LMB_NOOVERWRITE         = 0x8,
 >
-> Can you avoid #ifdefs where possible?
+> How about LMB_PERSIST ?
+
+Isn't LMB_NOOVERWRITE more suitable here ? I mean this is indicating
+that the said region of memory is not to be re-used/re-requested.
+
+>
+> These could be adjusted to use BIT()
+
+I am changing these to use the BIT macro in a subsequent commit.
+
+>
+> >  };
+> >
+> >  /**
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 0d01e58a46..80945e3cae 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -230,12 +230,88 @@ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+> >         lmb_reserve_common(fdt_blob);
+> >  }
+> >
+> > +static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
+>
+> At some point the index should change to an int (or uint), rather than
+> unsigned long. I had a series that did that, but it died.
+>
+> > +                                  enum lmb_flags flags)
+> > +{
+> > +       return rgn->region[r1].flags == flags;
+> > +}
+> > +
+> > +static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
+> > +                                     phys_addr_t base, phys_size_t size,
+> > +                                     enum lmb_flags flags)
+> > +{
+> > +       phys_size_t rgnsize;
+> > +       unsigned long rgn_cnt, idx;
+> > +       phys_addr_t rgnbase, rgnend;
+> > +       phys_addr_t mergebase, mergeend;
+> > +
+> > +       rgn_cnt = 0;
+> > +       idx = i;
+> > +       /*
+> > +        * First thing to do is to identify how many regions does
+> > +        * the requested region overlap.
+>
+> how many regions the requested region overlaps
 
 Okay
 
 >
-> >  static void boot_start_lmb(void)
-> >  {
-> >         phys_addr_t     mem_start;
-> > @@ -1048,7 +1048,7 @@ int bootm_run_states(struct bootm_info *bmi, int states)
-> >                 }
-> >         }
-> >  #endif
-> > -#if CONFIG_IS_ENABLED(OF_LIBFDT) && defined(CONFIG_LMB)
-> > +#if CONFIG_IS_ENABLED(OF_LIBFDT) && CONFIG_IS_ENABLED(LMB)
-> >         if (!ret && (states & BOOTM_STATE_FDT)) {
-> >                 boot_fdt_add_mem_rsv_regions(images->ft_addr);
-> >                 ret = boot_relocate_fdt(&images->ft_addr, &images->ft_len);
-> > diff --git a/boot/image-board.c b/boot/image-board.c
-> > index 1f8c1ac69f..99ee7968ba 100644
-> > --- a/boot/image-board.c
-> > +++ b/boot/image-board.c
-> > @@ -883,7 +883,7 @@ int image_setup_linux(struct bootm_headers *images)
-> >         int ret;
-> >
-> >         /* This function cannot be called without lmb support */
-> > -       if (!IS_ENABLED(CONFIG_LMB))
-> > +       if (!CONFIG_IS_ENABLED(LMB))
-> >                 return -EFAULT;
-> >         if (CONFIG_IS_ENABLED(OF_LIBFDT))
-> >                 boot_fdt_add_mem_rsv_regions(*of_flat_tree);
-> > diff --git a/fs/fs.c b/fs/fs.c
-> > index 2c835eef86..3fb00590be 100644
-> > --- a/fs/fs.c
-> > +++ b/fs/fs.c
-> > @@ -526,7 +526,7 @@ int fs_size(const char *filename, loff_t *size)
-> >         return ret;
-> >  }
-> >
-> > -#ifdef CONFIG_LMB
-> > +#if CONFIG_IS_ENABLED(LMB)
-> >  /* Check if a file may be read to the given address */
-> >  static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
-> >                              loff_t len, struct fstype_info *info)
-> > @@ -567,7 +567,7 @@ static int _fs_read(const char *filename, ulong addr, loff_t offset, loff_t len,
-> >         void *buf;
-> >         int ret;
-> >
-> > -#ifdef CONFIG_LMB
-> > +#if CONFIG_IS_ENABLED(LMB)
-> >         if (do_lmb_check) {
-> >                 ret = fs_read_lmb_check(filename, addr, offset, len, info);
-> >                 if (ret)
-> > diff --git a/lib/Makefile b/lib/Makefile
-> > index 81b503ab52..398c11726e 100644
-> > --- a/lib/Makefile
-> > +++ b/lib/Makefile
-> > @@ -118,7 +118,7 @@ obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
-> >  obj-y += hang.o
-> >  obj-y += linux_compat.o
-> >  obj-y += linux_string.o
-> > -obj-$(CONFIG_LMB) += lmb.o
-> > +obj-$(CONFIG_$(SPL_)LMB) += lmb.o
-> >  obj-y += membuff.o
-> >  obj-$(CONFIG_REGEX) += slre.o
-> >  obj-y += string.o
-> > diff --git a/net/tftp.c b/net/tftp.c
-> > index 5e27fd4aa9..5c75d9d04f 100644
-> > --- a/net/tftp.c
-> > +++ b/net/tftp.c
-> > @@ -82,7 +82,7 @@ static ulong  tftp_block_wrap;
-> >  static ulong   tftp_block_wrap_offset;
-> >  static int     tftp_state;
-> >  static ulong   tftp_load_addr;
-> > -#ifdef CONFIG_LMB
-> > +#if CONFIG_IS_ENABLED(LMB)
-> >  static ulong   tftp_load_size;
-> >  #endif
-> >  #ifdef CONFIG_TFTP_TSIZE
-> > @@ -160,7 +160,7 @@ static inline int store_block(int block, uchar *src, unsigned int len)
-> >         ulong store_addr = tftp_load_addr + offset;
-> >         void *ptr;
-> >
-> > -#ifdef CONFIG_LMB
-> > +#if CONFIG_IS_ENABLED(LMB)
-> >         ulong end_addr = tftp_load_addr + tftp_load_size;
-> >
-> >         if (!end_addr)
-> > @@ -710,7 +710,7 @@ static void tftp_timeout_handler(void)
-> >  /* Initialize tftp_load_addr and tftp_load_size from image_load_addr and lmb */
-> >  static int tftp_init_load_addr(void)
-> >  {
-> > -#ifdef CONFIG_LMB
-> > +#if CONFIG_IS_ENABLED(LMB)
+> > +        * If the flags match, combine all these overlapping
+> > +        * regions into a single region, and remove the merged
+> > +        * regions.
+> > +        */
+> > +       while (idx < rgn->cnt - 1) {
+> > +               rgnbase = rgn->region[idx].base;
+> > +               rgnsize = rgn->region[idx].size;
+> > +
+> > +               if (lmb_addrs_overlap(base, size, rgnbase,
+> > +                                     rgnsize)) {
+> > +                       if (!lmb_region_flags_match(rgn, idx, flags))
+> > +                               return -1;
+> > +                       rgn_cnt++;
+> > +                       idx++;
+> > +               }
+> > +       }
+> > +
+> > +       /* The merged region's base and size */
+> > +       rgnbase = rgn->region[i].base;
+> > +       mergebase = min(base, rgnbase);
+> > +       rgnend = rgn->region[idx].base + rgn->region[idx].size;
+> > +       mergeend = max(rgnend, (base + size));
+> > +
+> > +       rgn->region[i].base = mergebase;
+> > +       rgn->region[i].size = mergeend - mergebase;
+> > +
+> > +       /* Now remove the merged regions */
+> > +       while (--rgn_cnt)
+> > +               lmb_remove_region(rgn, i + 1);
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
+> > +                              phys_addr_t base, phys_size_t size,
+> > +                              enum lmb_flags flags)
+> > +{
+> > +       long ret = 0;
+> > +       phys_addr_t rgnend;
+> > +
+> > +       if (i == rgn->cnt - 1 ||
+> > +               base + size < rgn->region[i + 1].base) {
+> > +               if (!lmb_region_flags_match(rgn, i, flags))
+> > +                       return -1;
+> > +
+> > +               rgnend = rgn->region[i].base + rgn->region[i].size;
+> > +               rgn->region[i].base = min(base, rgn->region[i].base);
+> > +               rgnend = max(base + size, rgnend);
+> > +               rgn->region[i].size = rgnend - rgn->region[i].base;
+> > +       } else {
+> > +               ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
+> > +       }
+> > +
+> > +       return ret;
+> > +}
+> > +
+> >  /* This routine called with relocation disabled. */
+> >  static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >                                  phys_size_t size, enum lmb_flags flags)
 >
-> here too
+> This could really use a function comment
 
 Okay
 
 -sughosh
 
 >
-> >         phys_size_t max_size;
+> >  {
+> >         unsigned long coalesced = 0;
+> > -       long adjacent, i;
+> > +       long ret, i;
 > >
-> >         lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> > diff --git a/net/wget.c b/net/wget.c
-> > index 7cf809a8ef..b8ea43e7f0 100644
-> > --- a/net/wget.c
-> > +++ b/net/wget.c
-> > @@ -98,7 +98,7 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
-> >         ulong newsize = offset + len;
-> >         uchar *ptr;
+> >         if (rgn->cnt == 0) {
+> >                 rgn->region[0].base = base;
+> > @@ -260,23 +336,28 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >                                 return -1; /* regions with new flags */
+> >                 }
 > >
-> > -       if (IS_ENABLED(CONFIG_LMB)) {
-> > +       if (CONFIG_IS_ENABLED(LMB)) {
-> >                 ulong end_addr = image_load_addr + wget_load_size;
+> > -               adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> > -               if (adjacent > 0) {
+> > +               ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> > +               if (ret > 0) {
+> >                         if (flags != rgnflags)
+> >                                 break;
+> >                         rgn->region[i].base -= size;
+> >                         rgn->region[i].size += size;
+> >                         coalesced++;
+> >                         break;
+> > -               } else if (adjacent < 0) {
+> > +               } else if (ret < 0) {
+> >                         if (flags != rgnflags)
+> >                                 break;
+> >                         rgn->region[i].size += size;
+> >                         coalesced++;
+> >                         break;
+> >                 } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+> > -                       /* regions overlap */
+> > -                       return -1;
+> > +                       ret = lmb_resize_regions(rgn, i, base, size,
+> > +                                                flags);
+> > +                       if (ret < 0)
+> > +                               return -1;
+> > +
+> > +                       coalesced++;
+> > +                       break;
+> >                 }
+> >         }
 > >
-> >                 if (!end_addr)
-> > @@ -496,7 +496,7 @@ void wget_start(void)
-> >         debug_cond(DEBUG_WGET,
-> >                    "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
-> >
-> > -       if (IS_ENABLED(CONFIG_LMB)) {
-> > +       if (CONFIG_IS_ENABLED(LMB)) {
-> >                 if (wget_init_load_size()) {
-> >                         printf("\nwget error: ");
-> >                         printf("trying to overwrite reserved memory...\n");
-> > --
-> > 2.34.1
+> > @@ -418,7 +499,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+> >  }
 > >
 >
 > Regards,
