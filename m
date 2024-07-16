@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF039C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95584C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24D6288980;
-	Tue, 16 Jul 2024 09:49:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 94A9088984;
+	Tue, 16 Jul 2024 09:50:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Su8HcQUg";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="R6dMVFdO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9550388984; Tue, 16 Jul 2024 09:49:35 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 0F06A889D4; Tue, 16 Jul 2024 09:50:20 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36F0788907
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:49:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1504688907
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:50:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4266ea6a412so35414905e9.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:49:33 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-427b9dcbb09so3520495e9.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:50:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721116172; x=1721720972;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721116217; x=1721721017;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=VqRmicf9+LArg2q4v3gqjIb9XEUpnUdMDKeTdzCIkk4=;
- b=Su8HcQUg8YleCEykLLxypJK00uJtRmWBX6RLzchszfWq+STNTdZltUknb9t4Otyjmn
- A4lMVyzavVUwfqSbE4K1gX7erFHAjgiipTUJlFtLqmJpDCfKvzXJ6wbV0fbgKUKxOTOJ
- /mP5/m4DcVc73dviPOOMdZn8EhJSuA5xBbydd3qOZFp/Sqj+1SLhhcOB4ajhQnCRBdRK
- xm23rwiovJWYhcN3IRt0VUxYNWCSZ8m11BjwRB0BOORl+ruUACvk/uhi6fWUy4I+bwDY
- baPmn3hODqhrwLjSRpvbzbxsG9uZgmVvKL+DEOwrXNPwBhGB7XFk6nkBQa9IQDSM8IWI
- 6SFg==
+ bh=SujXZ5EarUZpJmwD3RIOjmu+PrxH3D3JPwlW/wSidoI=;
+ b=R6dMVFdO03PNq/ht+ZQ6lIVtaUH50NdQKZospvvscyhraE3/BNbLHvyKjeq65kvs8H
+ yNurTuQGX+Jr4fvzcGRFSuVfDXSEFaro5SNBTCfcNPWEO7Y5wH1EDgJRhXOn0XUkOK89
+ g+TRZNrfqHZbAaOibtpFW3h0TaEtgN5GA1WyRge98PPEcKoxgb6e6odmpL7lsb/uENn5
+ IYrwCMwdZ1pabC0bGgGDay/ae5XtNPN6hDyahMOY/EiUlE5ceqRFuZX+2JQcjXyZyyP8
+ BKiEm/9MWkxN2bo9DbWxfxK6pDAvnTKSx3FKWLym1M5mRG1QoWHY/VZAMTGGS1ie/I3X
+ TjIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721116172; x=1721720972;
+ d=1e100.net; s=20230601; t=1721116217; x=1721721017;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VqRmicf9+LArg2q4v3gqjIb9XEUpnUdMDKeTdzCIkk4=;
- b=L1JQw7MeQssbNjXZCAvlL6Ku+GU/1mt5cblh+dw5xIb7bsB0Yli5pKCZ0HyE0c5kaw
- y/TP4SDVnSnJ4DazAwojVYypsl3cenNzF8uPaOLHe1RPjatdsoL0pozFwfSn0AAldFM3
- oAgaDZjjLzCgVkZGyPhk0hlyTRsQFqPMutI4d7gln9r8Y3NKkNqjR5Q+lZKSzkMfE6OV
- zUj+6xmwjs6S4/9ygem4Y5bdJshv0z2XC/B6HKig8zKk74Ls1kpkZUQmLPXTxjW2D/HK
- X8d3xJzWdVE8v+r5gDv12hhKmLz/rlhKxkxJ33PftWXp+pA3Ty3SjU8Laf9klc00EO96
- d79A==
+ bh=SujXZ5EarUZpJmwD3RIOjmu+PrxH3D3JPwlW/wSidoI=;
+ b=j/HisMISRIM77TPjmEIKXQbPZ8i5Jh/fyavLqngUMR+hWgy6KnLzqSUr/Nyey/xZLS
+ IUTQ9FVJdWPmIl1tyVW8gSjf2ZzlApicPPrYP7e4/QTWx/glPDq2eK7hnAwXTKR+/lbQ
+ s7dT7Md9yZLuXZRkynsglRnYE+kxvJS/xQCOaSRfSXxGz4hKWXx9wpFggJRQlsnpipw8
+ ZiwNRoIQYGFWuGhkdEcg6JqQn7PtWtk/suR574Xb4nR2tgbfekNV4qx3j9sC0+lTidIr
+ ydLmAf4fDjdyD2uBqCOsH69OeZcqvDAWz7lMKPTpsxG8ERo0jCu6KolDDjDM6RTn+S0q
+ j3NQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVpn4Twh/8y09zr84eL5V+pIrr4RQv0b9RF5rAzn7QpS12HRB7GyMloXlKR67ciZe21KewrVpprIpefsX7FTWgQZfEsZw==
-X-Gm-Message-State: AOJu0YxHFpf9z6i7d2zVn0bXdpZM5A0S9Uj0ZwMAaxkTRArV76wlEEp3
- KES7l6HKqxEODpaQzb/cddvW8tL7btVTccwfSGh+PE0IUKFfHyatfKu4mo3yQY1F5yb4X890NiV
- aeb8KkA==
-X-Google-Smtp-Source: AGHT+IGJqouA1Unjlsqk2tgSrhlHeSzGISDhndOFa62b4Idssdt1yKmuTE8hg9CbclO5WhqRutdm5Q==
-X-Received: by 2002:a05:600c:4fce:b0:426:8ee5:5d29 with SMTP id
- 5b1f17b1804b1-427ba628f03mr8438455e9.9.1721116172355; 
- Tue, 16 Jul 2024 00:49:32 -0700 (PDT)
+ AJvYcCVAw7f/qIkBw4QB3vuns6i5p5qBBO+MB31l9SK5QtlJtpIeouKocIQRFwzmK3fAjn2gPQwIy3Z6c0jofanDgyspDHuaZg==
+X-Gm-Message-State: AOJu0YyTSVbKF7jukKkkEQ6/1n1GEsFZHQYqOe8t0be824KgB/iQURNY
+ FOLNWTztMUgXh0hHxRzjliuapDilUMDy9FOnw+ZTIxBtm4s/lGj1zl8GiQSS9N4=
+X-Google-Smtp-Source: AGHT+IGewj+6BJpJZbhMxZ+nfpWvgqDlAVQwnhR2ys6h/y3R2P6oWy0aR4UFfbBAlU3vZe6Wr3xj2Q==
+X-Received: by 2002:a05:600c:3b8a:b0:427:ac40:d4b1 with SMTP id
+ 5b1f17b1804b1-427ba6fa00amr6181205e9.27.1721116217375; 
+ Tue, 16 Jul 2024 00:50:17 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4279f25babbsm145434885e9.20.2024.07.16.00.49.31
+ 5b1f17b1804b1-427a63449fcsm112504845e9.29.2024.07.16.00.50.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 00:49:31 -0700 (PDT)
+ Tue, 16 Jul 2024 00:50:16 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2 11/14] doc: Add a description for bootmeth_script
-In-Reply-To: <20240716070419.1897560-12-sjg@chromium.org>
+Subject: Re: [PATCH v2 12/14] doc: Add a link to VBE from the bootstd docs
+In-Reply-To: <20240716070419.1897560-13-sjg@chromium.org>
 References: <20240716070419.1897560-1-sjg@chromium.org>
- <20240716070419.1897560-12-sjg@chromium.org>
-Date: Tue, 16 Jul 2024 09:49:28 +0200
-Message-ID: <87cyndn5dj.fsf@baylibre.com>
+ <20240716070419.1897560-13-sjg@chromium.org>
+Date: Tue, 16 Jul 2024 09:50:14 +0200
+Message-ID: <87a5ihn5c9.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -99,104 +98,33 @@ Thank you for the patch.
 
 On mar., juil. 16, 2024 at 08:04, Simon Glass <sjg@chromium.org> wrote:
 
-> Add documentation for the script bootmeth.
+> Link to this page to make it easier to find the VBE docs.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
 >
-> Changes in v2:
-> - Adjustments from Heinrich's comments
+> (no changes since v1)
 >
->  doc/develop/bootstd/index.rst    |  1 +
->  doc/develop/bootstd/overview.rst |  2 +-
->  doc/develop/bootstd/script.rst   | 52 ++++++++++++++++++++++++++++++++
->  3 files changed, 54 insertions(+), 1 deletion(-)
->  create mode 100644 doc/develop/bootstd/script.rst
+>  doc/develop/bootstd/overview.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
-> index 2c5d2d3fade..9d35b567d55 100644
-> --- a/doc/develop/bootstd/index.rst
-> +++ b/doc/develop/bootstd/index.rst
-> @@ -11,4 +11,5 @@ Standard Boot
->     pxelinux
->     qfw
->     cros
-> +   script
->     sandbox
 > diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-> index add054f3088..e4924b55ae7 100644
+> index e4924b55ae7..4a55b7da00a 100644
 > --- a/doc/develop/bootstd/overview.rst
 > +++ b/doc/develop/bootstd/overview.rst
-> @@ -414,7 +414,7 @@ Bootmeth drivers are provided for booting from various media:
->  
->     - :doc:`extlinux / syslinux <extlinux>` boot from a storage device
+> @@ -416,7 +416,7 @@ Bootmeth drivers are provided for booting from various media:
 >     - :doc:`extlinux / syslinux <extlinux>` boot from a network (PXE)
-> -   - U-Boot scripts from disk, network or SPI flash
-> +   - :doc:`U-Boot scripts <script>` from disk, network or SPI flash
+>     - :doc:`U-Boot scripts <script>` from disk, network or SPI flash
 >     - EFI boot using bootefi from disk
->     - VBE
+> -   - VBE
+> +   - :doc:`VBE </develop/vbe>`: Verified Boot for Embedded
 >     - :doc:`ChromiumOS <cros>` ChromiumOS boot from a disk
-> diff --git a/doc/develop/bootstd/script.rst b/doc/develop/bootstd/script.rst
-> new file mode 100644
-> index 00000000000..58ddc1cae1d
-> --- /dev/null
-> +++ b/doc/develop/bootstd/script.rst
-> @@ -0,0 +1,52 @@
-> +.. SPDX-License-Identifier: GPL-2.0+:
-> +
-> +Script Bootmeth
-> +===============
-> +
-> +This bootmeth provides a way to locate and run a script on a block or network
-> +device. It can also support SPI flash.
-> +
-> +For a block device the file is read from the selected partition, which must use
-> +a supported filesystem. The subdirectory to search in is defined by the bootstd
-> +list of prefixes ({"/", "/boot"} by default) and can be adjust with the
-> +`filename-prefixes` property in the bootstd device.
-> +
-> +For a network device, the filename is obtained from the `boot_script_dhcp`
-> +environment variable and the file is read using tftp. It must be in the
-> +top-level directory of the tftp server.
-> +
-> +In either case (file or network), the bootmeth searches for the file and creates
-> +a bootflow if found. The bootmeth searches for "boot.scr.uimg" first, then
-> +"boot.scr" if not found.
-> +
-> +For SPI flash, a script is read from flash using the offset provided by the
-> +"script_offset_f" environment variable.
-> +
-> +Some attempt is made to identify the Operating System: so far this only detects
-> +an `Armbian <https://www.armbian.com>`_
-> +distro. For block devices, if a file called "boot.bmp" exists in the same
-> +directory then it is used as the bootflow logo.
-> +
-> +When the bootflow is booted, the bootmeth sets these environment variables:
-> +
-> +    devtype
-> +        device type (e.g. "usb", "mmc", "ethernet" or "spi_flash")
-> +
-> +    devnum
-> +        device number, corresponding to the device 'sequence' number
-> +        `dev_seq(dev)`
-> +
-> +    distro_bootpart
-> +        (block devices only) partition number on the device (numbered from 1)
-> +
-> +    prefix
-> +        prefix used to find the file
-> +
-> +    mmc_bootdev
-> +        device number (same as `devnum`), set for sunxi mmc devices only
-> +
-> +The script file must be a FIT or a legacy uImage. It is loaded into memory and
-> +executed.
-> +
-> +The compatible string "u-boot,script" is used for the driver. It is present
-> +if `CONFIG_BOOTMETH_SCRIPT` is enabled.
+>     - EFI boot using boot manager
+>     - :doc:`QFW <qfw>`: QEMU firmware interface
 > -- 
 > 2.34.1
