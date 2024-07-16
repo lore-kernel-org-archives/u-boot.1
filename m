@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC8DC3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70907C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:07:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A0A5889D3;
-	Tue, 16 Jul 2024 09:04:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 05566889DC;
+	Tue, 16 Jul 2024 09:04:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RugOEHR8";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DhYF+Byy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C6E8889DB; Tue, 16 Jul 2024 09:04:51 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 2082E889D3; Tue, 16 Jul 2024 09:04:51 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DEE5889D3
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 127AA889D9
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e02c4983bfaso5357916276.2
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:47 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-368255de9ebso226622f8f.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721113486; x=1721718286; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6BHvXHOLWziQeAhPa6JSzlM1/VixhwvBpRayfpL5ykM=;
- b=RugOEHR8DhzUgPeHlZfQKnULcsx6LXTr1bT95dzvr1MEL2sCvh02dkcWXL5LpiBeEq
- wmGD/PlXJZgegOybTaKKqNiG0LTU6rCtQOY1ofTo8553vMoKUOCWu/0p1chQLDEdL1SH
- A4oGtHxwSamLtlC7V6XlG1XaoIFY8zHCsif9k=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721113488; x=1721718288;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=k/ezEM0Zlc7gA1owQG6CwiBK4N02Wqz+lGNUQ6S8XTI=;
+ b=DhYF+Byy1zdlcTB9LYhhhZSrfNJaaFuisu7FWwYxCINzT5rtKpvs2FhPjus+vRPg+p
+ ZEWtgjTAT0cvxHHICpJbkb1lMJOhlpcGi5Dfw1o3AeoW5n5fOPbjZYKkW4JJtvvtEd74
+ nEK+GzGVbcqF2kRuWP+bLQ7X84wjDDbeBH1LNKGLpjobH+ZsUr7wB7EeIuX9NryO/YL2
+ +6J6gNIIOLAlASKDGJHvZOjez0YviQenjjQWtOCJX2j2TZ2eCg1Txd8LHDIZmqF9mm0t
+ tdNG2zhKxx3moRao/GxW5Ww6IGoN/j6xMOIaqDHF7DMQg9/fzIL3iv4zRv6htfxk6U4l
+ z20g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721113486; x=1721718286;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6BHvXHOLWziQeAhPa6JSzlM1/VixhwvBpRayfpL5ykM=;
- b=gP1Lq/Ob0nDiR5htTAYB5+96ez7ccaascXj49vv24lHu0CQ6yQRSNFmvA5kT4bitoj
- C0fJtKpCiNor60Fuz/OZYDEmnti3BtKrUFS88ff1COH9yfpqxG5PiDfu4jZicqXDiqh3
- fDDKyU/5dH41G0UZi6kvOptOd/YdC4iTLsyfedfYRd74VoRkTU20b3NXFYtw3MrlOQfR
- Su4hw+PsYtn30JkSPv0Oxi6sRYSdAy93Dhm00bJNvk3KX9/O8QjJ4FRlR5V3ZO/iK5O0
- GrjT0PwNPhp5jg4KTfLpJrRxyj+Gh6/eT3qrp7yq9kCbhJH4V1dU+svmRIvvBrPDJ+F6
- A1oQ==
+ d=1e100.net; s=20230601; t=1721113488; x=1721718288;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=k/ezEM0Zlc7gA1owQG6CwiBK4N02Wqz+lGNUQ6S8XTI=;
+ b=ZNL3vWjt90jtZX5Syxp3caak3VjttkEMhpjDvU7TMFZaYMOwxSuBghKo24KRs7WG3B
+ zYa6zSBgX+PSazyF3wFNYaavTUxaUwtjmk8clJoAJ7FCCqlF3GxanbU0kyL215RSF9Ld
+ g9hZFtK2FlMsKJU468yhKY6KnWBiaNpyBHmB2yyYHT7GhPaeusERGqE2yHWF3Xup1+Kk
+ ChqvcPL7nDeb2l3eKR3qL784mCZ5ZG6f0TNpqFl7PRA0KYN4mk2zYHd9/27Elzdhop4l
+ V3hGruzZ7reYGcsrzvxpcpL4tPVpRbTzCNO2KKr80s6Eu9J3jhNSo9Yu/BpIltUhqXXK
+ ubYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURZT2084B23xR0yD6Vqmt3aViPq28SMmJIkbHXjnwguAGTgoxvXedYgVIGmKAWhqk/KSSoW+EqYOujfNQ1kl6nTT4FtA==
-X-Gm-Message-State: AOJu0Yye1g4ZM9PqtENM3T7IK76hUaz1gSkfcVupZgttWy15+R66TNIe
- 2rpbCDNtDjB+8ZJ+7zbCrmbXTUK/BBUUsXRNCpfDr+o8h/+Tv7dR/sBirW9JVvwoKB/NMZZH3b/
- eae57TlAIEtB/7WGPQQXp5ay9OxF30KZPVUvD
-X-Google-Smtp-Source: AGHT+IHr25ih9s4b3hRrZ3niJc7RlSDBwHNIWCkFNDmz4gtxgjcQW0qwFMFOciD1CpPgU7O+96nQzN4oLhx2j5nMiQA=
-X-Received: by 2002:a05:6902:1144:b0:e02:7d67:c5ce with SMTP id
- 3f1490d57ef6-e05d56bd2eamr1723480276.22.1721113486213; Tue, 16 Jul 2024
- 00:04:46 -0700 (PDT)
+ AJvYcCX4m/Ula4tOLO0hTfTtac+MJvPH+uIoqh9I7PHvOOrkG4peQt5BvWLVxAlCkCaJMS1Gi6esz2CzI6jJFs/Nk4IBosmq5Q==
+X-Gm-Message-State: AOJu0YyN2GEJHWB4vrK2LNhJVmQQRXKSK2i1kjtfFAvskNMFZjF/AbT/
+ 3OZ1Dz1jUffaIroakuztVDBc6GTcsS7DEUiJnKX4YaPRVQSr2Rg9LDS8HvaK0Kc=
+X-Google-Smtp-Source: AGHT+IEU7RsEaAtZw7lz9D5Pdc1jpTssivyRDA0yBhf1V/tQ6SSoHXrbyOQF2X2U1XC8B9TjEtj+Sg==
+X-Received: by 2002:a5d:4210:0:b0:367:8e63:4da4 with SMTP id
+ ffacd0b85a97d-368273e392fmr521419f8f.14.1721113488174; 
+ Tue, 16 Jul 2024 00:04:48 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427a63449fcsm111314235e9.29.2024.07.16.00.04.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jul 2024 00:04:46 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH 01/13] MAINTAINERS: Rename BOOTDEVICE
+In-Reply-To: <20240715101354.97895-2-sjg@chromium.org>
+References: <20240715101354.97895-1-sjg@chromium.org>
+ <20240715101354.97895-2-sjg@chromium.org>
+Date: Tue, 16 Jul 2024 09:04:43 +0200
+Message-ID: <87plrdom0k.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
- <20240715-b4-qcom-rpmh-v6-6-0c948a25d018@linaro.org>
- <CAFLszTgz-SOFR+aV7f45+pfByLztAYU1kvFPZof665=QwjjoPQ@mail.gmail.com>
- <c1f036a4-a080-428f-84fd-c44f968d44bf@linaro.org>
-In-Reply-To: <c1f036a4-a080-428f-84fd-c44f968d44bf@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 16 Jul 2024 08:04:35 +0100
-Message-ID: <CAFLszTj-1Pok7mJRGfR5fV20JMp5Hoe0r+4=p0S=NwtxQ0Gdgg@mail.gmail.com>
-Subject: Re: [PATCH v6 06/24] soc: qcom: cmd-db: adjust probe for U-Boot
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,46 +94,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Simon,
 
-On Mon, 15 Jul 2024 at 22:42, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
->
->
-> On 15/07/2024 13:39, Simon Glass wrote:
-> > On Mon, 15 Jul 2024 at 11:08, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >>
-> >> Integrate cmd-db into the U-Boot driver model.
-> >>
-> >> This is just a wrapper around an in-memory database, so we just need to
-> >> get the address and validate that cmd-db is there.
-> >>
-> >> Since cmd_db_header will be stored in the .data section we can skip
-> >> bind if it's already set.
-> >>
-> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> >> ---
-> >> To: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>   drivers/soc/qcom/cmd-db.c | 72 +++++++++++++++--------------------------------
-> >>   include/soc/qcom/cmd-db.h |  3 --
-> >>   2 files changed, 23 insertions(+), 52 deletions(-)
-> >>
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Thanks
-> >
-> > BTW, this is a MISC driver. Does it implement the read() operation?
->
-> No, the API (as defined in the header file) takes a string and returns a
-> database entry. cmd-db users don't have an easily available handle to
-> the node / udevice regardless.
+Thank you for the patch.
 
-OK. The closest thing might be UCLASS_SYSINFO, but it is designed for
-inside U-Boot and uses an int instead of a string for lookup.
+On lun., juil. 15, 2024 at 11:13, Simon Glass <sjg@chromium.org> wrote:
 
-Could you use the devicetree for this information? What sort of info is it?
+> Rename this to BOOTSTD which is the normal name for the feature.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2c6de3a1d84..9bee9284cca 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -918,7 +918,7 @@ F:	drivers/block/blkmap.c
+>  F:	include/blkmap.h
+>  F:	test/dm/blkmap.c
+>  
+> -BOOTDEVICE
+> +BOOTSTD
+>  M:	Simon Glass <sjg@chromium.org>
+>  S:	Maintained
+>  F:	boot/bootdev*.c
+> -- 
+> 2.34.1
