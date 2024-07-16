@@ -4,78 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0127C3DA49
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 02:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76DBAC3DA49
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 02:38:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 179588874A;
-	Wed, 17 Jul 2024 04:24:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E8D0D8880F;
+	Wed, 17 Jul 2024 04:38:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lb4BGsc5";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="C+sTG0f2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C557D88768; Wed, 17 Jul 2024 04:24:42 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C8B588768; Wed, 17 Jul 2024 01:43:48 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B525886FD
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 04:24:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D057987EB4
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:43:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5c690949977so216889eaf.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 19:24:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721183079; x=1721787879; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/nNC+cniBo4JCbbauy1lLDVwDlP0Jkq8smYTCbwiSjY=;
- b=lb4BGsc5Lk2aQHSDHWwNeMWthX/QmG5eMl6nHwN4x6K1v+OrtNr+Dy16Pmk0joWAWl
- 18RWujQg0p4ESDeAFIctgWTZjS3ISXdBDPx+NIc0FVQ76496CKCqgSSJUD7x1ipLFgNi
- uX+k2gV8/rioyoQafyF5m1Ayftftt4toM+OPQKbvsnhzd7ul41ZUKM3Dl0aXbh+PgniV
- EqExa3fV3SlH7Dj2FcaWcZgGPlxB85bkMcmnvJqCDSV1kA62B79U6/IxAK6NG/5KCxFF
- 28NejX0Qh193iIUK3WDwcapa1LQ+HfROQYCUJEs10I750YbFEnO3mJaZWStGbhkTsrRm
- w+IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721183079; x=1721787879;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/nNC+cniBo4JCbbauy1lLDVwDlP0Jkq8smYTCbwiSjY=;
- b=qPj2+hbkaW0V3QXs9fLadFAOQG2sTkB5vAZoXI5ijDZ/BdwPVoigSQugc4ROZxaTxU
- FRg8nav7SOeWYV0El41LceMTaaSPxaX/WCcm0Ijwnnd8pqb3JODCCeNZnTR6EfREXE1r
- nIog6DipRIY6WcghTnDa4KNVcWowhGMOci56SaYDsMIEJKj5BdeRQvoavHa/R9jsHpiQ
- hDo8307jDZ42yHBTGaZ0pSJCIr9w5jzZBF+8k78jT73j8wRqKqfochTqY29bnXUj02+E
- m028Ic9IQBOi9PBTT3sMI9QfFQgo2wYmHSlhl+PeCwUyPOaiTQhsVR0VybMtYElk57cu
- SurA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCVugHKBLblICbjULrZay3wroz6mlgeK35AlPp2CpJTpJ130j9Ma7xbxYSBA1CD9nJM6GOHzsngbq8ub37kWcRFPwDtA==
-X-Gm-Message-State: AOJu0Yx9C5gUfYNFMBJRMlborpOO7jG4oNL2fKYa4EGQ9iT7AZaTTdOa
- ww3pglW77BbTf18w1zSRDemQNNtjszNL8KCxitOfOK7eFGSHAffFUd+TwimbGoIjd2PKrKNcF1P
- YbV/zvMDOEXBJo+A2Hp9UdLqzlnc=
-X-Google-Smtp-Source: AGHT+IGPYrmzXEv61W3OeTWApeY8bsp1CXaSu9T9r8gJ73UGakWUy+MAmFBntBKJ7KCyqdnaZffAjon1saYarqRWrlg=
-X-Received: by 2002:a05:6820:1e0f:b0:5cc:64e5:d002 with SMTP id
- 006d021491bc7-5d41c2158ffmr462819eaf.8.1721183079332; Tue, 16 Jul 2024
- 19:24:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=quic_jjohnson@quicinc.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46GHf5TC027012;
+ Tue, 16 Jul 2024 23:43:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ N3QJ5/o/wDR3TZtIE94AfbmLbVWg1q+EHZ/P1r1AiVg=; b=C+sTG0f2IMrnTAlx
+ 4lk2QaJ4v/CcGvT5+BB4BGpLGPxpFumq8mOwZ8gnPNZInGHl+N6YXUaLmbKzDLHj
+ 2K7veyXTejKeunE66CPV9GkvVW4D2OGsK3W7xkpAf9hFrmAr+7eMDLDSMOuk7C5F
+ 4q0u2R2TYxypbZW1hi/eQMdk2YRi99/EQfzNwIO/fOCoT/bRKwkD1tyJm9IrZ5iq
+ qf8w0m1c/zcyLLh7Ejuu2P/X/E3PhZyUkRXC78ctdGuN3o4vAB/mzO4Rj5ky2O/f
+ 9WskK7p8+NlIZgiGcwRgyczAVyL4JBR8p8c7KBE715OiYWbcWfSPPUteyC7z9Ull
+ NFaZVw==
+Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com
+ [129.46.96.20])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 40dwfs0m4r-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 16 Jul 2024 23:43:36 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
+ [10.47.209.196])
+ by NALASPPMTA02.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
+ 46GNhZE5003908
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 16 Jul 2024 23:43:35 GMT
+Received: from [10.81.24.74] (10.49.16.6) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Tue, 16 Jul
+ 2024 16:43:34 -0700
+Message-ID: <7145cd8e-590a-4260-a738-dc1a386e7787@quicinc.com>
+Date: Tue, 16 Jul 2024 16:43:33 -0700
 MIME-Version: 1.0
-References: <20240626151522.83561-1-linux.amoon@gmail.com>
- <20240626151522.83561-2-linux.amoon@gmail.com>
-In-Reply-To: <20240626151522.83561-2-linux.amoon@gmail.com>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Wed, 17 Jul 2024 11:24:28 +0900
-Message-ID: <CALrBrZ27g5hSEKZ0qSLxKxOgXzuR7ONS6er7C_9kQLgBNr7oKw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/2] odroid: Fix target platform compilation issue on
- Odroid-XU3
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: --Minkyu Kang <mk7.kang@samsung.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] nvmem: layouts: add U-Boot env layout
+To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, Srinivas Kandagatla
+ <srinivas.kandagatla@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
+ <michael@walle.cc>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ <devicetree@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
+ <linux-arm-kernel@lists.infradead.org>, <u-boot@lists.denx.de>,
+ <linux-kernel@vger.kernel.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
+ <rafal@milecki.pl>
+References: <20240715135434.24992-1-zajec5@gmail.com>
+ <20240715135434.24992-2-zajec5@gmail.com>
+Content-Language: en-US
+From: Jeff Johnson <quic_jjohnson@quicinc.com>
+In-Reply-To: <20240715135434.24992-2-zajec5@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.49.16.6]
+X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: HjDUvP7cKZSBjai9_qJv7ION5Anjs5h9
+X-Proofpoint-GUID: HjDUvP7cKZSBjai9_qJv7ION5Anjs5h9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-16_02,2024-07-16_02,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ spamscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0 mlxlogscore=956
+ impostorscore=0 mlxscore=0 phishscore=0 suspectscore=0 clxscore=1011
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2407110000 definitions=main-2407160174
+X-Mailman-Approved-At: Wed, 17 Jul 2024 04:38:39 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,44 +109,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-
-2024=EB=85=84 6=EC=9B=94 27=EC=9D=BC (=EB=AA=A9) 00:41, Anand Moon <linux.a=
-moon@gmail.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
-
-> Resolved a compilation issue where the build system attempted
-> to compile for the Odroid-XU3 platform instead of the specified
-> Exynos4412 platform due to an incorrect CONFIG_SYS_BOARD setting.
-> Updated the Makefile to ensure that compilation only occurs for
-> the Odroid-XU3 specified target platform.
->
-> Now, object files will be generated only when building for the
-> TARGET_ODROID platform.
->
-> Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+On 7/15/24 06:54, Rafał Miłecki wrote:
+> From: Rafał Miłecki <rafal@milecki.pl>
+> 
+> U-Boot environment variables are stored in a specific format. Actual
+> data can be placed in various storage sources (MTD, UBI volume, EEPROM,
+> NVRAM, etc.).
+> 
+> Move all generic (NVMEM device independent) code from NVMEM device
+> driver to an NVMEM layout driver. Then add a simple NVMEM layout code on
+> top of it.
+> 
+> This allows using NVMEM layout for parsing U-Boot env data stored in any
+> kind of NVMEM device.
+> 
+> The old NVMEM glue driver stays in place for handling bindings in the
+> MTD context. To avoid code duplication it uses exported layout parsing
+> function. Please note that handling MTD & NVMEM layout bindings may be
+> refactored in the future.
+> 
+> Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 > ---
-> Tested om Odroid-U3 and Odroid-XU4.
-> ---
->  board/samsung/odroid/Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/board/samsung/odroid/Makefile b/board/samsung/odroid/Makefil=
-e
-> index 5bf48313de..615c99f501 100644
-> --- a/board/samsung/odroid/Makefile
-> +++ b/board/samsung/odroid/Makefile
-> @@ -3,4 +3,4 @@
->  # Copyright (c) 2014 Samsung Electronics Co., Ltd. All rights reserved.
->  # Przemyslaw Marczak <p.marczak@samsung.com>
->
-> -obj-y  :=3D odroid.o
-> +obj-$(CONFIG_TARGET_ODROID)    :=3D odroid.o
-> --
-> 2.44.0
->
+> This change was originally sent (and approved by Miquel) as a
+> [PATCH V3 6/6] nvmem: layouts: add U-Boot env layout
+> 
+> I just adjusted it to the approved binding and updated commit message.
+> I kept Miquel's Reviewed-by tag due to minimal changes.
+> 
+> I've successfully tested this code using it in both ways: as NVMEM
+> device driver & NVMEM layout.
+> 
+>   MAINTAINERS                        |   1 +
+>   drivers/nvmem/Kconfig              |   3 +-
+>   drivers/nvmem/layouts/Kconfig      |  11 ++
+>   drivers/nvmem/layouts/Makefile     |   1 +
+>   drivers/nvmem/layouts/u-boot-env.c | 203 +++++++++++++++++++++++++++++
+>   drivers/nvmem/layouts/u-boot-env.h |  15 +++
+>   drivers/nvmem/u-boot-env.c         | 158 +---------------------
+>   7 files changed, 234 insertions(+), 158 deletions(-)
+>   create mode 100644 drivers/nvmem/layouts/u-boot-env.c
+>   create mode 100644 drivers/nvmem/layouts/u-boot-env.h
+> 
+...
 
-applied to u-boot-samsung.
+> +module_nvmem_layout_driver(u_boot_env_layout);
+> +
+> +MODULE_AUTHOR("Rafał Miłecki");
+> +MODULE_LICENSE("GPL");
+> +MODULE_DEVICE_TABLE(of, u_boot_env_of_match_table);
 
-Thanks.
-Minkyu Kang.
+Is this missing a MODULE_DESCRIPTION()?
+
+Since commit 1fffe7a34c89 ("script: modpost: emit a warning when the 
+description is missing") a module without a MODULE_DESCRIPTION() will 
+result in a warning with make W=1.
+
+I'll hopefully have all existing warnings fixed in 6.11 so please avoid 
+adding new ones :)
+
+/jeff
