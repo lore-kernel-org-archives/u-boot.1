@@ -4,74 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58895C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 16:56:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCDF9C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 17:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D49F889DB;
-	Tue, 16 Jul 2024 18:56:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 47E7D88A02;
+	Tue, 16 Jul 2024 19:00:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a1y3a4w2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jwqE/HfI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95DD5889EC; Tue, 16 Jul 2024 18:56:26 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 6900688971; Tue, 16 Jul 2024 19:00:37 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57FB28876D
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 18:56:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F5AA887E3
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 19:00:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-58c2e5e8649so10235804a12.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:56:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5c6661bca43so7919eaf.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 10:00:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721148984; x=1721753784; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZuVI6jTiBctfFYUQqA7eSBNBxUubvdzQv0T/ZHpB4nI=;
- b=a1y3a4w2XrgJM0fsyLI9g4S7VmKNIbeXgOKuY6Afft/R23+YCtQ2qu8S6NaYMHylEd
- 82Ep9MTiEACKzN3OY11uTfHTYzlP6d9QpdgsmaWnD+8DEygnf5vxnlHn8DoNZpI4ukBl
- J+1x+tP8Hsu+NSfLGuB631Eowu9njCRDrXUf3c1m1WgIGFbVeBvDwynhwsZyy9FDF9gl
- kE9tIFb2eA2WN2fdbMY9UnzyGLO2o9kzL1693mj0JM/AWLVbhm3eMcKeFzhFma6a8Ls1
- VaL/7MmgajD7Yt+fIO5KobsHeUt3ImyUcOBZvy1lbhhnRfE8c0jEoUkqs7G7wdTiGoLN
- iA9g==
+ d=konsulko.com; s=google; t=1721149232; x=1721754032; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BA2eSeHDgCvPBH+BgeFfZt+8HTUHQiusdcHtSd6pth4=;
+ b=jwqE/HfIPMojxyaE+3H5Fb2BHylhgq7yiYKeAMuSKhX+E+G8llkt2dMt0vy5tkGjU3
+ 54AFtSHbRt6RAof3xB4Qk15tw7TzCnSTE8JNfhpVY/oOt0jELVkovubz0E6q9wXmnVn9
+ j0w7O4m8xHJugHjYbGKYFM3OSzGCFPKB0KYc8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721148984; x=1721753784;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZuVI6jTiBctfFYUQqA7eSBNBxUubvdzQv0T/ZHpB4nI=;
- b=Za0bG7MjuY7WSy+sIwvwCBrYpx05mw0i8ugwshM6+j6A/2PJdRbkxDXZBEoqwH7542
- meLWloLT23o9KfFljtSUEY/1Jx6ljUBH44PzYY2vLTE+d5CwehKqmBnceXCxyf5/9kKD
- BGfVxBdoVz0ZKAKgQq57EXITwRO5DAe7kHlH2/Ccg+KWCJck//3kaV7A22hGiU/XUrbU
- 5lnJfC3EMs6cCCRwtH/lg6ejYKmu+L7Uv6vfY19SHN/2b2gYVYZxFSdHaMCTvpg0Khew
- djSiqTks5LnPN+qPJJAzBICGt2fm4aDlTZ3mnx25Ww2ADQbgLnclgA8Y9Mndz1AfpNS2
- lrvg==
+ d=1e100.net; s=20230601; t=1721149232; x=1721754032;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BA2eSeHDgCvPBH+BgeFfZt+8HTUHQiusdcHtSd6pth4=;
+ b=oXWXCkHlwPX31g1hxBXior+1el19Zm0fbjnkgUJ+u1oS59JqqsgkZkNSKMbH77gMdm
+ UbNTxxtPd0TC8jPhD//8jQPAwVYrSb6f+wzbJo6V7CJxPeiFSkodNJ4Zb+85hfRnHJa2
+ 7oBTOTc0UtYJOzJcvQG7vVmMw5N59RAYwAa9BT/Q4Ng1XGsbj07R1QvUGlp5x0IZfJ0P
+ v8FfjRdKACei6RsXf5eO0q20wpIWk6+C5b0KAa055Vuk4Flj6svJ1O2qC9PhT1Fl7YVB
+ PW3aBHj5azI7f4NLOeAdwnOU2xXLN/X/le3y7G/yUazs0xSWMGUutfa9Nuq8NKZaPlwQ
+ qq7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcI098EPSf8+7BQ4U6aYK6DhN/pllU5n8FEDlL8/SzIsNK5H7OCYGxMo/7xPRir3Y7lsu8MZkIG5E/PPM1QSzbJ+I0Sg==
-X-Gm-Message-State: AOJu0YxM3f8bc14LQxhRwaktp7OdfQcb99utxzeVyJ4as9yr8ziArwlQ
- UNquSvujjYdzVp8+2DIhCoQHQ/QnTDx7yrPO9aYgQzpUcsAjKViahDPF4HE0UTRVK3ArOsU3Om9
- mC82T193S85QgqWC5gwxOGJZcPdY=
-X-Google-Smtp-Source: AGHT+IGbR1vsAGDh1sZsbjBEAsViEGy1/UoMn+EqV7fmG2FO2Dl4iTmn0gzov2XblJQMzTPUcPTjJ7e1h9Fh9FPg3Cw=
-X-Received: by 2002:a05:6402:3489:b0:58c:77b4:404b with SMTP id
- 4fb4d7f45d1cf-59f0b913ccdmr2657312a12.15.1721148983547; Tue, 16 Jul 2024
- 09:56:23 -0700 (PDT)
+ AJvYcCXuI3+LsdSIb9R6wuod2uydbB/wN6QAPw4/FBbALUOPFcGYj9i6hAvVe/ImXz3iCoeHnBA6D6ax5yJ31N5WUfGf8W42zQ==
+X-Gm-Message-State: AOJu0Yw5aSV8xXHfV4nsQlLcT5k1c6Ic14SQxk7b3biuk8aFgai0Rw+F
+ TRAMq2t4d+W0kdZsJo4a/674EzWDIeFG2EBr2pp3tIma2arX0aKVmNkwcDPLBbk=
+X-Google-Smtp-Source: AGHT+IGdPrarw70kJD1BZJjBqskGVIoX6a682iQmrx/5YQnZM2pro/DMmUCmQQuOMdu+3Df7b+7TcQ==
+X-Received: by 2002:a05:6871:294:b0:259:cdf1:b8af with SMTP id
+ 586e51a60fabf-260bdffe1efmr2297557fac.46.1721149232253; 
+ Tue, 16 Jul 2024 10:00:32 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-708c0d01337sm1351563a34.61.2024.07.16.10.00.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jul 2024 10:00:31 -0700 (PDT)
+Date: Tue, 16 Jul 2024 11:00:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH v2 41/48] efi_memory: add an event handler to update
+ memory map
+Message-ID: <20240716170028.GF561963@bill-the-cat>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240704073544.670249-42-sughosh.ganu@linaro.org>
+ <CAFLszTiXtfFh3K8Ft1nTzBizSitk_dyK7n0BsRccNNe6TimFoQ@mail.gmail.com>
+ <CADg8p97fwAvebfrANXwWc7At78wU59XXymTFWCvuaFHMGj+9zg@mail.gmail.com>
+ <CAFLszTiAHSgkGjV6PWOu2nisKc678rpxBvQKuOZeisqCmeAXSA@mail.gmail.com>
+ <20240715190534.GA561963@bill-the-cat>
+ <CADg8p972kWS9DY_xmNm2uBAz5-y_LtSy0dq2eRTf5dJMCranCw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240716150616.349466-1-philippe.reynes@softathome.com>
-In-Reply-To: <20240716150616.349466-1-philippe.reynes@softathome.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 16 Jul 2024 17:56:12 +0100
-Message-ID: <CALeDE9PSADyPUwBuHH46V2Of-HxyYJbo2VOdfQe-_soS6CHCvg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] lib: sha256: add feature sha256_hmac
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: trini@konsulko.com, sjg@chromium.org, abdellatif.elkhlifi@arm.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="A3fheFAfAjVGGJ8N"
+Content-Disposition: inline
+In-Reply-To: <CADg8p972kWS9DY_xmNm2uBAz5-y_LtSy0dq2eRTf5dJMCranCw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,93 +102,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
 
-It might be useful to have a cover letter explaining what the plans
-for this code are, great that there are tests but adding code in
-without it being used isn't always a feature so a cover letter with
-some details often helps with the context.
+--A3fheFAfAjVGGJ8N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Also if you're not aware there's work to integrate MBedTLS [1] and I'm
-not sure if that also may provide the functionality.
+On Tue, Jul 16, 2024 at 11:55:10AM +0530, Sughosh Ganu wrote:
+> On Tue, 16 Jul 2024 at 00:35, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Jul 15, 2024 at 12:39:32PM +0100, Simon Glass wrote:
+> > > Hi Sughosh,
+> > >
+> > > On Mon, 15 Jul 2024 at 10:39, Sughosh Ganu <sughosh.ganu@linaro.org> =
+wrote:
+> > > >
+> > > > hi Simon,
+> > > >
+> > > > On Sat, 13 Jul 2024 at 20:46, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Sughosh,
+> > > > >
+> > > > > On Thu, 4 Jul 2024 at 08:38, Sughosh Ganu <sughosh.ganu@linaro.or=
+g> wrote:
+> > > > > >
+> > > > > > There are events that would be used to notify other interested =
+modules
+> > > > > > of any changes in available and occupied memory. This would hap=
+pen
+> > > > > > when a module allocates or reserves memory, or frees up memory.=
+ These
+> > > > > > changes in memory map should be notified to other interested mo=
+dules
+> > > > > > so that the allocated memory does not get overwritten. Add an e=
+vent
+> > > > > > handler in the EFI memory module to update the EFI memory map
+> > > > > > accordingly when such changes happen. As a consequence, any sub=
+sequent
+> > > > > > memory request would honour the updated memory map and only ava=
+ilable
+> > > > > > memory would be allocated from.
+> > > > > >
+> > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > ---
+> > > > > > Changes since V1:
+> > > > > > * Handle the addition of memory to the LMB memory map.
+> > > > > > * Pass the overlap_only_ram parameter to the efi_add_memory_map=
+_pg()
+> > > > > >   based on the type of operation.
+> > > > > >
+> > > > > >  lib/efi_loader/Kconfig      |  1 +
+> > > > > >  lib/efi_loader/efi_memory.c | 34 +++++++++++++++++++++++++++++=
++++++
+> > > > > >  2 files changed, 35 insertions(+)
+> > > > > >
+> > > > >
+> > > > > This is getting complicated and I don't believe it is needed.
+> > > > >
+> > > > > EFI should not be allocating memory 'in free space' until it star=
+ts
+> > > > > up. For the very few (if any) cases where it does, it can do an l=
+mb
+> > > > > allocation.
+> > > >
+> > > > EFI memory module is not allocating memory at all now. This patch is
+> > > > adding an event handler for updating the EFI memory map, whenever t=
+he
+> > > > LMB memory map changes. All the EFI allocations are now being routed
+> > > > through the LMB API's.
+> > >
+> > > OK
+> > >
+> > > >
+> > > > >
+> > > > > As to the lmb allocations themselves, EFI can simply call look th=
+rough
+> > > > > the lmb list and call efi_add_memory_map_pg() for each entry, whe=
+n it
+> > > > > is ready to boot. There is no need to do it earlier.
+> > > >
+> > > > So in this case, I believe that rather than adding code in multiple
+> > > > places where the EFI memory module would have to get the LMB map and
+> > > > then update it's own, I think it is easier to update the EFI memory
+> > > > map as and when the LMB map gets updated. Else, we have a scenario
+> > > > where the EFI memory map would have to be updated as part of the EFI
+> > > > memory map dump function, as well as before the EFI boot. Any new c=
+ode
+> > > > that would be subsequently introduced that might have a similar
+> > > > requirement would then be needed to keep this point in mind(to get =
+the
+> > > > memory map from LMB).
+> > >
+> > > That doesn't hold water in my eyes. I actually like the idea of the
+> > > EFI memory map being set up before booting. It should be done in a
+> > > single function called from one place, just before booting. Well, I
+> > > suppose it could be called from the memory-map-dump function too. But
+> > > it should be pretty simple...just add some pre-defined things and then
+> > > add the lmb records. You can even write a unit test for it.
+> > >
+> > > >
+> > > > This is not an OS file-system kind of an operation where performance
+> > > > is critical, nor is this event(LMB memory map update) going to happ=
+en
+> > > > very frequently. So I believe that it would be better to keep the E=
+FI
+> > > > memory map updated along with the LMB one.
+> > >
+> > > I really don't like that idea at all. One table is enough for use by
+> > > U-Boot. The EFI one is needed for booting. Keeping them in sync as
+> > > U-Boot is running is not necessary, just invites bugs and makes the
+> > > whole thing harder to test.
+> >
+> > Doesn't that ignore the issue of EFI being re-entrant to us? Or no,
+> > because you're suggesting we only update the EFI map before entering the
+> > EFI loader, not strictly "booting the OS"? In which case, maybe that
+> > does end up being both cleaner and smaller? I'm not sure.
+>=20
+> And that is my concern here about having to update the EFI map at
+> multiple call points, instead of keeping it updated -- I feel this is
+> more prone to being buggy. And to add to this, there might be code
+> paths added subsequently which might need an updated EFI map where
+> this gets missed. The only downside to the current design is that it
+> might be slower since the EFI map gets updated on every change to the
+> LMB map. But I am not sure if the LMB map changes are going to be that
+> frequent.
 
-Peter
+To me the question really is, do we have a single entry point to the EFI
+loader that must always be used (and is before EFI loader must know for
+sure it has up to date memory reservations) or are there two or more
+points? If there's two or more points then yes, your current approach is
+best as we don't want to introduce problems down the line. If there's
+one (which is what I hope), then we can just make that entry point be
+where the resync happens.
 
-[1] https://lists.denx.de/pipermail/u-boot/2024-July/557832.html
+--=20
+Tom
 
-On Tue, 16 Jul 2024 at 16:16, Philippe Reynes
-<philippe.reynes@softathome.com> wrote:
->
-> Adds the support of the hmac based on sha256.
-> This implementation is based on rfc2104.
->
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
->  include/u-boot/sha256.h |  4 ++++
->  lib/sha256.c            | 40 ++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 44 insertions(+)
->
-> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-> index a4fe176c0b4..7aa4c54d0d4 100644
-> --- a/include/u-boot/sha256.h
-> +++ b/include/u-boot/sha256.h
-> @@ -24,4 +24,8 @@ void sha256_finish(sha256_context * ctx, uint8_t digest[SHA256_SUM_LEN]);
->  void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
->                 unsigned char *output, unsigned int chunk_sz);
->
-> +void sha256_hmac(const unsigned char *key, int keylen,
-> +                const unsigned char *input, unsigned int ilen,
-> +                unsigned char *output);
-> +
->  #endif /* _SHA256_H */
-> diff --git a/lib/sha256.c b/lib/sha256.c
-> index 665ba6f152e..64f6b48974b 100644
-> --- a/lib/sha256.c
-> +++ b/lib/sha256.c
-> @@ -298,3 +298,43 @@ void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
->
->         sha256_finish(&ctx, output);
->  }
-> +
-> +/*
-> + * Output = HMAC-SHA-256( input buffer, hmac key )
-> + */
-> +void sha256_hmac(const unsigned char *key, int keylen,
-> +                const unsigned char *input, unsigned int ilen,
-> +                unsigned char *output)
-> +{
-> +       int i;
-> +       sha256_context ctx;
-> +       unsigned char k_ipad[64];
-> +       unsigned char k_opad[64];
-> +       unsigned char tmpbuf[32];
-> +
-> +       memset(k_ipad, 0x36, 64);
-> +       memset(k_opad, 0x5C, 64);
-> +
-> +       for (i = 0; i < keylen; i++) {
-> +               if (i >= 64)
-> +                       break;
-> +
-> +               k_ipad[i] ^= key[i];
-> +               k_opad[i] ^= key[i];
-> +       }
-> +
-> +       sha256_starts(&ctx);
-> +       sha256_update(&ctx, k_ipad, 64);
-> +       sha256_update(&ctx, input, ilen);
-> +       sha256_finish(&ctx, tmpbuf);
-> +
-> +       sha256_starts(&ctx);
-> +       sha256_update(&ctx, k_opad, 64);
-> +       sha256_update(&ctx, tmpbuf, 32);
-> +       sha256_finish(&ctx, output);
-> +
-> +       memset(k_ipad, 0, 64);
-> +       memset(k_opad, 0, 64);
-> +       memset(tmpbuf, 0, 32);
-> +       memset(&ctx, 0, sizeof(sha256_context));
-> +}
-> --
-> 2.25.1
->
+--A3fheFAfAjVGGJ8N
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWpykACgkQFHw5/5Y0
+tyyW1AwAkd/5CbIicw9ZuEa4Ds3CP2N0wZVfMgTnCPT1DmLQgHinmTBim89KEZtg
+GMBQWpAFd/byk641HBABqj5hYbz6cL7Yu1PNgbdxbpfyjn26MMfVqmKQ6M/5raTB
+PrL2j3jWzfkj49vsTA/VSsOwY4M4raSQFJyMol/3fwhQMJuETwDY3yjRca61hVMZ
+prRcv6iq2UeQIjQdoeFMUpJkb6mP5stihdNfbvZlGoJOkfe5XEHmlrmuf/lx2Xlj
+fODUW75cNfrSReaMDdq8JJHdBZRAjN7R3DYD0aE3Sht9ZesCQ7+z+qPpb2KAtxm0
+EtGvSPXHVURnvcfWX1XLMm5eY4SVHmGv0eAS6I7OwJuV1Td7TawCuNEB0Mb5ZOLL
+nMLhfe9zzyhi/3Yh5zu+m51+nY5O7v+ohFcaoG6Tw9Utw9lSAH/paL0gKRB+vNhh
+R8s5xYXxDCm+PTC96RL9DddZ//NitrfF0dnGtm19wQ25u4XZ63zq+VWidkiCKkNI
+uUr1LSVI
+=Ljtm
+-----END PGP SIGNATURE-----
+
+--A3fheFAfAjVGGJ8N--
