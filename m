@@ -4,72 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 748F4C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B424C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:09:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F069889FC;
-	Tue, 16 Jul 2024 09:05:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 91F108897B;
+	Tue, 16 Jul 2024 09:09:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DpV84TvC";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3AawZad2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96A9888A08; Tue, 16 Jul 2024 09:05:06 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 909FB889AA; Tue, 16 Jul 2024 09:09:44 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48D67889CD
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FF0488967
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6b5dfa44f24so28376236d6.3
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:57 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42797289c8bso37757255e9.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:09:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721113497; x=1721718297; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XVlEk8xbBvHXVU2J9XA7XEMr5S3SrBU0bui0VbtU+ag=;
- b=DpV84TvC+U9g7QxPt1U4bfE6Z1DyXqJsyRmyyl6I09DPedw4GsJhugHgzDiBb4f2gu
- vYRL4P47UUpdyvA86C0XAQyw2NvMc3pPKllQocHAXbWSyrIYpQ6Ate0yqek7gUxotFen
- qd7hHV3Kzu6yyJrwFLMkxmiNTmLNyXW3lhpL4=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721113782; x=1721718582;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pItYeZtuOiDWru+Sjgl6UJlVB8ucKIpzV+Sc9CfFBRY=;
+ b=3AawZad2NL1NNTw2Zf0IstFqlp4uve5lXw+EJLiPGHJDmQnBIL5hHoiWVDE9SzmY9j
+ icyNZCMXf2xsAPAJQ3og/ltoRpMqKH3KNIQ5yJJHnfnFAlHfSGLyQaV5T68T3WxzgB18
+ Uy8krVnLLSC+RNeQveiKRd+P7GO1n2mw49pR2hfZccBTdA/z1Ste0lJOL6TolMPUjKyB
+ 5PdmBRkZb23QBLqfRj6UMYhdrSMYECVQGt3PQ0plqifS9Fkf6slghiWHv2xSvU4lBGQl
+ qvw0AVFHRk9hhel7NpdKZsoyUre+56Xd+DCuMVlOIZMDMxhV+2AbZ7NsCf4eS/J7h7CH
+ mVjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721113497; x=1721718297;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XVlEk8xbBvHXVU2J9XA7XEMr5S3SrBU0bui0VbtU+ag=;
- b=e/7PIAVkP7u6JWqOelTO2SJWXzYgX2+INfIrX5TPUdfSzzv556/viYcx/FdAMS7imd
- IFXd9iRDTRSpxvkkh0kTB52YBjTbeDjuMpTMTvy3SH7A/EwFSQTWPb0W531TZFA5eX2/
- fIwFkY9c+nkU/iz+Hjwrch7dvE26DzKFcLn7FyHbYhZsYHNoeHw/g6aBKzjYFsvTNK4p
- gDIpO1TX7Yary/G9zyeNeI4MmOfkgk8hn2iLHagG3QSMVSGxZscg+tAPl9XC0mFIP+iJ
- ER96aMXC/tSRjs9GJ/xL8Fs8aF1I0pW5gdRnjCkv8eHYBykJKXrFAuLOZtV5Ob25Yk+6
- dAWQ==
+ d=1e100.net; s=20230601; t=1721113782; x=1721718582;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pItYeZtuOiDWru+Sjgl6UJlVB8ucKIpzV+Sc9CfFBRY=;
+ b=DRSliSbrE4xxclzmGElykMr03fxzN+T3UIT0bxGpljd8ANdTEA5Xy1SjeQcjlj66/0
+ i+Yu0iIEQZ+MOqaJgTHF7+wTvD4iqaqu1Ki57+bHzIVGs528jU763+gg3/CeT5iySK/0
+ 3BeGzbQV8k7SidbKvgoC29DGj5UrhuxggLKKN/AGPvrkFM3s5JLr8NKn4B9uIsiHa69h
+ El1R1epyj/K1fKZw/Q+qZZoT0AWMD2FhJC5bCFWP2q8bxe89cUNgc256pZouYvmIhSJo
+ Jnpn+yvz8CqKKMGa/w+Ia0BsqPIvL/zhmXOM0qolQTVdZ8iNO30tjWHHiF/kK2GkSbSK
+ cM/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbtUvPA+uFv2qAeyTp48t51bRX+hQL6M+b6oP9FpO7x8xiwjdm5GyNx3FIbgKMEJE6FXUVevjyK1Fwe+NvkqfKdt++NA==
-X-Gm-Message-State: AOJu0YzDCHhBB9OPVWXjzWxhLrrEV4TY1luUOOGDqHj2ftm5PBYTScgu
- BoY7lCTnghEmge0l5yQiI9+rC0ti1C6ggnEeLk/69MS4ROg7pDLRKXSuHBULN++DC6u9SI6+ion
- kGNbtUBTxGZIFvHR2Si3hQteYbndEibHHxlFX
-X-Google-Smtp-Source: AGHT+IExT9X/ak3y9LHcfj5HaIHMa/oSVV3Ao29F5hvp6w+zP+5mX4cJVkXG5U6Tjz01KIyKArBlYp7Fj1fZg3om/vc=
-X-Received: by 2002:ad4:5de7:0:b0:6b5:3b00:7e62 with SMTP id
- 6a1803df08f44-6b77f4b6ab8mr20816116d6.8.1721113496766; Tue, 16 Jul 2024
- 00:04:56 -0700 (PDT)
+ AJvYcCUNHTE2dyS1yCsY9oIiTvJKLNe+Py/OcjzsGeqeNLG48iN1mOMTkoF8j1/8Dbr2+A93g6vnCkvNuR+mNeC7FOsADzKvGw==
+X-Gm-Message-State: AOJu0Yw6ErHOomaOJ7BHLhXIj84Uock5UUx6HIWfqgFfU26Iz+ybMNLB
+ 4FZttcouCHy7P8IzNgczgfINjv+he0H6ObCQL6/wnNkktJYyGxi3/o8HMxaspgA=
+X-Google-Smtp-Source: AGHT+IENOiB6c6GdWU7qej8ni/wi+EBpfVETMJTagTn51rlVY+Ty+XuYvPAv2kDGPnr6XKK6fqXhag==
+X-Received: by 2002:a05:600c:4fd5:b0:426:5546:71a with SMTP id
+ 5b1f17b1804b1-427ba656518mr6857255e9.2.1721113781587; 
+ Tue, 16 Jul 2024 00:09:41 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3680dab3bcdsm8183159f8f.3.2024.07.16.00.09.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jul 2024 00:09:40 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Alexander Dahl
+ <ada@thorsis.com>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ E Shattow <lucent@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaewon Jung <jaewon8868@gmail.com>, Janne Grunau <j@jannau.net>, Joao
+ Marcos Costa <jmcosta944@gmail.com>, Marek Vasut <marex@denx.de>, Michal
+ Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>, Quentin
+ Schulz <quentin.schulz@cherry.de>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH 02/13] doc: Move bootstd into its own directory
+In-Reply-To: <20240715101354.97895-3-sjg@chromium.org>
+References: <20240715101354.97895-1-sjg@chromium.org>
+ <20240715101354.97895-3-sjg@chromium.org>
+Date: Tue, 16 Jul 2024 09:09:37 +0200
+Message-ID: <87msmholse.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240716024032.22254-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240716024032.22254-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 16 Jul 2024 08:04:45 +0100
-Message-ID: <CAFLszTgSE-Zd1OpoisD4pCi6mFw2KgYzfFwpOsstUw08LGO-Qg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] boot: provide CONFIG_BOOTMETH_QFW Kconfig parameter
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Eddie James <eajames@linux.ibm.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,89 +100,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Simon,
 
-On Tue, 16 Jul 2024 at 03:40, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Thank you for the patch.
+
+On lun., juil. 15, 2024 at 11:13, Simon Glass <sjg@chromium.org> wrote:
+
+> Before adding more files, move the bootstd docs into a new directory,
+> with an index.
 >
-> U-Boot is often used conjunction with QEMU to boot via EFI or syslinux.
-> Here the QFW boot method is not needed.
->
-> At least for qemu-riscv64_smode_defconfig the kernel parameter is used
-> to specify the U-Boot binary. Trying to run U-Boot as a kernel makes
-> no sense.
->
-> Provide Kconfig parameter CONFIG_BOOTMETH_QFW to decide if the QFW boot
-> method shall be provided.
->
-> Disable the QFW boot method for all architectures but the sandbox by
-> default.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
 > ---
->  boot/Kconfig  | 9 +++++++++
->  boot/Makefile | 2 +-
->  2 files changed, 10 insertions(+), 1 deletion(-)
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 95300b008c5..d7e034c89e7 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -568,6 +568,15 @@ config BOOTMETH_EFI_BOOTMGR
->           the EFI binary to be launched is determined. To set the EFI variables
->           use the eficonfig command.
+>  MAINTAINERS                                       |  2 +-
+>  doc/board/starfive/milk-v_mars_cm.rst             |  2 +-
+>  doc/develop/board_best_practices.rst              |  2 +-
+>  doc/develop/bootstd/index.rst                     |  9 +++++++++
+>  doc/develop/{bootstd.rst => bootstd/overview.rst} | 14 +++++++-------
+>  doc/develop/index.rst                             |  2 +-
+>  doc/usage/cmd/bootdev.rst                         |  2 +-
+>  doc/usage/cmd/bootflow.rst                        |  2 +-
+>  doc/usage/cmd/bootmeth.rst                        |  2 +-
+>  doc/usage/environment.rst                         |  2 +-
+>  10 files changed, 24 insertions(+), 15 deletions(-)
+>  create mode 100644 doc/develop/bootstd/index.rst
+>  rename doc/develop/{bootstd.rst => bootstd/overview.rst} (99%)
 >
-> +config BOOTMETH_QFW
-> +       bool "Boot method using QEMU parameters"
-> +       depends on QFW
-> +       default y if SANDBOX
-> +       help
-> +        Use QEMU parameters -kernel, -initrd, -append to determine the kernel,
-> +        initial RAM disk, and kernel command line parameters to boot an
-> +        operating system. U-Boot's control device-tree is passed to the kernel.
-
-I added the bootmeth to deal with this part of the old qemu-arm.h :
-
-/* Try files from QEMU's -kernel/-initrd, through the QEMU firmware device. */
-#define BOOTENV_DEV_QFW(devtypeu, devtypel, instance) \
-"bootcmd_qfw= " \
-"if qfw load $kernel_addr_r $ramdisk_addr_r; then " \
-"  booti $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr; " \
-"  if test $? -eq 1; then " \
-"    bootz $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr; " \
-"  fi ; " \
-"fi\0"
-#define BOOTENV_DEV_NAME_QFW(devtypeu, devtypel, instance) "qfw "
-
-Are you sure this is not used?
-
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 9bee9284cca..86b830aa997 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -927,7 +927,7 @@ F:	boot/bootmeth*.c
+>  F:	boot/bootstd.c
+>  F:	cmd/bootdev.c
+>  F:	cmd/bootflow.c
+> -F:	doc/develop/bootstd.rst
+> +F:	doc/develop/bootstd/
+>  F:	doc/usage/bootdev.rst
+>  F:	doc/usage/bootflow.rst
+>  F:	doc/usage/bootmeth.rst
+> diff --git a/doc/board/starfive/milk-v_mars_cm.rst b/doc/board/starfive/milk-v_mars_cm.rst
+> index b31de6043bb..52d4e5e9098 100644
+> --- a/doc/board/starfive/milk-v_mars_cm.rst
+> +++ b/doc/board/starfive/milk-v_mars_cm.rst
+> @@ -89,7 +89,7 @@ provide a default value.
+>  
+>  The variable *$fdtfile* is used in the boot process to automatically load
+>  a device-tree provided by the operating system. For details of the boot
+> -process refer to the :doc:`U-Boot Standard Boot <../../../develop/bootstd>`
+> +process refer to the :doc:`/develop/bootstd/index`
+>  description.
+>  
+>  Boot source selection
+> diff --git a/doc/develop/board_best_practices.rst b/doc/develop/board_best_practices.rst
+> index f44401eab7d..09632c80ce7 100644
+> --- a/doc/develop/board_best_practices.rst
+> +++ b/doc/develop/board_best_practices.rst
+> @@ -7,7 +7,7 @@ In addition to the regular best practices such as using :doc:`checkpatch` and
+>  following the :doc:`docstyle` and the :doc:`codingstyle` there are some things
+>  which are specific to creating a new board port.
+>  
+> -* Implement :doc:`bootstd` to ensure that most operating systems will be
+> +* Implement :doc:`bootstd/index` to ensure that most operating systems will be
+>    supported by the platform.
+>  
+>  * The platform defconfig file must be generated via `make savedefconfig`.
+> diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
+> new file mode 100644
+> index 00000000000..f4f87c7787c
+> --- /dev/null
+> +++ b/doc/develop/bootstd/index.rst
+> @@ -0,0 +1,9 @@
+> +.. SPDX-License-Identifier: GPL-2.0+:
 > +
->  config BOOTMETH_VBE
->         bool "Bootdev support for Verified Boot for Embedded"
->         depends on FIT
-> diff --git a/boot/Makefile b/boot/Makefile
-> index 84ccfeaecec..92e6adb887c 100644
-> --- a/boot/Makefile
-> +++ b/boot/Makefile
-> @@ -11,7 +11,6 @@ obj-$(CONFIG_CMD_BOOTZ) += bootm.o bootm_os.o
->  obj-$(CONFIG_CMD_BOOTI) += bootm.o bootm_os.o
->
->  obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
-> -obj-$(CONFIG_QFW) += bootmeth_qfw.o
->
->  endif
->
-> @@ -31,6 +30,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
-> +obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_QFW) += bootmeth_qfw.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
->  obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
-> --
-> 2.45.2
->
-
-Regards,
-Simon
+> +Standard Boot
+> +=============
+> +
+> +.. toctree::
+> +   :maxdepth: 2
+> +
+> +   overview
+> diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd/overview.rst
+> similarity index 99%
+> rename from doc/develop/bootstd.rst
+> rename to doc/develop/bootstd/overview.rst
+> index 34631089ae0..761f61a573b 100644
+> --- a/doc/develop/bootstd.rst
+> +++ b/doc/develop/bootstd/overview.rst
+> @@ -1,7 +1,7 @@
+>  .. SPDX-License-Identifier: GPL-2.0+:
+>  
+> -U-Boot Standard Boot
+> -====================
+> +Standard Boot Overview
+> +======================
+>  
+>  Introduction
+>  ------------
+> @@ -17,7 +17,7 @@ introduces the following concepts:
+>  For Linux, the distro (Linux distribution, e.g. Debian, Fedora) is responsible
+>  for creating a bootflow for each kernel combination that it wants to offer.
+>  These bootflows are stored on media so they can be discovered by U-Boot. This
+> -feature is typically called `distro boot` (see :doc:`distro`) because it is
+> +feature is typically called `distro boot` (see :doc:`../distro`) because it is
+>  a way for distributions to boot on any hardware.
+>  
+>  Traditionally U-Boot has relied on scripts to implement this feature. See
+> @@ -32,7 +32,7 @@ way to boot with U-Boot. The feature is extensible to different Operating
+>  Systems (such as Chromium OS) and devices (beyond just block and network
+>  devices). It supports EFI boot and EFI bootmgr too.
+>  
+> -Finally, standard boot supports the operation of :doc:`vbe`.
+> +Finally, standard boot supports the operation of :doc:`../vbe`.
+>  
+>  Bootflow
+>  --------
+> @@ -427,16 +427,16 @@ Three commands are available:
+>  
+>  `bootdev`
+>      Allows listing of available bootdevs, selecting a particular one and
+> -    getting information about it. See :doc:`../usage/cmd/bootdev`
+> +    getting information about it. See :doc:`/usage/cmd/bootdev`
+>  
+>  `bootflow`
+>      Allows scanning one or more bootdevs for bootflows, listing available
+>      bootflows, selecting one, obtaining information about it and booting it.
+> -    See :doc:`../usage/cmd/bootflow`
+> +    See :doc:`/usage/cmd/bootflow`
+>  
+>  `bootmeth`
+>      Allow listing of available bootmethds and setting the order in which they
+> -    are tried. See :doc:`../usage/cmd/bootmeth`
+> +    are tried. See :doc:`/usage/cmd/bootmeth`
+>  
+>  .. _BootflowStates:
+>  
+> diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+> index f9c4bf839ee..c0107a783fc 100644
+> --- a/doc/develop/index.rst
+> +++ b/doc/develop/index.rst
+> @@ -29,7 +29,7 @@ Implementation
+>  
+>     directories
+>     bloblist
+> -   bootstd
+> +   bootstd/index
+>     ci_testing
+>     commands
+>     config_binding
+> diff --git a/doc/usage/cmd/bootdev.rst b/doc/usage/cmd/bootdev.rst
+> index f759abab354..98a0f43c580 100644
+> --- a/doc/usage/cmd/bootdev.rst
+> +++ b/doc/usage/cmd/bootdev.rst
+> @@ -22,7 +22,7 @@ Description
+>  The `bootdev` command is used to manage bootdevs. It can list available
+>  bootdevs, select one and obtain information about it.
+>  
+> -See :doc:`../../develop/bootstd` for more information about bootdevs in general.
+> +See :doc:`/develop/bootstd/index` for more information about bootdevs in general.
+>  
+>  
+>  bootdev list
+> diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
+> index 6519e4880a9..5d41fe37a7a 100644
+> --- a/doc/usage/cmd/bootflow.rst
+> +++ b/doc/usage/cmd/bootflow.rst
+> @@ -26,7 +26,7 @@ Description
+>  The `bootflow` command is used to manage bootflows. It can scan bootdevs to
+>  locate bootflows, list them and boot them.
+>  
+> -See :doc:`../../develop/bootstd` for more information.
+> +See :doc:`/develop/bootstd/index` for more information.
+>  
+>  Note that `CONFIG_BOOTSTD_FULL` (which enables `CONFIG_CMD_BOOTFLOW_FULL) must
+>  be enabled to obtain full functionality with this command. Otherwise, it only
+> diff --git a/doc/usage/cmd/bootmeth.rst b/doc/usage/cmd/bootmeth.rst
+> index bac9fdf85cd..c3d2ec1574b 100644
+> --- a/doc/usage/cmd/bootmeth.rst
+> +++ b/doc/usage/cmd/bootmeth.rst
+> @@ -21,7 +21,7 @@ Description
+>  The `bootmeth` command is used to manage bootmeths. It can list them and change
+>  the order in which they are used.
+>  
+> -See :doc:`../../develop/bootstd` for more information.
+> +See :doc:`/develop/bootstd/index` for more information.
+>  
+>  
+>  .. _bootmeth_order:
+> diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+> index 7d4b448cb30..cc33d3ec0f2 100644
+> --- a/doc/usage/environment.rst
+> +++ b/doc/usage/environment.rst
+> @@ -100,7 +100,7 @@ to add environment variables.
+>  
+>  Board maintainers are encouraged to migrate to the text-based environment as it
+>  is easier to maintain. The distro-board script still requires the old-style
+> -environments, so use :doc:`../develop/bootstd` instead.
+> +environments, so use :doc:`/develop/bootstd/index` instead.
+>  
+>  
+>  List of environment variables
+> -- 
+> 2.34.1
