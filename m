@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF3AEC3DA4B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 03:18:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE33C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 04:42:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 347FD8897B;
-	Tue, 16 Jul 2024 05:17:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D510D88768;
+	Tue, 16 Jul 2024 06:42:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HHbt2c+0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZN9foq4J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86C94885EE; Tue, 16 Jul 2024 05:17:19 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1386188633; Tue, 16 Jul 2024 06:42:22 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FB6388962
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 05:17:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A83088953
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 06:42:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-70211abf4cbso3442861a34.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 20:17:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721099834; x=1721704634; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Eox7hDxxdJPMvWrRggCbwpK9jjwlgKk46vxPcVNeUic=;
- b=HHbt2c+0O6Vz2RHElkmJ+eRlDGJ6ahD1YdKbFgYxWecmcrJLe9TA+Lu8dwEkWlcJsw
- FHcsXclkb5sZM7Ie8ABU2nfnYfeh10IlMQMRq0CHDzPaMOWuRd0UjlY56nePvPQmxtmK
- 9aoMRnaefJuY4LgcEnQT0GfHxXtFMbsNtx1MF+JfJx6F8yooQY2ozSEsxf51p+2QJwnT
- F1kHvx+F/xyzFzhU2iIDr+X8TFVHNVUKQ20Wgtxc0iJm739IHLyewajyy2cZZ1Cx2gIX
- GcHUEXucbx/pCWiGiJ5QHDzXqTAhHjUyIo/fzbDuaCvxKupfylZcbvi5eZFxZp5gbST3
- 4izA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721099834; x=1721704634;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Eox7hDxxdJPMvWrRggCbwpK9jjwlgKk46vxPcVNeUic=;
- b=aHXWZwMNyNqTIl89KhBGw2loJy4Bc/jzt4JFkv5JiZ8oOySo68UcoCRnjVhsX1Us7a
- 6XdqkhYySKAWclW3yF6QT5r6LFN4+hderTOkRoPPOfRKj976NRBewYkdD3msn2JeWJ0y
- jcn76nKAzY627cyfundMm4ZXqnv9YdMZxbQACTPCtcHyKemnaxa2ZwyR7tRwkS9rBLt9
- 91cfHNW/kUgREZPAwksBuNINKLEbU8FNpQeC5yH5KIoUS8OwBdQdd1f1I5Wra/xYfgqK
- 3SKh8a8G6rks9SkYn5yRxji4iMTR1nYZshPsmMu7h1zHn8iMtffqWeuhsr+kcS52aU6z
- y7Iw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtLJ5FXsWhdO4jKx7Nny4NGfCXXfAoONGT4VuwC6HAE0o7ClgS/9n0fafDWip7EzEj2DHYrIXQX5l7gzyrA+uq1OP65w==
-X-Gm-Message-State: AOJu0YzqWgU0t9a6L8QIW2AdCxOtA/tJLd+cYu8psHxmc4K/EUas1bKn
- 9CRVm8HWbKJX+YxmXXcgmcSSv4RcXX7mtjq9Yshu1smh6u6VbBzhjk91S6U0PSg=
-X-Google-Smtp-Source: AGHT+IGxX50X3dNxn7m2Q3W/yOhRVuKdvD4Mmtaj0ECxXwh8xIXlO7/DfHJ8YAcq3XmdGmw6omc8UA==
-X-Received: by 2002:a05:6870:80c8:b0:25e:c7b:ca96 with SMTP id
- 586e51a60fabf-260bdd5b25dmr675943fac.10.1721099834169; 
- Mon, 15 Jul 2024 20:17:14 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708c0c826a7sm1188532a34.38.2024.07.15.20.17.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 20:17:13 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Minkyu Kang <mk7.kang@samsung.com>
-Cc: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 5/5] arm: exynos: Enable TRNG on E850-96 board
-Date: Mon, 15 Jul 2024 22:17:09 -0500
-Message-Id: <20240716031709.24943-6-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240716031709.24943-1-semen.protsenko@linaro.org>
-References: <20240716031709.24943-1-semen.protsenko@linaro.org>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46G4gGOA105028;
+ Mon, 15 Jul 2024 23:42:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1721104936;
+ bh=unlj39I13T8Bwx3UTFjSLIyGqBXQB1EGvgmiVx+nRoc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ZN9foq4Jb8ZuAf2XqvjuwK/a+IFwpfPCKyYQDVinqHmPta66yJCSAAC5mEGqcVFDW
+ zKPd6Emk5Inx5/7mQr2vzbBRCJqS2Cy2g486Ae9jauHkLjjPc4G3X96ZB9M4Hj+2pb
+ jQCxy8EuHikhMhOAQu+qPjswjp3AXwE8F+zgVlnM=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46G4gGLX008971
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 15 Jul 2024 23:42:16 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
+ Jul 2024 23:42:16 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 15 Jul 2024 23:42:16 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46G4gF1U012024;
+ Mon, 15 Jul 2024 23:42:16 -0500
+Date: Tue, 16 Jul 2024 10:12:15 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Subject: Re: [PATCH 09/10] fdtgrep: Allow propagating properties up to
+ supernodes
+Message-ID: <20240716044215.axz24dmwv4v5m5wo@uda0497581>
+References: <20231217163627.2339802-1-sjg@chromium.org>
+ <20231217163627.2339802-10-sjg@chromium.org>
+ <20240710061528.4afx6lcsdsbookug@uda0497581>
+ <CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,72 +84,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable True Random Number Generator (TRNG) on E850-96 board. To do so:
-  1. Enable DM_RNG and RNG_EXYNOS for TARGET_E850_96
-  2. Add TRNG node to E850-96 device tree
-  3. Enable 'rng' command support for easy TRNG testing
+Hi Simon,
 
-TRNG node is already applied in Linux kernel device tree, but it hasn't
-appeared in upstream dts yet. Add it in U-Boot override dtsi file
-temporarily; it can be removed once it appears in upstream dts.
+On 10:39-20240711, Simon Glass wrote:
+> Hi Manorit,
+> 
+> On Wed, 10 Jul 2024 at 07:15, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > On 09:36-20231217, Simon Glass wrote:
+> > > The existing bootph binding is defined such that properties in a
+> > > subnode are also implied in the supernode also, as in this example:
+> > >
+> > >    buttons {
+> > >       /* bootph,pre-ram is implied by btn1 */
+> > >       compatible = "gpio-keys";
+> > >
+> > >       btn1 {
+> > >          bootph,pre-ram;
+> > >          gpios = <&gpio_a 3 0>;
+> > >          label = "button1";
+> > >          linux,code = <BTN_1>;
+> > >       };
+> > >
+> > > Provide an option to implement this in fdtgrep.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > Coming back to this patch as am facing some issues with the bootph-all
+> > propagation to the parent nodes [0]. We have a dmsc/sms node in our
+> > devices and it is a parent node of k3_pds, k3_clks, k3_reset.
+> >
+> > During U-boot proper we are initializing the serial console and during
+> > that time we have to make some calls to our Device manager for clocks
+> > and power domains. With the DT modelling, the clocks and power domains
+> > come under the device manager node ( dmsc/sms ) but interestingly that
+> > driver is not getting probed while putting bootph-all in the child
+> > nodes. Do you know anything about this? I thought putting it in child
+> > node will propagate it to the parent nodes as well so it'll be probed as
+> > well. We are having to put bootph-all explicitely in the dmsc/sms node
+> > for it to work.
+> 
+> Yes, that is because fdtgrep is only used with the SPL DT. The U-Boot
+> one is used unmodified by U-Boot and it does not check parents for
+> such properties (neither does SPL, but fdtgrep has logic to imply
+> these properties internally).
+> 
+> The easiest way to fix this would probably be to process the DT in
+> Binman for insertion into the final image, since Binman already does
+> lots of other DT processing.
+> 
+> If you like, you could create an issue for it [1]. If you want to have
+> a crack at fixing it, I could provide some pointers.
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
-Changes in v2:
-  - (none)
+I am not sure if I'll be able to focus on this now but feel free to give
+your pointers, might help anyone else as well if they want to take a
+look at it.
 
- arch/arm/dts/exynos850-e850-96-u-boot.dtsi | 11 +++++++++++
- arch/arm/mach-exynos/Kconfig               |  2 ++
- configs/e850-96_defconfig                  |  1 +
- 3 files changed, 14 insertions(+)
+Meanwhile I will open a issue as you mentioned for tracking this, trying
+to register on the URL that you provided. Thanks!
 
-diff --git a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-index 6d7148f7264a..3aa5d8bb10d0 100644
---- a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-+++ b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-@@ -3,6 +3,17 @@
-  * Copyright (c) 2023 Linaro Ltd.
-  */
- 
-+&soc {
-+	/* TODO: Remove this node once it appears in upstream dts */
-+	trng: rng@12081400 {
-+		compatible = "samsung,exynos850-trng";
-+		reg = <0x12081400 0x100>;
-+		clocks = <&cmu_core CLK_GOUT_SSS_ACLK>,
-+			 <&cmu_core CLK_GOUT_SSS_PCLK>;
-+		clock-names = "secss", "pclk";
-+	};
-+};
-+
- &pmu_system_controller {
- 	bootph-all;
- 	samsung,uart-debug-1;
-diff --git a/arch/arm/mach-exynos/Kconfig b/arch/arm/mach-exynos/Kconfig
-index cad8bb044cf0..3fee5a4299b8 100644
---- a/arch/arm/mach-exynos/Kconfig
-+++ b/arch/arm/mach-exynos/Kconfig
-@@ -250,6 +250,8 @@ config TARGET_E850_96
- 	select PINCTRL
- 	select PINCTRL_EXYNOS850
- 	imply OF_UPSTREAM
-+	imply DM_RNG
-+	imply RNG_EXYNOS
- 
- endchoice
- endif
-diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-index 29ad31d5f8ed..7e1e8adb4a0a 100644
---- a/configs/e850-96_defconfig
-+++ b/configs/e850-96_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ANDROID_BOOT_IMAGE=y
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_HUSH_PARSER=y
- CONFIG_CMD_ABOOTIMG=y
-+CONFIG_CMD_RNG=y
- CONFIG_CMD_CLK=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
--- 
-2.39.2
+Regards,
+Manorit
 
+> 
+> Regards,
+> Simon
+> 
+> [1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues
+> 
+> 
+> >
+> > [0]: https://lore.kernel.org/linux-arm-kernel/20240705-b4-upstream-bootph-all-v2-0-9007681ed7d8@ti.com/T/#t
+> >
+> > Regards,
+> > Manorit
+> > > ---
+> > >
+> > >  tools/fdtgrep.c | 18 +++++++++++++++++-
+> > >  1 file changed, 17 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+> > > index ca639a2d9f4f..f1ff1946bd4a 100644
+> > > --- a/tools/fdtgrep.c
+> > > +++ b/tools/fdtgrep.c
+> > > @@ -63,6 +63,7 @@ struct display_info {
+> > >       int types_inc;          /* Mask of types that we include (FDT_IS...) */
+> > >       int types_exc;          /* Mask of types that we exclude (FDT_IS...) */
+> > >       int invert;             /* Invert polarity of match */
+> > > +     int props_up;           /* Imply properties up to supernodes */
+> > >       struct value_node *value_head;  /* List of values to match */
+> > >       const char *output_fname;       /* Output filename */
+> > >       FILE *fout;             /* File to write dts/dtb output */
+> > > @@ -606,6 +607,16 @@ static int check_props(struct display_info *disp, const void *fdt, int node,
+> > >                                        strlen(str));
+> > >       }
+> > >
+> > > +     /* if requested, check all subnodes for this property too */
+> > > +     if (inc != 1 && disp->props_up) {
+> > > +             int subnode;
+> > > +
+> > > +             for (subnode = fdt_first_subnode(fdt, node);
+> > > +                  subnode > 0 && inc != 1;
+> > > +                  subnode = fdt_next_subnode(fdt, subnode))
+> > > +                     inc = check_props(disp, fdt, subnode, inc);
+> > > +     }
+> > > +
+> > >       return inc;
+> > >  }
+> > >
+> > > @@ -955,7 +966,7 @@ static const char usage_synopsis[] =
+> > >       case '?': usage("unknown option");
+> > >
+> > >  static const char usage_short_opts[] =
+> > > -             "haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTv"
+> > > +             "haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTuv"
+> > >               USAGE_COMMON_SHORT_OPTS;
+> > >  static const struct option usage_long_opts[] = {
+> > >       {"show-address",        no_argument, NULL, 'a'},
+> > > @@ -985,6 +996,7 @@ static const struct option usage_long_opts[] = {
+> > >       {"skip-supernodes",     no_argument, NULL, 'S'},
+> > >       {"show-stringtab",      no_argument, NULL, 't'},
+> > >       {"show-aliases",        no_argument, NULL, 'T'},
+> > > +     {"props-up-to-supernode", no_argument, NULL, 'u'},
+> > >       {"invert-match",        no_argument, NULL, 'v'},
+> > >       USAGE_COMMON_LONG_OPTS,
+> > >  };
+> > > @@ -1016,6 +1028,7 @@ static const char * const usage_opts_help[] = {
+> > >       "Don't include supernodes of matching nodes",
+> > >       "Include string table in binary output",
+> > >       "Include matching aliases in output",
+> > > +     "Add -p properties to supernodes too",
+> > >       "Invert the sense of matching (select non-matching lines)",
+> > >       USAGE_COMMON_OPTS_HELP
+> > >  };
+> > > @@ -1202,6 +1215,9 @@ static void scan_args(struct display_info *disp, int argc, char *argv[])
+> > >               case 'T':
+> > >                       disp->add_aliases = 1;
+> > >                       break;
+> > > +             case 'u':
+> > > +                     disp->props_up = 1;
+> > > +                     break;
+> > >               case 'v':
+> > >                       disp->invert = 1;
+> > >                       break;
+> > > --
+> > > 2.43.0.472.g3155946c3a-goog
+> > >
