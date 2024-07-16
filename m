@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DB7C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 18:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 903D9C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 18:45:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E05D889FD;
-	Tue, 16 Jul 2024 20:00:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ECA3187D10;
+	Tue, 16 Jul 2024 20:45:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N5dklpHS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ozYGFH+1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F6BC889EB; Tue, 16 Jul 2024 20:00:27 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id C771887B1A; Tue, 16 Jul 2024 20:45:35 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 792AD88939
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 20:00:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A2568800C
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 20:45:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-70368b53cc0so2987781a34.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 11:00:24 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-25e43dda1edso3431450fac.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 11:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721152823; x=1721757623; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721155532; x=1721760332; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tfMP/IOYj+6tQTjdKSOFmgUSZdP5iBu7St0So2Hnc1E=;
- b=N5dklpHSut21s1ESIPrXxLm8pcSS7ILvkyjD99ZpZL1H1MeuK3QPxuJO62TMUvclb/
- ji/RgjivfuQHlay1Bs2PQV6uONEPssy7gCUR6GnsmCo3YbgyhucEGibPVk3RFxlcK0gL
- hN0c6DUxsP6lqfxzZp4uMhwyy2WCojbGE4p0U=
+ bh=egmncopyTsHQ/w5X+HEIqFZyngHARi1ikY0nG6xtZE8=;
+ b=ozYGFH+1MfDm2qCTU114p0ZgcpEBVf/VaBSGxazr0n7NIQZbAGkVRq0H5pJ8KsnirD
+ 0ngrdrNYApMkw4D2XrYjmGB/vGcdcVCHrbypj5n9ex9OobbRQewe8cg+dDD9uHxV36ml
+ PfMZgjJBIaZwb+7Py7U7NpBtw9z0SQdqCZm9A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721152823; x=1721757623;
+ d=1e100.net; s=20230601; t=1721155532; x=1721760332;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tfMP/IOYj+6tQTjdKSOFmgUSZdP5iBu7St0So2Hnc1E=;
- b=UthRdjv/s8QdbYIzbAyd2wMSiU8MPmcY0zM7OfJAlvthlilexyRF1z5+lYwVzcDbVo
- v6XWsPXEdjecxNgwT65iE17CluF7YcJmuOZ288C8zpTjzM1NJ+aFBUEHBTJkF1Fm+EUC
- ABaUtNbSTNgZqej4eJxG+8q9SX33K5V6TajScpNXzvOwQCt8P7TV84ii48Ln6YTawlVg
- 64aM7aJvuA51d1t5xexOGNlxyOg/HugZ+j/L26//FakiwvN01Gf6md4BEpII5peS4Vhl
- W/tXY0oFC0wNnF4wHn8Eq9vZbwbhQPGTw+kq8ktF/PHzMVC4mSHxOFX+8aZHBhXygeRC
- 90Ag==
-X-Gm-Message-State: AOJu0YyDTj5vlgzG0kA+DPtO8yMGVzI3XXKfkJst5XXx7SpX6zi53+DY
- P4sbYeHHoQ61CqsM7Lgkmw5arTY3KgQzFxTsnaqOoBdvH+WMjYgNpMIgQxqDUTNsdTBPiG8hr+e
- o
-X-Google-Smtp-Source: AGHT+IHnxvrlfipvi67EBmnOrknbbZDZuvsIj47eqXXPtx31bbyu0aF3Y4qlKUsNcnnZ6yGLGcqMFA==
-X-Received: by 2002:a05:6870:1258:b0:25e:b632:b772 with SMTP id
- 586e51a60fabf-260bdddbb9fmr1766298fac.28.1721152822889; 
- Tue, 16 Jul 2024 11:00:22 -0700 (PDT)
+ bh=egmncopyTsHQ/w5X+HEIqFZyngHARi1ikY0nG6xtZE8=;
+ b=c52tLlBVhwy1AX8ROvE+wF2H02w/pqfWvpBtguAAO5473Y7m2i4xG5yR2+VfBpp5U8
+ vZ8yaJLjrmsqU4YK/MDZkQzLvpJkqYQK5YoO5pY0NWT4e6PY+nws8zkVLQ2ZmYniTkGh
+ ZRf7mGsFdLYr73NUIYfXwArfXY3kUmgHHR4zwVo/NvW7cICBABX8In0qUN6qpyzrEv6L
+ 8o5/F1mLjq4o4OcUhQniOM6ZS8PNYxs6qiwp+waJMmTA+dqzD6zNsGUUGeDFx4yUOlUM
+ j/6UfNWQ1UtjOtAJCnEJoEclZwlLiilAAV2W7KFmYbHrcvwzGIujuSXK6f6I0Z4XGhTt
+ cCww==
+X-Gm-Message-State: AOJu0Yxzxz7lvzNqliJfOcTxhdmZFHk+B9qQAakHV6XfEhpwcU84rh3i
+ 5WqfSRNNVR8bDv2n/ZVtH3WO81uVqfSeU+/mLXw71sjyq64WSPi0SQNInPEuvkk=
+X-Google-Smtp-Source: AGHT+IHy+uCpgjbk1cp3geEm45Y1XvWbVTF8V96NY3XvlwNrEdahdHOfkYsv77mUgI4L6FPjHN5BYg==
+X-Received: by 2002:a05:6870:e40a:b0:25e:660:104a with SMTP id
+ 586e51a60fabf-260bdf87673mr2724928fac.37.1721155531978; 
+ Tue, 16 Jul 2024 11:45:31 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-260750db105sm1441444fac.12.2024.07.16.11.00.21
+ 586e51a60fabf-2607512f564sm1430444fac.14.2024.07.16.11.45.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 11:00:22 -0700 (PDT)
-Date: Tue, 16 Jul 2024 12:00:20 -0600
+ Tue, 16 Jul 2024 11:45:31 -0700 (PDT)
+Date: Tue, 16 Jul 2024 12:45:29 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Richard Weinberger <richard@sigma-star.at>
-Cc: u-boot@lists.denx.de, barebox@lists.infradead.org, s.hauer@pengutronix.de
-Subject: Re: Various Integer Overflows in dlmalloc
-Message-ID: <20240716180020.GH561963@bill-the-cat>
-References: <2561107.TLnPLrj5Ze@somecomputer>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Michael Walle <mwalle@kernel.org>, linux-sunxi@lists.linux.dev,
+ Ryan Walklin <ryan@testtoast.com>, Chris Morgan <macromorgan@hotmail.com>
+Subject: Re: Pull request: u-boot-sunxi/master for v2024.10
+Message-ID: <20240716184410.GI561963@bill-the-cat>
+References: <20240716122405.78613-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="176EOECzmln74KwL"
+ protocol="application/pgp-signature"; boundary="KcOV5shS6T72FihI"
 Content-Disposition: inline
-In-Reply-To: <2561107.TLnPLrj5Ze@somecomputer>
+In-Reply-To: <20240716122405.78613-1-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,129 +92,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---176EOECzmln74KwL
+--KcOV5shS6T72FihI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 16, 2024 at 11:16:27AM +0200, Richard Weinberger wrote:
-> Hi!
->=20
-> While inspecting various security aspects of U-Boot I noticed some
-> issues around dlmalloc and asking for your feedback, especially for the
-> first issue.
-> I'm CC'ing Barebox folks since Barebox seems to be based on the same
-> dlmalloc-implementation as U-Boot does.
+On Tue, Jul 16, 2024 at 01:24:05PM +0100, Andre Przywara wrote:
 
-Thanks for digging in to all of this.
+> Hi Tom,
+>=20
+> please pull the sunxi/master branch, containing the first part of the
+> 2024.10 changes.
+> Nothing really major here, some rework of the SPL PMIC drivers, adding
+> support for the AXP717 on the way, which is showing up on newer boards
+> now, most prominently some Anbernic handheld gaming devices.
+> The rest is enabling Ethernet and SPI boot on the Allwinner V3s SoC,
+> plus two fixes.
+> This also updates the "traditional U-Boot" DTs to that of kernel v6.9.
+> I will look into upgrading some SoCs to dts/upstream in the coming cycle,
+> though this will not cover all SoCs for now, as we carry some non-mainline
+> fix to improve compatibility with older kernels. Will see how it goes,
+> but for now we stick with the "old way".
+>=20
+> The branch survived the gitlab CI run, and Linux boot testing on some
+> selected boards.
+>=20
+> Please pull!
+>=20
+> Cheers,
+> Andre
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> The following changes since commit b182816c1fb436916661949213c543bf4d4225=
+0b:
+>=20
+>   turris_1x: Normalize Kconfig usage (2024-07-13 10:42:15 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+>=20
+> for you to fetch changes up to 674e4f994f5da537cab62ad86bc8bdf5acaae88c:
+>=20
+>   spi: sunxi: drop max_hz handling (2024-07-16 01:40:40 +0100)
+>=20
 
-> 1. Integer Overflow While Computing Allocation Size
->=20
-> malloc/realloc/memalign take an arbitrary request size and apply
-> padding.
->=20
-> First, the length is (imperfectly) checked and the the conversion happens:
->=20
->   if ((long)bytes < 0) return NULL;
->=20
->   nb =3D request2size(bytes);  /* padded request size; */
->=20
-> The problem is that the request2size() macro is casting the requested
-> size to an signed long and adds SIZE_SZ + MALLOC_ALIGN_MASK:
->=20
-> #define request2size(req) \
->  (((long)((req) + (SIZE_SZ + MALLOC_ALIGN_MASK)) < \
->   (long)(MINSIZE + MALLOC_ALIGN_MASK)) ? MINSIZE : \
->    (((req) + (SIZE_SZ + MALLOC_ALIGN_MASK)) & ~(MALLOC_ALIGN_MASK)))
->=20
-> So, any allocation request between LONG_MAX - (SIZE_SZ + MALLOC_ALIGN_MAS=
-K) - 1 and LONG_MAX
-> will cause an overflow and as a consequence the caller will get
-> less memory than requested.
->=20
-> e.g. on an 32bits system malloc(2147483647) will succeed but allocates
-> only 16 bytes (MINSIZE). I've tested this with U-Boot on i386 and ARM.
->=20
-> This is a beefy vulnerability for exploit writers since unbound allocatio=
-ns
-> do happen. Like in the ext4 and squashfs symlink code, I'm sure there are=
- more.
-> If you don't care about verified boot, it's less of an issue, though.
->=20
-> I'm not so sure what the best fix is.
-> Mostly because I'm not sure why request2size() is anyway casting to long.
-> The original dlmalloc.c implementation doesn't do so. It has also a more
-> sophisticated overflow check, which is also missing in both U-Boot and Ba=
-rebox.
-> See https://research.cs.wisc.edu/sonar/projects/mnemosyne/resources/doc/h=
-tml/malloc-original_2src_2dlmalloc_8c-source.html
-> Lines 01938 to 01962.
->=20
-> I tracked down the bug to ppcboot, it's there since day 0.
-> So I don't know what's the intention behind casting.
->=20
-> On the other hand, since over commit is not supported, we could also just=
- fail
-> if the requested size is larger then the total amount of system memory.
-> I'm a little in fear that more overflows are lurking in the code.
-
-The "why" is likely lost due to time and I could only speculate and wave
-my hands about funny compiler issues at the time. Since we don't support
-overcommit, I'd be inclined to go with just failing if we're exceeding
-SYS_MALLOC_LEN.
-
-> 2. Integer overflow in sbrk() (U-Boot only)
->=20
-> sbrk() does:
->         ulong new =3D old + increment;
->=20
->         /*
->          * if we are giving memory back make sure we clear it out since
->          * we set MORECORE_CLEARS to 1
->          */
->         if (increment < 0)
->                 memset((void *)new, 0, -increment);
->=20
->         if ((new < mem_malloc_start) || (new > mem_malloc_end))
->                 return (void *)MORECORE_FAILURE;
->=20
->=20
-> If old + increment overflows (increment is a ptrdiff_t) then
-> sbrk() wrongly thinks we're shrinking the heap and memsets an invalid
-> range.
->=20
-> I propose as solution, applying memset() after the range check.
-
-OK, sounds good.
-
-> 3. Wrong ptrdiff_t type (U-Boot only)
->=20
-> U-Boot defines __kernel_ptrdiff_t to int for both i386 and x86_64.
-> As a consequence, large allocations on x86_64 will overflow the increment
-> parameter of sbrk() and less than requested is allocated.
-> I suggest defining __kernel_ptrdiff_t on x86_64 to long.
-
-OK, sounds good.
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---176EOECzmln74KwL
+--KcOV5shS6T72FihI
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWtTAACgkQFHw5/5Y0
-tywoIwv/TrYUuDq4c9Ols9IwfRrYB6aXPo9UqhTEex3NS/YbNWf9UnXvRoculZTq
-KwPdnX7hK285DOTwY3FX/mnpGtfiyqB8ZG1gboVX+0G3T4NRU2NmZN/p3RBp04sF
-hhfiBgarsJSngvfZi2W3dTF2aC4vCIXaSRRRGzMOUKavbt5cNSFH5ElKo0C6TjFh
-YbscSPJANoisHe550tpXF8sDxktGb2DnJ45oixy/MYpIwGJWfOYHFMgqQgNV/mbs
-asCJ60TeMQ4GiE1xstLSlXw4JYSafx6y2anOOfAkJ82lMElB+eAhq58bYTTS4iQL
-foWLnJwe5ydSq7cDmh4cSKE7hnhLvQoXJBYRPa8T1lkfMPBIh9Oa4rim9QGAyHQs
-ooCzOzFUv72Rw3ty4o4IwMuyijvOLnE1umn6EPPMXCw7uBbIjYSQwPF6Xwzslx3G
-1xsGbk70fQy3SM50zP/HLQSQqkUAC3irw+MKSNbOdJjzsxw01SV3cI1rtOiGATDf
-QjlAgR68
-=M2Ik
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWv8gACgkQFHw5/5Y0
+tywMXgv/VYFJ3AuDPSxvXOW6Qw/EsCkwYJn17vertA6imDHtXjLGLMgSxHkTdLGI
+GGR5it2+XrpG91pKYZmbCXmJnOEIjIfjoD7JJzynOSW1+ZCRsiPuPgE7Y+Xv3/MA
+NNdpmuiR21MIf2A4x2BHQLSG9wo5Je9WgUPdbw/9ZNpZkeCcTJ4/r9DwgHS1Eo5z
+XRYKzjDq+apReTSPUelVd6o46wld6yuWiK0+E8eXn+ebq3ia5c9GlLI+B1VFmWZj
+1t+Ag0Wsd8cgEqei/Xo7Zdbp2Ki8bYyLNrlTX0w77SvTKq+jnqXPV4ggH5ZkY1N0
+jB2sW9sOqS83JX4uA96Yd150nM2dPGIN5/rR0hinEOBjZEy3CtzJTa7ypLTCQNpw
+M8Iw61LohXIiQ+WIXMZZLs8ea7i80uqqh3qjgcvQUWk9/1G2u0J+Bej/XAWrZ+oS
+4KoP56+RovqZvN0LWPHgWuBZa515fE4w/kEFLdDI2ux59FWL1hMXss0VMdHv6DPf
+gJMITna4
+=8Hwy
 -----END PGP SIGNATURE-----
 
---176EOECzmln74KwL--
+--KcOV5shS6T72FihI--
