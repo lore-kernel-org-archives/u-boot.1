@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED016C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 748F4C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21F37889DB;
-	Tue, 16 Jul 2024 09:05:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F069889FC;
+	Tue, 16 Jul 2024 09:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k68DOfJs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DpV84TvC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CF86889D2; Tue, 16 Jul 2024 09:05:04 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 96A9888A08; Tue, 16 Jul 2024 09:05:06 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45D83889EF
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48D67889CD
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6b06e63d288so30432396d6.0
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:56 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6b5dfa44f24so28376236d6.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721113495; x=1721718295; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721113497; x=1721718297; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p1Pzeaun7BVbDsjDBDjk6CrkpBuWAB1cE1Q9Ofk3QnI=;
- b=k68DOfJsCdqKrfdzDUl5suaweVEPdvBN+CuSqbtV/NnO8QfbzF/xPZOT2+RL3+2+oQ
- zduyDdC48PjNady/Sa1nDOG8PUCBh1RIGiEOnINgAqHdXPNbQomoMGUNXX3UnZbcSQ/m
- YcmUz3NQ+9Z0ArL8NBgve7dRj49AQjHsxJ26I=
+ bh=XVlEk8xbBvHXVU2J9XA7XEMr5S3SrBU0bui0VbtU+ag=;
+ b=DpV84TvC+U9g7QxPt1U4bfE6Z1DyXqJsyRmyyl6I09DPedw4GsJhugHgzDiBb4f2gu
+ vYRL4P47UUpdyvA86C0XAQyw2NvMc3pPKllQocHAXbWSyrIYpQ6Ate0yqek7gUxotFen
+ qd7hHV3Kzu6yyJrwFLMkxmiNTmLNyXW3lhpL4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721113495; x=1721718295;
+ d=1e100.net; s=20230601; t=1721113497; x=1721718297;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=p1Pzeaun7BVbDsjDBDjk6CrkpBuWAB1cE1Q9Ofk3QnI=;
- b=PMULPvijTnPRbGzZoEJ0P5daHiCmM+SiooZGTXsQcXgMUJ53YbR+FGDAyr3c1c66un
- 53Eviqe3pReedro5fIRfusC1bhxn0+/Uh7aD7RY7wkHbQyPsks1+Ik8Vj9YrvDCHsqRV
- tXaqh9OBH6ekA4n80wXbWFaiYF0Wayi1dFiIfII8N+UDW72I3SkU5VpZT1yd9bCQpo46
- hiocCKEVp72MXy2P6UILiSmSf5w18or+zNi/UVaATC82oHah0MNpLRiEjJzoVo8r8VxX
- AgSVKf2TNAKSrCujcZaQPYgIBTjVWjiwT32Qg5HbyIVbPXUKQlcQqQPYjkDEQmE61XYa
- ajaA==
+ bh=XVlEk8xbBvHXVU2J9XA7XEMr5S3SrBU0bui0VbtU+ag=;
+ b=e/7PIAVkP7u6JWqOelTO2SJWXzYgX2+INfIrX5TPUdfSzzv556/viYcx/FdAMS7imd
+ IFXd9iRDTRSpxvkkh0kTB52YBjTbeDjuMpTMTvy3SH7A/EwFSQTWPb0W531TZFA5eX2/
+ fIwFkY9c+nkU/iz+Hjwrch7dvE26DzKFcLn7FyHbYhZsYHNoeHw/g6aBKzjYFsvTNK4p
+ gDIpO1TX7Yary/G9zyeNeI4MmOfkgk8hn2iLHagG3QSMVSGxZscg+tAPl9XC0mFIP+iJ
+ ER96aMXC/tSRjs9GJ/xL8Fs8aF1I0pW5gdRnjCkv8eHYBykJKXrFAuLOZtV5Ob25Yk+6
+ dAWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWlNSdVZCym2lkmJb1pyibe11qmU1+BOd/XHZ+K+rGNo++kqlm0fK0jqyPDHGTqqsMUoHYUf9tLpcQPZop00r+6K/mAuA==
-X-Gm-Message-State: AOJu0Yz97fESq8h+fJ9kPWoZgyzlckPG7VOfrpbkaekQRJsDSGLRXELp
- yLNqlAa4fHCqrRNsB4VUxHppyI/zCCMQRMZqcaDcQ1V/fkzgkK7KkGVaxuNcYvUekXAgs5DApvk
- KP9YrlTpYBOT6CKT01eHGG4qNlextcn3qM6ON+1TrYOKQXRM=
-X-Google-Smtp-Source: AGHT+IE4GUPX7+MYFXbgiRZgZj4yEJfZOwbijWDIibgtcu/gN23zDscalaHEwTNb1ICvNSoRHDPbmi8IRlDv0c1BH3M=
-X-Received: by 2002:a05:6214:4009:b0:6b0:9479:cdd7 with SMTP id
- 6a1803df08f44-6b77f602d9fmr13496026d6.54.1721113495211; Tue, 16 Jul 2024
- 00:04:55 -0700 (PDT)
+ AJvYcCVbtUvPA+uFv2qAeyTp48t51bRX+hQL6M+b6oP9FpO7x8xiwjdm5GyNx3FIbgKMEJE6FXUVevjyK1Fwe+NvkqfKdt++NA==
+X-Gm-Message-State: AOJu0YzDCHhBB9OPVWXjzWxhLrrEV4TY1luUOOGDqHj2ftm5PBYTScgu
+ BoY7lCTnghEmge0l5yQiI9+rC0ti1C6ggnEeLk/69MS4ROg7pDLRKXSuHBULN++DC6u9SI6+ion
+ kGNbtUBTxGZIFvHR2Si3hQteYbndEibHHxlFX
+X-Google-Smtp-Source: AGHT+IExT9X/ak3y9LHcfj5HaIHMa/oSVV3Ao29F5hvp6w+zP+5mX4cJVkXG5U6Tjz01KIyKArBlYp7Fj1fZg3om/vc=
+X-Received: by 2002:ad4:5de7:0:b0:6b5:3b00:7e62 with SMTP id
+ 6a1803df08f44-6b77f4b6ab8mr20816116d6.8.1721113496766; Tue, 16 Jul 2024
+ 00:04:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240715101354.97895-1-sjg@chromium.org>
- <20240715101354.97895-7-sjg@chromium.org>
- <50172cea-e2f1-4190-8491-04defa171d6c@gmx.de>
-In-Reply-To: <50172cea-e2f1-4190-8491-04defa171d6c@gmx.de>
+References: <20240716024032.22254-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240716024032.22254-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 16 Jul 2024 08:04:44 +0100
-Message-ID: <CAFLszThBP3+h1-H=-PcGezU3cPnHfTkqtRybA0fYX5AhTJ5P8Q@mail.gmail.com>
-Subject: Re: [PATCH 06/13] doc: Add a description for bootmeth_cros
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Tue, 16 Jul 2024 08:04:45 +0100
+Message-ID: <CAFLszTgSE-Zd1OpoisD4pCi6mFw2KgYzfFwpOsstUw08LGO-Qg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] boot: provide CONFIG_BOOTMETH_QFW Kconfig parameter
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nam Cao <namcao@linutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Eddie James <eajames@linux.ibm.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,82 +88,87 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Tue, 16 Jul 2024 at 00:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 16 Jul 2024 at 03:40, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On 7/15/24 12:13, Simon Glass wrote:
-> > Add documentation for the cros bootmeth.
+> U-Boot is often used conjunction with QEMU to boot via EFI or syslinux.
+> Here the QFW boot method is not needed.
 >
-> %s/bootmeth/boot method/
+> At least for qemu-riscv64_smode_defconfig the kernel parameter is used
+> to specify the U-Boot binary. Trying to run U-Boot as a kernel makes
+> no sense.
 >
-> throughout the patch.
+> Provide Kconfig parameter CONFIG_BOOTMETH_QFW to decide if the QFW boot
+> method shall be provided.
 >
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   doc/develop/bootstd/cros.rst     | 33 ++++++++++++++++++++++++++++++++
-> >   doc/develop/bootstd/index.rst    |  1 +
-> >   doc/develop/bootstd/overview.rst |  1 +
-> >   3 files changed, 35 insertions(+)
-> >   create mode 100644 doc/develop/bootstd/cros.rst
-> >
-> > diff --git a/doc/develop/bootstd/cros.rst b/doc/develop/bootstd/cros.rst
-> > new file mode 100644
-> > index 00000000000..96f148837ac
-> > --- /dev/null
-> > +++ b/doc/develop/bootstd/cros.rst
-> > @@ -0,0 +1,33 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+:
-> > +
-> > +ChromiumOS Bootmeth
-> > +===================
-> > +
-> > +ChromiumOS provides a mechanism for booting its Operating System from a block
-> > +device, described
-> > +`here <https://www.chromium.org/chromium-os/chromiumos-design-docs/verified-boot/>`_.
-> > +
-> > +U-Boot includes support for reading the associated data structures from the
-> > +device and identifying a bootable ChromiumOS image. This structure includes the
-> > +kernel itself, boot arguments (kernel command line), as well as the x86 setup
-> > +block (for x86 only).
-> > +
-> > +When invoked on a bootdev, this bootmeth searches for kernel partitions with
+> Disable the QFW boot method for all architectures but the sandbox by
+> default.
 >
-> What does 'invoked on a boot device' mean? Do you mean "if ChromimumOS
-> selects a boot device"?
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  boot/Kconfig  | 9 +++++++++
+>  boot/Makefile | 2 +-
+>  2 files changed, 10 insertions(+), 1 deletion(-)
+>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 95300b008c5..d7e034c89e7 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -568,6 +568,15 @@ config BOOTMETH_EFI_BOOTMGR
+>           the EFI binary to be launched is determined. To set the EFI variables
+>           use the eficonfig command.
+>
+> +config BOOTMETH_QFW
+> +       bool "Boot method using QEMU parameters"
+> +       depends on QFW
+> +       default y if SANDBOX
+> +       help
+> +        Use QEMU parameters -kernel, -initrd, -append to determine the kernel,
+> +        initial RAM disk, and kernel command line parameters to boot an
+> +        operating system. U-Boot's control device-tree is passed to the kernel.
 
-No, this how bootstd works. It scans through the bootdevs one at a
-time and invokes the bootmeths on each.
+I added the bootmeth to deal with this part of the old qemu-arm.h :
 
+/* Try files from QEMU's -kernel/-initrd, through the QEMU firmware device. */
+#define BOOTENV_DEV_QFW(devtypeu, devtypel, instance) \
+"bootcmd_qfw= " \
+"if qfw load $kernel_addr_r $ramdisk_addr_r; then " \
+"  booti $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr; " \
+"  if test $? -eq 1; then " \
+"    bootz $kernel_addr_r $ramdisk_addr_r:$filesize $fdtcontroladdr; " \
+"  fi ; " \
+"fi\0"
+#define BOOTENV_DEV_NAME_QFW(devtypeu, devtypel, instance) "qfw "
+
+Are you sure this is not used?
+
+> +
+>  config BOOTMETH_VBE
+>         bool "Bootdev support for Verified Boot for Embedded"
+>         depends on FIT
+> diff --git a/boot/Makefile b/boot/Makefile
+> index 84ccfeaecec..92e6adb887c 100644
+> --- a/boot/Makefile
+> +++ b/boot/Makefile
+> @@ -11,7 +11,6 @@ obj-$(CONFIG_CMD_BOOTZ) += bootm.o bootm_os.o
+>  obj-$(CONFIG_CMD_BOOTI) += bootm.o bootm_os.o
 >
-> > +the appropriate GUID (Globally Unique Identifier). When found, the information
-> > +is loaded and a bootflow is created.
-> > +
-> > +When the bootflow is booted, the bootmeth reads the kernel and boot arguments.
-> > +It then boots the kernel using zboot (on x86) or bootm (on ARM). The boot
-> > +arguments are adjusted to replace %U with the UUID of the selected kernel
-> > +partition. This results in the correct root disk being used, which is the next
-> > +partition after the kernel partition.
-> > +
-> > +For ARM, a :doc:`/usage/fit/index` is used. The `CONFIG_FIT_BEST_MATCH` option
-> > +must be enabled for U-Boot to select the correct devicetree to boot with.
-> > +
-> > +Note that a ChromiumOS image typically has two copies of the OS, each with its
+>  obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
+> -obj-$(CONFIG_QFW) += bootmeth_qfw.o
 >
-> %s/OS/operating system/
+>  endif
 >
-> > +own kernel and root disk. There is no initial ramdisk (initrd). This means that
-> > +this bootmeth typically locates two separate images.
-> > +
-> > +The compatible string "u-boot,cros" is used for the driver. The driver is
-> > +automatically instantiated if there are no bootmeth drivers in the devicetree.
+> @@ -31,6 +30,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
+> +obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_QFW) += bootmeth_qfw.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
+>  obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
+> --
+> 2.45.2
 >
-> The last sentence should be moved to the overview.
->
-> Please, mention the relevant configuration option for the boot method
-> driver.
->
-[..]
 
 Regards,
 Simon
