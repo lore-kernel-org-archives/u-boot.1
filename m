@@ -4,131 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D272C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 15:07:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F55C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 16:18:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E7AE88A06;
-	Tue, 16 Jul 2024 17:06:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 987F888980;
+	Tue, 16 Jul 2024 18:18:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="IOKCUYui";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MBykQW4U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80879889E0; Tue, 16 Jul 2024 17:06:30 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 13C5B889EB; Tue, 16 Jul 2024 18:18:09 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AACD58880B
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 17:06:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id BD58D8880B
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 18:18:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LnAtP+U8R99fcqEAa36kEovOKETMvs+mL6PzQnKdFKCjnZ/Xl3usqhC+bl7D0utpJrOpMEMhcqTDwFcoy5zOTpp76ZMHdfAEdKAM14P5mcvRMs5rzzxbccF1GILAchB8+S71OhcD7C1kq63dCoX8KskT5yWj1hDReYKcKO9OccoFrt4GT5JMiSAJmmUmT82vXwGaA2P4PM3Iby/C/zEOgOMFO59SxFEsu0iXut4Ik4jJDNmQkT+jNVPdc5yVqeALH4lI9sK92oih+KphDjOEy6Y8Tzk6vwQVsPgueYr7GvcQZklNFRS/DFIc6UTQS1cTDCM8jR53+zfmJPgwoiAgCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Wr/ZgSMmp+4cRfqhqtQaBcjI1/jlcIUfE0g07SXxf0U=;
- b=xWE9nLnMKNK1jNVRie9EfuaqvH8hPTnHUb8jjbqeC/I2U1WyrW49x7cU6Lqj5PKSAfuAfm1g3c+YmRrlLhWlkDXyuYrhLnISQaqUfWKS0JlTvXI/ShcZkzdrNQVhzHiqTY2cL5NyK+ItQt8FCc6MkH64B7j7xUrtrWKCHbZvXtHgOzrui/9pfE+Zs7NHJ5gn9wZ4XP+gGL57z7DMnZuCggu2ZjdpoB3o2ENUTQq7C5dAokNeUP/dNgyzEPc1CbHQaBCiFX1Azxz16DNAbXQyLZzLFt3mhWJ82CYVeEXLsJUN3CjFHV0Uj0q3h1DZruIRMPkRUrT6peORxGaK8hoAeA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=arm.com smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3d9400a1ad9so3287626b6e.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:18:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Wr/ZgSMmp+4cRfqhqtQaBcjI1/jlcIUfE0g07SXxf0U=;
- b=IOKCUYuigvUTtl5R2wk43eXWFmsWnjQQwxORsrY9x1sL0mtq2YDnIe3wtVoH7I4kBruv78y3ddEMtesC1XDe1o2LqyIlBbW+DRSFL8AkZ5HHElrjAIq3QyenjCSkNP2FO3mxkruZ/jfM++fl14dTzyFGgJcpOkvjuuPp2oA1DuA7EF2exNQiVAaN/YSS+gHFWjzaFQaCsf/XD3uY2I9iMbmtrRjewZ+Sw8lJp7SUIGHsvY2dh9XNkzKEl+awBqOz8K1GDPXyEnLElo9IeHF08F/coNSPSDpTH1fmb2di5YHmW5WjveX8s3ZHE4Fht2ip3MIsxr7ETN+ZaxRO0qnCvg==
-Received: from MR2P264CA0148.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:1::11) by
- MRZP264MB2332.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:30::22) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7784.14; Tue, 16 Jul 2024 15:06:25 +0000
-Received: from MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:1:cafe::a5) by MR2P264CA0148.outlook.office365.com
- (2603:10a6:501:1::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.29 via Frontend
- Transport; Tue, 16 Jul 2024 15:06:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D5A.mail.protection.outlook.com (10.167.241.7) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7784.11
- via Frontend Transport; Tue, 16 Jul 2024 15:06:24 +0000
-Received: from sah1lpt571.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 2548820219;
- Tue, 16 Jul 2024 17:06:24 +0200 (CEST)
-From: Philippe Reynes <philippe.reynes@softathome.com>
-To: trini@konsulko.com,
-	sjg@chromium.org,
-	abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de,
-	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH 4/4] test: lib: add test for key derivation
-Date: Tue, 16 Jul 2024 17:06:16 +0200
-Message-Id: <20240716150616.349466-4-philippe.reynes@softathome.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240716150616.349466-1-philippe.reynes@softathome.com>
-References: <20240716150616.349466-1-philippe.reynes@softathome.com>
+ d=konsulko.com; s=google; t=1721146685; x=1721751485; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LdCCmKdHcSBYk+rFhev4o6OxnKopszrTomFzvQwYEY4=;
+ b=MBykQW4US8VOlXLrHQfCtXClenMEi7cdSEffF/WptExMvDEJu90cVUp4t1fqnCGAoB
+ HrmkioJUrtAaOd2gLMGhAikYYfFekBqqNMnW9VnjaWns95JXVW8nE/m//9pWi/m3bd5y
+ QuqeYCAXlKI+uVXQEn5VQx81umj6MqfikoSRE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721146685; x=1721751485;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LdCCmKdHcSBYk+rFhev4o6OxnKopszrTomFzvQwYEY4=;
+ b=aOKmGeVsUxEj4W3QVaL1DYcY8j4sUbQIZdvziqnpqzkUs7FuUxIOiTU4A/q8mchFRO
+ k+yInxjfm7ScRWZsF7w3Cs2UfQbm0l3gPw4NFLWAbUgkX3zfmN3YI0SGjn4cXi7yD7mn
+ qiCw++Z+ZWebXxAAQhu5LB7VRihZkVGlPuTg4Zxw/7XT14Sw9yd7/rwpvI235dGfQm3U
+ yu9Yy4zdRiE7HEqbMDXQYZQGF6BRD72lyqQpHfwVzVt8WgqCw8mrygK8DpyoShujjeUB
+ wc++1wjYaaWuph7+R4DZJVQcGeVu1/e2FajpL1nAt7bQLlCjIHR2fgn1gUEv8s+Na2Ys
+ wYIg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXIcLRRawecyC055t98M2E8V0uXfVQadN20qPi0XiELjosETD145PEP05XmfohKT+F2kaB/hmyVklzBXaBjOm1NF7mGuQ==
+X-Gm-Message-State: AOJu0YxCCAedpUwh1OYfSeYTULytdlvmf79Y0JJVFqQ3Qh0tos58zZAZ
+ ga6TMBq52FtYKOqO62Tfl/yBY8Kdb8XzSvZ+QACV+pwmjFD/FSQ1Kpf3GNzinqM=
+X-Google-Smtp-Source: AGHT+IECfFiZxrIlHhabYXg7m1f050cHoSdgwj+1/EU83T7V615my9sZaWvqk8dyO/lkeWtH0tRXIw==
+X-Received: by 2002:a05:6870:5493:b0:254:79a2:38d1 with SMTP id
+ 586e51a60fabf-260bdd83853mr2278917fac.4.1721146685468; 
+ Tue, 16 Jul 2024 09:18:05 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-260752a6261sm1438195fac.43.2024.07.16.09.18.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jul 2024 09:18:04 -0700 (PDT)
+Date: Tue, 16 Jul 2024 10:18:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Dahl <ada@thorsis.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ E Shattow <lucent@gmail.com>, Jaewon Jung <jaewon8868@gmail.com>,
+ Janne Grunau <j@jannau.net>, Joao Marcos Costa <jmcosta944@gmail.com>,
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 02/13] doc: Move bootstd into its own directory
+Message-ID: <20240716161801.GE561963@bill-the-cat>
+References: <20240715101354.97895-1-sjg@chromium.org>
+ <20240715101354.97895-3-sjg@chromium.org>
+ <22edf937-af4d-4cf5-a251-095c1615cb4a@gmx.de>
+ <CAFLszTim9eiN5rObbZbGYa6ZgCV0G=7s6v1Bji3QO=o1fOiiaQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D5A:EE_|MRZP264MB2332:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 914bc17d-111f-4ad0-7b42-08dca5a8dc23
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6YmA8e6WZMCniAxJO9HNQxZVfKQQfK+9odJkocLpw49aF+KJ7AO1o0bs2yJX?=
- =?us-ascii?Q?vVZjqY7630icDKtvHIHUcXvbqxWnaOOQGVPDoMXdApuy1LfIXmP/+i+jKNwZ?=
- =?us-ascii?Q?k1XelozgV90y2Ds9Eqo3jUaI+LzDcUkeIB/kbPlj1K9S1W8kVXbGl2gol7fl?=
- =?us-ascii?Q?GslXfEhK3sHb5YORN1jHi01bSZXi6e727MmD8gLtNHk41wY5gPG/WzX6GlXT?=
- =?us-ascii?Q?gDwvLpQPH/pAy1xAayKRMX2/9E3j3J6fHZ5tXAwBN3UFUi1QW2PSKO/C//xO?=
- =?us-ascii?Q?3ZHs3+IdVJQAsv+QSaQ4Y9z3WJu6ydMujtmnRwwoz+8t/bdGJyR7pcAB6R47?=
- =?us-ascii?Q?mERksH1MaCHg8kw1pM3QOdeojmYDf+f8aJi19wphf2T3jLAmrYqETdqi7cRf?=
- =?us-ascii?Q?r308Mm48x9szcJgdISVZqXIqx7zk0i42a26DvBuWnOjBJ39twnNKkiC2hYnR?=
- =?us-ascii?Q?jPeP4Ykia/45ZkNy3RNBoGn0UFmu1WpvLNyImsq76hpimba1TXAYpCxkHz1G?=
- =?us-ascii?Q?C+x0RWAro5fRQYKsDR9SSSnO6KQT/NSr5ai6dzgquCdZuihiiLun6Si5f882?=
- =?us-ascii?Q?04hqgOQBetWQ1rpWkiTAuVgt6j/6XX723eY1LyYT3R3IpADjHTZYTVtPzXhI?=
- =?us-ascii?Q?vMuXeHLCRGyqaUog8rr8+TdPps3yg4jAdK25lT/a42EA9VkmA4snyNhN2r7R?=
- =?us-ascii?Q?4zszLfwbwOYrm16X8UlEg/bSn5MKbmTqrANIyHoCXm2NRzNYSKbBMme6LoV3?=
- =?us-ascii?Q?+Qmoly3ScMNVGKkWu/YEfS/7OFrlZB8/mzSJAroaoAD6RtG1xprzdpGq+IxZ?=
- =?us-ascii?Q?8A7ghGu+lK6spVP7GjizKs0rpEz9DjjY7HgAf3BZopBU/0eTG4s3RanF1kMe?=
- =?us-ascii?Q?5756sdAjSiDXFlBRvpqC5wYWX/wFoUDa649p04sjBCd2FC4lkGYM4wlXNHpF?=
- =?us-ascii?Q?HfpwkilaizCLLUr/aOoxQLlXPG5N+L2wU4RihSHEfzIHk8X/sgs5VdbxOO+D?=
- =?us-ascii?Q?e8DEYoCrtpPe/uUtz2oY0wnqxa7uB06ylP1Ec1Xba2Sl4uFeqMXx4nr7uGJa?=
- =?us-ascii?Q?bKd3TWV6ZspBDS5CHdQ/ScYd/SJWbqwFW5O5r76Hs/Vn9R64gK5PxB1eB+Eb?=
- =?us-ascii?Q?S3ycmiZdJCRcKdqqpbBO2xv4GzhylDmttrzTv4F4Mpa0/BkgT7FTZH3CvTfl?=
- =?us-ascii?Q?rWYK1owADARPpS+4yeEWMFDoZOYUo4W5R+OK+0msyDBBRfClszX+0s9khOBV?=
- =?us-ascii?Q?A82/MndW/ebbqaqQvIBMDDpH5weviAySSNZ6ppILwZrIBadgmIIy+pzge0iv?=
- =?us-ascii?Q?0x5F9RF3x6uhxYn7NteAzqklRGqsJ0WiO8ceXGFubMd+187f0DSHDZ0KgSIa?=
- =?us-ascii?Q?3nb/AXaEcy/bUDPOeoepq8YWfdRLu1SKj+b88BeqH6fTUh6S3UJQ4hvS1UZa?=
- =?us-ascii?Q?R4BQPqQYg0x5Hd19kTHTH/ynaM1oIAJu?=
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2024 15:06:24.5231 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 914bc17d-111f-4ad0-7b42-08dca5a8dc23
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRZP264MB2332
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="cAWnO79wyraTTylz"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTim9eiN5rObbZbGYa6ZgCV0G=7s6v1Bji3QO=o1fOiiaQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,138 +106,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds a test for the function sha256_hkdf.
 
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
- test/lib/Makefile           |   2 +-
- test/lib/test_sha256_hkdf.c | 104 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 105 insertions(+), 1 deletion(-)
- create mode 100644 test/lib/test_sha256_hkdf.c
+--cAWnO79wyraTTylz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index 170c5a539ca..1b7baa696db 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -19,7 +19,7 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
- obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
- obj-$(CONFIG_UT_LIB_RSA) += rsa.o
- obj-$(CONFIG_AES) += test_aes.o
--obj-$(CONFIG_SHA256) += test_sha256_hmac.o
-+obj-$(CONFIG_SHA256) += test_sha256_hmac.o test_sha256_hkdf.o
- obj-$(CONFIG_GETOPT) += getopt.o
- obj-$(CONFIG_CRC8) += test_crc8.o
- obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
-diff --git a/test/lib/test_sha256_hkdf.c b/test/lib/test_sha256_hkdf.c
-new file mode 100644
-index 00000000000..ca173a13afc
---- /dev/null
-+++ b/test/lib/test_sha256_hkdf.c
-@@ -0,0 +1,104 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
-+ *
-+ * Unit tests for sha256_hkdf functions
-+ */
-+
-+#include <command.h>
-+#include <test/lib.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <u-boot/sha256.h>
-+
-+struct test_sha256_hkdf_s {
-+	unsigned char *salt;
-+	int saltlen;
-+	unsigned char *ikm;
-+	int ikmlen;
-+	unsigned char *info;
-+	int infolen;
-+	unsigned char *expected;
-+	int expectedlen;
-+};
-+
-+/*
-+ * data comes from:
-+ * https://www.rfc-editor.org/rfc/rfc5869
-+ */
-+static unsigned char salt_test1[] = {
-+	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
-+	0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c };
-+
-+static unsigned char ikm_test1[] = {
-+	0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
-+	0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
-+
-+static unsigned char info_test1[] = {
-+	0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9 };
-+
-+static unsigned char expected_test1[] = {
-+	0x3c, 0xb2, 0x5f, 0x25, 0xfa, 0xac, 0xd5, 0x7a,
-+	0x90, 0x43, 0x4f, 0x64, 0xd0, 0x36, 0x2f, 0x2a,
-+	0x2d, 0x2d, 0x0a, 0x90, 0xcf, 0x1a, 0x5a, 0x4c,
-+	0x5d, 0xb0, 0x2d, 0x56, 0xec, 0xc4, 0xc5, 0xbf,
-+	0x34, 0x00, 0x72, 0x08, 0xd5, 0xb8, 0x87, 0x18,
-+	0x58, 0x65 };
-+
-+static struct test_sha256_hkdf_s test_sha256_hkdf[] = {
-+	{
-+		.salt = salt_test1,
-+		.saltlen = sizeof(salt_test1),
-+		.ikm = ikm_test1,
-+		.ikmlen = sizeof(ikm_test1),
-+		.info = info_test1,
-+		.infolen = sizeof(info_test1),
-+		.expected = expected_test1,
-+		.expectedlen = sizeof(expected_test1),
-+	},
-+};
-+
-+static int _lib_test_sha256_hkdf_run(struct unit_test_state *uts,
-+				     unsigned char *salt, int saltlen,
-+				     unsigned char *ikm, int ikmlen,
-+				     unsigned char *info, int infolen,
-+				     unsigned char *expected, int expectedlen)
-+{
-+	unsigned char output[64];
-+
-+	sha256_hkdf(salt, saltlen, ikm, ikmlen, info, infolen, output, expectedlen);
-+	ut_asserteq_mem(expected, output, expectedlen);
-+
-+	return 0;
-+}
-+
-+static int lib_test_sha256_hkdf_run(struct unit_test_state *uts,
-+				    struct test_sha256_hkdf_s *test)
-+{
-+	unsigned char *salt = test->salt;
-+	int saltlen = test->saltlen;
-+	unsigned char *ikm = test->ikm;
-+	int ikmlen = test->ikmlen;
-+	unsigned char *info = test->info;
-+	int infolen = test->infolen;
-+	unsigned char *expected = test->expected;
-+	int expectedlen = test->expectedlen;
-+
-+	return _lib_test_sha256_hkdf_run(uts, salt, saltlen, ikm, ikmlen,
-+					 info, infolen, expected, expectedlen);
-+}
-+
-+static int lib_test_sha256_hkdf(struct unit_test_state *uts)
-+{
-+	int i, ret = 0;
-+
-+	for (i = 0; i < ARRAY_SIZE(test_sha256_hkdf); i++) {
-+		ret = lib_test_sha256_hkdf_run(uts, &test_sha256_hkdf[i]);
-+		if (ret)
-+			break;
-+	}
-+
-+	return ret;
-+}
-+
-+LIB_TEST(lib_test_sha256_hkdf, 0);
--- 
-2.25.1
+On Tue, Jul 16, 2024 at 08:04:38AM +0100, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Mon, 15 Jul 2024 at 22:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+> >
+> > On 7/15/24 12:13, Simon Glass wrote:
+> > > Before adding more files, move the bootstd docs into a new directory,
+> > > with an index.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >   MAINTAINERS                                       |  2 +-
+> > >   doc/board/starfive/milk-v_mars_cm.rst             |  2 +-
+> > >   doc/develop/board_best_practices.rst              |  2 +-
+> > >   doc/develop/bootstd/index.rst                     |  9 +++++++++
+> > >   doc/develop/{bootstd.rst =3D> bootstd/overview.rst} | 14 +++++++---=
+----
+> > >   doc/develop/index.rst                             |  2 +-
+> > >   doc/usage/cmd/bootdev.rst                         |  2 +-
+> > >   doc/usage/cmd/bootflow.rst                        |  2 +-
+> > >   doc/usage/cmd/bootmeth.rst                        |  2 +-
+> > >   doc/usage/environment.rst                         |  2 +-
+> > >   10 files changed, 24 insertions(+), 15 deletions(-)
+> > >   create mode 100644 doc/develop/bootstd/index.rst
+> > >   rename doc/develop/{bootstd.rst =3D> bootstd/overview.rst} (99%)
+> > >
+> > > diff --git a/MAINTAINERS b/MAINTAINERS
+> > > index 9bee9284cca..86b830aa997 100644
+> > > --- a/MAINTAINERS
+> > > +++ b/MAINTAINERS
+> > > @@ -927,7 +927,7 @@ F:        boot/bootmeth*.c
+> > >   F:  boot/bootstd.c
+> > >   F:  cmd/bootdev.c
+> > >   F:  cmd/bootflow.c
+> > > -F:   doc/develop/bootstd.rst
+> > > +F:   doc/develop/bootstd/
+> > >   F:  doc/usage/bootdev.rst
+> > >   F:  doc/usage/bootflow.rst
+> > >   F:  doc/usage/bootmeth.rst
+> > > diff --git a/doc/board/starfive/milk-v_mars_cm.rst b/doc/board/starfi=
+ve/milk-v_mars_cm.rst
+> > > index b31de6043bb..52d4e5e9098 100644
+> > > --- a/doc/board/starfive/milk-v_mars_cm.rst
+> > > +++ b/doc/board/starfive/milk-v_mars_cm.rst
+> > > @@ -89,7 +89,7 @@ provide a default value.
+> > >
+> > >   The variable *$fdtfile* is used in the boot process to automaticall=
+y load
+> > >   a device-tree provided by the operating system. For details of the =
+boot
+> > > -process refer to the :doc:`U-Boot Standard Boot <../../../develop/bo=
+otstd>`
+> > > +process refer to the :doc:`/develop/bootstd/index`
+> > >   description.
+> > >
+> > >   Boot source selection
+> > > diff --git a/doc/develop/board_best_practices.rst b/doc/develop/board=
+_best_practices.rst
+> > > index f44401eab7d..09632c80ce7 100644
+> > > --- a/doc/develop/board_best_practices.rst
+> > > +++ b/doc/develop/board_best_practices.rst
+> > > @@ -7,7 +7,7 @@ In addition to the regular best practices such as usi=
+ng :doc:`checkpatch` and
+> > >   following the :doc:`docstyle` and the :doc:`codingstyle` there are =
+some things
+> > >   which are specific to creating a new board port.
+> > >
+> > > -* Implement :doc:`bootstd` to ensure that most operating systems wil=
+l be
+> > > +* Implement :doc:`bootstd/index` to ensure that most operating syste=
+ms will be
+> > >     supported by the platform.
+> > >
+> > >   * The platform defconfig file must be generated via `make savedefco=
+nfig`.
+> > > diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/inde=
+x.rst
+> > > new file mode 100644
+> > > index 00000000000..f4f87c7787c
+> > > --- /dev/null
+> > > +++ b/doc/develop/bootstd/index.rst
+> > > @@ -0,0 +1,9 @@
+> > > +.. SPDX-License-Identifier: GPL-2.0+:
+> > > +
+> > > +Standard Boot
+> > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > +
+> > > +.. toctree::
+> > > +   :maxdepth: 2
+> > > +
+> > > +   overview
+> > > diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd/overview.r=
+st
+> > > similarity index 99%
+> > > rename from doc/develop/bootstd.rst
+> > > rename to doc/develop/bootstd/overview.rst
+> > > index 34631089ae0..761f61a573b 100644
+> > > --- a/doc/develop/bootstd.rst
+> > > +++ b/doc/develop/bootstd/overview.rst
+> > > @@ -1,7 +1,7 @@
+> > >   .. SPDX-License-Identifier: GPL-2.0+:
+> > >
+> > > -U-Boot Standard Boot
+> > > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > > +Standard Boot Overview
+> > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >
+> >
+> >
+> >
+> > The text is not optimized for readability, e.g.
+> >
+> > "- bootdev  - a device which can hold or access a distro (e.g. MMC,
+> > Ethernet)"
+> >
+> > Please, consistently replace the non-words in the boot standard
+> > documentation:
+> >
+> > %s/bootdev/boot device/
+> > %s/bootmeth/boot method/
+> > %s/bootflow/boot flow/
+>=20
+> I do want to keep the terms, It is easy to search for bootdev or
+> bootmeth in the code and docs. Once people learn what they mean it is
+> pretty simple.
 
+I agree, this is the documentation for "bootdev" and "bootmeth" and
+"bootflow" not for "boot device" and so forth.
+
+> > "distro" isn't a dictionary word either. Do you mean operating system?
+>=20
+> I mean a linux distro, in the sense that 'distro boot' uses it.
+
+Maybe an initial statement early about starting your operating system
+distribution (distro), and then it's OK to say distro later on? This
+does also work on non-Linux distributions :)
+
+--=20
+Tom
+
+--cAWnO79wyraTTylz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWnTYACgkQFHw5/5Y0
+tyx1SAwAiWXV/6YDEHRDW6ZZpPOjzCwpzRekstL3h4j9VrG6kAPc45v1agKIQ/eV
+0EGEwjYZK3ECvE+dmljWBQa8sWZTwfPX6uFjDZ5ne5hlMpAPTcr83MwmtFsQarmE
+YNWuOGpyyCMK6JwkvgIXlRwk1XprBsO6kRlNHVJ7241b/CtVCRFj4Cm1yUf1EquQ
+8TNlfrXDSoYcg8hBt67cFQSlXSLnxHFFIQaw6pzXU8UvUjqrUXngAIyjHsW5U4DI
+s43HqhtyJt1P1AjJXBByU8InSZXVVxyBNaEYyS4gwr8W4gYxXe5BDwhRZi6kcfbX
+gyY2Qk3A4Jx4I5oBEYt4ICKbZ5BLWODMUg4wTDMqyDtpiQ9tZcPEbtToJTrM2ZRx
+QEIkViQsLlDTjzyCzoK3oXVi0cI4Gleqjsk7jKb5FwUAYSyxwCEwNX3KtyJ2NBin
+nGUV+sBp2+fNK0B7MgCDoY5TmQ9hxiJeLQrDwIliX4n45izmczdp9iNtvqoJzSSN
+KFmBUPWP
+=ZEvK
+-----END PGP SIGNATURE-----
+
+--cAWnO79wyraTTylz--
