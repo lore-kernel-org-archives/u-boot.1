@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76297C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 17:21:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DB7C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 18:00:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3E7D887E6;
-	Tue, 16 Jul 2024 19:21:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E05D889FD;
+	Tue, 16 Jul 2024 20:00:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gwDNLzNP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N5dklpHS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CAB4889EC; Tue, 16 Jul 2024 19:21:20 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 0F6BC889EB; Tue, 16 Jul 2024 20:00:27 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54AF0887D1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 19:21:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 792AD88939
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 20:00:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3d9de9f8c8dso3370288b6e.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 10:21:17 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-70368b53cc0so2987781a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 11:00:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721150476; x=1721755276; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721152823; x=1721757623; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MGyMyVmIzhmIyGflPh0TCg7mN+PkloIi+2HDCwtcVQo=;
- b=gwDNLzNPTNwWBJtUGOX36F7+DILGQgkBgbR1UhkiVE4EEWTjl0L4tsbjLKOWsaRjo4
- fCNatIQxnZ1nhDmIYj7lypMhbwxi+PaWNuDJLOk549bZxm3y2FCCiANcE+QdTidr9i/6
- XnOC+G+p795TXFZEuScqQYYUUxr7pNbJtKJLg=
+ bh=tfMP/IOYj+6tQTjdKSOFmgUSZdP5iBu7St0So2Hnc1E=;
+ b=N5dklpHSut21s1ESIPrXxLm8pcSS7ILvkyjD99ZpZL1H1MeuK3QPxuJO62TMUvclb/
+ ji/RgjivfuQHlay1Bs2PQV6uONEPssy7gCUR6GnsmCo3YbgyhucEGibPVk3RFxlcK0gL
+ hN0c6DUxsP6lqfxzZp4uMhwyy2WCojbGE4p0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721150476; x=1721755276;
+ d=1e100.net; s=20230601; t=1721152823; x=1721757623;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MGyMyVmIzhmIyGflPh0TCg7mN+PkloIi+2HDCwtcVQo=;
- b=JfIAlis/x+ysNbuybORjfIpg5t+ps6wgspniBjl6Zzy1gb+HxMUt7TgWC3TrOg0Fv6
- DXSDxfTeBU9TKmmj+w5uDMgLkbotxqBlZQBomVzozMqtZPQSCRG8JFiZvc/3eQDF6LNb
- ii8LmOhV3HsywMswHpupkjwOOlCjAX0PzriR5ReqfM36eaoXrp0E08qCmga0TUwTwlj/
- f8LfV3I6RRDmyZBcvfPN9Q31CKoSmpDt2URqBBp+1m283usDQ8ryl+g43IqYxfy5jybE
- t1t291grnZVr7EdQjURBbIZwwIKIae526LwIoYW1l8zjSofTXTXZ1id7sZTnppz30CKa
- YWFQ==
-X-Gm-Message-State: AOJu0YySDITWTjXzlokRtWN0OoTPrAdHFVe66lA5hoQIGlslIY4m5Unl
- cEJCVyLM0/mL5wVvkGXs5CO9ZJJ2FnDdeM2WsfDkjPbwV3anr5PDOUSKXKO5HPM=
-X-Google-Smtp-Source: AGHT+IHj37u4g4Y90PECLsAqgQr/fY/VzliLASApvJ9b1GXHFnmuvGPmMbhB3yrLaLn/6NwILnJcJw==
-X-Received: by 2002:a05:6808:2381:b0:3d5:4256:26d4 with SMTP id
- 5614622812f47-3dac7b6102emr3979450b6e.7.1721150476078; 
- Tue, 16 Jul 2024 10:21:16 -0700 (PDT)
+ bh=tfMP/IOYj+6tQTjdKSOFmgUSZdP5iBu7St0So2Hnc1E=;
+ b=UthRdjv/s8QdbYIzbAyd2wMSiU8MPmcY0zM7OfJAlvthlilexyRF1z5+lYwVzcDbVo
+ v6XWsPXEdjecxNgwT65iE17CluF7YcJmuOZ288C8zpTjzM1NJ+aFBUEHBTJkF1Fm+EUC
+ ABaUtNbSTNgZqej4eJxG+8q9SX33K5V6TajScpNXzvOwQCt8P7TV84ii48Ln6YTawlVg
+ 64aM7aJvuA51d1t5xexOGNlxyOg/HugZ+j/L26//FakiwvN01Gf6md4BEpII5peS4Vhl
+ W/tXY0oFC0wNnF4wHn8Eq9vZbwbhQPGTw+kq8ktF/PHzMVC4mSHxOFX+8aZHBhXygeRC
+ 90Ag==
+X-Gm-Message-State: AOJu0YyDTj5vlgzG0kA+DPtO8yMGVzI3XXKfkJst5XXx7SpX6zi53+DY
+ P4sbYeHHoQ61CqsM7Lgkmw5arTY3KgQzFxTsnaqOoBdvH+WMjYgNpMIgQxqDUTNsdTBPiG8hr+e
+ o
+X-Google-Smtp-Source: AGHT+IHnxvrlfipvi67EBmnOrknbbZDZuvsIj47eqXXPtx31bbyu0aF3Y4qlKUsNcnnZ6yGLGcqMFA==
+X-Received: by 2002:a05:6870:1258:b0:25e:b632:b772 with SMTP id
+ 586e51a60fabf-260bdddbb9fmr1766298fac.28.1721152822889; 
+ Tue, 16 Jul 2024 11:00:22 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dabbac0846sm883952b6e.6.2024.07.16.10.21.15
+ 586e51a60fabf-260750db105sm1441444fac.12.2024.07.16.11.00.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 10:21:15 -0700 (PDT)
-Date: Tue, 16 Jul 2024 11:21:13 -0600
+ Tue, 16 Jul 2024 11:00:22 -0700 (PDT)
+Date: Tue, 16 Jul 2024 12:00:20 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Walter Lozano <walter.lozano@collabora.com>
-Cc: u-boot@lists.denx.de, Martyn Welch <martyn@collabora.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] board: rpi: Update memory layout for Aarch64
-Message-ID: <20240716172113.GG561963@bill-the-cat>
-References: <20240716171602.2279766-1-walter.lozano@collabora.com>
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: u-boot@lists.denx.de, barebox@lists.infradead.org, s.hauer@pengutronix.de
+Subject: Re: Various Integer Overflows in dlmalloc
+Message-ID: <20240716180020.GH561963@bill-the-cat>
+References: <2561107.TLnPLrj5Ze@somecomputer>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mm+qeaMBjerzrV+E"
+ protocol="application/pgp-signature"; boundary="176EOECzmln74KwL"
 Content-Disposition: inline
-In-Reply-To: <20240716171602.2279766-1-walter.lozano@collabora.com>
+In-Reply-To: <2561107.TLnPLrj5Ze@somecomputer>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,111 +91,129 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---mm+qeaMBjerzrV+E
+--176EOECzmln74KwL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 16, 2024 at 02:16:02PM -0300, Walter Lozano wrote:
+On Tue, Jul 16, 2024 at 11:16:27AM +0200, Richard Weinberger wrote:
+> Hi!
+>=20
+> While inspecting various security aspects of U-Boot I noticed some
+> issues around dlmalloc and asking for your feedback, especially for the
+> first issue.
+> I'm CC'ing Barebox folks since Barebox seems to be based on the same
+> dlmalloc-implementation as U-Boot does.
 
-> ARM and Aarch64 have different restrictions and trying to accommodate
-> larger kernels like the ones used in distros can be challenging. For this
-> reason, separate the layout and rearrange the map for Aarch64 to support
-> kernels larger than 36 MB.
->=20
-> Signed-off-by: Walter Lozano <walter.lozano@collabora.com>
-> ---
->=20
->  board/raspberrypi/rpi/rpi.env | 25 ++++++++++++++++++-------
->  1 file changed, 18 insertions(+), 7 deletions(-)
->=20
-> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-> index 30228285edd..37c7f6a920e 100644
-> --- a/board/raspberrypi/rpi/rpi.env
-> +++ b/board/raspberrypi/rpi/rpi.env
-> @@ -42,13 +42,19 @@ dfu_alt_info+=3DzImage fat 0 1
->   *   For Aarch64, the kernel image is uncompressed and must be loaded at
->   *   text_offset bytes (specified in the header of the Image) into a 2MB
->   *   boundary. The 'booti' command relocates the image if necessary. Lin=
-ux uses
-> - *   a default text_offset of 0x80000.  In summary, loading at 0x80000
-> - *   satisfies all these constraints and reserving memory up to 0x024000=
-00
-> - *   permits fairly large (roughly 36M) kernels.
-> + *   a default text_offset of 0x80000.  However, loading it at 0x80000
-> + *   will allow to reserve only up to 0x02400000 which permits medium si=
-ze
-> + *   kernels (roughly 36M). This is good enough for customized kernels b=
-ut
-> + *   not for distros which by default enable drivers for many different
-> + *   boards. Under these circumstances, using 0x00200000 provides room f=
-or
-> + *   larger kernels.
->   *
->   * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
->   * conflict with something else. Reserving 1M for each of them at
-> - * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
-> + * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty for =
-ARM.
-> + *
-> + *   For Aarch64, since the kernel is placed in different location,
-> + *   accommodate them to reserver 1M for each of them.
->   *
->   * On ARM, both the DTB and any possible initrd must be loaded such that=
- they
->   * fit inside the lowmem mapping in Linux. In practice, this usually mea=
-ns not
-> @@ -62,16 +68,21 @@ dfu_alt_info+=3DzImage fat 0 1
->   * large initrds before they start colliding with U-Boot.
->   */
->  #ifdef CONFIG_ARM64
-> +pxefile_addr_r=3D0x00080000
-> +scriptaddr=3D0x00100000
-> +kernel_addr_r=3D0x00200000
-> +fdt_addr_r=3D0x03400000
-> +ramdisk_addr_r=3D0x03500000
->  fdt_high=3Dffffffffffffffff
->  initrd_high=3Dffffffffffffffff
->  #else
-> -fdt_high=3Dffffffff
-> -initrd_high=3Dffffffff
-> -#endif
->  kernel_addr_r=3D0x00080000
->  scriptaddr=3D0x02400000
->  pxefile_addr_r=3D0x02500000
->  fdt_addr_r=3D0x02600000
->  ramdisk_addr_r=3D0x02700000
-> +fdt_high=3Dffffffff
-> +initrd_high=3Dffffffff
-> +#endif
-> =20
->  boot_targets=3Dmmc usb pxe dhcp
+Thanks for digging in to all of this.
 
-We need to drop the disabling of device tree / initrd relocation as
-that's sure not going to help matters. What's the minimum amount of
-memory an aarch64 Pi will have? I really prefer reserving 128MiB (even
-if that's not the maximum Linux Kernel Image size anymore) and then
-device tree and then initrd.
+> 1. Integer Overflow While Computing Allocation Size
+>=20
+> malloc/realloc/memalign take an arbitrary request size and apply
+> padding.
+>=20
+> First, the length is (imperfectly) checked and the the conversion happens:
+>=20
+>   if ((long)bytes < 0) return NULL;
+>=20
+>   nb =3D request2size(bytes);  /* padded request size; */
+>=20
+> The problem is that the request2size() macro is casting the requested
+> size to an signed long and adds SIZE_SZ + MALLOC_ALIGN_MASK:
+>=20
+> #define request2size(req) \
+>  (((long)((req) + (SIZE_SZ + MALLOC_ALIGN_MASK)) < \
+>   (long)(MINSIZE + MALLOC_ALIGN_MASK)) ? MINSIZE : \
+>    (((req) + (SIZE_SZ + MALLOC_ALIGN_MASK)) & ~(MALLOC_ALIGN_MASK)))
+>=20
+> So, any allocation request between LONG_MAX - (SIZE_SZ + MALLOC_ALIGN_MAS=
+K) - 1 and LONG_MAX
+> will cause an overflow and as a consequence the caller will get
+> less memory than requested.
+>=20
+> e.g. on an 32bits system malloc(2147483647) will succeed but allocates
+> only 16 bytes (MINSIZE). I've tested this with U-Boot on i386 and ARM.
+>=20
+> This is a beefy vulnerability for exploit writers since unbound allocatio=
+ns
+> do happen. Like in the ext4 and squashfs symlink code, I'm sure there are=
+ more.
+> If you don't care about verified boot, it's less of an issue, though.
+>=20
+> I'm not so sure what the best fix is.
+> Mostly because I'm not sure why request2size() is anyway casting to long.
+> The original dlmalloc.c implementation doesn't do so. It has also a more
+> sophisticated overflow check, which is also missing in both U-Boot and Ba=
+rebox.
+> See https://research.cs.wisc.edu/sonar/projects/mnemosyne/resources/doc/h=
+tml/malloc-original_2src_2dlmalloc_8c-source.html
+> Lines 01938 to 01962.
+>=20
+> I tracked down the bug to ppcboot, it's there since day 0.
+> So I don't know what's the intention behind casting.
+>=20
+> On the other hand, since over commit is not supported, we could also just=
+ fail
+> if the requested size is larger then the total amount of system memory.
+> I'm a little in fear that more overflows are lurking in the code.
+
+The "why" is likely lost due to time and I could only speculate and wave
+my hands about funny compiler issues at the time. Since we don't support
+overcommit, I'd be inclined to go with just failing if we're exceeding
+SYS_MALLOC_LEN.
+
+> 2. Integer overflow in sbrk() (U-Boot only)
+>=20
+> sbrk() does:
+>         ulong new =3D old + increment;
+>=20
+>         /*
+>          * if we are giving memory back make sure we clear it out since
+>          * we set MORECORE_CLEARS to 1
+>          */
+>         if (increment < 0)
+>                 memset((void *)new, 0, -increment);
+>=20
+>         if ((new < mem_malloc_start) || (new > mem_malloc_end))
+>                 return (void *)MORECORE_FAILURE;
+>=20
+>=20
+> If old + increment overflows (increment is a ptrdiff_t) then
+> sbrk() wrongly thinks we're shrinking the heap and memsets an invalid
+> range.
+>=20
+> I propose as solution, applying memset() after the range check.
+
+OK, sounds good.
+
+> 3. Wrong ptrdiff_t type (U-Boot only)
+>=20
+> U-Boot defines __kernel_ptrdiff_t to int for both i386 and x86_64.
+> As a consequence, large allocations on x86_64 will overflow the increment
+> parameter of sbrk() and less than requested is allocated.
+> I suggest defining __kernel_ptrdiff_t on x86_64 to long.
+
+OK, sounds good.
 
 --=20
 Tom
 
---mm+qeaMBjerzrV+E
+--176EOECzmln74KwL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWrAIACgkQFHw5/5Y0
-tyyWrAv/V45pEHAvR9dKFHlp4DJA25d+BFhs0fNjba8nVwagKLUkG/n6p3igi9qx
-enomhIwLLuq7jwWHnjifZ+3inTz8ltMRNrJI1o5Stwlp8uRYQzauEY5yTTNm8ygv
-jK0Go2WjCXP+vofSb12PV5AWtbyP21iBBHZhZNYgj0IqPFOgpDKWzo3d25Dj0NoH
-q1x+bFxJtiRQWUXHVkvd2PBynvRwC25dtEd4zxGcB0JxDR+7po9nLv98e3v1Cmat
-RspE84aqBdXaGV5gDDIbP/6CsKI5CBg0BVNobDB1V+uBTwh46qN+VvnNBqjtd9x7
-DqTHgAbYiYeWsaf+a9OTzpwxI4M5xhhTjhU5+dqgJPVEwrXbYFBTHymUF6dviG4Z
-5Y3Ql9xfOZyYdVS7V95Bspe79cZWARoOzrx5Lz4M//JBlEAT+W9ZWtZSKDE+IE25
-xNY3GMk4BZnJFiNCZ6OF2F0E5hsk1dLeiHp1OoOjeL4CgiisiIb+NUHa89HvCQdp
-CwZRT0/b
-=NDng
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWtTAACgkQFHw5/5Y0
+tywoIwv/TrYUuDq4c9Ols9IwfRrYB6aXPo9UqhTEex3NS/YbNWf9UnXvRoculZTq
+KwPdnX7hK285DOTwY3FX/mnpGtfiyqB8ZG1gboVX+0G3T4NRU2NmZN/p3RBp04sF
+hhfiBgarsJSngvfZi2W3dTF2aC4vCIXaSRRRGzMOUKavbt5cNSFH5ElKo0C6TjFh
+YbscSPJANoisHe550tpXF8sDxktGb2DnJ45oixy/MYpIwGJWfOYHFMgqQgNV/mbs
+asCJ60TeMQ4GiE1xstLSlXw4JYSafx6y2anOOfAkJ82lMElB+eAhq58bYTTS4iQL
+foWLnJwe5ydSq7cDmh4cSKE7hnhLvQoXJBYRPa8T1lkfMPBIh9Oa4rim9QGAyHQs
+ooCzOzFUv72Rw3ty4o4IwMuyijvOLnE1umn6EPPMXCw7uBbIjYSQwPF6Xwzslx3G
+1xsGbk70fQy3SM50zP/HLQSQqkUAC3irw+MKSNbOdJjzsxw01SV3cI1rtOiGATDf
+QjlAgR68
+=M2Ik
 -----END PGP SIGNATURE-----
 
---mm+qeaMBjerzrV+E--
+--176EOECzmln74KwL--
