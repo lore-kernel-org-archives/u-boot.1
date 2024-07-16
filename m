@@ -4,92 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F55C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 16:18:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58895C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 16:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 987F888980;
-	Tue, 16 Jul 2024 18:18:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D49F889DB;
+	Tue, 16 Jul 2024 18:56:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MBykQW4U";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a1y3a4w2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13C5B889EB; Tue, 16 Jul 2024 18:18:09 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 95DD5889EC; Tue, 16 Jul 2024 18:56:26 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD58D8880B
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 18:18:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57FB28876D
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 18:56:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3d9400a1ad9so3287626b6e.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:18:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-58c2e5e8649so10235804a12.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:56:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721146685; x=1721751485; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LdCCmKdHcSBYk+rFhev4o6OxnKopszrTomFzvQwYEY4=;
- b=MBykQW4US8VOlXLrHQfCtXClenMEi7cdSEffF/WptExMvDEJu90cVUp4t1fqnCGAoB
- HrmkioJUrtAaOd2gLMGhAikYYfFekBqqNMnW9VnjaWns95JXVW8nE/m//9pWi/m3bd5y
- QuqeYCAXlKI+uVXQEn5VQx81umj6MqfikoSRE=
+ d=gmail.com; s=20230601; t=1721148984; x=1721753784; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZuVI6jTiBctfFYUQqA7eSBNBxUubvdzQv0T/ZHpB4nI=;
+ b=a1y3a4w2XrgJM0fsyLI9g4S7VmKNIbeXgOKuY6Afft/R23+YCtQ2qu8S6NaYMHylEd
+ 82Ep9MTiEACKzN3OY11uTfHTYzlP6d9QpdgsmaWnD+8DEygnf5vxnlHn8DoNZpI4ukBl
+ J+1x+tP8Hsu+NSfLGuB631Eowu9njCRDrXUf3c1m1WgIGFbVeBvDwynhwsZyy9FDF9gl
+ kE9tIFb2eA2WN2fdbMY9UnzyGLO2o9kzL1693mj0JM/AWLVbhm3eMcKeFzhFma6a8Ls1
+ VaL/7MmgajD7Yt+fIO5KobsHeUt3ImyUcOBZvy1lbhhnRfE8c0jEoUkqs7G7wdTiGoLN
+ iA9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721146685; x=1721751485;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LdCCmKdHcSBYk+rFhev4o6OxnKopszrTomFzvQwYEY4=;
- b=aOKmGeVsUxEj4W3QVaL1DYcY8j4sUbQIZdvziqnpqzkUs7FuUxIOiTU4A/q8mchFRO
- k+yInxjfm7ScRWZsF7w3Cs2UfQbm0l3gPw4NFLWAbUgkX3zfmN3YI0SGjn4cXi7yD7mn
- qiCw++Z+ZWebXxAAQhu5LB7VRihZkVGlPuTg4Zxw/7XT14Sw9yd7/rwpvI235dGfQm3U
- yu9Yy4zdRiE7HEqbMDXQYZQGF6BRD72lyqQpHfwVzVt8WgqCw8mrygK8DpyoShujjeUB
- wc++1wjYaaWuph7+R4DZJVQcGeVu1/e2FajpL1nAt7bQLlCjIHR2fgn1gUEv8s+Na2Ys
- wYIg==
+ d=1e100.net; s=20230601; t=1721148984; x=1721753784;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZuVI6jTiBctfFYUQqA7eSBNBxUubvdzQv0T/ZHpB4nI=;
+ b=Za0bG7MjuY7WSy+sIwvwCBrYpx05mw0i8ugwshM6+j6A/2PJdRbkxDXZBEoqwH7542
+ meLWloLT23o9KfFljtSUEY/1Jx6ljUBH44PzYY2vLTE+d5CwehKqmBnceXCxyf5/9kKD
+ BGfVxBdoVz0ZKAKgQq57EXITwRO5DAe7kHlH2/Ccg+KWCJck//3kaV7A22hGiU/XUrbU
+ 5lnJfC3EMs6cCCRwtH/lg6ejYKmu+L7Uv6vfY19SHN/2b2gYVYZxFSdHaMCTvpg0Khew
+ djSiqTks5LnPN+qPJJAzBICGt2fm4aDlTZ3mnx25Ww2ADQbgLnclgA8Y9Mndz1AfpNS2
+ lrvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXIcLRRawecyC055t98M2E8V0uXfVQadN20qPi0XiELjosETD145PEP05XmfohKT+F2kaB/hmyVklzBXaBjOm1NF7mGuQ==
-X-Gm-Message-State: AOJu0YxCCAedpUwh1OYfSeYTULytdlvmf79Y0JJVFqQ3Qh0tos58zZAZ
- ga6TMBq52FtYKOqO62Tfl/yBY8Kdb8XzSvZ+QACV+pwmjFD/FSQ1Kpf3GNzinqM=
-X-Google-Smtp-Source: AGHT+IECfFiZxrIlHhabYXg7m1f050cHoSdgwj+1/EU83T7V615my9sZaWvqk8dyO/lkeWtH0tRXIw==
-X-Received: by 2002:a05:6870:5493:b0:254:79a2:38d1 with SMTP id
- 586e51a60fabf-260bdd83853mr2278917fac.4.1721146685468; 
- Tue, 16 Jul 2024 09:18:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-260752a6261sm1438195fac.43.2024.07.16.09.18.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 09:18:04 -0700 (PDT)
-Date: Tue, 16 Jul 2024 10:18:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Dahl <ada@thorsis.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- E Shattow <lucent@gmail.com>, Jaewon Jung <jaewon8868@gmail.com>,
- Janne Grunau <j@jannau.net>, Joao Marcos Costa <jmcosta944@gmail.com>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 02/13] doc: Move bootstd into its own directory
-Message-ID: <20240716161801.GE561963@bill-the-cat>
-References: <20240715101354.97895-1-sjg@chromium.org>
- <20240715101354.97895-3-sjg@chromium.org>
- <22edf937-af4d-4cf5-a251-095c1615cb4a@gmx.de>
- <CAFLszTim9eiN5rObbZbGYa6ZgCV0G=7s6v1Bji3QO=o1fOiiaQ@mail.gmail.com>
+ AJvYcCUcI098EPSf8+7BQ4U6aYK6DhN/pllU5n8FEDlL8/SzIsNK5H7OCYGxMo/7xPRir3Y7lsu8MZkIG5E/PPM1QSzbJ+I0Sg==
+X-Gm-Message-State: AOJu0YxM3f8bc14LQxhRwaktp7OdfQcb99utxzeVyJ4as9yr8ziArwlQ
+ UNquSvujjYdzVp8+2DIhCoQHQ/QnTDx7yrPO9aYgQzpUcsAjKViahDPF4HE0UTRVK3ArOsU3Om9
+ mC82T193S85QgqWC5gwxOGJZcPdY=
+X-Google-Smtp-Source: AGHT+IGbR1vsAGDh1sZsbjBEAsViEGy1/UoMn+EqV7fmG2FO2Dl4iTmn0gzov2XblJQMzTPUcPTjJ7e1h9Fh9FPg3Cw=
+X-Received: by 2002:a05:6402:3489:b0:58c:77b4:404b with SMTP id
+ 4fb4d7f45d1cf-59f0b913ccdmr2657312a12.15.1721148983547; Tue, 16 Jul 2024
+ 09:56:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cAWnO79wyraTTylz"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTim9eiN5rObbZbGYa6ZgCV0G=7s6v1Bji3QO=o1fOiiaQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240716150616.349466-1-philippe.reynes@softathome.com>
+In-Reply-To: <20240716150616.349466-1-philippe.reynes@softathome.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 16 Jul 2024 17:56:12 +0100
+Message-ID: <CALeDE9PSADyPUwBuHH46V2Of-HxyYJbo2VOdfQe-_soS6CHCvg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] lib: sha256: add feature sha256_hmac
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: trini@konsulko.com, sjg@chromium.org, abdellatif.elkhlifi@arm.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,170 +88,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---cAWnO79wyraTTylz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It might be useful to have a cover letter explaining what the plans
+for this code are, great that there are tests but adding code in
+without it being used isn't always a feature so a cover letter with
+some details often helps with the context.
 
-On Tue, Jul 16, 2024 at 08:04:38AM +0100, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Mon, 15 Jul 2024 at 22:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> > On 7/15/24 12:13, Simon Glass wrote:
-> > > Before adding more files, move the bootstd docs into a new directory,
-> > > with an index.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >   MAINTAINERS                                       |  2 +-
-> > >   doc/board/starfive/milk-v_mars_cm.rst             |  2 +-
-> > >   doc/develop/board_best_practices.rst              |  2 +-
-> > >   doc/develop/bootstd/index.rst                     |  9 +++++++++
-> > >   doc/develop/{bootstd.rst =3D> bootstd/overview.rst} | 14 +++++++---=
-----
-> > >   doc/develop/index.rst                             |  2 +-
-> > >   doc/usage/cmd/bootdev.rst                         |  2 +-
-> > >   doc/usage/cmd/bootflow.rst                        |  2 +-
-> > >   doc/usage/cmd/bootmeth.rst                        |  2 +-
-> > >   doc/usage/environment.rst                         |  2 +-
-> > >   10 files changed, 24 insertions(+), 15 deletions(-)
-> > >   create mode 100644 doc/develop/bootstd/index.rst
-> > >   rename doc/develop/{bootstd.rst =3D> bootstd/overview.rst} (99%)
-> > >
-> > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > > index 9bee9284cca..86b830aa997 100644
-> > > --- a/MAINTAINERS
-> > > +++ b/MAINTAINERS
-> > > @@ -927,7 +927,7 @@ F:        boot/bootmeth*.c
-> > >   F:  boot/bootstd.c
-> > >   F:  cmd/bootdev.c
-> > >   F:  cmd/bootflow.c
-> > > -F:   doc/develop/bootstd.rst
-> > > +F:   doc/develop/bootstd/
-> > >   F:  doc/usage/bootdev.rst
-> > >   F:  doc/usage/bootflow.rst
-> > >   F:  doc/usage/bootmeth.rst
-> > > diff --git a/doc/board/starfive/milk-v_mars_cm.rst b/doc/board/starfi=
-ve/milk-v_mars_cm.rst
-> > > index b31de6043bb..52d4e5e9098 100644
-> > > --- a/doc/board/starfive/milk-v_mars_cm.rst
-> > > +++ b/doc/board/starfive/milk-v_mars_cm.rst
-> > > @@ -89,7 +89,7 @@ provide a default value.
-> > >
-> > >   The variable *$fdtfile* is used in the boot process to automaticall=
-y load
-> > >   a device-tree provided by the operating system. For details of the =
-boot
-> > > -process refer to the :doc:`U-Boot Standard Boot <../../../develop/bo=
-otstd>`
-> > > +process refer to the :doc:`/develop/bootstd/index`
-> > >   description.
-> > >
-> > >   Boot source selection
-> > > diff --git a/doc/develop/board_best_practices.rst b/doc/develop/board=
-_best_practices.rst
-> > > index f44401eab7d..09632c80ce7 100644
-> > > --- a/doc/develop/board_best_practices.rst
-> > > +++ b/doc/develop/board_best_practices.rst
-> > > @@ -7,7 +7,7 @@ In addition to the regular best practices such as usi=
-ng :doc:`checkpatch` and
-> > >   following the :doc:`docstyle` and the :doc:`codingstyle` there are =
-some things
-> > >   which are specific to creating a new board port.
-> > >
-> > > -* Implement :doc:`bootstd` to ensure that most operating systems wil=
-l be
-> > > +* Implement :doc:`bootstd/index` to ensure that most operating syste=
-ms will be
-> > >     supported by the platform.
-> > >
-> > >   * The platform defconfig file must be generated via `make savedefco=
-nfig`.
-> > > diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/inde=
-x.rst
-> > > new file mode 100644
-> > > index 00000000000..f4f87c7787c
-> > > --- /dev/null
-> > > +++ b/doc/develop/bootstd/index.rst
-> > > @@ -0,0 +1,9 @@
-> > > +.. SPDX-License-Identifier: GPL-2.0+:
-> > > +
-> > > +Standard Boot
-> > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > +
-> > > +.. toctree::
-> > > +   :maxdepth: 2
-> > > +
-> > > +   overview
-> > > diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd/overview.r=
-st
-> > > similarity index 99%
-> > > rename from doc/develop/bootstd.rst
-> > > rename to doc/develop/bootstd/overview.rst
-> > > index 34631089ae0..761f61a573b 100644
-> > > --- a/doc/develop/bootstd.rst
-> > > +++ b/doc/develop/bootstd/overview.rst
-> > > @@ -1,7 +1,7 @@
-> > >   .. SPDX-License-Identifier: GPL-2.0+:
-> > >
-> > > -U-Boot Standard Boot
-> > > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > +Standard Boot Overview
-> > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >
-> >
-> >
-> >
-> > The text is not optimized for readability, e.g.
-> >
-> > "- bootdev  - a device which can hold or access a distro (e.g. MMC,
-> > Ethernet)"
-> >
-> > Please, consistently replace the non-words in the boot standard
-> > documentation:
-> >
-> > %s/bootdev/boot device/
-> > %s/bootmeth/boot method/
-> > %s/bootflow/boot flow/
->=20
-> I do want to keep the terms, It is easy to search for bootdev or
-> bootmeth in the code and docs. Once people learn what they mean it is
-> pretty simple.
+Also if you're not aware there's work to integrate MBedTLS [1] and I'm
+not sure if that also may provide the functionality.
 
-I agree, this is the documentation for "bootdev" and "bootmeth" and
-"bootflow" not for "boot device" and so forth.
+Peter
 
-> > "distro" isn't a dictionary word either. Do you mean operating system?
->=20
-> I mean a linux distro, in the sense that 'distro boot' uses it.
+[1] https://lists.denx.de/pipermail/u-boot/2024-July/557832.html
 
-Maybe an initial statement early about starting your operating system
-distribution (distro), and then it's OK to say distro later on? This
-does also work on non-Linux distributions :)
-
---=20
-Tom
-
---cAWnO79wyraTTylz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWnTYACgkQFHw5/5Y0
-tyx1SAwAiWXV/6YDEHRDW6ZZpPOjzCwpzRekstL3h4j9VrG6kAPc45v1agKIQ/eV
-0EGEwjYZK3ECvE+dmljWBQa8sWZTwfPX6uFjDZ5ne5hlMpAPTcr83MwmtFsQarmE
-YNWuOGpyyCMK6JwkvgIXlRwk1XprBsO6kRlNHVJ7241b/CtVCRFj4Cm1yUf1EquQ
-8TNlfrXDSoYcg8hBt67cFQSlXSLnxHFFIQaw6pzXU8UvUjqrUXngAIyjHsW5U4DI
-s43HqhtyJt1P1AjJXBByU8InSZXVVxyBNaEYyS4gwr8W4gYxXe5BDwhRZi6kcfbX
-gyY2Qk3A4Jx4I5oBEYt4ICKbZ5BLWODMUg4wTDMqyDtpiQ9tZcPEbtToJTrM2ZRx
-QEIkViQsLlDTjzyCzoK3oXVi0cI4Gleqjsk7jKb5FwUAYSyxwCEwNX3KtyJ2NBin
-nGUV+sBp2+fNK0B7MgCDoY5TmQ9hxiJeLQrDwIliX4n45izmczdp9iNtvqoJzSSN
-KFmBUPWP
-=ZEvK
------END PGP SIGNATURE-----
-
---cAWnO79wyraTTylz--
+On Tue, 16 Jul 2024 at 16:16, Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> Adds the support of the hmac based on sha256.
+> This implementation is based on rfc2104.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+>  include/u-boot/sha256.h |  4 ++++
+>  lib/sha256.c            | 40 ++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 44 insertions(+)
+>
+> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+> index a4fe176c0b4..7aa4c54d0d4 100644
+> --- a/include/u-boot/sha256.h
+> +++ b/include/u-boot/sha256.h
+> @@ -24,4 +24,8 @@ void sha256_finish(sha256_context * ctx, uint8_t digest[SHA256_SUM_LEN]);
+>  void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+>                 unsigned char *output, unsigned int chunk_sz);
+>
+> +void sha256_hmac(const unsigned char *key, int keylen,
+> +                const unsigned char *input, unsigned int ilen,
+> +                unsigned char *output);
+> +
+>  #endif /* _SHA256_H */
+> diff --git a/lib/sha256.c b/lib/sha256.c
+> index 665ba6f152e..64f6b48974b 100644
+> --- a/lib/sha256.c
+> +++ b/lib/sha256.c
+> @@ -298,3 +298,43 @@ void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+>
+>         sha256_finish(&ctx, output);
+>  }
+> +
+> +/*
+> + * Output = HMAC-SHA-256( input buffer, hmac key )
+> + */
+> +void sha256_hmac(const unsigned char *key, int keylen,
+> +                const unsigned char *input, unsigned int ilen,
+> +                unsigned char *output)
+> +{
+> +       int i;
+> +       sha256_context ctx;
+> +       unsigned char k_ipad[64];
+> +       unsigned char k_opad[64];
+> +       unsigned char tmpbuf[32];
+> +
+> +       memset(k_ipad, 0x36, 64);
+> +       memset(k_opad, 0x5C, 64);
+> +
+> +       for (i = 0; i < keylen; i++) {
+> +               if (i >= 64)
+> +                       break;
+> +
+> +               k_ipad[i] ^= key[i];
+> +               k_opad[i] ^= key[i];
+> +       }
+> +
+> +       sha256_starts(&ctx);
+> +       sha256_update(&ctx, k_ipad, 64);
+> +       sha256_update(&ctx, input, ilen);
+> +       sha256_finish(&ctx, tmpbuf);
+> +
+> +       sha256_starts(&ctx);
+> +       sha256_update(&ctx, k_opad, 64);
+> +       sha256_update(&ctx, tmpbuf, 32);
+> +       sha256_finish(&ctx, output);
+> +
+> +       memset(k_ipad, 0, 64);
+> +       memset(k_opad, 0, 64);
+> +       memset(tmpbuf, 0, 32);
+> +       memset(&ctx, 0, sizeof(sha256_context));
+> +}
+> --
+> 2.25.1
+>
