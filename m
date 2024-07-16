@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88971C3DA4B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 02:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC2FC3DA4B
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 02:17:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC8B28813A;
-	Tue, 16 Jul 2024 04:15:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A46B8813A;
+	Tue, 16 Jul 2024 04:17:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="X3fwg3CL";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ZV4jmzSQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B987D8880F; Tue, 16 Jul 2024 04:15:28 +0200 (CEST)
-Received: from mail-m11876.qiye.163.com (mail-m11876.qiye.163.com
- [115.236.118.76])
+ id 743548813A; Tue, 16 Jul 2024 04:17:54 +0200 (CEST)
+Received: from mail-m1282.netease.com (mail-m1282.netease.com [103.209.128.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE37687D87
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 04:15:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6786887FC8
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 04:17:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=X3fwg3CLxI/iWKe3eT/8155d3DUDM746yDCv8NOEB7roqi9VHuH5yn0ly+xpPh7ENx5RhPDBADuNooiw/0XHZDPTHt2IX8LARpmjNcDjh/q+qd1SGWIZxENW+t1KPv96g7yLeTi44hUSNE3hByySZQqnTypw87Sx33S/XEXgvt8=;
+ b=ZV4jmzSQThz4lEOSZGIv1p/6610XMWzX3Dxz9n1F690F2m1JNqlJ/ETjDjwqD5iEpLKA6abmANfqro1zHBDb7xxtqqcBqmCintIbWAlNX1G34CWmvoH3Kd0fHzXVRwxpMGoYNQM2EmZ6E9DaJbAJJfYRjjcSorQd6n55DNeOWzI=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=wCQa2IqDRKtFi6Q85s34DnX1/aQ2BVf4LTWzn88Pc8o=;
+ bh=dnoWWyYlXO9CisuQlV+mMPLADTg9mkFU6fSoanKtFZ8=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 3486F900208;
- Tue, 16 Jul 2024 10:15:14 +0800 (CST)
-Message-ID: <5d6b6a36-b1b5-444d-af13-0b23ecec6051@rock-chips.com>
-Date: Tue, 16 Jul 2024 10:15:13 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 395A69001C9;
+ Tue, 16 Jul 2024 10:17:37 +0800 (CST)
+Message-ID: <b88949a1-db7d-43ea-8046-9e5e1f86d5e4@rock-chips.com>
+Date: Tue, 16 Jul 2024 10:17:36 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v2] rockchip: puma-rk3399: increase Ethernet PHY
- timeout to 30s
+Subject: Re: [PATCH next 1/2] rockchip: theobroma-systems: migrate git URLs to
+ HTTPS
 To: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger
- <klaus.goger@cherry.de>, Tom Rini <trini@konsulko.com>
+ <klaus.goger@cherry.de>, Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20240619-puma-eth-timeout-v2-1-a01c443d4445@cherry.de>
+References: <20240620-tsd-http-git-clone-v1-0-666e8d6a8949@cherry.de>
+ <20240620-tsd-http-git-clone-v1-1-666e8d6a8949@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240619-puma-eth-timeout-v2-1-a01c443d4445@cherry.de>
+In-Reply-To: <20240620-tsd-http-git-clone-v1-1-666e8d6a8949@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU0fHlZJGUNISEkdTEhDGBpWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhgeQlYeHR4YGk9MShoZSUtWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90b952911b03a9kunm3486f900208
+X-HM-Tid: 0a90b954c0be03a9kunm395a69001c9
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NDI6EDo4FDI0KhhWTggqTxQK
- CQ0wCzZVSlVKTElKS0JNSkpPQ0lJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTE9KNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NyI6LSo*DjI5EBg*GVFLFkot
+ GQgwCitVSlVKTElKS0JNSU5DSk9JVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPQ09ONwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,15 +77,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/6/19 23:44, Quentin Schulz wrote:
+On 2024/6/20 18:24, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> On Puma v2.1 with a KSZ9031, the Ethernet PHY often doesn't detect the
-> link in the 4-second default timeout.
+> It turns out only Puma had a working git:// URL. Though that is now
+> fixed, having HTTPS URLs make it easier to directly reach our cgit
+> webserver to check what's up without having to change the URL manually.
 >
-> After some boot-loop test for about a thousand boots, 70% were below
-> 10s, 90% below 15s and 100% below 30s. Let's play it safe and make it
-> 30s so that hopefully all links that should be detected are.
+> Depending on your terminal settings, this also makes it possible to
+> open the link from it.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -91,29 +93,50 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
-> Changes in v2:
-> - rebase on next
-> - use Kconfig symbol instead of constant in include/configs/
-> - Link to v1: https://lore.kernel.org/r/20240619-puma-eth-timeout-v1-1-db5c17153f82@cherry.de
-> ---
->   configs/puma-rk3399_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   board/theobroma-systems/jaguar_rk3588/MAINTAINERS | 2 +-
+>   board/theobroma-systems/puma_rk3399/MAINTAINERS   | 2 +-
+>   board/theobroma-systems/ringneck_px30/MAINTAINERS | 2 +-
+>   board/theobroma-systems/tiger_rk3588/MAINTAINERS  | 2 +-
+>   4 files changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-> index 5319239f989..4293cf0ae44 100644
-> --- a/configs/puma-rk3399_defconfig
-> +++ b/configs/puma-rk3399_defconfig
-> @@ -69,6 +69,7 @@ CONFIG_MMC_SDHCI_ROCKCHIP=y
->   CONFIG_SF_DEFAULT_BUS=1
->   CONFIG_SPI_FLASH_GIGADEVICE=y
->   CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_PHY_ANEG_TIMEOUT=30000
->   CONFIG_PHY_MICREL=y
->   CONFIG_PHY_MICREL_KSZ90X1=y
->   CONFIG_ETH_DESIGNWARE=y
+> diff --git a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+> index ab7051b427f..370d0a1272a 100644
+> --- a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+> +++ b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+> @@ -10,4 +10,4 @@ F:	include/configs/jaguar_rk3588.h
+>   F:	arch/arm/dts/rk3588-jaguar*
+>   F:	configs/jaguar-rk3588_defconfig
+>   W:	https://embedded.cherry.de/product/jaguar-sbc-rk3588/
+> -T:	git git://git.embedded.cherry.de/jaguar-u-boot.git
+> +T:	git https://git.embedded.cherry.de/jaguar-u-boot.git
+> diff --git a/board/theobroma-systems/puma_rk3399/MAINTAINERS b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+> index 2536e348887..1a5b78bf535 100644
+> --- a/board/theobroma-systems/puma_rk3399/MAINTAINERS
+> +++ b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+> @@ -9,4 +9,4 @@ F:	include/configs/puma_rk3399.h
+>   F:	arch/arm/dts/rk3399-puma*
+>   F:	configs/puma-rk3399_defconfig
+>   W:	https://embedded.cherry.de/product/puma-som-rk3399-q7/
+> -T:	git git://git.embedded.cherry.de/puma-u-boot.git
+> +T:	git https://git.embedded.cherry.de/puma-u-boot.git
+> diff --git a/board/theobroma-systems/ringneck_px30/MAINTAINERS b/board/theobroma-systems/ringneck_px30/MAINTAINERS
+> index 2aff91f4207..4d4544a2a3e 100644
+> --- a/board/theobroma-systems/ringneck_px30/MAINTAINERS
+> +++ b/board/theobroma-systems/ringneck_px30/MAINTAINERS
+> @@ -9,4 +9,4 @@ F:	include/configs/ringneck_px30.h
+>   F:	arch/arm/dts/px30-ringneck*
+>   F:	configs/ringneck-px30_defconfig
+>   W:	https://embedded.cherry.de/product/ringneck-som-px30-uq7/
+> -T:	git git://git.embedded.cherry.de/ringneck-u-boot.git
+> +T:	git https://git.embedded.cherry.de/ringneck-u-boot.git
+> diff --git a/board/theobroma-systems/tiger_rk3588/MAINTAINERS b/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+> index e5aab4b29f3..a95135616ad 100644
+> --- a/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+> +++ b/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+> @@ -10,4 +10,4 @@ F:	include/configs/tiger_rk3588.h
+>   F:	arch/arm/dts/rk3588-tiger*
+>   F:	configs/tiger-rk3588_defconfig
+>   W:	https://embedded.cherry.de/product/tiger-som-rk3588-q7/
+> -T:	git git://git.embedded.cherry.de/tiger-u-boot.git
+> +T:	git https://git.embedded.cherry.de/tiger-u-boot.git
 >
-> ---
-> base-commit: 01a5d7547ed3a51a8ac5837c31a150f85bc475f8
-> change-id: 20240619-puma-eth-timeout-41be9c243ed7
->
-> Best regards,
