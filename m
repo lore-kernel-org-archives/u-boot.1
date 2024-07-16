@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A635EC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 06:26:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C97C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 06:30:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2AC8895F;
-	Tue, 16 Jul 2024 08:26:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E3AFA88602;
+	Tue, 16 Jul 2024 08:30:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h19eOXYy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CB8zvfJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC0778895E; Tue, 16 Jul 2024 08:26:21 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 8C22B88385; Tue, 16 Jul 2024 08:30:39 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABA0888962
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 08:26:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E73888602
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 08:30:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-58d24201934so1558190a12.0
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 23:26:18 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-58ba3e38027so5376737a12.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 23:30:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721111178; x=1721715978; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721111437; x=1721716237; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5G72LMX6SMIcIwOOW314Cv+875KZS+PCyAk1NCG6UTc=;
- b=h19eOXYyBD8qAFTPU1WeyTHJY0bQNk4R8wwJ/FJcXAsOUOyVsICSKuCnIAinC6m98u
- sIQTMBWmku/XrZg2/nkw6C5zToANYxgHfIAndLKQmMDMRqu9b49g0Yx/e86nKWt7VTfE
- CoKIl+BtCuQbLopFErWH7lbuu6oatQYiUlYKcLrgmDcwd12VkX6TYSd+ZCcfZ5CDm90m
- 2jqnUrZp329QUznhA/5t9NLoyjCzrxyi+lZvLu3zVOvcbM08rfbGnv9M8Iq1T/DxCg9D
- a4obO9Ho3gLidxrnfAppCPMV5RPlgwZ0Ap6O0kIn9KlYpOvNqhMxeoRKzvoBNpeP9dR+
- sT0g==
+ bh=Jr46pKXohn9chrBmFIKoYcKCJDkwRDqauwz3Y/IG6VY=;
+ b=CB8zvfJeQOfhLdaw+QFA7D4wIzSCSMchgMc7kIQdaM2OC/xS+rqDw03aLDyhWqgver
+ FUanXIJwBHxZIUNPQVp/VOm5vsq5J93o/8PdIXA8R3VAlxXQI//+e5hPzwMnvdrsJ1Lu
+ +H7yxS+Gftyu39wCYiumLuq9ESxM1jqQhxtDlqcHW/rGnwi7etu47rwtNyl7UoT1BU2X
+ +lCpFJgkz31WTPIpRQGzoxwu9XNyVmYIVdAQdvXm6w7U7FwEGKIdl/r/8YdYF/wc9zC3
+ PcUGBBUbCNHVm13uVas1UX+NBfZhf2U0GJpGsk4ofUv+MXWFuYmQK3f11jGDUaZUQWu7
+ 0Ymg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721111178; x=1721715978;
+ d=1e100.net; s=20230601; t=1721111437; x=1721716237;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5G72LMX6SMIcIwOOW314Cv+875KZS+PCyAk1NCG6UTc=;
- b=o25VHE7+kD4MOsKEwtz9ruCiilh/B3kagvVWH1yP/SBoTFs6UeB5PunCPatgFN2qL2
- HxhZFN7YAx6jdK0iHouK4MwpwNRtiyXamOAp9VD0HuN3wKp2CZBB/Q6R6KhNVH0iy1wl
- a/QV/a8DMgiFvTMefaSp5SybZuJKCIjeaK6R4isyr9gnHGfqhHIs43rGDcMFU/n2ga3p
- 6A9OEMOABe/i1kC2C5fv2WdGK3icCDxwXaXkpkLuLQKp7dcYlNRaG2bOI6E34Sj86q2A
- 2+p2BvTzSOY/GWCl/r1ZWIxFChKfY1KTg3XTlqwu8PAGrIDVL05R0GeGd3imrYEoS5cy
- MVDA==
-X-Gm-Message-State: AOJu0YwLNVUy7UQ99gYP75mS22SCIXh/4J8bX99mBHvql9J+RJIv+mAI
- Ju0BgwOAYVcohAi8pcl3mJsshS/2CQa+nickYynumw6gh7oCdgXJanl1Ue9LFJ6XnRZ0JdUv1yk
- AFyvNqQUsmogaDnU4eIv4JSPsgy8MlFW9wvuGD945800Hju7Y
-X-Google-Smtp-Source: AGHT+IFXPKHTNqOXm7SM0+XIvK0z/g4AkWYzV+zJz7OsULs3fl5gIo8hBP7Zqc6oP1p7nYQrMPqUpdOQT8sSsVtLw6s=
-X-Received: by 2002:a50:f697:0:b0:58b:8858:8034 with SMTP id
- 4fb4d7f45d1cf-59f0b81a3a7mr704047a12.11.1721111177902; Mon, 15 Jul 2024
- 23:26:17 -0700 (PDT)
+ bh=Jr46pKXohn9chrBmFIKoYcKCJDkwRDqauwz3Y/IG6VY=;
+ b=xGV6UqQFsJ+YAhh0cCqPBb/WH1kmfIxC0Ce9p2qQNTt+gnHqTBoE0z5FJ0Rtyqdo8Y
+ HAwG34hGOLeErDCynoA+n9Zp9AxQMegfhEGcLLtlMA+yBzUkylNFjcyN8iM+dEgT8GIR
+ KKwDDv9IhSo5JsMy4oARBjcz04GRCkES98jQXgGRcK9pb1lijgpF8nvMSapTo/2RMlcT
+ /5cEIwydyV5Ov3PkQkdfEqebKbVq2Cn0jcI2p0XSCHB5Jlwfb1THl5usfSR73b43DeX9
+ WCCwGRT8IYbUh9NXIYTXN/6uXtvsB7ruoaaDtbWygk+/+pV6zuOMYCylLxwP3uibjQBw
+ 1TBw==
+X-Gm-Message-State: AOJu0YzFbOn6q1XJhQYsUBIucci5rPOl360bhJuOa8XZPmmUd4RtWS2N
+ biLrGyYsBlSIfiNB2mKQl5wJoHqn373g6QvjQcWJ+f+DwHb99ndQlU6ah0Szffe0xCGaoUsWZlv
+ N+uAvCnmTtxqc21mhaEQ6unI98sZwWkkOgzeVZA==
+X-Google-Smtp-Source: AGHT+IFAK9XeVQxa4cyFdPx0YH4qUtBJColoThRzKQvpAYTNpoGxiwh8xzqbCsrAWfl41kfEigw76jYhmU1U3yUKN1Q=
+X-Received: by 2002:a05:6402:26c6:b0:57c:c2b6:176d with SMTP id
+ 4fb4d7f45d1cf-59ef00abb97mr779398a12.32.1721111436713; Mon, 15 Jul 2024
+ 23:30:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-13-sughosh.ganu@linaro.org>
- <CAFLszTgp4GQydJY611gTOBnUk+Ce6o4vkVqNKtgcwKVzW9X6WQ@mail.gmail.com>
- <CADg8p94u_CYkek8tnPGtM8JOAn4QjMh5oLKCqvhRdj0M=H8GDA@mail.gmail.com>
- <CAFLszThFC8hW3nYoY=dfSdE_DgAT8UK762NuXy9LfR7Crd9=Ew@mail.gmail.com>
-In-Reply-To: <CAFLszThFC8hW3nYoY=dfSdE_DgAT8UK762NuXy9LfR7Crd9=Ew@mail.gmail.com>
+ <20240704073544.670249-10-sughosh.ganu@linaro.org>
+ <CAFLszTiN1K4tazqaBBCS37VHVtJ0ise2RQC2AGaLKg1SMFj9JQ@mail.gmail.com>
+ <CADg8p974419Rqisf0qwH46FVobDYsxuLjnD5UV4kGRPcK7_vCg@mail.gmail.com>
+ <CAFLszTjH=fvN3bWTieqfmKvdT9mdKRzBV4+zBBftD4Vg9ZwX=Q@mail.gmail.com>
+In-Reply-To: <CAFLszTjH=fvN3bWTieqfmKvdT9mdKRzBV4+zBBftD4Vg9ZwX=Q@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 16 Jul 2024 11:56:06 +0530
-Message-ID: <CADg8p94FT0HhZVQzj9NxRAAYqUX8KjS7KMKM-SxVidsP==NnYw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 12/48] lmb: allow for resizing lmb regions
+Date: Tue, 16 Jul 2024 12:00:25 +0530
+Message-ID: <CADg8p96Xc3vmfTf6GWFyzGBAMvZ2KM=-kBYRPGyi0RyP7R8_wQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 09/48] lmb: remove call to lmb_init()
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -99,68 +99,48 @@ On Mon, 15 Jul 2024 at 17:09, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sughosh,
 >
-> On Mon, 15 Jul 2024 at 10:27, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Mon, 15 Jul 2024 at 10:31, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
 > > hi Simon,
 > >
 > > On Sat, 13 Jul 2024 at 20:45, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Hi Sughosh,
+> > > kHi Sughosh,
 > > >
 > > > On Thu, 4 Jul 2024 at 08:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > > >
-> > > > Allow for resizing of LMB regions if the region attributes match. The
-> > > > current code returns a failure status on detecting an overlapping
-> > > > address. This worked up until now since the LMB calls were not
-> > > > persistent and global -- the LMB memory map was specific and private
-> > > > to a given caller of the LMB API's.
-> > > >
-> > > > With the change in the LMB code to make the LMB reservations
-> > > > persistent, there needs to be a check on whether the memory region can
-> > > > be resized, and then do it if so. To distinguish between memory that
-> > > > cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
-> > > > of memory with this attribute would indicate that the region cannot be
-> > > > resized.
+> > > > The LMB module will be changed to have persistent and global memory
+> > > > maps of available and used memory. With this change, there won't be
+> > > > any need to explicitly initialise the LMB memory maps. Remove the call
+> > > > to the lmb_init() function.
 > > > >
 > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > > > ---
-> > > > Changes since V1:
-> > > > * Do the check for the region flags in lmb_resize_regions() and
-> > > >   lmb_merge_overlap_regions() to decide on merging the overlapping
-> > > >   regions.
+> > > > Changes since V1: New patch
 > > > >
-> > > >  include/lmb.h |   1 +
-> > > >  lib/lmb.c     | 116 ++++++++++++++++++++++++++++++++++++++++++++------
-> > > >  2 files changed, 103 insertions(+), 14 deletions(-)
-> > > >
-> > > > diff --git a/include/lmb.h b/include/lmb.h
-> > > > index 069c6af2a3..99fcf5781f 100644
-> > > > --- a/include/lmb.h
-> > > > +++ b/include/lmb.h
-> > > > @@ -20,6 +20,7 @@
-> > > >  enum lmb_flags {
-> > > >         LMB_NONE                = 0x0,
-> > > >         LMB_NOMAP               = 0x4,
-> > > > +       LMB_NOOVERWRITE         = 0x8,
+> > > >  arch/arm/mach-stm32mp/dram_init.c |  1 -
+> > > >  board/xilinx/common/board.c       |  1 -
+> > > >  drivers/iommu/apple_dart.c        |  1 -
+> > > >  drivers/iommu/sandbox_iommu.c     |  1 -
+> > > >  include/lmb.h                     |  1 -
+> > > >  lib/lmb.c                         | 18 ------------------
+> > > >  test/lib/lmb.c                    | 18 ------------------
+> > > >  7 files changed, 41 deletions(-)
 > > >
-> > > How about LMB_PERSIST ?
+> > > I can't actually find the call to lmb_init(). Where is it?
 > >
-> > Isn't LMB_NOOVERWRITE more suitable here ? I mean this is indicating
-> > that the said region of memory is not to be re-used/re-requested.
-> >
-> > >
-> > > These could be adjusted to use BIT()
-> >
-> > I am changing these to use the BIT macro in a subsequent commit.
+> > Sorry, I do not understand this question. This patch removes the
+> > lmb_init() definition, as well as calls to the function from the rest
+> > of the files.
 >
-> Yes, I saw that later and forgot to remove this. Normally we make
-> refactoring changes before adding new code, though.
+> I see later you add lmb_mem_regions_init() so that there are two init
+> functions. We should really only have one.
 
-Okay, I will bring in that patch earlier in the series.
+Okay, let me see how I can put the functionality of lmb_init() needed
+for the tests into the lmb_mem_regions_init() function.
 
 -sughosh
 
-> [..]
 >
 > Regards,
 > Simon
