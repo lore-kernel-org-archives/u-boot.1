@@ -4,59 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6423DC3DA4B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 02:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E70C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 02:24:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D91148813A;
-	Tue, 16 Jul 2024 04:20:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id DBEAA88755;
+	Tue, 16 Jul 2024 04:24:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BxBZZZlE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32B658893B; Tue, 16 Jul 2024 04:20:32 +0200 (CEST)
-Received: from mail-m15566.qiye.163.com (mail-m15566.qiye.163.com
- [101.71.155.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4F47A8880F; Tue, 16 Jul 2024 04:24:56 +0200 (CEST)
+Received: from smtpbg150.qq.com (smtpbg150.qq.com [18.132.163.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC7A587FC8
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 04:20:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 934B18870C
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 04:24:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=BxBZZZlEEoA/PK8LhPZ72aJwNbhKPyxLCZgxuJYyCHa9O92gd9tzBKFd4itS0u6Z6hOO4+uIU7YJ9srtdOc20O9R5dknSm1bxW6S+s3yOpht7McQKH8dlMRlZ4+9SYflGASLWK+0DCZlFs7UBkgbXbwI94lrQ96TR+rWVk97hXE=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=l+r1cmZTZiNJabGs117Ndg4CCqnQykCXmjTVMaeMSQw=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id F18E79003CF;
- Tue, 16 Jul 2024 10:20:17 +0800 (CST)
-Message-ID: <96409f23-ce4d-4e8c-b766-af8942ac7689@rock-chips.com>
-Date: Tue, 16 Jul 2024 10:20:17 +0800
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpsz11t1721096675t8fouw
+X-QQ-Originating-IP: li1TQBPuv9h3gF3W+NV6AmC3o67FyzEKmsdKnagess8=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 16 Jul 2024 10:24:33 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 2372899476574021798
+Message-ID: <AF48B32FC86879A8+5f4d883b-964e-48ba-a9b6-39d4595eb557@radxa.com>
+Date: Tue, 16 Jul 2024 11:24:33 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] phy: rockchip: inno-hdmi: Fix missing readl base addr
-To: Jagan Teki <jagan@edgeble.ai>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Da Xue <da@libretech.co>,
- Jonas Karlman <jonas@kwiboo.se>
-References: <20240622182149.28416-1-jagan@edgeble.ai>
+Subject: Re: [PATCH] rockchip: include cru_rk3588.h and define rockchip_cru
+ for RK3588
+To: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu
+References: <20240618193044.22666-1-naoki@radxa.com>
+ <a33b10ea-a0d1-4d33-a0d7-a7a34bcd6ffb@rock-chips.com>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240622182149.28416-1-jagan@edgeble.ai>
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <a33b10ea-a0d1-4d33-a0d7-a7a34bcd6ffb@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0kaQlZLQ0NNSBlCTEhIHk1WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90b95733c303a9kunmf18e79003cf
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PEk6UQw*CDI4CBgKGDBKDTNI
- Vk4aCyNVSlVKTElKS0JNT0pDTUhMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITUpCNwY+
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpsz:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,62 +62,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+hi
 
-On 2024/6/23 02:21, Jagan Teki wrote:
-> inno_poll passes the reg offset that is used by readl_poll_sleep_timeout
-> without any base addr.
->
-> Fix it.
->
-> Bug:
-> inno_hdmi_phy phy@ff430000: Pre-PLL locking failed
-> inno_hdmi_phy phy@ff430000: PHY: Failed to power on phy@ff430000: -110.
-> failed to power on phy (ret=-110)
-> inno_hdmi_phy phy@ff430000: Pre-PLL locking failed
-> inno_hdmi_phy phy@ff430000: PHY: Failed to power on phy@ff430000: -110.
-> failed to power on phy (ret=-110)
->
-> Fixes: aa2271184603 ("phy: rockchip: Add Rockchip INNO HDMI PHY driver")
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On 6/19/24 05:39, FUKAUMI Naoki wrote:
+ > sorry,
+ >
+ > On 6/19/24 05:29, FUKAUMI Naoki wrote:
+ >> Hello,
+ >>
+ >> this happens only if HOSTCC=clang. I can see several other errors on
+ >> several other targets with HOSTCC=clang.
+ >
+ > ^this happens only if clang is used at make foo-bar_defconfig stage.
+ >
+ > it seems
+ >
+ > make foo-bar_defconfig
+ > make HOSTCC=clang CC=clang all
+ >
+ > works.
+ >
+ >> CC=clang seems to be fine.
+ >>
+ >> Best regards,
+ >>
+ >> --
+ >> FUKAUMI Naoki
+ >> Radxa Computer (Shenzhen) Co., Ltd.
 
-Thanks,
-- Kever
-> ---
->   drivers/phy/rockchip/phy-rockchip-inno-hdmi.c | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
-> index 3bb1a254ff..7459779dff 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
-> @@ -432,8 +432,8 @@ static inline void inno_update_bits(struct inno_hdmi_phy *inno, u8 reg,
->   	inno_write(inno, reg, tmp);
->   }
->   
-> -#define inno_poll(reg, val, cond, sleep_us, timeout_us) \
-> -	readl_poll_sleep_timeout((reg) * 4, val, cond, sleep_us, timeout_us)
-> +#define inno_poll(inno, reg, val, cond, sleep_us, timeout_us) \
-> +	readl_poll_sleep_timeout((inno)->regs + ((reg) * 4), val, cond, sleep_us, timeout_us)
->   
->   static unsigned long inno_hdmi_phy_get_tmdsclk(struct inno_hdmi_phy *inno,
->   					       unsigned long rate)
-> @@ -575,7 +575,7 @@ inno_hdmi_phy_rk3328_clk_set_rate(struct phy *phy,
->   	inno_update_bits(inno, 0xa0, RK3328_PRE_PLL_POWER_DOWN, 0);
->   
->   	/* Wait for Pre-PLL lock */
-> -	ret = inno_poll(0xa9, val, val & RK3328_PRE_PLL_LOCK_STATUS,
-> +	ret = inno_poll(inno, 0xa9, val, val & RK3328_PRE_PLL_LOCK_STATUS,
->   			1000, 10000);
->   	if (ret) {
->   		dev_err(phy->dev, "Pre-PLL locking failed\n");
-> @@ -674,7 +674,7 @@ inno_hdmi_phy_rk3328_power_on(struct phy *phy,
->   			 RK3328_TMDS_DRIVER_ENABLE);
->   
->   	/* Wait for post PLL lock */
-> -	ret = inno_poll(0xaf, v, v & RK3328_POST_PLL_LOCK_STATUS,
-> +	ret = inno_poll(inno, 0xaf, v, v & RK3328_POST_PLL_LOCK_STATUS,
->   			1000, 10000);
->   	if (ret) {
->   		dev_err(phy->dev, "Post-PLL locking failed\n");
+should I check/make patches for other RK3xxx targets?
+or should I avoid to use clang for defconfig?
+
+Best regards,
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+On 7/16/24 11:09, Kever Yang wrote:
+> 
+> On 2024/6/19 03:30, FUKAUMI Naoki wrote:
+>> fix following error found by clang:
+>>
+>>    CC      arch/arm/mach-rockchip/cpu-info.o
+>> arch/arm/mach-rockchip/cpu-info.c:23:13: error: incomplete definition 
+>> of type 'struct rockchip_cru'
+>>     23 |         switch (cru->glb_rst_st) {
+>>        |                 ~~~^
+>> ./arch/arm/include/asm/arch-rockchip/clock.h:181:8: note: forward 
+>> declaration of 'struct rockchip_cru'
+>>    181 | struct rockchip_cru;
+>>        |        ^
+>> 1 error generated.
+>>
+>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> 
+> Thanks,
+> - Kever
+>> ---
+>>   arch/arm/include/asm/arch-rockchip/cru.h        | 2 ++
+>>   arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 ++
+>>   2 files changed, 4 insertions(+)
+>>
+>> diff --git a/arch/arm/include/asm/arch-rockchip/cru.h 
+>> b/arch/arm/include/asm/arch-rockchip/cru.h
+>> index 9778790f34..c3259b8e7c 100644
+>> --- a/arch/arm/include/asm/arch-rockchip/cru.h
+>> +++ b/arch/arm/include/asm/arch-rockchip/cru.h
+>> @@ -17,6 +17,8 @@
+>>   # include <asm/arch-rockchip/cru_rk3399.h>
+>>   #elif defined(CONFIG_ROCKCHIP_RK3568)
+>>   #include <asm/arch-rockchip/cru_rk3568.h>
+>> +#elif defined(CONFIG_ROCKCHIP_RK3588)
+>> +#include <asm/arch-rockchip/cru_rk3588.h>
+>>   #endif
+>>   /* CRU_GLB_RST_ST */
+>> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h 
+>> b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+>> index a0e54d3965..dad484813f 100644
+>> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+>> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+>> @@ -92,6 +92,8 @@ struct rk3588_cru {
+>>       unsigned int pmuclkgate_con[9]; /* Address Offset: 0x0100 */
+>>   };
+>> +#define rockchip_cru rk3588_cru
+>> +
+>>   check_member(rk3588_cru, mode_con00, 0x280);
+>>   check_member(rk3588_cru, pmuclksel_con[1], 0x30304);
+> 
