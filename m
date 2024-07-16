@@ -4,63 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A308C3DA4B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 02:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 553E0C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 02:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3E568880B;
-	Tue, 16 Jul 2024 04:04:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C45028890F;
+	Tue, 16 Jul 2024 04:09:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MZ43vLSn";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KVXrYn34";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CE7887E15; Tue, 16 Jul 2024 04:04:52 +0200 (CEST)
-Received: from mail-m127211.xmail.ntesmail.com
- (mail-m127211.xmail.ntesmail.com [115.236.127.211])
+ id 480D18880F; Tue, 16 Jul 2024 04:09:22 +0200 (CEST)
+Received: from mail-m127159.xmail.ntesmail.com
+ (mail-m127159.xmail.ntesmail.com [115.236.127.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE3118888F
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 04:04:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E0CA88925
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 04:09:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=MZ43vLSnlM4PL9CGPK6J9RFOFnwbAusBaRgZYxxD+gPEtJhmgMZR0ZM9KAENLz+PVVkI0UitejHqMzv0+tDH6LqE22TZDlQvalVVHuIG+OeSynCWP/d5USaf8qDWbDLKUErBP/vSSsUJUMRxSs3r0dFEBr9sX9IA/f4yIevVJ/8=;
+ b=KVXrYn348a5qX3QF3YnrTuqPmtac6HYT6XsH1wBs1hK6ZPrr83/MQ5oq+GglifJulaOd/gkrGHZf1t7ubvDv/ZXWpFbstxMI5nT1+tzIBzMQYTjBa3QjxswLjg8f4mVsjoqe1/jyzVBRnJGALr8wLqQpUUMBFXdvYKrWmKXDie8=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=a/I8ZS+ig2rE/V7TzlfbgtInoCHtvDkKmjNygIUAft4=;
+ bh=HCs7ErsDGkI0wnf5FwU6xXiupHDJhHFecj07BOFVfNU=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id E97B49003B8;
- Tue, 16 Jul 2024 10:04:34 +0800 (CST)
-Message-ID: <bfc3d708-0a4d-41ce-a9a7-fe2f435a88e2@rock-chips.com>
-Date: Tue, 16 Jul 2024 10:04:34 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id BB390900391;
+ Tue, 16 Jul 2024 10:09:09 +0800 (CST)
+Message-ID: <a33b10ea-a0d1-4d33-a0d7-a7a34bcd6ffb@rock-chips.com>
+Date: Tue, 16 Jul 2024 10:09:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next 1/4] rockchip: ringneck-px30: disable broken USB
- gadget
-To: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger
- <klaus.goger@cherry.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- =?UTF-8?B?546L5piO5oiQ?= <frank.wang@rock-chips.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20240614-ringneck-no-gadget-v1-0-d3bc6e5088de@cherry.de>
- <20240614-ringneck-no-gadget-v1-1-d3bc6e5088de@cherry.de>
+Subject: Re: [PATCH] rockchip: include cru_rk3588.h and define rockchip_cru
+ for RK3588
+To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu
+References: <20240618193044.22666-1-naoki@radxa.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240614-ringneck-no-gadget-v1-1-d3bc6e5088de@cherry.de>
+In-Reply-To: <20240618193044.22666-1-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ04dQlZIQ0lJSh1CQk4aTx5WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh8ZQ1YdHUlNQ0xNHklLHUNWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90b948d0c603a9kunme97b49003b8
+X-HM-Tid: 0a90b94d014c03a9kunmbb390900391
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MCI6Qhw5PzI*Mhg#Ck9ILhw2
- DypPCwxVSlVKTElKS0JOT0xOQklLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSklONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mz46Syo4ODI4CBgUNysRCU4Y
+ Fx8aCg5VSlVKTElKS0JOTE5LTklIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQkhDNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,82 +73,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 2024/6/14 19:04, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 2024/6/19 03:30, FUKAUMI Naoki wrote:
+> fix following error found by clang:
 >
-> USB gadget simply doesn't work right now on PX30. Tested on PX30 EVB and
-> PX30 Ringneck with Linux mainline and Rockchip 5.10 Linux as well as
-> U-Boot.
-Do you mean for both U-Boot and kernel, including mainline version and 
-rockchip version,
-and on both PX30 EVB and Ringneck board, all SW&HW have no USB gadget 
-working?
-So when you test this, does the maskrom mode works? because it sounds 
-like maybe
-the HOST PC is the one have issue at the moment.
-
+>    CC      arch/arm/mach-rockchip/cpu-info.o
+> arch/arm/mach-rockchip/cpu-info.c:23:13: error: incomplete definition of type 'struct rockchip_cru'
+>     23 |         switch (cru->glb_rst_st) {
+>        |                 ~~~^
+> ./arch/arm/include/asm/arch-rockchip/clock.h:181:8: note: forward declaration of 'struct rockchip_cru'
+>    181 | struct rockchip_cru;
+>        |        ^
+> 1 error generated.
+>
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
-
-  - Kever
-
->
-> We don't want to our users to assume that USB gadget is supported on Q7
-> USB P1 on Ringneck Haikou, so let's remove its support, which also
-> removes the ums CLI command, fastboot and Android image booting
-> support.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+- Kever
 > ---
->   configs/ringneck-px30_defconfig | 7 +------
->   1 file changed, 1 insertion(+), 6 deletions(-)
+>   arch/arm/include/asm/arch-rockchip/cru.h        | 2 ++
+>   arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 ++
+>   2 files changed, 4 insertions(+)
 >
-> diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-> index 23204794205..2ec5f72e47a 100644
-> --- a/configs/ringneck-px30_defconfig
-> +++ b/configs/ringneck-px30_defconfig
-> @@ -15,7 +15,6 @@ CONFIG_DEBUG_UART_BASE=0xFF030000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
-> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_SPL_LOAD_FIT=y
-> @@ -42,6 +41,7 @@ CONFIG_SPL_ATF=y
->   # CONFIG_CMD_ELF is not set
->   # CONFIG_CMD_LZMADEC is not set
->   # CONFIG_CMD_UNZIP is not set
-> +CONFIG_CMD_BIND=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_I2C=y
-> @@ -49,7 +49,6 @@ CONFIG_CMD_I2C=y
->   # CONFIG_CMD_LOADS is not set
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> -CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_PMIC=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -73,8 +72,6 @@ CONFIG_BUTTON=y
->   CONFIG_BUTTON_GPIO=y
->   CONFIG_CLK=y
->   CONFIG_SPL_CLK=y
-> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> -CONFIG_FASTBOOT_BUF_SIZE=0x04000000
->   CONFIG_GPIO_HOG=y
->   CONFIG_SPL_GPIO_HOG=y
->   CONFIG_ROCKCHIP_GPIO=y
-> @@ -112,8 +109,6 @@ CONFIG_DM_THERMAL=y
->   CONFIG_USB=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
-> -CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_DWC2_OTG=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_LZO=y
->
+> diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
+> index 9778790f34..c3259b8e7c 100644
+> --- a/arch/arm/include/asm/arch-rockchip/cru.h
+> +++ b/arch/arm/include/asm/arch-rockchip/cru.h
+> @@ -17,6 +17,8 @@
+>   # include <asm/arch-rockchip/cru_rk3399.h>
+>   #elif defined(CONFIG_ROCKCHIP_RK3568)
+>   #include <asm/arch-rockchip/cru_rk3568.h>
+> +#elif defined(CONFIG_ROCKCHIP_RK3588)
+> +#include <asm/arch-rockchip/cru_rk3588.h>
+>   #endif
+>   
+>   /* CRU_GLB_RST_ST */
+> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+> index a0e54d3965..dad484813f 100644
+> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+> @@ -92,6 +92,8 @@ struct rk3588_cru {
+>   	unsigned int pmuclkgate_con[9]; /* Address Offset: 0x0100 */
+>   };
+>   
+> +#define rockchip_cru rk3588_cru
+> +
+>   check_member(rk3588_cru, mode_con00, 0x280);
+>   check_member(rk3588_cru, pmuclksel_con[1], 0x30304);
+>   
