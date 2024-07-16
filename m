@@ -4,44 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70364C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 00:41:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56300C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 01:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C705D88918;
-	Tue, 16 Jul 2024 02:41:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B60788925;
+	Tue, 16 Jul 2024 03:56:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="RRd8IH6Q";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 382A28891C; Tue, 16 Jul 2024 02:41:35 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 374AA88907
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 02:41:33 +0200 (CEST)
+ id 24DA08891B; Tue, 16 Jul 2024 03:56:03 +0200 (CEST)
+Received: from mail-m127220.xmail.ntesmail.com
+ (mail-m127220.xmail.ntesmail.com [115.236.127.220])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A6748887A
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 03:55:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AE6C71063;
- Mon, 15 Jul 2024 17:41:57 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 71F163F762;
- Mon, 15 Jul 2024 17:41:31 -0700 (PDT)
-Date: Tue, 16 Jul 2024 01:39:21 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Michael Walle <mwalle@kernel.org>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] spi: sunxi: fix clock divider calculation for max
- frequency setting
-Message-ID: <20240716013921.786059dc@minigeek.lan>
-In-Reply-To: <20240712171457.3104804-3-mwalle@kernel.org>
-References: <20240712171457.3104804-1-mwalle@kernel.org>
- <20240712171457.3104804-3-mwalle@kernel.org>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=RRd8IH6Qs7y+Mo3AVy1ARetyeqq3WtfRnTzl8PMSlB95brbH05+MbwlszQ0Xii3IG+Xsd9Bditw6QE9l9ISDcMaF1j/fh+P1zdbPbrbylT+tCHTMqQ8GlMrgekcbGm8CLwYWOrKSk9rfNO0/YSbpiFXLM1aHrwwUm/Fo48iBlRE=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=wH+Gg/XJYrAVGI5/lretoPen/epy44vsCLOM9BdpdE0=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 46365900368;
+ Tue, 16 Jul 2024 09:55:35 +0800 (CST)
+Message-ID: <35a2369e-1020-4412-b86d-654d9b1acf4c@rock-chips.com>
+Date: Tue, 16 Jul 2024 09:55:34 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH next 2/4] rockchip: ringneck-px30: enable FIT verification
+ in SPL
+To: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger
+ <klaus.goger@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20240614-ringneck-no-gadget-v1-0-d3bc6e5088de@cherry.de>
+ <20240614-ringneck-no-gadget-v1-2-d3bc6e5088de@cherry.de>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240614-ringneck-no-gadget-v1-2-d3bc6e5088de@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhlOHlZMSkoaHkJPTR1CQ0NWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a90b940944b03a9kunm46365900368
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MhA6Pww4TjI5GBgUMDwVER8S
+ CQsKFBxVSlVKTElKS0JPQkhOQkxJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQ0xNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,72 +76,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 12 Jul 2024 19:14:57 +0200
-Michael Walle <mwalle@kernel.org> wrote:
 
-Hi,
+On 2024/6/14 19:04, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> This enables FIT verification in SPL for its payload (bl31, u-boot.itb,
+> ...). This makes PX30 Ringneck match what happens on other Theobroma
+> boards.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-> If the maximum frequency is requested, we still fall into the CDR2
-> handling. But there the minimal divider is 2. For the sun6i and sun8i we
-> can do better with the CDR1 setting where the minimal divider is 1:
->   SPI_CLK = MOD_CLK / 2 ^ cdr with cdr = 0
-> 
-> Thus, handle the div = 1 case specially.
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Yes, this is correct: we lose half the performance without this patch,
-in the (common) full clock speed case.
-However ....
-
-> 
-> While at it, correct the comment above the calculation.
-> 
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
+Thanks,
+- Kever
 > ---
->  drivers/spi/spi-sunxi.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/spi/spi-sunxi.c b/drivers/spi/spi-sunxi.c
-> index bfb402902b8..3048ab0ecf7 100644
-> --- a/drivers/spi/spi-sunxi.c
-> +++ b/drivers/spi/spi-sunxi.c
-> @@ -249,6 +249,8 @@ static void sun4i_spi_set_speed_mode(struct udevice *dev)
->  	 * We have two choices there. Either we can use the clock
->  	 * divide rate 1, which is calculated thanks to this formula:
->  	 * SPI_CLK = MOD_CLK / (2 ^ (cdr + 1))
-> +	 * Or for sun6i/sun8i variants:
-> +	 * SPI_CLK = MOD_CLK / (2 ^ cdr)
->  	 * Or we can use CDR2, which is calculated with the formula:
->  	 * SPI_CLK = MOD_CLK / (2 * (cdr + 1))
->  	 * Whether we use the former or the latter is set through the
-> @@ -256,12 +258,15 @@ static void sun4i_spi_set_speed_mode(struct udevice *dev)
->  	 *
->  	 * First try CDR2, and if we can't reach the expected
->  	 * frequency, fall back to CDR1.
-> +	 * There is one exception if the requested clock is the input
-> +	 * clock. In that case we always use CDR1 because we'll get a
-> +	 * 1:1: ration for sun6i/sun8i variants.
->  	 */
->  
->  	div = DIV_ROUND_UP(SUNXI_INPUT_CLOCK, priv->freq);
->  	reg = readl(SPI_REG(priv, SPI_CCR));
->  
-> -	if ((div / 2) <= (SUN4I_CLK_CTL_CDR2_MASK + 1)) {
-> +	if (div != 1 && ((div / 2) <= (SUN4I_CLK_CTL_CDR2_MASK + 1))) {
->  		div /= 2;
-
-This is still not fully correct, is it? If I ask for 10 MHz, the
-algorithm should select 8 MHz (24/3) or actually 6 MHz (24/4), but it
-chooses 12 MHz (24/2), which is too much.
-So I think this division here should be either:
-	div = (div + 1) / 2;
-or:
-	div = DIV_ROUND_UP(div, 2);
-
-Can someone confirm this?
-
-Cheers,
-Andre
-
->  		if (div > 0)
->  			div--;
-
+>   configs/ringneck-px30_defconfig | 3 +++
+>   1 file changed, 3 insertions(+)
+>
+> diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
+> index 2ec5f72e47a..e7594b7a67b 100644
+> --- a/configs/ringneck-px30_defconfig
+> +++ b/configs/ringneck-px30_defconfig
+> @@ -17,8 +17,10 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+>   CONFIG_DEBUG_UART=y
+>   CONFIG_FIT=y
+>   CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_BOOTSTD_FULL=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/px30-ringneck-haikou.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> @@ -111,6 +113,7 @@ CONFIG_USB_EHCI_HCD=y
+>   CONFIG_USB_EHCI_GENERIC=y
+>   CONFIG_SPL_TINY_MEMSET=y
+>   CONFIG_TPL_TINY_MEMSET=y
+> +# CONFIG_RSA is not set
+>   CONFIG_LZO=y
+>   CONFIG_ERRNO_STR=y
+>   # CONFIG_EFI_LOADER is not set
+>
