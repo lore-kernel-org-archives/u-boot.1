@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FCAC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 19:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9021BC3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 19:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5B87884B2;
-	Tue, 16 Jul 2024 21:07:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 164BD88633;
+	Tue, 16 Jul 2024 21:07:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZiI6pUUg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZEMJncrn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41C27884C6; Tue, 16 Jul 2024 21:07:19 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id EA65D88645; Tue, 16 Jul 2024 21:07:32 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6EDB88246
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 21:07:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE69088246
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 21:07:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-25e15406855so3371731fac.0
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 12:07:16 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-706dea920f3so31868a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 12:07:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721156835; x=1721761635; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721156849; x=1721761649; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0LHevZ9Tb4YN17UkN4Ifw5qKxfJ0DF38DRqOZ+/iob8=;
- b=ZiI6pUUgHgFHq1E+yB+n/PzXJvOoXwZPGO40/ewXUYTsjNVMGWjZQRCz8HKcgXHjU1
- uG5nhShr+BsB5plouj30jLQuWBN4CB/LGGVwREij+NGS1dC1tIeHW/eMbX1b8qfBjR8Y
- EN5f2Nf0eI1JQUEk+glsIYBUa4k/6y603ILx4=
+ bh=HeqH+7dDmrMbXjBSUip4gAOVmTXQKQnFikOk2tvAHkc=;
+ b=ZEMJncrnR53nu9NMbffusXXoBOxo1SuijzD5t4FawBmrXO50IZRjyDTmPA7MK7zUm/
+ ++7ctHjFWsF2euDs2jD1MPDuBiEWhTQo7toR4FkfST5tYUfeWIUnqOv7O5MfCI1mIVu0
+ jJogYVbL9Mz5gPs4B3Uv8pFGdW3rAB4yLXW0M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721156835; x=1721761635;
+ d=1e100.net; s=20230601; t=1721156849; x=1721761649;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0LHevZ9Tb4YN17UkN4Ifw5qKxfJ0DF38DRqOZ+/iob8=;
- b=G02XmzsKL9k0bya4ps8WtHo8PAOJ4+gHk9x5X7OVC7ikxGC0GuzH26RjG+FuZkVTJw
- QWlf2lMvx6p/I+3hlft2ybAh4fnP3+/x2TnKvOzp9hXVUXWCRHqjF72LEVj/lqLsVUtw
- N0qD0mYrsZ8Se6oCCLzLCe+ko3fIN2Zcnf5GUmOx02FE8d7ke/28wRXCmesMZawB6JYe
- FyvtRgJiV97T8yFxSl5Ezu0mPn6ecXLAoBWa0/i2k60XRik8bOWJgHFSomokUqBBT2UV
- EbKXp9Ten+yQSTF6YaDk/vpy8G7sso/Hs1fIv5kJllzQYlMnc5uFpmGF1Zd3ww/6+Ba3
- 8FeQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsmKieFtJOYoNnd0jbLwm9xw8LuzPjqGzvnqDKNl//uuSu+irKuWLd6JmXwnVBwtoqKeiJvKl+DanVix7pkLU/w9TlYQ==
-X-Gm-Message-State: AOJu0Yy7X57Dkg6Id/pBJKb+fkLdb3xPxjwWONnMapVeqpJmfXUae+oG
- l54yg6ShNZGwM1/Fi5PsuBfoYvR0LReXr0TmPcLHWrBKqGBYKBSd4TWjWjnonx0=
-X-Google-Smtp-Source: AGHT+IFS9w3MgWJt7fibviumD/ZY06ULpslB/jR/AqyiEtdDAjJoy/ZkZOSRMf8fsz24GwCj0dRxKQ==
-X-Received: by 2002:a05:6870:ac23:b0:25e:1976:37c0 with SMTP id
- 586e51a60fabf-260ba4cfb64mr2999702fac.6.1721156835413; 
- Tue, 16 Jul 2024 12:07:15 -0700 (PDT)
+ bh=HeqH+7dDmrMbXjBSUip4gAOVmTXQKQnFikOk2tvAHkc=;
+ b=pjYA/qirk68M/TQ5cjHA8b8U8CkW97bzuWLaXOMTS7UpCGBTDvpk48NNUazAHqdJ82
+ xybGN52FUHSrE3tNYXhMOBSe6FSnPPzXBlUSGEDjm89O5A/HDhjAYrR45fB1Mp4g65ew
+ JKSndYAr8bkgP7/EtjKaAy9UmATkfUWXPyM2qw8hBuwvOMK8lhFl2D0vpXbBleYwGK/c
+ RENLRnFAW7LHR9M/xzfZ4T2VcVCkY2Yk0aKNgdiUElxM5ngqCNcV8+n4j/DXxHe7z33x
+ 0cukeOQjaiBSsBvN3qhywol37McWs5eDNeIOrmWFCA82Uufv/fq5Q8PUNwtAh7BVwuJ0
+ zt4A==
+X-Gm-Message-State: AOJu0Yy20TpiWS0GtMhzYmPjppxbBOzDgERbm9UtUAtt8Dg/Uiza9nqX
+ KGb6yZ5kTR1q/S8IIf72RcqJLCIwRkDNsbaorDjDG6/UtEzDoGpCOOptFBo9u18=
+X-Google-Smtp-Source: AGHT+IEE0of60ENHwOYAjpeyCdKWyiuXzP5J1WghdGqybD3mh3LhxpZAcRVUHpaE/bHF3QU3PIU3OQ==
+X-Received: by 2002:a05:6830:1119:b0:703:66bb:5a1 with SMTP id
+ 46e09a7af769-708db33af35mr1088526a34.18.1721156849570; 
+ Tue, 16 Jul 2024 12:07:29 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-260751354fcsm1442550fac.13.2024.07.16.12.07.14
+ 46e09a7af769-708c0d01834sm1436914a34.51.2024.07.16.12.07.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 12:07:14 -0700 (PDT)
-Date: Tue, 16 Jul 2024 13:07:12 -0600
+ Tue, 16 Jul 2024 12:07:29 -0700 (PDT)
+Date: Tue, 16 Jul 2024 13:07:26 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] doc: enable ReadTheDocs addon management
-Message-ID: <20240716190712.GJ561963@bill-the-cat>
-References: <20240716190423.12063-1-heinrich.schuchardt@canonical.com>
+To: Daniel Schultz <d.schultz@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de, m.othacehe@gmail.com,
+ joe.hershberger@ni.com, w.egorov@phytec.de, t.remmet@phytec.de,
+ d-gole@ti.com, festevam@gmail.com, mkorpershoek@baylibre.com,
+ sjg@chromium.org
+Subject: Re: [PATCH 0/9] Generalize PHYTEC Overlay Handling
+Message-ID: <20240716190726.GK561963@bill-the-cat>
+References: <20240703054202.2812540-1-d.schultz@phytec.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IjMKLVy6k9ozZ2Os"
+ protocol="application/pgp-signature"; boundary="4DjSbLw9l6urkRwS"
 Content-Disposition: inline
-In-Reply-To: <20240716190423.12063-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240703054202.2812540-1-d.schultz@phytec.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,69 +93,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---IjMKLVy6k9ozZ2Os
+--4DjSbLw9l6urkRwS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 16, 2024 at 09:04:23PM +0200, Heinrich Schuchardt wrote:
+On Tue, Jul 02, 2024 at 10:41:53PM -0700, Daniel Schultz wrote:
 
-> Up to now ReadTheDocs has been injecting code when building on their
-> platform. This includes for instance improvements for the search function.
->=20
-> To maintain the current output ReadTheDocs requires setting html_baseurl
-> and html_context in conf.py.
->=20
-> See: https://about.readthedocs.com/blog/2024/07/addons-by-default/
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  doc/conf.py | 6 ++++++
->  1 file changed, 6 insertions(+)
->=20
-> diff --git a/doc/conf.py b/doc/conf.py
-> index c9138a5a5d4..e79134cc3d7 100644
-> --- a/doc/conf.py
-> +++ b/doc/conf.py
-> @@ -21,6 +21,12 @@ from subprocess import check_output
->  # Get Sphinx version
->  major, minor, patch =3D sphinx.version_info[:3]
-> =20
-> +# Set canonical URL from the Read the Docs Domain
-> +html_baseurl =3D os.environ.get("READTHEDOCS_CANONICAL_URL", "")
-> +
-> +# Tell Jinja2 templates the build is running on Read the Docs
-> +if os.environ.get("READTHEDOCS", "") =3D=3D "True":
-> +    html_context["READTHEDOCS"] =3D True
-> =20
->  # If extensions (or modules to document with autodoc) are in another dir=
-ectory,
->  # add these directories to sys.path here. If the directory is relative t=
-o the
+> The overlays are specified in the bootenv.txt file that is loaded into
+> the environment. Then these overlays get loaded and applied via a script.
+> These scripts for loading and applying devicetree overlays are identical
+> for many phytec boards.
+> Create a common overlays.env that can be included.
+> Add support for devicetree overlays to phycore-imx8mp and include the
+> overlays.env for phycore-imx93.
+> Rename existing environment variables according to bootstd doc.
+> Move MMC boot logic into a common k3_mmc.env file and include the new
+> overlays.env file as well.
 
-Thanks for taking care of this!
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Can you please rebase this to current master? Thanks.
 
 --=20
 Tom
 
---IjMKLVy6k9ozZ2Os
+--4DjSbLw9l6urkRwS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWxN0ACgkQFHw5/5Y0
-tyyTvgwAkypSKpJx9aW0/AfRtz5ESynqwfK762rZ5RYlM9wG95TLEz5S/YZ0M0Tz
-Fz2VejvqM7F512OiwIZUC3AaxSEGg4oGosXV1RvhEe8MxenyfSbfW0IyGGhwmduF
-i3t5GsiA07+Aw7N8RSwj25KR75GwxXbvaXLhrO2cne7HicLYm+HK4qFSLBJjWihn
-fIY5w2l+T++Jn/1z8R7DGPPQD0jGc4zDOYHKgvyjKHxX++nQMjb+7C8sGpZvL6Mn
-jVbbipGa070bCIfsuZ/uR8TMZdvyvfFSUbVne/t1J2VsBn8fqSbvqVHFjUPBhT9E
-k9thkf38G8g97Al9ZoIEwHoVcwLKR5STTeUbVD6iguNMlxZuyJkZyvhixhBWyMyW
-iFfJHF/sPBVLyGOOfHP+9Wlz44Q9ErK1XMJgneZOoZq6VPX7QIzhYf7a3JmGyjeI
-vHrBsynRkPJIFABa2qcrFJi5Gwslb+yMEibj1xC/g9+kfEfihPNhGU7h4ajzrArU
-/Uk5qnW0
-=BC8l
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWxO4ACgkQFHw5/5Y0
+tyxvGgv7BHyuQ8lBPRTlcWucBgWSqLEroOrMPOfv07GJ8/ATEk227mc5L+PoPT96
+qA4VhzmQ577CVkswI0EWSgYd9y2xs2Uu+O/rwnlIrSO7LXkjrHON9FJw9OcMDkcT
+u9jLNuG6p6d3VpNhnhpSdIeAlxkZ1oB33cF3FnDSANxWZFk3DTolL/vUZqt+Wdar
+rNQzVWr+qDoOz72q9OlwJmfeOWKPO9/sj07ilQ9k4426mzx44Fxs+t+KlmCSuJdh
+6O67VKQinP6J3Cx4wO5l1ac88+XltnH/67biqIWVtByAOgKGMIK+z2EYQhO+bBJL
+ib+2B5D0pV0c9+1Vio4DfgxDwAq6Ev3d0GHdeP9U1ZUkhBnKH8CP6yD+wUJR1fpO
+tXNUcgN/gHNFVPklCzkrv7E0z1K/pcjUXmIATf2UopkBXJzpUh0WnLD3RdlDI3/4
+zjxhkmdplhwyQ1GT88TcQbeYg0zM3L/ZYchTMmr2qgGPmJWcg4sgeGbGNeRSH4ix
+egLk0WLu
+=S17z
 -----END PGP SIGNATURE-----
 
---IjMKLVy6k9ozZ2Os--
+--4DjSbLw9l6urkRwS--
