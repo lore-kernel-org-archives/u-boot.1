@@ -4,99 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29324C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 22:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0733DC3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 22:04:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77216889E0;
-	Wed, 17 Jul 2024 00:04:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C3CC3841BC;
+	Wed, 17 Jul 2024 00:04:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=johnthomson.fastmail.com.au
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aODjLcJG";
+	dkim=pass (2048-bit key; unprotected) header.d=fastmail.com.au header.i=@fastmail.com.au header.b="RksCo7Cl";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="VDOwELi5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F392588440; Tue, 16 Jul 2024 21:09:01 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2512788739; Tue, 16 Jul 2024 22:32:22 +0200 (CEST)
+Received: from fout4-smtp.messagingengine.com (fout4-smtp.messagingengine.com
+ [103.168.172.147])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8241D88706
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 21:08:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5c661e75ff6so81068eaf.2
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 12:08:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721156937; x=1721761737; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HqUuDjHfeH48QVi0gxfq0lp01BURHFnGi/Bl0YzJ7aY=;
- b=aODjLcJGmtCnONhUM691g+30yBYKiT/5lomXLpIIcBYyhSaY0KrIXyPF0jRepjdhR5
- 4KPKlhNnwQshMDpaH+ZFR/14l+m9mnZZvAw0WWfqG3HyvWWoyztko24cBnP+Qfa3Mw4p
- zwFe+iC+PYPVG/NorsIPBciwekiy/MX9lYy1Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721156937; x=1721761737;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HqUuDjHfeH48QVi0gxfq0lp01BURHFnGi/Bl0YzJ7aY=;
- b=otaCi0Xk7d9ZU4N2B85LZnCRhy8p0ACIFGJLvYj6sgohrU6OCZ3PphkknC2clEpFd1
- g4PxwNtmwgMJg/mMntoY2MrpOrgTqdZaGFMIwhHXQaAH7Jz0ON09qs3aWukAC9L8Dm4b
- cTH2cSprwICDqBLOf4xGaBIAbMwJqSz9Gh88Lcja53s6arTHL0IhEIrd/VN39cCdzBko
- YTe66V23O4Yk7DVi1ZUNtu8FYWXesQZI91gkoZWVHPGtE/JWDICrSg68xC/asBl90SVX
- mJuZRhbTv6Uhj41QCvFH07X45iHhWMWIRIuWslcVwcCqz3kR9ecshub9P2vZcR7iwOgG
- ZD9w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWzWdLclOGMwY1H3wH2+WI1sHSm5rTZ2DfNxpofZHCJMI/DgI+k09zYRAXifxakG5OYxRyvefqkufQrPxbTQ+ZoTNs1yg==
-X-Gm-Message-State: AOJu0YzVcmP6mib2IuRrK45aGYlpgmbdtO1svlo2vRitpCnCZAgeL3YC
- nApRxAIBnWSUJKejmxsIbgXub68d3PThBxe/rcRLYHWcCevabdOjaPh9RIUR150=
-X-Google-Smtp-Source: AGHT+IE+wPyhbaJzKrHrIO9ik8TlSzqXBxOVBbQxfwiD3dUS9P3rvnH5OyqcscwGii0hziA7AScJ/Q==
-X-Received: by 2002:a05:6820:c83:b0:5c4:27f0:ae with SMTP id
- 006d021491bc7-5d3cbce073bmr530885eaf.1.1721156937223; 
- Tue, 16 Jul 2024 12:08:57 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d3c9ec56b8sm38164eaf.10.2024.07.16.12.08.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 12:08:56 -0700 (PDT)
-Date: Tue, 16 Jul 2024 13:08:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, michal.simek@amd.com, seanga2@gmail.com,
- sheng.tan@9elements.com, akashi.tkhro@gmail.com,
- abdellatif.elkhlifi@arm.com, agendin@matrox.com,
- linux.amoon@gmail.com, andre.przywara@arm.com, afd@ti.com,
- artur@conclusive.pl, bmeng.cn@gmail.com, bb@ti.com,
- caleb.connolly@linaro.org, chanho61.park@samsung.com,
- devarsht@ti.com, eajames@linux.ibm.com,
- etienne.carriere@foss.st.com, francis.laniel@amarulasolutions.com,
- ilias.apalodimas@linaro.org, vanbaren@cideas.com,
- mr.bossman075@gmail.com, jonas@kwiboo.se, jpewhacker@gmail.com,
- kever.yang@rock-chips.com, leon@georgemail.eu,
- lukas.funke@weidmueller.com, abbaraju.manojsai@amarulasolutions.com,
- marek.vasut+renesas@mailbox.org, marex@denx.de,
- mkorpershoek@baylibre.com, n-jain1@ti.com, nm@ti.com,
- oleksandr.suvorov@foundries.io, pbrobinson@gmail.com,
- rasmus.villemoes@prevas.dk, raymond.mao@linaro.org,
- semen.protsenko@linaro.org, samuel@sholland.org,
- yangshiji66@outlook.com, sughosh.ganu@linaro.org,
- sumit.garg@linaro.org, sunil@amarulasolutions.com,
- tom@tom-fitzhenry.me.uk, troykiskyboundary@gmail.com
-Subject: Re: [PATCH v2 00/21] Universal Payload initial series
-Message-ID: <20240716190852.GL561963@bill-the-cat>
-References: <20240713070055.2172883-1-sjg@chromium.org>
- <87a5iliubh.fsf@bloch.sibelius.xs4all.nl>
- <09FB197A-06C8-4162-AAB6-3823BA2840B3@gmx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 662E088126
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 22:32:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=johnthomson.fastmail.com.au
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=lists@johnthomson.fastmail.com.au
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 4490013811CE;
+ Tue, 16 Jul 2024 16:32:17 -0400 (EDT)
+Received: from imap46 ([10.202.2.96])
+ by compute2.internal (MEProxy); Tue, 16 Jul 2024 16:32:17 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.com.au;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
+ t=1721161937; x=1721248337; bh=anvRylOc9xXD1gDfRBOCQ5p/bFINRvdN
+ QZCQBs8lZ2w=; b=RksCo7ClkbIUcrxmnVkptLjJNr07jzkgZtsZnIAvWVj6CA54
+ Fl921aI+NuQvzDRsSC/7t0yAH4o36fUD4OjzNAanNGoPTXshHxSaqXHTOqr7MLXp
+ cRtqMG0nqO6H9BrpRrEUJ2B1G3aWIRWYxxZ7rm/AiKBa9+HYSs7NmVwtjEfOCWWt
+ w+bjEMFBnZVUSehfUBtI2Hw7FtSX8awV4M0Q59SvIlhsAp58HylnkXLM6kd1VIre
+ jiGFK83RJNQzpAsN6pRo12eICBrNB94HtBs/Npnb9ofwIxF4B1i/+xMWNyIeGXNC
+ 9pRzKChDjwSKXCtz2h5fFVL5oNxiV0sODCecpA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721161937; x=
+ 1721248337; bh=anvRylOc9xXD1gDfRBOCQ5p/bFINRvdNQZCQBs8lZ2w=; b=V
+ DOwELi5tUIzED6NWnzwwU7rPqg38opcICmb+Y/znTkZ7z22ExF9zivWmsupap+LT
+ xD/vxf7RqJAFgcbwUNShR+eRF24xjMCjhwh3yqouxrkXM/h60OjLdYaq+8CIg5n2
+ Br+Duhz7OtshlufQwa3jmnSUfEorILjEw8mPouZjhLCYeyjYg2Yhm4XkdoSldc/c
+ qEvxOlvcMUeQzMeBANGA+69mpLSmNihrbYGXfKDtvMDRYg+YED5y5/4sLYorzpfS
+ Pc9+Qpypxd4QXKvsKfLYGtgc4NrZ8A3/HvY0z5XXtzu9je/Ovgjo9V6gROY+R5Df
+ OrlHNrDWVa59hAIV3hmLw==
+X-ME-Sender: <xms:z9iWZolz84gy7kbaNKZAMv3vbdG-B0TaKe7YMDwQONQbAWUjrNjSzQ>
+ <xme:z9iWZn1jt6E8UgGOApcFZR6-hChpbD4KC9Zx6nhJN5CtrFZ4nZt3ddl7XFnJ36YCx
+ T7MiN88WKo1JU2OKA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeggddugeelucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ohhhnhcuvfhhohhmshhonhdfuceolhhishhtshesjhhohhhnthhhohhmshhonhdrfhgrsh
+ htmhgrihhlrdgtohhmrdgruheqnecuggftrfgrthhtvghrnhepheffvdeufeegkefgtedu
+ ieejgedtudefueeugfdtvdeuheefkeegteejvefgteefnecuffhomhgrihhnpehkvghrnh
+ gvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhr
+ ohhmpehlihhsthhssehjohhhnhhthhhomhhsohhnrdhfrghsthhmrghilhdrtghomhdrrg
+ hu
+X-ME-Proxy: <xmx:z9iWZmoCFLN_4FZ3dcv--ijGLTUDQaZLMTwZWLkZu0WFapS1k-_y4Q>
+ <xmx:z9iWZkmvS6TXdyeVP8UzPdnjBEd6Mv17QfR2ifXBJTLXsMAqpAMmQA>
+ <xmx:z9iWZm38RBV7epcYQz22lM8ix5P_c6RebNqd-NUP7-QTOr4XQF86Tg>
+ <xmx:z9iWZrsEjMTYEHq4YLqGlCLyxXERuWLnanbWdSLPogbvw5Himnk_XQ>
+ <xmx:0diWZp1iAOnepBA37gGgbCvJ2Jcognf_Fso9x8LYv5WCp0XQcFSdPzAy>
+Feedback-ID: ia7894244:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 9E5C32A20077; Tue, 16 Jul 2024 16:32:15 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-568-g843fbadbe-fm-20240701.003-g843fbadb
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MbQ7wcNsZ6Kczf/Z"
-Content-Disposition: inline
-In-Reply-To: <09FB197A-06C8-4162-AAB6-3823BA2840B3@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Message-Id: <c8135f59-0138-48a7-baf8-c910a458f5b1@app.fastmail.com>
+In-Reply-To: <20240715135434.24992-2-zajec5@gmail.com>
+References: <20240715135434.24992-1-zajec5@gmail.com>
+ <20240715135434.24992-2-zajec5@gmail.com>
+Date: Tue, 16 Jul 2024 20:31:55 +0000
+From: "John Thomson" <lists@johnthomson.fastmail.com.au>
+To: =?UTF-8?Q?Rafa=C5=82_Mi=C5=82ecki?= <zajec5@gmail.com>,
+ "Srinivas Kandagatla" <srinivas.kandagatla@linaro.org>,
+ "Rob Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+ "Conor Dooley" <conor+dt@kernel.org>
+Cc: "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Michael Walle" <michael@walle.cc>,
+ "Miquel Raynal" <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ u-boot@lists.denx.de, linux-kernel@vger.kernel.org,
+ =?UTF-8?Q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>
+Subject: Re: [PATCH 2/2] nvmem: layouts: add U-Boot env layout
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Wed, 17 Jul 2024 00:04:11 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,70 +116,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 15 Jul 2024, at 13:54, Rafa=C5=82 Mi=C5=82ecki wrote:
+> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+>
+> diff --git a/drivers/nvmem/layouts/u-boot-env.c=20
+> b/drivers/nvmem/layouts/u-boot-env.c
+> new file mode 100644
+> index 000000000000..5217dc4a52f8
+> --- /dev/null
+> +++ b/drivers/nvmem/layouts/u-boot-env.c
+> @@ -0,0 +1,203 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2022 - 2023 Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.p=
+l>
+> + */
+> +
+> +#include <linux/crc32.h>
+> +#include <linux/etherdevice.h>
+> +#include <linux/export.h>
+> +#include <linux/if_ether.h>
+> +#include <linux/nvmem-consumer.h>
+> +#include <linux/nvmem-provider.h>
+> +#include <linux/of.h>
+> +#include <linux/slab.h>
+> +
+> +#include "u-boot-env.h"
+> +
+> +struct u_boot_env_image_single {
+> +	__le32 crc32;
+> +	uint8_t data[];
+> +} __packed;
+> +
+> +struct u_boot_env_image_redundant {
+> +	__le32 crc32;
+> +	u8 mark;
+> +	uint8_t data[];
+> +} __packed;
+> +
+> +struct u_boot_env_image_broadcom {
+> +	__le32 magic;
+> +	__le32 len;
+> +	__le32 crc32;
+> +	DECLARE_FLEX_ARRAY(uint8_t, data);
+> +} __packed;
+> +
+> +static int u_boot_env_read_post_process_ethaddr(void *context, const=20
+> char *id, int index,
+> +						unsigned int offset, void *buf, size_t bytes)
+> +{
+> +	u8 mac[ETH_ALEN];
+> +
+> +	if (bytes !=3D 3 * ETH_ALEN - 1)
+> +		return -EINVAL;
+> +
+> +	if (!mac_pton(buf, mac))
+> +		return -EINVAL;
+> +
+> +	if (index)
+> +		eth_addr_add(mac, index);
+> +
+> +	ether_addr_copy(buf, mac);
+> +
+> +	return 0;
+> +}
+> +
+> +static int u_boot_env_parse_cells(struct device *dev, struct=20
+> nvmem_device *nvmem, uint8_t *buf,
+> +				  size_t data_offset, size_t data_len)
+> +{
+> +	char *data =3D buf + data_offset;
+> +	char *var, *value, *eq;
+> +
+> +	for (var =3D data;
+> +	     var < data + data_len && *var;
+> +	     var =3D value + strlen(value) + 1) {
+> +		struct nvmem_cell_info info =3D {};
+> +
+> +		eq =3D strchr(var, '=3D');
+> +		if (!eq)
+> +			break;
+> +		*eq =3D '\0';
+> +		value =3D eq + 1;
+> +
+> +		info.name =3D devm_kstrdup(dev, var, GFP_KERNEL);
+> +		if (!info.name)
+> +			return -ENOMEM;
+> +		info.offset =3D data_offset + value - data;
+> +		info.bytes =3D strlen(value);
+> +		info.np =3D of_get_child_by_name(dev->of_node, info.name);
+> +		if (!strcmp(var, "ethaddr")) {
+> +			info.raw_len =3D strlen(value);
+> +			info.bytes =3D ETH_ALEN;
+> +			info.read_post_process =3D u_boot_env_read_post_process_ethaddr;
+> +		}
+> +
+> +		nvmem_add_one_cell(nvmem, &info);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
+> +		     enum u_boot_env_format format)
+> +{
+> +	size_t crc32_data_offset;
+> +	size_t crc32_data_len;
+> +	size_t crc32_offset;
+> +	__le32 *crc32_addr;
+> +	size_t data_offset;
+> +	size_t data_len;
+> +	size_t dev_size;
+> +	uint32_t crc32;
+> +	uint32_t calc;
+> +	uint8_t *buf;
+> +	int bytes;
+> +	int err;
+> +
+> +	dev_size =3D nvmem_dev_size(nvmem);
+> +
+> +	buf =3D kzalloc(dev_size, GFP_KERNEL);
+> +	if (!buf) {
+> +		err =3D -ENOMEM;
+> +		goto err_out;
+> +	}
+> +
+> +	bytes =3D nvmem_device_read(nvmem, 0, dev_size, buf);
+> +	if (bytes < 0) {
+> +		err =3D bytes;
+> +		goto err_kfree;
+> +	} else if (bytes !=3D dev_size) {
+> +		err =3D -EIO;
+> +		goto err_kfree;
+> +	}
+> +
+> +	switch (format) {
+> +	case U_BOOT_FORMAT_SINGLE:
+> +		crc32_offset =3D offsetof(struct u_boot_env_image_single, crc32);
+> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_single, data=
+);
+> +		data_offset =3D offsetof(struct u_boot_env_image_single, data);
+> +		break;
+> +	case U_BOOT_FORMAT_REDUNDANT:
+> +		crc32_offset =3D offsetof(struct u_boot_env_image_redundant, crc32);
+> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_redundant,=20
+> data);
+> +		data_offset =3D offsetof(struct u_boot_env_image_redundant, data);
+> +		break;
+> +	case U_BOOT_FORMAT_BROADCOM:
+> +		crc32_offset =3D offsetof(struct u_boot_env_image_broadcom, crc32);
+> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_broadcom, da=
+ta);
+> +		data_offset =3D offsetof(struct u_boot_env_image_broadcom, data);
+> +		break;
+> +	}
 
---MbQ7wcNsZ6Kczf/Z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Could we error somewhere if bytes or dev_size is < crc32_data_offset
+or alternatively if bytes is zero (above, beside bytes !=3D dev_size)?
+Detailed here: https://lore.kernel.org/lkml/20240612031510.14414-1-git@j=
+ohnthomson.fastmail.com.au/
+mtd partitioning can deliver a zero length partition (if misconfigured: =
+Example u-boot partition starts beyond hardware NOR length).
 
-On Sat, Jul 13, 2024 at 09:40:17PM +0200, Heinrich Schuchardt wrote:
->=20
->=20
-> Am 13. Juli 2024 10:12:50 MESZ schrieb Mark Kettenis <mark.kettenis@xs4al=
-l.nl>:
-> >> From: Simon Glass <sjg@chromium.org>
-> >> Date: Sat, 13 Jul 2024 08:00:34 +0100
-> >>=20
-> >> Universal Payload (UPL) is an Industry Standard for firmware
-> >> components[1].
-> >
-> >I think you have some trouble understanding the concept of industry
-> >standard ;).  I guess you want this to become an industry standard.
-> >Firmly https://xkcd.com/927/ territory if you ask me.
-> >
-> >> UPL is designed to improve interoperability within the
-> >> firmware industry, allowing mixing and matching of projects with less
-> >> friction and fewer project-specific implementations. UPL is
-> >> cross-platform, supporting ARM, x86 and RISC-V initially.
-> >>=20
-> >> This series provides some initial support for this, targeting 0.9.1 and
-> >> sandbox only.
-> >>=20
-> >> Features still to come include:
-> >> - Support for architectures
-> >> - FIT validation
-> >> - Handoff validation
-> >> - Interoperability tests
-> >>=20
-> >> This series is available at dm/uplb-working and requires the alist
-> >> series at dm/alist-working[2]
->=20
-> Why is this series needed?
+> +	crc32_addr =3D (__le32 *)(buf + crc32_offset);
+> +	crc32 =3D le32_to_cpu(*crc32_addr);
+> +	crc32_data_len =3D dev_size - crc32_data_offset;
+> +	data_len =3D dev_size - data_offset;
+> +
+> +	calc =3D crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
+> +	if (calc !=3D crc32) {
+> +		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected:=20
+> 0x%08x)\n", calc, crc32);
+> +		err =3D -EINVAL;
+> +		goto err_kfree;
+> +	}
+> +
+> +	buf[dev_size - 1] =3D '\0';
+> +	err =3D u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_le=
+n);
+> +
+> +err_kfree:
+> +	kfree(buf);
+> +err_out:
+> +	return err;
+> +}
+> +EXPORT_SYMBOL_GPL(u_boot_env_parse);
+> +
+> +static int u_boot_env_add_cells(struct nvmem_layout *layout)
+> +{
+> +	struct device *dev =3D &layout->dev;
+> +	enum u_boot_env_format format;
+> +
+> +	format =3D (uintptr_t)device_get_match_data(dev);
+> +
+> +	return u_boot_env_parse(dev, layout->nvmem, format);
+> +}
+> +
+> +static int u_boot_env_probe(struct nvmem_layout *layout)
+> +{
+> +	layout->add_cells =3D u_boot_env_add_cells;
+> +
+> +	return nvmem_layout_register(layout);
+> +}
+> +
+> +static void u_boot_env_remove(struct nvmem_layout *layout)
+> +{
+> +	nvmem_layout_unregister(layout);
+> +}
+> +
+> +static const struct of_device_id u_boot_env_of_match_table[] =3D {
+> +	{ .compatible =3D "u-boot,env", .data =3D (void *)U_BOOT_FORMAT_SING=
+LE, },
+> +	{ .compatible =3D "u-boot,env-redundant-bool", .data =3D (void=20
+> *)U_BOOT_FORMAT_REDUNDANT, },
+> +	{ .compatible =3D "u-boot,env-redundant-count", .data =3D (void=20
+> *)U_BOOT_FORMAT_REDUNDANT, },
+> +	{ .compatible =3D "brcm,env", .data =3D (void *)U_BOOT_FORMAT_BROADC=
+OM, },
+> +	{},
+> +};
+> +
+> +static struct nvmem_layout_driver u_boot_env_layout =3D {
+> +	.driver =3D {
+> +		.name =3D "u-boot-env-layout",
+> +		.of_match_table =3D u_boot_env_of_match_table,
+> +	},
+> +	.probe =3D u_boot_env_probe,
+> +	.remove =3D u_boot_env_remove,
+> +};
+> +module_nvmem_layout_driver(u_boot_env_layout);
+> +
+> +MODULE_AUTHOR("Rafa=C5=82 Mi=C5=82ecki");
+> +MODULE_LICENSE("GPL");
+> +MODULE_DEVICE_TABLE(of, u_boot_env_of_match_table);
 
-Because UPL is a standard, supported by other projects, which requires
-more than Just Nothing Else on top of what we do today. Please do
-provide constructive feedback on the changes themselves, but bringing in
-UPL support proper is something we should (and will) do. Thanks!
 
 --=20
-Tom
-
---MbQ7wcNsZ6Kczf/Z
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWxUQACgkQFHw5/5Y0
-tyyuDgv7BMQUFlo+Oa50qO8y8xQA0fnFpBbtfYMBAnFtJJM1In9SPl6tNM5JrJjf
-L771jgm8PTcBMKKlQpC+XGUAfns7YteN70mkzB5MB5KQwC7v/ygWms8ULJ+ndP+Z
-eKDrgOy+5dW6M34gI4ViMm4504/5SUAN09rilxvcDCt4gRBPBeZE+GbIEmya6Pne
-p5iUMBeMliAcW2UXoddB9lkt5HSC91ZUybYDa1ALQgBJ4HtLjr2ub8Jhg8/NanYV
-ScELQx5AbMjI8QhO52XXf3PaSNF8M9yfJiOhbuQYBlOjx7zk2hABxWAaR3icy7lF
-O62yFc9gljeuyiTf+4CUj6MrjkGkA5DPycUlMJvvtkwG9WnHp3DKiVCtco9YfwVs
-0etlRfLfgZO+fYw1KsnUBrSCY3k483LFFaW3hRGHLLovmvqAgXMAf19IuJgPYFal
-48bxamPwGR0ZYrRNM38Aj6fCdnC+O3ju1FSo65Q3b9CL+QVxFef800QsFaFWKnrc
-4cMDp0cW
-=Yqan
------END PGP SIGNATURE-----
-
---MbQ7wcNsZ6Kczf/Z--
+  John Thomson
