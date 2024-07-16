@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F986C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 00:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70364C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 00:41:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FE3E87E13;
-	Tue, 16 Jul 2024 02:34:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C705D88918;
+	Tue, 16 Jul 2024 02:41:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 860B688633; Tue, 16 Jul 2024 02:34:57 +0200 (CEST)
+ id 382A28891C; Tue, 16 Jul 2024 02:41:35 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6082587D14
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 02:34:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 374AA88907
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 02:41:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F31061063;
- Mon, 15 Jul 2024 17:35:19 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AE6C71063;
+ Mon, 15 Jul 2024 17:41:57 -0700 (PDT)
 Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 878E83F762;
- Mon, 15 Jul 2024 17:34:53 -0700 (PDT)
-Date: Tue, 16 Jul 2024 01:32:43 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 71F163F762;
+ Mon, 15 Jul 2024 17:41:31 -0700 (PDT)
+Date: Tue, 16 Jul 2024 01:39:21 +0100
 From: Andre Przywara <andre.przywara@arm.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Michael Walle <mwalle@kernel.org>, Jagan Teki
- <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] spi: sunxi: Improve the loading speed
-Message-ID: <20240716013243.13ce69ce@minigeek.lan>
-In-Reply-To: <CALeDE9P05YN092mYQ15Kha+1sd6Yp97qkk-ODMyXASB2Ae_SVQ@mail.gmail.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] spi: sunxi: fix clock divider calculation for max
+ frequency setting
+Message-ID: <20240716013921.786059dc@minigeek.lan>
+In-Reply-To: <20240712171457.3104804-3-mwalle@kernel.org>
 References: <20240712171457.3104804-1-mwalle@kernel.org>
- <CALeDE9P05YN092mYQ15Kha+1sd6Yp97qkk-ODMyXASB2Ae_SVQ@mail.gmail.com>
+ <20240712171457.3104804-3-mwalle@kernel.org>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -58,37 +58,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 12 Jul 2024 18:28:15 +0100
-Peter Robinson <pbrobinson@gmail.com> wrote:
+On Fri, 12 Jul 2024 19:14:57 +0200
+Michael Walle <mwalle@kernel.org> wrote:
 
-> On Fri, 12 Jul 2024 at 18:25, Michael Walle <mwalle@kernel.org> wrote:
-> >
-> > Right now, the maximal transfer speed from an SPI flash on a V3s is
-> > about 240kb/s. That is pretty slow. It turns out, that due to an
-> > error u-boot is setting the maximum frequency to 1MHz. By fixing
-> > that another bug is unearthed: one cannot set a clock divider of 1:1
-> > due to the handling between CDR1 and CDR2 handling. By fixing that
-> > I achieved loading speeds of about 1.5MB/s.  
+Hi,
+
+> If the maximum frequency is requested, we still fall into the CDR2
+> handling. But there the minimal divider is 2. For the sun6i and sun8i we
+> can do better with the CDR1 setting where the minimal divider is 1:
+>   SPI_CLK = MOD_CLK / 2 ^ cdr with cdr = 0
 > 
-> Minor nit, should the clock fix go first so there's not a regression
-> if someone needs to do a bisect on the first commit?
+> Thus, handle the div = 1 case specially.
 
-I am not sure this really matters here, since this patch just lifts the
-frequency from 12 MHz to 24 MHz, while patch 1/2 lifts it from 1 MHz to
-12 MHz. So there is no regression as such.
+Yes, this is correct: we lose half the performance without this patch,
+in the (common) full clock speed case.
+However ....
+
+> 
+> While at it, correct the comment above the calculation.
+> 
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
+> ---
+>  drivers/spi/spi-sunxi.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/spi/spi-sunxi.c b/drivers/spi/spi-sunxi.c
+> index bfb402902b8..3048ab0ecf7 100644
+> --- a/drivers/spi/spi-sunxi.c
+> +++ b/drivers/spi/spi-sunxi.c
+> @@ -249,6 +249,8 @@ static void sun4i_spi_set_speed_mode(struct udevice *dev)
+>  	 * We have two choices there. Either we can use the clock
+>  	 * divide rate 1, which is calculated thanks to this formula:
+>  	 * SPI_CLK = MOD_CLK / (2 ^ (cdr + 1))
+> +	 * Or for sun6i/sun8i variants:
+> +	 * SPI_CLK = MOD_CLK / (2 ^ cdr)
+>  	 * Or we can use CDR2, which is calculated with the formula:
+>  	 * SPI_CLK = MOD_CLK / (2 * (cdr + 1))
+>  	 * Whether we use the former or the latter is set through the
+> @@ -256,12 +258,15 @@ static void sun4i_spi_set_speed_mode(struct udevice *dev)
+>  	 *
+>  	 * First try CDR2, and if we can't reach the expected
+>  	 * frequency, fall back to CDR1.
+> +	 * There is one exception if the requested clock is the input
+> +	 * clock. In that case we always use CDR1 because we'll get a
+> +	 * 1:1: ration for sun6i/sun8i variants.
+>  	 */
+>  
+>  	div = DIV_ROUND_UP(SUNXI_INPUT_CLOCK, priv->freq);
+>  	reg = readl(SPI_REG(priv, SPI_CCR));
+>  
+> -	if ((div / 2) <= (SUN4I_CLK_CTL_CDR2_MASK + 1)) {
+> +	if (div != 1 && ((div / 2) <= (SUN4I_CLK_CTL_CDR2_MASK + 1))) {
+>  		div /= 2;
+
+This is still not fully correct, is it? If I ask for 10 MHz, the
+algorithm should select 8 MHz (24/3) or actually 6 MHz (24/4), but it
+chooses 12 MHz (24/2), which is too much.
+So I think this division here should be either:
+	div = (div + 1) / 2;
+or:
+	div = DIV_ROUND_UP(div, 2);
+
+Can someone confirm this?
 
 Cheers,
 Andre
 
-> 
-> > Michael Walle (2):
-> >   spi: sunxi: drop max_hz handling
-> >   spi: sunxi: fix clock divider calculation for max frequency setting
-> >
-> >  drivers/spi/spi-sunxi.c | 28 +++++++++++++++-------------
-> >  1 file changed, 15 insertions(+), 13 deletions(-)
-> >
-> > --
-> > 2.39.2
-> >  
+>  		if (div > 0)
+>  			div--;
 
