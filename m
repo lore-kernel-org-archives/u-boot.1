@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3866C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFBEEC3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9012C88977;
+	by phobos.denx.de (Postfix) with ESMTP id EE3B888967;
 	Tue, 16 Jul 2024 09:04:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cqn1gVB4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iFMcCxH2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF6D18896A; Tue, 16 Jul 2024 09:04:29 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 752C88896A; Tue, 16 Jul 2024 09:04:30 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEED88875B
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94FB788865
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4277a5ed48bso37604645e9.2
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:27 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-368255de9ebso226406f8f.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721113467; x=1721718267; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aL2KxptQixbrjXVsMrJ6VhxzDS9v9q++L8Ot8MmgvTA=;
- b=Cqn1gVB4dWBjaUsoptlxKT535/1y4geBXmSLxtNBAgxMPmox/pjbNhFMuiR84D4lH8
- 1ld4RXQBKwxpVDbbWNKuJG3cPIccrUvUQg3PPUsAp7DCFFENBkGjtTjGqJxkFTWooHTl
- 0l6nIGku5KJdYT56JpVl1XLoIcVx84ZZzoKCY=
+ d=chromium.org; s=google; t=1721113468; x=1721718268; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l7Ec0yVOybre4Ge8swbGUjOd4w0BWmN+imKPhpvgVtY=;
+ b=iFMcCxH2VN4l2L6M8zMsr5N6wpzTHjTbTS5ifZyUnZ1jwxIMu8gPRLGVSmS1aKMqSz
+ kqRCxwy45WCsgGxxiLqeTQZO/WPD7Zj6OeJzTy1NQCSyR54MXW3igD0SRHgbgV2DGs3d
+ VhS26+M+89w3B3uJXiskuQVv/4L9L7Qhc467g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721113467; x=1721718267;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aL2KxptQixbrjXVsMrJ6VhxzDS9v9q++L8Ot8MmgvTA=;
- b=VfmBWwcHPe2tQ8zDcH5pxx/RGPrO9V33eVeCtPZph8QS5VUoZjs0VfmZcx/3/d9xS8
- ZgFVvgDa/OEN847KfMLq+gH0aQuZ6q9rzwSVJOZ2W1xrtVB4KrG6ONy6iQ0wOwC/cLVN
- LPdQ3a0Ao5Fzo1JewDgNtTY4/hn+Z5U+zpYvMo9F/W3w+Nv6yIEH6hcHFkYUq2t9hLVA
- nfptlYZwDJcUtfC604H4aCVCDg9bxIw01hL88Dh6QtAbXZEVQRlCOExgtxmTetkesEGb
- 1uHrCXAMW+c1bTMAOx2DiCPgHHqp1hsACXk1X1WU07grj9eWHKzNYNAftT3s7yhA4a1Y
- swmw==
-X-Gm-Message-State: AOJu0YxCu9TfKFBtrTQ8o33fSit2Hfnhx1tzzQnRZnb2CdgkEejL1dWW
- XV09pv833vaWza7rfxYyOPpdqitnyOAIjIZjcmU6P9JGc+1TMF2I869LCiMDJkzl9XZfJvOWVmI
+ d=1e100.net; s=20230601; t=1721113468; x=1721718268;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l7Ec0yVOybre4Ge8swbGUjOd4w0BWmN+imKPhpvgVtY=;
+ b=sP3DmE8MgcZV9pWkNtsSxI7d8yC6O5tj/eeKPEXJC7xbUSkkesEkteDnjHLMEuKhRi
+ nWs6VacXv0eDSL+5ygQqhElvGK96KE26Ev9jkzwa59ZAXoaivQILnsLKnVeESs8KdOgZ
+ ZfNtfdwO0t2Y3y56xkfLB8szi37Y/oQqk4ZJVQRQOZbRcFTmU3cHrBG/tyx6VEkcG3pI
+ T/Yd2o5AuICnR2FiFDthha35oYnSh0ADNueXp0VskmVbhEqD3gXJIzZF3PsfXneDr/AQ
+ 04Cd5aA8QvoSkRVbVCaddFqMk+djTt688xxUO4dtZybjcXiUFROtfQGfmneQrlxfSkrb
+ NCsg==
+X-Gm-Message-State: AOJu0YwmVunVqBepG5UzINi66vFORGW8keXUwzHXUbCwg6MaxWixyqnK
+ cJnb47i1H+n0eBaDW2kObfzKajixvLuh6mAIemCDPdgYRNJLpfavLf3TUwrmpF1rYbQREUNRc+w
  =
-X-Google-Smtp-Source: AGHT+IEXJKDATh2+Zcmda3cOdJYNrqwgGnJNPyddnl1kwAgIucpX51ULzQh7wG3MtlGu8YVVLJ4wXA==
-X-Received: by 2002:a05:600c:3543:b0:426:6455:f11c with SMTP id
- 5b1f17b1804b1-427ba701fd3mr8965715e9.25.1721113466892; 
- Tue, 16 Jul 2024 00:04:26 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHicM9xDy3HZYChaHTRAuAMyuxTbfTpWI/IAn71crGVXf4bquGAVXlx6o48xFxHWTnJJMEXAg==
+X-Received: by 2002:adf:ff8a:0:b0:363:b3ea:7290 with SMTP id
+ ffacd0b85a97d-3682753b33bmr655376f8f.20.1721113467822; 
+ Tue, 16 Jul 2024 00:04:27 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4279f2cc286sm149446295e9.33.2024.07.16.00.04.26
+ 5b1f17b1804b1-4279f2cc286sm149446295e9.33.2024.07.16.00.04.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 00:04:26 -0700 (PDT)
+ Tue, 16 Jul 2024 00:04:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 00/14] doc: Add documentation for bootmeths
-Date: Tue, 16 Jul 2024 08:04:05 +0100
-Message-Id: <20240716070419.1897560-1-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH v2 01/14] MAINTAINERS: Rename BOOTDEVICE
+Date: Tue, 16 Jul 2024 08:04:06 +0100
+Message-Id: <20240716070419.1897560-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240716070419.1897560-1-sjg@chromium.org>
+References: <20240716070419.1897560-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -87,62 +91,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds some documentation about most of the bootmeths and
-tidies up a few minor areas.
+Rename this to BOOTSTD which is the normal name for the feature.
 
-It also fixes a bug in network-based booting of a script.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
 
-Changes in v2:
-- Add new patch to mention automatic binding of bootmeths
-- Adjustments from Heinrich's comments
+(no changes since v1)
 
-Simon Glass (14):
-  MAINTAINERS: Rename BOOTDEVICE
-  doc: Move bootstd into its own directory
-  doc: Mention automatic binding of bootmeths
-  doc: Add a description for bootmeth_extlinux
-  doc: Add a description for bootmeth_pxe
-  doc: Add a description for bootmeth_qfw
-  doc: Add a description for bootmeth_cros
-  doc: Add a description for bootmeth_sandbox
-  bootstd: Tidy up comments on the boothmeth drivers
-  bootstd: Correct handling of script from network
-  doc: Add a description for bootmeth_script
-  doc: Add a link to VBE from the bootstd docs
-  boot: Correct indentation in efi bootmeth
-  doc: Describe the bootstd settings
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- MAINTAINERS                                   |  4 +-
- boot/bootmeth_efi.c                           |  3 +-
- boot/bootmeth_extlinux.c                      |  2 +-
- boot/bootmeth_qfw.c                           |  2 +-
- boot/bootmeth_sandbox.c                       |  2 +-
- boot/bootmeth_script.c                        | 53 +++++++++++--------
- doc/board/starfive/milk-v_mars_cm.rst         |  2 +-
- doc/develop/board_best_practices.rst          |  2 +-
- doc/develop/bootstd/cros.rst                  | 33 ++++++++++++
- doc/develop/bootstd/extlinux.rst              | 28 ++++++++++
- doc/develop/bootstd/index.rst                 | 15 ++++++
- .../{bootstd.rst => bootstd/overview.rst}     | 43 ++++++++++-----
- doc/develop/bootstd/pxelinux.rst              | 27 ++++++++++
- doc/develop/bootstd/qfw.rst                   | 20 +++++++
- doc/develop/bootstd/sandbox.rst               | 17 ++++++
- doc/develop/bootstd/script.rst                | 52 ++++++++++++++++++
- doc/develop/index.rst                         |  2 +-
- doc/usage/cmd/bootdev.rst                     |  2 +-
- doc/usage/cmd/bootflow.rst                    |  2 +-
- doc/usage/cmd/bootmeth.rst                    |  2 +-
- doc/usage/environment.rst                     |  2 +-
- 21 files changed, 269 insertions(+), 46 deletions(-)
- create mode 100644 doc/develop/bootstd/cros.rst
- create mode 100644 doc/develop/bootstd/extlinux.rst
- create mode 100644 doc/develop/bootstd/index.rst
- rename doc/develop/{bootstd.rst => bootstd/overview.rst} (95%)
- create mode 100644 doc/develop/bootstd/pxelinux.rst
- create mode 100644 doc/develop/bootstd/qfw.rst
- create mode 100644 doc/develop/bootstd/sandbox.rst
- create mode 100644 doc/develop/bootstd/script.rst
-
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 2c6de3a1d84..9bee9284cca 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -918,7 +918,7 @@ F:	drivers/block/blkmap.c
+ F:	include/blkmap.h
+ F:	test/dm/blkmap.c
+ 
+-BOOTDEVICE
++BOOTSTD
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	boot/bootdev*.c
 -- 
 2.34.1
 
