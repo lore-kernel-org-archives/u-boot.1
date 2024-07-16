@@ -4,81 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79CCEC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 19:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77FD4C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 19:35:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0871C884B2;
-	Tue, 16 Jul 2024 21:13:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A0F46887D2;
+	Tue, 16 Jul 2024 21:35:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pSw0F2HW";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="djk+UWtv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43053885C5; Tue, 16 Jul 2024 21:13:07 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98EA1887D2; Tue, 16 Jul 2024 21:35:17 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE8AE88440
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 21:13:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7370E889E6
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 21:35:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3d9c4887533so3095008b6e.2
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 12:13:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721157184; x=1721761984; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zjFJDxjrDNU9ryCkhKAsZ9PweiP/07719rkHfdyxFg8=;
- b=pSw0F2HWJ1QLe6RXpzMwPCvqtqIOn/VyWjfzeNDdj79Of6lM3ROzP6R7vFdAymIUep
- UPxq3RiBCqCnx/wUHKjJW76CqY3o1RGLwC1XyZlDpgbP+sj7CZfrJXayOYAFB2+3rWo9
- Wcgov3cFTv2FTMAbBcIvja2eQDXCq9uEZBVEc=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E9DF841082
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 19:35:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1721158513;
+ bh=RjHbzppnHfpVkUL9OzqEtz8hWhzOGc08JFHQtZUP6WM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=djk+UWtv3iOjxk7hTCIwRVcm99KFqbrRN3pQSbQhbnaxfuqw8pS7h4Ez3Y2t33jCl
+ dur5cMK4tcl7wktg9IMbZRqBoYvq/zz9xtUl4IiGi9mtkWErT9GAr3k1Pac+kcuM4X
+ c/JaCApCYJkGLiO5SDR9jlntoPmM5nafF3aLkVL1Q9PX1nzT3lb8rsW5aimnD56F1R
+ sZB+DCL2Sw4gjfpLu4UySvEKu2Duy6Zf+OZRgR/i15XLZlGsHR0kMTC/7SEAhvIT/o
+ co7en6iEOQjv/YY5+1+OFPinXwK735FdPQV33GV59KwjSByxkG1kRsSOfY911GI4GT
+ xiCIv+4WPJolA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4279b07cd45so42203385e9.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 12:35:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721157184; x=1721761984;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zjFJDxjrDNU9ryCkhKAsZ9PweiP/07719rkHfdyxFg8=;
- b=ArORYBG1K9rarkg8d7cjTL9lroYSNy6Op9VqM8FOWIXkKTaoT4nn+3kXY7hSedAHsN
- qckZQaIkqNi1znU6hZIv+wimBM9fBGw9BiYAQf/4696SnYI99rDvjeO6hoCmthxQZNPW
- /q0TADmD0XM7uEO/ND5jr+H+jfZrHZDBEWrH4ha1TqL+RSl0If8l/1lyjj53pqqPKknI
- qx/nZ39AmmX1F5w7eb8GpJ1zmD3vm4dxHIemjU2FVAelmnrQgBwNmGk1Un2T3k0ikhxM
- TmyNa43J8drnlQvK3MQEdoz8QUKXnZl3K8ITHDBUHNree4I0C3ZGr47Qg2NpMmHE13+D
- sO3Q==
-X-Gm-Message-State: AOJu0Yx25n3QdS1xEjTmsPub4qoUxT7QxS6NK7QdGuUXsDBWu7/xBJ+Q
- CacbzP0xs0eVVu71CUKAXSIgak4gEH2+XJ2ATRXntrcPfdKf72G9ednxfRo9WK2Ec0eRch0AqEl
- J
-X-Google-Smtp-Source: AGHT+IE4aE0zPNhoStMpL4raUyoaVn6FNbzfWGGC/bTg3kqSyhYy7ik0b+AMFnrT/bl7cWl4x1hHjw==
-X-Received: by 2002:a05:6808:1523:b0:3d9:24b4:e131 with SMTP id
- 5614622812f47-3dac7b9968emr3866750b6e.24.1721157183537; 
- Tue, 16 Jul 2024 12:13:03 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dab3dd22absm1188314b6e.16.2024.07.16.12.13.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 12:13:02 -0700 (PDT)
-Date: Tue, 16 Jul 2024 13:13:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+ d=1e100.net; s=20230601; t=1721158510; x=1721763310;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RjHbzppnHfpVkUL9OzqEtz8hWhzOGc08JFHQtZUP6WM=;
+ b=RIjNUXgYWRSY1mAfgPsRh1TnhpIS1Rm/RYGkq6HXIeM9KjC7MKhFn0nlxtz5S6LsK8
+ 2feLMlTAl5aZGN94pl/8/0BzJacaWw+mQAZd+SKWmVQs9+uSi1NbixsC+0yb8iY6gT+J
+ Da2EKwWlqBk6mQa4tllPtrYWUpdDOLuG5A6OEIv0ei12AemykRFf1e0Q+ASqS5pWs76I
+ j/3yP4P8snDPSaQHlpWjwESYmAkFX4WSnOjg/WILKXLqfQJsctGFM/jYLN479peIx/fj
+ NsBbIpj0iw5h21tnRvmAI5knkWIj6a1V0/q252gFbRg+MBfc9fd/HujPmEsgf5w1Ijke
+ 2LPQ==
+X-Gm-Message-State: AOJu0YzJEo/M4JMXfQMUmFxlOu2uyStH7oeoXeJd75IyyXfp5K1iDdHI
+ xrgm12kM82pkTYiIzfd5OPYwX8MCg9cpqL6gQwDoyEksS1reiGaUBCLuBJbm5oV09dVLVZVJV07
+ 1/YDyPAGj3V1hwzVkrltloS5Dj0mWH9psba0TSo2P9Lai0FRp7D4UxhA+2IW+xFiA0WY=
+X-Received: by 2002:a05:600c:4e8a:b0:426:4f47:6037 with SMTP id
+ 5b1f17b1804b1-427ba69d40dmr18714995e9.19.1721158510252; 
+ Tue, 16 Jul 2024 12:35:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHS0j/DXmiM2T5BdlkJ8DCyoEaMJL2FjeL1rzYLeWYvfygbAvifRkKwsYbFv/CQsCR6hXOk+g==
+X-Received: by 2002:a05:600c:4e8a:b0:426:4f47:6037 with SMTP id
+ 5b1f17b1804b1-427ba69d40dmr18714805e9.19.1721158509833; 
+ Tue, 16 Jul 2024 12:35:09 -0700 (PDT)
+Received: from [192.168.123.161]
+ (ip-062-143-093-080.um16.pools.vodafone-ip.de. [62.143.93.80])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3680dab3e71sm9824050f8f.12.2024.07.16.12.35.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jul 2024 12:35:09 -0700 (PDT)
+Message-ID: <4bb80912-62fa-4f33-a344-351141d8df10@canonical.com>
+Date: Tue, 16 Jul 2024 21:35:18 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: Request for hosting a boot-firmware repository in u-boot git
+ (denx and GitHub)
+To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Peter Robinson <pbrobinson@gmail.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- Josh Boyer <jwboyer@redhat.com>
-Subject: Re: Request for hosting a boot-firmware repository in u-boot git
- (denx and GitHub)
-Message-ID: <20240716191300.GM561963@bill-the-cat>
+ Enric Balletbo i Serra <eballetb@redhat.com>, Josh Boyer
+ <jwboyer@redhat.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Nishanth Menon <nm@ti.com>
 References: <20240620213539.ftmjhphypssxp5n4@desolate>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jafNALASbnDZ6im9"
-Content-Disposition: inline
-In-Reply-To: <20240620213539.ftmjhphypssxp5n4@desolate>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20240716191300.GM561963@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240716191300.GM561963@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,134 +111,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 7/16/24 21:13, Tom Rini wrote:
+> On Thu, Jun 20, 2024 at 04:35:39PM -0500, Nishanth Menon wrote:
+>> Hi Team,
+>>
+>> We have briefly discussed this topic on IRC[1]. I would like to
+>> propose a new boot-firmware repository similar to the Linux-firmware
+>> repository under the aegis of u-boot hosting.
+>>
+>> In addition to TI, it looks like some NXP[2] and Rockchip[3]
+>> platforms seem to require additional closed-source/open-source
+>> binaries to have a complete bootable image. Distribution rights and
+>> locations of these binaries are challenging, and there needs to be a
+>> standard for how and where they are hosted for end users.
+>>
+>> Further, looking ahead to future architectures:
+>> * IP firmware: More and more IP vendors are embedding their own
+>>    "specialized controllers" and require firmware for the operation
+>>    (similar to Rockchip's DDR controller, I guess),
+>> * boot stage firmware: Additional stages of the boot process involve
+>>    vendor intermediate firmware, such as power configuration.
+>> * Security enclave binaries: While I see a few folks trying to have an
+>>    open-source s/w architecture, many PKA and PQC systems still require
+>>    prop binaries for IP reasons.
+>>
+>> NOTE: I am not judging any company(including TI) for reasons why some
+>> firmware is proprietary, but I hate to have the end users and other
+>> system (distro) maintainers have to deal with hell trying to make the
+>> life of end users easy to live with.
+>>
+>> In the case of TI's K3 architecture devices, we have two binary blobs
+>> that are critical for the boot process.
+>>
+>> 1. TIFS Firmware / DMSC firmware[4]—This is the security enclave
+>>    firmware. It is often encrypted, and sources are not public (due to
+>>    various business/regulatory reasons).
+>> 2. DM Firmware[5] - There is a source in public in some cases and
+>>    binary only in others - essentially limited function binary to be
+>>    put up in the device management uC. In cases where the source is
+>>    available, the build procedure is, in my personal opinion, pretty
+>>    arcane, and even though in theory it is practical, in practice, not
+>>    friendly - efforts are going to simplify it, even probably integrate
+>>    it with a more opensource ecosystem, but that is talking "look at the
+>>    tea leaves" stuff.
+>> 3. Low Power Management (LPM) binaries: tifs stub: another encrypted
+>>    binary that gives the tifs system context restore logic before
+>>    retrieving tifs firmware and a corresponding DM restoration binary.
+>>
+>> All told, this is not unlike the situation that necessitated the
+>> creation of a Linux firmware repository.
+>>
+>> Options that I see:
+>>
+>> 1. Let the status quo be - SoC vendors maintain random locations and
+>>    random rules to maintain boot firmware.
+>> 2. Ask Linux-firmware to host the binaries in a single canonical
+>>    location
+>> 3. Host a boot-firmware repository - u-boot repo may be the more
+>>    logical location.
+>>
+>> * (1) isn't the correct answer.
+>>
+>> * (2) Though I haven't seen any policy from the Linux-firmware
+>>    community mandating anything of the form, the binaries we are talking
+>>    of may not belong to Linux-firmware as they aren't strictly speaking
+>>    something Linux kernel will load (since the bootloader has that
+>>    responsibility), and in some cases may not even directly talk to
+>>    (security enclave or DDR firmware stuff). I am adding Josh to this
+>>    mail to see if he has any opinions on the topic (but keeping
+>>    from cross posting on linux-firmware list, unless folks feel it is
+>>    OK).
+>>
+>> On (3):
+>> Proposal:
+>>
+>> * Create a boot firmware repository in Denx and/or GitHub (if
+>>    financials are a hurdle, I hope we can solve it as a community).
+>> * Limit binaries only to those consumed part of the u-boot scope.
+>>
+>> * Limit binaries only to those that do not have an opensource project
+>>    (Trusted Firmware-A/M, OP-TEE, etc..) or depend entirely on vendor
+>>    source or are binary only in nature (subject to licensing terms below)
+>> * Limit binaries to some pre-established size to prevent repository
+>>    explosion - say, 512Kib?
+>> * Follow the same rules of integration and licensing guidelines as
+>>    Linux-firmware[6].
+>> * Similar rules as Linux-firmware guidelines of ABI backward and
+>>    forward compatibility.
+>> * Set a workflow update flow and a compatibility requirements document
+>>
+>> If we agree to have boot firmware under the stewardship of u-boot, we
+>> should also set other rules, which is excellent to discuss.
+>>
+>> Thoughts?
+> 
+> I believe that fundamentally, this is a problem that exists beyond both
+> just "U-Boot needs some binaries" and "TI has some binaries that
+> bootloaders need". So a generic solution is appropriate, and some sort
+> of community-based hosting of these needs (with appropriate licensing
+> from the IP owners) makes sense. Looking around at the binaries I have
+> to keep locally to use NXP platforms, and TI platforms and Rockchip
+> platforms, it's far from ideal. Having one place to get them all from
+> would make life easier for a lot of developers and also frankly for a
+> lot of end customers of these chips.
+> 
 
---jafNALASbnDZ6im9
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Some thought needs to be given to the license implications of these 
+binaries for operating system distributions.
 
-On Thu, Jun 20, 2024 at 04:35:39PM -0500, Nishanth Menon wrote:
-> Hi Team,
->=20
-> We have briefly discussed this topic on IRC[1]. I would like to
-> propose a new boot-firmware repository similar to the Linux-firmware
-> repository under the aegis of u-boot hosting.
->=20
-> In addition to TI, it looks like some NXP[2] and Rockchip[3]
-> platforms seem to require additional closed-source/open-source
-> binaries to have a complete bootable image. Distribution rights and
-> locations of these binaries are challenging, and there needs to be a
-> standard for how and where they are hosted for end users.
->=20
-> Further, looking ahead to future architectures:
-> * IP firmware: More and more IP vendors are embedding their own
->   "specialized controllers" and require firmware for the operation
->   (similar to Rockchip's DDR controller, I guess),
-> * boot stage firmware: Additional stages of the boot process involve
->   vendor intermediate firmware, such as power configuration.
-> * Security enclave binaries: While I see a few folks trying to have an
->   open-source s/w architecture, many PKA and PQC systems still require
->   prop binaries for IP reasons.
->=20
-> NOTE: I am not judging any company(including TI) for reasons why some
-> firmware is proprietary, but I hate to have the end users and other
-> system (distro) maintainers have to deal with hell trying to make the
-> life of end users easy to live with.
->=20
-> In the case of TI's K3 architecture devices, we have two binary blobs
-> that are critical for the boot process.
->=20
-> 1. TIFS Firmware / DMSC firmware[4]=E2=80=94This is the security enclave
->   firmware. It is often encrypted, and sources are not public (due to
->   various business/regulatory reasons).
-> 2. DM Firmware[5] - There is a source in public in some cases and
->   binary only in others - essentially limited function binary to be
->   put up in the device management uC. In cases where the source is
->   available, the build procedure is, in my personal opinion, pretty
->   arcane, and even though in theory it is practical, in practice, not
->   friendly - efforts are going to simplify it, even probably integrate
->   it with a more opensource ecosystem, but that is talking "look at the
->   tea leaves" stuff.
-> 3. Low Power Management (LPM) binaries: tifs stub: another encrypted
->   binary that gives the tifs system context restore logic before
->   retrieving tifs firmware and a corresponding DM restoration binary.
->=20
-> All told, this is not unlike the situation that necessitated the
-> creation of a Linux firmware repository.
->=20
-> Options that I see:
->=20
-> 1. Let the status quo be - SoC vendors maintain random locations and
->   random rules to maintain boot firmware.
-> 2. Ask Linux-firmware to host the binaries in a single canonical
->   location
-> 3. Host a boot-firmware repository - u-boot repo may be the more
->   logical location.
->=20
-> * (1) isn't the correct answer.
->=20
-> * (2) Though I haven't seen any policy from the Linux-firmware
->   community mandating anything of the form, the binaries we are talking
->   of may not belong to Linux-firmware as they aren't strictly speaking
->   something Linux kernel will load (since the bootloader has that
->   responsibility), and in some cases may not even directly talk to
->   (security enclave or DDR firmware stuff). I am adding Josh to this
->   mail to see if he has any opinions on the topic (but keeping
->   from cross posting on linux-firmware list, unless folks feel it is
->   OK).
->=20
-> On (3):
-> Proposal:
->=20
-> * Create a boot firmware repository in Denx and/or GitHub (if
->   financials are a hurdle, I hope we can solve it as a community).
-> * Limit binaries only to those consumed part of the u-boot scope.
->=20
-> * Limit binaries only to those that do not have an opensource project
->   (Trusted Firmware-A/M, OP-TEE, etc..) or depend entirely on vendor
->   source or are binary only in nature (subject to licensing terms below)
-> * Limit binaries to some pre-established size to prevent repository
->   explosion - say, 512Kib?
-> * Follow the same rules of integration and licensing guidelines as
->   Linux-firmware[6].
-> * Similar rules as Linux-firmware guidelines of ABI backward and
->   forward compatibility.
-> * Set a workflow update flow and a compatibility requirements document
->=20
-> If we agree to have boot firmware under the stewardship of u-boot, we
-> should also set other rules, which is excellent to discuss.
->=20
-> Thoughts?
+A distro providing a combined binary consisting of U-Boot and closed 
+source firmware might be interpreted as conflicting with U-Boot's GPL 
+license.
 
-I believe that fundamentally, this is a problem that exists beyond both
-just "U-Boot needs some binaries" and "TI has some binaries that
-bootloaders need". So a generic solution is appropriate, and some sort
-of community-based hosting of these needs (with appropriate licensing
-=66rom the IP owners) makes sense. Looking around at the binaries I have
-to keep locally to use NXP platforms, and TI platforms and Rockchip
-platforms, it's far from ideal. Having one place to get them all from
-would make life easier for a lot of developers and also frankly for a
-lot of end customers of these chips.
+Distributing the closed source binaries and U-Boot in separate packages 
+according to their respective licenses and only assemble them on the 
+target device via a post-installation script might be allowable.
 
---=20
-Tom
+Best regards
 
---jafNALASbnDZ6im9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaWxjwACgkQFHw5/5Y0
-tywqlAv8CSuMVTAHvDzxTTgzkP8Tk894QjH8y0kqnShzYh+IuyDTqnMeFpHPk/xg
-CyBRZKoiol9IAd3hLn3NFoV89Bw+n+c1eNat2fZrWUPh9WCvDn6m8nS2N+ILGeVq
-QonalLjq/kzs9KUSijRu//8GuisTD1RTt1ilF+QIfat0oLWie2lTWbRc9isXSY/2
-/h/r+gOtNrngOzUXyUtk74J+XgzOSgzKv4QehTJLmu58NY+S/3M3RyPXrRvTwS5s
-TtHSDMWFATI4JbOFtYeH5ClfZwH5MfPJbi0NH0kbGxOYVPJHaMKUBenxWFCA/Wo7
-v+GJGkI2aK+mq9oo5+NMr3EXWNGcaDvyNyCNmH90RqLcDtbP4fwXo2TBunSvKpgL
-1cxXtdZyptVdwXPHx32wmArpmkTiGsUwEY7uxWi53nsYwXTre5Dd6/iNNrznfZld
-2OkkPVr8JqR24LHclTlXHE63C53zGdzh/Rszg/H0JdPyOR653yKXuqM7cLbLiIFA
-7HLIt5jt
-=NbGI
------END PGP SIGNATURE-----
-
---jafNALASbnDZ6im9--
+Heinrich
