@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824CBC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01E9C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:51:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CD08889D0;
-	Tue, 16 Jul 2024 09:50:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8691088855;
+	Tue, 16 Jul 2024 09:51:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xdHvWdbS";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="N5zcfw/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28529889D1; Tue, 16 Jul 2024 09:50:51 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 86A7687D2F; Tue, 16 Jul 2024 09:51:45 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 390D988907
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:50:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9676488907
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:51:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4266f344091so37429335e9.0
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:50:49 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4266f535e82so34615315e9.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:51:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721116249; x=1721721049;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721116303; x=1721721103;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=2leGyKoLu+If5bWYRcR14KJ8LBv40SfxMORQFg/t8d4=;
- b=xdHvWdbSE/tACh48De6C5vE0gJYwduhpshVK8pZFnDJhhe3ULcOE1Hu7WTKQhw4JPo
- KscbQ5nvQAA0FjlzQR/4V3YwUxhLwMgTYWeoyoWzJzMLYu5mD353nwztGfNJ1TxquGTM
- S5TQglXg7Y2CmR6Do6PYIahoeESHbbkUqA8AFpo2o9tn/HEQFuxgd55q1TTIs4p9u8aL
- 8mS4K1vNqLYRCBWdaHsfwBz0avKckleQsbfB8YTz9ziXHByzmeUJsuPMcVR3fmKwzZ51
- oENKph+A8UGjTDYvsDCxVnvoF0ROk0FB6D3PVGvyjy6CscYWKhCtrWc8TOdjvte11Cxc
- KL6w==
+ bh=8xBFrHuq1s3vRGMYrvo63sHrvagZCYhV5cl57X80l8Y=;
+ b=N5zcfw/x4iYERd42QB3T0322dLoy9gX67P7A54vrUhU/GNID4jT99nftcArTQDjEYT
+ LykxJP2dYYe0t3h7O9t8S5QgX0zS7xhSpf0Ul5VaBj6Ozx3+6h6bIM/qnk5ssk7Dzklr
+ JaHaeypdmX+sYyT9es2Gczl6wYpp98N4Bz7eK4ccMdI7SsrIi+T0/w5aEAq6Iu8zH/Bx
+ ejAN3tyEUtA8Pd15ATzcrkhQ+LoysAO4pPkfMkNOWh2/iQLC6RXq6jLD81cQLfN/n6+c
+ HgTy9vcxzPaM3uytpG6W2QkP6kSDCqr8mV3lbYmOoKGXlihGbkO6Opu5Md9Aa2TVjo6m
+ kjzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721116249; x=1721721049;
+ d=1e100.net; s=20230601; t=1721116303; x=1721721103;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2leGyKoLu+If5bWYRcR14KJ8LBv40SfxMORQFg/t8d4=;
- b=rKS8SQLPKvdny9B61g4pL6gmmVR6VCn1fxJKFX4dTpiM8F6Kj2qiy95cHRhrWAKFoh
- Jd1wbiHdW4x6HYULAWB19kWkWED5Wu8SyARA9Op/sxVRvJHttwEDo+mXEvZQ1pvz7DbI
- Rv77dVDxKfb7BB4sbeqdwcqHL3eBNf6d6OWMblsA5rDkx8C1EVgTcuO1eLW71YOqJi7v
- 2NDZpgMNxB57XTU1/qj1VJ8GQ0TzNgkEocsJ3BseI9moDSkQK9TFY8Yb/d3C3IcxJwfr
- 762U92NKG4N8DJ2hH2SscCuXlKj5la7WPa7aKfXOQya5LvEBtFkdoG5c1lLLEcbC2i88
- oorA==
+ bh=8xBFrHuq1s3vRGMYrvo63sHrvagZCYhV5cl57X80l8Y=;
+ b=Rv9zVwK4l63NeRVK17R1YtpJBtBkjbw2iiirjPVxoATA2AX4jgGV1hBz/ilBDhsPJ3
+ /jA2msWtXgbMYaXCtfMSAgxkYYUC9jIHGMKtj66tKWHPRGb74T666XNM7lW2EzMAHzYk
+ 2ns/zakGf9H9rNfgRg4ZmEeDWu/0YxpVPtg+aAqnvf5PhCS2EKNQWlP/EAbq3WJgMpte
+ RWjJ+Pgis1gaNrJz9KL8/w3cA5lWWayzjnSJuO0WSpIKbIw3qJ1VOjJuo9aTAZKoprIz
+ UudZ7bsPl+8N0bBbiBMXJ9Vc/tAkEm+GXLKw2jwdGMasGmGQCEDSomxLvajBblwp78SE
+ siGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyhmeKXbdYjajiXhZUudGy+RNDDxoADoEn2nwAO/Fu/rw5BiVTE5t4MlXbbjXgJI+Rwi7m0NrRPZ3c/U391w5JdqkLEQ==
-X-Gm-Message-State: AOJu0Yzf4x4989jptjWSlhoIaILaTlyvki1ef4U5WddIPwgetIMRCwL9
- J7Sm2iC4fSNrP/9cglOQfNH0N8bvl0BStg/fasXfhCQ/YzXAOVJ9a5IwqPUHkcc=
-X-Google-Smtp-Source: AGHT+IHVAkcgPH67b6C0VegNJj1EhBp3MUrmETKIGymYnQY6yy+1xwaVdTArrZe3g8eXo4DK8VxqkA==
-X-Received: by 2002:a05:600c:1911:b0:426:6960:34ac with SMTP id
- 5b1f17b1804b1-427ba6b12d3mr8210925e9.36.1721116248515; 
- Tue, 16 Jul 2024 00:50:48 -0700 (PDT)
+ AJvYcCW2ElbnPEmUa0n8vEPFscUqj5AcFHWRkskjh3NFWekYF0oCpUG9pmFIXyoGKGI3a+X4X1AppOInjOYCBGlPv9QAO1tr6A==
+X-Gm-Message-State: AOJu0Yw4mu+scZMl1sbqa14ucBnbC5ohz4vi4OhD8INGKnSJmg9FMAr/
+ TQgRnl96rYKNhhmn4Q0210nYyYBoU+PH5xh+WjVBJy2OJ9jUyqws35hFCPmLj3O4y3EkW45deHE
+ ILOOvrg==
+X-Google-Smtp-Source: AGHT+IEjYCMhnx8lPeEh7/sceXWIZZAeJD1cKVcF3HYdnniSVE0L1kEuf4b3LLaXNPgtmvLcqswQYA==
+X-Received: by 2002:a5d:4084:0:b0:368:12ef:92cf with SMTP id
+ ffacd0b85a97d-3682633d266mr874051f8f.48.1721116302931; 
+ Tue, 16 Jul 2024 00:51:42 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427a5e8387fsm113154475e9.20.2024.07.16.00.50.47
+ ffacd0b85a97d-3680dab3c38sm8258959f8f.8.2024.07.16.00.51.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 00:50:47 -0700 (PDT)
+ Tue, 16 Jul 2024 00:51:42 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glkp@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2 13/14] boot: Correct indentation in efi bootmeth
-In-Reply-To: <20240716070419.1897560-14-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v2 14/14] doc: Describe the bootstd settings
+In-Reply-To: <20240716070419.1897560-15-sjg@chromium.org>
 References: <20240716070419.1897560-1-sjg@chromium.org>
- <20240716070419.1897560-14-sjg@chromium.org>
-Date: Tue, 16 Jul 2024 09:50:45 +0200
-Message-ID: <877cdln5be.fsf@baylibre.com>
+ <20240716070419.1897560-15-sjg@chromium.org>
+Date: Tue, 16 Jul 2024 09:51:40 +0200
+Message-ID: <874j8pn59v.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -99,10 +99,10 @@ Thank you for the patch.
 
 On mar., juil. 16, 2024 at 08:04, Simon Glass <sjg@chromium.org> wrote:
 
-> Fix a minor indentation / whitespace problem in a comment.
+> The bootstd node provides some configuration properties. Add these to
+> the documentation.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Heinrich Schuchardt <xypron.glkp@gmx.de>
 > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
@@ -111,21 +111,32 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 >
 > (no changes since v1)
 >
->  boot/bootmeth_efi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  doc/develop/bootstd/overview.rst | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 >
-> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-> index 56a6e47f5b2..39232eb2e25 100644
-> --- a/boot/bootmeth_efi.c
-> +++ b/boot/bootmeth_efi.c
-> @@ -265,7 +265,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
->  		return log_msg_ret("sz", -EINVAL);
->  	bflow->size = size;
+> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+> index 4a55b7da00a..d92a649beb0 100644
+> --- a/doc/develop/bootstd/overview.rst
+> +++ b/doc/develop/bootstd/overview.rst
+> @@ -406,6 +406,19 @@ You should probably also enable `CONFIG_BOOTSTD_DEFAULTS`, which provides
+>  several filesystem and network features (if `CONFIG_NET` is enabled) so that
+>  a good selection of boot options is available.
 >  
-> -    /* bootfile should be setup by dhcp*/
-> +	/* bootfile should be setup by dhcp */
->  	bootfile_name = env_get("bootfile");
->  	if (!bootfile_name)
->  		return log_msg_ret("bootfile_name", ret);
+> +Some devicetree properties are supported in the bootstd node when
+> +`CONFIG_BOOTSTD_FULL` is enabled:
+> +
+> +    filename-prefixes
+> +        List of prefixes to use when searching for files on block devices. This
+> +        defaults to {"/", "/boot/"} if not provided.
+> +
+> +    bootdev-order
+> +        Lists the bootdev ordering to use. Note that the deprecated
+> +        `boot_targets` environment variable overrides this, if present.
+> +
+> +    theme (subnode)
+> +        Sets the theme to use for menus. See :doc:`/develop/expo`.
+>  
+>  Available bootmeth drivers
+>  --------------------------
 > -- 
 > 2.34.1
