@@ -4,88 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C91C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F97EC3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:17:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E95948897B;
-	Tue, 16 Jul 2024 09:16:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A01068898B;
+	Tue, 16 Jul 2024 09:17:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UAbPTSan";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="M/v5yQCz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A93FF8897D; Tue, 16 Jul 2024 09:16:32 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 42D918898B; Tue, 16 Jul 2024 09:17:37 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 534268878A
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:16:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D80BF8878A
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:17:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-59f7fb90a50so67642a12.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:16:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2eede876fccso38203011fa.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:17:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721114190; x=1721718990; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=un9F2pcmBqShnb4C4mS0OS6BlizSyRC+u/Qm23Sj2Vs=;
- b=UAbPTSanxTTka6w4oGhAvko5u/j5hQwfWuFVWhzi+dbuSDFAdXUqSqSUMZ9HEGbBqD
- obQkpJIxrAR7z33kkzfSBSStPE7dofJ85zcg/aEdwV90Y9WSbAICzSAw1cMC9FmqYNva
- 8nXhIIPZ/EyDgyr6yF6mURtM0VAED+wiECsapEr4XPkyzKFOKtSNcYBMJbkdHKCb6uGV
- Oh1jlSfKTYiMoFQL/FWPzAuzawebGANSVqEDgBEesxv/9m77phZgXj+DC227u+FdYkug
- 8Hf+YMqgldWyxuIngIfbFzifLVsob4fUiyQ+bWbxGX7UQrAMPKkyiiYdpTx51yC7kfTy
- vmjQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721114254; x=1721719054;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=97GhZn7gnFJQMTK4zXW1CmZ7otlS6AJrpGcixKp5XDI=;
+ b=M/v5yQCz0nx/Ic1ZNYB0Kx8fE6g9kIKBMXgaUTkrt3o6kHVFqB+rdR5fMlXW2wRneE
+ mADU2AiQoIKYDSzFsJFT6Eo+RFAVmS0LWMMu9ShtViTY2aninOFkZSmO2VRwepVdx0ZP
+ rx4MfqN4f7vfigfkjukDnXGCoR+Owdj2pPH4xcJh5+w19ftTgGj8QnycL5B1eGLoo4El
+ faAuVU+BNwvbwMwJJj5IAyO+pynhW8dHSLAK300RwhHeMDF4ZqYOV7CcgfEKzqBNJ65K
+ +t5Gj+dzYnl+Ez6aATm0FL8x1sdyCkIKcZwh2b0jKd+9mv9KsQ4yeTUz+/sqhi7i6HfI
+ aNKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721114190; x=1721718990;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=un9F2pcmBqShnb4C4mS0OS6BlizSyRC+u/Qm23Sj2Vs=;
- b=A076GwJkT7DLV10iXNTs/urW8GS2LUOniR1B/rrUyqiYBWlhVqBMHZ9cCvp2RAXtju
- fkjUz3mPoWFhGZ9J0GyVdsoATjsZg3/jZ1YI7IFXuG9QA99FH8JysjLw3bQiUzcQz2xM
- ZhRxSa3qDzFr8Cou//xaTpzX9oHU8Y5h2NLElxCS5FtA1wo2eDVD9aSqpV7GKQuTzKNz
- foR31Pqn3tnI2EYaR7swBpejX03O6AuPmr2gUnVEJnev650UdSrQlTVQMHS4NTqMUmIE
- bap9rkYcIRFdOEXdhTwKqs1n+/L8AtnVL+PxxT32b9JXdyejiY84eimN9JIkJFme9s27
- wHlg==
+ d=1e100.net; s=20230601; t=1721114254; x=1721719054;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=97GhZn7gnFJQMTK4zXW1CmZ7otlS6AJrpGcixKp5XDI=;
+ b=fds0aJ/xcFILi7AHQNJmoKmpL1/0TL4UEN5C/1llogOPNci1UnYnTtfMGGZmToJ2HH
+ 6k1o/HeYziEW+5xtetnjLAgvvcrd1PWFon206mgY6NdRpUr1SVqjrGR7JlZb9PqQjkem
+ Koz/X9FrDiMKr8TeCbAIJeH/DZfia3dPB1z0pZgf/08Af+aFs4l1YbJ7mqtMP+7j9AyN
+ KQzVSw3oUtHdFETYDfLchOFjEd6XUHISFKB+ChD+QXDQZO8HJnbwKdybT9ZgSLGQje8B
+ w1pqsghoQh0l9GK4KcdOWedfZagI9ABoVgKpYAusOCkzRWLfIq/t5hP4xG0DLldn+ob8
+ Mczg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVssoKW1gywGoEgJZmtJwpHPNRU2y6g6EdZrlBjuE6v71Gz+kO923M+CVX1HSZQzf6YvL42CpKbhFZDDCYnDgfA2ZZW4Q==
-X-Gm-Message-State: AOJu0Yw+Gp3h3LG65KnEO4/PHEB0se09/AGp86EcSl8c/Y9uqyLFIbGC
- MU7COiYJ70dX7PNX3PrxKHgNufJgzWpITS5S92q2FaiAtO1NfKcFKPwoiC+vlRI=
-X-Google-Smtp-Source: AGHT+IGf7haLDhe9Z4TezhnTADZUTbhO799kfWaIOSUqFke6oa07h5UQt+kzY9NDM8bq5h1uy5KSNQ==
-X-Received: by 2002:a05:6402:3553:b0:57d:46f4:7df5 with SMTP id
- 4fb4d7f45d1cf-59eef775ca8mr899364a12.23.1721114189697; 
- Tue, 16 Jul 2024 00:16:29 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::18f8? ([2a02:8109:aa0d:be00::18f8])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-59b26f61fbfsm4341960a12.81.2024.07.16.00.16.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jul 2024 00:16:29 -0700 (PDT)
-Message-ID: <893fc8be-e4aa-46a1-9dd7-774a7f8faa69@linaro.org>
-Date: Tue, 16 Jul 2024 09:16:28 +0200
+ AJvYcCUmHsLmgC2jrktr+12JaYjnv5uVPTpNf6/eKJ5lDQ2Kf9ZfA8YVTfFvw/KOUAkZiKdH2YUNG5cInmxA7mseONsxFfpWVg==
+X-Gm-Message-State: AOJu0YyT6LGXdtXhgliZTFXy6yVTCzhmaiKqoM3cfbfoKnel3rvthTdS
+ yKLnAfPyesNkorR9huCeCy+UpJK5uDT7mhhd3A1WdvravNNu4knPxpcFo1b0ALk=
+X-Google-Smtp-Source: AGHT+IG+rAeUfnq5zW0XIkdgoD7bEXBefMz4R29YySYACxRAZEfhkmWZWV75hbyxBxC62WIEOoU23Q==
+X-Received: by 2002:a2e:961a:0:b0:2ee:7b7d:66df with SMTP id
+ 38308e7fff4ca-2eef4160428mr8542781fa.9.1721114253639; 
+ Tue, 16 Jul 2024 00:17:33 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427a5ef550asm112006105e9.46.2024.07.16.00.17.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jul 2024 00:17:32 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Bin Meng
+ <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Nam Cao
+ <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 03/13] doc: Add a description for bootmeth_extlinux
+In-Reply-To: <20240715101354.97895-4-sjg@chromium.org>
+References: <20240715101354.97895-1-sjg@chromium.org>
+ <20240715101354.97895-4-sjg@chromium.org>
+Date: Tue, 16 Jul 2024 09:17:30 +0200
+Message-ID: <87jzhlolf9.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 06/24] soc: qcom: cmd-db: adjust probe for U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
- <20240715-b4-qcom-rpmh-v6-6-0c948a25d018@linaro.org>
- <CAFLszTgz-SOFR+aV7f45+pfByLztAYU1kvFPZof665=QwjjoPQ@mail.gmail.com>
- <c1f036a4-a080-428f-84fd-c44f968d44bf@linaro.org>
- <CAFLszTj-1Pok7mJRGfR5fV20JMp5Hoe0r+4=p0S=NwtxQ0Gdgg@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTj-1Pok7mJRGfR5fV20JMp5Hoe0r+4=p0S=NwtxQ0Gdgg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,60 +93,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
+Thank you for the patch.
 
-On 16/07/2024 09:04, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Mon, 15 Jul 2024 at 22:42, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->>
->>
->> On 15/07/2024 13:39, Simon Glass wrote:
->>> On Mon, 15 Jul 2024 at 11:08, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>
->>>> Integrate cmd-db into the U-Boot driver model.
->>>>
->>>> This is just a wrapper around an in-memory database, so we just need to
->>>> get the address and validate that cmd-db is there.
->>>>
->>>> Since cmd_db_header will be stored in the .data section we can skip
->>>> bind if it's already set.
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>> To: Simon Glass <sjg@chromium.org>
->>>> ---
->>>>    drivers/soc/qcom/cmd-db.c | 72 +++++++++++++++--------------------------------
->>>>    include/soc/qcom/cmd-db.h |  3 --
->>>>    2 files changed, 23 insertions(+), 52 deletions(-)
->>>>
->>>
->>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->> Thanks
->>>
->>> BTW, this is a MISC driver. Does it implement the read() operation?
->>
->> No, the API (as defined in the header file) takes a string and returns a
->> database entry. cmd-db users don't have an easily available handle to
->> the node / udevice regardless.
-> 
-> OK. The closest thing might be UCLASS_SYSINFO, but it is designed for
-> inside U-Boot and uses an int instead of a string for lookup.
+On lun., juil. 15, 2024 at 11:13, Simon Glass <sjg@chromium.org> wrote:
 
-Right, I don't think we'll be able to find a more optimum solution here.
-> 
-> Could you use the devicetree for this information? What sort of info is it?
+> Add documentation for the extlinux bootmeth.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-It maps resource names (e.g. "ldoa1" - the LDO1 regulator on PMIC A) to 
-the address of the resource on the RPMh co-processor.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-We need to support existing (upstream) devicetree, since this has 
-already been around for many years.
-> 
-> Regards,
-> Simon
+Minor nitpicks below, feel free to ignore or apply.
 
--- 
-// Caleb (they/them)
+> ---
+>
+>  doc/develop/bootstd/extlinux.rst | 27 +++++++++++++++++++++++++++
+>  doc/develop/bootstd/index.rst    |  1 +
+>  doc/develop/bootstd/overview.rst |  2 +-
+>  3 files changed, 29 insertions(+), 1 deletion(-)
+>  create mode 100644 doc/develop/bootstd/extlinux.rst
+>
+> diff --git a/doc/develop/bootstd/extlinux.rst b/doc/develop/bootstd/extlinux.rst
+> new file mode 100644
+> index 00000000000..28490f38899
+> --- /dev/null
+> +++ b/doc/develop/bootstd/extlinux.rst
+> @@ -0,0 +1,27 @@
+> +.. SPDX-License-Identifier: GPL-2.0+:
+> +
+> +Extlinux Bootmeth
+> +=================
+> +
+> +`Extlinux <https://uapi-group.org/specifications/specs/boot_loader_specification>`_
+> +(sometimes called syslinux) allows U-Boot to provide a menu of possible
+> +Operating Systems from which the user can choose.
+> +
+> +U-Boot includes a parser for the `extlinux.conf` file. It consists primarily of
+> +a list of named OSes along with the kernel, initial ramdisk and other settings.
+> +The file is stored in the `extlinux/` subdirectory, possibly under the `boot/`
+> +subdirectory. This list of prefixes ({"/", "/boot"} by default) can be selected
+
+Can the prefixes also be surrounded by `` (`{"/", "boot"`} to insist
+that this is "code listing" as well ?
+
+> +with the `filename-prefixes` property in the bootstd device.
+> +
+> +Note that PXE (Preboot eXecution-Environment) uses the same file format, but in
+> +a network context.
+> +
+> +When invoked on a bootdev, this bootmeth searches for the file and creates a
+> +bootflow if found.
+> +
+> +When the bootflow is booted, the bootmeth calls pxe_setup_ctx() to set up the
+> +context, then pxe_process() to process the file. Depending on the contents, this
+
+same for pxe_setup_ctx and pxe_process
+
+> +may boot an OS or provide a list of options to the user, perhaps with a timeout.
+> +
+> +The compatible string "u-boot,extlinux" is used for the driver. The driver is
+> +automatically instantiated if there are no bootmeth drivers in the devicetree.
+> diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
+> index f4f87c7787c..5bbb3d633a3 100644
+> --- a/doc/develop/bootstd/index.rst
+> +++ b/doc/develop/bootstd/index.rst
+> @@ -7,3 +7,4 @@ Standard Boot
+>     :maxdepth: 2
+>  
+>     overview
+> +   extlinux
+> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+> index 761f61a573b..086a0b1281d 100644
+> --- a/doc/develop/bootstd/overview.rst
+> +++ b/doc/develop/bootstd/overview.rst
+> @@ -412,7 +412,7 @@ Available bootmeth drivers
+>  
+>  Bootmeth drivers are provided for:
+>  
+> -   - extlinux / syslinux boot from a disk
+> +   - :doc:`extlinux / syslinux <extlinux>` boot from a disk
+>     - extlinux boot from a network (PXE)
+>     - U-Boot scripts from disk, network or SPI flash
+>     - EFI boot using bootefi from disk
+> -- 
+> 2.34.1
