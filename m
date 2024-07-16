@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DFBCC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 23:01:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA439C3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 23:01:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9743E88A13;
-	Wed, 17 Jul 2024 01:00:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9050B88A1E;
+	Wed, 17 Jul 2024 01:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L9qNVv/G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hXJ895uH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADFA78875A; Wed, 17 Jul 2024 01:00:57 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 849BF88A1E; Wed, 17 Jul 2024 01:01:00 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B7F188785
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:00:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BEE7887D4
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:00:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-708b273b437so3242892a34.0
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 16:00:55 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-704156d0e0dso3234231a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 16:00:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721170854; x=1721775654; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721170857; x=1721775657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=95vh5YFBX6txK+P2nafdy0aoblbl0x56zvkTTB4HT4Q=;
- b=L9qNVv/G5U9Fz0GqYvqIBP7oy1JxIhIWVroFZJvQLHm+H2gQrDYVw/DIOm4gqw9cBi
- McDzVUopZ08yJcSzIv0FAv+vV/fjN+MsFePjxSE3IsWxDrW0ChCPFcZPmXNUsNxCKeWe
- GhO4+2TcKsY7LVdg1tRR+j4B4s06nrjIiXKu8=
+ bh=ulHKdc0B0Vdp5MKs9GFT8MviVK86LyzteKqsRi6rz9o=;
+ b=hXJ895uHk7LNIEKHn3ihwK8+h/ybZ8XljyGPO3ctL5IBysaafQ+NZ7vzcO3L16/mGt
+ Rgepdm4rSjaveDoyHOvLHs1UlJkFeVYVoqMnvQ5ZEJHHVSWorbO8TZLBF8XDgLZIeekz
+ X3BURXGLbgV8h0QLh8TKbdQINuUefV2SHDZ4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721170854; x=1721775654;
+ d=1e100.net; s=20230601; t=1721170857; x=1721775657;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=95vh5YFBX6txK+P2nafdy0aoblbl0x56zvkTTB4HT4Q=;
- b=U+wDmzzuCI/1zSwkphJtwH/GWhhhQP/1MM+lJEDCxyML7i/qgOpqN8BBIiiQsT9TH7
- l7vC/OXCQsVTVr/8VNqhAYzIgQOQS1AtSYa5/fn9y3jn9rbGFqOONAmB0Q8wzdxQBeJe
- TOTq0+yBMI6Y/cp3tEl2OAhG8/4TbxNHk2GU9ms4lWHGjuZ1DXxuCRnf4S1tqayQPjJo
- PaC91sKCDv12yCUsW8Aq0RiT5XJoRkRVHVuQb2KAYzmbpkW8pjIDZ1USp2YEnKsX9Yyu
- KqyhDkv+Tqrm+tZ4ko9f80GA+LE09QSh3X1A3bLTJIgyVYQgary+cd6Dj22MJM0hIzVP
- 7eow==
-X-Gm-Message-State: AOJu0YzjBcU/49ybxw0ZgqxfC5pB4TrnmmmUbnazTVgxuhFpqaBaPGwD
- A6ZyI0h0U5IigDY/Y6t6g9vt2SLWVSnXlOlRsVTnUNvgkDdK49b+3W2ZmWzJLf8=
-X-Google-Smtp-Source: AGHT+IH42sMBiUNuuWlp7rEo3fOiWCuI+GYkD8ErOiyLm9IIwQ228CORfh/y5dXPtIVL/KULrE5RTA==
-X-Received: by 2002:a05:6870:c0cd:b0:24f:d3ce:fe92 with SMTP id
- 586e51a60fabf-260bddd9806mr2992820fac.14.1721170854366; 
- Tue, 16 Jul 2024 16:00:54 -0700 (PDT)
+ bh=ulHKdc0B0Vdp5MKs9GFT8MviVK86LyzteKqsRi6rz9o=;
+ b=U8NLybBztsIJdAJDtHzdmDxNoCgmA4eBADqZo7M6gn8dzi0DqKNLS55MypBPz13uLE
+ TkhcCp7C07IaTnaPmARpk1NgAk8rXLJiRlgvgnj8seTVuqBkH/bpv0q/W3WifFMmU/4I
+ pc/XAyIKhtqaTORFRyycmSO/mKEflZgg77C0+q3/Kd8A3hYbxulqM79C3mYAwC4q7ndH
+ /29wyWfu6NKcl3/7AFjbnyor242hEQgFypYyuB37KHc1tmdWySHVDZiY5eA4nazbBWZk
+ nJZpz3BhRd34ztN1mFZy6yAPq5uqRnJMQkCFp2vqOX46fjoklfRHd4oQUGBVDO4uk9cP
+ 9AQg==
+X-Gm-Message-State: AOJu0YwSN4Ez/fKwORBoKknso2jo1qN/hJYh8TPBHbhmqCaXz5t9lfVr
+ v7g4j9x9M8L9YaKGfGn4RJFgd+aiJvescWiF9uQ6ynE1h9hrCip+hIiLaiYW78w=
+X-Google-Smtp-Source: AGHT+IFuPuEKUpWbWBsHRBNU9BZy0NqZ9KLBZb97PoQ5kfMhuIWr4+kc+zPhlWDTdDMsM2JdljxTkg==
+X-Received: by 2002:a05:6830:440a:b0:704:7c75:b13b with SMTP id
+ 46e09a7af769-708d99605dbmr4638407a34.6.1721170855674; 
+ Tue, 16 Jul 2024 16:00:55 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708c0d2fcc2sm1510063a34.77.2024.07.16.16.00.53
+ 46e09a7af769-708c0d2fcc2sm1510063a34.77.2024.07.16.16.00.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 16:00:53 -0700 (PDT)
+ Tue, 16 Jul 2024 16:00:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, upstream@lists.phytec.de, 
- Daniel Schultz <d.schultz@phytec.de>
-Cc: w.egorov@phytec.de, d-gole@ti.com, mkorpershoek@baylibre.com, nm@ti.com
-In-Reply-To: <20240701062050.1475249-1-d.schultz@phytec.de>
-References: <20240701062050.1475249-1-d.schultz@phytec.de>
-Subject: Re: [PATCH 1/4] configs: phycore_am62x_a53: Add more commands
-Message-Id: <172117085312.763145.796768975961942487.b4-ty@konsulko.com>
-Date: Tue, 16 Jul 2024 17:00:53 -0600
+To: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>, 
+ Nishanth Menon <nm@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
+ Dhruva Gole <d-gole@ti.com>
+In-Reply-To: <20240702-b4-upstream-streamline-platform-v3-0-0ebd7bbd31d5@ti.com>
+References: <20240702-b4-upstream-streamline-platform-v3-0-0ebd7bbd31d5@ti.com>
+Subject: Re: [PATCH v3 0/4] Fix fdtfile for j722s and am62p
+Message-Id: <172117085456.763145.4796228306126984599.b4-ty@konsulko.com>
+Date: Tue, 16 Jul 2024 17:00:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,12 +94,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 30 Jun 2024 23:20:47 -0700, Daniel Schultz wrote:
+On Tue, 02 Jul 2024 10:50:00 +0530, Manorit Chawdhry wrote:
 
-> Add i2c and rtc commands with all dependencies which are
-> required for testing.
-> 
-> Additionally, add smc and cache commands to boot Zephyr on the A53.
+> fdtfile wasn't being populated in these boards in legacy boot using
+> bootcmd_ti_mmc, migrate these platforms to ti_set_fdt_env.
 > 
 > 
 
