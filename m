@@ -4,61 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58F3DC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 10:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB9C0C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 11:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E36DC88977;
-	Tue, 16 Jul 2024 12:21:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id EF4B088939;
+	Tue, 16 Jul 2024 13:00:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="TwlCFPKU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A08DD88821; Tue, 16 Jul 2024 12:21:55 +0200 (CEST)
-Received: from mail-m127215.xmail.ntesmail.com
- (mail-m127215.xmail.ntesmail.com [115.236.127.215])
+ id 05E888887A; Tue, 16 Jul 2024 13:00:09 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88681889DE
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 12:21:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7737288977
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 13:00:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=TwlCFPKUohidSnOLvLBgeKAvgh67YeOBIgKaYmm3x9XfcFMEzhYt2ZAnxzgjsXUa0jsmRyyxTF/kPDbbkEHYYTFeWF477q4prTJYw8f6HR5SS3QRYkY4Oxaj8lNjpCEn6vHvv7FSo898ap6nyiNe1F837ezbDnANCEZxBAnLSU4=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=dJhGHhcm5q9xfNDMHmbXYR5BJp4JU+KGlzZRhJLF120=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 8C863900659;
- Tue, 16 Jul 2024 18:21:44 +0800 (CST)
-Message-ID: <f0f2fcd1-5e28-454e-9355-76442c64afe4@rock-chips.com>
-Date: Tue, 16 Jul 2024 18:21:44 +0800
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 46GAxevF081357
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Tue, 16 Jul 2024 18:59:40 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 16 Jul
+ 2024 18:59:40 +0800
+Date: Tue, 16 Jul 2024 18:59:37 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: E Shattow <lucent@gmail.com>
+CC: Bo Gan <ganboing@gmail.com>, Hal Feng <hal.feng@starfivetech.com>,
+ "rick@andestech.com" <rick@andestech.com>, "trini@konsulko.com"
+ <trini@konsulko.com>, "yanhong.wang@starfivetech.com"
+ <yanhong.wang@starfivetech.com>, Minda Chen <minda.chen@starfivetech.com>,
+ "duwe@suse.de" <duwe@suse.de>,
+ "namcao@linutronix.de" <namcao@linutronix.de>,
+ Xingyu Wu <xingyu.wu@starfivetech.com>, Mason Huo
+ <mason.huo@starfivetech.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] riscv: dts: jh7110: Enable PLL node in SPL
+Message-ID: <ZpZSmdrst4z_Q4JQ@swlinux02>
+References: <1709694011-683-1-git-send-email-ganboing@gmail.com>
+ <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+ <CANV2PTMPrQVZhWvNFxi8-RA0ZC4UAF1sHBbHiipUc01aWx6oqg@mail.gmail.com>
+ <0eda64cb-4ca8-f8bc-7515-6d2a2d3d4638@gmail.com>
+ <CANV2PTP3o1Q2JPCZO8Ewfye+oz9f3TVNTYhYZ3EAKtdYAhvkHg@mail.gmail.com>
+ <f355e582-cb52-e4c5-538b-26bcf69f0a2c@gmail.com>
+ <CANV2PTOzgyzYSbNRJXuvLnMDAT-mDL8o1tU7d72qTKQDMdt_Uw@mail.gmail.com>
+ <CANV2PTP2hpd5m17+_T7zp2V6w03d=0rgAuwukyC0LHVYxLtRuw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 9/9] rockchip: gpio: Add gpio-ranges props
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Johan Jonker <jbx6244@gmail.com>, Alex Bee <knaerzche@gmail.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de
-References: <20240512121633.1632597-1-jonas@kwiboo.se>
- <20240512121633.1632597-10-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240512121633.1632597-10-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhlITVZOSk1JQ00eTUlMSxpWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
- JVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90bb0ffbd803a9kunm8c863900659
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORQ6Ljo4HzI#Mh0vAzAxMhY9
- IjpPCwxVSlVKTElKSklOSEtOTENPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFCSENKNwY+
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANV2PTP2hpd5m17+_T7zp2V6w03d=0rgAuwukyC0LHVYxLtRuw@mail.gmail.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 46GAxevF081357
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,339 +80,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jul 11, 2024 at 12:55:05PM -0700, E Shattow wrote:
+> [EXTERNAL MAIL]
+> 
+> Ping. This regression still exists and is now in stable release.
+> Should we revert this change or how must it be fixed?
+> 
+> -E
+> 
 
-On 2024/5/12 20:16, Jonas Karlman wrote:
-> Add gpio-ranges props to supported SoCs based on the following Linux
-> patches:
->
-> ARM: dts: rockchip: add gpio-ranges property to gpio nodes
-> https://lore.kernel.org/all/26007385-81dc-9961-05d5-8b9a0969d0b6@gmail.com/
->
-> arm64: dts: rockchip: add gpio-ranges property to gpio nodes
-> https://lore.kernel.org/all/18c8c89a-9962-40f0-814f-81e2c420c957@gmail.com/
->
-> For RK3066 and RK3288 the gpio-ranges props is adjusted to match
-> https://lore.kernel.org/all/541b7633-af3b-4392-ac29-7ee1f2c6f943@kwiboo.se/
->
-> Re-enable gpio6 on RK3066 now that the pinctrl pin offset is used with
-> get_gpio_mux().
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Hi all,
 
-Thanks,
-- Kever
-> ---
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> ---
->   arch/arm/dts/rk3036-u-boot.dtsi  | 12 ++++++++++++
->   arch/arm/dts/rk3066a-u-boot.dtsi |  3 +--
->   arch/arm/dts/rk3128-u-boot.dtsi  | 16 ++++++++++++++++
->   arch/arm/dts/rk322x-u-boot.dtsi  | 16 ++++++++++++++++
->   arch/arm/dts/rk3288-u-boot.dtsi  | 33 ++++++++++++++++++++++++++++++++
->   arch/arm/dts/rk3308-u-boot.dtsi  | 20 +++++++++++++++++++
->   arch/arm/dts/rk3328-u-boot.dtsi  | 13 +++++++++++++
->   arch/arm/dts/rk3368-u-boot.dtsi  | 16 ++++++++++++++++
->   arch/arm/dts/rk3399-u-boot.dtsi  | 20 +++++++++++++++++++
->   arch/arm/dts/rv1108-u-boot.dtsi  | 16 ++++++++++++++++
->   arch/arm/dts/rv1126-u-boot.dtsi  | 14 ++++++++++++++
->   11 files changed, 177 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/dts/rk3036-u-boot.dtsi b/arch/arm/dts/rk3036-u-boot.dtsi
-> index 41ac054b81e8..3e788187f630 100644
-> --- a/arch/arm/dts/rk3036-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3036-u-boot.dtsi
-> @@ -4,3 +4,15 @@
->    */
->   
->   #include "rockchip-u-boot.dtsi"
-> +
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> diff --git a/arch/arm/dts/rk3066a-u-boot.dtsi b/arch/arm/dts/rk3066a-u-boot.dtsi
-> index 06f405ca2c5e..35b52d6fb7f3 100644
-> --- a/arch/arm/dts/rk3066a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3066a-u-boot.dtsi
-> @@ -24,6 +24,5 @@
->   };
->   
->   &gpio6 {
-> -	status = "disabled";
-> +	gpio-ranges = <&pinctrl 0 160 16>;
->   };
-> -
-> diff --git a/arch/arm/dts/rk3128-u-boot.dtsi b/arch/arm/dts/rk3128-u-boot.dtsi
-> index 6d1965e6b520..dd1208e7cf40 100644
-> --- a/arch/arm/dts/rk3128-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3128-u-boot.dtsi
-> @@ -14,6 +14,22 @@
->   	bootph-all;
->   };
->   
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> +
->   &grf {
->   	bootph-all;
->   };
-> diff --git a/arch/arm/dts/rk322x-u-boot.dtsi b/arch/arm/dts/rk322x-u-boot.dtsi
-> index aea917544b1c..f0e2a1f95aa0 100644
-> --- a/arch/arm/dts/rk322x-u-boot.dtsi
-> +++ b/arch/arm/dts/rk322x-u-boot.dtsi
-> @@ -47,6 +47,22 @@
->   	max-frequency = <150000000>;
->   };
->   
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> +
->   &grf {
->   	bootph-all;
->   };
-> diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-> index a43d320ade7b..0f8053a8b690 100644
-> --- a/arch/arm/dts/rk3288-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3288-u-boot.dtsi
-> @@ -95,8 +95,41 @@
->   	clock-names = "clk_edp", "clk_edp_24m", "pclk_edp";
->   };
->   
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 24>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 24 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 56 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 88 32>;
-> +};
-> +
-> +&gpio4 {
-> +	gpio-ranges = <&pinctrl 0 120 32>;
-> +};
-> +
-> +&gpio5 {
-> +	gpio-ranges = <&pinctrl 0 152 32>;
-> +};
-> +
-> +&gpio6 {
-> +	gpio-ranges = <&pinctrl 0 184 32>;
-> +};
-> +
->   &gpio7 {
->   	bootph-all;
-> +	gpio-ranges = <&pinctrl 0 216 32>;
-> +};
-> +
-> +&gpio8 {
-> +	gpio-ranges = <&pinctrl 0 248 16>;
->   };
->   
->   &grf {
-> diff --git a/arch/arm/dts/rk3308-u-boot.dtsi b/arch/arm/dts/rk3308-u-boot.dtsi
-> index 684fa7abddb1..7d3cf55c33fa 100644
-> --- a/arch/arm/dts/rk3308-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3308-u-boot.dtsi
-> @@ -70,6 +70,26 @@
->   	bootph-some-ram;
->   };
->   
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> +
-> +&gpio4 {
-> +	gpio-ranges = <&pinctrl 0 128 32>;
-> +};
-> +
->   &grf {
->   	bootph-all;
->   };
-> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-> index 0135bc08d491..3bc776146a82 100644
-> --- a/arch/arm/dts/rk3328-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
-> @@ -57,6 +57,19 @@
->   
->   &gpio0 {
->   	bootph-pre-ram;
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
->   };
->   
->   &grf {
-> diff --git a/arch/arm/dts/rk3368-u-boot.dtsi b/arch/arm/dts/rk3368-u-boot.dtsi
-> index 811d59ac346e..be2ebda83529 100644
-> --- a/arch/arm/dts/rk3368-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3368-u-boot.dtsi
-> @@ -26,3 +26,19 @@
->   		reg = <0x0 0xff740000 0x0 0x1000>;
->   	};
->   };
-> +
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-> index b6b43271172e..b85aac0ad0d1 100644
-> --- a/arch/arm/dts/rk3399-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
-> @@ -80,6 +80,26 @@
->   	bootph-some-ram;
->   };
->   
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> +
-> +&gpio4 {
-> +	gpio-ranges = <&pinctrl 0 128 32>;
-> +};
-> +
->   &grf {
->   	bootph-all;
->   };
-> diff --git a/arch/arm/dts/rv1108-u-boot.dtsi b/arch/arm/dts/rv1108-u-boot.dtsi
-> index ccf2d8bd83ec..f772d618bd1d 100644
-> --- a/arch/arm/dts/rv1108-u-boot.dtsi
-> +++ b/arch/arm/dts/rv1108-u-boot.dtsi
-> @@ -5,6 +5,22 @@
->   
->   #include "rockchip-u-boot.dtsi"
->   
-> +&gpio0 {
-> +	gpio-ranges = <&pinctrl 0 0 32>;
-> +};
-> +
-> +&gpio1 {
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> +
->   &grf {
->   	bootph-all;
->   };
-> diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
-> index 448598013578..3e6df1e433db 100644
-> --- a/arch/arm/dts/rv1126-u-boot.dtsi
-> +++ b/arch/arm/dts/rv1126-u-boot.dtsi
-> @@ -31,10 +31,24 @@
->   
->   &gpio0 {
->   	bootph-pre-ram;
-> +	gpio-ranges = <&pinctrl 0 0 32>;
->   };
->   
->   &gpio1 {
->   	bootph-pre-ram;
-> +	gpio-ranges = <&pinctrl 0 32 32>;
-> +};
-> +
-> +&gpio2 {
-> +	gpio-ranges = <&pinctrl 0 64 32>;
-> +};
-> +
-> +&gpio3 {
-> +	gpio-ranges = <&pinctrl 0 96 32>;
-> +};
-> +
-> +&gpio4 {
-> +	gpio-ranges = <&pinctrl 0 128 2>;
->   };
->   
->   &grf {
+I think I could revert this commit for now 
+if we cannot find the root cause and solution right away.
+
+Best regards,
+Leo
+
+> On Sat, Apr 20, 2024 at 3:56 AM E Shattow <lucent@gmail.com> wrote:
+> >
+> > On Fri, Apr 19, 2024 at 5:51 PM Bo Gan <ganboing@gmail.com> wrote:
+> > >
+> > ...snip...
+> > >
+> > > If without the change (reverted), can you read/write the same SD media in U-boot
+> > > proper? (U-boot proper will switch BUS_ROOT to PLL2).
+> >
+> > I tested again this change in commit e6b7aeef, before this change in
+> > parent commit e6b7aeef~, af04f37a HEAD from today 19th Apr 2024 (which
+> > due to not matching EEPROM product_id will be in the fall-through case
+> > of board/starfive/visionfive2/spl.c), af04f37a with applied patchset
+> > "board: starfive: add Milk-V Mars CM support" from 15th Apr 2024, and
+> > af04f37a reverting changes from e6b7aeef also with applied patchset
+> > "board: starfive: add Milk-V Mars CM support" from 15th Apr 2024.
+> >
+> > In all builds is OpenSBI at commit d4d2582e HEAD from today 19 Apr 2024.
+> >
+> > For each build tested per vendor Milk-V the Mars CM Lite (SD Card only
+> > non-eMMC) has pinmux of GPIO22 instead of GPIO62:
+> >
+> > -- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> > +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> > @@ -233,7 +233,7 @@
+> >
+> >         mmc0_pins: mmc0-pins {
+> >                  mmc0-pins-rest {
+> > -                       pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+> > +                       pinmux = <GPIOMUX(22, GPOUT_SYS_SDIO0_RST,
+> >                                               GPOEN_ENABLE, GPI_NONE)>;
+> >                         bias-pull-up;
+> >                         drive-strength = <12>;
+> >
+> > U-Boot config is simply starfive_visionfive2_defconfig.
+> >
+> > Results are as follows.
+> >
+> > StarFive # mac
+> > --------EEPROM INFO--------
+> > Vendor : MILK-V
+> > Product full SN: MARC-V10-2340-D004E000-000006DF
+> > data version: 0x2
+> > PCB revision: 0xc1
+> > BOM revision: A
+> > Ethernet MAC0 address: 6c:cf:39:00:83:11
+> > Ethernet MAC1 address: 6c:cf:39:00:83:12
+> > --------EEPROM INFO--------
+> >
+> > e6b7aeef: 2GB microSD (no speed class markings)
+> > af04f37a: 2GB microSD (no speed class markings)
+> > af04f37a with Mars CM patchset: 2GB microSD (no speed class markings)
+> > StarFive # mmc rescan ; mmc info
+> > unable to select a mode
+> > unable to select a mode
+> >
+> > e6b7aeef~: 2GB microSD (no speed class markings)
+> > af04f37a revert e6b7aeef with Mars CM patchset: 2GB microSD (no speed
+> > class markings)
+> > StarFive # mmc rescan ; mmc info
+> > Device: mmc@16010000
+> > Manufacturer ID: 1c
+> > OEM: 5356
+> > Name: USD
+> > Bus Speed: 50000000
+> > Mode: SD High Speed (50MHz)
+> > Rd Block Len: 512
+> > SD version 2.0
+> > High Capacity: No
+> > Capacity: 1.9 GiB
+> > Bus Width: 1-bit
+> > Erase Group Size: 512 Bytes
+> >
+> > e6b7aeef: 8GB microSD Class 4
+> > e6b7aeef~: 8GB microSD Class 4
+> > af04f37a: 8GB microSD Class 4
+> > af04f37a with Mars CM patchset: 8GB microSD Class 4
+> > af04f37a revert e6b7aeef with Mars CM patchset: 8GB microSD Class 4
+> > StarFive # mmc rescan ; mmc info
+> > Device: mmc@16010000
+> > Manufacturer ID: 2
+> > OEM: 544d
+> > Name: SA08G
+> > Bus Speed: 50000000
+> > Mode: SD High Speed (50MHz)
+> > Rd Block Len: 512
+> > SD version 3.0
+> > High Capacity: Yes
+> > Capacity: 7.4 GiB
+> > Bus Width: 1-bit
+> > Erase Group Size: 512 Bytes
+> >
+> > e6b7aeef: 8GB microSD Class 10
+> > e6b7aeef~: 8GB microSD Class 10
+> > af04f37a: 8GB microSD Class 10
+> > af04f37a with Mars CM patchset: 8GB microSD Class 10
+> > af04f37a revert e6b7aeef with Mars CM patchset: 8GB microSD Class 10
+> > StarFive # mmc rescan ; mmc info
+> > Device: mmc@16010000
+> > Manufacturer ID: 74
+> > OEM: 4a60
+> > Name: USD
+> > Bus Speed: 50000000
+> > Mode: SD High Speed (50MHz)
+> > Rd Block Len: 512
+> > SD version 3.0
+> > High Capacity: Yes
+> > Capacity: 7.5 GiB
+> > Bus Width: 1-bit
+> > Erase Group Size: 512 Bytes
+> >
+> > e6b7aeef: 32GB microSD Class 10 A1 U1 HC1
+> > e6b7aeef~: 32GB microSD Class 10 A1 U1 HC1
+> > af04f37a: 32GB microSD Class 10 A1 U1 HC1
+> > af04f37a with Mars CM patchset: 32GB microSD Class 10 A1 U1 HC1
+> > af04f37a revert e6b7aeef with Mars CM patchset: 32GB microSD Class 10 A1 U1 HC1
+> > StarFive # mmc rescan ; mmc info
+> > Device: mmc@16010000
+> > Manufacturer ID: 3
+> > OEM: 5344
+> > Name: SC32G
+> > Bus Speed: 50000000
+> > Mode: SD High Speed (50MHz)
+> > Rd Block Len: 512
+> > SD version 3.0
+> > High Capacity: Yes
+> > Capacity: 29.7 GiB
+> > Bus Width: 1-bit
+> > Erase Group Size: 512 Bytes
+> >
+> > e6b7aeef: 200GB microSD Class 10 A1 U1 XC1
+> > e6b7aeef~: 200GB microSD Class 10 A1 U1 XC1
+> > af04f37a: 200GB microSD Class 10 A1 U1 XC1
+> > af04f37a with Mars CM patchset: 200GB microSD Class 10 A1 U1 XC1
+> > af04f37a revert e6b7aeef with Mars CM patchset: 200GB microSD Class 10 A1 U1 XC1
+> > StarFive # mmc rescan ; mmc info
+> > Device: mmc@16010000
+> > Manufacturer ID: 3
+> > OEM: 5344
+> > Name: SC200
+> > Bus Speed: 50000000
+> > Mode: SD High Speed (50MHz)
+> > Rd Block Len: 512
+> > SD version 3.0
+> > High Capacity: Yes
+> > Capacity: 183.3 GiB
+> > Bus Width: 1-bit
+> > Erase Group Size: 512 Bytes
+> >
+> > e6b7aeef: 256GB microSD Class U3 XC1
+> > e6b7aeef~: 256GB microSD Class U3 XC1
+> > af04f37a: 256GB microSD Class U3 XC1
+> > af04f37a with Mars CM patchset: 256GB microSD Class U3 XC1
+> > af04f37a revert e6b7aeef with Mars CM patchset: 256GB microSD Class U3 XC1
+> > StarFive # mmc rescan ; mmc info
+> > Device: mmc@16010000
+> > Manufacturer ID: 1b
+> > OEM: 534d
+> > Name: GE4S5
+> > Bus Speed: 50000000
+> > Mode: SD High Speed (50MHz)
+> > Rd Block Len: 512
+> > SD version 3.0
+> > High Capacity: Yes
+> > Capacity: 238.8 GiB
+> > Bus Width: 1-bit
+> > Erase Group Size: 512 Bytes
+> >
+> > > One potential problem I
+> > > could think of is perhaps the SPL built is without SPL_PINCTRL_STARFIVE/JH7110
+> > > or the u-boot dts is missing the pinctrl that properly sets drive-strength and
+> > > other properties of the mmc0/1 pins. What dtb are you using? I tested this with
+> > > visionfive2 and it's working fine. Can you share the tree/config you used to
+> > > built for Milk-V Mars CM Lite? I don't see the corresponding dts being checked-
+> > > in to u-boot tree, so it helps if you can share the code. Thanks!
+> > >
+> > > Bo
+> >
+> > As described, this is upstream U-Boot. Does this 'mmc info' testing
+> > help give some ideas to suggest?
+> >
+> > -E
