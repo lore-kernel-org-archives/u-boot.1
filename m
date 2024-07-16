@@ -4,82 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA7CC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jul 2024 23:31:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68FE0C3DA4B
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 00:08:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29836885E7;
-	Tue, 16 Jul 2024 01:31:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 867468890F;
+	Tue, 16 Jul 2024 02:07:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aPN5vayC";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E3E7888A7; Tue, 16 Jul 2024 01:31:46 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10CAD88216
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 01:31:44 +0200 (CEST)
+ id 3D8DE88912; Tue, 16 Jul 2024 02:07:57 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id D86DA88907
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 02:07:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-65f9e25fffaso25164197b3.3
- for <u-boot@lists.denx.de>; Mon, 15 Jul 2024 16:31:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721086303; x=1721691103; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zytChzUSZ8zJvlHb0zwqGy+a8v8qThHsM9dFwW/Mg0Q=;
- b=aPN5vayCwlQ8p83Exxb8d0TXEtWGnFxQhkiIs+RdTy3AITtYIvobHS9IpnGeGYtJVn
- nJf8jAdlisvnBonK2PcZ47yowpdD1cCsxLt1CcXWNej+bqqXV9B5X6kbbqy+c/yClW8L
- 0qZVszb5p+MQo5EQG40cjTuwCfW2OvS9VafJfsLN845q9mSiVPLfynF3YaA0KHMqP9+I
- ET9YhJS1EABpeQO/LOj/Egu2WJbZkQdBy8SJ49eVb2oTQftVzbL1KRHBw6gz7E2xD8rv
- bU5mwJXE3qzYbZYh61hdqY596DBeb7OyTQcyEdeoAijJpO/WA+k7+XF87HHinTSHdRzu
- 2Wgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721086303; x=1721691103;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zytChzUSZ8zJvlHb0zwqGy+a8v8qThHsM9dFwW/Mg0Q=;
- b=FRgtq8By+1RXHHxbRUTE8ZdqQSCe2Qq6yk5sIgU7V11BBFVsBWVQ3/eklUlCG+aM3A
- qAt40Ej30i2/hJCSrILIq5e2+UC080OAGNVYOvR6mgsJq8K19/6/BTs7XO8IEXMO/r2F
- XY1+jMWCvxBKazeC6ZzWeb0gK2cAC1V/Aa+iBYMeivxuYgw3UjpwabTRDKlUcKXgyHd+
- hNyIMAtkNRS9BDc8dw9pTZPk40KoX420OD2B2oZ8A+VSRpKKTVPs5RslWPfpa+XY31Hi
- TLpZnoiF73Op4HS4H0cC2MMBFqRMhWgVGVmB2XhEg/nVgzCOTPJaZC3Ipiy/a9bCR2HT
- 9ovg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfM/cBlZVu1QHGjw5H9Hc31XWFVZaumnfZ92N3MUZSGQT7sGzTwbZocM4LrgaOfplBfZZUdu9OUQ4JIV86RBAgkWBmJg==
-X-Gm-Message-State: AOJu0YzLJJy2n1CbBF6Mwr+wqLJn85ON3e9RV2pFOOTASvMDwG8BFXc7
- BXBXRcQ4bOVe/8qLRRpiLmJQdtYFNCp+/JkXhiUKNe180T/PqBkCvScV+TOuH8L+B4szAmidh4/
- qs72zjA6ZQ9DFXqBss8KXFXdtQX9FABWaKA6ZXA==
-X-Google-Smtp-Source: AGHT+IHJOKtaBWpE0xzx2KMuTqMXpQuELjsAk16IXW2kjU6JRu7GE5TSKmrBbDlE36SWHzKVwM6usCNXoxXt3345sbc=
-X-Received: by 2002:a0d:de04:0:b0:64a:90fe:9108 with SMTP id
- 00721157ae682-66380c110d6mr5943187b3.30.1721086302098; Mon, 15 Jul 2024
- 16:31:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2D3D71063;
+ Mon, 15 Jul 2024 17:08:19 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BCDEB3F762;
+ Mon, 15 Jul 2024 17:07:52 -0700 (PDT)
+Date: Tue, 16 Jul 2024 01:05:41 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] spi: sunxi: drop max_hz handling
+Message-ID: <20240716010541.745a6c09@minigeek.lan>
+In-Reply-To: <20240712171457.3104804-2-mwalle@kernel.org>
+References: <20240712171457.3104804-1-mwalle@kernel.org>
+ <20240712171457.3104804-2-mwalle@kernel.org>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20240712234304.9675-1-semen.protsenko@linaro.org>
- <20240712234304.9675-5-semen.protsenko@linaro.org>
- <CAFLszTgDFB6ivRdPfV9PnKgke+5TRwmpveicb-a2vOr-H-VPbg@mail.gmail.com>
-In-Reply-To: <CAFLszTgDFB6ivRdPfV9PnKgke+5TRwmpveicb-a2vOr-H-VPbg@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Mon, 15 Jul 2024 18:31:31 -0500
-Message-ID: <CAPLW+4noPcfRXcUx++Yjf0O0wbxCZsKJw0DiWWGzodC-8i-_Mg@mail.gmail.com>
-Subject: Re: [PATCH 4/5] rng: Add Exynos TRNG driver
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,127 +57,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jul 13, 2024 at 10:13=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
->
-> Hi Sam,
->
+On Fri, 12 Jul 2024 19:14:56 +0200
+Michael Walle <mwalle@kernel.org> wrote:
 
-Hi Simon,
+Hi Michael,
 
-Thank you for the review!
+> The driver is trying to read the "spi-max-frequency" property of the
+> *controller* driver node. There is no such property. The
+> "spi-max-frequency" property belongs to the SPI devices on the bus.
 
-> On Sat, 13 Jul 2024 at 00:44, Sam Protsenko <semen.protsenko@linaro.org> =
-wrote:
-> > +config RNG_EXYNOS
-> > +       bool "Samsung Exynos True Random Number Generator support"
-> > +       depends on DM_RNG
-> > +       help
-> > +         Enable support for True Random Number Generator (TRNG)
-> > +         available in Exynos SoCs.
->
-> Can you mention the needed firmware here?
->
+Ah, indeed, good catch! Many thanks for sending this!
+ 
+> Right now, the driver will always fall back to the default value of 1MHz
+> and thus flash reads are very slow with just about 215kb/s.
 
-Will do in v2.
+That's even slower, right? I guess around 125 KB/s?
+ 
+> In fact, the SPI uclass will already take care of everything and we just
+> have to clamp the frequency to the values the driver/hardware supports.
+> Thus, drop the whole max_hz handling.
 
-> > +
-> > +struct exynos_trng_variant {
->
-> please add comments
->
+Looks good to me, I verified this by timing the read, this patch indeed 
+significantly increases the performance. Also changing the limit in the
+DT gets reflected in the driver and in the read speed. Also verified
+that the values read from the SPI flash are the same in all cases.
 
-Will do in v2.
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
 
-> > +       bool smc;
-> > +       int (*init)(struct udevice *dev);
-> > +       void (*exit)(struct udevice *dev);
-> > +       int (*read)(struct udevice *dev, void *data, size_t len);
-> > +};
-> > +
-> > +struct exynos_trng {
->
-> The convention is to add a _priv suffix
->
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+Tested-by: Andre Przywara <andre.przywara@arm.com>
 
-Will add in v2.
+I will make this part of the first 2024.10 PR.
 
-> > +static int exynos_trng_init_smc(struct udevice *dev)
-> > +{
-> > +       struct arm_smccc_res res;
-> > +       int ret =3D 0;
-> > +
-> > +       arm_smccc_smc(SMC_CMD_RANDOM, HWRNG_INIT, 0, 0, 0, 0, 0, 0, &re=
-s);
-> > +       if (res.a0 !=3D HWRNG_RET_OK) {
-> > +               dev_err(dev, "SMC command for TRNG init failed (%d)\n",
-> > +                       (int)res.a0);
-> > +               ret =3D -EIO;
-> > +       }
-> > +       if ((int)res.a0 =3D=3D -1)
-> > +               dev_info(dev, "Make sure LDFW is loaded\n");
->
-> return error here?
->
+Cheers,
+Andre
 
-It's already done above: (res.a0 !=3D HWRNG_RET_OK) condition includes
--1 case. This line is basically only to help user figure out what
-might be wrong.
 
-> > +static int exynos_trng_of_to_plat(struct udevice *dev)
-> > +{
-> > +       struct exynos_trng *trng =3D dev_get_priv(dev);
-> > +
-> > +       trng->data =3D (struct exynos_trng_variant *)dev_get_driver_dat=
-a(dev);
-> > +       if (!trng->data->smc) {
-> > +               trng->base =3D dev_read_addr_ptr(dev);
-> > +               if (!trng->base)
-> > +                       return -ENODEV;
->
-> That has a special meaning in U-Boot (i.e. that there is no device).
-> Devicetree problems should return -EINVAL
->
+> ---
+>  drivers/spi/spi-sunxi.c | 21 +++++++++------------
+>  1 file changed, 9 insertions(+), 12 deletions(-)
+> 
+> diff --git a/drivers/spi/spi-sunxi.c b/drivers/spi/spi-sunxi.c
+> index 13725ee7a2d..bfb402902b8 100644
+> --- a/drivers/spi/spi-sunxi.c
+> +++ b/drivers/spi/spi-sunxi.c
+> @@ -135,7 +135,6 @@ struct sun4i_spi_variant {
+>  struct sun4i_spi_plat {
+>  	struct sun4i_spi_variant *variant;
+>  	u32 base;
+> -	u32 max_hz;
+>  };
+>  
+>  struct sun4i_spi_priv {
+> @@ -237,6 +236,13 @@ static void sun4i_spi_set_speed_mode(struct udevice *dev)
+>  	unsigned int div;
+>  	u32 reg;
+>  
+> +	/*
+> +	 * The uclass should take care that this won't happen. But anyway,
+> +	 * avoid a div-by-zero exception.
+> +	 */
+> +	if (!priv->freq)
+> +		return;
+> +
+>  	/*
+>  	 * Setup clock divider.
+>  	 *
+> @@ -401,11 +407,10 @@ static int sun4i_spi_xfer(struct udevice *dev, unsigned int bitlen,
+>  
+>  static int sun4i_spi_set_speed(struct udevice *dev, uint speed)
+>  {
+> -	struct sun4i_spi_plat *plat = dev_get_plat(dev);
+>  	struct sun4i_spi_priv *priv = dev_get_priv(dev);
+>  
+> -	if (speed > plat->max_hz)
+> -		speed = plat->max_hz;
+> +	if (speed > SUN4I_SPI_MAX_RATE)
+> +		speed = SUN4I_SPI_MAX_RATE;
+>  
+>  	if (speed < SUN4I_SPI_MIN_RATE)
+>  		speed = SUN4I_SPI_MIN_RATE;
+> @@ -458,7 +463,6 @@ static int sun4i_spi_probe(struct udevice *bus)
+>  
+>  	priv->variant = plat->variant;
+>  	priv->base = plat->base;
+> -	priv->freq = plat->max_hz;
+>  
+>  	return 0;
+>  }
+> @@ -466,16 +470,9 @@ static int sun4i_spi_probe(struct udevice *bus)
+>  static int sun4i_spi_of_to_plat(struct udevice *bus)
+>  {
+>  	struct sun4i_spi_plat *plat = dev_get_plat(bus);
+> -	int node = dev_of_offset(bus);
+>  
+>  	plat->base = dev_read_addr(bus);
+>  	plat->variant = (struct sun4i_spi_variant *)dev_get_driver_data(bus);
+> -	plat->max_hz = fdtdec_get_int(gd->fdt_blob, node,
+> -				      "spi-max-frequency",
+> -				      SUN4I_SPI_DEFAULT_RATE);
+> -
+> -	if (plat->max_hz > SUN4I_SPI_MAX_RATE)
+> -		plat->max_hz = SUN4I_SPI_MAX_RATE;
+>  
+>  	return 0;
+>  }
 
-Will fix in v2.
-
-> > +       }
-> > +
-> > +       trng->clk =3D devm_clk_get(dev, "secss");
-> > +       if (IS_ERR(trng->clk))
-> > +               return -ENODEV;
->
-> Should return the actual error
->
-
-Will fix in v2.
-
-> > +
-> > +       trng->pclk =3D devm_clk_get_optional(dev, "pclk");
-> > +       if (IS_ERR(trng->pclk))
-> > +               return -ENODEV;
->
-> same here
->
-
-Will fix in v2.
-
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int exynos_trng_probe(struct udevice *dev)
-> > +{
-> > +       struct exynos_trng *trng =3D dev_get_priv(dev);
-> > +       int err;
->
-> s/err/ret/
->
-
-Will fix in v2.
-
-[snip]
-
->
-> Regards,
-> Simon
