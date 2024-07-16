@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9641C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC8DC3DA59
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 07:07:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35BC2889CE;
-	Tue, 16 Jul 2024 09:04:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A0A5889D3;
+	Tue, 16 Jul 2024 09:04:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KaTEEuD7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RugOEHR8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72C33889BB; Tue, 16 Jul 2024 09:04:49 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 0C6E8889DB; Tue, 16 Jul 2024 09:04:51 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EAFC889CE
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DEE5889D3
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 09:04:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6b5f128b199so30308106d6.0
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:46 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e02c4983bfaso5357916276.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 00:04:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721113485; x=1721718285; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721113486; x=1721718286; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xTRnsPBKeG7h7fn+nido/PZQSe7oh9yXObwyvG/m6L0=;
- b=KaTEEuD7qMEPjVaS5G4V+lGkvTIzDJMXqS+GTUj0smZ4dhDUvZCytmA0K47pu4pzFY
- ppToX63CUt315lDb83IxLKPmrPDRlLqnPxKD/MFwNT+KFmfzhdJVqrZBCMHnuQ/GSkQX
- nis1OoQD8Nii/MIX9VVn55u88x/GiD2EKufGU=
+ bh=6BHvXHOLWziQeAhPa6JSzlM1/VixhwvBpRayfpL5ykM=;
+ b=RugOEHR8DhzUgPeHlZfQKnULcsx6LXTr1bT95dzvr1MEL2sCvh02dkcWXL5LpiBeEq
+ wmGD/PlXJZgegOybTaKKqNiG0LTU6rCtQOY1ofTo8553vMoKUOCWu/0p1chQLDEdL1SH
+ A4oGtHxwSamLtlC7V6XlG1XaoIFY8zHCsif9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721113485; x=1721718285;
+ d=1e100.net; s=20230601; t=1721113486; x=1721718286;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xTRnsPBKeG7h7fn+nido/PZQSe7oh9yXObwyvG/m6L0=;
- b=thjK7lnraQw5R2Rzu5s/QnT2g905nqGwxHKMNKfDzysB2ns3mZgZaPSfap2IRcuPFu
- T22ju6/dUJQUlT51ZpqA02Ki1unpFVTpoQdbTS2dMe5Sa4l/DaYsS5MJ/Z5FSC2hQimr
- Yb1/JiLYilI6nLa3Kc7TB4JcAiD1rpKrdMXK6R17lQ11sUAd0IIH70tq7eUi1bmw7QHN
- voLa8T5I392mXpfW0kc8ZGN8oGDa8v04wwVMnAYej3na6QuB9nnWQoB7yxu5pJUvZz5V
- 0GY/86hX+/LgsbwKVWnUUyHkDtVEi+oM3R0Rvb4xKVwmHwZ8ZfMp4AthdruBtq8GzbOW
- EdJw==
-X-Gm-Message-State: AOJu0YyjXpQsd+8+F2bkAzgcwh0qMks+jpyaa5zWAfL0pd0OI81Hd/Cv
- pB1kbTFidnrimL9hv6Ry0WYD7HRB469h3qT6eHO9N+GMYpqVa9bh63kwKYfi8/ebRKPKhiDaeCd
- CNMSltCflk6J0LT4wvBgfN9IqSx3QUoD7m+Vq
-X-Google-Smtp-Source: AGHT+IFkEtcOUQJy1uSXvTOnRNUj6Opxt4vIgQcopFf/X8D+drD/o5TXETh3k4JtVVyrWqL5sbvPWg54KhCNIHSH/A4=
-X-Received: by 2002:a05:6214:622:b0:6b5:d97b:7247 with SMTP id
- 6a1803df08f44-6b77f625873mr16786006d6.52.1721113485215; Tue, 16 Jul 2024
- 00:04:45 -0700 (PDT)
+ bh=6BHvXHOLWziQeAhPa6JSzlM1/VixhwvBpRayfpL5ykM=;
+ b=gP1Lq/Ob0nDiR5htTAYB5+96ez7ccaascXj49vv24lHu0CQ6yQRSNFmvA5kT4bitoj
+ C0fJtKpCiNor60Fuz/OZYDEmnti3BtKrUFS88ff1COH9yfpqxG5PiDfu4jZicqXDiqh3
+ fDDKyU/5dH41G0UZi6kvOptOd/YdC4iTLsyfedfYRd74VoRkTU20b3NXFYtw3MrlOQfR
+ Su4hw+PsYtn30JkSPv0Oxi6sRYSdAy93Dhm00bJNvk3KX9/O8QjJ4FRlR5V3ZO/iK5O0
+ GrjT0PwNPhp5jg4KTfLpJrRxyj+Gh6/eT3qrp7yq9kCbhJH4V1dU+svmRIvvBrPDJ+F6
+ A1oQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCURZT2084B23xR0yD6Vqmt3aViPq28SMmJIkbHXjnwguAGTgoxvXedYgVIGmKAWhqk/KSSoW+EqYOujfNQ1kl6nTT4FtA==
+X-Gm-Message-State: AOJu0Yye1g4ZM9PqtENM3T7IK76hUaz1gSkfcVupZgttWy15+R66TNIe
+ 2rpbCDNtDjB+8ZJ+7zbCrmbXTUK/BBUUsXRNCpfDr+o8h/+Tv7dR/sBirW9JVvwoKB/NMZZH3b/
+ eae57TlAIEtB/7WGPQQXp5ay9OxF30KZPVUvD
+X-Google-Smtp-Source: AGHT+IHr25ih9s4b3hRrZ3niJc7RlSDBwHNIWCkFNDmz4gtxgjcQW0qwFMFOciD1CpPgU7O+96nQzN4oLhx2j5nMiQA=
+X-Received: by 2002:a05:6902:1144:b0:e02:7d67:c5ce with SMTP id
+ 3f1490d57ef6-e05d56bd2eamr1723480276.22.1721113486213; Tue, 16 Jul 2024
+ 00:04:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <trinity-c68bf542-baa7-4122-858b-c6d5ef8bf843-1720619007870@3c-app-gmx-bs04>
- <CAFLszTiBhrQPMJNS8sjY-jnq8TFnqdWxutyU2NXPit2RZJczhA@mail.gmail.com>
- <trinity-eed391ff-b254-4e52-a79e-febc2d406618-1721076610706@3c-app-gmx-bs14>
-In-Reply-To: <trinity-eed391ff-b254-4e52-a79e-febc2d406618-1721076610706@3c-app-gmx-bs14>
+References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
+ <20240715-b4-qcom-rpmh-v6-6-0c948a25d018@linaro.org>
+ <CAFLszTgz-SOFR+aV7f45+pfByLztAYU1kvFPZof665=QwjjoPQ@mail.gmail.com>
+ <c1f036a4-a080-428f-84fd-c44f968d44bf@linaro.org>
+In-Reply-To: <c1f036a4-a080-428f-84fd-c44f968d44bf@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 16 Jul 2024 08:04:34 +0100
-Message-ID: <CAFLszTg0Bhs3PAUrkZWLp0Lzus4R_tMJK_TOzte2nCgPFjY4nw@mail.gmail.com>
-Subject: Re: Re: avoid syscon fallback class for getting regmap
-To: Frank Wunderlich <frank-w@public-files.de>
-Cc: u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>, 
- "Christian Marangi (Ansuel)" <ansuelsmth@gmail.com>,
- John Crispin <john@phrozen.org>
+Date: Tue, 16 Jul 2024 08:04:35 +0100
+Message-ID: <CAFLszTj-1Pok7mJRGfR5fV20JMp5Hoe0r+4=p0S=NwtxQ0Gdgg@mail.gmail.com>
+Subject: Re: [PATCH v6 06/24] soc: qcom: cmd-db: adjust probe for U-Boot
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,63 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frank,
+Hi Caleb,
 
-On Mon, 15 Jul 2024 at 21:50, Frank Wunderlich <frank-w@public-files.de> wrote:
+On Mon, 15 Jul 2024 at 22:42, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> > Gesendet: Samstag, 13. Juli 2024 um 17:13 Uhr
-> > Von: "Simon Glass" <sjg@chromium.org>
-> > Betreff: Re: avoid syscon fallback class for getting regmap
+>
+>
+> On 15/07/2024 13:39, Simon Glass wrote:
+> > On Mon, 15 Jul 2024 at 11:08, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> Integrate cmd-db into the U-Boot driver model.
+> >>
+> >> This is just a wrapper around an in-memory database, so we just need to
+> >> get the address and validate that cmd-db is there.
+> >>
+> >> Since cmd_db_header will be stored in the .data section we can skip
+> >> bind if it's already set.
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >> To: Simon Glass <sjg@chromium.org>
+> >> ---
+> >>   drivers/soc/qcom/cmd-db.c | 72 +++++++++++++++--------------------------------
+> >>   include/soc/qcom/cmd-db.h |  3 --
+> >>   2 files changed, 23 insertions(+), 52 deletions(-)
+> >>
 > >
-> > Hi Frank,
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> Thanks
 > >
-> > On Wed, 10 Jul 2024 at 14:43, Frank Wunderlich <frank-w@public-files.de> wrote:
-> > >
-> > > Hi,
-> > >
-> > > i'm working on OF_UPSTREAM for mediatek boards and noticed missing syscon-fallback on some (mt7988) devicetree nodes.
-> > >
-> > > i know that u-boot uses this fallback to get the regmap shared across drivers, but only initializing once with the syscon_uclass.
-> > >
-> > > i tried adding the syscon-fallback to linux device tree and got pointed [1] back to uboot to solve the issue there...
-> > >
-> > > are there any ways to avoid syscon in device tree and get the regmap of different node?
-> > >
-> > > i guess i could use [2], but then it is possible to aquire same regmap multiple times which may result in issues (e.g. race-conditions).
-> > > I also want to avoid creating multiple drivers doing the exactily same thing like syscon.
-> > >
-> > > one easy (but maybe unwanted way) is to add all compatibles for affected syscons to the syscon driver...but then it is no more generic (baed on compatibles then vendor-specific).
-> >
-> > One option is to create a new driver in a new file and have its ops
-> > use the syscon ops. See for example
-> > arch/arm/mach-rockchip/rk3399/syscon_rk3399.c
+> > BTW, this is a MISC driver. Does it implement the read() operation?
 >
-> Hi Simon,
->
-> thanks for the suggestion, but i have not got it working yet
->
->
-> still fails here (drivers/net/mtk_eth.c):
->
->                 priv->xfi_pll_regmap = syscon_node_to_regmap(args.node);
+> No, the API (as defined in the header file) takes a string and returns a
+> database entry. cmd-db users don't have an easily available handle to
+> the node / udevice regardless.
 
-It isn't node, it's a 'driver data' value (see comments for
-syscon_get_by_driver_data()). So:
+OK. The closest thing might be UCLASS_SYSINFO, but it is designed for
+inside U-Boot and uses an int instead of a string for lookup.
 
-syscon_get_regmap_by_driver_data(MEDIATEK_SYSCON_WDT)
-
->
-> this is how i tried:
-> https://github.com/frank-w/u-boot/commit/a1060c88152fe8aa8a092f087591240f930146b3
->
-> do i miss something (i guess i do not need the data-field as i only need the regmap)?
-
-The driver_data field is set automatically by driver model - see [1]
-
-The data field is the thing being looked up by
-syscon_get_regmap_by_driver_data(), so you do need it.
+Could you use the devicetree for this information? What sort of info is it?
 
 Regards,
 Simon
-
-[1] https://docs.u-boot.org/en/latest/develop/driver-model/design.html#bind-stage
