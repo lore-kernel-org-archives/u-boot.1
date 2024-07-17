@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5447DC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 04:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C448C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 04:48:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0736885B5;
-	Wed, 17 Jul 2024 06:47:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C61588768;
+	Wed, 17 Jul 2024 06:47:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B63AF88729; Wed, 17 Jul 2024 06:47:52 +0200 (CEST)
+ id C0FE088464; Wed, 17 Jul 2024 06:47:52 +0200 (CEST)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E566688464
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 06:47:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 552B4885B5
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 06:47:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 46H4lao9020657; Wed, 17 Jul 2024 13:47:39 +0900
+ 46H4lao8020657; Wed, 17 Jul 2024 13:47:38 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  andy.yan@rock-chips.com, gajjar04akash@gmail.com, jonas@kwiboo.se,
  FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH v3 3/3] configs: rockchip: imply OF_LIBFDT_OVERLAY for rk3308
- and rk3328
-Date: Wed, 17 Jul 2024 13:47:26 +0900
-Message-ID: <20240717044726.59721-3-naoki@radxa.com>
+Subject: [PATCH v3 2/3] configs: rockchip: sync ENV_MEM_LAYOUT_SETTINGS for
+ rk3308, rk3328, and rk3399
+Date: Wed, 17 Jul 2024 13:47:25 +0900
+Message-ID: <20240717044726.59721-2-naoki@radxa.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240717044726.59721-1-naoki@radxa.com>
 References: <20240717044726.59721-1-naoki@radxa.com>
@@ -54,81 +54,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-for rk3308, all defconfigs have CONFIG_OF_LIBFDT_OVERLAY=y, so enable it
-by default.
+- add support for compressed kernel for rk3308
+- prepare support for fdtoverlay for rk3328
 
-for rk3328, any defconfig doesn't have it. but there is no strong reason
-not to enable it. at least it's required for ROCK Pi E.
+tested on ROCK Pi S 256MB, ROCK Pi E 2GB, and ROCK Pi 4A 4GB with
+linux-next-20240613 defconfig kernel.
 
 Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
 Changes in v3:
 - add missing separator in commit message
+- collect R-b tag
 Changes in v2:
-- none
+- minor cosmetic change in commit message
 ---
- arch/arm/mach-rockchip/Kconfig     | 2 ++
- configs/evb-rk3308_defconfig       | 1 -
- configs/roc-cc-rk3308_defconfig    | 1 -
- configs/rock-pi-s-rk3308_defconfig | 1 -
- 4 files changed, 2 insertions(+), 3 deletions(-)
+ include/configs/rk3308_common.h | 12 ++++++++----
+ include/configs/rk3328_common.h |  5 ++++-
+ include/configs/rk3399_common.h |  4 ++--
+ 3 files changed, 14 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 661e7fd1c9..5f6a4dd24a 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -166,6 +166,7 @@ config ROCKCHIP_RK3308
- 	imply LEGACY_IMAGE_FORMAT
- 	imply MISC
- 	imply MISC_INIT_R
-+	imply OF_LIBFDT_OVERLAY
- 	imply OF_UPSTREAM
- 	imply RNG_ROCKCHIP
- 	imply ROCKCHIP_COMMON_BOARD
-@@ -196,6 +197,7 @@ config ROCKCHIP_RK3328
- 	imply ARMV8_SET_SMPEN
- 	imply MISC
- 	imply MISC_INIT_R
-+	imply OF_LIBFDT_OVERLAY
- 	imply OF_LIVE
- 	imply OF_UPSTREAM
- 	imply PRE_CONSOLE_BUFFER
-diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
-index f4c2ea12ad..6d090dba30 100644
---- a/configs/evb-rk3308_defconfig
-+++ b/configs/evb-rk3308_defconfig
-@@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-evb"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_EVB_RK3308=y
-diff --git a/configs/roc-cc-rk3308_defconfig b/configs/roc-cc-rk3308_defconfig
-index 862ea4301f..b1b59d9cb5 100644
---- a/configs/roc-cc-rk3308_defconfig
-+++ b/configs/roc-cc-rk3308_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-roc-cc"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_ROC_RK3308_CC=y
-diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-index c15ba3d8a4..e450a06180 100644
---- a/configs/rock-pi-s-rk3308_defconfig
-+++ b/configs/rock-pi-s-rk3308_defconfig
-@@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-pi-s"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_EVB_RK3308=y
+diff --git a/include/configs/rk3308_common.h b/include/configs/rk3308_common.h
+index 80113220e4..2de55538fd 100644
+--- a/include/configs/rk3308_common.h
++++ b/include/configs/rk3308_common.h
+@@ -15,11 +15,15 @@
+ 
+ #define ENV_MEM_LAYOUT_SETTINGS		\
+ 	"scriptaddr=0x00500000\0"	\
++	"script_offset_f=0xffe000\0"	\
++	"script_size_f=0x2000\0"	\
+ 	"pxefile_addr_r=0x00600000\0"	\
+-	"fdt_addr_r=0x03e00000\0"	\
+-	"fdtoverlay_addr_r=0x03f00000\0"	\
+-	"kernel_addr_r=0x00680000\0"	\
+-	"ramdisk_addr_r=0x04000000\0"
++	"fdt_addr_r=0x01e00000\0"	\
++	"fdtoverlay_addr_r=0x01f00000\0"	\
++	"kernel_addr_r=0x02080000\0"	\
++	"ramdisk_addr_r=0x06000000\0"	\
++	"kernel_comp_addr_r=0x08000000\0"	\
++	"kernel_comp_size=0x2000000\0"
+ 
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+diff --git a/include/configs/rk3328_common.h b/include/configs/rk3328_common.h
+index f9e6634c5f..bd2bfe2910 100644
+--- a/include/configs/rk3328_common.h
++++ b/include/configs/rk3328_common.h
+@@ -15,8 +15,11 @@
+ 
+ #define ENV_MEM_LAYOUT_SETTINGS		\
+ 	"scriptaddr=0x00500000\0"	\
++	"script_offset_f=0xffe000\0"	\
++	"script_size_f=0x2000\0"	\
+ 	"pxefile_addr_r=0x00600000\0"	\
+-	"fdt_addr_r=0x01f00000\0"	\
++	"fdt_addr_r=0x01e00000\0"	\
++	"fdtoverlay_addr_r=0x01f00000\0"	\
+ 	"kernel_addr_r=0x02080000\0"	\
+ 	"ramdisk_addr_r=0x06000000\0"	\
+ 	"kernel_comp_addr_r=0x08000000\0"	\
+diff --git a/include/configs/rk3399_common.h b/include/configs/rk3399_common.h
+index 62007c8b27..d652ae4ca3 100644
+--- a/include/configs/rk3399_common.h
++++ b/include/configs/rk3399_common.h
+@@ -24,8 +24,8 @@
+ 	"script_offset_f=0xffe000\0"	\
+ 	"script_size_f=0x2000\0"	\
+ 	"pxefile_addr_r=0x00600000\0"	\
+-	"fdt_addr_r=0x01f00000\0"	\
+-	"fdtoverlay_addr_r=0x02000000\0"	\
++	"fdt_addr_r=0x01e00000\0"	\
++	"fdtoverlay_addr_r=0x01f00000\0"	\
+ 	"kernel_addr_r=0x02080000\0"	\
+ 	"ramdisk_addr_r=0x06000000\0"	\
+ 	"kernel_comp_addr_r=0x08000000\0"	\
 -- 
 2.43.0
 
