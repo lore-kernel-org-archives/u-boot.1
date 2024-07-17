@@ -4,95 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76DBAC3DA49
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 02:38:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 094ADC3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 03:56:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8D0D8880F;
-	Wed, 17 Jul 2024 04:38:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E20B88602;
+	Wed, 17 Jul 2024 05:56:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="C+sTG0f2";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IQtlNN+m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C8B588768; Wed, 17 Jul 2024 01:43:48 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 810B888768; Wed, 17 Jul 2024 05:56:01 +0200 (CEST)
+Received: from mail-m15578.qiye.163.com (mail-m15578.qiye.163.com
+ [101.71.155.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D057987EB4
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:43:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E392B874AC
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 05:55:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_jjohnson@quicinc.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46GHf5TC027012;
- Tue, 16 Jul 2024 23:43:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- N3QJ5/o/wDR3TZtIE94AfbmLbVWg1q+EHZ/P1r1AiVg=; b=C+sTG0f2IMrnTAlx
- 4lk2QaJ4v/CcGvT5+BB4BGpLGPxpFumq8mOwZ8gnPNZInGHl+N6YXUaLmbKzDLHj
- 2K7veyXTejKeunE66CPV9GkvVW4D2OGsK3W7xkpAf9hFrmAr+7eMDLDSMOuk7C5F
- 4q0u2R2TYxypbZW1hi/eQMdk2YRi99/EQfzNwIO/fOCoT/bRKwkD1tyJm9IrZ5iq
- qf8w0m1c/zcyLLh7Ejuu2P/X/E3PhZyUkRXC78ctdGuN3o4vAB/mzO4Rj5ky2O/f
- 9WskK7p8+NlIZgiGcwRgyczAVyL4JBR8p8c7KBE715OiYWbcWfSPPUteyC7z9Ull
- NFaZVw==
-Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 40dwfs0m4r-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 Jul 2024 23:43:36 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
- [10.47.209.196])
- by NALASPPMTA02.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
- 46GNhZE5003908
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 Jul 2024 23:43:35 GMT
-Received: from [10.81.24.74] (10.49.16.6) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Tue, 16 Jul
- 2024 16:43:34 -0700
-Message-ID: <7145cd8e-590a-4260-a738-dc1a386e7787@quicinc.com>
-Date: Tue, 16 Jul 2024 16:43:33 -0700
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=IQtlNN+mkbU+iipM9X/c1BIfCNdxbnIuTGPlhepSVf55W/Oo4p80aFRIrBx3POmbQq3SxoAygBFYtoR9Wi8TQiJyvgnefmymi5Og0aoO50p186sKUHueNPqTDYBW/ERjzheaq+0YbP0lLvqtNOKW8wp59srol6Zpgnnkg/ILXOU=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=LBQfdyp6BA25o4vevF6t5C4BVFbvCzc4qL5kWWoPpr0=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 34CA99004DA;
+ Wed, 17 Jul 2024 11:55:46 +0800 (CST)
+Message-ID: <0044b9dd-0f8f-4434-8307-bf49f1840028@rock-chips.com>
+Date: Wed, 17 Jul 2024 11:55:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] nvmem: layouts: add U-Boot env layout
-To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, Srinivas Kandagatla
- <srinivas.kandagatla@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
- <michael@walle.cc>, Miquel Raynal <miquel.raynal@bootlin.com>,
- <devicetree@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
- <linux-arm-kernel@lists.infradead.org>, <u-boot@lists.denx.de>,
- <linux-kernel@vger.kernel.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
- <rafal@milecki.pl>
-References: <20240715135434.24992-1-zajec5@gmail.com>
- <20240715135434.24992-2-zajec5@gmail.com>
+Subject: Re: [PATCH COVER] rockchip: rk3399: fix SPI-NOR flash not found in
+ U-Boot pre-reloc
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20240617-rk3399-fix-v1-1-69af21c2baed@cherry.de>
 Content-Language: en-US
-From: Jeff Johnson <quic_jjohnson@quicinc.com>
-In-Reply-To: <20240715135434.24992-2-zajec5@gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.49.16.6]
-X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-ORIG-GUID: HjDUvP7cKZSBjai9_qJv7ION5Anjs5h9
-X-Proofpoint-GUID: HjDUvP7cKZSBjai9_qJv7ION5Anjs5h9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-07-16_02,2024-07-16_02,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- spamscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0 mlxlogscore=956
- impostorscore=0 mlxscore=0 phishscore=0 suspectscore=0 clxscore=1011
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2407110000 definitions=main-2407160174
-X-Mailman-Approved-At: Wed, 17 Jul 2024 04:38:39 +0200
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240617-rk3399-fix-v1-1-69af21c2baed@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUNMSVYeTk1ISkoYT0lDHx9WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a90bed4f83103a9kunm34ca99004da
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBA6Qgw*QzIyFBMvS0oBPw8w
+ HgxPFBVVSlVKTElKSkNDTk9MS05OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTU9PNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,63 +75,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/15/24 06:54, Rafał Miłecki wrote:
-> From: Rafał Miłecki <rafal@milecki.pl>
-> 
-> U-Boot environment variables are stored in a specific format. Actual
-> data can be placed in various storage sources (MTD, UBI volume, EEPROM,
-> NVRAM, etc.).
-> 
-> Move all generic (NVMEM device independent) code from NVMEM device
-> driver to an NVMEM layout driver. Then add a simple NVMEM layout code on
-> top of it.
-> 
-> This allows using NVMEM layout for parsing U-Boot env data stored in any
-> kind of NVMEM device.
-> 
-> The old NVMEM glue driver stays in place for handling bindings in the
-> MTD context. To avoid code duplication it uses exported layout parsing
-> function. Please note that handling MTD & NVMEM layout bindings may be
-> refactored in the future.
-> 
-> Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
-> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
+
+On 2024/6/17 21:10, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> In commit 100f489f58a6 ("rockchip: rk3399: Fix loading FIT from SD-card
+> when booting from eMMC"), the spi1 bootph properties were mistakenly
+> removed meaning, so re-add them back to fix SPI-NOR flash not being
+> found in U-Boot pre-reloc as required for RK3399 Puma.
+>
+> Fixes: 100f489f58a6 ("rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Thanks,
+- Kever
 > ---
-> This change was originally sent (and approved by Miquel) as a
-> [PATCH V3 6/6] nvmem: layouts: add U-Boot env layout
-> 
-> I just adjusted it to the approved binding and updated commit message.
-> I kept Miquel's Reviewed-by tag due to minimal changes.
-> 
-> I've successfully tested this code using it in both ways: as NVMEM
-> device driver & NVMEM layout.
-> 
->   MAINTAINERS                        |   1 +
->   drivers/nvmem/Kconfig              |   3 +-
->   drivers/nvmem/layouts/Kconfig      |  11 ++
->   drivers/nvmem/layouts/Makefile     |   1 +
->   drivers/nvmem/layouts/u-boot-env.c | 203 +++++++++++++++++++++++++++++
->   drivers/nvmem/layouts/u-boot-env.h |  15 +++
->   drivers/nvmem/u-boot-env.c         | 158 +---------------------
->   7 files changed, 234 insertions(+), 158 deletions(-)
->   create mode 100644 drivers/nvmem/layouts/u-boot-env.c
->   create mode 100644 drivers/nvmem/layouts/u-boot-env.h
-> 
-...
-
-> +module_nvmem_layout_driver(u_boot_env_layout);
+>   arch/arm/dts/rk3399-u-boot.dtsi | 5 +++++
+>   1 file changed, 5 insertions(+)
+>
+> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
+> index b6b43271172..2bec139d833 100644
+> --- a/arch/arm/dts/rk3399-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
+> @@ -145,6 +145,11 @@
+>   	bootph-some-ram;
+>   };
+>   
+> +&spi1 {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
 > +
-> +MODULE_AUTHOR("Rafał Miłecki");
-> +MODULE_LICENSE("GPL");
-> +MODULE_DEVICE_TABLE(of, u_boot_env_of_match_table);
-
-Is this missing a MODULE_DESCRIPTION()?
-
-Since commit 1fffe7a34c89 ("script: modpost: emit a warning when the 
-description is missing") a module without a MODULE_DESCRIPTION() will 
-result in a warning with make W=1.
-
-I'll hopefully have all existing warnings fixed in 6.11 so please avoid 
-adding new ones :)
-
-/jeff
+>   &spi1_clk {
+>   	bootph-pre-ram;
+>   	bootph-some-ram;
+>
+> ---
+> base-commit: 2248c96ea1cf0b65377040d9f87ce7d8cf534c63
+> change-id: 20240617-rk3399-fix-d8c8d3ce844e
+>
+> Best regards,
