@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F879C3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 15:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D137C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 15:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F64988A82;
+	by phobos.denx.de (Postfix) with ESMTP id F380788A91;
 	Wed, 17 Jul 2024 17:57:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HKSqk/Wa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MPjn1RQg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CAE788A91; Wed, 17 Jul 2024 17:57:26 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 228C088A94; Wed, 17 Jul 2024 17:57:26 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 678CA88602
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32E2D88A7F
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-368380828d6so526795f8f.1
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:23 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-36798ea618bso4040420f8f.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1721231843; x=1721836643; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xaBB5sgSYz9Ukl/IWhLwKPEgiKlNC755XNbBGwb2KfU=;
- b=HKSqk/WaKTDiflipHbhxD+bAyxw706wdSXtai3fM1STYC0YP5AFCPgINmHKgtLkXhk
- NccEO9VDSarlbmaiLzW1lPV/N9kPe6XRxpzLhq75wRX95orDwLhnYLaZGO8eTb8xPgPM
- yLRUSpLlcUfc6q/NvUPNT7ehGhMUuhZyRa62k=
+ bh=vxhS3QzmIeiePQwfniISwPF25W9ft1nDSpcuXnmBmQA=;
+ b=MPjn1RQg5tMz3U5D0ZOS0B6p2EYeBi3sN2AxQqNgqfLH93XGpmVtOLAhCVCUZ4na+e
+ rcvKzq6Z5B330XVnCGndyhrhGB1KemxIl7VZqTyU7ZIMMZVkd5PvDTppeWf/AehMQzLk
+ dW9+fX8wFEA0aEh20NX3Z50TL+4LlJy9mJubs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721231843; x=1721836643;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xaBB5sgSYz9Ukl/IWhLwKPEgiKlNC755XNbBGwb2KfU=;
- b=oD+l5BUaufWSCPXwEYJosN4fhNbstULz+o5l0moLP9MSuPw19lZZxfAsjXSjXAC9lg
- SsO1na9ATt7Qpzn9SUqWKnWKC1hW30uScmRxWDtfLEwDpY4G3cBR0/ZjlLCmMIP6g8xr
- ycvNLvVhNgdJkU+7/sQz+EptRmZcQdnbeD7un8PAZ/a/yVgkEDUN1osvIFGaFQ+rSMAU
- L5KCFaeXLZoDuzmKi4Awkm2B0eMzet5l7JK7iEykf6v3D9WTs0V9aP9SrgU1BptM9bBU
- NPP29jSl5jk4q1eBifGa5MC2Qe1v7Rr0H9MzaLenhT1qxh03yFNofjn7+NoIy90zpbzX
- xvfw==
-X-Gm-Message-State: AOJu0Ywkk6Olno0SlbPyiOgtzBT64wmYO6sZXyrzNnpfmgjqFEbKCUOY
- 08ldws5OLJLq1NO+mbY7almvHXTCmert6jK8tMajcExIZSx0Hc6leGg0ccfzyyLt13Qw2kgJkNM
+ bh=vxhS3QzmIeiePQwfniISwPF25W9ft1nDSpcuXnmBmQA=;
+ b=HPHUlKxd9WxsPC1Ol6gro3pvLApdYAU2lOkNyM2yhPsUIQimGqBPsqtJs5uJ0pihX+
+ +HGU8Eux2mz0ChYAHHFsqzyuslZ/4A1wdqrUaAJMcG7aRlzyBNxYnatXEkUUEBCJylYx
+ VuW/OIMc2PNTzHXop+4JvqPn0w7IHYA6JN1T8J+hgzEk66+L+gLjjAHEGDTrcHHHSFq5
+ pJtmHFQKYzpuaRFhn9/uWUpEqYbyaWCCTYdllYtkxApOExBCwtzQnvdC8FqEujOV+GOY
+ z9+plqwsRrQB72gv3YGFulKiJqmLEscRzkCz2U/i1oqRzEwUXyG2i6qZAoaqByt0RxZI
+ CxTw==
+X-Gm-Message-State: AOJu0Yyu9oGej7MvO+Phqdm8ZWbtiv0mj4pCy91D38LXv/oQ3EeEzZMw
+ cMrqUiGV5ZRhZPajavwad3sr0pub412SgbKf/egAqhiQjsr688hY53pq6n+BSWaqPp96VJjodwE
  =
-X-Google-Smtp-Source: AGHT+IHyBz3YtCElepcUTW30MRtiCbD8erbIDKMH4CXa/NrHyP7hv/JOlWQmJubkSLVfuYdmtFVpsA==
-X-Received: by 2002:a5d:58f5:0:b0:35f:48e:fe59 with SMTP id
- ffacd0b85a97d-368317c88ebmr1267945f8f.66.1721231842706; 
- Wed, 17 Jul 2024 08:57:22 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH9I5jpT7ow3umedjDfPNEx5MdQq6wNbmzNQ9llSmjn3BuPdH2F6CPdJm9tpLRWNNWOsluk9Q==
+X-Received: by 2002:a5d:528a:0:b0:366:eb61:b47 with SMTP id
+ ffacd0b85a97d-368315f6189mr1446514f8f.8.1721231843512; 
+ Wed, 17 Jul 2024 08:57:23 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.21
+ ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 08:57:22 -0700 (PDT)
+ Wed, 17 Jul 2024 08:57:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 06/24] qconfig: Rename the doc link
-Date: Wed, 17 Jul 2024 16:56:54 +0100
-Message-Id: <20240717155712.2913651-7-sjg@chromium.org>
+Subject: [PATCH 07/24] qconfig: Move arg parsing into a separate function
+Date: Wed, 17 Jul 2024 16:56:55 +0100
+Message-Id: <20240717155712.2913651-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240717155712.2913651-1-sjg@chromium.org>
 References: <20240717155712.2913651-1-sjg@chromium.org>
@@ -89,28 +89,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This was missed during the renaming of the tool. Fix it.
+Reduce the size of main() by putting this code into its own function.
+For now the parser object needs to be returned too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: ea4d6dead37 ("moveconfig: Rename the tool to qconfig")
 ---
 
- tools/qconfig.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/qconfig.py | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 8a2384d895b..07d78387465 100755
+index 07d78387465..d8f0a716fe9 100755
 --- a/tools/qconfig.py
 +++ b/tools/qconfig.py
-@@ -3,7 +3,7 @@
+@@ -1453,8 +1453,14 @@ def do_scan_source(path, do_update):
+                 print(item, file=out)
  
- """Build and query a Kconfig database for boards.
  
--See doc/develop/moveconfig.rst for documentation.
-+See doc/develop/qconfig.rst for documentation.
+-def main():
+-    """Main program"""
++def parse_args():
++    """Parse the program arguments
++
++    Returns:
++        tuple:
++            argparse.ArgumentParser: parser
++            argparse.Namespace: Parsed arguments
++    """
+     try:
+         cpu_count = multiprocessing.cpu_count()
+     except NotImplementedError:
+@@ -1512,8 +1518,12 @@ doc/develop/moveconfig.rst for documentation.'''
+                       help='show any build errors as boards are built')
+     parser.add_argument('configs', nargs='*')
  
- Author: Masahiro Yamada <yamada.masahiro@socionext.com>
- Author: Simon Glass <sjg@chromium.org>
+-    args = parser.parse_args()
++    return parser, parser.parse_args()
++
+ 
++def main():
++    """Main program"""
++    parser, args = parse_args()
+     if args.test:
+         sys.argv = [sys.argv[0]]
+         fail, _ = doctest.testmod()
 -- 
 2.34.1
 
