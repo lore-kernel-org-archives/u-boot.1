@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9348FC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 16:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF54AC3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 16:02:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75AF788AEC;
+	by phobos.denx.de (Postfix) with ESMTP id D719688AF7;
 	Wed, 17 Jul 2024 17:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IOeeTFGP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C8Q1zMjP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFA2A88AE6; Wed, 17 Jul 2024 17:57:38 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 1F50088AF9; Wed, 17 Jul 2024 17:57:40 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA22B88AF2
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A120788AF5
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-367e50f71bbso4516893f8f.2
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:36 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-367b8a60b60so3939866f8f.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721231856; x=1721836656; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721231857; x=1721836657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Zt3jA1TrKf9KblM+yQ65C7uyptVMNqp3YsccCp2OFt0=;
- b=IOeeTFGPcC+g5hrSxrE0tYVpPEIRRUJbdhcsR3qS/kqRJfBQZVdiWABmXHzsBNlzOv
- gPyd95DAEjQohmoxlxXAhLugV08JQmYleDWLnUzCrLQ/esZFW57DOU2mEuW128MaORcF
- +l18MBsnL635+/5EKe6u0zXeDOJkiQlg2LFOc=
+ bh=pSi542Uq7eQms9MJ6dh6ZBB0Ffs9/0fip/6hT3MHN2A=;
+ b=C8Q1zMjP9jykaQiGqT+M2aQmVaQLRds8C2wUWjX08nNLqYbGcIAbCtvKAf6wHQh99K
+ 1upuR9fViTu9JD7M2EuDhNxkYIn+9U1mfoj+cr/fUX4LOGYPapxXqm3cCOqFlxS5Y2ym
+ sRD3DX5ZdTVyMqLgx4QALytKodGHdP2BnbqiI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721231856; x=1721836656;
+ d=1e100.net; s=20230601; t=1721231857; x=1721836657;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Zt3jA1TrKf9KblM+yQ65C7uyptVMNqp3YsccCp2OFt0=;
- b=YnZNRm7W/haZyyAG37kL44L5/lVjNwbC+nF6o91uu7QKS+20iu2fPAZyoUxuaylB29
- a5/ExO2h/Ohh+VP0QLlTtjDr7YObNgMNdlRItQFJvHGoUKP4vbF77fS/ihHV32aEtgiR
- UQzWCBXYQc0QygTuent9rbsAoDA6Rz0vY/A1rmpNV9UXCpWS3Jfj3w53mOA9Fk6ia/Jl
- lAUrf79AXAG8JGcQ5IOWM3m6EgW4qTQoy6y+8gmeZldHdkCt0fVDmb0saKWi4ZVXs5zP
- Jp9Cj1K7OZSNdZ5NaGSVCMYWpKn22rTsNYJr2yGmJqBWHNdl5FkJZfpjk+QNspETdjQm
- e+Zg==
-X-Gm-Message-State: AOJu0YxT1Kie8GijZjm7O469Jsvqy9yXXcCmGriaX6kYWVktb/jmtRi3
- MkLVw/ePsHJhGfk/hWpBv/2pyYbK2LP2Gm4HzhUozpd8qI9CRq9dZGHEYFGJl++ywfbt/VUt1pU
+ bh=pSi542Uq7eQms9MJ6dh6ZBB0Ffs9/0fip/6hT3MHN2A=;
+ b=veifyBJzHWvbwH3RO+THTvOSPYAdXW/6uGnHbsA3MtUmkO7kYEz4bqkRW35yzkBMIM
+ uZNCnMQHuJs9yZBUNWtA0//+Ohcqe5IohuRk2taFh0tBhHvUh8Cv1qvKQfa6gRpeNGbD
+ jT8hvMuOKCyMlsgf3oObcmfcyGhuhAv5allp7xx9mCbXmBjiEc3o8s/eZakxq+x50BZ2
+ ipCVx1Ldp0zxO1oCn9r5t0yyHPmRq+OOZ6ia/KA4X5tcjxNG7KxQhTHEmwu2X7W3Pfse
+ w45QHDQVt8DFcgfa17yjABvqQhJIDzJTNJhdSUFoO1Ih3oBa6GAZp1rdy3N+dZ0rng7m
+ ZmUg==
+X-Gm-Message-State: AOJu0YxxAdFzblNzLvKwsopdGgnaSkwLqlRDOV4bW2wDuYhqpTJSh9w+
+ JS+ymNGA0CoeCvyik1GPEKtj6iJ0keyqP9fhlqI87zWxJzYMZyHLro3NeZ1t1hMiLe9NV2vF0nU
  =
-X-Google-Smtp-Source: AGHT+IEWp5C0/qaJjrFOytGJD/TNHuE6f7fAnL/+PSLzVFPwSZ8nUffuLUhHxVUyxuDvc3teNGjN3g==
-X-Received: by 2002:a05:6000:18a6:b0:368:4634:c419 with SMTP id
- ffacd0b85a97d-3684634c53amr377281f8f.58.1721231855858; 
- Wed, 17 Jul 2024 08:57:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHw2J8SFhQhBCpq1yep1xQ4C2p+JhhPuLNR1Mi5g6dRU/Nev7f31lbv/8aEIr7zSBWnvLQBsw==
+X-Received: by 2002:a5d:45d2:0:b0:367:83e9:b4a5 with SMTP id
+ ffacd0b85a97d-368316fad85mr1291646f8f.49.1721231856869; 
+ Wed, 17 Jul 2024 08:57:36 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.34
+ ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 08:57:34 -0700 (PDT)
+ Wed, 17 Jul 2024 08:57:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 21/24] qconfig: Use the Color object in Progress
-Date: Wed, 17 Jul 2024 16:57:09 +0100
-Message-Id: <20240717155712.2913651-22-sjg@chromium.org>
+Subject: [PATCH 22/24] qconfig: Drop col argument from Slots()
+Date: Wed, 17 Jul 2024 16:57:10 +0100
+Message-Id: <20240717155712.2913651-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240717155712.2913651-1-sjg@chromium.org>
 References: <20240717155712.2913651-1-sjg@chromium.org>
@@ -89,104 +89,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the Progress class has the required object, use it from there
-instead of passing it around.
+This is not needed since the progress indicator has the object. Use that
+instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/qconfig.py | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ tools/qconfig.py | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
 
 diff --git a/tools/qconfig.py b/tools/qconfig.py
-index ec59ef4ec71..c4171cf9076 100755
+index c4171cf9076..dd24e4b398b 100755
 --- a/tools/qconfig.py
 +++ b/tools/qconfig.py
-@@ -704,12 +704,11 @@ class ReferenceSource:
+@@ -364,7 +364,7 @@ class Slot:
+     """
  
-         return self.src_dir
+     def __init__(self, toolchains, args, progress, devnull, make_cmd,
+-                 reference_src_dir, db_queue, col):
++                 reference_src_dir, db_queue):
+         """Create a new process slot.
  
--def move_config(args, col):
-+def move_config(args):
-     """Build database or sync config options to defconfig files.
+         Args:
+@@ -386,7 +386,7 @@ class Slot:
+         self.make_cmd = (make_cmd, 'O=' + self.build_dir)
+         self.reference_src_dir = reference_src_dir
+         self.db_queue = db_queue
+-        self.col = col
++        self.col = progress.col
+         self.parser = KconfigParser(args, self.build_dir)
+         self.state = STATE_IDLE
+         self.failed_boards = set()
+@@ -594,11 +594,9 @@ class Slot:
+         return self.failed_boards
  
-     Args:
-         args (Namespace): Program arguments
--        col (terminal.Color): Colour object
+ class Slots:
+-
+     """Controller of the array of subprocess slots."""
  
-     Returns:
-         tuple:
-@@ -745,6 +744,8 @@ def move_config(args, col):
-     else:
-         defconfigs = get_all_defconfigs()
+-    def __init__(self, toolchains, args, progress, reference_src_dir, db_queue,
+-                 col):
++    def __init__(self, toolchains, args, progress, reference_src_dir, db_queue):
+         """Create a new slots controller.
  
-+    col = terminal.Color(terminal.COLOR_NEVER if args.nocolour
-+                         else terminal.COLOR_IF_TERMINAL)
+         Args:
+@@ -608,17 +606,16 @@ class Slots:
+             reference_src_dir (str): Determine the true starting config state
+                 from this source tree (None for none)
+             db_queue (Queue): output queue to write config info for the database
+-            col (terminal.Color): Colour object
+         """
+         self.args = args
+         self.slots = []
+         self.progress = progress
+-        self.col = col
++        self.col = progress.col
+         devnull = subprocess.DEVNULL
+         make_cmd = get_make_cmd()
+         for _ in range(args.jobs):
+             self.slots.append(Slot(toolchains, args, progress, devnull,
+-                                   make_cmd, reference_src_dir, db_queue, col))
++                                   make_cmd, reference_src_dir, db_queue))
+ 
+     def add(self, defconfig):
+         """Add a new subprocess if a vacant slot is found.
+@@ -747,7 +744,7 @@ def move_config(args):
+     col = terminal.Color(terminal.COLOR_NEVER if args.nocolour
+                          else terminal.COLOR_IF_TERMINAL)
      progress = Progress(col, len(defconfigs))
-     slots = Slots(toolchains, args, progress, reference_src_dir, db_queue, col)
+-    slots = Slots(toolchains, args, progress, reference_src_dir, db_queue, col)
++    slots = Slots(toolchains, args, progress, reference_src_dir, db_queue)
  
-@@ -1604,7 +1605,7 @@ def add_commit(configs):
-     subprocess.call(['git', 'commit', '-s', '-m', msg])
- 
- 
--def write_db(config_db, col, progress):
-+def write_db(config_db, progress):
-     """Write the database to a file
- 
-     Args:
-@@ -1613,12 +1614,12 @@ def write_db(config_db, col, progress):
-             value: dict:
-                 key: CONFIG option
-                 value: Value of option
--        col (terminal.Color): Colour-output class
-         progress (Progress): Progress indicator.
- 
-     Returns:
-         int: exit code (0 for success)
-     """
-+    col = progress.col
-     with open(CONFIG_DATABASE, 'w', encoding='utf-8') as outf:
-         for defconfig, configs in config_db.items():
-             outf.write(f'{defconfig}\n')
-@@ -1631,16 +1632,16 @@ def write_db(config_db, col, progress):
-     return 0
- 
- 
--def move_done(col, progress):
-+def move_done(progress):
-     """Write a message indicating that the move is done
- 
-     Args:
--        col (terminal.Color): Colour-output class
-         progress (Progress): Progress indicator.
- 
-     Returns:
-         int: exit code (0 for success)
-     """
-+    col = progress.col
-     if progress.failed:
-         print(col.build(col.RED, f'{progress.failure_msg}see {FAILED_LIST}', True))
-     else:
-@@ -1684,16 +1685,14 @@ def main():
-     if args.find:
-         return do_find_config(args.configs)
- 
--    col = terminal.Color(terminal.COLOR_NEVER if args.nocolour
--                         else terminal.COLOR_IF_TERMINAL)
--    config_db, progress = move_config(args, col)
-+    config_db, progress = move_config(args)
- 
-     if args.commit:
-         add_commit(args.configs)
- 
-     if args.build_db:
--        return write_db(config_db, col, progress)
--    return move_done(col, progress)
-+        return write_db(config_db, progress)
-+    return move_done(progress)
- 
- 
- if __name__ == '__main__':
+     # Main loop to process defconfig files:
+     #  Add a new subprocess into a vacant slot.
 -- 
 2.34.1
 
