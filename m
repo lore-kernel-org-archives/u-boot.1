@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 867DEC3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 15:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F879C3DA4B
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 15:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B58588AA4;
-	Wed, 17 Jul 2024 17:57:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F64988A82;
+	Wed, 17 Jul 2024 17:57:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YFzrXXSP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HKSqk/Wa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 721C2886E2; Wed, 17 Jul 2024 17:57:24 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 0CAE788A91; Wed, 17 Jul 2024 17:57:26 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B62388A67
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 678CA88602
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4266dc7591fso49413125e9.0
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:22 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-368380828d6so526795f8f.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721231839; x=1721836639; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721231843; x=1721836643; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zd+2qAI1yQTOL2KYVNhEhJIK8nuC2Jsh06iLBM+jtAU=;
- b=YFzrXXSPtmv6O3vE4rtMdUd3YENrhy+CqM3hTV/O2KQQgreGsFd/lYRiITpggUaw4/
- +Nb6q09jQ4unda1bo9AqkgZefjDK5yyohf/3QF4mf+T3VKsOvpvloZZNpu2NUzKd6k7B
- 0JCdqXI/haK+yHBgkaHdzi/8GXj2pURRMO13c=
+ bh=xaBB5sgSYz9Ukl/IWhLwKPEgiKlNC755XNbBGwb2KfU=;
+ b=HKSqk/WaKTDiflipHbhxD+bAyxw706wdSXtai3fM1STYC0YP5AFCPgINmHKgtLkXhk
+ NccEO9VDSarlbmaiLzW1lPV/N9kPe6XRxpzLhq75wRX95orDwLhnYLaZGO8eTb8xPgPM
+ yLRUSpLlcUfc6q/NvUPNT7ehGhMUuhZyRa62k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721231839; x=1721836639;
+ d=1e100.net; s=20230601; t=1721231843; x=1721836643;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zd+2qAI1yQTOL2KYVNhEhJIK8nuC2Jsh06iLBM+jtAU=;
- b=vZBSOkJndHhkVDq3i0PApHc5OUwrnEyRReRv/8uLGQukZuj64tceVBgdlyO+lbMAjy
- LFuiy9zfIW0HDyskEWneiAHNpZ2l51O2/cTSBI2i4s59f/dJGO+WvYRq+fzX18ARvvZO
- KsegH0JLPaWfdIP/wI8FcXDpST1eV9eQ0zsspEzFKdwEcoBzTh8bcD8gmi55wU608awn
- vj8F38jaU/3a5mmTTLym1VgRX+ObL8BOQP5n5d7hgYyloOGHH3YWKgQocRjPzch/dek2
- CJbtfe9VALW+1EyVqIt3Y2Jmm9q1ANzsQoxpXxpENRKnbZOGf5/W7gpfbt0mmlqnyNQ4
- nmAg==
-X-Gm-Message-State: AOJu0Yw3K8MaREwNyWHY7/xutXgQXMHV/N5QHlci0y6oim8bGH+sPEhC
- kPFKJCCKBjpog4NokmUIIMxPi9kQRMgHRM3FWWxjIaTPett5Su2X4Rn0BUylz3fU40CzYRK5oKc
+ bh=xaBB5sgSYz9Ukl/IWhLwKPEgiKlNC755XNbBGwb2KfU=;
+ b=oD+l5BUaufWSCPXwEYJosN4fhNbstULz+o5l0moLP9MSuPw19lZZxfAsjXSjXAC9lg
+ SsO1na9ATt7Qpzn9SUqWKnWKC1hW30uScmRxWDtfLEwDpY4G3cBR0/ZjlLCmMIP6g8xr
+ ycvNLvVhNgdJkU+7/sQz+EptRmZcQdnbeD7un8PAZ/a/yVgkEDUN1osvIFGaFQ+rSMAU
+ L5KCFaeXLZoDuzmKi4Awkm2B0eMzet5l7JK7iEykf6v3D9WTs0V9aP9SrgU1BptM9bBU
+ NPP29jSl5jk4q1eBifGa5MC2Qe1v7Rr0H9MzaLenhT1qxh03yFNofjn7+NoIy90zpbzX
+ xvfw==
+X-Gm-Message-State: AOJu0Ywkk6Olno0SlbPyiOgtzBT64wmYO6sZXyrzNnpfmgjqFEbKCUOY
+ 08ldws5OLJLq1NO+mbY7almvHXTCmert6jK8tMajcExIZSx0Hc6leGg0ccfzyyLt13Qw2kgJkNM
  =
-X-Google-Smtp-Source: AGHT+IFjtRRm1gUpRLi/rFFJOYXxY/TREblxlOWxF76Qhwkf/zQ91pK0xmxrimRa9KZW7yPcbiCxEA==
-X-Received: by 2002:a05:600c:46c3:b0:426:6edf:4f41 with SMTP id
- 5b1f17b1804b1-427c2cadfa4mr16514455e9.8.1721231839066; 
- Wed, 17 Jul 2024 08:57:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHyBz3YtCElepcUTW30MRtiCbD8erbIDKMH4CXa/NrHyP7hv/JOlWQmJubkSLVfuYdmtFVpsA==
+X-Received: by 2002:a5d:58f5:0:b0:35f:48e:fe59 with SMTP id
+ ffacd0b85a97d-368317c88ebmr1267945f8f.66.1721231842706; 
+ Wed, 17 Jul 2024 08:57:22 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.18
+ ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 08:57:18 -0700 (PDT)
+ Wed, 17 Jul 2024 08:57:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 02/24] qconfig: Drop the try_expand() function
-Date: Wed, 17 Jul 2024 16:56:50 +0100
-Message-Id: <20240717155712.2913651-3-sjg@chromium.org>
+Subject: [PATCH 06/24] qconfig: Rename the doc link
+Date: Wed, 17 Jul 2024 16:56:54 +0100
+Message-Id: <20240717155712.2913651-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240717155712.2913651-1-sjg@chromium.org>
 References: <20240717155712.2913651-1-sjg@chromium.org>
@@ -89,53 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not used anymore, so drop it.
+This was missed during the renaming of the tool. Fix it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: ea4d6dead37 ("moveconfig: Rename the tool to qconfig")
 ---
 
- tools/qconfig.py | 21 ---------------------
- 1 file changed, 21 deletions(-)
+ tools/qconfig.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 2492b37444a..7d3989c7c3e 100755
+index 8a2384d895b..07d78387465 100755
 --- a/tools/qconfig.py
 +++ b/tools/qconfig.py
-@@ -29,7 +29,6 @@ import threading
- import time
- import unittest
+@@ -3,7 +3,7 @@
  
--import asteval
- from buildman import bsettings
- from buildman import kconfiglib
- from buildman import toolchain
-@@ -216,26 +215,6 @@ def read_file(fname, as_lines=True, skip_unicode=False):
-             print(f"Failed on file '{fname}: {exc}")
-             return None
+ """Build and query a Kconfig database for boards.
  
--def try_expand(line):
--    """If value looks like an expression, try expanding it
--    Otherwise just return the existing value
--    """
--    if line.find('=') == -1:
--        return line
--
--    try:
--        aeval = asteval.Interpreter( usersyms=SIZES, minimal=True )
--        cfg, val = re.split("=", line)
--        val= val.strip('\"')
--        if re.search(r'[*+-/]|<<|SZ_+|\(([^\)]+)\)', val):
--            newval = hex(aeval(val))
--            print(f'\tExpanded expression {val} to {newval}')
--            return cfg+'='+newval
--    except:
--        print(f'\tFailed to expand expression in {line}')
--
--    return line
--
+-See doc/develop/moveconfig.rst for documentation.
++See doc/develop/qconfig.rst for documentation.
  
- ### classes ###
- class Progress:
+ Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+ Author: Simon Glass <sjg@chromium.org>
 -- 
 2.34.1
 
