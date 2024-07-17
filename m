@@ -4,59 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 103E9C3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 07:39:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F8C3C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 07:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66FD888599;
-	Wed, 17 Jul 2024 09:39:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 16DFD886E2;
+	Wed, 17 Jul 2024 09:44:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="afg/KKR3";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CEFC885AE; Wed, 17 Jul 2024 09:39:06 +0200 (CEST)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::223])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 706F588701; Wed, 17 Jul 2024 09:43:59 +0200 (CEST)
+Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
+ [185.125.25.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22C1B88297
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 09:39:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 350E18859C
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 09:43:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 4880560007;
- Wed, 17 Jul 2024 07:39:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1721201943;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gVqGcJi/0C6Tdo7xoyHEoJQK0JHfWWJy7S9yivedLjM=;
- b=afg/KKR3i8ZgHCt5RVfUbimbKM4L0mV8titTU6TKtljZNQNIINPWQ9RWyP6JMv+2weTh6/
- rbbFNGEVfk7n588DDy+pAdy789Q9HiHSMHbqXFXcqbXPJWKH5Bs3Kved/SsljOS844LsVg
- r9iL/Wb+4pDqvoF9vSbQj6jA5jJq7JYNxdMh4tYMtfUSZFQ8p1loufpN1rldWAZ9yOrfWq
- 5C/K9bqi1PVAhoHar76+hqjugeF70odblMsBUMLdEP62u6iJVVF08EEnzYFsKusjRWjcVy
- Z0XKEZz7fFRKjDU9bfoo6dou56c/iSLXfGuNUVXebRqJeDRkdPfaL76jC5EiTA==
-Date: Wed, 17 Jul 2024 09:39:01 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: lukas.funke-oss@weidmueller.com
-Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Tim Harvey
- <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
-Message-ID: <20240717093901.3d5ee2ed@xps-13>
-In-Reply-To: <20240715112302.652527-2-lukas.funke-oss@weidmueller.com>
-References: <20240715112302.652527-1-lukas.funke-oss@weidmueller.com>
- <20240715112302.652527-2-lukas.funke-oss@weidmueller.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4WP7H06VX5zgH7;
+ Wed, 17 Jul 2024 09:43:56 +0200 (CEST)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4WP7H02zgyzhrV; Wed, 17 Jul 2024 09:43:56 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 17 Jul 2024 09:43:42 +0200
+Subject: [PATCH v2 1/2] rockchip: theobroma-systems: migrate git URLs to HTTPS
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240717-tsd-http-git-clone-v2-1-6626f7b3bbea@cherry.de>
+References: <20240717-tsd-http-git-clone-v2-0-6626f7b3bbea@cherry.de>
+In-Reply-To: <20240717-tsd-http-git-clone-v2-0-6626f7b3bbea@cherry.de>
+To: Klaus Goger <klaus.goger@cherry.de>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,59 +61,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukas,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-lukas.funke-oss@weidmueller.com wrote on Mon, 15 Jul 2024 13:23:01
-+0200:
+It turns out only Puma had a working git:// URL. Though that is now
+fixed, having HTTPS URLs make it easier to directly reach our cgit
+webserver to check what's up without having to change the URL manually.
 
-> From: Lukas Funke <lukas.funke@weidmueller.com>
->=20
-> tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
-> initialized in tpm_tis_init(). However, the init-function is called
-> *after* tpm_tis_wait_init() introducing an uninitalized field access.
->=20
-> This commit switches both routines.
->=20
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> ---
->=20
->  drivers/tpm/tpm2_tis_spi.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->=20
-> diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
-> index b0fe97ab1d0..5a4dbfd3ccb 100644
-> --- a/drivers/tpm/tpm2_tis_spi.c
-> +++ b/drivers/tpm/tpm2_tis_spi.c
-> @@ -256,17 +256,17 @@ static int tpm_tis_spi_probe(struct udevice *dev)
->  	/* Ensure a minimum amount of time elapsed since reset of the TPM */
->  	mdelay(drv_data->time_before_first_cmd_ms);
-> =20
-> +	tpm_tis_ops_register(dev, &phy_ops);
-> +	ret =3D tpm_tis_init(dev);
-> +	if (ret)
-> +		goto err;
-> +
+Depending on your terminal settings, this also makes it possible to
+open the link from it.
 
-Strange, I don't remember wait the init was done after the wait_init,
-but at a first glance the fix looks fine.
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ board/theobroma-systems/jaguar_rk3588/MAINTAINERS | 2 +-
+ board/theobroma-systems/puma_rk3399/MAINTAINERS   | 2 +-
+ board/theobroma-systems/ringneck_px30/MAINTAINERS | 2 +-
+ board/theobroma-systems/tiger_rk3588/MAINTAINERS  | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+diff --git a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+index ab7051b427f..370d0a1272a 100644
+--- a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
++++ b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+@@ -10,4 +10,4 @@ F:	include/configs/jaguar_rk3588.h
+ F:	arch/arm/dts/rk3588-jaguar*
+ F:	configs/jaguar-rk3588_defconfig
+ W:	https://embedded.cherry.de/product/jaguar-sbc-rk3588/
+-T:	git git://git.embedded.cherry.de/jaguar-u-boot.git
++T:	git https://git.embedded.cherry.de/jaguar-u-boot.git
+diff --git a/board/theobroma-systems/puma_rk3399/MAINTAINERS b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+index 2536e348887..1a5b78bf535 100644
+--- a/board/theobroma-systems/puma_rk3399/MAINTAINERS
++++ b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+@@ -9,4 +9,4 @@ F:	include/configs/puma_rk3399.h
+ F:	arch/arm/dts/rk3399-puma*
+ F:	configs/puma-rk3399_defconfig
+ W:	https://embedded.cherry.de/product/puma-som-rk3399-q7/
+-T:	git git://git.embedded.cherry.de/puma-u-boot.git
++T:	git https://git.embedded.cherry.de/puma-u-boot.git
+diff --git a/board/theobroma-systems/ringneck_px30/MAINTAINERS b/board/theobroma-systems/ringneck_px30/MAINTAINERS
+index 2aff91f4207..4d4544a2a3e 100644
+--- a/board/theobroma-systems/ringneck_px30/MAINTAINERS
++++ b/board/theobroma-systems/ringneck_px30/MAINTAINERS
+@@ -9,4 +9,4 @@ F:	include/configs/ringneck_px30.h
+ F:	arch/arm/dts/px30-ringneck*
+ F:	configs/ringneck-px30_defconfig
+ W:	https://embedded.cherry.de/product/ringneck-som-px30-uq7/
+-T:	git git://git.embedded.cherry.de/ringneck-u-boot.git
++T:	git https://git.embedded.cherry.de/ringneck-u-boot.git
+diff --git a/board/theobroma-systems/tiger_rk3588/MAINTAINERS b/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+index e5aab4b29f3..a95135616ad 100644
+--- a/board/theobroma-systems/tiger_rk3588/MAINTAINERS
++++ b/board/theobroma-systems/tiger_rk3588/MAINTAINERS
+@@ -10,4 +10,4 @@ F:	include/configs/tiger_rk3588.h
+ F:	arch/arm/dts/rk3588-tiger*
+ F:	configs/tiger-rk3588_defconfig
+ W:	https://embedded.cherry.de/product/tiger-som-rk3588-q7/
+-T:	git git://git.embedded.cherry.de/tiger-u-boot.git
++T:	git https://git.embedded.cherry.de/tiger-u-boot.git
 
->  	ret =3D tpm_tis_wait_init(dev, chip->locality);
->  	if (ret) {
->  		log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
->  		return ret;
->  	}
-> =20
-> -	tpm_tis_ops_register(dev, &phy_ops);
-> -	ret =3D tpm_tis_init(dev);
-> -	if (ret)
-> -		goto err;
-> -
->  	priv->pcr_count =3D drv_data->pcr_count;
->  	priv->pcr_select_min =3D drv_data->pcr_select_min;
->  	priv->version =3D TPM_V2;
+-- 
+2.45.2
 
-
-Thanks,
-Miqu=C3=A8l
