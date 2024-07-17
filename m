@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411C4C3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 08:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50C3C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 08:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FABB88A4B;
-	Wed, 17 Jul 2024 10:31:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E85788A47;
+	Wed, 17 Jul 2024 10:31:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cRX8Lf14";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B8YdDOfd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5D58886E5; Wed, 17 Jul 2024 10:31:21 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 6ECA588A58; Wed, 17 Jul 2024 10:31:22 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D0678841D
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 10:31:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25E7B885B6
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 10:31:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4266ea6a488so52327465e9.1
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:31:19 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-367ab76d5e1so2169167f8f.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:31:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1721205079; x=1721809879; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hHXfwRfqfKGf0ihjpwe0qbTiX5XWprKn6Mlgvi4ejjQ=;
- b=cRX8Lf14lcawei9LJ9r2O/+3UWAk67RwBBD7LfES/Uc1lHCIPhrAfz16og9DsLmZx3
- x+guo0LT2jJH3w2F2A6O2o2doyNZxcfMbseraJ3yxxi3qNyMkEL63pVqXmQVenSOGxX4
- FMbmSMIP/OShLYtWefpCIICJYFoegqBrUjRg8=
+ bh=WqnBpgTPKSNCCM+zienf7jPxyVeSlY9pjtUDd1+uzxk=;
+ b=B8YdDOfd0WcXabAhT0Waic0/9rHnbmmHvqVPRTuL0AHx/KS9xJ16gCOky2jb2Ta51h
+ +FqMx5D1XPOw9dQEOLTDeAYuNcDmyAsnEan/XoRtKXo4cIlQ99dw17xcC3eXGS+O1wzs
+ IS47bsWozHSCUuy+oamwe7Z2iZz2SuKktqGTM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721205079; x=1721809879;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hHXfwRfqfKGf0ihjpwe0qbTiX5XWprKn6Mlgvi4ejjQ=;
- b=Cy27nyeWyHhX2qVWgMZUsHcRPkRupVSDsAGJ7EQKJkXvyck+027OuDvRGaYToqXTnU
- n6L6JW4h10RuPnELjIfqvmTy7n1yeMLx0L+18I9JGKs0XYlocfgpBtzRGblxYXg5Zxh0
- q8ESXpJDgI8kRee++fzQn8C12h4PRNEm9tkZ5wfRVctFa73ZNuXyoIbQXisae49uQo9e
- VR76py3YNZrygKqLA5HxJjsYmEyjjVA2xFsz6uYSzaiR7Mc7sN0Sj6AkSOiA9ui3sTul
- IluAONWqHMWsKuexa74yvymsw7BZQveDb5H66svFS82fim/14O7fUkXqU9PbkhCKtFQX
- eXRA==
-X-Gm-Message-State: AOJu0YxRryRiWl0xXaHi8YBfHzvNQbwE3o6i6G+4vhNN8KO0rIqNdD2q
- r/hjutWd3MIRCOTmu0AIlrCPcOQnnYhCyQkc60HsaP69GbZkMlk/KQa6uF8ITEK5kXXJd4Me5EA
+ bh=WqnBpgTPKSNCCM+zienf7jPxyVeSlY9pjtUDd1+uzxk=;
+ b=GSHHlGJUkW/ykijo9G0lo7KqItcePzsyuUck1h88NbgVXR9+iM7TFtrFRi5Jwp7ULE
+ BBepYDwifGuahmBPcXpUueMWq3lQnRgGiUvT9mvCzJaJje0X/A7ZRn/ATS9gfp3q7UxZ
+ VpPVWrmcfSz2LiWKRFH4ZGRj+UTZeSEBFk+M4SGZeHv75m+cR8PJ4/GGjhwhiqCNZdQI
+ kJsUXpAK5+cQ24YSxQoF3j6KgKygswxTQyEMa1OfHLoqLFRgsHu2n8jvgAIbFqcuj07A
+ tEtcBdjyYY41IzSQtUbgGlUdUkub1g4PaHcYF+qBV4Q1NrMiArK8yomWSbH9ZrH2aM32
+ QPKA==
+X-Gm-Message-State: AOJu0YySJdn9pdfuhfebKiDJ5f+KRvrmvoHNrHVLKtNZK6LFMy5x/JpJ
+ EBTdDvQGT042cbeXZXBT9He3Eyq5750YJP2Zo6XlkFmLbp6ylK+u3nqbmnPa6U4K2rW2RiBwJ6Y
  =
-X-Google-Smtp-Source: AGHT+IGKJoKPz8AmJzFmFGQNP+bU0Zbz6E6LjTC92Mkc2xHM2YO1o/zOcn7BmMNchZwfyAXx+Y17LA==
-X-Received: by 2002:a05:600c:46c3:b0:426:6714:5415 with SMTP id
- 5b1f17b1804b1-427c2d01f36mr9052415e9.30.1721205078756; 
- Wed, 17 Jul 2024 01:31:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFDt3FIKfy7FbTjhHTshDqzwb2gdO0dcCHy5wpgCSXu+Cngg5Ta1Xn07iPLEppxCa8zplGOog==
+X-Received: by 2002:a05:6000:c8e:b0:367:8a87:ada2 with SMTP id
+ ffacd0b85a97d-36831659bfcmr701379f8f.26.1721205079454; 
+ Wed, 17 Jul 2024 01:31:19 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
  ffacd0b85a97d-3680dafbb5bsm11069930f8f.80.2024.07.17.01.31.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 01:31:18 -0700 (PDT)
+ Wed, 17 Jul 2024 01:31:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 05/14] doc: Add a description for bootmeth_pxe
-Date: Wed, 17 Jul 2024 09:30:55 +0100
-Message-Id: <20240717083104.1963431-6-sjg@chromium.org>
+Subject: [PATCH v3 06/14] doc: Add a description for bootmeth_qfw
+Date: Wed, 17 Jul 2024 09:30:56 +0100
+Message-Id: <20240717083104.1963431-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240717083104.1963431-1-sjg@chromium.org>
 References: <20240717083104.1963431-1-sjg@chromium.org>
@@ -90,7 +90,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the pxe bootmeth.
+Add documentation for the qfw bootmeth.
+
+Fix up the compatible string to drop the 'extlinux' part, which is not
+relevant to this bootmeth.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
@@ -98,88 +101,78 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
 
 Changes in v3:
-- Link to pxelinux from extlinux
-- Use quoting on function names
+- Drop extra 'and'
 
 Changes in v2:
 - Adjustments from Heinrich's comments
 
- doc/develop/bootstd/extlinux.rst |  3 ++-
+ boot/bootmeth_qfw.c              |  2 +-
  doc/develop/bootstd/index.rst    |  1 +
- doc/develop/bootstd/overview.rst |  2 +-
- doc/develop/bootstd/pxelinux.rst | 27 +++++++++++++++++++++++++++
- 4 files changed, 31 insertions(+), 2 deletions(-)
- create mode 100644 doc/develop/bootstd/pxelinux.rst
+ doc/develop/bootstd/overview.rst |  1 +
+ doc/develop/bootstd/qfw.rst      | 20 ++++++++++++++++++++
+ 4 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100644 doc/develop/bootstd/qfw.rst
 
-diff --git a/doc/develop/bootstd/extlinux.rst b/doc/develop/bootstd/extlinux.rst
-index 46e9ad9eea1..bf27dc57aaa 100644
---- a/doc/develop/bootstd/extlinux.rst
-+++ b/doc/develop/bootstd/extlinux.rst
-@@ -14,7 +14,8 @@ under the `boot/` subdirectory. This list of prefixes (``{"/", "/boot"}`` by
- default) can be selected with the `filename-prefixes` property in the bootstd
- device.
+diff --git a/boot/bootmeth_qfw.c b/boot/bootmeth_qfw.c
+index dfaa944594e..2f8e00cf350 100644
+--- a/boot/bootmeth_qfw.c
++++ b/boot/bootmeth_qfw.c
+@@ -88,7 +88,7 @@ static struct bootmeth_ops qfw_bootmeth_ops = {
+ };
  
--Note that the PXE bootmeth uses the same file format, but in a network context.
-+Note that the :doc:`pxelinux` uses the same file format, but in a
-+network context.
+ static const struct udevice_id qfw_bootmeth_ids[] = {
+-	{ .compatible = "u-boot,qfw-extlinux" },
++	{ .compatible = "u-boot,qfw-bootmeth" },
+ 	{ }
+ };
  
- When invoked on a bootdev, this bootmeth searches for the file and creates a
- bootflow if found.
 diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
-index 5bbb3d633a3..5052afe448f 100644
+index 5052afe448f..f8fce7207ce 100644
 --- a/doc/develop/bootstd/index.rst
 +++ b/doc/develop/bootstd/index.rst
-@@ -8,3 +8,4 @@ Standard Boot
- 
+@@ -9,3 +9,4 @@ Standard Boot
     overview
     extlinux
-+   pxelinux
+    pxelinux
++   qfw
 diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index 7af159b9ca8..b9b45f1e7a7 100644
+index b9b45f1e7a7..f23e344546d 100644
 --- a/doc/develop/bootstd/overview.rst
 +++ b/doc/develop/bootstd/overview.rst
-@@ -413,7 +413,7 @@ Available bootmeth drivers
- Bootmeth drivers are provided for booting from various media:
- 
-    - :doc:`extlinux / syslinux <extlinux>` boot from a storage device
--   - extlinux boot from a network (PXE)
-+   - :doc:`extlinux / syslinux <extlinux>` boot from a network (PXE)
-    - U-Boot scripts from disk, network or SPI flash
+@@ -418,6 +418,7 @@ Bootmeth drivers are provided for booting from various media:
     - EFI boot using bootefi from disk
     - VBE
-diff --git a/doc/develop/bootstd/pxelinux.rst b/doc/develop/bootstd/pxelinux.rst
+    - EFI boot using boot manager
++   - :doc:`QFW <qfw>`: QEMU firmware interface
+ 
+ Each driver is controlled by a Kconfig option. If no bootmeth driver is
+ selected by a compatible string in the devicetree, all available bootmeth
+diff --git a/doc/develop/bootstd/qfw.rst b/doc/develop/bootstd/qfw.rst
 new file mode 100644
-index 00000000000..c4b7fbb4c9c
+index 00000000000..70086ad1817
 --- /dev/null
-+++ b/doc/develop/bootstd/pxelinux.rst
-@@ -0,0 +1,27 @@
++++ b/doc/develop/bootstd/qfw.rst
+@@ -0,0 +1,20 @@
 +.. SPDX-License-Identifier: GPL-2.0+:
 +
-+PXE Bootmeth
++QFW Bootmeth
 +============
 +
-+PXE (Preboot eXecution-Environment) provides a way to boot an operating system
-+over a network interface. The PXE bootmeth supports PXELINUX and allows U-Boot to
-+provide a menu of possible Operating Systems from which the user can choose.
++`QEMU <hhttps://www.qemu.org/>`_ is a system emulator which is able to boot
++Operating Systems. QEMU provides specific support for booting an OS image
++provided on the QEMU command line.
 +
-+U-Boot includes a parser for the `extlinux.conf` file described
-+`here <https://uapi-group.org/specifications/specs/boot_loader_specification>`_.
-+It consists primarily of a list of named operating systems along with the
-+kernel, initial ramdisk and other settings. The file is retrieved from a network
-+server using the TFTP protocol.
++When invoked on a bootdev for UCLASS_QFW, this bootmeth reads the kernel
++provided by the QEMU `-kernel` argument, the initial ramdisk provided by
++`-initrd` and the boot arguments (command line) provided by `-append` into
++memory ready for booting.
 +
-+When invoked on a bootdev, this bootmeth searches for the file and creates a
-+bootflow if found. See
-+`PXELINUX <https://wiki.syslinux.org/wiki/index.php?title=PXELINUX>`_ for
-+a full description of the search procedure.
++When the bootflow is booted, the bootmeth tries the `booti` command first, then
++falls back to the `bootz` command. U-Boot's 'control' devicetree is passed
++through to the kernel.
 +
-+When the bootflow is booted, the bootmeth calls ``pxe_setup_ctx()`` to set up
-+the context, then ``pxe_process()`` to process the file. Depending on the
-+contents, this may boot an Operating System or provide a list of options to the
-+user, perhaps with a timeout.
-+
-+The compatible string "u-boot,extlinux-pxe" is used for the driver. It is
-+present if `CONFIG_BOOTMETH_EXTLINUX_PXE` is enabled.
++The compatible string "u-boot,qfw-bootmeth" is used for the driver. It is
++present if `CONFIG_QFW` is enabled.
 -- 
 2.34.1
 
