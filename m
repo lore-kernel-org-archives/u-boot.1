@@ -4,73 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEFC9C3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 12:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7265EC3DA4B
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 12:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35CC188755;
-	Wed, 17 Jul 2024 14:12:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D46B7889A2;
+	Wed, 17 Jul 2024 14:29:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MEH48lfv";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 17F2F886E7; Wed, 17 Jul 2024 14:12:02 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F64E884D1
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 14:11:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46HCBmEn121338;
- Wed, 17 Jul 2024 07:11:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721218308;
- bh=NkLbR/NiKYx4omUavlBwGPQCw0lbINMyLMannH0m+Hg=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=MEH48lfvxhfNDaly3/8DFFXcMwhvFo4+vQngnEdBSAwnuMD9Bnj7YqLHbqi/K/xDJ
- C0DiJAetGSTueLbMHsbM6VtEbUPAoJ9vhWlodORu3I6iZP8fXthwcRu6FNx4gj6SZU
- 8nWfNpNiql9S/ft4CProQRfz2mx7ahDc0mZSqkw8=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46HCBmr0015385
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 17 Jul 2024 07:11:48 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 17
- Jul 2024 07:11:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 17 Jul 2024 07:11:47 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46HCBl3G025887;
- Wed, 17 Jul 2024 07:11:47 -0500
-Date: Wed, 17 Jul 2024 07:11:47 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Peter Robinson
- <pbrobinson@gmail.com>, Enric Balletbo i Serra <eballetb@redhat.com>, Josh
- Boyer <jwboyer@redhat.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Subject: Re: Request for hosting a boot-firmware repository in u-boot git
- (denx and GitHub)
-Message-ID: <20240717121147.2otvlmo6tpmek3wm@vacancy>
-References: <20240620213539.ftmjhphypssxp5n4@desolate>
- <20240716191300.GM561963@bill-the-cat>
- <4bb80912-62fa-4f33-a344-351141d8df10@canonical.com>
- <20240716200147.GN561963@bill-the-cat>
- <e188ea04-9309-408b-8749-f137fbbd23fa@canonical.com>
- <20240716213618.GO561963@bill-the-cat>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1721219354;
+	bh=nY5S3upYd6k1bDSJfhQ4oADqnHo443C40Q6xN6z00p8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=to2yLqG4jy7fV0bYsuN4+xfUgBi+MxJEoZ+L4m+o9iZTysjMn1fT8B00k9H5XQ0CL
+	 QWFX67fQTThG154Aa686XnMEZgQmbzx5nbFu6f+malxnBdwyXaY3JvA7zuhLkCrMmO
+	 8JAokz/ZoX9OVYxmD3qgFMMVqP1tKJdyeRZqHmbYNzNXgwf026CRJTR9PalzlGa00Q
+	 SVcwqmHaIHDY0paBmoEFV3x0gjiVaaeOp2oqBstSGcMvzPXG4GTDMxQMkDye2Ud82E
+	 R8Wu8TZNeNKKQGwit9bacI5kgOzH8OfJceBsuLVDYK2bOr0pK1oDiTEX0cqOeiUcA6
+	 J6SW1HQHWIB/g==
+Received: from localhost (unknown [IPv6:2001:861:52:5f60:7f4c:42be:fdf8:3b8a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: pro@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id F22F48874C;
+ Wed, 17 Jul 2024 14:29:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1721219354;
+ bh=nY5S3upYd6k1bDSJfhQ4oADqnHo443C40Q6xN6z00p8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=npUSwZwhpF5fhQYQsL30ee+I6rq6tyamujISTVa/XkKfZn4U1RoxwV7goObNH5gVi
+ 8mozGIbrX83un/9vET7cIXNtzNgyICylzAmFsHxZ2Jo45iBJBfBkLhfqofmzkIYN80
+ 3YpDOWEVyG5kPoYjaFriqci7iqZnvLuFRKqpgfjACFSwNJUx302uo1bjUz0CpZ2NB8
+ IxfYWdvH8Gjxt8qsd00lldYkhmW1B/EmS6pmD8UeP7M2ZWaobtGNZLHtjg4R+LVS+E
+ HOKw60RTnI7XQ0/h7tG5hJsjQl5HUzrYGNhbL3FK90EI0xDlglohOtsEAfWE5oPMKY
+ 4991tLaa3xxlg==
+From: Philip Oberfichtner <pro@denx.de>
+To: u-boot@lists.denx.de
+Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
+ christophe.roullier@foss.st.com, epsi@gmx.de, eugen.hristev@collabora.com,
+ festevam@gmail.com, forbidden405@outlook.com, ivprusov@salutedevices.com,
+ joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
+ leyfoon.tan@starfivetech.com, marek.vasut+renesas@mailbox.org,
+ marjolaine.amate@odyssee-systemes.fr, neil.armstrong@linaro.org,
+ n-francis@ti.com, patrice.chotard@foss.st.com,
+ patrick.delaunay@foss.st.com, philipp.tomsich@vrull.eu,
+ rfried.dev@gmail.com, seanga2@gmail.com, sebastian.reichel@collabora.com,
+ sebastien.szymanski@armadeus.com, sjg@chromium.org, sumit.garg@linaro.org,
+ trini@konsulko.com, xypron.glpk@gmx.de, marex@denx.de,
+ Philip Oberfichtner <pro@denx.de>
+Subject: [PATCH v3 0/5] net: dwc_eth_qos: Add glue driver for Intel MAC
+Date: Wed, 17 Jul 2024 14:29:01 +0200
+Message-Id: <20240717122906.117861-1-pro@denx.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240716213618.GO561963@bill-the-cat>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,63 +73,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15:36-20240716, Tom Rini wrote:
-[...]
+This patch series implements the dwc_eth_qos glue driver for Intel SOCs.
+Before doing that, a few general adaptions to the dwc_eth_qos.c main
+driver are required. Most notably, the preparation for PCI based driver
+instances, which do not necessarily use a device tree.
 
-> > > > Distributing the closed source binaries and U-Boot in separate packages
-> > > > according to their respective licenses and only assemble them on the target
-> > > > device via a post-installation script might be allowable.
-> > > 
-> > > For this project the question is making sure that the binaries are
-> > > licensed such that they could be externally redistributable.
-> > > 
-> > > I don't know why someone would suggest that ABI calls are suddenly
-> > > linkage as I thought that (as far as these matters go) that was already
-> > > settled, but I am not a lawyer.
-> > 
-> > The relevant term in the GPL 2.0 license is "work based on the Program".
-> > According to the GPL a "work based on the Program" is "a work containing the
-> > Program or a portion of it".
-> > 
-> > If you build a binary via binman that contains U-Boot and another binary,
-> > the resulting binary could be considered "a work containing the Program or a
-> > portion of it".
-> > 
-> > The GPL 2.0 requires:
-> > 
-> > "But when you distribute the same sections as part of a whole which is a
-> > work based on the Program, the distribution of the whole must be on the
-> > terms of this License, whose permissions for other licensees extend to the
-> > entire whole, and thus to each and every part regardless of who wrote it."
-> 
-> I'm not a lawyer and I don't pretend to be one on mailing lists, either.
-> 
-> In that my non-lawyer statements matter, I don't think binman
-> constitutes some new form of linking and I believe it falls in to the
-> same well known ABI exception.
-> 
-> But that's entirely unrelated to the question of hosting binaries (some
-> of which may be closed source) for use in firmware projects, some of
-> which will not be GPL. For example, I would assume that running
-> tianocore on i.MX8 requires the same assorted binaries that U-Boot does,
-> and that would not have a license conflict.
+This patch series depends on: "net: dwc_eth_qos: mdio: Implement clause 45":
+https://patchwork.ozlabs.org/project/uboot/patch/20240507094237.168238-1-pro@denx.de/
 
-Usual disclaimers (not a lawyer, not representing corporate policy..  etc):
-buildroot and yocto for example prebuild images for embedded systems and
-they have had to deal with closed firmwares in the past as well.
-Packaging binaries in a filesystem or some format (x509/fit) is
-essentially the same thing - anyways.. interesting thought there.
+Changes in V3:
+	- Replace mfence() with mb()
+	- Clean-up eqos_get_base_addr()
+	- Several style fixes for dwc_eth_qos_intel
 
+Philip Oberfichtner (5):
+  x86: provide mb() macro
+  net: dwc_eth_qos: Fix header to be self-contained
+  net: dwc_eth_qos: Adapt probe() for PCI devices
+  net: dwc_eth_qos: Implement bind() for PCI devices
+  net: dwc_eth_qos: Add glue driver for Intel MAC
 
-PS: For folks interested: LPC accepted our proposal[1] in the
-security/boot MC and if folks could join in person or virtually, it
-would be great to lay this out and get the thoughts out and come to some
-direction here.
-
-[1] https://lpc.events/event/18/contributions/1815/
-
+ arch/x86/cpu/mp_init.c             |  10 +-
+ arch/x86/include/asm/cpu.h         |   5 -
+ arch/x86/include/asm/io.h          |   1 +
+ drivers/net/Kconfig                |   7 +
+ drivers/net/Makefile               |   1 +
+ drivers/net/dwc_eth_qos.c          |  79 ++++-
+ drivers/net/dwc_eth_qos.h          |   8 +-
+ drivers/net/dwc_eth_qos_imx.c      |   6 +
+ drivers/net/dwc_eth_qos_intel.c    | 449 +++++++++++++++++++++++++++++
+ drivers/net/dwc_eth_qos_intel.h    |  57 ++++
+ drivers/net/dwc_eth_qos_qcom.c     |   6 +
+ drivers/net/dwc_eth_qos_rockchip.c |   6 +
+ drivers/net/dwc_eth_qos_starfive.c |   6 +
+ drivers/net/dwc_eth_qos_stm32.c    |   6 +
+ include/pci_ids.h                  |   9 +
+ 15 files changed, 637 insertions(+), 19 deletions(-)
+ create mode 100644 drivers/net/dwc_eth_qos_intel.c
+ create mode 100644 drivers/net/dwc_eth_qos_intel.h
 
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.39.2
+
