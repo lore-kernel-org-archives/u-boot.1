@@ -4,80 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA439C3DA59
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jul 2024 23:01:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A19EC3DA59
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 00:48:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9050B88A1E;
-	Wed, 17 Jul 2024 01:01:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 99D068874A;
+	Wed, 17 Jul 2024 02:48:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hXJ895uH";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="AorY0LKC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 849BF88A1E; Wed, 17 Jul 2024 01:01:00 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D70C88722; Wed, 17 Jul 2024 02:48:44 +0200 (CEST)
+Received: from mail-m254103.xmail.ntesmail.com
+ (mail-m254103.xmail.ntesmail.com [103.129.254.103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BEE7887D4
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:00:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6463A88665
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 02:48:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-704156d0e0dso3234231a34.1
- for <u-boot@lists.denx.de>; Tue, 16 Jul 2024 16:00:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721170857; x=1721775657; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ulHKdc0B0Vdp5MKs9GFT8MviVK86LyzteKqsRi6rz9o=;
- b=hXJ895uHk7LNIEKHn3ihwK8+h/ybZ8XljyGPO3ctL5IBysaafQ+NZ7vzcO3L16/mGt
- Rgepdm4rSjaveDoyHOvLHs1UlJkFeVYVoqMnvQ5ZEJHHVSWorbO8TZLBF8XDgLZIeekz
- X3BURXGLbgV8h0QLh8TKbdQINuUefV2SHDZ4E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721170857; x=1721775657;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ulHKdc0B0Vdp5MKs9GFT8MviVK86LyzteKqsRi6rz9o=;
- b=U8NLybBztsIJdAJDtHzdmDxNoCgmA4eBADqZo7M6gn8dzi0DqKNLS55MypBPz13uLE
- TkhcCp7C07IaTnaPmARpk1NgAk8rXLJiRlgvgnj8seTVuqBkH/bpv0q/W3WifFMmU/4I
- pc/XAyIKhtqaTORFRyycmSO/mKEflZgg77C0+q3/Kd8A3hYbxulqM79C3mYAwC4q7ndH
- /29wyWfu6NKcl3/7AFjbnyor242hEQgFypYyuB37KHc1tmdWySHVDZiY5eA4nazbBWZk
- nJZpz3BhRd34ztN1mFZy6yAPq5uqRnJMQkCFp2vqOX46fjoklfRHd4oQUGBVDO4uk9cP
- 9AQg==
-X-Gm-Message-State: AOJu0YwSN4Ez/fKwORBoKknso2jo1qN/hJYh8TPBHbhmqCaXz5t9lfVr
- v7g4j9x9M8L9YaKGfGn4RJFgd+aiJvescWiF9uQ6ynE1h9hrCip+hIiLaiYW78w=
-X-Google-Smtp-Source: AGHT+IFuPuEKUpWbWBsHRBNU9BZy0NqZ9KLBZb97PoQ5kfMhuIWr4+kc+zPhlWDTdDMsM2JdljxTkg==
-X-Received: by 2002:a05:6830:440a:b0:704:7c75:b13b with SMTP id
- 46e09a7af769-708d99605dbmr4638407a34.6.1721170855674; 
- Tue, 16 Jul 2024 16:00:55 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708c0d2fcc2sm1510063a34.77.2024.07.16.16.00.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 16:00:55 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, 
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>, 
- Nishanth Menon <nm@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
- Dhruva Gole <d-gole@ti.com>
-In-Reply-To: <20240702-b4-upstream-streamline-platform-v3-0-0ebd7bbd31d5@ti.com>
-References: <20240702-b4-upstream-streamline-platform-v3-0-0ebd7bbd31d5@ti.com>
-Subject: Re: [PATCH v3 0/4] Fix fdtfile for j722s and am62p
-Message-Id: <172117085456.763145.4796228306126984599.b4-ty@konsulko.com>
-Date: Tue, 16 Jul 2024 17:00:54 -0600
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=AorY0LKCjoCvHnefJWc3W1yOqFp2bPBL3bLCrsDwllIL8C9ynq1AbqKVLjAkETXs9lvGwR1jGEcEeqv1C4lpjoPFJfILVIykMYiVohctLK0DFzYmVpVkDJFfw2/LuPpK3NkCDrFikW/bsyrh+shbQmwIxnRQCZuwxus8YfkI7nw=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=xMLN5OBo6OUnwMhjSOcsdiGKELuAx/BTVOeT7h1473o=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 3AC46900300;
+ Wed, 17 Jul 2024 08:48:25 +0800 (CST)
+Message-ID: <a2a316be-2fad-4b5b-8ae6-1368479ece80@rock-chips.com>
+Date: Wed, 17 Jul 2024 08:48:24 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] phy: rockchip: naneng-combphy: Introduce PHY-IDs
+ to fix RK3588 muxing
+To: Sebastian Kropatsch <seb-dev@mail.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <cover.1721161722.git.seb-dev@mail.de>
+ <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkweGlZOTUMdGE1DTBhMGExWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a90be29718f03a9kunm3ac46900300
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PFE6Lhw5ATI#URw#Sj8YNzg0
+ MkoKCQ5VSlVKTElKSkxMSEtOQklNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTElLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,16 +75,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Jul 2024 10:50:00 +0530, Manorit Chawdhry wrote:
 
-> fdtfile wasn't being populated in these boards in legacy boot using
-> bootcmd_ti_mmc, migrate these platforms to ti_set_fdt_env.
-> 
-> 
+On 2024/7/17 04:42, Sebastian Kropatsch wrote:
+> Fix multiplex configuration for PCIe1L0 and PCIe1L1 in PCIESEL_CON for
+> RK3588 to correctly select between Combo PHYs and PCIe3 PHY.
+> Currently, the code incorrectly muxes both ports to Combo PHYs,
+> interfering with PCIe3 PHY settings.
+> Introduce PHY identifiers to identify the correct Combo PHY and set
+> the necessary bits accordingly.
+>
+> This fix is adapted from the upstream Linux commit by Sebastian Reichel:
+> d16d4002fea6 ("phy: rockchip: naneng-combphy: Fix mux on rk3588")
+>
+> Fixes: b37260bca1aa ("phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588")
+> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Applied to u-boot/master, thanks!
-
--- 
-Tom
-
-
+Thanks,
+- Kever
+> ---
+>   .../rockchip/phy-rockchip-naneng-combphy.c    | 49 ++++++++++++++++++-
+>   1 file changed, 47 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> index 1b85cbcce8..7d61913af1 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> @@ -67,12 +67,15 @@ struct rockchip_combphy_grfcfg {
+>   };
+>   
+>   struct rockchip_combphy_cfg {
+> +	unsigned int num_phys;
+> +	unsigned int phy_ids[3];
+>   	const struct rockchip_combphy_grfcfg *grfcfg;
+>   	int (*combphy_cfg)(struct rockchip_combphy_priv *priv);
+>   };
+>   
+>   struct rockchip_combphy_priv {
+>   	u32 mode;
+> +	int id;
+>   	void __iomem *mmio;
+>   	struct udevice *dev;
+>   	struct regmap *pipe_grf;
+> @@ -270,6 +273,8 @@ static int rockchip_combphy_probe(struct udevice *udev)
+>   {
+>   	struct rockchip_combphy_priv *priv = dev_get_priv(udev);
+>   	const struct rockchip_combphy_cfg *phy_cfg;
+> +	fdt_addr_t addr;
+> +	int id;
+>   
+>   	priv->mmio = (void __iomem *)dev_read_addr(udev);
+>   	if (IS_ERR(priv->mmio))
+> @@ -281,6 +286,26 @@ static int rockchip_combphy_probe(struct udevice *udev)
+>   		return -EINVAL;
+>   	}
+>   
+> +	addr = dev_read_addr(udev);
+> +	if (addr == FDT_ADDR_T_NONE) {
+> +		dev_err(udev, "No valid device address found\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Find the phy-id based on the device's I/O-address */
+> +	priv->id = -ENODEV;
+> +	for (id = 0; id < phy_cfg->num_phys; id++) {
+> +		if (addr == phy_cfg->phy_ids[id]) {
+> +			priv->id = id;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (priv->id == -ENODEV) {
+> +		dev_err(udev, "Failed to find PHY ID\n");
+> +		return -ENODEV;
+> +	}
+> +
+>   	priv->dev = udev;
+>   	priv->mode = PHY_TYPE_SATA;
+>   	priv->cfg = phy_cfg;
+> @@ -421,6 +446,12 @@ static const struct rockchip_combphy_grfcfg rk3568_combphy_grfcfgs = {
+>   };
+>   
+>   static const struct rockchip_combphy_cfg rk3568_combphy_cfgs = {
+> +	.num_phys = 3,
+> +	.phy_ids = {
+> +		0xfe820000,
+> +		0xfe830000,
+> +		0xfe840000,
+> +	},
+>   	.grfcfg		= &rk3568_combphy_grfcfgs,
+>   	.combphy_cfg	= rk3568_combphy_cfg,
+>   };
+> @@ -436,8 +467,16 @@ static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
+>   		param_write(priv->phy_grf, &cfg->con1_for_pcie, true);
+>   		param_write(priv->phy_grf, &cfg->con2_for_pcie, true);
+>   		param_write(priv->phy_grf, &cfg->con3_for_pcie, true);
+> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
+> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
+> +		switch (priv->id) {
+> +		case 1:
+> +			printf("rk3588_combphy_cfg: priv->id was configured to 1");
+> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
+> +			break;
+> +		case 2:
+> +			printf("rk3588_combphy_cfg: priv->id was configured to 2");
+> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
+> +			break;
+> +		}
+>   		break;
+>   	case PHY_TYPE_USB3:
+>   		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
+> @@ -515,6 +554,12 @@ static const struct rockchip_combphy_grfcfg rk3588_combphy_grfcfgs = {
+>   };
+>   
+>   static const struct rockchip_combphy_cfg rk3588_combphy_cfgs = {
+> +	.num_phys = 3,
+> +	.phy_ids = {
+> +		0xfee00000,
+> +		0xfee10000,
+> +		0xfee20000,
+> +	},
+>   	.grfcfg		= &rk3588_combphy_grfcfgs,
+>   	.combphy_cfg	= rk3588_combphy_cfg,
+>   };
