@@ -4,75 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E9AC3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 16:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC264C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 16:39:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8EF988B19;
-	Wed, 17 Jul 2024 17:57:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4DE0888A68;
+	Wed, 17 Jul 2024 18:39:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MAGl2eGW";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="N6gr7Sf1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2D5F88B05; Wed, 17 Jul 2024 17:57:41 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 0690D88A5D; Wed, 17 Jul 2024 18:39:09 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D3988AEC
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E555988A28
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 18:39:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-367e50f71bbso4516934f8f.2
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:39 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4266b1f1b21so49588905e9.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 09:39:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721231859; x=1721836659; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k/fHgOc/BF/oFirrhE+8D5d+XLJD5YWbcjoyzaVrRKA=;
- b=MAGl2eGW9RJnnRu6d9TesO0Sm6G4r6G/r5oyLIvZzvNMpZ4mV/Usbb3asYtP2ZyHtw
- JDZXMgtGaPY2MgUf2qdtNZtAJiV2rqHUf5iE4KepkxCjRxsMrdoMmSIXnNKWSQqrPMdY
- 7izrUudNQ2Y3fQCcuZC+EYJ66jmwFDeX9ykbU=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721234346; x=1721839146;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qJD3f0ldfvybB3Z7bkmxDEvMK7cR3r2vdnEhXfYQziU=;
+ b=N6gr7Sf1MJQ44rKo+bNy6dkx9pNJNLfTiknEw8C0wNPDOXutWZscJ26ky644icndCe
+ V4T/5CS2s5pQLGs1dcgUfh1fc8DYLh6C68bC4P/7FnpJbSuiTuI3hLtT75BrPGX+wPmZ
+ Xa3JUwjb0eiAofmkX4HpS4AO0WUdUyzIRvnvQu7zMtLMeXS3a1c12Tz+oIFVx1ZQDvCu
+ 5br7r9EPTqi3iit6+M/9ZFYzlwFlFsVJkc9AL4CoizOOvFUwIeq9QAHqe8TAWQsDz51m
+ tWW0YPq5XN0y0BXtT8TaumEijeWFJi90vsOr145bSSRJY0AeGmdHMXhgQWdwfYkpjMYH
+ b7eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721231859; x=1721836659;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k/fHgOc/BF/oFirrhE+8D5d+XLJD5YWbcjoyzaVrRKA=;
- b=gVMhTJk9oe2a7sk6gXeq2FUuzK/jVBD8nnXFBAelOM88RzGOS3bPOQuOQfbeKH6YH/
- w/D83yL/xXfcckGcbAD+SFbd7/pxaasWKJRMgHd5HRMB67+P870d0mUT7wRSNuSC+Wlt
- 481j73NZMfn+oV4mn/r/TvldPeJhmjmTFF2UpnOxxx0fVEFXRsOgFrwN/eDTHt7Z0qBI
- 4utQ2imMAzsz+msdm+bQTbhHvyMUv6fV6a2vESXt2YjWRNi3x6RgzFzMbi4c6D41+ecU
- bp98Fzr+gszhMfeDlPnQujpToFxohX9EQzssmZlFqXZZEytdk4CMRvbi9LrFhoXaUnku
- OmMA==
-X-Gm-Message-State: AOJu0Yxqr03fzbQbyzVfj9PZo3ft7ya3MaKKUYkNepb40AyoMVCRTq32
- 2LNuvIysMYGMaog5+hbJG3CiXYtL26dLsdHGlgHnAdX+/u4/+8KV6h1xXyHNLEf/MKD1zAPwdXM
- =
-X-Google-Smtp-Source: AGHT+IF62WmHchk5S8sFv/sm9sZRACUI4cDkn6xHw3tYuejv2PqTHE45M7TLF0G5SPzs1ABeY5CWzA==
-X-Received: by 2002:a05:6000:1787:b0:35f:f58:38fc with SMTP id
- ffacd0b85a97d-3683164eca3mr1771363f8f.26.1721231858728; 
- Wed, 17 Jul 2024 08:57:38 -0700 (PDT)
-Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
+ d=1e100.net; s=20230601; t=1721234346; x=1721839146;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qJD3f0ldfvybB3Z7bkmxDEvMK7cR3r2vdnEhXfYQziU=;
+ b=FoYLEtYP6l3coDSb88oHumF33mXHB7e+8SjIRHAJCqurCrHWCMrxjDptX9FPuCsk71
+ EEUMK7Qf5iBrUPDFfQnhKWQsSTmvVqm1q/Tka7WBckQTDQOywEoHd4f/N3MiR/hjJOp3
+ gwlMT/KMd8VKWAapM7R4bpyPFmd6F45wgZHXHoYUGkPwl7/6iCgTaTbu9JSUje6K3WZt
+ ArWtrr5r0yfrAdDEgAkze2Eq+mnHlDvyy3M5JResopbVMDg1uUrchrTUUmElh/CASxr+
+ k1k7vuZ4+Fv2Dp5oDbRn+er/FelQigR4jO4P7wf7vZ1t7zGUk1NjDraXxYwxei2XtrVR
+ CowQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWoGQczwWbxXu8FpB2bzUgmVuMS3BH7GN0mSXmgGa32kscybkH2JyR0zW+usWLefsFRqn2oDRRIxrxPuluySrAdgyylzw==
+X-Gm-Message-State: AOJu0YxkzH2SaWRIC/ci8kpGVr1hp3o0FBWEEwQpIfxVaWs4TvXq+H3c
+ 7j30QPtS00WAAVAeUkseC0MUNuyrWECq7SWGCvdYaPjEx/rfA/SbCGOtau5hhD0=
+X-Google-Smtp-Source: AGHT+IHd+g4q7KmlvrCL6NvxP56LFl8jh/6du7I1unZL6oIRwNL5BIhJR4w3Ni8X2egUfWpdhSRnXA==
+X-Received: by 2002:a05:600c:1c15:b0:426:6618:146a with SMTP id
+ 5b1f17b1804b1-427c2cb5702mr16485355e9.2.1721234345988; 
+ Wed, 17 Jul 2024 09:39:05 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.37
+ 5b1f17b1804b1-427c778e049sm4565255e9.9.2024.07.17.09.39.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 08:57:38 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 24/24] qconfig: Allow searching for CONFIG values
-Date: Wed, 17 Jul 2024 16:57:12 +0100
-Message-Id: <20240717155712.2913651-25-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240717155712.2913651-1-sjg@chromium.org>
-References: <20240717155712.2913651-1-sjg@chromium.org>
+ Wed, 17 Jul 2024 09:39:05 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, AKASHI
+ Takahiro <akashi.tkhro@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, Abdellatif El Khlifi
+ <abdellatif.elkhlifi@arm.com>, Anand Moon <linux.amoon@gmail.com>, Peter
+ Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, Heinrich Schuchardt
+ <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH] cmd: move CMD_DHCP6 options beneath CMD_DHCP6
+In-Reply-To: <20240717145446.192222-1-heinrich.schuchardt@canonical.com>
+References: <20240717145446.192222-1-heinrich.schuchardt@canonical.com>
+Date: Wed, 17 Jul 2024 18:39:04 +0200
+Message-ID: <87wmlk55xz.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,96 +97,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add basic support for searching for matching of non-matching values.
+Hi Heinrich,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/20
+Thank you for the patch.
 
----
+On mer., juil. 17, 2024 at 16:54, Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
 
- doc/develop/qconfig.rst | 14 ++++++++++++++
- tools/qconfig.py        | 16 ++++++++++++----
- 2 files changed, 26 insertions(+), 4 deletions(-)
+> All Kconfig options that depend on CONFIG_CMD_DHCP6 should immediately
+> follow it.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-diff --git a/doc/develop/qconfig.rst b/doc/develop/qconfig.rst
-index 8efb1eb2685..123779eab17 100644
---- a/doc/develop/qconfig.rst
-+++ b/doc/develop/qconfig.rst
-@@ -85,6 +85,20 @@ example, to find boards which enabled CONFIG_SCSI but not CONFIG_BLK::
-     3 matches
-     pg_wcom_seli8_defconfig highbank_defconfig pg_wcom_expu1_defconfig
- 
-+It is also possible to search for particular values. For example, this finds all
-+boards with an empty string for `CONFIG_DEFAULT_FDT_FILE`::
-+
-+    ./tools/qconfig.py -f DEFAULT_FDT_FILE=\"\"
-+    1092 matches
-+    ...
-+
-+This finds boards which have a value for SYS_MAXARGS other than 64::
-+
-+    ./tools/qconfig.py -f ~SYS_MAXARGS=64
-+    cfg CONFIG_SYS_MAXARGS
-+    281 matches
-+    ...
-+
- 
- Finding implied CONFIGs
- -----------------------
-diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 408807931ff..3e7d42223dc 100755
---- a/tools/qconfig.py
-+++ b/tools/qconfig.py
-@@ -1079,7 +1079,7 @@ def do_imply_config(config_list, add_imply, imply_flags, skip_added,
-             for linenum in sorted(linenums, reverse=True):
-                 add_imply_rule(config[CONFIG_LEN:], fname, linenum)
- 
--def defconfig_matches(configs, re_match):
-+def defconfig_matches(configs, re_match, re_val):
-     """Check if any CONFIG option matches a regex
- 
-     The match must be complete, i.e. from the start to end of the CONFIG option.
-@@ -1089,13 +1089,15 @@ def defconfig_matches(configs, re_match):
-             key: CONFIG option
-             value: Value of option
-         re_match (re.Pattern): Match to check
-+        re_val (re.Pattern): Regular expression to check against value (or None)
- 
-     Returns:
-         bool: True if any CONFIG matches the regex
-     """
--    for cfg in configs:
-+    for cfg, val in configs.items():
-         if re_match.fullmatch(cfg):
--            return True
-+            if not re_val or re_val.fullmatch(val):
-+                return True
-     return False
- 
- def do_find_config(config_list):
-@@ -1123,15 +1125,21 @@ def do_find_config(config_list):
-         if cfg[0] == '~':
-             want = False
-             cfg = cfg[1:]
-+        val = None
-+        re_val = None
-+        if '=' in cfg:
-+            cfg, val = cfg.split('=', maxsplit=1)
-+            re_val = re.compile(val)
- 
-         # Search everything that is still in the running. If it has a config
-         # that we want, or doesn't have one that we don't, add it into the
-         # running for the next stage
-         in_list = out
-         out = set()
-+        print('cfg', cfg)
-         re_match = re.compile(cfg)
-         for defc in in_list:
--            has_cfg = defconfig_matches(config_db[defc], re_match)
-+            has_cfg = defconfig_matches(config_db[defc], re_match, re_val)
-             if has_cfg == want:
-                 out.add(defc)
-     print(f'{len(out)} matches')
--- 
-2.34.1
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
+> ---
+>  cmd/Kconfig | 34 +++++++++++++++++-----------------
+>  1 file changed, 17 insertions(+), 17 deletions(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 0cf0d8ad8ab..323e473cd64 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1810,6 +1810,23 @@ config CMD_DHCP6
+>  	  Will perform 4-message exchange with DHCPv6 server, requesting
+>  	  the minimum required options to TFTP boot. Complies with RFC 8415.
+>  
+> +if CMD_DHCP6
+> +
+> +config DHCP6_PXE_CLIENTARCH
+> +	hex
+> +	default 0x16 if ARM64
+> +	default 0x15 if ARM
+> +	default 0xFF
+> +
+> +config DHCP6_PXE_DHCP_OPTION
+> +	bool "Request & store 'pxe_configfile' from DHCP6 server"
+> +
+> +config DHCP6_ENTERPRISE_ID
+> +	int "Enterprise ID to send in DHCPv6 Vendor Class Option"
+> +	default 0
+> +
+> +endif
+> +
+>  config BOOTP_MAY_FAIL
+>  	bool "Allow for the BOOTP/DHCP server to not be found"
+>  	depends on CMD_BOOTP
+> @@ -1927,23 +1944,6 @@ config BOOTP_VCI_STRING
+>  	default "U-Boot.arm" if ARM
+>  	default "U-Boot"
+>  
+> -if CMD_DHCP6
+> -
+> -config DHCP6_PXE_CLIENTARCH
+> -	hex
+> -	default 0x16 if ARM64
+> -	default 0x15 if ARM
+> -	default 0xFF
+> -
+> -config DHCP6_PXE_DHCP_OPTION
+> -	bool "Request & store 'pxe_configfile' from DHCP6 server"
+> -
+> -config DHCP6_ENTERPRISE_ID
+> -	int "Enterprise ID to send in DHCPv6 Vendor Class Option"
+> -	default 0
+> -
+> -endif
+> -
+>  config CMD_TFTPBOOT
+>  	bool "tftpboot"
+>  	default y
+> -- 
+> 2.45.2
