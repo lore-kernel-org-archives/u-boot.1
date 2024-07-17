@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63544C3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:33:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B8CC3DA4B
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 934FC88AB8;
-	Wed, 17 Jul 2024 16:30:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F38AD88AA7;
+	Wed, 17 Jul 2024 16:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="AB/Axx6W";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="A+LEKxij";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="fQrnieH/";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="u+bniPo6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0523188AB7; Wed, 17 Jul 2024 16:30:48 +0200 (CEST)
-Received: from fout7-smtp.messagingengine.com (fout7-smtp.messagingengine.com
- [103.168.172.150])
+ id F163D88A48; Wed, 17 Jul 2024 16:30:53 +0200 (CEST)
+Received: from fhigh4-smtp.messagingengine.com
+ (fhigh4-smtp.messagingengine.com [103.168.172.155])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C76E188AA6
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:30:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F3C588AAD
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.nyi.internal (Postfix) with ESMTP id 013D3138014C;
- Wed, 17 Jul 2024 10:30:45 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 9BAD7114013F;
+ Wed, 17 Jul 2024 10:30:49 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Wed, 17 Jul 2024 10:30:45 -0400
+ by compute5.internal (MEProxy); Wed, 17 Jul 2024 10:30:49 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1721226644;
- x=1721313044; bh=+cUo9amc+i8WCXZ53M4FyXy8H0c1vt/Ah7pT2l5EVLk=; b=
- AB/Axx6WZjh/NjiprtJDsY7bixuCXsVDaRVRMf4x0FG+4BpMacM/9e8rOUr8bktJ
- fGLJzjlMFNiMU3E2iXnz7+RnAvOnB2IdH0Q11wye0bFtWV1bWPggR9GTo8N+yig0
- 3dI/loMTbqG/Sz8Ohec0tK+49Ji5anyVI3diQr3AXbow7q8fSQL/Ikek0V+ZWfmf
- WWEcqOKTrLCEIwcOYBJiG+OTITO5sfpHMZn1BQ7PdusnPY093MNoZ8mrzAISWC28
- uSWAx4iNl/794xBu4O9+zCQuQPSQ/ljKZZSBrA84g877XcetEOoRfRf1T206fSLC
- sWcVuXy5zYnfX+mbIwn4GQ==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1721226649;
+ x=1721313049; bh=OBk3eZKwy1ahZoqV/pq+SHftXZIZpoc0Zhzx3lmpEwU=; b=
+ fQrnieH/pWfAinOf0RzxMc+2qRmW0NNjMujMZ4/s77GWd/cL/VlOWMFr3j3Kb8Cp
+ nTigwZlSPde5iTe+4LwlCVVr//jBjd+T2I4m8VvYzAgaIklk/M+hQSlpGxoTrhES
+ Xja0F4M8pWMrTlCjtcKvpLdSvMHIj6/3plr6Z6BbAkFwugL/b2FY1aLqtxdANjeq
+ GArkGSOjklKWmVfHa5P0g+mBE7l9W9yRxlQzHkh/OCj7zptq0wcd4XjJRZseOYeg
+ zt5hVpHK0JLT9e+75urPNlbENuAkeCOUxLCoTHWKz4VVQRsim1AlwjJGxXCEJfDn
+ UeucrhwYaiSumNyZig4tIw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226644; x=
- 1721313044; bh=+cUo9amc+i8WCXZ53M4FyXy8H0c1vt/Ah7pT2l5EVLk=; b=A
- +LEKxijpFtc+nHnHugkVKjlPuBIpFDUNAbUArujKY6f8ISObpUEVs0YtSgcg/Xew
- CNdI0/eResS+U/czocMux87BoDN4A+0YRZ+aL5Tk2xFe/SwL6smlFZ5kzOfhQmwA
- jq/zkLV/P+luSYQqFWZfHgBF2gnkZdUnR315A3mZ0ZkrkTIrgGemwSNFsKuqGS+d
- gApJZN0Oa326ZbSzL9y4XjAE0NaXnC1/2oDk+EDInaZM+HOhHl4BOSFy313+8/+E
- 7EBKWUluDe/zwcy7fylpSmrYPZH71IBfqRnvI6qeQ34m4tPYv7QqYE4+/MV9kkB5
- DGsCVINeTREhOZjwrtVFg==
-X-ME-Sender: <xms:k9WXZjLUj7JOGdgtmIncA3_p_VPgLJGxKQDJeP9nxwtqc2PSYGHviw>
- <xme:k9WXZnJh8IFR2UWhcB17Beov88U3bKVuoB1Qw4UFsHtIIaE9ysQATPCqFCiOAbA6T
- 5KfpOPBFjGLSE_zOYc>
-X-ME-Received: <xmr:k9WXZrtBXvM9VE2gRbI_u7lSSpmi4_g5gOa_XcfhF8e3gg-MstLeEgUHzsENCXgll0rt>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226649; x=
+ 1721313049; bh=OBk3eZKwy1ahZoqV/pq+SHftXZIZpoc0Zhzx3lmpEwU=; b=u
+ +bniPo6hRh+8DkGX0nOhb1fPqJZC6655q13FIFCjDdZS/7ca9hXLG22o1HwPaxHB
+ 4KvMkd1kWx1m6GtqtldOTQnDbXhD31RfRlcB935+hara3wFHh5oYEe28wq7dTMah
+ /5yj7n2SnCSCwwgthYnpvMMaK4Et8QzyrZYphyBUYXpgTpqN9FFcHWlrItf5pyrG
+ C6Z0JcSE4QUY1Cg419gOfcOztaT/Mi6rWcIrFDvQXid4fv0kksIZGGISrRVwpPOE
+ 3ByUq2pH8busXto1zAqYuxrB1P5kdKn0yF3I0HTsc/eF4GJWlneUW0io1Gmyhl4m
+ L4NX1WZ6pG8Lg3xxdoXTw==
+X-ME-Sender: <xms:mNWXZkSFR8y5QeQRD7lLIFUyYQhgbUQQo6tYuzTcffDbJxeMRMK8xA>
+ <xme:mNWXZhzy1Fb3Ez9PlN0aOHsaSXoRW7Tc6k5Q50WrWRYuOkVC72ze22gqhJa5IeQ38
+ nvx4H-UkzhtVoVX1f4>
+X-ME-Received: <xmr:mNWXZh2WYLv-b2d4EbTq71QJvLD4ZfPbdbS8N_2jDlPPiw_SBdxnvWihX3uAKPAHXaMO>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeigdejudcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhirgig
  uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
- ggtffrrghtthgvrhhnpeffveeifeeljeejfeetgfeiueejieffgeeuieegtdekffekgedu
- udduteejleevtdenucffohhmrghinhepghhithhhuhgsrdgtohhmpdhkvghrnhgvlhdroh
- hrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehj
- ihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:k9WXZsZqd1VU2aTwfbnZxYN59lR4TgPHE-jIooQbmpXJpdp0d2QQCg>
- <xmx:k9WXZqYekgwGUUikU13EPltvfQuUKcu-Hq9jERzoHFmhkg6ltfX_0Q>
- <xmx:k9WXZgDNrlfpwa-ljQR2Bi6JLW47JL965zRh04I9V6KTY3kwe71N2w>
- <xmx:k9WXZobaONBPZdsajP8xO-773qW88ShNA5gHGbxuXrcNbOP8MITEoA>
- <xmx:lNWXZi4s3biWrVN7kHJH8czkhZqMRG-yZT4q_Jpd9Rg5Mas0O2oXsOAa>
+ ggtffrrghtthgvrhhnpeefuefgffeutdevgeeuffeuhedukeeggeehledtfeelgeffvdeh
+ leeuheejheelteenucffohhmrghinheptghorhgvsghoohhtrdhorhhgnecuvehluhhsth
+ gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdihrghn
+ ghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:mNWXZoBknVwPZE6jgqawLhcguRVIUDGInSbhmyzpfShTMPslFbbAlA>
+ <xmx:mNWXZtiOkrlm93huWJf6mn1Qw92HFjldHHOmc3LqKF1AgRzfHcNjsw>
+ <xmx:mNWXZkp-wy8RnDy2tTguZGqtpgGWFUBBxUBun8cFRCRJc4imI6NgXw>
+ <xmx:mNWXZgjTiAQUpmi0irC-OxS3QHonNeIOh88wm8lYVl1dA0S3QsYZ2g>
+ <xmx:mdWXZlg7D90bX_X4WsDyIpte2Q29RWS7lGS9FsS6DUMcxYKhU7jY0g53>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 17 Jul 2024 10:30:39 -0400 (EDT)
+ 17 Jul 2024 10:30:45 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 17 Jul 2024 22:29:26 +0800
-Subject: [PATCH 15/18] CI: Dockerfile: Use kernel.org upstream for
- trace-cmd
+Date: Wed, 17 Jul 2024 22:29:27 +0800
+Subject: [PATCH 16/18] CI: Dockerfile: Bump coreboot to 24.05
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240717-docker-image-v1-15-7c7fc6251e7a@flygoat.com>
+Message-Id: <20240717-docker-image-v1-16-7c7fc6251e7a@flygoat.com>
 References: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 In-Reply-To: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 To: u-boot@lists.denx.de
@@ -94,13 +93,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=775;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1161;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=8Su4CY/mP0535T8VmwKnDw1/ew0nsCKf8ogkc93BGII=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV132PUqSWq1b95ltRe0qjfsvVFu/TxNelnEgKTPlj
- sICXdE/HaUsDGJcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjCRVzsZGX5lSp41MEo+cMew
- L7y73Z+33ObvxOtHX0/fWPF7Tv+vPn6G/3lnvThrL4keOTat5X/tHIl7W7t8zza92Ovl365zfI9
- 4Fj8A
+ bh=Vb69xwnwcZjnpIx+q3tBoNzThEvUIIjlayL3BwSecfk=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV11+fu0x+FN6sWTa7Sfrqz4umTNjyhZBh62OFvWr3
+ rXv9pgk2lHKwiDGxSArpsgSIqDUt6Hx4oLrD7L+wMxhZQIZwsDFKQAT+cLJ8E+n2WbvFMZvJj3L
+ K1+ZLdKpMzkRqbNSc94aff+dTy5tsJnAyNCQmLnGICNNY2P+Nz3zb6aLQw88r9za/2ntib7VJfU
+ qi7gB
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -119,26 +118,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is project's upstream URL.
-
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/docker/Dockerfile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/docker/Dockerfile | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index cc6e9dc4812d..f45283d72441 100644
+index f45283d72441..5ff1ac449e1f 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -236,7 +236,7 @@ RUN mkdir /tmp/trace && \
-     cd /tmp/trace/libtracefs && \
-     make -j$(nproc) && \
-     sudo make install && \
--    git clone https://github.com/rostedt/trace-cmd.git /tmp/trace/trace-cmd && \
-+    git clone https://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git /tmp/trace/trace-cmd && \
-     cd /tmp/trace/trace-cmd && \
-     make -j$(nproc) && \
-     sudo make install && \
+@@ -243,15 +243,17 @@ RUN mkdir /tmp/trace && \
+     rm -rf /tmp/trace
+ 
+ # Build coreboot
+-RUN wget -O - https://coreboot.org/releases/coreboot-4.22.01.tar.xz | tar -C /tmp -xJ && \
+-    cd /tmp/coreboot-4.22.01 && \
++RUN wget -O - https://coreboot.org/releases/coreboot-24.05.tar.xz | tar -C /tmp -xJ && \
++    cd /tmp/coreboot-24.05 && \
+     make crossgcc-i386 CPUS=$(nproc) && \
+     make -C payloads/coreinfo olddefconfig && \
+     make -C payloads/coreinfo && \
+     make olddefconfig && \
+     make -j $(nproc) && \
+     sudo mkdir /opt/coreboot && \
+-    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/
++    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/ && \
++    rm -rf /tmp/coreboot-24.05
++	 
+ 
+ # Create our user/group
+ RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
 
 -- 
 2.45.2
