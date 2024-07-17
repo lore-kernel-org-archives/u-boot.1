@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FB9C3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:30:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C68EC3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:30:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2720688A52;
-	Wed, 17 Jul 2024 16:29:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 885FB88A4D;
+	Wed, 17 Jul 2024 16:29:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="Tn17NPxy";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="S0DGibZM";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="DtLW5vCr";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="U5OwWrB6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 973BD88214; Wed, 17 Jul 2024 16:29:40 +0200 (CEST)
+ id 6307F88A5D; Wed, 17 Jul 2024 16:29:45 +0200 (CEST)
 Received: from fout7-smtp.messagingengine.com (fout7-smtp.messagingengine.com
  [103.168.172.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B14288A48
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:29:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7160B88214
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:29:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.nyi.internal (Postfix) with ESMTP id 8AF6D1380130;
- Wed, 17 Jul 2024 10:29:37 -0400 (EDT)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 8290213800EA;
+ Wed, 17 Jul 2024 10:29:42 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Wed, 17 Jul 2024 10:29:37 -0400
+ by compute3.internal (MEProxy); Wed, 17 Jul 2024 10:29:42 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1721226577;
- x=1721312977; bh=hYta6hQC9jHyF8DVXaPhg0WZPqLZ3tlgFuTX9MK7Ih0=; b=
- Tn17NPxyd2TQ1u2QawFFvMyH3Q3ryrn0ra9OnAauP/4/3UZJYzjcpNA2+DIboVJH
- MZO0e36PX2rCEtImoAsgdNm+3tQZ0REmaHwYU+jthofDJ6FZME7OAA2BNJA9DiLv
- VoNMcf+uzKXJh6EeVevoCZwYzI6mHKvSuJkgZSHuPuUIVCFbV49RKkSfZTf3c5++
- h6j6JiMUo5wAXdQmd2PYF4d7dfo5QW3X4w3pQd3j8Wc+z+avqx0/Y5FNzRGW9rTR
- kPbZh3bntYmtF0z5UlCc76FryI0F1cQgeNPaNPWxEbjmUSELN5Bgft1CnzbgIdIf
- exco3ADbpwDJQoQ+6XBhxA==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1721226582;
+ x=1721312982; bh=slE+MZxZCc8tdebvkREDo1CqIMsZp2osne5GmFToM/g=; b=
+ DtLW5vCrG8dRtIdOyJg79Jh77DDmKCzpcxBE9R9VM8pgZDUvmEy0kTqAsdvxa6sE
+ hOvHoJeJIbx43cqJi24ju69KnQQu6veiVYp+nwJKFYGUVNoZfA0M2hJ982dVG4Ac
+ NlNgHPvqEH4NiD/OLLG7QIxPom+yqoBSrpOb/FqISLzj6qShGk9KTSpR0C/wlj9Y
+ dWa86zufxmYFLV4MWHyJAH4jY60iN8Et4KYbu/HW4/Pfr8fY5KAA79eUx3QDCz3u
+ Xo0Dog7xBr1IMYmcH79OQSbM2/leE7Viy/0Sx5G/g0NttbVKV2b9puWXFNvbN0bO
+ ISEuxdUL72uf7lpODzO4JQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226577; x=
- 1721312977; bh=hYta6hQC9jHyF8DVXaPhg0WZPqLZ3tlgFuTX9MK7Ih0=; b=S
- 0DGibZM2yew1iB9yARC779G0kjfqDPZP0bPvu3RiGzZbxYvOCgFOE+nibX8hWUib
- K2X5BXIOFFpVYu7cwzjp0rPf4cpyRmH42XGgx0X7B337Fvhv/NfeJA2VYpt+i2UX
- Kx3V2Axu8Mfc/yGtuYW/f6UL0yqh4ctscLlbXUNtKsGqVpGvV3A6MXugzA3qd/6i
- m2DUjPtc+Boo4LGdrGM9sdNz9K0iQzdZj4hr0lZ+oDYoa4D2H5Ho3V0yepdSoX1B
- u+fCfhr04W3lotDi5XebUDmN+LuS+uKnHm17pvKaMcQaJfw5ZqWOg7e1JnubjNZ5
- 7gvz8d0TLPIVQAwH+q6Pg==
-X-ME-Sender: <xms:UNWXZu91NBehspefCDQgg-JLBh4V80dzTXHMk2qTZwPLXbqw_h00CQ>
- <xme:UNWXZusMlUVJ1csVAWmQMqw5mdJ216bOmQqdCkDIBr8B0m13hxgoAX6Q-PgZbC461
- 6E6FCQVAU3y_m1Ya3g>
-X-ME-Received: <xmr:UNWXZkD6FTTggPcQa_tWlHSoBXATA3Y4W1j3VbSRiErAhSKLq6L9jLioUJ4PamhWsjaA>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226582; x=
+ 1721312982; bh=slE+MZxZCc8tdebvkREDo1CqIMsZp2osne5GmFToM/g=; b=U
+ 5OwWrB6CT9CThg23PWdwkF7cCm2Z8JfKwc46ojoOvmpR+qjp+IXrgTQ6UFuLZflM
+ Kik+kDvNfg71Nda7WnKSU2lFkO9ERQiROXupDKgJdfK+sJetXs7T1rgJ3iZGR4jj
+ DrFgVtB3f8jGkuG36rxi42ILqDDCGXX5ArJQtIxAG7bMmaKFS7PMJdNAdAYjoGHU
+ Nnx859lX1pke05d6tcWXkJk1sCkptx4oa0ej9i66cJuPQ6xV+CXbRPjJxdz88IUV
+ qAWMi9xl5CosRiEo3PbuHBnu6p+dr0zhrac1E4Ve8eLQv3MutgZ2+2DA1xVMAFX5
+ +cGzCl7UNUlPQ6YWH6Yfw==
+X-ME-Sender: <xms:VdWXZu6TI16vCOFq1cxMdj0lTUmDzG9jSWW0F_QGOr0WCCxIs0kTXQ>
+ <xme:VdWXZn7saxcM2tyR4HAaSU94Oi1eNMvKCzR7AEeCTCs7jpBUj0Bbe_AO9s89fOv6_
+ oLK3VnocYJbuI_aGlA>
+X-ME-Received: <xmr:VdWXZtc99S4uQGm6VwozkyRC-ZssBreZ9rlMldjLxLUFjBytBXNPVwWITSCOY4J7CU2h>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeigdejudcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeigdejudcutefuodetggdote
  ggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefhueev
  geffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
  hrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:UNWXZmd5FGRqYGQyNKudtgVwfKRk34Exo1PYxsEzW-h3zSs5f0YSog>
- <xmx:UNWXZjP_AXuYwGKwUa3EYBHleHYxPvkuMl7MPt2Whf5hDmiQUU2oNg>
- <xmx:UNWXZgkXDCkZ-g05CeiLme7HMYcgd9HUQRTwH7oD6b7kPhMRo0rCZQ>
- <xmx:UNWXZlt2wdORgROjPmEJDbbf92nJlv3GdBggg8QNbK4Ptm22TaTNdw>
- <xmx:UdWXZuen18GkL1QmcsiUUSL375WluiD9OlpDQFOfonMJfi6GKU7ou6Lc>
+X-ME-Proxy: <xmx:VdWXZrLqEQ31P7r9_xgZ4Nrl23IG7224R2veK6tc5WFsMQ7tEtVsuA>
+ <xmx:VdWXZiKe2J1I0rziCONv7SrI3VYWTN5GMPqtt2mgg69_1r7YTIbx6g>
+ <xmx:VdWXZsx8jJfg9HGsVak63KqvGITNNWg724vsLnx0FNs_7I_shPz_Ag>
+ <xmx:VdWXZmL8nSUeW2BKRCwvpl9sUkp-8Ivt24FAx3OBZcPhMOiINs4Obg>
+ <xmx:VtWXZjqSwSUMzWQ7OFUyyRgHKMc3Kjp02naqS4ETE53dKucex0fIxvZ6>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 17 Jul 2024 10:29:33 -0400 (EDT)
+ 17 Jul 2024 10:29:37 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 17 Jul 2024 22:29:13 +0800
-Subject: [PATCH 02/18] py: Replace distutils.core with setuptools
+Date: Wed, 17 Jul 2024 22:29:14 +0800
+Subject: [PATCH 03/18] doc/sphinx: Remove usage of six
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240717-docker-image-v1-2-7c7fc6251e7a@flygoat.com>
+Message-Id: <20240717-docker-image-v1-3-7c7fc6251e7a@flygoat.com>
 References: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 In-Reply-To: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 To: u-boot@lists.denx.de
@@ -92,13 +92,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1333;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=925;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=yf5v5bj4MFaBdFKZskSIooFLH5wefSZA8mYYx0OixgM=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV11sZn578WhnUZVwp5NNSOIhN6Up1gxnYlerMxzsX
- tIr80Goo5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACYiWMDIMPf56ynHW9I/MdaE
- 2K8rybzFGB21Pmiv/5Q/jO5qCsYv+xn+51eIMD0MSuVkCOjKP/Bwxe+fGn7Xl4bXveJ5N42nq8m
- VBQA=
+ bh=P9mfK62UxHoLxWgMieWXNSw1LzRd23RTfUaZ7REe1zk=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV120ZT1DAnpdw085t7mY/hM7JOV6fqKYaPZlqQscr
+ MIfZuV1lLIwiHExyIopsoQIKPVtaLy44PqDrD8wc1iZQIYwcHEKwET+LGf4H25gFFghZu80Q0Le
+ U2OiLt/RoPzvJ54rVZmVxYbEZ3wzYfgfZsx0cPXSlA0qK5YJ+BwOcFvGJX5V51LK5e31auETZI8
+ yAQA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -117,48 +117,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-distutils is deprecated long ago and being removed in python 3.12.
+We don't support python2 any more so there is no point to
+use six here.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/binman/setup.py           | 2 +-
- tools/buildman/requirements.txt | 1 +
- tools/dtoc/setup.py             | 2 +-
- 3 files changed, 3 insertions(+), 2 deletions(-)
+ doc/sphinx/kfigure.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/tools/binman/setup.py b/tools/binman/setup.py
-index 9a9206eb044a..bec078a3d9b1 100644
---- a/tools/binman/setup.py
-+++ b/tools/binman/setup.py
-@@ -1,6 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
+diff --git a/doc/sphinx/kfigure.py b/doc/sphinx/kfigure.py
+index dea7f91ef5ab..9467e8d52ac0 100644
+--- a/doc/sphinx/kfigure.py
++++ b/doc/sphinx/kfigure.py
+@@ -58,7 +58,6 @@ from docutils.parsers.rst.directives import images
+ import sphinx
  
--from distutils.core import setup
-+from setuptools import setup
- setup(name='binman',
-       version='1.0',
-       license='GPL-2.0+',
-diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
-index 052d0ed5c6f7..0dadbf3fa2c5 100644
---- a/tools/buildman/requirements.txt
-+++ b/tools/buildman/requirements.txt
-@@ -3,3 +3,4 @@ jsonschema==4.17.3
- pycryptodome==3.20
- pyyaml==6.0
- yamllint==1.26.3
-+setuptools==65.5.1
-diff --git a/tools/dtoc/setup.py b/tools/dtoc/setup.py
-index 5e092fe0872a..ae9ad043b013 100644
---- a/tools/dtoc/setup.py
-+++ b/tools/dtoc/setup.py
-@@ -1,6 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
+ from sphinx.util.nodes import clean_astext
+-from six import iteritems
  
--from distutils.core import setup
-+from setuptools import setup
- setup(name='dtoc',
-       version='1.0',
-       license='GPL-2.0+',
+ import kernellog
+ 
+@@ -540,7 +539,7 @@ def add_kernel_figure_to_std_domain(app, doctree):
+     docname = app.env.docname
+     labels = std.data["labels"]
+ 
+-    for name, explicit in iteritems(doctree.nametypes):
++    for name, explicit in doctree.nametypes.items():
+         if not explicit:
+             continue
+         labelid = doctree.nameids[name]
 
 -- 
 2.45.2
