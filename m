@@ -4,69 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492E2C3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE86C3DA4B
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:14:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC34B884E2;
-	Wed, 17 Jul 2024 16:10:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A2A9888CB;
+	Wed, 17 Jul 2024 16:14:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g1sUsLhG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 670EE88A34; Wed, 17 Jul 2024 16:10:29 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AD9C8800C
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:10:27 +0200 (CEST)
+ id BC8F4884E2; Wed, 17 Jul 2024 16:14:24 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 43D6787F19
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:14:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46HEAJmK011833;
- Wed, 17 Jul 2024 09:10:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721225419;
- bh=FzyvriWcOh2Js37fT14+XA2l8OJeruoT6NhpGtgyhu0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=g1sUsLhGl01iRTlicE0AJX6SawfOkswpztjbcqQNvy4Ge05zNU1GR9cRppMmUM3wq
- 6NO0Aq0ACn34CPCrQ522iueofg6bJif+e97ZCsdhSPjwRxt4JlC+TtnWjYazJM18pu
- EJoFIStVRaBbDiw8GW0GaA3GhbeY3L2YsQq8XN+Y=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46HEAJL1046074
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 17 Jul 2024 09:10:19 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 17
- Jul 2024 09:10:19 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 17 Jul 2024 09:10:19 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46HEAJFf065162;
- Wed, 17 Jul 2024 09:10:19 -0500
-Date: Wed, 17 Jul 2024 09:10:19 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-CC: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>, <j-humphreys@ti.com>,
- <marcel.ziswiler@toradex.com>, <vigneshr@ti.com>, <b-padhi@ti.com>
-Subject: Re: [PATCH] configs: j784s4_evm : Increase Dynamic memory allocation
- size
-Message-ID: <20240717141019.xy2rjdnlukh542d6@eternity>
-References: <20240715174301.2688466-1-u-kumar1@ti.com>
- <20240716200555.GC85916@francesco-nb>
- <ddef3081-76a2-4985-bc47-9a18bcd7ed93@ti.com>
- <20240717073342.GA3312@francesco-nb>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B68441063;
+ Wed, 17 Jul 2024 07:14:46 -0700 (PDT)
+Received: from debian (unknown [10.57.7.72])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C6AA13F73F;
+ Wed, 17 Jul 2024 07:14:20 -0700 (PDT)
+Date: Wed, 17 Jul 2024 16:14:17 +0200
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v4 09/10] tools: mkeficapsule: support generating dynamic
+ GUIDs
+Message-ID: <ZpfRuSeZdVJmAzKq@debian>
+Mail-Followup-To: Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de
+References: <20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org>
+ <20240702-b4-dynamic-uuid-v4-9-a00c82d1f504@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240717073342.GA3312@francesco-nb>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <20240702-b4-dynamic-uuid-v4-9-a00c82d1f504@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,32 +57,358 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09:33-20240717, Francesco Dolcini wrote:
-> Hello,
-> 
-> On Wed, Jul 17, 2024 at 09:40:11AM +0530, Kumar, Udit wrote:
-> > On 7/17/2024 1:35 AM, Francesco Dolcini wrote:
-> > > On Mon, Jul 15, 2024 at 11:13:01PM +0530, Udit Kumar wrote:
-> > > > Increase malloc size to 32 MB to align with other J7
-> > > > family devices.
-> > > Is this needed for any specific reason? I am asking to understand if
-> > > other boards using the same SOC should be updated to prevent
-> > > $random_issue.
-> > Since DFU is not supported yet in mainline u-boot, so I avoided to mention
-> > that failure.
-> > 
-> > Also this change is generic, so i thought of pushing it now instead of
-> > waiting for DFU series.
-> 
-> Thanks for the update, on our board DFU works fine on our j784s4 based
-> board (UUU or UMS are not working, but this is off topic for this
-> conversation ;-)
+On Tue, Jul 02, 2024 at 03:30:49PM +0200, Caleb Connolly wrote:
 
-I still think your comment is valid - commit message does need to
-explain something like "make space for future standard features such as
-DFU etc.."
+Hi Caleb,
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Thanks for re-spinning this series; it looks very good.
+My comments below.
+
+Best regards,
+Vincent.
+
+> Add a tool that can generate GUIDs that match those generated internally
+> by U-Boot for capsule update fw_images.
+
+Nit picking: I think you are not "adding a tool" anymore but rather, modifying
+an existing one.
+
+> 
+> Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
+> with the board compatible and fw_image name.
+> 
+> This tool accepts the same inputs and will produce the same GUID as
+> U-Boot would at runtime.
+
+Same here for "this tool".
+
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly at linaro.org>
+> ---
+>  doc/mkeficapsule.1   |  23 ++++++++
+>  tools/Makefile       |   3 +
+>  tools/mkeficapsule.c | 157 +++++++++++++++++++++++++++++++++++++++++++++++++--
+>  3 files changed, 178 insertions(+), 5 deletions(-)
+> 
+> diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
+> index c4c2057d5c7a..bf735295effa 100644
+> --- a/doc/mkeficapsule.1
+> +++ b/doc/mkeficapsule.1
+> @@ -9,8 +9,11 @@ mkeficapsule \- Generate EFI capsule file for U-Boot
+>  .SH SYNOPSIS
+>  .B mkeficapsule
+>  .RI [ options ] " " [ image-blob ] " " capsule-file
+>  
+> +.B mkeficapsule
+> +.RI guidgen " " [ GUID ] " " DTB " " IMAGE_NAME...
+> +
+>  .SH "DESCRIPTION"
+>  The
+>  .B mkeficapsule
+>  command is used to create an EFI capsule file to be used by U-Boot for firmware
+> @@ -41,8 +44,12 @@ format is the same as used in the new uImage format and allows for
+>  multiple binary blobs in a single capsule file.
+>  This type of image file can be generated by
+>  .BR mkimage .
+>  
+> +mkeficapsule can also be used to simulate the dynamic GUID generation used to
+> +identify firmware images in capsule updates by providing the namespace guid, dtb
+> +for the board, and a list of firmware images.
+> +
+>  .SH "OPTIONS"
+>  
+>  .TP
+>  .BI "-g\fR,\fB --guid " guid-string
+> @@ -112,8 +119,24 @@ at every firmware update.
+>  .TP
+>  .B "-d\fR,\fB --dump_sig"
+>  Dump signature data into *.p7 file
+>  
+> +.SH "GUIDGEN OPTIONS"
+> +
+> +.TP
+> +.B "[GUID]"
+> +The namespace/salt GUID, by default this is EFI_CAPSULE_NAMESPACE_GUID.
+> +The format is:
+> +    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+> +
+> +.TP
+> +.B DTB
+> +The device tree blob file for the board.
+> +
+> +.TP
+> +.B IMAGE_NAME...
+> +The names of the firmware images to generate GUIDs for.
+> +
+>  .PP
+>  .SH FILES
+>  .TP
+>  .I /EFI/UpdateCapsule
+> diff --git a/tools/Makefile b/tools/Makefile
+> index ee08a9675df8..7d1b29943471 100644
+> --- a/tools/Makefile
+> +++ b/tools/Makefile
+> @@ -253,8 +253,11 @@ mkeficapsule-objs := generated/lib/uuid.o \
+>  	$(LIBFDT_OBJS) \
+>  	mkeficapsule.o
+>  hostprogs-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+>  
+> +genguid-objs := generated/lib/uuid.o generated/lib/sha1.o genguid.o
+> +hostprogs-$(CONFIG_TOOLS_GENGUID) += genguid
+> +
+
+As far as I can tell those lines above should be removed, now that you have
+integrated genguid into mkeficapsule.
+
+>  mkfwumdata-objs := mkfwumdata.o generated/lib/crc32.o
+>  HOSTLDLIBS_mkfwumdata += -luuid
+>  hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
+>  
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index 54fb4dee3ee5..593380e4236a 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -19,12 +19,16 @@
+>  #include <gnutls/gnutls.h>
+>  #include <gnutls/pkcs7.h>
+>  #include <gnutls/abstract.h>
+>  
+> +#include <libfdt.h>
+>  #include <u-boot/uuid.h>
+>  
+>  #include "eficapsule.h"
+>  
+> +// Matches CONFIG_EFI_CAPSULE_NAMESPACE_GUID
+> +#define DEFAULT_NAMESPACE_GUID "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
+> +
+>  static const char *tool_name = "mkeficapsule";
+>  
+>  efi_guid_t efi_guid_fm_capsule = EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
+>  efi_guid_t efi_guid_cert_type_pkcs7 = EFI_CERT_TYPE_PKCS7_GUID;
+> @@ -38,8 +42,9 @@ enum {
+>  } capsule_type;
+>  
+>  static struct option options[] = {
+>  	{"guid", required_argument, NULL, 'g'},
+> +	{"dtb", required_argument, NULL, 'd'},
+
+I think this option entry should be removed. This seems unused and the existing
+`-d' option of mkeficapsule means something completely unrelated ("dump
+signature").
+
+>  	{"index", required_argument, NULL, 'i'},
+>  	{"instance", required_argument, NULL, 'I'},
+>  	{"fw-version", required_argument, NULL, 'v'},
+>  	{"private-key", required_argument, NULL, 'p'},
+> @@ -53,11 +58,23 @@ static struct option options[] = {
+>  	{"help", no_argument, NULL, 'h'},
+>  	{NULL, 0, NULL, 0},
+>  };
+>  
+> -static void print_usage(void)
+> +
+> +static void print_usage_guidgen(void)
+>  {
+> -	fprintf(stderr, "Usage: %s [options] <image blob> <output file>\n"
+> +	fprintf(stderr, "%s guidgen [GUID] DTB IMAGE_NAME...\n"
+> +		"Options:\n"
+> +
+> +		"\tGUID                        Namespace GUID (default: %s)\n"
+> +		"\tDTB                         Device Tree Blob\n"
+> +		"\tIMAGE_NAME...               One or more names of fw_images to generate GUIDs for\n",
+> +		tool_name, DEFAULT_NAMESPACE_GUID);
+> +}
+> +
+> +static void print_usage_mkeficapsule(void)
+> +{
+> +	fprintf(stderr, "Usage: \n\n%s [options] <image blob> <output file>\n"
+>  		"Options:\n"
+>  
+>  		"\t-g, --guid <guid string>    guid for image blob type\n"
+>  		"\t-i, --index <index>         update image index\n"
+> @@ -70,10 +87,11 @@ static void print_usage(void)
+>  		"\t-A, --fw-accept  firmware accept capsule, requires GUID, no image blob\n"
+>  		"\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
+>  		"\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
+>  		"\t-D, --dump-capsule          dump the contents of the capsule headers\n"
+> -		"\t-h, --help                  print a help message\n",
+> +		"\t-h, --help                  print a help message\n\n",
+>  		tool_name);
+> +	print_usage_guidgen();
+>  }
+>  
+>  /**
+>   * auth_context - authentication context
+> @@ -816,8 +834,130 @@ static void dump_capsule_contents(char *capsule_file)
+>  		exit(EXIT_FAILURE);
+>  	}
+>  }
+>  
+> +static struct fdt_header *load_dtb(const char *path)
+> +{
+> +	struct fdt_header *dtb;
+> +	ssize_t dtb_size;
+> +	FILE *f;
+> +
+> +	/* Open and parse DTB */
+> +	f = fopen(path, "r");
+> +	if (!f) {
+> +		fprintf(stderr, "Cannot open %s\n", path);
+> +		return NULL;
+> +	}
+> +
+> +	if (fseek(f, 0, SEEK_END)) {
+> +		fprintf(stderr, "Cannot seek to the end of %s: %s\n",
+> +			path, strerror(errno));
+> +		return NULL;
+> +	}
+> +
+> +	dtb_size = ftell(f);
+> +	if (dtb_size < 0) {
+> +		fprintf(stderr, "Cannot ftell %s: %s\n",
+> +			path, strerror(errno));
+> +		return NULL;
+> +	}
+> +
+> +	fseek(f, 0, SEEK_SET);
+> +
+> +	dtb = malloc(dtb_size);
+> +	if (!dtb) {
+> +		fprintf(stderr, "Can't allocated %ld\n", dtb_size);
+> +		return NULL;
+> +	}
+> +
+> +	if (fread(dtb, dtb_size, 1, f) != 1) {
+> +		fprintf(stderr, "Can't read %ld bytes from %s\n",
+> +			dtb_size, path);
+> +		free(dtb);
+> +		return NULL;
+> +	}
+> +
+> +	fclose(f);
+> +
+> +	return dtb;
+> +}
+> +
+> +#define MAX_IMAGE_NAME_LEN 128
+> +static int genguid(int argc, char **argv)
+> +{
+> +	int idx = 2, ret;
+> +	unsigned char namespace[16];
+> +	struct efi_guid image_type_id;
+> +	const char *dtb_path;
+> +	struct fdt_header *dtb;
+> +	const char *compatible;
+> +	int compatlen, namelen;
+> +	uint16_t fw_image[MAX_IMAGE_NAME_LEN];
+> +
+> +	if (argc < 2) {
+> +		fprintf(stderr, "Usage: ");
+> +		print_usage_guidgen();
+> +		return -1;
+> +	}
+> +
+> +	if (uuid_str_to_bin(argv[1], namespace, UUID_STR_FORMAT_GUID)) {
+> +		uuid_str_to_bin(DEFAULT_NAMESPACE_GUID, namespace, UUID_STR_FORMAT_GUID);
+> +		dtb_path = argv[1];
+> +	} else {
+> +		dtb_path = argv[2];
+> +		idx = 3;
+> +	}
+> +
+> +	if (idx == argc) {
+> +		fprintf(stderr, "Usage: ");
+> +		print_usage_guidgen();
+> +		return -1;
+> +	}
+> +
+> +	dtb = load_dtb(dtb_path);
+> +	if (!dtb)
+> +		return -1;
+> +
+> +	if ((ret = fdt_check_header(dtb))) {
+> +		fprintf(stderr, "Invalid DTB header: %d\n", ret);
+> +		return -1;
+> +	}
+> +
+> +	compatible = fdt_getprop(dtb, 0, "compatible", &compatlen);
+> +	if (!compatible) {
+> +		fprintf(stderr, "No compatible string found in DTB\n");
+> +		return -1;
+> +	}
+> +	if (strnlen(compatible, compatlen) >= compatlen) {
+> +		fprintf(stderr, "Compatible string not null-terminated\n");
+> +		return -1;
+> +	}
+> +
+> +	printf("Generating GUIDs for %s with namespace %s:\n",
+> +	       compatible, DEFAULT_NAMESPACE_GUID);
+> +	for (; idx < argc; idx++) {
+> +		memset(fw_image, 0, sizeof(fw_image));
+> +		namelen = strlen(argv[idx]);
+> +		if (namelen > MAX_IMAGE_NAME_LEN) {
+> +			fprintf(stderr, "Image name too long: %s\n", argv[idx]);
+> +			return -1;
+> +		}
+> +
+> +		for (int i = 0; i < namelen; i++)
+> +			fw_image[i] = (uint16_t)argv[idx][i];
+> +
+> +		gen_v5_guid((struct uuid *)&namespace, &image_type_id,
+> +			    compatible, strlen(compatible),
+> +			    fw_image, namelen * sizeof(uint16_t),
+> +			    NULL);
+> +
+> +		printf("%s: ", argv[idx]);
+> +		print_guid(&image_type_id);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  /**
+>   * main - main entry function of mkeficapsule
+>   * @argc:	Number of arguments
+>   * @argv:	Array of pointers to arguments
+> @@ -840,8 +980,15 @@ int main(int argc, char **argv)
+>  	char *privkey_file, *cert_file;
+>  	int c, idx;
+>  	struct fmp_payload_header_params fmp_ph_params = { 0 };
+>  
+> +	/* Generate dynamic GUIDs */
+> +	if (argc > 1 && !strcmp(argv[1], "guidgen")) {
+> +		if (genguid(argc - 1, argv + 1))
+> +			exit(EXIT_FAILURE);
+> +		exit(EXIT_SUCCESS);
+> +	}
+> +
+>  	guid = NULL;
+>  	index = 0;
+>  	instance = 0;
+>  	mcount = 0;
+> @@ -928,9 +1075,9 @@ int main(int argc, char **argv)
+>  		case 'D':
+>  			capsule_dump = true;
+>  			break;
+>  		default:
+> -			print_usage();
+> +			print_usage_mkeficapsule();
+>  			exit(EXIT_SUCCESS);
+>  		}
+>  	}
+>  
+> @@ -951,9 +1098,9 @@ int main(int argc, char **argv)
+>  	    (capsule_type != CAPSULE_NORMAL_BLOB &&
+>  	    ((argc != optind + 1) ||
+>  	     ((capsule_type == CAPSULE_ACCEPT) && !guid) ||
+>  	     ((capsule_type == CAPSULE_REVERT) && guid)))) {
+> -		print_usage();
+> +		print_usage_mkeficapsule();
+>  		exit(EXIT_FAILURE);
+>  	}
+>  
+>  	if (capsule_type != CAPSULE_NORMAL_BLOB) {
+> 
+> -- 
+> 2.45.2
+> 
