@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25DF0C3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 286F2C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:32:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 346FB88A8E;
-	Wed, 17 Jul 2024 16:30:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A02B88A9F;
+	Wed, 17 Jul 2024 16:30:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="LP/Z7Mpc";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="u9zK8YL0";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="tbhItXYQ";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="omPwBdZH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE09E888FB; Wed, 17 Jul 2024 16:30:33 +0200 (CEST)
+ id 70DF288AA6; Wed, 17 Jul 2024 16:30:37 +0200 (CEST)
 Received: from fhigh4-smtp.messagingengine.com
  (fhigh4-smtp.messagingengine.com [103.168.172.155])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E71F88A87
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:30:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29DDC88A76
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:30:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 8A2561140140;
- Wed, 17 Jul 2024 10:30:29 -0400 (EDT)
+Received: from compute9.internal (compute9.nyi.internal [10.202.2.228])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 3D8DC1140143;
+ Wed, 17 Jul 2024 10:30:34 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Wed, 17 Jul 2024 10:30:29 -0400
+ by compute9.internal (MEProxy); Wed, 17 Jul 2024 10:30:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1721226629;
- x=1721313029; bh=dHJrCMHVNZN7ZWukk46VAYTMdtRotM8I7rbU2c5JXNQ=; b=
- LP/Z7Mpc1kxlw2sCMaWxOBBEp3HMz9nNIvkar32MhNJ4D1bGSlzptWUxXcjFFsD0
- MViPsOUmrdNI/hE1yxF9RGCFJuPvofFMA+SBiKgIiKUvilk/lGsJmSTWJ4YrL4Jk
- rQT72AeTkJMOFC+eUZwV7gyegIjTO7UDS124EO8wNXDpqRc98uUPGkrzEAuKXiZh
- DEriMTOkDgJU9ytgnAqjMeDkN/t694Q07O0we6ctEelCJbvF9zeCBqT5374QE/rE
- 50yajQGXlAxfbjrYpYjKj4xmwGcKkyrroBd2qqTYmpZqrQMQjLsyOvbHe/7ozRN+
- eqPBULiaKQx/te4IXKgRHg==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1721226634;
+ x=1721313034; bh=hVZ0FtAKVJIpA4AXHbfifawc7/qZhq8pPmjcyUbiGRs=; b=
+ tbhItXYQcynzzfbkv+kQ+sOoExDe9/gepRlOUxWz/ZyZLpxQX6bVrhG1cKpPw0IT
+ 67fgGZBHCxi9z2SCrBXdEgDfzM4XvadTsjuYNJLfc2X1tMhUMBjfxZQL6KMHYTKB
+ LNzDlzAhCBpWb4bLPj8dG1FZWREh6Ne6Rbsd4joXCuTV2WKP5lGoB7bLPu5hizD7
+ XX7ncu1RjqdpCUICvBaQx5hryneBlctE5B6cVjPNpIjQrA0T9utc/P6uRyHnhD6p
+ YmgnLQLWVr3KzgfIV1QeODkPJMUHugop/X/h8506KIHhP3D4YEN3UkWP62Mzqkpk
+ RStN0g7Aqu32WtJGzcShDg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226629; x=
- 1721313029; bh=dHJrCMHVNZN7ZWukk46VAYTMdtRotM8I7rbU2c5JXNQ=; b=u
- 9zK8YL0OHhQXCMeKstQGaMZ0Czv14e4eSqeH5VPiYZjyxXZ5yUs//blUmBok2M2o
- qZsq6Vim0hsCfz0a5GwPvWPCTEa6tfkOOuCpunAx6C1QX9P9rahF/dKen1aT1I2/
- soO08G8w+L52hS1h5EWcUXyDWaXRt/aPUaObKzQ+Vf/g7YXEzpoXiNJeHXvrnwUV
- zd0xZiRrIoIvtW63uTu+eKHZlUp+rm7QeoX7KnY66zvWVWKNh/8V/iPhukH/NHmC
- FZeYw13pM/qQ3thN8bPSP94Nn0PwbxVskLK3pOBI9mHnwp+9njBosuCng6OK7qCJ
- qcsYYp5kLqB4NDyn7bTAw==
-X-ME-Sender: <xms:hdWXZvdnyazMsdxbGZhWOGs6wysGTax8AfkAc60IUjUhcDw0eokSew>
- <xme:hdWXZlNK09bDbi40_3Rpa3RWt1zp8aY9cEIV79EeWnFIq-5CAjqNMo4yzgni9Ij6O
- F36ZXrxQzX4y_DeqvA>
-X-ME-Received: <xmr:hdWXZoiPocIiZuz8yK5dlIZwMHOMnaznLNs12AK11ksBDZXnZakynJFv2mP5aFMbGc8E>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeigdejudcutefuodetggdotefrodftvf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226634; x=
+ 1721313034; bh=hVZ0FtAKVJIpA4AXHbfifawc7/qZhq8pPmjcyUbiGRs=; b=o
+ mPwBdZHIPOHCqdUz+jbXnYU6qETCSI1NK9ia5CXkDOaxxWMz+IS5MYL108nbZn/c
+ kxTH38JZCyLtgnBgGehCjPYfxg13B+gpVe8EnvAcxnygOkbxmv22RDNAN2WOptQf
+ F7TKIlbmbeW4PCyyJP5IVCu/SLjyUOZ0CVU4MciQZzy9TcwRRoPgtWdFm6j87vmG
+ It3xZ6XIYFUXL1EQ/LuU3R1g6brlPHCpkYrsRmf0oupWuFABMBcIqkrI6rITqtpu
+ 8a+CK1IXRojjpXW+fhjCPQza4ZUQA9+SeQN18mdy5Pen1XCTOt3r5e8DuUsdq4hZ
+ ljfJTwXm8watXX/3t3w9A==
+X-ME-Sender: <xms:idWXZsAOAlm6dUb9N5wMxa94jVfmxNPQ5fvsqh_ywvrYHeSL6CnUHA>
+ <xme:idWXZujjFiCsCnAmbgmf0WneX8_UEV-mOg9HuObuUXNrfcDAtKqxOTbuqN0m4r3Do
+ Wy-NwMDRYLz6y2ZXIA>
+X-ME-Received: <xmr:idWXZvnRwXtMSbd0btV03_Fz32ece-PUE_g5rh9j5xVKDsc81N7eVbV2GcF33rTNNvNB>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeigdejtdcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhirgig
  uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
- ggtffrrghtthgvrhhnpeetvedvleehtdfftedvjeetvdelvddvfeeuheehiefgfefhleff
- udefffehjeegtdenucffohhmrghinhepghhnuhdrohhrghdpghhithhlrggsrdgtohhmne
- cuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgig
- uhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:hdWXZg-5AYyY66Xr7rbEQH3t15naCSGD02tmec7OrnWAPHuCuErLxw>
- <xmx:hdWXZrsJFwHYDN7mkBzvXuqe5cg-ARqOOJvfABAvGMVL7RKbbijA4g>
- <xmx:hdWXZvHC18wx3mAtf77kmDmFKf82vRYMrhgfjALhMVNWPmG_iCOp4Q>
- <xmx:hdWXZiMYzDcPN2V_CqautgFY2d-enf1KG03s2Pi5NSSrJhJrIq1Udw>
- <xmx:hdWXZk8PQPL86k5zHe2E0sgcUe-CRZcNxLb523Ps26iepBi27K42uJDi>
+ ggtffrrghtthgvrhhnpeelkeeivefhfedvgefhlefhkeeiieejffehfefhvddvleeftddu
+ uedtjeekgfdvudenucffohhmrghinhepghhithhlrggsrdgtohhmpdhtrhhushhtvggufh
+ hirhhmfigrrhgvrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehm
+ rghilhhfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:idWXZiyJm5g1d49g2DXKCGGTn4bEXfW6L-hM2owZ2yOoLZgtCwpNiA>
+ <xmx:idWXZhS0SpAZW2dNhompo4w-xrmxu6nR4zwYXL6nppn4Gq5lJxDAnQ>
+ <xmx:idWXZtZA72grINehXHqt644snjIQZrPcwzPxNhJ0IctWVHjD_gC2Uw>
+ <xmx:idWXZqRwBG4YT3-3E9zpc7xPyEm0FCMdwaNy1X-JDLyJw3urUQjc9A>
+ <xmx:itWXZiQ4IYtdDYJRo5X8fmCKaZ1ZZ8zCkYmagenBfSTjUfLsH_wDphXr>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 17 Jul 2024 10:30:26 -0400 (EDT)
+ 17 Jul 2024 10:30:29 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 17 Jul 2024 22:29:23 +0800
-Subject: [PATCH 12/18] CI: Dockerfile: Bump QEMU to 9.0.1
+Date: Wed, 17 Jul 2024 22:29:24 +0800
+Subject: [PATCH 13/18] CI: Dockerfile: Bump fiptool to 2.10.4
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240717-docker-image-v1-12-7c7fc6251e7a@flygoat.com>
+Message-Id: <20240717-docker-image-v1-13-7c7fc6251e7a@flygoat.com>
 References: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 In-Reply-To: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 To: u-boot@lists.denx.de
@@ -93,13 +93,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1113;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=678;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=HM2LBNgzHWDaF8FdxyCvLf+IKD6xpvG0Knu8BlriYVE=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV10Stx58tqSi+zTHwzXC6ozTD92eeKdq27EpTg+cZ
- U9wr55b2lHKwiDGxSArpsgSIqDUt6Hx4oLrD7L+wMxhZQIZwsDFKQATMXdnZPi1ebpgJuvjM1s9
- jgu8WK8ee579t+zUS1pe02s5GNol2S8wMvTtviLKOquv72Fhwq3ID49uvXl9+7zP8rleqa+fMEY
- V/WQCAA==
+ bh=fHLj07WIf/DT4HZgfNWJTbSTP1NZDYeSYwOgx+Wai2w=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV10a1+U/YJ7ofL/jpNLHAGvTLSvjJ7/4mcn33q7Dy
+ 5FXT2ZtRykLgxgXg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAExkhQAjw8y351Ri5c7EXJva
+ fSezaYHyNZVjjHr9TIdDS7gVuY7c12D4K173p2Yl6/K9Nxit5+h1hQdcyUjxD/sc3/bQyHPC7vL
+ 9fAA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -118,30 +118,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous patches had been applied in 9.0.1 so remove cherry-picks
-as well.
-
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/docker/Dockerfile | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 8e144a2b64e9..8e242d08297a 100644
+index 8e242d08297a..91256f0248e4 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -184,10 +184,7 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 
- RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
- 	cd /tmp/qemu && \
--	git checkout v8.2.0 && \
--	git format-patch 0c7ffc977195~..0c7ffc977195 && \
--	git am 0001-hw-net-cadence_gem-Fix-MDIO_OP_xxx-values.patch && \
--	git cherry-pick d3c79c3974 && \
-+	git checkout v9.0.1 && \
- 	./configure --prefix=/opt/qemu --target-list="aarch64-softmmu,arm-softmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64el-softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x86_64-softmmu,xtensa-softmmu" && \
- 	make -j$(nproc) all install && \
- 	rm -rf /tmp/qemu
+@@ -192,7 +192,7 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+ # Build fiptool
+ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a && \
+ 	cd /tmp/tf-a/ && \
+-	git checkout v2.10.0 && \
++	git checkout lts-v2.10.4 && \
+ 	cd tools/fiptool && \
+ 	make && \
+ 	mkdir -p /usr/local/bin && \
 
 -- 
 2.45.2
