@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C21CC3DA4B
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 09:03:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA325C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 11:00:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C966D8818B;
-	Wed, 17 Jul 2024 11:03:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EEE0588746;
+	Wed, 17 Jul 2024 13:00:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHCYBID7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BsNHN08X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61CD4886E5; Wed, 17 Jul 2024 11:03:28 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 4E1058874C; Wed, 17 Jul 2024 13:00:06 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40D9588113
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 11:03:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38533886E2
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 13:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6b5da2730efso40221056d6.2
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 02:03:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2eea8ea8c06so93462841fa.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 04:00:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721207005; x=1721811805; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721214003; x=1721818803; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r8Yk7Yku/xpsB4qZgyiiI4mFEPEmNzQzvdBC2uKo/2k=;
- b=YHCYBID7bB1KKE39/Zeo0JNpib7KiKzt0cSjpj+koqyHeRtjGa0CnL3we4Fq0f58vI
- aDdKyiZ1uw2XOsKczL54ADFk1SoX2rSp6A9H/9lL6FMaU4nzzwTe/NWoy1tdOeMa8+ki
- bm+ID5K822mfG0ErdJW1PwJWbB534pOUyFyT8=
+ bh=1YWTMmSPcCPKkwgDbmYJhy5qbzh7NJgH8RQ7Lw5H66k=;
+ b=BsNHN08XXuIxG+aynQgcnLoccEntO3ErKfr6o0BTQ0AC/X3UhvfgTPcw2LGIlL51xi
+ zwZhdwOWMveu7seJaZ4AZTJ3FkhzuBGfg3L4pHFe3TGSul/ia9Iydkgdd/lvxg7OEh4S
+ Id7zXF+VOvPxD+dTZ0iCIHcx5ewN0yNUkDm5s4j9d9/mGDlIBEfqN8FqVDuj75yV/+uo
+ P/xwhBPMgcw6rlK/3ofw/3od7S8BGw7NNd96Liv2p8kuF4TJujo7/+fJc1ylguXQT1Uz
+ I2BMHfYr35f6reACgPlNVvSeZx3Tu9bKEtzo2806P+Y5InzHhoprlq1DPE1lqfGUedsb
+ WZYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721207005; x=1721811805;
+ d=1e100.net; s=20230601; t=1721214003; x=1721818803;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r8Yk7Yku/xpsB4qZgyiiI4mFEPEmNzQzvdBC2uKo/2k=;
- b=NuPzxJLbJxIECGxic5L2A7mtvND1/lKVxVmwP3wd15r6PZBJy3cFxvp5GY15Katvy4
- FXJABNrrbpGVQE/TgVIl6ReznuR/6iQe/YRFyXJt7eV5koXM4rIIXLcQAoTJxs01DjXE
- FkKVV0ok8SzGZ/dcBjZgc08JYw1OikYmWdN/3wqGI5cAeIeseUC/Y2InPZ0OmCI9021D
- ADYD+at53b5Z42xe2YdVCSDpriqI5KKuDFXy7oCtS73b/VifHKKDcyVZXpUf8KSRv5xL
- 5UVcubGxotvV3mkkRmA41n8yFIexlwAoC2mcxfhXuTY+ph8jgLFK6KposP2uBzkr2hPo
- 5mEg==
-X-Gm-Message-State: AOJu0YywYyshOFevtyJXfD9uIR5I8reh0zTUeM1jMLLsazaKx/ftJI9P
- WtXlykCtAtMAe6qVi2yVvf/rpRNToV7US6NVvz9iG1l+Nw4e/NK7JEk+K95crUpCGsQQWTLkKdF
- f/8mqDmHT1eQSvjoN/+JMuvxS3Ijir/cvIaY+d0dvhOZFhdA=
-X-Google-Smtp-Source: AGHT+IEwU9UEGdf3DoJXzhF4BPOkT7JHnoZjkvAg9zdbACzxxellBgkUwJd3TozeRwEQl3XdnArddDt9Qa2nIrl4eHI=
-X-Received: by 2002:a05:6214:2525:b0:6b5:4e07:2a55 with SMTP id
- 6a1803df08f44-6b78cab48c0mr14435436d6.29.1721207005129; Wed, 17 Jul 2024
- 02:03:25 -0700 (PDT)
+ bh=1YWTMmSPcCPKkwgDbmYJhy5qbzh7NJgH8RQ7Lw5H66k=;
+ b=Tvjg3fV+NOJgS9P4NlDdeUrsWuViA1mTkyHz75gnaOmOFvKncjy6Ut6ekBvA0N8k3g
+ gU9hfoziLyhOLD67/6HFluZxLaaZ/DbNF9syHvdaDG84DeM1dWIE+56aNj3qn3UiXP/8
+ n7k4iukuO4oGadwZeSCBeJqK3oUGteychEeK2s72QWrBme+36v7UKAyJq/K9rjuLQ4Ne
+ 711clKqbYGzbZB0cagjJrkhb0ffA3IL9poSHYOnu/MinBS827AN66IAu/JJjSbil3Zyl
+ QZ/XclLEkTs8IQFP6/6kkKxpk3KVGH7+Whw7xt+I+FTtkLf1WlpfwAbj0eoRYQVhxmRh
+ QaEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRoLM+goP6kaMN7bUIMSU9lCTA0Q8JyWCBQrGSkDKLHdDXftbTVIduwvsCYpQAVjg+7vMco3Rox6xYbh6lb3vQyZapRw==
+X-Gm-Message-State: AOJu0YxdUFireGpVfJL3GqC5JEC3SGfaMhL/qvPwFzmKABxNs11cDPwy
+ xJdD/924LS3OO9Myvn7vsuDm9C9KOV7i/TBnXPPjQ9U442DNSoOlgaB86zRq6Pr+DD1xLAyckyg
+ LVpAMeGegRf+ec3hrSxP9yG+ivVo=
+X-Google-Smtp-Source: AGHT+IGXhmqxCv/TildpXP4JF5f92iE9G4r4SPiYa9dMR2QXY/a6jCBRm0Ae5AfKd5iG21QnU8q2iK3vdTENbHoc95Q=
+X-Received: by 2002:a2e:bc13:0:b0:2ee:8e6f:ae01 with SMTP id
+ 38308e7fff4ca-2eefd1e4959mr10247751fa.48.1721214002494; Wed, 17 Jul 2024
+ 04:00:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240715193555.564528-1-trini@konsulko.com>
-In-Reply-To: <20240715193555.564528-1-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 17 Jul 2024 10:03:14 +0100
-Message-ID: <CAFLszTj7hpSBCraYMR1sZ3F6aZ6q5iYvj47ceT8dsp9zZTiZHw@mail.gmail.com>
-Subject: Re: [PATCH 1/5] arm: Remove omap4_panda board
+References: <20240716171602.2279766-1-walter.lozano@collabora.com>
+ <20240716172113.GG561963@bill-the-cat>
+In-Reply-To: <20240716172113.GG561963@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 17 Jul 2024 11:59:50 +0100
+Message-ID: <CALeDE9PUF4-oCk+CXB0FiL=Haq9o0MkHa5BS4JTvZw7HbwjjaQ@mail.gmail.com>
+Subject: Re: [PATCH] board: rpi: Update memory layout for Aarch64
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Cc: Walter Lozano <walter.lozano@collabora.com>, u-boot@lists.denx.de, 
+ Martyn Welch <martyn@collabora.com>, Matthias Brugger <mbrugger@suse.com>,
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,50 +90,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Mon, 15 Jul 2024 at 20:36, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 16 Jul 2024 at 18:21, Tom Rini <trini@konsulko.com> wrote:
 >
-> This board has not been converted to CONFIG_DM_I2C by the deadline.
-> Remove it.
+> On Tue, Jul 16, 2024 at 02:16:02PM -0300, Walter Lozano wrote:
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  arch/arm/dts/Makefile                |   4 -
->  arch/arm/dts/omap4-panda-common.dtsi | 573 ---------------------------
->  arch/arm/dts/omap4-panda-es.dts      |  82 ----
->  arch/arm/dts/omap4-panda.dts         |  13 -
->  arch/arm/mach-omap2/omap4/Kconfig    |   4 -
->  board/ti/panda/Kconfig               |  14 -
->  board/ti/panda/MAINTAINERS           |   6 -
->  board/ti/panda/Makefile              |   6 -
->  board/ti/panda/panda.c               | 322 ---------------
->  board/ti/panda/panda_mux_data.h      |  86 ----
->  configs/omap4_panda_defconfig        |  54 ---
->  include/configs/omap4_panda.h        |  16 -
->  12 files changed, 1180 deletions(-)
->  delete mode 100644 arch/arm/dts/omap4-panda-common.dtsi
->  delete mode 100644 arch/arm/dts/omap4-panda-es.dts
->  delete mode 100644 arch/arm/dts/omap4-panda.dts
->  delete mode 100644 board/ti/panda/Kconfig
->  delete mode 100644 board/ti/panda/MAINTAINERS
->  delete mode 100644 board/ti/panda/Makefile
->  delete mode 100644 board/ti/panda/panda.c
->  delete mode 100644 board/ti/panda/panda_mux_data.h
->  delete mode 100644 configs/omap4_panda_defconfig
->  delete mode 100644 include/configs/omap4_panda.h
+> > ARM and Aarch64 have different restrictions and trying to accommodate
+> > larger kernels like the ones used in distros can be challenging. For this
+> > reason, separate the layout and rearrange the map for Aarch64 to support
+> > kernels larger than 36 MB.
+> >
+> > Signed-off-by: Walter Lozano <walter.lozano@collabora.com>
+> > ---
+> >
+> >  board/raspberrypi/rpi/rpi.env | 25 ++++++++++++++++++-------
+> >  1 file changed, 18 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+> > index 30228285edd..37c7f6a920e 100644
+> > --- a/board/raspberrypi/rpi/rpi.env
+> > +++ b/board/raspberrypi/rpi/rpi.env
+> > @@ -42,13 +42,19 @@ dfu_alt_info+=zImage fat 0 1
+> >   *   For Aarch64, the kernel image is uncompressed and must be loaded at
+> >   *   text_offset bytes (specified in the header of the Image) into a 2MB
+> >   *   boundary. The 'booti' command relocates the image if necessary. Linux uses
+> > - *   a default text_offset of 0x80000.  In summary, loading at 0x80000
+> > - *   satisfies all these constraints and reserving memory up to 0x02400000
+> > - *   permits fairly large (roughly 36M) kernels.
+> > + *   a default text_offset of 0x80000.  However, loading it at 0x80000
+> > + *   will allow to reserve only up to 0x02400000 which permits medium size
+> > + *   kernels (roughly 36M). This is good enough for customized kernels but
+> > + *   not for distros which by default enable drivers for many different
+> > + *   boards. Under these circumstances, using 0x00200000 provides room for
+> > + *   larger kernels.
+> >   *
+> >   * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
+> >   * conflict with something else. Reserving 1M for each of them at
+> > - * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
+> > + * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty for ARM.
+> > + *
+> > + *   For Aarch64, since the kernel is placed in different location,
+> > + *   accommodate them to reserver 1M for each of them.
+> >   *
+> >   * On ARM, both the DTB and any possible initrd must be loaded such that they
+> >   * fit inside the lowmem mapping in Linux. In practice, this usually means not
+> > @@ -62,16 +68,21 @@ dfu_alt_info+=zImage fat 0 1
+> >   * large initrds before they start colliding with U-Boot.
+> >   */
+> >  #ifdef CONFIG_ARM64
+> > +pxefile_addr_r=0x00080000
+> > +scriptaddr=0x00100000
+> > +kernel_addr_r=0x00200000
+> > +fdt_addr_r=0x03400000
+> > +ramdisk_addr_r=0x03500000
+> >  fdt_high=ffffffffffffffff
+> >  initrd_high=ffffffffffffffff
+> >  #else
+> > -fdt_high=ffffffff
+> > -initrd_high=ffffffff
+> > -#endif
+> >  kernel_addr_r=0x00080000
+> >  scriptaddr=0x02400000
+> >  pxefile_addr_r=0x02500000
+> >  fdt_addr_r=0x02600000
+> >  ramdisk_addr_r=0x02700000
+> > +fdt_high=ffffffff
+> > +initrd_high=ffffffff
+> > +#endif
+> >
+> >  boot_targets=mmc usb pxe dhcp
+>
+> We need to drop the disabling of device tree / initrd relocation as
+> that's sure not going to help matters. What's the minimum amount of
+> memory an aarch64 Pi will have? I really prefer reserving 128MiB (even
+> if that's not the maximum Linux Kernel Image size anymore) and then
+> device tree and then initrd.
 
-I'm very pleased to see this.
+512Mb on the Zero2W and RPi3A.
 
-I happened to be looking at i2c deprecation (yet again!) the other
-day. I found the generation *before* the legacy SYS_I2C feature.
+We've not seen an issue here on the very large Fedora kernel, but I
+suspect that's because using UEFI mitigates this somewhat because here
+we're actually loading shim/grub.
 
-I will see if I can get it building, then send a series.
-
-For SPL, I am thinking we may need a 'tiny' i2c a bit like the tiny
-mmc, e.g. supporting a single controller and simple read/write. I have
-never really looked at it in any detail as there is too much cruft in
-there.
-
-Regards,
-Simon
+Peter
