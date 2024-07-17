@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 062BFC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:31:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05BACC3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 14:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDBC588A78;
-	Wed, 17 Jul 2024 16:30:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F9DD88A50;
+	Wed, 17 Jul 2024 16:30:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="G6c2pBrC";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="kqX5v9WV";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="oD4hDEVz";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="P2P4gwI9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72ACA88A66; Wed, 17 Jul 2024 16:30:14 +0200 (CEST)
-Received: from fout7-smtp.messagingengine.com (fout7-smtp.messagingengine.com
- [103.168.172.150])
+ id C79AA88A8F; Wed, 17 Jul 2024 16:30:22 +0200 (CEST)
+Received: from fhigh4-smtp.messagingengine.com
+ (fhigh4-smtp.messagingengine.com [103.168.172.155])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BB7D88A85
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:30:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C80288A50
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 16:30:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
 Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.nyi.internal (Postfix) with ESMTP id 4E298138013D;
- Wed, 17 Jul 2024 10:30:10 -0400 (EDT)
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 5BB541140142;
+ Wed, 17 Jul 2024 10:30:19 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Wed, 17 Jul 2024 10:30:10 -0400
+ by compute6.internal (MEProxy); Wed, 17 Jul 2024 10:30:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1721226610;
- x=1721313010; bh=4IMI4iJAUKG3YSLYHVxAb8IS4ZDaQxdgb96aEGpZU4I=; b=
- G6c2pBrCnjvpnD1q5lxL8iAOV2XqtZGDFA3Mgc1koBInDZjE96ktvgaO4u38mi/u
- C1xJOIDvlmEVgXtMMZ1cnMVsNDIhCdTUKC5juoQHRZzXZ0BFs6CC9wWmSCYflR5E
- TMGYHgXVz1wMoUrYwXpmCgslGB+AlZLMQvhtS/bFUPqOY8pwKtHku9jX8ABOFi+w
- vEiQQUbYMxMZ57fCHUwoIZR2hk5vzZLCIHCbuGAFnjP8xhyKbPB/vhSRqddtSChS
- yOBXZ44mpIhx3kb3AR1zafm9yh7FZU5Fs1yQ3oLztk0vSX4miy0ypwMVPLnuQ9Cq
- nNz9UJEgWT1JptaN8+NU+w==
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1721226619;
+ x=1721313019; bh=W523CBR1liKL/Ww+IcSbTbmzM93VBstcqBDnc7WroBI=; b=
+ oD4hDEVzEVT78RaVj08FX2QEwIiB79Ee1e5ysLBHAJ1GgdQjUzRyk3HOdS4Ndd31
+ Ggg10Azdaa/ALTW8QTTjzRJx2ZZnL8AoxUkKaQge7rHHDt9qP22leqddhr378quy
+ C3/i2oegfiDDsyDwpcN9bygT9vXUFfzX9RHTes9/xaqH48t2zmQ65z6c5wH4gBP1
+ h6uC1I/0y/0q+dDBNEDzt3hUPlIWTSDUqr1kPMIhsCqfmkB+AMAOLytYRl+bTI8i
+ OAp8uov5KRm5rRZKSzZZmUctg0yY5NicjKiNdZ4CxAS7paKOSaKmLBtPQ6iFxDVL
+ 2mvMo5iKKrWjfmyGiS5DGQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226610; x=
- 1721313010; bh=4IMI4iJAUKG3YSLYHVxAb8IS4ZDaQxdgb96aEGpZU4I=; b=k
- qX5v9WVjCgSk4+E8ufrvxigUAnf77wlcI/Qn+tlQryWM2Xpg7DRetOCM8KZp4W4M
- tKTbsbYw6z1HiKMH7838540fYJ9+7v6E37O4lyAYBw4Me5fdZbOzEh0gouKNgsfd
- 6V4cfXfcEdvUHZ6CnzoVeKn/jRPiSzKOyMhXV8sNTDlg5Wpgbr53NWkcXKTVJy70
- J29p2XcftiV4I/IuTDrzgTSnt3FLFToTe+5N/W4pJawcoCRFzp4ioQrgwj8tWHn6
- 7XKKQACoJPLUW1l/ETcXSMxYDFAj10ON+Zgu0fTQrLTrTgqS/zL9Smkn+cNUzMcL
- VZG7r8Id4qvMizMMJe3FQ==
-X-ME-Sender: <xms:cdWXZiRS0dHAIpjsFhLs8ECMFJJggcTlu3xcXriQsSNwMOyX7s2jug>
- <xme:cdWXZnxtEp9budRseE9EXCfBZ0FvZrosFEvin32y2VfOjqFlm_2zevxM_-Z-bt3_M
- sFU6daPQj6vt3pC3o8>
-X-ME-Received: <xmr:cdWXZv1d5rYbRYIJqWa4tV1tikqKoqCzHeT1tlUnSfFFzzj8ecGx05ItOt6dAeywj--5>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1721226619; x=
+ 1721313019; bh=W523CBR1liKL/Ww+IcSbTbmzM93VBstcqBDnc7WroBI=; b=P
+ 2P4gwI9G5Gckff09WCcnheHp4Sb5IUkumVqW7eMt1smInA0kJQfzdqGh6FIrpSSc
+ 1hyNM++QWPBvtDsX1WYwmZcAAndyNARwFaYzByEfrmybfx+WRoHXqiX183eCt1KX
+ ivq3TdOpQHsD/G49EyXQyU4rO8CYblRx6w1nu9n2EqMOjuCi2gKAsEPoQ44viBhs
+ 50MsG5b5qin4jReKgXpKlp8bRsp8e/9U4x9P8V5bHKmJtPouKeQvNDxUNel+NK97
+ l1VPksmx0chfFUk7NwuH4C3/dPJ2HQ6V34TyxXmZHxoYZGWlpVXKYlDlTDZ3FKp+
+ 4gJmx1Ao3beJr90Ck0cOQ==
+X-ME-Sender: <xms:e9WXZodtsh0XeXCS2Eje5nW9o2l3RQWKEyXyK0Q7bF6atqi32BZk-g>
+ <xme:e9WXZqMIykVcp_ALu12ol2X11xUrDEkUuA7-N2JjaZToutydGYM89z6UC8C__E5dn
+ QXjvo7hSX5SC8zfAKs>
+X-ME-Received: <xmr:e9WXZph3bIKyRFVrtcmQ09Z93I0E6ES4rFsuRpvRiH4MSzEUMQT6cgRsj4PYK8ggTrW->
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrgeeigdejudcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhirgig
  uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
- ggtffrrghtthgvrhhnpeetvedvleehtdfftedvjeetvdelvddvfeeuheehiefgfefhleff
- udefffehjeegtdenucffohhmrghinhepghhnuhdrohhrghdpghhithhlrggsrdgtohhmne
- cuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgig
- uhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:cdWXZuC-pihHpJMgql6eSP-pdh0dN5uO6npYOUjO3eKl0DdyhGQx3g>
- <xmx:cdWXZrhJQJGlqIqq550tY7AhrJpXV3EA_Gb1fX3i3PWTZ1YseDPIfA>
- <xmx:cdWXZqpPIaE2giX6N4nHkl160RoXWEP0KZetMTF765JWGQ_T3OGq8w>
- <xmx:cdWXZug4F9hPngcgValWw32kDozd9yCAjcFdaQpnMfK5aHZLznt5VA>
- <xmx:ctWXZrhOIpfAX1LFkCp8MdJvCfOy9gCYzJrrsvtY-HJVZ6WUAdFzyBfT>
+ ggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefhueev
+ geffgedukeejleenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfh
+ hrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:e9WXZt_npFBgAQ3pdsmeBrIskn29XYF0r0wb-7q_KclQTYFn6I2GpA>
+ <xmx:e9WXZkvYYN5rE03P6aJ5VKzrSp-6sA5MNvY_MP1NT07QqmQLcgBvjg>
+ <xmx:e9WXZkEWmqFSBDp6ELUCHiEdq3ayy8M-BffSYpQU2zlgttI6TKuDYw>
+ <xmx:e9WXZjNxI5OGK4NvZYzsGPgb-ZZUUFiOX3_IfZrS95w_Wmo6hRIoxg>
+ <xmx:e9WXZp8Bo0irtImkV2kALDsNuELhojdEw69QWL6a8SOAnkrY0eyUQYU5>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 17 Jul 2024 10:30:05 -0400 (EDT)
+ 17 Jul 2024 10:30:11 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 17 Jul 2024 22:29:20 +0800
-Subject: [PATCH 09/18] CI: Dockerfile: Set global git name & email config
+Date: Wed, 17 Jul 2024 22:29:21 +0800
+Subject: [PATCH 10/18] CI: Dockerfile: Bump base OS version
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240717-docker-image-v1-9-7c7fc6251e7a@flygoat.com>
+Message-Id: <20240717-docker-image-v1-10-7c7fc6251e7a@flygoat.com>
 References: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 In-Reply-To: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
 To: u-boot@lists.denx.de
@@ -93,13 +92,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1683;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1348;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=iG3IgS4CQDEWQDnsjhHG2NhOapBPXunikZ7HMVWHc/E=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV12khEsDb4dm223OsnNfZX1d2UFZlSH1RSlvUemGd
- 4FbVl3sKGVhEONikBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgInMLmb4zR54+GBcPcdD/leT
- F7gfbP7lZjhB/9uPVYEd907z7L0uMY+R4VAEkzX7/MDvnh6R8dcK6vlKWjrMEq0m/53358lPRo1
- 8fgA=
+ bh=8xRkf3ZGlsq7qM5E93/MPz91Ss5Qyrv6RL3obg0kFl0=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrTpV11uNJqsuvokyffa04yecB2petUVabr/t+s2Cc83D
+ 1PpyijrKGVhEONikBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgIk8sGVkuOY4+VFF8/WbH6wF
+ zMqrdE/9vJy1dOf3Q4yHjy2ZFlB26A8jw0kuu8nvDpVvtZA43q0lYd0ks8jqQXzrbPc1HGt3mrs
+ eYAAA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -118,48 +117,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set global git name & email config so we don't have to setup
-it for every project.
+Bump base os to latest jammy release and install more
+required dependencies.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/docker/Dockerfile | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ tools/docker/Dockerfile | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index cda87354566d..5824d371f259 100644
+index 5824d371f259..0bf2d180e255 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -121,6 +121,10 @@ RUN apt-get update && apt-get install -y \
+@@ -2,7 +2,7 @@
+ # This Dockerfile is used to build an image containing basic stuff to be used
+ # to build U-Boot and run our test suites.
+ 
+-FROM ubuntu:jammy-20240227
++FROM ubuntu:jammy-20240627.1
+ MAINTAINER Tom Rini <trini@konsulko.com>
+ LABEL Description=" This image is for building U-Boot inside a container"
+ 
+@@ -55,6 +55,7 @@ RUN apt-get update && apt-get install -y \
+ 	gawk \
+ 	gdisk \
+ 	git \
++	gnat \
+ 	gnu-efi \
+ 	gnutls-dev \
+ 	graphviz \
+@@ -98,10 +99,13 @@ RUN apt-get update && apt-get install -y \
+ 	python2.7 \
+ 	python3 \
+ 	python3-dev \
++	python3-jsonschema \
+ 	python3-pip \
+ 	python3-pyelftools \
+ 	python3-sphinx \
++	python3-venv \
+ 	python3-virtualenv \
++	python3-yaml \
+ 	rpm2cpio \
+ 	sbsigntool \
+ 	socat \
+@@ -118,6 +122,7 @@ RUN apt-get update && apt-get install -y \
+ 	vboot-utils \
+ 	xilinx-bootgen \
+ 	xxd \
++	yamllint \
  	zip \
  	&& rm -rf /var/lib/apt/lists/*
  
-+# Setup Git
-+RUN git config --global user.name "U-Boot CI" && \
-+	git config --global user.email u-boot@denx.de
-+
- # Make kernels readable for libguestfs tools to work correctly
- RUN chmod +r /boot/vmlinu*
- 
-@@ -128,8 +132,6 @@ RUN chmod +r /boot/vmlinu*
- RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 	cd /tmp/grub && \
- 	git checkout grub-2.06 && \
--	git config --global user.name "GitLab CI Runner" && \
--	git config --global user.email trini@konsulko.com && \
- 	git cherry-pick 049efdd72eb7baa7b2bf8884391ee7fe650da5a0 && \
- 	git cherry-pick 403d6540cd608b2706cfa0cb4713f7e4b490ff45 && \
- 	./bootstrap && \
-@@ -180,9 +182,6 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
- 	cd /tmp/qemu && \
- 	git checkout v8.2.0 && \
--	# config user.name and user.email to make 'git am' happy
--	git config user.name u-boot && \
--	git config user.email u-boot@denx.de && \
- 	git format-patch 0c7ffc977195~..0c7ffc977195 && \
- 	git am 0001-hw-net-cadence_gem-Fix-MDIO_OP_xxx-values.patch && \
- 	git cherry-pick d3c79c3974 && \
 
 -- 
 2.45.2
