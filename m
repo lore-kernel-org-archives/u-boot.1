@@ -4,83 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F6F8C3DA62
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 18:13:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE1AC3DA62
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 18:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFD7E88A45;
-	Wed, 17 Jul 2024 20:13:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 02E2988602;
+	Wed, 17 Jul 2024 20:32:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="ikhkiUtz";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="2JUSLMk2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2009C88AA7; Wed, 17 Jul 2024 20:13:20 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2A58E88A93; Wed, 17 Jul 2024 20:32:10 +0200 (CEST)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E8DA8874C
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:13:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 047948859B
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:32:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5a10835487fso820379a12.1
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 11:13:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1721239997; x=1721844797; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6KkKG9oUSk6oAo1JuMB1XpRU2s7BN26RJWKYlzZFCP8=;
- b=ikhkiUtzkhqG0o3uxxfN91PuYNpNedDlBeo6P0IA/nsruN6uGW5WVnxl7AwJs/5xb/
- xbrLKhqcWpqEbdwWdopTc+EYYm0UewXgXtBkG5Hn1KvSfBsfMYu5+6hrOMfblvhcmuD1
- oeFOHedxReAB+04fP9GbkXp9m64JP3ybXzUA4PEcXs4F4EjcDyAOZnqchqi3a6VZZ9s2
- mjUjFPu8eORloflznKqkaOO8Kw4XYznCHXwYx0NMcCUNTsRlp7RaIBZ8dILz4mHwgt/w
- /ssOERUISt1xN5FR41YbwpK7PBSfehFMVyPqyUWEH22abwU/+cFDbrIymQDkSoQE23Zc
- MYkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721239997; x=1721844797;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6KkKG9oUSk6oAo1JuMB1XpRU2s7BN26RJWKYlzZFCP8=;
- b=YnCOIoskJgmU9bbOV00FNcbOpz2mAODfz2fB/0rkLzxbnfOA15cyaSaIPK1A1Q6K+k
- 6PlBWdu/BpNbkcM+Ch5k0jW0WYMVoBUNBwks1niW33I7hc98ceUoCde9f+F6a2SxKrVD
- ENU88EO09cNXCmgM7dhasDtvG3QcPHXnJdbSNa78VeMEY25CqUiGt0mM7Lf7k7cp6D6q
- dtvXuU2TflDW3yOMg4Wp8p1zrxoUUB8WRXP5pt1KwZ6IxOJjFq7Yh4PPQejVsKO/Xvbe
- yaQVCDSVabl7HBMWfttX2FaX9b5ulRKlmxPNWGyH6PI4oUB+Ts91zF0/ZOkSIovV7E3X
- Ncdw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW37XkdI1u0/+nmSE6SJwWXDqgJyF0c7NixEkFkErsEkE18mINnzxYdQpbFmpqx+0SDJ76Dq+q6n5n/jmohpoTmZofRLQ==
-X-Gm-Message-State: AOJu0YzWHsbJhGw/zBwvXus9a6M3J+VXco7d8cx6CL+6/t9f4U113JYH
- wZ/ObP24vTCgvf1RqnMwBqC+IKzIfy8JSsmSR2ccZ5C6t1dNTy2wSKRUFloQTIch5cxWI71BfMy
- DCRXAS+oX/scE8p0gRWz0T/LL/PwGWgpHf0Wi6w==
-X-Google-Smtp-Source: AGHT+IFb60swNTSvBi2Xv9Wqlh3czG8eZALbAMFrogY/QiV4SUoaKmaayAq1u/ZXqLnIfwAS+cyDFaTAAf4C7C5CvXY=
-X-Received: by 2002:a17:906:7093:b0:a77:cc90:7733 with SMTP id
- a640c23a62f3a-a7a011a6d76mr181752466b.31.1721239996290; Wed, 17 Jul 2024
- 11:13:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=walter.lozano@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1721241127;
+ bh=RHBP6g1g/UCUWbajMZ9vJpeIJeMjoN/b6bXwM6h6sJs=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=2JUSLMk2UHIdoiRZs/uSLaT27Hh+6FEZBy/sgwPj7H5oydppXWxCTUiTPfkm/MAX0
+ YieZrCSyTRjeSiJWq3iASq5RFVa0o+6AmQdW/R5PH76dDExDtMN1hKq+2ve1BCHzsC
+ KjVwwKArZEA1Tc4QhJPMitqy7uGJR8qBq0oEa0Gb5ljPSdsfj6DElFkMdpIk6GklTy
+ ACORVv0Yh/h5b02IFSKAXo75ejqZDDAL6Pm0qwa8gmbgzXbNjkQVBYMGZ4jyjwBLRE
+ 2fitv551WiTmPBFs8DY3imLj36aMG/i9S0I5KqwpaWqlYfSgUKlyiqErgpgiwHpZRt
+ ORVJRoPXJEphg==
+Received: from [100.99.210.253]
+ (ec2-34-240-57-77.eu-west-1.compute.amazonaws.com [34.240.57.77])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: wlozano)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 2D32C3780C11;
+ Wed, 17 Jul 2024 18:32:04 +0000 (UTC)
+Message-ID: <1f85166d-5ec9-48bb-b4d9-6a76158e0d4e@collabora.com>
+Date: Wed, 17 Jul 2024 15:32:00 -0300
 MIME-Version: 1.0
-References: <20240604163546.60225-1-sebastian.reichel@collabora.com>
- <20240604163546.60225-2-sebastian.reichel@collabora.com>
- <CAJ+vNU0T_yd9mVrj7kDaub_4KtD+7acLDi+k9YpzY5qQMuMvSg@mail.gmail.com>
- <CAJ+vNU2dt95YLO7-77Va=8eLD1o5xWtE5DyAsVZnXMrKvmzayQ@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2dt95YLO7-77Va=8eLD1o5xWtE5DyAsVZnXMrKvmzayQ@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 17 Jul 2024 11:13:04 -0700
-Message-ID: <CAJ+vNU0vC6eQjQuHrdVG3ZqJyDaZqtsrQ_XRj3iSOQg7Q0MQaA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] usb: tcpm: add core framework
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- Eugen Hristev <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Simon Glass <sjg@chromium.org>, Soeren Moch <smoch@web.de>,
- Wang Jie <dave.wang@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: rpi: Update memory layout for Aarch64
+To: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Martyn Welch <martyn@collabora.com>,
+ Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>
+References: <20240716171602.2279766-1-walter.lozano@collabora.com>
+ <20240716172113.GG561963@bill-the-cat>
+ <CALeDE9PUF4-oCk+CXB0FiL=Haq9o0MkHa5BS4JTvZw7HbwjjaQ@mail.gmail.com>
+ <20240717154437.GP561963@bill-the-cat>
+Content-Language: en-US
+From: Walter Lozano <walter.lozano@collabora.com>
+In-Reply-To: <20240717154437.GP561963@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,173 +76,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 16, 2024 at 7:00=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
->
-> On Fri, Jul 12, 2024 at 5:23=E2=80=AFPM Tim Harvey <tharvey@gateworks.com=
-> wrote:
-> >
-> > On Tue, Jun 4, 2024 at 9:36=E2=80=AFAM Sebastian Reichel
-> > <sebastian.reichel@collabora.com> wrote:
-> > >
-> > > This adds TCPM framework in preparation for fusb302 support, which ca=
-n
-> > > handle USB power delivery messages. This is needed to solve issues wi=
-th
-> > > devices, that are running from a USB-C port supporting USB-PD, but no=
-t
-> > > having a battery.
-> > >
-> > > Such a device currently boots to the kernel without interacting with
-> > > the power-supply at all. If there are no USB-PD message replies withi=
-n
-> > > 5 seconds, the power-supply assumes the peripheral is not capable of
-> > > USB-PD. It usually takes more than 5 seconds for the system to reach
-> > > the kernel and probe the I2C based fusb302 chip driver. Thus the
-> > > system always runs into this state. The power-supply's solution to
-> > > fix this error state is a hard reset, which involves removing the
-> > > power from VBUS. Boards without a battery (or huge capacitors) will
-> > > reset at this point resulting in a boot loop.
-> > >
-> > > This imports the TCPM framework from the kernel. The porting has
-> > > originally been done by Rockchip using hardware timers and the Linux
-> > > kernel's TCPM code from some years ago.
-> > >
-> > > I had a look at upgrading to the latest TCPM kernel code, but that
-> > > beast became a lot more complex due to adding more USB-C features.
-> > > I believe these features are not needed in U-Boot and with multiple
-> > > kthreads and hrtimers being involved it is non-trivial to port them.
-> > > Instead I worked on stripping down features from the Rockchip port
-> > > to an even more basic level. Also the TCPM code has been reworked
-> > > to avoid complete use of any timers (Rockchip used SoC specific
-> > > hardware timers + IRQ to implement delayed work mechanism). Instead
-> > > the delayed state changes are handled directly from the poll loop.
-> > >
-> > > Note, that (in contrast to the original Rockchip port) the state
-> > > machine has the same hard reset quirk, that the kernel has - i.e.
-> > > it avoids disabling the CC pin resistors for devices that are not
-> > > self-powered. Without that quirk, the Radxa Rock 5B will not just
-> > > end up doing a machine reset when a hard reset is triggered, but will
-> > > not even recover, because the CPU will loose power and the FUSB302
-> > > will keep this state because of leak voltage arriving through the RX
-> > > serial pin (assuming a serial adapter is connected).
-> > >
-> > > This also includes a 'tcpm' command, which can be used to get
-> > > information about the current state and the negotiated voltage
-> > > and current.
-> > >
-> > > Co-developed-by: Wang Jie <dave.wang@rock-chips.com>
-> > > Signed-off-by: Wang Jie <dave.wang@rock-chips.com>
-> > > Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-> > > ---
-> > >  Makefile                         |    1 +
-> > >  cmd/Kconfig                      |    7 +
-> > >  cmd/Makefile                     |    1 +
-> > >  cmd/tcpm.c                       |  142 ++
-> > >  drivers/usb/Kconfig              |    2 +
-> > >  drivers/usb/tcpm/Kconfig         |    8 +
-> > >  drivers/usb/tcpm/Makefile        |    3 +
-> > >  drivers/usb/tcpm/tcpm-internal.h |  174 +++
-> > >  drivers/usb/tcpm/tcpm-uclass.c   |  102 ++
-> > >  drivers/usb/tcpm/tcpm.c          | 2251 ++++++++++++++++++++++++++++=
-++
-> > >  include/dm/uclass-id.h           |    1 +
-> > >  include/usb/pd.h                 |  516 +++++++
-> > >  include/usb/tcpm.h               |   99 ++
-> > >  13 files changed, 3307 insertions(+)
-> > >  create mode 100644 cmd/tcpm.c
-> > >  create mode 100644 drivers/usb/tcpm/Kconfig
-> > >  create mode 100644 drivers/usb/tcpm/Makefile
-> > >  create mode 100644 drivers/usb/tcpm/tcpm-internal.h
-> > >  create mode 100644 drivers/usb/tcpm/tcpm-uclass.c
-> > >  create mode 100644 drivers/usb/tcpm/tcpm.c
-> > >  create mode 100644 include/usb/pd.h
-> > >  create mode 100644 include/usb/tcpm.h
-> > >
-> >
-> > Hi Sebastian,
-> >
-> > I have a board that has a STMicroelectronics STUSB4500 USB PD sink
-> > controller [1] on it that I would be interested in writing a driver
-> > for using this TCPM class. This device is a USB PD sink controller
-> > which has a nice 'auto-run' feature that has 3 updatable NVM backed
-> > PDO's that it negotiates on its own with the the PD source so that you
-> > get basic functionality without needing a driver.
-> >
-> > I am struggling a bit to get the stusb4500 working in a driver that
-> > fits into your framework and I think its the fact that the STUSB4500
-> > has no buffering capability so the processing of messages during the
-> > PD negotiation is extremely timing critical and I'm often missing the
-> > SRC_CAP message. To help me understand the correct operation of the
-> > tcpm state machine can you by chance enable DEBUG in fusb302.c and
-> > tcpm.c and share the output with me?
-> >
-> > I'm trying to understand the required state machine transitions. It
-> > looks to me like for a SINK the state machine should go like this:
-> > INVALID_STATE -> SNK_UNATTACHED
-> > SNK_UNATTACHED -> SNK_ATTACH_WAIT
-> > ^^^ during tcpm_init
-> > SNK_ATTACH_WAIT -> SNK_DEBOUNCED
-> > SNK_DEBOUNCED -> SNK_ATTACHED
-> > SNK_ATTACHED -> SNK_STARTUP
-> > SNK_STARTUP -> SNK_DISCOVERY
-> > SNK_DISCOVERY -> SNK_WAIT_CAPABILITIES
-> >
-> > At this point drvops->set_pd_rx(on) is called to allow your driver to
-> > accept PD messages but I don't understand the following logic:
-> >         case SNK_WAIT_CAPABILITIES:
-> >                 ret =3D drvops->set_pd_rx(dev, true);
-> >                 if (ret < 0) {
-> >                         tcpm_set_state(dev, SNK_READY, 0);
-> >                         break;
-> >                 }
-> >                 /*
-> >                  * If VBUS has never been low, and we time out waiting
-> >                  * for source cap, try a soft reset first, in case we
-> >                  * were already in a stable contract before this boot.
-> >                  * Do this only once.
-> >                  */
-> >                 if (port->vbus_never_low) {
-> >                         port->vbus_never_low =3D false;
-> >                         tcpm_set_state(dev, SOFT_RESET_SEND,
-> >                                        PD_T_SINK_WAIT_CAP);
-> >                 } else {
-> >                         tcpm_set_state(dev, hard_reset_state(port),
-> >                                        PD_T_SINK_WAIT_CAP);
-> >                 }
-> >
-> > Why on error would you go straight to SNK_READY? The comment indicates
-> > a return value of >=3D0 is a timeout. Why on success would you either g=
-o
-> > straight to a hard/soft reset? What does fusb302.c return from
-> > set_pd_rx and do after that call?
->
-> Hi Sebastian,
->
-> I've managed to make it further through the TCPM state machine with my
-> stusb4500 driver. I figured out that the intended operation of
-> SNK_WAIT_CAPABILITIES is to send a soft reset which gets the PD SRC to
-> send SRC_CAP which transitions to SNK_NEGOTIATE_CAPABILITIES then the
-> PD SRC sends an ACCEPT which transitions to SNK_TRANSITION_SINK then a
-> PS_READY which transitions to SNK_READY.
->
-> I am seeing that when a PD_DATA_REQUEST to negotiate a contract my
-> board loses power which does not happen if the STUSB4500 is allowed to
-> run in its auto-run mode. Do you know if there is some sort of power
-> glitch that is expected when a PD_DATA_REQUEST is sent from the SNK to
-> the SRC that must be managed with hold-up caps or something?
->
 
-Hi Sebastian,
 
-I've determined why PD_DATA_REQUEST was causing my USB PD supply to
-disable board power.... I had a bug in my implementation of
-pd_transmit.
+On 7/17/24 12:44, Tom Rini wrote:
+> On Wed, Jul 17, 2024 at 11:59:50AM +0100, Peter Robinson wrote:
+>> On Tue, 16 Jul 2024 at 18:21, Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Tue, Jul 16, 2024 at 02:16:02PM -0300, Walter Lozano wrote:
+>>>
+>>>> ARM and Aarch64 have different restrictions and trying to accommodate
+>>>> larger kernels like the ones used in distros can be challenging. For this
+>>>> reason, separate the layout and rearrange the map for Aarch64 to support
+>>>> kernels larger than 36 MB.
+>>>>
+>>>> Signed-off-by: Walter Lozano <walter.lozano@collabora.com>
+>>>> ---
+>>>>
+>>>>   board/raspberrypi/rpi/rpi.env | 25 ++++++++++++++++++-------
+>>>>   1 file changed, 18 insertions(+), 7 deletions(-)
+>>>>
+>>>> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+>>>> index 30228285edd..37c7f6a920e 100644
+>>>> --- a/board/raspberrypi/rpi/rpi.env
+>>>> +++ b/board/raspberrypi/rpi/rpi.env
+>>>> @@ -42,13 +42,19 @@ dfu_alt_info+=zImage fat 0 1
+>>>>    *   For Aarch64, the kernel image is uncompressed and must be loaded at
+>>>>    *   text_offset bytes (specified in the header of the Image) into a 2MB
+>>>>    *   boundary. The 'booti' command relocates the image if necessary. Linux uses
+>>>> - *   a default text_offset of 0x80000.  In summary, loading at 0x80000
+>>>> - *   satisfies all these constraints and reserving memory up to 0x02400000
+>>>> - *   permits fairly large (roughly 36M) kernels.
+>>>> + *   a default text_offset of 0x80000.  However, loading it at 0x80000
+>>>> + *   will allow to reserve only up to 0x02400000 which permits medium size
+>>>> + *   kernels (roughly 36M). This is good enough for customized kernels but
+>>>> + *   not for distros which by default enable drivers for many different
+>>>> + *   boards. Under these circumstances, using 0x00200000 provides room for
+>>>> + *   larger kernels.
+>>>>    *
+>>>>    * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
+>>>>    * conflict with something else. Reserving 1M for each of them at
+>>>> - * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
+>>>> + * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty for ARM.
+>>>> + *
+>>>> + *   For Aarch64, since the kernel is placed in different location,
+>>>> + *   accommodate them to reserver 1M for each of them.
+>>>>    *
+>>>>    * On ARM, both the DTB and any possible initrd must be loaded such that they
+>>>>    * fit inside the lowmem mapping in Linux. In practice, this usually means not
+>>>> @@ -62,16 +68,21 @@ dfu_alt_info+=zImage fat 0 1
+>>>>    * large initrds before they start colliding with U-Boot.
+>>>>    */
+>>>>   #ifdef CONFIG_ARM64
+>>>> +pxefile_addr_r=0x00080000
+>>>> +scriptaddr=0x00100000
+>>>> +kernel_addr_r=0x00200000
+>>>> +fdt_addr_r=0x03400000
+>>>> +ramdisk_addr_r=0x03500000
+>>>>   fdt_high=ffffffffffffffff
+>>>>   initrd_high=ffffffffffffffff
+>>>>   #else
+>>>> -fdt_high=ffffffff
+>>>> -initrd_high=ffffffff
+>>>> -#endif
+>>>>   kernel_addr_r=0x00080000
+>>>>   scriptaddr=0x02400000
+>>>>   pxefile_addr_r=0x02500000
+>>>>   fdt_addr_r=0x02600000
+>>>>   ramdisk_addr_r=0x02700000
+>>>> +fdt_high=ffffffff
+>>>> +initrd_high=ffffffff
+>>>> +#endif
+>>>>
+>>>>   boot_targets=mmc usb pxe dhcp
+>>>
+>>> We need to drop the disabling of device tree / initrd relocation as
+>>> that's sure not going to help matters. What's the minimum amount of
+>>> memory an aarch64 Pi will have? I really prefer reserving 128MiB (even
+>>> if that's not the maximum Linux Kernel Image size anymore) and then
+>>> device tree and then initrd.
+>>
+>> 512Mb on the Zero2W and RPi3A.
+>>
+>> We've not seen an issue here on the very large Fedora kernel, but I
+>> suspect that's because using UEFI mitigates this somewhat because here
+>> we're actually loading shim/grub.
+> 
+> OK, that should be enough to put a 128MiB spot for kernel, then 512KiB
+> for device tree, and then rest for initrd, and not be disabling
+> relocation (and thus preventing U-Boot from fixing failures).
+> 
 
-My stusb4500 driver is now working fine with your tcpm series and I
-would be happy to submit it once your series is merged. Feel free to
-cc me on follow-up submissions of your series so I can test with it.
+Thanks for the feedback! If I understood it correctly a layout like the
+the one bellow would be the right thing. The only difference is in
+device tree for which is reserved a bit more.
 
-Best Regards,
+pxefile_addr_r=0x00080000
+scriptaddr=0x00100000
+kernel_addr_r=0x00200000
+fdt_addr_r=0x09800000
+ramdisk_addr_r=0x09900000
 
-Tim
+If this matches the expectations I will prepare the V2.
+
+Thanks in advance,
+
+Walter
+
+-- 
+Walter Lozano
+Collabora Ltd.
