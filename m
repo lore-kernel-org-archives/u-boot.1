@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58BE7C3DA60
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 18:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8939DC3DA60
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 01:52:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B71B688763;
-	Wed, 17 Jul 2024 20:49:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A35B388464;
+	Thu, 18 Jul 2024 03:52:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E+XkvUbx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lZqXt8WX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8C4C88ABD; Wed, 17 Jul 2024 20:49:13 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BACB688AA7; Wed, 17 Jul 2024 20:22:40 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DD9A884CA
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:49:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD4728879C
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:22:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46HIn8DE125802;
- Wed, 17 Jul 2024 13:49:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721242148;
- bh=s0j6hLF/kGqZkG5xwDewHQ9SMI0MHEGcBnSTffNZLIM=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=E+XkvUbx33nPCgl2sG89i5LlZP0CpxPmI+hrsK+ZMdL1hIHqpGWZ3RWKPXM3RKSKi
- DGrHA7yem8zWQLC0uW3EdzGWo7j06C+NPhQu7p6r6Vfv/q+jrhAWd6j+oH8y1NzDsf
- 5DhebY9CajW/gcdzs9KH96Yy/odEQO+2IGszdFDo=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46HIn8OX070503
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 17 Jul 2024 13:49:08 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 17
- Jul 2024 13:49:07 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 17 Jul 2024 13:49:07 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46HIn799120069;
- Wed, 17 Jul 2024 13:49:07 -0500
-Date: Wed, 17 Jul 2024 13:49:07 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Dhruva Gole <d-gole@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, <c-shilwant@ti.com>,
- <m-chawdhry@ti.com>, <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vibhore Vardhan
- <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>, Sebin Francis
- <sebin.francis@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
- <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>
-Subject: Re: [PATCH V5 0/6] Low Power Mode: Package TIFS Stub in BeaglePlay
-Message-ID: <20240717184907.5bmjwwn6tfmn3jfo@swarm>
-References: <20240705164833.2386549-1-d-gole@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=nyandarknessgirl@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4272738eb9eso53919245e9.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 11:22:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721240558; x=1721845358; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=WmKfZIyO5wo+gSD/02IKYHwxxEuNMHZf8QhprYVcp8M=;
+ b=lZqXt8WXcQjTqTAIQxeSAgkRS2R7HsfI1CUT1tGpHIENHADo69bPkLTvdBSmL2tbiL
+ 0OHSbQ1YoKOPYqOJCEvfmlhBguRST7pbk9Y/4z9ZL+iS8iO3UfquRCNUdbwCkNI9M3EQ
+ 5KCARYt313ydIeu4W3VXmmq23KX69li/vxI0qdMqpYqQrtmN3u6Njvi1stkyUHR8TDIy
+ e6Wyp3phuFxDLfl/wTYhMCpPDdnPFRgETM87ADbnuG1srcC70PpTf3YJwU1Np1SgSGvL
+ obNwXNzndHNWBhs5wqibRu9EVKANY3j8qGrWLKsXx47U5K2Bwy1Srf/P05abKiu0h4Zb
+ v53A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721240558; x=1721845358;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WmKfZIyO5wo+gSD/02IKYHwxxEuNMHZf8QhprYVcp8M=;
+ b=RWe4sK4CzvJ4sdvpD8zIpmYLR7NVdjuOobto40R2qrRvWUfSOeS/YrLqgahGq/Nkw5
+ 6L7mn4hs6XWkLKr9S8JLbqrJEUBPPW0wPtMiAniCt3bt7M+bhsWC8B1GnyV4B+0ATiRV
+ F1zqkXK7Do9W3g1sVwmeF07RIrZ84F6SbvsF96HkHjS3/KhP81nJCdT4UwgEwKnuekxo
+ drHw4rFgCx3au3Gr2QTGNXHeQttCD2OZPBVGlG3SSYZhLQaDb0Cr07ti6UGzph/8dLEp
+ rS5f9wSeBxOiW+LQ4RBuWDRYmCFlYj91OG6LEpUFUJnrqlM887CxRXMxAuQq+NP6KyYd
+ vrYw==
+X-Gm-Message-State: AOJu0Yy35LAeSmoybpF3adnoyowUTC2OsQqeQow3SXsIQVga757CIrBf
+ NMrwFBq3BKlox4N/8nFrjdg0Af3BKczdNTrGSKZHCe+54XddWGk4ilUo3XeckuxMPjoo5gbquAc
+ q5vKOqkdSuESZHyjkWehLO0crCUMXMGto/uTJTw93
+X-Google-Smtp-Source: AGHT+IF8weYmGNTElMmhKWfpMdFcoomBrknOVoDbt1WMmjdZZ5vwqyYKYFjllCcxijD4xleCsWsxtse0ci99C1CE4Lc=
+X-Received: by 2002:adf:e44c:0:b0:35f:20eb:cae3 with SMTP id
+ ffacd0b85a97d-36831750a0emr1599959f8f.67.1721240557939; Wed, 17 Jul 2024
+ 11:22:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240705164833.2386549-1-d-gole@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Eva Kurchatova <nyandarknessgirl@gmail.com>
+Date: Wed, 17 Jul 2024 21:22:26 +0300
+Message-ID: <CA+eeCSMKifhHwf+oYm-vamSyimoAycEN_U5RZj3bCX3Q5qsdwQ@mail.gmail.com>
+Subject: [PATCH 1/3] riscv: qemu: Enable booting from NVMe
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Thu, 18 Jul 2024 03:52:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,43 +82,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22:18-20240705, Dhruva Gole wrote:
-> This series includes the binman related changes required to package TIFS
-> Stub to support Low Power Modes on BeaglePlay.
-> It also documents the boot flow and tispl packaging details regarding
-> the same.
-> 
-> Changelog:
-> * Add more documentation around last time's discussion[1] on packaging TIFS
->   Stub in DM.
-> 
-> Link to previous series:
-> https://lore.kernel.org/u-boot/20240704084207.2211801-1-d-gole@ti.com/
-> 
-> [1] https://lore.kernel.org/u-boot/20240705151753.7v3geqkupqu673x3@ambiance/
-> 
-> Thanks for the explanation given in [1] Sebin,
-> Cc: Sebin Francis <sebin.francis@ti.com>
-> 
-> Dhruva Gole (6):
->   arm: dts: k3-am625-beagleplay: Package TIFS Stub
->   doc: beagle: am62x_beagleplay: Update the boot flow to show TIFS Stub
->   doc: beagle: am62x_beagleplay: Add TIFS Stub in image format
->   doc: ti: k3: Add TIFS Stub documentation
->   doc: ti: am62*: Mention TIFS Stub in img fmts and boot flow
-> 
-	Please change the ordering of the patches:
+From da876ced5ff607a4f21e30ab26fb1a972af56570 Mon Sep 17 00:00:00 2001
+From: LekKit <50500857+LekKit@users.noreply.github.com>
+Date: Wed, 17 Jul 2024 20:31:21 +0300
+Subject: [PATCH 1/3] riscv: qemu: Enable booting from NVMe
 
-MAINTAINERS: Include the TI docs under ARM TI
-doc: ti: k3: Add TIFS Stub documentation
-doc: ti: am62*: Mention TIFS Stub in img fmts and boot flow
+QEMU supports NVMe devices, but U-Boot only tries to boot from Virtio.
+This is problematic when explicitly using NVMe, so fix that.
 
-then do the stuff for beagleplay - first fix, then add new stuff, NOT
-the other way around - yes, i claim that a feature added without
-documentation is a bug.
+Additionally, RVVM virtual machine is almost fully compatible with QEMU,
+except it only implements NVMe drives instead of VirtIO.
+---
+ include/configs/qemu-riscv.h | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/include/configs/qemu-riscv.h b/include/configs/qemu-riscv.h
+index 2f594bfc..cf4fcb90 100644
+--- a/include/configs/qemu-riscv.h
++++ b/include/configs/qemu-riscv.h
+@@ -22,6 +22,7 @@
+  "stderr=serial,vidconsole\0"
 
+ #define BOOT_TARGET_DEVICES(func) \
++ func(NVME, nvme, 0) \
+  func(VIRTIO, virtio, 0) \
+  func(VIRTIO, virtio, 1) \
+  func(SCSI, scsi, 0) \
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.45.2
