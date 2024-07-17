@@ -4,61 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 094ADC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 03:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53FD8C3DA42
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 04:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E20B88602;
-	Wed, 17 Jul 2024 05:56:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id B58E5885AE;
+	Wed, 17 Jul 2024 06:10:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IQtlNN+m";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GHwNQhu3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 810B888768; Wed, 17 Jul 2024 05:56:01 +0200 (CEST)
-Received: from mail-m15578.qiye.163.com (mail-m15578.qiye.163.com
- [101.71.155.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 86FDC885B5; Wed, 17 Jul 2024 06:10:28 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E392B874AC
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 05:55:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2D8E28841D
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 06:10:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=IQtlNN+mkbU+iipM9X/c1BIfCNdxbnIuTGPlhepSVf55W/Oo4p80aFRIrBx3POmbQq3SxoAygBFYtoR9Wi8TQiJyvgnefmymi5Og0aoO50p186sKUHueNPqTDYBW/ERjzheaq+0YbP0lLvqtNOKW8wp59srol6Zpgnnkg/ILXOU=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=LBQfdyp6BA25o4vevF6t5C4BVFbvCzc4qL5kWWoPpr0=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 34CA99004DA;
- Wed, 17 Jul 2024 11:55:46 +0800 (CST)
-Message-ID: <0044b9dd-0f8f-4434-8307-bf49f1840028@rock-chips.com>
-Date: Wed, 17 Jul 2024 11:55:45 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46H4AFnG018324;
+ Tue, 16 Jul 2024 23:10:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1721189415;
+ bh=AmAsOBSnylzJ6HlZpPARxtD4JR7swh0AdcThoC+pFBQ=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=GHwNQhu3hhyRka1u+gfIhgn3TtudyxP2sHezxCfE5jvY3h9DKZ+9HsMEvGqygGrLf
+ +mnVzPCuRiaaTwpS8XwY8S46spPZgYOjKMXvNYlZIH8vHRpFKCy6kYNA7n9qegZ1ek
+ ss65wLn/YJt/efjxo+F2HPTKwNEFnXbC0em7xSNI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46H4AFGq017119
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 16 Jul 2024 23:10:15 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 16
+ Jul 2024 23:10:15 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 16 Jul 2024 23:10:15 -0500
+Received: from [172.24.29.211] (lt5cd2489kgj.dhcp.ti.com [172.24.29.211])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46H4ACZd068097;
+ Tue, 16 Jul 2024 23:10:13 -0500
+Message-ID: <ddef3081-76a2-4985-bc47-9a18bcd7ed93@ti.com>
+Date: Wed, 17 Jul 2024 09:40:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH COVER] rockchip: rk3399: fix SPI-NOR flash not found in
- U-Boot pre-reloc
-To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20240617-rk3399-fix-v1-1-69af21c2baed@cherry.de>
+Subject: Re: [PATCH] configs: j784s4_evm : Increase Dynamic memory allocation
+ size
+To: Francesco Dolcini <francesco@dolcini.it>
+CC: <trini@konsulko.com>, <nm@ti.com>, <u-boot@lists.denx.de>,
+ <j-humphreys@ti.com>, <marcel.ziswiler@toradex.com>, <vigneshr@ti.com>,
+ <b-padhi@ti.com>, <u-kumar1@ti.com>
+References: <20240715174301.2688466-1-u-kumar1@ti.com>
+ <20240716200555.GC85916@francesco-nb>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240617-rk3399-fix-v1-1-69af21c2baed@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20240716200555.GC85916@francesco-nb>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUNMSVYeTk1ISkoYT0lDHx9WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90bed4f83103a9kunm34ca99004da
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBA6Qgw*QzIyFBMvS0oBPw8w
- HgxPFBVVSlVKTElKSkNDTk9MS05OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTU9PNwY+
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,44 +83,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Francesco
 
-On 2024/6/17 21:10, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 7/17/2024 1:35 AM, Francesco Dolcini wrote:
+> Hello,
 >
-> In commit 100f489f58a6 ("rockchip: rk3399: Fix loading FIT from SD-card
-> when booting from eMMC"), the spi1 bootph properties were mistakenly
-> removed meaning, so re-add them back to fix SPI-NOR flash not being
-> found in U-Boot pre-reloc as required for RK3399 Puma.
->
-> Fixes: 100f489f58a6 ("rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> On Mon, Jul 15, 2024 at 11:13:01PM +0530, Udit Kumar wrote:
+>> Increase malloc size to 32 MB to align with other J7
+>> family devices.
+> Is this needed for any specific reason? I am asking to understand if
+> other boards using the same SOC should be updated to prevent
+> $random_issue.
 
-Thanks,
-- Kever
-> ---
->   arch/arm/dts/rk3399-u-boot.dtsi | 5 +++++
->   1 file changed, 5 insertions(+)
+In our downstream version, we are seeing an issue , while using DFU to MMC
+
+Please see
+
+https://gist.github.com/uditkumarti/b8209f61eff3154f6eb288ba63715263#file-gistfile1-txt-L82 
+
+
+
+Since DFU is not supported yet in mainline u-boot, so I avoided to 
+mention that failure.
+
+Also this change is generic, so i thought of pushing it now instead of 
+waiting for DFU series.
+
+
+> Francesco
 >
-> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-> index b6b43271172..2bec139d833 100644
-> --- a/arch/arm/dts/rk3399-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
-> @@ -145,6 +145,11 @@
->   	bootph-some-ram;
->   };
->   
-> +&spi1 {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
->   &spi1_clk {
->   	bootph-pre-ram;
->   	bootph-some-ram;
->
-> ---
-> base-commit: 2248c96ea1cf0b65377040d9f87ce7d8cf534c63
-> change-id: 20240617-rk3399-fix-d8c8d3ce844e
->
-> Best regards,
