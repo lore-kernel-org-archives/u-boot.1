@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731CEC3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 08:33:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1834BC3DA4B
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 08:34:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB9E388A4C;
-	Wed, 17 Jul 2024 10:31:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B67588A83;
+	Wed, 17 Jul 2024 10:33:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kuUXvl3T";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W2Ymbril";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BC2688A6B; Wed, 17 Jul 2024 10:31:28 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 81D4088A7F; Wed, 17 Jul 2024 10:33:31 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5021F886E5
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 10:31:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 719E3885B6
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 10:33:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-36799fb93baso3890577f8f.0
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:31:26 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-65f9e25fffaso40780107b3.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 01:33:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721205085; x=1721809885; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VNoOt5PguCcBNLvXXO7pgo72MDpPKtDUlw274PpmBpM=;
- b=kuUXvl3TUrjMaZBRJAto9LoUja3Y658/eSYPPd3ZQWrAYB6x6rNhhpQ/P0oavESv7j
- rrvh9ods4duE3EDcnX1RnbKxlrei/wHIAZMbgqV78+NHxguXycOySiHsTe5di73n5e2l
- ap03mMwMBpYrF3RuiFt5xNwK0ev50u3YKrdr4=
+ d=chromium.org; s=google; t=1721205208; x=1721810008; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rW7GubfCuVriyMszdmFtJrIRPR1k2JjSLPHzMEKZABc=;
+ b=W2YmbrilvsyM+DX6sxuFhd+wFm06S7/mTBat++gyCxOdTUX0HA+YCZeLnVpExNLI9Z
+ AvnB9uc0PUVKvuwNUIa+nXkG4L0E8QPD4ugBTRpHbXAJT+iWQ6E7O0c9yxEjQfu9ro6h
+ GwjhNDLebtaZhbZpvmD5aR2ztIzJu0kOQP++E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721205085; x=1721809885;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VNoOt5PguCcBNLvXXO7pgo72MDpPKtDUlw274PpmBpM=;
- b=l3AeMhv0AcDnH/bdDFUoFk6+7p78bmlBMoIqFP18JDCQj5YyyWzRjc+mK9mvRdYN2e
- QTjf6WNmnw35C1iGY5gMWx48bSTqD+Oa/1L43pfURjcDL4JW5AmRuuV8xSU/tfrZvGUH
- oLBvstIQGAOT4yylI0uUGt4bP2inaqxA8OqdOZshA+wNlbi5U8JW0++LEGBczV4iSbdX
- 6GHg8zk5wVlma4mJL64Nvx7Ko2Ui5gVc0oiCvEK3ASZNWU+OQ653pw0j7XIt9Mj3W3ro
- 59qW6FQ8HVaJPCc5hW3wia7p78rQ0DlB7tMZOu4TCdZF4is7XNtQtW8w6QZcrigrml4T
- j+yg==
-X-Gm-Message-State: AOJu0Yyv7nQiv+QVNg61YknaeQtCqZtaGGIhwdwhnP0KDvB9KP4Cj1wf
- TkaJQj1FTQEcHK7kj5woBuDxeYz2Cu/i5VcHN+vY8jetk0yczgbR2UYdkZlwdRNz6p9sMd9AB6Q
- =
-X-Google-Smtp-Source: AGHT+IGe3euFtwYwjN/FKY329HRcnBv1Vjhwm5RpuH9H3uIL+F6hooSnoP7KHNE4ConkcSlIQqMCNQ==
-X-Received: by 2002:adf:b647:0:b0:367:8fee:443b with SMTP id
- ffacd0b85a97d-368316f5e94mr816540f8f.41.1721205085705; 
- Wed, 17 Jul 2024 01:31:25 -0700 (PDT)
-Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafbb5bsm11069930f8f.80.2024.07.17.01.31.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 01:31:25 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 14/14] doc: Describe the bootstd settings
-Date: Wed, 17 Jul 2024 09:31:04 +0100
-Message-Id: <20240717083104.1963431-15-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240717083104.1963431-1-sjg@chromium.org>
-References: <20240717083104.1963431-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1721205208; x=1721810008;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rW7GubfCuVriyMszdmFtJrIRPR1k2JjSLPHzMEKZABc=;
+ b=TJBLOl2vnz3Ilqm7D00eYsXoSCp4hP5i4hGgEtKz+FFRVOLpw/yFpzIDetRdoa4qYK
+ oE+Cv0Oi/OG1XxZQf5DaKojId0Zi/o1h+Ets8PjT+4QoFBlgmL5j6gj64h9TTJXIZ8GJ
+ yK6pz76UWEbtI4ujzqKa5Z9vIpwKJcotCXu5Of08TBI9nX8A4xDGKz7SWbl2YNOYoZ0d
+ VamtVFxxbhWR1GvHSmCbheXjuf1xYn/wj9YX52t5NW8eN73KGBLXmB6/ixBVKiqxCP7n
+ 0EK7z4xS2dUidztLdViK7QpwrYAiDGcbUE40gHWqHM3cTRh8pBX8dQP+xFLzPMCNRFnn
+ Nybg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW4X48V5/bZq5lA7grtu/4vNqj+yUqjGObJlCxytpdKRLdtQyBgtRDHL2TjW2IOOMy8DRm2YYK65bJrqAxTo/7I1S2uEA==
+X-Gm-Message-State: AOJu0YyEB1I+Y1yTqmVsM5klTZvjGHPT5a02M42bb9W6zeTvneO9kpLL
+ 5wBQL5gF1kqVC5hvDUphKMm2L4BFiROyBBRdrDtQqD1fRPBkwsSxXj2lo8HwMAHf6ZCm4I88kJy
+ ih0GM6qBHmQ9vj2PB2hpO86WwiZ+fQn0G5h7C
+X-Google-Smtp-Source: AGHT+IF3TUm65G84Sfh93yJcXTb5j459VXC1f8vTPrMVta+3QBhTPEX3Z7R6YxXo418opx1vRcEFq6YTjKL+BVW0m8I=
+X-Received: by 2002:a05:6902:1007:b0:e03:5188:591d with SMTP id
+ 3f1490d57ef6-e05ed6b845emr1065758276.4.1721205208216; Wed, 17 Jul 2024
+ 01:33:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240716083534.19062-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240716083534.19062-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 17 Jul 2024 09:33:17 +0100
+Message-ID: <CAFLszTiqKUVBn20N75pXupLNFmQC_ivGEUtR7wJPcuZ_BB2TNA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] boot: provide CONFIG_BOOTMETH_QFW Kconfig parameter
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Eddie James <eajames@linux.ibm.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +86,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootstd node provides some configuration properties. Add these to
-the documentation.
+On Tue, 16 Jul 2024 at 09:35, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> U-Boot is often used conjunction with QEMU to boot via EFI or syslinux.
+> Here the QFW boot method is not needed.
+>
+> At least for qemu-riscv64_smode_defconfig the kernel parameter is used
+> to specify the U-Boot binary. Trying to run U-Boot as a kernel makes
+> no sense.
+>
+> Provide Kconfig parameter CONFIG_BOOTMETH_QFW to decide if the QFW boot
+> method shall be provided.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         default y on all architectures
+> ---
+>  boot/Kconfig  | 9 +++++++++
+>  boot/Makefile | 2 +-
+>  2 files changed, 10 insertions(+), 1 deletion(-)
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
-
-(no changes since v1)
-
- doc/develop/bootstd/overview.rst | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index 4a55b7da00a..d92a649beb0 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -406,6 +406,19 @@ You should probably also enable `CONFIG_BOOTSTD_DEFAULTS`, which provides
- several filesystem and network features (if `CONFIG_NET` is enabled) so that
- a good selection of boot options is available.
- 
-+Some devicetree properties are supported in the bootstd node when
-+`CONFIG_BOOTSTD_FULL` is enabled:
-+
-+    filename-prefixes
-+        List of prefixes to use when searching for files on block devices. This
-+        defaults to {"/", "/boot/"} if not provided.
-+
-+    bootdev-order
-+        Lists the bootdev ordering to use. Note that the deprecated
-+        `boot_targets` environment variable overrides this, if present.
-+
-+    theme (subnode)
-+        Sets the theme to use for menus. See :doc:`/develop/expo`.
- 
- Available bootmeth drivers
- --------------------------
--- 
-2.34.1
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
