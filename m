@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022A9C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 01:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA55C3DA60
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 01:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EEED88AD6;
+	by phobos.denx.de (Postfix) with ESMTP id 75BCE88AEC;
 	Thu, 18 Jul 2024 03:52:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YrD5Lj8y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ncfx/rbx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 405A188AA7; Wed, 17 Jul 2024 20:24:14 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id BAF4388AA8; Wed, 17 Jul 2024 20:24:35 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 588498879C
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:24:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB0788879C
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:24:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=nyandarknessgirl@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-36796d2e5a9so1282f8f.3
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 11:24:12 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-367990aaef3so11416f8f.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 11:24:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721240651; x=1721845451; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721240673; x=1721845473; darn=lists.denx.de;
  h=to:subject:message-id:date:from:in-reply-to:references:mime-version
  :from:to:cc:subject:date:message-id:reply-to;
- bh=p3UnclasR1WieDqgJR4+cCtsumYaL6vdrkUmBPrGMyE=;
- b=YrD5Lj8yKOM4oWxNOtF2O2/uTSffZNiFgi/YIS0w7NqPN+2uErrwyMeJrznXFZC5Rr
- OZnph/tK3VKveIKPQjc7M0SSy6E/3UKUHDVg9SE5sK67P1Z2Ra8SVnZJNTWB45C2/aVO
- OLgogsdsbH4E/2keaVQwDceG137ygw/OXxnj22sVDVUAGHDIn1xS9I5NwJl1iuR3RnT+
- EqRfztXLSlsaQ+IASukdoR1O6eHLHCJ1P6PL1/cIG0ECzrM4nESY9tVZiuoqjKQ79MWP
- P5S6wy1cn5Pl9RGDoL7A17n0T6ulFSqLPeefyYuD7mt3c6FGOTAzXN/nnaIYYWUXz3WQ
- vhIA==
+ bh=xsut1+cCc6fjj8lpl/P684L1aQ5VGExTDpUJki7ocX0=;
+ b=Ncfx/rbxDKd9n9Y4axN6xqeKuUGPuvzAcH963LKcA/Rl+Dbz+19iKmGe6poGsOXLdC
+ g8GJK8drnjCGQrpmjoC8tlbd7X9lPmxKJsV/CiEK1J1JEBNJJx5L58+zOelGrSRWs01w
+ EIMIVRd7IdVtfhLec+h1bMcmEQ0b0b8ATa7OOum/IZuGtYzpyRR/kDAIv03k7veIxxD3
+ Hw2C3/Gwu19RLMbMIMG1SKyYMjuh4sKM6viKiwRSXgdTi4uNA5r/FBJm2/ukbHeLF2QR
+ GxoELNsEVYJpAbar+HXZE8DlQWu2nIVqDACyvyZWa4l71fZ7zHcuLsGnxgygteGE/0VV
+ mHCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721240651; x=1721845451;
+ d=1e100.net; s=20230601; t=1721240673; x=1721845473;
  h=to:subject:message-id:date:from:in-reply-to:references:mime-version
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p3UnclasR1WieDqgJR4+cCtsumYaL6vdrkUmBPrGMyE=;
- b=OVun/c1Oq4Nstd0z4kDqh1rDhgRbp4HCbtHBfBv3O+4wHoxONd5HfG/UR4l71jbMcR
- iKOYXyDJEqfdlL5D1sLCu7EM1EqHyV3QaVD2VDWRyFaQKUSRs1m2lLptLVzKDgK08jeq
- s9lUDlsUfZYpqsNjg6agUWj4g2U2u6Nr05PaHDApZXcxoV+XJ/ShDobwDSIqll6eaU3d
- HJmvhEIrc1ZXG8z6iTuKtuySdIHyrMfNN8GO/9jalk8f118ODwabAjjFpspyg2ADnU/O
- QyxqBKMKGxXj4IVKsQDCudwWcfbldR3cpjH8Wj2c9GtuqgCkovJOZpXfcDDHKQoRfqcV
- 4Zug==
-X-Gm-Message-State: AOJu0YyqjEs4Mcl60n+cGzgDgQY01JjnniakKqWZkYAJdK/LUSsbSysw
- 7ImYFjJjv+zbxs6osHakHJ3MCh3w6gnnem607ODXHJxL37Zp9Oywlq2xyxo9k5q08Kiejg1x2Ay
- UJD7oQMUWH9hxkwjRBX4vZZ1bw/ifu4B7mzi+e5/B
-X-Google-Smtp-Source: AGHT+IHD7yCS//0MJOzij+uXPGttAzfwhl2D4VoF/CWrJbOiG7rhD03/pOKevEJmtScRCB+mB/ycUkcf1iEz6rHbLLk=
-X-Received: by 2002:a5d:6c68:0:b0:368:3895:67d6 with SMTP id
- ffacd0b85a97d-36838956875mr1832564f8f.20.1721240651467; Wed, 17 Jul 2024
- 11:24:11 -0700 (PDT)
+ bh=xsut1+cCc6fjj8lpl/P684L1aQ5VGExTDpUJki7ocX0=;
+ b=uCDOZGn4ZXRb7bREQ9ee6ilolWEL5GjRQfaNb2UjGWrjNh/MPv2/Pth6xxGqB+rro4
+ 9EpCSNm78dX0aErlBBTRPye+rQO5hJqBTRk8PE0Go7yFsGSNdjEmk+BdhSuJxkcWeMag
+ 7UW+j9b5ksNLQAv59GJYg3XKoq0pWHCIOxJlIuuIx+7jWrna5MIqzeYhlrjczigwI890
+ ZBwYcnlEXqpJBlxbrnz9gJs0AQJxyeYyMKTZ9xPjGISeervygaEanMlm1Uf8zGijsUYL
+ wHa8F7279EKC+OiniS2aAEx6hgdqyg97ndZ5Ww5mGJcF5hUjHEgTLtxFgp6Z0qkpqXF4
+ BUXA==
+X-Gm-Message-State: AOJu0YybkcO604+RcR9CbY9Qt/5E4a525BHCb2bsW5PekLtMbaA09UiK
+ wH5xU/kY/73udtxudIpul3n0rOI6VTucipiGvaAm6PTHoH+B6v6X5+Ok+d90/jC2XDwD0cZ0kAJ
+ x4dbVlMaaVSIrr3lSy6lpCqvq3ui4eS4kffbkWBAl
+X-Google-Smtp-Source: AGHT+IFnGlwGZSeoWudv5k3WAIcj+qmyR+3xxTdN19zzIoyHqTG91fqpasrsAsP3+4kws9M9nO1EUDigzWjl5alMObY=
+X-Received: by 2002:a05:6000:71d:b0:368:255e:ab13 with SMTP id
+ ffacd0b85a97d-36831722ed8mr2276110f8f.50.1721240672915; Wed, 17 Jul 2024
+ 11:24:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <CA+eeCSMKifhHwf+oYm-vamSyimoAycEN_U5RZj3bCX3Q5qsdwQ@mail.gmail.com>
 In-Reply-To: <CA+eeCSMKifhHwf+oYm-vamSyimoAycEN_U5RZj3bCX3Q5qsdwQ@mail.gmail.com>
 From: Eva Kurchatova <nyandarknessgirl@gmail.com>
-Date: Wed, 17 Jul 2024 21:24:00 +0300
-Message-ID: <CA+eeCSMWt4m2E9ynRXr0bXLBfarx_naeUL7GSGmJ3EZ=a=HR1w@mail.gmail.com>
+Date: Wed, 17 Jul 2024 21:24:21 +0300
+Message-ID: <CA+eeCSNo9RpZ_86wwYuKBiMHyZFAuEdiXL-6Sf=_9WfR_=ptFQ@mail.gmail.com>
 Subject: Re: [PATCH 1/3] riscv: qemu: Enable booting from NVMe
 To: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -84,30 +84,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From 2f016333edcf18f520970c5ef02fcaa8d2b1b8f0 Mon Sep 17 00:00:00 2001
+From e6087bb6d1f25e8a5fddd4255fc07a957312b406 Mon Sep 17 00:00:00 2001
 From: LekKit <50500857+LekKit@users.noreply.github.com>
-Date: Wed, 17 Jul 2024 20:39:09 +0300
-Subject: [PATCH 2/3] riscv: qemu: Enable EFI framebuffer
+Date: Wed, 17 Jul 2024 20:41:41 +0300
+Subject: [PATCH 3/3] riscv: qemu: Explicitly advertise RVVM support
 
-Enable framebuffer for better virtual machine integration.
-Some guests need EFI FB to work properly.
+This patch series enables full RVVM virtual machine support which was
+earlier inconveniently provided as out-of-tree patchset.
+
+This should be cleaner than a separate board config, since both
+emulators provide similar feature set.
 ---
- board/emulation/qemu-riscv/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/riscv/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/emulation/qemu-riscv/Kconfig
-b/board/emulation/qemu-riscv/Kconfig
-index 9538c66e..012ac14a 100644
---- a/board/emulation/qemu-riscv/Kconfig
-+++ b/board/emulation/qemu-riscv/Kconfig
-@@ -58,6 +58,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
-  imply E1000
-  imply PCI
-  imply NVME_PCI
-+ imply VIDEO
-+ imply VIDEO_SIMPLE
-  imply PCIE_ECAM_GENERIC
-  imply DM_RNG
-  imply DM_RTC
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index fa3b016c..7c52e666 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -21,7 +21,7 @@ config TARGET_OPENPITON_RISCV64
+  bool "Support RISC-V cores on OpenPiton SoC"
+
+ config TARGET_QEMU_VIRT
+- bool "Support QEMU Virt Board"
++ bool "Support QEMU Virt & RVVM Boards"
+  select BOARD_LATE_INIT
+
+ config TARGET_SIFIVE_UNLEASHED
 -- 
 2.45.2
