@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D137C3DA42
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 15:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD5A7C3DA4B
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jul 2024 15:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F380788A91;
-	Wed, 17 Jul 2024 17:57:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 742C788AB5;
+	Wed, 17 Jul 2024 17:57:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MPjn1RQg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BqJmrCBl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 228C088A94; Wed, 17 Jul 2024 17:57:26 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 2B87388AA5; Wed, 17 Jul 2024 17:57:27 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32E2D88A7F
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4928E88464
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 17:57:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-36798ea618bso4040420f8f.0
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:24 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4277a5ed48bso52650895e9.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 08:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721231843; x=1721836643; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721231844; x=1721836644; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vxhS3QzmIeiePQwfniISwPF25W9ft1nDSpcuXnmBmQA=;
- b=MPjn1RQg5tMz3U5D0ZOS0B6p2EYeBi3sN2AxQqNgqfLH93XGpmVtOLAhCVCUZ4na+e
- rcvKzq6Z5B330XVnCGndyhrhGB1KemxIl7VZqTyU7ZIMMZVkd5PvDTppeWf/AehMQzLk
- dW9+fX8wFEA0aEh20NX3Z50TL+4LlJy9mJubs=
+ bh=mQHVBnDYJbgEPzPJ/LWgNIgndBxCiuo4GIpaVhPZ/Lk=;
+ b=BqJmrCBlD4xB8h3gVj08tS68j/j3uIXmGBtTaH6zGRVnz6gHWRcTWz2+94h6h6M3Cj
+ odWPHn+LLa7H3KSn8bEvyEti2+Iub1pRBUyj03YXNByOgVJIAK1yo0gtclXsZobaUhT1
+ E1fGWO8M2X0Ujb5BnZTxxDB0+Vf/qG841udug=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721231843; x=1721836643;
+ d=1e100.net; s=20230601; t=1721231844; x=1721836644;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vxhS3QzmIeiePQwfniISwPF25W9ft1nDSpcuXnmBmQA=;
- b=HPHUlKxd9WxsPC1Ol6gro3pvLApdYAU2lOkNyM2yhPsUIQimGqBPsqtJs5uJ0pihX+
- +HGU8Eux2mz0ChYAHHFsqzyuslZ/4A1wdqrUaAJMcG7aRlzyBNxYnatXEkUUEBCJylYx
- VuW/OIMc2PNTzHXop+4JvqPn0w7IHYA6JN1T8J+hgzEk66+L+gLjjAHEGDTrcHHHSFq5
- pJtmHFQKYzpuaRFhn9/uWUpEqYbyaWCCTYdllYtkxApOExBCwtzQnvdC8FqEujOV+GOY
- z9+plqwsRrQB72gv3YGFulKiJqmLEscRzkCz2U/i1oqRzEwUXyG2i6qZAoaqByt0RxZI
- CxTw==
-X-Gm-Message-State: AOJu0Yyu9oGej7MvO+Phqdm8ZWbtiv0mj4pCy91D38LXv/oQ3EeEzZMw
- cMrqUiGV5ZRhZPajavwad3sr0pub412SgbKf/egAqhiQjsr688hY53pq6n+BSWaqPp96VJjodwE
+ bh=mQHVBnDYJbgEPzPJ/LWgNIgndBxCiuo4GIpaVhPZ/Lk=;
+ b=fFpNkEU8sSZAKvForOXMfEd+pxv0GUwnShH/7OxZCR4LowaRYxCdeJ+rKzvjtdDZa7
+ iMhaARh4vT6N1SSS85JPZF6ccGI6a4KhpfX1QvyN2c/E5Tzhu95eb76kwXpuSVaYfw9t
+ SzMSn8VB0L9QRcnRvlOqLrKA2gDSoC3NH1xjdbZo7k7URY24CiX2XC8X1uiKnvbdbWDQ
+ /JCOrZ6t588fMrlcF5TyNnb/HB9F4atbytBGtNtxodKUeUYIOGmwHChzqHYrQ+mol7es
+ Nr76sUMScBsU5JE/ekjVwe5dOX8ufHvljT/hovfc5xj8wIG8grzH4WM3DSwcfcx8auTj
+ WNDA==
+X-Gm-Message-State: AOJu0Yzm25JXSrHgS1drBQTpBSdbXNTsNiciz19VJ8CJYL01cuGGfe2J
+ Q+2M7ewhZZQnrKnFlsgR5BhrN6jOgJ6IHsi044Q5w4s+5LAyxNwl3sHdSyRzwG7lwblxDTt/OSk
  =
-X-Google-Smtp-Source: AGHT+IH9I5jpT7ow3umedjDfPNEx5MdQq6wNbmzNQ9llSmjn3BuPdH2F6CPdJm9tpLRWNNWOsluk9Q==
-X-Received: by 2002:a5d:528a:0:b0:366:eb61:b47 with SMTP id
- ffacd0b85a97d-368315f6189mr1446514f8f.8.1721231843512; 
- Wed, 17 Jul 2024 08:57:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGDbMue0Z2anokHx60Hm3YuF975Zp8reYbYuE4MIR8vtbh4eyfBl91vKsgHG3loH9h+sBlf6g==
+X-Received: by 2002:a5d:59a2:0:b0:367:9073:3496 with SMTP id
+ ffacd0b85a97d-3683160e527mr1875479f8f.29.1721231844332; 
+ Wed, 17 Jul 2024 08:57:24 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.22
+ ffacd0b85a97d-3680dafb877sm12173958f8f.69.2024.07.17.08.57.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 17 Jul 2024 08:57:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 07/24] qconfig: Move arg parsing into a separate function
-Date: Wed, 17 Jul 2024 16:56:55 +0100
-Message-Id: <20240717155712.2913651-8-sjg@chromium.org>
+Subject: [PATCH 08/24] qconfig: Move arg checking a little higher
+Date: Wed, 17 Jul 2024 16:56:56 +0100
+Message-Id: <20240717155712.2913651-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240717155712.2913651-1-sjg@chromium.org>
 References: <20240717155712.2913651-1-sjg@chromium.org>
@@ -89,50 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reduce the size of main() by putting this code into its own function.
-For now the parser object needs to be returned too.
+Check for scan_source as one of the possible operations for this tool,
+moving the check above the scan_source implementation.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/qconfig.py | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+ tools/qconfig.py | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 07d78387465..d8f0a716fe9 100755
+index d8f0a716fe9..6d263ce30db 100755
 --- a/tools/qconfig.py
 +++ b/tools/qconfig.py
-@@ -1453,8 +1453,14 @@ def do_scan_source(path, do_update):
-                 print(item, file=out)
+@@ -1534,14 +1534,15 @@ def main():
+     col = terminal.Color(terminal.COLOR_NEVER if args.nocolour
+                          else terminal.COLOR_IF_TERMINAL)
  
- 
--def main():
--    """Main program"""
-+def parse_args():
-+    """Parse the program arguments
++    if not any((args.force_sync, args.build_db, args.imply, args.find,
++                args.scan_source)):
++        parser.print_usage()
++        sys.exit(1)
 +
-+    Returns:
-+        tuple:
-+            argparse.ArgumentParser: parser
-+            argparse.Namespace: Parsed arguments
-+    """
-     try:
-         cpu_count = multiprocessing.cpu_count()
-     except NotImplementedError:
-@@ -1512,8 +1518,12 @@ doc/develop/moveconfig.rst for documentation.'''
-                       help='show any build errors as boards are built')
-     parser.add_argument('configs', nargs='*')
+     if args.scan_source:
+         do_scan_source(os.getcwd(), args.update)
+         return 0
  
--    args = parser.parse_args()
-+    return parser, parser.parse_args()
-+
+-    if not any((args.force_sync, args.build_db, args.imply, args.find)):
+-        parser.print_usage()
+-        sys.exit(1)
+-
+     # prefix the option name with CONFIG_ if missing
+     configs = [prefix_config(cfg) for cfg in args.configs]
  
-+def main():
-+    """Main program"""
-+    parser, args = parse_args()
-     if args.test:
-         sys.argv = [sys.argv[0]]
-         fail, _ = doctest.testmod()
 -- 
 2.34.1
 
