@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E406EC3DA63
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A452AC3DA63
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:13:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E5FF88AD2;
-	Thu, 18 Jul 2024 19:02:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D8C2B88113;
+	Thu, 18 Jul 2024 19:13:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jONUm0K3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oPG63mje";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53DF688ABE; Thu, 18 Jul 2024 19:02:19 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 9E3448657F; Thu, 18 Jul 2024 19:13:28 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79E6B88ABA
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:02:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC5B088AD9
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:13:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2ee9174c5c0so1675561fa.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:02:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-25dfb580d1fso490826fac.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:13:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721322136; x=1721926936; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1721322804; x=1721927604; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tEO4CG87gcKiYqDLq3gSu70pMhMTu0BWMWCN5alJUW8=;
- b=jONUm0K3hlDzbEFflfkeD4A1/PZD4DPk+HwDh0tlmQnO4x5XIdiasHOqYH/thqMD80
- RZLIEUi2H+Z5nUx9KHclsuc7Hh5koUPe+9wma7dvaKT+Qbx9cA+hoJiJQk1rj7v2MQe9
- 8LQZCkgT8/3zqsgifCf60RrFQk8+xzrAHM6HyQdi5mKdwa6KHGUJM7rDQG0L+aJBIYR/
- rDXwRHEpQBXXvwkgA9JE7BS1iz5V0LzFdBfPnZnmSqg8vz8ILTcgJPyjolZ5oLKGWFMv
- f2Ojmiv+KclKmRrEnOo6+T2XFcRK1cgXyrwymb4UiS0KZ/Xy6Qr7fXd0vZG0EHvANutw
- IWIw==
+ bh=Xyz4oBZLIPbkYz582n4fTn+Rbd24cV3n3QH9P14Rvus=;
+ b=oPG63mje+AaoSmCPE5h9SNZ9I47AHDOVVTYSSHNdPpCJKBLDE9saPG1qOlUmaGIu6s
+ ML163U8blY2dsRx/pvJyUO9soE1Njk2owcGD65avQMGxWDzQkgi4lYNbmqegSUM/dDp4
+ xfG/do9L3ZoxOnMOarf6n/O1qUQUMtflCfrOg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721322136; x=1721926936;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721322804; x=1721927604;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tEO4CG87gcKiYqDLq3gSu70pMhMTu0BWMWCN5alJUW8=;
- b=oF9uaPiXp95FiRKO9tT61OaO1ETTcSwWxUpUlYMY6BKJbBJ9ybnVy3vpOz8XawlYOf
- KekQJ1L3BHysinjpU1VQ6CeRCm4H11Y6X+e0W+Tm2qSc6tSKPO8DDn8+KHp26yzcSn2B
- cAEKvpreEW/YJgiFLJjMgeEQK65zeN7Y3b9ujXdT4+xwWfjC1gXyIh9b4Ib4e98W3pTF
- GAKK7TcWWIjgT4kA3PXmDU/jVgntkMFN1VT4ZdbMegql3Qlnx/nRpelTTqcWUgBJ8HQC
- sBHdGuR/efmu1BRrCZyUD1eTLA1NTX07V4qu7jiLIqjWafK9dmRgSsHTxYqKqykkqXS9
- xjRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhy4vJgvq2rCKsv3DoQGo03fu5fUy7M/IaoFjY/zJkWqsddZcqbepSffyTrgzvaNiVEmNlhWqmVMDwdGjeEe/aLYyZvQ==
-X-Gm-Message-State: AOJu0YxRt6sQ4jd2PV5JMNft/ejTuJSPwbdmwf+YqP/lf+c+2KZro8yE
- le9b3LkQwO8ehQs8XgR0TotB8CkyogSzHv8VnzJZeiBSH5Fe5A3SzfFyB9nE7UlKjtNqiR+Ao+c
- IQK3unWCq+LCUsjjuwL7C4EWrZVA=
-X-Google-Smtp-Source: AGHT+IHgOY9LRwZiixABpTUPD0kxbMgpycCSRgba6sDf76gJCSImkbjG1WaXMjO2h6TlhgOYSaME9LS/yGnLpx4eaRE=
-X-Received: by 2002:a2e:9995:0:b0:2ee:d55c:5c3 with SMTP id
- 38308e7fff4ca-2ef05d5de10mr10316471fa.7.1721322135388; Thu, 18 Jul 2024
- 10:02:15 -0700 (PDT)
+ bh=Xyz4oBZLIPbkYz582n4fTn+Rbd24cV3n3QH9P14Rvus=;
+ b=DHvIRoX4s4EXVZrZDdf2CcvuG8PgLO8s9x7CdjkhSMxJXFPFDxPqXKQFguLQBsJOCz
+ vpGt3zjL4kKBoQuyd2iWmhirLb1siL9hqm1n0Pkrka/TSTdC8RgKbi3ng4VPqNajDyb2
+ RyPnpDO3gvrD5UWHLmmk15tV6q4u3YrgZSkYe5cPE31V+f1zY2fTRue01Gp4uT+4JeBx
+ y/7qNAGYpSgxowRdmfPRAIUN9Xp12sxxKmDv3LngEOU0HbMivy2sVT2DHqA3nMhYf1cL
+ ERcjOyH2JwWN8sdxqADsxUQ4WOLgB/S2K8DohmTW4wCbuLn+j9F9Dv+5lE5x21b++OsP
+ R9rg==
+X-Gm-Message-State: AOJu0YwK4MgXy4niPmZ4zCi4L1OjdwmMKZr7DBuNtBjhkB9X+rXT5BWf
+ LoC7Ea3MJ5A32RftLcbOuPa8+ga8qK5HQqUomXhROBidhRpMcW4PLHiWEQVBugo=
+X-Google-Smtp-Source: AGHT+IHzsPwaDLnC+JSwdgLbouKUjYxiUlXxFUwyqsQwmnsLjIKqGERB3hnxCI9Esxkq6TNm8UWKaQ==
+X-Received: by 2002:a05:6871:153:b0:25e:1817:e4b7 with SMTP id
+ 586e51a60fabf-260d9504caemr4659896fac.38.1721322804472; 
+ Thu, 18 Jul 2024 10:13:24 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-260ee584a56sm422664fac.7.2024.07.18.10.13.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jul 2024 10:13:24 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io
+In-Reply-To: <20240718-u-boot-fix-v6-10-upstream-build-v1-1-ebeb67ef773e@linaro.org>
+References: <20240718-u-boot-fix-v6-10-upstream-build-v1-1-ebeb67ef773e@linaro.org>
+Subject: Re: [PATCH] ARM: dts: remove leftover Amlogic GX/G12 bindings headers
+Message-Id: <172132280380.1848517.3639926942922389573.b4-ty@konsulko.com>
+Date: Thu, 18 Jul 2024 11:13:23 -0600
 MIME-Version: 1.0
-References: <038dad39-e99a-4464-be5e-57a3a73ca8af@oss.nxp.com>
- <20240702090928.1663707-1-paul.geurts@prodrive-technologies.com>
-In-Reply-To: <20240702090928.1663707-1-paul.geurts@prodrive-technologies.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 18 Jul 2024 14:02:03 -0300
-Message-ID: <CAOMZO5BGYvWhb9gBspMb4mbx_OFmJ+0TiKyP9inZ+i8ieToCWA@mail.gmail.com>
-Subject: Re: [PATCH] imx: hab: Make imx_hab_is_enabled dependent on
- FIELD_RETURN
-To: Paul Geurts <paul.geurts@prodrive-technologies.com>
-Cc: ye.li@oss.nxp.com, sbabic@denx.de, uboot-imx@nxp.com, trini@konsulko.com, 
- peng.fan@nxp.com, eduard@lionizers.com, marex@denx.de, fedor.ross@ifm.com, 
- rasmus.villemoes@prevas.dk, xypron.glpk@gmx.de, elena.popa@nxp.com, 
- tharvey@gateworks.com, sjg@chromium.org, vitor.soares@toradex.com, 
- u-boot@lists.denx.de, martijn.de.gouw@prodrive-technologies.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,18 +89,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ye Li,
+On Thu, 18 Jul 2024 10:28:37 +0200, Neil Armstrong wrote:
 
-On Tue, Jul 2, 2024 at 6:09=E2=80=AFAM Paul Geurts
-<paul.geurts@prodrive-technologies.com> wrote:
+> Remove the leftover Amlogic GX/G12 bindings headers that
+> maked the v6.10 upstream DT fail to build.
+> 
+> 
 
-> > Thanks for confirm. I also cross checked with teams. 8MP must burn a
-> > pattern. Otherwise HAB won't covert to field return.
->
-> Okay, thanks for checking, I will wait for the details and make the neces=
-sary adjustments
+Applied to u-boot/master, thanks!
 
-Please let us know if you have more information on this so we can
-proceed with this patch.
+-- 
+Tom
 
-Thanks
+
