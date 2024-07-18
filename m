@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5698C3DA63
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1831C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89D1688B34;
-	Thu, 18 Jul 2024 19:36:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FCE188B59;
+	Thu, 18 Jul 2024 19:36:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N67kpaXO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="meALOkOE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA9CE88B0F; Thu, 18 Jul 2024 19:36:55 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id DF0CC88B34; Thu, 18 Jul 2024 19:36:56 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFA0888B16
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26FF588B35
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2eea7e2b073so19877841fa.0
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:46 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2eea8ea8c06so16135641fa.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721324206; x=1721929006; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721324207; x=1721929007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+u3npMrvTYLly9s/nnMJV4fbdRuydcPSpwmE1Eu4kgQ=;
- b=N67kpaXORhmfT7u/67TtV/6Y/z/iDYJ60W0waugwhCc5u59pU3cYZY0ekM1Bgkh1Wi
- RDCeJH48vNc5rsuTFJaMi4Qn6/0QXJCuASEo4f8KDW1iuyc0vK7CH//mlWp9tI7M/JJT
- 1qglSrWzo6w9lOpmR1QsuVzzLhL8Kp3GWzG1A=
+ bh=kZ7tnch+wxD3yWZ0D3mB/5hvkukjhZ586xHwPBhVjTM=;
+ b=meALOkOEO+ytMneHTJbFTd/TrmgTjSCoocqrqY/JLkyv8cqYIaIZYkFz9aizc2ZJfn
+ PgeH02J7k5CTMPnYFjdaycB8QuDj6gGbDyzh9pczSIiWBUYGQj88A6ljhKJC9FPAIy7n
+ TyZgKhq4flTUeZSetDzxLPB4pp9PPD/coG1tY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721324206; x=1721929006;
+ d=1e100.net; s=20230601; t=1721324207; x=1721929007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+u3npMrvTYLly9s/nnMJV4fbdRuydcPSpwmE1Eu4kgQ=;
- b=YGxyuWpu1T3I43qifBz7V57QpQkviQ23MMaUhbOT7WoWtlVYsqIm3qwjNqavAyYRS/
- 7Ib7d6LVvTDLyZUBWaTJPuETuqg7GEWCiEk8fNRBWzO5K8NY8pmLHZ8/GztJMKrCy5ze
- Y4VDYKtw2HI0Z6oCXd4VaEZweqhev9Y+dfg7Pz7hAzzwirbUUGIG2VcW87VNxPZ0rPue
- PsZfXgeJsRi+ZGh9Z6Yr9tyNfbpbDUaU6GWyy5B0jt0zfgz1tD9Y0/DMXTMIeqsUythb
- A3Hi1L8BNu1FqwggOMD2+bDn2tdauwfT3wRKmgf39QdMLSXKJ28+iuny6vA1l7sUidxz
- EDnA==
-X-Gm-Message-State: AOJu0YzZ8DvJEeunxqAsHdFdf8/KRXMjrYU5WvcRE5MHsMbrVRFq27RT
- bmKyZB74fgHRqvsl0mufHCF6LcJ2cyIJGFZN5GCZtxVLGba8Ou6N1ngwb9RcIzyMn35sgMeycN0
+ bh=kZ7tnch+wxD3yWZ0D3mB/5hvkukjhZ586xHwPBhVjTM=;
+ b=BEzEt1+WxzZPqz4cQViDUAYuuuUt5rZ9JiqlPQyMDQVQDjyoudxvUYZjD2ykF3HnCi
+ Hf9tfcqca1VU13tTZhQwTyJGIzKYPZhRjj8BKkh7sZCsxCN9duVDhPe2C7X6uKtESYY+
+ NFQ2hSRN5GvaQHHjAamlxVw37Qzl3WqGD4EN9DQisqmFoyvPDj2QZi/LVIN8Vm3pFug3
+ g8QcpYlKqkiqbDkIfaJzR+SV9DkhO/TEVHYnhsVdVhxgav97crlQCRWrGnPgRvhgc5gF
+ iUQtgQRK6vqeoVKxr1LoR0B1NZ69KlKzpLO+Mx1PIiGdwokr+2cHpNeWlvlnrEeBIRdl
+ tNfA==
+X-Gm-Message-State: AOJu0Yx1UX9CZ5xFQddPtZMW/5UJr9Gh9I29suGaoYvgfeDoFwbHBWpn
+ x2rRM2P9BK6NPyPIH6Cau+mifywAwO/bk7FkoRQ0Ad/0iMlrOFNImR5uM+R7CDSgysg9kYrercM
  =
-X-Google-Smtp-Source: AGHT+IEcQrw0BwPz9zGnZ0LlD2sA0ZAH/a560UN2tAO0vOkBey3Tp7+tFKjkCIRgavsicZqUuCRMSw==
-X-Received: by 2002:a2e:bc0a:0:b0:2ee:dde7:899c with SMTP id
- 38308e7fff4ca-2ef05c73644mr27764511fa.17.1721324206098; 
- Thu, 18 Jul 2024 10:36:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFSlR7CVC+j5lBhKkLlK5nCGolThOpNisJkigZ0wZACOnHWGXZyoAVUG2uA6tEoFCxpMWcBkg==
+X-Received: by 2002:a2e:be24:0:b0:2ee:7bed:2cf4 with SMTP id
+ 38308e7fff4ca-2ef05c91135mr26613731fa.23.1721324207172; 
+ Thu, 18 Jul 2024 10:36:47 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.45
+ 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 10:36:45 -0700 (PDT)
+ Thu, 18 Jul 2024 10:36:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, Aaron Williams <awilliams@marvell.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-Subject: [PATCH 14/20] octeon: Drop OCTEON_I2C_FDT dead code
-Date: Thu, 18 Jul 2024 18:36:05 +0100
-Message-Id: <20240718173611.4014274-15-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Philip Richard Oberfichtner <pro@denx.de>
+Subject: [PATCH 15/20] i2c: Remove I2C_SET_BUS()
+Date: Thu, 18 Jul 2024 18:36:06 +0100
+Message-Id: <20240718173611.4014274-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
 References: <20240718173611.4014274-1-sjg@chromium.org>
@@ -90,32 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This option is not defined by any board, so drop the code.
+This is very old, predating even the legacy I2C support, so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/mips/mach-octeon/octeon_fdt.c | 7 -------
- 1 file changed, 7 deletions(-)
+ drivers/power/power_i2c.c | 5 -----
+ include/i2c.h             | 7 -------
+ 2 files changed, 12 deletions(-)
 
-diff --git a/arch/mips/mach-octeon/octeon_fdt.c b/arch/mips/mach-octeon/octeon_fdt.c
-index c74fe9d9fb8..15ce292be95 100644
---- a/arch/mips/mach-octeon/octeon_fdt.c
-+++ b/arch/mips/mach-octeon/octeon_fdt.c
-@@ -687,13 +687,6 @@ int octeon_fdt_i2c_get_bus(const void *fdt, int node_offset)
- 	while (node_offset > 0 &&
- 	       !(found = !fdt_node_check_compatible(fdt, node_offset, compat))) {
- 		node_offset = fdt_parent_offset(fdt, node_offset);
--#ifdef CONFIG_OCTEON_I2C_FDT
--		bus = i2c_get_bus_num_fdt(node_offset);
--		if (bus >= 0) {
--			debug("%s: Found bus 0x%x\n", __func__, bus);
--			return bus;
--		}
--#endif
+diff --git a/drivers/power/power_i2c.c b/drivers/power/power_i2c.c
+index a871fc41987..c2fc1c6b42f 100644
+--- a/drivers/power/power_i2c.c
++++ b/drivers/power/power_i2c.c
+@@ -33,8 +33,6 @@ int pmic_reg_write(struct pmic *p, u32 reg, u32 val)
+ 		       p->bus);
+ 		return -ENXIO;
  	}
- 	if (!found) {
- 		printf("Error: node %d in device tree is not a child of the I2C bus\n",
+-#else /* Non DM I2C support - will be removed */
+-	I2C_SET_BUS(p->bus);
+ #endif
+ 
+ 	switch (pmic_i2c_tx_num) {
+@@ -93,9 +91,6 @@ int pmic_reg_read(struct pmic *p, u32 reg, u32 *val)
+ 		return -ENXIO;
+ 	}
+ 	ret = dm_i2c_read(dev, reg, buf, pmic_i2c_tx_num);
+-#else /* Non DM I2C support - will be removed */
+-	I2C_SET_BUS(p->bus);
+-	ret = i2c_read(pmic_i2c_addr, reg, 1, buf, pmic_i2c_tx_num);
+ #endif
+ 	if (ret)
+ 		return ret;
+diff --git a/include/i2c.h b/include/i2c.h
+index 45ca3d63e3f..1d1430b74a6 100644
+--- a/include/i2c.h
++++ b/include/i2c.h
+@@ -954,13 +954,6 @@ static inline unsigned int I2C_GET_BUS(void)
+ 	return I2C_MULTI_BUS ? i2c_get_bus_num() : 0;
+ }
+ 
+-static inline void I2C_SET_BUS(unsigned int bus) __attribute__((always_inline));
+-static inline void I2C_SET_BUS(unsigned int bus)
+-{
+-	if (I2C_MULTI_BUS)
+-		i2c_set_bus_num(bus);
+-}
+-
+ /**
+  * Find the I2C bus number by given a FDT I2C node.
+  *
 -- 
 2.34.1
 
