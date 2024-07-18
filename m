@@ -4,93 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C582FC3DA61
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDA6C3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:38:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 455088867B;
-	Thu, 18 Jul 2024 22:12:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CB87A885F1;
+	Thu, 18 Jul 2024 22:38:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IR5VKgO4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S8Rq3N8Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCC978869E; Thu, 18 Jul 2024 22:12:17 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 5673C885AE; Thu, 18 Jul 2024 22:38:26 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83BED8867B
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:12:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50A3688481
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:38:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7611b6a617cso732396a12.3
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:12:15 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-52ed9b802ceso895131e87.3
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:38:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721333534; x=1721938334; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NBB5y1lVoJSr7WfOxPb4tdGRbvPwMyiIFLwmhXLcOrE=;
- b=IR5VKgO4dn0StmiWZsw/+twfJHMOm9Ffu7M+WkQyVU35bljBqiuf/gLjkfLWRT9c0g
- R1+jBSkI/mgpBy9R/gIHUxNEEOaqeIEIrGpRMUgEWmk7672Qmec1jxOcffrCbALjI/bv
- DMqVFM/E8YwssjPPrgQP+PP8aCpehdLWUgo8N4zJ9OMaebXQLfXqw7/3UXd5es0qyVYE
- R3OaR4tIN1QIP06lIOsJXPMGw71+b3QOt/U4D6J8yqFc+gAdVppePQrjJnSeGAsjD3Cl
- mqxEred077sMxNkKmnHx75H1f13pxL+0iWtKJ6kJf+k2UyMJlBjThKKPBTNI5rbzDbkJ
- +mfA==
+ d=gmail.com; s=20230601; t=1721335103; x=1721939903; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=grKwAfVIdVaAktWTMGpxeXoUxOY/5riJ4pFZ2AzhV+0=;
+ b=S8Rq3N8Y0UAn0UzQikR0FT3Q08g2jczvQGG87EQXxNEv23w+UtwuUhpgI+bK94d49b
+ 74ZddrWrDH/PdqvfSjPUrHYoIvd+qibbGCf7WSZREGdU1dqsBCAb85k3IrzBqdbLSWr3
+ xL9vaARF3IP1r0IeN3vxsp2taQLozhF8N6NTK3Q2TlLX+GSeyoLq62Y3Ae3tLz98HhMC
+ waKWtaYYE89/Ff0ZxcYTNWcA3OgYbcCruXedDPs/KoUUU+eApHcduIJLDeiuuu60Z4Ig
+ N1WPAxgBsIh29cYRcma7bNfW166EN+i/EUqQdDDiJ20nYYBUg+t3/5hS/lVqefw5K9eN
+ 61qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721333534; x=1721938334;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NBB5y1lVoJSr7WfOxPb4tdGRbvPwMyiIFLwmhXLcOrE=;
- b=KC2P84zQt9oHOKKrRWk6W7Oa2DpOH4RKeTS1eOV0sVzPPi/kg2PfT9/vZaZzwq5IQS
- TY3OvHUyyelCkMJJFDITxHSjB5aYJhrdQMIn/ThfivvAZMFymVsEFqUXTP161oevFCSv
- G4hwzHAdqoU0SwVDnTxRMFh8GRCZFJ3AJ3YMmp1gDj9WSbQGrgCncKNiC8+IJzj5Z7FS
- mnk07SZUd6wRVRdbRFjGFng1lRZeIt7F+sC6opvfMRM0FnSCmUz+53RdN1zUf8E2RG4v
- 9zphlyS4bQJB9h7x8NtVe0mFKPb4n93vDg9xvOUlV77W0g/E/mMNH0p/uJ981GBwlHAC
- g47A==
-X-Gm-Message-State: AOJu0YyWNfDEds2MY+mSoD1jtWtBCXyND2O47+0GsR8lKO8QxG79teB3
- Mbi3PxHDMG4PsbPmy/RloLhk/an7m19slI5liaf5+f+R+6o8jJiNjBng/1aHwWXGZfkOOoQ4QHj
- HZoDE3+IXhcfvuVVVtX5VcZdXfua1wQYXbFXTKA==
-X-Google-Smtp-Source: AGHT+IGPXKAr1MmNGOaa/db9h9CIsM/8s8yHZICStlT5715ZKVYj26vTlt6zTap7kE7S3TlA/5YZVeaXuUo+FjrauZo=
-X-Received: by 2002:a05:6a21:9990:b0:1c2:9084:fcf with SMTP id
- adf61e73a8af0-1c3fdc95392mr8401864637.14.1721333533974; Thu, 18 Jul 2024
- 13:12:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721335103; x=1721939903;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=grKwAfVIdVaAktWTMGpxeXoUxOY/5riJ4pFZ2AzhV+0=;
+ b=K1X+MDqvpBdyWics7P0qitdoCwSHieT3miNMbqgyomO7QpOB/A2j6LaCjWxYIr9tkL
+ 6VgK+dmVSilAIYzqcwDPxwkiGEX7qc9qMmtF83EPDWTxwOrTLs2YqtuQZ43uq9b0mb6b
+ cYaeCjX8fRrP13LUsGfOP5qfsjZcdG3p30dZCGJ9+nd5Bpo1LuzG2vWk3CnaY96A/NQa
+ MpEGYiWo2QGDs6F0kpmVI9mSDulV/NvJ8YPQwZpHPMV95Eornroyp1Ifoi+gZTzR5R9U
+ DkwniVhHdeMc9F/v0AdS/bZXBOk6pj4WHNp799otFlvJb7bJU4TfV0zNQYQBVxnINky+
+ CrJw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXdyA6p27JaUeweeN/Sqr6u95jod961ieY/KCKhWKAJIwxHdXPK+cMbLi3AoSvCJA5D95eFGA66CkNRNXw4Re3DDD/WA==
+X-Gm-Message-State: AOJu0YwEP3D3sEXL4jwF6NQYKfoVsg8WPSgKwyXLh0gB5bLjC9gARb3m
+ n1A1DJ5fXUBFE9zH8ag9Doixh7YRTZmHn4uXGTcMr8BJnlWJFVOlI5NN2wFkaYxO+xq64V3i5vO
+ 8+lqw7pehr6FD2Ob5RFBdAe3AOK8=
+X-Google-Smtp-Source: AGHT+IFgLK0dIj5dOlBCaec3nQfutjLndSePUizCI8gif9L0yVI1u7rKJ74oK10B+1Aan9JWCusJjN/LunzRgBJ/cMM=
+X-Received: by 2002:a05:6512:33c5:b0:52c:ec68:6165 with SMTP id
+ 2adb3069b0e04-52ee53cc00bmr4812117e87.33.1721335103272; Thu, 18 Jul 2024
+ 13:38:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-10-raymond.mao@linaro.org>
- <CAC_iWjKC0sB++5um6TpnOxmkY8DhoNEx76C2UOeKsF7cX8yXCA@mail.gmail.com>
-In-Reply-To: <CAC_iWjKC0sB++5um6TpnOxmkY8DhoNEx76C2UOeKsF7cX8yXCA@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 18 Jul 2024 16:12:02 -0400
-Message-ID: <CAEfUkUJbwB0ArRRjym7rrS2VX992gbdoUo+F7t+3kE9avLfQ_Q@mail.gmail.com>
-Subject: Re: [PATCH v4 09/29] makefile: add mbedtls include directories
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Ilya Lukin <4.shket@gmail.com>, 
- Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+References: <20240713113029.78262-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240713113029.78262-1-heinrich.schuchardt@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 18 Jul 2024 13:38:11 -0700
+Message-ID: <CANV2PTMHVYh6=32hL5hOuWOHgLhFfcGid=2eUokzvZQ10R5QxQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: find distro device-path for media devices
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,45 +88,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-On Wed, 3 Jul 2024 at 07:35, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
-
-> On Tue, 2 Jul 2024 at 21:27, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Add the mbedtls include directories into the build system.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - None.
-> > Changes in v3
-> > - Remove changes for PLATFORM_CPPFLAGS.
-> > Changes in v4
-> > - Fix errors when building without "O=".
-> > - Minor fix of the include directories.
-> >
-> >  Makefile | 6 ++++++
-> >  1 file changed, 6 insertions(+)
-> >
-> > diff --git a/Makefile b/Makefile
-> > index 07d7947c8af..fd855dbd5c9 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -829,6 +829,12 @@ KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
-> >  UBOOTINCLUDE    := \
-> >         -Iinclude \
-> >         $(if $(KBUILD_SRC), -I$(srctree)/include) \
-> > +       $(if $(CONFIG_MBEDTLS_LIB), \
-> > +               "-DMBEDTLS_CONFIG_FILE=\"mbedtls_def_config.h\"" \
+On Sat, Jul 13, 2024 at 4:30=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> don't you need a full path to the config file?
+> The auto-generated load options for media device do not contain a partiti=
+on
+> node. We cannot expect the simple file protocol here.
 >
-No, we don't need the full path.
-Since "$(srctree)/lib/mbedtls" is in the include directories, and the this
-filename is unique
-in the project.
+> Get the partition device-path via the loaded image protocol.
+>
+> Fixes: e91b68fd6b83 ("efi_loader: load distro dtb in bootmgr")
+> Reported-by: E Shattow <lucent@gmail.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/efi_loader.h         |  2 +-
+>  lib/efi_loader/efi_bootmgr.c |  2 +-
+>  lib/efi_loader/efi_fdt.c     | 33 +++++++++++++++++++--------------
+>  3 files changed, 21 insertions(+), 16 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 6c993e1a694..2a06fbe4704 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -1205,6 +1205,6 @@ efi_status_t efi_load_option_dp_join(struct efi_dev=
+ice_path **dp,
+>
+>  int efi_get_distro_fdt_name(char *fname, int size, int seq);
+>
+> -void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size);
+> +void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *f=
+dt_size);
+>
+>  #endif /* _EFI_LOADER_H */
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index 304ed43595c..589d3996b68 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -1277,7 +1277,7 @@ efi_status_t efi_bootmgr_run(void *fdt)
+>                 if (fdt_lo)
+>                         fdt =3D fdt_lo;
+>                 if (!fdt) {
+> -                       efi_load_distro_fdt(&fdt_distro, &fdt_size);
+> +                       efi_load_distro_fdt(handle, &fdt_distro, &fdt_siz=
+e);
+>                         fdt =3D fdt_distro;
+>                 }
+>         }
+> diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
+> index 86ba00c2bdd..4ccf2055be3 100644
+> --- a/lib/efi_loader/efi_fdt.c
+> +++ b/lib/efi_loader/efi_fdt.c
+> @@ -75,28 +75,34 @@ int efi_get_distro_fdt_name(char *fname, int size, in=
+t seq)
+>  /**
+>   * efi_load_distro_fdt() - load distro device-tree
+>   *
+> + * @handle:    handle of loaded image
+>   * @fdt:       on return device-tree, must be freed via efi_free_pages()
+>   * @fdt_size:  buffer size
+>   */
+> -void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size)
+> +void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *f=
+dt_size)
+>  {
+> -       struct efi_device_path *rem, *dp;
+> +       struct efi_device_path *dp;
+>         efi_status_t  ret;
+> +       struct efi_handler *handler;
+> +       struct efi_loaded_image *loaded_image;
+>         efi_handle_t device;
+>
+>         *fdt =3D NULL;
+>
+> -       dp =3D efi_get_dp_from_boot(NULL);
+> -       if (!dp)
+> +       /* Get boot device from loaded image protocol */
+> +       ret =3D efi_search_protocol(handle, &efi_guid_loaded_image, &hand=
+ler);
+> +       if (ret !=3D EFI_SUCCESS)
+>                 return;
+> -       device =3D efi_dp_find_obj(dp, NULL, &rem);
+> -       ret =3D efi_search_protocol(device, &efi_simple_file_system_proto=
+col_guid,
+> -                                 NULL);
+> +       loaded_image =3D handler->protocol_interface;
+> +       device =3D loaded_image->device_handle;
+> +
+> +       /* Get device path of boot device */
+> +       ret =3D efi_search_protocol(device, &efi_guid_device_path, &handl=
+er);
+>         if (ret !=3D EFI_SUCCESS)
+> -               goto err;
+> -       memcpy(rem, &END, sizeof(END));
+> +               return;
+> +       dp =3D handler->protocol_interface;
+>
+> -       /* try the various available names */
+> +       /* Try the various available names */
+>         for (int seq =3D 0; ; ++seq) {
+>                 struct efi_device_path *file;
+>                 char buf[255];
+> @@ -108,10 +114,9 @@ void efi_load_distro_fdt(void **fdt, efi_uintn_t *fd=
+t_size)
+>                         break;
+>                 ret =3D efi_load_image_from_path(true, file, fdt, fdt_siz=
+e);
+>                 efi_free_pool(file);
+> -               if (ret =3D=3D EFI_SUCCESS)
+> +               if (ret =3D=3D EFI_SUCCESS) {
+> +                       log_debug("Fdt %pD loaded\n", file);
+>                         break;
+> +               }
+>         }
+> -
+> -err:
+> -       efi_free_pool(dp);
+>  }
+> --
+> 2.45.2
+>
 
-Regards,
-Raymond
+Tested-by: E Shattow <lucent@gmail.com>
