@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E60C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:38:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 276E6C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAF5E88B80;
-	Thu, 18 Jul 2024 19:36:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4ECA188AE5;
+	Thu, 18 Jul 2024 19:36:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JxIb71ON";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hd/Pw0fj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AC7D88ADC; Thu, 18 Jul 2024 19:36:50 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 9832E88B7D; Thu, 18 Jul 2024 19:36:51 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D147888B37
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9799088B23
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3683f56b9bdso71739f8f.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:43 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-426526d30aaso5226845e9.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721324203; x=1721929003; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721324204; x=1721929004; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sPnvaVlT8/NA2r+1550BsFJnCHZwiiO/dBXdqH3MsZA=;
- b=JxIb71ONOt/za53ahBlncxfbDF0uDQSfsiZJ1a/YLrSpTHt5cnXL7Ma3gWwQTwEcPV
- Urdy4kSKghaxp1YNH7IXsvY0K7Bebh+zPlLQsXm9SF2TETcx93PvGfZdEl7tcUGUkwum
- 5KT6EQ4mcRilfqjvDGBdC44bbFhYsUpqls+1c=
+ bh=XG8EvHpulFYX6YSxtFrVLn2/ViuiFFIxmpQmiKUbFXQ=;
+ b=hd/Pw0fjixcQm4vgZKDhlVVQMjcQFRoOMYMZY1XbXSWo2KyhlurZscK62K23iRxdgM
+ YMGiPmpsBadb7hg6C3bJa63IfiUVRoKThrgtL7bpnkoInEqvQY++MPW8iGd8tELd+1gr
+ lQHmmaoSiwuuamnt/OIhHEX/d03ae8vmP4l/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721324203; x=1721929003;
+ d=1e100.net; s=20230601; t=1721324204; x=1721929004;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sPnvaVlT8/NA2r+1550BsFJnCHZwiiO/dBXdqH3MsZA=;
- b=e28a59IqyXVz/Fp6ONlJJ6aw7qrrQxgl9Eyd+3MKXAzBM0MgPf6l1kTal+eigityYN
- PLcoab1sH/VvauPOSRxcBC8Uytf7jga0rmxH0j2A1Ymylco/MIwvJz4lGWFYpZ17xuG2
- oHYj9Uf2rdjCOY8ulkezqm0sl13jUi+XeMzmLyE22fDWOY8u9c/2miUmUY39l2O/m2yV
- IPGwnbyk9ccDD/9hKsjFy1Y2u9/uEVEXaUBqmc3TY+3hA48D1M0vjmEwGKPb5khGFGF9
- Yd2BGyvxfjvXr2oY13hForMvPZy+KxfiKf+vE5MnYhOb6JzaN4lKvnppVtBTeU2J5YNS
- k+iQ==
-X-Gm-Message-State: AOJu0Yx2twZPQumxGbuXlOc7/vQjmddYu+nsM1UP44MmkxrPnTyl6fua
- i8tTCzhW+oVpclrspEtH5EWbLQngm+SSgAK7MWtWCM763O7vMAg139cJg3HydkTWhybkZtT1W8g
+ bh=XG8EvHpulFYX6YSxtFrVLn2/ViuiFFIxmpQmiKUbFXQ=;
+ b=D6XznfdTBlY8KGr70wCOxhIwQ/NY+HAsbkhpkKjlqSTzUSzaT3mcodNHd7I1WJEAyo
+ cpUtTwbyHepiAETqfxCn4zQTGDhxLtczOkdMMtaTvhaDM+q0ORZ3bmCxzV9dFdf+0/+B
+ Dg0eY2N3qiqsNOHq4IiE8mgQJSOV1QnLSp9BD7f3Cq8c2Vh2oKUPPhF2IJRUxxXsXEbC
+ wowRlMrhLTxXwFx66H3j2U3Kslkt+kO9VUTtrL7urwBqwPhEQklBJOtL6476dRuXXuRu
+ 1X6LpYqsAJwanEJzVeWIKjShWbx1USTlFUksJnmfZBmMHXAh65ViQU0ejsvCHFKN08nJ
+ 4kig==
+X-Gm-Message-State: AOJu0Yxwu3ci/sOsmFlgnZ3DHX+hMsQlLE45bwCz1euCpYz3LLbwTXN6
+ yWMZq2D0YNZX/YS6U6j8imOS+J8jMA0IM/SyLsfSQAPRwo2d2PAgDJ9OrNS6UanpiNIdmm/iiUA
  =
-X-Google-Smtp-Source: AGHT+IHSdunYzmLonJsig8toi4X5PL0HzBOsVdcHlIKiv81u9BmEwfKDLgD5b4Nk+hgdzMRQei3RKA==
-X-Received: by 2002:a5d:4e4e:0:b0:367:988d:fb99 with SMTP id
- ffacd0b85a97d-368316003camr3383692f8f.8.1721324203240; 
+X-Google-Smtp-Source: AGHT+IGtmngmQOrBwlydYieqzi44lhYPfcSHCz5q3xV04oASGdGRn1bpgrvQXsGMDDyaT0UzGkDQZw==
+X-Received: by 2002:a05:600c:35d6:b0:423:791:f446 with SMTP id
+ 5b1f17b1804b1-427c2cc9898mr37212245e9.7.1721324203997; 
  Thu, 18 Jul 2024 10:36:43 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.42
+ 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 10:36:42 -0700 (PDT)
+ Thu, 18 Jul 2024 10:36:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
  Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 10/20] date: Drop the legacy I2C code
-Date: Thu, 18 Jul 2024 18:36:01 +0100
-Message-Id: <20240718173611.4014274-11-sjg@chromium.org>
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Michal Simek <michal.simek@amd.com>, Niel Fourie <lusus@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH 11/20] keymile: Remove use of legacy I2C
+Date: Thu, 18 Jul 2024 18:36:02 +0100
+Message-Id: <20240718173611.4014274-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
 References: <20240718173611.4014274-1-sjg@chromium.org>
@@ -90,95 +93,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop two generations of old code in this command. All boards should use
-driver model for I2C from 2021.
+Drop this old code to permit removal of legacy I2C code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/date.c | 26 --------------------------
- 1 file changed, 26 deletions(-)
+ board/keymile/Kconfig         |  3 --
+ board/keymile/common/common.c | 69 -----------------------------------
+ 2 files changed, 72 deletions(-)
 
-diff --git a/cmd/date.c b/cmd/date.c
-index bdb3e199b43..8614f022761 100644
---- a/cmd/date.c
-+++ b/cmd/date.c
-@@ -31,7 +31,6 @@ static int do_date(struct cmd_tbl *cmdtp, int flag, int argc,
- 	int old_bus __maybe_unused;
+diff --git a/board/keymile/Kconfig b/board/keymile/Kconfig
+index 18ef689b334..3585941470e 100644
+--- a/board/keymile/Kconfig
++++ b/board/keymile/Kconfig
+@@ -11,9 +11,6 @@ if VENDOR_KM
  
- 	/* switch to correct I2C bus */
--#ifdef CONFIG_DM_RTC
- 	struct udevice *dev;
+ menu "KM Board Setup"
  
- 	rcode = uclass_get_device_by_seq(UCLASS_RTC, 0, &dev);
-@@ -42,29 +41,19 @@ static int do_date(struct cmd_tbl *cmdtp, int flag, int argc,
- 			return CMD_RET_FAILURE;
- 		}
- 	}
--#endif
+-config SYS_I2C_INIT_BOARD
+-	def_bool y if ARM
+-
+ config HUSH_INIT_VAR
+ 	def_bool y
  
- 	switch (argc) {
- 	case 2:			/* set date & time */
- 		if (strcmp(argv[1],"reset") == 0) {
- 			puts ("Reset RTC...\n");
--#ifdef CONFIG_DM_RTC
- 			rcode = dm_rtc_reset(dev);
- 			if (!rcode)
- 				rcode = dm_rtc_set(dev, &default_tm);
--#else
--			rtc_reset();
--			rcode = rtc_set(&default_tm);
--#endif
- 			if (rcode)
- 				puts("## Failed to set date after RTC reset\n");
- 		} else {
- 			/* initialize tm with current time */
--#ifdef CONFIG_DM_RTC
- 			rcode = dm_rtc_get(dev, &tm);
--#else
--			rcode = rtc_get(&tm);
--#endif
- 			if (!rcode) {
- 				/* insert new date & time */
- 				if (mk_date(argv[1], &tm) != 0) {
-@@ -72,11 +61,7 @@ static int do_date(struct cmd_tbl *cmdtp, int flag, int argc,
- 					break;
- 				}
- 				/* and write to RTC */
--#ifdef CONFIG_DM_RTC
- 				rcode = dm_rtc_set(dev, &tm);
--#else
--				rcode = rtc_set(&tm);
--#endif
- 				if (rcode) {
- 					printf("## Set date failed: err=%d\n",
- 					       rcode);
-@@ -87,11 +72,7 @@ static int do_date(struct cmd_tbl *cmdtp, int flag, int argc,
- 		}
- 		fallthrough;
- 	case 1:			/* get date & time */
--#ifdef CONFIG_DM_RTC
- 		rcode = dm_rtc_get(dev, &tm);
--#else
--		rcode = rtc_get(&tm);
--#endif
- 		if (rcode) {
- 			puts("## Get date failed\n");
- 			break;
-@@ -108,13 +89,6 @@ static int do_date(struct cmd_tbl *cmdtp, int flag, int argc,
- 		rcode = CMD_RET_USAGE;
- 	}
+diff --git a/board/keymile/common/common.c b/board/keymile/common/common.c
+index 9358c25dcb0..5aa7c4e5383 100644
+--- a/board/keymile/common/common.c
++++ b/board/keymile/common/common.c
+@@ -129,75 +129,6 @@ void check_for_uboot_update(void)
+ }
+ #endif
  
--	/* switch back to original I2C bus */
--#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
--	i2c_set_bus_num(old_bus);
--#elif !defined(CONFIG_DM_RTC)
--	I2C_SET_BUS(old_bus);
+-#if defined(CONFIG_SYS_I2C_INIT_BOARD)
+-static void i2c_write_start_seq(void)
+-{
+-	set_sda(1);
+-	udelay(DELAY_HALF_PERIOD);
+-	set_scl(1);
+-	udelay(DELAY_HALF_PERIOD);
+-	set_sda(0);
+-	udelay(DELAY_HALF_PERIOD);
+-	set_scl(0);
+-	udelay(DELAY_HALF_PERIOD);
+-}
+-
+-/*
+- * I2C is a synchronous protocol and resets of the processor in the middle
+- * of an access can block the I2C Bus until a powerdown of the full unit is
+- * done. This function toggles the SCL until the SCL and SCA line are
+- * released, but max. 16 times, after this a I2C start-sequence is sent.
+- * This I2C Deblocking mechanism was developed by Keymile in association
+- * with Anatech and Atmel in 1998.
+- */
+-int i2c_make_abort(void)
+-{
+-	int	scl_state = 0;
+-	int	sda_state = 0;
+-	int	i = 0;
+-	int	ret = 0;
+-
+-	if (!get_sda()) {
+-		ret = -1;
+-		while (i < 16) {
+-			i++;
+-			set_scl(0);
+-			udelay(DELAY_ABORT_SEQ);
+-			set_scl(1);
+-			udelay(DELAY_ABORT_SEQ);
+-			scl_state = get_scl();
+-			sda_state = get_sda();
+-			if (scl_state && sda_state) {
+-				ret = 0;
+-				break;
+-			}
+-		}
+-	}
+-	if (ret == 0)
+-		for (i = 0; i < 5; i++)
+-			i2c_write_start_seq();
+-
+-	/* respect stop setup time */
+-	udelay(DELAY_ABORT_SEQ);
+-	set_scl(1);
+-	udelay(DELAY_ABORT_SEQ);
+-	set_sda(1);
+-	get_sda();
+-
+-	return ret;
+-}
+-
+-/**
+- * i2c_init_board - reset i2c bus. When the board is powercycled during a
+- * bus transfer it might hang; for details see doc/I2C_Edge_Conditions.
+- */
+-void i2c_init_board(void)
+-{
+-	/* Now run the AbortSequence() */
+-	i2c_make_abort();
+-}
 -#endif
 -
- 	return rcode ? CMD_RET_FAILURE : 0;
- }
- 
+ #if defined(CONFIG_KM_COMMON_ETH_INIT)
+ int board_eth_init(struct bd_info *bis)
+ {
 -- 
 2.34.1
 
