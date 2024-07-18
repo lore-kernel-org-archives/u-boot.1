@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9647C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 16:49:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81CDC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 16:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AFB18855C;
-	Thu, 18 Jul 2024 18:49:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 253268867B;
+	Thu, 18 Jul 2024 18:55:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uHJrWQM0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lD3y731+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1BC78867B; Thu, 18 Jul 2024 18:49:56 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 4902D88AD2; Thu, 18 Jul 2024 18:55:08 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A7878855B
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 18:49:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28222885F5
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 18:55:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1fc49c1f3e5so10032315ad.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 09:49:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-70b04fd6d2cso5826b3a.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 09:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721321393; x=1721926193; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WsdFGgBeCXt31CgqGOQ3PDprlUAHEh6tkzBrb47EwmQ=;
- b=uHJrWQM00dp+ErGH4iBKvXH7X5TiW//fgiaVoIxygBiJjImCFthCtJ5RY5Z1zMbQre
- LyQOBaUbEo2IRy+AzFPiYrUZYlIB4PpSEMDGYyu6NbhJL6Nsw+hhU5fUMSkFnwe1JZkT
- 7htTPvTdrYimPiR0GNuX4aYkn9ehjQeqdMAuRn5Uzr0rN2r8EVBqPUF+sySfsyoz9TsP
- fl4uQTQyOp5hhdSgRIQJJNvqwRd2qeRq8pe/Pvecr3Tw1zdbxCfqGDi2mzluJLKGCH2V
- gtmn3H2rc5U5+EwFm++5vFC6VGn6yfqYzlKdK8oSJpHMQ79LltUcmE+93CqGjVF2eEdy
- WlTA==
+ d=gmail.com; s=20230601; t=1721321704; x=1721926504; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PSAb1jnBZLwlRxNCGO8kaAdmrOdqPYGu5qqyDBUKx2A=;
+ b=lD3y731+6BSFRVRVZ1IsmWW+ntxZ9PQRElLRrKM/DdrHI0qnLR0iy9dKwqvFqyTqiM
+ cBCGdlUKrdz5E+Bd7mIkoKyk2npi1GX9t3rJHc9xprjLv0pFXt6Ha3fWEINqGI/izli3
+ mMwK9W+wH+rFFo2wRy7AJsKER1ULRU55Hmvc7qI1PqmoittLBiOojAoQwSL8cF9+iiHL
+ 28DtiQafrC5sYXsCOppcbO6mlDRwJf0eHV/6dJ9t0MyAAAa+9TOcGoRxefnpUY02G8nE
+ H4VTZhzUWFZGtz1uAE4wbCajDrCTnh2qc5T+PZ2mJ98OqdWDmk5PHtdDY9SflceWUhwY
+ uFww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721321393; x=1721926193;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1721321704; x=1721926504;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WsdFGgBeCXt31CgqGOQ3PDprlUAHEh6tkzBrb47EwmQ=;
- b=fDGyqKfdC2HXEhlOY6zquPsZLehdEPLUzrkN1V1uVVtF86GeACWRVfcoXe189TiKGN
- O7m8xOPOaLQeCUhY59oSTwxyvCYJHXIYs0oJR3woaF7giQ2rqpiunTw1gezZQQFDFxGi
- noB6EtNEFUGzKOFRx4kNdLjrutJw0PBg03OmpG8E1haqUPb60B/XLnqRfBcGLrAH2FY7
- dFQaH0cFh5YvvwcOKMKY6tE3+w6CVDQ06AQmLYYZ6S1AoxG3DXAJMoO1kDFlK7iNiS4m
- 0YA/GxVapUqeWXj+EpYQYfFvT1A7z+dPNbcQHexTPf1oomvREeuxH1+rPMoecqki2A8V
- NFAg==
-X-Gm-Message-State: AOJu0YyNvWKuAUZjY1btOMk1K0I9N7Yvm6TeSnbFgCqgBNy2bmH2F44n
- 21HrDj+Vtc2d5WdaX7oWOEWpffkr3FWK/k/iOoWhO7Sv2t2fC2zjpFFWfjACEF6CJKOmeZ9hADH
- GTtMRNHD/TPhxhE/2nyhFJ+otVqvpSPfxVG850Q==
-X-Google-Smtp-Source: AGHT+IEBCAWs+UJvXICO33wIZbx7A+6W401G9HLMvw6na3Zjaoy91GicKftqdzTMKcIrrzymsgra9IZWQRX+v/w6gig=
-X-Received: by 2002:a17:90b:14b:b0:2c8:8a5:c1b9 with SMTP id
- 98e67ed59e1d1-2cb5266ae26mr4569072a91.13.1721321392849; Thu, 18 Jul 2024
- 09:49:52 -0700 (PDT)
+ bh=PSAb1jnBZLwlRxNCGO8kaAdmrOdqPYGu5qqyDBUKx2A=;
+ b=ckBZ7w3xVYcg3WO8KQFH65eRXlxjEbKTPtp8Cn0ZPbmm9mI2PXjols1PtXcruJbO/5
+ 7p/nuF2UD39qqqFwBrkj/W2OH/xaXlaqSlZLrDqD4YKFZDHlefGRqFHAVF7v4ezJlWMl
+ GJ5hB8MZGKCuVFQnR8/LtoE1oPpUAxB48dSahCdEI/i1G8Db/evMtSjSm8feTJrfTZHq
+ v1jjhbiplm1jqgF7ER6XP5RtTaP+9BBcE1D7hfLPR6GujzY2eHdCa5j8sSSGTxG/Ziav
+ bfq7KP3P+x+oVjDdIOnbyqorWpLXe0acgr2QJwnPF7Bc+K2ZuAYZAHpfRm1IbNOMHlHX
+ rVzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWB18lzMSA4MTggqtOM04n+jIhywmcjxFQu4eFkcEpcFkZKmnavI7LYZZE/+vYIjYL+pK5RYvaMbPgEfs+yTRUTCpeNEA==
+X-Gm-Message-State: AOJu0Yxv/mgsf7/ExDYcTIldLAYLnwgGvHxpFLotePdW3EvORHb2Ecbo
+ gTHxVfL7Eb3iZXwhrw7K2zOqBO+P8FwIy15D9aqxcTe50zKZIU7/
+X-Google-Smtp-Source: AGHT+IE00qDa/t6cp6NCGnSpuQfVl3w45VyVmSYDk9SNoXh4hR1AS3dS3LN+nOAksvH9C8RAW9T5uQ==
+X-Received: by 2002:a05:6a20:cf8d:b0:1c0:f5c1:8071 with SMTP id
+ adf61e73a8af0-1c3fdc86ff3mr3734704637.3.1721321704564; 
+ Thu, 18 Jul 2024 09:55:04 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:bc92:63f4:6f0e:1985])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70cfc6dfe6csm48791b3a.4.2024.07.18.09.55.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jul 2024 09:55:03 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: peng.fan@nxp.com
+Cc: uboot-imx@nxp.com, m.othacehe@gmail.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
+Date: Thu, 18 Jul 2024 13:54:54 -0300
+Message-Id: <20240718165454.904763-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-9-raymond.mao@linaro.org>
- <CAC_iWjLxSbtcSwM1iQjj7DG3sJLY5Q=3fnuOphkJKXcQyO4TtQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLxSbtcSwM1iQjj7DG3sJLY5Q=3fnuOphkJKXcQyO4TtQ@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 18 Jul 2024 12:49:41 -0400
-Message-ID: <CAEfUkUKG8NLz+our5gtaGyd0CZC1cbgd9dMLCRFjx8cbA+Ce7g@mail.gmail.com>
-Subject: Re: [PATCH v4 08/29] hash: integrate hash on mbedtls
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Eddie James <eajames@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,53 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Currently, there is an error when the i.MX93 CPU frequency is
+read:
 
-On Wed, 3 Jul 2024 at 04:56, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+Could not read CPU frequency: -2
+CPU:   NXP i.MX93(52) Rev1.1 A55 at 0 MHz
 
-> Hi Raymond
->
-> On Tue, 2 Jul 2024 at 21:27, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Integrate common/hash.c on the hash shim layer so that hash APIs
-> > from mbedtls can be leveraged by boot/image and efi_loader.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Use the original head files instead of creating new ones.
-> > Changes in v3
-> > - Add handle checkers for malloc.
-> > Changes in v4
-> > - None.
-> >
-> >  common/hash.c | 143 ++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 143 insertions(+)
-> >
-> > diff --git a/common/hash.c b/common/hash.c
-> > index ac63803fed9..96caf074374 100644
-> > --- a/common/hash.c
-> > +++ b/common/hash.c
->
-[snip]
+Fix it by describing the A55 clock nodes in the devicetree, like done
+on other i.MX SoCs.
 
-> > @@ -267,10 +404,16 @@ static struct hash_algo hash_algo[] = {
-> >                 .hash_init      = hw_sha_init,
-> >                 .hash_update    = hw_sha_update,
-> >                 .hash_finish    = hw_sha_finish,
-> > +#else
-> > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
-> > +               .hash_init      = hash_init_sha512,
-> > +               .hash_update    = hash_update_sha512,
-> > +               .hash_finish    = hash_finish_sha512,
->
-> I don't have strong opinion here, but you could alternatively define
-> sha384 wrappers for mbedTLS and avoid this ifdef.
-> In any case I personally don't mind.
->
-> I will prefer not to create a new wrapper function in order to save
-space.
+With this change, the CPU frequency error is gone and it can be correctly
+retrieved:
 
-Regards,
-Raymond
+CPU:   NXP i.MX93(52) Rev1.1 A55 at 1700 MHz
+CPU:   Industrial temperature grade  (-40C to 105C) at 35C
+
+As the upstream imx93.dtsi does not describe the CPU clocks,
+keep the clock node in imx93-u-boot.dtsi for now.
+
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ arch/arm/dts/imx93-u-boot.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.dtsi
+index 289aba175843..b2b3d57318fc 100644
+--- a/arch/arm/dts/imx93-u-boot.dtsi
++++ b/arch/arm/dts/imx93-u-boot.dtsi
+@@ -9,6 +9,14 @@
+ 	};
+ };
+ 
++&A55_0 {
++	clocks = <&clk IMX93_CLK_ARM_PLL>;
++};
++
++&A55_1 {
++	clocks = <&clk IMX93_CLK_ARM_PLL>;
++};
++
+ &binman {
+ 	u-boot-spl-ddr {
+ 		align = <4>;
+-- 
+2.34.1
+
