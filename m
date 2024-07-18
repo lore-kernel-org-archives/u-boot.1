@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9671CC3DA63
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E9FBC3DA63
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:36:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4914D88B0C;
-	Thu, 18 Jul 2024 19:13:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C210F88AD2;
+	Thu, 18 Jul 2024 19:36:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NrBxNEqw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LYnH/D1g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CB2C88A8E; Thu, 18 Jul 2024 19:13:33 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id C053988B14; Thu, 18 Jul 2024 19:36:40 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1EE188ADC
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:13:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4759688B16
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3d9e233873aso603950b6e.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:13:30 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-52ea5765e75so800194e87.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721322809; x=1721927609; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qihi6oJDe0Qt1mY3/VAzR7MiaeB+lT6t6ZuMejIc39k=;
- b=NrBxNEqwx0N3vlHT3o1zvhC4QCXLt+M2aiOPAQZb+DR+jwrXWDv0IZBQaXa9cSlEMY
- IGWzOZCyprg/N99135nnfntV3E3Tze+XQhAvEKf+z/2MfHV+1ITzuIAXudl6s74y7+xe
- 44iYtJvky0yogyzXTCfMmix4Ivj7RCV6qX22g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721322809; x=1721927609;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1721324196; x=1721928996; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qihi6oJDe0Qt1mY3/VAzR7MiaeB+lT6t6ZuMejIc39k=;
- b=K5d7USbMV2tSwSpiftLnUIvGyaXtqupea6XSARF5vC/MOjCwjw9UTootLWc4ZC57Og
- 1BS50QeSIj5cHhz7g+OeWqDT5d6xmrsy/5jMoJRdw+TXtJBD05/9+gbiaMoIxOWPnc2q
- 9+mq1lESpDOE3+9Bwpw2YrVtjLVsgjvSj270qFpUcBcKhmvUOHhoCshw2Fhh4pKYTK6S
- hT2bIhe0ec3c6YsFhr+gQ77K0XsHHcKkEnXqP+SEGJa+YjpmUcWcu1oP3Q1cT2fF2I3/
- E6MdJdIUw8aGCoKv+xXgRBwKrnUjHuBZRUPZwyyFkKbHuNvNoz4WSAlNFwNUteM+Lo6u
- oomw==
-X-Gm-Message-State: AOJu0Yz93e7bCZ8Jvf73Y1pCMOUVdfzvQGQo8oyyoLk+bLXecJSm1saV
- 6QnYOZGFD68vZomLOGH/PnC+0a9zsQX+h9TQHvInl2InEMXuRvjpmTrPGUaX4OFkiPvQ1Pw4v2p
- KlQ8=
-X-Google-Smtp-Source: AGHT+IEOLTABwwGcBpPKFX5Dz1zxixZfO+ca8id7ychQbZr3lUn6Jp0oD2kDpvkvqgSaDbcWUHI/Mw==
-X-Received: by 2002:a05:6808:1494:b0:3d9:23ad:1ff1 with SMTP id
- 5614622812f47-3dad1f216a9mr6628669b6e.3.1721322809270; 
- Thu, 18 Jul 2024 10:13:29 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dad52bf232sm486388b6e.48.2024.07.18.10.13.28
+ bh=Ue0QbSzgNQ5B1TK87pANzgVrklqUS9UvEnbBVZ5YOQM=;
+ b=LYnH/D1gXF1ZudAjo+IZk+y3/gmlB5QsQDppCNFa+1+zmc+uRycc9FzwKmqhTdN9Y2
+ 1pecf40Kw0nzXr/ARUyKIqRcx+BcIPe5Fd3+F/VGeHRqtLfzalYRY5wA/Ub9SyO3nIUK
+ TmijBd+3f8bZUHpgfuJ2nH5cdegV+ywDFwHKk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721324196; x=1721928996;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ue0QbSzgNQ5B1TK87pANzgVrklqUS9UvEnbBVZ5YOQM=;
+ b=egOBXiTb5YRva+2+i5nuQxMIQRjunJFbfez2I+aOacTAsDmWsyj+li2c/iA6mIa5oD
+ FOva+TWNEyUBLuALeEQ6LGaYkFZFlBursDvs10Am2TpnS2KmyX89RBmCUIHuvjE6Bgpn
+ 0e7MHsKXk3chC1t81oKz1rdaM3h0cAyP3IW/rdruqEvgZgwV2Cd7muX3hQRHJRoO3oj7
+ wZ+QdOsdgPQ8NO9xF7SmmQ1LLScC7MvYr94XjHR72RwqWeZ8DJlTR3fTvPLEf+TcSCQN
+ kFnu1ESazsj1+jKTdiaVIfaJvW9xgziUQ/ajiZLov23/KT37dXYZnv+8/7zfv/kRJW6e
+ 35sQ==
+X-Gm-Message-State: AOJu0YwyQOuN3kAMfBRdWxr72IRaYtdNl4Eo0VCOMq9/BOmYpHUKcuv8
+ hL8qDQzt71+FmKoLZPojHEBWJipCAueHuAV362A3IvyUZoUxNdgPUjTc5sIWaKqViXvEW+PT7Xw
+ =
+X-Google-Smtp-Source: AGHT+IHDPaYtnVYrAZBSK4nmr/UARhWTflv8mIs705RV5V3/9dRM5NOtUoCT0JVw+BTNNBalYWBpyw==
+X-Received: by 2002:a05:6512:1281:b0:52b:bf8e:ffea with SMTP id
+ 2adb3069b0e04-52ee54113d0mr4136429e87.40.1721324196268; 
+ Thu, 18 Jul 2024 10:36:36 -0700 (PDT)
+Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 10:13:28 -0700 (PDT)
-Date: Thu, 18 Jul 2024 11:13:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Pull request: u-boot-rockchip-20240718
-Message-ID: <20240718171326.GY561963@bill-the-cat>
-References: <20240718083341.401564-1-kever.yang@rock-chips.com>
+ Thu, 18 Jul 2024 10:36:35 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
+ Simon Glass <sjg@chromium.org>, Philip Richard Oberfichtner <pro@denx.de>
+Subject: [PATCH 02/20] i2c: Remove board_i2c_init()
+Date: Thu, 18 Jul 2024 18:35:53 +0100
+Message-Id: <20240718173611.4014274-3-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
+References: <20240718173611.4014274-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4RMpHH1P3mc+aen3"
-Content-Disposition: inline
-In-Reply-To: <20240718083341.401564-1-kever.yang@rock-chips.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,68 +89,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This function is not used, so drop it.
 
---4RMpHH1P3mc+aen3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-On Thu, Jul 18, 2024 at 04:33:41PM +0800, Kever Yang wrote:
+ include/i2c.h | 8 --------
+ 1 file changed, 8 deletions(-)
 
-> Hi Tom,
->=20
-> Please pull the updates for rockchip platform:
-> - Add boards:=20
->   rk3328: Radxa ROCK Pi E v3;
->   rk3588s: FriendlyElec NanoPi R6C/S;
-> - Remove board: Theobroma Systems RK3368 Lion;
-> - Add rk3588 pcie support;
-> - Misc updates for board and config;
->=20
->=20
-> CI:
-> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/21635
->=20
-> Thanks,
-> - Kever
->=20
-> The following changes since commit b182816c1fb436916661949213c543bf4d4225=
-0b:
->=20
->   turris_1x: Normalize Kconfig usage (2024-07-13 10:42:15 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
-t-rockchip-20240718
->=20
-> for you to fetch changes up to e8b3f6c1018e1401bcc697a8aed8120061e4f189:
->=20
->   configs: rockchip: imply OF_LIBFDT_OVERLAY for rk3308 and rk3328 (2024-=
-07-17 16:26:55 +0800)
->=20
+diff --git a/include/i2c.h b/include/i2c.h
+index 4e59009cd93..8d91b24b43b 100644
+--- a/include/i2c.h
++++ b/include/i2c.h
+@@ -972,14 +972,6 @@ enum {
+ 	I2C_8, I2C_9, I2C_10,
+ };
+ 
+-/**
+- * Get FDT values for i2c bus.
+- *
+- * @param blob  Device tree blbo
+- * Return: the number of I2C bus
+- */
+-void board_i2c_init(const void *blob);
+-
+ /**
+  * Find the I2C bus number by given a FDT I2C node.
+  *
+-- 
+2.34.1
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---4RMpHH1P3mc+aen3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaZTTMACgkQFHw5/5Y0
-tyyJOgv/QldhW0nv63DGILqj+SzIaCtrepkkaMcuvPd6SBoic0UaJHiKCQZYlBp6
-tRpGqY5oIbrqgryQrPyYKKNoaMC48qMh5cyBKbFR5akue55dReV0xZOv7Oera1xu
-dGqyg3DfbHTt4eEYgDRsx5Z3h6JlsHZrpzenktPilYxW3BVo/2CQ0786sgSq36hB
-DtE2jg3e/4s+ATqzPufOCtxdcjKKDch7QJH2xYaUiomT3uU5eYTX8onrNNlhRbZq
-+i0G+l3twt9qAh62NQfW1dbN3bKH+be1e2A3WtjmArwJyPWxHw4j+jio4aY9n9y3
-nI9KxQcJCeroVAuxy/BZAHgY/kkCCxq4eyE9HIIxwau0XlLVlrEVVMS4W7693FMt
-j+gzDk9xMzsOQmS/2jDShQC23sA6qh9ZgdO+GIiww51Xxc5tycoATM4vsnmgu5lH
-0wGq/l0frbT4363MEHKtWYvSA3yzIAuOIghb2vOqAHp6aG4UuDwqTy4kVEDkLyPa
-OkUXeTEM
-=CnSL
------END PGP SIGNATURE-----
-
---4RMpHH1P3mc+aen3--
