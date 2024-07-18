@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDB28C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF60C3DA63
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:42:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6698688786;
+	by phobos.denx.de (Postfix) with ESMTP id C648388A5F;
 	Thu, 18 Jul 2024 15:41:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JwhatDJr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CNYWrQoG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB6B88818B; Thu, 18 Jul 2024 15:41:36 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 95F8F886E2; Thu, 18 Jul 2024 15:41:37 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90C57886A0
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:41:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 804D988709
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:41:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-260fff38792so120689fac.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:41:34 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3c9cc681e4fso452228b6e.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:41:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721310093; x=1721914893; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721310094; x=1721914894; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZhS3b5C81Kk5FKqDlTAmpwbksW41b5csspvKD7cfRWc=;
- b=JwhatDJrA20pn2sTFHtGn6hQntHs2kvMkjd3wNVo5D60S3K8zlCNpeazxoosnuPmMB
- vGLazPDsXsiAlfHDiaD2vZW+7WI+eSx1N0972udFkHteyPDOy38Y7+ocV4p1dAdLA2jA
- 6EmcrFkGT3Qs4V8X/Yx3cxSKOXl7XwlH32at0=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=nsip7G4GFKJAHyvlKF76eV9EvQs6vDWTzrIrUchBiiU=;
+ b=CNYWrQoGSOyh8br95d9u60t7HvSP+xZYxBq4LIhLEw8HkTHv4pzv7PGltzcVx6a05g
+ qYQ7wA+rmgHSY3ws+n98d0EUraMx1ipK8/MwZeN1GrxMx28l8Y8tWy0HDYH5wdASHH7p
+ oj7/OfLXUVOSimbFWTb7l4U8L832Ceb7V7NdA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721310093; x=1721914893;
+ d=1e100.net; s=20230601; t=1721310094; x=1721914894;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZhS3b5C81Kk5FKqDlTAmpwbksW41b5csspvKD7cfRWc=;
- b=qSR/IhRQKJbSC4mLvhp/ZQs3mBKMf13cXa8Zf+OkdAicxRBZDH3FbLERARlRQ/ojYc
- Q7NYcCGE3bu78VZI70nc7mD1vNSm9lt3vshgVapgNxQyrqaOwfJX/g3XdUI9XiSa/7b9
- hg/3OPWMvLA2FYNY59bttbBPWgB8+GolwpdHqQNQ1dhmQylTn/PGb9U484SYW1tCg90c
- j6WEBI5TVaNDhW+Lq5C4+ZlVdgFhZABgN7FvGcC1uMWvE/MUNJsIQAfY/3Y4ZC5G991/
- 21YXGNk4WoLl6WB7YLWPA+/EGXkk8/SrWCVqx+NqOwEiEDG9NVRNtXYcJQYhz8ytGByJ
- n+kQ==
-X-Gm-Message-State: AOJu0Yy5DBQz/v5Wr/I+YN/jSScvA/CCb/hcucrxZsr9tB5Xjgpu45pE
- MMw+J3E0GdJJ3XbpYh3Wq63D1E6JE9x9wsFZYuyAD2w5rn3Ejhp/v48ONRED4cR7VDcP4aaP6+b
- auJQ=
-X-Google-Smtp-Source: AGHT+IGn5EeB4rwCpeb1cBKB594i9JU271ax3iF6quIkncQJQzdHBcUh4QBpjmOTB0ZzvoBt+TX5LQ==
-X-Received: by 2002:a05:6870:558d:b0:260:e096:414c with SMTP id
- 586e51a60fabf-260e096853emr3721215fac.49.1721310093249; 
- Thu, 18 Jul 2024 06:41:33 -0700 (PDT)
+ bh=nsip7G4GFKJAHyvlKF76eV9EvQs6vDWTzrIrUchBiiU=;
+ b=OKwliysuS6sFhKxArhgIfAPU/PBuw2tfqE9zJbWvSGxZTMSbtElYJ7G2/HwLfmshJf
+ ZOrNGWAPSvN/6nvkZBbaZHV+c/vf5pKa2Jjrcw7DlAV8DH2bAnmF8uR6yDSSST2msbNP
+ NYYi6q3Mdo+DRaUgym33F4BycjLubKVtVuI/S2bBK4ZPADOYwOMoyE2NJ9ydNj5mm6DM
+ 33HpLcBR0/0yQV8j95SKU4+53UgelmrtixvPyq9r4iCbKI7vyMaIrUOSsD6MsmHUobO6
+ dzKjBJ18J9B0S3JzBiyc19lzxDL1ZXyRE1sjIqs+HzM87zWvwKs2AycUX5yE1EmMWn+T
+ O//A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbItHK+Hc+XvFjVVnSmutr3CRd73h4x0R0e14RBacml4EYmeLad8Evk6EjJ7uQj37GR3I03rk97OBM3vUTeqtkpmlFmw==
+X-Gm-Message-State: AOJu0YxkJSRrGcwNyYUtW91h3/dhqS7YOt3IkxpD0TtkIi4A/LkxXdMS
+ ljwQcHegOSZPm59gi3LTJ6kT/r8BAGCFcqpI4BQ/VTstQ3ttYH5jMWy+vz/+6T8=
+X-Google-Smtp-Source: AGHT+IGNRnakBXZf1hA9NOp7DQPyVRQFlkD0iSj1A4/NOW1weV34hNuy6brk2QLJpb89onp8MBLbgw==
+X-Received: by 2002:a05:6870:3d8e:b0:24c:ae57:b4b9 with SMTP id
+ 586e51a60fabf-260d91920d6mr4234524fac.14.1721310094374; 
+ Thu, 18 Jul 2024 06:41:34 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-260ee947f82sm355303fac.50.2024.07.18.06.41.32
+ 586e51a60fabf-260ee947f82sm355303fac.50.2024.07.18.06.41.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 06:41:32 -0700 (PDT)
+ Thu, 18 Jul 2024 06:41:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-In-Reply-To: <20240703113756.1293218-1-vincent.stehle@arm.com>
-References: <20240627170629.2696427-1-vincent.stehle@arm.com>
- <20240703113756.1293218-1-vincent.stehle@arm.com>
-Subject: Re: [PATCH v2 0/2] Respin bootstd cros patch into a series of two
-Message-Id: <172131009240.1834634.13545537893706472606.b4-ty@konsulko.com>
-Date: Thu, 18 Jul 2024 07:41:32 -0600
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Christian Marangi <ansuelsmth@gmail.com>
+In-Reply-To: <20240706161303.9110-1-ansuelsmth@gmail.com>
+References: <20240706161303.9110-1-ansuelsmth@gmail.com>
+Subject: Re: [PATCH] timer: mtk: skip setting parent with dummy fixed-clock
+Message-Id: <172131009342.1834634.16950541414480829533.b4-ty@konsulko.com>
+Date: Thu, 18 Jul 2024 07:41:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,16 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Jul 2024 13:37:54 +0200, Vincent Stehlé wrote:
+On Sat, 06 Jul 2024 18:13:02 +0200, Christian Marangi wrote:
 
-> This is a respin of this patch [1] after discussion [2]. Thanks to
-> Simon and Heinrich for their reviews.
+> Skip setting parent with dummy fixed-clock. Upstream linux might declare
+> an additional clock for the mtk timer and that additional clock might
+> also be a fixed-clock defined in DT. Setting parent of a dummy fixed-clock
+> resulta in error hence mtk timer fails to probe.
 > 
-> To use the guidcmp() function, as suggested by Heinrich, we need to
-> make it available to bootmeth_cros.c and I think that the cleanest way
-> to do that is (arguably) to move the guid helper functions to efi.h
-> near the efi_guid_t definition; this is why the original patch has now
-> become a series of two patches.
+> Skip setting parent to permit correct probe of the mtk timer.
 > 
 > [...]
 
