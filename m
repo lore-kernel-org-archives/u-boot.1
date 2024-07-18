@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53D71C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77890C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 14:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7E7A88758;
-	Thu, 18 Jul 2024 15:54:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B68E882BE;
+	Thu, 18 Jul 2024 16:11:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iqlWUbAy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BJntEfth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9797088A76; Thu, 18 Jul 2024 15:54:28 +0200 (CEST)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id 4B938882FA; Thu, 18 Jul 2024 16:11:35 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A2728874C
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:54:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16E458827D
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 16:11:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e026a2238d8so885318276.0
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:54:26 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a05b4fa525so25535085a.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 07:11:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721310865; x=1721915665; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721311892; x=1721916692; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=29751J7wtABTY0ZbYzFs6TMGQ7iTt9LYqCSc65bdd5w=;
- b=iqlWUbAycf3X0bGpj/84GdUhc1fzl33wOB/pwYZA3a2g5e+vfDwuANCgWOTbiTnQjh
- R0W9rDZEPRYnYybxSg41AHUc7ViQsfR4RvzoWQKQxj5m6zJbDlnwxoj1IblzV6tUxC4B
- OZjK4sKLQTjm9IBBlFbHEkwsDVKiavMbv50H4ybUDPLdDSbeBmXkEQCGNJA2ObdV+qn0
- lOyxNj4pfHicP1VfByZ8imCjtrmXedbLKohJpSEhe8mYVl+zv3TcHOCHSMe9Nn5K2Mhb
- 5wpz2O1YeK/3KHsvg7YblwPl3GsZjPG3PUSD5fnmOSr7fbUSbX+PUYP/9Sb6l49ziqJJ
- +kVQ==
+ bh=5mNz5fwjQxA7hRjG/y2bSuDn47T4+Ayl8EytxxJFnmE=;
+ b=BJntEfthBOqAmvu3yBbxUrPqDaIdjEzuysosxxQE+/7mPORd8LDfzq2CzfrDz4Px/6
+ tqWe0UnVDQHWhXQUxJF013o6IAiuEg9NBvZRAULsApTVNSShbbG0qoSO3sbAMExICcuC
+ FbaVVA5UvYVpY+ezHXwv5NxqP+ewWqqJe8WIQq5JgUycDlT3QMzclzuArq12Hbg7WQnQ
+ 7HQbqpjUjP7RSc6n+Sm8atb/ZB1BveucENcSxvIQ5TxURaLubDO5Mod5iWxm99BdGFaO
+ nO2P+IXrDZHaaI4ubrOtF+behB/oGW46LJDf3U6iBnraiPWWI+6aXlMspmjwDZiIGsvT
+ fc2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721310865; x=1721915665;
+ d=1e100.net; s=20230601; t=1721311892; x=1721916692;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=29751J7wtABTY0ZbYzFs6TMGQ7iTt9LYqCSc65bdd5w=;
- b=wrq41VTUEeMdEGSnQcVjEKMyowHEv/lIhnkDx/9rCLtJx3T+c3QyoizN8HNtyIb6Bc
- RtyY0SabjC75oIU0aIWFk3H394XAUhlaROqtBbvLzN1y/1DinQ/qV0oIpf/qfJLGQbLh
- Ari3tYXS/L7dTgnECwz3Li/33mRtHKkvMtxrJfmybZu4dY+tEnKt/FoutZrriw3ebwPC
- gZuqxueXjW1GxYFwFZ2cjKOIDs4dNGEkLx6TmD2OOuBGKJmGjsyTxqEEAwWvAMoEGN+M
- 8ItNBghoNz8cHHPVyPPFYOB73ntLE/h28Hjtwl7MQ7TJyRVj4pQ1lUlSbojF2LA3Daxx
- c+Bg==
+ bh=5mNz5fwjQxA7hRjG/y2bSuDn47T4+Ayl8EytxxJFnmE=;
+ b=BfzJFNi8UANlD0QH2I896Ch5sL2LSb8aWI/l6PpqMYqXgrwE+34GSWozQqNQTB2qOU
+ IxYKnt/ucy9kdT42B8dgutngEbFP2QUrMTpzdjD7w8xlYnCCA54E9EXVGvMBYuEU7RKi
+ 1sgvnH7+GtA2dUskbwue3+oNo/EsfDtDE2eNqpGVBaz3k5qjzwjO2J51gc6hHqhwhoyw
+ WKB3XaP/W4XD/MVxSfB+aQ2GYDK5hn5GOzevSR6i2k594zh/Oeb6k0leEkA+rB810M7+
+ hjpYWJZ8N6VyhgNnJlbvsDyw/WUJB07kkkyBntipchIvXgxRDlipUz7wuuL5CsZTUGma
+ DHGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWr4zWu/kVwjCNuk2IFGcIXTYWY39jvwuDQ6AEJyYew1mY+dPm1OkfWy9ug02tiAHl54chgKMLSEOkXPnKc8opeMjJ0xg==
-X-Gm-Message-State: AOJu0YxYZlS9DTJfq1O7kDFiCaanFTZ3cGPwcyjFAe0ClMKp/p1saHrv
- MgIcSXsvYSb8OpNDk7V+6u+GAIihZg/ZdZVi3/i8WlRcB9I77Y1p
-X-Google-Smtp-Source: AGHT+IF2bdl/vdAjf6n+by0U8HjhYCcz2Q+RHk5DlfYYW45MkU6gd815+Cb5U7T/vcSB+a2P9382hQ==
-X-Received: by 2002:a05:6902:13c9:b0:e05:ff2a:aa49 with SMTP id
- 3f1490d57ef6-e05ff2abefdmr3071876276.30.1721310865142; 
- Thu, 18 Jul 2024 06:54:25 -0700 (PDT)
+ AJvYcCU3uVRXrxgxvLVGJEUHoqB3hvr4+P2qtV+/xCvsqh3jKB7yHC0i3yKdd39KaY64wmggC3CMtnBBejbk9s+8X8/2xA1f3A==
+X-Gm-Message-State: AOJu0Yzd2DbI9WMkgWY58tUjPtnGrHb5QGTUVnAWu5E/0Q3iPXh+D2dV
+ BtrH/QxW9CfNArr5OLx2jSV0bZ0VxeCu5TcfcIWUSmWYOO5hqvHUKkdXzQ==
+X-Google-Smtp-Source: AGHT+IHl2XLD5gXi6RRh7Vy6DTd56p0pczONX94yMNvfblr7Oc1U02S6hDdLmFfmf/D3DC1nHRXKag==
+X-Received: by 2002:a05:620a:1a22:b0:795:4d37:82a8 with SMTP id
+ af79cd13be357-7a193981b56mr137840185a.22.1721311891549; 
+ Thu, 18 Jul 2024 07:11:31 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b79c66d305sm8151476d6.140.2024.07.18.06.54.24
+ af79cd13be357-7a19396fe9asm27987385a.118.2024.07.18.07.11.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jul 2024 06:54:24 -0700 (PDT)
-Message-ID: <325e6cc7-8210-8e95-0267-10d84192a406@gmail.com>
-Date: Thu, 18 Jul 2024 09:54:23 -0400
+ Thu, 18 Jul 2024 07:11:31 -0700 (PDT)
+Message-ID: <cd57edbe-bf5a-0545-9cbb-f39babdbe776@gmail.com>
+Date: Thu, 18 Jul 2024 10:11:30 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH v2 15/21] spl: Plumb in the Universal Payload handoff
+Subject: Re: [PATCH v2 03/21] test: Move some SPL-loading test-code into
+ sandbox common
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Michal Simek <michal.simek@amd.com>,
- Lean Sheng Tan <sheng.tan@9elements.com>, Bin Meng <bmeng.cn@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>, Nikhil M Jain <n-jain1@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Troy Kisky <troykiskyboundary@gmail.com>
+ Lean Sheng Tan <sheng.tan@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 References: <20240713070055.2172883-1-sjg@chromium.org>
- <20240713070055.2172883-16-sjg@chromium.org>
+ <20240713070055.2172883-4-sjg@chromium.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240713070055.2172883-16-sjg@chromium.org>
+In-Reply-To: <20240713070055.2172883-4-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,152 +101,209 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/13/24 03:00, Simon Glass wrote:
-> Specify the FIT and include information about each loaded image, as
-> required by the UPL handoff.
-> 
-> Write the UPL handoff into the bloblist before jumping to the next phase.
-> 
-> Control this using a runtime flag to avoid conflicting with other
-> handoff mechanisms.
+> This code is useful for loading an image in sandbox_spl so move it into
+> a place where it can be called as needed.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
-> Changes in v2:
-> - Hang when something goes wrong, to avoid a broken boot
-> - Add a runtime flag to enable UPL
+> (no changes since v1)
 > 
->   common/spl/spl.c                  |  8 ++++++++
->   common/spl/spl_fit.c              | 22 ++++++++++++++++++++++
->   include/asm-generic/global_data.h |  4 ++++
->   3 files changed, 34 insertions(+)
+>   arch/sandbox/cpu/spl.c         | 67 ++++++++++++++++++++++++++++++++++
+>   arch/sandbox/include/asm/spl.h | 14 +++++++
+>   test/image/spl_load_os.c       | 53 +--------------------------
+>   3 files changed, 82 insertions(+), 52 deletions(-)
 > 
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index 7794ddccade..d6a364de6ee 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -810,6 +810,14 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->   			printf(SPL_TPL_PROMPT
->   			       "SPL hand-off write failed (err=%d)\n", ret);
->   	}
-> +	if (CONFIG_IS_ENABLED(UPL_OUT) && (gd->flags & GD_FLG_UPL)) {
-> +		ret = spl_write_upl_handoff(&spl_image);
-> +		if (ret) {
-> +			printf(SPL_TPL_PROMPT
-> +			       "UPL hand-off write failed (err=%d)\n", ret);
-> +			hang();
-> +		}
+> diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+> index 9ad9da686c6..caa8e0b3b01 100644
+> --- a/arch/sandbox/cpu/spl.c
+> +++ b/arch/sandbox/cpu/spl.c
+> @@ -6,6 +6,7 @@
+>   #include <dm.h>
+>   #include <hang.h>
+>   #include <handoff.h>
+> +#include <image.h>
+>   #include <init.h>
+>   #include <log.h>
+>   #include <os.h>
+> @@ -179,3 +180,69 @@ int handoff_arch_save(struct spl_handoff *ho)
+>   
+>   	return 0;
+>   }
+> +
+> +/* Context used to hold file descriptor */
+> +struct load_ctx {
+> +	int fd;
+> +};
+> +
+> +static ulong read_fit_image(struct spl_load_info *load, ulong offset,
+> +			    ulong size, void *buf)
+> +{
+> +	struct load_ctx *load_ctx = load->priv;
+> +	off_t ret;
+> +	ssize_t res;
+> +
+> +	ret = os_lseek(load_ctx->fd, offset, OS_SEEK_SET);
+> +	if (ret < 0) {
+> +		printf("Failed to seek to %zx, got %zx (errno=%d)\n", offset,
+> +		       ret, errno);
+> +		return log_msg_ret("lse", ret);
 > +	}
->   	if (CONFIG_IS_ENABLED(BLOBLIST)) {
->   		ret = bloblist_finish();
->   		if (ret)
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> index 2a097f4464c..b288f675ae3 100644
-> --- a/common/spl/spl_fit.c
-> +++ b/common/spl/spl_fit.c
-> @@ -12,6 +12,7 @@
->   #include <memalign.h>
->   #include <mapmem.h>
->   #include <spl.h>
-> +#include <upl.h>
->   #include <sysinfo.h>
->   #include <asm/global_data.h>
->   #include <asm/io.h>
-> @@ -645,6 +646,8 @@ static int spl_fit_load_fpga(struct spl_fit_info *ctx,
->   		printf("%s: Cannot load the FPGA: %i\n", __func__, ret);
->   		return ret;
->   	}
-> +	upl_add_image(node, fpga_image.load_addr, fpga_image.size,
-> +		      fdt_getprop(ctx->fit, node, FIT_DESC_PROP, NULL));
-
-Does load_addr even make sense for FPGAs?
-
-And I noticed that you always call this after load_simple_fit/fit_image_load.
-Could we call upl_add_image in those functions instead?
-
->   	return spl_fit_upload_fpga(ctx, node, &fpga_image);
->   }
-> @@ -768,6 +771,9 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
->   	if (ret)
->   		return ret;
->   
-> +	upl_add_image(node, spl_image->load_addr, spl_image->size,
-> +		      fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
 > +
->   	/*
->   	 * For backward compatibility, we treat the first node that is
->   	 * as a U-Boot image, if no OS-type has been declared.
-> @@ -811,6 +817,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
->   			       __func__, index, ret);
->   			return ret;
->   		}
-> +		upl_add_image(node, image_info.load_addr, image_info.size,
-> +			      fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
->   
->   		if (spl_fit_image_is_fpga(ctx.fit, node))
->   			spl_fit_upload_fpga(&ctx, node, &image_info);
-> @@ -847,6 +855,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
->   		spl_image->entry_point = spl_image->load_addr;
->   
->   	spl_image->flags |= SPL_FIT_FOUND;
-> +	upl_set_fit_info(map_to_sysmem(ctx.fit), ctx.conf_node,
-> +			 spl_image->entry_point);
+> +	res = os_read(load_ctx->fd, buf, size);
+> +	if (res < 0) {
+> +		printf("Failed to read %lx bytes, got %ld (errno=%d)\n",
+> +		       size, res, errno);
+> +		return log_msg_ret("osr", res);
+> +	}
+> +
+> +	return size;
+> +}
+> +
+> +int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image)
+> +{
+> +	struct legacy_img_hdr *header;
+> +	struct load_ctx load_ctx;
+> +	struct spl_load_info load;
+> +	int ret;
+> +	int fd;
+> +
+> +	memset(&load, '\0', sizeof(load));
+> +	spl_set_bl_len(&load, 512);
+> +	load.read = read_fit_image;
+> +
+> +	ret = sandbox_find_next_phase(fname, maxlen, true);
+> +	if (ret) {
+> +		printf("%s not found, error %d\n", fname, ret);
+> +		return log_msg_ret("nph", ret);
+> +	}
+> +
+> +	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+> +
+> +	log_debug("reading from %s\n", fname);
+> +	fd = os_open(fname, OS_O_RDONLY);
+> +	if (fd < 0)
+> +		return log_msg_ret("ope", -ENOENT);
 
-I think this should be virt_to_phys, since we aren't really mapping it.
+should return errno
 
+and I think longer messages won't hurt (this is sandbox after all).
+
+> +	if (os_read(fd, header, 512) != 512)
+
+Actually, this should probably be sizeof(*header) and not 512
+
+> +		return log_msg_ret("rea", -EIO);
+
+ditto errno/message
+
+> +	load_ctx.fd = fd;
+> +
+> +	load.priv = &load_ctx;
+> +
+> +	ret = spl_load_simple_fit(image, &load, 0, header);
+> +	if (ret)
+> +		return log_msg_ret("slf", ret);
+> +
+> +	return 0;
+> +}
+> diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
+> index 4fab24cd156..d50d9ad6b48 100644
+> --- a/arch/sandbox/include/asm/spl.h
+> +++ b/arch/sandbox/include/asm/spl.h
+> @@ -6,6 +6,8 @@
+>   #ifndef __asm_spl_h
+>   #define __asm_spl_h
+>   
+> +struct spl_image_info;
+> +
+>   enum {
+>   	BOOT_DEVICE_MMC1,
+>   	BOOT_DEVICE_MMC2,
+> @@ -31,4 +33,16 @@ enum {
+>    */
+>   int sandbox_find_next_phase(char *fname, int maxlen, bool use_img);
+>   
+> +/**
+> + * sandbox_spl_load_fit() - Load the next phase from a FIT
+> + *
+> + * Loads a FIT containing the next phase and sets it up for booting
+> + *
+> + * @fname: Returns filename loaded
+> + * @maxlen: Maximum length for @fname including \0
+> + * @image: Place to put SPL-image information
+> + * Return: 0 if OK, -ve on error
+> + */
+> +int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image);
+> +
+>   #endif
+> diff --git a/test/image/spl_load_os.c b/test/image/spl_load_os.c
+> index 7d5fb9b07e0..56105a59236 100644
+> --- a/test/image/spl_load_os.c
+> +++ b/test/image/spl_load_os.c
+> @@ -10,63 +10,12 @@
+>   #include <test/spl.h>
+>   #include <test/ut.h>
+>   
+> -/* Context used for this test */
+> -struct text_ctx {
+> -	int fd;
+> -};
+> -
+> -static ulong read_fit_image(struct spl_load_info *load, ulong offset,
+> -			    ulong size, void *buf)
+> -{
+> -	struct text_ctx *text_ctx = load->priv;
+> -	off_t ret;
+> -	ssize_t res;
+> -
+> -	ret = os_lseek(text_ctx->fd, offset, OS_SEEK_SET);
+> -	if (ret != offset) {
+> -		printf("Failed to seek to %zx, got %zx (errno=%d)\n", offset,
+> -		       ret, errno);
+> -		return 0;
+> -	}
+> -
+> -	res = os_read(text_ctx->fd, buf, size);
+> -	if (res == -1) {
+> -		printf("Failed to read %lx bytes, got %ld (errno=%d)\n",
+> -		       size, res, errno);
+> -		return 0;
+> -	}
+> -
+> -	return size;
+> -}
+> -
+>   static int spl_test_load(struct unit_test_state *uts)
+>   {
+>   	struct spl_image_info image;
+> -	struct legacy_img_hdr *header;
+> -	struct text_ctx text_ctx;
+> -	struct spl_load_info load;
+>   	char fname[256];
+> -	int ret;
+> -	int fd;
+> -
+> -	memset(&load, '\0', sizeof(load));
+> -	spl_set_bl_len(&load, 512);
+> -	load.read = read_fit_image;
+> -
+> -	ret = sandbox_find_next_phase(fname, sizeof(fname), true);
+> -	if (ret)
+> -		ut_assertf(0, "%s not found, error %d\n", fname, ret);
+> -
+> -	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+> -
+> -	fd = os_open(fname, OS_O_RDONLY);
+> -	ut_assert(fd >= 0);
+> -	ut_asserteq(512, os_read(fd, header, 512));
+> -	text_ctx.fd = fd;
+> -
+> -	load.priv = &text_ctx;
+>   
+> -	ut_assertok(spl_load_simple_fit(&image, &load, 0, header));
+> +	ut_assertok(sandbox_spl_load_fit(fname, sizeof(fname), &image));
 >   
 >   	return 0;
 >   }
-> @@ -891,6 +901,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
->   	if (ret < 0)
->   		return ret;
->   
-> +	upl_add_image(ret, fw_data, fw_len,
-> +		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
-> +
->   	spl_image->size = fw_len;
->   	spl_image->load_addr = fw_data;
->   	if (fit_image_get_entry(header, ret, &spl_image->entry_point))
-> @@ -911,6 +924,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
->   	if (ret >= 0) {
->   		spl_image->fdt_addr = (void *)dt_data;
->   
-> +		upl_add_image(ret, dt_data, dt_len,
-> +		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
-> +
->   		if (spl_image->os == IH_OS_U_BOOT) {
->   			/* HACK: U-Boot expects FDT at a specific address */
->   			fdt_hack = spl_image->load_addr + spl_image->size;
-> @@ -940,7 +956,13 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
->   				     &img_data, &img_len);
->   		if (ret < 0)
->   			return ret;
-> +		upl_add_image(ret, img_data, img_len,
-> +		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
->   	}
->   
-> +	spl_image->flags |= SPL_FIT_FOUND;
-
-This change is unrelated and should be moved into a separate commit.
-
-> +	upl_set_fit_info(map_to_sysmem(header), conf_noffset,
-> +			 spl_image->entry_point);
-> +
->   	return 0;
->   }
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> index 98d822530d8..37643a4bbb9 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -716,6 +716,10 @@ enum gd_flags {
->   	 * @GD_FLG_HUSH_MODERN_PARSER: Use hush 2021 parser.
->   	 */
->   	GD_FLG_HUSH_MODERN_PARSER = 0x2000000,
-> +	/**
-> +	 * @GD_FLG_UPL: Read/write a Universal Payload (UPL) handoff
-> +	 */
-> +	GD_FLG_UPL = 0x4000000,
->   };
->   
->   #endif /* __ASSEMBLY__ */
 
