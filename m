@@ -4,53 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310BEC3DA60
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 03:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7759BC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 04:33:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F79B88481;
-	Thu, 18 Jul 2024 05:52:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id BABDF8870E;
+	Thu, 18 Jul 2024 06:33:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="cXe0sP7J";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gcf4OAC4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE7C884CA; Thu, 18 Jul 2024 05:52:10 +0200 (CEST)
-Received: from mail-m1282.netease.com (mail-m1282.netease.com [103.209.128.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 753E388AE8; Thu, 18 Jul 2024 06:33:56 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8672C88481
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 05:52:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4E96B882F0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:33:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=cXe0sP7JyF8szggv3O10x0OeC/Krr5S6WXjSKSy8Nvy9Vp61SYOuu731WKpCqGEmg6uOaK2RFCsx7KyS0yRPGNCgpB487CBXX71w/rycHd279Bm48WS4ma0dSyNpKWuLD358q+54oC3JethMz3BmyBnFwuvIX2CGJfjCGBwv9aI=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=Cp+2WIGYXGOq/zD368ne15Fvgue10DmnlG/3jm0ywR8=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id BAFB990027C;
- Thu, 18 Jul 2024 11:52:00 +0800 (CST)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20240614
-Date: Thu, 18 Jul 2024 11:52:00 +0800
-Message-Id: <20240718035200.394004-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3d94293f12fso240654b6e.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 21:33:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721277232; x=1721882032; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fRMjEsvqN9W4Vg1EMV3ABerDW+2fG1BxbTV+vtJOuvA=;
+ b=Gcf4OAC4vbBLSz1Ffev+Agd3g4BM3KY0f31znWazxuEecVQeQXD8h8A5i/Iafg/m3W
+ G2dewEtN+xTsMK0Q2vHxzpNi1aZpFag5ZM+1slwaI488ngsVkxmMe+1I0C6PAYEA5Sfl
+ ABvGBXxD4kHoEablwT6En4M0oxrXpigF9DIyGqSZknN0p41XLOK1yWJiD64sJBo5y8Xu
+ Cl89Vohd8fCy2/Vok3LiuskdtpNrym3xYmTbDxCsxz6bQCzD5DB6+dY59EhN+WVIHV4S
+ dpMBP0LTVNcMMHqU5y0zXO9T/M2gEapQJBoLp/OwsGuA7Y+pck8EMPYO51IPAvJw2pSL
+ THjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721277232; x=1721882032;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fRMjEsvqN9W4Vg1EMV3ABerDW+2fG1BxbTV+vtJOuvA=;
+ b=rXYcpLqyUd4NeF3rb3m0pjBL13daAzPbcfAnVOhDe1KcbF9thdERhfQe6Tx6oPJ+8h
+ HhdkrbAVhG/DTveWgx8E5srT7UBatScoaI6GNLPc8Fy3/cAvw+tVPvjW5yLnzrgt1OnI
+ Ul3Sc2IVW6Ydp3pqNEC6FdwUsfxb82oF9qbgVC2gdbhZ+fseSeJKdB2/tJQ8qAeJ5px3
+ 1BIMmA4/l3z1Z2HXfovZuxO7n9LwPDtEpDuLu+mmmiDtIX6yBPHZ5HokbdrHknS1Rocu
+ 2+AB7nWYcBvv8uVCaOAl+AzZSE5+2iANW+FeqVWPKvNEoW35ceKoU8B1KDpFVNc5vTfh
+ iJwQ==
+X-Gm-Message-State: AOJu0YyccgL3Wj5xs63DqlZzV6xzPCYkAzGePYPNj03EPgQdNX/UtooB
+ Z5TT+eUab2Eja2594pIr+JO0bURjxRrGTcUl0JL1QKaMy1cQLYJDKZQygVjBKVk=
+X-Google-Smtp-Source: AGHT+IFggWKokAvpLfTXc/F2PJI/wCkvobn0/JNolEiinKjGmrz7b7bl99PGnrvifwmIK1yZVo88jA==
+X-Received: by 2002:a05:6808:2128:b0:3d9:244b:b9d3 with SMTP id
+ 5614622812f47-3dad7721c93mr1712655b6e.23.1721277232220; 
+ Wed, 17 Jul 2024 21:33:52 -0700 (PDT)
+Received: from localhost.localdomain ([117.135.90.188])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70b7ecd309csm8965354b3a.216.2024.07.17.21.33.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jul 2024 21:33:51 -0700 (PDT)
+From: Kongyang Liu <seashell11234455@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng@tinylab.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Padmarao Begari <padmarao.begari@microchip.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>
+Subject: [PATCH v2 0/2] riscv: spacemit: bananapi_f3: add support for Banana
+ Pi F3 board
+Date: Thu, 18 Jul 2024 12:33:21 +0800
+Message-ID: <20240718043329.1500-1-seashell11234455@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUoeTVZCT0lJGk5LS0NCHxhWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90c3f7e25c03a9kunmbafb990027c
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBQ6GBw*VjI1DBcITRFWMzEB
- KBVPFDdVSlVKTElKSUxPTElKSEpLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT0pMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,50 +101,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Banana Pi F3 board is a industrial grade RISC-V development board, it
+design with SpacemiT K1 8 core RISC-V chip, CPU integrates 2.0 TOPs AI
+computing power. 4G DDR and 16G eMMC onboard.2x GbE Ethernet prot, 4x USB
+3.0 and PCIe for M.2 interface, support HDMI and Dual MIPI-CSI Camera.
 
-Please pull the fixex for rockchip platform:
-- pmic fix for rk8xx;
-- pinctrl fix for rk3188/rv1126/rk3588;
-- mkimage fix for rockcihp "-l" option;
+This patch introduces fundamental support for the Banana Pi F3 board,
+encompassing UART, CPU, and PLIC support. This ensures that U-Boot can
+operate in serial console mode.
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/21111
+Changes in v2:
+- Change license to GPL-2.0-or-later
+- Add memory node for dts
+- Add ft_board_setup function for kernel memory init
+- Use default prompt
 
-Thanks,
-- Kever
+Kongyang Liu (2):
+  riscv: spacemit: bananapi_f3: initial support added
+  doc: spacemit: bananapi_f3: document Banana Pi F3 board
 
-The following changes since commit ca6a992e09441d6cca73439c63c3735f86b36ea4:
+ arch/riscv/Kconfig                     |   5 +
+ arch/riscv/cpu/k1/Kconfig              |  18 ++
+ arch/riscv/cpu/k1/Makefile             |   6 +
+ arch/riscv/cpu/k1/cpu.c                |   9 +
+ arch/riscv/cpu/k1/dram.c               |  54 ++++
+ arch/riscv/dts/Makefile                |   1 +
+ arch/riscv/dts/k1-bananapi-f3.dts      |  25 ++
+ arch/riscv/dts/k1.dtsi                 | 375 +++++++++++++++++++++++++
+ board/spacemit/bananapi_f3/Kconfig     |  25 ++
+ board/spacemit/bananapi_f3/MAINTAINERS |   6 +
+ board/spacemit/bananapi_f3/Makefile    |   5 +
+ board/spacemit/bananapi_f3/board.c     |   9 +
+ configs/bananapi_f3_defconfig          |  20 ++
+ doc/board/index.rst                    |   1 +
+ doc/board/spacemit/bananapi_f3.rst     |  78 +++++
+ doc/board/spacemit/index.rst           |   8 +
+ include/configs/bananapi_f3.h          |  15 +
+ 17 files changed, 660 insertions(+)
+ create mode 100644 arch/riscv/cpu/k1/Kconfig
+ create mode 100644 arch/riscv/cpu/k1/Makefile
+ create mode 100644 arch/riscv/cpu/k1/cpu.c
+ create mode 100644 arch/riscv/cpu/k1/dram.c
+ create mode 100644 arch/riscv/dts/k1-bananapi-f3.dts
+ create mode 100644 arch/riscv/dts/k1.dtsi
+ create mode 100644 board/spacemit/bananapi_f3/Kconfig
+ create mode 100644 board/spacemit/bananapi_f3/MAINTAINERS
+ create mode 100644 board/spacemit/bananapi_f3/Makefile
+ create mode 100644 board/spacemit/bananapi_f3/board.c
+ create mode 100644 configs/bananapi_f3_defconfig
+ create mode 100644 doc/board/spacemit/bananapi_f3.rst
+ create mode 100644 doc/board/spacemit/index.rst
+ create mode 100644 include/configs/bananapi_f3.h
 
-  cmd: sound: fix help text (2024-06-13 09:31:56 -0600)
+-- 
+2.41.0
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240614
-
-for you to fetch changes up to 3f9a19befe9277db2a337552912c6ddbcc0c8b10:
-
-  rockchip: mkimage: fix mkimage -l for header v1 (2024-06-14 17:07:59 +0800)
-
-----------------------------------------------------------------
-Chris Morgan (2):
-      Revert "board: rockchip: Add early ADC button detect for RGxx3"
-      board: rockchip: rgxx3: Use sdmmc0 as first device
-
-Jonas Karlman (3):
-      pinctrl: rockchip: rk3188: Fix support for IOMUX_GPIO_ONLY flag
-      pinctrl: rockchip: rv1126: Fix support for IOMUX_L_SOURCE_PMU flag
-      pinctrl: rockchip: rk3588: Fix support for rockchip_get_mux()
-
-Quentin Schulz (4):
-      regulator: rk8xx: fix incorrect device used for _ldo_[sg]et_suspend_value
-      regulator: rk8xx: pass pmic udevice instead of regulator to all internal functions
-      regulator: rk8xx: clarify operator precedence
-      rockchip: mkimage: fix mkimage -l for header v1
-
- arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi   |  2 +-
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c       | 64 ------------------------
- drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 40 ++++++++++++---
- drivers/power/regulator/rk8xx.c                  | 54 ++++++++++----------
- tools/rkcommon.c                                 |  2 +-
- 5 files changed, 63 insertions(+), 99 deletions(-)
