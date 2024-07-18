@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D3BC3DA63
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8AF9C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:38:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEF9288B40;
-	Thu, 18 Jul 2024 19:36:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B56688B16;
+	Thu, 18 Jul 2024 19:36:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kv0Ke4Qk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nZw9Tjk8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88B9688B83; Thu, 18 Jul 2024 19:36:52 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 0B9BB88B25; Thu, 18 Jul 2024 19:36:55 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44EF288B3C
+ by phobos.denx.de (Postfix) with ESMTPS id E6BCC88B0D
  for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4266ea6a488so6002335e9.1
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4266f344091so5045775e9.0
  for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721324204; x=1721929004; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721324205; x=1721929005; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fVdUB5kDIZISS9Cgbu0NWCL+1o75Oe1Hn72y4DoziBw=;
- b=Kv0Ke4Qk61mo96oWPPJrF7l2WpI2pADGyemx0R2UWmkuCSCxgQKa5CytY7QVwApulS
- 8zFhl+bcPA1RhLQxNhMTMj0DBAr2N+hMqvLKbWQxePhxzWWwjjn3SSQc3PgyIpdexrz0
- jl0zau81m5acGXS0qvCudGyXLUGCZ0NFWELVw=
+ bh=QBPkwFkF1dHjMzr/6xPgULo3aQXuISwUaqKYYxG9cb4=;
+ b=nZw9Tjk8vXKz+WaWkSvPQq85+1xmemPhToZ0ZSe0oj2v4q4jt4fM+c5lapHH5vTbwo
+ tvsfC66GmoT/6EeXvUI1S0JmpLuOeCU6lb/rjxRCQx0tz0PSFycktwW2j4O7kVwfJZR/
+ pFINKv93v+LDTKHoiEwBRVuE68cgUg9QnepbA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721324204; x=1721929004;
+ d=1e100.net; s=20230601; t=1721324205; x=1721929005;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fVdUB5kDIZISS9Cgbu0NWCL+1o75Oe1Hn72y4DoziBw=;
- b=fa/Qx9+uZhdSV3aXnM96UDniMAGuZLitZ3+ozdWLjtA5Ls0RCU2Wrrgap62N1ckBNK
- Xrml50t1W4kagvQDS/8KHb8pyH1lkH7VlNqKUvXp0ZIHUZxzrUVg5uO6sIg1kX3LF+SM
- BC6xtfrw26RH1Fo16XunPCHoHqxtR1/riOQ4wMbm4comGiJFjuWb/8Yqn52hvDBQkqOk
- CuSdnJ4/ZOeyvB212O08WfR1VdLfPWfhz1FEQtQTQxTpQbHsNavShKMqDMOB8LZnjryp
- YkU8njDcN6lm9TSbyTUYh7xL2OO5PY1K/5RD0egozFL97RpPXhR3drZRh7HKqKR0GdAW
- OUWw==
-X-Gm-Message-State: AOJu0YySd+cYVbe3xHF7pe8FDIvWcy47ojEuZy9HgHfv0XX+R08ZyCel
- UUkEHgfXH8Jy1Q8dMCHJ8Ln8O5uiP8y/vtGwAV5W5JkWCbysly1DNTsMuU4bQ7Aci8NhRR2Ckx0
+ bh=QBPkwFkF1dHjMzr/6xPgULo3aQXuISwUaqKYYxG9cb4=;
+ b=Ma65kMVF18Q1AQ3a8lCgTz8D3ivYl5PaD+fWjpSHEPxNMdm90NA/lCh7EEOoaSAiY4
+ NI8vV3tlJVYKkxMJmF9zUdzx91DUCE67VOzVEs6Hi2TWFRlI5KoW8ckSdINZR9kXAdqm
+ D8k6z5JctYQ0wsQsUDmvqoFkJoGEU+3u0sKFh7Ydtqal6qsgzpL/VgzOGBZzNpDOfvNn
+ vx7QOK5Qm72rcSbFKHCfv2KtXpcl/TT19jzvygnx3RGEQNEs/8tkZ4tD2yOphAoCTGgy
+ Mgvg5MdKjuJaK64eJFuXfjbwhso1zRlH+lQzhx7/knKSEu3D10h+yurFOh4J/giq3+tC
+ bu9Q==
+X-Gm-Message-State: AOJu0YzJqzIuD0igRRFH9v0vHLyPPfXHriAtEazlcv2BfuAYsvint75j
+ DAtztaxLzk7GIQym9cCKn14qmqgmuvVllgTldt/zkP/rlOjzM9ExEX0Fj1diyzLH5HCepgaGUbI
  =
-X-Google-Smtp-Source: AGHT+IHoW00ACA59oNs0UV55A8A5C3hAnnWbh4Y8io8Ww20De2yqrafSOnbOmyPQq3yL/GpKsH/z8g==
-X-Received: by 2002:a05:600c:3595:b0:426:5c81:2538 with SMTP id
- 5b1f17b1804b1-427c2cb8a05mr43293365e9.14.1721324204642; 
- Thu, 18 Jul 2024 10:36:44 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGxGd4Gorzvc68C2iWfMPHGx3rm6pRS803eym4LBS/Cp0DABLtnFan7x6HiBho+i7e6sOOZiQ==
+X-Received: by 2002:a05:600c:5801:b0:426:59ec:179d with SMTP id
+ 5b1f17b1804b1-427c2d00125mr37948455e9.38.1721324205296; 
+ Thu, 18 Jul 2024 10:36:45 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.44
@@ -65,9 +65,9 @@ From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 12/20] i2c: mxc: pg_wcom: Drop legacy I2c
-Date: Thu, 18 Jul 2024 18:36:03 +0100
-Message-Id: <20240718173611.4014274-13-sjg@chromium.org>
+Subject: [PATCH 13/20] i2c: Drop reference to SYS_I2C_INIT_BOARD
+Date: Thu, 18 Jul 2024 18:36:04 +0100
+Message-Id: <20240718173611.4014274-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
 References: <20240718173611.4014274-1-sjg@chromium.org>
@@ -89,36 +89,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop use of this feature, but keep the board building. This will allow
-removal of very old common I2C code.
+This is not now used by any boards, so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/ddr/fsl/main.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ doc/I2C_Edge_Conditions | 10 ++++------
+ drivers/i2c/soft_i2c.c  | 11 -----------
+ 2 files changed, 4 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/ddr/fsl/main.c b/drivers/ddr/fsl/main.c
-index 31091bb4495..6474e0d64c7 100644
---- a/drivers/ddr/fsl/main.c
-+++ b/drivers/ddr/fsl/main.c
-@@ -111,7 +111,7 @@ static int ddr_i2c_read(DEV_TYPE *dev, unsigned int addr,
- #if CONFIG_IS_ENABLED(DM_I2C)
- 	ret = dm_i2c_read(dev, 0, buf, len);
- #else
--	ret = i2c_read(dev->chip, addr, alen, buf, len);
-+	ret = -ENOSYS;
- #endif
+diff --git a/doc/I2C_Edge_Conditions b/doc/I2C_Edge_Conditions
+index f4a99687011..9ccb21c5092 100644
+--- a/doc/I2C_Edge_Conditions
++++ b/doc/I2C_Edge_Conditions
+@@ -31,12 +31,10 @@ Notes
+ !!!THIS IS AN UNDOCUMENTED I2C BUS BUG, NOT A AMCC 4xx BUG!!!
  
- 	return ret;
-@@ -162,7 +162,6 @@ static void __get_spd(generic_spd_eeprom_t *spd, u8 i2c_address)
- 	};
- 	dev = &ldev;
+ This reset edge condition could possibly be present in every I2C
+-controller and device available. For boards where a I2C bus reset
+-function can be implemented a i2c_init_board() function should be
+-provided and enabled by #define'ing CONFIG_SYS_I2C_INIT_BOARD in your
+-board's config file. Note that this is NOT necessary when using the
+-bit-banging I2C driver (common/soft_i2c.c) as this already includes
+-the I2C bus reset sequence.
++controller and device available.
++
++Note that this problem does not happen when using the bit-banging I2C driver
++(common/soft_i2c.c) as this already includes the I2C bus reset sequence.
  
--	i2c_set_bus_num(CONFIG_SYS_SPD_BUS_NUM);
- #endif
  
- #ifdef CONFIG_SYS_FSL_DDR4
+ Many thanks to Bill Hunter for finding this serious BUG.
+diff --git a/drivers/i2c/soft_i2c.c b/drivers/i2c/soft_i2c.c
+index 1f2afc65e8b..6b2bff03f13 100644
+--- a/drivers/i2c/soft_i2c.c
++++ b/drivers/i2c/soft_i2c.c
+@@ -108,16 +108,13 @@ DECLARE_GLOBAL_DATA_PTR;
+ /*-----------------------------------------------------------------------
+  * Local functions
+  */
+-#if !defined(CONFIG_SYS_I2C_INIT_BOARD)
+ static void  send_reset	(void);
+-#endif
+ static void  send_start	(void);
+ static void  send_stop	(void);
+ static void  send_ack	(int);
+ static int   write_byte	(uchar byte);
+ static uchar read_byte	(int);
+ 
+-#if !defined(CONFIG_SYS_I2C_INIT_BOARD)
+ /*-----------------------------------------------------------------------
+  * Send a reset sequence consisting of 9 clocks with the data signal high
+  * to clock any confused device back into an idle state.  Also send a
+@@ -145,7 +142,6 @@ static void send_reset(void)
+ 	send_stop();
+ 	I2C_TRISTATE;
+ }
+-#endif
+ 
+ /*-----------------------------------------------------------------------
+  * START: High -> Low on SDA while SCL is High
+@@ -278,12 +274,6 @@ static uchar read_byte(int ack)
+  */
+ static void soft_i2c_init(struct i2c_adapter *adap, int speed, int slaveaddr)
+ {
+-#if defined(CONFIG_SYS_I2C_INIT_BOARD)
+-	/* call board specific i2c bus reset routine before accessing the   */
+-	/* environment, which might be in a chip on that bus. For details   */
+-	/* about this problem see doc/I2C_Edge_Conditions.                  */
+-	i2c_init_board();
+-#else
+ 	/*
+ 	 * WARNING: Do NOT save speed in a static variable: if the
+ 	 * I2C routines are called before RAM is initialized (to read
+@@ -291,7 +281,6 @@ static void soft_i2c_init(struct i2c_adapter *adap, int speed, int slaveaddr)
+ 	 * system will crash.
+ 	 */
+ 	send_reset ();
+-#endif
+ }
+ 
+ /*-----------------------------------------------------------------------
 -- 
 2.34.1
 
