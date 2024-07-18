@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83ABFC3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:40:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0D6C3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 19:47:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 774BC88B83;
-	Thu, 18 Jul 2024 19:37:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 719E1882BE;
+	Thu, 18 Jul 2024 21:47:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VjezCYNV";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Oo3YCwIQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02FC488B4C; Thu, 18 Jul 2024 19:37:04 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 411CB88AD4; Thu, 18 Jul 2024 21:47:44 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A69688B3C
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 308E087873
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 21:47:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2ebe40673e8so15570511fa.3
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5a2a90243c9so271924a12.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 12:47:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721324211; x=1721929011; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=amarulasolutions.com; s=google; t=1721332061; x=1721936861;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wUUm/STYO5VBjXLu0pO4WLA+xPwtQwEfQiZ17q2qcgI=;
- b=VjezCYNVV/YkDonHP23AUnDm/AJiK+9zocF0TyaKUuYFt5XEIcPXqt4VER+Qg2oRgD
- z4v7d6RKXm/Nqq8V7wEhKIwn5GHt1fDPSIELgbFoTEPxpNNxNxjfPL8aQoVNxdUyxF35
- czOjIfPrxWudvutjrFNv54NBf1YiwRnJXlOa4=
+ bh=xsERpho8TOr/sHpD54DCtNz79AzwpQpjEPL3CL+xyrI=;
+ b=Oo3YCwIQlgfbwvB2OMBcH4yUkqcQF7M3cJjs7swkF3wEww6PhTGI1oVQ7P5JcKixd5
+ UviG7ddN/lXbU6RvHcCD+p6LU8u/ROoEIhUOa/u9Ds1gwuCJ6wMFdBiYcCbJRhHjQsl3
+ PTmcixtMNsMfQtm7Zdeo/EnCdHPK3dURtZfTE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721324211; x=1721929011;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721332061; x=1721936861;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wUUm/STYO5VBjXLu0pO4WLA+xPwtQwEfQiZ17q2qcgI=;
- b=jRerZXzxB4HJbHGaJftfIwCgjdpaEoveyLcJb38LCe9qqyceXLV2eaqvsoVx7zwwyL
- lEqsftRxOBMkyamocaon+tkiBQnEwstrgWUW+gbSnRo0eRRSv5lBdJQWunAJ6gg75F1b
- V7b5zkMMNJPm9FmdKIF0ReO1M/1LjwOdtmu3KUTV2T8fQqXwo3ZQftBY1bapuaULfGy/
- wwjcq2xC7QfdmIwUx/4x2+Tz9KZfFMwlVtlopZD4CRFiOQupKsaH38Zofnrv8PyON1rB
- eoqhS2RqQceDyDTnPBZ3bgULLpOBS8/oMJSZ0zB5IqySLl3f4kCGxwWJNa/F9WL0jD2x
- +3bQ==
-X-Gm-Message-State: AOJu0YyvvrJXpz+caXVJRnnUfYjHTwClSq9l9p5vso0/zcJ8pE2eyxGv
- b5lgxxOWeOc2mN1Ck7Rxr/Y+aV+pmyzdDeulZRitzc3KdR18LyNrvwI5uOg/H20viqebafvfLv4
- =
-X-Google-Smtp-Source: AGHT+IGaonxc4D9b9eLrTkz/ywDP/xpVeNZc5yWBpeYxe8HHqsSir/jIabKuWTHpeympmxR2LcCVDQ==
-X-Received: by 2002:a2e:8198:0:b0:2ec:541b:4b4e with SMTP id
- 38308e7fff4ca-2ef05d2f545mr21287401fa.32.1721324211570; 
- Thu, 18 Jul 2024 10:36:51 -0700 (PDT)
-Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 10:36:51 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Philip Richard Oberfichtner <pro@denx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 20/20] i2c: Remove CFG_SYS_I2C_DIRECT_BUS
-Date: Thu, 18 Jul 2024 18:36:11 +0100
-Message-Id: <20240718173611.4014274-21-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
-References: <20240718173611.4014274-1-sjg@chromium.org>
+ bh=xsERpho8TOr/sHpD54DCtNz79AzwpQpjEPL3CL+xyrI=;
+ b=U6r5lH+++TiCKj4sEj3o3zpPxbfwmB56tx0heFWvLYrGMu4dVMPKsJ+kmSbCKqPT28
+ jFE/cQPbzIPMHxct/2Fmv39EfKIyJmcLkuz5km9HRsQ0qzUBR8WgZ1oJMxqrAIoJ51sR
+ JFTGig6/USu8+3s/bOgFAEWM8/1O4TB1HVLoourxOv+eGI1rLLURQEIgNqzpGLZKPUSa
+ jXqIMeciTptAk+CJh4Lk+YKkxpT853mJdk3vXIjsz15RLX+jiItvaScRqpDuXaKUT3k2
+ UMD9ia40GZ7yHNGTde0IHiG15pWcp4KSHZLzIwv7/sKbUZmHEmHidMb8TH279ArZW3Bi
+ aG+Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW4YJyHYPfZz5CX/CP2BlcZN1U3Pz322BJjQfdeTxUM9uQKx/PiRwlARwgC8+YLFemhSylL60U5hmQwvDqaMmqE9Jd/DA==
+X-Gm-Message-State: AOJu0Yy8/ZDPQwbuBiyNrcPVwmAdKcIp0y7klycRFHCrmXipVz+hukh9
+ g5TF7uvvt8rua44/krzlpAx7foQXVV6W3YHQt+XANKHJb4nTL3tVDrwLsZX9ZHnza7eaBMB9fMq
+ nkex+Rv+s9KUpusgB6f1ne2sRVRoTSuPE7G0/zg==
+X-Google-Smtp-Source: AGHT+IEyiHWFQ8OdfNp1MRMwIJ+7XM+nvngsgCSwa7Uu4YPSaeMKVXHPTOgdgmthyFk+EY5Mv1zQhI2cDg5Vx6VcbCQ=
+X-Received: by 2002:a17:906:40cf:b0:a77:af07:b98a with SMTP id
+ a640c23a62f3a-a7a013e90c6mr421722866b.73.1721332061475; Thu, 18 Jul 2024
+ 12:47:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <PAZP264MB2974E713F54A40AB9B17DB85B1DB2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+ <20240710-talcum-repent-307fd836d683@thorsis.com>
+ <PAZP264MB29745BAD4E854E1884E5A9CDB1AC2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+In-Reply-To: <PAZP264MB29745BAD4E854E1884E5A9CDB1AC2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 18 Jul 2024 21:47:29 +0200
+Message-ID: <CAOf5uwmN5t5Mvg8GZe-F=B5ykmeuLfw69ctS5GZvOYZcZczsmA@mail.gmail.com>
+Subject: Re: [PATCH] mtd: nand: raw: atmel: Use ONFI ECC params if available
+To: Zixun Li <zli@ogga.fr>
+Cc: Alexander Dahl <ada@thorsis.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ open list <u-boot@lists.denx.de>, 
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,230 +92,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that this is always 1, remove it and the associated dead code.
+Hi
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Thu, Jul 18, 2024 at 9:40=E2=80=AFPM Zixun Li <zli@ogga.fr> wrote:
+>
+> On 10/07/2024 09:28, Alexander Dahl wrote:
+>
+> > Despite the missing space between 'if' and the opening bracket (checkpa=
+tch
+> > should have told you?) this looks very much like what got into linux wi=
+th v4.11
+> > but was changed/reworked multiple times afterwards.  I wonder why this =
+was
+> > not ported to U-Boot when introducing this driver?  In 6a8dfd57220d ("n=
+and:
+> > atmel: Add DM based NAND driver") it was claimed the driver was ported
+> > from linux-5.4-at91, so this feature was probably dropped intentionally=
+?
+> > Does anyone know why?
+> >
+>
+> Hi,
+>
+> Sorry for the format issue. Is there any comment from maintainers ?
+>
+> I'll push a v2 if this patch is considered.
 
- README                 |   7 +--
- drivers/i2c/i2c_core.c | 104 -----------------------------------------
- include/i2c.h          |  35 --------------
- 3 files changed, 1 insertion(+), 145 deletions(-)
+Looking on it. Anyway expand the commit message with original information o=
+f it.
+Like:
 
-diff --git a/README b/README
-index 44dafa3be98..461c5d4d0e3 100644
---- a/README
-+++ b/README
-@@ -771,13 +771,8 @@ The following options need to be configured:
- 		CFG_SYS_NUM_I2C_BUSES
- 		Hold the number of i2c buses you want to use.
- 
--		CFG_SYS_I2C_DIRECT_BUS
--		define this, if you don't use i2c muxes on your hardware.
--
- 		CFG_SYS_I2C_BUSES
--		hold a list of buses you want to use, only used if
--		CFG_SYS_I2C_DIRECT_BUS is not defined, for example
--		a board with CFG_SYS_NUM_I2C_BUSES = 9:
-+		hold a list of buses you want to use
- 
- 		 CFG_SYS_I2C_BUSES	{{0, {I2C_NULL_HOP}}, \
- 					{0, {{I2C_MUX_PCA9547, 0x70, 1}}}, \
-diff --git a/drivers/i2c/i2c_core.c b/drivers/i2c/i2c_core.c
-index f371d952af5..cccd45027db 100644
---- a/drivers/i2c/i2c_core.c
-+++ b/drivers/i2c/i2c_core.c
-@@ -33,100 +33,8 @@ struct i2c_adapter *i2c_get_adapter(int index)
- 	return i2c_adap_p;
- }
- 
--#if !defined(CFG_SYS_I2C_DIRECT_BUS)
--struct i2c_bus_hose i2c_bus[CFG_SYS_NUM_I2C_BUSES] =
--			CFG_SYS_I2C_BUSES;
--#endif
--
- DECLARE_GLOBAL_DATA_PTR;
- 
--#ifndef CFG_SYS_I2C_DIRECT_BUS
--/*
-- * i2c_mux_set()
-- * -------------
-- *
-- * This turns on the given channel on I2C multiplexer chip connected to
-- * a given I2C adapter directly or via other multiplexers. In the latter
-- * case the entire multiplexer chain must be initialized first starting
-- * with the one connected directly to the adapter. When disabling a chain
-- * muxes must be programmed in reverse order, starting with the one
-- * farthest from the adapter.
-- *
-- * mux_id is the multiplexer chip type from defined in i2c.h. So far only
-- * NXP (Philips) PCA954x multiplexers are supported. Switches are NOT
-- * supported (anybody uses them?)
-- */
--
--static int i2c_mux_set(struct i2c_adapter *adap, int mux_id, int chip,
--			int channel)
--{
--	uint8_t	buf;
--	int ret;
--
--	/* channel < 0 - turn off the mux */
--	if (channel < 0) {
--		buf = 0;
--		ret = adap->write(adap, chip, 0, 0, &buf, 1);
--		if (ret)
--			printf("%s: Could not turn off the mux.\n", __func__);
--		return ret;
--	}
--
--	switch (mux_id) {
--	case I2C_MUX_PCA9540_ID:
--	case I2C_MUX_PCA9542_ID:
--		if (channel > 1)
--			return -1;
--		buf = (uint8_t)((channel & 0x01) | (1 << 2));
--		break;
--	case I2C_MUX_PCA9544_ID:
--		if (channel > 3)
--			return -1;
--		buf = (uint8_t)((channel & 0x03) | (1 << 2));
--		break;
--	case I2C_MUX_PCA9547_ID:
--		if (channel > 7)
--			return -1;
--		buf = (uint8_t)((channel & 0x07) | (1 << 3));
--		break;
--	case I2C_MUX_PCA9548_ID:
--		if (channel > 7)
--			return -1;
--		buf = (uint8_t)(0x01 << channel);
--		break;
--	default:
--		printf("%s: wrong mux id: %d\n", __func__, mux_id);
--		return -1;
--	}
--
--	ret = adap->write(adap, chip, 0, 0, &buf, 1);
--	if (ret)
--		printf("%s: could not set mux: id: %d chip: %x channel: %d\n",
--		       __func__, mux_id, chip, channel);
--	return ret;
--}
--
--static int i2c_mux_set_all(void)
--{
--	struct i2c_bus_hose *i2c_bus_tmp = &i2c_bus[I2C_BUS];
--	int i;
--
--	return 0;
--}
--
--static int i2c_mux_disconnect_all(void)
--{
--	struct	i2c_bus_hose *i2c_bus_tmp = &i2c_bus[I2C_BUS];
--	int	i;
--	uint8_t	buf = 0;
--
--	if (I2C_ADAP->init_done == 0)
--		return 0;
--
--	return 0;
--}
--#endif
--
- /*
-  * i2c_init_bus():
-  * ---------------
-@@ -200,11 +108,6 @@ int i2c_set_bus_num(unsigned int bus)
- 	if ((bus == I2C_BUS) && (I2C_ADAP->init_done > 0))
- 		return 0;
- 
--#ifndef CFG_SYS_I2C_DIRECT_BUS
--	if (bus >= CFG_SYS_NUM_I2C_BUSES)
--		return -1;
--#endif
--
- 	max = ll_entry_count(struct i2c_adapter, i2c);
- 	if (I2C_ADAPTER(bus) >= max) {
- 		printf("Error, wrong i2c adapter %d max %d possible\n",
-@@ -212,17 +115,10 @@ int i2c_set_bus_num(unsigned int bus)
- 		return -2;
- 	}
- 
--#ifndef CFG_SYS_I2C_DIRECT_BUS
--	i2c_mux_disconnect_all();
--#endif
--
- 	gd->cur_i2c_bus = bus;
- 	if (I2C_ADAP->init_done == 0)
- 		i2c_init_bus(bus, I2C_ADAP->speed, I2C_ADAP->slaveaddr);
- 
--#ifndef CFG_SYS_I2C_DIRECT_BUS
--	i2c_mux_set_all();
--#endif
- 	return 0;
- }
- 
-diff --git a/include/i2c.h b/include/i2c.h
-index 180b71f1451..91917f54be9 100644
---- a/include/i2c.h
-+++ b/include/i2c.h
-@@ -646,7 +646,6 @@ void i2c_early_init_f(void);
- #define I2C_RXTX_LEN	128	/* maximum tx/rx buffer length */
- 
- /* no muxes used bus = i2c adapters */
--#define CFG_SYS_I2C_DIRECT_BUS	1
- #define CFG_SYS_NUM_I2C_BUSES	ll_entry_count(struct i2c_adapter, i2c)
- 
- struct i2c_adapter {
-@@ -692,47 +691,13 @@ struct i2c_adapter {
- 
- struct i2c_adapter *i2c_get_adapter(int index);
- 
--#ifndef CFG_SYS_I2C_DIRECT_BUS
--struct i2c_mux {
--	int	id;
--	char	name[16];
--};
--
--struct i2c_next_hop {
--	struct i2c_mux		mux;
--	uint8_t		chip;
--	uint8_t		channel;
--};
--
--struct i2c_bus_hose {
--	int	adapter;
--};
--#define I2C_NULL_HOP	{{-1, ""}, 0, 0}
--extern struct i2c_bus_hose	i2c_bus[];
--
--#define I2C_ADAPTER(bus)	i2c_bus[bus].adapter
--#else
- #define I2C_ADAPTER(bus)	bus
--#endif
- #define	I2C_BUS			gd->cur_i2c_bus
- 
- #define	I2C_ADAP_NR(bus)	i2c_get_adapter(I2C_ADAPTER(bus))
- #define	I2C_ADAP		I2C_ADAP_NR(gd->cur_i2c_bus)
- #define I2C_ADAP_HWNR		(I2C_ADAP->hwadapnr)
- 
--#ifndef CFG_SYS_I2C_DIRECT_BUS
--#define I2C_MUX_PCA9540_ID	1
--#define I2C_MUX_PCA9540		{I2C_MUX_PCA9540_ID, "PCA9540B"}
--#define I2C_MUX_PCA9542_ID	2
--#define I2C_MUX_PCA9542		{I2C_MUX_PCA9542_ID, "PCA9542A"}
--#define I2C_MUX_PCA9544_ID	3
--#define I2C_MUX_PCA9544		{I2C_MUX_PCA9544_ID, "PCA9544A"}
--#define I2C_MUX_PCA9547_ID	4
--#define I2C_MUX_PCA9547		{I2C_MUX_PCA9547_ID, "PCA9547A"}
--#define I2C_MUX_PCA9548_ID	5
--#define I2C_MUX_PCA9548		{I2C_MUX_PCA9548_ID, "PCA9548"}
--#endif
--
- #ifndef I2C_SOFT_DECLARATIONS
- # if (defined(CONFIG_AT91RM9200) || \
- 	defined(CONFIG_AT91SAM9260) ||  defined(CONFIG_AT91SAM9261) || \
--- 
-2.34.1
+Upstream commit <short sha>
 
+Try to report some original context from kernel
+
+Micahel
+
+
+> --
+> Zixun LI
+>
+>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
