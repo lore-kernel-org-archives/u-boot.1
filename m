@@ -4,70 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA55C3DA60
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 01:53:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310BEC3DA60
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 03:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75BCE88AEC;
-	Thu, 18 Jul 2024 03:52:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F79B88481;
+	Thu, 18 Jul 2024 05:52:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ncfx/rbx";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="cXe0sP7J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAF4388AA8; Wed, 17 Jul 2024 20:24:35 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1CE7C884CA; Thu, 18 Jul 2024 05:52:10 +0200 (CEST)
+Received: from mail-m1282.netease.com (mail-m1282.netease.com [103.209.128.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB0788879C
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 20:24:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8672C88481
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 05:52:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nyandarknessgirl@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-367990aaef3so11416f8f.0
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 11:24:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721240673; x=1721845473; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xsut1+cCc6fjj8lpl/P684L1aQ5VGExTDpUJki7ocX0=;
- b=Ncfx/rbxDKd9n9Y4axN6xqeKuUGPuvzAcH963LKcA/Rl+Dbz+19iKmGe6poGsOXLdC
- g8GJK8drnjCGQrpmjoC8tlbd7X9lPmxKJsV/CiEK1J1JEBNJJx5L58+zOelGrSRWs01w
- EIMIVRd7IdVtfhLec+h1bMcmEQ0b0b8ATa7OOum/IZuGtYzpyRR/kDAIv03k7veIxxD3
- Hw2C3/Gwu19RLMbMIMG1SKyYMjuh4sKM6viKiwRSXgdTi4uNA5r/FBJm2/ukbHeLF2QR
- GxoELNsEVYJpAbar+HXZE8DlQWu2nIVqDACyvyZWa4l71fZ7zHcuLsGnxgygteGE/0VV
- mHCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721240673; x=1721845473;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xsut1+cCc6fjj8lpl/P684L1aQ5VGExTDpUJki7ocX0=;
- b=uCDOZGn4ZXRb7bREQ9ee6ilolWEL5GjRQfaNb2UjGWrjNh/MPv2/Pth6xxGqB+rro4
- 9EpCSNm78dX0aErlBBTRPye+rQO5hJqBTRk8PE0Go7yFsGSNdjEmk+BdhSuJxkcWeMag
- 7UW+j9b5ksNLQAv59GJYg3XKoq0pWHCIOxJlIuuIx+7jWrna5MIqzeYhlrjczigwI890
- ZBwYcnlEXqpJBlxbrnz9gJs0AQJxyeYyMKTZ9xPjGISeervygaEanMlm1Uf8zGijsUYL
- wHa8F7279EKC+OiniS2aAEx6hgdqyg97ndZ5Ww5mGJcF5hUjHEgTLtxFgp6Z0qkpqXF4
- BUXA==
-X-Gm-Message-State: AOJu0YybkcO604+RcR9CbY9Qt/5E4a525BHCb2bsW5PekLtMbaA09UiK
- wH5xU/kY/73udtxudIpul3n0rOI6VTucipiGvaAm6PTHoH+B6v6X5+Ok+d90/jC2XDwD0cZ0kAJ
- x4dbVlMaaVSIrr3lSy6lpCqvq3ui4eS4kffbkWBAl
-X-Google-Smtp-Source: AGHT+IFnGlwGZSeoWudv5k3WAIcj+qmyR+3xxTdN19zzIoyHqTG91fqpasrsAsP3+4kws9M9nO1EUDigzWjl5alMObY=
-X-Received: by 2002:a05:6000:71d:b0:368:255e:ab13 with SMTP id
- ffacd0b85a97d-36831722ed8mr2276110f8f.50.1721240672915; Wed, 17 Jul 2024
- 11:24:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=cXe0sP7JyF8szggv3O10x0OeC/Krr5S6WXjSKSy8Nvy9Vp61SYOuu731WKpCqGEmg6uOaK2RFCsx7KyS0yRPGNCgpB487CBXX71w/rycHd279Bm48WS4ma0dSyNpKWuLD358q+54oC3JethMz3BmyBnFwuvIX2CGJfjCGBwv9aI=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=Cp+2WIGYXGOq/zD368ne15Fvgue10DmnlG/3jm0ywR8=;
+ h=date:mime-version:subject:message-id:from;
+Received: from localhost.localdomain (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id BAFB990027C;
+ Thu, 18 Jul 2024 11:52:00 +0800 (CST)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20240614
+Date: Thu, 18 Jul 2024 11:52:00 +0800
+Message-Id: <20240718035200.394004-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <CA+eeCSMKifhHwf+oYm-vamSyimoAycEN_U5RZj3bCX3Q5qsdwQ@mail.gmail.com>
-In-Reply-To: <CA+eeCSMKifhHwf+oYm-vamSyimoAycEN_U5RZj3bCX3Q5qsdwQ@mail.gmail.com>
-From: Eva Kurchatova <nyandarknessgirl@gmail.com>
-Date: Wed, 17 Jul 2024 21:24:21 +0300
-Message-ID: <CA+eeCSNo9RpZ_86wwYuKBiMHyZFAuEdiXL-6Sf=_9WfR_=ptFQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] riscv: qemu: Enable booting from NVMe
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 18 Jul 2024 03:52:34 +0200
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUoeTVZCT0lJGk5LS0NCHxhWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a90c3f7e25c03a9kunmbafb990027c
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBQ6GBw*VjI1DBcITRFWMzEB
+ KBVPFDdVSlVKTElKSUxPTElKSEpLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT0pMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,32 +67,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From e6087bb6d1f25e8a5fddd4255fc07a957312b406 Mon Sep 17 00:00:00 2001
-From: LekKit <50500857+LekKit@users.noreply.github.com>
-Date: Wed, 17 Jul 2024 20:41:41 +0300
-Subject: [PATCH 3/3] riscv: qemu: Explicitly advertise RVVM support
+Hi Tom,
 
-This patch series enables full RVVM virtual machine support which was
-earlier inconveniently provided as out-of-tree patchset.
+Please pull the fixex for rockchip platform:
+- pmic fix for rk8xx;
+- pinctrl fix for rk3188/rv1126/rk3588;
+- mkimage fix for rockcihp "-l" option;
 
-This should be cleaner than a separate board config, since both
-emulators provide similar feature set.
----
- arch/riscv/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/21111
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index fa3b016c..7c52e666 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -21,7 +21,7 @@ config TARGET_OPENPITON_RISCV64
-  bool "Support RISC-V cores on OpenPiton SoC"
+Thanks,
+- Kever
 
- config TARGET_QEMU_VIRT
-- bool "Support QEMU Virt Board"
-+ bool "Support QEMU Virt & RVVM Boards"
-  select BOARD_LATE_INIT
+The following changes since commit ca6a992e09441d6cca73439c63c3735f86b36ea4:
 
- config TARGET_SIFIVE_UNLEASHED
--- 
-2.45.2
+  cmd: sound: fix help text (2024-06-13 09:31:56 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240614
+
+for you to fetch changes up to 3f9a19befe9277db2a337552912c6ddbcc0c8b10:
+
+  rockchip: mkimage: fix mkimage -l for header v1 (2024-06-14 17:07:59 +0800)
+
+----------------------------------------------------------------
+Chris Morgan (2):
+      Revert "board: rockchip: Add early ADC button detect for RGxx3"
+      board: rockchip: rgxx3: Use sdmmc0 as first device
+
+Jonas Karlman (3):
+      pinctrl: rockchip: rk3188: Fix support for IOMUX_GPIO_ONLY flag
+      pinctrl: rockchip: rv1126: Fix support for IOMUX_L_SOURCE_PMU flag
+      pinctrl: rockchip: rk3588: Fix support for rockchip_get_mux()
+
+Quentin Schulz (4):
+      regulator: rk8xx: fix incorrect device used for _ldo_[sg]et_suspend_value
+      regulator: rk8xx: pass pmic udevice instead of regulator to all internal functions
+      regulator: rk8xx: clarify operator precedence
+      rockchip: mkimage: fix mkimage -l for header v1
+
+ arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi   |  2 +-
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c       | 64 ------------------------
+ drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 40 ++++++++++++---
+ drivers/power/regulator/rk8xx.c                  | 54 ++++++++++----------
+ tools/rkcommon.c                                 |  2 +-
+ 5 files changed, 63 insertions(+), 99 deletions(-)
