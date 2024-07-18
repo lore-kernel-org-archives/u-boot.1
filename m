@@ -4,74 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDA6C3DA61
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF4DEC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:40:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB87A885F1;
-	Thu, 18 Jul 2024 22:38:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C26A884EA;
+	Thu, 18 Jul 2024 22:40:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S8Rq3N8Y";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CtQZajYq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5673C885AE; Thu, 18 Jul 2024 22:38:26 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id A55F38859C; Thu, 18 Jul 2024 22:39:59 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50A3688481
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:38:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4745C88481
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:39:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-52ed9b802ceso895131e87.3
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:38:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2ca8dfa2cceso534192a91.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:39:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721335103; x=1721939903; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=grKwAfVIdVaAktWTMGpxeXoUxOY/5riJ4pFZ2AzhV+0=;
- b=S8Rq3N8Y0UAn0UzQikR0FT3Q08g2jczvQGG87EQXxNEv23w+UtwuUhpgI+bK94d49b
- 74ZddrWrDH/PdqvfSjPUrHYoIvd+qibbGCf7WSZREGdU1dqsBCAb85k3IrzBqdbLSWr3
- xL9vaARF3IP1r0IeN3vxsp2taQLozhF8N6NTK3Q2TlLX+GSeyoLq62Y3Ae3tLz98HhMC
- waKWtaYYE89/Ff0ZxcYTNWcA3OgYbcCruXedDPs/KoUUU+eApHcduIJLDeiuuu60Z4Ig
- N1WPAxgBsIh29cYRcma7bNfW166EN+i/EUqQdDDiJ20nYYBUg+t3/5hS/lVqefw5K9eN
- 61qw==
+ d=linaro.org; s=google; t=1721335196; x=1721939996; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n0yb+V67Nk/8UDA6AMYDZUxO/auPI1a+b9Kh2VfFBNs=;
+ b=CtQZajYqllnTrLZkhAsne70YA3YybOAx+FEN9drVv3zx3cImJNbX8Bc93S2Uw3K4ZB
+ Yb5PHK/n44E5gFMGV+xsg6aSQMymWgto65uzSONLPS2vD4d6CoiG3T3ME5qodod0N6b+
+ XEG+VsMBTBBkAdFnmYck8+Vu9hUUbBE+6NLSjuja6HWd5GenRWp6RS6C3H8Ii4f3f4x2
+ W9eaxyvKXEdDQZkPbYP3J7/tN6pBrSOqYkBuzUuemfXnrW0YIsiEPaLD1iP8WBv84+2r
+ AECqUg14NnKUBd8h0BNGeEDlzRoJrPSAgcJpMpEB7jG5O4voSG4Ra6kCzHLMORuI9I0z
+ rVYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721335103; x=1721939903;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=grKwAfVIdVaAktWTMGpxeXoUxOY/5riJ4pFZ2AzhV+0=;
- b=K1X+MDqvpBdyWics7P0qitdoCwSHieT3miNMbqgyomO7QpOB/A2j6LaCjWxYIr9tkL
- 6VgK+dmVSilAIYzqcwDPxwkiGEX7qc9qMmtF83EPDWTxwOrTLs2YqtuQZ43uq9b0mb6b
- cYaeCjX8fRrP13LUsGfOP5qfsjZcdG3p30dZCGJ9+nd5Bpo1LuzG2vWk3CnaY96A/NQa
- MpEGYiWo2QGDs6F0kpmVI9mSDulV/NvJ8YPQwZpHPMV95Eornroyp1Ifoi+gZTzR5R9U
- DkwniVhHdeMc9F/v0AdS/bZXBOk6pj4WHNp799otFlvJb7bJU4TfV0zNQYQBVxnINky+
- CrJw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXdyA6p27JaUeweeN/Sqr6u95jod961ieY/KCKhWKAJIwxHdXPK+cMbLi3AoSvCJA5D95eFGA66CkNRNXw4Re3DDD/WA==
-X-Gm-Message-State: AOJu0YwEP3D3sEXL4jwF6NQYKfoVsg8WPSgKwyXLh0gB5bLjC9gARb3m
- n1A1DJ5fXUBFE9zH8ag9Doixh7YRTZmHn4uXGTcMr8BJnlWJFVOlI5NN2wFkaYxO+xq64V3i5vO
- 8+lqw7pehr6FD2Ob5RFBdAe3AOK8=
-X-Google-Smtp-Source: AGHT+IFgLK0dIj5dOlBCaec3nQfutjLndSePUizCI8gif9L0yVI1u7rKJ74oK10B+1Aan9JWCusJjN/LunzRgBJ/cMM=
-X-Received: by 2002:a05:6512:33c5:b0:52c:ec68:6165 with SMTP id
- 2adb3069b0e04-52ee53cc00bmr4812117e87.33.1721335103272; Thu, 18 Jul 2024
- 13:38:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721335196; x=1721939996;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n0yb+V67Nk/8UDA6AMYDZUxO/auPI1a+b9Kh2VfFBNs=;
+ b=WIvn74p5x5BlHkcOAe6XNJP+BrF9eS3ztTAP/OICNWsBY/8jB/YDHXTq6+uFoEmH5z
+ n2ikeoJDQahf66ughvQbfv6x2SLypl+hqpNTTdgzKwlzIoL4GmIXi5h7G6RmqfPQYCbk
+ X9y0jL7JHlAFjRYmKToWJHXNWqHSesZmgrmGLK3fjjVoONre9ixN7z8Q+3L5BEXLuLtC
+ HQy6zkbAfwBfDmOnMe1N9XHOqvh9mEgp9PUncbS5GJTU9E9v0gcvhCfgcLSBmy1R/dbG
+ dMpbiCaTNtyztLJliChwO2GtZok4sz3NBx8WfpCr3v/3fd7mOIvdFB/7AImY4rY/0y1U
+ zANA==
+X-Gm-Message-State: AOJu0Yy8aV4Qp5v96WH5OeRab72BGxhSFC4IM1tWVD4kVMfhysEyYLxr
+ NhdxqAXGuZTs3ZbrqY28NIX4JYqbxyzHXcSfwl3vd4qS4A5zhF4lPyZZeUqWOvdqAItewafLK5s
+ b0ins5SXFJGllIuSv9Dt4lBw66L3t2y0sn0RTZg==
+X-Google-Smtp-Source: AGHT+IHQPoF2VahbISwMYJiNmMgahOoIa+JIBB9XQ8Qvnvvcyt6oZ9NvxKn+8uudlPVPgNZAvVUsDqQzzk7xgjhymq8=
+X-Received: by 2002:a17:90b:a51:b0:2c9:7803:1cf6 with SMTP id
+ 98e67ed59e1d1-2cb527a1155mr4574957a91.20.1721335195639; Thu, 18 Jul 2024
+ 13:39:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240713113029.78262-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240713113029.78262-1-heinrich.schuchardt@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Thu, 18 Jul 2024 13:38:11 -0700
-Message-ID: <CANV2PTMHVYh6=32hL5hOuWOHgLhFfcGid=2eUokzvZQ10R5QxQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: find distro device-path for media devices
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-18-raymond.mao@linaro.org>
+ <CAC_iWjL6E+SNLGjzO3s7-8MJH4XjKyPeN3WkUjQrxFRrjfO_7A@mail.gmail.com>
+In-Reply-To: <CAC_iWjL6E+SNLGjzO3s7-8MJH4XjKyPeN3WkUjQrxFRrjfO_7A@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 18 Jul 2024 16:39:43 -0400
+Message-ID: <CAEfUkUJ7iq+J_x-8JXooSR8ishaJqvZ6krwaugxRvLUYN51LYw@mail.gmail.com>
+Subject: Re: [PATCH v4 17/29] mbedtls: add public key porting layer
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Alexander Gendin <agendin@matrox.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,124 +107,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jul 13, 2024 at 4:30=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The auto-generated load options for media device do not contain a partiti=
-on
-> node. We cannot expect the simple file protocol here.
->
-> Get the partition device-path via the loaded image protocol.
->
-> Fixes: e91b68fd6b83 ("efi_loader: load distro dtb in bootmgr")
-> Reported-by: E Shattow <lucent@gmail.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/efi_loader.h         |  2 +-
->  lib/efi_loader/efi_bootmgr.c |  2 +-
->  lib/efi_loader/efi_fdt.c     | 33 +++++++++++++++++++--------------
->  3 files changed, 21 insertions(+), 16 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 6c993e1a694..2a06fbe4704 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -1205,6 +1205,6 @@ efi_status_t efi_load_option_dp_join(struct efi_dev=
-ice_path **dp,
->
->  int efi_get_distro_fdt_name(char *fname, int size, int seq);
->
-> -void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size);
-> +void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *f=
-dt_size);
->
->  #endif /* _EFI_LOADER_H */
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 304ed43595c..589d3996b68 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -1277,7 +1277,7 @@ efi_status_t efi_bootmgr_run(void *fdt)
->                 if (fdt_lo)
->                         fdt =3D fdt_lo;
->                 if (!fdt) {
-> -                       efi_load_distro_fdt(&fdt_distro, &fdt_size);
-> +                       efi_load_distro_fdt(handle, &fdt_distro, &fdt_siz=
-e);
->                         fdt =3D fdt_distro;
->                 }
->         }
-> diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
-> index 86ba00c2bdd..4ccf2055be3 100644
-> --- a/lib/efi_loader/efi_fdt.c
-> +++ b/lib/efi_loader/efi_fdt.c
-> @@ -75,28 +75,34 @@ int efi_get_distro_fdt_name(char *fname, int size, in=
-t seq)
->  /**
->   * efi_load_distro_fdt() - load distro device-tree
->   *
-> + * @handle:    handle of loaded image
->   * @fdt:       on return device-tree, must be freed via efi_free_pages()
->   * @fdt_size:  buffer size
->   */
-> -void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size)
-> +void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *f=
-dt_size)
->  {
-> -       struct efi_device_path *rem, *dp;
-> +       struct efi_device_path *dp;
->         efi_status_t  ret;
-> +       struct efi_handler *handler;
-> +       struct efi_loaded_image *loaded_image;
->         efi_handle_t device;
->
->         *fdt =3D NULL;
->
-> -       dp =3D efi_get_dp_from_boot(NULL);
-> -       if (!dp)
-> +       /* Get boot device from loaded image protocol */
-> +       ret =3D efi_search_protocol(handle, &efi_guid_loaded_image, &hand=
-ler);
-> +       if (ret !=3D EFI_SUCCESS)
->                 return;
-> -       device =3D efi_dp_find_obj(dp, NULL, &rem);
-> -       ret =3D efi_search_protocol(device, &efi_simple_file_system_proto=
-col_guid,
-> -                                 NULL);
-> +       loaded_image =3D handler->protocol_interface;
-> +       device =3D loaded_image->device_handle;
-> +
-> +       /* Get device path of boot device */
-> +       ret =3D efi_search_protocol(device, &efi_guid_device_path, &handl=
-er);
->         if (ret !=3D EFI_SUCCESS)
-> -               goto err;
-> -       memcpy(rem, &END, sizeof(END));
-> +               return;
-> +       dp =3D handler->protocol_interface;
->
-> -       /* try the various available names */
-> +       /* Try the various available names */
->         for (int seq =3D 0; ; ++seq) {
->                 struct efi_device_path *file;
->                 char buf[255];
-> @@ -108,10 +114,9 @@ void efi_load_distro_fdt(void **fdt, efi_uintn_t *fd=
-t_size)
->                         break;
->                 ret =3D efi_load_image_from_path(true, file, fdt, fdt_siz=
-e);
->                 efi_free_pool(file);
-> -               if (ret =3D=3D EFI_SUCCESS)
-> +               if (ret =3D=3D EFI_SUCCESS) {
-> +                       log_debug("Fdt %pD loaded\n", file);
->                         break;
-> +               }
->         }
-> -
-> -err:
-> -       efi_free_pool(dp);
->  }
-> --
-> 2.45.2
->
+Hi Ilias,
 
-Tested-by: E Shattow <lucent@gmail.com>
+On Wed, 3 Jul 2024 at 07:47, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
+
+> On Tue, 2 Jul 2024 at 21:30, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Add porting layer for public key on top of MbedTLS X509 library.
+> > Introduce _LEGACY and _MBEDTLS kconfigs for public key legacy and
+> > MbedTLS implementations respectively.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Move the porting layer to MbedTLS dir.
+> > Changes in v3
+> > - None.
+> > Changes in v4
+> > - Introduce _LEGACY and _MBEDTLS kconfigs for public key legacy and
+> >   MbedTLS implementations respectively.
+> > - Move common functions to helper.
+> >
+> >  lib/mbedtls/Kconfig      | 50 ++++++++++++++++++++++++
+> >  lib/mbedtls/Makefile     |  7 +++-
+> >  lib/mbedtls/public_key.c | 82 ++++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 138 insertions(+), 1 deletion(-)
+> >  create mode 100644 lib/mbedtls/public_key.c
+> >
+> > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > index 0cdf0135667..6f29b0c81a2 100644
+> > --- a/lib/mbedtls/Kconfig
+> > +++ b/lib/mbedtls/Kconfig
+>
+[snip]
+
+> > @@ -232,7 +258,31 @@ endif # MBEDTLS_LIB_CRYPTO
+> >
+> >  config MBEDTLS_LIB_X509
+> >         bool "MbedTLS certificate libraries"
+> > +       select ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS if \
+> > +               ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> > +       select SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS if \
+> > +               ASYMMETRIC_PUBLIC_KEY_SUBTYPE && SPL
+>
+> Why do we have to select SPL here and in the Kconfig above for the
+> legacy option?
+>
+> It should be:
+"select SPL_<ALG>_<LEGACY/MBEDTLS> if SPL_<ALG>"
+For example:
+```
+config MBEDTLS_LIB_X509
+      bool "MbedTLS certificate libraries"
+       [...]
+       select SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_MBEDTLS if \
+              SPL_ASYMMETRIC_PUBLIC_KEY
+```
+
+Regards,
+Raymond
