@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72C2C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:28:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF292C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:41:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA85B88633;
-	Thu, 18 Jul 2024 15:28:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EB3DF886A0;
+	Thu, 18 Jul 2024 15:41:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e+E7kMrr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b6dKMsNF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41F9B88636; Thu, 18 Jul 2024 15:28:29 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id ED62B88758; Thu, 18 Jul 2024 15:41:35 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 364A288548
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:28:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 857A48818B
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:41:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6b79c27dd01so4940206d6.3
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:28:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5ce74defe41so458486eaf.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721309306; x=1721914106; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qcdECpK4+D9/UIsoAyvnYobgpsjTP5Zd2Z3ucx9k134=;
- b=e+E7kMrrJzg7fcvh9KtdC1y2X0Zc/KIj+Np2BV3rEuH/6NAwUdryuUm/j3iaLPm4jS
- GP5pXv+nPTSknk89frcEhphpyQ8Irc7Z1aDmX6xnydJ4ymXxUjN+k6n7XLSbe0sUyZ8C
- FgRV2rvFCex3gq2K8pjprsQwug/hTviI7UPOAgc6uK4MW/D0t8Si0SPUju9gy+KUL3S8
- QlLhq7PTgcD+Ji3S0+na6nLFm1W8EZZt6iTTlQsKwyGk93R6Q9f055MEBEgh6POf2TUx
- R+/qiCW8KCLiJUKJxGzdmKahqjLDS0wIiYySB3RguavN2ckIaxcaa3Rd64aDdMphlu+H
- fS4g==
+ d=konsulko.com; s=google; t=1721310092; x=1721914892; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y6rKdsUL7lDBtWnIZYiEPCqwDl1ywNTO0QMEVkKMnf4=;
+ b=b6dKMsNFOtUvlkR/kDddMYSWDBaGDS2kXMULTcmiexQHm64zd0MQRVwBdE48dd7juO
+ Sf32JBbZL+IizBkX5DUd/dl7Yocf5PuUSkwL2TnGLJpgGpBLh3PRH+/nTk4MOKOBsn2O
+ t97GbpsuHRIpW+0495v0kgR/AS61DA7vFmAdQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721309306; x=1721914106;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qcdECpK4+D9/UIsoAyvnYobgpsjTP5Zd2Z3ucx9k134=;
- b=g/1mqdEuJq8zVZnEkb+pz7Zt0BMFmPRX+5iHJWaAUOA7VFnfXPuFwJQq/2a8HTFMPc
- 9shJ69KDQzIct26bhHVcFQxWgMGk0Q/f0alwlPXo8WrBWJoJ8mJ80i1iJj2JOMOkyo57
- Uqn9J9bJzrtfthM6fp1KXV/NiULWDLzsKcWCxqN+p2fcL7lxewAERI99aNAhooN6Ql81
- RJpSrv1kOHsBr27ZNG/hrecrsPx7qCIyKa4bUKD2Z6GIc/Ocn+btGi5qTOC+e0yvFQhs
- E0jbry99foY2GgS5A9+8o5WyuH4cGFM/RHrs9p5A4uCgoOibzI8vBa9U+gu0oH0EAkOS
- US2Q==
+ d=1e100.net; s=20230601; t=1721310092; x=1721914892;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=y6rKdsUL7lDBtWnIZYiEPCqwDl1ywNTO0QMEVkKMnf4=;
+ b=bY24glVQ4KzGqokitc2dkRP/IQruLmWhH3XxOTr5lbdyp5tyzkH28xc8CwiJnxmoNj
+ 3XK2DEkrLM4IMzdlP2QikUFOf9srfnTyNmoWx+uGvaG7BlFMh3K+AQBi2QWp02Y0i32a
+ eHpDmS0uC5YivpQR8mk9vc85s6u7dSvMSioxxdeHKxEoSjpCxagNY0nnSkS/wowv7AnW
+ M4Uj0ugo/JKqcmGAy9aRLlj0eQep9PPSWM2wHgPuQ/PDyZnR6mZFRoGsTwgd2e/5b8oQ
+ 8VjGl08fCAkS947j9bZ2eP2ZoQToLE8CYMeoHBiqlRFrboc+JJpxwupE+cnl4nEanBbR
+ IMRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUae0Td8278QnHbG+ec3Gu5MgiAmF7QcYqJ6QtlSMJUdO9UDYYjd7JeVRfhl5CFs/ErOAPc4Vz1qLq6a9s+KBShoX+Nig==
-X-Gm-Message-State: AOJu0YzV30pn3cVrz+9GRdvT0fNZcO0RB0WeAeoSYaSjCPGT4KYoQ+fm
- lB9jGQkfZBc5VZcaabaGO113r6c6DQEuQZYWC9/tkxKnO+bjLwsg
-X-Google-Smtp-Source: AGHT+IGMiLlG+prgI9aS5/u3RH2s54qesOeQyulRuRpokozJYMTdzWtqQAeKzx96gD8q7SZdLbg+hQ==
-X-Received: by 2002:ad4:5d66:0:b0:6b7:a3f1:3248 with SMTP id
- 6a1803df08f44-6b7a3f1341amr11482016d6.25.1721309305974; 
- Thu, 18 Jul 2024 06:28:25 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b79c675468sm7939736d6.133.2024.07.18.06.28.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jul 2024 06:28:25 -0700 (PDT)
-Message-ID: <26f6d85c-7d22-fb2f-d18b-5adcf494bc34@gmail.com>
-Date: Thu, 18 Jul 2024 09:28:24 -0400
+ AJvYcCU/MK0ynNQDrhFUVOPZ4PBg36yDcXGGDa2CO+bmcFWpOHmkS4cgDik7WYX1xw7luXYt3szb8Qtog+HNgwRs2dgPi7+fqA==
+X-Gm-Message-State: AOJu0Yxi2FE5YX2OpfYK/IWfE5yo2c8O5jtYvfBWRd+E++aDZP0Bixa5
+ DTK1O2Cjhb1z+/1H8P37TwhcekcFYfENhbviyuteAWXqhzhGOLjK+mOo+Cy4PMU=
+X-Google-Smtp-Source: AGHT+IE1tw7l2IsMiLmgSKKElmHylCd3aA7nEhZKIuD1PMTY2QB5ts2DGpAZZCvHSDDzWiSjsNSnJA==
+X-Received: by 2002:a05:6870:f613:b0:25e:c013:a7fb with SMTP id
+ 586e51a60fabf-260d944deb0mr3934753fac.43.1721310092244; 
+ Thu, 18 Jul 2024 06:41:32 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-260ee947f82sm355303fac.50.2024.07.18.06.41.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jul 2024 06:41:31 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Vitor Soares <ivitro@gmail.com>
+Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20240704154932.434266-1-ivitro@gmail.com>
+References: <20240704154932.434266-1-ivitro@gmail.com>
+Subject: Re: [PATCH v1] verdin-am62: add DFU, USB and UUU fastboot support
+Message-Id: <172131009143.1834634.5277914704766018339.b4-ty@konsulko.com>
+Date: Thu, 18 Jul 2024 07:41:31 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2 04/21] sandbox: Enable SPL_LOAD_BLOCK
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Michal Simek <michal.simek@amd.com>,
- Lean Sheng Tan <sheng.tan@9elements.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>
-References: <20240713070055.2172883-1-sjg@chromium.org>
- <20240713070055.2172883-5-sjg@chromium.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240713070055.2172883-5-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,34 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/13/24 03:00, Simon Glass wrote:
-> Enable this option for all sandbox boards so that the FIT-loading code
-> can be used without generating an error about block devices not being
-> supported.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
->   common/spl/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index af43b5f5d3c..970a4a346e4 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -288,6 +288,7 @@ config SPL_BOARD_INIT
->   
->   config SPL_LOAD_BLOCK
->   	bool
-> +	default y if SANDBOX
->   	help
->   	  Support loading images from block devices. This adds a bl_len member
->   	  to struct spl_load_info.
+On Thu, 04 Jul 2024 16:49:32 +0100, Vitor Soares wrote:
 
-NACK.
+> Enable USB host as well as USB gadget and DFU support for a53 and r5
+> configs. Also, enable UUU fastboot support to download files with
+> the UUU tool from a53.
+> 
+> Additionally, configure usb0 to peripheral mode and add extra
+> environment for DFU use.
+> 
+> [...]
 
-Enable one of the many configs which select this one instead.
+Applied to u-boot/master, thanks!
 
---Sean
+-- 
+Tom
+
+
