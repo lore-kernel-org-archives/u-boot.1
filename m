@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEC4C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 08:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296B1C3DA60
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 08:36:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37FEA88B29;
-	Thu, 18 Jul 2024 10:35:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC63888B33;
+	Thu, 18 Jul 2024 10:35:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="WNAFdOZo";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QQGXZGqw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 331DF88AE8; Thu, 18 Jul 2024 07:45:49 +0200 (CEST)
+ id 52FEA88AF1; Thu, 18 Jul 2024 07:45:50 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4579A88AEE
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 07:45:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04BA488B05
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 07:45:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id CD4E710001D;
- Thu, 18 Jul 2024 08:45:45 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CD4E710001D
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 914A610001E;
+ Thu, 18 Jul 2024 08:45:47 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 914A610001E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1721281545;
- bh=rkC5KOtB68QMcwC8kAn6+s72ky2ZxvvXZmJVhRmXSGA=;
+ s=mail; t=1721281547;
+ bh=mbVNZKS0VZHvFIQBE/E4Hsqmg1ATPTE0craFcE9vZHQ=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=WNAFdOZoH1kKkuUki1V+YHco7ZuJwiyuQC3tO9OHlKIUasj32UrHKaAvo+oxe+BUI
- eU7kpCvCV0p0d9gVZpTa32hsNLKjd7ik3WG4VuOhaQjqldJfPBIVDSRdEcWxFZv2Hu
- T9N0a5tzYSVpxM4ZyzV7nr6WireYvBzAZOCheGnfqCahNGPOIuM+Y3i6hiXoRsblm9
- 20W2wdlSFXZzgbuh1ehqXCjPxQqOd48kRXaI+LKaMaKQRp490bkuYwxELqmlhDSyml
- +HyoNAURM/jLArljB0nLOak1LX8rN4qxXoMZCxN4i/eVYRs9WE2bwubBoKeHvoJ7Ei
- 5+BtF4MT+4f0A==
+ b=QQGXZGqwtifFlB/E9H+S/afoRLlaSPmo5rgqH2riaTyjREXUTR5Lkn0pnN6pIXTul
+ 13YukP5ooO71f9rH/wBs9L0vM3SHIfjYcLgdx6v3eqalDWAeQ/wZtgoNCVKMdz4tVz
+ MZuGEPQVwUsOkjbozpgcxjzvokIl4dPNAccGrziE6x1YGOjWvwo4flJ9CgT6sF7XGB
+ 1lT4eqXYxPq759hjvHo9nJy13NaYyqZ4o4IAYc5FwDenkzN1mAYBXMZm1jJ8A6a1pv
+ v1y7+pdN/ZpRCnB8GLYXsxKmQf7iYqTqQRSZlQA4LwS71Et+5K7wVN+LHCWxyGyYGY
+ 4Km0fZdLTxaxg==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
  [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 18 Jul 2024 08:45:45 +0300 (MSK)
+ Thu, 18 Jul 2024 08:45:47 +0300 (MSK)
 Received: from user-A520M-DS3H.sberdevices.ru (100.64.160.123) by
  p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 18 Jul 2024 08:45:44 +0300
+ 15.2.1118.40; Thu, 18 Jul 2024 08:45:46 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <frieder.schrempf@kontron.de>, <kmpark@infradead.org>, <hs@denx.de>,
@@ -60,9 +60,9 @@ To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <jagan@amarulasolutions.com>
 CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v6 3/6] drivers: introduce UBI block abstraction
-Date: Thu, 18 Jul 2024 08:45:25 +0300
-Message-ID: <20240718054528.799539-4-avromanov@salutedevices.com>
+Subject: [PATCH v6 5/6] disk: support UBI partitions
+Date: Thu, 18 Jul 2024 08:45:27 +0300
+Message-ID: <20240718054528.799539-6-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240718054528.799539-1-avromanov@salutedevices.com>
 References: <20240718054528.799539-1-avromanov@salutedevices.com>
@@ -111,81 +111,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UBI block is an virtual device, that runs on top
-of the MTD layer. The blocks are UBI volumes.
-Intended to be used in combination with other MTD
-drivers.
-
-Despite the fact that it, like mtdblock abstraction,
-it used with UCLASS_MTD, they can be used together
-on the system without conflicting. For example,
-using bcb command:
-
-  # Trying to load bcb via mtdblock:
-  $ bcb load mtd 0 mtd_partition_name
-
-  # Trying to load bcb via UBI block:
-  $ bcb load ubi 1 ubi_volume_name
-
-User always must attach UBI layer (for example, using
-ubi_part()) before using UBI block device.
+UBI partition is abstraction over UBI volumes.
+Can be used by UBI block device.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 Reviewed-by: Heiko Schocher <hs@denx.de>
-Acked-by: Heiko Schocher <hs@denx.de>
 ---
- drivers/block/blk-uclass.c |   1 +
- drivers/mtd/ubi/Kconfig    |   7 ++
- drivers/mtd/ubi/Makefile   |   1 +
- drivers/mtd/ubi/block.c    | 130 +++++++++++++++++++++++++++++++++++++
- include/ubi_uboot.h        |   9 +++
- 5 files changed, 148 insertions(+)
- create mode 100644 drivers/mtd/ubi/block.c
+ drivers/mtd/ubi/Makefile |  2 +-
+ drivers/mtd/ubi/part.c   | 99 ++++++++++++++++++++++++++++++++++++++++
+ include/part.h           |  2 +
+ 3 files changed, 102 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/ubi/part.c
 
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index 9b8aa45667..312e038445 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -37,6 +37,7 @@ static struct {
- 	{ UCLASS_BLKMAP, "blkmap" },
- 	{ UCLASS_RKMTD, "rkmtd" },
- 	{ UCLASS_MTD, "mtd" },
-+	{ UCLASS_MTD, "ubi" },
- };
- 
- static enum uclass_id uclass_name_to_iftype(const char *uclass_idname)
-diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
-index fd446d6efb..ccbeafad26 100644
---- a/drivers/mtd/ubi/Kconfig
-+++ b/drivers/mtd/ubi/Kconfig
-@@ -114,5 +114,12 @@ config MTD_UBI_FM_DEBUG
- 	help
- 	  Enable UBI fastmap debug
- 
-+config UBI_BLOCK
-+	bool "Enable UBI block device support"
-+	depends on BLK
-+	default n
-+	help
-+	  Enable UBI block device support using blk_ops abstraction.
-+
- endif # MTD_UBI
- endmenu # "Enable UBI - Unsorted block images"
 diff --git a/drivers/mtd/ubi/Makefile b/drivers/mtd/ubi/Makefile
-index 30d00fbdfe..6e24ae95d3 100644
+index 6e24ae95d3..690ef9e901 100644
 --- a/drivers/mtd/ubi/Makefile
 +++ b/drivers/mtd/ubi/Makefile
-@@ -7,3 +7,4 @@ obj-y += attach.o build.o vtbl.o vmt.o upd.o kapi.o eba.o io.o wl.o crc32.o
+@@ -7,4 +7,4 @@ obj-y += attach.o build.o vtbl.o vmt.o upd.o kapi.o eba.o io.o wl.o crc32.o
  obj-$(CONFIG_MTD_UBI_FASTMAP) += fastmap.o
  obj-y += misc.o
  obj-y += debug.o
-+obj-$(CONFIG_UBI_BLOCK) += block.o
-diff --git a/drivers/mtd/ubi/block.c b/drivers/mtd/ubi/block.c
+-obj-$(CONFIG_UBI_BLOCK) += block.o
++obj-$(CONFIG_UBI_BLOCK) += block.o part.o
+diff --git a/drivers/mtd/ubi/part.c b/drivers/mtd/ubi/part.c
 new file mode 100644
-index 0000000000..99d55282cd
+index 0000000000..13d1f165c3
 --- /dev/null
-+++ b/drivers/mtd/ubi/block.c
-@@ -0,0 +1,130 @@
++++ b/drivers/mtd/ubi/part.c
+@@ -0,0 +1,99 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * (C) Copyright 2024 SaluteDevices, Inc.
@@ -193,39 +146,16 @@ index 0000000000..99d55282cd
 + * Author: Alexey Romanov <avromanov@salutedevices.com>
 + */
 +
-+#include <blk.h>
++#include <memalign.h>
 +#include <part.h>
 +#include <ubi_uboot.h>
-+#include <dm/device.h>
-+#include <dm/device-internal.h>
 +
-+int ubi_bind(struct udevice *dev)
-+{
-+	struct blk_desc *bdesc;
-+	struct udevice *bdev;
-+	int ret;
-+
-+	ret = blk_create_devicef(dev, "ubi_blk", "blk", UCLASS_MTD,
-+				 -1, 512, 0, &bdev);
-+	if (ret) {
-+		pr_err("Cannot create block device");
-+		return ret;
-+	}
-+
-+	bdesc = dev_get_uclass_plat(bdev);
-+
-+	bdesc->bdev = bdev;
-+	bdesc->part_type = PART_TYPE_UBI;
-+
-+	return 0;
-+}
-+
-+static struct ubi_device *get_ubi_device(void)
++static inline struct ubi_device *get_ubi_device(void)
 +{
 +	return ubi_devices[0];
 +}
 +
-+static char *get_volume_name(int vol_id)
++static struct ubi_volume *ubi_get_volume_by_index(int vol_id)
 +{
 +	struct ubi_device *ubi = get_ubi_device();
 +	int i;
@@ -240,100 +170,94 @@ index 0000000000..99d55282cd
 +			continue;
 +
 +		if (volume->vol_id == vol_id)
-+			return volume->name;
++			return volume;
 +	}
 +
 +	return NULL;
 +}
 +
-+static ulong ubi_bread(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
-+		       void *dst)
++static int __maybe_unused part_get_info_ubi(struct blk_desc *dev_desc, int part_idx,
++					    struct disk_partition *info)
 +{
-+	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
-+	char *volume_name = get_volume_name(block_dev->hwpart);
-+	unsigned int size = blkcnt * block_dev->blksz;
-+	loff_t offset = start * block_dev->blksz;
-+	int ret;
++	struct ubi_volume *vol;
 +
-+	if (!volume_name) {
-+		pr_err("%s: failed to find volume name for blk=" LBAF "\n", __func__, start);
-+		return -EINVAL;
-+	}
++	/*
++	 * We must use part_idx - 1 instead of part_idx, because
++	 * part_get_info_by_name() start indexing at 1, not 0.
++	 * ubi volumes idexed starting at 0
++	 */
++	vol = ubi_get_volume_by_index(part_idx - 1);
++	if (!vol)
++		return 0;
 +
-+	ret = ubi_volume_read(volume_name, dst, offset, size);
-+	if (ret) {
-+		pr_err("%s: failed to read from %s UBI volume\n", __func__, volume_name);
-+		return ret;
-+	}
++	snprintf(info->name, PART_NAME_LEN, vol->name);
 +
-+	return blkcnt;
-+}
++	info->start = 0;
++	info->size = (unsigned long)vol->used_bytes / dev_desc->blksz;
++	info->blksz = dev_desc->blksz;
 +
-+static ulong ubi_bwrite(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
-+			const void *src)
-+{
-+	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
-+	char *volume_name = get_volume_name(block_dev->hwpart);
-+	unsigned int size = blkcnt * block_dev->blksz;
-+	loff_t offset = start * block_dev->blksz;
-+	int ret;
-+
-+	if (!volume_name) {
-+		pr_err("%s: failed to find volume for blk=" LBAF "\n", __func__, start);
-+		return -EINVAL;
-+	}
-+
-+	ret = ubi_volume_write(volume_name, (void *)src, offset, size);
-+	if (ret) {
-+		pr_err("%s: failed to write from %s UBI volume\n", __func__, volume_name);
-+		return ret;
-+	}
-+
-+	return blkcnt;
-+}
-+
-+static int ubi_blk_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = device_probe(dev);
-+	if (ret) {
-+		pr_err("Probing %s failed (err=%d)\n", dev->name, ret);
-+		return ret;
-+	}
++	/* Save UBI volume ID in blk device descriptor */
++	dev_desc->hwpart = vol->vol_id;
 +
 +	return 0;
 +}
 +
-+static const struct blk_ops ubi_blk_ops = {
-+	.read = ubi_bread,
-+	.write = ubi_bwrite,
-+};
-+
-+U_BOOT_DRIVER(ubi_blk) = {
-+	.name = "ubi_blk",
-+	.id = UCLASS_BLK,
-+	.ops = &ubi_blk_ops,
-+	.probe = ubi_blk_probe,
-+};
-diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-index d36bb92348..ea0db69c72 100644
---- a/include/ubi_uboot.h
-+++ b/include/ubi_uboot.h
-@@ -55,4 +55,13 @@ extern struct ubi_device *ubi_devices[];
- int cmd_ubifs_mount(char *vol_name);
- int cmd_ubifs_umount(void);
- 
-+#if IS_ENABLED(CONFIG_UBI_BLOCK)
-+int ubi_bind(struct udevice *dev);
-+#else
-+static inline int ubi_bind(struct udevice *dev)
++static void __maybe_unused part_print_ubi(struct blk_desc *dev_desc)
 +{
-+	return -EOPNOTSUPP;
-+}
-+#endif
++	struct ubi_device *ubi = get_ubi_device();
++	int i;
 +
- #endif
++	for (i = 0; i < (ubi->vtbl_slots + 1); i++) {
++		struct ubi_volume *volume = ubi->volumes[i];
++
++		if (!volume)
++			continue;
++
++		if (volume->vol_id >= UBI_INTERNAL_VOL_START)
++			continue;
++
++		printf("%d: %s\n", volume->vol_id, volume->name);
++	}
++}
++
++static int part_test_ubi(struct blk_desc *dev_desc)
++{
++	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
++
++	if (blk_dread(dev_desc, 0, 1, (ulong *)buffer) != 1)
++		return -1;
++
++	return 0;
++}
++
++U_BOOT_PART_TYPE(ubi) = {
++	.name	= "ubi",
++	.part_type	= PART_TYPE_UBI,
++	.max_entries	= UBI_ENTRY_NUMBERS,
++	.get_info	= part_get_info_ptr(part_get_info_ubi),
++	.print	= part_print_ptr(part_print_ubi),
++	.test	= part_test_ubi,
++};
+diff --git a/include/part.h b/include/part.h
+index 40419fdf2f..72b98b3512 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -31,6 +31,7 @@ struct block_drvr {
+ #define PART_TYPE_AMIGA		0x04
+ #define PART_TYPE_EFI		0x05
+ #define PART_TYPE_MTD		0x06
++#define PART_TYPE_UBI		0x07
+ 
+ /* maximum number of partition entries supported by search */
+ #define DOS_ENTRY_NUMBERS	8
+@@ -38,6 +39,7 @@ struct block_drvr {
+ #define MAC_ENTRY_NUMBERS	64
+ #define AMIGA_ENTRY_NUMBERS	8
+ #define MTD_ENTRY_NUMBERS	64
++#define UBI_ENTRY_NUMBERS	UBI_MAX_VOLUMES
+ 
+ /*
+  * Type string for U-Boot bootable partitions
 -- 
 2.34.1
 
