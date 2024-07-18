@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77890C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 14:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE9DDC3DA63
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 14:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B68E882BE;
-	Thu, 18 Jul 2024 16:11:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F6F088427;
+	Thu, 18 Jul 2024 16:12:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BJntEfth";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O012jtm8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B938882FA; Thu, 18 Jul 2024 16:11:35 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 5945F882FA; Thu, 18 Jul 2024 16:12:57 +0200 (CEST)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16E458827D
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 16:11:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AA2A8827D
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 16:12:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a05b4fa525so25535085a.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 07:11:33 -0700 (PDT)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-44d1eb90522so1454741cf.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 07:12:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721311892; x=1721916692; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721311974; x=1721916774; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=5mNz5fwjQxA7hRjG/y2bSuDn47T4+Ayl8EytxxJFnmE=;
- b=BJntEfthBOqAmvu3yBbxUrPqDaIdjEzuysosxxQE+/7mPORd8LDfzq2CzfrDz4Px/6
- tqWe0UnVDQHWhXQUxJF013o6IAiuEg9NBvZRAULsApTVNSShbbG0qoSO3sbAMExICcuC
- FbaVVA5UvYVpY+ezHXwv5NxqP+ewWqqJe8WIQq5JgUycDlT3QMzclzuArq12Hbg7WQnQ
- 7HQbqpjUjP7RSc6n+Sm8atb/ZB1BveucENcSxvIQ5TxURaLubDO5Mod5iWxm99BdGFaO
- nO2P+IXrDZHaaI4ubrOtF+behB/oGW46LJDf3U6iBnraiPWWI+6aXlMspmjwDZiIGsvT
- fc2w==
+ bh=wxWw5dv1enFXWP4IBvpSJ1dxirxT7EtX8Zn1ZGJhpJg=;
+ b=O012jtm8q+E6V9rlIxP35IM/k7466ETF3JoRrzY3lct7s0AqtJHHnBZxEGP9ZBbFAo
+ 54ur+xpmSabHWbXVNvYGgACfGpxgtfW+yUwoO6nJV2cdfwOVkXRgV57S3ZjHtGElhiZt
+ l0hshLf8RHjVHg0hQ4IT87y7CPmsdLla9yGWRVHUFAiRvsNyOsBygOTiljKX/2SK8BY5
+ z2OKgow15tFn18rr7vWjyGVQnpP1Qim15qkZ47dCNXBJqyANGWSMOXYdsA38rYxr+F81
+ zuFepbNJCxpaclGwQt07qLdISfG/x9YFLsk8l/CjH4qI8nbIb9RZc8KnfCS+5ykd1OiT
+ CmuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721311892; x=1721916692;
+ d=1e100.net; s=20230601; t=1721311974; x=1721916774;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5mNz5fwjQxA7hRjG/y2bSuDn47T4+Ayl8EytxxJFnmE=;
- b=BfzJFNi8UANlD0QH2I896Ch5sL2LSb8aWI/l6PpqMYqXgrwE+34GSWozQqNQTB2qOU
- IxYKnt/ucy9kdT42B8dgutngEbFP2QUrMTpzdjD7w8xlYnCCA54E9EXVGvMBYuEU7RKi
- 1sgvnH7+GtA2dUskbwue3+oNo/EsfDtDE2eNqpGVBaz3k5qjzwjO2J51gc6hHqhwhoyw
- WKB3XaP/W4XD/MVxSfB+aQ2GYDK5hn5GOzevSR6i2k594zh/Oeb6k0leEkA+rB810M7+
- hjpYWJZ8N6VyhgNnJlbvsDyw/WUJB07kkkyBntipchIvXgxRDlipUz7wuuL5CsZTUGma
- DHGw==
+ bh=wxWw5dv1enFXWP4IBvpSJ1dxirxT7EtX8Zn1ZGJhpJg=;
+ b=dXM0DUVahome576Ac62sDeOJZl0RqYC9c9gYa0+NLiuv3dqSICM0LpJhXBYQ2IrX61
+ FEKEC5lOykY+7mnKZAQTN2SkFF5PGc7AtG0E+tHpkhYW0TWUb7VdVg6lUL+cbYnh0aj+
+ S/tKcpXEeb2lkAo6kB1Vjj73X4H6GPPfUdLuSjGPyFRwvfqez6R6coWZKyZ0tvbOFrUC
+ kJ8zg2XB6NWlGmRGdxRyeHbqW9ziwF5YcOBtK0ph0fvneluAmQd7tDKfhu5fMMIldRfL
+ PUncsPzDOE7Mi7dUsuf7zkK2ZmgoW8bRTAgdTITpEuWHuGIc1aEEUcNp7rwMFBp/iEB8
+ fZMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3uVRXrxgxvLVGJEUHoqB3hvr4+P2qtV+/xCvsqh3jKB7yHC0i3yKdd39KaY64wmggC3CMtnBBejbk9s+8X8/2xA1f3A==
-X-Gm-Message-State: AOJu0Yzd2DbI9WMkgWY58tUjPtnGrHb5QGTUVnAWu5E/0Q3iPXh+D2dV
- BtrH/QxW9CfNArr5OLx2jSV0bZ0VxeCu5TcfcIWUSmWYOO5hqvHUKkdXzQ==
-X-Google-Smtp-Source: AGHT+IHl2XLD5gXi6RRh7Vy6DTd56p0pczONX94yMNvfblr7Oc1U02S6hDdLmFfmf/D3DC1nHRXKag==
-X-Received: by 2002:a05:620a:1a22:b0:795:4d37:82a8 with SMTP id
- af79cd13be357-7a193981b56mr137840185a.22.1721311891549; 
- Thu, 18 Jul 2024 07:11:31 -0700 (PDT)
+ AJvYcCXYIo48qT/4ba76vXuM92dwnoOfbv/Z3nA2LJ5+o7BYR8yp0AHCHf+TXgdg+G2rvvvNM/R1RTf/2reUUkbUttfGyNPDFQ==
+X-Gm-Message-State: AOJu0YyjsTxt7Cf+bHnmiSBjMlEN8PazV3DkyNI5lI+B4W1jR6cMn0t2
+ AeUTQuOjDyGJXaiKw3vovBl88j/oGzJsAe4UAmeVPWDYF5E8PMbh
+X-Google-Smtp-Source: AGHT+IG6pt+mTTgVQmisTccfNH1SQeo4D6iE9eger6qBVL99nar1UTEBaOg9smrfRz7gVW2ItPhAGw==
+X-Received: by 2002:ac8:7c43:0:b0:447:eac6:3873 with SMTP id
+ d75a77b69052e-44f969a0cbemr12807971cf.5.1721311973673; 
+ Thu, 18 Jul 2024 07:12:53 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a19396fe9asm27987385a.118.2024.07.18.07.11.30
+ d75a77b69052e-44f96a9d9dfsm2698341cf.67.2024.07.18.07.12.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jul 2024 07:11:31 -0700 (PDT)
-Message-ID: <cd57edbe-bf5a-0545-9cbb-f39babdbe776@gmail.com>
-Date: Thu, 18 Jul 2024 10:11:30 -0400
+ Thu, 18 Jul 2024 07:12:53 -0700 (PDT)
+Message-ID: <ea2af812-f6a5-478d-5069-ee918bf507a8@gmail.com>
+Date: Thu, 18 Jul 2024 10:12:52 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH v2 03/21] test: Move some SPL-loading test-code into
- sandbox common
+Subject: Re: [PATCH v2 20/21] sandbox: Add an SPL loader for UPL
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Michal Simek <michal.simek@amd.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 References: <20240713070055.2172883-1-sjg@chromium.org>
- <20240713070055.2172883-4-sjg@chromium.org>
+ <20240713070055.2172883-20-sjg@chromium.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240713070055.2172883-4-sjg@chromium.org>
+In-Reply-To: <20240713070055.2172883-20-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,209 +100,110 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/13/24 03:00, Simon Glass wrote:
-> This code is useful for loading an image in sandbox_spl so move it into
-> a place where it can be called as needed.
+> Add support for loading a UPL image from SPL. This uses the simple FIT
+> implementation, but also loads the full FIT just to permit more testing.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
 > (no changes since v1)
 > 
->   arch/sandbox/cpu/spl.c         | 67 ++++++++++++++++++++++++++++++++++
->   arch/sandbox/include/asm/spl.h | 14 +++++++
->   test/image/spl_load_os.c       | 53 +--------------------------
->   3 files changed, 82 insertions(+), 52 deletions(-)
+>   arch/sandbox/cpu/spl.c         | 49 +++++++++++++++++++++++++++++++++-
+>   arch/sandbox/include/asm/spl.h |  1 +
+>   2 files changed, 49 insertions(+), 1 deletion(-)
 > 
 > diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-> index 9ad9da686c6..caa8e0b3b01 100644
+> index 39869f27a7b..f665f86d64c 100644
 > --- a/arch/sandbox/cpu/spl.c
 > +++ b/arch/sandbox/cpu/spl.c
-> @@ -6,6 +6,7 @@
+> @@ -3,14 +3,18 @@
+>    * Copyright (c) 2016 Google, Inc
+>    */
+>   
+> +#define LOG_CATEGORY	LOGC_BOOT
+> +
 >   #include <dm.h>
 >   #include <hang.h>
 >   #include <handoff.h>
-> +#include <image.h>
+>   #include <image.h>
 >   #include <init.h>
 >   #include <log.h>
+> +#include <mapmem.h>
 >   #include <os.h>
-> @@ -179,3 +180,69 @@ int handoff_arch_save(struct spl_handoff *ho)
+>   #include <spl.h>
+> +#include <upl.h>
+>   #include <asm/global_data.h>
+>   #include <asm/spl.h>
+>   #include <asm/state.h>
+> @@ -52,7 +56,8 @@ void board_init_f(ulong flag)
+>   void board_boot_order(u32 *spl_boot_list)
+>   {
+>   	spl_boot_list[0] = BOOT_DEVICE_VBE;
+> -	spl_boot_list[1] = BOOT_DEVICE_BOARD;
+> +	spl_boot_list[1] = BOOT_DEVICE_UPL;
+> +	spl_boot_list[2] = BOOT_DEVICE_BOARD;
+>   }
+>   
+>   static int spl_board_load_file(struct spl_image_info *spl_image,
+> @@ -246,3 +251,45 @@ int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image)
 >   
 >   	return 0;
 >   }
 > +
-> +/* Context used to hold file descriptor */
-> +struct load_ctx {
-> +	int fd;
-> +};
-> +
-> +static ulong read_fit_image(struct spl_load_info *load, ulong offset,
-> +			    ulong size, void *buf)
+> +static int upl_load_from_image(struct spl_image_info *spl_image,
+> +			       struct spl_boot_device *bootdev)
 > +{
-> +	struct load_ctx *load_ctx = load->priv;
-> +	off_t ret;
-> +	ssize_t res;
+> +	long long size;
+> +	char *fname;
+> +	int ret, fd;
+> +	ulong addr;
 > +
-> +	ret = os_lseek(load_ctx->fd, offset, OS_SEEK_SET);
-> +	if (ret < 0) {
-> +		printf("Failed to seek to %zx, got %zx (errno=%d)\n", offset,
-> +		       ret, errno);
-> +		return log_msg_ret("lse", ret);
-> +	}
+> +	if (!CONFIG_IS_ENABLED(UPL_OUT))
+> +		return -ENOTSUPP;
 > +
-> +	res = os_read(load_ctx->fd, buf, size);
-> +	if (res < 0) {
-> +		printf("Failed to read %lx bytes, got %ld (errno=%d)\n",
-> +		       size, res, errno);
-> +		return log_msg_ret("osr", res);
-> +	}
+> +	spl_upl_init();
+> +	fname = os_malloc(256);
 > +
-> +	return size;
-> +}
+> +	ret = sandbox_spl_load_fit(fname, 256, spl_image);
+> +	if (ret)
+> +		return log_msg_ret("fit", ret);
+> +	spl_image->flags = SPL_SANDBOXF_ARG_IS_BUF;
+> +	spl_image->arg = map_sysmem(spl_image->load_addr, 0);
+> +	/* size is set by load_simple_fit(), offset is left as 0 */
 > +
-> +int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image)
-> +{
-> +	struct legacy_img_hdr *header;
-> +	struct load_ctx load_ctx;
-> +	struct spl_load_info load;
-> +	int ret;
-> +	int fd;
-> +
-> +	memset(&load, '\0', sizeof(load));
-> +	spl_set_bl_len(&load, 512);
-> +	load.read = read_fit_image;
-> +
-> +	ret = sandbox_find_next_phase(fname, maxlen, true);
-> +	if (ret) {
-> +		printf("%s not found, error %d\n", fname, ret);
-> +		return log_msg_ret("nph", ret);
-> +	}
-> +
-> +	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
-> +
-> +	log_debug("reading from %s\n", fname);
+> +	/* now read the whole FIT into memory */
+
+Why do we have to do this? Didn't we just load the FIT in sandbox_spl_load_fit?
+
 > +	fd = os_open(fname, OS_O_RDONLY);
 > +	if (fd < 0)
-> +		return log_msg_ret("ope", -ENOENT);
-
-should return errno
-
-and I think longer messages won't hurt (this is sandbox after all).
-
-> +	if (os_read(fd, header, 512) != 512)
-
-Actually, this should probably be sizeof(*header) and not 512
-
+> +		return log_msg_ret("op2", -ENOENT);
+> +	if (os_get_filesize(fname,  &size))
+> +		return log_msg_ret("fis", -ENOENT);
+> +
+> +	/* place it after the loaded image, allowing plenty of space */
+> +	addr = ALIGN(spl_image->load_addr + size, 0x1000);
+> +	log_debug("Loading whole FIT to %lx\n", addr);
+> +	if (os_read(fd, map_sysmem(addr, 0), size) != size)
 > +		return log_msg_ret("rea", -EIO);
-
-ditto errno/message
-
-> +	load_ctx.fd = fd;
+> +	os_close(fd);
 > +
-> +	load.priv = &load_ctx;
-> +
-> +	ret = spl_load_simple_fit(image, &load, 0, header);
-> +	if (ret)
-> +		return log_msg_ret("slf", ret);
+> +	/* tell UPL where it is */
+> +	upl_set_fit_addr(addr);
 > +
 > +	return 0;
 > +}
+> +SPL_LOAD_IMAGE_METHOD("upl", 4, BOOT_DEVICE_UPL, upl_load_from_image);
 > diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
-> index 4fab24cd156..d50d9ad6b48 100644
+> index d50d9ad6b48..d824b2123a2 100644
 > --- a/arch/sandbox/include/asm/spl.h
 > +++ b/arch/sandbox/include/asm/spl.h
-> @@ -6,6 +6,8 @@
->   #ifndef __asm_spl_h
->   #define __asm_spl_h
+> @@ -18,6 +18,7 @@ enum {
+>   	BOOT_DEVICE_NOR,
+>   	BOOT_DEVICE_SPI,
+>   	BOOT_DEVICE_NAND,
+> +	BOOT_DEVICE_UPL,
+>   };
 >   
-> +struct spl_image_info;
-> +
->   enum {
->   	BOOT_DEVICE_MMC1,
->   	BOOT_DEVICE_MMC2,
-> @@ -31,4 +33,16 @@ enum {
->    */
->   int sandbox_find_next_phase(char *fname, int maxlen, bool use_img);
->   
-> +/**
-> + * sandbox_spl_load_fit() - Load the next phase from a FIT
-> + *
-> + * Loads a FIT containing the next phase and sets it up for booting
-> + *
-> + * @fname: Returns filename loaded
-> + * @maxlen: Maximum length for @fname including \0
-> + * @image: Place to put SPL-image information
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image);
-> +
->   #endif
-> diff --git a/test/image/spl_load_os.c b/test/image/spl_load_os.c
-> index 7d5fb9b07e0..56105a59236 100644
-> --- a/test/image/spl_load_os.c
-> +++ b/test/image/spl_load_os.c
-> @@ -10,63 +10,12 @@
->   #include <test/spl.h>
->   #include <test/ut.h>
->   
-> -/* Context used for this test */
-> -struct text_ctx {
-> -	int fd;
-> -};
-> -
-> -static ulong read_fit_image(struct spl_load_info *load, ulong offset,
-> -			    ulong size, void *buf)
-> -{
-> -	struct text_ctx *text_ctx = load->priv;
-> -	off_t ret;
-> -	ssize_t res;
-> -
-> -	ret = os_lseek(text_ctx->fd, offset, OS_SEEK_SET);
-> -	if (ret != offset) {
-> -		printf("Failed to seek to %zx, got %zx (errno=%d)\n", offset,
-> -		       ret, errno);
-> -		return 0;
-> -	}
-> -
-> -	res = os_read(text_ctx->fd, buf, size);
-> -	if (res == -1) {
-> -		printf("Failed to read %lx bytes, got %ld (errno=%d)\n",
-> -		       size, res, errno);
-> -		return 0;
-> -	}
-> -
-> -	return size;
-> -}
-> -
->   static int spl_test_load(struct unit_test_state *uts)
->   {
->   	struct spl_image_info image;
-> -	struct legacy_img_hdr *header;
-> -	struct text_ctx text_ctx;
-> -	struct spl_load_info load;
->   	char fname[256];
-> -	int ret;
-> -	int fd;
-> -
-> -	memset(&load, '\0', sizeof(load));
-> -	spl_set_bl_len(&load, 512);
-> -	load.read = read_fit_image;
-> -
-> -	ret = sandbox_find_next_phase(fname, sizeof(fname), true);
-> -	if (ret)
-> -		ut_assertf(0, "%s not found, error %d\n", fname, ret);
-> -
-> -	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
-> -
-> -	fd = os_open(fname, OS_O_RDONLY);
-> -	ut_assert(fd >= 0);
-> -	ut_asserteq(512, os_read(fd, header, 512));
-> -	text_ctx.fd = fd;
-> -
-> -	load.priv = &text_ctx;
->   
-> -	ut_assertok(spl_load_simple_fit(&image, &load, 0, header));
-> +	ut_assertok(sandbox_spl_load_fit(fname, sizeof(fname), &image));
->   
->   	return 0;
->   }
+>   /**
 
