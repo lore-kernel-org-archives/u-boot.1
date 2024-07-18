@@ -4,78 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0D6C3DA61
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 19:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39CF9C3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:02:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 719E1882BE;
-	Thu, 18 Jul 2024 21:47:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id A926788AD2;
+	Thu, 18 Jul 2024 22:02:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Oo3YCwIQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YFuMTwgF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 411CB88AD4; Thu, 18 Jul 2024 21:47:44 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id B5AAC88AD2; Thu, 18 Jul 2024 22:02:01 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 308E087873
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 21:47:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5B0E388ABE
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5a2a90243c9so271924a12.0
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 12:47:42 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1fb4a807708so11697335ad.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:01:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1721332061; x=1721936861;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xsERpho8TOr/sHpD54DCtNz79AzwpQpjEPL3CL+xyrI=;
- b=Oo3YCwIQlgfbwvB2OMBcH4yUkqcQF7M3cJjs7swkF3wEww6PhTGI1oVQ7P5JcKixd5
- UviG7ddN/lXbU6RvHcCD+p6LU8u/ROoEIhUOa/u9Ds1gwuCJ6wMFdBiYcCbJRhHjQsl3
- PTmcixtMNsMfQtm7Zdeo/EnCdHPK3dURtZfTE=
+ d=linaro.org; s=google; t=1721332918; x=1721937718; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=z8nGBOuqIJZlY8MzWiHj27h+4+hbitnBfz+bzvyUP3w=;
+ b=YFuMTwgFuXbd/BSmw3vOXMnbdDNfgxGxum1x0EpPzHjQmjxfDfrtaoACxkqPjppdRQ
+ 7oSpfyahx+N/iUc9DzlxPfvl5CjC1TVH/ClIe5ko8Gpso/iNQ3YjA+qDCn5J9JtDgegv
+ i6y+ki6em7ybJZhbyndahc6KCokmIYWjdaNBDxdqZtSqEFIoyzVk1R+dTuMCm7k6Ho6p
+ m8wQClpECAowvPMJY/8m+vxpoegf8WlPoi1ezvTDnZFDYq60/JxlqDucephJode/PQhj
+ 9lvv/Me8JMxWWPhBn64JGO3lLW0W4NJkz3XLQCQMlZdky9UKXuydvysTw0YPqXTWbs83
+ WyIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721332061; x=1721936861;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xsERpho8TOr/sHpD54DCtNz79AzwpQpjEPL3CL+xyrI=;
- b=U6r5lH+++TiCKj4sEj3o3zpPxbfwmB56tx0heFWvLYrGMu4dVMPKsJ+kmSbCKqPT28
- jFE/cQPbzIPMHxct/2Fmv39EfKIyJmcLkuz5km9HRsQ0qzUBR8WgZ1oJMxqrAIoJ51sR
- JFTGig6/USu8+3s/bOgFAEWM8/1O4TB1HVLoourxOv+eGI1rLLURQEIgNqzpGLZKPUSa
- jXqIMeciTptAk+CJh4Lk+YKkxpT853mJdk3vXIjsz15RLX+jiItvaScRqpDuXaKUT3k2
- UMD9ia40GZ7yHNGTde0IHiG15pWcp4KSHZLzIwv7/sKbUZmHEmHidMb8TH279ArZW3Bi
- aG+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4YJyHYPfZz5CX/CP2BlcZN1U3Pz322BJjQfdeTxUM9uQKx/PiRwlARwgC8+YLFemhSylL60U5hmQwvDqaMmqE9Jd/DA==
-X-Gm-Message-State: AOJu0Yy8/ZDPQwbuBiyNrcPVwmAdKcIp0y7klycRFHCrmXipVz+hukh9
- g5TF7uvvt8rua44/krzlpAx7foQXVV6W3YHQt+XANKHJb4nTL3tVDrwLsZX9ZHnza7eaBMB9fMq
- nkex+Rv+s9KUpusgB6f1ne2sRVRoTSuPE7G0/zg==
-X-Google-Smtp-Source: AGHT+IEyiHWFQ8OdfNp1MRMwIJ+7XM+nvngsgCSwa7Uu4YPSaeMKVXHPTOgdgmthyFk+EY5Mv1zQhI2cDg5Vx6VcbCQ=
-X-Received: by 2002:a17:906:40cf:b0:a77:af07:b98a with SMTP id
- a640c23a62f3a-a7a013e90c6mr421722866b.73.1721332061475; Thu, 18 Jul 2024
- 12:47:41 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721332918; x=1721937718;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z8nGBOuqIJZlY8MzWiHj27h+4+hbitnBfz+bzvyUP3w=;
+ b=pwbiOeEpa2T4gZYpBU4R5EZkzYL2pVmU5ARN0zVci6qXw17v4IkI39xvIe8HqEONeN
+ WxBGySshWrBftRka1Lt1gO447L+OVYnha+3haDzjHQYBWNdO0OuA/BMb91xb9s3ZQm2Y
+ MhHBOVmCmahTUAomNwSvMv+Z8c5VTvczI9L2ie8Hr0to5ypHNFdQq9k+rdBQm/LCHMnh
+ ThLKdlxsgX74XDTPzgmGcuZ/5WSrE+jdt80495YDvg4w8XqOTobEDSDmmUMjyGKiaUZA
+ patugsImUaT8UqHhjJH2WjxmXQW0Giq/xfbDn8fHFnxObJI/lIhT7fZehzmdXq5rXRCF
+ NCGg==
+X-Gm-Message-State: AOJu0YzhqCdHr68RhjMlHH7c+h5I6p3xn/Vb5Tg0zlQE6X08uum8W2ar
+ RwsIsuZHmrKhWUR/UPbvTrirW5VzXotmNUT64DLcEAGhhlkE6Lm7I7SP64x7iJ4a052UHXozg+1
+ FERQL2akUF9sM6Xm1mYCwBP6TH2wwlrg/BloJ9Q==
+X-Google-Smtp-Source: AGHT+IHMJ1CLQA1vjC1eWhC7cml7lXHCKFYdtfjWlhAuPiUCESPixGEvYyx6VhYzxeKq8uVfyt0J932XQfg2jXQdGjg=
+X-Received: by 2002:a17:90b:30ca:b0:2c8:ac1:d8c3 with SMTP id
+ 98e67ed59e1d1-2cb52927e76mr5158530a91.29.1721332915831; Thu, 18 Jul 2024
+ 13:01:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <PAZP264MB2974E713F54A40AB9B17DB85B1DB2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
- <20240710-talcum-repent-307fd836d683@thorsis.com>
- <PAZP264MB29745BAD4E854E1884E5A9CDB1AC2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
-In-Reply-To: <PAZP264MB29745BAD4E854E1884E5A9CDB1AC2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 18 Jul 2024 21:47:29 +0200
-Message-ID: <CAOf5uwmN5t5Mvg8GZe-F=B5ykmeuLfw69ctS5GZvOYZcZczsmA@mail.gmail.com>
-Subject: Re: [PATCH] mtd: nand: raw: atmel: Use ONFI ECC params if available
-To: Zixun Li <zli@ogga.fr>
-Cc: Alexander Dahl <ada@thorsis.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- open list <u-boot@lists.denx.de>, 
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-10-raymond.mao@linaro.org>
+ <CAC_iWjKC0sB++5um6TpnOxmkY8DhoNEx76C2UOeKsF7cX8yXCA@mail.gmail.com>
+In-Reply-To: <CAC_iWjKC0sB++5um6TpnOxmkY8DhoNEx76C2UOeKsF7cX8yXCA@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 18 Jul 2024 16:01:44 -0400
+Message-ID: <CAEfUkULg9O=et0pPi1c4ZnbL2mxK7c9CQ5KzdzF9A5y_MH1D+A@mail.gmail.com>
+Subject: Re: [PATCH v4 09/29] makefile: add mbedtls include directories
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Ilya Lukin <4.shket@gmail.com>, 
+ Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +107,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Ilias,
 
-On Thu, Jul 18, 2024 at 9:40=E2=80=AFPM Zixun Li <zli@ogga.fr> wrote:
->
-> On 10/07/2024 09:28, Alexander Dahl wrote:
->
-> > Despite the missing space between 'if' and the opening bracket (checkpa=
-tch
-> > should have told you?) this looks very much like what got into linux wi=
-th v4.11
-> > but was changed/reworked multiple times afterwards.  I wonder why this =
-was
-> > not ported to U-Boot when introducing this driver?  In 6a8dfd57220d ("n=
-and:
-> > atmel: Add DM based NAND driver") it was claimed the driver was ported
-> > from linux-5.4-at91, so this feature was probably dropped intentionally=
-?
-> > Does anyone know why?
+On Wed, 3 Jul 2024 at 07:35, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
+
+> On Tue, 2 Jul 2024 at 21:27, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
+> > Add the mbedtls include directories into the build system.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - None.
+> > Changes in v3
+> > - Remove changes for PLATFORM_CPPFLAGS.
+> > Changes in v4
+> > - Fix errors when building without "O=".
+> > - Minor fix of the include directories.
+> >
+> >  Makefile | 6 ++++++
+> >  1 file changed, 6 insertions(+)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index 07d7947c8af..fd855dbd5c9 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -829,6 +829,12 @@ KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
+> >  UBOOTINCLUDE    := \
+> >         -Iinclude \
+> >         $(if $(KBUILD_SRC), -I$(srctree)/include) \
+> > +       $(if $(CONFIG_MBEDTLS_LIB), \
+> > +               "-DMBEDTLS_CONFIG_FILE=\"mbedtls_def_config.h\"" \
 >
-> Hi,
+> don't you need a full path to the config file?
+> > +               -I$(srctree)/lib/mbedtls \
+> > +               -I$(srctree)/lib/mbedtls/port \
+> > +               -I$(srctree)/lib/mbedtls/external/mbedtls \
+> > +               -I$(srctree)/lib/mbedtls/external/mbedtls/include) \
 >
-> Sorry for the format issue. Is there any comment from maintainers ?
+> Most of these paths are explicitly added in patch #3. Why don't we
+> just keep them there?
 >
-> I'll push a v2 if this patch is considered.
+> We still need this for building other modules other than the MbedTLS
+library itself.
+For example, when those files include the "hash-checksum.h".
 
-Looking on it. Anyway expand the commit message with original information o=
-f it.
-Like:
-
-Upstream commit <short sha>
-
-Try to report some original context from kernel
-
-Micahel
-
-
-> --
-> Zixun LI
->
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Regards,
+Raymond
