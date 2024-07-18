@@ -4,75 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE3CC3DA60
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 09:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9371AC3DA60
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 10:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A03A188AD8;
-	Thu, 18 Jul 2024 11:12:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B5B35882DC;
+	Thu, 18 Jul 2024 12:15:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ErvwtLhE";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="468pTkIm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B621C88B05; Thu, 18 Jul 2024 11:12:01 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CCD48850A; Thu, 18 Jul 2024 12:15:38 +0200 (CEST)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2061c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:240a::61c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C64AC88AC1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 11:11:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 006DA881BA
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 12:15:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-427d2c8c632so314755e9.2
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 02:11:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721293919; x=1721898719; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a5bh/8yLLkdkS29f86OrEaE8zuEZCrK1vMYqGTA3TIA=;
- b=ErvwtLhEnhZ5B2MTd+CtJGJVDc8dZDsLRkayODKFOCyG9mhdYfm9J69+Z1Whaiajq7
- 8qFiHixFw6nA4flxe9KSJkYUDlkRrAaCz/dP0qP16fDnA/XFobbxfQ203ZbYNoyiupOb
- kf6Qqde42vVuMY8EwnnK3ZBTfhvXhmQQRk2Js=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721293919; x=1721898719;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=a5bh/8yLLkdkS29f86OrEaE8zuEZCrK1vMYqGTA3TIA=;
- b=IBj0dQH5NRjyrTB4x+vf07H5R0Vp0DIHQJYkyShts5Ymyj/3NMAj+uVgnjqz4HShI7
- Zd/SQQaFWUF9vd0CkyU6s9bQPU/bO9z0ML/J3DwT373Zp5Jzb5u4gdbAPlbPiN1hTfWV
- 7dKh9tE9LzxI7DP04vqUaS8aNtWsAaDEiJTOKKVv7nXuvwkLMIIygD11lf2NrXBGkgzi
- 3+jriP87CcYXuF1LQiimLJDcJz0V0U5eTg5p7FhgNVh8BVJLLhJjrTv5QVQDG1fjiQ2v
- +OGo/h+TSEZKLI3kUsOa8F6ByjSeIIOlVjjK5lE1/+e0NL1vVsWZsCcFvI7NDwI5BqW1
- Tnuw==
-X-Gm-Message-State: AOJu0YzYnviYQSe5Wxif6XG3GTchGPs6Tgg2rVaHm4ZAudwyWNay34oh
- rADwqSWYTCAKBNvpnuOJnTWP/XHH7RkWZS3W7xwhsqaTAnh0ZndrE8x6tnFetQpbleUvsJB6HJI
- =
-X-Google-Smtp-Source: AGHT+IGSsF/h1JUwmmsfpSfF0tdj2Il3q5VGUtzhi3b8A3J84NHBDscJTz0jnXtvSzj0cix+81q2Qw==
-X-Received: by 2002:adf:f206:0:b0:368:12ef:92d8 with SMTP id
- ffacd0b85a97d-3683171fa78mr2324207f8f.52.1721293919081; 
- Thu, 18 Jul 2024 02:11:59 -0700 (PDT)
-Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-368525f0353sm1064403f8f.115.2024.07.18.02.11.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 02:11:58 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 26/26] qconfig: Support a 'list' format
-Date: Thu, 18 Jul 2024 10:11:25 +0100
-Message-Id: <20240718091125.3788990-27-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240718091125.3788990-1-sjg@chromium.org>
-References: <20240718091125.3788990-1-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=u9uJfMBoKayhuSgeG0vlBmKtFCgjCtBynpE0Qv0rmYpAQYbegrRshK9BTUMoLYTd5KN+GXb+64xgt2SYOnDWOYD6Ra/LvGmLUI19gr9M4xgiYvOM1243cVsRTt7qUEeL/sos88Mq2/fakkM0roH5Wg6ObQbuqi/pX9BKmRQTGOOuTcc5SfMSZnU7+bVt6y2VFBRoHoLg+X+PFXoGxCM6CbYqi73mi1t/uQxOc2aBGEYx0uN5Ijoh47gBx5I9xPW7tsV+Ldx173HevX0h3lDyQwQJRTbV9oDQYy79orDoJRJq+70PZKP66GRL2kno4fTTBWLYO/hD/4bzi+1kEBAoOA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lgYz5PPKfWveqgbbRVb2U/xpDevE1FzHveFStJgfAEs=;
+ b=BsFU7mL4E0rWP0vOPZLLaPffcHz6tQH8Gb7NjgYdhKPZuAi/UokmGAKmdOXkwffuf8nw5ikw0h5n/wE+ifioSZDxQn9MidRA1//BkkpeSnN4cDAYFpgVxM4bYinBojQok9CgT4VplVh1B1E0FmcIrzlTYZgz0QNd7nkgQesBkLZy73p5kvSCqTE8gN+kvM33Q1ijwxyWUZ/HdndLS/xpvF5PZm1mSssWPReudoNGnc41ErBxuJdNZLpsVMAywRpCFTQf0aun+pw0ufIwolUlChamnK+YLhqOfFHFXYCJwJkNeTWHjD/jyBa2qT2OuQZnmuEdi9rNdBhlelVgba3v0Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lgYz5PPKfWveqgbbRVb2U/xpDevE1FzHveFStJgfAEs=;
+ b=468pTkImh9KvKQ5T7zZM3Hy748car+WFvCnv5/d5IgzO6kUDsCZDnFpDqPHg3G+K15ycs6NWPVrwlPIYRS3McHdq9iSnsaCUc0aOZnJJ00W6jS83sBqPf7Fg5mFb1S+gVpWbIeaukrCEqxmBBUN87FK1OsYx5i0SHhgC/1Oqbxk=
+Received: from BN8PR04CA0002.namprd04.prod.outlook.com (2603:10b6:408:70::15)
+ by SN7PR12MB7178.namprd12.prod.outlook.com (2603:10b6:806:2a6::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.35; Thu, 18 Jul
+ 2024 10:15:32 +0000
+Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
+ (2603:10b6:408:70:cafe::19) by BN8PR04CA0002.outlook.office365.com
+ (2603:10b6:408:70::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.29 via Frontend
+ Transport; Thu, 18 Jul 2024 10:15:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7784.5 via Frontend Transport; Thu, 18 Jul 2024 10:15:31 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 18 Jul
+ 2024 05:15:30 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Manikanta Guntupalli <manikanta.guntupalli@amd.com>, Harini Katakam
+ <harini.katakam@amd.com>, Neal Frager <neal.frager@amd.com>, "Radhey Shyam
+ Pandey" <radhey.shyam.pandey@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: zynqmp: dts: Add rts delay property for rs485 mode on
+ KD240
+Date: Thu, 18 Jul 2024 12:15:23 +0200
+Message-ID: <0e0c4c067236e11f661c1d067017e1ca975c9ddb.1721297721.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1040; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=hvMVHkWJSYiZphog1Go2Y4PHRazekK+87PVsdw7EMAc=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrQZr20Uxc4nbHMVi2DMi7XY9cptR6fDvyKLX4eUe9fmG
+ Vt8DSzoiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABPp7WGYK7r55z3DnTYRjdrP
+ L8QIBQnPd5BNZVjQH3//eLtsFLfpvSOMRc721y7cKTIFAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|SN7PR12MB7178:EE_
+X-MS-Office365-Filtering-Correlation-Id: e5551cb8-586a-47e4-0675-08dca7128e3a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?tIoNJfjFdZ4DS/Jj+dhCqI0h/+bsRZ8B2SRDCzv93ZVog0gfnW/hLE4Vt7he?=
+ =?us-ascii?Q?/XETsPehQkCj/hV+9cZR8Bh/Z5JAzkz4/jzr9MceCzmNCTWKGjSWhqOkFn0l?=
+ =?us-ascii?Q?q0LnOGLbkRMT7/YkvDMmZidoC/CrkcVQ515duNqKWDOHoIej/rEGtLpZk4X4?=
+ =?us-ascii?Q?MyA5MY2OzxyLeOP/Opq4qhBdelSTbRqNG2APLsWh5I3EX6yCp7W44dJ3+d5v?=
+ =?us-ascii?Q?PngnizitcPq00HPofitRcZS9FBMDGPU0KP7GYfEqqc3h+1PM81iyIjWUZztr?=
+ =?us-ascii?Q?UDA0ifuoNZIh4OeFP4I2gqidqOvAp9KShJySY0N8syl+flAWr2mne3SsS0mb?=
+ =?us-ascii?Q?t4icy/B3A+qOICI+dumV8CAnYMQV5xkgbBrc7WcxfYH4RBz04kDxUltk4xqP?=
+ =?us-ascii?Q?kY8Uc3gmEww5rUQURAtjuFALSrXituJIC/7GbNw0+//otUF3tT6MquF0qVak?=
+ =?us-ascii?Q?2rZNJKJ14o3bv3qVEJ5aTyA6j/t/DtVACPanPrJbQcC6iLZrA3+dF73P/2A7?=
+ =?us-ascii?Q?BUvgMBWaA/vaQAzjGDewlldZ9sabSIaR8JXgwcwqoFFzBwRlleZpQzxVZEV5?=
+ =?us-ascii?Q?dhLoetqQmyMV+Z4RUOUTRqLPspLfv7Hc7SHM7PwcXfdBbh0hAWNfDvEWBago?=
+ =?us-ascii?Q?+VlPjgNOyUNEo8gEfElEIo/q0/MMa62wvquEyBL3ZjHaoaevtVtmZjwTHCUp?=
+ =?us-ascii?Q?FQcgGFfeEml71bKt0zykCy3k9UzqfJdwyHsn61OxFsN+fXqJkfSRqoZxpmlw?=
+ =?us-ascii?Q?54m12hVyYI2p05ppFL/nXyf+S2PSvMR8LAtvCRkcTVqvTWDXuWG4Ve4QKJvY?=
+ =?us-ascii?Q?wbH2o8WAJy9MYyOenOT4Q/wYcW4VIXcEgeFwfdaVphobMQOFzxAC5leKjYE0?=
+ =?us-ascii?Q?etvO8Z7NzHRonlNkyYuZIuIHJ5rf22+YEown+0ykAnVLVwuuX5So1io+0Vmh?=
+ =?us-ascii?Q?1iCv16s1cIFr1E3KdzXi40rTH7OXfa8jn8YqSTa9LXIyIfappEMP9V4CYaK2?=
+ =?us-ascii?Q?e7WQzgLsOJaGxDPWGao9YkW24gm8izM97Q2CxqOkMtmALhWMn94iY/F0Q3lC?=
+ =?us-ascii?Q?h8BOwZlUKTqDXoAX3vZwMRYx5ms6q9fFUaG5NVxUAmLu4iorLSZFdA8W56YN?=
+ =?us-ascii?Q?9EG50EyinzJFa/HASer8BassDD061xRt35xCy48ZbaOJgNdA3PCvyVj5VFP7?=
+ =?us-ascii?Q?edU7csT+Haxw21JXNs5n6+H5OKwAdffca0p3j1RDTY4NSsDR25i48RNLD7tm?=
+ =?us-ascii?Q?yulcmB7MmmzY0hWF5PMyBWwA5HyXsABnut3hZMpRwSIS6qfkj/7lRUT179nB?=
+ =?us-ascii?Q?Q8RcuPKE7yDu4QPIpcK/GdDf5pPSMCwH3B5h4hhCunSKFrjd4soqGk7yauL3?=
+ =?us-ascii?Q?1VFkYFAH1HbL0xTrMqZXLSIE1UhbLfOC+y8nlLMVxZ8cQFiW1a25YiZwXF54?=
+ =?us-ascii?Q?7WCJrCecbuc=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2024 10:15:31.6247 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5551cb8-586a-47e4-0675-08dca7128e3a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06C.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7178
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,73 +152,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a flag to output the found list in a more user-friendly format, with
-one board per line. Omit the board count.
+From: Manikanta Guntupalli <manikanta.guntupalli@amd.com>
 
-This can be useful with grep, for example.
+Add "rs485-rts-delay" property to uartps node with delay_rts_before_send
+and delay_rts_after_send values as 10ms for rs485 mode on KD240.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+10ms rts delay values have been chosen based on testing with rs485
+temperature sensor (which is part of the kit) as safe minimum value
+for reliable operation at a baud rate of 9600.
+
+Signed-off-by: Manikanta Guntupalli <manikanta.guntupalli@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
-Changes in v2:
-- Add new patch to support a 'list' format
+ arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 1 +
+ 1 file changed, 1 insertion(+)
 
- tools/qconfig.py | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
-
-diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 241bd9efe33..7b868c7d72c 100755
---- a/tools/qconfig.py
-+++ b/tools/qconfig.py
-@@ -1100,7 +1100,7 @@ def defconfig_matches(configs, re_match, re_val):
-                 return True
-     return False
- 
--def do_find_config(config_list):
-+def do_find_config(config_list, list_format):
-     """Find boards with a given combination of CONFIGs
- 
-     Args:
-@@ -1108,6 +1108,8 @@ def do_find_config(config_list):
-             consisting of a config option, with or without a CONFIG_ prefix. If
-             an option is preceded by a tilde (~) then it must be false,
-             otherwise it must be true)
-+        list_format (bool): True to write in 'list' format, one board name per
-+            line
- 
-     Returns:
-         int: exit code (0 for success)
-@@ -1141,8 +1143,10 @@ def do_find_config(config_list):
-             has_cfg = defconfig_matches(config_db[defc], re_match, re_val)
-             if has_cfg == want:
-                 out.add(defc)
--    print(f'{len(out)} matches')
--    print(' '.join(item.split('_defconfig')[0] for item in sorted(list(out))))
-+    if not list_format:
-+        print(f'{len(out)} matches')
-+    sep = '\n' if list_format else ' '
-+    print(sep.join(item.split('_defconfig')[0] for item in sorted(list(out))))
-     return 0
- 
- 
-@@ -1535,6 +1539,8 @@ doc/develop/moveconfig.rst for documentation.'''
-                       help='Find boards with a given config combination')
-     parser.add_argument('-i', '--imply', action='store_true', default=False,
-                       help='find options which imply others')
-+    parser.add_argument('-l', '--list', action='store_true', default=False,
-+                      help='Show a sorted list of board names, one per line')
-     parser.add_argument('-I', '--imply-flags', type=str, default='',
-                       help="control the -i option ('help' for help")
-     parser.add_argument('-j', '--jobs', type=int, default=cpu_count,
-@@ -1688,7 +1694,7 @@ def main():
-             sys.exit(1)
-         return 0
-     if args.find:
--        return do_find_config(args.configs)
-+        return do_find_config(args.configs, args.list)
- 
-     config_db, progress = move_config(args)
- 
+diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+index 1727a1cc15c1..4de29d5d3ff6 100644
+--- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+@@ -358,6 +358,7 @@
+ 	status = "okay";
+ 	rts-gpios = <&gpio 72 GPIO_ACTIVE_HIGH>;
+ 	linux,rs485-enabled-at-boot-time;
++	rs485-rts-delay = <10 10>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart0_default>;
+ 	assigned-clock-rates = <100000000>;
 -- 
-2.34.1
+2.43.0
 
