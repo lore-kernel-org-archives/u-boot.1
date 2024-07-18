@@ -4,83 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03408C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53D71C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 13:54:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AA4688758;
-	Thu, 18 Jul 2024 15:52:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B7E7A88758;
+	Thu, 18 Jul 2024 15:54:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T1DrJA1L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iqlWUbAy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83DD188786; Thu, 18 Jul 2024 15:52:25 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 9797088A76; Thu, 18 Jul 2024 15:54:28 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B5058874C
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:52:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A2728874C
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 15:54:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3c9cc66c649so452121b6e.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:52:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e026a2238d8so885318276.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 06:54:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721310742; x=1721915542; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zV4Q/m7ZL3NWqCgaxGBmY8hjcQVuOQMnonW1mdfVDCY=;
- b=T1DrJA1Lg2T/0SWSiijmhU6cu7sQ88QndnjcITMzk4aJKTEY7wwzVTz4r2o+bzgUOf
- 1j3z3NkTYWOVguQB7P5QW5/W1vVX2FlxI6xy/wojXl3susOaPy9dqU4Kt+21P2PGP+gR
- iuhI2E6tj42d3Vc6jnDGAfMxF/xPeQDqPn66g=
+ d=gmail.com; s=20230601; t=1721310865; x=1721915665; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=29751J7wtABTY0ZbYzFs6TMGQ7iTt9LYqCSc65bdd5w=;
+ b=iqlWUbAycf3X0bGpj/84GdUhc1fzl33wOB/pwYZA3a2g5e+vfDwuANCgWOTbiTnQjh
+ R0W9rDZEPRYnYybxSg41AHUc7ViQsfR4RvzoWQKQxj5m6zJbDlnwxoj1IblzV6tUxC4B
+ OZjK4sKLQTjm9IBBlFbHEkwsDVKiavMbv50H4ybUDPLdDSbeBmXkEQCGNJA2ObdV+qn0
+ lOyxNj4pfHicP1VfByZ8imCjtrmXedbLKohJpSEhe8mYVl+zv3TcHOCHSMe9Nn5K2Mhb
+ 5wpz2O1YeK/3KHsvg7YblwPl3GsZjPG3PUSD5fnmOSr7fbUSbX+PUYP/9Sb6l49ziqJJ
+ +kVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721310742; x=1721915542;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zV4Q/m7ZL3NWqCgaxGBmY8hjcQVuOQMnonW1mdfVDCY=;
- b=DuPc833ueKB61rA80GS6JAP+OT+avCciuEXXeeJ9EqsvRk7txH9RqGLAthX5Kl+THQ
- UKAdW3yCK/EO0XFzVxxrSvkURS3YhbSCSdtDgAa4hUIl4nY5UsHIRbLrGMj4ycvLjEXG
- qxdyKz+rDez1BXsYZ6kCCkDCc7yM0gwoe8kpuw7uwUk3fvgcpo7R4mMPhiwUO2xSa8zs
- ANc3RCiOPfBbm34P+WVcUfHGwcHPgc4WSul8nYo6MMVs2JnunQ4yelViJEvHdhVWxmOs
- l2o7USV3aSS1jvfombvXEQo6NymVAqpYpD7EwccZi7la/XKRO5hIlHmmA0CLpr0SzBcQ
- WrGg==
+ d=1e100.net; s=20230601; t=1721310865; x=1721915665;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=29751J7wtABTY0ZbYzFs6TMGQ7iTt9LYqCSc65bdd5w=;
+ b=wrq41VTUEeMdEGSnQcVjEKMyowHEv/lIhnkDx/9rCLtJx3T+c3QyoizN8HNtyIb6Bc
+ RtyY0SabjC75oIU0aIWFk3H394XAUhlaROqtBbvLzN1y/1DinQ/qV0oIpf/qfJLGQbLh
+ Ari3tYXS/L7dTgnECwz3Li/33mRtHKkvMtxrJfmybZu4dY+tEnKt/FoutZrriw3ebwPC
+ gZuqxueXjW1GxYFwFZ2cjKOIDs4dNGEkLx6TmD2OOuBGKJmGjsyTxqEEAwWvAMoEGN+M
+ 8ItNBghoNz8cHHPVyPPFYOB73ntLE/h28Hjtwl7MQ7TJyRVj4pQ1lUlSbojF2LA3Daxx
+ c+Bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1bUqL+ZJcCN91585lCh2hlDtZ2nPFwti1U1/b+EF2F7NVrRjMTLV1Q1bb7fDEKX303XPc/L4R40XnmasRaPBDmnfaiA==
-X-Gm-Message-State: AOJu0YxQVyey0qOcxcBOkckDlgpTUNVjWS852WRtwp2XbSebNYgIREhF
- A0imydr9LG+ysVxdO/mmUuwI/aQOSv3GWb4f7Zlv3ZBoYuxTvu82tVWmZQHnuMo=
-X-Google-Smtp-Source: AGHT+IEk9/fc986in1Xr+vEoI4loAQ80qOTgFmAuh7pDmuLCRajNlTHMvdcTZDgr7DeEF8l1Qyon8g==
-X-Received: by 2002:a05:6808:f8b:b0:3d5:2ab4:8dc2 with SMTP id
- 5614622812f47-3dad521e6a2mr5258896b6e.26.1721310741906; 
- Thu, 18 Jul 2024 06:52:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708e7900b37sm437611a34.67.2024.07.18.06.52.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 06:52:21 -0700 (PDT)
-Date: Thu, 18 Jul 2024 07:52:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Walter Lozano <walter.lozano@collabora.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
- Martyn Welch <martyn@collabora.com>, Matthias Brugger <mbrugger@suse.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] board: rpi: Update memory layout for Aarch64
-Message-ID: <20240718135219.GV561963@bill-the-cat>
-References: <20240716171602.2279766-1-walter.lozano@collabora.com>
- <20240716172113.GG561963@bill-the-cat>
- <CALeDE9PUF4-oCk+CXB0FiL=Haq9o0MkHa5BS4JTvZw7HbwjjaQ@mail.gmail.com>
- <20240717154437.GP561963@bill-the-cat>
- <1f85166d-5ec9-48bb-b4d9-6a76158e0d4e@collabora.com>
+ AJvYcCWr4zWu/kVwjCNuk2IFGcIXTYWY39jvwuDQ6AEJyYew1mY+dPm1OkfWy9ug02tiAHl54chgKMLSEOkXPnKc8opeMjJ0xg==
+X-Gm-Message-State: AOJu0YxYZlS9DTJfq1O7kDFiCaanFTZ3cGPwcyjFAe0ClMKp/p1saHrv
+ MgIcSXsvYSb8OpNDk7V+6u+GAIihZg/ZdZVi3/i8WlRcB9I77Y1p
+X-Google-Smtp-Source: AGHT+IF2bdl/vdAjf6n+by0U8HjhYCcz2Q+RHk5DlfYYW45MkU6gd815+Cb5U7T/vcSB+a2P9382hQ==
+X-Received: by 2002:a05:6902:13c9:b0:e05:ff2a:aa49 with SMTP id
+ 3f1490d57ef6-e05ff2abefdmr3071876276.30.1721310865142; 
+ Thu, 18 Jul 2024 06:54:25 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6b79c66d305sm8151476d6.140.2024.07.18.06.54.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Jul 2024 06:54:24 -0700 (PDT)
+Message-ID: <325e6cc7-8210-8e95-0267-10d84192a406@gmail.com>
+Date: Thu, 18 Jul 2024 09:54:23 -0400
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RJwVRncQKMQm/7J0"
-Content-Disposition: inline
-In-Reply-To: <1f85166d-5ec9-48bb-b4d9-6a76158e0d4e@collabora.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2 15/21] spl: Plumb in the Universal Payload handoff
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Michal Simek <michal.simek@amd.com>,
+ Lean Sheng Tan <sheng.tan@9elements.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+References: <20240713070055.2172883-1-sjg@chromium.org>
+ <20240713070055.2172883-16-sjg@chromium.org>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20240713070055.2172883-16-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,158 +106,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 7/13/24 03:00, Simon Glass wrote:
+> Specify the FIT and include information about each loaded image, as
+> required by the UPL handoff.
+> 
+> Write the UPL handoff into the bloblist before jumping to the next phase.
+> 
+> Control this using a runtime flag to avoid conflicting with other
+> handoff mechanisms.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v2:
+> - Hang when something goes wrong, to avoid a broken boot
+> - Add a runtime flag to enable UPL
+> 
+>   common/spl/spl.c                  |  8 ++++++++
+>   common/spl/spl_fit.c              | 22 ++++++++++++++++++++++
+>   include/asm-generic/global_data.h |  4 ++++
+>   3 files changed, 34 insertions(+)
+> 
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index 7794ddccade..d6a364de6ee 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -810,6 +810,14 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+>   			printf(SPL_TPL_PROMPT
+>   			       "SPL hand-off write failed (err=%d)\n", ret);
+>   	}
+> +	if (CONFIG_IS_ENABLED(UPL_OUT) && (gd->flags & GD_FLG_UPL)) {
+> +		ret = spl_write_upl_handoff(&spl_image);
+> +		if (ret) {
+> +			printf(SPL_TPL_PROMPT
+> +			       "UPL hand-off write failed (err=%d)\n", ret);
+> +			hang();
+> +		}
+> +	}
+>   	if (CONFIG_IS_ENABLED(BLOBLIST)) {
+>   		ret = bloblist_finish();
+>   		if (ret)
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index 2a097f4464c..b288f675ae3 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -12,6 +12,7 @@
+>   #include <memalign.h>
+>   #include <mapmem.h>
+>   #include <spl.h>
+> +#include <upl.h>
+>   #include <sysinfo.h>
+>   #include <asm/global_data.h>
+>   #include <asm/io.h>
+> @@ -645,6 +646,8 @@ static int spl_fit_load_fpga(struct spl_fit_info *ctx,
+>   		printf("%s: Cannot load the FPGA: %i\n", __func__, ret);
+>   		return ret;
+>   	}
+> +	upl_add_image(node, fpga_image.load_addr, fpga_image.size,
+> +		      fdt_getprop(ctx->fit, node, FIT_DESC_PROP, NULL));
 
---RJwVRncQKMQm/7J0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Does load_addr even make sense for FPGAs?
 
-On Wed, Jul 17, 2024 at 03:32:00PM -0300, Walter Lozano wrote:
->=20
->=20
-> On 7/17/24 12:44, Tom Rini wrote:
-> > On Wed, Jul 17, 2024 at 11:59:50AM +0100, Peter Robinson wrote:
-> > > On Tue, 16 Jul 2024 at 18:21, Tom Rini <trini@konsulko.com> wrote:
-> > > >=20
-> > > > On Tue, Jul 16, 2024 at 02:16:02PM -0300, Walter Lozano wrote:
-> > > >=20
-> > > > > ARM and Aarch64 have different restrictions and trying to accommo=
-date
-> > > > > larger kernels like the ones used in distros can be challenging. =
-For this
-> > > > > reason, separate the layout and rearrange the map for Aarch64 to =
-support
-> > > > > kernels larger than 36 MB.
-> > > > >=20
-> > > > > Signed-off-by: Walter Lozano <walter.lozano@collabora.com>
-> > > > > ---
-> > > > >=20
-> > > > >   board/raspberrypi/rpi/rpi.env | 25 ++++++++++++++++++-------
-> > > > >   1 file changed, 18 insertions(+), 7 deletions(-)
-> > > > >=20
-> > > > > diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rp=
-i/rpi.env
-> > > > > index 30228285edd..37c7f6a920e 100644
-> > > > > --- a/board/raspberrypi/rpi/rpi.env
-> > > > > +++ b/board/raspberrypi/rpi/rpi.env
-> > > > > @@ -42,13 +42,19 @@ dfu_alt_info+=3DzImage fat 0 1
-> > > > >    *   For Aarch64, the kernel image is uncompressed and must be =
-loaded at
-> > > > >    *   text_offset bytes (specified in the header of the Image) i=
-nto a 2MB
-> > > > >    *   boundary. The 'booti' command relocates the image if neces=
-sary. Linux uses
-> > > > > - *   a default text_offset of 0x80000.  In summary, loading at 0=
-x80000
-> > > > > - *   satisfies all these constraints and reserving memory up to =
-0x02400000
-> > > > > - *   permits fairly large (roughly 36M) kernels.
-> > > > > + *   a default text_offset of 0x80000.  However, loading it at 0=
-x80000
-> > > > > + *   will allow to reserve only up to 0x02400000 which permits m=
-edium size
-> > > > > + *   kernels (roughly 36M). This is good enough for customized k=
-ernels but
-> > > > > + *   not for distros which by default enable drivers for many di=
-fferent
-> > > > > + *   boards. Under these circumstances, using 0x00200000 provide=
-s room for
-> > > > > + *   larger kernels.
-> > > > >    *
-> > > > >    * scriptaddr and pxefile_addr_r can be pretty much anywhere th=
-at doesn't
-> > > > >    * conflict with something else. Reserving 1M for each of them =
-at
-> > > > > - * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be ple=
-nty.
-> > > > > + * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be ple=
-nty for ARM.
-> > > > > + *
-> > > > > + *   For Aarch64, since the kernel is placed in different locati=
-on,
-> > > > > + *   accommodate them to reserver 1M for each of them.
-> > > > >    *
-> > > > >    * On ARM, both the DTB and any possible initrd must be loaded =
-such that they
-> > > > >    * fit inside the lowmem mapping in Linux. In practice, this us=
-ually means not
-> > > > > @@ -62,16 +68,21 @@ dfu_alt_info+=3DzImage fat 0 1
-> > > > >    * large initrds before they start colliding with U-Boot.
-> > > > >    */
-> > > > >   #ifdef CONFIG_ARM64
-> > > > > +pxefile_addr_r=3D0x00080000
-> > > > > +scriptaddr=3D0x00100000
-> > > > > +kernel_addr_r=3D0x00200000
-> > > > > +fdt_addr_r=3D0x03400000
-> > > > > +ramdisk_addr_r=3D0x03500000
-> > > > >   fdt_high=3Dffffffffffffffff
-> > > > >   initrd_high=3Dffffffffffffffff
-> > > > >   #else
-> > > > > -fdt_high=3Dffffffff
-> > > > > -initrd_high=3Dffffffff
-> > > > > -#endif
-> > > > >   kernel_addr_r=3D0x00080000
-> > > > >   scriptaddr=3D0x02400000
-> > > > >   pxefile_addr_r=3D0x02500000
-> > > > >   fdt_addr_r=3D0x02600000
-> > > > >   ramdisk_addr_r=3D0x02700000
-> > > > > +fdt_high=3Dffffffff
-> > > > > +initrd_high=3Dffffffff
-> > > > > +#endif
-> > > > >=20
-> > > > >   boot_targets=3Dmmc usb pxe dhcp
-> > > >=20
-> > > > We need to drop the disabling of device tree / initrd relocation as
-> > > > that's sure not going to help matters. What's the minimum amount of
-> > > > memory an aarch64 Pi will have? I really prefer reserving 128MiB (e=
-ven
-> > > > if that's not the maximum Linux Kernel Image size anymore) and then
-> > > > device tree and then initrd.
-> > >=20
-> > > 512Mb on the Zero2W and RPi3A.
-> > >=20
-> > > We've not seen an issue here on the very large Fedora kernel, but I
-> > > suspect that's because using UEFI mitigates this somewhat because here
-> > > we're actually loading shim/grub.
-> >=20
-> > OK, that should be enough to put a 128MiB spot for kernel, then 512KiB
-> > for device tree, and then rest for initrd, and not be disabling
-> > relocation (and thus preventing U-Boot from fixing failures).
-> >=20
->=20
-> Thanks for the feedback! If I understood it correctly a layout like the
-> the one bellow would be the right thing. The only difference is in
-> device tree for which is reserved a bit more.
->=20
-> pxefile_addr_r=3D0x00080000
-> scriptaddr=3D0x00100000
-> kernel_addr_r=3D0x00200000
-> fdt_addr_r=3D0x09800000
-> ramdisk_addr_r=3D0x09900000
->=20
-> If this matches the expectations I will prepare the V2.
+And I noticed that you always call this after load_simple_fit/fit_image_load.
+Could we call upl_add_image in those functions instead?
 
-Looks right to me, Peter or Matthias ? Thanks!
+>   	return spl_fit_upload_fpga(ctx, node, &fpga_image);
+>   }
+> @@ -768,6 +771,9 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+>   	if (ret)
+>   		return ret;
+>   
+> +	upl_add_image(node, spl_image->load_addr, spl_image->size,
+> +		      fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
+> +
+>   	/*
+>   	 * For backward compatibility, we treat the first node that is
+>   	 * as a U-Boot image, if no OS-type has been declared.
+> @@ -811,6 +817,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+>   			       __func__, index, ret);
+>   			return ret;
+>   		}
+> +		upl_add_image(node, image_info.load_addr, image_info.size,
+> +			      fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
+>   
+>   		if (spl_fit_image_is_fpga(ctx.fit, node))
+>   			spl_fit_upload_fpga(&ctx, node, &image_info);
+> @@ -847,6 +855,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+>   		spl_image->entry_point = spl_image->load_addr;
+>   
+>   	spl_image->flags |= SPL_FIT_FOUND;
+> +	upl_set_fit_info(map_to_sysmem(ctx.fit), ctx.conf_node,
+> +			 spl_image->entry_point);
 
---=20
-Tom
+I think this should be virt_to_phys, since we aren't really mapping it.
 
---RJwVRncQKMQm/7J0
-Content-Type: application/pgp-signature; name="signature.asc"
+>   
+>   	return 0;
+>   }
+> @@ -891,6 +901,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+>   	if (ret < 0)
+>   		return ret;
+>   
+> +	upl_add_image(ret, fw_data, fw_len,
+> +		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
+> +
+>   	spl_image->size = fw_len;
+>   	spl_image->load_addr = fw_data;
+>   	if (fit_image_get_entry(header, ret, &spl_image->entry_point))
+> @@ -911,6 +924,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+>   	if (ret >= 0) {
+>   		spl_image->fdt_addr = (void *)dt_data;
+>   
+> +		upl_add_image(ret, dt_data, dt_len,
+> +		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
+> +
+>   		if (spl_image->os == IH_OS_U_BOOT) {
+>   			/* HACK: U-Boot expects FDT at a specific address */
+>   			fdt_hack = spl_image->load_addr + spl_image->size;
+> @@ -940,7 +956,13 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+>   				     &img_data, &img_len);
+>   		if (ret < 0)
+>   			return ret;
+> +		upl_add_image(ret, img_data, img_len,
+> +		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
+>   	}
+>   
+> +	spl_image->flags |= SPL_FIT_FOUND;
 
------BEGIN PGP SIGNATURE-----
+This change is unrelated and should be moved into a separate commit.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaZHg8ACgkQFHw5/5Y0
-tywAdgwAq6B38Mdi2O7UyP17htc39PtDSjBDdCQXb5VicECStCGrmce/NknQS7h4
-LrpOBMg8m/5pW+v8SowLlOlLAy5yFAFbI3HigA1lX0ESBCpuDyNPc9H2LA7rs0KA
-8RgjmQx0R8BpD4nIpdMDEVo+cyEUn8eQepO88vnu6Za9IXQ/uW5GLK3ZLRZ7JNna
-YpKGl1ZWtuMfaCMxPjn5SmbHCBlpLez6oFYZAp+5CIDrkoYS5l/pqXGAQcC/f/cp
-CsHMJJPqwdatDEzQvC83MgF5oV52UKMks27V2NeCLYhfDUNtRE5r1X4xT22HUdA9
-wCDItumOtLwH5rQt9ZCnCioflPZLCNVopkKi7osiHNsJhq0V86XZ1++aL298PKq9
-fCWmliZrz/Scw/3jXpkYO6MusQnlRMXuO4+utPqgIIuYKy6mwOhgwYsvVLxrJOiA
-Cfepmh6cpeM2GEaa95XPuVji6ROyokoy1G0LHLFI0+hq6rwSnv+Ldw73P889Atry
-hLhsJWQB
-=8Nbu
------END PGP SIGNATURE-----
+> +	upl_set_fit_info(map_to_sysmem(header), conf_noffset,
+> +			 spl_image->entry_point);
+> +
+>   	return 0;
+>   }
+> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> index 98d822530d8..37643a4bbb9 100644
+> --- a/include/asm-generic/global_data.h
+> +++ b/include/asm-generic/global_data.h
+> @@ -716,6 +716,10 @@ enum gd_flags {
+>   	 * @GD_FLG_HUSH_MODERN_PARSER: Use hush 2021 parser.
+>   	 */
+>   	GD_FLG_HUSH_MODERN_PARSER = 0x2000000,
+> +	/**
+> +	 * @GD_FLG_UPL: Read/write a Universal Payload (UPL) handoff
+> +	 */
+> +	GD_FLG_UPL = 0x4000000,
+>   };
+>   
+>   #endif /* __ASSEMBLY__ */
 
---RJwVRncQKMQm/7J0--
