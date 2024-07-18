@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4324DC3DA63
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5EE6C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:37:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8858788B54;
-	Thu, 18 Jul 2024 19:36:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0584388B5F;
+	Thu, 18 Jul 2024 19:36:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FNMayAnL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lesLqwtK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC99488B20; Thu, 18 Jul 2024 19:36:44 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id DC46388B42; Thu, 18 Jul 2024 19:36:45 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4CEB88AFC
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 959BF88B28
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4266fd39527so5308625e9.1
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:38 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-427b1d4da32so3906265e9.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721324198; x=1721928998; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721324200; x=1721929000; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U7W6VRTiC52CR1Q1hFQqYfIxU58dRf/5d0w2T3SZSOk=;
- b=FNMayAnLusXR+44QF19497n+Lu4fpXPLCdMGVReCZ+8NGdNeg3/8jc9MGYnqmEBdX0
- 3BJMJSIQzjxn19f+un4uYxBEtY74eNVz3K8kMrt3airvnnzgWe9fwouweNJqKWbsst8V
- pZz3cDyLlFF3gsGMfINAzb/oCM0ZED8bvMjbI=
+ bh=oQWD0XbYpzivUrX+9+8siVQWZcY+/agG+WeL7lk+mD4=;
+ b=lesLqwtKSLyO/NG/yy6Qf7ntVUz4ILjLYgy8F+t3SoZy39NsCiVZWjOJcpY3rWh1lr
+ cms0sZr0zW3Tk6EH5T90FkJfY8Rnzh+GqpGJvKRy/CEdYJq1KZl59mwM6FWl4gPIxoZ7
+ 8F3+VjVpOigET3//MwgVJs/J3JdeENpOe0YeU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721324198; x=1721928998;
+ d=1e100.net; s=20230601; t=1721324200; x=1721929000;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U7W6VRTiC52CR1Q1hFQqYfIxU58dRf/5d0w2T3SZSOk=;
- b=tXYOTtWG76nMfw0QVwWMOX+dMMfIzTjS5/N1WsqORjVAuDof2J8LJzATHoYrW2XSfA
- g1MhQy+ofoJJcMlPTEsZ72/pjB2+tUTFi2rsdLlOL3TEsE4q8Gf1a+6npzq0tpuNi2Kg
- R8DVL5SIemTnLdI4v/FjfMyTguO+PpizxZhjypn2fBvlHBW27mf2LUZO6a1j0j5D7LZS
- +OF6cfEx2w6MX3rOK0QEzqqv+3+vY6fPD2ALgcekpwBPiar1TCxO8f5G2ahqTry/BN0Y
- PEDg11Dov/cB52L7mlcPujBJtUAywnczeEpRHFsjiT1RPK9D1IZ+VYqd0vPHsdie7Knh
- 7mKA==
-X-Gm-Message-State: AOJu0YyOytkb/LqLglUxz4sttxG4mFWNBUKjA8P5O7njcnp86S21c5kP
- 5CQCQnSefOzWxG3SJ40du+pfcgMdIM6uuKjrU+C6uqRTTA2nNAjvgMbe4xHLVUcHkByJMbwx/1Y
+ bh=oQWD0XbYpzivUrX+9+8siVQWZcY+/agG+WeL7lk+mD4=;
+ b=jLCOj6yZwUZhE/FRszfCMJj0p2Oa0cEty00TXteY+soY8MFpm+g47VZIERiTmlweSx
+ KbnO03Rec3O5HLVbBGDsNTjaxeN5j2qv9uDCGQBis5oKarmMaAZhVbnbUP1nac1BGNko
+ jiWfbEfE6hH1VffhTHkFlWXkwGgU/hparf+geYO+oQUh2U11LGzDaKTikzMQF39FaEDR
+ /03A8QWXn3vdFvrmgKZczmaeivgzw9ip9Otm4E8MyMm/ZZDpIgsX/zaXu4XZQ5Bq/Czz
+ D1pTRSIEe7mI8Vu0F6ASLLbJX6j8ag7rrV8YoK4qcxbwojSD0s7+zvhm5uR53QJCRyEC
+ JvnA==
+X-Gm-Message-State: AOJu0YyFYHa+k5RGpTMzmOedThAS1UCHRfqFz+9ssstaAFXe6CXRMspy
+ cMhO7p6n3+EIn9kQ+yPkYLej+rY+7cQqyrF1mxzKLlNiNfTRma/QkxRJy/kjGjtR+tK8b6bVLKY
  =
-X-Google-Smtp-Source: AGHT+IEG+lTMREE3P4w3j7IKXMQhKFhF+8w2+rKdrOhjtK+hTYGypvFUMieUctsemdMMyRQ2oVpdfQ==
-X-Received: by 2002:a05:600c:138b:b0:426:5c9b:dedf with SMTP id
- 5b1f17b1804b1-427c2cb6112mr40158035e9.12.1721324198257; 
- Thu, 18 Jul 2024 10:36:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF+OXj9zIDBWlznUXaAhvCBvHX3KAG6wnguecnc3Hi+NHHrp8MqQtRXp/V8NKMp1OfxuViPkg==
+X-Received: by 2002:a05:600c:19d3:b0:426:676a:c4d1 with SMTP id
+ 5b1f17b1804b1-427d2b3a890mr13776455e9.8.1721324199764; 
+ Thu, 18 Jul 2024 10:36:39 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.37
+ 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 10:36:37 -0700 (PDT)
+ Thu, 18 Jul 2024 10:36:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, Markus Niebel <Markus.Niebel@tq-group.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Martyn Welch <martyn.welch@collabora.com>,
- Paul Kocialkowski <contact@paulk.fr>,
- Philip Richard Oberfichtner <pro@denx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 04/20] i2c: Remove CFG_I2C_MULTI_BUS
-Date: Thu, 18 Jul 2024 18:35:55 +0100
-Message-Id: <20240718173611.4014274-5-sjg@chromium.org>
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Wasim Khan <wasim.khan@nxp.com>
+Subject: [PATCH 06/20] armv8: ls2085a: Drop CMD_DATE
+Date: Thu, 18 Jul 2024 18:35:57 +0100
+Message-Id: <20240718173611.4014274-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
 References: <20240718173611.4014274-1-sjg@chromium.org>
@@ -94,103 +93,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is used by a few boards but we are years past the migration date,
-so let's drop it now.
+These boards use pre-driver model code and it is several years since the
+migration deadline. Disable the 'date' command so that this old code can
+be removed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- README                         |  7 -------
- include/configs/omap3_beagle.h |  3 ---
- include/configs/sniper.h       | 14 --------------
- include/configs/tqma6.h        |  3 ---
- include/i2c.h                  |  2 +-
- 5 files changed, 1 insertion(+), 28 deletions(-)
+ configs/ls2080aqds_nand_defconfig | 1 -
+ configs/ls2080aqds_qspi_defconfig | 1 -
+ configs/ls2080ardb_nand_defconfig | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/README b/README
-index b89768f1791..9fd2aee4b04 100644
---- a/README
-+++ b/README
-@@ -883,13 +883,6 @@ The following options need to be configured:
- 		You should define these to the GPIO value as given directly to
- 		the generic GPIO functions.
- 
--		CFG_I2C_MULTI_BUS
--
--		This option allows the use of multiple I2C buses, each of which
--		must have a controller.	 At any point in time, only one bus is
--		active.	 To switch to a different bus, use the 'i2c dev' command.
--		Note that bus numbering is zero-based.
--
- 		CFG_SYS_I2C_NOPROBES
- 
- 		This option specifies a list of I2C devices that will be skipped
-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
-index af7cb3513f8..b616dd2608c 100644
---- a/include/configs/omap3_beagle.h
-+++ b/include/configs/omap3_beagle.h
-@@ -28,9 +28,6 @@
- /* NAND: SPL falcon mode configs */
- #endif /* CONFIG_MTD_RAW_NAND */
- 
--/* Enable Multi Bus support for I2C */
--#define CFG_I2C_MULTI_BUS
--
- /* DSS Support */
- 
- /* TWL4030 LED Support */
-diff --git a/include/configs/sniper.h b/include/configs/sniper.h
-index 45a3102aeee..d0ae5e18605 100644
---- a/include/configs/sniper.h
-+++ b/include/configs/sniper.h
-@@ -34,20 +34,6 @@
- 
- #define CFG_SYS_SDRAM_BASE		0x80000000
- 
--/*
-- * I2C
-- */
--
--#define CFG_I2C_MULTI_BUS
--
--/*
-- * Input
-- */
--
--/*
-- * SPL
-- */
--
- /*
-  * Serial
-  */
-diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
-index 2da76f15431..ceeed174ec5 100644
---- a/include/configs/tqma6.h
-+++ b/include/configs/tqma6.h
-@@ -26,9 +26,6 @@
- 
- #define TQMA6_SPI_FLASH_SECTOR_SIZE	SZ_64K
- 
--/* I2C Configs */
--#define CFG_I2C_MULTI_BUS
--
- #if !defined(CONFIG_DM_PMIC)
- #define CFG_POWER_PFUZE100_I2C_ADDR	0x08
- #define TQMA6_PFUZE100_I2C_BUS		2
-diff --git a/include/i2c.h b/include/i2c.h
-index 1d3be3f6759..622540c8265 100644
---- a/include/i2c.h
-+++ b/include/i2c.h
-@@ -942,7 +942,7 @@ unsigned int i2c_get_bus_speed(void);
-  * only for backwardcompatibility, should go away if we switched
-  * completely to new multibus support.
-  */
--#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY) || defined(CFG_I2C_MULTI_BUS)
-+#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
- # if !defined(CFG_SYS_MAX_I2C_BUS)
- #  define CFG_SYS_MAX_I2C_BUS		2
- # endif
+diff --git a/configs/ls2080aqds_nand_defconfig b/configs/ls2080aqds_nand_defconfig
+index 06e41546d67..0066414f0f5 100644
+--- a/configs/ls2080aqds_nand_defconfig
++++ b/configs/ls2080aqds_nand_defconfig
+@@ -61,7 +61,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_DATE=y
+ # CONFIG_ISO_PARTITION is not set
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+diff --git a/configs/ls2080aqds_qspi_defconfig b/configs/ls2080aqds_qspi_defconfig
+index 0b54bc999e7..44a1459749f 100644
+--- a/configs/ls2080aqds_qspi_defconfig
++++ b/configs/ls2080aqds_qspi_defconfig
+@@ -43,7 +43,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_DATE=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+diff --git a/configs/ls2080ardb_nand_defconfig b/configs/ls2080ardb_nand_defconfig
+index f1009e1738b..cbc8d6a5cf4 100644
+--- a/configs/ls2080ardb_nand_defconfig
++++ b/configs/ls2080ardb_nand_defconfig
+@@ -68,7 +68,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_DATE=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_NAND=y
 -- 
 2.34.1
 
