@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 082C0C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 23:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43163C3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 23:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31FC888B22;
-	Fri, 19 Jul 2024 01:10:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A39288821;
+	Fri, 19 Jul 2024 01:58:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z9wxcExA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EdESA3Fr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E236388746; Fri, 19 Jul 2024 01:10:21 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id E350088B33; Fri, 19 Jul 2024 01:58:21 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C21EF885F1
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 01:10:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8500885AE
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 01:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3d9dfc7c5f6so661630b6e.0
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 16:10:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-79ef7635818so55640285a.3
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 16:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721344218; x=1721949018; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/5vYDx/Q1akqoqQPejZVNbMZ1gWumiU1VqCs0Bifgd8=;
- b=Z9wxcExAx2X3Y3mA5cGAU5jjNjuL6ZzoPYgSZeNgPkZYPLQ2V7fbqngUpa3dpif3be
- 6vSrP/2cO0wMpFrHM3fZX9ueu5ZmBjTiDfymzwx7bmJfN8efvVUevxO9EAh8nZ1DK/MI
- JEJxC0hKA4SbO9K+nCtf46SzkKdHOwbas/4gM=
+ d=gmail.com; s=20230601; t=1721347098; x=1721951898; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=atgrj/tjroPp2u0gPRyJZXIygb41a2RQdWbg9dJFht0=;
+ b=EdESA3FriqeZKIkWVsXA+jaZgZ9Or+P7Tqr/rVBoYpZJYUDhSjH3Z2HenZSWGjUuR1
+ LNCdEDmS//y4focn8ANJOtMPrS7ZK0FRXNleSSFeFDvTauzFkWuZGW6Yer7nm8WKXsYr
+ nic4wTcb0Qojk7lAa+YvAhCPRp3Uz61uTkIG2Ek8zWcepXjS00WJSF4ig01Xa/2+QxxG
+ LKUEtjoviTQQ9enlk9RhP8XKfRUWfvx9TILVFUZNlaQv2N6UZ9VVyCV1ET9NnENLJab8
+ Y5HFVZp+v8b8L3nFZY6XUCTyPOfZrvlfSB5jnSvJvnv5AfUCrVzIKjucT0zMNHqMekLL
+ 6b6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721344218; x=1721949018;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/5vYDx/Q1akqoqQPejZVNbMZ1gWumiU1VqCs0Bifgd8=;
- b=VG4Boa2ngFnIIMivqs9vhSChtJTtIxEcgcEOCzSX6V3QXQzvLQJIzeHXxEo7RzDttR
- gYSwolEZA2OiFEnCJdaaVIE+8n2Cce/5tY7dhbzHrcyeSEc1IBBU+2obIPmm3xXvsDw7
- KwammgUJRekK0PyJ7scEdwmxJ1SIpgebLpogeDh6LLWJ3leH1u07WHlS3MjKLQVU9Zfb
- ergkZs/gVNDyhBfsvi0nZQOGS9wo1kw6c5eXdw4NWs1cn+Jcjwg8pEIZHT8yVHZUtvfu
- jphEpQD5cnYTnZrW1Lk3U67M3Fbv6zUieRJsZJv7FcmYXq0xiEKUzv45Y97AMGlttYBw
- kUGw==
+ d=1e100.net; s=20230601; t=1721347098; x=1721951898;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=atgrj/tjroPp2u0gPRyJZXIygb41a2RQdWbg9dJFht0=;
+ b=CfzH77HXkL1ESC3jypLH5O9GMPNBpvuAmluHSF7iis0FO+XOwIur7bNzNi8y3dfvBn
+ xdyhsrYNWpO1G+99GGX8UV5HLqRagmvGPKNMyQRzdwDQDhSG4RHuvSUWqP01grbhQFuo
+ wflgv0IgwpPzJfTobh91O0USAxjuLFI13++ZrbXqetkcjQB+emHKSTfFXW3heqaaCibr
+ IZy4gYZfA/wfavtt2uFFErr8hQKXBVVKbXkpQplBvTqbCjLJTBQs1lpfLFT88VVeuZs0
+ au8hG1MIynCJZaUJOkPig6J3FzhdUfbJ4fCyWcA+Ay8PHj6GpHFSUeU9hxJL166Qjgk0
+ 2cAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUF0zNPXDKMIDb6183siGUc2augvMvwvdkL10KqqABDm9ovLZzvv2naYOOcXx21+mcwnssebIY6Cx0Vxk7oEj+vNRqsvQ==
-X-Gm-Message-State: AOJu0YxAeZhq5gD1Qrlb6mHnd5z1ET/JO4VpLoGHRAxzI5xJumnROg0m
- C4i403Xru2+xsapmi2+jSy6pk+PdzUKsbUBe4WYzcl1ZaBb08Vw/l2gba70rLX8=
-X-Google-Smtp-Source: AGHT+IHKIHYbyB8yXBPKCkTcaR8OAZ5uR1GfZWhkVQISNJ/wtWgtL2Dza23z2LjLwsy5wNNMfjmjhw==
-X-Received: by 2002:a05:6808:2181:b0:3da:a48b:d1e6 with SMTP id
- 5614622812f47-3dad51f2ef7mr6261199b6e.16.1721344218600; 
- Thu, 18 Jul 2024 16:10:18 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dae09ce8aasm55128b6e.45.2024.07.18.16.10.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 16:10:18 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, 
- Dmitrii Merkurev <dimorinny@google.com>, 
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
-In-Reply-To: <20240710-bootmeth-android-v3-0-b99406e22da3@baylibre.com>
-References: <20240710-bootmeth-android-v3-0-b99406e22da3@baylibre.com>
-Subject: Re: [PATCH v3 0/5] bootstd: Add Android support
-Message-Id: <172134421771.2776895.17285970503833035551.b4-ty@konsulko.com>
-Date: Thu, 18 Jul 2024 17:10:17 -0600
+ AJvYcCXMC9FwjZGxkvC2cwioW05NInwz2NJvbW1m2a70VYVdV+NMVuhGUFoKjaSu5SYqlpSDKep102fiLfSti24AttzuMI4VUg==
+X-Gm-Message-State: AOJu0YyQm2wYppJA5qM1yqqC/yh9Ppl5s59IVZQTI/Xbj6WnOlskU8er
+ EX+jKlqqUa4UQaJ9w7Dkl6JcC7EFZ2ePS8iBYIxznjsWX/oodh4S
+X-Google-Smtp-Source: AGHT+IGRJfoXiqil77NeXId7oCBdPAmWYjVy43Qzxm/QU4mPB23WD5cVu62q4yDkd4zRkU0Wn2mubw==
+X-Received: by 2002:a05:620a:4145:b0:79f:c81:3051 with SMTP id
+ af79cd13be357-7a18744154amr799719585a.2.1721347098552; 
+ Thu, 18 Jul 2024 16:58:18 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a198fab076sm13781485a.22.2024.07.18.16.58.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Jul 2024 16:58:18 -0700 (PDT)
+Message-ID: <ef802785-90a1-9e14-e1c4-85f73fb1dd01@gmail.com>
+Date: Thu, 18 Jul 2024 19:58:17 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2 04/21] sandbox: Enable SPL_LOAD_BLOCK
+Content-Language: en-US
+From: Sean Anderson <seanga2@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Michal Simek <michal.simek@amd.com>,
+ Lean Sheng Tan <sheng.tan@9elements.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>
+References: <20240713070055.2172883-1-sjg@chromium.org>
+ <20240713070055.2172883-5-sjg@chromium.org>
+ <26f6d85c-7d22-fb2f-d18b-5adcf494bc34@gmail.com>
+In-Reply-To: <26f6d85c-7d22-fb2f-d18b-5adcf494bc34@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,25 +103,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Jul 2024 10:40:01 +0200, Mattijs Korpershoek wrote:
-
-> Android boot flow is a bit different than a regular Linux distro.
-> Android relies on multiple partitions in order to boot.
-> 
-> A typical boot flow would be:
-> 1. Parse the Bootloader Control Block (BCB, misc partition)
-> 2. If BCB requested bootonce-bootloader, start fastboot and wait.
-> 3. If BCB requested recovery or normal android, run the following:
->    a. Get slot (A/B) from BCB
->    b. Run AVB (Android Verified Boot) on boot partitions
->    c. Load boot and vendor_boot partitions
->    d. Load device-tree, ramdisk and boot
-> 
-> [...]
-
-Applied to u-boot/master, thanks!
-
--- 
-Tom
-
-
+T24gNy8xOC8yNCAwOToyOCwgU2VhbiBBbmRlcnNvbiB3cm90ZToNCj4gT24gNy8xMy8yNCAw
+MzowMCwgU2ltb24gR2xhc3Mgd3JvdGU6DQo+PiBFbmFibGUgdGhpcyBvcHRpb24gZm9yIGFs
+bCBzYW5kYm94IGJvYXJkcyBzbyB0aGF0IHRoZSBGSVQtbG9hZGluZyBjb2RlDQo+PiBjYW4g
+YmUgdXNlZCB3aXRob3V0IGdlbmVyYXRpbmcgYW4gZXJyb3IgYWJvdXQgYmxvY2sgZGV2aWNl
+cyBub3QgYmVpbmcNCj4+IHN1cHBvcnRlZC4NCj4+DQo+PiBTaWduZWQtb2ZmLWJ5OiBTaW1v
+biBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz4NCj4+IC0tLQ0KPj4NCj4+IChubyBjaGFuZ2Vz
+IHNpbmNlIHYxKQ0KPj4NCj4+IMKgIGNvbW1vbi9zcGwvS2NvbmZpZyB8IDEgKw0KPj4gwqAg
+MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2Nv
+bW1vbi9zcGwvS2NvbmZpZyBiL2NvbW1vbi9zcGwvS2NvbmZpZw0KPj4gaW5kZXggYWY0M2I1
+ZjVkM2MuLjk3MGE0YTM0NmU0IDEwMDY0NA0KPj4gLS0tIGEvY29tbW9uL3NwbC9LY29uZmln
+DQo+PiArKysgYi9jb21tb24vc3BsL0tjb25maWcNCj4+IEBAIC0yODgsNiArMjg4LDcgQEAg
+Y29uZmlnIFNQTF9CT0FSRF9JTklUDQo+PiDCoCBjb25maWcgU1BMX0xPQURfQkxPQ0sNCj4+
+IMKgwqDCoMKgwqAgYm9vbA0KPj4gK8KgwqDCoCBkZWZhdWx0IHkgaWYgU0FOREJPWA0KPj4g
+wqDCoMKgwqDCoCBoZWxwDQo+PiDCoMKgwqDCoMKgwqDCoCBTdXBwb3J0IGxvYWRpbmcgaW1h
+Z2VzIGZyb20gYmxvY2sgZGV2aWNlcy4gVGhpcyBhZGRzIGEgYmxfbGVuIG1lbWJlcg0KPj4g
+wqDCoMKgwqDCoMKgwqAgdG8gc3RydWN0IHNwbF9sb2FkX2luZm8uDQo+IA0KPiBOQUNLLg0K
+PiANCj4gRW5hYmxlIG9uZSBvZiB0aGUgbWFueSBjb25maWdzIHdoaWNoIHNlbGVjdCB0aGlz
+IG9uZSBpbnN0ZWFkLg0KPiANCj4gLS1TZWFuDQoNCk9LLCBzbyBJIHRoaW5rIHlvdSB3YW50
+ZWQgdG8gYWRkIHRoaXMgYmVjYXVzZSBvZiB0aGUgcHJldmlvdXMgcGF0Y2gvcGF0Y2ggMjAu
+DQoNCkkgdGhpbmsgYSBiZXR0ZXIgc29sdXRpb24gd291bGQgYmUgdG8ganVzdCByZWR1Y2Ug
+dGhlIGJsX2xlbiB0byAxLCBzaW5jZSB1bml4IEkvTw0KaXMgYnl0ZS1vcmllbnRlZCBhbnl3
+YXkgYW5kIHdlIG5vdyBoYXZlIHNldmVyYWwgdGVzdHMgZm9yIGJsX2xlbiAhPSAxLg0KDQot
+LVNlYW4NCg==
