@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF594C3DA63
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:39:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1013CC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 17:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F78A88B68;
-	Thu, 18 Jul 2024 19:36:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1661988AE1;
+	Thu, 18 Jul 2024 19:37:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cHVC6mFB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lS7gQgNb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E6F688B59; Thu, 18 Jul 2024 19:36:58 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 58DC688B66; Thu, 18 Jul 2024 19:36:59 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0B1C88B20
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB42888B22
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 19:36:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-427cede1e86so5107555e9.0
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:48 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3685b3dbcdcso61120f8f.3
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:36:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721324208; x=1721929008; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721324209; x=1721929009; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XPUIO2JDD3ZktKauX7bMu/44GB3SHOoU1u34absaRVc=;
- b=cHVC6mFB+SxgInGtqlAAC92e7R4YjxhwUwRQz6dT3j1eVUQ3YbxjMR689wJys3dART
- RAdmvYmOD6f1imBt9Leoa9Aw/juIPf82o7djmUsCYaAE4qkNvOeYcyQvld9hIBku/VNj
- yjQlgZjFyERM7GW97wIA3lRtuy+SU6Z2+JywQ=
+ bh=jKHc43u1TcGjUDlv7l9M3oFlNlL7j5I4LTRXAfv7vB8=;
+ b=lS7gQgNbf3pOpUbSgfNGv646FiDme1sLZtBxJ10J9wqoI7ipprbzs3/+d0exAHB84Y
+ aOImhGivV0ah2BzlwWjlsEI+KI7s72cb0hZUFfcV2ZVejoQVM2xlyIyeN+uRwEnv2dYX
+ PEQn+/lS/X+wKN4ucc1yCgCNxitSh3xYLwRS0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721324208; x=1721929008;
+ d=1e100.net; s=20230601; t=1721324209; x=1721929009;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XPUIO2JDD3ZktKauX7bMu/44GB3SHOoU1u34absaRVc=;
- b=lTeemK4OXDJdkm4hgghKQomaYUg8RlSgojFeQakdKjuEEihigz4KjvUA3vpkwYESht
- 2gmxo8mIWnK3kYm8g1SCeABsOisaHvzzx2tjzznvajRZSlXXS9wjDmT5z3NCTYMfc/5X
- i99o/xqGbQoDG6RGnmco4UJgkDBBDMFYXq38Tizmet+RLu2ZnwCRJ7iSkTzaw+s2VDdI
- MDGl+VaPcvBnbdAuiiJPExy0b0NSUSYO1rDE+Xo2MVh6+BuGNbveonFMRQwl2F7haMaO
- 3k/+HL5jwTQyJ6gBcx2lzIqapr6cFrIA+MMLi2JEKkTSIfCfad4l4Vp8OhBpVe4U5Nrf
- hOsg==
-X-Gm-Message-State: AOJu0Yz9foG7yPNw/wPVNz+xqsX/LM3FcyyYtJ3I6BI+a8SsQWdAk0as
- xqXCqNL7UCqWgZuIjgBYVa3zGUsGetZfLMNSPCDf6+sAIpu42fJ39adrclGqxbJSEp60K/0laSM
+ bh=jKHc43u1TcGjUDlv7l9M3oFlNlL7j5I4LTRXAfv7vB8=;
+ b=Sva81EpTd12zLzmkCsl43g1RMTglRscXlWR3jOKNSRr65D8VdtGnJ5CNJTI33VSssE
+ PoSt9P7pnB3Vwg6bdG0Tv0ameZ/ZDshK1++TvjBvlEv7r2de7NP5gFBTUuT0XmoniKTe
+ PqXnv7ZJXE5t++28t9X9RkOwjqL7pC+S+EUnRw2clW/nBTsQ5eR1qau7tJUzMkI9x9cw
+ Np6ScvncSIBJyrHccY3rK5Mbe46nZFZNSoWz/vI2zk37RBF+5BY8CD7xSfkUHgw3/rdj
+ sWKvDNuEXijYS4XUPgm2bglrgx9IEXIcupH7oijCvmyBIHZiBgS+1m3aDI5+8DpM7SzV
+ jgfg==
+X-Gm-Message-State: AOJu0YzFq2Cu1kUyUCgxjSUKGomH+Ihe56O2DcnVAoPYh74vP0RWIU1r
+ lVN7obGv/tyK9wpAO43ShefSi7e8zkVWEXPwU654/COejLeTUeIsPlG2BYC/JX77W7sM3c15xNg
  =
-X-Google-Smtp-Source: AGHT+IFIyjpek9O6zl1n4lIZk/vS4JzOQs+l4YRz9KVS/wMft2iwmnfujuCuS6ISMOUgFdN3VRDLYw==
-X-Received: by 2002:a05:600c:1d24:b0:426:5ee5:3129 with SMTP id
- 5b1f17b1804b1-427c2ca5692mr46034295e9.2.1721324208091; 
- Thu, 18 Jul 2024 10:36:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEaFxHbXsBU3SAzbSes0T2vFYlXvGH+6yA+87H9bim7tI14ivWgLDPLWoJoBj45UZC8TdAZMA==
+X-Received: by 2002:a5d:45d2:0:b0:367:973e:c20a with SMTP id
+ ffacd0b85a97d-368315fa466mr3658163f8f.18.1721324209125; 
+ Thu, 18 Jul 2024 10:36:49 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.47
+ 5b1f17b1804b1-427d2b29396sm20950715e9.32.2024.07.18.10.36.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 10:36:47 -0700 (PDT)
+ Thu, 18 Jul 2024 10:36:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, Philip Richard Oberfichtner <pro@denx.de>
-Subject: [PATCH 16/20] i2c: Remove I2C_GET_BUS()
-Date: Thu, 18 Jul 2024 18:36:07 +0100
-Message-Id: <20240718173611.4014274-17-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Philip Richard Oberfichtner <pro@denx.de>, egnite GmbH <info@egnite.de>
+Subject: [PATCH 17/20] i2c: Drop CFG_SYS_MAX_I2C_BUS
+Date: Thu, 18 Jul 2024 18:36:08 +0100
+Message-Id: <20240718173611.4014274-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
 References: <20240718173611.4014274-1-sjg@chromium.org>
@@ -89,28 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is very old, predating even the legacy I2C support, so drop it.
+Only one board uses this option and it is very old. Let's drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/i2c.h | 7 -------
- 1 file changed, 7 deletions(-)
+ include/configs/ethernut5.h |  3 ---
+ include/i2c.h               | 14 --------------
+ 2 files changed, 17 deletions(-)
 
-diff --git a/include/i2c.h b/include/i2c.h
-index 1d1430b74a6..b6727bb2a73 100644
---- a/include/i2c.h
-+++ b/include/i2c.h
-@@ -947,13 +947,6 @@ unsigned int i2c_get_bus_speed(void);
- # define I2C_MULTI_BUS				0
+diff --git a/include/configs/ethernut5.h b/include/configs/ethernut5.h
+index 807c6963192..c327bbbe07d 100644
+--- a/include/configs/ethernut5.h
++++ b/include/configs/ethernut5.h
+@@ -59,9 +59,6 @@
+ #define CFG_SYS_I2C_RTC_ADDR		0x51
  #endif
  
--/* NOTE: These two functions MUST be always_inline to avoid code growth! */
--static inline unsigned int I2C_GET_BUS(void) __attribute__((always_inline));
--static inline unsigned int I2C_GET_BUS(void)
--{
--	return I2C_MULTI_BUS ? i2c_get_bus_num() : 0;
--}
+-/* I2C */
+-#define CFG_SYS_MAX_I2C_BUS	1
+-
+ #define I2C_SOFT_DECLARATIONS
+ 
+ #define GPIO_I2C_SCL		AT91_PIO_PORTA, 24
+diff --git a/include/i2c.h b/include/i2c.h
+index b6727bb2a73..282f3cd700f 100644
+--- a/include/i2c.h
++++ b/include/i2c.h
+@@ -933,20 +933,6 @@ int i2c_set_bus_speed(unsigned int);
+ unsigned int i2c_get_bus_speed(void);
+ #endif /* CONFIG_SYS_I2C_LEGACY */
+ 
+-/*
+- * only for backwardcompatibility, should go away if we switched
+- * completely to new multibus support.
+- */
+-#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
+-# if !defined(CFG_SYS_MAX_I2C_BUS)
+-#  define CFG_SYS_MAX_I2C_BUS		2
+-# endif
+-# define I2C_MULTI_BUS				1
+-#else
+-# define CFG_SYS_MAX_I2C_BUS		1
+-# define I2C_MULTI_BUS				0
+-#endif
 -
  /**
   * Find the I2C bus number by given a FDT I2C node.
