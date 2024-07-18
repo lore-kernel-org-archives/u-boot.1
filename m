@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39CF9C3DA61
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C582FC3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 20:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A926788AD2;
-	Thu, 18 Jul 2024 22:02:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 455088867B;
+	Thu, 18 Jul 2024 22:12:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YFuMTwgF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IR5VKgO4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5AAC88AD2; Thu, 18 Jul 2024 22:02:01 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id DCC978869E; Thu, 18 Jul 2024 22:12:17 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B0E388ABE
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83BED8867B
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 22:12:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1fb4a807708so11697335ad.2
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:01:59 -0700 (PDT)
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-7611b6a617cso732396a12.3
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 13:12:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721332918; x=1721937718; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721333534; x=1721938334; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z8nGBOuqIJZlY8MzWiHj27h+4+hbitnBfz+bzvyUP3w=;
- b=YFuMTwgFuXbd/BSmw3vOXMnbdDNfgxGxum1x0EpPzHjQmjxfDfrtaoACxkqPjppdRQ
- 7oSpfyahx+N/iUc9DzlxPfvl5CjC1TVH/ClIe5ko8Gpso/iNQ3YjA+qDCn5J9JtDgegv
- i6y+ki6em7ybJZhbyndahc6KCokmIYWjdaNBDxdqZtSqEFIoyzVk1R+dTuMCm7k6Ho6p
- m8wQClpECAowvPMJY/8m+vxpoegf8WlPoi1ezvTDnZFDYq60/JxlqDucephJode/PQhj
- 9lvv/Me8JMxWWPhBn64JGO3lLW0W4NJkz3XLQCQMlZdky9UKXuydvysTw0YPqXTWbs83
- WyIQ==
+ bh=NBB5y1lVoJSr7WfOxPb4tdGRbvPwMyiIFLwmhXLcOrE=;
+ b=IR5VKgO4dn0StmiWZsw/+twfJHMOm9Ffu7M+WkQyVU35bljBqiuf/gLjkfLWRT9c0g
+ R1+jBSkI/mgpBy9R/gIHUxNEEOaqeIEIrGpRMUgEWmk7672Qmec1jxOcffrCbALjI/bv
+ DMqVFM/E8YwssjPPrgQP+PP8aCpehdLWUgo8N4zJ9OMaebXQLfXqw7/3UXd5es0qyVYE
+ R3OaR4tIN1QIP06lIOsJXPMGw71+b3QOt/U4D6J8yqFc+gAdVppePQrjJnSeGAsjD3Cl
+ mqxEred077sMxNkKmnHx75H1f13pxL+0iWtKJ6kJf+k2UyMJlBjThKKPBTNI5rbzDbkJ
+ +mfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721332918; x=1721937718;
+ d=1e100.net; s=20230601; t=1721333534; x=1721938334;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z8nGBOuqIJZlY8MzWiHj27h+4+hbitnBfz+bzvyUP3w=;
- b=pwbiOeEpa2T4gZYpBU4R5EZkzYL2pVmU5ARN0zVci6qXw17v4IkI39xvIe8HqEONeN
- WxBGySshWrBftRka1Lt1gO447L+OVYnha+3haDzjHQYBWNdO0OuA/BMb91xb9s3ZQm2Y
- MhHBOVmCmahTUAomNwSvMv+Z8c5VTvczI9L2ie8Hr0to5ypHNFdQq9k+rdBQm/LCHMnh
- ThLKdlxsgX74XDTPzgmGcuZ/5WSrE+jdt80495YDvg4w8XqOTobEDSDmmUMjyGKiaUZA
- patugsImUaT8UqHhjJH2WjxmXQW0Giq/xfbDn8fHFnxObJI/lIhT7fZehzmdXq5rXRCF
- NCGg==
-X-Gm-Message-State: AOJu0YzhqCdHr68RhjMlHH7c+h5I6p3xn/Vb5Tg0zlQE6X08uum8W2ar
- RwsIsuZHmrKhWUR/UPbvTrirW5VzXotmNUT64DLcEAGhhlkE6Lm7I7SP64x7iJ4a052UHXozg+1
- FERQL2akUF9sM6Xm1mYCwBP6TH2wwlrg/BloJ9Q==
-X-Google-Smtp-Source: AGHT+IHMJ1CLQA1vjC1eWhC7cml7lXHCKFYdtfjWlhAuPiUCESPixGEvYyx6VhYzxeKq8uVfyt0J932XQfg2jXQdGjg=
-X-Received: by 2002:a17:90b:30ca:b0:2c8:ac1:d8c3 with SMTP id
- 98e67ed59e1d1-2cb52927e76mr5158530a91.29.1721332915831; Thu, 18 Jul 2024
- 13:01:55 -0700 (PDT)
+ bh=NBB5y1lVoJSr7WfOxPb4tdGRbvPwMyiIFLwmhXLcOrE=;
+ b=KC2P84zQt9oHOKKrRWk6W7Oa2DpOH4RKeTS1eOV0sVzPPi/kg2PfT9/vZaZzwq5IQS
+ TY3OvHUyyelCkMJJFDITxHSjB5aYJhrdQMIn/ThfivvAZMFymVsEFqUXTP161oevFCSv
+ G4hwzHAdqoU0SwVDnTxRMFh8GRCZFJ3AJ3YMmp1gDj9WSbQGrgCncKNiC8+IJzj5Z7FS
+ mnk07SZUd6wRVRdbRFjGFng1lRZeIt7F+sC6opvfMRM0FnSCmUz+53RdN1zUf8E2RG4v
+ 9zphlyS4bQJB9h7x8NtVe0mFKPb4n93vDg9xvOUlV77W0g/E/mMNH0p/uJ981GBwlHAC
+ g47A==
+X-Gm-Message-State: AOJu0YyWNfDEds2MY+mSoD1jtWtBCXyND2O47+0GsR8lKO8QxG79teB3
+ Mbi3PxHDMG4PsbPmy/RloLhk/an7m19slI5liaf5+f+R+6o8jJiNjBng/1aHwWXGZfkOOoQ4QHj
+ HZoDE3+IXhcfvuVVVtX5VcZdXfua1wQYXbFXTKA==
+X-Google-Smtp-Source: AGHT+IGPXKAr1MmNGOaa/db9h9CIsM/8s8yHZICStlT5715ZKVYj26vTlt6zTap7kE7S3TlA/5YZVeaXuUo+FjrauZo=
+X-Received: by 2002:a05:6a21:9990:b0:1c2:9084:fcf with SMTP id
+ adf61e73a8af0-1c3fdc95392mr8401864637.14.1721333533974; Thu, 18 Jul 2024
+ 13:12:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240702182325.2904421-1-raymond.mao@linaro.org>
  <20240702182325.2904421-10-raymond.mao@linaro.org>
  <CAC_iWjKC0sB++5um6TpnOxmkY8DhoNEx76C2UOeKsF7cX8yXCA@mail.gmail.com>
 In-Reply-To: <CAC_iWjKC0sB++5um6TpnOxmkY8DhoNEx76C2UOeKsF7cX8yXCA@mail.gmail.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 18 Jul 2024 16:01:44 -0400
-Message-ID: <CAEfUkULg9O=et0pPi1c4ZnbL2mxK7c9CQ5KzdzF9A5y_MH1D+A@mail.gmail.com>
+Date: Thu, 18 Jul 2024 16:12:02 -0400
+Message-ID: <CAEfUkUJbwB0ArRRjym7rrS2VX992gbdoUo+F7t+3kE9avLfQ_Q@mail.gmail.com>
 Subject: Re: [PATCH v4 09/29] makefile: add mbedtls include directories
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
@@ -141,17 +141,11 @@ wrote:
 > > +               "-DMBEDTLS_CONFIG_FILE=\"mbedtls_def_config.h\"" \
 >
 > don't you need a full path to the config file?
-> > +               -I$(srctree)/lib/mbedtls \
-> > +               -I$(srctree)/lib/mbedtls/port \
-> > +               -I$(srctree)/lib/mbedtls/external/mbedtls \
-> > +               -I$(srctree)/lib/mbedtls/external/mbedtls/include) \
 >
-> Most of these paths are explicitly added in patch #3. Why don't we
-> just keep them there?
->
-> We still need this for building other modules other than the MbedTLS
-library itself.
-For example, when those files include the "hash-checksum.h".
+No, we don't need the full path.
+Since "$(srctree)/lib/mbedtls" is in the include directories, and the this
+filename is unique
+in the project.
 
 Regards,
 Raymond
