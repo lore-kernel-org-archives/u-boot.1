@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8489AC3DA60
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 05:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF27C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jul 2024 08:02:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BECD6884AC;
-	Thu, 18 Jul 2024 07:48:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 806018818B;
+	Thu, 18 Jul 2024 10:02:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="pw9zYP2z";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="XQRXCb3s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 382FC88AEE; Thu, 18 Jul 2024 07:48:30 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 96CA78818B; Thu, 18 Jul 2024 10:02:14 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D35C188354
- for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 07:48:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8E4A887B1A
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 10:02:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a77c0b42a8fso258174766b.1
- for <u-boot@lists.denx.de>; Wed, 17 Jul 2024 22:48:27 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-42679f33fefso144235e9.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jul 2024 01:02:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1721281707; x=1721886507;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721289732; x=1721894532;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lFBeE1m+hZsN1quFXrMJZCRlfDvWzytjMMRETRzYe1g=;
- b=pw9zYP2zybpLK23BkUVKUmHmw2AazYPglHDXBCmo6Dc/QQ+65176WyfPiJv442dH4T
- VGhAKEApKdLIFUobSfYw/gW3M/4gYWTtebRaA4LKaAazPqmPZS8IVbTcUsYnSfMwV8c/
- zMGJrOFe7tB9vx2UY3jM9s9epkEYHD5/xQdOs=
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=J9ySQSoLDZt74f2ROktTPdcizEayBtt86njQBDyv7VI=;
+ b=XQRXCb3sL2GKIV0VDRt/Cx77ZMevlei7PmPYpOj49aPAK3FMY6JuJWBMe4UpyGGaUW
+ LhPlboFQFioTXDxxFB6fMTJDsbzwzrz5zgg/8crOCV0XWHJnXFPnwns3D4rH2viLj6or
+ 9WxMbI5ppCsXrEFWGW2RLgrFz+ezXyVZGHYDpsdQJm8FJqbpOfH+xHCo9MYESCgDEPpK
+ HNMfx534Rd0bct3jcJUQt3lfzQcJmO9XBoZtvvAvMeT9/mnZeixIFJhriWJPHm62a6K9
+ /5ZArnr/Elc/NPl0oTGUZcKzvyfw7Mk9gT3/Jl60pY03RPHHiYPq68pltJQWUGnYxKda
+ rynA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721281707; x=1721886507;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lFBeE1m+hZsN1quFXrMJZCRlfDvWzytjMMRETRzYe1g=;
- b=ebqHBsIT+vGmbVN4qEQ/uRwwTA9FAb4n8ClxSyWRxdaKCW2vYeFj+xllwVKdYrERD/
- 4F+TbUjo6kCp5ZqlIp5CXOB0u837N0iPMsJ7h/Dvvtig64TisQcauBZH7e9WMp9vTIIS
- QhWD8uwqFQiAvAMma34by6dWgF14KXWIfYCr8MyjRYUQUQXKRKhMIETD6p4FtPHQonx7
- TactvmU5jlOl+Z1z2KlaU8BHTWO1ZmimAG6tcDsAAnUrHcQQA+Rgy2q6OdEXoI+R54VP
- QUm8jSw/jAR/xZ0XzM9ARvDe4MGsxBwM3R8s0XB4uwB5kRGKfkhYt6WoOOARybl4RHq+
- xY5A==
+ d=1e100.net; s=20230601; t=1721289732; x=1721894532;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=J9ySQSoLDZt74f2ROktTPdcizEayBtt86njQBDyv7VI=;
+ b=bZzdc2TOxhARWeF+yy9cI/XnSwb/77BZyDK5ZF7qo+H4AYfVvfRY4I28OPPbHKMQ3O
+ +QFLYBE2s92aUP4CWkSoXwWDFD+FsabVYNDBf1+KxLwwEnymf2aSOOnLibLSZXbOGRAs
+ prTTb2wN3KCR3ixg9FUrGjX8noYg+IoOLtCztkUctB94263V8+lyYE5ohkGjaIgSiMCE
+ I6GkDUlb+FMLJpcrx3S92opzgJq23+FF6OFURBBF3bXekPR8IIRt8kKuEJ9EkrMo6TJ7
+ qHVUw0OcwZZyHcRCo0/8/SQZn4zQ2r/JtIRD+t4T1REqwmkEyH057bBmI31UvHa7F2Mx
+ VUNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdRr/bNjVLEIXqyyXWBGBTfZR2zy4tpHoC/W35GTD3sic0UcWjqmghts2U3lGkhVVmz9LYzO39Z7unFL1Y7qWcVizCrQ==
-X-Gm-Message-State: AOJu0YxNN2eT0fmNFiX7ys9wWdMaqgR+kknAV9s3JVArUycVjsGWXo6K
- sfNTgF3li8QmXR3Zz5XUDgFhdCslsAVTEzSjX1vb+/VvHsQEC8UyGBx9I6fz4g2Yvew7X7Yj5uG
- thJRewM6tpiPH77zYmltTOUP4Q6WJkPB8jfp+hw==
-X-Google-Smtp-Source: AGHT+IE0QUrht4Rn0ghyysyZUzPJiHjEGk5lzy9b1MVBOfAW8ccbzN68EScMZ4xG1yeOofVY+LmtW7uTsCceXolP22M=
-X-Received: by 2002:a17:906:f294:b0:a77:e6dd:7f35 with SMTP id
- a640c23a62f3a-a7a0f137e24mr165791866b.13.1721281707248; Wed, 17 Jul 2024
- 22:48:27 -0700 (PDT)
+ AJvYcCUwbV33092ysfu6y/8puPC0JiwdTCu90nFAtd5ZpKEdr1xrKnuP7WJepcSJgQ17+KxrlQdy7LbhcZtCVqZ/rM6jc4LgzA==
+X-Gm-Message-State: AOJu0YzRb6UqtJjXzTKU82CJWLYHuSOgkLj/xBh6b4F27TXJ/x2xbi0N
+ bq9l4zyNjE6xQZhGQcabNQzz76/K/EHORSviQTpBP+9ajScWBhHzvyzcYa0qbdg=
+X-Google-Smtp-Source: AGHT+IHUlTNLROEWW5t67JS5kt9pTko2taA8zXKYWE52eHr3m241SgJSASFDmxjk8Fw5I4btknjMMw==
+X-Received: by 2002:a05:600c:3555:b0:426:6eb9:db07 with SMTP id
+ 5b1f17b1804b1-427c2cc36famr30004035e9.13.1721289731637; 
+ Thu, 18 Jul 2024 01:02:11 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427d2a6e91fsm1098055e9.23.2024.07.18.01.02.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jul 2024 01:02:11 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>,
+ Lean Sheng Tan <sheng.tan@9elements.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 01/21] sandbox: Use const in os_jump_to_file()
+In-Reply-To: <20240713070055.2172883-2-sjg@chromium.org>
+References: <20240713070055.2172883-1-sjg@chromium.org>
+ <20240713070055.2172883-2-sjg@chromium.org>
+Date: Thu, 18 Jul 2024 10:02:07 +0200
+Message-ID: <871q3rm8lc.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240718054528.799539-1-avromanov@salutedevices.com>
-In-Reply-To: <20240718054528.799539-1-avromanov@salutedevices.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 18 Jul 2024 07:48:15 +0200
-Message-ID: <CAOf5uwmcexSSzZMjLNQ4A=qrMDvDc0k5t1mwteScAcWmgM4Qhw@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] Introduce UBI block device
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: dario.binacchi@amarulasolutions.com, frieder.schrempf@kontron.de, 
- kmpark@infradead.org, hs@denx.de, joe.hershberger@ni.com, dunaev@tecon.ru, 
- sjg@chromium.org, bmeng@tinylab.org, xypron.glpk@gmx.de, 
- tobias@waldekranz.com, jpewhacker@gmail.com, marek.vasut+renesas@mailbox.org, 
- kever.yang@rock-chips.com, jbx6244@gmail.com, abdellatif.elkhlifi@arm.com, 
- mikhail.kshevetskiy@iopsys.eu, jagan@amarulasolutions.com, 
- kernel@salutedevices.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,115 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey
+Hi Simon,
 
-On Thu, Jul 18, 2024 at 7:45=E2=80=AFAM Alexey Romanov
-<avromanov@salutedevices.com> wrote:
->
-> Hello!
->
-> This series adds support for the UBI block device, which
-> allows to read/write data block by block. For example,
-> it can now be used for BCB or Android AB command:
->
->   $ bcb load ubi 0 part_name
->
-> Tested only on SPI NAND, so bind is made only for
-> SPI NAND drivers. Can be used with mtdblock device [1].
->
+Thank you for the patch.
 
-Did you run the CI on it? It's important not only that review get pass
-but even we don't
-create regression on other build
+On sam., juil. 13, 2024 at 08:00, Simon Glass <sjg@chromium.org> wrote:
 
-Michael
+> The argument array is not changed by the callee, so mark it const.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
 >
-> Changes V1 -> V2 [2]:
+> (no changes since v1)
 >
->  - Rebased over mtdblock v2 patchset [3].
->  - Compile UBI partitions support only if CONFIG_BLK option
->    is enabled.
+>  arch/sandbox/cpu/os.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Changes V2 -> V3 [4]:
->
->  - Fix build warnings: use LBAF printf format string for lbaint_t types.
->
-> Changes V3 -> V4 [5]:
->
->  - Rebased over u-boot/master.
->  - Fix build errors and warnings if CONFIG_BLK isn't enabled.
->  - Fix failed tests in cases is ubiblock device isn't binded.
->
-> Changes V4 -> V5 [6]:
->
->   - Rebased over u-boot/master.
->   - Fix build errors when CONFIG_MTD and CONFIG_MTD_UBI isn't enabled.
->   - Use auto blk device devnum generation when call
->     blk_create_devicef (pass -1 parameter instead of dev_seq(dev)).
->
-> Changes V5 -> V6 [7]:
->
->   - Rebased over u-boot/master.
->   - Introduce CONFIG_UBI_BLOCK which is disabled by default.
->   - Fix undefined reference to `__aeabi_ldivmod' compiler error for 32-bi=
-t ARM targets.
->
-> Links:
->
->   [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salu=
-tedevices.com/
->   [2] https://lore.kernel.org/all/20240306134906.1179285-1-avromanov@salu=
-tedevices.com/
->   [3] https://lore.kernel.org/all/20240307130726.1582487-1-avromanov@salu=
-tedevices.com/
->   [4] https://lore.kernel.org/all/20240325144148.3738195-1-avromanov@salu=
-tedevices.com/
->   [5] https://lore.kernel.org/all/20240524111319.3512009-1-avromanov@salu=
-tedevices.com/
->   [6] https://lore.kernel.org/all/20240603155740.1840571-1-avromanov@salu=
-tedevices.com/
->   [7] https://lore.kernel.org/all/20240626104527.2811828-1-avromanov@salu=
-tedevices.com/
->
-> Alexey Romanov (6):
->   ubi: allow to read from volume with offset
->   ubi: allow to write to volume with offset
->   drivers: introduce UBI block abstraction
->   disk: don't try search for partition type if already set
->   disk: support UBI partitions
->   spinand: bind UBI block
->
->  cmd/ubi.c                   |  78 ++++++++++++++++++++--
->  disk/part.c                 |   7 ++
->  drivers/block/blk-uclass.c  |   1 +
->  drivers/mtd/nand/spi/core.c |  12 +++-
->  drivers/mtd/ubi/Kconfig     |   7 ++
->  drivers/mtd/ubi/Makefile    |   1 +
->  drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
->  drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
->  env/ubi.c                   |  16 ++---
->  include/part.h              |   2 +
->  include/ubi_uboot.h         |  13 +++-
->  11 files changed, 348 insertions(+), 18 deletions(-)
->  create mode 100644 drivers/mtd/ubi/block.c
->  create mode 100644 drivers/mtd/ubi/part.c
->
-> --
+> diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
+> index d7869b2e368..6a8a5e7b89b 100644
+> --- a/arch/sandbox/cpu/os.c
+> +++ b/arch/sandbox/cpu/os.c
+> @@ -808,7 +808,7 @@ static int make_exec(char *fname, const void *data, int size)
+>   * @count: Number of arguments in @add_args
+>   * Return: 0 if OK, -ENOMEM if out of memory
+>   */
+> -static int add_args(char ***argvp, char *add_args[], int count)
+> +static int add_args(char ***argvp, const char *add_args[], int count)
+>  {
+>  	char **argv, **ap;
+>  	int argc;
+> @@ -859,7 +859,7 @@ static int os_jump_to_file(const char *fname, bool delete_it)
+>  	struct sandbox_state *state = state_get_current();
+>  	char mem_fname[30];
+>  	int fd, err;
+> -	char *extra_args[5];
+> +	const char *extra_args[5];
+>  	char **argv = state->argv;
+>  	int argc;
+>  #ifdef DEBUG
+> -- 
 > 2.34.1
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
