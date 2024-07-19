@@ -4,71 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA2CC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 08:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D447CC3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 09:12:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 347FF88ACF;
-	Fri, 19 Jul 2024 10:59:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 212F5887CE;
+	Fri, 19 Jul 2024 11:12:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b6v6l3HG";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="R9nD0HUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E9E088B19; Fri, 19 Jul 2024 10:59:29 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 9C92E88B55; Fri, 19 Jul 2024 11:12:29 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20724.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::724])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DDBA883BB
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 10:59:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFA3A884AC
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 11:12:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46J8xCt4057279;
- Fri, 19 Jul 2024 03:59:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721379552;
- bh=VDiXNwQGsKLChngHBy7vUZlrmpkdqhH+zi1Jql58z68=;
- h=From:To:CC:Subject:Date;
- b=b6v6l3HGCL3VPLYGqqlBjNgg/un7O3RlWpbY6K4k8zxJSw/4BeJf2Pkv6vure45Hg
- 3xRhJZCPRJAZtodCzN7HGd+UjMv2nlvK1Fc0/XeCa2ZIUIbDAhBfnlJGgPlPkZzbMU
- geZLVXbHkDFwIz8ba3JYL+ixR9bTCp8yICTYCFRc=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46J8xCig028057
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jul 2024 03:59:12 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jul 2024 03:59:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jul 2024 03:59:12 -0500
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46J8xCOW065050;
- Fri, 19 Jul 2024 03:59:12 -0500
-Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 46J8xBDN030592;
- Fri, 19 Jul 2024 03:59:11 -0500
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>, Nishanth Menon <nm@ti.com>, MD
- Danish Anwar <danishanwar@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>, Andrew Davis
- <afd@ti.com>
-Subject: [PATCH] remoteproc: uclass: Modify uc_pdata->name to use combination
- of device name and device's parent name
-Date: Fri, 19 Jul 2024 14:29:08 +0530
-Message-ID: <20240719085908.3564171-1-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IAV1y0rFSPQuAPDtGC9y7o6WKGY/8Rv5TZhHxoMrogVcrViPF8eC5PuQSGoiv3fGUpIpslZIcN+8nUioylH2MdsCqFx5ZWIIQ2/m7VH+j/K/AI6j/6lgU+fZ4baUu/aqQXMBnJpBqdUj9HYrX8v9C9JqD49t7oYpkVi6MwpnTuOC14SOm75fPv3/iVNLPChWTJJaxWtJntkKePKBnGd/qnt1G6kElbp+cUQPtvxYNhpClUcpX6hyWPFTXq8n6NTeTax9Hd/jHhY5/EHiTd3iJ5Pkq/SC1MPkohPaumAzxn7XptTtIVvvmBLtEpV3n7bMA5Ng2aYTwFHnJdbaX22XgA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1BTe/ZWeqTHEx90txr3Fb+Lvu3QnO5dk4oCsYeoxOao=;
+ b=Ar253LWzEslDInPyDJDQt+eYata0K0eZti1AQz8P5Y50Lcn0oHET5ESbi6zwmp/EutHo4OYjFcshjepAyavh72T6XXlmge56HS8LhKcqDNuON4e7JTWIcbJAuQJsNvbMvLvgJ2kP7p7hCK1d30HggioQD3nLUWhseQ00nyJgWvbbXrmIcyDgLmW6QxyDLK7hmvqr4UMiscWs4LtNh43tdvF2PKrR8PrviyWYb7xIuJ4eW8/EUeRt1slepzX7JGG2x+v2FH8vTuis4AOhUPhSqPBro9HPHNMkVr04uSFoiJY5WZRgw92F4oM0vQDbZx+ViTeWjKBZ/t+00exybnYLaw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1BTe/ZWeqTHEx90txr3Fb+Lvu3QnO5dk4oCsYeoxOao=;
+ b=R9nD0HUXClWG+OxOA0XxaA51cDkapw1xEYMbecOvD/R/tJNTYLTDG5gFSdzmcl8g6pI80Yqjgp/ctPGhIwR6HFcrfzmrc/T3RckgQeq7sOKy/IyVVuJOClhuHqeG9RXtU+i2Qx2wBN2ZCQyNSftmrhorNW4h6A5yP7uwyQ58dg7ZEsDMPrFVDnw0BroI1OlWWBFgKujom9keNIC8FqtBsxsChYzSNzbz2eG1n3e14Lto9uRCZ2Tkqz7lzXuuIDcyUicoWJDnxUfEvkqg3DeUa+9a92wlkiik2X27bupBi85ndXHRzLUNqPPsnujT8+NUAX8msM02aVVuAOCfolsQUw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS1PR08MB7402.eurprd08.prod.outlook.com (2603:10a6:20b:4c6::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.16; Fri, 19 Jul
+ 2024 09:12:25 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7784.016; Fri, 19 Jul 2024
+ 09:12:24 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v6 0/3] led: implement software blinking
+Date: Fri, 19 Jul 2024 13:12:10 +0400
+Message-Id: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.39.2
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-ClientProxiedBy: LO4P302CA0029.GBRP302.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c1::20) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS1PR08MB7402:EE_
+X-MS-Office365-Filtering-Correlation-Id: a175e18e-685c-4134-95da-08dca7d2e745
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|52116014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kWrNbfWqh1iRwv4FH7qkHy9HFnLz6M98hV5hynZTrHyNsujqfpa4xgi08tNc?=
+ =?us-ascii?Q?PxVTNnVU9rkBr6ZJ1VItZLSauf0S+AZslEBW40jmUkdj6MAUOmvePHi+aZI9?=
+ =?us-ascii?Q?AoJgUInBtO0q1miZPdhbh8fqBfXbT1YX9IcORmeye3/L4kVRnJKmP2/9ZTR+?=
+ =?us-ascii?Q?n4sco3buxi/GYM4xLQL0bbGXIGjqnDp/fdXUZbfcdbsKnjQR9gUznQPnTY2H?=
+ =?us-ascii?Q?FZZBnTP1bOFMNrjr8Z59p+U2RCgDa+lbJXkdpVuxnr6JZGeHeIsJUk12nbOU?=
+ =?us-ascii?Q?ncZ0s4rigweWESOusz6BL4+qhOU5OmaTZWSmpSt29tDeJdZGYMn0z7FGCfUm?=
+ =?us-ascii?Q?GEIObXDSchEVbaJTkX/Tf/6PEIlvxkocRhl3rDuCs/poaEaGPo8JFMV51Gkq?=
+ =?us-ascii?Q?wHInknRv4mGGEKAngHQ0QmEfy8F9ex5bkG7q8Su+Qemwa+/Uh5yMV8E2Ftoo?=
+ =?us-ascii?Q?k64T/sHO3J6wchi9bDCQeEfVu1WoSVicQcam6mR/O9GpClxBcEZA0ZX64xcH?=
+ =?us-ascii?Q?fyBLxZb503Ofanstc/rvHMBKLPfLxSRey/zLi8bPViCg2fakGvHVFf4JynYs?=
+ =?us-ascii?Q?fTYNivbCbZGbtGp4IE8uHR6FW8G3+fg0U5Dta3ihr9Nm3ajWycx0nJ4H4cLv?=
+ =?us-ascii?Q?yceOsp26Koe3XwVCBgSW1u56etj7G499vXIprpTMYKy4KUBguU9AbZxgzHrP?=
+ =?us-ascii?Q?Y34kRp6sYiQO7kdY0FewQkjy1AbGUn8OL/4ZXqQ5+3EG6nQE+IL5MPbGIgu/?=
+ =?us-ascii?Q?A+hjabCA14RjwXt42BcsJCQmUteBta/nj+IusQPX4X/UdQWy6FHR2WKEbp3O?=
+ =?us-ascii?Q?n9tl5cph92gASBlk0VWifS8RVMVkgdwXjDyGpLIHiymHJL/+8KN6jbeNwbNn?=
+ =?us-ascii?Q?mKTvKzS49HeLjR95I5tVjaj5DawhacUK2dxQbrOUCPaF6rD1Q6NaUsNYCpPr?=
+ =?us-ascii?Q?SLnD+OG5y1PrAC4mVBIjyUiAQ03pul1bvSPiarPRisa61fxxfkFPA9awZJfD?=
+ =?us-ascii?Q?lCXZlBe/Mt3e1t/FiY0CoKeqfg3UmW1Ib39/v1e6n/uGC1DATPjwBjhUptjD?=
+ =?us-ascii?Q?IqMOUbzw5wVS3OgbZJNyn678yFOC4vjztQ+gwZXop/wozu+PZsEymAZEAX1I?=
+ =?us-ascii?Q?n8tEH8gdu/6/v59yks1LzZMflKq9CI172QczCAk7vjb17GgStUDhlpieipIg?=
+ =?us-ascii?Q?MA5rTYU4hB7vFm1oSj+fyhvNxNqnl+278UcCQ0YnUigiM0l2uevxbgD3wPIx?=
+ =?us-ascii?Q?0QKInxLyoyqzmYDJHMbCLZpHoopd9wesuZoWjrg0DLbBU/DzvReSh4KsFIRF?=
+ =?us-ascii?Q?0WDUxKlEiZC9g0cCTqL1qttzaq5NmYDwlRi7F+ygM3/BKY8EHuZz16CeOX+U?=
+ =?us-ascii?Q?72ZeMBqX5ZUHnYBfCadhZs3sx9hq+fVLuo3LwKcQ1URzrUnfDg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rEQlSDdD00gehdoCEWCCHdO/rsWQeDWnldb3il2BZKUN4EcetD0+aEN44kJt?=
+ =?us-ascii?Q?FK4tC7NPG6IgzUDp/vkDwYw6l9tLA/lb7CRq3VSupI0HjcmmnmvQP8u3RF/j?=
+ =?us-ascii?Q?CR0A7T2Jx0JdR3wBJ2zjROPwGSZbIgiNn/0oWupB+r4ovlUpEPZf5Mdc3m2z?=
+ =?us-ascii?Q?yA9LydQGLBxiTTnbv0jRR4vtNA6Gpr+WTTUn1g+sNOhYsXiMaRuVNdHYw/15?=
+ =?us-ascii?Q?90WiiNogjfdVPK/4idXcKzcvrb7fuKltuH2q11B0RuYfniQaUrJkPFPF7dbx?=
+ =?us-ascii?Q?k1VIAY29v7wFpAlslTDfpnDqKAUVSkwiyeqPr0uv6URuXBdwJiZuyen+ofO5?=
+ =?us-ascii?Q?/bG0wmyGle7Q9O0O9nTEw2OpQRMP/GxraHX14bNDbOCoRRh8TKW7c+dhy/ut?=
+ =?us-ascii?Q?EDoWUKZuRbvYwoZKcbvgVroAeB1Fu4Gb0jjTw5tH+3rJIXOGzSWQcU2msDsx?=
+ =?us-ascii?Q?S+reaiwiXhO0WuHUFtrc7zb/GqT1OI0vRlKtk60Fg3cfQAUE8wStFqNuirzo?=
+ =?us-ascii?Q?+I4GlQ4V0+Q2qOu2L7eHc0t88c7pbzF9qyMpEGmZTpx38x987gJcJVJGvLsu?=
+ =?us-ascii?Q?y5FFRE9R1mxEmdWqv01WHqdplF0fHXE+/+H+/Ek5hSqipNt0tkyhRgWNPOw3?=
+ =?us-ascii?Q?AGzXs+SWLfJGNbEtfvJ9/eAOvSsH4p051O8hiadUaaa989AfM8e0PVEgD3c6?=
+ =?us-ascii?Q?rqudvXWs8rJMF2sA+eO30SIfVtApqHxrrgDZmzJLTJ8brOhISTmfTEyVCrIo?=
+ =?us-ascii?Q?Z2fShjvYowxC9K3Pkxax+sXQzyUjwj+9xGh/NueY9qFLrMcWqu2ur+qwvrLd?=
+ =?us-ascii?Q?/vvSxkyNmMhm53939ZltnAtB8Eshf9fOlMUx3vKcyYNHdszO7KStQ/k1B7Ao?=
+ =?us-ascii?Q?6CZ/8Xz1VRjukIHJgq54HBJ33HzxeKzRIYdO/vprMzDUVm2FAhI97e8BclxC?=
+ =?us-ascii?Q?LJuFDL7JOMQOB67+vCmuogwFM93H/Xy1AaDhss0dzsPPajT1Q8GWF5juHjdi?=
+ =?us-ascii?Q?ZglxYVnRZtxaLNT0+IZHL5tHBQmsV9b1vBIDdk6vAscLcGHphN1JmZs5OfqT?=
+ =?us-ascii?Q?LoW91bP9uwST24dLpCR3Ak43etstJKRQ2VSx6Uiwd41TaAavG7ZRjb+LqI3Z?=
+ =?us-ascii?Q?yQ2TLzRzIn6EuecqBou6TGZdGWHFCCvAIXkvXVpgtf5cPxWfhHTA3943vqF+?=
+ =?us-ascii?Q?FJD6bLEPM2XgplynOGFXpNwlhi6PKxfO2tshITEA6ZCiR+qjXGrH3a/fYf3O?=
+ =?us-ascii?Q?6Ew1pLWl9yJs1bwZlAbNE03t6DDTLrwbem+Q2RtWGFnPjObG7Hwc8fvG55Ec?=
+ =?us-ascii?Q?7oI4f3LcCqRA/BcJSoXSzjsabhPYuXEM2l1nF3Z9qMjTlowkt+waPEslEta7?=
+ =?us-ascii?Q?wGm9pAkSEMqz5cUKR1O799nraboexj+iaDk08+GEcdHtk77e/Ti8svWroXLR?=
+ =?us-ascii?Q?06Qka8FgJBUHi3UrYr+iDk9KUoiqrRv39GjnzeZzUE/73ZTP37Ur24ecw4+X?=
+ =?us-ascii?Q?nkWCTQrBMSrfmw9XKeUwVgfQGfyh/iChNggpeZNza1mXjQ6k5oaUtECJLFiC?=
+ =?us-ascii?Q?4IkxWQZDnX3xP57cKzN2QPquKstAkaQHdCP/1lJHJSBaqtQZgFThon53DNhs?=
+ =?us-ascii?Q?Gg=3D=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: a175e18e-685c-4134-95da-08dca7d2e745
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jul 2024 09:12:24.8617 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ljRiexg1Sa41cmrtKXP96gB0vo4U4oLIfOS6/6+7G8vji9mupc2oVe1PHvjWnY8IVdIs4zSeOSCTD+QhlNdYtSvSkAHj1Iz0QVGCTHQZpqI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR08MB7402
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,77 +160,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-uc_pdata->name is populated from device tree property "remoteproc-name".
-For those devcices that don't set "remoteproc-name", uc_pdata->name
-falls back to dev->name.
+v2 changes:
+ * Drop sw_blink_state structure, move its necessary fields to
+   led_uc_plat structure.
+ * Add cyclic_info pointer to led_uc_plat structure. This
+   simplify code a lot.
+ * Remove cyclic function search logic. Not needed anymore.
+ * Fix blinking period. It was twice large.
+ * Other cleanups.
 
-If two devices have same name, this will result into uc_pdata->name not
-being unique and rproc_init() will fail.
+v3 changes:
+ * Adapt code to recent cyclic function changes
+ * Move software blinking functions to separate file
+ * Other small changes
 
-Fix this by using combination of dev->name and dev->parent->name instead
-of using just the dev->name to populate uc_pdata->name.
+v4 changes:
+ * Refactoring of led_set_period() function
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
-Cc: Andrew Davis <afd@ti.com>
+v5 changes
+ * Fix compilation if CONFIG_LED_BLINK is not defined
 
-Failure Example:
-In k3-am64-main.dtsi, both pru0_0 [1] and pru1_0 [2] will have
-dev->name as "pru@34000" although their parent name is different.
+v6 changes:
+ * Enable LEDST_BLINK state unconditionally.
+ * Function led_set_period() becomes available when CONFIG_LED_BLINK
+   is disabled. This makes led code simpler.
+ * Software blinking requires about 100 bytes of data for a led. It's
+   not a good idea to allocate so much memory for each supported led.
+   Change the code to allocate blinking data only for required leds.
 
-pru0_0 has dev->name as "pru@34000" and parent name as "icssg@30000000"
-pru1_0 has dev->name as "pru@34000" and parent name as "icssg@30080000"
+Michael Polyntsov (2):
+  led: Implement software led blinking
+  led: Add dts property to specify blinking of the led
 
-rproc_init() fails for pru1_0 as the the uc_pdata->name becomes same as the pru0_0.
-More details on this issue can be found here [3]. It was suggested to use a
-different combination if `dev->name` is not unique by Andrew Davis <afd@ti.com> [4]
+Mikhail Kshevetskiy (1):
+  led: enable LEDST_BLINK state unconditionally
 
-Failure Logs:
-	rproc_pre_probe: 'pru@34000': using fdt
-	rproc_pre_probe: 'pru@34000': using fdt
-	rproc_pre_probe: pru@34000 duplicate name 'pru@34000'
-	_rproc_probe_dev: pru@34000: Failed to initialize - -22
-	rproc_boot: rproc_init() failed: -22
+ cmd/led.c                  |   8 ---
+ drivers/led/Kconfig        |  16 ++++-
+ drivers/led/Makefile       |   1 +
+ drivers/led/led-uclass.c   |  51 ++++++++++++----
+ drivers/led/led_sw_blink.c | 117 +++++++++++++++++++++++++++++++++++++
+ include/led.h              |  24 +++++++-
+ 6 files changed, 196 insertions(+), 21 deletions(-)
+ create mode 100644 drivers/led/led_sw_blink.c
 
-To fix it, this commit uses combination of dev and dev's parent name.
-
-After this commit,
-pru0_0 uc->pdata->name = "pru@34000:icssg@30000000"
-pru1_0 uc->pdata->name = "pru@34000:icssg@30080000"
-
-Both the names are unique, thus rproc_init() succeeds.
-
-[1] https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1276
-[2] https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1417
-[3] https://lore.kernel.org/all/5cda289f-1d14-41f6-84e3-ff1d1034be13@ti.com/
-[4] https://lore.kernel.org/all/e48f5818-182c-47ab-b384-379659830d38@ti.com/
-
- drivers/remoteproc/rproc-uclass.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
-index 3ba2b40dca..e550292dda 100644
---- a/drivers/remoteproc/rproc-uclass.c
-+++ b/drivers/remoteproc/rproc-uclass.c
-@@ -158,9 +158,15 @@ static int rproc_pre_probe(struct udevice *dev)
- 		uc_pdata->driver_plat_data = pdata->driver_plat_data;
- 	}
- 
--	/* Else try using device Name */
--	if (!uc_pdata->name)
--		uc_pdata->name = dev->name;
-+	/* Else try using a combination of device Name and devices's parent's name */
-+	if (!uc_pdata->name) {
-+		int rproc_name_size = 256;
-+		char *buf;
-+
-+		buf = malloc(rproc_name_size);
-+		snprintf(buf, rproc_name_size, "%s-%s", dev->name, dev->parent->name);
-+		uc_pdata->name = buf;
-+	}
- 	if (!uc_pdata->name) {
- 		debug("Unnamed device!");
- 		return -EINVAL;
 -- 
-2.34.1
+2.39.2
 
