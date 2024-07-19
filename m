@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B10C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F8FC3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:52:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E671988BC0;
-	Fri, 19 Jul 2024 12:50:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 525D688BD0;
+	Fri, 19 Jul 2024 12:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MUfXGZGf";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="MUfXGZGf";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HxUMMHER";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HxUMMHER";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 725F288BA9; Fri, 19 Jul 2024 12:50:27 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id EED7A88B8A; Fri, 19 Jul 2024 12:50:28 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4202288B49
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6D588B33
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WQRKF0n4Yz9sly;
- Fri, 19 Jul 2024 12:50:25 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WQRKG16pDz9tXg;
+ Fri, 19 Jul 2024 12:50:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386225;
+ s=mail20150812; t=1721386226;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=IY1P2JffHdcau+/Lbo1uaduteJHmO81950aAV0NR+K0=;
- b=MUfXGZGfyhq+TjDdJ4zYQuq7RxsFfNaPpnZ+edcZ5/oR4t9Fb4342t6ZvEcxS5qYS4j9Ud
- yzN/XAG1DzaTwyQ9kCvb8klLY2ohBqTM/ftJ0xskyxYShmwcRm7opUF8DFnC34PGQnocjg
- 9L5B+buPXlZ2VYqBkVsan/GUWyyXPwOrZNTEYRU3YaQLxa8B+evHGliIrsUh8w0LtJOB4j
- DUlGfj6SlxmXLQ45tejy/HF2fvXzbQW3z3mZSsiFmUINp80DOqawjqnEYWngEF9Urk6nm7
- SwMhZgbPcPfg2Yw/ub10O9aUgKY+0nXu4sl9972AQGEKr+Tb9nenM4OE4K+eow==
+ bh=UaVO2hV1otlHhUZu+PIc10WYUshPrH+CR95MSMqZa28=;
+ b=HxUMMHERSn4rx6Zpeb9iC3i4yKTQJ/RhwxwsKG9/ApvZS6N0XAicGHS1qcdx8PqRHhh744
+ Rpfr1YsTg+yTWtf5GcOXcqIM0/Wxa2d65XgGKQHjzCiYPAZlbIMbgfn0v5LH+BZ2ETV1KG
+ MbuG48+EQTA9oT5GrClEZh8KwTM3p7I43XP79zGWhKUKbj2Xy6iv0narI7gMPuFjNcewvh
+ 92AGzzyB40vNgsmcEiungPwI1cBfcTxqD1OZxxfjAHqAP//e5XE+s9KxQig36aFP/fQ6re
+ BU7jScmjhhUW3iKS614ip/1RXbFGTLOy74vrBsmM17nG52ZilYYyoicxs/OCiA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386225;
+ s=mail20150812; t=1721386226;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=IY1P2JffHdcau+/Lbo1uaduteJHmO81950aAV0NR+K0=;
- b=MUfXGZGfyhq+TjDdJ4zYQuq7RxsFfNaPpnZ+edcZ5/oR4t9Fb4342t6ZvEcxS5qYS4j9Ud
- yzN/XAG1DzaTwyQ9kCvb8klLY2ohBqTM/ftJ0xskyxYShmwcRm7opUF8DFnC34PGQnocjg
- 9L5B+buPXlZ2VYqBkVsan/GUWyyXPwOrZNTEYRU3YaQLxa8B+evHGliIrsUh8w0LtJOB4j
- DUlGfj6SlxmXLQ45tejy/HF2fvXzbQW3z3mZSsiFmUINp80DOqawjqnEYWngEF9Urk6nm7
- SwMhZgbPcPfg2Yw/ub10O9aUgKY+0nXu4sl9972AQGEKr+Tb9nenM4OE4K+eow==
+ bh=UaVO2hV1otlHhUZu+PIc10WYUshPrH+CR95MSMqZa28=;
+ b=HxUMMHERSn4rx6Zpeb9iC3i4yKTQJ/RhwxwsKG9/ApvZS6N0XAicGHS1qcdx8PqRHhh744
+ Rpfr1YsTg+yTWtf5GcOXcqIM0/Wxa2d65XgGKQHjzCiYPAZlbIMbgfn0v5LH+BZ2ETV1KG
+ MbuG48+EQTA9oT5GrClEZh8KwTM3p7I43XP79zGWhKUKbj2Xy6iv0narI7gMPuFjNcewvh
+ 92AGzzyB40vNgsmcEiungPwI1cBfcTxqD1OZxxfjAHqAP//e5XE+s9KxQig36aFP/fQ6re
+ BU7jScmjhhUW3iKS614ip/1RXbFGTLOy74vrBsmM17nG52ZilYYyoicxs/OCiA==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 09/37] board: congatec: Remove duplicate newlines
-Date: Fri, 19 Jul 2024 12:48:46 +0200
-Message-ID: <20240719104948.323791-9-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 10/37] board: davinci: Remove duplicate newlines
+Date: Fri, 19 Jul 2024 12:48:47 +0200
+Message-ID: <20240719104948.323791-10-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
 References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: iojd9suj3enckm5ohr684erz3j3hpscw
-X-MBO-RS-ID: cce4f4b26cd22ec9f12
-X-Rspamd-Queue-Id: 4WQRKF0n4Yz9sly
+X-MBO-RS-META: 1dhxi93rth6xa86jmgocpkk5p48o9ru8
+X-MBO-RS-ID: e5441f64105b664d019
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,21 +89,29 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- board/congatec/cgtqmx8/cgtqmx8.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/davinci/da8xxevm/omapl138_lcdk.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/board/congatec/cgtqmx8/cgtqmx8.c b/board/congatec/cgtqmx8/cgtqmx8.c
-index 99c33a1943e..054e4e10867 100644
---- a/board/congatec/cgtqmx8/cgtqmx8.c
-+++ b/board/congatec/cgtqmx8/cgtqmx8.c
-@@ -371,7 +371,6 @@ void detail_board_ddr_info(void)
- 	puts("\nDDR    ");
- }
+diff --git a/board/davinci/da8xxevm/omapl138_lcdk.c b/board/davinci/da8xxevm/omapl138_lcdk.c
+index 607e05ad9ae..03c34455c50 100644
+--- a/board/davinci/da8xxevm/omapl138_lcdk.c
++++ b/board/davinci/da8xxevm/omapl138_lcdk.c
+@@ -167,7 +167,6 @@ int board_init(void)
+ 	/* address of boot parameters */
+ 	gd->bd->bi_boot_params = LINUX_BOOT_PARAM_ADDR;
  
 -
- #ifdef CONFIG_OF_BOARD_SETUP
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
+ 	/* setup the SUSPSRC for ARM to control emulation suspend */
+ 	writel(readl(&davinci_syscfg_regs->suspsrc) &
+ 	       ~(DAVINCI_SYSCFG_SUSPSRC_EMAC | DAVINCI_SYSCFG_SUSPSRC_I2C |
+@@ -195,7 +194,6 @@ int board_init(void)
+ 	       &davinci_emif_regs->ab2cr); /* CS3 */
+ #endif
+ 
+-
+ #ifdef CONFIG_MMC_DAVINCI
+ 	if (davinci_configure_pin_mux(mmc0_pins, ARRAY_SIZE(mmc0_pins)) != 0)
+ 		return 1;
 -- 
 2.43.0
 
