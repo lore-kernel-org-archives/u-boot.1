@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42498C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 13:57:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D58CC3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 13:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4584288BCB;
-	Fri, 19 Jul 2024 15:57:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C547288BE8;
+	Fri, 19 Jul 2024 15:57:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EkhyiP/n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hjA0LV7O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48B0F88B8D; Fri, 19 Jul 2024 15:57:01 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 1C55988BCB; Fri, 19 Jul 2024 15:57:03 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6584188BC7
+ by phobos.denx.de (Postfix) with ESMTPS id D339388BA8
  for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 15:56:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4279c924ca7so12850715e9.2
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3685a564bafso642541f8f.3
  for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 06:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1721397417; x=1722002217; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=i+jRIalvS5muc88dIbat7gIg4Q1A2Ra7DzoF/oDb6nU=;
- b=EkhyiP/nMy6dhwlsfiZRmt4d4YhOKpp4gkxVL6HGYY37jdHd71381o5ROy9WR/qYA2
- DwI7K6hIjfPzf3IAXkQonEMXh1PYvwusaruMGdj2UXbnEu760upy8X7DVeHkKehCunBu
- VfRZXSuEH4uDvo2eJkTpYvp7DGHSFuamvvlBcwZWIUKg2697evqcM6680JiwsB1m7QO7
- qXs4xYhdNHA+Z1yxfObIzG7Zoqgy7lpe9azQ9VKvBtxJb6E9pLqscqn7zVFYYlwttTO1
- 8PTqIuoua6tbd2I+DZLdxnZrnEID9f1EzmStdUN08USTafz4XoAcykQBVXFcQg8gp609
- MW6A==
+ :reply-to; bh=XC6Y1cpNpchY+zzcdh5bJH6Mn3r/EZmTDYKPR+8m8/Y=;
+ b=hjA0LV7O5LBPccrqikk5ipdtONuNqS7+VmssDy5cC5ZBRawSeE4kj+WY+TzDgJ+phF
+ j+Xlsyc6bVShHImPGTHCR1HLVk9wWwMsCOPBiQGpxkuPJtJND6vbqUQ7uiXbM48N5VCH
+ O+ns2rHjhgmTGx3yF+UwlAJUfcLP/PTvsdpbZKcY1bT+TL/Cw77PfUWSGJ0sfAMjoEou
+ Rht25VvUS5gu6VU30QUNcoZ0bNa4g1d3JSNUJS9ECUhv/j5mEh8+mLSU/dPNuP/g/Ic4
+ iIMzfT9Yj5mG8HY3j2XaGIUDhB/Gr2ogdcPoZDh55IsAfH5EB8SrijtKRbF296o9h3wL
+ IOuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721397417; x=1722002217;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i+jRIalvS5muc88dIbat7gIg4Q1A2Ra7DzoF/oDb6nU=;
- b=rVaGc8BSJH3VYpqi72TErgFkE9l5Ceez6sLOCd0/WgcdkyLFZqDxnmmTVjoctuIlyK
- 63lwp3MyuDKWwh4sN146btUEuxonrI+0KFpOaM9S5N2YhDAwMvmMblBR3W2x7PcEKWrG
- 6Q2ZRH/0agGdI8qcSFzAsrOwCbTUvlG5Jkthl005obCOFgZQbNzHVKft7pSWNsmCHcE7
- H097OlhSKMI7ZHFEI6Kitt7xwpjA1GYxr4DXZ/bsZ/y76cJ/i7QLf/s+QFEInHkhWVnD
- 6p8tVVqd8x9iDSE3bIR6ODiwl7VwZjhTivMYSVUM5+NX9EojT1O6CpNVo57DLyqr60l/
- Hy1A==
+ bh=XC6Y1cpNpchY+zzcdh5bJH6Mn3r/EZmTDYKPR+8m8/Y=;
+ b=JBF3vfrWhWRzHGM7DklTWpLHhKlHZzjYdCa77x2ckKJ4rYemoV0idO1WpzwtzT06lV
+ CmfQJNTMMs8vALEpCn6ocNv8w7SYpuFPPNRDMzgF3pL9FrKjTL+6BDUojNeYZ8kvGJ4Y
+ k4ldrZrQuatKPuM2yMOEKEFq4XnWqz2Te+RkeOqdJcESo26c/KJWy7QRoRmb1CzqByJ0
+ L4N+jVbMFM4PijnOHnKHz2gRSZY8XYLWvaue1XyKC6abL/Mnf0GvCArtiCpz5chSQr1n
+ YQzFiHqDUzKNXOLAuu3qOLunen9mBuBa6izV2tB9r5mZdGW142c15HLgrxS/0EQ88R6C
+ f1sQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUR4I4xEd5GDwpyeHLnGNcKLl69nodJU0FwjCYsp4xRZjODgkAYxGTfwPRGQ44TX4Iz8pWg4ANIBFItIQBW9VFkc7JplQ==
-X-Gm-Message-State: AOJu0Yz7/RwT3XN7Cca6Zl0RtM+JL6QUOH786/XtGg2PnOpC7gH/qTzV
- rN1gVvoHE+vAMBd4OCQ3bXgRQ2BVVgPqb8JXA2ei22zwfUQwwsIa0OoitGn3d50=
-X-Google-Smtp-Source: AGHT+IHSMwakYGB9/5KVUlOWqws4/Gff+CEsx+WhJfyFumDdJ8AYGvpHdE0KrIjFPMSOSaQnsC5PPw==
-X-Received: by 2002:a5d:4c8e:0:b0:368:31c7:19d3 with SMTP id
- ffacd0b85a97d-36831c72a22mr4681547f8f.9.1721397416289; 
- Fri, 19 Jul 2024 06:56:56 -0700 (PDT)
+ AJvYcCVFJVy7JQmdRlQIKA481zvGF6lvb11VBmdOGUz504e5sFQYOhsfrHNcgV8qgxQCqrAHYv51neoex/btSNOYWMnn0fOX9Q==
+X-Gm-Message-State: AOJu0YzkdNV6qj4liOYBqR3UAIL+SHstGXF5R/QbTl4d0njE2AL3pMnt
+ TCHsNPnNvGLqMGjNnHpCP7fDpZM1DKWocJMg2r7pR0B9suUABzuRCkp1ud1VTQQ=
+X-Google-Smtp-Source: AGHT+IHhyf2kZiFpnueDiZRVb1po4NJUgo7RKD1pJ4qcEbwqNYczBKz0tSBm2aPivUd7NGNzCFcfsA==
+X-Received: by 2002:a5d:4576:0:b0:368:657a:6347 with SMTP id
+ ffacd0b85a97d-368657a647bmr2726949f8f.34.1721397417069; 
+ Fri, 19 Jul 2024 06:56:57 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3687868bc21sm1694083f8f.39.2024.07.19.06.56.55
+ ffacd0b85a97d-3687868bc21sm1694083f8f.39.2024.07.19.06.56.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 06:56:55 -0700 (PDT)
+ Fri, 19 Jul 2024 06:56:56 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 19 Jul 2024 15:56:51 +0200
-Subject: [PATCH 2/3] usb: dwc3: fix dcache flush range calculation
+Date: Fri, 19 Jul 2024 15:56:52 +0200
+Subject: [PATCH 3/3] usb: dwc3: invalidate dcache on buffer used in
+ interrupt handling
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-2-58a5f026ea8e@linaro.org>
+Message-Id: <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-3-58a5f026ea8e@linaro.org>
 References: <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-0-58a5f026ea8e@linaro.org>
 In-Reply-To: <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-0-58a5f026ea8e@linaro.org>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -80,20 +81,20 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1110;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2360;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=kh4rtOL6KeUvZru5sLtHZtD07pAad6NFUjKXTJm+qDc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmmnClPPG/Fg9c6HqnGAbU3NOHqXuMzkT+XVYeFAfF
- bSfTPJGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZppwpQAKCRB33NvayMhJ0Y3sEA
- CVFcj2sDoJHJIuKiiCDOwm2HfJ/xEIjAqoiZ9UFFgegJjWBWvWHgvkLP2t9hf3oRIMeV9Ifq0CkXyx
- iAsGxXjqjSuyvzKC0s7JORHI11qqWvICHEIfvuqfVnkNsyX8dZZ42VZA/u01sKF1hR+dY9UWQylvgC
- FzyDUI1q7ZtyhL0qVHnRFsjHgS4BPaHsYXoDYku+rrbSEewXB0X/oDlYX5JBDSDwEk2aM/nSOjm8vz
- EgSCREGm/uX3OfdY8MpbqbSFF8rkLAsqsrzGxMVYA1izmevlztjxwbIFjFktyZ6secS+pDAbHKsKvl
- sKiaAJc9EGpowHdfS+YBBxcRpmQ//MoHts5zaxmM+oiJY1ds4s4UpGBQH6YoyfvgPka7H9xOGr0vvt
- n/YPk9jL1KKgcruDyyfshQTylnuDGUXpDYbxui6CQ3sRDedNFWMWir1PMBlWE9712SVc2YWkbQLIE2
- lR56Ivp/A+z+k4Msrypy7ObTaKR4KZ+gMRE8LwNdZbSak8qhxFW8ciKrPwZ+BCz/oGECXpaT7M8zs8
- VntXCS/LfYuWsl9R3wULTraYYcAPjb3eAmulIiju/8l/47y9hy01pPsxBVUktyAhS/cGtLtnoaLKKB
- 9zj9MFLlAVLHhgPpTbmJKOWcbORorS1k/4RIMXQsuFCFc2PQJFU/Q9nlcXUQ==
+ bh=O5J25UaIoFRsnO+v0VukJ5RdDmbk6MuGwxOpVDPF6vE=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmmnClazlJj0WqLRfFrc+7CRP65tPRd8p7CpfhZbjd
+ xeha/J+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZppwpQAKCRB33NvayMhJ0UK0EA
+ CodKdnPVSp6uLnVnqS2+F+5gLUR7NspBen5GdUogUMAnAhdJ1ye1HfrZu5hvnlirnE3Ba9L4EZp7XT
+ z6iQXmUhMox5dL8AcsGOJF5vaHOailBehTO2ox483vcMODVznbp1TudsgLLCHWmPB1yaRnt5VWACb7
+ /U5MvOpYsqr8qcxukiFar2GMJhNeVWG9HZKYYPlcO2Ub7KTTmVO3iFP03g6PALFPP8t/HZ+x+vUta9
+ alCepAAuSe2Cq7JXCRw1ayQtUnVfP4ZAuAjmN3Wi95+as52mR2rwKS2UIjZroc0VSy/SFUPyirrQaI
+ xIJ/xmTQYJKcRpfEP2gI8PCbpEMjniAGDzPBcSEno5+wYMi1OVfKlamn/37R647kJxaivfNyfeV10f
+ XCHhYQIawp2MqxbsLfb7G3L9ewC9gecovnL/IdqNLRJ6OJ7iNH71ZvNP2+db7i5ysWvll1Dw19lMIV
+ pNKrhgTqNwDvpciG1nRHUpURBweWcIGdFAIs6qOK58dnQ9sXfdGZzwePx0FRp+g3OJ23n6SeGDPtVp
+ YMm3DMSnMP9otyuIlnn3hI6N6SkiSZG4CzjSTBW3XYMQ96oRZqPtasnkdzKGzpLS0F9y63zaiuUS3+
+ TWms86YHTym0Y6ZFCMGfVzNyFqHOhwq74U9u3BpKiPx6sy45NQOUeein9h1w==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -112,34 +113,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current flush operation will omit doing a flush/invalidate on
-the first and last bytes if the base address and size are not aligned
-with DMA_MINALIGN.
+On Qualcomm systems, the setup buffer and even buffers are in
+a bad state at interrupt handling, so invalidate the dcache lines
+for the setup_buf and event buffer to make sure we read correct
+data written by the hardware.
 
-This causes operation failures Qualcomm platforms.
+This fixes the following error:
+dwc3-generic-peripheral usb@a600000: UNKNOWN IRQ type -1
+dwc3-generic-peripheral usb@a600000: UNKNOWN IRQ type 4673109
 
-Take in account the alignment and size of the buffer and also
-flush the previous and last cacheline.
+and invalid situation in dwc3_gadget_giveback() because setup_buf content
+is read at 0s and leads to fatal crash fixed by [1].
+
+[1] https://lore.kernel.org/all/20240528-topic-sm8x50-dwc3-gadget-crash-fix-v1-1-58434ab4b3d3@linaro.org/
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/usb/dwc3/io.h | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/usb/dwc3/ep0.c    | 2 ++
+ drivers/usb/dwc3/gadget.c | 2 ++
+ drivers/usb/dwc3/io.h     | 8 ++++++++
+ 3 files changed, 12 insertions(+)
 
+diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+index 0c7e0123368..fc1d5892106 100644
+--- a/drivers/usb/dwc3/ep0.c
++++ b/drivers/usb/dwc3/ep0.c
+@@ -743,6 +743,8 @@ static void dwc3_ep0_inspect_setup(struct dwc3 *dwc,
+ 	if (!dwc->gadget_driver)
+ 		goto out;
+ 
++	dwc3_invalidate_cache(ctrl, sizeof(*ctrl));
++
+ 	len = le16_to_cpu(ctrl->wLength);
+ 	if (!len) {
+ 		dwc->three_stage_setup = false;
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index d41b590afb8..0bc9aee4daa 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -2503,6 +2503,8 @@ static irqreturn_t dwc3_process_event_buf(struct dwc3 *dwc, u32 buf)
+ 	while (left > 0) {
+ 		union dwc3_event event;
+ 
++		dwc3_invalidate_cache((uintptr_t)evt->buf, evt->length);
++
+ 		event.raw = *(u32 *) (evt->buf + evt->lpos);
+ 
+ 		dwc3_process_event_entry(dwc, &event);
 diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
-index 04791d4c9be..1aaf5413c6d 100644
+index 1aaf5413c6d..7cf05203b0d 100644
 --- a/drivers/usb/dwc3/io.h
 +++ b/drivers/usb/dwc3/io.h
-@@ -50,6 +50,9 @@ static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
+@@ -55,4 +55,12 @@ static inline void dwc3_flush_cache(uintptr_t addr, int length)
  
- static inline void dwc3_flush_cache(uintptr_t addr, int length)
- {
--	flush_dcache_range(addr, addr + ROUND(length, CACHELINE_SIZE));
+ 	flush_dcache_range(start_addr, end_addr);
+ }
++
++static inline void dwc3_invalidate_cache(uintptr_t addr, int length)
++{
 +	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
 +	uintptr_t end_addr = ALIGN((uintptr_t)addr + length, ARCH_DMA_MINALIGN);
 +
-+	flush_dcache_range(start_addr, end_addr);
- }
++	invalidate_dcache_range(start_addr, end_addr);
++}
  #endif /* __DRIVERS_USB_DWC3_IO_H */
 
 -- 
