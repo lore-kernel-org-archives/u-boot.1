@@ -4,71 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06A13C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785D3C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:57:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75DA688C4D;
-	Fri, 19 Jul 2024 12:50:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EBE3288BFE;
+	Fri, 19 Jul 2024 12:52:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="i4EypKOr";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dzX+6R1t";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZYYop1sI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6327C88C33; Fri, 19 Jul 2024 12:50:56 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 79EAF88B93; Fri, 19 Jul 2024 12:52:40 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8174288C15
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F7DE88B8B
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4WQRKp1xQqz9sdB;
- Fri, 19 Jul 2024 12:50:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386254;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sBXza+tZ9d9SSWn3pCvyvf+3oLd8mXMMiMN/nisxh8c=;
- b=i4EypKOrOw+49N3kKshJezVJCvTfxuBzPgfRfdI/bXNPN/hoaWaUJygLdGceU09qqliklP
- dP97l6eGBcL/GXz+hqz6h8WHMb5fiK3XALe0Rl4FAQUGqxKDlOLHiRwA7PnVBwZbZpTbkq
- YRaA5cEz6pRAnI4HXLlpjKRxJcbWJCA2iIcMtjh2mcLHJE5W8v5mzNtOFdis0f5VC5DCic
- TR8YLWs6dTsbFQca3APQn40FFU2ATLZNovgYK7QKmS92D4Lpy2+v1aURytPVaHTvO07CGK
- VQC9hXVDMsaUW4eYT5JiFgmMgr/0Ga4f6YvJYpOrKobXlNLpQO5DQ/6kbFxGTA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386252;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sBXza+tZ9d9SSWn3pCvyvf+3oLd8mXMMiMN/nisxh8c=;
- b=dzX+6R1t6SKR2bXhpPDtAsC9yREb+Tv8NAIkFiGHGdThvL1bioWkQzmJuehAjoYZTi7CxD
- 4xvr1hyFJvl+Rdordcfcy5IBThP+urW5tmuSdOhQ10D2cb7ur6wpdQ8u4SqozugL8HTbAd
- VpcTbv8HLdZHY4BlvKCMSaeYeVJQrEhN4jKk8DTK9axyFrtSRg+JldHq/pTHpbNXmDsRXk
- H0I/1kknnAZVfAV0wS1yR2IZdd2tUphBuJPZh9N+roefaWouK34ZtoLIurf01brhmNjaJU
- difm9TVtkzXA60pxraZiIkBcN6RGftWdqiSdugHKsjhR5S4SRgKewbDzDx1YsA==
-To: u-boot@lists.denx.de
-Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
- trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 37/37] board: xilinx: Remove duplicate newlines
-Date: Fri, 19 Jul 2024 12:49:14 +0200
-Message-ID: <20240719104948.323791-37-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
-References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-52e991fb456so1077611e87.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 03:52:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721386357; x=1721991157; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=58/jv5tptFNOiwfxFhbasDAzVtRJkaZAGxlA4W5Tws8=;
+ b=ZYYop1sIjcCh1ey0z66dBUjrEz+P2ldc4k0b1wC64rd5XuvPAjB5AMIhJDwNU9Gmeu
+ BsGVxAYbwQL0EojdamrtQW5r0bhpim7A6BYl/Wy+HSjmmVhONNqs1RR+SedbW2BqInHx
+ zsmTdNQv3ZEISC0n63KxWyRs/j9Lg3Xa96bEztJQngwVWjWycW6PbanRuCVfGgXUr57K
+ SXLX+UOp6Hbo5nqOGV6/HnW8zUAKtJsk9K2vKaKnSsyt9esDnRqtHFRRCcGah7ra69Pb
+ ek880GCQfp3RGgY/1GG6C2sequ2XfiFh7Vmir1ghdJK6h1TRK9+ET7baYFH1jZxomzh+
+ 99pQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721386357; x=1721991157;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=58/jv5tptFNOiwfxFhbasDAzVtRJkaZAGxlA4W5Tws8=;
+ b=Ud+cce/xwLNX9cvdzFs5KacyzQv2J1DTooIS8mMU5aHitFbN5kdf2kUxrOm9YNLHxt
+ mV+soXemPd+fCJ+AG6XiQ+9fv1v2l3VM7eiZRl4Qiqj4wOcgOFrqe6TZipf78eWTNxFF
+ KKtDLfroEG6hBaq8NePDm2R7Uav8evntmWrUmTrWAcXLWP1UdYEcFdXkU3QR18zoHmqu
+ 4mYtdwUsNZoDGym9yJDQNItvSCd+QM6S9Tnm1vR9KfbER2qPuHZcKo8I1SW5YIFzkKyq
+ cpD/r1QnimWoSvwD5oZ0ur8X2sBifaJPRp4084aZY+WdybFSu5KBMYrefKMshm3BvPFZ
+ R8xw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjJoH1QvVbV4iFogQa44rNmjC0g5mg8rh/pvWV4X3jbRlfhkJ+HaRunpLE9QzaRdSA5n0qrkLf1himPeOBpddMHWRbUg==
+X-Gm-Message-State: AOJu0YwFFRZ+t+31eqfwwf4sagbTzDDUV7ZR7FkqyRUb22dy3qeKjh0F
+ HPBz16onuZ7eDaXEOWWflFhVFTDVnPNdijKyEptLRpDLDV19TYKmROYlU0kgM8xizjxHAsoxZHZ
+ lUSv8MtbGBcByJ5IQkBPEqMN50l8=
+X-Google-Smtp-Source: AGHT+IG8oZQ0npnXQUEY7YaoZDRcydfhBZ8hZanYKC3e90aGGaAfHYcMhkwRaqotdi8FLwfH5xNIzOUcyOCblDAqLIc=
+X-Received: by 2002:a05:6512:6cd:b0:52c:ca8d:d1c with SMTP id
+ 2adb3069b0e04-52ef09e237dmr1272031e87.2.1721386357175; Fri, 19 Jul 2024
+ 03:52:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: nynwerizzwgp7hoedo9tktw1k1erfb9n
-X-MBO-RS-ID: 8bd572fa2bc64c27b51
+References: <1709694011-683-1-git-send-email-ganboing@gmail.com>
+ <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+ <CANV2PTMPrQVZhWvNFxi8-RA0ZC4UAF1sHBbHiipUc01aWx6oqg@mail.gmail.com>
+ <0eda64cb-4ca8-f8bc-7515-6d2a2d3d4638@gmail.com>
+ <CANV2PTP3o1Q2JPCZO8Ewfye+oz9f3TVNTYhYZ3EAKtdYAhvkHg@mail.gmail.com>
+ <f355e582-cb52-e4c5-538b-26bcf69f0a2c@gmail.com>
+ <CANV2PTOzgyzYSbNRJXuvLnMDAT-mDL8o1tU7d72qTKQDMdt_Uw@mail.gmail.com>
+ <CANV2PTP2hpd5m17+_T7zp2V6w03d=0rgAuwukyC0LHVYxLtRuw@mail.gmail.com>
+ <ZpZSmdrst4z_Q4JQ@swlinux02>
+In-Reply-To: <ZpZSmdrst4z_Q4JQ@swlinux02>
+From: E Shattow <lucent@gmail.com>
+Date: Fri, 19 Jul 2024 03:52:25 -0700
+Message-ID: <CANV2PTOgP0Nc=9gM9gA=hL6b3qkDDsmdP99D2bOF0U+7x4RKjw@mail.gmail.com>
+Subject: Re: [PATCH] riscv: dts: jh7110: Enable PLL node in SPL
+To: Leo Liang <ycliang@andestech.com>
+Cc: Bo Gan <ganboing@gmail.com>, Hal Feng <hal.feng@starfivetech.com>, 
+ "rick@andestech.com" <rick@andestech.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ "duwe@suse.de" <duwe@suse.de>, "namcao@linutronix.de" <namcao@linutronix.de>, 
+ Xingyu Wu <xingyu.wu@starfivetech.com>, Mason Huo <mason.huo@starfivetech.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,125 +103,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop all duplicate newlines. No functional change.
+On Tue, Jul 16, 2024 at 3:59=E2=80=AFAM Leo Liang <ycliang@andestech.com> w=
+rote:
+>
+> On Thu, Jul 11, 2024 at 12:55:05PM -0700, E Shattow wrote:
+> > [EXTERNAL MAIL]
+> >
+> > Ping. This regression still exists and is now in stable release.
+> > Should we revert this change or how must it be fixed?
+> >
+> > -E
+> >
+>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
- board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c | 2 --
- board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c    | 2 --
- board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c    | 2 --
- board/xilinx/zynq/zynq-zed/ps7_init_gpl.c      | 2 --
- board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c     | 3 ---
- 5 files changed, 11 deletions(-)
+> Hi all,
+>
+> I think I could revert this commit for now
+> if we cannot find the root cause and solution right away.
+>
+> Best regards,
+> Leo
+>
 
-diff --git a/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c b/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
-index 602a789e775..e7f1d6ef5ec 100644
---- a/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
-+++ b/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
-@@ -4060,7 +4060,6 @@ unsigned long ps7_post_config_3_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_2_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-@@ -8263,7 +8262,6 @@ unsigned long ps7_post_config_2_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_1_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-diff --git a/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
-index 9343683f4d7..48001269cd7 100644
---- a/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
-+++ b/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
-@@ -4167,7 +4167,6 @@ unsigned long ps7_post_config_3_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_2_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-@@ -8483,7 +8482,6 @@ unsigned long ps7_post_config_2_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_1_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-diff --git a/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
-index 6b153aa3796..76ef5d9323e 100644
---- a/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
-+++ b/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
-@@ -4136,7 +4136,6 @@ unsigned long ps7_post_config_3_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_2_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-@@ -8421,7 +8420,6 @@ unsigned long ps7_post_config_2_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_1_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-diff --git a/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
-index 6f2edf16c24..67642798b41 100644
---- a/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
-+++ b/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
-@@ -4026,7 +4026,6 @@ unsigned long ps7_post_config_3_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_2_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-@@ -8195,7 +8194,6 @@ unsigned long ps7_post_config_2_0[] = {
-     //
- };
- 
--
- unsigned long ps7_pll_init_data_1_0[] = {
-     // START: top
-     // .. START: SLCR SETTINGS
-diff --git a/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
-index 04d2e5f1375..6a3236ce2d2 100644
---- a/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
-+++ b/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
-@@ -4082,7 +4082,6 @@ unsigned long ps7_post_config_3_0[] = {
- 	/* */
- };
- 
--
- unsigned long ps7_pll_init_data_2_0[] = {
- 	/* START: top */
- 	/* .. START: SLCR SETTINGS */
-@@ -8313,7 +8312,6 @@ unsigned long ps7_post_config_2_0[] = {
- 	/* */
- };
- 
--
- unsigned long ps7_pll_init_data_1_0[] = {
- 	/* START: top */
- 	/* .. START: SLCR SETTINGS */
-@@ -12477,7 +12475,6 @@ unsigned long ps7_post_config_1_0[] = {
- 	/* */
- };
- 
--
- #include "xil_io.h"
- 
- unsigned long *ps7_mio_init_data = ps7_mio_init_data_3_0;
--- 
-2.43.0
+Yes I agree this needs to be reverted. There are more than just
+failures of older SD card profiles within U-Boot, there is also the
+failure of newer SD card profile device access from Linux Kernel when
+U-Boot internal fdt is passed on to Grub2 and then Linux Kernel (6.10
+upstream). We should test for these problems before bringing this
+change back.
 
+-E
