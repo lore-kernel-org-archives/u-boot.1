@@ -4,78 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C98CDC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 19:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D188C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 19:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24BFC88BFD;
-	Fri, 19 Jul 2024 21:15:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B31D488BF9;
+	Fri, 19 Jul 2024 21:17:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oZ3gnbbb";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EC1688C00; Fri, 19 Jul 2024 21:14:59 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1721416632;
+	bh=mpEHc+T4/6SgsNK57It9Cj0KWjHJHfD5X18+I6FvTqE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=lJVknv9mT/h+NINGbgfcsmyFXe47r25kWP/RjVNyiW4LL/I7XngyXgFF5BqeDpjYC
+	 PQXpLzNIPIYo5dfdg9gQfn8aSh+qhArzFEMgA8sy7+ahefS/XC48N2xAae975r0pOs
+	 znK6uHjiYLvwRXcwZjt+RhVdWXXUWd9rkWiukn6frOnwZ9uCUJfBWEGzfeZVFOwkjn
+	 qG4mIvW+nEyGemjE2M6WbNJp2lzXyvygA2M3gUfe6vTczb/FkqIK2QcO6I694DBdjB
+	 3B/lU874CuMe7HS3n2DUaB25oW9waBu6Hc84KEeSquC3q0vRRiEYC/gnLp/7tmhUnY
+	 /nfXJSW9DttTQ==
+Received: from crub.agik.hopto.org (p508b6272.dip0.t-ipconnect.de
+ [80.139.98.114])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 308B988BC7
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 21:14:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3d93147ac6bso1260928b6e.0
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:14:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721416496; x=1722021296; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WlHU22krZ/nSmhnZ6Ryb36e1MoSMuaFgXkn44sGhb/w=;
- b=oZ3gnbbb95mVO6gxL2dYttdysQ24JlWp6fKADgaDTErnICi682Efcu/A/9TmieVyHK
- XWD/xOM0KFnQqj5kEBqqDwLCMpOmsbk0nwo846oN/VZleSRG7s0HTPPWHave2KZLK355
- FStsbTc7pHkhbQYZ5VXbxsf+8tfXNFofIkhTs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721416496; x=1722021296;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WlHU22krZ/nSmhnZ6Ryb36e1MoSMuaFgXkn44sGhb/w=;
- b=OYkytFkQRwC+UeJXBY9imOwgvmdhJAyR97HveCMRtJ4f41vzrNMg1x6cxjStZ9nYBg
- r3T6+OKL6RtE9slaTX1Fg7Gcs4Kl72q4sw9Mp9vPZG4/lBtaHKiXjvx9A7ZbdGw6BJEw
- rSogyqE5Guwh+doWZ4E4S86V0dK18ZX/LO2WsA7iQEKWqZCrJv+UtYVTVDzrS5+C0uGf
- Q0P3EmIg6ro/MxPD558IsDW+EtVtgWIbwDuRcBVsBAa0p1iPt+mOtuyASxO6v4KyWc1p
- cIgBIioy4JPk53jLz0QHytNuzR2B/Z5gzV9UI7EY+azkXQRqmsRjmzEJFug0FvZuhWYd
- OAVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYlhbJ4PhsAJ9AhjZG2zA1FLpL5pSzzGX834/7bJiIrIi1TfCUMtjyG0iEZLby69TknU4WKWeitFtCD9fd/pc7/Bxo2g==
-X-Gm-Message-State: AOJu0Yz40bOytii2aJ/X5KtzLNIeumEC1qY8IrVSK20PYxQU7RUVewVM
- s7odKQe48tNWqX/wJHlHsQ6Jy7X+TaeSjFoN/G4ZaxU7D1uviGI7OnrQjxefSTA=
-X-Google-Smtp-Source: AGHT+IEvhN5CJ/GxkHE/WDhBwNEpifHMtnrrQbrLeruEd8r9L5axtncdpmjqMLRbXxVgCR+29ep+6A==
-X-Received: by 2002:a05:6808:1892:b0:3d9:3337:d38a with SMTP id
- 5614622812f47-3dad1f1235dmr10083457b6e.3.1721416495807; 
- Fri, 19 Jul 2024 12:14:55 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dae097887esm397971b6e.14.2024.07.19.12.14.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 12:14:55 -0700 (PDT)
-Date: Fri, 19 Jul 2024 13:14:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] env: mmc: Fix env loading with CONFIG_SYS_MMC_ENV_PART
-Message-ID: <20240719191452.GD561963@bill-the-cat>
-References: <20240719-fix-mmc-env-boot1-v1-1-e32b2037d4d8@baylibre.com>
+ (Authenticated sender: agust@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3443B88BD6;
+ Fri, 19 Jul 2024 21:17:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1721416631;
+ bh=mpEHc+T4/6SgsNK57It9Cj0KWjHJHfD5X18+I6FvTqE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dla8GupXlLUaFKkUI19bxkT7gNj7ZFK0JN6GQ9zrdGopkI5iwUZtPuoFfZxI4NAEr
+ /BvfrwNXm0ygnW4ZYOlexWe+85jmCXEoKcHx/LDOHzy0IfDw8xWB9TW+3kS+VE5Eyw
+ 7YRi6YYEnHHkuwGVOUWvsVSf4vtaMVhidVmUGCjmYdSBj8og4xxje2fx4e5Y0QDFCU
+ 1Bnlk3JDk3DjtA0LxlTj1z1TFn92gYIndNPknsKsyuffzCFJJtY2mfZwvxFrsKqQXy
+ 3RWVoy2j2ZuEQSF7wOAH2cyU+EFpR9T/lHsqAylx0VuhftfgbRFy/UYcEbxqHRjZ1B
+ Fgz5lkP77Tz4w==
+From: Anatolij Gustschin <agust@denx.de>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
+Subject: [PATCH] board: keymile: convert to CONFIG_DM_I2C
+Date: Fri, 19 Jul 2024 21:16:56 +0200
+Message-Id: <20240719191656.3323947-1-agust@denx.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oQ3Xx466RwJPsOcz"
-Content-Disposition: inline
-In-Reply-To: <20240719-fix-mmc-env-boot1-v1-1-e32b2037d4d8@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,107 +67,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The conversion to DM_I2C is mandatory, rework to remove
+use of legacy I2C API.
 
---oQ3Xx466RwJPsOcz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Anatolij Gustschin <agust@denx.de>
+Cc: Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>
+Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
+---
+ board/keymile/Kconfig                          |  3 ---
+ board/keymile/common/common.c                  | 12 ------------
+ board/keymile/common/common.h                  |  3 +--
+ board/keymile/common/ivm.c                     | 18 ++++++------------
+ .../keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c  |  8 +++++++-
+ configs/pg_wcom_expu1_defconfig                |  5 ++++-
+ configs/pg_wcom_seli8_defconfig                |  5 ++++-
+ include/configs/km/pg-wcom-ls102xa.h           | 13 -------------
+ 8 files changed, 22 insertions(+), 45 deletions(-)
 
-On Fri, Jul 19, 2024 at 05:38:54PM +0200, Mattijs Korpershoek wrote:
+diff --git a/board/keymile/Kconfig b/board/keymile/Kconfig
+index f7e9b74f57..4145881385 100644
+--- a/board/keymile/Kconfig
++++ b/board/keymile/Kconfig
+@@ -11,9 +11,6 @@ if VENDOR_KM
+ 
+ menu "KM Board Setup"
+ 
+-config SYS_I2C_INIT_BOARD
+-	def_bool y if ARM
+-
+ config HUSH_INIT_VAR
+ 	def_bool y
+ 
+diff --git a/board/keymile/common/common.c b/board/keymile/common/common.c
+index 9358c25dcb..25897af2d8 100644
+--- a/board/keymile/common/common.c
++++ b/board/keymile/common/common.c
+@@ -129,7 +129,6 @@ void check_for_uboot_update(void)
+ }
+ #endif
+ 
+-#if defined(CONFIG_SYS_I2C_INIT_BOARD)
+ static void i2c_write_start_seq(void)
+ {
+ 	set_sda(1);
+@@ -187,17 +186,6 @@ int i2c_make_abort(void)
+ 	return ret;
+ }
+ 
+-/**
+- * i2c_init_board - reset i2c bus. When the board is powercycled during a
+- * bus transfer it might hang; for details see doc/I2C_Edge_Conditions.
+- */
+-void i2c_init_board(void)
+-{
+-	/* Now run the AbortSequence() */
+-	i2c_make_abort();
+-}
+-#endif
+-
+ #if defined(CONFIG_KM_COMMON_ETH_INIT)
+ int board_eth_init(struct bd_info *bis)
+ {
+diff --git a/board/keymile/common/common.h b/board/keymile/common/common.h
+index d16c82487b..7d2fdffe98 100644
+--- a/board/keymile/common/common.h
++++ b/board/keymile/common/common.h
+@@ -138,13 +138,12 @@ void early_bootcount_store(ulong ebootcount);
+ void check_for_uboot_update(void);
+ 
+ #define DELAY_ABORT_SEQ		62  /* @200kHz 9 clocks = 44us, 62us is ok */
+-#define DELAY_HALF_PERIOD	(500 / (CONFIG_SYS_I2C_SPEED / 1000))
++#define DELAY_HALF_PERIOD	(500 / (I2C_SPEED_STANDARD_RATE / 1000))
+ 
+ void set_sda(int state);
+ void set_scl(int state);
+ int get_sda(void);
+ int get_scl(void);
+ 
+-int i2c_soft_read_pin(void);
+ int i2c_make_abort(void);
+ #endif /* __KEYMILE_COMMON_H */
+diff --git a/board/keymile/common/ivm.c b/board/keymile/common/ivm.c
+index f01fe44303..9360c86566 100644
+--- a/board/keymile/common/ivm.c
++++ b/board/keymile/common/ivm.c
+@@ -342,9 +342,8 @@ static int ivm_populate_env(unsigned char *buf, int len, int mac_address_offset)
+ 
+ int ivm_read_eeprom(unsigned char *buf, int len, int mac_address_offset)
+ {
+-	int ret;
+-#if CONFIG_IS_ENABLED(DM_I2C)
+ 	struct udevice *eedev = NULL;
++	int ret;
+ 
+ 	ret = i2c_get_chip_for_busnum(CONFIG_KM_IVM_BUS,
+ 				      CONFIG_SYS_IVM_EEPROM_ADR, 1, &eedev);
+@@ -354,22 +353,17 @@ int ivm_read_eeprom(unsigned char *buf, int len, int mac_address_offset)
+ 		return 1;
+ 	}
+ 
++#if CONFIG_IS_ENABLED(ARCH_LS1021A)
++	/* add deblocking here */
++	i2c_make_abort();
++#endif
++
+ 	ret = dm_i2c_read(eedev, 0, buf, len);
+ 	if (ret != 0) {
+ 		printf("Error: Unable to read from I2C EEPROM at address %02X:%02X\n",
+ 		       CONFIG_SYS_IVM_EEPROM_ADR, 0);
+ 		return 1;
+ 	}
+-#else
+-	i2c_set_bus_num(CONFIG_KM_IVM_BUS);
+-	/* add deblocking here */
+-	i2c_make_abort();
+ 
+-	ret = i2c_read(CONFIG_SYS_IVM_EEPROM_ADR, 0, 1, buf, len);
+-	if (ret != 0) {
+-		printf("Error reading EEprom\n");
+-		return -2;
+-	}
+-#endif
+ 	return ivm_populate_env(buf, len, mac_address_offset);
+ }
+diff --git a/board/keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c b/board/keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c
+index cc3611e2de..409a55ebda 100644
+--- a/board/keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c
++++ b/board/keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c
+@@ -5,7 +5,6 @@
+ 
+ #include <config.h>
+ #include <event.h>
+-#include <i2c.h>
+ #include <asm/io.h>
+ #include <asm/arch/immap_ls102xa.h>
+ #include <asm/arch/clock.h>
+@@ -107,6 +106,13 @@ int board_early_init_f(void)
+ 
+ 	arch_soc_init();
+ 
++	/*
++	 * Reset I2C bus. When the board is powercycled during a bus
++	 * transfer it might hang; for details see doc/I2C_Edge_Conditions.
++	 * Now run the AbortSequence()
++	 */
++	i2c_make_abort();
++
+ 	return 0;
+ }
+ 
+diff --git a/configs/pg_wcom_expu1_defconfig b/configs/pg_wcom_expu1_defconfig
+index 61513c9e2e..e10e635cf4 100644
+--- a/configs/pg_wcom_expu1_defconfig
++++ b/configs/pg_wcom_expu1_defconfig
+@@ -11,6 +11,7 @@ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_SYS_I2C_MXC_I2C1=y
+ CONFIG_SYS_I2C_MXC_I2C2=y
+ CONFIG_SYS_I2C_MXC_I2C3=y
++CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-pg-wcom-expu1"
+ CONFIG_SYS_MONITOR_LEN=1048576
+ CONFIG_BOOTCOUNT_BOOTLIMIT=3
+@@ -78,7 +79,9 @@ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_SYS_BOOTCOUNT_BE=y
+ CONFIG_DDR_CLK_FREQ=50000000
+ CONFIG_SYS_FSL_DDR3=y
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+diff --git a/configs/pg_wcom_seli8_defconfig b/configs/pg_wcom_seli8_defconfig
+index 82923d32ca..6244dd1cfa 100644
+--- a/configs/pg_wcom_seli8_defconfig
++++ b/configs/pg_wcom_seli8_defconfig
+@@ -11,6 +11,7 @@ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_SYS_I2C_MXC_I2C1=y
+ CONFIG_SYS_I2C_MXC_I2C2=y
+ CONFIG_SYS_I2C_MXC_I2C3=y
++CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-pg-wcom-seli8"
+ CONFIG_SYS_MONITOR_LEN=1048576
+ CONFIG_BOOTCOUNT_BOOTLIMIT=3
+@@ -78,7 +79,9 @@ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_SYS_BOOTCOUNT_BE=y
+ CONFIG_DDR_CLK_FREQ=50000000
+ CONFIG_SYS_FSL_DDR3=y
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+diff --git a/include/configs/km/pg-wcom-ls102xa.h b/include/configs/km/pg-wcom-ls102xa.h
+index 15ef68a050..3a243d789c 100644
+--- a/include/configs/km/pg-wcom-ls102xa.h
++++ b/include/configs/km/pg-wcom-ls102xa.h
+@@ -145,19 +145,6 @@
+  */
+ #define CFG_SYS_NS16550_CLK		get_serial_clock()
+ 
+-/*
+- * I2C
+- */
+-
+-#define CFG_SYS_I2C_MAX_HOPS		1
+-#define CFG_SYS_NUM_I2C_BUSES	3
+-#define I2C_MUX_PCA_ADDR		0x70
+-#define I2C_MUX_CH_DEFAULT		0x0
+-#define CFG_SYS_I2C_BUSES	{	{0, {I2C_NULL_HOP} }, \
+-					{0, {{I2C_MUX_PCA9547, 0x70, 1 } } }, \
+-					{1, {I2C_NULL_HOP}                 }, \
+-				}
+-
+ #define CFG_SMP_PEN_ADDR		0x01ee0200
+ 
+ #define HWCONFIG_BUFFER_SIZE		256
+-- 
+2.25.1
 
-> When CONFIG_SYS_MMC_ENV_PART=3D2, the environment is loaded from
-> the USER partition (hwpart=3D0) instead of from the
-> BOOT1 partition (hwpart=3D2).
->=20
-> IS_ENABLED() cannot be used for non-boolean KConfig options.
-> Its documentation states:
->=20
-> > * IS_ENABLED(CONFIG_FOO) evaluates to 1 if CONFIG_FOO is set to 'y',
-> > * 0 otherwise.
->=20
-> So in our case, IS_ENABLED(CONFIG_SYS_MMC_ENV_PART) evaluates to 0.
->=20
-> Because of this, the hwpart variable is never assigned and mmc_offset()
-> ends up switching back to the USER hwpart (0) instead of BOOT1 (2).
->=20
-> Fix it by using #define instead.
->=20
-> Tested with:
->=20
->   # have CONFIG_SYS_MMC_ENV_PART=3D2 in defconfig
->   # 1. Erase mmc0boot1
->   =3D> mmc dev 0 2
->   =3D> mmc erase 0 400
->   =3D> mmc read ${loadaddr} 0 400
->   =3D> md ${loadaddr} 4
->   82000000: 00000000 00000000 00000000 00000000  ................
->=20
->   # 2. Restore default environment and save to MMC
->   =3D> env default -a -f
->   =3D> saveenv
->=20
->   # 3. Read back mmc0boot1 and confirm the env is present
->   =3D> mmc read ${loadaddr} 0 400
->   =3D> md ${loadaddr} 4
->   82000000: 13e0632e 72646461 7469665f 3978303d  .c..addr_fit=3D0x9
->=20
-> Fixes: 5b4acb0ff79d ("env: mmc: Apply GPT only on eMMC user HW partition")
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->  env/mmc.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/env/mmc.c b/env/mmc.c
-> index 776df0786be5..0338aa6c56ad 100644
-> --- a/env/mmc.c
-> +++ b/env/mmc.c
-> @@ -110,8 +110,9 @@ static inline s64 mmc_offset(struct mmc *mmc, int cop=
-y)
->  	int hwpart =3D 0;
->  	int err;
-> =20
-> -	if (IS_ENABLED(CONFIG_SYS_MMC_ENV_PART))
-
-> -		hwpart =3D mmc_get_env_part(mmc);
-> +#if defined(CONFIG_SYS_MMC_ENV_PART)
-> +	hwpart =3D mmc_get_env_part(mmc);
-> +#endif
-> =20
->  #if defined(CONFIG_ENV_MMC_PARTITION)
->  	str =3D CONFIG_ENV_MMC_PARTITION;
->=20
-
-Nice catch. I did a little poking around with:
-rg -g Kconfig -U '^config ([A-Z0-9_]+)\n[[:blank:]]+(int|hex)' -o -r \
-  '$1' -NI | sort -u > syms
-
-And then
-for SYM in `cat syms`;do rg "IS_ENABLED\(CONFIG_${SYM}\)";done
-
-The only other place we use IS_ENABLED like this is a debug print where
-a value of zero on the symbol would be invalid usage.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---oQ3Xx466RwJPsOcz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaauykACgkQFHw5/5Y0
-tyxmnwv+KAto3a367PeJJvm4dlvyvJE+kxZyppaGoMEvrfohpBTo1z/86OBe3Fu8
-rOxUQjMuewOpI9kSpHPyMmwa8y11uOSwo/vK/DiN8/11w/dIGeM3C5L1YG0Gm6Ja
-sPwkCLV1wpKedJIT0S0bhPTbRJE/UDSw4o/DvoJ5uDcmNjpoQdRgw8DOTDiSIQva
-qW7Ug1t9sXWnD32ZZYxYtYetMkz+mLhQ0x3kCK98GQZJ8LxhiY9aXPjQVj1WkXh1
-K4AGCYl5CCYxEqiGBSszteQ7FrrLGPJp/F+eTxIT23kAV38Mt+NmpUSVt2km5Cq9
-J5k4qhI985GjSul8Vq2uoAwdAaTDryi9pJCgwMdj7TadtzpQ1JQLWFa56gCu0h4H
-KxgyIsKEF3w+evqB7ti2D+5Smk7Opq+wlZv/gsjbYamdnpFSYxua3i37/6C2XDzw
-QuZIVZjZ0nw5jaYBOMNoQ4U0qfCKi9tkclR3OrBWXcfrg5dRhKzHNTitsiHX73oo
-pSeeqJNU
-=TUNx
------END PGP SIGNATURE-----
-
---oQ3Xx466RwJPsOcz--
