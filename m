@@ -4,103 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF96C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:25:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27E9C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:39:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB33688204;
-	Fri, 19 Jul 2024 17:25:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 389E388BD6;
+	Fri, 19 Jul 2024 17:39:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DwKF1zgb";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LovoEqy6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1710488B8B; Fri, 19 Jul 2024 17:25:48 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 5A0E388BCF; Fri, 19 Jul 2024 17:39:00 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF33D87EDC
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:25:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5823788BD6
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:38:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-70445bb3811so1087440a34.1
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:25:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4266f3e0df8so13348885e9.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:38:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721402744; x=1722007544; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vq6L43Sy1bU/MCqJMLvS6DcFtayxCV6ydhWNnJLK7nk=;
- b=DwKF1zgb3Bk9pG2J9oeX1Pe/cQP1gTCQj8HHaM2wKwNStQlXrudBm6PFb9MSncFBZ5
- MTnbDR8ikJnFkzce+fjIGcFwDxfNXCLeg55n6BMtSGDXNHBLG0Hf/73yXl81P68wPh+V
- dC77t+e4KyIJjFEiYaSnqDlsBvHtMBCA2Fp9A=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721403537; x=1722008337;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=szKoElj3LiGC3E/TsrjpbOVIG50cBu/zHMjtEbL8kiE=;
+ b=LovoEqy6UfQ8LSvOrR5eQJqPok29/AB0psUUM8umvUnHMufk5p7xk2BOSFlZybP9Nm
+ C/rOIV2Uwuy0HNtwmxEQ4t15/zNJwaWn/sK8E4wWY88lujOHsj3VIJ6YdXKVG7yl2qNJ
+ EGWdNDLQkgKLs1PkW5YLXHbv9q/AW0RvaD+D8ZQhVI/X8gueBpDqzXBWqLP3eNnr9rl2
+ /STvMGVwg4bqMz4DuCJ1E7+vR0RWvwV26daIrcanROHC2PZaJchRu67Qiei5QOiIEcwn
+ C5tHXQvJmX9Scijf3H6F2tEbw4qN0oGxITEvdMT0a/OuhF2dC6SGBHBtliu3C7mA+K6l
+ l0ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721402744; x=1722007544;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vq6L43Sy1bU/MCqJMLvS6DcFtayxCV6ydhWNnJLK7nk=;
- b=X3m7dZ5bDB9wr34X+Mr1pnGrDYhjzYZCiojT++QI3izle9who8oTqMwA6aA5S5LUSh
- RRmN6voKN8SB07KWyJzjBhsalAEAdPxYF0fFfdpZJTIKNSBQunxvAua9QiU3aKQ2+QAB
- Cwi5iV6K32rZuCxrR+rsRww8+fYGbZBpo5nKRHag2bdxlMFzTEWJ3QXoVasB5IB4zyOU
- bOncQh4OWaDwhvbnMZUOjbpQWiiAsxB1KB+VL2lmnGUs7QlhpsDs2hS24Ab8zDUcshzo
- 6J5JAkPnIJVO++Afnyrhc8zo+cgXw2cImSF49z1hoRiiPz9Pnbqp4UFsJjid9lduXY9T
- gECA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVAhXxY8iq12+pwTZHk6CWZj6ht91ikuoihqWD0Nbnf7poo1WI9g7Gs+gHJqayl7r0ojF7MSXWq6rQP/GWt1qD+qNAv9g==
-X-Gm-Message-State: AOJu0YzHkUldGLE5gjAKd3GN+I5djRH3D7zc5dZLFzSdmfAXVPVuiBd8
- ys/s+XIOIa58mHpndRRlbm9KljCl8tJE6HHo8wV53klH7ZZcANSY5RFJAvtWbFA=
-X-Google-Smtp-Source: AGHT+IG6uete06GRLNqYnXUyhzCpVG5ItT37Tqqrq86ZdoP8dvve7DIbvhZMKEnL/Zd3KtIgdUPZJQ==
-X-Received: by 2002:a05:6830:2b07:b0:703:6543:ecf3 with SMTP id
- 46e09a7af769-708e37b57b3mr9580833a34.9.1721402744505; 
- Fri, 19 Jul 2024 08:25:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d55aaed6e3sm258974eaf.41.2024.07.19.08.25.42
+ d=1e100.net; s=20230601; t=1721403537; x=1722008337;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=szKoElj3LiGC3E/TsrjpbOVIG50cBu/zHMjtEbL8kiE=;
+ b=GCbO+bllhPIJ68nv+v/AJwNrOUK8ZGUBjfJ8B872bp9zKl6aQA6NlFYPiyYBAO5mGh
+ T77MoKthgeB+CwSrQISBtLYbXlYgcplb9gTBZzczRM8zYM4FAixCFxBE5m4nJfBdkkkF
+ HF+LDZOv+M/T0tZuF27Rn+e/ozmt83NKFpnfLAl1d7pf8xJdh0PPg9ZEI3lcxzedIwbH
+ wrhvzy2d0e7yMXveJ8EHMtdIQzRA5bCy39ee2HqxFCLCh+iGZNd2CNz/eHQcYgHjgQKN
+ FeliOsiCr+WWUiN/cX/ro/d5QqSEbvboBpFICFWdKzeDJYXxiHRN25VqeXrRXOtognoe
+ 4b7g==
+X-Gm-Message-State: AOJu0YxSIJER7kv3fKNpXU/2WQiKkcCAF5pYEGGWtS93pvxCVyg56XRR
+ uLs3vdtWUx3intRERk5SpkT0DdT7UCpnUjjxiUxMo7F/Sk7Aie+tTwX70gZfD3o=
+X-Google-Smtp-Source: AGHT+IGFbSI7grCgEn4wZlmbf2js/AoZySRl6AAoiomAcVRa7B/+oOi2ZAxOgTSscnb1S6VG2WOAiw==
+X-Received: by 2002:a05:600c:1ca8:b0:426:54c9:dfed with SMTP id
+ 5b1f17b1804b1-427c371a871mr60502075e9.28.1721403536452; 
+ Fri, 19 Jul 2024 08:38:56 -0700 (PDT)
+Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427d68fa9b1sm29655085e9.8.2024.07.19.08.38.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 08:25:44 -0700 (PDT)
-Date: Fri, 19 Jul 2024 09:25:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, manish.pandey2@arm.com,
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Eddie James <eajames@linux.ibm.com>
-Subject: Re: [PATCH v4 08/29] hash: integrate hash on mbedtls
-Message-ID: <20240719152540.GB561963@bill-the-cat>
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-9-raymond.mao@linaro.org>
- <CAC_iWjLxSbtcSwM1iQjj7DG3sJLY5Q=3fnuOphkJKXcQyO4TtQ@mail.gmail.com>
- <CAFLszTiezZ4hx-ToVT+CzE6aAwvjea_5-=VuqBWcGjAqOoH2Mg@mail.gmail.com>
- <CAEfUkUJ+U87Pb0YC9m18BpUgc94n0NcqTAEqoP3f5j3SkoB4PQ@mail.gmail.com>
- <CAFLszTg+Nx43kB2rMYTyHS36mKjkQc643p2Gd8Dax5ivwOtokw@mail.gmail.com>
+ Fri, 19 Jul 2024 08:38:55 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Fri, 19 Jul 2024 17:38:54 +0200
+Subject: [PATCH] env: mmc: Fix env loading with CONFIG_SYS_MMC_ENV_PART
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EMsNJRW+mv3uhNnJ"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg+Nx43kB2rMYTyHS36mKjkQc643p2Gd8Dax5ivwOtokw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240719-fix-mmc-env-boot1-v1-1-e32b2037d4d8@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAI2ImmYC/x2MQQqAIBAAvyJ7biHFKPtKdNDcag9paEgQ/T3pO
+ DAzD2RKTBlG8UCiwpljqCAbActuw0bIvjKoVum2lwZXvvE4FqRQ0MV4SbSD1053UllloHZnoir
+ 9z2l+3w/sP7zvYwAAAA==
+To: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,107 +94,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When CONFIG_SYS_MMC_ENV_PART=2, the environment is loaded from
+the USER partition (hwpart=0) instead of from the
+BOOT1 partition (hwpart=2).
 
---EMsNJRW+mv3uhNnJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+IS_ENABLED() cannot be used for non-boolean KConfig options.
+Its documentation states:
 
-On Fri, Jul 19, 2024 at 04:05:09PM +0100, Simon Glass wrote:
-> Hi Raymond,
->=20
-> On Thu, 18 Jul 2024 at 17:46, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Fri, 5 Jul 2024 at 04:36, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Hi,
-> >>
-> >> On Wed, Jul 3, 2024, 09:56 Ilias Apalodimas <ilias.apalodimas@linaro.o=
-rg> wrote:
-> >> >
-> >> > Hi Raymond
-> >> >
-> >> > On Tue, 2 Jul 2024 at 21:27, Raymond Mao <raymond.mao@linaro.org> wr=
-ote:
-> >> > >
-> >> > > Integrate common/hash.c on the hash shim layer so that hash APIs
-> >> > > from mbedtls can be leveraged by boot/image and efi_loader.
-> >> > >
-> >> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >> > > ---
-> >> > > Changes in v2
-> >> > > - Use the original head files instead of creating new ones.
-> >> > > Changes in v3
-> >> > > - Add handle checkers for malloc.
-> >> > > Changes in v4
-> >> > > - None.
-> >> > >
-> >> > >  common/hash.c | 143 +++++++++++++++++++++++++++++++++++++++++++++=
-+++++
-> >> > >  1 file changed, 143 insertions(+)
-> >> > >
-> >> > > diff --git a/common/hash.c b/common/hash.c
-> >> > > index ac63803fed9..96caf074374 100644
-> >> > > --- a/common/hash.c
-> >> > > +++ b/common/hash.c
-> >> > > @@ -35,6 +35,141 @@
-> >> > >  #include <u-boot/sha512.h>
-> >> > >  #include <u-boot/md5.h>
-> >> > >
-> >> > > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
-> >> > > +
-> >> > > +static int hash_init_sha1(struct hash_algo *algo, void **ctxp)
-> >> > > +{
-> >> > > +       int ret;
-> >> > > +       mbedtls_sha1_context *ctx =3D malloc(sizeof(mbedtls_sha1_c=
-ontext));
-> >>
-> >>
-> >> Why do we need allocation here? We should avoid it where possible.
-> >>
-> > The API "hash_init_sha1(struct hash_algo *algo, void **ctxp)" is passin=
-g a pointer
-> > address and expecting to get the context from the pointer, it is reason=
-able to do the
-> > allocation.
-> > On top of that, this patch doesn't make changes on this API itself, but=
- just adapted
-> > it to MbedTLS stacks, thus you can see the allocation is needed by the =
-original API
-> > as well.
->=20
-> Oh dear., I see Now I am looking at the code. It is full of #ifdefs
-> for different cases.
->=20
-> The whole thing needs a bit of a rationalisation before adding another ca=
-se.
+> * IS_ENABLED(CONFIG_FOO) evaluates to 1 if CONFIG_FOO is set to 'y',
+> * 0 otherwise.
 
-If you're referring too the hash_algo struct, I'm not sure we can do
-something different that doesn't in turn increase size globally. And
-long term some of this may be able to go away if we can remove
-non-mbedTLS options.
+So in our case, IS_ENABLED(CONFIG_SYS_MMC_ENV_PART) evaluates to 0.
 
---=20
-Tom
+Because of this, the hwpart variable is never assigned and mmc_offset()
+ends up switching back to the USER hwpart (0) instead of BOOT1 (2).
 
---EMsNJRW+mv3uhNnJ
-Content-Type: application/pgp-signature; name="signature.asc"
+Fix it by using #define instead.
 
------BEGIN PGP SIGNATURE-----
+Tested with:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaahXEACgkQFHw5/5Y0
-tyyCAAv7Bjoz39V0V9nLeb4xmo8J4MrDkgt+Oao54xvCW1+5GjYgwnknRAxO0EKE
-oJBljdmWl9PEEBs1HAR2kj4rSOW5wqQMuJRPENglrTmrZltdYNqFnwvVc9QB6OQj
-RVxfGAN9OiDLR0kc/pFZ4vAF13T6ng+DGOx+jeOHTEywMcdoL0sCgjp6fyPh2xVi
-pKnSVlP/DPjiXD6BYEeH+g/ftAOU4xhboirk3Aif9MQeHgTv+tsrZHATe3iZk43L
-pMFpaIYPsLqZjM3ZuJCRrkRva7Dea5MXpqdPahic+UEuQK7YcbkvSIayrrFIZbxr
-K59TqeXCF5R3CnPy2mV9xtPTQ3hMW3MPOMU5lXfdWPYSX/Yjt6sJbRP6NL6A5UU5
-ZirP5ZfzomdOjDRqrgU8o/5ANFfjfyRHQsq5RWhk+c2Afge9jmnK7vEJcAjlifNh
-wk+svvYQPpOCZoTwSXb2y/zgPIXUWRRqB9/7cu9V7vXZkyI4W+bESdsJJWImwsGM
-QcSIS7AG
-=XNCu
------END PGP SIGNATURE-----
+  # have CONFIG_SYS_MMC_ENV_PART=2 in defconfig
+  # 1. Erase mmc0boot1
+  => mmc dev 0 2
+  => mmc erase 0 400
+  => mmc read ${loadaddr} 0 400
+  => md ${loadaddr} 4
+  82000000: 00000000 00000000 00000000 00000000  ................
 
---EMsNJRW+mv3uhNnJ--
+  # 2. Restore default environment and save to MMC
+  => env default -a -f
+  => saveenv
+
+  # 3. Read back mmc0boot1 and confirm the env is present
+  => mmc read ${loadaddr} 0 400
+  => md ${loadaddr} 4
+  82000000: 13e0632e 72646461 7469665f 3978303d  .c..addr_fit=0x9
+
+Fixes: 5b4acb0ff79d ("env: mmc: Apply GPT only on eMMC user HW partition")
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+ env/mmc.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/env/mmc.c b/env/mmc.c
+index 776df0786be5..0338aa6c56ad 100644
+--- a/env/mmc.c
++++ b/env/mmc.c
+@@ -110,8 +110,9 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
+ 	int hwpart = 0;
+ 	int err;
+ 
+-	if (IS_ENABLED(CONFIG_SYS_MMC_ENV_PART))
+-		hwpart = mmc_get_env_part(mmc);
++#if defined(CONFIG_SYS_MMC_ENV_PART)
++	hwpart = mmc_get_env_part(mmc);
++#endif
+ 
+ #if defined(CONFIG_ENV_MMC_PARTITION)
+ 	str = CONFIG_ENV_MMC_PARTITION;
+
+---
+base-commit: 459560000736ac7c9c8b04522789c20fb45ff95a
+change-id: 20240719-fix-mmc-env-boot1-a8d4b4512a29
+
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
