@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45AAC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:06:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0FC7C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:06:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51E3588C00;
-	Fri, 19 Jul 2024 17:05:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B377E88C10;
+	Fri, 19 Jul 2024 17:05:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g1SjWrLU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hHmEpQY2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EAEA88BD6; Fri, 19 Jul 2024 17:05:28 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 7A80188BFC; Fri, 19 Jul 2024 17:05:29 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BB2E88BF3
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:05:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72F7B882EF
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:05:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6b78c980981so11067046d6.2
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:05:26 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6b06e63d288so10875156d6.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:05:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721401525; x=1722006325; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721401526; x=1722006326; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9tCADUWLZiF/KGXre6LFjCUaWJiyUv+TYnE1Q+FTOMU=;
- b=g1SjWrLUqM/eLyzRvUoAYPoy3zK//5HnCswTDd4YaRCaCI+O4x3VJAwMBag5O6pxm4
- QntLNdjppPDZPuPrWDwGPHfb8r5fNh1kc7hL1vE3Rh6cUROegoF8Pgvl7EpHqZ+o6OS5
- 7NefYbyy8ZGf6wE4CWXzOjSMkGscPJRRYnrGI=
+ bh=EkHuuKvtrP9/IeTD6EbWjLC16V5YMYbe0WzH8r/aZYc=;
+ b=hHmEpQY2U4GdfSGDjo30zLjnXd2AJ8+Rn7oQgDPRoC5+oOfPClAaEAgxCDhLWeIvWL
+ jAIYgtNjuDfJ1niP2gkX8+rWRoIOjTzOhTuCZeGT+hiLChhg19Z8kV7Aogm0lONYG7ws
+ rELyEzZ6qs33HHjesaUYpjTB9TrD1Ooedsqe8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721401525; x=1722006325;
+ d=1e100.net; s=20230601; t=1721401526; x=1722006326;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9tCADUWLZiF/KGXre6LFjCUaWJiyUv+TYnE1Q+FTOMU=;
- b=oGzK2Sjtmd2dy5wX0xtCyZcOnuxTEcG2vtQzNzGEH81AfjNJAjqvbEFm9KQnfhdMoV
- ntsr/LP0hZZdLu56eN75oASApATsA/OkLsYUUXbemS0mp0iBV7NMvgX/c6iaItHCfXn/
- Qi1WJ3/0F0YNo1iIUhZFnrFgFYGg6Gr7TI7V2vusNKwmF7WgOvqbpmunlcuCjm5UXN8W
- 0NUzPygwqn0025B8neLJnoayJdDGtaLT8eIdMNUTEa7x+WvlQl74GJeSPQWLGnAit7Qb
- yL+PJOah5bfJqVwo2NJVIa0tDoo7OKwV6UWjIlrSrjqeDwR1CgxjvAP74GnZDn771Uav
- sbDw==
-X-Gm-Message-State: AOJu0Yx+3nnWchm8R+ZOKNCHHUVXBH1O4MO+e91V/ruhFnU0FE/NUq4B
- DIf/Ne8V70qqwtyCMpZ5J01hHaI4iGkZF9MZTF4/J0W5TNPRqvJgwliwMEHEsZRGL36kSbM2NLg
- 4qhGtVCzpACykBGh2jkIBUJsUtE5C0WGX3Z6nsKCDVkKtNUQ=
-X-Google-Smtp-Source: AGHT+IEwtICn5HY67U9eL9nrqpb3mjLOGluIq0l+f5R4p5SjPh0/MymJ63XRI/dg0cGN6K9cFJuIKz4rsHc1PhorM1Q=
-X-Received: by 2002:a05:6214:d45:b0:6b7:a322:344f with SMTP id
- 6a1803df08f44-6b7a3224827mr54982326d6.22.1721401525281; Fri, 19 Jul 2024
- 08:05:25 -0700 (PDT)
+ bh=EkHuuKvtrP9/IeTD6EbWjLC16V5YMYbe0WzH8r/aZYc=;
+ b=rPhYgPNNqRiL3yOrlT8jhGNSs01phxW7W8FIzSQaD9ZQm9SUD4j8dNbdygsTsrM4r5
+ pMg1ScT5XKQwr+ZZfguI6j+5omk2jDf7CF0q776AvwmTUR63e0CxEBEZ84RPSqL33S5f
+ jWwDDBOC1uwqy0KzMdWuaGougEDwH37Q/1WTFeP9IZvoNmx5Pu3+VpAUlYULAx9z/5hD
+ jEEzkmsyx3r3opmWQ3bfc5p0Oa1/w3jDP3zZc9QKExFuqOjsotOFvmtu+B2yWduFG58i
+ jAz2uOyPtEGdrKAm/LboujKNZPU9sAyx+I9pSwjSz3Y9gDUtMltCv95o35gMuqLgAkmD
+ kIlA==
+X-Gm-Message-State: AOJu0YwWIJv3N59GL2lIZ7b87ZaDnhKKwenqbHYPBcx2c7HGyZdmYdDf
+ U8PFC4Xv3NzFzjI5eNFl/ToLwst1gRDpfQ7z8ZXdAmI/loNnVdjWrqbzPD7Og7RZwPT3T0xvGoL
+ 4LT9j+B5/DbV5NxMo7cU7/v3S6WgFjrNZwcNfjVvkD3nhiIk=
+X-Google-Smtp-Source: AGHT+IHojR9jMYuVef3mMnR1HRImWsf0CG4PEOw2BC/0jtrtte8O1bdvzLc7SQmQEGBSOpAoRHUSoY0T1cICe2lYIOg=
+X-Received: by 2002:a05:6214:1cc6:b0:6b5:53a7:74b3 with SMTP id
+ 6a1803df08f44-6b78e2324f1mr91860736d6.15.1721401526244; Fri, 19 Jul 2024
+ 08:05:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240717-docker-image-v1-0-7c7fc6251e7a@flygoat.com>
- <20240717-docker-image-v1-2-7c7fc6251e7a@flygoat.com>
-In-Reply-To: <20240717-docker-image-v1-2-7c7fc6251e7a@flygoat.com>
+ <20240717-docker-image-v1-3-7c7fc6251e7a@flygoat.com>
+In-Reply-To: <20240717-docker-image-v1-3-7c7fc6251e7a@flygoat.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jul 2024 16:05:14 +0100
-Message-ID: <CAFLszTjjBCb8rY=zRahE4tNoLvR=460bStth0JHceCbnicRxzw@mail.gmail.com>
-Subject: Re: [PATCH 02/18] py: Replace distutils.core with setuptools
+Date: Fri, 19 Jul 2024 16:05:15 +0100
+Message-ID: <CAFLszThR8w8jvm=D4Q=k1ob8R7Ou7E6xQSvFR3a91b=0uEAjZA@mail.gmail.com>
+Subject: Re: [PATCH 03/18] doc/sphinx: Remove usage of six
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -86,16 +86,13 @@ X-Virus-Status: Clean
 
 On Wed, 17 Jul 2024 at 15:29, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
 >
-> distutils is deprecated long ago and being removed in python 3.12.
+> We don't support python2 any more so there is no point to
+> use six here.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->  tools/binman/setup.py           | 2 +-
->  tools/buildman/requirements.txt | 1 +
->  tools/dtoc/setup.py             | 2 +-
->  3 files changed, 3 insertions(+), 2 deletions(-)
+>  doc/sphinx/kfigure.py | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-But please separate out the requirements update into a separate patch.
