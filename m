@@ -4,142 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B82DC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 12:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67258C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 12:43:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA28B88B22;
-	Fri, 19 Jul 2024 14:25:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id C033F88B95;
+	Fri, 19 Jul 2024 14:43:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="cphry7IH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ghm0HjlB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37B8E88B8B; Fri, 19 Jul 2024 14:25:51 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B23F88BA4; Fri, 19 Jul 2024 14:43:50 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F18928850A
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 14:25:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A072E887CE
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 14:43:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=udifpLR862wz1T6e/fiqx3TlMNdoxaL8cXR49xqfW+eSgBRy4OAtvmbOQ1b0IjIk6/5yYGTa6GqJU3os3GSBoIcQgzdrY0I7R/8hLBZfyq3BNlnN0m3LJjbvw+ecJ1TZdQIu6RS9VVQb9mZmXWoQ7aWlbTJEq6gqemQ4RCLLDN/2asvQlbMIo7ThfvHm2Cwm4u7mS8KDD6KM+Zrxc/T42JxYcauUWP2toEB1fTaoK6zzgF2y1eJ6GJnrMCZP6a1WReUvcnLZl4WAGGHt10uXY+4ppq2ZBX7evLlIok+r33ZoJosFQvOHhHJ2MtPlm5iEjvzsNCtMYJMGVMKG2ybkzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=44jPM8aTP8JskxBOQKMrXAw4U/B/hZdbM1sDTT/5vGc=;
- b=F8G/mugQUlmznSgIulKABKNlk8PQQjBidF6Et3D+IrwQphlWA5Q38VKI81dLbRTJSLjB4RZ1nLvVu8B2GZAZhYuExC+FOiRMrZqsOcYbxFQdZ50ltYp+e2NHrih0gwqCewdOForuzePTBICXeZqhhYCyH0dbZJd+AtFPAbK9CJkpWRQLhXXpl3frGLFhnhC8UY5NlrN8D7fL57wLpy4CCd2oQMMaVuMBeNoFk1HpGpCnGhz6PUyt1acrFHvKXDBvEJNLjy7UCb+kJNryJUUzRcSHCl7gxEz0jfWq00xPkN+wGaacyh2a2tOLIYFBz+NUz1KX4RfRH4GNKfVGJjz8tw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=44jPM8aTP8JskxBOQKMrXAw4U/B/hZdbM1sDTT/5vGc=;
- b=cphry7IHVPHlDSZnTSWlV7Bkauv7cHW0CYvzS/+gDig9itVbe7wdQl6TAPeGEhRUyiZppwZPprxmgPTJMxd5NEqMKEdz3s7ZJqgaCkUXnsN8COPvXDSdr4Gt5LS5ooQ5D5AbujzTNVE2IUkvr7bWmry+ztmwSbyxQnVRdEMYG00=
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by GV1PR04MB10559.eurprd04.prod.outlook.com (2603:10a6:150:20b::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.19; Fri, 19 Jul
- 2024 12:25:43 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.7762.020; Fri, 19 Jul 2024
- 12:25:43 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Fabio Estevam <festevam@gmail.com>
-CC: dl-uboot-imx <uboot-imx@nxp.com>, "m.othacehe@gmail.com"
- <m.othacehe@gmail.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
-Thread-Topic: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
-Thread-Index: AQHa2TM//LpgARdN1USXPdOQOkpgIbH9+wBQ
-Date: Fri, 19 Jul 2024 12:25:43 +0000
-Message-ID: <PAXPR04MB8459D5776F7661B689B99B5588AD2@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20240718165454.904763-1-festevam@gmail.com>
-In-Reply-To: <20240718165454.904763-1-festevam@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|GV1PR04MB10559:EE_
-x-ms-office365-filtering-correlation-id: b1dbfddc-56ff-4d75-dbbf-08dca7ede911
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?OQU14qA5HpZG/wHCfMoJXhdfyl3HM9Fxt4EDANXifXlP1cilokJ5U4IyjBE1?=
- =?us-ascii?Q?2oYe6UjcPRWMGcHp3nB4B1fGl8WtuzyY3Hz3Thy/lOCUXCCku96T3O87dRrY?=
- =?us-ascii?Q?sgMk68XNiO0pdqtkj/aUi+cEh2rT+ZqG954k5vBZnv8lbkVbrodnR6seK398?=
- =?us-ascii?Q?qAQFHFugD3wuPccQf6NnKIEoV4oFNjVHS+x75eqShheS6QAWHcISgMQhJCuV?=
- =?us-ascii?Q?TKroTS9TSwp6zgOHAE2MqhSbZUJyTcMPmHvHG459V/95xDSDyNHogheyg7Rj?=
- =?us-ascii?Q?0BiDhLLspI63nzyV5HrPRD7sQ7R+Sa6LmbxZEs0vX6v//E5xfHtYIh/ZA/WX?=
- =?us-ascii?Q?Z57yQogCxlr+W57l4zRKzz98ChcEgcKPh+u8OCOhEAE/PE104ai/zjBxMVsC?=
- =?us-ascii?Q?ynqKLECSuwaFIu4vspbAXhKzd/clp0v8qaCh8V3/ykdyoiEfEDSxVN9lknjH?=
- =?us-ascii?Q?LWfCXjzHyd3o5i/dkxyQH3UVFhE7kq75aTePEtKTaBXle+BGSRCIwd6uUqKO?=
- =?us-ascii?Q?WGkM0TMefrls+p5ifsivhhdcISopEVAIXGfcjXG4aTDUgzBcN3vCJNDztm+T?=
- =?us-ascii?Q?P1MIiFMS5+mtyIJzhoz9MQkq/uH8habeNs0HNJFJGIJv/AQMvuIXLAmiA476?=
- =?us-ascii?Q?VUCx/DcB4f3m/iuNa12YuHZOefWsS9KL6P12k8rAPNAvdSi+roIFDy9hECw6?=
- =?us-ascii?Q?p6g/P3/dr/I9nzPxEUD/ZCwRt1dxT1DGXKMXDK1y09WL/mNLvQrYrmXkW6yn?=
- =?us-ascii?Q?KK9o4LVrsy14jLHogNPqp/fqwoP9fZD8pXzEIYMNviFLN0T6N5QA5R4rF4xw?=
- =?us-ascii?Q?sQw0sALhm5U336L3AHvJJA68SVw/0zjNrAZP8J3BG7t6mLAQfYouiaWZG1ak?=
- =?us-ascii?Q?vrz4RdhTUs+ZU+ZOTMo8O98DIZG8iVq956H1ydvzItgmEOQ0INUGp3DOUYwo?=
- =?us-ascii?Q?7r/QfBrLKCRm9nur8p6lyGxgQS+2MEaO2uB+0rou1nyKpxpUwcrkLkUTERGe?=
- =?us-ascii?Q?mwjzJbcS508yKqY9uZju7LvlBZbhMeCI/uhvoLYWR3QWQ5kMHBtwF7Y5ad5k?=
- =?us-ascii?Q?gimXS955AVBX/7CLtt087OmArSYzCR3Eo+DuGvWraELndMO0/aIo0ASdXo4T?=
- =?us-ascii?Q?tfhkQkwrHkldD6QESK6l8qM+L+DS8Use916GLEjG1M8goia813eOqQcJ9d61?=
- =?us-ascii?Q?Zj7DpjYJKwJQyGtusRfl/oV1IuFXN9SHXLEewqyt+AXzWKHbCWl5TAhCn4SJ?=
- =?us-ascii?Q?u5p8FObMek0CSsdrUzepAXkZ6a4ZG9yhI7jS4L89LJT8cOfoUD9DVU5Y4JKV?=
- =?us-ascii?Q?Lq4rCrj8X/yAIetCgHif9p+Rq4kdqJ7VpdSpNRyLiAvIn7FLjQ360f3sE6vB?=
- =?us-ascii?Q?ukkKtX9CuAShE6SGXSf7QZhrfBD0MBchtTn5xyg+fwoJVkQTmA=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?SGphZDoA1DOOiWUTWPhFOMMaMTPphlPssnUv3zdVJ+KsjMzYKMKVJ2ApS7kP?=
- =?us-ascii?Q?eo2S8y8WYrwcHnA3af6WUD3f+0EUkvSVku3AXo0FOOiFZY1X9OMvDVVsoyLa?=
- =?us-ascii?Q?Bcnf2Sl+D695T1cUIQvADP8Dy4Ppw+q+PYy1LUOHFuz19j4tzoQAdl4GQDHS?=
- =?us-ascii?Q?5xC520hPiznnsFllB/ucE9Ovnlwe9VP5Maa7+iylwwWceJDyXWd272Rjywxr?=
- =?us-ascii?Q?5HSPp9IifIbCpJkf9DcWEmEIaS32K+jJ6E4w+tYFsa0wxN6NBcwMbkYHVrZ+?=
- =?us-ascii?Q?IsXAWWlM0IoYkO6CWjIj4SMFxjTmbbtgpk6hwXJoV+kkMvdvv57OD1qxejHh?=
- =?us-ascii?Q?mSwhyku4WSgafOD4JkEnZd9G89bpbO3GR08TqE0fSCbprExj0YpgDgDkdkyp?=
- =?us-ascii?Q?aFr122MLruefk5GdjAMGa/YKZMfrNJiUJj+i+TI0lexBIdHeZ5sKkafJoImi?=
- =?us-ascii?Q?JA2F80Hk3fIPjx89FtxNXplYtrukbEGRhtGqtfoKZrpSt+fkWAFbRyjsSyTq?=
- =?us-ascii?Q?BIccGaepijAcuAIR5Hhlsc3Lqs/BppL4wPOO5cCw8MwxeNr5HLrGw2L4Re/X?=
- =?us-ascii?Q?vfBsp6HghCA9MQpqaOcrxG6kdCqMrQdFNK0zeQa+mM6CrFOOSHoxlyX+HBwY?=
- =?us-ascii?Q?lbj+KOHCG113AOUajW6EzBzxgWVzU1mELuRhlGw8tdu+Qhorz5+cCJ2o6KEO?=
- =?us-ascii?Q?x+5o2jTwYgh9zf2+ngYqfUGdqpGwSnm/4IOy7HxT422UirKbG5cNyTsHjYMg?=
- =?us-ascii?Q?wZYOCD0KfdVC2qKrKWfnexfA2FiCWIQG4ssn1p0XMst+40dyp0ax2mDzlSJT?=
- =?us-ascii?Q?YhqU4aI5OAe6jimypfoNkpZs90oQ/KAbDQ/8+GhQxQvbrhSkPqp5rts752J2?=
- =?us-ascii?Q?x90w7BLMK+RuvOn/ugq6nlHxmSAJnPOk1d59mSSoatWBkbmfe0eZmhHogUdL?=
- =?us-ascii?Q?wz07s3Uim/JO3VUPMJdUmGq7g64cSvG9UHhHqTV5956VSIm5LpCOrrAQEnl/?=
- =?us-ascii?Q?FmLw+iUc7v/OWbMQW3t1HxWqLMo4uYNBWklt9ogEhEltdm4H+2mjia6RhNqP?=
- =?us-ascii?Q?s3gNFDKX58gwZ+2CLbnWo/Ql89OVv3FrykmUwU+636zPSpz8PgvokxsPiCYd?=
- =?us-ascii?Q?MdRtvuCu0WHRd5ik6SABIIM1H7kRFGd+X2FYyt9isnRjFJZtuaaxdBT8F9tE?=
- =?us-ascii?Q?vlRE8Ss4oRVhn/yeLy5gyGU+Du44ZLN2Y8arwGnyiugs1eyOeAn07677cg93?=
- =?us-ascii?Q?5Y8ZtKUi9ma61SrNwlVKLSAy548ilfPtPAPamZHrERKkizsRd8PWKqOVJzxe?=
- =?us-ascii?Q?2UQ0mGUqbOYe1rNY7E8gxLV+JKkAnFVxBKTAsxfjNv7aJR7+KEc2sR3AcfEO?=
- =?us-ascii?Q?wYMbFHV+/LiVfhr/CuQpjDJo0E5MLtbca62VAAdVmwNO4wL6DUx4bBLZtNZs?=
- =?us-ascii?Q?XhAvTQ20V/JvMV8I9PddXgLrFgOawwP4ZIw0Iwh64C+3WFg35EgiEWAr1gPi?=
- =?us-ascii?Q?+M6gzTZ1jFXmxuCXjkQZ98/6L5aQ/tZJWTQJl+movx00Ut/3yLXw26qN4TAr?=
- =?us-ascii?Q?AgfRpaPpq+5jsrZu4T8=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-52ea79e689eso2509677e87.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 05:43:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721393027; x=1721997827; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ve2hQ5pHxvbNy1OSZ2npGOGhPQk8I2RilPEuAWpFDSU=;
+ b=Ghm0HjlBxeaHpUZB6w0wOlRiv6lGIv8Mzn+tAQh6VDWcVhVjfYN4EKV2YhEgHx8zmo
+ VVn5o39twwEA+CcnA0P94sxCLjgnwjSveT0WZeENpYz/VwNz7nGE/f6ZeBIoIawz+txQ
+ +4EMEl9UXC4zzAGAl9sWydbxjPl66tTYSkOgVYEhCIpxCLAUqt5gnGNBTd3Cd7zzi7+w
+ wODv4nhYw5GIg50dqQyjBoZEm/EYwEOkTOSn91MFeDvNKbUXzLFeDSbKBHPYiNwEMsws
+ LtSMquv5OLh9NCeG51lQ/3ZFvrFZctwEZ19HThBHUjQO+vzL/4SeQDU0aMDplA0Fjhh+
+ GRmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721393027; x=1721997827;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ve2hQ5pHxvbNy1OSZ2npGOGhPQk8I2RilPEuAWpFDSU=;
+ b=PheL575gs37oEtTxAENlbRGTt6gH+sYnrHl3kFzdguA81K6FgtNfYIXJZLTkGu3CHt
+ dg+7lJOTcRg7tqG7arVWjRW9xdgVsJUb+XwrNIZVrYJSZutu9/JgXNrlEOKTlSK5kfs1
+ jDZqoTiKZJURIlnU/ZVS2+hFBDbnOsUhstyMA0kmThl61XWchTXSdAYDRCWBv9kGirCx
+ 2QfaF1b34SI06CJdPTaFVf04zo0237T9ncuhjq+apu0BtNj8/8u2ozQ9b06M2PKBvxaQ
+ a4yZV5HColEEWq6dqr26Oyn3TMgq5BWO5ymfyhoIqVxYpvv+xmzwoQSdnmebFKT7l/ns
+ ETjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOB8TUE7X+x45SlAs/zZVd9BdrGo4mmvZxZR9gkZaJgt2r2FwJ8L02I8mV7rA85fFcHwkTfj9cjayjUQecI2n8f+x5EA==
+X-Gm-Message-State: AOJu0YzYG+Y4OKLXkVBiOaNNPTg0h7U2GnIkaCPaYpBfJ1E9Euc5fTLi
+ UFAUmGdzgKw900i1Y1fatp7TC60EReLadF+A/A28WB9kNgDhEz9LvOh2mwUpJYc=
+X-Google-Smtp-Source: AGHT+IFpM2ERS/J+q7XR76boDH/oqkQUrtd4GBgQFf9NtlRrnGvLd+8dX9aFMgwHgHRx++1l/teJPA==
+X-Received: by 2002:a05:6512:4016:b0:52c:9877:71b7 with SMTP id
+ 2adb3069b0e04-52ee545279emr7409833e87.59.1721393026777; 
+ Fri, 19 Jul 2024 05:43:46 -0700 (PDT)
+Received: from [192.168.2.172] ([90.187.152.45])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7a3c785e97sm28577466b.39.2024.07.19.05.43.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jul 2024 05:43:46 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v5 00/11] efi: CapsuleUpdate: support for dynamic UUIDs
+Date: Fri, 19 Jul 2024 14:43:40 +0200
+Message-Id: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1dbfddc-56ff-4d75-dbbf-08dca7ede911
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Jul 2024 12:25:43.8992 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: sCH5zSWKa5vAa52zY1twAiTPDZeJczVhBHBo11B/DgREuTtPUckeVXqI6h47pu4zaGUHJoanJg1N2/c3vKPMOQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10559
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHxfmmYC/2XQ3WrDMAwF4Fcpvq6LrMhJ2qu9R9mFf5RWsCXFW
+ U1LybvPKZRu+PII9Imjh5o5Cc/qsHmoxFlmmcYS7HajwtmNJ9YSS1YISECI2pOO99F9S9DXq0R
+ tnHXeUN8G7FTZuiQe5PYUj58ln2X+mdL9eSCbdfqy2srKRoPm3lhiAA5EH18yujTtpnRSK5bxD
+ Vjc1wAWIGA7NAZs5z1XQPMHaEwNNCvgyJVCNnqACqA30EH9jkwFcAChx2gGC/8rLMvyC5deBtR
+ yAQAA
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7490;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=2+mBTm3AtxCEQwrQZenO+38nwyl0Ei02ApyHAcyxcR8=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmml+All732VPqMFxUwc2dwcJuXURBBcuzuWyoF
+ RDbmQK7ouiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZppfgAAKCRAFgzErGV9k
+ tkNgD/wLcQ6iA2wY+lP6LYljazz74BXmjKLxiWTToxBR6TGE0somBEUwabfbiEE1vMc6pzIHOOk
+ i7Jvo6zu5EmEvMPwymbivicjv0Dja0PchjACFTSsuwyPCg3vXRqyG3WGekz6dhRPFoYG+fklszs
+ o8Ae42q3D0eYeUMw0W1naFItZsIaihXlWYE4LKZdpEy2KKEc6RWx+3zOOQIpxCK4FXdEJGg9JAx
+ 1qFuojVmxgfgWBVaxMWoICDL2cWFLOn1U7dr7cYQlmranG6Fv7GCymOvCnSimXSFqptrd9VCfXF
+ mSklS0BSHf3Dd+2ZxTjI3tMO//GYzq4OlHTAvqoilPlwhb5jJp96Sk1wreh41m5HdVq1HjYeID4
+ zWYUEP5UcVlH+IMumUthyPuY+E8LrX62ohJLBfpeMy6ie9Kzbw8W5H3CPvsrMirjplLsJeMdIvZ
+ 4IZeBL8JHitpFimdBIDrwdBLW/UaWrSoboFko8WxYCLs0t0MccjyACInjf0G7IgFODaRAGSiLB9
+ 3Y+CxcbBAEA1zoKF87Ovta35VwoH6b46JsNwuZF+O8uT2AUsg1eWwuc4LEdIs12QfCxA+j1HAL0
+ /dJYWstKVMJ/yJSJG4dnlbzees7jTy7b4cVh3HrWejW6+6OTDqgta3rNyJi3yvkC1oKo0EHRxoP
+ uL9AHdW4EKx6axQ==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,28 +118,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH] imx93-u-boot: Describe the CPU clocks in the
-> devicetree
->=20
-> Currently, there is an error when the i.MX93 CPU frequency is
-> read:
->=20
-> Could not read CPU frequency: -2
-> CPU:   NXP i.MX93(52) Rev1.1 A55 at 0 MHz
->=20
-> Fix it by describing the A55 clock nodes in the devicetree, like done on
-> other i.MX SoCs.
->=20
-> With this change, the CPU frequency error is gone and it can be
-> correctly
-> retrieved:
->=20
-> CPU:   NXP i.MX93(52) Rev1.1 A55 at 1700 MHz
-> CPU:   Industrial temperature grade  (-40C to 105C) at 35C
->=20
-> As the upstream imx93.dtsi does not describe the CPU clocks, keep the
-> clock node in imx93-u-boot.dtsi for now.
->=20
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+As more boards adopt support for the EFI CapsuleUpdate mechanism, there
+is a growing issue of being able to target updates to them properly. The
+current mechanism of hardcoding UUIDs for each board at compile time is
+unsustainable, and maintaining lists of GUIDs is similarly cumbersome.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+In this series, I propose that we adopt v5 GUIDs, these are generated by
+using a well-known salt GUID as well as board specific information the
+DT root compatible string, these are hashed together and the result is
+truncated to form a new UUID.
+
+The well-known salt GUID can be specific to the architecture (SoC
+vendor), or OEM. It is defined in the board defconfig so that vendors
+can easily bring their own.
+
+Specifically, the following fields are used to generate a GUID for a
+particular fw_image:
+
+* namespace salt
+* board compatible (usually the first entry in the dt root compatible
+  array).
+* fw_image name (the string identifying the specific image, especially
+  relevant for board that can update multiple images).
+
+== Usage ==
+
+Boards can enable dynamic UUID support by simply not setting the
+efi_fw_image image_type_id property. Vendors may also wish to set a
+custom namespace GUID (by setting CONFIG_EFI_CAPSULE_NAMESPACE_GUID).
+
+== Limitations ==
+
+* Changing GUIDs
+
+The primary limitation with this approach is that if any of the source
+fields change, so will the GUID for the board. It is therefore pretty
+important to ensure that GUID changes are caught during development.
+
+* Supporting multiple boards with a single image
+
+This now requires having an entry with the GUID for every board which
+might lead to larger UpdateCapsule images.
+
+== Tooling ==
+
+The mkeficapsule command is updated to add a new guidgen subcommand,
+this can generate GUIDs that match those the board would generate at
+runtime. It accepts an optional namespace GUID (if the default isn't
+used), a path to the board DTB, and a list of firmware image names.
+
+This series follows a related discussion started by Ilias:
+https://lore.kernel.org/u-boot/CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com/
+
+CI run for this series: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/21419
+
+---
+Changes in v5:
+- Clean up mkeficapsule genguid patch
+- Add explicit tests validating the GUID type bits
+- Link to v4: https://lore.kernel.org/r/20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org
+
+Changes in v4:
+- Make UUID v5 support always enabled rather than being optional.
+- Fix endianness issues (thanks Vincent and Ilias)
+- Merge genguid tool into mkeficapsule.
+-	And move mkeficapsule over to using U-Boot's UUID code rather
+	than libuuid.
+- Provide a default namespace UUID for all U-Boot boards.
+- Link to v3: https://lore.kernel.org/r/20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org
+
+Changes in v3:
+- Add manpage for genguid
+- Add dedicated CONFIG_TOOLS_GENGUID option
+- Minor code fixes addressing v2 feedback
+- Link to v2: https://lore.kernel.org/r/20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org
+
+Changes in v2:
+- Move namespace UUID to be defined in defconfig
+- Add tests and tooling
+- Only use the first board compatible to generate UUID.
+- Link to v1: https://lore.kernel.org/r/20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org
+
+---
+Caleb Connolly (11):
+      efi: define struct efi_guid
+      lib: uuid: add UUID v5 support
+      efi: add a helper to generate dynamic UUIDs
+      doc: uefi: document dynamic UUID generation
+      sandbox: switch to dynamic UUIDs
+      lib: uuid: supporting building as part of host tools
+      include: export uuid.h
+      tools: mkeficapsule: use u-boot UUID library
+      tools: mkeficapsule: support generating dynamic GUIDs
+      test: lib/uuid: add unit tests for dynamic UUIDs
+      test: lib/uuid: add tests for UUID version/variant bits
+
+ arch/arm/mach-rockchip/board.c                     |   2 +-
+ board/cobra5272/flash.c                            |   2 +-
+ board/gardena/smart-gateway-mt7688/board.c         |   2 +-
+ board/sandbox/sandbox.c                            |  16 --
+ board/socrates/socrates.c                          |   2 +-
+ board/xilinx/common/board.c                        |   2 +-
+ cmd/efi.c                                          |   2 +-
+ cmd/efi_common.c                                   |   2 +-
+ cmd/flash.c                                        |   2 +-
+ cmd/gpt.c                                          |   2 +-
+ cmd/nvedit_efi.c                                   |   2 +-
+ cmd/x86/hob.c                                      |   2 +-
+ common/flash.c                                     |   2 +-
+ disk/part_efi.c                                    |   2 +-
+ doc/develop/uefi/uefi.rst                          |  27 +++
+ doc/mkeficapsule.1                                 |  23 +++
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c          |   2 +-
+ env/sf.c                                           |   2 +-
+ fs/btrfs/btrfs.c                                   |   2 +-
+ fs/btrfs/compat.h                                  |   2 +-
+ fs/btrfs/disk-io.c                                 |   2 +-
+ fs/ext4/ext4fs.c                                   |   2 +-
+ include/efi.h                                      |   2 +-
+ include/fwu.h                                      |   2 +-
+ include/part.h                                     |   2 +-
+ include/rkmtd.h                                    |   2 +-
+ include/sandbox_efi_capsule.h                      |   6 +-
+ include/{ => u-boot}/uuid.h                        |  21 ++-
+ lib/Kconfig                                        |   1 +
+ lib/acpi/acpi_dp.c                                 |   2 +-
+ lib/acpi/acpigen.c                                 |   2 +-
+ lib/efi/efi_app.c                                  |   2 +-
+ lib/efi_loader/Kconfig                             |  12 ++
+ lib/efi_loader/efi_capsule.c                       |   1 +
+ lib/efi_loader/efi_device_path.c                   |   2 +-
+ lib/efi_loader/efi_firmware.c                      |  52 +++++
+ lib/efi_loader/efi_variable.c                      |   2 +-
+ lib/fwu_updates/fwu_mtd.c                          |   2 +-
+ lib/uuid.c                                         | 102 +++++++---
+ lib/vsprintf.c                                     |   2 +-
+ net/bootp.c                                        |   2 +-
+ test/dm/acpi_dp.c                                  |   2 +-
+ test/dm/acpigen.c                                  |   2 +-
+ test/lib/uuid.c                                    | 120 +++++++++++-
+ .../test_efi_capsule/test_capsule_firmware_fit.py  |   2 +-
+ .../test_efi_capsule/test_capsule_firmware_raw.py  |   8 +-
+ .../test_capsule_firmware_signed_fit.py            |   2 +-
+ .../test_capsule_firmware_signed_raw.py            |   4 +-
+ test/py/tests/test_efi_capsule/version.dts         |   6 +-
+ tools/Makefile                                     |   8 +-
+ tools/binman/etype/efi_capsule.py                  |   2 +-
+ tools/binman/ftest.py                              |   2 +-
+ tools/eficapsule.h                                 |   2 +-
+ tools/mkeficapsule.c                               | 209 ++++++++++++++++-----
+ 54 files changed, 544 insertions(+), 148 deletions(-)
+---
+change-id: 20240422-b4-dynamic-uuid-1a5ab1486c27
+base-commit: c717871c07fb36f13806ef5351d858a72a811d95
+
+// Caleb (they/them)
+
