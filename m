@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33ED7C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 19:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C98CDC3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 19:15:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60BEB88B81;
-	Fri, 19 Jul 2024 21:04:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 24BFC88BFD;
+	Fri, 19 Jul 2024 21:15:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NMSeCUqS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oZ3gnbbb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78A0488BB3; Fri, 19 Jul 2024 21:04:07 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 5EC1688C00; Fri, 19 Jul 2024 21:14:59 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 559F988B65
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 21:04:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 308B988BC7
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 21:14:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-6c2d04b0833so65139a12.2
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:04:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3d93147ac6bso1260928b6e.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:14:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721415844; x=1722020644; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=twnrMbDkein0AOcFFy9fdUcj9hF7OJjlp5xJnG4Bs4M=;
- b=NMSeCUqS9jldQ0zcRuI4ATfJlZxhU+/ttg/wJjf3WrC9jCA0SpLG/lzSOd+uRTGuGh
- za0kdi3QRDUTSh2h2Gs63t2FHaBMVF1c3pj4XJCs9LwfrgxrIdJHQcTwmJHg6+tW1SVu
- mNjCZfReuCNJzAFmf00acro3MZK8thlBb6VnWgaMq4XVz7xICkTkGd4JqE5iBmeIQQQd
- e+NmuxBNPUKiEP2E1ylcU1Mb9m/+8SV7APUkv/C+eIHf5EPSSrmI8Km8rzMQQv6r/w9v
- 8Yu3lCWKZgZ6wiJqS/lqobCsksfEIO2DR8bZsi2dh3oUgAXe726TaxZJG+/fwF+xUAcL
- XQDQ==
+ d=konsulko.com; s=google; t=1721416496; x=1722021296; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WlHU22krZ/nSmhnZ6Ryb36e1MoSMuaFgXkn44sGhb/w=;
+ b=oZ3gnbbb95mVO6gxL2dYttdysQ24JlWp6fKADgaDTErnICi682Efcu/A/9TmieVyHK
+ XWD/xOM0KFnQqj5kEBqqDwLCMpOmsbk0nwo846oN/VZleSRG7s0HTPPWHave2KZLK355
+ FStsbTc7pHkhbQYZ5VXbxsf+8tfXNFofIkhTs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721415844; x=1722020644;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=twnrMbDkein0AOcFFy9fdUcj9hF7OJjlp5xJnG4Bs4M=;
- b=m0HfyUnl1u0rMVuaYPoqdfsO2x5L2XxZoK9n7pN6YTCiUhGuEyhhSNCArtMwfplNIn
- YCluiByEl33S3m5H95YFQcOv35zxIM/z5GNLJczm1zT6/0YtJUHMp3sLOPyOkPdjrcvT
- gYEGIot2AQCEwfzZSQIZ5HWj/jv4q/Tk9/I+ZpJ7IxM7h/hjjjKf/Pe81Fwf3CDZkcXB
- SgVD9WkiUAojaA8OL48Dt7ESs3MN2oUIc63tbAWVDWVa4xLeK8cSDfWGDP0K7RZ1XusK
- Olv/85K8R2xf3Q/7R2xjozfBqB7D7zmNtb6o0gpQGpoSoO0whjCgGrUiaIiKSQdueG5T
- pfmA==
+ d=1e100.net; s=20230601; t=1721416496; x=1722021296;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WlHU22krZ/nSmhnZ6Ryb36e1MoSMuaFgXkn44sGhb/w=;
+ b=OYkytFkQRwC+UeJXBY9imOwgvmdhJAyR97HveCMRtJ4f41vzrNMg1x6cxjStZ9nYBg
+ r3T6+OKL6RtE9slaTX1Fg7Gcs4Kl72q4sw9Mp9vPZG4/lBtaHKiXjvx9A7ZbdGw6BJEw
+ rSogyqE5Guwh+doWZ4E4S86V0dK18ZX/LO2WsA7iQEKWqZCrJv+UtYVTVDzrS5+C0uGf
+ Q0P3EmIg6ro/MxPD558IsDW+EtVtgWIbwDuRcBVsBAa0p1iPt+mOtuyASxO6v4KyWc1p
+ cIgBIioy4JPk53jLz0QHytNuzR2B/Z5gzV9UI7EY+azkXQRqmsRjmzEJFug0FvZuhWYd
+ OAVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVgOdYjX8AXZZFJIajyScrUtAGdpfZ0ggGKp1QQ3sMKHSwvjE5jvUs7d2xu7CNa3Zk65f9QL1ckEnAL32S0yw18k83VNw==
-X-Gm-Message-State: AOJu0YyCEbNHxZwprFhOUnLSho+07q/rB43KsAUcoea0o88tH8VOsnOK
- bkDtiyHXf72CEU7wA9SlrGNbixoW5oaQvfZB/K0ymW1EVo3LYGTCR6XLFA==
-X-Google-Smtp-Source: AGHT+IHdS2RfAVPVVqV6OqNGhlk6T9w6Y+A91l4E31b04DRoasuhwwO807Nf7NwaeJV968JH7BDvZQ==
-X-Received: by 2002:a17:903:22c9:b0:1fb:1cc3:647b with SMTP id
- d9443c01a7336-1fd7457ea53mr5587045ad.5.1721415843692; 
- Fri, 19 Jul 2024 12:04:03 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:c08b:f396:b4ea:b716])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fd6f48f7e8sm7992695ad.309.2024.07.19.12.04.01
+ AJvYcCXYlhbJ4PhsAJ9AhjZG2zA1FLpL5pSzzGX834/7bJiIrIi1TfCUMtjyG0iEZLby69TknU4WKWeitFtCD9fd/pc7/Bxo2g==
+X-Gm-Message-State: AOJu0Yz40bOytii2aJ/X5KtzLNIeumEC1qY8IrVSK20PYxQU7RUVewVM
+ s7odKQe48tNWqX/wJHlHsQ6Jy7X+TaeSjFoN/G4ZaxU7D1uviGI7OnrQjxefSTA=
+X-Google-Smtp-Source: AGHT+IEvhN5CJ/GxkHE/WDhBwNEpifHMtnrrQbrLeruEd8r9L5axtncdpmjqMLRbXxVgCR+29ep+6A==
+X-Received: by 2002:a05:6808:1892:b0:3d9:3337:d38a with SMTP id
+ 5614622812f47-3dad1f1235dmr10083457b6e.3.1721416495807; 
+ Fri, 19 Jul 2024 12:14:55 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3dae097887esm397971b6e.14.2024.07.19.12.14.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 12:04:03 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: breno.lima@nxp.com
-Cc: francesco.montefoschi@udoo.org, u-boot@lists.denx.de,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] udoo_neo: Convert to watchdog driver model
-Date: Fri, 19 Jul 2024 16:03:37 -0300
-Message-Id: <20240719190337.1598053-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Fri, 19 Jul 2024 12:14:55 -0700 (PDT)
+Date: Fri, 19 Jul 2024 13:14:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] env: mmc: Fix env loading with CONFIG_SYS_MMC_ENV_PART
+Message-ID: <20240719191452.GD561963@bill-the-cat>
+References: <20240719-fix-mmc-env-boot1-v1-1-e32b2037d4d8@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oQ3Xx466RwJPsOcz"
+Content-Disposition: inline
+In-Reply-To: <20240719-fix-mmc-env-boot1-v1-1-e32b2037d4d8@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,57 +92,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
-the 'reset' command in U-Boot to not cause a board reset.
-    
-Fix it by switching to the watchdog driver model via sysreset, which
-is the preferred method for implementing the watchdog reset.
 
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
----
- arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi | 12 ++++++++++++
- configs/udoo_neo_defconfig                     |  3 +++
- 2 files changed, 15 insertions(+)
+--oQ3Xx466RwJPsOcz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi b/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
-index b5e1f2b9a16f..7f5a6424bac8 100644
---- a/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
-+++ b/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
-@@ -1,5 +1,13 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
-+/ {
-+	wdt-reboot {
-+		compatible = "wdt-reboot";
-+		wdt = <&wdog1>;
-+		bootph-pre-ram;
-+	};
-+};
-+
- &soc {
- 	bootph-all;
- };
-@@ -15,3 +23,7 @@
- &uart1 {
- 	bootph-all;
- };
-+
-+&wdog1 {
-+	bootph-pre-ram;
-+};
-diff --git a/configs/udoo_neo_defconfig b/configs/udoo_neo_defconfig
-index 4986b4c26260..9f9ad0ad5ec7 100644
---- a/configs/udoo_neo_defconfig
-+++ b/configs/udoo_neo_defconfig
-@@ -61,5 +61,8 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_ANATOP=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_IMX_THERMAL=y
- CONFIG_USB=y
-+CONFIG_IMX_WATCHDOG=y
--- 
-2.34.1
+On Fri, Jul 19, 2024 at 05:38:54PM +0200, Mattijs Korpershoek wrote:
 
+> When CONFIG_SYS_MMC_ENV_PART=3D2, the environment is loaded from
+> the USER partition (hwpart=3D0) instead of from the
+> BOOT1 partition (hwpart=3D2).
+>=20
+> IS_ENABLED() cannot be used for non-boolean KConfig options.
+> Its documentation states:
+>=20
+> > * IS_ENABLED(CONFIG_FOO) evaluates to 1 if CONFIG_FOO is set to 'y',
+> > * 0 otherwise.
+>=20
+> So in our case, IS_ENABLED(CONFIG_SYS_MMC_ENV_PART) evaluates to 0.
+>=20
+> Because of this, the hwpart variable is never assigned and mmc_offset()
+> ends up switching back to the USER hwpart (0) instead of BOOT1 (2).
+>=20
+> Fix it by using #define instead.
+>=20
+> Tested with:
+>=20
+>   # have CONFIG_SYS_MMC_ENV_PART=3D2 in defconfig
+>   # 1. Erase mmc0boot1
+>   =3D> mmc dev 0 2
+>   =3D> mmc erase 0 400
+>   =3D> mmc read ${loadaddr} 0 400
+>   =3D> md ${loadaddr} 4
+>   82000000: 00000000 00000000 00000000 00000000  ................
+>=20
+>   # 2. Restore default environment and save to MMC
+>   =3D> env default -a -f
+>   =3D> saveenv
+>=20
+>   # 3. Read back mmc0boot1 and confirm the env is present
+>   =3D> mmc read ${loadaddr} 0 400
+>   =3D> md ${loadaddr} 4
+>   82000000: 13e0632e 72646461 7469665f 3978303d  .c..addr_fit=3D0x9
+>=20
+> Fixes: 5b4acb0ff79d ("env: mmc: Apply GPT only on eMMC user HW partition")
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  env/mmc.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/env/mmc.c b/env/mmc.c
+> index 776df0786be5..0338aa6c56ad 100644
+> --- a/env/mmc.c
+> +++ b/env/mmc.c
+> @@ -110,8 +110,9 @@ static inline s64 mmc_offset(struct mmc *mmc, int cop=
+y)
+>  	int hwpart =3D 0;
+>  	int err;
+> =20
+> -	if (IS_ENABLED(CONFIG_SYS_MMC_ENV_PART))
+
+> -		hwpart =3D mmc_get_env_part(mmc);
+> +#if defined(CONFIG_SYS_MMC_ENV_PART)
+> +	hwpart =3D mmc_get_env_part(mmc);
+> +#endif
+> =20
+>  #if defined(CONFIG_ENV_MMC_PARTITION)
+>  	str =3D CONFIG_ENV_MMC_PARTITION;
+>=20
+
+Nice catch. I did a little poking around with:
+rg -g Kconfig -U '^config ([A-Z0-9_]+)\n[[:blank:]]+(int|hex)' -o -r \
+  '$1' -NI | sort -u > syms
+
+And then
+for SYM in `cat syms`;do rg "IS_ENABLED\(CONFIG_${SYM}\)";done
+
+The only other place we use IS_ENABLED like this is a debug print where
+a value of zero on the symbol would be invalid usage.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--oQ3Xx466RwJPsOcz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaauykACgkQFHw5/5Y0
+tyxmnwv+KAto3a367PeJJvm4dlvyvJE+kxZyppaGoMEvrfohpBTo1z/86OBe3Fu8
+rOxUQjMuewOpI9kSpHPyMmwa8y11uOSwo/vK/DiN8/11w/dIGeM3C5L1YG0Gm6Ja
+sPwkCLV1wpKedJIT0S0bhPTbRJE/UDSw4o/DvoJ5uDcmNjpoQdRgw8DOTDiSIQva
+qW7Ug1t9sXWnD32ZZYxYtYetMkz+mLhQ0x3kCK98GQZJ8LxhiY9aXPjQVj1WkXh1
+K4AGCYl5CCYxEqiGBSszteQ7FrrLGPJp/F+eTxIT23kAV38Mt+NmpUSVt2km5Cq9
+J5k4qhI985GjSul8Vq2uoAwdAaTDryi9pJCgwMdj7TadtzpQ1JQLWFa56gCu0h4H
+KxgyIsKEF3w+evqB7ti2D+5Smk7Opq+wlZv/gsjbYamdnpFSYxua3i37/6C2XDzw
+QuZIVZjZ0nw5jaYBOMNoQ4U0qfCKi9tkclR3OrBWXcfrg5dRhKzHNTitsiHX73oo
+pSeeqJNU
+=TUNx
+-----END PGP SIGNATURE-----
+
+--oQ3Xx466RwJPsOcz--
