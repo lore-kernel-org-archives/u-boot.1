@@ -4,94 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3196EC3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 14:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55515C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 14:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8955188B78;
-	Fri, 19 Jul 2024 16:01:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
+	by phobos.denx.de (Postfix) with ESMTP id BDDD588B79;
+	Fri, 19 Jul 2024 16:14:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=armadeus.com header.i=@armadeus.com header.b="erPiPhqL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dryfxPno";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5509D88BBA; Fri, 19 Jul 2024 16:01:02 +0200 (CEST)
-Received: from 7.mo582.mail-out.ovh.net (7.mo582.mail-out.ovh.net
- [46.105.59.196])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9CFE788B79; Fri, 19 Jul 2024 16:14:06 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CE0788B65
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 16:01:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A338A87F51
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 16:14:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=armadeus.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.17.234])
- by mo582.mail-out.ovh.net (Postfix) with ESMTP id 4WQWY72x7Qz1QGY
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 14:00:59 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-snzmb (unknown [10.110.178.59])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id E1E261FE98;
- Fri, 19 Jul 2024 14:00:58 +0000 (UTC)
-Received: from armadeus.com ([37.59.142.107])
- by ghost-submission-6684bf9d7b-snzmb with ESMTPSA
- id voJaNZpxmmaX6AAAp8BpyQ
- (envelope-from <sebastien.szymanski@armadeus.com>);
- Fri, 19 Jul 2024 14:00:58 +0000
-Authentication-Results: garm.ovh; auth=pass
- (GARM-107S001c6110fe4-3ef8-43fd-9786-65078e3bf1b9,
- 68270C7946175900C0D504C303ABE67534C2A4CF)
- smtp.auth=sebastien.szymanski@armadeus.com
-X-OVh-ClientIp: 92.148.253.243
-Message-ID: <abf7f940-1bfb-4e5f-937b-135a580034b3@armadeus.com>
-Date: Fri, 19 Jul 2024 16:00:58 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2ee98a224b8so4185821fa.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 07:14:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721398444; x=1722003244; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oMQUqxwkgZpDFmKqArteyQgnRS5MQIA4I1MecVtqgkw=;
+ b=dryfxPnoUJqm7XjbQHGXfIZwFI6dYBjgmZo8DwrQ3RT6SvdEuFOHJN4khZmDX+P2pc
+ MmEuxU1A9IMoIFuBt1m+IjkP4hW0VaTV8NtUBnUjR+rxDUEeMr/urQ7M4YHZSxC7VPhA
+ RVRz5YkOTdqu1wJjRbGl0aU6DG54njILRkfd00TfejpAMVlZnh9SOf5B8wEdYHn8OdiU
+ JrP8nC/cAnKm7H4bsrX4vLt8x12rBLG9FYcwnkinMHdhejgVSSqw8iLhocgRiijn9457
+ CEPFAUz2CvhEcmtPRgLaSCXHf0pdNXOOGCsG8d9kl7TLiGkwJo2CHDf0yF5GfG/5ECti
+ n83g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721398444; x=1722003244;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oMQUqxwkgZpDFmKqArteyQgnRS5MQIA4I1MecVtqgkw=;
+ b=tGauGKbGoFM3tlaXrH0Gtk2daaacI0uEZVMfPklxKyHqdkSomln22EvHB/tfBaVgeP
+ 0uHVej2YnpzPX5LbruwzgIrWjea8yhEUBaeQz39KvjD2kheTMTdnISyuxEWU0yQpRIJG
+ wHxhNk+bICxrsdoh+HBVfGp5Cebtl1GgJqDHioPYDkPgF80iOaDUmE6pU1ugQqCrXwfB
+ NxwDKF55DulXzN+eNWyfVamCPNo+e5Mkjy/b+S7eCshjKG5sePrRn5e1gxhssoOUnSNg
+ wIGQ6TErokmNCZ4OYDJxpXHZ7+HukyWIPD1XB23ZJPO5pymn8GI6So0LXRyTrk2MJP1T
+ fTwg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVi60YY/N4F8N0sJlVnguaKnonogklZmxx1lD1MvD0jtjsNdNAh8SG9qSR5GTjsh3U/2cTcLJKa9uCq6jo4BejP0viRDw==
+X-Gm-Message-State: AOJu0YxaHvZKCNIQjCEMFp2hy+ALZdm/Bo6FDe0eGAoeXrQXL84jL0Gu
+ o74hkLhZYWKGBTW8WJKpF1SET3M9OaSHhYyKUmy3bZXzoP/SzYgxt6oQX9JGMd4g9DIiCBmHshX
+ lH52bHhTpOMvFhs4e05LpwUJtFJc=
+X-Google-Smtp-Source: AGHT+IGKvNk/cRRiS/aBKDJwS524qygOshO8Xho7CwcdDme/mVPbGUxDx8qnaNQQQKB/pe4CZMOPiUTWd6cguIV6LpI=
+X-Received: by 2002:a2e:a583:0:b0:2ee:d55c:602 with SMTP id
+ 38308e7fff4ca-2ef0da3f476mr11569031fa.6.1721398443606; Fri, 19 Jul 2024
+ 07:14:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
-To: Fabio Estevam <festevam@gmail.com>, peng.fan@nxp.com
-Cc: uboot-imx@nxp.com, m.othacehe@gmail.com, u-boot@lists.denx.de
 References: <20240718165454.904763-1-festevam@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
- xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
- ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
- yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
- ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
- cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
- AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
- LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
- /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
- v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
- 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
- d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
- ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
- B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
- vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
- zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
- KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
- FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
- 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
- MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
- ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
- DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
- ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
- pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
- JNoSD7Kz6Y9qnKo=
-In-Reply-To: <20240718165454.904763-1-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 8186136751533976489
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeftddrhedugdejvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhjggtgfesthekredttddvjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnheptdeghedtudeltdduveevkeevveevfefftdehtdeikeegueekvedtffeigeetkefhnecukfhppeduvdejrddtrddtrddupdelvddrudegkedrvdehfedrvdegfedpfeejrdehledrudegvddruddtjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehkedvpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=KNIAKsLp8uw6hRn5IQ58dGpEOfHBUVfff4+RnZxUnWw=; 
- c=relaxed/relaxed; d=armadeus.com; h=From;
- s=ovhmo103079-selector1; t=1721397659; v=1;
- b=erPiPhqLs52cEQMLjciH06KN2m1YQZr08Lx+f1jX5N4nCISnV2Hw3co/FdlsrhHTHfhQ0mHZ
- D0BeHhZAGsgiA9Ex6XjmMGUhq0wvdbRtSE8L1xw/VZvGs56DOQmevPrx1BJVuWyLOqvBDJttF/3
- ZIzTO9gYBXoCwoiDYPWN4ynm2jbCsYa8m9DzIBqpnJEEn2lk+G9rx3AqsK9iE29lnoBIGaQJ8jm
- OyyVUwbVEhSqAJDuR8sCzsDW0h7JFfhZhaLURr3bK2RtXW8CCcWe+BoMMwth7KIMRZsmY4gIE2z
- ZhTL/o1it2doqQfZ97BlkjuqLBs998hz3xrr9HHHYan5Q==
+ <abf7f940-1bfb-4e5f-937b-135a580034b3@armadeus.com>
+In-Reply-To: <abf7f940-1bfb-4e5f-937b-135a580034b3@armadeus.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 19 Jul 2024 11:13:51 -0300
+Message-ID: <CAOMZO5D4FFvK=L+GwdfpLAyGBV2d2t-9d3GGTAuXYU0jt3kfjg@mail.gmail.com>
+Subject: Re: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
+To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
+Cc: peng.fan@nxp.com, uboot-imx@nxp.com, m.othacehe@gmail.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,58 +91,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
+Hi S=C3=A9bastien,
 
-On 7/18/24 18:54, Fabio Estevam wrote:
-> Currently, there is an error when the i.MX93 CPU frequency is
-> read:
-> 
-> Could not read CPU frequency: -2
-> CPU:   NXP i.MX93(52) Rev1.1 A55 at 0 MHz
-> 
-> Fix it by describing the A55 clock nodes in the devicetree, like done
-> on other i.MX SoCs.
-> 
-> With this change, the CPU frequency error is gone and it can be correctly
-> retrieved:
-> 
-> CPU:   NXP i.MX93(52) Rev1.1 A55 at 1700 MHz
-> CPU:   Industrial temperature grade  (-40C to 105C) at 35C
-> 
-> As the upstream imx93.dtsi does not describe the CPU clocks,
-> keep the clock node in imx93-u-boot.dtsi for now.
-> 
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
-> ---
->   arch/arm/dts/imx93-u-boot.dtsi | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
-> diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.dtsi
-> index 289aba175843..b2b3d57318fc 100644
-> --- a/arch/arm/dts/imx93-u-boot.dtsi
-> +++ b/arch/arm/dts/imx93-u-boot.dtsi
-> @@ -9,6 +9,14 @@
->   	};
->   };
->   
-> +&A55_0 {
-> +	clocks = <&clk IMX93_CLK_ARM_PLL>;
+On Fri, Jul 19, 2024 at 11:00=E2=80=AFAM S=C3=A9bastien Szymanski
+<sebastien.szymanski@armadeus.com> wrote:
 
-Why IMX93_CLK_ARM_PLL and not IMX93_CLK_A55_SEL ?
+> > +&A55_0 {
+> > +     clocks =3D <&clk IMX93_CLK_ARM_PLL>;
+>
+> Why IMX93_CLK_ARM_PLL and not IMX93_CLK_A55_SEL ?
 
-Best regards,
+IMX93_CLK_A55_SEL is a mux that can select between a55_alt versus arm_pll.
 
-> +};
-> +
-> +&A55_1 {
-> +	clocks = <&clk IMX93_CLK_ARM_PLL>;
-> +};
-> +
->   &binman {
->   	u-boot-spl-ddr {
->   		align = <4>;
+The real CPU clock is IMX93_CLK_ARM_PLL, so this one better represents it.
 
--- 
-Sébastien Szymanski, Armadeus Systems
-Software engineer
+This is also consistent with the other i.MX8M SoCs.
 
+Take imx8mm.dtsi for example:
+
+A53_0: cpu@0 {
+....
+     clocks =3D <&clk IMX8MM_CLK_ARM>;
+
+This also uses the "real" CPU clock, not the mux one (imx8mm_a53_sels).
+
+I also plan to upstream this clock change to the Linux devicetree.
+
+Thanks
