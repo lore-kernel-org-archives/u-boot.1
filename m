@@ -4,88 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0B0C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:44:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89823C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:47:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 499BE88B19;
-	Fri, 19 Jul 2024 12:44:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 137E087E96;
+	Fri, 19 Jul 2024 12:47:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="VRiEpHDF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lANWZ2k9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A310F88B19; Fri, 19 Jul 2024 12:43:57 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B287D87DEA; Fri, 19 Jul 2024 12:47:31 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CE5F884C5
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:43:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8045C87F51
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:47:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mmkurbanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 7C707100008;
- Fri, 19 Jul 2024 13:43:53 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 7C707100008
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1721385833;
- bh=XePHiUHhYBpZ+Dp3HCUOBxFOQZUn9UtDxOqpem15d6I=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=VRiEpHDFmQpMZtZ3B1qkhWSea19bAbAhSTC3rHHZ8ViUJ9FWhuwRko2QTtYowHg7I
- fjyv69smsyw+sXy2dfba1rsqlwt18gCYcvYmyUgBL4meury764UO35A1AYGvqQnzcP
- aHsKNdKJ2UQzVoug+xoKVROSQOSgJYQV3MoCaWcnOSH2KAZOADn+apdgByIvqryR98
- 8k7S3zicZJbSgjzaF+e06ZXMZbSmaUjqZICDTYMGviNnFM3y3b9JCy1oqRSRhY4mue
- tCJLs8CH4eEx/khXe6a9oeXzw8pIQxHOgf5NkJtVGwjw5AQqT2pclNRC/xRl4yrXdE
- oqe7pkA/Hm4pA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 19 Jul 2024 13:43:53 +0300 (MSK)
-Received: from [172.28.66.131] (100.64.160.123) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Fri, 19 Jul 2024 13:43:53 +0300
-Message-ID: <94c1d54b-24f1-43a1-b56c-7af73cc7596c@salutedevices.com>
-Date: Fri, 19 Jul 2024 13:43:52 +0300
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WQRFq3bfyz9sNY;
+ Fri, 19 Jul 2024 12:47:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1721386047;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tKBX7gnzAaJR4UMlO6PFthwDz6F3oXKQyZJD/SMoIKI=;
+ b=lANWZ2k9dXFPTe8b7bAJx6+CEuTMlYcAaesbyGlihELjJ/fMlWOIOPNQbx4X5s0+XUQwux
+ qprDvSbc8Eza6xiRSflKzYeVR5MQUy/EZ2o5ReELeXo59VOR4xJT0YXSSFKum2WF9vCgDW
+ +t3bI1+hdIljqde08IoIHg1Jga5fpdxHcaO0fntZHnUJJnnzzz1qRMuFeL2JFmqlpZ0MXC
+ gawejSpz4bOv3Zog6gUbZ+NfXLNQhgouKMz0E+a5jk4FGeWBbaGMafsk8D1HTLiHRuRvlA
+ 0FL2wVQwkvJkVWXB1/RVOsGJndxpe/OoDwWqvicrYdiVMLFu4KKuWK+ZLpIT9w==
+Message-ID: <75dfe963-4663-40ce-97e1-c3401d414702@mailbox.org>
+Date: Fri, 19 Jul 2024 12:47:24 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/2] cmd: ubi: check 'updating' before calling
- ubi_more_update_data()
-To: Tom Rini <trini@konsulko.com>, Dmitry Dunaev <dunaev@tecon.ru>
-CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>
-References: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
+Subject: Re: [PATCH 01/37] board: BuS: Remove duplicate newlines
+To: u-boot@lists.denx.de
+Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
+ trini@konsulko.com
+References: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
-From: Martin Kurbanov <mmkurbanov@salutedevices.com>
-In-Reply-To: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 186588 [Jul 18 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: mmkurbanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
- 186c4d603b899ccfd4883d230c53f273b80e467f,
- {Tracking_from_domain_doesnt_match_to}, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/07/18 08:29:00 #26061289
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-MBO-RS-META: rmfnzz34za7ho1bx9i3th7efos8ep6f5
+X-MBO-RS-ID: 13313d429f58345a46f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,24 +76,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello. Please, ping
+On 7/19/24 12:27 PM, Marek Vasut wrote:
+> Drop all duplicate newlines. No functional change.
 
-On 16.06.2024 16:34, Martin Kurbanov wrote:
-> If 0 is passed to the 'bytes' parameter in the ubi_start_update(),
-> there is no need to call the ubi_more_update_data(). Otherwise,
-> there will be a double-free of 'vol->upd_buf'.
-> 
-> Also check that the ubi_start_update() was called before calling
-> the ubi_more_update_data().
-> 
-> Martin Kurbanov (2):
->   cmd: ubi: remove redundant initializations
->   cmd: ubi: check 'updating' before calling ubi_more_update_data()
-> 
->  cmd/ubi.c | 21 +++++++++++++++------
->  1 file changed, 15 insertions(+), 6 deletions(-)
-> 
-
--- 
-Best Regards,
-Martin Kurbanov
+Please ignore, my ISP sucks, I have to resend this.
