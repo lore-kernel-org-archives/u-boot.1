@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38544C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 19:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD16C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 20:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A2F88BAE;
-	Fri, 19 Jul 2024 21:45:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D72A388BC7;
+	Fri, 19 Jul 2024 22:33:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZJRHxGcC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cFNu8wy1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1655C88BFF; Fri, 19 Jul 2024 21:45:24 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 9706E882FA; Fri, 19 Jul 2024 22:33:21 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3E0B88BA9
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 21:45:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51D8388BC4
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 22:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5a1c49632deso1352048a12.2
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:45:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2c968fa1d4fso272757a91.3
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 13:33:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721418321; x=1722023121; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=irCNOI97C1dmpwFS67+p8hLNmzpy+cqA7K43B2G38uQ=;
- b=ZJRHxGcCDzXs/kThJvygY+VxOMkH/TGSYzbrAiQ7nZCl+NhCof1G+b1t5+twfLiQW4
- AXq+If/AJGx0GzHVkZY0pbOOae7ctowER2M2dwznlcx6g7/A2US/EThHy8KtSckeguqS
- EAJ4s9a9LvkeZoCIE/dsEUq2jqRwz6EHHR4yp0sLd85FJ8CwuGHtPp461xdUsI4bHFqS
- P2By13ZeVnZpdbzoSRsrGxdzq2+gUPrtpzRiVrSRzH4X76CaQnSrVW2kQyBxfUMc+M9Z
- FK739xDyzAu230kBqBh9jl4js+WNDMdYMr2OCsYGn0S/DF1ZwI+5NaWa7DGzEh3z0uHE
- dViQ==
+ d=gmail.com; s=20230601; t=1721421198; x=1722025998; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6pfGgNFidDRmgjDdlA0Iv1gQZJ34ZY5c+xYMxSgOPuY=;
+ b=cFNu8wy1fmdF9hzJIbkZ6poswYlTltWJNVDMyUhkQzSd3uNO9+kKlK2qmVHYeLt/m5
+ OlH1B3kupIGx4SqFGC3zmVytv16Ik4BrDYYVcO0xAix4vYmBRaGNBVv48vq0sjga2dGo
+ Yw6gHdcOc52+urEDaOXIw1HUEtjBQ3+3q/6tePauQuWkujgTycE37ud0eauYFBSEQagP
+ +0vb3ihIGW3nsNCcuRrzKRWPoFIskchquOWUBfGc2J+lgcBsB/71pvPoag9HGHQYA4jq
+ 3sOFa8WpZVUGD5Wh8qOUht0Q2iq+fB8Nuu8Lx6bESfRyEaahupgiuc1Hz8UDll0F0Zz2
+ xTXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721418321; x=1722023121;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=irCNOI97C1dmpwFS67+p8hLNmzpy+cqA7K43B2G38uQ=;
- b=LwbQTILywFUGjLGu5Rha94d/p1AYaRcoNd+SaJPSh32w8afCQdVmXppKW1ub8CdJYu
- wTXL9puBGXiQKYEaR+rUEJRtMvN+lJAr2phlwsLAZYBu32kZU/71WeOjLmu+vDwcobxZ
- +CsLYbPYZoWTtqKxnCbvjp+TBxGKoyodHl/Nu3jNFVHrUS8Z5IhV7y6SqskKTMlihBTB
- +2mMjbkfgFjkSv5Uaymss3VCg+OnfCctl3XKqlBFe8c/a14Y8yFSuux51/fo7oZkiNUO
- IWbz8D/d4Eo7WXexhSdf//s4/maeJOdAMv99qBUZ1IcYJuMhQzmdgAdci12xCNE7M5C1
- mbjQ==
+ d=1e100.net; s=20230601; t=1721421198; x=1722025998;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6pfGgNFidDRmgjDdlA0Iv1gQZJ34ZY5c+xYMxSgOPuY=;
+ b=bWxF1AOV/xlz+opWA4A0lrJnayWRZRQTN2yeKZxy1K3ILrsbCmv/1EA1izBjM842qy
+ WKwwRUSDGL9auycWtEMct7QY+Qij0BTghESQKNRe4vc6YBe7EmcIcEZIo5RJ0l3d5gLg
+ oqje+PTzyCSBTtrCPKf0sKDj6T8GQn+FSr+YouG3upYW7UjhA5Iylb+Fj3nxWyOtXj/f
+ jZNDrYzamPse+u3Z0Z9UUgyplq0T6P4VhvdXfCmVplvIkybm8Xeh2mO868rp0oFuYFbO
+ SYUAgWO6Za5SUpklk9RSJKYvrdux8EXSLYA4utX5CetJPy0kLz7NYEMyqULQynFsMGBZ
+ Nufg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVusj32XGoeFXTzbr+Hsk30Z8oCymdc+5XgdY5Y+kLG8QP020lBdRXx8TyPdqwU1RbFUmK9dWEYGWpuFCV29tt/uCE4LA==
-X-Gm-Message-State: AOJu0YyC/PrFZy6N4YYIlMbi8yszT9BHx3B67FCuzVLRqrK/o1AlbWET
- pAWlN028GN4eIpFGtB4CeJMNjlbInH51krYnokqBBWAd0+2yNxbO55w56zvcz9A=
-X-Google-Smtp-Source: AGHT+IEv4W9a5hnyK5ihZVUYHaQbRHheS4ApukCZI4pQeaLKHongVUs2lXcYnGjN9FcvbF4pI0X75Q==
-X-Received: by 2002:a50:c34c:0:b0:5a1:2735:2378 with SMTP id
- 4fb4d7f45d1cf-5a1273523fbmr4063778a12.30.1721418321277; 
- Fri, 19 Jul 2024 12:45:21 -0700 (PDT)
-Received: from [192.168.2.186] ([90.187.152.45])
+ AJvYcCXVABhcOEoE3XRo/1xB0t2MEWLFCBMmNg0uuyETflHUa5BIcbUxddevD7AKIyXqsrxjmiBdYesHGHwGvUMaUIcqjB7NAw==
+X-Gm-Message-State: AOJu0YzLa+a5yE0SK8g/Uv1kAl66XjHGGe+BY94JPWkxRTM4jPObrSBh
+ Tz19qN10eB4mKcrSz9iI8eCwJu15vCIypQmvk5GOIizKBSNX5CNQ
+X-Google-Smtp-Source: AGHT+IG1pwNMeho5LKBd6MGLW+usG+rJbjWm1cEelGTcvSLSil/2BQq2wqbByHU66m+DSI/oEP5qnw==
+X-Received: by 2002:a17:90a:d806:b0:2c9:7a37:62ab with SMTP id
+ 98e67ed59e1d1-2cd16058647mr762839a91.4.1721421197746; 
+ Fri, 19 Jul 2024 13:33:17 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:27e4:cf37:80d4:17f5])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5a30c7d32c6sm1600958a12.90.2024.07.19.12.45.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Jul 2024 12:45:20 -0700 (PDT)
-Message-ID: <73e4df07-274e-4ceb-9d80-a3b54cc1e960@linaro.org>
-Date: Fri, 19 Jul 2024 21:45:17 +0200
+ 98e67ed59e1d1-2ccf8092da9sm2138230a91.37.2024.07.19.13.33.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jul 2024 13:33:17 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: breno.lima@nxp.com
+Cc: francesco.montefoschi@udoo.org, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v2 1/4] udoo_neo: Convert to watchdog driver model
+Date: Fri, 19 Jul 2024 17:33:08 -0300
+Message-Id: <20240719203311.1695523-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 06/24] soc: qcom: cmd-db: adjust probe for U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20240715-b4-qcom-rpmh-v6-0-0c948a25d018@linaro.org>
- <20240715-b4-qcom-rpmh-v6-6-0c948a25d018@linaro.org>
- <CAFLszTgz-SOFR+aV7f45+pfByLztAYU1kvFPZof665=QwjjoPQ@mail.gmail.com>
- <c1f036a4-a080-428f-84fd-c44f968d44bf@linaro.org>
- <CAFLszTj-1Pok7mJRGfR5fV20JMp5Hoe0r+4=p0S=NwtxQ0Gdgg@mail.gmail.com>
- <893fc8be-e4aa-46a1-9dd7-774a7f8faa69@linaro.org>
- <CAFLszTgYdSdPv5AhCOZBx0fh1292KAtZ9KBxTE3DVW5PnP6+oA@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTgYdSdPv5AhCOZBx0fh1292KAtZ9KBxTE3DVW5PnP6+oA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,74 +91,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
+With the watchdog driver model in place, it is no longer needed
+to have board code to initialize the watchdog, so remove
+its related board code.
 
-On 19/07/2024 17:04, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Tue, 16 Jul 2024 at 08:16, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->>
->>
->> On 16/07/2024 09:04, Simon Glass wrote:
->>> Hi Caleb,
->>>
->>> On Mon, 15 Jul 2024 at 22:42, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>
->>>>
->>>>
->>>> On 15/07/2024 13:39, Simon Glass wrote:
->>>>> On Mon, 15 Jul 2024 at 11:08, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>>>
->>>>>> Integrate cmd-db into the U-Boot driver model.
->>>>>>
->>>>>> This is just a wrapper around an in-memory database, so we just need to
->>>>>> get the address and validate that cmd-db is there.
->>>>>>
->>>>>> Since cmd_db_header will be stored in the .data section we can skip
->>>>>> bind if it's already set.
->>>>>>
->>>>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>>>> ---
->>>>>> To: Simon Glass <sjg@chromium.org>
->>>>>> ---
->>>>>>     drivers/soc/qcom/cmd-db.c | 72 +++++++++++++++--------------------------------
->>>>>>     include/soc/qcom/cmd-db.h |  3 --
->>>>>>     2 files changed, 23 insertions(+), 52 deletions(-)
->>>>>>
->>>>>
->>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>>>
->>>> Thanks
->>>>>
->>>>> BTW, this is a MISC driver. Does it implement the read() operation?
->>>>
->>>> No, the API (as defined in the header file) takes a string and returns a
->>>> database entry. cmd-db users don't have an easily available handle to
->>>> the node / udevice regardless.
->>>
->>> OK. The closest thing might be UCLASS_SYSINFO, but it is designed for
->>> inside U-Boot and uses an int instead of a string for lookup.
->>
->> Right, I don't think we'll be able to find a more optimum solution here.
-> 
-> OK
-> 
->>>
->>> Could you use the devicetree for this information? What sort of info is it?
->>
->> It maps resource names (e.g. "ldoa1" - the LDO1 regulator on PMIC A) to
->> the address of the resource on the RPMh co-processor.
->>
->> We need to support existing (upstream) devicetree, since this has
->> already been around for many years.
-> 
-> OK., Has this problem been resolved in more recent platforms?
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+Changes since v1:
+- Remove board wdog board code.
 
-What problem?
-> 
-> Regards,
-> Simon
+ arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi | 12 ++++++++++++
+ board/udoo/neo/neo.c                           | 16 ----------------
+ configs/udoo_neo_defconfig                     |  3 +++
+ 3 files changed, 15 insertions(+), 16 deletions(-)
 
+diff --git a/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi b/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
+index b5e1f2b9a16f..7f5a6424bac8 100644
+--- a/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
++++ b/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
+@@ -1,5 +1,13 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
++/ {
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
++};
++
+ &soc {
+ 	bootph-all;
+ };
+@@ -15,3 +23,7 @@
+ &uart1 {
+ 	bootph-all;
+ };
++
++&wdog1 {
++	bootph-pre-ram;
++};
+diff --git a/board/udoo/neo/neo.c b/board/udoo/neo/neo.c
+index b435b721e53c..1a0aaecc3328 100644
+--- a/board/udoo/neo/neo.c
++++ b/board/udoo/neo/neo.c
+@@ -57,9 +57,6 @@ enum {
+ #define ENET_RX_PAD_CTRL  (PAD_CTL_PKE | PAD_CTL_PUE |          \
+ 	PAD_CTL_SPEED_MED   | PAD_CTL_SRE_FAST)
+ 
+-#define WDOG_PAD_CTRL (PAD_CTL_PUE | PAD_CTL_PKE | PAD_CTL_SPEED_MED |	\
+-	PAD_CTL_DSE_40ohm)
+-
+ #define BOARD_DETECT_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE |		\
+ 	PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED |		\
+ 	PAD_CTL_DSE_34ohm | PAD_CTL_HYS | PAD_CTL_SRE_FAST)
+@@ -113,10 +110,6 @@ static iomux_v3_cfg_t const phy_control_pads[] = {
+ 	MUX_PAD_CTRL(ENET_CLK_PAD_CTRL),
+ };
+ 
+-static iomux_v3_cfg_t const wdog_b_pad = {
+-	MX6_PAD_GPIO1_IO13__GPIO1_IO_13 | MUX_PAD_CTRL(WDOG_PAD_CTRL),
+-};
+-
+ static iomux_v3_cfg_t const peri_3v3_pads[] = {
+ 	MX6_PAD_QSPI1A_DATA0__GPIO4_IO_16 | MUX_PAD_CTRL(NO_PAD_CTRL),
+ };
+@@ -148,15 +141,6 @@ int board_init(void)
+ 	/* Address of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+ 
+-	/*
+-	 * Because kernel set WDOG_B mux before pad with the commone pinctrl
+-	 * framwork now and wdog reset will be triggered once set WDOG_B mux
+-	 * with default pad setting, we set pad setting here to workaround this.
+-	 * Since imx_iomux_v3_setup_pad also set mux before pad setting, we set
+-	 * as GPIO mux firstly here to workaround it.
+-	 */
+-	imx_iomux_v3_setup_pad(wdog_b_pad);
+-
+ 	/* Enable PERI_3V3, which is used by SD2, ENET, LVDS, BT */
+ 	imx_iomux_v3_setup_multiple_pads(peri_3v3_pads,
+ 					 ARRAY_SIZE(peri_3v3_pads));
+diff --git a/configs/udoo_neo_defconfig b/configs/udoo_neo_defconfig
+index 4986b4c26260..9f9ad0ad5ec7 100644
+--- a/configs/udoo_neo_defconfig
++++ b/configs/udoo_neo_defconfig
+@@ -61,5 +61,8 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_ANATOP=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_IMX_THERMAL=y
+ CONFIG_USB=y
++CONFIG_IMX_WATCHDOG=y
 -- 
-// Caleb (they/them)
+2.34.1
+
