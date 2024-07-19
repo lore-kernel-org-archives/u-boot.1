@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30619C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C48CC3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:55:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC62B88C11;
-	Fri, 19 Jul 2024 12:50:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 156DF88C20;
+	Fri, 19 Jul 2024 12:50:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XXF+Wd+H";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rJFCx+r3";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="imE6RKup";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jEGMhysn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 003FD88C27; Fri, 19 Jul 2024 12:50:46 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id D128E88C12; Fri, 19 Jul 2024 12:50:47 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A61F88C08
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06DCE88BFC
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4WQRKc6HVsz9sss;
- Fri, 19 Jul 2024 12:50:44 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WQRKd59dPz9spG;
+ Fri, 19 Jul 2024 12:50:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386244;
+ s=mail20150812; t=1721386245;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=sOUyfBiVGmtJrYt3tFPjfh+3WQg4ZAf43XwkwyXJ1rU=;
- b=XXF+Wd+Hw12dSGnyppS1bC+RrKhatBvD7+SnraO8DczOZLUa6/QHoscP91ju7rHhojKJqp
- FdfHN4NDGbr29EVAS9i/NyFCRSDGOEFZVPPFqzF3L/DqYO401GiH1LLwGjCP/uZFqgTBKr
- 3UsvsNtY4Igf7DKFF/qpizcx54zb5KGXrQMZNeoFy5rkPGvwPixugKtSZmvdwMddKg7w4L
- CYnT+p/v+lrQdl6DOyuZID0RkWpR2xm0/0g02I6X4HeM9Z2HiNda6qFz+pFthpmaHO6K4N
- mC++wS0siBXJ0TtEDTL9FGhWXnknnBx5Js2asTuFg7Vg3nw5bpssciAIY5YBAQ==
+ bh=quXgPSH7M27ZQX6cLnkfno+3CRY9BNqVmokzFfdIUNI=;
+ b=imE6RKupDN8u3vfnZmsSrM4vUbKsXH6JCid51Txbj6Hm49otGPZUwlLxFFaDXCT5uDNfai
+ kQQk8hct3rXSCbA3VzIuIYWAMYDu+z8VM6UPvYxWVzWQswFhDheLBEGaMHHz75n9C3bmHS
+ rKA7jhV4r+Eh9NGMwY3dtuAxBVtYaf/bOPoJchsSkQJ6/9tfdSw+tsohrdOf+p8leAKOl8
+ jey0je/ynnwdHvBzVSoseo8Vn6VxZphmQ8KllSVcYZrTZOf2LaYBMZRbbddnwa8AUN0EDN
+ Mbp5GPqfcfKH5BdH6IS5sBZULkSJTiX9uLdpbFmLBjlm2Lf9xRNyP4UmxoWiZA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1721386243;
@@ -52,24 +53,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=sOUyfBiVGmtJrYt3tFPjfh+3WQg4ZAf43XwkwyXJ1rU=;
- b=rJFCx+r3SZjKIznpYSk8MfcvHV9Qf+Gl5ywRwiFiI/4NgIKoBRiFtKrvhcHd2FUoKAK/T6
- 5fmaA4Dla0GkyRjCztCtMGuNT8QXYcMwdJ23lGbju00/z6uCufgtfvO8awSRkM+/QerLpW
- Kwa7a7Obdm+e0otVWQTbSVqJFQOkIhyn281ko/uwqxJhsbrRUG8nvFMTHs3eYTo2AKQ1/F
- Tw/RlcIxmxXMCXNX4KlKGbDuTNtZu2D3AIQ1GlDPZMyt48dch4Ef7uYegDz2Gd/bzCfGR/
- S+CMhJbWvLk0Rm+x98od2fGezyPqvdMpYgAOgLXV0KdPgWYGmW/WXx39GksFng==
+ bh=quXgPSH7M27ZQX6cLnkfno+3CRY9BNqVmokzFfdIUNI=;
+ b=jEGMhysnO1Ejf/mPPpoeKQNgkU7jZEaNnPUedVn9BeYIsbirdSmr6XXvwSJ4XEPvriAaOY
+ qNGqMurBj6icOb+PFT4lm7Sbq9W1GzZKFoeRmYRURi5Guj6ICHyeX9H7HPtHdMww7Qmdfe
+ wbh50iHybMpOW6ihkHRivmKNKofkw+TjBSrWrQ/ZDQcGzuqOr+lzpsNunISfet/9ToI6ms
+ r4JwNv3TXbpcgsqI/kH9t31/vtOToa7sYpSrZs0zB8Ysw/Ls/tF6qGtzBoSyhNfrvN/bCz
+ 6JkN0v/NRyNNjNZD9azgpFVGnHpy8+SqFCFLYci1BMZldIbVVDf2AQdAwOtVcA==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 27/37] board: socrates: Remove duplicate newlines
-Date: Fri, 19 Jul 2024 12:49:04 +0200
-Message-ID: <20240719104948.323791-27-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 28/37] board: softing: Remove duplicate newlines
+Date: Fri, 19 Jul 2024 12:49:05 +0200
+Message-ID: <20240719104948.323791-28-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
 References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 95a68580d04cea32a7a
-X-MBO-RS-META: 3apx5ejw31fquuw68js1ogqmeuya84fc
+X-MBO-RS-META: 7f3bdozkkb8wutr1i1pr3gz47sxuodi3
+X-MBO-RS-ID: b79afc0bbd70cb9daf0
+X-Rspamd-Queue-Id: 4WQRKd59dPz9spG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,60 +92,30 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- board/socrates/ddr.c   | 1 -
- board/socrates/nand.c  | 1 -
- board/socrates/sdram.c | 1 -
- board/socrates/tlb.c   | 1 -
- 4 files changed, 4 deletions(-)
+ board/softing/vining_fpga/qts/iocsr_config.h | 1 -
+ board/softing/vining_fpga/qts/pll_config.h   | 1 -
+ 2 files changed, 2 deletions(-)
 
-diff --git a/board/socrates/ddr.c b/board/socrates/ddr.c
-index bf4894eff67..317c6b0a9f5 100644
---- a/board/socrates/ddr.c
-+++ b/board/socrates/ddr.c
-@@ -3,7 +3,6 @@
-  * Copyright 2008 Freescale Semiconductor, Inc.
-  */
+diff --git a/board/softing/vining_fpga/qts/iocsr_config.h b/board/softing/vining_fpga/qts/iocsr_config.h
+index 4059ed5ad12..62a25b9942e 100644
+--- a/board/softing/vining_fpga/qts/iocsr_config.h
++++ b/board/softing/vining_fpga/qts/iocsr_config.h
+@@ -655,5 +655,4 @@ const unsigned long iocsr_scan_chain3_table[] = {
+ 	0x00004000,
+ };
  
 -
- #include <fsl_ddr_sdram.h>
- #include <fsl_ddr_dimm_params.h>
- 
-diff --git a/board/socrates/nand.c b/board/socrates/nand.c
-index 517a4a0af6a..b8e6e2cd76e 100644
---- a/board/socrates/nand.c
-+++ b/board/socrates/nand.c
-@@ -56,7 +56,6 @@ static void sc_nand_write_buf(struct mtd_info *mtd, const u_char *buf, int len)
- 	}
- }
+ #endif /* __SOCFPGA_IOCSR_CONFIG_H__ */
+diff --git a/board/softing/vining_fpga/qts/pll_config.h b/board/softing/vining_fpga/qts/pll_config.h
+index 40bc8f7f7c1..2b930fa9463 100644
+--- a/board/softing/vining_fpga/qts/pll_config.h
++++ b/board/softing/vining_fpga/qts/pll_config.h
+@@ -80,5 +80,4 @@
+ #define CFG_HPS_ALTERAGRP_MAINCLK 3
+ #define CFG_HPS_ALTERAGRP_DBGATCLK 3
  
 -
- /**
-  * sc_nand_read_byte -  read one byte from the chip
-  * @mtd:	MTD device structure
-diff --git a/board/socrates/sdram.c b/board/socrates/sdram.c
-index d0415d26ce7..00a3f2b31e7 100644
---- a/board/socrates/sdram.c
-+++ b/board/socrates/sdram.c
-@@ -14,7 +14,6 @@
- #include <spd_sdram.h>
- #include <linux/delay.h>
- 
--
- #if !defined(CONFIG_SPD_EEPROM)
- /*
-  * Autodetect onboard DDR SDRAM on 85xx platforms
-diff --git a/board/socrates/tlb.c b/board/socrates/tlb.c
-index 0cc675781d1..b4ddb1b1739 100644
---- a/board/socrates/tlb.c
-+++ b/board/socrates/tlb.c
-@@ -28,7 +28,6 @@ struct fsl_e_tlb_entry tlb_table[] = {
- 		      MAS3_SX|MAS3_SW|MAS3_SR, 0,
- 		      0, 0, BOOKE_PAGESZ_4K, 0),
- 
--
- 	/*
- 	 * TLB 1:	64M	Non-cacheable, guarded
- 	 * 0xfc000000	64M	FLASH
+ #endif /* __SOCFPGA_PLL_CONFIG_H__ */
 -- 
 2.43.0
 
