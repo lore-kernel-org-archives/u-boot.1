@@ -4,73 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EACAC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0B0C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:44:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6D5088B9E;
-	Fri, 19 Jul 2024 12:30:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 499BE88B19;
+	Fri, 19 Jul 2024 12:44:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eRn1RMyE";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Nwy3skP6";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="VRiEpHDF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B4B788B87; Fri, 19 Jul 2024 12:30:29 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A310F88B19; Fri, 19 Jul 2024 12:43:57 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C906788B8A
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:30:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CE5F884C5
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:43:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ spf=pass smtp.mailfrom=mmkurbanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 7C707100008;
+ Fri, 19 Jul 2024 13:43:53 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 7C707100008
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1721385833;
+ bh=XePHiUHhYBpZ+Dp3HCUOBxFOQZUn9UtDxOqpem15d6I=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=VRiEpHDFmQpMZtZ3B1qkhWSea19bAbAhSTC3rHHZ8ViUJ9FWhuwRko2QTtYowHg7I
+ fjyv69smsyw+sXy2dfba1rsqlwt18gCYcvYmyUgBL4meury764UO35A1AYGvqQnzcP
+ aHsKNdKJ2UQzVoug+xoKVROSQOSgJYQV3MoCaWcnOSH2KAZOADn+apdgByIvqryR98
+ 8k7S3zicZJbSgjzaF+e06ZXMZbSmaUjqZICDTYMGviNnFM3y3b9JCy1oqRSRhY4mue
+ tCJLs8CH4eEx/khXe6a9oeXzw8pIQxHOgf5NkJtVGwjw5AQqT2pclNRC/xRl4yrXdE
+ oqe7pkA/Hm4pA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WQQtC47gWz9sjL;
- Fri, 19 Jul 2024 12:30:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721385027;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0RbhfCNPBfBWGO8rRKE4cNM9wLT6ZrMxv/WSDcUXajA=;
- b=eRn1RMyEgfkFeqkY9Y8hZktqRTvMmIE+o8S/znB1TtgqhZmEK2Vh3O1z+5Vi9MBy22wQwR
- rLMNSe5sgM1k5ei9BFyVhFV5ZA3/qjWQUDc+cmK0m+wOHl2Rw3rt1KzMgonA2u31Ew6486
- UevMYz13DqE3VOraRpnTlQAIl6YmHXQ+1K2IdGTj9R+u+3skM4UqhrkAAyLaNH7kPp2hA0
- pcLfI+wu4bLQgGF9pBDFTLidyFYsI+V01UtkW0cjtPeANSk8CGypAkH1/7Vf4ybth0cD3g
- rZjwofvC6qINJCNe9zldHbCKGaVnjO5+PBGYZwDopUFU/wTk0oJg3lyA/g2PgQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721385025;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0RbhfCNPBfBWGO8rRKE4cNM9wLT6ZrMxv/WSDcUXajA=;
- b=Nwy3skP6jQCQWsnv6W4MbaNBR/s6tqiBhlAcVzExULYDXO/SFhAQBTQclLXM2BfyJ2Bn9B
- KVr8foWCiv45jAI1H4Uwat8OKNUnr/I5hz6gKMLxdI6Mun/esE7i4i2aPdy5SU1oMeV/rp
- J1mg9n46YTpd3JzGc55ct9u3Rs89EfgUSDLualKDT14F3jtrCBmtRHQSkTkbUBws8B8PJG
- EfgTBWav2KsZEEbA3TA35DZmfTaAjKislwGczNXdfDM1rlH58oFIJ7OFYtvxLTnNS+e6GT
- ImivU9O9i3AmrSmKQU+zP2vv+8Mt+oCp0StHYommggNgSeDOoOEL37U0ces9vw==
-To: u-boot@lists.denx.de
-Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
- trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 14/37] board: engicam: Remove duplicate newlines
-Date: Fri, 19 Jul 2024 12:28:08 +0200
-Message-ID: <20240719102934.322997-14-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
-References: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri, 19 Jul 2024 13:43:53 +0300 (MSK)
+Received: from [172.28.66.131] (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Fri, 19 Jul 2024 13:43:53 +0300
+Message-ID: <94c1d54b-24f1-43a1-b56c-7af73cc7596c@salutedevices.com>
+Date: Fri, 19 Jul 2024 13:43:52 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: jgwrjm4trn45xiakxrd1j44prrysooxq
-X-MBO-RS-ID: e4a60702088b02250fc
-X-Rspamd-Queue-Id: 4WQQtC47gWz9sjL
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/2] cmd: ubi: check 'updating' before calling
+ ubi_more_update_data()
+To: Tom Rini <trini@konsulko.com>, Dmitry Dunaev <dunaev@tecon.ru>
+CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>
+References: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
+Content-Language: en-US
+From: Martin Kurbanov <mmkurbanov@salutedevices.com>
+In-Reply-To: <20240616133426.123299-1-mmkurbanov@salutedevices.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 186588 [Jul 18 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: mmkurbanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
+ 186c4d603b899ccfd4883d230c53f273b80e467f,
+ {Tracking_from_domain_doesnt_match_to}, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/07/18 08:29:00 #26061289
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,25 +102,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop all duplicate newlines. No functional change.
+Hello. Please, ping
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
- board/engicam/imx6q/imx6q.c | 1 -
- 1 file changed, 1 deletion(-)
+On 16.06.2024 16:34, Martin Kurbanov wrote:
+> If 0 is passed to the 'bytes' parameter in the ubi_start_update(),
+> there is no need to call the ubi_more_update_data(). Otherwise,
+> there will be a double-free of 'vol->upd_buf'.
+> 
+> Also check that the ubi_start_update() was called before calling
+> the ubi_more_update_data().
+> 
+> Martin Kurbanov (2):
+>   cmd: ubi: remove redundant initializations
+>   cmd: ubi: check 'updating' before calling ubi_more_update_data()
+> 
+>  cmd/ubi.c | 21 +++++++++++++++------
+>  1 file changed, 15 insertions(+), 6 deletions(-)
+> 
 
-diff --git a/board/engicam/imx6q/imx6q.c b/board/engicam/imx6q/imx6q.c
-index d799fe6526a..a8d54128476 100644
---- a/board/engicam/imx6q/imx6q.c
-+++ b/board/engicam/imx6q/imx6q.c
-@@ -5,7 +5,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--
- #include <asm/io.h>
- #include <asm/gpio.h>
- #include <linux/sizes.h>
 -- 
-2.43.0
-
+Best Regards,
+Martin Kurbanov
