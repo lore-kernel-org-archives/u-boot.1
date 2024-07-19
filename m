@@ -4,70 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7620CC3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E10BC3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3770288C25;
-	Fri, 19 Jul 2024 17:05:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E163A88B81;
+	Fri, 19 Jul 2024 17:12:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a5LVzHOF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sgXZfZOT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4686A88BF2; Fri, 19 Jul 2024 17:05:37 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id CB3ED88B8B; Fri, 19 Jul 2024 17:12:46 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 310B088C1F
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:05:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95CD888005
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b7a3b75133so10838246d6.2
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:05:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3d9e13ef8edso1222538b6e.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:12:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721401534; x=1722006334; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y25LCJxgr3g60E58hLn4n+uGc8NTGd6TkeiaqdwV4II=;
- b=a5LVzHOFZ56PoSFDurMwYGuMYtnkgUN9EIFIxrp7qvqmJrA0oQkCzbMOCvPSs9Thhh
- 9UBeoTkFkPzy/cIk6pTxKSWlcBh3JW2zHLf6fymPV8x/cg9z8aUHQElk4gkO2KADYWEy
- m7K5wbLKpYVY6VrEGjwklvt8NhtdCCCTa2CXY=
+ d=konsulko.com; s=google; t=1721401963; x=1722006763; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=esz43Ta7zVl9mw3ppCZKoaOrPOLkcPPtrA/c2OtokTg=;
+ b=sgXZfZOTyOS+GnDrrEsOkn+UDP9CgeQlZ5E+S9FaxGjvR92ggMoEIAaotSz197U+4P
+ 3ie8CopnCbRTweRLD9POXyKewbETK/Wy8ueapSMqzb8+No9yoJaNsezKbrmtkweAgtxP
+ jWpgZW5xzjOqR7Q1L9eum343nefwPmjyS5tqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721401534; x=1722006334;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y25LCJxgr3g60E58hLn4n+uGc8NTGd6TkeiaqdwV4II=;
- b=EVVEbevo6At8mRia4i3klUe9AV9+PsMCs1G7fawqvAfXj+9PSb4Si+SWs5lppAbALZ
- qyQGj6Kc1P7LO/ooJ+zNfmWORrtzO48/O1AvPOiaEZGo2igFqVJkTYzSZJckKeUhP0z1
- /BqnM7dEPJOOyTb4CdKOXXj4RvF6hxeYwV+iy5ilagFvjQf2RcqyQiMnUkXvlBXkwAnP
- kksgZha2ZSnRybkiQb60CAQmhwdH7mCxO7PUyJLZNy1CUne5041f/QyEGCNUc6HGSWr7
- II3SDZie+64K0T1wzG2JxMKErvgF76OZt0WeGKUcpctPdWTmX1EX2S3aph2XuwCZDu7t
- Oihg==
-X-Gm-Message-State: AOJu0Yx0qE7z7Q2eHY1l7YcVU8DQyct0PC18TQA4S2ybhYEPDJzmxal4
- ZO1vtgj7CUFonVO1kGlfAzT2Y7OQ7zoDRz/ZYb7XVsyq6zERd8rco7t4YGbuHormXEfWcH0xIp5
- XGOwTAyx0YTqV+13Wb0y+Zj7KXhRP1EPbRgn7
-X-Google-Smtp-Source: AGHT+IHuoE3jben27XeYFZ8j5ICZgQiXZMXFwO4vPRr4we8POxQNQj0SIRCTV0t/chiufSjRM2NXgCLuCbyph3ASBGA=
-X-Received: by 2002:a05:6214:21c9:b0:6b4:f9b0:e8c4 with SMTP id
- 6a1803df08f44-6b94f02a935mr3706836d6.10.1721401534039; Fri, 19 Jul 2024
- 08:05:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721401963; x=1722006763;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=esz43Ta7zVl9mw3ppCZKoaOrPOLkcPPtrA/c2OtokTg=;
+ b=RQU+AMOM3O2RzhTOoO6yTkdf59AMs1VEoR30/kHs+hbV+dJYnWaSqK3dU54WbIdHBW
+ I42J32v4RdSfAC/UDZp+8ZfwZe53w2VO2YTKIyj0Lg2gWF6rEit74ICu138oAQ5yIoq0
+ JVBzLNIGr4bCPgXa3rI92FPflIvDmJybPo7Kn+yTLmlrtvX3LROp7nl1p0gV7bfHB+bU
+ 9xemQ3vvc95WtwitF6SFasC9d0zdMgb2gH6vPJDkTHCqZd0B3kzaAOVronpNKLoAD8o/
+ smYKItJLv+0PbZnyfN+25zx2dYoT9XD2BEWQMqZqmqTEcKopyNTIsUPBchulxmyNUiEV
+ hHHw==
+X-Gm-Message-State: AOJu0YxjI6UgAJknp3g90FEUPuqrbAH+911Vi4hZiKGLSI+7sxFgW6Ji
+ lwnGtc6DLWMWVD5At/GypT7LZQ6Ld3Y1rv1VPH+CgD5bixqr+CHPvXYlADSkqFI=
+X-Google-Smtp-Source: AGHT+IE5E6oR9+TPijHpoDtMVXjF+W8N6PgQkrfhmI01WLu7+yqYohUfYazQotWMIxNDuZ+T4e4zPw==
+X-Received: by 2002:a05:6808:1595:b0:3d6:4eb3:3c54 with SMTP id
+ 5614622812f47-3dae629b9a3mr117252b6e.11.1721401963269; 
+ Fri, 19 Jul 2024 08:12:43 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-708f617399csm315996a34.60.2024.07.19.08.12.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jul 2024 08:12:42 -0700 (PDT)
+Date: Fri, 19 Jul 2024 09:12:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sumit.garg@linaro.org,
+	jerome.forissier@linaro.org
+Subject: Re: [PATCH] tools: Add script to update git subtree projects
+Message-ID: <20240719151240.GA561963@bill-the-cat>
+References: <20240719141245.49186-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
-References: <20240719114850.28134-1-Zhiqiang.Hou@nxp.com>
- <20240719114850.28134-2-Zhiqiang.Hou@nxp.com>
-In-Reply-To: <20240719114850.28134-2-Zhiqiang.Hou@nxp.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jul 2024 16:05:23 +0100
-Message-ID: <CAFLszTgmhnQBO4LtXfY_COuVWPA1TANQwGASDCpf5bm2OFd5xg@mail.gmail.com>
-Subject: Re: [PATCHv1 1/3] mp: imx9: add cpu command support
-To: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
-Cc: u-boot@lists.denx.de, sbabic@denx.de, festevam@gmail.com, 
- uboot-imx@nxp.com, trini@konsulko.com, peng.fan@nxp.com, 
- Tao Yang <Tao.Yang1@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="my2T8t0Dm6qPKtaw"
+Content-Disposition: inline
+In-Reply-To: <20240719141245.49186-1-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,25 +90,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zhiqiang,
 
-On Fri, 19 Jul 2024 at 12:28, Zhiqiang Hou <Zhiqiang.Hou@nxp.com> wrote:
->
-> From: Tao Yang <Tao.Yang1@nxp.com>
->
-> Implement the cpu command to kick cpu core to run barematel or RTOS
-> applications.
->
-> Signed-off-by: Tao Yang <Tao.Yang1@nxp.com>
-> Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+--my2T8t0Dm6qPKtaw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Jul 19, 2024 at 07:12:43AM -0700, Raymond Mao wrote:
+
+> Recently we are introducing multiple git subtree projects and
+> it is the right time to have a universal script to update
+> various subtrees and replace the dts/update-dts-subtree.sh.
+>=20
+> update-subtree.sh is a wrapper of git subtree commands.
+>=20
+> Usage: From U-Boot top directory,
+> run
+> $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
+> for pulling a tag from the upstream.
+> Or run
+> $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
+> for cherry-pick a commit from the upstream.
+>=20
+> Currently <subtree-name> supports dts, mbedtls and lwip.
+>=20
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  arch/arm/mach-imx/imx9/Makefile |  4 +-
->  arch/arm/mach-imx/imx9/mp.c     | 81 +++++++++++++++++++++++++++++++++
->  2 files changed, 84 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm/mach-imx/imx9/mp.c
+>  dts/update-dts-subtree.sh | 48 ----------------------
+>  tools/update-subtree.sh   | 86 +++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 86 insertions(+), 48 deletions(-)
+>  delete mode 100755 dts/update-dts-subtree.sh
+>  create mode 100755 tools/update-subtree.sh
 
-This seems to be adding more code to a deprecated API. It should use
-UCLASS_CPU and driver model. See the comment at the top of cpu_func.h
+This looks good, but please update the documentation as well.
+We reference dts/update-dts-subtree.sh in doc/develop/devicetree/control.rst
 
-Regards,
-Simon
+--=20
+Tom
+
+--my2T8t0Dm6qPKtaw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaagmEACgkQFHw5/5Y0
+tyw+CAv/X7qZVKrPJJgP/jY7/71BC+vMkL2oPh8TdgzTryHlX7qaiaIf4NsR9zzQ
+9MW7L2prXH4QUreqmurXPY1pms2YNay5fN/ein8qJwrQWMIBxBI9XR6zadogxrmI
+Q7U6YqGGDNfgvX6e69juSBJOHPOYdkDTQPv1zffNSj1uyYN8gou5ihoqAo0DU7t1
+mQ54BAxJAYat01nyn3E9AcgJRqEo2MByNC0cbHyPKriHK7fMhaqcV0Pv2AodUDHe
+53pgoH983ONHN/+ZY8uRMfaJKAF1uePdWRq4oK/l38HUiSFvM+eZr87NlQDt+b3/
+rm9skYtQlULRuHLdX15moFNQMxGTNW7FQi5hkzVZvg+WLZFkB9t/3NClMPKq7grr
+j6cff0aDRIRsECYle9lM6HJF6moCP1N5IZjd0o7HI+0R2F59pRM/IxCXH5tiET5w
+j6LrIBf1YJJAfoRBVDCHmxo+mYqv1BWwsZlj8Wp3TDXdkFUVBqpfdkAi2WRjT0yT
+yY7flh6u
+=WhTY
+-----END PGP SIGNATURE-----
+
+--my2T8t0Dm6qPKtaw--
