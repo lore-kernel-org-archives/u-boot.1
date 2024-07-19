@@ -4,44 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02C8C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 22:22:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6812DC3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 23:12:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F37EF8855C;
-	Sat, 20 Jul 2024 00:22:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4529588418;
+	Sat, 20 Jul 2024 01:12:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pEZaL8BX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E8D688B49; Sat, 20 Jul 2024 00:22:01 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2FAC3884C3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 00:21:59 +0200 (CEST)
+ id 1FBE08845A; Sat, 20 Jul 2024 01:12:09 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E09A883BA
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 01:12:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E3CB6169E;
- Fri, 19 Jul 2024 15:22:23 -0700 (PDT)
-Received: from [127.0.0.1] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 13EF53F73F;
- Fri, 19 Jul 2024 15:21:57 -0700 (PDT)
-Date: Fri, 19 Jul 2024 23:21:54 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-CC: Jagan Teki <jagan@amarulasolutions.com>, linux-sunxi@lists.linux.dev
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_sunxi=3A_dts=3A_arm/arm64=3A_up?=
- =?US-ASCII?Q?date_devicetree_files_from_Linux-v6=2E10?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240717175153.GR561963@bill-the-cat>
-References: <20240717143415.343827-1-andre.przywara@arm.com>
- <20240717175153.GR561963@bill-the-cat>
-Message-ID: <191A0F66-E2AE-4D1B-ACBE-E411E135BB61@arm.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-062-143-093-080.um16.pools.vodafone-ip.de
+ [62.143.93.80])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4AD803F385; 
+ Fri, 19 Jul 2024 23:12:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1721430723;
+ bh=s0/o5bObUJ2ynRsgsx/IAcB3eohKOmd8yjDzS1WYzss=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=pEZaL8BXMq4MNfgt2I8Hzppom93gd+KukoP2SzQz8KEBajjWVNlgOZJfKVFrGZIzP
+ n3J59wyNPOj1ZAhKP3y757rUYjGdAcN1Mz858r1Rz1Cz1sTOEdemI4oVpveXbcMblA
+ Erv+mpQx9TzFFGK7YTKV8KqnW84LKzh9/4vPKLYUJeeUj1pwNdZiumQ5qEyhr615MX
+ SFwrVvQ1E0+9Q89RjVR8xpGUBA2us2cehkOyGnlI7lxMjwavkTaHB6y8gNK2FtRTlU
+ 6z3yCL87528DpG/bpsi1XGIjKT83I66wzP4j8+Zr3hPOgOgYD+9F7/zD3hemlz+xQT
+ 6Z2XZ6nmK98fg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Minda Chen <minda.chen@starfivetech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>
+Cc: Hal Feng <hal.feng@starfivetech.com>, E Shattow <lucent@gmail.com>,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] board: fix compatible property Milk-V Mars CM
+Date: Sat, 20 Jul 2024 01:11:58 +0200
+Message-ID: <20240719231158.50416-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,59 +73,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-Sorry for top posting, am on the road=2E
+For the Milk-V Mars CM (lite) we have only been copying sizeof(void *)
+bytes to the compatible property instead of the whole string list.
 
-First: The Allwinner drivers in U-Boot work with mainline kernel DTs for a=
-ges, so there are no code changes required=2E
-We manually sync the DTs from the kernel for years, but I always do one ch=
-ange:
+Fixes: de3229599d4f ("board: add support for Milk-V Mars CM")
+Reported-by: E Shattow <lucent@gmail.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ board/starfive/visionfive2/spl.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
-In kernel v5=2E13 the Allwinner IRQ controller (not the GIC) DT binding an=
-d DTs changed in an incompatible way, and some critical devices now route t=
-heir IRQ through that controller instead of to the GIC=2E If an older kerne=
-l sees such a new DT, some critical devices fail to probe due to that, and =
-the kernel does not boot=2E Using the old DT routing fixes that, at the exp=
-ense of losing some advanced power saving features=2E
-So in the interest of  better compatibility with older kernels and $fdtcon=
-troladdr (default for UEFI boot), I always kept the old way during the U-Bo=
-ot sync=2E This affects all devices with the popular H3, A64 and H6 SoCs, a=
-mong others=2E A20 and older or H616s are not affected=2E
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index b794b73b6bd..f55c6b5d34c 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -170,23 +170,32 @@ void spl_fdt_fixup_mars_cm(void *fdt)
+ {
+ 	const char *compat;
+ 	const char *model;
++	int compat_size;
+ 
+ 	spl_fdt_fixup_mars(fdt);
+ 
+ 	if (!get_mmc_size_from_eeprom()) {
+ 		int offset;
++		static const char
++		compat_cm_lite[] = "milkv,mars-cm-lite\0starfive,jh7110";
+ 
+ 		model = "Milk-V Mars CM Lite";
+-		compat = "milkv,mars-cm-lite\0starfive,jh7110";
++		compat = compat_cm_lite;
++		compat_size = sizeof(compat_cm_lite);
+ 
+ 		offset = fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins/mmc0-pins-rest");
+ 		/* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_NONE) */
+ 		fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+ 	} else {
++		static const char
++		compat_cm[] = "milkv,mars-cm\0starfive,jh7110";
++
+ 		model = "Milk-V Mars CM";
+-		compat = "milkv,mars-cm\0starfive,jh7110";
++		compat = compat_cm;
++		compat_size = sizeof(compat_cm);
+ 	}
+-	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
++	fdt_setprop(fdt, fdt_path_offset(fdt, "/"),
++		    "compatible", compat, compat_size);
+ 	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model);
+ }
+ 
+-- 
+2.45.2
 
-So my plan was to migrate the latter group ASAP (after the v6=2E10 sync), =
-and then maybe the others in the next cycle, which means pulling the plug o=
-n original Debian Buster kernels, for instance=2E 5=2E13 is three years old=
- by now, so I guess this might be fine now=2E
-
-Does that make sense?
-
-Cheers,
-Andre
-
-
-
-On 17 July 2024 18:51:53 BST, Tom Rini <trini@konsulko=2Ecom> wrote:
->On Wed, Jul 17, 2024 at 03:34:15PM +0100, Andre Przywara wrote:
->
->> Sync the devicetree files from the official Linux kernel tree, v6=2E10=
-=2E
->> This is covering Allwinner SoCs with 32-bit and 64-bit ARM cores=2E
->>=20
->> Besides mostly cosmectic changes, this adds cpufreq support to H616
->> boards, Nothing that U-Boot needs for itself, but helpful to pass on
->> to kernels=2E We also get the =2Edts files for the Tanix TX1 TV box and
->> three Anbernic handheld gaming devices=2E
->>=20
->> As before, this omits the non-backwards compatible changes to the R_INT=
-C
->> controller, to remain compatible with older kernels=2E
->>=20
->> Signed-off-by: Andre Przywara <andre=2Eprzywara@arm=2Ecom>
->
->This reminded me I needed to see that v6=2E10-dts is tagged upstream now=
-=2E
->So, for the record, when can we move sunxi to OF_UPSTREAM? Or what's
->blocking it? Thanks!
->
->--=20
->Tom
