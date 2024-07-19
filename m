@@ -4,89 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785D3C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:57:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3BA2C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 11:00:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBE3288BFE;
-	Fri, 19 Jul 2024 12:52:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F25988B7C;
+	Fri, 19 Jul 2024 13:00:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZYYop1sI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PI3XhSSY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79EAF88B93; Fri, 19 Jul 2024 12:52:40 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id CF98988BAB; Fri, 19 Jul 2024 13:00:17 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F7DE88B8B
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:52:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEE2888001
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 13:00:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52e991fb456so1077611e87.0
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 03:52:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42793fc0a6dso11334585e9.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 04:00:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721386357; x=1721991157; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=58/jv5tptFNOiwfxFhbasDAzVtRJkaZAGxlA4W5Tws8=;
- b=ZYYop1sIjcCh1ey0z66dBUjrEz+P2ldc4k0b1wC64rd5XuvPAjB5AMIhJDwNU9Gmeu
- BsGVxAYbwQL0EojdamrtQW5r0bhpim7A6BYl/Wy+HSjmmVhONNqs1RR+SedbW2BqInHx
- zsmTdNQv3ZEISC0n63KxWyRs/j9Lg3Xa96bEztJQngwVWjWycW6PbanRuCVfGgXUr57K
- SXLX+UOp6Hbo5nqOGV6/HnW8zUAKtJsk9K2vKaKnSsyt9esDnRqtHFRRCcGah7ra69Pb
- ek880GCQfp3RGgY/1GG6C2sequ2XfiFh7Vmir1ghdJK6h1TRK9+ET7baYFH1jZxomzh+
- 99pQ==
+ d=linaro.org; s=google; t=1721386815; x=1721991615; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WE+v9/IYadKTGvIviz3OHQ81kCUhYJKYbMlayf/9YvE=;
+ b=PI3XhSSYC4Ro73hBn9WWkk963XS2X9DhSc3eSCGu9W3To0P9sQhiLIyQfU/hrafTvu
+ obZCX2t/RrHLGDq9h70Y6PCMHf1lctS1dXiDtZQhcm3zgYR6eRCYunwhnOKC/LHI6FIi
+ pxDNNFxA1okKAp6Njhm4piMxB03E8ZhXqWVLq0oh1I7ul4DRVCVVB1u0HwGm6hHjEXNS
+ rj9Q7lIrcZuyFB27gA/eYHAh9ISbfWFHZaxTzJ67D6qeCRVvtb9STIByv2z/Mf4eGj6W
+ o1NSwjuSrXXfxnH9gMjOvVitFk9J0fdHqWVuNiTe8TBMwRp5hm172190BqCrZfNmAiKj
+ SDfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721386357; x=1721991157;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=58/jv5tptFNOiwfxFhbasDAzVtRJkaZAGxlA4W5Tws8=;
- b=Ud+cce/xwLNX9cvdzFs5KacyzQv2J1DTooIS8mMU5aHitFbN5kdf2kUxrOm9YNLHxt
- mV+soXemPd+fCJ+AG6XiQ+9fv1v2l3VM7eiZRl4Qiqj4wOcgOFrqe6TZipf78eWTNxFF
- KKtDLfroEG6hBaq8NePDm2R7Uav8evntmWrUmTrWAcXLWP1UdYEcFdXkU3QR18zoHmqu
- 4mYtdwUsNZoDGym9yJDQNItvSCd+QM6S9Tnm1vR9KfbER2qPuHZcKo8I1SW5YIFzkKyq
- cpD/r1QnimWoSvwD5oZ0ur8X2sBifaJPRp4084aZY+WdybFSu5KBMYrefKMshm3BvPFZ
- R8xw==
+ d=1e100.net; s=20230601; t=1721386815; x=1721991615;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WE+v9/IYadKTGvIviz3OHQ81kCUhYJKYbMlayf/9YvE=;
+ b=aCMQXr26GKyFRSmWvNCvjR3u82gmTuwQw0YyGUIZZSU7Qnd2FMqjxnR2mG8s3rwAmT
+ p4ldNsdp+Ovx4O4o/2bkAvVL5mLXeC2UORYZiBEkP27EjOXwA/JaE6QrGJTKQll4J3Ia
+ gpDH3DOhJ+mByGjuBY4++TlhTJhbUT4q0JWf9sIyogfQblFuQmIKgz95lMVy9y1gLrDa
+ IZjFIPsQOV6U1wAuGNZhLQ5dzNZ2V3103M48g531KbXH5rwDDntA2ejStGU6KWt2X0h2
+ /DdZowdnopkKcR+25G5qUzNJ48G91+PPvbXSUkp+h3/5fj5VFwtzZxldHQJvQqsv3Xgt
+ oUNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjJoH1QvVbV4iFogQa44rNmjC0g5mg8rh/pvWV4X3jbRlfhkJ+HaRunpLE9QzaRdSA5n0qrkLf1himPeOBpddMHWRbUg==
-X-Gm-Message-State: AOJu0YwFFRZ+t+31eqfwwf4sagbTzDDUV7ZR7FkqyRUb22dy3qeKjh0F
- HPBz16onuZ7eDaXEOWWflFhVFTDVnPNdijKyEptLRpDLDV19TYKmROYlU0kgM8xizjxHAsoxZHZ
- lUSv8MtbGBcByJ5IQkBPEqMN50l8=
-X-Google-Smtp-Source: AGHT+IG8oZQ0npnXQUEY7YaoZDRcydfhBZ8hZanYKC3e90aGGaAfHYcMhkwRaqotdi8FLwfH5xNIzOUcyOCblDAqLIc=
-X-Received: by 2002:a05:6512:6cd:b0:52c:ca8d:d1c with SMTP id
- 2adb3069b0e04-52ef09e237dmr1272031e87.2.1721386357175; Fri, 19 Jul 2024
- 03:52:37 -0700 (PDT)
+ AJvYcCUgievES29UJF1bhWjMNhzCrE/jbQEP7Xeq0+dLBihfsoTvyFkfXDnyl41/xbFdEXTc9iyLubAsDboi4iIGEGUNsQDccQ==
+X-Gm-Message-State: AOJu0YwUTybB0wk7MbdCNUbH+4llfg1xQj07JvBMwWHkCJuUyvk7yD6e
+ jIwa+OlkLYw3g8LlVf/HCgoWmmpwfKjYBZICI16HBZYq79mORg+yjnD7gRwCTzE=
+X-Google-Smtp-Source: AGHT+IFyt935sJtRMbaRH96TZOE204ek6t0wusNmUSFLDlqEJOiB/L7Aq18DYj6RsvMqLgIotkGfMg==
+X-Received: by 2002:a05:600c:1f95:b0:427:abed:3608 with SMTP id
+ 5b1f17b1804b1-427c2ca7a2fmr45312375e9.5.1721386814985; 
+ Fri, 19 Jul 2024 04:00:14 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427d6697c3fsm20556055e9.0.2024.07.19.04.00.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jul 2024 04:00:14 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/4] ufs: properly fix cache operations
+Date: Fri, 19 Jul 2024 13:00:09 +0200
+Message-Id: <20240719-u-boot-ufs-dcache-fixup-v1-0-b044fc9564e9@linaro.org>
 MIME-Version: 1.0
-References: <1709694011-683-1-git-send-email-ganboing@gmail.com>
- <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
- <CANV2PTMPrQVZhWvNFxi8-RA0ZC4UAF1sHBbHiipUc01aWx6oqg@mail.gmail.com>
- <0eda64cb-4ca8-f8bc-7515-6d2a2d3d4638@gmail.com>
- <CANV2PTP3o1Q2JPCZO8Ewfye+oz9f3TVNTYhYZ3EAKtdYAhvkHg@mail.gmail.com>
- <f355e582-cb52-e4c5-538b-26bcf69f0a2c@gmail.com>
- <CANV2PTOzgyzYSbNRJXuvLnMDAT-mDL8o1tU7d72qTKQDMdt_Uw@mail.gmail.com>
- <CANV2PTP2hpd5m17+_T7zp2V6w03d=0rgAuwukyC0LHVYxLtRuw@mail.gmail.com>
- <ZpZSmdrst4z_Q4JQ@swlinux02>
-In-Reply-To: <ZpZSmdrst4z_Q4JQ@swlinux02>
-From: E Shattow <lucent@gmail.com>
-Date: Fri, 19 Jul 2024 03:52:25 -0700
-Message-ID: <CANV2PTOgP0Nc=9gM9gA=hL6b3qkDDsmdP99D2bOF0U+7x4RKjw@mail.gmail.com>
-Subject: Re: [PATCH] riscv: dts: jh7110: Enable PLL node in SPL
-To: Leo Liang <ycliang@andestech.com>
-Cc: Bo Gan <ganboing@gmail.com>, Hal Feng <hal.feng@starfivetech.com>, 
- "rick@andestech.com" <rick@andestech.com>,
- "trini@konsulko.com" <trini@konsulko.com>, 
- "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, 
- "duwe@suse.de" <duwe@suse.de>, "namcao@linutronix.de" <namcao@linutronix.de>, 
- Xingyu Wu <xingyu.wu@starfivetech.com>, Mason Huo <mason.huo@starfivetech.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADlHmmYC/x2MywqAIBAAfyX23IK9MPuV6GC65V4yNCOQ/j3pO
+ AwzGSIFpghTlSHQzZH9UaCpKzBOHzsh28LQirYXslGYcPX+wrRFtEYbR7jxk060SqtRaCXHboB
+ Sn4GK+M/z8r4fkLgU32kAAAA=
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=985;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=+OvyvowGCVp1isBZr978pyBMDj+qPXv56diUjrE7gVc=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmmkc7GEyEF2Mv5Sjop2XtmUWYaOgymfKbr8tSGvqt
+ VISwHCqJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZppHOwAKCRB33NvayMhJ0XT3EA
+ CpwuTLZd6gryeT08tQnghcJLJnQomF1GBIwsKzF7y09dtv4arQMEencEmAY06BhocqKvAYVTjbUASy
+ k+nauJZhrUdJKs50U5FNsMtA9H6EuWA0JB834OJIjDVwCNbhhnwF2Rd3g1cOGDNGqjXjBAEgvhf1XT
+ lZ4OWJ6cNQLn5p12QsNImk5sZpBcINZfAh/PeXSsMlMH2KesVq6iVMZnHfDjSNTwwT6AuHnvhYys+A
+ nyHDzZnEMMlGbNGNguBxrMBmdoFDIQMC1sJexF9UvRz47q0UNP5L2mJov2vQzXMe5XguVqbdoNV7+n
+ pKYFZ7jXBYQdz/m/5pNc5DTzX2Cvsk4i/d0n0S5V9z8mlUpWQJhgN6qLuwZ3xQnT2UuBBiD6lNK23+
+ wzVnLYl0hs/UhpXcf2WXdWoR/dAHIkip46rtSVzzXizQ/XSv5n2Re/o184NGPf0GVD/VWRV+wAm75r
+ RyIGBiOgRS/J15OE2ThDwlWrSURpUE+YznllaXcZTuwhJ8xNe6GeDSKcjGkBtHM0zFUEkonDHshfHc
+ /5h88sXOnI9X6v9umN1KjSdbC1D12IApJ3aBoahYxKCDzVMtzMocVfCiHb3MfMNnXdIH4kHRJyeaYa
+ u87HFyWN91+k3uQbbx930IAHhewTPsCUphtd4+dRtvtFTfjSRftPpua3/vlQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,33 +113,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 16, 2024 at 3:59=E2=80=AFAM Leo Liang <ycliang@andestech.com> w=
-rote:
->
-> On Thu, Jul 11, 2024 at 12:55:05PM -0700, E Shattow wrote:
-> > [EXTERNAL MAIL]
-> >
-> > Ping. This regression still exists and is now in stable release.
-> > Should we revert this change or how must it be fixed?
-> >
-> > -E
-> >
->
+We experience huge problems with cache handling on Qualcomm
+systems, and it appears the dcache handling in the UFS core
+is quite wrong and causes all those issues.
 
-> Hi all,
->
-> I think I could revert this commit for now
-> if we cannot find the root cause and solution right away.
->
-> Best regards,
-> Leo
->
+This serie fixes the dcache operations, and fixes a big data
+write corruption due to a wrong data end address calculation.
 
-Yes I agree this needs to be reverted. There are more than just
-failures of older SD card profiles within U-Boot, there is also the
-failure of newer SD card profile device access from Linux Kernel when
-U-Boot internal fdt is passed on to Grub2 and then Linux Kernel (6.10
-upstream). We should test for these problems before bringing this
-change back.
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (4):
+      ufs: allocate descriptors with size aligned with DMA_MINALIGN
+      ufs: fix dcache flush and invalidate range calculation
+      ufs: split flush and invalidate to only invalidate when required
+      ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
 
--E
+ drivers/ufs/ufs.c | 74 +++++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 44 insertions(+), 30 deletions(-)
+---
+base-commit: 3f772959501c99fbe5aa0b22a36efe3478d1ae1c
+change-id: 20240719-u-boot-ufs-dcache-fixup-d9a980a97835
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
