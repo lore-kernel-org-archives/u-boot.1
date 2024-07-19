@@ -4,101 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCBFAC3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 12:45:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE883C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 13:50:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 648D688C08;
-	Fri, 19 Jul 2024 14:44:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 892C088BA8;
+	Fri, 19 Jul 2024 15:50:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mRJCw6c7";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="GuwWKPlU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28E1C88BC7; Fri, 19 Jul 2024 14:44:05 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7479388BBA; Fri, 19 Jul 2024 15:50:50 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A05888BD0
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 14:43:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40C3D88BA8
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 15:50:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-52ea7bdde68so1745696e87.0
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 05:43:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721393037; x=1721997837; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=llK4xT0In7ILZ11aux3dptSqD1KXjlG7HnszAqFZZgU=;
- b=mRJCw6c7Vk+2Md0eK9L/MH3H2UPkV7CUvtflOoTgejhMV+D3ULQVFux0ad7yWoByiz
- aqLCALmSQfnD7Ek2vv7NRgZTVbScu+osQBbB3SGsocn1Amjp8lcH/Zh6938XdD4AJro5
- fxwopA2oIh0TgJY9d33L1vfKccaTwrpNvnSbgaHNLWdYU2cU+VKPxrCoEpcLm9C2mNLy
- kR63ds45hL8l/9RiLyTayvUWDY1eYzVy/LZxSRvwsfpUmdu8tge7bMOlQokdbDvIVSC5
- gY9QRotz9bNRKq9HtB2jm9tCbZT3ooGfCnSDyOtiIUMoWjLKvHcfStzjVA55Svj1Fw6E
- lkFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721393037; x=1721997837;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=llK4xT0In7ILZ11aux3dptSqD1KXjlG7HnszAqFZZgU=;
- b=ou8Q8bs85O/TZ6cfIcSg0Beqc9ficZvcIMT8+Y9tzVlh6cry+sG0bxyEkgyP3VFvZi
- Xlejicz/K0muOyKH8ZsKU8WRDKU4TidfbVSFq8TWy+uTl6QnDgVB119Fl2AyhLDkp+cO
- Mj/DkvDmHgv9dVI4CjQtLtjSh50jkBmwA11c2lJxGR4Uf6UdeujzeEDjWLgEEM22K0uO
- 3yuQHw/z2YJbe8Lw4fiosaGLZYSmWeacxZ1D34YLO4s4aNPy5iRdBzblz+1y4A64D0PM
- OcLEXkxqP+sX2SETb7Os33MVP0vLjT0qEBMWK0KKuFamBIKIMP1s6oD2wwJOblD4VTcV
- WUuA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNTW6thndF2bA9q+KIDBvOe2lW43pefEV28+QeTtbRI1/wONcHuWDwT1amJgmD10s3c/1QTfKslB/qu7x/HFbcu93NRg==
-X-Gm-Message-State: AOJu0YxLY3+VxbWoTI8p6ivqYwzFC7a72w+7iWsneE7SMR1E5ugppu+C
- a01gTwYWvzEWtzFEOfFhTTFow4t1RrVhd5TW7PEP2Qpe9IM4Da4CpNfpc+WCWF0=
-X-Google-Smtp-Source: AGHT+IFa1/0DBq0be1bLAU5tbX+q3nNtBH0blC6lzacXcU7wA26IUiLcdSWjT3zd7jXyAMdfQWcPfA==
-X-Received: by 2002:a05:6512:33d1:b0:52e:bdd4:610c with SMTP id
- 2adb3069b0e04-52ee546ca4fmr5358976e87.63.1721393037293; 
- Fri, 19 Jul 2024 05:43:57 -0700 (PDT)
-Received: from [192.168.2.172] ([90.187.152.45])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7a3c785e97sm28577466b.39.2024.07.19.05.43.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 05:43:56 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 19 Jul 2024 14:43:49 +0200
-Subject: [PATCH v5 09/11] tools: mkeficapsule: support generating dynamic GUIDs
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=zhiqiang.hou@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nuK2e34gK6cRzvs11CqnHxTpdGwDhc8NiUw6ab2Zeve0rqfurLrUbwST6Dc3UxkuNXVidowvfgfARKDHycJ2PZcOuIW3z1+HhzRPGLH5/cxJxp4bAqJ0aOfyfuZfIlJWIO5fyWrAd3B1YGkm8uUoukohNQyu7oQkf62OWjE/ht99edlmqo3YOqXFH2xKSV8HpJzWePEt6709HxPOJmKVoLLT/TI7HBY9iEHbgbZ4yridI8me4DBUA/wlixYr7KYCBIdCmbOoCOrZuTLTpTw4giyC/YNARhq9P5BhAa+VnO267u128kD3i/F4TenmHq+P3uuxJBW/R86N/QlN6fNUjg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Z+v9dEtvHTppHKMEVzBEmxZyCiCiX+s1jBu779b5ck0=;
+ b=CAQjJH/i5Ts37Duw5Wj+OZr+v+MlShkZqy+WyC6Wi82Fh2tfAhVqheQbl8k7Fc2kY24xwt6rILm7bQwKJfbJphj4IYW27DGFCutE3N7ObRePmWA+PlICyFk+NCUsZRwiNKZCqx/HZbZH+Y+T/lqMPlLosuPTAKU7lpvoLnnhLhsri3MqolzJjMuWmZoiqHMwT2yqPZnUmMZHz6d7VuPFSaOMvGw5Nxg1d9HRA+IyOpvXTlVsVo3Umo9fwJRlTtNjz6+YXqHmyoNBwmf+4yMeNblIIz8APIYtApgq8kgXwKh45qkCfZ5D88x5HGbdJNQ0Tn4MMnHR6Gk5xKRzOuGGag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Z+v9dEtvHTppHKMEVzBEmxZyCiCiX+s1jBu779b5ck0=;
+ b=GuwWKPlUVVvSXHn2LHq6+kgxzKCNOsgo9toQ+t+IO9cc0uysENZKk9F6txQS3OImV/gFa27WScL5DYZE479imSTlJ2EKdAXcHmsl/4xoVShpQxpD6y8NhGif8E7Xxi1gL4aOTR7diaJtcW0nc6iqJasYVF4MPM0PW+BizOj03PE=
+Received: from DB9PR04MB9236.eurprd04.prod.outlook.com (2603:10a6:10:370::16)
+ by AM9PR04MB8732.eurprd04.prod.outlook.com (2603:10a6:20b:43f::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.16; Fri, 19 Jul
+ 2024 13:50:46 +0000
+Received: from DB9PR04MB9236.eurprd04.prod.outlook.com
+ ([fe80::9903:6f05:ded5:924f]) by DB9PR04MB9236.eurprd04.prod.outlook.com
+ ([fe80::9903:6f05:ded5:924f%4]) with mapi id 15.20.7784.017; Fri, 19 Jul 2024
+ 13:50:46 +0000
+From: "Z.Q. Hou" <zhiqiang.hou@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "sbabic@denx.de"
+ <sbabic@denx.de>, dl-uboot-imx <uboot-imx@nxp.com>, "trini@konsulko.com"
+ <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Yi Zhao <yi.zhao@nxp.com>, 
+ Jiafei Pan <jiafei.pan@nxp.com>
+Subject: RE: [PATCHv1 1/2] mp: imx8m: add cpu command support
+Thread-Topic: [PATCHv1 1/2] mp: imx8m: add cpu command support
+Thread-Index: AQHa2cCer9YJzGqEdEC88/KnBi/y2LH962SAgAAhFCA=
+Date: Fri, 19 Jul 2024 13:50:46 +0000
+Message-ID: <DB9PR04MB923670C9D250CCA833DA659A84AD2@DB9PR04MB9236.eurprd04.prod.outlook.com>
+References: <20240719100758.1917-1-Zhiqiang.Hou@nxp.com>
+ <20240719100758.1917-2-Zhiqiang.Hou@nxp.com>
+ <CAOMZO5BoEqV_h5RdLKZitt+GDwAMyV7T6jH3P=t_TnovYMEd2g@mail.gmail.com>
+In-Reply-To: <CAOMZO5BoEqV_h5RdLKZitt+GDwAMyV7T6jH3P=t_TnovYMEd2g@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR04MB9236:EE_|AM9PR04MB8732:EE_
+x-ms-office365-filtering-correlation-id: 63b54fe1-00c7-4b6f-46a4-08dca7f9ca8a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?SDI5Z3k4N25uc2VVMlF5UkxhT3I1MThua2lmeG5KV3Nwemo3cm5sREJIWTVS?=
+ =?utf-8?B?ZU1xbGVqVndwYXJKUXErc2kyNi9GMjMrNEowekVLZ2xZUEhxQUMwc3RuTVQx?=
+ =?utf-8?B?c2FQNGRGa3JzNmtWVzE5c09RRVJ3YnpNV2lnOW45cmVEQ0w4REpFdlhEZUpq?=
+ =?utf-8?B?QWFRaXlLT0VOOG1hLy9veHg1cHFWRFBveG51L1YwNXIvbmZKVHkxNmhQUEY0?=
+ =?utf-8?B?M3lUQ1lGOFZLcXFhT0d4Ui9zVnZiLzVmaTA3Q3ZSSmRyMnlYLzRXT3dMaTJa?=
+ =?utf-8?B?OHpHUjgxeVJpQ1ZlSG5ZYmxTVWdWVExGV1FPRlUwSUQwd2c1Yzh0Skp0Y0Zs?=
+ =?utf-8?B?T2Y3Ym1pV0t2SGtXMllNc3NhM21OVlZha0ZHNXZKRjV0WThTMms0SXpoQUFp?=
+ =?utf-8?B?d0NBRjRwc2RLNitIdGYrb2VJT3NsSW5sUjZWOVY1UUJZYjUwYWNQSFNISlo0?=
+ =?utf-8?B?VmdwM09ySXd6T0dQSHEva0ZPcVJHcCtDc3Y3dG1lNzgvYUlqUnlYRVRGZXhS?=
+ =?utf-8?B?Z283QW9BL0hYL3ZBSjkvNU1nMXlrd2YxcDJmUFgycTdKQTJBVUg4dGlUV2o1?=
+ =?utf-8?B?M0Q5bTc0ZTFrc1h0UkZnd2dINmo1QndKN2s1Z0tDb1h0WkkyR0JzMWJNS0xB?=
+ =?utf-8?B?THljaFdtSm0wemJiSXBHeXN0ZnQrZG9Ca0RFbGViMG4va2xJcHZPUzJxbVVB?=
+ =?utf-8?B?N1VrRi9icjd0aEoxenBEK0FIRlNYOXE4T0tRdnB5blkyaDRIMWJxcGphN1I5?=
+ =?utf-8?B?MVJOc2tBVDNDc3lTNmdtOXJnSjFjZkJMS0xiRzc0OHk2dUlpMHVMc20zVlZT?=
+ =?utf-8?B?UWJ4MUloSGhOTk9nUVNKS1VvbS8yK2k2YS9DL25XalB2ZWJ1VXd1ODVIM2pl?=
+ =?utf-8?B?Z0ZiUkFucFJzL3pjRFJFQXdjVDYrbVhjd29iUnVIVWhLQkZmNS9rRTRTbUYr?=
+ =?utf-8?B?cXN5RlhyUzlQU2JYRUxFRVkxK3NBUmFHQ2ZhV1lxY0dOQnVXYWlyT2lFNExQ?=
+ =?utf-8?B?MUQ1UGdxYjY0aGRkamZEc0x2WmRBQi9YL2kvUk1oTnFlY1lQczVpVkFnVVgv?=
+ =?utf-8?B?MEpPZWVrb2ZFeHhnUjhUcUJRRkZyVlRJeGFSQTNqR2NRdE1TSkVCT28wYzN5?=
+ =?utf-8?B?ek5YSDgzaXdwQzVQYzFPaEZnWXdiWk1sd09aUms1TExGY2FWdnFmQ2dDL2F4?=
+ =?utf-8?B?eHgyQ25XazJHL05nbnpzNmJUeGk1QzBSRU1HcFZSbUoxVjA0U1pLQWk5dUFh?=
+ =?utf-8?B?cGFWOG9TbERUcUdTWE1vdGIzSEVrOUdvNUFpeE5ZZFo2bzNnSFd1a2xlU0sy?=
+ =?utf-8?B?WE84RkpwYy9vZGQ5aEtidEIyVVpDUUF0anBGUDNLQ0x6R1FzTlU4S3hyTVRy?=
+ =?utf-8?B?QlVNY1liRE9KdWZNV2k3cm4veU9wTjEreThsZ3BPV2NVQStDdUNjS2w0RXhW?=
+ =?utf-8?B?RlVyQ1ErN25ienZmcGkzS2xRUTRPcVZsanpuMm1rc20yak5XcGZhdFZaUGpS?=
+ =?utf-8?B?UENBUi9pcFQ4OG5YVDY5WUt2L3lTZ1hXTGFVWFY0SzVMMERBaGNQT2NKZXRL?=
+ =?utf-8?B?RE9qWGh5V1RvZ3UzdGFvOHZYQnFuSFF5Mi9rUi9pd0tDSEZ0YkJORUtkWktp?=
+ =?utf-8?B?cUp6YkRHdjZ3V0FuV2lDYzQ1VktTRm9lU0JlS0tndG1FdS9pMVpKdy9wWjFZ?=
+ =?utf-8?B?ZlZHV1hmckw3NkYwZ0lYS1pTelQwbEhRUmlLVEpTVm96eTZraWFzMFp0NmNo?=
+ =?utf-8?B?aDZRd0haMUJtempEYWhwSHdTVWNGSnlMZTZ2eDZkcWplWGJRODdBeEMyTStO?=
+ =?utf-8?B?eUpLTUV4bVpoMk5rTXZEcDFUOHRDVTViV0x6YlF1aEQ3V1Qrc0pzbDhVcUdv?=
+ =?utf-8?B?MnJxS0JyUDZOclpNN2oyU0R5UmRRQUtDL1l6WVNKRTBNV1E9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB9236.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VExmbzJlUENKb21RMm01SWhyaHF3TUtNNldnWTVFNjlVNzBRV3JMaEZlTVRO?=
+ =?utf-8?B?bDZkSUVjQlVpcUwzSXJKRVhxMDBOYlVYeHJ3SjBZZ3BCSFNjWWVPa2JnOEZn?=
+ =?utf-8?B?dm5MVnJqRlVSQzdjaSt1SWpwSEZFeFJoOVArZndoTVIvdkkwbXFzM2Vad0xK?=
+ =?utf-8?B?QlFzTUpHc0RtZ0xCNG9MTFRHUWFSbTFvV3REeldvYUhid0R4c2lQQ1N5YU1Y?=
+ =?utf-8?B?ZGtaVjU5ZHM1dDc1dGlFUVdlQ3FaTlhNeHpOa3Q5QUtuSzNaMEo0dUU0Wnli?=
+ =?utf-8?B?azdlUEJFNUVUZUM5ckJKL1pXbkZzRFBoN3pyL2xMM0M1akpXSW9ITU85eVV1?=
+ =?utf-8?B?dmxlMEtmSDBiVWJRaW15SnAxZlBscTJFOUpsRGhFNnQramc4SG93Z0gwY3p1?=
+ =?utf-8?B?Z1djdlhSRXA5ZktNdkVmQlEwb3B1aVd1UFNxRDNZTXk2ZDJFeS9MVmNSdzlM?=
+ =?utf-8?B?MThwUWd5SnV0eXVlQkc4VEw3aWhZNE9leGpRc2xkTkN1WkxiOFZaVXVkMW1w?=
+ =?utf-8?B?aWdSZndJOXhhMGVEMUVHdmdTMnNTMFU0M1A4cG9zVjh6UllFa0lJUjNMKzcv?=
+ =?utf-8?B?UUN2L0tqR1c5Y2xvU3kyM0tWTkdQUG9SaUdpMWtZbUhaZzZvdUZrZVk2TEhD?=
+ =?utf-8?B?MHFiNnZSVEtzRFdxOS9QajJzT1U1bVd4SWtEMC8wdXBiT1dIR3c2aTJtSHhN?=
+ =?utf-8?B?ZkR3dE5TSkhMelAreU9TczNZUGRKamJrZWV6Wlh0NTE3WlBTOWVOL09sRjdk?=
+ =?utf-8?B?V01td2VsMENndm1RNXh3cmltQ1JTWkxrcVZiY0hBNWc4ay9LYXpzcUZxT2Zm?=
+ =?utf-8?B?Sk1UclJBUXJ2MUMreWZ5US9JNk9IODVyWGVHZGtQSzltK1V4QUFWZ042Y2dY?=
+ =?utf-8?B?S1JJdkhPOGhxMXdxSW1RNS9UR29uemRmVC9VZFRNS21jRTJKdkV2QWlxVG4r?=
+ =?utf-8?B?VE0wRVYxSDdxcllDaW1TaWk1b1NpT0FIY3g4aE1ZRXVJc1VIWm1Kc0dpNVhF?=
+ =?utf-8?B?NnhieUF4Mk5lUlJYUzkwbkJSVjhlMWRpRkp5VkFyK3JEeFFsMG9RWUZTTkwy?=
+ =?utf-8?B?UkdMRVJUdVFDNkYxcXR3RWtrdzdCVzhKMGNWbWtqQzd5bFVGUFltNVRVc0ZT?=
+ =?utf-8?B?bGhiZGtmb0RuYnA5Q2VpZi9FWVN4dUY0NXl6ak9ZdmllYmt4V1Bla0RFWlFp?=
+ =?utf-8?B?QlZrSlQrNU9BZnAyUWNscnBWVTE5aWJoNmIycEFiWWc1dm51N3ZrVHE3aThm?=
+ =?utf-8?B?VkxwYTB2a3BuaUdEL1M5c1VCUFMxWWtlWXFaVWRMNE1rT005SStoVTRxdmxZ?=
+ =?utf-8?B?SThmYXArcnh6SHlzQ2ZnR0thT3MrekVHQnRaekZubzdEL3FNVCsxbGN1NG1i?=
+ =?utf-8?B?d0VmcTN2SlRvRjl5LzZtaVdOK1dRMHh2eTdUbjcrREJaMlc5WVdhTUVSOGZL?=
+ =?utf-8?B?Sy9EdkRWSVNkdjh6TUFmeHdDY2lhRDEwYTA0aUs0QSs0SVZnQmxEOVhoVlV5?=
+ =?utf-8?B?azB2dUwzb041VzRoOWZISDFVUzVXVnhUQm5VWm9wTDdPNHlycWpXMUxFTG9C?=
+ =?utf-8?B?cjRwSGU1cEhNcTlYV3Y4OE10bGl1Mm5kMElCNEVOcldpa2VxMzB0RlRReU9V?=
+ =?utf-8?B?WVY3MUdQb1FMUHhjaU50cXdkcWFJc0NkanFLc1NpYzhDTitQaVNaL2VvN3FU?=
+ =?utf-8?B?d0g2RUJTR01pTXo2SUZubVBwakZNbWZXRTRTWnEvZFpFSEJ5dlFueXVuZDJB?=
+ =?utf-8?B?L0k1T0FtREhMRmRkSmVhNDk2UTF0S2o5NU9QT0tScm9uYUtINWxrUitKVGM0?=
+ =?utf-8?B?b1BHZkhNdkNzWFNPaXVYaFd1MWdhU0NZQ3VJOEdOcGFtSnYvWUhwNGJQTCtk?=
+ =?utf-8?B?WlhjOVk1N2dVOTJCNXFWbGFMTE9NOUdCNWsxK0pVM2hWenhNYXdSYVgrdCt5?=
+ =?utf-8?B?TFVGYVgwRjdIN29DWlRqN2YrVGlldk5pVmxlR1dHbmlCQmNEeFZaTWRheXVn?=
+ =?utf-8?B?NVp0dWdWOXh3TStGcXR3eE1CYUhyYVQ4S1ZvWEZiN3dZUkprRHcrL3dLV1Yr?=
+ =?utf-8?B?UG4vTDh5Rm1hZU5saDgyT2FkZCtLMlZvaWZvVXBZZkJFVkF1T0NueHdYeEJ1?=
+ =?utf-8?Q?VfPN1B6es33UqeLUAgWdQWWa9?=
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240719-b4-dynamic-uuid-v5-9-8a83de3fe3dc@linaro.org>
-References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
-In-Reply-To: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8305;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=1C+uaiSfAQ8Egf4zk38nISU8F2OuZnqGH4xxBkBr6jI=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmml+BgwnsgZ82w6oBx0ryJce7YsHt0O8pJSFmv
- X+i817eiEiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZppfgQAKCRAFgzErGV9k
- tlWfD/9ljiN3aIDa4xOczzk0TnsdQUrmdeVvj7Lrr0DJnCBerhnOctca1a2QIxvQzaGDnR3j86Y
- GlrP7j2o653hd2qqtG6iIA8ucX4t/P8YmSOhF7guev/bzuw4BoWQyW9xZvb3kSexfZIbuRPydPP
- B010zTe0oH8mWF7kbSYJgU4BIzYDeknn8QAoOFIJN2n7uzPKB2jokzVo0FRsl/8bJcUkc6oT77z
- SwagvrSDNQyaepb8fBAoDtghQEIP8ZRRECk1ZnjVritSIkZSkhW4rbtqky2bqaSosiQqOIsmDGI
- Vw0fx/EkZuLbpSqYMOrFgkP+Ha64oPVQiKX6vBOYWcuxwjgmkm22i0U1q8r8HJiRVrdlmPVqwLy
- 7SXNBGh6cQy+fefaXgj/iy8qyiSfCt1pgrvSwkdyuZPhR1nr3+VWQCYItC3EfWzSRg649JDhmzj
- guqMbLaiKDm+BeuCbwZkbVJbACfs5mpjHuxIft9oMhvDhGc7THZHvL2P9Ehcb7s0hTaVY3qCgHD
- hnRN/1xWn4nszyv30bBQTWQft0GabVaQPW1al8YYurf38KasKGiv+OZerm0HTmy9EVfEIUQcOsD
- FMyi8Al5bW8RJ9R7iBthMToLnU3lKWvM/I/AteEybmYQHcJle2RySkUa6BujvjRMtKrDXzPtey1
- BFJo1Ec+99nWwgQ==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB9236.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63b54fe1-00c7-4b6f-46a4-08dca7f9ca8a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Jul 2024 13:50:46.5966 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: uyS/fM2bRMZiyQozzpgn2Q4v4kA1YrcVvb598Hoe5kiWUKgUpaSqQyrS4ap3Q1ikvGdv2WYa0+nPWezgd96hdw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8732
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,304 +178,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for generating GUIDs that match those generated internally
-by U-Boot for capsule update fw_images when using dynamic UUIDs.
-
-Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
-with the board compatible and fw_image name. This feature just provides
-a way to determine the UUIDs for a particular board without having to
-actually boot U-Boot on it.
-
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- doc/mkeficapsule.1   |  23 ++++++++
- tools/mkeficapsule.c | 156 +++++++++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 174 insertions(+), 5 deletions(-)
-
-diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
-index c4c2057d5c7a..bf735295effa 100644
---- a/doc/mkeficapsule.1
-+++ b/doc/mkeficapsule.1
-@@ -9,8 +9,11 @@ mkeficapsule \- Generate EFI capsule file for U-Boot
- .SH SYNOPSIS
- .B mkeficapsule
- .RI [ options ] " " [ image-blob ] " " capsule-file
- 
-+.B mkeficapsule
-+.RI guidgen " " [ GUID ] " " DTB " " IMAGE_NAME...
-+
- .SH "DESCRIPTION"
- The
- .B mkeficapsule
- command is used to create an EFI capsule file to be used by U-Boot for firmware
-@@ -41,8 +44,12 @@ format is the same as used in the new uImage format and allows for
- multiple binary blobs in a single capsule file.
- This type of image file can be generated by
- .BR mkimage .
- 
-+mkeficapsule can also be used to simulate the dynamic GUID generation used to
-+identify firmware images in capsule updates by providing the namespace guid, dtb
-+for the board, and a list of firmware images.
-+
- .SH "OPTIONS"
- 
- .TP
- .BI "-g\fR,\fB --guid " guid-string
-@@ -112,8 +119,24 @@ at every firmware update.
- .TP
- .B "-d\fR,\fB --dump_sig"
- Dump signature data into *.p7 file
- 
-+.SH "GUIDGEN OPTIONS"
-+
-+.TP
-+.B "[GUID]"
-+The namespace/salt GUID, by default this is EFI_CAPSULE_NAMESPACE_GUID.
-+The format is:
-+    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-+
-+.TP
-+.B DTB
-+The device tree blob file for the board.
-+
-+.TP
-+.B IMAGE_NAME...
-+The names of the firmware images to generate GUIDs for.
-+
- .PP
- .SH FILES
- .TP
- .I /EFI/UpdateCapsule
-diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-index 54fb4dee3ee5..8dfc09ffaf4f 100644
---- a/tools/mkeficapsule.c
-+++ b/tools/mkeficapsule.c
-@@ -19,12 +19,16 @@
- #include <gnutls/gnutls.h>
- #include <gnutls/pkcs7.h>
- #include <gnutls/abstract.h>
- 
-+#include <libfdt.h>
- #include <u-boot/uuid.h>
- 
- #include "eficapsule.h"
- 
-+// Matches CONFIG_EFI_CAPSULE_NAMESPACE_GUID
-+#define DEFAULT_NAMESPACE_GUID "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
-+
- static const char *tool_name = "mkeficapsule";
- 
- efi_guid_t efi_guid_fm_capsule = EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
- efi_guid_t efi_guid_cert_type_pkcs7 = EFI_CERT_TYPE_PKCS7_GUID;
-@@ -53,11 +57,23 @@ static struct option options[] = {
- 	{"help", no_argument, NULL, 'h'},
- 	{NULL, 0, NULL, 0},
- };
- 
--static void print_usage(void)
-+
-+static void print_usage_guidgen(void)
- {
--	fprintf(stderr, "Usage: %s [options] <image blob> <output file>\n"
-+	fprintf(stderr, "%s guidgen [GUID] DTB IMAGE_NAME...\n"
-+		"Options:\n"
-+
-+		"\tGUID                        Namespace GUID (default: %s)\n"
-+		"\tDTB                         Device Tree Blob\n"
-+		"\tIMAGE_NAME...               One or more names of fw_images to generate GUIDs for\n",
-+		tool_name, DEFAULT_NAMESPACE_GUID);
-+}
-+
-+static void print_usage_mkeficapsule(void)
-+{
-+	fprintf(stderr, "Usage: \n\n%s [options] <image blob> <output file>\n"
- 		"Options:\n"
- 
- 		"\t-g, --guid <guid string>    guid for image blob type\n"
- 		"\t-i, --index <index>         update image index\n"
-@@ -70,10 +86,11 @@ static void print_usage(void)
- 		"\t-A, --fw-accept  firmware accept capsule, requires GUID, no image blob\n"
- 		"\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
- 		"\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
- 		"\t-D, --dump-capsule          dump the contents of the capsule headers\n"
--		"\t-h, --help                  print a help message\n",
-+		"\t-h, --help                  print a help message\n\n",
- 		tool_name);
-+	print_usage_guidgen();
- }
- 
- /**
-  * auth_context - authentication context
-@@ -816,8 +833,130 @@ static void dump_capsule_contents(char *capsule_file)
- 		exit(EXIT_FAILURE);
- 	}
- }
- 
-+static struct fdt_header *load_dtb(const char *path)
-+{
-+	struct fdt_header *dtb;
-+	ssize_t dtb_size;
-+	FILE *f;
-+
-+	/* Open and parse DTB */
-+	f = fopen(path, "r");
-+	if (!f) {
-+		fprintf(stderr, "Cannot open %s\n", path);
-+		return NULL;
-+	}
-+
-+	if (fseek(f, 0, SEEK_END)) {
-+		fprintf(stderr, "Cannot seek to the end of %s: %s\n",
-+			path, strerror(errno));
-+		return NULL;
-+	}
-+
-+	dtb_size = ftell(f);
-+	if (dtb_size < 0) {
-+		fprintf(stderr, "Cannot ftell %s: %s\n",
-+			path, strerror(errno));
-+		return NULL;
-+	}
-+
-+	fseek(f, 0, SEEK_SET);
-+
-+	dtb = malloc(dtb_size);
-+	if (!dtb) {
-+		fprintf(stderr, "Can't allocated %ld\n", dtb_size);
-+		return NULL;
-+	}
-+
-+	if (fread(dtb, dtb_size, 1, f) != 1) {
-+		fprintf(stderr, "Can't read %ld bytes from %s\n",
-+			dtb_size, path);
-+		free(dtb);
-+		return NULL;
-+	}
-+
-+	fclose(f);
-+
-+	return dtb;
-+}
-+
-+#define MAX_IMAGE_NAME_LEN 128
-+static int genguid(int argc, char **argv)
-+{
-+	int idx = 2, ret;
-+	unsigned char namespace[16];
-+	struct efi_guid image_type_id;
-+	const char *dtb_path;
-+	struct fdt_header *dtb;
-+	const char *compatible;
-+	int compatlen, namelen;
-+	uint16_t fw_image[MAX_IMAGE_NAME_LEN];
-+
-+	if (argc < 2) {
-+		fprintf(stderr, "Usage: ");
-+		print_usage_guidgen();
-+		return -1;
-+	}
-+
-+	if (uuid_str_to_bin(argv[1], namespace, UUID_STR_FORMAT_GUID)) {
-+		uuid_str_to_bin(DEFAULT_NAMESPACE_GUID, namespace, UUID_STR_FORMAT_GUID);
-+		dtb_path = argv[1];
-+	} else {
-+		dtb_path = argv[2];
-+		idx = 3;
-+	}
-+
-+	if (idx == argc) {
-+		fprintf(stderr, "Usage: ");
-+		print_usage_guidgen();
-+		return -1;
-+	}
-+
-+	dtb = load_dtb(dtb_path);
-+	if (!dtb)
-+		return -1;
-+
-+	if ((ret = fdt_check_header(dtb))) {
-+		fprintf(stderr, "Invalid DTB header: %d\n", ret);
-+		return -1;
-+	}
-+
-+	compatible = fdt_getprop(dtb, 0, "compatible", &compatlen);
-+	if (!compatible) {
-+		fprintf(stderr, "No compatible string found in DTB\n");
-+		return -1;
-+	}
-+	if (strnlen(compatible, compatlen) >= compatlen) {
-+		fprintf(stderr, "Compatible string not null-terminated\n");
-+		return -1;
-+	}
-+
-+	printf("Generating GUIDs for %s with namespace %s:\n",
-+	       compatible, DEFAULT_NAMESPACE_GUID);
-+	for (; idx < argc; idx++) {
-+		memset(fw_image, 0, sizeof(fw_image));
-+		namelen = strlen(argv[idx]);
-+		if (namelen > MAX_IMAGE_NAME_LEN) {
-+			fprintf(stderr, "Image name too long: %s\n", argv[idx]);
-+			return -1;
-+		}
-+
-+		for (int i = 0; i < namelen; i++)
-+			fw_image[i] = (uint16_t)argv[idx][i];
-+
-+		gen_v5_guid((struct uuid *)&namespace, &image_type_id,
-+			    compatible, strlen(compatible),
-+			    fw_image, namelen * sizeof(uint16_t),
-+			    NULL);
-+
-+		printf("%s: ", argv[idx]);
-+		print_guid(&image_type_id);
-+	}
-+
-+	return 0;
-+}
-+
- /**
-  * main - main entry function of mkeficapsule
-  * @argc:	Number of arguments
-  * @argv:	Array of pointers to arguments
-@@ -840,8 +979,15 @@ int main(int argc, char **argv)
- 	char *privkey_file, *cert_file;
- 	int c, idx;
- 	struct fmp_payload_header_params fmp_ph_params = { 0 };
- 
-+	/* Generate dynamic GUIDs */
-+	if (argc > 1 && !strcmp(argv[1], "guidgen")) {
-+		if (genguid(argc - 1, argv + 1))
-+			exit(EXIT_FAILURE);
-+		exit(EXIT_SUCCESS);
-+	}
-+
- 	guid = NULL;
- 	index = 0;
- 	instance = 0;
- 	mcount = 0;
-@@ -928,9 +1074,9 @@ int main(int argc, char **argv)
- 		case 'D':
- 			capsule_dump = true;
- 			break;
- 		default:
--			print_usage();
-+			print_usage_mkeficapsule();
- 			exit(EXIT_SUCCESS);
- 		}
- 	}
- 
-@@ -951,9 +1097,9 @@ int main(int argc, char **argv)
- 	    (capsule_type != CAPSULE_NORMAL_BLOB &&
- 	    ((argc != optind + 1) ||
- 	     ((capsule_type == CAPSULE_ACCEPT) && !guid) ||
- 	     ((capsule_type == CAPSULE_REVERT) && guid)))) {
--		print_usage();
-+		print_usage_mkeficapsule();
- 		exit(EXIT_FAILURE);
- 	}
- 
- 	if (capsule_type != CAPSULE_NORMAL_BLOB) {
-
--- 
-2.45.2
-
+SGkgRmFiaW8sDQoNClRoYW5rcyBhIGxvdCBmb3IgeW91ciBjb21tZW50cyENCg0KPiAtLS0tLU9y
+aWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFp
+bC5jb20+DQo+IFNlbnQ6IEZyaWRheSwgSnVseSAxOSwgMjAyNCA3OjMzIFBNDQo+IFRvOiBaLlEu
+IEhvdSA8emhpcWlhbmcuaG91QG54cC5jb20+DQo+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsg
+c2JhYmljQGRlbnguZGU7IGRsLXVib290LWlteA0KPiA8dWJvb3QtaW14QG54cC5jb20+OyB0cmlu
+aUBrb25zdWxrby5jb207IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPjsNCj4gWWkgWmhhbyA8
+eWkuemhhb0BueHAuY29tPjsgSmlhZmVpIFBhbiA8amlhZmVpLnBhbkBueHAuY29tPg0KPiBTdWJq
+ZWN0OiBSZTogW1BBVENIdjEgMS8yXSBtcDogaW14OG06IGFkZCBjcHUgY29tbWFuZCBzdXBwb3J0
+DQo+IA0KPiBPbiBGcmksIEp1bCAxOSwgMjAyNCBhdCA2OjQ34oCvQU0gWmhpcWlhbmcgSG91IDxa
+aGlxaWFuZy5Ib3VAbnhwLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiBGcm9tOiBIb3UgWmhpcWlhbmcg
+PFpoaXFpYW5nLkhvdUBueHAuY29tPg0KPiA+DQo+ID4gSW1wbGVtZW50IHRoZSBjcHUgY29tbWFu
+ZCB0byBraWNrIGNwdSBjb3JlIHRvIHJ1biBiYXJlbWF0ZWwgb3IgUlRPUw0KPiA+IGFwcGxpY2F0
+aW9ucy4NCj4gDQo+IHMvYmFyZW1hdGVsL2JhcmVtZXRhbA0KDQpXaWxsIGZpeC4NCg0KPiANCj4g
+UGxlYXNlIGFkZCBkb2N1bWVudGF0aW9uIGV4cGxhaW5pbmcgaG93IHRvIHJ1biB0aGlzIGNvbW1h
+bmQsIGhvdyBpdCB3YXMNCj4gdGVzdGVkLCBldGMuDQoNClRoaXMgcGF0Y2ggaXMgdG8gYWRkIHRo
+ZSBuZWVkZWQgZnVuY3Rpb25zIHRvIGVuYWJsZSBjbWQvbXAuYywgd2hpY2ggaXMgd2VsbCBrbm93
+biwgc28gSSBkb24ndCB0aGluayBpdCdzIG5lY2Vzc2FyeSB0byBhZGQgYW4gZXhhbXBsZSB0byB0
+aGUgY29tbWl0IGxvZy4NCg0KPiANCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvYXJjaC9h
+cm0vbWFjaC1pbXgvaW14OG0vbXAuYw0KPiANCj4gV2hhdCBkb2VzIG1wIG1lYW4/DQoNClNob3J0
+IG9mICdtdWx0aXByb2Nlc3NvcicsIHRoZSBzYW1lIG1lYW4gYXMgY21kL21wLmMuDQoNClRoYW5r
+cywNClpoaXFpYW5nDQo=
