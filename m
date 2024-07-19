@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B766C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 18:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33ED7C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 19:04:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81FC38855C;
-	Fri, 19 Jul 2024 20:07:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 60BEB88B81;
+	Fri, 19 Jul 2024 21:04:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eN2JYJzQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NMSeCUqS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8E8B882FA; Fri, 19 Jul 2024 20:07:08 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 78A0488BB3; Fri, 19 Jul 2024 21:04:07 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD3FC88BD4
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 20:07:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 559F988B65
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 21:04:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3d94293f12fso1247616b6e.3
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 11:07:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-6c2d04b0833so65139a12.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721412424; x=1722017224; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JSZyCMBlqVvLXyTRiI2oRhRZxOi8iOo2WHa8W0VAtv8=;
- b=eN2JYJzQG6PjO9FZA7BHM4tQx52lumvNN/eZS73FRE1wgXuNcsmowbUyqPQ++ong6g
- xonuTQsMB769uB/sV83hW3olzYWKZW0xvh24X24VFlayBkzZ0eXkAJu637W76l790S0c
- d6bX5Q0SYxuWmbwFLInd2R7+VdWtFGZIBQuuQ=
+ d=gmail.com; s=20230601; t=1721415844; x=1722020644; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=twnrMbDkein0AOcFFy9fdUcj9hF7OJjlp5xJnG4Bs4M=;
+ b=NMSeCUqS9jldQ0zcRuI4ATfJlZxhU+/ttg/wJjf3WrC9jCA0SpLG/lzSOd+uRTGuGh
+ za0kdi3QRDUTSh2h2Gs63t2FHaBMVF1c3pj4XJCs9LwfrgxrIdJHQcTwmJHg6+tW1SVu
+ mNjCZfReuCNJzAFmf00acro3MZK8thlBb6VnWgaMq4XVz7xICkTkGd4JqE5iBmeIQQQd
+ e+NmuxBNPUKiEP2E1ylcU1Mb9m/+8SV7APUkv/C+eIHf5EPSSrmI8Km8rzMQQv6r/w9v
+ 8Yu3lCWKZgZ6wiJqS/lqobCsksfEIO2DR8bZsi2dh3oUgAXe726TaxZJG+/fwF+xUAcL
+ XQDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721412424; x=1722017224;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JSZyCMBlqVvLXyTRiI2oRhRZxOi8iOo2WHa8W0VAtv8=;
- b=bWgCh4EFD0a5XbrdyD14Ktjiz+UAcVONZPc3HVryUWyeMIK1J9Y0oDQvGilnu1djB9
- d2LzM/SB8VdgZNQFYGSBaMS+KnmcCZ9tb11353xZonx/7C3vi2PVSQhK7uXa/B7+cQHV
- W8diDG+rYvcyXI3DxmXXsmYSvlEuLU+3/BMAtsRQka0iEujTF6pObzzFmHyLsiGkh1kc
- EGYt03HTL7arWlHkKOfiMZ/5WkYXCzdNrrB5NeCTaH8rRJ+CfHt1Emr7nmleQquCqDv4
- OA2Upa3KcDxKxC0BipUDyvhlrHNi8/RFX0F5w4yXj9kUV7hnpuOAlOY9bxngpw+hGlQH
- kQ0g==
-X-Gm-Message-State: AOJu0YyUasHkYLnUKfWSm25J8dfKPu75Jtu5SBUcId4vTu85wWEcrRjq
- Dzzn10kYWKgzJUVAI2v6VAnFlmpnFWQlgrltJFXUnmAMmUt1IQJrZhcXWC1xjJY=
-X-Google-Smtp-Source: AGHT+IEFh7IeiDYh/QvLNeYcVoWI01eAj0DprEyKRK7HE3CTBeZ9jcfjltoTZdfzg0PYkvJR9ZCVYg==
-X-Received: by 2002:a05:6808:14d3:b0:3d6:2b12:7dc0 with SMTP id
- 5614622812f47-3dae5f1eafcmr784542b6e.20.1721412424503; 
- Fri, 19 Jul 2024 11:07:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dae0969e73sm366139b6e.5.2024.07.19.11.07.03
+ d=1e100.net; s=20230601; t=1721415844; x=1722020644;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=twnrMbDkein0AOcFFy9fdUcj9hF7OJjlp5xJnG4Bs4M=;
+ b=m0HfyUnl1u0rMVuaYPoqdfsO2x5L2XxZoK9n7pN6YTCiUhGuEyhhSNCArtMwfplNIn
+ YCluiByEl33S3m5H95YFQcOv35zxIM/z5GNLJczm1zT6/0YtJUHMp3sLOPyOkPdjrcvT
+ gYEGIot2AQCEwfzZSQIZ5HWj/jv4q/Tk9/I+ZpJ7IxM7h/hjjjKf/Pe81Fwf3CDZkcXB
+ SgVD9WkiUAojaA8OL48Dt7ESs3MN2oUIc63tbAWVDWVa4xLeK8cSDfWGDP0K7RZ1XusK
+ Olv/85K8R2xf3Q/7R2xjozfBqB7D7zmNtb6o0gpQGpoSoO0whjCgGrUiaIiKSQdueG5T
+ pfmA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgOdYjX8AXZZFJIajyScrUtAGdpfZ0ggGKp1QQ3sMKHSwvjE5jvUs7d2xu7CNa3Zk65f9QL1ckEnAL32S0yw18k83VNw==
+X-Gm-Message-State: AOJu0YyCEbNHxZwprFhOUnLSho+07q/rB43KsAUcoea0o88tH8VOsnOK
+ bkDtiyHXf72CEU7wA9SlrGNbixoW5oaQvfZB/K0ymW1EVo3LYGTCR6XLFA==
+X-Google-Smtp-Source: AGHT+IHdS2RfAVPVVqV6OqNGhlk6T9w6Y+A91l4E31b04DRoasuhwwO807Nf7NwaeJV968JH7BDvZQ==
+X-Received: by 2002:a17:903:22c9:b0:1fb:1cc3:647b with SMTP id
+ d9443c01a7336-1fd7457ea53mr5587045ad.5.1721415843692; 
+ Fri, 19 Jul 2024 12:04:03 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:c08b:f396:b4ea:b716])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1fd6f48f7e8sm7992695ad.309.2024.07.19.12.04.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 11:07:04 -0700 (PDT)
-Date: Fri, 19 Jul 2024 12:07:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sam Povilus <sam.povilus@amd.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: Pull request efi-2024-10-rc1-3
-Message-ID: <20240719180701.GC561963@bill-the-cat>
-References: <dec71b07-2360-444a-ba0d-19f09ae45a53@gmx.de>
+ Fri, 19 Jul 2024 12:04:03 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: breno.lima@nxp.com
+Cc: francesco.montefoschi@udoo.org, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] udoo_neo: Convert to watchdog driver model
+Date: Fri, 19 Jul 2024 16:03:37 -0300
+Message-Id: <20240719190337.1598053-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YZcwBOyxBpzuhXPN"
-Content-Disposition: inline
-In-Reply-To: <dec71b07-2360-444a-ba0d-19f09ae45a53@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,57 +91,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
---YZcwBOyxBpzuhXPN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi | 12 ++++++++++++
+ configs/udoo_neo_defconfig                     |  3 +++
+ 2 files changed, 15 insertions(+)
 
-On Fri, Jul 19, 2024 at 04:26:43PM +0200, Heinrich Schuchardt wrote:
+diff --git a/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi b/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
+index b5e1f2b9a16f..7f5a6424bac8 100644
+--- a/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
++++ b/arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi
+@@ -1,5 +1,13 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
++/ {
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
++};
++
+ &soc {
+ 	bootph-all;
+ };
+@@ -15,3 +23,7 @@
+ &uart1 {
+ 	bootph-all;
+ };
++
++&wdog1 {
++	bootph-pre-ram;
++};
+diff --git a/configs/udoo_neo_defconfig b/configs/udoo_neo_defconfig
+index 4986b4c26260..9f9ad0ad5ec7 100644
+--- a/configs/udoo_neo_defconfig
++++ b/configs/udoo_neo_defconfig
+@@ -61,5 +61,8 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_ANATOP=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_IMX_THERMAL=y
+ CONFIG_USB=y
++CONFIG_IMX_WATCHDOG=y
+-- 
+2.34.1
 
-> Dear Tom,
->=20
-> The following changes since commit 459560000736ac7c9c8b04522789c20fb45ff9=
-5a:
->=20
->   Merge patch series "bootstd: Add Android support" (2024-07-18
-> 17:03:47 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-10-rc1-3
->=20
-> for you to fetch changes up to 38b000881ebc0a48b0a814fce9f52dfe62ac644b:
->=20
->   doc: Describe the bootstd settings (2024-07-19 14:01:46 +0200)
->=20
-> No issues were reported on Gitlab:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21685
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---YZcwBOyxBpzuhXPN
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaaqz8ACgkQFHw5/5Y0
-tyz7jgwAjukgvt+vAnpz5iaOKYgn8X63D21e5iw8dTf2Y8mOmSp2ml09qEb/0wuF
-Q4l1QiCka0fd3RTmKo9qVMGTbV7QJPPSGwyRVpIQJwafLnffmu7eAXk4h0ISGcKA
-Jx9ynpEMB2ynHXIAHeCwMZ2Ag6FAC71O7SjRLGt4D5eBww5fTtySPHjOFVWANkBb
-U8puEhWbqHg/u4kOOGHMUr+RqR0+Hmk8i0xcGV0RJWM/SCA1hckVrVc6WtYl1AaM
-FeTwl3wuFwH5o4YSAZWCfonpfb7SQOo6ZlZPAxfcAYWLpG+TS6eJukXuth/dYkCD
-Gx6Qh2HPrtW6C4yffJ9z2lgkpVfz2O8ut2LexDX35SUBfOJ2uRE68uhcytkfdy0Q
-h+VdokEjCXWh8MNe69WASh7LnWikv4VTztJ9vFch5dOq6Cc564VKviGjl8C8Oydo
-qZmGb53nww22neG9k06yKVyseQJfRJApErvu6PEf7wVtvSGcYUH8dFdJca23DgSC
-pNpYFUrt
-=xe5d
------END PGP SIGNATURE-----
-
---YZcwBOyxBpzuhXPN--
