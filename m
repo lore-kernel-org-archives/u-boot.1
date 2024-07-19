@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E178C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CDB8C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9064B88C42;
+	by phobos.denx.de (Postfix) with ESMTP id EEA9988C4A;
 	Fri, 19 Jul 2024 12:50:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Am+hghfs";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Cgq3MYyO";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="sIZ6Lcyt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="h2No/8PR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0A1388C31; Fri, 19 Jul 2024 12:50:51 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 9839A88BFD; Fri, 19 Jul 2024 12:50:52 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E79D688BFC
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C84EB88C15
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:50:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,45 +31,45 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WQRKj4qYsz9sly;
- Fri, 19 Jul 2024 12:50:49 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WQRKk4j4Vz9sdR;
+ Fri, 19 Jul 2024 12:50:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386249;
+ s=mail20150812; t=1721386250;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QKBDWuoXRKmkkpAjKC7WmlOeYyMHDAMp7pOiGoZGh2A=;
- b=Am+hghfs5uo8naDUwWbkBRFgHtHcCYgeCNgLtxQAWOMO3/7LBIVA3UAp1NH/JFdXg6dWmK
- TJ/nH8M8xZE7zviMP7YxxhrPAxZikF+OC+RUmgqG5QDunrpk9yINeyCSG1RtTJ9/d/ccAM
- n1d7fdixr+Z7xw0LBhHX3VIp+1VOobQ+v4mlgMFAF7pYCLj6qrRa+xQgOWrI/1Hy7UZqCV
- wp7JFxmroAfqXrPOeB7cysNVsNJ1D1FoyGEI/vZbzYaXIaq9TyVGBoAAu+QyhA0UUaAuRy
- UZrVbu0Z0GKtby0rcRJtAc8Ob0OcpESg89zxTRjIToTDMEUntEFsPjcgxu6HDw==
+ bh=TfLMcdFTS6qTUwMFjuZzcFU9AUX7byh1eFCYewAcd48=;
+ b=sIZ6LcytUTz3M8Io4+XQvfB+KsqknvEehJYE6BC+bwL0c7A2mB6J2hCBb04Swdstk+4a4L
+ 67VtyfCxFkHEfPrVJzDRwLaBBfVKtaArvUIcf9VB7WWNswoENmZo2joHXhAssbOKxlX2Fc
+ 1ugNXOK6bq6FTyGRMmy66tXw4qbeGOr52nVRTBYDghwRWubnzZRits74F6DGoq08Gx2Jwm
+ YxBCMbUCeEedbtuh9IspGHz0HjPbqUn5+4aH7VkQ/huT7FJ8j/mEWkhFSaQBb/gDWOPWvv
+ UAIZqTesQ4xhmSzgZ75UldbqEN+2JpBTaD4iWktBQf1XLUtMKRiJkDlgRifEkw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721386247;
+ s=mail20150812; t=1721386248;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QKBDWuoXRKmkkpAjKC7WmlOeYyMHDAMp7pOiGoZGh2A=;
- b=Cgq3MYyOd6LkUMRThcYPeRVgHmw+rh1xjg1LLLhMyn+w358ZXpwlIXzA+qaV2wx787FJqQ
- v0kPZX5eW08Rvm4qSyExf2zeR0XOz+C0hVGWbjlbDNOvgi4iWex3pd3e+3F+UpPVgjEPzN
- oO1M/YyyOEeSc+TPovuFE3V1hiUz187iUDFBSeKbY2OBqRaA2PffLMPhS814oNulZoD12T
- 84Eo1m7O7wI6zf1Y7Aq96QmpCAdZfnsKuUqSXi5fgBL7zm1+zWpnU2YxsCRyl9tEIAqBca
- st1enM0nHziBv6Btik8trXpHHY4apicG6G3DV0CQURsVJdAZ41YSYa7Jm5pk2g==
+ bh=TfLMcdFTS6qTUwMFjuZzcFU9AUX7byh1eFCYewAcd48=;
+ b=h2No/8PRVDS8V7367IrOBEVCNZPWsFBgaAim4n7hxPD+t8vW7NiLQ+tJPVKAOf07oW25x4
+ GuO7wG1gdf/oG+Xf2PeXMVxQ4C6MP0HKR3vhhcYl5dH2A8q/MuTrWVWmZ/BoRjI0oVWbQ5
+ vPdjXPUwzUXKvfyT7GaSnBta9Ojl6rjBknEXlqrKGQ3PdgCoNcEdYyK2FqhDuIthh2q14P
+ pejd3jhEftyVmKjH+QAmXik9N27ZZeI9knToxMtefmWsvwMw4gtmfv9XB2fON9zwLKsRkv
+ tvehAnfIILiZfZeLJGYMdZgHdFl1c2v2IFSpbT+SIm7bcjO+fY0Jlpogkz8zDA==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 32/37] board: terasic: Remove duplicate newlines
-Date: Fri, 19 Jul 2024 12:49:09 +0200
-Message-ID: <20240719104948.323791-32-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 33/37] board: theadorable: Remove duplicate newlines
+Date: Fri, 19 Jul 2024 12:49:10 +0200
+Message-ID: <20240719104948.323791-33-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
 References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: y9fj5f4cpk7nur9twoqggr7of6tkdqz4
-X-MBO-RS-ID: 9408e6eb5408ba54c32
+X-MBO-RS-META: 3tqzuhcnp8suzwafxh438e7hxez741ss
+X-MBO-RS-ID: 00d6cee09cc20c50b9f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,96 +90,21 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- board/terasic/de1-soc/qts/iocsr_config.h       | 1 -
- board/terasic/de1-soc/qts/pll_config.h         | 1 -
- board/terasic/de10-nano/qts/iocsr_config.h     | 1 -
- board/terasic/de10-nano/qts/pll_config.h       | 1 -
- board/terasic/de10-standard/qts/iocsr_config.h | 1 -
- board/terasic/de10-standard/qts/pll_config.h   | 1 -
- board/terasic/sockit/qts/iocsr_config.h        | 1 -
- board/terasic/sockit/qts/pll_config.h          | 1 -
- 8 files changed, 8 deletions(-)
+ board/theadorable/theadorable.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/board/terasic/de1-soc/qts/iocsr_config.h b/board/terasic/de1-soc/qts/iocsr_config.h
-index 359fd0e4173..46ef8288ed5 100644
---- a/board/terasic/de1-soc/qts/iocsr_config.h
-+++ b/board/terasic/de1-soc/qts/iocsr_config.h
-@@ -655,5 +655,4 @@ const unsigned long iocsr_scan_chain3_table[] = {
- 	0x00004000,
- };
+diff --git a/board/theadorable/theadorable.c b/board/theadorable/theadorable.c
+index cca5c3d33b5..d7234532fe6 100644
+--- a/board/theadorable/theadorable.c
++++ b/board/theadorable/theadorable.c
+@@ -288,7 +288,6 @@ int board_late_init(void)
+ 			}
+ 		} while (get_timer(start_time) < ABORT_TIMEOUT);
  
 -
- #endif /* __SOCFPGA_IOCSR_CONFIG_H__ */
-diff --git a/board/terasic/de1-soc/qts/pll_config.h b/board/terasic/de1-soc/qts/pll_config.h
-index 2811e04c480..ae3cd316743 100644
---- a/board/terasic/de1-soc/qts/pll_config.h
-+++ b/board/terasic/de1-soc/qts/pll_config.h
-@@ -86,5 +86,4 @@
- #define CFG_HPS_ALTERAGRP_MAINCLK 3
- #define CFG_HPS_ALTERAGRP_DBGATCLK 3
- 
--
- #endif /* __SOCFPGA_PLL_CONFIG_H__ */
-diff --git a/board/terasic/de10-nano/qts/iocsr_config.h b/board/terasic/de10-nano/qts/iocsr_config.h
-index a889d3da348..155550007a3 100644
---- a/board/terasic/de10-nano/qts/iocsr_config.h
-+++ b/board/terasic/de10-nano/qts/iocsr_config.h
-@@ -655,5 +655,4 @@ const unsigned long iocsr_scan_chain3_table[] = {
- 	0x00004000,
- };
- 
--
- #endif /* __SOCFPGA_IOCSR_CONFIG_H__ */
-diff --git a/board/terasic/de10-nano/qts/pll_config.h b/board/terasic/de10-nano/qts/pll_config.h
-index 192ffb4e27b..794fa203d94 100644
---- a/board/terasic/de10-nano/qts/pll_config.h
-+++ b/board/terasic/de10-nano/qts/pll_config.h
-@@ -80,5 +80,4 @@
- #define CFG_HPS_ALTERAGRP_MAINCLK 3
- #define CFG_HPS_ALTERAGRP_DBGATCLK 3
- 
--
- #endif /* __SOCFPGA_PLL_CONFIG_H__ */
-diff --git a/board/terasic/de10-standard/qts/iocsr_config.h b/board/terasic/de10-standard/qts/iocsr_config.h
-index 4aed74e8b29..80086b0c293 100644
---- a/board/terasic/de10-standard/qts/iocsr_config.h
-+++ b/board/terasic/de10-standard/qts/iocsr_config.h
-@@ -655,5 +655,4 @@ const unsigned long iocsr_scan_chain3_table[] = {
- 	0x00004000,
- };
- 
--
- #endif /* __SOCFPGA_IOCSR_CONFIG_H__ */
-diff --git a/board/terasic/de10-standard/qts/pll_config.h b/board/terasic/de10-standard/qts/pll_config.h
-index c1ecd4b8208..b09b6adfab0 100644
---- a/board/terasic/de10-standard/qts/pll_config.h
-+++ b/board/terasic/de10-standard/qts/pll_config.h
-@@ -80,5 +80,4 @@
- #define CFG_HPS_ALTERAGRP_MAINCLK 4
- #define CFG_HPS_ALTERAGRP_DBGATCLK 4
- 
--
- #endif /* __SOCFPGA_PLL_CONFIG_H__ */
-diff --git a/board/terasic/sockit/qts/iocsr_config.h b/board/terasic/sockit/qts/iocsr_config.h
-index 7b72ae9c3c2..8c247c8dfe5 100644
---- a/board/terasic/sockit/qts/iocsr_config.h
-+++ b/board/terasic/sockit/qts/iocsr_config.h
-@@ -655,5 +655,4 @@ const unsigned long iocsr_scan_chain3_table[] = {
- 	0x00004000,
- };
- 
--
- #endif /* __SOCFPGA_IOCSR_CONFIG_H__ */
-diff --git a/board/terasic/sockit/qts/pll_config.h b/board/terasic/sockit/qts/pll_config.h
-index 104e324d8a4..52f1eb0c7b4 100644
---- a/board/terasic/sockit/qts/pll_config.h
-+++ b/board/terasic/sockit/qts/pll_config.h
-@@ -80,5 +80,4 @@
- #define CFG_HPS_ALTERAGRP_MAINCLK 3
- #define CFG_HPS_ALTERAGRP_DBGATCLK 3
- 
--
- #endif /* __SOCFPGA_PLL_CONFIG_H__ */
+ 		/*
+ 		 * At this stage the bootcounter has not been incremented
+ 		 * yet. We need to do this manually here to get an actually
 -- 
 2.43.0
 
