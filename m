@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB95C3DA49
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 01:39:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D175C3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 01:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F06888B70;
-	Fri, 19 Jul 2024 03:38:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09B5888B78;
+	Fri, 19 Jul 2024 03:38:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F18E68818B; Fri, 19 Jul 2024 03:38:43 +0200 (CEST)
+ id 50EFF88276; Fri, 19 Jul 2024 03:38:45 +0200 (CEST)
 Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
  (mail-bjschn02on20709.outbound.protection.partner.outlook.cn
  [IPv6:2406:e500:4440:2::709])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 303D78855B
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 03:38:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15F6E88B54
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 03:38:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=minda.chen@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JntEcIYz6Y5CuZUwcDobgDyUQ2T9tuPkuDKywjuQkWj67iUhKXb0CLkLPPumOfC5D/UQfTE6R0ABMuqVKS01sJUWR3msxxDSYz+3EtXqi5GKymoxqhnaqNOaJoy55J+saoOObNNoLMjYnswU7cnb8dyelrm+wEYdOR+GTwJrXRMelibQDQQftyT1TnBMI7OIKY/ZVV/rHYhBtRzn721cgohrpRFjjOtGoTDuJeFKhb9H6/2FKEBEx6ZzSM8AmOMFHs3Ukxzef7mnbK1GDjsXukQ8FlwyM5gHUtG4MKXmkagkAIRZLshfK7cs2XYE0lkruoBd4XIOu+6R0Dg3INPr8A==
+ b=nBVq5Fxdz/FCLqLcHBH32oaMSGcWjDYVsli3YX2l9o4egg79d8ZAwVo9dig61Oyb68bEIluyOTP7eBzzQVoBIFhgR1Xl7Gr4pAbPSv66oHVLMbvGOsiZNPJ4Fe8iWWTC+Jm/oBc0kW60nHIaDzh2nRaGTeIVdzDl1n3IkLKYcZJ7/Qhx1UNPxKQfcmY89tINZruYopecxnYO6IxovWyAazXsNkvYQk0/cebz7rzBmZyFW5TrYlRNaPrrkgfEjyE3fINnd0Vymw4tN4r1XWqRHcaPzndhiCv8lQsGmAOQsvglno2NnDcCzZHV5MTBuQr+NZ3E82kv27K2xPpeW9o7lQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1ir3VFEfLhABBHxWohfRXc1ZR9TyjNjxE7Sdef6cWNU=;
- b=WaY2uPUifA3yJrcpk/9aWquR6MBvNtQnVEY3e58e/ltcSRsKkm3tmoVFeLkDbyVfvUMC7as4a8DP1w1Ok9Pe+LvAhlXPyKEguVMnMzE+Vt8pdi2UIQtdTxa5nS4sWJobo9TAUZ0KmJBPAGfZNHjiq0SaaIepLtQldTSyzd7jRlCTL9kjX2ka0T04ij1QR9kz0iw6D/kvjNW2uwAk5peg/NAFc8/J5e85ELaW5PzYpkrhl2gKON5Z3qfjpukoOI1PwW963wjtxc2+11WpSeJI/4Dhkvfp1kjV66FNewtMn28Y6eJeofg5A4iJrIfqDyDPR5lok9nYaKfZIMKI6hw/GQ==
+ bh=SDdHzCQc5qDfJLE11ZEBBo2WEIlPcVFBVFDTts/pLlk=;
+ b=SMsN+20jpn7/h0UD/rezkdnohlOWI5INyZynlyWQX7jCs3jNArVGMwZ6yHgp/5t7WQ8ViEw8iz3cUbvxsdkUbJEgwJ0skQCr3itn5wTYDmiJQ8bzFkiQnPuSRVlKw+CK/m1TQ1JF1uB5iWJlEAWWjxnyvE1JF3mi6jcfhZywoHb2fmxJ5TAS421MVSTXq+fvEE9p9j5keph+fR5GZ4sqVGwWQbfFO/vyx8id0v34x8eT7FADT8M7TTj78V9D4S29HtpeELlulC9jIA3RoUV2/ae/pMzEEmzwPHrkicRZPwcFdtihDTBu0nr6AhwZqf6Ibe21xaiG94lT0JyTSC5WHQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
@@ -40,11 +40,11 @@ Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c311:25::15) by SHXPR01MB0623.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c311:1d::19) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.46; Fri, 19 Jul
- 2024 01:38:35 +0000
+ 2024 01:38:36 +0000
 Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
  ([fe80::bd9e:fb57:ebf7:9d71]) by
  SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::bd9e:fb57:ebf7:9d71%4])
- with mapi id 15.20.7741.046; Fri, 19 Jul 2024 01:38:35 +0000
+ with mapi id 15.20.7741.046; Fri, 19 Jul 2024 01:38:36 +0000
 From: Minda Chen <minda.chen@starfivetech.com>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Roger Quadros <rogerq@kernel.org>,
@@ -56,9 +56,10 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>,
  Minda Chen <minda.chen@starfivetech.com>
-Subject: [PATCH v3 4/8] usb: cdns: starfive: Add cdns USB driver
-Date: Fri, 19 Jul 2024 09:38:18 +0800
-Message-Id: <20240719013822.101374-5-minda.chen@starfivetech.com>
+Subject: [PATCH v3 5/8] pinctrl: starfive: Setup USB default disable
+ overcurrent pin
+Date: Fri, 19 Jul 2024 09:38:19 +0800
+Message-Id: <20240719013822.101374-6-minda.chen@starfivetech.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240719013822.101374-1-minda.chen@starfivetech.com>
 References: <20240719013822.101374-1-minda.chen@starfivetech.com>
@@ -69,54 +70,54 @@ X-ClientProxiedBy: NT0PR01CA0003.CHNPR01.prod.partner.outlook.cn
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SHXPR01MB0863:EE_|SHXPR01MB0623:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa2cfb93-ebfc-4815-11ac-08dca7938182
+X-MS-Office365-Filtering-Correlation-Id: c27c1fca-10d0-4586-15f1-08dca79381f4
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|1800799024|52116014|41320700013|366016|38350700014|921020;
-X-Microsoft-Antispam-Message-Info: hiLHqaaC8Q5SuvsufjmzRfp1zAlqO/OZDhTrKrguDj+cTQKm19CxpcLyrjkCNocCYDmWiTN09zf/8Z7VZbGq2h8K5UaVqyeHvVkMqFLa0ggnqlKY+7NuIlFMsdewNSS8mREv1YJQM2MvY9FmDoQYXZgRTEeJFoE4gERGi6EbmX/JUYrpf5GKpkvjateUT4ObF65nZ+LspE365sofNs8lWqIzcLLfFoxLanFRf/qimcoSfu6fYEyWuQ4UXjq367Rm1s9zhRe8BG9dIme2PG/Z7OSB5rWL9UPZwLsWoAGqaj7xQIqG6KpcNyu3WYK2+pT2MjKcpSUosIETMdFnDEQT0lHU4ZNqhM/9U7ujcPDODYhRSihmXDXxZfMnQAuJHOzmiOgP5iNOuym8NcpJttOJqIqVlCN9xp8kNuRELr7sAkstbw9nH3QGlN877SmeC8W6McOdOXBEdE0Qphgqt98mpgsBmbyMSoRPRayYKPeB8w/AF1ZTEijCXcmpbYtEcE4isUcwWqMfGPNOoxR1rffPykJQ82mf6JJJtkpEmeYeHISNyT5buqYZ7FaU2MdVCKPVXvxsQ2+ibBOoHxBo2ONOfW16e3BL0h2pPBBGTk9F1sw8sdKMf9s+tbpiJ00uofw6glpwqTTbd5X7YpdzfmG2ww==
+X-Microsoft-Antispam-Message-Info: z7fMsnsJct6gW4g+gwtyOBzmzZLnGC92ejBU2+rJfQbwfLIyD+97B7Zah90+dpg6VzRiAeuPT53DTYo7CoSuEPX0eXj7tZKAuafPzGZ+E6Y1Ktbp2n1D6qp6T+iCZaTqcefg/37kq/alt/YlXNnh+UMT+jVhPMzY8iqOPZewRNTf3KTURxXeyHm3VwGTNRppCJ/u9RNoQpBFnOEbNVmA9PVx2iNvGT7tPGNlnEeH9kcqmv2qAap2e/fXp0o9PJZ2X5FUdxllpcXwQJIr3DfXuz0667ivrO4BV91RjJMFyKTzeMnykJGZLaXQ2nrDWh22xOdXxCfP5gwCikAQNQ0xLlRth1AIky5peY4HsqyAnnd0/oBmG5M/jc5Ls881YrgnF7EuG+Hws3CFFgFcw0P0JgQgFT4IJRRYoKjeLtJO2Pg9Z/JQRGGoo14sdugJAsPhSRIYUnU4EfJKL4BDY3/3ie/iQ0tzrHW3nDZMteF5ZjPcq1CTLiGHZNIMXXxxQJ91B57XzzfzAuNptcuI9tqE5ZxJXkgsSVayvfQ69Kr3tcOUiJ6NJ86mK1Rce5R4FxfzMTrNXDdvyLM+cOIbW4bUH/UPVZW2J99ue1os2LjTIFngvFCKkUxTyzh0s5O/cSUdpmrXPIr/8D4QShTGQajiDQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
  SFS:(13230040)(7416014)(1800799024)(52116014)(41320700013)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?W3Fe6hC7dXhMQUb4t2fT5bSkVtEbgtspQi2h4RGBQ2/MxD81/KYx7g5HwSh/?=
- =?us-ascii?Q?bJdJGgJ+qMgb6xKfD5GDs3RHtZFSixHyxfZMrzoNqaOGqt379J/04DZNBjMF?=
- =?us-ascii?Q?Jvx7nkVD/LuKqLFebW4LCQqWHNPjx5sg5i4lExf6O6MRTRmSDrhYy/J6LZz3?=
- =?us-ascii?Q?JQhWR5NRg16xZOFtiACjujm2VheuUfqZgBXHu9NwQ2KpagG9I/cHoDTfY0Gb?=
- =?us-ascii?Q?kkcmasb2Ji3ShbSre6ovpd0ehjSP8WJHa+cOYQtmV9Y3pqNLg3KdVlwSKjM4?=
- =?us-ascii?Q?8Orkjgo3r3DOMrcu6Mxh39QMPuLhN3vfMdIxLJo+ShzT/To4LIj3MEXqCnvJ?=
- =?us-ascii?Q?Cdz/Rrb6pgHCdn0SWac3nTlyS41At6lmNxaeY/RjN4VPPa+AoPoJblPgxdIR?=
- =?us-ascii?Q?W10bWYQhormO4zLcqKR9ujDT89UlH9za0GQ1yaqdLp8xaCAmS593p0G0c8hW?=
- =?us-ascii?Q?1JSqJetC4wj2VQ5QgEVYlg+rR+yiJmC+T6RsgHZeBKM3RIJ6zKfpQYxoiQpo?=
- =?us-ascii?Q?twoZ8KsW6/dxI/fhyMSXGsklNhdcffD2pqCKbdiXSAfixq+STfwvUZoHDf+1?=
- =?us-ascii?Q?oNsFbSIZLTrfMgrw3xpn1LMaQuKLW+kA7lwm/LMMJcwpmEHPYRP6dMNlCxLe?=
- =?us-ascii?Q?+dmvS7QHJinS85q53Mgg7IrDZT6rD3bqjfXE/HyWIa37aFAvWQ2YJFlNsjFr?=
- =?us-ascii?Q?moYFmPXma3HmaQrnuNz1dY2kRJLRXsUe4hiYmu11dKb9gA+dinKwSANBOhTn?=
- =?us-ascii?Q?wBHR6Uub3IpqcA8BFbKbgwBC+32EE2lyFKNJrlUbk2DiPrE0Dbykfk5bHhUK?=
- =?us-ascii?Q?YYpXWCJjTuxvUJWbzzzux2ZXR648TimM6xkLaXgGzm8a5w13IDROA6j/XJ8v?=
- =?us-ascii?Q?4YVYe71Jx8kRmnE9K87FhAtG7PxFEOmy2ku8e7atqM8J1bbi4OiYDq9Tl/Hk?=
- =?us-ascii?Q?evMW2D/AN+YifR4Egitmt8NqYqPRCLVnOC6xAaY72WG/NBD+iN3aICQ+elVO?=
- =?us-ascii?Q?p2xsQwrGlVwawCcFUBbJg/Dtv+0/DnYccj3pT3e9ZnJEqjQFOQJ619eE8uEh?=
- =?us-ascii?Q?BkrVkVVqjagvZn8KUiRtoNJ8lnE50fQYIPwB3kz59hbSQAIkgni3hZmpd997?=
- =?us-ascii?Q?mpM1r2ZTJLPY39kbuJASuyUEYP1gn36Goco6uYsbU2im6WST3VSiThIeacgt?=
- =?us-ascii?Q?0b+jcAQGqOtQcR1zY3/sT1SkBvy2ramFe4E86wzM1Hfy11/GBNVdAIBs/uvM?=
- =?us-ascii?Q?mm8dPwPXCp+t209KtMPSl3Wgu81wbQA2dCHM+MEXd5p/hs3xqj7OplsOPVoA?=
- =?us-ascii?Q?KXiFLx6+4EShv1Un2iqW5jvjoFOomCHERAiWS7AKubnfbj74OVTHbAnb98X6?=
- =?us-ascii?Q?1EipTwa4m5pWtYnfdycLhOMwocxCEEuMaLrld6Ajao9SjGNWJ2FmTqqQwBIZ?=
- =?us-ascii?Q?d0dyZkbS3i3UIrA/Vz+XLYHQGsXrxsMiwB3e5t3ihVO790/8Ni+s6QPC3y+B?=
- =?us-ascii?Q?yEj/0p/a634Us4ElIN8oVoHdmaUZ3XMc8b8ZI8dTqrbvpwCDTrOI5eVSvpvV?=
- =?us-ascii?Q?pm3W9qngyZpuqFhDFb8PJ+k6noivNRbpDtcVIm9H0+M/KqUCexCqxFOF89ui?=
- =?us-ascii?Q?7w=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BQYl/6RYXEn+bJpJNvcQM2MzeQVj6FkZvHSF4pIuiA0MMeT6KO82RL7cIjV0?=
+ =?us-ascii?Q?7Gja2dWWI5fSjzrPXDvSTN5sG/P1q+D4oUY87quHElEVDytMY8+FHyEhKoOa?=
+ =?us-ascii?Q?uxNzgydOTFZ8s9uLN8Pq7oQ+ErHG1ZbAwQTC+z7nqMcxdvpAmU3vDxD6Mg8C?=
+ =?us-ascii?Q?/I0VkyoQbwc4nU1F3Ifuh92G4eOFJRXpKQXNAXRB4682+zS8bUf+iNNwz1bM?=
+ =?us-ascii?Q?y1XalaeZkRRTV+Ol2nfKt6WmLph5OGgLAcmf2yHjbbzdNQlaGp9cHbxgcOTd?=
+ =?us-ascii?Q?6+y5dihTkPunrAcctRWZ92EKOmsOjhg7pEF35W8MyEISGW3RADZxXCh+lgdT?=
+ =?us-ascii?Q?nLGf6o3+zV/N93y93vQqLwDp0BQ/jrjdk6OBWkR4YPhx/XEJ2pv8FNfnqtcO?=
+ =?us-ascii?Q?MWXh0zV9JZa6lGUBt9roIATUFVlUM7pQpmpAn5t/e4gdMcVd5kLhms0Am+Wh?=
+ =?us-ascii?Q?juf4mnrty4MSW5JRden/byuUALcWWmBgABYt+57Z3uoXdTBhNw/RwXh44JSO?=
+ =?us-ascii?Q?VV3tvY80gER6ZgmT+PtDJGma7puz4HSNEt4kQglKpt4ZPZg7bQOv3rwh1IfQ?=
+ =?us-ascii?Q?syUTjF6/po/tY9MLPhvcRRg8+MlAl+ECgQzyiU+axTSUZTC9gkMsFYc4/2rP?=
+ =?us-ascii?Q?+PqLzNMxPKQm1VQlorrfO/cmHvxY5SZs4QCkE1ektIKB5qB/1z0/I3SyKCL9?=
+ =?us-ascii?Q?+C0me/K/dILjamqzVU0j48Mga8uXBNM62BP9fkLu2jmBDDyw9+yCvuO8vRkD?=
+ =?us-ascii?Q?xPv4T+Qe5uOTyco7JINZ9MrICbD8uLp+gtlqZTny4ELCckWiL2i7WftZREst?=
+ =?us-ascii?Q?coxj4bpTJtpZ/ZGZIvlOTzH42JJ73ZOVC/AXI4wN/DR77CgzLX5vLJZj5acT?=
+ =?us-ascii?Q?F6uAWLESdPyyLIJ53ndPn6kOA/npn4WZRJCDxqZo2ya6iHEgU8v0nL8MLdPM?=
+ =?us-ascii?Q?342GrbnSEq1wzpR++jlLmA1cAkIGGuTEX0psCM6j4tO+DJWm1jQeAihxoPqD?=
+ =?us-ascii?Q?Hex3tjVsABqNYVZh5a3ur8+OjAkqcDk820AO/m6zcYlHyZwCeqnZBzaoCXfZ?=
+ =?us-ascii?Q?fHYGLfeLM/WXv4XAnJlxa6MBPug4IM39HkDByK0s8+uRspTcudKUmytfdNXo?=
+ =?us-ascii?Q?/E60gL0t1a9B0IWeMXfLAMwyhm4ao8F995lBJYp/9tQZpeVj3rdGg+MhN8X8?=
+ =?us-ascii?Q?3F+1NryCpLJ8ka2w0t0EXqeumU6m18JU7Hrf6pZG0onHb6R4k0U86NrTKmDs?=
+ =?us-ascii?Q?EJGrw7gh/Dt177IUt00T8GCGwf49ZM3nc7Q5ahyaoMUIUMvcW4/2Whihzduc?=
+ =?us-ascii?Q?imq+zG64l+W2gCtSL8HGnaSnoCEr8dJh69m+ukfoEkV0V66Pj032khDJTws4?=
+ =?us-ascii?Q?W/CtlOalhuV7G6Un7h/5ztjsoA1vZ4CAipJjnSBBDoVW0i63wKewDRkvCvuU?=
+ =?us-ascii?Q?0Pu6wlW2G5C13is8AYohukt13HsySen5kZPf/oRz2EXSm++wb/OsoXAaztBY?=
+ =?us-ascii?Q?aSU+W4tS7vUamiLk6PU6SMsTYk9RYoM4qjqk6fM2Y6XMkRRW5EU9F/9lKguk?=
+ =?us-ascii?Q?iaObNkIHZoWu85gfEAgp9chr/3t8DP+jvocmPE5kyjfEU0U3JDUzJjLvSU90?=
+ =?us-ascii?Q?9A=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa2cfb93-ebfc-4815-11ac-08dca7938182
+X-MS-Exchange-CrossTenant-Network-Message-Id: c27c1fca-10d0-4586-15f1-08dca79381f4
 X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jul 2024 01:38:35.5338 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jul 2024 01:38:36.2859 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mlQprOZdmIckxy85aYdWu46HD+1aheG/VA2aufhNZ+vthpnkFoyIfWXdPZJswPIrBy5oOUhEpbU3JvK+hoS/dmZUN2ZhTCMIqI9Hj9ChTwY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: aoai5b8EU+DZzDJlaLAdw1nRDNCGqKiTDcFr8fM6h50tZhexQ7Ekp713syNI7nNTU0UjCNhurkn8KxmNpTghMbVeHUv5uEASTm+8+SVLTz8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0623
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -134,239 +135,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add cdns USB3 wrapper driver.
+For some JH7110 boards, USB host overcurent pin is not reserved,
+To make USB host work, overcurrent pin must be disabled. So set the
+pin default disabled.
 
 Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
 ---
- drivers/usb/cdns3/Kconfig          |   7 ++
- drivers/usb/cdns3/Makefile         |   2 +
- drivers/usb/cdns3/cdns3-starfive.c | 191 +++++++++++++++++++++++++++++
- 3 files changed, 200 insertions(+)
- create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
+ drivers/pinctrl/starfive/pinctrl-jh7110-sys.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
-index 35b61497d9..f8f363982b 100644
---- a/drivers/usb/cdns3/Kconfig
-+++ b/drivers/usb/cdns3/Kconfig
-@@ -55,4 +55,11 @@ config USB_CDNS3_TI
- 	help
- 	  Say 'Y' here if you are building for Texas Instruments
- 	  platforms that contain Cadence USB3 controller core. E.g.: J721e.
-+
-+config USB_CDNS3_STARFIVE
-+	tristate "Cadence USB3 support on Starfive platforms"
-+	default USB_CDNS3
-+	help
-+	  Say 'Y' here if you are building for Starfive platforms
-+	  that contain Cadence USB3 controller core. E.g.: JH7110.
- endif
-diff --git a/drivers/usb/cdns3/Makefile b/drivers/usb/cdns3/Makefile
-index 18d7190755..03d1eadb2f 100644
---- a/drivers/usb/cdns3/Makefile
-+++ b/drivers/usb/cdns3/Makefile
-@@ -9,3 +9,5 @@ cdns3-$(CONFIG_$(SPL_)USB_CDNS3_GADGET)	+= gadget.o ep0.o
- cdns3-$(CONFIG_$(SPL_)USB_CDNS3_HOST)	+= host.o
- 
- obj-$(CONFIG_USB_CDNS3_TI)		+= cdns3-ti.o
-+
-+obj-$(CONFIG_USB_CDNS3_STARFIVE)	+= cdns3-starfive.o
-diff --git a/drivers/usb/cdns3/cdns3-starfive.c b/drivers/usb/cdns3/cdns3-starfive.c
-new file mode 100644
-index 0000000000..839d72e4e1
---- /dev/null
-+++ b/drivers/usb/cdns3/cdns3-starfive.c
-@@ -0,0 +1,191 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * cdns3-starfive.c - StarFive specific Glue layer for Cadence USB Controller
-+ *
-+ * Copyright (C) 2024 StarFive Technology Co., Ltd.
-+ *
-+ * Author:	Minda Chen <minda.chen@starfivetech.com>
-+ */
-+
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/usb/otg.h>
-+#include <reset.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+#include <malloc.h>
-+
-+#include "core.h"
-+
-+#define USB_STRAP_HOST			BIT(17)
-+#define USB_STRAP_DEVICE		BIT(18)
-+#define USB_STRAP_MASK			GENMASK(18, 16)
-+
-+#define USB_SUSPENDM_HOST		BIT(19)
-+#define USB_SUSPENDM_MASK		BIT(19)
-+
-+#define USB_MISC_CFG_MASK		GENMASK(23, 20)
-+#define USB_SUSPENDM_BYPS		BIT(20)
-+#define USB_PLL_EN			BIT(22)
-+#define USB_REFCLK_MODE			BIT(23)
-+
-+struct cdns_starfive {
-+	struct udevice *dev;
-+	struct regmap *stg_syscon;
-+	struct reset_ctl_bulk resets;
-+	struct clk_bulk clks;
-+	u32 stg_usb_mode;
-+	enum usb_dr_mode mode;
-+};
-+
-+static void cdns_mode_init(struct cdns_starfive *data, enum usb_dr_mode mode)
-+{
-+	unsigned int strap, suspendm;
-+
-+	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-+			   USB_MISC_CFG_MASK,
-+			   USB_SUSPENDM_BYPS | USB_PLL_EN | USB_REFCLK_MODE);
-+
-+	switch (mode) {
-+	case USB_DR_MODE_HOST:
-+		strap = USB_STRAP_HOST;
-+		suspendm = USB_SUSPENDM_HOST;
-+		break;
-+
-+	case USB_DR_MODE_PERIPHERAL:
-+		strap = USB_STRAP_DEVICE;
-+		suspendm = 0;
-+		break;
-+	default:
-+		return;
-+	}
-+
-+	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-+			   USB_STRAP_MASK, strap);
-+	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-+			   USB_SUSPENDM_MASK, suspendm);
-+}
-+
-+static void cdns_clk_rst_deinit(struct cdns_starfive *data)
-+{
-+	reset_assert_bulk(&data->resets);
-+	clk_disable_bulk(&data->clks);
-+}
-+
-+static int cdns_clk_rst_init(struct cdns_starfive *data)
-+{
+diff --git a/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c b/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+index dafba65eae..1102985ab9 100644
+--- a/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
++++ b/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+@@ -378,8 +378,15 @@ static int jh7110_sys_pinctrl_probe(struct udevice *dev)
+ {
+ 	struct starfive_pinctrl_soc_info *info =
+ 		(struct starfive_pinctrl_soc_info *)dev_get_driver_data(dev);
+-
+-	return starfive_pinctrl_probe(dev, info);
++	struct starfive_pinctrl_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
-+	ret = clk_get_bulk(data->dev, &data->clks);
-+	if (ret)
-+		return ret;
-+
-+	ret = reset_get_bulk(data->dev, &data->resets);
-+	if (ret)
-+		goto err_clk;
-+
-+	ret = clk_enable_bulk(&data->clks);
-+	if (ret) {
-+		dev_err(data->dev, "clk enable failed: %d\n", ret);
-+		goto err_en_clk;
-+	}
-+
-+	ret = reset_deassert_bulk(&data->resets);
-+	if (ret) {
-+		dev_err(data->dev, "reset deassert failed: %d\n", ret);
-+		goto err_reset;
-+	}
-+
-+	return 0;
-+
-+err_reset:
-+	clk_disable_bulk(&data->clks);
-+err_en_clk:
-+	reset_release_bulk(&data->resets);
-+err_clk:
-+	clk_release_bulk(&data->clks);
-+
++	ret = starfive_pinctrl_probe(dev, info);
++	/* Set default the usb controller overcurrent signal. */
++	if (!ret)
++		clrsetbits_le32(priv->base + JH7110_SYS_GPI,
++				GENMASK(22, 16), BIT(16));
 +	return ret;
-+}
-+
-+static int cdns_starfive_get_syscon(struct cdns_starfive *data)
-+{
-+	struct ofnode_phandle_args phandle;
-+	int ret;
-+
-+	ret = dev_read_phandle_with_args(data->dev, "starfive,stg-syscon", NULL, 1, 0,
-+					 &phandle);
-+	if (ret < 0) {
-+		dev_err(data->dev, "Can't get stg cfg phandle: %d\n", ret);
-+		return ret;
-+	}
-+
-+	data->stg_syscon = syscon_node_to_regmap(phandle.node);
-+	if (IS_ERR(data->stg_syscon)) {
-+		dev_err(data->dev, "fail to get regmap: %d\n", (int)PTR_ERR(data->stg_syscon));
-+		return PTR_ERR(data->stg_syscon);
-+	}
-+
-+	data->stg_usb_mode = phandle.args[0];
-+
-+	return 0;
-+}
-+
-+static int cdns_starfive_probe(struct udevice *dev)
-+{
-+	struct cdns_starfive *data = dev_get_plat(dev);
-+	enum usb_dr_mode dr_mode;
-+	ofnode node;
-+	int ret;
-+
-+	data->dev = dev;
-+
-+	ret = cdns_starfive_get_syscon(data);
-+	if (ret)
-+		return ret;
-+
-+	node = ofnode_by_compatible(dev_ofnode(dev), "cdns,usb3");
-+	if (!ofnode_valid(node)) {
-+		dev_err(dev, "failed to get usb node\n");
-+		return -ENODEV;
-+	}
-+
-+	dr_mode = usb_get_dr_mode(node);
-+
-+	data->mode = dr_mode;
-+	ret = cdns_clk_rst_init(data);
-+	if (ret) {
-+		dev_err(data->dev, "clk reset failed: %d\n", ret);
-+		return ret;
-+	}
-+	cdns_mode_init(data, dr_mode);
-+
-+	return 0;
-+}
-+
-+static int cdns_starfive_remove(struct udevice *dev)
-+{
-+	struct cdns_starfive *data = dev_get_plat(dev);
-+
-+	cdns_clk_rst_deinit(data);
-+	return 0;
-+}
-+
-+static const struct udevice_id cdns_starfive_of_match[] = {
-+	{ .compatible = "starfive,jh7110-usb", },
-+	{},
-+};
-+
-+U_BOOT_DRIVER(cdns_starfive) = {
-+	.name = "cdns-starfive",
-+	.id = UCLASS_NOP,
-+	.of_match = cdns_starfive_of_match,
-+	.bind = cdns3_bind,
-+	.probe = cdns_starfive_probe,
-+	.remove = cdns_starfive_remove,
-+	.plat_auto	= sizeof(struct cdns_starfive),
-+	.flags = DM_FLAG_OS_PREPARE,
-+};
+ }
+ 
+ static const struct udevice_id jh7110_sys_pinctrl_ids[] = {
 -- 
 2.17.1
 
