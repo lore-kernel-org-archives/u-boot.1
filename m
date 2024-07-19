@@ -4,45 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B88C0C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 09:47:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B367C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 714C788B60;
-	Fri, 19 Jul 2024 11:47:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id A3E5488B55;
+	Fri, 19 Jul 2024 12:30:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hRQ5pz0w";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="D0USMg9u";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9A6D88B3A; Fri, 19 Jul 2024 11:47:07 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 097A188B65; Fri, 19 Jul 2024 12:30:15 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17DD888113
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 11:47:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8254887CE
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:30:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=nxp.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id CD7771A1386;
- Fri, 19 Jul 2024 11:47:04 +0200 (CEST)
-Received: from aprdc01srsp001v.ap-rdc01.nxp.com
- (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 6C8B01A046D;
- Fri, 19 Jul 2024 11:47:04 +0200 (CEST)
-Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- DC266183AD14; Fri, 19 Jul 2024 17:47:02 +0800 (+08)
-From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
-To: u-boot@lists.denx.de, sbabic@denx.de, festevam@gmail.com,
- uboot-imx@nxp.com, trini@konsulko.com, peng.fan@nxp.com
-Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Yi Zhao <yi.zhao@nxp.com>,
- Jiafei Pan <Jiafei.Pan@nxp.com>
-Subject: [PATCHv1 1/2] mp: imx8m: add cpu command support
-Date: Fri, 19 Jul 2024 18:07:57 +0800
-Message-Id: <20240719100758.1917-2-Zhiqiang.Hou@nxp.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240719100758.1917-1-Zhiqiang.Hou@nxp.com>
-References: <20240719100758.1917-1-Zhiqiang.Hou@nxp.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WQQsw4Y6Yz9tXp;
+ Fri, 19 Jul 2024 12:30:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1721385012;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8BLT3SISHGfbNU/xQ1TZqBT/DY6wFIyVn1Ynri1PtXo=;
+ b=hRQ5pz0wi2oojR1tsQLf2kCYzPFdbUc8MTnyFlU2WryQVsfglvOuiM+fX0I5UoTvLwxn1Z
+ M1E3PEM/HzBm/9pBSRudJrxTqCn+hMFuPFmHwDKqamhVLLAZSIkj95t0JJIPWt1OofptUl
+ WWg52h9tjI1+OuBzcTFTpX3TzKY5AX/xjMkaGYKoHWknzwJUFXPCP0iMDqAT6elB91HpH7
+ WxVREwES+O/7mFpeGDi/U7Unj2oEkNJuV7rGOt/IhSGCThNgR+K1gYN1Dd/bozGlOYMqr5
+ RpC6kibkc1H7Qp0LHdozQC243qkWE1pzUk94PflIxbaYNHLTwScm95BmHGemhw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1721385010;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8BLT3SISHGfbNU/xQ1TZqBT/DY6wFIyVn1Ynri1PtXo=;
+ b=D0USMg9ujYAJ7mJnKKr4sv0AiQMG9bhHIT3Ujps9rnILO/69jg9ZMxJvBdqZ2NnnjB18Bx
+ +n2ongDiIHB5RnBExK0XoqzA2EjRHRkrCGSZFukYTgfSHniKo5Eznc3KkXm0jd5s2Nzl1Y
+ izgWAdruT1Vl2SD7/6EIX65NW0eO7Z2kNDDAClgFLFlw/Ow01m/BeXywPujCFfneVwBtbY
+ 217yssoKA7vl5Gt4zDZbU/kS4H1QQ1ANu6mPLFQgybUx7kZXonmOiQ93tf/9t6JQHkDCSc
+ 6w6QrA5/6SxyW6XT9Ypn24jp+J/kwayyfPSsaASGI1sXSxZ2k58B1SnJQpsJNA==
+To: u-boot@lists.denx.de
+Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
+ trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 01/37] board: BuS: Remove duplicate newlines
+Date: Fri, 19 Jul 2024 12:27:55 +0200
+Message-ID: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 4tch9i8phgyjiam3iph15uc7fgm5nuhg
+X-MBO-RS-ID: 6ffe104530896122007
+X-Rspamd-Queue-Id: 4WQQsw4Y6Yz9tXp
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,142 +83,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+Drop all duplicate newlines. No functional change.
 
-Implement the cpu command to kick cpu core to run barematel or RTOS
-applications.
-
-Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Signed-off-by: Yi Zhao <yi.zhao@nxp.com>
-Signed-off-by: Jiafei Pan <Jiafei.Pan@nxp.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- arch/arm/mach-imx/imx8m/Makefile |   3 +-
- arch/arm/mach-imx/imx8m/mp.c     | 100 +++++++++++++++++++++++++++++++
- 2 files changed, 102 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/mach-imx/imx8m/mp.c
+ board/BuS/eb_cpu5282/eb_cpu5282.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/mach-imx/imx8m/Makefile b/arch/arm/mach-imx/imx8m/Makefile
-index abd5ddc177..9e4d919159 100644
---- a/arch/arm/mach-imx/imx8m/Makefile
-+++ b/arch/arm/mach-imx/imx8m/Makefile
-@@ -1,9 +1,10 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
--# Copyright 2017 NXP
-+# Copyright 2017, 2024 NXP
+diff --git a/board/BuS/eb_cpu5282/eb_cpu5282.c b/board/BuS/eb_cpu5282/eb_cpu5282.c
+index cf5610861b5..c254da62bf4 100644
+--- a/board/BuS/eb_cpu5282/eb_cpu5282.c
++++ b/board/BuS/eb_cpu5282/eb_cpu5282.c
+@@ -181,5 +181,4 @@ void __led_set(led_id_t mask, int state)
  
- obj-y += lowlevel_init.o
- obj-y += clock_slice.o soc.o
-+obj-$(CONFIG_MP) += mp.o
- obj-$(CONFIG_ARMV8_PSCI) += psci.o
- obj-$(CONFIG_IMX8MQ) += clock_imx8mq.o
- obj-$(CONFIG_IMX8MM)$(CONFIG_IMX8MN)$(CONFIG_IMX8MP) += clock_imx8mm.o
-diff --git a/arch/arm/mach-imx/imx8m/mp.c b/arch/arm/mach-imx/imx8m/mp.c
-new file mode 100644
-index 0000000000..33b9ccfce2
---- /dev/null
-+++ b/arch/arm/mach-imx/imx8m/mp.c
-@@ -0,0 +1,100 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2024 NXP
-+ */
-+
-+#include <asm/arch/imx-regs.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm/ptrace.h>
-+#include <asm/system.h>
-+#include <config.h>
-+#include <cpu_func.h>
-+#include <linux/psci.h>
-+#include <vsprintf.h>
-+
-+#ifndef MAX_CPUS
-+#define MAX_CPUS 4
-+#endif
-+
-+/* A53 Reset Control Register (SRC_A53RCR0) */
-+#define SRC_A53RCR0_CORE_1_RESET_MASK		BIT(5)
-+#define SRC_A53RCR0_CORE_2_RESET_MASK		BIT(6)
-+#define SRC_A53RCR0_CORE_3_RESET_MASK		BIT(7)
-+
-+/* A53 Reset Control Register (SRC_A53RCR1) */
-+#define SRC_A53RCR1_CORE_1_ENABLE_MASK		BIT(1)
-+#define SRC_A53RCR1_CORE_2_ENABLE_MASK		BIT(2)
-+#define SRC_A53RCR1_CORE_3_ENABLE_MASK		BIT(3)
-+
-+static struct src *src = (struct src *)SRC_BASE_ADDR;
-+
-+static u32 cpu_reset_mask[MAX_CPUS] = {
-+	0, /* We don't really want to modify the cpu0 */
-+	SRC_A53RCR0_CORE_1_RESET_MASK,
-+	SRC_A53RCR0_CORE_2_RESET_MASK,
-+	SRC_A53RCR0_CORE_3_RESET_MASK
-+};
-+
-+static u32 cpu_ctrl_mask[MAX_CPUS] = {
-+	0, /* We don't really want to modify the cpu0 */
-+	SRC_A53RCR1_CORE_1_ENABLE_MASK,
-+	SRC_A53RCR1_CORE_2_ENABLE_MASK,
-+	SRC_A53RCR1_CORE_3_ENABLE_MASK
-+};
-+
-+int is_core_valid(unsigned int core)
-+{
-+	if (core < MAX_CPUS)
-+		return 1;
-+
-+	return 0;
-+}
-+
-+int cpu_status(u32 nr)
-+{
-+	printf("core %d => %d\n", nr, !!(src->a53rcr1 & cpu_ctrl_mask[nr]));
-+
-+	return 0;
-+}
-+
-+int cpu_reset(u32 nr)
-+{
-+	/* Software reset of the CPU N */
-+	src->a53rcr |= cpu_reset_mask[nr];
-+
-+	return 0;
-+}
-+
-+int cpu_release(u32 nr, int argc, char *const argv[])
-+{
-+	struct pt_regs regs;
-+	u64 boot_addr;
-+
-+	if (nr >= MAX_CPUS) {
-+		printf("Invalid CPU ID %d\n", nr);
-+		return -1;
-+	}
-+
-+	boot_addr = simple_strtoull(argv[0], NULL, 16);
-+
-+	regs.regs[0] = PSCI_0_2_FN64_CPU_ON;
-+	regs.regs[1] = nr;
-+	regs.regs[2] = boot_addr;
-+	regs.regs[3] = 0;
-+
-+	smc_call(&regs);
-+	if (regs.regs[0])
-+		return -1;
-+
-+	printf("kicked cpu core #%d to address %llx\n", nr, boot_addr);
-+
-+	return 0;
-+}
-+
-+int cpu_disable(u32 nr)
-+{
-+	/* Disable the CPU N */
-+	src->a53rcr1 &= ~cpu_ctrl_mask[nr];
-+
-+	return 0;
-+}
+ /*---------------------------------------------------------------------------*/
+ 
+-
+ /* EOF EB+MCF-EV123.c */
 -- 
 2.43.0
 
