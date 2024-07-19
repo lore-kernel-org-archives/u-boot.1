@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B66CC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 11:28:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D04AFC3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 11:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9020B88B95;
-	Fri, 19 Jul 2024 13:28:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0316F88BAD;
+	Fri, 19 Jul 2024 13:28:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A65C88B8A; Fri, 19 Jul 2024 13:28:01 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
+ id 9CF8C884CA; Fri, 19 Jul 2024 13:28:02 +0200 (CEST)
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B218C88B8D
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 13:27:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3E9F88B7C
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 13:27:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 7C65B1A2969;
- Fri, 19 Jul 2024 13:27:58 +0200 (CEST)
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 7F12B20136B;
+ Fri, 19 Jul 2024 13:27:59 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 425841A13B8;
- Fri, 19 Jul 2024 13:27:58 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 4658E201367;
+ Fri, 19 Jul 2024 13:27:59 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- C8D87181D0FE; Fri, 19 Jul 2024 19:27:56 +0800 (+08)
+ C76FD1820F77; Fri, 19 Jul 2024 19:27:57 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, sbabic@denx.de, festevam@gmail.com,
  uboot-imx@nxp.com, trini@konsulko.com, peng.fan@nxp.com
 Cc: Tao Yang <Tao.Yang1@nxp.com>,
 	Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv1 2/3] imx93_evk: add definition MAX_CPUS
-Date: Fri, 19 Jul 2024 19:48:49 +0800
-Message-Id: <20240719114850.28134-3-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv1 3/3] configs: imx93-11x11-evk: enable CONFIG_MP to support
+ cpu command
+Date: Fri, 19 Jul 2024 19:48:50 +0800
+Message-Id: <20240719114850.28134-4-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240719114850.28134-1-Zhiqiang.Hou@nxp.com>
 References: <20240719114850.28134-1-Zhiqiang.Hou@nxp.com>
@@ -61,33 +62,23 @@ X-Virus-Status: Clean
 
 From: Tao Yang <Tao.Yang1@nxp.com>
 
-Add definition for determining the implemented CPU numbers.
+Enable the cpu command support for the default config.
 
 Signed-off-by: Tao Yang <Tao.Yang1@nxp.com>
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
- include/configs/imx93_evk.h | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ configs/imx93_11x11_evk_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
-index ce6567e2af..24a8124ca1 100644
---- a/include/configs/imx93_evk.h
-+++ b/include/configs/imx93_evk.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022 NXP
-+ * Copyright 2022, 2024 NXP
-  */
- 
- #ifndef __IMX93_EVK_H
-@@ -134,4 +134,6 @@
- /* Using ULP WDOG for reset */
- #define WDOG_BASE_ADDR          WDG3_BASE_ADDR
- 
-+#define MAX_CPUS 2
-+
- #endif
+diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
+index 2246715d82..b5c7e92a0e 100644
+--- a/configs/imx93_11x11_evk_defconfig
++++ b/configs/imx93_11x11_evk_defconfig
+@@ -127,3 +127,4 @@ CONFIG_ULP_WATCHDOG=y
+ CONFIG_WDT=y
+ CONFIG_LZO=y
+ CONFIG_BZIP2=y
++CONFIG_MP=y
 -- 
 2.43.0
 
