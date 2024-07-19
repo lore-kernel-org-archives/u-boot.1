@@ -4,80 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27E9C3DA59
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03495C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 15:47:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 389E388BD6;
-	Fri, 19 Jul 2024 17:39:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 77F9C884E2;
+	Fri, 19 Jul 2024 17:47:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LovoEqy6";
+	dkim=pass (2048-bit key; unprotected) header.d=armadeus.com header.i=@armadeus.com header.b="NykuTlez";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A0E388BCF; Fri, 19 Jul 2024 17:39:00 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1F7438852E; Fri, 19 Jul 2024 17:47:46 +0200 (CEST)
+Received: from 6.mo576.mail-out.ovh.net (6.mo576.mail-out.ovh.net
+ [46.105.50.107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5823788BD6
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:38:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05D6988315
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:47:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4266f3e0df8so13348885e9.2
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 08:38:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721403537; x=1722008337;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=szKoElj3LiGC3E/TsrjpbOVIG50cBu/zHMjtEbL8kiE=;
- b=LovoEqy6UfQ8LSvOrR5eQJqPok29/AB0psUUM8umvUnHMufk5p7xk2BOSFlZybP9Nm
- C/rOIV2Uwuy0HNtwmxEQ4t15/zNJwaWn/sK8E4wWY88lujOHsj3VIJ6YdXKVG7yl2qNJ
- EGWdNDLQkgKLs1PkW5YLXHbv9q/AW0RvaD+D8ZQhVI/X8gueBpDqzXBWqLP3eNnr9rl2
- /STvMGVwg4bqMz4DuCJ1E7+vR0RWvwV26daIrcanROHC2PZaJchRu67Qiei5QOiIEcwn
- C5tHXQvJmX9Scijf3H6F2tEbw4qN0oGxITEvdMT0a/OuhF2dC6SGBHBtliu3C7mA+K6l
- l0ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721403537; x=1722008337;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=szKoElj3LiGC3E/TsrjpbOVIG50cBu/zHMjtEbL8kiE=;
- b=GCbO+bllhPIJ68nv+v/AJwNrOUK8ZGUBjfJ8B872bp9zKl6aQA6NlFYPiyYBAO5mGh
- T77MoKthgeB+CwSrQISBtLYbXlYgcplb9gTBZzczRM8zYM4FAixCFxBE5m4nJfBdkkkF
- HF+LDZOv+M/T0tZuF27Rn+e/ozmt83NKFpnfLAl1d7pf8xJdh0PPg9ZEI3lcxzedIwbH
- wrhvzy2d0e7yMXveJ8EHMtdIQzRA5bCy39ee2HqxFCLCh+iGZNd2CNz/eHQcYgHjgQKN
- FeliOsiCr+WWUiN/cX/ro/d5QqSEbvboBpFICFWdKzeDJYXxiHRN25VqeXrRXOtognoe
- 4b7g==
-X-Gm-Message-State: AOJu0YxSIJER7kv3fKNpXU/2WQiKkcCAF5pYEGGWtS93pvxCVyg56XRR
- uLs3vdtWUx3intRERk5SpkT0DdT7UCpnUjjxiUxMo7F/Sk7Aie+tTwX70gZfD3o=
-X-Google-Smtp-Source: AGHT+IGFbSI7grCgEn4wZlmbf2js/AoZySRl6AAoiomAcVRa7B/+oOi2ZAxOgTSscnb1S6VG2WOAiw==
-X-Received: by 2002:a05:600c:1ca8:b0:426:54c9:dfed with SMTP id
- 5b1f17b1804b1-427c371a871mr60502075e9.28.1721403536452; 
- Fri, 19 Jul 2024 08:38:56 -0700 (PDT)
-Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d68fa9b1sm29655085e9.8.2024.07.19.08.38.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 08:38:55 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Fri, 19 Jul 2024 17:38:54 +0200
-Subject: [PATCH] env: mmc: Fix env loading with CONFIG_SYS_MMC_ENV_PART
+ dmarc=none (p=none dis=none) header.from=armadeus.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=sebastien.szymanski@armadeus.com
+Received: from director3.ghost.mail-out.ovh.net (unknown [10.108.9.56])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4WQYwH3Xyqz1XkF
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 15:47:43 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-5bt55 (unknown [10.110.168.219])
+ by director3.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 0F8591FD7B;
+ Fri, 19 Jul 2024 15:47:43 +0000 (UTC)
+Received: from armadeus.com ([37.59.142.104])
+ by ghost-submission-6684bf9d7b-5bt55 with ESMTPSA
+ id 4PFgAZ+KmmaYCwEAzz2HBQ
+ (envelope-from <sebastien.szymanski@armadeus.com>);
+ Fri, 19 Jul 2024 15:47:43 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-104R005bac1b0eb-5bd7-4765-9cfe-7a77f309ff61,
+ 68270C7946175900C0D504C303ABE67534C2A4CF)
+ smtp.auth=sebastien.szymanski@armadeus.com
+X-OVh-ClientIp: 92.148.253.243
+Message-ID: <e1645877-d5b8-44f5-b185-5427b28fa2e7@armadeus.com>
+Date: Fri, 19 Jul 2024 17:47:42 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240719-fix-mmc-env-boot1-v1-1-e32b2037d4d8@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAI2ImmYC/x2MQQqAIBAAvyJ7biHFKPtKdNDcag9paEgQ/T3pO
- DAzD2RKTBlG8UCiwpljqCAbActuw0bIvjKoVum2lwZXvvE4FqRQ0MV4SbSD1053UllloHZnoir
- 9z2l+3w/sP7zvYwAAAA==
-To: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
+To: Fabio Estevam <festevam@gmail.com>
+Cc: peng.fan@nxp.com, uboot-imx@nxp.com, m.othacehe@gmail.com,
+ u-boot@lists.denx.de
+References: <20240718165454.904763-1-festevam@gmail.com>
+ <abf7f940-1bfb-4e5f-937b-135a580034b3@armadeus.com>
+ <CAOMZO5D4FFvK=L+GwdfpLAyGBV2d2t-9d3GGTAuXYU0jt3kfjg@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
+Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
+ xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
+ ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
+ yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
+ ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
+ cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
+ AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
+ LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
+ /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
+ v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
+ 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
+ d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
+ ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
+ B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
+ vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
+ zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
+ KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
+ FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
+ 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
+ MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
+ ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
+ DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
+ ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
+ pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
+ JNoSD7Kz6Y9qnKo=
+In-Reply-To: <CAOMZO5D4FFvK=L+GwdfpLAyGBV2d2t-9d3GGTAuXYU0jt3kfjg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 9988702498653072297
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeftddrhedugdelvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhjggtgfesthekredttddvjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnheptdeghedtudeltdduveevkeevveevfefftdehtdeikeegueekvedtffeigeetkefhnecukfhppeduvdejrddtrddtrddupdelvddrudegkedrvdehfedrvdegfedpfeejrdehledrudegvddruddtgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehjeeipdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=lFmHPWHh4W99xWS50kX34VYDR8PXPUCrZqbiyZjhrn4=; 
+ c=relaxed/relaxed; d=armadeus.com; h=From;
+ s=ovhmo103079-selector1; t=1721404063; v=1;
+ b=NykuTlezVN4AlYNHgRwbEd5Rwyvp2jJXE3Mjt4ayZVcai/kbRKYRdYmhorI0Un3icRVms3wL
+ LPlpmae7XhBoVttHs4FfPr0P0ecyZ4J1jA0HzTOSgCz9yPS5J8jq4L2I4JB8rKdypwt32BKVIR6
+ WPchNQ/6g1oeXpMWDjJhm1zdYoWSaByGkPkJra4BzNS6OorYY7jA5HfbpKaFKrcFCutb3l1LVbJ
+ oK4ggypYwRSkv8jKapqOH9tf2feILQxMSnkQte1b4UvzlR2ft6QMw7CuDVrARkJXSt2YH+iJlCC
+ Jr0f0slF0Lz4g/6+vZIryGkWEGyWw54f4S2BeeE7HcBog==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,70 +111,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_SYS_MMC_ENV_PART=2, the environment is loaded from
-the USER partition (hwpart=0) instead of from the
-BOOT1 partition (hwpart=2).
+On 7/19/24 16:13, Fabio Estevam wrote:
+> Hi Sébastien,
+> 
+> On Fri, Jul 19, 2024 at 11:00 AM Sébastien Szymanski
+> <sebastien.szymanski@armadeus.com> wrote:
+> 
+>>> +&A55_0 {
+>>> +     clocks = <&clk IMX93_CLK_ARM_PLL>;
+>>
+>> Why IMX93_CLK_ARM_PLL and not IMX93_CLK_A55_SEL ?
+> 
+> IMX93_CLK_A55_SEL is a mux that can select between a55_alt versus arm_pll.
+> 
+> The real CPU clock is IMX93_CLK_ARM_PLL, so this one better represents it.
 
-IS_ENABLED() cannot be used for non-boolean KConfig options.
-Its documentation states:
+Ok, thank for the explanation.
 
-> * IS_ENABLED(CONFIG_FOO) evaluates to 1 if CONFIG_FOO is set to 'y',
-> * 0 otherwise.
+> 
+> This is also consistent with the other i.MX8M SoCs.
+> 
+> Take imx8mm.dtsi for example:
+> 
+> A53_0: cpu@0 {
+> ....
+>       clocks = <&clk IMX8MM_CLK_ARM>;
+> 
+> This also uses the "real" CPU clock, not the mux one (imx8mm_a53_sels).
+> 
+> I also plan to upstream this clock change to the Linux devicetree.
 
-So in our case, IS_ENABLED(CONFIG_SYS_MMC_ENV_PART) evaluates to 0.
+I did look at imx8mm.dtsi but the clock IMX8MM_CLK_ARM is not defined in 
+U-Boot and in Linux it's defined as:
 
-Because of this, the hwpart variable is never assigned and mmc_offset()
-ends up switching back to the USER hwpart (0) instead of BOOT1 (2).
+hws[IMX8MM_CLK_ARM] = imx_clk_hw_cpu("arm", "arm_a53_core",
+                                      hws[IMX8MM_CLK_A53_CORE]->clk,
+				     hws[IMX8MM_CLK_A53_CORE]->clk,
+                                      hws[IMX8MM_ARM_PLL_OUT]->clk,
+				     hws[IMX8MM_CLK_A53_DIV]->clk);
 
-Fix it by using #define instead.
+So in Linux for the i.MX93, the clocks property in the device tree has 
+to be IMX93_CLK_A55_CORE:
 
-Tested with:
+clks[IMX93_CLK_A55_CORE] = imx_clk_hw_cpu("a55_core", "a55_sel",
+					clks[IMX93_CLK_A55_SEL]->clk,
+					clks[IMX93_CLK_A55_SEL]->clk,
+					clks[IMX93_CLK_ARM_PLL]->clk,
+					clks[IMX93_CLK_A55_GATE]->clk);
 
-  # have CONFIG_SYS_MMC_ENV_PART=2 in defconfig
-  # 1. Erase mmc0boot1
-  => mmc dev 0 2
-  => mmc erase 0 400
-  => mmc read ${loadaddr} 0 400
-  => md ${loadaddr} 4
-  82000000: 00000000 00000000 00000000 00000000  ................
+?
 
-  # 2. Restore default environment and save to MMC
-  => env default -a -f
-  => saveenv
+Regards,
 
-  # 3. Read back mmc0boot1 and confirm the env is present
-  => mmc read ${loadaddr} 0 400
-  => md ${loadaddr} 4
-  82000000: 13e0632e 72646461 7469665f 3978303d  .c..addr_fit=0x9
+> 
+> Thanks
 
-Fixes: 5b4acb0ff79d ("env: mmc: Apply GPT only on eMMC user HW partition")
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- env/mmc.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/env/mmc.c b/env/mmc.c
-index 776df0786be5..0338aa6c56ad 100644
---- a/env/mmc.c
-+++ b/env/mmc.c
-@@ -110,8 +110,9 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
- 	int hwpart = 0;
- 	int err;
- 
--	if (IS_ENABLED(CONFIG_SYS_MMC_ENV_PART))
--		hwpart = mmc_get_env_part(mmc);
-+#if defined(CONFIG_SYS_MMC_ENV_PART)
-+	hwpart = mmc_get_env_part(mmc);
-+#endif
- 
- #if defined(CONFIG_ENV_MMC_PARTITION)
- 	str = CONFIG_ENV_MMC_PARTITION;
-
----
-base-commit: 459560000736ac7c9c8b04522789c20fb45ff95a
-change-id: 20240719-fix-mmc-env-boot1-a8d4b4512a29
-
-Best regards,
 -- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Sébastien Szymanski, Armadeus Systems
+Software engineer
 
