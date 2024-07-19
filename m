@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED88C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18424C3DA5D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 10:31:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AB1288B93;
-	Fri, 19 Jul 2024 12:30:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A4C388B8C;
+	Fri, 19 Jul 2024 12:30:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QGWPK7Jz";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rUIsvyns";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="r4/uKxax";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="b6jweISy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3547C88B86; Fri, 19 Jul 2024 12:30:19 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id D6E0788B9D; Fri, 19 Jul 2024 12:30:21 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6059E887CE
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:30:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0843488B4F
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 12:30:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WQQt11Xjyz9skw;
- Fri, 19 Jul 2024 12:30:17 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WQQt331NWz9tXp;
+ Fri, 19 Jul 2024 12:30:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1721385019;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0uk4DzoNArApLWn/IrTaFP2AJz1WSxaySSjyuEWTS5A=;
+ b=r4/uKxaxh/+iEOemYhCOrsyxM3q0+rRR+E5/npzfIdqkMPBbt9cFcqE5DkOW/nZNsJ/wlH
+ KCv0PBZXJPQ2TyLKbhU1kz3tg917xOkC3gMpbxaetMkGqnZ99peXbrvUMx21m45j/ITWn2
+ sbIwVzC0tVGF3rCN97bD+D79aY3y+ZXCIXc+PelL2ioR1TXFxDbHRYRQR/3+e4kkJd67L5
+ KWBJQXkUBuakFy51IJOkFcvym6FLJK0Bn/aTWm7Yy2W4pPhl1JN6NcLMFAOMn4WUZPhmZH
+ l/M87ryLPD5ODEanhpGDVCU4zG8T7SJonwBeUj9DZMfebF9jYtJ31spkQC1moQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1721385017;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1q5MceQJx7LXD1S7ouGvCHzt954GN4KJntaZ7BwkcXo=;
- b=QGWPK7JzvxWw9TPfd6jgln+7Vtbu00U4Fbvln3PyVCTuQIy2RZLE8jLhm1NqIMRVKI2TAE
- 63BemwOIwdxGl4wcmRKjktNl5KvSURajPIGZ6qR0UE94MakxM21MBHTN3GJsk9Oew3pZ7J
- r/62ry9rx7VgvaraNwZlcmu3dqtWaQuSeOC4D7yxPOTpmdMFcd3vuj2seAXQerEj8ODBXW
- ss+caIsbUL3Unsfr8h7B77RnK3NnspHgQoYyFtKIjXpBVSd1sM1EgiAY1sGDD5Y9ycNb9M
- WUIV/g9OzWRnrInsa8Sf3c8yaARYNCp+rC06s4YJAViCLKbappfBd7tWUn1SEw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721385015;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1q5MceQJx7LXD1S7ouGvCHzt954GN4KJntaZ7BwkcXo=;
- b=rUIsvynsp3L3XI7kk1D0FxjuANfLbpag1zPxy+9GOmkp1jYPnWqOIRMWEVzWLro82XSnVd
- BR/b7FJePl5PGmrIDogJpugAexdG0auToaVp+6rwwMgKXb8b7IOYXkRbGvygqr3hBTfnEm
- jSvvGFd3QX2alX+5fiEL4Ha2DGBSqK6n8fCAlvATLaIifPZ7y5jk0Fh2CoJLJnzjsRZiBo
- kKVs0K/22MQWBFO9Bnp8A7RS8E2bgDgeUIQ4YOn5spVdwywuTaltcCZbDyOVCmEocPtpvk
- VKf4GX1yqR2zEJ9v1wONOPFD1sbuhzfRjF5vKBRwEt90RfzbfLtywbE+/cXecw==
+ bh=0uk4DzoNArApLWn/IrTaFP2AJz1WSxaySSjyuEWTS5A=;
+ b=b6jweISy6LvS6i9uB+FIAIpBHlAGVFbwMV6+NkQlky7AzfpOJH3oSNIXyv88cRkKMb1FQy
+ Z5xYappnvjpI3qoBAK5SCnXbqwK20oki960c7IHLO9B4rzQ4suM7hf7umF2YQhqad+PR10
+ FNRv6QGHhcypMw3A9K1MCsxaYEqNbwm37abapjsmKDN+hfk7OEYaV4n7yqjNnlhVvsaSIS
+ DSZTjfYPw6labOEjtIL2pybz0JAzSk04SZIwIPwafZVnNPGsaBATERF8+okeXSNNcy5Ytr
+ EnuaKyQaNm4EtzukCdsSYR6/FeEhJAw/PiXe3pRK/bOdDJzsCW6zXt3upNGCxA==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 05/37] board: armltd: Remove duplicate newlines
-Date: Fri, 19 Jul 2024 12:27:59 +0200
-Message-ID: <20240719102934.322997-5-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 07/37] board: cobra5272: Remove duplicate newlines
+Date: Fri, 19 Jul 2024 12:28:01 +0200
+Message-ID: <20240719102934.322997-7-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
 References: <20240719102934.322997-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 5480c7c30d5eeab8f78
-X-MBO-RS-META: iqxa75yxdoybpx16tyt7cnr6o1co4y7b
-X-Rspamd-Queue-Id: 4WQQt11Xjyz9skw
+X-MBO-RS-META: 8hibbcqodmpo5usq6z98pthms4gpu4pn
+X-MBO-RS-ID: 95d1e5b903256703d7e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,21 +90,53 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- board/armltd/vexpress64/pcie.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/cobra5272/flash.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/board/armltd/vexpress64/pcie.c b/board/armltd/vexpress64/pcie.c
-index 1045c905f73..301d95e44fa 100644
---- a/board/armltd/vexpress64/pcie.c
-+++ b/board/armltd/vexpress64/pcie.c
-@@ -109,7 +109,6 @@ static void xr3pci_setup_atr(void)
- 			     XR3_PCI_MEMSPACE64_SIZE,
- 			     XR3PCI_ATR_TRSLID_AXIMEMORY);
+diff --git a/board/cobra5272/flash.c b/board/cobra5272/flash.c
+index 157b71da85e..616842e62f4 100644
+--- a/board/cobra5272/flash.c
++++ b/board/cobra5272/flash.c
+@@ -61,7 +61,6 @@ Done:
+ 	return;
+ }
  
 -
- 	/* setup CPU to PCIe address translation table */
- 	base = XR3_CONFIG_BASE + XR3PCI_ATR_AXI4_SLV0;
+ unsigned long flash_init(void)
+ {
+ 	int i, j;
+@@ -112,7 +111,6 @@ unsigned long flash_init(void)
+ 	return size;
+ }
  
+-
+ #define CMD_READ_ARRAY		0x00F0
+ #define CMD_UNLOCK1		0x00AA
+ #define CMD_UNLOCK2		0x0055
+@@ -133,7 +131,6 @@ unsigned long flash_init(void)
+ #define ERR   2
+ #define TMO   4
+ 
+-
+ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ {
+ 	ulong result;
+@@ -267,7 +264,6 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ 	if ((result & data) != data)
+ 		return ERR_NOT_ERASED;
+ 
+-
+ 	/*
+ 	 * Disable interrupts which might cause a timeout
+ 	 * here. Remember that our exception vectors are
+@@ -317,7 +313,6 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ 	return rc;
+ }
+ 
+-
+ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ {
+ 	ulong wp, data;
 -- 
 2.43.0
 
