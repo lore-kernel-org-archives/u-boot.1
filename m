@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F349C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 16:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B766C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 18:07:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA688883BB;
-	Fri, 19 Jul 2024 18:07:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 81FC38855C;
+	Fri, 19 Jul 2024 20:07:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FbiXezVW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eN2JYJzQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3D0E8852E; Fri, 19 Jul 2024 18:07:06 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id E8E8B882FA; Fri, 19 Jul 2024 20:07:08 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E06DC8826E
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 18:07:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD3FC88BD4
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 20:07:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ee9bca8652so3677941fa.3
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 09:07:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3d94293f12fso1247616b6e.3
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 11:07:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721405224; x=1722010024; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/0fy+bLy6OvbjkRrkwTBJOxTQA00Gdh6HLU2X62Frug=;
- b=FbiXezVW5cqEZh6VWkOSYYX63fNQHRYuxYKp0aI9KqbIN1PuNMTHAfgKQNXT5JXHLd
- kxzcUBlf/PBbG2gz3zssJApyK7e6MbD5n3mlKSufT3YBa0UEdkGlJUv3ncMEfVRAUs6n
- OUurMTG0TJqS8aifWzQU+yRoPQgwq5Cx90XdhDACo7H2g8/dUrzxEqqRBGUIVKKeVKUR
- xqDFopkXCiuTUFpUF27XalDe0KNpCjfZt8chJc/dWtu+8++8TlE8uN/fhzGic9MwPfdO
- sYbj0o7bByG6NOFowe7JGvltG/ny7yaZoM4AR7El4Xj6lRyJsNvUkXOV/XXMDV9v+qGo
- CXdA==
+ d=konsulko.com; s=google; t=1721412424; x=1722017224; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JSZyCMBlqVvLXyTRiI2oRhRZxOi8iOo2WHa8W0VAtv8=;
+ b=eN2JYJzQG6PjO9FZA7BHM4tQx52lumvNN/eZS73FRE1wgXuNcsmowbUyqPQ++ong6g
+ xonuTQsMB769uB/sV83hW3olzYWKZW0xvh24X24VFlayBkzZ0eXkAJu637W76l790S0c
+ d6bX5Q0SYxuWmbwFLInd2R7+VdWtFGZIBQuuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721405224; x=1722010024;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/0fy+bLy6OvbjkRrkwTBJOxTQA00Gdh6HLU2X62Frug=;
- b=gPJZYOjp1598Tgd3zdthtWVI3stqK/m83UpHDPOL8PC52XmxSUn6M6C1GRfShqeGyt
- oXxekCOO8FJDGIaQrpDpb0+IZlMXOi/os7+4N9nCa4Q8n1KLPIBCSx1zh8LE5mzNp9jc
- 6JWH1/UJw0fpg1Isx5/2Pmo0syB0BF8TIMpUfNQjka1PQ3R5GEHhU4pXyIC4eBbGVtGC
- mRLJFpDLgvegC4XI/OYnBDFC+oTN470hZpK9pBculF4sYhOuZZ9km4wJDxNbYfCfgzNy
- 9THGLV2ZJx8bm5u9iV5DpZUln4VfwEoCXqe9Yz8y6jpAk8OwMOkUK6oK1+s+oEBULM+7
- zoCw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW615Iof8607yUFSZcRBNjFmPWuUMimX3siDsvQ3BKTayqJ1yJn6f8HS0Xvmlmr7gH78Z+dHp1gCQQd8JWpvs0DUas6KQ==
-X-Gm-Message-State: AOJu0YzXugR3/ny/fMPWF1YF5RKwuHWBOhUGl/Dl4kyWXJSe1iW7ofes
- JdLdygHRBpTYL41wTL65++2sLTT06SQiupw8Onnun6ijPtB+MukEET7xqJX+xVJY8zv9PB+ycsJ
- mionFPl6FAYB3Wv2aurnsK86Ko0Q=
-X-Google-Smtp-Source: AGHT+IFgzcNMn0hy88gLH8nhY9MQDyuq+cXQ52waLXuYxjaYyTBrufkruPaLAdJK0oL0EhQpZ1D5GLGT9rUoD3iQ7rA=
-X-Received: by 2002:a2e:1f12:0:b0:2ee:83f7:8b36 with SMTP id
- 38308e7fff4ca-2ef16789ae6mr796481fa.2.1721405223920; Fri, 19 Jul 2024
- 09:07:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721412424; x=1722017224;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JSZyCMBlqVvLXyTRiI2oRhRZxOi8iOo2WHa8W0VAtv8=;
+ b=bWgCh4EFD0a5XbrdyD14Ktjiz+UAcVONZPc3HVryUWyeMIK1J9Y0oDQvGilnu1djB9
+ d2LzM/SB8VdgZNQFYGSBaMS+KnmcCZ9tb11353xZonx/7C3vi2PVSQhK7uXa/B7+cQHV
+ W8diDG+rYvcyXI3DxmXXsmYSvlEuLU+3/BMAtsRQka0iEujTF6pObzzFmHyLsiGkh1kc
+ EGYt03HTL7arWlHkKOfiMZ/5WkYXCzdNrrB5NeCTaH8rRJ+CfHt1Emr7nmleQquCqDv4
+ OA2Upa3KcDxKxC0BipUDyvhlrHNi8/RFX0F5w4yXj9kUV7hnpuOAlOY9bxngpw+hGlQH
+ kQ0g==
+X-Gm-Message-State: AOJu0YyUasHkYLnUKfWSm25J8dfKPu75Jtu5SBUcId4vTu85wWEcrRjq
+ Dzzn10kYWKgzJUVAI2v6VAnFlmpnFWQlgrltJFXUnmAMmUt1IQJrZhcXWC1xjJY=
+X-Google-Smtp-Source: AGHT+IEFh7IeiDYh/QvLNeYcVoWI01eAj0DprEyKRK7HE3CTBeZ9jcfjltoTZdfzg0PYkvJR9ZCVYg==
+X-Received: by 2002:a05:6808:14d3:b0:3d6:2b12:7dc0 with SMTP id
+ 5614622812f47-3dae5f1eafcmr784542b6e.20.1721412424503; 
+ Fri, 19 Jul 2024 11:07:04 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3dae0969e73sm366139b6e.5.2024.07.19.11.07.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jul 2024 11:07:04 -0700 (PDT)
+Date: Fri, 19 Jul 2024 12:07:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sam Povilus <sam.povilus@amd.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: Pull request efi-2024-10-rc1-3
+Message-ID: <20240719180701.GC561963@bill-the-cat>
+References: <dec71b07-2360-444a-ba0d-19f09ae45a53@gmx.de>
 MIME-Version: 1.0
-References: <20240718165454.904763-1-festevam@gmail.com>
- <abf7f940-1bfb-4e5f-937b-135a580034b3@armadeus.com>
- <CAOMZO5D4FFvK=L+GwdfpLAyGBV2d2t-9d3GGTAuXYU0jt3kfjg@mail.gmail.com>
- <e1645877-d5b8-44f5-b185-5427b28fa2e7@armadeus.com>
-In-Reply-To: <e1645877-d5b8-44f5-b185-5427b28fa2e7@armadeus.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 19 Jul 2024 13:06:51 -0300
-Message-ID: <CAOMZO5DRwa86mRLdxGaCyBMUkUPuc25HQt-nUOThzOHSxWZLpg@mail.gmail.com>
-Subject: Re: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
-To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Cc: peng.fan@nxp.com, uboot-imx@nxp.com, m.othacehe@gmail.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YZcwBOyxBpzuhXPN"
+Content-Disposition: inline
+In-Reply-To: <dec71b07-2360-444a-ba0d-19f09ae45a53@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,36 +92,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi S=C3=A9bastien,
 
-On Fri, Jul 19, 2024 at 12:47=E2=80=AFPM S=C3=A9bastien Szymanski
-<sebastien.szymanski@armadeus.com> wrote:
+--YZcwBOyxBpzuhXPN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> I did look at imx8mm.dtsi but the clock IMX8MM_CLK_ARM is not defined in
-> U-Boot and in Linux it's defined as:
->
-> hws[IMX8MM_CLK_ARM] =3D imx_clk_hw_cpu("arm", "arm_a53_core",
->                                       hws[IMX8MM_CLK_A53_CORE]->clk,
->                                      hws[IMX8MM_CLK_A53_CORE]->clk,
->                                       hws[IMX8MM_ARM_PLL_OUT]->clk,
->                                      hws[IMX8MM_CLK_A53_DIV]->clk);
->
-> So in Linux for the i.MX93, the clocks property in the device tree has
-> to be IMX93_CLK_A55_CORE:
->
-> clks[IMX93_CLK_A55_CORE] =3D imx_clk_hw_cpu("a55_core", "a55_sel",
->                                         clks[IMX93_CLK_A55_SEL]->clk,
->                                         clks[IMX93_CLK_A55_SEL]->clk,
->                                         clks[IMX93_CLK_ARM_PLL]->clk,
->                                         clks[IMX93_CLK_A55_GATE]->clk);
->
-> ?
+On Fri, Jul 19, 2024 at 04:26:43PM +0200, Heinrich Schuchardt wrote:
 
-Yes, that's correct. I will use IMX93_CLK_A55_CORE when upstreaming it.
+> Dear Tom,
+>=20
+> The following changes since commit 459560000736ac7c9c8b04522789c20fb45ff9=
+5a:
+>=20
+>   Merge patch series "bootstd: Add Android support" (2024-07-18
+> 17:03:47 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-10-rc1-3
+>=20
+> for you to fetch changes up to 38b000881ebc0a48b0a814fce9f52dfe62ac644b:
+>=20
+>   doc: Describe the bootstd settings (2024-07-19 14:01:46 +0200)
+>=20
+> No issues were reported on Gitlab:
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21685
+>=20
 
-At some point, we should align these clock names between Linux and U-Boot.
+Applied to u-boot/master, thanks!
 
-For now, as I am touching arch/arm/dts/imx93-u-boot.dtsi this is OK
-for U-Boot purposes.
+--=20
+Tom
 
-Thanks
+--YZcwBOyxBpzuhXPN
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaaqz8ACgkQFHw5/5Y0
+tyz7jgwAjukgvt+vAnpz5iaOKYgn8X63D21e5iw8dTf2Y8mOmSp2ml09qEb/0wuF
+Q4l1QiCka0fd3RTmKo9qVMGTbV7QJPPSGwyRVpIQJwafLnffmu7eAXk4h0ISGcKA
+Jx9ynpEMB2ynHXIAHeCwMZ2Ag6FAC71O7SjRLGt4D5eBww5fTtySPHjOFVWANkBb
+U8puEhWbqHg/u4kOOGHMUr+RqR0+Hmk8i0xcGV0RJWM/SCA1hckVrVc6WtYl1AaM
+FeTwl3wuFwH5o4YSAZWCfonpfb7SQOo6ZlZPAxfcAYWLpG+TS6eJukXuth/dYkCD
+Gx6Qh2HPrtW6C4yffJ9z2lgkpVfz2O8ut2LexDX35SUBfOJ2uRE68uhcytkfdy0Q
+h+VdokEjCXWh8MNe69WASh7LnWikv4VTztJ9vFch5dOq6Cc564VKviGjl8C8Oydo
+qZmGb53nww22neG9k06yKVyseQJfRJApErvu6PEf7wVtvSGcYUH8dFdJca23DgSC
+pNpYFUrt
+=xe5d
+-----END PGP SIGNATURE-----
+
+--YZcwBOyxBpzuhXPN--
