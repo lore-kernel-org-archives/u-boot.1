@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4BAC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 07:05:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4DEC3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 07:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F51F88B60;
-	Fri, 19 Jul 2024 09:04:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 082D388B65;
+	Fri, 19 Jul 2024 09:05:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MWKDXtos";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uGDmEieF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CAF588B5F; Fri, 19 Jul 2024 09:04:51 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 2E4068850A; Fri, 19 Jul 2024 09:05:02 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F5F988B42
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 09:04:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E64E888B5F
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 09:04:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46J74kcN130700;
- Fri, 19 Jul 2024 02:04:46 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46J74tUL118918;
+ Fri, 19 Jul 2024 02:04:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721372686;
- bh=NYoEAcUnjmR/qUaZAntOFk8OuYZxuEhUAjJI3U22kkI=;
+ s=ti-com-17Q1; t=1721372695;
+ bh=iTwhHkxpA0DWPgfEtrO4qODHGmyqhcA+TPXYTLR5zmo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=MWKDXtosXdXzcCMkyO/W7Z6+iSDvD4Rom0asMwJIThdypGE4oDp345m8ZPPNkqLDF
- hLKKtZMgN1o9nCCSklFGeB0hhaR6a7WXbkLt75TjocSBETSvidRAILITnkZRbpUkFA
- xolowp4A09jsOtRyJYFwfMBeSGIs5XQ7rWWKHlVA=
+ b=uGDmEieFuW0hdcbbjodMo35tMYetd5V26VGx2MruQNMXb6aLwD9miksdM4GLpI+vK
+ 3Yzkj4SdQ8Lj8exZp3mI6wlOhQ/VGoz7AUWEPkQ0SxxRCr6P8nzS+6KaOzEqjNyLA7
+ x+IMy3eSzihpDTBJtJ//m2co8XSEfXiBtypc4ns8=
 Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46J74kcw015481
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46J74tCS015837
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jul 2024 02:04:46 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
+ Fri, 19 Jul 2024 02:04:55 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jul 2024 02:04:46 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 02:04:55 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jul 2024 02:04:46 -0500
+ Frontend Transport; Fri, 19 Jul 2024 02:04:55 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46J74b4p094617;
- Fri, 19 Jul 2024 02:04:42 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46J74b4r094617;
+ Fri, 19 Jul 2024 02:04:51 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>, Nishant Menon <nm@ti.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
@@ -59,9 +59,10 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
  <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V6 1/6] MAINTAINERS: Include the TI docs under ARM TI
-Date: Fri, 19 Jul 2024 12:33:08 +0530
-Message-ID: <20240719070312.3771755-2-d-gole@ti.com>
+Subject: [PATCH V6 3/6] doc: board: ti: Update to use the new boot firmware
+ labels
+Date: Fri, 19 Jul 2024 12:33:10 +0530
+Message-ID: <20240719070312.3771755-4-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240719070312.3771755-1-d-gole@ti.com>
 References: <20240719070312.3771755-1-d-gole@ti.com>
@@ -85,25 +86,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add entry for the TI boards documentation under ARM TI
+Use the new boot_firmwares labels that help make documentation more
+specific as to which firmwares are used in which devices
 
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ doc/board/beagle/j721e_beagleboneai64.rst | 4 ++++
+ doc/board/phytec/phycore-am62x.rst        | 4 ++++
+ doc/board/phytec/phycore-am64x.rst        | 4 ++++
+ doc/board/ti/am64x_evm.rst                | 4 ++++
+ doc/board/ti/am65x_evm.rst                | 4 ++++
+ doc/board/ti/j7200_evm.rst                | 4 ++++
+ doc/board/ti/j721e_evm.rst                | 4 ++++
+ doc/board/ti/j721s2_evm.rst               | 4 ++++
+ doc/board/ti/j722s_evm.rst                | 4 ++++
+ doc/board/ti/j784s4_evm.rst               | 4 ++++
+ 10 files changed, 40 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 19ca57d200b9..23246414d6f4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -732,6 +732,7 @@ F:	arch/arm/mach-omap2/
- F:	arch/arm/include/asm/arch-omap*/
- F:	arch/arm/include/asm/ti-common/
- F:	board/ti/
-+F:	doc/board/ti/
- F:	drivers/dma/ti*
- F:	drivers/dma/ti*/
- F:	drivers/firmware/ti_sci.*
+diff --git a/doc/board/beagle/j721e_beagleboneai64.rst b/doc/board/beagle/j721e_beagleboneai64.rst
+index d6b9c8ca606a..090b2b3b86ae 100644
+--- a/doc/board/beagle/j721e_beagleboneai64.rst
++++ b/doc/board/beagle/j721e_beagleboneai64.rst
+@@ -42,6 +42,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
+index a7ce2c58825b..af24acf9aac4 100644
+--- a/doc/board/phytec/phycore-am62x.rst
++++ b/doc/board/phytec/phycore-am62x.rst
+@@ -30,6 +30,10 @@ Sources
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure
+ ---------------
+ 
+diff --git a/doc/board/phytec/phycore-am64x.rst b/doc/board/phytec/phycore-am64x.rst
+index 68d78ad7c25a..02388c7a5b22 100644
+--- a/doc/board/phytec/phycore-am64x.rst
++++ b/doc/board/phytec/phycore-am64x.rst
+@@ -30,6 +30,10 @@ Sources
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure
+ ---------------
+ 
+diff --git a/doc/board/ti/am64x_evm.rst b/doc/board/ti/am64x_evm.rst
+index 88997b6a283e..65c4c456528c 100644
+--- a/doc/board/ti/am64x_evm.rst
++++ b/doc/board/ti/am64x_evm.rst
+@@ -48,6 +48,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares_sysfw
++    :end-before: .. k3_rst_include_end_boot_firmwares_sysfw
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/ti/am65x_evm.rst b/doc/board/ti/am65x_evm.rst
+index 89011c08dd46..60b08ceebf0f 100644
+--- a/doc/board/ti/am65x_evm.rst
++++ b/doc/board/ti/am65x_evm.rst
+@@ -58,6 +58,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares_sysfw
++    :end-before: .. k3_rst_include_end_boot_firmwares_sysfw
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/ti/j7200_evm.rst b/doc/board/ti/j7200_evm.rst
+index d4a823fa26ca..4fd2aff83547 100644
+--- a/doc/board/ti/j7200_evm.rst
++++ b/doc/board/ti/j7200_evm.rst
+@@ -47,6 +47,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/ti/j721e_evm.rst b/doc/board/ti/j721e_evm.rst
+index 80d91cafab08..41c8d4c72a8d 100644
+--- a/doc/board/ti/j721e_evm.rst
++++ b/doc/board/ti/j721e_evm.rst
+@@ -52,6 +52,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
+index f5c48c96a837..21683b90b1a8 100644
+--- a/doc/board/ti/j721s2_evm.rst
++++ b/doc/board/ti/j721s2_evm.rst
+@@ -60,6 +60,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure:
+ ----------------
+ 
+diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
+index 10b243908a1c..e5a1be50c4fa 100644
+--- a/doc/board/ti/j722s_evm.rst
++++ b/doc/board/ti/j722s_evm.rst
+@@ -45,6 +45,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure:
+ ----------------
+ 
+diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+index 2ffec3dbd3be..a1e927cb7438 100644
+--- a/doc/board/ti/j784s4_evm.rst
++++ b/doc/board/ti/j784s4_evm.rst
+@@ -60,6 +60,10 @@ Sources
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_boot_firmwares
++
+ Build procedure
+ ---------------
+ 0. Setup the environment variables:
 -- 
 2.34.1
 
