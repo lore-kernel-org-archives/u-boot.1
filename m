@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE88FC3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 20:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DB4C3DA59
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 20:33:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40A9788C12;
-	Fri, 19 Jul 2024 22:33:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B6E588C20;
+	Fri, 19 Jul 2024 22:33:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YBKQwuXO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YFkfOHkZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E25788C0E; Fri, 19 Jul 2024 22:33:23 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id D4AF788C1F; Fri, 19 Jul 2024 22:33:25 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65AF388204
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 22:33:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A7B388204
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 22:33:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-75b77be7611so268376a12.3
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 13:33:21 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2cb71213df9so252514a91.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 13:33:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721421200; x=1722026000; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721421202; x=1722026002; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WPowDHH6iw1UznnucGaJReYJWKexVi8IuAP6OsuDOiM=;
- b=YBKQwuXO4H96IF9AUBrjSlaHS36gQ2K08eYn7kXY0vnlOxFEOY4AAqi7vomjOrVVf4
- 77xBZXvaI6BXsxQWwHe+VgmK9Csed1wNUCCixTxJ9A66M8HigAuZOlWu4Qfw2R0nri+O
- tv/UjmT1YLngBPg+MD9n2Krs9iYO3yD1kYQefmGqPfiP91L03+F6xgoPAKkG05eC4Q9s
- szFZLqxlyXFZHThDpY29Csxs4ddiyMPKFuavBnmc3+xJ8PU6yPGIee7cSirndN5pSSf6
- es4mRkCjPAnBeidB2/G5+UZFYCx9sW5UIQ2emqMfFrKrAJybOUAhW3Zg6wXwgaP2nrt/
- tdiA==
+ bh=ZmKV42ksGlLx77lO05gLq0meRRtD8AwNQ9JoVJxNgEg=;
+ b=YFkfOHkZWQEznte3QN4DohtG7BO6ISdR6kiMGqCoNArkWGjzk6vqk+iayn0yM5fx9E
+ sPqPvljIKXmFBhzxhgievsuGYf6ph7OdT3dRcdATrcaPX6uWegqkHO3JV299OKqZ4Lg8
+ ujnBI3937613h0qg7VsMgmo0amRl+ZyMGKvpkTFf9cb2rNcSDNwbaH/UySYVi6YdXmv/
+ x18++SsgdGM3gMyuZBDcNVnQRWjcYXBS+BnpAQdMfbT88Vvc5ky7fIEV5GzbCjFqB0yz
+ ZnwrExvQCt2YE8nzkRpO6Md5WHYrMWC8JIO8/xteAbsqp+TEos6TM+A6Fwv9/C/b1IGV
+ GDrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721421200; x=1722026000;
+ d=1e100.net; s=20230601; t=1721421202; x=1722026002;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WPowDHH6iw1UznnucGaJReYJWKexVi8IuAP6OsuDOiM=;
- b=hI6N0jYH3s9T0d8rz/9o4+TnsCGsaDoQ09wN0+de2ymVhBZMy9Z/IeJpUQvOd8tenj
- NT80jBeKOZ7j1eEYkjTr9QI+/I9p5gFNhRZ4xmYDfezXS45T5Wjjvzfio7jjtfibzudb
- ajNcF7oPRbcyRORoi0KPTkH4i61Ifw8h2RMxRSV8ad7fNSQkqBFszRBYbMQq7JEIV8/N
- thOTyvF/LyTkNtEIegr6dsE2NvUfDstMKlEHMm+Rs8Daqh5Zy5jEhvUDlZxe8acfS+RS
- rjyhBoilbL1BiaCZzlnaMQ7NiBWs++0VF6/q7dbsxQsElWAHcrcdZHmHzqMN2lVn5uk3
- DncQ==
+ bh=ZmKV42ksGlLx77lO05gLq0meRRtD8AwNQ9JoVJxNgEg=;
+ b=FwoqDxBo6s8B3oraviFEBGRynG3wQ71uk0/djKmo89Xnu78XeB1U6Q9EzlrcmkrcOs
+ 3WTRfLnW1IKp2nK1OwLAsPbnZFjmf8nAjvwmoF5Jmv9Zjs7GbvXh7obcEYVKZrwv7VU7
+ UcwLN5m5dIrJoCXX+hzd7mVpWGaNOaknriKQ5bWqgKl9SAqgKMT0CpjXcL2YfOz+MLdc
+ 84pUzYIlyTvSEPBf8+lsgRUqhk0veNip6SJRjpvJcBtElwjdQypV5lXE2G5yBt+7qc3W
+ RDTNyc/AUW61VqZdy276Mth310I1K/kCCnelQQn8g1iY8M3kSkmo0pdDbzsjvKxHWGvG
+ LOkw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvS/THL9wMNIA0JlIXDLw7yOXgK2vxGOy3anYnLkypucKG5jejQsAqAdFMFy2TYVdHT6K1YDmYUAtF7GsSvcYRYy9EjA==
-X-Gm-Message-State: AOJu0YyI8JdWU7U3z4Q/VF+WrjVFuF5zZXcIseZcAStR68b0WGj3QGdT
- EP3EyvlpD6a4CD4vQR6UjrFcok1JdnLjbNCUI9bK+ppm61HcAYKK
-X-Google-Smtp-Source: AGHT+IEetMtQEDK4UUl5EPVxxCYe9EElNHg194Q4xVCRx7f9fJTOEWuPRGa0M/INlnHAGPzae+tnqQ==
-X-Received: by 2002:a17:90b:20b:b0:2cb:4382:99f1 with SMTP id
- 98e67ed59e1d1-2cd16191fcdmr739281a91.6.1721421199933; 
- Fri, 19 Jul 2024 13:33:19 -0700 (PDT)
+ AJvYcCXn6GsuM07aUug3nKpWiZEjHy/RQNG2G2GIBdLevVC0/beeZkSbYqHu2ZnvCx/cmMu+BcFNN/Vcucbs15K0iu+jmV3sDA==
+X-Gm-Message-State: AOJu0Yy8PyXG0xEyZUcwHrCvyWSyrP86U5SRMFEsnydBgPP0/xTpq2oX
+ WxcLu+fCN0cHYQAwvl8cYiLthAWHup3gI+kHBEuCwwLhT8u9/XSR
+X-Google-Smtp-Source: AGHT+IGnYXYKnL7AtG68rpJiPYRu29NrYB9fMypA8P69Ox9TiM8wR/Eek5NDwzuD0C+xOa+1yv4ZVg==
+X-Received: by 2002:a17:90a:ac06:b0:2cb:4382:9efe with SMTP id
+ 98e67ed59e1d1-2cd1607bfe0mr735540a91.5.1721421202089; 
+ Fri, 19 Jul 2024 13:33:22 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:27e4:cf37:80d4:17f5])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ccf8092da9sm2138230a91.37.2024.07.19.13.33.18
+ 98e67ed59e1d1-2ccf8092da9sm2138230a91.37.2024.07.19.13.33.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 13:33:19 -0700 (PDT)
+ Fri, 19 Jul 2024 13:33:21 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: breno.lima@nxp.com
 Cc: francesco.montefoschi@udoo.org, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v2 2/4] udoo_neo: Select LTO
-Date: Fri, 19 Jul 2024 17:33:09 -0300
-Message-Id: <20240719203311.1695523-2-festevam@gmail.com>
+Subject: [PATCH v2 3/4] udoo-neo: Do not print devicetree model
+Date: Fri, 19 Jul 2024 17:33:10 -0300
+Message-Id: <20240719203311.1695523-3-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240719203311.1695523-1-festevam@gmail.com>
 References: <20240719203311.1695523-1-festevam@gmail.com>
@@ -94,35 +94,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-u-boot.img has grown in such a way that it overwrites the
-environment region.
+The udoo_neo_defconfig target supports several board variants.
+All of these variants use the imx6sx-udoo-neo-basic devicetree in U-Boot.
+    
+Currently, the devicetree model as well as the board variant name
+are shown:
+    
+...
+Model: UDOO Neo Basic
+Board: UDOO Neo FULL
+...
 
-Select CONFIG_LTO to help reducing the U-Boot binary size
-and add a build-time size check to avoid U-Boot to overlap
-the environment region.
+Printing the devicetree model that is used internally by U-Boot
+may confuse users.
+    
+Unselect the CONFIG_DISPLAY_BOARDINFO option and move the board printing
+inside board_init() so that only the real board name that is detected
+in run-time is printed.
 
 Signed-off-by: Fabio Estevam <festevam@gmail.com>
 ---
 Changes since v1:
 - Newly introduced.
 
- configs/udoo_neo_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ board/udoo/neo/neo.c       | 43 +++++++++++++++++---------------------
+ configs/udoo_neo_defconfig |  1 +
+ 2 files changed, 20 insertions(+), 24 deletions(-)
 
+diff --git a/board/udoo/neo/neo.c b/board/udoo/neo/neo.c
+index 1a0aaecc3328..4cf214bf17c6 100644
+--- a/board/udoo/neo/neo.c
++++ b/board/udoo/neo/neo.c
+@@ -136,8 +136,25 @@ static int setup_fec(void)
+ 	return enable_fec_anatop_clock(0, ENET_25MHZ);
+ }
+ 
++static char *board_string(int type)
++{
++	switch (type) {
++	case UDOO_NEO_TYPE_BASIC:
++		return "BASIC";
++	case UDOO_NEO_TYPE_BASIC_KS:
++		return "BASICKS";
++	case UDOO_NEO_TYPE_FULL:
++		return "FULL";
++	case UDOO_NEO_TYPE_EXTENDED:
++		return "EXTENDED";
++	}
++	return "UNDEFINED";
++}
++
+ int board_init(void)
+ {
++	int *board_type = (int *)OCRAM_START;
++
+ 	/* Address of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+ 
+@@ -149,6 +166,8 @@ int board_init(void)
+ 	gpio_request(IMX_GPIO_NR(4, 16), "ncp692");
+ 	gpio_direction_output(IMX_GPIO_NR(4, 16) , 1);
+ 
++	printf("Board: UDOO Neo %s\n", board_string(*board_type));
++
+ 	setup_fec();
+ 
+ 	return 0;
+@@ -179,30 +198,6 @@ int board_mmc_init(struct bd_info *bis)
+ 	return fsl_esdhc_initialize(bis, &usdhc_cfg[0]);
+ }
+ 
+-static char *board_string(int type)
+-{
+-	switch (type) {
+-	case UDOO_NEO_TYPE_BASIC:
+-		return "BASIC";
+-	case UDOO_NEO_TYPE_BASIC_KS:
+-		return "BASICKS";
+-	case UDOO_NEO_TYPE_FULL:
+-		return "FULL";
+-	case UDOO_NEO_TYPE_EXTENDED:
+-		return "EXTENDED";
+-	}
+-	return "UNDEFINED";
+-}
+-
+-/* Override the default implementation, DT model is not accurate */
+-int checkboard(void)
+-{
+-	int *board_type = (int *)OCRAM_START;
+-
+-	printf("Board: UDOO Neo %s\n", board_string(*board_type));
+-	return 0;
+-}
+-
+ int board_late_init(void)
+ {
+ 	int *board_type = (int *)OCRAM_START;
 diff --git a/configs/udoo_neo_defconfig b/configs/udoo_neo_defconfig
-index 9f9ad0ad5ec7..97e3b379835f 100644
+index 97e3b379835f..826d5a115043 100644
 --- a/configs/udoo_neo_defconfig
 +++ b/configs/udoo_neo_defconfig
-@@ -19,6 +19,9 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL=y
- CONFIG_SPL_LIBDISK_SUPPORT=y
- # CONFIG_CMD_BMODE is not set
-+CONFIG_LTO=y
-+CONFIG_HAS_BOARD_SIZE_LIMIT=y
-+CONFIG_BOARD_SIZE_LIMIT=523264
+@@ -25,6 +25,7 @@ CONFIG_BOARD_SIZE_LIMIT=523264
  CONFIG_DISTRO_DEFAULTS=y
  CONFIG_BOOTCOMMAND="run findfdt; run distro_bootcmd"
  CONFIG_SYS_PBSIZE=532
++# CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_FS_EXT4=y
 -- 
 2.34.1
 
