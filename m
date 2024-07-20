@@ -4,159 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5969C3DA5D
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 02:32:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03596C3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 06:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F0F884BE;
-	Sat, 20 Jul 2024 04:32:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ogga.fr
+	by phobos.denx.de (Postfix) with ESMTP id 1919388BFD;
+	Sat, 20 Jul 2024 08:20:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ogga.onmicrosoft.com header.i=@ogga.onmicrosoft.com header.b="BMAOHvra";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZPV/gYKH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E41E88BF2; Sat, 20 Jul 2024 00:35:40 +0200 (CEST)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9976D88C20; Sat, 20 Jul 2024 08:20:46 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7769A887CE
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 00:35:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 879AE88BFC
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:20:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ogga.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zli@ogga.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o1hKxrQBECuS9VQ7mkKbK2Hmp2EbPwu624PDjtWltuKDPNN7FuKuaFaiKKwKay73UolS0B0o5MSzqRrQFLn7DYdxHXQLpIqOjsYHpIekj2Ja1SRpdAkPJjNTmUelI2znNzU0mNPeAiXT7bAKxma26XrACmdJKSDV2KsP+P4kuIRe5wffcmYUtm7b3YAKsntOVzhybT6TBNLPOgIDjkqEZTfNYBdE+KYJNh5hpG4WpZnMMlMVB+N9MZJ76iWxXxa2FRfmhmnFxP8KxwOFY8akzXPyDmpnlAiPsDZF/vDZ5D8/UX+vEzp/37gl2PTqITyTPrd7axHvLQnfDJHbtikG9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cSgmwyE+6FAb7Xjv+gTPwi8w+xQ8j7Gh8l22Ns0BhXQ=;
- b=HmJaro0NLIBqk+JQG+w1syRwKo8ZpTkVYcWI5nWEUjRWtrqR/aImHGJF+3Tb5tdvT9ByE/ZwOKTWQqlAwrCl71qQp6Rn+j3DBV5v/ZlID8H/Yrz2SvR5pebyY8tXv+4z4iYFHZ74N4zubfi/tOxxZJ3LFbDB3eIwuuwsV17OAyohYRYkXUKRmPfFmuwDNETdtVGsi1FCzSAPuohvrRwt/mHKsHx/YWFX8j3+3rdFPsOnJphDfyUdlWZK5XsxXPI7bKylEvWrL0Ep9+AIMyg7qH2BWhRfa9hE5XgRcl232ExXj1krwIsemrSUjY4OQ9KW2XH+SEOK6WnQ8hqamg8OQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ogga.fr; dmarc=pass action=none header.from=ogga.fr; dkim=pass
- header.d=ogga.fr; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ogga.onmicrosoft.com; 
- s=selector1-ogga-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cSgmwyE+6FAb7Xjv+gTPwi8w+xQ8j7Gh8l22Ns0BhXQ=;
- b=BMAOHvraXVvKuRQLOuBCrcow/zXIbFLGeRzt5JVCFNZpdciUa56JdlQPqM2dlKwEWC8rIPbHfYNvhz5tgZaVueP8ORV3gEjP78MpMfoib8VpoiVGtuIJqGa9pFUzmAuOU46h4EJjNB6ZJlSPakJN4+KRgvYpc60zZPWTmjhXTno=
-Received: from PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f2::20)
- by PATP264MB4580.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:428::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.19; Fri, 19 Jul
- 2024 22:35:36 +0000
-Received: from PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM
- ([fe80::ead1:fb5b:e337:d4ff]) by PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM
- ([fe80::ead1:fb5b:e337:d4ff%6]) with mapi id 15.20.7784.017; Fri, 19 Jul 2024
- 22:35:36 +0000
-From: Zixun Li <zli@ogga.fr>
-To: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, open list
- <u-boot@lists.denx.de>
-Subject: [PATCH RFC] usb: gadget: atmel: Add DM_USB_GADGET support
-Thread-Topic: [PATCH RFC] usb: gadget: atmel: Add DM_USB_GADGET support
-Thread-Index: AdraKD65mvfpW5HBSRerSjJoAhuUHg==
-Date: Fri, 19 Jul 2024 22:35:35 +0000
-Deferred-Delivery: Fri, 19 Jul 2024 22:35:20 +0000
-Message-ID: <PAZP264MB297470A072D9FA16978B1338B1AD2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=ogga.fr;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAZP264MB2974:EE_|PATP264MB4580:EE_
-x-ms-office365-filtering-correlation-id: 51d4ebb2-9333-4226-1daa-08dca8431ba7
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?VjFGUFhiSk52WWRRRVljeTdKeXBFTUxKbUNFc21GRnRIM0ZSUlhmYkdJN1Ri?=
- =?utf-8?B?OERYNmlZa2tPbU1wY1ZXdG1sSW1GNDVZUFc5NVB0ZjhES3pyRS9WL291UUhU?=
- =?utf-8?B?cnZjTHVYWWx5ZXNrdWpNL0ZYY2FkcG5GeHhBanBJOFM1UTBjRUFrTVVyRGlk?=
- =?utf-8?B?L2pldWM0T3NqMVZaaFl5YU03dzJqa25aRlVnU09VTEthV2hDYVoya0dhVVlB?=
- =?utf-8?B?WU4xajhNM0Z4cmpmSDlON3hGSG10VGwyTFJxWGorZlNpSHFFVTF0V1lCWEND?=
- =?utf-8?B?a08vcWpRQmIzWGh6UjJMRitIZDkzam96cUg4Y1JydTZNWTI5dWpta01oeEpR?=
- =?utf-8?B?VnI1ZXlzSExBakIvNDZlMHRaaE16eStHeTdhL2hIS0FnaEExNWhGWkxRTktt?=
- =?utf-8?B?cmtkQ3VRd01GU0JXcDZ3WmZvd1lCTXRQcm9YaHJlMW9HQTI1cTBGcWFubEV1?=
- =?utf-8?B?bFZKRTlza3VLd3hzRExXbFNmUkdXSHpOOFZEZHhwV1lrS1lXZjNhamVNaEt4?=
- =?utf-8?B?OHVNbU50MGYyZG81VTZWcjNsR0Z2NzBVTTNlZ0k2bWFKbnlybUpMSVBGUVdr?=
- =?utf-8?B?NkVEK1Q1a0FpeVpJMlNMM1RkYzVHa2hhSmJQM3diNzhIdWl6UU5UcVozMGtq?=
- =?utf-8?B?cm9nRHFrTmNVZ3FWdFRPTFlkZDRzRG5hbHBaRFp0OUFLcityMTM3KzdRTUl1?=
- =?utf-8?B?RGg1c05tK2g5dVU2R1dsZElIZTFuS0xwMkRPRzBBR2tTdXI2Tm1QN1NIRnpF?=
- =?utf-8?B?ZGw2bS9mRk43WEJ1OFhObHQ5V2NremVZdEpYcGI4Uk94RTMvRUxjdTU2YndZ?=
- =?utf-8?B?NCtZVlhrZElqM3phQnJQYkNEKy9nRHBVVmJaRkZpYjM2SDM5QjR1OEp1YkpJ?=
- =?utf-8?B?MUU2YzZPTWUrN2N2ekljNitEUzRreW5nU3NOKy8vNUs5RjdYMFRIaWxMakM0?=
- =?utf-8?B?SzlWMUFNZXp3WGlnMTFUTWNvU0dlbm1Fek52OHQyNDU4UTV6ZE9EVWVtTEli?=
- =?utf-8?B?YWtDelFJcXp4RFlaTlV1L0xRTDJ6WVBiRDhqaXBvdGVlTEtycnNHTjhSUXVr?=
- =?utf-8?B?cWU4NlF0ejJFcWg5NFZ6K2k5Vkw5M3pNaGRHZC9HNU9xVDM2QVhIUStqbXgv?=
- =?utf-8?B?SjVYL2Y3QVNmTlhZYy8vQ2lGUE9Ebkc0U292ZDZjbEFpV0g5UVpKbjJoQkhB?=
- =?utf-8?B?cSttclgwNmYrY2tsMnE0T3R1ZUpaL1p6bVdOVmw5UzVDai9sMkxxazM5WldG?=
- =?utf-8?B?TFpKMnA0a1MrVDdRMmZOc3dPZ2N1MTIxc3lGV0k2aUFyVFJEd1ZoUUYzbU9W?=
- =?utf-8?B?Um96RUxpY0hCVGlGSUR4R3JWdzU2M28xWTV4Rk9ML09UN2ZBWkdRSkZnLyt6?=
- =?utf-8?B?OThOVGRCU0phZG1mY0VXc2xxcFBzNjJ1R29lY1BpVzhwdjQvS3daanpRb09t?=
- =?utf-8?B?TFltYWFuUmg3K2pxSEtzQjhEMXFFUjA0OGEzUUp2SnBjWXdSRDdoajh4NHZE?=
- =?utf-8?B?ZExOblZaZi9CdmtnaUQvL2lDR2Q2T2luWmw1NzJDcmppN3g1aFpoWUJtTXl5?=
- =?utf-8?B?UnZ3N1Q5ZFBsWjhNMmU3WG13NEEzT0NxUFlsemszTUdpcFZZS2QzdXJlckpx?=
- =?utf-8?B?WmJsL1htV01WMHNjeDhwZ1ZEbnJINWYxKzZWdk5pVGNJQ29zcGhnQ3prMlF1?=
- =?utf-8?B?ZWlqN1llekF4L2F3Mm40MjBhNzhwbndJdEtsRVhzWVlGMThkajZxQ3NBS2Vi?=
- =?utf-8?B?OCtyc3lGeEYxWWMyZVZDVU1KQjRoQVJ3UUtrSlVIUXhqbzc4Q2twU1A0T25E?=
- =?utf-8?B?VExkQWNpbHBULzZ2NTJnQlRaQndIb1p2Y0ZvK3dCOTBqY3k2UnRjMFRET2ZX?=
- =?utf-8?B?WWtqdFMxejloSWlFeXJTall6SHpQaTYvcHJ5MU5EdVhiNEE9PQ==?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?REdOZm1VY1k0Qk94SlF4bjJtd1RyNkhoYkNXaDZQL0w2ZGs2Q1paSEFzMWh6?=
- =?utf-8?B?YXc0VEcxM1NMV0t4V0dyb1l0L2lZMlpLNVhlWTZmZlplcEIza1JjTVozM2l0?=
- =?utf-8?B?UjlrK1pPT2pyZTN2cFQ3VE5nRUM2clRnblNzT1JmOGdid0pnRzF5WEwrS3Vs?=
- =?utf-8?B?ZW9wR3lpZ1dzMkVYSHp0aGhxUUV2NU1kNk9OQmFBSnpibTRhdGlGaUJ0VUxF?=
- =?utf-8?B?RGEzcGkxZ2pIc25BUW9sS283YjNMVW92RG02K2dMRUJ2UnlIemhaSWs4cFJS?=
- =?utf-8?B?ZTJMUCtnejgxUHN6Zit5d1J3YUxsbmpHM2F6eUsyOTFnUnREQWl1bFlrZkhM?=
- =?utf-8?B?bHppZGNjN1lWekRRZjExcEhLWjJ4TGUrN25LcXAxbDY2TGlETHRHY3lHZ2xt?=
- =?utf-8?B?V09XVk4wbjM4QW9LNUxKYUNWYWVNTkxsZXpGTlpIZS9xQjFiQUYycWxnVitv?=
- =?utf-8?B?bWRVRVJWcUpNQ1Q2Uno2bnAwaE9nY1A3L1hoVExjaFJwbEpxNGZLcG5obU5P?=
- =?utf-8?B?NTNXbUJLTkUrOUx1cUloWTV2N0tVM1EzQ1J5S2NaWmNOVWJyUkh5WEtIY0tZ?=
- =?utf-8?B?aEEyK1NJc1gvWXdYZUZIZHFxT2dnaXlVanBqN0xITzBMOTRIMzhvNlNrcmEz?=
- =?utf-8?B?WUZiVDI1SWh5ODFoZFBQZlUxZG1yOVVoQ2Zqc1RXSEQzaDJSbGFJa0RnK3U4?=
- =?utf-8?B?blBvcmNWVDlQMDFxaW1oa3RsYnk5UDZzMkxrWjNucmY1NTNkckthSGxCTDdh?=
- =?utf-8?B?T08wOWZHQm1NT1MvTWs0UVhJbTJhMmRsQkZpcTkrOU5GYUl3czBXQ0RodFNY?=
- =?utf-8?B?alg1Nkhrcm1SOXpPWTMyZExkd05wbm5TUDErNENLNzV0SHhjeWxsam50TVdo?=
- =?utf-8?B?dkp4UXAveFhjTDc3YWpXTTVPN2poWHlBb0d0MC9MQmZqa1drTmNlYVcxVkhP?=
- =?utf-8?B?SmJVVmh0b25uSjhGQTlrQXJtUktEKzFZa05VNEI5U1JYWkQ2RHBxcUxaU203?=
- =?utf-8?B?VW1aWVdBQUJzak5pK2JoVStjZGpYZzZCSkxqQTVyc2ZjbmRBOHNPbE44TU1z?=
- =?utf-8?B?VHpmS0I0Y0xyODBNM2IrMWNldFNGWGl2ZTZpcmQ2VVpBbEkvRld2aFVnTzBX?=
- =?utf-8?B?eDZpS2FCVnNzclBkUWEvVUVIaDM5eVRvNUIvTi8yU0cvVmgwUndsWC80TVpx?=
- =?utf-8?B?K0FHMmlQY2FMTkNwMVVtR0tuS01WODZxdVAyekMzNk13UEJoRjBudTNNRnRG?=
- =?utf-8?B?TGxncXpBd1JRampFOExlU0Z0MVZnR1c1YWFWVWV4SENuM245MXdOM2hHMjJu?=
- =?utf-8?B?ZkFObURFUEVwdGZCajROa0doZDVjOTZSNnFmYmxhN3A2SVV4S1Z0VzYybGJY?=
- =?utf-8?B?elQra2c0cEUvSGtWZnJDUTdFWWFOQVFQMjk3UGFIZmxPNVdnZlVGaEw5eEo5?=
- =?utf-8?B?TWhZN0FrKzBkMkdlMU8rb0RCbTc5UzFxczhUdUhaUmQwdUpidEpGcWtPV3Zi?=
- =?utf-8?B?NFN1SXZKeU9Ya09YRk9YRDhvVVVnOUhYeU96NStReERsdE5zaVJWOHBrTG9Q?=
- =?utf-8?B?YlVZM0pSTkhVNHVhY3VQRmxPTWVWM0Q3OGVhY3EzamhPM0tyc0JwWllSWHJu?=
- =?utf-8?B?RlEveUFtZURycFhpak5WM2ZKT3VqTTBscWYwc2oxSnd1VnlUaS91Z1RKMnNK?=
- =?utf-8?B?NUYzWUhJNDNod2UvNjIzRXJuZ0xJdDUzaTl1TnVVbmZVUzdwN3M4TmhUNFRD?=
- =?utf-8?B?SlRZaGlrTWgvN3dlc1VaWFI0elBtR2pWWHhENVhkWldJTFMwUmdMWXROc2RM?=
- =?utf-8?B?c2l2SHdGUGpkbHNTTUZXMWl2bGdXeUQva0l6NngybzRnMklJMUU4RGY3UWVp?=
- =?utf-8?B?TXBReUVxSkVReDNnL0UzSllISU5rSVZ6MC9Jb1JZQitxUkoyd3k1bDlnVkQ0?=
- =?utf-8?B?aHVrUEtPODBRQmpZYXloVGFWVzh2SFdOTk85bk10aCtsTmJVSFl2ajVnakRr?=
- =?utf-8?B?dHFONlNDNW43YVg5SE5qd2trckZYRE83SE12OGhhUWRRVE5KRE9QdFpyY21V?=
- =?utf-8?B?a3Z6UVdqazR6V1Y5Y05wSlZPUzJraTZWemx6QmZmcmx4b3I2Z0grMHV5ZTVl?=
- =?utf-8?Q?bqc8=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4266dc7591fso17066975e9.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 23:20:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1721456444; x=1722061244; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g+oW3CsyV+nYlYgMcVmTwgEEy6dSUqBDdsXPdBSw2yc=;
+ b=ZPV/gYKHX9aGVapqhFtjPSkps0vwwqMISC/her+nJVlRIJ+NaUS7QKTe5SsqSmgqR/
+ oqIzG0LfYxA3vEggwfVjF/F8sCmgSCAAXk3egdQ0AUARXtWqQH3npnJwTU2nTvzZo09q
+ 9ti4KPi5EHXNaP/Ula+MbqKEUkeyQKtk77UxI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721456444; x=1722061244;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g+oW3CsyV+nYlYgMcVmTwgEEy6dSUqBDdsXPdBSw2yc=;
+ b=p9Zl3c06Vm2pjKfIGXSSqKnbM+r1goPwd5H1xQXkRrc+t20mqxTvrBhl5QKtx8zvx5
+ ETW0DlJl/N9FQs3k4h1VPYlO5q0gNtvrzD1xFrgsixf9GvryCFaQq8AUec8L8nPJBW6J
+ pq14G6u+RvQJsOIn9iVEGwvZ7Hmkae5bwLLDvs0PukpKAzWQng+XHupZ+UKEA59a7ete
+ Qkbg4gL2BehmAGl3gZTGqgirvAIusS065QWz+q2FS2weNjFpIvJo48pZIEAokaLSTQI3
+ /AEYNV56z1XUs2hO7vu6Fyw8RlRDVWfGH+U3oD75BdPqD72HyvoyUeIWjYBzRDXNXLuU
+ rCgQ==
+X-Gm-Message-State: AOJu0Yy4TVTUUFZ4GhhDTMUwq/8Gr9ceq8ITqNWuTtMXve9oAJCfZ3Kr
+ xM9kxAZXH8N+VdETOmPbv5Dnjst3qYNLZwoaIbvFWr9xEOeHvdKWL0pGBrG/bVMex41wDzXLLbY
+ =
+X-Google-Smtp-Source: AGHT+IHrPz2Dzn/MnmtilUY9sfbkQLEmhm+oRdUyVCXJw2MexSt9KMhMefsrXnN0Xs7qa4QLSRiodA==
+X-Received: by 2002:a05:600c:1f10:b0:426:59aa:e2fe with SMTP id
+ 5b1f17b1804b1-427dc558bebmr3115845e9.19.1721456443799; 
+ Fri, 19 Jul 2024 23:20:43 -0700 (PDT)
+Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36878684773sm3226281f8f.7.2024.07.19.23.20.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jul 2024 23:20:43 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Dragan Simic <dsimic@manjaro.org>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Massimo Pegorer <massimo.pegorer@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+Subject: [PATCH 01/14] rockchip: Move the default timer init to a common file
+Date: Sat, 20 Jul 2024 07:16:53 +0100
+Message-Id: <20240720061706.2644229-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240720061706.2644229-1-sjg@chromium.org>
+References: <20240720061706.2644229-1-sjg@chromium.org>
 MIME-Version: 1.0
-X-OriginatorOrg: ogga.fr
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51d4ebb2-9333-4226-1daa-08dca8431ba7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Jul 2024 22:35:35.9815 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0a737871-c9db-44dc-a24e-55df547c3098
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: owGJwf2vOi1HHfetotUbEzOGBpqwCYJCaKqGUjwPWwJszg2+Af0FGhcngrcj8DS8
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB4580
-X-Mailman-Approved-At: Sat, 20 Jul 2024 04:32:32 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,137 +94,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QWRkIGRyaXZlciBtb2RlbCBzdXBwb3J0IGJ5IHVzaW5nIHRoZSB1Y2xhc3MgVUNMQVNTX1VTQl9H
-QURHRVRfR0VORVJJQy4NCg0KRGlzYWJsZSBsb2NhbCB1c2JfZ2FkZ2V0X3JlZ2lzdGVyX2RyaXZl
-cigpL3VzYl9nYWRnZXRfdW5yZWdpc3Rlcl9kcml2ZXIoKQ0KaW1wbGVtZW50YXRpb24gd2hpY2gg
-aXMgaW1wbGVtZW50ZWQgaW4gdWRjLWNvcmUuYyB3aGVuIERNX1VTQl9HQURHRVQNCmlzIGVuYWJs
-ZWQuDQoNCkNvbXBhcmVkIHRvIExpbnV4IGRyaXZlciBzYW05eDYwIGFuZCBzYW1hN2c1IERUIGJp
-bmRpbmdzIGFyZSBub3QgaW5jbHVkZWQNCmFzIHRoZXkgYXJlIG5vdCBzdXBwb3J0ZWQgYnkgdGhl
-IGRyaXZlciB5ZXQuDQoNClNpZ25lZC1vZmYtYnk6IFppeHVuIExJIDx6bGlAb2dnYS5mcj4NCi0t
-LQ0KIGRyaXZlcnMvdXNiL2dhZGdldC9hdG1lbF91c2JhX3VkYy5jIHwgMTk2ICsrKysrKysrKysr
-KysrKysrKysrKysrKy0tLS0NCiAxIGZpbGUgY2hhbmdlZCwgMTY5IGluc2VydGlvbnMoKyksIDI3
-IGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy91c2IvZ2FkZ2V0L2F0bWVsX3Vz
-YmFfdWRjLmMgYi9kcml2ZXJzL3VzYi9nYWRnZXQvYXRtZWxfdXNiYV91ZGMuYw0KaW5kZXggZjk5
-NTUzZGY4ZC4uNDBlOGI4OTVhMCAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvdXNiL2dhZGdldC9hdG1l
-bF91c2JhX3VkYy5jDQorKysgYi9kcml2ZXJzL3VzYi9nYWRnZXQvYXRtZWxfdXNiYV91ZGMuYw0K
-QEAgLTE3LDkgKzE3LDE5IEBADQogI2luY2x1ZGUgPGxpbnV4L3VzYi9nYWRnZXQuaD4NCiAjaW5j
-bHVkZSA8bGludXgvdXNiL2F0bWVsX3VzYmFfdWRjLmg+DQogI2luY2x1ZGUgPG1hbGxvYy5oPg0K
-KyNpbmNsdWRlIDxjbGsuaD4NCisjaW5jbHVkZSA8ZG0uaD4NCisjaW5jbHVkZSA8ZG0vZGV2aWNl
-X2NvbXBhdC5oPg0KKyNpbmNsdWRlIDxkbS9kZXZyZXMuaD4NCisNCisjaWYgQ09ORklHX0lTX0VO
-QUJMRUQoRE1fVVNCX0dBREdFVCkNCisjaW5jbHVkZSA8bWFjaC9hdG1lbF91c2JhX3VkYy5oPg0K
-KyNlbmRpZiAvKiBDT05GSUdfSVNfRU5BQkxFRChETV9VU0JfR0FER0VUKSAqLw0KIA0KICNpbmNs
-dWRlICJhdG1lbF91c2JhX3VkYy5oIg0KIA0KK3N0YXRpYyBzdHJ1Y3QgdXNiYV91ZGMgKmNvbnRy
-b2xsZXI7DQorDQogc3RhdGljIGludCB2YnVzX2lzX3ByZXNlbnQoc3RydWN0IHVzYmFfdWRjICp1
-ZGMpDQogew0KIAkvKiBObyBWYnVzIGRldGVjdGlvbjogQXNzdW1lIGFsd2F5cyBwcmVzZW50ICov
-DQpAQCAtNTA2LDEyICs1MTYsNiBAQCB1c2JhX3VkY19zZXRfc2VsZnBvd2VyZWQoc3RydWN0IHVz
-Yl9nYWRnZXQgKmdhZGdldCwgaW50IGlzX3NlbGZwb3dlcmVkKQ0KIAlyZXR1cm4gMDsNCiB9DQog
-DQotc3RhdGljIGNvbnN0IHN0cnVjdCB1c2JfZ2FkZ2V0X29wcyB1c2JhX3VkY19vcHMgPSB7DQot
-CS5nZXRfZnJhbWUJCT0gdXNiYV91ZGNfZ2V0X2ZyYW1lLA0KLQkud2FrZXVwCQkJPSB1c2JhX3Vk
-Y193YWtldXAsDQotCS5zZXRfc2VsZnBvd2VyZWQJPSB1c2JhX3VkY19zZXRfc2VsZnBvd2VyZWQs
-DQotfTsNCi0NCiBzdGF0aWMgc3RydWN0IHVzYl9lbmRwb2ludF9kZXNjcmlwdG9yIHVzYmFfZXAw
-X2Rlc2MgPSB7DQogCS5iTGVuZ3RoID0gVVNCX0RUX0VORFBPSU5UX1NJWkUsDQogCS5iRGVzY3Jp
-cHRvclR5cGUgPSBVU0JfRFRfRU5EUE9JTlQsDQpAQCAtMTE1Myw3ICsxMTU3LDcgQEAgc3RhdGlj
-IGludCB1c2JhX3VkY19pcnEoc3RydWN0IHVzYmFfdWRjICp1ZGMpDQogCXJldHVybiAwOw0KIH0N
-CiANCi1zdGF0aWMgaW50IGF0bWVsX3VzYmFfc3RhcnQoc3RydWN0IHVzYmFfdWRjICp1ZGMpDQor
-c3RhdGljIGludCB1c2JhX2VuYWJsZShzdHJ1Y3QgdXNiYV91ZGMgKnVkYykNCiB7DQogCXVkYy0+
-ZGV2c3RhdHVzID0gMSA8PCBVU0JfREVWSUNFX1NFTEZfUE9XRVJFRDsNCiANCkBAIC0xMTY4LDcg
-KzExNzIsNyBAQCBzdGF0aWMgaW50IGF0bWVsX3VzYmFfc3RhcnQoc3RydWN0IHVzYmFfdWRjICp1
-ZGMpDQogCXJldHVybiAwOw0KIH0NCiANCi1zdGF0aWMgaW50IGF0bWVsX3VzYmFfc3RvcChzdHJ1
-Y3QgdXNiYV91ZGMgKnVkYykNCitzdGF0aWMgaW50IHVzYmFfZGlzYWJsZShzdHJ1Y3QgdXNiYV91
-ZGMgKnVkYykNCiB7DQogCXVkYy0+Z2FkZ2V0LnNwZWVkID0gVVNCX1NQRUVEX1VOS05PV047DQog
-CXJlc2V0X2FsbF9lbmRwb2ludHModWRjKTsNCkBAIC0xMTc5LDI4ICsxMTgzLDI5IEBAIHN0YXRp
-YyBpbnQgYXRtZWxfdXNiYV9zdG9wKHN0cnVjdCB1c2JhX3VkYyAqdWRjKQ0KIAlyZXR1cm4gMDsN
-CiB9DQogDQotc3RhdGljIHN0cnVjdCB1c2JhX3VkYyBjb250cm9sbGVyID0gew0KLQkucmVncyA9
-ICh1bnNpZ25lZCAqKUFUTUVMX0JBU0VfVURQSFMsDQotCS5maWZvID0gKHVuc2lnbmVkICopQVRN
-RUxfQkFTRV9VRFBIU19GSUZPLA0KLQkuZ2FkZ2V0ID0gew0KLQkJLm9wcwkJPSAmdXNiYV91ZGNf
-b3BzLA0KLQkJLmVwX2xpc3QJPSBMSVNUX0hFQURfSU5JVChjb250cm9sbGVyLmdhZGdldC5lcF9s
-aXN0KSwNCi0JCS5zcGVlZAkJPSBVU0JfU1BFRURfSElHSCwNCi0JCS5pc19kdWFsc3BlZWQJPSAx
-LA0KLQkJLm5hbWUJCT0gImF0bWVsX3VzYmFfdWRjIiwNCi0JfSwNCi19Ow0KK3N0YXRpYyBpbnQg
-dXNiYV9nYWRnZXRfcHVsbHVwKHN0cnVjdCB1c2JfZ2FkZ2V0ICpnLCBpbnQgaXNfb24pDQorew0K
-KwlzdHJ1Y3QgdXNiYV91ZGMgKnVkYyA9IGNvbnRyb2xsZXI7DQorCXUzMiBjdHJsOw0KKw0KKwlj
-dHJsID0gdXNiYV9yZWFkbCh1ZGMsIENUUkwpOw0KKw0KKwl1c2JhX3dyaXRlbCh1ZGMsIENUUkws
-IGlzX29uID8gY3RybCAmIH5VU0JBX0RFVEFDSCA6IGN0cmwgfCBVU0JBX0RFVEFDSCk7DQorDQor
-CXJldHVybiAwOw0KK30NCiANCiBpbnQgZG1fdXNiX2dhZGdldF9oYW5kbGVfaW50ZXJydXB0cyhz
-dHJ1Y3QgdWRldmljZSAqZGV2KQ0KIHsNCi0Jc3RydWN0IHVzYmFfdWRjICp1ZGMgPSAmY29udHJv
-bGxlcjsNCisJc3RydWN0IHVzYmFfdWRjICp1ZGMgPSBjb250cm9sbGVyOw0KIA0KIAlyZXR1cm4g
-dXNiYV91ZGNfaXJxKHVkYyk7DQogfQ0KIA0KKyNpZiAhQ09ORklHX0lTX0VOQUJMRUQoRE1fVVNC
-X0dBREdFVCkNCiBpbnQgdXNiX2dhZGdldF9yZWdpc3Rlcl9kcml2ZXIoc3RydWN0IHVzYl9nYWRn
-ZXRfZHJpdmVyICpkcml2ZXIpDQogew0KLQlzdHJ1Y3QgdXNiYV91ZGMgKnVkYyA9ICZjb250cm9s
-bGVyOw0KKwlzdHJ1Y3QgdXNiYV91ZGMgKnVkYyA9IGNvbnRyb2xsZXI7DQogCWludCByZXQ7DQog
-DQogCWlmICghZHJpdmVyIHx8ICFkcml2ZXItPmJpbmQgfHwgIWRyaXZlci0+c2V0dXApIHsNCkBA
-IC0xMjEzLDcgKzEyMTgsNyBAQCBpbnQgdXNiX2dhZGdldF9yZWdpc3Rlcl9kcml2ZXIoc3RydWN0
-IHVzYl9nYWRnZXRfZHJpdmVyICpkcml2ZXIpDQogCQlyZXR1cm4gLUVCVVNZOw0KIAl9DQogDQot
-CWF0bWVsX3VzYmFfc3RhcnQodWRjKTsNCisJdXNiYV9lbmFibGUodWRjKTsNCiANCiAJdWRjLT5k
-cml2ZXIgPSBkcml2ZXI7DQogDQpAQCAtMTIyOCw3ICsxMjMzLDcgQEAgaW50IHVzYl9nYWRnZXRf
-cmVnaXN0ZXJfZHJpdmVyKHN0cnVjdCB1c2JfZ2FkZ2V0X2RyaXZlciAqZHJpdmVyKQ0KIA0KIGlu
-dCB1c2JfZ2FkZ2V0X3VucmVnaXN0ZXJfZHJpdmVyKHN0cnVjdCB1c2JfZ2FkZ2V0X2RyaXZlciAq
-ZHJpdmVyKQ0KIHsNCi0Jc3RydWN0IHVzYmFfdWRjICp1ZGMgPSAmY29udHJvbGxlcjsNCisJc3Ry
-dWN0IHVzYmFfdWRjICp1ZGMgPSBjb250cm9sbGVyOw0KIA0KIAlpZiAoIWRyaXZlciB8fCAhZHJp
-dmVyLT51bmJpbmQgfHwgIWRyaXZlci0+ZGlzY29ubmVjdCkgew0KIAkJcHJfZXJyKCJiYWQgcGFy
-YW10ZXJcbiIpOw0KQEAgLTEyMzksMTEgKzEyNDQsNTQgQEAgaW50IHVzYl9nYWRnZXRfdW5yZWdp
-c3Rlcl9kcml2ZXIoc3RydWN0IHVzYl9nYWRnZXRfZHJpdmVyICpkcml2ZXIpDQogCWRyaXZlci0+
-dW5iaW5kKCZ1ZGMtPmdhZGdldCk7DQogCXVkYy0+ZHJpdmVyID0gTlVMTDsNCiANCi0JYXRtZWxf
-dXNiYV9zdG9wKHVkYyk7DQorCXVzYmFfZGlzYWJsZSh1ZGMpOw0KKw0KKwlyZXR1cm4gMDsNCit9
-DQorI2Vsc2UgLyogIUNPTkZJR19JU19FTkFCTEVEKERNX1VTQl9HQURHRVQpICovDQorDQorc3Rh
-dGljIGludCB1c2JhX2dhZGdldF9zdGFydChzdHJ1Y3QgdXNiX2dhZGdldCAqZywNCisJCQkgICAg
-IHN0cnVjdCB1c2JfZ2FkZ2V0X2RyaXZlciAqZHJpdmVyKQ0KK3sNCisJc3RydWN0IHVzYmFfdWRj
-ICp1ZGMgPSBjb250cm9sbGVyOw0KKw0KKwlpZiAoIWRyaXZlciB8fCAhZHJpdmVyLT5iaW5kIHx8
-ICFkcml2ZXItPnNldHVwKSB7DQorCQlwcmludGYoImJhZCBwYXJhbWV0ZXJcbiIpOw0KKwkJcmV0
-dXJuIC1FSU5WQUw7DQorCX0NCisNCisJaWYgKHVkYy0+ZHJpdmVyKSB7DQorCQlwcmludGYoIlVE
-QyBhbHJlYWR5IGhhcyBhIGdhZGdldCBkcml2ZXJcbiIpOw0KKwkJcmV0dXJuIC1FQlVTWTsNCisJ
-fQ0KKw0KKwl1c2JhX2VuYWJsZSh1ZGMpOw0KKw0KKwl1ZGMtPmRyaXZlciA9IGRyaXZlcjsNCisN
-CisJcmV0dXJuIDA7DQorfQ0KKw0KK3N0YXRpYyBpbnQgdXNiYV9nYWRnZXRfc3RvcChzdHJ1Y3Qg
-dXNiX2dhZGdldCAqZykNCit7DQorCXN0cnVjdCB1c2JhX3VkYyAqdWRjID0gY29udHJvbGxlcjsN
-CisNCisJaWYgKCF1ZGMpDQorCQlyZXR1cm4gLUVOT0RFVjsNCisNCisJaWYgKCF1ZGMtPmRyaXZl
-cikNCisJCXJldHVybiAtRUlOVkFMOw0KKw0KKwl1ZGMtPmRyaXZlci0+ZGlzY29ubmVjdCgmdWRj
-LT5nYWRnZXQpOw0KKwl1ZGMtPmRyaXZlciA9IE5VTEw7DQorDQorCXVzYmFfZGlzYWJsZSh1ZGMp
-Ow0KIA0KIAlyZXR1cm4gMDsNCiB9DQogDQorI2VuZGlmIC8qICFDT05GSUdfSVNfRU5BQkxFRChE
-TV9VU0JfR0FER0VUKSAqLw0KKw0KIHN0YXRpYyBzdHJ1Y3QgdXNiYV9lcCAqdXNiYV91ZGNfcGRh
-dGEoc3RydWN0IHVzYmFfcGxhdGZvcm1fZGF0YSAqcGRhdGEsDQogCQkJCSAgICAgIHN0cnVjdCB1
-c2JhX3VkYyAqdWRjKQ0KIHsNCkBAIC0xMjg0LDEzICsxMzMyLDEwNyBAQCBzdGF0aWMgc3RydWN0
-IHVzYmFfZXAgKnVzYmFfdWRjX3BkYXRhKHN0cnVjdCB1c2JhX3BsYXRmb3JtX2RhdGEgKnBkYXRh
-LA0KIAlyZXR1cm4gZXBzOw0KIH0NCiANCitzdGF0aWMgY29uc3Qgc3RydWN0IHVzYl9nYWRnZXRf
-b3BzIHVzYmFfdWRjX29wcyA9IHsNCisJLmdldF9mcmFtZQkJPSB1c2JhX3VkY19nZXRfZnJhbWUs
-DQorCS53YWtldXAJCQk9IHVzYmFfdWRjX3dha2V1cCwNCisJLnNldF9zZWxmcG93ZXJlZAk9IHVz
-YmFfdWRjX3NldF9zZWxmcG93ZXJlZCwNCisJLnB1bGx1cAkJCT0gdXNiYV9nYWRnZXRfcHVsbHVw
-LA0KKyNpZiBDT05GSUdfSVNfRU5BQkxFRChETV9VU0JfR0FER0VUKQ0KKwkudWRjX3N0YXJ0CQk9
-IHVzYmFfZ2FkZ2V0X3N0YXJ0LA0KKwkudWRjX3N0b3AJCT0gdXNiYV9nYWRnZXRfc3RvcCwNCisj
-ZW5kaWYNCit9Ow0KKw0KK3N0YXRpYyBzdHJ1Y3QgdXNiYV91ZGMgdWRjX2NvbnRyb2xsZXIgPSB7
-DQorCS5yZWdzID0gKHVuc2lnbmVkIGludCAqKUFUTUVMX0JBU0VfVURQSFMsDQorCS5maWZvID0g
-KHVuc2lnbmVkIGludCAqKUFUTUVMX0JBU0VfVURQSFNfRklGTywNCisJLmdhZGdldCA9IHsNCisJ
-CS5vcHMJCT0gJnVzYmFfdWRjX29wcywNCisJCS5lcF9saXN0CT0gTElTVF9IRUFEX0lOSVQodWRj
-X2NvbnRyb2xsZXIuZ2FkZ2V0LmVwX2xpc3QpLA0KKwkJLnNwZWVkCQk9IFVTQl9TUEVFRF9ISUdI
-LA0KKwkJLmlzX2R1YWxzcGVlZAk9IDEsDQorCQkubmFtZQkJPSAiYXRtZWxfdXNiYV91ZGMiLA0K
-Kwl9LA0KK307DQorDQogaW50IHVzYmFfdWRjX3Byb2JlKHN0cnVjdCB1c2JhX3BsYXRmb3JtX2Rh
-dGEgKnBkYXRhKQ0KIHsNCi0Jc3RydWN0IHVzYmFfdWRjICp1ZGM7DQorCWNvbnRyb2xsZXIgPSAm
-dWRjX2NvbnRyb2xsZXI7DQorDQorCWNvbnRyb2xsZXItPnVzYmFfZXAgPSB1c2JhX3VkY19wZGF0
-YShwZGF0YSwgY29udHJvbGxlcik7DQorDQorCXJldHVybiAwOw0KK30NCisNCisjaWYgQ09ORklH
-X0lTX0VOQUJMRUQoRE1fVVNCX0dBREdFVCkNCitzdHJ1Y3QgdXNiYV9wcml2X2RhdGEgew0KKwlz
-dHJ1Y3QgY2xrX2J1bGsJCWNsa3M7DQorfTsNCiANCi0JdWRjID0gJmNvbnRyb2xsZXI7DQorc3Rh
-dGljIGludCBhdG1lbF91c2JhX3VkY19jbGtfaW5pdChzdHJ1Y3QgdWRldmljZSAqZGV2LCBzdHJ1
-Y3QgY2xrX2J1bGsgKmNsa3MpDQorew0KKwlpbnQgcmV0Ow0KIA0KLQl1ZGMtPnVzYmFfZXAgPSB1
-c2JhX3VkY19wZGF0YShwZGF0YSwgdWRjKTsNCisJcmV0ID0gY2xrX2dldF9idWxrKGRldiwgY2xr
-cyk7DQorCWlmIChyZXQgPT0gLUVOT1NZUykNCisJCXJldHVybiAwOw0KKw0KKwlpZiAocmV0KQ0K
-KwkJcmV0dXJuIHJldDsNCisNCisJcmV0ID0gY2xrX2VuYWJsZV9idWxrKGNsa3MpOw0KKwlpZiAo
-cmV0KSB7DQorCQljbGtfcmVsZWFzZV9idWxrKGNsa3MpOw0KKwkJcmV0dXJuIHJldDsNCisJfQ0K
-IA0KIAlyZXR1cm4gMDsNCiB9DQorDQorc3RhdGljIGludCBhdG1lbF91c2JhX3VkY19wcm9iZShz
-dHJ1Y3QgdWRldmljZSAqZGV2KQ0KK3sNCisJc3RydWN0IHVzYmFfcHJpdl9kYXRhICpwcml2ID0g
-ZGV2X2dldF9wcml2KGRldik7DQorCWludCByZXQ7DQorDQorCXJldCA9IGF0bWVsX3VzYmFfdWRj
-X2Nsa19pbml0KGRldiwgJnByaXYtPmNsa3MpOw0KKwlpZiAocmV0KQ0KKwkJcmV0dXJuIHJldDsN
-CisNCisJcmV0ID0gdXNiYV91ZGNfcHJvYmUoJnBkYXRhKTsNCisJaWYgKHJldCkNCisJCXJldHVy
-biByZXQ7DQorDQorCWNvbnRyb2xsZXItPmRyaXZlciA9IDA7DQorDQorCXJldCA9IHVzYl9hZGRf
-Z2FkZ2V0X3VkYygoc3RydWN0IGRldmljZSAqKWRldiwgJmNvbnRyb2xsZXItPmdhZGdldCk7DQor
-DQorCXJldHVybiByZXQ7DQorfQ0KKw0KK3N0YXRpYyBpbnQgYXRtZWxfdXNiYV91ZGNfcmVtb3Zl
-KHN0cnVjdCB1ZGV2aWNlICpkZXYpDQorew0KKwlzdHJ1Y3QgdXNiYV9wcml2X2RhdGEgKnByaXYg
-PSBkZXZfZ2V0X3ByaXYoZGV2KTsNCisNCisJdXNiX2RlbF9nYWRnZXRfdWRjKCZjb250cm9sbGVy
-LT5nYWRnZXQpOw0KKw0KKwljbGtfcmVsZWFzZV9idWxrKCZwcml2LT5jbGtzKTsNCisNCisJcmV0
-dXJuIGRtX3NjYW5fZmR0X2RldihkZXYpOw0KK30NCisNCitzdGF0aWMgY29uc3Qgc3RydWN0IHVk
-ZXZpY2VfaWQgYXRtZWxfdXNiYV91ZGNfaWRzW10gPSB7DQorCXsgLmNvbXBhdGlibGUgPSAiYXRt
-ZWwsYXQ5MXNhbTlybC11ZGMiIH0sDQorCXsgLmNvbXBhdGlibGUgPSAiYXRtZWwsYXQ5MXNhbTln
-NDUtdWRjIiB9LA0KKwl7IC5jb21wYXRpYmxlID0gImF0bWVsLHNhbWE1ZDMtdWRjIiB9LA0KKwl7
-fQ0KK307DQorDQorVV9CT09UX0RSSVZFUihhdGVtbF91c2JhX3VkYykgPSB7DQorCS5uYW1lCT0g
-ImF0ZW1sX3VzYmFfdWRjIiwNCisJLmlkCT0gVUNMQVNTX1VTQl9HQURHRVRfR0VORVJJQywNCisJ
-Lm9mX21hdGNoID0gYXRtZWxfdXNiYV91ZGNfaWRzLA0KKwkucHJvYmUgPSBhdG1lbF91c2JhX3Vk
-Y19wcm9iZSwNCisJLnJlbW92ZSA9IGF0bWVsX3VzYmFfdWRjX3JlbW92ZSwNCisJLnByaXZfYXV0
-bwk9IHNpemVvZihzdHJ1Y3QgdXNiYV9wcml2X2RhdGEpLA0KK307DQorI2VuZGlmIC8qIENPTkZJ
-R19JU19FTkFCTEVEKERNX1VTQl9HQURHRVQpICovDQotLSANCjIuNDUuMQ0KDQo=
+Rather than repeating the same code in two files (SPL and TPL), move it
+to a shared filed.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ arch/arm/include/asm/arch-rockchip/timer.h |  3 ++
+ arch/arm/mach-rockchip/Makefile            |  4 +--
+ arch/arm/mach-rockchip/spl.c               | 21 +------------
+ arch/arm/mach-rockchip/spl_common.c        | 36 ++++++++++++++++++++++
+ arch/arm/mach-rockchip/tpl.c               | 30 +-----------------
+ 5 files changed, 43 insertions(+), 51 deletions(-)
+ create mode 100644 arch/arm/mach-rockchip/spl_common.c
+
+diff --git a/arch/arm/include/asm/arch-rockchip/timer.h b/arch/arm/include/asm/arch-rockchip/timer.h
+index 77b54220447..b5fc738c98c 100644
+--- a/arch/arm/include/asm/arch-rockchip/timer.h
++++ b/arch/arm/include/asm/arch-rockchip/timer.h
+@@ -15,4 +15,7 @@ struct rk_timer {
+ 	u32 timer_int_status;
+ };
+ 
++/** rockchip_stimer_init() - Set up the timer ready for use */
++void rockchip_stimer_init(void);
++
+ #endif
+diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
+index c07bdaee4c3..3b13891ec24 100644
+--- a/arch/arm/mach-rockchip/Makefile
++++ b/arch/arm/mach-rockchip/Makefile
+@@ -8,9 +8,9 @@
+ # inaccessible/protected memory (and the bootrom-helper assumes that
+ # the stack-pointer is valid before switching to the U-Boot stack).
+ obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
+-obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o
++obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o spl_common.o
+ obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
+-obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o
++obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o spl_common.o
+ obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
+ 
+ obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index 3ce7e792b5a..bbd223bc524 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -13,6 +13,7 @@
+ #include <ram.h>
+ #include <spl.h>
+ #include <asm/arch-rockchip/bootrom.h>
++#include <asm/arch-rockchip/timer.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+@@ -86,26 +87,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+ #define	TIMER_FMODE	BIT(0)
+ #define	TIMER_RMODE	BIT(1)
+ 
+-__weak void rockchip_stimer_init(void)
+-{
+-#if defined(CONFIG_ROCKCHIP_STIMER_BASE)
+-	/* If Timer already enabled, don't re-init it */
+-	u32 reg = readl(CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
+-
+-	if (reg & TIMER_EN)
+-		return;
+-#ifndef CONFIG_ARM64
+-	asm volatile("mcr p15, 0, %0, c14, c0, 0"
+-		     : : "r"(CONFIG_COUNTER_FREQUENCY));
+-#endif
+-	writel(0, CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
+-	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE);
+-	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE + 4);
+-	writel(TIMER_EN | TIMER_FMODE, CONFIG_ROCKCHIP_STIMER_BASE +
+-	       TIMER_CONTROL_REG);
+-#endif
+-}
+-
+ __weak int board_early_init_f(void)
+ {
+ 	return 0;
+diff --git a/arch/arm/mach-rockchip/spl_common.c b/arch/arm/mach-rockchip/spl_common.c
+new file mode 100644
+index 00000000000..b29f33448ab
+--- /dev/null
++++ b/arch/arm/mach-rockchip/spl_common.c
+@@ -0,0 +1,36 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2019 Rockchip Electronics Co., Ltd
++ */
++
++#include <asm/io.h>
++#include <linux/bitops.h>
++
++#define TIMER_LOAD_COUNT_L	0x00
++#define TIMER_LOAD_COUNT_H	0x04
++#define TIMER_CONTROL_REG	0x10
++#define TIMER_EN	0x1
++#define	TIMER_FMODE	BIT(0)
++#define	TIMER_RMODE	BIT(1)
++
++__weak void rockchip_stimer_init(void)
++{
++#if defined(CONFIG_ROCKCHIP_STIMER_BASE)
++	/* If Timer already enabled, don't re-init it */
++	u32 reg = readl(CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
++
++	if (reg & TIMER_EN)
++		return;
++
++#ifndef CONFIG_ARM64
++	asm volatile("mcr p15, 0, %0, c14, c0, 0"
++		     : : "r"(CONFIG_COUNTER_FREQUENCY));
++#endif
++
++	writel(0, CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
++	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE);
++	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE + 4);
++	writel(TIMER_EN | TIMER_FMODE, CONFIG_ROCKCHIP_STIMER_BASE +
++	       TIMER_CONTROL_REG);
++#endif
++}
+diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
+index 50f04f9474a..0e1da8c1c89 100644
+--- a/arch/arm/mach-rockchip/tpl.c
++++ b/arch/arm/mach-rockchip/tpl.c
+@@ -14,41 +14,13 @@
+ #include <version.h>
+ #include <asm/io.h>
+ #include <asm/arch-rockchip/bootrom.h>
++#include <asm/arch-rockchip/timer.h>
+ #include <linux/bitops.h>
+ 
+ #if CONFIG_IS_ENABLED(BANNER_PRINT)
+ #include <timestamp.h>
+ #endif
+ 
+-#define TIMER_LOAD_COUNT_L	0x00
+-#define TIMER_LOAD_COUNT_H	0x04
+-#define TIMER_CONTROL_REG	0x10
+-#define TIMER_EN	0x1
+-#define	TIMER_FMODE	BIT(0)
+-#define	TIMER_RMODE	BIT(1)
+-
+-__weak void rockchip_stimer_init(void)
+-{
+-#if defined(CONFIG_ROCKCHIP_STIMER_BASE)
+-	/* If Timer already enabled, don't re-init it */
+-	u32 reg = readl(CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
+-
+-	if (reg & TIMER_EN)
+-		return;
+-
+-#ifndef CONFIG_ARM64
+-	asm volatile("mcr p15, 0, %0, c14, c0, 0"
+-		     : : "r"(CONFIG_COUNTER_FREQUENCY));
+-#endif
+-
+-	writel(0, CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
+-	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE);
+-	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE + 4);
+-	writel(TIMER_EN | TIMER_FMODE, CONFIG_ROCKCHIP_STIMER_BASE +
+-	       TIMER_CONTROL_REG);
+-#endif
+-}
+-
+ void board_init_f(ulong dummy)
+ {
+ 	struct udevice *dev;
+-- 
+2.34.1
+
