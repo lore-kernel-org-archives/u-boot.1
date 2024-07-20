@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E41BC3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85BFC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:50:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BB1788B4C;
+	by phobos.denx.de (Postfix) with ESMTP id DBC1288C2F;
 	Sat, 20 Jul 2024 12:50:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e3Is3gkL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dgJjTJ8g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19D6788ACF; Sat, 20 Jul 2024 12:50:07 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 32E5B886F9; Sat, 20 Jul 2024 12:50:07 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39369886F9
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3D8B88719
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4266fd395eeso17915605e9.3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:05 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-367e50f71bbso1293973f8f.2
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1721472604; x=1722077404; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wJ+6pcMOYGGI1gMWlYtkWd2t1T5NPvlT5ETc8P2r6y0=;
- b=e3Is3gkLDzC60GZ5TDlPElq5zEL6bApAbekbdymquFuvjSl44t0sWGs1jPglAa4Zt/
- NmTHlV8rQGIUonM1+7yVMK+IkFyDU+58vSFxCpquWjoKNYIcEFG9h80WlDru4Gyuqah4
- zuNPtDyffK5+rQk7+b4DGhEhE5lEqF++rp5bE=
+ bh=GHLm0SmoLQYiUDyEBdTJJMeoIs9kvx/JX2BIscoUFN0=;
+ b=dgJjTJ8gdliLJVwnmH/ExHcu562R+SYCEwhORlHlipKojG0jjMQX5MRuOVvnqc60Bt
+ +jxxlHSRp5cU2wHRy3ISL1uGFu6xKEwjymmksgizuoytd9iYpg4OPThQ2vASg6NcFT0A
+ ja1V4W6LnOF/j+oRrmXyouuUKOFcX0QInDX1s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721472604; x=1722077404;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wJ+6pcMOYGGI1gMWlYtkWd2t1T5NPvlT5ETc8P2r6y0=;
- b=o8janmLiHA8rZi3J+exsBXn2CHUrQpvbrslvAnM+eZ0Ksy7OEU3YeqRpZuTXUBBvgR
- rqbWr2bcbC/YE9QBK73vZlVBVgFUelbE/6BX1758b7lU2H8Ms6F2tzvVHX3YNlelXUYR
- 0qptWB2KviVNxuZTRpz1uQ5NWqlhY0aUzmOWTOdRFeaYDudfoU9G6E/ONdgaJ6lmy8Gc
- tnQmFo5JDeDzKKB3i7npYtwPf0lFPyNcpkHVmaDHXlQw5h8StG4QdIU3XTaNUVkEdpNN
- DhnGRRPFvtwOllInk91H+4OJCUI4O8TNHM6JMtTcccqGCrWsejsZtd8McxRozJZURA16
- drQg==
-X-Gm-Message-State: AOJu0YyuGj3i3Ok9JPQX+A5pVxwOtUBNfuAXWxT3MCxREkSZ6CIGP5nt
- HLQuyb5QwJ4nr5xSJ3dfQQ4bkfno06KhpAbSJURWl+kEH1SbPMYkT0mIjP9Y5dyUTJu8RViDVgo
+ bh=GHLm0SmoLQYiUDyEBdTJJMeoIs9kvx/JX2BIscoUFN0=;
+ b=vMxMUTLnI9/5HyzkwyXJIfFpl7xFoTycXTB/cu4zdg7AGNvCv2j+pmu+RyRGNsVR6g
+ pm2yjU2gQlTY6gFaBdBLdvHKfAPy1zGA5rMkCnocbqW7lDcDk6gEycw8hu3xd8t8s/nR
+ hEUTuZm/1Pfh4rCqZttR4enZu4xjPuHx/5Sq2pOPAETuHofJ9mQlELYb/ae+rY2O8dWr
+ rK8LrKJ+mEs+ORdKSxxQJ39a+rqusaWa3b37Ri9+qUEkkt2QQcmPYl9rLip1kqi6EzMo
+ Jo8fJpd3bl0Ogz9zr/EyDImxxvpOfmRWz47EJxzygbjMDzkkq62lwznPRxoSo0FdjNId
+ MiKQ==
+X-Gm-Message-State: AOJu0YyOiDJIh8g03lLA8VnyryVaYczO52CouAkt7Ec2/Qe48asm/itZ
+ IFhWtjbyxDD5h5RjV3aVTw615Io2/CkP4ZbEEBDgoz0vcwpUwG104J0jNaMNGlevBWxQvqlEX6c
  =
-X-Google-Smtp-Source: AGHT+IE5qJQz9pMA4UXtECamOY35CcfiTskC2wG7mPjiKBeH8woxCcYA+2zJK+McwpA4hcILom+Ccw==
-X-Received: by 2002:a05:600c:468b:b0:426:5416:67de with SMTP id
- 5b1f17b1804b1-427dc58f5bdmr6299665e9.30.1721472604493; 
- Sat, 20 Jul 2024 03:50:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHWL0GX8eRUf9P0m5VpCyoplp2pw7fgrYlkaHMKpJxObMEUSjIq53kAiUuEKr1c2+Z8f1GBWA==
+X-Received: by 2002:a5d:4ecc:0:b0:368:36e6:b23a with SMTP id
+ ffacd0b85a97d-369bb2dd18fmr623872f8f.55.1721472603637; 
+ Sat, 20 Jul 2024 03:50:03 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.03
+ ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 03:50:04 -0700 (PDT)
+ Sat, 20 Jul 2024 03:50:03 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -70,9 +70,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/20] binman: Tidy up comment for Bintoolfdt_add_pubkey.run()
-Date: Sat, 20 Jul 2024 11:49:34 +0100
-Message-Id: <20240720104950.2730773-5-sjg@chromium.org>
+Subject: [PATCH 03/20] binman: Tidy up bintool docs
+Date: Sat, 20 Jul 2024 11:49:33 +0100
+Message-Id: <20240720104950.2730773-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240720104950.2730773-1-sjg@chromium.org>
 References: <20240720104950.2730773-1-sjg@chromium.org>
@@ -94,29 +94,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function returns a value, so add documentation for it.
+The docs have somehow got out of sync. Regenerate the file to fix the
+problem.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/btool/fdt_add_pubkey.py | 4 ++++
- 1 file changed, 4 insertions(+)
+ tools/binman/bintools.rst | 61 ++++++++++++++++++++++++---------------
+ 1 file changed, 38 insertions(+), 23 deletions(-)
 
-diff --git a/tools/binman/btool/fdt_add_pubkey.py b/tools/binman/btool/fdt_add_pubkey.py
-index a50774200c9..75a9716ad72 100644
---- a/tools/binman/btool/fdt_add_pubkey.py
-+++ b/tools/binman/btool/fdt_add_pubkey.py
-@@ -32,6 +32,10 @@ class Bintoolfdt_add_pubkey(bintool.Bintool):
-                 verified for the image / configuration to be considered valid.
-             algo (str): Cryptographic algorithm. Optional parameter,
-                 default value: sha1,rsa2048
+diff --git a/tools/binman/bintools.rst b/tools/binman/bintools.rst
+index 1336f4d0115..fa44d9c6872 100644
+--- a/tools/binman/bintools.rst
++++ b/tools/binman/bintools.rst
+@@ -10,6 +10,15 @@ binaries. It is fairly easy to create new bintools. Just add a new file to the
+ 
+ 
+ 
++Bintool: bootgen: Generate bootable fsbl image for zynq/zynqmp
++--------------------------------------------------------------
 +
-+        Returns:
-+            CommandResult: Resulting output from the bintool, or None if the
-+                tool is not present
-         """
-         args = []
-         if algo:
++This bintools supports running Xilinx "bootgen" in order
++to generate a bootable, authenticated image form an SPL.
++
++
++
++
+ Bintool: bzip2: Compression/decompression using the bzip2 algorithm
+ -------------------------------------------------------------------
+ 
+@@ -37,6 +46,25 @@ Documentation about CBFS is at https://www.coreboot.org/CBFS
+ 
+ 
+ 
++Bintool: cst: Image generation for U-Boot
++-----------------------------------------
++
++This bintool supports running `cst` with some basic parameters as
++needed by binman.
++
++
++
++Bintool: fdt_add_pubkey: Add public key to control dtb (spl or u-boot proper)
++-----------------------------------------------------------------------------
++
++This bintool supports running `fdt_add_pubkey`.
++
++Normally mkimage adds signature information to the control dtb. However
++binman images are built independent from each other. Thus it is required
++to add the public key separately from mkimage.
++
++
++
+ Bintool: fiptool: Image generation for ARM Trusted Firmware
+ -----------------------------------------------------------
+ 
+@@ -143,11 +171,20 @@ Documentation is available via::
+ 
+ 
+ 
++Bintool: mkeficapsule: Handles the 'mkeficapsule' tool
++------------------------------------------------------
++
++This bintool is used for generating the EFI capsules. The
++capsule generation parameters can either be specified through
++commandline, or through a config file.
++
++
++
+ Bintool: mkimage: Image generation for U-Boot
+ ---------------------------------------------
+ 
+ This bintool supports running `mkimage` with some basic parameters as
+-neeed by binman.
++needed by binman.
+ 
+ Normally binman uses the mkimage built by U-Boot. But when run outside the
+ U-Boot build system, binman can use the version installed in your system.
+@@ -194,25 +231,3 @@ Documentation is available via::
+ 
+ 
+ 
+-Bintool: fdt_add_pubkey: Add public key to device tree
+-------------------------------------------------------
+-
+-This bintool supports running `fdt_add_pubkey` in order to add a public
+-key coming from a certificate to a device-tree.
+-
+-Normally signing is done using `mkimage` in context of `binman sign`. However,
+-in this process the public key is not added to the stage before u-boot proper.
+-Using `fdt_add_pubkey` the key can be injected to the SPL independent of
+-`mkimage`
+-
+-
+-
+-Bintool: bootgen: Sign ZynqMP FSBL image
+-----------------------------------------
+-
+-This bintool supports running `bootgen` in order to sign a SPL for ZynqMP
+-devices.
+-
+-The bintool automatically creates an appropriate input image file (.bif) for
+-bootgen based on the passed arguments. The output is a bootable,
+-authenticated `boot.bin` file.
 -- 
 2.34.1
 
