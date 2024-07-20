@@ -4,84 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEFD4C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:34:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60351C3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:35:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53F46886B3;
-	Sat, 20 Jul 2024 17:34:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E2AD8887B9;
+	Sat, 20 Jul 2024 17:35:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XjC3QAfH";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4812388753; Sat, 20 Jul 2024 17:34:11 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1721489756;
+	bh=w6USbBUcC9IcztNj5zmvFRQrM/lppYZNH0ktXM0ieDE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=kimmnoRyFkWQtCa2I6FvLA1FbqKeGcs8nupE03f4GGmNGAhvrGaiwvt9Y6YOlqBI+
+	 bK2b954JXLPc9pElOYSucGrWzZdtJ8hM5MXRw/Vifz1pFVfJJZLRFNS3ZEY6pJW+C+
+	 elHGCS3P+L+gKY3ok20adkAHPZudJFr8JyRsP6hhKZensNsX474GO88yWM2EZ/BPl4
+	 5seFGImHQFBWvVlqksG5IIiRCvSWOr2g/kkXFy1lAZid9HvcJjT2rkcs1X6kP2HnWE
+	 GeX46sai8J51HiSZhpqP9fPv9MYtf/87K+wB6QQU1+dVJiDBCCTQO19EcSh04RHdru
+	 mM9Oy9JOCKf3w==
+Received: from crub.agik.hopto.org (p508b6272.dip0.t-ipconnect.de
+ [80.139.98.114])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 304E9885D1
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 17:34:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-79f06c9c929so205586685a.0
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:34:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721489648; x=1722094448; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=H6OZ4KAeG5eWJU0A4kn0Leqvy9QKwFWVviE+MozWFrM=;
- b=XjC3QAfH+ugPBLaotXILn172vdkh3QT5F+/ufB3yzpv+xvzvlCLGRGyX/7CJHR2sLq
- BysEDiXecdPcXnRKoK5iH8ZcgDtDX2ti+uu/mCgvhdrrUndVS/FJZ3hidy8VT4D8mRZP
- odZuOlsvIaIf2zBbj+R8B88vLMo2ZzNa6QOlhd9YoSJMQJuRuP97bfeovKmWDjSBlTwO
- i9jqcJERqpdde86kKnJdcf87W4VvoyRbh7nMv8dYUD4w6lW63iKRxkyHhS4Dqgi1xmky
- rDfEExgh0Gg2NoldgkcQnaGLs13RRnKW41cFamtiuLROp5Yu6d88WT522sUHAAILr9q8
- 8EBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721489648; x=1722094448;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=H6OZ4KAeG5eWJU0A4kn0Leqvy9QKwFWVviE+MozWFrM=;
- b=jiaU690MgCrTuqLjJNnhX6d5gHVWTZuCXbBKy20piE1JuSpxZmoJZWvnQDDU8e2IYz
- o5lTRChe6XoDtaGsxcO9weyzqlGT0h6TzoQ2criRvVh5rHPmUV/05bZtLXvZIbrkId+L
- uoU4a1TYsqeTEDsx1UyZuVvO9QrkS91lgjr5D2sqUapFr7f1rNbm+c2y+whxZLehQyAW
- VDIdVN3NIqZIuOUqj5M8c6TPsv/voQbdqW7LnfdC9Lqvop8D3phWr7st34hPngrfd3RY
- Y/OCZLjWQKx1Qqh6Z2yVzk9j3cxBK0dLtfDELF1SzQ7QAwACxoq54/LIR0z/FN0+dZJF
- INhA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/WJKv+ykgwGcU0l+mGXeEF9768XxbYski/cTk/8t06yvBBgtKDVhf2PUekkYp/xs+F2ZMSXjTV6sWiGiOLBVryq2APQ==
-X-Gm-Message-State: AOJu0YxfimZ4JA7SHKY3Dwhq8I5OcGfoc3qUha3VewolYeEJnF1S7mvX
- /aWwWByb1eJgkQcXA2N2PKJwGPZ7OMEBEaUCTterCwrcQOpnSXSL
-X-Google-Smtp-Source: AGHT+IHPc3ZeRWVoDsQNNy/NmxNV0ApDMXGCh93it7w6lRR4DBiPmSfgefwx4Z+0BJH14s5zy57iJQ==
-X-Received: by 2002:a05:620a:1a95:b0:79b:bcee:d627 with SMTP id
- af79cd13be357-7a1a19759f5mr337542785a.35.1721489647915; 
- Sat, 20 Jul 2024 08:34:07 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-44f9cd2824fsm18236451cf.41.2024.07.20.08.34.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 20 Jul 2024 08:34:07 -0700 (PDT)
-Message-ID: <3354d01b-5994-6954-bce9-798cc6af156c@gmail.com>
-Date: Sat, 20 Jul 2024 11:34:06 -0400
+ (Authenticated sender: agust@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id BEDD9886FF;
+ Sat, 20 Jul 2024 17:35:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1721489755;
+ bh=w6USbBUcC9IcztNj5zmvFRQrM/lppYZNH0ktXM0ieDE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=pOWjkccRAYDV6P+QqyuqP/lzH7tmVbYv7z9KHMIiDLynFIXIgOm/g+9KRJNCgtOE8
+ dQSRw/bsWxiK1WiNF7anYGiFORjCBw2Y8uJZjg4fUMhxH0oXuaz5DhG3uVbKEzMGB/
+ bwR6OZyuqXkqEOKGaiZAh1wfU2wyh140USxLXLzM5RG/gyOojHFBEOfen5TmU5A3Kj
+ eCcsmbxDX8ab2FIxjSh7I3ZgS2j4FuqseEEiLIc8UiEinAsW7c03UNf7xYNEFZRHDe
+ RCTKFF5GJhmwLUiMei+uxS8RPmzbLMI1sjBwydnUxGrNwUlrpVQJeIwrmlp01a7zLG
+ k1qAKeO772IAw==
+From: Anatolij Gustschin <agust@denx.de>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [PATCH] mx6boards: convert to DM_I2C and DM_SERIAL
+Date: Sat, 20 Jul 2024 17:35:39 +0200
+Message-Id: <20240720153539.3550313-1-agust@denx.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 03/14] spl: Remove some #ifdefs in spl_parse_image_header()
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Devarsh Thakkar <devarsht@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
- Tom Rini <trini@konsulko.com>
-References: <20240720061706.2644229-1-sjg@chromium.org>
- <20240720061706.2644229-4-sjg@chromium.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240720061706.2644229-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,80 +66,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/20/24 02:16, Simon Glass wrote:
-> This function has a number of unnecessary #ifdefs so remove them.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->   common/spl/spl.c | 22 +++++++++++-----------
->   1 file changed, 11 insertions(+), 11 deletions(-)
-> 
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index 6f4a8bfb3f4..02567e766f1 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -308,8 +308,10 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
->   		ret = spl_parse_legacy_header(spl_image, header);
->   		if (ret)
->   			return ret;
-> -	} else {
-> -#ifdef CONFIG_SPL_PANIC_ON_RAW_IMAGE
-> +		return 0;
-> +	}
-> +
-> +	if (IS_ENABLED(CONFIG_SPL_PANIC_ON_RAW_IMAGE)) {
->   		/*
->   		 * CONFIG_SPL_PANIC_ON_RAW_IMAGE is defined when the
->   		 * code which loads images in SPL cannot guarantee that
-> @@ -319,10 +321,9 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
->   		 * is bad, and thus should be skipped silently.
->   		 */
->   		panic("** no mkimage signature but raw image not supported");
-> -#endif
-> +	}
->   
-> -#if CONFIG_IS_ENABLED(OS_BOOT)
-> -#if defined(CONFIG_CMD_BOOTI)
-> +	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
+Rework to remove use of legacy I2C API. Also switch
+to DM_SERIAL to avoid board removal warning.
 
-Maybe this should be IS_ENABLED(CONFIG_SPL_OS_BOOT) since this file cannot be compiled except in SPL.
+Signed-off-by: Anatolij Gustschin <agust@denx.de>
+Cc: Eric Bénard <eric@eukrea.com>
+---
+ board/embest/mx6boards/mx6boards.c | 70 +++---------------------------
+ configs/marsboard_defconfig        |  6 +--
+ configs/riotboard_defconfig        |  6 +--
+ 3 files changed, 10 insertions(+), 72 deletions(-)
 
->   		ulong start, size;
->   
->   		if (!booti_setup((ulong)header, &start, &size, 0)) {
-> @@ -336,7 +337,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
->   			      spl_image->load_addr, spl_image->size);
->   			return 0;
->   		}
-> -#elif defined(CONFIG_CMD_BOOTZ)
-> +	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) {
->   		ulong start, end;
->   
->   		if (!bootz_setup((ulong)header, &start, &end)) {
-> @@ -350,11 +351,11 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
->   			      spl_image->load_addr, spl_image->size);
->   			return 0;
->   		}
-> -#endif
-> -#endif
-> +	}
->   
-> -		if (!spl_parse_board_header(spl_image, bootdev, (const void *)header, sizeof(*header)))
-> -			return 0;
-> +	if (!spl_parse_board_header(spl_image, bootdev, (const void *)header,
-> +				    sizeof(*header)))
-> +		return 0;
->   
->   #ifdef CONFIG_SPL_RAW_IMAGE_SUPPORT
->   		/* Signature not found - assume u-boot.bin */
-> @@ -366,7 +367,6 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
->   		debug("Raw boot image support not enabled, proceeding to other boot methods\n");
->   		return -EINVAL;
->   #endif
-> -	}
->   
->   	return 0;
->   }
+diff --git a/board/embest/mx6boards/mx6boards.c b/board/embest/mx6boards/mx6boards.c
+index 896350140d..cf3368c253 100644
+--- a/board/embest/mx6boards/mx6boards.c
++++ b/board/embest/mx6boards/mx6boards.c
+@@ -25,7 +25,6 @@
+ #include <asm/gpio.h>
+ #include <asm/mach-imx/iomux-v3.h>
+ #include <asm/mach-imx/boot_mode.h>
+-#include <asm/mach-imx/mxc_i2c.h>
+ #include <asm/mach-imx/spi.h>
+ #include <asm/mach-imx/video.h>
+ #include <i2c.h>
+@@ -61,10 +60,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define ENET_PAD_CTRL_CLK  ((PAD_CTL_PUS_100K_UP & ~PAD_CTL_PKE) | \
+ 	PAD_CTL_SPEED_MED | PAD_CTL_DSE_40ohm | PAD_CTL_SRE_FAST)
+ 
+-#define I2C_PAD_CTRL	(PAD_CTL_PUS_100K_UP |			\
+-	PAD_CTL_SPEED_MED | PAD_CTL_DSE_40ohm | PAD_CTL_HYS |	\
+-	PAD_CTL_ODE | PAD_CTL_SRE_FAST)
+-
+ #define SPI_PAD_CTRL (PAD_CTL_HYS | PAD_CTL_SPEED_MED | \
+ 		      PAD_CTL_DSE_40ohm | PAD_CTL_SRE_FAST)
+ 
+@@ -148,57 +143,6 @@ static void setup_spi(void)
+ }
+ #endif
+ 
+-struct i2c_pads_info i2c_pad_info1 = {
+-	.scl = {
+-		.i2c_mode = MX6_PAD_CSI0_DAT9__I2C1_SCL
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gpio_mode = MX6_PAD_CSI0_DAT9__GPIO5_IO27
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gp = IMX_GPIO_NR(5, 27)
+-	},
+-	.sda = {
+-		.i2c_mode = MX6_PAD_CSI0_DAT8__I2C1_SDA
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gpio_mode = MX6_PAD_CSI0_DAT8__GPIO5_IO26
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gp = IMX_GPIO_NR(5, 26)
+-	}
+-};
+-
+-struct i2c_pads_info i2c_pad_info2 = {
+-	.scl = {
+-		.i2c_mode = MX6_PAD_KEY_COL3__I2C2_SCL
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gpio_mode = MX6_PAD_KEY_COL3__GPIO4_IO12
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gp = IMX_GPIO_NR(4, 12)
+-	},
+-	.sda = {
+-		.i2c_mode = MX6_PAD_KEY_ROW3__I2C2_SDA
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gpio_mode = MX6_PAD_KEY_ROW3__GPIO4_IO13
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gp = IMX_GPIO_NR(4, 13)
+-	}
+-};
+-
+-struct i2c_pads_info i2c_pad_info3 = {
+-	.scl = {
+-		.i2c_mode = MX6_PAD_GPIO_5__I2C3_SCL
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gpio_mode = MX6_PAD_GPIO_5__GPIO1_IO05
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gp = IMX_GPIO_NR(1, 5)
+-	},
+-	.sda = {
+-		.i2c_mode = MX6_PAD_GPIO_6__I2C3_SDA
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gpio_mode = MX6_PAD_GPIO_6__GPIO1_IO06
+-				| MUX_PAD_CTRL(I2C_PAD_CTRL),
+-		.gp = IMX_GPIO_NR(1, 6)
+-	}
+-};
+-
+ iomux_v3_cfg_t const tft_pads_riot[] = {
+ 	/* LCD_PWR_EN */
+ 	MX6_PAD_ENET_TXD1__GPIO1_IO29 | MUX_PAD_CTRL(NO_PAD_CTRL),
+@@ -258,8 +202,11 @@ static void do_enable_hdmi(struct display_info_t const *dev)
+ 
+ static int detect_i2c(struct display_info_t const *dev)
+ {
+-	return (0 == i2c_set_bus_num(dev->bus)) &&
+-		(0 == i2c_probe(dev->addr));
++	struct udevice *udev = NULL;
++	int ret;
++
++	ret = i2c_get_chip_for_busnum(dev->bus, dev->addr, 1, &udev);
++	return ret ? 0 : 1;
+ }
+ 
+ struct display_info_t const displays[] = {{
+@@ -400,12 +347,7 @@ int board_init(void)
+ {
+ 	/* address of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+-	/* i2c1 : PMIC, Audio codec on RiOT, Expansion connector on MarS */
+-	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info1);
+-	/* i2c2 : HDMI EDID */
+-	setup_i2c(1, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info2);
+-	/* i2c3 : LVDS, Expansion connector */
+-	setup_i2c(2, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info3);
++
+ #ifdef CONFIG_MXC_SPI
+ 	setup_spi();
+ #endif
+diff --git a/configs/marsboard_defconfig b/configs/marsboard_defconfig
+index 8325aaa1c9..198fec2cb2 100644
+--- a/configs/marsboard_defconfig
++++ b/configs/marsboard_defconfig
+@@ -10,9 +10,6 @@ CONFIG_ENV_SECT_SIZE=0x2000
+ CONFIG_IMX_CONFIG="board/boundary/nitrogen6x/nitrogen6q.cfg"
+ CONFIG_MX6Q=y
+ CONFIG_TARGET_EMBESTMX6BOARDS=y
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx6q-marsboard"
+ CONFIG_DISTRO_DEFAULTS=y
+@@ -37,7 +34,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_BOUNCE_BUFFER=y
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SYS_I2C_MXC=y
+ CONFIG_FSL_USDHC=y
+@@ -50,6 +47,7 @@ CONFIG_FEC_MXC=y
+ CONFIG_MII=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_IMX6=y
++CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+diff --git a/configs/riotboard_defconfig b/configs/riotboard_defconfig
+index 1b303e738b..a1e806be42 100644
+--- a/configs/riotboard_defconfig
++++ b/configs/riotboard_defconfig
+@@ -12,9 +12,6 @@ CONFIG_ENV_OFFSET=0x60000
+ CONFIG_IMX_CONFIG="board/boundary/nitrogen6x/nitrogen6s1g.cfg"
+ CONFIG_MX6S=y
+ CONFIG_TARGET_EMBESTMX6BOARDS=y
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx6dl-riotboard"
+ CONFIG_SPL_TEXT_BASE=0x00908000
+@@ -53,7 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=2
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_BOUNCE_BUFFER=y
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SYS_I2C_MXC=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+@@ -67,6 +64,7 @@ CONFIG_FEC_MXC=y
+ CONFIG_MII=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_IMX6=y
++CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+-- 
+2.25.1
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
