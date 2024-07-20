@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22335C3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:37:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 419FDC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:37:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7858488815;
-	Sat, 20 Jul 2024 14:36:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0653588747;
+	Sat, 20 Jul 2024 14:36:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gE149dwx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kLrfbpWP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31DA088671; Sat, 20 Jul 2024 14:36:21 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 32F6188675; Sat, 20 Jul 2024 14:36:22 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21F63886F9
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:36:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ECC4886F0
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:36:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e05f913e382so2576908276.2
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 05:36:19 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6b795574f9dso17046626d6.0
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 05:36:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721478978; x=1722083778; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721478979; x=1722083779; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+bGH+gk+PuH9ubUKfxTAXkwfWNiby03oqWKcU/To+gM=;
- b=gE149dwxP3/xB3ORIiITyrIiRmKDaxDPZn3NuHkxSvXb+tGpG+oKjS5yuJRc7ThIfk
- T0Q43ASrqBRRd/15yD1d2AmkX1RtAlCjRtrCZLgNEhWZEB4asDQMWdgyGkNjWsHjdpi2
- ndezg7s3S6zx+Qk7LKXJCJgkuw4QffyzNEB5c=
+ bh=ji0nkWSYhXyrjMUiSEGbiYwhqND0jvMljRF3PqE5j+U=;
+ b=kLrfbpWPMWtdPNcnpT8DtwnShmuQwgHVMJ9NUiVMVwti3iI1eIX3ru7OAacMqHUq5a
+ 42Wh+Mi4gUEiGADvfmEu0e4etg2kUoWZFIc8zt9oQnEk21D1dvWCd8rgtsmTBcJscFdm
+ wSyZ4cXCdMVjDjOG1lD1JfdoIXOe9Hi/F5UaI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721478978; x=1722083778;
+ d=1e100.net; s=20230601; t=1721478979; x=1722083779;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+bGH+gk+PuH9ubUKfxTAXkwfWNiby03oqWKcU/To+gM=;
- b=gkBAYZMdul/0UtKEER+HDuQf21lKY7gl3LJM6T2GSwkyqsKDx7c0vYErZDON+3FhM6
- QwFRDlWXxtWsMi0v3BQaxuca7/Kn1GUwKJBvJ97P+respxRLg6ZmFx5/RwkeuBCZgIf6
- yzgmxNRVtm3q4RCtQlhMS8IVrerBVVLX1myc3gX6h9yTsXVZW9xuhG/XmIb2hIlipcgZ
- kDFdhZLye+hdGEmN21xIsGqO/aZls+U7wviaUMVES/M2aEMgE9AVCMenXWGBaM0cE+t0
- BUHodYfRapiJBf0X9PMQnVVBRz7Jgni66g57d0QTG4MofsgkOVTlpaZMBVdsWh2nH75/
- 3ZZQ==
+ bh=ji0nkWSYhXyrjMUiSEGbiYwhqND0jvMljRF3PqE5j+U=;
+ b=fvEXSRvsOOfq5RD2G4yN/N9xoUUhgtUVwbRVfhdMRepHEY0P59SOLQ7bM5Hxba6lLE
+ qT8GUT07no4TA3PhFfSCiOUNa4JqGnW1nQhemWg00j1jkRatNgHrlkS4XwcAagqtQXfS
+ XtQCcdanmfKHwrWOzqw0jlYeuA4HwUNm4f1cL9nddO/IFU0fHqZcxJjtqDb2Qydre/kx
+ VPlKP7WDXvkuwPpXscAxJLthksckZQDsiNaV3oxBMtcFVoFlzo2oWWnxHDKLcE93I2re
+ HzXdQBWsq0aAsuem22D0wp161hNOd+ztBRtvnW+NVK1CvpysRHFs4U8iYNwZz0V2kYVd
+ VptQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLVzUHwHi1lKcjFmlTMW1nJWBQLmLPsjTjHdXy7HM+GQt/FJi8LLF6JJgqe3Q776qrApIyv54DrYHXyHASDG80pRYt2Q==
-X-Gm-Message-State: AOJu0YzhDhR8ZWcoR6leJxERGa9Ginb5XpNhSVPpgmXcWDv/X1MFhtrm
- +n4EpRyHLdNj/ifSSA6N1ETwXJFOqx3L3erE60u9AhfzuNLl3gVlgtFhcDcFrEBfu5eHW4Uv56m
- hvOxokGCQre8H6kxkPtew9lzqTJbvQLT4mk2N
-X-Google-Smtp-Source: AGHT+IFxXLWOl8CaXVA6t8eFEtWLiQu7GI4YsHFTXQU2SeWOTb/AsHjTKMTdkae48AT6lSdXxdmux/y9XGQzzvovNnU=
-X-Received: by 2002:a05:6902:2302:b0:e03:9e09:951e with SMTP id
- 3f1490d57ef6-e087b8f3110mr1213876276.25.1721478977961; Sat, 20 Jul 2024
- 05:36:17 -0700 (PDT)
+ AJvYcCXNSjF4666XMXZs1ROXn2vqqE+6NWKseRS0k6kh41X8WNL1dD7QTB4q36uGQm7hh1/SoFjr2usyToRs/cg1GfPOxXgRbQ==
+X-Gm-Message-State: AOJu0YxTDeKKmdV1AnzKlRBQ9ueXtbMkKNwO9TtqQAx2nkiZ+Rk5kxxV
+ 8g/4wFFR43TfJ3F/E/v9lCgF1Hl1REQ7DbLJ+JiL1YcjHV7mD6Ml3lLrDhhrNEVrJ8kjzzW6eqG
+ j8HbnSS2xNdMhhPznS/xr4UneipFdVoPUikWw
+X-Google-Smtp-Source: AGHT+IFogQKZ7rXek+BpGPgdwJ9yBPPOkewVpSKtdtFIhQfouUHwHsw3OPjjJXUX5EWaC8K8aDiOn6KyOnjp2jPciqE=
+X-Received: by 2002:a05:6214:2a4f:b0:6b2:c840:7a2 with SMTP id
+ 6a1803df08f44-6b961182b79mr15012646d6.45.1721478978970; Sat, 20 Jul 2024
+ 05:36:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
- <20240719091213.3757300-3-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20240719091213.3757300-3-mikhail.kshevetskiy@iopsys.eu>
+ <20240719091213.3757300-4-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240719091213.3757300-4-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 20 Jul 2024 13:36:07 +0100
-Message-ID: <CAFLszTi4hmabQZ3T67_Q8d4wZ7Y_XN=nRpW2oDjqnAr-8K1=hQ@mail.gmail.com>
-Subject: Re: [PATCH v6 2/3] led: Implement software led blinking
+Date: Sat, 20 Jul 2024 13:36:08 +0100
+Message-ID: <CAFLszTjG2vXnReX_cKUNPPPknunrcxV5hA1R2p5jrtd7a1w0Yw@mail.gmail.com>
+Subject: Re: [PATCH v6 3/3] led: Add dts property to specify blinking of the
+ led
 To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Cc: Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
@@ -95,19 +96,21 @@ On Fri, 19 Jul 2024 at 10:12, Mikhail Kshevetskiy
 >
 > From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
 >
-> If hardware (or driver) doesn't support leds blinking, it's
-> now possible to use software implementation of blinking instead.
-> This relies on cyclic functions.
+> The standard property
+>
+>     linux,default-trigger = "pattern";
+>
+> used to get an effect. No blinking parameters can be set yet.
 >
 > Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
 > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
->  drivers/led/Kconfig        |  16 ++++-
->  drivers/led/Makefile       |   1 +
->  drivers/led/led-uclass.c   |  11 ++++
->  drivers/led/led_sw_blink.c | 117 +++++++++++++++++++++++++++++++++++++
->  include/led.h              |  22 +++++++
->  5 files changed, 166 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/led/led_sw_blink.c
+>  drivers/led/led-uclass.c | 30 +++++++++++++++++++++++++-----
+>  1 file changed, 25 insertions(+), 5 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+One more thing - it should really have a test, like
+dm_test_led_blink(), some ideas about how to fiddle the time are in
+dm_test_rtc_set_get().
