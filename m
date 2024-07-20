@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F3AC3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:10:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025EDC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:10:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E9E58885D;
-	Sat, 20 Jul 2024 19:10:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E35188897;
+	Sat, 20 Jul 2024 19:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ReTCdL9L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PA5v5OWd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4018D8882D; Sat, 20 Jul 2024 19:10:16 +0200 (CEST)
+ id 191008883F; Sat, 20 Jul 2024 19:10:18 +0200 (CEST)
 Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
  [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 757D3887FE
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:10:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03862887F3
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:10:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7035c367c4cso1492107a34.2
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:10:13 -0700 (PDT)
+ 46e09a7af769-7035b717880so1761408a34.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:10:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721495412; x=1722100212; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721495415; x=1722100215; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qSlzYeiivpcN4Cg8DkhEjEZVf89S1XB3p7R0w0JQYMY=;
- b=ReTCdL9LZq17ESI4zWrbHd3UTUzlayOwfjSCIaIE5wZ3NGpaRZLFvaZN0jTIgQ8Erm
- n7swOl5hW4olTvHVggeb/ZY6MDNP9F8d5eRRa4viQIOfBjZCW3pKobTFwyVOlZz2Y/o7
- WNjCnaQ0QjWQnA3TL+TSp4IHx6vrhFCJkzg4s=
+ bh=eUTuaHrWY1rUSuuWpSj7wJc6uwZEv42rS2nntAdu2z4=;
+ b=PA5v5OWdAckU5/PYABacvsj2xdrO+7HqpSOoV0WJIAo6nKz4R6ras/whj4mfjeAcyO
+ cT6AJmPA12NteNFslsmEMzubctT8PsQasseOaZwKmGSAcrd9MxWuWFsOYr0z2xVFGyte
+ kBFVRxJdGVhlUDbI6Dfm2nK6QhfziTlIgljBs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721495412; x=1722100212;
+ d=1e100.net; s=20230601; t=1721495415; x=1722100215;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qSlzYeiivpcN4Cg8DkhEjEZVf89S1XB3p7R0w0JQYMY=;
- b=FQdVIMiBJGo11llfK91Nqc47NAOZqDOm6LGpMcYFPZf9L2PueXyOXjqEoqNA61sF8H
- MZ+23YGd7b+vaY2n5nMM7yV3XhHNeZR6Mt/h6Znw+ymV9xXFXoTAd3SZb5Wtptg0zR7I
- jjGdpriUVJxa/nQo7ZLDVMCXqfk+zKDCNxoIolyXnPR0ZWPNFYTZLITdqh2P5cg0GoE/
- TAkdtxxpoLj9sVDG47/X73VlxxFuZOESwVttpQdgyWpoAQgofjruGYWnBhXu5Lqj3GeC
- SBvt9yFqcRF8R4bymzumogeiAwrO4g3L+iMhgQe41ow3cm1ekqcCnGhx6+m+HCyqNV26
- /zyg==
+ bh=eUTuaHrWY1rUSuuWpSj7wJc6uwZEv42rS2nntAdu2z4=;
+ b=WRNK9XsMGwp3qQ3KdioNT0CDzVYYT56rWaANgO6zL+YX9I/G4jO2jDLqTTRW5cIQKn
+ mXupc9ZGcF8p+zJhtA5Fmf/k8kPPiC5SIb186QQ1v9NUZMzi1+/wJzMHEP75I7vHoaAc
+ iK+GubyD3Oz36Z9jVXbJliJSlEixe/1yJjl0/RnnyrwoEc1CccxtStPViaTZqN2SgJgl
+ WUpdi6+BK39Qw9CF/5bwAgmuRywlQKunfjVVGifdB6CBI/Kh760i21Ev2qs0HY5qexuP
+ r3GB0zNxYoBgiUvV1CGgtTpFn7bLtm6vzsRQjRN9HSajdi/Jo+QNDYN1tkB5QjN0BHAA
+ Jh6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzDFwYPPYYKEte/yXaip6vI2vy4RA/7l3kLlS2+eVHAu4Uz0yYVjyM/vFTXoDyxPWBUGmiuiyzvhIKF23y+bhbfPJ0yA==
-X-Gm-Message-State: AOJu0Yxqz7+L1g64CwXsQR6DP7V5w+B40k/vQL6uPx1MkRrCrQJHNo0n
- TQz54Tsp+9I1WhJLNWK6KaQPsMtAOuvfIYnkFVcldP+AmlKxHbyICW/XxhTlkZuRPiuKAgymmDJ
- S1Kc=
-X-Google-Smtp-Source: AGHT+IHruPz9p1HBsMDpuFPqqz1eAKRDNU41TRtK9ZRAApPm856taGbu3CJBO+viljzfofy8YgFjng==
-X-Received: by 2002:a05:6830:3814:b0:703:77b1:c653 with SMTP id
- 46e09a7af769-709009b1172mr2948508a34.24.1721495409298; 
- Sat, 20 Jul 2024 10:10:09 -0700 (PDT)
+ AJvYcCWgSSdIbz8xA9q464AtXAucDn1mdUZycot7kElPzTw2ITnYh3yhbaXX9amxr15aE7QGdbFDDYJeTnpsxuEISi351bKjyQ==
+X-Gm-Message-State: AOJu0YwG2RktpHD1Hv2Xrdr7zBi+aYxBkKgcebr85YUJRcHLB4uXo+IW
+ 6A6Pq73/IEVi16ahxBHEqJ/WB+NPlWhDdIG1HN1zRTB7aqENM0TZOYxBZuRFdM7l8AWZaUWLwuW
+ D0NM=
+X-Google-Smtp-Source: AGHT+IHgNkNNOckYArWIV3RgY36cmG9MqhT6U/Yu/4BN14KF6kKpZI71zRPfDLAtmBzC3GuWHDupRA==
+X-Received: by 2002:a9d:6f93:0:b0:703:6f95:98e9 with SMTP id
+ 46e09a7af769-708ea09d9cdmr4153058a34.10.1721495414499; 
+ Sat, 20 Jul 2024 10:10:14 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.07
+ 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 10:10:08 -0700 (PDT)
+ Sat, 20 Jul 2024 10:10:14 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: bb@ti.com, nm@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
-In-Reply-To: <20240715111550.543037-1-n-francis@ti.com>
-References: <20240715111550.543037-1-n-francis@ti.com>
-Subject: Re: [RESEND PATCH] soc: ti: k3-socinfo: Add support for J721E
- SR2.0
-Message-Id: <172149540773.3268377.17030858622030082014.b4-ty@konsulko.com>
-Date: Sat, 20 Jul 2024 11:10:07 -0600
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: nm@ti.com, u-boot@lists.denx.de, j-humphreys@ti.com, 
+ marcel.ziswiler@toradex.com, vigneshr@ti.com, b-padhi@ti.com
+In-Reply-To: <20240715174301.2688466-1-u-kumar1@ti.com>
+References: <20240715174301.2688466-1-u-kumar1@ti.com>
+Subject: Re: [PATCH] configs: j784s4_evm : Increase Dynamic memory
+ allocation size
+Message-Id: <172149541234.3268377.2927049348821454979.b4-ty@konsulko.com>
+Date: Sat, 20 Jul 2024 11:10:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,9 +94,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 15 Jul 2024 16:45:50 +0530, Neha Malcom Francis wrote:
+On Mon, 15 Jul 2024 23:13:01 +0530, Udit Kumar wrote:
 
-> Add support for identifying J721E SR2.0
+> Increase malloc size to 32 MB to align with other J7
+> family devices.
 > 
 > 
 
