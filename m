@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12760C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFFCAC3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:44:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617B4887FE;
-	Sat, 20 Jul 2024 17:36:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 458F2886AA;
+	Sat, 20 Jul 2024 17:44:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sr+sji8e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S4j061S2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA03E887FF; Sat, 20 Jul 2024 17:36:22 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 119DB886B3; Sat, 20 Jul 2024 17:44:06 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD3DA88747
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 17:36:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C43B188618
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 17:44:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-70211abf4cbso1616418a34.3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:36:20 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-44d1eb90522so10962131cf.0
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:44:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721489779; x=1722094579; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721490243; x=1722095043; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fqKFrMMdyrfN/7FFh/Wrt+ezRHmdFtI75DXYhi+z0kk=;
- b=Sr+sji8efxgc+JNWijBqX+3oxDf9kDdeMyHRDzR9Vxeql2N0rKGPwBg3LIS3RUw4gY
- FdCl4PiCTxGqvRI0iZCu9b6fyz2aszX8x+d83lQ5y31iaAgdWiPxZiznz60WXQEepf4P
- B90vR5ajyXb6xHdJh2Swe+N3HGe0g7CKXv9ycJpm6fnGzZPBR7g9wb0jkJEkeQUiQ/0d
- A3txfnAzOirXcot+8qU41Q+/WHYo/Bje8jRN0Ml5WHMGqdrnC+mIZPXXygELvBk4BCUu
- j2fS9Qlo3vrCOsyknFTY3/A/qTcsEMETrn4JYRSRfiKZd6lASNL9w0G05mNoXXaZHZqm
- 9lEg==
+ bh=j6uliTaPz3TOpnpLbR18Rd/Y8Rt5NbDZ/BMa18oX4V0=;
+ b=S4j061S22icf9H3Xyq6v8BVIUzr/50RKTQj6t/NOhFv4XboNo0uObLCZ4Pl9M8RQL3
+ nbect0MRwnPHICj4QQU01jzJzam7pf8a1Quh6HP0nrZpa92FTpBGgw/a1bEroMOVtWu+
+ pzgvkzT2EmkgclZIavsayZSchkVvwJNESf3z0yJsgRE2OrCzRAvYT7w+xCP2SqbuOxOF
+ gv53QbnwluTBYXB2WnDgvxnpPImlILtV4S2nrEJy38ixeUA8kbN3vHL9RbZHQWDwFeP8
+ PpjgQy+yw+BuEf0n9HkHPjdgmIkw+kd8ixtm0WCr79lre8K37W/IIR0naRlM++mdfNKv
+ TBqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721489779; x=1722094579;
+ d=1e100.net; s=20230601; t=1721490243; x=1722095043;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fqKFrMMdyrfN/7FFh/Wrt+ezRHmdFtI75DXYhi+z0kk=;
- b=fQtN8UZO2mjf1YAGZKPi0TROJ8kELM4R6mbvoaecpbFZNCOoJ5OMYIA7J2x7ouKlii
- UMDJUPVd1f+ltQhmxyG9zPFqjxxAoz7ohlbjFVGlSc8aVHiVy9SFTGpxjR1lk9pcRj0B
- jNqI9s/on/iGCAuRYR4nHhF3VO0VC75Du4bNvZGvrShO5g82q2iPmxADVUtYpBLWt+5r
- YBAATn1SVhKaIBslH1iscilO2tKG60eUqNwD8qGJMri5Flza33h9vWCQWFTPOLOzDuml
- APQtAt1Qw4UkXA+qDxSIjfu/0v7IA7lY8vfrFudz3pWl8lSJDMupIEibsjQsyWPOuYHe
- VdHg==
+ bh=j6uliTaPz3TOpnpLbR18Rd/Y8Rt5NbDZ/BMa18oX4V0=;
+ b=FYSMM+I8RubLzStrNUcvn9kXC6x4WI5cG7gBiHN2yy6hQxHYeBGtGsMX5VqV9RnG22
+ hIyr47CWVfaw3snVYLi7BlOy5w7ELjVmBJmGKmzxRvqaJFbjn6O3rwwqCD6Zsl94zu1N
+ Lu/N/MxhXB0qDCPKpqc5SoXiH4ls8mRXIrdKxqG/7EWViK96HKnU5/bvHPFERa3i0aOi
+ xnDw0jvydHh3+As+sYazIhWobkTR/a8fPuVE4WOKjlGeWqc7raPwhe//TgUZYO7ZYIwn
+ n0b37pW9xuAAuZ2PVEE2wplYvq2K6wx2RV1Netm0L1z0k/zb+Na+NcJfgmk7/sm4VDkE
+ u6eQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJMxQbCiF3RsYwovMcZrOCZldxtfVDSMFwD4aIaJ2+gF9YlKhoZYopNLeJGSUH/g+kkAXWvnxrryYYdbvQ0Cv4rNCncw==
-X-Gm-Message-State: AOJu0YybVp1tXddbYua4zsE0DGoa6IhvdeBTwkPDEBESXgGksJeq3k/t
- mGmyDmsKnuwfoKitomdmSRoTDjSnP6hR/yqW0mqUCSB+V8n66owsqRvKAw==
-X-Google-Smtp-Source: AGHT+IHDnHOwj2EBy0Aw2Eu1NAeR9MPGUGs6MXoFx9PUonW3Sa9dm6F4bEebGX0P/DhlK5txJftLQg==
-X-Received: by 2002:a05:6830:6384:b0:703:5c50:82e2 with SMTP id
- 46e09a7af769-708fdade986mr3859892a34.16.1721489779321; 
- Sat, 20 Jul 2024 08:36:19 -0700 (PDT)
+ AJvYcCW8ifV+BoabHrfIlppQ4JrUHGoZKue7Jvw8SOhLc/vm6iqsivuve/Z3XXpTekLpJ9aLXgoEt+piOEoAKjOSy6FAYhA/xw==
+X-Gm-Message-State: AOJu0YxCHTWpEFtOAeGXpp7bcxtlBCQZ8hZ6BxGRo5HIRCId8kwbcly4
+ ebIM/xxy+tL/Hj0XETyZlBfY4QoyPNw7mujP97mD1DQiFexf4CX0
+X-Google-Smtp-Source: AGHT+IHdtDjnpqIrl/S2HZrAKHZlJo9ONIFpXkMkrQ51uNsHOiAqi+ZdqlwXCez/GlfhVs1IT+NmCA==
+X-Received: by 2002:a05:622a:1344:b0:446:5764:3c9f with SMTP id
+ d75a77b69052e-44fa52824bemr36611461cf.22.1721490242497; 
+ Sat, 20 Jul 2024 08:44:02 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b8f98f4a9asm11898106d6.75.2024.07.20.08.36.18
+ d75a77b69052e-44f9e3b62e8sm16818471cf.74.2024.07.20.08.44.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 20 Jul 2024 08:36:19 -0700 (PDT)
-Message-ID: <f0414737-91f2-8f82-19e1-79c08a9afab2@gmail.com>
-Date: Sat, 20 Jul 2024 11:36:18 -0400
+ Sat, 20 Jul 2024 08:44:02 -0700 (PDT)
+Message-ID: <5178a74c-05ff-4b91-443c-3bab888d764a@gmail.com>
+Date: Sat, 20 Jul 2024 11:44:00 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 04/14] spl: Remove remaining #ifdef in
- spl_parse_image_header()
+Subject: Re: [PATCH 05/14] mmc: Use logging instead of printf()
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Devarsh Thakkar <devarsht@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
- Tom Rini <trini@konsulko.com>
+Cc: Greg Malysa <greg.malysa@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <sean.anderson@seco.com>,
+ Tom Rini <trini@konsulko.com>, cmachida <curtis.machida@intel.com>
 References: <20240720061706.2644229-1-sjg@chromium.org>
- <20240720061706.2644229-5-sjg@chromium.org>
+ <20240720061706.2644229-6-sjg@chromium.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240720061706.2644229-5-sjg@chromium.org>
+In-Reply-To: <20240720061706.2644229-6-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,62 +103,209 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/20/24 02:16, Simon Glass wrote:
-> Define spl_set_header_raw_uboot() always so we can drop the last #ifdef
-> in this function.
+> The code makes quite a few uses of __func__ which puts the function
+> name into the resulting SPL image. Use the log subsystem instead, to
+> reduce size.
+> 
+> The CONFIG_LOGF_FUNC option can be used to enable the function name.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
->   common/spl/spl.c | 15 ++++++++-------
->   1 file changed, 8 insertions(+), 7 deletions(-)
+>   drivers/mmc/sdhci.c | 46 +++++++++++++++++++--------------------------
+>   1 file changed, 19 insertions(+), 27 deletions(-)
 > 
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index 02567e766f1..745efdd9b28 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -245,7 +245,6 @@ __weak struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
->   	return map_sysmem(CONFIG_TEXT_BASE + offset, 0);
->   }
->   
-> -#ifdef CONFIG_SPL_RAW_IMAGE_SUPPORT
->   void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
->   {
->   	ulong u_boot_pos = spl_get_image_pos();
-> @@ -273,7 +272,6 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
->   	spl_image->os = IH_OS_U_BOOT;
->   	spl_image->name = "U-Boot";
->   }
-> -#endif
->   
->   __weak int spl_parse_board_header(struct spl_image_info *spl_image,
->   				  const struct spl_boot_device *bootdev,
-> @@ -357,16 +355,19 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
->   				    sizeof(*header)))
->   		return 0;
->   
-> -#ifdef CONFIG_SPL_RAW_IMAGE_SUPPORT
-> +	if (IS_ENABLED(CONFIG_SPL_RAW_IMAGE_SUPPORT)) {
->   		/* Signature not found - assume u-boot.bin */
->   		debug("mkimage signature not found - ih_magic = %x\n",
-> -			header->ih_magic);
-> +		      header->ih_magic);
->   		spl_set_header_raw_uboot(spl_image);
-> -#else
-> -		/* RAW image not supported, proceed to other boot methods. */
-> +	} else {
-> +		/*
-> +		 * RAW image not supported, proceed to other boot
-> +		 * methods
-> +		 */
+> diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> index 560b7e889c7..24998233543 100644
+> --- a/drivers/mmc/sdhci.c
+> +++ b/drivers/mmc/sdhci.c
+> @@ -32,8 +32,7 @@ static void sdhci_reset(struct sdhci_host *host, u8 mask)
+>   	sdhci_writeb(host, mask, SDHCI_SOFTWARE_RESET);
+>   	while (sdhci_readb(host, SDHCI_SOFTWARE_RESET) & mask) {
+>   		if (timeout == 0) {
+> -			printf("%s: Reset 0x%x never completed.\n",
+> -			       __func__, (int)mask);
+> +			log_warning("Reset %x never completed\n", (int)mask);
 
-nit: leave this comment as-is, since it is under 80 columns
+I think this cast can be removed too
 
->   		debug("Raw boot image support not enabled, proceeding to other boot methods\n");
+>   			return;
+>   		}
+>   		timeout--;
+> @@ -139,8 +138,7 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
+>   	do {
+>   		stat = sdhci_readl(host, SDHCI_INT_STATUS);
+>   		if (stat & SDHCI_INT_ERROR) {
+> -			pr_debug("%s: Error detected in status(0x%X)!\n",
+> -				 __func__, stat);
+> +			log_debug("Error detected in status(%x)!\n", stat);
+>   			return -EIO;
+>   		}
+>   		if (!transfer_done && (stat & rdy)) {
+> @@ -173,7 +171,7 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
+>   		if (timeout-- > 0)
+>   			udelay(10);
+>   		else {
+> -			printf("%s: Transfer data timeout\n", __func__);
+> +			log_err("Transfer data timeout\n");
+>   			return -ETIMEDOUT;
+>   		}
+>   	} while (!(stat & SDHCI_INT_DATA_END));
+> @@ -232,7 +230,7 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
+>   
+>   	while (sdhci_readl(host, SDHCI_PRESENT_STATE) & mask) {
+>   		if (time >= cmd_timeout) {
+> -			printf("%s: MMC: %d busy ", __func__, mmc_dev);
+> +			log_warning("MMC: %d busy ", mmc_dev);
+
+Maybe this should be "mmc%d busy\n"
+
+>   			if (2 * cmd_timeout <= SDHCI_CMD_MAX_TIMEOUT) {
+>   				cmd_timeout += cmd_timeout;
+>   				printf("timeout increasing to: %u ms.\n",
+> @@ -316,8 +314,8 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
+>   		}
+>   
+>   		if (get_timer(start) >= SDHCI_READ_STATUS_TIMEOUT) {
+> -			printf("%s: Timeout for status update: %08x %08x\n",
+> -			       __func__, stat, mask);
+> +			log_warning("Timeout for status update: %08x %08x\n",
+> +				    stat, mask);
+>   			return -ETIMEDOUT;
+>   		}
+>   	} while ((stat & mask) != mask);
+> @@ -358,7 +356,7 @@ static int sdhci_execute_tuning(struct udevice *dev, uint opcode)
+>   	struct mmc *mmc = mmc_get_mmc_dev(dev);
+>   	struct sdhci_host *host = mmc->priv;
+>   
+> -	debug("%s\n", __func__);
+> +	log_debug("tuning\n");
+
+I think this one should be left as-is. Or at least given something more descriptive.
+
+>   
+>   	if (host->ops && host->ops->platform_execute_tuning) {
+>   		err = host->ops->platform_execute_tuning(mmc, opcode);
+> @@ -380,8 +378,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
+>   	while (sdhci_readl(host, SDHCI_PRESENT_STATE) &
+>   			   (SDHCI_CMD_INHIBIT | SDHCI_DATA_INHIBIT)) {
+>   		if (timeout == 0) {
+> -			printf("%s: Timeout to wait cmd & data inhibit\n",
+> -			       __func__);
+> +			log_err("Timeout to wait cmd & data inhibit\n");
+
+Might as well fix the grammar while we're at it
+
+log_err("Timeout waiting for cmd & data inhibit\n");
+
+>   			return -EBUSY;
+>   		}
+>   
+> @@ -397,7 +394,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
+>   	if (host->ops && host->ops->set_delay) {
+>   		ret = host->ops->set_delay(host);
+>   		if (ret) {
+> -			printf("%s: Error while setting tap delay\n", __func__);
+> +			log_err("Error while setting tap delay\n");
+>   			return ret;
+>   		}
+>   	}
+> @@ -405,7 +402,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
+>   	if (host->ops && host->ops->config_dll) {
+>   		ret = host->ops->config_dll(host, clock, false);
+>   		if (ret) {
+> -			printf("%s: Error while configuring dll\n", __func__);
+> +			log_err("Error configuring dll\n");
+
+To distinguish these, can we say "Error while disabling dll"
+
+>   			return ret;
+>   		}
+>   	}
+> @@ -456,7 +453,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
+>   	if (host->ops && host->ops->config_dll) {
+>   		ret = host->ops->config_dll(host, clock, true);
+>   		if (ret) {
+> -			printf("%s: Error while configuring dll\n", __func__);
+> +			log_err("Error configuring dll\n");
+
+and "Error while enabling dll"
+
+I know this grows .data a bit...
+
+>   			return ret;
+>   		}
+>   	}
+> @@ -472,8 +469,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
+>   	while (!((clk = sdhci_readw(host, SDHCI_CLOCK_CONTROL))
+>   		& SDHCI_CLOCK_INT_STABLE)) {
+>   		if (timeout == 0) {
+> -			printf("%s: Internal clock never stabilised.\n",
+> -			       __func__);
+> +			log_err("Internal clock never stabilised.\n");
+>   			return -EBUSY;
+>   		}
+>   		timeout--;
+> @@ -738,8 +734,7 @@ static int sdhci_init(struct mmc *mmc)
+>   	if (host->quirks & SDHCI_QUIRK_32BIT_DMA_ADDR) {
+>   		host->align_buffer = memalign(8, 512 * 1024);
+>   		if (!host->align_buffer) {
+> -			printf("%s: Aligned buffer alloc failed!!!\n",
+> -			       __func__);
+> +			log_err("Aligned buffer alloc failed\n");
+>   			return -ENOMEM;
+>   		}
+>   	}
+> @@ -881,20 +876,18 @@ int sdhci_setup_cfg(struct mmc_config *cfg, struct sdhci_host *host,
+>   #else
+>   	caps = sdhci_readl(host, SDHCI_CAPABILITIES);
+>   #endif
+> -	debug("%s, caps: 0x%x\n", __func__, caps);
+> +	log_debug("caps: 0x%x\n", caps);
+>   
+>   #if CONFIG_IS_ENABLED(MMC_SDHCI_SDMA)
+>   	if ((caps & SDHCI_CAN_DO_SDMA)) {
+>   		host->flags |= USE_SDMA;
+>   	} else {
+> -		debug("%s: Your controller doesn't support SDMA!!\n",
+> -		      __func__);
+> +		log_debug("Controller doesn't support SDMA\n");
+>   	}
+>   #endif
+>   #if CONFIG_IS_ENABLED(MMC_SDHCI_ADMA)
+>   	if (!(caps & SDHCI_CAN_DO_ADMA2)) {
+> -		printf("%s: Your controller doesn't support ADMA!!\n",
+> -		       __func__);
+> +		log_err("Controller doesn't support ADMA\n");
 >   		return -EINVAL;
-> -#endif
-> +	}
+>   	}
+>   	if (!host->adma_desc_table) {
+> @@ -927,7 +920,7 @@ int sdhci_setup_cfg(struct mmc_config *cfg, struct sdhci_host *host,
+>   #else
+>   		caps_1 = sdhci_readl(host, SDHCI_CAPABILITIES_1);
+>   #endif
+> -		debug("%s, caps_1: 0x%x\n", __func__, caps_1);
+> +		log_debug("caps_1: %x\n", caps_1);
+>   		host->clk_mul = (caps_1 & SDHCI_CLOCK_MUL_MASK) >>
+>   				SDHCI_CLOCK_MUL_SHIFT;
 >   
->   	return 0;
->   }
+> @@ -953,8 +946,7 @@ int sdhci_setup_cfg(struct mmc_config *cfg, struct sdhci_host *host,
+>   			host->max_clk *= host->clk_mul;
+>   	}
+>   	if (host->max_clk == 0) {
+> -		printf("%s: Hardware doesn't specify base clock frequency\n",
+> -		       __func__);
+> +		log_err("Hardware doesn't specify base clock frequency\n");
+>   		return -EINVAL;
+>   	}
+>   	if (f_max && (f_max < host->max_clk))
+> @@ -1047,7 +1039,7 @@ int add_sdhci(struct sdhci_host *host, u32 f_max, u32 f_min)
+>   
+>   	host->mmc = mmc_create(&host->cfg, host);
+>   	if (host->mmc == NULL) {
+> -		printf("%s: mmc create fail!\n", __func__);
+> +		log_err("mmc create fail\n");
+>   		return -ENOMEM;
+>   	}
+>   
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
