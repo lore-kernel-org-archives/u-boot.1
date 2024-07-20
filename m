@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44BB4C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:52:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46E19C3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:52:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94CF688C67;
-	Sat, 20 Jul 2024 12:50:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B93EC88C78;
+	Sat, 20 Jul 2024 12:50:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NXomHTYh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fj+BI+m2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF3E088BFD; Sat, 20 Jul 2024 12:50:14 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 6858488C61; Sat, 20 Jul 2024 12:50:15 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29B1D88C3E
+ by phobos.denx.de (Postfix) with ESMTPS id EABA688C4A
  for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3686b285969so1021074f8f.0
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-427cede1e86so17703015e9.0
  for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721472611; x=1722077411; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721472612; x=1722077412; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h1AAb7fPpTapCEkoTqfc0oA+MgHeOQZ53yxZMoy7rzw=;
- b=NXomHTYh5Ewl90wxoyhu2RPoktRPTABfUftHUTMetyihMN3s/RLnAozTKdvK50pvmM
- 7nef6Et78bQNfS31Y42m1Ia2NXQXjU+uP0cV5Zd8+v88gAqAU5p6EnefYAHawT9F7rsE
- MILrwK/OIV5cyKBaQYxvkSFNWYKnhSUN5oenM=
+ bh=JBWL6Y4zNr0gtfBm8AHfUCtwzhJ5+/iqoEoBimB/Of4=;
+ b=fj+BI+m2T5hHMva5s6mggPU7QhEbO7VvTwZMQlyDYG8zMKrHz48BQ7Q6qro+qKipvp
+ XIYTzu7PKYot00mm8R1aWY3/yTnc2tfPpqdGuVOWbbeLGnQOHqMuQN92eeB+HmiBn+AS
+ iCn++UH5V3GKWQytf0LxWqAK0I2yUB8SzeKEQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721472611; x=1722077411;
+ d=1e100.net; s=20230601; t=1721472612; x=1722077412;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h1AAb7fPpTapCEkoTqfc0oA+MgHeOQZ53yxZMoy7rzw=;
- b=iu08BgbNIrleVn0542D1BooElSBnOCLG4Izn5qpyCu4h8Z9Jh2Bs3yxRJtbAuILdIW
- 2CuqdLCCaT6nU99UsRqumOFVMerJnBXDcalOiH5NrhvEgFENUzm+bTtdefWGecloWggr
- VCJoPO8j3wECVk5BpJ1hTqXVWkxJwB4nvEbFHI2B3p5NTe4c9S9LBnHpWw4XED2LHlkF
- tnd/AgbLYDZewX1JFLVkYRn6p1F7VrBmp9Wnk7CZyG0Lfe9NTxS4ldvMQeN4+Ap4nldF
- Xhgt816snzFVoVpIxXGcNHJcOoGVAdvA/72qY1bbqHEn8rMn1BAUNgaix0GwB0A5H58q
- tRWQ==
-X-Gm-Message-State: AOJu0YwPj7R42gRpFulDhCm8nb6OzGUSYRtGbzSRuKtppGNc/TlMu5Eq
- D7YRNK29DdeA+wiZrfqvBELlMI+SV7d+ofwcCoFPpWzeCpscDsu2CKsAKAonu2i3Pe74jSDXOZ0
+ bh=JBWL6Y4zNr0gtfBm8AHfUCtwzhJ5+/iqoEoBimB/Of4=;
+ b=Ttq4jkuvxDNua2kixJkOl6Tdttp6CrCKFALdjaUQmjnBzZGdFuzvg1rAiV9NqnUdF6
+ 5Se6/kKkQZPr3HZExlRBl+Hjw/L/cmn1cM6lQTvn4K9jE+ryg3PK4B45BxG+13mMrZpY
+ E4KG1t8HMUhJrtIjc/XTfIblOxeAw6AqNOj0UCGyfpzOBEeVmWbF0hJ7QOK3aub+a/4j
+ JhyoArtmQzd9hn/8tOJK166foglEB1sXiYCsGReXxZH08NfNVw1fcMa25Y2rGBufvfA0
+ 8MRrSt3OFn61WPqDfr3aHfqJZlavf3vsL4pJe1aRXGwi9czp5tjAUvp7Xl2u5LwUOCVO
+ G0ug==
+X-Gm-Message-State: AOJu0YxEXzh9pDq7dv448oAqSciOprgdXKIN66TcQdkpPCxYte5ZdaZ1
+ DEetaCSL56Evo5QzV7lkF6Dh0frHF+NiD/dIbpEEmKT7x15gMiyUELVKOXeNinFpB1JepryesYE
  =
-X-Google-Smtp-Source: AGHT+IGUZYQE2NLtR4s0rdPLJteUq8R1JqNcTvkecphEg8aHZl57NH/G/xGtmBnaUdy8rCSnWoLDsg==
-X-Received: by 2002:adf:f98f:0:b0:367:9cef:f41e with SMTP id
- ffacd0b85a97d-369bb2ab332mr709854f8f.57.1721472611446; 
- Sat, 20 Jul 2024 03:50:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH3/k4kvkvhTaaB4pY9Da0Db+BQ7+imNCnj3wuyoYFXnsTZJb3Hh1WUdzTIm84guPLKwNQyeg==
+X-Received: by 2002:adf:f343:0:b0:368:504d:c3a4 with SMTP id
+ ffacd0b85a97d-369bae34e0fmr841233f8f.17.1721472612306; 
+ Sat, 20 Jul 2024 03:50:12 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.10
+ ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 03:50:11 -0700 (PDT)
+ Sat, 20 Jul 2024 03:50:12 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/20] binman: Add a bintool for fdtgrep
-Date: Sat, 20 Jul 2024 11:49:42 +0100
-Message-Id: <20240720104950.2730773-13-sjg@chromium.org>
+Subject: [PATCH 13/20] binman: Remove dependency on pylibfdt for entry-docs
+Date: Sat, 20 Jul 2024 11:49:43 +0100
+Message-Id: <20240720104950.2730773-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240720104950.2730773-1-sjg@chromium.org>
 References: <20240720104950.2730773-1-sjg@chromium.org>
@@ -94,179 +93,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Binman needs the ability to run fdtgrep to prepare devicetree subsets
-for use by SPL and TPL. Add a new bintool in preparation for this.
+Allow the entry-docs command to operate even if pylibfdt is not present
+in the systemn.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/bintools.rst     |   8 ++
- tools/binman/btool/fdtgrep.py | 137 ++++++++++++++++++++++++++++++++++
- 2 files changed, 145 insertions(+)
- create mode 100644 tools/binman/btool/fdtgrep.py
+ tools/binman/image.py | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/tools/binman/bintools.rst b/tools/binman/bintools.rst
-index fa44d9c6872..cd05ad8cb26 100644
---- a/tools/binman/bintools.rst
-+++ b/tools/binman/bintools.rst
-@@ -65,6 +65,14 @@ to add the public key separately from mkimage.
+diff --git a/tools/binman/image.py b/tools/binman/image.py
+index e77b5d0d97c..97443d3c0a7 100644
+--- a/tools/binman/image.py
++++ b/tools/binman/image.py
+@@ -21,6 +21,9 @@ from dtoc import fdt_util
+ from u_boot_pylib import tools
+ from u_boot_pylib import tout
  
++# This is imported if needed
++state = None
++
+ class Image(section.Entry_section):
+     """A Image, representing an output from binman
  
- 
-+Bintool: fdtgrep: Handles the 'fdtgrep' tool
-+--------------------------------------------
+@@ -75,6 +78,10 @@ class Image(section.Entry_section):
+     def __init__(self, name, node, copy_to_orig=True, test=False,
+                  ignore_missing=False, use_expanded=False, missing_etype=False,
+                  generate=True):
++        # Put this here to allow entry-docs and help to work without libfdt
++        global state
++        from binman import state
 +
-+This bintool supports running `fdtgrep` with parameters suitable for
-+producing SPL devicetrees from the main one.
-+
-+
-+
- Bintool: fiptool: Image generation for ARM Trusted Firmware
- -----------------------------------------------------------
- 
-diff --git a/tools/binman/btool/fdtgrep.py b/tools/binman/btool/fdtgrep.py
-new file mode 100644
-index 00000000000..c34d8d8943b
---- /dev/null
-+++ b/tools/binman/btool/fdtgrep.py
-@@ -0,0 +1,137 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2022 Google LLC
-+#
-+"""Bintool implementation for fdtgrep
-+
-+fdtgrepprovides a way to grep devicetree-binary files to extract or remove
-+certain elements.
-+
-+Usage: fdtgrep - extract portions from device tree
-+
-+Usage:
-+	fdtgrep <options> <dt file>|-
-+
-+Output formats are:
-+	dts - device tree soure text
-+	dtb - device tree blob (sets -Hmt automatically)
-+	bin - device tree fragment (may not be a valid .dtb)
-+
-+Options: -[haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
-+  -a, --show-address                 Display address
-+  -A, --colour                       Show all nodes/tags, colour those that match
-+  -b, --include-node-with-prop <arg> Include contains containing property
-+  -c, --include-compat <arg>         Compatible nodes to include in grep
-+  -C, --exclude-compat <arg>         Compatible nodes to exclude in grep
-+  -d, --diff                         Diff: Mark matching nodes with +, others with -
-+  -e, --enter-node                   Enter direct subnode names of matching nodes
-+  -f, --show-offset                  Display offset
-+  -g, --include-match <arg>          Node/property/compatible string to include in grep
-+  -G, --exclude-match <arg>          Node/property/compatible string to exclude in grep
-+  -H, --show-header                  Output a header
-+  -I, --show-version                 Put "/dts-v1/;" on first line of dts output
-+  -l, --list-regions                 Output a region list
-+  -L, --list-strings                 List strings in string table
-+  -m, --include-mem                  Include mem_rsvmap section in binary output
-+  -n, --include-node <arg>           Node to include in grep
-+  -N, --exclude-node <arg>           Node to exclude in grep
-+  -p, --include-prop <arg>           Property to include in grep
-+  -P, --exclude-prop <arg>           Property to exclude in grep
-+  -r, --remove-strings               Remove unused strings from string table
-+  -R, --include-root                 Include root node and all properties
-+  -s, --show-subnodes                Show all subnodes matching nodes
-+  -S, --skip-supernodes              Don't include supernodes of matching nodes
-+  -t, --show-stringtab               Include string table in binary output
-+  -T, --show-aliases                 Include matching aliases in output
-+  -o, --out <arg>                    -o <output file>
-+  -O, --out-format <arg>             -O <output format>
-+  -v, --invert-match                 Invert the sense of matching (select non-matching lines)
-+  -h, --help                         Print this help and exit
-+  -V, --version                      Print version and exit
-+"""
-+
-+import tempfile
-+
-+from u_boot_pylib import tools
-+from binman import bintool
-+
-+class Bintoolfdtgrep(bintool.Bintool):
-+    """Handles the 'fdtgrep' tool
-+
-+    This bintool supports running `fdtgrep` with parameters suitable for
-+    producing SPL devicetrees from the main one.
-+    """
-+    def __init__(self, name):
-+        super().__init__(name, 'Grep devicetree files')
-+
-+    def create_for_phase(self, infile, phase, outfile, remove_props):
-+        """Create the FDT for a particular phase
-+
-+        Args:
-+            infile (str): Input filename containing the full FDT contents (with
-+                all nodes and properties)
-+            phase (str): Phase to generate for ('tpl', 'vpl', 'spl')
-+            outfile (str): Output filename to write the grepped FDT contents to
-+                (with only neceesary nodes and properties)
-+
-+        Returns:
-+            CommandResult: Resulting output from the bintool, or None if the
-+                tool is not present
-+        """
-+        if phase == 'tpl':
-+            tag = 'bootph-pre-sram'
-+        elif phase == 'vpl':
-+            tag = 'bootph-verify'
-+        elif phase == 'spl':
-+            tag = 'bootph-pre-ram'
-+        else:
-+            raise(f"Invalid U-Boot phase '{phase}': Use tpl/vpl/spl")
-+
-+        # These args mirror those in cmd_fdtgrep in scripts/Makefile.lib
-+        # First do the first stage
-+        with tempfile.NamedTemporaryFile(prefix='fdtgrep.tmp',
-+                                         dir=tools.get_output_dir()) as tmp:
-+            args = [
-+                infile,
-+                '-o', tmp.name,
-+                '-b', 'bootph-all',
-+                '-b', tag,
-+                '-u',
-+                '-RT',
-+                '-n', '/chosen',
-+                 '-n', '/config',
-+                 '-O', 'dtb',
-+                ]
-+            self.run_cmd(*args)
-+            args = [
-+                    tmp.name,
-+                    '-o', outfile,
-+                    '-r',
-+                     '-O', 'dtb',
-+                    '-P', 'bootph-all',
-+                    '-P', 'bootph-pre-ram',
-+                    '-P', 'bootph-pre-sram',
-+                    '-P', 'bootph-verify',
-+                    ]
-+            for prop_name in remove_props:
-+                args += ['-P', prop_name]
-+            return self.run_cmd(*args)
-+
-+    def fetch(self, method):
-+        """Fetch handler for fdtgrep
-+
-+        This installs fdtgrep using the apt utility, which assumes that it is
-+        packaged in u-boot tools, which it is not.
-+
-+        Args:
-+            method (FETCH_...): Method to use
-+
-+        Returns:
-+            True if the file was fetched and now installed, None if a method
-+            other than FETCH_BIN was requested
-+
-+        Raises:
-+            Valuerror: Fetching could not be completed
-+        """
-+        if method != bintool.FETCH_BIN:
-+            return None
-+        return self.apt_install('u-boot-tools')
+         super().__init__(None, 'section', node, test=test)
+         self.copy_to_orig = copy_to_orig
+         self.name = name
 -- 
 2.34.1
 
