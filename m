@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5FBC3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B853BC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 18:09:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB46488845;
-	Sat, 20 Jul 2024 19:14:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D270388806;
+	Sat, 20 Jul 2024 20:09:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qZ0beyBT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M8g7htRE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 821CA88860; Sat, 20 Jul 2024 19:14:22 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 660DC88845; Sat, 20 Jul 2024 20:09:17 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 682D0884BC
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:14:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 045AD887F3
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 20:09:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-706dea920f3so1378066a34.1
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:14:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6b797fb1c4aso23135936d6.2
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 11:09:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721495659; x=1722100459; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8loVbkb8m8vGN6/0kVpkglgJYN9ScAPRJ8PdoeWP720=;
- b=qZ0beyBT8otpQtJDHZbLsHuWXHEKtBLDsN3CAAY7FIHmKkwxKDGgTosRsUkFjKDx0e
- jNosniH7Frm8USeomjoEsjNsMkHOPF0zkkpnb1ZLl7Pb+rjtSMD1l8QUAtIOYasrfFDy
- DIDIggLfxG3HOqW+LehxIlPptdV8hIXFXU40A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721495659; x=1722100459;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1721498953; x=1722103753; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8loVbkb8m8vGN6/0kVpkglgJYN9ScAPRJ8PdoeWP720=;
- b=s+XAcaQ4Mne3y9H5HQtfmGY/68LLWZsXihdzoALUNZIoSYULzYXcqbi14+oQocJAZi
- yFJqtIIOOiYS3oh7dOmn7n23moo9CRuU5bUVjXWMqeE0B0XOtc0agdgQYm4d3AsA7p5T
- 1Mww1U/frwfEXxvK2wyyrf5zk2Ep/5vixuTibnz6HaOhQ1byawCEUbO+V/PwY9kVVj5t
- IUCYgwNyrvDmbHTgvXndgI4PiaDxJsyQWHU8B3XjfREzjVzh1me7Hocrq9o4Z8FC3Ai8
- O4RP7+SKw3TCyEkdGW727Fy7DtcW3m/c8TJHTcnv4NY/Cj1m7QYWvjYJF4vaoi12z8Y+
- FigQ==
-X-Gm-Message-State: AOJu0YwdvBOdI/uUbNGW/QJADC07XrbOwZoqvnwva5bEkDhNndqZpV8Z
- spS9B0OwW4zQc5/t+EOAnALrZ+iJjvUIohjoIlypjvgmJ0h+abuUtvZWtXkWqKs=
-X-Google-Smtp-Source: AGHT+IGfUJ1Wonm6IyIgH0EF61tRcgqSPgMxUJUAlzn4LYw3brdx7sYrSussEET44zyo1B9f84HQXw==
-X-Received: by 2002:a05:6830:378d:b0:704:49d1:6c93 with SMTP id
- 46e09a7af769-708fdb3b456mr1457847a34.5.1721495659173; 
- Sat, 20 Jul 2024 10:14:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f6195e28sm773993a34.75.2024.07.20.10.14.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 10:14:18 -0700 (PDT)
-Date: Sat, 20 Jul 2024 11:14:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH] sunxi: dts: arm/arm64: update devicetree files from
- Linux-v6.10
-Message-ID: <20240720171415.GG561963@bill-the-cat>
-References: <20240717143415.343827-1-andre.przywara@arm.com>
- <20240717175153.GR561963@bill-the-cat>
- <191A0F66-E2AE-4D1B-ACBE-E411E135BB61@arm.com>
+ bh=fa7lZ39fuVer2u/ihTs8y91PsO8zaiFlL1KsKVAFg/o=;
+ b=M8g7htREsazENHjhAHcc7xoaNAglO8FoQ5tP2fSrKRU70m+X9zccwd1BNUVJAvPSnj
+ IeN9KXfPbdshw/Mtnb+MYiexOMFolQ37d2zu+LFbDskuoZCed7zxJ7nVpcMQWW5C3w65
+ v7E82n2o4ec/hrgL6KAKDTc/efd1LGIxopr1xVmKcd0MW+mxjUx7v85FUDRHA1uqZYbn
+ +xq4onz4bRKihDzbD3PSexUdSspOteUidZDjKQf9Ge5TsM2CMlsGudqzyH3t0By5mmaZ
+ 3jP/v9UM/JfaGnQVxLLwOiqxk29H5D9J/Hv5mw/5f51f8Mkjh/uOuPji8/q5YxR/Ldvx
+ DHVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721498953; x=1722103753;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fa7lZ39fuVer2u/ihTs8y91PsO8zaiFlL1KsKVAFg/o=;
+ b=lqwkRfjcnX3/uSZ4BAbmvAfIxKdf9QI9PivqHlCMqGrPg77FpZjkvRl7CWMjLTvuik
+ t0BI1oJWZIhffa2NvYY6GmJMYcK16cy+OD4gRMv3psIMSKy0aLrJQsXqqyw7V6pDEQOn
+ etiSZm3mKdDyYls49MkiR5JZUgpjAQX2s0zLT6FEnSqTA1n5iJYxp4yWP9GwZfnhsN0s
+ O2YxldDPFYRFLe8Gt/4b/mO85v/U0jhO2teeiVeHtea5OArYYXMV02qjJlGFfnHFXW7k
+ ycmOIKirKIsP8IlSWcICPrlZH2cqZ6veMFNHY8Fbf4/ypPMqVwiqg+IPGutQ+hsBriPM
+ 7eWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUu8jaVw4ZLkzYBYJyCkEYAT56lgRRdh6KGL1Kgva04noTeVM6kYXGrs486d+uVPI5R0czW6tL9QESEQbG1Gz4XPr9MYA==
+X-Gm-Message-State: AOJu0YwWnbtUPIc2+HWdygomTKgPWZiW32+Qfdn6WpbVzj6Ukx/W935P
+ QgF20DSqn521eKzpLJxB3B9Qc1+kAN2yWsnwAbuurkPb2aUKSm95b0zMecDr9gwZ97ZcsSv/6ZP
+ 5QhHk/eOar1CIs9MgvEW8MAxjWJI=
+X-Google-Smtp-Source: AGHT+IH66L078JmcWn9Kcevdq1x1yvEDUR8RACtYGukrCQ/J06Rqjx9kVemu4IYrAh4VMg9/a2VWYRojlF1gxWm7EoQ=
+X-Received: by 2002:a05:6214:f02:b0:6b7:9d3b:b5e9 with SMTP id
+ 6a1803df08f44-6b94f02ff22mr51718486d6.20.1721498952958; Sat, 20 Jul 2024
+ 11:09:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xTSkFB0xJ5Uan9zl"
-Content-Disposition: inline
-In-Reply-To: <191A0F66-E2AE-4D1B-ACBE-E411E135BB61@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240719215123.3358410-1-agust@denx.de>
+ <CAFLszTjjgvFePwsMO-u-bKRjaCREXy1PCpOCmfH=Atvm2ThAqg@mail.gmail.com>
+ <20240720150934.40349259@crub>
+In-Reply-To: <20240720150934.40349259@crub>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Sat, 20 Jul 2024 13:08:46 -0500
+Message-ID: <CAOCHtYj0fEqUjsw2CwTPS8VUyeEF15P3FJqEU8ser0z-DYm3jg@mail.gmail.com>
+Subject: Re: [PATCH] board: beagle: convert to CONFIG_DM_I2C
+To: Anatolij Gustschin <agust@denx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,60 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Thank you Anatolij, I'm really glad someone was interested in making
+this board work properly in mainline u-boot!
 
---xTSkFB0xJ5Uan9zl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Jul 20, 2024 at 8:09=E2=80=AFAM Anatolij Gustschin <agust@denx.de> =
+wrote:
+>
+> Hi Simon,
+>
+> On Sat, 20 Jul 2024 13:36:04 +0100
+> Simon Glass sjg@chromium.org wrote:
+> ...
+> > > -       /* return BEAGLE_NO_EEPROM if eeprom doesn't respond */
+> > > -       if (i2c_probe(EXPANSION_EEPROM_I2C_ADDRESS) =3D=3D 1) {
+> > > -               i2c_set_bus_num(TWL4030_I2C_BUS);
+> > > +       ret =3D i2c_get_chip_for_busnum(EXPANSION_EEPROM_I2C_BUS,
+> > > +                                     EXPANSION_EEPROM_I2C_ADDRESS, 1=
+, &eeprom);
+> > > +       if (ret)
+> > >                 return BEAGLE_NO_EEPROM;
+> >
+> > Isn't this in the devicetree? It should be possible to use
+> > i2c_eeprom_read(). See for example sysinfo_rcar_probe().
+>
+> No, it isn't in the devicetree. This EEPROM is on an optional
+> expansion board.
 
-On Fri, Jul 19, 2024 at 11:21:54PM +0100, Andre Przywara wrote:
-> Hi Tom,
-> Sorry for top posting, am on the road.
->=20
-> First: The Allwinner drivers in U-Boot work with mainline kernel DTs for =
-ages, so there are no code changes required.
-> We manually sync the DTs from the kernel for years, but I always do one c=
-hange:
->=20
-> In kernel v5.13 the Allwinner IRQ controller (not the GIC) DT binding and=
- DTs changed in an incompatible way, and some critical devices now route th=
-eir IRQ through that controller instead of to the GIC. If an older kernel s=
-ees such a new DT, some critical devices fail to probe due to that, and the=
- kernel does not boot. Using the old DT routing fixes that, at the expense =
-of losing some advanced power saving features.
-> So in the interest of  better compatibility with older kernels and $fdtco=
-ntroladdr (default for UEFI boot), I always kept the old way during the U-B=
-oot sync. This affects all devices with the popular H3, A64 and H6 SoCs, am=
-ong others. A20 and older or H616s are not affected.
->=20
-> So my plan was to migrate the latter group ASAP (after the v6.10 sync), a=
-nd then maybe the others in the next cycle, which means pulling the plug on=
- original Debian Buster kernels, for instance. 5.13 is three years old by n=
-ow, so I guess this might be fine now.
->=20
-> Does that make sense?
+Oh this expansion eeprom never really supported that many devices:
+https://elinux.org/Category:BeagleBoard_Expansion_Boards
 
-Yes, that sounds reasonable, thanks for explaining.
+With the older pre-device tree kernel days we would pass a boot arg to
+the kernel to re-pinmux the proper device configuration..
 
---=20
-Tom
+We could either just drop this part, or convert to the u-boot
+expansion framework, which would use u-boot overlays..
 
---xTSkFB0xJ5Uan9zl
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
 
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmab8GcACgkQFHw5/5Y0
-tywviwv3eqNqWeeffp2JhUfw4aW60YZQZ4PtvZ7oaqtrzqVzwj82AOfY3T5ihh3F
-6nw3l15O4qDDXeUY++MCMHxQ+w6Gm0sKmpk9p7B0mV7xTKsq2lp7YghVzG1Y/vzg
-ATYmfaw6Nw0pHXOljIrO0Fg05bUUV6OUwhqlx9/5Teahpqh4i+3FuAieZqafWITK
-DBBCcTsBS0S7ZDBNVEsaYwQtQqalE5HskUCktTnTU6A2CJvUWHIQ9O9IzbSsOEjg
-wtIuNQWbbSAvbCU3kG8BsuUKbYK8mUbLYWDx1nPHUsgrz3xMl5rRyTy2NmIiF11N
-9kHz7Vsc1T+3sK4mx0B4gUBzL9zFGv8cUHfl6KrUrPNEybGKDpRynyIea327U45G
-QpwTeKsoB/OtpE1FUEgpFZ6M449n7iQEpcZ0hFHPf8oYUwBNOvRGbuMUltnrfRZ/
-0rNWZWEfdHQN5Pqc+cfT/GMnJHnBbEJgp3R72V5QSW0Yar0fG9eXiB3/9GTuFwhD
-X6pKsO4=
-=HQMt
------END PGP SIGNATURE-----
-
---xTSkFB0xJ5Uan9zl--
+--
+Robert Nelson
+https://rcn-ee.com/
