@@ -4,55 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC104C3DA5D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jul 2024 23:36:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88624C3DA5D
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 00:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F10E388511;
-	Sat, 20 Jul 2024 01:36:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id ABE04886DB;
+	Sat, 20 Jul 2024 02:07:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721432188;
-	bh=npaDeiFYpcGQvX42n9/CzgePhFV5cUN/N+GyhNXxyIs=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lW7MJSIAQiLGJ/BhCx1gXu9r1AkrMzC8fbTwHuGu4n9EC7a+ru6qcEn7EepnnpE4z
-	 uZegqtYJrm/egs5VTv+8VQMAAhkdvVCqGKy5erjWqKjRzAgQtxbReyh4of5mKdpSxQ
-	 LyZjEf+wRZWDa9pLlsLVWVXIpZ7cYhBgohB+0uPla1AcZxlWYOB7umwKxL1P4IgW6Z
-	 mcMMs7luKtPRr/ZRipcCB2kau2bu9IzPxI4nkEgTghjOIR8brCl/9wjdnEB5ShdcxN
-	 AUKAiJuajEcSPau2SNzZQl7JiRbOF9KvRO4aMRz/UPDkWy5NX0ntRK+FVLSqrG4+XP
-	 qrR5rS8lEzLxA==
-Received: from crub (p508b6272.dip0.t-ipconnect.de [80.139.98.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BW9TMCN2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F02DD88718; Sat, 20 Jul 2024 02:07:03 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 98C1387ED1;
- Sat, 20 Jul 2024 01:36:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1721432186;
- bh=npaDeiFYpcGQvX42n9/CzgePhFV5cUN/N+GyhNXxyIs=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=b6Jtr9Qk1HRqHC3vmn8VPNgCqWlQrjh/J9/SjiZpY1wnfVkVOSpzcEUMCZ0Vp8/2M
- IP9EP4z04ivNw/UMSBuZw5ck24JOzg9/iT2o1rbMnVGH45/FzoKOFmmPo4E9Idh4zk
- 6CVu/kicrDbaRpAmsPw9DijXH1CSrIa4Sl/W85v7abREJsNOdnvm0mfAnEHaT8dSgO
- dolSt4rZlVA5mDwWQKtIgDAkiREkGp2Nsn9JMOHO8BEuxpf3sStIb1c1W5cAaFI3fq
- oaaQBneN0NFUT1ZKOZbPpKSeXy+nKIuLRletn6J89ytiGYq01kIZxBWKflabp0bpto
- MAoK1HTM3/97g==
-Date: Sat, 20 Jul 2024 01:36:11 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Heiko Schocher <hs@denx.de>, Holger Brunck
- <holger.brunck@hitachienergy.com>
-Subject: Re: [PATCH 11/20] keymile: Remove use of legacy I2C
-Message-ID: <20240720013611.5d7408ab@crub>
-In-Reply-To: <20240718173611.4014274-12-sjg@chromium.org>
-References: <20240718173611.4014274-1-sjg@chromium.org>
- <20240718173611.4014274-12-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id E7720884BE
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 02:07:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52e9b9fb3dcso2326482e87.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 17:07:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721434021; x=1722038821; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XqqoebHtGhhGg1HhP7CWYNtlgq1mekBeuabSQJy0zHY=;
+ b=BW9TMCN2CPS18H2YdptI3TjR38dg+n9bwnp1/Sb9+zwMVfP01uCOqCbLqXnTbqNx7h
+ znifCU5nB450wOnB9xa+b7utmPWHaR/ZL1AC6r5TfyYSiHX9Xk+NeeMPOJ3+5dzQuA3F
+ mx7y89sqjRmaoc6j6nZyhguUFi9oj4QJfWSS0d/AqPLZwEG4IbmSEMvMy9zYpffSJDH4
+ a6Kguwl4eCCetImejUdFQYwFMDM2DjYrmVN7jehn0ASsBzRBMgLRg6qkMVKUcwP6axwx
+ 8DHBt3fGOrrO51Y+Q8qoiIu6KxdJCgvscDca2/paI4In2c324coKUlrYx/uXgA+BeaSX
+ EXHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721434021; x=1722038821;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XqqoebHtGhhGg1HhP7CWYNtlgq1mekBeuabSQJy0zHY=;
+ b=KCOoAGH+pviysGKixYsS3cpGd7e0zyMSJXmjZ4N8AZMxRtA6guUSJmx4npOo721NCS
+ mssCN71+fL80abjPZrg3Jt8121mRBDkI05xmBup3dAa7WqTcmg48HOR90YD+UZ6HgipT
+ EwU4t3ZKmNLd4cbwjXtHdEqsrWCTzqHGk2nbJkZbCmaL9FPXKc7pK+BI67awsjKfbBZJ
+ 9jhRQRuEegvRpGyz3Si6dKo0yCZzlEAQ8h9hEqg7X/RTcX1gNSR9k3dOR6mXtcb8ibOl
+ EP68Jtydd3CHnEzrmfKG2mnBf0X+mtc02mh4uKMXnXXBIokwpy1GpWl3daDHW0fd73Lv
+ KEDg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX99IarxZVmtIr/Abas2LO6hbPNUgYson7jkRlkyEC8RCn6bLwl3qsRYO6IgR8sGmmq4BdLkms+vIa9SHfpBBA++lwLWg==
+X-Gm-Message-State: AOJu0YxwQBcTnidgFAyP5emGTOk1b9YSJ2qEnq2kbIun2IfYoGH5OFYu
+ OM6lkU3mMN72qY5GR/3p2mvAEEBVf3DoAJfsbwlAAXfxfLBeNLApB0YytC9kEgsi+wdCM3bML+o
+ D4aZW2ILuzpwvtyrvijRnRSt4FK1AlrRD
+X-Google-Smtp-Source: AGHT+IGJ3350QFu4t4Br79TczSFzyzAnL/kPDjnSa/umbvgprRPQ1vmvQhMYKkbjMuRu8XSH+CtgpmEKtLUgDWfCI7g=
+X-Received: by 2002:ac2:4c4f:0:b0:52c:cd4f:b95b with SMTP id
+ 2adb3069b0e04-52ee53b060emr5193132e87.22.1721434020532; Fri, 19 Jul 2024
+ 17:07:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20240719231158.50416-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240719231158.50416-1-heinrich.schuchardt@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Fri, 19 Jul 2024 17:06:49 -0700
+Message-ID: <CANV2PTPOesJWcbYhVeiQWonccy3rWdQmN5qfuJtFN+JpnYNzbA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] board: fix compatible property Milk-V Mars CM
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Rick Chen <rick@andestech.com>, Hal Feng <hal.feng@starfivetech.com>, 
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,27 +93,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, Jul 19, 2024 at 4:12=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> For the Milk-V Mars CM (lite) we have only been copying sizeof(void *)
+> bytes to the compatible property instead of the whole string list.
 
-On Thu, 18 Jul 2024 18:36:02 +0100
-Simon Glass sjg@chromium.org wrote:
+This const char array must be so that we may get an accurate data
+length with sizeof() but it highlights there are helper functions for
+get of fdt stringlist and not for set of fdt stringlist.
 
-> Drop this old code to permit removal of legacy I2C code.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+>
+> Fixes: de3229599d4f ("board: add support for Milk-V Mars CM")
+> Reported-by: E Shattow <lucent@gmail.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> 
->  board/keymile/Kconfig         |  3 --
->  board/keymile/common/common.c | 69 -----------------------------------
->  2 files changed, 72 deletions(-)
+>  board/starfive/visionfive2/spl.c | 15 ++++++++++++---
+>  1 file changed, 12 insertions(+), 3 deletions(-)
+>
+> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive=
+2/spl.c
+> index b794b73b6bd..f55c6b5d34c 100644
+> --- a/board/starfive/visionfive2/spl.c
+> +++ b/board/starfive/visionfive2/spl.c
+> @@ -170,23 +170,32 @@ void spl_fdt_fixup_mars_cm(void *fdt)
+>  {
+>         const char *compat;
+>         const char *model;
+> +       int compat_size;
+>
+>         spl_fdt_fixup_mars(fdt);
+>
+>         if (!get_mmc_size_from_eeprom()) {
+>                 int offset;
+> +               static const char
+> +               compat_cm_lite[] =3D "milkv,mars-cm-lite\0starfive,jh7110=
+";
+>
+>                 model =3D "Milk-V Mars CM Lite";
+> -               compat =3D "milkv,mars-cm-lite\0starfive,jh7110";
+> +               compat =3D compat_cm_lite;
+> +               compat_size =3D sizeof(compat_cm_lite);
+>
+>                 offset =3D fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins/m=
+mc0-pins-rest");
+>                 /* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_NON=
+E) */
+>                 fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+>         } else {
+> +               static const char
+> +               compat_cm[] =3D "milkv,mars-cm\0starfive,jh7110";
+> +
+>                 model =3D "Milk-V Mars CM";
+> -               compat =3D "milkv,mars-cm\0starfive,jh7110";
+> +               compat =3D compat_cm;
+> +               compat_size =3D sizeof(compat_cm);
+>         }
+> -       fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat,=
+ sizeof(compat));
+> +       fdt_setprop(fdt, fdt_path_offset(fdt, "/"),
+> +                   "compatible", compat, compat_size);
+>         fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model=
+);
+>  }
+>
+> --
+> 2.45.2
+>
 
-Please do not remove this i2c deblocking code. I've updated the
-DM_I2C conversion patch, it preserves this deblocking code, but
-legacy I2C code is removed:
-
- https://patchwork.ozlabs.org/project/uboot/patch/20240719232422.3403700-1-agust@denx.de/
-
-Thanks,
-
---
-Anatolij
+-E
