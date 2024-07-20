@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB4DC3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 06:21:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 155BEC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 06:21:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BD4588C29;
-	Sat, 20 Jul 2024 08:20:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EAC0088C3A;
+	Sat, 20 Jul 2024 08:20:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EgHfOeRR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="giqAy4sX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35C6888C20; Sat, 20 Jul 2024 08:20:47 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 08B9B88C20; Sat, 20 Jul 2024 08:20:48 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56EC588648
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:20:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18F0788BFD
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:20:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-36798779d75so1485880f8f.3
- for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 23:20:45 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3683f56b9bdso1091913f8f.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jul 2024 23:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721456444; x=1722061244; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721456445; x=1722061245; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I/OXMxmi9C1+dGOLK2mXDn/pqIiUYC0dsjYcfx/TUik=;
- b=EgHfOeRR6hHmVrvVqF7SuMZ3USdCqoU+4u7Gy8md3BRCYgu5IXSdNICr/8dqX/gFvw
- EISl1sDFIRR9HnEdigcT/6xFBYaAq0mwSJlwbPtqUA/NaJRX9Bd4n1HfVcfnRUngNAjx
- DI6aBOyvKPlCh1gKZNSA7maIQKO7deeAv0AR0=
+ bh=2BeI37qKazeyNQA0Z/ff7wB33585jWhLhfJW5BgtNCA=;
+ b=giqAy4sXabtiiu+07ChH4xj9JJ9+pUZq4LBAXUyKmL34H1oh3wm2hpN58YMDGoe5Uu
+ wbaeUeqrUKjxOAoJnawwBYjXrodjLPebXZraLyziYq2y5h4Jti/XoFb82y9W7xP8cw8i
+ ieWfZP2fWQDf/hybZzFC64XoDGvjCTD4hXgu8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721456444; x=1722061244;
+ d=1e100.net; s=20230601; t=1721456445; x=1722061245;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I/OXMxmi9C1+dGOLK2mXDn/pqIiUYC0dsjYcfx/TUik=;
- b=cR+GwQbAp2RQhMHdGaUtHOJirVKQvSJThNI06c2yt2s/OfufNCadQ5/ikUaVu7N7IR
- EkMjxkRZxE6XmfFjyGBbeaaKaU9lWn+o6F7CAqh1CQVrA0JGudo+OBuWuQYidPmJOhE4
- bWbyZTONKsT7i2PYbVdrTQqesXbFFyB62FdW94XnBONuz4+6imKN/jw4V0ZdUxiHNbSW
- 5WdIwpKlEX36NC7kXxtnckesHUdc3TuiGDvC2o8Vl2XDnWzSikCM3aII6scoJFxxldQ1
- PJL5hWZQvp10xIhp2EGwWq47w7HSHhCwt5ygxaT6ZQ5pvi4h7W+KrsDWi7xwtTjpeATO
- t5uQ==
-X-Gm-Message-State: AOJu0Yy1+BqF+dIZA8cV4loQf7eFB0ytu2ZI99fpEYgkJ50kKolUIhAm
- yXNfL7VnAdi9Sq5m9Z+CR9ED1GyTmL1Uq0NAzKWkBY+eBFw1CCEm5pprAbTsWHQA7kB56dei1Fk
+ bh=2BeI37qKazeyNQA0Z/ff7wB33585jWhLhfJW5BgtNCA=;
+ b=OcxAyOT10Ic2p5r7ZzyG6+7Rp7EuzEYYOw4DjqwBxpApFmP23GaqHfKDy4ZHhRHJ+R
+ rfkPjDA7tpLAJTqTrgNFspZq+gD/grEEXKToPjAUVxcv4lkAE9YDC7MBYMzByhUlB75G
+ vJv0hDpey5iF39Z85D/6dT9+DUgTWh9vhbD58B3GrYOCW/kLON+IWOLGpyKC06GfRDXn
+ /yffPIRXrhjXtiIWfPib8yoC/x5WxZat9UiTVrACkufs4f00OJskadzfHum5FZk1XA2g
+ iug1fjeCT8LfVtF6MIh2+omAqlUTZ71Y8OEbWVpFNtlhBq4FSV+lErvL061v31WJM+vg
+ T4wg==
+X-Gm-Message-State: AOJu0YyJ4krFXB6QYSgDsngT0zrxrZ21eZVU+e5wYgjfqy9HN0H4tG8E
+ yMLPcYNjJQjSrqsHShZIugaVOhA9OgpFMeOC7JblebItILxud7geW/HncHpQpQkUrud21/eohBc
  =
-X-Google-Smtp-Source: AGHT+IGF1915sRtqFJuxuusS1d8/jogPGVLI+v0RNyRxZ8DV+GqLu9HXOirzhan0BbdwSlFV2zYP0Q==
-X-Received: by 2002:a5d:6911:0:b0:368:e634:1520 with SMTP id
- ffacd0b85a97d-369bb2d54cfmr413157f8f.59.1721456444631; 
- Fri, 19 Jul 2024 23:20:44 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHaa17wklW/4tmegLFnvD+VtvIKKC2gI1x3EyPqNztICoWbeWVmtYJb6MN8C1j3MopfOc80bw==
+X-Received: by 2002:a5d:64ca:0:b0:362:5816:f134 with SMTP id
+ ffacd0b85a97d-369bbbb300cmr407772f8f.13.1721456445395; 
+ Fri, 19 Jul 2024 23:20:45 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36878684773sm3226281f8f.7.2024.07.19.23.20.43
+ ffacd0b85a97d-36878684773sm3226281f8f.7.2024.07.19.23.20.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 23:20:44 -0700 (PDT)
+ Fri, 19 Jul 2024 23:20:45 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Nikhil M Jain <n-jain1@ti.com>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 02/14] spl: Correct use of CMD_BOOTI and CMD_BOOTZ
-Date: Sat, 20 Jul 2024 07:16:54 +0100
-Message-Id: <20240720061706.2644229-3-sjg@chromium.org>
+Subject: [PATCH 03/14] spl: Remove some #ifdefs in spl_parse_image_header()
+Date: Sat, 20 Jul 2024 07:16:55 +0100
+Message-Id: <20240720061706.2644229-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240720061706.2644229-1-sjg@chromium.org>
 References: <20240720061706.2644229-1-sjg@chromium.org>
@@ -91,37 +90,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These should have a CONFIG_ prefix. Add it.
+This function has a number of unnecessary #ifdefs so remove them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 7a0d88076b9 ("Add in the ability to load and boot an uncompr...")
 ---
 
- common/spl/spl.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ common/spl/spl.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 7794ddccade..6f4a8bfb3f4 100644
+index 6f4a8bfb3f4..02567e766f1 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
-@@ -322,7 +322,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
- #endif
+@@ -308,8 +308,10 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 		ret = spl_parse_legacy_header(spl_image, header);
+ 		if (ret)
+ 			return ret;
+-	} else {
+-#ifdef CONFIG_SPL_PANIC_ON_RAW_IMAGE
++		return 0;
++	}
++
++	if (IS_ENABLED(CONFIG_SPL_PANIC_ON_RAW_IMAGE)) {
+ 		/*
+ 		 * CONFIG_SPL_PANIC_ON_RAW_IMAGE is defined when the
+ 		 * code which loads images in SPL cannot guarantee that
+@@ -319,10 +321,9 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 		 * is bad, and thus should be skipped silently.
+ 		 */
+ 		panic("** no mkimage signature but raw image not supported");
+-#endif
++	}
  
- #if CONFIG_IS_ENABLED(OS_BOOT)
--#if defined(CMD_BOOTI)
-+#if defined(CONFIG_CMD_BOOTI)
+-#if CONFIG_IS_ENABLED(OS_BOOT)
+-#if defined(CONFIG_CMD_BOOTI)
++	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
  		ulong start, size;
  
  		if (!booti_setup((ulong)header, &start, &size, 0)) {
-@@ -336,7 +336,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+@@ -336,7 +337,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
  			      spl_image->load_addr, spl_image->size);
  			return 0;
  		}
--#elif defined(CMD_BOOTZ)
-+#elif defined(CONFIG_CMD_BOOTZ)
+-#elif defined(CONFIG_CMD_BOOTZ)
++	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) {
  		ulong start, end;
  
  		if (!bootz_setup((ulong)header, &start, &end)) {
+@@ -350,11 +351,11 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 			      spl_image->load_addr, spl_image->size);
+ 			return 0;
+ 		}
+-#endif
+-#endif
++	}
+ 
+-		if (!spl_parse_board_header(spl_image, bootdev, (const void *)header, sizeof(*header)))
+-			return 0;
++	if (!spl_parse_board_header(spl_image, bootdev, (const void *)header,
++				    sizeof(*header)))
++		return 0;
+ 
+ #ifdef CONFIG_SPL_RAW_IMAGE_SUPPORT
+ 		/* Signature not found - assume u-boot.bin */
+@@ -366,7 +367,6 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 		debug("Raw boot image support not enabled, proceeding to other boot methods\n");
+ 		return -EINVAL;
+ #endif
+-	}
+ 
+ 	return 0;
+ }
 -- 
 2.34.1
 
