@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB92C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D2BC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:10:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26439887FD;
-	Sat, 20 Jul 2024 19:10:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 996538883F;
+	Sat, 20 Jul 2024 19:10:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iKVJPvmF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJUCDRnh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A3FD8882D; Sat, 20 Jul 2024 19:10:14 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 79973887F3; Sat, 20 Jul 2024 19:10:15 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EC62887F3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:10:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60E8C887FD
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:10:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5d3cf39c239so1597431eaf.1
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:10:12 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7044c085338so1587172a34.2
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:10:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721495411; x=1722100211; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721495412; x=1722100212; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CdLmVw6QwR1vitAGukde828ZUrkpQ7qkopPsXiO5F3Q=;
- b=iKVJPvmFaBgRYCdKptPi2eiOwCq7PmLICPXI7XYCiiymPYbSbHVq4GdFe2VH8SGey3
- vzW2VVE4a5g+zQ/tUe1ST+fXo67I88gAPTEdx6qY3Btekd560xL841km6Cer1G2JgvID
- 64aQvX3gM80QFihIPDSOTSbV8FfZ4dIp/o9t0=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7qmmVmfhXISqGxpEqF1TKuTu7HMKTNl589hEpUWJcxE=;
+ b=bJUCDRnh2et/ua87ADd7J7WClToyM35xjzXnN8KQakeHXxFilMyv3Y02u/Ab1bSC/q
+ /QZKOjuoH5oSpNyvzsyKZJdXf0mgx32QI0Y3kP3cJfCpl6xMLOUcWLP9p88wMKEFWq3f
+ bqQvg+mU0gcrMdYhu/EveyW0Nuy+Mc9n0BEwM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721495411; x=1722100211;
+ d=1e100.net; s=20230601; t=1721495412; x=1722100212;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CdLmVw6QwR1vitAGukde828ZUrkpQ7qkopPsXiO5F3Q=;
- b=U+n+Clzqsf+4F9r9c8qXiKBxVEEWdYGFaT663JiR6+srrKuJMGsfjFfF1tm1sKwxmi
- DwQAhem4tICX/dbF5QDTIhR81qoyqlEwjD0rEvx+C68ODYaeXApm7G2seq/+80XT25Cp
- XmTs5fb18+l3o3d/jm9DmQ8Qi1YN9P8q5qW/o8hceisWMXU+hE7SLypH8Su3brUhhDST
- ffDLec9H2AtdOTKrpDg/tjW1LTFEfRqO4gT84azcWZGGQKlZQwBsJ189sUGDOo16i3zI
- PizQPoa31Nm1UvnbOzXm9PMb3S3k/w/bq3eYCVbs31UNSy+kC7E9ZQbUcZsG2peC3A9c
- 9mVw==
-X-Gm-Message-State: AOJu0YyZ3eGyTGsPAOGjhIE6UbVLrfiPg2BAf0pxsUFHoQlp91hcmFfY
- Appo/jDgvRQUMuacTZgmT3IlM3EGWRgfzVPO4tcKySJ0J5zXVCE4o00OjJsJnp0=
-X-Google-Smtp-Source: AGHT+IHVFWiP+ZaQ8pwtL2FA1/4S7bEtFZYy6ATmwsK+uT9wMo5i3MIXslqh9lsm7CB9DGnBl4Z7NA==
-X-Received: by 2002:a4a:e90b:0:b0:5ce:f75b:175e with SMTP id
- 006d021491bc7-5d564f5fb1fmr3332974eaf.4.1721495410630; 
- Sat, 20 Jul 2024 10:10:10 -0700 (PDT)
+ bh=7qmmVmfhXISqGxpEqF1TKuTu7HMKTNl589hEpUWJcxE=;
+ b=Z//+Hm7NsnSbIHsZVGPCtfgbNh7BTFYIxVK4eZlTALNQ2fxJnyePfxqAPgKhZjl4yA
+ 1N0Ztk6/RZtlzDm1Iqv96Tv+9aO3mv66hrsIEyWG5RVsH0Taex3oe10gaUbgC8VUHJaf
+ dGjkkG6LRFIxbu9GE4F8o+l5JcUyC2I8jBJGlskw0mSFbm8UGAjxn04MvN2Hr86TBDcM
+ vy1YhLBQuJqoPo8bI+dYRW0wp9nAkVAE36vHv8vmLnsrJ3r7uNPp8msaJ/w+zaKQal92
+ dzXXuqjd6ssYTeyasTYWu6YFezWn9ZHpaHwXgn3aF9QM8qiu12Wxtk0QTmy1l/6+l5Wr
+ +QnQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVVGuPZdE3C2qwbKu/zioXx96PkdZCRBd5k905ICzgSfS7xnyqwm8jJRARD6I0UWbxgMS9I4fBkveblG7EeWQN2EZGwew==
+X-Gm-Message-State: AOJu0Yw8d5kQYi/AivRa714SGXjJkWIhpzTB2OaomOZGMdiVFKR2RpB8
+ 3xnCnMiFd3FrI/90VHN7Ow6JtXCJkju37DKCkUGmbH0JpQ/ARbai7pfDwgAPN04=
+X-Google-Smtp-Source: AGHT+IEF196w2qetQ1ocZLbWEy2Rcrnq5kq4FbKjpzegJpWLyflzqvpAAenmil9Q7Y1fHj9w5nWcrg==
+X-Received: by 2002:a05:6830:3c05:b0:703:6b2a:2af9 with SMTP id
+ 46e09a7af769-70900908d13mr3078502a34.10.1721495412233; 
+ Sat, 20 Jul 2024 10:10:12 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.09
+ 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 10:10:10 -0700 (PDT)
+ Sat, 20 Jul 2024 10:10:11 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240715114200.817719-1-sjg@chromium.org>
-References: <20240715114200.817719-1-sjg@chromium.org>
-Subject: Re: [PATCH v3] bootstash: Do not provide a default address for all
-Message-Id: <172149540939.3268377.6175901184381929195.b4-ty@konsulko.com>
-Date: Sat, 20 Jul 2024 11:10:09 -0600
+To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ William Zhang <william.zhang@broadcom.com>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20240715131950.180562-1-heinrich.schuchardt@canonical.com>
+References: <20240715131950.180562-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] drivers/mtd/nvmxip: nvmxip.h is a global include
+Message-Id: <172149541087.3268377.14129415590231939428.b4-ty@konsulko.com>
+Date: Sat, 20 Jul 2024 11:10:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -87,11 +94,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 15 Jul 2024 12:42:00 +0100, Simon Glass wrote:
+On Mon, 15 Jul 2024 15:19:50 +0200, Heinrich Schuchardt wrote:
 
-> A valid memory location to stash bootstage information at will be
-> architecture dependent. Move the existing defaults to the main Kconfig
-> file for this option and set 0x0 as the default only for sandbox.
+> include/nvmxip.h is a global and not a local include.
+> So we should use angle brackets.
 > 
 > 
 
