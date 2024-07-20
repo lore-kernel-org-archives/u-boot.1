@@ -4,66 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35ABAC3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:37:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D777C3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:37:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E58F788840;
-	Sat, 20 Jul 2024 14:36:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF01B886F0;
+	Sat, 20 Jul 2024 14:36:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lyIF47X+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gRKNwOsV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B76D88675; Sat, 20 Jul 2024 14:36:19 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 54DE3886FF; Sat, 20 Jul 2024 14:36:20 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 201C588673
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:36:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B7AB8867C
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:36:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b78c980981so15913806d6.2
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 05:36:16 -0700 (PDT)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-dfef5980a69so3001128276.3
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 05:36:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721478975; x=1722083775; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721478977; x=1722083777; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dLHa3XLXYc9cn9xszSRkjx5rBWee/Wnw6YB1cXZOpMU=;
- b=lyIF47X+mofE0Ht6T85150NJsgcYZqTvtEJmWLw7+Zwe7IlcpUWhnOssRyfuGVf8e+
- lKtBuh+qt7WRDs2l+9zC4IPvpXxzSFf2JsYzw5ObbG056CeMtgPE7NN9ekTwMZ5xzzW4
- Cc8wDN6ZEU5y8ShHm/JaBY9AaOx8lk44j5pK8=
+ bh=KP/wPoCPWafGyp4tiXm4B791hD0lxnAd8GxHuNOstTA=;
+ b=gRKNwOsV3+sThNb7S8VarWynJc9os/MOKAcpdST7sfJAcPCFd/hP4ParbCnwmuLu/4
+ gHu2SVdHgdUrMGMiQMn7k6oJe+RZ4wJ7WEPMM4GKZEmVzdEb08llxEhOvkns+oEhZRLh
+ 8sha1CLbsge9SiohFP56B3HG2/i8iSG5AUkUQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721478975; x=1722083775;
+ d=1e100.net; s=20230601; t=1721478977; x=1722083777;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dLHa3XLXYc9cn9xszSRkjx5rBWee/Wnw6YB1cXZOpMU=;
- b=K30/z63nPXgnNAJ7y2GCzeCarcdh90WId8pnCoBspZQix8UlJpuYk8U4JUesV5KTkr
- QxqMGkqKQ2cLm5/eGxUXwrt3bYt20/r4UzZGIzHpUN1P8ZOgy+Hhm69pKmu0PQ9ChEjo
- 31VGQhqkXMlOTvdLrl259XUK+AxPAF58w/+DbFTAlg7R0SiExz0ZifyOjtb1owNUfONQ
- GZK7wPMIy+tmMwrBJefp5uPufEAYtM1i5XNFudhlhGFuG0LXaEOmbh5eA4xIsQTqgh5U
- v86/hFKviSuY15EOY1zk0DHkmDpKasJFMHaqBvQO0dDCHyN27iuOTHMrKuumYlPUSKjs
- VY5g==
-X-Gm-Message-State: AOJu0Yw8yR19HnBrCwVrrRs3I7JodKRlE6080muio/5h/WVhXG3K421C
- o3yOVAMaGdKudpwH7hxC5Hti9e+VBI9IHl1vWfYiuxRDxLnXpcpIRZf3i1WtrdXdTrGivwZD0Gg
- lM7dK0pyb17D1rXg2JS2XluOzvjF+BsdMSgyPrfM1O7bT79c=
-X-Google-Smtp-Source: AGHT+IHyN9bIxSyhrOj08J9GmA6f8BVxBZcJXLX8kjQMvbWNgPvhiyzo7ZzFPreW7Frc31irPm+/w6aUCgo7w5Bs8Xw=
-X-Received: by 2002:a05:6214:240d:b0:6b5:50:4427 with SMTP id
- 6a1803df08f44-6b96106d9c0mr20719326d6.12.1721478974939; Sat, 20 Jul 2024
- 05:36:14 -0700 (PDT)
+ bh=KP/wPoCPWafGyp4tiXm4B791hD0lxnAd8GxHuNOstTA=;
+ b=ZSS388av0YMStQ4sY5Frmnw3dzoesgGkJN3pRNckHf9DTuytqYPjcxNK4CFUB4yTJW
+ mdEqGO4osNq41HWEiKJabZIBZHfZ1Jz9XDBv4PLryEXhXRqgHWDQ1kMp6oMcHJoH7g4E
+ ZYu6t+gbSSpF3bip1BKUP1vgy99Ag+5A3q8oHud0aKz1RIk5uHrQ7p3K9pTwEL1R4mMd
+ T5G8QrxJa9Jou3zGK9prxZr6vljKn5LnenpkLQZK0ltzgr6Se/qnvo0tKuNgQeQ5Rlvl
+ 1ncjB22YV03WpIIFRa2Y2dQ7ch9AkVSVXU6VOhdIZGHKB45m7OaOSEHT+oG/Ph88Iogk
+ GF5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVbbActASQhOop08Vn3DxomrQ2A05lluS2jvdHmKVLZAiBvGgZIRvXJs/80O4XrOI2AtA7qHT/VCRSz54WqmtLfTpy0sA==
+X-Gm-Message-State: AOJu0YxRxxH9lJHpOSkCqmNcn995zQHzGW5OdZU3XVcVoJwrl88mrvpi
+ FwTttm7qZkeUxIFvS2YMfmW8IZw1yxjwMU9k5gzk5DUu0qSTIEUdItfPf+w5lMWDTPG5MjIxjOU
+ tQhdzmsulxCknxiWmdfqhdF8/Hrp1oeuMfA2R
+X-Google-Smtp-Source: AGHT+IF5tfjQ/2z7HrhL9cTc+ochcAeWLb1O2kKOLPWQHvnrgeZSSQZ3fCMB+heAxyAZieD2OJB4r8vVkMiUsEsmNWk=
+X-Received: by 2002:a05:6902:1b89:b0:e08:5c66:7d60 with SMTP id
+ 3f1490d57ef6-e087b2fd751mr1395283276.12.1721478976994; Sat, 20 Jul 2024
+ 05:36:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240719215123.3358410-1-agust@denx.de>
-In-Reply-To: <20240719215123.3358410-1-agust@denx.de>
+References: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240719091213.3757300-2-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240719091213.3757300-2-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 20 Jul 2024 13:36:04 +0100
-Message-ID: <CAFLszTjjgvFePwsMO-u-bKRjaCREXy1PCpOCmfH=Atvm2ThAqg@mail.gmail.com>
-Subject: Re: [PATCH] board: beagle: convert to CONFIG_DM_I2C
-To: Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Sat, 20 Jul 2024 13:36:06 +0100
+Message-ID: <CAFLszTjMjNyq0RXp-nmRdFoikKMbEBoQE=oD4i4OA3ezNtD0dA@mail.gmail.com>
+Subject: Re: [PATCH v6 1/3] led: enable LEDST_BLINK state unconditionally
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Christian Marangi <ansuelsmth@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,133 +89,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anatolij,
-
-On Fri, 19 Jul 2024 at 22:51, Anatolij Gustschin <agust@denx.de> wrote:
+On Fri, 19 Jul 2024 at 10:12, Mikhail Kshevetskiy
+<mikhail.kshevetskiy@iopsys.eu> wrote:
 >
-> Rework to remove use of legacy I2C API.
+> Changes:
+>  * enable LEDST_BLINK state unconditionally
+>  * function led_set_period() becomes available when CONFIG_LED_BLINK
+>    is disabled. This makes led code simpler.
+>  * fix cmd/led.c to work properly when LEDST_BLINK present, but
+>    CONFIG_LED_BLINK is disabled
 >
-> Signed-off-by: Anatolij Gustschin <agust@denx.de>
-> Cc: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
->  board/beagle/beagle/beagle.c   | 41 +++++++++++++++++++++-------------
->  configs/omap3_beagle_defconfig |  2 +-
->  include/configs/omap3_beagle.h |  3 ---
->  3 files changed, 26 insertions(+), 20 deletions(-)
->
-> diff --git a/board/beagle/beagle/beagle.c b/board/beagle/beagle/beagle.c
-> index ac2f89cf21..ae258817e9 100644
-> --- a/board/beagle/beagle/beagle.c
-> +++ b/board/beagle/beagle/beagle.c
-> @@ -41,7 +41,6 @@
->  #include "beagle.h"
->  #include <command.h>
->
-> -#define TWL4030_I2C_BUS                        0
->  #define EXPANSION_EEPROM_I2C_BUS       1
->  #define EXPANSION_EEPROM_I2C_ADDRESS   0x50
->
-> @@ -213,27 +212,37 @@ void get_board_mem_timings(struct board_sdrc_timings *timings)
->   */
->  static unsigned int get_expansion_id(void)
->  {
-> -       i2c_set_bus_num(EXPANSION_EEPROM_I2C_BUS);
-> +       struct udevice *eeprom = NULL;
-> +       int ret;
->
-> -       /* return BEAGLE_NO_EEPROM if eeprom doesn't respond */
-> -       if (i2c_probe(EXPANSION_EEPROM_I2C_ADDRESS) == 1) {
-> -               i2c_set_bus_num(TWL4030_I2C_BUS);
-> +       ret = i2c_get_chip_for_busnum(EXPANSION_EEPROM_I2C_BUS,
-> +                                     EXPANSION_EEPROM_I2C_ADDRESS, 1, &eeprom);
-> +       if (ret)
->                 return BEAGLE_NO_EEPROM;
-
-Isn't this in the devicetree? It should be possible to use
-i2c_eeprom_read(). See for example sysinfo_rcar_probe().
-
-> -       }
->
->         /* read configuration data */
-> -       i2c_read(EXPANSION_EEPROM_I2C_ADDRESS, 0, 1, (u8 *)&expansion_config,
-> -                sizeof(expansion_config));
-> +       ret = dm_i2c_read(eeprom, 0, (uint8_t *)&expansion_config,
-> +                         sizeof(expansion_config));
-> +       if (ret != 0) {
-> +               /* return BEAGLE_NO_EEPROM if eeprom doesn't respond */
-> +               return BEAGLE_NO_EEPROM;
-> +       }
->
-> -       /* retry reading configuration data with 16bit addressing */
->         if ((expansion_config.device_vendor == 0xFFFFFF00) ||
->             (expansion_config.device_vendor == 0xFFFFFFFF)) {
->                 printf("EEPROM is blank or 8bit addressing failed: retrying with 16bit:\n");
-> -               i2c_read(EXPANSION_EEPROM_I2C_ADDRESS, 0, 2, (u8 *)&expansion_config,
-> -                        sizeof(expansion_config));
->         }
->
-> -       i2c_set_bus_num(TWL4030_I2C_BUS);
-> +       /* retry reading configuration data with 16bit addressing */
-> +       ret = i2c_get_chip_for_busnum(EXPANSION_EEPROM_I2C_BUS,
-> +                                     EXPANSION_EEPROM_I2C_ADDRESS, 2, &eeprom);
-> +       if (ret)
-> +               return BEAGLE_NO_EEPROM;
-> +
-> +       ret = dm_i2c_read(eeprom, 0, (uint8_t *)&expansion_config,
-> +                         sizeof(expansion_config));
-> +       if (ret != 0)
-> +               return BEAGLE_NO_EEPROM;
->
->         return expansion_config.device_vendor;
->  }
-> @@ -281,13 +290,13 @@ static void beagle_dvi_pup(void)
->                 #define GPIODATADIR1 (TWL4030_BASEADD_GPIO+3)
->                 #define GPIODATAOUT1 (TWL4030_BASEADD_GPIO+6)
->
-> -               i2c_read(TWL4030_CHIP_GPIO, GPIODATADIR1, 1, &val, 1);
-> +               twl4030_i2c_read_u8(TWL4030_CHIP_GPIO, GPIODATADIR1, &val);
->                 val |= 4;
-> -               i2c_write(TWL4030_CHIP_GPIO, GPIODATADIR1, 1, &val, 1);
-> +               twl4030_i2c_write_u8(TWL4030_CHIP_GPIO, GPIODATADIR1, val);
->
-> -               i2c_read(TWL4030_CHIP_GPIO, GPIODATAOUT1, 1, &val, 1);
-> +               twl4030_i2c_read_u8(TWL4030_CHIP_GPIO, GPIODATAOUT1, &val);
->                 val |= 4;
-> -               i2c_write(TWL4030_CHIP_GPIO, GPIODATAOUT1, 1, &val, 1);
-> +               twl4030_i2c_write_u8(TWL4030_CHIP_GPIO, GPIODATAOUT1, val);
->                 break;
->         }
->  }
-> diff --git a/configs/omap3_beagle_defconfig b/configs/omap3_beagle_defconfig
-> index 8a709243a9..f76709389c 100644
-> --- a/configs/omap3_beagle_defconfig
-> +++ b/configs/omap3_beagle_defconfig
-> @@ -61,7 +61,7 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
->  CONFIG_SPL_OF_TRANSLATE=y
->  CONFIG_USB_FUNCTION_FASTBOOT=y
->  CONFIG_FASTBOOT_BUF_ADDR=0x82000000
-> -CONFIG_SYS_I2C_LEGACY=y
-> +CONFIG_DM_I2C=y
->  CONFIG_SPL_SYS_I2C_LEGACY=y
->  CONFIG_LED_STATUS=y
->  CONFIG_LED_STATUS0=y
-> diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
-> index af7cb3513f..b616dd2608 100644
-> --- a/include/configs/omap3_beagle.h
-> +++ b/include/configs/omap3_beagle.h
-> @@ -28,9 +28,6 @@
->  /* NAND: SPL falcon mode configs */
->  #endif /* CONFIG_MTD_RAW_NAND */
->
-> -/* Enable Multi Bus support for I2C */
-> -#define CFG_I2C_MULTI_BUS
-> -
->  /* DSS Support */
->
->  /* TWL4030 LED Support */
-> --
-> 2.25.1
+>  cmd/led.c                |  8 --------
+>  drivers/led/led-uclass.c | 10 +++++-----
+>  include/led.h            |  2 --
+>  3 files changed, 5 insertions(+), 15 deletions(-)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
