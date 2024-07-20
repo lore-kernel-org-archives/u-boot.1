@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BBD7C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DB2C3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:49:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80EBF88CCF;
-	Sat, 20 Jul 2024 14:44:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07A3B88CAB;
+	Sat, 20 Jul 2024 14:44:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="W5D7CMuU";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tkLN3Cg5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xw3yLwmh";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KiyT1Cqe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5541988CBB; Sat, 20 Jul 2024 14:44:06 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 1C6B4883BB; Sat, 20 Jul 2024 14:44:07 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6876D886F9
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:44:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48AA488C82
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:44:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,46 +32,46 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WR5nw1vM3z9sWs;
- Sat, 20 Jul 2024 14:44:04 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4WR5nx0vLZz9sqr;
+ Sat, 20 Jul 2024 14:44:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721479444;
+ s=mail20150812; t=1721479445;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eikx+AX+VKbqbo/YTakOVD+Ixz7O32TCinTjj/4NKvo=;
- b=W5D7CMuUWEaCi4GboMOmrEYFGtXkX3SSsewM026mCqh/pgl4BxnMPmP2JAdJc/3f9XZ1sb
- jrmcsBkgCbtoKjvj+DKpkoezTwlaCVrxVGNkCwiKjHL1C1+8UqeLh8KUfpihlNxqU4fRaH
- d5m8fwxyzzVtLDL+/I3DStEQv3mUQGSVxYIOPsgefPKmFDgq3ZyzbH88vOpJR5LihnZXGr
- GhOMYd/HNqs20yBI47p4LkG0sidM6NitHlAhXlP4b5O8xZtj1la676JGE63yCl/akf5YWX
- Bf+wYKaNc6LtlL7NUPvavDr5lqF8uwYk0jWXXp2dA2Lj6dyRvaA3e5frovDDng==
+ bh=bD8wFTHg+UL8C5B/axGSrmwd75vAJpN5KLgL2Xcp7j0=;
+ b=xw3yLwmh5llETGwziOIcG92d/Q9ttXWpG+JdKlzVAeS6u8KrRDrxvCtreUQG6cqC2m5seN
+ dnd3dUWUe4MsSDqPqQg2ERymIFYxMGnvtwQe32JGQh3ebA/QsUhEns3z8vISp5n/AiCksU
+ l0bwyWpm9i+XnI8an9s2YuwMhXjX79DQNLxq8sqlJkOklFPNr9KTYVQl6D6EmiBkpCcPtz
+ Y42fRe1e11PgkRdO3RjGUA7eeq8/NiKoSOgr43S2T9LM5dMyy/IyBohXksK6+nQuqWJRSZ
+ 30yGTXs+8Oq6LJWGQ3szE3dnU7x628K7vr0Ro4GFpSTFWe0WLZZjsbjUhTDGCA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721479442;
+ s=mail20150812; t=1721479443;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eikx+AX+VKbqbo/YTakOVD+Ixz7O32TCinTjj/4NKvo=;
- b=tkLN3Cg5/sju4vobCJhGH09lFB6fMnfwKLvAMIlqHR3o0pX6SyYJXvWbgj6n6Z3NsJxh2O
- pgOErYs4lLwnr8UA3bzsfKRgGALpMk3udPJySoYNQz3kocJp3HHzBz3VEKDjrYfRShd4l9
- nJub9pTP6+wI0nlj2M5EFcoVgmL1PPfvnzjun7gPWHlkpn5avoIzLnmDiMwQH9ZHoj3Uk5
- PlblA9EPAW5DEBeAP1fMpBP7+LeeBSXNv6UPNr1ktm+tQ+PlLrmH+Mv/4UxGorkwCr8rBi
- BL0RerVUR4XoIvSMwn7GRNrJTYGfE/gKae631gczzZttrZ5RdJucFM+32YUCtg==
+ bh=bD8wFTHg+UL8C5B/axGSrmwd75vAJpN5KLgL2Xcp7j0=;
+ b=KiyT1CqeMdNoKHRzFfdhspASRdf0f4KWQ7JL/fJ64R4y6XyCwBPGkofn1TrvPIgyBiCEoL
+ eyatyGrxJgH16/Fh8cMvfeF32Nn6MmNe+r4cYqBh5KvFufCxAVjcyXDUjfLINNjOLp6RJy
+ 5I162ajAUuETboqevCjG7+7kPuQkEc840cBjga2AAGQydYnsdiPkr6DxbQCoznA9wtljqb
+ rHO4wLzrA5ivyP+yfwv7+83mjylUbbcscTOaYOEjCauGDyBHUYsxb62eaTW9WyouwWfaaU
+ JLEb9w/42K/xDEi4zWqfl4p0DYwEhyaMmlP+WcF9bnxvkL6bB1uB5zvbjMZ4dA==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 34/40] drivers: sysreset: Remove duplicate newlines
-Date: Sat, 20 Jul 2024 14:40:59 +0200
-Message-ID: <20240720124239.7553-34-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 35/40] drivers: thermal: Remove duplicate newlines
+Date: Sat, 20 Jul 2024 14:41:00 +0200
+Message-ID: <20240720124239.7553-35-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240720124239.7553-1-marek.vasut+renesas@mailbox.org>
 References: <20240720124239.7553-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 552a38fa4caabd49f34
-X-MBO-RS-META: jompsafayqunbpi1xi5reaico3c1k6c8
-X-Rspamd-Queue-Id: 4WR5nw1vM3z9sWs
+X-MBO-RS-ID: 5894b8b8912c8610fad
+X-MBO-RS-META: 5tuqrikrnaafkgpue5toxg9jue7g5ek7
+X-Rspamd-Queue-Id: 4WR5nx0vLZz9sqr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,21 +92,21 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/sysreset/sysreset-uclass.c | 1 -
+ drivers/thermal/thermal-uclass.c | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-index 0abb4042e0f..d30b008bf9a 100644
---- a/drivers/sysreset/sysreset-uclass.c
-+++ b/drivers/sysreset/sysreset-uclass.c
-@@ -117,7 +117,6 @@ void reset_cpu(void)
- 	sysreset_walk_halt(SYSRESET_WARM);
- }
+diff --git a/drivers/thermal/thermal-uclass.c b/drivers/thermal/thermal-uclass.c
+index f0fe912e313..c61e6c3ee0e 100644
+--- a/drivers/thermal/thermal-uclass.c
++++ b/drivers/thermal/thermal-uclass.c
+@@ -13,7 +13,6 @@
+ #include <asm/io.h>
+ #include <linux/list.h>
  
 -
- #if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET)
- int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ int thermal_get_temp(struct udevice *dev, int *temp)
  {
+ 	const struct dm_thermal_ops *ops = device_get_ops(dev);
 -- 
 2.43.0
 
