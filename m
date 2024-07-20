@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60BCFC3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2476FC3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AEA288C66;
+	by phobos.denx.de (Postfix) with ESMTP id E982888C6E;
 	Sat, 20 Jul 2024 12:50:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IbmjHnOw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iVGCB1oI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECDB388C7A; Sat, 20 Jul 2024 12:50:17 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id CED3F88C63; Sat, 20 Jul 2024 12:50:19 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0BBB88C3A
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D510988C6A
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4266fd395eeso17916495e9.3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:15 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-368380828d6so1183650f8f.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721472615; x=1722077415; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721472616; x=1722077416; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GtbjdRjVZn+HPOrN8NDkNLwitRbi8zPwHnYtHEqwomM=;
- b=IbmjHnOw3zViZaI0BQ2DD/HBDzJE9VmWuuslZsRkew1aB+Bef4WNWqK4fDIcZQ7H19
- MtJO+ZMDMfonAGM+BkfB6hSgBZ+ziqGsUrAOKXiW89tanOB4bq8OURHrtsfQ50cr2EjX
- ceAVEPBOH3rKvhlexC1fdd4PklpjoakiR9U5A=
+ bh=gdgJIOiWQSfmcd3D+Z27c+DjHBIgtD2kdkldOsI0gY8=;
+ b=iVGCB1oIXXUh2LlhQQj7gj+IfaJQk8H1+Pu+c3vp5vXegEkMu/W4WjHcFvthz9pyn1
+ mB/IQo8EYLvX1gK3TxwuZEUHGVLoEuX44vkUBoDl269TpmWYHFgKZFroXX/6o5/AuHYl
+ kO/cq1CgXoUYGB7H3/evVAMdyBQukRyLZsOj4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721472615; x=1722077415;
+ d=1e100.net; s=20230601; t=1721472616; x=1722077416;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GtbjdRjVZn+HPOrN8NDkNLwitRbi8zPwHnYtHEqwomM=;
- b=twOyrpcrmq4d+6QmM2A/ugPE6iJjMmw1yktQoPm0R6ro6Y1D37qKAc8YXQfJwZ2vZW
- x/xTskru1Ylj5it0UhHGImp74oas1FwwvubsWvpMH+rvaYI1VewtkbMNf82qSP42SRsg
- NPxQpFDMl+hu34QogZNARgSuKsfXZRxve8kjtSQTjWr/MpHcJCXc0UMnz6rcdxMwv/IO
- RYzdvkXqeMwSS+nv0+oo3kKXyUzs/+F/qkTb3jy9hHNocb3SYy72xtlECR1Jo31irCdT
- M+XKTsDLILapmm8tdrRqTPvzMSd/sTJgjZyzKqV4MM9PLTp/Dukl2jXe7xkemrgQrTgH
- dFnQ==
-X-Gm-Message-State: AOJu0YxBykcuodWxG51gxcLM6mVGkn0JwTAdahmnUIUQCf1TWT1FmKRj
- sRKWDgfKO9GjuzDm643uvL0zejE8+0qDxEtEOVyiIElHeQtuLUdLlbvmTJglwwdM4qlj6cYBLYc
+ bh=gdgJIOiWQSfmcd3D+Z27c+DjHBIgtD2kdkldOsI0gY8=;
+ b=URq2m0UjBBJCb5ogB4NOhVbZHHCL7AgtAdAcyPrAN+uB4VAFDY+OGPk4O9YlevD2uR
+ 5iwSlfhcPxwNTCW/xm3wGbpdSE9sQAVgmI/qWBhGu813/9BTxCgJ2RC3wcR01fZ86xAV
+ 4oA+j3jV9EWei9kyPLV1ksoXAh5T5J0g1XYyv4yrO61FV+JHYJR02AGypFrrbEg+9gbf
+ CpaOkQyZ2EeHQefvArYISvDOAr0US2ie4uyVBDpSRN2KQMNSs9jHMqbeQGkSZvWRD3C6
+ g4HkgJEJmrT4p1k5RNQSNrov4thJ4J4ntoifDlrLTlkc/i5UXDzN0Qggs3GBVWuIZb/X
+ aYHQ==
+X-Gm-Message-State: AOJu0YxVREcOryiMJDNOuITFxuJ4GB+3OSfokcoB7xQ+BttwzB31uLl3
+ 3vW9W/BESydiok7RzP7VyG9R1nFPXl1L+vlHg+/GKYr0bvbofk4JPV/BePfFBoq24ZJCxlnnbLg
  =
-X-Google-Smtp-Source: AGHT+IGpHNn7q4CPYF7bVuV6+viRAA1nHGdb9jjEI84ZyytwV+QwO4TXS+pR4+4b0uqgrE1/WNqh7g==
-X-Received: by 2002:a05:6000:1564:b0:369:ba89:a577 with SMTP id
- ffacd0b85a97d-369ba89a83amr835613f8f.34.1721472615156; 
- Sat, 20 Jul 2024 03:50:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHEM0hxkGsD8OxUF5ZVyDgTLKd81IbwtVDnvNL1IJjgVMNVJrumftex7MkNDJ/92ALVFPYM0A==
+X-Received: by 2002:adf:c005:0:b0:35f:e0f:69a6 with SMTP id
+ ffacd0b85a97d-36831652aeemr6601200f8f.27.1721472616087; 
+ Sat, 20 Jul 2024 03:50:16 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.14
+ ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 03:50:14 -0700 (PDT)
+ Sat, 20 Jul 2024 03:50:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
  Brandon Maier <brandon.maier@collins.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Lukas Funke <lukas.funke@weidmueller.com>,
+ Marek Vasut <marex@denx.de>, Neha Malcom Francis <n-francis@ti.com>,
+ Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 16/20] binman: fit: Allow providing FDT filenames in a
- directory
-Date: Sat, 20 Jul 2024 11:49:46 +0100
-Message-Id: <20240720104950.2730773-17-sjg@chromium.org>
+Subject: [PATCH 17/20] binman: fit: Write the compatible string to
+ configuration
+Date: Sat, 20 Jul 2024 11:49:47 +0100
+Message-Id: <20240720104950.2730773-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240720104950.2730773-1-sjg@chromium.org>
 References: <20240720104950.2730773-1-sjg@chromium.org>
@@ -98,148 +98,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In some cases the list of available FDT files is not available in an
-entryarg. Provide an option to point to a directory containing them
-instead.
+FIT allows the FDT's root-node compatible string to be placed in a
+configuration node to simplify and speed up finding the best match for
+booting.
+
+Add a new property to support this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/entries.rst              |  7 ++++
- tools/binman/etype/fit.py             | 19 ++++++++-
- tools/binman/ftest.py                 | 17 ++++++--
- tools/binman/test/333_fit_fdt_dir.dts | 58 +++++++++++++++++++++++++++
- 4 files changed, 96 insertions(+), 5 deletions(-)
- create mode 100644 tools/binman/test/333_fit_fdt_dir.dts
+ tools/binman/entries.rst                 |  5 ++
+ tools/binman/etype/fit.py                | 12 +++++
+ tools/binman/ftest.py                    | 55 +++++++++++++++++++---
+ tools/binman/test/334_fit_fdt_compat.dts | 60 ++++++++++++++++++++++++
+ 4 files changed, 125 insertions(+), 7 deletions(-)
+ create mode 100644 tools/binman/test/334_fit_fdt_compat.dts
 
 diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index 8bfec8b434e..dcacd298c6d 100644
+index dcacd298c6d..fd8edc64fa2 100644
 --- a/tools/binman/entries.rst
 +++ b/tools/binman/entries.rst
-@@ -857,6 +857,13 @@ The top-level 'fit' node supports the following special properties:
+@@ -939,6 +939,7 @@ You can create config nodes in a similar way::
+             firmware = "atf";
+             loadables = "uboot";
+             fdt = "fdt-SEQ";
++            fit,compatible;    // optional
+         };
+     };
  
-             fit,fdt-list-val = "dtb1", "dtb2";
+@@ -948,6 +949,10 @@ for each of your two files.
+ Note that if no devicetree files are provided (with '-a of-list' as above)
+ then no nodes will be generated.
  
-+    fit,fdt-list-dir
-+        As an alternative to fit,fdt-list the list of device tree files
-+        can be provided as a directory. Each .dtb file in the directory is
-+        processed, , e.g.::
++The 'fit,compatible' property (if present) is replaced with the compatible
++string from the root node of the devicetree, so that things work correctly
++with FIT's configuration-matching algortihm.
 +
-+            fit,fdt-list-dir = "arch/arm/dts
-+
- Substitutions
- ~~~~~~~~~~~~~
+ Generating nodes from an ELF file (split-elf)
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
 diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index 2c14b15b03c..8a25c784ef6 100644
+index 8a25c784ef6..ab827d52066 100644
 --- a/tools/binman/etype/fit.py
 +++ b/tools/binman/etype/fit.py
-@@ -5,7 +5,9 @@
+@@ -171,6 +171,7 @@ class Entry_fit(Entry_section):
+                 firmware = "atf";
+                 loadables = "uboot";
+                 fdt = "fdt-SEQ";
++                fit,compatible;
+             };
+         };
  
- """Entry-type module for producing a FIT"""
+@@ -180,6 +181,10 @@ class Entry_fit(Entry_section):
+     Note that if no devicetree files are provided (with '-a of-list' as above)
+     then no nodes will be generated.
  
-+import glob
- import libfdt
-+import os
- 
- from binman.entry import Entry, EntryArg
- from binman.etype.section import Entry_section
-@@ -87,6 +89,13 @@ class Entry_fit(Entry_section):
- 
-                 fit,fdt-list-val = "dtb1", "dtb2";
- 
-+        fit,fdt-list-dir
-+            As an alternative to fit,fdt-list the list of device tree files
-+            can be provided as a directory. Each .dtb file in the directory is
-+            processed, , e.g.::
++    The 'fit,compatible' property is replaced with the compatible string from
++    the root node of the devicetree, so that things work correctly with FIT's
++    configuration-matching algortihm.
 +
-+                fit,fdt-list-dir = "arch/arm/dts
-+
-     Substitutions
-     ~~~~~~~~~~~~~
+     Generating nodes from an ELF file (split-elf)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
-@@ -352,6 +361,7 @@ class Entry_fit(Entry_section):
-         self._fit = None
-         self._fit_props = {}
-         self._fdts = None
-+        self._fdt_dir = None
-         self.mkimage = None
-         self._priv_entries = {}
-         self._loadables = []
-@@ -368,7 +378,14 @@ class Entry_fit(Entry_section):
-             if fdts is not None:
-                 self._fdts = fdts.split()
-         else:
--            self._fdts = fdt_util.GetStringList(self._node, 'fit,fdt-list-val')
-+            self._fdt_dir = fdt_util.GetString(self._node, 'fit,fdt-list-dir')
-+            if self._fdt_dir:
-+                indir = tools.get_input_filename(self._fdt_dir)
-+                fdts = glob.glob('*.dtb', root_dir=indir)
-+                self._fdts = [os.path.splitext(f)[0] for f in sorted(fdts)]
-+            else:
-+                self._fdts = fdt_util.GetStringList(self._node,
-+                                                    'fit,fdt-list-val')
- 
-         self._fit_default_dt = self.GetEntryArgsOrProps([EntryArg('default-dt',
-                                                                   str)])[0]
+@@ -611,6 +616,13 @@ class Entry_fit(Entry_section):
+                                 fsw.property('loadables', val.encode('utf-8'))
+                             elif pname == 'fit,operation':
+                                 pass
++                            elif pname == 'fit,compatible':
++                                fdt_phase = fdt_util.GetString(node, pname)
++                                data = tools.read_file(fname)
++                                fdt = Fdt.FromData(data)
++                                fdt.Scan()
++                                prop = fdt.GetRoot().props['compatible']
++                                fsw.property('compatible', prop.bytes)
+                             elif pname.startswith('fit,'):
+                                 self._raise_subnode(
+                                     node, f"Unknown directive '{pname}'")
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 684e960b582..6e1e1e9b50b 100644
+index 6e1e1e9b50b..d930e353faf 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -4181,8 +4181,8 @@ class TestFunctional(unittest.TestCase):
-         data = self._DoReadFile('172_scp.dts')
-         self.assertEqual(SCP_DATA, data[:len(SCP_DATA)])
+@@ -7490,6 +7490,24 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             err,
+             "Image '.*' is missing external blobs and is non-functional: .*")
  
--    def testFitFdt(self):
--        """Test an image with an FIT with multiple FDT images"""
-+    def CheckFitFdt(self, dts='170_fit_fdt.dts', use_fdt_list=True):
-+        """Check an image with an FIT with multiple FDT images"""
-         def _CheckFdt(seq, expected_data):
-             """Check the FDT nodes
++    def SetupAlternateDts(self):
++        """Compile the .dts test files for alternative-fdt
++
++        Returns:
++            tuple:
++                str: Test directory created
++                list of str: '.bin' files which we expect Binman to create
++        """
++        testdir = TestFunctional._MakeInputDir('dtb')
++        dtb_list = []
++        for fname in glob.glob(f'{self.TestFile("alt_dts")}/*.dts'):
++            tmp_fname = fdt_util.EnsureCompiled(fname, testdir)
++            base = os.path.splitext(os.path.basename(fname))[0]
++            dtb_list.append(base + '.bin')
++            shutil.move(tmp_fname, os.path.join(testdir, base + '.dtb'))
++
++        return testdir, dtb_list
++
+     def CheckAlternates(self, dts, phase, xpl_data):
+         """Run the test for the alterative-fdt etype
  
-@@ -4221,11 +4221,12 @@ class TestFunctional(unittest.TestCase):
-             self.assertEqual('fdt-%d' % seq, fnode.props['fdt'].value)
+@@ -7503,13 +7521,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+                 key: str filename
+                 value: Fdt object
+         """
+-        testdir = TestFunctional._MakeInputDir('dtb')
+-        dtb_list = []
+-        for fname in glob.glob(f'{self.TestFile("alt_dts")}/*.dts'):
+-            tmp_fname = fdt_util.EnsureCompiled(fname, testdir)
+-            base = os.path.splitext(os.path.basename(fname))[0]
+-            dtb_list.append(base + '.bin')
+-            shutil.move(tmp_fname, os.path.join(testdir, base + '.dtb'))
++        dtb_list = self.SetupAlternateDts()[1]
  
          entry_args = {
--            'of-list': 'test-fdt1 test-fdt2',
-             'default-dt': 'test-fdt2',
-         }
-+        if use_fdt_list:
-+            entry_args['of-list'] = 'test-fdt1 test-fdt2'
-         data = self._DoReadFileDtb(
--            '170_fit_fdt.dts',
-+            dts,
-             entry_args=entry_args,
-             extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])[0]
-         self.assertEqual(U_BOOT_NODTB_DATA, data[-len(U_BOOT_NODTB_DATA):])
-@@ -4244,6 +4245,10 @@ class TestFunctional(unittest.TestCase):
-         _CheckConfig(1, TEST_FDT1_DATA)
-         _CheckConfig(2, TEST_FDT2_DATA)
+             f'{phase}-dtb': '1',
+@@ -7614,6 +7626,35 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test an image with an FIT with FDT images using fit,fdt-list-dir"""
+         self.CheckFitFdt('333_fit_fdt_dir.dts', False)
  
-+    def testFitFdt(self):
-+        """Test an image with an FIT with multiple FDT images"""
-+        self.CheckFitFdt()
++    def testFitFdtCompat(self):
++        """Test an image with an FIT with compatible in the config nodes"""
++        entry_args = {
++            'of-list': 'model1 model2',
++            'default-dt': 'model2',
++            }
++        testdir, dtb_list = self.SetupAlternateDts()
++        data = self._DoReadFileDtb(
++            '334_fit_fdt_compat.dts', use_real_dtb=True, update_dtb=True,
++            entry_args=entry_args, extra_indirs=[testdir])[0]
 +
-     def testFitFdtMissingList(self):
-         """Test handling of a missing 'of-list' entry arg"""
-         with self.assertRaises(ValueError) as e:
-@@ -7605,6 +7610,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self.assertIn("Invalid U-Boot phase 'bad-phase': Use tpl/vpl/spl",
-                       str(e.exception))
- 
-+    def testFitFdtListDir(self):
-+        """Test an image with an FIT with FDT images using fit,fdt-list-dir"""
-+        self.CheckFitFdt('333_fit_fdt_dir.dts', False)
++        fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
++
++        fit = fdt.Fdt.FromData(fit_data)
++        fit.Scan()
++
++        cnode = fit.GetNode('/configurations')
++        self.assertIn('default', cnode.props)
++        self.assertEqual('config-2', cnode.props['default'].value)
++
++        for seq in range(1, 2):
++            name = f'config-{seq}'
++            fnode = fit.GetNode('/configurations/%s' % name)
++            self.assertIsNotNone(fnode)
++            self.assertIn('compatible', fnode.props.keys())
++            expected = 'one' if seq == 1 else 'two'
++            self.assertEqual(f'u-boot,model-{expected}',
++                             fnode.props['compatible'].value)
 +
  
  if __name__ == "__main__":
      unittest.main()
-diff --git a/tools/binman/test/333_fit_fdt_dir.dts b/tools/binman/test/333_fit_fdt_dir.dts
+diff --git a/tools/binman/test/334_fit_fdt_compat.dts b/tools/binman/test/334_fit_fdt_compat.dts
 new file mode 100644
-index 00000000000..aa778451a4b
+index 00000000000..3bf45c710db
 --- /dev/null
-+++ b/tools/binman/test/333_fit_fdt_dir.dts
-@@ -0,0 +1,58 @@
++++ b/tools/binman/test/334_fit_fdt_compat.dts
+@@ -0,0 +1,60 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +
 +/dts-v1/;
@@ -254,7 +274,7 @@ index 00000000000..aa778451a4b
 +		fit {
 +			description = "test-desc";
 +			#address-cells = <1>;
-+			fit,fdt-list-dir = "fdts";
++			fit,fdt-list = "of-list";
 +
 +			images {
 +				kernel {
@@ -291,6 +311,8 @@ index 00000000000..aa778451a4b
 +					firmware = "uboot";
 +					loadables = "atf";
 +					fdt = "fdt-SEQ";
++					fit,firmware = "vpl";
++					fit,compatible;
 +				};
 +			};
 +		};
