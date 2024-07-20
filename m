@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D2BC3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:10:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F3AC3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:10:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 996538883F;
-	Sat, 20 Jul 2024 19:10:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E9E58885D;
+	Sat, 20 Jul 2024 19:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJUCDRnh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ReTCdL9L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79973887F3; Sat, 20 Jul 2024 19:10:15 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 4018D8882D; Sat, 20 Jul 2024 19:10:16 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E8C887FD
+ by phobos.denx.de (Postfix) with ESMTPS id 757D3887FE
  for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:10:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7044c085338so1587172a34.2
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7035c367c4cso1492107a34.2
  for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:10:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1721495412; x=1722100212; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7qmmVmfhXISqGxpEqF1TKuTu7HMKTNl589hEpUWJcxE=;
- b=bJUCDRnh2et/ua87ADd7J7WClToyM35xjzXnN8KQakeHXxFilMyv3Y02u/Ab1bSC/q
- /QZKOjuoH5oSpNyvzsyKZJdXf0mgx32QI0Y3kP3cJfCpl6xMLOUcWLP9p88wMKEFWq3f
- bqQvg+mU0gcrMdYhu/EveyW0Nuy+Mc9n0BEwM=
+ bh=qSlzYeiivpcN4Cg8DkhEjEZVf89S1XB3p7R0w0JQYMY=;
+ b=ReTCdL9LZq17ESI4zWrbHd3UTUzlayOwfjSCIaIE5wZ3NGpaRZLFvaZN0jTIgQ8Erm
+ n7swOl5hW4olTvHVggeb/ZY6MDNP9F8d5eRRa4viQIOfBjZCW3pKobTFwyVOlZz2Y/o7
+ WNjCnaQ0QjWQnA3TL+TSp4IHx6vrhFCJkzg4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721495412; x=1722100212;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7qmmVmfhXISqGxpEqF1TKuTu7HMKTNl589hEpUWJcxE=;
- b=Z//+Hm7NsnSbIHsZVGPCtfgbNh7BTFYIxVK4eZlTALNQ2fxJnyePfxqAPgKhZjl4yA
- 1N0Ztk6/RZtlzDm1Iqv96Tv+9aO3mv66hrsIEyWG5RVsH0Taex3oe10gaUbgC8VUHJaf
- dGjkkG6LRFIxbu9GE4F8o+l5JcUyC2I8jBJGlskw0mSFbm8UGAjxn04MvN2Hr86TBDcM
- vy1YhLBQuJqoPo8bI+dYRW0wp9nAkVAE36vHv8vmLnsrJ3r7uNPp8msaJ/w+zaKQal92
- dzXXuqjd6ssYTeyasTYWu6YFezWn9ZHpaHwXgn3aF9QM8qiu12Wxtk0QTmy1l/6+l5Wr
- +QnQ==
+ bh=qSlzYeiivpcN4Cg8DkhEjEZVf89S1XB3p7R0w0JQYMY=;
+ b=FQdVIMiBJGo11llfK91Nqc47NAOZqDOm6LGpMcYFPZf9L2PueXyOXjqEoqNA61sF8H
+ MZ+23YGd7b+vaY2n5nMM7yV3XhHNeZR6Mt/h6Znw+ymV9xXFXoTAd3SZb5Wtptg0zR7I
+ jjGdpriUVJxa/nQo7ZLDVMCXqfk+zKDCNxoIolyXnPR0ZWPNFYTZLITdqh2P5cg0GoE/
+ TAkdtxxpoLj9sVDG47/X73VlxxFuZOESwVttpQdgyWpoAQgofjruGYWnBhXu5Lqj3GeC
+ SBvt9yFqcRF8R4bymzumogeiAwrO4g3L+iMhgQe41ow3cm1ekqcCnGhx6+m+HCyqNV26
+ /zyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVGuPZdE3C2qwbKu/zioXx96PkdZCRBd5k905ICzgSfS7xnyqwm8jJRARD6I0UWbxgMS9I4fBkveblG7EeWQN2EZGwew==
-X-Gm-Message-State: AOJu0Yw8d5kQYi/AivRa714SGXjJkWIhpzTB2OaomOZGMdiVFKR2RpB8
- 3xnCnMiFd3FrI/90VHN7Ow6JtXCJkju37DKCkUGmbH0JpQ/ARbai7pfDwgAPN04=
-X-Google-Smtp-Source: AGHT+IEF196w2qetQ1ocZLbWEy2Rcrnq5kq4FbKjpzegJpWLyflzqvpAAenmil9Q7Y1fHj9w5nWcrg==
-X-Received: by 2002:a05:6830:3c05:b0:703:6b2a:2af9 with SMTP id
- 46e09a7af769-70900908d13mr3078502a34.10.1721495412233; 
- Sat, 20 Jul 2024 10:10:12 -0700 (PDT)
+ AJvYcCXzDFwYPPYYKEte/yXaip6vI2vy4RA/7l3kLlS2+eVHAu4Uz0yYVjyM/vFTXoDyxPWBUGmiuiyzvhIKF23y+bhbfPJ0yA==
+X-Gm-Message-State: AOJu0Yxqz7+L1g64CwXsQR6DP7V5w+B40k/vQL6uPx1MkRrCrQJHNo0n
+ TQz54Tsp+9I1WhJLNWK6KaQPsMtAOuvfIYnkFVcldP+AmlKxHbyICW/XxhTlkZuRPiuKAgymmDJ
+ S1Kc=
+X-Google-Smtp-Source: AGHT+IHruPz9p1HBsMDpuFPqqz1eAKRDNU41TRtK9ZRAApPm856taGbu3CJBO+viljzfofy8YgFjng==
+X-Received: by 2002:a05:6830:3814:b0:703:77b1:c653 with SMTP id
+ 46e09a7af769-709009b1172mr2948508a34.24.1721495409298; 
+ Sat, 20 Jul 2024 10:10:09 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.10
+ 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 10:10:11 -0700 (PDT)
+ Sat, 20 Jul 2024 10:10:08 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- William Zhang <william.zhang@broadcom.com>, 
- Rui Miguel Silva <rui.silva@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20240715131950.180562-1-heinrich.schuchardt@canonical.com>
-References: <20240715131950.180562-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] drivers/mtd/nvmxip: nvmxip.h is a global include
-Message-Id: <172149541087.3268377.14129415590231939428.b4-ty@konsulko.com>
-Date: Sat, 20 Jul 2024 11:10:10 -0600
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: bb@ti.com, nm@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
+In-Reply-To: <20240715111550.543037-1-n-francis@ti.com>
+References: <20240715111550.543037-1-n-francis@ti.com>
+Subject: Re: [RESEND PATCH] soc: ti: k3-socinfo: Add support for J721E
+ SR2.0
+Message-Id: <172149540773.3268377.17030858622030082014.b4-ty@konsulko.com>
+Date: Sat, 20 Jul 2024 11:10:07 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,10 +93,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 15 Jul 2024 15:19:50 +0200, Heinrich Schuchardt wrote:
+On Mon, 15 Jul 2024 16:45:50 +0530, Neha Malcom Francis wrote:
 
-> include/nvmxip.h is a global and not a local include.
-> So we should use angle brackets.
+> Add support for identifying J721E SR2.0
 > 
 > 
 
