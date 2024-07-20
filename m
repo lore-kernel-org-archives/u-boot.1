@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01025C3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04DD1C3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 10:51:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7702E887DB;
+	by phobos.denx.de (Postfix) with ESMTP id D91E288C35;
 	Sat, 20 Jul 2024 12:50:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b++QdrdF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B8pPl7XL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1AF288C35; Sat, 20 Jul 2024 12:50:08 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 9F5EF886F9; Sat, 20 Jul 2024 12:50:09 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E94E588881
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B91EA887DB
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 12:50:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3685a5e7d3cso1263301f8f.1
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:06 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-426717a2d12so13066135e9.0
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 03:50:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721472606; x=1722077406; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721472607; x=1722077407; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=li1IbXJw6DxJm/ADzdiuFI1KqXBqFMV9qEsClyWdShg=;
- b=b++QdrdFwe5EApCFLIHXXvc2M/hPTsYn+K8pmsLHg30bSZAfi6EjSoKkhC5LUWb+Lk
- wwKOBR8vFQQckMvFQgqzdc6KADrsjpo8zKSB3N7f3Bv8WAzrFmKIhgZXdiOAdyYr+8yY
- 4feSkggWLlPSRt8aLW3p8IJorXwVO1bpqpXxk=
+ bh=b5E6k3TeZZrlIyJ3gIf10eDnmMZczp4PKqwvDqSToLE=;
+ b=B8pPl7XLhqbZRYXOwiIIZUwhRIBPTMMs5vlnuvu8Qdifr2AchNH8mK+lE5a5BUbxEM
+ z2XYVF6fhCOj5EB3CPRK14JiZDUCyBkx5CN9julIO6kz7Jb+EZKq9KitxGClj9Z7exxE
+ Ajyx3nKPvUiSOorxVyXa2Lrn22omJn3s859Sk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721472606; x=1722077406;
+ d=1e100.net; s=20230601; t=1721472607; x=1722077407;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=li1IbXJw6DxJm/ADzdiuFI1KqXBqFMV9qEsClyWdShg=;
- b=OVVFN1XKImAQSwd4F3kHqX2twrf65zwDABfrnvedXmgCwCNV4v85TctXI3jvKGUUWB
- m8Fox8EpQ7Jm2pdVcbjpa57NMV0zHTrdraUyGtFiKs4QpZC8D6FjknICCe4yYCK7G23d
- nYpTJz2OPCZHkfAvupyur6ieRfqWT797MQmhDndx7XReX5ETt5w2cIM9gXavIfvZUpo2
- fZuwISXkVAa5Kf0ALNivxgRg4hBgAvOwnsN7waP4czCfi+v8HeLGYv4ULoq+d9fs2Cbl
- uzCCR3BpAkwGRLlvr0WruI2Ck03v/VLwL7pUlzZOurQeeX6SQnNRvyvH91gxhWPMZ21O
- 3RSQ==
-X-Gm-Message-State: AOJu0YzPX8FX6RiE46HaCf9or+x+OxYv43Anu1gznnkiMNAUunC58w00
- /4sSWFBtrKZ4YoUUI64nsyaSDFKqk+zFAv7lCFrI86WBXaif/oZpX2ne3kf6ShaBbttjHRVJtZM
+ bh=b5E6k3TeZZrlIyJ3gIf10eDnmMZczp4PKqwvDqSToLE=;
+ b=jat828zZcisdAZfZ2Ataci/QOhz9/CQsby4qF0b+ycbzRiC3HcXwg4gYYHxfjOZbMC
+ 8E4QvfovStqR0xMTaqB3REhO1iXNzvrn4CvopgCDP/P/gaq0EUmSyudAbzY5nxzul7wi
+ OKkBG4xwm7xHjgF6Tynm5p5DtaIFzAkIOpSTxu35w8aRpm1yUvWs1vW/qbDNBwFo3Pvj
+ roO77hnmE8qsea2XGZP8A1zV7jncCHGG6I2yrBOAiRO1o8YiryYDJlsRSTBXFF0ZuV7K
+ Wbd9nnQYBxXBNvlVA15OiwL+qkAblkxiL2IKUHJpNiGfBStLBBC1Go6lcxAyE3gi0ZQp
+ 96Bg==
+X-Gm-Message-State: AOJu0Yz/GW0Xx6KffX8JJcvmC8edbipU9MxgmlI0wF7DPWxq8w6pBNhI
+ 5oAY+dMnYxNcHMwRUtUJu7x/CglmiEAfOrSKLwS+AfZUEJxeP8kKBFXKrOVQ5u/4iYmEwNhyUyM
  =
-X-Google-Smtp-Source: AGHT+IGsvKFpS6iVqKnwPzwDzsPqRKfryNdHx7awwHctoQEVp9CNo6LTWbjYI14cYGyRIi/xLxo9iQ==
-X-Received: by 2002:a5d:5886:0:b0:367:9d2c:9602 with SMTP id
- ffacd0b85a97d-369bb2ea299mr935582f8f.49.1721472606261; 
- Sat, 20 Jul 2024 03:50:06 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGdH2qWRVn6cahW0cWeS/eQ0Kl9Rj0afGny1VxBYorxL5t1yaR1ufa3+e5tE6r7qgHDhH7Fng==
+X-Received: by 2002:a05:600c:470e:b0:424:8dbe:817d with SMTP id
+ 5b1f17b1804b1-427d2a95525mr51811605e9.10.1721472607079; 
+ Sat, 20 Jul 2024 03:50:07 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.05
+ ffacd0b85a97d-36878684225sm3715616f8f.9.2024.07.20.03.50.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 03:50:05 -0700 (PDT)
+ Sat, 20 Jul 2024 03:50:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Marek Vasut <marex@denx.de>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 06/20] binman: elf: Add more debugging to
- LookupAndWriteSymbols()
-Date: Sat, 20 Jul 2024 11:49:36 +0100
-Message-Id: <20240720104950.2730773-7-sjg@chromium.org>
+Subject: [PATCH 07/20] binman: Write the compressed output to a file
+Date: Sat, 20 Jul 2024 11:49:37 +0100
+Message-Id: <20240720104950.2730773-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240720104950.2730773-1-sjg@chromium.org>
 References: <20240720104950.2730773-1-sjg@chromium.org>
@@ -95,28 +93,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When symbol-writing does not appear to work, it can sometimes be hard to
-figure out what is going on. Add some more debugging to help.
+When an entry is compressed, write the compressed contents to a file so
+that it is possible to see what was produced. This aids debugging with
+new images.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/elf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/binman/entry.py | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/tools/binman/elf.py b/tools/binman/elf.py
-index 2ecc95f7eb8..a4694056391 100644
---- a/tools/binman/elf.py
-+++ b/tools/binman/elf.py
-@@ -275,7 +275,7 @@ def LookupAndWriteSymbols(elf_fname, entry, section, is_elf=False,
-         return 0
-     base = syms.get(base_sym)
-     if not base and not is_elf:
--        tout.debug('LookupAndWriteSymbols: no base')
-+        tout.debug(f'LookupAndWriteSymbols: no base: elf_fname={elf_fname}, base_sym={base_sym}, is_elf={is_elf}')
-         return 0
-     base_addr = 0 if is_elf else base.address
-     count = 0
+diff --git a/tools/binman/entry.py b/tools/binman/entry.py
+index 219d5dcecab..752c584c9a3 100644
+--- a/tools/binman/entry.py
++++ b/tools/binman/entry.py
+@@ -1199,6 +1199,9 @@ features to produce new behaviours.
+             self.uncomp_size = len(indata)
+             if self.comp_bintool.is_present():
+                 data = self.comp_bintool.compress(indata)
++                uniq = self.GetUniqueName()
++                fname = tools.get_output_filename(f'comp.{uniq}')
++                tools.write_file(fname, data)
+             else:
+                 self.record_missing_bintool(self.comp_bintool)
+                 data = tools.get_bytes(0, 1024)
 -- 
 2.34.1
 
