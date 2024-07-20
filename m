@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D044C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 14:44:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB89C3DA59
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:30:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B2BB884DC;
-	Sat, 20 Jul 2024 16:44:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9FE70885D7;
+	Sat, 20 Jul 2024 17:30:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g5ATUgwY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CdQgjMJr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 084318851B; Sat, 20 Jul 2024 16:44:41 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id A3C8E885F6; Sat, 20 Jul 2024 17:30:22 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD70F882BE
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 16:44:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92F34885D1
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 17:30:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6b7aed340daso11829666d6.3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 07:44:38 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6ad86f3cc34so16629146d6.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:30:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721486678; x=1722091478; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721489419; x=1722094219; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=/zUWNS9Rl5vcG83tv2HmcM1s5pNJP6XD7lOU9NlmCAw=;
- b=g5ATUgwYDHd7AMbF4IZn3fM2ERfrUd4NGg0g7y3giJuwHSSDGtEhaPtsToKCreCyc1
- DznVhts5NwiFuqQUX/9qQZrAmYbAFAHiT+i0WqwIN6csuANp2gUu92a4c41mP3/lxRqI
- GQuF+hRTfLPbqGUu318/rIDuxv3xsGoRR7W0rJ1Rbx40J9Bxg1ptDTBBGzp/W2wcRMR5
- jAGo1nBxk9aE9qDPqlKe/c+twleXb1/CZVu7iy/wX6/BQRa0pyNkmMKAiIVbEAwGuSGi
- wXyP8UmiYOfj94pL/lMtbUu5tqE0a6u+Sf2fmfzgvBiwFuZrQGHfIjywXytg2i2+0ScN
- bh4g==
+ bh=Ik3HFmVTikQOenYTvuTv2sUn93Uc+MZMo2x6j31CHgY=;
+ b=CdQgjMJrNaTA2jJB4nH0gY3IotPjUXaQvIMt+pGEfPpkWSe/YQGMZA0gjt7QR4kuaT
+ 24len/TkxkFCRH1Y+ngK0Vu/krYtDN+pU9f43vFe+XmvswLW+MntYX5rGCI1kR+5nJOJ
+ V3wNTnHyYDvrgn6wE6zd5fkundUM3zNcjY8Fche5x5gC+fDBKH0vuA7ok3mwc0XuH4Ng
+ nC9EyghaZ2IGdu1xahWo0RAmenDacWSyyV1NRdCsuovO0CnK0QCK9sj48mHImJ3xndYd
+ QRrKMIRIcL055iriCgPJKYxc+LiP4vfBZjUFJVLjd5h8gBoS+4IbjOhETbEkwIVv7E61
+ hp2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721486678; x=1722091478;
+ d=1e100.net; s=20230601; t=1721489419; x=1722094219;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/zUWNS9Rl5vcG83tv2HmcM1s5pNJP6XD7lOU9NlmCAw=;
- b=sly6BCyRV0ml1Ya9ZS8b470pJZ33q1wsc+rAD2cI4o58H8bn91cmhhKulGowz+MD4T
- mBuqrlie8B4ovoPP5lGZNELsX+2jL2CqAgBMDqWfhYHzQai7jjJOlx1kjRvvO/PmuCmM
- C51rcFWhYT1hBr6spfVg3N7MVrdpNiHgDLX1+VxB1Xfj1dNn/wdSsD+JZ89kT/MNdjkk
- nuzow6UkwK1v5E6vmRd6yLRw1KPJlUlT5vgkyHwklUJgNmTYKLl2ILsdMjL0MlxXL2ip
- Xe0wGdAaHCaeqR048WT/s8iONel3J7fv5XeDUXqlTxB57K77i2nU0Jc7N/TCDg7oQQXC
- L7Gw==
-X-Gm-Message-State: AOJu0Yx+S276NZRDNjJM5pPuHLKrb/1J4uvD0Wpa1KbUAOdvlTY3xHdD
- QUy/qxiD3n9Jik/5HgJnS0rWZAQzLcOXBB7BgCeOH5K2IMsVNLdT
-X-Google-Smtp-Source: AGHT+IFw2Er6ebN+VsA196csuGCQluEvmcHnaECIwoqV6tlNv4oOpi/uuBYNh3qUVs/6J+gqAO3hYA==
-X-Received: by 2002:ad4:5fce:0:b0:6b5:ec27:886a with SMTP id
- 6a1803df08f44-6b96106e4afmr26468076d6.4.1721486677560; 
- Sat, 20 Jul 2024 07:44:37 -0700 (PDT)
+ bh=Ik3HFmVTikQOenYTvuTv2sUn93Uc+MZMo2x6j31CHgY=;
+ b=H33Gl8IwypUR2DSJ51rpxtITjCTL5G/CWLQkZK/hneEi8OOfM6aJO2Fpg9YUtzNZ0t
+ m6HBhoq9fzgKM97BgK6hk9rrZXJnaFT6AzRE6bkRwEXDq2bdYIFACNIanaEkcbsUo6fO
+ nDLG5jbxhotL2zNdgJVTYeIwSeFowx1ZkulV5+Nx6n1V3UJH9u/RSn4asWz46a3gdbUl
+ G5C2y7cS+G0jZ2MkYW/Vb9o5SMrnx3YdbBls0UWHKgWrsZ+GLLepPp/lxmh9JWu+KowM
+ UIAeyWT3YYoIgk7HfOY7uzXR6GroTu22M+g8QQ2C86w7rZcqUlCVX4FNeLZMYZaIwk5d
+ 688g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXoZQVZ59YJLyW8cUJvw7z5rMYVogxwXwqUHjY1Dbu39S8igVMOtxol/PDQ1ftrN/6aMO/8ZBnJmRNO8FGop7YA3E0eaw==
+X-Gm-Message-State: AOJu0YxNLaNm46QxXVfHuqY5pJ149qQXThIYYM6isqsa3KrrTIsRgovs
+ emdupIjE1W2kfWTBNEobxQNAZF7upQ0oqQ6qZ+jUj16sRVpzW2iV
+X-Google-Smtp-Source: AGHT+IFdPTEOQqCISL6BXuVtcfFGU3g8m2Yok2gdrlP9CBxagKCFuIoaYLpPIvObfgF7UuP4DoJGAg==
+X-Received: by 2002:ad4:5ec8:0:b0:6b5:4573:4ac5 with SMTP id
+ 6a1803df08f44-6b95a750672mr35231726d6.45.1721489419320; 
+ Sat, 20 Jul 2024 08:30:19 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b7acb04d74sm17656576d6.131.2024.07.20.07.44.36
+ 6a1803df08f44-6b7ac7bd12dsm18219536d6.27.2024.07.20.08.30.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 20 Jul 2024 07:44:36 -0700 (PDT)
-Message-ID: <c968d99b-8a64-6afd-5824-844ad19e0d5a@gmail.com>
-Date: Sat, 20 Jul 2024 10:44:35 -0400
+ Sat, 20 Jul 2024 08:30:18 -0700 (PDT)
+Message-ID: <424b4660-799c-f4b2-bb22-d1f5c617088d@gmail.com>
+Date: Sat, 20 Jul 2024 11:30:17 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH v2 15/21] spl: Plumb in the Universal Payload handoff
+Subject: Re: [PATCH 02/14] spl: Correct use of CMD_BOOTI and CMD_BOOTZ
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Michal Simek <michal.simek@amd.com>, Lean Sheng Tan
- <sheng.tan@9elements.com>, Bin Meng <bmeng.cn@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>, Nikhil M Jain <n-jain1@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Troy Kisky <troykiskyboundary@gmail.com>
-References: <20240713070055.2172883-1-sjg@chromium.org>
- <20240713070055.2172883-16-sjg@chromium.org>
- <325e6cc7-8210-8e95-0267-10d84192a406@gmail.com>
- <CAFLszTgqzN2CwcOj3iR+mspxHD7mjLejaDPPx2Ext=RY8LS1=g@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Devarsh Thakkar <devarsht@ti.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Tom Rini <trini@konsulko.com>
+References: <20240720061706.2644229-1-sjg@chromium.org>
+ <20240720061706.2644229-3-sjg@chromium.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAFLszTgqzN2CwcOj3iR+mspxHD7mjLejaDPPx2Ext=RY8LS1=g@mail.gmail.com>
+In-Reply-To: <20240720061706.2644229-3-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,126 +99,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/20/24 08:36, Simon Glass wrote:
-> Hi Sean,
+On 7/20/24 02:16, Simon Glass wrote:
+> These should have a CONFIG_ prefix. Add it.
 > 
-> On Thu, 18 Jul 2024 at 14:54, Sean Anderson <seanga2@gmail.com> wrote:
->>
->> On 7/13/24 03:00, Simon Glass wrote:
->>> Specify the FIT and include information about each loaded image, as
->>> required by the UPL handoff.
->>>
->>> Write the UPL handoff into the bloblist before jumping to the next phase.
->>>
->>> Control this using a runtime flag to avoid conflicting with other
->>> handoff mechanisms.
->>>
->>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>> ---
->>>
->>> Changes in v2:
->>> - Hang when something goes wrong, to avoid a broken boot
->>> - Add a runtime flag to enable UPL
->>>
->>>    common/spl/spl.c                  |  8 ++++++++
->>>    common/spl/spl_fit.c              | 22 ++++++++++++++++++++++
->>>    include/asm-generic/global_data.h |  4 ++++
->>>    3 files changed, 34 insertions(+)
->>>
->>> diff --git a/common/spl/spl.c b/common/spl/spl.c
->>> index 7794ddccade..d6a364de6ee 100644
->>> --- a/common/spl/spl.c
->>> +++ b/common/spl/spl.c
->>> @@ -810,6 +810,14 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->>>                        printf(SPL_TPL_PROMPT
->>>                               "SPL hand-off write failed (err=%d)\n", ret);
->>>        }
->>> +     if (CONFIG_IS_ENABLED(UPL_OUT) && (gd->flags & GD_FLG_UPL)) {
->>> +             ret = spl_write_upl_handoff(&spl_image);
->>> +             if (ret) {
->>> +                     printf(SPL_TPL_PROMPT
->>> +                            "UPL hand-off write failed (err=%d)\n", ret);
->>> +                     hang();
->>> +             }
->>> +     }
->>>        if (CONFIG_IS_ENABLED(BLOBLIST)) {
->>>                ret = bloblist_finish();
->>>                if (ret)
->>> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
->>> index 2a097f4464c..b288f675ae3 100644
->>> --- a/common/spl/spl_fit.c
->>> +++ b/common/spl/spl_fit.c
->>> @@ -12,6 +12,7 @@
->>>    #include <memalign.h>
->>>    #include <mapmem.h>
->>>    #include <spl.h>
->>> +#include <upl.h>
->>>    #include <sysinfo.h>
->>>    #include <asm/global_data.h>
->>>    #include <asm/io.h>
->>> @@ -645,6 +646,8 @@ static int spl_fit_load_fpga(struct spl_fit_info *ctx,
->>>                printf("%s: Cannot load the FPGA: %i\n", __func__, ret);
->>>                return ret;
->>>        }
->>> +     upl_add_image(node, fpga_image.load_addr, fpga_image.size,
->>> +                   fdt_getprop(ctx->fit, node, FIT_DESC_PROP, NULL));
->>
->> Does load_addr even make sense for FPGAs?
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: 7a0d88076b9 ("Add in the ability to load and boot an uncompr...")
+> ---
 > 
-> Well the images do get loaded into RAM at a particular address.
-
-No they don't. I mean, technically yes, but it's just an intermediate step
-before being programmed into the FPGA. Much like how executable boot images
-may be loaded to an intermediate address before being copied to their final
-location. And the load_addr is set to 0 a few lines above.
-
-But don't bother special-casing this if you do the next part.
-
->>
->> And I noticed that you always call this after load_simple_fit/fit_image_load.
->> Could we call upl_add_image in those functions instead?
+>   common/spl/spl.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> Yes, although it means compiling upl.h for the host. Perhaps it isn't
-> that bad though and it avoids repeating code.
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index 7794ddccade..6f4a8bfb3f4 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -322,7 +322,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+>   #endif
+>   
+>   #if CONFIG_IS_ENABLED(OS_BOOT)
+> -#if defined(CMD_BOOTI)
+> +#if defined(CONFIG_CMD_BOOTI)
+>   		ulong start, size;
+>   
+>   		if (!booti_setup((ulong)header, &start, &size, 0)) {
+> @@ -336,7 +336,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+>   			      spl_image->load_addr, spl_image->size);
+>   			return 0;
+>   		}
+> -#elif defined(CMD_BOOTZ)
+> +#elif defined(CONFIG_CMD_BOOTZ)
+>   		ulong start, end;
+>   
+>   		if (!bootz_setup((ulong)header, &start, &end)) {
 
-I would prefer that to help ensure that future programmers don't forget it.
-
->>
->>>        return spl_fit_upload_fpga(ctx, node, &fpga_image);
->>>    }
->>> @@ -768,6 +771,9 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
->>>        if (ret)
->>>                return ret;
->>>
->>> +     upl_add_image(node, spl_image->load_addr, spl_image->size,
->>> +                   fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
->>> +
->>>        /*
->>>         * For backward compatibility, we treat the first node that is
->>>         * as a U-Boot image, if no OS-type has been declared.
->>> @@ -811,6 +817,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
->>>                               __func__, index, ret);
->>>                        return ret;
->>>                }
->>> +             upl_add_image(node, image_info.load_addr, image_info.size,
->>> +                           fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
->>>
->>>                if (spl_fit_image_is_fpga(ctx.fit, node))
->>>                        spl_fit_upload_fpga(&ctx, node, &image_info);
->>> @@ -847,6 +855,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
->>>                spl_image->entry_point = spl_image->load_addr;
->>>
->>>        spl_image->flags |= SPL_FIT_FOUND;
->>> +     upl_set_fit_info(map_to_sysmem(ctx.fit), ctx.conf_node,
->>> +                      spl_image->entry_point);
->>
->> I think this should be virt_to_phys, since we aren't really mapping it.
-> 
-> We want to pass the address, which (for sandbox) has to be able to be
-> mapped back to a pointer. Everywhere else in sandbox this is how we
-> handle that...
-
-This is really a nit. But I thought that map_to_sysmem implied a pairing with
-unmap. But I guess that's map_physmem.
-
---Sean
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
