@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72A03C3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:11:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4B45C3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 17:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D8F888963;
-	Sat, 20 Jul 2024 19:10:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7FCDE888D1;
+	Sat, 20 Jul 2024 19:11:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xs/8kadu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uZVZ1NKQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04FD988955; Sat, 20 Jul 2024 19:10:29 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id D38D08887E; Sat, 20 Jul 2024 19:11:41 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A59D08883D
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:10:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFCDB88837
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 19:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-708e75d8d7cso1701641a34.3
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:10:26 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-260fff38792so1334186fac.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 10:11:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721495425; x=1722100225; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UjU6tZRkzdm3V++NVK5ifF0H25nqiPVa1mrdkRs8h74=;
- b=Xs/8kaducKFxte09A5X4tKOnwzqkiikhjqsSmsotIgDGmGKOV72T5I+2aWzTMY9ZB/
- URTq2+s8HfftyPaCCW2BGxIm7wOi5/B7BIuGLXqrjkkogFfKBYAcvvvoNfEoFw32HBUr
- EMF7SEh46chEYYO4ZQ+k36VmWNJQZKusqkt94=
+ d=konsulko.com; s=google; t=1721495498; x=1722100298; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=u3iHWaZhSu2RYHqErPDhTyzZxHNKyWnBVOWoPpKmyFU=;
+ b=uZVZ1NKQdv+qr2IbdT3QA3DiQS6M9F8BCJUf+e/HevKl+5IbAOWjGhgxrZhFYn9drE
+ gK0vq/IDt3BI9bpu7flFF69cE5pmLuF9LYb4SXgtsEaxioK4Dx2fGMlYuRjGmZA+Ow/x
+ y9KKtYjNSFNLnr4H496r2Bkd0DW+UwvTlb4oo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721495425; x=1722100225;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UjU6tZRkzdm3V++NVK5ifF0H25nqiPVa1mrdkRs8h74=;
- b=iZzujTjBBIyyRnyu2RR9RJAWLaZtdJSaOzOLmIXFstgWEfwyOtLyBOETgwUHn9xSJz
- 4w2qD7kIB67W+5tIQ8/b9NgJ6WoUqoKTeB6O5H3Wi4tec3ie+m7jf12DXCQ4483h2Hzb
- Ej239j8qZNGbYIhh6S2Iym3gih2YZrC/p5muj4FTzZWd0XTV8rTYazQwSLRr30G4bulJ
- pj734l+YhGupjJ7lvD/gnXAyL+6H7MvsiXnN6T/rlpnsahA1IDgazaejhYUnyp5iZ72Q
- 18GcZQtVDinbNN2rLLE+EW3sBPNAol721hxqn/sL0VWdVSAfm4l1DxEZpyi2TVhQxUWr
- jMWQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU4BWLLMRFSNEX29kOlDvm/LtZ5WpTI2j1jHWmWRiDPIUhFgSnqgQ5n9MaXmms01VKV2QQtQLS1s+8vCxG6PWgfzGXvvQ==
-X-Gm-Message-State: AOJu0YwgkDT9lFVvDJ7/Jr83c4Axah1zOzNExPfIwOhCxTyHD3hGfach
- j791MZgCsewDJiCZ2kl+nFoWeBpzIf0tD/DXkN8S220IVeoe5FgHheK3l27bRuNMWsst376ZQLz
- Zqpc=
-X-Google-Smtp-Source: AGHT+IENS+3UiAZCyKUSGP0Na8CL0F1he/ZREsqRn8Y4jEiW4Ccalyw01/zsXsnNVBGaXyxbj3f2fQ==
-X-Received: by 2002:a05:6830:650d:b0:704:4658:5d1 with SMTP id
- 46e09a7af769-709008bdeb9mr2536063a34.12.1721495425503; 
- Sat, 20 Jul 2024 10:10:25 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
+ d=1e100.net; s=20230601; t=1721495498; x=1722100298;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u3iHWaZhSu2RYHqErPDhTyzZxHNKyWnBVOWoPpKmyFU=;
+ b=IODuEsYzEy1NovwLJdraUxum2PUnBaxvNEFbRXBlk5I1wQG0khlu+DSlVVdd5YTqhi
+ W9E5B4IsCY5DOEBRFWC5vm91Cm64wI+sneZqdOm+QEYsNcV1UQ7JYdgrhGKG77QmwfWb
+ oIB7x0hP/kk+MXKX2Rjys9FqkSmM2GUOy0PE4vv+jhj6q0OCUBS0AmO79dLShXW1S1CA
+ 82GSPq38u1OXjDOQXcuYfw7NAR/QXZe4xem+kiI7qA64e8EbeU3+69Y3p4n8XYNj7erA
+ qXexwxWVQtSquaQL2VCRx8pWBqgxRSnKAiC78pSSYYJ+534vTzlZXmxi7ctDD6G9PChV
+ lQ/g==
+X-Gm-Message-State: AOJu0YwuMk3PTVrWR2+j2Zculbba/SLkRXQ0EZ4LSZe5J3/2Hgydjbpd
+ 76ymKOsLJW4U4SqvPbP0VZjbsF4Iu3bLmFQ7i52oY/BkHChkLfjZef5cSKq8LAA=
+X-Google-Smtp-Source: AGHT+IFXpBNgCYYhEelzKp7EudWxKwsw+/IwufJ03yMp2hqJGhiUvk/4jYIeAL7XMIQ+z9ILoKG7fQ==
+X-Received: by 2002:a05:6870:8327:b0:24f:e5f2:1cf0 with SMTP id
+ 586e51a60fabf-263ab42d58cmr1663732fac.14.1721495497880; 
+ Sat, 20 Jul 2024 10:11:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
  [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f6189bd5sm773037a34.65.2024.07.20.10.10.24
+ 586e51a60fabf-2610ca47ff0sm837850fac.38.2024.07.20.10.11.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jul 2024 10:10:25 -0700 (PDT)
+ Sat, 20 Jul 2024 10:11:37 -0700 (PDT)
+Date: Sat, 20 Jul 2024 11:11:33 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
-In-Reply-To: <20240719212326.42901-1-heinrich.schuchardt@canonical.com>
-References: <20240719212326.42901-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] doc: define html_context in conf.py
-Message-Id: <172149542410.3268377.14284744403781720948.b4-ty@konsulko.com>
-Date: Sat, 20 Jul 2024 11:10:24 -0600
+To: Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de, Robert Nelson <robertcnelson@gmail.com>
+Subject: Re: [PATCH] board: beagle: convert to CONFIG_DM_I2C
+Message-ID: <20240720171133.GE561963@bill-the-cat>
+References: <20240719215123.3358410-1-agust@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gdBkILOQhWmDMNF9"
+Content-Disposition: inline
+In-Reply-To: <20240719215123.3358410-1-agust@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,17 +89,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Jul 2024 23:23:26 +0200, Heinrich Schuchardt wrote:
 
-> The dictionary html_context is not passed into conf.py but must be created
-> there. See
-> https://dev.readthedocs.io/en/latest/design/theme-context.html#customizing-the-context
-> 
-> 
+--gdBkILOQhWmDMNF9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Fri, Jul 19, 2024 at 11:51:23PM +0200, Anatolij Gustschin wrote:
 
--- 
+> Rework to remove use of legacy I2C API.
+>=20
+> Signed-off-by: Anatolij Gustschin <agust@denx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>  board/beagle/beagle/beagle.c   | 41 +++++++++++++++++++++-------------
+>  configs/omap3_beagle_defconfig |  2 +-
+>  include/configs/omap3_beagle.h |  3 ---
+>  3 files changed, 26 insertions(+), 20 deletions(-)
+
+Thanks for doing the conversion. That said, as the nominal maintainer of
+the platform and also given that Robert of beagleboard.org would like to
+drop this initial platform support, I'll merge this update, in case
+someone in the future wishes to revive it, then continue to delete.
+
+--=20
 Tom
 
+--gdBkILOQhWmDMNF9
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmab77sACgkQFHw5/5Y0
+tyw4iQv/cHndHaJ6kDBcKFUWAWlrp+KAKEgHitlFS+uvgtJSqRfMmk+qo4VekZSm
+dR9Bd4mMxSaVj7wULGu5KrtvgiE1yxMJNvM6oE5vXz1btqJOnW2GfCjZ4F7mzU6g
+M6zhpHvAWqYuvS0YFS/Ty+weGT/HeHfufl8rLb2ISKJY/0KCkwNW7sGsjqjBmXvh
+1LrlTZqSvfUTV7ZijedmbFI7d+szgyEE8/WH3U0FpdsOZTquWhYjMOmjBwb3VTBR
+Jh29PqkFQFWc6xuKJnVJjbKc83Sn06oWGMfcUoBjwpZa7a+4LZK/GUZ0DQcC2Gsy
+uDX9WlfafWVzblU8MVe7b7PEuPoS2W6MturR/NV0FDp27QaBGvNs8xSL2BH44kyS
+lfhC5zzbvQoc3kWQI5x/st1FPTCNsVV+Hea/hGI8dXVLmERAfh4M3Fk1nHTJmyy5
+aR7Wk9RcsqtqzhYnbPOCHWid8fP2uPcupv+Ixc0z/gPT3r6Y3sKwXbeutkGu5avX
+NVXxECc3
+=aETg
+-----END PGP SIGNATURE-----
+
+--gdBkILOQhWmDMNF9--
