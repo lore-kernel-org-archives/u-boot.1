@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC4E7C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694B0C3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 12:47:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E20788CA2;
+	by phobos.denx.de (Postfix) with ESMTP id 848D088CAA;
 	Sat, 20 Jul 2024 14:44:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lfy0LNwK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Ef8HeMhF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IxdegUyE";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pVkG5dWy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B11B188CA1; Sat, 20 Jul 2024 14:43:56 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 9F9DC88675; Sat, 20 Jul 2024 14:43:57 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB48488655
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:43:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDB1C88C8D
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 14:43:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,46 +32,46 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WR5nk45qlz9sd6;
- Sat, 20 Jul 2024 14:43:54 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WR5nl4DnGz9sT1;
+ Sat, 20 Jul 2024 14:43:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721479434;
+ s=mail20150812; t=1721479435;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wCHh+sAwFmokXPatOC2DNqHXW9wZmsh7qFZob8d40Ng=;
- b=lfy0LNwKhESMyx2jOVZI6h0rMlYkSyvbZpXsmwLWC4WwSXrLi1OYsXiP9SFdJg6uPXGif4
- IyM7qRzpO7hFCpInVTUJaei4jS7HbC0ak0qsl1tirwsXoh0tXi9+14faR/5aSwRF9cQeaq
- bwNwsT0zOaUiX3ekJ3B+EQEZkFLeEwtin8OENYdyIFUV7ftCKj2YbwUlLq73vuo0k87Yux
- bYgV05LpkT9L362cHAz3wffPzicwHdDx1uuCDTN5dpDN7YGrWQSJ/VBvPbdE71OGt42DIs
- ve8HbzhZJkLs7qwqdXyS1tDaX3EliZckBWuL11Prv7ldnsr/pwbFrX/t8zjWGw==
+ bh=xSQ2T3J33QHVudqzrFDnc32l54DZLT27rOQDAtMNOOU=;
+ b=IxdegUyEBxi30XD8A8ZOmoXsm/uS6ETocipKpb1v9WQSHEMdYjwI1XufN5wUg02RhK7v8q
+ a9flW5P9si8rgHvWsGSZa0/iKbm/IzxKYwoXkaRCYHWTpB1mf+fyk2vY37Eu3LQBjSZG+8
+ 5f7P6e5EbrsAovwCKG3t+3gcOZu6j7dRStVlUeIPYHcMlbuKR3ijeELNlDlhPz+CxVRzJ6
+ LgvO9De6LYLssO+xKd+9hehbAGmkl8xM0RM4Zpw3TeArnPhFWgrDA6MHH7rF1gpEWcLK9P
+ Hi3OSw5bRcn7EF0wrHsWEaRh5EAqXUMU7naxrz7VasFzZypFQWva/VuTY+bY8A==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721479432;
+ s=mail20150812; t=1721479433;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wCHh+sAwFmokXPatOC2DNqHXW9wZmsh7qFZob8d40Ng=;
- b=Ef8HeMhF7r0egVBlN+jtocJ/Z+ie8/aHqk1XQYBSdhnkmd8jjTrkP/AkJmDR1pTI2va/IS
- HKtxzqGgWGRmSISNk5gqG6JWzSjGKg5854wSViWf11meNMs1QyWFwgDpCBjRZZH/wZTq0F
- 3Vt2EBleM8MmuAi5zSNcLeE5If0ar6WbjiyFbN1pe/3EwYOjDS3c6KLtfV84AOlKz9E4/P
- jtvPVb1hGeGtC2vTp99Nz/N8Mzgn5Lueu65YrGeVwAtyKhaZnISKoCNG+MCLcbs6PBUI0k
- 8ZUDVkF+Ah2//SkLPeGvPPD3pacS6HjPoJDCQpcm1GccR+VOmA18ZhVfKelKPA==
+ bh=xSQ2T3J33QHVudqzrFDnc32l54DZLT27rOQDAtMNOOU=;
+ b=pVkG5dWyiUQEwuCnzngn9wopvdT6O/iJghNF1nLWc6/RptJjf4uajL9aLq6OUGJ815dkVQ
+ er9DA5Z01y89VExLJGL6eeMaFKrT4h2UPelvKLidg/QSMjrrx7XzXtap6Snl3rqEfF4i7Q
+ EqIWOwVruhD0XTyVmGuKhRBqRtSBf2s1TG96L+RuSB7pH/UUpHt7FSFmFDBOstNo7J4xdU
+ /amnWokmBLE/Y0/md+GSq4myFtClrp3TJ2crETrP7gh8Uxd5q+rtqBUT0CYGsCqYs4MeHN
+ COA/6ak15busmUXqPeMIl8fSHeOEcUK+mCOdmxXQXbBBbEkahlGy7g1t1gjkbQ==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 24/40] drivers: power: Remove duplicate newlines
-Date: Sat, 20 Jul 2024 14:40:49 +0200
-Message-ID: <20240720124239.7553-24-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 25/40] drivers: ram: Remove duplicate newlines
+Date: Sat, 20 Jul 2024 14:40:50 +0200
+Message-ID: <20240720124239.7553-25-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240720124239.7553-1-marek.vasut+renesas@mailbox.org>
 References: <20240720124239.7553-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 42f1775c4282731e01d
-X-MBO-RS-META: 469t6fekebokg9u7ejbzo5nth1wow5kp
-X-Rspamd-Queue-Id: 4WR5nk45qlz9sd6
+X-MBO-RS-ID: aa4ef0e3feafba4314e
+X-MBO-RS-META: jspaqd3xpf56xqeg9fs1yg6orsxx8nqo
+X-Rspamd-Queue-Id: 4WR5nl4DnGz9sT1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,47 +92,71 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/power/regulator/lp873x_regulator.c  | 1 -
- drivers/power/regulator/lp87565_regulator.c | 1 -
- drivers/power/twl6030.c                     | 1 -
- 3 files changed, 3 deletions(-)
+ drivers/ram/rockchip/dmc-rk3368.c   | 3 ---
+ drivers/ram/stm32_sdram.c           | 2 --
+ drivers/ram/stm32mp1/stm32mp1_ddr.c | 1 -
+ 3 files changed, 6 deletions(-)
 
-diff --git a/drivers/power/regulator/lp873x_regulator.c b/drivers/power/regulator/lp873x_regulator.c
-index c59d77118ad..271a7e45139 100644
---- a/drivers/power/regulator/lp873x_regulator.c
-+++ b/drivers/power/regulator/lp873x_regulator.c
-@@ -310,7 +310,6 @@ static int buck_get_enable(struct udevice *dev)
- 	bool enable = false;
- 	int ret;
+diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
+index 42114a5aa91..ab087275fe2 100644
+--- a/drivers/ram/rockchip/dmc-rk3368.c
++++ b/drivers/ram/rockchip/dmc-rk3368.c
+@@ -138,7 +138,6 @@ enum {
+ #define DDR3_MR2_TWL(n) \
+ 	(((n - 5) & 0x7) << 3)
  
 -
- 	ret = lp873x_buck_enable(dev, PMIC_OP_GET, &enable);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/power/regulator/lp87565_regulator.c b/drivers/power/regulator/lp87565_regulator.c
-index d622d956815..2212cb5c651 100644
---- a/drivers/power/regulator/lp87565_regulator.c
-+++ b/drivers/power/regulator/lp87565_regulator.c
-@@ -167,7 +167,6 @@ static int buck_get_enable(struct udevice *dev)
- 	bool enable = false;
- 	int ret;
+ #ifdef CONFIG_TPL_BUILD
+ 
+ static void ddr_set_noc_spr_err_stall(struct rk3368_grf *grf, bool enable)
+@@ -524,7 +523,6 @@ static int pctl_calc_timings(struct rk3368_sdram_params *params,
+ 	pctl_timing->tckesr = pctl_timing->tcke + 1;  /* JESD-79: tCKE + 1tCK */
+ 	pctl_timing->tdpd = 0;    /* RK3368 TRM: "allowed values for DDR3: 0" */
  
 -
- 	ret = lp87565_buck_enable(dev, PMIC_OP_GET, &enable);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/power/twl6030.c b/drivers/power/twl6030.c
-index 39c05f9b7d3..0cf2e50d65c 100644
---- a/drivers/power/twl6030.c
-+++ b/drivers/power/twl6030.c
-@@ -29,7 +29,6 @@ static struct twl6030_data twl6032_info = {
- 	.vbat_shift	= TWL6032_VBAT_SHIFT,
+ 	/*
+ 	 * The controller can represent tFAW as 4x, 5x or 6x tRRD only.
+ 	 * We want to use the smallest multiplier that satisfies the tFAW
+@@ -987,7 +985,6 @@ static struct ram_ops rk3368_dmc_ops = {
+ 	.get_info = rk3368_dmc_get_info,
  };
  
 -
- static int twl6030_gpadc_read_channel(u8 channel_no)
- {
- 	u8 lsb = 0;
+ static const struct udevice_id rk3368_dmc_ids[] = {
+ 	{ .compatible = "rockchip,rk3368-dmc" },
+ 	{ }
+diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
+index 10dc05dd640..954995c499c 100644
+--- a/drivers/ram/stm32_sdram.c
++++ b/drivers/ram/stm32_sdram.c
+@@ -333,7 +333,6 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
+ 			return -EINVAL;
+ 		}
+ 
+-
+ 		params->bank_params[bank].sdram_timing =
+ 			(struct stm32_sdram_timing *)
+ 			 ofnode_read_u8_array_ptr(bank_node,
+@@ -346,7 +345,6 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
+ 			return -EINVAL;
+ 		}
+ 
+-
+ 		bank_params->sdram_ref_count = ofnode_read_u32_default(bank_node,
+ 						"st,sdram-refcount", 8196);
+ 		bank++;
+diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+index d7834b32299..0e37ea93fbc 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
++++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+@@ -707,7 +707,6 @@ void stm32mp1_ddr_init(struct ddr_info *priv,
+ 		break;
+ 	}
+ 
+-
+ 	if (config->c_reg.mstr & DDRCTRL_MSTR_DDR3)
+ 		ret = board_ddr_power_init(STM32MP_DDR3);
+ 	else if (config->c_reg.mstr & DDRCTRL_MSTR_LPDDR2) {
 -- 
 2.43.0
 
