@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C67BC3DA49
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:45:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 276F0C3DA49
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 15:52:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B92DF886AA;
-	Sat, 20 Jul 2024 17:45:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9DA12884BE;
+	Sat, 20 Jul 2024 17:52:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EJxUvNMA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d7TIxADh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CF3488753; Sat, 20 Jul 2024 17:45:23 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id D1414886CC; Sat, 20 Jul 2024 17:52:38 +0200 (CEST)
+Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
+ [IPv6:2607:f8b0:4864:20::933])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DC7A88618
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 17:45:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94CDE884BC
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 17:52:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b79c969329so15603756d6.0
- for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:45:21 -0700 (PDT)
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-824ae03efbfso516864241.3
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 08:52:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721490320; x=1722095120; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721490755; x=1722095555; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Nl5CfRXkg3cLWPhb6b+dXizmaRz+BzSz2klLEgQY26c=;
- b=EJxUvNMAJJpuewENEShYKIA7yW7VspevEs4VTERz8s0NjUwH2ElmXhACcJrWibxT/t
- 1kWOpDf5Pyg/BkesGitZh8QvlU9k3OSdu7260uOFn9gYmFFIwq8WU9QRe3K5JNPY16sO
- dnBf8JPKOU4+3un8MLrQXH/7Sbe9LoWtlUC7RbrIIZ4I+796ydSaKZmV6ob3ygDnIKa+
- tf0/r7tfP1QDmXq8UYN2kBIRVMufybl4dDU0xhDAKTbYplLCeSlj2HxiwiL0gJVzNwJQ
- H6bceiRqz33HBytzxgZgCiL3waarxmuPyJ2D6SNWcohzMjgaCM/GZaEhZX2XDv1zmkmp
- QfKA==
+ bh=j+zRf4QdIkblrARycCbZVAq34xdIXoURKiW2GILwsuE=;
+ b=d7TIxADhONW8ZWeBx1NRuaTz3TQA1+7K2S4atngQ5WSGEEkXKkbGKiFUW7Voyaml42
+ f6NHZzKpybxZApnN1bR77Xa9/cBh4YTLxQEVOUDjVAyXF13X6t3vN4JAQf+pFSxBwbQN
+ 7jhdmWCgO81R1eFhwfofULnPE/Wgtf2Bcsfbpb3UxyfhHDFs63+XqzSrI9yWW6mHsKWN
+ l/jdsdTRh5uFxwcspz2SYl1wIOEBbjZ+oTdcF2QKrkrERcDtjQsWM7AqZEpmKV0fnLka
+ i0HA+C4opN7lMxHSqnfUHGEZQoxPV5RKMuZ76Wl+5h0PtlRF4KLg918f29vwgLmQLX0h
+ i+/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721490320; x=1722095120;
+ d=1e100.net; s=20230601; t=1721490755; x=1722095555;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Nl5CfRXkg3cLWPhb6b+dXizmaRz+BzSz2klLEgQY26c=;
- b=O8bSvk1O6S49BaYNh6OeCZyAMVeEc3ctOOWqF5v4qwppVPLIR6wIBDYW+rrG6gYH91
- ClfAm3VjeG7hQD5spRPrOSBEZEX39NBoLUkXRgWzbH1Q24pGq8yBbA+kk5ijKrj3+zIt
- F40dPM+MZRZgYBG7GKhkUk5TEa4H6KQGNTwVq9xgoP2df6emRchGohmdOPnNmrad/5/9
- 3NoY+Z8A4hndXaPvZQrrViJ3UXumdvkJ+QpG+HfHGQZXp9xa8/vsbCiPYStUXnunzCQq
- TXaCciKBxDwhBndStoc9P+vrJcFW9k6wdjsC2BxS5VK3gleNuIWVZq9FKc8L6JL5+LoU
- V6SQ==
+ bh=j+zRf4QdIkblrARycCbZVAq34xdIXoURKiW2GILwsuE=;
+ b=hCLfGNcncNZXFTMmoGQEXaU9Af6nSp7LRYsQIa6jf4eJm/gpGRLkunKThyAYSMHj0N
+ Vg7SGrvLZe3F6wT9dZ8YxwBjnZMH1BvAtYSChuo8KEYvx3VsS0ERjaLZkeQpZyI62+yC
+ d/zq8iaxxx6VPCdp1j4hySWAVwVbeHX+YrEAxqxb+CLtlN2egK7d6mb02auHYFicKwlA
+ HYzOtyvusajk/BUCseaOK/3Nd8vSOGiX4ImZm9PXblb/Rrq5oTk4daK7f1HLvhV94OA1
+ aI4d/hp+gUbKuNyPURtK9vzPtjZMqFRk0MUgTkoYZgm9NpWoRg8xjmhl5lyJAsQEvNx2
+ owgQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsa6T8g2tOQXaWn37Y7rTDWtY488R1RgDeTN8lMuFoPb2c1mJ/InVfFyuGW9m7gha6d2cyFfY7rH5C/ko/tLD4kBiWDQ==
-X-Gm-Message-State: AOJu0YyN17FsvLy4umD9C/mNPp5oK9TTgLhHJqvpIM8TKv/ZGZayrMVC
- e6wmsvsVaQSAISq0h0RJTC3hatzL+tsNOz3KKKh2+0zifXd4oIgDClIdOQ==
-X-Google-Smtp-Source: AGHT+IG9n0dL2OLH4S2EZWykBH8i873ZkRBJdmb/BB2cfB+zasMt2hJuiLdTiD8ixRFq7Q1VIb8jGQ==
-X-Received: by 2002:a05:6214:21ef:b0:6b7:b3b8:e882 with SMTP id
- 6a1803df08f44-6b961092137mr23313676d6.25.1721490319967; 
- Sat, 20 Jul 2024 08:45:19 -0700 (PDT)
+ AJvYcCX81x4Tm8Y6GTAWE2MeH46jVmOxDvgi/tcCmpBXteRUO01Ykvqpf+u8A8C3T4WmZw3l3voLGTedbULOB2CYztI/z5Cemg==
+X-Gm-Message-State: AOJu0YwiEAOHqMaGwr4oHrGrvNeqBLSfXv0D//lX2Mb5SBZy1q4Bvbh6
+ +jTipRQ9mrP2ATvWY7NC0WfiIjCOVO8YILMrtUzxk33+cT6b8ND/
+X-Google-Smtp-Source: AGHT+IG3lO6N0ymwHQaIyyS6lczdEwZTm2vXuGKOWvE8regCvKUCLCth/TjsWYY5+zdeoV25hBndHA==
+X-Received: by 2002:a05:6102:5c1b:b0:48f:b577:e02d with SMTP id
+ ada2fe7eead31-49283f75fa1mr2415028137.25.1721490755313; 
+ Sat, 20 Jul 2024 08:52:35 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b7ac9c3462sm18446176d6.76.2024.07.20.08.45.19
+ 6a1803df08f44-6b8f98f4a9asm11997656d6.75.2024.07.20.08.52.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 20 Jul 2024 08:45:19 -0700 (PDT)
-Message-ID: <97d82989-7fb2-b229-0fd2-3997c003f6bd@gmail.com>
-Date: Sat, 20 Jul 2024 11:45:18 -0400
+ Sat, 20 Jul 2024 08:52:34 -0700 (PDT)
+Message-ID: <f7dff022-9eb2-7ce8-971d-de282f0404e2@gmail.com>
+Date: Sat, 20 Jul 2024 11:52:33 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 06/14] mmc: Use logging instead of pr_err()
+Subject: Re: [PATCH 07/14] log: Avoid including function names by default
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Dragan Simic <dsimic@manjaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?Q?Thomas_Wei=c3=9fschuh?= <thomas.weissschuh@linutronix.de>,
  Tom Rini <trini@konsulko.com>
 References: <20240720061706.2644229-1-sjg@chromium.org>
- <20240720061706.2644229-7-sjg@chromium.org>
+ <20240720061706.2644229-8-sjg@chromium.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240720061706.2644229-7-sjg@chromium.org>
+In-Reply-To: <20240720061706.2644229-8-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,196 +105,161 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/20/24 02:16, Simon Glass wrote:
-> Use the log subsystem instead of dev, to avoid including function names
-> in the code.
+> Unless function names are requested, the logging system should not
+> compile these into the code. Adjust the macros to handle this.
 > 
-> The CONFIG_LOGF_FUNC option can be used to enable the function name.
+> Enable CONFIG_LOGF_FUNC logging for sandbox since the tests expect the
+> function names to be included. Fix up the pinmux test which checks a
+> logging statement.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
->   drivers/mmc/mmc.c | 49 ++++++++++++++++++++++++-----------------------
->   1 file changed, 25 insertions(+), 24 deletions(-)
+>   common/log_console.c      |  4 ++--
+>   configs/sandbox_defconfig |  1 +
+>   include/log.h             | 18 ++++++++++++------
+>   test/cmd/pinmux.c         |  8 +++++++-
+>   test/log/log_test.c       |  4 ++--
+>   5 files changed, 24 insertions(+), 11 deletions(-)
 > 
-> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-> index b18dc331f78..b0105afe5d6 100644
-> --- a/drivers/mmc/mmc.c
-> +++ b/drivers/mmc/mmc.c
-> @@ -294,7 +294,7 @@ int mmc_poll_for_busy(struct mmc *mmc, int timeout_ms)
->   
->   		if (status & MMC_STATUS_MASK) {
->   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
-> -			pr_err("Status Error: 0x%08x\n", status);
-> +			log_err("Status Error: %08x\n", status);
->   #endif
->   			return -ECOMM;
->   		}
-> @@ -307,7 +307,7 @@ int mmc_poll_for_busy(struct mmc *mmc, int timeout_ms)
->   
->   	if (timeout_ms <= 0) {
->   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
-> -		pr_err("Timeout waiting card ready\n");
-> +		log_err("Timeout waiting card ready\n");
->   #endif
->   		return -ETIMEDOUT;
->   	}
-> @@ -449,7 +449,7 @@ static int mmc_read_blocks(struct mmc *mmc, void *dst, lbaint_t start,
->   	if (blkcnt > 1) {
->   		if (mmc_send_stop_transmission(mmc, false)) {
->   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
-> -			pr_err("mmc fail to send stop cmd\n");
-> +			log_err("mmc fail to send stop cmd\n");
->   #endif
->   			return 0;
->   		}
-> @@ -500,8 +500,8 @@ ulong mmc_bread(struct blk_desc *block_dev, lbaint_t start, lbaint_t blkcnt,
->   
->   	if ((start + blkcnt) > block_dev->lba) {
->   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
-> -		pr_err("MMC: block number 0x" LBAF " exceeds max(0x" LBAF ")\n",
-> -		       start + blkcnt, block_dev->lba);
-> +		log_err("MMC: block number " LBAF " exceeds max(" LBAF ")\n",
-> +			start + blkcnt, block_dev->lba);
->   #endif
->   		return 0;
->   	}
-> @@ -997,7 +997,7 @@ static int mmc_get_capabilities(struct mmc *mmc)
->   		return 0;
->   
->   	if (!ext_csd) {
-> -		pr_err("No ext_csd found!\n"); /* this should enver happen */
-> +		log_err("No ext_csd found!\n"); /* this should enver happen */
->   		return -ENOTSUPP;
->   	}
->   
-> @@ -1109,17 +1109,17 @@ int mmc_hwpart_config(struct mmc *mmc,
->   		return -EINVAL;
->   
->   	if (IS_SD(mmc) || (mmc->version < MMC_VERSION_4_41)) {
-> -		pr_err("eMMC >= 4.4 required for enhanced user data area\n");
-> +		log_err("eMMC >= 4.4 required for enhanced user data area\n");
->   		return -EMEDIUMTYPE;
->   	}
->   
->   	if (!(mmc->part_support & PART_SUPPORT)) {
-> -		pr_err("Card does not support partitioning\n");
-> +		log_err("Card does not support partitioning\n");
->   		return -EMEDIUMTYPE;
->   	}
->   
->   	if (!mmc->hc_wp_grp_size) {
-> -		pr_err("Card does not define HC WP group size\n");
-> +		log_err("Card does not define HC WP group size\n");
->   		return -EMEDIUMTYPE;
->   	}
->   
-> @@ -1127,8 +1127,7 @@ int mmc_hwpart_config(struct mmc *mmc,
->   	if (conf->user.enh_size) {
->   		if (conf->user.enh_size % mmc->hc_wp_grp_size ||
->   		    conf->user.enh_start % mmc->hc_wp_grp_size) {
-> -			pr_err("User data enhanced area not HC WP group "
-> -			       "size aligned\n");
-> +			log_err("User data enhanced area not HC WP group size aligned\n");
->   			return -EINVAL;
->   		}
->   		part_attrs |= EXT_CSD_ENH_USR;
-> @@ -1146,8 +1145,8 @@ int mmc_hwpart_config(struct mmc *mmc,
->   
->   	for (pidx = 0; pidx < 4; pidx++) {
->   		if (conf->gp_part[pidx].size % mmc->hc_wp_grp_size) {
-> -			pr_err("GP%i partition not HC WP group size "
-> -			       "aligned\n", pidx+1);
-> +			log_err("GP%i partition not HC WP group-size aligned\n",
-> +				pidx + 1);
->   			return -EINVAL;
->   		}
->   		gp_size_mult[pidx] = conf->gp_part[pidx].size / mmc->hc_wp_grp_size;
-> @@ -1158,7 +1157,7 @@ int mmc_hwpart_config(struct mmc *mmc,
->   	}
->   
->   	if (part_attrs && ! (mmc->part_support & ENHNCD_SUPPORT)) {
-> -		pr_err("Card does not support enhanced attribute\n");
-> +		log_err("Card does not support enhanced attribute\n");
->   		return -EMEDIUMTYPE;
->   	}
->   
-> @@ -1171,8 +1170,8 @@ int mmc_hwpart_config(struct mmc *mmc,
->   		(ext_csd[EXT_CSD_MAX_ENH_SIZE_MULT+1] << 8) +
->   		ext_csd[EXT_CSD_MAX_ENH_SIZE_MULT];
->   	if (tot_enh_size_mult > max_enh_size_mult) {
-> -		pr_err("Total enhanced size exceeds maximum (%u > %u)\n",
-> -		       tot_enh_size_mult, max_enh_size_mult);
-> +		log_err("Total enhanced size exceeds maximum (%x > %x)\n",
-> +			tot_enh_size_mult, max_enh_size_mult);
->   		return -EMEDIUMTYPE;
->   	}
->   
-> @@ -1205,7 +1204,7 @@ int mmc_hwpart_config(struct mmc *mmc,
->   
->   	if (ext_csd[EXT_CSD_PARTITION_SETTING] &
->   	    EXT_CSD_PARTITION_SETTING_COMPLETED) {
-> -		pr_err("Card already partitioned\n");
-> +		log_err("Card already partitioned\n");
->   		return -EPERM;
->   	}
->   
-> @@ -1876,7 +1875,7 @@ error:
->   		}
->   	}
->   
-> -	pr_err("unable to select a mode\n");
-> +	log_err("unable to select a mode\n");
->   	return -ENOTSUPP;
->   }
->   
-> @@ -2254,7 +2253,7 @@ error:
->   		}
->   	}
->   
-> -	pr_err("unable to select a mode : %d\n", err);
-> +	log_err("unable to select a mode: %d\n", err);
->   
->   	return -ENOTSUPP;
->   }
-> @@ -2921,8 +2920,10 @@ retry:
->   
->   		if (err) {
->   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
-> -			if (!quiet)
-> -				pr_err("Card did not respond to voltage select! : %d\n", err);
-> +			if (!quiet) {
-> +				log_err("Card did not respond to voltage select! : %d\n",
-> +					err);
-> +			}
->   #endif
->   			return -EOPNOTSUPP;
->   		}
-> @@ -2955,7 +2956,7 @@ int mmc_start_init(struct mmc *mmc)
->   						   | MMC_CAP(MMC_LEGACY) |
->   						   MMC_MODE_1BIT);
+> diff --git a/common/log_console.c b/common/log_console.c
+> index c27101b8fe2..9376baad664 100644
+> --- a/common/log_console.c
+> +++ b/common/log_console.c
+> @@ -38,10 +38,10 @@ static int log_console_emit(struct log_device *ldev, struct log_rec *rec)
+>   			printf("%d-", rec->line);
+>   		if (fmt & BIT(LOGF_FUNC)) {
+>   			if (CONFIG_IS_ENABLED(USE_TINY_PRINTF)) {
+> -				printf("%s()", rec->func);
+> +				printf("%s()", rec->func ?: "?");
 >   			} else {
-> -				pr_err("bus_mode requested is not supported\n");
-> +				log_err("bus_mode requested is not supported\n");
->   				return -EINVAL;
+>   				printf("%*s()", CONFIG_LOGF_FUNC_PAD,
+> -				       rec->func);
+> +				       rec->func ?: "?");
 >   			}
 >   		}
-> @@ -2975,7 +2976,7 @@ int mmc_start_init(struct mmc *mmc)
->   	if (no_card) {
->   		mmc->has_init = 0;
->   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
-> -		pr_err("MMC: no card present\n");
-> +		log_err("MMC: no card present\n");
+>   	}
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index e2db66d4a25..d43d92d0cf2 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -38,6 +38,7 @@ CONFIG_PRE_CONSOLE_BUFFER=y
+>   CONFIG_LOG=y
+>   CONFIG_LOG_MAX_LEVEL=9
+>   CONFIG_LOG_DEFAULT_LEVEL=6
+> +CONFIG_LOGF_FUNC=y
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>   CONFIG_STACKPROTECTOR=y
+>   CONFIG_ANDROID_AB=y
+> diff --git a/include/log.h b/include/log.h
+> index fc0d5984472..67b6fd70050 100644
+> --- a/include/log.h
+> +++ b/include/log.h
+> @@ -125,7 +125,7 @@ static inline int log_uc_cat(enum uclass_id id)
+>    * @level: Level of log record (indicating its severity)
+>    * @file: File name of file where log record was generated
+>    * @line: Line number in file where log record was generated
+> - * @func: Function where log record was generated
+> + * @func: Function where log record was generated, NULL if not known
+>    * @fmt: printf() format string for log record
+>    * @...: Optional parameters, according to the format string @fmt
+>    * Return: 0 if log record was emitted, -ve on error
+> @@ -141,7 +141,7 @@ int _log(enum log_category_t cat, enum log_level_t level, const char *file,
+>    * @level: Level of log record (indicating its severity)
+>    * @file: File name of file where log record was generated
+>    * @line: Line number in file where log record was generated
+> - * @func: Function where log record was generated
+> + * @func: Function where log record was generated, NULL if not known
+>    * @addr:	Starting address to display at start of line
+>    * @data:	pointer to data buffer
+>    * @width:	data value width.  May be 1, 2, or 4.
+> @@ -193,6 +193,12 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
+>   #define _LOG_DEBUG	0
 >   #endif
->   		return -ENOMEDIUM;
->   	}
-> @@ -3104,7 +3105,7 @@ static int mmc_probe(struct bd_info *bis)
->   	uclass_foreach_dev(dev, uc) {
->   		ret = device_probe(dev);
->   		if (ret)
-> -			pr_err("%s - probe failed: %d\n", dev->name, ret);
-> +			log_err("%s - probe failed: %d\n", dev->name, ret);
->   	}
 >   
->   	return 0;
+> +#ifdef CONFIG_LOGF_FUNC
+> +#define _log_func	__func__
+> +#else
+> +#define _log_func	NULL
+> +#endif
+> +
+>   #if CONFIG_IS_ENABLED(LOG)
+>   
+>   /* Emit a log record if the level is less that the maximum */
+> @@ -201,7 +207,7 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
+>   	if (_LOG_DEBUG != 0 || _l <= _LOG_MAX_LEVEL) \
+>   		_log((enum log_category_t)(_cat), \
+>   		     (enum log_level_t)(_l | _LOG_DEBUG), __FILE__, \
+> -		     __LINE__, __func__, \
+> +		     __LINE__, _log_func, \
+>   		      pr_fmt(_fmt), ##_args); \
+>   	})
+>   
+> @@ -211,7 +217,7 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
+>   	if (_LOG_DEBUG != 0 || _l <= _LOG_MAX_LEVEL) \
+>   		_log_buffer((enum log_category_t)(_cat), \
+>   			    (enum log_level_t)(_l | _LOG_DEBUG), __FILE__, \
+> -			    __LINE__, __func__, _addr, _data, \
+> +			    __LINE__, _log_func, _addr, _data, \
+>   			    _width, _count, _linelen); \
+>   	})
+>   #else
+> @@ -302,7 +308,7 @@ void __assert_fail(const char *assertion, const char *file, unsigned int line,
+>    */
+>   #define assert(x) \
+>   	({ if (!(x) && _DEBUG) \
+> -		__assert_fail(#x, __FILE__, __LINE__, __func__); })
+> +		__assert_fail(#x, __FILE__, __LINE__, _log_func); })
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Can we keep this one in? It's only compiled for debug and we are including file/line anyway.
+
+>   /*
+>    * This one actually gets compiled in even without DEBUG. It doesn't include the
+> @@ -314,7 +320,7 @@ void __assert_fail(const char *assertion, const char *file, unsigned int line,
+>   #define assert_noisy(x) \
+>   	({ bool _val = (x); \
+>   	if (!_val) \
+> -		__assert_fail(#x, "?", __LINE__, __func__); \
+> +		__assert_fail(#x, "?", __LINE__, _log_func); \
+>   	_val; \
+>   	})
+>   
+> diff --git a/test/cmd/pinmux.c b/test/cmd/pinmux.c
+> index 4253baa5646..7ab7004b684 100644
+> --- a/test/cmd/pinmux.c
+> +++ b/test/cmd/pinmux.c
+> @@ -30,7 +30,13 @@ static int dm_test_cmd_pinmux_status_pinname(struct unit_test_state *uts)
+>   
+>   	console_record_reset();
+>   	run_command("pinmux status P9", 0);
+> -	ut_assert_nextlinen("single-pinctrl pinctrl-single-no-width: missing register width");
+> +	if (IS_ENABLED(CONFIG_LOGF_FUNC)) {
+> +		ut_assert_nextlinen(
+> +			"   single_of_to_plat() single-pinctrl pinctrl-single-no-width: missing register width");
+> +	} else {
+> +		ut_assert_nextlinen(
+> +			"single-pinctrl pinctrl-single-no-width: missing register width");
+> +	}
+>   	ut_assert_nextlinen("P9 not found");
+>   	ut_assert_console_end();
+>   
+> diff --git a/test/log/log_test.c b/test/log/log_test.c
+> index 855353a9c40..d756b96dbac 100644
+> --- a/test/log/log_test.c
+> +++ b/test/log/log_test.c
+> @@ -452,8 +452,8 @@ int log_test_buffer(struct unit_test_state *uts)
+>   	/* This one should product no output due to the debug level */
+>   	log_buffer(LOGC_BOOT, LOGL_DEBUG, 0, buf, 1, 0x12, 0);
+>   
+> -	ut_assert_nextline("00000000: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff  ..\"3DUfw........");
+> -	ut_assert_nextline("00000010: 10 00                                            ..");
+> +	ut_assert_nextline("     log_test_buffer() 00000000: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff  ..\"3DUfw........");
+> +	ut_assert_nextline("     log_test_buffer() 00000010: 10 00                                            ..");
+>   	ut_assert_console_end();
+>   	free(buf);
+>   
+
+Anyway, the rest looks fine. This probably breaks the use case of someone turning on
+function names at runtime, so maybe we will need to split this config if someone cares.
+
+--Sean
