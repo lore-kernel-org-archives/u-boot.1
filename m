@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C4A9C3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 15:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD3F3C3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 15:28:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E10FE88189;
-	Sun, 21 Jul 2024 17:26:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45F4188315;
+	Sun, 21 Jul 2024 17:26:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gg9/WPN7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ccMLCfFT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D95F7880D8; Sun, 21 Jul 2024 17:26:49 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id C54A0882B7; Sun, 21 Jul 2024 17:26:50 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 139EB87F51
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 17:26:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0F6B87B8D
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 17:26:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4257d5fc9b7so28770895e9.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 08:26:47 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3686b554cfcso1457602f8f.1
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 08:26:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721575606; x=1722180406; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721575608; x=1722180408; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P/2IzB95kuKYUiAZPjcAEAOS0mmi8EMf8y6z/GHEaik=;
- b=Gg9/WPN76hkqHKcyQGgqSx+3LI0TjU9BR1S6sWEi3sdSO5l8sKqtXmku70WuOOdOWK
- k7z4aANBONbs8nSKtbRaISB2oKFdjBNfh7aW100z3eXir8FJi8LHRuWavmZC8FM/mglI
- QPSjgyRE8yEcxYP1qMScVrqyN2ADU7l17+dMk=
+ bh=rzd/tgKw3U4nnCuTmybuY2hn9Pea92hD50jy03Xtyqg=;
+ b=ccMLCfFT8EadwWpP1KNCq82bBQeWN7IbMPiHqbv5inTIjTgIXJ0pluPjSXSNKvcEmO
+ cSYQsWZibIox4oTRnXp2/7QnE8qlW6ODSfLqrjE6+5Zd9TtOWd97TyJY0ohP1tbya3xi
+ 0jKx7y8qtxpCkQCPetoFkBUYNElGzTFHdfkjI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721575606; x=1722180406;
+ d=1e100.net; s=20230601; t=1721575608; x=1722180408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P/2IzB95kuKYUiAZPjcAEAOS0mmi8EMf8y6z/GHEaik=;
- b=k26glDVebIQLeZaSNf38rkU4MENmU40MuMRzUJtO1wIilNrJ4tMmOR4iuXo66sk9fD
- UHtFNb2dQ1sWU94FxkbaLwG86Pkbvh/4MKh6/O4n1uTGFH02g52PseZExlRNw8clUYSW
- T2IDk9HAGnVTL58bFMtdu/t1HOfQTSbxA1ATVzfxabEJs0MQ6Fm+n9D0e47QU8Cf1nSX
- gPbRafIWSXq5M8NZsnyf6NQRinwelnCCAm/iPavSdl/3P+HO7xmOaxp260qBHN1kHmOF
- syAqTg6r19Zh6UuKUHWuHMaWfpWMu1th73tXCU0ltuyejvdNl33rhAIUA6GJgLF3mpgl
- luWQ==
-X-Gm-Message-State: AOJu0YwVF6ge3U03LAu6iaEKRatLngH8KcN8zlpPTirqONzvFYvCsZQx
- ADydv8OfWBgRcg4rfYDqD1LKAJGKCewexfsL7wfWaVqHD3y+cZrMU1qHT74dpljJu2NQCbZnNTc
+ bh=rzd/tgKw3U4nnCuTmybuY2hn9Pea92hD50jy03Xtyqg=;
+ b=Boo+CXTBSig4baFNDKKI2s1r81d/RRgE6ABWdINFKxQVmbg24LXv1++3P/8HaoIWLA
+ YIfem7CU2fuLZT1oiv1i87U6FWUmD1kH9vrLcuRWy3FY6yjp3qlEiiCL4tVm1N2CpKPi
+ K2CBMD/nQdewySPuKGJqDqV0wIrikijhU7ZYjSuB1eb69RAPDFccxWUZb8bC8Foy6ax7
+ W9WpJohkNVRDx4KmWWK4N2UvdKr3DF/jRF6w3aCNOIApAAVfAGVqpmoGpZb61jeI+OpE
+ z/Np/sNrA0bxYrYxrER2tJRgbbRGTl+xTQUh1dYmoC3weJ4j0Iq9C934RDgdCvanCupT
+ mxew==
+X-Gm-Message-State: AOJu0YzasuYLRxSGpfVBnlxthr9Fl7q+SpmJdUibCtV8ONiYGBP9CpGf
+ 00c2UNvazfJWMOaytP/ekR4xtEe3nvVPuVP2YGjYPI/kN62RGrIPrHE93TI4QBI9QXrQjMrTadg
  =
-X-Google-Smtp-Source: AGHT+IHbgq8aW4TERmR6jRn9ViA51dlHhr3SS+ds+m53hrhabpOsYz9b6PCkSALiqw+QqBmOh6XYIA==
-X-Received: by 2002:a05:600c:46d0:b0:426:593c:9359 with SMTP id
- 5b1f17b1804b1-427dc56b60bmr41785735e9.32.1721575606403; 
- Sun, 21 Jul 2024 08:26:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEOAMVmpGK8uqPYEs+Y6uaC7xlnzI+6sPSxOLRwvFxjN5ef2QDNuS/5WJDS8efRk38A8umWSg==
+X-Received: by 2002:a5d:5043:0:b0:367:8a9e:6bed with SMTP id
+ ffacd0b85a97d-369bbcb9f70mr2866696f8f.61.1721575608199; 
+ Sun, 21 Jul 2024 08:26:48 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427e5803bb0sm8702255e9.45.2024.07.21.08.26.45
+ 5b1f17b1804b1-427e5803bb0sm8702255e9.45.2024.07.21.08.26.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 08:26:46 -0700 (PDT)
+ Sun, 21 Jul 2024 08:26:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v2 12/14] spl: Use unified inline functions for spl_load_info
-Date: Sun, 21 Jul 2024 16:25:57 +0100
-Message-Id: <20240721152600.3212917-13-sjg@chromium.org>
+Subject: [PATCH v2 14/14] blk: Correct comment for
+ blk_get_devnum_by_uclass_idname()
+Date: Sun, 21 Jul 2024 16:25:59 +0100
+Message-Id: <20240721152600.3212917-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240721152600.3212917-1-sjg@chromium.org>
 References: <20240721152600.3212917-1-sjg@chromium.org>
@@ -89,8 +90,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than declaring completely separate functions, put the code for
-each case into the same function. This makes it easier to read.
+Update the comment to match the function. Fix the indentation while we
+are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Sean Anderson <seanga2@gmail.com>
@@ -98,52 +99,31 @@ Reviewed-by: Sean Anderson <seanga2@gmail.com>
 
 (no changes since v1)
 
- include/spl.h | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ include/blk.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/spl.h b/include/spl.h
-index 5dfdf778d2d..2f6a3e64c10 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -306,31 +306,27 @@ struct spl_load_info {
- 		      void *buf);
- #if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
- 	int bl_len;
-+#endif
- };
+diff --git a/include/blk.h b/include/blk.h
+index 7c7cf7f2b10..1fc9a5b8471 100644
+--- a/include/blk.h
++++ b/include/blk.h
+@@ -650,7 +650,7 @@ struct blk_driver *blk_driver_lookup_type(int uclass_id);
+ struct blk_desc *blk_get_devnum_by_uclass_id(enum uclass_id uclass_id, int devnum);
  
- static inline int spl_get_bl_len(struct spl_load_info *info)
- {
-+#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
- 	return info->bl_len;
--}
--
--static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
--{
--	info->bl_len = bl_len;
--}
- #else
--};
--
--static inline int spl_get_bl_len(struct spl_load_info *info)
--{
- 	return 1;
-+#endif
- }
+ /**
+- * blk_get_devnum_by_uclass_id() - Get a block device by type name, and number
++ * blk_get_devnum_by_uclass_idname() - Get block device by type name and number
+  *
+  * This looks up the block device type based on @uclass_idname, then calls
+  * blk_get_devnum_by_uclass_id().
+@@ -660,7 +660,7 @@ struct blk_desc *blk_get_devnum_by_uclass_id(enum uclass_id uclass_id, int devnu
+  * Return: point to block device descriptor, or NULL if not found
+  */
+ struct blk_desc *blk_get_devnum_by_uclass_idname(const char *uclass_idname,
+-					    int devnum);
++						 int devnum);
  
- static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
- {
-+#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
-+	info->bl_len = bl_len;
-+#else
- 	if (bl_len != 1)
- 		panic("CONFIG_SPL_LOAD_BLOCK not enabled");
--}
- #endif
-+}
- 
- /*
-  * We need to know the position of U-Boot in memory so we can jump to it. We
+ /**
+  * blk_dselect_hwpart() - select a hardware partition
 -- 
 2.34.1
 
