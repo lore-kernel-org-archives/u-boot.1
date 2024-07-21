@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34249C3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 19:38:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A52FDC3DA61
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 21:27:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71C5987E96;
-	Sun, 21 Jul 2024 21:38:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B0DB687FC7;
+	Sun, 21 Jul 2024 23:27:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PQ/2pQ7Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PwPGMe3N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C25F87EB4; Sun, 21 Jul 2024 21:38:47 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A0A2B87EB4; Sun, 21 Jul 2024 23:27:22 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B251487D87
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 21:38:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9146387F82
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 23:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=7206=OW=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1721590718;
- bh=ehj0RUrNAERJ1k0umecI5YaNFDmDih9JC/6hGuzWe+Y=;
- b=PQ/2pQ7Qdt/RcfRAn57HHxNma8B+7eomPdlkmUQcLIBgn2rXs91EXQd1jw3Fv/QAR6o1WWSIK
- F63CGxpwWI7jnGdjxLDqVZjQkvLsOLxuTYJx0fY5CsHMx0zYt9+NBbez2fb9HvUvEnHZjuS0FaX
- BJvpALGWLVOehi5Eqgg17G8mXmArAodnWsxtfUSzcPfJKeJAGowwd/hOs1lbXwyUFkE9Q9tg44s
- FyUPSiPVykUecuGuYODp7dcLkRGT9ioTHBPALXJF6sUCmvqyUYNq8mxInxjQb6yPJk69XwRtPv0
- vWWj726Ycy6IEDEPjyaVTe0l7n657jgxLZdC6gerk+nA==
-Message-ID: <bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se>
-Date: Sun, 21 Jul 2024 21:38:31 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2ef2d7d8854so5435401fa.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 14:27:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721597240; x=1722202040; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+ICEtV5gK0eZ0LuPJc3O76jItFa5nZgVcR/2kogruH0=;
+ b=PwPGMe3NyrGmrxjsCcrpFksGGtKlX6Iv4W2/Bfc5EG2gyP0hBTwPtgLkza1Ty3LIEH
+ JvNVA+1fXpiD+hLD6S9bubkBDgGmeY60qa0PNJbsgH1e5dnWOkj88kU08Eb6Xv7BY3Uu
+ tGyAFEbD9E9cKf3+68cMcbxjm+dTDjenkwmLpkmm6KCRIBBVTrSwBb7yvQBNCiEOX/v3
+ GvXW++IK/Ni7C9LJ+J35VJD67UFRpvJk6pjR4DZzvCt5dYMBhqpltLMmKxCsYNasUW/2
+ B1qGpC5myxcyJ3uY+tqFPWwN4AW8AalErLUvrWDQlbCznH1CMPON0I07usWJSxQk4NNV
+ PTuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721597240; x=1722202040;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+ICEtV5gK0eZ0LuPJc3O76jItFa5nZgVcR/2kogruH0=;
+ b=C0N7Rnf927IVslmEpBB8boQAoSQAMIzYfDJvAoq5AbvG58pNj155MIqcaEQyGhxrn8
+ yNYHTWETF3JOBAf4gZ6vVGxgP9iUqI7yYNwsEQSgAH4wZakokmQCScL2B5KD+Rs1xog/
+ zBTj3b3QSUOZLgoQ2fQXHSWJjYxxk8TeY3wCAVG4hv4kG2AwHThwBrD86LDwLA1DVYeO
+ Gv1Dp4MQGKQ86EImRlKNveaYpR3An6j3vnArrQ4SY/JbijEjyyLzGmpjNQE28VvsdZp6
+ e2Kd3dJ9sJvA+6SP1JU59XKmXLeybNqebX7dMkkJLqrn1mhVNHmWF+/kjMgIz5aGawBo
+ 89jQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWoXbTx3iG1iUICuEMD4VwagRCtf7AmbuH4Plpcrl6ugHaZWfv/lP4Qkv/Ztac2au/H7LEaXao5JivBIXk7S1xQq1p6w==
+X-Gm-Message-State: AOJu0YxTVba9w08gM0thXWa32J/1noJeAKY8+19hEwIi/Bek8xZUZ45d
+ wk5WWJmEX+/0qMdT/RaJZQjyJGOlWvAI6TLDN16ja0+bUM3W0jW0qtbyf9FISx7jaP2K97ArGRL
+ XvbHWRQcQkEq8cF3btRNlVHD4B621DuKav24=
+X-Google-Smtp-Source: AGHT+IE0NH1KmVJC3DCmTjDm6wH5PnLu3mS4z0Ocs9qs0hToB84sjJYwbyt33EyFQlKA2UBHQGanldHWdYJsxM1e0Mc=
+X-Received: by 2002:a05:651c:19a9:b0:2ef:3250:d0d4 with SMTP id
+ 38308e7fff4ca-2ef3250d296mr4719601fa.48.1721597239497; Sun, 21 Jul 2024
+ 14:27:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rockchip: bring-up to Radxa Rock 3C board
-To: Maxim Moskalets <maximmosk4@gmail.com>, Maxim Moskalets
- <Maxim.Moskalets@kaspersky.com>
-Cc: sjg@chromium.org, u-boot@lists.denx.de, trini@konsulko.com
-References: <20240721145353.6817-1-Maxim.Moskalets@kaspersky.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240721145353.6817-1-Maxim.Moskalets@kaspersky.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 669d63bb7025df85504b01bb
+References: <20240719231158.50416-1-heinrich.schuchardt@canonical.com>
+ <CANV2PTPOesJWcbYhVeiQWonccy3rWdQmN5qfuJtFN+JpnYNzbA@mail.gmail.com>
+In-Reply-To: <CANV2PTPOesJWcbYhVeiQWonccy3rWdQmN5qfuJtFN+JpnYNzbA@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sun, 21 Jul 2024 14:27:08 -0700
+Message-ID: <CANV2PTOWVCTWiyQoA4vEro61WwFSPBaGbrsBN-zXVwm2daHvJg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] board: fix compatible property Milk-V Mars CM
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Rick Chen <rick@andestech.com>, Hal Feng <hal.feng@starfivetech.com>, 
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,189 +94,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Maxim,
+P.S. my suggestion below
 
-On 2024-07-21 16:53, Maxim Moskalets wrote:
-> Just copy of rock-3a-rk3568_defconfig with dts for rock-3c-rk3566.
-> Separated from the original due to the use of different DTS, than
-> fixed primarily network support.
+On Fri, Jul 19, 2024 at 5:06=E2=80=AFPM E Shattow <lucent@gmail.com> wrote:
+>
+> On Fri, Jul 19, 2024 at 4:12=E2=80=AFPM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > For the Milk-V Mars CM (lite) we have only been copying sizeof(void *)
+> > bytes to the compatible property instead of the whole string list.
+>
+> This const char array must be so that we may get an accurate data
+> length with sizeof() but it highlights there are helper functions for
+> get of fdt stringlist and not for set of fdt stringlist.
+>
+> >
+> > Fixes: de3229599d4f ("board: add support for Milk-V Mars CM")
+> > Reported-by: E Shattow <lucent@gmail.com>
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  board/starfive/visionfive2/spl.c | 15 ++++++++++++---
+> >  1 file changed, 12 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfi=
+ve2/spl.c
+> > index b794b73b6bd..f55c6b5d34c 100644
+> > --- a/board/starfive/visionfive2/spl.c
+> > +++ b/board/starfive/visionfive2/spl.c
+> > @@ -170,23 +170,32 @@ void spl_fdt_fixup_mars_cm(void *fdt)
+> >  {
+> >         const char *compat;
+> >         const char *model;
+> > +       int compat_size;
+> >
+> >         spl_fdt_fixup_mars(fdt);
+> >
+> >         if (!get_mmc_size_from_eeprom()) {
+> >                 int offset;
+> > +               static const char
+> > +               compat_cm_lite[] =3D "milkv,mars-cm-lite\0starfive,jh71=
+10";
+> >
+> >                 model =3D "Milk-V Mars CM Lite";
+> > -               compat =3D "milkv,mars-cm-lite\0starfive,jh7110";
+> > +               compat =3D compat_cm_lite;
+> > +               compat_size =3D sizeof(compat_cm_lite);
+> >
+> >                 offset =3D fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins=
+/mmc0-pins-rest");
+> >                 /* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_N=
+ONE) */
+> >                 fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+> >         } else {
+> > +               static const char
+> > +               compat_cm[] =3D "milkv,mars-cm\0starfive,jh7110";
+> > +
+> >                 model =3D "Milk-V Mars CM";
+> > -               compat =3D "milkv,mars-cm\0starfive,jh7110";
+> > +               compat =3D compat_cm;
+> > +               compat_size =3D sizeof(compat_cm);
+> >         }
+> > -       fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compa=
+t, sizeof(compat));
+> > +       fdt_setprop(fdt, fdt_path_offset(fdt, "/"),
+> > +                   "compatible", compat, compat_size);
+> >         fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", mod=
+el);
+> >  }
+> >
+> > --
+> > 2.45.2
+> >
+>
+> -E
 
-What does this reference to? There has never been support for ROCK 3C in
-U-Boot, so nothing can have been fixed?
+What about something like as follows?
 
-Please change the patch subject to something like:
+ void spl_fdt_fixup_mars(void *fdt)
+ {
+-       static const char compat[] =3D "milkv,mars\0starfive,jh7110";
+        u32 phandle;
+        u8 i;
+        int offset;
+        int ret;
 
-  board: rockchip: Add Radxa ROCK 3C
+-       fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible",
+compat, sizeof(compat));
+-       fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
+-                          "Milk-V Mars");
++       offset =3D fdt_path_offset(fdt, "/");
++       fdt_setprop_string(fdt,    offset, "compatible", "milkv,mars");
++       fdt_appendprop_string(fdt, offset, "compatible", "starfive,jh7110")=
+;
++       fdt_setprop_string(fdt,    offset, "model",      "Milk-V Mars");
 
-and add some details about what board revision you have tested on.
+        /* gmac0 */
+        offset =3D fdt_path_offset(fdt, "/soc/clock-controller@17000000");
+@@ -164,30 +226,31 @@ void spl_fdt_fixup_mars(void *fdt)
+                                break;
+                }
+        }
+ }
 
-Also this is missing an entry in rockchip.rst:
+ void spl_fdt_fixup_mars_cm(void *fdt)
+ {
+-       const char *compat;
+-       const char *model;
++       int offset;
 
-     - Radxa ROCK 3C (rock-3c-rk3566)
+        spl_fdt_fixup_mars(fdt);
 
-and an entry in a MAINTAINERS-file.
+        if (!get_mmc_size_from_eeprom()) {
+-               int offset;
+-
+-               model =3D "Milk-V Mars CM Lite";
+-               compat =3D "milkv,mars-cm-lite\0starfive,jh7110";
++               offset =3D fdt_path_offset(fdt, "/");
++               fdt_setprop_string(fdt, offset, "compatible",
+"milkv,mars-cm-lite");
++               fdt_appendprop_string(fdt, offset, "compatible",
+"starfive,jh7110");
++               fdt_setprop_string(fdt, offset, "model", "Milk-V Mars CM Li=
+te");
 
-Feel free to add me as maintainer/reviewer of this board and fix/add
-below config values to match what I have carried in my tree for a few
-months now :-)
+                offset =3D fdt_path_offset(fdt,
+"/soc/pinctrl/mmc0-pins/mmc0-pins-rest");
+                /* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_NONE)=
+ */
+                fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+        } else {
+-               model =3D "Milk-V Mars CM";
+-               compat =3D "milkv,mars-cm\0starfive,jh7110";
++               offset =3D fdt_path_offset(fdt, "/");
++               fdt_setprop_string(fdt, offset, "compatible", "milkv,mars-c=
+m");
++               fdt_appendprop_string(fdt, offset, "compatible",
+"starfive,jh7110");
++               fdt_setprop_string(fdt, offset, "model", "Milk-V Mars CM");
+        }
+-       fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible",
+compat, sizeof(compat));
+-       fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model);
+ }
 
-Add a file arch/arm/dts/rk3566-rock-3c-u-boot.dtsi with:
+ void spl_fdt_fixup_version_a(void *fdt)
+@@ -235,6 +298,7 @@ void spl_fdt_fixup_version_a(void *fdt)
+                                break;
+                }
+        }
++
+ }
 
----
-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 
-#include "rk356x-u-boot.dtsi"
+And similar changes to the other "string1\0string2" settings in the
+same source file.
 
-&sfc {
-	flash@0 {
-		bootph-pre-ram;
-		bootph-some-ram;
-	};
-};
----
-
-to enable support for booting from SPI flash.
-
-> 
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> ---
->  configs/rock-3c-rk3566_defconfig | 93 ++++++++++++++++++++++++++++++++
->  1 file changed, 93 insertions(+)
->  create mode 100644 configs/rock-3c-rk3566_defconfig
-> 
-> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
-> new file mode 100644
-> index 00000000000..53a98029783
-> --- /dev/null
-> +++ b/configs/rock-3c-rk3566_defconfig
-> @@ -0,0 +1,93 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-rock-3a.dtb"
-
-This should be:
-
-CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
-
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-
-Please add:
-
-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-
-Please add:
-
-CONFIG_LED=y
-CONFIG_LED_GPIO=y
-
-to support the gpio-leds node.
-
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_BUS=4
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-
-Please add:
-
-CONFIG_SPI_FLASH_GIGADEVICE=y
-
-> +CONFIG_SPI_FLASH_MACRONIX=y
-
-and please add:
-
-CONFIG_SPI_FLASH_WINBOND=y
-
-to maximize support for custom SPI flash modules.
-
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-
-Please drop, there is no pwm node enabled in the device tree.
-
-Regards,
-Jonas
-
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-
+-E
