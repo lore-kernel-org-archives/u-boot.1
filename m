@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60768C3DA61
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 885CEC3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4980087F82;
+	by phobos.denx.de (Postfix) with ESMTP id B3B29884BC;
 	Sun, 21 Jul 2024 12:10:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m1cBp3jb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q+B42kMm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E19E288204; Sun, 21 Jul 2024 12:10:02 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id C2518883AF; Sun, 21 Jul 2024 12:10:03 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C6D87C69
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:09:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52EF9874AC
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4266b1f1b21so24515385e9.1
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:09:59 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-426636ef8c9so22419425e9.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556598; x=1722161398; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721556600; x=1722161400; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6CdBvkjQUifgeWrqo97YmGrR8yUAGLNSKg2BY5OiBFo=;
- b=m1cBp3jbu8IT4EwEM+/aGx51jHyJxwNHEGg9O/NJv922FOfKVJOixMwXxrN8vX7RkD
- c2dv6HMvATkKpyJII+EHTH8AIkSKazcJ7E6VIbU704qlQmwPsAt+hWuKPBpp9bQ7Fd97
- W+m+AtiNyVmFhpTPxnLDO/o4lZIC/iY+0f8ic=
+ bh=p4F/vUlfj3xNeNqf/7eTpyLbM/QqmxD5aRJYwP/qcjw=;
+ b=Q+B42kMmkLJatfGDkWrLuwUw1MJ62DlLdExeV5qq4DF4y6FrMFUzq9rQ1yPMm5VBFr
+ fvwl6dc2YkUXzfnYMtO5jZG97KuQtJgJ7t+bDwrm+cVB3QZm+n2NQsWOKwR9lWa7GQMx
+ RQybqklYaH7h9vg/aDzT3ShF41c4TqTdG1M4U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556598; x=1722161398;
+ d=1e100.net; s=20230601; t=1721556600; x=1722161400;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6CdBvkjQUifgeWrqo97YmGrR8yUAGLNSKg2BY5OiBFo=;
- b=YCu69NX0gVtzAydj7s5TTdMm7es7JyR1o6RT5TlCY2b5Ij1km+dpw/sjJN4gtZSD+7
- KPcZM89C+oPtA+HPZZPqSaQnu166epbReZmDu/8KYSmvny29+pa9s0C0MIX4tqFlVped
- LUacK+lVQxEyro/kCE3CjYkBQAnGqrR/jAHuWGK/9ESsfe5bto2Q1nClpMlzUrT/qZ6j
- E+WW4KqED8JeYeOXDU/PFYXyJZ4OAfnqYwP0U+gIk7kOg/e7fw80sc9ZhiT69+CY69Lb
- Vj1VnvDzQ3WZV25Kc1riplwsVOxO8V22ZylJMYsFYYaLBji55/zE19ZAkTVNhIaVnHXq
- 1TEA==
-X-Gm-Message-State: AOJu0Yzk52d5w/bkH6oIEKazByoktIKljBO5NviA1e/aHfvPeyeNVnzG
- VpZCUrdqm5gJJyKVFYk+j4a4XzRWvAbIZQefpXnHQ9nno6uRY9mNvwQ+3Xyk8GVC/7gSIAEQXbI
+ bh=p4F/vUlfj3xNeNqf/7eTpyLbM/QqmxD5aRJYwP/qcjw=;
+ b=VPFdNLu3rcdm96dvgC2OJ/QPwVrf7OJy7RfzruV7FqEBCxTGe93iRQC+WNcRFnGqLg
+ DUEP9IPMSJhF+Teu8Z4FLvJlJwdlizKbM7EZzSeyuZFewQaxerTERfsSM4/B79JuefMI
+ 9qyfigStAYWpo3DmGes4FmEU4eJf+pvCHDjuFsGSkPeuyecx48YBn2TBhtIWI74FH2Us
+ DbXBMWUVsAp78W1BkVJ5eIlNfCc3VBZMewd7ASKiwvkZ40r1YW/eSIQchxEAmCgOwY4a
+ JGIKVJb+MvXcfD+vR9uzhZv48GbWYyBgh2TV4b9qyrtaUVE3G5GsTEaKeVoc6U8XZ338
+ 7UIg==
+X-Gm-Message-State: AOJu0YwXBz6qYl9jJd0ZmLe+l9vEU+n/8C8jYitI1OBYDk3XLxik2OlR
+ bAfP+8UEs6fi1AdH3Kq49jnzXoCfSWYPrpOzGH3lzimBI8BrNVwLkmT919CITdwn+lFGeQt4ooA
  =
-X-Google-Smtp-Source: AGHT+IEdpR9Crm5SqCR8LRtC2LkejY9PoLuvNAn5Yrax75VIkXilRtMXIgQi6SHmHsCaiWbidVLbLQ==
-X-Received: by 2002:a05:600c:5116:b0:426:6f38:8974 with SMTP id
- 5b1f17b1804b1-427dc512d1dmr22957435e9.6.1721556598435; 
- Sun, 21 Jul 2024 03:09:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHUKvbBocWQL4HJG6xoblUUkKtdyEeiPJBgvJHbqE77Qq92d8IVl86FnICGgRZQfMmsk86nGQ==
+X-Received: by 2002:a05:600c:4e86:b0:426:6f17:531 with SMTP id
+ 5b1f17b1804b1-427dc5204aemr24704795e9.13.1721556600028; 
+ Sun, 21 Jul 2024 03:10:00 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.09.57
+ 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.09.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 03:09:57 -0700 (PDT)
+ Sun, 21 Jul 2024 03:09:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 09/21] upl: Add support for reading a upl handoff
-Date: Sun, 21 Jul 2024 11:09:27 +0100
-Message-Id: <20240721100940.3202027-10-sjg@chromium.org>
+Subject: [PATCH v3 10/21] upl: Add support for writing a upl handoff
+Date: Sun, 21 Jul 2024 11:09:28 +0100
+Message-Id: <20240721100940.3202027-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240721100940.3202027-1-sjg@chromium.org>
 References: <20240721100940.3202027-1-sjg@chromium.org>
@@ -92,196 +92,67 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Universal Payload provides a standard way of handing off control between
-two firmware phases. Add support for reading the handoff information into
+two firmware phases. Add support for writing the handoff information from
 a structure.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Allow up.h to be built by the host build
+(no changes since v1)
 
- MAINTAINERS               |   7 +
- boot/Kconfig              |  19 ++
- boot/Makefile             |   3 +
- boot/upl_common.c         |  60 ++++
- boot/upl_common.h         |  24 ++
- boot/upl_read.c           | 588 ++++++++++++++++++++++++++++++++++++++
- configs/sandbox_defconfig |   1 +
- include/upl.h             | 355 +++++++++++++++++++++++
- 8 files changed, 1057 insertions(+)
- create mode 100644 boot/upl_common.c
- create mode 100644 boot/upl_common.h
- create mode 100644 boot/upl_read.c
- create mode 100644 include/upl.h
+ boot/Kconfig     |   8 +
+ boot/Makefile    |   1 +
+ boot/upl_write.c | 622 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 631 insertions(+)
+ create mode 100644 boot/upl_write.c
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index a6e47e8a217..070a766a76f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1701,6 +1701,13 @@ M:	Neha Malcom Francis <n-francis@ti.com>
- S:	Maintained
- F:	drivers/ufs/
- 
-+UPL
-+M:	Simon Glass <sjg@chromium.org>
-+S:	Maintained
-+T:	git https://source.denx.de/u-boot/custodians/u-boot-dm.git
-+F:	boot/upl*
-+F:	include/upl.h
-+
- USB
- M:	Marek Vasut <marex@denx.de>
- S:	Maintained
 diff --git a/boot/Kconfig b/boot/Kconfig
-index def483a41f1..6e907b45095 100644
+index 6e907b45095..fa4f766054c 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -736,6 +736,25 @@ config BOOTMETH_SCRIPT
- 	  This provides a way to try out standard boot on an existing boot flow.
- 	  It is not enabled by default to save space.
+@@ -739,6 +739,7 @@ config BOOTMETH_SCRIPT
+ config UPL
+ 	bool "upl - Universal Payload Specification"
+ 	imply UPL_READ
++	imply UPL_WRITE
+ 	help
+ 	  Provides support for UPL payloads and handoff information. U-Boot
+ 	  supports generating and accepting handoff information. The mkimage
+@@ -753,6 +754,13 @@ config UPL_READ
+ 	  which can be used elsewhere in U-Boot. This is just the reading
+ 	  implementation, useful for trying it out.
  
-+config UPL
-+	bool "upl - Universal Payload Specification"
-+	imply UPL_READ
++config UPL_WRITE
++	bool "upl - Support writing a Universal Payload handoff"
 +	help
-+	  Provides support for UPL payloads and handoff information. U-Boot
-+	  supports generating and accepting handoff information. The mkimage
-+	  tool will eventually support creating payloads.
-+
-+if UPL
-+
-+config UPL_READ
-+	bool "upl - Support reading a Universal Payload handoff"
-+	help
-+	  Provides support for decoding a UPL-format payload into a C structure
-+	  which can be used elsewhere in U-Boot. This is just the reading
++	  Provides support for encoding a UPL-format payload from a C structure
++	  so it can be passed to another program. This is just the writing
 +	  implementation, useful for trying it out.
 +
-+endif  # UPL
-+
- endif # BOOTSTD
+ endif  # UPL
  
- config LEGACY_IMAGE_FORMAT
+ endif # BOOTSTD
 diff --git a/boot/Makefile b/boot/Makefile
-index 75d1cd46fab..97b52a3404c 100644
+index 97b52a3404c..b8b63d31e88 100644
 --- a/boot/Makefile
 +++ b/boot/Makefile
-@@ -43,6 +43,9 @@ endif
- obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
- obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) += fdt_simplefb.o
+@@ -45,6 +45,7 @@ obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) += fdt_simplefb.o
  
-+obj-$(CONFIG_$(SPL_TPL_)UPL) += upl_common.o
-+obj-$(CONFIG_$(SPL_TPL_)UPL_READ) += upl_read.o
-+
+ obj-$(CONFIG_$(SPL_TPL_)UPL) += upl_common.o
+ obj-$(CONFIG_$(SPL_TPL_)UPL_READ) += upl_read.o
++obj-$(CONFIG_$(SPL_TPL_)UPL_WRITE) += upl_write.o
+ 
  obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += image-fdt.o
  obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) += fdt_region.o
- obj-$(CONFIG_$(SPL_TPL_)FIT) += image-fit.o
-diff --git a/boot/upl_common.c b/boot/upl_common.c
+diff --git a/boot/upl_write.c b/boot/upl_write.c
 new file mode 100644
-index 00000000000..3924423abd5
+index 00000000000..7d637c15ba0
 --- /dev/null
-+++ b/boot/upl_common.c
-@@ -0,0 +1,60 @@
++++ b/boot/upl_write.c
+@@ -0,0 +1,622 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * UPL handoff command functions
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#define LOG_CATEGORY UCLASS_BOOTSTD
-+
-+#include <string.h>
-+#include <upl.h>
-+
-+/* Names of bootmodes */
-+const char *const bootmode_names[UPLBM_COUNT] = {
-+	[UPLBM_FULL]	= "full",
-+	[UPLBM_MINIMAL]	= "minimal",
-+	[UPLBM_FAST]	= "fast",
-+	[UPLBM_DIAG]	= "diag",
-+	[UPLBM_DEFAULT]	= "default",
-+	[UPLBM_S2]	= "s2",
-+	[UPLBM_S3]	= "s3",
-+	[UPLBM_S4]	= "s4",
-+	[UPLBM_S5]	= "s5",
-+	[UPLBM_FACTORY]	= "factory",
-+	[UPLBM_FLASH]	= "flash",
-+	[UPLBM_RECOVERY] = "recovery",
-+};
-+
-+/* Names of memory usages */
-+const char *const usage_names[UPLUS_COUNT] = {
-+	[UPLUS_ACPI_RECLAIM]	= "acpi-reclaim",
-+	[UPLUS_ACPI_NVS]	= "acpi-nvs",
-+	[UPLUS_BOOT_CODE]	= "boot-code",
-+	[UPLUS_BOOT_DATA]	= "boot-data",
-+	[UPLUS_RUNTIME_CODE]	= "runtime-code",
-+	[UPLUS_RUNTIME_DATA]	= "runtime-data",
-+};
-+
-+/* Names of access types */
-+const char *const access_types[UPLUS_COUNT] = {
-+	[UPLAT_MMIO]	= "mmio",
-+	[UPLAT_IO]	= "io",
-+};
-+
-+/* Names of graphics formats */
-+const char *const graphics_formats[UPLUS_COUNT] = {
-+	[UPLGF_ARGB32]	= "a8r8g8b8",
-+	[UPLGF_ABGR32]	= "a8b8g8r8",
-+	[UPLGF_ABGR64]	= "a16b16g16r16",
-+};
-+
-+void upl_init(struct upl *upl)
-+{
-+	memset(upl, '\0', sizeof(struct upl));
-+	alist_init_struct(&upl->image, struct upl_image);
-+	alist_init_struct(&upl->mem, struct upl_mem);
-+	alist_init_struct(&upl->memmap, struct upl_memmap);
-+	alist_init_struct(&upl->memres, struct upl_memres);
-+}
-diff --git a/boot/upl_common.h b/boot/upl_common.h
-new file mode 100644
-index 00000000000..cc517dc1de9
---- /dev/null
-+++ b/boot/upl_common.h
-@@ -0,0 +1,24 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * UPL handoff command functions
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#ifndef __UPL_COMMON_H
-+#define __UPL_COMMON_H
-+
-+/* Names of bootmodes */
-+extern const char *const bootmode_names[UPLBM_COUNT];
-+
-+/* Names of memory usages */
-+extern const char *const usage_names[UPLUS_COUNT];
-+
-+/* Names of access types */
-+extern const char *const access_types[UPLUS_COUNT];
-+
-+/* Names of graphics formats */
-+extern const char *const graphics_formats[UPLUS_COUNT];
-+
-+#endif /* __UPL_COMMON_H */
-diff --git a/boot/upl_read.c b/boot/upl_read.c
-new file mode 100644
-index 00000000000..2d8caa6ef11
---- /dev/null
-+++ b/boot/upl_read.c
-@@ -0,0 +1,588 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * UPL handoff parsing
++ * UPL handoff generation
 + *
 + * Copyright 2024 Google LLC
 + * Written by Simon Glass <sjg@chromium.org>
@@ -295,178 +166,148 @@ index 00000000000..2d8caa6ef11
 +#include "upl_common.h"
 +
 +/**
-+ * read_addr() - Read an address
++ * write_addr() - Write an address
 + *
-+ * Reads an address in the correct format, either 32- or 64-bit
++ * Writes an address in the correct format, either 32- or 64-bit
 + *
 + * @upl: UPL state
-+ * @node: Node to read from
-+ * @prop: Property name to read
-+ * @addr: Place to put the address
++ * @node: Node to write to
++ * @prop: Property name to write
++ * @addr: Address to write
 + * Return: 0 if OK, -ve on error
 + */
-+static int read_addr(const struct upl *upl, ofnode node, const char *prop,
-+		     ulong *addrp)
++static int write_addr(const struct upl *upl, ofnode node, const char *prop,
++		      ulong addr)
 +{
 +	int ret;
 +
-+	if (upl->addr_cells == 1) {
-+		u32 val;
-+
-+		ret = ofnode_read_u32(node, prop, &val);
-+		if (!ret)
-+			*addrp = val;
-+	} else {
-+		u64 val;
-+
-+		ret = ofnode_read_u64(node, prop, &val);
-+		if (!ret)
-+			*addrp = val;
-+	}
++	if (upl->addr_cells == 1)
++		ret = ofnode_write_u32(node, prop, addr);
++	else
++		ret = ofnode_write_u64(node, prop, addr);
 +
 +	return ret;
 +}
 +
 +/**
-+ * read_size() - Read a size
++ * write_size() - Write a size
 + *
-+ * Reads a size in the correct format, either 32- or 64-bit
++ * Writes a size in the correct format, either 32- or 64-bit
 + *
 + * @upl: UPL state
-+ * @node: Node to read from
-+ * @prop: Property name to read
-+ * @addr: Place to put the size
++ * @node: Node to write to
++ * @prop: Property name to write
++ * @size: Size to write
 + * Return: 0 if OK, -ve on error
 + */
-+static int read_size(const struct upl *upl, ofnode node, const char *prop,
-+		     ulong *sizep)
++static int write_size(const struct upl *upl, ofnode node, const char *prop,
++		      ulong size)
 +{
 +	int ret;
 +
-+	if (upl->size_cells == 1) {
-+		u32 val;
-+
-+		ret = ofnode_read_u32(node, prop, &val);
-+		if (!ret)
-+			*sizep = val;
-+	} else {
-+		u64 val;
-+
-+		ret = ofnode_read_u64(node, prop, &val);
-+		if (!ret)
-+			*sizep = val;
-+	}
++	if (upl->size_cells == 1)
++		ret = ofnode_write_u32(node, prop, size);
++	else
++		ret = ofnode_write_u64(node, prop, size);
 +
 +	return ret;
 +}
 +
 +/**
-+ * ofnode_read_bitmask() - Read a bit mask from a string list
++ * ofnode_write_bitmask() - Write a bit mask as a string list
 + *
-+ * @node: Node to read from
-+ * @prop: Property name to read
++ * @node: Node to write to
++ * @prop: Property name to write
 + * @names: Array of names for each bit
 + * @count: Number of array entries
-+ * @value: Returns resulting bit-mask value on success
++ * @value: Bit-mask value to write
 + * Return: 0 if OK, -EINVAL if a bit number is not defined, -ENOSPC if the
-+ * string is too long for the (internal) buffer, -EINVAL if no such property
++ * string is too long for the (internal) buffer
 + */
-+static int ofnode_read_bitmask(ofnode node, const char *prop,
-+			       const char *const names[], uint count,
-+			       uint *valuep)
++static int ofnode_write_bitmask(ofnode node, const char *prop,
++				const char *const names[], uint count,
++				uint value)
 +{
-+	const char **list;
-+	const char **strp;
-+	uint val;
++	char buf[128];
++	char *ptr, *end = buf + sizeof(buf);
 +	uint bit;
 +	int ret;
 +
-+	ret = ofnode_read_string_list(node, prop, &list);
-+	if (ret < 0)
-+		return log_msg_ret("rea", ret);
++	ptr = buf;
++	for (bit = 0; bit < count; bit++) {
++		if (value & BIT(bit)) {
++			const char *str = names[bit];
++			uint len;
 +
-+	val = 0;
-+	for (strp = list; *strp; strp++) {
-+		const char *str = *strp;
-+		bool found = false;
-+
-+		for (bit = 0; bit < count; bit++) {
-+			if (!strcmp(str, names[bit])) {
-+				found = true;
-+				break;
++			if (!str) {
++				log_debug("Unnamed bit number %d\n", bit);
++				return log_msg_ret("bit", -EINVAL);
 +			}
++			len = strlen(str) + 1;
++			if (ptr + len > end) {
++				log_debug("String array too long\n");
++				return log_msg_ret("bit", -ENOSPC);
++			}
++
++			memcpy(ptr, str, len);
++			ptr += len;
 +		}
-+		if (found)
-+			val |= BIT(bit);
-+		else
-+			log_warning("%s/%s: Invalid value '%s'\n",
-+				    ofnode_get_name(node), prop, str);
 +	}
-+	*valuep = val;
++
++	ret = ofnode_write_prop(node, prop, buf, ptr - buf, true);
++	if (ret)
++		return log_msg_ret("wri", ret);
 +
 +	return 0;
 +}
 +
 +/**
-+ * ofnode_read_value() - Read a string value as an int using a lookup
++ * ofnode_write_value() - Write an int as a string value using a lookup
 + *
-+ * @node: Node to read from
-+ * @prop: Property name to read
++ * @node: Node to write to
++ * @prop: Property name to write
 + * @names: Array of names for each int value
 + * @count: Number of array entries
-+ * @valuep: Returns int value read
-+ * Return: 0 if OK, -EINVAL if a bit number is not defined, -ENOENT if the
-+ * property does not exist
++ * @value: Int value to write
++ * Return: 0 if OK, -EINVAL if a bit number is not defined, -ENOSPC if the
++ * string is too long for the (internal) buffer
 + */
-+static int ofnode_read_value(ofnode node, const char *prop,
-+			     const char *const names[], uint count,
-+			     uint *valuep)
++static int ofnode_write_value(ofnode node, const char *prop,
++			      const char *const names[], uint count,
++			      uint value)
 +{
 +	const char *str;
-+	int i;
-+
-+	str = ofnode_read_string(node, prop);
-+	if (!str)
-+		return log_msg_ret("rd", -ENOENT);
-+
-+	for (i = 0; i < count; i++) {
-+		if (!strcmp(names[i], str)) {
-+			*valuep = i;
-+			return 0;
-+		}
-+	}
-+
-+	log_debug("Unnamed value '%s'\n", str);
-+	return log_msg_ret("val", -EINVAL);
-+}
-+
-+static int read_uint(ofnode node, const char *prop, uint *valp)
-+{
-+	u32 val;
 +	int ret;
 +
-+	ret = ofnode_read_u32(node, prop, &val);
++	if (value >= count) {
++		log_debug("Value of range %d\n", value);
++		return log_msg_ret("val", -ERANGE);
++	}
++	str = names[value];
++	if (!str) {
++		log_debug("Unnamed value %d\n", value);
++		return log_msg_ret("val", -EINVAL);
++	}
++	ret = ofnode_write_string(node, prop, str);
 +	if (ret)
-+		return ret;
-+	*valp = val;
++		return log_msg_ret("wri", ret);
 +
 +	return 0;
 +}
 +
 +/**
-+ * decode_root_props() - Decode root properties from the tree
++ * add_root_props() - Add root properties to the tree
 + *
-+ * @upl: UPL state
-+ * @node: Node to decode
++ * @node: Node to add to
 + * Return 0 if OK, -ve on error
 + */
-+static int decode_root_props(struct upl *upl, ofnode node)
++static int add_root_props(const struct upl *upl, ofnode node)
 +{
 +	int ret;
 +
-+	ret = read_uint(node, UPLP_ADDRESS_CELLS, &upl->addr_cells);
++	ret = ofnode_write_u32(node, UPLP_ADDRESS_CELLS, upl->addr_cells);
 +	if (!ret)
-+		ret = read_uint(node, UPLP_SIZE_CELLS, &upl->size_cells);
++		ret = ofnode_write_u32(node, UPLP_SIZE_CELLS, upl->size_cells);
 +	if (ret)
 +		return log_msg_ret("cel", ret);
 +
@@ -474,347 +315,391 @@ index 00000000000..2d8caa6ef11
 +}
 +
 +/**
-+ * decode_root_props() - Decode UPL parameters from the tree
++ * add_upl_params() - Add UPL parameters node
 + *
 + * @upl: UPL state
-+ * @node: Node to decode
++ * @options: /options node to add to
 + * Return 0 if OK, -ve on error
 + */
-+static int decode_upl_params(struct upl *upl, ofnode options)
++static int add_upl_params(const struct upl *upl, ofnode options)
 +{
 +	ofnode node;
 +	int ret;
 +
-+	node = ofnode_find_subnode(options, UPLN_UPL_PARAMS);
-+	if (!ofnode_valid(node))
-+		return log_msg_ret("par", -EINVAL);
-+	log_debug("decoding '%s'\n", ofnode_get_name(node));
-+
-+	ret = read_addr(upl, node, UPLP_SMBIOS, &upl->smbios);
++	ret = ofnode_add_subnode(options, UPLN_UPL_PARAMS, &node);
 +	if (ret)
-+		return log_msg_ret("smb", ret);
-+	ret = read_addr(upl, node, UPLP_ACPI, &upl->acpi);
-+	if (ret)
-+		return log_msg_ret("acp", ret);
-+	ret = ofnode_read_bitmask(node, UPLP_BOOTMODE, bootmode_names,
-+				  UPLBM_COUNT, &upl->bootmode);
-+	if (ret)
-+		return log_msg_ret("boo", ret);
-+	ret = read_uint(node, UPLP_ADDR_WIDTH, &upl->addr_width);
-+	if (ret)
-+		return log_msg_ret("add", ret);
-+	ret = read_uint(node, UPLP_ACPI_NVS_SIZE, &upl->acpi_nvs_size);
-+	if (ret)
-+		return log_msg_ret("nvs", ret);
++		return log_msg_ret("img", ret);
 +
-+	return 0;
-+}
-+
-+/**
-+ * decode_upl_images() - Decode /options/upl-image nodes
-+ *
-+ * @node: /options node in which to look for the node
-+ * Return 0 if OK, -ve on error
-+ */
-+static int decode_upl_images(struct upl *upl, ofnode options)
-+{
-+	ofnode node, images;
-+	int ret;
-+
-+	images = ofnode_find_subnode(options, UPLN_UPL_IMAGE);
-+	if (!ofnode_valid(images))
-+		return log_msg_ret("img", -EINVAL);
-+	log_debug("decoding '%s'\n", ofnode_get_name(images));
-+
-+	ret = read_addr(upl, images, UPLP_FIT, &upl->fit);
++	ret = write_addr(upl, node, UPLP_SMBIOS, upl->smbios);
 +	if (!ret)
-+		ret = read_uint(images, UPLP_CONF_OFFSET, &upl->conf_offset);
++		ret = write_addr(upl, node, UPLP_ACPI, upl->acpi);
++	if (!ret && upl->bootmode)
++		ret = ofnode_write_bitmask(node, UPLP_BOOTMODE, bootmode_names,
++					   UPLBM_COUNT, upl->bootmode);
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_ADDR_WIDTH, upl->addr_width);
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_ACPI_NVS_SIZE,
++				       upl->acpi_nvs_size);
 +	if (ret)
 +		return log_msg_ret("cnf", ret);
 +
-+	ofnode_for_each_subnode(node, images) {
-+		struct upl_image img;
++	return 0;
++}
 +
-+		ret = read_addr(upl, node, UPLP_LOAD, &img.load);
++/**
++ * add_upl_image() - Add /options/upl-image nodes and properties to the tree
++ *
++ * @upl: UPL state
++ * @node: /options node to add to
++ * Return 0 if OK, -ve on error
++ */
++static int add_upl_image(const struct upl *upl, ofnode options)
++{
++	ofnode node;
++	int ret, i;
++
++	ret = ofnode_add_subnode(options, UPLN_UPL_IMAGE, &node);
++	if (ret)
++		return log_msg_ret("img", ret);
++
++	if (upl->fit)
++		ret = ofnode_write_u32(node, UPLP_FIT, upl->fit);
++	if (!ret && upl->conf_offset)
++		ret = ofnode_write_u32(node, UPLP_CONF_OFFSET,
++				       upl->conf_offset);
++	if (ret)
++		return log_msg_ret("cnf", ret);
++
++	for (i = 0; i < upl->image.count; i++) {
++		const struct upl_image *img = alist_get(&upl->image, i,
++							struct upl_image);
++		ofnode subnode;
++		char name[10];
++
++		snprintf(name, sizeof(name), UPLN_IMAGE "-%d", i + 1);
++		ret = ofnode_add_subnode(node, name, &subnode);
++		if (ret)
++			return log_msg_ret("sub", ret);
++
++		ret = write_addr(upl, subnode, UPLP_LOAD, img->load);
 +		if (!ret)
-+			ret = read_size(upl, node, UPLP_SIZE, &img.size);
-+		if (!ret)
-+			ret = read_uint(node, UPLP_OFFSET, &img.offset);
-+		img.description = ofnode_read_string(node, UPLP_DESCRIPTION);
-+		if (!img.description)
++			ret = write_size(upl, subnode, UPLP_SIZE, img->size);
++		if (!ret && img->offset)
++			ret = ofnode_write_u32(subnode, UPLP_OFFSET,
++					       img->offset);
++		ret = ofnode_write_string(subnode, UPLP_DESCRIPTION,
++					  img->description);
++		if (ret)
 +			return log_msg_ret("sim", ret);
-+		if (!alist_add(&upl->image, img, struct upl_image))
-+			return log_msg_ret("img", -ENOMEM);
 +	}
 +
 +	return 0;
 +}
 +
 +/**
-+ * decode_addr_size() - Decide a set of addr/size pairs
++ * buffer_addr_size() - Generate a set of addr/size pairs
 + *
-+ * Each base/size value from the devicetree is written to the region list
++ * Each base/size value from each region is written to the buffer in a suitable
++ * format to be written to the devicetree
 + *
 + * @upl: UPL state
-+ * @buf: Bytes to decode
-+ * @size: Number of bytes to decode
-+ * @regions: List of regions to process (struct memregion)
-+ * Returns: number of regions found, if OK, else -ve on error
++ * @buf: Buffer to write to
++ * @size: Buffer size
++ * @num_regions: Number of regions to process
++ * @region: List of regions to process (struct memregion)
++ * Returns: Number of bytes written, or -ENOSPC if the buffer is too small
 + */
-+static int decode_addr_size(const struct upl *upl, const char *buf, int size,
-+			    struct alist *regions)
++static int buffer_addr_size(const struct upl *upl, char *buf, int size,
++			    uint num_regions, const struct alist *region)
 +{
-+	const char *ptr, *end = buf + size;
++	char *ptr, *end = buf + size;
 +	int i;
 +
-+	alist_init_struct(regions, struct memregion);
 +	ptr = buf;
-+	for (i = 0; ptr < end; i++) {
-+		struct memregion reg;
++	for (i = 0; i < num_regions; i++) {
++		const struct memregion *reg = alist_get(region, i,
++							struct memregion);
 +
 +		if (upl->addr_cells == 1)
-+			reg.base = fdt32_to_cpu(*(u32 *)ptr);
++			*(u32 *)ptr = cpu_to_fdt32(reg->base);
 +		else
-+			reg.base = fdt64_to_cpu(*(u64 *)ptr);
++			*(u64 *)ptr = cpu_to_fdt64(reg->base);
 +		ptr += upl->addr_cells * sizeof(u32);
 +
 +		if (upl->size_cells == 1)
-+			reg.size = fdt32_to_cpu(*(u32 *)ptr);
++			*(u32 *)ptr = cpu_to_fdt32(reg->size);
 +		else
-+			reg.size = fdt64_to_cpu(*(u64 *)ptr);
++			*(u64 *)ptr = cpu_to_fdt64(reg->size);
 +		ptr += upl->size_cells * sizeof(u32);
 +		if (ptr > end)
 +			return -ENOSPC;
-+
-+		if (!alist_add(regions, reg, struct memregion))
-+			return log_msg_ret("reg", -ENOMEM);
 +	}
 +
-+	return i;
++	return ptr - buf;
 +}
 +
 +/**
-+ * node_matches_at() - Check if a node name matches "base@..."
-+ *
-+ * Return: true if the node name matches the base string followed by an @ sign;
-+ * false otherwise
-+ */
-+static bool node_matches_at(ofnode node, const char *base)
-+{
-+	const char *name = ofnode_get_name(node);
-+	int len = strlen(base);
-+
-+	return !strncmp(base, name, len) && name[len] == '@';
-+}
-+
-+/**
-+ * decode_upl_memory_node() - Decode a /memory node from the tree
++ * add_upl_memory() - Add /memory nodes to the tree
 + *
 + * @upl: UPL state
-+ * @node: Node to decode
++ * @root: Parent node to contain the new /memory nodes
 + * Return 0 if OK, -ve on error
 + */
-+static int decode_upl_memory_node(struct upl *upl, ofnode node)
++static int add_upl_memory(const struct upl *upl, ofnode root)
 +{
-+	struct upl_mem mem;
-+	const char *buf;
-+	int size, len;
++	int i;
 +
-+	buf = ofnode_read_prop(node, UPLP_REG, &size);
-+	if (!buf) {
-+		log_warning("Node '%s': Missing '%s' property\n",
-+			    ofnode_get_name(node), UPLP_REG);
-+		return log_msg_ret("reg", -EINVAL);
-+	}
-+	len = decode_addr_size(upl, buf, size, &mem.region);
-+	if (len < 0)
-+		return log_msg_ret("buf", len);
-+	mem.hotpluggable = ofnode_read_bool(node, UPLP_HOTPLUGGABLE);
-+	if (!alist_add(&upl->mem, mem, struct upl_mem))
-+		return log_msg_ret("mem", -ENOMEM);
++	for (i = 0; i < upl->mem.count; i++) {
++		const struct upl_mem *mem = alist_get(&upl->mem, i,
++						      struct upl_mem);
++		char buf[mem->region.count * sizeof(64) * 2];
++		const struct memregion *first;
++		char name[26];
++		int ret, len;
++		ofnode node;
 +
-+	return 0;
-+}
-+
-+/**
-+ * decode_upl_memmap() - Decode memory-map nodes from the tree
-+ *
-+ * @upl: UPL state
-+ * @root: Parent node containing the /memory-map nodes
-+ * Return 0 if OK, -ve on error
-+ */
-+static int decode_upl_memmap(struct upl *upl, ofnode root)
-+{
-+	ofnode node;
-+
-+	ofnode_for_each_subnode(node, root) {
-+		struct upl_memmap memmap;
-+		int size, len, ret;
-+		const char *buf;
-+
-+		memmap.name = ofnode_get_name(node);
-+		memmap.usage = 0;
-+
-+		buf = ofnode_read_prop(node, UPLP_REG, &size);
-+		if (!buf) {
-+			log_warning("Node '%s': Missing '%s' property\n",
-+				    ofnode_get_name(node), UPLP_REG);
-+			continue;
++		if (!mem->region.count) {
++			log_debug("Memory %d has no regions\n", i);
++			return log_msg_ret("reg", -EINVAL);
 +		}
++		first = alist_get(&mem->region, 0, struct memregion);
++		sprintf(name, UPLN_MEMORY "@0x%lx", first->base);
++		ret = ofnode_add_subnode(root, name, &node);
++		if (ret)
++			return log_msg_ret("mem", ret);
 +
-+		len = decode_addr_size(upl, buf, size, &memmap.region);
++		len = buffer_addr_size(upl, buf, sizeof(buf), mem->region.count,
++				       &mem->region);
 +		if (len < 0)
 +			return log_msg_ret("buf", len);
-+		ret = ofnode_read_bitmask(node, UPLP_USAGE, usage_names,
-+					  UPLUS_COUNT, &memmap.usage);
-+		if (ret && ret != -EINVAL)	/* optional property */
-+			return log_msg_ret("bit", ret);
 +
-+		if (!alist_add(&upl->memmap, memmap, struct upl_memmap))
-+			return log_msg_ret("mmp", -ENOMEM);
++		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
++		if (!ret && mem->hotpluggable)
++			ret = ofnode_write_bool(node, UPLP_HOTPLUGGABLE,
++						mem->hotpluggable);
++		if (ret)
++			return log_msg_ret("lst", ret);
 +	}
 +
 +	return 0;
 +}
 +
 +/**
-+ * decode_upl_memres() - Decode reserved-memory nodes from the tree
++ * add_upl_memmap() - Add memory-map nodes to the tree
 + *
 + * @upl: UPL state
-+ * @root: Parent node containing the reserved-memory nodes
++ * @root: Parent node to contain the new /memory-map node and its subnodes
 + * Return 0 if OK, -ve on error
 + */
-+static int decode_upl_memres(struct upl *upl, ofnode root)
++static int add_upl_memmap(const struct upl *upl, ofnode root)
 +{
-+	ofnode node;
++	ofnode mem_node;
++	int i, ret;
 +
-+	ofnode_for_each_subnode(node, root) {
-+		struct upl_memres memres;
-+		const char *buf;
-+		int size, len;
++	if (!upl->memmap.count)
++		return 0;
++	ret = ofnode_add_subnode(root, UPLN_MEMORY_MAP, &mem_node);
++	if (ret)
++		return log_msg_ret("img", ret);
 +
-+		log_debug("decoding '%s'\n", ofnode_get_name(node));
-+		memres.name = ofnode_get_name(node);
++	for (i = 0; i < upl->memmap.count; i++) {
++		const struct upl_memmap *memmap = alist_get(&upl->memmap, i,
++							struct upl_memmap);
++		char buf[memmap->region.count * sizeof(64) * 2];
++		const struct memregion *first;
++		char name[26];
++		int ret, len;
++		ofnode node;
 +
-+		buf = ofnode_read_prop(node, UPLP_REG, &size);
-+		if (!buf) {
-+			log_warning("Node '%s': Missing 'reg' property\n",
-+				    ofnode_get_name(node));
-+			continue;
++		if (!memmap->region.count) {
++			log_debug("Memory %d has no regions\n", i);
++			return log_msg_ret("reg", -EINVAL);
 +		}
++		first = alist_get(&memmap->region, 0, struct memregion);
++		sprintf(name, "%s@0x%lx", memmap->name, first->base);
++		ret = ofnode_add_subnode(mem_node, name, &node);
++		if (ret)
++			return log_msg_ret("memmap", ret);
 +
-+		len = decode_addr_size(upl, buf, size, &memres.region);
++		len = buffer_addr_size(upl, buf, sizeof(buf),
++				       memmap->region.count, &memmap->region);
 +		if (len < 0)
 +			return log_msg_ret("buf", len);
-+		memres.no_map = ofnode_read_bool(node, UPLP_NO_MAP);
-+
-+		if (!alist_add(&upl->memres, memres, struct upl_memres))
-+			return log_msg_ret("mre", -ENOMEM);
++		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
++		if (!ret && memmap->usage)
++			ret = ofnode_write_bitmask(node, UPLP_USAGE,
++						   usage_names,
++						   UPLUS_COUNT, memmap->usage);
++		if (ret)
++			return log_msg_ret("lst", ret);
 +	}
 +
 +	return 0;
 +}
 +
 +/**
-+ * decode_upl_serial() - Decode the serial node
++ * add_upl_memres() - Add /memory-reserved nodes to the tree
 + *
 + * @upl: UPL state
-+ * @root: Parent node contain node
++ * @root: Parent node to contain the new node
 + * Return 0 if OK, -ve on error
 + */
-+static int decode_upl_serial(struct upl *upl, ofnode node)
++static int add_upl_memres(const struct upl *upl, ofnode root,
++			  bool skip_existing)
 +{
-+	struct upl_serial *ser = &upl->serial;
-+	const char *buf;
-+	int len, size;
++	ofnode mem_node;
++	int i, ret;
++
++	if (!upl->memmap.count)
++		return 0;
++	ret = ofnode_add_subnode(root, UPLN_MEMORY_RESERVED, &mem_node);
++	if (ret) {
++		if (skip_existing && ret == -EEXIST)
++			return 0;
++		return log_msg_ret("img", ret);
++	}
++
++	for (i = 0; i < upl->memres.count; i++) {
++		const struct upl_memres *memres = alist_get(&upl->memres, i,
++							struct upl_memres);
++		char buf[memres->region.count * sizeof(64) * 2];
++		const struct memregion *first;
++		char name[26];
++		int ret, len;
++		ofnode node;
++
++		if (!memres->region.count) {
++			log_debug("Memory %d has no regions\n", i);
++			return log_msg_ret("reg", -EINVAL);
++		}
++		first = alist_get(&memres->region, 0, struct memregion);
++		sprintf(name, "%s@0x%lx", memres->name, first->base);
++		ret = ofnode_add_subnode(mem_node, name, &node);
++		if (ret)
++			return log_msg_ret("memres", ret);
++
++		len = buffer_addr_size(upl, buf, sizeof(buf),
++				       memres->region.count, &memres->region);
++		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
++		if (!ret && memres->no_map)
++			ret = ofnode_write_bool(node, UPLP_NO_MAP,
++						memres->no_map);
++		if (ret)
++			return log_msg_ret("lst", ret);
++	}
++
++	return 0;
++}
++
++/**
++ * add_upl_serial() - Add serial node
++ *
++ * @upl: UPL state
++ * @root: Parent node to contain the new node
++ * Return 0 if OK, -ve on error
++ */
++static int add_upl_serial(const struct upl *upl, ofnode root,
++			  bool skip_existing)
++{
++	const struct upl_serial *ser = &upl->serial;
++	const struct memregion *first;
++	char name[26];
++	ofnode node;
 +	int ret;
 +
-+	ser->compatible = ofnode_read_string(node, UPLP_COMPATIBLE);
-+	if (!ser->compatible) {
-+		log_warning("Node '%s': Missing compatible string\n",
-+			    ofnode_get_name(node));
-+		return log_msg_ret("com", -EINVAL);
-+	}
-+	ret = read_uint(node, UPLP_CLOCK_FREQUENCY, &ser->clock_frequency);
-+	if (!ret)
-+		ret = read_uint(node, UPLP_CURRENT_SPEED, &ser->current_speed);
++	if (!ser->compatible || skip_existing)
++		return 0;
++	if (!ser->reg.count)
++		return log_msg_ret("ser", -EINVAL);
++	first = alist_get(&ser->reg, 0, struct memregion);
++	sprintf(name, UPLN_SERIAL "@0x%lx", first->base);
++	ret = ofnode_add_subnode(root, name, &node);
 +	if (ret)
-+		return log_msg_ret("spe", ret);
++		return log_msg_ret("img", ret);
++	ret = ofnode_write_string(node, UPLP_COMPATIBLE, ser->compatible);
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_CLOCK_FREQUENCY,
++				       ser->clock_frequency);
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_CURRENT_SPEED,
++				       ser->current_speed);
++	if (!ret) {
++		char buf[16];
++		int len;
 +
-+	buf = ofnode_read_prop(node, UPLP_REG, &size);
-+	if (!buf) {
-+		log_warning("Node '%s': Missing 'reg' property\n",
-+			    ofnode_get_name(node));
-+		return log_msg_ret("reg", -EINVAL);
++		len = buffer_addr_size(upl, buf, sizeof(buf), 1, &ser->reg);
++		if (len < 0)
++			return log_msg_ret("buf", len);
++
++		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
 +	}
-+
-+	len = decode_addr_size(upl, buf, sizeof(buf), &ser->reg);
-+	if (len < 0)
-+		return log_msg_ret("buf", len);
-+
-+	/* set defaults */
-+	ser->reg_io_shift = UPLD_REG_IO_SHIFT;
-+	ser->reg_offset = UPLD_REG_OFFSET;
-+	ser->reg_io_width = UPLD_REG_IO_WIDTH;
-+	read_uint(node, UPLP_REG_IO_SHIFT, &ser->reg_io_shift);
-+	read_uint(node, UPLP_REG_OFFSET, &ser->reg_offset);
-+	read_uint(node, UPLP_REG_IO_WIDTH, &ser->reg_io_width);
-+	read_addr(upl, node, UPLP_VIRTUAL_REG, &ser->virtual_reg);
-+	ret = ofnode_read_value(node, UPLP_ACCESS_TYPE, access_types,
-+				ARRAY_SIZE(access_types), &ser->access_type);
-+	if (ret && ret != -ENOENT)
++	if (!ret && ser->reg_io_shift != UPLD_REG_IO_SHIFT)
++		ret = ofnode_write_u32(node, UPLP_REG_IO_SHIFT,
++				       ser->reg_io_shift);
++	if (!ret && ser->reg_offset != UPLD_REG_OFFSET)
++		ret = ofnode_write_u32(node, UPLP_REG_OFFSET, ser->reg_offset);
++	if (!ret && ser->reg_io_width != UPLD_REG_IO_WIDTH)
++		ret = ofnode_write_u32(node, UPLP_REG_IO_WIDTH,
++				       ser->reg_io_width);
++	if (!ret && ser->virtual_reg)
++		ret = write_addr(upl, node, UPLP_VIRTUAL_REG, ser->virtual_reg);
++	if (!ret) {
++		ret = ofnode_write_value(node, UPLP_ACCESS_TYPE, access_types,
++					 ARRAY_SIZE(access_types),
++					 ser->access_type);
++	}
++	if (ret)
 +		return log_msg_ret("ser", ret);
 +
 +	return 0;
 +}
 +
 +/**
-+ * decode_upl_graphics() - Decode graphics node
++ * add_upl_graphics() - Add graphics node
 + *
 + * @upl: UPL state
-+ * @root: Node to decode
++ * @root: Parent node to contain the new node
 + * Return 0 if OK, -ve on error
 + */
-+static int decode_upl_graphics(struct upl *upl, ofnode node)
++static int add_upl_graphics(const struct upl *upl, ofnode root)
 +{
-+	struct upl_graphics *gra = &upl->graphics;
-+	const char *buf, *compat;
-+	int len, size;
++	const struct upl_graphics *gra = &upl->graphics;
++	const struct memregion *first;
++	char name[36];
++	ofnode node;
 +	int ret;
 +
-+	compat = ofnode_read_string(node, UPLP_COMPATIBLE);
-+	if (!compat) {
-+		log_warning("Node '%s': Missing compatible string\n",
-+			    ofnode_get_name(node));
-+		return log_msg_ret("com", -EINVAL);
-+	}
-+	if (strcmp(UPLC_GRAPHICS, compat)) {
-+		log_warning("Node '%s': Ignoring compatible '%s'\n",
-+			    ofnode_get_name(node), compat);
-+		return 0;
-+	}
++	if (!gra->reg.count)
++		return log_msg_ret("gra", -ENOENT);
++	first = alist_get(&gra->reg, 0, struct memregion);
++	sprintf(name, UPLN_GRAPHICS "@0x%lx", first->base);
++	ret = ofnode_add_subnode(root, name, &node);
++	if (ret)
++		return log_msg_ret("gra", ret);
 +
-+	buf = ofnode_read_prop(node, UPLP_REG, &size);
-+	if (!buf) {
-+		log_warning("Node '%s': Missing 'reg' property\n",
-+			    ofnode_get_name(node));
-+		return log_msg_ret("reg", -EINVAL);
-+	}
-+
-+	len = decode_addr_size(upl, buf, sizeof(buf), &gra->reg);
-+	if (len < 0)
-+		return log_msg_ret("buf", len);
-+
-+	ret = read_uint(node, UPLP_WIDTH, &gra->width);
-+	if (!ret)
-+		ret = read_uint(node, UPLP_HEIGHT, &gra->height);
-+	if (!ret)
-+		ret = read_uint(node, UPLP_STRIDE, &gra->stride);
++	ret = ofnode_write_string(node, UPLP_COMPATIBLE, UPLC_GRAPHICS);
 +	if (!ret) {
-+		ret = ofnode_read_value(node, UPLP_GRAPHICS_FORMAT,
-+					graphics_formats,
-+					ARRAY_SIZE(graphics_formats),
-+					&gra->format);
++		char buf[16];
++		int len;
++
++		len = buffer_addr_size(upl, buf, sizeof(buf), 1, &gra->reg);
++		if (len < 0)
++			return log_msg_ret("buf", len);
++
++		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
++	}
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_WIDTH, gra->width);
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_HEIGHT, gra->height);
++	if (!ret)
++		ret = ofnode_write_u32(node, UPLP_STRIDE, gra->stride);
++	if (!ret) {
++		ret = ofnode_write_value(node, UPLP_GRAPHICS_FORMAT,
++					 graphics_formats,
++					 ARRAY_SIZE(graphics_formats),
++					 gra->format);
 +	}
 +	if (ret)
 +		return log_msg_ret("pro", ret);
@@ -822,424 +707,71 @@ index 00000000000..2d8caa6ef11
 +	return 0;
 +}
 +
-+int upl_read_handoff(struct upl *upl, oftree tree)
++int upl_write_handoff(const struct upl *upl, ofnode root, bool skip_existing)
 +{
-+	ofnode root, node;
++	ofnode options;
 +	int ret;
 +
-+	if (!oftree_valid(tree))
-+		return log_msg_ret("tre", -EINVAL);
++	ret = add_root_props(upl, root);
++	if (ret)
++		return log_msg_ret("ad1", ret);
++	ret = ofnode_add_subnode(root, UPLN_OPTIONS, &options);
++	if (ret && ret != -EEXIST)
++		return log_msg_ret("opt", -EINVAL);
++
++	ret = add_upl_params(upl, options);
++	if (ret)
++		return log_msg_ret("ad1", ret);
++
++	ret = add_upl_image(upl, options);
++	if (ret)
++		return log_msg_ret("ad2", ret);
++
++	ret = add_upl_memory(upl, root);
++	if (ret)
++		return log_msg_ret("ad3", ret);
++
++	ret = add_upl_memmap(upl, root);
++	if (ret)
++		return log_msg_ret("ad4", ret);
++
++	ret = add_upl_memres(upl, root, skip_existing);
++	if (ret)
++		return log_msg_ret("ad5", ret);
++
++	ret = add_upl_serial(upl, root, skip_existing);
++	if (ret)
++		return log_msg_ret("ad6", ret);
++
++	ret = add_upl_graphics(upl, root);
++	if (ret && ret != -ENOENT)
++		return log_msg_ret("ad6", ret);
++
++	return 0;
++}
++
++int upl_create_handoff_tree(const struct upl *upl, oftree *treep)
++{
++	ofnode root;
++	oftree tree;
++	int ret;
++
++	ret = oftree_new(&tree);
++	if (ret)
++		return log_msg_ret("new", ret);
 +
 +	root = oftree_root(tree);
++	if (!ofnode_valid(root))
++		return log_msg_ret("roo", -EINVAL);
 +
-+	upl_init(upl);
-+	ret = decode_root_props(upl, root);
++	ret = upl_write_handoff(upl, root, false);
 +	if (ret)
-+		return log_msg_ret("roo", ret);
++		return log_msg_ret("wr", ret);
 +
-+	ofnode_for_each_subnode(node, root) {
-+		const char *name = ofnode_get_name(node);
-+
-+		log_debug("decoding '%s'\n", name);
-+		if (!strcmp(UPLN_OPTIONS, name)) {
-+			ret = decode_upl_params(upl, node);
-+			if (ret)
-+				return log_msg_ret("opt", ret);
-+
-+			ret = decode_upl_images(upl, node);
-+		} else if (node_matches_at(node, UPLN_MEMORY)) {
-+			ret = decode_upl_memory_node(upl, node);
-+		} else if (!strcmp(UPLN_MEMORY_MAP, name)) {
-+			ret = decode_upl_memmap(upl, node);
-+		} else if (!strcmp(UPLN_MEMORY_RESERVED, name)) {
-+			ret = decode_upl_memres(upl, node);
-+		} else if (node_matches_at(node, UPLN_SERIAL)) {
-+			ret = decode_upl_serial(upl, node);
-+		} else if (node_matches_at(node, UPLN_GRAPHICS)) {
-+			ret = decode_upl_graphics(upl, node);
-+		} else {
-+			log_debug("Unknown node '%s'\n", name);
-+			ret = 0;
-+		}
-+		if (ret)
-+			return log_msg_ret("err", ret);
-+	}
++	*treep = tree;
 +
 +	return 0;
 +}
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index dc5fcdbd1c9..484f9e1bf8d 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -16,6 +16,7 @@ CONFIG_FIT_RSASSA_PSS=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTMETH_ANDROID=y
-+CONFIG_UPL=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_MEASURED_BOOT=y
- CONFIG_BOOTSTAGE=y
-diff --git a/include/upl.h b/include/upl.h
-new file mode 100644
-index 00000000000..fca7e5fd49f
---- /dev/null
-+++ b/include/upl.h
-@@ -0,0 +1,355 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * UPL handoff generation
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#ifndef __UPL_WRITE_H
-+#define __UPL_WRITE_H
-+
-+#ifndef USE_HOSTCC
-+
-+#include <alist.h>
-+#include <dm/ofnode_decl.h>
-+
-+struct unit_test_state;
-+
-+#define UPLP_ADDRESS_CELLS	"#address-cells"
-+#define UPLP_SIZE_CELLS		"#size-cells"
-+
-+#define UPLN_OPTIONS		"options"
-+#define UPLN_UPL_PARAMS		"upl-params"
-+#define UPLP_SMBIOS		"smbios"
-+#define UPLP_ACPI		"acpi"
-+#define UPLP_BOOTMODE		"bootmode"
-+#define UPLP_ADDR_WIDTH		"addr-width"
-+#define UPLP_ACPI_NVS_SIZE	"acpi-nvs-size"
-+
-+#define UPLPATH_UPL_IMAGE	"/options/upl-image"
-+#define UPLN_UPL_IMAGE		"upl-image"
-+#define UPLN_IMAGE		"image"
-+#define UPLP_FIT		"fit"
-+#define UPLP_CONF_OFFSET	"conf-offset"
-+#define UPLP_LOAD		"load"
-+#define UPLP_SIZE		"size"
-+#define UPLP_OFFSET		"offset"
-+#define UPLP_DESCRIPTION	"description"
-+
-+#define UPLN_MEMORY		"memory"
-+#define UPLP_HOTPLUGGABLE	"hotpluggable"
-+
-+#define UPLPATH_MEMORY_MAP	"/memory-map"
-+#define UPLN_MEMORY_MAP		"memory-map"
-+#define UPLP_USAGE		"usage"
-+
-+#define UPLN_MEMORY_RESERVED	"reserved-memory"
-+#define UPLPATH_MEMORY_RESERVED	"/reserved-memory"
-+#define UPLP_NO_MAP		"no-map"
-+
-+#define UPLN_SERIAL		"serial"
-+#define UPLP_REG		"reg"
-+#define UPLP_COMPATIBLE		"compatible"
-+#define UPLP_CLOCK_FREQUENCY	"clock-frequency"
-+#define UPLP_CURRENT_SPEED	"current-speed"
-+#define UPLP_REG_IO_SHIFT	"reg-io-shift"
-+#define UPLP_REG_OFFSET		"reg-offset"
-+#define UPLP_REG_IO_WIDTH	"reg-io-width"
-+#define UPLP_VIRTUAL_REG	"virtual-reg"
-+#define UPLP_ACCESS_TYPE	"access-type"
-+
-+#define UPLN_GRAPHICS		"framebuffer"
-+#define UPLC_GRAPHICS		"simple-framebuffer"
-+#define UPLP_WIDTH		"width"
-+#define UPLP_HEIGHT		"height"
-+#define UPLP_STRIDE		"stride"
-+#define UPLP_GRAPHICS_FORMAT	"format"
-+
-+/**
-+ * enum upl_boot_mode - Encodes the boot mode
-+ *
-+ * Each is a bit number from the boot_mode mask
-+ */
-+enum upl_boot_mode {
-+	UPLBM_FULL,
-+	UPLBM_MINIMAL,
-+	UPLBM_FAST,
-+	UPLBM_DIAG,
-+	UPLBM_DEFAULT,
-+	UPLBM_S2,
-+	UPLBM_S3,
-+	UPLBM_S4,
-+	UPLBM_S5,
-+	UPLBM_FACTORY,
-+	UPLBM_FLASH,
-+	UPLBM_RECOVERY,
-+
-+	UPLBM_COUNT,
-+};
-+
-+/**
-+ * struct upl_image - UPL image informaiton
-+ *
-+ * @load: Address image was loaded to
-+ * @size: Size of image in bytes
-+ * @offset: Offset of the image in the FIT (0=none)
-+ * @desc: Description of the iamge (taken from the FIT)
-+ */
-+struct upl_image {
-+	ulong load;
-+	ulong size;
-+	uint offset;
-+	const char *description;
-+};
-+
-+/**
-+ * struct memregion - Information about a region of memory
-+ *
-+ * @base: Base address
-+ * @size: Size in bytes
-+ */
-+struct memregion {
-+	ulong base;
-+	ulong size;
-+};
-+
-+/**
-+ * struct upl_mem - Information about physical-memory layout
-+ *
-+ * TODO: Figure out initial-mapped-area
-+ *
-+ * @region: Memory region list (struct memregion)
-+ * @hotpluggable: true if hotpluggable
-+ */
-+struct upl_mem {
-+	struct alist region;
-+	bool hotpluggable;
-+};
-+
-+/**
-+ * enum upl_usage - Encodes the usage
-+ *
-+ * Each is a bit number from the usage mask
-+ */
-+enum upl_usage {
-+	UPLUS_ACPI_RECLAIM,
-+	UPLUS_ACPI_NVS,
-+	UPLUS_BOOT_CODE,
-+	UPLUS_BOOT_DATA,
-+	UPLUS_RUNTIME_CODE,
-+	UPLUS_RUNTIME_DATA,
-+	UPLUS_COUNT
-+};
-+
-+/**
-+ * struct upl_memmap - Information about logical-memory layout
-+ *
-+ * @name: Node name to use
-+ * @region: Memory region list (struct memregion)
-+ * @usage: Memory-usage mask (enum upl_usage)
-+ */
-+struct upl_memmap {
-+	const char *name;
-+	struct alist region;
-+	uint usage;
-+};
-+
-+/**
-+ * struct upl_memres - Reserved memory
-+ *
-+ * @name: Node name to use
-+ * @region: Reserved memory region list (struct memregion)
-+ * @no_map: true to indicate that a virtual mapping must not be created
-+ */
-+struct upl_memres {
-+	const char *name;
-+	struct alist region;
-+	bool no_map;
-+};
-+
-+enum upl_serial_access_type {
-+	UPLSAT_MMIO,
-+	UPLSAT_IO,
-+};
-+
-+/* serial defaults */
-+enum {
-+	UPLD_REG_IO_SHIFT	= 0,
-+	UPLD_REG_OFFSET		= 0,
-+	UPLD_REG_IO_WIDTH	= 1,
-+};
-+
-+/**
-+ * enum upl_access_type - Access types
-+ *
-+ * @UPLAT_MMIO: Memory-mapped I/O
-+ * @UPLAT_IO: Separate I/O
-+ */
-+enum upl_access_type {
-+	UPLAT_MMIO,
-+	UPLAT_IO,
-+};
-+
-+/**
-+ * struct upl_serial - Serial console
-+ *
-+ * @compatible: Compatible string (NULL if there is no serial console)
-+ * @clock_frequency: Input clock frequency of UART
-+ * @current_speed: Current baud rate of UART
-+ * @reg: List of base address and size of registers (struct memregion)
-+ * @reg_shift_log2: log2 of distance between each register
-+ * @reg_offset: Offset of registers from the base address
-+ * @reg_width: Register width in bytes
-+ * @virtual_reg: Virtual register access (0 for none)
-+ * @access_type: Register access type to use
-+ */
-+struct upl_serial {
-+	const char *compatible;
-+	uint clock_frequency;
-+	uint current_speed;
-+	struct alist reg;
-+	uint reg_io_shift;
-+	uint reg_offset;
-+	uint reg_io_width;
-+	ulong virtual_reg;
-+	enum upl_serial_access_type access_type;
-+};
-+
-+/**
-+ * enum upl_graphics_format - Graphics formats
-+ *
-+ * @UPLGF_ARGB32: 32bpp format using 0xaarrggbb
-+ * @UPLGF_ABGR32: 32bpp format using 0xaabbggrr
-+ * @UPLGF_ARGB64: 64bpp format using 0xaaaabbbbggggrrrr
-+ */
-+enum upl_graphics_format {
-+	UPLGF_ARGB32,
-+	UPLGF_ABGR32,
-+	UPLGF_ABGR64,
-+};
-+
-+/**
-+ * @reg: List of base address and size of registers (struct memregion)
-+ * @width: Width of display in pixels
-+ * @height: Height of display in pixels
-+ * @stride: Number of bytes from one line to the next
-+ * @format: Pixel format
-+ */
-+struct upl_graphics {
-+	struct alist reg;
-+	uint width;
-+	uint height;
-+	uint stride;
-+	enum upl_graphics_format format;
-+};
-+
-+/*
-+ * Information about the UPL state
-+ *
-+ * @addr_cells: Number of address cells used in the handoff
-+ * @size_cells: Number of size cells used in the handoff
-+ * @bootmode: Boot-mode mask (enum upl_boot_mode)
-+ * @fit: Address of FIT image that was loaded
-+ * @conf_offset: Offset in FIT of the configuration that was selected
-+ * @addr_width: Adress-bus width of machine, e.g. 46 for 46 bits
-+ * @acpi_nvs_size: Size of the ACPI non-volatile-storage area in bytes
-+ * @image: Information about each image (struct upl_image)
-+ * @mem: Information about physical-memory regions (struct upl_mem)
-+ * @nennap: Information about logical-memory regions (struct upl_memmap)
-+ * @nennap: Information about reserved-memory regions (struct upl_memres)
-+ */
-+struct upl {
-+	int addr_cells;
-+	int size_cells;
-+
-+	ulong smbios;
-+	ulong acpi;
-+	uint bootmode;
-+	ulong fit;
-+	uint conf_offset;
-+	uint addr_width;
-+	uint acpi_nvs_size;
-+
-+	struct alist image;
-+	struct alist mem;
-+	struct alist memmap;
-+	struct alist memres;
-+	struct upl_serial serial;
-+	struct upl_graphics graphics;
-+};
-+
-+/**
-+ * upl_write_handoff() - Write a Unversal Payload handoff structure
-+ *
-+ * upl: UPL state to write
-+ * @root: root node to write it to
-+ * @skip_existing: Avoid recreating any nodes which already exist in the
-+ * devicetree. For example, if there is a serial node, just leave it alone,
-+ * since don't need to create a new one
-+ * Return: 0 on success, -ve on error
-+ */
-+int upl_write_handoff(const struct upl *upl, ofnode root, bool skip_existing);
-+
-+/**
-+ * upl_create_handoff_tree() - Write a Unversal Payload handoff structure
-+ *
-+ * upl: UPL state to write
-+ * @treep: Returns a new tree containing the handoff
-+ * Return: 0 on success, -ve on error
-+ */
-+int upl_create_handoff_tree(const struct upl *upl, oftree *treep);
-+
-+/**
-+ * upl_read_handoff() - Read a Unversal Payload handoff structure
-+ *
-+ * upl: UPL state to read into
-+ * @tree: Devicetree containing the data to read
-+ * Return: 0 on success, -ve on error
-+ */
-+int upl_read_handoff(struct upl *upl, oftree tree);
-+#endif /* USE_HOSTCC */
-+
-+#if CONFIG_IS_ENABLED(UPL) && defined(CONFIG_SPL_BUILD)
-+
-+/**
-+ * upl_set_fit_info() - Set up basic info about the FIT
-+ *
-+ * @fit: Address of FIT
-+ * @conf_offset: Configuration node being used
-+ * @entry_addr: Entry address for next phase
-+ */
-+void upl_set_fit_info(ulong fit, int conf_offset, ulong entry_addr);
-+
-+/**
-+ * upl_set_fit_addr() - Set up the address of the FIT
-+ *
-+ * @fit: Address of FIT
-+ */
-+void upl_set_fit_addr(ulong fit);
-+
-+/**
-+ * upl_add_image() - Add a new image to the UPL
-+ *
-+ * @node: Image node offset in FIT
-+ * @load_addr: Address to which images was loaded
-+ * @size: Image size in bytes
-+ * @desc: Description of image
-+ */
-+int upl_add_image(int node, ulong load_addr, ulong size, const char *desc);
-+
-+#else
-+static inline void upl_set_fit_addr(ulong fit) {}
-+static inline void upl_set_fit_info(ulong fit, int conf_offset,
-+				    ulong entry_addr) {}
-+static inline int upl_add_image(int node, ulong load_addr, ulong size,
-+				const char *desc)
-+{
-+	return 0;
-+}
-+#endif /* UPL && SPL */
-+
-+/** upl_init() - Set up a UPL struct */
-+void upl_init(struct upl *upl);
-+
-+#endif /* __UPL_WRITE_H */
 -- 
 2.34.1
 
