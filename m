@@ -4,84 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9501DC3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 18:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCCA9C3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 18:40:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96D6087D6B;
-	Sun, 21 Jul 2024 20:27:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F7B687D87;
+	Sun, 21 Jul 2024 20:40:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UhIoU+D+";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J20rBY94";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51EAC86DBD; Sun, 21 Jul 2024 20:27:36 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C394586DBD; Sun, 21 Jul 2024 20:40:35 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B48E387F51
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 20:27:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80ADC87E96
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 20:40:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52f042c15e3so105156e87.0
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 11:27:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721586453; x=1722191253; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j9ocxDhHjpzhe+GksOU/1BU79CxMR5pPjqc9VX+0YYM=;
- b=UhIoU+D+5LDyjxeGIGa+uQZcpz2ZKa9F5m6clcUagRLQaZNiDPgvIgtG9NY1oXZzpe
- NOGNaHETa08nZGu10NInsQKfesw/IAYVCssl+CXif4PUuuHjoXds3cjfk2uPbddw/Gz6
- qhOirH274LgMTy5ixxK48qjrPetTH2x9SgBwvaI6y9lgrNvwFEQeyNFH1VKsYa8e95E6
- 4X6FmROUT9Z4cvmXqAYnrWm5PgTylKlWuu+ugN/yYWu7eyMDoobl52bcJ7lrFFv8Jwiv
- QMFDoXUoS3ibSQ2fZQaTX+/BVXStFyw8M8XTV6xz1E+k4FuwX8oH76MYgbjmyCzOhMHb
- BLaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721586453; x=1722191253;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=j9ocxDhHjpzhe+GksOU/1BU79CxMR5pPjqc9VX+0YYM=;
- b=wfT8CUnm/Q4KWE/dUUpItX14CgnsqPxKnf01sZgaBZafH9coRZ9JNrYKMY26c2vi+Z
- /h/M0ogtgmk4GA4fwxybHf4fkDqVKx1CYVkjhWREAgGN6Edh3VWhuWpQApLZoBjW5ihq
- BeqSXzAyWetEHO9RHfIXFjDrCb99yJv3rIVr/uixIruUF0eQjtq883rEudSzW2NKLP32
- XXIh3HumkA9WGdWdgjp1hQ9DbdVouu+5ADtkzoqe9dGHXvigiJxdpLmB8EHryt+v4AOm
- YTmMDrnuTgnZS3PQMir9ZbFP7mRxuRL1kgmZpyxvyUUe/kfYf66wGqmGjYno1i9JYS/K
- zhRA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUalNuo62RLdlZ6NC+nFxSNlj0VtQYyXbFdS65lsskzT7DzMyU6fUU4/0YG9VGpbJK45AllVDhQRIlLVcjakp3bEm3kWQ==
-X-Gm-Message-State: AOJu0YzgNlu8GHtqivTYZo5DyO0ZoSGUAFgwc//4XlVeInU8XbLz3Diz
- jYqkuSRCjIObndhclJh6YQU24cdA+XiiAkzbnQ0gVNOJTfzTbylO7Jx/SOiLUCERLaJmg1OgBQ4
- xuExiIVEZ0lCy2vfGNIEQ7TXO7Uc=
-X-Google-Smtp-Source: AGHT+IENpa2BmgnaelUtWONZSwxnZ1AebokLYuhBHbywxy6rKfpAjNYOQDjK1XAwuRnxtI7xVgtzQHBVhk4DSF/UoUE=
-X-Received: by 2002:a05:6512:3342:b0:52e:fa78:63c0 with SMTP id
- 2adb3069b0e04-52efa7866d0mr1050005e87.13.1721586452500; Sun, 21 Jul 2024
- 11:27:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=7206=OW=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1721587219;
+ bh=uequ2ZHkdDFUB+Lzq9fGGq7ci5flSvtZjgw2B0yLNF4=;
+ b=J20rBY94ORyzIbK3BJwEGBHnuSfGYkK04lKRpKIA0OfOhma1telxfiuf0JtapEvaa4iA+1Xt5
+ okYgTq1J7JejrugL0aBnlGNyr4hQAOmYLRriGAd3iB4TAJXF5jZLvlpLBO80aMn4qNjchQJErwE
+ HhbgdOCzuz4C2OjsxnH4/qU08gdL6G04MRhg6nb+M4dgc/N7Z7xtxotFY/so2YH7z/Oz+lrF370
+ 0rx5RIaOLjuq9pxwbUZkZgSg1DtnRp1n2eOjUmPxWl7LhA7frdYFc4iPUEnWUctc7SX/+1R6mnJ
+ L669OOccRRTuIZNRWnwG2KVa/ylmCTOkMzwBDGjJDgEA==
+Message-ID: <7fd8f4e2-1661-43d5-b753-94549351dbf8@kwiboo.se>
+Date: Sun, 21 Jul 2024 20:40:16 +0200
 MIME-Version: 1.0
-References: <20240719013822.101374-1-minda.chen@starfivetech.com>
- <20240719013822.101374-8-minda.chen@starfivetech.com>
- <CANV2PTOXmm4a4+_94iKoGTAY5-kiym3xwYF77upXdu8KmLKv+Q@mail.gmail.com>
-In-Reply-To: <CANV2PTOXmm4a4+_94iKoGTAY5-kiym3xwYF77upXdu8KmLKv+Q@mail.gmail.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sun, 21 Jul 2024 11:27:21 -0700
-Message-ID: <CANV2PTPv9v9h0LW08qQq-cU3XJQBhs3Lz-w691CV3=5u7gh=_A@mail.gmail.com>
-Subject: Re: [PATCH v3 7/8] dts: starfive: Add JH7110 Cadence USB dts node
-To: Minda Chen <minda.chen@starfivetech.com>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>, 
- Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] phy: rockchip: naneng-combphy: Introduce PHY-IDs
+ to fix RK3588 muxing
+To: Sebastian Kropatsch <seb-dev@mail.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <cover.1721161722.git.seb-dev@mail.de>
+ <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 669d56107025df85504af01f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,277 +75,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jul 20, 2024 at 6:47=E2=80=AFPM E Shattow <lucent@gmail.com> wrote:
->
-> Hi, I am testing on Milk-V Mars CM Lite, and I add to these devicetree
-> changes at runtime from board/starfive/visionfive2/spl.c
->
-> On Thu, Jul 18, 2024 at 6:38=E2=80=AFPM Minda Chen <minda.chen@starfivete=
-ch.com> wrote:
-> >
-> > Add Jh7110 Cadence USB dts node, Visionfive2 default setting
-> > is USB 2.0 device.
-> >
-> > Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
-> > ---
-> >  .../dts/jh7110-starfive-visionfive-2.dtsi     |  5 ++
-> >  arch/riscv/dts/jh7110.dtsi                    | 52 +++++++++++++++++++
-> >  2 files changed, 57 insertions(+)
-> >
-> > diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/ri=
-scv/dts/jh7110-starfive-visionfive-2.dtsi
-> > index e11babc1cd..44785bbee3 100644
-> > --- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-> > +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-> > @@ -378,3 +378,8 @@
-> >                 };
-> >         };
-> >  };
-> > +
-> > +&usb_cdns3 {
-> > +       dr_mode =3D "peripheral";
-> > +       status =3D "okay";
-> > +};
-> > diff --git a/arch/riscv/dts/jh7110.dtsi b/arch/riscv/dts/jh7110.dtsi
-> > index 2cdc683d49..1eee924e1d 100644
-> > --- a/arch/riscv/dts/jh7110.dtsi
-> > +++ b/arch/riscv/dts/jh7110.dtsi
-> > @@ -371,6 +371,58 @@
-> >                         status =3D "disabled";
-> >                 };
-> >
-> > +               usb0: usb@10100000 {
-> > +                       compatible =3D "starfive,jh7110-usb";
-> > +                       ranges =3D <0x0 0x0 0x10100000 0x100000>;
-> > +                       #address-cells =3D <1>;
-> > +                       #size-cells =3D <1>;
-> > +                       starfive,stg-syscon =3D <&stg_syscon 0x4>;
-> > +                       clocks =3D <&stgcrg JH7110_STGCLK_USB_LPM>,
-> > +                                <&stgcrg JH7110_STGCLK_USB_STB>,
-> > +                                <&stgcrg JH7110_STGCLK_USB_APB>,
-> > +                                <&stgcrg JH7110_STGCLK_USB_AXI>,
-> > +                                <&stgcrg JH7110_STGCLK_USB_UTMI_APB>;
-> > +                       clock-names =3D "lpm", "stb", "apb", "axi", "ut=
-mi_apb";
-> > +                       resets =3D <&stgcrg JH7110_STGRST_USB_PWRUP>,
-> > +                                <&stgcrg JH7110_STGRST_USB_APB>,
-> > +                                <&stgcrg JH7110_STGRST_USB_AXI>,
-> > +                                <&stgcrg JH7110_STGRST_USB_UTMI_APB>;
-> > +                       reset-names =3D "pwrup", "apb", "axi", "utmi_ap=
-b";
-> > +
-> > +                       usb_cdns3: usb@0 {
-> > +                               compatible =3D "cdns,usb3";
-> > +                               reg =3D <0x0 0x10000>,
-> > +                                     <0x10000 0x10000>,
-> > +                                     <0x20000 0x10000>;
-> > +                               reg-names =3D "otg", "xhci", "dev";
-> > +                               interrupts =3D <100>, <108>, <110>;
-> > +                               interrupt-names =3D "host", "peripheral=
-", "otg";
-> > +                               phys =3D <&usbphy0>;
-> > +                               phy-names =3D "cdns3,usb2-phy";
-> > +                       };
-> > +               };
-> > +
-> > +               usbphy0: phy@10200000 {
-> > +                       compatible =3D "starfive,jh7110-usb-phy";
-> > +                       reg =3D <0x0 0x10200000 0x0 0x10000>;
-> > +                       clocks =3D <&syscrg JH7110_SYSCLK_USB_125M>,
-> > +                                <&stgcrg JH7110_STGCLK_USB_APP_125>;
-> > +                       clock-names =3D "125m", "app_125m";
-> > +                       #phy-cells =3D <0>;
-> > +               };
-> > +
-> > +               pciephy0: phy@10210000 {
-> > +                       compatible =3D "starfive,jh7110-pcie-phy";
-> > +                       reg =3D <0x0 0x10210000 0x0 0x10000>;
-> > +                       #phy-cells =3D <0>;
-> > +               };
-> > +
-> > +               pciephy1: phy@10220000 {
-> > +                       compatible =3D "starfive,jh7110-pcie-phy";
-> > +                       reg =3D <0x0 0x10220000 0x0 0x10000>;
-> > +                       #phy-cells =3D <0>;
-> > +               };
-> > +
-> >                 stgcrg: clock-controller@10230000 {
-> >                         compatible =3D "starfive,jh7110-stgcrg";
-> >                         reg =3D <0x0 0x10230000 0x0 0x10000>;
-> > --
-> > 2.17.1
-> >
->
-> Access fault
->
->         starting USB...
->         Bus usb@0: cdns-usb3-host usb@0: set 1 has failed, back to 0
->         scanning bus usb@0 for devices... Unhandled exception: Load acces=
-s fault
->         EPC: 00000000fff85ce2 RA: 00000000fff85cdc TVAL: 0000000000000004
->         EPC: 0000000040246ce2 RA: 0000000040246cdc reloc adjusted
->
->         Code: 9863 3ee7 8526 f0ef c37f 651c 3a03 0105 (43dc)
->
->
->         resetting ...
->
-> when I add only these:
->
->         int offset;
->
->         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000"); /* &sys=
-gpio */
->         fdt_add_subnode(fdt, offset, "usb0-0");
->         fdt_setprop_string(fdt, fdt_path_offset(fdt, "/__symbols__"),
-> "usb_pins", "/soc/pinctrl@13040000/usb0-0");
->         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0");
-> /* usb_pins */
->         fdt_create_phandle(fdt, offset);
->         fdt_add_subnode(fdt, offset, "driver-vbus-pin");
->         offset =3D fdt_path_offset(fdt,
-> "/soc/pinctrl@13040000/usb0-0/driver-vbus-pin");
->         fdt_setprop_u32(fdt, offset, "pinmux", 0xff070019); /*
-> GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS, GPOEN_ENABLE, GPI_NONE) */
->         fdt_setprop_empty(fdt, offset, "bias-disable");
->         fdt_setprop_empty(fdt, offset, "input-disable");
->         fdt_setprop_empty(fdt, offset, "input-schmitt-disable");
->         fdt_setprop_u32(fdt, offset, "slew-rate", 0);
->
->         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000"); /* &usb0 */
->         fdt_setprop_string(fdt, offset, "pinctrl-names", "default");
->         fdt_setprop_u32(fdt, offset, "pinctrl-0", fdt_get_phandle(fdt,
-> fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0")));
->         fdt_setprop_string(fdt, offset, "status", "okay");
->
->         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000/usb@0"); /*
-> &usb_cdns3 */
->         fdt_setprop_string(fdt, offset, "dr_mode",   "host");
->
-> Success USB is working but PCI disabled if instead I add all of this:
->
->         int offset;
->
->         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000"); /* &sys=
-gpio */
->         fdt_add_subnode(fdt, offset, "usb0-0");
->         fdt_setprop_string(fdt, fdt_path_offset(fdt, "/__symbols__"),
-> "usb_pins", "/soc/pinctrl@13040000/usb0-0");
->         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0");
-> /* usb_pins */
->         fdt_create_phandle(fdt, offset);
->         fdt_add_subnode(fdt, offset, "driver-vbus-pin");
->         offset =3D fdt_path_offset(fdt,
-> "/soc/pinctrl@13040000/usb0-0/driver-vbus-pin");
->         fdt_setprop_u32(fdt, offset, "pinmux", 0xff070019); /*
-> GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS, GPOEN_ENABLE, GPI_NONE) */
->         fdt_setprop_empty(fdt, offset, "bias-disable");
->         fdt_setprop_empty(fdt, offset, "input-disable");
->         fdt_setprop_empty(fdt, offset, "input-schmitt-disable");
->         fdt_setprop_u32(fdt, offset, "slew-rate", 0);
->
->         offset =3D fdt_path_offset(fdt, "/soc/pcie@2b000000"); /* &pcie0 =
-*/
->         fdt_setprop_string(fdt, offset, "status", "disabled");
->
->         offset =3D fdt_path_offset(fdt, "/soc/phy@10210000"); /* &pciephy=
-0 */
->         fdt_setprop_u32(fdt, offset, "starfive,sys-syscon",
-> fdt_get_phandle(fdt, fdt_path_offset(fdt,
-> "/soc/sys_syscon@13030000"))); /* =3D <&sys_syscon> */
->         fdt_appendprop_u32(fdt, offset, "starfive,sys-syscon", 0x18);
-> /* append <magic number> */
->         fdt_setprop_u32(fdt, offset, "starfive,stg-syscon",
-> fdt_get_phandle(fdt, fdt_path_offset(fdt,
-> "/soc/stg_syscon@10240000"))); /* =3D <&stg_syscon> */
->         fdt_appendprop_u32(fdt, offset, "starfive,stg-syscon", 0x148);
-> /* append <magic number> */
->         fdt_appendprop_u32(fdt, offset, "starfive,stg-syscon", 0x1f4);
-> /* append <magic number> */
->         fdt_setprop_string(fdt, offset, "status", "okay");
->
->         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000"); /* &usb0 */
->         fdt_setprop_string(fdt, offset, "pinctrl-names", "default");
->         fdt_setprop_u32(fdt, offset, "pinctrl-0", fdt_get_phandle(fdt,
-> fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0")));
->         fdt_setprop_string(fdt, offset, "status", "okay");
->
->         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000/usb@0"); /*
-> &usb_cdns3 */
->         fdt_setprop_u32(fdt,    offset, "phys",
-> fdt_get_phandle(fdt, fdt_path_offset(fdt, "/soc/phy@10200000"))); /* =3D
-> <&usbphy0> */
->         fdt_appendprop_u32(fdt, offset, "phys",
-> fdt_get_phandle(fdt, fdt_path_offset(fdt, "/soc/phy@10210000"))); /*
-> append <&pciephy0> */
->         fdt_setprop(fdt,        offset, "phy-names",
-> "cdns3,usb2-phy\0cdns3,usb3-phy",
-> sizeof("cdns3,usb2-phy\0cdns3,usb3-phy"));
->         fdt_setprop_string(fdt, offset, "dr_mode",   "host");
->
-> I have made some mistake for devicetree and USB2.0 with keeping pcie0
-> (not disable)? or is there a problem with the implementation?
->
-> Best regards, -E Shattow
+Hi Sebastian,
 
-P.S. here is with debug logging:
+On 2024-07-16 22:42, Sebastian Kropatsch wrote:
+> Fix multiplex configuration for PCIe1L0 and PCIe1L1 in PCIESEL_CON for
+> RK3588 to correctly select between Combo PHYs and PCIe3 PHY.
+> Currently, the code incorrectly muxes both ports to Combo PHYs,
+> interfering with PCIe3 PHY settings.
+> Introduce PHY identifiers to identify the correct Combo PHY and set
+> the necessary bits accordingly.
+> 
+> This fix is adapted from the upstream Linux commit by Sebastian Reichel:
+> d16d4002fea6 ("phy: rockchip: naneng-combphy: Fix mux on rk3588")
+> 
+> Fixes: b37260bca1aa ("phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588")
+> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+> ---
+>  .../rockchip/phy-rockchip-naneng-combphy.c    | 49 ++++++++++++++++++-
+>  1 file changed, 47 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> index 1b85cbcce8..7d61913af1 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> @@ -67,12 +67,15 @@ struct rockchip_combphy_grfcfg {
+>  };
+>  
+>  struct rockchip_combphy_cfg {
+> +	unsigned int num_phys;
+> +	unsigned int phy_ids[3];
+>  	const struct rockchip_combphy_grfcfg *grfcfg;
+>  	int (*combphy_cfg)(struct rockchip_combphy_priv *priv);
+>  };
+>  
+>  struct rockchip_combphy_priv {
+>  	u32 mode;
+> +	int id;
+>  	void __iomem *mmio;
+>  	struct udevice *dev;
+>  	struct regmap *pipe_grf;
+> @@ -270,6 +273,8 @@ static int rockchip_combphy_probe(struct udevice *udev)
+>  {
+>  	struct rockchip_combphy_priv *priv = dev_get_priv(udev);
+>  	const struct rockchip_combphy_cfg *phy_cfg;
+> +	fdt_addr_t addr;
+> +	int id;
+>  
+>  	priv->mmio = (void __iomem *)dev_read_addr(udev);
+>  	if (IS_ERR(priv->mmio))
+> @@ -281,6 +286,26 @@ static int rockchip_combphy_probe(struct udevice *udev)
+>  		return -EINVAL;
+>  	}
+>  
+> +	addr = dev_read_addr(udev);
 
-drivers/core/ofnode.c:517-    ofnode_read_prop() ofnode_read_prop:
-assigned-clock-rates: <not found>
-drivers/core/uclass.c:537-uclass_get_device_by_ofnode() Looking for phy@102=
-00000
-drivers/core/uclass.c:388-uclass_find_device_by_ofnode() Looking for
-phy@10200000
-drivers/core/uclass.c:407-uclass_find_device_by_ofnode()    - result
-for phy@10200000: phy@10200000 (ret=3D0)
-drivers/core/uclass.c:540-uclass_get_device_by_ofnode()    - result
-for phy@10200000: phy@10200000 (ret=3D0)
-drivers/core/ofnode.c:517-    ofnode_read_prop() ofnode_read_prop:
-assigned-clock-rates: <not found>
-drivers/core/uclass.c:537-uclass_get_device_by_ofnode() Looking for
-clock-controller@13020000
-drivers/core/uclass.c:388-uclass_find_device_by_ofnode() Looking for
-clock-controller@13020000
-drivers/core/uclass.c:407-uclass_find_device_by_ofnode()    - result
-for clock-controller@13020000: clock-controller@13020000 (ret=3D0)
-drivers/core/uclass.c:540-uclass_get_device_by_ofnode()    - result
-for clock-controller@13020000: clock-controller@13020000 (ret=3D0)
-drivers/core/uclass.c:537-uclass_get_device_by_ofnode() Looking for
-clock-controller@10230000
-drivers/core/uclass.c:388-uclass_find_device_by_ofnode() Looking for
-clock-controller@10230000
-drivers/core/uclass.c:407-uclass_find_device_by_ofnode()    - result
-for clock-controller@10230000: clock-controller@10230000 (ret=3D0)
-drivers/core/uclass.c:540-uclass_get_device_by_ofnode()    - result
-for clock-controller@10230000: clock-controller@10230000 (ret=3D0)
-common/event.c:113-      notify_dynamic() Sending event 5/(unknown) to
-spy 'efi_disk add'
-drivers/usb/cdns3/drd.c:287-      cdns3_drd_init() cdns-usb3-host
-usb@0: DRD version v1 (ID: 0004024e, rev: 00000200)
-drivers/usb/cdns3/drd.c:297-      cdns3_drd_init() cdns-usb3-host
-usb@0: Controller strapped to HOST
-drivers/core/ofnode.c:517-    ofnode_read_prop() ofnode_read_prop: dr_mode:=
- host
-drivers/phy/starfive/phy-jh7110-usb2.c:58-   usb2_phy_set_mode()
-jh7110_usb2_phy phy@10200000: Changing phy to 1
-drivers/usb/cdns3/core.c:304-cdns3_hw_role_switch() cdns-usb3-host
-usb@0: Switching role 0 -> 1cdns-usb3-host usb@0: Waiting till Host
-mode is turned on
-drivers/usb/cdns3/core.c:309-cdns3_hw_role_switch() cdns-usb3-host
-usb@0: set 1 has failed, back to 0
-drivers/usb/cdns3/core.c:375-         cdns3_probe() cdns-usb3-host
-usb@0: Cadence USB3 core: probe succeed
-common/event.c:113-      notify_dynamic() Sending event 5/(unknown) to
-spy 'efi_disk add'
-drivers/core/ofnode.c:394-ofnode_read_u32_index()
-ofnode_read_u32_index: companion: (not found)
-scanning bus usb@0 for devices... Unhandled exception: Load access fault
-EPC: 00000000fff7f50e RA: 00000000fff7f508 TVAL: 0000000000000004
-EPC: 000000004024d50e RA: 000000004024d508 reloc adjusted
+dev_read_addr(udev) is already called above, maybe we can use the
+returned value from that call?
 
-Code: 9863 3ee7 8526 f0ef c37f 651c 3a03 0105 (43dc)
+Or this could be changes to match other reg value matching done in other
+rockchip phy drivers, e.g. something like:
 
+	ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 0, &reg);
+	if (ret) {
+		dev_err(udev, "failed to read reg[0] property\n");
+		return ret;
+	}
+	if (reg == 0 && dev_read_addr_cells(udev) == 2) {
+		ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 1, &reg);
+		if (ret) {
+			dev_err(udev, "failed to read reg[1] property\n");
+			return ret;
+		}
+	}
 
-resetting ...
+> +	if (addr == FDT_ADDR_T_NONE) {
+> +		dev_err(udev, "No valid device address found\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Find the phy-id based on the device's I/O-address */
+> +	priv->id = -ENODEV;
+> +	for (id = 0; id < phy_cfg->num_phys; id++) {
+> +		if (addr == phy_cfg->phy_ids[id]) {
+> +			priv->id = id;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (priv->id == -ENODEV) {
+> +		dev_err(udev, "Failed to find PHY ID\n");
+> +		return -ENODEV;
+> +	}
+> +
+>  	priv->dev = udev;
+>  	priv->mode = PHY_TYPE_SATA;
+>  	priv->cfg = phy_cfg;
+> @@ -421,6 +446,12 @@ static const struct rockchip_combphy_grfcfg rk3568_combphy_grfcfgs = {
+>  };
+>  
+>  static const struct rockchip_combphy_cfg rk3568_combphy_cfgs = {
+> +	.num_phys = 3,
+> +	.phy_ids = {
+> +		0xfe820000,
+> +		0xfe830000,
+> +		0xfe840000,
+> +	},
+>  	.grfcfg		= &rk3568_combphy_grfcfgs,
+>  	.combphy_cfg	= rk3568_combphy_cfg,
+>  };
+> @@ -436,8 +467,16 @@ static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
+>  		param_write(priv->phy_grf, &cfg->con1_for_pcie, true);
+>  		param_write(priv->phy_grf, &cfg->con2_for_pcie, true);
+>  		param_write(priv->phy_grf, &cfg->con3_for_pcie, true);
+> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
+> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
+> +		switch (priv->id) {
+> +		case 1:
+> +			printf("rk3588_combphy_cfg: priv->id was configured to 1");
 
--E
+Please drop printf calls.
+
+> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
+> +			break;
+> +		case 2:
+> +			printf("rk3588_combphy_cfg: priv->id was configured to 2");
+
+Please drop printf calls.
+
+Regards,
+Jonas
+
+> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
+> +			break;
+> +		}
+>  		break;
+>  	case PHY_TYPE_USB3:
+>  		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
+> @@ -515,6 +554,12 @@ static const struct rockchip_combphy_grfcfg rk3588_combphy_grfcfgs = {
+>  };
+>  
+>  static const struct rockchip_combphy_cfg rk3588_combphy_cfgs = {
+> +	.num_phys = 3,
+> +	.phy_ids = {
+> +		0xfee00000,
+> +		0xfee10000,
+> +		0xfee20000,
+> +	},
+>  	.grfcfg		= &rk3588_combphy_grfcfgs,
+>  	.combphy_cfg	= rk3588_combphy_cfg,
+>  };
+
