@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 150E6C3DA61
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E20C3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:13:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C302288387;
-	Sun, 21 Jul 2024 12:10:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C2D7884C3;
+	Sun, 21 Jul 2024 12:10:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MyhocUCV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aRxqwyp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D34887DEA; Sun, 21 Jul 2024 12:10:16 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id EE3AD87DDF; Sun, 21 Jul 2024 12:10:17 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CDE087E2E
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96ECB88481
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4266eda81c5so27290705e9.0
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:13 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4266eda81c5so27290775e9.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556612; x=1722161412; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721556613; x=1722161413; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PMDeghO/Y6K45EmdAp4dwoHR9L9HRTg6eyWhSMrrDKY=;
- b=MyhocUCVBVyhn2hTpaiZxTN3cMLRvotQ6KmC4/+ltdY2XxZL4kZRfMVamnjfI44tDD
- DYtGHWUTua0CghWYsm8uUKhLusjzfrooWj40nZnPoEwZ0apLC+XBPHRTRtmq7kbGHAYY
- QRks/TL77Kdsj5+yrRfVD7sc3wgc5LPXNtmH0=
+ bh=V7yfQJnzerRMJjIcRrPROZ+EQrjMmQNkFPp8FD+m5Z8=;
+ b=aRxqwyp2bR+crRA3zHc9hkhq8aRES5MH6qlWRZWDUhW9pxX7QgsSmm1rJi73ki8s4O
+ 7mE/3reAZbHIJsnZCxNcsg6BEDhpU3tYSxixFi2ME/HwwLPkxXo1Kikhgr0zPHLrb+kM
+ US6GbXvsPdKTTJvkG0Jf+kqzTJKNZK0VJGE2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556612; x=1722161412;
+ d=1e100.net; s=20230601; t=1721556613; x=1722161413;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PMDeghO/Y6K45EmdAp4dwoHR9L9HRTg6eyWhSMrrDKY=;
- b=n25x4e1hV0+ZVrTCK0Fyen+fbzU7BrYuNEqFVQyQrmLnUyLrLDbrk8xqrKHCDcHtG6
- FCE4qkeMPviDwtEWV5GMk86z8dHJELHYxP4rbj7XdNi5clLZjhIzjbqxWQnAEvaqiHKC
- LWAID5r8Rp3+YP2gWjbjmcEM/d0hR4T7n++TvF8aGtl9QxylzbIjoLVoZUaqAPk4tzA1
- F882AvpZ1Hm5bcAHNLMVq0M2eRSFRWKcNEAlVuH/D8mgpbWdmmB0JRzMhMaO+n1tfCYY
- Cy9d5tqHdT8FVxGlpZrgGxJHykgS3qEStlRE6HARMzD2FUe7f5kDsmJw+WxagDMWiltS
- oiAQ==
-X-Gm-Message-State: AOJu0YyOsX8lOk9fMkHr4xUUKX4vmV4VqToBX0tof0RUlDZZYIZD/ZRO
- 931+B/mFlYFiXBYfBvD0/wSn9uVkCovqJ9aPDcns0fVw/ryxKfkFHf0TLiXdYIHZ8SjVmQKDFS0
+ bh=V7yfQJnzerRMJjIcRrPROZ+EQrjMmQNkFPp8FD+m5Z8=;
+ b=MD1HZy6j6PB+d8dD+8DzqQO2snaDQf9BsehLBM5konLM+WodEZkQ24JRW7p2Rg3T9t
+ TTMKmx9r6i875xshPgi+DyB6UuFlQQCMrdkqr9iyajJna0CzZ2Wlu7WnT+tD3mIUyxrP
+ 9Me/br3/n4TUVhKlCNxQpzzxaQkMXaFGf3DPw0W8FyEurRNd5HUBzsUy7TtPgADewh+b
+ fLIOFCmxW7O0Z752WS7q19KRNh12APXl5j9ETcnXKWDuq1w35EBcUgB/RXTIyzfyHjGZ
+ MP2wArPbIBFPAJddJLkd8CRaxWFP3Yp6qYdfNxuJhLhxhMIagD3JA7HiGEvktnX1e/EH
+ Q85w==
+X-Gm-Message-State: AOJu0YzP8CZmf7NqF4ORQF1nNmTZAPaURUiZ3w1XRXwNGwhJewV/Js3a
+ dtYx8Wgk7HBg2HDUE0MYTX2y48Wi3YYWnrdANfZuwI8IbJv0Ridg+3WI/92vl+1v/baBCst4VDY
  =
-X-Google-Smtp-Source: AGHT+IFjWMrY7h3N+wEE7ah6xbGGhQHzTAd7gdxLc5gQblPa6DGzhceOJFzTSSiGNOIdjt/XRjfdBg==
-X-Received: by 2002:a05:600c:3b26:b0:426:5b44:2be7 with SMTP id
- 5b1f17b1804b1-427dc5204bfmr33447605e9.10.1721556612436; 
- Sun, 21 Jul 2024 03:10:12 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFElwJdQaaJjyuKNAu5VdnQUCOSWWiD+d4mewUnSxk1I1T1wOcTsGWYcDUtwMgEWsOJeqKWRA==
+X-Received: by 2002:a05:600c:4f86:b0:425:81bd:e5ee with SMTP id
+ 5b1f17b1804b1-427dc520ae2mr26294615e9.16.1721556613733; 
+ Sun, 21 Jul 2024 03:10:13 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.11
+ 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 03:10:11 -0700 (PDT)
+ Sun, 21 Jul 2024 03:10:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 19/21] sandbox: Add a flag to enable UPL
-Date: Sun, 21 Jul 2024 11:09:37 +0100
-Message-Id: <20240721100940.3202027-19-sjg@chromium.org>
+Subject: [PATCH v3 20/21] sandbox: Add an SPL loader for UPL
+Date: Sun, 21 Jul 2024 11:09:38 +0100
+Message-Id: <20240721100940.3202027-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240721100940.3202027-1-sjg@chromium.org>
 References: <20240721100940.3202027-1-sjg@chromium.org>
@@ -91,68 +91,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UPL significantly alters the boot flow for sandbox. Add a flag to enable
-this so that it can be enabled only on tests which need it.
+Add support for loading a UPL image from SPL. This uses the simple FIT
+implementation, but also loads the full FIT just to permit more testing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/cpu/start.c         | 13 ++++++++++++-
- arch/sandbox/include/asm/state.h |  1 +
- 2 files changed, 13 insertions(+), 1 deletion(-)
+ arch/sandbox/cpu/spl.c         | 49 +++++++++++++++++++++++++++++++++-
+ arch/sandbox/include/asm/spl.h |  1 +
+ 2 files changed, 49 insertions(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
-index 0920ed55965..9ad5d46271a 100644
---- a/arch/sandbox/cpu/start.c
-+++ b/arch/sandbox/cpu/start.c
-@@ -431,6 +431,14 @@ static int sandbox_cmdline_cb_autoboot_keyed(struct sandbox_state *state,
- }
- SANDBOX_CMDLINE_OPT(autoboot_keyed, 0, "Allow keyed autoboot");
+diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+index e86193de419..bcb1ca10a51 100644
+--- a/arch/sandbox/cpu/spl.c
++++ b/arch/sandbox/cpu/spl.c
+@@ -3,14 +3,18 @@
+  * Copyright (c) 2016 Google, Inc
+  */
  
-+static int sandbox_cmdline_cb_upl(struct sandbox_state *state, const char *arg)
++#define LOG_CATEGORY	LOGC_BOOT
++
+ #include <dm.h>
+ #include <hang.h>
+ #include <handoff.h>
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
++#include <mapmem.h>
+ #include <os.h>
+ #include <spl.h>
++#include <upl.h>
+ #include <asm/global_data.h>
+ #include <asm/spl.h>
+ #include <asm/state.h>
+@@ -52,7 +56,8 @@ void board_init_f(ulong flag)
+ void board_boot_order(u32 *spl_boot_list)
+ {
+ 	spl_boot_list[0] = BOOT_DEVICE_VBE;
+-	spl_boot_list[1] = BOOT_DEVICE_BOARD;
++	spl_boot_list[1] = BOOT_DEVICE_UPL;
++	spl_boot_list[2] = BOOT_DEVICE_BOARD;
+ }
+ 
+ static int spl_board_load_file(struct spl_image_info *spl_image,
+@@ -250,3 +255,45 @@ int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image)
+ 
+ 	return 0;
+ }
++
++static int upl_load_from_image(struct spl_image_info *spl_image,
++			       struct spl_boot_device *bootdev)
 +{
-+	state->upl = true;
++	long long size;
++	char *fname;
++	int ret, fd;
++	ulong addr;
++
++	if (!CONFIG_IS_ENABLED(UPL_OUT))
++		return -ENOTSUPP;
++
++	spl_upl_init();
++	fname = os_malloc(256);
++
++	ret = sandbox_spl_load_fit(fname, 256, spl_image);
++	if (ret)
++		return log_msg_ret("fit", ret);
++	spl_image->flags = SPL_SANDBOXF_ARG_IS_BUF;
++	spl_image->arg = map_sysmem(spl_image->load_addr, 0);
++	/* size is set by load_simple_fit(), offset is left as 0 */
++
++	/* now read the whole FIT into memory */
++	fd = os_open(fname, OS_O_RDONLY);
++	if (fd < 0)
++		return log_msg_ret("op2", -ENOENT);
++	if (os_get_filesize(fname,  &size))
++		return log_msg_ret("fis", -ENOENT);
++
++	/* place it after the loaded image, allowing plenty of space */
++	addr = ALIGN(spl_image->load_addr + size, 0x1000);
++	log_debug("Loading whole FIT to %lx\n", addr);
++	if (os_read(fd, map_sysmem(addr, 0), size) != size)
++		return log_msg_ret("rea", -EIO);
++	os_close(fd);
++
++	/* tell UPL where it is */
++	upl_set_fit_addr(addr);
 +
 +	return 0;
 +}
-+SANDBOX_CMDLINE_OPT(upl, 0, "Enable Universal Payload (UPL)");
-+
- static void setup_ram_buf(struct sandbox_state *state)
- {
- 	/* Zero the RAM buffer if we didn't read it, to keep valgrind happy */
-@@ -540,6 +548,9 @@ int sandbox_main(int argc, char *argv[])
- 			goto err;
- 	}
++SPL_LOAD_IMAGE_METHOD("upl", 4, BOOT_DEVICE_UPL, upl_load_from_image);
+diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
+index d50d9ad6b48..d824b2123a2 100644
+--- a/arch/sandbox/include/asm/spl.h
++++ b/arch/sandbox/include/asm/spl.h
+@@ -18,6 +18,7 @@ enum {
+ 	BOOT_DEVICE_NOR,
+ 	BOOT_DEVICE_SPI,
+ 	BOOT_DEVICE_NAND,
++	BOOT_DEVICE_UPL,
+ };
  
-+	if (state->upl)
-+		gd->flags |= GD_FLG_UPL;
-+
- #if CONFIG_IS_ENABLED(SYS_MALLOC_F)
- 	gd->malloc_base = CFG_MALLOC_F_ADDR;
- #endif
-@@ -558,7 +569,7 @@ int sandbox_main(int argc, char *argv[])
- 	log_debug("debug: %s\n", __func__);
- 
- 	/* Do pre- and post-relocation init */
--	board_init_f(0);
-+	board_init_f(gd->flags);
- 
- 	board_init_r(gd->new_gd, 0);
- 
-diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
-index c84a1f7060f..6b50473ed41 100644
---- a/arch/sandbox/include/asm/state.h
-+++ b/arch/sandbox/include/asm/state.h
-@@ -97,6 +97,7 @@ struct sandbox_state {
- 	bool autoboot_keyed;		/* Use keyed-autoboot feature */
- 	bool disable_eth;		/* Disable Ethernet devices */
- 	bool disable_sf_bootdevs;	/* Don't bind SPI flash bootdevs */
-+	bool upl;			/* Enable Universal Payload (UPL) */
- 
- 	/* Pointer to information for each SPI bus/cs */
- 	struct sandbox_spi_info spi[CONFIG_SANDBOX_SPI_MAX_BUS]
+ /**
 -- 
 2.34.1
 
