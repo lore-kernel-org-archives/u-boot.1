@@ -4,85 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A191C3DA61
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:09:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378DBC3DA61
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D22D687DEA;
-	Sun, 21 Jul 2024 12:08:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3959F8806A;
+	Sun, 21 Jul 2024 12:08:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QKQbrT4t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jD0sJklA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AF0687DC7; Sun, 21 Jul 2024 12:08:52 +0200 (CEST)
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
- [IPv6:2607:f8b0:4864:20::a2f])
+ id 9119387B8D; Sun, 21 Jul 2024 12:08:55 +0200 (CEST)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8480D880F8
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:08:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 181BE87EB4
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:08:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4f51981b1beso203759e0c.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:08:49 -0700 (PDT)
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7a115c427f1so235665a12.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:08:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556528; x=1722161328; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721556531; x=1722161331; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DlfUiYsPf5zlW15uGXcV1orXOFGoHiZRibNL1BC7xF4=;
- b=QKQbrT4tL5uz50/A1aJMPHaXN3pEhctsTPraSbHXNvDDkPo/9qmOx4qUnmn5owXbBY
- R3bZfnhaQX2I4anpJ2KARLRckZPCMTjMgdb6obzaEXkCTM4DgvpNVl7N5+P/90Rwtdti
- Ib5jc44RXHnwGxv5aWR3rfZmnKBYvSEnoYYwc=
+ bh=49OTLffb5n59cgctai071C377IuP8qSyteEXF4rsPrQ=;
+ b=jD0sJklAzZZZ8GYGJoBBjBiVcrokGWJlO1sI9LDizZck08Lm2ZNmagyK9ySJ7OlA2z
+ /o4ds4fymeRUecVPFFMl8hiWwwt+pgLDYN7iDeaXwsDUrvFSOMGF/jbuVC3xIkJz1Dr6
+ 3LVi3UHnX2cxgQcsDl/AFH4b9B3OAsu0vxYb4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556528; x=1722161328;
+ d=1e100.net; s=20230601; t=1721556531; x=1722161331;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DlfUiYsPf5zlW15uGXcV1orXOFGoHiZRibNL1BC7xF4=;
- b=pxM4divSOG6FPc/s8AwXje/hYUQ9Y0tHDXBNFgrCMOqrFn6nE8/odn6QHh2E9MneIR
- PT5PpTbAl6lqHYpCTsmgKaYkib0DlrGuXIxxXBYl3vdvL+4az0yVnN+Dk3eSW3KTXbTm
- 7f6fKROULQHveBf9Kosq/qWcshjYvcYKz7T8bSIRXa0j09KLjKXIkgDQoMynOc9TvG0U
- ZnzmibyllFmZD70oqDHQRDxCnUkFJ7et51K2J0klw2uC5nzHTQuDDPuu8II3/hR7GIo6
- sD6VYhB03LA3YBh2ZhciZnAGWsJfylxoehPkxPJzP8pnw35lh42verFDAelvOknQSVS9
- +ROQ==
-X-Gm-Message-State: AOJu0YwKfPFU/CX+u4NGo1cpWC6zb58udCzcggjV3bsCjsDbz35QvU/z
- 9dstj0YU+6+MEGquhJh/fxJCH3TyHbH+3DWaCHaEDwitVlQJZdj8448+C921A5MM8bxFuNYPgiU
- kCpEUROxcFUZeR1WCC6XUIejCG3tjBEexp311
-X-Google-Smtp-Source: AGHT+IFc7biNyc5rYdukI6kdvCi6mrNVEHNfy0/JZ8rPAZS0wa9e/ksuWtKtSn15frAByo9emFsOd+dBxNCJ1ctiWyc=
-X-Received: by 2002:a05:6122:4105:b0:4f5:1787:18aa with SMTP id
- 71dfb90a1353d-4f517871c9fmr1659280e0c.0.1721556528343; Sun, 21 Jul 2024
- 03:08:48 -0700 (PDT)
+ bh=49OTLffb5n59cgctai071C377IuP8qSyteEXF4rsPrQ=;
+ b=atBvxaGWzvRU1oS4bCoqMctoxmhgATHGaY2hGIBt0/+gxIc8FRFb/g7Km50Pp4oEcc
+ ZiYudw14CXEzKVD1IqmNKIEHAtwSHuehHQ8Xpiju+WuMrlgW42QmnJuTfKIGSo3IhRrM
+ XhWacBEEhD3eoeia+ZEInak3Z6ctrmcz3lner63xC+2geAUwOxCNRa5gtIp4N6x3uvb7
+ 3U3HlRRXGli1hY0bF2gcf0cZog9T83nCPesPUH5rVR2/q+XqUzkkVPZaeyp33336bVfC
+ ShcwycRGARhWoCPnzUlQleSb9llRzzClGtx8uESaJqCgfAo6tyCaBSa1eC7dvmmEmeAw
+ WqJg==
+X-Gm-Message-State: AOJu0YxB2Fyv8gNSGY6h+HvKbSC8wvB3SVb1rTmi2/2EHAnm9cWx/vhP
+ NLxMjxnaY42l9fkCgoqbD8NU2uyYpM5+fe+dTFJ1U0Z0aoQbdrRWJiUBLEE1P1m6aFuoUnsOKiw
+ sPL/jPsvP9CZzuLCh9BvHFwss41jBnJR6K0Uv
+X-Google-Smtp-Source: AGHT+IGNHu4b0mW57aC1IdbLpPgi6KfJa3mO9AMJks2NNaocXcXUiG9pl/YEYrGlWbfJwB8/qC/FNfQdLJmdRYZUrxM=
+X-Received: by 2002:a05:6a20:a12c:b0:1c3:a411:dc48 with SMTP id
+ adf61e73a8af0-1c42299e229mr4332608637.38.1721556531511; Sun, 21 Jul 2024
+ 03:08:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240720061706.2644229-1-sjg@chromium.org>
- <20240720061706.2644229-14-sjg@chromium.org>
- <b3b642fd-fbf9-50e1-cc6b-8c52b551fd54@gmail.com>
-In-Reply-To: <b3b642fd-fbf9-50e1-cc6b-8c52b551fd54@gmail.com>
+ <20240720061706.2644229-10-sjg@chromium.org>
+ <b6bd4451-9893-77e1-e293-f6aad2cf1295@gmail.com>
+In-Reply-To: <b6bd4451-9893-77e1-e293-f6aad2cf1295@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 21 Jul 2024 11:08:36 +0100
-Message-ID: <CAFLszTh+aEqdajNRq=6Y=w=3NPAocL4nL3Md-cohjXVAvVJ5-g@mail.gmail.com>
-Subject: Re: [PATCH 13/14] spl: Create a function to init spl_load_info
+Date: Sun, 21 Jul 2024 11:08:35 +0100
+Message-ID: <CAFLszTi_kNreRgTDo6dy3wO+CqS4cBydZF+qQrtpBZk7SUzXAQ@mail.gmail.com>
+Subject: Re: [PATCH 09/14] spl: mmc: Handle error codes consistently
 To: Sean Anderson <seanga2@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andre Przywara <andre.przywara@arm.com>, 
- Chanho Park <chanho61.park@samsung.com>, Fabio Estevam <festevam@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, 
- Maksim Kiselev <bigunclemax@gmail.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michael Walle <mwalle@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>, 
- Stefano Babic <sbabic@denx.de>, Suniel Mahesh <sunil@amarulasolutions.com>, 
- Tom Rini <trini@konsulko.com>, Xavier Drudis Ferran <xdrudis@tinet.cat>
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,27 +88,16 @@ X-Virus-Status: Clean
 
 Hi Sean,
 
-On Sat, 20 Jul 2024 at 17:11, Sean Anderson <seanga2@gmail.com> wrote:
+On Sat, 20 Jul 2024 at 16:58, Sean Anderson <seanga2@gmail.com> wrote:
 >
 > On 7/20/24 02:17, Simon Glass wrote:
-> > Rather than having every caller set this up individually, create a
-> > common init function. This allows new fields to be added without the
-> > risk of them being left uninited.
-> >
+> > Use 'ret' as the return code, since it may not be an error and this is
+> > the common name in U-Boot. Make sure to return the error code when
+> > given, rather than transforming it into -1 (-EPERM).
 >
-> What is the code size impact of this?
+> Does this transformation affect code size?
 
-I don't see any, e.g. for socfpga_n5x_atf (which enabled
-SPL_FS_FAT)and firefly-rk3288
-
->
-> IIRC the reason why I didn't do this is to avoid growing the code in
-> cases where priv is unused.
-
->
-> Although in some places there are memsets which should be removed anyway.
-
-Yes, that might be helping.
+Not that I can see, e.g. for firefly-rk3288
 
 Regards,
-SImon
+Simon
