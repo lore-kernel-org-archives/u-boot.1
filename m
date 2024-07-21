@@ -4,55 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E78C3DA59
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jul 2024 20:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF7FC3DA59
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 01:47:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9245A88800;
-	Sat, 20 Jul 2024 22:20:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1FB1088644;
+	Sun, 21 Jul 2024 03:47:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721506843;
-	bh=9zzKw/bW+FMDPxBmkl3PJyp73xlSf8j32Pv26LbrJ6c=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WGcUn8rzeo76/495oRIdxhvjV3nO+JkpddyN21XkbT4RzubBiuJKZtjtKfV4wlN/W
-	 3UTwgN7OnJOrOvNKun3A6U5a+CbtsOjtjxHDWGbJbqdQ1XSfdsLq/bDomWyoshCgiE
-	 qzMRdwXz4CCSQNpnljCu6u3YdjYAdQD8RZPrXX0pNi5GpTpmEoUGg3Rc1xFl0wtq2n
-	 nG9tDtirWLhhufO1XoJG1SpcsxyslJtHyKfTMvsKEItfuUoH9LKpGNCRN/sH/seu4h
-	 8W2ORL/LVgWKQ3P1WxydljyAYJvB5LSEvhg9i2nJDaN9ITzUJvdJcKrlhBDr5HP47+
-	 WvKJGfO20PQ1w==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BH8qwsPh";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D7C468865D; Sun, 21 Jul 2024 03:47:42 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8930B88614;
- Sat, 20 Jul 2024 22:20:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1721506841;
- bh=9zzKw/bW+FMDPxBmkl3PJyp73xlSf8j32Pv26LbrJ6c=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=iBlb6RDgoitSrW8waSkUpvRgFVP4NmUjyuA9SztNnXpl1l4egbaLvH2uzoRDnRxlm
- l5Kc2x5bBoahfWaIFxE7arQ8r96nVSSQLQjz39xkwXLQZR2pA3+d6OekG0ndJsx9VG
- zMFifE0c992k59KibKgezyDs/vwToUV4og9fb6JIxmIkvjOMjr4IB9Nk2c+0tomKXs
- j9CLtNR1/ymbEfaF6rBQMYvRkhg7nwiRgxZcTitJUc0Oi0+EaINVPlCL2rXjna+gST
- FNRSHIWhg+wmvDB1XITCCtmqTqAf167nXzLbG2L0PAZ1p6Y0tbg27BsQDbqnJv2zrG
- CSxYeRa1gFzuA==
-Message-ID: <97a92b69-bac4-49f5-aeb8-19d5c0d53eb4@denx.de>
-Date: Sat, 20 Jul 2024 22:12:29 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id AFCAB885F6
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:47:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52efd08e6d9so722645e87.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jul 2024 18:47:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721526460; x=1722131260; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=srMKKIrkZ6d0bPdWG/fOSFkpc6sujUUnC0bnPUA6hhI=;
+ b=BH8qwsPhzpg3sxArQEUwo07RMcD4+cDyq8sdLfglBKOpcHxPAlcAo7n41a7eCQVclI
+ tJLjfpVemiwZ6ZKr1tidsBkCEQptPTAdfkcaVhVWC9ie/VBXiDLM2Vha9pthsUOkZFNI
+ X1inPZOcOmtRyXiv8DwqLqxxuHZFGWoz+f2FRvGANf1X+TJSZUrf0O4Wie9D7xztoSo7
+ +RPB/DpjXmDcl2rzBUcUTSNMf4b0nf5/z3J1sZzw6G1p9JnNCc4NF32KHu5SyBp41m6C
+ dLhXi2Teo66r3DHyDvbgzmz8IRlTVf0kPxkNwk/IG6WbAK67rMuRW8rU58vTakdpxK8G
+ 1hJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721526460; x=1722131260;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=srMKKIrkZ6d0bPdWG/fOSFkpc6sujUUnC0bnPUA6hhI=;
+ b=Q9cSHNlW0FMsnPUIOhH24Lpoy5Lw/sM4aZYQAf/X2whH5Yat/1sl1SLbPG5K0WKwqh
+ 7y3BQUKEWgfckWf1R2mZQ6nBaIEubv2AYaGrGSzzvkaqSYTl4XTEhAWR48Uq2Q6J1CFw
+ vkCvUNEVBhZ+mthFejV0eqo4I0TL1Ax5s7BwvzNoR8jGz2jFnKDe6arYcfk+Ips5lTxg
+ 5yXy4XxWZ7vXj+2NfpEohh3x/+RgyjRFOikLNctdaczglNw4RVqmAv7/Xd03UoPFLZT8
+ wEDXAMjNf0semnTDaNV3Qg39pBNbUEALJjXfw0Ie8t1W37Ot8TTwL8PLwkVIAotqlvPW
+ Doaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3/cFjPr3euSIkLkDrTDMmf8DPrfiFJ3Sqg67M1jRZF1s4z0yLhK2AYGCAQWUhfet5tWGF5GY8Ym0Sj3pLZM25r9iaYg==
+X-Gm-Message-State: AOJu0YzRgkneakkwcutnzcf1Ryi4E4id80RvFPRgzZdvE1foPjIsPn8B
+ kyT/DtUlKh0P2xku9O4iVsBZHlkBYk4XpLC9QisokZPEBB+9BgztcKNOnjd15mg9MpXuixv9dtp
+ 0klBN+MJjxgUCrNKd+ynrKw7ZtvQ=
+X-Google-Smtp-Source: AGHT+IEqffkVVfARPWqSmMWOXjfwtFAnwmQYuS7fFUjZLpt0z46dgqOThN4+8oP+NzXrfr/bmGBzbpFP3wX+OHB2o7I=
+X-Received: by 2002:ac2:4c56:0:b0:52e:d0f8:2d30 with SMTP id
+ 2adb3069b0e04-52efb89cab8mr1798670e87.59.1721526459689; Sat, 20 Jul 2024
+ 18:47:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH RFC] usb: gadget: atmel: Add DM_USB_GADGET support
-To: Zixun Li <zli@ogga.fr>, open list <u-boot@lists.denx.de>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-References: <PAZP264MB297470A072D9FA16978B1338B1AD2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
-Content-Language: en-US
-In-Reply-To: <PAZP264MB297470A072D9FA16978B1338B1AD2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240719013822.101374-1-minda.chen@starfivetech.com>
+ <20240719013822.101374-8-minda.chen@starfivetech.com>
+In-Reply-To: <20240719013822.101374-8-minda.chen@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sat, 20 Jul 2024 18:47:28 -0700
+Message-ID: <CANV2PTOXmm4a4+_94iKoGTAY5-kiym3xwYF77upXdu8KmLKv+Q@mail.gmail.com>
+Subject: Re: [PATCH v3 7/8] dts: starfive: Add JH7110 Cadence USB dts node
+To: Minda Chen <minda.chen@starfivetech.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Roger Quadros <rogerq@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, 
+ Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,336 +97,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/20/24 12:35 AM, Zixun Li wrote:
-> Add driver model support by using the uclass UCLASS_USB_GADGET_GENERIC.
-> 
-> Disable local usb_gadget_register_driver()/usb_gadget_unregister_driver()
-> implementation which is implemented in udc-core.c when DM_USB_GADGET
-> is enabled.
-> 
-> Compared to Linux driver sam9x60 and sama7g5 DT bindings are not included
-> as they are not supported by the driver yet.
-> 
-> Signed-off-by: Zixun LI <zli@ogga.fr>
+Hi, I am testing on Milk-V Mars CM Lite, and I add to these devicetree
+changes at runtime from board/starfive/visionfive2/spl.c
 
-+CC Mattijs
-
+On Thu, Jul 18, 2024 at 6:38=E2=80=AFPM Minda Chen <minda.chen@starfivetech=
+.com> wrote:
+>
+> Add Jh7110 Cadence USB dts node, Visionfive2 default setting
+> is USB 2.0 device.
+>
+> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
 > ---
->   drivers/usb/gadget/atmel_usba_udc.c | 196 ++++++++++++++++++++++++----
->   1 file changed, 169 insertions(+), 27 deletions(-)
-> 
-> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-> index f99553df8d..40e8b895a0 100644
-> --- a/drivers/usb/gadget/atmel_usba_udc.c
-> +++ b/drivers/usb/gadget/atmel_usba_udc.c
-> @@ -17,9 +17,19 @@
->   #include <linux/usb/gadget.h>
->   #include <linux/usb/atmel_usba_udc.h>
->   #include <malloc.h>
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/devres.h>
-
-Keep the list sorted
-
-> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +#include <mach/atmel_usba_udc.h>
-> +#endif /* CONFIG_IS_ENABLED(DM_USB_GADGET) */
->   
->   #include "atmel_usba_udc.h"
->   
-> +static struct usba_udc *controller;
+>  .../dts/jh7110-starfive-visionfive-2.dtsi     |  5 ++
+>  arch/riscv/dts/jh7110.dtsi                    | 52 +++++++++++++++++++
+>  2 files changed, 57 insertions(+)
+>
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/risc=
+v/dts/jh7110-starfive-visionfive-2.dtsi
+> index e11babc1cd..44785bbee3 100644
+> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> @@ -378,3 +378,8 @@
+>                 };
+>         };
+>  };
 > +
->   static int vbus_is_present(struct usba_udc *udc)
->   {
->   	/* No Vbus detection: Assume always present */
-> @@ -506,12 +516,6 @@ usba_udc_set_selfpowered(struct usb_gadget *gadget, int is_selfpowered)
->   	return 0;
->   }
->   
-> -static const struct usb_gadget_ops usba_udc_ops = {
-> -	.get_frame		= usba_udc_get_frame,
-> -	.wakeup			= usba_udc_wakeup,
-> -	.set_selfpowered	= usba_udc_set_selfpowered,
-> -};
-> -
->   static struct usb_endpoint_descriptor usba_ep0_desc = {
->   	.bLength = USB_DT_ENDPOINT_SIZE,
->   	.bDescriptorType = USB_DT_ENDPOINT,
-> @@ -1153,7 +1157,7 @@ static int usba_udc_irq(struct usba_udc *udc)
->   	return 0;
->   }
->   
-> -static int atmel_usba_start(struct usba_udc *udc)
-> +static int usba_enable(struct usba_udc *udc)
-
-Please factor out such rename (if it is even necessary) into a separate 
-preparatory patch, it makes the review easier.
-
->   {
->   	udc->devstatus = 1 << USB_DEVICE_SELF_POWERED;
->   
-> @@ -1168,7 +1172,7 @@ static int atmel_usba_start(struct usba_udc *udc)
->   	return 0;
->   }
->   
-> -static int atmel_usba_stop(struct usba_udc *udc)
-> +static int usba_disable(struct usba_udc *udc)
->   {
->   	udc->gadget.speed = USB_SPEED_UNKNOWN;
->   	reset_all_endpoints(udc);
-> @@ -1179,28 +1183,29 @@ static int atmel_usba_stop(struct usba_udc *udc)
->   	return 0;
->   }
->   
-> -static struct usba_udc controller = {
-> -	.regs = (unsigned *)ATMEL_BASE_UDPHS,
-> -	.fifo = (unsigned *)ATMEL_BASE_UDPHS_FIFO,
-> -	.gadget = {
-> -		.ops		= &usba_udc_ops,
-> -		.ep_list	= LIST_HEAD_INIT(controller.gadget.ep_list),
-> -		.speed		= USB_SPEED_HIGH,
-> -		.is_dualspeed	= 1,
-> -		.name		= "atmel_usba_udc",
-> -	},
-> -};
-> +static int usba_gadget_pullup(struct usb_gadget *g, int is_on)
-> +{
-> +	struct usba_udc *udc = controller;
-> +	u32 ctrl;
-> +
-> +	ctrl = usba_readl(udc, CTRL);
-
-
-if (is_on)
-   ctrl &= ~USBA_DETACH;
-else
-   ctrl |= USBA_DETACH;
-
-usba_writel(udc, ctrl);
-
-Should help readability.
-
-If this is moved code, do this in a preparatory patch please.
-
-> +	usba_writel(udc, CTRL, is_on ? ctrl & ~USBA_DETACH : ctrl | USBA_DETACH);
-> +
-> +	return 0;
-> +}
->   
->   int dm_usb_gadget_handle_interrupts(struct udevice *dev)
->   {
-> -	struct usba_udc *udc = &controller;
-> +	struct usba_udc *udc = controller;
->   
->   	return usba_udc_irq(udc);
->   }
->   
-> +#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
->   int usb_gadget_register_driver(struct usb_gadget_driver *driver)
->   {
-> -	struct usba_udc *udc = &controller;
-> +	struct usba_udc *udc = controller;
->   	int ret;
->   
->   	if (!driver || !driver->bind || !driver->setup) {
-> @@ -1213,7 +1218,7 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
->   		return -EBUSY;
->   	}
->   
-> -	atmel_usba_start(udc);
-> +	usba_enable(udc);
-
-Should be in preparatory patch.
-
->   	udc->driver = driver;
->   
-> @@ -1228,7 +1233,7 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
->   
->   int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
->   {
-> -	struct usba_udc *udc = &controller;
-> +	struct usba_udc *udc = controller;
-
-Should be in one of preparatory patches.
-
->   	if (!driver || !driver->unbind || !driver->disconnect) {
->   		pr_err("bad paramter\n");
-> @@ -1239,11 +1244,54 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
->   	driver->unbind(&udc->gadget);
->   	udc->driver = NULL;
->   
-> -	atmel_usba_stop(udc);
-> +	usba_disable(udc);
-> +
-> +	return 0;
-> +}
-> +#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-> +
-> +static int usba_gadget_start(struct usb_gadget *g,
-> +			     struct usb_gadget_driver *driver)
-> +{
-> +	struct usba_udc *udc = controller;
-> +
-> +	if (!driver || !driver->bind || !driver->setup) {
-> +		printf("bad parameter\n");
-
-Use log_ or dev_err
-
-> +		return -EINVAL;
-> +	}
-> +
-> +	if (udc->driver) {
-> +		printf("UDC already has a gadget driver\n");
-> +		return -EBUSY;
-> +	}
-> +
-> +	usba_enable(udc);
-> +
-> +	udc->driver = driver;
-> +
-> +	return 0;
-> +}
-> +
-> +static int usba_gadget_stop(struct usb_gadget *g)
-> +{
-> +	struct usba_udc *udc = controller;
-> +
-> +	if (!udc)
-> +		return -ENODEV;
-> +
-> +	if (!udc->driver)
-> +		return -EINVAL;
-> +
-> +	udc->driver->disconnect(&udc->gadget);
-> +	udc->driver = NULL;
-> +
-> +	usba_disable(udc);
->   
->   	return 0;
->   }
->   
-> +#endif /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-> +
->   static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
->   				      struct usba_udc *udc)
->   {
-> @@ -1284,13 +1332,107 @@ static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
->   	return eps;
->   }
->   
-> +static const struct usb_gadget_ops usba_udc_ops = {
-> +	.get_frame		= usba_udc_get_frame,
-> +	.wakeup			= usba_udc_wakeup,
-> +	.set_selfpowered	= usba_udc_set_selfpowered,
-> +	.pullup			= usba_gadget_pullup,
-> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +	.udc_start		= usba_gadget_start,
-> +	.udc_stop		= usba_gadget_stop,
-> +#endif
+> +&usb_cdns3 {
+> +       dr_mode =3D "peripheral";
+> +       status =3D "okay";
 > +};
+> diff --git a/arch/riscv/dts/jh7110.dtsi b/arch/riscv/dts/jh7110.dtsi
+> index 2cdc683d49..1eee924e1d 100644
+> --- a/arch/riscv/dts/jh7110.dtsi
+> +++ b/arch/riscv/dts/jh7110.dtsi
+> @@ -371,6 +371,58 @@
+>                         status =3D "disabled";
+>                 };
+>
+> +               usb0: usb@10100000 {
+> +                       compatible =3D "starfive,jh7110-usb";
+> +                       ranges =3D <0x0 0x0 0x10100000 0x100000>;
+> +                       #address-cells =3D <1>;
+> +                       #size-cells =3D <1>;
+> +                       starfive,stg-syscon =3D <&stg_syscon 0x4>;
+> +                       clocks =3D <&stgcrg JH7110_STGCLK_USB_LPM>,
+> +                                <&stgcrg JH7110_STGCLK_USB_STB>,
+> +                                <&stgcrg JH7110_STGCLK_USB_APB>,
+> +                                <&stgcrg JH7110_STGCLK_USB_AXI>,
+> +                                <&stgcrg JH7110_STGCLK_USB_UTMI_APB>;
+> +                       clock-names =3D "lpm", "stb", "apb", "axi", "utmi=
+_apb";
+> +                       resets =3D <&stgcrg JH7110_STGRST_USB_PWRUP>,
+> +                                <&stgcrg JH7110_STGRST_USB_APB>,
+> +                                <&stgcrg JH7110_STGRST_USB_AXI>,
+> +                                <&stgcrg JH7110_STGRST_USB_UTMI_APB>;
+> +                       reset-names =3D "pwrup", "apb", "axi", "utmi_apb"=
+;
 > +
-> +static struct usba_udc udc_controller = {
-> +	.regs = (unsigned int *)ATMEL_BASE_UDPHS,
-> +	.fifo = (unsigned int *)ATMEL_BASE_UDPHS_FIFO,
-> +	.gadget = {
-> +		.ops		= &usba_udc_ops,
-> +		.ep_list	= LIST_HEAD_INIT(udc_controller.gadget.ep_list),
-> +		.speed		= USB_SPEED_HIGH,
-> +		.is_dualspeed	= 1,
-> +		.name		= "atmel_usba_udc",
-> +	},
-> +};
+> +                       usb_cdns3: usb@0 {
+> +                               compatible =3D "cdns,usb3";
+> +                               reg =3D <0x0 0x10000>,
+> +                                     <0x10000 0x10000>,
+> +                                     <0x20000 0x10000>;
+> +                               reg-names =3D "otg", "xhci", "dev";
+> +                               interrupts =3D <100>, <108>, <110>;
+> +                               interrupt-names =3D "host", "peripheral",=
+ "otg";
+> +                               phys =3D <&usbphy0>;
+> +                               phy-names =3D "cdns3,usb2-phy";
+> +                       };
+> +               };
 > +
->   int usba_udc_probe(struct usba_platform_data *pdata)
->   {
-> -	struct usba_udc *udc;
-> +	controller = &udc_controller;
+> +               usbphy0: phy@10200000 {
+> +                       compatible =3D "starfive,jh7110-usb-phy";
+> +                       reg =3D <0x0 0x10200000 0x0 0x10000>;
+> +                       clocks =3D <&syscrg JH7110_SYSCLK_USB_125M>,
+> +                                <&stgcrg JH7110_STGCLK_USB_APP_125>;
+> +                       clock-names =3D "125m", "app_125m";
+> +                       #phy-cells =3D <0>;
+> +               };
 > +
-> +	controller->usba_ep = usba_udc_pdata(pdata, controller);
+> +               pciephy0: phy@10210000 {
+> +                       compatible =3D "starfive,jh7110-pcie-phy";
+> +                       reg =3D <0x0 0x10210000 0x0 0x10000>;
+> +                       #phy-cells =3D <0>;
+> +               };
 > +
-> +	return 0;
-> +}
+> +               pciephy1: phy@10220000 {
+> +                       compatible =3D "starfive,jh7110-pcie-phy";
+> +                       reg =3D <0x0 0x10220000 0x0 0x10000>;
+> +                       #phy-cells =3D <0>;
+> +               };
 > +
-> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +struct usba_priv_data {
-> +	struct clk_bulk		clks;
-> +};
->   
-> -	udc = &controller;
-> +static int atmel_usba_udc_clk_init(struct udevice *dev, struct clk_bulk *clks)
-> +{
-> +	int ret;
->   
-> -	udc->usba_ep = usba_udc_pdata(pdata, udc);
-> +	ret = clk_get_bulk(dev, clks);
-> +	if (ret == -ENOSYS)
-> +		return 0;
-> +
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = clk_enable_bulk(clks);
-> +	if (ret) {
-> +		clk_release_bulk(clks);
-> +		return ret;
-> +	}
->   
->   	return 0;
->   }
-> +
-> +static int atmel_usba_udc_probe(struct udevice *dev)
-> +{
-> +	struct usba_priv_data *priv = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	ret = atmel_usba_udc_clk_init(dev, &priv->clks);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = usba_udc_probe(&pdata);
-> +	if (ret)
-> +		return ret;
-> +
-> +	controller->driver = 0;
-> +
-> +	ret = usb_add_gadget_udc((struct device *)dev, &controller->gadget);
-> +
-> +	return ret;
-> +}
-> +
-> +static int atmel_usba_udc_remove(struct udevice *dev)
-> +{
-> +	struct usba_priv_data *priv = dev_get_priv(dev);
-> +
-> +	usb_del_gadget_udc(&controller->gadget);
-> +
-> +	clk_release_bulk(&priv->clks);
-> +
-> +	return dm_scan_fdt_dev(dev);
-> +}
-> +
-> +static const struct udevice_id atmel_usba_udc_ids[] = {
-> +	{ .compatible = "atmel,at91sam9rl-udc" },
-> +	{ .compatible = "atmel,at91sam9g45-udc" },
-> +	{ .compatible = "atmel,sama5d3-udc" },
+>                 stgcrg: clock-controller@10230000 {
+>                         compatible =3D "starfive,jh7110-stgcrg";
+>                         reg =3D <0x0 0x10230000 0x0 0x10000>;
+> --
+> 2.17.1
+>
 
-Keep the list sorted.
+Access fault
 
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(ateml_usba_udc) = {
-> +	.name	= "ateml_usba_udc",
-> +	.id	= UCLASS_USB_GADGET_GENERIC,
-> +	.of_match = atmel_usba_udc_ids,
-> +	.probe = atmel_usba_udc_probe,
-> +	.remove = atmel_usba_udc_remove,
-> +	.priv_auto	= sizeof(struct usba_priv_data),
-> +};
-> +#endif /* CONFIG_IS_ENABLED(DM_USB_GADGET) */
+        starting USB...
+        Bus usb@0: cdns-usb3-host usb@0: set 1 has failed, back to 0
+        scanning bus usb@0 for devices... Unhandled exception: Load access =
+fault
+        EPC: 00000000fff85ce2 RA: 00000000fff85cdc TVAL: 0000000000000004
+        EPC: 0000000040246ce2 RA: 0000000040246cdc reloc adjusted
 
-Looks pretty good otherwise, thanks !
+        Code: 9863 3ee7 8526 f0ef c37f 651c 3a03 0105 (43dc)
 
-Don't forget to CC Mattijs on V2
+
+        resetting ...
+
+when I add only these:
+
+        int offset;
+
+        offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000"); /* &sysgp=
+io */
+        fdt_add_subnode(fdt, offset, "usb0-0");
+        fdt_setprop_string(fdt, fdt_path_offset(fdt, "/__symbols__"),
+"usb_pins", "/soc/pinctrl@13040000/usb0-0");
+        offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0");
+/* usb_pins */
+        fdt_create_phandle(fdt, offset);
+        fdt_add_subnode(fdt, offset, "driver-vbus-pin");
+        offset =3D fdt_path_offset(fdt,
+"/soc/pinctrl@13040000/usb0-0/driver-vbus-pin");
+        fdt_setprop_u32(fdt, offset, "pinmux", 0xff070019); /*
+GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS, GPOEN_ENABLE, GPI_NONE) */
+        fdt_setprop_empty(fdt, offset, "bias-disable");
+        fdt_setprop_empty(fdt, offset, "input-disable");
+        fdt_setprop_empty(fdt, offset, "input-schmitt-disable");
+        fdt_setprop_u32(fdt, offset, "slew-rate", 0);
+
+        offset =3D fdt_path_offset(fdt, "/soc/usb@10100000"); /* &usb0 */
+        fdt_setprop_string(fdt, offset, "pinctrl-names", "default");
+        fdt_setprop_u32(fdt, offset, "pinctrl-0", fdt_get_phandle(fdt,
+fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0")));
+        fdt_setprop_string(fdt, offset, "status", "okay");
+
+        offset =3D fdt_path_offset(fdt, "/soc/usb@10100000/usb@0"); /*
+&usb_cdns3 */
+        fdt_setprop_string(fdt, offset, "dr_mode",   "host");
+
+Success USB is working but PCI disabled if instead I add all of this:
+
+        int offset;
+
+        offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000"); /* &sysgp=
+io */
+        fdt_add_subnode(fdt, offset, "usb0-0");
+        fdt_setprop_string(fdt, fdt_path_offset(fdt, "/__symbols__"),
+"usb_pins", "/soc/pinctrl@13040000/usb0-0");
+        offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0");
+/* usb_pins */
+        fdt_create_phandle(fdt, offset);
+        fdt_add_subnode(fdt, offset, "driver-vbus-pin");
+        offset =3D fdt_path_offset(fdt,
+"/soc/pinctrl@13040000/usb0-0/driver-vbus-pin");
+        fdt_setprop_u32(fdt, offset, "pinmux", 0xff070019); /*
+GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS, GPOEN_ENABLE, GPI_NONE) */
+        fdt_setprop_empty(fdt, offset, "bias-disable");
+        fdt_setprop_empty(fdt, offset, "input-disable");
+        fdt_setprop_empty(fdt, offset, "input-schmitt-disable");
+        fdt_setprop_u32(fdt, offset, "slew-rate", 0);
+
+        offset =3D fdt_path_offset(fdt, "/soc/pcie@2b000000"); /* &pcie0 */
+        fdt_setprop_string(fdt, offset, "status", "disabled");
+
+        offset =3D fdt_path_offset(fdt, "/soc/phy@10210000"); /* &pciephy0 =
+*/
+        fdt_setprop_u32(fdt, offset, "starfive,sys-syscon",
+fdt_get_phandle(fdt, fdt_path_offset(fdt,
+"/soc/sys_syscon@13030000"))); /* =3D <&sys_syscon> */
+        fdt_appendprop_u32(fdt, offset, "starfive,sys-syscon", 0x18);
+/* append <magic number> */
+        fdt_setprop_u32(fdt, offset, "starfive,stg-syscon",
+fdt_get_phandle(fdt, fdt_path_offset(fdt,
+"/soc/stg_syscon@10240000"))); /* =3D <&stg_syscon> */
+        fdt_appendprop_u32(fdt, offset, "starfive,stg-syscon", 0x148);
+/* append <magic number> */
+        fdt_appendprop_u32(fdt, offset, "starfive,stg-syscon", 0x1f4);
+/* append <magic number> */
+        fdt_setprop_string(fdt, offset, "status", "okay");
+
+        offset =3D fdt_path_offset(fdt, "/soc/usb@10100000"); /* &usb0 */
+        fdt_setprop_string(fdt, offset, "pinctrl-names", "default");
+        fdt_setprop_u32(fdt, offset, "pinctrl-0", fdt_get_phandle(fdt,
+fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0")));
+        fdt_setprop_string(fdt, offset, "status", "okay");
+
+        offset =3D fdt_path_offset(fdt, "/soc/usb@10100000/usb@0"); /*
+&usb_cdns3 */
+        fdt_setprop_u32(fdt,    offset, "phys",
+fdt_get_phandle(fdt, fdt_path_offset(fdt, "/soc/phy@10200000"))); /* =3D
+<&usbphy0> */
+        fdt_appendprop_u32(fdt, offset, "phys",
+fdt_get_phandle(fdt, fdt_path_offset(fdt, "/soc/phy@10210000"))); /*
+append <&pciephy0> */
+        fdt_setprop(fdt,        offset, "phy-names",
+"cdns3,usb2-phy\0cdns3,usb3-phy",
+sizeof("cdns3,usb2-phy\0cdns3,usb3-phy"));
+        fdt_setprop_string(fdt, offset, "dr_mode",   "host");
+
+I have made some mistake for devicetree and USB2.0 with keeping pcie0
+(not disable)? or is there a problem with the implementation?
+
+Best regards, -E Shattow
