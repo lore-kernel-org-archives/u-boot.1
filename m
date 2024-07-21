@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 885CEC3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E0EFC3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:12:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3B29884BC;
-	Sun, 21 Jul 2024 12:10:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32901883BB;
+	Sun, 21 Jul 2024 12:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q+B42kMm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OToSCgs4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2518883AF; Sun, 21 Jul 2024 12:10:03 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 211288827D; Sun, 21 Jul 2024 12:10:07 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52EF9874AC
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3525688387
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-426636ef8c9so22419425e9.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:01 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2ef23d04541so9906171fa.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556600; x=1722161400; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721556602; x=1722161402; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p4F/vUlfj3xNeNqf/7eTpyLbM/QqmxD5aRJYwP/qcjw=;
- b=Q+B42kMmkLJatfGDkWrLuwUw1MJ62DlLdExeV5qq4DF4y6FrMFUzq9rQ1yPMm5VBFr
- fvwl6dc2YkUXzfnYMtO5jZG97KuQtJgJ7t+bDwrm+cVB3QZm+n2NQsWOKwR9lWa7GQMx
- RQybqklYaH7h9vg/aDzT3ShF41c4TqTdG1M4U=
+ bh=SxwArqhnI36i4knZApbv9zYEW8+/GrH2G+Q9EhmsQtg=;
+ b=OToSCgs4tfQCa1pjHpapabiXhB+VejofsiG6AUJfvEi+IEDgCS7BgYwbO7Fq0GWnBu
+ JWxOSuVZZ7ULTm9gZeedkFVi8HAyoBZ0JlXVvZtezcDOOrsm3BWoeY0ohDJnSb8gNzse
+ y69arF1+PgJDIGX96VN1qO1s1lphr37tD86qw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556600; x=1722161400;
+ d=1e100.net; s=20230601; t=1721556602; x=1722161402;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p4F/vUlfj3xNeNqf/7eTpyLbM/QqmxD5aRJYwP/qcjw=;
- b=VPFdNLu3rcdm96dvgC2OJ/QPwVrf7OJy7RfzruV7FqEBCxTGe93iRQC+WNcRFnGqLg
- DUEP9IPMSJhF+Teu8Z4FLvJlJwdlizKbM7EZzSeyuZFewQaxerTERfsSM4/B79JuefMI
- 9qyfigStAYWpo3DmGes4FmEU4eJf+pvCHDjuFsGSkPeuyecx48YBn2TBhtIWI74FH2Us
- DbXBMWUVsAp78W1BkVJ5eIlNfCc3VBZMewd7ASKiwvkZ40r1YW/eSIQchxEAmCgOwY4a
- JGIKVJb+MvXcfD+vR9uzhZv48GbWYyBgh2TV4b9qyrtaUVE3G5GsTEaKeVoc6U8XZ338
- 7UIg==
-X-Gm-Message-State: AOJu0YwXBz6qYl9jJd0ZmLe+l9vEU+n/8C8jYitI1OBYDk3XLxik2OlR
- bAfP+8UEs6fi1AdH3Kq49jnzXoCfSWYPrpOzGH3lzimBI8BrNVwLkmT919CITdwn+lFGeQt4ooA
+ bh=SxwArqhnI36i4knZApbv9zYEW8+/GrH2G+Q9EhmsQtg=;
+ b=R+lujLHHQQailEdcQu1m82a4ifjpFlJjJdYurpcaIA065IySnbcpknk++QuxLAncef
+ 9vgHwoIFJVhr/YuNfyUP6QdS9vm3R6m06YC2F7k0HIp18N+hWMY2hBoJyNLVinysRDZo
+ 1gsUZkYBGgwNY9kHijGExRny6XwERtrVSZze2VpLNoHlJDYc8bNnu5YAUf26Kc2kyyeV
+ HQ3GPyX9DEA/j0jM6v5584Vg5qj/LLdSShOBvyS1odwZZGutBRP71U7Z37Nw+muI4fUt
+ xMv/+xRVe/FqVwwRyO8jGs8soNQht385QJH2wQoZ1rWlvcrjSrQq6bhiOyVkzyhoJ8z/
+ zx5w==
+X-Gm-Message-State: AOJu0YziSXfuhp8MeMz0hUxut6o2S/ElZ9Y9Da8mcjg2VLIu8+nKuRtY
+ ncMfsv/gBA3QqVd+JT5yiBbbj4zPlgWil9YnUwV3q+feyp4jdNw0p2gT9RXZaLHa6xURbPUW42w
  =
-X-Google-Smtp-Source: AGHT+IHUKvbBocWQL4HJG6xoblUUkKtdyEeiPJBgvJHbqE77Qq92d8IVl86FnICGgRZQfMmsk86nGQ==
-X-Received: by 2002:a05:600c:4e86:b0:426:6f17:531 with SMTP id
- 5b1f17b1804b1-427dc5204aemr24704795e9.13.1721556600028; 
- Sun, 21 Jul 2024 03:10:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHkLjfa3xuc7Cmd0iYX+N3Pfvuxf+KHPixCiARyZg/dq/BzDcxtD2KT0sm+JOaL38AC/xrwdA==
+X-Received: by 2002:a2e:9090:0:b0:2ee:8ce9:3037 with SMTP id
+ 38308e7fff4ca-2ef1681e836mr30001231fa.37.1721556601700; 
+ Sun, 21 Jul 2024 03:10:01 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.09.58
+ 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 03:09:59 -0700 (PDT)
+ Sun, 21 Jul 2024 03:10:00 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 10/21] upl: Add support for writing a upl handoff
-Date: Sun, 21 Jul 2024 11:09:28 +0100
-Message-Id: <20240721100940.3202027-11-sjg@chromium.org>
+Subject: [PATCH v3 11/21] upl: Add basic tests
+Date: Sun, 21 Jul 2024 11:09:29 +0100
+Message-Id: <20240721100940.3202027-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240721100940.3202027-1-sjg@chromium.org>
 References: <20240721100940.3202027-1-sjg@chromium.org>
@@ -91,687 +91,467 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Universal Payload provides a standard way of handing off control between
-two firmware phases. Add support for writing the handoff information from
-a structure.
+Add some unit tests to check that we can write a UPL handoff and read it
+back.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- boot/Kconfig     |   8 +
- boot/Makefile    |   1 +
- boot/upl_write.c | 622 +++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 631 insertions(+)
- create mode 100644 boot/upl_write.c
+Changes in v2:
+- Put the upl tests under their own subcommand to avoid bootstd init
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 6e907b45095..fa4f766054c 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -739,6 +739,7 @@ config BOOTMETH_SCRIPT
- config UPL
- 	bool "upl - Universal Payload Specification"
- 	imply UPL_READ
-+	imply UPL_WRITE
- 	help
- 	  Provides support for UPL payloads and handoff information. U-Boot
- 	  supports generating and accepting handoff information. The mkimage
-@@ -753,6 +754,13 @@ config UPL_READ
- 	  which can be used elsewhere in U-Boot. This is just the reading
- 	  implementation, useful for trying it out.
+ MAINTAINERS           |   1 +
+ include/test/suites.h |   1 +
+ include/upl.h         |   9 ++
+ test/boot/Makefile    |   2 +
+ test/boot/upl.c       | 368 ++++++++++++++++++++++++++++++++++++++++++
+ test/cmd_ut.c         |   3 +
+ 6 files changed, 384 insertions(+)
+ create mode 100644 test/boot/upl.c
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 070a766a76f..1c41fd30b2a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1707,6 +1707,7 @@ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-dm.git
+ F:	boot/upl*
+ F:	include/upl.h
++F:	test/boot/upl.c
  
-+config UPL_WRITE
-+	bool "upl - Support writing a Universal Payload handoff"
-+	help
-+	  Provides support for encoding a UPL-format payload from a C structure
-+	  so it can be passed to another program. This is just the writing
-+	  implementation, useful for trying it out.
+ USB
+ M:	Marek Vasut <marex@denx.de>
+diff --git a/include/test/suites.h b/include/test/suites.h
+index 365d5f20dfe..2ceef577f7f 100644
+--- a/include/test/suites.h
++++ b/include/test/suites.h
+@@ -63,5 +63,6 @@ int do_ut_str(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_time(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_unicode(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		  char *const argv[]);
++int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ 
+ #endif /* __TEST_SUITES_H__ */
+diff --git a/include/upl.h b/include/upl.h
+index fca7e5fd49f..fa784e57f74 100644
+--- a/include/upl.h
++++ b/include/upl.h
+@@ -308,6 +308,15 @@ int upl_create_handoff_tree(const struct upl *upl, oftree *treep);
+  * Return: 0 on success, -ve on error
+  */
+ int upl_read_handoff(struct upl *upl, oftree tree);
 +
- endif  # UPL
++/**
++ * upl_get_test_data() - Fill a UPL with some test data
++ *
++ * @uts: Test state (can be uninited)
++ * @upl: Returns test data
++ * Return: 0 on success, 1 on error
++ */
++int upl_get_test_data(struct unit_test_state *uts, struct upl *upl);
+ #endif /* USE_HOSTCC */
  
- endif # BOOTSTD
-diff --git a/boot/Makefile b/boot/Makefile
-index 97b52a3404c..b8b63d31e88 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -45,6 +45,7 @@ obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) += fdt_simplefb.o
- 
- obj-$(CONFIG_$(SPL_TPL_)UPL) += upl_common.o
- obj-$(CONFIG_$(SPL_TPL_)UPL_READ) += upl_read.o
-+obj-$(CONFIG_$(SPL_TPL_)UPL_WRITE) += upl_write.o
- 
- obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += image-fdt.o
- obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) += fdt_region.o
-diff --git a/boot/upl_write.c b/boot/upl_write.c
+ #if CONFIG_IS_ENABLED(UPL) && defined(CONFIG_SPL_BUILD)
+diff --git a/test/boot/Makefile b/test/boot/Makefile
+index 068522cb9e0..8ec5daa7bfe 100644
+--- a/test/boot/Makefile
++++ b/test/boot/Makefile
+@@ -13,3 +13,5 @@ ifdef CONFIG_OF_LIVE
+ obj-$(CONFIG_BOOTMETH_VBE_SIMPLE) += vbe_simple.o
+ endif
+ obj-$(CONFIG_BOOTMETH_VBE) += vbe_fixup.o
++
++obj-$(CONFIG_UPL) += upl.o
+diff --git a/test/boot/upl.c b/test/boot/upl.c
 new file mode 100644
-index 00000000000..7d637c15ba0
+index 00000000000..e9d92efd80d
 --- /dev/null
-+++ b/boot/upl_write.c
-@@ -0,0 +1,622 @@
++++ b/test/boot/upl.c
+@@ -0,0 +1,368 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * UPL handoff generation
++ * UPL handoff testing
 + *
 + * Copyright 2024 Google LLC
 + * Written by Simon Glass <sjg@chromium.org>
 + */
 +
-+#define LOG_CATEGORY UCLASS_BOOTSTD
-+
-+#include <log.h>
++#include <abuf.h>
++#include <mapmem.h>
 +#include <upl.h>
 +#include <dm/ofnode.h>
-+#include "upl_common.h"
++#include <test/suites.h>
++#include <test/test.h>
++#include <test/ut.h>
++#include "bootstd_common.h"
 +
-+/**
-+ * write_addr() - Write an address
-+ *
-+ * Writes an address in the correct format, either 32- or 64-bit
-+ *
-+ * @upl: UPL state
-+ * @node: Node to write to
-+ * @prop: Property name to write
-+ * @addr: Address to write
-+ * Return: 0 if OK, -ve on error
-+ */
-+static int write_addr(const struct upl *upl, ofnode node, const char *prop,
-+		      ulong addr)
++/* Declare a new upl test */
++#define UPL_TEST(_name, _flags)	UNIT_TEST(_name, _flags, upl_test)
++
++static int add_region(struct unit_test_state *uts, struct alist *lst,
++		      ulong base, ulong size)
 +{
-+	int ret;
++	struct memregion region;
 +
-+	if (upl->addr_cells == 1)
-+		ret = ofnode_write_u32(node, prop, addr);
-+	else
-+		ret = ofnode_write_u64(node, prop, addr);
-+
-+	return ret;
-+}
-+
-+/**
-+ * write_size() - Write a size
-+ *
-+ * Writes a size in the correct format, either 32- or 64-bit
-+ *
-+ * @upl: UPL state
-+ * @node: Node to write to
-+ * @prop: Property name to write
-+ * @size: Size to write
-+ * Return: 0 if OK, -ve on error
-+ */
-+static int write_size(const struct upl *upl, ofnode node, const char *prop,
-+		      ulong size)
-+{
-+	int ret;
-+
-+	if (upl->size_cells == 1)
-+		ret = ofnode_write_u32(node, prop, size);
-+	else
-+		ret = ofnode_write_u64(node, prop, size);
-+
-+	return ret;
-+}
-+
-+/**
-+ * ofnode_write_bitmask() - Write a bit mask as a string list
-+ *
-+ * @node: Node to write to
-+ * @prop: Property name to write
-+ * @names: Array of names for each bit
-+ * @count: Number of array entries
-+ * @value: Bit-mask value to write
-+ * Return: 0 if OK, -EINVAL if a bit number is not defined, -ENOSPC if the
-+ * string is too long for the (internal) buffer
-+ */
-+static int ofnode_write_bitmask(ofnode node, const char *prop,
-+				const char *const names[], uint count,
-+				uint value)
-+{
-+	char buf[128];
-+	char *ptr, *end = buf + sizeof(buf);
-+	uint bit;
-+	int ret;
-+
-+	ptr = buf;
-+	for (bit = 0; bit < count; bit++) {
-+		if (value & BIT(bit)) {
-+			const char *str = names[bit];
-+			uint len;
-+
-+			if (!str) {
-+				log_debug("Unnamed bit number %d\n", bit);
-+				return log_msg_ret("bit", -EINVAL);
-+			}
-+			len = strlen(str) + 1;
-+			if (ptr + len > end) {
-+				log_debug("String array too long\n");
-+				return log_msg_ret("bit", -ENOSPC);
-+			}
-+
-+			memcpy(ptr, str, len);
-+			ptr += len;
-+		}
-+	}
-+
-+	ret = ofnode_write_prop(node, prop, buf, ptr - buf, true);
-+	if (ret)
-+		return log_msg_ret("wri", ret);
++	region.base = base;
++	region.size = size;
++	ut_assertnonnull(alist_add(lst, region, struct memregion));
 +
 +	return 0;
 +}
 +
-+/**
-+ * ofnode_write_value() - Write an int as a string value using a lookup
-+ *
-+ * @node: Node to write to
-+ * @prop: Property name to write
-+ * @names: Array of names for each int value
-+ * @count: Number of array entries
-+ * @value: Int value to write
-+ * Return: 0 if OK, -EINVAL if a bit number is not defined, -ENOSPC if the
-+ * string is too long for the (internal) buffer
-+ */
-+static int ofnode_write_value(ofnode node, const char *prop,
-+			      const char *const names[], uint count,
-+			      uint value)
++int upl_get_test_data(struct unit_test_state *uts, struct upl *upl)
 +{
-+	const char *str;
-+	int ret;
++	struct upl_memmap memmap;
++	struct upl_memres memres;
++	struct upl_image img;
++	struct upl_mem mem;
 +
-+	if (value >= count) {
-+		log_debug("Value of range %d\n", value);
-+		return log_msg_ret("val", -ERANGE);
-+	}
-+	str = names[value];
-+	if (!str) {
-+		log_debug("Unnamed value %d\n", value);
-+		return log_msg_ret("val", -EINVAL);
-+	}
-+	ret = ofnode_write_string(node, prop, str);
-+	if (ret)
-+		return log_msg_ret("wri", ret);
++	upl_init(upl);
++
++	upl->addr_cells = 1;
++	upl->size_cells = 1;
++	upl->smbios = 0x123;
++	upl->acpi = 0x456;
++	upl->bootmode = BIT(UPLBM_DEFAULT) | BIT(UPLBM_S3);
++	upl->fit = 0x789;
++	upl->conf_offset = 0x234;
++	upl->addr_width = 46;
++	upl->acpi_nvs_size = 0x100;
++
++	/* image[0] */
++	img.load = 0x1;
++	img.size = 0x2;
++	img.offset = 0x3;
++	img.description = "U-Boot";
++	ut_assertnonnull(alist_add(&upl->image, img, struct upl_image));
++
++	/* image[1] */
++	img.load = 0x4;
++	img.size = 0x5;
++	img.offset = 0x6;
++	img.description = "ATF";
++	ut_assertnonnull(alist_add(&upl->image, img, struct upl_image));
++
++	/* mem[0] : 3 regions */
++	memset(&mem, '\0', sizeof(mem));
++	alist_init_struct(&mem.region, struct memregion);
++	ut_assertok(add_region(uts, &mem.region, 0x10, 0x20));
++	ut_assertok(add_region(uts, &mem.region, 0x30, 0x40));
++	ut_assertok(add_region(uts, &mem.region, 0x40, 0x50));
++	ut_assertnonnull(alist_add(&upl->mem, mem, struct upl_mem));
++
++	/* mem[0] : 1 region */
++	alist_init_struct(&mem.region, struct memregion);
++	ut_assertok(add_region(uts, &mem.region, 0x70, 0x80));
++	mem.hotpluggable = true;
++	ut_assertnonnull(alist_add(&upl->mem, mem, struct upl_mem));
++	mem.hotpluggable = false;
++
++	/* memmap[0] : 5 regions */
++	alist_init_struct(&memmap.region, struct memregion);
++	memmap.name = "acpi";
++	memmap.usage = BIT(UPLUS_ACPI_RECLAIM);
++	ut_assertok(add_region(uts, &memmap.region, 0x11, 0x12));
++	ut_assertok(add_region(uts, &memmap.region, 0x13, 0x14));
++	ut_assertok(add_region(uts, &memmap.region, 0x15, 0x16));
++	ut_assertok(add_region(uts, &memmap.region, 0x17, 0x18));
++	ut_assertok(add_region(uts, &memmap.region, 0x19, 0x1a));
++	ut_assertnonnull(alist_add(&upl->memmap, memmap, struct upl_memmap));
++
++	/* memmap[1] : 1 region */
++	memmap.name = "u-boot";
++	memmap.usage = BIT(UPLUS_BOOT_DATA);
++	alist_init_struct(&memmap.region, struct memregion);
++	ut_assertok(add_region(uts, &memmap.region, 0x21, 0x22));
++	ut_assertnonnull(alist_add(&upl->memmap, memmap, struct upl_memmap));
++
++	/* memmap[2] : 1 region */
++	alist_init_struct(&memmap.region, struct memregion);
++	memmap.name = "efi";
++	memmap.usage = BIT(UPLUS_RUNTIME_CODE);
++	ut_assertok(add_region(uts, &memmap.region, 0x23, 0x24));
++	ut_assertnonnull(alist_add(&upl->memmap, memmap, struct upl_memmap));
++
++	/* memmap[3]: 2 regions */
++	alist_init_struct(&memmap.region, struct memregion);
++	memmap.name = "empty";
++	memmap.usage = 0;
++	ut_assertok(add_region(uts, &memmap.region, 0x25, 0x26));
++	ut_assertok(add_region(uts, &memmap.region, 0x27, 0x28));
++	ut_assertnonnull(alist_add(&upl->memmap, memmap, struct upl_memmap));
++
++	/* memmap[4]: 1 region */
++	alist_init_struct(&memmap.region, struct memregion);
++	memmap.name = "acpi-things";
++	memmap.usage = BIT(UPLUS_RUNTIME_CODE) | BIT(UPLUS_ACPI_NVS);
++	ut_assertok(add_region(uts, &memmap.region, 0x29, 0x2a));
++	ut_assertnonnull(alist_add(&upl->memmap, memmap, struct upl_memmap));
++
++	/* memres[0]: 1 region */
++	alist_init_struct(&memres.region, struct memregion);
++	memset(&memres, '\0', sizeof(memres));
++	memres.name = "mmio";
++	ut_assertok(add_region(uts, &memres.region, 0x2b, 0x2c));
++	ut_assertnonnull(alist_add(&upl->memres, memres, struct upl_memres));
++
++	/* memres[1]: 2 regions */
++	alist_init_struct(&memres.region, struct memregion);
++	memres.name = "memory";
++	ut_assertok(add_region(uts, &memres.region, 0x2d, 0x2e));
++	ut_assertok(add_region(uts, &memres.region, 0x2f, 0x30));
++	memres.no_map = true;
++	ut_assertnonnull(alist_add(&upl->memres, memres, struct upl_memres));
++
++	upl->serial.compatible = "ns16550a";
++	upl->serial.clock_frequency = 1843200;
++	upl->serial.current_speed = 115200;
++	alist_init_struct(&upl->serial.reg, struct memregion);
++	ut_assertok(add_region(uts, &upl->serial.reg, 0xf1de0000, 0x100));
++	upl->serial.reg_io_shift = 2;
++	upl->serial.reg_offset = 0x40;
++	upl->serial.reg_io_width = 1;
++	upl->serial.virtual_reg = 0x20000000;
++	upl->serial.access_type = UPLSAT_MMIO;
++
++	alist_init_struct(&upl->graphics.reg, struct memregion);
++	ut_assertok(add_region(uts, &upl->graphics.reg, 0xd0000000, 0x10000000));
++	upl->graphics.width = 1280;
++	upl->graphics.height = 1280;
++	upl->graphics.stride = upl->graphics.width * 4;
++	upl->graphics.format = UPLGF_ARGB32;
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_root_props() - Add root properties to the tree
-+ *
-+ * @node: Node to add to
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_root_props(const struct upl *upl, ofnode node)
++static int compare_upl_image(struct unit_test_state *uts,
++			     const struct upl_image *base,
++			     const struct upl_image *cmp)
 +{
-+	int ret;
-+
-+	ret = ofnode_write_u32(node, UPLP_ADDRESS_CELLS, upl->addr_cells);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_SIZE_CELLS, upl->size_cells);
-+	if (ret)
-+		return log_msg_ret("cel", ret);
++	ut_asserteq(base->load, cmp->load);
++	ut_asserteq(base->size, cmp->size);
++	ut_asserteq(base->offset, cmp->offset);
++	ut_asserteq_str(base->description, cmp->description);
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_upl_params() - Add UPL parameters node
-+ *
-+ * @upl: UPL state
-+ * @options: /options node to add to
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_params(const struct upl *upl, ofnode options)
++static int compare_upl_memregion(struct unit_test_state *uts,
++				 const struct memregion *base,
++				 const struct memregion *cmp)
 +{
-+	ofnode node;
-+	int ret;
-+
-+	ret = ofnode_add_subnode(options, UPLN_UPL_PARAMS, &node);
-+	if (ret)
-+		return log_msg_ret("img", ret);
-+
-+	ret = write_addr(upl, node, UPLP_SMBIOS, upl->smbios);
-+	if (!ret)
-+		ret = write_addr(upl, node, UPLP_ACPI, upl->acpi);
-+	if (!ret && upl->bootmode)
-+		ret = ofnode_write_bitmask(node, UPLP_BOOTMODE, bootmode_names,
-+					   UPLBM_COUNT, upl->bootmode);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_ADDR_WIDTH, upl->addr_width);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_ACPI_NVS_SIZE,
-+				       upl->acpi_nvs_size);
-+	if (ret)
-+		return log_msg_ret("cnf", ret);
++	ut_asserteq(base->base, cmp->base);
++	ut_asserteq(base->size, cmp->size);
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_upl_image() - Add /options/upl-image nodes and properties to the tree
-+ *
-+ * @upl: UPL state
-+ * @node: /options node to add to
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_image(const struct upl *upl, ofnode options)
-+{
-+	ofnode node;
-+	int ret, i;
-+
-+	ret = ofnode_add_subnode(options, UPLN_UPL_IMAGE, &node);
-+	if (ret)
-+		return log_msg_ret("img", ret);
-+
-+	if (upl->fit)
-+		ret = ofnode_write_u32(node, UPLP_FIT, upl->fit);
-+	if (!ret && upl->conf_offset)
-+		ret = ofnode_write_u32(node, UPLP_CONF_OFFSET,
-+				       upl->conf_offset);
-+	if (ret)
-+		return log_msg_ret("cnf", ret);
-+
-+	for (i = 0; i < upl->image.count; i++) {
-+		const struct upl_image *img = alist_get(&upl->image, i,
-+							struct upl_image);
-+		ofnode subnode;
-+		char name[10];
-+
-+		snprintf(name, sizeof(name), UPLN_IMAGE "-%d", i + 1);
-+		ret = ofnode_add_subnode(node, name, &subnode);
-+		if (ret)
-+			return log_msg_ret("sub", ret);
-+
-+		ret = write_addr(upl, subnode, UPLP_LOAD, img->load);
-+		if (!ret)
-+			ret = write_size(upl, subnode, UPLP_SIZE, img->size);
-+		if (!ret && img->offset)
-+			ret = ofnode_write_u32(subnode, UPLP_OFFSET,
-+					       img->offset);
-+		ret = ofnode_write_string(subnode, UPLP_DESCRIPTION,
-+					  img->description);
-+		if (ret)
-+			return log_msg_ret("sim", ret);
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * buffer_addr_size() - Generate a set of addr/size pairs
-+ *
-+ * Each base/size value from each region is written to the buffer in a suitable
-+ * format to be written to the devicetree
-+ *
-+ * @upl: UPL state
-+ * @buf: Buffer to write to
-+ * @size: Buffer size
-+ * @num_regions: Number of regions to process
-+ * @region: List of regions to process (struct memregion)
-+ * Returns: Number of bytes written, or -ENOSPC if the buffer is too small
-+ */
-+static int buffer_addr_size(const struct upl *upl, char *buf, int size,
-+			    uint num_regions, const struct alist *region)
-+{
-+	char *ptr, *end = buf + size;
-+	int i;
-+
-+	ptr = buf;
-+	for (i = 0; i < num_regions; i++) {
-+		const struct memregion *reg = alist_get(region, i,
-+							struct memregion);
-+
-+		if (upl->addr_cells == 1)
-+			*(u32 *)ptr = cpu_to_fdt32(reg->base);
-+		else
-+			*(u64 *)ptr = cpu_to_fdt64(reg->base);
-+		ptr += upl->addr_cells * sizeof(u32);
-+
-+		if (upl->size_cells == 1)
-+			*(u32 *)ptr = cpu_to_fdt32(reg->size);
-+		else
-+			*(u64 *)ptr = cpu_to_fdt64(reg->size);
-+		ptr += upl->size_cells * sizeof(u32);
-+		if (ptr > end)
-+			return -ENOSPC;
-+	}
-+
-+	return ptr - buf;
-+}
-+
-+/**
-+ * add_upl_memory() - Add /memory nodes to the tree
-+ *
-+ * @upl: UPL state
-+ * @root: Parent node to contain the new /memory nodes
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_memory(const struct upl *upl, ofnode root)
++static int compare_upl_mem(struct unit_test_state *uts,
++			   const struct upl_mem *base,
++			   const struct upl_mem *cmp)
 +{
 +	int i;
 +
-+	for (i = 0; i < upl->mem.count; i++) {
-+		const struct upl_mem *mem = alist_get(&upl->mem, i,
-+						      struct upl_mem);
-+		char buf[mem->region.count * sizeof(64) * 2];
-+		const struct memregion *first;
-+		char name[26];
-+		int ret, len;
-+		ofnode node;
-+
-+		if (!mem->region.count) {
-+			log_debug("Memory %d has no regions\n", i);
-+			return log_msg_ret("reg", -EINVAL);
-+		}
-+		first = alist_get(&mem->region, 0, struct memregion);
-+		sprintf(name, UPLN_MEMORY "@0x%lx", first->base);
-+		ret = ofnode_add_subnode(root, name, &node);
-+		if (ret)
-+			return log_msg_ret("mem", ret);
-+
-+		len = buffer_addr_size(upl, buf, sizeof(buf), mem->region.count,
-+				       &mem->region);
-+		if (len < 0)
-+			return log_msg_ret("buf", len);
-+
-+		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
-+		if (!ret && mem->hotpluggable)
-+			ret = ofnode_write_bool(node, UPLP_HOTPLUGGABLE,
-+						mem->hotpluggable);
-+		if (ret)
-+			return log_msg_ret("lst", ret);
++	ut_asserteq(base->region.count, cmp->region.count);
++	ut_asserteq(base->hotpluggable, cmp->hotpluggable);
++	for (i = 0; i < base->region.count; i++) {
++		ut_assertok(compare_upl_memregion(uts,
++			alist_get(&base->region, i, struct memregion),
++			alist_get(&cmp->region, i, struct memregion)));
 +	}
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_upl_memmap() - Add memory-map nodes to the tree
-+ *
-+ * @upl: UPL state
-+ * @root: Parent node to contain the new /memory-map node and its subnodes
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_memmap(const struct upl *upl, ofnode root)
++static int check_device_name(struct unit_test_state *uts, const char *base,
++			     const char *cmp)
 +{
-+	ofnode mem_node;
-+	int i, ret;
++	const char *p;
 +
-+	if (!upl->memmap.count)
-+		return 0;
-+	ret = ofnode_add_subnode(root, UPLN_MEMORY_MAP, &mem_node);
-+	if (ret)
-+		return log_msg_ret("img", ret);
-+
-+	for (i = 0; i < upl->memmap.count; i++) {
-+		const struct upl_memmap *memmap = alist_get(&upl->memmap, i,
-+							struct upl_memmap);
-+		char buf[memmap->region.count * sizeof(64) * 2];
-+		const struct memregion *first;
-+		char name[26];
-+		int ret, len;
-+		ofnode node;
-+
-+		if (!memmap->region.count) {
-+			log_debug("Memory %d has no regions\n", i);
-+			return log_msg_ret("reg", -EINVAL);
-+		}
-+		first = alist_get(&memmap->region, 0, struct memregion);
-+		sprintf(name, "%s@0x%lx", memmap->name, first->base);
-+		ret = ofnode_add_subnode(mem_node, name, &node);
-+		if (ret)
-+			return log_msg_ret("memmap", ret);
-+
-+		len = buffer_addr_size(upl, buf, sizeof(buf),
-+				       memmap->region.count, &memmap->region);
-+		if (len < 0)
-+			return log_msg_ret("buf", len);
-+		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
-+		if (!ret && memmap->usage)
-+			ret = ofnode_write_bitmask(node, UPLP_USAGE,
-+						   usage_names,
-+						   UPLUS_COUNT, memmap->usage);
-+		if (ret)
-+			return log_msg_ret("lst", ret);
++	p = strchr(cmp, '@');
++	if (p) {
++		ut_assertnonnull(p);
++		ut_asserteq_strn(base, cmp);
++		ut_asserteq(p - cmp, strlen(base));
++	} else {
++		ut_asserteq_str(base, cmp);
 +	}
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_upl_memres() - Add /memory-reserved nodes to the tree
-+ *
-+ * @upl: UPL state
-+ * @root: Parent node to contain the new node
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_memres(const struct upl *upl, ofnode root,
-+			  bool skip_existing)
++static int compare_upl_memmap(struct unit_test_state *uts,
++			      const struct upl_memmap *base,
++			      const struct upl_memmap *cmp)
 +{
-+	ofnode mem_node;
-+	int i, ret;
++	int i;
 +
-+	if (!upl->memmap.count)
-+		return 0;
-+	ret = ofnode_add_subnode(root, UPLN_MEMORY_RESERVED, &mem_node);
-+	if (ret) {
-+		if (skip_existing && ret == -EEXIST)
-+			return 0;
-+		return log_msg_ret("img", ret);
-+	}
-+
-+	for (i = 0; i < upl->memres.count; i++) {
-+		const struct upl_memres *memres = alist_get(&upl->memres, i,
-+							struct upl_memres);
-+		char buf[memres->region.count * sizeof(64) * 2];
-+		const struct memregion *first;
-+		char name[26];
-+		int ret, len;
-+		ofnode node;
-+
-+		if (!memres->region.count) {
-+			log_debug("Memory %d has no regions\n", i);
-+			return log_msg_ret("reg", -EINVAL);
-+		}
-+		first = alist_get(&memres->region, 0, struct memregion);
-+		sprintf(name, "%s@0x%lx", memres->name, first->base);
-+		ret = ofnode_add_subnode(mem_node, name, &node);
-+		if (ret)
-+			return log_msg_ret("memres", ret);
-+
-+		len = buffer_addr_size(upl, buf, sizeof(buf),
-+				       memres->region.count, &memres->region);
-+		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
-+		if (!ret && memres->no_map)
-+			ret = ofnode_write_bool(node, UPLP_NO_MAP,
-+						memres->no_map);
-+		if (ret)
-+			return log_msg_ret("lst", ret);
-+	}
++	ut_assertok(check_device_name(uts, base->name, cmp->name));
++	ut_asserteq(base->region.count, cmp->region.count);
++	ut_asserteq(base->usage, cmp->usage);
++	for (i = 0; i < base->region.count; i++)
++		ut_assertok(compare_upl_memregion(uts,
++			alist_get(&base->region, i, struct memregion),
++			alist_get(&cmp->region, i, struct memregion)));
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_upl_serial() - Add serial node
-+ *
-+ * @upl: UPL state
-+ * @root: Parent node to contain the new node
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_serial(const struct upl *upl, ofnode root,
-+			  bool skip_existing)
++static int compare_upl_memres(struct unit_test_state *uts,
++			      const struct upl_memres *base,
++			      const struct upl_memres *cmp)
 +{
-+	const struct upl_serial *ser = &upl->serial;
-+	const struct memregion *first;
-+	char name[26];
-+	ofnode node;
-+	int ret;
++	int i;
 +
-+	if (!ser->compatible || skip_existing)
-+		return 0;
-+	if (!ser->reg.count)
-+		return log_msg_ret("ser", -EINVAL);
-+	first = alist_get(&ser->reg, 0, struct memregion);
-+	sprintf(name, UPLN_SERIAL "@0x%lx", first->base);
-+	ret = ofnode_add_subnode(root, name, &node);
-+	if (ret)
-+		return log_msg_ret("img", ret);
-+	ret = ofnode_write_string(node, UPLP_COMPATIBLE, ser->compatible);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_CLOCK_FREQUENCY,
-+				       ser->clock_frequency);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_CURRENT_SPEED,
-+				       ser->current_speed);
-+	if (!ret) {
-+		char buf[16];
-+		int len;
-+
-+		len = buffer_addr_size(upl, buf, sizeof(buf), 1, &ser->reg);
-+		if (len < 0)
-+			return log_msg_ret("buf", len);
-+
-+		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
-+	}
-+	if (!ret && ser->reg_io_shift != UPLD_REG_IO_SHIFT)
-+		ret = ofnode_write_u32(node, UPLP_REG_IO_SHIFT,
-+				       ser->reg_io_shift);
-+	if (!ret && ser->reg_offset != UPLD_REG_OFFSET)
-+		ret = ofnode_write_u32(node, UPLP_REG_OFFSET, ser->reg_offset);
-+	if (!ret && ser->reg_io_width != UPLD_REG_IO_WIDTH)
-+		ret = ofnode_write_u32(node, UPLP_REG_IO_WIDTH,
-+				       ser->reg_io_width);
-+	if (!ret && ser->virtual_reg)
-+		ret = write_addr(upl, node, UPLP_VIRTUAL_REG, ser->virtual_reg);
-+	if (!ret) {
-+		ret = ofnode_write_value(node, UPLP_ACCESS_TYPE, access_types,
-+					 ARRAY_SIZE(access_types),
-+					 ser->access_type);
-+	}
-+	if (ret)
-+		return log_msg_ret("ser", ret);
++	ut_assertok(check_device_name(uts, base->name, cmp->name));
++	ut_asserteq(base->region.count, cmp->region.count);
++	ut_asserteq(base->no_map, cmp->no_map);
++	for (i = 0; i < base->region.count; i++)
++		ut_assertok(compare_upl_memregion(uts,
++			alist_get(&base->region, i, struct memregion),
++			alist_get(&cmp->region, i, struct memregion)));
 +
 +	return 0;
 +}
 +
-+/**
-+ * add_upl_graphics() - Add graphics node
-+ *
-+ * @upl: UPL state
-+ * @root: Parent node to contain the new node
-+ * Return 0 if OK, -ve on error
-+ */
-+static int add_upl_graphics(const struct upl *upl, ofnode root)
++static int compare_upl_serial(struct unit_test_state *uts,
++			      struct upl_serial *base, struct upl_serial *cmp)
 +{
-+	const struct upl_graphics *gra = &upl->graphics;
-+	const struct memregion *first;
-+	char name[36];
-+	ofnode node;
-+	int ret;
++	int i;
 +
-+	if (!gra->reg.count)
-+		return log_msg_ret("gra", -ENOENT);
-+	first = alist_get(&gra->reg, 0, struct memregion);
-+	sprintf(name, UPLN_GRAPHICS "@0x%lx", first->base);
-+	ret = ofnode_add_subnode(root, name, &node);
-+	if (ret)
-+		return log_msg_ret("gra", ret);
-+
-+	ret = ofnode_write_string(node, UPLP_COMPATIBLE, UPLC_GRAPHICS);
-+	if (!ret) {
-+		char buf[16];
-+		int len;
-+
-+		len = buffer_addr_size(upl, buf, sizeof(buf), 1, &gra->reg);
-+		if (len < 0)
-+			return log_msg_ret("buf", len);
-+
-+		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
-+	}
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_WIDTH, gra->width);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_HEIGHT, gra->height);
-+	if (!ret)
-+		ret = ofnode_write_u32(node, UPLP_STRIDE, gra->stride);
-+	if (!ret) {
-+		ret = ofnode_write_value(node, UPLP_GRAPHICS_FORMAT,
-+					 graphics_formats,
-+					 ARRAY_SIZE(graphics_formats),
-+					 gra->format);
-+	}
-+	if (ret)
-+		return log_msg_ret("pro", ret);
++	ut_asserteq_str(base->compatible, cmp->compatible);
++	ut_asserteq(base->clock_frequency, cmp->clock_frequency);
++	ut_asserteq(base->current_speed, cmp->current_speed);
++	for (i = 0; i < base->reg.count; i++)
++		ut_assertok(compare_upl_memregion(uts,
++			alist_get(&base->reg, i, struct memregion),
++			alist_get(&cmp->reg, i, struct memregion)));
++	ut_asserteq(base->reg_io_shift, cmp->reg_io_shift);
++	ut_asserteq(base->reg_offset, cmp->reg_offset);
++	ut_asserteq(base->reg_io_width, cmp->reg_io_width);
++	ut_asserteq(base->virtual_reg, cmp->virtual_reg);
++	ut_asserteq(base->access_type, cmp->access_type);
 +
 +	return 0;
 +}
 +
-+int upl_write_handoff(const struct upl *upl, ofnode root, bool skip_existing)
++static int compare_upl_graphics(struct unit_test_state *uts,
++				struct upl_graphics *base,
++				struct upl_graphics *cmp)
 +{
-+	ofnode options;
-+	int ret;
++	int i;
 +
-+	ret = add_root_props(upl, root);
-+	if (ret)
-+		return log_msg_ret("ad1", ret);
-+	ret = ofnode_add_subnode(root, UPLN_OPTIONS, &options);
-+	if (ret && ret != -EEXIST)
-+		return log_msg_ret("opt", -EINVAL);
-+
-+	ret = add_upl_params(upl, options);
-+	if (ret)
-+		return log_msg_ret("ad1", ret);
-+
-+	ret = add_upl_image(upl, options);
-+	if (ret)
-+		return log_msg_ret("ad2", ret);
-+
-+	ret = add_upl_memory(upl, root);
-+	if (ret)
-+		return log_msg_ret("ad3", ret);
-+
-+	ret = add_upl_memmap(upl, root);
-+	if (ret)
-+		return log_msg_ret("ad4", ret);
-+
-+	ret = add_upl_memres(upl, root, skip_existing);
-+	if (ret)
-+		return log_msg_ret("ad5", ret);
-+
-+	ret = add_upl_serial(upl, root, skip_existing);
-+	if (ret)
-+		return log_msg_ret("ad6", ret);
-+
-+	ret = add_upl_graphics(upl, root);
-+	if (ret && ret != -ENOENT)
-+		return log_msg_ret("ad6", ret);
++	for (i = 0; i < base->reg.count; i++)
++		ut_assertok(compare_upl_memregion(uts,
++			alist_get(&base->reg, i, struct memregion),
++			alist_get(&cmp->reg, i, struct memregion)));
++	ut_asserteq(base->width, cmp->width);
++	ut_asserteq(base->height, cmp->height);
++	ut_asserteq(base->stride, cmp->stride);
++	ut_asserteq(base->format, cmp->format);
 +
 +	return 0;
 +}
 +
-+int upl_create_handoff_tree(const struct upl *upl, oftree *treep)
++static int compare_upl(struct unit_test_state *uts, struct upl *base,
++		       struct upl *cmp)
 +{
-+	ofnode root;
-+	oftree tree;
-+	int ret;
++	int i;
 +
-+	ret = oftree_new(&tree);
-+	if (ret)
-+		return log_msg_ret("new", ret);
++	ut_asserteq(base->addr_cells, cmp->addr_cells);
++	ut_asserteq(base->size_cells, cmp->size_cells);
 +
-+	root = oftree_root(tree);
-+	if (!ofnode_valid(root))
-+		return log_msg_ret("roo", -EINVAL);
++	ut_asserteq(base->smbios, cmp->smbios);
++	ut_asserteq(base->acpi, cmp->acpi);
++	ut_asserteq(base->bootmode, cmp->bootmode);
++	ut_asserteq(base->fit, cmp->fit);
++	ut_asserteq(base->conf_offset, cmp->conf_offset);
++	ut_asserteq(base->addr_width, cmp->addr_width);
++	ut_asserteq(base->acpi_nvs_size, cmp->acpi_nvs_size);
 +
-+	ret = upl_write_handoff(upl, root, false);
-+	if (ret)
-+		return log_msg_ret("wr", ret);
++	ut_asserteq(base->image.count, cmp->image.count);
++	for (i = 0; i < base->image.count; i++)
++		ut_assertok(compare_upl_image(uts,
++			alist_get(&base->image, i, struct upl_image),
++			alist_get(&cmp->image, i, struct upl_image)));
 +
-+	*treep = tree;
++	ut_asserteq(base->mem.count, cmp->mem.count);
++	for (i = 0; i < base->mem.count; i++)
++		ut_assertok(compare_upl_mem(uts,
++			alist_get(&base->mem, i, struct upl_mem),
++			alist_get(&cmp->mem, i, struct upl_mem)));
++
++	ut_asserteq(base->memmap.count, cmp->memmap.count);
++	for (i = 0; i < base->memmap.count; i++)
++		ut_assertok(compare_upl_memmap(uts,
++			alist_get(&base->memmap, i, struct upl_memmap),
++			alist_get(&cmp->memmap, i, struct upl_memmap)));
++
++	ut_asserteq(base->memres.count, cmp->memres.count);
++	for (i = 0; i < base->memres.count; i++)
++		ut_assertok(compare_upl_memres(uts,
++			alist_get(&base->memres, i, struct upl_memres),
++			alist_get(&cmp->memres, i, struct upl_memres)));
++
++	ut_assertok(compare_upl_serial(uts, &base->serial, &cmp->serial));
++	ut_assertok(compare_upl_graphics(uts, &base->graphics, &cmp->graphics));
 +
 +	return 0;
 +}
++
++/* Basic test of writing and reading UPL handoff */
++static int upl_test_base(struct unit_test_state *uts)
++{
++	oftree tree, check_tree;
++	struct upl upl, check;
++	struct abuf buf;
++
++	if (!CONFIG_IS_ENABLED(OFNODE_MULTI_TREE))
++		return -EAGAIN;  /* skip test */
++	ut_assertok(upl_get_test_data(uts, &upl));
++
++	ut_assertok(upl_create_handoff_tree(&upl, &tree));
++	ut_assertok(oftree_to_fdt(tree, &buf));
++
++	/*
++	 * strings in check_tree and therefore check are only valid so long as
++	 * buf stays around. As soon as we call abuf_uninit they go away
++	 */
++	check_tree = oftree_from_fdt(abuf_data(&buf));
++	ut_assert(ofnode_valid(oftree_path(check_tree, "/")));
++
++	ut_assertok(upl_read_handoff(&check, check_tree));
++	ut_assertok(compare_upl(uts, &upl, &check));
++	abuf_uninit(&buf);
++
++	return 0;
++}
++UPL_TEST(upl_test_base, 0);
++
++int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	struct unit_test *tests = UNIT_TEST_SUITE_START(upl_test);
++	const int n_ents = UNIT_TEST_SUITE_COUNT(upl_test);
++
++	return cmd_ut_category("cmd_upl", "cmd_upl_", tests, n_ents, argc,
++			       argv);
++}
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 4e4aa8f1cb2..38ba89ee33e 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -133,6 +133,9 @@ static struct cmd_tbl cmd_ut_sub[] = {
+ #ifdef CONFIG_CMD_SEAMA
+ 	U_BOOT_CMD_MKENT(seama, CONFIG_SYS_MAXARGS, 1, do_ut_seama, "", ""),
+ #endif
++#ifdef CONFIG_CMD_UPL
++	U_BOOT_CMD_MKENT(upl, CONFIG_SYS_MAXARGS, 1, do_ut_upl, "", ""),
++#endif
+ };
+ 
+ static int do_ut_all(struct cmd_tbl *cmdtp, int flag, int argc,
 -- 
 2.34.1
 
