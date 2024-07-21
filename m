@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C110C3DA61
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 15:28:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9501DC3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 18:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D5C188406;
-	Sun, 21 Jul 2024 17:26:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 96D6087D6B;
+	Sun, 21 Jul 2024 20:27:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YFjNb3yu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UhIoU+D+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BAF688360; Sun, 21 Jul 2024 17:26:52 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 51EAC86DBD; Sun, 21 Jul 2024 20:27:36 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2647C87F82
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 17:26:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B48E387F51
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 20:27:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2eede876fbfso48498281fa.1
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 08:26:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-52f042c15e3so105156e87.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 11:27:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721575606; x=1722180406; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1721586453; x=1722191253; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Dd8Zm7sk74Nq1b7b3UrBgD+f0PgP9Wv1CLphK3d4A9Q=;
- b=YFjNb3yu2sJdl6YbuImT+csjSqEznUkeI0LI6Pc1y2qB+AUB9zQuP/p40+vvemrFkv
- kSl7AsUK6KNXAF1MvCbA2l2Olz2CKEalVXZJlEpdnyPF9SocCGQufsWXfhyBtGnr6SYx
- jDVXkZCODHIQou5DmZfECOEL/VN5/+cvTPHzg=
+ bh=j9ocxDhHjpzhe+GksOU/1BU79CxMR5pPjqc9VX+0YYM=;
+ b=UhIoU+D+5LDyjxeGIGa+uQZcpz2ZKa9F5m6clcUagRLQaZNiDPgvIgtG9NY1oXZzpe
+ NOGNaHETa08nZGu10NInsQKfesw/IAYVCssl+CXif4PUuuHjoXds3cjfk2uPbddw/Gz6
+ qhOirH274LgMTy5ixxK48qjrPetTH2x9SgBwvaI6y9lgrNvwFEQeyNFH1VKsYa8e95E6
+ 4X6FmROUT9Z4cvmXqAYnrWm5PgTylKlWuu+ugN/yYWu7eyMDoobl52bcJ7lrFFv8Jwiv
+ QMFDoXUoS3ibSQ2fZQaTX+/BVXStFyw8M8XTV6xz1E+k4FuwX8oH76MYgbjmyCzOhMHb
+ BLaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721575606; x=1722180406;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721586453; x=1722191253;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dd8Zm7sk74Nq1b7b3UrBgD+f0PgP9Wv1CLphK3d4A9Q=;
- b=ob5KXh+jeMvUEoYe5JhkTOQRu+xn4oze4w7QnvAiVkJy2DeTXNT0K498jpYm0G/YK9
- oQEAH96glJuDpPxJ4+zPNf5fnDdzvKaRvJvEj7rCbvouxTjCSmGJ8viGEDiQ4XkIyBGK
- xhhdkhEvfBYHyrN2S82woTWTywW2oDgydAPuIjgAx4TI8KMqXjkMJBZAg/m4ZBCPc5lg
- mtQ09C+Vp3C/YsxEpHb8q6Z0A7QYmnkqIQ59QqxbWcB4EVIuld7C5Q7xK0jUu3YHDWlX
- UTWVxKwfTbAVE647qqYFEAJYD7+TUJQSV3DF5SFkIoyPhz17cJQsLsC/6ZllRQQqN8k4
- pUnw==
-X-Gm-Message-State: AOJu0YxRijK9gXqLXdhKmwYLHdzyZFlgMKx2TEx8WTkWwZrKJXjMIHVi
- DA2zr1ww22HAWImRAvkDdNRvhwmnAwHKo8TuJDiPBthKLm/+BfIydv99qWAGEeLSwF0VojhZdRo
- =
-X-Google-Smtp-Source: AGHT+IEBOagJzvqSGNgy1xN8tMDaV5mgYURhVVWh+ickT0NVRoAek+upOV9mOJE2DEWj3kHaFERhqw==
-X-Received: by 2002:a2e:8906:0:b0:2ef:243b:6dca with SMTP id
- 38308e7fff4ca-2ef243b754bmr19722711fa.10.1721575605617; 
- Sun, 21 Jul 2024 08:26:45 -0700 (PDT)
-Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427e5803bb0sm8702255e9.45.2024.07.21.08.26.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 08:26:45 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v2 11/14] spl: mmc: Try to clean up raw-mode options
-Date: Sun, 21 Jul 2024 16:25:56 +0100
-Message-Id: <20240721152600.3212917-12-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240721152600.3212917-1-sjg@chromium.org>
-References: <20240721152600.3212917-1-sjg@chromium.org>
+ bh=j9ocxDhHjpzhe+GksOU/1BU79CxMR5pPjqc9VX+0YYM=;
+ b=wfT8CUnm/Q4KWE/dUUpItX14CgnsqPxKnf01sZgaBZafH9coRZ9JNrYKMY26c2vi+Z
+ /h/M0ogtgmk4GA4fwxybHf4fkDqVKx1CYVkjhWREAgGN6Edh3VWhuWpQApLZoBjW5ihq
+ BeqSXzAyWetEHO9RHfIXFjDrCb99yJv3rIVr/uixIruUF0eQjtq883rEudSzW2NKLP32
+ XXIh3HumkA9WGdWdgjp1hQ9DbdVouu+5ADtkzoqe9dGHXvigiJxdpLmB8EHryt+v4AOm
+ YTmMDrnuTgnZS3PQMir9ZbFP7mRxuRL1kgmZpyxvyUUe/kfYf66wGqmGjYno1i9JYS/K
+ zhRA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUalNuo62RLdlZ6NC+nFxSNlj0VtQYyXbFdS65lsskzT7DzMyU6fUU4/0YG9VGpbJK45AllVDhQRIlLVcjakp3bEm3kWQ==
+X-Gm-Message-State: AOJu0YzgNlu8GHtqivTYZo5DyO0ZoSGUAFgwc//4XlVeInU8XbLz3Diz
+ jYqkuSRCjIObndhclJh6YQU24cdA+XiiAkzbnQ0gVNOJTfzTbylO7Jx/SOiLUCERLaJmg1OgBQ4
+ xuExiIVEZ0lCy2vfGNIEQ7TXO7Uc=
+X-Google-Smtp-Source: AGHT+IENpa2BmgnaelUtWONZSwxnZ1AebokLYuhBHbywxy6rKfpAjNYOQDjK1XAwuRnxtI7xVgtzQHBVhk4DSF/UoUE=
+X-Received: by 2002:a05:6512:3342:b0:52e:fa78:63c0 with SMTP id
+ 2adb3069b0e04-52efa7866d0mr1050005e87.13.1721586452500; Sun, 21 Jul 2024
+ 11:27:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240719013822.101374-1-minda.chen@starfivetech.com>
+ <20240719013822.101374-8-minda.chen@starfivetech.com>
+ <CANV2PTOXmm4a4+_94iKoGTAY5-kiym3xwYF77upXdu8KmLKv+Q@mail.gmail.com>
+In-Reply-To: <CANV2PTOXmm4a4+_94iKoGTAY5-kiym3xwYF77upXdu8KmLKv+Q@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sun, 21 Jul 2024 11:27:21 -0700
+Message-ID: <CANV2PTPv9v9h0LW08qQq-cU3XJQBhs3Lz-w691CV3=5u7gh=_A@mail.gmail.com>
+Subject: Re: [PATCH v3 7/8] dts: starfive: Add JH7110 Cadence USB dts node
+To: Minda Chen <minda.chen@starfivetech.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Roger Quadros <rogerq@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, 
+ Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,1894 +98,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make the raw-mode options depend on SPL_SYS_MMCSD_RAW_MODE in a more
-direct way. This makes it easier to understand the options with
-'make menuconfig'.
+On Sat, Jul 20, 2024 at 6:47=E2=80=AFPM E Shattow <lucent@gmail.com> wrote:
+>
+> Hi, I am testing on Milk-V Mars CM Lite, and I add to these devicetree
+> changes at runtime from board/starfive/visionfive2/spl.c
+>
+> On Thu, Jul 18, 2024 at 6:38=E2=80=AFPM Minda Chen <minda.chen@starfivete=
+ch.com> wrote:
+> >
+> > Add Jh7110 Cadence USB dts node, Visionfive2 default setting
+> > is USB 2.0 device.
+> >
+> > Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> > ---
+> >  .../dts/jh7110-starfive-visionfive-2.dtsi     |  5 ++
+> >  arch/riscv/dts/jh7110.dtsi                    | 52 +++++++++++++++++++
+> >  2 files changed, 57 insertions(+)
+> >
+> > diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/ri=
+scv/dts/jh7110-starfive-visionfive-2.dtsi
+> > index e11babc1cd..44785bbee3 100644
+> > --- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> > +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> > @@ -378,3 +378,8 @@
+> >                 };
+> >         };
+> >  };
+> > +
+> > +&usb_cdns3 {
+> > +       dr_mode =3D "peripheral";
+> > +       status =3D "okay";
+> > +};
+> > diff --git a/arch/riscv/dts/jh7110.dtsi b/arch/riscv/dts/jh7110.dtsi
+> > index 2cdc683d49..1eee924e1d 100644
+> > --- a/arch/riscv/dts/jh7110.dtsi
+> > +++ b/arch/riscv/dts/jh7110.dtsi
+> > @@ -371,6 +371,58 @@
+> >                         status =3D "disabled";
+> >                 };
+> >
+> > +               usb0: usb@10100000 {
+> > +                       compatible =3D "starfive,jh7110-usb";
+> > +                       ranges =3D <0x0 0x0 0x10100000 0x100000>;
+> > +                       #address-cells =3D <1>;
+> > +                       #size-cells =3D <1>;
+> > +                       starfive,stg-syscon =3D <&stg_syscon 0x4>;
+> > +                       clocks =3D <&stgcrg JH7110_STGCLK_USB_LPM>,
+> > +                                <&stgcrg JH7110_STGCLK_USB_STB>,
+> > +                                <&stgcrg JH7110_STGCLK_USB_APB>,
+> > +                                <&stgcrg JH7110_STGCLK_USB_AXI>,
+> > +                                <&stgcrg JH7110_STGCLK_USB_UTMI_APB>;
+> > +                       clock-names =3D "lpm", "stb", "apb", "axi", "ut=
+mi_apb";
+> > +                       resets =3D <&stgcrg JH7110_STGRST_USB_PWRUP>,
+> > +                                <&stgcrg JH7110_STGRST_USB_APB>,
+> > +                                <&stgcrg JH7110_STGRST_USB_AXI>,
+> > +                                <&stgcrg JH7110_STGRST_USB_UTMI_APB>;
+> > +                       reset-names =3D "pwrup", "apb", "axi", "utmi_ap=
+b";
+> > +
+> > +                       usb_cdns3: usb@0 {
+> > +                               compatible =3D "cdns,usb3";
+> > +                               reg =3D <0x0 0x10000>,
+> > +                                     <0x10000 0x10000>,
+> > +                                     <0x20000 0x10000>;
+> > +                               reg-names =3D "otg", "xhci", "dev";
+> > +                               interrupts =3D <100>, <108>, <110>;
+> > +                               interrupt-names =3D "host", "peripheral=
+", "otg";
+> > +                               phys =3D <&usbphy0>;
+> > +                               phy-names =3D "cdns3,usb2-phy";
+> > +                       };
+> > +               };
+> > +
+> > +               usbphy0: phy@10200000 {
+> > +                       compatible =3D "starfive,jh7110-usb-phy";
+> > +                       reg =3D <0x0 0x10200000 0x0 0x10000>;
+> > +                       clocks =3D <&syscrg JH7110_SYSCLK_USB_125M>,
+> > +                                <&stgcrg JH7110_STGCLK_USB_APP_125>;
+> > +                       clock-names =3D "125m", "app_125m";
+> > +                       #phy-cells =3D <0>;
+> > +               };
+> > +
+> > +               pciephy0: phy@10210000 {
+> > +                       compatible =3D "starfive,jh7110-pcie-phy";
+> > +                       reg =3D <0x0 0x10210000 0x0 0x10000>;
+> > +                       #phy-cells =3D <0>;
+> > +               };
+> > +
+> > +               pciephy1: phy@10220000 {
+> > +                       compatible =3D "starfive,jh7110-pcie-phy";
+> > +                       reg =3D <0x0 0x10220000 0x0 0x10000>;
+> > +                       #phy-cells =3D <0>;
+> > +               };
+> > +
+> >                 stgcrg: clock-controller@10230000 {
+> >                         compatible =3D "starfive,jh7110-stgcrg";
+> >                         reg =3D <0x0 0x10230000 0x0 0x10000>;
+> > --
+> > 2.17.1
+> >
+>
+> Access fault
+>
+>         starting USB...
+>         Bus usb@0: cdns-usb3-host usb@0: set 1 has failed, back to 0
+>         scanning bus usb@0 for devices... Unhandled exception: Load acces=
+s fault
+>         EPC: 00000000fff85ce2 RA: 00000000fff85cdc TVAL: 0000000000000004
+>         EPC: 0000000040246ce2 RA: 0000000040246cdc reloc adjusted
+>
+>         Code: 9863 3ee7 8526 f0ef c37f 651c 3a03 0105 (43dc)
+>
+>
+>         resetting ...
+>
+> when I add only these:
+>
+>         int offset;
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000"); /* &sys=
+gpio */
+>         fdt_add_subnode(fdt, offset, "usb0-0");
+>         fdt_setprop_string(fdt, fdt_path_offset(fdt, "/__symbols__"),
+> "usb_pins", "/soc/pinctrl@13040000/usb0-0");
+>         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0");
+> /* usb_pins */
+>         fdt_create_phandle(fdt, offset);
+>         fdt_add_subnode(fdt, offset, "driver-vbus-pin");
+>         offset =3D fdt_path_offset(fdt,
+> "/soc/pinctrl@13040000/usb0-0/driver-vbus-pin");
+>         fdt_setprop_u32(fdt, offset, "pinmux", 0xff070019); /*
+> GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS, GPOEN_ENABLE, GPI_NONE) */
+>         fdt_setprop_empty(fdt, offset, "bias-disable");
+>         fdt_setprop_empty(fdt, offset, "input-disable");
+>         fdt_setprop_empty(fdt, offset, "input-schmitt-disable");
+>         fdt_setprop_u32(fdt, offset, "slew-rate", 0);
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000"); /* &usb0 */
+>         fdt_setprop_string(fdt, offset, "pinctrl-names", "default");
+>         fdt_setprop_u32(fdt, offset, "pinctrl-0", fdt_get_phandle(fdt,
+> fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0")));
+>         fdt_setprop_string(fdt, offset, "status", "okay");
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000/usb@0"); /*
+> &usb_cdns3 */
+>         fdt_setprop_string(fdt, offset, "dr_mode",   "host");
+>
+> Success USB is working but PCI disabled if instead I add all of this:
+>
+>         int offset;
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000"); /* &sys=
+gpio */
+>         fdt_add_subnode(fdt, offset, "usb0-0");
+>         fdt_setprop_string(fdt, fdt_path_offset(fdt, "/__symbols__"),
+> "usb_pins", "/soc/pinctrl@13040000/usb0-0");
+>         offset =3D fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0");
+> /* usb_pins */
+>         fdt_create_phandle(fdt, offset);
+>         fdt_add_subnode(fdt, offset, "driver-vbus-pin");
+>         offset =3D fdt_path_offset(fdt,
+> "/soc/pinctrl@13040000/usb0-0/driver-vbus-pin");
+>         fdt_setprop_u32(fdt, offset, "pinmux", 0xff070019); /*
+> GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS, GPOEN_ENABLE, GPI_NONE) */
+>         fdt_setprop_empty(fdt, offset, "bias-disable");
+>         fdt_setprop_empty(fdt, offset, "input-disable");
+>         fdt_setprop_empty(fdt, offset, "input-schmitt-disable");
+>         fdt_setprop_u32(fdt, offset, "slew-rate", 0);
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/pcie@2b000000"); /* &pcie0 =
+*/
+>         fdt_setprop_string(fdt, offset, "status", "disabled");
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/phy@10210000"); /* &pciephy=
+0 */
+>         fdt_setprop_u32(fdt, offset, "starfive,sys-syscon",
+> fdt_get_phandle(fdt, fdt_path_offset(fdt,
+> "/soc/sys_syscon@13030000"))); /* =3D <&sys_syscon> */
+>         fdt_appendprop_u32(fdt, offset, "starfive,sys-syscon", 0x18);
+> /* append <magic number> */
+>         fdt_setprop_u32(fdt, offset, "starfive,stg-syscon",
+> fdt_get_phandle(fdt, fdt_path_offset(fdt,
+> "/soc/stg_syscon@10240000"))); /* =3D <&stg_syscon> */
+>         fdt_appendprop_u32(fdt, offset, "starfive,stg-syscon", 0x148);
+> /* append <magic number> */
+>         fdt_appendprop_u32(fdt, offset, "starfive,stg-syscon", 0x1f4);
+> /* append <magic number> */
+>         fdt_setprop_string(fdt, offset, "status", "okay");
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000"); /* &usb0 */
+>         fdt_setprop_string(fdt, offset, "pinctrl-names", "default");
+>         fdt_setprop_u32(fdt, offset, "pinctrl-0", fdt_get_phandle(fdt,
+> fdt_path_offset(fdt, "/soc/pinctrl@13040000/usb0-0")));
+>         fdt_setprop_string(fdt, offset, "status", "okay");
+>
+>         offset =3D fdt_path_offset(fdt, "/soc/usb@10100000/usb@0"); /*
+> &usb_cdns3 */
+>         fdt_setprop_u32(fdt,    offset, "phys",
+> fdt_get_phandle(fdt, fdt_path_offset(fdt, "/soc/phy@10200000"))); /* =3D
+> <&usbphy0> */
+>         fdt_appendprop_u32(fdt, offset, "phys",
+> fdt_get_phandle(fdt, fdt_path_offset(fdt, "/soc/phy@10210000"))); /*
+> append <&pciephy0> */
+>         fdt_setprop(fdt,        offset, "phy-names",
+> "cdns3,usb2-phy\0cdns3,usb3-phy",
+> sizeof("cdns3,usb2-phy\0cdns3,usb3-phy"));
+>         fdt_setprop_string(fdt, offset, "dr_mode",   "host");
+>
+> I have made some mistake for devicetree and USB2.0 with keeping pcie0
+> (not disable)? or is there a problem with the implementation?
+>
+> Best regards, -E Shattow
 
-There are three different ways of specifying the offset:
+P.S. here is with debug logging:
 
-- sector offset
-- partition number
-- partition type
+drivers/core/ofnode.c:517-    ofnode_read_prop() ofnode_read_prop:
+assigned-clock-rates: <not found>
+drivers/core/uclass.c:537-uclass_get_device_by_ofnode() Looking for phy@102=
+00000
+drivers/core/uclass.c:388-uclass_find_device_by_ofnode() Looking for
+phy@10200000
+drivers/core/uclass.c:407-uclass_find_device_by_ofnode()    - result
+for phy@10200000: phy@10200000 (ret=3D0)
+drivers/core/uclass.c:540-uclass_get_device_by_ofnode()    - result
+for phy@10200000: phy@10200000 (ret=3D0)
+drivers/core/ofnode.c:517-    ofnode_read_prop() ofnode_read_prop:
+assigned-clock-rates: <not found>
+drivers/core/uclass.c:537-uclass_get_device_by_ofnode() Looking for
+clock-controller@13020000
+drivers/core/uclass.c:388-uclass_find_device_by_ofnode() Looking for
+clock-controller@13020000
+drivers/core/uclass.c:407-uclass_find_device_by_ofnode()    - result
+for clock-controller@13020000: clock-controller@13020000 (ret=3D0)
+drivers/core/uclass.c:540-uclass_get_device_by_ofnode()    - result
+for clock-controller@13020000: clock-controller@13020000 (ret=3D0)
+drivers/core/uclass.c:537-uclass_get_device_by_ofnode() Looking for
+clock-controller@10230000
+drivers/core/uclass.c:388-uclass_find_device_by_ofnode() Looking for
+clock-controller@10230000
+drivers/core/uclass.c:407-uclass_find_device_by_ofnode()    - result
+for clock-controller@10230000: clock-controller@10230000 (ret=3D0)
+drivers/core/uclass.c:540-uclass_get_device_by_ofnode()    - result
+for clock-controller@10230000: clock-controller@10230000 (ret=3D0)
+common/event.c:113-      notify_dynamic() Sending event 5/(unknown) to
+spy 'efi_disk add'
+drivers/usb/cdns3/drd.c:287-      cdns3_drd_init() cdns-usb3-host
+usb@0: DRD version v1 (ID: 0004024e, rev: 00000200)
+drivers/usb/cdns3/drd.c:297-      cdns3_drd_init() cdns-usb3-host
+usb@0: Controller strapped to HOST
+drivers/core/ofnode.c:517-    ofnode_read_prop() ofnode_read_prop: dr_mode:=
+ host
+drivers/phy/starfive/phy-jh7110-usb2.c:58-   usb2_phy_set_mode()
+jh7110_usb2_phy phy@10200000: Changing phy to 1
+drivers/usb/cdns3/core.c:304-cdns3_hw_role_switch() cdns-usb3-host
+usb@0: Switching role 0 -> 1cdns-usb3-host usb@0: Waiting till Host
+mode is turned on
+drivers/usb/cdns3/core.c:309-cdns3_hw_role_switch() cdns-usb3-host
+usb@0: set 1 has failed, back to 0
+drivers/usb/cdns3/core.c:375-         cdns3_probe() cdns-usb3-host
+usb@0: Cadence USB3 core: probe succeed
+common/event.c:113-      notify_dynamic() Sending event 5/(unknown) to
+spy 'efi_disk add'
+drivers/core/ofnode.c:394-ofnode_read_u32_index()
+ofnode_read_u32_index: companion: (not found)
+scanning bus usb@0 for devices... Unhandled exception: Load access fault
+EPC: 00000000fff7f50e RA: 00000000fff7f508 TVAL: 0000000000000004
+EPC: 000000004024d50e RA: 000000004024d508 reloc adjusted
 
-So make these a choice, so it is more obvious what is going on.
+Code: 9863 3ee7 8526 f0ef c37f 651c 3a03 0105 (43dc)
 
-Update existing boards to enable SPL_SYS_MMCSD_RAW_MODE where needed.
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+resetting ...
 
-(no changes since v1)
-
- arch/arm/mach-imx/imx8m/soc.c                 |  2 +
- arch/arm/mach-imx/spl_imx_romapi.c            | 13 ++++-
- .../imx8mp_rsb3720a1/imx8mp_rsb3720a1.c       |  4 +-
- common/spl/Kconfig                            | 52 +++++++++++--------
- configs/am335x_guardian_defconfig             |  2 +-
- configs/am335x_pdu001_defconfig               |  2 +-
- configs/am3517_evm_defconfig                  |  2 +-
- configs/am62ax_evm_a53_defconfig              |  1 +
- configs/am62ax_evm_r5_defconfig               |  1 +
- configs/am62px_evm_a53_defconfig              |  1 +
- configs/am62px_evm_r5_defconfig               |  1 +
- configs/am62x_beagleplay_a53_defconfig        |  1 +
- configs/am62x_beagleplay_r5_defconfig         |  1 +
- configs/am62x_evm_a53_defconfig               |  1 +
- configs/am62x_evm_r5_defconfig                |  1 +
- configs/am64x_evm_a53_defconfig               |  1 +
- configs/am64x_evm_r5_defconfig                |  1 +
- configs/am65x_evm_a53_defconfig               |  1 +
- configs/am65x_evm_r5_defconfig                |  1 +
- configs/brppt2_defconfig                      |  2 +-
- configs/brsmarc1_defconfig                    |  2 +-
- configs/cgtqmx8_defconfig                     |  1 +
- configs/chromebit_mickey_defconfig            |  2 +-
- configs/chromebook_jerry_defconfig            |  2 +-
- configs/chromebook_minnie_defconfig           |  2 +-
- configs/chromebook_speedy_defconfig           |  2 +-
- configs/ci20_mmc_defconfig                    |  1 +
- configs/da850evm_defconfig                    |  2 +-
- configs/da850evm_nand_defconfig               |  2 +-
- configs/deneb_defconfig                       |  1 +
- configs/display5_defconfig                    |  2 +-
- configs/display5_factory_defconfig            |  2 +-
- configs/draco-rastaban_defconfig              |  2 +-
- configs/draco-thuban_defconfig                |  2 +-
- .../gardena-smart-gateway-at91sam_defconfig   |  2 +-
- configs/giedi_defconfig                       |  1 +
- configs/imx28_xea_defconfig                   |  1 +
- configs/imx28_xea_sb_defconfig                |  1 +
- configs/imx6q_logic_defconfig                 |  2 +-
- configs/imx8mm-cl-iot-gate-optee_defconfig    |  1 +
- configs/imx8mm-cl-iot-gate_defconfig          |  1 +
- configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |  1 +
- configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |  1 +
- configs/imx8mm-mx8menlo_defconfig             |  1 +
- configs/imx8mm-phygate-tauri-l_defconfig      |  1 +
- configs/imx8mm_beacon_defconfig               |  1 +
- configs/imx8mm_beacon_fspi_defconfig          |  1 +
- configs/imx8mm_data_modul_edm_sbc_defconfig   |  1 +
- configs/imx8mm_evk_defconfig                  |  1 +
- configs/imx8mm_evk_fspi_defconfig             |  1 +
- configs/imx8mm_phg_defconfig                  |  1 +
- configs/imx8mm_venice_defconfig               |  1 +
- configs/imx8mn_beacon_2g_defconfig            |  1 +
- configs/imx8mn_beacon_defconfig               |  1 +
- configs/imx8mn_beacon_fspi_defconfig          |  1 +
- configs/imx8mn_bsh_smm_s2_defconfig           |  1 +
- configs/imx8mn_bsh_smm_s2pro_defconfig        |  1 +
- configs/imx8mn_ddr4_evk_defconfig             |  1 +
- configs/imx8mn_evk_defconfig                  |  1 +
- configs/imx8mn_var_som_defconfig              |  1 +
- configs/imx8mn_venice_defconfig               |  1 +
- configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |  1 +
- configs/imx8mp_beacon_defconfig               |  1 +
- configs/imx8mp_data_modul_edm_sbc_defconfig   |  1 +
- configs/imx8mp_debix_model_a_defconfig        |  1 +
- configs/imx8mp_dhcom_pdk2_defconfig           |  1 +
- configs/imx8mp_dhcom_pdk3_defconfig           |  1 +
- configs/imx8mp_evk_defconfig                  |  1 +
- configs/imx8mp_rsb3720a1_4G_defconfig         |  2 +
- configs/imx8mp_rsb3720a1_6G_defconfig         |  1 +
- configs/imx8mp_venice_defconfig               |  1 +
- configs/imx8mq_cm_defconfig                   |  1 +
- configs/imx8mq_evk_defconfig                  |  1 +
- configs/imx8mq_phanbell_defconfig             |  1 +
- configs/imx8mq_reform2_defconfig              |  1 +
- configs/imx8qm_mek_defconfig                  |  1 +
- configs/imx8qxp_mek_defconfig                 |  1 +
- configs/imx8ulp_evk_defconfig                 |  1 +
- configs/imx93-phyboard-segin_defconfig        |  1 +
- configs/imx93_11x11_evk_defconfig             |  1 +
- configs/imx93_11x11_evk_ld_defconfig          |  1 +
- configs/imx93_var_som_defconfig               |  1 +
- configs/imxrt1020-evk_defconfig               |  1 +
- configs/imxrt1050-evk_defconfig               |  1 +
- configs/imxrt1050-evk_fspi_defconfig          |  1 +
- configs/imxrt1170-evk_defconfig               |  1 +
- configs/iot2050_defconfig                     |  1 +
- configs/j7200_evm_a72_defconfig               |  1 +
- configs/j7200_evm_r5_defconfig                |  1 +
- configs/j721e_beagleboneai64_a72_defconfig    |  1 +
- configs/j721e_beagleboneai64_r5_defconfig     |  1 +
- configs/j721e_evm_a72_defconfig               |  1 +
- configs/j721e_evm_r5_defconfig                |  1 +
- configs/j721s2_evm_a72_defconfig              |  1 +
- configs/j721s2_evm_r5_defconfig               |  1 +
- configs/j722s_evm_a53_defconfig               |  1 +
- configs/j722s_evm_r5_defconfig                |  1 +
- configs/j784s4_evm_a72_defconfig              |  1 +
- configs/j784s4_evm_r5_defconfig               |  1 +
- configs/kontron-sl-mx8mm_defconfig            |  1 +
- configs/kontron_pitx_imx8m_defconfig          |  1 +
- configs/kontron_sl28_defconfig                |  1 +
- configs/librem5_defconfig                     |  1 +
- configs/ls1021aiot_sdcard_defconfig           |  1 +
- configs/ls1021aqds_nand_defconfig             |  1 +
- configs/ls1021aqds_sdcard_ifc_defconfig       |  1 +
- configs/ls1021aqds_sdcard_qspi_defconfig      |  1 +
- configs/ls1021atsn_sdcard_defconfig           |  1 +
- ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |  1 +
- configs/ls1021atwr_sdcard_ifc_defconfig       |  1 +
- configs/ls1021atwr_sdcard_qspi_defconfig      |  1 +
- configs/msc_sm2s_imx8mp_defconfig             |  1 +
- configs/omap35_logic_defconfig                |  2 +-
- configs/omap35_logic_somlv_defconfig          |  2 +-
- configs/omap3_logic_defconfig                 |  2 +-
- configs/omap3_logic_somlv_defconfig           |  2 +-
- configs/phycore-imx8mm_defconfig              |  1 +
- configs/phycore-imx8mp_defconfig              |  1 +
- configs/phycore_am62x_a53_defconfig           |  1 +
- configs/phycore_am62x_r5_defconfig            |  1 +
- configs/phycore_am64x_a53_defconfig           |  1 +
- configs/phycore_am64x_r5_defconfig            |  1 +
- configs/pico-imx8mq_defconfig                 |  1 +
- configs/sama5d27_wlsom1_ek_mmc_defconfig      |  2 +-
- .../sama5d27_wlsom1_ek_qspiflash_defconfig    |  2 +-
- configs/sama5d2_icp_mmc_defconfig             |  2 +-
- configs/sandbox_noinst_defconfig              |  1 +
- configs/sniper_defconfig                      |  2 +-
- configs/socfpga_secu1_defconfig               |  2 +-
- configs/verdin-am62_a53_defconfig             |  1 +
- configs/verdin-am62_r5_defconfig              |  1 +
- configs/verdin-imx8mm_defconfig               |  1 +
- configs/verdin-imx8mp_defconfig               |  1 +
- 133 files changed, 175 insertions(+), 52 deletions(-)
-
-diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-index be38ca52885..f30178ae213 100644
---- a/arch/arm/mach-imx/imx8m/soc.c
-+++ b/arch/arm/mach-imx/imx8m/soc.c
-@@ -735,6 +735,7 @@ int boot_mode_getprisec(void)
- #endif
- 
- #if defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MP)
-+#ifdef SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
- #define IMG_CNTN_SET1_OFFSET	GENMASK(22, 19)
- unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 						unsigned long raw_sect)
-@@ -769,6 +770,7 @@ unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 
- 	return raw_sect;
- }
-+#endif /* SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION */
- #endif
- 
- bool is_usb_boot(void)
-diff --git a/arch/arm/mach-imx/spl_imx_romapi.c b/arch/arm/mach-imx/spl_imx_romapi.c
-index 9a86f5c133f..bdaea439d7f 100644
---- a/arch/arm/mach-imx/spl_imx_romapi.c
-+++ b/arch/arm/mach-imx/spl_imx_romapi.c
-@@ -33,8 +33,17 @@ ulong spl_romapi_raw_seekable_read(u32 offset, u32 size, void *buf)
- 
- ulong __weak spl_romapi_get_uboot_base(u32 image_offset, u32 rom_bt_dev)
- {
--	return image_offset +
--		(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512 - 0x8000);
-+	u32 sector = 0;
-+
-+	/*
-+	 * Some boards use this value even though MMC is not enabled in SPL, for
-+	 * example imx8mn_bsh_smm_s2
-+	 */
-+#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+	sector = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
-+#endif
-+
-+	return image_offset + sector * 512 - 0x8000;
- }
- 
- static int is_boot_from_stream_device(u32 boot)
-diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-index 070933fb54b..af083c3c38f 100644
---- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-+++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-@@ -190,7 +190,7 @@ int board_late_init(void)
- 	return 0;
- }
- 
--#ifdef CONFIG_SPL_MMC
-+#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
- #define UBOOT_RAW_SECTOR_OFFSET 0x40
- unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 					   unsigned long raw_sector)
-@@ -204,4 +204,4 @@ unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 		return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
- 	}
- }
--#endif /* CONFIG_SPL_MMC */
-+#endif /* CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR */
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index af43b5f5d3c..55a42a3a7c7 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -490,24 +490,45 @@ config SPL_DISPLAY_PRINT
- 	  the board.
- 
- config SPL_SYS_MMCSD_RAW_MODE
--	bool
--	help
--	  Support booting from an MMC without a filesystem.
--
--config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
--	bool "MMC raw mode: by sector"
-+	bool "Use raw reads to locate the next boot phase"
-+	depends on SPL_DM_MMC || SPL_MMC
- 	default y if ARCH_SUNXI || ARCH_DAVINCI || ARCH_UNIPHIER || \
- 		     ARCH_MX6 || ARCH_MX7 || \
- 		     ARCH_ROCKCHIP || ARCH_MVEBU ||  ARCH_SOCFPGA || \
- 		     ARCH_AT91 || ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
- 		     OMAP44XX || OMAP54XX || AM33XX || AM43XX || \
- 		     TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
-+	help
-+	  Support booting from an MMC without a filesystem.
-+
-+if SPL_SYS_MMCSD_RAW_MODE
-+
-+choice
-+	prompt "Method for locating next phase of boot (e.g. U-Boot)"
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+	bool "MMC raw mode: by sector"
- 	select SPL_LOAD_BLOCK if SPL_MMC
--	select SPL_SYS_MMCSD_RAW_MODE if SPL_MMC
- 	help
- 	  Use sector number for specifying U-Boot location on MMC/SD in
- 	  raw mode.
- 
-+config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-+	bool "MMC Raw mode: by partition"
-+	select SPL_LOAD_BLOCK if SPL_MMC
-+	help
-+	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
-+	bool "MMC raw mode: by partition type"
-+	depends on DOS_PARTITION && SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-+	help
-+	  Use partition type for specifying U-Boot partition on MMC/SD in
-+	  raw mode. U-Boot will be loaded from the first partition of this
-+	  type to be found.
-+
-+endchoice
-+
- config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
- 	hex "Address on the MMC to load U-Boot from"
- 	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-@@ -538,13 +559,6 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
- 
- 	  If unsure, leave the default.
- 
--config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
--	bool "MMC Raw mode: by partition"
--	select SPL_LOAD_BLOCK if SPL_MMC
--	select SPL_SYS_MMCSD_RAW_MODE if SPL_MMC
--	help
--	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
--
- config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
- 	hex "Partition to use to load U-Boot from"
- 	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-@@ -553,14 +567,6 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION
- 	  Partition on the MMC to load U-Boot from when the MMC is being
- 	  used in raw mode
- 
--config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
--	bool "MMC raw mode: by partition type"
--	depends on DOS_PARTITION && SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
--	help
--	  Use partition type for specifying U-Boot partition on MMC/SD in
--	  raw mode. U-Boot will be loaded from the first partition of this
--	  type to be found.
--
- config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_TYPE
- 	hex "Partition Type on the MMC to load U-Boot from"
- 	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
-@@ -568,6 +574,8 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_TYPE
- 	  Partition Type on the MMC to load U-Boot from, when the MMC is being
- 	  used in raw mode.
- 
-+endif # SPL_SYS_MMCSD_RAW_MODE
-+
- config SUPPORT_EMMC_BOOT_OVERRIDE_PART_CONFIG
- 	bool "Override eMMC EXT_CSC_PART_CONFIG by user defined partition"
- 	depends on SUPPORT_EMMC_BOOT
-diff --git a/configs/am335x_guardian_defconfig b/configs/am335x_guardian_defconfig
-index 75138542431..14a14c257c2 100644
---- a/configs/am335x_guardian_defconfig
-+++ b/configs/am335x_guardian_defconfig
-@@ -34,7 +34,7 @@ CONFIG_ARCH_MISC_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_ETH=y
- CONFIG_SPL_I2C=y
-diff --git a/configs/am335x_pdu001_defconfig b/configs/am335x_pdu001_defconfig
-index febe5ebaabb..ddb7ee9239c 100644
---- a/configs/am335x_pdu001_defconfig
-+++ b/configs/am335x_pdu001_defconfig
-@@ -26,7 +26,7 @@ CONFIG_BOOTCOMMAND="run eval_boot_device;part uuid mmc ${mmc_boot}:${root_fs_par
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_I2C=y
- # CONFIG_SPL_NAND_SUPPORT is not set
- CONFIG_SPL_POWER=y
-diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
-index 3236f1dd672..064c8bfe007 100644
---- a/configs/am3517_evm_defconfig
-+++ b/configs/am3517_evm_defconfig
-@@ -25,7 +25,7 @@ CONFIG_SPL_MAX_SIZE=0xec00
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- # CONFIG_SPL_FS_EXT4 is not set
- # CONFIG_SPL_I2C is not set
- CONFIG_SPL_MTD=y
-diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-index 4a351cd015a..b905ff74f2a 100644
---- a/configs/am62ax_evm_a53_defconfig
-+++ b/configs/am62ax_evm_a53_defconfig
-@@ -30,6 +30,7 @@ CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_PAD_TO=0x0
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-index 44ccb6baa90..092d0830623 100644
---- a/configs/am62ax_evm_r5_defconfig
-+++ b/configs/am62ax_evm_r5_defconfig
-@@ -39,6 +39,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-index 30d48340249..f367eb65031 100644
---- a/configs/am62px_evm_a53_defconfig
-+++ b/configs/am62px_evm_a53_defconfig
-@@ -37,6 +37,7 @@ CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_PAD_TO=0x0
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
-index ace55696737..4f7be44cfba 100644
---- a/configs/am62px_evm_r5_defconfig
-+++ b/configs/am62px_evm_r5_defconfig
-@@ -40,6 +40,7 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index 79c82d1ff7a..af54f9670a7 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -40,6 +40,7 @@ CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
-index d0cc4f5b405..ee4c43ff97f 100644
---- a/configs/am62x_beagleplay_r5_defconfig
-+++ b/configs/am62x_beagleplay_r5_defconfig
-@@ -45,6 +45,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DM_MAILBOX=y
-diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-index ca993b427bd..0b7ee942a0a 100644
---- a/configs/am62x_evm_a53_defconfig
-+++ b/configs/am62x_evm_a53_defconfig
-@@ -38,6 +38,7 @@ CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
-index 4b2e57b13a0..78ed3f62d06 100644
---- a/configs/am62x_evm_r5_defconfig
-+++ b/configs/am62x_evm_r5_defconfig
-@@ -47,6 +47,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DM_MAILBOX=y
-diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-index 66792595711..9a70a304f2e 100644
---- a/configs/am64x_evm_a53_defconfig
-+++ b/configs/am64x_evm_a53_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1800
- CONFIG_SPL_DMA=y
-diff --git a/configs/am64x_evm_r5_defconfig b/configs/am64x_evm_r5_defconfig
-index 96475d4c1b8..1e83b7ff1fe 100644
---- a/configs/am64x_evm_r5_defconfig
-+++ b/configs/am64x_evm_r5_defconfig
-@@ -50,6 +50,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SPL_DMA=y
-diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
-index 925a88e2547..f22b9afdb3b 100644
---- a/configs/am65x_evm_a53_defconfig
-+++ b/configs/am65x_evm_a53_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
-index 4fc9c39711c..1660bf93530 100644
---- a/configs/am65x_evm_r5_defconfig
-+++ b/configs/am65x_evm_r5_defconfig
-@@ -46,6 +46,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/brppt2_defconfig b/configs/brppt2_defconfig
-index 47b37bbc807..2f29cb3dc46 100644
---- a/configs/brppt2_defconfig
-+++ b/configs/brppt2_defconfig
-@@ -34,7 +34,7 @@ CONFIG_SYS_PBSIZE=532
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
-diff --git a/configs/brsmarc1_defconfig b/configs/brsmarc1_defconfig
-index f584b8d30b1..5b9a822c9ae 100644
---- a/configs/brsmarc1_defconfig
-+++ b/configs/brsmarc1_defconfig
-@@ -43,7 +43,7 @@ CONFIG_ARCH_MISC_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_I2C=y
- # CONFIG_SPL_NAND_SUPPORT is not set
- CONFIG_SPL_DM_SPI_FLASH=y
-diff --git a/configs/cgtqmx8_defconfig b/configs/cgtqmx8_defconfig
-index 24dfdae11e3..a9283ad49ea 100644
---- a/configs/cgtqmx8_defconfig
-+++ b/configs/cgtqmx8_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=0
-diff --git a/configs/chromebit_mickey_defconfig b/configs/chromebit_mickey_defconfig
-index e5d805d7da7..93bf4f5c592 100644
---- a/configs/chromebit_mickey_defconfig
-+++ b/configs/chromebit_mickey_defconfig
-@@ -38,7 +38,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- CONFIG_CMD_GPIO=y
-diff --git a/configs/chromebook_jerry_defconfig b/configs/chromebook_jerry_defconfig
-index 9bc59539dc8..a1df1f830f0 100644
---- a/configs/chromebook_jerry_defconfig
-+++ b/configs/chromebook_jerry_defconfig
-@@ -37,7 +37,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- CONFIG_CMD_GPIO=y
-diff --git a/configs/chromebook_minnie_defconfig b/configs/chromebook_minnie_defconfig
-index 26fa05e543b..03520b6af40 100644
---- a/configs/chromebook_minnie_defconfig
-+++ b/configs/chromebook_minnie_defconfig
-@@ -38,7 +38,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- CONFIG_CMD_GPIO=y
-diff --git a/configs/chromebook_speedy_defconfig b/configs/chromebook_speedy_defconfig
-index 5deb09b28ec..607fd288197 100644
---- a/configs/chromebook_speedy_defconfig
-+++ b/configs/chromebook_speedy_defconfig
-@@ -38,7 +38,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- CONFIG_CMD_GPIO=y
-diff --git a/configs/ci20_mmc_defconfig b/configs/ci20_mmc_defconfig
-index 39f33844e46..90574d2a157 100644
---- a/configs/ci20_mmc_defconfig
-+++ b/configs/ci20_mmc_defconfig
-@@ -32,6 +32,7 @@ CONFIG_SYS_MALLOC_BOOTPARAMS=y
- CONFIG_SPL_MAX_SIZE=0x2e00
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- # CONFIG_SPL_BANNER_PRINT is not set
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1c
- CONFIG_SPL_MMC_TINY=y
-diff --git a/configs/da850evm_defconfig b/configs/da850evm_defconfig
-index 30d1a93fec3..d10faa5b275 100644
---- a/configs/da850evm_defconfig
-+++ b/configs/da850evm_defconfig
-@@ -50,7 +50,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0f70000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x110000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x8000
-diff --git a/configs/da850evm_nand_defconfig b/configs/da850evm_nand_defconfig
-index 62cbd02b69a..7e59b6ff876 100644
---- a/configs/da850evm_nand_defconfig
-+++ b/configs/da850evm_nand_defconfig
-@@ -46,7 +46,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0f70000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x110000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_NAND_SUPPORT=y
- CONFIG_SPL_NAND_DRIVERS=y
- CONFIG_SPL_NAND_ECC=y
-diff --git a/configs/deneb_defconfig b/configs/deneb_defconfig
-index 4b9b0734c5a..4731e84e388 100644
---- a/configs/deneb_defconfig
-+++ b/configs/deneb_defconfig
-@@ -55,6 +55,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SPL_POWER_DOMAIN=y
-diff --git a/configs/display5_defconfig b/configs/display5_defconfig
-index 1d3336b8c6a..7463f4f52b5 100644
---- a/configs/display5_defconfig
-+++ b/configs/display5_defconfig
-@@ -42,7 +42,7 @@ CONFIG_SYS_PBSIZE=2076
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_BOOTCOUNT_LIMIT=y
- CONFIG_SPL_SYS_MALLOC=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_DMA=y
- CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_SAVEENV=y
-diff --git a/configs/display5_factory_defconfig b/configs/display5_factory_defconfig
-index 7c681f095c5..59d0c5d0370 100644
---- a/configs/display5_factory_defconfig
-+++ b/configs/display5_factory_defconfig
-@@ -39,7 +39,7 @@ CONFIG_SYS_CBSIZE=2048
- CONFIG_SYS_PBSIZE=2084
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_SYS_MALLOC=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_DMA=y
- CONFIG_SPL_I2C=y
- CONFIG_SPL_OS_BOOT=y
-diff --git a/configs/draco-rastaban_defconfig b/configs/draco-rastaban_defconfig
-index 43d29f5b11a..acba6f2b958 100644
---- a/configs/draco-rastaban_defconfig
-+++ b/configs/draco-rastaban_defconfig
-@@ -35,7 +35,7 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80208000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_NAND_DRIVERS=y
- CONFIG_SPL_NAND_ECC=y
-diff --git a/configs/draco-thuban_defconfig b/configs/draco-thuban_defconfig
-index b457b22fc64..dd4799f900a 100644
---- a/configs/draco-thuban_defconfig
-+++ b/configs/draco-thuban_defconfig
-@@ -35,7 +35,7 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80208000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_NAND_DRIVERS=y
- CONFIG_SPL_NAND_ECC=y
-diff --git a/configs/gardena-smart-gateway-at91sam_defconfig b/configs/gardena-smart-gateway-at91sam_defconfig
-index 3b9466c830f..42f116fac13 100644
---- a/configs/gardena-smart-gateway-at91sam_defconfig
-+++ b/configs/gardena-smart-gateway-at91sam_defconfig
-@@ -46,7 +46,7 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_NAND_SUPPORT=y
- CONFIG_SPL_NAND_RAW_ONLY=y
- CONFIG_SPL_NAND_DRIVERS=y
-diff --git a/configs/giedi_defconfig b/configs/giedi_defconfig
-index c7390d1d323..774ab647ccd 100644
---- a/configs/giedi_defconfig
-+++ b/configs/giedi_defconfig
-@@ -55,6 +55,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SPL_POWER_DOMAIN=y
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 822a329187f..d1470014fd7 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -48,6 +48,7 @@ CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0
- CONFIG_SUPPORT_EMMC_BOOT_OVERRIDE_PART_CONFIG=y
-diff --git a/configs/imx28_xea_sb_defconfig b/configs/imx28_xea_sb_defconfig
-index 8d48d8c5078..aa1116aa4b0 100644
---- a/configs/imx28_xea_sb_defconfig
-+++ b/configs/imx28_xea_sb_defconfig
-@@ -29,6 +29,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0
- CONFIG_SUPPORT_EMMC_BOOT_OVERRIDE_PART_CONFIG=y
-diff --git a/configs/imx6q_logic_defconfig b/configs/imx6q_logic_defconfig
-index 7203583003c..b893da6c92a 100644
---- a/configs/imx6q_logic_defconfig
-+++ b/configs/imx6q_logic_defconfig
-@@ -30,7 +30,7 @@ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
- CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
- CONFIG_SPL_RAW_IMAGE_SUPPORT=y
- CONFIG_SPL_SYS_MALLOC=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_DMA=y
- CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm-cl-iot-gate-optee_defconfig b/configs/imx8mm-cl-iot-gate-optee_defconfig
-index f5bb50c5f39..0b7dd632b59 100644
---- a/configs/imx8mm-cl-iot-gate-optee_defconfig
-+++ b/configs/imx8mm-cl-iot-gate-optee_defconfig
-@@ -37,6 +37,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm-cl-iot-gate_defconfig b/configs/imx8mm-cl-iot-gate_defconfig
-index b36ad7c867c..9312e9f72a7 100644
---- a/configs/imx8mm-cl-iot-gate_defconfig
-+++ b/configs/imx8mm-cl-iot-gate_defconfig
-@@ -39,6 +39,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-index d4e9d9f342d..f37297cdbf7 100644
---- a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-+++ b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-@@ -36,6 +36,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_POWER=y
-diff --git a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-index c85a14119e7..950246ecded 100644
---- a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-+++ b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-@@ -36,6 +36,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_POWER=y
-diff --git a/configs/imx8mm-mx8menlo_defconfig b/configs/imx8mm-mx8menlo_defconfig
-index 5e6bbb3e508..8644177a769 100644
---- a/configs/imx8mm-mx8menlo_defconfig
-+++ b/configs/imx8mm-mx8menlo_defconfig
-@@ -52,6 +52,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
-index 41765f1ddc5..51a6c6ea320 100644
---- a/configs/imx8mm-phygate-tauri-l_defconfig
-+++ b/configs/imx8mm-phygate-tauri-l_defconfig
-@@ -37,6 +37,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
-index e3dcbfe0452..7f0cb9a06bf 100644
---- a/configs/imx8mm_beacon_defconfig
-+++ b/configs/imx8mm_beacon_defconfig
-@@ -38,6 +38,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_beacon_fspi_defconfig b/configs/imx8mm_beacon_fspi_defconfig
-index 0aca853afd9..354a671bafb 100644
---- a/configs/imx8mm_beacon_fspi_defconfig
-+++ b/configs/imx8mm_beacon_fspi_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_data_modul_edm_sbc_defconfig b/configs/imx8mm_data_modul_edm_sbc_defconfig
-index f26a8791cd0..a78ae0c1eaa 100644
---- a/configs/imx8mm_data_modul_edm_sbc_defconfig
-+++ b/configs/imx8mm_data_modul_edm_sbc_defconfig
-@@ -59,6 +59,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
-index ff33d1532a0..927b41c4cc2 100644
---- a/configs/imx8mm_evk_defconfig
-+++ b/configs/imx8mm_evk_defconfig
-@@ -35,6 +35,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_evk_fspi_defconfig b/configs/imx8mm_evk_fspi_defconfig
-index a57dc47f26f..96c0a46bcec 100644
---- a/configs/imx8mm_evk_fspi_defconfig
-+++ b/configs/imx8mm_evk_fspi_defconfig
-@@ -39,6 +39,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_phg_defconfig b/configs/imx8mm_phg_defconfig
-index e14dcdf9a3d..2fd319b3a6c 100644
---- a/configs/imx8mm_phg_defconfig
-+++ b/configs/imx8mm_phg_defconfig
-@@ -36,6 +36,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mm_venice_defconfig b/configs/imx8mm_venice_defconfig
-index f4d999bfcef..fc3e3ec3779 100644
---- a/configs/imx8mm_venice_defconfig
-+++ b/configs/imx8mm_venice_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_beacon_2g_defconfig b/configs/imx8mn_beacon_2g_defconfig
-index 1129d8070cc..7a1931510e8 100644
---- a/configs/imx8mn_beacon_2g_defconfig
-+++ b/configs/imx8mn_beacon_2g_defconfig
-@@ -48,6 +48,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_beacon_defconfig b/configs/imx8mn_beacon_defconfig
-index f4af99847d1..eebfb0d7a7d 100644
---- a/configs/imx8mn_beacon_defconfig
-+++ b/configs/imx8mn_beacon_defconfig
-@@ -47,6 +47,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_beacon_fspi_defconfig b/configs/imx8mn_beacon_fspi_defconfig
-index cecde443367..6acbb8a0215 100644
---- a/configs/imx8mn_beacon_fspi_defconfig
-+++ b/configs/imx8mn_beacon_fspi_defconfig
-@@ -47,6 +47,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_bsh_smm_s2_defconfig b/configs/imx8mn_bsh_smm_s2_defconfig
-index b4351a392ef..29d7cdab922 100644
---- a/configs/imx8mn_bsh_smm_s2_defconfig
-+++ b/configs/imx8mn_bsh_smm_s2_defconfig
-@@ -42,6 +42,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_DMA=y
-diff --git a/configs/imx8mn_bsh_smm_s2pro_defconfig b/configs/imx8mn_bsh_smm_s2pro_defconfig
-index 0faa3376fd3..151a9a520ab 100644
---- a/configs/imx8mn_bsh_smm_s2pro_defconfig
-+++ b/configs/imx8mn_bsh_smm_s2pro_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_ddr4_evk_defconfig b/configs/imx8mn_ddr4_evk_defconfig
-index 82e3ce19480..93380a0ddde 100644
---- a/configs/imx8mn_ddr4_evk_defconfig
-+++ b/configs/imx8mn_ddr4_evk_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_evk_defconfig b/configs/imx8mn_evk_defconfig
-index 2402e9e8bfb..662703a312d 100644
---- a/configs/imx8mn_evk_defconfig
-+++ b/configs/imx8mn_evk_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_var_som_defconfig b/configs/imx8mn_var_som_defconfig
-index 218415fad57..0155cb2044e 100644
---- a/configs/imx8mn_var_som_defconfig
-+++ b/configs/imx8mn_var_som_defconfig
-@@ -46,6 +46,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mn_venice_defconfig b/configs/imx8mn_venice_defconfig
-index b65fef0a806..93e6a28535c 100644
---- a/configs/imx8mn_venice_defconfig
-+++ b/configs/imx8mn_venice_defconfig
-@@ -46,6 +46,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig b/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
-index 05f68c7e2ae..497a908f7a7 100644
---- a/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
-+++ b/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
-index 3c337d4bd25..ba676c95467 100644
---- a/configs/imx8mp_beacon_defconfig
-+++ b/configs/imx8mp_beacon_defconfig
-@@ -53,6 +53,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_data_modul_edm_sbc_defconfig b/configs/imx8mp_data_modul_edm_sbc_defconfig
-index fe3e757eefd..c8948e85961 100644
---- a/configs/imx8mp_data_modul_edm_sbc_defconfig
-+++ b/configs/imx8mp_data_modul_edm_sbc_defconfig
-@@ -66,6 +66,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_debix_model_a_defconfig b/configs/imx8mp_debix_model_a_defconfig
-index aa1de6d6909..c76ab232b12 100644
---- a/configs/imx8mp_debix_model_a_defconfig
-+++ b/configs/imx8mp_debix_model_a_defconfig
-@@ -37,6 +37,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_BOOTROM_SUPPORT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
-index 79b3e96c8e3..f807b0cfc37 100644
---- a/configs/imx8mp_dhcom_pdk2_defconfig
-+++ b/configs/imx8mp_dhcom_pdk2_defconfig
-@@ -64,6 +64,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- # CONFIG_SPL_FIT_IMAGE_TINY is not set
-diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
-index 8ef8bf4db27..05895d6dd6f 100644
---- a/configs/imx8mp_dhcom_pdk3_defconfig
-+++ b/configs/imx8mp_dhcom_pdk3_defconfig
-@@ -66,6 +66,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- # CONFIG_SPL_FIT_IMAGE_TINY is not set
-diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index f5ba022b075..fe05eeadd70 100644
---- a/configs/imx8mp_evk_defconfig
-+++ b/configs/imx8mp_evk_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_rsb3720a1_4G_defconfig b/configs/imx8mp_rsb3720a1_4G_defconfig
-index 54789365aa9..7a7f3907b06 100644
---- a/configs/imx8mp_rsb3720a1_4G_defconfig
-+++ b/configs/imx8mp_rsb3720a1_4G_defconfig
-@@ -53,6 +53,8 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_rsb3720a1_6G_defconfig b/configs/imx8mp_rsb3720a1_6G_defconfig
-index 4b0b71d03d9..75d110f91d1 100644
---- a/configs/imx8mp_rsb3720a1_6G_defconfig
-+++ b/configs/imx8mp_rsb3720a1_6G_defconfig
-@@ -53,6 +53,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_defconfig
-index df93774b307..b08e4ae4e1f 100644
---- a/configs/imx8mp_venice_defconfig
-+++ b/configs/imx8mp_venice_defconfig
-@@ -48,6 +48,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mq_cm_defconfig b/configs/imx8mq_cm_defconfig
-index 5eb96d3826a..ac45c3d669d 100644
---- a/configs/imx8mq_cm_defconfig
-+++ b/configs/imx8mq_cm_defconfig
-@@ -40,6 +40,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
-index 3c1701a3768..2a51681c335 100644
---- a/configs/imx8mq_evk_defconfig
-+++ b/configs/imx8mq_evk_defconfig
-@@ -42,6 +42,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mq_phanbell_defconfig b/configs/imx8mq_phanbell_defconfig
-index 3a3fb754fa4..4c36827b2ae 100644
---- a/configs/imx8mq_phanbell_defconfig
-+++ b/configs/imx8mq_phanbell_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8mq_reform2_defconfig b/configs/imx8mq_reform2_defconfig
-index 1844e3c8b84..2a951f16de4 100644
---- a/configs/imx8mq_reform2_defconfig
-+++ b/configs/imx8mq_reform2_defconfig
-@@ -45,6 +45,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx8qm_mek_defconfig b/configs/imx8qm_mek_defconfig
-index bf02d3e4f67..a96fb310cdd 100644
---- a/configs/imx8qm_mek_defconfig
-+++ b/configs/imx8qm_mek_defconfig
-@@ -48,6 +48,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SPL_POWER_DOMAIN=y
-diff --git a/configs/imx8qxp_mek_defconfig b/configs/imx8qxp_mek_defconfig
-index d6b79f53893..56cc8347926 100644
---- a/configs/imx8qxp_mek_defconfig
-+++ b/configs/imx8qxp_mek_defconfig
-@@ -49,6 +49,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SPL_POWER_DOMAIN=y
-diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
-index b302df1f351..7e1a53f289a 100644
---- a/configs/imx8ulp_evk_defconfig
-+++ b/configs/imx8ulp_evk_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x22040000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x8000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_WATCHDOG=y
-diff --git a/configs/imx93-phyboard-segin_defconfig b/configs/imx93-phyboard-segin_defconfig
-index e3eb0029fa4..6e9e9c5a19b 100644
---- a/configs/imx93-phyboard-segin_defconfig
-+++ b/configs/imx93-phyboard-segin_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_BOOTROM_SUPPORT=y
- CONFIG_SPL_LOAD_IMX_CONTAINER=y
- CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/container.cfg"
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
-index 2246715d822..78efb7bae81 100644
---- a/configs/imx93_11x11_evk_defconfig
-+++ b/configs/imx93_11x11_evk_defconfig
-@@ -42,6 +42,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x83200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx93_11x11_evk_ld_defconfig b/configs/imx93_11x11_evk_ld_defconfig
-index deed068550a..fd33fd54762 100644
---- a/configs/imx93_11x11_evk_ld_defconfig
-+++ b/configs/imx93_11x11_evk_ld_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x83200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
- CONFIG_SPL_I2C=y
-diff --git a/configs/imx93_var_som_defconfig b/configs/imx93_var_som_defconfig
-index 94ce213f93a..14f220e8a3c 100644
---- a/configs/imx93_var_som_defconfig
-+++ b/configs/imx93_var_som_defconfig
-@@ -45,6 +45,7 @@ CONFIG_SPL_BOOTROM_SUPPORT=y
- CONFIG_SPL_LOAD_IMX_CONTAINER=y
- CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/container.cfg"
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
- CONFIG_SPL_I2C=y
-diff --git a/configs/imxrt1020-evk_defconfig b/configs/imxrt1020-evk_defconfig
-index 80c8769926e..72bbd720153 100644
---- a/configs/imxrt1020-evk_defconfig
-+++ b/configs/imxrt1020-evk_defconfig
-@@ -31,6 +31,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
- # CONFIG_BOOTM_NETBSD is not set
-diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
-index 086fc47ec27..fdbce8e6aa9 100644
---- a/configs/imxrt1050-evk_defconfig
-+++ b/configs/imxrt1050-evk_defconfig
-@@ -35,6 +35,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
- CONFIG_SPL_NOR_SUPPORT=y
-diff --git a/configs/imxrt1050-evk_fspi_defconfig b/configs/imxrt1050-evk_fspi_defconfig
-index 4b252cfa5d0..03543ed0a30 100644
---- a/configs/imxrt1050-evk_fspi_defconfig
-+++ b/configs/imxrt1050-evk_fspi_defconfig
-@@ -36,6 +36,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
- CONFIG_SPL_NOR_SUPPORT=y
-diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
-index 83825da6de9..fe0058aa5ce 100644
---- a/configs/imxrt1170-evk_defconfig
-+++ b/configs/imxrt1170-evk_defconfig
-@@ -31,6 +31,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
- # CONFIG_BOOTM_NETBSD is not set
-diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
-index 8654bf20865..2a7a958dec2 100644
---- a/configs/iot2050_defconfig
-+++ b/configs/iot2050_defconfig
-@@ -53,6 +53,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DM_MAILBOX=y
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index fcfa9265996..137ca3f0d02 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -45,6 +45,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1800
- CONFIG_SPL_DMA=y
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index e023af24674..774a9eff439 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
- CONFIG_SPL_DMA=y
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index ead1d8389c6..b720c74999d 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_MAX_SIZE=0xc0000
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j721e_beagleboneai64_r5_defconfig b/configs/j721e_beagleboneai64_r5_defconfig
-index 314161b8a62..ce96e4921b8 100644
---- a/configs/j721e_beagleboneai64_r5_defconfig
-+++ b/configs/j721e_beagleboneai64_r5_defconfig
-@@ -42,6 +42,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index acb6e9c556e..c50e98391ff 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
-index f1c9bbd3fa8..3b4a7c3c0ee 100644
---- a/configs/j721e_evm_r5_defconfig
-+++ b/configs/j721e_evm_r5_defconfig
-@@ -49,6 +49,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
-index 5800e4be963..d78ebb5cfd4 100644
---- a/configs/j721s2_evm_a72_defconfig
-+++ b/configs/j721s2_evm_a72_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-index d0af664a6b7..b6adb6a77d7 100644
---- a/configs/j721s2_evm_r5_defconfig
-+++ b/configs/j721s2_evm_r5_defconfig
-@@ -50,6 +50,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
-index 1675cedb25e..98620222a07 100644
---- a/configs/j722s_evm_a53_defconfig
-+++ b/configs/j722s_evm_a53_defconfig
-@@ -37,6 +37,7 @@ CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_PAD_TO=0x0
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j722s_evm_r5_defconfig b/configs/j722s_evm_r5_defconfig
-index 8ba3916807d..e574be9e19d 100644
---- a/configs/j722s_evm_r5_defconfig
-+++ b/configs/j722s_evm_r5_defconfig
-@@ -40,6 +40,7 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index d6505f60c57..29f9f3dabde 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -38,6 +38,7 @@ CONFIG_LOGLEVEL=7
- CONFIG_SPL_MAX_SIZE=0xc0000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
-index 543b0a50d7a..a1168819497 100644
---- a/configs/j784s4_evm_r5_defconfig
-+++ b/configs/j784s4_evm_r5_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
-index f2570289298..9321a077260 100644
---- a/configs/kontron-sl-mx8mm_defconfig
-+++ b/configs/kontron-sl-mx8mm_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
-index c2133470fc9..52238831229 100644
---- a/configs/kontron_pitx_imx8m_defconfig
-+++ b/configs/kontron_pitx_imx8m_defconfig
-@@ -44,6 +44,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
-index a1d5f89b1ec..c4493e50a32 100644
---- a/configs/kontron_sl28_defconfig
-+++ b/configs/kontron_sl28_defconfig
-@@ -51,6 +51,7 @@ CONFIG_SPL_MAX_SIZE=0x20000
- CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x900
- CONFIG_SPL_MPC8XXX_INIT_DDR=y
-diff --git a/configs/librem5_defconfig b/configs/librem5_defconfig
-index 6999a689e29..248fc1fdde4 100644
---- a/configs/librem5_defconfig
-+++ b/configs/librem5_defconfig
-@@ -46,6 +46,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/ls1021aiot_sdcard_defconfig b/configs/ls1021aiot_sdcard_defconfig
-index 2354f4113ae..981093a9fb5 100644
---- a/configs/ls1021aiot_sdcard_defconfig
-+++ b/configs/ls1021aiot_sdcard_defconfig
-@@ -49,6 +49,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x82080000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021aqds_nand_defconfig b/configs/ls1021aqds_nand_defconfig
-index 136ca9a2670..4fc0e66e485 100644
---- a/configs/ls1021aqds_nand_defconfig
-+++ b/configs/ls1021aqds_nand_defconfig
-@@ -60,6 +60,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80200000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021aqds_sdcard_ifc_defconfig b/configs/ls1021aqds_sdcard_ifc_defconfig
-index befb4ae442c..72632b87701 100644
---- a/configs/ls1021aqds_sdcard_ifc_defconfig
-+++ b/configs/ls1021aqds_sdcard_ifc_defconfig
-@@ -59,6 +59,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x820c0000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021aqds_sdcard_qspi_defconfig b/configs/ls1021aqds_sdcard_qspi_defconfig
-index db06a03fe6b..78dce4dcbba 100644
---- a/configs/ls1021aqds_sdcard_qspi_defconfig
-+++ b/configs/ls1021aqds_sdcard_qspi_defconfig
-@@ -58,6 +58,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x820c0000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021atsn_sdcard_defconfig b/configs/ls1021atsn_sdcard_defconfig
-index e5d8eeb8a2f..0853bfbd3a0 100644
---- a/configs/ls1021atsn_sdcard_defconfig
-+++ b/configs/ls1021atsn_sdcard_defconfig
-@@ -52,6 +52,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x82100000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-index dc0e507263f..28434d8e191 100644
---- a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-+++ b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-@@ -60,6 +60,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x82104000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021atwr_sdcard_ifc_defconfig b/configs/ls1021atwr_sdcard_ifc_defconfig
-index 9980d6106ec..b4348f12678 100644
---- a/configs/ls1021atwr_sdcard_ifc_defconfig
-+++ b/configs/ls1021atwr_sdcard_ifc_defconfig
-@@ -61,6 +61,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x82100000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/ls1021atwr_sdcard_qspi_defconfig b/configs/ls1021atwr_sdcard_qspi_defconfig
-index ed92e34dccf..8d2c391f0e8 100644
---- a/configs/ls1021atwr_sdcard_qspi_defconfig
-+++ b/configs/ls1021atwr_sdcard_qspi_defconfig
-@@ -62,6 +62,7 @@ CONFIG_SPL_FSL_PBL=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x82100000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xe8
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/msc_sm2s_imx8mp_defconfig b/configs/msc_sm2s_imx8mp_defconfig
-index 2e1d112a3e7..47ed5cfb214 100644
---- a/configs/msc_sm2s_imx8mp_defconfig
-+++ b/configs/msc_sm2s_imx8mp_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defconfig
-index 23b2e503385..a35c027f952 100644
---- a/configs/omap35_logic_defconfig
-+++ b/configs/omap35_logic_defconfig
-@@ -28,7 +28,7 @@ CONFIG_SPL_MAX_SIZE=0xec00
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- # CONFIG_SPL_FS_EXT4 is not set
- # CONFIG_SPL_I2C is not set
- CONFIG_SPL_MTD=y
-diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_somlv_defconfig
-index a5f242ff40c..28e85bf5173 100644
---- a/configs/omap35_logic_somlv_defconfig
-+++ b/configs/omap35_logic_somlv_defconfig
-@@ -29,7 +29,7 @@ CONFIG_SPL_MAX_SIZE=0xec00
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- # CONFIG_SPL_FS_EXT4 is not set
- # CONFIG_SPL_I2C is not set
- CONFIG_SPL_MTD=y
-diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfig
-index d081d4e0fb4..045290838e4 100644
---- a/configs/omap3_logic_defconfig
-+++ b/configs/omap3_logic_defconfig
-@@ -27,7 +27,7 @@ CONFIG_SPL_MAX_SIZE=0xec00
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- # CONFIG_SPL_FS_EXT4 is not set
- # CONFIG_SPL_I2C is not set
- CONFIG_SPL_MTD=y
-diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_somlv_defconfig
-index 68e89d245ee..583f79059a5 100644
---- a/configs/omap3_logic_somlv_defconfig
-+++ b/configs/omap3_logic_somlv_defconfig
-@@ -29,7 +29,7 @@ CONFIG_SPL_MAX_SIZE=0xec00
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- # CONFIG_SPL_FS_EXT4 is not set
- # CONFIG_SPL_I2C is not set
- CONFIG_SPL_MTD=y
-diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
-index f9fd7255df7..ce322887bae 100644
---- a/configs/phycore-imx8mm_defconfig
-+++ b/configs/phycore-imx8mm_defconfig
-@@ -38,6 +38,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 8dd4963bdc0..a296d2e3a99 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- # CONFIG_SPL_CRYPTO is not set
-diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index 39161b722b1..d8b129f7dd0 100644
---- a/configs/phycore_am62x_a53_defconfig
-+++ b/configs/phycore_am62x_a53_defconfig
-@@ -47,6 +47,7 @@ CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/phycore_am62x_r5_defconfig b/configs/phycore_am62x_r5_defconfig
-index b7d0273dd74..7fc3abf1262 100644
---- a/configs/phycore_am62x_r5_defconfig
-+++ b/configs/phycore_am62x_r5_defconfig
-@@ -48,6 +48,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_I2C=y
-diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-index 1af72e8bb32..5cf24b9debf 100644
---- a/configs/phycore_am64x_a53_defconfig
-+++ b/configs/phycore_am64x_a53_defconfig
-@@ -45,6 +45,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/phycore_am64x_r5_defconfig b/configs/phycore_am64x_r5_defconfig
-index a0d78241928..72d10f76647 100644
---- a/configs/phycore_am64x_r5_defconfig
-+++ b/configs/phycore_am64x_r5_defconfig
-@@ -49,6 +49,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_DMA=y
-diff --git a/configs/pico-imx8mq_defconfig b/configs/pico-imx8mq_defconfig
-index cf91eb563b9..ef876abbd36 100644
---- a/configs/pico-imx8mq_defconfig
-+++ b/configs/pico-imx8mq_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/sama5d27_wlsom1_ek_mmc_defconfig b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-index 89a5bcdfac8..25213af37c5 100644
---- a/configs/sama5d27_wlsom1_ek_mmc_defconfig
-+++ b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-@@ -48,7 +48,7 @@ CONFIG_SPL_MAX_SIZE=0x10000
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
- CONFIG_SPL_DISPLAY_PRINT=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_AT91_MCK_BYPASS=y
- CONFIG_HUSH_PARSER=y
- CONFIG_CMD_BOOTZ=y
-diff --git a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-index a07044578a8..5502858fead 100644
---- a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-+++ b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-@@ -48,7 +48,7 @@ CONFIG_SPL_MAX_SIZE=0x10000
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
- CONFIG_SPL_DISPLAY_PRINT=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-diff --git a/configs/sama5d2_icp_mmc_defconfig b/configs/sama5d2_icp_mmc_defconfig
-index 6b9fa27de63..98b931c375d 100644
---- a/configs/sama5d2_icp_mmc_defconfig
-+++ b/configs/sama5d2_icp_mmc_defconfig
-@@ -49,7 +49,7 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
- CONFIG_SPL_DISPLAY_PRINT=y
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_AT91_MCK_BYPASS=y
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index f37230151a0..bfd95e2398f 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xa000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x4000000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
-index 0243b15f31c..d0dbd105d0c 100644
---- a/configs/sniper_defconfig
-+++ b/configs/sniper_defconfig
-@@ -22,7 +22,7 @@ CONFIG_SPL_MAX_SIZE=0xec00
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80208000
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=2
- # CONFIG_SPL_FS_EXT4 is not set
-diff --git a/configs/socfpga_secu1_defconfig b/configs/socfpga_secu1_defconfig
-index a08ba22fdb5..3a3b8a77c22 100644
---- a/configs/socfpga_secu1_defconfig
-+++ b/configs/socfpga_secu1_defconfig
-@@ -42,7 +42,7 @@ CONFIG_SPL_PAD_TO=0x10000
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--# CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-+# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x1
- # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE is not set
- CONFIG_SPL_MTD=y
-diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
-index 464d0bbb159..27f089317e3 100644
---- a/configs/verdin-am62_a53_defconfig
-+++ b/configs/verdin-am62_a53_defconfig
-@@ -51,6 +51,7 @@ CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
- CONFIG_SPL_DMA=y
-diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
-index e39ee2ac6fe..bd9ecd94922 100644
---- a/configs/verdin-am62_r5_defconfig
-+++ b/configs/verdin-am62_r5_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/verdin-imx8mm_defconfig b/configs/verdin-imx8mm_defconfig
-index ef7f3b1bc10..9ca205586a0 100644
---- a/configs/verdin-imx8mm_defconfig
-+++ b/configs/verdin-imx8mm_defconfig
-@@ -47,6 +47,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
-diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
-index fca91f7b1ee..c74398f4f8b 100644
---- a/configs/verdin-imx8mp_defconfig
-+++ b/configs/verdin-imx8mp_defconfig
-@@ -60,6 +60,7 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
- CONFIG_SPL_I2C=y
--- 
-2.34.1
-
+-E
