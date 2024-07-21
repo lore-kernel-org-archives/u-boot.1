@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCCA9C3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 18:40:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34249C3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 19:38:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F7B687D87;
-	Sun, 21 Jul 2024 20:40:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71C5987E96;
+	Sun, 21 Jul 2024 21:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J20rBY94";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PQ/2pQ7Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C394586DBD; Sun, 21 Jul 2024 20:40:35 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 4C25F87EB4; Sun, 21 Jul 2024 21:38:47 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80ADC87E96
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 20:40:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B251487D87
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 21:38:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,28 +28,25 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1721587219;
- bh=uequ2ZHkdDFUB+Lzq9fGGq7ci5flSvtZjgw2B0yLNF4=;
- b=J20rBY94ORyzIbK3BJwEGBHnuSfGYkK04lKRpKIA0OfOhma1telxfiuf0JtapEvaa4iA+1Xt5
- okYgTq1J7JejrugL0aBnlGNyr4hQAOmYLRriGAd3iB4TAJXF5jZLvlpLBO80aMn4qNjchQJErwE
- HhbgdOCzuz4C2OjsxnH4/qU08gdL6G04MRhg6nb+M4dgc/N7Z7xtxotFY/so2YH7z/Oz+lrF370
- 0rx5RIaOLjuq9pxwbUZkZgSg1DtnRp1n2eOjUmPxWl7LhA7frdYFc4iPUEnWUctc7SX/+1R6mnJ
- L669OOccRRTuIZNRWnwG2KVa/ylmCTOkMzwBDGjJDgEA==
-Message-ID: <7fd8f4e2-1661-43d5-b753-94549351dbf8@kwiboo.se>
-Date: Sun, 21 Jul 2024 20:40:16 +0200
+ s=fe-e1b5cab7be; t=1721590718;
+ bh=ehj0RUrNAERJ1k0umecI5YaNFDmDih9JC/6hGuzWe+Y=;
+ b=PQ/2pQ7Qdt/RcfRAn57HHxNma8B+7eomPdlkmUQcLIBgn2rXs91EXQd1jw3Fv/QAR6o1WWSIK
+ F63CGxpwWI7jnGdjxLDqVZjQkvLsOLxuTYJx0fY5CsHMx0zYt9+NBbez2fb9HvUvEnHZjuS0FaX
+ BJvpALGWLVOehi5Eqgg17G8mXmArAodnWsxtfUSzcPfJKeJAGowwd/hOs1lbXwyUFkE9Q9tg44s
+ FyUPSiPVykUecuGuYODp7dcLkRGT9ioTHBPALXJF6sUCmvqyUYNq8mxInxjQb6yPJk69XwRtPv0
+ vWWj726Ycy6IEDEPjyaVTe0l7n657jgxLZdC6gerk+nA==
+Message-ID: <bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se>
+Date: Sun, 21 Jul 2024 21:38:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] phy: rockchip: naneng-combphy: Introduce PHY-IDs
- to fix RK3588 muxing
-To: Sebastian Kropatsch <seb-dev@mail.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
- <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <cover.1721161722.git.seb-dev@mail.de>
- <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+Subject: Re: [PATCH v2] rockchip: bring-up to Radxa Rock 3C board
+To: Maxim Moskalets <maximmosk4@gmail.com>, Maxim Moskalets
+ <Maxim.Moskalets@kaspersky.com>
+Cc: sjg@chromium.org, u-boot@lists.denx.de, trini@konsulko.com
+References: <20240721145353.6817-1-Maxim.Moskalets@kaspersky.com>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+In-Reply-To: <20240721145353.6817-1-Maxim.Moskalets@kaspersky.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -57,8 +54,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 669d56107025df85504af01f
+ 149.28.215.223
+X-ForwardEmail-ID: 669d63bb7025df85504b01bb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,153 +72,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+Hi Maxim,
 
-On 2024-07-16 22:42, Sebastian Kropatsch wrote:
-> Fix multiplex configuration for PCIe1L0 and PCIe1L1 in PCIESEL_CON for
-> RK3588 to correctly select between Combo PHYs and PCIe3 PHY.
-> Currently, the code incorrectly muxes both ports to Combo PHYs,
-> interfering with PCIe3 PHY settings.
-> Introduce PHY identifiers to identify the correct Combo PHY and set
-> the necessary bits accordingly.
+On 2024-07-21 16:53, Maxim Moskalets wrote:
+> Just copy of rock-3a-rk3568_defconfig with dts for rock-3c-rk3566.
+> Separated from the original due to the use of different DTS, than
+> fixed primarily network support.
+
+What does this reference to? There has never been support for ROCK 3C in
+U-Boot, so nothing can have been fixed?
+
+Please change the patch subject to something like:
+
+  board: rockchip: Add Radxa ROCK 3C
+
+and add some details about what board revision you have tested on.
+
+Also this is missing an entry in rockchip.rst:
+
+     - Radxa ROCK 3C (rock-3c-rk3566)
+
+and an entry in a MAINTAINERS-file.
+
+Feel free to add me as maintainer/reviewer of this board and fix/add
+below config values to match what I have carried in my tree for a few
+months now :-)
+
+Add a file arch/arm/dts/rk3566-rock-3c-u-boot.dtsi with:
+
+---
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+
+#include "rk356x-u-boot.dtsi"
+
+&sfc {
+	flash@0 {
+		bootph-pre-ram;
+		bootph-some-ram;
+	};
+};
+---
+
+to enable support for booting from SPI flash.
+
 > 
-> This fix is adapted from the upstream Linux commit by Sebastian Reichel:
-> d16d4002fea6 ("phy: rockchip: naneng-combphy: Fix mux on rk3588")
-> 
-> Fixes: b37260bca1aa ("phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588")
-> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 > ---
->  .../rockchip/phy-rockchip-naneng-combphy.c    | 49 ++++++++++++++++++-
->  1 file changed, 47 insertions(+), 2 deletions(-)
+>  configs/rock-3c-rk3566_defconfig | 93 ++++++++++++++++++++++++++++++++
+>  1 file changed, 93 insertions(+)
+>  create mode 100644 configs/rock-3c-rk3566_defconfig
 > 
-> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-> index 1b85cbcce8..7d61913af1 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-> @@ -67,12 +67,15 @@ struct rockchip_combphy_grfcfg {
->  };
->  
->  struct rockchip_combphy_cfg {
-> +	unsigned int num_phys;
-> +	unsigned int phy_ids[3];
->  	const struct rockchip_combphy_grfcfg *grfcfg;
->  	int (*combphy_cfg)(struct rockchip_combphy_priv *priv);
->  };
->  
->  struct rockchip_combphy_priv {
->  	u32 mode;
-> +	int id;
->  	void __iomem *mmio;
->  	struct udevice *dev;
->  	struct regmap *pipe_grf;
-> @@ -270,6 +273,8 @@ static int rockchip_combphy_probe(struct udevice *udev)
->  {
->  	struct rockchip_combphy_priv *priv = dev_get_priv(udev);
->  	const struct rockchip_combphy_cfg *phy_cfg;
-> +	fdt_addr_t addr;
-> +	int id;
->  
->  	priv->mmio = (void __iomem *)dev_read_addr(udev);
->  	if (IS_ERR(priv->mmio))
-> @@ -281,6 +286,26 @@ static int rockchip_combphy_probe(struct udevice *udev)
->  		return -EINVAL;
->  	}
->  
-> +	addr = dev_read_addr(udev);
+> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+> new file mode 100644
+> index 00000000000..53a98029783
+> --- /dev/null
+> +++ b/configs/rock-3c-rk3566_defconfig
+> @@ -0,0 +1,93 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-rock-3a.dtb"
 
-dev_read_addr(udev) is already called above, maybe we can use the
-returned value from that call?
+This should be:
 
-Or this could be changes to match other reg value matching done in other
-rockchip phy drivers, e.g. something like:
+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
 
-	ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 0, &reg);
-	if (ret) {
-		dev_err(udev, "failed to read reg[0] property\n");
-		return ret;
-	}
-	if (reg == 0 && dev_read_addr_cells(udev) == 2) {
-		ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 1, &reg);
-		if (ret) {
-			dev_err(udev, "failed to read reg[1] property\n");
-			return ret;
-		}
-	}
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_POWEROFF=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
 
-> +	if (addr == FDT_ADDR_T_NONE) {
-> +		dev_err(udev, "No valid device address found\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	/* Find the phy-id based on the device's I/O-address */
-> +	priv->id = -ENODEV;
-> +	for (id = 0; id < phy_cfg->num_phys; id++) {
-> +		if (addr == phy_cfg->phy_ids[id]) {
-> +			priv->id = id;
-> +			break;
-> +		}
-> +	}
-> +
-> +	if (priv->id == -ENODEV) {
-> +		dev_err(udev, "Failed to find PHY ID\n");
-> +		return -ENODEV;
-> +	}
-> +
->  	priv->dev = udev;
->  	priv->mode = PHY_TYPE_SATA;
->  	priv->cfg = phy_cfg;
-> @@ -421,6 +446,12 @@ static const struct rockchip_combphy_grfcfg rk3568_combphy_grfcfgs = {
->  };
->  
->  static const struct rockchip_combphy_cfg rk3568_combphy_cfgs = {
-> +	.num_phys = 3,
-> +	.phy_ids = {
-> +		0xfe820000,
-> +		0xfe830000,
-> +		0xfe840000,
-> +	},
->  	.grfcfg		= &rk3568_combphy_grfcfgs,
->  	.combphy_cfg	= rk3568_combphy_cfg,
->  };
-> @@ -436,8 +467,16 @@ static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
->  		param_write(priv->phy_grf, &cfg->con1_for_pcie, true);
->  		param_write(priv->phy_grf, &cfg->con2_for_pcie, true);
->  		param_write(priv->phy_grf, &cfg->con3_for_pcie, true);
-> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
-> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
-> +		switch (priv->id) {
-> +		case 1:
-> +			printf("rk3588_combphy_cfg: priv->id was configured to 1");
+Please add:
 
-Please drop printf calls.
+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 
-> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
-> +			break;
-> +		case 2:
-> +			printf("rk3588_combphy_cfg: priv->id was configured to 2");
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
 
-Please drop printf calls.
+Please add:
+
+CONFIG_LED=y
+CONFIG_LED_GPIO=y
+
+to support the gpio-leds node.
+
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=4
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+
+Please add:
+
+CONFIG_SPI_FLASH_GIGADEVICE=y
+
+> +CONFIG_SPI_FLASH_MACRONIX=y
+
+and please add:
+
+CONFIG_SPI_FLASH_WINBOND=y
+
+to maximize support for custom SPI flash modules.
+
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_PWM_ROCKCHIP=y
+
+Please drop, there is no pwm node enabled in the device tree.
 
 Regards,
 Jonas
 
-> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
-> +			break;
-> +		}
->  		break;
->  	case PHY_TYPE_USB3:
->  		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
-> @@ -515,6 +554,12 @@ static const struct rockchip_combphy_grfcfg rk3588_combphy_grfcfgs = {
->  };
->  
->  static const struct rockchip_combphy_cfg rk3588_combphy_cfgs = {
-> +	.num_phys = 3,
-> +	.phy_ids = {
-> +		0xfee00000,
-> +		0xfee10000,
-> +		0xfee20000,
-> +	},
->  	.grfcfg		= &rk3588_combphy_grfcfgs,
->  	.combphy_cfg	= rk3588_combphy_cfg,
->  };
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
 
