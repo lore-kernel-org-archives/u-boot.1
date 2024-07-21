@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A27AC3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E045DC3DA61
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17173885A8;
+	by phobos.denx.de (Postfix) with ESMTP id 7A4EB885F5;
 	Sun, 21 Jul 2024 12:10:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YGx3p5nw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SY7fJu0a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8938088464; Sun, 21 Jul 2024 12:10:11 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 0174687F8D; Sun, 21 Jul 2024 12:10:13 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4869C87DEA
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A32C88373
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-42795086628so23155905e9.3
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:08 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-368f92df172so1103775f8f.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556607; x=1722161407; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721556608; x=1722161408; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZmLlbJwCCZB/5EvQ5ochur3SVGPaQKOuGnol8FHQ1Lk=;
- b=YGx3p5nwGdqXFPpIyRgUhzWIhfdXxZdcqUY1MqQ5wq1m4ByDCg2l/pRLFuAVIVfVWJ
- YsQ7L2fozxQCIrf0AjfJBPilpLwPQgsK02vZyeGjFSEIx+bjiaN6WMta5HyR2qdTZ08j
- hPBLQwhkaUqMAUKWG0TGwE+qY8WGYPuifYK2c=
+ bh=ja/D2ziihdkTmFP+Q+oAy6MiqLXOGRQqokvJIJjNpWw=;
+ b=SY7fJu0af37jhhmCuT/X1w62YKt96vhDgNv1LymiQH8XjdLFEIGR5U+7w9jNOrRHMB
+ J6R+gCE5dS2ChmgZsFEAtw8qT+ZKQXixbkohFxoNz2NHunV8liWgsPPzy+1vXxBdnvpm
+ YWYm8bUtMFbvp2iACASKNgaNZBDGcvvCBsqTE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556607; x=1722161407;
+ d=1e100.net; s=20230601; t=1721556608; x=1722161408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZmLlbJwCCZB/5EvQ5ochur3SVGPaQKOuGnol8FHQ1Lk=;
- b=UNBHIxWFvKqDNWubYqL9qOLu/c+UCwecp1O7jnHtpxJiwAGftyNp9fDVu14xU/y1NE
- hjw3E2RqJbYz8GuDEG+jcATR5ziGKec3v2Q7EZl70zeCr2zuhxcWEagSPFPe+l80erjo
- RvdBj+HHPEZfOEqEUQoFXfC7f9duQyJ4LiohZcvuDhwfsS3TTQFCav8twrY1QQe9BBI+
- dc1un+ItJlzRv21AwgegLor7ArTzk5oRXWr6p/xybZBXRstz+Me0wbY0/EhwjRFpAziI
- 7PKFl9kGpSmSwoa8HLzoL/W7hikSZNcad2FJgLMknJ+YteaSMhTYJr4yoVUMv1dTy+zH
- bpVQ==
-X-Gm-Message-State: AOJu0YymlnLIkJOYebLULx4zJaXcLjJL12YaDojBZCSOjeszQ5JC12Eo
- GglRN/ap7o4nCzMTihoJBx4ZgUF96wlwSfBek3c+lhmGAOynwDIwpk54mOsOogHPkbx79Ss3/Xo
+ bh=ja/D2ziihdkTmFP+Q+oAy6MiqLXOGRQqokvJIJjNpWw=;
+ b=gMdFkDKZVdl3hkryj5MaQi5YdkWbpSjZgpMH4EWpi0Xz2rzg5fkmM5YOUrLKqLorR7
+ zOzl4ft9Lz9XyWxnRBl5fSC8CiGV+1ql1q04X7URKE1lPGsWZRl1B2vw2dIvUbK0B0XL
+ KeNgTx1mW3LxjHZWA5FV3zCb3qg8bNhBe4rtcbcEvJZw9xXCzM4G0O9u0GKi2mSjGswK
+ UyMDV1L5VG/fjmGHf9pZs8Y+S/MBMXtopHqEU/d7Z+R0WuGo/0G5U153fdr8LzMfB6fC
+ Xa0p36xJmmKo/BdmNPHRWfGbxmud03JUs9ODY4njT/JMDsj5+fcKRE6v4Bg3JgRc5kI3
+ 3IoQ==
+X-Gm-Message-State: AOJu0YyWoO4DtJ3uNY1D4s3kgCo1CAeU368Is3jCnq5x7iHo55nXNzJd
+ B5mJey7rRBwyzBjIi35NsUTU4WAlgP3tlGP1qwMRXwxOGYMgBdIQxMHQDCBORNSmC0+DxoauHoc
  =
-X-Google-Smtp-Source: AGHT+IFCvKhW5lKV0OObfKIGFJJyFf+kz3Xoj78J0JahbtKXc8OCPOhddrG9a9PPzcxHQqk8fC1d9g==
-X-Received: by 2002:a05:600c:474f:b0:427:dae6:8416 with SMTP id
- 5b1f17b1804b1-427dc5865ecmr19050495e9.36.1721556607362; 
- Sun, 21 Jul 2024 03:10:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGBs+URla17pK4doGDSRQZUca9xTOx4dCq7I95oFYscvxp/BP3gaV9AsiB00QqL/2HrAUkpnA==
+X-Received: by 2002:adf:fa92:0:b0:367:9625:bd05 with SMTP id
+ ffacd0b85a97d-369bae3ec96mr1858908f8f.15.1721556608545; 
+ Sun, 21 Jul 2024 03:10:08 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.06
+ 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 03:10:06 -0700 (PDT)
+ Sun, 21 Jul 2024 03:10:07 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 15/21] spl: Plumb in the Universal Payload handoff
-Date: Sun, 21 Jul 2024 11:09:33 +0100
-Message-Id: <20240721100940.3202027-16-sjg@chromium.org>
+Subject: [PATCH v3 16/21] upl: Plumb in universal payload to the init process
+Date: Sun, 21 Jul 2024 11:09:34 +0100
+Message-Id: <20240721100940.3202027-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240721100940.3202027-1-sjg@chromium.org>
 References: <20240721100940.3202027-1-sjg@chromium.org>
@@ -91,126 +91,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Specify the FIT and include information about each loaded image, as
-required by the UPL handoff.
-
-Write the UPL handoff into the bloblist before jumping to the next phase.
-
-Control this using a runtime flag to avoid conflicting with other
-handoff mechanisms.
+Read the UPL early in boot so that it is available. For now none of the
+information is used.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Hang when something goes wrong, to avoid a broken boot
-- Add a runtime flag to enable UPL
-- Put upl_image() calls in a common place
+ boot/Kconfig     | 12 +++++++++++-
+ common/board_f.c | 22 ++++++++++++++++++++++
+ common/board_r.c |  2 ++
+ 3 files changed, 35 insertions(+), 1 deletion(-)
 
- boot/image-fit.c                  | 4 ++++
- common/spl/spl.c                  | 8 ++++++++
- common/spl/spl_fit.c              | 9 +++++++++
- include/asm-generic/global_data.h | 4 ++++
- 4 files changed, 25 insertions(+)
-
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 9253f81fff5..c38ccd6754f 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -36,6 +36,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #include <bootm.h>
- #include <image.h>
- #include <bootstage.h>
-+#include <upl.h>
- #include <u-boot/crc.h>
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 1fdbb0755c5..ca14a614152 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -754,7 +754,9 @@ config UPL_READ
+ 	help
+ 	  Provides support for decoding a UPL-format payload into a C structure
+ 	  which can be used elsewhere in U-Boot. This is just the reading
+-	  implementation, useful for trying it out.
++	  implementation, useful for trying it out. See UPL_IN for how
++	  to tell U-Boot to actually read it on startup and use it for memory
++	  and device information, etc.
  
- /*****************************************************************************/
-@@ -2294,6 +2295,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ config UPL_WRITE
+ 	bool "upl - Support writing a Universal Payload handoff"
+@@ -765,6 +767,14 @@ config UPL_WRITE
+ 	  for how to tell U-Boot SPL to actually write it before jumping to
+ 	  the next phase.
  
- 	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_LOAD);
- 
-+	upl_add_image(noffset, load, len,
-+		      fdt_getprop(fit, noffset, FIT_DESC_PROP, NULL));
++config UPL_IN
++	bool "upl - Read the UPL handoff on startup"
++	select UPL_READ
++	help
++	  Read an SPL handoff when U-Boot starts and use it to provide
++	  devices, memory layout, etc. required by U-Boot. This allows U-Boot
++	  to function as a payload in the meaning of the specification.
 +
- 	*datap = load;
- 	*lenp = len;
- 	if (fit_unamep)
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 7794ddccade..d6a364de6ee 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -810,6 +810,14 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 			printf(SPL_TPL_PROMPT
- 			       "SPL hand-off write failed (err=%d)\n", ret);
- 	}
-+	if (CONFIG_IS_ENABLED(UPL_OUT) && (gd->flags & GD_FLG_UPL)) {
-+		ret = spl_write_upl_handoff(&spl_image);
-+		if (ret) {
-+			printf(SPL_TPL_PROMPT
-+			       "UPL hand-off write failed (err=%d)\n", ret);
-+			hang();
-+		}
+ if SPL
+ 
+ config SPL_UPL
+diff --git a/common/board_f.c b/common/board_f.c
+index 22c180b2187..ebcc63f34dc 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -40,6 +40,7 @@
+ #include <sysreset.h>
+ #include <timer.h>
+ #include <trace.h>
++#include <upl.h>
+ #include <video.h>
+ #include <watchdog.h>
+ #include <asm/cache.h>
+@@ -862,6 +863,26 @@ __weak int clear_bss(void)
+ 	return 0;
+ }
+ 
++static int initf_upl(void)
++{
++	struct upl *upl;
++	int ret;
++
++	if (!IS_ENABLED(CONFIG_UPL_IN) || !(gd->flags & GD_FLG_UPL))
++		return 0;
++
++	upl = malloc(sizeof(struct upl));
++	if (upl)
++		ret = upl_read_handoff(upl, oftree_default());
++	if (ret) {
++		printf("UPL handoff: read failure (err=%dE)\n", ret);
++		return ret;
 +	}
- 	if (CONFIG_IS_ENABLED(BLOBLIST)) {
- 		ret = bloblist_finish();
- 		if (ret)
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 527a5691ac6..03a2ad4ebe7 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -12,6 +12,7 @@
- #include <memalign.h>
- #include <mapmem.h>
- #include <spl.h>
-+#include <upl.h>
- #include <sysinfo.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-@@ -336,6 +337,9 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 			image_info->entry_point = FDT_ERROR;
- 	}
- 
-+	upl_add_image(node, load_addr, length,
-+		      fdt_getprop(fit, node, FIT_DESC_PROP, NULL));
++	gd_set_upl(upl);
 +
- 	return 0;
- }
- 
-@@ -847,6 +851,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 		spl_image->entry_point = spl_image->load_addr;
- 
- 	spl_image->flags |= SPL_FIT_FOUND;
-+	upl_set_fit_info(map_to_sysmem(ctx.fit), ctx.conf_node,
-+			 spl_image->entry_point);
- 
- 	return 0;
- }
-@@ -943,5 +949,8 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
- 	}
- 	spl_image->flags |= SPL_FIT_FOUND;
- 
-+	upl_set_fit_info(map_to_sysmem(header), conf_noffset,
-+			 spl_image->entry_point);
++	return 0;
++}
 +
- 	return 0;
- }
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 98d822530d8..37643a4bbb9 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -716,6 +716,10 @@ enum gd_flags {
- 	 * @GD_FLG_HUSH_MODERN_PARSER: Use hush 2021 parser.
- 	 */
- 	GD_FLG_HUSH_MODERN_PARSER = 0x2000000,
-+	/**
-+	 * @GD_FLG_UPL: Read/write a Universal Payload (UPL) handoff
-+	 */
-+	GD_FLG_UPL = 0x4000000,
- };
- 
- #endif /* __ASSEMBLY__ */
+ static const init_fnc_t init_sequence_f[] = {
+ 	setup_mon_len,
+ #ifdef CONFIG_OF_CONTROL
+@@ -871,6 +892,7 @@ static const init_fnc_t init_sequence_f[] = {
+ 	trace_early_init,
+ #endif
+ 	initf_malloc,
++	initf_upl,
+ 	log_init,
+ 	initf_bootstage,	/* uses its own timer, so does not need DM */
+ 	event_init,
+diff --git a/common/board_r.c b/common/board_r.c
+index d4ba245ac69..f445803d7a4 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -521,6 +521,8 @@ static int dm_announce(void)
+ 		       uclass_count);
+ 		if (CONFIG_IS_ENABLED(OF_REAL))
+ 			printf(", devicetree: %s", fdtdec_get_srcname());
++		if (CONFIG_IS_ENABLED(UPL))
++			printf(", universal payload active");
+ 		printf("\n");
+ 		if (IS_ENABLED(CONFIG_OF_HAS_PRIOR_STAGE) &&
+ 		    (gd->fdt_src == FDTSRC_SEPARATE ||
 -- 
 2.34.1
 
