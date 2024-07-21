@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 300AEC3DA61
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B61F8C3DA5D
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:12:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 910C3884F4;
-	Sun, 21 Jul 2024 12:10:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F3D88841D;
+	Sun, 21 Jul 2024 12:10:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZpeN+Nsv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ThLTmuNa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F1F2874AC; Sun, 21 Jul 2024 12:10:08 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 8B8D1882FA; Sun, 21 Jul 2024 12:10:09 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 827C387F82
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1F4687E2E
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:10:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4266edee10cso21474395e9.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:04 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4265b7514fcso14979075e9.1
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556603; x=1722161403; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721556605; x=1722161405; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mXps1w02KoAEI/J0dK85qRjQGLKli7FFwp5J/bAizH0=;
- b=ZpeN+NsvP6L6N1jG4NUerb4pDIXm+PH4Tn0aaxzYvHL8dG1Tm8r+Rgm+auA00H6ACA
- PAgMVh5fZLnNWbVJSwhfQQ0fn0qSLgMAXBgJAPKzLhF7g1Qev0zAWwuJ9fsp07W3OTAr
- oAM6SpcBjskvX6U4baksZ6KkpgMwyygnV5hy0=
+ bh=J7h3k7EVJswaTosGjrbwIOk2JvT2g7zYKCjona+R064=;
+ b=ThLTmuNajNQQh6NYgRqU/DHep3syvYp3H9/Cn5ou1NSO5JtoMrOs0v83vWWMZH4XwZ
+ ATmioZNF6aycrKJkBMWTAackn0x5tIdhU3rv5lSrrYR8qsSi/8+3db69/fYeOCRY/KqC
+ 4omMFXOqwzcqtAYZRPK80fSFi69PsaiQB9oL4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556603; x=1722161403;
+ d=1e100.net; s=20230601; t=1721556605; x=1722161405;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mXps1w02KoAEI/J0dK85qRjQGLKli7FFwp5J/bAizH0=;
- b=n8IxKVW5RhJDueWxK14t8EApardWS09flcJJN5N1C8JIhOLa7Q3o4xVoFpXzOAuIBI
- A7S1XS2IWtIyQdGS/6PQ0G/RGbjglgEWsB9HZqd2YQ3owJkbv76qInsQDSV8nYnnOFEH
- V5M5HyFHni1QqRzzzwcnxa5ywsPrhUEHkz6pIAxg2f6FCNQ7BbhxS2TBDxtW35wRwOvD
- 9vhszFdbL0nw+qL1Sv5o5e5ctd/iohbxHskqvGNRDGlncbusE/vPFA883QjAWQd3eOgo
- zcgeZ0p5A3DcijkxtgqdNEhImd4+fAZrteF7NTLjl92ZmgQmdNSITThsazktKfL0/+P6
- fJpw==
-X-Gm-Message-State: AOJu0Yxr0PAy68u1W93T/Dp2g3FhptcLjxaZxP7cD6to/EaxPZLWijF9
- wzzQUCRfScr6jF7RLcQ668uXJVMBBx3llxz8IB6T3FNQaR29esKlmSC1EL6jxUTg1ocMmeapqqg
+ bh=J7h3k7EVJswaTosGjrbwIOk2JvT2g7zYKCjona+R064=;
+ b=O9YgwI6E+aBFQmg+0DTElAhxpCqgZPHKI3vFcB3BjH+XCxYHZPUgLBYkjAscMB1ek3
+ lc5/LrDgMLvPAN/SfNgIS/IoAGgkqehuITqSTpxcUmCjkLexmZ9R3d6RkBYXxAOKn/w6
+ on4Aexxtwkjd99DGa7FV+kRP9hhxTMP0qI1rR8JXmExpsb5y5s0L23MBCXqVw9+WlcoK
+ Lv9Ec62RbUelLib70ZQ0djKJcALP5QPxfVB2joTkCr9xPRRs4Vu6LW3W2HEoKBvixAMF
+ WSqEmIM83mh1Uq/S8fwTUqRppUEQyu4HihCAONeK9x9G1Z+gFP0bDD7K68uWGlBAHGa4
+ y4pg==
+X-Gm-Message-State: AOJu0Yx2ix+WOp01fICAmguMRtd+UVUa8c717BRuAhlt+YbYo2t2qltI
+ Tv+IZSwqDK5qYEmzHDYVEDoRCjSisYBK0LRdoOg1kbHDFUqMCDk7NF86PFAhXfWP0j7ZbL0qkwQ
  =
-X-Google-Smtp-Source: AGHT+IF58TI+ZDWW5SuBolpN4/3iy3rsG+4r5C+qdmVin8C3owcsJzZv8f2zD2wTnl+E0N5ELPRehg==
-X-Received: by 2002:a05:600c:4684:b0:426:58cb:8ca3 with SMTP id
- 5b1f17b1804b1-427daa2dd90mr28704705e9.21.1721556603445; 
- Sun, 21 Jul 2024 03:10:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGOjKs6q+4xSZXbXx9FvVrBppz2+4Zzhx/g9V27g3st5GwcPzthnH05B4viajP5Wu7xkxKUqQ==
+X-Received: by 2002:a05:600c:46ce:b0:426:686f:7ad with SMTP id
+ 5b1f17b1804b1-427da805e46mr30642185e9.10.1721556604727; 
+ Sun, 21 Jul 2024 03:10:04 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.02
+ 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.10.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 03:10:02 -0700 (PDT)
+ Sun, 21 Jul 2024 03:10:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 12/21] upl: Add a command
-Date: Sun, 21 Jul 2024 11:09:30 +0100
-Message-Id: <20240721100940.3202027-13-sjg@chromium.org>
+Subject: [PATCH v3 13/21] upl: Add support for Universal Payload in SPL
+Date: Sun, 21 Jul 2024 11:09:31 +0100
+Message-Id: <20240721100940.3202027-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240721100940.3202027-1-sjg@chromium.org>
 References: <20240721100940.3202027-1-sjg@chromium.org>
@@ -91,91 +91,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a 'upl' command to work with Universal Payload features. For now it
-only supports reading and writing a handoff structure.
+Add the basic code to create a handoff structure in SPL, so it can be
+passed to the next phase. For now this is not plumbed in.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- MAINTAINERS                       |   2 +
- boot/Kconfig                      |   1 +
- cmd/Kconfig                       |   7 ++
- cmd/Makefile                      |   1 +
- cmd/upl.c                         | 118 +++++++++++++++++++
- doc/usage/cmd/upl.rst             | 186 ++++++++++++++++++++++++++++++
- doc/usage/index.rst               |   1 +
- include/asm-generic/global_data.h |  15 +++
- test/boot/upl.c                   |  40 +++++++
- 9 files changed, 371 insertions(+)
- create mode 100644 cmd/upl.c
- create mode 100644 doc/usage/cmd/upl.rst
+Changes in v2:
+- Add a function to init the UPL process in SPL
+
+ MAINTAINERS          |   1 +
+ boot/Kconfig         |  32 ++++++++
+ common/spl/Makefile  |   2 +
+ common/spl/spl_upl.c | 171 +++++++++++++++++++++++++++++++++++++++++++
+ include/spl.h        |  16 ++++
+ 5 files changed, 222 insertions(+)
+ create mode 100644 common/spl/spl_upl.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 1c41fd30b2a..538d975748d 100644
+index 538d975748d..efb557b2524 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1706,6 +1706,8 @@ M:	Simon Glass <sjg@chromium.org>
- S:	Maintained
+@@ -1707,6 +1707,7 @@ S:	Maintained
  T:	git https://source.denx.de/u-boot/custodians/u-boot-dm.git
  F:	boot/upl*
-+F:	cmd/upl.c
-+F:	doc/usage/cmd/upl.rst
+ F:	cmd/upl.c
++F:	common/spl/spl_upl.c
+ F:	doc/usage/cmd/upl.rst
  F:	include/upl.h
  F:	test/boot/upl.c
- 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index fa4f766054c..f9a44550ac4 100644
+index f9a44550ac4..1fdbb0755c5 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -738,6 +738,7 @@ config BOOTMETH_SCRIPT
- 
- config UPL
- 	bool "upl - Universal Payload Specification"
-+	imply CMD_UPL
+@@ -741,6 +741,7 @@ config UPL
+ 	imply CMD_UPL
  	imply UPL_READ
  	imply UPL_WRITE
++	imply SPL_UPL if SPL
  	help
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 0cf0d8ad8ab..3c602bd5ba3 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -388,6 +388,13 @@ config CMD_SEAMA
- 	help
- 	  Support reading NAND Seattle Image (SEAMA) images.
+ 	  Provides support for UPL payloads and handoff information. U-Boot
+ 	  supports generating and accepting handoff information. The mkimage
+@@ -757,11 +758,42 @@ config UPL_READ
  
-+config CMD_UPL
-+	bool "upl - Universal Payload Specification"
+ config UPL_WRITE
+ 	bool "upl - Support writing a Universal Payload handoff"
 +	help
-+	  Provides commands to deal with UPL payloads and handoff information.
-+	  U-Boot supports generating and accepting handoff information. The
-+	  mkimage tool will eventually support creating payloads.
++	  Provides support for encoding a UPL-format payload from a C structure
++	  so it can be passed to another program. This is just the writing
++	  implementation, useful for trying it out. See SPL_UPL_OUT
++	  for how to tell U-Boot SPL to actually write it before jumping to
++	  the next phase.
 +
- config CMD_VBE
- 	bool "vbe - Verified Boot for Embedded"
- 	depends on BOOTMETH_VBE
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 87133cc27a8..91227f1249c 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -189,6 +189,7 @@ obj-$(CONFIG_CMD_UBIFS) += ubifs.o
- obj-$(CONFIG_CMD_UNIVERSE) += universe.o
- obj-$(CONFIG_CMD_UNLZ4) += unlz4.o
- obj-$(CONFIG_CMD_UNZIP) += unzip.o
-+obj-$(CONFIG_CMD_UPL) += upl.o
- obj-$(CONFIG_CMD_VIRTIO) += virtio.o
- obj-$(CONFIG_CMD_WDT) += wdt.o
- obj-$(CONFIG_CMD_LZMADEC) += lzmadec.o
-diff --git a/cmd/upl.c b/cmd/upl.c
++if SPL
++
++config SPL_UPL
++	bool "Write a UPL handoff in SPL"
++	imply SPL_UPL_OUT
++	help
++	  This tells SPL to write a UPL handoff and pass it to the next phase
++	  (e.g. to U-Boot or another program which SPL loads and runs). THis
++	  provides information to help that program run correctly and
++	  efficiently on the machine.
++
++config SPL_UPL_WRITE
++	bool  # upl - Support writing a Universal Payload handoff in SPL
++	select SPL_BLOBLIST
+ 	help
+ 	  Provides support for encoding a UPL-format payload from a C structure
+ 	  so it can be passed to another program. This is just the writing
+ 	  implementation, useful for trying it out.
+ 
++config SPL_UPL_OUT
++	bool "upl - Support writing a Universal Payload handoff in SPL"
++	select SPL_UPL_WRITE
++	help
++	  Provides support for encoding a UPL-format payload and passing it to
++	  the next firmware phase. This allows U-Boot SPL to function as
++	  Platform Init in the meaning of the specification.
++
++endif  # SPL
++
+ endif  # UPL
+ 
+ endif # BOOTSTD
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index 4809f9c3ec1..137b18428bd 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -37,3 +37,5 @@ obj-$(CONFIG_$(SPL_TPL_)SPI_LOAD) += spl_spi.o
+ obj-$(CONFIG_$(SPL_TPL_)RAM_SUPPORT) += spl_ram.o
+ obj-$(CONFIG_$(SPL_TPL_)USB_SDP_SUPPORT) += spl_sdp.o
+ endif
++
++obj-$(CONFIG_$(SPL_TPL_)UPL) += spl_upl.o
+diff --git a/common/spl/spl_upl.c b/common/spl/spl_upl.c
 new file mode 100644
-index 00000000000..c9745886507
+index 00000000000..12337a05cc0
 --- /dev/null
-+++ b/cmd/upl.c
-@@ -0,0 +1,118 @@
++++ b/common/spl/spl_upl.c
+@@ -0,0 +1,171 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Commands for UPL handoff generation
++ * UPL handoff parsing
 + *
 + * Copyright 2024 Google LLC
 + * Written by Simon Glass <sjg@chromium.org>
@@ -183,409 +203,192 @@ index 00000000000..c9745886507
 +
 +#define LOG_CATEGORY UCLASS_BOOTSTD
 +
-+#include <abuf.h>
-+#include <alist.h>
-+#include <command.h>
-+#include <display_options.h>
++#include <bloblist.h>
++#include <dm.h>
++#include <image.h>
 +#include <mapmem.h>
-+#include <string.h>
++#include <serial.h>
++#include <spl.h>
 +#include <upl.h>
-+#include <dm/ofnode.h>
-+#include <test/ut.h>
++#include <video.h>
++#include <asm/global_data.h>
++#include <dm/read.h>
++#include <dm/uclass-internal.h>
 +
 +DECLARE_GLOBAL_DATA_PTR;
 +
-+static int do_upl_info(struct cmd_tbl *cmdtp, int flag, int argc,
-+		       char *const argv[])
++struct upl s_upl;
++
++void upl_set_fit_addr(ulong fit)
 +{
-+	const struct upl *upl = gd_upl();
++	struct upl *upl = &s_upl;
 +
-+	printf("UPL state: %sactive\n", upl ? "" : "in");
-+	if (!upl)
-+		return 0;
-+	if (argc > 1 && !strcmp("-v", argv[1])) {
-+		int i;
++	upl->fit = fit;
++}
 +
-+		printf("fit %lx\n", upl->fit);
-+		printf("conf_offset %x\n", upl->conf_offset);
-+		for (i = 0; i < upl->image.count; i++) {
-+			const struct upl_image *img =
-+				alist_get(&upl->image, i, struct upl_image);
++void upl_set_fit_info(ulong fit, int conf_offset, ulong entry_addr)
++{
++	struct upl *upl = &s_upl;
 +
-+			printf("image %d: load %lx size %lx offset %x: %s\n", i,
-+			       img->load, img->size, img->offset,
-+			       img->description);
-+		}
++	upl->fit = fit;
++	upl->conf_offset = conf_offset;
++	log_debug("upl: add fit %lx conf %x\n", fit, conf_offset);
++}
++
++int upl_add_image(int node, ulong load_addr, ulong size, const char *desc)
++{
++	struct upl *upl = &s_upl;
++	struct upl_image img;
++
++	img.load = load_addr;
++	img.size = size;
++	img.offset = node;
++	img.description = desc;
++	if (!alist_add(&upl->image, img, struct upl_image))
++		return -ENOMEM;
++	log_debug("upl: add image %s at %lx size %lx\n", desc, load_addr, size);
++
++	return 0;
++}
++
++static int write_serial(struct upl_serial *ser)
++{
++	struct udevice *dev = gd->cur_serial_dev;
++	struct serial_device_info info;
++	struct memregion region;
++	int ret;
++
++	if (!dev)
++		return log_msg_ret("ser", -ENOENT);
++	ret = serial_getinfo(dev, &info);
++	if (ret)
++		return log_msg_ret("inf", ret);
++
++	ser->compatible = ofnode_read_string(dev_ofnode(dev), "compatible");
++	ser->clock_frequency = info.clock;
++	ser->current_speed = gd->baudrate;
++	region.base = info.addr;
++	region.size = info.size;
++	alist_init_struct(&ser->reg, struct memregion);
++	if (!alist_add(&ser->reg, region, struct memregion))
++		return -ENOMEM;
++	ser->reg_io_shift = info.reg_shift;
++	ser->reg_offset = info.reg_offset;
++	ser->reg_io_width = info.reg_width;
++	ser->virtual_reg = 0;
++	ser->access_type = info.addr_space;
++
++	return 0;
++}
++
++static int write_graphics(struct upl_graphics *gra)
++{
++	struct video_uc_plat *plat;
++	struct video_priv *priv;
++	struct memregion region;
++	struct udevice *dev;
++
++	alist_init_struct(&gra->reg, struct memregion);
++	uclass_find_first_device(UCLASS_VIDEO, &dev);
++	if (!dev || !device_active(dev))
++		return log_msg_ret("vid", -ENOENT);
++
++	plat = dev_get_uclass_plat(dev);
++	region.base = plat->base;
++	region.size = plat->size;
++	if (!alist_add(&gra->reg, region, struct memregion))
++		return log_msg_ret("reg", -ENOMEM);
++
++	priv = dev_get_uclass_priv(dev);
++	gra->width = priv->xsize;
++	gra->height = priv->ysize;
++	gra->stride = priv->line_length;	/* private field */
++	switch (priv->format) {
++	case VIDEO_RGBA8888:
++	case VIDEO_X8R8G8B8:
++		gra->format = UPLGF_ARGB32;
++		break;
++	case VIDEO_X8B8G8R8:
++		gra->format = UPLGF_ABGR32;
++		break;
++	case VIDEO_X2R10G10B10:
++		log_debug("device '%s': VIDEO_X2R10G10B10 not supported\n",
++			  dev->name);
++		return log_msg_ret("for", -EPROTO);
++	case VIDEO_UNKNOWN:
++		log_debug("device '%s': Unknown video format\n", dev->name);
++		return log_msg_ret("for", -EPROTO);
 +	}
 +
 +	return 0;
 +}
 +
-+static int do_upl_write(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char *const argv[])
++int spl_write_upl_handoff(struct spl_image_info *spl_image)
 +{
-+	struct upl s_upl, *upl = &s_upl;
-+	struct unit_test_state uts;
++	struct upl *upl = &s_upl;
 +	struct abuf buf;
-+	oftree tree;
-+	ulong addr;
++	ofnode root;
++	void *ptr;
 +	int ret;
 +
-+	upl_get_test_data(&uts, upl);
++	log_debug("UPL: Writing handoff - image_count=%d\n", upl->image.count);
++	upl->addr_cells = IS_ENABLED(CONFIG_PHYS_64BIT) ? 2 : 1;
++	upl->size_cells = IS_ENABLED(CONFIG_PHYS_64BIT) ? 2 : 1;
++	upl->bootmode = UPLBM_DEFAULT;
++	ret = write_serial(&upl->serial);
++	if (ret)
++		return log_msg_ret("ser", ret);
++	ret = write_graphics(&upl->graphics);
++	if (ret && ret != -ENOENT)
++		return log_msg_ret("gra", ret);
 +
-+	log_debug("Writing UPL\n");
-+	ret = upl_create_handoff_tree(upl, &tree);
-+	if (ret) {
-+		log_err("Failed to write (err=%dE)\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
++	root = ofnode_root();
++	ret = upl_write_handoff(upl, root, true);
++	if (ret)
++		return log_msg_ret("wr", ret);
 +
-+	log_debug("Flattening\n");
-+	ret = oftree_to_fdt(tree, &buf);
-+	if (ret) {
-+		log_err("Failed to write (err=%dE)\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+	addr = map_to_sysmem(abuf_data(&buf));
-+	printf("UPL handoff written to %lx size %lx\n", addr, abuf_size(&buf));
-+	if (env_set_hex("upladdr", addr) ||
-+	    env_set_hex("uplsize", abuf_size(&buf))) {
-+		printf("Cannot set env var\n");
-+		return CMD_RET_FAILURE;
-+	}
++	ret = oftree_to_fdt(oftree_default(), &buf);
++	if (ret)
++		return log_msg_ret("fdt", ret);
++	log_debug("FDT size %zx\n", abuf_size(&buf));
 +
-+	log_debug("done\n");
++	ptr = bloblist_add(BLOBLISTT_CONTROL_FDT, abuf_size(&buf), 0);
++	if (!ptr)
++		return log_msg_ret("blo", -ENOENT);
++	memcpy(ptr, abuf_data(&buf), abuf_size(&buf));
 +
 +	return 0;
 +}
 +
-+static int do_upl_read(struct cmd_tbl *cmdtp, int flag, int argc,
-+		       char *const argv[])
++void spl_upl_init(void)
 +{
-+	struct upl s_upl, *upl = &s_upl;
-+	oftree tree;
-+	ulong addr;
-+	int ret;
-+
-+	if (argc < 1)
-+		return CMD_RET_USAGE;
-+	addr = hextoul(argv[1], NULL);
-+
-+	printf("Reading UPL at %lx\n", addr);
-+	tree = oftree_from_fdt(map_sysmem(addr, 0));
-+	ret = upl_read_handoff(upl, tree);
-+	if (ret) {
-+		log_err("Failed to read (err=%dE)\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return 0;
++	upl_init(&s_upl);
 +}
-+
-+U_BOOT_LONGHELP(upl,
-+	"info [-v]     - Check UPL status\n"
-+	"upl read <addr>   - Read handoff information\n"
-+	"upl write         - Write handoff information");
-+
-+U_BOOT_CMD_WITH_SUBCMDS(upl, "Universal Payload support", upl_help_text,
-+	U_BOOT_SUBCMD_MKENT(info, 2, 1, do_upl_info),
-+	U_BOOT_SUBCMD_MKENT(read, 2, 1, do_upl_read),
-+	U_BOOT_SUBCMD_MKENT(write, 1, 1, do_upl_write));
-diff --git a/doc/usage/cmd/upl.rst b/doc/usage/cmd/upl.rst
-new file mode 100644
-index 00000000000..a64063d42d5
---- /dev/null
-+++ b/doc/usage/cmd/upl.rst
-@@ -0,0 +1,186 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+upl command
-+===========
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    upl write
-+    upl read <addr>
-+    upl info [-v]
-+
-+Description
-+-----------
-+
-+The *upl* command is used to test U-Boot's support for the Universal Payload
-+Specification (UPL) firmware standard. It allows creation of a fake handoff for
-+use in testing.
-+
-+
-+upl write
-+~~~~~~~~~
-+
-+Write a fake UPL handoff structure. The `upladdr` environment variable is set to
-+the address of this structure and `uplsize` is set to the size.
-+
-+
-+upl read
-+~~~~~~~~
-+
-+Read a UPL handoff structure into internal state. This allows testing that the
-+handoff can be obtained.
-+
-+upl info
-+~~~~~~~~
-+
-+Show basic information about usage of UPL:
-+
-+    UPL state
-+        active or inactive (indicates whether U-Boot booted from UPL or not)
-+
-+    fit
-+        Address of the FIT which was loaded
-+
-+    conf_offset 2a4
-+        FIT offset of the chosen configuration
-+
-+For each image the following information is shown:
-+
-+    Image number
-+        Images are numbered from 0
-+
-+    load
-+        Address to which the image was loaded
-+
-+    size
-+        Size of the loaded image
-+
-+    offset
-+        FIT offset of the image
-+
-+    description
-+        Description of the image
-+
-+
-+Example
-+-------
-+
-+This shows checking whether a UPL handoff was read at start-up::
-+
-+    => upl info
-+    UPL state: active
-+
-+This shows how to use the command to write and display the handoff::
-+
-+    => upl write
-+    UPL handoff written to bc8a5e0 size 662
-+    => print upladdr
-+    upladdr=bc8a5e0
-+    => print uplsize
-+    uplsize=662
-+
-+    > fdt addr ${upladdr}
-+    Working FDT set to bc8a5e0
-+    => fdt print
-+    / {
-+        #address-cells = <0x00000001>;
-+        #size-cells = <0x00000001>;
-+        options {
-+            upl-params {
-+                smbios = <0x00000123>;
-+                acpi = <0x00000456>;
-+                bootmode = "default", "s3";
-+                addr-width = <0x0000002e>;
-+                acpi-nvs-size = <0x00000100>;
-+            };
-+            upl-image {
-+                fit = <0x00000789>;
-+                conf-offset = <0x00000234>;
-+                image-1 {
-+                    load = <0x00000001>;
-+                    size = <0x00000002>;
-+                    offset = <0x00000003>;
-+                    description = "U-Boot";
-+                };
-+                image-2 {
-+                    load = <0x00000004>;
-+                    size = <0x00000005>;
-+                    offset = <0x00000006>;
-+                    description = "ATF";
-+                };
-+            };
-+        };
-+        memory@0x10 {
-+            reg = <0x00000010 0x00000020 0x00000030 0x00000040 0x00000050 0x00000060>;
-+        };
-+        memory@0x70 {
-+            reg = <0x00000070 0x00000080>;
-+            hotpluggable;
-+        };
-+        memory-map {
-+            acpi@0x11 {
-+                reg = <0x00000011 0x00000012 0x00000013 0x00000014 0x00000015 0x00000016 0x00000017 0x00000018 0x00000019 0x0000001a>;
-+                usage = "acpi-reclaim";
-+            };
-+            u-boot@0x21 {
-+                reg = <0x00000021 0x00000022>;
-+                usage = "boot-data";
-+            };
-+            efi@0x23 {
-+                reg = <0x00000023 0x00000024>;
-+                usage = "runtime-code";
-+            };
-+            empty@0x25 {
-+                reg = <0x00000025 0x00000026 0x00000027 0x00000028>;
-+            };
-+            acpi-things@0x2a {
-+                reg = <0x0000002a 0x00000000>;
-+                usage = "acpi-nvs", "runtime-code";
-+            };
-+        };
-+        reserved-memory {
-+            mmio@0x2b {
-+                reg = <0x0000002b 0x0000002c>;
-+            };
-+            memory@0x2d {
-+                reg = <0x0000002d 0x0000002e 0x0000002f 0x00000030>;
-+                no-map;
-+            };
-+        };
-+        serial@0xf1de0000 {
-+            compatible = "ns16550a";
-+            clock-frequency = <0x001c2000>;
-+            current-speed = <0x0001c200>;
-+            reg = <0xf1de0000 0x00000100>;
-+            reg-io-shift = <0x00000002>;
-+            reg-offset = <0x00000040>;
-+            virtual-reg = <0x20000000>;
-+            access-type = "mmio";
-+        };
-+        framebuffer@0xd0000000 {
-+            compatible = "simple-framebuffer";
-+            reg = <0xd0000000 0x10000000>;
-+            width = <0x00000500>;
-+            height = <0x00000500>;
-+            stride = <0x00001400>;
-+            format = "a8r8g8b8";
-+        };
-+    };
-+    =>
-+
-+This showing reading the handoff into internal state::
-+
-+    => upl read bc8a5e0
-+    Reading UPL at bc8a5e0
-+    =>
-+
-+This shows getting basic information about UPL:
-+
-+    => upl info -v
-+    UPL state: active
-+    fit 1264000
-+    conf_offset 2a4
-+    image 0: load 200000 size 105f5c8 offset a4: U-Boot 2024.07-00770-g739ee12e8358 for sandbox board
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 49b354e6ffd..b34e388bfd1 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -113,6 +113,7 @@ Shell commands
-    cmd/tftpput
-    cmd/trace
-    cmd/true
-+   cmd/upl
-    cmd/ums
-    cmd/unbind
-    cmd/ut
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index aa336d63e3a..98d822530d8 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -30,6 +30,7 @@
- 
- struct acpi_ctx;
- struct driver_rt;
-+struct upl;
- 
- typedef struct global_data gd_t;
- 
-@@ -491,6 +492,12 @@ struct global_data {
- 	 * @dmtag_list: List of DM tags
- 	 */
- 	struct list_head dmtag_list;
-+#if CONFIG_IS_ENABLED(UPL)
-+	/**
-+	 * @upl: Universal Payload-handoff information
-+	 */
-+	struct upl *upl;
-+#endif
- };
- #ifndef DO_DEPS_ONLY
- static_assert(sizeof(struct global_data) == GD_SIZE);
-@@ -590,6 +597,14 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
- #define gd_malloc_ptr()		0L
- #endif
- 
-+#if CONFIG_IS_ENABLED(UPL)
-+#define gd_upl()		gd->upl
-+#define gd_set_upl(_val)	gd->upl = (_val)
-+#else
-+#define gd_upl()		NULL
-+#define gd_set_upl(val)
-+#endif
-+
- /**
-  * enum gd_flags - global data flags
-  *
-diff --git a/test/boot/upl.c b/test/boot/upl.c
-index e9d92efd80d..c55f1d297d1 100644
---- a/test/boot/upl.c
-+++ b/test/boot/upl.c
-@@ -358,6 +358,46 @@ static int upl_test_base(struct unit_test_state *uts)
- }
- UPL_TEST(upl_test_base, 0);
- 
-+/* Test 'upl info' command */
-+static int upl_test_info(struct unit_test_state *uts)
-+{
-+	gd_set_upl(NULL);
-+	ut_assertok(run_command("upl info", 0));
-+	ut_assert_nextline("UPL state: inactive");
-+	ut_assert_console_end();
-+
-+	gd_set_upl((struct upl *)uts);	/* set it to any non-zero value */
-+	ut_assertok(run_command("upl info", 0));
-+	ut_assert_nextline("UPL state: active");
-+	ut_assert_console_end();
-+	gd_set_upl(NULL);
-+
-+	return 0;
-+}
-+UPL_TEST(upl_test_info, UT_TESTF_CONSOLE_REC);
-+
-+/* Test 'upl read' and 'upl_write' commands */
-+static int upl_test_read_write(struct unit_test_state *uts)
-+{
-+	ulong addr;
-+
-+	if (!CONFIG_IS_ENABLED(OFNODE_MULTI_TREE))
-+		return -EAGAIN;  /* skip test */
-+	ut_assertok(run_command("upl write", 0));
-+
-+	addr = env_get_hex("upladdr", 0);
-+	ut_assert_nextline("UPL handoff written to %lx size %lx", addr,
-+			   env_get_hex("uplsize", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("upl read ${upladdr}", 0));
-+	ut_assert_nextline("Reading UPL at %lx", addr);
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+UPL_TEST(upl_test_read_write, UT_TESTF_CONSOLE_REC);
-+
- int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+diff --git a/include/spl.h b/include/spl.h
+index 5dfdf778d2d..089b1864c57 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -1074,4 +1074,20 @@ static inline bool spl_decompression_enabled(void)
  {
- 	struct unit_test *tests = UNIT_TEST_SUITE_START(upl_test);
+ 	return IS_ENABLED(CONFIG_SPL_GZIP) || IS_ENABLED(CONFIG_SPL_LZMA);
+ }
++
++/**
++ * spl_write_upl_handoff() - Write a Universal Payload hand-off structure
++ *
++ * @spl_image: Information about the image being booted
++ * Return: 0 if OK, -ve on error
++ */
++int spl_write_upl_handoff(struct spl_image_info *spl_image);
++
++/**
++ * spl_upl_init() - Get UPL ready for information to be added
++ *
++ * This must be called before upl_add_image(), etc.
++ */
++void spl_upl_init(void);
++
+ #endif
 -- 
 2.34.1
 
