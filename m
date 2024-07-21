@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 874E7C3DA5D
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:10:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA088C3DA61
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jul 2024 10:10:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E01687FCD;
-	Sun, 21 Jul 2024 12:09:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABBC287F51;
+	Sun, 21 Jul 2024 12:09:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lz+GcM8t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G1AJWCwH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A6D787F7D; Sun, 21 Jul 2024 12:09:49 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 086358657F; Sun, 21 Jul 2024 12:09:51 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5430E87B8D
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:09:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B9AB87702
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 12:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4265b7514fcso14978375e9.1
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:09:47 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-369cb9f086aso252345f8f.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 03:09:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721556586; x=1722161386; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kS6aLBTsVtIDYgmWztIQWA0s5KVUKYNwIMeTY1YFVeg=;
- b=lz+GcM8tU803MzcEkWRp1sZVXApwAMz9tZK5E1bLggHTmykqWMh2UEtZZ+5T/o2y97
- 8NdqpCouhbtt/rnxtrdCT7MlcIEZGu4Xs+RCophqv5ztG+vnOJpnqYNnK//VpZIEZAML
- eagQ1rA/iKD1suCbxOQpXOoWdy9m1niTdoXbM=
+ d=chromium.org; s=google; t=1721556588; x=1722161388; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l2wNqzT5MB3WU3QIYPvENWUo2cQMUiJ/5H2QOdCb+t0=;
+ b=G1AJWCwHgZPtogWSkb6jnRmuPtsNJDBl7mH7Q0K0GGtoIF+9wEv4fYYy4i8K9Wk4uU
+ k0OuiLnnZWG9gffCcdXAh8Ok7zT6FsErtrkZUIkAmb/ca/ofGXU1gUne0Lgy2au07X1y
+ 8vKrHbrHrP7WnYr9vqsz1CR+F6x5aNiBW2Vfk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721556586; x=1722161386;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kS6aLBTsVtIDYgmWztIQWA0s5KVUKYNwIMeTY1YFVeg=;
- b=wOBP4riuO/jmeM6Od16QmNSkqVx80yGHrpsUrDL1nTnWFfqdBOgKo8YUmCRiZHS8RY
- JUweysbhsI5KwCk4eWpgXW4RBfr6HDKgcWT9XStZuoaRQ/ypVQj9uQ8S0MPF+vgopvT1
- tOfqofp24Ik4h9YL1wYRvIXg6u2RgAvXpzCkpq0S3V74md3XLamv2ZTznpc5Zc4eawEZ
- Dx/T95x+R549s4NayeGL+di3BqINCIEZChznUr5gnspnFfjJlUDdj2Z0FFbiIZcAV2Ol
- BsmZjQf0GojwI1XovAA+93ue6YpA/0cdgmgoHQjiL69uO8gYMcG3YWS1TusdXc0KNu6e
- qh3g==
-X-Gm-Message-State: AOJu0Yzs9eMCgb6idN/XXmr0FiKz8hEc6PL6Q/VewmB1L08qXdtUv7mI
- y9JDnXGX9pAqfuJrYRvvasfvLBIB/Ni16QBNkghAXMk/GTcVxaT59EObNp4/FnY2ZTWqf53wlaY
+ d=1e100.net; s=20230601; t=1721556588; x=1722161388;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l2wNqzT5MB3WU3QIYPvENWUo2cQMUiJ/5H2QOdCb+t0=;
+ b=LTaoYwZlTnaA0cJ7DIYLeZ4XsCu7BL/M8dI2reZhUv5uLxu6gYnOHzI6W8oW3HUKoc
+ TuKhaVvV+WwX7uKMuk3/pykbroiJgbFMVXmKKF2P4R64hKZs08JRrEDZYX8qBCjyi3DD
+ hVmsu6QxEcbJ+l7XPBoZanVu+TSWCrvC1gF1UVGaLIoHEcwGpthkNR7m8XoJnOkAM9qo
+ 9nzQBoQUHs6+3EyjSbEUwHJN2RmGd3670wkKRjz3vXkmCy81oTc2naBBXYaG8YqDHL7U
+ 8ww2LkbcO1ZgnI4gO0PJAW4gJgUKgpHK0FZwsp1NWnUo1/NZhOBlvobJcmBvKht3wq0j
+ e9iA==
+X-Gm-Message-State: AOJu0Yw/1k0nogImnjcdxha8Wxbap721zFR4lde7MM+WGJ3UgmG+amkG
+ r4WjOC3+sQhfkH0NeM/+5HFU653lvOKF0/capJeW2H7c86suOMo5DdcNZnm58Ml6cgUCZ3TFqzs
  =
-X-Google-Smtp-Source: AGHT+IGMIGOLNBiEE0swKD1hL4tyYt1UjSbfs9O/QHFfqHJ0fFoJtvnQtdgLNB9/xaJHVZSdpjmC5g==
-X-Received: by 2002:a05:600c:1e19:b0:424:a401:f012 with SMTP id
- 5b1f17b1804b1-427da7f3d1amr23393095e9.3.1721556586124; 
- Sun, 21 Jul 2024 03:09:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEwI1Defv4QvUe4tx3YmkhbinWKwlZ351VvkrwlT+4KoDNGJEUV7rNsO3LzaPpFzBNQJGRbPA==
+X-Received: by 2002:a05:6000:18aa:b0:367:4dbb:ed51 with SMTP id
+ ffacd0b85a97d-369bad97dfemr2186601f8f.0.1721556588128; 
+ Sun, 21 Jul 2024 03:09:48 -0700 (PDT)
 Received: from tasman.. (host-92-15-194-143.as13285.net. [92.15.194.143])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.09.45
+ 5b1f17b1804b1-427d69013fasm85096265e9.12.2024.07.21.03.09.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 03:09:45 -0700 (PDT)
+ Sun, 21 Jul 2024 03:09:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Jerry Van Baren <vanbaren@cideas.com>
-Subject: [PATCH v3 00/21] Universal Payload initial series
-Date: Sun, 21 Jul 2024 11:09:18 +0100
-Message-Id: <20240721100940.3202027-1-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v3 01/21] sandbox: Use const in os_jump_to_file()
+Date: Sun, 21 Jul 2024 11:09:19 +0100
+Message-Id: <20240721100940.3202027-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240721100940.3202027-1-sjg@chromium.org>
+References: <20240721100940.3202027-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,127 +92,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Universal Payload (UPL) is an Industry Standard for firmware
-components[1]. UPL is designed to improve interoperability within the
-firmware industry, allowing mixing and matching of projects with less
-friction and fewer project-specific implementations. UPL is
-cross-platform, supporting ARM, x86 and RISC-V initially.
+The argument array is not changed by the callee, so mark it const.
 
-This series provides some initial support for this, targeting 0.9.1 and
-sandbox only.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
 
-Features still to come include:
-- Support for architectures
-- FIT validation
-- Handoff validation
-- Interoperability tests
+(no changes since v1)
 
-This series is available at dm/uplb-working and requires the alist
-series at dm/alist-working[2]
+ arch/sandbox/cpu/os.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-[1] https://universalpayload.github.io/spec/
-[2] https://patchwork.ozlabs.org/project/uboot/list/?series=414642
-
-Changes in v3:
-- Use longer error messages
-- Use -errno instead of inventing a new error
-- Use sizeof(*header) instead of 512
-- Use a block size of 1 if !CONFIG_SPL_LOAD_BLOCK
-- Fix 'handed' typo
-- Rebase on earlier change
-- Allow up.h to be built by the host build
-- Split out into its own commit
-
-Changes in v2:
-- Put the upl tests under their own subcommand to avoid bootstd init
-- Add a function to init the UPL process in SPL
-- Hang when something goes wrong, to avoid a broken boot
-- Add a runtime flag to enable UPL
-- Put upl_image() calls in a common place
-- Add a link to the spec
-- Add a link to the command
-- Support CI testing
-- Rework to use alist instead of fixed-length arrays
-
-Simon Glass (21):
-  sandbox: Use const in os_jump_to_file()
-  sandbox: Fix a comment in os_find_u_boot()
-  test: Move some SPL-loading test-code into sandbox common
-  fdt: Don't overwrite bloblist devicetree
-  sandbox: fdt: Avoid overwriting an existing fdt
-  sandbox: Return error code from read/write/seek
-  sandbox: Add ELF file to VPL u-boot.img
-  sandbox: Set up global_data earlier
-  upl: Add support for reading a upl handoff
-  upl: Add support for writing a upl handoff
-  upl: Add basic tests
-  upl: Add a command
-  upl: Add support for Universal Payload in SPL
-  spl: Set SPL_FIT_FOUND for full FIT also
-  spl: Plumb in the Universal Payload handoff
-  upl: Plumb in universal payload to the init process
-  sandbox_vpl: Enable Universal Payload
-  upl: Add initial documentation
-  sandbox: Add a flag to enable UPL
-  sandbox: Add an SPL loader for UPL
-  upl: Add an end-to-end test
-
- MAINTAINERS                       |  13 +
- Makefile                          |   4 +-
- arch/sandbox/cpu/cpu.c            |   2 +
- arch/sandbox/cpu/os.c             |  30 +-
- arch/sandbox/cpu/spl.c            | 120 +++++-
- arch/sandbox/cpu/start.c          |  18 +-
- arch/sandbox/include/asm/spl.h    |  15 +
- arch/sandbox/include/asm/state.h  |   1 +
- boot/Kconfig                      |  70 ++++
- boot/Makefile                     |   4 +
- boot/image-fit.c                  |   4 +
- boot/upl_common.c                 |  60 +++
- boot/upl_common.h                 |  24 ++
- boot/upl_read.c                   | 588 ++++++++++++++++++++++++++++
- boot/upl_write.c                  | 622 ++++++++++++++++++++++++++++++
- cmd/Kconfig                       |   7 +
- cmd/Makefile                      |   1 +
- cmd/upl.c                         | 118 ++++++
- common/board_f.c                  |  22 ++
- common/board_r.c                  |   2 +
- common/spl/Makefile               |   2 +
- common/spl/spl.c                  |   8 +
- common/spl/spl_fit.c              |  10 +
- common/spl/spl_upl.c              | 171 ++++++++
- configs/sandbox_defconfig         |   1 +
- configs/sandbox_vpl_defconfig     |   4 +
- doc/usage/cmd/upl.rst             | 186 +++++++++
- doc/usage/index.rst               |   2 +
- doc/usage/upl.rst                 |  46 +++
- drivers/block/sandbox.c           |   4 +-
- drivers/usb/emul/sandbox_flash.c  |   2 +-
- fs/sandbox/sandboxfs.c            |   6 +-
- include/asm-generic/global_data.h |  19 +
- include/os.h                      |   6 +-
- include/spl.h                     |  16 +
- include/test/suites.h             |   1 +
- include/upl.h                     | 364 +++++++++++++++++
- lib/fdtdec.c                      |   1 +
- test/boot/Makefile                |   2 +
- test/boot/upl.c                   | 437 +++++++++++++++++++++
- test/cmd_ut.c                     |   3 +
- test/image/spl_load_os.c          |  53 +--
- test/py/tests/test_upl.py         |  38 ++
- 43 files changed, 3035 insertions(+), 72 deletions(-)
- create mode 100644 boot/upl_common.c
- create mode 100644 boot/upl_common.h
- create mode 100644 boot/upl_read.c
- create mode 100644 boot/upl_write.c
- create mode 100644 cmd/upl.c
- create mode 100644 common/spl/spl_upl.c
- create mode 100644 doc/usage/cmd/upl.rst
- create mode 100644 doc/usage/upl.rst
- create mode 100644 include/upl.h
- create mode 100644 test/boot/upl.c
- create mode 100644 test/py/tests/test_upl.py
-
+diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
+index 46ff305b536..a04eb5aa18c 100644
+--- a/arch/sandbox/cpu/os.c
++++ b/arch/sandbox/cpu/os.c
+@@ -808,7 +808,7 @@ static int make_exec(char *fname, const void *data, int size)
+  * @count: Number of arguments in @add_args
+  * Return: 0 if OK, -ENOMEM if out of memory
+  */
+-static int add_args(char ***argvp, char *add_args[], int count)
++static int add_args(char ***argvp, const char *add_args[], int count)
+ {
+ 	char **argv, **ap;
+ 	int argc;
+@@ -859,7 +859,7 @@ static int os_jump_to_file(const char *fname, bool delete_it)
+ 	struct sandbox_state *state = state_get_current();
+ 	char mem_fname[30];
+ 	int fd, err;
+-	char *extra_args[5];
++	const char *extra_args[5];
+ 	char **argv = state->argv;
+ 	int argc;
+ #ifdef DEBUG
 -- 
 2.34.1
 
