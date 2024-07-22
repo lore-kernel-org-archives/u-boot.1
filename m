@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0BC8C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 06:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5797C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 07:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F32B880A5;
-	Mon, 22 Jul 2024 08:53:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FCE7880A5;
+	Mon, 22 Jul 2024 09:35:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GgmtLt0q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JE3JXtYu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A3C188276; Mon, 22 Jul 2024 08:53:13 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 82EE688204; Mon, 22 Jul 2024 09:35:37 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CA688800C
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 08:53:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39DC98800C
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 09:35:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-260f057aa9bso2244165fac.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 23:53:11 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-70d265e5278so296250b3a.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 00:35:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721631190; x=1722235990; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721633734; x=1722238534; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zc/p5/1xMsZVNfZCUi9WDcELXGhx9I8UCRp9NZzoa5U=;
- b=GgmtLt0qo34amE5nbmKiRxfhVGdfxP0H4IReygd8hQER8x5QeEbNvGYLb7P46h0dPd
- z2OJKfVvdY6Rf0wp/tEmdboi/dLuGK/4uCeQC0juULDFAr+ihaacLVlwcAOSg7bgJnGW
- VerTROd/diX9fxbV2UrnezHB9ce1R7K7pnX1hMbmN1whMJcTDg7uhO2bd55at40KE+Ks
- knYtiXXffM3Hn1EZoYTqGqY/i4nvmZY9QSFF5Gcr8YopIBeZ4XpPY/6p8pLdTEmo/t4i
- OHh+zVsOt3Kopv8f+8gGRg0i+oCN33OKwB36RaQHPD/1ibq80T1QMmZgi64weLqZHf9j
- DG+w==
+ bh=34AlKJBUAqgwwWW+z+tkH5nQxaWFzgIdFYHRMh4GkNw=;
+ b=JE3JXtYuzlT75fAN+tTUli1E6PZ+nuwyM6gMORpAaS6Oftq21bM9EzdhqsyACGDW3A
+ xLiW9xlFoo3F5ihTPt3FgUohv8DkPse5FKrm1ycOTE2uA85wW5yU9AtNS36ORoS70gJC
+ lJcIVYQsnlhuHz2lsz4FvIcslTXtJWISkrHa5IovnJeobcdgOWiYwSDHqUpBbWUj1/k6
+ 2zaZ55KROXYtw3ADDUeA3lMy0SB8aMW/KGjMBnU+h4+SvJqaIRhZUOgKk8bqu8I6oWyP
+ wda52Ho3DtbTs9k4TlDBSgEPeXBNFl1X40y4OvD6X1yjjmqm7ZtQuAmIg0Qbeyw1IOkF
+ auvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721631190; x=1722235990;
+ d=1e100.net; s=20230601; t=1721633734; x=1722238534;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zc/p5/1xMsZVNfZCUi9WDcELXGhx9I8UCRp9NZzoa5U=;
- b=TGL7bDWYotlSg+CWx9pGKMXZqGT1YeWBfx4mPilvcgBP671d9at0e8a2A0Wc5QLXXS
- f+E7vMFtyLU2tfdr4Hp13Aksh/K5XNna7w2qzfk17DRIi/YeOL4kFNQ+AP43wPtTjdnR
- yEWQ3uoiWqO/PVrGikOwRC53lNrCSDymRx8DU6qM21jhxt1AvDtFYevsQ2g2qIdnPXGS
- kGDxZ7DYm6QdfZuelAv1bS3kKqVXO616D96TkjuYm32o0q0cRy47gQ29pfSrYgI4P+v9
- C64BDlOtoMr5Dtcgo4Kkh1fUiYoGn9CWCHPYoOBgmg5I5drxViqKujCseD4Ld21xDW9r
- fs6w==
-X-Gm-Message-State: AOJu0YyDksIEOYONXL5XX6N4qjXbTIA/7OJVCDAe7HoDEOTRClwmmcQH
- JeqSzs/hLffJ6gzXiY3w3lPg3hZlUqXPjhFwlDEGvhV1+VbCvrwPgodbvr5iOlHKlKxn7rvNxlo
- GWFY5/BbkvDF8wWesbzWzh4Dutk1y70lOf6iaww==
-X-Google-Smtp-Source: AGHT+IFJ6gnXmVLwU88MdbCbdd1C8E7VUhGr+7fHu9f/K7rnOrwgOKBbKTTIQt1eY6t++kRnRMMSCfqs+NI6nuwDc1Y=
-X-Received: by 2002:a05:6870:3041:b0:254:e89e:fc1d with SMTP id
- 586e51a60fabf-263ab59d582mr4875307fac.51.1721631190034; Sun, 21 Jul 2024
- 23:53:10 -0700 (PDT)
+ bh=34AlKJBUAqgwwWW+z+tkH5nQxaWFzgIdFYHRMh4GkNw=;
+ b=wtobPN/xDNqorSqex1lSsLgLoOCyv5Yzy98FtdwsRIo2hdtJtDjBknRSx+kovxMZEf
+ SfBIUdMcix2VyE9M76+lbx6mmQ9iDgbb6Jccf5FE0DeiWE+vbIRdDZ0LEI2FbZuItgqg
+ zL7G/D5V2AFheeNUdZ1zGYB2abWYPAXYJnNp7mH83vyMV7b1Xl3DIAZ1FST1m6EubRhj
+ 2jbDMUsqbiMryzc7oGGXHUyX6KE3BMFTbAcJsH6OZCan2x1Nc4zvTrf9ecwZJ2tNBttA
+ 4yF42WjTSsppTZm2F8c67GqQp0X4nMKFeWPrqpp0v3rgQ+p7QHgOepshj+wh090ArBHY
+ MJ4g==
+X-Gm-Message-State: AOJu0YxzzwcrOLRJ+WzbhAuJ3eYQzNc7qFE9ldu2/HOdu5ztb0o54knH
+ uTEKa/psU5rhSXUJinjIxGC+UNHkfu7wyCS/MtxeMQgbxawhAbQsxy6htQKY7krz0qRPsqgoMOq
+ pw+wqSwsuSGuqJl20lZxwb75QxPlcqSfASk33CQ==
+X-Google-Smtp-Source: AGHT+IHEKHao/rAtl05xfwYQaPS2kSraJtAiUDXHgIWv38hn4JidQjJ2DTVfOlDATT7k/2LAqm6pINSrqkB7UjxEgYk=
+X-Received: by 2002:a05:6a00:1acd:b0:70b:349a:efd7 with SMTP id
+ d2e1a72fcca58-70d086dcfc3mr5307427b3a.14.1721633733585; Mon, 22 Jul 2024
+ 00:35:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240715101354.97895-1-sjg@chromium.org>
- <20240715101354.97895-13-sjg@chromium.org>
-In-Reply-To: <20240715101354.97895-13-sjg@chromium.org>
+References: <20240715112302.652527-1-lukas.funke-oss@weidmueller.com>
+ <20240715112302.652527-2-lukas.funke-oss@weidmueller.com>
+ <CAFLszTgX8Tfn=qC_ZBMR2M+iwFAOLKQhGQg8w42F1saAmZq4Eg@mail.gmail.com>
+In-Reply-To: <CAFLszTgX8Tfn=qC_ZBMR2M+iwFAOLKQhGQg8w42F1saAmZq4Eg@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 22 Jul 2024 09:52:33 +0300
-Message-ID: <CAC_iWjLb7OK=SFusJiSR7d=Kzctv7mWwMQSka-6G43LFZDNcMg@mail.gmail.com>
-Subject: Re: [PATCH 12/13] boot: Correct indentation in efi bootmeth
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Shantur Rathore <i@shantur.com>
+Date: Mon, 22 Jul 2024 10:34:57 +0300
+Message-ID: <CAC_iWjJR=wXX-kv5cmzE38gOCX8FYduX7xhtmm_QHe911GXaPA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
+To: Simon Glass <sjg@chromium.org>, lukas.funke-oss@weidmueller.com
+Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,30 +89,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 15 Jul 2024 at 13:14, Simon Glass <sjg@chromium.org> wrote:
+Hi all
+
+On Sun, 21 Jul 2024 at 13:08, Simon Glass <sjg@chromium.org> wrote:
 >
-> Fix a minor indentation / whitespace problem in a comment.
+> Hi,
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> On Mon, 15 Jul 2024 at 12:23, <lukas.funke-oss@weidmueller.com> wrote:
+> >
+> > From: Lukas Funke <lukas.funke@weidmueller.com>
+> >
+> > tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
+> > initialized in tpm_tis_init(). However, the init-function is called
+> > *after* tpm_tis_wait_init() introducing an uninitalized field access.
+> >
+> > This commit switches both routines.
+> >
+> > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> > ---
+> >
+> >  drivers/tpm/tpm2_tis_spi.c | 10 +++++-----
+> >  1 file changed, 5 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+> > index b0fe97ab1d0..5a4dbfd3ccb 100644
+> > --- a/drivers/tpm/tpm2_tis_spi.c
+> > +++ b/drivers/tpm/tpm2_tis_spi.c
+> > @@ -256,17 +256,17 @@ static int tpm_tis_spi_probe(struct udevice *dev)
+> >         /* Ensure a minimum amount of time elapsed since reset of the TPM */
+> >         mdelay(drv_data->time_before_first_cmd_ms);
+> >
+> > +       tpm_tis_ops_register(dev, &phy_ops);
+> > +       ret = tpm_tis_init(dev);
+> > +       if (ret)
+> > +               goto err;
+> > +
+> >         ret = tpm_tis_wait_init(dev, chip->locality);
+> >         if (ret) {
+> >                 log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
+> >                 return ret;
+> >         }
+> >
+> > -       tpm_tis_ops_register(dev, &phy_ops);
+> > -       ret = tpm_tis_init(dev);
+> > -       if (ret)
+> > -               goto err;
+> > -
+> >         priv->pcr_count = drv_data->pcr_count;
+> >         priv->pcr_select_min = drv_data->pcr_select_min;
+> >         priv->version = TPM_V2;
+> > --
+> > 2.30.2
+> >
 >
->  boot/bootmeth_efi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> This needs a Fixes tag for a5c30c26b28 (HEAD) tpm: Use the new API on
+> tpm2 spi driver
 >
-> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-> index 56a6e47f5b2..39232eb2e25 100644
-> --- a/boot/bootmeth_efi.c
-> +++ b/boot/bootmeth_efi.c
-> @@ -265,7 +265,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
->                 return log_msg_ret("sz", -EINVAL);
->         bflow->size = size;
+
+Yes please we need a fixes tag
+
+> The old code set up the timeouts first, then did the wait_init.
+> Presumably the point of wait_init is to wait before doing the init, so
+> we should try to keep that behaviour, unless it is actually wrong.
 >
-> -    /* bootfile should be setup by dhcp*/
-> +       /* bootfile should be setup by dhcp */
->         bootfile_name = env_get("bootfile");
->         if (!bootfile_name)
->                 return log_msg_ret("bootfile_name", ret);
-> --
-> 2.34.1
+> So my thought would be to move the setup of the required timeout into
+> tpm_tis_ops_register(), instead.
+
+tpm_tis_ops_register() is setting up the bus accesses and I'd prefer
+to keep it that way.
+Since this is a static function, we can fold it in tpm_tis_init(),
+which makes more sense
+
+Thanks
+/Ilias
 >
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Regards,
+> Simon
