@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FC1AC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 21:03:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D69D0C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 21:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD0D87F82;
-	Mon, 22 Jul 2024 23:03:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5DC4387D43;
+	Mon, 22 Jul 2024 23:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nNr7pfmP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EJ0lHhGu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EB2E87F82; Mon, 22 Jul 2024 23:03:02 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 4755A87D43; Mon, 22 Jul 2024 23:03:58 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3299487D43
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 23:02:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CE6F884AC
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 23:03:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2cd16900ec5so215344a91.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 14:02:51 -0700 (PDT)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2ef18ca13f2so4935851fa.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 14:03:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721682170; x=1722286970; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gCFRasq2/hXbvoCSlOuCoRlz7xLupt+tuTPbF7ltSk4=;
- b=nNr7pfmPxCbcKh6+NQtLzQTKQTc+6UD85O1NkI5m0OTKoJqTVLoNYq5q3rLsIjqFP7
- rfTOx3ZJZOZOLrnOy7QIb6L2zPgeVNbFnoXwbrD5WthqDBQs7y1V+oWVWs/qMcQAE5YH
- S7kmRrG/dda92GAr7ENMAyVrb+eknQdCGQpckfS2J8FdTrGQsllEvniTOLCA3/SOPul+
- QIEqBmm7Smx4S9sXhGf3GBDMuo9K4SDUEP1eXtsCF1x+FVLHj2HajIXlKrZA6uIjny7o
- 6MDLXEc6cGwRiFVIv12LyugwY+K3UlY/aiGwAulO5+3TBxh7/Ge3QKoHyJB7iwbDTHBX
- NvYw==
+ d=gmail.com; s=20230601; t=1721682231; x=1722287031; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UFCRCYSL9qNsv+rB1MP7Iig8d5et5TzULmWVnmNbD/Y=;
+ b=EJ0lHhGuxm3RqOi0Psh5oIStRFo4J1EeTQTBdp7w4Vm2lG2Kx4Pmz6vMO5G7Pqdkpc
+ g0xxRD2Q6Zkp2z7l/xSxa1JZh6XFDLCXU42ZF2DAfo7fytOtD4HK3JajDiOkoKS6zKVi
+ Gnu6kvoR3j0PcR/nNnpL5e/l/rDd68+pgOxX9cDkIZPmtyEvKJEDmOXSIIa+1hOnd1NL
+ XjkR6toIkzn7jOAiINPMS8JCD3wxEvNnZaP5zuxjBMUxV9DX6uSNBJPXs4Gf+qHnd2Hd
+ 5UR9yvgx7IjSJyCPxryOE6b5uK22aoYMSIb/rppTjVuz3vMuAeZna+FRdz001jYIFAzn
+ JWYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721682170; x=1722286970;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gCFRasq2/hXbvoCSlOuCoRlz7xLupt+tuTPbF7ltSk4=;
- b=IFsv4xGwQmTEf0R2z2c8J5VVKp/90ibGLqcrrpfQEvk7yABn7rMXKUFHPWUF6Ri4CN
- e128s0UX4dvr43B30V/ZbYYXMSAGN11cQuFkvmmpa9nlMYZlrJx7LQuJ/BdsAY8uUfpd
- KRnR8wqMEi42Asf7RhgZrU/ZTvbL7gM4LIOilfmCJ2BJWeV397uKyCO92O4mO0KH3AvA
- kvgQcwE6bmbL4r1ppJDu8I5JncKY2qk86h6OlYO6QMuXNW9DBZb6UoSxBr1+xWCSEnm0
- EwmvlRfwuHtyJTOV9gpRooHRnsPyzDYFIMlZGwIE7o/Jw1kEvCIBAdk7jXXtkfzS9jLT
- vANg==
-X-Gm-Message-State: AOJu0Yw2jrXY9ChCsxQ/0TNB5jf2ANk+FiKMt/rZuiBO4bavl7NSb9P3
- U6pee7iwJMNaqe1m0MKkwFhYME5W7ZNQ2mHIx+Z2tX6/pLoGhuwF1ZjMpQ==
-X-Google-Smtp-Source: AGHT+IGXfvVG6ptxkX1KuspM6Q4GcxTe7iJKp4bnq6Go3PZY6QliyiegtMl3FL8+HWg/AVrdKNwgIA==
-X-Received: by 2002:a17:90b:20b:b0:2cb:4382:99f1 with SMTP id
- 98e67ed59e1d1-2cd16191fcdmr6586012a91.6.1721682169516; 
- Mon, 22 Jul 2024 14:02:49 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:4af8:a5d7:cd1a:7dfb])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ccf80a8275sm7500835a91.47.2024.07.22.14.02.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 14:02:48 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20240722
-Date: Mon, 22 Jul 2024 18:02:44 -0300
-Message-Id: <20240722210244.2294039-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1721682231; x=1722287031;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UFCRCYSL9qNsv+rB1MP7Iig8d5et5TzULmWVnmNbD/Y=;
+ b=wsMlPJsjEP4bD2zCIoAKtKUC/cSfOoc7S/z4iyrxCeVmtqG8KLXWhY3K+2DuGT64IX
+ 1tj7Fq3t5qwJTdBMNXP1aTlwFM+D3srDL4LrPdRnSKInBVHJVYP41yAGOcMGeBhFXcvZ
+ ouyXTqXGbSGxenwNKljuq7Ahuy+u87T91HFURxiVNbxuLS7qiWYod62HSjk9rUI6zLHQ
+ eXyyb/Z+JFAsfEBK+hod2zI9po6w6Z60miAaAvMDaS3Ih8R/fsJUlPShJx4nRT2K9dsd
+ AAUh6bA9QTBViZcPwTvIVYo025gWemoOovFkgpYwY0EaumQP6jr9PD9H5zLgp2qfqkgr
+ qtDQ==
+X-Gm-Message-State: AOJu0YynNTMaIp3JymAMrVKbfGrhHrflmENPLMIls64RHjv4u3Y/gUgz
+ 8A+gKAOyxw8NHCjyVJutBVKF7BnqLN6ETYBlowlj3xX06PWSMXqDzrmm8ApJyaoPyuFIpV1UdDq
+ 3oRwcAcUkeSqHnWefI3Vlf5XXmbY=
+X-Google-Smtp-Source: AGHT+IHktAPv/tMgEYQyU00tpMqjTX0NQ6uKAvGLyl3qCMTtnqRtmjZmNSmRcm4GF524Jd5uGVgd1fRQxVo/hz+clmE=
+X-Received: by 2002:a05:6512:308a:b0:52f:c0dd:d168 with SMTP id
+ 2adb3069b0e04-52fc0ddd3a0mr1193905e87.7.1721682230301; Mon, 22 Jul 2024
+ 14:03:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240720124803.3505570-1-agust@denx.de>
+In-Reply-To: <20240720124803.3505570-1-agust@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 22 Jul 2024 18:03:38 -0300
+Message-ID: <CAOMZO5BUth8Lj5Uaa_03RV6Mw99vCJUMzGqsz-HcuykCZPzM=g@mail.gmail.com>
+Subject: Re: [PATCH] nitrogen6x: convert to DM_I2C and DM_SERIAL
+To: Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Troy Kisky <troy.kisky@boundarydevices.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,84 +88,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sat, Jul 20, 2024 at 9:50=E2=80=AFAM Anatolij Gustschin <agust@denx.de> =
+wrote:
+>
+> Rework to remove use of legacy I2C API. Also switch
+> to DM_SERIAL to avoid board removal warning.
+>
+> Signed-off-by: Anatolij Gustschin <agust@denx.de>
+> Cc: Troy Kisky <troy.kisky@boundarydevices.com>
 
-Please pull from u-boot-imx/master, thanks.
-
-The following changes since commit 5024a96db8ea6ff2e814f4599af9e5faf09296b7:
-
-  Subtree merge tag 'v6.10-dts' of devicetree-rebasing repo [1] into dts/upstream (2024-07-20 11:15:22 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240722
-
-for you to fetch changes up to a9c962941e119017eb9d5985c5c214d9711c9433:
-
-  kontron-sl-mx6ul: switch to DM_SERIAL (2024-07-22 17:55:35 -0300)
-
-u-boot-imx-master-20240722
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/21728
-
-- Conversions to DM_I2C and DM_SERIAL.
-- Support for I2C3 and PWM1 for the imx6q clock driver.
-- Improvements for udoo-neo
-- Describe the i.MX93 CPU clocks in the devicetree to fix CPU clock printing
-- Fix for SPI and NANC clk-imx8mn clock driver
-----------------------------------------------------------------
-Anatolij Gustschin (3):
-      nitrogen6x: convert to DM_I2C and DM_SERIAL
-      mx6boards: convert to DM_I2C and DM_SERIAL
-      kontron-sl-mx6ul: switch to DM_SERIAL
-
-Emil Kronborg (2):
-      clk: imx6q: Add definition for IMX6QDL_CLK_I2C3
-      clk: imx6q: Add definition for IMX6QDL_CLK_PWM1
-
-Fabio Estevam (5):
-      imx93-u-boot: Describe the CPU clocks in the devicetree
-      udoo_neo: Convert to watchdog driver model
-      udoo_neo: Select LTO
-      udoo-neo: Do not print devicetree model
-      udoo-neo: Convert to OF_UPSTREAM
-
-Michael Trimarchi (4):
-      clk: imx: clk-imx8mn Fix nand and spi clock parent
-      clk: imx8mn: Make parent names arrays const pointers
-      clk: imx8mm: Make parent names arrays const pointers
-      clk: imx8mp: Make parent names arrays const pointers
-
- arch/arm/dts/Makefile                          |   5 +-
- arch/arm/dts/imx6sx-udoo-neo-basic-u-boot.dtsi |  12 +
- arch/arm/dts/imx6sx-udoo-neo-basic.dts         |  33 --
- arch/arm/dts/imx6sx-udoo-neo-extended.dts      |  26 --
- arch/arm/dts/imx6sx-udoo-neo-full.dts          |  41 ---
- arch/arm/dts/imx6sx-udoo-neo.dtsi              | 482 -------------------------
- arch/arm/dts/imx93-u-boot.dtsi                 |   8 +
- arch/arm/mach-imx/mx6/Kconfig                  |   1 +
- board/boundary/nitrogen6x/nitrogen6x.c         |  79 +---
- board/embest/mx6boards/mx6boards.c             |  70 +---
- board/udoo/neo/neo.c                           |  59 +--
- configs/kontron-sl-mx6ul_defconfig             |   1 +
- configs/marsboard_defconfig                    |   6 +-
- configs/mx6qsabrelite_defconfig                |   7 +-
- configs/nitrogen6dl2g_defconfig                |   7 +-
- configs/nitrogen6dl_defconfig                  |   7 +-
- configs/nitrogen6q2g_defconfig                 |   7 +-
- configs/nitrogen6q_defconfig                   |   7 +-
- configs/nitrogen6s1g_defconfig                 |   7 +-
- configs/nitrogen6s_defconfig                   |   7 +-
- configs/riotboard_defconfig                    |   6 +-
- configs/udoo_neo_defconfig                     |   9 +-
- drivers/clk/imx/clk-imx6q.c                    |   4 +
- drivers/clk/imx/clk-imx8mm.c                   | 157 ++++----
- drivers/clk/imx/clk-imx8mn.c                   | 151 ++++----
- drivers/clk/imx/clk-imx8mp.c                   | 242 ++++++-------
- include/configs/nitrogen6x.h                   |   2 -
- 27 files changed, 393 insertions(+), 1050 deletions(-)
- delete mode 100644 arch/arm/dts/imx6sx-udoo-neo-basic.dts
- delete mode 100644 arch/arm/dts/imx6sx-udoo-neo-extended.dts
- delete mode 100644 arch/arm/dts/imx6sx-udoo-neo-full.dts
- delete mode 100644 arch/arm/dts/imx6sx-udoo-neo.dtsi
+Applied, thanks.
