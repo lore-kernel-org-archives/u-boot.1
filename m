@@ -4,49 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36F4DC3DA63
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 08:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715A1C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 10:09:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C8EE881BA;
-	Mon, 22 Jul 2024 10:29:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id B705287EFA;
+	Mon, 22 Jul 2024 12:09:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 74F8D88168; Mon, 22 Jul 2024 10:29:54 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2971088214
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:29:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 46M8ThZZ044237
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 22 Jul 2024 16:29:43 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 22 Jul
- 2024 16:29:44 +0800
-Date: Mon, 22 Jul 2024 16:29:39 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/master
-Message-ID: <Zp4Xv1-IPVWgn5NP@swlinux02>
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="JjQcN5Sd";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 76C6787F82; Mon, 22 Jul 2024 12:08:59 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5053C87E50
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 12:08:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-52efc60a6e6so2260712e87.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:08:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1721642936; x=1722247736;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nQjMvPb4Y9vGOyi5AspPKr3a0lJJCwL1Za1fvW0YMIM=;
+ b=JjQcN5Sdfv0yLsd3s+jW/J9Popx4ZTAXk8FPf5f4ul1HcMaexqfwAYHJzoUNueYWCj
+ jP0FHWMIojTIEgCHmeYFgrml6s6Un8AT3kXCyJcEAygMWZnLITFWeH8oYmfZhsFLkKPO
+ atBTKHhB6aPpBPr7px9kVk/y4qW1jPnG8xTIxL4a1eHC8pBg7D1jfITbtPxp6fecAT6X
+ JgDMgt40aXIqImR/PBDSX/Sdigxo7WscYrDzc47ZejfRfbI34oLqedhS6XlZYXTeECUa
+ MUXGH3+MVOs3og8HBqJk1AMiE3BvyKkMT+PGE1P1EXNSEYPcc8ZhLW0UqKM5nclgPdQo
+ MfBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721642936; x=1722247736;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nQjMvPb4Y9vGOyi5AspPKr3a0lJJCwL1Za1fvW0YMIM=;
+ b=lWw0JtRFmEe8lC+tHkktqLjzM7ePPraCs6TMYcrzZ2EkD+vlN5LlPMJAiRjJXAfsBK
+ jMG9RkWl3Br8e2oKdIrvfntK+oUJIdAghQW9gQJLEK8hmhEZDHq+axhtJpzUQHBIVWNO
+ US3P3WVs3QV2JdPgQhhlVxCjP31LbaNc1ZX/TxRKs3WWs8/kkWZNKjQgTHzB5klcZlHI
+ QBaOWooW0SKItpgt+UoycdGJStn/EJ1QuRVftDswKYo0PyxQbzfbYwqBp6yqDR2SEYAR
+ wS4sC0Yqu9aY0+Bgcb1y8qJQLI3po5M66Qx+e4xaqcVH1g6//n0uPR70XUVrtc4jBxNu
+ z+yA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqD+/D5TJE0oF6IGBVzpFUtPCgQYxVRqT1MwREjbC0JDHQF/q0q7Xjr10rqfG3z2bvqXmNcleivLrczQ6afpdnIQ43mw==
+X-Gm-Message-State: AOJu0YyYJsit59rqUz6/G+h3CMSryISwmKRR7CWAoiixLN+dnNioYdYu
+ zTzEDLIowFmKpqpjGKi9P7yj9l6cQJaVStVP9JkMCE+HeGtBSKvbpx74gGTO/A==
+X-Google-Smtp-Source: AGHT+IGSvFULDFDh+4XDASSdDZbbvM3G+zPF6CKr2z+araIJ40CyjeIx7pwW7xZUldHsk6gqy29mdg==
+X-Received: by 2002:a05:6512:e8e:b0:52e:9cc7:4461 with SMTP id
+ 2adb3069b0e04-52efb52266fmr3440536e87.5.1721642936419; 
+ Mon, 22 Jul 2024 03:08:56 -0700 (PDT)
+Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7a3c91db6asm408187966b.148.2024.07.22.03.08.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 22 Jul 2024 03:08:56 -0700 (PDT)
+Message-ID: <20d1a83c-9463-40b6-b0b6-e43c57614b8f@monstr.eu>
+Date: Mon, 22 Jul 2024 12:08:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 46M8ThZZ044237
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 37/37] board: xilinx: Remove duplicate newlines
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
+ trini@konsulko.com
+References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
+ <20240719104948.323791-37-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Michal Simek <monstr@monstr.eu>
+In-Reply-To: <20240719104948.323791-37-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,39 +97,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-The following changes since commit 5024a96db8ea6ff2e814f4599af9e5faf09296b7:
 
-  Subtree merge tag 'v6.10-dts' of devicetree-rebasing repo [1] into dts/upstream (2024-07-20 11:15:22 -0600)
+On 7/19/24 12:49, Marek Vasut wrote:
+> Drop all duplicate newlines. No functional change.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+>   board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c | 2 --
+>   board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c    | 2 --
+>   board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c    | 2 --
+>   board/xilinx/zynq/zynq-zed/ps7_init_gpl.c      | 2 --
+>   board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c     | 3 ---
+>   5 files changed, 11 deletions(-)
+> 
+> diff --git a/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c b/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
+> index 602a789e775..e7f1d6ef5ec 100644
+> --- a/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
+> +++ b/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
+> @@ -4060,7 +4060,6 @@ unsigned long ps7_post_config_3_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_2_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> @@ -8263,7 +8262,6 @@ unsigned long ps7_post_config_2_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_1_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> diff --git a/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
+> index 9343683f4d7..48001269cd7 100644
+> --- a/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
+> +++ b/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
+> @@ -4167,7 +4167,6 @@ unsigned long ps7_post_config_3_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_2_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> @@ -8483,7 +8482,6 @@ unsigned long ps7_post_config_2_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_1_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> diff --git a/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
+> index 6b153aa3796..76ef5d9323e 100644
+> --- a/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
+> +++ b/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
+> @@ -4136,7 +4136,6 @@ unsigned long ps7_post_config_3_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_2_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> @@ -8421,7 +8420,6 @@ unsigned long ps7_post_config_2_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_1_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> diff --git a/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
+> index 6f2edf16c24..67642798b41 100644
+> --- a/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
+> +++ b/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
+> @@ -4026,7 +4026,6 @@ unsigned long ps7_post_config_3_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_2_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> @@ -8195,7 +8194,6 @@ unsigned long ps7_post_config_2_0[] = {
+>       //
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_1_0[] = {
+>       // START: top
+>       // .. START: SLCR SETTINGS
+> diff --git a/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
+> index 04d2e5f1375..6a3236ce2d2 100644
+> --- a/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
+> +++ b/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
+> @@ -4082,7 +4082,6 @@ unsigned long ps7_post_config_3_0[] = {
+>   	/* */
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_2_0[] = {
+>   	/* START: top */
+>   	/* .. START: SLCR SETTINGS */
+> @@ -8313,7 +8312,6 @@ unsigned long ps7_post_config_2_0[] = {
+>   	/* */
+>   };
+>   
+> -
+>   unsigned long ps7_pll_init_data_1_0[] = {
+>   	/* START: top */
+>   	/* .. START: SLCR SETTINGS */
+> @@ -12477,7 +12475,6 @@ unsigned long ps7_post_config_1_0[] = {
+>   	/* */
+>   };
+>   
+> -
+>   #include "xil_io.h"
+>   
+>   unsigned long *ps7_mio_init_data = ps7_mio_init_data_3_0;
 
-are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+Reviewed-by: Michal Simek <michal.simek@amd.com>
 
-for you to fetch changes up to dd3cd9eecc9846e7c37a97c9755d2a83fb995cbb:
+Thanks,
+Michal
 
-  Revert "riscv: dts: jh7110: Enable PLL node in SPL" (2024-07-22 15:42:07 +0800)
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/21724
-----------------------------------------------------------------
-Andreas Schwab (1):
-      board: sifive: unmatched: remove extra space in fdtfile value
 
-Heinrich Schuchardt (2):
-      riscv: add RISC-V fields to bdinfo command
-      riscv: semihosting: correct alignment
-
-Leo Yu-Chi Liang (1):
-      Revert "riscv: dts: jh7110: Enable PLL node in SPL"
-
- arch/riscv/dts/jh7110-u-boot.dtsi    |  4 ----
- arch/riscv/lib/Makefile              |  1 +
- arch/riscv/lib/bdinfo.c              | 18 ++++++++++++++++++
- arch/riscv/lib/semihosting.S         |  2 +-
- board/sifive/unmatched/unmatched.env |  2 +-
- 5 files changed, 21 insertions(+), 6 deletions(-)
- create mode 100644 arch/riscv/lib/bdinfo.c
-
-Best regards,
-Leo
