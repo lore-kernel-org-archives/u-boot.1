@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54493C3DA70
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 23:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E9C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 23:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 888C18867C;
-	Tue, 23 Jul 2024 01:58:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32473886AF;
+	Tue, 23 Jul 2024 01:58:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721692692;
-	bh=U0bZq155WHSGWcilbOZBtQuxgAbaKmxqNLjcZ/EaHIM=;
+	s=phobos-20191101; t=1721692693;
+	bh=ofVe72+wTeG0l6ruNZqPd0/8MLi8/hcQAotAfV5sXXE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oueq7L/t1zc54Fh2uv/FV524ub7SGg3nw6RbRrli4oaRt3O98I9MUzhQF3322rUTH
-	 alMr4UoB+EuYaMaXhF96+wl55sJ/qKB1HX0jqGqs6VDnSuE7ESgwf9LUZ5+oSnpRVG
-	 DIN3VLc/KCChze4dUbx4dgsRn0GDIXJQui7IWJlSzc0fdCfQa0aQ+bVpHUSIuedDxm
-	 02SwdaS2LxONQutoP3cqrVla9JWHl1tS7yn7fyYNKRGYVKSqd66zcfL4eUfb9F5PWi
-	 7yL7BRgpq5AJcNPWFI6HRg7TNjymvSfhJcZqRfeG/BdCPzOPE3RUi0h+3l5C9ghNsu
-	 QJ+OkWqagmvMQ==
+	b=hcmfwjrjxNBL4MUZT3/ltRZDhqn2zhpKCpIkV2OQ+9NAluEdjBFpJyOZzX3JtarcK
+	 DO1FDz2JhYQrmgYmIQpeaJGH20XdomCDo8zoOjKwdIHYSRfBVFmoFgq6Vefj/licda
+	 mZBlFY3tNAjVsNSmpoMByvc6+4Hg8wZmbrFsTfXEpvKgH10qNOd/7VjLL3QIQE5VcN
+	 d/XRoQrYy6SiGyMKl4wGjD2vdrZC9jJ6SHXLfyg/KpDLvytjem8Xp/8W2Ji+UujUwE
+	 kh1r8ACLlnYa767p9ZyGs//NQMrnt/J66m60AnzxemGfkCe0Y0BvjX9BaKoCfnsqqE
+	 osfQI/ipEB6Rg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8F891885E7;
- Tue, 23 Jul 2024 01:58:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 42A6B8867C;
+ Tue, 23 Jul 2024 01:58:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1721692691;
- bh=U0bZq155WHSGWcilbOZBtQuxgAbaKmxqNLjcZ/EaHIM=;
+ bh=ofVe72+wTeG0l6ruNZqPd0/8MLi8/hcQAotAfV5sXXE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=My+b6liOP53Emrkc0iS5yC23jHT8dR+EHmSiWw4VWZvtWKXhT7oOqsco5XY4T3t5u
- fh5iCf456kq//69AZM/IoCfUtuCJBYIX+6lkreVuUNBpnxGy+MFmLuAskyaH99VY04
- Jw7qxi6PyO7F3y8k8mah5nKIiWolA6odyO5GYYb0nKb4/bHYqOK4sQezhzI0aRC85/
- VgkL4dXJjmzzAbwQ2CdFmb5eywX7rSWJ2BvrK8J1wBKkvaQnE/Y58yt96b46o4VqPN
- sjCemZmh6x8joqGsan3E69jw8VxYjJjtlVQcnLXgcOu8j2bSNg7K6ussdl8KaaXVYq
- oZgZB562S4uag==
-Message-ID: <cd446203-327f-408b-b387-043dc22b5877@denx.de>
-Date: Tue, 23 Jul 2024 01:42:02 +0200
+ b=lYnHZKD1OCFPtA5jHlZtJQLsP7OYK9huJkmcS+C6Hb0ed8s7yo7i8LScJwNx3ItVM
+ aZoBOXjLHxW3iCEmit9oiZxjqA+DFEFuXrK7bN3XdfbUbsGVVVdWTjI4WQ9LI1wUYl
+ oLg+YcO9N+kjeNvf2yBU4KlbjvfZ3yoTKLP0olnM3RasuwD3ZaUilHbtpiuZvOzCbI
+ TaR00p3isbEv4zlFqNcKxnWY2R+ybvSHChzZ3oft1CkrKInYaHo/hwTZ3r6qfAR2bO
+ UqS4h8cDd0YSBNwqlbVaEBzorNrLf82fZckYmXKBf5a+n0D8qhDR0ld/dQuup8DQ66
+ H13VHre3fYFIw==
+Message-ID: <1f9b506f-b698-4b4c-ada6-146fa98ebafb@denx.de>
+Date: Tue, 23 Jul 2024 01:44:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] usb: gadget: atmel: Add attach/detach support
+Subject: Re: [PATCH v2 4/4] usb: gadget: atmel: Add DM_USB_GADGET support
 To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Zixun LI <zli@ogga.fr>, u-boot@lists.denx.de
 References: <20240722202426.190986-1-zli@ogga.fr>
- <20240722202426.190986-4-zli@ogga.fr>
+ <20240722202426.190986-5-zli@ogga.fr>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240722202426.190986-4-zli@ogga.fr>
+In-Reply-To: <20240722202426.190986-5-zli@ogga.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,11 +72,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/22/24 10:23 PM, Zixun LI wrote:
-> Add controller attach/detach support by using
-> usb_gadget_ops.pullup() method.
-> 
-> Signed-off-by: Zixun LI <zli@ogga.fr>
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+[...]
 
-Thanks !
+> +static int usba_udc_probe(struct udevice *dev)
+> +{
+> +	struct usba_priv_data *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = usba_udc_clk_init(dev, &priv->clks);
+> +	if (ret)
+> +		return ret;
+> +
+> +	controller = &udc_controller;
+
+Is it possible to extract the controller point from udevice private data?
+
+> +	controller->usba_ep = usba_udc_pdata(&pdata, controller);
+> +
+> +	controller->driver = 0;
+
+Please use = NULL if -> driver is a pointer.
