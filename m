@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A06AC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 06:51:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0BC8C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 06:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8051688137;
-	Mon, 22 Jul 2024 08:51:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F32B880A5;
+	Mon, 22 Jul 2024 08:53:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wXEh+F2C";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GgmtLt0q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03D7B88246; Mon, 22 Jul 2024 08:51:19 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 8A3C188276; Mon, 22 Jul 2024 08:53:13 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 287628800C
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 08:51:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CA688800C
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 08:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1fc587361b6so28893365ad.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 23:51:16 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-260f057aa9bso2244165fac.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 23:53:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721631075; x=1722235875; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721631190; x=1722235990; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=btQaOPHtmuAudZ573Bafy7rDU35o0g26Hj8gTwoaHCU=;
- b=wXEh+F2CKSvefIKTilGoMdx4QY6YvbtUZcOA4xr+/pqjXGj2JZbPssI32zRFZw0QHu
- rDDgSzNOE+rM+yZxgTIfvIx3Z12K1brQ3gFcahCwCHBjJ1ad8SnpJ2vuk9ham3lXK5Me
- 5O/Zl12ndqhfoLVoJj/H+AHpzI5AWW2nHCeCZDShbEVEiK94Hx3kxW3YAmLexE8J3a6c
- A5/7BSoshoMxPWqKamA3wefFpSlcz6bjEq5JmrncjkAiUSCKT097q6Z2LOZXIHvdvLlY
- 9W2feBjnpCdzpXIGGrnwla2tQmVdR9AOOper2NZYNvYpPnSo4M3L4+8Z6sQbNL1cLlR0
- LSew==
+ bh=zc/p5/1xMsZVNfZCUi9WDcELXGhx9I8UCRp9NZzoa5U=;
+ b=GgmtLt0qo34amE5nbmKiRxfhVGdfxP0H4IReygd8hQER8x5QeEbNvGYLb7P46h0dPd
+ z2OJKfVvdY6Rf0wp/tEmdboi/dLuGK/4uCeQC0juULDFAr+ihaacLVlwcAOSg7bgJnGW
+ VerTROd/diX9fxbV2UrnezHB9ce1R7K7pnX1hMbmN1whMJcTDg7uhO2bd55at40KE+Ks
+ knYtiXXffM3Hn1EZoYTqGqY/i4nvmZY9QSFF5Gcr8YopIBeZ4XpPY/6p8pLdTEmo/t4i
+ OHh+zVsOt3Kopv8f+8gGRg0i+oCN33OKwB36RaQHPD/1ibq80T1QMmZgi64weLqZHf9j
+ DG+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721631075; x=1722235875;
+ d=1e100.net; s=20230601; t=1721631190; x=1722235990;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=btQaOPHtmuAudZ573Bafy7rDU35o0g26Hj8gTwoaHCU=;
- b=InNSE0u0jW527ZgByH8QMfqL5U+qrVxO+QV5GisQryltaohpVTPyfU6HSnD6Ib7V/M
- wGBLFUnjCdCfx2kSm3eX695w4LniHiqyYw88mfKnP50X6qk4Aca6fj16/q9QzauPmvxo
- e1CHRqLoXkFEO5HTP89uCQwSxy+W2Z1y1lAEkTA4dtzjvlU6CiqATH0v3gGBA+zZS/tO
- nOIb/rBJ0BQASmI9QO/dTwaFjANeT6vxV+fBZdZAGe9Q68DDFFDtjzS9NKzKfWIpRLq1
- SKM6HDkbqUeWPudHzYYjfsOZETsVm4zjxR4E1VwkYHxMYjS6Qer2io2/DrKg0siBuP1M
- x0QQ==
-X-Gm-Message-State: AOJu0Yx+K7xzWaqOl9FUq5tCDkYBFyItudLksc0SYOdbsC0btBEGEPuG
- 6JiTvBJz4Anqt+JuJzHd4QVKMvXMrOb4pGa5z0VxxFWtItCVskqMQP92BQibfkawFy8MAVjxuQJ
- 1V/JHf+1BjY/3EzWVHTiYdI2+cylsrYOST8qO4g==
-X-Google-Smtp-Source: AGHT+IENdrWgkRqF3E0rjPJcc9uyJMrXCEqDKuzQBaeIn6SO5KKHqOtIU2w9l0PwXRIaVaoVPMmy/iOnAuUw/e1/6/Q=
-X-Received: by 2002:a17:90a:ba97:b0:2c9:9658:d704 with SMTP id
- 98e67ed59e1d1-2cd2751d66bmr1993121a91.40.1721631074523; Sun, 21 Jul 2024
- 23:51:14 -0700 (PDT)
+ bh=zc/p5/1xMsZVNfZCUi9WDcELXGhx9I8UCRp9NZzoa5U=;
+ b=TGL7bDWYotlSg+CWx9pGKMXZqGT1YeWBfx4mPilvcgBP671d9at0e8a2A0Wc5QLXXS
+ f+E7vMFtyLU2tfdr4Hp13Aksh/K5XNna7w2qzfk17DRIi/YeOL4kFNQ+AP43wPtTjdnR
+ yEWQ3uoiWqO/PVrGikOwRC53lNrCSDymRx8DU6qM21jhxt1AvDtFYevsQ2g2qIdnPXGS
+ kGDxZ7DYm6QdfZuelAv1bS3kKqVXO616D96TkjuYm32o0q0cRy47gQ29pfSrYgI4P+v9
+ C64BDlOtoMr5Dtcgo4Kkh1fUiYoGn9CWCHPYoOBgmg5I5drxViqKujCseD4Ld21xDW9r
+ fs6w==
+X-Gm-Message-State: AOJu0YyDksIEOYONXL5XX6N4qjXbTIA/7OJVCDAe7HoDEOTRClwmmcQH
+ JeqSzs/hLffJ6gzXiY3w3lPg3hZlUqXPjhFwlDEGvhV1+VbCvrwPgodbvr5iOlHKlKxn7rvNxlo
+ GWFY5/BbkvDF8wWesbzWzh4Dutk1y70lOf6iaww==
+X-Google-Smtp-Source: AGHT+IFJ6gnXmVLwU88MdbCbdd1C8E7VUhGr+7fHu9f/K7rnOrwgOKBbKTTIQt1eY6t++kRnRMMSCfqs+NI6nuwDc1Y=
+X-Received: by 2002:a05:6870:3041:b0:254:e89e:fc1d with SMTP id
+ 586e51a60fabf-263ab59d582mr4875307fac.51.1721631190034; Sun, 21 Jul 2024
+ 23:53:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <682c714d8b39b3ef0a12ec3d824475d630b17e11.1721138209.git.michal.simek@amd.com>
-In-Reply-To: <682c714d8b39b3ef0a12ec3d824475d630b17e11.1721138209.git.michal.simek@amd.com>
+References: <20240715101354.97895-1-sjg@chromium.org>
+ <20240715101354.97895-13-sjg@chromium.org>
+In-Reply-To: <20240715101354.97895-13-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 22 Jul 2024 09:50:38 +0300
-Message-ID: <CAC_iWjJiJ=AZcbXRgCe2mQdNr_5CfDmKwtp06CT-ezwhj1QK3A@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: Fix typo in EFI_RT_VOLATILE_STORE description
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Mon, 22 Jul 2024 09:52:33 +0300
+Message-ID: <CAC_iWjLb7OK=SFusJiSR7d=Kzctv7mWwMQSka-6G43LFZDNcMg@mail.gmail.com>
+Subject: Re: [PATCH 12/13] boot: Correct indentation in efi bootmeth
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shantur Rathore <i@shantur.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,34 +90,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Jul 2024 at 16:57, Michal Simek <michal.simek@amd.com> wrote:
+On Mon, 15 Jul 2024 at 13:14, Simon Glass <sjg@chromium.org> wrote:
 >
-> Fix typo in EFI_RT_VOLATILE_STORE description.
+> Fix a minor indentation / whitespace problem in a comment.
 >
-> Fixes: c28d32f946f0 ("efi_loader: conditionally enable SetvariableRT")
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->  lib/efi_loader/Kconfig | 2 +-
+>  boot/bootmeth_efi.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index ee71f417147a..41bab4f1ad27 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -67,7 +67,7 @@ config EFI_RT_VOLATILE_STORE
->         depends on EFI_VARIABLE_FILE_STORE
->         help
->           When EFI variables are stored on file we don't allow SetVariableRT,
-> -         since the OS doesn't know how to write that file. At he same time
-> +         since the OS doesn't know how to write that file. At the same time
->           we copy runtime variables in DRAM and support GetVariableRT
+> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> index 56a6e47f5b2..39232eb2e25 100644
+> --- a/boot/bootmeth_efi.c
+> +++ b/boot/bootmeth_efi.c
+> @@ -265,7 +265,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+>                 return log_msg_ret("sz", -EINVAL);
+>         bflow->size = size;
 >
->           Enable this option to allow SetVariableRT on the RAM backend of
+> -    /* bootfile should be setup by dhcp*/
+> +       /* bootfile should be setup by dhcp */
+>         bootfile_name = env_get("bootfile");
+>         if (!bootfile_name)
+>                 return log_msg_ret("bootfile_name", ret);
 > --
-> 2.43.0
+> 2.34.1
 >
-
-I don't think we n eed fixes tags for typos. In any case
-
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
