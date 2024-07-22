@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F907C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 06:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD18C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 06:42:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55E99880A5;
-	Mon, 22 Jul 2024 08:28:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B986B881E7;
+	Mon, 22 Jul 2024 08:42:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zJo+FfBX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WQD9Ng7t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82E9C8800C; Mon, 22 Jul 2024 08:28:32 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id CA6E288210; Mon, 22 Jul 2024 08:42:35 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CED28813A
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 08:28:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C9BC881E7
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 08:42:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a77af4cd570so182403566b.1
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 23:28:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2cb5787b4a5so1961938a91.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 23:42:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721629710; x=1722234510; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721630552; x=1722235352; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FZjJ2Cintlhg3idWIHMW+ovGYNWrskULMfH5goDqRtw=;
- b=zJo+FfBX3sqCzrRkbAAhGjlqrLAynuoNMpNPu1gK9LLpNWmGsHI6eUYYLDqx/Hnmkh
- McgJ1Ap3rlzehfBMXnss7G+5IGK6ijGXWiz68JjrBaxqjt4Bp4DDl5amB3v9zVcyG8Bh
- vE0LVJ40TyojUmC+0EukrKGTkpUYpuYrX0PyqCjpEj37Or4KX2BG6vuEAcRJSM8rlbAI
- 1mkj2YRmFsfw9zWz9um0sQjaA/iX/w16BlCX45zqtqNkr3TeqVvuVnGAyfTUHIdUuITc
- EOVmzXxHMasGY+kX27fDOj9zf/llhyVZwCD9kmvrMcZkUrebCbEu1Sc/trFxBvYbR+2h
- Xseg==
+ bh=fMAsIn1WLv/uRrGfSqU4qBG6j6tQcPQ4ox1e8Jrl8Ro=;
+ b=WQD9Ng7thL9IRpl4rFccjgFB0NXesaQg8b43xE9YiDcLZS0hwz/QmVKs3Adr/WAbbl
+ sFv/YvPsndNkLnPOACMBl0WfyAJVA77gpDTDuPu2c6oW1ABmJF3qQ2jn/SnuqRv9+6OD
+ SIdWIWMZjh2A4yWX3efhcWo4mCaaSeb2TdafsscNiymNcA+aAqa7tTtwsqhokSZHOxS0
+ szbLPIiF67I6ksolTIyw/HtESF9DuYoxdn21vrOHOhTsRcZSgZ54JNAmbCOaCL/aourr
+ FCT5IDJ9hyBBXHzDwmFtlH/KOQSsV1cKsHzw+8YrdXHeErjtiAgUAJXQZWru6WPNfd6/
+ ru6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721629710; x=1722234510;
+ d=1e100.net; s=20230601; t=1721630552; x=1722235352;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FZjJ2Cintlhg3idWIHMW+ovGYNWrskULMfH5goDqRtw=;
- b=EfQnK+mHebnYXbMFteI/8SsU4XwOqvJZIhTR7V0X1KU6lwHBeKOBAIrt0ydXRWrc8I
- UKUzxzDzmdE83XZkAtqiFfumn2Rg80di1Sj0fMkL4zf63iuC6Vzd/Ei7Eed02OVI5ORp
- CaX2YHepk5181wpvToA4CHRE/yy+GbORt6veQ22kn3IEYoWINBYQ/YLM17aAHQsagyDb
- sr1eLrWtCBXqR/byg1GDCW8itEkAjkqz9GEb5pn65yB/bocWPX5LovYLnRZLlm8NRIDh
- g3Bc8vEBjbaqzwrIYnF9n3f7w7ti0XhI3XO44w7+a6Q5syswNmXgSCkgNvC9e4Tvv/Il
- 86yw==
-X-Gm-Message-State: AOJu0Yx7j7/DenrL9/X1+j1dR83E2tIe3BBL7QT5kVzgCn6FI/b0VYU3
- x8kGBs7DM5xCC6ioyiVw4OfvRcX8kploS6Sse/qTsG6uiGjUFRUwFXW8Pfxq1ZsEKR8GObcWraw
- tDljv+LmJl3a0Q1gsmVZHH4Ve/L9wi3ZtritAyQ==
-X-Google-Smtp-Source: AGHT+IGLOvIPqjjVveOT4k4oN5qRxYroplIItKWmOrnMSIPLteN6qiQssLivBTRK50IPnkCGuJA3cmpQTRGQ3+XUwe0=
-X-Received: by 2002:a50:9553:0:b0:5a2:8f7d:aff4 with SMTP id
- 4fb4d7f45d1cf-5a479b729b2mr4521897a12.20.1721629709616; Sun, 21 Jul 2024
- 23:28:29 -0700 (PDT)
+ bh=fMAsIn1WLv/uRrGfSqU4qBG6j6tQcPQ4ox1e8Jrl8Ro=;
+ b=lnqTR5lriv6YEK0pzuqSdr9ZgLmDFtXY0IDWMsV9wWHyZAd5EtBf/dEG9WftlUoA7h
+ mwoSrzaxSJa1v7GwmcQXFBS11STrhdNeYK6QXPis4rFkLPpEPibAExdfu0vpDGGY2cBS
+ iuFs1ZCSCv9KalZELs5IoNi2NzZB5Vva8qz0efbWt1zEX04QxyM6l4yS1dxjxhzX4Q58
+ VkkBOGVhcfjiClzhNNICJLd1emnuEDOuOtutOvzT7TUO6HPa6sUZsCyq549DzXP8ePhT
+ j6Kdf932GaqRnwWeehdr3cT9ynJcxwRMUFR6MZDye2IzJ/wTzYzWycK5wjVBrJJf0T9Q
+ 8PAw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUZwxyEnKNKGpMqC+KVSzR9+njFySD+e1oBalJ472oVoHMlnJZIIQPUQ4CmJGhueC4hcKdmXUwt7T1EU6t5ryiufkKeqw==
+X-Gm-Message-State: AOJu0YxB7tJroAdPRkUzAiB7v4y8zwrLNk9jTM40ycjguVN6tTG/Cl1y
+ xlfv0HQdS+cH2Y96V6jU7hlBMHONZdChuPPw6nvWOzybuCxSXoWRyMaenfOlLs4iYiGYMQ3tLj+
+ 58eHx6xPw/AY5AP/PBlZU/1gpYcpzqLZFO9nOcw==
+X-Google-Smtp-Source: AGHT+IHJLUXGz5+uA+0vIqZfoRjwlLuiIqwBmtPjZR2HC3O3U3nYmt4SU0wSCQ6CrssLVHWA3x0zdLmIbKaz0DqELYE=
+X-Received: by 2002:a17:90a:c593:b0:2c9:81c6:b0e7 with SMTP id
+ 98e67ed59e1d1-2cd274ade2fmr2423183a91.30.1721630551730; Sun, 21 Jul 2024
+ 23:42:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240708140242.GA38804@bill-the-cat>
-In-Reply-To: <20240708140242.GA38804@bill-the-cat>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 22 Jul 2024 11:58:18 +0530
-Message-ID: <CADg8p968x-UsiHEazS81+DxSXN0DLHpjTEDYDA+0LO=3hGK86A@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+References: <20240710-arm64-backtrace-v1-0-5a2ba50485dd@linaro.org>
+ <20240710-arm64-backtrace-v1-1-5a2ba50485dd@linaro.org>
+In-Reply-To: <20240710-arm64-backtrace-v1-1-5a2ba50485dd@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 22 Jul 2024 09:41:55 +0300
+Message-ID: <CAC_iWjJm1HPQWLgr5fp5AmFMTXKom4DygEMerG9Z-s0uwW7o2w@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/3] drop unused kallsyms support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>, 
- Michal Simek <michal.simek@amd.com>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,79 +91,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 8 Jul 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 10 Jul 2024 at 19:26, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
+> There was some very old code floating around for decoding symbols, it's
+> incomplete and is never built. Remove it so we can add a new
+> implementation.
 >
-> > The aim of this patch series is to fix the current state of
-> > incoherence between modules when it comes to memory usage. The primary
-> > issue that this series is trying to fix is that the EFI memory module
-> > which is responsible for allocating and freeing memory, does not have
-> > any visibility of the memory that is being used by the LMB
-> > module. This is further complicated by the fact that the LMB
-> > allocations are caller specific -- the LMB memory map is not global
-> > nor persistent. This means that the memory "allocated" by the LMB
-> > module might be relevant only for a given function. Hence one of the
-> > requirements for making the memory usage visible across modules is to
-> > make LMB allocations persistent and global, and then have means to
-> > communicate the use of memory across modules.
-> >
-> > The first set of patches in this series work on making the LMB memory
-> > map persistent and global. This is being done keeping in mind the
-> > usage of LMB memory by platforms where the same memory region can be
-> > used to load multiple different images. What is not allowed is to
-> > overwrite memory that has been allocated by the other module,
-> > currently the EFI memory module. This is being achieved by introducing
-> > a new flag, LMB_NOOVERWRITE, which represents memory which cannot be
-> > re-requested once allocated.
-> >
-> > A review comment on the earlier version was to do away with the static
-> > arrays for the LMB lists of free and used memory. This version
-> > uses the alloced list data structure for the LMB lists.
-> >
-> > The second set of patches are making changes to the EFI memory module
-> > to make use of the LMB functions to allocate and free memory. A
-> > *_flags() version of LMB API's has been introduced for the same. The
-> > earlier version was using notification mechanism from both LMB and EFI
-> > modules to maintain memory coherence. This version makes use of the
-> > LMB API functions for the memory allocations. This is based on review
-> > comments of EFI maintainers.
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  Makefile            | 11 -----------
+>  common/Makefile     |  1 -
+>  common/kallsyms.c   | 43 -------------------------------------------
+>  common/system_map.c |  8 --------
+>  4 files changed, 63 deletions(-)
 >
-> On am64x_evm_a53, the last test in test/py/tests/test_net_boot.py fails
-> due to:
-> ...
-> TFTP from server 192.168.116.10; our IP address is 192.168.116.23
-> Filename 'pxelinux.cfg/default-arm-k3'.
-> Load address: 0x80100000
-> Loading: ##################################################  64 Bytes
->          8.8 KiB/s
-> done
-> Bytes transferred = 64 (40 hex)
->   1  pxe          ready   ethernet     0  port@1.bootdev.0          extlinux/extlinux.conf
-> ** Booting bootflow 'port@1.bootdev.0' with pxe
-> Retrieving file: pxelinux.cfg/default-arm
-> am65_cpsw_nuss_port ethernet@8000000port@1: K3 CPSW: rflow_id_base: 16
-> link up on port 1, speed 1000, full duplex
-> Using ethernet@8000000port@1 device
-> TFTP from server 192.168.116.10; our IP address is 192.168.116.23
-> Filename 'pxelinux.cfg/default-arm'.
+> diff --git a/Makefile b/Makefile
+> index f5b2512f3690..fcb9565d2fff 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1786,21 +1786,10 @@ quiet_cmd_u-boot__ ?= LD      $@
+>                 $(PLATFORM_LIBS) -Map u-boot.map;                               \
+>                 $(if $(ARCH_POSTLINK), $(MAKE) -f $(ARCH_POSTLINK) $@, true)
+>  endif
 >
-> TFTP error: trying to overwrite reserved memory...
-> Couldn't retrieve pxelinux.cfg/default-arm
-
-So this seems to be failing because the address used to load the pxe
-config file seems to be overlapping with an already reserved region of
-memory. Can you please check if modifying the address works?
-
+> -quiet_cmd_smap = GEN     common/system_map.o
+> -cmd_smap = \
+> -       smap=`$(call SYSTEM_MAP,u-boot) | \
+> -               awk '$$2 ~ /[tTwW]/ {printf $$1 $$3 "\\\\000"}'` ; \
+> -       $(CC) $(c_flags) -DSYSTEM_MAP="\"$${smap}\"" \
+> -               -c $(srctree)/common/system_map.c -o common/system_map.o
+> -
+>  u-boot:        $(u-boot-init) $(u-boot-main) $(u-boot-keep-syms-lto) u-boot.lds FORCE
+>         +$(call if_changed,u-boot__)
+> -ifeq ($(CONFIG_KALLSYMS),y)
+> -       $(call cmd,smap)
+> -       $(call cmd,u-boot__) common/system_map.o
+> -endif
 >
-> And note that the pxelinux.cfg files are created as defined by the
-> example within the test. This test is also still fine on Pi 4.
-
-If this is working fine on the Pi 4, this is mostly to do with needing
-to tweak the load address.
-
--sughosh
-
+>  ifeq ($(CONFIG_RISCV),y)
+>         @tools/prelink-riscv $@
+>  endif
+> diff --git a/common/Makefile b/common/Makefile
+> index e98354734206..bca02e4c362f 100644
+> --- a/common/Makefile
+> +++ b/common/Makefile
+> @@ -34,9 +34,8 @@ obj-$(CONFIG_USB_ONBOARD_HUB) += usb_onboard_hub.o
+>  obj-$(CONFIG_CONSOLE_MUX) += iomux.o
+>  obj-$(CONFIG_MTD_NOR_FLASH) += flash.o
+>  obj-$(CONFIG_CMD_KGDB) += kgdb.o kgdb_stubs.o
+>  obj-$(CONFIG_I2C_EDID) += edid.o
+> -obj-$(CONFIG_KALLSYMS) += kallsyms.o
+>  obj-y += splash.o
+>  obj-$(CONFIG_SPLASH_SOURCE) += splash_source.o
+>  obj-$(CONFIG_MENU) += menu.o
+>  obj-$(CONFIG_UPDATE_COMMON) += update.o
+> diff --git a/common/kallsyms.c b/common/kallsyms.c
+> deleted file mode 100644
+> index 49b3897078ae..000000000000
+> --- a/common/kallsyms.c
+> +++ /dev/null
+> @@ -1,43 +0,0 @@
+> -/*
+> - * Helper functions for working with the builtin symbol table
+> - *
+> - * Copyright (c) 2008-2009 Analog Devices Inc.
+> - * Licensed under the GPL-2 or later.
+> - */
+> -
+> -
+> -/* We need the weak marking as this symbol is provided specially */
+> -extern const char system_map[] __attribute__((weak));
+> -
+> -/* Given an address, return a pointer to the symbol name and store
+> - * the base address in caddr.  So if the symbol map had an entry:
+> - *             03fb9b7c_spi_cs_deactivate
+> - * Then the following call:
+> - *             unsigned long base;
+> - *             const char *sym = symbol_lookup(0x03fb9b80, &base);
+> - * Would end up setting the variables like so:
+> - *             base = 0x03fb9b7c;
+> - *             sym = "_spi_cs_deactivate";
+> - */
+> -const char *symbol_lookup(unsigned long addr, unsigned long *caddr)
+> -{
+> -       const char *sym, *csym;
+> -       char *esym;
+> -       unsigned long sym_addr;
+> -
+> -       sym = system_map;
+> -       csym = NULL;
+> -       *caddr = 0;
+> -
+> -       while (*sym) {
+> -               sym_addr = hextoul(sym, &esym);
+> -               sym = esym;
+> -               if (sym_addr > addr)
+> -                       break;
+> -               *caddr = sym_addr;
+> -               csym = sym;
+> -               sym += strlen(sym) + 1;
+> -       }
+> -
+> -       return csym;
+> -}
+> diff --git a/common/system_map.c b/common/system_map.c
+> deleted file mode 100644
+> index 8307293bf3ae..000000000000
+> --- a/common/system_map.c
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -/*
+> - * The builtin symbol table for use with kallsyms
+> - *
+> - * Copyright (c) 2008-2009 Analog Devices Inc.
+> - * Licensed under the GPL-2 or later.
+> - */
+> -
+> -const char const system_map[] = SYSTEM_MAP;
 >
 > --
-> Tom
+> 2.45.2
+>
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
