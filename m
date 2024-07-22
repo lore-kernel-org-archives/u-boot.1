@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409BAC3DA63
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:58:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3677AC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 797B8884F1;
-	Mon, 22 Jul 2024 19:57:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD06688403;
+	Mon, 22 Jul 2024 19:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oaZeHI/+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z2FOb3rE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17B6A883D9; Mon, 22 Jul 2024 19:57:47 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id AEB578841D; Mon, 22 Jul 2024 19:57:47 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B73D5883DE
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83CD987E30
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-5d5846f7985so402993eaf.0
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:44 -0700 (PDT)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5d569bee00aso1210151eaf.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721671063; x=1722275863; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721671064; x=1722275864; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WrsM4fGIRFJZwpxDjdxpd7RZs/pDRwGsYnn/StKH7jY=;
- b=oaZeHI/+8HxdtzURHq/2zB2gITqIiAwXGGk7Jja0zVrjpjktgUFd4b5Xxf+AN1sw2L
- 7NG/yRHem9vLR+s3Yj+xKaN3t+mDRUnb3SsxfHWGATAdte1o54G3/eLEmlp9GZBgy0ZB
- wDx6GPJwCHkEYuaHHBBU4SuC7VUcLBgjaW60bK2PdCeKFJbRjdRdcHaMQUEtopom9FE7
- GrGtYjkjClCaHuArkTALCh9SbZ0YiL5ZWwsj1hCUssqIIV8gIAoihiRsyHnhrylhyDs6
- eVFI2GpiuxpW6CIyOgsorV5lQWNLqajYzj1Pv0l/297ISLVN4l9yRBbvrAddgT1/9W0m
- VICA==
+ bh=/szNzAHh4ooOhxwkHsXehb7GdYF2Vg4+vJOe1XuY3No=;
+ b=Z2FOb3rE2lFEeOrOWdiw07jaOy0qIJ3iE0351D/JtDpkatcZ5FRGui0+t4y9Yo+VP/
+ 3AX9WkJy2RgZ8NIg3RrzpQaphKXa6oOZQ2BpLOXOcx7CxqlAO/nXySeTNy6JHSNMhQbM
+ b25GVAy5epv9mFlVCeo5x4XvWTo9GStnUyg8oMuIqn9fVAT812wSCbhuiLEkn38Kpi37
+ X5W+O8kb2Nj87WX+MF7VSR0a3jlR1aWCkFDq8if/FJN2cEedNdx8xL3oezew8AIQqrt7
+ twGartUkScWIPcGKghHJ0Ts9Qivq7K0INiOUQZrzN+G0xahkEG8sh4qcWh2FMu8VPMvT
+ po7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721671063; x=1722275863;
+ d=1e100.net; s=20230601; t=1721671064; x=1722275864;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WrsM4fGIRFJZwpxDjdxpd7RZs/pDRwGsYnn/StKH7jY=;
- b=No66tRbkAhPb7sXpyMZQJXF8mSw9wHMtVuCyM4Gj7XJsB3z64vErsCmWHJtJC8prOT
- By3RlPGdxKdrjAtdTzRFLrx74MbaeUIEfeDz+KHqxCiSl4CkoIHw+Jy3tTOa525yuqxN
- QqBoKxY/gDh7eR6XtTGVABRgT9cg9UBq59EQTKo02DTeBIiK20q5nK7/QBUVS72ZEa8q
- QtLuWq+PgrR/UE/94/01GPL2p1H/JykBB5FosNY2MeEEFuIMvuyczsg7a41tVoKxZtOD
- UHz03nWCXnNJ722vu+eCGh0Rb5Zca9l4tDH0KD4gEvel67M+05uNHblrAGwn9D3b/DRe
- 6LxA==
+ bh=/szNzAHh4ooOhxwkHsXehb7GdYF2Vg4+vJOe1XuY3No=;
+ b=ea4YPsHqNpoL0KpLafa+o1RhnXgPX/zXgwvBIIjT4KAB2ZIRKU33cchwnO6l8KdDMV
+ g2Db1QsWQW6TQDXkwNtn1YChJ93fpHhx5Dez8MPvyfHm429V37JvgnNLn+zc7VksnOHS
+ p01z8dQCPBVgK2tqhSi7yJPT++QPUVoU+L2aGa+bu5jfADeFbimpKyuPSM9+ruZNDeGP
+ /bO8ZTfRdrn3hLyi6D24Fda5unKebc3slCBDRgIVZyAyb98fskDSB/VQ0G7C5kcROzmJ
+ xPMt9kc5V0gtH+ahUaVyBkmXBQvTOru7EfoxOfOJFKu2WGRO7d7Nt7csWBI4J52j0wci
+ 7MVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXKcTucEIjEG2kRfaA+Al6bGo+jIvlfRcM7Iwpx5xIoE4pqhbWy98+ufiVN9MFXYm/dR15uszAS7VL6QyEL8n0tlwrRMQ==
-X-Gm-Message-State: AOJu0YwKdukAwx2M+DEKpxTNiBJ+zgupAVgKUPqabv31Y2bwwyqiob+/
- 0+Wfom2UnouxPbkU/vtFb+RaWYzptSNe5ai1zr3nd0m66kvUAFApwBcy2OLnRO0=
-X-Google-Smtp-Source: AGHT+IGgaITIbKID14gVFkyhly4FL/zbI0quFTWFwHdmcDIReyi6ikYj8oelUdWy7AQfobATCj0sNQ==
-X-Received: by 2002:a05:6820:4c0a:b0:5c4:e036:e383 with SMTP id
- 006d021491bc7-5d56500366cmr10446736eaf.8.1721671063387; 
- Mon, 22 Jul 2024 10:57:43 -0700 (PDT)
+ AJvYcCVd8RAnHxTJ/AjUIKqDv+//d3dRlL4sQbS0XRkKjgRTiW3iLP6Qnph6ObqRcb9HEIWSEloGNs2LnY49RFZOWBoBTBD4bQ==
+X-Gm-Message-State: AOJu0YxKL++USkD5xmtYCXxeiMJOdEYEPiSGeR59Oj9p1McDgZ7uAj88
+ pLa7ttf2lS8txX1oQ+d2TdsG+nk/NBjiDjK8n1P2+lBKuWviEf8qRIZggTJHJ/o=
+X-Google-Smtp-Source: AGHT+IHYl0NWnLd0UeYR7IPAsmFEwygtVOzlMgtNTGqXFeuyx1E7bShAEnCfZsvl00fwL7LX9pSJKw==
+X-Received: by 2002:a05:6820:210c:b0:5c7:b679:4503 with SMTP id
+ 006d021491bc7-5d564cfc023mr10902978eaf.0.1721671064336; 
+ Mon, 22 Jul 2024 10:57:44 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d55a831b79sm1480335eaf.17.2024.07.22.10.57.43
+ 006d021491bc7-5d55d4eb2e7sm1325847eaf.46.2024.07.22.10.57.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 22 Jul 2024 10:57:43 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 03/38] mmc: dw_mmc: Extract waiting for data busy into a
- separate routine
-Date: Mon, 22 Jul 2024 12:57:05 -0500
-Message-Id: <20240722175740.6985-4-semen.protsenko@linaro.org>
+Subject: [PATCH v3 04/38] mmc: dw_mmc: Extract FIFO init into a separate
+ routine
+Date: Mon, 22 Jul 2024 12:57:06 -0500
+Message-Id: <20240722175740.6985-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 References: <20240722175740.6985-1-semen.protsenko@linaro.org>
@@ -104,10 +104,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Waiting for data busy is a logically separate operation and should be
-implemented as a separate routine. Follow Linux kernel example and
-extract it from dwmci_send_cmd(). This way it doesn't clutter
-dwmci_send_cmd() function, and can be reused later in other cases.
+Move FIFO threshold initialization into a separate function to make
+dwmci_init() more readable.
 
 No functional change.
 
@@ -120,56 +118,52 @@ Changes in v3:
 Changes in v2:
   - Added R-b tag from Quentin
 
- drivers/mmc/dw_mmc.c | 25 ++++++++++++++++---------
- 1 file changed, 16 insertions(+), 9 deletions(-)
+ drivers/mmc/dw_mmc.c | 25 +++++++++++++++----------
+ 1 file changed, 15 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index 9d668b3d8813..a82f6a96db39 100644
+index a82f6a96db39..cbfb8d3b8683 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -246,6 +246,21 @@ static int dwmci_set_transfer_mode(struct dwmci_host *host,
- 	return mode;
+@@ -540,6 +540,20 @@ static int dwmci_set_ios(struct mmc *mmc)
+ 	return 0;
  }
  
-+static void dwmci_wait_while_busy(struct dwmci_host *host, struct mmc_cmd *cmd)
++static void dwmci_init_fifo(struct dwmci_host *host)
 +{
-+	unsigned int timeout = 500; /* msec */
-+	ulong start;
++	if (!host->fifoth_val) {
++		u32 fifo_size;
 +
-+	start = get_timer(0);
-+	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
-+		if (get_timer(start) > timeout) {
-+			debug("%s: Timeout on data busy, continue anyway\n",
-+			      __func__);
-+			break;
-+		}
++		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
++		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
++		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
++				   TX_WMARK(fifo_size / 2);
 +	}
++
++	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
 +}
 +
- #ifdef CONFIG_DM_MMC
- static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
- 		   struct mmc_data *data)
-@@ -260,19 +275,11 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
- 	ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac, cur_idmac,
- 				 data ? DIV_ROUND_UP(data->blocks, 8) : 0);
- 	int ret = 0, flags = 0, i;
--	unsigned int timeout = 500;
- 	u32 retry = 100000;
- 	u32 mask, ctrl;
--	ulong start = get_timer(0);
- 	struct bounce_buffer bbstate;
+ static int dwmci_init(struct mmc *mmc)
+ {
+ 	struct dwmci_host *host = mmc->priv;
+@@ -564,16 +578,7 @@ static int dwmci_init(struct mmc *mmc)
  
--	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
--		if (get_timer(start) > timeout) {
--			debug("%s: Timeout on data busy, continue anyway\n", __func__);
--			break;
--		}
--	}
+ 	dwmci_writel(host, DWMCI_IDINTEN, 0);
+ 	dwmci_writel(host, DWMCI_BMOD, 1);
 -
-+	dwmci_wait_while_busy(host, cmd);
- 	dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_ALL);
+-	if (!host->fifoth_val) {
+-		uint32_t fifo_size;
+-
+-		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
+-		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
+-		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
+-				TX_WMARK(fifo_size / 2);
+-	}
+-	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
++	dwmci_init_fifo(host);
  
- 	if (data) {
+ 	dwmci_writel(host, DWMCI_CLKENA, 0);
+ 	dwmci_writel(host, DWMCI_CLKSRC, 0);
 -- 
 2.39.2
 
