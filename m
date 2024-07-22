@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A43C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:34:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C8C8C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:38:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1A11883BB;
-	Mon, 22 Jul 2024 19:34:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 70C3588387;
+	Mon, 22 Jul 2024 19:38:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wW0/hy9d";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qXdI+M1O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C319883D9; Mon, 22 Jul 2024 19:34:00 +0200 (CEST)
-Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
- [IPv6:2607:f8b0:4864:20::e2e])
+ id 69F9E87A09; Mon, 22 Jul 2024 19:38:05 +0200 (CEST)
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
+ [IPv6:2607:f8b0:4864:20::a2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D2688395
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:33:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CFAC87D74
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:37:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-4928989e272so634362137.2
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:33:58 -0700 (PDT)
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-4ef12e5658bso1385504e0c.2
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:37:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721669637; x=1722274437; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721669877; x=1722274677; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CPYubr7er9J9d6B2C24uq9A0y4uuJUDbhv7WXbhTjJo=;
- b=wW0/hy9d+4CKq+RsGXUDFyZ09ZX7bi+1kQFVp947Fbrb0/nVLwLlxsB/CuSxaiGx86
- 8YjOR9/vb8ELjf3+aTY53JQJ4GkvH9zOTvXo8xZhnkyttkfrwcZVttscOiP48VqRldzm
- Lt643LfC+SrtlndqEIn13pci63Yh5YtqAskY1p2UkVcqE79MZ39S/RneBdUjyy/D1I+I
- lVUvxvLNZ3ofXbgDAU7V18guEYGvH1KZL6U470JsDVwVW21H0x0mXW8kLHLyQljreouQ
- 0l4FJZveu8b6g5o9Ef+m8jgJGMUJRtutUyG7XWzzFHF4JC3W0gXFFmcAC+YJESID1YL3
- Ye4A==
+ bh=e11WXnVUbrXSVo1L1cKam2thLTO1fC9rohwOOWhGvuk=;
+ b=qXdI+M1OBZNRsLh2+3v8K/U4RV6UszIH0ZE5iuvPaikrdlGzJQ1Q1ulPTTa9vNER6V
+ XY1lzRMAr1kXIr+TI0mA8wMFOq2SzIpMqI3j3gPSVUedc04TqcIAjC+Q/uOn1eJJNC0z
+ ZkyxzvMMS40JWp2jndB5cKy6ndrzHW7yFzhvwXEaKhT/5hpSpkCwGc1+LGsrlxgBZOhn
+ hOgkLhMXc0RGlGvm/x4t34HF+E3cL/vh4HfEfBlxiMhMQPX1GP4T/yLB8Trzuagz98ZD
+ H/BHBVAdtgxv44jiUXn8yIHdJzq4dpXTQLAmJzqambACZ8FuZ7grvyCBpQxoRzY5X5pM
+ ZlyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721669637; x=1722274437;
+ d=1e100.net; s=20230601; t=1721669877; x=1722274677;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CPYubr7er9J9d6B2C24uq9A0y4uuJUDbhv7WXbhTjJo=;
- b=V0qIbYmh0JJmHOulK7qRYi0mxxuGbyhPsj9l4c8yUfpjckphEFo2Eln92uJ1i1//D2
- eCWrmwcftmBupN+Jl6JrlwlHhEK5z/9FM350rfxQrtHeYHpHYducTuA6Z/871+7wou1K
- 1VQ2DRbUAey/34U1QhJGUfy+BJQoVDuNDjVmeFLqgsmWCYg0B8/9sggQ8g2nq2Ktwasr
- qM+IymMr0J0Ld72wZYFWTCJnUjnAWRA6c10ZkE5dDsJV7GuuFD/hob+woRPqHtewB0fG
- oEkaWwwBDzjk4BVK4JjFindwv4AkgbqZH0ur4jgkESQ8oYHUfOf/k96vkHKh1Xr79N4+
- yUHA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVolp8EEOglNoSYa57uX/UjXOi+Bluxq/PtSsfirHPzfMr7d7jxAQUVopMP6vUkBf75dPiWkUjPasHJW8RUrUWHhoN3Sg==
-X-Gm-Message-State: AOJu0Ywgn79RAV9aJxp/20ligdfg70yHH9htE5H0M8VGvlROFjo3dNg4
- HdaFIhgIUZtYU5EnLHbHUkOhGpqmIZ+2XH04DfxolkKswP5sgEXKdp6YUlduttwH7Rl6/i6cI4T
- v+fOB/NTWTb6w8bwKty25w511Jm6KCupcearZAw==
-X-Google-Smtp-Source: AGHT+IFjEwjEggwzq78QhkI9ASrApf/tp0zdjGgr8h66RXJ64o9kbSEtZD3kiTJCAmz/TMynLErAgaMcYKhMWJOhpJY=
-X-Received: by 2002:a05:6102:6ce:b0:48f:df47:a4a8 with SMTP id
- ada2fe7eead31-4928ba9f4damr9473516137.29.1721669636918; Mon, 22 Jul 2024
- 10:33:56 -0700 (PDT)
+ bh=e11WXnVUbrXSVo1L1cKam2thLTO1fC9rohwOOWhGvuk=;
+ b=v3H3/cx1Funm2td84bxy/UtnPGAGue5c00djw9NAg/1itRChp8K8nl5PxfznjTWxBx
+ sMFxM0byGaULcY6Z2Hv4VwUcCf961tbi/TucBKFy72kiysddUvRcM3aKNByJPjV75CkD
+ ++JExKW8YWAtE6Lh8c4OML/pG17h4qXu3E2ol78Uh2OuJE2hgYQjeBx6H+MjcBA4iyu8
+ GhCtzMwE9TU5C7WnxlnJYlXRjV4n2mugkdHSUwZ/l+q3i/nqiyjvlojqIPf7NLBgcJ+/
+ vfkWPAXQOUToRoO0MD98lOtGeRodchyGMvIsMZXNaFkm6Frr9kaCKIU24exzBq/CYmD7
+ O5kA==
+X-Gm-Message-State: AOJu0YyW3AxDbrXX5NJaDcsUg6tClLNnaN82sn36O6GieTOsw+uQjltS
+ +J6REIv51HVtO4qtpE6nT6qAdsvVsYp3iGf/SVMVdKbv2Tez8+CToCzkKuLZL9JcBsFBPfRStNz
+ SjNyeO1MbC1FS3z4FFQ/6KJ77vhyUlKNEPRb7AzC9Scsq5PW8
+X-Google-Smtp-Source: AGHT+IE6t9AO1wd/xnjh0N0Ag4sMfnhc2ZCjCi5ImSyVoOgXRMELMtqzT8haTyjFZYFc6zMauYQlWmKA60F+GmzA0yA=
+X-Received: by 2002:a05:6122:88a:b0:4ef:281f:84d7 with SMTP id
+ 71dfb90a1353d-4f50665886emr6479979e0c.2.1721669876898; Mon, 22 Jul 2024
+ 10:37:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
- <20240719-b4-dynamic-uuid-v5-4-8a83de3fe3dc@linaro.org>
-In-Reply-To: <20240719-b4-dynamic-uuid-v5-4-8a83de3fe3dc@linaro.org>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240708140242.GA38804@bill-the-cat>
+ <CADg8p968x-UsiHEazS81+DxSXN0DLHpjTEDYDA+0LO=3hGK86A@mail.gmail.com>
+ <20240722173325.GA989285@bill-the-cat>
+In-Reply-To: <20240722173325.GA989285@bill-the-cat>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 22 Jul 2024 23:03:21 +0530
-Message-ID: <CADg8p96vdO5iqwQXtSpkQ6fqvrjmuuoWxHjQ3CtV7Xq=SEX2Eg@mail.gmail.com>
-Subject: Re: [PATCH v5 04/11] doc: uefi: document dynamic UUID generation
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+Date: Mon, 22 Jul 2024 23:07:45 +0530
+Message-ID: <CADg8p97bFNApmT+sPPs4MYhyOwzAdK_7M6n__0CaX5iV1MvK-w@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,67 +92,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Caleb,
+On Mon, 22 Jul 2024 at 23:03, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Jul 22, 2024 at 11:58:18AM +0530, Sughosh Ganu wrote:
+> > On Mon, 8 Jul 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
+> > >
+> > > > The aim of this patch series is to fix the current state of
+> > > > incoherence between modules when it comes to memory usage. The primary
+> > > > issue that this series is trying to fix is that the EFI memory module
+> > > > which is responsible for allocating and freeing memory, does not have
+> > > > any visibility of the memory that is being used by the LMB
+> > > > module. This is further complicated by the fact that the LMB
+> > > > allocations are caller specific -- the LMB memory map is not global
+> > > > nor persistent. This means that the memory "allocated" by the LMB
+> > > > module might be relevant only for a given function. Hence one of the
+> > > > requirements for making the memory usage visible across modules is to
+> > > > make LMB allocations persistent and global, and then have means to
+> > > > communicate the use of memory across modules.
+> > > >
+> > > > The first set of patches in this series work on making the LMB memory
+> > > > map persistent and global. This is being done keeping in mind the
+> > > > usage of LMB memory by platforms where the same memory region can be
+> > > > used to load multiple different images. What is not allowed is to
+> > > > overwrite memory that has been allocated by the other module,
+> > > > currently the EFI memory module. This is being achieved by introducing
+> > > > a new flag, LMB_NOOVERWRITE, which represents memory which cannot be
+> > > > re-requested once allocated.
+> > > >
+> > > > A review comment on the earlier version was to do away with the static
+> > > > arrays for the LMB lists of free and used memory. This version
+> > > > uses the alloced list data structure for the LMB lists.
+> > > >
+> > > > The second set of patches are making changes to the EFI memory module
+> > > > to make use of the LMB functions to allocate and free memory. A
+> > > > *_flags() version of LMB API's has been introduced for the same. The
+> > > > earlier version was using notification mechanism from both LMB and EFI
+> > > > modules to maintain memory coherence. This version makes use of the
+> > > > LMB API functions for the memory allocations. This is based on review
+> > > > comments of EFI maintainers.
+> > >
+> > > On am64x_evm_a53, the last test in test/py/tests/test_net_boot.py fails
+> > > due to:
+> > > ...
+> > > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > > Filename 'pxelinux.cfg/default-arm-k3'.
+> > > Load address: 0x80100000
+> > > Loading: ##################################################  64 Bytes
+> > >          8.8 KiB/s
+> > > done
+> > > Bytes transferred = 64 (40 hex)
+> > >   1  pxe          ready   ethernet     0  port@1.bootdev.0          extlinux/extlinux.conf
+> > > ** Booting bootflow 'port@1.bootdev.0' with pxe
+> > > Retrieving file: pxelinux.cfg/default-arm
+> > > am65_cpsw_nuss_port ethernet@8000000port@1: K3 CPSW: rflow_id_base: 16
+> > > link up on port 1, speed 1000, full duplex
+> > > Using ethernet@8000000port@1 device
+> > > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > > Filename 'pxelinux.cfg/default-arm'.
+> > >
+> > > TFTP error: trying to overwrite reserved memory...
+> > > Couldn't retrieve pxelinux.cfg/default-arm
+> >
+> > So this seems to be failing because the address used to load the pxe
+> > config file seems to be overlapping with an already reserved region of
+> > memory. Can you please check if modifying the address works?
+>
+> I'm not sure what address you're thinking of modifying but, this isn't
+> overwriting U-Boot itself so it's a case that needs to work.
 
-On Fri, 19 Jul 2024 at 18:14, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Document how platforms can generate GUIDs at runtime rather than
-> maintaining a list of UUIDs per-board.
->
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  doc/develop/uefi/uefi.rst | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
->
-> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> index d450b12bf801..b284736cf6c2 100644
-> --- a/doc/develop/uefi/uefi.rst
-> +++ b/doc/develop/uefi/uefi.rst
-> @@ -448,8 +448,35 @@ the location of the firmware updates is not a very secure
->  practice. Getting this information from the firmware itself is more
->  secure, assuming the firmware has been verified by a previous stage
->  boot loader.
->
-> +Dynamic FWU GUIDs
-> +*****************
-
-I believe you are using FWU as an acronym for firmware update ? If so,
-can you mention it that way ? We use FWU in the A/B update context, so
-it would be better not to use the term.
+Can you please print the lmb memory map through bdinfo and share it
+with me. That will give some info on what is causing the issue. Thing
+is, with this patchset, if there is another reservation with a
+different flag(like LMB_NOMAP, LMB_NOOVERWRITE), this would cause the
+load to fail.
 
 -sughosh
 
-> +
-> +The image_type_id contains a GUID value which is specific to the image
-> +and board being updated, that is to say it should uniquely identify the
-> +board model (and revision if relevant) and image pair. Traditionally,
-> +these GUIDs are generated manually and hardcoded on a per-board basis,
-> +however this scheme makes it difficult to scale up to support many
-> +boards.
-> +
-> +To address this, v5 GUIDs can be used to generate board-specific GUIDs
-> +at runtime, based on the board's devicetree root compatible
-> +(e.g. "qcom,qrb5165-rb5").
-> +
-> +These strings are combined with the fw_image name to generate GUIDs for
-> +each image. Support for dynamic UUIDs can be enabled by generating a new
-> +namespace UUID and setting EFI_CAPSULE_NAMESPACE_GUID to it. Dynamic GUID
-> +generation is only enabled if the image_type_id property is unset for your
-> +firmware images, this is to avoid breaking existing boards with hardcoded
-> +GUIDs.
-> +
-> +The mkeficapsule tool can be used to determine the GUIDs for a particular
-> +board and image. It can be found in the tools directory.
-> +
-> +Firmware update images
-> +**********************
-> +
->  The firmware images structure defines the GUID values, image index
->  values and the name of the images that are to be updated through
->  the capsule update feature. These values are to be defined as part of
->  an array. These GUID values would be used by the Firmware Management
 >
 > --
-> 2.45.2
->
+> Tom
