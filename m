@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C4DBC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A39C3DA63
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 439C78855C;
-	Mon, 22 Jul 2024 19:57:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A9B3288578;
+	Mon, 22 Jul 2024 19:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cp+o7Z1T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDi2YLLt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 874E5884FD; Mon, 22 Jul 2024 19:57:48 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id CF2A58850A; Mon, 22 Jul 2024 19:57:49 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C3A188453
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8C2D88403
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-706dea920f3so2179527a34.1
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:46 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3d934cb84b6so2749111b6e.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721671065; x=1722275865; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721671066; x=1722275866; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0SOWexDhZKgy98qvHFC6VGW70pjGoZQlJAvCc0MDcpk=;
- b=Cp+o7Z1TqsjGoGoWLaA7/2BiB9K18mnl5xZJMyDQtytWuq/5YjLrJYnk10ogZihz3h
- JitY3IdK7CT6TnA65sSJ9LrhR9I7izEc6K/H1P5dnD0wxq2zNabE08RLPaUOk2e103Wm
- jFtPu8ZfPnuQhKeH9a0QInvuNf8LFYIRCrgCMbvDoJEgpXQ1S74yBTGwrtVTHEhkPxMC
- xTG/TJTtCf9FjdCB3Cq2WYEITgvBdKH2g8d66KXAglx9rJDGwEPbzOj0oRrxga8MrABP
- m7GcmaQuoi8XA+Osr5ebi0pF3w+vtQsXxYdmDRjUAAXaMCLgAeHTS1IqKboVjLMJu3kk
- TH4g==
+ bh=11WuBB5C6fLNVutMYcUdxo6m0qC6Z3s9HJbjOLj/k8Y=;
+ b=PDi2YLLtKibC0c9i49n05YxWkkp6hBcL5Kz3v+W7zVkTK2T0KgZlbl99I2P/XketlZ
+ wiuLZAgsZB6pb7W+ANtsjNT70FYGp5vu2neGoWje90cHNWaqrYAKc3/DXZCQvR9BuhL/
+ elrE4ga27Fitfam0Z14AvNBLO9jzEk7Z34O+B5v5MG1P0LkwrlmRXgG+TIpjP66TZDKQ
+ Ycf8iWRyktsNSg/MaDg7bC/ErgDr/3NLX2aC9ENwC+rZLigSnhzZlj1oF86+FmhrUEGE
+ 30qx/B7tA3RAtvMZIfaw6Z1PTKLaihsBZqWZRFZ9/plkU2BRx4KL1Ipsgo20rOeWVGgy
+ 9X9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721671065; x=1722275865;
+ d=1e100.net; s=20230601; t=1721671066; x=1722275866;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0SOWexDhZKgy98qvHFC6VGW70pjGoZQlJAvCc0MDcpk=;
- b=BnSWQKekeU2NQvLy2kdpCEKCfj/gqCY38upoNP/ZqfSwsq1DM3URYzZl1mxzjyI3R1
- 5CzUxZUSMfZRJaJQtTtVuvjUPpUgpPokCgWLQNOcj1W0Ml+lOTHh3AoGFczxSk4O1Kf9
- jUnMcHFd7XVF9KA9AU3yXraB/11wLniuc39xQ6lxRuRTy6lwvIhSRgc/WVAoK4DaTISy
- yQ5Yjh6Zz1aTr2FXbfgYd6q4lwQ/IQ4lOmf86ZoA0ufZJak8LOdPkjkGfTLf5InhaB1O
- wCDMfj0MS5bOrGuumvdtq7SSMXFoieul9f2RQSJxypA010DjQPSYpzXxTn4IKz2ixccU
- ZWbg==
+ bh=11WuBB5C6fLNVutMYcUdxo6m0qC6Z3s9HJbjOLj/k8Y=;
+ b=hwJwXfT3fmOYDKsILNORFBf9q5NUMTicsQB2R6YRWum79oVU17JdVVHP7PnTlSth0p
+ LKsEaledi2EJ7RCnqXRPGBB2GTJsZJDmOUdMbJop1zU8t5/OfxexKXfBPzctjjXBG8s9
+ v2d/0ASg2ekh5qitLLpOiWG0+qxBV2K/L0YlgsEzYhd5EuNGX4ELLG+HIEChQ+EtRkKn
+ 5mdteW1faCdG1DGgMPHrNx4VKgGGaBmcTBP0+ZVLcvnekpeq10n8HsE8S495WT1hXdbV
+ wQEGp9L+CVuYTVJcNo3IBOGjuyNctFddsQAp2GXmLVcIxibhHuEX2Ozzx6vUSYPzP6zH
+ i3Iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUBmxEtWjBeCyUYew7Zdva2KsdFjLrEv3x3V3nK9EtcMhiaGjpepDhSwPNASeEXVUUCxejNS7yPhp8/qlPJuClzNlNxg==
-X-Gm-Message-State: AOJu0YwcDvxkH2eyBvliJmg/DKBrs21EcMIEt1zALEGRwcZX/3GpLIZM
- gVth9+A+fNkFhcmoCQdV7g8ReH8rM3REFdwXlAYdkB2iD8XPcQsnCXFg7TU3SQ4=
-X-Google-Smtp-Source: AGHT+IEGj7Rx2u+O4tCEdGWFHYLQH5Pu3XS7gn8nOWzr9Q4ULEEiElntoPrBdb6TEQgRNaQz+ays3g==
-X-Received: by 2002:a05:6830:2aa7:b0:703:644c:84fc with SMTP id
- 46e09a7af769-708fdbe2457mr3225644a34.11.1721671065029; 
- Mon, 22 Jul 2024 10:57:45 -0700 (PDT)
+ AJvYcCXdoOxsl9Am3G0CxKs581/tdfjtxJtWIKWa1xAPoAAiv5bUDElzqTzqkLY6kLgm7b/6imDSDMQa5EFEF6BZRS0eW12ZEA==
+X-Gm-Message-State: AOJu0YxQRgpB7nUH5El8yy1ouICiPMDZ0l8BKzN1aprXsih6b/iI0Ecd
+ OUGx0HUPI5pqugKxiya3FrzyrOcsP1GsPVqbrisrw+Krl+uz89efdHPsyNLMp18=
+X-Google-Smtp-Source: AGHT+IGrMQjbB1BkbYsxSCZnVVz7kqTjqUqEjvTlJeyb/uJ9ybTKy8GVEclNp1Fdhl9uckCHm5CZIA==
+X-Received: by 2002:a05:6808:1688:b0:3d9:37b8:dae7 with SMTP id
+ 5614622812f47-3dafd0ba558mr796315b6e.1.1721671066473; 
+ Mon, 22 Jul 2024 10:57:46 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f60c2be3sm1624885a34.23.2024.07.22.10.57.44
+ 5614622812f47-3dae098bea1sm1599821b6e.27.2024.07.22.10.57.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 10:57:44 -0700 (PDT)
+ Mon, 22 Jul 2024 10:57:46 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>,
 	Minkyu Kang <promsoft@gmail.com>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 05/38] mmc: dw_mmc: Extract divider update to a separate
- function
-Date: Mon, 22 Jul 2024 12:57:07 -0500
-Message-Id: <20240722175740.6985-6-semen.protsenko@linaro.org>
+Subject: [PATCH v3 07/38] mmc: dw_mmc: Extract DMA transfer handling code into
+ a separate routine
+Date: Mon, 22 Jul 2024 12:57:09 -0500
+Message-Id: <20240722175740.6985-8-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 References: <20240722175740.6985-1-semen.protsenko@linaro.org>
@@ -104,132 +104,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extract the clock divider update into dwmci_update_div() function. It's
-a procedure recommended in TRM, so it's better to keep it in a dedicated
-function to make the code clearer.
-
-While at it also extract the clock control code into a separate routine
-to avoid code duplication in dwmci_setup_bus().
+Make dwmci_send_cmd() easier to read by moving the DMA transfer handling
+code into a dedicated function.
 
 No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 Changes in v3:
   - (none)
 
 Changes in v2:
-  - Moved CLKSRC after disabling the clock as recommended in TRM, to
-    avoid possible glitch
-  - Extracted div update into a separate function with corresponding
-    comment
-  - Changed the patch subject and reworked the commit message
+  - Added R-b tag from Quentin
 
- drivers/mmc/dw_mmc.c | 81 +++++++++++++++++++++++++++-----------------
- 1 file changed, 50 insertions(+), 31 deletions(-)
+ drivers/mmc/dw_mmc.c | 51 ++++++++++++++++++++++++++------------------
+ 1 file changed, 30 insertions(+), 21 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index cbfb8d3b8683..7bf3279ee9ec 100644
+index 37a1125fba4f..7b20f4936b62 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -412,11 +412,56 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+@@ -233,6 +233,33 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
  	return ret;
  }
  
--static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
-+static int dwmci_control_clken(struct dwmci_host *host, bool on)
++static int dwmci_dma_transfer(struct dwmci_host *host, uint flags,
++			      struct bounce_buffer *bbstate)
++{
++	int ret;
++	u32 mask, ctrl;
++
++	if (flags == MMC_DATA_READ)
++		mask = DWMCI_IDINTEN_RI;
++	else
++		mask = DWMCI_IDINTEN_TI;
++
++	ret = wait_for_bit_le32(host->ioaddr + DWMCI_IDSTS,
++				mask, true, 1000, false);
++	if (ret)
++		debug("%s: DWMCI_IDINTEN mask 0x%x timeout\n", __func__, mask);
++
++	/* Clear interrupts */
++	dwmci_writel(host, DWMCI_IDSTS, DWMCI_IDINTEN_MASK);
++
++	ctrl = dwmci_readl(host, DWMCI_CTRL);
++	ctrl &= ~DWMCI_DMA_EN;
++	dwmci_writel(host, DWMCI_CTRL, ctrl);
++
++	bounce_buffer_stop(bbstate);
++	return ret;
++}
++
+ static int dwmci_set_transfer_mode(struct dwmci_host *host,
+ 		struct mmc_data *data)
  {
--	u32 div, status;
-+	const u32 val = on ? DWMCI_CLKEN_ENABLE | DWMCI_CLKEN_LOW_PWR : 0;
-+	const u32 cmd_only_clk = DWMCI_CMD_PRV_DAT_WAIT | DWMCI_CMD_UPD_CLK;
- 	int timeout = 10000;
-+	u32 status;
-+
-+	dwmci_writel(host, DWMCI_CLKENA, val);
-+
-+	/* Inform CIU */
-+	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_START | cmd_only_clk);
-+	do {
-+		status = dwmci_readl(host, DWMCI_CMD);
-+		if (timeout-- < 0) {
-+			debug("%s: Timeout!\n", __func__);
-+			return -ETIMEDOUT;
-+		}
-+	} while (status & DWMCI_CMD_START);
-+
-+	return 0;
-+}
-+
-+/*
-+ * Update the clock divider.
-+ *
-+ * To prevent a clock glitch keep the clock stopped during the update of
-+ * clock divider and clock source.
-+ */
-+static int dwmci_update_div(struct dwmci_host *host, u32 div)
-+{
-+	int ret;
-+
-+	/* Disable clock */
-+	ret = dwmci_control_clken(host, false);
-+	if (ret)
-+		return ret;
-+
-+	/* Set clock to desired speed */
-+	dwmci_writel(host, DWMCI_CLKDIV, div);
-+	dwmci_writel(host, DWMCI_CLKSRC, 0);
-+
-+	/* Enable clock */
-+	return dwmci_control_clken(host, true);
-+}
-+
-+static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
-+{
-+	u32 div;
- 	unsigned long sclk;
-+	int ret;
+@@ -275,7 +302,7 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+ 				 data ? DIV_ROUND_UP(data->blocks, 8) : 0);
+ 	int ret = 0, flags = 0, i;
+ 	u32 retry = 100000;
+-	u32 mask, ctrl;
++	u32 mask;
+ 	struct bounce_buffer bbstate;
  
- 	if ((freq == host->clock) || (freq == 0))
- 		return 0;
-@@ -439,35 +484,9 @@ static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
- 	else
- 		div = DIV_ROUND_UP(sclk, 2 * freq);
+ 	dwmci_wait_while_busy(host, cmd);
+@@ -384,26 +411,8 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
  
--	dwmci_writel(host, DWMCI_CLKENA, 0);
--	dwmci_writel(host, DWMCI_CLKSRC, 0);
+ 	if (data) {
+ 		ret = dwmci_data_transfer(host, data);
 -
--	dwmci_writel(host, DWMCI_CLKDIV, div);
--	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_PRV_DAT_WAIT |
--			DWMCI_CMD_UPD_CLK | DWMCI_CMD_START);
+-		/* only dma mode need it */
+-		if (!host->fifo_mode) {
+-			if (data->flags == MMC_DATA_READ)
+-				mask = DWMCI_IDINTEN_RI;
+-			else
+-				mask = DWMCI_IDINTEN_TI;
+-			ret = wait_for_bit_le32(host->ioaddr + DWMCI_IDSTS,
+-						mask, true, 1000, false);
+-			if (ret)
+-				debug("%s: DWMCI_IDINTEN mask 0x%x timeout.\n",
+-				      __func__, mask);
+-			/* clear interrupts */
+-			dwmci_writel(host, DWMCI_IDSTS, DWMCI_IDINTEN_MASK);
 -
--	do {
--		status = dwmci_readl(host, DWMCI_CMD);
--		if (timeout-- < 0) {
--			debug("%s: Timeout!\n", __func__);
--			return -ETIMEDOUT;
+-			ctrl = dwmci_readl(host, DWMCI_CTRL);
+-			ctrl &= ~(DWMCI_DMA_EN);
+-			dwmci_writel(host, DWMCI_CTRL, ctrl);
+-			bounce_buffer_stop(&bbstate);
 -		}
--	} while (status & DWMCI_CMD_START);
--
--	dwmci_writel(host, DWMCI_CLKENA, DWMCI_CLKEN_ENABLE |
--			DWMCI_CLKEN_LOW_PWR);
--
--	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_PRV_DAT_WAIT |
--			DWMCI_CMD_UPD_CLK | DWMCI_CMD_START);
--
--	timeout = 10000;
--	do {
--		status = dwmci_readl(host, DWMCI_CMD);
--		if (timeout-- < 0) {
--			debug("%s: Timeout!\n", __func__);
--			return -ETIMEDOUT;
--		}
--	} while (status & DWMCI_CMD_START);
-+	ret = dwmci_update_div(host, div);
-+	if (ret)
-+		return ret;
++		if (!host->fifo_mode)
++			ret = dwmci_dma_transfer(host, data->flags, &bbstate);
+ 	}
  
- 	host->clock = freq;
- 
+ 	udelay(100);
 -- 
 2.39.2
 
