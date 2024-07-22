@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FF95C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 21:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20959C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 21:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25092885EE;
-	Mon, 22 Jul 2024 23:05:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A0ED884B2;
+	Mon, 22 Jul 2024 23:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jT+EXXkr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AvwUtUB9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D27A87D43; Mon, 22 Jul 2024 23:05:44 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 3FA0C884B2; Mon, 22 Jul 2024 23:05:58 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5767888579
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 23:05:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5659C87F82
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 23:05:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52f008b40d7so325424e87.2
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 14:05:32 -0700 (PDT)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ef243cc250so3984261fa.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 14:05:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721682331; x=1722287131; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721682356; x=1722287156; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GqzADg7SNYzuOdVntxYGfWjsWqaWfVFai44+fY2HvQU=;
- b=jT+EXXkrhFwO8A+8DPtKHSnyOGVEhPpgkq0ITzp2NN7BVgdljZdHObzjFXJqSiaW5f
- dxPLE/QISfJsZfKTYBm1k4vZQdH1KKip+1CqKPep2V5g17mTjSIFH9dl/HzBNZ0xIqm8
- dyu2GesRkse9eY85IPAXeR0Dxa80wQBuS5U19wsmBilzGLhSgOscjjZdcm+B5Q6VlpGE
- mRrBmm6JZOIDL25gozmH5RRg/Wy/qOgU+6O9Y+VR3zcyj4TFqC2VEtVnDSvy68CtZHpH
- 32i1+3GB0jMj4URM/UO2lc8og739bZpl2eH7U2ZnKQ6CvRa3rebvvzo0K2wqV3hH3JWZ
- NjvA==
+ bh=FSkMePlIabU3WgnhAwDqKQgCZdxOGmzHfSGRJA+uejA=;
+ b=AvwUtUB9VZx57cnFLcaIkIwtfqD3vprAcyl/1yFbIvyFVBeZwDynJVaLggSNuhojrh
+ yesNcz8ACWy3+28M+U3100Sk/JIGKUP3cjPALPR/N2Cm/eEVNcOA6qv7UqTwFvm6A6sc
+ PMzBznKdNH800FiAyjloiRwpB1gpny/5ioxTqrPv6/+2OnziPNgpcArYG8TPEsy6tC00
+ fCq0uZ6PWhZx7tk74QfcUWGzKNZH11mnsxrplAK9CqFXNk6Aax6O0mnOGu83Zyn1OgLr
+ k4Brn2hfJXrSNY4B3ceMM2g2OlSj444DBS1OH+4/hNa8cF5iv/Xpk8vCVNpUH8Kc5MXl
+ XxXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721682331; x=1722287131;
+ d=1e100.net; s=20230601; t=1721682356; x=1722287156;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GqzADg7SNYzuOdVntxYGfWjsWqaWfVFai44+fY2HvQU=;
- b=LlCDQaykglTr272Hr4zZzVhX17pt51x8+xlUkaq12992gk9iC2cZfD0uxOgrvOE9jm
- lnpp1LiJcEZHkXzOrHsWD3GRC/fXvLlRzzlKQGl0kbmEzer95YJ9lXdQXMedYtK7scwq
- Yz5iAuGQwOxS28YI6/pSvX5+/rEp4kRJth9hTElGSvqt6C3V+xPRqJiIHulaOT1xc/Nv
- 3Bf5XUoywbWohylqCIzjcek2/V5vpTMv6+YbMuvZkxa6bW8w+Z0ZtcR28XNIW05mV90M
- OQTRWVaMTqNsMpQ2nYGB07xj8ykCPJZhzSkOevRgQ6Y1jCrpNopqZTLlL9Ev9B4dtfky
- Jnvw==
+ bh=FSkMePlIabU3WgnhAwDqKQgCZdxOGmzHfSGRJA+uejA=;
+ b=XU1fLxZU1QZq3pz/cmUl08O31S2v7ZPzNu5rGRtlcxssAYlINyYopyZ7fXN2LbeIYI
+ FmnXF3pZ2GbLhIP/pTfRJlbmmU4CasrJH1omcJWHIxEr+yD3uwVEE1bEHj+qbv7pUNrq
+ mIihLckyradXnuLZzkyoO+JnqPr8LHFpAShg2o3Wb1xnT0W7n+yaiOONfxSAvpJGgiCE
+ 0aHanUvSXeSb99V53UeXSMJDxmVdpTh2X/9JaCZbnGwDH37ewGpf6Kxnh/cZ/ouf38+v
+ Tq2ncbwCTPdwIa6jnPTphMPW/oLuezmsqo7DGMY5xX04gAszNQhLmiHIOgTgpSYnF2tF
+ rXew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV61WPTcXypEIdxgkuF2dvKaIoyzvVubacGqNYt07czRtBq0jK8LKD7iKhPKHh+kn79/Bw6vxlID+7qoozhjZh4unV4zQ==
-X-Gm-Message-State: AOJu0YxMUaBwR61SmY158+ELJU11HZuGBbpYKA4JXXaCjEiCqCG8GfdT
- 0Zv6omTxPp6wP62YdDUBse53hVpcJmWHDWoneYM4Npt4K/FSsee4T8C6s2XV7LXB+9sZpxcn9cJ
- l4CSvWtr7qPAkhqTTQz4S8Wej2dY=
-X-Google-Smtp-Source: AGHT+IEWGJ0oCj2jMwKzzH3ElojocZwaDrmWOFoEBBLJAKRZkIRXA4KtM7/TzW2rqW2Ax/tKEkzbb5DBu6mkX4KX4aM=
-X-Received: by 2002:a2e:b16b:0:b0:2f0:1ea8:63a6 with SMTP id
- 38308e7fff4ca-2f01ea8665bmr3570421fa.8.1721682331001; Mon, 22 Jul 2024
- 14:05:31 -0700 (PDT)
+ AJvYcCXfhcZTB3hpZWe1OOHh4mvqO+rQDLJJ9ECHs/Ep6F0ydOrUQ+5Ch6Fv/TcL0urCP5eB9ujNh7ygcu3g08kMir53GvWvww==
+X-Gm-Message-State: AOJu0YymnGdFDVlFN5/EGAW4fc0LjBT6bJiQB4yLZKLAE+z4yyq4OCJB
+ 7YCbXDR4qmL89DudSDA6uhBBqy8SNFL7fvpQ5y6jpNQ5EXp/ST5O5/QyCqqm+RoWS5HOlC91Em8
+ RR8SFEn9D7atBwf6ETj2XlNNXNoI=
+X-Google-Smtp-Source: AGHT+IH0CiMQ3czxZMqOHyGE2cLTU8ktAcU9yVWNPrEiGLnPnilhsmGAAy9aMt5Nzwn0ERwl1ugnzkbSMrgF5no9oak=
+X-Received: by 2002:a05:6512:4007:b0:52f:2bd:966 with SMTP id
+ 2adb3069b0e04-52f02bd0b6fmr1697024e87.1.1721682355511; Mon, 22 Jul 2024
+ 14:05:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240712141922.27739-1-emil.kronborg@protonmail.com>
-In-Reply-To: <20240712141922.27739-1-emil.kronborg@protonmail.com>
+References: <20240718165454.904763-1-festevam@gmail.com>
+In-Reply-To: <20240718165454.904763-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Jul 2024 18:05:19 -0300
-Message-ID: <CAOMZO5DfjPCdj5sNKHbXESO9=Zg9-KqsmJcbQzkFZNB6SQeb6A@mail.gmail.com>
-Subject: Re: [PATCH] clk: imx6q: Add definition for IMX6QDL_CLK_PWM1
-To: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: lukma@denx.de, seanga2@gmail.com, trini@konsulko.com, 
- rasmus.villemoes@prevas.dk, u-boot@lists.denx.de
+Date: Mon, 22 Jul 2024 18:05:44 -0300
+Message-ID: <CAOMZO5D63A0_na46tenYEn6mZC+fQfC0Mpa899z5aY3WCjB8tg@mail.gmail.com>
+Subject: Re: [PATCH] imx93-u-boot: Describe the CPU clocks in the devicetree
+To: peng.fan@nxp.com
+Cc: uboot-imx@nxp.com, m.othacehe@gmail.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,22 +89,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 12, 2024 at 8:10=E2=80=AFPM Emil Kronborg
-<emil.kronborg@protonmail.com> wrote:
+On Thu, Jul 18, 2024 at 1:55=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> Enabling CONFIG_CMD_PWM, and consequently CONFIG_DM_PWM, causes the pwm
-> command to fail due to a missing clock.
+> Currently, there is an error when the i.MX93 CPU frequency is
+> read:
 >
->     =3D> pwm enable 0 0
->     Enable clock-controller@20c4000 failed
->     Failed to enable per_clk
->     pwm: '0' not found
->     Command 'pwm' failed: Error -2
+> Could not read CPU frequency: -2
+> CPU:   NXP i.MX93(52) Rev1.1 A55 at 0 MHz
 >
-> Note that it is trivial to also add the clocks for PWM2, PWM3, and PWM4.
-> However, I only tested PWM1 and thus only added the clock for that
-> signal.
+> Fix it by describing the A55 clock nodes in the devicetree, like done
+> on other i.MX SoCs.
 >
-> Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
+> With this change, the CPU frequency error is gone and it can be correctly
+> retrieved:
+>
+> CPU:   NXP i.MX93(52) Rev1.1 A55 at 1700 MHz
+> CPU:   Industrial temperature grade  (-40C to 105C) at 35C
+>
+> As the upstream imx93.dtsi does not describe the CPU clocks,
+> keep the clock node in imx93-u-boot.dtsi for now.
+>
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
 Applied, thanks.
