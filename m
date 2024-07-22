@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B38EEC3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 16:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15BBDC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB55B883DE;
-	Mon, 22 Jul 2024 18:43:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1820C86DBD;
+	Mon, 22 Jul 2024 19:33:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BEFOpnYw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wx6cc8sY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E9E088387; Mon, 22 Jul 2024 18:43:17 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8B32087EDC; Mon, 22 Jul 2024 19:33:32 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A06D88348
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 18:43:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AA9F87D1A
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:33:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46MGhB6M019976;
- Mon, 22 Jul 2024 11:43:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721666591;
- bh=L+6ctzE7ECiYwYDDc0kNNFSjIt5Vfm0G7TB5XYXZZYk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=BEFOpnYwWAvO9Xbn47cAEQu+l0uJrKpHMZOa+ZRSdMua3ylRQ+lHfu7MalmXSMEmf
- Z+SZknWJrtupUAs6mzbLWA03JfaMUvFqu4lmbZ9d6/qqTYsgUF0cQ+IXI10KDAyaFi
- FFQwAGi0SFJkhgxcugoWI2l7WO5UyJlrfthbQWqk=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46MGhBT5019157
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 22 Jul 2024 11:43:11 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 22
- Jul 2024 11:43:11 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 22 Jul 2024 11:43:11 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46MGhBtL006144;
- Mon, 22 Jul 2024 11:43:11 -0500
-Date: Mon, 22 Jul 2024 11:43:11 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Dhruva Gole <d-gole@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, <c-shilwant@ti.com>,
- <m-chawdhry@ti.com>, <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vibhore Vardhan
- <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>, Sebin Francis
- <sebin.francis@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
- <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>
-Subject: Re: [PATCH V6 2/6] doc: ti: k3: Add TIFS Stub documentation
-Message-ID: <20240722164311.jszai6ahxexvw5hz@skydiver>
-References: <20240719070312.3771755-1-d-gole@ti.com>
- <20240719070312.3771755-3-d-gole@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7039e4a4a03so2579535a34.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:33:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1721669609; x=1722274409; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KJm6nDWtRcXQ4Nj5mnYmUZoZNhHHYymtgJ+eh3rb1uc=;
+ b=Wx6cc8sYGuVMQF3BbrnwdtQn54kYNnQwVBWWznzrtPsxBAy4FBsqR31EGG0HZrLUxg
+ yJk2Ft1+mNIjzf5r6KZNzm/PgKH3htKgsCtMNrBD+CWShFETS2K9c0BwwnMpEP6c7SFx
+ 1tCrEatxmCZpsREBKV+2g+Ki6AQGt5hPWK+wg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721669609; x=1722274409;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KJm6nDWtRcXQ4Nj5mnYmUZoZNhHHYymtgJ+eh3rb1uc=;
+ b=ZVphuNUScoJ+OGkvXJucnGp7xt/ApmXUb/XKDf0eFk9ojymjeQomm2l7xzxwN48HDE
+ yBO0FO9MA4uTYjiyNodHbKxpNF5Pe/iawaq8qDoXE1OXCoaTXY469vXQeK4KxhsBDwL0
+ 8uaObV6lY+VLvWwZX3N+akztOcByfA+XJIGgr5GvMP9YLO5r6jK+ivOfV9u/2A5Hq2jF
+ 350Zo142pxkBAAKoeOkpsoDGMEHHCwFmhMmN6sieNcpR+I55ONT43v5o48lRLJEwJMkG
+ cbIwRQvXlEdNT48QDyTImZCD7tsyHYOvVCnfUKSz4KcSIWaNJWg0fFdpwYSlu9PyHdXI
+ YUJw==
+X-Gm-Message-State: AOJu0Yz9QqcyYAcdzbled73yrYT7fVvewu9rLJ310IugGpMJ+E8mayWA
+ QWTZQFOFb0GNoJKXQobgYntCCPHB0Fm6XCBQ+8JFBDvIT9Pd+bcATbH/EP+5TBw=
+X-Google-Smtp-Source: AGHT+IEy2aWoag+7K+zNgQ8SlcfI9njFHxMFKrmT2uC6T9rgmItQprtjIFM7UPI6zOUUuXqSGfsy1w==
+X-Received: by 2002:a05:6830:6209:b0:703:6d44:41a5 with SMTP id
+ 46e09a7af769-708fdadef23mr11560822a34.6.1721669608962; 
+ Mon, 22 Jul 2024 10:33:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-708f60a55e1sm1604445a34.11.2024.07.22.10.33.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jul 2024 10:33:28 -0700 (PDT)
+Date: Mon, 22 Jul 2024 11:33:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
+Message-ID: <20240722173325.GA989285@bill-the-cat>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240708140242.GA38804@bill-the-cat>
+ <CADg8p968x-UsiHEazS81+DxSXN0DLHpjTEDYDA+0LO=3hGK86A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KC9YLLUOEOCyMhbA"
 Content-Disposition: inline
-In-Reply-To: <20240719070312.3771755-3-d-gole@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <CADg8p968x-UsiHEazS81+DxSXN0DLHpjTEDYDA+0LO=3hGK86A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,38 +95,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:33-20240719, Dhruva Gole wrote:
-> +
-> +.. k3_rst_include_end_boot_firmwares
-> +.. k3_rst_include_start_lpm_firmware
-	s/lpm/tifsstub ?
-> +
-> +* **TIFS Stub** - A small piece of code that helps restore the remaining
-> +  context and resume the TIFS firmware when resuming from Low Power Modes
-> +  like Suspend-to-RAM/ Deep Sleep. It is loaded into the ATCM (Tightly
-> +  Coupled Memory 'A' of the DM R5) during DM startup. The reason it isn't
-> +  merged with DM is because in HS devices we need to sign the tifs-stub with
-> +  customer key. The DM cannot have a component signed using a customer key
-> +  because a HS device customer owns the customer key and only customer
-> +  has the access for the customer key. Since TIFS Stub signing has to happen
-> +  from the customer side but the DM is released by TI or built by customer
-> +  optionally using publicly available sources, we need to allow binman to
-> +  sign the TIFS Stub and only then package it alongside other firmwares.
 
-How about:
+--KC9YLLUOEOCyMhbA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The TIFS stub is a small piece of binary designed to help restore the
-required security context and resume the TIFS firmware when the system
-resumes from low-power modes such as suspend-to-RAM/Deep Sleep. This
-stub uses the same encryption and customer key signing model as TIFS
-and is loaded into the ATCM (Tightly Coupled Memory 'A' of the DM R5)
-during DM startup. Due to the independent certificate signing process,
-the stub is maintained separately from DM.
+On Mon, Jul 22, 2024 at 11:58:18AM +0530, Sughosh Ganu wrote:
+> On Mon, 8 Jul 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
+> >
+> > > The aim of this patch series is to fix the current state of
+> > > incoherence between modules when it comes to memory usage. The primary
+> > > issue that this series is trying to fix is that the EFI memory module
+> > > which is responsible for allocating and freeing memory, does not have
+> > > any visibility of the memory that is being used by the LMB
+> > > module. This is further complicated by the fact that the LMB
+> > > allocations are caller specific -- the LMB memory map is not global
+> > > nor persistent. This means that the memory "allocated" by the LMB
+> > > module might be relevant only for a given function. Hence one of the
+> > > requirements for making the memory usage visible across modules is to
+> > > make LMB allocations persistent and global, and then have means to
+> > > communicate the use of memory across modules.
+> > >
+> > > The first set of patches in this series work on making the LMB memory
+> > > map persistent and global. This is being done keeping in mind the
+> > > usage of LMB memory by platforms where the same memory region can be
+> > > used to load multiple different images. What is not allowed is to
+> > > overwrite memory that has been allocated by the other module,
+> > > currently the EFI memory module. This is being achieved by introducing
+> > > a new flag, LMB_NOOVERWRITE, which represents memory which cannot be
+> > > re-requested once allocated.
+> > >
+> > > A review comment on the earlier version was to do away with the static
+> > > arrays for the LMB lists of free and used memory. This version
+> > > uses the alloced list data structure for the LMB lists.
+> > >
+> > > The second set of patches are making changes to the EFI memory module
+> > > to make use of the LMB functions to allocate and free memory. A
+> > > *_flags() version of LMB API's has been introduced for the same. The
+> > > earlier version was using notification mechanism from both LMB and EFI
+> > > modules to maintain memory coherence. This version makes use of the
+> > > LMB API functions for the memory allocations. This is based on review
+> > > comments of EFI maintainers.
+> >
+> > On am64x_evm_a53, the last test in test/py/tests/test_net_boot.py fails
+> > due to:
+> > ...
+> > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > Filename 'pxelinux.cfg/default-arm-k3'.
+> > Load address: 0x80100000
+> > Loading: ##################################################  64 Bytes
+> >          8.8 KiB/s
+> > done
+> > Bytes transferred =3D 64 (40 hex)
+> >   1  pxe          ready   ethernet     0  port@1.bootdev.0          ext=
+linux/extlinux.conf
+> > ** Booting bootflow 'port@1.bootdev.0' with pxe
+> > Retrieving file: pxelinux.cfg/default-arm
+> > am65_cpsw_nuss_port ethernet@8000000port@1: K3 CPSW: rflow_id_base: 16
+> > link up on port 1, speed 1000, full duplex
+> > Using ethernet@8000000port@1 device
+> > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > Filename 'pxelinux.cfg/default-arm'.
+> >
+> > TFTP error: trying to overwrite reserved memory...
+> > Couldn't retrieve pxelinux.cfg/default-arm
+>=20
+> So this seems to be failing because the address used to load the pxe
+> config file seems to be overlapping with an already reserved region of
+> memory. Can you please check if modifying the address works?
 
+I'm not sure what address you're thinking of modifying but, this isn't
+overwriting U-Boot itself so it's a case that needs to work.
 
-> +
-> +.. k3_rst_include_end_lpm_firmware
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+--=20
+Tom
+
+--KC9YLLUOEOCyMhbA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmael+IACgkQFHw5/5Y0
+tyyqCQv+JWoa93dOeDMJZWgS7qYd26Y6aEW8QqVIkXNgfe6tAxW8oy0sr9sQ1wie
+haCCXTHycbSt6tWPwCNuj4lHobPQwwwGWJQ+NGKgemOMFEXr452KuSE7t3niGsfq
+2Z/nxRmhRbkuR795A//KcueuOJ7fS/V+Kx2HO7Q0kmeb/pTHduaVUSUDozZz+qoa
+IgZr3iCiUups2TdiwzOn5kGka0+fhA6SSY+/EQArBiwVmYSu9yWSaw+E//WVrelq
+qFDgXr5Xv1Cjd3mvMHOO0Oa3U6DsSwKL00DjB8kHRKvHJin6eJG20sgauYuyPJiz
+5d+0kpEJUehN+6KMw4ifQo+HxrkNzJkwKhzxHMFRYjJEQXj3J5Nti2/AwH/jA6Ng
+wJZRmwE34Qop/BC4fcfO/v0ifpPJqvravo5f9gzTYD+zKT9DU1XXhE/gB1XWZKuf
+int3eGp8bcwL6nOuiusqm2flVfF3YgIEwB5D1LW8dUqX8JQJ0St5e/4GkoKrVABG
+bzayeEXs
+=oVUb
+-----END PGP SIGNATURE-----
+
+--KC9YLLUOEOCyMhbA--
