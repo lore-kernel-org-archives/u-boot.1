@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0787C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 23:58:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54493C3DA70
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 23:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 158BB885F4;
-	Tue, 23 Jul 2024 01:58:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 888C18867C;
+	Tue, 23 Jul 2024 01:58:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721692691;
-	bh=hf/qRaFQTshgtN5ScUbkLDKunHQq/A2SyMzjgvUlRQM=;
+	s=phobos-20191101; t=1721692692;
+	bh=U0bZq155WHSGWcilbOZBtQuxgAbaKmxqNLjcZ/EaHIM=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WIUe6wJtq+PShiKrmRzanIaNBezffQUlYeyz79hLZEMxEnrFkORtU/Dota3s9HW21
-	 uw0pQ3eGfkrq8QnSc3k8hEQj24vE6KxnvOnWIBhxLaWuFK8i58keN55hjBl1L1Q1gJ
-	 baw16Kt3r/PrOeNZo7XhaF62oW2UhKgpvuHJvcZC0PrZPZA+a0fAaedNzW97oQPEgY
-	 +r75HQGR2CggPtNUVQFSfXT3iDQyKiCJlOJIaMjF1NmXcVVdtS06LwI7kKwH4tJ4T0
-	 OcBxzY+depsC2AYtT+hRbDyehQ/JURauTNEQ3r5HBKWaRH8JlPxlMncSc5WtrSLL9/
-	 jRvFODR5BlGag==
+	b=oueq7L/t1zc54Fh2uv/FV524ub7SGg3nw6RbRrli4oaRt3O98I9MUzhQF3322rUTH
+	 alMr4UoB+EuYaMaXhF96+wl55sJ/qKB1HX0jqGqs6VDnSuE7ESgwf9LUZ5+oSnpRVG
+	 DIN3VLc/KCChze4dUbx4dgsRn0GDIXJQui7IWJlSzc0fdCfQa0aQ+bVpHUSIuedDxm
+	 02SwdaS2LxONQutoP3cqrVla9JWHl1tS7yn7fyYNKRGYVKSqd66zcfL4eUfb9F5PWi
+	 7yL7BRgpq5AJcNPWFI6HRg7TNjymvSfhJcZqRfeG/BdCPzOPE3RUi0h+3l5C9ghNsu
+	 QJ+OkWqagmvMQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E6C8B88440;
- Tue, 23 Jul 2024 01:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8F891885E7;
+ Tue, 23 Jul 2024 01:58:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1721692690;
- bh=hf/qRaFQTshgtN5ScUbkLDKunHQq/A2SyMzjgvUlRQM=;
+ s=phobos-20191101; t=1721692691;
+ bh=U0bZq155WHSGWcilbOZBtQuxgAbaKmxqNLjcZ/EaHIM=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SNVvFnD1Xo8sPcrYprmsezLH0zQYlQEbo49f8KhZwBvO/qvtVzeIfvBivhoCAyMTd
- wsQNK8nigUE9R+MHZmpxLWtw42Js0Laucnzk/rnTxj1vAKbeeO0Cyb7iRhCMQWTaAD
- g1d3RaSkxaaoCLMXelvmpFp1TKuDE50DycrMZgzuGq+xHdCN2Fzd7KJhDdRZIjwjCL
- 63YaXhFOkRhKjwLatM9JHdJ5NSguCJkq8/bD8GGgmrIZWYSi2XxqWBhnWCDe/FykKd
- voUTl13sAKzL5Rz+xNMSVtOZUZS7qS3/g+HeWO4jrGly8iVDnPA5Z7tbs/vh+zFfdg
- VpwV/ktj1jKXw==
-Message-ID: <57f5a68f-6f12-4bf2-8f6a-851c9064c930@denx.de>
-Date: Tue, 23 Jul 2024 01:41:41 +0200
+ b=My+b6liOP53Emrkc0iS5yC23jHT8dR+EHmSiWw4VWZvtWKXhT7oOqsco5XY4T3t5u
+ fh5iCf456kq//69AZM/IoCfUtuCJBYIX+6lkreVuUNBpnxGy+MFmLuAskyaH99VY04
+ Jw7qxi6PyO7F3y8k8mah5nKIiWolA6odyO5GYYb0nKb4/bHYqOK4sQezhzI0aRC85/
+ VgkL4dXJjmzzAbwQ2CdFmb5eywX7rSWJ2BvrK8J1wBKkvaQnE/Y58yt96b46o4VqPN
+ sjCemZmh6x8joqGsan3E69jw8VxYjJjtlVQcnLXgcOu8j2bSNg7K6ussdl8KaaXVYq
+ oZgZB562S4uag==
+Message-ID: <cd446203-327f-408b-b387-043dc22b5877@denx.de>
+Date: Tue, 23 Jul 2024 01:42:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] usb: gadget: atmel: Code refactor part 2
+Subject: Re: [PATCH v2 3/4] usb: gadget: atmel: Add attach/detach support
 To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Zixun LI <zli@ogga.fr>, u-boot@lists.denx.de
 References: <20240722202426.190986-1-zli@ogga.fr>
- <20240722202426.190986-3-zli@ogga.fr>
+ <20240722202426.190986-4-zli@ogga.fr>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240722202426.190986-3-zli@ogga.fr>
+In-Reply-To: <20240722202426.190986-4-zli@ogga.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,13 +72,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/22/24 10:23 PM, Zixun LI wrote:
-> - Rename atmel_usba_start() / atmel_usba_stop() to usba_udc_enable()
->    / usba_udc_disable(), remove atmel_ prefix to be inline with other
->    functions. Also avoid confusion with DM start() / stop() functions.
-> - Replace printf() by log_err()
-> - Spelling paramter -> parameter
+> Add controller attach/detach support by using
+> usb_gadget_ops.pullup() method.
+> 
+> Signed-off-by: Zixun LI <zli@ogga.fr>
 
-I think I have to push a bit more here, can you please split each bullet 
-point into a separate patch ? I think that'd be ideal, because it seems 
-that each bullet point is one type of change, and one type of change 
-should be in one patch.
+Reviewed-by: Marek Vasut <marex@denx.de>
+
+Thanks !
