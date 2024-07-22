@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715A1C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 10:09:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 023BEC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 10:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B705287EFA;
-	Mon, 22 Jul 2024 12:09:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 78D8488276;
+	Mon, 22 Jul 2024 12:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="JjQcN5Sd";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="UepjY7H5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76C6787F82; Mon, 22 Jul 2024 12:08:59 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id B8CFC88263; Mon, 22 Jul 2024 12:09:24 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5053C87E50
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 12:08:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2ED287E50
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 12:09:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-52efc60a6e6so2260712e87.1
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:08:57 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7fe8d029fbeso161506839f.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:09:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1721642936; x=1722247736;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1721642961; x=1722247761;
  darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=nQjMvPb4Y9vGOyi5AspPKr3a0lJJCwL1Za1fvW0YMIM=;
- b=JjQcN5Sdfv0yLsd3s+jW/J9Popx4ZTAXk8FPf5f4ul1HcMaexqfwAYHJzoUNueYWCj
- jP0FHWMIojTIEgCHmeYFgrml6s6Un8AT3kXCyJcEAygMWZnLITFWeH8oYmfZhsFLkKPO
- atBTKHhB6aPpBPr7px9kVk/y4qW1jPnG8xTIxL4a1eHC8pBg7D1jfITbtPxp6fecAT6X
- JgDMgt40aXIqImR/PBDSX/Sdigxo7WscYrDzc47ZejfRfbI34oLqedhS6XlZYXTeECUa
- MUXGH3+MVOs3og8HBqJk1AMiE3BvyKkMT+PGE1P1EXNSEYPcc8ZhLW0UqKM5nclgPdQo
- MfBg==
+ bh=zFMn63Y6UALjTceLm9QpUxvJ+xBtLUiM8IOCsYhYz6Y=;
+ b=UepjY7H5hKybD7q1fNlvtUm5U76kRq3dvASvhKaFFDdtlHxZOgPTpbJLDeE0Ke8BZz
+ LaoVd1+8m6bkCLOvnkA+4IWoTeskoUKAh0IUnKmoX/oYLpNiSWCZ7UYTm0h+Pu6kixym
+ ahr3UX3Yilqg8bloCIgac0nGr29uxyQaJNMh24DvLDpe+VTwvcHCLb7L71rtYUhqrnS4
+ VRk7l+MYgi8lniW4Gd41vG6ziEQ2AH/mhe4Npd1vXGhaFWX42cVLBdypg9D2iiglBWvg
+ cYo7pGYh0FCyFx3muGea2P1FfjRD+7UfDhPQpr9sWLqgln8ByKxWo7JpFWaz5usByisS
+ CYzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721642936; x=1722247736;
+ d=1e100.net; s=20230601; t=1721642961; x=1722247761;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nQjMvPb4Y9vGOyi5AspPKr3a0lJJCwL1Za1fvW0YMIM=;
- b=lWw0JtRFmEe8lC+tHkktqLjzM7ePPraCs6TMYcrzZ2EkD+vlN5LlPMJAiRjJXAfsBK
- jMG9RkWl3Br8e2oKdIrvfntK+oUJIdAghQW9gQJLEK8hmhEZDHq+axhtJpzUQHBIVWNO
- US3P3WVs3QV2JdPgQhhlVxCjP31LbaNc1ZX/TxRKs3WWs8/kkWZNKjQgTHzB5klcZlHI
- QBaOWooW0SKItpgt+UoycdGJStn/EJ1QuRVftDswKYo0PyxQbzfbYwqBp6yqDR2SEYAR
- wS4sC0Yqu9aY0+Bgcb1y8qJQLI3po5M66Qx+e4xaqcVH1g6//n0uPR70XUVrtc4jBxNu
- z+yA==
+ bh=zFMn63Y6UALjTceLm9QpUxvJ+xBtLUiM8IOCsYhYz6Y=;
+ b=jKYD4ujHQ6kAxl6jsnTojLLskfrrjVeAPK9XMoCU9a+Nh1u7jdJmOEnZIhvhJPCgv/
+ AeC6wI0D99Ero92y1yN5wOoIRIbBrEYs/veFF5LmSwLvCqAHz6kgRnatiAmFHcV4y2IA
+ o+4WwGAW3qn5WnoxdAiRTYH0yUNwre2vW8wuYbyb4rSVRZRoXikLrEmjQzs8F0o47TGE
+ 47u51NatXYaKMKFtzVsWiM3b7KvtVA58lJLmSIUrV2xV9IwQ2uowDmRXKgb7xClfZ5XR
+ uDKTAMuWv2BK6qtZDB8tB+b9g8WeZ5rk70R9GMkyKANOHWdaJZXk/plmj+6qrquJt+fj
+ w2cQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqD+/D5TJE0oF6IGBVzpFUtPCgQYxVRqT1MwREjbC0JDHQF/q0q7Xjr10rqfG3z2bvqXmNcleivLrczQ6afpdnIQ43mw==
-X-Gm-Message-State: AOJu0YyYJsit59rqUz6/G+h3CMSryISwmKRR7CWAoiixLN+dnNioYdYu
- zTzEDLIowFmKpqpjGKi9P7yj9l6cQJaVStVP9JkMCE+HeGtBSKvbpx74gGTO/A==
-X-Google-Smtp-Source: AGHT+IGSvFULDFDh+4XDASSdDZbbvM3G+zPF6CKr2z+araIJ40CyjeIx7pwW7xZUldHsk6gqy29mdg==
-X-Received: by 2002:a05:6512:e8e:b0:52e:9cc7:4461 with SMTP id
- 2adb3069b0e04-52efb52266fmr3440536e87.5.1721642936419; 
- Mon, 22 Jul 2024 03:08:56 -0700 (PDT)
+ AJvYcCW0mDsJ3zQk9jnMe/ca2uYSgUexc7I3VACuEemnvSxeOObTQ3bl04DnrldHVIlTlG+IwXrO1C8VH6N6sUYvmjQchB0PDQ==
+X-Gm-Message-State: AOJu0YxccdyKHX87RjideG/iKnLCfDMGKydXwrLYtUAWt4ZN2xuYsD8s
+ WOhfjU7KGAqj9jVz38OWI2m0izvQPhLvN7IRKiPjG4cG7Y8+CIUPe+DLNg2hmg==
+X-Google-Smtp-Source: AGHT+IHxRu04HV3eqcmBXiT//P1DULpXC0Zht0dkl38HKYNpW2ogtmhHatTsyVwHOyNVp8MI94cGaQ==
+X-Received: by 2002:a05:6602:6d05:b0:805:3d47:19d6 with SMTP id
+ ca18e2360f4ac-81aa9bce5ccmr827004539f.6.1721642961394; 
+ Mon, 22 Jul 2024 03:09:21 -0700 (PDT)
 Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7a3c91db6asm408187966b.148.2024.07.22.03.08.55
+ 8926c6da1cb9f-4c24284184fsm1150349173.63.2024.07.22.03.09.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jul 2024 03:08:56 -0700 (PDT)
-Message-ID: <20d1a83c-9463-40b6-b0b6-e43c57614b8f@monstr.eu>
-Date: Mon, 22 Jul 2024 12:08:53 +0200
+ Mon, 22 Jul 2024 03:09:21 -0700 (PDT)
+Message-ID: <1d4f445f-dbe3-4701-a90f-b65b656bbb59@monstr.eu>
+Date: Mon, 22 Jul 2024 12:09:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 37/37] board: xilinx: Remove duplicate newlines
+Subject: Re: [PATCH 24/37] board: opalkelly: Remove duplicate newlines
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com
 References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
- <20240719104948.323791-37-marek.vasut+renesas@mailbox.org>
+ <20240719104948.323791-24-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
 From: Michal Simek <monstr@monstr.eu>
-In-Reply-To: <20240719104948.323791-37-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240719104948.323791-24-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,122 +104,21 @@ On 7/19/24 12:49, Marek Vasut wrote:
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->   board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c | 2 --
->   board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c    | 2 --
->   board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c    | 2 --
->   board/xilinx/zynq/zynq-zed/ps7_init_gpl.c      | 2 --
->   board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c     | 3 ---
->   5 files changed, 11 deletions(-)
+>   board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c b/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
-> index 602a789e775..e7f1d6ef5ec 100644
-> --- a/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
-> +++ b/board/xilinx/zynq/zynq-microzed/ps7_init_gpl.c
-> @@ -4060,7 +4060,6 @@ unsigned long ps7_post_config_3_0[] = {
->       //
+> diff --git a/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c b/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c
+> index 0cbfc08183c..1c63277d928 100644
+> --- a/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c
+> +++ b/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c
+> @@ -254,7 +254,6 @@ unsigned long ps7_reset_apu_3_0[] = {
+>   	EMIT_EXIT(),
 >   };
 >   
 > -
->   unsigned long ps7_pll_init_data_2_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> @@ -8263,7 +8262,6 @@ unsigned long ps7_post_config_2_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_1_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> diff --git a/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
-> index 9343683f4d7..48001269cd7 100644
-> --- a/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
-> +++ b/board/xilinx/zynq/zynq-zc702/ps7_init_gpl.c
-> @@ -4167,7 +4167,6 @@ unsigned long ps7_post_config_3_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_2_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> @@ -8483,7 +8482,6 @@ unsigned long ps7_post_config_2_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_1_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> diff --git a/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
-> index 6b153aa3796..76ef5d9323e 100644
-> --- a/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
-> +++ b/board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c
-> @@ -4136,7 +4136,6 @@ unsigned long ps7_post_config_3_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_2_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> @@ -8421,7 +8420,6 @@ unsigned long ps7_post_config_2_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_1_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> diff --git a/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
-> index 6f2edf16c24..67642798b41 100644
-> --- a/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
-> +++ b/board/xilinx/zynq/zynq-zed/ps7_init_gpl.c
-> @@ -4026,7 +4026,6 @@ unsigned long ps7_post_config_3_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_2_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> @@ -8195,7 +8194,6 @@ unsigned long ps7_post_config_2_0[] = {
->       //
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_1_0[] = {
->       // START: top
->       // .. START: SLCR SETTINGS
-> diff --git a/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c b/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
-> index 04d2e5f1375..6a3236ce2d2 100644
-> --- a/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
-> +++ b/board/xilinx/zynq/zynq-zybo/ps7_init_gpl.c
-> @@ -4082,7 +4082,6 @@ unsigned long ps7_post_config_3_0[] = {
->   	/* */
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_2_0[] = {
->   	/* START: top */
->   	/* .. START: SLCR SETTINGS */
-> @@ -8313,7 +8312,6 @@ unsigned long ps7_post_config_2_0[] = {
->   	/* */
->   };
->   
-> -
->   unsigned long ps7_pll_init_data_1_0[] = {
->   	/* START: top */
->   	/* .. START: SLCR SETTINGS */
-> @@ -12477,7 +12475,6 @@ unsigned long ps7_post_config_1_0[] = {
->   	/* */
->   };
->   
-> -
->   #include "xil_io.h"
->   
->   unsigned long *ps7_mio_init_data = ps7_mio_init_data_3_0;
-
+>   int ps7_post_config(void)
+>   {
+>   	return ps7_config(ps7_post_config_3_0);
 
 Reviewed-by: Michal Simek <michal.simek@amd.com>
 
@@ -233,5 +132,3 @@ Maintainer of Linux kernel - Xilinx Microblaze
 Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
 U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
 TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
-
-
