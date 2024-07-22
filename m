@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 023BEC3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 10:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 854F3C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 10:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78D8488276;
-	Mon, 22 Jul 2024 12:09:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E3D1587EDC;
+	Mon, 22 Jul 2024 12:10:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="UepjY7H5";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="qQMJcFCw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8CFC88263; Mon, 22 Jul 2024 12:09:24 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id 7D82F87E50; Mon, 22 Jul 2024 12:10:05 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2ED287E50
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 12:09:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86EDD87EFA
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 12:10:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7fe8d029fbeso161506839f.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:09:22 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a77bf336171so664683666b.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:10:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1721642961; x=1722247761;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1721643003; x=1722247803;
  darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=zFMn63Y6UALjTceLm9QpUxvJ+xBtLUiM8IOCsYhYz6Y=;
- b=UepjY7H5hKybD7q1fNlvtUm5U76kRq3dvASvhKaFFDdtlHxZOgPTpbJLDeE0Ke8BZz
- LaoVd1+8m6bkCLOvnkA+4IWoTeskoUKAh0IUnKmoX/oYLpNiSWCZ7UYTm0h+Pu6kixym
- ahr3UX3Yilqg8bloCIgac0nGr29uxyQaJNMh24DvLDpe+VTwvcHCLb7L71rtYUhqrnS4
- VRk7l+MYgi8lniW4Gd41vG6ziEQ2AH/mhe4Npd1vXGhaFWX42cVLBdypg9D2iiglBWvg
- cYo7pGYh0FCyFx3muGea2P1FfjRD+7UfDhPQpr9sWLqgln8ByKxWo7JpFWaz5usByisS
- CYzg==
+ bh=gwby0DLx207A3u/XK1S0AmzJBsrVAaYH6t9rwQAzl1k=;
+ b=qQMJcFCw0t9Lk41gpP7H30SCM3KiUBnaLwfv+/AX+JKtQ8eEeLPG+OCLfOqzMH3Nr+
+ +e4hWT8YgbKHd50aLPh5L0BYBzTnfeL9hZ30PH1iXUjtC3GftGOysAobL/VBTHt1bUPG
+ k1nZ+CL0ykSTQunYxo/ev4NK77xBGTNhXNSZ6jxb9kfqeaQfXWZZy6q3zmdHCnqHgPJU
+ tnB92k3C30tjPshYSsKuSDQebNEnDNtsH+Hi8OQq5YkSUj8yZZm4XSj3x/0EgbtbVqdf
+ E2+QQ13xN2EBWLtSpl2zq9sqz9vGHNHUi+0FiEm2oMSo8V/DTMcj9fhdnPOpmkb+9z6l
+ mHWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721642961; x=1722247761;
+ d=1e100.net; s=20230601; t=1721643003; x=1722247803;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zFMn63Y6UALjTceLm9QpUxvJ+xBtLUiM8IOCsYhYz6Y=;
- b=jKYD4ujHQ6kAxl6jsnTojLLskfrrjVeAPK9XMoCU9a+Nh1u7jdJmOEnZIhvhJPCgv/
- AeC6wI0D99Ero92y1yN5wOoIRIbBrEYs/veFF5LmSwLvCqAHz6kgRnatiAmFHcV4y2IA
- o+4WwGAW3qn5WnoxdAiRTYH0yUNwre2vW8wuYbyb4rSVRZRoXikLrEmjQzs8F0o47TGE
- 47u51NatXYaKMKFtzVsWiM3b7KvtVA58lJLmSIUrV2xV9IwQ2uowDmRXKgb7xClfZ5XR
- uDKTAMuWv2BK6qtZDB8tB+b9g8WeZ5rk70R9GMkyKANOHWdaJZXk/plmj+6qrquJt+fj
- w2cQ==
+ bh=gwby0DLx207A3u/XK1S0AmzJBsrVAaYH6t9rwQAzl1k=;
+ b=NrAZl5aoa1SNL/O/1xzzpXyJ8m/FKDVugnvPEBawshyWMt4SHottWDSkeQ/2Myk5dY
+ yeOIcIedtsF3+ZJnQKscJDBXOXmM8BXOM2YG6QgUVarNv0wIm3TiAfin4cj61DzhGYUp
+ cLwP2WkTVmHeYDx24ni5kaW7zFsCw72lEw0xy2AQB/VAlUwsAu3g5zLpsTL1j49LnpVi
+ JoWxVyZ6ohCyPbybOAxbG121jZ2f6cCL59jP8hjzKJsySRMsPI9bTdugFpqiS1y7Qa7D
+ iQBP5aGzCTiV/WtBvxT6TMO+MT/xp1LMO+cH6o2B+kqzoZey0C4FPB2BTikLOB96i0Fb
+ p7pA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0mDsJ3zQk9jnMe/ca2uYSgUexc7I3VACuEemnvSxeOObTQ3bl04DnrldHVIlTlG+IwXrO1C8VH6N6sUYvmjQchB0PDQ==
-X-Gm-Message-State: AOJu0YxccdyKHX87RjideG/iKnLCfDMGKydXwrLYtUAWt4ZN2xuYsD8s
- WOhfjU7KGAqj9jVz38OWI2m0izvQPhLvN7IRKiPjG4cG7Y8+CIUPe+DLNg2hmg==
-X-Google-Smtp-Source: AGHT+IHxRu04HV3eqcmBXiT//P1DULpXC0Zht0dkl38HKYNpW2ogtmhHatTsyVwHOyNVp8MI94cGaQ==
-X-Received: by 2002:a05:6602:6d05:b0:805:3d47:19d6 with SMTP id
- ca18e2360f4ac-81aa9bce5ccmr827004539f.6.1721642961394; 
- Mon, 22 Jul 2024 03:09:21 -0700 (PDT)
+ AJvYcCWlG1m16p3VPAKSZTDXt5e8M6l94jI7uVAQ3C0VBBI196usGEt7ffwc2azCVg0bkdVekpGVpfkSr6Nl+wp+DtbctOfzqA==
+X-Gm-Message-State: AOJu0Ywr+R2giSArHsnJTtaSvEvhdd/2ER6PnJP717FPCoBNYOd8kvfL
+ p/L0Pv3uG1pD6w7Yt9XfqT6HpPv2MvR7onfIm3MI47fleNUDIBzer6RuS3D8Lg==
+X-Google-Smtp-Source: AGHT+IEv0O1XDS1Zm2Y24+orwH3tQjWdVrM9HeYEwH6lfghYIFT2ZEQrEsytym+pGD3kTNo7D36x5Q==
+X-Received: by 2002:a17:906:d555:b0:a77:ba4d:a4ea with SMTP id
+ a640c23a62f3a-a7a41c921e1mr663623566b.23.1721643002925; 
+ Mon, 22 Jul 2024 03:10:02 -0700 (PDT)
 Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
  by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4c24284184fsm1150349173.63.2024.07.22.03.09.19
+ a640c23a62f3a-a7a3c91caabsm412641366b.143.2024.07.22.03.10.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jul 2024 03:09:21 -0700 (PDT)
-Message-ID: <1d4f445f-dbe3-4701-a90f-b65b656bbb59@monstr.eu>
-Date: Mon, 22 Jul 2024 12:09:17 +0200
+ Mon, 22 Jul 2024 03:10:02 -0700 (PDT)
+Message-ID: <d81aa73b-9d23-4cd6-b078-2090b5d27bb5@monstr.eu>
+Date: Mon, 22 Jul 2024 12:10:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 24/37] board: opalkelly: Remove duplicate newlines
+Subject: Re: [PATCH 12/40] drivers: fpga: Remove duplicate newlines
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com
-References: <20240719104948.323791-1-marek.vasut+renesas@mailbox.org>
- <20240719104948.323791-24-marek.vasut+renesas@mailbox.org>
+References: <20240720124239.7553-1-marek.vasut+renesas@mailbox.org>
+ <20240720124239.7553-12-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
 From: Michal Simek <monstr@monstr.eu>
-In-Reply-To: <20240719104948.323791-24-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240720124239.7553-12-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,26 +99,107 @@ X-Virus-Status: Clean
 
 
 
-On 7/19/24 12:49, Marek Vasut wrote:
+On 7/20/24 14:40, Marek Vasut wrote:
 > Drop all duplicate newlines. No functional change.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->   board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c | 1 -
->   1 file changed, 1 deletion(-)
+>   drivers/fpga/ACEX1K.c   | 1 -
+>   drivers/fpga/fpga.c     | 1 -
+>   drivers/fpga/ivm_core.c | 1 -
+>   drivers/fpga/lattice.c  | 1 -
+>   drivers/fpga/spartan2.c | 2 --
+>   drivers/fpga/spartan3.c | 2 --
+>   6 files changed, 8 deletions(-)
 > 
-> diff --git a/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c b/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c
-> index 0cbfc08183c..1c63277d928 100644
-> --- a/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c
-> +++ b/board/opalkelly/zynq/zynq-syzygy-hub/ps7_init_gpl.c
-> @@ -254,7 +254,6 @@ unsigned long ps7_reset_apu_3_0[] = {
->   	EMIT_EXIT(),
->   };
+> diff --git a/drivers/fpga/ACEX1K.c b/drivers/fpga/ACEX1K.c
+> index cb7877a8afe..3de9011ac06 100644
+> --- a/drivers/fpga/ACEX1K.c
+> +++ b/drivers/fpga/ACEX1K.c
+> @@ -79,7 +79,6 @@ int ACEX1K_info( Altera_desc *desc )
+>   	return FPGA_SUCCESS;
+>   }
 >   
 > -
->   int ps7_post_config(void)
->   {
->   	return ps7_config(ps7_post_config_3_0);
+>   /* ------------------------------------------------------------------------- */
+>   /* ACEX1K Passive Serial Generic Implementation                                  */
+>   
+> diff --git a/drivers/fpga/fpga.c b/drivers/fpga/fpga.c
+> index 38ba6c21ea2..1f6782537de 100644
+> --- a/drivers/fpga/fpga.c
+> +++ b/drivers/fpga/fpga.c
+> @@ -30,7 +30,6 @@ static void fpga_no_sup(char *fn, char *msg)
+>   		printf("No FPGA support!\n");
+>   }
+>   
+> -
+>   /* fpga_get_desc
+>    *	map a device number to a descriptor
+>    */
+> diff --git a/drivers/fpga/ivm_core.c b/drivers/fpga/ivm_core.c
+> index b9cecdd8720..3c9a01e5110 100644
+> --- a/drivers/fpga/ivm_core.c
+> +++ b/drivers/fpga/ivm_core.c
+> @@ -580,7 +580,6 @@ void ispVMFreeMem(void)
+>   	}
+>   }
+>   
+> -
+>   /*
+>    *
+>    * ispVMDataSize
+> diff --git a/drivers/fpga/lattice.c b/drivers/fpga/lattice.c
+> index 036580cad70..3f481e38565 100644
+> --- a/drivers/fpga/lattice.c
+> +++ b/drivers/fpga/lattice.c
+> @@ -35,7 +35,6 @@ extern unsigned short g_usIntelDataIndex;
+>   extern unsigned short g_usIntelBufferSize;
+>   extern char *const g_szSupportedVersions[];
+>   
+> -
+>   /*
+>    * ispVMDelay
+>    *
+> diff --git a/drivers/fpga/spartan2.c b/drivers/fpga/spartan2.c
+> index 9cd6cb7f0fb..906649ea181 100644
+> --- a/drivers/fpga/spartan2.c
+> +++ b/drivers/fpga/spartan2.c
+> @@ -85,7 +85,6 @@ static int spartan2_info(xilinx_desc *desc)
+>   	return FPGA_SUCCESS;
+>   }
+>   
+> -
+>   /* ------------------------------------------------------------------------- */
+>   /* Spartan-II Slave Parallel Generic Implementation */
+>   
+> @@ -285,7 +284,6 @@ static int spartan2_sp_dump(xilinx_desc *desc, const void *buf, size_t bsize)
+>   	return ret_val;
+>   }
+>   
+> -
+>   /* ------------------------------------------------------------------------- */
+>   
+>   static int spartan2_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
+> diff --git a/drivers/fpga/spartan3.c b/drivers/fpga/spartan3.c
+> index b4d87d47d93..98405589134 100644
+> --- a/drivers/fpga/spartan3.c
+> +++ b/drivers/fpga/spartan3.c
+> @@ -91,7 +91,6 @@ static int spartan3_info(xilinx_desc *desc)
+>   	return FPGA_SUCCESS;
+>   }
+>   
+> -
+>   /* ------------------------------------------------------------------------- */
+>   /* Spartan-II Slave Parallel Generic Implementation */
+>   
+> @@ -293,7 +292,6 @@ static int spartan3_sp_dump(xilinx_desc *desc, const void *buf, size_t bsize)
+>   	return ret_val;
+>   }
+>   
+> -
+>   /* ------------------------------------------------------------------------- */
+>   
+>   static int spartan3_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
 
 Reviewed-by: Michal Simek <michal.simek@amd.com>
 
@@ -132,3 +213,4 @@ Maintainer of Linux kernel - Xilinx Microblaze
 Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
 U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
 TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+
