@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE547C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 04:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57AC6C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 04:10:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37D8388001;
-	Mon, 22 Jul 2024 06:08:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC58E8800C;
+	Mon, 22 Jul 2024 06:10:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721621321;
-	bh=Zd1mnrbWUw6mkmiQXDuc6n5yVOm+KjYsXzfGyQnUHgg=;
+	s=phobos-20191101; t=1721621452;
+	bh=N6jahHnNLNv99K8u4nyIMvxRU0hiKdDzcrl1lcaW0D8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=PMT+uLzJUmek3EHJm9xpTSPzCiloPxtWNy9HukuiYZOjJ1K3y7CeYzHYcMLQa0LC+
-	 j7pZk0P3XW7zjnu8U44PQWyBOgvM8t/XM60FfZg0RbN3ZCJGih0P4sA2DnJLBs3r1N
-	 LvDDQnfV7zkgxLjR8j+2e6FxDMRrTYibmPDRsjchaSpEO64QQnDWEvMRc++GWVJZ1v
-	 tg63NqeTn4tTAKCoxX5zOA8DCFlx5mfweQznYBnK2I0lafJhDhtb026tzmYKFB4pYV
-	 gTeAM3Vmd1RlyX5tK3VkMVpjUVqWGWPvjCqu+4lRJYjZ3qcgpmRjBrg7eG5uVlnutm
-	 VrrlWCzPFmVdg==
+	b=dzEhJF7Bm7+1hemTLIFb9S1dP3Mzqgn6CMrKV7fB00/WF06Je1O+eABDsck4WnYSF
+	 E1A8f0Omx8h2r16e5vwmhhLEBogDLoB69uC3xvZ2Y06bFjdCfNSAyCdNqPFezEUdnV
+	 XRBElppQ81ss6KbUl9n25VCfjiajhTKs3ZO9XWmWXFkoXTqzG42XM/vi/frMa/6gq2
+	 l8LN5RFvQgMtZX0O3mj41sWgq5r17ioAL4o3jSkTq9K9sz3EJdj2G3ECI0cC8tCDCt
+	 jGMIOxNIMgZtCcTQGXcgsTPugNsQqmvenwufumznj2DT1ih3HbdJDedjibRlxAVc/e
+	 bZP9J1AUQuXTQ==
 Received: from [192.168.1.107] (87-97-112-163.pool.digikabel.hu
  [87.97.112.163])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9CAB58808B;
- Mon, 22 Jul 2024 06:08:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id EA49C87FCD;
+ Mon, 22 Jul 2024 06:10:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1721621319;
- bh=Zd1mnrbWUw6mkmiQXDuc6n5yVOm+KjYsXzfGyQnUHgg=;
+ s=phobos-20191101; t=1721621452;
+ bh=N6jahHnNLNv99K8u4nyIMvxRU0hiKdDzcrl1lcaW0D8=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=rc2j6/e/6m3tDxekD2OxhvL5gL/aVvQ/15Hw3F6c9lGx/AezlGXVwCfuqdljZMwel
- qzJUgRxAB42BFDrYqq0KRH7vIx+ruGKOEzZCwmhoed204t2/uVZ0Z2chedWlHO1Bzs
- rKvzSZNWMUc5nT1qPsovwrrCtcSpOvGY2IjtnlKVwfMNp7Ir+ucMGaOdbrzGVtFtsS
- 1DvM2EG61+53nz0/ceKsepZEU4CDeOQ9dV5ih0xvEi+nZEarSSMscD2DcbqZiAX+wF
- DmsbZu9nsYtkGHDpp3yY+rGaV9gDru/TPC1CZXk+7qDdcQp1yRec1SnAPZmiL5xFf5
- ZPtZd9o5LpyIA==
-Message-ID: <d7cdfb24-6718-428d-a02d-867bf921a6ca@denx.de>
-Date: Mon, 22 Jul 2024 06:08:09 +0200
+ b=stnDUvhVz583gE4yQjCsq+LIxWIzmUNprd9oZXPoAzoswgtbnBj4bIH0GL/MmlsYx
+ da0lU1cJr15hKoIz3uFUU+GH3f2OF2xSwLKZBJ3xwz33T1jR9cZWUukv9we9AwouFy
+ 3sVXHbOECiiX2wdL6/tE0W8Twdq+Oy1EokFE8Mv8NgP6cFEZZJBZl9mICifgV79ap+
+ /G9E2WOOfVqjz75O4rj3n4341M+sVxPUjq1EjIK1IBax4nkIewTzxabd1dkzjB6irR
+ s+YAB7YlEOAx9gqt0xM0Usz8TA/68l7AnIZ3XPjevJxRxA529dpEEH4Kd6ui80Mkap
+ kw2s7+7ushVYg==
+Message-ID: <44ce0337-0bf5-b773-89bc-79a54488c04e@denx.de>
+Date: Mon, 22 Jul 2024 06:10:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v2] board: keymile: convert to CONFIG_DM_I2C
+Subject: Re: [PATCH 11/20] keymile: Remove use of legacy I2C
 Content-Language: en-US
-To: Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-References: <20240719191656.3323947-1-agust@denx.de>
- <20240719232422.3403700-1-agust@denx.de>
+To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Holger Brunck <holger.brunck@hitachienergy.com>
+References: <20240718173611.4014274-1-sjg@chromium.org>
+ <20240718173611.4014274-12-sjg@chromium.org> <20240720013611.5d7408ab@crub>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240719232422.3403700-1-agust@denx.de>
+In-Reply-To: <20240720013611.5d7408ab@crub>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,36 +72,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Anatolij,
+Hello Simon,
 
-On 20.07.24 01:24, Anatolij Gustschin wrote:
-> The conversion to DM_I2C is mandatory, rework to remove
-> use of legacy I2C API.
+On 20.07.24 01:36, Anatolij Gustschin wrote:
+> Hi Simon,
 > 
-> Signed-off-by: Anatolij Gustschin <agust@denx.de>
-> Cc: Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>
-> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
-> Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-> ---
+> On Thu, 18 Jul 2024 18:36:02 +0100
+> Simon Glass sjg@chromium.org wrote:
 > 
-> Changes in v2:
->   - convert pg_wcom_expu1_update_defconfig and
->     pg_wcom_seli8_update_defconfig files
->   - remove obsolete CONFIG_SYS_I2C_MXC_I2C* in all defconfigs
+>> Drop this old code to permit removal of legacy I2C code.
+>>
+>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>> ---
+>>
+>>   board/keymile/Kconfig         |  3 --
+>>   board/keymile/common/common.c | 69 -----------------------------------
+>>   2 files changed, 72 deletions(-)
 > 
->   board/keymile/Kconfig                          |  3 ---
->   board/keymile/common/common.c                  | 12 ------------
->   board/keymile/common/common.h                  |  3 +--
->   board/keymile/common/ivm.c                     | 18 ++++++------------
->   .../keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c  |  8 +++++++-
->   configs/pg_wcom_expu1_defconfig                |  8 ++++----
->   configs/pg_wcom_expu1_update_defconfig         |  8 ++++----
->   configs/pg_wcom_seli8_defconfig                |  8 ++++----
->   configs/pg_wcom_seli8_update_defconfig         |  8 ++++----
->   include/configs/km/pg-wcom-ls102xa.h           | 13 -------------
->   10 files changed, 30 insertions(+), 59 deletions(-)
+> Please do not remove this i2c deblocking code. I've updated the
+> DM_I2C conversion patch, it preserves this deblocking code, but
+> legacy I2C code is removed:
+> 
+>   https://patchwork.ozlabs.org/project/uboot/patch/20240719232422.3403700-1-agust@denx.de/
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+Can you add this patch to your patchseries and resend a v2?
 
 Thanks!
 
