@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED88C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 23:32:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D7EC3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 23:32:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7F2688602;
-	Tue, 23 Jul 2024 01:30:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 226FC88739;
+	Tue, 23 Jul 2024 01:30:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iuWs4gcR";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P/Z5RGr0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NG3wf/PU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kupf6ld+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 376C788739; Tue, 23 Jul 2024 01:30:08 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 779D288614; Tue, 23 Jul 2024 01:30:11 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7027288496
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 01:29:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F406E884C6
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 01:30:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WSc2F29kxz9sWt;
- Tue, 23 Jul 2024 01:29:57 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WSc2J52B9z9sp5;
+ Tue, 23 Jul 2024 01:30:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721690997;
+ s=mail20150812; t=1721691000;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GwQGV6/4ttUzagm5bue0uRJJc7MqUz/j62dvB7qn+XY=;
- b=iuWs4gcRUoMYqacpwRf+Fl75Gq1MhvPPgsKE1ZpEo0kKwcsaxC6hLxAKX5kBecJ3DYERwQ
- odCWKoGisN7KXMt2P2mXUrf1iKx9wpQnQi5B2BmBP45t/pFvxR0zxm9M9SOP4U9rqaic4V
- TW5uwLFy952+/GT8ZyyFcpR+rbVAWpVbeoAeQnpL8RQWNILHf9Oy0hcsEhd0SevhItOedK
- rI00F6QR/lxOgnVkbjvBTtttrVfIVmOB+AC63kS6zgyxkWHFLgibst0thofjrZaQdaiu7g
- CXkdnIhaR6VlcNEuOxif0yUIn5MYadqn7wsoNgGYQJOyrfnqTMBwQCzibKqsCQ==
+ bh=deC50xjst5lBiH+JQWv6CylOkjvi4uB47SPRqWLMkak=;
+ b=NG3wf/PUY0wAeBG2L9H0cqPzkM8seS2t0CKQf3ZGCZb4F6nJp98B/lLyNrw7nWoIEAE39a
+ EChdYdT9+CtcMekqbbEyqwOdDFhND6wMzuOE5gYsNuy8xQ1SzngwZqPDXYwxe25pI1J+lq
+ f248lKN/UyLaytUyR/6eGhyVtN52KM/R/sD2kyUxFMAG1LsaHAZ0Td2ea4vwKDCqapIg7e
+ UVsenTPE5TwFqK+77V8erBtISOFNIUTkO142x/hqLx9H/CSaTBV40+mBzKgIkzm2wzZoxV
+ 4lFSte3QPtMNuMHxl+hSTHP/SjtZmcMKUJ9UUk5gmandWbGNkb/u8rKFI88hRA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1721690995;
+ s=mail20150812; t=1721690998;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GwQGV6/4ttUzagm5bue0uRJJc7MqUz/j62dvB7qn+XY=;
- b=P/Z5RGr0CWjAQq22j/0wnpItiMQqI3VK/19bfwa3dVxjj79+3mywaJ+cO8okzVqlR4au5d
- 1hzc8Z7JPYoh9lWpEorFXJl8DkjMg/V/OSMaJhy11Th647mo3mFRdliXgtaKD7qrhWVegW
- rwMYdBAW0+yE+1toMqgqmoy3uZJn/BikB5wcPdzboEN9Zg/hg0SNQsY1RcKndKg233waiW
- zhaxdLvm3CCHFpbcStOyv+wrYvTstXkaKfsK/r2W7SImLfa9Fu/4RwTnuN13PnY+nwKGI4
- f3/yi55rqhM4wNmWhM2R/Yllo+5tEch3dNIq6Wx2cjmhEJhtu8DRyQY3wHhG/A==
+ bh=deC50xjst5lBiH+JQWv6CylOkjvi4uB47SPRqWLMkak=;
+ b=kupf6ld+G7azZ0z8TNmGXwf3fJAesAjFLX69pF5ILMjid2Z8nQMOeE8i4qXVs0UKcNMSr/
+ pdZe+vEEo2Gxm3X7E2RgcGwONF1lgSQSrg0wCpM3P/lyFDHtZp5EgkU58ofun7y7ZAMk+n
+ 8T0uzrsQZRYRKiaNExnNSw0dA72766I0Q/NTnERA8EBa5KW/qKw9M87L2/PZAXJT+HakUX
+ E25wejO//Mfq18Six0N1efzuLBsOrhyoAN7VpgAZoPbDQn0/lSLhmfAZ0xVePvqEqS85IU
+ lJx+/GF/aREljB5gEf3Y7Q0ofQaK6yPLB6z9kORM0fQRgEiLsmfSs31usrlbXQ==
 To: u-boot@lists.denx.de
 Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
  trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 10/15] include: power: Remove duplicate newlines
-Date: Tue, 23 Jul 2024 01:28:29 +0200
-Message-ID: <20240722232910.91249-10-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 14/15] include: zfs: Remove duplicate newlines
+Date: Tue, 23 Jul 2024 01:28:33 +0200
+Message-ID: <20240722232910.91249-14-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240722232910.91249-1-marek.vasut+renesas@mailbox.org>
 References: <20240722232910.91249-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 35b66630e956202f1ac
-X-MBO-RS-META: 7sckkqiopjpg1kwdmtntws37gsrdo5yq
+X-MBO-RS-ID: aabcdc8d44cc6b33025
+X-MBO-RS-META: h5kfxm5d5gxduknz113gzdxhfbwxz8ye
+X-Rspamd-Queue-Id: 4WSc2J52B9z9sp5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,34 +91,45 @@ Drop all duplicate newlines. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- include/power/max17042_fg.h | 1 -
- include/power/tps65910.h    | 1 -
- 2 files changed, 2 deletions(-)
+ include/zfs/spa.h     | 1 -
+ include/zfs/zfs.h     | 1 -
+ include/zfs/zfs_acl.h | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/include/power/max17042_fg.h b/include/power/max17042_fg.h
-index ec8377d3707..e417012459d 100644
---- a/include/power/max17042_fg.h
-+++ b/include/power/max17042_fg.h
-@@ -43,7 +43,6 @@ enum {
- #define RCOMP0			0x0060
- #define TempCo			0x1015
+diff --git a/include/zfs/spa.h b/include/zfs/spa.h
+index cd2ddf58e77..df01d4964fb 100644
+--- a/include/zfs/spa.h
++++ b/include/zfs/spa.h
+@@ -10,7 +10,6 @@
+ #ifndef ZFS_SPA_HEADER
+ #define	ZFS_SPA_HEADER 1
  
 -
- #define MAX17042_POR (1 << 1)
- 
- #define MODEL_UNLOCK1		0x0059
-diff --git a/include/power/tps65910.h b/include/power/tps65910.h
-index ccc759acf66..645eabc2c4b 100644
---- a/include/power/tps65910.h
-+++ b/include/power/tps65910.h
-@@ -51,7 +51,6 @@ enum {
- #define TPS65910_REG_ST_OFF_1				(0x2)
- #define TPS65910_REG_ST_ON_LOW_POW			(0x3)
+ /*
+  * General-purpose 32-bit and 64-bit bitfield encodings.
+  */
+diff --git a/include/zfs/zfs.h b/include/zfs/zfs.h
+index 72d87452ddf..84154377bda 100644
+--- a/include/zfs/zfs.h
++++ b/include/zfs/zfs.h
+@@ -10,7 +10,6 @@
+ #ifndef	GRUB_ZFS_HEADER
+ #define	GRUB_ZFS_HEADER 1
  
 -
- /* VDD2 & VDD1 voltage selection register. (VDD2_OP_REG & VDD1_OP_REG) */
- #define TPS65910_OP_REG_SEL				(0x7F)
+ /*
+  * On-disk version number.
+  */
+diff --git a/include/zfs/zfs_acl.h b/include/zfs/zfs_acl.h
+index d6cc408d7f1..038c68f1386 100644
+--- a/include/zfs/zfs_acl.h
++++ b/include/zfs/zfs_acl.h
+@@ -38,5 +38,4 @@ typedef struct zfs_znode_acl {
+ 	uint8_t	z_ace_data[ZFS_ACE_SPACE]; /* space for embedded ACEs */
+ } zfs_znode_acl_t;
  
+-
+ #endif	/* _SYS_FS_ZFS_ACL_H */
 -- 
 2.43.0
 
