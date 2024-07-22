@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD2BC3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 18:00:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B75FFC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 18:00:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4B3C88680;
-	Mon, 22 Jul 2024 19:58:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97CE588214;
+	Mon, 22 Jul 2024 19:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aX6UV1XQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fjfedCg0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AB0788645; Mon, 22 Jul 2024 19:57:58 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 6A98D884AC; Mon, 22 Jul 2024 19:57:58 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2983E88214
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E573884DC
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3d9400a1ad9so2615923b6e.1
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:55 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-260e5b2dfb5so2637409fac.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721671074; x=1722275874; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721671075; x=1722275875; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z0y0jof263srhDFgZAkkgTTJzKgOeUotT2aFOff6tn8=;
- b=aX6UV1XQhJmpwRWX5dHY9XCM9UNdMHDA3XpGQScz3h4jSIpbaAUo435QWMOpOSqCjB
- nsz/CQsPguXWAiivMmFaVStFiqJbhAMoQTtWLsKUbAKIJiBRwpRg24GalqSywzZWyo1S
- G6c3RUeVv3CTy7aZvkaXuRYT0hObibeS+jAKsd7mT9nx1J0g2vXocbjh5j/zn4lfa/Fk
- CjqbxWNPv0LtPIpCy9CvNUVrc7KrBKRL9cCsBX3pGq5tESi9nw4TaPK2XoZRve9vdWLZ
- 44qqAnEEB+IuS0FOkErZNiou9Te2P5NpJGaRupEPNKY4E09N6gbuSMHkfdrVICRDuqs+
- wj5A==
+ bh=H/9bLsSODM8QlNrXZwkKXMW66HF6+d8MEEjib5AaJSY=;
+ b=fjfedCg0TReC3A018fXmy5Tu6uN91G9YJILAzPDYbD/Olnph3kp2PXy8FgEbGHHCW+
+ wVDU+TRNraXQqB+KsK3YX5JIMfVE7k9KEpcj5xwkgQZwo3V4TfQ2l6wLH9E2eS6bBt20
+ YjcZe2vejNXxFeFvMIuljqtN1cPg9Fn2mptWkpBzAj4L0pzRYbyrESy8Rc8RbQhCznOl
+ z0easfrswg27r8W6rMoEENvh0lYfm3PBI3ofkGfUj+xn3tex958Rn6Gyq9i5XvOCVnEx
+ NOktrm1QOVhI2xy4X9jFxBXETn1TKtR7Q8vpg9UQXJX+S6tPNgRqG8LVCFQ63vM3xb0C
+ 36BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721671074; x=1722275874;
+ d=1e100.net; s=20230601; t=1721671075; x=1722275875;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z0y0jof263srhDFgZAkkgTTJzKgOeUotT2aFOff6tn8=;
- b=gSMe8+WV+Stwg65vo+0EmgJupuHxKDVvLADgj30yDhowAv1XjZk7XF6HhGcNMvgLwF
- Phndv77fEathNtGs6dn7ofi3ncO94RQx79XhEp1hvxm2VTWIaei3I0M0qgE97YTmSK3K
- oCsEofDFY72a0a6ybnofrCCNYiibTjL9XHdAyEx9zIw0napHMHloHNCjkZzCFUXnOpVm
- oswG4rmUf+WaC0O1jSvt47MRkzkKNkmPwDxBljy+TSSXwxrhFNX04bxxhmYGZWdDNLnZ
- rro/vk7GxUDyXK8WJGiX9YraVNGC1Qkx1GBn04Erv+9j4rddBMHXOFnfMjjElXxdtVlw
- v5Fw==
+ bh=H/9bLsSODM8QlNrXZwkKXMW66HF6+d8MEEjib5AaJSY=;
+ b=m4MTk92dtpDk3nYnMH4itzN5odguaVC3niaKyyuumsIGEN85IpxTwwDbzeMIlmyzof
+ VnzYZqUG5woWMlRtLBwpp3svL9f3wM/tb2HHHUwbSyp9xUaEjbzdiQU5JGEKmuXiI5B8
+ Sapj6XsenURWT1JiMduCGTA3HAfVn/VhXhZGT4pZNVhFvZDeFNxEB4dGIdXmQIEDe9FC
+ pL2uUzaYvlBk6w0q32Ptx7YoRfNQX3AtCsO/pWCTiCz8OIwu6QkljTtZM15gt5YYYIBV
+ RUphyZzE9h2F/hqqC3ZJWxQNUP/yTi0JDbTJmU4DHUZhVo1D3X+/xtvb1pxawsXAZrbJ
+ HiEg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPawodHcO0KPboX5ILOo+d2PkDzaodD53/IdETK4AoXHsNeYjHxScI9ANckZNu9VHE5lem6Y8YpmX0tg4G0OB0sC8pbQ==
-X-Gm-Message-State: AOJu0Yyvcid0Nucgr8o1mfeTbxKA+Pyq9nOTSZQm29n76iDSulo3TV49
- JVuT4moJ3UmgMVtSNzvHx19vk17MYrZFHmOPehdS7n5Vq3MfFFsrJEzN428MDDw=
-X-Google-Smtp-Source: AGHT+IHdoCNJUHnrtBpsJ0pnFTiDvemzCPMrW6HLBLPCFEhL+c2w2AxXy+WskW108h2uKJ6IrfF/ew==
-X-Received: by 2002:a05:6808:f07:b0:3d9:2b45:1585 with SMTP id
- 5614622812f47-3dae5fb24bamr10121131b6e.22.1721671073938; 
- Mon, 22 Jul 2024 10:57:53 -0700 (PDT)
+ AJvYcCXhs27BctvFOjq7pzAL7tkxEpcbbOPd1DwpT86TszxACg1Dui7vwn8D6Gnvwm7Lk5fIQJnRhU6n6LD/+4Ii+MsX2F0GJg==
+X-Gm-Message-State: AOJu0YyBOlu/0IGoqkityzPobvgizNlnrKjSzH/wm7fD5uDYC6au1xqd
+ xhUmgiLZQRwOQq39V3JpKzR1wwqgSxhl8Ce7qaGMQvwNZPs61YIr9bNpVyd0bZ0=
+X-Google-Smtp-Source: AGHT+IF3Su/FEsZR2A2JJ12fVaapiYUjjldnwSSPJR7kpfscwOeZ5i2Lo+F1b8UOp8y+FExF/jV4Xg==
+X-Received: by 2002:a05:6871:80e:b0:261:1267:fe95 with SMTP id
+ 586e51a60fabf-264690938d6mr395447fac.9.1721671075077; 
+ Mon, 22 Jul 2024 10:57:55 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dae099013asm1596433b6e.25.2024.07.22.10.57.53
+ 586e51a60fabf-2610c76db96sm1787543fac.14.2024.07.22.10.57.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 10:57:53 -0700 (PDT)
+ Mon, 22 Jul 2024 10:57:54 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>,
 	Minkyu Kang <promsoft@gmail.com>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 17/38] mmc: exynos_dw_mmc: Fix obtaining the base address
- of controller
-Date: Mon, 22 Jul 2024 12:57:19 -0500
-Message-Id: <20240722175740.6985-18-semen.protsenko@linaro.org>
+Subject: [PATCH v3 18/38] mmc: exynos_dw_mmc: Fix getting private data in
+ exynos_dwmci_board_init()
+Date: Mon, 22 Jul 2024 12:57:20 -0500
+Message-Id: <20240722175740.6985-19-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 References: <20240722175740.6985-1-semen.protsenko@linaro.org>
@@ -104,18 +104,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Getting the base address with outdated fdtdec_get_addr() API and further
-casting it to (void *) leads to next build warning on ARM64 platforms:
+In case of CONFIG_DM_MMC, host->priv actually holds (struct udevice *),
+and not (struct dwmci_exynos_priv_data *). This makes *priv pointer
+invalid and may lead to Synchronous Abort during its dereference later
+in exynos_dwmci_board_init(). Fix it by extracting
+exynos_dwmmc_get_priv() helper from exynos_dwmci_clksel() and using it
+for getting the private data in exynos_dwmci_board_init()
 
-    In function 'exynos_dwmci_get_config':
-        warning: cast to pointer from integer of different size
-        [-Wint-to-pointer-cast]
-            host->ioaddr = (void *)base;
-
-Use livetree API instead (dev_read_addr_ptr()), which handles this
-correctly.
-
-Fixes: a082a2dde061 ("EXYNOS5: DWMMC: Added FDT support for DWMMC")
+Fixes: 3537ee879e04 ("mmc: exynos_dw_mmc: support the Driver mode for Exynos")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
 Changes in v3:
@@ -124,37 +120,53 @@ Changes in v3:
 Changes in v2:
   - (none)
 
- drivers/mmc/exynos_dw_mmc.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ drivers/mmc/exynos_dw_mmc.c | 20 +++++++++++++-------
+ 1 file changed, 13 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index 377c9e6d90b9..a86d58663c1b 100644
+index a86d58663c1b..aa542c13fea8 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -155,7 +155,7 @@ static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
- 				   struct dwmci_exynos_priv_data *priv)
+@@ -41,18 +41,24 @@ struct dwmci_exynos_priv_data {
+ 	u32 sdr_timing;
+ };
+ 
++static struct dwmci_exynos_priv_data *exynos_dwmmc_get_priv(
++		struct dwmci_host *host)
++{
++#ifdef CONFIG_DM_MMC
++	return container_of(host, struct dwmci_exynos_priv_data, host);
++#else
++	return host->priv;
++#endif
++}
++
+ /*
+  * Function used as callback function to initialise the
+  * CLKSEL register for every mmc channel.
+  */
+ static int exynos_dwmci_clksel(struct dwmci_host *host)
  {
- 	int err = 0;
--	u32 base, timing[3];
-+	u32 timing[3];
+-#ifdef CONFIG_DM_MMC
+-	struct dwmci_exynos_priv_data *priv =
+-		container_of(host, struct dwmci_exynos_priv_data, host);
+-#else
+-	struct dwmci_exynos_priv_data *priv = host->priv;
+-#endif
++	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
++
+ 	dwmci_writel(host, DWMCI_CLKSEL, priv->sdr_timing);
  
- 	/* Extract device id for each mmc channel */
- 	host->dev_id = pinmux_decode_periph_id(blob, node);
-@@ -173,12 +173,11 @@ static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
- 	host->buswidth = fdtdec_get_int(blob, node, "samsung,bus-width", 4);
+ 	return 0;
+@@ -82,7 +88,7 @@ unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
  
- 	/* Set the base address from the device node */
--	base = fdtdec_get_addr(blob, node, "reg");
--	if (!base) {
-+	host->ioaddr = dev_read_addr_ptr(dev);
-+	if (!host->ioaddr) {
- 		printf("DWMMC%d: Can't get base address\n", host->dev_index);
- 		return -EINVAL;
- 	}
--	host->ioaddr = (void *)base;
+ static void exynos_dwmci_board_init(struct dwmci_host *host)
+ {
+-	struct dwmci_exynos_priv_data *priv = host->priv;
++	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
  
- 	/* Extract the timing info from the node */
- 	err =  fdtdec_get_int_array(blob, node, "samsung,timing", timing, 3);
+ 	if (host->quirks & DWMCI_QUIRK_DISABLE_SMU) {
+ 		dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
 -- 
 2.39.2
 
