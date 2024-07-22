@@ -4,82 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84207C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 13:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C18C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 14:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F250886DBD;
-	Mon, 22 Jul 2024 15:22:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ED54787D1A;
+	Mon, 22 Jul 2024 16:21:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CE+w9slw";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KHfiFUFs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 703F187C86; Mon, 22 Jul 2024 15:22:35 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 61BA088387; Mon, 22 Jul 2024 16:21:30 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05F498304A
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 15:22:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3F8587BF4
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 16:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5a10bb7bcd0so3919573a12.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 06:22:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2cb5deb027dso2510231a91.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 07:21:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721654552; x=1722259352; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zjuYZTiMpVgmM/Lp8BAnPINbfYCrQjJXmkw8AwJPQc8=;
- b=CE+w9slw8uwH465u5g80dzhki5+FJncrhNlDWS5uH5atLt26LR1x8VAeoRJk6E4chb
- SfNbaYjKCb7oPfwb4O77Yi8LNySDZAB14tONceG2AM5DCXAIw/JSnPSkjg9qldZ6VRxp
- ZeDb3MZGdsga3BEp/Fh0uhP0Bgm+Lb2lydftiyYD92qPM3ORr35BNOM/JNfN0I0gV4wN
- mughB5ixduyeR500QPn70y2Su5Nze6AsBF9LGPaNrNTros7tY29GtVgSqqwasVtHtiVr
- y/7BbeDZWddqEyNboFtbbngZwZuBbDNr0IuvQi4Wx9uvvPtyFXtE3+/nMe3NpbZuVVT5
- rDBg==
+ d=linaro.org; s=google; t=1721658086; x=1722262886; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RKuXls5FBaWPMrQJeMe+EpL0RMaMbZ4PK91NL4QvSpY=;
+ b=KHfiFUFsklGcpxi74ZHZnfoLvh5FtK3IOzkOvNlNihayEKYAlhS/mhLYhiL+5AYcQY
+ cB0NQCRQ9LpvoIG+ZIJXkH4DbfWhi0NeOp186iI5FbVcv/SIJC/LqdNKMYDJAt6SQs9a
+ q40e9A5lmn8CgHldu7f5sF0Oi/j4vUzw4qdI+4+UX0aOeoQfAPEfD/C4o7uGlg4PbK/1
+ aR83TSXW3E+bA1j04fhg7TMG8hh0yMusiJkN2nXjrMrANPz4uRIvAdGeo/gpEtohyMSV
+ TJOnUZlkCgpfE83jKry3RSFR8cnjNWyQoNt1Pr7fkN59w6eHmZpNMJIK7lsZdxSjwikh
+ 5yyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721654552; x=1722259352;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zjuYZTiMpVgmM/Lp8BAnPINbfYCrQjJXmkw8AwJPQc8=;
- b=t82cvvmA5XGzx7wmXE5vz08MbIskRLxD8+5cN5N3GAQ3F/faEP8sDxvmf1Lkl+wMki
- wodfUQThfWtRGnpmFsu3Vmiseqw6thsbO0zULVhNrZCKho2PCKkUpLocB7JADrOIR4g7
- 8oCmsGcploPkdMtcsOY45VlUKrVIKyrtWXsyUEX+sxlcmV2JxUY8bCp4KwWQqALHYdHf
- JTAULMrE0We5AwYOMTUEkBuSzjWLZ4otXud0eWtOy+16Qyaam17Tat6/rD4MzjVPmNS3
- Au6CAlaTtSWcSoNQCOxL+lCksu1BOPR/Fi2YkgOatkdyu9FaMZxA+2jUCpHQOtroQxfQ
- sFCA==
+ d=1e100.net; s=20230601; t=1721658086; x=1722262886;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RKuXls5FBaWPMrQJeMe+EpL0RMaMbZ4PK91NL4QvSpY=;
+ b=tEzQT2ZCDuYLIwCPe8b+rrI28wvRCT9IepiS5ImBOk7Cf5dN17NfGVdiYPGQgHeOZ6
+ xzgXfc1raa9CYoqq8zkTsVJ4HpzE6yI3JWBzo50lHk0yPa/V2toNUe3hbfxwVnBeaI/Y
+ iNo9MsXhr1Ey0SsBUupBOZeURBVou7BbkUTwEvxo7hl2lqW6zAsybB8eaNh7vSz62qs+
+ QODY2C7mxsKxQx33TOcmbku8hgIF8EWyVh7s1Etw3ASM/nwaA7srL6FKvvRPUgcwzLLo
+ vF48YA00PkHJVURhP0zejDRzcFCINxsUaoHrXAEodn5TgClHvjehZaDNNaq2e7zVRguC
+ cjVA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAPH3YYF9Ei2RU/2oAUHn/A0BW7OMZgyJm9sVb8F2VBom3vQFKDsdn0e000HPCH+A+SEC9gVyVXYLg24lfWyNKy5mtTA==
-X-Gm-Message-State: AOJu0Yz6uts2NtzNo+jgDxhmVn25B1mYAV64pxBhxsJKKGEhQiTYmiWK
- r644dftm8NNUA6AJ/6hfKb+Q7fiaNJvP/c/1H0rGvSx9N8wsKL5hpJqtNGH9CJQ=
-X-Google-Smtp-Source: AGHT+IF4dly26+UvKitXIXrRr3FB8C1XFVuYko4cSI8k08Jj60NLeH4dl9GvnkzKnAQX4tf8veqUFg==
-X-Received: by 2002:a17:907:97c4:b0:a79:8149:967a with SMTP id
- a640c23a62f3a-a7a4c0100c6mr484417766b.16.1721654552280; 
- Mon, 22 Jul 2024 06:22:32 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:364e:69c1:558c:15f4?
- ([2a01:e0a:3cb:7bb0:364e:69c1:558c:15f4])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7a856c9fffsm738466b.163.2024.07.22.06.22.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jul 2024 06:22:31 -0700 (PDT)
-Message-ID: <7cb33dec-5a54-4dc4-9516-a761245279eb@linaro.org>
-Date: Mon, 22 Jul 2024 15:22:30 +0200
+ AJvYcCXJDTXcJsmRfM8wJDAAvZo1dpTbFH5zzCcXa0pdbkrEBWPyCjYWP/4QocLBIuKmmFNre5CcKEOjMd0HjvW0OxpO05fUgQ==
+X-Gm-Message-State: AOJu0YxpFphvr9pQbAtGchZF0ZKSyfRYX8zAKSJpmKH0Di/0yxz761tB
+ 3c3PfnS/V31MKuPDS84//v7tTcRCdrISw8z5yr4bQuGZ3RbPw+tDV6agDdkewLghrYqFyrocGby
+ eIWNyKRowm7Nn89lUPrYhNafeapKHdyng5dRN4w==
+X-Google-Smtp-Source: AGHT+IFYolqZwKslppn7vYf3qp+BaZKiz1PdKdvJMfPgWi3fyCDVYabCxLbN9b85RKjtgxN/AFez/FFnFVv8jjbbEXs=
+X-Received: by 2002:a17:90a:f988:b0:2c7:aba6:d32f with SMTP id
+ 98e67ed59e1d1-2cd27430c37mr6055850a91.22.1721658085838; Mon, 22 Jul 2024
+ 07:21:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tools: Add script to update git subtree projects
-To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
-Cc: sumit.garg@linaro.org, Tom Rini <trini@konsulko.com>
-References: <20240719141245.49186-1-raymond.mao@linaro.org>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240719141245.49186-1-raymond.mao@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-9-raymond.mao@linaro.org>
+ <CAC_iWjLxSbtcSwM1iQjj7DG3sJLY5Q=3fnuOphkJKXcQyO4TtQ@mail.gmail.com>
+ <CAFLszTiezZ4hx-ToVT+CzE6aAwvjea_5-=VuqBWcGjAqOoH2Mg@mail.gmail.com>
+ <CAEfUkUJ+U87Pb0YC9m18BpUgc94n0NcqTAEqoP3f5j3SkoB4PQ@mail.gmail.com>
+ <CAFLszTg+Nx43kB2rMYTyHS36mKjkQc643p2Gd8Dax5ivwOtokw@mail.gmail.com>
+ <20240719152540.GB561963@bill-the-cat>
+ <CAFLszTihZMPK124jAVvbnm7CT1SZ8wFJq920C9vMF2vz8jmpnQ@mail.gmail.com>
+ <20240720171314.GF561963@bill-the-cat>
+In-Reply-To: <20240720171314.GF561963@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 22 Jul 2024 10:21:14 -0400
+Message-ID: <CAEfUkUJF8if1iOHDgFswThBv8-wJCxpkGnbEQ_qc_NoNqfYHYw@mail.gmail.com>
+Subject: Re: [PATCH v4 08/29] hash: integrate hash on mbedtls
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, manish.pandey2@arm.com, 
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Eddie James <eajames@linux.ibm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,204 +116,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Sat, 20 Jul 2024 at 13:13, Tom Rini <trini@konsulko.com> wrote:
 
-On 7/19/24 16:12, Raymond Mao wrote:
-> Recently we are introducing multiple git subtree projects and
-> it is the right time to have a universal script to update
-> various subtrees and replace the dts/update-dts-subtree.sh.
-> 
-> update-subtree.sh is a wrapper of git subtree commands.
-> 
-> Usage: From U-Boot top directory,
-> run
-> $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
-> for pulling a tag from the upstream.
-> Or run
-> $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
-> for cherry-pick a commit from the upstream.
-> 
-> Currently <subtree-name> supports dts, mbedtls and lwip.
-> 
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  dts/update-dts-subtree.sh | 48 ----------------------
->  tools/update-subtree.sh   | 86 +++++++++++++++++++++++++++++++++++++++
->  2 files changed, 86 insertions(+), 48 deletions(-)
->  delete mode 100755 dts/update-dts-subtree.sh
->  create mode 100755 tools/update-subtree.sh
-> 
-> diff --git a/dts/update-dts-subtree.sh b/dts/update-dts-subtree.sh
-> deleted file mode 100755
-> index a57b78a41d3..00000000000
-> --- a/dts/update-dts-subtree.sh
-> +++ /dev/null
-> @@ -1,48 +0,0 @@
-> -#!/bin/sh
-> -# SPDX-License-Identifier: GPL-2.0+
-> -#
-> -# Copyright 2024 Linaro Ltd.
-> -#
-> -# Usage: from the top level U-Boot source tree, run:
-> -# $ ./dts/update-dts-subtree.sh pull <release-tag>
-> -# $ ./dts/update-dts-subtree.sh pick <commit-id>
-> -#
-> -# The script will pull changes from devicetree-rebasing repo into U-Boot
-> -# as a subtree located as <U-Boot>/dts/upstream sub-directory. It will
-> -# automatically create a squash/merge commit listing the commits imported.
-> -
-> -set -e
-> -
-> -merge_commit_msg=$(cat << EOF
-> -Subtree merge tag '$2' of devicetree-rebasing repo [1] into dts/upstream
-> -
-> -[1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
-> -EOF
-> -)
-> -
-> -remote_add_and_fetch() {
-> -    if ! git remote get-url devicetree-rebasing 2>/dev/null
-> -    then
-> -        echo "Warning: Script automatically adds new git remote via:"
-> -        echo "    git remote add devicetree-rebasing \\"
-> -        echo "        https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git"
-> -        git remote add devicetree-rebasing \
-> -            https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
-> -    fi
-> -    git fetch devicetree-rebasing master
-> -}
-> -
-> -if [ "$1" = "pull" ]
-> -then
-> -    remote_add_and_fetch
-> -    git subtree pull --prefix dts/upstream devicetree-rebasing \
-> -        "$2" --squash -m "${merge_commit_msg}"
-> -elif [ "$1" = "pick" ]
-> -then
-> -    remote_add_and_fetch
-> -    git cherry-pick -x --strategy=subtree -Xsubtree=dts/upstream/ "$2"
-> -else
-> -    echo "usage: $0 <op> <ref>"
-> -    echo "  <op>     pull or pick"
-> -    echo "  <ref>    release tag [pull] or commit id [pick]"
-> -fi
-> diff --git a/tools/update-subtree.sh b/tools/update-subtree.sh
-> new file mode 100755
-> index 00000000000..bf41a31de2b
-> --- /dev/null
-> +++ b/tools/update-subtree.sh
-> @@ -0,0 +1,86 @@
-> +#!/bin/sh
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright (c) 2024 Linaro Limited
-> +# Author: Raymond Mao <raymond.mao@linaro.org>
-> +#
-> +# Usage: from the top level U-Boot source tree, run:
-> +# $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
-> +# Or:
-> +# $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
-> +#
-> +# The script will pull changes from subtree repo into U-Boot.
-> +# It will automatically create a squash/merge commit listing the commits
-> +# imported.
-> +
-> +set -e
-> +
-> +repo_url_mbedtls="https://github.com/Mbed-TLS/mbedtls.git"
-> +repo_url_dts="https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git"
-> +repo_url_lwip="https://git.savannah.gnu.org/git/lwip.git"
-> +
-> +path_mbedtls="lib/mbedtls/external/mbedtls"
-> +path_dts="dts/upstream"
-> +path_lwlip="lib/lwip/lwip"
-> +
-> +print_usage() {
-> +    echo "usage: $0 <op> <subtree-name> <ref>"
-> +    echo "  <op>           pull or pick"
-> +    echo "  <subtree-name> mbedtls or dts or lwip"
-> +    echo "  <ref>          release tag [pull] or commit id [pick]"
-> +}
-> +
-> +if [ $# -ne 3 ]; then
-> +    print_usage
-> +    exit 1
-> +fi
-> +
-> +op=$1
-> +subtree_name=$2
-> +ref=$3
-> +
-> +if [ "$subtree_name" = "mbedtls" ]; then
-> +    repo_url=$repo_url_mbedtls
-> +    remote_name="mbedtls_upstream"
-> +    path=$path_mbedtls
-> +elif [ "$subtree_name" = "dts" ]; then
-> +    repo_url=$repo_url_dts
-> +    remote_name="devicetree-rebasing"
-> +    path=$path_dts
-> +elif [ "$subtree_name" = "lwip" ]; then
-> +    repo_url=$repo_url_lwip
-> +    remote_name="lwip_upstream"
-> +    path=$path_lwip
-> +else
-> +    echo "Invalid subtree name: $subtree_name"
-> +    print_usage
-> +    exit 1
-> +fi
+> On Sat, Jul 20, 2024 at 01:36:02PM +0100, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 19 Jul 2024 at 16:25, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Jul 19, 2024 at 04:05:09PM +0100, Simon Glass wrote:
+> > > > Hi Raymond,
+> > > >
+> > > > On Thu, 18 Jul 2024 at 17:46, Raymond Mao <raymond.mao@linaro.org>
+> wrote:
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Fri, 5 Jul 2024 at 04:36, Simon Glass <sjg@chromium.org> wrote:
+> > > > >>
+> > > > >> Hi,
+> > > > >>
+> > > > >> On Wed, Jul 3, 2024, 09:56 Ilias Apalodimas <
+> ilias.apalodimas@linaro.org> wrote:
+> > > > >> >
+> > > > >> > Hi Raymond
+> > > > >> >
+> > > > >> > On Tue, 2 Jul 2024 at 21:27, Raymond Mao <
+> raymond.mao@linaro.org> wrote:
+> > > > >> > >
+> > > > >> > > Integrate common/hash.c on the hash shim layer so that hash
+> APIs
+> > > > >> > > from mbedtls can be leveraged by boot/image and efi_loader.
+> > > > >> > >
+> > > > >> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > >> > > ---
+> > > > >> > > Changes in v2
+> > > > >> > > - Use the original head files instead of creating new ones.
+> > > > >> > > Changes in v3
+> > > > >> > > - Add handle checkers for malloc.
+> > > > >> > > Changes in v4
+> > > > >> > > - None.
+> > > > >> > >
+> > > > >> > >  common/hash.c | 143
+> ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > > > >> > >  1 file changed, 143 insertions(+)
+> > > > >> > >
+> > > > >> > > diff --git a/common/hash.c b/common/hash.c
+> > > > >> > > index ac63803fed9..96caf074374 100644
+> > > > >> > > --- a/common/hash.c
+> > > > >> > > +++ b/common/hash.c
+> > > > >> > > @@ -35,6 +35,141 @@
+> > > > >> > >  #include <u-boot/sha512.h>
+> > > > >> > >  #include <u-boot/md5.h>
+> > > > >> > >
+> > > > >> > > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
+> > > > >> > > +
+> > > > >> > > +static int hash_init_sha1(struct hash_algo *algo, void
+> **ctxp)
+> > > > >> > > +{
+> > > > >> > > +       int ret;
+> > > > >> > > +       mbedtls_sha1_context *ctx =
+> malloc(sizeof(mbedtls_sha1_context));
+> > > > >>
+> > > > >>
+> > > > >> Why do we need allocation here? We should avoid it where possible.
+> > > > >>
+> > > > > The API "hash_init_sha1(struct hash_algo *algo, void **ctxp)" is
+> passing a pointer
+> > > > > address and expecting to get the context from the pointer, it is
+> reasonable to do the
+> > > > > allocation.
+> > > > > On top of that, this patch doesn't make changes on this API
+> itself, but just adapted
+> > > > > it to MbedTLS stacks, thus you can see the allocation is needed by
+> the original API
+> > > > > as well.
+> > > >
+> > > > Oh dear., I see Now I am looking at the code. It is full of #ifdefs
+> > > > for different cases.
+> > > >
+> > > > The whole thing needs a bit of a rationalisation before adding
+> another case.
+> > >
+> > > If you're referring too the hash_algo struct, I'm not sure we can do
+> > > something different that doesn't in turn increase size globally. And
+> > > long term some of this may be able to go away if we can remove
+> > > non-mbedTLS options.
+> >
+> > Well, at least using the existing functions rather than writing
+> > entirely new ones would help.
+> >
+> > The real culprit here is the hardware-acceleration stuff, but making
+> > the software side messy too is not nice. Hashing should move to a
+> > linker-list approach for the implementation, and probably driver model
+> > for the hardware acceleration.
+>
+> I'm fine with looking at that, after mbedtls is merged and we're looking
+> at what can be removed / cleaned up. Perhaps we'll be able to shift
+> most/all of the hardware assisted algorithms to being handled within
+> mbedtls, I don't know.
+>
+> Yes, I think to handle this within mbedtls is straight forward.
 
-Suggestion: this and the repo_url_* / path_* values could be moved into
-a function like so:
-
-set_params() {
-    case "$1" in
-        mbedtls)
-            path=lib/mbedtls/external/mbedtls
-            repo_url=https://github.com/Mbed-TLS/mbedtls.git
-            ;;
-        ... other cases here ...
-        *)
-            echo "Invalid subtree name: $subtree_name"
-            print_usage
-            exit 1
-    esac
-}
-
-set_params $1
-
-> +
-> +merge_commit_msg=$(cat << EOF
-> +Subtree merge tag '$ref' of $subtree_name repo [1] into $path
-> +
-> +[1] $repo_url
-> +EOF
-> +)
-> +
-> +remote_add_and_fetch() {
-> +    if [ -z "$(git remote get-url $remote_name 2>/dev/null)" ]; then
-> +        echo "Warning: Script automatically adds new git remote via:"
-> +        echo "    git remote add $remote_name \\"
-> +        echo "        $repo_url"
-> +        git remote add $remote_name $repo_url
-> +    fi
-> +    git fetch $remote_name master
-> +}
-> +
-> +if [ "$op" = "pull" ]; then
-> +    remote_add_and_fetch
-> +    git subtree pull --prefix $path $remote_name "$ref" --squash -m "$merge_commit_msg"
-> +elif [ "$op" = "pick" ]; then
-> +    remote_add_and_fetch
-> +    git cherry-pick -x --strategy=subtree -Xsubtree=$path/ "$ref"
-> +else
-> +    print_usage
-> +    exit 1
-> +fi
-
-Overall LGTM. FWIW:
-
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-
-Thanks,
--- 
-Jerome
+Regards,
+Raymond
