@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FDB7C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:59:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C79ADC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 18:00:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFDD688629;
-	Mon, 22 Jul 2024 19:57:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54F1188636;
+	Mon, 22 Jul 2024 19:57:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="upt8c3L+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QTswfDU4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 827CF88005; Mon, 22 Jul 2024 19:57:55 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id C032088005; Mon, 22 Jul 2024 19:57:55 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B757884DC
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEBBD885C4
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5d5846f799dso419973eaf.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:52 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-70360eeb7d2so2292928a34.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721671071; x=1722275871; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721671069; x=1722275869; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GiWkBHfBCMF0meV1xEDsmcygKVcTz36qXrwmUIbHoYU=;
- b=upt8c3L+eAuXpFmXLKDuVQhLXmjMfJTaQBffSjzFdenWtAmbpue9/fLTffceU41E/y
- yBMUWfWSnJgeU7kLr+ytYC/NBFjLNHPzcZWOw0yViYQHcocWGE6C99O72dQebkmo7oMv
- 9LbY1+rUSrUftLD9TcRAeClg2MSLxUm2ekgXQk6Z1ItZpViskIhKDnE1WNArv79fGZZw
- GNxwMetdfmFfmC14E9e8WtBWdL3f4kLwzLEoa7LxvTKuWkoJrtkC5FaxCDiunSUwam05
- Td7qp4Dwxq93XazuYJbpTR33AaukaxLhT31Ir7m5WReKxfON4k1GDX7olUF5mElFaCRg
- 4IVQ==
+ bh=1aUcQOokL3xqy+2RQdZCNrjA8SK63j9nZZpmOhUjF74=;
+ b=QTswfDU43Kglxw7LlOiXNCrcKkmqwjBcEyW6Oc6M3X7B7SshQaXChtN2MqCqfMiYPn
+ SnnG8/Vv2en6fZBpmspbLS6rakcFX30zvT6+hPLFRMNhRwDy6L3JhsD7lCeKAWnxUcld
+ D5FTxZx6jjuXt2X115OO07uuTTsafiIxU9S0xwhbvyf3ncy1Cny4rxZ5kc4vgAhNZm9d
+ UfkqypU4pcPPlqiJ7Sq3U0a2/XAMWmYDP/tOQs28OZCKVWVmO26aDckBP//sThqvE1iY
+ //MGDEdKm2enwguIuBTbU720UTszfm2YerkDFMuTwF+MqKLOjJt+SZS66S0zAxwx91+D
+ T8Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721671071; x=1722275871;
+ d=1e100.net; s=20230601; t=1721671069; x=1722275869;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GiWkBHfBCMF0meV1xEDsmcygKVcTz36qXrwmUIbHoYU=;
- b=MGi2nLiWzfLynKcBMKMhgpUhgCNHh3LGtH8XhQmjqyckLDJz+zhAHgJ91VZdmS0pAQ
- bXltS2eK/E0XfEcl6CZ5lgJ2Gv3KE8g5RkWJf4teVWIec6PRpL1fScU5FqTeblOsTkXV
- UYAOK2W/D5V2ZR0LdwYU+P5ERq4ZFLb4Fke5jGBaiaQlVroyzKaakOYavXJBf+ckQNdJ
- CLhp2vF/y7WNRUTFNaaKNKU8+o1yV6HveZ86aRSebbpQurejesy+fhvWOxfhM4M7IERo
- 6WE1Wz+wZzdyEvXe3l4FcqaqPggj1GN3Md0RqTZwSB9k8lLEA1cjN/oFTAqaM0r7VUC8
- Fp6A==
+ bh=1aUcQOokL3xqy+2RQdZCNrjA8SK63j9nZZpmOhUjF74=;
+ b=bzwYeaMt4WLXvADpKYDCA08kFvD2kAFB/9C904uXCK8loNzmSQ0WB7T1BGG4I5p4vP
+ JcoIIH/59L54xfv6k9ODilS6PR+7JZ7D/z6x5zJosf48A0OJ2QhwadZ+xVO5G12ceOcd
+ ODRpjKxzZXy4SzmplxwJIUOF8KsiI/ah3Ft0wggDSm+qaHHTLgCZcbVwkYtpZ7on0gtK
+ A/PzW+XxVLzt2I8WgYWgbiZFkk3hfaCDS7T11rgxL8avyMvsun+WQxhpnCxL6yHJYn1O
+ Ooceo/KaUxIYR/fK/95n2GdIP2gvdIo5wcboKmuiCE8JiOLR5c6wjaH1yHIL9hC8vHux
+ Oz+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWX3jERQHGhNUATRR55PJUZJ1IvOdCXNSj/54lbDsmNO5RPIfI5rEikoXydS6ZhM9A2TXuBYSBS78A2/DwYnDIawPKk4A==
-X-Gm-Message-State: AOJu0YycSBc9AO+d5UtUA/0eKGRrvOYzXS+FhPuwCkufifwq68lLEg0P
- M91IIEX0Q6qyKltS+ySsToqopEUgjL1eQQ49EUqttJSxhFO554P1mseawbDbZeA=
-X-Google-Smtp-Source: AGHT+IG/v3Uu3bWXUuszGjZ6nLHXg7HpnihKIZGI9HHA8YmDoiIgYiZkJ5laZMUWdUMwlrgTVQl6wg==
-X-Received: by 2002:a05:6870:171c:b0:254:8afa:6914 with SMTP id
- 586e51a60fabf-26121636797mr7384128fac.34.1721671070941; 
- Mon, 22 Jul 2024 10:57:50 -0700 (PDT)
+ AJvYcCWPHQG/1E74cH6cu4rTE6QpoRm15zdNoXUGd2ytdVdo+BT7iCYU3n/sF5pQcBbGtZXOa8scgPxik072w1EAIyuZyME3Rg==
+X-Gm-Message-State: AOJu0YwBxcC0kun1OPzV7nkPh4wBn7PqF5Kdezm6tsQKkIidxamm8qZ9
+ NKV8mucZy04TjNfWL5paN5ByqpVPo3NsfNWPCN3jhBMS6QhLRlrMeB9a9OqzL4E=
+X-Google-Smtp-Source: AGHT+IH6PoD+gw2637nIL+ROFsngyhvOvIRjwxjlWekUcXDJpy5vZY/4XXlDXyq0lyqqmHy/hWMcPQ==
+X-Received: by 2002:a05:6830:6f81:b0:703:783a:dad5 with SMTP id
+ 46e09a7af769-709009d69b7mr12198291a34.27.1721671069537; 
+ Mon, 22 Jul 2024 10:57:49 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2610c716a51sm1759718fac.7.2024.07.22.10.57.50
+ 46e09a7af769-708f60d73a8sm1665316a34.41.2024.07.22.10.57.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 10:57:50 -0700 (PDT)
+ Mon, 22 Jul 2024 10:57:49 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>,
 	Minkyu Kang <promsoft@gmail.com>
@@ -79,9 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 13/38] mmc: dw_mmc: Improve coding style
-Date: Mon, 22 Jul 2024 12:57:15 -0500
-Message-Id: <20240722175740.6985-14-semen.protsenko@linaro.org>
+Subject: [PATCH v3 11/38] mmc: dw_mmc: Replace fifoth_val property with
+ fifo-depth
+Date: Mon, 22 Jul 2024 12:57:13 -0500
+Message-Id: <20240722175740.6985-12-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 References: <20240722175740.6985-1-semen.protsenko@linaro.org>
@@ -103,491 +104,258 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix most of checkpatch warnings and other obvious style issues.
+Replace fifoth_val property with its fifo-depth counterpart in all DW
+MMC drivers. fifo-depth is a common property used in upstream Linux
+kernel. The FIFOTH register value will be calculated using fifo-depth
+value in DW MMC core (dw_mmc.c). This change reduces code duplication in
+platform drivers, and pulls common FIFOTH register value calculation
+into core dw_mmc driver where it belongs.
 
 No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 Changes in v3:
   - (none)
 
 Changes in v2:
-  - Added R-b tag from Quentin
+  - (none)
 
- drivers/mmc/dw_mmc.c |  69 ++++++++++----------
- include/dwmmc.h      | 149 ++++++++++++++++++++++---------------------
- 2 files changed, 110 insertions(+), 108 deletions(-)
+ drivers/mmc/dw_mmc.c          | 21 +++++++++++++--------
+ drivers/mmc/exynos_dw_mmc.c   | 10 +++++-----
+ drivers/mmc/ftsdc010_mci.h    |  1 -
+ drivers/mmc/hi6220_dw_mmc.c   |  7 +++----
+ drivers/mmc/nexell_dw_mmc.c   |  5 +----
+ drivers/mmc/rockchip_dw_mmc.c |  5 +----
+ drivers/mmc/snps_dw_mmc.c     |  6 ++----
+ drivers/mmc/socfpga_dw_mmc.c  |  4 ++--
+ include/dwmmc.h               |  4 ++--
+ 9 files changed, 29 insertions(+), 34 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index 8af665a00222..8551eac70185 100644
+index 7aa3dbbe83ad..8af665a00222 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -125,8 +125,9 @@ static void dwmci_prepare_desc(struct dwmci_host *host, struct mmc_data *data,
- 		if (blk_cnt <= 8) {
- 			flags |= DWMCI_IDMAC_LD;
- 			cnt = data->blocksize * blk_cnt;
--		} else
-+		} else {
- 			cnt = data->blocksize * 8;
-+		}
- 
- 		if (host->dma_64bit_address) {
- 			dwmci_set_idma_desc64(desc64, flags, cnt,
-@@ -150,10 +151,8 @@ static void dwmci_prepare_desc(struct dwmci_host *host, struct mmc_data *data,
- 	flush_dcache_range(data_start, roundup(data_end, ARCH_DMA_MINALIGN));
- }
- 
--static void dwmci_prepare_data(struct dwmci_host *host,
--			       struct mmc_data *data,
--			       void *cur_idmac,
--			       void *bounce_buffer)
-+static void dwmci_prepare_data(struct dwmci_host *host, struct mmc_data *data,
-+			       void *cur_idmac, void *bounce_buffer)
+@@ -218,8 +218,6 @@ static unsigned int dwmci_get_timeout(struct mmc *mmc, const unsigned int size)
+ static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+ 				    struct mmc_data *data, u32 mask)
  {
- 	const u32 idmacl = virt_to_phys(cur_idmac) & 0xffffffff;
- 	const u32 idmacu = (u64)virt_to_phys(cur_idmac) >> 32;
-@@ -277,7 +276,7 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
+-	const u32 fifo_depth = (((host->fifoth_val & RX_WMARK_MASK) >>
+-				 RX_WMARK_SHIFT) + 1) * 2;
+ 	const u32 int_rx = mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO);
+ 	const u32 int_tx = mask & DWMCI_INTMSK_TXDR;
+ 	int ret = 0;
+@@ -254,8 +252,8 @@ static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+ 			if (ret < 0)
+ 				break;
  
- 	for (;;) {
- 		mask = dwmci_readl(host, DWMCI_RINTSTS);
--		/* Error during data transfer. */
-+		/* Error during data transfer */
- 		if (mask & (DWMCI_DATA_ERR | DWMCI_DATA_TOUT)) {
- 			debug("%s: DATA ERROR!\n", __func__);
- 			ret = -EINVAL;
-@@ -286,16 +285,15 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
+-			len = fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
+-					    DWMCI_FIFO_MASK);
++			len = host->fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
++						  DWMCI_FIFO_MASK);
+ 			len = min(size, len);
+ 			for (i = 0; i < len; i++)
+ 				dwmci_writel(host, DWMCI_DATA, *buf++);
+@@ -656,16 +654,23 @@ static int dwmci_set_ios(struct mmc *mmc)
  
- 		ret = dwmci_data_transfer_fifo(host, data, mask);
- 
--		/* Data arrived correctly. */
-+		/* Data arrived correctly */
- 		if (mask & DWMCI_INTMSK_DTO) {
- 			ret = 0;
- 			break;
- 		}
- 
--		/* Check for timeout. */
-+		/* Check for timeout */
- 		if (get_timer(start) > timeout) {
--			debug("%s: Timeout waiting for data!\n",
--			      __func__);
-+			debug("%s: Timeout waiting for data!\n", __func__);
- 			ret = -ETIMEDOUT;
- 			break;
- 		}
-@@ -317,8 +315,8 @@ static int dwmci_dma_transfer(struct dwmci_host *host, uint flags,
- 	else
- 		mask = DWMCI_IDINTEN_TI;
- 
--	ret = wait_for_bit_le32(host->ioaddr + host->regs->idsts,
--				mask, true, 1000, false);
-+	ret = wait_for_bit_le32(host->ioaddr + host->regs->idsts, mask, true,
-+				1000, false);
- 	if (ret)
- 		debug("%s: DWMCI_IDINTEN mask 0x%x timeout\n", __func__, mask);
- 
-@@ -334,7 +332,7 @@ static int dwmci_dma_transfer(struct dwmci_host *host, uint flags,
- }
- 
- static int dwmci_set_transfer_mode(struct dwmci_host *host,
--		struct mmc_data *data)
-+				   struct mmc_data *data)
+ static void dwmci_init_fifo(struct dwmci_host *host)
  {
- 	unsigned long mode;
- 
-@@ -380,12 +378,12 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
- 		} else {
- 			if (data->flags == MMC_DATA_READ) {
- 				ret = bounce_buffer_start(&bbstate,
--						(void*)data->dest,
-+						(void *)data->dest,
- 						data->blocksize *
- 						data->blocks, GEN_BB_WRITE);
- 			} else {
- 				ret = bounce_buffer_start(&bbstate,
--						(void*)data->src,
-+						(void *)data->src,
- 						data->blocksize *
- 						data->blocks, GEN_BB_READ);
- 			}
-@@ -420,9 +418,9 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
- 	if (cmd->resp_type & MMC_RSP_CRC)
- 		flags |= DWMCI_CMD_CHECK_CRC;
- 
--	flags |= (cmd->cmdidx | DWMCI_CMD_START | DWMCI_CMD_USE_HOLD_REG);
-+	flags |= cmd->cmdidx | DWMCI_CMD_START | DWMCI_CMD_USE_HOLD_REG;
- 
--	debug("Sending CMD%d\n",cmd->cmdidx);
-+	debug("Sending CMD%d\n", cmd->cmdidx);
- 
- 	dwmci_writel(host, DWMCI_CMD, flags);
- 
-@@ -436,7 +434,7 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
- 	}
- 
- 	if (i == retry) {
--		debug("%s: Timeout.\n", __func__);
-+		debug("%s: Timeout\n", __func__);
- 		return -ETIMEDOUT;
- 	}
- 
-@@ -449,18 +447,17 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
- 		 * below shall be debug(). eMMC cards also do not favor
- 		 * CMD8, please keep that in mind.
- 		 */
--		debug("%s: Response Timeout.\n", __func__);
-+		debug("%s: Response Timeout\n", __func__);
- 		return -ETIMEDOUT;
- 	} else if (mask & DWMCI_INTMSK_RE) {
--		debug("%s: Response Error.\n", __func__);
-+		debug("%s: Response Error\n", __func__);
- 		return -EIO;
- 	} else if ((cmd->resp_type & MMC_RSP_CRC) &&
- 		   (mask & DWMCI_INTMSK_RCRC)) {
--		debug("%s: Response CRC Error.\n", __func__);
-+		debug("%s: Response CRC Error\n", __func__);
- 		return -EIO;
- 	}
- 
--
- 	if (cmd->resp_type & MMC_RSP_PRESENT) {
- 		if (cmd->resp_type & MMC_RSP_136) {
- 			cmd->response[0] = dwmci_readl(host, DWMCI_RESP3);
-@@ -556,24 +553,24 @@ static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
- 	unsigned long sclk;
- 	int ret;
- 
--	if ((freq == host->clock) || (freq == 0))
-+	if (freq == host->clock || freq == 0)
- 		return 0;
+-	if (!host->fifoth_val) {
++	u32 fifo_thr, fifoth_val;
 +
- 	/*
--	 * If host->get_mmc_clk isn't defined,
--	 * then assume that host->bus_hz is source clock value.
--	 * host->bus_hz should be set by user.
-+	 * If host->get_mmc_clk isn't defined, then assume that host->bus_hz is
-+	 * source clock value. host->bus_hz should be set by user.
- 	 */
--	if (host->get_mmc_clk)
-+	if (host->get_mmc_clk) {
- 		sclk = host->get_mmc_clk(host, freq);
--	else if (host->bus_hz)
-+	} else if (host->bus_hz) {
- 		sclk = host->bus_hz;
--	else {
--		debug("%s: Didn't get source clock value.\n", __func__);
-+	} else {
-+		debug("%s: Didn't get source clock value\n", __func__);
- 		return -EINVAL;
++	if (!host->fifo_depth) {
+ 		u32 fifo_size;
+ 
++		/*
++		 * Automatically detect FIFO depth from FIFOTH register.
++		 * Power-on value of RX_WMark is FIFO_DEPTH-1.
++		 */
+ 		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
+ 		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
+-		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
+-				   TX_WMARK(fifo_size / 2);
++		host->fifo_depth = fifo_size;
  	}
  
- 	if (sclk == freq)
--		div = 0;	/* bypass mode */
-+		div = 0; /* bypass mode */
- 	else
- 		div = DIV_ROUND_UP(sclk, 2 * freq);
+-	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
++	fifo_thr = host->fifo_depth / 2;
++	fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_thr - 1) | TX_WMARK(fifo_thr);
++	dwmci_writel(host, DWMCI_FIFOTH, fifoth_val);
+ }
  
-@@ -597,7 +594,7 @@ static int dwmci_set_ios(struct mmc *mmc)
- 	struct dwmci_host *host = (struct dwmci_host *)mmc->priv;
- 	u32 ctype, regs;
+ static void dwmci_init_dma(struct dwmci_host *host)
+diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+index a51f762988da..377c9e6d90b9 100644
+--- a/drivers/mmc/exynos_dw_mmc.c
++++ b/drivers/mmc/exynos_dw_mmc.c
+@@ -150,8 +150,8 @@ static int do_dwmci_init(struct dwmci_host *host)
+ 	return exynos_dwmci_core_init(host);
+ }
  
--	debug("Buswidth = %d, clock: %d\n", mmc->bus_width, mmc->clock);
-+	debug("Bus width = %d, clock: %d\n", mmc->bus_width, mmc->clock);
- 
- 	dwmci_setup_bus(host, mmc->clock);
- 	switch (mmc->bus_width) {
-@@ -711,10 +708,10 @@ static int dwmci_init(struct mmc *mmc)
- 	/* Enumerate at 400KHz */
- 	dwmci_setup_bus(host, mmc->cfg->f_min);
- 
--	dwmci_writel(host, DWMCI_RINTSTS, 0xFFFFFFFF);
-+	dwmci_writel(host, DWMCI_RINTSTS, 0xffffffff);
- 	dwmci_writel(host, DWMCI_INTMASK, 0);
- 
--	dwmci_writel(host, DWMCI_TMOUT, 0xFFFFFFFF);
-+	dwmci_writel(host, DWMCI_TMOUT, 0xffffffff);
- 
- 	dwmci_writel(host, DWMCI_BMOD, 1);
- 	dwmci_init_fifo(host);
-@@ -748,7 +745,7 @@ static const struct mmc_ops dwmci_ops = {
- #endif
- 
- void dwmci_setup_cfg(struct mmc_config *cfg, struct dwmci_host *host,
--		u32 max_clk, u32 min_clk)
-+		     u32 max_clk, u32 min_clk)
+-static int exynos_dwmci_get_config(const void *blob, int node,
+-				   struct dwmci_host *host,
++static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
++				   int node, struct dwmci_host *host,
+ 				   struct dwmci_exynos_priv_data *priv)
  {
- 	cfg->name = host->name;
- #ifndef CONFIG_DM_MMC
-@@ -784,7 +781,7 @@ int add_dwmci(struct dwmci_host *host, u32 max_clk, u32 min_clk)
- 	dwmci_setup_cfg(&host->cfg, host, max_clk, min_clk);
+ 	int err = 0;
+@@ -200,7 +200,7 @@ static int exynos_dwmci_get_config(const void *blob, int node,
+ 			priv->sdr_timing = DWMMC_MMC2_SDR_TIMING_VAL;
+ 	}
  
- 	host->mmc = mmc_create(&host->cfg, host);
--	if (host->mmc == NULL)
-+	if (!host->mmc)
- 		return -1;
+-	host->fifoth_val = fdtdec_get_int(blob, node, "fifoth_val", 0);
++	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
+ 	host->bus_hz = fdtdec_get_int(blob, node, "bus_hz", 0);
+ 	host->div = fdtdec_get_int(blob, node, "div", 0);
  
- 	return 0;
+@@ -216,8 +216,8 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 	struct dwmci_host *host = &priv->host;
+ 	int err;
+ 
+-	err = exynos_dwmci_get_config(gd->fdt_blob, dev_of_offset(dev), host,
+-				      priv);
++	err = exynos_dwmci_get_config(dev, gd->fdt_blob, dev_of_offset(dev),
++				      host, priv);
+ 	if (err)
+ 		return err;
+ 	err = do_dwmci_init(host);
+diff --git a/drivers/mmc/ftsdc010_mci.h b/drivers/mmc/ftsdc010_mci.h
+index 782d92be2f5f..36187cfa04f6 100644
+--- a/drivers/mmc/ftsdc010_mci.h
++++ b/drivers/mmc/ftsdc010_mci.h
+@@ -28,7 +28,6 @@ struct ftsdc010_chip {
+ 	int dev_index;
+ 	int dev_id;
+ 	int buswidth;
+-	u32 fifoth_val;
+ 	struct mmc *mmc;
+ 	void *priv;
+ 	bool fifo_mode;
+diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+index c68a9157bfcc..0302f5c296b9 100644
+--- a/drivers/mmc/hi6220_dw_mmc.c
++++ b/drivers/mmc/hi6220_dw_mmc.c
+@@ -36,7 +36,7 @@ struct hi6220_dwmmc_priv_data {
+ struct hisi_mmc_data {
+ 	unsigned int clock;
+ 	bool use_fifo;
+-	u32 fifoth_val;
++	u32 fifo_depth;
+ };
+ 
+ static int hi6220_dwmmc_of_to_plat(struct udevice *dev)
+@@ -125,7 +125,7 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
+ 	host->mmc = &plat->mmc;
+ 
+ 	host->fifo_mode = mmc_data->use_fifo;
+-	host->fifoth_val = mmc_data->fifoth_val;
++	host->fifo_depth = mmc_data->fifo_depth;
+ 	host->mmc->priv = &priv->host;
+ 	upriv->mmc = host->mmc;
+ 	host->mmc->dev = dev;
+@@ -158,8 +158,7 @@ static const struct hisi_mmc_data hi6220_mmc_data = {
+ static const struct hisi_mmc_data hi3798mv2x_mmc_data = {
+ 	.clock = 50000000,
+ 	.use_fifo = false,
+-	// FIFO depth is 256
+-	.fifoth_val = MSIZE(4) | RX_WMARK(0x7f) | TX_WMARK(0x80),
++	.fifo_depth = 256,
+ };
+ 
+ static const struct udevice_id hi6220_dwmmc_ids[] = {
+diff --git a/drivers/mmc/nexell_dw_mmc.c b/drivers/mmc/nexell_dw_mmc.c
+index 2e1ce54c7d50..80df617e07e9 100644
+--- a/drivers/mmc/nexell_dw_mmc.c
++++ b/drivers/mmc/nexell_dw_mmc.c
+@@ -186,10 +186,7 @@ static int nexell_dwmmc_probe(struct udevice *dev)
+ 	struct dwmci_host *host = &priv->host;
+ 	struct udevice *pwr_dev __maybe_unused;
+ 
+-	host->fifoth_val = MSIZE(0x2) |
+-		RX_WMARK(priv->fifo_size / 2 - 1) |
+-		TX_WMARK(priv->fifo_size / 2);
+-
++	host->fifo_depth = priv->fifo_size;
+ 	host->fifo_mode = priv->fifo_mode;
+ 
+ 	dwmci_setup_cfg(&plat->cfg, host, priv->max_freq, priv->min_freq);
+diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+index 1a10b7057a47..b2a46a95481c 100644
+--- a/drivers/mmc/rockchip_dw_mmc.c
++++ b/drivers/mmc/rockchip_dw_mmc.c
+@@ -138,10 +138,7 @@ static int rockchip_dwmmc_probe(struct udevice *dev)
+ 	if (ret < 0)
+ 		return ret;
+ #endif
+-	host->fifoth_val = MSIZE(0x2) |
+-		RX_WMARK(priv->fifo_depth / 2 - 1) |
+-		TX_WMARK(priv->fifo_depth / 2);
+-
++	host->fifo_depth = priv->fifo_depth;
+ 	host->fifo_mode = priv->fifo_mode;
+ 
+ #if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+diff --git a/drivers/mmc/snps_dw_mmc.c b/drivers/mmc/snps_dw_mmc.c
+index 9bdbe5070b1d..f30331e51f7e 100644
+--- a/drivers/mmc/snps_dw_mmc.c
++++ b/drivers/mmc/snps_dw_mmc.c
+@@ -81,7 +81,7 @@ static int snps_dwmmc_of_to_plat(struct udevice *dev)
+ 	host->ioaddr = dev_read_addr_ptr(dev);
+ 
+ 	/*
+-	 * If fifo-depth is unset don't set fifoth_val - we will try to
++	 * If fifo-depth is unset don't set fifo_depth - we will try to
+ 	 * auto detect it.
+ 	 */
+ 	ret = dev_read_u32(dev, "fifo-depth", &fifo_depth);
+@@ -89,9 +89,7 @@ static int snps_dwmmc_of_to_plat(struct udevice *dev)
+ 		if (fifo_depth < FIFO_MIN || fifo_depth > FIFO_MAX)
+ 			return -EINVAL;
+ 
+-		host->fifoth_val = MSIZE(0x2) |
+-				   RX_WMARK(fifo_depth / 2 - 1) |
+-				   TX_WMARK(fifo_depth / 2);
++		host->fifo_depth = fifo_depth;
+ 	}
+ 
+ 	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
+diff --git a/drivers/mmc/socfpga_dw_mmc.c b/drivers/mmc/socfpga_dw_mmc.c
+index f738019b8357..3147d3019c0a 100644
+--- a/drivers/mmc/socfpga_dw_mmc.c
++++ b/drivers/mmc/socfpga_dw_mmc.c
+@@ -134,8 +134,8 @@ static int socfpga_dwmmc_of_to_plat(struct udevice *dev)
+ 	 * We only have one dwmmc block on gen5 SoCFPGA.
+ 	 */
+ 	host->dev_index = 0;
+-	host->fifoth_val = MSIZE(0x2) |
+-		RX_WMARK(fifo_depth / 2 - 1) | TX_WMARK(fifo_depth / 2);
++
++	host->fifo_depth = fifo_depth;
+ 	priv->drvsel = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+ 				       "drvsel", 3);
+ 	priv->smplsel = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
 diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 77c8989148a1..a99b2f3bf0cc 100644
+index de18fda68ac8..7bb456e792b4 100644
 --- a/include/dwmmc.h
 +++ b/include/dwmmc.h
-@@ -15,31 +15,31 @@
- #define DWMCI_CTRL		0x000
- #define	DWMCI_PWREN		0x004
- #define DWMCI_CLKDIV		0x008
--#define DWMCI_CLKSRC		0x00C
-+#define DWMCI_CLKSRC		0x00c
- #define DWMCI_CLKENA		0x010
- #define DWMCI_TMOUT		0x014
- #define DWMCI_CTYPE		0x018
--#define DWMCI_BLKSIZ		0x01C
-+#define DWMCI_BLKSIZ		0x01c
- #define DWMCI_BYTCNT		0x020
- #define DWMCI_INTMASK		0x024
- #define DWMCI_CMDARG		0x028
--#define DWMCI_CMD		0x02C
-+#define DWMCI_CMD		0x02c
- #define DWMCI_RESP0		0x030
- #define DWMCI_RESP1		0x034
- #define DWMCI_RESP2		0x038
--#define DWMCI_RESP3		0x03C
-+#define DWMCI_RESP3		0x03c
- #define DWMCI_MINTSTS		0x040
- #define DWMCI_RINTSTS		0x044
- #define DWMCI_STATUS		0x048
--#define DWMCI_FIFOTH		0x04C
-+#define DWMCI_FIFOTH		0x04c
- #define DWMCI_CDETECT		0x050
- #define DWMCI_WRTPRT		0x054
- #define DWMCI_GPIO		0x058
--#define DWMCI_TCMCNT		0x05C
-+#define DWMCI_TCMCNT		0x05c
- #define DWMCI_TBBCNT		0x060
- #define DWMCI_DEBNCE		0x064
- #define DWMCI_USRID		0x068
--#define DWMCI_VERID		0x06C
-+#define DWMCI_VERID		0x06c
- #define DWMCI_HCON		0x070
- #define DWMCI_UHS_REG		0x074
- #define DWMCI_BMOD		0x080
-@@ -47,7 +47,7 @@
- #define DWMCI_DATA		0x200
- /* Registers to support IDMAC 32-bit address mode */
- #define DWMCI_DBADDR		0x088
--#define DWMCI_IDSTS		0x08C
-+#define DWMCI_IDSTS		0x08c
- #define DWMCI_IDINTEN		0x090
- #define DWMCI_DSCADDR		0x094
- #define DWMCI_BUFADDR		0x098
-@@ -63,94 +63,94 @@
+@@ -187,7 +187,7 @@ struct dwmci_idmac_regs {
+  * @dev_index:	Arbitrary device index for use by controller
+  * @dev_id:	Arbitrary device ID for use by controller
+  * @buswidth:	Bus width in bits (8 or 4)
+- * @fifoth_val:	Value for FIFOTH register (or 0 to leave unset)
++ * @fifo_depth:	Depth of FIFO, bytes (or 0 for automatic detection)
+  * @mmc:	Pointer to generic MMC structure for this device
+  * @priv:	Private pointer for use by controller
+  * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
+@@ -204,7 +204,7 @@ struct dwmci_host {
+ 	int dev_index;
+ 	int dev_id;
+ 	int buswidth;
+-	u32 fifoth_val;
++	u32 fifo_depth;
+ 	struct mmc *mmc;
+ 	void *priv;
  
- /* Interrupt Mask register */
- #define DWMCI_INTMSK_ALL	0xffffffff
--#define DWMCI_INTMSK_RE		(1 << 1)
--#define DWMCI_INTMSK_CDONE	(1 << 2)
--#define DWMCI_INTMSK_DTO	(1 << 3)
--#define DWMCI_INTMSK_TXDR	(1 << 4)
--#define DWMCI_INTMSK_RXDR	(1 << 5)
--#define DWMCI_INTMSK_RCRC	(1 << 6)
--#define DWMCI_INTMSK_DCRC	(1 << 7)
--#define DWMCI_INTMSK_RTO	(1 << 8)
--#define DWMCI_INTMSK_DRTO	(1 << 9)
--#define DWMCI_INTMSK_HTO	(1 << 10)
--#define DWMCI_INTMSK_FRUN	(1 << 11)
--#define DWMCI_INTMSK_HLE	(1 << 12)
--#define DWMCI_INTMSK_SBE	(1 << 13)
--#define DWMCI_INTMSK_ACD	(1 << 14)
--#define DWMCI_INTMSK_EBE	(1 << 15)
--
--/* Raw interrupt Regsiter */
--#define DWMCI_DATA_ERR	(DWMCI_INTMSK_EBE | DWMCI_INTMSK_SBE | DWMCI_INTMSK_HLE |\
--			DWMCI_INTMSK_FRUN | DWMCI_INTMSK_EBE | DWMCI_INTMSK_DCRC)
--#define DWMCI_DATA_TOUT	(DWMCI_INTMSK_HTO | DWMCI_INTMSK_DRTO)
-+#define DWMCI_INTMSK_RE		BIT(1)
-+#define DWMCI_INTMSK_CDONE	BIT(2)
-+#define DWMCI_INTMSK_DTO	BIT(3)
-+#define DWMCI_INTMSK_TXDR	BIT(4)
-+#define DWMCI_INTMSK_RXDR	BIT(5)
-+#define DWMCI_INTMSK_RCRC	BIT(6)
-+#define DWMCI_INTMSK_DCRC	BIT(7)
-+#define DWMCI_INTMSK_RTO	BIT(8)
-+#define DWMCI_INTMSK_DRTO	BIT(9)
-+#define DWMCI_INTMSK_HTO	BIT(10)
-+#define DWMCI_INTMSK_FRUN	BIT(11)
-+#define DWMCI_INTMSK_HLE	BIT(12)
-+#define DWMCI_INTMSK_SBE	BIT(13)
-+#define DWMCI_INTMSK_ACD	BIT(14)
-+#define DWMCI_INTMSK_EBE	BIT(15)
-+
-+/* Raw interrupt register */
-+#define DWMCI_DATA_ERR		(DWMCI_INTMSK_EBE | DWMCI_INTMSK_SBE | \
-+				 DWMCI_INTMSK_HLE | DWMCI_INTMSK_FRUN | \
-+				 DWMCI_INTMSK_EBE | DWMCI_INTMSK_DCRC)
-+#define DWMCI_DATA_TOUT		(DWMCI_INTMSK_HTO | DWMCI_INTMSK_DRTO)
-+
- /* CTRL register */
--#define DWMCI_CTRL_RESET	(1 << 0)
--#define DWMCI_CTRL_FIFO_RESET	(1 << 1)
--#define DWMCI_CTRL_DMA_RESET	(1 << 2)
--#define DWMCI_DMA_EN		(1 << 5)
--#define DWMCI_CTRL_SEND_AS_CCSD	(1 << 10)
--#define DWMCI_IDMAC_EN		(1 << 25)
-+#define DWMCI_CTRL_RESET	BIT(0)
-+#define DWMCI_CTRL_FIFO_RESET	BIT(1)
-+#define DWMCI_CTRL_DMA_RESET	BIT(2)
-+#define DWMCI_DMA_EN		BIT(5)
-+#define DWMCI_CTRL_SEND_AS_CCSD	BIT(10)
-+#define DWMCI_IDMAC_EN		BIT(25)
- #define DWMCI_RESET_ALL		(DWMCI_CTRL_RESET | DWMCI_CTRL_FIFO_RESET |\
- 				DWMCI_CTRL_DMA_RESET)
- 
- /* CMD register */
--#define DWMCI_CMD_RESP_EXP	(1 << 6)
--#define DWMCI_CMD_RESP_LENGTH	(1 << 7)
--#define DWMCI_CMD_CHECK_CRC	(1 << 8)
--#define DWMCI_CMD_DATA_EXP	(1 << 9)
--#define DWMCI_CMD_RW		(1 << 10)
--#define DWMCI_CMD_SEND_STOP	(1 << 12)
--#define DWMCI_CMD_ABORT_STOP	(1 << 14)
--#define DWMCI_CMD_PRV_DAT_WAIT	(1 << 13)
--#define DWMCI_CMD_UPD_CLK	(1 << 21)
--#define DWMCI_CMD_USE_HOLD_REG	(1 << 29)
--#define DWMCI_CMD_START		(1 << 31)
-+#define DWMCI_CMD_RESP_EXP	BIT(6)
-+#define DWMCI_CMD_RESP_LENGTH	BIT(7)
-+#define DWMCI_CMD_CHECK_CRC	BIT(8)
-+#define DWMCI_CMD_DATA_EXP	BIT(9)
-+#define DWMCI_CMD_RW		BIT(10)
-+#define DWMCI_CMD_SEND_STOP	BIT(12)
-+#define DWMCI_CMD_ABORT_STOP	BIT(14)
-+#define DWMCI_CMD_PRV_DAT_WAIT	BIT(13)
-+#define DWMCI_CMD_UPD_CLK	BIT(21)
-+#define DWMCI_CMD_USE_HOLD_REG	BIT(29)
-+#define DWMCI_CMD_START		BIT(31)
- 
- /* CLKENA register */
--#define DWMCI_CLKEN_ENABLE	(1 << 0)
--#define DWMCI_CLKEN_LOW_PWR	(1 << 16)
-+#define DWMCI_CLKEN_ENABLE	BIT(0)
-+#define DWMCI_CLKEN_LOW_PWR	BIT(16)
- 
--/* Card-type registe */
-+/* Card type register */
- #define DWMCI_CTYPE_1BIT	0
--#define DWMCI_CTYPE_4BIT	(1 << 0)
--#define DWMCI_CTYPE_8BIT	(1 << 16)
-+#define DWMCI_CTYPE_4BIT	BIT(0)
-+#define DWMCI_CTYPE_8BIT	BIT(16)
- 
--/* Status Register */
--#define DWMCI_FIFO_EMPTY	(1 << 2)
--#define DWMCI_FIFO_FULL		(1 << 3)
--#define DWMCI_BUSY		(1 << 9)
-+/* Status register */
-+#define DWMCI_FIFO_EMPTY	BIT(2)
-+#define DWMCI_FIFO_FULL		BIT(3)
-+#define DWMCI_BUSY		BIT(9)
- #define DWMCI_FIFO_MASK		0x1fff
- #define DWMCI_FIFO_SHIFT	17
- 
--/* FIFOTH Register */
-+/* FIFOTH register */
- #define MSIZE(x)		((x) << 28)
- #define RX_WMARK(x)		((x) << 16)
- #define TX_WMARK(x)		(x)
- #define RX_WMARK_SHIFT		16
- #define RX_WMARK_MASK		(0xfff << RX_WMARK_SHIFT)
- 
--#define DWMCI_IDMAC_OWN		(1 << 31)
--#define DWMCI_IDMAC_CH		(1 << 4)
--#define DWMCI_IDMAC_FS		(1 << 3)
--#define DWMCI_IDMAC_LD		(1 << 2)
-+#define DWMCI_IDMAC_OWN		BIT(31)
-+#define DWMCI_IDMAC_CH		BIT(4)
-+#define DWMCI_IDMAC_FS		BIT(3)
-+#define DWMCI_IDMAC_LD		BIT(2)
- 
--/*  Bus Mode Register */
--#define DWMCI_BMOD_IDMAC_RESET	(1 << 0)
--#define DWMCI_BMOD_IDMAC_FB	(1 << 1)
--#define DWMCI_BMOD_IDMAC_EN	(1 << 7)
-+/* Bus Mode register */
-+#define DWMCI_BMOD_IDMAC_RESET	BIT(0)
-+#define DWMCI_BMOD_IDMAC_FB	BIT(1)
-+#define DWMCI_BMOD_IDMAC_EN	BIT(7)
- 
- /* UHS register */
--#define DWMCI_DDR_MODE	(1 << 16)
-+#define DWMCI_DDR_MODE		BIT(16)
- 
- /* Internal IDMAC interrupt defines */
--#define DWMCI_IDINTEN_RI		BIT(1)
--#define DWMCI_IDINTEN_TI		BIT(0)
-+#define DWMCI_IDINTEN_RI	BIT(1)
-+#define DWMCI_IDINTEN_TI	BIT(0)
-+#define DWMCI_IDINTEN_MASK	(DWMCI_IDINTEN_TI | DWMCI_IDINTEN_RI)
- 
--#define DWMCI_IDINTEN_MASK	(DWMCI_IDINTEN_TI | \
--				 DWMCI_IDINTEN_RI)
--
--/* quirks */
--#define DWMCI_QUIRK_DISABLE_SMU		(1 << 0)
-+/* Quirks */
-+#define DWMCI_QUIRK_DISABLE_SMU	BIT(0)
- 
- /**
-  * struct dwmci_idmac_regs - Offsets of IDMAC registers
-@@ -230,6 +230,7 @@ struct dwmci_host {
- 	 * return that value too. Then DWMMC will put itself in bypass mode.
- 	 */
- 	unsigned int (*get_mmc_clk)(struct dwmci_host *host, uint freq);
-+
- #ifndef CONFIG_BLK
- 	struct mmc_config cfg;
- #endif
-@@ -253,6 +254,7 @@ static inline void dwmci_writeb(struct dwmci_host *host, int reg, u8 val)
- {
- 	writeb(val, host->ioaddr + reg);
- }
-+
- static inline u32 dwmci_readl(struct dwmci_host *host, int reg)
- {
- 	return readl(host->ioaddr + reg);
-@@ -269,6 +271,7 @@ static inline u8 dwmci_readb(struct dwmci_host *host, int reg)
- }
- 
- #ifdef CONFIG_BLK
-+
- /**
-  * dwmci_setup_cfg() - Set up the configuration for DWMMC
-  * @cfg:	Configuration structure to fill in (generally &plat->mmc)
-@@ -301,7 +304,7 @@ static inline u8 dwmci_readb(struct dwmci_host *host, int reg)
-  * See rockchip_dw_mmc.c for an example.
-  */
- void dwmci_setup_cfg(struct mmc_config *cfg, struct dwmci_host *host,
--		u32 max_clk, u32 min_clk);
-+		     u32 max_clk, u32 min_clk);
- 
- /**
-  * dwmci_bind() - Set up a new MMC block device
-@@ -321,6 +324,7 @@ void dwmci_setup_cfg(struct mmc_config *cfg, struct dwmci_host *host,
- int dwmci_bind(struct udevice *dev, struct mmc *mmc, struct mmc_config *cfg);
- 
- #else
-+
- /**
-  * add_dwmci() - Add a new DWMMC interface
-  * @host:	DWMMC host structure
-@@ -332,6 +336,7 @@ int dwmci_bind(struct udevice *dev, struct mmc *mmc, struct mmc_config *cfg);
-  * Return: 0 if OK, -ve on error
-  */
- int add_dwmci(struct dwmci_host *host, u32 max_clk, u32 min_clk);
-+
- #endif /* !CONFIG_BLK */
- 
- #ifdef CONFIG_DM_MMC
 -- 
 2.39.2
 
