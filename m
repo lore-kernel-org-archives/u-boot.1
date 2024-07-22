@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19B5C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 01:33:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60817C3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 01:34:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38E9A88001;
-	Mon, 22 Jul 2024 03:33:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B80BA8811C;
+	Mon, 22 Jul 2024 03:34:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YnyrWF9a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kr5Ju8xf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0254187919; Mon, 22 Jul 2024 03:33:55 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 3DE7388168; Mon, 22 Jul 2024 03:34:31 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 349C68808B
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:33:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B902F87919
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 03:34:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2cb5eafd585so587888a91.2
- for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 18:33:52 -0700 (PDT)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2cb5dcb1227so588752a91.1
+ for <u-boot@lists.denx.de>; Sun, 21 Jul 2024 18:34:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721612031; x=1722216831; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1721612067; x=1722216867; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=UQH2y6TI1uKcvidv8bU6nB1iJ6YtcqiGCCnrwupKeB0=;
- b=YnyrWF9aoh3p2JD7jKrwmSR0YNbn1/PrM2vJRY9mkNF3xsmuw/AssLP+nKXjPhrufR
- HpcwWfTJfqiDnj1Tunxwo0rv8UghjdsFvVr7UhsFirJNeJ6Cxu40mx0EtZ4ANog+Kisz
- 1ucxuyVYHY0fcCrqEu0ddSARYd9JYhUbt6MrdGdeCuLihkKj5YP71OssRnC2l45nSGUH
- zXHxC6aWLXL1zBVXAUGBRN6N9DFE1L9Ga4Tz2iDd5KisKg8b1UeQQfNRw9dwlPbSzkbW
- jpyFtawfdA3TnaPd0c7ra0J1AAzExeWEiU4nTp5zELkdQDV37LebLmjjFTpmrPo+pkmc
- Symg==
+ b=kr5Ju8xfAsMXwcgDXJnTQdmXLQeduBUu8JVuUDY551E6v09n7fqIip1Q/tsHP56R/p
+ UetGLC1soiCJf2Obljw2vm8CR5/tdsVQ2ZewsKeVgejbO3MBwoAa+n9Sum16+9TswmQA
+ wxxGNvK+aZ0eIFteD/RWKBsP/AnA0ZOhhSTD/lQwJLepBOiFJQw8olrki2z7VNcrYIOK
+ OSLFiXwDYm8kMW/inMPt6W3GUr1IIAchOTCoEeztTw8+MspnmaSMSbfOaVbCyAWwliQu
+ wDTG0k5PrD7XdcvemX1zjevoaH82J1+Y7HXwHPySqGrU7jDtSXJR2nnLYhJWka936XY+
+ ORww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721612031; x=1722216831;
+ d=1e100.net; s=20230601; t=1721612067; x=1722216867;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=UQH2y6TI1uKcvidv8bU6nB1iJ6YtcqiGCCnrwupKeB0=;
- b=KEOUfKtt9u29ufu2i04K2MHQeQuRK1YAj8teBbEOswsb1ApQF2JM8MXQtOyMxkmQVn
- BoJe0tsH9P49p1jJ5gobEsgrf25gKSV1xEkbOsMYHaNVTSmAfGXcTP9zzP3o5Pdz0YGR
- fUc6PWi7cUUV5pVOkXlrjvYe3UF2WoRVt3BmYjI+uUY+dadk0dW2jvCG2KXvF+uf0rnf
- iD/eTKlLiBiFQjqXV/DI8c3JHbsvqwbwjih64bN8zzWD5akKDyv2c0V7Un7VBnHTfar3
- G3uKxtGjzWpIkaJiKkKZuHoyjySMVtz/qzFVZJxoTOrYxD38Cf7/UY+6dDOSYjZi0v9g
- hXwA==
-X-Gm-Message-State: AOJu0YxWA2kbu+2iU4Z8ksCR5StE5zDH3ItkPi5EqRWfvAedvTUND6PQ
- 5NhrY6CKQCI8k1O+lIm2VjUSCN8dqGbL1VD8k6Grmbh8p5xk4U54/FMTQg==
-X-Google-Smtp-Source: AGHT+IHJ3+cD1OOzREJmzyglMU3ZxlDuooi6h+7OryQKmfL4k+gKRxG5nwrQBA2vH45L2h82NQcztA==
-X-Received: by 2002:a17:902:d2cc:b0:1fa:ab25:f634 with SMTP id
- d9443c01a7336-1fd745601a8mr54928225ad.3.1721612030498; 
- Sun, 21 Jul 2024 18:33:50 -0700 (PDT)
+ b=iF7y6c3eMxuU77Eli1btr2q8e7vHB/3/G2bZhiEn1cYDWJsH21wcx9bSUG0zxliNTQ
+ fls7sFrX11J2uQ79vLdJs1S8lIiRxLPTMf9AB7p0bAfOuf5MxBfNjQg+OElBDnFET4Bt
+ 8BJ8dt4JnxcYFOvOJ/j8Denut9iKAE2LeO0cxS7npHW4DrzMbz6jclGoZV1wD371VYYh
+ MeCZpMwkvVUcaAbPI1y+KaKicelt/mkeD0GcHMN5+NuBoXjDv95lHWUSLRjPHKQjZCC2
+ M0pyC+RePn9cz2gi0FewczX8WDQLJcCjAEw/eQHTUgN7b1NyfiCPnlBjhDuxCN6FWgZN
+ 8qig==
+X-Gm-Message-State: AOJu0YyGnHRb64bOzhLhIlRjC+EMHTJiNjoQZkWbzfJrmy9omlSB/GnW
+ OTxUaQ2d32nDe6WfLEqRNUbXB6v0VZhWg7j7b5Ol+Kfnco4TZRh3z1htUQ==
+X-Google-Smtp-Source: AGHT+IE27iXX2lxJZ2Du4nU/F5jVFMBk+GcuEhpCWqkByxNqjmuOIFht/E1HWO5x0sBjMPvrED5siA==
+X-Received: by 2002:a17:902:d4d2:b0:1fc:52f4:1803 with SMTP id
+ d9443c01a7336-1fd74653ac3mr53224805ad.11.1721612067102; 
+ Sun, 21 Jul 2024 18:34:27 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:2ff7:142d:3c92:ec97])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fd6f430b01sm42579765ad.187.2024.07.21.18.33.48
+ d9443c01a7336-1fd6f4313f8sm42595525ad.189.2024.07.21.18.34.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 18:33:49 -0700 (PDT)
+ Sun, 21 Jul 2024 18:34:26 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: festevam@gmail.com
 Cc: u-boot@lists.denx.de,
-	boot-imx@nxp.com
+	u-boot-imx@nxp.com
 Subject: [PATCH] warp7: Convert to OF_UPSTREAM
-Date: Sun, 21 Jul 2024 22:33:34 -0300
-Message-Id: <20240722013334.1940598-1-festevam@gmail.com>
+Date: Sun, 21 Jul 2024 22:34:22 -0300
+Message-Id: <20240722013422.1940735-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
