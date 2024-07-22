@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A8B3C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 18:01:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE070C3DA59
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 18:01:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0050388669;
+	by phobos.denx.de (Postfix) with ESMTP id 57166886B6;
 	Mon, 22 Jul 2024 19:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ua9nEsEq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MnK8Jtpl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66B8F88645; Mon, 22 Jul 2024 19:58:00 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 9652688645; Mon, 22 Jul 2024 19:58:00 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C333F8863B
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74AF6884DC
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5d5846f799dso420019eaf.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:57 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3d9234b77dfso2604917b6e.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721671076; x=1722275876; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721671077; x=1722275877; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CGa3gMIJW2chTqaZtwdlvxZx8ygHbDg82FUsQVJNvCE=;
- b=Ua9nEsEqC46fDl7YxABRXmjVCCLgvaykrlMPLmX4Fn9SsK5JdqOnls4Hfm+wNA54k9
- BM8FasqggCpmZv+sB73SxvmhMVAJseutndde3S/yjtmFRbseZkxAvOtwQDW5kkVTKSqW
- ZwsvjD+N5huw/Z0QiqRPL2sh47hpiXZ4+UBMXL0e+V6gW00JDAp1oIhQLK+shiUO/I5f
- UuoBLKAWukmpn1bDZDOH4NxvgE1h/UUmo3FW2N8Yp97USbrBAkswdgho3Pjl0hKF4Zxc
- ICa4viDdQ1TxZHC9kHoi0kThuuUYY3+AsVzn0A9r+fwGScjf9bkvXmjSWvu/RH/cj4SY
- rhYQ==
+ bh=y37Oe49jpSOYUz8ibpLrcyDInbVzJikIkqAZ8DtZNaI=;
+ b=MnK8JtplByCLqcqoRMWj7vdQgu0A4Q6PsXPKfVL3BB+AoOQupMaiva0EDLGS9Fe8Bh
+ xrh97ce6zMsP54a4QeUxuW476Pln1jMz0iLhOQBCiyUBC5T/sPGxNM/ynwIgh0TM1ZLp
+ Bl1DZ4dxnFYblFFpeFdQ55wlBX7iwzWwp7QRZ/u7fF1cqRYic94HdMBp+umbZrknsBa1
+ b1IAxFDd3YrqCrV/eO87jxmkuI0OdM7qRAzwCCwjRQT9aJM8uVkRQIfPoqWLqHBX5vXG
+ HZClqcBL16oVjK9x6MZFGnRHaNytq/vW3W+UMrFs9u0TfcZVZRgtX1ESMe1+XQQyjfV3
+ kaOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721671076; x=1722275876;
+ d=1e100.net; s=20230601; t=1721671077; x=1722275877;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CGa3gMIJW2chTqaZtwdlvxZx8ygHbDg82FUsQVJNvCE=;
- b=gmOIIiVGqZuzl7hpiRbIB8W7wWV3JTqJHyFZqSuXQK/MqjeOL5k1Bzp1Pv2AFOab+X
- LYrskQW1b8Df/VjXhqFudYeBVm5MRiNilv12SdsMXk16DzjX/+CVxjeCtDJIVZsrKArZ
- GTl+2MxJaER2BqRIVGBKv4+DlE+S48TGItIPDdPA1JZEWn/MDryngjrWMvbqg5Ps+maN
- wUtv2MBVzOY1p31mIO8+RKTKnrtnFDxGCJtsQmX79uEbND8jDCr/qYd3iz8FcPADJv1o
- TsbtpsB2OiAWMqS6Fb51CXMnMMF/R1rY08aTq3WUdreSFRotpCHttuts50Pph9MUB/dR
- Qopw==
+ bh=y37Oe49jpSOYUz8ibpLrcyDInbVzJikIkqAZ8DtZNaI=;
+ b=QcUqNYiHY/3KSi8U6vSwnzU2q6pd+1NYVUUp2TDRSNCTzXIZBCKbygS48KvACoWDqs
+ Fuy5m7ag0gLmYlnOnqCbK6jqznaOOvPZc3jHW6c7Et4wCLRFZXqgZomgk3C9hbDKcTnC
+ P09SMhYBzu9c2gGnFfumZ+sKa0LJZ+FSnW/i3zL7/JIYShN4AISkYsfCg937pWgU7/p+
+ EZAV/OfgpgUFtmy4FAgFiiS2eQCg9uaDaxfYjaYG9J6Wrey5dsgM2+9rpbKd/m5FqqMI
+ BecybV+w6POGu5MHfvE7FTBx4ubfN3V7BXbeUgAPGArWNTfxuOJXRxtp12LReiqYx6Bv
+ S33Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU976ifyYT4+Ncc8RqPyz37rlCcyf8b/BFF/xO0H7byeYYRSs00EfDf849yUArLQkffhXkD35rFgWdGxvmq54DHseykIg==
-X-Gm-Message-State: AOJu0YwoHU9zN281I3dRIV9R/5d5CbMq7sNgbvFSlxb/49uyvRdJL6lp
- GEdD9uUkLb7nbAmgNve07olTpenxZhmjKms50U45fUQxVtPFYFpzzCIgQWtp//I=
-X-Google-Smtp-Source: AGHT+IFr2YKf3Y1FlbXI2XRfMnS+y/QX3OYeD0nf2T9CPcKX+msrIHHfZg0SioOayaxmoHrwzpgsnQ==
-X-Received: by 2002:a4a:ee83:0:b0:5c4:5cbc:b1b5 with SMTP id
- 006d021491bc7-5d564cfc26dmr10181747eaf.0.1721671076451; 
- Mon, 22 Jul 2024 10:57:56 -0700 (PDT)
+ AJvYcCXM9hmbF8qyHziISxZUXokGiwc9Yh1nAWK5f5u+KFt1bHIYI1ga7gagwrJYrl5UpNX08RdPgin4TJjouXMdmg/zVze64A==
+X-Gm-Message-State: AOJu0Yx0SbBKVQyWyUk8TG8nnWW0NusohsJENEjqrNYiKeuAwbVzR5wy
+ mPzIsKeuUKLQH7Ngces3sXXwsdBDUiS4Mt0sZl/renqc+W3GS+XpBj5N0tnGKXc=
+X-Google-Smtp-Source: AGHT+IFwAXyOjpC+9bUd+LSTBl7IZcAxzsGh6jL24hDDk3CE4E/Tj3xqBncoeCk4Vw8esvyIKDC3dg==
+X-Received: by 2002:a05:6808:2006:b0:3d9:dc70:1119 with SMTP id
+ 5614622812f47-3dae97f708amr8441045b6e.46.1721671077180; 
+ Mon, 22 Jul 2024 10:57:57 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d55a8042f8sm1411239eaf.8.2024.07.22.10.57.56
+ 5614622812f47-3dae097c6aesm1600548b6e.18.2024.07.22.10.57.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 22 Jul 2024 10:57:56 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 20/38] mmc: exynos_dw_mmc: Obtain and use CIU clock via CCF
- API
-Date: Mon, 22 Jul 2024 12:57:22 -0500
-Message-Id: <20240722175740.6985-21-semen.protsenko@linaro.org>
+Subject: [PATCH v3 21/38] mmc: exynos_dw_mmc: Use .of_to_plat for device tree
+ parsing
+Date: Mon, 22 Jul 2024 12:57:23 -0500
+Message-Id: <20240722175740.6985-22-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 References: <20240722175740.6985-1-semen.protsenko@linaro.org>
@@ -104,192 +104,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-New Exynos chips should implement clock drivers using CCF framework. In
-that case corresponding CCF functions can be used to get/set the clock
-rates. Moreover, already existing get_mmc_clk() and set_mmc_clk() calls
-are only implemented for CONFIG_CPU_V7A (i.e. ARM32 chips). In case of
-ARM64 chips that config option is not defined, so build will crash on
-linking stage, with errors like these:
+exynos_dwmci_get_config() is called from the probe function and used to
+read data from device tree. Make use of .of_to_plat driver callback
+instead, and convert exynos_dwmci_get_config() to match its signature.
 
-    ld: drivers/mmc/exynos_dw_mmc.o:
-      in function `exynos_dwmci_get_sclk':
-      undefined reference to `get_mmc_clk'
-    ld: drivers/mmc/exynos_dw_mmc.o:
-      in function `exynos_dwmci_set_sclk':
-      undefined reference to `set_mmc_clk'
+No functional change.
 
-Fix that issue by using CCF clocks API on ARM64 platforms for getting
-and setting the source clock (sclk = SDCLKIN = CIU) rate. To implement
-this, first extract the existing ARM32 clock control code into helper
-functions with more generic signatures to abstract getting/setting the
-sclk rate. Then add CCF clock support to those functions for ARM64
-platforms.
-
-Fixes: a082a2dde061 ("EXYNOS5: DWMMC: Added FDT support for DWMMC")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
 Changes in v3:
   - (none)
 
 Changes in v2:
-  - Replaced CONFIG_IS_ENABLED() with #ifdef
+  - (none)
 
- drivers/mmc/exynos_dw_mmc.c | 87 +++++++++++++++++++++++++++++++++----
- 1 file changed, 79 insertions(+), 8 deletions(-)
+ drivers/mmc/exynos_dw_mmc.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index ed2752391603..4d28ede0d756 100644
+index 4d28ede0d756..09a59fdf0120 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -4,6 +4,7 @@
-  * Jaehoon Chung <jh80.chung@samsung.com>
-  */
- 
-+#include <clk.h>
- #include <dwmmc.h>
- #include <fdtdec.h>
- #include <asm/global_data.h>
-@@ -15,6 +16,7 @@
- #include <asm/arch/pinmux.h>
- #include <asm/arch/power.h>
- #include <asm/gpio.h>
-+#include <linux/err.h>
- #include <linux/printk.h>
- 
- #define	DWMMC_MAX_CH_NUM		4
-@@ -38,6 +40,7 @@ struct dwmci_exynos_priv_data {
- #ifdef CONFIG_DM_MMC
- 	struct dwmci_host host;
- #endif
-+	struct clk clk;
- 	u32 sdr_timing;
- };
- 
-@@ -51,6 +54,61 @@ static struct dwmci_exynos_priv_data *exynos_dwmmc_get_priv(
- #endif
+@@ -223,10 +223,13 @@ static int do_dwmci_init(struct dwmci_host *host)
+ 	return exynos_dwmci_core_init(host);
  }
  
-+/**
-+ * exynos_dwmmc_get_sclk - Get source clock (SDCLKIN) rate
-+ * @host: MMC controller object
-+ * @rate: Will contain clock rate, Hz
-+ *
-+ * Return: 0 on success or negative value on error
-+ */
-+static int exynos_dwmmc_get_sclk(struct dwmci_host *host, unsigned long *rate)
-+{
-+#ifdef CONFIG_CPU_V7A
-+	*rate = get_mmc_clk(host->dev_index);
-+#else
-+	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-+
-+	*rate = clk_get_rate(&priv->clk);
-+#endif
-+
-+	if (IS_ERR_VALUE(*rate))
-+		return *rate;
-+
-+	return 0;
-+}
-+
-+/**
-+ * exynos_dwmmc_set_sclk - Set source clock (SDCLKIN) rate
-+ * @host: MMC controller object
-+ * @rate: Desired clock rate, Hz
-+ *
-+ * Return: 0 on success or negative value on error
-+ */
-+static int exynos_dwmmc_set_sclk(struct dwmci_host *host, unsigned long rate)
-+{
-+	int err;
-+
-+#ifdef CONFIG_CPU_V7A
-+	unsigned long sclk;
-+	unsigned int div;
-+
-+	err = exynos_dwmmc_get_sclk(host, &sclk);
-+	if (err)
-+		return err;
-+
-+	div = DIV_ROUND_UP(sclk, rate);
-+	set_mmc_clk(host->dev_index, div);
-+#else
-+	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-+
-+	err = clk_set_rate(&priv->clk, rate);
-+	if (err < 0)
-+		return err;
-+#endif
-+
-+	return 0;
-+}
-+
- /*
-  * Function used as callback function to initialise the
-  * CLKSEL register for every mmc channel.
-@@ -68,6 +126,7 @@ unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
+-static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
+-				   int node, struct dwmci_host *host,
+-				   struct dwmci_exynos_priv_data *priv)
++#ifdef CONFIG_DM_MMC
++static int exynos_dwmmc_of_to_plat(struct udevice *dev)
  {
- 	unsigned long sclk;
- 	int8_t clk_div;
-+	int err;
++	const void *blob = gd->fdt_blob;
++	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
++	struct dwmci_host *host = &priv->host;
++	int node = dev_of_offset(dev);
+ 	int err = 0;
+ 	u32 timing[3];
  
- 	/*
- 	 * Since SDCLKIN is divided inside controller by the DIVRATIO
-@@ -77,7 +136,13 @@ unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
- 	 */
- 	clk_div = ((dwmci_readl(host, DWMCI_CLKSEL) >> DWMCI_DIVRATIO_BIT)
- 			& DWMCI_DIVRATIO_MASK) + 1;
--	sclk = get_mmc_clk(host->dev_index);
-+
-+	err = exynos_dwmmc_get_sclk(host, &sclk);
-+	if (err) {
-+		printf("DWMMC%d: failed to get clock rate (%d)\n",
-+		       host->dev_index, err);
-+		return 0;
-+	}
+@@ -286,7 +289,6 @@ static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
+ 	return 0;
+ }
  
- 	/*
- 	 * Assume to know divider value.
-@@ -107,19 +172,19 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
- 
- static int exynos_dwmci_core_init(struct dwmci_host *host)
+-#ifdef CONFIG_DM_MMC
+ static int exynos_dwmmc_probe(struct udevice *dev)
  {
--	unsigned int div;
--	unsigned long freq, sclk;
-+	unsigned long freq;
-+	int err;
+ 	struct exynos_mmc_plat *plat = dev_get_plat(dev);
+@@ -301,10 +303,6 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 		return err;
+ #endif
  
- 	if (host->bus_hz)
- 		freq = host->bus_hz;
- 	else
- 		freq = DWMMC_MAX_FREQ;
- 
--	/* request mmc clock vlaue of 52MHz.  */
--	sclk = get_mmc_clk(host->dev_index);
--	div = DIV_ROUND_UP(sclk, freq);
--	/* set the clock divisor for mmc */
--	set_mmc_clk(host->dev_index, div);
-+	err = exynos_dwmmc_set_sclk(host, freq);
-+	if (err) {
-+		printf("DWMMC%d: failed to set clock rate on probe (%d); "
-+		       "continue anyway\n", host->dev_index, err);
-+	}
- 
- 	host->name = "EXYNOS DWMMC";
- #ifdef CONFIG_EXYNOS5420
-@@ -230,6 +295,12 @@ static int exynos_dwmmc_probe(struct udevice *dev)
- 	struct dwmci_host *host = &priv->host;
- 	int err;
- 
-+#ifndef CONFIG_CPU_V7A
-+	err = clk_get_by_index(dev, 1, &priv->clk); /* ciu */
-+	if (err)
-+		return err;
-+#endif
-+
- 	err = exynos_dwmci_get_config(dev, gd->fdt_blob, dev_of_offset(dev),
- 				      host, priv);
+-	err = exynos_dwmci_get_config(dev, gd->fdt_blob, dev_of_offset(dev),
+-				      host, priv);
+-	if (err)
+-		return err;
+ 	err = do_dwmci_init(host);
  	if (err)
+ 		return err;
+@@ -335,6 +333,7 @@ U_BOOT_DRIVER(exynos_dwmmc_drv) = {
+ 	.name		= "exynos_dwmmc",
+ 	.id		= UCLASS_MMC,
+ 	.of_match	= exynos_dwmmc_ids,
++	.of_to_plat	= exynos_dwmmc_of_to_plat,
+ 	.bind		= exynos_dwmmc_bind,
+ 	.ops		= &dm_dwmci_ops,
+ 	.probe		= exynos_dwmmc_probe,
 -- 
 2.39.2
 
