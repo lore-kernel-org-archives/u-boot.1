@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5797C3DA59
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 07:35:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AEAC3DA5D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 07:49:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FCE7880A5;
-	Mon, 22 Jul 2024 09:35:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 32A1888137;
+	Mon, 22 Jul 2024 09:49:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JE3JXtYu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V6tmeH6k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82EE688204; Mon, 22 Jul 2024 09:35:37 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 29B4788216; Mon, 22 Jul 2024 09:49:21 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39DC98800C
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 09:35:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD3C88800C
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 09:49:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-70d265e5278so296250b3a.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 00:35:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-52f04c29588so632580e87.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 00:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721633734; x=1722238534; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=34AlKJBUAqgwwWW+z+tkH5nQxaWFzgIdFYHRMh4GkNw=;
- b=JE3JXtYuzlT75fAN+tTUli1E6PZ+nuwyM6gMORpAaS6Oftq21bM9EzdhqsyACGDW3A
- xLiW9xlFoo3F5ihTPt3FgUohv8DkPse5FKrm1ycOTE2uA85wW5yU9AtNS36ORoS70gJC
- lJcIVYQsnlhuHz2lsz4FvIcslTXtJWISkrHa5IovnJeobcdgOWiYwSDHqUpBbWUj1/k6
- 2zaZ55KROXYtw3ADDUeA3lMy0SB8aMW/KGjMBnU+h4+SvJqaIRhZUOgKk8bqu8I6oWyP
- wda52Ho3DtbTs9k4TlDBSgEPeXBNFl1X40y4OvD6X1yjjmqm7ZtQuAmIg0Qbeyw1IOkF
- auvg==
+ d=gmail.com; s=20230601; t=1721634558; x=1722239358; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7aD1aCeUX7BrqF5pPc93bLBTpRngVY7tuvl/mmUzhZo=;
+ b=V6tmeH6kdWdNsI2eWqNIwwZsM4nPzoMWGLdvNeCm2V1g4vRMOBKE040hicR0WPIHWz
+ xOAfIkzBq6kY9cw1nKfV7GW0m9U3Z3aRfcz1inEqmnOSTS0UCh5L2Rh7GEWSFZhrs2aK
+ 1aoXbK0aNkKvafDd1X3NQT7iDDwJLhh4C4hLw1W+lubkcongvIAwxbbvshox47YzjfD3
+ czaZaLsfgL8CJCZVO4N1KcmXHFkmCa8lEyGvuMfQ0Y4OZVdqUHdaxLDmqclXmLs2J3Pq
+ UR675/kDsgaTlPFHrpesT6h/tdasML23gKsZ/VBHKhWll8dmWqc1Y8BSLLHBe1pMDjrg
+ IX4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721633734; x=1722238534;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1721634558; x=1722239358;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=34AlKJBUAqgwwWW+z+tkH5nQxaWFzgIdFYHRMh4GkNw=;
- b=wtobPN/xDNqorSqex1lSsLgLoOCyv5Yzy98FtdwsRIo2hdtJtDjBknRSx+kovxMZEf
- SfBIUdMcix2VyE9M76+lbx6mmQ9iDgbb6Jccf5FE0DeiWE+vbIRdDZ0LEI2FbZuItgqg
- zL7G/D5V2AFheeNUdZ1zGYB2abWYPAXYJnNp7mH83vyMV7b1Xl3DIAZ1FST1m6EubRhj
- 2jbDMUsqbiMryzc7oGGXHUyX6KE3BMFTbAcJsH6OZCan2x1Nc4zvTrf9ecwZJ2tNBttA
- 4yF42WjTSsppTZm2F8c67GqQp0X4nMKFeWPrqpp0v3rgQ+p7QHgOepshj+wh090ArBHY
- MJ4g==
-X-Gm-Message-State: AOJu0YxzzwcrOLRJ+WzbhAuJ3eYQzNc7qFE9ldu2/HOdu5ztb0o54knH
- uTEKa/psU5rhSXUJinjIxGC+UNHkfu7wyCS/MtxeMQgbxawhAbQsxy6htQKY7krz0qRPsqgoMOq
- pw+wqSwsuSGuqJl20lZxwb75QxPlcqSfASk33CQ==
-X-Google-Smtp-Source: AGHT+IHEKHao/rAtl05xfwYQaPS2kSraJtAiUDXHgIWv38hn4JidQjJ2DTVfOlDATT7k/2LAqm6pINSrqkB7UjxEgYk=
-X-Received: by 2002:a05:6a00:1acd:b0:70b:349a:efd7 with SMTP id
- d2e1a72fcca58-70d086dcfc3mr5307427b3a.14.1721633733585; Mon, 22 Jul 2024
- 00:35:33 -0700 (PDT)
+ bh=7aD1aCeUX7BrqF5pPc93bLBTpRngVY7tuvl/mmUzhZo=;
+ b=ZTUsIqPMb1+6q7nhCWwt626VnnUB9ebYQJq2DDHE9/x7tFBgie6q3JPHmOk4M+NRIe
+ ciF1WbhC3PHY40ClM5YxbpxW0pybYz5dDrw51qqIcqlVjl5FC801I/qgwNuBMVIzSr+l
+ 8XHOafiEObeb2L6lLOfWiZk/NdmmW/dV/8IbHZo48FMUjUTaANCXbSKaj5q6meGUB3Fz
+ RXsEQoyDXJpC43TLjrme4mp+fNyITLQc9/U/ghSPSvnTW5oSMg4nmrH5Np8pZtwtoszZ
+ 7ZlAS6Bjij2kZl0OD1VyjZ7modRsmwce3DmGmlnCyH7PQ9peLkw1SltYt7FUwan3epYq
+ 60xQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVRjI0CNUBy0IS71mZtZR9kjlPgil4hGzW3ITFjLPAnkmnOjxCndG5cuSIhCv3ioDJ/qoil1eT1PZbhVEJV54azwvj5qA==
+X-Gm-Message-State: AOJu0YyD2KWOiBaz7dY1RRpuY5XKlY0YgM4cD9t3TLH5SYOzPCrk+cxD
+ kw3sRntj3VOPrKl6W47XzXOYfVgfyK/uL3ZUVdfOzkV0+0bDYLQz
+X-Google-Smtp-Source: AGHT+IGYWoiDhtyxXJbasbOUiPoWcKszIfzDoavqOIgqiDcQvF4lZF5xBHjFl5HDjYdXUmQpiChXrA==
+X-Received: by 2002:a05:6512:3184:b0:52e:7f6b:5786 with SMTP id
+ 2adb3069b0e04-52efb8a5b0cmr2877314e87.61.1721634557790; 
+ Mon, 22 Jul 2024 00:49:17 -0700 (PDT)
+Received: from moskalets-nb.kdtln.ru (109-252-15-116.nat.spd-mgts.ru.
+ [109.252.15.116]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52ef553c1cfsm1111112e87.71.2024.07.22.00.49.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jul 2024 00:49:17 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: trini@konsulko.com,
+	u-boot@lists.denx.de,
+	sjg@chromium.org
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3] board: rockchip: add Radxa ROCK 3 Model C
+Date: Mon, 22 Jul 2024 10:49:07 +0300
+Message-Id: <20240722074907.28507-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240715112302.652527-1-lukas.funke-oss@weidmueller.com>
- <20240715112302.652527-2-lukas.funke-oss@weidmueller.com>
- <CAFLszTgX8Tfn=qC_ZBMR2M+iwFAOLKQhGQg8w42F1saAmZq4Eg@mail.gmail.com>
-In-Reply-To: <CAFLszTgX8Tfn=qC_ZBMR2M+iwFAOLKQhGQg8w42F1saAmZq4Eg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 22 Jul 2024 10:34:57 +0300
-Message-ID: <CAC_iWjJR=wXX-kv5cmzE38gOCX8FYduX7xhtmm_QHe911GXaPA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
-To: Simon Glass <sjg@chromium.org>, lukas.funke-oss@weidmueller.com
-Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Tim Harvey <tharvey@gateworks.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,79 +94,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all
+Based on rock-3a-rk3568_defconfig.
+Tesetd on v1.31 revision.
 
-On Sun, 21 Jul 2024 at 13:08, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> On Mon, 15 Jul 2024 at 12:23, <lukas.funke-oss@weidmueller.com> wrote:
-> >
-> > From: Lukas Funke <lukas.funke@weidmueller.com>
-> >
-> > tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
-> > initialized in tpm_tis_init(). However, the init-function is called
-> > *after* tpm_tis_wait_init() introducing an uninitalized field access.
-> >
-> > This commit switches both routines.
-> >
-> > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> > ---
-> >
-> >  drivers/tpm/tpm2_tis_spi.c | 10 +++++-----
-> >  1 file changed, 5 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
-> > index b0fe97ab1d0..5a4dbfd3ccb 100644
-> > --- a/drivers/tpm/tpm2_tis_spi.c
-> > +++ b/drivers/tpm/tpm2_tis_spi.c
-> > @@ -256,17 +256,17 @@ static int tpm_tis_spi_probe(struct udevice *dev)
-> >         /* Ensure a minimum amount of time elapsed since reset of the TPM */
-> >         mdelay(drv_data->time_before_first_cmd_ms);
-> >
-> > +       tpm_tis_ops_register(dev, &phy_ops);
-> > +       ret = tpm_tis_init(dev);
-> > +       if (ret)
-> > +               goto err;
-> > +
-> >         ret = tpm_tis_wait_init(dev, chip->locality);
-> >         if (ret) {
-> >                 log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
-> >                 return ret;
-> >         }
-> >
-> > -       tpm_tis_ops_register(dev, &phy_ops);
-> > -       ret = tpm_tis_init(dev);
-> > -       if (ret)
-> > -               goto err;
-> > -
-> >         priv->pcr_count = drv_data->pcr_count;
-> >         priv->pcr_select_min = drv_data->pcr_select_min;
-> >         priv->version = TPM_V2;
-> > --
-> > 2.30.2
-> >
->
-> This needs a Fixes tag for a5c30c26b28 (HEAD) tpm: Use the new API on
-> tpm2 spi driver
->
+Board Specifications:
+- Rockchip RK3566
+- 1/2/4GB LPDDR4 2112MT/s
+- eMMC socket
+- uSD card slot
+- M.2 2230 Connector
+- GbE LAN with POE
+- 3.5mm jack with mic
+- HDMI 2.0, MIPI DSI/CSI
+- USB 3.0 Host/OTG, USB 2.0 Host
+- 40-pin GPIO expansion ports
 
-Yes please we need a fixes tag
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+---
+v3:
+	add suggested by Jonas Karlman <jonas@kwiboo.se> in
+	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
+v2:
+	rebase to updated upstream dts
+---
+ MAINTAINERS                             |  7 ++
+ arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 10 +++
+ configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst         |  1 +
+ 4 files changed, 115 insertions(+)
+ create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+ create mode 100644 configs/rock-3c-rk3566_defconfig
 
-> The old code set up the timeouts first, then did the wait_init.
-> Presumably the point of wait_init is to wait before doing the init, so
-> we should try to keep that behaviour, unless it is actually wrong.
->
-> So my thought would be to move the setup of the required timeout into
-> tpm_tis_ops_register(), instead.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a6e47e8a217..b87077d3adb 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -492,6 +492,13 @@ F:	include/configs/owl-common.h
+ F:	configs/bubblegum_96_defconfig
+ F:	configs/cubieboard7_defconfig
+ 
++ARM RADXA ROCK 3 MODEL C
++M:	Jonas Karlman <jonas@kwiboo.se>
++M:	Maxim Moskalets <maximmosk4@gmail.com>
++S:	Maintained
++F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
++F:	configs/rock-3c-rk3566_defconfig
++
+ ARM RENESAS RMOBILE/R-CAR
+ M:	Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+ M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
+diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+new file mode 100644
+index 00000000000..fd7f5367b75
+--- /dev/null
++++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk356x-u-boot.dtsi"
++
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
+diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+new file mode 100644
+index 00000000000..f44b202c8c3
+--- /dev/null
++++ b/configs/rock-3c-rk3566_defconfig
+@@ -0,0 +1,97 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SCSI_AHCI=y
++CONFIG_AHCI_PCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=4
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index bedc52e03e2..69976ab2463 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
+      - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
+      - Powkiddy X55 (powkiddy-x55-rk3566)
+      - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
++     - Radxa ROCK 3 Model C (rock-3c-rk3566)
+ 
+ * rk3568
+      - Rockchip Evb-RK3568 (evb-rk3568)
+-- 
+2.39.2
 
-tpm_tis_ops_register() is setting up the bus accesses and I'd prefer
-to keep it that way.
-Since this is a static function, we can fold it in tpm_tis_init(),
-which makes more sense
-
-Thanks
-/Ilias
->
-> Regards,
-> Simon
