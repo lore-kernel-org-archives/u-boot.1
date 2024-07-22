@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4D4C3DA5D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:58:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409BAC3DA63
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jul 2024 17:58:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E6398841D;
+	by phobos.denx.de (Postfix) with ESMTP id 797B8884F1;
 	Mon, 22 Jul 2024 19:57:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w2Uk2D0X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oaZeHI/+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C23884CC; Mon, 22 Jul 2024 19:57:47 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 17B6A883D9; Mon, 22 Jul 2024 19:57:47 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14217883BB
+ by phobos.denx.de (Postfix) with ESMTPS id B73D5883DE
  for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 19:57:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5c7b6c6a581so2073132eaf.0
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5d5846f7985so402993eaf.0
  for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 10:57:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1721671063; x=1722275863; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XGaz0fs9yegy5kcV14Vpei8PrOBWPisherUF76538uE=;
- b=w2Uk2D0XWfPis60l/uDtdYWAChlC1r2Df65BpVFGg12g93fQs1cMt2eV6bAHvCABGM
- p+PC/sN647CNbFVZJ9mlPTu9M9Bdx9zZgO9h7KndV3XwVmHXoxv8FsRgQg+PROfdJS3g
- SvUo4AoFRQnIsgYf/fCeRYGP9PWL9GzNwv6I9PuwUs+/IFsHeR4QCJISwlKasL+yv2X/
- URMeYZhzhP8v3MwVP7vfcs3w+EKbGECQB3hvDgckEgcrsTZTpvKi+422Nw6NWyGs8jmA
- zYL80sS6Lcr+1rpnWjzSbnZp99BpYSx/2UYoML7Gxvx40EVluWVfAD5g17yqRAkcsZE4
- r1MQ==
+ bh=WrsM4fGIRFJZwpxDjdxpd7RZs/pDRwGsYnn/StKH7jY=;
+ b=oaZeHI/+8HxdtzURHq/2zB2gITqIiAwXGGk7Jja0zVrjpjktgUFd4b5Xxf+AN1sw2L
+ 7NG/yRHem9vLR+s3Yj+xKaN3t+mDRUnb3SsxfHWGATAdte1o54G3/eLEmlp9GZBgy0ZB
+ wDx6GPJwCHkEYuaHHBBU4SuC7VUcLBgjaW60bK2PdCeKFJbRjdRdcHaMQUEtopom9FE7
+ GrGtYjkjClCaHuArkTALCh9SbZ0YiL5ZWwsj1hCUssqIIV8gIAoihiRsyHnhrylhyDs6
+ eVFI2GpiuxpW6CIyOgsorV5lQWNLqajYzj1Pv0l/297ISLVN4l9yRBbvrAddgT1/9W0m
+ VICA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721671063; x=1722275863;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XGaz0fs9yegy5kcV14Vpei8PrOBWPisherUF76538uE=;
- b=b9s1E9p+d4H2Gcfbc+NlxXL14Bb9bvmGjjCDh8oX/e+m0D9Arz6duin/dBeYOoTHSW
- BkNX7tQmzNc/01NBvceJ0pueFsfVkX5bxHROYSQsb4ADYxp9fyZ+mKPJIzeEUL3K3I9J
- joxR9tZzx82MEQNmfYLNF1GXcpet+RMDvf4pA6CL3mIfnVUGA1sHaCOvl8Y+/Lvk/yPR
- Sd/Fv6EWaBTNi+R165PMPcellCaKLYmL1pTCLdkYkKhv1tHAcN7yIGME3gKra+VrLWOK
- twH6Ehx+1C6trn9gLugs0yyy8ssyS4XonFHIHhWXrckaEBq9pA8ovZ10USdFOioJuDBd
- RvpA==
+ bh=WrsM4fGIRFJZwpxDjdxpd7RZs/pDRwGsYnn/StKH7jY=;
+ b=No66tRbkAhPb7sXpyMZQJXF8mSw9wHMtVuCyM4Gj7XJsB3z64vErsCmWHJtJC8prOT
+ By3RlPGdxKdrjAtdTzRFLrx74MbaeUIEfeDz+KHqxCiSl4CkoIHw+Jy3tTOa525yuqxN
+ QqBoKxY/gDh7eR6XtTGVABRgT9cg9UBq59EQTKo02DTeBIiK20q5nK7/QBUVS72ZEa8q
+ QtLuWq+PgrR/UE/94/01GPL2p1H/JykBB5FosNY2MeEEFuIMvuyczsg7a41tVoKxZtOD
+ UHz03nWCXnNJ722vu+eCGh0Rb5Zca9l4tDH0KD4gEvel67M+05uNHblrAGwn9D3b/DRe
+ 6LxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFm2/2q9rgQ0v1Ql4B2bjzQFzcRzf55CCeM7CvjK8OwbW802rsdhWr1xV+4AuHbVFALooKUELYkUbJoiUXUc8ELG1HOw==
-X-Gm-Message-State: AOJu0YzOrIUEXlq4Jt9zJj7sepop8jP3q17YXMPZosbyHPSB/EnD5fV2
- tWWwUVvX0RIdNss8tz/bl3nD7wcRujXF9TKOZ+dc31E4VahjAlveJN1u9m3o7i0=
-X-Google-Smtp-Source: AGHT+IG1cuUBbkDC/QkGcByV31didQemieJ/Nz67EWguvkScC1A/UpCAkq3XdZlSMySQd/wwvwTJuQ==
-X-Received: by 2002:a05:6820:278c:b0:5c4:396e:4217 with SMTP id
- 006d021491bc7-5d58b5b5a1fmr838230eaf.0.1721671062667; 
- Mon, 22 Jul 2024 10:57:42 -0700 (PDT)
+ AJvYcCXKcTucEIjEG2kRfaA+Al6bGo+jIvlfRcM7Iwpx5xIoE4pqhbWy98+ufiVN9MFXYm/dR15uszAS7VL6QyEL8n0tlwrRMQ==
+X-Gm-Message-State: AOJu0YwKdukAwx2M+DEKpxTNiBJ+zgupAVgKUPqabv31Y2bwwyqiob+/
+ 0+Wfom2UnouxPbkU/vtFb+RaWYzptSNe5ai1zr3nd0m66kvUAFApwBcy2OLnRO0=
+X-Google-Smtp-Source: AGHT+IGgaITIbKID14gVFkyhly4FL/zbI0quFTWFwHdmcDIReyi6ikYj8oelUdWy7AQfobATCj0sNQ==
+X-Received: by 2002:a05:6820:4c0a:b0:5c4:e036:e383 with SMTP id
+ 006d021491bc7-5d56500366cmr10446736eaf.8.1721671063387; 
+ Mon, 22 Jul 2024 10:57:43 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d55aad172csm1473828eaf.38.2024.07.22.10.57.42
+ 006d021491bc7-5d55a831b79sm1480335eaf.17.2024.07.22.10.57.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 10:57:42 -0700 (PDT)
+ Mon, 22 Jul 2024 10:57:43 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>,
 	Minkyu Kang <promsoft@gmail.com>
@@ -79,9 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 02/38] mmc: dw_mmc: Move struct idmac to dw_mmc.c
-Date: Mon, 22 Jul 2024 12:57:04 -0500
-Message-Id: <20240722175740.6985-3-semen.protsenko@linaro.org>
+Subject: [PATCH v3 03/38] mmc: dw_mmc: Extract waiting for data busy into a
+ separate routine
+Date: Mon, 22 Jul 2024 12:57:05 -0500
+Message-Id: <20240722175740.6985-4-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 References: <20240722175740.6985-1-semen.protsenko@linaro.org>
@@ -103,8 +104,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-struct idmac is only used in dw_mmc.c, so move it there from dwmmc.h to
-avoid cluttering the interface in the header.
+Waiting for data busy is a logically separate operation and should be
+implemented as a separate routine. Follow Linux kernel example and
+extract it from dwmci_send_cmd(). This way it doesn't clutter
+dwmci_send_cmd() function, and can be reused later in other cases.
 
 No functional change.
 
@@ -117,46 +120,56 @@ Changes in v3:
 Changes in v2:
   - Added R-b tag from Quentin
 
- drivers/mmc/dw_mmc.c | 7 +++++++
- include/dwmmc.h      | 7 -------
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/mmc/dw_mmc.c | 25 ++++++++++++++++---------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index e6107c770fe3..9d668b3d8813 100644
+index 9d668b3d8813..a82f6a96db39 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -20,6 +20,13 @@
+@@ -246,6 +246,21 @@ static int dwmci_set_transfer_mode(struct dwmci_host *host,
+ 	return mode;
+ }
  
- #define PAGE_SIZE 4096
- 
-+struct dwmci_idmac {
-+	u32 flags;
-+	u32 cnt;
-+	u32 addr;
-+	u32 next_addr;
-+} __aligned(ARCH_DMA_MINALIGN);
++static void dwmci_wait_while_busy(struct dwmci_host *host, struct mmc_cmd *cmd)
++{
++	unsigned int timeout = 500; /* msec */
++	ulong start;
 +
- static int dwmci_wait_reset(struct dwmci_host *host, u32 value)
- {
- 	unsigned long timeout = 1000;
-diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 39024fb38aaa..7e4acf096dce 100644
---- a/include/dwmmc.h
-+++ b/include/dwmmc.h
-@@ -198,13 +198,6 @@ struct dwmci_host {
- 	bool fifo_mode;
- };
++	start = get_timer(0);
++	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
++		if (get_timer(start) > timeout) {
++			debug("%s: Timeout on data busy, continue anyway\n",
++			      __func__);
++			break;
++		}
++	}
++}
++
+ #ifdef CONFIG_DM_MMC
+ static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
+ 		   struct mmc_data *data)
+@@ -260,19 +275,11 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+ 	ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac, cur_idmac,
+ 				 data ? DIV_ROUND_UP(data->blocks, 8) : 0);
+ 	int ret = 0, flags = 0, i;
+-	unsigned int timeout = 500;
+ 	u32 retry = 100000;
+ 	u32 mask, ctrl;
+-	ulong start = get_timer(0);
+ 	struct bounce_buffer bbstate;
  
--struct dwmci_idmac {
--	u32 flags;
--	u32 cnt;
--	u32 addr;
--	u32 next_addr;
--} __aligned(ARCH_DMA_MINALIGN);
+-	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
+-		if (get_timer(start) > timeout) {
+-			debug("%s: Timeout on data busy, continue anyway\n", __func__);
+-			break;
+-		}
+-	}
 -
- static inline void dwmci_writel(struct dwmci_host *host, int reg, u32 val)
- {
- 	writel(val, host->ioaddr + reg);
++	dwmci_wait_while_busy(host, cmd);
+ 	dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_ALL);
+ 
+ 	if (data) {
 -- 
 2.39.2
 
