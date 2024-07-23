@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C4DC3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 04:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD3BC3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 05:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E143B88266;
-	Tue, 23 Jul 2024 06:58:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ECBC886A0;
+	Tue, 23 Jul 2024 07:40:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gmwV13Le";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="b5mBoyUC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B77E3886E6; Tue, 23 Jul 2024 06:58:45 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C1DC3886FC; Tue, 23 Jul 2024 07:40:15 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D37B187D1A
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 06:58:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B84D888681
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 07:40:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3cabac56b38so3230528b6e.3
- for <u-boot@lists.denx.de>; Mon, 22 Jul 2024 21:58:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721710720; x=1722315520; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=otaCMEXUGR6FM+82Afkpz4R/n41GN+sA53rDGorlx9M=;
- b=gmwV13Lewith8L2qR2QniRygO/KJ4yccpyrQB4Ene80BIZQUDtGzdEF+2XSaj9UwIC
- F4TEB4+NSNXNYp5gsF+1hSu5dZIeH5MG/B9nXsKDPp7Ip+PlSt3DAtEGuyOFDOic6UiV
- P90IEVAB5KrQF0J1GBg9pj9urXy3ByDskeYMVf1Wm8zZwHbNRC5dd+TE72YGG1DC0KPD
- pbRA6fgF1XFwy8OtZcPbxY54pe3VYW+pJQ4S0E5hbvSwIPNOv/MphT1NinjpHTjeIZQf
- zGMXN6DjNMnq2HZF4svRqojFDHJXztwRF5vWm3eNx/pNyKX1DYYjKUJRtzkj+LTbIgEP
- +rZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721710720; x=1722315520;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=otaCMEXUGR6FM+82Afkpz4R/n41GN+sA53rDGorlx9M=;
- b=oMpv2XXankKDHLsSJhNcWCGQmLH7Rd3ObDOfdqg2f2CbMz+eD7LYKqBeEiffTyBufI
- 4q0QqRwc7sk1iPZcbPYTeKlFZFCYUw3LF7TpN6QKHTGERKzX4KsnqhLmo6lk8VVbp4/3
- GKtfx7m8rm6hhYgtbBErSrxz1nYqfyqB6bcNshWbOwfhM7pa6HUXtjykbRRSN6z/F/km
- RdEJbiry9nEcgxYuy/jT7mcfVAQ9109043tR5uFs/kt2KFXkBxCqNMIr7es7O72V0dA2
- Yd3cgFHmLqcx8EjRjMyq0h25k6FewJ4CLOPLVlWKeIv/5nh1qbV6kTd3yuOSWY7Px59Z
- 5EOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXvbvRXhAlCD/O/0JL+2VCOF0HJcJUC1cMA83QLMHcVSR8tM13WHzanbZyzVpVP5wgn+YrisSrR4zXzasNUXosxVDJjIA==
-X-Gm-Message-State: AOJu0YxxApVadXkJeV2aXcHGY37GBTX1ns5YhmPDY/MUuL1b4+64CZtU
- nL+LkMUqMX3B+l2lb2S5BElrkBr4y1eG/VdslgNnh4bhk+KJ2PMzo8mKKmPZ/Q+N8rElXkJDzKc
- SK/4I5qqavm19L33EndmmrqUrZUE=
-X-Google-Smtp-Source: AGHT+IFeqKuCCzRX2DJphiGBXmFTbiiGK8endU635T5ciIzKo1JVeJ+/KXsdBt5Bf5GB8Fw2mTSjxPGOEfvaIL9KKqA=
-X-Received: by 2002:a05:6808:1443:b0:3d5:6413:2138 with SMTP id
- 5614622812f47-3dafd0cffaamr2384851b6e.12.1721710720495; Mon, 22 Jul 2024
- 21:58:40 -0700 (PDT)
+ spf=fail smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1721713209; x=1722318009; i=xypron.glpk@gmx.de;
+ bh=Vyb+niZTB2eSMMCCdkdVzvV5jueXffIYf88CN70SglY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=b5mBoyUCzZO3Wv4he8Ueq4d8KdiSGDMlWaWXB3LOi0D1c7UHekTMo9qBrLaZF1NS
+ FcTtJXQzzo5nZ+6c9u0qmTZ8FcJzlAkCyvnMRw0LrRBAE3i0WiDur1Thx7/90i2xD
+ 7L95szQgzooFei/3WiSuJlTyu9zWEIJMen2iTvHToPOMa4ghaSmrnpbg8cgINU0Wd
+ duBfO8AZyFbMNzcONyDE0zJabb2xISx7JV4GLzuuaC0mI9u/g7Mfam9KtFeoliC2r
+ u+CPn8cjaTOhQQBjseEdnhS0c1+oWwltB7cEs+vmf5I/is6pdZhwJogPslbtr0hee
+ 9bCJ8ike9L3H+x+ltQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MrQEn-1rzbNW0DQt-00kS65; Tue, 23
+ Jul 2024 07:40:09 +0200
+Message-ID: <eca1559a-e34e-4951-b94a-215b6ea15bde@gmx.de>
+Date: Tue, 23 Jul 2024 07:39:59 +0200
 MIME-Version: 1.0
-References: <20240716031709.24943-1-semen.protsenko@linaro.org>
- <CAPLW+4mAqpgWwiX4fvZFjWMWPtY9Mx11b9oPghzfpFoD8FU98A@mail.gmail.com>
-In-Reply-To: <CAPLW+4mAqpgWwiX4fvZFjWMWPtY9Mx11b9oPghzfpFoD8FU98A@mail.gmail.com>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 23 Jul 2024 13:58:29 +0900
-Message-ID: <CALrBrZ1d-1Ytxtos9-NzDjNwyyY8T+aOqHU03+KDhJLdMYPt6A@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] arm: exynos: Enable TRNG for E850-96 board
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Anand Moon <linux.amoon@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, 
- Minkyu Kang <mk7.kang@samsung.com>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: add /dtbs search path
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20240722175532.184842-1-caleb.connolly@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240722175532.184842-1-caleb.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Provags-ID: V03:K1:cc521xUB2ChTxZg0qlIn6EOnXgk+rM07WGRzM8aYNdSso8Z4e8i
+ zJlUf9WOQ/earkqlwsjXqlLq0McF1xfOeaFxexK/hH/Gw6vY1g2ik2/Wc9zK8ToGIQeQ1uS
+ Wxew6aZ6f/M0QqX8mDK9x90fDwHNKMvMEWmYSeF4LAbtHMRZ1QLRiYYpfZy2LOtpeWcXbJ4
+ kjPO2Sd8qp/0a3keRnKnw==
+UI-OutboundReport: notjunk:1;M01:P0:f363OeSkSkY=;XIBui/VWkZ3Anu+VkxfFSlSmy6p
+ 5/NPz4xJfRLJIOBCvFlbFxLqT2YeBwhb0JfLa2b1K4KLawPDGtNpqgc6Jri1TO4yywtG6uPN8
+ sO3gD3OnWu8iBsOD4lMVlGrKDSnpHYecstDUhAzqpQMFq9AQpp/E1KD4aXMtgCA06BoCG3ttk
+ qBdzIUcjmEMjedHmEFTrVSczjHmq/ItX7N1ggV+6MKRlTy649zHqOrZtl+b2ibE/qwhSpfEKE
+ qZoJ2P4Uo7FA7K5/ivnCredMA1GsvXByftGCKAj7hmDsCua4ueG1Ab66LJc0rQGiN6t0yuFsg
+ omS49wc0e1+BSmhuWOZhd9AAp0jVV5LTV5aeiuY1kyKtxzoftbTjl9xzckoksRopB+Y6I2XUz
+ xHkFN7X3EWvH+IBRmxEvNoPiPQHn5kwJ00vsgpQPvtTH0WrRcuAQXjhTmGmBIAeEXLtl7evQE
+ WW3inK+2jFjCc/bEGp1Ib6Uziu5J7RUUZYPbLu2BSqiMd9yQ6q2quZu4A2y8pitCQ6d3MjbMW
+ LFr/qh/DXEy+ElDdP4C7AUiobw05wSptaWpGgkThtfShgDCoS6lhRtETGntcdlbgdl5ViMaN/
+ mMlHgdbf2oVOSndf5hPwh8e4akCVG/Q0h/6gw3y42Powf2zqfSfGgQXHVmXAezP2M5XI7q6tk
+ tYRzUPXLV/sGjxrt4fSBJuBF8hrdt5ce5ZFNtrY61vzkkkVIqFXvfHXkOGPYYEJGffovFG90I
+ mAS7tUylAs/gkIK1vBe2p4WLvF1iCQiLh7o/htSzAU+pBrnB8DHAyvFhaq2ys7bHQ16hzHLmT
+ 8YgqfL2G+2tyrKOHY/lAn14Q==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,91 +90,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-
-2024=EB=85=84 7=EC=9B=94 23=EC=9D=BC (=ED=99=94) 03:17, Sam Protsenko <seme=
-n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
-
-> Hi Minkyu,
+On 7/22/24 19:55, Caleb Connolly wrote:
+> Add an additional search path /dtbs, this is where dtbs are installed on
+> postmarketOS and potentially other distros.
 >
-> Can you please take a look at this series? And also my MMC series [1]
-> has been pending for a while now, if it's ok with you -- can you
-> please apply it?
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   lib/efi_loader/efi_fdt.c | 3 +++
+>   1 file changed, 3 insertions(+)
 >
-> Thanks!
+> diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
+> index 86ba00c2bdd9..4777943b80df 100644
+> --- a/lib/efi_loader/efi_fdt.c
+> +++ b/lib/efi_loader/efi_fdt.c
+> @@ -42,8 +42,11 @@ int efi_get_distro_fdt_name(char *fname, int size, in=
+t seq)
+>   		break;
+>   	case 2:
+>   		prefix =3D "/dtb/current";
+>   		break;
+> +	case 3:
+> +		prefix =3D "/dtbs";
+
+Debian's flash-kernel also installs into /dtbs.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> +		break;
+>   	default:
+>   		return log_msg_ret("pref", -EINVAL);
+>   	}
 >
-> [1] https://lists.denx.de/pipermail/u-boot/2024-July/559602.html
->
-> On Mon, Jul 15, 2024 at 10:17=E2=80=AFPM Sam Protsenko
-> <semen.protsenko@linaro.org> wrote:
-> >
-> > This series enables True Random Number Generator (TRNG) for E850-96
-> > board. Here is a short breakdown of features implemented in this series=
-:
-> >
-> >   1. Load LDFW (Loadable Firmware) on E850-96 board. It's needed to mak=
-e
-> >      TRNG SMC commands functional. To do so, add the default eMMC
-> >      partition table and implement reading and applying LDFW in
-> >      board_init().
-> >   2. Add Exynos TRNG driver
-> >   3. Enable Exynos TRNG driver on E850-96 board. It requires SSS clocks
-> >      to be enabled, so add those clocks as well.
-> >
-> > With this series it's possible to generate random numbers in U-Boot
-> > (e.g. using 'rng' command). The main reason for RNG enablement on
-> > E850-96 board -- it's needed for EFI_RNG_PROTOCOL and kaslr, so it's on=
-e
-> > of the requirements to enable EFI boot support on E850-96 board, which
-> > in turn is needed (among other things) for EBBR spec and SystemReady IR
-> > certification. With this series it's also possible to use TRNG in Linux
-> > kernel (which was recently added, see [1] for details), as Linux kernel
-> > Exynos TRNG driver also relies on LDFW firmware to be loaded in the
-> > bootloader.
-> >
-> > Changes in v2:
-> >   - Addressed comments for [PATCH 4/5] rng: Add Exynos TRNG driver
-> >
-> > [1]
-> https://lore.kernel.org/all/20240618003743.2975-1-semen.protsenko@linaro.=
-org/T/#me6ba1762a254ca438a9715f011d32820babfe2d8
-> >
-> > Sam Protsenko (5):
-> >   board: samsung: e850-96: Add default partitions
-> >   board: samsung: e850-96: Load LDFW firmware on board init
-> >   clk: exynos: Add SSS clocks for Exynos850
-> >   rng: Add Exynos TRNG driver
-> >   arm: exynos: Enable TRNG on E850-96 board
-> >
-> >  arch/arm/dts/exynos850-e850-96-u-boot.dtsi |  11 +
-> >  arch/arm/mach-exynos/Kconfig               |   2 +
-> >  board/samsung/e850-96/Makefile             |   4 +-
-> >  board/samsung/e850-96/e850-96.c            |   6 +-
-> >  board/samsung/e850-96/e850-96.env          |  26 ++
-> >  board/samsung/e850-96/fw.c                 | 131 ++++++++++
-> >  board/samsung/e850-96/fw.h                 |  12 +
-> >  configs/e850-96_defconfig                  |   1 +
-> >  drivers/clk/exynos/clk-exynos850.c         |  10 +
-> >  drivers/rng/Kconfig                        |  13 +
-> >  drivers/rng/Makefile                       |   1 +
-> >  drivers/rng/exynos-trng.c                  | 291 +++++++++++++++++++++
-> >  12 files changed, 504 insertions(+), 4 deletions(-)
-> >  create mode 100644 board/samsung/e850-96/e850-96.env
-> >  create mode 100644 board/samsung/e850-96/fw.c
-> >  create mode 100644 board/samsung/e850-96/fw.h
-> >  create mode 100644 drivers/rng/exynos-trng.c
-> >
-> > --
-> > 2.39.2
-> >
 
-
-Your patch was failed to apply to u-boot-samsung due to the
-e850-96_defconfig.
-please rebase the patch.
-
-and about mmc patches, those have delegated to mmc maintainers.
-
-Thanks,
-Minkyu Kang.
