@@ -4,97 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB18C3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 20:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5327CC3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 20:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53F378831F;
-	Tue, 23 Jul 2024 22:45:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D64787BF4;
+	Tue, 23 Jul 2024 22:53:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RZ0D1X5J";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uUqklVc7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDD7287876; Tue, 23 Jul 2024 22:45:11 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 7B18F841BC; Tue, 23 Jul 2024 22:53:48 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91C20885B9
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 22:45:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A414687BF4
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 22:53:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5ce74defe43so3212263eaf.2
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 13:45:07 -0700 (PDT)
+ spf=fail smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-66493332ebfso53211467b3.3
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 13:53:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721767506; x=1722372306; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wAbfYoKc5RFlTIXX7sLj4QHjmMPzmMwfrVQ3TOIHJ7g=;
- b=RZ0D1X5JO46zrWQuC4XDQdCKl4makLVKsyvdznttJJRLntHc01yErBVVmrORC1o3WK
- HfXdLoDIS4ORQPbmQZaxVHQEkTOw0nJXRtNlmAWEuq02cBx+EKHyDNJs7R4HUdx1xu5f
- eaXw0TGbitj+qNLrH4Q0tu3FofT3uUMnWHZl4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721767506; x=1722372306;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1721768013; x=1722372813; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wAbfYoKc5RFlTIXX7sLj4QHjmMPzmMwfrVQ3TOIHJ7g=;
- b=B0NP3R1tWAl3e5Ew7koc9AemiH2E4OO7cb1vUJxTrCvQ1le4FpIPkXh4PvmDotk+AB
- w4co/vy25uzSVq5QNxWNYrtHmMYz7ifrNOkCg1np/djyVJZMkthJtFMliFOfHzCkp4hk
- FdLPo7RKn6tvdzjcpGsl0t7/+Qt2tTqQ4EO+RxSxaiMBUBerrB/GHXMjuDKxyYS5gJiL
- ujt3um/c+T1R+zG0FVL/vBjADBf6RE084BVR5hr5PJ8mDs64LI4llEidXdxJHszEV/oP
- er9nr7qdGg1kDPQJgDTtbxv8EFshsEZgwvg5v2ygUFaweBdhYKhO6laHoXu3jMYU0r3O
- e65Q==
-X-Gm-Message-State: AOJu0YwOd4u75hFtJzuri3GfkI9vonaEWpo+A9bjvqzHPEtX3VUqo5lt
- SqmW8YEL0RvTPxgttXCl7e7xJuyvEOfdzqlBkn1+i9xXSTW8T03LMJBzWlVf6+w=
-X-Google-Smtp-Source: AGHT+IGg9zAnKuB2v6Rh8lpaMMFOkt5Wx3UzcVyxQHUtEzB7aaFv+5g1OSVbxNfNuDlhABWuoSR5Lw==
-X-Received: by 2002:a05:6870:f10e:b0:260:f24f:62d2 with SMTP id
- 586e51a60fabf-2648ca44c9fmr36970fac.17.1721767506130; 
- Tue, 23 Jul 2024 13:45:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2610c716d8fsm2324709fac.5.2024.07.23.13.45.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 13:45:05 -0700 (PDT)
-Date: Tue, 23 Jul 2024 14:45:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v4 00/29] Integrate MbedTLS v3.6 LTS with U-Boot
-Message-ID: <20240723204502.GJ989285@bill-the-cat>
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240703012555.GX38804@bill-the-cat>
- <CAEfUkUKhso=O4oFDoJsEd=m+o-avKYvTHMDUHGQsLFQs7vpy-w@mail.gmail.com>
+ bh=DewhSkU7LjnmRxrL5DyulxRJp1zistuFm4SYqYV4pPQ=;
+ b=uUqklVc7OGvf5NMEtRPGqPp3FB2iuouDu/uvSls5JKFc71GUE0R3N/bJwOJFFMxKVN
+ DLj2O8gb2WW2SoCeSyklNqMb8ZlkIzWMFenZ8N0yU4PyibNeczRYUgoUM3KjQdym3kSw
+ IeaHtgJsDpgDp643UIS6k3p9xPaTBGpnEdpTvc04UtbNLUtU04RSRxdD46G4fPbr6VmY
+ Khxws+sRshQ2xHWyTcNAYVuWiss8088GR1ZV/dVQqXtoeMP0Lvg7TdeloTeHrNuDm3Gr
+ dUU9QwJv78VDGAGZUdk61hCIJjcdztVMOQphFjKfXrN1CLTEU9a1br3/sGlTVqyMgFsc
+ o8nQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721768013; x=1722372813;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DewhSkU7LjnmRxrL5DyulxRJp1zistuFm4SYqYV4pPQ=;
+ b=m8vUBYGu3wxlGhjHQvkFphV7mlyOglSI6IAZePkGkc8oQR2AJLean5JppVcxoHo2cD
+ h2KRqpeovj+cD6nk2PwN5IgbqmSBSXprc9Z2X+RZmCWP3M3A0ufydxv54LZ0vhJBacSE
+ kBrG2CPHpHj/JhScJlan76+6v8n5o8EAj/ZhshGb7QNP0hxbC67GFy6tO9OBhMv97d6S
+ 9qGeDMXpUuAuLtxqgsoEI+Glnjrr/kX1JqeoLs6XObzsbC7iTFrQKx4E8oFxoO53RGQx
+ dyF7ZHJ6ye2VvFz9MjUUNjCgBhEEvqsphlg+rynUkD5zIyZeCCWbE4nVBmyZ1x9sJmmd
+ i/Rg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXF9AYghc9VJiHIqTt5EwsyS7ka5i7uar/cGR+0xvz3aV7LDK4zHi5Ytoz2vZPa2fkU/p+VJmLS1C5sSdW7EPOjX947vg==
+X-Gm-Message-State: AOJu0YyexwjbBKGMGwgjUaNjlBWMjyTmD3nEPAPjm83GuWKXMnSRnVB0
+ Mpb4DcGq4fTfEPBAQLjig1gly65KPS7vjCzsS5bIuV0cri2Keq2dj1lBYzWLUVZeXjgcBykoCmO
+ LLebVEnmMk8wAIne4CTFsgY1AtlDku6bP1tb4Fg==
+X-Google-Smtp-Source: AGHT+IFZK4BhxDZMi9xHXf9Ny6QKYxTlCS/0oT13ZivyAdnsVhjAqsqSz7dX5RnWdXgbAiylaKd9TuBPa4N/j2njoFw=
+X-Received: by 2002:a05:690c:dc2:b0:61b:e645:3e94 with SMTP id
+ 00721157ae682-66a684c2bb8mr187574557b3.5.1721768013316; Tue, 23 Jul 2024
+ 13:53:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xdar3rRqsuKKYDru"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkUKhso=O4oFDoJsEd=m+o-avKYvTHMDUHGQsLFQs7vpy-w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240308000432.32369-1-semen.protsenko@linaro.org>
+ <a135888e-0d97-1382-c1f9-5bf097a7ffe3@gmail.com>
+ <CAPLW+4=f1AcZRde8e+rWWpCm9BtFAACqdWCfMryRBcSFn4OinA@mail.gmail.com>
+ <CAPLW+4kBMcO8xOyHYeOqi+npCT651990Efyuanzq8jDgnaqX5Q@mail.gmail.com>
+ <CAPLW+4kP_Y4YMtsYpK_uA4B4s-a36UA7ZPZNiV_KYBuDb_qJwg@mail.gmail.com>
+ <20240613153310.GM68077@bill-the-cat>
+ <CAOf5uwm8ez2MxirkxYQ=VXQOnV9z2s3zeKMPMJnhBa-QRXV9eA@mail.gmail.com>
+In-Reply-To: <CAOf5uwm8ez2MxirkxYQ=VXQOnV9z2s3zeKMPMJnhBa-QRXV9eA@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 23 Jul 2024 15:53:21 -0500
+Message-ID: <CAPLW+4mN1iOC7nZ6pJttgp2UdO0RdW2yv69P5kPOf_2YE+TO5A@mail.gmail.com>
+Subject: Re: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Yang Xiwen <forbidden405@outlook.com>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,220 +103,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Jul 3, 2024 at 10:00=E2=80=AFAM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi all
+>
+> Working on the clock now. I have done a different implementation
+>
+> clk-mux, clk-gate I have added a clk_generic_set_rate that is a stub
+> that propagate to the parent, I think that should work the same but
+> wihout this while and even on preparation on more
+> changes I need. Can be work on your case too?
+>
 
---xdar3rRqsuKKYDru
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Michael,
 
-On Tue, Jul 23, 2024 at 03:24:29PM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Tue, 2 Jul 2024 at 21:26, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Tue, Jul 02, 2024 at 11:22:36AM -0700, Raymond Mao wrote:
+I've provided some thoughts on your gate/mux implementation here: [1].
+As you've submitted your (different) implementation of the same
+feature, but 4 months later, I guess my patch doesn't cover your
+cases, or perhaps it has some design flaws? Please let me know.
+
+If anything, that shows there is a rising need in this propagation
+feature. I'd like to encourage the maintainers to take a look at both
+implementations, and maybe at least comment on why there is hesitance
+to accept this patch. It's been almost 5 months that I'm trying to
+push that through, and my MMC work (DDR mode on E850-96 board to be
+precise) still very much depends on this.
+
+Thanks!
+
+[1] https://lists.denx.de/pipermail/u-boot/2024-July/559753.html
+
+
+> Michael
+>
+> On Thu, Jun 13, 2024 at 5:33=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
 > >
-> > > Integrate MbedTLS v3.6 LTS (currently v3.6.0-RC1) with U-Boot.
+> > On Mon, Jun 10, 2024 at 02:43:17PM -0500, Sam Protsenko wrote:
+> > > On Tue, May 14, 2024 at 3:26=E2=80=AFPM Sam Protsenko
+> > > <semen.protsenko@linaro.org> wrote:
+> > > >
+> > > > On Wed, May 1, 2024 at 4:12=E2=80=AFPM Sam Protsenko <semen.protsen=
+ko@linaro.org> wrote:
+> > > > >
+> > > > > On Wed, Apr 10, 2024 at 9:53=E2=80=AFPM Sean Anderson <seanga2@gm=
+ail.com> wrote:
+> > > > > >
+> > > > > > On 3/7/24 19:04, Sam Protsenko wrote:
+> > > > > > > Sometimes clocks provided to a consumer might not have .set_r=
+ate
+> > > > > > > operation (like gate or mux clocks), but have CLK_SET_PARENT_=
+RATE flag
+> > > > > > > set. In that case it's usually possible to find a parent up t=
+he tree
+> > > > > > > which is capable of setting the rate (div, pll, etc). Impleme=
+nt a simple
+> > > > > > > lookup procedure for such cases, to traverse the clock tree u=
+ntil
+> > > > > > > .set_rate capable parent is found, and use that parent to act=
+ually
+> > > > > > > change the rate. The search will stop once the first .set_rat=
+e capable
+> > > > > > > clock is found, which is usually enough to handle most cases.
+> > > > > > >
+> > > > > > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > > > > > > ---
+> > > > >
+> > > > > [snip]
+> > > > >
+> > > > > >
+> > > > > > Can you give an example of where this is needed?
+> > > > > >
+> > > > >
+> > > > > Sure. In my case it's needed for eMMC enablement on E850-96 board=
+.
+> > > > > eMMC node in the device tree [1] is a gate clock
+> > > > > (CLK_GOUT_MMC_EMBD_SDCLKIN), so the MMC driver won't be able to c=
+hange
+> > > > > its rate. But that clock actually has CLK_SET_RATE_PARENT flag se=
+t in
+> > > > > the clock driver [2]. So the right thing to do in this case (and
+> > > > > that's basically how it's done in Linux kernel too) is to travers=
+e the
+> > > > > clock tree upwards, and try to find the parent capable to do .set=
+_rate
+> > > > > (which is usually a divider clock), and use it to change the cloc=
+k
+> > > > > rate. I'm working on exynos_dw_mmc driver [3] right now, making i=
+t use
+> > > > > CCF clocks, but I can't do that before this patch is applied.
+> > > > >
+> > > > > Grepping the U-Boot tree I can see the CLK_SET_RATE_PARENT flag i=
+s
+> > > > > also used in various IMX clock drivers and STM32MP13 clock driver=
+. I
+> > > > > guess without this change those flags will be basically ignored.
+> > > > >
+> > > > > Thanks!
+> > > > >
+> > > >
+> > > > Hi Sean,
+> > > >
+> > > > Just wanted to check if you think my explanation above is ok and th=
+e
+> > > > patch can be applied? I'm finishing my new patch series for enablin=
+g
+> > > > MMC on E850-96, but this patch has to be applied first.
+> > > >
+> > > > Thanks!
+> > > >
 > > >
-> > > Motivations:
-> > > ------------
+> > > Hi Tom,
 > > >
-> > > 1. MbedTLS is well maintained with LTS versions.
-> > > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
-> > > 3. MbedTLS recently switched license back to GPLv2.
-> > >
-> > > Prerequisite:
-> > > -------------
-> > >
-> > > This patch series requires mbedtls git repo to be added as a
-> > > subtree to the main U-Boot repo via:
-> > >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
-> > >           https://github.com/Mbed-TLS/mbedtls.git \
-> > >           v3.6.0 --squash
-> > > Moreover, due to the Windows-style files from mbedtls git repo,
-> > > we need to convert the CRLF endings to LF and do a commit manually:
-> > >     $ git add --renormalize .
-> > >     $ git commit
-> > >
-> > > New Kconfig options:
-> > > --------------------
-> > >
-> > > `MBEDTLS_LIB` is for MbedTLS general switch.
-> > > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
-> > with
-> > > MbedTLS.
-> > > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN=
-1,
-> > > and Pubkey parser with MbedTLS.
-> > > `MBEDTLS_LIB_TLS` is for SSL/TLS (Disabled until LWIP port for MbedTL=
-S is
-> > > ready).
-> > > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto libr=
-ary.
-> > > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
-> > > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
-> > > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTL=
-S`
-> > > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
-> > > introduced.
-> > >
-> > > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X5=
-09
-> > > are by default enabled in qemu_arm64_defconfig for testing purpose.
-> > >
-> > > Patches for external MbedTLS project:
-> > > -------------------------------------
-> > >
-> > > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
-> > > executables which is not supported by MbedTLS at the moment,
-> > > addtional patches for MbedTLS are created to adapt with the EFI loade=
-r:
-> > > 1. Decoding of Microsoft Authentication Code.
-> > > 2. Decoding of PKCS#9 Authenticate Attributes.
-> > > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
-> > certificates.
-> > > 4. MbedTLS native test suites for PKCS#7 signer's info.
-> > >
-> > > All above 4 patches (tagged with `mbedtls/external`) are submitted to
-> > > MbedTLS project and being reviewed, eventually they should be part of
-> > > MbedTLS LTS release.
-> > > But before that, please merge them into U-Boot, otherwise the building
-> > > will be broken when MBEDTLS_LIB_X509 is enabled.
-> > >
-> > > See below PR link for the reference:
-> > > https://github.com/Mbed-TLS/mbedtls/pull/9001
-> > >
-> > > Miscellaneous:
-> > > --------------
-> > >
-> > > Optimized MbedTLS library size by tailoring the config file
-> > > and disabling all unnecessary features for EFI loader.
-> > > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha=
-256,
-> > > sha512) are completely replaced when MbedTLS is enabled.
-> > > From v3, the size-growth is slightly reduced by refactoring Hash
-> > functions.
-> > >
-> > > Target(QEMU arm64) size-growth when enabling MbedTLS:
-> > > v1: 6.03%
-> > > v2: 4.66%
-> > > v3 & v4: 4.55%
-> > >
-> > > Please see the latest output of bloat-o-meter for the reference of the
-> > > size-growth on QEMU arm64 target [1].
-> > >
-> > > Tests done:
-> > > -----------
-> > >
-> > > EFI Secure Boot test (EFI variables loading and verifying, EFI signed
-> > image
-> > > verifying and booting) via U-Boot console.
-> > > EFI Secure Boot and Capsule sandbox test passed.
-> > >
-> > > Known issues:
-> > > -------------
-> > >
-> > > None.
-> > >
-> > > [1]: bloat-o-meter output between disabling/enabling MbedTLS (QEMU ar=
-m64)
-> > > ```
-> > > add/remove: 206/81 grow/shrink: 19/17 up/down: 55548/-17495 (38053)
+> > > Would it be reasonable to ask you to take care of this patch? It's
+> > > been ignored for 3 months now, but it's needed for eMMC enablement on
+> > > E850-96 board.
 > >
-> > bloat-o-meter is a bit off then, since buildman shows:
-> > u-boot: add: 243/-17, grow: 18/-17 bytes: 65723/-8480 (57243)
+> > Any comments at this point Sean?
 > >
-> > (Please use buildman for the size comparisons in the future).
-> >
->=20
-> I have a problem with buildman.
-> As I followed the buildman/README.rst and run below command, but cannot g=
-et
-> any
-> output size summary. Is anything missing? I saw some artifacts of building
-> each
-> commit being generated in the upper dir though.
-> ```
-> ./tools/buildman/buildman -b <my_branch_name> --boards qemu_arm64 -sSdB
-> ```
-> I have set my branch upstream to upstream/next.
-
-You have to tell it twice, once to build and a second to summarize
-things. My wrapper looks like:
-#!/bin/bash
-
-# Initial and constant buildman args
-ARGS=3D"-devl -PEWM"
-ALL=3D0
-KEEP=3D0
-
-# Find our arguments
-while test $# -ne 0; do
-	if [ "$1" =3D=3D "--all" ]; then
-		ALL=3D1
-		shift 1
-	elif [ "$1" =3D=3D "--branch" ]; then
-		BRANCH=3D$2
-		shift 2
-	elif [ "$1" =3D=3D "--keep" ]; then
-		KEEP=3D1
-		ARGS=3D"$ARGS -k"
-		shift 1
-	elif [ "$1" =3D=3D "--board" ]; then
-		MACHINE=3D"--board $2"
-		OUTDIR=3D/tmp/$2
-		shift 2
-	else
-		MACHINE=3D$1
-		shift 1
-	fi
-done
-
-OUTDIR=3D${OUTDIR:-/tmp/$MACHINE}
-
-if [ -z "$MACHINE" ]; then
-	echo Usage: $0 MACHINE [--all] [--keep] [--branch BRANCH]
-	exit 1
-fi
-
-# If not all, then only first/last
-if [ $ALL -ne 1 ]; then
-	ARGS=3D"$ARGS --step 0"
-fi
-
-if [ ! -z $BRANCH ]; then
-	ARGS=3D"$ARGS -b $BRANCH"
-else
-	ARGS=3D"$ARGS -b `git rev-parse --abbrev-ref HEAD`"
-fi
-
-mkdir -p ${OUTDIR}
-
-export SOURCE_DATE_EPOCH=3D`date +%s`
-=2E/tools/buildman/buildman -o ${OUTDIR} $ARGS -SBC $MACHINE
-=2E/tools/buildman/buildman -o ${OUTDIR} $ARGS -SsB $MACHINE
-
-[ $KEEP -eq 0 ] && rm -rf ${OUTDIR}
-
---=20
-Tom
-
---xdar3rRqsuKKYDru
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmagFkMACgkQFHw5/5Y0
-tywtoAwAq5NYah5x22DGSV8iXRFvtW2sPfSifsWaAJdUPCaSyttKcegBEnc/wgEr
-oKSH9SszRAYEWfnsaV5RHM9LWOh1C1zjdsMEYRzNwq71Cft7RMw6xSGcfAvq+SSA
-aQZWP6lx74PBSDC2gBxIkIIADWPZhiIG5uj9H2v+UX4l4w3m0U56trqa7xveBw9R
-d2z195rGnPJMOfNKUp50d+68t6hXjJRHmPLxnphLotjP7h8Q4rdFWCzCR21EaNLR
-u4jGhUXxZX8r2BUqkR2dlHQSXfRmjluMkkR2WYk4KA4o5B5cRZaoQxVKM1vDB70E
-qaScboZFq1oYOOc6Fx2WfxYreEjf/JDiCiBO8qlHewTON8oRKqbpTGLfrSzaBnmT
-TAAsPEZFQgVQX9NkFedBWab9idFI0+A3wVQD7FCzlKxMNmsQ6YAsZnwrAjEUtBxd
-eHpLwbAERMXhZo9jDB8gqveXVqUTppTmOBhCSvlsEQeVZOdq/tPUdRbiaJ6KqvzO
-xPKM2zRz
-=ChkB
------END PGP SIGNATURE-----
-
---xdar3rRqsuKKYDru--
+> > --
+> > Tom
+>
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
