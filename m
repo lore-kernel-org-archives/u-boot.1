@@ -4,85 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D22B3C3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 15:29:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD3AC3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 16:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 217BD880D1;
-	Tue, 23 Jul 2024 17:29:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F1B788841E;
+	Tue, 23 Jul 2024 18:35:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ogga.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HwF7L4sc";
+	dkim=pass (1024-bit key; unprotected) header.d=ogga.onmicrosoft.com header.i=@ogga.onmicrosoft.com header.b="Txnt6cKS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65F3B88107; Tue, 23 Jul 2024 17:29:35 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C06348811C; Tue, 23 Jul 2024 16:12:02 +0200 (CEST)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60DF788056
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 17:29:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D9A088826
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 16:11:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-708bf659898so2788089a34.2
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 08:29:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721748570; x=1722353370; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=maLcJBNspMezKfQRvhyTkbqBwTo8JaIzwXr9GvqHb54=;
- b=HwF7L4scnA2MltNCw2pzX3wP7XQW+7NVGvkZ9MpU1JsxyzjGfjqEi7Alonm3FdDXK+
- MYjclN8cltPvNAgIn3tPRb3bbDje2qEiA9RQzkN9fI1WdC+71fRjsYNZicO0gFkrwGeW
- fz3LClbNpEpy6C8NO/etTDcxUv3hv9mlG96mI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721748570; x=1722353370;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=maLcJBNspMezKfQRvhyTkbqBwTo8JaIzwXr9GvqHb54=;
- b=sUccNJxfyIVtvBKwzKYdW72YMe3GfhxVP9a3bVr+mJCBpz/NVcxKVPpjWGALojgAqK
- bGov/j3lP6zJOLqsn+hT0CR4dX+QyuN2SqPQFyndRFEWHQzbKgBNCozPpnkBMV+wqkOt
- rsLg2DH53+Xf69VBFJgEYJF/F5rlgXhzHRB+DJhaAFCeqdKbUl+KodFh30NruIZz4qDP
- 2WnxXcurEPXWtOLGecW4Vi3XgZ6sHFPUd1ySzz3LYciuff+5ffWbmW3CgHfdVH+ntjv0
- GLDjWXSwLHz9ZaFa+7hIs810Bq+LDiEGhka1xnlXUYZBns+xKkT+8iAczQCANtGLHGLs
- J1/A==
-X-Gm-Message-State: AOJu0YxTs8PCyPwLbqqBYVYqSMZAWlbtIHi/ZTQRP0u48WHBGuqCgBYY
- jYQkp++suW6SgKDTV2VNCTLW/4bBETLUU1NuDo6YC6TdJOrKPow3Z0IHAL+Fkbg=
-X-Google-Smtp-Source: AGHT+IGNq5QkH8PhjcEt4QWPG+pVFTcxJZMQG2ezNebWPlTgwiUlYyE7jhp43CQVsINBM6eUq6sb4Q==
-X-Received: by 2002:a05:6830:6c18:b0:704:4d7e:380f with SMTP id
- 46e09a7af769-70900899818mr13614457a34.1.1721748570000; 
- Tue, 23 Jul 2024 08:29:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-708f60d2160sm2043419a34.30.2024.07.23.08.29.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 08:29:29 -0700 (PDT)
-Date: Tue, 23 Jul 2024 09:29:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
-Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
-Message-ID: <20240723152926.GI989285@bill-the-cat>
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240708140242.GA38804@bill-the-cat>
- <CADg8p968x-UsiHEazS81+DxSXN0DLHpjTEDYDA+0LO=3hGK86A@mail.gmail.com>
- <20240722173325.GA989285@bill-the-cat>
- <CADg8p97bFNApmT+sPPs4MYhyOwzAdK_7M6n__0CaX5iV1MvK-w@mail.gmail.com>
- <20240723144836.GH989285@bill-the-cat>
- <CADg8p96619yU3Li94_JsJx5VUpDpF7SqF3m9McHhQFYLchvktw@mail.gmail.com>
+ dmarc=none (p=none dis=none) header.from=ogga.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zli@ogga.fr
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Cbki+UXxpXBrToXBhjC4iaaK39mzDsSvvDm6XU7CRnFqiE3wqlNcKwc6vN9rIPs3KwnSGJHi4/w33mvcgvoQiabPNi2If6VouOk14qrta5bMCG+3a09ETNf8/6kQX9lyXz71521fy9Z+jyZdhaAomvweREwyHkadDQEjDdl1ThgUKG1LrUCAjldyxmekCAdZBwcdUzws09iSwJf1cYTY0ILbfR4z8XfiWoUTvD4yzeChxoeCyhfza6B9wH6PryCN/cysbzEfCfeAgH7uclAJLUhFE4KDZfQTw+nABZuEpfmFro1bk/bxcjQ2CseMrR3v/fk33ITpWh6zq7qjlnHbUw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wvLjOuQy2GvTyKEXbtHHM6yGFVTQw0kf2GCEn3XjrNg=;
+ b=lH58AogmaTBcZuupz/70tzPXa4e7aGKRjL86YP3biAH0jAz5XGeVkFs/zD+KlBvan7eWah2pNRF0ZAbt7+0Z1CDiYvTtIyugShxUCUCBbU7oRbXT/LyENt38ovbFhsv3MX3X+JtPOSZELoYQEV66g6JlXhIXIiwVC3CiiZwANpFzYV7YCXIkVUmYM9ROAdwZAXh2xx9NMpZiFImYD4eFxTMgTS3gOthQuQm5Tm5cMBXA3rjLY4hqsM8+ekJS6xnw/xMpo0L0mukcBpXXW+ikS5ZKm/6gWLGidWyCXpVMmdlPHK8Nb6Q3C+QZcfvlV8icUdSzvYRI90DCzsNpfcxUZA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ogga.fr; dmarc=pass action=none header.from=ogga.fr; dkim=pass
+ header.d=ogga.fr; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ogga.onmicrosoft.com; 
+ s=selector1-ogga-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wvLjOuQy2GvTyKEXbtHHM6yGFVTQw0kf2GCEn3XjrNg=;
+ b=Txnt6cKS7dY2XFB/yjQNK0uVY3U3C8QrK6HwZmVskOfiZJadbR7TELeNny9gHbr7Kd9dfWHC7XqVp2d+RQQzfyw9VezutIoXaBAmY23QqjZI9Q1GiR+GsstKuVTm/KZUdeYWI2TwZjxm9m5WBf4yHjFJeRj7IqH9K1tyHWMnvxc=
+Received: from PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f2::20)
+ by PR0P264MB2503.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1e2::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.19; Tue, 23 Jul
+ 2024 14:11:56 +0000
+Received: from PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::ead1:fb5b:e337:d4ff]) by PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::ead1:fb5b:e337:d4ff%6]) with mapi id 15.20.7784.017; Tue, 23 Jul 2024
+ 14:11:56 +0000
+From: Zixun Li <zli@ogga.fr>
+To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>, open list
+ <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: RE: usb gadget driver initialization issue
+Thread-Topic: usb gadget driver initialization issue
+Thread-Index: AdraksYKvUdWMPd+RkiQx27iAfyB4AATkGCAAFhrjmAAMZ4LcA==
+Date: Tue, 23 Jul 2024 14:11:37 +0000
+Deferred-Delivery: Tue, 23 Jul 2024 14:11:02 +0000
+Message-ID: <PAZP264MB29744B89E4BFCA068B4D1E82B1A92@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+References: <PAZP264MB2974BB43BCE300D4A9E2FC63B1AE2@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+ <7cd7bc33-a9c3-4235-9861-65d50338be45@denx.de>
+ <PAZP264MB2974A94AD300B6A8210CD418B1A82@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+In-Reply-To: <PAZP264MB2974A94AD300B6A8210CD418B1A82@PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ogga.fr;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAZP264MB2974:EE_|PR0P264MB2503:EE_
+x-ms-office365-filtering-correlation-id: 6a8374fb-042d-411b-8e04-08dcab2168c4
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?ApMlbcarw2hSaNHJeZX2nd+Rm/gxZuoAb4R4VCFV/3PtzRAqdyq7+5xyHCa9?=
+ =?us-ascii?Q?DviPUCL/gRX8j8qeqN0CNofByUYGG/I3xUT1Zuz+l5cyleD8RNJbSPiuUIuV?=
+ =?us-ascii?Q?zIoI302ZGzwdFod6v+ECG5yPKM9LFGBLqH2SjCKZygzzzs5XJI0/WuSyCLno?=
+ =?us-ascii?Q?nCmVju5Vvdm7RQSbo55AxoeAUqyxaufJy6syw1FxXmxRtX7+YC9ayLwJq2wa?=
+ =?us-ascii?Q?Jf4WNp2GiXklW8V+7Eeuf7lPC6lNpto46ItA89tMTchxLmtsvoN/grLMILGZ?=
+ =?us-ascii?Q?L4vQ9BE3A9vSt6LjuKbeAbdCRkuL7rTEATpXHSIe61NbO1Ub+ZQocyDQZ9jV?=
+ =?us-ascii?Q?4FtxOfy9bE6lpnSLosIZJbjd6UVi7qbcq+rU8cUBv64bv62QufN0PALK8CI9?=
+ =?us-ascii?Q?HqnrQXWSiG37PeJ7Jqp5fryHV9YX+7xj7GMtipBoRI3+0sBdt+Si1vj95egI?=
+ =?us-ascii?Q?S1dUeGTCDQu6wRUVGzLjbsgIuslMrHdqPt0Nbe6DJwLMIbZbNzrp6LqQCoQm?=
+ =?us-ascii?Q?P1UB5H337kfTc9FGQGS4XQBgRN5q5RELWD4HcEcm5BeFGDVwE2fzBgN9Hvfk?=
+ =?us-ascii?Q?O8GgH5W3QI+ky1qWqq1tP2tWvYhg31CyZGEkUk9UPq/ZN6Tx1ZsQPOzjOop+?=
+ =?us-ascii?Q?LuEf2xjsW46M1oVGC89bsSJZBB+DL+gcdK7AXZ2aYgThQ+b4cMyI+hxzMuCh?=
+ =?us-ascii?Q?AIQTiQD7nQzlewPknHsGVwsC/+I8G3G5arF8351b2bylbXy3fB1stgtWI1wG?=
+ =?us-ascii?Q?gDeQLe9h2eXaz5j4G83qN0mLY2t4JGp2aLFR+XF8I0tfcUBwKNXn22tNrt03?=
+ =?us-ascii?Q?FNAQcEFQstEF7QWel0yDtNqZI4eqVTmkNchY856cuk+/cqOXs2C4UD/qB27t?=
+ =?us-ascii?Q?7GckgaUMeyk9xC4/1/McEmxbsbJmOeD54KPTkge3JcN8et8psEQXX/vAtuU2?=
+ =?us-ascii?Q?Q6J+sl0gty14uBtQPGvj9Nlr5JlKE8d1Jh9yhJNZspfCq26LoWRuwRq6SCAq?=
+ =?us-ascii?Q?wItohQPJdayhNPipnWPOkNK6gYrZibZ2Y08FCHI4UYxyQIEMeR1+0E3E9nXf?=
+ =?us-ascii?Q?xAzEfJGJ3Xx2jYYxTPQLxcMMptS3VtMRm2rTQ2PUKqDtPgeFaj+RhJ+M17B7?=
+ =?us-ascii?Q?ZHDquvp1lnsJ1nsmw1zLf8E6LVd9VtIZSt54J2Ji2vh8kR3BPN3yDldfKMel?=
+ =?us-ascii?Q?Zxfe08Ik3ihfi1nxJZfs6JjDj+QK2TpsKJ4ND2DJU/+akUTrD5tUcCLqJgw8?=
+ =?us-ascii?Q?AM+o0pt/V8cbBBtuOUEKbQTARivtXyP57eHG/33QwotZ5y+5rCZcfq8O0U33?=
+ =?us-ascii?Q?1cBXDMLNb4kt2W8C7bCfdIxqMRBnb04Du58eUt1fTvFkX+xOzyglMuQR7QKk?=
+ =?us-ascii?Q?r5mmZI/YjPBp5Dglg3QAvclwlckZnbdyI+BRH/T/zPglUvfY1g=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?rAfsw5WuOE5Yt3bQXOjb5WLCeuF5b/lgKoUl7mO7dYqVfJRR8SsEn5CL+3Lw?=
+ =?us-ascii?Q?3bYyL5fCbJ5H22ptP66yJoH3KV2RbSM3uirCmF73qZf1P/8afKslik8XyAOM?=
+ =?us-ascii?Q?VBYVY9rI4JsbgLlGMTV26kbDsu1J+D0/8FiFGPbeqgB4uISJwdJ7kE1YyoiB?=
+ =?us-ascii?Q?Uyoy1Vf8o/0Z4q7ph8B6Ffi4y7M4PiScF5EuerqaD4QPJ1NNqGY59fpLbDlp?=
+ =?us-ascii?Q?Nv4A9MWp0N16ceomJ02hfLuyi1BjYZ0F4PBsgOr6k/JlbvDaMqxpkfsZigE+?=
+ =?us-ascii?Q?XKVWMZxk5Y/0x+6D9L1nAC3QzV3Cr72/zUMDDAzS4F+UFGNIGHX5A+5hgLuG?=
+ =?us-ascii?Q?Ql+vHaRII81lY/ZqF0LPTdUOC+RKYccmB7bRGODIDhr0YnyhFVENtWAaGdU6?=
+ =?us-ascii?Q?G2mJREwlOKDLHY1RXLMWz5tR0fyu18VUDtUTrC73KNzBjGn1aJRC4osj93zj?=
+ =?us-ascii?Q?BHqtMTeJ7nYE0O7A4Cuy58kuHqWV7PPZva4kcRT7UmF4kZ9jIrpLXj8MbvO+?=
+ =?us-ascii?Q?tjtPM54NadhI+4Xc2anmrjm2xxt+bYanEj6LSSMcJp53+wfk5T86Hg0aizgC?=
+ =?us-ascii?Q?Shn1krFtccPTes0oYtR+pJ+wTG3FItHiNSJZXj9jTlPn8FOXrY4sQy+MzyjW?=
+ =?us-ascii?Q?j7A55b3H0dfriPcPZk9Pxy3nZW8JhHn7bZLKV5G7HopcYr6fXmuMuSRLzS/B?=
+ =?us-ascii?Q?5Wd0ByauNz6CEUpB402SwdScF0tUU7EEj2FtA7UfhAY+GzvwHgqByPFAR8ad?=
+ =?us-ascii?Q?R/keJItqII/d3B2d0Dx0YEC/BZynF2uVvypQN1xOo5RChjKgcvnONhjseDFJ?=
+ =?us-ascii?Q?tvA9DnzHnC5UPZiLNhQTwvOpVjrubvJnGcZivmUHHd3MKPVExEHV0GJSXPt/?=
+ =?us-ascii?Q?VcQA80c54SW2DtO3U4WUaARwfZtwBE56SSe68/ZmpRh0iyTLz1xbC2dCpIRP?=
+ =?us-ascii?Q?Mm5tt5bvDWhX6nK+d+33MD3irGmIOwJPVE0z8wryPWJno6RI5bdrvcsEaND7?=
+ =?us-ascii?Q?kw7mfc/e8xyDo9y93VrSN+l3GQqfNYLCgHdEYtIzziNTCvfrxDrpvJnnRoLw?=
+ =?us-ascii?Q?OeuL4EMvMtejyqx4vB9tjTrrL+PkiuA5bebzncD3zdvM1Q9Xd3UeMsOeDDG9?=
+ =?us-ascii?Q?hgpJOoZT3wNx8NCg3fcy4QGj92MbUF9PicX4otz3StxdYKTzIpgw3eZd1g5O?=
+ =?us-ascii?Q?IT30F0BLz8U5rguNKWvdf/6zFeI2PViJhxFYWNT/ghd2zLD9fGcybs2jQQ2e?=
+ =?us-ascii?Q?e1Ny09L11blqSOZ8arHwWBQaL6my/JypsW2ovAMOK9GYfVK3vtVOzqyGarlL?=
+ =?us-ascii?Q?oMK2AVB+LE7p/rJkyM1Xpot5mNI2Ym6Pwv8pBNK9dPiSpRh2KdGswSEmskVe?=
+ =?us-ascii?Q?80bm3VPpItHh9vr1zJ51sh7g1HPgDLGMlzzzWNP9u96Tp/L3zj7X3+7/NS2+?=
+ =?us-ascii?Q?amdyOUnN23b3D0Dczj2dhlwy+paaNBMqtFF7tLtTKa6t3eKazHBX+wyoN/rW?=
+ =?us-ascii?Q?bHIkL3HqG6rkGw18Kyck0iMTX79uZ557CkmLaQZm7LuDFeFAdzfgLGhp5Q?=
+ =?us-ascii?Q?=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BOt2qk4j+IF1pAyB"
-Content-Disposition: inline
-In-Reply-To: <CADg8p96619yU3Li94_JsJx5VUpDpF7SqF3m9McHhQFYLchvktw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-OriginatorOrg: ogga.fr
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAZP264MB2974.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a8374fb-042d-411b-8e04-08dcab2168c4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Jul 2024 14:11:55.9132 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0a737871-c9db-44dc-a24e-55df547c3098
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: gjX7fiwVvb4luqS26IILNYT7jK1GrP59HPdWxjg1t8SxJ0OlNJ8rrPRTrRLx7NNx
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB2503
+X-Mailman-Approved-At: Tue, 23 Jul 2024 18:35:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,152 +160,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---BOt2qk4j+IF1pAyB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 23, 2024 at 08:21:11PM +0530, Sughosh Ganu wrote:
-> On Tue, 23 Jul 2024 at 20:18, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Jul 22, 2024 at 11:07:45PM +0530, Sughosh Ganu wrote:
-> > > On Mon, 22 Jul 2024 at 23:03, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Jul 22, 2024 at 11:58:18AM +0530, Sughosh Ganu wrote:
-> > > > > On Mon, 8 Jul 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
-> > > > > >
-> > > > > > > The aim of this patch series is to fix the current state of
-> > > > > > > incoherence between modules when it comes to memory usage. Th=
-e primary
-> > > > > > > issue that this series is trying to fix is that the EFI memor=
-y module
-> > > > > > > which is responsible for allocating and freeing memory, does =
-not have
-> > > > > > > any visibility of the memory that is being used by the LMB
-> > > > > > > module. This is further complicated by the fact that the LMB
-> > > > > > > allocations are caller specific -- the LMB memory map is not =
-global
-> > > > > > > nor persistent. This means that the memory "allocated" by the=
- LMB
-> > > > > > > module might be relevant only for a given function. Hence one=
- of the
-> > > > > > > requirements for making the memory usage visible across modul=
-es is to
-> > > > > > > make LMB allocations persistent and global, and then have mea=
-ns to
-> > > > > > > communicate the use of memory across modules.
-> > > > > > >
-> > > > > > > The first set of patches in this series work on making the LM=
-B memory
-> > > > > > > map persistent and global. This is being done keeping in mind=
- the
-> > > > > > > usage of LMB memory by platforms where the same memory region=
- can be
-> > > > > > > used to load multiple different images. What is not allowed i=
-s to
-> > > > > > > overwrite memory that has been allocated by the other module,
-> > > > > > > currently the EFI memory module. This is being achieved by in=
-troducing
-> > > > > > > a new flag, LMB_NOOVERWRITE, which represents memory which ca=
-nnot be
-> > > > > > > re-requested once allocated.
-> > > > > > >
-> > > > > > > A review comment on the earlier version was to do away with t=
-he static
-> > > > > > > arrays for the LMB lists of free and used memory. This version
-> > > > > > > uses the alloced list data structure for the LMB lists.
-> > > > > > >
-> > > > > > > The second set of patches are making changes to the EFI memor=
-y module
-> > > > > > > to make use of the LMB functions to allocate and free memory.=
- A
-> > > > > > > *_flags() version of LMB API's has been introduced for the sa=
-me. The
-> > > > > > > earlier version was using notification mechanism from both LM=
-B and EFI
-> > > > > > > modules to maintain memory coherence. This version makes use =
-of the
-> > > > > > > LMB API functions for the memory allocations. This is based o=
-n review
-> > > > > > > comments of EFI maintainers.
-> > > > > >
-> > > > > > On am64x_evm_a53, the last test in test/py/tests/test_net_boot.=
-py fails
-> > > > > > due to:
-> > > > > > ...
-> > > > > > TFTP from server 192.168.116.10; our IP address is 192.168.116.=
-23
-> > > > > > Filename 'pxelinux.cfg/default-arm-k3'.
-> > > > > > Load address: 0x80100000
-> > > > > > Loading: ##################################################  64=
- Bytes
-> > > > > >          8.8 KiB/s
-> > > > > > done
-> > > > > > Bytes transferred =3D 64 (40 hex)
-> > > > > >   1  pxe          ready   ethernet     0  port@1.bootdev.0     =
-     extlinux/extlinux.conf
-> > > > > > ** Booting bootflow 'port@1.bootdev.0' with pxe
-> > > > > > Retrieving file: pxelinux.cfg/default-arm
-> > > > > > am65_cpsw_nuss_port ethernet@8000000port@1: K3 CPSW: rflow_id_b=
-ase: 16
-> > > > > > link up on port 1, speed 1000, full duplex
-> > > > > > Using ethernet@8000000port@1 device
-> > > > > > TFTP from server 192.168.116.10; our IP address is 192.168.116.=
-23
-> > > > > > Filename 'pxelinux.cfg/default-arm'.
-> > > > > >
-> > > > > > TFTP error: trying to overwrite reserved memory...
-> > > > > > Couldn't retrieve pxelinux.cfg/default-arm
-> > > > >
-> > > > > So this seems to be failing because the address used to load the =
-pxe
-> > > > > config file seems to be overlapping with an already reserved regi=
-on of
-> > > > > memory. Can you please check if modifying the address works?
-> > > >
-> > > > I'm not sure what address you're thinking of modifying but, this is=
-n't
-> > > > overwriting U-Boot itself so it's a case that needs to work.
-> > >
-> > > Can you please print the lmb memory map through bdinfo and share it
-> > > with me. That will give some info on what is causing the issue. Thing
-> > > is, with this patchset, if there is another reservation with a
-> > > different flag(like LMB_NOMAP, LMB_NOOVERWRITE), this would cause the
-> > > load to fail.
-> >
-> > Well hunh. I thought I had reproduced the issue before posting, but I
-> > just pushed the same tree (I'm fairly certain) over to my lab and the
-> > tests are passing now. So, lets just see what happens with the next
-> > iteration of the series, sorry for the noise.
+> -----Original Message-----
+> From: Zixun Li
+> Sent: Monday, July 22, 2024 17:53
+> To: 'Marek Vasut' <marex@denx.de>; Lukasz Majewski <lukma@denx.de>;
+> open list <u-boot@lists.denx.de>; Mattijs Korpershoek
+> <mkorpershoek@baylibre.com>
+> Subject: RE: usb gadget driver initialization issue
 >=20
-> Okay, I will put out the LMB only, non-rfc series once the CI has gone
-> through fine. Btw, I hope you have seen my comment on irc about having
-> the SPL_LMB config symbol as a bool, instead of def_bool y. Thanks.
+> Hi, this issue only affects usb_ether, as g_dnl will enter event loop rig=
+ht after
+> driver register so the host won't see an un responsive device.
+>=20
+> I think one solution is revert half of 718f1d41 to move
+>  usb_gadget_register_driver()/usb_gadget_unregister_driver()
+> back to usb_eth_start()/usb_eth_stop().
+>=20
+> It doesn't affect the ability of bind/unbind mentioned by the commit's
+> description. In fact by reverting it usb_ether will behaves more like run=
+ning
+> 'ums' or 'dfu', since running a ethernet command like 'dhcp'
+> will do register->event loop->unregister just like 'ums' does.
 
-I'll investigate that further once I can poke at the code, thanks.
+More precisely I'm thinking about the following patch:
 
+Subject: [PATCH] usb: gadget: ether: Handle gadget driver registration in
+ start and stop
+
+Revert part of 718f1d41 to move
+ usb_gadget_register_driver()/usb_gadget_unregister_driver()
+back to usb_eth_start()/usb_eth_stop().
+
+usb_gadget_register_driver() will initialize the USB controller and
+enter ready to connect state.
+
+From the host's point of view, a device is ready to be enumerated.
+However, since dm_usb_gadget_handle_interrupts() is only called when
+ethernet function is started, at this stage USB events are not managed,
+host's enumeration attempts will fail and resulting error like:
+    usb 1-1: new high-speed USB device number 50 using xhci_hcd
+    usb 1-1: device descriptor read/64, error -110
+    usb 1-1: device descriptor read/64, error -110
+    usb usb1-port1: attempt power cycle
+
+With this change the USB controller will only be initialized when ethernet
+function is used so the host won't see an unresponsive device.
+
+Signed-off-by: Zixun LI <zli@ogga.fr>
+---
+ drivers/usb/gadget/ether.c | 15 +++++----------
+ 1 file changed, 5 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+index b7b7bacb00..ed55f12662 100644
+--- a/drivers/usb/gadget/ether.c
++++ b/drivers/usb/gadget/ether.c
+@@ -2277,6 +2277,9 @@ static int usb_eth_start(struct udevice *udev)
+ 	packet_received =3D 0;
+ 	packet_sent =3D 0;
+=20
++	if (usb_gadget_register_driver(&priv->eth_driver) < 0)
++		goto fail;
++
+ 	gadget =3D dev->gadget;
+ 	usb_gadget_connect(gadget);
+=20
+@@ -2398,6 +2401,8 @@ static void usb_eth_stop(struct udevice *udev)
+ 		dm_usb_gadget_handle_interrupts(udev->parent);
+ 		dev->network_started =3D 0;
+ 	}
++
++	usb_gadget_unregister_driver(&priv->eth_driver);
+ }
+=20
+ static int usb_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+@@ -2503,15 +2508,6 @@ static int usb_eth_probe(struct udevice *dev)
+ 	priv->eth_driver.disconnect	=3D eth_disconnect;
+ 	priv->eth_driver.suspend	=3D eth_suspend;
+ 	priv->eth_driver.resume		=3D eth_resume;
+-	return usb_gadget_register_driver(&priv->eth_driver);
+-}
+-
+-static int usb_eth_remove(struct udevice *dev)
+-{
+-	struct ether_priv *priv =3D dev_get_priv(dev);
+-
+-	usb_gadget_unregister_driver(&priv->eth_driver);
+-
+ 	return 0;
+ }
+=20
+@@ -2526,7 +2522,6 @@ U_BOOT_DRIVER(eth_usb) =3D {
+ 	.name	=3D "usb_ether",
+ 	.id	=3D UCLASS_ETH,
+ 	.probe	=3D usb_eth_probe,
+-	.remove	=3D usb_eth_remove,
+ 	.unbind	=3D usb_eth_unbind,
+ 	.ops	=3D &usb_eth_ops,
+ 	.priv_auto	=3D sizeof(struct ether_priv),
 --=20
-Tom
+2.45.2
 
---BOt2qk4j+IF1pAyB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmafzEwACgkQFHw5/5Y0
-tyxi0Av/VQPP+APS8/2suAsGMiDOPZ32/28FDbAatZsdHTS9It9vs+pNqPweznAR
-CGup2qcJeWrrPrSxVWx8vNs+MC3BPLAhOXRcY8j+Sj1ym5BEJDppmpf//sfyAmhH
-bwWiH244ob3Uqgy4YNvMuRehw0BJ4Z0AJQdbioNqPh9Ds4TcmQmRguUW7UbH6rFA
-pGXGwFPd+kO3YRtBi5fXUBWL5AbuxsWGNQckne5wiQp9f2c/92YDV+6/xNjap3TZ
-bqjeMSFqRHI4hcZpj0+2SqW6V/U4wXX8LjKSl9e0NlRchLs8hKHDB+TMvOFUI6Zt
-jn24qC79/SEV74Z6Wmn9tBEolhhGDnTDIAZTQHOghWmjOHWhKUy5DUDYkUpEnzd9
-GLJbO6fsc+w4iLYIFlY2tzYNmDEfp9KASIK+gqXYMAYRfKiFnoBIa4dG43yStwxb
-glL1FhhBSXaJkji1VDYWGeGDV+3RVYfLrgXR4xTdaSaU57csN12FLHkWAF+seJag
-bKdJ2gAu
-=fKsv
------END PGP SIGNATURE-----
-
---BOt2qk4j+IF1pAyB--
