@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2CAC3DA7E
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 21:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A41FC3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 21:16:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EEC088804;
-	Tue, 23 Jul 2024 23:04:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E1448865D;
+	Tue, 23 Jul 2024 23:16:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GQ9H3vXZ";
+	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="Y6UFuKvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F915887CD; Tue, 23 Jul 2024 23:04:25 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9CE458811C; Tue, 23 Jul 2024 23:16:11 +0200 (CEST)
+Received: from shout01.mail.de (shout01.mail.de [IPv6:2001:868:100:600::216])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 314248831F
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 23:04:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1D8E87903
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 23:16:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5c74f6e5432so2578449eaf.3
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 14:04:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721768654; x=1722373454; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dGpuuAVozBIqBqNUDH+LW/AfZy9YWJiIyQfTt9k3sOw=;
- b=GQ9H3vXZ+xqfxeSF328Zb5J9XnmC9AVTdQ4A2LQV4lKSEzJeDMkZj0VcaLl4u2t30E
- VY97e2YTR3kNKv6+Hb3YDyBgZP7FQmSgGieVE648jFy5A4+lM8NhtURNhYSoXc1vpiWX
- dQKReTbFIXzEkjAux5QejfE7T9nGW9Bh/bpjE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721768654; x=1722373454;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dGpuuAVozBIqBqNUDH+LW/AfZy9YWJiIyQfTt9k3sOw=;
- b=FE4H9X9IzFZlbkgEwMt/f92fuU1hd71Qr7ZFYqv6dOCVHMSAWtwi2k8kMqWlDvyrS2
- XXm4+evppF3dJRxos3KN4LWxrDj3nFH1GtwCkid8hilnbDogtbd5RpROFFkb1noxiJgG
- ok/KXxtyZUOH3WeNpSBJX//LTMIqyWlv4R89n2GjU7FvPXLIw4C9wL5zZHd8o4Mgv20U
- LCFFbz1dll9pHoxj84p4uLsR3zYfIcPLt4BtSczTY5HWwtHVMv9NzXwOfYDU5VAZckfi
- 6ukRxTx4G2+8Hr/GyBDPfF3+8SCtSzdMYSJ28OzCJWhxmtGiGrGhL58ImMvEPH0DbuGF
- ph7Q==
-X-Gm-Message-State: AOJu0YwfAA5O+BHdeJEs6LwvTWCBgwyN+8PsW3PBsNyMMVDaRNXLyECu
- kho2A5AffzASd+91AaZqLAveC74Ptboz1FO4xVSpj97+FigqXSwnO5XKBVeBlEH7UEabEa0qb7c
- Nehs=
-X-Google-Smtp-Source: AGHT+IHRXyb2IiKJPuXU+JiOMGCmMVLnl8H7722JSSGgfUvEsx3cPgFttPMazNAswNW/+zGYMGihbA==
-X-Received: by 2002:a05:6820:4b8b:b0:5cc:2800:27e1 with SMTP id
- 006d021491bc7-5d59bce20a0mr1482146eaf.0.1721768652628; 
- Tue, 23 Jul 2024 14:04:12 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-45.totalplay.net.
- [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d59f04938bsm61321eaf.33.2024.07.23.14.04.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 14:04:12 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>
-In-Reply-To: <20240719215123.3358410-1-agust@denx.de>
-References: <20240719215123.3358410-1-agust@denx.de>
-Subject: Re: [PATCH] board: beagle: convert to CONFIG_DM_I2C
-Message-Id: <172176865209.2258489.13195091426100228342.b4-ty@konsulko.com>
-Date: Tue, 23 Jul 2024 15:04:12 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=mail.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=seb-dev@mail.de
+Received: from postfix03.mail.de (postfix03.bt.mail.de [10.0.121.127])
+ by shout01.mail.de (Postfix) with ESMTP id 089E5240B60;
+ Tue, 23 Jul 2024 23:16:07 +0200 (CEST)
+Received: from smtp01.mail.de (smtp01.bt.mail.de [10.0.121.211])
+ by postfix03.mail.de (Postfix) with ESMTP id DD1F6801A9;
+ Tue, 23 Jul 2024 23:16:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mail.de;
+ s=mailde202009; t=1721769366;
+ bh=u1fxtWGVCtmUqVydcfDcuOOIDXd/KgCmIFK8x8vZPnc=;
+ h=From:To:Cc:Subject:Date:Message-ID:From:To:CC:Subject:Reply-To;
+ b=Y6UFuKvol+jvxnvHHIpD8enLztZzEpf1p9TiuF16b1ONs382Ksa/nrv1fxVxWNJTR
+ C4MPH2ayVmjIn6XJd5bBL8dSfcP27l1e5zmpSX4n4XlHTdcx3YpYkL+mDvLm5mIAjs
+ /cWG1SNIXecWBx+THNt0pfFF8guihGE/OBR56+vFOkEC2bNvzz0NqEmMwtOnslT4d8
+ ALdBIaJda7FHZocna+u1SQULxEh1mBWwDUnutzIfGQgusjgP2AvtRAaZTXzTWZjN/4
+ q0avN87NpDOpPBpUVLb40vogqMhG6UUAerSBz0zM30GwlXa1Kd8Wj0yOAsuCTgxLBr
+ 811GsVVKAxKLg==
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp01.mail.de (Postfix) with ESMTPSA id AA4E32417EC;
+ Tue, 23 Jul 2024 23:16:04 +0200 (CEST)
+From: Sebastian Kropatsch <seb-dev@mail.de>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 0/1] phy: rockchip: snps-pcie3: Fix bifurcation and spelling
+Date: Tue, 23 Jul 2024 23:13:13 +0200
+Message-ID: <cover.1721768589.git.seb-dev@mail.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 8bit
+X-purgate: clean
+X-purgate: This mail is considered clean (visit http://www.eleven.de for
+ further information)
+X-purgate-type: clean
+X-purgate-Ad: Categorized by eleven eXpurgate (R) http://www.eleven.de
+X-purgate: This mail is considered clean (visit http://www.eleven.de for
+ further information)
+X-purgate: clean
+X-purgate-size: 1010
+X-purgate-ID: 154282::1721769366-CADB0670-696E83C9/0/0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,15 +82,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Jul 2024 23:51:23 +0200, Anatolij Gustschin wrote:
+This is only patch 2/5 from the previous v2 patch series since the other
+patches are already merged.
+The title has been kept the same as v2 for patch management purposes.
 
-> Rework to remove use of legacy I2C API.
-> 
-> 
+Cheers,
+Sebastian
+---
 
-Applied to u-boot/master, thanks!
+Changes v2 -> v3:
+
+ - Select only patch 2/5
+ - Call 'dev_read_addr(udev)' only once by using 'addr' in 'priv->mmio ='
+ - Remove debugging printf statements
+ - Collect "Reviewed-by: Kever Yang" tag
+ - Link to v2: https://lore.kernel.org/u-boot/cover.1721161722.git.seb-dev@mail.de/T/
+
+Changes v1 -> v2:
+
+ - Add new patch "phy: rockchip: naneng-combphy: Introduce PHY-IDs to fix RK3588 muxing"
+ - Collect "Reviewed-by: Kever Yang" tags for all previous patches
+ - Link to v1: https://lore.kernel.org/u-boot/cover.1720988760.git.seb-dev@mail.de/T/
+
+---
+Sebastian Kropatsch (1):
+  phy: rockchip: naneng-combphy: Introduce PHY-IDs to fix RK3588 muxing
+
+ .../rockchip/phy-rockchip-naneng-combphy.c    | 46 +++++++++++++++++--
+ 1 file changed, 43 insertions(+), 3 deletions(-)
 
 -- 
-Tom
-
+2.43.0
 
