@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B8DBC3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 13:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F7E5C3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 13:39:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F5928880E;
-	Tue, 23 Jul 2024 15:36:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id C70C1887CD;
+	Tue, 23 Jul 2024 15:39:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="1l8Qoo4b";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IpG7vwd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2694887B4; Tue, 23 Jul 2024 15:19:16 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 9BFEC887CD; Tue, 23 Jul 2024 15:39:02 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7B75887C0
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 15:18:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 125E188846
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 15:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-427d2c8c632so39263325e9.2
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 06:18:58 -0700 (PDT)
+ spf=fail smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-70365f905b6so3621073a34.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 06:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1721740733; x=1722345533;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S7YGTRNAP4Qvs03ij7q9pLjWucU4FpHpqQyRMNIRFE8=;
- b=1l8Qoo4bR+v+ElTugbrJ79Vkr4ruI9cnWKRibReAK30xLUPKIcd9sG7nDQ3ENw8VkM
- sTVHAgd74xpbtDXaqDzT2cUxoTCO/X6FKYF4f7lHTzATN3VDJ3g9LYJwVD6C5MUV6m/g
- 6OCqAW5rqWed+T5FCzn3fhDa4FGpS6AlE1/jaU+uWpjLTudS8QW4hr5z0hIhKrY71wGY
- VQ4HCkG7UeA60r8e/Hr/CHsQXPacGMhAQ6CQnhIS8OMtRujS3efz85hwVegNsY6K9cI4
- KdmI5J/nRN2DSkkGAHD473q/o7ZrjRwRXenz2yNctbPbTRxXYgfMs40dzNKl2kbQ56J6
- e39g==
+ d=linaro.org; s=google; t=1721741937; x=1722346737; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=O/4DehQAXFUtwWfhcS1lj2tRRzgt6GzFGsAI8vFjBIM=;
+ b=IpG7vwd+jfWrm1LznbdGyg+uZkk8aMTOWhj2nmHxGkg4LgNTjx+9dXAKQX2+KH1wCr
+ 5gfix/ZzZEa/x8HiYoWmd7l7mSju97uNRAWKQnRwrlhnknTCiVFOCJo9eLHhBoriuEoa
+ nZA0iyb7mmIoydqZ+wegUNvoVM75UWHfI8TIModCFM2gjMWizKCcLpgYxcXznFhwt4Qg
+ gPW4pVIdmwDpXOs5gLFHK4ylvYNdN/yymvw7IE7yeK58YXeqketV+jWiV/C7qpiAqVuN
+ IRHgzbBbB/UW27yWP5NmLD+UmwgNLzRfSHNvYQ/y+775mGkUE3M6gvoGwDKTT1NxCdLe
+ 5DIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721740733; x=1722345533;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S7YGTRNAP4Qvs03ij7q9pLjWucU4FpHpqQyRMNIRFE8=;
- b=ftw38QrKPnHJnIqHVAxwaMcnJW+13vn2/3MIP98f8pkms+8WtLRXajTabKXQEboOLz
- xoOthkN9ou0TS7OPTvVLqw10pI4nLMWNOfTLbUudP9kF/1y8kVkZn5W0Sc+GfM44bPbV
- uaqPNACnzGdA3wgISLvRZ8HXOD8z2O4WHpgyLiIT5jlxlioMnBp3uafNL4lQwPTx9Yx4
- vifYC8Jmvop4cgzH+myoIS0t9VHQvh/Kk2vUzG3jQ2ShpGGbIDkeP8wDSh91/cMSuKIh
- YvdBP81UxpArDtCZk18hzOdWIWdQQbsJkkjJeCx+alLkEqliUq95Fncp7tgxycp2NLTy
- rlhg==
+ d=1e100.net; s=20230601; t=1721741937; x=1722346737;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O/4DehQAXFUtwWfhcS1lj2tRRzgt6GzFGsAI8vFjBIM=;
+ b=jjiOUkn8w8/pMksqppX1i1ZsMfyTBzr8gJZCwLTCtRvjqXbWhPlKrtdZVnYwA3t1no
+ Tz9GSnHawVMBYpfWZ6/QbRwrMHOUZIjkkUyB5VJ7EzcSVhfWcyjzeQenw1RQSEuwCc3L
+ ax7qFHW1IjfyNxdSrw4uAGasIC2WyW08Zig5PB4ziCKVkhL/HnWF2ovRcMSmsMcUR+8W
+ 0SJqLbShRGZHE1PJ1jyI40IIdUbsdqmSHFemRge6DGxAwhM91TRXfsGJUPDetRjZK4On
+ 40y4dOf39S1hKd3DRc4+EFAJ5DA9ITW3oO8covb9q/HKEmzzJ4i7jK09tK/i6FNbACJC
+ zbxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWpTw8s2HkLArz/GIs8OYWFqanTE5E+BqFSP2AJI0bMSuv2lG8+UurtKjU5aL5BYnaOM+7bV4+akxb9GXj8I79Un2DlPw==
-X-Gm-Message-State: AOJu0YyLHunMUlHIUfTH85Z7UAK7o9i5CgGxAdPrm9ZdjAVpxOSijuph
- cLaoke99lG8bQSYTLpsV3ogrMeFXvUbGhkw1WO5R402OcYCg7WLmj+ed6vHB5Zo=
-X-Google-Smtp-Source: AGHT+IHQOCPsh7UUuCNTRch4XaOZMoAPu/3b2I7rwBwH8uMAgHwxRJbwzL54BDY3I+Znt10iO/YHiA==
-X-Received: by 2002:a05:600c:82c3:b0:426:5d37:67f0 with SMTP id
- 5b1f17b1804b1-427dc548f5bmr69203155e9.13.1721740733057; 
- Tue, 23 Jul 2024 06:18:53 -0700 (PDT)
-Received: from localhost.localdomain ([78.199.60.143])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427db2a4e3bsm140312545e9.44.2024.07.23.06.18.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 06:18:50 -0700 (PDT)
-From: Zixun LI <admin@hifiphile.com>
-X-Google-Original-From: Zixun LI <zli@ogga.fr>
-To: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Zixun LI <zli@ogga.fr>,
-	u-boot@lists.denx.de
-Subject: [PATCH v3 7/7] usb: gadget: atmel: Add DM_USB_GADGET support
-Date: Tue, 23 Jul 2024 15:18:14 +0200
-Message-ID: <20240723131817.262596-8-zli@ogga.fr>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240723131817.262596-1-zli@ogga.fr>
-References: <20240723131817.262596-1-zli@ogga.fr>
+ AJvYcCWiRpFPigaabl3GNP++oT03KWX340wLAAb7AnmZco7fBV/o5lR4+1uk8mgIqSsdM0P5oIh1lz0ZD0esRMgYn4w0Buzm/w==
+X-Gm-Message-State: AOJu0YzahdZEFtB4EnnHJP/eUNHLnaTdESAccNzPzEqVfhaKsWd5C+ry
+ yGZ/yMEHNxyq7aCv9wq/XwyLLJcwJatkFr/B9mGNL17U5PUhYDehUzVnwz0gWVbGqN/ffU5szLj
+ NBMfTjItZBtficjT0tmXmC0nRBlNlMwIK/1raJQ==
+X-Google-Smtp-Source: AGHT+IEQeD1uLxz3h7VWfnJ/aramoAbJOy+agDyNwAjcljtCVPeKzoUQepZ01S572DprOib9H8j0IUDpdckTbZArLQA=
+X-Received: by 2002:a05:6870:d3cc:b0:260:fdd5:4147 with SMTP id
+ 586e51a60fabf-2638df231c8mr8657133fac.15.1721741936576; Tue, 23 Jul 2024
+ 06:38:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 23 Jul 2024 15:35:56 +0200
+References: <20240715112302.652527-1-lukas.funke-oss@weidmueller.com>
+ <20240715112302.652527-2-lukas.funke-oss@weidmueller.com>
+ <CAFLszTgX8Tfn=qC_ZBMR2M+iwFAOLKQhGQg8w42F1saAmZq4Eg@mail.gmail.com>
+ <CAC_iWjJR=wXX-kv5cmzE38gOCX8FYduX7xhtmm_QHe911GXaPA@mail.gmail.com>
+ <CAFLszTgpy8o37ZKYZaNKBt42ihXNWHzH3FNW1g5tLLuwnTeR+A@mail.gmail.com>
+In-Reply-To: <CAFLszTgpy8o37ZKYZaNKBt42ihXNWHzH3FNW1g5tLLuwnTeR+A@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 23 Jul 2024 16:38:20 +0300
+Message-ID: <CAC_iWj+RW3SF9g7VYBx=OwV3-qP2uzUE8HN1vznp0i3M4P5Cvw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
+To: Simon Glass <sjg@chromium.org>
+Cc: lukas.funke-oss@weidmueller.com, u-boot@lists.denx.de, 
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,236 +94,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add driver model support by using the uclass UCLASS_USB_GADGET_GENERIC.
+Hi Simon
 
-Disable local usb_gadget_register_driver()/usb_gadget_unregister_driver()
-implementation which is implemented in udc-core.c when DM_USB_GADGET
-is enabled.
+On Tue, 23 Jul 2024 at 15:47, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias
+>
+> On Mon, 22 Jul 2024 at 08:35, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi all
+> >
+> > On Sun, 21 Jul 2024 at 13:08, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi,
+> > >
+> > > On Mon, 15 Jul 2024 at 12:23, <lukas.funke-oss@weidmueller.com> wrote:
+> > > >
+> > > > From: Lukas Funke <lukas.funke@weidmueller.com>
+> > > >
+> > > > tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
+> > > > initialized in tpm_tis_init(). However, the init-function is called
+> > > > *after* tpm_tis_wait_init() introducing an uninitalized field access.
+> > > >
+> > > > This commit switches both routines.
+> > > >
+> > > > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> > > > ---
+> > > >
+> > > >  drivers/tpm/tpm2_tis_spi.c | 10 +++++-----
+> > > >  1 file changed, 5 insertions(+), 5 deletions(-)
+> > > >
+> > > > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+> > > > index b0fe97ab1d0..5a4dbfd3ccb 100644
+> > > > --- a/drivers/tpm/tpm2_tis_spi.c
+> > > > +++ b/drivers/tpm/tpm2_tis_spi.c
+> > > > @@ -256,17 +256,17 @@ static int tpm_tis_spi_probe(struct udevice *dev)
+> > > >         /* Ensure a minimum amount of time elapsed since reset of the TPM */
+> > > >         mdelay(drv_data->time_before_first_cmd_ms);
+> > > >
+> > > > +       tpm_tis_ops_register(dev, &phy_ops);
+> > > > +       ret = tpm_tis_init(dev);
+> > > > +       if (ret)
+> > > > +               goto err;
+> > > > +
+> > > >         ret = tpm_tis_wait_init(dev, chip->locality);
+> > > >         if (ret) {
+> > > >                 log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
+> > > >                 return ret;
+> > > >         }
+> > > >
+> > > > -       tpm_tis_ops_register(dev, &phy_ops);
+> > > > -       ret = tpm_tis_init(dev);
+> > > > -       if (ret)
+> > > > -               goto err;
+> > > > -
+> > > >         priv->pcr_count = drv_data->pcr_count;
+> > > >         priv->pcr_select_min = drv_data->pcr_select_min;
+> > > >         priv->version = TPM_V2;
+> > > > --
+> > > > 2.30.2
+> > > >
+> > >
+> > > This needs a Fixes tag for a5c30c26b28 (HEAD) tpm: Use the new API on
+> > > tpm2 spi driver
+> > >
+> >
+> > Yes please we need a fixes tag
+> >
+> > > The old code set up the timeouts first, then did the wait_init.
+> > > Presumably the point of wait_init is to wait before doing the init, so
+> > > we should try to keep that behaviour, unless it is actually wrong.
+> > >
+> > > So my thought would be to move the setup of the required timeout into
+> > > tpm_tis_ops_register(), instead.
+> >
+> > tpm_tis_ops_register() is setting up the bus accesses and I'd prefer
+> > to keep it that way.
+> > Since this is a static function, we can fold it in tpm_tis_init(),
+> > which makes more sense
+>
+> Since this is used by i2c and SPI we need to make sure that both work.
 
-Replace dm_usb_gadget_handle_interrupts() with handle_interrupts ops
-when DM_USB_GADGET is enabled.
+The tpm_tis_wait_init function is SPI-specific right now. It was SPI
+specifric before a5c30c26b28c6 as well. The i2c driver was after the
+refactoring and it doesn't call tpm_tis_wait_init(). However, I think
+we should call it on all drivers.
 
-Disable legacy struct usba_udc controller as controller point is extracted
-from udevice private data with DM.
+The only bus-specific bit is how we read back from the TPM. So I think
+the right thing to do here is
+1. Teach tpm_tis_wait_init() to call the proper bus function rather
+than the hardcoded tpm_tis_spi_read()
+2. call it from tpm_tis_init()
 
-Disable legacy usba_udc_probe() to avoid conflict with DM when it's
-enabled.
+That way we'll call it regardless of the bus the TPM happens to sit on.
 
-Compared to Linux driver only supported devices' DT bindings are included
-(sorted as Linux driver)
+Regards
+/Ilias
 
-Signed-off-by: Zixun LI <zli@ogga.fr>
----
- drivers/usb/gadget/atmel_usba_udc.c | 138 ++++++++++++++++++++++++++++
- drivers/usb/gadget/atmel_usba_udc.h |   3 +
- include/linux/usb/atmel_usba_udc.h  |   2 +
- 3 files changed, 143 insertions(+)
-
-diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-index a7b96449f8..b7b2e5196b 100644
---- a/drivers/usb/gadget/atmel_usba_udc.c
-+++ b/drivers/usb/gadget/atmel_usba_udc.c
-@@ -7,10 +7,14 @@
-  *			   Bo Shen <voice.shen@atmel.com>
-  */
- 
-+#include <clk.h>
-+#include <dm.h>
- #include <log.h>
- #include <malloc.h>
- #include <asm/gpio.h>
- #include <asm/hardware.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
- #include <linux/bitops.h>
- #include <linux/errno.h>
- #include <linux/list.h>
-@@ -18,6 +22,14 @@
- #include <linux/usb/gadget.h>
- #include <linux/usb/atmel_usba_udc.h>
- 
-+#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-+#include <mach/atmel_usba_udc.h>
-+
-+static int usba_udc_start(struct usb_gadget *gadget,
-+			  struct usb_gadget_driver *driver);
-+static int usba_udc_stop(struct usb_gadget *gadget);
-+#endif /* CONFIG_IS_ENABLED(DM_USB_GADGET) */
-+
- #include "atmel_usba_udc.h"
- 
- static int vbus_is_present(struct usba_udc *udc)
-@@ -528,6 +540,10 @@ static const struct usb_gadget_ops usba_udc_ops = {
- 	.wakeup			= usba_udc_wakeup,
- 	.set_selfpowered	= usba_udc_set_selfpowered,
- 	.pullup			= usba_udc_pullup,
-+#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-+	.udc_start		= usba_udc_start,
-+	.udc_stop		= usba_udc_stop,
-+#endif
- };
- 
- static struct usb_endpoint_descriptor usba_ep0_desc = {
-@@ -1237,6 +1253,7 @@ static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
- 	return eps;
- }
- 
-+#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
- static struct usba_udc controller = {
- 	.regs = (unsigned *)ATMEL_BASE_UDPHS,
- 	.fifo = (unsigned *)ATMEL_BASE_UDPHS_FIFO,
-@@ -1312,3 +1329,124 @@ int usba_udc_probe(struct usba_platform_data *pdata)
- 
- 	return 0;
- }
-+
-+#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-+struct usba_priv_data {
-+	struct clk_bulk		clks;
-+	struct usba_udc		udc;
-+};
-+
-+static int usba_udc_start(struct usb_gadget *gadget,
-+			  struct usb_gadget_driver *driver)
-+{
-+	struct usba_udc *udc = to_usba_udc(gadget);
-+
-+	usba_udc_enable(udc);
-+
-+	udc->driver = driver;
-+
-+	return 0;
-+}
-+
-+static int usba_udc_stop(struct usb_gadget *gadget)
-+{
-+	struct usba_udc *udc = to_usba_udc(gadget);
-+
-+	udc->driver = NULL;
-+
-+	usba_udc_disable(udc);
-+
-+	return 0;
-+}
-+
-+static int usba_udc_clk_init(struct udevice *dev, struct clk_bulk *clks)
-+{
-+	int ret;
-+
-+	ret = clk_get_bulk(dev, clks);
-+	if (ret == -ENOSYS)
-+		return 0;
-+
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable_bulk(clks);
-+	if (ret) {
-+		clk_release_bulk(clks);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int usba_udc_probe(struct udevice *dev)
-+{
-+	struct usba_priv_data *priv = dev_get_priv(dev);
-+	struct usba_udc *udc = &priv->udc;
-+	int ret;
-+
-+	ret = usba_udc_clk_init(dev, &priv->clks);
-+	if (ret)
-+		return ret;
-+
-+	udc->fifo = (void __iomem *)dev_remap_addr_index(dev, FIFO_IOMEM_ID);
-+	if (!udc->fifo)
-+		return -EINVAL;
-+
-+	udc->regs = (void __iomem *)dev_remap_addr_index(dev, CTRL_IOMEM_ID);
-+	if (!udc->regs)
-+		return -EINVAL;
-+
-+	udc->gadget.ops = &usba_udc_ops;
-+	udc->gadget.speed = USB_SPEED_HIGH,
-+	udc->gadget.is_dualspeed = 1,
-+	udc->gadget.name = "atmel_usba_udc",
-+
-+	udc->usba_ep = usba_udc_pdata(&pdata, udc);
-+
-+	udc->driver = NULL;
-+
-+	ret = usb_add_gadget_udc((struct device *)dev, &udc->gadget);
-+
-+	return ret;
-+}
-+
-+static int usba_udc_remove(struct udevice *dev)
-+{
-+	struct usba_priv_data *priv = dev_get_priv(dev);
-+
-+	usb_del_gadget_udc(&priv->udc.gadget);
-+
-+	clk_release_bulk(&priv->clks);
-+
-+	return dm_scan_fdt_dev(dev);
-+}
-+
-+static int usba_udc_handle_interrupts(struct udevice *dev)
-+{
-+	struct usba_priv_data *priv = dev_get_priv(dev);
-+
-+	return usba_udc_irq(&priv->udc);
-+}
-+
-+static const struct usb_gadget_generic_ops usba_udc_gadget_ops = {
-+	.handle_interrupts	= usba_udc_handle_interrupts,
-+};
-+
-+static const struct udevice_id usba_udc_ids[] = {
-+	{ .compatible = "atmel,at91sam9rl-udc" },
-+	{ .compatible = "atmel,at91sam9g45-udc" },
-+	{ .compatible = "atmel,sama5d3-udc" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(atmel_usba_udc) = {
-+	.name	= "atmel_usba_udc",
-+	.id	= UCLASS_USB_GADGET_GENERIC,
-+	.of_match = usba_udc_ids,
-+	.ops = &usba_udc_gadget_ops,
-+	.probe = usba_udc_probe,
-+	.remove = usba_udc_remove,
-+	.priv_auto = sizeof(struct usba_priv_data),
-+};
-+#endif /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-diff --git a/drivers/usb/gadget/atmel_usba_udc.h b/drivers/usb/gadget/atmel_usba_udc.h
-index f6cb48c1cf..7f5e98f6c4 100644
---- a/drivers/usb/gadget/atmel_usba_udc.h
-+++ b/drivers/usb/gadget/atmel_usba_udc.h
-@@ -211,6 +211,9 @@
- #define EP0_EPT_SIZE		USBA_EPT_SIZE_64
- #define EP0_NR_BANKS		1
- 
-+#define FIFO_IOMEM_ID	0
-+#define CTRL_IOMEM_ID	1
-+
- #define DBG_ERR		0x0001	/* report all error returns */
- #define DBG_HW		0x0002	/* debug hardware initialization */
- #define DBG_GADGET	0x0004	/* calls to/from gadget driver */
-diff --git a/include/linux/usb/atmel_usba_udc.h b/include/linux/usb/atmel_usba_udc.h
-index c1c810759c..37c4f21849 100644
---- a/include/linux/usb/atmel_usba_udc.h
-+++ b/include/linux/usb/atmel_usba_udc.h
-@@ -20,6 +20,8 @@ struct usba_platform_data {
- 	struct usba_ep_data	*ep;
- };
- 
-+#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
- extern int usba_udc_probe(struct usba_platform_data *pdata);
-+#endif
- 
- #endif /* __LINUX_USB_USBA_H */
--- 
-2.45.2
-
+>
+> I believe the way it used to be, some initial values were set for the
+> timeouts. The naming is somewhat confusing I suppose.
+>
+> Regards,
+> Simon
