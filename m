@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D27C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 20:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A97C3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 20:43:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E92387E9F;
-	Tue, 23 Jul 2024 22:38:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 651CD87876;
+	Tue, 23 Jul 2024 22:43:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ke5J4ksq";
+	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="VQ5Odtza";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 764F087E9F; Tue, 23 Jul 2024 22:38:01 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BF80A87D8C; Tue, 23 Jul 2024 22:43:10 +0200 (CEST)
+Received: from shout02.mail.de (shout02.mail.de [IPv6:2001:868:100:600::217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D56887876
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 22:37:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3A6886E1B
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 22:43:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6694b50a937so51984037b3.0
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 13:37:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721767071; x=1722371871; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AxTwJULvL60KtdcKTJl3rtIJVO46eWBUQeqsw+xpT3U=;
- b=ke5J4ksqZgC/43htmRU7AO5hylX60vxLNG94MwTlSuehXbEa/hh+uFlPMuBB+/+xqr
- 8Adcs+dwiPzAnVchb9R5H3ZQGoaPQrOTFx2Gi+D6QUlzVY3x6rwseUtysn4cgDA2KbYD
- 9Rc5FXpmZd5vkWmJH+0JOl9r/XahtZuRiof85S8lMc++s+rgvhl4ss/eTma8Qsz52Xu5
- XSsa0iGEE4Ylnq5QP16/JN4H0DJ64yzY1FQVd+dzZgiQAdpxX/CJ7B6epp9Ce9eIPA8t
- SrmgWwE/GusgB05+ZhIvDcLZkQwusAVqneE213+2ebByNanRlZWxuWbbYXzIry/a7Y7J
- nP9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721767071; x=1722371871;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AxTwJULvL60KtdcKTJl3rtIJVO46eWBUQeqsw+xpT3U=;
- b=j3eHXwl6KCDRRXIk2S/SOtEPdJ7iiCZpKwgjqqtauP1KO6CcFgkU8ebFaYqDI2RBcM
- l637RTDJCR4dVKBk1mfJ/vnvsGbIuKBJVlpP8lVAq5SnX4O5rFln1HjIKzzYlHaqw5/h
- L8G3Jw4KbcDrR0pYwKyfZLWU561q2+21dw8i0wIyPy4wBaf7/pLj6pxkadrQP1K57JXB
- RL6sVKOKfl64ebxEw8ATkl5iw6+CIFUWSXStHkIOB4Tr65C2KTi0N27gllDGfEv+ggoA
- 5zKjT1yyrVnABwUHEePqUdFcJ2EFYnmGGpDgfXPTVhri/IBmufXy9mY3+xAKrrwiDaCa
- hvFg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzoJofPdBzhKn1SY90ppoe28ft/t9Dn3323wcr/g2PPlFI1NmEGy1UToAlgMvIIgDdaYNBzQQhlYy92RpIHVDY9R/cPA==
-X-Gm-Message-State: AOJu0Yy8Tr0UJsXj+93yYgwXMy1fd/48WcB3yCZ8LYXx2GqIXYtyAaeP
- JSLbVqRy9y0TaotWnwfAnOtbFit9xE4OkAgpYDT/JVDAkAoguEoRcJ8mgExt4BTWLC+qK1ZRSnC
- BegrBULN6OFQj1i0KsdGMhxsjCjlKS847D3bwlsf/6ps2xuCCJ6Q=
-X-Google-Smtp-Source: AGHT+IHBDLE77xxoyLsgOqsk25/OgQprm1McS0NGHNBL4qtK3id0sl7OAou92uNh73JcehQlaqC+33i2y+fGmLxqBWA=
-X-Received: by 2002:a81:eb08:0:b0:65b:a403:9ec8 with SMTP id
- 00721157ae682-671f55b48c5mr10423587b3.38.1721767070990; Tue, 23 Jul 2024
- 13:37:50 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=mail.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=seb-dev@mail.de
+Received: from postfix03.mail.de (postfix03.bt.mail.de [10.0.121.127])
+ by shout02.mail.de (Postfix) with ESMTP id 3B0F7241003;
+ Tue, 23 Jul 2024 22:43:06 +0200 (CEST)
+Received: from smtp01.mail.de (smtp03.bt.mail.de [10.0.121.213])
+ by postfix03.mail.de (Postfix) with ESMTP id 1AF08801A9;
+ Tue, 23 Jul 2024 22:43:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mail.de;
+ s=mailde202009; t=1721767386;
+ bh=WUmWfMLxH3czyUUQjlD53Oo3ow1K5ftOu1qO+k8Zmqw=;
+ h=Message-ID:Date:Subject:To:Cc:From:From:To:CC:Subject:Reply-To;
+ b=VQ5OdtzaAWhyIpvUB5C9ZbCu9c7CV9PHrKqY8bAaYN9fuUTQK5zKBRUY8ig7piUtg
+ YQ3Uw3804te6Pggj3pG1A50WPTlibibr+mBORyPEQ2TpUsq4AnIrdHz6H90wSOL8zV
+ oaCcrnYuDqUXbyM1TiveA2ACJFJpGFsBUhRBcJapA7MPB9qvk4nw04CSd2SQyu0Jcn
+ SPkhm/LMFbH7Dbfak6rJUIEBaMIPLeqLb/7s/WiXr0/fFYgP1EjWU0jIuNrOwwooHF
+ b2Fz+2gtsQ5c2x5RcM68LovUS8MPkY3MCH6aboH2QJG7k+s+GaJHSd4fSswXgkl3px
+ YNU/AwJ/3lIaQ==
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp01.mail.de (Postfix) with ESMTPSA id 324E7240DBF;
+ Tue, 23 Jul 2024 22:43:03 +0200 (CEST)
+Message-ID: <aef94fef-c256-4a44-ad32-d534e7ee0f76@mail.de>
+Date: Tue, 23 Jul 2024 22:43:00 +0200
 MIME-Version: 1.0
-References: <20240705071419.11521-1-michael@amarulasolutions.com>
-In-Reply-To: <20240705071419.11521-1-michael@amarulasolutions.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 23 Jul 2024 15:37:40 -0500
-Message-ID: <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
-Subject: Re: [PATCH V2] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
- present for gate and mux
-To: Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, linux-amarula@amarulasolutions.com,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 2/5] phy: rockchip: naneng-combphy: Introduce PHY-IDs
+ to fix RK3588 muxing
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <cover.1721161722.git.seb-dev@mail.de>
+ <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
+ <7fd8f4e2-1661-43d5-b753-94549351dbf8@kwiboo.se>
+From: Sebastian Kropatsch <seb-dev@mail.de>
+In-Reply-To: <7fd8f4e2-1661-43d5-b753-94549351dbf8@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate: clean
+X-purgate: This mail is considered clean (visit http://www.eleven.de for
+ further information)
+X-purgate-type: clean
+X-purgate-Ad: Categorized by eleven eXpurgate (R) http://www.eleven.de
+X-purgate: This mail is considered clean (visit http://www.eleven.de for
+ further information)
+X-purgate: clean
+X-purgate-size: 5235
+X-purgate-ID: 154282::1721767385-0EE221F9-7B01E1BE/0/0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,183 +88,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 5, 2024 at 2:14=E2=80=AFAM Michael Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Gate and mux does not have .set_rate operation, but they could have
-> CLK_SET_PARENT_RATE flag set. In that case it's usually possible to find =
-a
-> parent up the tree which is capable of setting the rate (div, pll, etc).
-> Add clk_generic_set_rate to allow them to trasverse the clock tree.
->
-> Cc: Sam Protsenko <semen.protsenko@linaro.org>
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> ---
->  drivers/clk/clk-gate.c       |  1 +
->  drivers/clk/clk-mux.c        |  2 +-
->  drivers/clk/clk-uclass.c     | 20 ++++++++++++++++++++
->  drivers/clk/clk.c            |  9 +++++++++
->  include/clk.h                |  9 +++++++++
->  include/linux/clk-provider.h |  1 +
->  6 files changed, 41 insertions(+), 1 deletion(-)
-> ---
-> V1->V2:
->         Fix missing include
-> ---
-> diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
-> index cfd90b717e7..c86083ac5a3 100644
-> --- a/drivers/clk/clk-gate.c
-> +++ b/drivers/clk/clk-gate.c
-> @@ -116,6 +116,7 @@ const struct clk_ops clk_gate_ops =3D {
->         .enable =3D clk_gate_enable,
->         .disable =3D clk_gate_disable,
->         .get_rate =3D clk_generic_get_rate,
-> +       .set_rate =3D clk_generic_set_rate,
+Hi Jonas,
 
-I can see that clk_generic_get_rate() already exists here, and adding
-clk_generic_set_rate() tries to mimic that existing design. But
-frankly, I'm not sure it was a very good design choice in the first
-place. I mean, to have get/set rate operations for the clock types
-that clearly don't have such ability. I think it would be better to
-model the CCF clocks after real world clocks, and handle the
-propagation on the clock logic level. In fact, that's how it's already
-implemented in Linux kernel [1]. That keeps the particular clock
-implementations simple and brings the propagation logic to the actual
-clk API (clk_set_rate()), which in turn is able to cover all possible
-cases: even if some new clock types are implemented later, they will
-be covered already. That also reduces some code duplication and makes
-it easier to control that behavior in a centralized manner. The patch
-with the discussed implementation was already submitted a while ago
-[2], and still pending on the review.
+Am 21.07.2024 um 20:40 schrieb Jonas Karlman:
+> Hi Sebastian,
+> 
+> On 2024-07-16 22:42, Sebastian Kropatsch wrote:
+>> Fix multiplex configuration for PCIe1L0 and PCIe1L1 in PCIESEL_CON for
+>> RK3588 to correctly select between Combo PHYs and PCIe3 PHY.
+>> Currently, the code incorrectly muxes both ports to Combo PHYs,
+>> interfering with PCIe3 PHY settings.
+>> Introduce PHY identifiers to identify the correct Combo PHY and set
+>> the necessary bits accordingly.
+>>
+>> This fix is adapted from the upstream Linux commit by Sebastian Reichel:
+>> d16d4002fea6 ("phy: rockchip: naneng-combphy: Fix mux on rk3588")
+>>
+>> Fixes: b37260bca1aa ("phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588")
+>> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+>> ---
+>>   .../rockchip/phy-rockchip-naneng-combphy.c    | 49 ++++++++++++++++++-
+>>   1 file changed, 47 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+>> index 1b85cbcce8..7d61913af1 100644
+>> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+>> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+>> @@ -67,12 +67,15 @@ struct rockchip_combphy_grfcfg {
+>>   };
+>>   
+>>   struct rockchip_combphy_cfg {
+>> +	unsigned int num_phys;
+>> +	unsigned int phy_ids[3];
+>>   	const struct rockchip_combphy_grfcfg *grfcfg;
+>>   	int (*combphy_cfg)(struct rockchip_combphy_priv *priv);
+>>   };
+>>   
+>>   struct rockchip_combphy_priv {
+>>   	u32 mode;
+>> +	int id;
+>>   	void __iomem *mmio;
+>>   	struct udevice *dev;
+>>   	struct regmap *pipe_grf;
+>> @@ -270,6 +273,8 @@ static int rockchip_combphy_probe(struct udevice *udev)
+>>   {
+>>   	struct rockchip_combphy_priv *priv = dev_get_priv(udev);
+>>   	const struct rockchip_combphy_cfg *phy_cfg;
+>> +	fdt_addr_t addr;
+>> +	int id;
+>>   
+>>   	priv->mmio = (void __iomem *)dev_read_addr(udev);
+>>   	if (IS_ERR(priv->mmio))
+>> @@ -281,6 +286,26 @@ static int rockchip_combphy_probe(struct udevice *udev)
+>>   		return -EINVAL;
+>>   	}
+>>   
+>> +	addr = dev_read_addr(udev);
+> 
+> dev_read_addr(udev) is already called above, maybe we can use the
+> returned value from that call?
 
-Can I ask you if patch [2] doesn't cover some of your cases? Or maybe
-I'm missing something out and having .set_rate op in gate/mux would
-actually be better for some particular reason?
+Yes that is true. While priv->mmio seems to be the base address of the
+memory-mapped I/O region for the device, it seems to be more complex
+than being simply of type fdt_addr_t. To my non-expert eye it seems
+more error-prone, more unclear and less future-proof (what if __iomem
+changes somehow?). Please correct me if I'm wrong.
+I tried to keep it very close to the Linux implementation to make future
+changes/imports from the Linux driver as easy as possible.
 
-Thanks!
+We could use the 'addr' variable in the priv->mmio definition though.
 
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree=
-/drivers/clk/clk-gate.c#n120
-[2] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
+> Or this could be changes to match other reg value matching done in other
+> rockchip phy drivers, e.g. something like:
+> 
+> 	ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 0, &reg);
+> 	if (ret) {
+> 		dev_err(udev, "failed to read reg[0] property\n");
+> 		return ret;
+> 	}
+> 	if (reg == 0 && dev_read_addr_cells(udev) == 2) {
+> 		ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 1, &reg);
+> 		if (ret) {
+> 			dev_err(udev, "failed to read reg[1] property\n");
+> 			return ret;
+> 		}
+> 	}
 
+This solution looks more complex to me. What would the advantage
+of this solution be?
 
->  };
->
->  struct clk *clk_register_gate(struct device *dev, const char *name,
-> diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-> index e3481be95fa..f99a67ebd35 100644
-> --- a/drivers/clk/clk-mux.c
-> +++ b/drivers/clk/clk-mux.c
-> @@ -151,13 +151,13 @@ static int clk_mux_set_parent(struct clk *clk, stru=
-ct clk *parent)
->  #else
->         writel(reg, mux->reg);
->  #endif
-> -
->         return 0;
->  }
->
->  const struct clk_ops clk_mux_ops =3D {
->         .get_rate =3D clk_generic_get_rate,
->         .set_parent =3D clk_mux_set_parent,
-> +       .set_rate =3D clk_generic_set_rate,
->  };
->
->  struct clk *clk_hw_register_mux_table(struct device *dev, const char *na=
-me,
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index ed6e60bc484..638864e6774 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -517,6 +517,26 @@ ulong clk_get_parent_rate(struct clk *clk)
->         return pclk->rate;
->  }
->
-> +ulong clk_set_parent_rate(struct clk *clk, ulong rate)
-> +{
-> +       const struct clk_ops *ops;
-> +       struct clk *pclk;
-> +
-> +       debug("%s(clk=3D%p)\n", __func__, clk);
-> +       if (!clk_valid(clk))
-> +               return 0;
-> +
-> +       pclk =3D clk_get_parent(clk);
-> +       if (IS_ERR(pclk))
-> +               return -ENODEV;
-> +
-> +       ops =3D clk_dev_ops(pclk->dev);
-> +       if (!ops->set_rate)
-> +               return -ENOSYS;
-> +
-> +       return clk_set_rate(pclk, rate);
-> +}
-> +
->  ulong clk_round_rate(struct clk *clk, ulong rate)
->  {
->         const struct clk_ops *ops;
-> diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-> index 6ede1b4d4dc..febd5314df2 100644
-> --- a/drivers/clk/clk.c
-> +++ b/drivers/clk/clk.c
-> @@ -14,6 +14,7 @@
->  #include <dm/uclass.h>
->  #include <dm/lists.h>
->  #include <dm/device-internal.h>
-> +#include <linux/clk-provider.h>
->
->  int clk_register(struct clk *clk, const char *drv_name,
->                  const char *name, const char *parent_name)
-> @@ -61,6 +62,14 @@ ulong clk_generic_get_rate(struct clk *clk)
->         return clk_get_parent_rate(clk);
->  }
->
-> +ulong clk_generic_set_rate(struct clk *clk, ulong rate)
-> +{
-> +       if (clk->flags & CLK_SET_RATE_PARENT)
-> +               return clk_set_parent_rate(clk, rate);
-> +
-> +       return clk_get_parent_rate(clk);
-> +}
-> +
->  const char *clk_hw_get_name(const struct clk *hw)
->  {
->         assert(hw);
-> diff --git a/include/clk.h b/include/clk.h
-> index af23e4f3475..1900377eddb 100644
-> --- a/include/clk.h
-> +++ b/include/clk.h
-> @@ -452,6 +452,15 @@ struct clk *clk_get_parent(struct clk *clk);
->   */
->  ulong clk_get_parent_rate(struct clk *clk);
->
-> +/**
-> + * clk_set_parent_rate() - Set parent of current clock rate.
-> + * @clk:       A clock struct that was previously successfully requested=
- by
-> + *             clk_request/get_by_*().
-> + *
-> + * Return: clock rate in Hz, or -ve error code.
-> + */
-> +ulong clk_set_parent_rate(struct clk *clk, ulong rate);
-> +
->  /**
->   * clk_round_rate() - Adjust a rate to the exact rate a clock can provid=
-e
->   * @clk: A clock struct that was previously successfully requested by
-> diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
-> index 59f9c241b84..459fa2d15ce 100644
-> --- a/include/linux/clk-provider.h
-> +++ b/include/linux/clk-provider.h
-> @@ -253,6 +253,7 @@ struct clk *clk_register_fixed_rate(struct device *de=
-v, const char *name,
->
->  const char *clk_hw_get_name(const struct clk *hw);
->  ulong clk_generic_get_rate(struct clk *clk);
-> +ulong clk_generic_set_rate(struct clk *clk, ulong rate);
->
->  struct clk *dev_get_clk_ptr(struct udevice *dev);
->
-> --
-> 2.43.0
->
+>> +	if (addr == FDT_ADDR_T_NONE) {
+>> +		dev_err(udev, "No valid device address found\n");
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	/* Find the phy-id based on the device's I/O-address */
+>> +	priv->id = -ENODEV;
+>> +	for (id = 0; id < phy_cfg->num_phys; id++) {
+>> +		if (addr == phy_cfg->phy_ids[id]) {
+>> +			priv->id = id;
+>> +			break;
+>> +		}
+>> +	}
+>> +
+>> +	if (priv->id == -ENODEV) {
+>> +		dev_err(udev, "Failed to find PHY ID\n");
+>> +		return -ENODEV;
+>> +	}
+>> +
+>>   	priv->dev = udev;
+>>   	priv->mode = PHY_TYPE_SATA;
+>>   	priv->cfg = phy_cfg;
+>> @@ -421,6 +446,12 @@ static const struct rockchip_combphy_grfcfg rk3568_combphy_grfcfgs = {
+>>   };
+>>   
+>>   static const struct rockchip_combphy_cfg rk3568_combphy_cfgs = {
+>> +	.num_phys = 3,
+>> +	.phy_ids = {
+>> +		0xfe820000,
+>> +		0xfe830000,
+>> +		0xfe840000,
+>> +	},
+>>   	.grfcfg		= &rk3568_combphy_grfcfgs,
+>>   	.combphy_cfg	= rk3568_combphy_cfg,
+>>   };
+>> @@ -436,8 +467,16 @@ static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
+>>   		param_write(priv->phy_grf, &cfg->con1_for_pcie, true);
+>>   		param_write(priv->phy_grf, &cfg->con2_for_pcie, true);
+>>   		param_write(priv->phy_grf, &cfg->con3_for_pcie, true);
+>> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
+>> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
+>> +		switch (priv->id) {
+>> +		case 1:
+>> +			printf("rk3588_combphy_cfg: priv->id was configured to 1");
+> 
+> Please drop printf calls.
+> 
+>> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
+>> +			break;
+>> +		case 2:
+>> +			printf("rk3588_combphy_cfg: priv->id was configured to 2");
+> 
+> Please drop printf calls.
+
+Yes, these are forgotten from debugging and shouldn't be there.
+
+Cheers,
+Sebastian
