@@ -4,92 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FA6EC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 10:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BD7C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 12:40:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB9478865D;
-	Tue, 23 Jul 2024 12:46:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9E44D885F5;
+	Tue, 23 Jul 2024 14:40:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="H0YriGDd";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="QqRqnjyB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8492F88681; Tue, 23 Jul 2024 12:46:54 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id A1CB58865D; Tue, 23 Jul 2024 14:40:32 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C3AC88602
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 12:46:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 348A088496
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 14:40:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E4E973F730
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 10:46:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1721731606;
- bh=MXt0I/gKud944IgI/iksjKSDVUlr1FlhnUuSCeT3koA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=H0YriGDd7rTVGuqfLIJReFSzYBt0GHlDFG8EYIj+7NvA6PZp05/L3eOpK2OYexNzc
- rc31usE3G1ZBIwqhm1IYcaVhKDdrrnNntOldgCwOI/T7WCVm+K3gjea13CFwHKBB30
- jcdMG/QSnbYA48i0i2ySpWK8QBKukJty5+Ni2o8zzhy+qDWzZfFp7Ukckox1a9CSGw
- v/97K60O6COUXsO34LowCrFItMSYQ7le7sDsRhtvVYNIapGh6ZnQTwkLHmJDbqBvo5
- CljSMFmVnUPZm/+zV2D9rxECVCzpZCYTCZ3/dXZL+pmJjvvvdrK4MIzu5t3JIiTHZP
- 3+zFN5XgfZ56w==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-427a7a65e7dso21523745e9.1
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 03:46:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721731606; x=1722336406;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MXt0I/gKud944IgI/iksjKSDVUlr1FlhnUuSCeT3koA=;
- b=EMlrkzfa8rsDEWVTxUtBKzepQD/Kw+PMeiAlwy4wlBaEYL2DGfFTON6UhLtp4XlWX6
- A8/FxKyXXJDxsESbKXzxNJZjVhjuq2Hi630hLTh9/1qX26rBwWkteTr20LPy/4CNkfRk
- 4kvY5xqnLIY5fMdcROp1JmNGI6psnCEvLhbEkzKF34lszinXiJxLAQKL1MVnwfeUk3+8
- ZOOkO4Uhhu7Nmim/ao0pTXbv3fxvOm3FSvJ7UPUye55F0EfEEBGazzUz7o55bCr3qyFC
- nEQAiC/oRdnE3YWeqpmK4i32dogdL0LJ0zNP9m4L3eGoyIPGBCasAjNUQAyAZC0DHjr/
- fUwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWmsajBbfHvRMYC9fIwMTVst1eg+QMxpPS6whcd6yAF8V2EaRpDh9T1QP7bIR2FY3etyXn5zGe0cD5FBfUl5vynlaMOug==
-X-Gm-Message-State: AOJu0YzPworRiF9jMHQ+Z2B9gp5jODxsHRgOcpI4fTTEow1lrtiPfUTl
- m3tIuQV6GFATU6K5lW7EenwbpS5Rtwr8MvB0+4GWyR+Rag7ij/pGUhGNJ2iH82dwn32iWMPxXTU
- EL8wVCSSzJhorMOnxei76pv7z3Zs/NOFtaZR4jAvg+WqdbG0YL7fBwtIRyczMAHS9A5c=
-X-Received: by 2002:a05:600c:190d:b0:424:895c:b84b with SMTP id
- 5b1f17b1804b1-427efa0729emr11559285e9.4.1721731606547; 
- Tue, 23 Jul 2024 03:46:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFE3KpXg8H3qwio+vMTqYyzOtupXUc5TkwXcbT70YmxAYlkW3IszYN2A6mmAk/8KgZnvaDBYw==
-X-Received: by 2002:a05:600c:190d:b0:424:895c:b84b with SMTP id
- 5b1f17b1804b1-427efa0729emr11559095e9.4.1721731606161; 
- Tue, 23 Jul 2024 03:46:46 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-093-080.um16.pools.vodafone-ip.de. [62.143.93.80])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d69385ddsm166137345e9.48.2024.07.23.03.46.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 03:46:45 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] smbios: add extended Extended BIOS ROM Size
-Date: Tue, 23 Jul 2024 12:46:34 +0200
-Message-ID: <20240723104634.116082-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=i87piagwYL8QmheeepeGzzC6GY1521W7RBVF3RfsOxIcFXS9+iD8z4DbJPCohBQNJMsQ7FFeAYeFdD5PA7AEGtdwpgKrydyyuyNuxNqEqMJt4oEVAJkpgw+VEVvAtCCwDIgpIc8z5LLnF4xB/UuRAQKnUTsNcNxKT25XR239qA337dNpklmFyY7d+oGDMaW2DlJn7QYnFshM8pI4r2fJUiTodTIQpn5mVmMMOMzbIl9KYE3sjr+Uoqao0W28BfL4JxLesVSzKgvL7DGonIPXRBF8OZyhExNw8czxecmnv/D/64fs+Fo888BojpTDOX9CctsYpDkRfBHUFa85rYRdUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hEJ5BvQme00OOB2mAMUBvoVKn10/5vPtcdixhbvpr90=;
+ b=ufXU1u8P/aK3lEThxXZHslEPhZ0JN9NLpEzxGDa7jhUbd8Tw+VHcBQ4sKu6b7B7k1V8OgyFR1BCukmDgVbXcm3otx705U0bMUaz2fRqbn6hxYfzKNWM8wALfylVF5Ax/I2NMFgW/NFr9yl0G/kMrAF4+E4CJ8/EGiyLsl+WzhKIFoTMzHcjo1Z7RxtNf3TokC5bt6v6HACjf/cMpTP59gAUjvg7IXMB9M7VXPMP4vch9aRTlCnt9uoIRESeD8AKIQ46i2KgTQsh32eUdKwXy9Zut+KLVkL24SFUcSNjcfwnofGR1kC53anawpzG7eYZgxHe1DRlumPbDgZzktfju2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hEJ5BvQme00OOB2mAMUBvoVKn10/5vPtcdixhbvpr90=;
+ b=QqRqnjyBVNuwhfsVzAfhHDbW1SEn9VipG1h4T/HwLDZcnvzF9fqujvwHC8tEb2DWCnAqozzwUyPFAWZSNIVWytKWdHVIGl8sjv7u/Gp9ZrVMTj3YyymD+DdboJqKLzvdyc1PahN0aml6MZXeaxqow3aWbuQL936vS1kaiVa5v1U=
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DU4PR04MB10671.eurprd04.prod.outlook.com (2603:10a6:10:582::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.19; Tue, 23 Jul
+ 2024 12:40:25 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.7762.020; Tue, 23 Jul 2024
+ 12:40:24 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>
+Subject: RE: [PATCH v2] warp7: Convert to OF_UPSTREAM
+Thread-Topic: [PATCH v2] warp7: Convert to OF_UPSTREAM
+Thread-Index: AQHa3GD17EMFnA0CdkmQeV8bzMvXLrIEQhcA
+Date: Tue, 23 Jul 2024 12:40:24 +0000
+Message-ID: <PAXPR04MB845916D465FB022048698FFA88A92@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20240722175935.2165598-1-festevam@gmail.com>
+In-Reply-To: <20240722175935.2165598-1-festevam@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|DU4PR04MB10671:EE_
+x-ms-office365-filtering-correlation-id: c0554fec-97dd-4e7a-8b7c-08dcab149f71
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?ZoYNWZrENhl0BzDJ8zzkEHlJ3ozx+XYwbXBUJSLKrrkQZPqEJbWAsFvs3+nq?=
+ =?us-ascii?Q?pWXmYSkQ3YUOsOcG/Ug8pYhsV18M2DvlS2bgNCvi4DdOiyIL+Wu53vmqhCz5?=
+ =?us-ascii?Q?1GcGeSdMhunLGJNQBFyWg3Z4Td+OcPomPYtqx5zm57yaWdSYmue0Z52ZWA9I?=
+ =?us-ascii?Q?+IwQ9QTOvJcHgYHdnfqn5tZTE1V/+vKx6t4Jg3Y+HumhuNSyHIwclRb8vPtH?=
+ =?us-ascii?Q?E1vzGGVpECWvN2FVRuQCGNkO6sNR0diBAXOOUiBejHC4r3Tuhd4011Q4xQLy?=
+ =?us-ascii?Q?phYWpF5+E/rh1b3EZzq/TZOhVMpsqjiJz7kJJVKJloI2Z8cUjEeBAtDNLrfj?=
+ =?us-ascii?Q?T1IxUcXHg+nVwh6EtcfSbHrelSolDehmrjNSyxDytzMZW5RgCLN0HFcPXl/8?=
+ =?us-ascii?Q?wgpdIVqMyaMK7zj7gBiWRZMHJHssb5Mio+PbSdQ02AhyPwnGoVeX7XwrbbPk?=
+ =?us-ascii?Q?Buyi++5eWbDZID0rJf10ogsSoE2bWvMB5paqogsj+R0XsYUomu+MKC8/luu0?=
+ =?us-ascii?Q?QtSr6/5/zHbpARCxELlTQ0NUWhuiZjqq54iwhEcucA8RSoJBT+dVOuuxuy8w?=
+ =?us-ascii?Q?WYQnkmuj8i6fiebF1QO2C00M5FZken9G5HQHCCDYBqRf/gzJQzQGWU1DoLTk?=
+ =?us-ascii?Q?YI51V3KQ4rP9vo0/KxfL0Iu/p83AeX7NlKZyUtJddM3TZTqGoH1SQVIcfk0a?=
+ =?us-ascii?Q?UkBNbZB3mCu0TB01GpU6ZENVmopY8GD/ScZvz/ZQ/sSueQUbir0WwuGzUa2N?=
+ =?us-ascii?Q?Qm7aZ6JGI6E9yRdw4yamytuHAAjkSaDFXH/jpccEOfrVywO4Zr3H67htHvzp?=
+ =?us-ascii?Q?7lTbq6G6EYXcCuKMbgF2FBeQUyYgVjwPPpj/MlXWM8WLq2R1srtp0Z2cf8Cr?=
+ =?us-ascii?Q?/vrbdpUleyboPifQXb6sGGHL4C9dTdo0uB4vpY5slpNK2Ef8MSN3F5JaMm3L?=
+ =?us-ascii?Q?EpBY8EKTaoOd6PjvQrtYoYe5b3FtFkSsFGnYgGBw4tNyMQpoxs7h1WWFyTol?=
+ =?us-ascii?Q?SMQUgDbxAg02W0aVjDjqMAkoltlTWc1S56ayBDPVxs+enTt9oSofPcskYZLT?=
+ =?us-ascii?Q?wtPnSgbn8hNQInkaBFnKJpWSauGQT1JLDbKMRQyp74JtRVpsw/XwU02csU0W?=
+ =?us-ascii?Q?v7l6/irW0aFHPODdkFZsT6Wz0q5T3KDUUvwUsySh4WIMnqPnXyH7b5bwZr2e?=
+ =?us-ascii?Q?vQRZueYJbczU15tbaMDAA8k+L+IggrjGpMi6cFTi5UHDuyc/W1kLF2XR3OiQ?=
+ =?us-ascii?Q?U70vwm34IhtWajDS0PdaWV1fvUXIE+4E47RgjIRpXW1SFk0Yn1h5Y8XIH7IA?=
+ =?us-ascii?Q?NFi10r1rbT3DnXEJ9zc8kE9zTGahvn6xSSVygtNSdutZjeJMLNsnnPb5uul8?=
+ =?us-ascii?Q?f5RGrjbc6qNdLySoPPgwwpGVSyngYYwpy6geEcgHip7G4o4qwg=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?DxBvZzB2Ds0DBD7oKg7c5vImwn7dGKbewFmPKxw1stbrQ37zMzlapt5bFDPJ?=
+ =?us-ascii?Q?zKV8/bfuz162LrbQ6tBI95vY99XRyPsgDd/H5gE52XCVWWqkqoxSADy4oOVp?=
+ =?us-ascii?Q?uSGhUldlUaGZ3H744xMunoP4OWMWDPN4XYolc7bWMyh2n7ata472f9efOSE7?=
+ =?us-ascii?Q?vbqyLJAYco7FeXFSVpyXP7edz9QddgwjVHBEJHkX8p3cUw6UR7zE1vGRovPu?=
+ =?us-ascii?Q?mmGAKnBdyEjgJ58PmV+IlDrnWkEToLq66SqG8cI7coGybq8bR/8txJpZ150S?=
+ =?us-ascii?Q?uvK4weMd0cKHpOi6jLoDjB6KuOWZl5tieFyYlIKDvgbnLoQS5BJq+2qOUio6?=
+ =?us-ascii?Q?N1Hudr3/PXIIkNWmkyboOe2SyCnwPp/jW27jy/ndQXEHIZVayE/4CK20sGZE?=
+ =?us-ascii?Q?LQKtto9EUSUA+R9DnAxoqHTeYtN+SMfOkfxFoWmOI7mN9l5cpUA+JAIQTN3S?=
+ =?us-ascii?Q?36K/a/BrLWsdDFvOVfcrgv8ZdtHfbh5aiVUpIR4+EQL/CLr7GsVDA8G2wT58?=
+ =?us-ascii?Q?vHf4vW2UOxPJO+eIFzMn/CBfSjE/+tuEo1TxkGladxYpc8/bObI8R29a7oYn?=
+ =?us-ascii?Q?bhDqD8w+A6DUHOp/YKEWkvgSPqU/15cZTSAXpmLlMhIF2awaBitk1q7a39Sp?=
+ =?us-ascii?Q?CvFfHIbIpo0mbIVfKPvTvKH/OkHE4wBZgKlL0/3FT2Dh+VmUd6RGk11so/th?=
+ =?us-ascii?Q?1BA+c9ytWL46AKqzcDAo5KQDt1ev9+VgmYlrjPhFyGJ/cqVIb0WJJC6YO263?=
+ =?us-ascii?Q?0GEVcWJ3itzfG92tFuTBRgI46nwBf14nCEp9N0Z6rfw4HVIkPJ8dl2iiMGvv?=
+ =?us-ascii?Q?E9Gvp2wiT92GJVo9UMreFOD73Y2ORVRKQ59Xrr1UpPM5S5AraRRr2PKYftm2?=
+ =?us-ascii?Q?9h9yRt2ofD0mZ+XUcdrR6u9OgARahdivlPkW/gAK5lqMruzQLFSrF7sAdFTC?=
+ =?us-ascii?Q?/EzD/3NRM/lUQS3HCUzDt2p6Sh5wrwQacJ/nnjxqsoH42AgNcjrVWLPDvT35?=
+ =?us-ascii?Q?ke1epr5wl0rtaLJv/gaF/ofzBgKuXZL9/cFeJwlnG4XLHTdC9DSNZ8ko9dCo?=
+ =?us-ascii?Q?VAp5FPdPPQK4vw7Mj7NwbcJFhvLxouqtolRL8t187ou3JymT5ELBs3Fx0Duc?=
+ =?us-ascii?Q?dobl9HjOiSumt8Wa8h9ZDqua97yJELilvb7ug56swLNOj+C+XAZYKtkVgfCZ?=
+ =?us-ascii?Q?wGBZ6NjjzuwKuc2KQJPgsKPDyjBDocZLhkQ6hhic3NSHL8S8GN3Ng2o3IMxJ?=
+ =?us-ascii?Q?weVWzG/zoc1xtGuzMWXDxWKAZgu27ohm0BrTZgGs/bjSUoDYx5CkXYn78kFj?=
+ =?us-ascii?Q?WtrcuUDrWPvXYC61XEzHOnhW6d3SKmgpKYuCH4PYaK/4nJ+Ff10+A0Xlc/Pr?=
+ =?us-ascii?Q?+Y+2UqjbHhbJh3nDPHRFWm/G+wusBY7TX7FjDs6bZgdFNTEMK7cXSvrrPpTQ?=
+ =?us-ascii?Q?HtdyEVX+ln3wMb/3Q6l6+Fs0Hn4PfwbLXamOz9Ze04mvNAdIqya/vkzcCZmO?=
+ =?us-ascii?Q?KrLPP2+AWg1zCu4GXZFiKXgSHl9mfFuShvnsl2J0Hk4UfCpwYHVk50en/NIY?=
+ =?us-ascii?Q?ZUSb/IFoLdcuGA/M8jk=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0554fec-97dd-4e7a-8b7c-08dcab149f71
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Jul 2024 12:40:24.1846 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: abQ9GBT7RPrtvCHaenRCJV2xq5c1lu226ZZbmHdsMV6O5dxDvBFg4CoPfgcS0q6nkPo5vRpy0Mp1DOXI7u0MnA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10671
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,54 +156,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot claims to create SMBIOS 3.7 tables. The type 0 table has
-a field Extended BIOS ROM Size since version 3.1.
+> Subject: [PATCH v2] warp7: Convert to OF_UPSTREAM
+>=20
+> Instead of using the local imx7s-warp devicetree copies from U-Boot,
+> convert the imx7s-warp board to OF_UPSTREAM so that the upstream
+> kernel devicetree can be used instead.
+>=20
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-BIOS ROM sizes of 16 MiB or above must be written to this field.
-
-Add and fill the missing field.
-
-This patch does not cover the case of a ROM >= 8 GiB which cannot
-be configured in U-Boot.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/smbios.h | 1 +
- lib/smbios.c     | 9 ++++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/include/smbios.h b/include/smbios.h
-index a4fda9df7bd..00119d7a60c 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -105,6 +105,7 @@ struct __packed smbios_type0 {
- 	u8 bios_minor_release;
- 	u8 ec_major_release;
- 	u8 ec_minor_release;
-+	u16 extended_bios_rom_size;
- 	char eos[SMBIOS_STRUCT_EOS_BYTES];
- };
- 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 4126466e34a..e2a2f873a94 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -348,7 +348,14 @@ static int smbios_write_type0(ulong *current, int handle,
- #endif
- 	t->bios_release_date = smbios_add_prop(ctx, NULL, U_BOOT_DMI_DATE);
- #ifdef CONFIG_ROM_SIZE
--	t->bios_rom_size = (CONFIG_ROM_SIZE / 65536) - 1;
-+	if (CONFIG_ROM_SIZE < 0x1000000) {
-+		/* CONFIG_ROM_SIZE < 16 MiB */
-+		t->bios_rom_size = (CONFIG_ROM_SIZE / 65536) - 1;
-+	} else {
-+		/* CONFIG_ROM_SIZE < 8 GiB */
-+		t->bios_rom_size = 0xff;
-+		t->extended_bios_rom_size = CONFIG_ROM_SIZE >> 20;
-+	}
- #endif
- 	t->bios_characteristics = BIOS_CHARACTERISTICS_PCI_SUPPORTED |
- 				  BIOS_CHARACTERISTICS_SELECTABLE_BOOT |
--- 
-2.45.2
-
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
