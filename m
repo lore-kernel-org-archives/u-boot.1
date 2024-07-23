@@ -4,74 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A97C3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 20:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB18C3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 20:45:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 651CD87876;
-	Tue, 23 Jul 2024 22:43:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mail.de
+	by phobos.denx.de (Postfix) with ESMTP id 53F378831F;
+	Tue, 23 Jul 2024 22:45:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="VQ5Odtza";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RZ0D1X5J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF80A87D8C; Tue, 23 Jul 2024 22:43:10 +0200 (CEST)
-Received: from shout02.mail.de (shout02.mail.de [IPv6:2001:868:100:600::217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CDD7287876; Tue, 23 Jul 2024 22:45:11 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3A6886E1B
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 22:43:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91C20885B9
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 22:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=mail.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=seb-dev@mail.de
-Received: from postfix03.mail.de (postfix03.bt.mail.de [10.0.121.127])
- by shout02.mail.de (Postfix) with ESMTP id 3B0F7241003;
- Tue, 23 Jul 2024 22:43:06 +0200 (CEST)
-Received: from smtp01.mail.de (smtp03.bt.mail.de [10.0.121.213])
- by postfix03.mail.de (Postfix) with ESMTP id 1AF08801A9;
- Tue, 23 Jul 2024 22:43:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mail.de;
- s=mailde202009; t=1721767386;
- bh=WUmWfMLxH3czyUUQjlD53Oo3ow1K5ftOu1qO+k8Zmqw=;
- h=Message-ID:Date:Subject:To:Cc:From:From:To:CC:Subject:Reply-To;
- b=VQ5OdtzaAWhyIpvUB5C9ZbCu9c7CV9PHrKqY8bAaYN9fuUTQK5zKBRUY8ig7piUtg
- YQ3Uw3804te6Pggj3pG1A50WPTlibibr+mBORyPEQ2TpUsq4AnIrdHz6H90wSOL8zV
- oaCcrnYuDqUXbyM1TiveA2ACJFJpGFsBUhRBcJapA7MPB9qvk4nw04CSd2SQyu0Jcn
- SPkhm/LMFbH7Dbfak6rJUIEBaMIPLeqLb/7s/WiXr0/fFYgP1EjWU0jIuNrOwwooHF
- b2Fz+2gtsQ5c2x5RcM68LovUS8MPkY3MCH6aboH2QJG7k+s+GaJHSd4fSswXgkl3px
- YNU/AwJ/3lIaQ==
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp01.mail.de (Postfix) with ESMTPSA id 324E7240DBF;
- Tue, 23 Jul 2024 22:43:03 +0200 (CEST)
-Message-ID: <aef94fef-c256-4a44-ad32-d534e7ee0f76@mail.de>
-Date: Tue, 23 Jul 2024 22:43:00 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5ce74defe43so3212263eaf.2
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 13:45:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1721767506; x=1722372306; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wAbfYoKc5RFlTIXX7sLj4QHjmMPzmMwfrVQ3TOIHJ7g=;
+ b=RZ0D1X5JO46zrWQuC4XDQdCKl4makLVKsyvdznttJJRLntHc01yErBVVmrORC1o3WK
+ HfXdLoDIS4ORQPbmQZaxVHQEkTOw0nJXRtNlmAWEuq02cBx+EKHyDNJs7R4HUdx1xu5f
+ eaXw0TGbitj+qNLrH4Q0tu3FofT3uUMnWHZl4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721767506; x=1722372306;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wAbfYoKc5RFlTIXX7sLj4QHjmMPzmMwfrVQ3TOIHJ7g=;
+ b=B0NP3R1tWAl3e5Ew7koc9AemiH2E4OO7cb1vUJxTrCvQ1le4FpIPkXh4PvmDotk+AB
+ w4co/vy25uzSVq5QNxWNYrtHmMYz7ifrNOkCg1np/djyVJZMkthJtFMliFOfHzCkp4hk
+ FdLPo7RKn6tvdzjcpGsl0t7/+Qt2tTqQ4EO+RxSxaiMBUBerrB/GHXMjuDKxyYS5gJiL
+ ujt3um/c+T1R+zG0FVL/vBjADBf6RE084BVR5hr5PJ8mDs64LI4llEidXdxJHszEV/oP
+ er9nr7qdGg1kDPQJgDTtbxv8EFshsEZgwvg5v2ygUFaweBdhYKhO6laHoXu3jMYU0r3O
+ e65Q==
+X-Gm-Message-State: AOJu0YwOd4u75hFtJzuri3GfkI9vonaEWpo+A9bjvqzHPEtX3VUqo5lt
+ SqmW8YEL0RvTPxgttXCl7e7xJuyvEOfdzqlBkn1+i9xXSTW8T03LMJBzWlVf6+w=
+X-Google-Smtp-Source: AGHT+IGg9zAnKuB2v6Rh8lpaMMFOkt5Wx3UzcVyxQHUtEzB7aaFv+5g1OSVbxNfNuDlhABWuoSR5Lw==
+X-Received: by 2002:a05:6870:f10e:b0:260:f24f:62d2 with SMTP id
+ 586e51a60fabf-2648ca44c9fmr36970fac.17.1721767506130; 
+ Tue, 23 Jul 2024 13:45:06 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2610c716d8fsm2324709fac.5.2024.07.23.13.45.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Jul 2024 13:45:05 -0700 (PDT)
+Date: Tue, 23 Jul 2024 14:45:02 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: Re: [PATCH v4 00/29] Integrate MbedTLS v3.6 LTS with U-Boot
+Message-ID: <20240723204502.GJ989285@bill-the-cat>
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240703012555.GX38804@bill-the-cat>
+ <CAEfUkUKhso=O4oFDoJsEd=m+o-avKYvTHMDUHGQsLFQs7vpy-w@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/5] phy: rockchip: naneng-combphy: Introduce PHY-IDs
- to fix RK3588 muxing
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <cover.1721161722.git.seb-dev@mail.de>
- <ed6198ccb2635f0e950e3c21fa8898216bf949fa.1721161722.git.seb-dev@mail.de>
- <7fd8f4e2-1661-43d5-b753-94549351dbf8@kwiboo.se>
-From: Sebastian Kropatsch <seb-dev@mail.de>
-In-Reply-To: <7fd8f4e2-1661-43d5-b753-94549351dbf8@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate: clean
-X-purgate: This mail is considered clean (visit http://www.eleven.de for
- further information)
-X-purgate-type: clean
-X-purgate-Ad: Categorized by eleven eXpurgate (R) http://www.eleven.de
-X-purgate: This mail is considered clean (visit http://www.eleven.de for
- further information)
-X-purgate: clean
-X-purgate-size: 5235
-X-purgate-ID: 154282::1721767385-0EE221F9-7B01E1BE/0/0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xdar3rRqsuKKYDru"
+Content-Disposition: inline
+In-Reply-To: <CAEfUkUKhso=O4oFDoJsEd=m+o-avKYvTHMDUHGQsLFQs7vpy-w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,150 +111,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-Am 21.07.2024 um 20:40 schrieb Jonas Karlman:
-> Hi Sebastian,
-> 
-> On 2024-07-16 22:42, Sebastian Kropatsch wrote:
->> Fix multiplex configuration for PCIe1L0 and PCIe1L1 in PCIESEL_CON for
->> RK3588 to correctly select between Combo PHYs and PCIe3 PHY.
->> Currently, the code incorrectly muxes both ports to Combo PHYs,
->> interfering with PCIe3 PHY settings.
->> Introduce PHY identifiers to identify the correct Combo PHY and set
->> the necessary bits accordingly.
->>
->> This fix is adapted from the upstream Linux commit by Sebastian Reichel:
->> d16d4002fea6 ("phy: rockchip: naneng-combphy: Fix mux on rk3588")
->>
->> Fixes: b37260bca1aa ("phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588")
->> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
->> ---
->>   .../rockchip/phy-rockchip-naneng-combphy.c    | 49 ++++++++++++++++++-
->>   1 file changed, 47 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
->> index 1b85cbcce8..7d61913af1 100644
->> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
->> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
->> @@ -67,12 +67,15 @@ struct rockchip_combphy_grfcfg {
->>   };
->>   
->>   struct rockchip_combphy_cfg {
->> +	unsigned int num_phys;
->> +	unsigned int phy_ids[3];
->>   	const struct rockchip_combphy_grfcfg *grfcfg;
->>   	int (*combphy_cfg)(struct rockchip_combphy_priv *priv);
->>   };
->>   
->>   struct rockchip_combphy_priv {
->>   	u32 mode;
->> +	int id;
->>   	void __iomem *mmio;
->>   	struct udevice *dev;
->>   	struct regmap *pipe_grf;
->> @@ -270,6 +273,8 @@ static int rockchip_combphy_probe(struct udevice *udev)
->>   {
->>   	struct rockchip_combphy_priv *priv = dev_get_priv(udev);
->>   	const struct rockchip_combphy_cfg *phy_cfg;
->> +	fdt_addr_t addr;
->> +	int id;
->>   
->>   	priv->mmio = (void __iomem *)dev_read_addr(udev);
->>   	if (IS_ERR(priv->mmio))
->> @@ -281,6 +286,26 @@ static int rockchip_combphy_probe(struct udevice *udev)
->>   		return -EINVAL;
->>   	}
->>   
->> +	addr = dev_read_addr(udev);
-> 
-> dev_read_addr(udev) is already called above, maybe we can use the
-> returned value from that call?
+--xdar3rRqsuKKYDru
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes that is true. While priv->mmio seems to be the base address of the
-memory-mapped I/O region for the device, it seems to be more complex
-than being simply of type fdt_addr_t. To my non-expert eye it seems
-more error-prone, more unclear and less future-proof (what if __iomem
-changes somehow?). Please correct me if I'm wrong.
-I tried to keep it very close to the Linux implementation to make future
-changes/imports from the Linux driver as easy as possible.
+On Tue, Jul 23, 2024 at 03:24:29PM -0400, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Tue, 2 Jul 2024 at 21:26, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > On Tue, Jul 02, 2024 at 11:22:36AM -0700, Raymond Mao wrote:
+> >
+> > > Integrate MbedTLS v3.6 LTS (currently v3.6.0-RC1) with U-Boot.
+> > >
+> > > Motivations:
+> > > ------------
+> > >
+> > > 1. MbedTLS is well maintained with LTS versions.
+> > > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+> > > 3. MbedTLS recently switched license back to GPLv2.
+> > >
+> > > Prerequisite:
+> > > -------------
+> > >
+> > > This patch series requires mbedtls git repo to be added as a
+> > > subtree to the main U-Boot repo via:
+> > >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+> > >           https://github.com/Mbed-TLS/mbedtls.git \
+> > >           v3.6.0 --squash
+> > > Moreover, due to the Windows-style files from mbedtls git repo,
+> > > we need to convert the CRLF endings to LF and do a commit manually:
+> > >     $ git add --renormalize .
+> > >     $ git commit
+> > >
+> > > New Kconfig options:
+> > > --------------------
+> > >
+> > > `MBEDTLS_LIB` is for MbedTLS general switch.
+> > > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
+> > with
+> > > MbedTLS.
+> > > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN=
+1,
+> > > and Pubkey parser with MbedTLS.
+> > > `MBEDTLS_LIB_TLS` is for SSL/TLS (Disabled until LWIP port for MbedTL=
+S is
+> > > ready).
+> > > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto libr=
+ary.
+> > > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
+> > > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
+> > > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTL=
+S`
+> > > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
+> > > introduced.
+> > >
+> > > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X5=
+09
+> > > are by default enabled in qemu_arm64_defconfig for testing purpose.
+> > >
+> > > Patches for external MbedTLS project:
+> > > -------------------------------------
+> > >
+> > > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+> > > executables which is not supported by MbedTLS at the moment,
+> > > addtional patches for MbedTLS are created to adapt with the EFI loade=
+r:
+> > > 1. Decoding of Microsoft Authentication Code.
+> > > 2. Decoding of PKCS#9 Authenticate Attributes.
+> > > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
+> > certificates.
+> > > 4. MbedTLS native test suites for PKCS#7 signer's info.
+> > >
+> > > All above 4 patches (tagged with `mbedtls/external`) are submitted to
+> > > MbedTLS project and being reviewed, eventually they should be part of
+> > > MbedTLS LTS release.
+> > > But before that, please merge them into U-Boot, otherwise the building
+> > > will be broken when MBEDTLS_LIB_X509 is enabled.
+> > >
+> > > See below PR link for the reference:
+> > > https://github.com/Mbed-TLS/mbedtls/pull/9001
+> > >
+> > > Miscellaneous:
+> > > --------------
+> > >
+> > > Optimized MbedTLS library size by tailoring the config file
+> > > and disabling all unnecessary features for EFI loader.
+> > > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha=
+256,
+> > > sha512) are completely replaced when MbedTLS is enabled.
+> > > From v3, the size-growth is slightly reduced by refactoring Hash
+> > functions.
+> > >
+> > > Target(QEMU arm64) size-growth when enabling MbedTLS:
+> > > v1: 6.03%
+> > > v2: 4.66%
+> > > v3 & v4: 4.55%
+> > >
+> > > Please see the latest output of bloat-o-meter for the reference of the
+> > > size-growth on QEMU arm64 target [1].
+> > >
+> > > Tests done:
+> > > -----------
+> > >
+> > > EFI Secure Boot test (EFI variables loading and verifying, EFI signed
+> > image
+> > > verifying and booting) via U-Boot console.
+> > > EFI Secure Boot and Capsule sandbox test passed.
+> > >
+> > > Known issues:
+> > > -------------
+> > >
+> > > None.
+> > >
+> > > [1]: bloat-o-meter output between disabling/enabling MbedTLS (QEMU ar=
+m64)
+> > > ```
+> > > add/remove: 206/81 grow/shrink: 19/17 up/down: 55548/-17495 (38053)
+> >
+> > bloat-o-meter is a bit off then, since buildman shows:
+> > u-boot: add: 243/-17, grow: 18/-17 bytes: 65723/-8480 (57243)
+> >
+> > (Please use buildman for the size comparisons in the future).
+> >
+>=20
+> I have a problem with buildman.
+> As I followed the buildman/README.rst and run below command, but cannot g=
+et
+> any
+> output size summary. Is anything missing? I saw some artifacts of building
+> each
+> commit being generated in the upper dir though.
+> ```
+> ./tools/buildman/buildman -b <my_branch_name> --boards qemu_arm64 -sSdB
+> ```
+> I have set my branch upstream to upstream/next.
 
-We could use the 'addr' variable in the priv->mmio definition though.
+You have to tell it twice, once to build and a second to summarize
+things. My wrapper looks like:
+#!/bin/bash
 
-> Or this could be changes to match other reg value matching done in other
-> rockchip phy drivers, e.g. something like:
-> 
-> 	ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 0, &reg);
-> 	if (ret) {
-> 		dev_err(udev, "failed to read reg[0] property\n");
-> 		return ret;
-> 	}
-> 	if (reg == 0 && dev_read_addr_cells(udev) == 2) {
-> 		ret = ofnode_read_u32_index(dev_ofnode(udev), "reg", 1, &reg);
-> 		if (ret) {
-> 			dev_err(udev, "failed to read reg[1] property\n");
-> 			return ret;
-> 		}
-> 	}
+# Initial and constant buildman args
+ARGS=3D"-devl -PEWM"
+ALL=3D0
+KEEP=3D0
 
-This solution looks more complex to me. What would the advantage
-of this solution be?
+# Find our arguments
+while test $# -ne 0; do
+	if [ "$1" =3D=3D "--all" ]; then
+		ALL=3D1
+		shift 1
+	elif [ "$1" =3D=3D "--branch" ]; then
+		BRANCH=3D$2
+		shift 2
+	elif [ "$1" =3D=3D "--keep" ]; then
+		KEEP=3D1
+		ARGS=3D"$ARGS -k"
+		shift 1
+	elif [ "$1" =3D=3D "--board" ]; then
+		MACHINE=3D"--board $2"
+		OUTDIR=3D/tmp/$2
+		shift 2
+	else
+		MACHINE=3D$1
+		shift 1
+	fi
+done
 
->> +	if (addr == FDT_ADDR_T_NONE) {
->> +		dev_err(udev, "No valid device address found\n");
->> +		return -EINVAL;
->> +	}
->> +
->> +	/* Find the phy-id based on the device's I/O-address */
->> +	priv->id = -ENODEV;
->> +	for (id = 0; id < phy_cfg->num_phys; id++) {
->> +		if (addr == phy_cfg->phy_ids[id]) {
->> +			priv->id = id;
->> +			break;
->> +		}
->> +	}
->> +
->> +	if (priv->id == -ENODEV) {
->> +		dev_err(udev, "Failed to find PHY ID\n");
->> +		return -ENODEV;
->> +	}
->> +
->>   	priv->dev = udev;
->>   	priv->mode = PHY_TYPE_SATA;
->>   	priv->cfg = phy_cfg;
->> @@ -421,6 +446,12 @@ static const struct rockchip_combphy_grfcfg rk3568_combphy_grfcfgs = {
->>   };
->>   
->>   static const struct rockchip_combphy_cfg rk3568_combphy_cfgs = {
->> +	.num_phys = 3,
->> +	.phy_ids = {
->> +		0xfe820000,
->> +		0xfe830000,
->> +		0xfe840000,
->> +	},
->>   	.grfcfg		= &rk3568_combphy_grfcfgs,
->>   	.combphy_cfg	= rk3568_combphy_cfg,
->>   };
->> @@ -436,8 +467,16 @@ static int rk3588_combphy_cfg(struct rockchip_combphy_priv *priv)
->>   		param_write(priv->phy_grf, &cfg->con1_for_pcie, true);
->>   		param_write(priv->phy_grf, &cfg->con2_for_pcie, true);
->>   		param_write(priv->phy_grf, &cfg->con3_for_pcie, true);
->> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
->> -		param_write(priv->pipe_grf, &cfg->pipe_pcie1l1_sel, true);
->> +		switch (priv->id) {
->> +		case 1:
->> +			printf("rk3588_combphy_cfg: priv->id was configured to 1");
-> 
-> Please drop printf calls.
-> 
->> +			param_write(priv->pipe_grf, &cfg->pipe_pcie1l0_sel, true);
->> +			break;
->> +		case 2:
->> +			printf("rk3588_combphy_cfg: priv->id was configured to 2");
-> 
-> Please drop printf calls.
+OUTDIR=3D${OUTDIR:-/tmp/$MACHINE}
 
-Yes, these are forgotten from debugging and shouldn't be there.
+if [ -z "$MACHINE" ]; then
+	echo Usage: $0 MACHINE [--all] [--keep] [--branch BRANCH]
+	exit 1
+fi
 
-Cheers,
-Sebastian
+# If not all, then only first/last
+if [ $ALL -ne 1 ]; then
+	ARGS=3D"$ARGS --step 0"
+fi
+
+if [ ! -z $BRANCH ]; then
+	ARGS=3D"$ARGS -b $BRANCH"
+else
+	ARGS=3D"$ARGS -b `git rev-parse --abbrev-ref HEAD`"
+fi
+
+mkdir -p ${OUTDIR}
+
+export SOURCE_DATE_EPOCH=3D`date +%s`
+=2E/tools/buildman/buildman -o ${OUTDIR} $ARGS -SBC $MACHINE
+=2E/tools/buildman/buildman -o ${OUTDIR} $ARGS -SsB $MACHINE
+
+[ $KEEP -eq 0 ] && rm -rf ${OUTDIR}
+
+--=20
+Tom
+
+--xdar3rRqsuKKYDru
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmagFkMACgkQFHw5/5Y0
+tywtoAwAq5NYah5x22DGSV8iXRFvtW2sPfSifsWaAJdUPCaSyttKcegBEnc/wgEr
+oKSH9SszRAYEWfnsaV5RHM9LWOh1C1zjdsMEYRzNwq71Cft7RMw6xSGcfAvq+SSA
+aQZWP6lx74PBSDC2gBxIkIIADWPZhiIG5uj9H2v+UX4l4w3m0U56trqa7xveBw9R
+d2z195rGnPJMOfNKUp50d+68t6hXjJRHmPLxnphLotjP7h8Q4rdFWCzCR21EaNLR
+u4jGhUXxZX8r2BUqkR2dlHQSXfRmjluMkkR2WYk4KA4o5B5cRZaoQxVKM1vDB70E
+qaScboZFq1oYOOc6Fx2WfxYreEjf/JDiCiBO8qlHewTON8oRKqbpTGLfrSzaBnmT
+TAAsPEZFQgVQX9NkFedBWab9idFI0+A3wVQD7FCzlKxMNmsQ6YAsZnwrAjEUtBxd
+eHpLwbAERMXhZo9jDB8gqveXVqUTppTmOBhCSvlsEQeVZOdq/tPUdRbiaJ6KqvzO
+xPKM2zRz
+=ChkB
+-----END PGP SIGNATURE-----
+
+--xdar3rRqsuKKYDru--
