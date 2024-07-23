@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55322C3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 14:44:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C76C3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 14:48:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8418888112;
-	Tue, 23 Jul 2024 16:44:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3451487B1D;
+	Tue, 23 Jul 2024 16:48:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="X672G+K/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UJ64WTPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9238D87DAD; Tue, 23 Jul 2024 16:44:46 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2C35087C7E; Tue, 23 Jul 2024 16:48:48 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABB12879C1
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 16:44:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF2FC87A6D
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 16:48:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3E10E400E2
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 14:44:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1721745880;
- bh=bPecfUX14AZ3by7Joblw4n4wmultG97feotGpqJymos=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=X672G+K/HfcbM623xME8VSHC6rRkLVKYj1XNw+bQgGlYZFqQ0+QDPiUvE7Z24knud
- TbD+Sz0/USs5ir5PX3tvRpP1kNOMDKDIoIsd5Z5WmrjylBvry+GwvTjiw3FAyuy6dW
- kFi80mQCmpsk723Ayce5jmYATGaBfLZCOhr35x3wly5GT0EuY832kInPbEGw5dCdRu
- 7D5IBITxXp8cxleVyGrU1Sj8raga9TCjQCnoZbtktYl1MfOjvGgLESy5lFvZbFzX3E
- gL5DGwL7AAw3ofXgZ8lbf0bToOYDRbb31nW5oZPPpdIfgtZf53eD3LhbTixLshMKpG
- ClnFhPAWBTA8A==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-426703ac975so25387655e9.0
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 07:44:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-70448cae1e0so2987782a34.3
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 07:48:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1721746119; x=1722350919; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=k1gbeCQxqfeGkYcLx6JRBcvqM8SnljoMu2vQMHPu8+o=;
+ b=UJ64WTPPjG33XzdorVXERUBlncL9OMD0flCEHYUTdGieo6UG/y2AMitskWEpTevBDo
+ MWE2U7rT34WIiLoOSQtbN0a5lJwIbQOIPeGahBVTYhgHCdm1pgt+rnAbwFqAj2/TC3Yk
+ xE9nfUEHwoPnX9SCJYC4pjjbf0W6avGrSMU18=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721745879; x=1722350679;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bPecfUX14AZ3by7Joblw4n4wmultG97feotGpqJymos=;
- b=EttKUIv4fWmExFrRxun0DZGq5mlyMDt/d98tkgzhhe1ClHxkYL8Rz1yYBVhGbugFXx
- PZUfBibja9gRgNq/7B+XwTlEmkz6wgl3a3WdednWEQn+UEwNGbSxLJOx0Uju++e3v9x6
- t7rr5TrxN4UOgEfXO51pimQTuhIlSSps9Qi7IdBN75CH31HNvzHfhnT9wwep2RihNii1
- zB1lXrysZ3zWPa1V2LDe2M2YGo7CVccEglP/1/YuHw0Q8Sh+yk3SzZq2hnI7FrK7i1qJ
- BR0HkMC64FHhHXBzhkp0mg7DIa3D/FUCDo2t63H3ZpTwTnwQet8xbcRQ4i/5SWoCMM5F
- eHyA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWMq0U8pcJrTEVisJmmD+9ew5eQIA7jZBbLQ680mxF0KLsVhj8Ro8jTkOx/g3E/Rdd0i/AekJLek7tRWcMkyx51BN3epQ==
-X-Gm-Message-State: AOJu0YxO4ABKrzCP0HfOLOGHC4H+IQClmrriEwsIRz4Kt4sxhYqo3yLR
- DARjHITtKp8HLjMjf5wihTPYtznwYbFtvHo8Bcr9dNTkfN+mrm3vKOJXyogZNxa+hj7frTgD3aI
- +hvurAh14XZvS1cbkqYYu0645wbXVVz32EFteOkcS5xEy5ltCmbjrv1NnAB9aynHeAm8=
-X-Received: by 2002:a05:600c:1f8c:b0:426:5e32:4857 with SMTP id
- 5b1f17b1804b1-427eef58524mr19463745e9.0.1721745879695; 
- Tue, 23 Jul 2024 07:44:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFqGtRUzXUjYu3Oo312fioHKmzvxF0C3hDP+ZwTlV28qLEDcJtwJ07F/c92GH0e5nX/1Q75kQ==
-X-Received: by 2002:a05:600c:1f8c:b0:426:5e32:4857 with SMTP id
- 5b1f17b1804b1-427eef58524mr19463625e9.0.1721745879295; 
- Tue, 23 Jul 2024 07:44:39 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-093-080.um16.pools.vodafone-ip.de. [62.143.93.80])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d6906a96sm180042065e9.22.2024.07.23.07.44.38
+ d=1e100.net; s=20230601; t=1721746119; x=1722350919;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k1gbeCQxqfeGkYcLx6JRBcvqM8SnljoMu2vQMHPu8+o=;
+ b=Tb57EloZFoCITwc4qUAXp2ipL//N53YTO6/DTpQAYm2G5gZDCfH8POshKGye5mCUZM
+ 4GVMIzo7NcGuaqPehfAdpn1iE7D9Imt9BkUm+sR/NIWrP9wkyZZwYs/RQQDdg8sMlVsw
+ vKFXiA6qECzMBy5QXpcLAAfeRHcvUD0CqGsbLC8ZG/icvglSFQH8bI8ppf01f0S/Uz8y
+ i8bIVq9UL5sL4LTsap8YGtwP+NXQCokjZxrCW3lCS5nTt4u0RuhsowboLY7bozAsAMjD
+ +CdmN2j9Bt62Ck6vQ41mPWs8WEQUrYs/l2Oyn5wlenRZQm2x4gHh6luR1rf+23ULOYcH
+ 1Mhw==
+X-Gm-Message-State: AOJu0YzsS481/CxjXCvqIIOIUeXlqlVEAduHO24I3+bB3Jv3LumYa1dU
+ JoBdWX2H02XlRyoRAAxXQiHC5yg9XngnvtGEY9AHJags0k9UKSjefZN7YbEWBwo=
+X-Google-Smtp-Source: AGHT+IHhIjzmCFZTPbCJzzf7RVDjqW++03tPVqNvsQeATZ0lJlR6VFUvIgfAQQGufRWL/rPHMvVHbA==
+X-Received: by 2002:a05:6830:64ca:b0:704:4b6f:ac87 with SMTP id
+ 46e09a7af769-7090092798fmr11870220a34.17.1721746119585; 
+ Tue, 23 Jul 2024 07:48:39 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-45.totalplay.net.
+ [189.203.103.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-708f61913b8sm2023288a34.68.2024.07.23.07.48.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 07:44:38 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] smbios: add extended Extended BIOS ROM Size
-Date: Tue, 23 Jul 2024 16:44:23 +0200
-Message-ID: <20240723144423.191677-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ Tue, 23 Jul 2024 07:48:38 -0700 (PDT)
+Date: Tue, 23 Jul 2024 08:48:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH v2 00/48] Make U-Boot memory reservations coherent
+Message-ID: <20240723144836.GH989285@bill-the-cat>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240708140242.GA38804@bill-the-cat>
+ <CADg8p968x-UsiHEazS81+DxSXN0DLHpjTEDYDA+0LO=3hGK86A@mail.gmail.com>
+ <20240722173325.GA989285@bill-the-cat>
+ <CADg8p97bFNApmT+sPPs4MYhyOwzAdK_7M6n__0CaX5iV1MvK-w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="w0PtqE7kbAHM5k4X"
+Content-Disposition: inline
+In-Reply-To: <CADg8p97bFNApmT+sPPs4MYhyOwzAdK_7M6n__0CaX5iV1MvK-w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,61 +97,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot claims to create SMBIOS 3.7 tables. The type 0 table has
-a field Extended BIOS ROM Size since version 3.1.
 
-BIOS ROM sizes of 16 MiB or above must be written to this field.
+--w0PtqE7kbAHM5k4X
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add and fill the missing field.
+On Mon, Jul 22, 2024 at 11:07:45PM +0530, Sughosh Ganu wrote:
+> On Mon, 22 Jul 2024 at 23:03, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Jul 22, 2024 at 11:58:18AM +0530, Sughosh Ganu wrote:
+> > > On Mon, 8 Jul 2024 at 19:32, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Jul 04, 2024 at 01:04:56PM +0530, Sughosh Ganu wrote:
+> > > >
+> > > > > The aim of this patch series is to fix the current state of
+> > > > > incoherence between modules when it comes to memory usage. The pr=
+imary
+> > > > > issue that this series is trying to fix is that the EFI memory mo=
+dule
+> > > > > which is responsible for allocating and freeing memory, does not =
+have
+> > > > > any visibility of the memory that is being used by the LMB
+> > > > > module. This is further complicated by the fact that the LMB
+> > > > > allocations are caller specific -- the LMB memory map is not glob=
+al
+> > > > > nor persistent. This means that the memory "allocated" by the LMB
+> > > > > module might be relevant only for a given function. Hence one of =
+the
+> > > > > requirements for making the memory usage visible across modules i=
+s to
+> > > > > make LMB allocations persistent and global, and then have means to
+> > > > > communicate the use of memory across modules.
+> > > > >
+> > > > > The first set of patches in this series work on making the LMB me=
+mory
+> > > > > map persistent and global. This is being done keeping in mind the
+> > > > > usage of LMB memory by platforms where the same memory region can=
+ be
+> > > > > used to load multiple different images. What is not allowed is to
+> > > > > overwrite memory that has been allocated by the other module,
+> > > > > currently the EFI memory module. This is being achieved by introd=
+ucing
+> > > > > a new flag, LMB_NOOVERWRITE, which represents memory which cannot=
+ be
+> > > > > re-requested once allocated.
+> > > > >
+> > > > > A review comment on the earlier version was to do away with the s=
+tatic
+> > > > > arrays for the LMB lists of free and used memory. This version
+> > > > > uses the alloced list data structure for the LMB lists.
+> > > > >
+> > > > > The second set of patches are making changes to the EFI memory mo=
+dule
+> > > > > to make use of the LMB functions to allocate and free memory. A
+> > > > > *_flags() version of LMB API's has been introduced for the same. =
+The
+> > > > > earlier version was using notification mechanism from both LMB an=
+d EFI
+> > > > > modules to maintain memory coherence. This version makes use of t=
+he
+> > > > > LMB API functions for the memory allocations. This is based on re=
+view
+> > > > > comments of EFI maintainers.
+> > > >
+> > > > On am64x_evm_a53, the last test in test/py/tests/test_net_boot.py f=
+ails
+> > > > due to:
+> > > > ...
+> > > > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > > > Filename 'pxelinux.cfg/default-arm-k3'.
+> > > > Load address: 0x80100000
+> > > > Loading: ##################################################  64 Byt=
+es
+> > > >          8.8 KiB/s
+> > > > done
+> > > > Bytes transferred =3D 64 (40 hex)
+> > > >   1  pxe          ready   ethernet     0  port@1.bootdev.0         =
+ extlinux/extlinux.conf
+> > > > ** Booting bootflow 'port@1.bootdev.0' with pxe
+> > > > Retrieving file: pxelinux.cfg/default-arm
+> > > > am65_cpsw_nuss_port ethernet@8000000port@1: K3 CPSW: rflow_id_base:=
+ 16
+> > > > link up on port 1, speed 1000, full duplex
+> > > > Using ethernet@8000000port@1 device
+> > > > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > > > Filename 'pxelinux.cfg/default-arm'.
+> > > >
+> > > > TFTP error: trying to overwrite reserved memory...
+> > > > Couldn't retrieve pxelinux.cfg/default-arm
+> > >
+> > > So this seems to be failing because the address used to load the pxe
+> > > config file seems to be overlapping with an already reserved region of
+> > > memory. Can you please check if modifying the address works?
+> >
+> > I'm not sure what address you're thinking of modifying but, this isn't
+> > overwriting U-Boot itself so it's a case that needs to work.
+>=20
+> Can you please print the lmb memory map through bdinfo and share it
+> with me. That will give some info on what is causing the issue. Thing
+> is, with this patchset, if there is another reservation with a
+> different flag(like LMB_NOMAP, LMB_NOOVERWRITE), this would cause the
+> load to fail.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	Replace 0x01000000 by SZ_16M
----
- include/smbios.h | 1 +
- lib/smbios.c     | 9 ++++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
+Well hunh. I thought I had reproduced the issue before posting, but I
+just pushed the same tree (I'm fairly certain) over to my lab and the
+tests are passing now. So, lets just see what happens with the next
+iteration of the series, sorry for the noise.
 
-diff --git a/include/smbios.h b/include/smbios.h
-index a4fda9df7bd..00119d7a60c 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -105,6 +105,7 @@ struct __packed smbios_type0 {
- 	u8 bios_minor_release;
- 	u8 ec_major_release;
- 	u8 ec_minor_release;
-+	u16 extended_bios_rom_size;
- 	char eos[SMBIOS_STRUCT_EOS_BYTES];
- };
- 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 4126466e34a..7c24ea129eb 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -22,6 +22,7 @@
- #include <cpu.h>
- #include <dm/uclass-internal.h>
- #endif
-+#include <linux/sizes.h>
- 
- /* Safeguard for checking that U_BOOT_VERSION_NUM macros are compatible with U_BOOT_DMI */
- #if U_BOOT_VERSION_NUM < 2000 || U_BOOT_VERSION_NUM > 2099 || \
-@@ -348,7 +349,13 @@ static int smbios_write_type0(ulong *current, int handle,
- #endif
- 	t->bios_release_date = smbios_add_prop(ctx, NULL, U_BOOT_DMI_DATE);
- #ifdef CONFIG_ROM_SIZE
--	t->bios_rom_size = (CONFIG_ROM_SIZE / 65536) - 1;
-+	if (CONFIG_ROM_SIZE < SZ_16M) {
-+		t->bios_rom_size = (CONFIG_ROM_SIZE / 65536) - 1;
-+	} else {
-+		/* CONFIG_ROM_SIZE < 8 GiB */
-+		t->bios_rom_size = 0xff;
-+		t->extended_bios_rom_size = CONFIG_ROM_SIZE >> 20;
-+	}
- #endif
- 	t->bios_characteristics = BIOS_CHARACTERISTICS_PCI_SUPPORTED |
- 				  BIOS_CHARACTERISTICS_SELECTABLE_BOOT |
--- 
-2.45.2
+--=20
+Tom
 
+--w0PtqE7kbAHM5k4X
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmafwsAACgkQFHw5/5Y0
+tyy0kQv9GCETgC9oi43TOebCtTYjDHtDfnFRDFn7LYNw00sw/RUb03+Vp5Yi1st7
+8v9aSkj4ex95eRL5F55no6N1f06du7Ui8b7Ubf+9zTWkWGgU8B6jB/4EhcvlPs/I
+bEM6NSgg8VIV4Ik2VWZXF1KBf7T/sxJCNVUBybdPpqiFdo/PXVAzBgbIGT6UAXCl
+IKd5aDmAjdxpdOuE8HJ2Xq1hevSQrW3Xly9tgqm1xIf9xuR9nvTKZFrkjUu/CopL
+HT3+mlbboJy+DcdJGPfpr+CJT/wFIxCGkHHHKdii678A4/M6E7DehQfHwzqlr5pA
+GmF0xRUFwyQ53+gVfpPDQe8cJrs4WndKUZvQZHL6/gvSdbzmvacu6lE4q5V72wF4
+Nm3qYcRyKUiXJsBdxmNweeZaW/poD8Jy18Iw0lVpTa2ft5ynO9hTNaG6DdTaj0XB
+7tQUdfp9lltXt12COn5FoxKasfVoQ4hhGQzXs4yHXCwUBFi8OqKqrwI5Udr0ol3g
+rR6oSVxl
+=t2Yk
+-----END PGP SIGNATURE-----
+
+--w0PtqE7kbAHM5k4X--
