@@ -4,57 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F59C3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 13:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26900C3DA63
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 14:05:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EE5B88863;
-	Tue, 23 Jul 2024 15:53:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 809B9887FA;
+	Tue, 23 Jul 2024 16:05:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721742780;
-	bh=2d9QfhXmU71iHvh67TPc1J1fKVF+NvwlfwCF8DVOfPQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=JOKegtIx10DSYwVLMstLCYLtkoVQsttznYFwNQrHQULE1C+EXChlKtWdrcbJmP0FU
-	 x0y38psv98KUOYYiU/sR2s1zn0e5tfIGR4z/1mOwsqAlR5DdPkGvXyaGImI20JK703
-	 Nq+Xn3YLU8r5f/s4e2nirBszBii6qJJ07hDXOneuIt0EaxSxQCZRg9bKZhWdj8wTqw
-	 baAbvnBZ/8gEhS18o61YRT888p2BRYkXfGWc1tPwsCkTuhfDk2zI1we2m9Sg3tCiss
-	 Vpci7/khX48Vsq6Jy7Bu+jfTm2oET3MWvjyIst67dw3R37Cg5Lp0gC0kCrwx0XfGKC
-	 eLkfFUajMEV9w==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JTZe0a6Q";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 19A1288800; Tue, 23 Jul 2024 16:05:37 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C599A8876D;
- Tue, 23 Jul 2024 15:52:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1721742774;
- bh=2d9QfhXmU71iHvh67TPc1J1fKVF+NvwlfwCF8DVOfPQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ISw6wFkbJdvcNR2Qf6ndXbtPcJoBZpVXQyVmml7qi5n56JzCU4D30Il1XsxC4J/2a
- Xn/n6vLKxQ9csAMPm5d3qRV91rUq4ugY2O8yzLtdMY6Raejl0CO167K+KDNvvtt+IS
- E9aZh8A5A4pOcqO7/5MVWfYqF3a7LFISqJ7HEBCcmSgws1lvOaCOLM8HuN0og9bJzV
- PJ9nutR+Wds08HkTBLv8ZUkBZDyinu1DGiPlHby7ap424+H+13NWH3TnlPGsthE+7x
- KVhFQdG/GryXDZJIrKReJswyUvm19kYX+kWgAework0LMT0eepGLBbrthd06/jdH5C
- kgx2FV1kw7VNw==
-Message-ID: <19e38775-8e52-4581-8efb-246188b06734@denx.de>
-Date: Tue, 23 Jul 2024 15:36:39 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 1147A887E7
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 16:05:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2cb09dc1dafso2842804a91.2
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 07:05:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721743526; x=1722348326; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yjmijZJz8MQCbwZkr6a1aaLFm4wBQ/LZRvwH911o9no=;
+ b=JTZe0a6QWg4Nzq18diwWggUO+lM3yH/I7Nq3t8PpJCm5xGb2vI97SQLI4hJqBd7umN
+ 1N99hpl3QEzPOqoVTQAQFiQ+BUjv5Ydr+skGv/EjOhZ2VPQJuU+1nCqYz0LvCcyF9W7u
+ EgaNNRrkFbbbr6R37y8AulJ7+Otw0lCZWb6u4UXJgyb3iQDRd1O4AVRJ2U8+Owwh96a2
+ TGTIn58k8zbuBXyxSm4x6LnsKWDWAIkCt7hLvSIThHI64m2W+PHooO1PAxwPKg3g7yIy
+ 0yOM0U5KsjAZ+wzv5ev3sbV/d7q/IYvJSotXa1k5f1H8G2gY8/+LRtyio96wME2bY4ot
+ Le8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721743526; x=1722348326;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yjmijZJz8MQCbwZkr6a1aaLFm4wBQ/LZRvwH911o9no=;
+ b=sIxAGGSitLcWxTuV02Ux1s/+HQCL3O1B0zATIThwYCaol/6SEvzixhuhytgZQUiT9S
+ qrA/QMiF2l49k+nJgfyxvORfR8XiJlVl1N7JeJaD0kciACnDGjq15MO/cX6gzBQjURMM
+ tUMLKNCDdIL9NvtyK3nSAufxPw5Y3aQCmxcO5FsajCkyvP2ipr+987v6Eg7OgiWG7g6W
+ Uk1BYO1L11bAtrqHu8WzgtplpXKW/UZCP7gCbKu4PnI8PLHlLd2lm0JCkAgXZQCNkl8P
+ 6fdmj8Tmj0W7XgWKLIhApdvpnATPS8a5vbd9t0q/gl+cGfZFSQNF3D2ObKe/IixQr/kQ
+ znLw==
+X-Gm-Message-State: AOJu0Yzr3AYclTjKKiVoPlsKHLX54xy9Vb669Yw1S2rAGSmJ9czA5Atl
+ MneFmP4BqIWI+qcqiPoxi+0yTchjuB9gxG3J7t1eiFRBmGC1M3/BJiCcHFfbAg8Hq3Yur6iuC/q
+ 1xy/r1xHOACikTD5gsdc64kHbpl02yJpUGy5eVw==
+X-Google-Smtp-Source: AGHT+IFdIJHp/12bVBq0GM+0OKLfn1hGP9TboBiQ6kkPXXrQS/lLdIR5UALKMfLLAokVOIQHbb15rz87AjRcZWViQHE=
+X-Received: by 2002:a17:90a:6081:b0:2cd:2c4d:9345 with SMTP id
+ 98e67ed59e1d1-2cd85c25254mr3016163a91.6.1721743526216; Tue, 23 Jul 2024
+ 07:05:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/7] usb: gadget: atmel: Add attach/detach support
-To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Zixun LI <zli@ogga.fr>, u-boot@lists.denx.de
-References: <20240723131817.262596-1-zli@ogga.fr>
- <20240723131817.262596-7-zli@ogga.fr>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240723131817.262596-7-zli@ogga.fr>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240722193052.57592-1-raymond.mao@linaro.org>
+ <c68ab077-063c-49f0-b345-dffe4db28bb2@cherry.de>
+In-Reply-To: <c68ab077-063c-49f0-b345-dffe4db28bb2@cherry.de>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Tue, 23 Jul 2024 10:05:14 -0400
+Message-ID: <CAEfUkUJrDi2MTBbB8hLn6jBv7uXs5__0m=-28J+ZfjGkPDmChw@mail.gmail.com>
+Subject: Re: [PATCH v2] tools: Add script to update git subtree projects
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, sumit.garg@linaro.org, jerome.forissier@linaro.org, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,15 +90,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/23/24 3:18 PM, Zixun LI wrote:
-> Add controller attach/detach support by using
-> usb_gadget_ops.pullup() method.
+Hi Quentin,
 
-It is called 'function' in C, not 'method'. I think 'method' is C++ or 
-maybe Java ?
+On Tue, 23 Jul 2024 at 03:16, Quentin Schulz <quentin.schulz@cherry.de>
+wrote:
 
-In any case:
+> Hi Raymond,
+>
+> On 7/22/24 9:30 PM, Raymond Mao wrote:
+> > Recently we are introducing multiple git subtree projects and
+> > it is the right time to have a universal script to update
+> > various subtrees and replace the dts/update-dts-subtree.sh.
+> >
+> > update-subtree.sh is a wrapper of git subtree commands.
+> >
+> > Usage: From U-Boot top directory,
+> > run
+> > $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
+> > for pulling a tag from the upstream.
+> > Or run
+> > $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
+> > for cherry-pick a commit from the upstream.
+> >
+> > Currently <subtree-name> supports dts, mbedtls and lwip.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Refactored the script.
+> > - Update the control doc.
+> >
+> >   doc/develop/devicetree/control.rst |  8 +--
+> >   dts/update-dts-subtree.sh          | 48 -----------------
+> >   tools/update-subtree.sh            | 86 ++++++++++++++++++++++++++++++
+> >   3 files changed, 90 insertions(+), 52 deletions(-)
+> >   delete mode 100755 dts/update-dts-subtree.sh
+> >   create mode 100755 tools/update-subtree.sh
+> >
+> > diff --git a/doc/develop/devicetree/control.rst
+> b/doc/develop/devicetree/control.rst
+> > index ca4fb0b5b10..211f7e4909c 100644
+> > --- a/doc/develop/devicetree/control.rst
+> > +++ b/doc/develop/devicetree/control.rst
+> > @@ -96,12 +96,12 @@ sync the `dts/upstream/` subtree from the
+> devicetree-rebasing repo whenever
+> >   the next branch opens (refer: :doc:`../release_cycle`) with the latest
+> mainline
+> >   Linux kernel release. To sync the `dts/upstream/` subtree, run::
+> >
+> > -    ./dts/update-dts-subtree.sh pull <devicetree-rebasing-release-tag>
+> > +    ./tools/update-subtree.sh pull dts <devicetree-rebasing-release-tag>
+> >
+> >   If required it is also possible to cherry-pick fixes from the
+> >   devicetree-rebasing repository prior to next sync, usage::
+> >
+> > -    ./dts/update-dts-subtree.sh pick <devicetree-rebasing-commit-id>
+> > +    ./tools/update-subtree.sh pick dts <devicetree-rebasing-commit-id>
+> >
+> >
+> >   Configuration
+> > @@ -116,8 +116,8 @@ However, if `dts/upstream/` hasn't yet received
+> devicetree source file for your
+> >   newly added board support then one option is that you can add the
+> corresponding
+> >   devicetree source file as `arch/<arch>/dts/<name>.dts`. To select that
+> add `#
+> >   CONFIG_OF_UPSTREAM is not set` and set `DEFAULT_DEVICE_TREE=<name>`
+> when
+> > -prompted by Kconfig. Another option is that you can use use the "pick"
+> option of
+> > -`dts/update-dts-subtree.sh` mentioned above to bring in the commits
+> that you
+> > +prompted by Kconfig. Another option is that you can use the "pick"
+> option of
+> > +`tools/update-subtree.sh` mentioned above to bring in the commits that
+> you
+> >   need.
+> >
+> >   This should include your CPU or SoC's devicetree file. On top of that
+> any U-Boot
+> > diff --git a/dts/update-dts-subtree.sh b/dts/update-dts-subtree.sh
+> > deleted file mode 100755
+> > index a57b78a41d3..00000000000
+> > --- a/dts/update-dts-subtree.sh
+> > +++ /dev/null
+> > @@ -1,48 +0,0 @@
+> > -#!/bin/sh
+> > -# SPDX-License-Identifier: GPL-2.0+
+> > -#
+> > -# Copyright 2024 Linaro Ltd.
+> > -#
+> > -# Usage: from the top level U-Boot source tree, run:
+> > -# $ ./dts/update-dts-subtree.sh pull <release-tag>
+> > -# $ ./dts/update-dts-subtree.sh pick <commit-id>
+> > -#
+> > -# The script will pull changes from devicetree-rebasing repo into U-Boot
+> > -# as a subtree located as <U-Boot>/dts/upstream sub-directory. It will
+> > -# automatically create a squash/merge commit listing the commits
+> imported.
+> > -
+> > -set -e
+> > -
+> > -merge_commit_msg=$(cat << EOF
+> > -Subtree merge tag '$2' of devicetree-rebasing repo [1] into dts/upstream
+> > -
+> > -[1]
+> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
+> > -EOF
+> > -)
+> > -
+> > -remote_add_and_fetch() {
+> > -    if ! git remote get-url devicetree-rebasing 2>/dev/null
+> > -    then
+> > -        echo "Warning: Script automatically adds new git remote via:"
+> > -        echo "    git remote add devicetree-rebasing \\"
+> > -        echo "
+> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+> "
+> > -        git remote add devicetree-rebasing \
+> > -
+> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+> > -    fi
+> > -    git fetch devicetree-rebasing master
+> > -}
+> > -
+> > -if [ "$1" = "pull" ]
+> > -then
+> > -    remote_add_and_fetch
+> > -    git subtree pull --prefix dts/upstream devicetree-rebasing \
+> > -        "$2" --squash -m "${merge_commit_msg}"
+> > -elif [ "$1" = "pick" ]
+> > -then
+> > -    remote_add_and_fetch
+> > -    git cherry-pick -x --strategy=subtree -Xsubtree=dts/upstream/ "$2"
+> > -else
+> > -    echo "usage: $0 <op> <ref>"
+> > -    echo "  <op>     pull or pick"
+> > -    echo "  <ref>    release tag [pull] or commit id [pick]"
+> > -fi
+> > diff --git a/tools/update-subtree.sh b/tools/update-subtree.sh
+> > new file mode 100755
+> > index 00000000000..5946aa1a9e2
+> > --- /dev/null
+> > +++ b/tools/update-subtree.sh
+>
+> We have scripts/ and tools/ directories, this being a shell script I
+> would have intuitively added it to scripts/. So my question is, what's
+> the difference between those two directories :) ?
+>
+> Good question. Personally I think 'scripts' are for those scripts needed
+by other components and 'tools' are for the general purpose utilities
+(not limited to scripts). That is the reason I prefer 'tools'.
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+> @@ -0,0 +1,86 @@
+> > +#!/bin/sh
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +#
+> > +# Copyright (c) 2024 Linaro Limited
+> > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > +#
+> > +# Usage: from the top level U-Boot source tree, run:
+> > +# $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
+> > +# Or:
+> > +# $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
+> > +#
+> > +# The script will pull changes from subtree repo into U-Boot.
+> > +# It will automatically create a squash/merge commit listing the commits
+> > +# imported.
+> > +
+> > +set -e
+> > +
+> > +print_usage() {
+> > +    echo "usage: $0 <op> <subtree-name> <ref>"
+> > +    echo "  <op>           pull or pick"
+>
+> I think pulls are supposed to be done and sent to the ML by maintainers
+> only? At least that's what we're supposed to do for the dts/upstream/
+> directory AFAIR. Is it the same for mbedtls and lwip? If so, maybe
+> explicit this in the usage that only maintainers are supposed to run
+> this script with that option? And if you need to do it, ask the
+> maintainers to do it for you? Does this make sense?
+>
+> The rules of running this script are the same as the original one
+'dts/update-dts-subtree.sh'. We have the documentation for dts now,
+and will have similar ones for MbedTLS and LWIP soon.
+I didn't add this part yet since both MbedTLS and LWIP patch series
+are still under review.
 
-Thanks !
+
+> > +    echo "  <subtree-name> mbedtls or dts or lwip"
+> > +    echo "  <ref>          release tag [pull] or commit id [pick]"
+> > +}
+> > +
+> > +if [ $# -ne 3 ]; then
+> > +    print_usage
+> > +    exit 1
+> > +fi
+> > +
+> > +op=$1
+> > +subtree_name=$2
+> > +ref=$3
+> > +
+> > +set_params() {
+> > +    case "$subtree_name" in
+> > +        mbedtls)
+> > +            path=lib/mbedtls/external/mbedtls
+> > +            repo_url=https://github.com/Mbed-TLS/mbedtls.git
+> > +            remote_name="mbedtls_upstream"
+> > +            ;;
+> > +        dts)
+> > +            path=dts/upstream
+> > +            repo_url=
+> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+> > +            remote_name="devicetree-rebasing"
+> > +            ;;
+> > +        lwip)
+> > +            path=lib/lwip/lwip
+> > +            repo_url=https://git.savannah.gnu.org/git/lwip.git
+> > +            remote_name="lwip_upstream"
+> > +            ;;
+> > +        *)
+> > +            echo "Invalid subtree name: $subtree_name"
+> > +            print_usage
+> > +            exit 1
+> > +    esac
+> > +}
+> > +
+> > +set_params
+> > +
+> > +merge_commit_msg=$(cat << EOF
+> > +Subtree merge tag '$ref' of $subtree_name repo [1] into $path
+> > +
+>
+> I would recommend adding at the very least the path of the tools used to
+> generate this merge commit (so ./tools/update-subtree.sh or maybe just
+> $0?) or maybe even the full command line that was used to do this merge?
+>
+> Sorry but in any case would we need this commit message only without
+knowing
+the variables?
+
+
+> > +[1] $repo_url
+> > +EOF
+> > +)
+> > +
+> > +remote_add_and_fetch() {
+> > +    if [ -z "$(git remote get-url $remote_name 2>/dev/null)" ]; then
+> > +        echo "Warning: Script automatically adds new git remote via:"
+> > +        echo "    git remote add $remote_name \\"
+> > +        echo "        $repo_url"
+> > +        git remote add $remote_name $repo_url
+> > +    fi
+> > +    git fetch $remote_name master
+> > +}
+> > +
+> > +if [ "$op" = "pull" ]; then
+> > +    remote_add_and_fetch
+> > +    git subtree pull --prefix $path $remote_name "$ref" --squash -m
+> "$merge_commit_msg"
+> > +elif [ "$op" = "pick" ]; then
+> > +    remote_add_and_fetch
+> > +    git cherry-pick -x --strategy=subtree -Xsubtree=$path/ "$ref"
+>
+> Should we add -s there too? (or --signoff)
+>
+> As I search for all 'merge' commits in history, they have not
+signed-off tags.
+This patch is to extend the original script to support more git upstream
+repos.
+So I intended to keep the commit message format as the original one unless
+we have reasons to improve it.
+
+Regards,
+Raymond
