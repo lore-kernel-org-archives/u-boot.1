@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B26CC3DA63
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 14:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B65BAC3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jul 2024 14:44:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3E6B885B9;
-	Tue, 23 Jul 2024 16:43:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09646887D3;
+	Tue, 23 Jul 2024 16:43:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2387688286; Tue, 23 Jul 2024 16:43:29 +0200 (CEST)
-Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ id 7D85A87CEB; Tue, 23 Jul 2024 16:43:29 +0200 (CEST)
+Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A19587C38
- for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 16:43:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8B34879C1
+ for <u-boot@lists.denx.de>; Tue, 23 Jul 2024 16:43:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 30CBD20116B;
- Tue, 23 Jul 2024 16:43:20 +0200 (CEST)
+Received: from inva020.nxp.com (localhost [127.0.0.1])
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 8C9451A1168;
+ Tue, 23 Jul 2024 16:43:18 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id EC127200AE8;
- Tue, 23 Jul 2024 16:43:19 +0200 (CEST)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 55FEC1A0C4A;
+ Tue, 23 Jul 2024 16:43:18 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- A9EF3180222B; Tue, 23 Jul 2024 22:43:18 +0800 (+08)
+ 1966F180222B; Tue, 23 Jul 2024 22:43:17 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv1 3/5] cmd: cpu: add release subcommand
-Date: Tue, 23 Jul 2024 23:03:58 +0800
-Message-Id: <20240723150400.16650-4-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv1 1/5] cpu: add release_core callback
+Date: Tue, 23 Jul 2024 23:03:56 +0800
+Message-Id: <20240723150400.16650-2-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240723150400.16650-1-Zhiqiang.Hou@nxp.com>
 References: <20240723150400.16650-1-Zhiqiang.Hou@nxp.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,103 +60,68 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Add a new subcommand 'release' to bring up a core to run baremetal
-and RTOS applications.
-
-For example on i.MX8M Plus EVK, release the LAST core to run a RTOS
-application, passing the sequence number of the CPU core to release,
-here it is 3:
-    u-boot=> cpu list
-      0: cpu@0      NXP i.MX?? Rev1.1 A53 at 4154504685 MHz at 31C
-
-      1: cpu@1      NXP i.MX?? Rev1.1 A53 at 4154504685 MHz at 30C
-
-      2: cpu@2      NXP i.MX?? Rev1.1 A53 at 4154504685 MHz at 31C
-
-      3: cpu@3      NXP i.MX?? Rev1.1 A53 at 4154504685 MHz at 31C
-
-    u-boot=> load mmc 1:2 C0000000 /hello_world.bin
-    66008 bytes read in 5 ms (12.6 MiB/s)
-    u-boot=> dcache flush; icache flush
-    u-boot=> cpu release 3 C0000000
-    Released CPU core (mpidr: 0x3) to address 0xc0000000
+Add a new callback release_core to the cpu_ops, which is used to
+release a CPU core to run baremetal or RTOS application on a SoC
+with multiple CPU cores.
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
- cmd/cpu.c | 44 ++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 42 insertions(+), 2 deletions(-)
+ drivers/cpu/cpu-uclass.c | 10 ++++++++++
+ include/cpu.h            | 15 +++++++++++++++
+ 2 files changed, 25 insertions(+)
 
-diff --git a/cmd/cpu.c b/cmd/cpu.c
-index 9e323069b9..2755250756 100644
---- a/cmd/cpu.c
-+++ b/cmd/cpu.c
-@@ -3,6 +3,7 @@
-  * Copyright (c) 2015 Google, Inc
-  * Written by Simon Glass <sjg@chromium.org>
-  * Copyright (c) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
-+ * Copyright 2024 NXP
-  */
- 
- #include <command.h>
-@@ -18,6 +19,19 @@ static const char *cpu_feature_name[CPU_FEAT_COUNT] = {
- 	"Device ID",
- };
- 
-+static struct udevice *cpu_find_device(unsigned long cpu_id)
-+{
-+	struct udevice *dev;
-+
-+	for (uclass_first_device(UCLASS_CPU, &dev); dev;
-+	     uclass_next_device(&dev)) {
-+		if (cpu_id == dev_seq(dev))
-+			return dev;
-+	}
-+
-+	return NULL;
-+}
-+
- static int print_cpu_list(bool detail)
- {
- 	struct udevice *dev;
-@@ -82,10 +96,36 @@ static int do_cpu_detail(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
+diff --git a/drivers/cpu/cpu-uclass.c b/drivers/cpu/cpu-uclass.c
+index 16f8f2e521..2c8e46c05e 100644
+--- a/drivers/cpu/cpu-uclass.c
++++ b/drivers/cpu/cpu-uclass.c
+@@ -104,6 +104,16 @@ int cpu_get_vendor(const struct udevice *dev, char *buf, int size)
+ 	return ops->get_vendor(dev, buf, size);
  }
  
-+static int do_cpu_release(struct cmd_tbl *cmdtp, int flag, int argc,
-+			  char *const argv[])
++int cpu_release_core(const struct udevice *dev, phys_addr_t addr)
 +{
-+	struct udevice *dev;
-+	unsigned long cpu_id;
-+	unsigned long long boot_addr;
++	struct cpu_ops *ops = cpu_get_ops(dev);
 +
-+	if (argc != 3)
-+		return CMD_RET_USAGE;
++	if (!ops->release_core)
++		return -ENOSYS;
 +
-+	cpu_id = dectoul(argv[1], NULL);
-+	dev = cpu_find_device(cpu_id);
-+	if (!dev)
-+		return CMD_RET_FAILURE;
-+
-+	boot_addr = simple_strtoull(argv[2], NULL, 16);
-+
-+	if (cpu_release_core(dev, boot_addr))
-+		return CMD_RET_FAILURE;
-+
-+	return 0;
++	return ops->release_core(dev, addr);
 +}
 +
- U_BOOT_LONGHELP(cpu,
- 	"list	- list available CPUs\n"
--	"cpu detail	- show CPU detail");
-+	"cpu detail	- show CPU detail\n"
-+	"cpu release <core ID> <addr>	- Release CPU <core ID> at <addr>\n"
-+	"            <core ID>: the sequence number in list subcommand outputs");
+ U_BOOT_DRIVER(cpu_bus) = {
+ 	.name	= "cpu_bus",
+ 	.id	= UCLASS_SIMPLE_BUS,
+diff --git a/include/cpu.h b/include/cpu.h
+index 2077ff3063..0018910d61 100644
+--- a/include/cpu.h
++++ b/include/cpu.h
+@@ -102,6 +102,15 @@ struct cpu_ops {
+ 	 *         if not.
+ 	 */
+ 	int (*is_current)(struct udevice *dev);
++
++	/**
++	 * release_core() - Relase a CPU core to the given address to run application
++	 *
++	 * @dev:	Device to check (UCLASS_CPU)
++	 * @addr:	Address to relese the CPU core
++	 * @return 0 if OK, -ve on error
++	 */
++	int (*release_core)(const struct udevice *dev, phys_addr_t addr);
+ };
  
- U_BOOT_CMD_WITH_SUBCMDS(cpu, "display information about CPUs", cpu_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_cpu_list),
--	U_BOOT_SUBCMD_MKENT(detail, 1, 0, do_cpu_detail));
-+	U_BOOT_SUBCMD_MKENT(detail, 1, 0, do_cpu_detail),
-+	U_BOOT_SUBCMD_MKENT(release, 3, 0, do_cpu_release));
+ #define cpu_get_ops(dev)        ((struct cpu_ops *)(dev)->driver->ops)
+@@ -164,4 +173,10 @@ int cpu_is_current(struct udevice *cpu);
+  */
+ struct udevice *cpu_get_current_dev(void);
+ 
++/**
++ * cpu_release_core() - Relase a CPU core to the given address to run application
++ *
++ * @return 0 if OK, -ve on error
++ */
++int cpu_release_core(const struct udevice *dev, phys_addr_t addr);
+ #endif
 -- 
 2.17.1
 
