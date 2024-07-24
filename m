@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECEF0C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 07:09:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A83EC3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 07:25:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EF5F88896;
-	Wed, 24 Jul 2024 09:09:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AECAA88896;
+	Wed, 24 Jul 2024 09:25:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iCosFJoV";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="l+fcb08r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DEB5888A7; Wed, 24 Jul 2024 09:09:02 +0200 (CEST)
-Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
- [IPv6:2607:f8b0:4864:20::930])
+ id 5EE70888B2; Wed, 24 Jul 2024 09:25:23 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DDC488847
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 09:08:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C43C688881
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 09:25:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-8100ff1cec5so1943601241.3
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 00:08:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a7a843bef98so171518366b.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 00:25:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721804937; x=1722409737; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cnImAU6c+OjygjKAgCkoW8mZOOi4zG5gnsjfnv5FROo=;
- b=iCosFJoVlNGssnBGedQ7TlDF4TllPAAp88uMdS40Tr/CIbg6M36UFsgywIZtIVGfHm
- ZfaxcVGMU2UMB+tJqiflY4P476o2ri6XQJ1FUWKuhq8sf1qXA0M0z5oTHvZicCB22LFY
- jcgqrfIA4hYeEW2ATG8Bct2l5/4/67eJa2m5nfIRuGNCi//6JBf7HSt8uFtTZYqLnFuT
- dWN435oUtbaSvhj0dq25QbBUGx5NzHc/VEl6g+0I+PyiRLaj5nfLwdf/Rkn5ccKl4f4a
- zH1F030qKyH4eopI0UKve1cU3xOWaisr03EubfIE+qocF1YRxkEDZhYlr2LVKWDsB1aL
- rdKw==
+ d=amarulasolutions.com; s=google; t=1721805914; x=1722410714;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b/oyYbdAAktnxe0eFeuqbIM/IJXFxFN4HmTs0gttlr4=;
+ b=l+fcb08r74o97kSJqoC8hptI/B20MRdvL6TDKK1AEw4cvnDkTnq9Vx/ET4iZmdLePf
+ 7ZD20zklTqeZzMiYdtBRu088kOUiuyf614J2HbiHKu2XQTsn53BzvfqxlsfXTlMR7jcO
+ mraZSVm7yY+dEIOnRMt+kZpv8GjUjuCrT6mZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721804937; x=1722409737;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cnImAU6c+OjygjKAgCkoW8mZOOi4zG5gnsjfnv5FROo=;
- b=DGJjdj4G5oCeLoQNyok6fyoDchdjbTQ98wnAbeopw/QPBCHz+58Q4sYEx8ySuPDTrn
- WWHiDx+65/c7sTfHYTJ9SUfid/rQ/gynMfYA4j+HQojqUEWyiPkPwcBR/Jz/48bYgrRB
- 7s3NX1X81W2M/YRzmVKAoxVkGJqT+N6p9p4MTVLtK1NQ/5gt9wCdWWsZZuNP3LFvj3Zh
- 2PZjnqalUGu6GCTza5o/PUIi8UToZ1boxPBCuzmBY5wqHaF9jKQzCUHtnTdIzRR+CLb8
- hW915cEvec++/5aJBjz9iOm6drfg7TQU3aCSYFfGZ8q3EYQW/KMPc2CCmXnlf6sQuxzv
- 60mQ==
-X-Gm-Message-State: AOJu0Yw4wWsMyqfEUNMAtskDHvngx9rg6vc2I5N1IL1q1JbnkbkRwxGu
- f4ndROslcoIG942HAoQ8d95qA+wlL0tkgBsMVwQdYGp7mb+IEuXjfVnvdTeQHBhsyD0y58nxmjE
- LaVRDx9vwlE99p2r+MZvbaFONU7iHqFHkLT5ypA==
-X-Google-Smtp-Source: AGHT+IFW6xu/7wLMwSM53o6v2zrL+9LPaaDklp3GLYylZqO8g6A37ih2KhDnE7ZGfIWP+z0SBuIVofEVMmC7PxR4KwY=
-X-Received: by 2002:a05:6102:3310:b0:492:9dbe:1741 with SMTP id
- ada2fe7eead31-493c1ac3b84mr1882481137.27.1721804937196; Wed, 24 Jul 2024
- 00:08:57 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721805914; x=1722410714;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=b/oyYbdAAktnxe0eFeuqbIM/IJXFxFN4HmTs0gttlr4=;
+ b=JkFhV5ctgJfhY202Q3HgAx57Xk6pf6YJa7Wi8yQplgHpLwypD+fWNCFxrbyRXyOBH1
+ I/Uv1T5o5Twy6MEudmauIt4lCwp0ECZU3gY26RKHtmWsMu30LywpHYpIkkundOX3ygqr
+ dxieW45/yNen1UshYcd4OwgWOC3y0RZi6YdiCNVK2F+jz2zK2bobKb6+twGtav/HWXAO
+ IUCTUreCMim1RSTf5MIUpI7nzsWdVHEQLbltwJtExHnwLbYSs10KrZxk5IPBRhRYy3EW
+ oB5MtLIKO5p86O7cQ2xBhM+bmVmzXQIjBKwx0SEToLZ6FmmOr3oPdAENc5BVTNr/Eoh8
+ iAlA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVafX7nyXmxBGx0TYtV7wDzR3HZj1MuYh8TB5YrLzQofrZ9FO2VCLTNQtVVkxvD6WndxZs1FseE8axdNX60BhIS7yA3sQ==
+X-Gm-Message-State: AOJu0YxKsHnAt6eORdwj0vmumodnwvuu7Peffp9hhQ+ZeNmW6jiSQD9L
+ O/NMRBHA0mXybZ7shWs66RRDJALHENQXh79RiJ+pHB/bvUuF9h211a7HdaF4udp+fEtWwwKEuKm
+ l+UFwlloKVCvjYLuBZN2x+1GMxomXwjTd69Gr8a+941VXh7BGO6QyUw==
+X-Google-Smtp-Source: AGHT+IFze/UyS8WCzOGs00sl+JDIUtXr4rhEpbWVLAo/4UImMniy2Dg5hHNV1eR2pBuiO+TlGA4rA0IGo5jyjmEmXpo=
+X-Received: by 2002:a17:907:72c1:b0:a7a:8bf9:a6e8 with SMTP id
+ a640c23a62f3a-a7ab0e010fbmr79548766b.35.1721805913963; Wed, 24 Jul 2024
+ 00:25:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240722193052.57592-1-raymond.mao@linaro.org>
-In-Reply-To: <20240722193052.57592-1-raymond.mao@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 24 Jul 2024 12:38:46 +0530
-Message-ID: <CAFA6WYNm6roHW3KsENtq2nLfhmZV1xeUzak6CUyHj6oFy=yQqA@mail.gmail.com>
-Subject: Re: [PATCH v2] tools: Add script to update git subtree projects
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240705071419.11521-1-michael@amarulasolutions.com>
+ <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
+In-Reply-To: <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 24 Jul 2024 09:25:01 +0200
+Message-ID: <CAOf5uwk8xjgsrVysDgEeOsr6uR5u=LYP3N2s67eBf5eqqtS_MQ@mail.gmail.com>
+Subject: Re: [PATCH V2] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present for gate and mux
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, linux-amarula@amarulasolutions.com,
+ u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,228 +91,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Sam
 
-Thanks for doing this.
+On Tue, Jul 23, 2024 at 10:37=E2=80=AFPM Sam Protsenko
+<semen.protsenko@linaro.org> wrote:
+>
+> On Fri, Jul 5, 2024 at 2:14=E2=80=AFAM Michael Trimarchi
+> <michael@amarulasolutions.com> wrote:
+> >
+> > Gate and mux does not have .set_rate operation, but they could have
+> > CLK_SET_PARENT_RATE flag set. In that case it's usually possible to fin=
+d a
+> > parent up the tree which is capable of setting the rate (div, pll, etc)=
+.
+> > Add clk_generic_set_rate to allow them to trasverse the clock tree.
+> >
+> > Cc: Sam Protsenko <semen.protsenko@linaro.org>
+> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+> > ---
+> >  drivers/clk/clk-gate.c       |  1 +
+> >  drivers/clk/clk-mux.c        |  2 +-
+> >  drivers/clk/clk-uclass.c     | 20 ++++++++++++++++++++
+> >  drivers/clk/clk.c            |  9 +++++++++
+> >  include/clk.h                |  9 +++++++++
+> >  include/linux/clk-provider.h |  1 +
+> >  6 files changed, 41 insertions(+), 1 deletion(-)
+> > ---
+> > V1->V2:
+> >         Fix missing include
+> > ---
+> > diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
+> > index cfd90b717e7..c86083ac5a3 100644
+> > --- a/drivers/clk/clk-gate.c
+> > +++ b/drivers/clk/clk-gate.c
+> > @@ -116,6 +116,7 @@ const struct clk_ops clk_gate_ops =3D {
+> >         .enable =3D clk_gate_enable,
+> >         .disable =3D clk_gate_disable,
+> >         .get_rate =3D clk_generic_get_rate,
+> > +       .set_rate =3D clk_generic_set_rate,
+>
+> I can see that clk_generic_get_rate() already exists here, and adding
+> clk_generic_set_rate() tries to mimic that existing design. But
+> frankly, I'm not sure it was a very good design choice in the first
+> place. I mean, to have get/set rate operations for the clock types
+> that clearly don't have such ability. I think it would be better to
+> model the CCF clocks after real world clocks, and handle the
+> propagation on the clock logic level. In fact, that's how it's already
+> implemented in Linux kernel [1]. That keeps the particular clock
 
-On Tue, 23 Jul 2024 at 01:01, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Recently we are introducing multiple git subtree projects and
-> it is the right time to have a universal script to update
-> various subtrees and replace the dts/update-dts-subtree.sh.
->
-> update-subtree.sh is a wrapper of git subtree commands.
->
-> Usage: From U-Boot top directory,
-> run
-> $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
-> for pulling a tag from the upstream.
-> Or run
-> $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
-> for cherry-pick a commit from the upstream.
->
-> Currently <subtree-name> supports dts, mbedtls and lwip.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Refactored the script.
-> - Update the control doc.
->
->  doc/develop/devicetree/control.rst |  8 +--
->  dts/update-dts-subtree.sh          | 48 -----------------
->  tools/update-subtree.sh            | 86 ++++++++++++++++++++++++++++++
->  3 files changed, 90 insertions(+), 52 deletions(-)
->  delete mode 100755 dts/update-dts-subtree.sh
->  create mode 100755 tools/update-subtree.sh
->
-> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-> index ca4fb0b5b10..211f7e4909c 100644
-> --- a/doc/develop/devicetree/control.rst
-> +++ b/doc/develop/devicetree/control.rst
-> @@ -96,12 +96,12 @@ sync the `dts/upstream/` subtree from the devicetree-rebasing repo whenever
->  the next branch opens (refer: :doc:`../release_cycle`) with the latest mainline
->  Linux kernel release. To sync the `dts/upstream/` subtree, run::
->
-> -    ./dts/update-dts-subtree.sh pull <devicetree-rebasing-release-tag>
-> +    ./tools/update-subtree.sh pull dts <devicetree-rebasing-release-tag>
->
->  If required it is also possible to cherry-pick fixes from the
->  devicetree-rebasing repository prior to next sync, usage::
->
-> -    ./dts/update-dts-subtree.sh pick <devicetree-rebasing-commit-id>
-> +    ./tools/update-subtree.sh pick dts <devicetree-rebasing-commit-id>
->
->
->  Configuration
-> @@ -116,8 +116,8 @@ However, if `dts/upstream/` hasn't yet received devicetree source file for your
->  newly added board support then one option is that you can add the corresponding
->  devicetree source file as `arch/<arch>/dts/<name>.dts`. To select that add `#
->  CONFIG_OF_UPSTREAM is not set` and set `DEFAULT_DEVICE_TREE=<name>` when
-> -prompted by Kconfig. Another option is that you can use use the "pick" option of
-> -`dts/update-dts-subtree.sh` mentioned above to bring in the commits that you
-> +prompted by Kconfig. Another option is that you can use the "pick" option of
-> +`tools/update-subtree.sh` mentioned above to bring in the commits that you
->  need.
->
->  This should include your CPU or SoC's devicetree file. On top of that any U-Boot
-> diff --git a/dts/update-dts-subtree.sh b/dts/update-dts-subtree.sh
-> deleted file mode 100755
-> index a57b78a41d3..00000000000
-> --- a/dts/update-dts-subtree.sh
-> +++ /dev/null
-> @@ -1,48 +0,0 @@
-> -#!/bin/sh
-> -# SPDX-License-Identifier: GPL-2.0+
-> -#
-> -# Copyright 2024 Linaro Ltd.
-> -#
-> -# Usage: from the top level U-Boot source tree, run:
-> -# $ ./dts/update-dts-subtree.sh pull <release-tag>
-> -# $ ./dts/update-dts-subtree.sh pick <commit-id>
-> -#
-> -# The script will pull changes from devicetree-rebasing repo into U-Boot
-> -# as a subtree located as <U-Boot>/dts/upstream sub-directory. It will
-> -# automatically create a squash/merge commit listing the commits imported.
-> -
-> -set -e
-> -
-> -merge_commit_msg=$(cat << EOF
-> -Subtree merge tag '$2' of devicetree-rebasing repo [1] into dts/upstream
-> -
-> -[1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
-> -EOF
-> -)
-> -
-> -remote_add_and_fetch() {
-> -    if ! git remote get-url devicetree-rebasing 2>/dev/null
-> -    then
-> -        echo "Warning: Script automatically adds new git remote via:"
-> -        echo "    git remote add devicetree-rebasing \\"
-> -        echo "        https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git"
-> -        git remote add devicetree-rebasing \
-> -            https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
-> -    fi
-> -    git fetch devicetree-rebasing master
-> -}
-> -
-> -if [ "$1" = "pull" ]
-> -then
-> -    remote_add_and_fetch
-> -    git subtree pull --prefix dts/upstream devicetree-rebasing \
-> -        "$2" --squash -m "${merge_commit_msg}"
-> -elif [ "$1" = "pick" ]
-> -then
-> -    remote_add_and_fetch
-> -    git cherry-pick -x --strategy=subtree -Xsubtree=dts/upstream/ "$2"
-> -else
-> -    echo "usage: $0 <op> <ref>"
-> -    echo "  <op>     pull or pick"
-> -    echo "  <ref>    release tag [pull] or commit id [pick]"
-> -fi
-> diff --git a/tools/update-subtree.sh b/tools/update-subtree.sh
-> new file mode 100755
-> index 00000000000..5946aa1a9e2
-> --- /dev/null
-> +++ b/tools/update-subtree.sh
-> @@ -0,0 +1,86 @@
-> +#!/bin/sh
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright (c) 2024 Linaro Limited
-> +# Author: Raymond Mao <raymond.mao@linaro.org>
-> +#
-> +# Usage: from the top level U-Boot source tree, run:
-> +# $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
-> +# Or:
-> +# $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
-> +#
-> +# The script will pull changes from subtree repo into U-Boot.
-> +# It will automatically create a squash/merge commit listing the commits
-> +# imported.
-> +
-> +set -e
-> +
-> +print_usage() {
-> +    echo "usage: $0 <op> <subtree-name> <ref>"
-> +    echo "  <op>           pull or pick"
-> +    echo "  <subtree-name> mbedtls or dts or lwip"
-> +    echo "  <ref>          release tag [pull] or commit id [pick]"
-> +}
-> +
-> +if [ $# -ne 3 ]; then
-> +    print_usage
-> +    exit 1
-> +fi
-> +
-> +op=$1
-> +subtree_name=$2
-> +ref=$3
-> +
-> +set_params() {
-> +    case "$subtree_name" in
-> +        mbedtls)
-> +            path=lib/mbedtls/external/mbedtls
+Ok , so you suggest to have something like in the core
 
-Although I am in favour of making this script generic, this subdir
-path doesn't exist yet. Wouldn't it make more sense to add mbedtls
-here alongside the corresponding patch-set? Otherwise the script will
-just fail.
+if (p->set_rate)
+{
+     set_rate())
 
-> +            repo_url=https://github.com/Mbed-TLS/mbedtls.git
-> +            remote_name="mbedtls_upstream"
-> +            ;;
-> +        dts)
-> +            path=dts/upstream
-> +            repo_url=https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
-> +            remote_name="devicetree-rebasing"
-> +            ;;
-> +        lwip)
-> +            path=lib/lwip/lwip
+}
+else
+{
+    set_generic_rate()
+}
 
-Ditto here.
+The same for get_rate()
 
--Sumit
+> implementations simple and brings the propagation logic to the actual
+> clk API (clk_set_rate()), which in turn is able to cover all possible
+> cases: even if some new clock types are implemented later, they will
+> be covered already. That also reduces some code duplication and makes
+> it easier to control that behavior in a centralized manner. The patch
+> with the discussed implementation was already submitted a while ago
+> [2], and still pending on the review.
 
-> +            repo_url=https://git.savannah.gnu.org/git/lwip.git
-> +            remote_name="lwip_upstream"
-> +            ;;
-> +        *)
-> +            echo "Invalid subtree name: $subtree_name"
-> +            print_usage
-> +            exit 1
-> +    esac
-> +}
-> +
-> +set_params
-> +
-> +merge_commit_msg=$(cat << EOF
-> +Subtree merge tag '$ref' of $subtree_name repo [1] into $path
-> +
-> +[1] $repo_url
-> +EOF
-> +)
-> +
-> +remote_add_and_fetch() {
-> +    if [ -z "$(git remote get-url $remote_name 2>/dev/null)" ]; then
-> +        echo "Warning: Script automatically adds new git remote via:"
-> +        echo "    git remote add $remote_name \\"
-> +        echo "        $repo_url"
-> +        git remote add $remote_name $repo_url
-> +    fi
-> +    git fetch $remote_name master
-> +}
-> +
-> +if [ "$op" = "pull" ]; then
-> +    remote_add_and_fetch
-> +    git subtree pull --prefix $path $remote_name "$ref" --squash -m "$merge_commit_msg"
-> +elif [ "$op" = "pick" ]; then
-> +    remote_add_and_fetch
-> +    git cherry-pick -x --strategy=subtree -Xsubtree=$path/ "$ref"
-> +else
-> +    print_usage
-> +    exit 1
-> +fi
-> --
-> 2.25.1
+I have seen it and because I'm extending the clk framework a bit more [1]
+I was thinking about a more complete approach. Nothing against your
+patch, but just
+I have observed in my use case (display) that I need more from the
+clock framework we have
+
+Michael
+
+[1] https://patchwork.amarulasolutions.com/patch/3291/
+
 >
+> Can I ask you if patch [2] doesn't cover some of your cases? Or maybe
+> I'm missing something out and having .set_rate op in gate/mux would
+> actually be better for some particular reason?
+>
+> Thanks!
+>
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tr=
+ee/drivers/clk/clk-gate.c#n120
+> [2] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
+>
+>
+> >  };
+> >
+> >  struct clk *clk_register_gate(struct device *dev, const char *name,
+> > diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
+> > index e3481be95fa..f99a67ebd35 100644
+> > --- a/drivers/clk/clk-mux.c
+> > +++ b/drivers/clk/clk-mux.c
+> > @@ -151,13 +151,13 @@ static int clk_mux_set_parent(struct clk *clk, st=
+ruct clk *parent)
+> >  #else
+> >         writel(reg, mux->reg);
+> >  #endif
+> > -
+> >         return 0;
+> >  }
+> >
+> >  const struct clk_ops clk_mux_ops =3D {
+> >         .get_rate =3D clk_generic_get_rate,
+> >         .set_parent =3D clk_mux_set_parent,
+> > +       .set_rate =3D clk_generic_set_rate,
+> >  };
+> >
+> >  struct clk *clk_hw_register_mux_table(struct device *dev, const char *=
+name,
+> > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> > index ed6e60bc484..638864e6774 100644
+> > --- a/drivers/clk/clk-uclass.c
+> > +++ b/drivers/clk/clk-uclass.c
+> > @@ -517,6 +517,26 @@ ulong clk_get_parent_rate(struct clk *clk)
+> >         return pclk->rate;
+> >  }
+> >
+> > +ulong clk_set_parent_rate(struct clk *clk, ulong rate)
+> > +{
+> > +       const struct clk_ops *ops;
+> > +       struct clk *pclk;
+> > +
+> > +       debug("%s(clk=3D%p)\n", __func__, clk);
+> > +       if (!clk_valid(clk))
+> > +               return 0;
+> > +
+> > +       pclk =3D clk_get_parent(clk);
+> > +       if (IS_ERR(pclk))
+> > +               return -ENODEV;
+> > +
+> > +       ops =3D clk_dev_ops(pclk->dev);
+> > +       if (!ops->set_rate)
+> > +               return -ENOSYS;
+> > +
+> > +       return clk_set_rate(pclk, rate);
+> > +}
+> > +
+> >  ulong clk_round_rate(struct clk *clk, ulong rate)
+> >  {
+> >         const struct clk_ops *ops;
+> > diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+> > index 6ede1b4d4dc..febd5314df2 100644
+> > --- a/drivers/clk/clk.c
+> > +++ b/drivers/clk/clk.c
+> > @@ -14,6 +14,7 @@
+> >  #include <dm/uclass.h>
+> >  #include <dm/lists.h>
+> >  #include <dm/device-internal.h>
+> > +#include <linux/clk-provider.h>
+> >
+> >  int clk_register(struct clk *clk, const char *drv_name,
+> >                  const char *name, const char *parent_name)
+> > @@ -61,6 +62,14 @@ ulong clk_generic_get_rate(struct clk *clk)
+> >         return clk_get_parent_rate(clk);
+> >  }
+> >
+> > +ulong clk_generic_set_rate(struct clk *clk, ulong rate)
+> > +{
+> > +       if (clk->flags & CLK_SET_RATE_PARENT)
+> > +               return clk_set_parent_rate(clk, rate);
+> > +
+> > +       return clk_get_parent_rate(clk);
+> > +}
+> > +
+> >  const char *clk_hw_get_name(const struct clk *hw)
+> >  {
+> >         assert(hw);
+> > diff --git a/include/clk.h b/include/clk.h
+> > index af23e4f3475..1900377eddb 100644
+> > --- a/include/clk.h
+> > +++ b/include/clk.h
+> > @@ -452,6 +452,15 @@ struct clk *clk_get_parent(struct clk *clk);
+> >   */
+> >  ulong clk_get_parent_rate(struct clk *clk);
+> >
+> > +/**
+> > + * clk_set_parent_rate() - Set parent of current clock rate.
+> > + * @clk:       A clock struct that was previously successfully request=
+ed by
+> > + *             clk_request/get_by_*().
+> > + *
+> > + * Return: clock rate in Hz, or -ve error code.
+> > + */
+> > +ulong clk_set_parent_rate(struct clk *clk, ulong rate);
+> > +
+> >  /**
+> >   * clk_round_rate() - Adjust a rate to the exact rate a clock can prov=
+ide
+> >   * @clk: A clock struct that was previously successfully requested by
+> > diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.=
+h
+> > index 59f9c241b84..459fa2d15ce 100644
+> > --- a/include/linux/clk-provider.h
+> > +++ b/include/linux/clk-provider.h
+> > @@ -253,6 +253,7 @@ struct clk *clk_register_fixed_rate(struct device *=
+dev, const char *name,
+> >
+> >  const char *clk_hw_get_name(const struct clk *hw);
+> >  ulong clk_generic_get_rate(struct clk *clk);
+> > +ulong clk_generic_set_rate(struct clk *clk, ulong rate);
+> >
+> >  struct clk *dev_get_clk_ptr(struct udevice *dev);
+> >
+> > --
+> > 2.43.0
+> >
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
