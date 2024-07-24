@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED59C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 12:41:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDAC2C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 12:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3946887F5;
-	Wed, 24 Jul 2024 14:41:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 85556887F5;
+	Wed, 24 Jul 2024 14:43:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PHGL+pzq";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CfK8kuI0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 106B38881B; Wed, 24 Jul 2024 14:41:33 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 191998881B; Wed, 24 Jul 2024 14:43:54 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 762DC8857D
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 14:41:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B95C58857D
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 14:43:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4277a5ed48bso51008935e9.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 05:41:30 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4266ea6a412so49111465e9.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 05:43:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721824890; x=1722429690;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721825031; x=1722429831;
  darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ws85tnaGLq+atxk5UHfnkVoJR9lY1iQJJyWYDvzrVU4=;
- b=PHGL+pzqE7dRyuxbQNTX4BsSthLWWVUJLRluliStyfQGXHSiyo+CZH4QNBoM+d6MeP
- WFoWy/RV87L/9Bi1TC7QMRbKT1oVdCfl41qVLNnGAZhsg2FbcdUQSWjK4YK4n9uu4EW1
- ynKH7eWI5qbS0S3x/O6ME+D2rCNt4iPJtLFF9rqNd7smB7F+4cMDz8VJ9oMqx50cxwy+
- 2y2bCHoaUeREfEiNqVsQ99C+Et4jQw7NNQYPEGsN1BXXzlfqK4ejcI8PY2osxUnMeDzA
- Jw4s8WpZNFP7x+LvCsYfTCisOhUJoB0yZzsJ5QJ5imLvQQfKWSM9AQgr8gw2+ZmU9Jgf
- vR2w==
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NqdicVidvWllvsEa26c8xP4j1wNPqzUsmcSAloA5vuo=;
+ b=CfK8kuI0Y5pP9PocdJeYjdWsC3ADAnrjNJAJMntFOv1Hjxj2N86BqH0qV9SWWCaE8D
+ EDYhp/xjFvKxF/hKFSdpcSbFQ49mqHvOSJvjLFOtjEZ4Eu2g1JLTwvdV+Y1t5gotNTu5
+ zZUdLT5MafhUJTqDTvUh4Dzj9pgYTS1iBqeAZsNjy+7so/ES1e5AxXNWtIJLtD5wbvhw
+ w4K27pSMIwtVt4WuMGDl+/8JHe6GpI7mbINmx9OFH0fylbXV0F8Gat8CfqL+5wJGUJjl
+ IjedyYwHBC+oaLqJxUGvm3y4L/UDTBo1jHBrGHifHuf/bW0XeW3qTSbFSPGAvF22/qwK
+ N3Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721824890; x=1722429690;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ws85tnaGLq+atxk5UHfnkVoJR9lY1iQJJyWYDvzrVU4=;
- b=BjWgHJKIc1NEKGoaokk507av+Dyn7qNL0Wwk38YIppYY4PF9LPBOv96KHT9myTtNKt
- IUzRfvOOm1x0qumTHAZjaNwHa5TilEcgAYkjyoi9BONemvCGfzDGHyaJCLRdrglfO5pC
- N2+Hh6NHxw4Zb1CT2UiR7mLs6ljahq1KR4WUyHWVG5PTuFByCgaD1QnWEa3TUsEUfWId
- VeW8WUSXsI03m7xfohVK7JA2OeqPlBWdzslLyN1x2DSxUx/i46h2k3meJUQsPpdpGM02
- lbSyY4HK8C/P/AC5idSRofHIbuRkMb7vsuh5tiasIqfee8R5LtzZQDE03bTj//Q5V7hW
- cZTg==
+ d=1e100.net; s=20230601; t=1721825031; x=1722429831;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NqdicVidvWllvsEa26c8xP4j1wNPqzUsmcSAloA5vuo=;
+ b=UAZBNTxqEFPbItZ93PAAMlfaPqcp02sPWP2KZEmKfmTZTGgMLYOJVXQHyVSZ0e4ciI
+ MgMVKXxvbgN7wiWZZtWwGeAouYuxhgscveijUmaYq1fviBJ8FQrIoeKFoLYmnZj4eEoY
+ R+IJOaLdgYqu7FCZRPbZn2Ghf0ZiXB29Xj5sFfF40o1Ff16H+gShzLNHQ/f/OAl7V1ms
+ cy8GiE6WhZlmeLPFpjeDd0pTkpmtH11L5ODdzj9MKuI1RjpqLrNdW7+DrJlvyWW/M1GV
+ lpteESI4p8JXV4593hGOdjPSTBuoQrNZJ2b1TEJ7l8LH49R4mw0v9iOlsw9k+Lh7WCMF
+ 5lfw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUP0vYalCOdpAfz9FSuzbzQXxH7VKMR7JVEj/VfeoEKpDx4sogDPvyVmY0049nyzV0zP7+h+g6Y50toOIJ/OdBzYsBHEg==
-X-Gm-Message-State: AOJu0YwZjAVFr6vLTXlGw0wLlZnRTuCSB4ZCvb8qVMwGM/+nJbpd+sh1
- wKKJsYVgDJtpOY9TGV6NybUlLuZmQC9X06SEsKTTXl9r4RISLOIhQkMY7hZeC+o=
-X-Google-Smtp-Source: AGHT+IGV7bGgnDZN6F7N9bw7FPiyg3U7JSj3P7CzaEElf8zY889Wjba53dPK9rtKD7efkdwswBR6BA==
-X-Received: by 2002:a05:600c:5491:b0:426:6ed2:6130 with SMTP id
- 5b1f17b1804b1-427f955845bmr14399305e9.14.1721824889323; 
- Wed, 24 Jul 2024 05:41:29 -0700 (PDT)
-Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ AJvYcCWWqRuIw3RGOEOqk8/wKfWovhUmiFJYQEbk4lN5K3LoZ+Z8zKo2hf9wQexx1YBXl0pOlgeAmTzBinNb/4EbLLUNrC+3qQ==
+X-Gm-Message-State: AOJu0YyxIHws3wfO9Wm8JzseqhcfQ4tPQx6QOpbmWkKmPPM/mf8Nilwy
+ jn/k06BZUCbctfFKmV0PiclGwVgzYQwYcQ1tW0vWF5RJ7XADMUsmfcJ1bQpNFVI=
+X-Google-Smtp-Source: AGHT+IFvTO11FToLzHGQTz9nZ757ewwUKWtGJosdQDNHlwERdKvarymM5atxs9NcJRbB5b8ZpiY0PA==
+X-Received: by 2002:a05:6000:cc3:b0:367:9803:bfe7 with SMTP id
+ ffacd0b85a97d-369dee44287mr4350707f8f.53.1721825030825; 
+ Wed, 24 Jul 2024 05:43:50 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427ffaf2460sm3032355e9.40.2024.07.24.05.41.28
+ ffacd0b85a97d-368787ebab0sm14397736f8f.92.2024.07.24.05.43.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 05:41:28 -0700 (PDT)
+ Wed, 24 Jul 2024 05:43:50 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Wed, 24 Jul 2024 14:41:25 +0200
-Subject: [PATCH] doc: Add a description for bootmeth_android
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20240724-doc-bootstd-android-v1-1-03a55b7a7c92@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAHT2oGYC/x3MMQqAMAxA0atIZgM1iopXEYdqomZppBURxLtbH
- N/w/wNJokqCoXggyqVJLWRUZQHL7sMmqJwN5KhxHTXItuBsdqaT0QeOpozMq+uruW6JPOTyiLL
- q/V/H6X0/mla+ymUAAAA=
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Guillaume La Roque <glaroque@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14.0
+Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
+ <glaroque@baylibre.com>, Dmitrii Merkurev <dimorinny@google.com>, Roman
+ Stratiienko <r.stratiienko@gmail.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/5] bootstd: Add Android support
+In-Reply-To: <CAFLszTgB92LRWcfZnpyNgiOUCKNeL4oMzm8HQq0_zfKjGurMhA@mail.gmail.com>
+References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
+ <CAFLszThimpJyRFg2Dc8QKyin7=BF2Gwkez6ifWOYGnf-=15HWg@mail.gmail.com>
+ <87o77zbnx3.fsf@baylibre.com>
+ <CAFLszTgB92LRWcfZnpyNgiOUCKNeL4oMzm8HQq0_zfKjGurMhA@mail.gmail.com>
+Date: Wed, 24 Jul 2024 14:43:49 +0200
+Message-ID: <87ttgf3qpm.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,104 +97,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial documentation for the Android bootmeth.
+On mar., juin 18, 2024 at 21:03, Simon Glass <sjg@chromium.org> wrote:
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- MAINTAINERS                      |  1 +
- doc/develop/bootstd/android.rst  | 39 +++++++++++++++++++++++++++++++++++++++
- doc/develop/bootstd/index.rst    |  1 +
- doc/develop/bootstd/overview.rst |  2 +-
- 4 files changed, 42 insertions(+), 1 deletion(-)
+> Hi Mattijs,
+>
+> On Mon, 17 Jun 2024 at 09:15, Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Hi Simon,
+>>
+>> On lun., juin 17, 2024 at 07:53, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> > Hi Mattijs,
+>> >
+>> > On Thu, 13 Jun 2024 at 04:13, Mattijs Korpershoek
+>> > <mkorpershoek@baylibre.com> wrote:
+>> >>
+>> >> Android boot flow is a bit different than a regular Linux distro.
+>> >> Android relies on multiple partitions in order to boot.
+>> >>
+>> >> A typical boot flow would be:
+>> >> 1. Parse the Bootloader Control Block (BCB, misc partition)
+>> >> 2. If BCB requested bootonce-bootloader, start fastboot and wait.
+>> >> 3. If BCB requested recovery or normal android, run the following:
+>> >>    a. Get slot (A/B) from BCB
+>> >>    b. Run AVB (Android Verified Boot) on boot partitions
+>> >>    c. Load boot and vendor_boot partitions
+>> >>    d. Load device-tree, ramdisk and boot
+>> >>
+>> >> The AOSP documentation has more details at [1], [2], [3]
+>> >>
+>> >> This has been implemented via complex boot scripts such as [4].
+>> >> However, these boot script are neither very maintainable nor generic.
+>> >> Moreover, DISTRO_DEFAULTS is being deprecated [5].
+>> >>
+>> >> Add a generic Android bootflow implementation for bootstd.
+>> >>
+>> >> For this initial version, only boot image v4 is supported.
+>> >>
+>> >> This has been tested on sandbox using:
+>> >> $ ./test/py/test.py --bd sandbox --build -k test_ut
+>> >>
+>> >> This has also been tested on the AM62X SK EVM using TI's Android SDK[6]
+>> >> To test on TI board, the following (WIP) patch is needed as well:
+>> >> https://gitlab.baylibre.com/baylibre/ti/ti-u-boot/-/commit/84cceb912bccd7cdd7f9dd69bca0e5d987a1fd04
+>> >>
+>> >> [1] https://source.android.com/docs/core/architecture/bootloader
+>> >> [2] https://source.android.com/docs/core/architecture/partitions
+>> >> [3] https://source.android.com/docs/core/architecture/partitions/generic-boot
+>> >> [4] https://source.denx.de/u-boot/u-boot/-/blob/master/include/configs/meson64_android.h
+>> >> [5] https://lore.kernel.org/r/all/20230914165615.1058529-17-sjg@chromium.org/
+>> >> [6] https://software-dl.ti.com/processor-sdk-android/esd/AM62X/09_02_00/docs/android/Overview.html
+>> >>
+>> >> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> >> ---
+>> >> Changes in v2:
+>> >> - Dropped patch 2/6 boot: android: Add image_android_get_version() (Igor)
+>> >> - Fixed multi-line comment style (Igor, Simon)
+>> >> - Added dependency on CMD_FASTBOOT for BOOTMETH_ANDROID (Igor)
+>> >> - Fixed various resource leaks (Igor)
+>> >> - Fixed bootmeth_priv dangling pointer on error cases (Igor)
+>> >> - Updated test instructions in commit message for patch 6/6
+>> >> - Added __weak impl of get_avendor_bootimg_addr() in patch 1 (dropped
+>> >>   Igor's review because of this change)
+>> >> - Added extra info in Kconfig to detail MMC limitation (Simon)
+>> >> - Fixed typo Bootmethod->Bootmeth (Simon)
+>> >> - Documented android_priv structure (Simon)
+>> >> - Demoted various messages from printf() to log_debug (Simon)
+>> >> - Fixed some lines too long (Simon)
+>> >> - Added function documentation to read_slotted_partition() (Simon)
+>> >> - Added some doc about avb extra_args being modified (Simon)
+>> >> - Link to v1: https://lore.kernel.org/r/20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com
+>> >>
+>> >> ---
+>> >> Mattijs Korpershoek (5):
+>> >>       boot: android: Provide vendor_bootimg_addr in boot_get_fdt()
+>> >>       bootstd: Add bootflow_iter_check_mmc() helper
+>> >>       android: boot: Add set_abootimg_addr() and set_avendor_bootimg_addr()
+>> >>       bootstd: Add a bootmeth for Android
+>> >>       bootstd: Add test for bootmeth_android
+>> >>
+>> >>  MAINTAINERS               |   7 +
+>> >>  arch/sandbox/dts/test.dts |   8 +
+>> >>  boot/Kconfig              |  16 ++
+>> >>  boot/Makefile             |   2 +
+>> >>  boot/bootflow.c           |  12 +
+>> >>  boot/bootmeth_android.c   | 553 ++++++++++++++++++++++++++++++++++++++++++++++
+>> >>  boot/bootmeth_android.h   |  29 +++
+>> >>  boot/image-android.c      |   5 +
+>> >>  boot/image-fdt.c          |   2 +-
+>> >>  cmd/abootimg.c            |  10 +
+>> >>  configs/sandbox_defconfig |   2 +-
+>> >>  doc/develop/bootstd.rst   |   6 +
+>> >>  include/bootflow.h        |   9 +
+>> >>  include/image.h           |  14 ++
+>> >>  test/boot/bootflow.c      |  65 +++++-
+>> >>  test/py/tests/test_ut.py  |  76 +++++++
+>> >>  16 files changed, 811 insertions(+), 5 deletions(-)
+>> >> ---
+>> >> base-commit: f9886bc60f42d5bcfcfa4e474af7dc230400b6be
+>> >> change-id: 20240605-bootmeth-android-bfc8596e9367
+>> >>
+>> >> Best regards,
+>> >> --
+>> >> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> >>
+>> >
+>> > Thinking about this, I believe we should start having docs about the
+>> > individual bootmeths themselves.
+>>
+>> Yes.
+>>
+>> >
+>> > Can you add a section about your new bootmeth? I will come up with a
+>> > patch for the others that I know about. Perhaps
+>> > doc/develop/bootstd.rst would be a suitable place for now?
+>>
+>> Yes I can add a section. I would have preferred to have an example to
+>> work from there, but I can start writing docs as well.
+>>
+>> I'm leaving on vacation soon (without computer), so I'll be able to
+>> send a v3 with docs included in at earliest a 2-3 weeks from now.
+>
+> It isn't a blocker for this series, just something I thought of.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index a6e47e8a2179..c2832345ab18 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -945,6 +945,7 @@ S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
- F:	boot/bootmeth_android.c
- F:	boot/bootmeth_android.h
-+F:	doc/develop/bootstd/android.rst
- 
- BTRFS
- M:	Marek Behún <kabel@kernel.org>
-diff --git a/doc/develop/bootstd/android.rst b/doc/develop/bootstd/android.rst
-new file mode 100644
-index 000000000000..41701d5bdff3
---- /dev/null
-+++ b/doc/develop/bootstd/android.rst
-@@ -0,0 +1,39 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+Android Bootmeth
-+================
-+
-+Android provides a mechanism for booting its Operating System from eMMC storage,
-+described on `source.android.com <https://source.android.com/docs/core/architecture/bootloader>`_.
-+
-+Android has strong requirements about partitioning layout which are described
-+`here <https://source.android.com/docs/core/architecture/partitions>`_.
-+Because multiple partitions are required, this bootmeth only operates on whole mmc
-+devices which have a valid partition table.
-+
-+When invoked on a bootdev, this bootmeth searches for the ``misc`` partition in order
-+to read the *boot mode*, which can be one of following:
-+
-+Normal
-+  Boot the regular Android Operating System.
-+
-+Recovery
-+  Boot a slimmed down Recovery Operating System. Can be used
-+  to factory reset the device or to apply system updates.
-+
-+Bootloader
-+  Stay in U-Boot and wait for fastboot commands from the host.
-+
-+After the *boot mode* has been determined, this bootmeth will read the *slot suffix*
-+from the ``misc`` partition. For details about slots, see
-+`the AOSP documentation <https://source.android.com/docs/core/ota/ab#slots>`_.
-+
-+When both the *boot mode* and the *slot suffix* are known, the bootflow is created.
-+
-+When the bootflow is booted, the bootmeth reads the kernel, the boot arguments and
-+the vendor ramdisk.
-+It then boots the kernel using bootm. The relevant devicetree blob is extracted
-+from the ``boot`` partition based on the ``adtb_idx`` environment variable.
-+
-+The compatible string "u-boot,android" is used for the driver. It is present
-+if `CONFIG_BOOTMETH_ANDROID` is enabled.
-diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
-index 9d35b567d55d..4c4e26ccdb70 100644
---- a/doc/develop/bootstd/index.rst
-+++ b/doc/develop/bootstd/index.rst
-@@ -10,6 +10,7 @@ Standard Boot
-    extlinux
-    pxelinux
-    qfw
-+   android
-    cros
-    script
-    sandbox
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index ff3cc48eb64f..c6f003851b2a 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -429,7 +429,7 @@ Available bootmeth drivers
- 
- Bootmeth drivers are provided for booting from various media:
- 
--   - Android bootflow (boot image v4)
-+   - :doc:`Android <android>` bootflow (boot image v4)
-    - :doc:`ChromiumOS <cros>` ChromiumOS boot from a disk
-    - EFI boot using bootefi from disk
-    - EFI boot using boot manager
+For future reference, the doc has been submitted here:
 
----
-base-commit: f659ba43837e5ae5a35fdff3736c8e13f9062abd
-change-id: 20240724-doc-bootstd-android-ddf081b3622a
+https://lore.kernel.org/all/20240724-doc-bootstd-android-v1-1-03a55b7a7c92@baylibre.com/
 
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
+>
+>>
+>> If you make a patch for the other bootmeths in the mean-time, please cc
+>> me so that I can help review and have an example for Android.
+>
+> Yes, will do, if I do.
+>
+> Regards,
+> Simon
