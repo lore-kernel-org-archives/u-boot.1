@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19335C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 08:56:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD869C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:08:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73BB288800;
-	Wed, 24 Jul 2024 10:56:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 262A3887F6;
+	Wed, 24 Jul 2024 11:08:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qtprSIax";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y7xvV/wb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C309D88896; Wed, 24 Jul 2024 10:56:36 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 147F888800; Wed, 24 Jul 2024 11:08:36 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D054887F6
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 10:56:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE4A288549
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:08:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7a103ac7be3so984920a12.3
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 01:56:28 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2cb5e0b020eso4148352a91.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 02:08:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721811386; x=1722416186; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721812110; x=1722416910; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9eSuAyqPyzz/Byk6WKc53HtdBYBvgdKVAfylPsflt24=;
- b=qtprSIaxqwbqolgusjTzmnyYTueoeem13iCHhAertKX0BWsZUeq420eh2j81vuNU8Q
- EKpoJAMMDifs2UIxGDAWIPUEVq1JA6my2vgt2cRTHTCOTdScYqIRFpx9TOVU8in9jae3
- vJZ5bgOd8BtXUhxalfOg8KuDq+Qrbaa56pq6c/dXAmprG5XUJdx422osf+fftpw6hd+6
- Kmr0wvuJPJrHY5QSoI3mHYF1N5Znj02MD8bs4hOH74cj9NZHZWGDHGRGjqBbS9qb0C0F
- bJunhzqKx3A30KAXYwLAdondHZMMnHA6xy04Q/eV9FD7w8LyhD1/JaEp2WIsZcAMBd9N
- Ww3g==
+ bh=fdhN60BfhOouFUGrvElZxAp7p2y2sLDWHPEa88Nzaew=;
+ b=y7xvV/wbrN/zRP3UOX2yMn5ncntlaSxMPoi2il8zJJavO175057JPLzhSla0reGem1
+ 4btZImNqqdV8M6k8WHIRhZ0TInumZQzHkkI83p+5pgVJ2KdkMN99yRd+htu324r1cfWI
+ eZW254tJ3FAGeQPCPSs/8JyGXSjlPkgHmWy1kCGhjgAf/5X2I6trdqWoHSEUhTi5LOWt
+ 9SZ61wfXf6uCMNRbrlImfRF48oCHEapORy4V40Jd3vkZxQ1QJNyvnQNCvq3/Gl00CBAu
+ Lb3GV/prNVzDK4bJzAmg1IV2UB+pJLJmgsQTvVB0YghLmw67VVaRfDCTlzBvYJP957s8
+ 9cSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721811386; x=1722416186;
+ d=1e100.net; s=20230601; t=1721812110; x=1722416910;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9eSuAyqPyzz/Byk6WKc53HtdBYBvgdKVAfylPsflt24=;
- b=VJUyc0WEIirdxswKTEqnQ2qVmrHgKLKc91Lgiq7hKujutAvsZQCUoKB70cekegNC2o
- BHizOdwBeKxIQk66NrFTqV+xs+YeVJAsF3j1KR8YL1GNjrzzXHkq/roZW/st3bzWFTHz
- 2oyuy1fryxUiDoMQyfHP7KsFKxH3a+HefK4LcdViMLo//gvuemwBQYfp9F8psep2xdKF
- 0E5tX0eKj5CrnjCN9Fw+hvuYrcYmFg6Ugyb+LcLpgT2LC/G/I56B9ayxWG6zCoBAZGWe
- 180t53EyWiBplFeF45Fm+ZRj9hPHq+8DIgUg5yVlSN/rcjlaDTMYxsto8hUcydwHKEfp
- pjdw==
-X-Gm-Message-State: AOJu0YwIPVjq7/ftPhw+YnhJRnqiSKVdicN9jgV8NMkrg9TLMsSt4lk9
- Mbexv3NU9ysJSXUt645apY3lDUMAKZruAqrlOlSOkH+lBQyrPmuU9I0WoIb8uqIhltqlXJFfcRv
- FfpBfNo7b+tPQi7N+v3VuVvKiGROuvQWPC/v8sQ==
-X-Google-Smtp-Source: AGHT+IGiu/6dPy0c6LcnshefaPr0pojx5jeNMlyh6tlwcO1V65f8uS8pdHtE45NVwLgRW9A5IxnJMCGJmSH2zaXJ5mI=
-X-Received: by 2002:a17:90b:1090:b0:2c9:5f1e:1a62 with SMTP id
- 98e67ed59e1d1-2cdaf779b22mr2425683a91.36.1721811386430; Wed, 24 Jul 2024
- 01:56:26 -0700 (PDT)
+ bh=fdhN60BfhOouFUGrvElZxAp7p2y2sLDWHPEa88Nzaew=;
+ b=nY9l+0nSnFW81i3E63BJDdB+8FnofpEbC6W6BwoaKiQspxDOxb3xNY7rKJZiddYQS0
+ wQkE7Zhomd5i0n0Il5eW9trxh1SudEVZSJRVlrJYCuKcP2a8kAzDJBdr1sWlDDmk6kS0
+ STbzh4xfBa71xi6wTV2Xgcx2ZiBvvJQli91yFq2+W9UEfYIwLlwPQP3Tn+fnySMgfeie
+ cxKXrkeSNPG2lPGcIfNP0TY77e6gy4L4d9Gx/iMZSJJPI7p7BNWpaov34cKrVx470aKa
+ mFR1rvQJtksqPyEsCrbHbUC3Z9w/bbh5OqdrLWdEfqFMqBkbZWcUlL13CRV5ZP/6rAsu
+ PKdQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWNqSxhYaEhHVaHDW3prIbI9+hikw36Vk7NGTWtnzdpp/7U8iW1j8IctehMsEMOBoSBaRp8SMgFBK+Hsz1F1/ohklJBPw==
+X-Gm-Message-State: AOJu0YwTnaAJZxThpMWtU+yUkhsOe8SFXUr3rMyu8rfm6OpJnz+TZrw9
+ v1uvfkjI/C5VDYeuOr+/cJ1GU7rMGyhhEStzXXZjHJoBUFwoTJP5ku9ovMJgo8HszQT4R4/2r7x
+ wHpmXS0iep3o1wNvfayD87/9Hyw8tq8Ph086f3A==
+X-Google-Smtp-Source: AGHT+IFB7Xpj9PsW7VC7oDlVlSBYGXFXRFbmqRO7LgqP/mlSji7PvMkmfL9KqmS9tgCBT+C2dSdV9Df23vP07EEr0zk=
+X-Received: by 2002:a17:90a:f187:b0:2c8:f3b7:ec45 with SMTP id
+ 98e67ed59e1d1-2cdaef5ed6emr2532245a91.36.1721812109172; Wed, 24 Jul 2024
+ 02:08:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240724073448.710197-1-lukas.funke-oss@weidmueller.com>
- <20240724073448.710197-2-lukas.funke-oss@weidmueller.com>
-In-Reply-To: <20240724073448.710197-2-lukas.funke-oss@weidmueller.com>
+References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
+In-Reply-To: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 24 Jul 2024 11:55:49 +0300
-Message-ID: <CAC_iWjL1dE_KQRiz-3RwztZPt-C9V4=836obQ3PmkC1NrzgX6w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
-To: lukas.funke-oss@weidmueller.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tim Harvey <tharvey@gateworks.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Wed, 24 Jul 2024 12:07:53 +0300
+Message-ID: <CAC_iWj+bxgRgWNH0jnj-WXRoLKT=LXWGRBdW-5-k-M-r3KHTqw@mail.gmail.com>
+Subject: Re: [PATCH v5 00/11] efi: CapsuleUpdate: support for dynamic UUIDs
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,126 +91,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Lukas,
+Hi Caleb,
 
-On Wed, 24 Jul 2024 at 10:35, <lukas.funke-oss@weidmueller.com> wrote:
+checkpatch reports some issues for #4 & #9, check that for v6
+
+Cheers
+/Ilias
+On Fri, 19 Jul 2024 at 15:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> From: Lukas Funke <lukas.funke@weidmueller.com>
+> As more boards adopt support for the EFI CapsuleUpdate mechanism, there
+> is a growing issue of being able to target updates to them properly. The
+> current mechanism of hardcoding UUIDs for each board at compile time is
+> unsustainable, and maintaining lists of GUIDs is similarly cumbersome.
 >
-> tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
-> initialized in tpm_tis_init(). However, the init-function is called
-> *after* tpm_tis_wait_init() introducing an uninitalized field access.
+> In this series, I propose that we adopt v5 GUIDs, these are generated by
+> using a well-known salt GUID as well as board specific information the
+> DT root compatible string, these are hashed together and the result is
+> truncated to form a new UUID.
 >
-> This commit switches both routines.
+> The well-known salt GUID can be specific to the architecture (SoC
+> vendor), or OEM. It is defined in the board defconfig so that vendors
+> can easily bring their own.
 >
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> Specifically, the following fields are used to generate a GUID for a
+> particular fw_image:
+>
+> * namespace salt
+> * board compatible (usually the first entry in the dt root compatible
+>   array).
+> * fw_image name (the string identifying the specific image, especially
+>   relevant for board that can update multiple images).
+>
+> == Usage ==
+>
+> Boards can enable dynamic UUID support by simply not setting the
+> efi_fw_image image_type_id property. Vendors may also wish to set a
+> custom namespace GUID (by setting CONFIG_EFI_CAPSULE_NAMESPACE_GUID).
+>
+> == Limitations ==
+>
+> * Changing GUIDs
+>
+> The primary limitation with this approach is that if any of the source
+> fields change, so will the GUID for the board. It is therefore pretty
+> important to ensure that GUID changes are caught during development.
+>
+> * Supporting multiple boards with a single image
+>
+> This now requires having an entry with the GUID for every board which
+> might lead to larger UpdateCapsule images.
+>
+> == Tooling ==
+>
+> The mkeficapsule command is updated to add a new guidgen subcommand,
+> this can generate GUIDs that match those the board would generate at
+> runtime. It accepts an optional namespace GUID (if the default isn't
+> used), a path to the board DTB, and a list of firmware image names.
+>
+> This series follows a related discussion started by Ilias:
+> https://lore.kernel.org/u-boot/CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com/
+>
+> CI run for this series: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/21419
+>
 > ---
+> Changes in v5:
+> - Clean up mkeficapsule genguid patch
+> - Add explicit tests validating the GUID type bits
+> - Link to v4: https://lore.kernel.org/r/20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org
+>
+> Changes in v4:
+> - Make UUID v5 support always enabled rather than being optional.
+> - Fix endianness issues (thanks Vincent and Ilias)
+> - Merge genguid tool into mkeficapsule.
+> -       And move mkeficapsule over to using U-Boot's UUID code rather
+>         than libuuid.
+> - Provide a default namespace UUID for all U-Boot boards.
+> - Link to v3: https://lore.kernel.org/r/20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org
+>
+> Changes in v3:
+> - Add manpage for genguid
+> - Add dedicated CONFIG_TOOLS_GENGUID option
+> - Minor code fixes addressing v2 feedback
+> - Link to v2: https://lore.kernel.org/r/20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org
 >
 > Changes in v2:
-> - Call tpm_tis_wait_init() from tpm_tis_init()
-> - Use phy_ops for bus access in tpm_tis_wait_init()
+> - Move namespace UUID to be defined in defconfig
+> - Add tests and tooling
+> - Only use the first board compatible to generate UUID.
+> - Link to v1: https://lore.kernel.org/r/20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org
 >
->  drivers/tpm/tpm2_tis_core.c | 28 ++++++++++++++++++++++++++++
->  drivers/tpm/tpm2_tis_spi.c  | 29 -----------------------------
->  2 files changed, 28 insertions(+), 29 deletions(-)
+> ---
+> Caleb Connolly (11):
+>       efi: define struct efi_guid
+>       lib: uuid: add UUID v5 support
+>       efi: add a helper to generate dynamic UUIDs
+>       doc: uefi: document dynamic UUID generation
+>       sandbox: switch to dynamic UUIDs
+>       lib: uuid: supporting building as part of host tools
+>       include: export uuid.h
+>       tools: mkeficapsule: use u-boot UUID library
+>       tools: mkeficapsule: support generating dynamic GUIDs
+>       test: lib/uuid: add unit tests for dynamic UUIDs
+>       test: lib/uuid: add tests for UUID version/variant bits
 >
-> diff --git a/drivers/tpm/tpm2_tis_core.c b/drivers/tpm/tpm2_tis_core.c
-> index 680a6409433..1fdf8cfa319 100644
-> --- a/drivers/tpm/tpm2_tis_core.c
-> +++ b/drivers/tpm/tpm2_tis_core.c
-> @@ -419,6 +419,28 @@ static bool tis_check_ops(struct tpm_tis_phy_ops *phy_ops)
->         return true;
->  }
+>  arch/arm/mach-rockchip/board.c                     |   2 +-
+>  board/cobra5272/flash.c                            |   2 +-
+>  board/gardena/smart-gateway-mt7688/board.c         |   2 +-
+>  board/sandbox/sandbox.c                            |  16 --
+>  board/socrates/socrates.c                          |   2 +-
+>  board/xilinx/common/board.c                        |   2 +-
+>  cmd/efi.c                                          |   2 +-
+>  cmd/efi_common.c                                   |   2 +-
+>  cmd/flash.c                                        |   2 +-
+>  cmd/gpt.c                                          |   2 +-
+>  cmd/nvedit_efi.c                                   |   2 +-
+>  cmd/x86/hob.c                                      |   2 +-
+>  common/flash.c                                     |   2 +-
+>  disk/part_efi.c                                    |   2 +-
+>  doc/develop/uefi/uefi.rst                          |  27 +++
+>  doc/mkeficapsule.1                                 |  23 +++
+>  drivers/firmware/arm-ffa/arm-ffa-uclass.c          |   2 +-
+>  env/sf.c                                           |   2 +-
+>  fs/btrfs/btrfs.c                                   |   2 +-
+>  fs/btrfs/compat.h                                  |   2 +-
+>  fs/btrfs/disk-io.c                                 |   2 +-
+>  fs/ext4/ext4fs.c                                   |   2 +-
+>  include/efi.h                                      |   2 +-
+>  include/fwu.h                                      |   2 +-
+>  include/part.h                                     |   2 +-
+>  include/rkmtd.h                                    |   2 +-
+>  include/sandbox_efi_capsule.h                      |   6 +-
+>  include/{ => u-boot}/uuid.h                        |  21 ++-
+>  lib/Kconfig                                        |   1 +
+>  lib/acpi/acpi_dp.c                                 |   2 +-
+>  lib/acpi/acpigen.c                                 |   2 +-
+>  lib/efi/efi_app.c                                  |   2 +-
+>  lib/efi_loader/Kconfig                             |  12 ++
+>  lib/efi_loader/efi_capsule.c                       |   1 +
+>  lib/efi_loader/efi_device_path.c                   |   2 +-
+>  lib/efi_loader/efi_firmware.c                      |  52 +++++
+>  lib/efi_loader/efi_variable.c                      |   2 +-
+>  lib/fwu_updates/fwu_mtd.c                          |   2 +-
+>  lib/uuid.c                                         | 102 +++++++---
+>  lib/vsprintf.c                                     |   2 +-
+>  net/bootp.c                                        |   2 +-
+>  test/dm/acpi_dp.c                                  |   2 +-
+>  test/dm/acpigen.c                                  |   2 +-
+>  test/lib/uuid.c                                    | 120 +++++++++++-
+>  .../test_efi_capsule/test_capsule_firmware_fit.py  |   2 +-
+>  .../test_efi_capsule/test_capsule_firmware_raw.py  |   8 +-
+>  .../test_capsule_firmware_signed_fit.py            |   2 +-
+>  .../test_capsule_firmware_signed_raw.py            |   4 +-
+>  test/py/tests/test_efi_capsule/version.dts         |   6 +-
+>  tools/Makefile                                     |   8 +-
+>  tools/binman/etype/efi_capsule.py                  |   2 +-
+>  tools/binman/ftest.py                              |   2 +-
+>  tools/eficapsule.h                                 |   2 +-
+>  tools/mkeficapsule.c                               | 209 ++++++++++++++++-----
+>  54 files changed, 544 insertions(+), 148 deletions(-)
+> ---
+> change-id: 20240422-b4-dynamic-uuid-1a5ab1486c27
+> base-commit: c717871c07fb36f13806ef5351d858a72a811d95
 >
-> +static int tpm_tis_wait_init(struct udevice *dev, int loc)
-> +{
-> +       struct tpm_chip *chip = dev_get_priv(dev);
-> +       unsigned long start, stop;
-> +       u8 status;
-> +       int ret;
-> +
-> +       start = get_timer(0);
-> +       stop = chip->timeout_b;
-> +       do {
-> +               mdelay(TPM_TIMEOUT_MS);
-> +               ret = chip->phy_ops->read_bytes(dev, TPM_ACCESS(loc), 1, &status);
-> +               if (ret)
-> +                       break;
-> +
-> +               if (status & TPM_ACCESS_VALID)
-> +                       return 0;
-> +       } while (get_timer(start) < stop);
-> +
-> +       return -EIO;
-> +}
-> +
->  int tpm_tis_init(struct udevice *dev)
->  {
->         struct tpm_chip *chip = dev_get_priv(dev);
-> @@ -436,6 +458,12 @@ int tpm_tis_init(struct udevice *dev)
->         chip->timeout_c = TIS_SHORT_TIMEOUT_MS;
->         chip->timeout_d = TIS_SHORT_TIMEOUT_MS;
+> // Caleb (they/them)
 >
-> +       ret = tpm_tis_wait_init(dev, chip->locality);
-> +       if (ret) {
-> +               log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
-> +               return ret;
-> +       }
-> +
->         ret = tpm_tis_request_locality(dev, 0);
->         if (ret)
->                 return ret;
-> diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
-> index b0fe97ab1d0..7909a147c2d 100644
-> --- a/drivers/tpm/tpm2_tis_spi.c
-> +++ b/drivers/tpm/tpm2_tis_spi.c
-> @@ -188,29 +188,6 @@ static int tpm_tis_spi_write32(struct udevice *dev, u32 addr, u32 value)
->         return tpm_tis_spi_write(dev, addr, sizeof(value), (u8 *)&value_le);
->  }
->
-> -static int tpm_tis_wait_init(struct udevice *dev, int loc)
-> -{
-> -       struct tpm_chip *chip = dev_get_priv(dev);
-> -       unsigned long start, stop;
-> -       u8 status;
-> -       int ret;
-> -
-> -       start = get_timer(0);
-> -       stop = chip->timeout_b;
-> -       do {
-> -               mdelay(TPM_TIMEOUT_MS);
-> -
-> -               ret = tpm_tis_spi_read(dev, TPM_ACCESS(loc), 1, &status);
-> -               if (ret)
-> -                       break;
-> -
-> -               if (status & TPM_ACCESS_VALID)
-> -                       return 0;
-> -       } while (get_timer(start) < stop);
-> -
-> -       return -EIO;
-> -}
-> -
->  static struct tpm_tis_phy_ops phy_ops = {
->         .read_bytes = tpm_tis_spi_read,
->         .write_bytes = tpm_tis_spi_write,
-> @@ -256,12 +233,6 @@ static int tpm_tis_spi_probe(struct udevice *dev)
->         /* Ensure a minimum amount of time elapsed since reset of the TPM */
->         mdelay(drv_data->time_before_first_cmd_ms);
->
-> -       ret = tpm_tis_wait_init(dev, chip->locality);
-> -       if (ret) {
-> -               log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
-> -               return ret;
-> -       }
-> -
->         tpm_tis_ops_register(dev, &phy_ops);
->         ret = tpm_tis_init(dev);
->         if (ret)
-> --
-> 2.30.2
->
-
-I'll manually add the fixes tag on merge. Other than that
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
