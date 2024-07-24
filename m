@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26602C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:37:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D0FC3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 914F588959;
+	by phobos.denx.de (Postfix) with ESMTP id EFD448896B;
 	Wed, 24 Jul 2024 16:37:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RXcd7adr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iQvQyaRf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C56F288955; Wed, 24 Jul 2024 16:37:26 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id A4CD78897A; Wed, 24 Jul 2024 16:37:27 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FDBF8895D
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:37:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 714F888920
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:37:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6b78c980981so37542406d6.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:37:24 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6b7a0ef0e75so40356646d6.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:37:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721831843; x=1722436643; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721831844; x=1722436644; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EWktEUI5FlxP4TVw1Kgz5TPJyBVPMDWJm2BnIrKklhw=;
- b=RXcd7adrp5l47LsP0n/MNeVUDWmG56PUxXAbyOGHkXmSL06p559L70hy4UaNrKaxfY
- SK0MBP11QOHMw4mg6kv4exKp5nr5bstTFunb5dbcL9Q48nofojk9Qgg2BuoHgZy3GV/c
- SR9kqorH9crYgGNztAvIrzpOoUdzudhi3O6KA=
+ bh=5fdRErxGSUe2YcBjty9uU+IoPYtODwUThkLaFN11WmM=;
+ b=iQvQyaRfvJZWXY6+jcc02QFphREhjbZ5ZlljS/2Vg7kPG2fuJAXzzIrRruIrTcm+DY
+ zjgBCDtQ4B8CE2JHgaj5fEJh3/dDexAC1x5PrJqiF4+Yi379ZI5iSvKEdNXR9uzUZ5AS
+ VwTx9S0vRBDKpWno4SRrLjuDJWesYC2M6Bv9E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721831843; x=1722436643;
+ d=1e100.net; s=20230601; t=1721831844; x=1722436644;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EWktEUI5FlxP4TVw1Kgz5TPJyBVPMDWJm2BnIrKklhw=;
- b=nK//HjtRMpURFzkTL1G0k3pqBVI4+/fuoFkTde9Wh7MjXlw18VEFH4wfowwPNqEwqN
- QPfE71WFXa7EgC4OIfZ9hejOmgTeNFYyXIyDYIPCVvaJHhS0vA9wk95xTJj//sKJ+Jdk
- FmJGdqhZUUPygxZVpr9lVrmf5OFJzpTnhwmZKo0PiDTI1V57yHcoF1GJg5t6QzBD/FYP
- ekgWYCXTPhK2ydhXTzxmZEAX60Fhn+UTDvJjq0lSQk75EyxQ71HOWM/t5rs+8xPTyEV/
- eqrzp/X4Ajz5mmgBk3SlZxHObldwEDanm9QPfMaGpCmWs1/ON77mpLgbeBW5GLAFiRJX
- i6xQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXC0kjSEuFX/2HLCdPnZxq9wxBIDf6Zl/oZSa7YhVrBs7P/UY/suhTEnumV4eR4Tnzsk79W58lSdkNSYtn8VqVxqIt0Kw==
-X-Gm-Message-State: AOJu0Yzx9q1ROMtC+pc1XmJXdTj44ySg7p7X/2uOTKIg8xLbgy2MC4Zt
- FpK6Z8APPo7tesvmtCBDEXSsIwTNiFHvspaX8+hVZpU9OqpR0evYCrvP/bTcziyYbYwj6ovR1wW
- uivjZmcwx9034e8F9QUsOr29YQGo3nuTG1VDG
-X-Google-Smtp-Source: AGHT+IEJr6LbTAqKDVGFCctBj15DS3n/3iN/6hfLscrErIsQBbioUwOqkRJZnKpY+6VkMXKTL2BPIA23JVyLyN+Q0tE=
-X-Received: by 2002:a05:6214:2622:b0:6b9:5bbb:108d with SMTP id
- 6a1803df08f44-6b99074202cmr23253186d6.5.1721831843430; Wed, 24 Jul 2024
- 07:37:23 -0700 (PDT)
+ bh=5fdRErxGSUe2YcBjty9uU+IoPYtODwUThkLaFN11WmM=;
+ b=sV1xx6m71FhZOB8jo6P4oF/+aE+dnp8aMNBpkEWaqGhsW76bppcVDtKA+fB7uoBy8N
+ 9QxiWkUN/AKUKzGs8HD0yW3DvIN6ZYWf7gyr5XydHmEFNEMB2AoX6//3q0OKRGTFS21r
+ VG1JnUf49hlHUVniHI4df1cNTIJT6JhQi8WA70rw/nR+07+cVIt6pwx24xzQl/8MV8le
+ AuIYt+S+16bTkEECrOEUB8IZIPlDCKxGiA5G6tOLG1j6NLzO96hQ2hBzPvHuirhDfhEG
+ iN+AIWnlOBZfwNgyzF0V2Jn2wgCNnogsthev4hzKS9JcpXq5dPnuqNw3rFO2HrEVWnbz
+ uOqg==
+X-Gm-Message-State: AOJu0YyQIxAke0NQZ6z6xaNKo5lbIl82tWoTF6ifQFPjJNa+fNlK6Q4L
+ 1KOa3z+Sd3nVr9vo7zIKFgti2TxBs/QtAHjsU+hRnlocttnTnnyQJmOIX6d+ejM5Qf91RLIfmcp
+ FStofmHi3JlybVA+f+j2r565peuWxH+mIuG5FAc681hqph48=
+X-Google-Smtp-Source: AGHT+IH31UP52RIJ3K6UoOw10/TvflmptdK3o13a/lw/iSaMyn1W6IcZedCur1YBtv1QBssoqYcOsP7E3Aw/19Auebg=
+X-Received: by 2002:ad4:5be4:0:b0:6b5:413a:3f96 with SMTP id
+ 6a1803df08f44-6b98ed243c1mr33876376d6.10.1721831844303; Wed, 24 Jul 2024
+ 07:37:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240724073448.710197-1-lukas.funke-oss@weidmueller.com>
- <20240724073448.710197-2-lukas.funke-oss@weidmueller.com>
- <CAC_iWjL1dE_KQRiz-3RwztZPt-C9V4=836obQ3PmkC1NrzgX6w@mail.gmail.com>
-In-Reply-To: <CAC_iWjL1dE_KQRiz-3RwztZPt-C9V4=836obQ3PmkC1NrzgX6w@mail.gmail.com>
+References: <20240723150400.16650-1-Zhiqiang.Hou@nxp.com>
+ <20240723150400.16650-2-Zhiqiang.Hou@nxp.com>
+In-Reply-To: <20240723150400.16650-2-Zhiqiang.Hou@nxp.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 24 Jul 2024 08:37:12 -0600
-Message-ID: <CAFLszTjvHTnz+xcss2Kk+ERLX9G5zr6iU+rRwFYaEtS_CBc_rw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: lukas.funke-oss@weidmueller.com, u-boot@lists.denx.de, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tim Harvey <tharvey@gateworks.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Wed, 24 Jul 2024 08:37:13 -0600
+Message-ID: <CAFLszTiXhnZ+=e1d3k0izMAYtPOHKb2bbdubrkB-kPL+KdXfjw@mail.gmail.com>
+Subject: Re: [PATCHv1 1/5] cpu: add release_core callback
+To: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com, 
+ festevam@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,132 +83,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 24 Jul 2024 at 02:56, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Thanks Lukas,
->
-> On Wed, 24 Jul 2024 at 10:35, <lukas.funke-oss@weidmueller.com> wrote:
-> >
-> > From: Lukas Funke <lukas.funke@weidmueller.com>
-> >
-> > tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
-> > initialized in tpm_tis_init(). However, the init-function is called
-> > *after* tpm_tis_wait_init() introducing an uninitalized field access.
-> >
-> > This commit switches both routines.
-> >
-> > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> > Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> > ---
-> >
-> > Changes in v2:
-> > - Call tpm_tis_wait_init() from tpm_tis_init()
-> > - Use phy_ops for bus access in tpm_tis_wait_init()
-> >
-> >  drivers/tpm/tpm2_tis_core.c | 28 ++++++++++++++++++++++++++++
-> >  drivers/tpm/tpm2_tis_spi.c  | 29 -----------------------------
-> >  2 files changed, 28 insertions(+), 29 deletions(-)
-> >
-> > diff --git a/drivers/tpm/tpm2_tis_core.c b/drivers/tpm/tpm2_tis_core.c
-> > index 680a6409433..1fdf8cfa319 100644
-> > --- a/drivers/tpm/tpm2_tis_core.c
-> > +++ b/drivers/tpm/tpm2_tis_core.c
-> > @@ -419,6 +419,28 @@ static bool tis_check_ops(struct tpm_tis_phy_ops *phy_ops)
-> >         return true;
-> >  }
-> >
-> > +static int tpm_tis_wait_init(struct udevice *dev, int loc)
-> > +{
-> > +       struct tpm_chip *chip = dev_get_priv(dev);
-> > +       unsigned long start, stop;
-> > +       u8 status;
-> > +       int ret;
-> > +
-> > +       start = get_timer(0);
-> > +       stop = chip->timeout_b;
-> > +       do {
-> > +               mdelay(TPM_TIMEOUT_MS);
-> > +               ret = chip->phy_ops->read_bytes(dev, TPM_ACCESS(loc), 1, &status);
-> > +               if (ret)
-> > +                       break;
-> > +
-> > +               if (status & TPM_ACCESS_VALID)
-> > +                       return 0;
-> > +       } while (get_timer(start) < stop);
-> > +
-> > +       return -EIO;
-> > +}
-> > +
-> >  int tpm_tis_init(struct udevice *dev)
-> >  {
-> >         struct tpm_chip *chip = dev_get_priv(dev);
-> > @@ -436,6 +458,12 @@ int tpm_tis_init(struct udevice *dev)
-> >         chip->timeout_c = TIS_SHORT_TIMEOUT_MS;
-> >         chip->timeout_d = TIS_SHORT_TIMEOUT_MS;
-> >
-> > +       ret = tpm_tis_wait_init(dev, chip->locality);
-> > +       if (ret) {
-> > +               log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
-> > +               return ret;
-> > +       }
-> > +
-> >         ret = tpm_tis_request_locality(dev, 0);
-> >         if (ret)
-> >                 return ret;
-> > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
-> > index b0fe97ab1d0..7909a147c2d 100644
-> > --- a/drivers/tpm/tpm2_tis_spi.c
-> > +++ b/drivers/tpm/tpm2_tis_spi.c
-> > @@ -188,29 +188,6 @@ static int tpm_tis_spi_write32(struct udevice *dev, u32 addr, u32 value)
-> >         return tpm_tis_spi_write(dev, addr, sizeof(value), (u8 *)&value_le);
-> >  }
-> >
-> > -static int tpm_tis_wait_init(struct udevice *dev, int loc)
-> > -{
-> > -       struct tpm_chip *chip = dev_get_priv(dev);
-> > -       unsigned long start, stop;
-> > -       u8 status;
-> > -       int ret;
-> > -
-> > -       start = get_timer(0);
-> > -       stop = chip->timeout_b;
-> > -       do {
-> > -               mdelay(TPM_TIMEOUT_MS);
-> > -
-> > -               ret = tpm_tis_spi_read(dev, TPM_ACCESS(loc), 1, &status);
-> > -               if (ret)
-> > -                       break;
-> > -
-> > -               if (status & TPM_ACCESS_VALID)
-> > -                       return 0;
-> > -       } while (get_timer(start) < stop);
-> > -
-> > -       return -EIO;
-> > -}
-> > -
-> >  static struct tpm_tis_phy_ops phy_ops = {
-> >         .read_bytes = tpm_tis_spi_read,
-> >         .write_bytes = tpm_tis_spi_write,
-> > @@ -256,12 +233,6 @@ static int tpm_tis_spi_probe(struct udevice *dev)
-> >         /* Ensure a minimum amount of time elapsed since reset of the TPM */
-> >         mdelay(drv_data->time_before_first_cmd_ms);
-> >
-> > -       ret = tpm_tis_wait_init(dev, chip->locality);
-> > -       if (ret) {
-> > -               log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
-> > -               return ret;
-> > -       }
-> > -
-> >         tpm_tis_ops_register(dev, &phy_ops);
-> >         ret = tpm_tis_init(dev);
-> >         if (ret)
-> > --
-> > 2.30.2
-> >
->
-> I'll manually add the fixes tag on merge. Other than that
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi Zhiqiang,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Fixes: a5c30c26b28 ("tpm: Use the new API on tpm2 spi driver")
+On Tue, 23 Jul 2024 at 08:43, Zhiqiang Hou <Zhiqiang.Hou@nxp.com> wrote:
+>
+> From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+>
+> Add a new callback release_core to the cpu_ops, which is used to
+> release a CPU core to run baremetal or RTOS application on a SoC
+> with multiple CPU cores.
+>
+> Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+> ---
+>  drivers/cpu/cpu-uclass.c | 10 ++++++++++
+>  include/cpu.h            | 15 +++++++++++++++
+>  2 files changed, 25 insertions(+)
+>
+> diff --git a/drivers/cpu/cpu-uclass.c b/drivers/cpu/cpu-uclass.c
+> index 16f8f2e521..2c8e46c05e 100644
+> --- a/drivers/cpu/cpu-uclass.c
+> +++ b/drivers/cpu/cpu-uclass.c
+> @@ -104,6 +104,16 @@ int cpu_get_vendor(const struct udevice *dev, char *buf, int size)
+>         return ops->get_vendor(dev, buf, size);
+>  }
+>
+> +int cpu_release_core(const struct udevice *dev, phys_addr_t addr)
+> +{
+> +       struct cpu_ops *ops = cpu_get_ops(dev);
+> +
+> +       if (!ops->release_core)
+> +               return -ENOSYS;
+> +
+> +       return ops->release_core(dev, addr);
+> +}
+> +
+>  U_BOOT_DRIVER(cpu_bus) = {
+>         .name   = "cpu_bus",
+>         .id     = UCLASS_SIMPLE_BUS,
+> diff --git a/include/cpu.h b/include/cpu.h
+> index 2077ff3063..0018910d61 100644
+> --- a/include/cpu.h
+> +++ b/include/cpu.h
+> @@ -102,6 +102,15 @@ struct cpu_ops {
+>          *         if not.
+>          */
+>         int (*is_current)(struct udevice *dev);
+> +
+> +       /**
+> +        * release_core() - Relase a CPU core to the given address to run application
+> +        *
+> +        * @dev:        Device to check (UCLASS_CPU)
+> +        * @addr:       Address to relese the CPU core
+> +        * @return 0 if OK, -ve on error
+> +        */
+> +       int (*release_core)(const struct udevice *dev, phys_addr_t addr);
+>  };
+>
+>  #define cpu_get_ops(dev)        ((struct cpu_ops *)(dev)->driver->ops)
+> @@ -164,4 +173,10 @@ int cpu_is_current(struct udevice *cpu);
+>   */
+>  struct udevice *cpu_get_current_dev(void);
+>
+> +/**
+> + * cpu_release_core() - Relase a CPU core to the given address to run application
+> + *
+> + * @return 0 if OK, -ve on error
+> + */
+> +int cpu_release_core(const struct udevice *dev, phys_addr_t addr);
+>  #endif
+> --
+> 2.17.1
+>
+
+Please also add a test for this callback to test/dm/cpu.c
+
+Regards,
+Simon
