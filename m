@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA100C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34D7C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26EB288920;
-	Wed, 24 Jul 2024 08:05:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 876C188965;
+	Wed, 24 Jul 2024 08:05:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD8B988886; Wed, 24 Jul 2024 08:05:46 +0200 (CEST)
+ id 5A74988896; Wed, 24 Jul 2024 08:05:47 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7335888965
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4E1588880F
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 62C88106F;
- Tue, 23 Jul 2024 23:05:54 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 42118153B;
+ Tue, 23 Jul 2024 23:05:49 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 507713F766;
- Tue, 23 Jul 2024 23:05:24 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2F2DA3F766;
+ Tue, 23 Jul 2024 23:05:18 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 32/40] stm32mp: do not add lmb memory before relocation
-Date: Wed, 24 Jul 2024 11:32:16 +0530
-Message-Id: <20240724060224.3071065-33-sughosh.ganu@linaro.org>
+Subject: [PATCH 31/40] zynq: lmb: do not add to lmb map before relocation
+Date: Wed, 24 Jul 2024 11:32:15 +0530
+Message-Id: <20240724060224.3071065-32-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,41 +63,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB memory map is now being handled through data structures which
-need heap memory to be operational. Moreover, the LMB memory map is
-initialised as part of the board boot after relocation as part of
-platform agnostic code. Remove addition of LMB memory before
-relocation for the stm32mp platforms.
+The LMB memory is typically not needed very early in the platform's
+boot. Do not add memory to the LMB map before relocation. Reservation
+of common areas and adding of memory is done after relocation.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc: New patch
+Changes since rfc: None
 
- arch/arm/mach-stm32mp/dram_init.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ board/xilinx/common/board.c | 31 -------------------------------
+ 1 file changed, 31 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index 97d894d05f..32f2a95ed8 100644
---- a/arch/arm/mach-stm32mp/dram_init.c
-+++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -57,15 +57,8 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 	 */
- 	gd->ram_top = clamp_val(gd->ram_top, 0, SZ_4G - 1);
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 1fcf7c3d8f..3440402ab4 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -12,7 +12,6 @@
+ #include <image.h>
+ #include <init.h>
+ #include <jffs2/load_kernel.h>
+-#include <lmb.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+ #include <asm/sections.h>
+@@ -665,36 +664,6 @@ int embedded_dtb_select(void)
+ }
+ #endif
  
+-#if IS_ENABLED(CONFIG_LMB)
+-
+-#ifndef MMU_SECTION_SIZE
+-#define MMU_SECTION_SIZE        (1 * 1024 * 1024)
+-#endif
+-
+-phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+-{
+-	phys_size_t size;
+-	phys_addr_t reg;
+-
+-	if (!total_size)
+-		return gd->ram_top;
+-
+-	if (!IS_ALIGNED((ulong)gd->fdt_blob, 0x8))
+-		panic("Not 64bit aligned DT location: %p\n", gd->fdt_blob);
+-
 -	/* found enough not-reserved memory to relocated U-Boot */
--	lmb_add(gd->ram_base, gd->ram_top - gd->ram_base, LMB_NONE);
+-	lmb_add(gd->ram_base, gd->ram_size, LMB_NONE);
 -	boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob);
--	/* add 8M for reserved memory for display, fdt, gd,... */
--	size = ALIGN(SZ_8M + CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE),
+-	size = ALIGN(CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE);
 -	reg = lmb_alloc(size, MMU_SECTION_SIZE, LMB_NONE);
 -
 -	if (!reg)
 -		reg = gd->ram_top - size;
-+	size = ALIGN(SZ_8M + CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE);
-+	reg = gd->ram_top - size;
- 
- 	/* before relocation, mark the U-Boot memory as cacheable by default */
- 	if (!(gd->flags & GD_FLG_RELOC))
+-
+-	return reg + size;
+-}
+-#endif
+-
+ #ifdef CONFIG_OF_BOARD_SETUP
+ #define MAX_RAND_SIZE 8
+ int ft_board_setup(void *blob, struct bd_info *bd)
 -- 
 2.34.1
 
