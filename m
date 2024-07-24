@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F08C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 684BEC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:12:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADC6F8897D;
-	Wed, 24 Jul 2024 08:05:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19A408891B;
+	Wed, 24 Jul 2024 08:06:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0F1788962; Wed, 24 Jul 2024 08:05:49 +0200 (CEST)
+ id 1782F8894E; Wed, 24 Jul 2024 08:06:00 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 48D6088934
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0A47B8890F
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3F843106F;
- Tue, 23 Jul 2024 23:06:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F23471596;
+ Tue, 23 Jul 2024 23:06:20 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B0F2B3F766;
- Tue, 23 Jul 2024 23:05:39 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DF8443F766;
+ Tue, 23 Jul 2024 23:05:50 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 35/40] test: lmb: run lmb tests only manually
-Date: Wed, 24 Jul 2024 11:32:19 +0530
-Message-Id: <20240724060224.3071065-36-sughosh.ganu@linaro.org>
+Subject: [PATCH 37/40] test: lmb: invoke the LMB unit tests from a separate
+ script
+Date: Wed, 24 Jul 2024 11:32:21 +0530
+Message-Id: <20240724060224.3071065-38-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,178 +64,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB code has been changed so that the memory reservations and
-allocations are now persistent and global. With this change, the
-design of the LMB tests needs to be changed accordingly. Mark the LMB
-tests to be run only manually. The tests won't be run as part of the
-unit test suite, but would be invoked through a separate test, and
-thus would not interfere with the running of the rest of the tests.
+With the LMB tests moved under a separate class of unit tests, invoke
+these from a separate script which would allow for a system reset once
+the tests have been run. This enables clearing up the LMB memory map
+after having run the tests.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since rfc: None
 
- test/lib/lmb.c | 41 ++++++++++++++++++++---------------------
- 1 file changed, 20 insertions(+), 21 deletions(-)
+ test/py/tests/test_lmb.py | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 test/py/tests/test_lmb.py
 
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index aea84e7b1c..c869f58b42 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -200,7 +200,7 @@ static int test_multi_alloc_512mb_x2(struct unit_test_state *uts,
- }
- 
- /* Create a memory region with one reserved region and allocate */
--static int lib_test_lmb_simple(struct unit_test_state *uts)
-+static int lib_test_lmb_simple_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -212,10 +212,10 @@ static int lib_test_lmb_simple(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
- 	return test_multi_alloc_512mb(uts, 0xE0000000);
- }
--LIB_TEST(lib_test_lmb_simple, 0);
-+LIB_TEST(lib_test_lmb_simple_norun, UT_TESTF_MANUAL);
- 
- /* Create two memory regions with one reserved region and allocate */
--static int lib_test_lmb_simple_x2(struct unit_test_state *uts)
-+static int lib_test_lmb_simple_x2_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -227,7 +227,7 @@ static int lib_test_lmb_simple_x2(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 3.5GiB and 1 GiB */
- 	return test_multi_alloc_512mb_x2(uts, 0xE0000000, 0x40000000);
- }
--LIB_TEST(lib_test_lmb_simple_x2, 0);
-+LIB_TEST(lib_test_lmb_simple_x2_norun, UT_TESTF_MANUAL);
- 
- /* Simulate 512 MiB RAM, allocate some blocks that fit/don't fit */
- static int test_bigblock(struct unit_test_state *uts, const phys_addr_t ram)
-@@ -286,7 +286,7 @@ static int test_bigblock(struct unit_test_state *uts, const phys_addr_t ram)
- 	return 0;
- }
- 
--static int lib_test_lmb_big(struct unit_test_state *uts)
-+static int lib_test_lmb_big_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -298,7 +298,7 @@ static int lib_test_lmb_big(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
- 	return test_bigblock(uts, 0xE0000000);
- }
--LIB_TEST(lib_test_lmb_big, 0);
-+LIB_TEST(lib_test_lmb_big_norun, UT_TESTF_MANUAL);
- 
- /* Simulate 512 MiB RAM, allocate a block without previous reservation */
- static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
-@@ -368,7 +368,7 @@ static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
- 	return 0;
- }
- 
--static int lib_test_lmb_noreserved(struct unit_test_state *uts)
-+static int lib_test_lmb_noreserved_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -380,10 +380,9 @@ static int lib_test_lmb_noreserved(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
- 	return test_noreserved(uts, 0xE0000000, 4, 1);
- }
-+LIB_TEST(lib_test_lmb_noreserved_norun, UT_TESTF_MANUAL);
- 
--LIB_TEST(lib_test_lmb_noreserved, 0);
--
--static int lib_test_lmb_unaligned_size(struct unit_test_state *uts)
-+static int lib_test_lmb_unaligned_size_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -395,13 +394,13 @@ static int lib_test_lmb_unaligned_size(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
- 	return test_noreserved(uts, 0xE0000000, 5, 8);
- }
--LIB_TEST(lib_test_lmb_unaligned_size, 0);
-+LIB_TEST(lib_test_lmb_unaligned_size_norun, UT_TESTF_MANUAL);
- 
- /*
-  * Simulate a RAM that starts at 0 and allocate down to address 0, which must
-  * fail as '0' means failure for the lmb_alloc functions.
-  */
--static int lib_test_lmb_at_0(struct unit_test_state *uts)
-+static int lib_test_lmb_at_0_norun(struct unit_test_state *uts)
- {
- 	const phys_addr_t ram = 0;
- 	const phys_size_t ram_size = 0x20000000;
-@@ -443,10 +442,10 @@ static int lib_test_lmb_at_0(struct unit_test_state *uts)
- 
- 	return 0;
- }
--LIB_TEST(lib_test_lmb_at_0, 0);
-+LIB_TEST(lib_test_lmb_at_0_norun, UT_TESTF_MANUAL);
- 
- /* Check that calling lmb_reserve with overlapping regions fails. */
--static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
-+static int lib_test_lmb_overlapping_reserve_norun(struct unit_test_state *uts)
- {
- 	const phys_addr_t ram = 0x40000000;
- 	const phys_size_t ram_size = 0x20000000;
-@@ -498,7 +497,7 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
- 
- 	return 0;
- }
--LIB_TEST(lib_test_lmb_overlapping_reserve, 0);
-+LIB_TEST(lib_test_lmb_overlapping_reserve_norun, UT_TESTF_MANUAL);
- 
- /*
-  * Simulate 512 MiB RAM, reserve 3 blocks, allocate addresses in between.
-@@ -621,7 +620,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	return 0;
- }
- 
--static int lib_test_lmb_alloc_addr(struct unit_test_state *uts)
-+static int lib_test_lmb_alloc_addr_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -633,7 +632,7 @@ static int lib_test_lmb_alloc_addr(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
- 	return test_alloc_addr(uts, 0xE0000000);
- }
--LIB_TEST(lib_test_lmb_alloc_addr, 0);
-+LIB_TEST(lib_test_lmb_alloc_addr_norun, UT_TESTF_MANUAL);
- 
- /* Simulate 512 MiB RAM, reserve 3 blocks, check addresses in between */
- static int test_get_unreserved_size(struct unit_test_state *uts,
-@@ -696,7 +695,7 @@ static int test_get_unreserved_size(struct unit_test_state *uts,
- 	return 0;
- }
- 
--static int lib_test_lmb_get_free_size(struct unit_test_state *uts)
-+static int lib_test_lmb_get_free_size_norun(struct unit_test_state *uts)
- {
- 	int ret;
- 
-@@ -708,9 +707,9 @@ static int lib_test_lmb_get_free_size(struct unit_test_state *uts)
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
- 	return test_get_unreserved_size(uts, 0xE0000000);
- }
--LIB_TEST(lib_test_lmb_get_free_size, 0);
-+LIB_TEST(lib_test_lmb_get_free_size_norun, UT_TESTF_MANUAL);
- 
--static int lib_test_lmb_flags(struct unit_test_state *uts)
-+static int lib_test_lmb_flags_norun(struct unit_test_state *uts)
- {
- 	struct lmb_region *mem, *used;
- 	struct alist *mem_lst, *used_lst;
-@@ -800,4 +799,4 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
- 
- 	return 0;
- }
--LIB_TEST(lib_test_lmb_flags, 0);
-+LIB_TEST(lib_test_lmb_flags_norun, UT_TESTF_MANUAL);
+diff --git a/test/py/tests/test_lmb.py b/test/py/tests/test_lmb.py
+new file mode 100644
+index 0000000000..b6f9ff9c6a
+--- /dev/null
++++ b/test/py/tests/test_lmb.py
+@@ -0,0 +1,24 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2024 Linaro Ltd
++#
++# Run the LMB tests
++
++import pytest
++
++base_script = '''
++ut lmb -f
++'''
++
++@pytest.mark.boardspec('sandbox')
++def test_lmb(u_boot_console):
++    cons = u_boot_console
++    cmd = base_script
++
++    with cons.log.section('LMB Unit Test'):
++        output = cons.run_command_list(cmd.splitlines())
++
++    assert 'Failures: 0' in output[-1]
++
++    # Restart so that the LMB memory map starts with
++    # a clean slate for the next set of tests.
++    u_boot_console.restart_uboot()
 -- 
 2.34.1
 
