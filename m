@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 349B8C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D4FCC3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DF6E88931;
-	Wed, 24 Jul 2024 08:05:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F0F9488955;
+	Wed, 24 Jul 2024 08:05:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64E4888920; Wed, 24 Jul 2024 08:05:06 +0200 (CEST)
+ id 66B1F88906; Wed, 24 Jul 2024 08:05:06 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 22A4888906
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id ECC198890F
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 16AB3106F;
- Tue, 23 Jul 2024 23:05:28 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DF608152B;
+ Tue, 23 Jul 2024 23:05:22 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id ED83B3F766;
- Tue, 23 Jul 2024 23:04:57 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CB9DD3F766;
+ Tue, 23 Jul 2024 23:04:52 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 27/40] spl: sandbox: initialise the ram banksize in spl
-Date: Wed, 24 Jul 2024 11:32:11 +0530
-Message-Id: <20240724060224.3071065-28-sughosh.ganu@linaro.org>
+Subject: [PATCH 26/40] spl: call spl_board_init() at the end of the spl init
+ sequence
+Date: Wed, 24 Jul 2024 11:32:10 +0530
+Message-Id: <20240724060224.3071065-27-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,47 +64,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Initialise the ram bank information for sandbox in SPL. This is needed
-for initialising the LMB memory map as part of the platform init.
+The spl_board_init() function on sandbox invokes the unit
+tests. Invoking the tests should be done once the rest of the system
+has been initialised. Call the spl_board_init() function at the very
+end, once the rest of the initilisation functions have been called,
+including the setting up of the LMB memory map.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since rfc: New patch
 
- arch/sandbox/cpu/spl.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ common/spl/spl.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 9ad9da686c..22cd916685 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -121,6 +121,15 @@ static int load_from_image(struct spl_image_info *spl_image,
- }
- SPL_LOAD_IMAGE_METHOD("sandbox_image", 7, BOOT_DEVICE_BOARD, load_from_image);
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 38ac0608bb..891edde156 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -713,9 +713,6 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	if (CONFIG_IS_ENABLED(SOC_INIT))
+ 		spl_soc_init();
  
-+int dram_init_banksize(void)
-+{
-+	/* These are necessary so TFTP can use LMBs to check its load address */
-+	gd->bd->bi_dram[0].start = gd->ram_base;
-+	gd->bd->bi_dram[0].size = get_effective_memsize();
-+
-+	return 0;
-+}
-+
- void spl_board_init(void)
- {
- 	struct sandbox_state *state = state_get_current();
-@@ -128,10 +137,6 @@ void spl_board_init(void)
- 	if (!CONFIG_IS_ENABLED(UNIT_TEST))
- 		return;
- 
--	/* These are necessary so TFTP can use LMBs to check its load address */
--	gd->bd->bi_dram[0].start = gd->ram_base;
--	gd->bd->bi_dram[0].size = get_effective_memsize();
+-	if (CONFIG_IS_ENABLED(BOARD_INIT))
+-		spl_board_init();
 -
- 	if (state->run_unittests) {
- 		struct unit_test *tests = UNIT_TEST_ALL_START();
- 		const int count = UNIT_TEST_ALL_COUNT();
+ 	if (IS_ENABLED(CONFIG_SPL_WATCHDOG) && CONFIG_IS_ENABLED(WDT))
+ 		initr_watchdog();
+ 
+@@ -733,6 +730,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		/* Don't fail. We still can try other boot methods. */
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(BOARD_INIT))
++		spl_board_init();
++
+ 	bootcount_inc();
+ 
+ 	/* Dump driver model states to aid analysis */
 -- 
 2.34.1
 
