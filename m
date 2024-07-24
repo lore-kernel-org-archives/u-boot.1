@@ -4,71 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C02AC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32718C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:52:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0778288938;
-	Wed, 24 Jul 2024 16:39:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 56282879AF;
+	Wed, 24 Jul 2024 16:52:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SBdEsN5E";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SEb9w/g3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E5188962; Wed, 24 Jul 2024 16:39:40 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id CBC91879AF; Wed, 24 Jul 2024 16:52:09 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2259C8889B
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:39:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7B9580805
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:52:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6678a45eaa3so66951877b3.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:39:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5d569bee00aso2377557eaf.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:52:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721831977; x=1722436777; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B+TwOllwrTNDAn0VcamQyXsrV6o+bKXGw00+KIEWg4o=;
- b=SBdEsN5EjH07uEBXmgfLEg9b7pf0xhOTc26i2vNTRNnYZh7hOHu6fVKgpTFPMIlyXS
- 3UC2vxnH7th38vtcrQEv3UGJrSn5Ezzdcg3UUW/Qmv/zU7q1d9gRsjgpsdijuFlviOsu
- pZ0lwpZYFDXPUL8d1lZrLc3ZCmZQyNYBZpKn8=
+ d=konsulko.com; s=google; t=1721832725; x=1722437525; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=btfEtOhmhexsM61HA9O1atzXCk9Eyont1pdiFEpq8xA=;
+ b=SEb9w/g3hqOyoi+/YC15WlXE2+FaoK1WwTHyxKfVFt1DAQEn5h742CjBwaggTyWNVZ
+ 5hF9XHGmaT1UyfPupdO0vkBAlCFnW8abRAmgz0n7zPH7Z1LVDyFo1J3H4nfls0qqS4mu
+ o7Mntr4pkugVZiswuQEzdjMXMFRtya4eqVwjQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721831977; x=1722436777;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B+TwOllwrTNDAn0VcamQyXsrV6o+bKXGw00+KIEWg4o=;
- b=AsgBcDynAzZAK99OA6X3zSAxZff12qYZa1Pc42t7LifhAEsuIWSrydmTNFCW7xpceA
- /kP62T/acsHN1AwOOCdqb4V/YtlBcCPAGA5M6AVny3uO0S/i1rVnuhd6qWaoOodYa9DL
- 1mCFWXQ3+ptGXvNln3E7Tu4OHqrkYO1o1rdnM61cCP/C29o/PKbHDSUtq5FnWrvZTzxr
- mRCe+eRWt3OX8HbkqtZeFG9F2KamYYmqtv7I27IFjwyetH21q7qhU6vnlPTYOkTda+iv
- 3wKUueuR7oRNj0n0IvOaBmo+HGdMImRuhuo8WV2kIlGyTynVfAVGO1a4UHoJTWzKUvgW
- pReg==
-X-Gm-Message-State: AOJu0YzlhiCVrHVNFQtNEsK3DNGpVLLmIZoiBj1cFn6erv7hAFlaC3YH
- wTE/tUxqybYCo2n2iVX07+HHHX5k6xkSuDs8RslKia1mp1bVxbk5wHFWCHf+2+UvM8JPV+GluiJ
- HYzPeuIeJ4hNmXM9VWWqeNxXMBdUuaBWLUouA
-X-Google-Smtp-Source: AGHT+IG3t1D71oh+mDEpU81hrJRHqKFSTv/s2kKPqaHpKeD0n+Hj+WY/7KR1x0B2MzcYXJmnztF2MRJ9nb/6a30byj4=
-X-Received: by 2002:a05:690c:101:b0:64b:2f31:296b with SMTP id
- 00721157ae682-6727962c4d0mr37789307b3.4.1721831977072; Wed, 24 Jul 2024
- 07:39:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721832725; x=1722437525;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=btfEtOhmhexsM61HA9O1atzXCk9Eyont1pdiFEpq8xA=;
+ b=fx4rwC0M7W/k7u4QfA37Q0cRZzH8lTEfCHJn0ZdwZtbVRGMZJ1eXy4XgPkvs9r7uQd
+ XzXue1qC58qOHRMuhEnThhOujnXk6R61w4hOMMAuzV+Ga7AI6BjRuvvS+zjCTgZ68FGm
+ feEIyS6CQrGiaPJNc8blPasfHrioEwLlCXriKQJGLrkLpC56t1kkvmJmyDL0uNSTmp+X
+ +tspCgDzJ+DW+5iamQlnsEe/mxAwQUhtHAKhB7MeJbRpRzU6ISOTsj1LoyBEed0R1Rw+
+ F4Ak4j5o1VyQfw2vLQmCNg9hxnNBxw7RCc2T6SfhDcXoUmR+ygnzPtTduRG0Hj2d9sZh
+ fKvw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLvsOyHodBPaj4J9Zh5yn6/gD+LeqOKyUUYUGRN3uJiKhsBGFsUT7Zn0uiBp2GQc3SyNPBvQzIz45RAouH+rKJqmpAcg==
+X-Gm-Message-State: AOJu0Yw8mFBqEAcFSNfMJaPNxtv4W9uR48feG89rhVw26jCGuGja9d40
+ qlnr50pqjK7ROMnXjE5j64K1JrsVvT2KOtisAT4NDAod9CHi3DtRJmEwH6/e9ic=
+X-Google-Smtp-Source: AGHT+IE9oPEcQxBY0IlfC8QUCaUxvBkBBLgTYo3MFXCOj0cr1rTtZYeZYuv8rSxdw8KgjRB7v/Sykw==
+X-Received: by 2002:a05:6820:4b88:b0:5ce:d2e3:b18 with SMTP id
+ 006d021491bc7-5d5adaac07fmr75620eaf.8.1721832725231; 
+ Wed, 24 Jul 2024 07:52:05 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
+ [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5d59ee0e77dsm345895eaf.5.2024.07.24.07.52.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jul 2024 07:52:04 -0700 (PDT)
+Date: Wed, 24 Jul 2024 08:52:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH v2 38/48] lib: Kconfig: add a config symbol for
+ getting lmb memory map updates
+Message-ID: <20240724145201.GL989285@bill-the-cat>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240704073544.670249-39-sughosh.ganu@linaro.org>
+ <20240705195057.GP38804@bill-the-cat>
+ <CAC_iWjJDwFLMaP=S=z_OMnnQb=q32QMEPoywxPWwjixMSbJ84Q@mail.gmail.com>
+ <CADg8p946kVK_BfrSvEgFcvQh95MCRMBKJ+48syCnCSvrpJQ0-w@mail.gmail.com>
+ <CAFLszTiYALCrgBUBJ=g_BoQtOzHGx2OhuTxCioCHdXNuJb850w@mail.gmail.com>
+ <20240723142055.GG989285@bill-the-cat>
+ <CAFLszTgG9WuzYp97ANm=k3iju-DH+c5A2HfgwmUznti9tQyzpw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240721152600.3212917-1-sjg@chromium.org>
- <20240721152600.3212917-3-sjg@chromium.org>
- <68cb1acb-fa61-4bdb-b109-2fad64726158@cherry.de>
-In-Reply-To: <68cb1acb-fa61-4bdb-b109-2fad64726158@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 24 Jul 2024 08:39:26 -0600
-Message-ID: <CAFLszTjGcQqRJ8HdtL2a_d1op6Kda9q6b08ue4WtXxzjXO+_1A@mail.gmail.com>
-Subject: Re: [PATCH v2 02/14] spl: Correct use of CMD_BOOTI and CMD_BOOTZ
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UUCdbVQLBCa3wjQg"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgG9WuzYp97ANm=k3iju-DH+c5A2HfgwmUznti9tQyzpw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,67 +103,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On Mon, 22 Jul 2024 at 07:11, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 7/21/24 5:25 PM, Simon Glass wrote:
-> > These should have a CONFIG_ prefix. Add it.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Fixes: 7a0d88076b9 ("Add in the ability to load and boot an uncompr...")
-> > Reviewed-by: Sean Anderson <seanga2@gmail.com>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >   common/spl/spl.c | 4 ++--
-> >   1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > index 7794ddccade..6f4a8bfb3f4 100644
-> > --- a/common/spl/spl.c
-> > +++ b/common/spl/spl.c
-> > @@ -322,7 +322,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
-> >   #endif
-> >
-> >   #if CONFIG_IS_ENABLED(OS_BOOT)
-> > -#if defined(CMD_BOOTI)
-> > +#if defined(CONFIG_CMD_BOOTI)
->
-> Maybe use IS_ENABLED(CMD_BOOTI) instead?
+--UUCdbVQLBCa3wjQg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-IS_ENABLED(CONFIG_CMD_BOOTI) I assume. Sure, but I don't think it
-matters as they are equivalent.
-
->
-> >               ulong start, size;
+On Wed, Jul 24, 2024 at 08:37:14AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 23 Jul 2024 at 08:20, Tom Rini <trini@konsulko.com> wrote:
 > >
-> >               if (!booti_setup((ulong)header, &start, &size, 0)) {
-> > @@ -336,7 +336,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
-> >                             spl_image->load_addr, spl_image->size);
-> >                       return 0;
-> >               }
-> > -#elif defined(CMD_BOOTZ)
-> > +#elif defined(CONFIG_CMD_BOOTZ)
->
-> Ditto?
->
-> In any case,
->
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
->
-> Though.... i'm wondering why we are checking for CMD_BOOTI in SPL in the
-> first place?
-
-I suppose it is to enable a feature in SPL only if it will be used in U-Boot?
-
->
-> >               ulong start, end;
+> > On Tue, Jul 23, 2024 at 01:42:59PM +0100, Simon Glass wrote:
+> > > Hi Sughosh,
+> > >
+> > > On Mon, 22 Jul 2024 at 13:59, Sughosh Ganu <sughosh.ganu@linaro.org> =
+wrote:
+> > > >
+> > > > On Mon, 22 Jul 2024 at 18:00, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > On Fri, 5 Jul 2024 at 22:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Jul 04, 2024 at 01:05:34PM +0530, Sughosh Ganu wrote:
+> > > > > >
+> > > > > > > Add a Kconfig symbol to enable getting updates on any memory =
+map
+> > > > > > > changes that might be done by the LMB module. This notificati=
+on
+> > > > > > > mechanism can then be used to have a synchronous view of allo=
+cated and
+> > > > > > > free memory.
+> > > > > > >
+> > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > > ---
+> > > > > > > Changes since V1:
+> > > > > > > * Change the description to highlight only LMB notifications.
+> > > > > > > * Add a separate line for dependencies.
+> > > > > > >
+> > > > > > >  lib/Kconfig | 10 ++++++++++
+> > > > > > >  1 file changed, 10 insertions(+)
+> > > > > > >
+> > > > > > > diff --git a/lib/Kconfig b/lib/Kconfig
+> > > > > > > index 7eea517b3b..b422183a0f 100644
+> > > > > > > --- a/lib/Kconfig
+> > > > > > > +++ b/lib/Kconfig
+> > > > > > > @@ -74,6 +74,16 @@ config HAVE_PRIVATE_LIBGCC
+> > > > > > >  config LIB_UUID
+> > > > > > >       bool
+> > > > > > >
+> > > > > > > +config MEM_MAP_UPDATE_NOTIFY
+> > > > > > > +     bool "Get notified of any changes to the LMB memory map"
+> > > > > > > +     depends on EVENT && LMB && EFI_LOADER
+> > > > > > > +     default y
+> > > > > > > +     help
+> > > > > > > +       Enable this option to get notification on any changes=
+ to the
+> > > > > > > +       memory that is allocated or freed by the LMB module. =
+This will
+> > > > > > > +       allow different modules that allocate memory or maint=
+ain a memory
+> > > > > > > +       map to have a synchronous view of available and alloc=
+ated memory.
+> > > > > >
+> > > > > > This needs to be select'd when it's going to be used, opting ou=
+t of
+> > > > > > making sure memory reservations are obeyed isn't a good idea.
+> > > > >
+> > > > > +1 which begs the question, do we need the config option at all ?
+> > > >
+> > > > The config symbol can be used for removing the code for platforms
+> > > > which do not support EFI ?
+> > >
+> > > I am still of the so-far firm opinion that this can be done once,
+> > > before booting, rather than maintaining two separate tables as we go.
 > >
-> >               if (!bootz_setup((ulong)header, &start, &end)) {
+> > Did you see the part in the thread where he explained the multiple entry
+> > points that would need to be kept in sync?
+>=20
+> Yes, but I'm not sure what they are, nor why a shared function cannot
+> be called twice from two different places.
 
-Regards,
-Simon
+Because we don't want to miss the third or fourth entry point down the
+road. That's why going the other direction makes more sense I believe,
+we won't have a future problem here because we designed with that in
+mind.
+
+--=20
+Tom
+
+--UUCdbVQLBCa3wjQg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmahFQ4ACgkQFHw5/5Y0
+tyzhfAv+MPH7JYJmm/22uwVo4Cx2CI8X4c02gY3rnxNRUhmVhFErI0V8mKpVJOSB
+E71doxkXJCihZlO7OVNqR2lSGZWuOWnOQQ2gLFzR5rKG+Bn3Uny2iU6/9HdD2m2t
+hrbfGV6mHRHoVVlBqVw5xVQVHCS9uxmJOlXYq0voL3ocr4Hpzu1Hw/RFzz6dooq0
+V1JS74/lSsfCzTPbdpqQaPLzGLY292GHON2vI/iwggVgijiW7jEeF1YOWZMi7OKm
+xmC1trURULBwALwDZkZMJWFQYBO7fC05CxuYFAhAepfckktYpZ3xqYqKW4NZuunw
+jySC+ee0DlYsGSXPrak4iVggaMQbZIBxLk8ubd7mf8qDdiznPNc+S2QOL4IRDumE
+ktJFv3XHrFc4oUc2NDJkvs86CpcseA2w1sRi+ULFourpSJlU5iHIASoav2PbTqf9
+1RMLw0PE0qb7/uXVHMiCFcVXhWiEV8BctrPgn/+J2IzlkLzTSLt/i3136XA2Cbt/
+/kZI7cNy
+=8hp1
+-----END PGP SIGNATURE-----
+
+--UUCdbVQLBCa3wjQg--
