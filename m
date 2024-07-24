@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 332A9C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 22:47:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8210EC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 22:47:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A921889D9;
-	Thu, 25 Jul 2024 00:47:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EA2F889A6;
+	Thu, 25 Jul 2024 00:47:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fwBOZ1vM";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="id01VNBW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFF6288929; Thu, 25 Jul 2024 00:47:27 +0200 (CEST)
+ id 3A72C889DC; Thu, 25 Jul 2024 00:47:30 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31FBD889CB
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 00:47:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D694588929
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 00:47:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=fa7d=OZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1721861240;
- bh=gtYfVHkmba4s2XI0nvMd9Z70fLs550YRUn+7ItDPi4g=;
- b=fwBOZ1vMHObQKCpiURmN1NT/81Df7YIIh/SzbKORq10EN+mt1c6maD6i6whEYibDuvky7AL9W
- 41tJUw/Pkm1qFyJ7TtKEcaD5pw0Tq6SmHXS9bwYkn6f05di5IAKxx1ZuAe2zAoq1Ha++vH6chCn
- moortk/weTA4AQDOEb7lGFWwKHEUwvBx8NwoXMcAsFEiDeejFv48hzFeHn/nkJLnyyfB7Oa8Xwm
- Bxcw2BW1P2G6VkqjmVXuCEwBUV8rX91w8qjXXoOorVL2sYgsyCO/pCIrVgeo0fwWJIC9fnBOLKo
- BPHHqwEblY3TiI7eG0Lx3fre8Wh6aDCG/wyQ4d85kdIg==
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1721861245; bh=gxRDUd3ZI7zXF7HmrziDHAnabzH/rYg/a87Dwz/12Sc=;
+ b=id01VNBWZTTeUmbpDnq2PSIHejnkHzRoAAYiYUlq2CySPos4qO+csNNPW3fDBNA+5DvWALLdJ
+ 2GMfXpOvG2JTFjQUOL+b+miyZsdKXD277QWlLiEwGuvfCJ5Uojypc8/lE3ks3G+9Q1Ng2M2aIGv
+ yt5pYUmll5pJ0m+rDGCZuvamlasO4TQ0kb9R2cFF99YCK57b4qlAhuH4EnMeYUofVTY6B5XnGOJ
+ Fyt6ymbPnEQ6CQnWBZ2vhDwZlmlSU+m7YrPYcQd5hzUyFwjkPqzNPw+BbBoAbDaSJ6m1VeZpO4T
+ 9XXCu0HegFvycr0A5nuTChXXCLM9gOnFEV2nNJ6kipEg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
 Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH 1/2] power: regulator: Do not call set_suspend_value with
- -ENODATA
-Date: Wed, 24 Jul 2024 22:47:10 +0000
-Message-ID: <20240724224713.2963301-1-jonas@kwiboo.se>
+Subject: [PATCH 2/2] power: regulator: Consistently return -ENOSYS when ops is
+ unimplemented
+Date: Wed, 24 Jul 2024 22:47:11 +0000
+Message-ID: <20240724224713.2963301-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240724224713.2963301-1-jonas@kwiboo.se>
+References: <20240724224713.2963301-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -50,7 +52,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 66a18477c03061da306c8846
+X-ForwardEmail-ID: 66a1847ac03061da306c885c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,77 +69,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On some boards a PMIC regulator is flagged with regulator-on-in-suspend
-and does not define any suspend or max microvolt, e.g. on Radxa ROCK 3A:
+dev_get_driver_ops() may return NULL when the udevice is invalid.
 
-  vcc_ddr: DCDC_REG3 {
-	regulator-name = "vcc_ddr";
-	regulator-always-on;
-	regulator-boot-on;
-	regulator-initial-mode = <0x2>;
-
-	regulator-state-mem {
-		regulator-on-in-suspend;
-	};
-  };
-
-This result in suspend_uV having the value -ENODATA after probe.
-
-This negative voltage, -ENODATA, gets missinterpreted and result in an
-unexpected voltage being set by autoset.
-
-E.g. on Radxa ROCK 3A the vcc_ddr regulator by default have a normal and
-suspend voltage value of 0.5v. However, due to this missinterpretation
-the suspend voltage end up beind set to 0.5625v instead.
-
-Fix this by skip calling regulator_set_suspend_value() in autoset and
-also protect calling set value ops when input value is -ENODATA.
+Move the ops check to top of functions to consistently return -ENOSYS
+when ops is unimplemented and prevent trying to access uclass plat data,
+also add missing NULL checks to suspend ops.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/power/regulator/regulator-uclass.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/power/regulator/regulator-uclass.c | 24 +++++++++++-----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index 88a8525b3c47..03d39587b315 100644
+index 03d39587b315..009229002920 100644
 --- a/drivers/power/regulator/regulator-uclass.c
 +++ b/drivers/power/regulator/regulator-uclass.c
-@@ -60,6 +60,8 @@ int regulator_set_value(struct udevice *dev, int uV)
- 		return -EINVAL;
- 	if (uc_pdata->max_uV != -ENODATA && uV > uc_pdata->max_uV)
- 		return -EINVAL;
-+	if (uV == -ENODATA)
-+		return -EINVAL;
+@@ -55,6 +55,9 @@ int regulator_set_value(struct udevice *dev, int uV)
+ 	struct dm_regulator_uclass_plat *uc_pdata;
+ 	int ret, old_uV = uV, is_enabled = 0;
  
- 	if (!ops || !ops->set_value)
++	if (!ops || !ops->set_value)
++		return -ENOSYS;
++
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 	if (uc_pdata->min_uV != -ENODATA && uV < uc_pdata->min_uV)
+ 		return -EINVAL;
+@@ -63,9 +66,6 @@ int regulator_set_value(struct udevice *dev, int uV)
+ 	if (uV == -ENODATA)
+ 		return -EINVAL;
+ 
+-	if (!ops || !ops->set_value)
+-		return -ENOSYS;
+-
+ 	if (uc_pdata->ramp_delay) {
+ 		is_enabled = regulator_get_enable(dev);
+ 		old_uV = regulator_get_value(dev);
+@@ -87,6 +87,9 @@ int regulator_set_suspend_value(struct udevice *dev, int uV)
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+ 	struct dm_regulator_uclass_plat *uc_pdata;
+ 
++	if (!ops || !ops->set_suspend_value)
++		return -ENOSYS;
++
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 	if (uc_pdata->min_uV != -ENODATA && uV < uc_pdata->min_uV)
+ 		return -EINVAL;
+@@ -95,9 +98,6 @@ int regulator_set_suspend_value(struct udevice *dev, int uV)
+ 	if (uV == -ENODATA)
+ 		return -EINVAL;
+ 
+-	if (!ops->set_suspend_value)
+-		return -ENOSYS;
+-
+ 	return ops->set_suspend_value(dev, uV);
+ }
+ 
+@@ -105,7 +105,7 @@ int regulator_get_suspend_value(struct udevice *dev)
+ {
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+ 
+-	if (!ops->get_suspend_value)
++	if (!ops || !ops->get_suspend_value)
  		return -ENOSYS;
-@@ -90,6 +92,8 @@ int regulator_set_suspend_value(struct udevice *dev, int uV)
- 		return -EINVAL;
- 	if (uc_pdata->max_uV != -ENODATA && uV > uc_pdata->max_uV)
- 		return -EINVAL;
-+	if (uV == -ENODATA)
-+		return -EINVAL;
  
- 	if (!ops->set_suspend_value)
+ 	return ops->get_suspend_value(dev);
+@@ -140,6 +140,9 @@ int regulator_set_current(struct udevice *dev, int uA)
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+ 	struct dm_regulator_uclass_plat *uc_pdata;
+ 
++	if (!ops || !ops->set_current)
++		return -ENOSYS;
++
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 	if (uc_pdata->min_uA != -ENODATA && uA < uc_pdata->min_uA)
+ 		return -EINVAL;
+@@ -148,9 +151,6 @@ int regulator_set_current(struct udevice *dev, int uA)
+ 	if (uA == -ENODATA)
+ 		return -EINVAL;
+ 
+-	if (!ops || !ops->set_current)
+-		return -ENOSYS;
+-
+ 	return ops->set_current(dev, uA);
+ }
+ 
+@@ -216,7 +216,7 @@ int regulator_set_suspend_enable(struct udevice *dev, bool enable)
+ {
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+ 
+-	if (!ops->set_suspend_enable)
++	if (!ops || !ops->set_suspend_enable)
  		return -ENOSYS;
-@@ -141,6 +145,8 @@ int regulator_set_current(struct udevice *dev, int uA)
- 		return -EINVAL;
- 	if (uc_pdata->max_uA != -ENODATA && uA > uc_pdata->max_uA)
- 		return -EINVAL;
-+	if (uA == -ENODATA)
-+		return -EINVAL;
  
- 	if (!ops || !ops->set_current)
+ 	return ops->set_suspend_enable(dev, enable);
+@@ -226,7 +226,7 @@ int regulator_get_suspend_enable(struct udevice *dev)
+ {
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+ 
+-	if (!ops->get_suspend_enable)
++	if (!ops || !ops->get_suspend_enable)
  		return -ENOSYS;
-@@ -299,7 +305,7 @@ int regulator_autoset(struct udevice *dev)
- 	if (ret == -ENOSYS)
- 		ret = 0;
  
--	if (!ret && uc_pdata->suspend_on) {
-+	if (!ret && uc_pdata->suspend_on && uc_pdata->suspend_uV != -ENODATA) {
- 		ret = regulator_set_suspend_value(dev, uc_pdata->suspend_uV);
- 		if (ret == -ENOSYS)
- 			ret = 0;
+ 	return ops->get_suspend_enable(dev);
 -- 
 2.45.2
 
