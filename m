@@ -4,72 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E877C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 22:17:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1625CC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 22:18:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69A97889CB;
+	by phobos.denx.de (Postfix) with ESMTP id C9369889A6;
 	Thu, 25 Jul 2024 00:17:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oX1lngOv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lpGWB/O8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17F6889AF; Thu, 25 Jul 2024 00:17:45 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 9A13D889BE; Thu, 25 Jul 2024 00:17:47 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12A7388959
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 00:17:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AB21889BD
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 00:17:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5c661e75ff6so187417eaf.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 15:17:42 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5d5aeaa9751so232849eaf.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 15:17:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721859462; x=1722464262; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721859463; x=1722464263; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=o6TkR1NjHJ+Jhp4WATeqXgDUk0yRqnHNNXJWHJKqZAw=;
- b=oX1lngOv5rAiJz3AXpPVrguyr6w7/IeSx2t5Lvc7qI7HcQdfMeRNp3WiSeDq6YH7AV
- AQIdU+3E/Y+p1+AafhgVYXm+8gSxxehCtD9p+IUTN2YRK0B2bArk6VpUgoMw0CXEbJMP
- NTSDroWWe22gpy96+g9nl/W/QAXLIv5Le6Fic=
+ bh=xHIAwyhJQAHO8CL6ZISidU4aJFu1GJDIEQ2Sy9m9b3k=;
+ b=lpGWB/O8IY0wYqOYvRlTaJCHnjuxcIdoH+Ai//kGmZwhjK9HJQz2FgAmoObIlKILYh
+ 9F1ms7HPb/UxH1vWg7QZ8QBaFfHS0f9BcKkOL3H+mnUH/hFB2TJWtYp6sToqxqeWaSc9
+ u1Y9GZt6AeaOOPBrOYkCUsJlRqltX5Sf6wcog=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721859462; x=1722464262;
+ d=1e100.net; s=20230601; t=1721859463; x=1722464263;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=o6TkR1NjHJ+Jhp4WATeqXgDUk0yRqnHNNXJWHJKqZAw=;
- b=h59DtTs/+ZMctO7JEpZO9T1eXORKiRQQX6SvE4EbNcXDyVaafpB/ykfxZK+to8N/MY
- xq7fIOAHVtUmGxgM4YfaMHtAurN4cvEWU7YRpJVzK8dqeJJyX6S6WR+AMTJ+JPH2frvc
- MCQ004EpNHBqhBexd0/9TsFbtkLPnk3uAPwZx0DFNEfWNvy1h1/nJqxznBMiQl7dOWHo
- XV9WcR6QI437mQKXsxRMm0WaqWGYQ5PUzYJecSPqpK7u/ED8cWq7+I8F7VmUXDq+qg/O
- ulRQQvLJNsrzKN+3EC310gH1TyE3JJQN308ZrS0EGGCKK44ZbJhbxXgF0ZpcSYPFITYj
- 74vQ==
+ bh=xHIAwyhJQAHO8CL6ZISidU4aJFu1GJDIEQ2Sy9m9b3k=;
+ b=HhlPVsQ9957BO+tC2lyZYwxy/cv2a84g+AvTIfXPa3pC4dRBPaQuTfL55q9IFn7OSJ
+ Do/mMH8vGm6Nqk1R2gdLp/z8ZszMS/1ztJXmHQ64CMoFy1YwEUukgZ21WayEnGNOuHbH
+ GWl9CApq89XY0KrcoYvTpw8BB4ZMmIQdVsOmaiZoj07WCkVebU8AgPP3rc+EX1NN02TZ
+ CaECvx6QUSAO/ZuWej+59XnIQLC4q9XZa3zaXYB6xS6+NZMXN4xHs335ifgXIOGwsOBP
+ O2tmpNtmPjdCSjtz/gPHqcubT1ZxkmLBdmfLHZR9ChRPx15v/EQMAmP+AZy+CXouLB2X
+ jTcQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUP1Ad1YdgGP8KkIgljQMTgNSNLmuBogN8afV9KmxnGDT8s8FNbTNsPnD1En/ovMRyRKx88/wTTeXL8ecxYrhKmAvPThA==
-X-Gm-Message-State: AOJu0YxmvcDAWSsbnZC4aW4KBwjD8vtDBY/XPpIxwr/ovW6WSsbLqR2v
- szbARz0cMzzCk1WM3XZfDWJqqfQIiemmyQbAaOsaWGh2we0Rl6OCPN/Yscja+wyzOSR7b/VNgcn
- dRNAYwQqyIXwk51dIzuEX4lZNV8eqsmMs4VObTelKP72zOIE=
-X-Google-Smtp-Source: AGHT+IHnocK1snptltGd3ooBJqQ9hQIqCsK9oJ+s/ZF3yVGK9JZzcQ1lLIhFVdyUF+I45P98Uk0A8E8Ew57Pb2VNK3s=
-X-Received: by 2002:a05:6358:6486:b0:1a6:769e:4753 with SMTP id
- e5c5f4694b2df-1acfb96a667mr18061355d.19.1721859461774; Wed, 24 Jul 2024
- 15:17:41 -0700 (PDT)
+ AJvYcCUBuTA4iwG/BF3zpYt+PEfo2TMepUDdzj4meslB6Zglq+35abjpGk353ix+rb3z4iJJgk1P0RUWQGXCHJOAddK4GefQ2A==
+X-Gm-Message-State: AOJu0YyO6LKR3g5zWLvZN7V8p01oGTMrSgujU8rIoD3N1BWJwhmacQD9
+ +bL1CioMxDzJD86zMLjncUx9O67rwgdWsHGwdYPVHRNY7J2EfWhRafD3TbsTsSQTJneZ0YJgygo
+ tR3sHbE9H1e/Q9Gj69W29LuWtKusf8Ey+6xdI
+X-Google-Smtp-Source: AGHT+IFQadUgiFt8ppadKajyvodA3sWFJH7ivGc6xVm+iqL2i6hwZxS8UCjnXW6isjGXuhvDUgtpVRdl7C3Ir7wW4z0=
+X-Received: by 2002:a05:6358:3418:b0:1ac:f346:735a with SMTP id
+ e5c5f4694b2df-1acf891b8c2mr158161655d.28.1721859462966; Wed, 24 Jul 2024
+ 15:17:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240723015555.GE989285@bill-the-cat>
- <trinity-430de174-6a75-482c-b8dd-fde586286c63-1721742246830@3c-app-gmx-bap35>
- <CAFLszTgt90Xne03OH4Z53T77j=ehqUJmK0OAXPNAPS7qm=4__g@mail.gmail.com>
- <trinity-d8537898-e5c7-4ec3-8477-843b24fddf2a-1721841047587@3c-app-gmx-bs37>
-In-Reply-To: <trinity-d8537898-e5c7-4ec3-8477-843b24fddf2a-1721841047587@3c-app-gmx-bs37>
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-5-sughosh.ganu@linaro.org>
+ <20240724205418.GM989285@bill-the-cat>
+In-Reply-To: <20240724205418.GM989285@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 24 Jul 2024 16:17:31 -0600
-Message-ID: <CAFLszThGWXmkvHuzKeYKrxpLU=vP7=_=0ZZijhDagJ1X82OaDQ@mail.gmail.com>
-Subject: Re: Re: [ANN] U-Boot v2024.10-rc1 released
-To: Frank Wunderlich <frank-w@public-files.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Date: Wed, 24 Jul 2024 16:17:32 -0600
+Message-ID: <CAFLszTiY7hDq4x56UDDCEOOHCGKUSfv0HqwA4-y0nFAFpywvFw@mail.gmail.com>
+Subject: Re: [PATCH 04/40] lib: Convert str_to_list() to use alist
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Michal Simek <michal.simek@amd.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,60 +95,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frank,
+Hi Tom,
 
-On Wed, 24 Jul 2024 at 11:10, Frank Wunderlich <frank-w@public-files.de> wrote:
+On Wed, 24 Jul 2024 at 14:54, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi
+> On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
 >
-> > Gesendet: Mittwoch, 24. Juli 2024 um 16:37 Uhr
-> > Von: "Simon Glass" <sjg@chromium.org>
-> > An: "Frank Wunderlich" <frank-w@public-files.de>
-> > Cc: "Tom Rini" <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-> > Betreff: Re: [ANN] U-Boot v2024.10-rc1 released
+> > From: Simon Glass <sjg@chromium.org>
 > >
-> > Hi,
+> > Use this new data structure in the utility function.
 > >
-> > On Tue, 23 Jul 2024 at 07:44, Frank Wunderlich <frank-w@public-files.de> wrote:
-> > >
-> > > Hi,
-> > >
-> > > i notice build-error because of CONFIG_TOOLS_MKEFICAPSULE is set automaticly and does not find an include
-> > >
-> > > https://github.com/frank-w/u-boot/actions/runs/10059612312/job/27805232284
-> > >
-> > > tools/mkeficapsule.c:20:10: fatal error: gnutls/gnutls.h: No such file or directory
-> > >    20 | #include <gnutls/gnutls.h>
-> > >       |          ^~~~~~~~~~~~~~~~~
-> > >
-> > > solved it temporary by adding CONFIG_TOOLS_MKEFICAPSULE=n to my configs/mt7622_bpi-r64_defconfig
-> > >
-> > > commit: https://github.com/frank-w/u-boot/commit/2640a8881d3c6a232575f46b0f2b8a0217b6d639
-> > > fixed pipeline: https://github.com/frank-w/u-boot/actions/runs/10059965071
-> > >
-> > > breaking commit seems to be
-> > >
-> > > b7a625b1ce49 tools: Build mkeficapsule tool by default if EFI_LOADER is set
-> > >
-> > > i have EFI_LOADER set to y,but it is unclear where the header-file should be...i do not find any gnutls.h in my tree
-> >
-> > We should really build all tools always, where possible.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >  lib/strto.c | 35 +++++++++++++++++++----------------
+> >  1 file changed, 19 insertions(+), 16 deletions(-)
 >
-> why require more depencies for tools which are most likely not used by users...in my case i do not need the mkeficapsule ;)
+> This is rather big growth when we didn't already have realloc:
+> 05: lib: Convert str_to_list() to use alist
+>    aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
+>             xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
+>                u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
+>                  function                                   old     new   delta
+>                  realloc                                      -    1120   +1120
+>                  alist_ensure_ptr                             -     140    +140
+>                  alist_expand_to                              -     136    +136
+>                  alist_init                                   -     108    +108
+>                  alist_uninit_move_ptr                        -      76     +76
+>                  alist_add_ptr                                -      72     +72
+>                  alist_uninit                                 -      48     +48
+>                  str_to_list                                204     232     +28
 >
-> the gnutls error i get only in pipeline...maybe on my host i have the required lib somewhere in the common includes of gcc crosscompiler.
->
-> on my laptop i get a different error but also on mkeficapsule tool
->
-> tools/mkeficapsule.c:18:10: fatal error: uuid/uuid.h: No such file or directory
->    18 | #include <uuid/uuid.h>
->       |          ^~~~~~~~~~~~~
->
-> i guess this can be installed with "apt-get install uuid-dev" but why should i fix the depency if i do not need the tool?
+> --
+> Tom
 
-Because it is confusing for packagers to deal with adding special
-config options in order to build all the tools. So we try to build
-them all, always.
+We can just drop this patch, perhaps? It was really just a demo of alist.
 
 Regards,
-Simon
+SImon
