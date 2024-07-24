@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86552C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 10:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E17D7C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 10:27:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20FEC888F6;
-	Wed, 24 Jul 2024 12:19:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CCE4888AA;
+	Wed, 24 Jul 2024 12:27:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="k3q1zfLX";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qbm/VZ0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA34288886; Wed, 24 Jul 2024 12:19:41 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 071D3888E7; Wed, 24 Jul 2024 12:27:48 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22EBC888FB
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 12:19:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFCF9888A5
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 12:27:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-368557c9e93so3487580f8f.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 03:19:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-260dde65a68so3575176fac.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 03:27:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721816377; x=1722421177;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=msXaV3QB0P1wFjMF+8wM9FGD1dBsJDUrwFsPt+oqlx4=;
- b=k3q1zfLXMPZ3XeyTh+w1OrXJOBMHJGNyama1wcXeyv8P+1QVO8uubt4229rQtYckZo
- Vlnuivzkmp517CJ3tjUWCd1fwmjvQvFrhb8cAlw34XjdxVDZ2PctICZzfB3R8TcG/Uee
- m9G3YgDI7zM6hzqQAgh5wFWFZb4NZkhperf4xW18Ft29eGlkaChxzN9WgdDh8q5YT/Aw
- vEDgLQQMe1JQOECP3p58VQdna8GMw2n9GiUbHHB8s5Pdz/ldAQWSm4v0LLtqumT4WDBX
- PuEvX+B513ujjYFertmaHnMZn5AfPby1sJR5jHm2hsSc+YMfMAqylEIdByW/GYiEl5uC
- e9BQ==
+ d=gmail.com; s=20230601; t=1721816864; x=1722421664; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XlJQcsDHbA8KlkzjqyMcGdG4FHUS77/NIg5B8roEwJE=;
+ b=Qbm/VZ0DyQ3ygZzNVOc0KmbOKwhFBVoQxE4GyerCImU1k+wciL8GNLKZZzFLWh0J5L
+ hub2rTPGPXpinz4dCqBxrUXjKkdDH8lSmINbmBWwNQvt9Flw+SI98VuZE2spk7HWIr+u
+ /nUbJ93eWrvE9Qc1DKQ+33Gj+vfCOPoRCV8U3PST2ZJeNF/E+brV7RiUjbG5L2fG9JS7
+ EzpntuVJPJdTWAma/b9eQwg2I/CP5EDM4OvblCWVqPSD30cRCRWkyhFu3gSw4LS7OGOu
+ 3+KigLyxNRWh5TFfPqPgaBiXoCc0NdnDQYfvYyJvKgRG4wBoDmGkBylZnQXgs/mbYIbD
+ avLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721816377; x=1722421177;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=msXaV3QB0P1wFjMF+8wM9FGD1dBsJDUrwFsPt+oqlx4=;
- b=Nq+I2Znk/2VyrHAtFTHK4vG6sKPTK+cllK/xGbwJ1XGs02nPiSgD4c5lqSvzMhIIYR
- U5nJKJz+tN3AO52kPybvWHvUicKjRoGLn2ouiwvEPI2VF1IXURcuRYIi7T8KkFf9++8v
- 4Dm1ms9xv5xixC6Zxm0fuzGm81mB65/+VyDuzKPrKDuZ3v3Hb/JYRuz+s0tvlK9CMaBy
- g8Ml+XnlD35O4+r+AEiXIr0+uEiKib+xBDfPrZIUNABFy3ZwJLbf39u6cQP8wiuJoiF1
- +dWIlHuOMPHzVo7VQr+Szy35I9ILs2ffiiWvvzneCmRMWMsHArObXr7+lyXqvpDvDmHa
- zbMg==
+ d=1e100.net; s=20230601; t=1721816864; x=1722421664;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XlJQcsDHbA8KlkzjqyMcGdG4FHUS77/NIg5B8roEwJE=;
+ b=Mdpm627XFQ7iyr8MC96Xl4lKvCgfzhAMt9luIipOJ+ZdHPskeo2tE2Jf7e4M4ya86s
+ zzt6tY7WI/4CsppgpTV2aHrCHBmJTzvKKE6Dkv2E8P86omwr/3QFhcwaOZUj8HK3sVfM
+ pWV2QvXUNUgyB/zAdOTGAQL7sr1+mrH3j4+R/PXNpi57jfGnmB0i5sFYJR7BdM1dUcIQ
+ U3vQWSTCqXklr+5c152pdGd4i9+0cqdTze7QqycFuL8FSHbRXIYr3uba/F9+bEYs4T0I
+ FLAJ0sRx7KELebbKewiRvK/Gaxzwenc1rOd3bBLkJBIWBl4meAzfxUT+GwBP/fZ3Xvai
+ QSvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVfsGqzfF3+eGxt8QdinC5WNKmOS525YYVnoKMK3NuuJRqGAjxU2N04LLPkGvH1+dWWXkAtC/N3Ilmew/06Xq+xHm3dYA==
-X-Gm-Message-State: AOJu0YyBs1sOioWekAnEMp96FgxzqtZbUMElPkzcajNLhQeY+CQY6FEr
- C0GQP6nUJq6CRK9FTRNUogsfmVLHAD8JmL9q3r4TFmtQ0wjCSBKGirkOMT9fCqE=
-X-Google-Smtp-Source: AGHT+IGdw4IZ6PxjLsP/iufK51eIBYyPt5VCsupbDuIra1Cx3672sxt4OKWR0c4gW4PkPOSqPnrwyQ==
-X-Received: by 2002:a05:6000:2c3:b0:367:434f:caa2 with SMTP id
- ffacd0b85a97d-369bad3a81amr10023291f8f.0.1721816377290; 
- Wed, 24 Jul 2024 03:19:37 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427f937348bsm23336165e9.18.2024.07.24.03.19.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 03:19:36 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marex@denx.de>, Zixun LI <admin@hifiphile.com>, Lukasz
- Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Zixun LI <zli@ogga.fr>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 6/7] usb: gadget: atmel: Add attach/detach support
-In-Reply-To: <19e38775-8e52-4581-8efb-246188b06734@denx.de>
-References: <20240723131817.262596-1-zli@ogga.fr>
- <20240723131817.262596-7-zli@ogga.fr>
- <19e38775-8e52-4581-8efb-246188b06734@denx.de>
-Date: Wed, 24 Jul 2024 12:19:36 +0200
-Message-ID: <871q3j5byf.fsf@baylibre.com>
+ AJvYcCUl1PulFeKYJTdjkzHScaSDE6ry8bXZbTpMDOE59rzBlK6t7XfBe+iu2PBbZLTiGgIEsaohvp+F1JMM7qMHRnLuaS2WBQ==
+X-Gm-Message-State: AOJu0YwjV5pkeOq5j0CXdHlEVoqYD+JjZ9hqETevLWYxUaJiRJjloUPO
+ CE52MStFLgactZBzJUOq8YVX73x0gu6f7jT7uBkcsMX8OeGBfN/jTpz7N/FXNITHjyqpn5L20oI
+ Eouy8VuOE2T36JsyWq2FbrfCeJ6Q=
+X-Google-Smtp-Source: AGHT+IHcf0bonm/DRUS5YJ/+HuzVg89qDsJRxxkAeKVBhYIt5OS8uyZ3rMA2OYPqNtCZ+cBdl3Fxf2zUSVZ1xInNxhA=
+X-Received: by 2002:a05:6870:c10f:b0:25e:1532:fa93 with SMTP id
+ 586e51a60fabf-2648ca4420emr1776498fac.15.1721816864317; Wed, 24 Jul 2024
+ 03:27:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20240723181439.7089-1-semen.protsenko@linaro.org>
+In-Reply-To: <20240723181439.7089-1-semen.protsenko@linaro.org>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Wed, 24 Jul 2024 19:27:33 +0900
+Message-ID: <CALrBrZ0cgPVpboGKBe=QvxaWhZWLRH9=j3oASniYJvQfCD9xpw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/5] arm: exynos: Enable TRNG for E850-96 board
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Anand Moon <linux.amoon@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Lukasz Majewski <lukma@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,24 +95,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mar., juil. 23, 2024 at 15:36, Marek Vasut <marex@denx.de> wrote:
+Hi,
 
-> On 7/23/24 3:18 PM, Zixun LI wrote:
->> Add controller attach/detach support by using
->> usb_gadget_ops.pullup() method.
+
+2024=EB=85=84 7=EC=9B=94 24=EC=9D=BC (=EC=88=98) 03:14, Sam Protsenko <seme=
+n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+
+> This series enables True Random Number Generator (TRNG) for E850-96
+> board. Here is a short breakdown of features implemented in this series:
 >
-> It is called 'function' in C, not 'method'. I think 'method' is C++ or 
-> maybe Java ?
-
-Agreed, 'function' is more appropriate wording.
-
-Zixun, if you need to respin a v4 please consider using 'function'.
-
-Otherwise I can fix it up while applying !
-
+>   1. Load LDFW (Loadable Firmware) on E850-96 board. It's needed to make
+>      TRNG SMC commands functional. To do so, add the default eMMC
+>      partition table and implement reading and applying LDFW in
+>      board_init().
+>   2. Add Exynos TRNG driver
+>   3. Enable Exynos TRNG driver on E850-96 board. It requires SSS clocks
+>      to be enabled, so add those clocks as well.
 >
-> In any case:
+> With this series it's possible to generate random numbers in U-Boot
+> (e.g. using 'rng' command). The main reason for RNG enablement on
+> E850-96 board -- it's needed for EFI_RNG_PROTOCOL and kaslr, so it's one
+> of the requirements to enable EFI boot support on E850-96 board, which
+> in turn is needed (among other things) for EBBR spec and SystemReady IR
+> certification. With this series it's also possible to use TRNG in Linux
+> kernel (which was recently added, see [1] for details), as Linux kernel
+> Exynos TRNG driver also relies on LDFW firmware to be loaded in the
+> bootloader.
 >
-> Reviewed-by: Marek Vasut <marex@denx.de>
+> Changes in v3:
+>   - Fixed applying the defconfig changes (patch 5/5)
+>   - Rebased on top of the most recent U-Boot/master
 >
-> Thanks !
+> Changes in v2:
+>   - Addressed comments for [PATCH 4/5] rng: Add Exynos TRNG driver
+>
+> Sam Protsenko (5):
+>   board: samsung: e850-96: Add default partitions
+>   board: samsung: e850-96: Load LDFW firmware on board init
+>   clk: exynos: Add SSS clocks for Exynos850
+>   rng: Add Exynos TRNG driver
+>   arm: exynos: Enable TRNG on E850-96 board
+>
+>  arch/arm/dts/exynos850-e850-96-u-boot.dtsi |  11 +
+>  arch/arm/mach-exynos/Kconfig               |   2 +
+>  board/samsung/e850-96/Makefile             |   4 +-
+>  board/samsung/e850-96/e850-96.c            |   6 +-
+>  board/samsung/e850-96/e850-96.env          |  26 ++
+>  board/samsung/e850-96/fw.c                 | 131 ++++++++++
+>  board/samsung/e850-96/fw.h                 |  12 +
+>  configs/e850-96_defconfig                  |   1 +
+>  drivers/clk/exynos/clk-exynos850.c         |  10 +
+>  drivers/rng/Kconfig                        |  13 +
+>  drivers/rng/Makefile                       |   1 +
+>  drivers/rng/exynos-trng.c                  | 291 +++++++++++++++++++++
+>  12 files changed, 504 insertions(+), 4 deletions(-)
+>  create mode 100644 board/samsung/e850-96/e850-96.env
+>  create mode 100644 board/samsung/e850-96/fw.c
+>  create mode 100644 board/samsung/e850-96/fw.h
+>  create mode 100644 drivers/rng/exynos-trng.c
+>
+> --
+> 2.39.2
+>
+
+applied to u-boot-samsung.
+
+Thanks.
+Minkyu Kang.
