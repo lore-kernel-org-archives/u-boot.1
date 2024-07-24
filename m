@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D832C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:21:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D51FC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01E5188886;
-	Wed, 24 Jul 2024 11:21:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B34C488876;
+	Wed, 24 Jul 2024 11:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Cd9YpX/r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oj+4QcjJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCB0988881; Wed, 24 Jul 2024 11:21:52 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 98A4E888D7; Wed, 24 Jul 2024 11:26:56 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38CF888886
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:21:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B79D88876
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:26:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4266f3e0df8so47218965e9.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 02:21:46 -0700 (PDT)
+ spf=fail smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-7a1be7b7bb5so707034a12.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 02:26:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721812905; x=1722417705;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cEpIq1dFDodHFZ3CR8nNl9CNDnPWVWqBCR9Y7u8JCs0=;
- b=Cd9YpX/rk3hMySxBE+Sf3ZjSQz/4bVAILr9kDAjqCv2aUZ2PeDKxjmks1suj3YD4Ix
- X3fq1o2OoDs3/rb3OoOKeSG5tXu5Smb8biHbnNXmVDRaNQYSdxh+TH/ZIKC6+LVfffAe
- 4MWbW4iUE9qAS8RtKLZ5rkulRwLIYVeNm8BfKFM8ORHateCiKFEUegLk42x9n/qZAvAW
- 4UY/0nIVe2jhSRSFhi4DdNRuXQvD0EycDT294QLgZRzDjucihisMa7DK1tEUJRTad9hE
- vaj4odn0ZNWUTtnbT6FNj2WSBXSulbiZEGQb5uvFZ6QSc1ojmbBzoIIsuzKJmqMVacn4
- IPDw==
+ d=linaro.org; s=google; t=1721813206; x=1722418006; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1eXvUVqatXkA+zjoiaNY6zUmYQYdQGSAleIJBPmyOA0=;
+ b=oj+4QcjJLehotyX7+cgrs9fAGtDx/sgQk41kzzdKg3V05o7QY6JHc8gQrxCBDKINHJ
+ 1JIYfkHZNrC9NDix/uHjmZrRkykL4BhrDoAaF6pYZ8tQHcRjknk+Fj4c8yv/OV0F3QNE
+ vB5peQmlc9v/beoz6wKcZyNDwQEnxs1JADnbl+IhEJeDt9fr9/63YWESR5h/0nXiNkOx
+ hmzUXijfUJEApG1WME8C5ilyb1JUC+h2DO1ZL9+uV5JeXHG9CmDbQ20NVd8SGESGAXVK
+ jieAlSO8Eef1UTtEX5lXmyKhJeAd1cmvVgwHWI2NOMUa7ES5/GpAzS9cojGehC6gsJGO
+ da0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721812905; x=1722417705;
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cEpIq1dFDodHFZ3CR8nNl9CNDnPWVWqBCR9Y7u8JCs0=;
- b=xEtfnPdhOfQeVP53cy5tseR1/urUWN6kNYCgInF51EPCGin3ufD5kWDjypI0c9i5nj
- /qYjypvg41poi5LNlBgUnk7FG1PqmaQKXTVMpHC9mycHdEWaPjwK6Xz6ycvrZQGZ79pC
- 2zHzej2secxaPVHSLBVrZEMOqpfnEQ6c71UPAGdtex7iBWvzlmUp/ny0COha6ENYhNYh
- MDGXYx2YePgTniCW80DpAtWfSWhSocLpovn/ML+HWD6wq2juCmOfynq4TD9pWrCDU8M4
- PFG8PNHEyQ8G/MaWK9s+Z94zwgtyl91hk3jQe0sDyTXkp8MnehU6qoB8InsgmQjJgp6/
- 8TFw==
+ d=1e100.net; s=20230601; t=1721813206; x=1722418006;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1eXvUVqatXkA+zjoiaNY6zUmYQYdQGSAleIJBPmyOA0=;
+ b=YTbBLJyiHaGO4OLSjdukkRn9Jumc8rGPfHPR0b3WkbK1LkNAKMnD7XbPa5/mCxkuaB
+ eSM1sCpU/xUEEZmCwPGGQb161uVfI7xf4K1FqgxpEJRgksivYMOMT6vC9Md2bkU6kyiV
+ fUeSDW/i69mkiM2e4ZojHjqYNn9859F53Uuz52TbdOnS2Doaum/xWC/v2K8H9Gw4TWVt
+ TQsqsERqtSw8QmGkcSy2eGvVKUVAgzm6bZgwDW8sJNCXptpDrdin48ukxFPsDrnw9Znz
+ O9MD/Dd1hom7LrAALXOnA5fwk1v2kq36s+EuL6UGG2ebSQr6jFrGcs2zS/1V8b1YRDQA
+ tsXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCR/1gAHPzZHdGdaq7HLus9QPdiOqFSKuITOC6atp+q8XuMLCdeDtzBHb7msnXIgMhJDmtSG5lEsubH6Z2ysYWbbL7Bg==
-X-Gm-Message-State: AOJu0YyBRqtvE03OIz7xAGGVQr2s/GrPS0m94tS3+AKo5zN0BjifGeS9
- NMzczbW/YW6Fzc3yUOZvZsMHvDQcr4CGNnXaIKfgusFeFj3aFnrJRezIcjsvVpE=
-X-Google-Smtp-Source: AGHT+IFZ+C+hPwxoohUWsxga9yTji5aRDyiHs659BgwglEitnu4w8ArrFzD1eD+ESFv1NRfISosFzg==
-X-Received: by 2002:a05:600c:45d2:b0:426:6945:75b8 with SMTP id
- 5b1f17b1804b1-427f95c1df2mr10642955e9.31.1721812905186; 
- Wed, 24 Jul 2024 02:21:45 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427f9397285sm19677825e9.27.2024.07.24.02.21.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 02:21:44 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Dmitrii Merkurev
- <dimorinny@google.com>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-In-Reply-To: <20240723141844.GF989285@bill-the-cat>
-References: <20240723141844.GF989285@bill-the-cat>
-Date: Wed, 24 Jul 2024 11:21:43 +0200
-Message-ID: <87ttgf5emw.fsf@baylibre.com>
+ AJvYcCX9D3HIuOsSZlJZ+wT4zDgN/q7vvwQWIUt40t/Puf6AV0pEiFLGOFLXTYgkdlzL/3B9ca+o5FHQT4tZ6JyihcfL2t2YPQ==
+X-Gm-Message-State: AOJu0YyKf7waUXjTYztA9XNaD9LuZiMY8rmkg0b60IKtmWhfU8Jmlun0
+ LIiEJ2EKq818HRxpV/TiFS652ucg1dJVpn/KsS7ROE4ZGsjphf12aMlFM6SEk2ccJ41lhmmCYYB
+ vO5B/oq3EcMYNeQdvXhqaaW4d5kZOEwgKiC76RQ==
+X-Google-Smtp-Source: AGHT+IFYmp1Xmvh8wnlrHyjqHOi+hfGMzqZe72UrxvkOBorK8Nemin6HF/LQ0X+Bj0tNst4XFkAJWuWeALw9xo1vEgA=
+X-Received: by 2002:a05:6a21:a24b:b0:1c4:67c1:f6fb with SMTP id
+ adf61e73a8af0-1c467c1fbf6mr488157637.41.1721813204647; Wed, 24 Jul 2024
+ 02:26:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
+ <20240719-b4-dynamic-uuid-v5-5-8a83de3fe3dc@linaro.org>
+In-Reply-To: <20240719-b4-dynamic-uuid-v5-5-8a83de3fe3dc@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 24 Jul 2024 12:26:07 +0300
+Message-ID: <CAC_iWj+LrXCp4zcLVqESSiJixM6t_7LJ0ekzt7q3DZgYK6vPZg@mail.gmail.com>
+Subject: Re: [PATCH v5 05/11] sandbox: switch to dynamic UUIDs
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,307 +92,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, 19 Jul 2024 at 15:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Migrate sandbox over to generating it's capsule update image GUIDs
+> dynamically from the namespace and board/image info. Update the
+> reference and tests to use the new GUIDs.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  board/sandbox/sandbox.c                                  | 16 ----------------
+>  include/sandbox_efi_capsule.h                            |  6 +++---
+>  .../tests/test_efi_capsule/test_capsule_firmware_fit.py  |  2 +-
+>  .../tests/test_efi_capsule/test_capsule_firmware_raw.py  |  8 ++++----
+>  .../test_efi_capsule/test_capsule_firmware_signed_fit.py |  2 +-
+>  .../test_efi_capsule/test_capsule_firmware_signed_raw.py |  4 ++--
+>  test/py/tests/test_efi_capsule/version.dts               |  6 +++---
+>  tools/binman/etype/efi_capsule.py                        |  2 +-
+>  tools/binman/ftest.py                                    |  2 +-
+>  9 files changed, 16 insertions(+), 32 deletions(-)
+>
+> diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+> index 802596569c64..d97945e58fcf 100644
+> --- a/board/sandbox/sandbox.c
+> +++ b/board/sandbox/sandbox.c
+> @@ -31,36 +31,20 @@
+>   */
+>  gd_t *gd;
+>
+>  #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+> -/* GUIDs for capsule updatable firmware images */
+> -#define SANDBOX_UBOOT_IMAGE_GUID \
+> -       EFI_GUID(0x09d7cf52, 0x0720, 0x4710, 0x91, 0xd1, \
+> -                0x08, 0x46, 0x9b, 0x7f, 0xe9, 0xc8)
+> -
+> -#define SANDBOX_UBOOT_ENV_IMAGE_GUID \
+> -       EFI_GUID(0x5a7021f5, 0xfef2, 0x48b4, 0xaa, 0xba, \
+> -                0x83, 0x2e, 0x77, 0x74, 0x18, 0xc0)
+> -
+> -#define SANDBOX_FIT_IMAGE_GUID \
+> -       EFI_GUID(0x3673b45d, 0x6a7c, 0x46f3, 0x9e, 0x60, \
+> -                0xad, 0xab, 0xb0, 0x3f, 0x79, 0x37)
+> -
+>  struct efi_fw_image fw_images[] = {
+>  #if defined(CONFIG_EFI_CAPSULE_FIRMWARE_RAW)
+>         {
+> -               .image_type_id = SANDBOX_UBOOT_IMAGE_GUID,
+>                 .fw_name = u"SANDBOX-UBOOT",
+>                 .image_index = 1,
+>         },
+>         {
+> -               .image_type_id = SANDBOX_UBOOT_ENV_IMAGE_GUID,
+>                 .fw_name = u"SANDBOX-UBOOT-ENV",
+>                 .image_index = 2,
+>         },
+>  #elif defined(CONFIG_EFI_CAPSULE_FIRMWARE_FIT)
+>         {
+> -               .image_type_id = SANDBOX_FIT_IMAGE_GUID,
+>                 .fw_name = u"SANDBOX-FIT",
+>                 .image_index = 1,
+>         },
+>  #endif
+> diff --git a/include/sandbox_efi_capsule.h b/include/sandbox_efi_capsule.h
+> index 3e288e8a84a2..84d45ec5cfd5 100644
+> --- a/include/sandbox_efi_capsule.h
+> +++ b/include/sandbox_efi_capsule.h
+> @@ -5,11 +5,11 @@
+>
+>  #if !defined(_SANDBOX_EFI_CAPSULE_H_)
+>  #define _SANDBOX_EFI_CAPSULE_H_
+>
+> -#define SANDBOX_UBOOT_IMAGE_GUID       "09d7cf52-0720-4710-91d1-08469b7fe9c8"
+> -#define SANDBOX_UBOOT_ENV_IMAGE_GUID   "5a7021f5-fef2-48b4-aaba-832e777418c0"
+> -#define SANDBOX_FIT_IMAGE_GUID         "3673b45d-6a7c-46f3-9e60-adabb03f7937"
+> +#define SANDBOX_UBOOT_IMAGE_GUID       "985f2937-7c2e-5e9a-8a5e-8e063312964b"
+> +#define SANDBOX_UBOOT_ENV_IMAGE_GUID   "9e339473-c2eb-530a-a69b-0cd6bbbed40e"
+> +#define SANDBOX_FIT_IMAGE_GUID         "46610520-469e-59dc-a8dd-c11832b877ea"
+>  #define SANDBOX_INCORRECT_GUID         "058b7d83-50d5-4c47-a195-60d86ad341c4"
+>
+>  #define UBOOT_FIT_IMAGE                        "u-boot_bin_env.itb"
+>
+> diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
+> index 11bcdc2bb293..a726c71c1138 100644
+> --- a/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
+> +++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
+> @@ -146,9 +146,9 @@ class TestEfiCapsuleFirmwareFit():
+>                  verify_content(u_boot_console, '100000', 'u-boot:Old')
+>                  verify_content(u_boot_console, '150000', 'u-boot-env:Old')
+>              else:
+>                  # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
+> -                assert '3673B45D-6A7C-46F3-9E60-ADABB03F7937' in ''.join(output)
+> +                assert '985F2937-7C2E-5E9A-8A5E-8E063312964B' in ''.join(output)
+>                  assert 'ESRT: fw_version=5' in ''.join(output)
+>                  assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
+>
+>                  verify_content(u_boot_console, '100000', 'u-boot:New')
+> diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+> index f3a2dff5c2c8..8a790405c7c4 100644
+> --- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+> +++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+> @@ -144,12 +144,12 @@ class TestEfiCapsuleFirmwareRaw:
+>                  'env set dfu_alt_info "sf 0:0=u-boot-bin raw 0x100000 0x50000;u-boot-env raw 0x150000 0x200000"',
+>                  'efidebug capsule esrt'])
+>
+>              # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is in the ESRT.
+> -            assert '5A7021F5-FEF2-48B4-AABA-832E777418C0' in ''.join(output)
+> +            assert '9E339473-C2EB-530A-A69B-0CD6BBBED40E' in ''.join(output)
+>
+>              # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
+> -            assert '09D7CF52-0720-4710-91D1-08469B7FE9C8' in ''.join(output)
+> +            assert '985F2937-7C2E-5E9A-8A5E-8E063312964B' in ''.join(output)
+>
+>              check_file_removed(u_boot_console, disk_img, capsule_files)
+>
+>              expected = 'u-boot:Old' if capsule_auth else 'u-boot:New'
+> @@ -198,14 +198,14 @@ class TestEfiCapsuleFirmwareRaw:
+>                  verify_content(u_boot_console, '100000', 'u-boot:Old')
+>                  verify_content(u_boot_console, '150000', 'u-boot-env:Old')
+>              else:
+>                  # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
+> -                assert '09D7CF52-0720-4710-91D1-08469B7FE9C8' in ''.join(output)
+> +                assert '985F2937-7C2E-5E9A-8A5E-8E063312964B' in ''.join(output)
+>                  assert 'ESRT: fw_version=5' in ''.join(output)
+>                  assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
+>
+>                  # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is in the ESRT.
+> -                assert '5A7021F5-FEF2-48B4-AABA-832E777418C0' in ''.join(output)
+> +                assert '9E339473-C2EB-530A-A69B-0CD6BBBED40E' in ''.join(output)
+>                  assert 'ESRT: fw_version=10' in ''.join(output)
+>                  assert 'ESRT: lowest_supported_fw_version=7' in ''.join(output)
+>
+>                  verify_content(u_boot_console, '100000', 'u-boot:New')
+> diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py
+> index 44a58baa3106..debbce8bdbdf 100644
+> --- a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py
+> +++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py
+> @@ -156,9 +156,9 @@ class TestEfiCapsuleFirmwareSignedFit():
+>                  'u-boot-env raw 0x150000 0x200000"',
+>                  'efidebug capsule esrt'])
+>
+>              # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
+> -            assert '3673B45D-6A7C-46F3-9E60-ADABB03F7937' in ''.join(output)
+> +            assert '46610520-469E-59DC-A8DD-C11832B877EA' in ''.join(output)
+>              assert 'ESRT: fw_version=5' in ''.join(output)
+>              assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
+>
+>              verify_content(u_boot_console, '100000', 'u-boot:New')
+> diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
+> index 83a10e160b8c..439bd71b3a7d 100644
+> --- a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
+> +++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
+> @@ -150,14 +150,14 @@ class TestEfiCapsuleFirmwareSignedRaw():
+>                  'u-boot-env raw 0x150000 0x200000"',
+>                  'efidebug capsule esrt'])
+>
+>              # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
+> -            assert '09D7CF52-0720-4710-91D1-08469B7FE9C8' in ''.join(output)
+> +            assert '985F2937-7C2E-5E9A-8A5E-8E063312964B' in ''.join(output)
+>              assert 'ESRT: fw_version=5' in ''.join(output)
+>              assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
+>
+>              # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is in the ESRT.
+> -            assert '5A7021F5-FEF2-48B4-AABA-832E777418C0' in ''.join(output)
+> +            assert '9E339473-C2EB-530A-A69B-0CD6BBBED40E' in ''.join(output)
+>              assert 'ESRT: fw_version=10' in ''.join(output)
+>              assert 'ESRT: lowest_supported_fw_version=7' in ''.join(output)
+>
+>              verify_content(u_boot_console, '100000', 'u-boot:New')
+> diff --git a/test/py/tests/test_efi_capsule/version.dts b/test/py/tests/test_efi_capsule/version.dts
+> index 07850cc6064c..3aebb5b64fbd 100644
+> --- a/test/py/tests/test_efi_capsule/version.dts
+> +++ b/test/py/tests/test_efi_capsule/version.dts
+> @@ -7,18 +7,18 @@
+>         firmware-version {
+>                 image1 {
+>                         lowest-supported-version = <3>;
+>                         image-index = <1>;
+> -                       image-type-id = "09D7CF52-0720-4710-91D1-08469B7FE9C8";
+> +                       image-type-id = "985F2937-7C2E-5E9A-8A5E-8E063312964B";
+>                 };
+>                 image2 {
+>                         lowest-supported-version = <7>;
+>                         image-index = <2>;
+> -                       image-type-id = "5A7021F5-FEF2-48B4-AABA-832E777418C0";
+> +                       image-type-id = "9E339473-C2EB-530A-A69B-0CD6BBBED40E";
+>                 };
+>                 image3 {
+>                         lowest-supported-version = <3>;
+>                         image-index = <1>;
+> -                       image-type-id = "3673B45D-6A7C-46F3-9E60-ADABB03F7937";
+> +                       image-type-id = "46610520-469E-59DC-A8DD-C11832B877EA";
+>                 };
+>         };
+>  };
+> diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
+> index 751f654bf310..7ed016432074 100644
+> --- a/tools/binman/etype/efi_capsule.py
+> +++ b/tools/binman/etype/efi_capsule.py
+> @@ -23,9 +23,9 @@ def get_binman_test_guid(type_str):
+>      Returns:
+>          The actual GUID value (str)
+>      """
+>      TYPE_TO_GUID = {
+> -        'binman-test' : '09d7cf52-0720-4710-91d1-08469b7fe9c8'
+> +        'binman-test' : '985f2937-7c2e-5e9a-8a5e-8e063312964b'
+>      }
+>
+>      return TYPE_TO_GUID[type_str]
+>
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index e4da04030a51..735413ddb0db 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -123,9 +123,9 @@ TEE_ADDR = 0x5678
+>
+>  # Firmware Management Protocol(FMP) GUID
+>  FW_MGMT_GUID = '6dcbd5ed-e82d-4c44-bda1-7194199ad92a'
+>  # Image GUID specified in the DTS
+> -CAPSULE_IMAGE_GUID = '09d7cf52-0720-4710-91d1-08469b7fe9c8'
+> +CAPSULE_IMAGE_GUID = '985F2937-7C2E-5E9A-8A5E-8E063312964B'
+>  # Windows cert GUID
+>  WIN_CERT_TYPE_EFI_GUID = '4aafd29d-68df-49ee-8aa9-347d375665a7'
+>  # Empty capsule GUIDs
+>  EMPTY_CAPSULE_ACCEPT_GUID = '0c996046-bcc0-4d04-85ec-e1fcedf1c6f8'
+>
+> --
+> 2.45.2
+>
 
-Thank you for the report.
-
-On mar., juil. 23, 2024 at 08:18, Tom Rini <trini@konsulko.com> wrote:
-
-> Here's the latest report.
->
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Jul 22, 2024, 8:07 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->
->
-> Hi,
->
-> Please find the latest report on new defect(s) introduced to Das U-Boot
-> found with Coverity Scan.
->
-> 8 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-> 3 defect(s), reported by Coverity Scan earlier, were marked fixed in the
-> recent build analyzed by Coverity Scan.
->
-> New defect(s) Reported-by: Coverity Scan
-> Showing 8 of 8 defect(s)
->
->
-> ** CID 501795:  Insecure data handling  (TAINTED_SCALAR)
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501795:  Insecure data handling  (TAINTED_SCALAR)
-> /boot/bootmeth_android.c: 96 in scan_boot_part()
-> 90      if (!is_android_boot_image_header(buf)) {
-> 91              free(buf);
-> 92              return log_msg_ret("header", -ENOENT);
-> 93      }
-> 94
-> 95      priv->header_version = ((struct andr_boot_img_hdr_v0
-> *)buf)->header_version;
->>>>     CID 501795:  Insecure data handling  (TAINTED_SCALAR)
->>>>     Passing tainted expression "*buf" to "dlfree", which uses it as an
-> offset.
-
-scan_boot_part() generates this warning, but scan_vendor_boot_part()
-does not.
-Both functions follow a similar code flow.
-
-The only reason scan_boot_part() generates this warning, is because of
-the downcast into struct andr_boot_img_hdr_v0.
-
-We can't change char* buf into struct andr_boot_img_hdr_v0 because we
-need to be block aligned when calling blk_dread().
-
-Per my understanding tainted data means it comes from user input (which
-is true for both scan_boot_part() and scan_vendor_boot_part() because
-both read from eMMC, which can be consider "user input".
-
-Since I don't see any particular problem with this code I propose that
-we ignore this warning.
-
-
-> 96      free(buf);
-> 97
-> 98      return 0;
-> 99     }
-> 100
-> 101     static int scan_vendor_boot_part(struct udevice *blk, struct
-> android_priv *priv)
->
-> ** CID 501794:  Memory - corruptions  (OVERRUN)
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501794:  Memory - corruptions  (OVERRUN)
-> /lib/tpm_tcg2.c: 640 in tcg2_measurement_init()
-> 634             rc = tcg2_log_prepare_buffer(*dev, elog,
-> ignore_existing_log);
-> 635             if (rc) {
-> 636                     tcg2_measurement_term(*dev, elog, true);
-> 637                     return rc;
-> 638             }
-> 639
->>>>     CID 501794:  Memory - corruptions  (OVERRUN)
->>>>     Overrunning array "version_string" of 50 bytes by passing it to a
-> function which accesses it at byte offset 63.
-> 640             rc = tcg2_measure_event(*dev, elog, 0, EV_S_CRTM_VERSION,
-> 641                                     strlen(version_string) + 1,
-> 642                                     (u8 *)version_string);
-> 643             if (rc) {
-> 644                     tcg2_measurement_term(*dev, elog, true);
-> 645                     return rc;
->
-> ** CID 501793:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/tpm-v2.c: 909 in tpm2_allow_extend()
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501793:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/tpm-v2.c: 909 in tpm2_allow_extend()
-> 903             int rc;
-> 904
-> 905             rc = tpm2_get_pcr_info(dev, &pcrs);
-> 906             if (rc)
-> 907                     return false;
-> 908
->>>>     CID 501793:  Insecure data handling  (TAINTED_SCALAR)
->>>>     Using tainted variable "pcrs.count" as a loop boundary.
-> 909             for (i = 0; i < pcrs.count; i++) {
-> 910                     if (tpm2_is_active_pcr(&pcrs.selection[i]) &&
-> 911                         !tpm2_algorithm_to_len(pcrs.selection[i].hash))
-> 912                             return false;
-> 913             }
-> 914
-> 915             return true;
->
-> ** CID 501792:  Control flow issues  (DEADCODE)
-> /lib/efi_loader/efi_helper.c: 137 in efi_load_option_dp_join()
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501792:  Control flow issues  (DEADCODE)
-> /lib/efi_loader/efi_helper.c: 137 in efi_load_option_dp_join()
-> 131             if (fdt_dp) {
-> 132                     struct efi_device_path *tmp_dp = *dp;
-> 133
-> 134                     *dp = efi_dp_concat(tmp_dp, fdt_dp, *dp_size);
-> 135                     efi_free_pool(tmp_dp);
-> 136                     if (!dp)
->>>>     CID 501792:  Control flow issues  (DEADCODE)
->>>>     Execution cannot reach this statement: "return
-> 9223372036854775817UL;".
-> 137                             return EFI_OUT_OF_RESOURCES;
-> 138                     *dp_size += efi_dp_size(fdt_dp) + sizeof(END);
-> 139             }
-> 140
-> 141             *dp_size += sizeof(END);
-> 142
->
-> ** CID 501791:    (DEADCODE)
-> /drivers/usb/gadget/ether.c: 2219 in eth_bind()
-> /drivers/usb/gadget/ether.c: 2110 in eth_bind()
-> /drivers/usb/gadget/ether.c: 2071 in eth_bind()
-> /drivers/usb/gadget/ether.c: 2089 in eth_bind()
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501791:    (DEADCODE)
-> /drivers/usb/gadget/ether.c: 2219 in eth_bind()
-> 2213                    out_ep->name, in_ep->name,
-> 2214                    status_ep ? " STATUS " : "",
-> 2215                    status_ep ? status_ep->name : ""
-> 2216                    );
-> 2217            printf("MAC %pM\n", pdata->enetaddr);
-> 2218
->>>>     CID 501791:    (DEADCODE)
->>>>     Execution cannot reach the expression "rndis" inside this
-> statement: "if (cdc || rndis)
->   printf(...".
-> 2219            if (cdc || rndis)
-> 2220                    printf("HOST MAC %02x:%02x:%02x:%02x:%02x:%02x\n",
-> 2221                            dev->host_mac[0], dev->host_mac[1],
-> 2222                            dev->host_mac[2], dev->host_mac[3],
-> 2223                            dev->host_mac[4], dev->host_mac[5]);
-> 2224
-> /drivers/usb/gadget/ether.c: 2110 in eth_bind()
-> 2104                    device_desc.bNumConfigurations = 2;
-> 2105
-> 2106            if (gadget_is_dualspeed(gadget)) {
-> 2107                    if (rndis)
-> 2108                            dev_qualifier.bNumConfigurations = 2;
-> 2109                    else if (!cdc)
->>>>     CID 501791:    (DEADCODE)
->>>>     Execution cannot reach this statement: "dev_qualifier.bDeviceClass
-> ...".
-> 2110                            dev_qualifier.bDeviceClass =
-> USB_CLASS_VENDOR_SPEC;
-> 2111
-> 2112                    /* assumes ep0 uses the same value for both speeds
-> ... */
-> 2113                    dev_qualifier.bMaxPacketSize0 =
-> device_desc.bMaxPacketSize0;
-> 2114
-> 2115                    /* and that all endpoints are dual-speed */
-> /drivers/usb/gadget/ether.c: 2071 in eth_bind()
-> 2065
-> 2066     #if defined(CONFIG_USB_ETH_CDC) || defined(CONFIG_USB_ETH_RNDIS)
-> 2067            /*
-> 2068             * CDC Ethernet control interface doesn't require a status
-> endpoint.
-> 2069             * Since some hosts expect one, try to allocate one anyway.
-> 2070             */
->>>>     CID 501791:    (DEADCODE)
->>>>     Execution cannot reach the expression "rndis" inside this
-> statement: "if (cdc || rndis) {
->   statu...".
-> 2071            if (cdc || rndis) {
-> 2072                    status_ep = usb_ep_autoconfig(gadget,
-> &fs_status_desc);
-> 2073                    if (status_ep) {
-> 2074                            status_ep->driver_data = status_ep;     /*
-> claim */
-> 2075                    } else if (rndis) {
-> 2076                            pr_err("can't run RNDIS on %s",
-> gadget->name);
-> /drivers/usb/gadget/ether.c: 2089 in eth_bind()
-> 2083                    }
-> 2084            }
-> 2085     #endif
-> 2086
-> 2087            /* one config:  cdc, else minimal subset */
-> 2088            if (!cdc) {
->>>>     CID 501791:    (DEADCODE)
->>>>     Execution cannot reach this statement: "eth_config.bNumInterfaces =
-> 1;".
-> 2089                    eth_config.bNumInterfaces = 1;
-> 2090                    eth_config.iConfiguration = STRING_SUBSET;
-> 2091
-> 2092                    /*
-> 2093                     * use functions to set these up, in case we're
-> built to work
-> 2094                     * with multiple controllers and must override CDC
-> Ethernet.
->
-> ** CID 501790:  Null pointer dereferences  (FORWARD_NULL)
-> /cmd/bcb.c: 175 in __bcb_initialize()
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501790:  Null pointer dereferences  (FORWARD_NULL)
-> /cmd/bcb.c: 175 in __bcb_initialize()
-> 169                     }
-> 170             }
-> 171
-> 172             return CMD_RET_SUCCESS;
-> 173
-> 174     err_read_fail:
->>>>     CID 501790:  Null pointer dereferences  (FORWARD_NULL)
->>>>     Dereferencing null pointer "block".
-> 175             printf("Error: %d %d:%s read failed (%d)\n",
-> block->uclass_id,
-> 176                    block->devnum, partition->name, ret);
-> 177             __bcb_reset();
-> 178             return CMD_RET_FAILURE;
-> 179     }
-> 180
-
-This probably deserves to be addressed. I don't know if Dmitrii is actively
-watching the list so I'll study this in more detail and send a fix if appropriate.
-
->
-> ** CID 501789:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/tpm_tcg2.c: 41 in tcg2_get_pcr_info()
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501789:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/tpm_tcg2.c: 41 in tcg2_get_pcr_info()
-> 35      memset(response, 0, sizeof(response));
-> 36
-> 37      ret = tpm2_get_pcr_info(dev, &pcrs);
-> 38      if (ret)
-> 39              return ret;
-> 40
->>>>     CID 501789:  Insecure data handling  (TAINTED_SCALAR)
->>>>     Using tainted variable "pcrs.count" as a loop boundary.
-> 41      for (i = 0; i < pcrs.count; i++) {
-> 42              u32 hash_mask =
-> tcg2_algorithm_to_mask(pcrs.selection[i].hash);
-> 43
-> 44              if (hash_mask) {
-> 45                      *supported_pcr |= hash_mask;
-> 46                      if (tpm2_is_active_pcr(&pcrs.selection[i]))
->
-> ** CID 501788:  Memory - corruptions  (OVERRUN)
->
->
-> ________________________________________________________________________________________________________
-> *** CID 501788:  Memory - corruptions  (OVERRUN)
-> /lib/tpm_tcg2.c: 658 in tcg2_measurement_term()
-> 652                                bool error)
-> 653     {
-> 654             u32 event = error ? 0x1 : 0xffffffff;
-> 655             int i;
-> 656
-> 657             for (i = 0; i < 8; ++i)
->>>>     CID 501788:  Memory - corruptions  (OVERRUN)
->>>>     Overrunning buffer pointed to by "(u8 const *)&event" of 4 bytes by
-> passing it to a function which accesses it at byte offset 63.
-> 658                     tcg2_measure_event(dev, elog, i, EV_SEPARATOR,
-> sizeof(event),
-> 659                                        (const u8 *)&event);
-> 660
-> 661             if (elog->log)
-> 662                     unmap_physmem(elog->log, MAP_NOCACHE);
-> 663     }
->
->
->
-> ----- End forwarded message -----
->
-> -- 
-> Tom
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
