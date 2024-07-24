@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD869C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D832C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:21:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 262A3887F6;
-	Wed, 24 Jul 2024 11:08:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 01E5188886;
+	Wed, 24 Jul 2024 11:21:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y7xvV/wb";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Cd9YpX/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 147F888800; Wed, 24 Jul 2024 11:08:36 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id CCB0988881; Wed, 24 Jul 2024 11:21:52 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE4A288549
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:08:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38CF888886
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:21:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2cb5e0b020eso4148352a91.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 02:08:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4266f3e0df8so47218965e9.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 02:21:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721812110; x=1722416910; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fdhN60BfhOouFUGrvElZxAp7p2y2sLDWHPEa88Nzaew=;
- b=y7xvV/wbrN/zRP3UOX2yMn5ncntlaSxMPoi2il8zJJavO175057JPLzhSla0reGem1
- 4btZImNqqdV8M6k8WHIRhZ0TInumZQzHkkI83p+5pgVJ2KdkMN99yRd+htu324r1cfWI
- eZW254tJ3FAGeQPCPSs/8JyGXSjlPkgHmWy1kCGhjgAf/5X2I6trdqWoHSEUhTi5LOWt
- 9SZ61wfXf6uCMNRbrlImfRF48oCHEapORy4V40Jd3vkZxQ1QJNyvnQNCvq3/Gl00CBAu
- Lb3GV/prNVzDK4bJzAmg1IV2UB+pJLJmgsQTvVB0YghLmw67VVaRfDCTlzBvYJP957s8
- 9cSw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721812905; x=1722417705;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cEpIq1dFDodHFZ3CR8nNl9CNDnPWVWqBCR9Y7u8JCs0=;
+ b=Cd9YpX/rk3hMySxBE+Sf3ZjSQz/4bVAILr9kDAjqCv2aUZ2PeDKxjmks1suj3YD4Ix
+ X3fq1o2OoDs3/rb3OoOKeSG5tXu5Smb8biHbnNXmVDRaNQYSdxh+TH/ZIKC6+LVfffAe
+ 4MWbW4iUE9qAS8RtKLZ5rkulRwLIYVeNm8BfKFM8ORHateCiKFEUegLk42x9n/qZAvAW
+ 4UY/0nIVe2jhSRSFhi4DdNRuXQvD0EycDT294QLgZRzDjucihisMa7DK1tEUJRTad9hE
+ vaj4odn0ZNWUTtnbT6FNj2WSBXSulbiZEGQb5uvFZ6QSc1ojmbBzoIIsuzKJmqMVacn4
+ IPDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721812110; x=1722416910;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fdhN60BfhOouFUGrvElZxAp7p2y2sLDWHPEa88Nzaew=;
- b=nY9l+0nSnFW81i3E63BJDdB+8FnofpEbC6W6BwoaKiQspxDOxb3xNY7rKJZiddYQS0
- wQkE7Zhomd5i0n0Il5eW9trxh1SudEVZSJRVlrJYCuKcP2a8kAzDJBdr1sWlDDmk6kS0
- STbzh4xfBa71xi6wTV2Xgcx2ZiBvvJQli91yFq2+W9UEfYIwLlwPQP3Tn+fnySMgfeie
- cxKXrkeSNPG2lPGcIfNP0TY77e6gy4L4d9Gx/iMZSJJPI7p7BNWpaov34cKrVx470aKa
- mFR1rvQJtksqPyEsCrbHbUC3Z9w/bbh5OqdrLWdEfqFMqBkbZWcUlL13CRV5ZP/6rAsu
- PKdQ==
+ d=1e100.net; s=20230601; t=1721812905; x=1722417705;
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cEpIq1dFDodHFZ3CR8nNl9CNDnPWVWqBCR9Y7u8JCs0=;
+ b=xEtfnPdhOfQeVP53cy5tseR1/urUWN6kNYCgInF51EPCGin3ufD5kWDjypI0c9i5nj
+ /qYjypvg41poi5LNlBgUnk7FG1PqmaQKXTVMpHC9mycHdEWaPjwK6Xz6ycvrZQGZ79pC
+ 2zHzej2secxaPVHSLBVrZEMOqpfnEQ6c71UPAGdtex7iBWvzlmUp/ny0COha6ENYhNYh
+ MDGXYx2YePgTniCW80DpAtWfSWhSocLpovn/ML+HWD6wq2juCmOfynq4TD9pWrCDU8M4
+ PFG8PNHEyQ8G/MaWK9s+Z94zwgtyl91hk3jQe0sDyTXkp8MnehU6qoB8InsgmQjJgp6/
+ 8TFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNqSxhYaEhHVaHDW3prIbI9+hikw36Vk7NGTWtnzdpp/7U8iW1j8IctehMsEMOBoSBaRp8SMgFBK+Hsz1F1/ohklJBPw==
-X-Gm-Message-State: AOJu0YwTnaAJZxThpMWtU+yUkhsOe8SFXUr3rMyu8rfm6OpJnz+TZrw9
- v1uvfkjI/C5VDYeuOr+/cJ1GU7rMGyhhEStzXXZjHJoBUFwoTJP5ku9ovMJgo8HszQT4R4/2r7x
- wHpmXS0iep3o1wNvfayD87/9Hyw8tq8Ph086f3A==
-X-Google-Smtp-Source: AGHT+IFB7Xpj9PsW7VC7oDlVlSBYGXFXRFbmqRO7LgqP/mlSji7PvMkmfL9KqmS9tgCBT+C2dSdV9Df23vP07EEr0zk=
-X-Received: by 2002:a17:90a:f187:b0:2c8:f3b7:ec45 with SMTP id
- 98e67ed59e1d1-2cdaef5ed6emr2532245a91.36.1721812109172; Wed, 24 Jul 2024
- 02:08:29 -0700 (PDT)
+ AJvYcCVCR/1gAHPzZHdGdaq7HLus9QPdiOqFSKuITOC6atp+q8XuMLCdeDtzBHb7msnXIgMhJDmtSG5lEsubH6Z2ysYWbbL7Bg==
+X-Gm-Message-State: AOJu0YyBRqtvE03OIz7xAGGVQr2s/GrPS0m94tS3+AKo5zN0BjifGeS9
+ NMzczbW/YW6Fzc3yUOZvZsMHvDQcr4CGNnXaIKfgusFeFj3aFnrJRezIcjsvVpE=
+X-Google-Smtp-Source: AGHT+IFZ+C+hPwxoohUWsxga9yTji5aRDyiHs659BgwglEitnu4w8ArrFzD1eD+ESFv1NRfISosFzg==
+X-Received: by 2002:a05:600c:45d2:b0:426:6945:75b8 with SMTP id
+ 5b1f17b1804b1-427f95c1df2mr10642955e9.31.1721812905186; 
+ Wed, 24 Jul 2024 02:21:45 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427f9397285sm19677825e9.27.2024.07.24.02.21.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jul 2024 02:21:44 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Dmitrii Merkurev
+ <dimorinny@google.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+In-Reply-To: <20240723141844.GF989285@bill-the-cat>
+References: <20240723141844.GF989285@bill-the-cat>
+Date: Wed, 24 Jul 2024 11:21:43 +0200
+Message-ID: <87ttgf5emw.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
-In-Reply-To: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 24 Jul 2024 12:07:53 +0300
-Message-ID: <CAC_iWj+bxgRgWNH0jnj-WXRoLKT=LXWGRBdW-5-k-M-r3KHTqw@mail.gmail.com>
-Subject: Re: [PATCH v5 00/11] efi: CapsuleUpdate: support for dynamic UUIDs
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,167 +93,307 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Tom,
 
-checkpatch reports some issues for #4 & #9, check that for v6
+Thank you for the report.
 
-Cheers
-/Ilias
-On Fri, 19 Jul 2024 at 15:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On mar., juil. 23, 2024 at 08:18, Tom Rini <trini@konsulko.com> wrote:
+
+> Here's the latest report.
 >
-> As more boards adopt support for the EFI CapsuleUpdate mechanism, there
-> is a growing issue of being able to target updates to them properly. The
-> current mechanism of hardcoding UUIDs for each board at compile time is
-> unsustainable, and maintaining lists of GUIDs is similarly cumbersome.
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Mon, Jul 22, 2024, 8:07 PM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
 >
-> In this series, I propose that we adopt v5 GUIDs, these are generated by
-> using a well-known salt GUID as well as board specific information the
-> DT root compatible string, these are hashed together and the result is
-> truncated to form a new UUID.
 >
-> The well-known salt GUID can be specific to the architecture (SoC
-> vendor), or OEM. It is defined in the board defconfig so that vendors
-> can easily bring their own.
+> Hi,
 >
-> Specifically, the following fields are used to generate a GUID for a
-> particular fw_image:
+> Please find the latest report on new defect(s) introduced to Das U-Boot
+> found with Coverity Scan.
 >
-> * namespace salt
-> * board compatible (usually the first entry in the dt root compatible
->   array).
-> * fw_image name (the string identifying the specific image, especially
->   relevant for board that can update multiple images).
+> 8 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+> 3 defect(s), reported by Coverity Scan earlier, were marked fixed in the
+> recent build analyzed by Coverity Scan.
 >
-> == Usage ==
+> New defect(s) Reported-by: Coverity Scan
+> Showing 8 of 8 defect(s)
 >
-> Boards can enable dynamic UUID support by simply not setting the
-> efi_fw_image image_type_id property. Vendors may also wish to set a
-> custom namespace GUID (by setting CONFIG_EFI_CAPSULE_NAMESPACE_GUID).
 >
-> == Limitations ==
+> ** CID 501795:  Insecure data handling  (TAINTED_SCALAR)
 >
-> * Changing GUIDs
 >
-> The primary limitation with this approach is that if any of the source
-> fields change, so will the GUID for the board. It is therefore pretty
-> important to ensure that GUID changes are caught during development.
+> ________________________________________________________________________________________________________
+> *** CID 501795:  Insecure data handling  (TAINTED_SCALAR)
+> /boot/bootmeth_android.c: 96 in scan_boot_part()
+> 90      if (!is_android_boot_image_header(buf)) {
+> 91              free(buf);
+> 92              return log_msg_ret("header", -ENOENT);
+> 93      }
+> 94
+> 95      priv->header_version = ((struct andr_boot_img_hdr_v0
+> *)buf)->header_version;
+>>>>     CID 501795:  Insecure data handling  (TAINTED_SCALAR)
+>>>>     Passing tainted expression "*buf" to "dlfree", which uses it as an
+> offset.
+
+scan_boot_part() generates this warning, but scan_vendor_boot_part()
+does not.
+Both functions follow a similar code flow.
+
+The only reason scan_boot_part() generates this warning, is because of
+the downcast into struct andr_boot_img_hdr_v0.
+
+We can't change char* buf into struct andr_boot_img_hdr_v0 because we
+need to be block aligned when calling blk_dread().
+
+Per my understanding tainted data means it comes from user input (which
+is true for both scan_boot_part() and scan_vendor_boot_part() because
+both read from eMMC, which can be consider "user input".
+
+Since I don't see any particular problem with this code I propose that
+we ignore this warning.
+
+
+> 96      free(buf);
+> 97
+> 98      return 0;
+> 99     }
+> 100
+> 101     static int scan_vendor_boot_part(struct udevice *blk, struct
+> android_priv *priv)
 >
-> * Supporting multiple boards with a single image
+> ** CID 501794:  Memory - corruptions  (OVERRUN)
 >
-> This now requires having an entry with the GUID for every board which
-> might lead to larger UpdateCapsule images.
 >
-> == Tooling ==
+> ________________________________________________________________________________________________________
+> *** CID 501794:  Memory - corruptions  (OVERRUN)
+> /lib/tpm_tcg2.c: 640 in tcg2_measurement_init()
+> 634             rc = tcg2_log_prepare_buffer(*dev, elog,
+> ignore_existing_log);
+> 635             if (rc) {
+> 636                     tcg2_measurement_term(*dev, elog, true);
+> 637                     return rc;
+> 638             }
+> 639
+>>>>     CID 501794:  Memory - corruptions  (OVERRUN)
+>>>>     Overrunning array "version_string" of 50 bytes by passing it to a
+> function which accesses it at byte offset 63.
+> 640             rc = tcg2_measure_event(*dev, elog, 0, EV_S_CRTM_VERSION,
+> 641                                     strlen(version_string) + 1,
+> 642                                     (u8 *)version_string);
+> 643             if (rc) {
+> 644                     tcg2_measurement_term(*dev, elog, true);
+> 645                     return rc;
 >
-> The mkeficapsule command is updated to add a new guidgen subcommand,
-> this can generate GUIDs that match those the board would generate at
-> runtime. It accepts an optional namespace GUID (if the default isn't
-> used), a path to the board DTB, and a list of firmware image names.
+> ** CID 501793:  Insecure data handling  (TAINTED_SCALAR)
+> /lib/tpm-v2.c: 909 in tpm2_allow_extend()
 >
-> This series follows a related discussion started by Ilias:
-> https://lore.kernel.org/u-boot/CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com/
 >
-> CI run for this series: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/21419
+> ________________________________________________________________________________________________________
+> *** CID 501793:  Insecure data handling  (TAINTED_SCALAR)
+> /lib/tpm-v2.c: 909 in tpm2_allow_extend()
+> 903             int rc;
+> 904
+> 905             rc = tpm2_get_pcr_info(dev, &pcrs);
+> 906             if (rc)
+> 907                     return false;
+> 908
+>>>>     CID 501793:  Insecure data handling  (TAINTED_SCALAR)
+>>>>     Using tainted variable "pcrs.count" as a loop boundary.
+> 909             for (i = 0; i < pcrs.count; i++) {
+> 910                     if (tpm2_is_active_pcr(&pcrs.selection[i]) &&
+> 911                         !tpm2_algorithm_to_len(pcrs.selection[i].hash))
+> 912                             return false;
+> 913             }
+> 914
+> 915             return true;
 >
-> ---
-> Changes in v5:
-> - Clean up mkeficapsule genguid patch
-> - Add explicit tests validating the GUID type bits
-> - Link to v4: https://lore.kernel.org/r/20240702-b4-dynamic-uuid-v4-0-a00c82d1f504@linaro.org
+> ** CID 501792:  Control flow issues  (DEADCODE)
+> /lib/efi_loader/efi_helper.c: 137 in efi_load_option_dp_join()
 >
-> Changes in v4:
-> - Make UUID v5 support always enabled rather than being optional.
-> - Fix endianness issues (thanks Vincent and Ilias)
-> - Merge genguid tool into mkeficapsule.
-> -       And move mkeficapsule over to using U-Boot's UUID code rather
->         than libuuid.
-> - Provide a default namespace UUID for all U-Boot boards.
-> - Link to v3: https://lore.kernel.org/r/20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org
 >
-> Changes in v3:
-> - Add manpage for genguid
-> - Add dedicated CONFIG_TOOLS_GENGUID option
-> - Minor code fixes addressing v2 feedback
-> - Link to v2: https://lore.kernel.org/r/20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org
+> ________________________________________________________________________________________________________
+> *** CID 501792:  Control flow issues  (DEADCODE)
+> /lib/efi_loader/efi_helper.c: 137 in efi_load_option_dp_join()
+> 131             if (fdt_dp) {
+> 132                     struct efi_device_path *tmp_dp = *dp;
+> 133
+> 134                     *dp = efi_dp_concat(tmp_dp, fdt_dp, *dp_size);
+> 135                     efi_free_pool(tmp_dp);
+> 136                     if (!dp)
+>>>>     CID 501792:  Control flow issues  (DEADCODE)
+>>>>     Execution cannot reach this statement: "return
+> 9223372036854775817UL;".
+> 137                             return EFI_OUT_OF_RESOURCES;
+> 138                     *dp_size += efi_dp_size(fdt_dp) + sizeof(END);
+> 139             }
+> 140
+> 141             *dp_size += sizeof(END);
+> 142
 >
-> Changes in v2:
-> - Move namespace UUID to be defined in defconfig
-> - Add tests and tooling
-> - Only use the first board compatible to generate UUID.
-> - Link to v1: https://lore.kernel.org/r/20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org
+> ** CID 501791:    (DEADCODE)
+> /drivers/usb/gadget/ether.c: 2219 in eth_bind()
+> /drivers/usb/gadget/ether.c: 2110 in eth_bind()
+> /drivers/usb/gadget/ether.c: 2071 in eth_bind()
+> /drivers/usb/gadget/ether.c: 2089 in eth_bind()
 >
-> ---
-> Caleb Connolly (11):
->       efi: define struct efi_guid
->       lib: uuid: add UUID v5 support
->       efi: add a helper to generate dynamic UUIDs
->       doc: uefi: document dynamic UUID generation
->       sandbox: switch to dynamic UUIDs
->       lib: uuid: supporting building as part of host tools
->       include: export uuid.h
->       tools: mkeficapsule: use u-boot UUID library
->       tools: mkeficapsule: support generating dynamic GUIDs
->       test: lib/uuid: add unit tests for dynamic UUIDs
->       test: lib/uuid: add tests for UUID version/variant bits
 >
->  arch/arm/mach-rockchip/board.c                     |   2 +-
->  board/cobra5272/flash.c                            |   2 +-
->  board/gardena/smart-gateway-mt7688/board.c         |   2 +-
->  board/sandbox/sandbox.c                            |  16 --
->  board/socrates/socrates.c                          |   2 +-
->  board/xilinx/common/board.c                        |   2 +-
->  cmd/efi.c                                          |   2 +-
->  cmd/efi_common.c                                   |   2 +-
->  cmd/flash.c                                        |   2 +-
->  cmd/gpt.c                                          |   2 +-
->  cmd/nvedit_efi.c                                   |   2 +-
->  cmd/x86/hob.c                                      |   2 +-
->  common/flash.c                                     |   2 +-
->  disk/part_efi.c                                    |   2 +-
->  doc/develop/uefi/uefi.rst                          |  27 +++
->  doc/mkeficapsule.1                                 |  23 +++
->  drivers/firmware/arm-ffa/arm-ffa-uclass.c          |   2 +-
->  env/sf.c                                           |   2 +-
->  fs/btrfs/btrfs.c                                   |   2 +-
->  fs/btrfs/compat.h                                  |   2 +-
->  fs/btrfs/disk-io.c                                 |   2 +-
->  fs/ext4/ext4fs.c                                   |   2 +-
->  include/efi.h                                      |   2 +-
->  include/fwu.h                                      |   2 +-
->  include/part.h                                     |   2 +-
->  include/rkmtd.h                                    |   2 +-
->  include/sandbox_efi_capsule.h                      |   6 +-
->  include/{ => u-boot}/uuid.h                        |  21 ++-
->  lib/Kconfig                                        |   1 +
->  lib/acpi/acpi_dp.c                                 |   2 +-
->  lib/acpi/acpigen.c                                 |   2 +-
->  lib/efi/efi_app.c                                  |   2 +-
->  lib/efi_loader/Kconfig                             |  12 ++
->  lib/efi_loader/efi_capsule.c                       |   1 +
->  lib/efi_loader/efi_device_path.c                   |   2 +-
->  lib/efi_loader/efi_firmware.c                      |  52 +++++
->  lib/efi_loader/efi_variable.c                      |   2 +-
->  lib/fwu_updates/fwu_mtd.c                          |   2 +-
->  lib/uuid.c                                         | 102 +++++++---
->  lib/vsprintf.c                                     |   2 +-
->  net/bootp.c                                        |   2 +-
->  test/dm/acpi_dp.c                                  |   2 +-
->  test/dm/acpigen.c                                  |   2 +-
->  test/lib/uuid.c                                    | 120 +++++++++++-
->  .../test_efi_capsule/test_capsule_firmware_fit.py  |   2 +-
->  .../test_efi_capsule/test_capsule_firmware_raw.py  |   8 +-
->  .../test_capsule_firmware_signed_fit.py            |   2 +-
->  .../test_capsule_firmware_signed_raw.py            |   4 +-
->  test/py/tests/test_efi_capsule/version.dts         |   6 +-
->  tools/Makefile                                     |   8 +-
->  tools/binman/etype/efi_capsule.py                  |   2 +-
->  tools/binman/ftest.py                              |   2 +-
->  tools/eficapsule.h                                 |   2 +-
->  tools/mkeficapsule.c                               | 209 ++++++++++++++++-----
->  54 files changed, 544 insertions(+), 148 deletions(-)
-> ---
-> change-id: 20240422-b4-dynamic-uuid-1a5ab1486c27
-> base-commit: c717871c07fb36f13806ef5351d858a72a811d95
+> ________________________________________________________________________________________________________
+> *** CID 501791:    (DEADCODE)
+> /drivers/usb/gadget/ether.c: 2219 in eth_bind()
+> 2213                    out_ep->name, in_ep->name,
+> 2214                    status_ep ? " STATUS " : "",
+> 2215                    status_ep ? status_ep->name : ""
+> 2216                    );
+> 2217            printf("MAC %pM\n", pdata->enetaddr);
+> 2218
+>>>>     CID 501791:    (DEADCODE)
+>>>>     Execution cannot reach the expression "rndis" inside this
+> statement: "if (cdc || rndis)
+>   printf(...".
+> 2219            if (cdc || rndis)
+> 2220                    printf("HOST MAC %02x:%02x:%02x:%02x:%02x:%02x\n",
+> 2221                            dev->host_mac[0], dev->host_mac[1],
+> 2222                            dev->host_mac[2], dev->host_mac[3],
+> 2223                            dev->host_mac[4], dev->host_mac[5]);
+> 2224
+> /drivers/usb/gadget/ether.c: 2110 in eth_bind()
+> 2104                    device_desc.bNumConfigurations = 2;
+> 2105
+> 2106            if (gadget_is_dualspeed(gadget)) {
+> 2107                    if (rndis)
+> 2108                            dev_qualifier.bNumConfigurations = 2;
+> 2109                    else if (!cdc)
+>>>>     CID 501791:    (DEADCODE)
+>>>>     Execution cannot reach this statement: "dev_qualifier.bDeviceClass
+> ...".
+> 2110                            dev_qualifier.bDeviceClass =
+> USB_CLASS_VENDOR_SPEC;
+> 2111
+> 2112                    /* assumes ep0 uses the same value for both speeds
+> ... */
+> 2113                    dev_qualifier.bMaxPacketSize0 =
+> device_desc.bMaxPacketSize0;
+> 2114
+> 2115                    /* and that all endpoints are dual-speed */
+> /drivers/usb/gadget/ether.c: 2071 in eth_bind()
+> 2065
+> 2066     #if defined(CONFIG_USB_ETH_CDC) || defined(CONFIG_USB_ETH_RNDIS)
+> 2067            /*
+> 2068             * CDC Ethernet control interface doesn't require a status
+> endpoint.
+> 2069             * Since some hosts expect one, try to allocate one anyway.
+> 2070             */
+>>>>     CID 501791:    (DEADCODE)
+>>>>     Execution cannot reach the expression "rndis" inside this
+> statement: "if (cdc || rndis) {
+>   statu...".
+> 2071            if (cdc || rndis) {
+> 2072                    status_ep = usb_ep_autoconfig(gadget,
+> &fs_status_desc);
+> 2073                    if (status_ep) {
+> 2074                            status_ep->driver_data = status_ep;     /*
+> claim */
+> 2075                    } else if (rndis) {
+> 2076                            pr_err("can't run RNDIS on %s",
+> gadget->name);
+> /drivers/usb/gadget/ether.c: 2089 in eth_bind()
+> 2083                    }
+> 2084            }
+> 2085     #endif
+> 2086
+> 2087            /* one config:  cdc, else minimal subset */
+> 2088            if (!cdc) {
+>>>>     CID 501791:    (DEADCODE)
+>>>>     Execution cannot reach this statement: "eth_config.bNumInterfaces =
+> 1;".
+> 2089                    eth_config.bNumInterfaces = 1;
+> 2090                    eth_config.iConfiguration = STRING_SUBSET;
+> 2091
+> 2092                    /*
+> 2093                     * use functions to set these up, in case we're
+> built to work
+> 2094                     * with multiple controllers and must override CDC
+> Ethernet.
 >
-> // Caleb (they/them)
+> ** CID 501790:  Null pointer dereferences  (FORWARD_NULL)
+> /cmd/bcb.c: 175 in __bcb_initialize()
 >
+>
+> ________________________________________________________________________________________________________
+> *** CID 501790:  Null pointer dereferences  (FORWARD_NULL)
+> /cmd/bcb.c: 175 in __bcb_initialize()
+> 169                     }
+> 170             }
+> 171
+> 172             return CMD_RET_SUCCESS;
+> 173
+> 174     err_read_fail:
+>>>>     CID 501790:  Null pointer dereferences  (FORWARD_NULL)
+>>>>     Dereferencing null pointer "block".
+> 175             printf("Error: %d %d:%s read failed (%d)\n",
+> block->uclass_id,
+> 176                    block->devnum, partition->name, ret);
+> 177             __bcb_reset();
+> 178             return CMD_RET_FAILURE;
+> 179     }
+> 180
+
+This probably deserves to be addressed. I don't know if Dmitrii is actively
+watching the list so I'll study this in more detail and send a fix if appropriate.
+
+>
+> ** CID 501789:  Insecure data handling  (TAINTED_SCALAR)
+> /lib/tpm_tcg2.c: 41 in tcg2_get_pcr_info()
+>
+>
+> ________________________________________________________________________________________________________
+> *** CID 501789:  Insecure data handling  (TAINTED_SCALAR)
+> /lib/tpm_tcg2.c: 41 in tcg2_get_pcr_info()
+> 35      memset(response, 0, sizeof(response));
+> 36
+> 37      ret = tpm2_get_pcr_info(dev, &pcrs);
+> 38      if (ret)
+> 39              return ret;
+> 40
+>>>>     CID 501789:  Insecure data handling  (TAINTED_SCALAR)
+>>>>     Using tainted variable "pcrs.count" as a loop boundary.
+> 41      for (i = 0; i < pcrs.count; i++) {
+> 42              u32 hash_mask =
+> tcg2_algorithm_to_mask(pcrs.selection[i].hash);
+> 43
+> 44              if (hash_mask) {
+> 45                      *supported_pcr |= hash_mask;
+> 46                      if (tpm2_is_active_pcr(&pcrs.selection[i]))
+>
+> ** CID 501788:  Memory - corruptions  (OVERRUN)
+>
+>
+> ________________________________________________________________________________________________________
+> *** CID 501788:  Memory - corruptions  (OVERRUN)
+> /lib/tpm_tcg2.c: 658 in tcg2_measurement_term()
+> 652                                bool error)
+> 653     {
+> 654             u32 event = error ? 0x1 : 0xffffffff;
+> 655             int i;
+> 656
+> 657             for (i = 0; i < 8; ++i)
+>>>>     CID 501788:  Memory - corruptions  (OVERRUN)
+>>>>     Overrunning buffer pointed to by "(u8 const *)&event" of 4 bytes by
+> passing it to a function which accesses it at byte offset 63.
+> 658                     tcg2_measure_event(dev, elog, i, EV_SEPARATOR,
+> sizeof(event),
+> 659                                        (const u8 *)&event);
+> 660
+> 661             if (elog->log)
+> 662                     unmap_physmem(elog->log, MAP_NOCACHE);
+> 663     }
+>
+>
+>
+> ----- End forwarded message -----
+>
+> -- 
+> Tom
