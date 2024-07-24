@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0C4C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 10:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D74C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 10:15:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86CC988881;
-	Wed, 24 Jul 2024 12:14:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0677688881;
+	Wed, 24 Jul 2024 12:15:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="IUaK3wKi";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vHJMvs5C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52D5A8883E; Wed, 24 Jul 2024 12:14:52 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 47878888FA; Wed, 24 Jul 2024 12:15:40 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AAD1888D7
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 12:14:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4687B8883E
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 12:15:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4266fd395eeso47734485e9.3
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 03:14:48 -0700 (PDT)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2ef2ed59200so40378251fa.3
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 03:15:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721816088; x=1722420888;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721816137; x=1722420937;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=90Ii16dGfA4/Mbpr7D6QpmRNFg8K9o7U5/arTaDp/+I=;
- b=IUaK3wKiPA5z+XMMKe+jcQu/WuT7CNpWZ9x711b51KOT/MrjB7noa/8hArQygMys8q
- kIW7t4P1likYatleu8eYozSG+LK6d1dTtk6vUqRCEoovIjs7JMkNHyuKFkP5+GVN6wPZ
- sxUcnDJY1hzMy+xyE7p5HjEdL8GUzMPUrnO6ROvjteUQXf5LJcroaW2xctMAXG3T3Inp
- mlXk9Be2kcPad4VJt13Kp8RJ1Ov6meLtHC2PXCjt/z881Qgd0vudH97/yDCWoqd97ZJq
- q97ySh2BeH06qOk12A8nFxFUhQg8t/CrVKj+uJjaJjtCArQM2bdf1SkOiOkLBtxP1hgG
- 30BA==
+ bh=o9SDdR7HPHRBrAoUiOkap0LB5qMl0j8/M+icVGxefz0=;
+ b=vHJMvs5CUSEZArlLdZdDmv2BkmREjGUQvrDARUr6PzOasz1h9ZIU5FA7N3OhYXBBvk
+ WhWF2Gan3utISX/ARxc4MFc8aXoEYItLvLZgw4HDrbY31SuLx4Iei6SDXu0uezd67kIf
+ hS2egNSO4YsUKUrEKbpkJ/QN54yiXBhSrm7xfkYcQOKgYUrhmO9Iw1B/YwLoR6A9HE1X
+ 04oLEqfvBXPL6Sn7/jx+t3AHFSH8qTHxQIWNa3YoVWd7yPKnqqoe7mmxymTLVv4d52Oj
+ CIymY2P7C3FIguz/MU0yWdSIMHgphDzawpGMxJF5bDVBs6aaykRM972g4TrFRsgGKNsg
+ p4TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721816088; x=1722420888;
+ d=1e100.net; s=20230601; t=1721816137; x=1722420937;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=90Ii16dGfA4/Mbpr7D6QpmRNFg8K9o7U5/arTaDp/+I=;
- b=l2/tL9e5S5XpGoxL8JKH4pBVm+FddF4PilNSCnTxgHEC91uFt43VVCk7YGHSeTBIl0
- XFVg2Xnr8YtvsIAyLvso0EXPDB1IzXrr2AmPRZEGdXFey8/OPLx7l2T68NnfLLcD46Ky
- UuUqY7J/pcFDsuxkGD8UZZefii2hQh+VYexZDooaQEP4GCS/HEYxa/m9uLb/K+q/sr14
- xZh/N/ZzXpZFCvQchEJ5G8LaMP40mezQWgnYLiTGcFy3wtXXLeIsaWs2mCV9wL9cAETE
- VhMv7Y1scZ7LGWqRkSX9sKreP1Wx90wvtAYyq7HFshH2E9pYWgQybfyq0anxp+DtlRx8
- z5HA==
+ bh=o9SDdR7HPHRBrAoUiOkap0LB5qMl0j8/M+icVGxefz0=;
+ b=GJJVATmm2XjZN6vuW0ij71xm8507QYTiga+0JIwwlKMWLthY5AXQMWB7nP1Hn5khq/
+ +LD9bPnagUN5I5c1gPPGGXjysNsXNZ8JJpRtr0DC99d7bzYdh/msmPjvRZoYnUMETLZv
+ IecrFC/jF9vGHuI2q7h+9vGZgXIb4c6rszavme6vLS7elC1USe91YgYZQcHxPDdH6gou
+ JnnQelz/XFBtJcebjHSZdDbTIi1BpVkj6DC605I+ETuM7JPNJQSoR5HP4xAplN5pcniE
+ yBGyWdXeSBznQfzm0xUDQBmMfcnxL+mpIqCd3EduwK4VDf4xp3bg/OaxmoDfNPp30IAB
+ OPqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUwemp9gTmS6UABTZH9M3MEhODMpALtJMcSOJkI5nvJxLQOj/We1+s1K1bFC52AO4MuS/ptXkBySBsaQawCfCSiStjfig==
-X-Gm-Message-State: AOJu0Ywy0kOhabbfVpj7zRQkmjdqOg9Ft7owtjd4pZFjpGFOITe7PTEl
- rJXUTA6qqDepgyCeR/VCMyb/VH/rYHnsQblWexWIk0RlRCnpEHAhq5PSMNcbkXU=
-X-Google-Smtp-Source: AGHT+IECG21oeVzh6qD10umUYjp0k+vsHfQGTTPZP6WEyCQAnV8eIRrS31zKIe9Ms+w/a2Fqfx+/LA==
-X-Received: by 2002:a05:600c:3b90:b0:426:6ed5:fd5 with SMTP id
- 5b1f17b1804b1-427dc53b5c9mr86112265e9.6.1721816087722; 
- Wed, 24 Jul 2024 03:14:47 -0700 (PDT)
+ AJvYcCWJ3ZHUZDYjs420AGGz82508tQoYKkjOBUHYCaZiNRdkuHqW3CgIedD725oAaK26VxoJ7S8ipmtew6rKT8UmRYybaBMoA==
+X-Gm-Message-State: AOJu0Ywe5pPxTslk+lMM8hNyywMf/iGwRWt1C6wEB2Iqga7hnnCRfvl8
+ mzTNELvy+DCiRMhH/PaoBTd4DDcMlnsPnZvwdxx8X7DWpUJmITOSlAJ7hH8amwzink0ZJuzd6Pw
+ t
+X-Google-Smtp-Source: AGHT+IHxOE+DBXYm30b4sK6TZomiF9l+jpRy9fIeOLuebHy3v0HIR/uwml2TeLuZTn5hCW6m6ZLAkw==
+X-Received: by 2002:a2e:9687:0:b0:2ee:df26:9d4d with SMTP id
+ 38308e7fff4ca-2f03255bf63mr10718971fa.47.1721816137023; 
+ Wed, 24 Jul 2024 03:15:37 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427f93aba72sm22089095e9.37.2024.07.24.03.14.47
+ 5b1f17b1804b1-427f937aa9esm22833035e9.12.2024.07.24.03.15.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 03:14:47 -0700 (PDT)
+ Wed, 24 Jul 2024 03:15:36 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>, Marek
  Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
 Cc: Zixun LI <zli@ogga.fr>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 3/7] usb: gadget: atmel: Fix typo in
- usb_gadget_register_driver()
-In-Reply-To: <20240723131817.262596-4-zli@ogga.fr>
+Subject: Re: [PATCH v3 4/7] usb: gadget: atmel: Move usba_udc_pdata() with
+ other static functions
+In-Reply-To: <20240723131817.262596-5-zli@ogga.fr>
 References: <20240723131817.262596-1-zli@ogga.fr>
- <20240723131817.262596-4-zli@ogga.fr>
-Date: Wed, 24 Jul 2024 12:14:46 +0200
-Message-ID: <87cyn35c6h.fsf@baylibre.com>
+ <20240723131817.262596-5-zli@ogga.fr>
+Date: Wed, 24 Jul 2024 12:15:35 +0200
+Message-ID: <87a5i75c54.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -100,31 +101,113 @@ Thank you for the patch.
 
 On mar., juil. 23, 2024 at 15:18, Zixun LI <admin@hifiphile.com> wrote:
 
-> Replace "paramter" by "parameter".
+> To make all static functions in the top, no functional change.
 >
 > Signed-off-by: Zixun LI <zli@ogga.fr>
 
-Same remark on checkpatch warning:
-
-WARNING: From:/Signed-off-by: email address mismatch: 'From: Zixun LI <admin@hifiphile.com>' != 'Signed-off-by: Zixun LI <zli@ogga.fr>'
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
->  drivers/usb/gadget/atmel_usba_udc.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/usb/gadget/atmel_usba_udc.c | 80 ++++++++++++++---------------
+>  1 file changed, 40 insertions(+), 40 deletions(-)
 >
 > diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-> index 83fdc36870..2e3d8f36a2 100644
+> index 2e3d8f36a2..a3d24501ba 100644
 > --- a/drivers/usb/gadget/atmel_usba_udc.c
 > +++ b/drivers/usb/gadget/atmel_usba_udc.c
-> @@ -1204,7 +1204,7 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
->  	int ret;
+> @@ -1179,6 +1179,46 @@ static int atmel_usba_stop(struct usba_udc *udc)
+>  	return 0;
+>  }
 >  
->  	if (!driver || !driver->bind || !driver->setup) {
-> -		log_err("bad paramter\n");
-> +		log_err("bad parameter\n");
->  		return -EINVAL;
->  	}
+> +static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
+> +				      struct usba_udc *udc)
+> +{
+> +	struct usba_ep *eps;
+> +	int i;
+> +
+> +	eps = malloc(sizeof(struct usba_ep) * pdata->num_ep);
+> +	if (!eps) {
+> +		log_err("failed to alloc eps\n");
+> +		return NULL;
+> +	}
+> +
+> +	udc->gadget.ep0 = &eps[0].ep;
+> +
+> +	INIT_LIST_HEAD(&udc->gadget.ep_list);
+> +	INIT_LIST_HEAD(&eps[0].ep.ep_list);
+> +
+> +	for (i = 0; i < pdata->num_ep; i++) {
+> +		struct usba_ep *ep = &eps[i];
+> +
+> +		ep->ep_regs = udc->regs + USBA_EPT_BASE(i);
+> +		ep->dma_regs = udc->regs + USBA_DMA_BASE(i);
+> +		ep->fifo = udc->fifo + USBA_FIFO_BASE(i);
+> +		ep->ep.ops = &usba_ep_ops;
+> +		ep->ep.name = pdata->ep[i].name;
+> +		ep->ep.maxpacket = pdata->ep[i].fifo_size;
+> +		ep->fifo_size = ep->ep.maxpacket;
+> +		ep->udc = udc;
+> +		INIT_LIST_HEAD(&ep->queue);
+> +		ep->nr_banks = pdata->ep[i].nr_banks;
+> +		ep->index = pdata->ep[i].index;
+> +		ep->can_dma = pdata->ep[i].can_dma;
+> +		ep->can_isoc = pdata->ep[i].can_isoc;
+> +		if (i)
+> +			list_add_tail(&ep->ep.ep_list, &udc->gadget.ep_list);
+> +	};
+> +
+> +	return eps;
+> +}
+> +
+>  static struct usba_udc controller = {
+>  	.regs = (unsigned *)ATMEL_BASE_UDPHS,
+>  	.fifo = (unsigned *)ATMEL_BASE_UDPHS_FIFO,
+> @@ -1244,46 +1284,6 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+>  	return 0;
+>  }
 >  
+> -static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
+> -				      struct usba_udc *udc)
+> -{
+> -	struct usba_ep *eps;
+> -	int i;
+> -
+> -	eps = malloc(sizeof(struct usba_ep) * pdata->num_ep);
+> -	if (!eps) {
+> -		log_err("failed to alloc eps\n");
+> -		return NULL;
+> -	}
+> -
+> -	udc->gadget.ep0 = &eps[0].ep;
+> -
+> -	INIT_LIST_HEAD(&udc->gadget.ep_list);
+> -	INIT_LIST_HEAD(&eps[0].ep.ep_list);
+> -
+> -	for (i = 0; i < pdata->num_ep; i++) {
+> -		struct usba_ep *ep = &eps[i];
+> -
+> -		ep->ep_regs = udc->regs + USBA_EPT_BASE(i);
+> -		ep->dma_regs = udc->regs + USBA_DMA_BASE(i);
+> -		ep->fifo = udc->fifo + USBA_FIFO_BASE(i);
+> -		ep->ep.ops = &usba_ep_ops;
+> -		ep->ep.name = pdata->ep[i].name;
+> -		ep->ep.maxpacket = pdata->ep[i].fifo_size;
+> -		ep->fifo_size = ep->ep.maxpacket;
+> -		ep->udc = udc;
+> -		INIT_LIST_HEAD(&ep->queue);
+> -		ep->nr_banks = pdata->ep[i].nr_banks;
+> -		ep->index = pdata->ep[i].index;
+> -		ep->can_dma = pdata->ep[i].can_dma;
+> -		ep->can_isoc = pdata->ep[i].can_isoc;
+> -		if (i)
+> -			list_add_tail(&ep->ep.ep_list, &udc->gadget.ep_list);
+> -	};
+> -
+> -	return eps;
+> -}
+> -
+>  int usba_udc_probe(struct usba_platform_data *pdata)
+>  {
+>  	struct usba_udc *udc;
 > -- 
 > 2.45.2
