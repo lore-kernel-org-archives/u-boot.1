@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB27C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A14E7C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E64988908;
-	Wed, 24 Jul 2024 08:04:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0191A8890D;
+	Wed, 24 Jul 2024 08:04:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83ABE887CE; Wed, 24 Jul 2024 08:04:37 +0200 (CEST)
+ id 4BF208891C; Wed, 24 Jul 2024 08:04:48 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3FEFB88847
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 6938788901
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34917106F;
- Tue, 23 Jul 2024 23:04:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 557ED106F;
+ Tue, 23 Jul 2024 23:05:02 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1FE9A3F766;
- Tue, 23 Jul 2024 23:04:26 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 437B93F766;
+ Tue, 23 Jul 2024 23:04:32 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 21/40] lmb: bootm: remove superfluous lmb stub functions
-Date: Wed, 24 Jul 2024 11:32:05 +0530
-Message-Id: <20240724060224.3071065-22-sughosh.ganu@linaro.org>
+Subject: [PATCH 22/40] lmb: init: initialise the lmb data structures during
+ board init
+Date: Wed, 24 Jul 2024 11:32:06 +0530
+Message-Id: <20240724060224.3071065-23-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,43 +64,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove a couple of superfluous LMB stub functions, and instead put a
-check for calling the lmb_reserve() function.
+The memory map maintained by the LMB module is now persistent and
+global. This memory map is being maintained through the alloced list
+structure which can be extended at runtime -- there is one list for
+the available memory, and one for the used memory. Allocate and
+initialise these lists during the board init.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc: New patch
+Changes since rfc: None
 
- boot/bootm.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ common/board_r.c |  4 ++++
+ common/spl/spl.c |  3 +++
+ include/lmb.h    | 11 +++++++++++
+ lib/lmb.c        | 20 ++++++++++++++++++++
+ 4 files changed, 38 insertions(+)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index d44fd2ed87..2689f36977 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- 	return 0;
- }
+diff --git a/common/board_r.c b/common/board_r.c
+index d4ba245ac6..eaf9b40ec0 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -22,6 +22,7 @@
+ #include <hang.h>
+ #include <image.h>
+ #include <irq_func.h>
++#include <lmb.h>
+ #include <log.h>
+ #include <net.h>
+ #include <asm/cache.h>
+@@ -610,6 +611,9 @@ static init_fnc_t init_sequence_r[] = {
+ #ifdef CONFIG_CLOCKS
+ 	set_cpu_clk_info, /* Setup clock information */
+ #endif
++#if CONFIG_IS_ENABLED(LMB)
++	initr_lmb,
++#endif
+ #ifdef CONFIG_EFI_LOADER
+ 	efi_memory_init,
+ #endif
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 7794ddccad..38ac0608bb 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -723,6 +723,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	    IS_ENABLED(CONFIG_SPL_ATF))
+ 		dram_init_banksize();
  
--#if !CONFIG_IS_ENABLED(LMB)
--#define lmb_reserve(base, size)
--static inline void boot_start_lmb(void) { }
--#endif
--
- static int bootm_start(void)
- {
- 	memset((void *)&images, 0, sizeof(images));
-@@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 		images->os.end = relocated_addr + image_size;
- 	}
- 
--	lmb_reserve(images->os.load, (load_end - images->os.load));
-+	if (CONFIG_IS_ENABLED(LMB))
-+		lmb_reserve(images->os.load, (load_end - images->os.load));
++	if (IS_ENABLED(CONFIG_SPL_LMB))
++		initr_lmb();
 +
+ 	if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
+ 		ret = pci_init();
+ 		if (ret)
+diff --git a/include/lmb.h b/include/lmb.h
+index 2d8f9a6b71..cc4cf9f3c8 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -37,6 +37,17 @@ struct lmb_region {
+ 	enum lmb_flags flags;
+ };
+ 
++/**
++ * initr_lmb() - Initialise the LMB lists
++ *
++ * Initialise the LMB lists needed for keeping the memory map. There
++ * are two lists, in form of alloced list data structure. One for the
++ * available memory, and one for the used memory.
++ *
++ * Return: 0 on success, -ve on error
++ */
++int initr_lmb(void);
++
+ /**
+  * lmb_add_memory() - Add memory range for LMB allocations
+  *
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 5afdfc32fb..5baa5c4c52 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -783,3 +783,23 @@ int lmb_mem_regions_init(void)
+ 
  	return 0;
  }
- 
++
++/**
++ * initr_lmb() - Initialise the LMB lists
++ *
++ * Initialise the LMB lists needed for keeping the memory map. There
++ * are two lists, in form of alloced list data structure. One for the
++ * available memory, and one for the used memory.
++ *
++ * Return: 0 on success, -ve on error
++ */
++int initr_lmb(void)
++{
++	int ret;
++
++	ret = lmb_mem_regions_init();
++	if (ret)
++		printf("Unable to initialise the LMB data structures\n");
++
++	return ret;
++}
 -- 
 2.34.1
 
