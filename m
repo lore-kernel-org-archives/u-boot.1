@@ -4,68 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D0FC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1A91C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:38:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFD448896B;
-	Wed, 24 Jul 2024 16:37:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A18B88950;
+	Wed, 24 Jul 2024 16:37:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iQvQyaRf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FIApjkKF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4CD78897A; Wed, 24 Jul 2024 16:37:27 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 0773D88920; Wed, 24 Jul 2024 16:37:29 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 714F888920
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:37:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D978F8895D
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:37:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b7a0ef0e75so40356646d6.1
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:37:25 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-65cd720cee2so68809677b3.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:37:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721831844; x=1722436644; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721831846; x=1722436646; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5fdRErxGSUe2YcBjty9uU+IoPYtODwUThkLaFN11WmM=;
- b=iQvQyaRfvJZWXY6+jcc02QFphREhjbZ5ZlljS/2Vg7kPG2fuJAXzzIrRruIrTcm+DY
- zjgBCDtQ4B8CE2JHgaj5fEJh3/dDexAC1x5PrJqiF4+Yi379ZI5iSvKEdNXR9uzUZ5AS
- VwTx9S0vRBDKpWno4SRrLjuDJWesYC2M6Bv9E=
+ bh=jcv0xRB+t/lQ24cY2EvHropBDzNEtxeTwdJm4XnAByk=;
+ b=FIApjkKFwNL12syCBu0ULd2IrCHO+ypJmzrbM88KyC2ZegI1+0GqIkYOit+b1diF7T
+ y1GlP/0F74Rm1/K9v6jjvCSt/oOwC2ESnR+bXknz9ojKWuBlEHlfNohi/XUJCXtoB6MW
+ 4LEsHP+QLP9U6JD75lfcKb89GCFYUg+zDsbIE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721831844; x=1722436644;
+ d=1e100.net; s=20230601; t=1721831846; x=1722436646;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5fdRErxGSUe2YcBjty9uU+IoPYtODwUThkLaFN11WmM=;
- b=sV1xx6m71FhZOB8jo6P4oF/+aE+dnp8aMNBpkEWaqGhsW76bppcVDtKA+fB7uoBy8N
- 9QxiWkUN/AKUKzGs8HD0yW3DvIN6ZYWf7gyr5XydHmEFNEMB2AoX6//3q0OKRGTFS21r
- VG1JnUf49hlHUVniHI4df1cNTIJT6JhQi8WA70rw/nR+07+cVIt6pwx24xzQl/8MV8le
- AuIYt+S+16bTkEECrOEUB8IZIPlDCKxGiA5G6tOLG1j6NLzO96hQ2hBzPvHuirhDfhEG
- iN+AIWnlOBZfwNgyzF0V2Jn2wgCNnogsthev4hzKS9JcpXq5dPnuqNw3rFO2HrEVWnbz
- uOqg==
-X-Gm-Message-State: AOJu0YyQIxAke0NQZ6z6xaNKo5lbIl82tWoTF6ifQFPjJNa+fNlK6Q4L
- 1KOa3z+Sd3nVr9vo7zIKFgti2TxBs/QtAHjsU+hRnlocttnTnnyQJmOIX6d+ejM5Qf91RLIfmcp
- FStofmHi3JlybVA+f+j2r565peuWxH+mIuG5FAc681hqph48=
-X-Google-Smtp-Source: AGHT+IH31UP52RIJ3K6UoOw10/TvflmptdK3o13a/lw/iSaMyn1W6IcZedCur1YBtv1QBssoqYcOsP7E3Aw/19Auebg=
-X-Received: by 2002:ad4:5be4:0:b0:6b5:413a:3f96 with SMTP id
- 6a1803df08f44-6b98ed243c1mr33876376d6.10.1721831844303; Wed, 24 Jul 2024
- 07:37:24 -0700 (PDT)
+ bh=jcv0xRB+t/lQ24cY2EvHropBDzNEtxeTwdJm4XnAByk=;
+ b=w5VOfB4BXDVGtQnuohdmGSX7Ggpw90bS3tpferApQOIctxetrL93bPNR9qX/9X5nW5
+ X0VWbKcJ2IkyNHnGLLqftncyKKW6oeQOag6WwPbmNIkP8cpqGDAByqUIP5h2yKGUfKJ8
+ vUc5Nj8Jii0GHs8rRFaAzmZTrmOd3nj5bCsYpZupefdBRr58TtEoqmkZAyCATWf8xyPL
+ ILU7f3l1583124w+Ml9gkMhU8weEDdQ92vF6xa5RHRxxkWkz7V3SWlscR4M0Cxk85Ds5
+ x++SBXYvVEG/xtW0K0CTi0704ce8lmy+f/bhNQo6DO2c8kpsRst7yuCE11k0LfVAlWB1
+ oFbg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYSlqO9bHRy7zF1PCY292USr3GOfNtunMYDPRjiT9QN72IyK3pZsqnijDZZk3h9q2rq59VxAFQYVZFQnNYSXqWGRQKyQ==
+X-Gm-Message-State: AOJu0YyTAvriRdRmLOQvwCX71iYKdfRAH97F8dl6bFxX6BD62LJ1xm0i
+ 1Xbt9qXnyYE7NarXSxV2PhYOSL5nWifNEHb55ojwAAdGBAz482jt6yj8VvSQ0M0ttzyeNQcovDS
+ j2nxLNdINT/zGoQs15VqCpr/BoSs6WmfpjcaJuZ3x8/0OGIU=
+X-Google-Smtp-Source: AGHT+IH+Rw4SLKcY+vjP32sJz/3/SouyTzZtnA4UlIMxTOnCgkLzo6VQ0XQFqGwDERZ7T35E/NB2b9tXRMq6n9fmdi4=
+X-Received: by 2002:a0d:fb07:0:b0:627:778f:b0a8 with SMTP id
+ 00721157ae682-671f589adb3mr30939637b3.42.1721831845700; Wed, 24 Jul 2024
+ 07:37:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240723150400.16650-1-Zhiqiang.Hou@nxp.com>
- <20240723150400.16650-2-Zhiqiang.Hou@nxp.com>
-In-Reply-To: <20240723150400.16650-2-Zhiqiang.Hou@nxp.com>
+References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
+ <20240704073544.670249-39-sughosh.ganu@linaro.org>
+ <20240705195057.GP38804@bill-the-cat>
+ <CAC_iWjJDwFLMaP=S=z_OMnnQb=q32QMEPoywxPWwjixMSbJ84Q@mail.gmail.com>
+ <CADg8p946kVK_BfrSvEgFcvQh95MCRMBKJ+48syCnCSvrpJQ0-w@mail.gmail.com>
+ <CAFLszTiYALCrgBUBJ=g_BoQtOzHGx2OhuTxCioCHdXNuJb850w@mail.gmail.com>
+ <20240723142055.GG989285@bill-the-cat>
+In-Reply-To: <20240723142055.GG989285@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 24 Jul 2024 08:37:13 -0600
-Message-ID: <CAFLszTiXhnZ+=e1d3k0izMAYtPOHKb2bbdubrkB-kPL+KdXfjw@mail.gmail.com>
-Subject: Re: [PATCHv1 1/5] cpu: add release_core callback
-To: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com, 
- festevam@gmail.com
+Date: Wed, 24 Jul 2024 08:37:14 -0600
+Message-ID: <CAFLszTgG9WuzYp97ANm=k3iju-DH+c5A2HfgwmUznti9tQyzpw@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 38/48] lib: Kconfig: add a config symbol for
+ getting lmb memory map updates
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,79 +95,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zhiqiang,
+Hi Tom,
 
-On Tue, 23 Jul 2024 at 08:43, Zhiqiang Hou <Zhiqiang.Hou@nxp.com> wrote:
+On Tue, 23 Jul 2024 at 08:20, Tom Rini <trini@konsulko.com> wrote:
 >
-> From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+> On Tue, Jul 23, 2024 at 01:42:59PM +0100, Simon Glass wrote:
+> > Hi Sughosh,
+> >
+> > On Mon, 22 Jul 2024 at 13:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > On Mon, 22 Jul 2024 at 18:00, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > On Fri, 5 Jul 2024 at 22:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Jul 04, 2024 at 01:05:34PM +0530, Sughosh Ganu wrote:
+> > > > >
+> > > > > > Add a Kconfig symbol to enable getting updates on any memory map
+> > > > > > changes that might be done by the LMB module. This notification
+> > > > > > mechanism can then be used to have a synchronous view of allocated and
+> > > > > > free memory.
+> > > > > >
+> > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > ---
+> > > > > > Changes since V1:
+> > > > > > * Change the description to highlight only LMB notifications.
+> > > > > > * Add a separate line for dependencies.
+> > > > > >
+> > > > > >  lib/Kconfig | 10 ++++++++++
+> > > > > >  1 file changed, 10 insertions(+)
+> > > > > >
+> > > > > > diff --git a/lib/Kconfig b/lib/Kconfig
+> > > > > > index 7eea517b3b..b422183a0f 100644
+> > > > > > --- a/lib/Kconfig
+> > > > > > +++ b/lib/Kconfig
+> > > > > > @@ -74,6 +74,16 @@ config HAVE_PRIVATE_LIBGCC
+> > > > > >  config LIB_UUID
+> > > > > >       bool
+> > > > > >
+> > > > > > +config MEM_MAP_UPDATE_NOTIFY
+> > > > > > +     bool "Get notified of any changes to the LMB memory map"
+> > > > > > +     depends on EVENT && LMB && EFI_LOADER
+> > > > > > +     default y
+> > > > > > +     help
+> > > > > > +       Enable this option to get notification on any changes to the
+> > > > > > +       memory that is allocated or freed by the LMB module. This will
+> > > > > > +       allow different modules that allocate memory or maintain a memory
+> > > > > > +       map to have a synchronous view of available and allocated memory.
+> > > > >
+> > > > > This needs to be select'd when it's going to be used, opting out of
+> > > > > making sure memory reservations are obeyed isn't a good idea.
+> > > >
+> > > > +1 which begs the question, do we need the config option at all ?
+> > >
+> > > The config symbol can be used for removing the code for platforms
+> > > which do not support EFI ?
+> >
+> > I am still of the so-far firm opinion that this can be done once,
+> > before booting, rather than maintaining two separate tables as we go.
 >
-> Add a new callback release_core to the cpu_ops, which is used to
-> release a CPU core to run baremetal or RTOS application on a SoC
-> with multiple CPU cores.
->
-> Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-> ---
->  drivers/cpu/cpu-uclass.c | 10 ++++++++++
->  include/cpu.h            | 15 +++++++++++++++
->  2 files changed, 25 insertions(+)
->
-> diff --git a/drivers/cpu/cpu-uclass.c b/drivers/cpu/cpu-uclass.c
-> index 16f8f2e521..2c8e46c05e 100644
-> --- a/drivers/cpu/cpu-uclass.c
-> +++ b/drivers/cpu/cpu-uclass.c
-> @@ -104,6 +104,16 @@ int cpu_get_vendor(const struct udevice *dev, char *buf, int size)
->         return ops->get_vendor(dev, buf, size);
->  }
->
-> +int cpu_release_core(const struct udevice *dev, phys_addr_t addr)
-> +{
-> +       struct cpu_ops *ops = cpu_get_ops(dev);
-> +
-> +       if (!ops->release_core)
-> +               return -ENOSYS;
-> +
-> +       return ops->release_core(dev, addr);
-> +}
-> +
->  U_BOOT_DRIVER(cpu_bus) = {
->         .name   = "cpu_bus",
->         .id     = UCLASS_SIMPLE_BUS,
-> diff --git a/include/cpu.h b/include/cpu.h
-> index 2077ff3063..0018910d61 100644
-> --- a/include/cpu.h
-> +++ b/include/cpu.h
-> @@ -102,6 +102,15 @@ struct cpu_ops {
->          *         if not.
->          */
->         int (*is_current)(struct udevice *dev);
-> +
-> +       /**
-> +        * release_core() - Relase a CPU core to the given address to run application
-> +        *
-> +        * @dev:        Device to check (UCLASS_CPU)
-> +        * @addr:       Address to relese the CPU core
-> +        * @return 0 if OK, -ve on error
-> +        */
-> +       int (*release_core)(const struct udevice *dev, phys_addr_t addr);
->  };
->
->  #define cpu_get_ops(dev)        ((struct cpu_ops *)(dev)->driver->ops)
-> @@ -164,4 +173,10 @@ int cpu_is_current(struct udevice *cpu);
->   */
->  struct udevice *cpu_get_current_dev(void);
->
-> +/**
-> + * cpu_release_core() - Relase a CPU core to the given address to run application
-> + *
-> + * @return 0 if OK, -ve on error
-> + */
-> +int cpu_release_core(const struct udevice *dev, phys_addr_t addr);
->  #endif
-> --
-> 2.17.1
->
+> Did you see the part in the thread where he explained the multiple entry
+> points that would need to be kept in sync?
 
-Please also add a test for this callback to test/dm/cpu.c
+Yes, but I'm not sure what they are, nor why a shared function cannot
+be called twice from two different places.
 
 Regards,
 Simon
