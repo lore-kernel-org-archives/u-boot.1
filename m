@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D4FCC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C160C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0F9488955;
-	Wed, 24 Jul 2024 08:05:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BB0688938;
+	Wed, 24 Jul 2024 08:05:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66B1F88906; Wed, 24 Jul 2024 08:05:06 +0200 (CEST)
+ id 5F23788959; Wed, 24 Jul 2024 08:05:19 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id ECC198890F
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0A9A088935
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DF608152B;
- Tue, 23 Jul 2024 23:05:22 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F2D7A1476;
+ Tue, 23 Jul 2024 23:05:38 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CB9DD3F766;
- Tue, 23 Jul 2024 23:04:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DEDAE3F766;
+ Tue, 23 Jul 2024 23:05:08 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,10 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 26/40] spl: call spl_board_init() at the end of the spl init
- sequence
-Date: Wed, 24 Jul 2024 11:32:10 +0530
-Message-Id: <20240724060224.3071065-27-sughosh.ganu@linaro.org>
+Subject: [PATCH 29/40] sandbox: spl: enable lmb config for SPL
+Date: Wed, 24 Jul 2024 11:32:13 +0530
+Message-Id: <20240724060224.3071065-30-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -64,43 +63,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The spl_board_init() function on sandbox invokes the unit
-tests. Invoking the tests should be done once the rest of the system
-has been initialised. Call the spl_board_init() function at the very
-end, once the rest of the initilisation functions have been called,
-including the setting up of the LMB memory map.
+Enable the LMB config in SPL. This helps in testing the LMB code in
+SPL on sandbox.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc: New patch
+Changes since rfc:
+* Enable config for sandbox_noinst
 
- common/spl/spl.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ configs/sandbox_noinst_defconfig | 1 +
+ configs/sandbox_spl_defconfig    | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 38ac0608bb..891edde156 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -713,9 +713,6 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	if (CONFIG_IS_ENABLED(SOC_INIT))
- 		spl_soc_init();
- 
--	if (CONFIG_IS_ENABLED(BOARD_INIT))
--		spl_board_init();
--
- 	if (IS_ENABLED(CONFIG_SPL_WATCHDOG) && CONFIG_IS_ENABLED(WDT))
- 		initr_watchdog();
- 
-@@ -733,6 +730,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		/* Don't fail. We still can try other boot methods. */
- 	}
- 
-+	if (CONFIG_IS_ENABLED(BOARD_INIT))
-+		spl_board_init();
-+
- 	bootcount_inc();
- 
- 	/* Dump driver model states to aid analysis */
+diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
+index 3e5ef854f6..6150f55072 100644
+--- a/configs/sandbox_noinst_defconfig
++++ b/configs/sandbox_noinst_defconfig
+@@ -285,3 +285,4 @@ CONFIG_TPM=y
+ CONFIG_ZSTD=y
+ CONFIG_SPL_LZMA=y
+ CONFIG_ERRNO_STR=y
++CONFIG_SPL_LMB=y
+diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
+index 2823bde492..3dd4c7ab43 100644
+--- a/configs/sandbox_spl_defconfig
++++ b/configs/sandbox_spl_defconfig
+@@ -253,3 +253,4 @@ CONFIG_ZSTD=y
+ CONFIG_SPL_LZMA=y
+ CONFIG_ERRNO_STR=y
+ CONFIG_SPL_HEXDUMP=y
++CONFIG_SPL_LMB=y
 -- 
 2.34.1
 
