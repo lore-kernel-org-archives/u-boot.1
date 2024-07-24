@@ -4,53 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 727D4C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 10:57:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8258C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 10:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEC0D88826;
-	Wed, 24 Jul 2024 12:57:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6CFDE888AA;
+	Wed, 24 Jul 2024 12:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1721818620;
-	bh=/s7KkX46ihE+Tel3MjkYu1BIn2RhM2MKPOHWM88rOMM=;
+	s=phobos-20191101; t=1721818623;
+	bh=BaTX+G/GIR8swIf730+X1nG1RCY4Z3r5WOESB4wIteo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UMoBgLiejS8WjXB17u3JQFhDPFcJu+VoX6NLzSgau8Xwdz7f/zOjOSBISoFQFsFOC
-	 13D7gv+ImjFUUX4+paQR4kzWpcdLaqwwADNv/2aXsNEfMTG0ovQhigGWOON8tfaAFJ
-	 7Jb4eR0L8aToaWbF9BjmZIXRwHQ3vFDGi9BiwU7dgbW0OjFJVqlxU2y7Qpz+O6qNtj
-	 ux5Dr/NFEp4Gwl1UeqJYulvrgqUaUUfHiCuDJSsX6uALOM13fEgaCZhiH797KK4B9b
-	 1ZqZTLHJoZ7L+PvCNkC3fZIGn1TLPgFOGU2PdK/HSkm0gvCKZ713xw58LgFcC6drWe
-	 nxfnzEJR6jO5Q==
+	b=Fd9F/R264WejMeRn7zNnDk6h+LImub88iD+bB3ZeXP52mplY2L7J+CQcEOQ5XJ1O6
+	 cWzzYLlycYKqnNgEFuw+6IHcQfRrf02eUkrZ2uCw/vTdCOYm8sKbpyzRofm2pyScXv
+	 RMKJHxsmQqJTnm/G3ZpLHBX7xMbu/4pHKwmSzdbi+TCDJDV2w8DspiaBaqC1WHP9Q+
+	 yF0J/7PhWzau+Pet2KPQ0O0EZddNVrfJBq+Us6FKubuPzxuxr9xrHqnucJPgebfV8P
+	 jxwHWpjnJlJMZ0G9ldU8QpL/zYEesydSYwgIuPln5K7ydvLTk2Ky8tik/IK+AwjXyP
+	 Bb2gJY7Xj5oRw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 40CAB88826;
+ by phobos.denx.de (Postfix) with ESMTPSA id D865888886;
  Wed, 24 Jul 2024 12:56:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1721818619;
- bh=/s7KkX46ihE+Tel3MjkYu1BIn2RhM2MKPOHWM88rOMM=;
+ s=phobos-20191101; t=1721818620;
+ bh=BaTX+G/GIR8swIf730+X1nG1RCY4Z3r5WOESB4wIteo=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=eDmT6qOtD3T/Lbvc6NzBPpBJX9lRJaPE1SsfPTlfluERjRoKeRzoxY0419bRlYfnQ
- zBzbfpvx+HjGNbK5/3UwumtpdDULPCa35r2u6n7OTjltc2AiF8Jm+Y1/5vCnASUNHs
- Egog++72rYSVjL0b8OF6snid0NBGdz6KQE9ClJsB95IDGjQjGU1dKDQ1rNPNkmRknQ
- JZUbotrcYeBoN0hORj6ze/4gdIWqQSQHDS2/83Y0RlEZq4GdnOWoirQfue07pMqdtn
- 7J/jaXTSPhSJAVkWNUSGcu6QpOC0rVCBWDkuiMNdAwMM8SRD/5SXNyKcMjf/W2Mfuf
- Z7S1KNW05nneA==
-Message-ID: <02d82a41-c336-4689-a340-f5c8658d1614@denx.de>
-Date: Wed, 24 Jul 2024 12:04:38 +0200
+ b=byY1zDNtsXWYSmrHJNTu8i1jUD61Hx+Kb5UIGXF/SG2COtybJwURKkv/R62ttGBt9
+ FXBxr85FofudfCWsA1t4aKtyrqPee+mKQBt2Q5XhlNS8L25b5SstfhITC5OKLydEB0
+ MPlMVHERz0BT3vjbGZTPTNXELOz7SSSyV+UV0BLSeP4u4hT3gYcpsKDaPZhD1GLcW3
+ 1yE9xhq4qNDyoBVl+rk9AQdZe183N77807fitlglG1kWQyVBBb5tfv2mF5PwInOw0+
+ zCM/Ngkk9q7JnWUVj+Prnt18OiAoEnDA4y8yCxvB9N6Gif0syU0kFYwdABUkQvmQiB
+ 78Bw4khrwNyaQ==
+Message-ID: <7b97413c-2786-417d-adbc-b8b7a2511de0@denx.de>
+Date: Wed, 24 Jul 2024 12:11:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] i2c: imx_lpi2c: Fix a typo in bus_i2c_receive
+Subject: Re: [PATCH 2/3] i2c: imx_lpi2c: Replace hard-coded bus speed value
+ with bus->speed_hz
 To: fedorross@gmail.com, u-boot@lists.denx.de
 Cc: Fedor Ross <fedor.ross@ifm.com>, Heiko Schocher <hs@denx.de>,
  Tom Rini <trini@konsulko.com>
 References: <20240724095943.214967-1-fedor.ross@ifm.com>
+ <20240724095943.214967-2-fedor.ross@ifm.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240724095943.214967-1-fedor.ross@ifm.com>
+In-Reply-To: <20240724095943.214967-2-fedor.ross@ifm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,29 +74,41 @@ X-Virus-Status: Clean
 On 7/24/24 11:59 AM, fedorross@gmail.com wrote:
 > From: Fedor Ross <fedor.ross@ifm.com>
 > 
-> Fix a typo in a debug message. It should be 'for' not 'fot' .
+> Instead of using the hard-coded bus speed value I2C_SPEED_STANDARD_RATE,
+> use the actual configured bus speed. This way the bus speed doesn't
+> change suddenly after calling the imx_lpi2c_probe_chip() function for
+> example.
 > 
 > Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
-
-Please add '---' here for V2, so the CC list does not get included in 
-commit message when the patch is applied.
-
 > Cc: Heiko Schocher <hs@denx.de>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: Marek Vasut <marex@denx.de>
 > ---
->   drivers/i2c/imx_lpi2c.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/i2c/imx_lpi2c.c | 11 +++++++----
+>   1 file changed, 7 insertions(+), 4 deletions(-)
 > 
 > diff --git a/drivers/i2c/imx_lpi2c.c b/drivers/i2c/imx_lpi2c.c
-> index a1be841b119..3c43f61d819 100644
+> index 3c43f61d819..7b10b2b252d 100644
 > --- a/drivers/i2c/imx_lpi2c.c
 > +++ b/drivers/i2c/imx_lpi2c.c
-> @@ -130,7 +130,7 @@ static int bus_i2c_receive(struct udevice *bus, u8 *rxbuf, int len)
+> @@ -163,6 +163,7 @@ static int bus_i2c_receive(struct udevice *bus, u8 *rxbuf, int len)
+>   static int bus_i2c_start(struct udevice *bus, u8 addr, u8 dir)
+>   {
+>   	lpi2c_status_t result;
+> +	struct dm_i2c_bus *i2c = dev_get_uclass_priv(bus);
+>   	struct imx_lpi2c_bus *i2c_bus = dev_get_priv(bus);
+>   	struct imx_lpi2c_reg *regs = (struct imx_lpi2c_reg *)(i2c_bus->base);
+>   	u32 val;
+> @@ -172,7 +173,7 @@ static int bus_i2c_start(struct udevice *bus, u8 addr, u8 dir)
+>   		debug("i2c: start check busy bus: 0x%x\n", result);
 >   
->   	result = bus_i2c_wait_for_tx_ready(regs);
->   	if (result) {
-> -		debug("i2c: receive wait fot tx ready: %d\n", result);
-> +		debug("i2c: receive wait for tx ready: %d\n", result);
+>   		/* Try to init the lpi2c then check the bus busy again */
+> -		bus_i2c_init(bus, I2C_SPEED_STANDARD_RATE);
+> +		bus_i2c_init(bus, i2c->speed_hz);
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+Drop the second parameter of bus_i2c_init(). In bus_i2c_init(), do:
+
+struct dm_i2c_bus *i2c = dev_get_uclass_priv(bus);
+int speed = i2c->speed_hz;
+
+That should clean the proliferation of "speed" variable.
