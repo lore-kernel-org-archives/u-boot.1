@@ -4,114 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7DDAC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 12:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED59C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 12:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB481887F5;
-	Wed, 24 Jul 2024 14:36:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id E3946887F5;
+	Wed, 24 Jul 2024 14:41:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="KM7uXiQL";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PHGL+pzq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE926888A5; Wed, 24 Jul 2024 12:31:30 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 106B38881B; Wed, 24 Jul 2024 14:41:33 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C763888F6
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 12:31:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 762DC8857D
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 14:41:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 9D09E100021;
- Wed, 24 Jul 2024 13:31:27 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 9D09E100021
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1721817087;
- bh=vg4D6pTJ0cwKiF4S3SWao84rTPVc0JT1KDzE9yTJYn8=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=KM7uXiQLceqSLvkjfpWSP9xuPpdMz9WIB0Y51FEiPi3TthiWn7hshW8zUcFCgFSoy
- pwjkO0qKGzEP/9DW4cQxMPldwy9QOJ1UNj4RnTExnRIjBnVLSID1wWr9wG3aF563W+
- Mh9Wj5ztgyn861ef9q0AGL5e1Fcb7yiX4BV4/5Yt2KGsRWMchJz6kBLtGVJbe0k9GF
- awRLhB8G7TLSCFi27AUf9bHrDYb5GT9SDKj6XDUrlLVeLEpUBGRXWePIDMX0QQ8km0
- 4oIlgcGseYMAqYujtBJCRu5hlsXOvGGDeL5Eni4m5lj1cMhDWahfCK4o0/qItGJBK9
- tWlmupo2RZ7fA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 24 Jul 2024 13:31:27 +0300 (MSK)
-Received: from p-i-exch-a-m1.sberdevices.ru (172.24.196.116) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 24 Jul 2024 13:31:27 +0300
-Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.4; Wed, 24 Jul 2024 13:31:26 +0300
-Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::81d7:3d68:fdfd:518]) by
- p-i-exch-sc-m02.sberdevices.ru ([fe80::81d7:3d68:fdfd:518%9]) with
- mapi id 15.02.1118.040; Wed, 24 Jul 2024 13:31:26 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: Michael Walle <michael@walle.cc>
-CC: "dario.binacchi@amarulasolutions.com"
- <dario.binacchi@amarulasolutions.com>, "michael@amarulasolutions.com"
- <michael@amarulasolutions.com>, "frieder.schrempf@kontron.de"
- <frieder.schrempf@kontron.de>, "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>, "bmeng@tinylab.org"
- <bmeng@tinylab.org>, "tobias@waldekranz.com" <tobias@waldekranz.com>,
- "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>, "jbx6244@gmail.com"
- <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
- <abdellatif.elkhlifi@arm.com>, "michal.simek@amd.com" <michal.simek@amd.com>, 
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
- "patrice.chotard@foss.st.com" <patrice.chotard@foss.st.com>, kernel
- <kernel@sberdevices.ru>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v7 0/3] Introduce mtdblock device
-Thread-Topic: [PATCH v7 0/3] Introduce mtdblock device
-Thread-Index: AQHa2NXQXYourbtGaEyeJouKDxf6ULH9bcMAgAgXeQA=
-Date: Wed, 24 Jul 2024 10:31:26 +0000
-Message-ID: <20240724103110.dhsla6mekkncaoal@cab-wsm-0029881>
-References: <20240718054606.799665-1-avromanov@salutedevices.com>
- <D2TBIZ3HDGMJ.2S5Q1ZYD44D7I@walle.cc>
-In-Reply-To: <D2TBIZ3HDGMJ.2S5Q1ZYD44D7I@walle.cc>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.92]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <A52477187CBABF4B98AE6C3848F3D133@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4277a5ed48bso51008935e9.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 05:41:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721824890; x=1722429690;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ws85tnaGLq+atxk5UHfnkVoJR9lY1iQJJyWYDvzrVU4=;
+ b=PHGL+pzqE7dRyuxbQNTX4BsSthLWWVUJLRluliStyfQGXHSiyo+CZH4QNBoM+d6MeP
+ WFoWy/RV87L/9Bi1TC7QMRbKT1oVdCfl41qVLNnGAZhsg2FbcdUQSWjK4YK4n9uu4EW1
+ ynKH7eWI5qbS0S3x/O6ME+D2rCNt4iPJtLFF9rqNd7smB7F+4cMDz8VJ9oMqx50cxwy+
+ 2y2bCHoaUeREfEiNqVsQ99C+Et4jQw7NNQYPEGsN1BXXzlfqK4ejcI8PY2osxUnMeDzA
+ Jw4s8WpZNFP7x+LvCsYfTCisOhUJoB0yZzsJ5QJ5imLvQQfKWSM9AQgr8gw2+ZmU9Jgf
+ vR2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721824890; x=1722429690;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ws85tnaGLq+atxk5UHfnkVoJR9lY1iQJJyWYDvzrVU4=;
+ b=BjWgHJKIc1NEKGoaokk507av+Dyn7qNL0Wwk38YIppYY4PF9LPBOv96KHT9myTtNKt
+ IUzRfvOOm1x0qumTHAZjaNwHa5TilEcgAYkjyoi9BONemvCGfzDGHyaJCLRdrglfO5pC
+ N2+Hh6NHxw4Zb1CT2UiR7mLs6ljahq1KR4WUyHWVG5PTuFByCgaD1QnWEa3TUsEUfWId
+ VeW8WUSXsI03m7xfohVK7JA2OeqPlBWdzslLyN1x2DSxUx/i46h2k3meJUQsPpdpGM02
+ lbSyY4HK8C/P/AC5idSRofHIbuRkMb7vsuh5tiasIqfee8R5LtzZQDE03bTj//Q5V7hW
+ cZTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUP0vYalCOdpAfz9FSuzbzQXxH7VKMR7JVEj/VfeoEKpDx4sogDPvyVmY0049nyzV0zP7+h+g6Y50toOIJ/OdBzYsBHEg==
+X-Gm-Message-State: AOJu0YwZjAVFr6vLTXlGw0wLlZnRTuCSB4ZCvb8qVMwGM/+nJbpd+sh1
+ wKKJsYVgDJtpOY9TGV6NybUlLuZmQC9X06SEsKTTXl9r4RISLOIhQkMY7hZeC+o=
+X-Google-Smtp-Source: AGHT+IGV7bGgnDZN6F7N9bw7FPiyg3U7JSj3P7CzaEElf8zY889Wjba53dPK9rtKD7efkdwswBR6BA==
+X-Received: by 2002:a05:600c:5491:b0:426:6ed2:6130 with SMTP id
+ 5b1f17b1804b1-427f955845bmr14399305e9.14.1721824889323; 
+ Wed, 24 Jul 2024 05:41:29 -0700 (PDT)
+Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427ffaf2460sm3032355e9.40.2024.07.24.05.41.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jul 2024 05:41:28 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Wed, 24 Jul 2024 14:41:25 +0200
+Subject: [PATCH] doc: Add a description for bootmeth_android
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 186694 [Jul 24 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
- 186c4d603b899ccfd4883d230c53f273b80e467f, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/07/24 09:34:00 #26140072
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Wed, 24 Jul 2024 14:35:57 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20240724-doc-bootstd-android-v1-1-03a55b7a7c92@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAHT2oGYC/x3MMQqAMAxA0atIZgM1iopXEYdqomZppBURxLtbH
+ N/w/wNJokqCoXggyqVJLWRUZQHL7sMmqJwN5KhxHTXItuBsdqaT0QeOpozMq+uruW6JPOTyiLL
+ q/V/H6X0/mla+ymUAAAA=
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,36 +98,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Add initial documentation for the Android bootmeth.
 
-Sorry for the late reply.
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+ MAINTAINERS                      |  1 +
+ doc/develop/bootstd/android.rst  | 39 +++++++++++++++++++++++++++++++++++++++
+ doc/develop/bootstd/index.rst    |  1 +
+ doc/develop/bootstd/overview.rst |  2 +-
+ 4 files changed, 42 insertions(+), 1 deletion(-)
 
-On Fri, Jul 19, 2024 at 08:57:04AM +0200, Michael Walle wrote:
-> Hi,
->=20
-> > Tested only on SPI NAND, so bind is made only for
-> > SPI NAND drivers.
->=20
-> If tried to test this with the SPI NOR framework but I couldn't get
-> it to work. The SPI NOR flash didn't register with/was found by the
-> mtdblock subsystem. I guess that is probably because the SPI NOR
-> flash has it's own UCLASS_SPI_FLASH. There is some kind of
-> compatibility layer (drivers/mtd/spi/sf_mtd.c) but it doesn't
-> register a UCLASS_MTD.
->=20
-> Do you have any idea how to get this to work?
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a6e47e8a2179..c2832345ab18 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -945,6 +945,7 @@ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+ F:	boot/bootmeth_android.c
+ F:	boot/bootmeth_android.h
++F:	doc/develop/bootstd/android.rst
+ 
+ BTRFS
+ M:	Marek Behún <kabel@kernel.org>
+diff --git a/doc/develop/bootstd/android.rst b/doc/develop/bootstd/android.rst
+new file mode 100644
+index 000000000000..41701d5bdff3
+--- /dev/null
++++ b/doc/develop/bootstd/android.rst
+@@ -0,0 +1,39 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++Android Bootmeth
++================
++
++Android provides a mechanism for booting its Operating System from eMMC storage,
++described on `source.android.com <https://source.android.com/docs/core/architecture/bootloader>`_.
++
++Android has strong requirements about partitioning layout which are described
++`here <https://source.android.com/docs/core/architecture/partitions>`_.
++Because multiple partitions are required, this bootmeth only operates on whole mmc
++devices which have a valid partition table.
++
++When invoked on a bootdev, this bootmeth searches for the ``misc`` partition in order
++to read the *boot mode*, which can be one of following:
++
++Normal
++  Boot the regular Android Operating System.
++
++Recovery
++  Boot a slimmed down Recovery Operating System. Can be used
++  to factory reset the device or to apply system updates.
++
++Bootloader
++  Stay in U-Boot and wait for fastboot commands from the host.
++
++After the *boot mode* has been determined, this bootmeth will read the *slot suffix*
++from the ``misc`` partition. For details about slots, see
++`the AOSP documentation <https://source.android.com/docs/core/ota/ab#slots>`_.
++
++When both the *boot mode* and the *slot suffix* are known, the bootflow is created.
++
++When the bootflow is booted, the bootmeth reads the kernel, the boot arguments and
++the vendor ramdisk.
++It then boots the kernel using bootm. The relevant devicetree blob is extracted
++from the ``boot`` partition based on the ``adtb_idx`` environment variable.
++
++The compatible string "u-boot,android" is used for the driver. It is present
++if `CONFIG_BOOTMETH_ANDROID` is enabled.
+diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
+index 9d35b567d55d..4c4e26ccdb70 100644
+--- a/doc/develop/bootstd/index.rst
++++ b/doc/develop/bootstd/index.rst
+@@ -10,6 +10,7 @@ Standard Boot
+    extlinux
+    pxelinux
+    qfw
++   android
+    cros
+    script
+    sandbox
+diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+index ff3cc48eb64f..c6f003851b2a 100644
+--- a/doc/develop/bootstd/overview.rst
++++ b/doc/develop/bootstd/overview.rst
+@@ -429,7 +429,7 @@ Available bootmeth drivers
+ 
+ Bootmeth drivers are provided for booting from various media:
+ 
+-   - Android bootflow (boot image v4)
++   - :doc:`Android <android>` bootflow (boot image v4)
+    - :doc:`ChromiumOS <cros>` ChromiumOS boot from a disk
+    - EFI boot using bootefi from disk
+    - EFI boot using boot manager
 
-I think you have to try bind driver via mtd_bind(), just like
-I do for SPI-NAND in patch "spinand: bind mtdblock".
+---
+base-commit: f659ba43837e5ae5a35fdff3736c8e13f9062abd
+change-id: 20240724-doc-bootstd-android-ddf081b3622a
 
-I see what in file drivers/mtd/spi/sf_probe.c there is struct
-mtd_info and also you have U_BOOT_DRIVER. Maybe try to bind there?
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
->=20
-> -michael
-
-
-
---=20
-Thank you,
-Alexey=
