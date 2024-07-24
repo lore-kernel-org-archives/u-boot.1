@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53012C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:04:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A725AC3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:04:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 980F18881C;
-	Wed, 24 Jul 2024 08:03:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 188E0888A4;
+	Wed, 24 Jul 2024 08:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26BC688845; Wed, 24 Jul 2024 08:03:13 +0200 (CEST)
+ id 0147D888A2; Wed, 24 Jul 2024 08:03:20 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3790488005
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:03:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 8535D88805
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:03:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2D62E1476;
- Tue, 23 Jul 2024 23:03:34 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4F5D0106F;
+ Tue, 23 Jul 2024 23:03:39 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1A3FF3F766;
- Tue, 23 Jul 2024 23:03:03 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3BA263F766;
+ Tue, 23 Jul 2024 23:03:08 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,10 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 05/40] spl: alloc: call full alloc functions if malloc pool is
- available
-Date: Wed, 24 Jul 2024 11:31:49 +0530
-Message-Id: <20240724060224.3071065-6-sughosh.ganu@linaro.org>
+Subject: [PATCH 06/40] alist: add a couple of helper functions
+Date: Wed, 24 Jul 2024 11:31:50 +0530
+Message-Id: <20240724060224.3071065-7-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -64,49 +63,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the malloc simple functionality is enabled in SPL, it is not
-possible to call the full-implementation alloc functions even after
-the heap is set-up in ram memory. Check for this condition and
-call the functions when enabled.
+Add a couple of helper functions to detect an empty and full alist.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc: New patch
+Changes since rfc: None
 
- common/malloc_simple.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ include/alist.h | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-diff --git a/common/malloc_simple.c b/common/malloc_simple.c
-index 4e6d7952b3..982287defe 100644
---- a/common/malloc_simple.c
-+++ b/common/malloc_simple.c
-@@ -40,6 +40,10 @@ void *malloc_simple(size_t bytes)
- {
- 	void *ptr;
- 
-+#if IS_ENABLED(CONFIG_SPL_SYS_MALLOC) && IS_ENABLED(CONFIG_SPL_LMB)
-+	if (gd->flags & GD_FLG_FULL_MALLOC_INIT)
-+		return mALLOc(bytes);
-+#endif
- 	ptr = alloc_simple(bytes, 1);
- 	if (!ptr)
- 		return ptr;
-@@ -50,6 +54,15 @@ void *malloc_simple(size_t bytes)
- 	return ptr;
+diff --git a/include/alist.h b/include/alist.h
+index 6cc3161dcd..06ae137102 100644
+--- a/include/alist.h
++++ b/include/alist.h
+@@ -82,6 +82,28 @@ static inline bool alist_err(struct alist *lst)
+ 	return lst->flags & ALISTF_FAIL;
  }
  
-+void *realloc_simple(void *oldmem, size_t bytes)
++/**
++ * alist_full() - Check if the alist is full
++ *
++ * @lst: List to check
++ * Return: true if full, false otherwise
++ */
++static inline bool alist_full(struct alist *lst)
 +{
-+#if IS_ENABLED(CONFIG_SPL_SYS_MALLOC) && IS_ENABLED(CONFIG_SPL_LMB)
-+	if (gd->flags & GD_FLG_FULL_MALLOC_INIT)
-+		return rEALLOc(oldmem, bytes);
-+#endif
-+	return NULL;
++	return lst->count == lst->alloc;
 +}
 +
- void *memalign_simple(size_t align, size_t bytes)
- {
- 	void *ptr;
++/**
++ * alist_empty() - Check if the alist is empty
++ *
++ * @lst: List to check
++ * Return: true if empty, false otherwise
++ */
++static inline bool alist_empty(struct alist *lst)
++{
++	return !lst->count && lst->alloc;
++}
++
+ /**
+  * alist_get_ptr() - Get the value of a pointer
+  *
 -- 
 2.34.1
 
