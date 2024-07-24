@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C160C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A793C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BB0688938;
+	by phobos.denx.de (Postfix) with ESMTP id AF8238895B;
 	Wed, 24 Jul 2024 08:05:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F23788959; Wed, 24 Jul 2024 08:05:19 +0200 (CEST)
+ id 737F888935; Wed, 24 Jul 2024 08:05:19 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0A9A088935
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id E5BC788906
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F2D7A1476;
- Tue, 23 Jul 2024 23:05:38 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D0C6B106F;
+ Tue, 23 Jul 2024 23:05:33 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DEDAE3F766;
- Tue, 23 Jul 2024 23:05:08 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 261C03F766;
+ Tue, 23 Jul 2024 23:05:02 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 29/40] sandbox: spl: enable lmb config for SPL
-Date: Wed, 24 Jul 2024 11:32:13 +0530
-Message-Id: <20240724060224.3071065-30-sughosh.ganu@linaro.org>
+Subject: [PATCH 28/40] lmb: config: make lmb config symbol def_bool
+Date: Wed, 24 Jul 2024 11:32:12 +0530
+Message-Id: <20240724060224.3071065-29-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,36 +63,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the LMB config in SPL. This helps in testing the LMB code in
-SPL on sandbox.
+The LMB module provides allocation/reservation API's, primarily for
+loading images to memory. This is functionality which is used by all
+boards. Make the config symbol used for the main U-Boot image as
+def_bool and enable it by default.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc:
-* Enable config for sandbox_noinst
+Changes since rfc: New patch
 
- configs/sandbox_noinst_defconfig | 1 +
- configs/sandbox_spl_defconfig    | 1 +
- 2 files changed, 2 insertions(+)
+ lib/Kconfig | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 3e5ef854f6..6150f55072 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -285,3 +285,4 @@ CONFIG_TPM=y
- CONFIG_ZSTD=y
- CONFIG_SPL_LZMA=y
- CONFIG_ERRNO_STR=y
-+CONFIG_SPL_LMB=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 2823bde492..3dd4c7ab43 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -253,3 +253,4 @@ CONFIG_ZSTD=y
- CONFIG_SPL_LZMA=y
- CONFIG_ERRNO_STR=y
- CONFIG_SPL_HEXDUMP=y
-+CONFIG_SPL_LMB=y
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 6a9338390a..c7fa4bc77e 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1099,9 +1099,7 @@ config LIB_ELF
+ 	  This supports for 32 bit and 64 bit versions.
+ 
+ config LMB
+-	bool "Enable the logical memory blocks library (lmb)"
+-	default y if ARC || ARM || M68K || MICROBLAZE || MIPS || \
+-		     NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
++	def_bool y
+ 	help
+ 	  Support the library logical memory blocks. This will require
+ 	  a malloc() implementation for defining the data structures
 -- 
 2.34.1
 
