@@ -4,74 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A0AC3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 19:38:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A285C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 20:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F347B8899A;
-	Wed, 24 Jul 2024 21:38:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 25412889A1;
+	Wed, 24 Jul 2024 22:54:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BG4irEO6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P71o+UVu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F345B8899B; Wed, 24 Jul 2024 21:38:38 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 3C6038899B; Wed, 24 Jul 2024 22:54:26 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87E2488996
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 21:38:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E71ED8899A
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 22:54:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.belisko@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ef2fccca2cso2081591fa.1
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 12:38:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5d4071e9b93so181716eaf.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 13:54:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721849916; x=1722454716; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pAhM2TXnnDNh9KRiWdw+XkyLx/gj0j0v4f8mDWjY60c=;
- b=BG4irEO6PSAu7942daeXiLu6fLr/xqpZnsgz6XJFhl0ESDqHw4eEOFbtUNLSCYrEb/
- KcdFJmT2vcfmRyUH0Bl7M9e7d/JGSUBROA467xosiQArXv+yn28Av3zWmdpRrhJIFZcJ
- zzQDff1SHsQLvEswJYBaeogAPr4M6hWn+v9auOaTW2ovJWuQUZKzUYMSPFvjoZ+Y+I1a
- UUx37vBV408Ad7rtciWhYdviLGLSD+gslyNJOukb3fyI8joRA1GmnaId222wSaIBF/uN
- 7IxPPLx27hShwA5rTBL4iWsEZepEBpbCbqFDqEiuhITiwGhE7btkFeOs6whtLjEQN5I2
- MiCQ==
+ d=konsulko.com; s=google; t=1721854462; x=1722459262; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3HhrqOpO3b6atPooBv4OizUMVPdFSvrmtc3At4rxTSE=;
+ b=P71o+UVuB/Ksz6EsLlbqNJkJiJh4iL9kjhT9pIIh4v3e6ieigaZHEqpIMkeAgOPBKe
+ T4Z154XUrjHfOlb+xRvl6h9T79EEz+c5HcA4tVw4Ce6U48r409mcoZJOaJnjOaA1q+pF
+ PMdTOypoHXc3Cqbgh65gwDMDDPaGLpk1t2jZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721849916; x=1722454716;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pAhM2TXnnDNh9KRiWdw+XkyLx/gj0j0v4f8mDWjY60c=;
- b=Hug41pblb1thQKcpxZaOzy/6cHSFuCcFiQGooIK2V8czEhxkb96kVSlXUFFOdNwGu5
- JLe/8nOjRklLhP9U1sbeeZy89/GTvLburX465p6f+q1H+6szY53WFaC+ps2UP/SzNkfN
- oJeOjpp44/G1KSKz+Wbajh92zI1x2aIyuY3fxQeE2hUU2uwRKdB3ccVpfrVnQvtvEGSc
- 9lMcqAy8yIvL62P5xvTdclmd4i0tv3wBST5SFG5F3mdGyBufSwiUsV1Q8XczVQtWozK9
- J+h16FXS67QdNr0Ff0q+2e54j2efWLq1oYXNtLXHPCG2L7K3YntevUIKxLi8D+9mL/Mk
- 6DvQ==
-X-Gm-Message-State: AOJu0YyaIhqG/4nCEkK+x1rOeSsMMYlObCsuY6hbsGqNFl1+D7gfV4bY
- 6E3a3MMsJ+ZHeYJiNLyRGYDl8rr7Xy/4U+WHKQOBzd0OH88l17HvDeQKQob03s2rkP6Q5s9f4GL
- UzHw98VAQ6MiH6sjZ4Op37xb3uVfwYw==
-X-Google-Smtp-Source: AGHT+IEaE3aqdzJJOQ6tAjkCPcxI23Y//Z+XZdBpuZmXy1HKDBx5cYuB12TLUO/r0+0jnO6xnABBiB/xbC5qRfjO8e4=
-X-Received: by 2002:a2e:a202:0:b0:2ef:23ec:9363 with SMTP id
- 38308e7fff4ca-2f039df3c05mr5349851fa.45.1721849915344; Wed, 24 Jul 2024
- 12:38:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721854462; x=1722459262;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3HhrqOpO3b6atPooBv4OizUMVPdFSvrmtc3At4rxTSE=;
+ b=Pyc/ZzPu/wFZkEcEVTtXv8SnmCOrtfFsz/Jkes2XklAuc+U7U2yXHEyfHViqMIGO2B
+ xdr3nNRsP8x7XG51ymJ8sJz2AVuYRY5I5AqBt7my2NdYpFu8SvLsQwNQLLiHAD69zkJw
+ bKbwcSCZH7gkqQTdkWrBZ4lpafSV8yWdci/S/dVh4uwi86Cz+PFM7Flg+EN4qHf1eNp1
+ jjQXfwM74EDHJb7DqqSvGv3vMjy/0uyKbgsN1b4W9YJU8Tf6J7Lx0mA43Qg9WUbw0JO3
+ JVo9ttf0Zq+5j8297CqEj6zMLrSsY59rOAp0Slr4NEj54s81RX4q266k1GLZXICYLTbf
+ D+Ng==
+X-Gm-Message-State: AOJu0YznRcfRi5pgfAAvm0/xgyi5yQKuS3+xWQ0ocW9Mo7pRP7wcWCU6
+ HGy+XWhdLeuiBm7M0P/meXFoFBwdYIxha1aurPLz1jUCGS/5L6gUqQucfzXZnFM=
+X-Google-Smtp-Source: AGHT+IGFhO8JEUHpFSo66WrSPAze9sWlcXxQA+JPvl8shLOw/kT/Um7tFeuJ8Z3aw9JNyQTWfrnIgw==
+X-Received: by 2002:a05:6820:1b09:b0:5c4:7b18:b8eb with SMTP id
+ 006d021491bc7-5d5ad9c892dmr1487235eaf.2.1721854462631; 
+ Wed, 24 Jul 2024 13:54:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
+ [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5d5b3591726sm2734eaf.15.2024.07.24.13.54.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jul 2024 13:54:22 -0700 (PDT)
+Date: Wed, 24 Jul 2024 14:54:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Max Filippov <jcmvbkbc@gmail.com>
+Subject: Re: [PATCH 04/40] lib: Convert str_to_list() to use alist
+Message-ID: <20240724205418.GM989285@bill-the-cat>
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-5-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-References: <CAAfyv37co294aQKffpt0ce=ajYutBrcnU23P=pi=s6YN5gT3Fg@mail.gmail.com>
- <7e901715-35bb-43b9-9471-d8f4573cbf61@kwiboo.se>
-In-Reply-To: <7e901715-35bb-43b9-9471-d8f4573cbf61@kwiboo.se>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Wed, 24 Jul 2024 21:38:24 +0200
-Message-ID: <CAAfyv36fkumDdFkh_vBrYnc-YKjT5Q18hAcje8+2FHtw7Vw7tA@mail.gmail.com>
-Subject: Re: radxa cm3 2024.01 mmc write error
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9bJIRkQVPdiIVjnz"
+Content-Disposition: inline
+In-Reply-To: <20240724060224.3071065-5-sughosh.ganu@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,62 +101,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On Thu, Jul 11, 2024 at 10:33=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wr=
-ote:
+--9bJIRkQVPdiIVjnz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi Marek,
->
-> On 2024-07-10 21:26, Belisko Marek wrote:
-> > Hi,
-> >
-> > I'm playing with radxa cme and mainline u-boot 2024.01 (present in
-> > scarthgap yocto).
-> > I realized that mmc write fails all the time like:
-> > =3D> md.l $loadaddr
-> > 00c00800: ff7ff7eb fffdffff fffffff5 ffff9fff  ................
-> > =3D> mmc write $loadaddr 1fc0 10
-> >
-> > MMC write: dev # 0, block # 8128, count 16 ... mmc write failed
-> > 0 blocks written: ERROR
-> >
-> > 1fc0 =3D 8128 is according to rockchip gpt table u-boot env partition.
-> >
-> > Is there something I'm doing wrong or its regression?
->
-> Please try with latest U-Boot v2024.07, following fix has been part of
-> U-Boot since v2024.04-rc2.
->
-> rockchip: rk35xx: Remove use of eMMC DDR52 mode
->
-> https://source.denx.de/u-boot/u-boot/-/commit/ebe293bae79d8c64d9cd4284044=
-e25ddadd074b5
+On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
 
-Thanks for the tip, it resolved an issue.
+> From: Simon Glass <sjg@chromium.org>
+>=20
+> Use this new data structure in the utility function.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+>  lib/strto.c | 35 +++++++++++++++++++----------------
+>  1 file changed, 19 insertions(+), 16 deletions(-)
 
->
->
-> Regards,
-> Jonas
->
-> >
-> > Thanks and regards,
-> >
-> > marek
->
->
-BR,
+This is rather big growth when we didn't already have realloc:
+05: lib: Convert str_to_list() to use alist
+   aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
+            xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
+               u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
+                 function                                   old     new   d=
+elta
+                 realloc                                      -    1120   +=
+1120
+                 alist_ensure_ptr                             -     140    =
++140
+                 alist_expand_to                              -     136    =
++136
+                 alist_init                                   -     108    =
++108
+                 alist_uninit_move_ptr                        -      76    =
+ +76
+                 alist_add_ptr                                -      72    =
+ +72
+                 alist_uninit                                 -      48    =
+ +48
+                 str_to_list                                204     232    =
+ +28
 
-marek
 --=20
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
+Tom
 
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
+--9bJIRkQVPdiIVjnz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmahafcACgkQFHw5/5Y0
+tyyDLAv9Hy3h8lZKhPkYzAhXhXhy8MzvCHyP5nJTLr5gFj4mNhKNkmn2L7oRPesY
+2HpBz1q47M3RrC3lDhMqxcrLIbP2cH0nPH6J+kzL/J2e2IdXq19sur7x6p+D1IhG
+Gvm71hvg6rjSgIhxOFgKrQjnzijAM2nKPKu5gAXy7Njn36W/myjAeoH7ZbAsgjqo
+urflFIZpyLncodACKxXPgYZNlX4EfI1p0icKm48pnYczuHeaWVsVHmwLLe2FoWSf
+kBfrsR0ZMdmXhj7YBqIJMxr5H0Og3GQayIxmITVK+OIX/JMqIKvAnpqSbivOkLYx
+yyNcpbDufAiWjZmWQSBLlZanLfNZq+w1gz6mkpT0rLQEckPSY1KqEqGumi3WV4bk
+4mSwlL2MYRCmRDlRTZhrAIveWFrnD0aufIiORUcgvKnIDbQCaH94P4XbGuIUGiTS
+bKibPDvntOeKiYxyLdI6fUlc9IKE8tW95VLPSrGywJM3nXOD3mLbZZwNxGabq61P
+u6W3VyKe
+=Na2Q
+-----END PGP SIGNATURE-----
+
+--9bJIRkQVPdiIVjnz--
