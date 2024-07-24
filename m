@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A285C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 20:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E5AFC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 20:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25412889A1;
-	Wed, 24 Jul 2024 22:54:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0EA88899B;
+	Wed, 24 Jul 2024 22:55:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P71o+UVu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RlXebdY1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C6038899B; Wed, 24 Jul 2024 22:54:26 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id ECE45889AA; Wed, 24 Jul 2024 22:55:48 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E71ED8899A
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 22:54:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4A0A8899A
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 22:55:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5d4071e9b93so181716eaf.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 13:54:23 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3dab349467dso147194b6e.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 13:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721854462; x=1722459262; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721854545; x=1722459345; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3HhrqOpO3b6atPooBv4OizUMVPdFSvrmtc3At4rxTSE=;
- b=P71o+UVuB/Ksz6EsLlbqNJkJiJh4iL9kjhT9pIIh4v3e6ieigaZHEqpIMkeAgOPBKe
- T4Z154XUrjHfOlb+xRvl6h9T79EEz+c5HcA4tVw4Ce6U48r409mcoZJOaJnjOaA1q+pF
- PMdTOypoHXc3Cqbgh65gwDMDDPaGLpk1t2jZA=
+ bh=NJhiQSHA9Ty9tU/Rjw77ZxGwrRoSk+9EGDNcFENlkqM=;
+ b=RlXebdY1f85fUXh3iFDZRYaNC76nwBBb2iTNdcod5LNqduVkmqhJnbODVjQGgj9h8q
+ AuprHPJqzFsJmVr5oaWT2iW9R/jQ2rQ0DSaOXJTvtPwCZDqhpPt2VVLtyWFiLJWHqGEJ
+ JNnYTFowCMEz5S4ozw+3y3cUQWr0a95RcM96I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721854462; x=1722459262;
+ d=1e100.net; s=20230601; t=1721854545; x=1722459345;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3HhrqOpO3b6atPooBv4OizUMVPdFSvrmtc3At4rxTSE=;
- b=Pyc/ZzPu/wFZkEcEVTtXv8SnmCOrtfFsz/Jkes2XklAuc+U7U2yXHEyfHViqMIGO2B
- xdr3nNRsP8x7XG51ymJ8sJz2AVuYRY5I5AqBt7my2NdYpFu8SvLsQwNQLLiHAD69zkJw
- bKbwcSCZH7gkqQTdkWrBZ4lpafSV8yWdci/S/dVh4uwi86Cz+PFM7Flg+EN4qHf1eNp1
- jjQXfwM74EDHJb7DqqSvGv3vMjy/0uyKbgsN1b4W9YJU8Tf6J7Lx0mA43Qg9WUbw0JO3
- JVo9ttf0Zq+5j8297CqEj6zMLrSsY59rOAp0Slr4NEj54s81RX4q266k1GLZXICYLTbf
- D+Ng==
-X-Gm-Message-State: AOJu0YznRcfRi5pgfAAvm0/xgyi5yQKuS3+xWQ0ocW9Mo7pRP7wcWCU6
- HGy+XWhdLeuiBm7M0P/meXFoFBwdYIxha1aurPLz1jUCGS/5L6gUqQucfzXZnFM=
-X-Google-Smtp-Source: AGHT+IGFhO8JEUHpFSo66WrSPAze9sWlcXxQA+JPvl8shLOw/kT/Um7tFeuJ8Z3aw9JNyQTWfrnIgw==
-X-Received: by 2002:a05:6820:1b09:b0:5c4:7b18:b8eb with SMTP id
- 006d021491bc7-5d5ad9c892dmr1487235eaf.2.1721854462631; 
- Wed, 24 Jul 2024 13:54:22 -0700 (PDT)
+ bh=NJhiQSHA9Ty9tU/Rjw77ZxGwrRoSk+9EGDNcFENlkqM=;
+ b=rla4ssZ3CQe7RY2U+2d1PlcTsjfvOPag0JgK3AdP1tbMwJWZqiaiDjr3xO/cy0P9EB
+ yLOQE4j2lqiAeCSbtpryTPyBO252HjGZUoj3AjadaVHJv/koAWeh416UT7ktRI79h2g6
+ vhQeGpdpsmxVnDX6vVsPPOyD+H6+5s68NDERCEJjIeD4aTkofNXYjUX2WtrTGwUNTQ0H
+ JsNEhhj+BKNsKsi+/w/g5bluKbA2uJOS92dLd63UtuuaRfi5Leaq1EoOgmzI5GnSHHE0
+ fzoWwNx7uKVl4tZRChXzWtAqcA/ZPf11PvKe/1z4WJ1dUuT+Onhij7a6MRu+yvF3cYvW
+ KbFg==
+X-Gm-Message-State: AOJu0YzcR1ulbcO5LbHYp9dIvZae9GEoki5Rkr/nm6Gwa1Tfmf/BlNAF
+ RR3bGCY36oNcgA0HSug13S/IbIAx2ZyxwqybcujkVU4X61WmV7RDNB4zdDuiEDL2UPp8fiYKvOl
+ LMbQ=
+X-Google-Smtp-Source: AGHT+IEjZC0rDwKX6AUd33fCIRLoOumVpjS9xgRH6vj2HEVSd9H7dr2YbyVEoy+aZV3A3a1rBjcs9w==
+X-Received: by 2002:a05:6808:1a1d:b0:3d9:ad9d:622f with SMTP id
+ 5614622812f47-3db10ea87a7mr841998b6e.27.1721854545557; 
+ Wed, 24 Jul 2024 13:55:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
  [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d5b3591726sm2734eaf.15.2024.07.24.13.54.20
+ 5614622812f47-3db1357a39bsm10293b6e.55.2024.07.24.13.55.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 13:54:22 -0700 (PDT)
-Date: Wed, 24 Jul 2024 14:54:18 -0600
+ Wed, 24 Jul 2024 13:55:45 -0700 (PDT)
+Date: Wed, 24 Jul 2024 14:55:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
@@ -75,15 +76,15 @@ Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>
-Subject: Re: [PATCH 04/40] lib: Convert str_to_list() to use alist
-Message-ID: <20240724205418.GM989285@bill-the-cat>
+Subject: Re: [PATCH 28/40] lmb: config: make lmb config symbol def_bool
+Message-ID: <20240724205541.GN989285@bill-the-cat>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-5-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-29-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9bJIRkQVPdiIVjnz"
+ protocol="application/pgp-signature"; boundary="DIP3WdR7jdMOwWf8"
 Content-Disposition: inline
-In-Reply-To: <20240724060224.3071065-5-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-29-sughosh.ganu@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,66 +103,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9bJIRkQVPdiIVjnz
+--DIP3WdR7jdMOwWf8
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
+On Wed, Jul 24, 2024 at 11:32:12AM +0530, Sughosh Ganu wrote:
 
-> From: Simon Glass <sjg@chromium.org>
+> The LMB module provides allocation/reservation API's, primarily for
+> loading images to memory. This is functionality which is used by all
+> boards. Make the config symbol used for the main U-Boot image as
+> def_bool and enable it by default.
 >=20
-> Use this new data structure in the utility function.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  lib/strto.c | 35 +++++++++++++++++++----------------
->  1 file changed, 19 insertions(+), 16 deletions(-)
+> Changes since rfc: New patch
+>=20
+>  lib/Kconfig | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
 
-This is rather big growth when we didn't already have realloc:
-05: lib: Convert str_to_list() to use alist
-   aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
-            xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
-               u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
-                 function                                   old     new   d=
-elta
-                 realloc                                      -    1120   +=
-1120
-                 alist_ensure_ptr                             -     140    =
-+140
-                 alist_expand_to                              -     136    =
-+136
-                 alist_init                                   -     108    =
-+108
-                 alist_uninit_move_ptr                        -      76    =
- +76
-                 alist_add_ptr                                -      72    =
- +72
-                 alist_uninit                                 -      48    =
- +48
-                 str_to_list                                204     232    =
- +28
+OK, I asked for this, but, some platforms had special enough uses where
+they disabled it and so we get more growth here too, so, lets drop this
+concept for now.
 
 --=20
 Tom
 
---9bJIRkQVPdiIVjnz
+--DIP3WdR7jdMOwWf8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmahafcACgkQFHw5/5Y0
-tyyDLAv9Hy3h8lZKhPkYzAhXhXhy8MzvCHyP5nJTLr5gFj4mNhKNkmn2L7oRPesY
-2HpBz1q47M3RrC3lDhMqxcrLIbP2cH0nPH6J+kzL/J2e2IdXq19sur7x6p+D1IhG
-Gvm71hvg6rjSgIhxOFgKrQjnzijAM2nKPKu5gAXy7Njn36W/myjAeoH7ZbAsgjqo
-urflFIZpyLncodACKxXPgYZNlX4EfI1p0icKm48pnYczuHeaWVsVHmwLLe2FoWSf
-kBfrsR0ZMdmXhj7YBqIJMxr5H0Og3GQayIxmITVK+OIX/JMqIKvAnpqSbivOkLYx
-yyNcpbDufAiWjZmWQSBLlZanLfNZq+w1gz6mkpT0rLQEckPSY1KqEqGumi3WV4bk
-4mSwlL2MYRCmRDlRTZhrAIveWFrnD0aufIiORUcgvKnIDbQCaH94P4XbGuIUGiTS
-bKibPDvntOeKiYxyLdI6fUlc9IKE8tW95VLPSrGywJM3nXOD3mLbZZwNxGabq61P
-u6W3VyKe
-=Na2Q
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmahak0ACgkQFHw5/5Y0
+tyx27wv5ATzAq1k1e+3lxPwRjp/dQX6bet+BEceYWOBB1Z3AVB5HseIcoB7GZTdC
+iVUdeGubY+IIAmbctyuYQsbw5Jj0meKscNX2kv0YRMchQez6cCvelJUBGSJZ0mEY
+EN+AROjwGSi8eGy5GKiT8AbPregcoyiO+kvZsH80ePd0OEbhPeIugWOpRUj+Rgtr
+BrWDEpAkYULp+PdiNXAJNtNOz+NMtERTUQYFfhq1MidFH3YYLgw//14MVtgrRv6P
+Z2yjxGkS6nzYP+WUZxizRa4qnMVADPWySgMwnKH8PrtJUzwyL/RAjt8cVrURPgji
+Wf9CANXZcXGoNQZhYYol4d3IkZChxV6Jierw5VVfk6lC8KrdFqPY1mP6anaDx7+i
+o0EM+Q6Tsg+237AqZ34FrSCRf1CKoTeU3kPZU4+fOjxbv05LJ5CcWgN3l8ubFlOb
+YRT5NJDHNLLMxxqsrZS/qKXufeppIpo11jdRcexJ/D3TfLejLU4eQ2Dpu8+LUeUd
+VW/dDmQ8
+=HMDn
 -----END PGP SIGNATURE-----
 
---9bJIRkQVPdiIVjnz--
+--DIP3WdR7jdMOwWf8--
