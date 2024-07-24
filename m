@@ -4,49 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B582EC3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:13:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC136C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:56:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E90A28890F;
-	Wed, 24 Jul 2024 08:06:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0840188890;
+	Wed, 24 Jul 2024 08:56:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="uSHd3Vna";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31FF58890F; Wed, 24 Jul 2024 08:06:24 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 767E288982
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:06:16 +0200 (CEST)
+ id ABCEC88886; Wed, 24 Jul 2024 08:56:14 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 08AB7888A2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:56:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 614A91474;
- Tue, 23 Jul 2024 23:06:36 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D62A3F766;
- Tue, 23 Jul 2024 23:06:06 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Michal Simek <michal.simek@amd.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 40/40] lmb: ut: re-enable unit tests
-Date: Wed, 24 Jul 2024 11:32:24 +0530
-Message-Id: <20240724060224.3071065-41-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=fail
+ smtp.mailfrom=SRS0=3f2b=OY=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1721804151;
+ bh=43A7FbcmuoZ3M/HdlTpZfZIDiC2DfBXI3yJLqLlk4Zk=;
+ b=uSHd3Vna6dTqaCUt9yz2u4LvHIALLNskrNnjYhpkx2wmh0rVkLYagflmXOwuG3gyIMH3gjJOX
+ dntGagNETcusXGoUzAnHG/Z/s62MAk1DPOzRTN0ZYFBi76tbum68yaHXtACFRHj1JGTsTENc0vl
+ X2bf2RhpFx9onXyEKkZ+rxWU+qEyDAGFl1qWvSPnYXqf+N/KrS87joIweoUAZqBMj5yV8GhYKxD
+ mmDpYBbzT854K80wDmmkR+1Ve1nQmyM7oY+oPVmN6aM4XhuFEGLhWJf3OWRYu0Cfy8gZ533TCx3
+ x5fc30rNdopJBJS80k7VOkFsY51iwj04dB8EWUdAi5JQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+Subject: [PATCH] mmc: rockchip_dw_mmc: Allow 4-bit mode when 8-bit mode is
+ supported
+Date: Wed, 24 Jul 2024 06:55:36 +0000
+Message-ID: <20240724065538.2735237-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 66a0a572964f016be2adfbcc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,207 +69,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All the changes needed for making the LMB memory map persistent and
-global have been made, including making corresponding changes in the
-test code. Re-enable the unit tests on the platforms.
+Hosts capable of 8-bit can also do 4 bits, fix use of 4-bit mode when
+8-bit mode is supported.
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+This fixes use of 1-bit mode with SD NAND on ROCK Pi S using the DT in
+v6.11-rc1 that chage to use 8-bit bus to also support eMMC. With this
+4-bit mode is used with SD NAND and 8-bit mode with eMMC, same as in
+Linux kernel.
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-Changes since rfc: New patch
+ drivers/mmc/rockchip_dw_mmc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- configs/sandbox64_defconfig        | 4 +++-
- configs/sandbox_defconfig          | 7 +++----
- configs/sandbox_flattree_defconfig | 4 +++-
- configs/sandbox_noinst_defconfig   | 8 ++++----
- configs/sandbox_spl_defconfig      | 8 ++++----
- configs/sandbox_vpl_defconfig      | 6 ++++--
- configs/snow_defconfig             | 2 +-
- 7 files changed, 22 insertions(+), 17 deletions(-)
-
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index dbcf65d29f..dd0582d2a0 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -3,7 +3,6 @@ CONFIG_SYS_MALLOC_LEN=0x6000000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="sandbox64"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_PRE_CON_BUF_ADDR=0x100000
- CONFIG_SYS_LOAD_ADDR=0x0
-@@ -271,3 +270,6 @@ CONFIG_GETOPT=y
- CONFIG_EFI_RT_VOLATILE_STORE=y
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_TEST_FDTDEC=y
-+CONFIG_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 9bb1813e77..dc5fcdbd1c 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -3,7 +3,6 @@ CONFIG_SYS_MALLOC_LEN=0x6000000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="sandbox"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_PRE_CON_BUF_ADDR=0xf0000
- CONFIG_SYS_LOAD_ADDR=0x0
-@@ -346,9 +345,6 @@ CONFIG_ADDR_MAP=y
- CONFIG_CMD_DHRYSTONE=y
- CONFIG_ECDSA=y
- CONFIG_ECDSA_VERIFY=y
--CONFIG_CRYPT_PW=y
--CONFIG_CRYPT_PW_SHA256=y
--CONFIG_CRYPT_PW_SHA512=y
- CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
-@@ -360,3 +356,6 @@ CONFIG_EFI_CAPSULE_AUTHENTICATE=y
- CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_TEST_FDTDEC=y
-+CONFIG_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index b87bd145bb..049a606613 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -2,7 +2,6 @@ CONFIG_TEXT_BASE=0
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="sandbox"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SYS_LOAD_ADDR=0x0
- CONFIG_PCI=y
-@@ -229,3 +228,6 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
- CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
-+CONFIG_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 6150f55072..e930162937 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -6,7 +6,6 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="sandbox"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -132,7 +131,6 @@ CONFIG_NETCONSOLE=y
- CONFIG_IP_DEFRAG=y
- CONFIG_BOOTP_SERVERIP=y
- CONFIG_SPL_DM=y
--CONFIG_SPL_DM_DEVICE_REMOVE=y
- CONFIG_DM_DMA=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
-@@ -279,10 +277,12 @@ CONFIG_FS_CRAMFS=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_CMD_DHRYSTONE=y
- CONFIG_RSA_VERIFY_WITH_PKEY=y
--CONFIG_X509_CERTIFICATE_PARSER=y
--CONFIG_PKCS7_MESSAGE_PARSER=y
- CONFIG_TPM=y
- CONFIG_ZSTD=y
- CONFIG_SPL_LZMA=y
- CONFIG_ERRNO_STR=y
- CONFIG_SPL_LMB=y
-+CONFIG_UNIT_TEST=y
-+CONFIG_SPL_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 3dd4c7ab43..31ccdbd502 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -5,7 +5,6 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="sandbox"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-@@ -108,7 +107,6 @@ CONFIG_NETCONSOLE=y
- CONFIG_IP_DEFRAG=y
- CONFIG_BOOTP_SERVERIP=y
- CONFIG_SPL_DM=y
--CONFIG_SPL_DM_DEVICE_REMOVE=y
- CONFIG_DM_DMA=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
-@@ -245,8 +243,6 @@ CONFIG_FS_CRAMFS=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_CMD_DHRYSTONE=y
- CONFIG_RSA_VERIFY_WITH_PKEY=y
--CONFIG_X509_CERTIFICATE_PARSER=y
--CONFIG_PKCS7_MESSAGE_PARSER=y
- CONFIG_TPM=y
- CONFIG_SPL_CRC8=y
- CONFIG_ZSTD=y
-@@ -254,3 +250,7 @@ CONFIG_SPL_LZMA=y
- CONFIG_ERRNO_STR=y
- CONFIG_SPL_HEXDUMP=y
- CONFIG_SPL_LMB=y
-+CONFIG_UNIT_TEST=y
-+CONFIG_SPL_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index a8e9e16746..3ec64fd982 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -5,7 +5,6 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="sandbox"
- CONFIG_SPL_TEXT_BASE=0x100000
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -119,7 +118,6 @@ CONFIG_NETCONSOLE=y
- CONFIG_IP_DEFRAG=y
- CONFIG_SPL_DM=y
- CONFIG_TPL_DM=y
--CONFIG_SPL_DM_DEVICE_REMOVE=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_DM_DMA=y
- CONFIG_REGMAP=y
-@@ -254,3 +252,7 @@ CONFIG_TPM=y
- CONFIG_ZSTD=y
- # CONFIG_VPL_LZMA is not set
- CONFIG_ERRNO_STR=y
-+CONFIG_UNIT_TEST=y
-+CONFIG_SPL_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/configs/snow_defconfig b/configs/snow_defconfig
-index 637c51d2c2..2c0757194b 100644
---- a/configs/snow_defconfig
-+++ b/configs/snow_defconfig
-@@ -19,7 +19,6 @@ CONFIG_ENV_OFFSET=0x3FC000
- CONFIG_ENV_SECT_SIZE=0x4000
- CONFIG_DEFAULT_DEVICE_TREE="exynos5250-snow"
- CONFIG_SPL_TEXT_BASE=0x02023400
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SPL=y
- CONFIG_DEBUG_UART_BASE=0x12c30000
- CONFIG_DEBUG_UART_CLOCK=100000000
-@@ -108,3 +107,4 @@ CONFIG_VIDEO_BRIDGE_PARADE_PS862X=y
- CONFIG_VIDEO_BRIDGE_NXP_PTN3460=y
- CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
-+CONFIG_UNIT_TEST=y
+diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+index 1a10b7057a47..549fb80f1988 100644
+--- a/drivers/mmc/rockchip_dw_mmc.c
++++ b/drivers/mmc/rockchip_dw_mmc.c
+@@ -159,6 +159,10 @@ static int rockchip_dwmmc_probe(struct udevice *dev)
+ 	host->mmc->dev = dev;
+ 	upriv->mmc = host->mmc;
+ 
++	/* Hosts capable of 8-bit can also do 4 bits */
++	if (host->buswidth == 8)
++		plat->cfg.host_caps |= MMC_MODE_4BIT;
++
+ 	return dwmci_probe(dev);
+ }
+ 
 -- 
-2.34.1
+2.45.2
 
