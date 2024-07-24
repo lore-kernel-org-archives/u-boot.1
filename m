@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADE8C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C4A3C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AA39889D5;
+	by phobos.denx.de (Postfix) with ESMTP id E19ED889DB;
 	Wed, 24 Jul 2024 17:09:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lJ/kumNf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JGu6m6W8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB986889C8; Wed, 24 Jul 2024 17:09:55 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id 3E0F48898B; Wed, 24 Jul 2024 17:09:56 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE03889D1
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:09:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B11CA888F6
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:09:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-397ba4f7387so29036885ab.0
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:09:52 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-389ccd2f0abso27270385ab.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:09:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721833791; x=1722438591; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721833792; x=1722438592; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZHV+H6GBJLzLH2rNEhDoNrXutE7fhloiyyl/xe1MzYc=;
- b=lJ/kumNfb97iQ3XAwW2GfMNTrlVsys43vVtaj+82L3KLzp8uf44lfnvy4VmakVO0Ev
- X3X7F2rEXg0H3SpQLIF7/KolHu823Zoy8WJspTYSvkCkp3k1kEEkXNZWm2Vg7m7k78kN
- 6f2CJEkOA7prENNyu7+CRNaLWYZtyiNUVQLpI=
+ bh=bRiDcVCSSjJEs/6FAiIGCFP0clyqH3r0UR3wRHKYC38=;
+ b=JGu6m6W82ldw62/Wi+MVdDPJSg7GzJ7QTquzxxyPFn861MMRvge1RyLQxYRNlmOeni
+ 0DG2JpWTd88PdxMMZPRnusHyiSTJSoetJyw6AT3xrVM7G1W6VJwoonxfSL2aViP8Gz5M
+ vQQsS/DEkYOrsJuPXAevwaMJ7GjvFe6rNKz38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721833791; x=1722438591;
+ d=1e100.net; s=20230601; t=1721833792; x=1722438592;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZHV+H6GBJLzLH2rNEhDoNrXutE7fhloiyyl/xe1MzYc=;
- b=sS0QsG4+1E6DyyVz+FgRCX+0c3aoXQS/UGb0AXOfEQOZ/SB4kW9AXYyY9qc8USBsjl
- CaNg5hBcf7+x0iK24IFjX5eif2eiPPvOY8JHCbv/Dm98Cr9DcLeU813pfofPdjeMvEeu
- kYWqMuJr8IsnM1TAa3yWlY1BtFXXKht5m5ezL3ojQGCgNm/rXLH8Juz+XN/hMXwgE86n
- 8pO11iLGYX9RsgMWNvyeqYc/EeiD6URNv/Q0L55mE4wrzQ4itxx5+AJ0lEdScGjz2uzU
- dgEVkSaCCwkyY+05zT+Q1rVVg7+gnHBopygpExp/ULj8r1Bo6QCaHCufK/vsitVctjCA
- Sa6Q==
-X-Gm-Message-State: AOJu0Yx4UaZjm/OFMRKNnYAyDbhV1omDJbdYzT2XFxAQeYuovV4Rg3Kz
- iJQ7hMDcnmzJNnG0ZTL2CKdQLvj2paeKsuz4IiIEC6FHFJvQMaWaKI/lAXGVJdD25hlV8ShDbHQ
+ bh=bRiDcVCSSjJEs/6FAiIGCFP0clyqH3r0UR3wRHKYC38=;
+ b=ks/n9rPd1nVgkiE48wgiAULgeF+ax0mnkdMvuhld0EL0YFNMnY4wiOswpwdJ3t3ARj
+ O2D0dahkSVQLMRCFeeChzsPcBwer95MF7rtj5qSYqy4oOgcBzl8i36sBYlB1nuPX9YX7
+ JjJP0jjwCIEvaDAWzaQObSKnndyKnUHuHbYW0swim6ov9QfRSNWMukjxY9V7C385n46M
+ ysjg4/wSVUxtixyODrHq4FSjvFwLaMcIQUbOARC7FURfxyUnmSm2OHFuoXfQYNvwc1IO
+ pKLY32CurC71pxr1Cw0sJaNnx3RnKQxi83v12byJge/oSzRL7Knwatlt+YLoByruUVLF
+ Ld+w==
+X-Gm-Message-State: AOJu0YznaY9w9Mszapj9X3BWQyj5ycgC1EWR0kIfT3sNzm/FEyn+ZjQO
+ qjtsuOWDKE3r2E25JKNQKDg0NJAge6lI+CJN8gE+y46gjKrE9igW5szhIz8rKq9LyDqrIlzrIQk
  =
-X-Google-Smtp-Source: AGHT+IELKmkV8VPtgrwOJwnGQWeZervQjhIL6bPXwj2ka0WYq3LX0/7l3bbyQV8X9w8qu8jnCEn4iw==
-X-Received: by 2002:a92:c262:0:b0:39a:1b0a:f0a9 with SMTP id
- e9e14a558f8ab-39a1b0afda0mr20352995ab.23.1721833791503; 
- Wed, 24 Jul 2024 08:09:51 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE3KZW17TmsfvWYx5QiNMkQt0tqiqdnb1LD2Dh+pm4st2P3Tv5Z4xhx96JDqaydphv5YGFQMw==
+X-Received: by 2002:a05:6e02:1d8d:b0:375:a180:b3d1 with SMTP id
+ e9e14a558f8ab-398e6b9e4e7mr183500855ab.20.1721833792350; 
+ Wed, 24 Jul 2024 08:09:52 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.09.50
+ e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.09.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:09:51 -0700 (PDT)
+ Wed, 24 Jul 2024 08:09:52 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Bin Meng <bmeng.cn@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Michal Simek <michal.simek@amd.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH 16/35] global_data: Use less space for environment fields
-Date: Wed, 24 Jul 2024 09:09:03 -0600
-Message-Id: <20240724150922.2343249-17-sjg@chromium.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Shiji Yang <yangshiji66@outlook.com>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: [PATCH 17/35] board_f: Add a new struct to hold pre-relocation info
+Date: Wed, 24 Jul 2024 09:09:04 -0600
+Message-Id: <20240724150922.2343249-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724150922.2343249-1-sjg@chromium.org>
 References: <20240724150922.2343249-1-sjg@chromium.org>
@@ -94,61 +93,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use shorter types for some of these fields to save space. Reorder to put
-fields with like alignment together.
+Quite a few of the members of struct global_data are only used before
+reloction, or have little meaning afterwards, yet they hang around in
+struct global_data for the lifetime of U-Boot. This uses up precious
+pre-relocation SRAM on many boards.
+
+To help with this, start a new struct which exists only before
+relocation. Move new_fdt into this new struct. Drop the display of it
+in the 'bdinfo' command as it is probably not very useful.
+
+Note that the field does not exist in SPL builds.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/asm-generic/global_data.h | 14 +++++++-------
- include/env_internal.h            |  1 +
- 2 files changed, 8 insertions(+), 7 deletions(-)
+ cmd/bdinfo.c                      |  1 -
+ common/board_f.c                  | 11 +++++++----
+ include/asm-generic/global_data.h | 11 +++++++----
+ include/board_f.h                 | 23 +++++++++++++++++++++++
+ test/cmd/bdinfo.c                 |  2 --
+ 5 files changed, 37 insertions(+), 11 deletions(-)
+ create mode 100644 include/board_f.h
 
+diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
+index 437ac4e8630..b53b51acca4 100644
+--- a/cmd/bdinfo.c
++++ b/cmd/bdinfo.c
+@@ -154,7 +154,6 @@ static int bdinfo_print_all(struct bd_info *bd)
+ 	if (IS_ENABLED(CONFIG_CMD_NET))
+ 		print_eth();
+ 	bdinfo_print_num_l("fdt_blob", (ulong)map_to_sysmem(gd->fdt_blob));
+-	bdinfo_print_num_l("new_fdt", (ulong)map_to_sysmem(gd->new_fdt));
+ 	bdinfo_print_num_l("fdt_size", (ulong)gd->fdt_size);
+ 	if (IS_ENABLED(CONFIG_VIDEO))
+ 		show_video_info();
+diff --git a/common/board_f.c b/common/board_f.c
+index 1935b1dd11b..2125eb5ca50 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -577,7 +577,7 @@ static int reserve_fdt(void)
+ 			gd->fdt_size = ALIGN(fdt_totalsize(gd->fdt_blob), 32);
+ 
+ 			gd->start_addr_sp = reserve_stack_aligned(gd->fdt_size);
+-			gd->new_fdt = map_sysmem(gd->start_addr_sp, gd->fdt_size);
++			gd->boardf->new_fdt = map_sysmem(gd->start_addr_sp, gd->fdt_size);
+ 			debug("Reserving %lu Bytes for FDT at: %08lx\n",
+ 			      gd->fdt_size, gd->start_addr_sp);
+ 		}
+@@ -667,10 +667,10 @@ static int init_post(void)
+ static int reloc_fdt(void)
+ {
+ 	if (!IS_ENABLED(CONFIG_OF_EMBED)) {
+-		if (gd->new_fdt) {
+-			memcpy(gd->new_fdt, gd->fdt_blob,
++		if (gd->boardf->new_fdt) {
++			memcpy(gd->boardf->new_fdt, gd->fdt_blob,
+ 			       fdt_totalsize(gd->fdt_blob));
+-			gd->fdt_blob = gd->new_fdt;
++			gd->fdt_blob = gd->boardf->new_fdt;
+ 		}
+ 	}
+ 
+@@ -1005,8 +1005,11 @@ static const init_fnc_t init_sequence_f[] = {
+ 
+ void board_init_f(ulong boot_flags)
+ {
++	struct board_f boardf;
++
+ 	gd->flags = boot_flags;
+ 	gd->flags &= ~GD_FLG_HAVE_CONSOLE;
++	gd->boardf = &boardf;
+ 
+ 	if (initcall_run_list(init_sequence_f))
+ 		hang();
 diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index d8be0654a87..0904fcf77fc 100644
+index 0904fcf77fc..bd053f77f6c 100644
 --- a/include/asm-generic/global_data.h
 +++ b/include/asm-generic/global_data.h
-@@ -113,21 +113,21 @@ struct global_data {
- 	 */
- 	unsigned long env_addr;
- 	/**
--	 * @env_valid: environment is valid
-+	 * @env_has_init: bit mask indicating environment locations
- 	 *
--	 * See &enum env_valid
-+	 * &enum env_location defines which bit relates to which location
- 	 */
--	unsigned long env_valid;
-+	unsigned short env_has_init;
- 	/**
--	 * @env_has_init: bit mask indicating environment locations
-+	 * @env_valid: environment is valid
- 	 *
--	 * &enum env_location defines which bit relates to which location
-+	 * See &enum env_valid
- 	 */
--	unsigned long env_has_init;
-+	unsigned char env_valid;
- 	/**
- 	 * @env_load_prio: priority of the loaded environment
- 	 */
--	int env_load_prio;
-+	char env_load_prio;
- 	/**
- 	 * @ram_base: base address of RAM used by U-Boot
- 	 */
-diff --git a/include/env_internal.h b/include/env_internal.h
-index cbd1ef3e914..2a66a98b97e 100644
---- a/include/env_internal.h
-+++ b/include/env_internal.h
-@@ -101,6 +101,7 @@ extern const char default_environment[];
- #include <env_flags.h>
- #include <search.h>
+@@ -20,6 +20,7 @@
+  */
  
-+/* this is stored as bits in gd->env_has_init so is limited to 16 entries */
- enum env_location {
- 	ENVL_UNKNOWN,
- 	ENVL_EEPROM,
+ #ifndef __ASSEMBLY__
++#include <board_f.h>
+ #include <cyclic.h>
+ #include <event_internal.h>
+ #include <fdtdec.h>
+@@ -41,6 +42,12 @@ struct global_data {
+ 	 * @bd: board information
+ 	 */
+ 	struct bd_info *bd;
++#ifndef CONFIG_SPL_BUILD
++	/**
++	 * @boardf: information only used before relocation
++	 */
++	struct board_f *boardf;
++#endif
+ 	/**
+ 	 * @flags: global data flags
+ 	 *
+@@ -218,10 +225,6 @@ struct global_data {
+ 	 * @fdt_blob: U-Boot's own device tree, NULL if none
+ 	 */
+ 	const void *fdt_blob;
+-	/**
+-	 * @new_fdt: relocated device tree
+-	 */
+-	void *new_fdt;
+ 	/**
+ 	 * @fdt_size: space reserved for relocated device space
+ 	 */
+diff --git a/include/board_f.h b/include/board_f.h
+new file mode 100644
+index 00000000000..74fca6df75c
+--- /dev/null
++++ b/include/board_f.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2024 Google LLC
++ * Written by: Simon Glass <sjg@chromeium.org>
++ */
++
++#ifndef __BOARD_F
++#define __BOARD_F
++
++/**
++ * struct board_f: Information used only before relocation
++ *
++ * This struct is set up in board_init_f() and used to deal with relocation. It
++ * is not available after relocation.
++ */
++struct board_f {
++	/**
++	 * @new_fdt: relocated device tree
++	 */
++	void *new_fdt;
++};
++
++#endif
+diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+index 027848c3e24..60adc4aa960 100644
+--- a/test/cmd/bdinfo.c
++++ b/test/cmd/bdinfo.c
+@@ -185,8 +185,6 @@ static int bdinfo_test_all(struct unit_test_state *uts)
+ 	ut_assert(map_to_sysmem(gd->fdt_blob) == env_get_hex("fdtcontroladdr", 0x1234));
+ 	ut_assertok(test_num_l(uts, "fdt_blob",
+ 			       (ulong)map_to_sysmem(gd->fdt_blob)));
+-	ut_assertok(test_num_l(uts, "new_fdt",
+-			       (ulong)map_to_sysmem(gd->new_fdt)));
+ 	ut_assertok(test_num_l(uts, "fdt_size", (ulong)gd->fdt_size));
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO))
 -- 
 2.34.1
 
