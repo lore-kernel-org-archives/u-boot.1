@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32718C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 14:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D47C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56282879AF;
-	Wed, 24 Jul 2024 16:52:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C49788937;
+	Wed, 24 Jul 2024 17:03:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SEb9w/g3";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oGgnoK18";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBC91879AF; Wed, 24 Jul 2024 16:52:09 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 18D268892E; Wed, 24 Jul 2024 17:03:26 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7B9580805
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 16:52:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7D0C88962
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5d569bee00aso2377557eaf.1
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 07:52:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4266f344091so51075615e9.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:03:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721832725; x=1722437525; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=btfEtOhmhexsM61HA9O1atzXCk9Eyont1pdiFEpq8xA=;
- b=SEb9w/g3hqOyoi+/YC15WlXE2+FaoK1WwTHyxKfVFt1DAQEn5h742CjBwaggTyWNVZ
- 5hF9XHGmaT1UyfPupdO0vkBAlCFnW8abRAmgz0n7zPH7Z1LVDyFo1J3H4nfls0qqS4mu
- o7Mntr4pkugVZiswuQEzdjMXMFRtya4eqVwjQ=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721833402; x=1722438202;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=l71GUNd+bj7NQjmqtoWUMnGob/2y6+OVO8exST300Lg=;
+ b=oGgnoK18CHsAzvhITTBSKScLcnJ0WjKGQJjucmliSjlhcZlDccRK+SqHydALWF7MLr
+ eOJdBM3VA/D7s2+MQh8NORY9TlCLXGQEsYb+lzw2b8Am49bx6/QQy/h5+iTAc6QVAjsV
+ oapYFbNQwGbP/Xgu0J8/FzArq9yNd5u0iWFmac5+kVxRnD5Y70o3sZ+QUyd3ZFq60kkY
+ bLZxY5RcvTlMnnToTfmLMAbUJuzo+7SCvNn/2j0lYMLLH3UJrCAa7iSPN6wA9tbSt5kD
+ KpTuV6F9NHslUObhlRw/2eCcxtMwB91o3Rl6nN4aiMQn7YA8b8XcMHLswtCm77QG1Oi4
+ MuAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721832725; x=1722437525;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=btfEtOhmhexsM61HA9O1atzXCk9Eyont1pdiFEpq8xA=;
- b=fx4rwC0M7W/k7u4QfA37Q0cRZzH8lTEfCHJn0ZdwZtbVRGMZJ1eXy4XgPkvs9r7uQd
- XzXue1qC58qOHRMuhEnThhOujnXk6R61w4hOMMAuzV+Ga7AI6BjRuvvS+zjCTgZ68FGm
- feEIyS6CQrGiaPJNc8blPasfHrioEwLlCXriKQJGLrkLpC56t1kkvmJmyDL0uNSTmp+X
- +tspCgDzJ+DW+5iamQlnsEe/mxAwQUhtHAKhB7MeJbRpRzU6ISOTsj1LoyBEed0R1Rw+
- F4Ak4j5o1VyQfw2vLQmCNg9hxnNBxw7RCc2T6SfhDcXoUmR+ygnzPtTduRG0Hj2d9sZh
- fKvw==
+ d=1e100.net; s=20230601; t=1721833402; x=1722438202;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=l71GUNd+bj7NQjmqtoWUMnGob/2y6+OVO8exST300Lg=;
+ b=CzbfG75Bea2dCy6lg76SMCNT/eOSm1IDprih8LoItOe8p2OGPruUeLGO3ntjglJwZ7
+ zao9I+1HCDY6qn++nWpwVpnA/wCj0KCAvyN1rhZj30b2QYo7kySaVp3yjDdU5fRMjQQy
+ Fsutho2YmkqBZu/p9k3/ahJK0gGg41W/3ltJxbLCYGzSUSHq1DDK1f5fN3HFf9zwMtEI
+ W3yizI1WqPGxAo2LF0hchiyfiwpzJLfRVRBIiNsDnzfPGMM9AOwgkyBe7AP+kM3CC6OD
+ nIN7Uhr1x0l6ZgpsqiL2i0/xpvnDxfGRVjkFyQ/78NQVM+exGP3O9p6Lar5rkOZT1AaI
+ 9D0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLvsOyHodBPaj4J9Zh5yn6/gD+LeqOKyUUYUGRN3uJiKhsBGFsUT7Zn0uiBp2GQc3SyNPBvQzIz45RAouH+rKJqmpAcg==
-X-Gm-Message-State: AOJu0Yw8mFBqEAcFSNfMJaPNxtv4W9uR48feG89rhVw26jCGuGja9d40
- qlnr50pqjK7ROMnXjE5j64K1JrsVvT2KOtisAT4NDAod9CHi3DtRJmEwH6/e9ic=
-X-Google-Smtp-Source: AGHT+IE9oPEcQxBY0IlfC8QUCaUxvBkBBLgTYo3MFXCOj0cr1rTtZYeZYuv8rSxdw8KgjRB7v/Sykw==
-X-Received: by 2002:a05:6820:4b88:b0:5ce:d2e3:b18 with SMTP id
- 006d021491bc7-5d5adaac07fmr75620eaf.8.1721832725231; 
- Wed, 24 Jul 2024 07:52:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
- [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d59ee0e77dsm345895eaf.5.2024.07.24.07.52.03
+ AJvYcCWNLLiCk2srV06M4KeLaWwsDPRfH5e1d69D4nVHTptlANihqEtIX9PrSbPAOMNVSMTsVLTh08qm78ZdyTWKHI9Z5vdv7Q==
+X-Gm-Message-State: AOJu0Yy2RoN4WbFP4UyzuneetQP18ZqZnJvWAwY0Ak9rSUH356efkQlH
+ oa351lcbbn0Sfd8NLg62WUKj/mBvbVaGs5vUnxhUs715tDy7K/cdeN+d/+vjf/Q=
+X-Google-Smtp-Source: AGHT+IE2aVVKOXkT5o8lXWG2L5cXijUgU2EMaP935Mvnn96/BB7fX7ERQj61ZK0KsnDItFUULI8vhA==
+X-Received: by 2002:a5d:64ac:0:b0:368:31c7:19d3 with SMTP id
+ ffacd0b85a97d-369f09a2093mr2510710f8f.9.1721833401284; 
+ Wed, 24 Jul 2024 08:03:21 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3687868b24csm14548543f8f.25.2024.07.24.08.03.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 07:52:04 -0700 (PDT)
-Date: Wed, 24 Jul 2024 08:52:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Fabio Estevam <festevam@gmail.com>, Michal Simek <michal.simek@amd.com>
-Subject: Re: [RFC PATCH v2 38/48] lib: Kconfig: add a config symbol for
- getting lmb memory map updates
-Message-ID: <20240724145201.GL989285@bill-the-cat>
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-39-sughosh.ganu@linaro.org>
- <20240705195057.GP38804@bill-the-cat>
- <CAC_iWjJDwFLMaP=S=z_OMnnQb=q32QMEPoywxPWwjixMSbJ84Q@mail.gmail.com>
- <CADg8p946kVK_BfrSvEgFcvQh95MCRMBKJ+48syCnCSvrpJQ0-w@mail.gmail.com>
- <CAFLszTiYALCrgBUBJ=g_BoQtOzHGx2OhuTxCioCHdXNuJb850w@mail.gmail.com>
- <20240723142055.GG989285@bill-the-cat>
- <CAFLszTgG9WuzYp97ANm=k3iju-DH+c5A2HfgwmUznti9tQyzpw@mail.gmail.com>
+ Wed, 24 Jul 2024 08:03:20 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 1/3] usb: dwc3: allocate setup_buf with
+ dma_alloc_coherent()
+In-Reply-To: <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-1-58a5f026ea8e@linaro.org>
+References: <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-0-58a5f026ea8e@linaro.org>
+ <20240719-u-boot-dwc3-gadget-dcache-fixup-v1-1-58a5f026ea8e@linaro.org>
+Date: Wed, 24 Jul 2024 17:03:18 +0200
+Message-ID: <87r0bi4ytl.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UUCdbVQLBCa3wjQg"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgG9WuzYp97ANm=k3iju-DH+c5A2HfgwmUznti9tQyzpw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,111 +95,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Neil,
 
---UUCdbVQLBCa3wjQg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you for the patch.
 
-On Wed, Jul 24, 2024 at 08:37:14AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 23 Jul 2024 at 08:20, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Jul 23, 2024 at 01:42:59PM +0100, Simon Glass wrote:
-> > > Hi Sughosh,
-> > >
-> > > On Mon, 22 Jul 2024 at 13:59, Sughosh Ganu <sughosh.ganu@linaro.org> =
-wrote:
-> > > >
-> > > > On Mon, 22 Jul 2024 at 18:00, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > On Fri, 5 Jul 2024 at 22:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Jul 04, 2024 at 01:05:34PM +0530, Sughosh Ganu wrote:
-> > > > > >
-> > > > > > > Add a Kconfig symbol to enable getting updates on any memory =
-map
-> > > > > > > changes that might be done by the LMB module. This notificati=
-on
-> > > > > > > mechanism can then be used to have a synchronous view of allo=
-cated and
-> > > > > > > free memory.
-> > > > > > >
-> > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > > ---
-> > > > > > > Changes since V1:
-> > > > > > > * Change the description to highlight only LMB notifications.
-> > > > > > > * Add a separate line for dependencies.
-> > > > > > >
-> > > > > > >  lib/Kconfig | 10 ++++++++++
-> > > > > > >  1 file changed, 10 insertions(+)
-> > > > > > >
-> > > > > > > diff --git a/lib/Kconfig b/lib/Kconfig
-> > > > > > > index 7eea517b3b..b422183a0f 100644
-> > > > > > > --- a/lib/Kconfig
-> > > > > > > +++ b/lib/Kconfig
-> > > > > > > @@ -74,6 +74,16 @@ config HAVE_PRIVATE_LIBGCC
-> > > > > > >  config LIB_UUID
-> > > > > > >       bool
-> > > > > > >
-> > > > > > > +config MEM_MAP_UPDATE_NOTIFY
-> > > > > > > +     bool "Get notified of any changes to the LMB memory map"
-> > > > > > > +     depends on EVENT && LMB && EFI_LOADER
-> > > > > > > +     default y
-> > > > > > > +     help
-> > > > > > > +       Enable this option to get notification on any changes=
- to the
-> > > > > > > +       memory that is allocated or freed by the LMB module. =
-This will
-> > > > > > > +       allow different modules that allocate memory or maint=
-ain a memory
-> > > > > > > +       map to have a synchronous view of available and alloc=
-ated memory.
-> > > > > >
-> > > > > > This needs to be select'd when it's going to be used, opting ou=
-t of
-> > > > > > making sure memory reservations are obeyed isn't a good idea.
-> > > > >
-> > > > > +1 which begs the question, do we need the config option at all ?
-> > > >
-> > > > The config symbol can be used for removing the code for platforms
-> > > > which do not support EFI ?
-> > >
-> > > I am still of the so-far firm opinion that this can be done once,
-> > > before booting, rather than maintaining two separate tables as we go.
-> >
-> > Did you see the part in the thread where he explained the multiple entry
-> > points that would need to be kept in sync?
->=20
-> Yes, but I'm not sure what they are, nor why a shared function cannot
-> be called twice from two different places.
+On ven., juil. 19, 2024 at 15:56, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 
-Because we don't want to miss the third or fourth entry point down the
-road. That's why going the other direction makes more sense I believe,
-we won't have a future problem here because we designed with that in
-mind.
+> Also allocate the setup_buf with dma_alloc_coherent() since it's
 
---=20
-Tom
+The subject of the patch says:
 
---UUCdbVQLBCa3wjQg
-Content-Type: application/pgp-signature; name="signature.asc"
+"usb: dwc3: allocate setup_buf with dma_alloc_coherent()"
 
------BEGIN PGP SIGNATURE-----
+Isn't this line just repeating the title?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmahFQ4ACgkQFHw5/5Y0
-tyzhfAv+MPH7JYJmm/22uwVo4Cx2CI8X4c02gY3rnxNRUhmVhFErI0V8mKpVJOSB
-E71doxkXJCihZlO7OVNqR2lSGZWuOWnOQQ2gLFzR5rKG+Bn3Uny2iU6/9HdD2m2t
-hrbfGV6mHRHoVVlBqVw5xVQVHCS9uxmJOlXYq0voL3ocr4Hpzu1Hw/RFzz6dooq0
-V1JS74/lSsfCzTPbdpqQaPLzGLY292GHON2vI/iwggVgijiW7jEeF1YOWZMi7OKm
-xmC1trURULBwALwDZkZMJWFQYBO7fC05CxuYFAhAepfckktYpZ3xqYqKW4NZuunw
-jySC+ee0DlYsGSXPrak4iVggaMQbZIBxLk8ubd7mf8qDdiznPNc+S2QOL4IRDumE
-ktJFv3XHrFc4oUc2NDJkvs86CpcseA2w1sRi+ULFourpSJlU5iHIASoav2PbTqf9
-1RMLw0PE0qb7/uXVHMiCFcVXhWiEV8BctrPgn/+J2IzlkLzTSLt/i3136XA2Cbt/
-/kZI7cNy
-=8hp1
------END PGP SIGNATURE-----
+> also consumed by the hardware DMA.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  drivers/usb/dwc3/core.h   | 2 ++
+>  drivers/usb/dwc3/ep0.c    | 4 ++--
+>  drivers/usb/dwc3/gadget.c | 8 ++++----
+>  3 files changed, 8 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+> index 7374ce950da..ce35460c405 100644
+> --- a/drivers/usb/dwc3/core.h
+> +++ b/drivers/usb/dwc3/core.h
+> @@ -670,6 +670,7 @@ struct dwc3_scratchpad_array {
+>   * @ep0_trb: dma address of ep0_trb
+>   * @ep0_usb_req: dummy req used while handling STD USB requests
+>   * @ep0_bounce_addr: dma address of ep0_bounce
+> + * @setup_buf_addr: dma address if setup_buf
 
---UUCdbVQLBCa3wjQg--
+if -> of
+
+Both remarks being minor, please add:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+>   * @scratch_addr: dma address of scratchbuf
+>   * @lock: for synchronizing
+>   * @dev: pointer to our struct device
+> @@ -757,6 +758,7 @@ struct dwc3 {
+>  	dma_addr_t		ep0_trb_addr;
+>  	dma_addr_t		ep0_bounce_addr;
+>  	dma_addr_t		scratch_addr;
+> +	dma_addr_t		setup_buf_addr;
+>  	struct dwc3_request	ep0_usb_req;
+>  
+>  	/* device lock */
+> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+> index 16b11ce3d9f..0c7e0123368 100644
+> --- a/drivers/usb/dwc3/ep0.c
+> +++ b/drivers/usb/dwc3/ep0.c
+> @@ -381,7 +381,7 @@ static int dwc3_ep0_handle_status(struct dwc3 *dwc,
+>  	dep = dwc->eps[0];
+>  	dwc->ep0_usb_req.dep = dep;
+>  	dwc->ep0_usb_req.request.length = sizeof(*response_pkt);
+> -	dwc->ep0_usb_req.request.buf = dwc->setup_buf;
+> +	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
+>  	dwc->ep0_usb_req.request.complete = dwc3_ep0_status_cmpl;
+>  
+>  	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
+> @@ -663,7 +663,7 @@ static int dwc3_ep0_set_sel(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
+>  	dep = dwc->eps[0];
+>  	dwc->ep0_usb_req.dep = dep;
+>  	dwc->ep0_usb_req.request.length = dep->endpoint.maxpacket;
+> -	dwc->ep0_usb_req.request.buf = dwc->setup_buf;
+> +	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
+>  	dwc->ep0_usb_req.request.complete = dwc3_ep0_set_sel_cmpl;
+>  
+>  	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
+> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+> index 7d6bcc2627f..d41b590afb8 100644
+> --- a/drivers/usb/dwc3/gadget.c
+> +++ b/drivers/usb/dwc3/gadget.c
+> @@ -2622,8 +2622,8 @@ int dwc3_gadget_init(struct dwc3 *dwc)
+>  		goto err1;
+>  	}
+>  
+> -	dwc->setup_buf = memalign(CONFIG_SYS_CACHELINE_SIZE,
+> -				  DWC3_EP0_BOUNCE_SIZE);
+> +	dwc->setup_buf = dma_alloc_coherent(DWC3_EP0_BOUNCE_SIZE,
+> +					(unsigned long *)&dwc->setup_buf_addr);
+>  	if (!dwc->setup_buf) {
+>  		ret = -ENOMEM;
+>  		goto err2;
+> @@ -2670,7 +2670,7 @@ err4:
+>  	dma_free_coherent(dwc->ep0_bounce);
+>  
+>  err3:
+> -	kfree(dwc->setup_buf);
+> +	dma_free_coherent(dwc->setup_buf);
+>  
+>  err2:
+>  	dma_free_coherent(dwc->ep0_trb);
+> @@ -2692,7 +2692,7 @@ void dwc3_gadget_exit(struct dwc3 *dwc)
+>  
+>  	dma_free_coherent(dwc->ep0_bounce);
+>  
+> -	kfree(dwc->setup_buf);
+> +	dma_free_coherent(dwc->setup_buf);
+>  
+>  	dma_free_coherent(dwc->ep0_trb);
+>  
+>
+> -- 
+> 2.34.1
