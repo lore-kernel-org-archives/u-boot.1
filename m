@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09010C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5064EC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:15:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAC6C88A2F;
-	Wed, 24 Jul 2024 17:10:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2776E88A34;
+	Wed, 24 Jul 2024 17:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O0AYjRec";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JuVrawlK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C589D88A06; Wed, 24 Jul 2024 17:10:10 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 07EFC8896B; Wed, 24 Jul 2024 17:10:11 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3DE988A31
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:10:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E796788A25
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:10:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-389ccd2f0abso27272135ab.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:10:08 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3737dc4a669so25738285ab.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:10:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721833807; x=1722438607; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721833806; x=1722438606; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CZCaotnKwlv8rcCZcL+GNKCooIqPqTv/vWYI7wJ776Q=;
- b=O0AYjRecKaG/2t2L/xfiKZ+UcjewAhaoxsVwLKp/ho0T3XJ0JdNWn59AJQzq7Fshqp
- YF595ESgcSrFueRJ7LDY9E6h8QW9+UD97IKsAageTXcZq1PVxa3+CGVwvHpU0k5CT2bR
- RN/o6f9XeexwSep9ppQOpk2vpSH/qzJ9OBl3Y=
+ bh=Jd0l4zwxrWARTFEkbuyz4ngT8mytSOpGKQmzVJEO9x8=;
+ b=JuVrawlKYoaO+olz4TDh7PqHyx0IXeynkxwdfGRR4Ah1JxwO5JhCdusqeg9BLi3V3D
+ 4n1T96LGJKr25Dq7qrIQznUQEl4/3VOEiS/nLUNqykgOkavXNHxWXdob/OBmijnTJ7+C
+ iU6qMVY3dBJ1HB2bWQv8GgLiKU6m/WzKKfWwE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721833807; x=1722438607;
+ d=1e100.net; s=20230601; t=1721833806; x=1722438606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CZCaotnKwlv8rcCZcL+GNKCooIqPqTv/vWYI7wJ776Q=;
- b=p8/vxppsrVVcmVteIgKGnTu7hRFNxjsrAMJNq02Jqy4yGroOJ/P+qCD1J8bcOXHW8I
- soB+tf/+0OFD+trtA0e/LMXW3iqFuVDVdSoQTScipakiFHzy0X3pV6+Ue8xQOJRolCgG
- tAaE7JnAbSPLvtpeE1E/svo2kV4eptKjeSa8czp0BM4EPx9VLzgDw9vte+3HE1l7SOHA
- dpMsPHvXtWOqC5US3NA3hhGXHYnLjs5+EqC1CWiX0gOgIwkppEZhHFoEFOSVQK6PqSV+
- Aa1R77Xoy9sByBBi/XoJdqfCfjWsULsf4k+hnojLaz7SGutu+vnmRC/FSpWl37ZCsIud
- ot6A==
-X-Gm-Message-State: AOJu0Yyo2yj/IF2Hrxq066kdAjWCXL3h0vva/F06Ojr1ui/WMPNVbzBy
- zoZUc5/zrQvE4shyR7IsxpidJkN3iFmulzT/PLUqBLVe3UQZFZhDS7+iyC4rlt+F0a9j9l0FnfQ
+ bh=Jd0l4zwxrWARTFEkbuyz4ngT8mytSOpGKQmzVJEO9x8=;
+ b=mwtKy2YCIIX4dO/ncCPj/sVgPQEp3s1rxJHlnF6+BMt0HVjC7Li5+zDnX+ooWho32Y
+ iL6r8Z/J6qtB2IUW6WHGc0ty4dpHHE+A5xH5vYLEGTwqVRc0ZSQM64Fvdy9lLX7q7kl4
+ WW/M7pMdoqXE7XrIEad/pOPpvPbva9ePWzDX4M74siTDJCi7wb2ccqv+vVLvhx2lL0LV
+ fOED89PlAcZsKob1toVOGwAWDZ3IeXhlI32MbLRCaQzzD8HTqOck4o+mL/HwhvCAWCsW
+ wtYPFw+JnqOVKhn+YQ6kodOG0ZCFqGAYj5Wsofsy2cFkChLfis82U5AUY4mKinNr5WV1
+ 4tZA==
+X-Gm-Message-State: AOJu0YxQKaw+23IkE48T9SVhIfd2OlHR8yknJ0uq+wngX9mdjvAqsMbq
+ Fd0FVL4bwPeLh7vmV/Coc+Me3HACs5zSxrcQr/oJmzeJF6OhdVKauayTMxvR6AU5pBGGD6RGvws
  =
-X-Google-Smtp-Source: AGHT+IHz1V28706U1JuUxyou/qnacroyPtqQgR1Zl7S32MraVazpNqPridOG6d+E5opRP/+Cn7DLjQ==
-X-Received: by 2002:a05:6e02:1aad:b0:380:fd76:3d9e with SMTP id
- e9e14a558f8ab-398e6b9eea3mr178800205ab.22.1721833807252; 
- Wed, 24 Jul 2024 08:10:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFN+CcD1gfx55iRkHacHfJ4+m/z+l7wL1m4koqJbnkVIxgI3U1xHqo51+6Ipi2Zsq26iyg+iA==
+X-Received: by 2002:a05:6e02:1a6a:b0:376:410b:ae67 with SMTP id
+ e9e14a558f8ab-3993ffa3d27mr148678115ab.16.1721833806484; 
+ Wed, 24 Jul 2024 08:10:06 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.10.06
+ e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.10.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:10:06 -0700 (PDT)
+ Wed, 24 Jul 2024 08:10:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexander Dahl <ada@thorsis.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH 34/35] doc: Move generic-board documentation into rst
-Date: Wed, 24 Jul 2024 09:09:21 -0600
-Message-Id: <20240724150922.2343249-35-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: [PATCH 33/35] global_data: Remove environment members if not used
+Date: Wed, 24 Jul 2024 09:09:20 -0600
+Message-Id: <20240724150922.2343249-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724150922.2343249-1-sjg@chromium.org>
 References: <20240724150922.2343249-1-sjg@chromium.org>
@@ -92,101 +91,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This information is useful for people looking at how U-Boot has changed
-over the years and the design decisions which led to it. Move it into
-doc/ in an 'historical' section.
+If the environment is not enabled we don't need these fields in
+global_data. Make them conditional.
+
+Make these fields conditional. Move env_buf up one so it can share
+an #ifdef.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- .../historical/generic_board.rst}                | 16 ++++++++--------
- doc/develop/historical/index.rst                 | 12 ++++++++++++
- doc/develop/index.rst                            |  8 ++++++++
- 3 files changed, 28 insertions(+), 8 deletions(-)
- rename doc/{README.generic-board => develop/historical/generic_board.rst} (96%)
- create mode 100644 doc/develop/historical/index.rst
+ common/hwconfig.c                 |  8 +++++++-
+ include/asm-generic/global_data.h | 12 ++++++++----
+ lib/asm-offsets.c                 |  2 ++
+ 3 files changed, 17 insertions(+), 5 deletions(-)
 
-diff --git a/doc/README.generic-board b/doc/develop/historical/generic_board.rst
-similarity index 96%
-rename from doc/README.generic-board
-rename to doc/develop/historical/generic_board.rst
-index bc35179fbfd..6711d3d7a89 100644
---- a/doc/README.generic-board
-+++ b/doc/develop/historical/generic_board.rst
-@@ -1,10 +1,9 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# (C) Copyright 2014 Google, Inc
--# Simon Glass <sjg@chromium.org>
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. (C) Copyright 2014 Google, Inc
-+.. sectionauthor:: Simon Glass <sjg@chromium.org>
+diff --git a/common/hwconfig.c b/common/hwconfig.c
+index afaa6cb37ab..25a8cd5bf5d 100644
+--- a/common/hwconfig.c
++++ b/common/hwconfig.c
+@@ -77,7 +77,13 @@ static const char *__hwconfig(const char *opt, size_t *arglen,
  
--Background
------------
-+Generic board
-+-------------
+ 	/* if we are passed a buffer use it, otherwise try the environment */
+ 	if (!env_hwconfig) {
+-		if (!(gd->flags & GD_FLG_ENV_READY) && gd->env_valid != ENV_VALID) {
++#if CONFIG_IS_ENABLED(ENV_SUPPORT)
++		if (!(gd->flags & GD_FLG_ENV_READY) &&
++		    gd->env_valid != ENV_VALID)
++#else
++		if (true)
++#endif
++		{
+ 			printf("WARNING: Calling __hwconfig without a buffer "
+ 					"and before environment is ready\n");
+ 			return NULL;
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index 18d21de6237..1d58ada4094 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -85,6 +85,7 @@ struct global_data {
+ 	 * @cpu_clk: CPU clock rate in Hz
+ 	 */
+ 	unsigned long cpu_clk;
++#if CONFIG_IS_ENABLED(ENV_SUPPORT)
+ 	/**
+ 	 * @env_addr: address of environment structure
+ 	 *
+@@ -92,6 +93,7 @@ struct global_data {
+ 	 * environment variables.
+ 	 */
+ 	unsigned long env_addr;
++#endif /* ENV_SUPPORT */
+ 	/**
+ 	 * @ram_base: base address of RAM used by U-Boot
+ 	 */
+@@ -133,6 +135,7 @@ struct global_data {
+ 	 * @baudrate: baud rate of the serial interface
+ 	 */
+ 	unsigned int baudrate;
++#if CONFIG_IS_ENABLED(ENV_SUPPORT)
+ 	/**
+ 	 * @env_has_init: bit mask indicating environment locations
+ 	 *
+@@ -149,14 +152,15 @@ struct global_data {
+ 	 * @env_load_prio: priority of the loaded environment
+ 	 */
+ 	char env_load_prio;
+-	/**
+-	 * @fdt_src: Source of FDT
+-	 */
+-	enum fdt_source_t fdt_src;
+ 	/**
+ 	 * @env_buf: buffer for env_get() before reloc
+ 	 */
+ 	char env_buf[32];
++#endif /* ENV_SUPPORT */
++	/**
++	 * @fdt_src: Source of FDT
++	 */
++	enum fdt_source_t fdt_src;
+ 	/**
+ 	 * @arch: architecture-specific data
+ 	 */
+diff --git a/lib/asm-offsets.c b/lib/asm-offsets.c
+index 4e2dbda9a71..b6bbcbf76ca 100644
+--- a/lib/asm-offsets.c
++++ b/lib/asm-offsets.c
+@@ -44,7 +44,9 @@ int main(void)
  
- U-Boot traditionally had a board.c file for each architecture. This introduced
- quite a lot of duplication, with each architecture tending to do
-@@ -16,7 +15,7 @@ All boards and architectures have moved to this as of mid 2016.
+ 	DEFINE(GD_NEW_GD, offsetof(struct global_data, new_gd));
  
++#if CONFIG_IS_ENABLED(ENV_SUPPORT)
+ 	DEFINE(GD_ENV_ADDR, offsetof(struct global_data, env_addr));
++#endif
  
- What has changed?
-------------------
-+~~~~~~~~~~~~~~~~~
- 
- The main change is that the arch/<arch>/lib/board.c file is removed in
- favour of common/board_f.c (for pre-relocation init) and common/board_r.c
-@@ -28,7 +27,7 @@ have been moved to separate structures.
- 
- 
- Further Background
--------------------
-+~~~~~~~~~~~~~~~~~~
- 
- The full text of the original generic board series is reproduced below.
- 
-@@ -132,4 +131,5 @@ convenience.
- 
- Simon Glass, sjg@chromium.org
- March 2014
-+
- Updated after final removal, May 2016
-diff --git a/doc/develop/historical/index.rst b/doc/develop/historical/index.rst
-new file mode 100644
-index 00000000000..e4462f5d2a7
---- /dev/null
-+++ b/doc/develop/historical/index.rst
-@@ -0,0 +1,12 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Historical Documents
-+====================
-+
-+This section provides documentation about major changes in U-Boot over the
-+years.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   generic_board
-diff --git a/doc/develop/index.rst b/doc/develop/index.rst
-index c0107a783fc..0d0e60ab56c 100644
---- a/doc/develop/index.rst
-+++ b/doc/develop/index.rst
-@@ -99,3 +99,11 @@ Code quality
-    :maxdepth: 1
- 
-    python_cq
-+
-+Historical documentation
-+------------------------
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   historical/index
+ 	return 0;
+ }
 -- 
 2.34.1
 
