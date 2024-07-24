@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8323BC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:10:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976B1C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB1BF889AB;
-	Wed, 24 Jul 2024 17:09:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 262C6889B4;
+	Wed, 24 Jul 2024 17:09:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KWBg6uf7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PPz+zekO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6262388967; Wed, 24 Jul 2024 17:09:45 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id EA8E588971; Wed, 24 Jul 2024 17:09:45 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 163F888976
+ by phobos.denx.de (Postfix) with ESMTPS id D9ACA88937
  for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:09:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3992195d08aso24421915ab.0
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-398039f8b7bso23909235ab.3
  for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:09:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721833781; x=1722438581; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721833782; x=1722438582; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yN5x+SeSlYbnr6ZaYILJ+6G/CB2ex2cdwl3F04tTdtE=;
- b=KWBg6uf7bVhwODMf2OdDJwCnciEr0I4zIfWDdB741oH0IWsLTkEaJpeTrRF881PwKv
- +tfBDjOU3d0lolOX6pN57eb+9qG+3bfVbbSDgVqMrPBGFgD6N5iVv4/eF6XpSRC517uN
- XL48LSubAvjUvmR1d/BRB6koI12aJf5ZSfiqY=
+ bh=fM2thlPm+51/Wv9sw6R7iyRrrX69x8OUoAgUNfbBmk4=;
+ b=PPz+zekO9s+unF6SGt2bqgC6cXS+ZwGnF69MfuDsnjv5yTX8ethBm81tXhZiocSPyw
+ EpwUN+kfjuamF0fi9Ce77ioFCtFxmHoOtrwlBPcz0NclEfXp1Fvypj3s8sQr2Dpay12g
+ TVRlVHIBU24RPZPKAnjMfz2hB+xIdUMQOBD1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721833781; x=1722438581;
+ d=1e100.net; s=20230601; t=1721833782; x=1722438582;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yN5x+SeSlYbnr6ZaYILJ+6G/CB2ex2cdwl3F04tTdtE=;
- b=wTDQq3yqGagpNs20V+FmbV+6+Z80O5M66Wv9Dd2G+a1RuTqg/GHL8I2BHH6IaikPJ3
- cwkvk2A9FcF5GilavtvNQ5JTgLD09V5Q+R1QrMpiVpJnTit6nYdV/8K2MxHP1Iy2Eh57
- ddnn7QiIksskfKWk7Yl/hrLy9NqePf4E0TKkZZMMiNikbYQCMcHAm4Gt2tp8WRAIOwUc
- w00cW5rwShioQwDFof+a6/idmnzxSw2LQzIgdNc/6rwOhr2RIBRpB/lvNWLoWqbdcFPW
- LKeDx955xs7oqMbUXLlikmTtWtK/lF4TpTYa8j0MLUjR6+buPS/WTcWhZbYQN2QLz/nH
- aOfQ==
-X-Gm-Message-State: AOJu0YwK4c1zIarcrC2nMZIIo0KVPPMjxQOnKxkapZAiuh4IWFrUENQ8
- ovJnedVve5/sD+bNWR1BrcZ6eML1wIsjNtAmV0bxVjh9O+Vku9sJ+vAt1rtaaLLNbry0Ipkjgdg
+ bh=fM2thlPm+51/Wv9sw6R7iyRrrX69x8OUoAgUNfbBmk4=;
+ b=k9inXZ2pM/lOiW2j5A8KX9pyZ98JCU7avPk433NuWICuVWGL1z+wJtUJAi++XVsL67
+ azmuLIByiJkhtwxebKO/TH152nokOhl7CCSHiFMVM8kmoQYMPBdY72UROCm3QZucTRsg
+ aN4r5YlqHNs9FyfQy7nvlfzhYQIF75w+myeA+Eo4txb+W8ZEB7yeLB2okVPeX4umJsJj
+ FYRjK9T2yxnrR5re1zMjrFuCgBQSCZiL4x/HxNaSNt7lDLiGnxDok6h3Wl20q+8lj2OK
+ s5N7GU8Sfb9K+O97H5mHhIz0zcJx4LgJ/noK99PuGeJtk+jqEdV8JsGdtVf4ewSTR1R7
+ Hegg==
+X-Gm-Message-State: AOJu0YwPXAK+C6hY+h7Pu/bHBRZNz9J5gkCwV9Ysl28XmeBi0dGQtzgc
+ IpsoFudjWnSFi3d8gVw51jVxT9S4lN7gwpjzVdFlQCVuuLeGaPDSKX2SQEjZ1VzWpA3Tks9JuDI
  =
-X-Google-Smtp-Source: AGHT+IHfwUoTPeq3t5Poheamj1qabJ3DpQcAJw0rJMmfMc4Q+54lZtvi1jqPxzz1O7nIOD0zByFkVQ==
-X-Received: by 2002:a05:6e02:13ab:b0:397:6dfc:9946 with SMTP id
- e9e14a558f8ab-39a194d5e6bmr24590595ab.27.1721833781708; 
- Wed, 24 Jul 2024 08:09:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH0fWfp3Lur4rorO0rZDxqqC6Gcl32NAx36rVMvhWyIK0Tr304tEleDjvFBcD4Hho1nV5l5fA==
+X-Received: by 2002:a05:6e02:1a81:b0:396:ba86:318f with SMTP id
+ e9e14a558f8ab-39a194d7b69mr27933775ab.24.1721833782478; 
+ Wed, 24 Jul 2024 08:09:42 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.09.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:09:41 -0700 (PDT)
+ Wed, 24 Jul 2024 08:09:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Stefan Bosch <stefan_b@posteo.net>
-Subject: [PATCH 06/35] arm: friendlyarm: Avoid accessing global_data fb_base
-Date: Wed, 24 Jul 2024 09:08:53 -0600
-Message-Id: <20240724150922.2343249-7-sjg@chromium.org>
+ Albert Aribaud <albert.u.boot@aribaud.net>, Ilko Iliev <iliev@ronetix.at>
+Subject: [PATCH 07/35] arm: ronetix: Avoid accessing global_data fb_base
+Date: Wed, 24 Jul 2024 09:08:54 -0600
+Message-Id: <20240724150922.2343249-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724150922.2343249-1-sjg@chromium.org>
 References: <20240724150922.2343249-1-sjg@chromium.org>
@@ -95,36 +94,44 @@ Use the new video function to get the framebuffer base.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- board/friendlyarm/nanopi2/board.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ board/ronetix/pm9263/pm9263.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
-index c8cbc5a15fa..b32dfc6b570 100644
---- a/board/friendlyarm/nanopi2/board.c
-+++ b/board/friendlyarm/nanopi2/board.c
-@@ -11,6 +11,7 @@
- #ifdef CONFIG_PWM_NX
- #include <pwm.h>
- #endif
+diff --git a/board/ronetix/pm9263/pm9263.c b/board/ronetix/pm9263/pm9263.c
+index 1de1bd68701..8125f064cf1 100644
+--- a/board/ronetix/pm9263/pm9263.c
++++ b/board/ronetix/pm9263/pm9263.c
+@@ -9,6 +9,7 @@
+ 
+ #include <config.h>
+ #include <init.h>
 +#include <video.h>
  #include <asm/global_data.h>
+ #include <linux/sizes.h>
  #include <asm/io.h>
+@@ -110,11 +111,12 @@ int dram_init_banksize(void)
+ #ifdef CONFIG_DISPLAY_BOARDINFO
+ int checkboard (void)
+ {
++	ulong fb_base = video_get_fb();
+ 	char *ss;
  
-@@ -492,12 +493,8 @@ int splash_screen_prepare(void)
- 					 ARRAY_SIZE(splash_locations));
+ 	printf ("Board : Ronetix PM9263\n");
+ 
+-	switch (gd->fb_base) {
++	switch (fb_base) {
+ 	case PHYS_PSRAM:
+ 		ss = "(PSRAM)";
+ 		break;
+@@ -127,7 +129,7 @@ int checkboard (void)
+ 		ss = "";
+ 		break;
  	}
+-	printf("Video memory : 0x%08lX %s\n", gd->fb_base, ss );
++	printf("Video memory : 0x%08lX %s\n", fb_base, ss);
  
--	if (!err) {
--		char addr[64];
--
--		sprintf(addr, "0x%lx", gd->fb_base);
--		env_set("fb_addr", addr);
--	}
-+	if (!err)
-+		env_set_hex("fb_addr", video_get_fb());
- 
- 	return err;
- }
+ 	printf ("\n");
+ 	return 0;
 -- 
 2.34.1
 
