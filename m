@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A793C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51C8C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF8238895B;
-	Wed, 24 Jul 2024 08:05:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B94838892F;
+	Wed, 24 Jul 2024 08:05:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 737F888935; Wed, 24 Jul 2024 08:05:19 +0200 (CEST)
+ id D09118891B; Wed, 24 Jul 2024 08:05:32 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E5BC788906
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4A36588966
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:05:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D0C6B106F;
- Tue, 23 Jul 2024 23:05:33 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 208341476;
+ Tue, 23 Jul 2024 23:05:44 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 261C03F766;
- Tue, 23 Jul 2024 23:05:02 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0DFF53F766;
+ Tue, 23 Jul 2024 23:05:13 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 28/40] lmb: config: make lmb config symbol def_bool
-Date: Wed, 24 Jul 2024 11:32:12 +0530
-Message-Id: <20240724060224.3071065-29-sughosh.ganu@linaro.org>
+Subject: [PATCH 30/40] sandbox: iommu: remove lmb allocation in the driver
+Date: Wed, 24 Jul 2024 11:32:14 +0530
+Message-Id: <20240724060224.3071065-31-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,33 +63,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB module provides allocation/reservation API's, primarily for
-loading images to memory. This is functionality which is used by all
-boards. Make the config symbol used for the main U-Boot image as
-def_bool and enable it by default.
+The sandbox iommu driver uses the LMB module to allocate a particular
+range of memory for the device virtual address(DVA). This used to work
+earlier since the LMB memory map was caller specific and not
+global. But with the change to make the LMB allocations global and
+persistent, adding this memory range has other side effects. On the
+other hand, the sandbox iommu test expects to see this particular
+value of the DVA. Use the DVA address directly, instead of mapping it
+in the LMB memory map, and then have it allocated.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc: New patch
+Changes since rfc: None
 
- lib/Kconfig | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ drivers/iommu/sandbox_iommu.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 6a9338390a..c7fa4bc77e 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1099,9 +1099,7 @@ config LIB_ELF
- 	  This supports for 32 bit and 64 bit versions.
+diff --git a/drivers/iommu/sandbox_iommu.c b/drivers/iommu/sandbox_iommu.c
+index 505f2c3250..15ecaacbb3 100644
+--- a/drivers/iommu/sandbox_iommu.c
++++ b/drivers/iommu/sandbox_iommu.c
+@@ -5,10 +5,10 @@
  
- config LMB
--	bool "Enable the logical memory blocks library (lmb)"
--	default y if ARC || ARM || M68K || MICROBLAZE || MIPS || \
--		     NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
-+	def_bool y
- 	help
- 	  Support the library logical memory blocks. This will require
- 	  a malloc() implementation for defining the data structures
+ #include <dm.h>
+ #include <iommu.h>
+-#include <lmb.h>
+ #include <asm/io.h>
+ #include <linux/sizes.h>
+ 
++#define DVA_ADDR		0x89abc000
+ #define IOMMU_PAGE_SIZE		SZ_4K
+ 
+ static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+@@ -20,8 +20,7 @@ static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+ 	paddr = ALIGN_DOWN(virt_to_phys(addr), IOMMU_PAGE_SIZE);
+ 	off = virt_to_phys(addr) - paddr;
+ 	psize = ALIGN(size + off, IOMMU_PAGE_SIZE);
+-
+-	dva = lmb_alloc(psize, IOMMU_PAGE_SIZE, LMB_NONE);
++	dva = (phys_addr_t)DVA_ADDR;
+ 
+ 	return dva + off;
+ }
+@@ -35,8 +34,6 @@ static void sandbox_iommu_unmap(struct udevice *dev, dma_addr_t addr,
+ 	dva = ALIGN_DOWN(addr, IOMMU_PAGE_SIZE);
+ 	psize = size + (addr - dva);
+ 	psize = ALIGN(psize, IOMMU_PAGE_SIZE);
+-
+-	lmb_free(dva, psize, LMB_NONE);
+ }
+ 
+ static struct iommu_ops sandbox_iommu_ops = {
+@@ -46,8 +43,6 @@ static struct iommu_ops sandbox_iommu_ops = {
+ 
+ static int sandbox_iommu_probe(struct udevice *dev)
+ {
+-	lmb_add(0x89abc000, SZ_16K, LMB_NONE);
+-
+ 	return 0;
+ }
+ 
 -- 
 2.34.1
 
