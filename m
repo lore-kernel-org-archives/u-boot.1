@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3D4C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:03:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC5EDC3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5725B88874;
-	Wed, 24 Jul 2024 08:03:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF86E88847;
+	Wed, 24 Jul 2024 08:03:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4BEE88005; Wed, 24 Jul 2024 08:03:02 +0200 (CEST)
+ id 19A1E88005; Wed, 24 Jul 2024 08:03:08 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A9B6E88805
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:02:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 225738880F
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:02:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7EE181476;
- Tue, 23 Jul 2024 23:03:18 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DEB3B106F;
+ Tue, 23 Jul 2024 23:03:23 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6C44B3F766;
- Tue, 23 Jul 2024 23:02:48 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8D81F3F766;
+ Tue, 23 Jul 2024 23:02:53 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 02/40] lib: Handle a special case with str_to_list()
-Date: Wed, 24 Jul 2024 11:31:46 +0530
-Message-Id: <20240724060224.3071065-3-sughosh.ganu@linaro.org>
+Subject: [PATCH 03/40] alist: Add support for an allocated pointer list
+Date: Wed, 24 Jul 2024 11:31:47 +0530
+Message-Id: <20240724060224.3071065-4-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -65,51 +65,629 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-The current implementation can return an extra result at the end when
-the string ends with a space. Fix this by adding a special case.
+In various places it is useful to have an array of structures, but allow
+it to grow. In some cases we work around it by setting maximum number of
+entries, using a Kconfig option. In other places we use a linked list,
+which does not provide for random access and can complicate the code.
+
+Introduce a new data structure, which is a variable-sized list of structs
+each of the same, pre-set size. It provides O(1) access and is reasonably
+efficient at expanding linearly, since it doubles in size when it runs out
+of space.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- lib/strto.c   | 4 +++-
- test/str_ut.c | 4 +---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ include/alist.h   | 214 ++++++++++++++++++++++++++++++++++++++++++++++
+ lib/Makefile      |   1 +
+ lib/alist.c       | 147 +++++++++++++++++++++++++++++++
+ test/lib/Makefile |   1 +
+ test/lib/alist.c  | 197 ++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 560 insertions(+)
+ create mode 100644 include/alist.h
+ create mode 100644 lib/alist.c
+ create mode 100644 test/lib/alist.c
 
-diff --git a/lib/strto.c b/lib/strto.c
-index 5157332d6c..f83ac67c66 100644
---- a/lib/strto.c
-+++ b/lib/strto.c
-@@ -236,12 +236,14 @@ const char **str_to_list(const char *instr)
- 		return NULL;
+diff --git a/include/alist.h b/include/alist.h
+new file mode 100644
+index 0000000000..6cc3161dcd
+--- /dev/null
++++ b/include/alist.h
+@@ -0,0 +1,214 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Handles a contiguous list of pointers which be allocated and freed
++ *
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#ifndef __ALIST_H
++#define __ALIST_H
++
++#include <stdbool.h>
++#include <linux/bitops.h>
++#include <linux/types.h>
++
++/**
++ * struct alist - object list that can be allocated and freed
++ *
++ * Holds a list of objects, each of the same size. The object is typically a
++ * C struct. The array is alloced in memory can change in size.
++ *
++ * The list rememebers the size of the list, but has a separate count of how
++ * much space is allocated, This allows it increase in size in steps as more
++ * elements are added, which is more efficient that reallocating the list every
++ * time a single item is added
++ *
++ * Two types of access are provided:
++ *
++ * alist_get...(index)
++ *	gets an existing element, if its index is less that size
++ *
++ * alist_ensure(index)
++ *	address an existing element, or creates a new one if not present
++ *
++ * @data: object data of size `@obj_size * @alloc`. The list can grow as
++ * needed but never shrinks
++ * @obj_size: Size of each object in bytes
++ * @count: number of objects in array
++ * @alloc: allocated length of array, to which @count can grow
++ * @flags: flags for the alist (ALISTF_...)
++ */
++struct alist {
++	void *data;
++	u16 obj_size;
++	u16 count;
++	u16 alloc;
++	u16 flags;
++};
++
++/**
++ * enum alist_flags - Flags for the alist
++ *
++ * @ALIST_FAIL: true if any allocation has failed. Once this has happened, the
++ * alist is dead and cannot grow further
++ */
++enum alist_flags {
++	ALISTF_FAIL	= BIT(0),
++};
++
++/**
++ * alist_has() - Check if an index is within the list range
++ *
++ * Checks if index is within the current alist count
++ *
++ * @lst: alist to check
++ * @index: Index to check
++ * Returns: true if value, else false
++ */
++static inline bool alist_has(struct alist *lst, uint index)
++{
++	return index < lst->count;
++}
++
++/**
++ * alist_err() - Check if the alist is still valid
++ *
++ * @lst: List to check
++ * Return: false if OK, true if any previous allocation failed
++ */
++static inline bool alist_err(struct alist *lst)
++{
++	return lst->flags & ALISTF_FAIL;
++}
++
++/**
++ * alist_get_ptr() - Get the value of a pointer
++ *
++ * @lst: alist to check
++ * @index: Index to read from
++ * Returns: pointer, if present, else NULL
++ */
++const void *alist_get_ptr(const struct alist *lst, uint index);
++
++/**
++ * alist_getd() - Get the value of a pointer directly, with no checking
++ *
++ * This must only be called on indexes for which alist_has() returns true
++ *
++ * @lst: alist to check
++ * @index: Index to read from
++ * Returns: pointer value (may be NULL)
++ */
++static inline const void *alist_getd(struct alist *lst, uint index)
++{
++	return lst->data + index * lst->obj_size;
++}
++
++#define alist_get(_lst, _index, _struct)	\
++	((const _struct *)alist_get_ptr(_lst, _index))
++
++/**
++ * alist_ensure_ptr() - Ensure an object exists at a given index
++ *
++ * This provides read/write access to an array element. If it does not exist,
++ * it is allocated, reading for the caller to store the object into
++ *
++ * Allocates a object at the given index if needed
++ *
++ * @lst: alist to check
++ * @index: Index to address
++ * Returns: pointer where struct can be read/written, or NULL if out of memory
++ */
++void *alist_ensure_ptr(struct alist *lst, uint index);
++
++/**
++ * alist_ensure() - Address a struct, the correct object type
++ *
++ * Use as:
++ *	struct my_struct *ptr = alist_ensure(&lst, 4, struct my_struct);
++ */
++#define alist_ensure(_lst, _index, _struct)	\
++	((_struct *)alist_ensure_ptr(_lst, _index))
++
++/**
++ * alist_add_ptr() - Ad a new object to the list
++ *
++ * @lst: alist to add to
++ * @obj: Pointer to object to copy in
++ * Returns: pointer to where the object was copied, or NULL if out of memory
++ */
++void *alist_add_ptr(struct alist *lst, void *obj);
++
++/**
++ * alist_expand_by() - Expand a list by the given amount
++ *
++ * @lst: alist to expand
++ * @inc_by: Amount to expand by
++ * Return: true if OK, false if out of memory
++ */
++bool alist_expand_by(struct alist *lst, uint inc_by);
++
++/**
++ * alist_add() - Used to add an object type with the correct type
++ *
++ * Use as:
++ *	struct my_struct obj;
++ *	struct my_struct *ptr = alist_add(&lst, &obj, struct my_struct);
++ */
++#define alist_add(_lst, _obj, _struct)	\
++	((_struct *)alist_add_ptr(_lst, (_struct *)&(_obj)))
++
++/**
++ * alist_init() - Set up a new object list
++ *
++ * Sets up a list of objects, initially empty
++ *
++ * @lst: alist to set up
++ * @obj_size: Size of each element in bytes
++ * @alloc_size: Number of items to allowed to start, before reallocation is
++ * needed (0 to start with no space)
++ * Return: true if OK, false if out of memory
++ */
++bool alist_init(struct alist *lst, uint obj_size, uint alloc_size);
++
++#define alist_init_struct(_lst, _struct)	\
++	alist_init(_lst, sizeof(_struct), 0)
++
++/**
++ * alist_uninit_move_ptr() - Return the allocated contents and uninit the alist
++ *
++ * This returns the alist data to the caller, so that the caller receives data
++ * that it can be sure will hang around. The caller is responsible for freeing
++ * the data.
++ *
++ * If the alist size is 0, this returns NULL
++ *
++ * The alist is uninited as part of this.
++ *
++ * The alist must be inited before this can be called.
++ *
++ * @alist: alist to uninit
++ * @countp: if non-NULL, returns the number of objects in the returned data
++ * (which is @alist->size)
++ * Return: data contents, allocated with malloc(), or NULL if the data could not
++ *	be allocated, or the data size is 0
++ */
++void *alist_uninit_move_ptr(struct alist *alist, size_t *countp);
++
++/**
++ * alist_uninit_move() - Typed version of alist_uninit_move_ptr()
++ */
++#define alist_uninit_move(_lst, _countp, _struct)	\
++	(_struct *)alist_uninit_move_ptr(_lst, _countp)
++
++/**
++ * alist_uninit() - Free any memory used by an alist
++ *
++ * The alist must be inited before this can be called.
++ *
++ * @alist: alist to uninit
++ */
++void alist_uninit(struct alist *alist);
++
++#endif /* __ALIST_H */
+diff --git a/lib/Makefile b/lib/Makefile
+index e389ad014f..81b503ab52 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -147,6 +147,7 @@ endif
+ obj-$(CONFIG_$(SPL_)OID_REGISTRY) += oid_registry.o
  
- 	/* count the number of space-separated strings */
--	for (count = *str != '\0', p = str; *p; p++) {
-+	for (count = 0, p = str; *p; p++) {
- 		if (*p == ' ') {
- 			count++;
- 			*p = '\0';
- 		}
- 	}
-+	if (p != str && p[-1])
-+		count++;
- 
- 	/* allocate the pointer array, allowing for a NULL terminator */
- 	ptr = calloc(count + 1, sizeof(char *));
-diff --git a/test/str_ut.c b/test/str_ut.c
-index 389779859a..96e048975d 100644
---- a/test/str_ut.c
-+++ b/test/str_ut.c
-@@ -342,9 +342,7 @@ static int test_str_to_list(struct unit_test_state *uts)
- 	ut_asserteq_str("space", ptr[3]);
- 	ut_assertnonnull(ptr[4]);
- 	ut_asserteq_str("", ptr[4]);
--	ut_assertnonnull(ptr[5]);
--	ut_asserteq_str("", ptr[5]);
--	ut_assertnull(ptr[6]);
-+	ut_assertnull(ptr[5]);
- 	str_free_list(ptr);
- 	ut_assertok(ut_check_delta(start));
- 
+ obj-y += abuf.o
++obj-y += alist.o
+ obj-y += date.o
+ obj-y += rtc-lib.o
+ obj-$(CONFIG_LIB_ELF) += elf.o
+diff --git a/lib/alist.c b/lib/alist.c
+new file mode 100644
+index 0000000000..bf5220e4f3
+--- /dev/null
++++ b/lib/alist.c
+@@ -0,0 +1,147 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Handles a contiguous list of pointers which be allocated and freed
++ *
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#include <alist.h>
++#include <display_options.h>
++#include <malloc.h>
++#include <stdio.h>
++#include <string.h>
++
++enum {
++	ALIST_INITIAL_SIZE	= 4,	/* default size of unsized list */
++};
++
++bool alist_init(struct alist *lst, uint obj_size, uint start_size)
++{
++	/* Avoid realloc for the initial size to help malloc_simple */
++	memset(lst, '\0', sizeof(struct alist));
++	if (start_size) {
++		lst->data = calloc(obj_size, start_size);
++		if (!lst->data) {
++			lst->flags = ALISTF_FAIL;
++			return false;
++		}
++		lst->alloc = start_size;
++	}
++	lst->obj_size = obj_size;
++
++	return true;
++}
++
++void alist_uninit(struct alist *lst)
++{
++	free(lst->data);
++
++	/* Clear fields to avoid any confusion */
++	memset(lst, '\0', sizeof(struct alist));
++}
++
++/**
++ * alist_expand_to() - Expand a list to the given size
++ *
++ * @lst: List to modify
++ * @inc_by: Amount to expand to
++ * Return: true if OK, false if out of memory
++ */
++static bool alist_expand_to(struct alist *lst, uint new_alloc)
++{
++	void *new_data;
++
++	if (lst->flags & ALISTF_FAIL)
++		return false;
++	new_data = realloc(lst->data, lst->obj_size * new_alloc);
++	if (!new_data) {
++		lst->flags |= ALISTF_FAIL;
++		return false;
++	}
++	memset(new_data + lst->obj_size * lst->alloc, '\0',
++	       lst->obj_size * (new_alloc - lst->alloc));
++	lst->alloc = new_alloc;
++	lst->data = new_data;
++
++	return true;
++}
++
++bool alist_expand_by(struct alist *lst, uint inc_by)
++{
++	return alist_expand_to(lst, lst->alloc + inc_by);
++}
++
++/**
++ * alist_expand_min() - Expand to at least the provided size
++ *
++ * Expands to the lowest power of two which can incorporate the new size
++ *
++ * @lst: alist to expand
++ * @min_alloc: Minimum new allocated size; if 0 then ALIST_INITIAL_SIZE is used
++ * Return: true if OK, false if out of memory
++ */
++static bool alist_expand_min(struct alist *lst, uint min_alloc)
++{
++	uint new_alloc;
++
++	for (new_alloc = lst->alloc ?: ALIST_INITIAL_SIZE;
++	     new_alloc < min_alloc;)
++		new_alloc *= 2;
++
++	return alist_expand_to(lst, new_alloc);
++}
++
++const void *alist_get_ptr(const struct alist *lst, uint index)
++{
++	if (index >= lst->count)
++		return NULL;
++
++	return lst->data + index * lst->obj_size;
++}
++
++void *alist_ensure_ptr(struct alist *lst, uint index)
++{
++	uint minsize = index + 1;
++	void *ptr;
++
++	if (index >= lst->alloc && !alist_expand_min(lst, minsize))
++		return NULL;
++
++	ptr = lst->data + index * lst->obj_size;
++	if (minsize >= lst->count)
++		lst->count = minsize;
++
++	return ptr;
++}
++
++void *alist_add_ptr(struct alist *lst, void *obj)
++{
++	void *ptr;
++
++	ptr = alist_ensure_ptr(lst, lst->count);
++	if (!ptr)
++		return ptr;
++	memcpy(ptr, obj, lst->obj_size);
++
++	return ptr;
++}
++
++void *alist_uninit_move_ptr(struct alist *alist, size_t *countp)
++{
++	void *ptr;
++
++	if (countp)
++		*countp = alist->count;
++	if (!alist->count) {
++		alist_uninit(alist);
++		return NULL;
++	}
++
++	ptr = alist->data;
++
++	/* Clear everything out so there is no record of the data */
++	alist_init(alist, alist->obj_size, 0);
++
++	return ptr;
++}
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index e75a263e6a..70f14c46b1 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -5,6 +5,7 @@
+ ifeq ($(CONFIG_SPL_BUILD),)
+ obj-y += cmd_ut_lib.o
+ obj-y += abuf.o
++obj-y += alist.o
+ obj-$(CONFIG_EFI_LOADER) += efi_device_path.o
+ obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
+ obj-y += hexdump.o
+diff --git a/test/lib/alist.c b/test/lib/alist.c
+new file mode 100644
+index 0000000000..f9050a963e
+--- /dev/null
++++ b/test/lib/alist.c
+@@ -0,0 +1,197 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#include <alist.h>
++#include <string.h>
++#include <test/lib.h>
++#include <test/test.h>
++#include <test/ut.h>
++
++struct my_struct {
++	uint val;
++	uint other_val;
++};
++
++enum {
++	obj_size	= sizeof(struct my_struct),
++};
++
++/* Test alist_init() */
++static int lib_test_alist_init(struct unit_test_state *uts)
++{
++	struct alist lst;
++	ulong start;
++
++	start = ut_check_free();
++
++	/* with a size of 0, the fields should be inited, with no memory used */
++	memset(&lst, '\xff', sizeof(lst));
++	ut_assert(alist_init_struct(&lst, struct my_struct));
++	ut_asserteq_ptr(NULL, lst.data);
++	ut_asserteq(0, lst.count);
++	ut_asserteq(0, lst.alloc);
++	ut_assertok(ut_check_delta(start));
++	alist_uninit(&lst);
++	ut_asserteq_ptr(NULL, lst.data);
++	ut_asserteq(0, lst.count);
++	ut_asserteq(0, lst.alloc);
++
++	/* use an impossible size */
++	ut_asserteq(false, alist_init(&lst, obj_size,
++				      CONFIG_SYS_MALLOC_LEN));
++	ut_assertnull(lst.data);
++	ut_asserteq(0, lst.count);
++	ut_asserteq(0, lst.alloc);
++
++	/* use a small size */
++	ut_assert(alist_init(&lst, obj_size, 4));
++	ut_assertnonnull(lst.data);
++	ut_asserteq(0, lst.count);
++	ut_asserteq(4, lst.alloc);
++
++	/* free it */
++	alist_uninit(&lst);
++	ut_asserteq_ptr(NULL, lst.data);
++	ut_asserteq(0, lst.count);
++	ut_asserteq(0, lst.alloc);
++	ut_assertok(ut_check_delta(start));
++
++	/* Check for memory leaks */
++	ut_assertok(ut_check_delta(start));
++
++	return 0;
++}
++LIB_TEST(lib_test_alist_init, 0);
++
++/* Test alist_get() and alist_getd() */
++static int lib_test_alist_get(struct unit_test_state *uts)
++{
++	struct alist lst;
++	ulong start;
++	void *ptr;
++
++	start = ut_check_free();
++
++	ut_assert(alist_init(&lst, obj_size, 3));
++	ut_asserteq(0, lst.count);
++	ut_asserteq(3, lst.alloc);
++
++	ut_assertnull(alist_get_ptr(&lst, 2));
++	ut_assertnull(alist_get_ptr(&lst, 3));
++
++	ptr = alist_ensure_ptr(&lst, 1);
++	ut_assertnonnull(ptr);
++	ut_asserteq(2, lst.count);
++	ptr = alist_ensure_ptr(&lst, 2);
++	ut_asserteq(3, lst.count);
++	ut_assertnonnull(ptr);
++
++	ptr = alist_ensure_ptr(&lst, 3);
++	ut_assertnonnull(ptr);
++	ut_asserteq(4, lst.count);
++	ut_asserteq(6, lst.alloc);
++
++	ut_assertnull(alist_get_ptr(&lst, 4));
++
++	alist_uninit(&lst);
++
++	/* Check for memory leaks */
++	ut_assertok(ut_check_delta(start));
++
++	return 0;
++}
++LIB_TEST(lib_test_alist_get, 0);
++
++/* Test alist_has() */
++static int lib_test_alist_has(struct unit_test_state *uts)
++{
++	struct alist lst;
++	ulong start;
++	void *ptr;
++
++	start = ut_check_free();
++
++	ut_assert(alist_init(&lst, obj_size, 3));
++
++	ut_assert(!alist_has(&lst, 0));
++	ut_assert(!alist_has(&lst, 1));
++	ut_assert(!alist_has(&lst, 2));
++	ut_assert(!alist_has(&lst, 3));
++
++	/* create a new one to force expansion */
++	ptr = alist_ensure_ptr(&lst, 4);
++	ut_assertnonnull(ptr);
++
++	ut_assert(alist_has(&lst, 0));
++	ut_assert(alist_has(&lst, 1));
++	ut_assert(alist_has(&lst, 2));
++	ut_assert(alist_has(&lst, 3));
++	ut_assert(alist_has(&lst, 4));
++	ut_assert(!alist_has(&lst, 5));
++
++	alist_uninit(&lst);
++
++	/* Check for memory leaks */
++	ut_assertok(ut_check_delta(start));
++
++	return 0;
++}
++LIB_TEST(lib_test_alist_has, 0);
++
++/* Test alist_ensure() */
++static int lib_test_alist_ensure(struct unit_test_state *uts)
++{
++	struct my_struct *ptr3, *ptr4;
++	struct alist lst;
++	ulong start;
++
++	start = ut_check_free();
++
++	ut_assert(alist_init_struct(&lst, struct my_struct));
++	ut_asserteq(obj_size, lst.obj_size);
++	ut_asserteq(0, lst.count);
++	ut_asserteq(0, lst.alloc);
++	ptr3 = alist_ensure_ptr(&lst, 3);
++	ut_asserteq(4, lst.count);
++	ut_asserteq(4, lst.alloc);
++	ut_assertnonnull(ptr3);
++	ptr3->val = 3;
++
++	ptr4 = alist_ensure_ptr(&lst, 4);
++	ut_asserteq(8, lst.alloc);
++	ut_asserteq(5, lst.count);
++	ut_assertnonnull(ptr4);
++	ptr4->val = 4;
++	ut_asserteq(4, alist_get(&lst, 4, struct my_struct)->val);
++
++	ut_asserteq_ptr(ptr4, alist_ensure(&lst, 4, struct my_struct));
++
++	alist_ensure(&lst, 4, struct my_struct)->val = 44;
++	ut_asserteq(44, alist_get(&lst, 4, struct my_struct)->val);
++	ut_asserteq(3, alist_get(&lst, 3, struct my_struct)->val);
++	ut_assertnull(alist_get(&lst, 7, struct my_struct));
++	ut_asserteq(8, lst.alloc);
++	ut_asserteq(5, lst.count);
++
++	/* add some more, checking handling of malloc() failure */
++	malloc_enable_testing(0);
++	ut_assertnonnull(alist_ensure(&lst, 7, struct my_struct));
++	ut_assertnull(alist_ensure(&lst, 8, struct my_struct));
++	malloc_disable_testing();
++
++	lst.flags &= ~ALISTF_FAIL;
++	ut_assertnonnull(alist_ensure(&lst, 8, struct my_struct));
++	ut_asserteq(16, lst.alloc);
++	ut_asserteq(9, lst.count);
++
++	alist_uninit(&lst);
++
++	/* Check for memory leaks */
++	ut_assertok(ut_check_delta(start));
++
++	return 0;
++}
++LIB_TEST(lib_test_alist_ensure, 0);
 -- 
 2.34.1
 
