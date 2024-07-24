@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F82C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:13:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F7EC3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 300C5889FC;
+	by phobos.denx.de (Postfix) with ESMTP id A176288A02;
 	Wed, 24 Jul 2024 17:10:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HHXctVY+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BuvuCzgU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4AA28897D; Wed, 24 Jul 2024 17:10:00 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id A9139889E8; Wed, 24 Jul 2024 17:10:02 +0200 (CEST)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 851FC889D6
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:09:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 759D2889EF
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:09:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-397ba4f7387so29037365ab.0
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:09:58 -0700 (PDT)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-39626aee4easo31857325ab.3
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:09:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721833797; x=1722438597; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721833798; x=1722438598; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mxvAYhHBEAOug/ziwcv1FJDNAfJPWj7x2CKfDADCZqY=;
- b=HHXctVY+LxNrwLn2i1QaUsVtE3s01lHUdYfyn1MBEDQvgVSQB9ryoX0ymoUcJloUkZ
- dxT9jkqURfsm2sOlg5BV396YJ8N93AYiU7/bPlB+p92/soydm4OmMqoeXtUA9SZ3REaS
- OEQM8OgpyhLGEpLfD1cruZltbdetr+phnMgFk=
+ bh=YZEPgo+XYLFFyAW1YlK0NCnBY6hKBWJxZ6+C8S626Io=;
+ b=BuvuCzgUyc7xyctY556XpW5CLeIAb735Mb7YqYSQEWnHh3Av4F+GIxMj276ZHyMdzg
+ 2oUrz9mMQIyS9W7sKZfaq65RjzHkFl9vnvv69TA0lOBHPy/8t5/GUHSEFH3wFmnAwDmc
+ RVMIsdSFuKILaQ+m449T5lUVt0i026c76AJ5A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721833797; x=1722438597;
+ d=1e100.net; s=20230601; t=1721833798; x=1722438598;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mxvAYhHBEAOug/ziwcv1FJDNAfJPWj7x2CKfDADCZqY=;
- b=pVvyq389+vfrUpT/hVvFjwRdPkebgnlP1BhQ+PWS+un3HJ3+pm8nVitgw7z06tILNY
- 3eO/Hsez4YPP35LBS+LqUOsXuiDnPRm3s7NgzcRQH5JSR/ierJMcKs6Vk3EcxjmZ8Ggt
- RgWptS1TkAU4F8XeyQyE7YzU0qbF1r0Ry/2hHVx8qqacuCuAYhjNmeJHKyr+iXZUxR9s
- gpZ9P6xuYejdQ2QAIxb97tedMcrFZp9qasky2dVH0yrbyAlhPZKgRwWyWdGmygdsYmfD
- oTznaaQgy2nQzzOtY55OuMT/pfFSwXTKjFJ5zOI5Gow4wR4RHcgIRovRHAPZmifOMUDP
- MVVA==
-X-Gm-Message-State: AOJu0Yx+Rnyix9Z0EL24yaZCfMFrFeVOP4RL3DxKAZdOX9ieDd7WVRDn
- Kui4gvdBXg5UayJWyDFksEF/bNqkpUfQN/8dLrLCFKwTrM0ANCuhsqPRYjLI8Zzt9CqRaZRv/wU
+ bh=YZEPgo+XYLFFyAW1YlK0NCnBY6hKBWJxZ6+C8S626Io=;
+ b=Qu6KeopV8iU/x3Rf7XraRLslAE437TMwilbvT282TDAS/R2ZNQy7vpZiCv135FIm9S
+ k9IylPUj/Nzt4J2DzNT9X4NuRwZcRCFH/ZvioQ5CyCy89qm2EXB9viE/RU0acYLehHu7
+ LN5X30rAQo/l9aJ8/Oksys5jpfUQDYS5XgUHpJ6YGW5e1AzXjHNDX2d/dQHyLBTEMLQN
+ QTPHXEN9eqtA8DS+YG5CuLtn17Yob8fCdgWgi2M5WlzRIoa9fkT/FoBT0IjjAEOwGXR8
+ +dZU37N0AxjeqXqI54yJ2oRKHmeg9Fd5HXkAb7Ycde2iMfeV++8ypRUNhH09qmo3VUa8
+ Iyog==
+X-Gm-Message-State: AOJu0YxBOhyVnC2e71iTtNtCNRiamTgTRTnFp9R1nItBHXu+3TXdELef
+ KSnT5pu6+vAmUObwqj0LFMHi9/KsVHg4wDwiwHq7iCUT3H33+/zmvZ3mec1Ta0ZweEkYxvA848w
  =
-X-Google-Smtp-Source: AGHT+IHfqVQFZg2VdjakfEyP9yhwpT0KTpG59Rf4x2L8teApjUdDxVgvyvP4As6A4CdRPgLcLqVIsw==
-X-Received: by 2002:a92:c544:0:b0:396:5af7:64e3 with SMTP id
- e9e14a558f8ab-39a19272634mr26724605ab.15.1721833797199; 
- Wed, 24 Jul 2024 08:09:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEdYMIXOmfe2DRB6pmMCzeRnWNr6LmzMA6bR1W0F7Dbvkrym7EcBI+HF0rpWCp4RkAsvIfCHA==
+X-Received: by 2002:a92:c241:0:b0:383:5ada:7a65 with SMTP id
+ e9e14a558f8ab-39a16d5dc55mr39037355ab.26.1721833798137; 
+ Wed, 24 Jul 2024 08:09:58 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.09.56
+ e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.09.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:09:56 -0700 (PDT)
+ Wed, 24 Jul 2024 08:09:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>,
+ Aaron Williams <awilliams@marvell.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH 22/35] global_data: Collect common fields at the top
-Date: Wed, 24 Jul 2024 09:09:09 -0600
-Message-Id: <20240724150922.2343249-23-sjg@chromium.org>
+Subject: [PATCH 23/35] global_data: Reduce the size of bus_clk and mem_clk
+Date: Wed, 24 Jul 2024 09:09:10 -0600
+Message-Id: <20240724150922.2343249-24-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724150922.2343249-1-sjg@chromium.org>
 References: <20240724150922.2343249-1-sjg@chromium.org>
@@ -90,242 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move all the fields which are always present to the top of the struct,
-so we can potentially save some space by taking note of alignment.
+The bus clock and memory clock are unlikely to go above 4GHz for now, so
+reduce the field size to 32 bits.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/asm-generic/global_data.h | 166 +++++++++++++++---------------
- 1 file changed, 82 insertions(+), 84 deletions(-)
+ arch/mips/mach-ath79/ar934x/clk.c | 4 ++--
+ arch/mips/mach-octeon/cpu.c       | 2 +-
+ include/asm-generic/global_data.h | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/arch/mips/mach-ath79/ar934x/clk.c b/arch/mips/mach-ath79/ar934x/clk.c
+index bdaa6839a2b..231a21ca90f 100644
+--- a/arch/mips/mach-ath79/ar934x/clk.c
++++ b/arch/mips/mach-ath79/ar934x/clk.c
+@@ -327,8 +327,8 @@ int do_ar934x_showclk(struct cmd_tbl *cmdtp, int flag, int argc,
+ {
+ 	ar934x_update_clock();
+ 	printf("CPU:       %8ld MHz\n", gd->cpu_clk / 1000000);
+-	printf("Memory:    %8ld MHz\n", gd->mem_clk / 1000000);
+-	printf("AHB:       %8ld MHz\n", gd->bus_clk / 1000000);
++	printf("Memory:    %8d MHz\n", gd->mem_clk / 1000000);
++	printf("AHB:       %8d MHz\n", gd->bus_clk / 1000000);
+ 	return 0;
+ }
+ 
+diff --git a/arch/mips/mach-octeon/cpu.c b/arch/mips/mach-octeon/cpu.c
+index c7744e84706..c771da61a68 100644
+--- a/arch/mips/mach-octeon/cpu.c
++++ b/arch/mips/mach-octeon/cpu.c
+@@ -67,7 +67,7 @@ static int get_clocks(void)
+ 	gd->cpu_clk = ref_clock * FIELD_GET(RST_BOOT_C_MUL, val);
+ 	gd->bus_clk = ref_clock * FIELD_GET(RST_BOOT_PNR_MUL, val);
+ 
+-	debug("%s: cpu: %lu, bus: %lu\n", __func__, gd->cpu_clk, gd->bus_clk);
++	debug("%s: cpu: %lu, bus: %u\n", __func__, gd->cpu_clk, gd->bus_clk);
+ 
+ 	return 0;
+ }
 diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 1331686066c..48241d10034 100644
+index 48241d10034..7910e73e2e3 100644
 --- a/include/asm-generic/global_data.h
 +++ b/include/asm-generic/global_data.h
-@@ -70,48 +70,6 @@ struct global_data {
+@@ -65,11 +65,11 @@ struct global_data {
+ 	/**
+ 	 * @bus_clk: platform clock rate in Hz
+ 	 */
+-	unsigned long bus_clk;
++	unsigned int bus_clk;
+ 	/**
  	 * @mem_clk: memory clock rate in Hz
  	 */
- 	unsigned long mem_clk;
--#if defined(CONFIG_POST)
--	/**
--	 * @post_log_word: active POST tests
--	 *
--	 * @post_log_word is a bit mask defining which POST tests are recorded
--	 * (see constants POST_*).
--	 */
--	unsigned long post_log_word;
--	/**
--	 * @post_log_res: POST results
--	 *
--	 * @post_log_res is a bit mask with the POST results. A bit with value 1
--	 * indicates successful execution.
--	 */
--	unsigned long post_log_res;
--	/**
--	 * @post_init_f_time: time in ms when post_init_f() started
--	 */
--	unsigned long post_init_f_time;
--#endif
--#ifdef CONFIG_BOARD_TYPES
--	/**
--	 * @board_type: board type
--	 *
--	 * If a U-Boot configuration supports multiple board types, the actual
--	 * board type may be stored in this field.
--	 */
--	unsigned long board_type;
--#endif
--#if CONFIG_IS_ENABLED(PRE_CONSOLE_BUFFER)
--	/**
--	 * @precon_buf_idx: pre-console buffer index
--	 *
--	 * @precon_buf_idx indicates the current position of the
--	 * buffer used to collect output before the console becomes
--	 * available. When negative, the pre-console buffer is
--	 * temporarily disabled (used when the pre-console buffer is
--	 * being written out, to prevent adding its contents to
--	 * itself).
--	 */
--	long precon_buf_idx;
--#endif
+-	unsigned long mem_clk;
++	unsigned int mem_clk;
  	/**
  	 * @env_addr: address of environment structure
  	 *
-@@ -176,7 +134,87 @@ struct global_data {
- 	 * @new_gd: pointer to relocated global data
- 	 */
- 	struct global_data *new_gd;
--
-+	/**
-+	 * @fdt_blob: U-Boot's own device tree, NULL if none
-+	 */
-+	const void *fdt_blob;
-+	/**
-+	 * @fdt_src: Source of FDT
-+	 */
-+	enum fdt_source_t fdt_src;
-+	/**
-+	 * @jt: jump table
-+	 *
-+	 * The jump table contains pointers to exported functions. A pointer to
-+	 * the jump table is passed to standalone applications.
-+	 */
-+	struct jt_funcs *jt;
-+	/**
-+	 * @env_buf: buffer for env_get() before reloc
-+	 */
-+	char env_buf[32];
-+	/**
-+	 * @cur_serial_dev: current serial device
-+	 */
-+	struct udevice *cur_serial_dev;
-+	/**
-+	 * @arch: architecture-specific data
-+	 */
-+	struct arch_global_data arch;
-+	/**
-+	 * @dmtag_list: List of DM tags
-+	 */
-+	struct list_head dmtag_list;
-+	/**
-+	 * @timebase_h: high 32 bits of timer
-+	 */
-+	unsigned int timebase_h;
-+	/**
-+	 * @timebase_l: low 32 bits of timer
-+	 */
-+	unsigned int timebase_l;
-+#if defined(CONFIG_POST)
-+	/**
-+	 * @post_log_word: active POST tests
-+	 *
-+	 * @post_log_word is a bit mask defining which POST tests are recorded
-+	 * (see constants POST_*).
-+	 */
-+	unsigned long post_log_word;
-+	/**
-+	 * @post_log_res: POST results
-+	 *
-+	 * @post_log_res is a bit mask with the POST results. A bit with value 1
-+	 * indicates successful execution.
-+	 */
-+	unsigned long post_log_res;
-+	/**
-+	 * @post_init_f_time: time in ms when post_init_f() started
-+	 */
-+	unsigned long post_init_f_time;
-+#endif
-+#ifdef CONFIG_BOARD_TYPES
-+	/**
-+	 * @board_type: board type
-+	 *
-+	 * If a U-Boot configuration supports multiple board types, the actual
-+	 * board type may be stored in this field.
-+	 */
-+	unsigned long board_type;
-+#endif
-+#if CONFIG_IS_ENABLED(PRE_CONSOLE_BUFFER)
-+	/**
-+	 * @precon_buf_idx: pre-console buffer index
-+	 *
-+	 * @precon_buf_idx indicates the current position of the
-+	 * buffer used to collect output before the console becomes
-+	 * available. When negative, the pre-console buffer is
-+	 * temporarily disabled (used when the pre-console buffer is
-+	 * being written out, to prevent adding its contents to
-+	 * itself).
-+	 */
-+	long precon_buf_idx;
-+#endif
- #ifdef CONFIG_DM
- 	/**
- 	 * @dm_root: root instance for Driver Model
-@@ -221,38 +259,18 @@ struct global_data {
- 	 */
- 	struct udevice *timer;
- #endif
--	/**
--	 * @fdt_blob: U-Boot's own device tree, NULL if none
--	 */
--	const void *fdt_blob;
--	/**
--	 * @fdt_src: Source of FDT
--	 */
--	enum fdt_source_t fdt_src;
- #if CONFIG_IS_ENABLED(OF_LIVE)
- 	/**
- 	 * @of_root: root node of the live tree
- 	 */
- 	struct device_node *of_root;
- #endif
--
- #if CONFIG_IS_ENABLED(MULTI_DTB_FIT)
- 	/**
- 	 * @multi_dtb_fit: pointer to uncompressed multi-dtb FIT image
- 	 */
- 	const void *multi_dtb_fit;
- #endif
--	/**
--	 * @jt: jump table
--	 *
--	 * The jump table contains pointers to exported functions. A pointer to
--	 * the jump table is passed to standalone applications.
--	 */
--	struct jt_funcs *jt;
--	/**
--	 * @env_buf: buffer for env_get() before reloc
--	 */
--	char env_buf[32];
- #ifdef CONFIG_TRACE
- 	/**
- 	 * @trace_buff: trace buffer
-@@ -268,18 +286,10 @@ struct global_data {
- 	 */
- 	int cur_i2c_bus;
- #endif
--	/**
--	 * @timebase_h: high 32 bits of timer
--	 */
--	unsigned int timebase_h;
--	/**
--	 * @timebase_l: low 32 bits of timer
--	 */
--	unsigned int timebase_l;
-+#if CONFIG_IS_ENABLED(CMD_BDINFO_EXTRA)
- 	/**
- 	 * @malloc_start: start of malloc() region
- 	 */
--#if CONFIG_IS_ENABLED(CMD_BDINFO_EXTRA)
- 	unsigned long malloc_start;
- #endif
- #if CONFIG_IS_ENABLED(SYS_MALLOC_F)
-@@ -296,14 +306,6 @@ struct global_data {
- 	 */
- 	unsigned long malloc_ptr;
- #endif
--	/**
--	 * @cur_serial_dev: current serial device
--	 */
--	struct udevice *cur_serial_dev;
--	/**
--	 * @arch: architecture-specific data
--	 */
--	struct arch_global_data arch;
- #ifdef CONFIG_CONSOLE_RECORD
- 	/**
- 	 * @console_out: output buffer for console recording
-@@ -431,10 +433,6 @@ struct global_data {
- 	 */
- 	struct hlist_head cyclic_list;
- #endif
--	/**
--	 * @dmtag_list: List of DM tags
--	 */
--	struct list_head dmtag_list;
- };
- #ifndef DO_DEPS_ONLY
- static_assert(sizeof(struct global_data) == GD_SIZE);
 -- 
 2.34.1
 
