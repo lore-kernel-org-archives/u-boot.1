@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B61A2C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0871C3DA70
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:05:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 202EB88886;
-	Wed, 24 Jul 2024 08:03:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 93A3C8883E;
+	Wed, 24 Jul 2024 08:03:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62B478881B; Wed, 24 Jul 2024 08:03:29 +0200 (CEST)
+ id E47068883E; Wed, 24 Jul 2024 08:03:38 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9A85488845
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:03:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id C4B138881B
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:03:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8F6891476;
- Tue, 23 Jul 2024 23:03:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B0DD4106F;
+ Tue, 23 Jul 2024 23:03:54 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D1AD3F766;
- Tue, 23 Jul 2024 23:03:19 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9E0333F766;
+ Tue, 23 Jul 2024 23:03:24 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,9 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 08/40] lmb: remove the unused lmb_is_reserved() function
-Date: Wed, 24 Jul 2024 11:31:52 +0530
-Message-Id: <20240724060224.3071065-9-sughosh.ganu@linaro.org>
+Subject: [PATCH 09/40] lmb: staticize __lmb_alloc_base()
+Date: Wed, 24 Jul 2024 11:31:53 +0530
+Message-Id: <20240724060224.3071065-10-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -63,9 +63,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lmb_is_reserved() API is not used. There is another API,
-lmb_is_reserved_flags() which can be used to check if a particular
-memory region is reserved. Remove the unused API.
+The __lmb_alloc_base() function is only called from within the lmb
+module. Moreover, the lmb_alloc() and lmb_alloc_base() API's are good
+enough for the allocation API calls. Make the __lmb_alloc_base()
+function static.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -73,48 +74,85 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since rfc: None
 
- include/lmb.h | 11 -----------
- lib/lmb.c     |  5 -----
- 2 files changed, 16 deletions(-)
+ include/lmb.h |  2 --
+ lib/lmb.c     | 39 ++++++++++++++++++++-------------------
+ 2 files changed, 20 insertions(+), 21 deletions(-)
 
 diff --git a/include/lmb.h b/include/lmb.h
-index 231b68b27d..6c50d93e83 100644
+index 6c50d93e83..7b87181b9e 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -117,17 +117,6 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+@@ -112,8 +112,6 @@ long lmb_reserve_flags(struct lmb *lmb, phys_addr_t base,
+ phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align);
+ phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+ 			   phys_addr_t max_addr);
+-phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+-			     phys_addr_t max_addr);
  phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size);
  phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
  
--/**
-- * lmb_is_reserved() - test if address is in reserved region
-- *
-- * The function checks if a reserved region comprising @addr exists.
-- *
-- * @lmb:	the logical memory block struct
-- * @addr:	address to be tested
-- * Return:	1 if reservation exists, 0 otherwise
-- */
--int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr);
--
- /**
-  * lmb_is_reserved_flags() - test if address is in reserved region with flag bits set
-  *
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 44f9820531..adc3abd5b4 100644
+index adc3abd5b4..4d39c0d1f9 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -565,11 +565,6 @@ int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
+@@ -435,30 +435,13 @@ static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
+ 	return (i < rgn->cnt) ? i : -1;
+ }
+ 
+-phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
+-{
+-	return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
+-}
+-
+-phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
+-{
+-	phys_addr_t alloc;
+-
+-	alloc = __lmb_alloc_base(lmb, size, align, max_addr);
+-
+-	if (alloc == 0)
+-		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+-		       (ulong)size, (ulong)max_addr);
+-
+-	return alloc;
+-}
+-
+ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ {
+ 	return addr & ~(size - 1);
+ }
+ 
+-phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
++static phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size,
++				    ulong align, phys_addr_t max_addr)
+ {
+ 	long i, rgn;
+ 	phys_addr_t base = 0;
+@@ -499,6 +482,24 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phy
  	return 0;
  }
  
--int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
--{
--	return lmb_is_reserved_flags(lmb, addr, LMB_NONE);
--}
--
- __weak void board_lmb_reserve(struct lmb *lmb)
- {
- 	/* please define platform specific board_lmb_reserve() */
++phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
++{
++	return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
++}
++
++phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
++{
++	phys_addr_t alloc;
++
++	alloc = __lmb_alloc_base(lmb, size, align, max_addr);
++
++	if (alloc == 0)
++		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
++		       (ulong)size, (ulong)max_addr);
++
++	return alloc;
++}
++
+ /*
+  * Try to allocate a specific address range: must be in defined memory but not
+  * reserved
 -- 
 2.34.1
 
