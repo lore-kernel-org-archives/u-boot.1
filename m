@@ -4,53 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F8EC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:58:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFCE1C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 07:06:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92F3E88847;
-	Wed, 24 Jul 2024 08:58:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 60EB788896;
+	Wed, 24 Jul 2024 09:06:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="e+rxFUpd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qk43pQLb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ADA188881; Wed, 24 Jul 2024 08:58:33 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD74B88896; Wed, 24 Jul 2024 09:06:57 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D074A88829
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:58:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 970E3887F5
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 09:06:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=fail
- smtp.mailfrom=SRS0=3f2b=OY=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1721804304;
- bh=VLGZgadPratNQutp/fr/e1wMUxOAGJO/2H/9ZAh0sGE=;
- b=e+rxFUpdaeaC26kDiMlYB8Ct06ITw2OP0g6nrdRUTG7ROy6RQA18vfEyVQ/4UImp4xPGitAi3
- Urkv39JXUHFxYHFjqG2vR7AtTR1IlzypPQR4lTSM+3nesnFBCqO60mfwKI+CAdc5Qp2ZJ6Pe9Pm
- X0/n8EDZE0EQX/DojAJFAMjb6h5tK1EkjiWNBj05j3UPG9Ob5nL7k8Z1ot+KnWqPiEBtEXZxdlO
- DI6qdbPb9ZhTwQ/O/1NH6J3xONKSX9YKoaQGPAjlZoKb87IQzQWHzmA4FIsFNKs4q+OPwcOQJEk
- 2Gug+tooq2iM3u39b1dl/u81iTBvXTRMxemWPAiYSZyQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] rockchip: io-domain: Add support for RK3308
-Date: Wed, 24 Jul 2024 06:58:15 +0000
-Message-ID: <20240724065817.2736062-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-25d6dd59170so3190208fac.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 00:06:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721804811; x=1722409611; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ny5zw6it9ju3d89g1qPbU6u3QFBzldQPmn10FIOuN4Y=;
+ b=Qk43pQLbHAaimTBqS0zNS+hi4Cu8h2wei1Uju8hYr7A1IBl0onOmHD57WFO+DhUHiG
+ ttsuml883dJN+mK7Sky/59lsXMUaTUsS37a6ixSVp85KfesuVz5gd1P2g1c/INcQ9Pfs
+ 4K8CB+obzlwI0qPpevRDum1KnOt8V0jk01NptCHqbrDoGkRwI/GIMCrvaXQoUP1tfDHX
+ 2OPWUa9RgqQrPEDfs75zcuqngdMinuM5dV4jJEsFm/YuwBB09JHBgOd6VQ+IsnREo8O0
+ wkAgSGJhQBC6bUDaHM7iwtRgU06IZxcakeRxE8KCI/YUFyinzaG0fuEdrCCKIfZReQE0
+ rBOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721804811; x=1722409611;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ny5zw6it9ju3d89g1qPbU6u3QFBzldQPmn10FIOuN4Y=;
+ b=N7CticQNlM6qDbxM9qecDxz9s41fuoxm0Gt3Np2tBbrk1fidMVUB2VseKoF7ANmgII
+ nZL4iTTAx05jx7WGtUBew+MT/IrrH66m6jgwd6eYbmyX318PjXTl0xMfRBcBRM57WpeJ
+ 8ZB2m/6FQARWlrqW4/psZLKopqp0WFNZhskzLVAKEwOodPyIK6ypSjgNjG56tMzggIBx
+ /o9tmmYg757/39JHsPYKDeNtV8oqO2msbH6Hs8Lp2lhbwpBoVfbsQLUGyrYwqHG6Nux6
+ yOQjtjuWyjIk6lfLHc7ulYUDjqyTmGtPuwNRXKnLRWqzKpxuzSjeoeU0hV8ufTNTp1Uo
+ trIQ==
+X-Gm-Message-State: AOJu0YyD4lReSQtYFVkb3KzJmbIiULd5ngt67gNOUlNb58eTs4ZAm+Gw
+ Nkamj2mcwLpgbbPIMCWSc2JzbmJamB8PvD1Z6mcsEvBKkBk0/KR5LOi6BpYwgEmC3+Jso5S00kN
+ l/98KHI1JGLEEyKDZlKoQilwOPvHQQkY+ciK09A==
+X-Google-Smtp-Source: AGHT+IFp8/SGEtzTcv82XqDeMxJliXUJEPGcwIu03tMFXXCp5eMV34eaJmYdajhkM0+8q11KHZmM0RryJZtol/GKgGw=
+X-Received: by 2002:a05:6870:3281:b0:260:df27:99fc with SMTP id
+ 586e51a60fabf-2648771dc1bmr2067165fac.25.1721804811160; Wed, 24 Jul 2024
+ 00:06:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66a0a60e78718bd2bf1d3d38
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-11-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-11-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 24 Jul 2024 10:06:13 +0300
+Message-ID: <CAC_iWjJwEc2EZ4Lp+1ucxEBGJndcJBdb+4MO_LuMDpnOe-YKJw@mail.gmail.com>
+Subject: Re: [PATCH 10/40] lmb: use the BIT macro for lmb flags
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,99 +94,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Port the RK3308 part of the Rockchip IO Domain driver from linux.
+On Wed, 24 Jul 2024 at 09:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> Use the BIT macro for assigning values to the LMB flags instead of
+> assigning random values to them.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> Changes since rfc: None
+>
+>  include/lmb.h | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/include/lmb.h b/include/lmb.h
+> index 7b87181b9e..a1de18c3cb 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -5,6 +5,7 @@
+>
+>  #include <asm/types.h>
+>  #include <asm/u-boot.h>
+> +#include <linux/bitops.h>
+>
+>  /*
+>   * Logical memory blocks.
+> @@ -18,8 +19,8 @@
+>   * @LMB_NOMAP: don't add to mmu configuration
+>   */
+>  enum lmb_flags {
+> -       LMB_NONE                = 0x0,
+> -       LMB_NOMAP               = 0x4,
+> +       LMB_NONE                = BIT(0),
+> +       LMB_NOMAP               = BIT(1),
+>  };
+>
+>  /**
+> --
+> 2.34.1
+>
 
-This differs from linux version in that vccio3 iodomain bit is enabled
-in the write ops instead of in an init ops as in linux, this way we can
-avoid keeping a full state of all supply that have been configured.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/mach-rockchip/rk3308/syscon_rk3308.c |  3 ++
- drivers/misc/rockchip-io-domain.c             | 37 +++++++++++++++++++
- 2 files changed, 40 insertions(+)
-
-diff --git a/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c b/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c
-index 2d7e97110152..e77189eef6cf 100644
---- a/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c
-+++ b/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c
-@@ -16,4 +16,7 @@ U_BOOT_DRIVER(syscon_rk3308) = {
- 	.name = "rk3308_syscon",
- 	.id = UCLASS_SYSCON,
- 	.of_match = rk3308_syscon_ids,
-+#if CONFIG_IS_ENABLED(OF_REAL)
-+	.bind = dm_scan_fdt_dev,
-+#endif
- };
-diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-domain.c
-index cf4f7c3984c7..025b6049a9f7 100644
---- a/drivers/misc/rockchip-io-domain.c
-+++ b/drivers/misc/rockchip-io-domain.c
-@@ -31,6 +31,10 @@
- #define PX30_IO_VSEL_VCCIO6_SRC		BIT(0)
- #define PX30_IO_VSEL_VCCIO6_SUPPLY_NUM	1
- 
-+#define RK3308_SOC_CON0			0x300
-+#define RK3308_SOC_CON0_VCCIO3		BIT(8)
-+#define RK3308_SOC_VCCIO3_SUPPLY_NUM	3
-+
- #define RK3328_SOC_CON4			0x410
- #define RK3328_SOC_CON4_VCCIO2		BIT(7)
- #define RK3328_SOC_VCCIO2_SUPPLY_NUM	1
-@@ -119,6 +123,22 @@ static int px30_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
- 	return ret;
- }
- 
-+static int rk3308_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
-+{
-+	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-+
-+	if (!ret && idx == RK3308_SOC_VCCIO3_SUPPLY_NUM) {
-+		/*
-+		 * set vccio3 iodomain to also use this framework
-+		 * instead of a special gpio.
-+		 */
-+		u32 val = RK3308_SOC_CON0_VCCIO3 | (RK3308_SOC_CON0_VCCIO3 << 16);
-+		ret = regmap_write(grf, RK3308_SOC_CON0, val);
-+	}
-+
-+	return ret;
-+}
-+
- static int rk3328_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
- {
- 	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-@@ -189,6 +209,19 @@ static const struct rockchip_iodomain_soc_data soc_data_px30_pmu = {
- 	.write = rockchip_iodomain_write,
- };
- 
-+static const struct rockchip_iodomain_soc_data soc_data_rk3308 = {
-+	.grf_offset = 0x300,
-+	.supply_names = {
-+		"vccio0-supply",
-+		"vccio1-supply",
-+		"vccio2-supply",
-+		"vccio3-supply",
-+		"vccio4-supply",
-+		"vccio5-supply",
-+	},
-+	.write = rk3308_iodomain_write,
-+};
-+
- static const struct rockchip_iodomain_soc_data soc_data_rk3328 = {
- 	.grf_offset = 0x410,
- 	.supply_names = {
-@@ -256,6 +289,10 @@ static const struct udevice_id rockchip_iodomain_ids[] = {
- 		.compatible = "rockchip,px30-pmu-io-voltage-domain",
- 		.data = (ulong)&soc_data_px30_pmu,
- 	},
-+	{
-+		.compatible = "rockchip,rk3308-io-voltage-domain",
-+		.data = (ulong)&soc_data_rk3308,
-+	},
- 	{
- 		.compatible = "rockchip,rk3328-io-voltage-domain",
- 		.data = (ulong)&soc_data_rk3328,
--- 
-2.45.2
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
