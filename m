@@ -4,83 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71D85C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08835C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0140088929;
-	Wed, 24 Jul 2024 17:40:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F0828897F;
+	Wed, 24 Jul 2024 17:48:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iSgbe3b5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KKh6YKo9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 592428898B; Wed, 24 Jul 2024 17:40:51 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id E282C889AA; Wed, 24 Jul 2024 17:48:19 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83EC28897D
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:40:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A49588997
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:48:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e0875f1e9edso4151113276.1
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:40:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ef2d582e31so39189951fa.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:48:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721835646; x=1722440446; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VZQSzm833zFe+5Xruewp0tm85zrVqZs8SrLevamZegU=;
- b=iSgbe3b5oDLk0y6lwPbT/9wjaKB1DLTp/PwdMqOVadu7qWSyx6TTGYsHVR0F1ypDBi
- OaLL5oF1D//0TXHo/eujZWNMxfeIsRWiDVFDxtTeLI21/RAO/AjBINQa3WZ+8MdW7vu5
- vAmdkoLsPMV4mbB2e2YwFLd/mtE+bRGenuazo=
+ d=linaro.org; s=google; t=1721836097; x=1722440897; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=QBd6NvMy/fWSFw4JFGKRaGpPxX2t0h4CS/mrUUn4lmk=;
+ b=KKh6YKo97vTIrEmTopOoG4tTpVBsUhCyx0Agzo3K9KwZm0IYex9P9zTE1tRg8j67k0
+ MKruXKVPfHrbFdw05jKkEzMtoKWQtE0qLaQ8xpbyCFGgLsUAi34w88CUkiFTGEBZqIHV
+ Dt0kvuDcJ5l8tEu5MhElbCvcHxgG/huHBaJdJmsqxT6hl1M7VVqNFL22kGe/JswhfwHh
+ 3bFhmVW/7RQ7+l/fHi11FYejk8lNBaorppTlOyyI33zEwLHBUMagDYsbmTy46d9tBxny
+ m9vCo7SY6/6SMmRU5UwmfiF1hCk+lzeYDa9ls9mR0jJY7ATNR1Q9q/1LfwmKXZ6b85oz
+ 1AfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721835646; x=1722440446;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VZQSzm833zFe+5Xruewp0tm85zrVqZs8SrLevamZegU=;
- b=pHn1uqIGZ9wAIWNQN8vIQXlxUC6/Ixo8Jyc0KfQR17S+uq2G/WnjyAdUfbvHBShCr4
- YBaYZ3O38gI1AVesCm/NERQCVIVYbmPXXSl2w1UP+63FawN4x5lzT9Qvy8prkeBoRM3G
- yZ2A9rH+k4IE/FST0LFd8IZEyuKu7BSwm4POfyvjrWl10CNpIsQZtr8chlLGmsWT3QDF
- kkmT87Mrp2SNZHXfQojpa6hxCjHBbkkSufdLb4j9hk+Fw7yOqJrUPytLaGpbx0CT5KKy
- Jf2sBNj0pwoTGoyX6/ypUusLod29xCNcRsBS0MZoAG5Uyk66GWTFS7j9S7ZQ4+uMi/gy
- zs8A==
+ d=1e100.net; s=20230601; t=1721836097; x=1722440897;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QBd6NvMy/fWSFw4JFGKRaGpPxX2t0h4CS/mrUUn4lmk=;
+ b=QHcrJfCdjbM5MC14iZG7WnQuR9tuPhTFwhVgoPDUoSbg8N7gdEXclU0yS11pwk0Maz
+ W0kQdZlQidPeboRq7YDgYku63JqIM/rDbVVxjMgM4TIvp0kRSM9xBTdYquG/Ycubf/VM
+ +tQerADGpkSJnLP88291hf8xbdSt47BDGBvbbMvqH3LEYHY+syPruCNwAYgB2XOrtZkS
+ +0RWpSmJrDbY/og6imBrrUeXvfcJ/a40ZmP3PXUkd+SDeg3E15yRn07BdYhVmfySA4gb
+ SqdFNBG5ntwRbCCKiujAhsA8v0tzdpp7yuOLAEl3/UThtSN5eqabzivXRPKwoMAtcc+L
+ HHDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXuNOmLR3aHP6d+b0txT9ZlkieEUcnqlSuAPp8YulLOCR6TI+fy9CnIlPeuBYApO22ptFMRqdhbWB+vX/REW8Wg1i3eIw==
-X-Gm-Message-State: AOJu0YyibEeo15fFDaFatXnOvYjFjNskVbAsoR3x2ocdPpCyLPttpbhW
- yHtxka1Euwx/BQO3wHAVKYyql+Y6AC/WV9jHIEu95sQAcZ1S1dvTVLl0aib/HaxVlFbTMDJW8Rt
- m5FkNSlqP/q4fe5auBF2+8OxwhMIM4hjvd+gxf69jwBzI3Os=
-X-Google-Smtp-Source: AGHT+IGgsMTcLREymf7Movu7swuEZvPmC4U1lVsv4Mz9NhPPqdYB4K7kJZmH0N+feMfF57ZQqWcrk0iRP8kLqQJbb6Q=
-X-Received: by 2002:a05:6902:72a:b0:e03:5d90:cfc1 with SMTP id
- 3f1490d57ef6-e0870062720mr21353123276.7.1721835646279; Wed, 24 Jul 2024
- 08:40:46 -0700 (PDT)
+ AJvYcCUW8WxNHAtVPenWtUnVty6VuLsymWIoXHSblvYo/edR2YkI+lpkF0eapYJAdxDViLJxAHmueQRmEWqk/BdKONBpBEk5Vw==
+X-Gm-Message-State: AOJu0Ywnu7PzrAnD7bKTKhSmsAAOcS4Sr3MIfv0XRrM/rkt5d7L3cCgj
+ QkDD0yHVZK1VmopSTr5MixT49AN7Myug1KVBOoOy3yKG+FqbAlj3Ha2QhuKdMAk=
+X-Google-Smtp-Source: AGHT+IGeZq2xbOv4VC4uLkCbCjLp7c5F4opvse8TxtfstS+s5sft/3PUnTdYGwESL1m/Fg2p6bi2LQ==
+X-Received: by 2002:a05:651c:155:b0:2ef:2d6e:58fe with SMTP id
+ 38308e7fff4ca-2f039d8f959mr1640461fa.32.1721836096453; 
+ Wed, 24 Jul 2024 08:48:16 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427f93aabdasm33633015e9.36.2024.07.24.08.48.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jul 2024 08:48:16 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 24 Jul 2024 17:48:09 +0200
+Subject: [PATCH v2 1/3] usb: dwc3: allocate setup_buf with dma_alloc_coherent()
 MIME-Version: 1.0
-References: <20240704073544.670249-1-sughosh.ganu@linaro.org>
- <20240704073544.670249-39-sughosh.ganu@linaro.org>
- <20240705195057.GP38804@bill-the-cat>
- <CAC_iWjJDwFLMaP=S=z_OMnnQb=q32QMEPoywxPWwjixMSbJ84Q@mail.gmail.com>
- <CADg8p946kVK_BfrSvEgFcvQh95MCRMBKJ+48syCnCSvrpJQ0-w@mail.gmail.com>
- <CAFLszTiYALCrgBUBJ=g_BoQtOzHGx2OhuTxCioCHdXNuJb850w@mail.gmail.com>
- <20240723142055.GG989285@bill-the-cat>
- <CAFLszTgG9WuzYp97ANm=k3iju-DH+c5A2HfgwmUznti9tQyzpw@mail.gmail.com>
- <20240724145201.GL989285@bill-the-cat>
-In-Reply-To: <20240724145201.GL989285@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 24 Jul 2024 09:40:35 -0600
-Message-ID: <CAFLszTgoh6aLQ0BiHjkHYyzE9v0LP5d10Abq-k875kO7kP3ATA@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 38/48] lib: Kconfig: add a config symbol for
- getting lmb memory map updates
-To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-1-65836d699a71@linaro.org>
+References: <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org>
+In-Reply-To: <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org>
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3246;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=has3gz/aM0afGUQH4DsnuFvgyVLWYivVIH5LE+Ha1CQ=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmoSI8MkKh3L4swJmpflbdl3MWyGtAOz/NRgQoa9av
+ tmAmuCGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZqEiPAAKCRB33NvayMhJ0XeBEA
+ DQc+Cod6NbnTf+qYDPFanw5uvYv6SDCKodcddonGDpE57Gx9wmgpCWHUtKZ26IYPDA/rtnsVlauP9N
+ OuHbLErvVDTKdfEKI4uu7yfouaHMtguoQzescldKUKLjw4+Jzj2tPyo/ET8O1ySqDEErUzxCn4ngvn
+ F7pkUV4QWTzq8RxO2RIbOH8RafF5rzJ4ed9/jOMCamN72yNWe5gZgKZD96DpQ19Qbn/9DFB5WO65ke
+ Ce4MRY5buo6pMRB403VSEJecZCsaW0g4G1LYz+rYqPxWIAA8oET9E8/LkOmI8C88aoRzjJh+Z2XOc/
+ fJK8wW++eRRntr1qkUbK3H7WAz6AuKeiVXtnn3C6OTLDa+0jQUmYQYfgVmPdmzhh4M/oHspqp8RJ5n
+ fpZYPFqvaqsQ3AJB4T/bwHzk3aYSLerBI55OXPpS4aXHT1huk4ZZq4NVm/CEQJdvQbhX2ckj4icz2Z
+ lIyUEyI/k1elJWX8eLD7klyo6joZ/wf5KR8V4W5pPOqhuCO9x6ZHeGG0wdX95KS3itMJppoFM4/T8w
+ QJNMDKPnjvIzyumyQ+EIElM+UHIFl1VEL4pYWNHec8b/6/5MFO4JeXIVYUQ9O/GyxCQkGhhYVVtGHT
+ odwNXngDh7eEqf+wECX19Zxmbixm8gHQhKk8hL5f+6yERVVgz6CMpMr9pRbA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,88 +112,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Since setup_buf is also consumed by hardware DMA, aligns it's
+allocation like other hardware buffers by introduce setup_buf_addr
+populated by dma_alloc_coherent(), and use it to pass the physical
+address of the buffer to the hardware.
 
-On Wed, 24 Jul 2024 at 08:52, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Jul 24, 2024 at 08:37:14AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 23 Jul 2024 at 08:20, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Jul 23, 2024 at 01:42:59PM +0100, Simon Glass wrote:
-> > > > Hi Sughosh,
-> > > >
-> > > > On Mon, 22 Jul 2024 at 13:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > >
-> > > > > On Mon, 22 Jul 2024 at 18:00, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > On Fri, 5 Jul 2024 at 22:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Jul 04, 2024 at 01:05:34PM +0530, Sughosh Ganu wrote:
-> > > > > > >
-> > > > > > > > Add a Kconfig symbol to enable getting updates on any memory map
-> > > > > > > > changes that might be done by the LMB module. This notification
-> > > > > > > > mechanism can then be used to have a synchronous view of allocated and
-> > > > > > > > free memory.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > > > ---
-> > > > > > > > Changes since V1:
-> > > > > > > > * Change the description to highlight only LMB notifications.
-> > > > > > > > * Add a separate line for dependencies.
-> > > > > > > >
-> > > > > > > >  lib/Kconfig | 10 ++++++++++
-> > > > > > > >  1 file changed, 10 insertions(+)
-> > > > > > > >
-> > > > > > > > diff --git a/lib/Kconfig b/lib/Kconfig
-> > > > > > > > index 7eea517b3b..b422183a0f 100644
-> > > > > > > > --- a/lib/Kconfig
-> > > > > > > > +++ b/lib/Kconfig
-> > > > > > > > @@ -74,6 +74,16 @@ config HAVE_PRIVATE_LIBGCC
-> > > > > > > >  config LIB_UUID
-> > > > > > > >       bool
-> > > > > > > >
-> > > > > > > > +config MEM_MAP_UPDATE_NOTIFY
-> > > > > > > > +     bool "Get notified of any changes to the LMB memory map"
-> > > > > > > > +     depends on EVENT && LMB && EFI_LOADER
-> > > > > > > > +     default y
-> > > > > > > > +     help
-> > > > > > > > +       Enable this option to get notification on any changes to the
-> > > > > > > > +       memory that is allocated or freed by the LMB module. This will
-> > > > > > > > +       allow different modules that allocate memory or maintain a memory
-> > > > > > > > +       map to have a synchronous view of available and allocated memory.
-> > > > > > >
-> > > > > > > This needs to be select'd when it's going to be used, opting out of
-> > > > > > > making sure memory reservations are obeyed isn't a good idea.
-> > > > > >
-> > > > > > +1 which begs the question, do we need the config option at all ?
-> > > > >
-> > > > > The config symbol can be used for removing the code for platforms
-> > > > > which do not support EFI ?
-> > > >
-> > > > I am still of the so-far firm opinion that this can be done once,
-> > > > before booting, rather than maintaining two separate tables as we go.
-> > >
-> > > Did you see the part in the thread where he explained the multiple entry
-> > > points that would need to be kept in sync?
-> >
-> > Yes, but I'm not sure what they are, nor why a shared function cannot
-> > be called twice from two different places.
->
-> Because we don't want to miss the third or fourth entry point down the
-> road. That's why going the other direction makes more sense I believe,
-> we won't have a future problem here because we designed with that in
-> mind.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ drivers/usb/dwc3/core.h   | 2 ++
+ drivers/usb/dwc3/ep0.c    | 4 ++--
+ drivers/usb/dwc3/gadget.c | 8 ++++----
+ 3 files changed, 8 insertions(+), 6 deletions(-)
 
-You might be right, but I don't even know what we are referring to
-here...what are the two 'entry points'?
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index 7374ce950da..b572ea340c8 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -670,6 +670,7 @@ struct dwc3_scratchpad_array {
+  * @ep0_trb: dma address of ep0_trb
+  * @ep0_usb_req: dummy req used while handling STD USB requests
+  * @ep0_bounce_addr: dma address of ep0_bounce
++ * @setup_buf_addr: dma address of setup_buf
+  * @scratch_addr: dma address of scratchbuf
+  * @lock: for synchronizing
+  * @dev: pointer to our struct device
+@@ -757,6 +758,7 @@ struct dwc3 {
+ 	dma_addr_t		ep0_trb_addr;
+ 	dma_addr_t		ep0_bounce_addr;
+ 	dma_addr_t		scratch_addr;
++	dma_addr_t		setup_buf_addr;
+ 	struct dwc3_request	ep0_usb_req;
+ 
+ 	/* device lock */
+diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+index 16b11ce3d9f..0c7e0123368 100644
+--- a/drivers/usb/dwc3/ep0.c
++++ b/drivers/usb/dwc3/ep0.c
+@@ -381,7 +381,7 @@ static int dwc3_ep0_handle_status(struct dwc3 *dwc,
+ 	dep = dwc->eps[0];
+ 	dwc->ep0_usb_req.dep = dep;
+ 	dwc->ep0_usb_req.request.length = sizeof(*response_pkt);
+-	dwc->ep0_usb_req.request.buf = dwc->setup_buf;
++	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
+ 	dwc->ep0_usb_req.request.complete = dwc3_ep0_status_cmpl;
+ 
+ 	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
+@@ -663,7 +663,7 @@ static int dwc3_ep0_set_sel(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
+ 	dep = dwc->eps[0];
+ 	dwc->ep0_usb_req.dep = dep;
+ 	dwc->ep0_usb_req.request.length = dep->endpoint.maxpacket;
+-	dwc->ep0_usb_req.request.buf = dwc->setup_buf;
++	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
+ 	dwc->ep0_usb_req.request.complete = dwc3_ep0_set_sel_cmpl;
+ 
+ 	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index 7d6bcc2627f..d41b590afb8 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -2622,8 +2622,8 @@ int dwc3_gadget_init(struct dwc3 *dwc)
+ 		goto err1;
+ 	}
+ 
+-	dwc->setup_buf = memalign(CONFIG_SYS_CACHELINE_SIZE,
+-				  DWC3_EP0_BOUNCE_SIZE);
++	dwc->setup_buf = dma_alloc_coherent(DWC3_EP0_BOUNCE_SIZE,
++					(unsigned long *)&dwc->setup_buf_addr);
+ 	if (!dwc->setup_buf) {
+ 		ret = -ENOMEM;
+ 		goto err2;
+@@ -2670,7 +2670,7 @@ err4:
+ 	dma_free_coherent(dwc->ep0_bounce);
+ 
+ err3:
+-	kfree(dwc->setup_buf);
++	dma_free_coherent(dwc->setup_buf);
+ 
+ err2:
+ 	dma_free_coherent(dwc->ep0_trb);
+@@ -2692,7 +2692,7 @@ void dwc3_gadget_exit(struct dwc3 *dwc)
+ 
+ 	dma_free_coherent(dwc->ep0_bounce);
+ 
+-	kfree(dwc->setup_buf);
++	dma_free_coherent(dwc->setup_buf);
+ 
+ 	dma_free_coherent(dwc->ep0_trb);
+ 
 
-My current belief is that we can set up the EFI memory table before
-booting, with a single pass through the table. Maintaining two
-independent tables as we go doesn't seem very useful. It is harder to
-test too.
+-- 
+2.34.1
 
-Regards,
-Simon
