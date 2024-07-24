@@ -4,77 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A83EC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 07:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D81C3DA61
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 07:35:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AECAA88896;
-	Wed, 24 Jul 2024 09:25:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 162B888896;
+	Wed, 24 Jul 2024 09:35:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="l+fcb08r";
+	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="kGFDLx30";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EE70888B2; Wed, 24 Jul 2024 09:25:23 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4E73888896; Wed, 24 Jul 2024 09:35:13 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C43C688881
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 09:25:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D151888C2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 09:35:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a7a843bef98so171518366b.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 00:25:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1721805914; x=1722410714;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b/oyYbdAAktnxe0eFeuqbIM/IJXFxFN4HmTs0gttlr4=;
- b=l+fcb08r74o97kSJqoC8hptI/B20MRdvL6TDKK1AEw4cvnDkTnq9Vx/ET4iZmdLePf
- 7ZD20zklTqeZzMiYdtBRu088kOUiuyf614J2HbiHKu2XQTsn53BzvfqxlsfXTlMR7jcO
- mraZSVm7yY+dEIOnRMt+kZpv8GjUjuCrT6mZM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721805914; x=1722410714;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b/oyYbdAAktnxe0eFeuqbIM/IJXFxFN4HmTs0gttlr4=;
- b=JkFhV5ctgJfhY202Q3HgAx57Xk6pf6YJa7Wi8yQplgHpLwypD+fWNCFxrbyRXyOBH1
- I/Uv1T5o5Twy6MEudmauIt4lCwp0ECZU3gY26RKHtmWsMu30LywpHYpIkkundOX3ygqr
- dxieW45/yNen1UshYcd4OwgWOC3y0RZi6YdiCNVK2F+jz2zK2bobKb6+twGtav/HWXAO
- IUCTUreCMim1RSTf5MIUpI7nzsWdVHEQLbltwJtExHnwLbYSs10KrZxk5IPBRhRYy3EW
- oB5MtLIKO5p86O7cQ2xBhM+bmVmzXQIjBKwx0SEToLZ6FmmOr3oPdAENc5BVTNr/Eoh8
- iAlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVafX7nyXmxBGx0TYtV7wDzR3HZj1MuYh8TB5YrLzQofrZ9FO2VCLTNQtVVkxvD6WndxZs1FseE8axdNX60BhIS7yA3sQ==
-X-Gm-Message-State: AOJu0YxKsHnAt6eORdwj0vmumodnwvuu7Peffp9hhQ+ZeNmW6jiSQD9L
- O/NMRBHA0mXybZ7shWs66RRDJALHENQXh79RiJ+pHB/bvUuF9h211a7HdaF4udp+fEtWwwKEuKm
- l+UFwlloKVCvjYLuBZN2x+1GMxomXwjTd69Gr8a+941VXh7BGO6QyUw==
-X-Google-Smtp-Source: AGHT+IFze/UyS8WCzOGs00sl+JDIUtXr4rhEpbWVLAo/4UImMniy2Dg5hHNV1eR2pBuiO+TlGA4rA0IGo5jyjmEmXpo=
-X-Received: by 2002:a17:907:72c1:b0:a7a:8bf9:a6e8 with SMTP id
- a640c23a62f3a-a7ab0e010fbmr79548766b.35.1721805913963; Wed, 24 Jul 2024
- 00:25:13 -0700 (PDT)
+ spf=fail smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EYCtBM3wgZSA2n9Y4rinYDolnWhu0gpbL3msYLhtJmIbc3ElxMxBgWWKdx2OvpnzzBZ86pdysAbJn6eeifbs+dwVEiM/lYE3KUQj63mWMG2CupoxZ96PSc8dCmNyQFambXKjl6K9TEz/q1iqXeW8rfhRMWdBdvHGm17M5aucNGKojNcn2gZBe7r92XDCJ8XyUTDxZGGKJWTbe7RyTdy68kiVbRAD9iMtyz9uiYuD2+2sLBJrIZMyQ/UF+Aia8fkUwSJ5Qra+RSMoDsD3p/QfPL6JruPR6nMY4O9XzhWOsIcJOHfgQ0BQ7qhgpY627r29qKo1RO3AmhOvWCYS6fGcrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PA0KNwiJKOqZcNQTL398BllBaW3KiV/ZWtXdsV+moNw=;
+ b=atwJezViLs6ym4CIbfwDzK0+PMdxFhwCJRIxOgq6g04gUVrDxVaHF6tw1BYAT3d63zAhZ4xeFWd6XM7Nr23s4AMCyDLW4Qv+8+rvw+ZPW3EErxCGL4+kFPDMvcRja4/s8K6GO7cTVF/tjkpMV/K2PDgaFcj+mdcv7fc+fNM4XZMra0x+GkAOvnHyabRabZlWFZcHZBM+Lw+ab8XujCDDxSyeDL+n1UKO6hThlvgeCCKg+j8ouMGE6ZOkMWyDQs4ZRkVNksW3IFVcMeZiaUuW50nQ7mofbc53Rd1/lrSBAxx/at5VILXFlO0Po4m6cPFnXy3h6B17Zt2uiJZu5qtJAA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weidmueller.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PA0KNwiJKOqZcNQTL398BllBaW3KiV/ZWtXdsV+moNw=;
+ b=kGFDLx30SLkOX7DDgtuV3uRHsRqLdg6Z2kbJBsvsB/tx47dWzfnuX1aRtnMDAuamaDTflXBPs1HKnTavrAbT3+bCw2duas7p0CBoVqvw+o5iDOw6WRhvk3jornxTelaPAvgTgczPne2TQ6P/qlVBTGtHvlgVEd1KlKT1xbXpCBf2dYJ2knmR5Z23+/dqCYjMkfTSacn5X4WnEsAXmPruz7KT0Vv2n0awnTSr4A3r4iDj+3+i6rqwFtpki5MlXpX6pZ5921+evhGPb6iqm7iZ2GbXdiUNdGiyX0cMtVa/tcKhufpIVuorImtW5aTVHEqVgrbUB0+OeEWcnbR2kpRamg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by GV2PR08MB8124.eurprd08.prod.outlook.com (2603:10a6:150:74::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.20; Wed, 24 Jul
+ 2024 07:34:58 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::aeb:1738:d59a:cee6%4]) with mapi id 15.20.7762.030; Wed, 24 Jul 2024
+ 07:34:58 +0000
+From: lukas.funke-oss@weidmueller.com
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/1] tpm: call tpm_tis_wait_init() after tpm_tis_init()
+Date: Wed, 24 Jul 2024 09:34:47 +0200
+Message-Id: <20240724073448.710197-2-lukas.funke-oss@weidmueller.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240724073448.710197-1-lukas.funke-oss@weidmueller.com>
+References: <20240724073448.710197-1-lukas.funke-oss@weidmueller.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0108.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:bb::17) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
-References: <20240705071419.11521-1-michael@amarulasolutions.com>
- <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
-In-Reply-To: <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 24 Jul 2024 09:25:01 +0200
-Message-ID: <CAOf5uwk8xjgsrVysDgEeOsr6uR5u=LYP3N2s67eBf5eqqtS_MQ@mail.gmail.com>
-Subject: Re: [PATCH V2] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
- present for gate and mux
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, linux-amarula@amarulasolutions.com,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|GV2PR08MB8124:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94ed8b9f-1d90-4c6b-dd54-08dcabb31e83
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|52116014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xwd6S21Vt0bClptgdsRp/jITXHnNQWnvfhqEd+zX72URMjWNO3rPpOisa+I4?=
+ =?us-ascii?Q?gHRVkcfz2j0/WRUNkCPKSqT7RV0T3S4PK79NF60Sz22n6Vdq4WSGxFj77+Cl?=
+ =?us-ascii?Q?gWo+8uP759KpH8CxK7Yt5io/RkXqbweleMzhpYqmafzQdPw2UUdvYoaHkoYn?=
+ =?us-ascii?Q?L4o/wxfU5QtO70U3kS30MqdxxrtK4A0kWMmWFGVWJ9VB1Xe4OmngLrqXXNC3?=
+ =?us-ascii?Q?wuPjkbiaVn0asrIhcL/jdTZMY/ZaI1+o1tZ/PJ5xJNfBUiElyoMLWh/avVvP?=
+ =?us-ascii?Q?Cq3DiW34Tvo0VXsZtVS7HbpfkBJw+2dhEsVLauRSBpVJmfziFXhXScXO1uMy?=
+ =?us-ascii?Q?oq1sqX8ct3jcDL8tDkATlSM6XielUuW1XzKXjP6u777nA6f71lAm/Gli4Pub?=
+ =?us-ascii?Q?z2xuHiWQeekEdhhnw0S/qIIDQhza8KBh9NlgKBUmTDzTgL+9b+iADhZvWSg8?=
+ =?us-ascii?Q?4iIu7vtnNiu/2rKLitvo/GDwgz9MQcsTQmMEV6E1ck3dV0JdUXSWbQn96XiH?=
+ =?us-ascii?Q?ZuM3922khmW9bDGUcBvqS9b7CGK9+6yu8+m6Fgki0H08pFpTLcqY++tDj0b+?=
+ =?us-ascii?Q?dZTuvymfcPFJJhhXu7B/vfzF9U0MG0Fknh1VqPV1SYSkuYJVlb85T7D14pzN?=
+ =?us-ascii?Q?qthbhm6sarW6vzb/QzesQ90QsWvMiRc7FuHnu6nbHx9mO2Kk4AaDJB9n/QrY?=
+ =?us-ascii?Q?J1UnM65IYt6eHy/P/dR6fjJnsjWnMoP2aQ1SpXUIyovgA1hCxP0vqCn8R1lN?=
+ =?us-ascii?Q?Ijnv1vJ941CqzTDfij7fdymJ4aRvbY1scjhm1WrXlhHfP0A5M7EjutKuxzQy?=
+ =?us-ascii?Q?c1GoF3CBU6R9V8uAXZBsFj/glpntXbrmo6PW7nFsGlunqWhn/b3MN6XEneoj?=
+ =?us-ascii?Q?gX+Dif7RGEQkr4bXpE3+WIMvS3JgthEgljf+U5UdHoCJ6ke+dk6ZuWOuDdEh?=
+ =?us-ascii?Q?Y8ZnXRXW4FIsAdtM7hNkyWQ+9yMfm27gsSefbLfJtqvqNK3m0Xezc2ah+zb6?=
+ =?us-ascii?Q?Po9pR9F/JGd/n8K8VkAYq9k99KqVNGPHF1u3FRPx4d4kz6uSfjQD4BJ0v+nF?=
+ =?us-ascii?Q?xJuhAXTdcoSsGl6JRHso3BlqDo91q5XPu0vbBhcwFeHrdvnpjK2NwTWgdRnC?=
+ =?us-ascii?Q?Zmr5z9mtveOS0+lKISDlld9fPvqxLC1fwYKW/d9lkgx2aIF7lC3GrAjyV7PX?=
+ =?us-ascii?Q?N5UKnF2Ep16ivCNr2RGujg3MGvvCBBG6SYXkIjKVueBKlHsN7IaF3IFXysKY?=
+ =?us-ascii?Q?ZEJRaFB+0ZfhI3Mw0WR5sPCvReqR4xxKX09MdtqmQkBEFstR3wbwPOtjUWiT?=
+ =?us-ascii?Q?qE6HEh1kg9lIC+u1pIYZRYWTYSHq3wV6hisLF163NmCjRzAKPdUrmLRi9tDJ?=
+ =?us-ascii?Q?acMNCczmfmZrQZKrPy5E9X0R/CeR8C/XIp2RmRKExBzgBgi65A=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?wr7tVmxlAOFvSDBDzitWt+Akaqzvn4l6Xmwjkd9barve9xrpmQtY5CLRzBLA?=
+ =?us-ascii?Q?mwJVS6O8dHZjWazG+x9Rs5+960wt02iR7A8kkHAmBqgWTSwktUzenYZJyQ7W?=
+ =?us-ascii?Q?EQ5JPX+1DaP/jGZGHxunL28PF6S4SsTgeu5HN9SKkvjcF4oyy/+WAZwKj+pJ?=
+ =?us-ascii?Q?sraLW6yLPRn/eD18s+3N4bp20uk89J05vx3KUvo6Ny5EsqPatTPi4EIzOGRb?=
+ =?us-ascii?Q?B7w9iCBqzYejre5ljt6Yb1UoJ4No9KSdSYAewNLZCWsAO7M1by3ZsFdDqAZV?=
+ =?us-ascii?Q?UEphaTUGjjIO+JhSrImhfagV1itkXHn/7eZstFV+N5GEnL1rX6zziHWG/siX?=
+ =?us-ascii?Q?mvjivDtxl+O0GwGlsT3NzDaobfPzS8Vrlu4YzGHVTg8XwyAVzCcqf3Z1UQMP?=
+ =?us-ascii?Q?Eckvd7OQ2PAOwtyjhQnzcrNN80f0zOTY5n48rE7J//sTUUuf654vWKQlBr79?=
+ =?us-ascii?Q?Ejm7ipKpB2+YHiJ1f3Y43PutgghD5RbQUMtFK4vYRj4mqoPkmWpuJzeRXCSK?=
+ =?us-ascii?Q?lnvx4+jooLFbIJsK1F93jsuU1TW0nbJwGSi3r/ZlbFl4RuPHEWxamuxur80t?=
+ =?us-ascii?Q?ahPLTH6Gnu0z5AGneNGxepRiU2kGVYK8xz5yfeSH9JDVmYRgcxdzb+Qq5jgV?=
+ =?us-ascii?Q?Edau7608Qkinnt3cXViFpWcTs6CgHeJSjSr+/yVHNUS2uLXwu+J3KMbtC0oR?=
+ =?us-ascii?Q?QyABG3l7tUhatN8Z1987bwlwpIwLFFs/BS4MkZ0Zo4kt+R9TefgrUjIZnVkb?=
+ =?us-ascii?Q?O9RnM5R48cFLkndQit+2guzVzygZf5Bgu9DMR9zG8Ys0g4rxUY7RpiMp33vc?=
+ =?us-ascii?Q?+5qwpmwtk5vboxShdvoKsLi3fEYGE640q5mnw8gN88YHYH8wsuUXO35MmfZL?=
+ =?us-ascii?Q?+vMpYimW9Q/9cfOiKisF5vkkAOmsvJH09BTNayAlgVGYMAXTuxnTSjVnWiqy?=
+ =?us-ascii?Q?9MXHpxeaOgMKkhZpiuMGH9ijPfkgC8qMOCR3FTFsIIcaF9LJcM/G3vO8TYfr?=
+ =?us-ascii?Q?1uUqbBY3ebA7rflIclgtgH5X+oIQez7CVWmot9OaMa7VmH8Hiu47yR/T3E/f?=
+ =?us-ascii?Q?D4z23O0GfjvC2dKxn23wrPIreSwHES2QDk77rfMEY1m73nSauUtrw9dmbR2T?=
+ =?us-ascii?Q?wHSRIOxAElkuh49s90Wei18vMsUi5TdvhZryO5k7S2WFNlv6PD0+JA6D0ly/?=
+ =?us-ascii?Q?Pwr5qxSnJviR0HnDkZ3+eRqTs/AQeDgrM6mtRfqqUZGGjMwYGBQU6Sh+0IdK?=
+ =?us-ascii?Q?UrC5znxmCdm1rXaAQajbKBe47Dr4BpTSGU1OdvvZa//XEolS4vC/aTM6h1Nc?=
+ =?us-ascii?Q?+wlFxDl/M+ZiyR+kjK5t1FDEZlqCd5ZKNF2oZGOuTlKehResAi1oQKd9KO4u?=
+ =?us-ascii?Q?iLhtwxiZkjEAfPjfB4lF3o4TUdlWodBdb365ygpCMkFJFAsmZHAt0+BDZyhz?=
+ =?us-ascii?Q?/Ac8I/578JiX6zrkW6y8FxvSj+4AGB7g7aTfjZ+Hp9CPR1IgP6i1ucbJdPLQ?=
+ =?us-ascii?Q?abDwvIFKSJb6f4F3xTcy3R2q9FeCSQrayHi1/jTY+Mu8p1dvqGoPTmI4wbVi?=
+ =?us-ascii?Q?0P+w3lHWU60ZsntW+DrxFkZuDfpqaGtslNagjloQHDwdgvUcG0f/xySmh5hu?=
+ =?us-ascii?Q?YA=3D=3D?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94ed8b9f-1d90-4c6b-dd54-08dcabb31e83
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2024 07:34:58.0213 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sUeyGHLk6FMK1tg2iQ4Wa2FCewUVAr6wK+V9YcHrOzCLPEb4Nx3Iknh+5qbj0QPC6/3EndSoM19j6LFgReXuww==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8124
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,231 +162,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam
+From: Lukas Funke <lukas.funke@weidmueller.com>
 
-On Tue, Jul 23, 2024 at 10:37=E2=80=AFPM Sam Protsenko
-<semen.protsenko@linaro.org> wrote:
->
-> On Fri, Jul 5, 2024 at 2:14=E2=80=AFAM Michael Trimarchi
-> <michael@amarulasolutions.com> wrote:
-> >
-> > Gate and mux does not have .set_rate operation, but they could have
-> > CLK_SET_PARENT_RATE flag set. In that case it's usually possible to fin=
-d a
-> > parent up the tree which is capable of setting the rate (div, pll, etc)=
-.
-> > Add clk_generic_set_rate to allow them to trasverse the clock tree.
-> >
-> > Cc: Sam Protsenko <semen.protsenko@linaro.org>
-> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> > ---
-> >  drivers/clk/clk-gate.c       |  1 +
-> >  drivers/clk/clk-mux.c        |  2 +-
-> >  drivers/clk/clk-uclass.c     | 20 ++++++++++++++++++++
-> >  drivers/clk/clk.c            |  9 +++++++++
-> >  include/clk.h                |  9 +++++++++
-> >  include/linux/clk-provider.h |  1 +
-> >  6 files changed, 41 insertions(+), 1 deletion(-)
-> > ---
-> > V1->V2:
-> >         Fix missing include
-> > ---
-> > diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
-> > index cfd90b717e7..c86083ac5a3 100644
-> > --- a/drivers/clk/clk-gate.c
-> > +++ b/drivers/clk/clk-gate.c
-> > @@ -116,6 +116,7 @@ const struct clk_ops clk_gate_ops =3D {
-> >         .enable =3D clk_gate_enable,
-> >         .disable =3D clk_gate_disable,
-> >         .get_rate =3D clk_generic_get_rate,
-> > +       .set_rate =3D clk_generic_set_rate,
->
-> I can see that clk_generic_get_rate() already exists here, and adding
-> clk_generic_set_rate() tries to mimic that existing design. But
-> frankly, I'm not sure it was a very good design choice in the first
-> place. I mean, to have get/set rate operations for the clock types
-> that clearly don't have such ability. I think it would be better to
-> model the CCF clocks after real world clocks, and handle the
-> propagation on the clock logic level. In fact, that's how it's already
-> implemented in Linux kernel [1]. That keeps the particular clock
+tpm_tis_wait_init() is using the 'chip->timeout_b' field which is
+initialized in tpm_tis_init(). However, the init-function is called
+*after* tpm_tis_wait_init() introducing an uninitalized field access.
 
-Ok , so you suggest to have something like in the core
+This commit switches both routines.
 
-if (p->set_rate)
-{
-     set_rate())
+Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+---
 
-}
-else
-{
-    set_generic_rate()
-}
+Changes in v2:
+- Call tpm_tis_wait_init() from tpm_tis_init()
+- Use phy_ops for bus access in tpm_tis_wait_init()
 
-The same for get_rate()
+ drivers/tpm/tpm2_tis_core.c | 28 ++++++++++++++++++++++++++++
+ drivers/tpm/tpm2_tis_spi.c  | 29 -----------------------------
+ 2 files changed, 28 insertions(+), 29 deletions(-)
 
-> implementations simple and brings the propagation logic to the actual
-> clk API (clk_set_rate()), which in turn is able to cover all possible
-> cases: even if some new clock types are implemented later, they will
-> be covered already. That also reduces some code duplication and makes
-> it easier to control that behavior in a centralized manner. The patch
-> with the discussed implementation was already submitted a while ago
-> [2], and still pending on the review.
+diff --git a/drivers/tpm/tpm2_tis_core.c b/drivers/tpm/tpm2_tis_core.c
+index 680a6409433..1fdf8cfa319 100644
+--- a/drivers/tpm/tpm2_tis_core.c
++++ b/drivers/tpm/tpm2_tis_core.c
+@@ -419,6 +419,28 @@ static bool tis_check_ops(struct tpm_tis_phy_ops *phy_ops)
+ 	return true;
+ }
+ 
++static int tpm_tis_wait_init(struct udevice *dev, int loc)
++{
++	struct tpm_chip *chip = dev_get_priv(dev);
++	unsigned long start, stop;
++	u8 status;
++	int ret;
++
++	start = get_timer(0);
++	stop = chip->timeout_b;
++	do {
++		mdelay(TPM_TIMEOUT_MS);
++		ret = chip->phy_ops->read_bytes(dev, TPM_ACCESS(loc), 1, &status);
++		if (ret)
++			break;
++
++		if (status & TPM_ACCESS_VALID)
++			return 0;
++	} while (get_timer(start) < stop);
++
++	return -EIO;
++}
++
+ int tpm_tis_init(struct udevice *dev)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+@@ -436,6 +458,12 @@ int tpm_tis_init(struct udevice *dev)
+ 	chip->timeout_c = TIS_SHORT_TIMEOUT_MS;
+ 	chip->timeout_d = TIS_SHORT_TIMEOUT_MS;
+ 
++	ret = tpm_tis_wait_init(dev, chip->locality);
++	if (ret) {
++		log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
++		return ret;
++	}
++
+ 	ret = tpm_tis_request_locality(dev, 0);
+ 	if (ret)
+ 		return ret;
+diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+index b0fe97ab1d0..7909a147c2d 100644
+--- a/drivers/tpm/tpm2_tis_spi.c
++++ b/drivers/tpm/tpm2_tis_spi.c
+@@ -188,29 +188,6 @@ static int tpm_tis_spi_write32(struct udevice *dev, u32 addr, u32 value)
+ 	return tpm_tis_spi_write(dev, addr, sizeof(value), (u8 *)&value_le);
+ }
+ 
+-static int tpm_tis_wait_init(struct udevice *dev, int loc)
+-{
+-	struct tpm_chip *chip = dev_get_priv(dev);
+-	unsigned long start, stop;
+-	u8 status;
+-	int ret;
+-
+-	start = get_timer(0);
+-	stop = chip->timeout_b;
+-	do {
+-		mdelay(TPM_TIMEOUT_MS);
+-
+-		ret = tpm_tis_spi_read(dev, TPM_ACCESS(loc), 1, &status);
+-		if (ret)
+-			break;
+-
+-		if (status & TPM_ACCESS_VALID)
+-			return 0;
+-	} while (get_timer(start) < stop);
+-
+-	return -EIO;
+-}
+-
+ static struct tpm_tis_phy_ops phy_ops = {
+ 	.read_bytes = tpm_tis_spi_read,
+ 	.write_bytes = tpm_tis_spi_write,
+@@ -256,12 +233,6 @@ static int tpm_tis_spi_probe(struct udevice *dev)
+ 	/* Ensure a minimum amount of time elapsed since reset of the TPM */
+ 	mdelay(drv_data->time_before_first_cmd_ms);
+ 
+-	ret = tpm_tis_wait_init(dev, chip->locality);
+-	if (ret) {
+-		log(LOGC_DM, LOGL_ERR, "%s: no device found\n", __func__);
+-		return ret;
+-	}
+-
+ 	tpm_tis_ops_register(dev, &phy_ops);
+ 	ret = tpm_tis_init(dev);
+ 	if (ret)
+-- 
+2.30.2
 
-I have seen it and because I'm extending the clk framework a bit more [1]
-I was thinking about a more complete approach. Nothing against your
-patch, but just
-I have observed in my use case (display) that I need more from the
-clock framework we have
-
-Michael
-
-[1] https://patchwork.amarulasolutions.com/patch/3291/
-
->
-> Can I ask you if patch [2] doesn't cover some of your cases? Or maybe
-> I'm missing something out and having .set_rate op in gate/mux would
-> actually be better for some particular reason?
->
-> Thanks!
->
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tr=
-ee/drivers/clk/clk-gate.c#n120
-> [2] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
->
->
-> >  };
-> >
-> >  struct clk *clk_register_gate(struct device *dev, const char *name,
-> > diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-> > index e3481be95fa..f99a67ebd35 100644
-> > --- a/drivers/clk/clk-mux.c
-> > +++ b/drivers/clk/clk-mux.c
-> > @@ -151,13 +151,13 @@ static int clk_mux_set_parent(struct clk *clk, st=
-ruct clk *parent)
-> >  #else
-> >         writel(reg, mux->reg);
-> >  #endif
-> > -
-> >         return 0;
-> >  }
-> >
-> >  const struct clk_ops clk_mux_ops =3D {
-> >         .get_rate =3D clk_generic_get_rate,
-> >         .set_parent =3D clk_mux_set_parent,
-> > +       .set_rate =3D clk_generic_set_rate,
-> >  };
-> >
-> >  struct clk *clk_hw_register_mux_table(struct device *dev, const char *=
-name,
-> > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> > index ed6e60bc484..638864e6774 100644
-> > --- a/drivers/clk/clk-uclass.c
-> > +++ b/drivers/clk/clk-uclass.c
-> > @@ -517,6 +517,26 @@ ulong clk_get_parent_rate(struct clk *clk)
-> >         return pclk->rate;
-> >  }
-> >
-> > +ulong clk_set_parent_rate(struct clk *clk, ulong rate)
-> > +{
-> > +       const struct clk_ops *ops;
-> > +       struct clk *pclk;
-> > +
-> > +       debug("%s(clk=3D%p)\n", __func__, clk);
-> > +       if (!clk_valid(clk))
-> > +               return 0;
-> > +
-> > +       pclk =3D clk_get_parent(clk);
-> > +       if (IS_ERR(pclk))
-> > +               return -ENODEV;
-> > +
-> > +       ops =3D clk_dev_ops(pclk->dev);
-> > +       if (!ops->set_rate)
-> > +               return -ENOSYS;
-> > +
-> > +       return clk_set_rate(pclk, rate);
-> > +}
-> > +
-> >  ulong clk_round_rate(struct clk *clk, ulong rate)
-> >  {
-> >         const struct clk_ops *ops;
-> > diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-> > index 6ede1b4d4dc..febd5314df2 100644
-> > --- a/drivers/clk/clk.c
-> > +++ b/drivers/clk/clk.c
-> > @@ -14,6 +14,7 @@
-> >  #include <dm/uclass.h>
-> >  #include <dm/lists.h>
-> >  #include <dm/device-internal.h>
-> > +#include <linux/clk-provider.h>
-> >
-> >  int clk_register(struct clk *clk, const char *drv_name,
-> >                  const char *name, const char *parent_name)
-> > @@ -61,6 +62,14 @@ ulong clk_generic_get_rate(struct clk *clk)
-> >         return clk_get_parent_rate(clk);
-> >  }
-> >
-> > +ulong clk_generic_set_rate(struct clk *clk, ulong rate)
-> > +{
-> > +       if (clk->flags & CLK_SET_RATE_PARENT)
-> > +               return clk_set_parent_rate(clk, rate);
-> > +
-> > +       return clk_get_parent_rate(clk);
-> > +}
-> > +
-> >  const char *clk_hw_get_name(const struct clk *hw)
-> >  {
-> >         assert(hw);
-> > diff --git a/include/clk.h b/include/clk.h
-> > index af23e4f3475..1900377eddb 100644
-> > --- a/include/clk.h
-> > +++ b/include/clk.h
-> > @@ -452,6 +452,15 @@ struct clk *clk_get_parent(struct clk *clk);
-> >   */
-> >  ulong clk_get_parent_rate(struct clk *clk);
-> >
-> > +/**
-> > + * clk_set_parent_rate() - Set parent of current clock rate.
-> > + * @clk:       A clock struct that was previously successfully request=
-ed by
-> > + *             clk_request/get_by_*().
-> > + *
-> > + * Return: clock rate in Hz, or -ve error code.
-> > + */
-> > +ulong clk_set_parent_rate(struct clk *clk, ulong rate);
-> > +
-> >  /**
-> >   * clk_round_rate() - Adjust a rate to the exact rate a clock can prov=
-ide
-> >   * @clk: A clock struct that was previously successfully requested by
-> > diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.=
-h
-> > index 59f9c241b84..459fa2d15ce 100644
-> > --- a/include/linux/clk-provider.h
-> > +++ b/include/linux/clk-provider.h
-> > @@ -253,6 +253,7 @@ struct clk *clk_register_fixed_rate(struct device *=
-dev, const char *name,
-> >
-> >  const char *clk_hw_get_name(const struct clk *hw);
-> >  ulong clk_generic_get_rate(struct clk *clk);
-> > +ulong clk_generic_set_rate(struct clk *clk, ulong rate);
-> >
-> >  struct clk *dev_get_clk_ptr(struct udevice *dev);
-> >
-> > --
-> > 2.43.0
-> >
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
