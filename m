@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D470C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:44:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4884FC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 09:45:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B7588883E;
-	Wed, 24 Jul 2024 11:44:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id BD8768883E;
+	Wed, 24 Jul 2024 11:45:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="H2v/BXru";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kpejvegS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1008888C1; Wed, 24 Jul 2024 11:44:50 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D115588800; Wed, 24 Jul 2024 11:45:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 363168883E
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:44:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8543E888A5
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 11:45:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a79a7d1a0dbso201650266b.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 02:44:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1721814287; x=1722419087;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CX8dIKm2xif95PPt8pFkD1rTo+mG0+20QfbHWygzPsQ=;
- b=H2v/BXruYibX7A9fcZRRDwrFvlFGBG6ewGC0/ekt1yYsPV4jrpYqPo2Ap9ykMU+x1n
- 1B7VGt/RvDn/DRMeq/O4563GnttkwMEhdpFKEZE65lSJzUt0Xw7UEVovPwYjX7r1bH5I
- SKXGdPyDWU3pQXYQqWgeo3x6bOqbwyO0MDtSo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721814287; x=1722419087;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CX8dIKm2xif95PPt8pFkD1rTo+mG0+20QfbHWygzPsQ=;
- b=Td+g4kYvcYbFy0xMlr1a3tJr0/2IsUcPizvoB3xC2TvLoQg7iVQLr/oZ6l36BS0G03
- SkziVlKgT2K63FIEvdJYd2gwzF69eROImB8sfkzvmvgZroe7yBGBgck+1oiwY+awVerG
- by1vnywcm7F6KqeWYozRxZvVWGaGvfY8fa+MG3fKT3uV2/EQ7TFxFElakBvwX1y6DKqt
- iOcIfS7fcLJv0RO+sSO6baUO2bQmE4wf5Bj3dfXsQ6gHw8VMHUd73cq/oYpuZvW7txE3
- Dav2PO6q2liu+8O9gwtlTtQt4J4W+iSsBRKcKmzJ/2wRDh7QihK/5K/G0zssEDvMVq3e
- bK5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVOXWdLu8WICncGNE44xhk6dO/IajHXP8hYEDZYzULeso0UHtBqu4n2urPO3G/V/xgofJBAOZQmRYKziTqm2QFHnxC//A==
-X-Gm-Message-State: AOJu0YznIotdfI3AjzeTnj2zmYaHNjdeZP5xd2Ib+/aYdCzQ7GyQ2bSX
- PG5Shho1VkOmA+byVnfROLyQ466hunjjhk+COIxODdt1iT9HGOdHD4fo2SGAAw3sqkJwrFrnRxI
- J8VFKVsvrY7KCHVxJOVuVinYj7UmqJJgn9sziCw==
-X-Google-Smtp-Source: AGHT+IFkXRzvTt/UOfegbZihkTl0OO9HZ9QWuMPUt/cFAY5fxdHlHw2vzuEH+KE0Dr6lXumvsz664iOfu1BkHtiLOwA=
-X-Received: by 2002:a17:907:7d86:b0:a77:cca9:b216 with SMTP id
- a640c23a62f3a-a7aabb420a4mr141043766b.33.1721814287469; Wed, 24 Jul 2024
- 02:44:47 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1721814336; x=1722419136; i=xypron.glpk@gmx.de;
+ bh=Hl3gTZO8Dh0mNyYU+pUigZ6Q06RUegWRkL02Z+cgxfQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=kpejvegS8dr6y3/fe1gusYsSvJoYobW1XjyDWkpiQRW4bLEJgFphnH5ZnRIVqO2W
+ hd9U1J1N+dirJVWSx+57sxoVw8xdwER8zOF3QudLZCpp98AK/YQwdWWOVkiFLNwvP
+ iiKLh90BJfPGmEj9QXyda2Q0gPq9UtfqJVhkmQ20QVsM8jYh0abkSoPIv+QQcjBK9
+ TiAfdBpCq2nJ3WiU3bM0BE6llCTS7VfYyLHGURl/Dr7LVfolHP2VmW4xnd3GIMYfu
+ wK/6PCe4R9CzZnUEk/VfPPiSloHEYLwxUIRxCo/aZZ7hwp15xhVh/pUtGEtzc9t9f
+ d05+AV1cn9nhHdkvGA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7zBb-1sBEIt1jPv-00vKLh; Wed, 24
+ Jul 2024 11:45:36 +0200
+Message-ID: <5329b5b4-b54d-4c4d-aedc-c21c3da5f9ee@gmx.de>
+Date: Wed, 24 Jul 2024 11:45:31 +0200
 MIME-Version: 1.0
-References: <20240705071419.11521-1-michael@amarulasolutions.com>
- <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
- <CAOf5uwk8xjgsrVysDgEeOsr6uR5u=LYP3N2s67eBf5eqqtS_MQ@mail.gmail.com>
-In-Reply-To: <CAOf5uwk8xjgsrVysDgEeOsr6uR5u=LYP3N2s67eBf5eqqtS_MQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 24 Jul 2024 11:44:35 +0200
-Message-ID: <CAOf5uw=5QVsWe0thmTPjUyKFTKo98YsQZosTm0803hVGhZRZmw@mail.gmail.com>
-Subject: Re: [PATCH V2] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
- present for gate and mux
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, linux-amarula@amarulasolutions.com,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+References: <20240723141844.GF989285@bill-the-cat>
+ <87ttgf5emw.fsf@baylibre.com>
+Content-Language: en-US
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dmitrii Merkurev <dimorinny@google.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <87ttgf5emw.fsf@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:WrlVNRGPNUi91HVXFm4yxBj1kO2twRQY/0qqVs/QoyNFS3KPpIR
+ PiACRF3s15m9+IFlopArZ5c/vhUC6x3qbCsKBM27HlPnWzJpXuwIFjqorM9f48dVEicgoQ/
+ ocAnsNltwS5reJ0kYFlEk+mu18Q3UGzDpMqgG4OVyF5HQRISS6px/g6OoczD1lOOi672CpJ
+ rP2h1O2vhbVTF7bcCZxFw==
+UI-OutboundReport: notjunk:1;M01:P0:czQXmadlhRA=;0NtziB24WxGw0+lgeWkaMn60yDk
+ yFmOsmjiXTa16srNZIvduxTwd3+mzzt2CTnG3E8Xq++9EWSVOOl+ze2Wv8c6jrwmWDVDi+R2S
+ 9PTz8HzZ/HcNXfNy2V1PqYOBjy5BWqiENLMYCH/FtcD7tHN6uwmOEXK+31xF2YSaqrUjyldsk
+ BqJDYzpK9nfb3izkbwcLUWkGjI9iVrm2kSvYj1k2GpJ2HD4YUloZ5aCDYOvQNnKpbcHb6akH9
+ DLzTMrHLQZG7V5wz5pQMgxqSQMoUlLXWBjC/o+BqP0/64tGQLLhfarE7XbxcMediM67Juee5x
+ WFJ7Stuovdefdff4p60x70qcW67hoI0RyijdeO+tBrkqqa2ridCEmV+8+9Y1mrhnwlsbYHmZ8
+ DyDqHgBdwhN2txo+46Fm956u3T+IVxYcDARh9IUcN6iKx/ylJ39bWHUsK+3IFDPyBjXRRVsOD
+ CKk3ny2SypxUz+k+4RCAyyo1pbRnfo+yorC045QoutwJcQBlJW0n9SMRFR2DxqETEyE/vco3j
+ FMLESFU/HojBrqxZVasBgSWfWplEHdTRNqSeh2EWXIb3aSj6pjZxhEpDElC8VNbdi8cDsebEG
+ 0WpyXQJ7UvHPgB4Jva0zojpGDarEIi4xl6Vh5ccnSQ+gsJrNqrPFSFUFDaTKqyHbOTcRwR684
+ GGB64DNubHXppnHHRVmFfzX7CCLI6JWhp3GVKFeyUi+uLxMjJjoCrK0rvaofQk6XgMYtRQhPl
+ aDm+MfAAJN0jNNtGbZX12AO01YXs9/96o8Lncqtd2Tx0uf+baouadKt4whf0meWKSLuJKgc1R
+ AT8Mu/Vb92ReZSX+JpVKV9Nw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,280 +93,353 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam
+On 24.07.24 11:21, Mattijs Korpershoek wrote:
+> Hi Tom,
+>
+> Thank you for the report.
+>
+> On mar., juil. 23, 2024 at 08:18, Tom Rini <trini@konsulko.com> wrote:
+>
+>> Here's the latest report.
+>>
+>> ---------- Forwarded message ---------
+>> From: <scan-admin@coverity.com>
+>> Date: Mon, Jul 22, 2024, 8:07 PM
+>> Subject: New Defects reported by Coverity Scan for Das U-Boot
+>> To: <tom.rini@gmail.com>
+>>
+>>
+>> Hi,
+>>
+>> Please find the latest report on new defect(s) introduced to Das U-Boot
+>> found with Coverity Scan.
+>>
+>> 8 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+>> 3 defect(s), reported by Coverity Scan earlier, were marked fixed in th=
+e
+>> recent build analyzed by Coverity Scan.
+>>
+>> New defect(s) Reported-by: Coverity Scan
+>> Showing 8 of 8 defect(s)
+>>
+>>
+>> ** CID 501795:  Insecure data handling  (TAINTED_SCALAR)
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501795:  Insecure data handling  (TAINTED_SCALAR)
+>> /boot/bootmeth_android.c: 96 in scan_boot_part()
+>> 90      if (!is_android_boot_image_header(buf)) {
+>> 91              free(buf);
+>> 92              return log_msg_ret("header", -ENOENT);
+>> 93      }
+>> 94
+>> 95      priv->header_version =3D ((struct andr_boot_img_hdr_v0
+>> *)buf)->header_version;
+>>>>>      CID 501795:  Insecure data handling  (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "*buf" to "dlfree", which uses it as=
+ an
+>> offset.
+>
+> scan_boot_part() generates this warning, but scan_vendor_boot_part()
+> does not.
+> Both functions follow a similar code flow.
+>
+> The only reason scan_boot_part() generates this warning, is because of
+> the downcast into struct andr_boot_img_hdr_v0.
+>
+> We can't change char* buf into struct andr_boot_img_hdr_v0 because we
+> need to be block aligned when calling blk_dread().
+>
+> Per my understanding tainted data means it comes from user input (which
+> is true for both scan_boot_part() and scan_vendor_boot_part() because
+> both read from eMMC, which can be consider "user input".
+>
+> Since I don't see any particular problem with this code I propose that
+> we ignore this warning.
 
-On Wed, Jul 24, 2024 at 9:25=E2=80=AFAM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi Sam
->
-> On Tue, Jul 23, 2024 at 10:37=E2=80=AFPM Sam Protsenko
-> <semen.protsenko@linaro.org> wrote:
-> >
-> > On Fri, Jul 5, 2024 at 2:14=E2=80=AFAM Michael Trimarchi
-> > <michael@amarulasolutions.com> wrote:
-> > >
-> > > Gate and mux does not have .set_rate operation, but they could have
-> > > CLK_SET_PARENT_RATE flag set. In that case it's usually possible to f=
-ind a
-> > > parent up the tree which is capable of setting the rate (div, pll, et=
-c).
-> > > Add clk_generic_set_rate to allow them to trasverse the clock tree.
-> > >
-> > > Cc: Sam Protsenko <semen.protsenko@linaro.org>
-> > > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> > > ---
-> > >  drivers/clk/clk-gate.c       |  1 +
-> > >  drivers/clk/clk-mux.c        |  2 +-
-> > >  drivers/clk/clk-uclass.c     | 20 ++++++++++++++++++++
-> > >  drivers/clk/clk.c            |  9 +++++++++
-> > >  include/clk.h                |  9 +++++++++
-> > >  include/linux/clk-provider.h |  1 +
-> > >  6 files changed, 41 insertions(+), 1 deletion(-)
-> > > ---
-> > > V1->V2:
-> > >         Fix missing include
-> > > ---
-> > > diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
-> > > index cfd90b717e7..c86083ac5a3 100644
-> > > --- a/drivers/clk/clk-gate.c
-> > > +++ b/drivers/clk/clk-gate.c
-> > > @@ -116,6 +116,7 @@ const struct clk_ops clk_gate_ops =3D {
-> > >         .enable =3D clk_gate_enable,
-> > >         .disable =3D clk_gate_disable,
-> > >         .get_rate =3D clk_generic_get_rate,
-> > > +       .set_rate =3D clk_generic_set_rate,
-> >
-> > I can see that clk_generic_get_rate() already exists here, and adding
-> > clk_generic_set_rate() tries to mimic that existing design. But
-> > frankly, I'm not sure it was a very good design choice in the first
-> > place. I mean, to have get/set rate operations for the clock types
-> > that clearly don't have such ability. I think it would be better to
-> > model the CCF clocks after real world clocks, and handle the
-> > propagation on the clock logic level. In fact, that's how it's already
-> > implemented in Linux kernel [1]. That keeps the particular clock
->
-> Ok , so you suggest to have something like in the core
->
-> if (p->set_rate)
-> {
->      set_rate())
->
-> }
-> else
-> {
->     set_generic_rate()
-> }
->
+The warning is specifically about invoking free for the buffer that we
+have allocated via malloc(). Our implementation of malloc() and free()
+stores some meta-information about allocated buffers at a negative
+offset and we don't overwrite this area via blk_read().
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 8faf5a56e1..a309108dd4 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -467,8 +467,14 @@ ulong clk_get_rate(struct clk *clk)
-                return 0;
-        ops =3D clk_dev_ops(clk->dev);
-
--       if (!ops->get_rate)
--               return -ENOSYS;
-+       if (!ops->get_rate) {
-+               parent =3D clk_get_parent(clk);
-+               if (!clk_is_valid(parent))
-+                       return -ENOSYS;
-+               ops =3D clk_dev_ops(parent->dev);
-+               if (!ops->get_rate)
-+                       return -ENOSYS;
-+       }
-
-        return ops->get_rate(clk);
- }
-
-You suggest to remove get_rate, set_rate function in mux and gate and
-use some propagation in the core, am I right?
-
-
-Michael
-> The same for get_rate()
->
-> > implementations simple and brings the propagation logic to the actual
-> > clk API (clk_set_rate()), which in turn is able to cover all possible
-> > cases: even if some new clock types are implemented later, they will
-> > be covered already. That also reduces some code duplication and makes
-> > it easier to control that behavior in a centralized manner. The patch
-> > with the discussed implementation was already submitted a while ago
-> > [2], and still pending on the review.
->
-> I have seen it and because I'm extending the clk framework a bit more [1]
-> I was thinking about a more complete approach. Nothing against your
-> patch, but just
-> I have observed in my use case (display) that I need more from the
-> clock framework we have
->
-> Michael
->
-> [1] https://patchwork.amarulasolutions.com/patch/3291/
->
-> >
-> > Can I ask you if patch [2] doesn't cover some of your cases? Or maybe
-> > I'm missing something out and having .set_rate op in gate/mux would
-> > actually be better for some particular reason?
-> >
-> > Thanks!
-> >
-> > [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
-tree/drivers/clk/clk-gate.c#n120
-> > [2] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
-> >
-> >
-> > >  };
-> > >
-> > >  struct clk *clk_register_gate(struct device *dev, const char *name,
-> > > diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-> > > index e3481be95fa..f99a67ebd35 100644
-> > > --- a/drivers/clk/clk-mux.c
-> > > +++ b/drivers/clk/clk-mux.c
-> > > @@ -151,13 +151,13 @@ static int clk_mux_set_parent(struct clk *clk, =
-struct clk *parent)
-> > >  #else
-> > >         writel(reg, mux->reg);
-> > >  #endif
-> > > -
-> > >         return 0;
-> > >  }
-> > >
-> > >  const struct clk_ops clk_mux_ops =3D {
-> > >         .get_rate =3D clk_generic_get_rate,
-> > >         .set_parent =3D clk_mux_set_parent,
-> > > +       .set_rate =3D clk_generic_set_rate,
-> > >  };
-> > >
-> > >  struct clk *clk_hw_register_mux_table(struct device *dev, const char=
- *name,
-> > > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> > > index ed6e60bc484..638864e6774 100644
-> > > --- a/drivers/clk/clk-uclass.c
-> > > +++ b/drivers/clk/clk-uclass.c
-> > > @@ -517,6 +517,26 @@ ulong clk_get_parent_rate(struct clk *clk)
-> > >         return pclk->rate;
-> > >  }
-> > >
-> > > +ulong clk_set_parent_rate(struct clk *clk, ulong rate)
-> > > +{
-> > > +       const struct clk_ops *ops;
-> > > +       struct clk *pclk;
-> > > +
-> > > +       debug("%s(clk=3D%p)\n", __func__, clk);
-> > > +       if (!clk_valid(clk))
-> > > +               return 0;
-> > > +
-> > > +       pclk =3D clk_get_parent(clk);
-> > > +       if (IS_ERR(pclk))
-> > > +               return -ENODEV;
-> > > +
-> > > +       ops =3D clk_dev_ops(pclk->dev);
-> > > +       if (!ops->set_rate)
-> > > +               return -ENOSYS;
-> > > +
-> > > +       return clk_set_rate(pclk, rate);
-> > > +}
-> > > +
-> > >  ulong clk_round_rate(struct clk *clk, ulong rate)
-> > >  {
-> > >         const struct clk_ops *ops;
-> > > diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-> > > index 6ede1b4d4dc..febd5314df2 100644
-> > > --- a/drivers/clk/clk.c
-> > > +++ b/drivers/clk/clk.c
-> > > @@ -14,6 +14,7 @@
-> > >  #include <dm/uclass.h>
-> > >  #include <dm/lists.h>
-> > >  #include <dm/device-internal.h>
-> > > +#include <linux/clk-provider.h>
-> > >
-> > >  int clk_register(struct clk *clk, const char *drv_name,
-> > >                  const char *name, const char *parent_name)
-> > > @@ -61,6 +62,14 @@ ulong clk_generic_get_rate(struct clk *clk)
-> > >         return clk_get_parent_rate(clk);
-> > >  }
-> > >
-> > > +ulong clk_generic_set_rate(struct clk *clk, ulong rate)
-> > > +{
-> > > +       if (clk->flags & CLK_SET_RATE_PARENT)
-> > > +               return clk_set_parent_rate(clk, rate);
-> > > +
-> > > +       return clk_get_parent_rate(clk);
-> > > +}
-> > > +
-> > >  const char *clk_hw_get_name(const struct clk *hw)
-> > >  {
-> > >         assert(hw);
-> > > diff --git a/include/clk.h b/include/clk.h
-> > > index af23e4f3475..1900377eddb 100644
-> > > --- a/include/clk.h
-> > > +++ b/include/clk.h
-> > > @@ -452,6 +452,15 @@ struct clk *clk_get_parent(struct clk *clk);
-> > >   */
-> > >  ulong clk_get_parent_rate(struct clk *clk);
-> > >
-> > > +/**
-> > > + * clk_set_parent_rate() - Set parent of current clock rate.
-> > > + * @clk:       A clock struct that was previously successfully reque=
-sted by
-> > > + *             clk_request/get_by_*().
-> > > + *
-> > > + * Return: clock rate in Hz, or -ve error code.
-> > > + */
-> > > +ulong clk_set_parent_rate(struct clk *clk, ulong rate);
-> > > +
-> > >  /**
-> > >   * clk_round_rate() - Adjust a rate to the exact rate a clock can pr=
-ovide
-> > >   * @clk: A clock struct that was previously successfully requested b=
-y
-> > > diff --git a/include/linux/clk-provider.h b/include/linux/clk-provide=
-r.h
-> > > index 59f9c241b84..459fa2d15ce 100644
-> > > --- a/include/linux/clk-provider.h
-> > > +++ b/include/linux/clk-provider.h
-> > > @@ -253,6 +253,7 @@ struct clk *clk_register_fixed_rate(struct device=
- *dev, const char *name,
-> > >
-> > >  const char *clk_hw_get_name(const struct clk *hw);
-> > >  ulong clk_generic_get_rate(struct clk *clk);
-> > > +ulong clk_generic_set_rate(struct clk *clk, ulong rate);
-> > >
-> > >  struct clk *dev_get_clk_ptr(struct udevice *dev);
-> > >
-> > > --
-> > > 2.43.0
-> > >
 >
 >
+>> 96      free(buf);
+>> 97
+>> 98      return 0;
+>> 99     }
+>> 100
+>> 101     static int scan_vendor_boot_part(struct udevice *blk, struct
+>> android_priv *priv)
+>>
+>> ** CID 501794:  Memory - corruptions  (OVERRUN)
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501794:  Memory - corruptions  (OVERRUN)
+>> /lib/tpm_tcg2.c: 640 in tcg2_measurement_init()
+>> 634             rc =3D tcg2_log_prepare_buffer(*dev, elog,
+>> ignore_existing_log);
+>> 635             if (rc) {
+>> 636                     tcg2_measurement_term(*dev, elog, true);
+>> 637                     return rc;
+>> 638             }
+>> 639
+>>>>>      CID 501794:  Memory - corruptions  (OVERRUN)
+>>>>>      Overrunning array "version_string" of 50 bytes by passing it to=
+ a
+>> function which accesses it at byte offset 63.
+>> 640             rc =3D tcg2_measure_event(*dev, elog, 0, EV_S_CRTM_VERS=
+ION,
+>> 641                                     strlen(version_string) + 1,
+>> 642                                     (u8 *)version_string);
+>> 643             if (rc) {
+>> 644                     tcg2_measurement_term(*dev, elog, true);
+>> 645                     return rc;
+>>
+>> ** CID 501793:  Insecure data handling  (TAINTED_SCALAR)
+>> /lib/tpm-v2.c: 909 in tpm2_allow_extend()
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501793:  Insecure data handling  (TAINTED_SCALAR)
+>> /lib/tpm-v2.c: 909 in tpm2_allow_extend()
+>> 903             int rc;
+>> 904
+>> 905             rc =3D tpm2_get_pcr_info(dev, &pcrs);
+>> 906             if (rc)
+>> 907                     return false;
+>> 908
+>>>>>      CID 501793:  Insecure data handling  (TAINTED_SCALAR)
+>>>>>      Using tainted variable "pcrs.count" as a loop boundary.
+>> 909             for (i =3D 0; i < pcrs.count; i++) {
+>> 910                     if (tpm2_is_active_pcr(&pcrs.selection[i]) &&
+>> 911                         !tpm2_algorithm_to_len(pcrs.selection[i].ha=
+sh))
+>> 912                             return false;
+>> 913             }
+>> 914
+>> 915             return true;
+>>
+>> ** CID 501792:  Control flow issues  (DEADCODE)
+>> /lib/efi_loader/efi_helper.c: 137 in efi_load_option_dp_join()
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501792:  Control flow issues  (DEADCODE)
+>> /lib/efi_loader/efi_helper.c: 137 in efi_load_option_dp_join()
+>> 131             if (fdt_dp) {
+>> 132                     struct efi_device_path *tmp_dp =3D *dp;
+>> 133
+>> 134                     *dp =3D efi_dp_concat(tmp_dp, fdt_dp, *dp_size)=
+;
+>> 135                     efi_free_pool(tmp_dp);
+>> 136                     if (!dp)
+>>>>>      CID 501792:  Control flow issues  (DEADCODE)
+>>>>>      Execution cannot reach this statement: "return
+>> 9223372036854775817UL;".
+>> 137                             return EFI_OUT_OF_RESOURCES;
+>> 138                     *dp_size +=3D efi_dp_size(fdt_dp) + sizeof(END)=
+;
+>> 139             }
+>> 140
+>> 141             *dp_size +=3D sizeof(END);
+>> 142
+>>
+>> ** CID 501791:    (DEADCODE)
+>> /drivers/usb/gadget/ether.c: 2219 in eth_bind()
+>> /drivers/usb/gadget/ether.c: 2110 in eth_bind()
+>> /drivers/usb/gadget/ether.c: 2071 in eth_bind()
+>> /drivers/usb/gadget/ether.c: 2089 in eth_bind()
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501791:    (DEADCODE)
+>> /drivers/usb/gadget/ether.c: 2219 in eth_bind()
+>> 2213                    out_ep->name, in_ep->name,
+>> 2214                    status_ep ? " STATUS " : "",
+>> 2215                    status_ep ? status_ep->name : ""
+>> 2216                    );
+>> 2217            printf("MAC %pM\n", pdata->enetaddr);
+>> 2218
+>>>>>      CID 501791:    (DEADCODE)
+>>>>>      Execution cannot reach the expression "rndis" inside this
+>> statement: "if (cdc || rndis)
+>>    printf(...".
+>> 2219            if (cdc || rndis)
+>> 2220                    printf("HOST MAC %02x:%02x:%02x:%02x:%02x:%02x\=
+n",
+>> 2221                            dev->host_mac[0], dev->host_mac[1],
+>> 2222                            dev->host_mac[2], dev->host_mac[3],
+>> 2223                            dev->host_mac[4], dev->host_mac[5]);
+>> 2224
+>> /drivers/usb/gadget/ether.c: 2110 in eth_bind()
+>> 2104                    device_desc.bNumConfigurations =3D 2;
+>> 2105
+>> 2106            if (gadget_is_dualspeed(gadget)) {
+>> 2107                    if (rndis)
+>> 2108                            dev_qualifier.bNumConfigurations =3D 2;
+>> 2109                    else if (!cdc)
+>>>>>      CID 501791:    (DEADCODE)
+>>>>>      Execution cannot reach this statement: "dev_qualifier.bDeviceCl=
+ass
+>> ...".
+>> 2110                            dev_qualifier.bDeviceClass =3D
+>> USB_CLASS_VENDOR_SPEC;
+>> 2111
+>> 2112                    /* assumes ep0 uses the same value for both spe=
+eds
+>> ... */
+>> 2113                    dev_qualifier.bMaxPacketSize0 =3D
+>> device_desc.bMaxPacketSize0;
+>> 2114
+>> 2115                    /* and that all endpoints are dual-speed */
+>> /drivers/usb/gadget/ether.c: 2071 in eth_bind()
+>> 2065
+>> 2066     #if defined(CONFIG_USB_ETH_CDC) || defined(CONFIG_USB_ETH_RNDI=
+S)
+>> 2067            /*
+>> 2068             * CDC Ethernet control interface doesn't require a sta=
+tus
+>> endpoint.
+>> 2069             * Since some hosts expect one, try to allocate one any=
+way.
+>> 2070             */
+>>>>>      CID 501791:    (DEADCODE)
+>>>>>      Execution cannot reach the expression "rndis" inside this
+>> statement: "if (cdc || rndis) {
+>>    statu...".
+>> 2071            if (cdc || rndis) {
+>> 2072                    status_ep =3D usb_ep_autoconfig(gadget,
+>> &fs_status_desc);
+>> 2073                    if (status_ep) {
+>> 2074                            status_ep->driver_data =3D status_ep;  =
+   /*
+>> claim */
+>> 2075                    } else if (rndis) {
+>> 2076                            pr_err("can't run RNDIS on %s",
+>> gadget->name);
+>> /drivers/usb/gadget/ether.c: 2089 in eth_bind()
+>> 2083                    }
+>> 2084            }
+>> 2085     #endif
+>> 2086
+>> 2087            /* one config:  cdc, else minimal subset */
+>> 2088            if (!cdc) {
+>>>>>      CID 501791:    (DEADCODE)
+>>>>>      Execution cannot reach this statement: "eth_config.bNumInterfac=
+es =3D
+>> 1;".
+>> 2089                    eth_config.bNumInterfaces =3D 1;
+>> 2090                    eth_config.iConfiguration =3D STRING_SUBSET;
+>> 2091
+>> 2092                    /*
+>> 2093                     * use functions to set these up, in case we're
+>> built to work
+>> 2094                     * with multiple controllers and must override =
+CDC
+>> Ethernet.
+>>
+>> ** CID 501790:  Null pointer dereferences  (FORWARD_NULL)
+>> /cmd/bcb.c: 175 in __bcb_initialize()
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501790:  Null pointer dereferences  (FORWARD_NULL)
+>> /cmd/bcb.c: 175 in __bcb_initialize()
+>> 169                     }
+>> 170             }
+>> 171
+>> 172             return CMD_RET_SUCCESS;
+>> 173
+>> 174     err_read_fail:
+>>>>>      CID 501790:  Null pointer dereferences  (FORWARD_NULL)
+>>>>>      Dereferencing null pointer "block".
+>> 175             printf("Error: %d %d:%s read failed (%d)\n",
+>> block->uclass_id,
+>> 176                    block->devnum, partition->name, ret);
+>> 177             __bcb_reset();
+>> 178             return CMD_RET_FAILURE;
+>> 179     }
+>> 180
 >
-> --
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com
-> __________________________________
+> This probably deserves to be addressed. I don't know if Dmitrii is activ=
+ely
+> watching the list so I'll study this in more detail and send a fix if ap=
+propriate.
+
+If blk_get_dev() returns NULL, we should write a message like "No such
+device" and return CMD_RET_FAILURE immediately.
+
+Please, use log_err() for writing error messages. We don't need "Error:"
+at the beginning of error messages.
+
+Best regards
+
+Heinrich
+
 >
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com
-> www.amarulasolutions.com
+>>
+>> ** CID 501789:  Insecure data handling  (TAINTED_SCALAR)
+>> /lib/tpm_tcg2.c: 41 in tcg2_get_pcr_info()
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501789:  Insecure data handling  (TAINTED_SCALAR)
+>> /lib/tpm_tcg2.c: 41 in tcg2_get_pcr_info()
+>> 35      memset(response, 0, sizeof(response));
+>> 36
+>> 37      ret =3D tpm2_get_pcr_info(dev, &pcrs);
+>> 38      if (ret)
+>> 39              return ret;
+>> 40
+>>>>>      CID 501789:  Insecure data handling  (TAINTED_SCALAR)
+>>>>>      Using tainted variable "pcrs.count" as a loop boundary.
+>> 41      for (i =3D 0; i < pcrs.count; i++) {
+>> 42              u32 hash_mask =3D
+>> tcg2_algorithm_to_mask(pcrs.selection[i].hash);
+>> 43
+>> 44              if (hash_mask) {
+>> 45                      *supported_pcr |=3D hash_mask;
+>> 46                      if (tpm2_is_active_pcr(&pcrs.selection[i]))
+>>
+>> ** CID 501788:  Memory - corruptions  (OVERRUN)
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 501788:  Memory - corruptions  (OVERRUN)
+>> /lib/tpm_tcg2.c: 658 in tcg2_measurement_term()
+>> 652                                bool error)
+>> 653     {
+>> 654             u32 event =3D error ? 0x1 : 0xffffffff;
+>> 655             int i;
+>> 656
+>> 657             for (i =3D 0; i < 8; ++i)
+>>>>>      CID 501788:  Memory - corruptions  (OVERRUN)
+>>>>>      Overrunning buffer pointed to by "(u8 const *)&event" of 4 byte=
+s by
+>> passing it to a function which accesses it at byte offset 63.
+>> 658                     tcg2_measure_event(dev, elog, i, EV_SEPARATOR,
+>> sizeof(event),
+>> 659                                        (const u8 *)&event);
+>> 660
+>> 661             if (elog->log)
+>> 662                     unmap_physmem(elog->log, MAP_NOCACHE);
+>> 663     }
+>>
+>>
+>>
+>> ----- End forwarded message -----
+>>
+>> --
+>> Tom
 
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
