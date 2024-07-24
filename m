@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A73C3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:08:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB27C3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 302F9888EB;
+	by phobos.denx.de (Postfix) with ESMTP id 8E64988908;
 	Wed, 24 Jul 2024 08:04:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DA8D887FA; Wed, 24 Jul 2024 08:04:36 +0200 (CEST)
+ id 83ABE887CE; Wed, 24 Jul 2024 08:04:37 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1B64488875
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3FEFB88847
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 11A99106F;
- Tue, 23 Jul 2024 23:04:52 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34917106F;
+ Tue, 23 Jul 2024 23:04:57 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B31AB3F766;
- Tue, 23 Jul 2024 23:04:21 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1FE9A3F766;
+ Tue, 23 Jul 2024 23:04:26 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -38,11 +38,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 20/40] lmb: remove lmb_init_and_reserve_range() function
-Date: Wed, 24 Jul 2024 11:32:04 +0530
-Message-Id: <20240724060224.3071065-21-sughosh.ganu@linaro.org>
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH 21/40] lmb: bootm: remove superfluous lmb stub functions
+Date: Wed, 24 Jul 2024 11:32:05 +0530
+Message-Id: <20240724060224.3071065-22-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -64,88 +63,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the move to make the LMB allocations persistent and the common
-memory regions being reserved during board init, there is no need for
-an explicit reservation of a memory range. Remove the
-lmb_init_and_reserve_range() function.
+Remove a couple of superfluous LMB stub functions, and instead put a
+check for calling the lmb_reserve() function.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
-Changes since rfc: None
+Changes since rfc: New patch
 
- boot/bootm.c  | 15 +--------------
- include/lmb.h |  3 ---
- lib/lmb.c     |  8 --------
- 3 files changed, 1 insertion(+), 25 deletions(-)
+ boot/bootm.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index 5ce84b73b5..d44fd2ed87 100644
+index d44fd2ed87..2689f36977 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -239,18 +239,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+@@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
  	return 0;
  }
  
--#if CONFIG_IS_ENABLED(LMB)
--static void boot_start_lmb(void)
--{
--	phys_addr_t	mem_start;
--	phys_size_t	mem_size;
+-#if !CONFIG_IS_ENABLED(LMB)
+-#define lmb_reserve(base, size)
+-static inline void boot_start_lmb(void) { }
+-#endif
 -
--	mem_start = env_get_bootm_low();
--	mem_size = env_get_bootm_size();
--
--	lmb_init_and_reserve_range(mem_start, mem_size, NULL);
--}
--#else
-+#if !CONFIG_IS_ENABLED(LMB)
- #define lmb_reserve(base, size)
- static inline void boot_start_lmb(void) { }
- #endif
-@@ -260,8 +249,6 @@ static int bootm_start(void)
+ static int bootm_start(void)
+ {
  	memset((void *)&images, 0, sizeof(images));
- 	images.verify = env_get_yesno("verify");
- 
--	boot_start_lmb();
--
- 	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_START, "bootm_start");
- 	images.state = BOOTM_STATE_START;
- 
-diff --git a/include/lmb.h b/include/lmb.h
-index 50977e6561..2d8f9a6b71 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -37,9 +37,6 @@ struct lmb_region {
- 	enum lmb_flags flags;
- };
- 
--void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
--				void *fdt_blob);
--
- /**
-  * lmb_add_memory() - Add memory range for LMB allocations
-  *
-diff --git a/lib/lmb.c b/lib/lmb.c
-index ce1b0204c9..5afdfc32fb 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -292,14 +292,6 @@ __weak void lmb_add_memory(void)
+@@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 		images->os.end = relocated_addr + image_size;
  	}
+ 
+-	lmb_reserve(images->os.load, (load_end - images->os.load));
++	if (CONFIG_IS_ENABLED(LMB))
++		lmb_reserve(images->os.load, (load_end - images->os.load));
++
+ 	return 0;
  }
  
--/* Initialize the struct, add memory and call arch/board reserve functions */
--void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
--				void *fdt_blob)
--{
--	lmb_add(base, size);
--	lmb_reserve_common(fdt_blob);
--}
--
- static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
- 				   enum lmb_flags flags)
- {
 -- 
 2.34.1
 
