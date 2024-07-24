@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD791C3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:07:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 647EAC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 06:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8482A888F8;
-	Wed, 24 Jul 2024 08:04:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2D25888BE;
+	Wed, 24 Jul 2024 08:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 787FD888F5; Wed, 24 Jul 2024 08:04:16 +0200 (CEST)
+ id 47CD88883D; Wed, 24 Jul 2024 08:04:20 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6D42188805
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 446F8888AB
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5F617106F;
- Tue, 23 Jul 2024 23:04:36 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3AD89106F;
+ Tue, 23 Jul 2024 23:04:31 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 48BFD3F766;
- Tue, 23 Jul 2024 23:04:06 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 23B163F766;
+ Tue, 23 Jul 2024 23:04:00 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -39,10 +39,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 17/40] lmb: introduce a function to add memory to the lmb
- memory map
-Date: Wed, 24 Jul 2024 11:32:01 +0530
-Message-Id: <20240724060224.3071065-18-sughosh.ganu@linaro.org>
+Subject: [PATCH 16/40] lmb: allow lmb module to be used in SPL
+Date: Wed, 24 Jul 2024 11:32:00 +0530
+Message-Id: <20240724060224.3071065-17-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
@@ -64,100 +63,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a function lmb_add_memory() to add available memory to the
-LMB memory map. Call this function during board init once the LMB data
-structures have been initialised.
+With the introduction of separate config symbols for the SPL phase of
+U-Boot, the condition checks need to be tweaked so that platforms that
+enable the LMB module in SPL are also able to call the LMB API's. Use
+the appropriate condition checks to achieve this.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since rfc: None
+Changes since rfc:
+* Replace conditional compilation of lmb code to an if
+  (CONFIG_IS_ENABLED()) in store_block() and tftp_init_load_addr().
 
- include/lmb.h | 12 ++++++++++++
- lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 54 insertions(+)
+ board/xilinx/common/board.c |  2 +-
+ boot/bootm.c                |  4 ++--
+ boot/image-board.c          |  2 +-
+ fs/fs.c                     |  4 ++--
+ lib/Makefile                |  2 +-
+ net/tftp.c                  | 40 ++++++++++++++++++-------------------
+ net/wget.c                  |  4 ++--
+ 7 files changed, 29 insertions(+), 29 deletions(-)
 
-diff --git a/include/lmb.h b/include/lmb.h
-index a308796d58..77e2a23c0d 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -40,6 +40,18 @@ struct lmb_region {
- void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
- void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
- 				void *fdt_blob);
-+
-+/**
-+ * lmb_add_memory() - Add memory range for LMB allocations
-+ *
-+ * Add the entire available memory range to the pool of memory that
-+ * can be used by the LMB module for allocations.
-+ *
-+ * Return: None
-+ *
-+ */
-+void lmb_add_memory(void);
-+
- long lmb_add(phys_addr_t base, phys_size_t size);
- long lmb_reserve(phys_addr_t base, phys_size_t size);
- /**
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 88352e9a25..db0874371a 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -239,6 +239,46 @@ void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
- 	lmb_reserve_common(fdt_blob);
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 4056884400..f04c92a70f 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -665,7 +665,7 @@ int embedded_dtb_select(void)
  }
+ #endif
  
-+/**
-+ * lmb_add_memory() - Add memory range for LMB allocations
-+ *
-+ * Add the entire available memory range to the pool of memory that
-+ * can be used by the LMB module for allocations.
-+ *
-+ * This can be overridden for specific boards/architectures.
-+ *
-+ * Return: None
-+ *
-+ */
-+__weak void lmb_add_memory(void)
-+{
-+	int i;
-+	phys_size_t size;
-+	phys_addr_t rgn_top;
-+	u64 ram_top = gd->ram_top;
-+	struct bd_info *bd = gd->bd;
-+
-+	/* Assume a 4GB ram_top if not defined */
-+	if (!ram_top)
-+		ram_top = 0x100000000ULL;
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		size = bd->bi_dram[i].size;
-+		if (size) {
-+			if (bd->bi_dram[i].start > ram_top)
-+				continue;
-+
-+			rgn_top = bd->bi_dram[i].start +
-+				bd->bi_dram[i].size;
-+
-+			if (rgn_top > ram_top)
-+				size -= rgn_top - ram_top;
-+
-+			lmb_add(bd->bi_dram[i].start, size);
-+		}
-+	}
-+}
-+
- /* Initialize the struct, add memory and call arch/board reserve functions */
- void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
- 				void *fdt_blob)
-@@ -728,5 +768,7 @@ int lmb_mem_regions_init(void)
- 		return -1;
- 	}
+-#if defined(CONFIG_LMB)
++#if IS_ENABLED(CONFIG_LMB)
  
-+	lmb_add_memory();
-+
+ #ifndef MMU_SECTION_SIZE
+ #define MMU_SECTION_SIZE        (1 * 1024 * 1024)
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 7b3fe551de..5ce84b73b5 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -239,7 +239,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
  	return 0;
  }
+ 
+-#ifdef CONFIG_LMB
++#if CONFIG_IS_ENABLED(LMB)
+ static void boot_start_lmb(void)
+ {
+ 	phys_addr_t	mem_start;
+@@ -1048,7 +1048,7 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 		}
+ 	}
+ #endif
+-#if CONFIG_IS_ENABLED(OF_LIBFDT) && defined(CONFIG_LMB)
++#if CONFIG_IS_ENABLED(OF_LIBFDT) && CONFIG_IS_ENABLED(LMB)
+ 	if (!ret && (states & BOOTM_STATE_FDT)) {
+ 		boot_fdt_add_mem_rsv_regions(images->ft_addr);
+ 		ret = boot_relocate_fdt(&images->ft_addr, &images->ft_len);
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 1f8c1ac69f..99ee7968ba 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -883,7 +883,7 @@ int image_setup_linux(struct bootm_headers *images)
+ 	int ret;
+ 
+ 	/* This function cannot be called without lmb support */
+-	if (!IS_ENABLED(CONFIG_LMB))
++	if (!CONFIG_IS_ENABLED(LMB))
+ 		return -EFAULT;
+ 	if (CONFIG_IS_ENABLED(OF_LIBFDT))
+ 		boot_fdt_add_mem_rsv_regions(*of_flat_tree);
+diff --git a/fs/fs.c b/fs/fs.c
+index 2c835eef86..3fb00590be 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -526,7 +526,7 @@ int fs_size(const char *filename, loff_t *size)
+ 	return ret;
+ }
+ 
+-#ifdef CONFIG_LMB
++#if CONFIG_IS_ENABLED(LMB)
+ /* Check if a file may be read to the given address */
+ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
+ 			     loff_t len, struct fstype_info *info)
+@@ -567,7 +567,7 @@ static int _fs_read(const char *filename, ulong addr, loff_t offset, loff_t len,
+ 	void *buf;
+ 	int ret;
+ 
+-#ifdef CONFIG_LMB
++#if CONFIG_IS_ENABLED(LMB)
+ 	if (do_lmb_check) {
+ 		ret = fs_read_lmb_check(filename, addr, offset, len, info);
+ 		if (ret)
+diff --git a/lib/Makefile b/lib/Makefile
+index 81b503ab52..398c11726e 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -118,7 +118,7 @@ obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
+ obj-y += hang.o
+ obj-y += linux_compat.o
+ obj-y += linux_string.o
+-obj-$(CONFIG_LMB) += lmb.o
++obj-$(CONFIG_$(SPL_)LMB) += lmb.o
+ obj-y += membuff.o
+ obj-$(CONFIG_REGEX) += slre.o
+ obj-y += string.o
+diff --git a/net/tftp.c b/net/tftp.c
+index a199f4a6df..f841f6b701 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -82,9 +82,7 @@ static ulong	tftp_block_wrap;
+ static ulong	tftp_block_wrap_offset;
+ static int	tftp_state;
+ static ulong	tftp_load_addr;
+-#ifdef CONFIG_LMB
+ static ulong	tftp_load_size;
+-#endif
+ #ifdef CONFIG_TFTP_TSIZE
+ /* The file size reported by the server */
+ static int	tftp_tsize;
+@@ -160,19 +158,20 @@ static inline int store_block(int block, uchar *src, unsigned int len)
+ 	ulong store_addr = tftp_load_addr + offset;
+ 	void *ptr;
+ 
+-#ifdef CONFIG_LMB
+-	ulong end_addr = tftp_load_addr + tftp_load_size;
++	if (CONFIG_IS_ENABLED(LMB)) {
++		ulong end_addr = tftp_load_addr + tftp_load_size;
+ 
+-	if (!end_addr)
+-		end_addr = ULONG_MAX;
++		if (!end_addr)
++			end_addr = ULONG_MAX;
+ 
+-	if (store_addr < tftp_load_addr ||
+-	    store_addr + len > end_addr) {
+-		puts("\nTFTP error: ");
+-		puts("trying to overwrite reserved memory...\n");
+-		return -1;
++		if (store_addr < tftp_load_addr ||
++		    store_addr + len > end_addr) {
++			puts("\nTFTP error: ");
++			puts("trying to overwrite reserved memory...\n");
++			return -1;
++		}
+ 	}
+-#endif
++
+ 	ptr = map_sysmem(store_addr, len);
+ 	memcpy(ptr, src, len);
+ 	unmap_sysmem(ptr);
+@@ -709,17 +708,18 @@ static void tftp_timeout_handler(void)
+ /* Initialize tftp_load_addr and tftp_load_size from image_load_addr and lmb */
+ static int tftp_init_load_addr(void)
+ {
+-#ifdef CONFIG_LMB
+-	phys_size_t max_size;
++	if (CONFIG_IS_ENABLED(LMB)) {
++		phys_size_t max_size;
+ 
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
++		lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+ 
+-	max_size = lmb_get_free_size(image_load_addr);
+-	if (!max_size)
+-		return -1;
++		max_size = lmb_get_free_size(image_load_addr);
++		if (!max_size)
++			return -1;
++
++		tftp_load_size = max_size;
++	}
+ 
+-	tftp_load_size = max_size;
+-#endif
+ 	tftp_load_addr = image_load_addr;
+ 	return 0;
+ }
+diff --git a/net/wget.c b/net/wget.c
+index 7cf809a8ef..b8ea43e7f0 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -98,7 +98,7 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+ 	ulong newsize = offset + len;
+ 	uchar *ptr;
+ 
+-	if (IS_ENABLED(CONFIG_LMB)) {
++	if (CONFIG_IS_ENABLED(LMB)) {
+ 		ulong end_addr = image_load_addr + wget_load_size;
+ 
+ 		if (!end_addr)
+@@ -496,7 +496,7 @@ void wget_start(void)
+ 	debug_cond(DEBUG_WGET,
+ 		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+ 
+-	if (IS_ENABLED(CONFIG_LMB)) {
++	if (CONFIG_IS_ENABLED(LMB)) {
+ 		if (wget_init_load_size()) {
+ 			printf("\nwget error: ");
+ 			printf("trying to overwrite reserved memory...\n");
 -- 
 2.34.1
 
