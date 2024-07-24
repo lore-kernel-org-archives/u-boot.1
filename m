@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F18FC3DA61
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE27CC3DA63
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 15:14:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 189A788A29;
-	Wed, 24 Jul 2024 17:10:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 893268897D;
+	Wed, 24 Jul 2024 17:10:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FcL6Npsf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mUpakHgx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50E1D8896B; Wed, 24 Jul 2024 17:10:06 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 493D688A30; Wed, 24 Jul 2024 17:10:08 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AB528896B
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:10:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2899C889DA
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:10:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3993f5d75bbso21763915ab.3
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:10:04 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-819c1f53617so202895739f.2
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:10:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721833803; x=1722438603; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721833805; x=1722438605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yl7b2neWcp3ZKSpPxnfjX/88lmyO4eG3V0NDr5W0e58=;
- b=FcL6NpsfMW/6PVHYnRhkDSVbZevKIcEDVSDx4bOM3hTP64jz+8nQwMYF/lT8NAKAPy
- by20f4RFWy3CvSMXBoeFQv8rLYEJ2haFQar/RGXrDSrsvIqXoWPFv82yHJEi7atiW905
- ytBYHcPMHo2oTsw2h5GS/pJfK8dDGJXWXX+jw=
+ bh=dx98GpL7OtOQnVwbZSDT5Sr4CK0z+gnPKMcHmQUVQLs=;
+ b=mUpakHgxGFt+Qah+iA9Mq/XtUlZBPl+FoW3vDvV4ffTVYijfsv3RJANDgpKgL+QPw5
+ vokEM75XWTmHUS+s4Hka7X7kvnXI7N2+XDk7j/wHKNdtyiy0i3mmIMU9oeNoVRkeWHYI
+ BMiuJXNOLOfaN+Y4hhwXBUAKcG3ZukvgVzx2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721833803; x=1722438603;
+ d=1e100.net; s=20230601; t=1721833805; x=1722438605;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yl7b2neWcp3ZKSpPxnfjX/88lmyO4eG3V0NDr5W0e58=;
- b=n2wzCvaQtJq+/ODvjv+fcgtHuLGwhhqjgdR8VWdUCOlKy5WdpcRvlsqL2vFatCD4Du
- DkgfP6i/DO9Eer9u8SPfXwT1cowBI+QTstAFD+mAXL52wxqqOC1xW5wl1meTNBPXGgih
- y+m3HoOShGXsHC+M1bdA90VBK+LFYTPLuPorDJR4I0frGwBHEAzQUMa3uiIPYNkt16A+
- Gj3wkVlIH39Nrn/V51/lQds2N2Fo1/dE4ia5rZiG4znGPIbGOc9tmPoqFDgGlTn/Xe85
- hyu4ou1RXOUNCe0d0XRlpe1P05T9fnhSYRBubAOJWL6Ch4EE7Qjgt5G/RTON3UthuYmx
- GhAA==
-X-Gm-Message-State: AOJu0YwjMJDiuNAAgrmH8w2VHHGNA2xR9/5fkDD6zldeI/Xg+2vFIYFa
- j5K0uyZ6a0dBtXUDfklPwPqxNEb1oqoVyMxp7OP7WXWKP0Ol5G6SeW9N5oxZ6o1PVtMTgK+XHPE
+ bh=dx98GpL7OtOQnVwbZSDT5Sr4CK0z+gnPKMcHmQUVQLs=;
+ b=DJzlA2ksYUkZAxaSJHX8NK6e1KWQW0tOSUhjyAfD5bAI01yZp5H6heyvXkq4CvjAhq
+ KCcypXSnV6ql7CfDNPchoSZdPkuWxr91Ei3O6ds2q9MNrNAk1iLCqaxtdKV6zW+I4KH9
+ tlLh4+ndCa2hD7SE/pI7i9sO4kKvr7OaHF8GAXgGsyaTSKxg2A4ggvvQL+FVwj5Ex81l
+ obT2f2eqetFahp492cEElLHkTZxI3F1YXn2g8ifPw7gitS3/lFrb86RvDXrxL6U16elp
+ hwtnMB32NXlFPzYXWw0TlaghGutajtxU9XYYPh3cJKJP9kgb+OnP5T959H7XZNNdhoME
+ cKqQ==
+X-Gm-Message-State: AOJu0YxzkoKYeYo7ihbN03Ztd/FWsy0BPJwrUB6S7mtYvglTDJPl9UGJ
+ AAssskw5lUSyDCA7PDYvmB13JA5nsBdKkfZtiofljFwGWt8G3ltharQ5mTZW3Z/D03Vy+p+pgrw
  =
-X-Google-Smtp-Source: AGHT+IEBabBv7wWQ3K7rKtPV5SIHaweY2fgYl6++HjVduWhndnF9/i8bra+3bBITaj2r7ReHEeIaSQ==
-X-Received: by 2002:a05:6e02:1aad:b0:380:fd76:3d9e with SMTP id
- e9e14a558f8ab-398e6b9eea3mr178797535ab.22.1721833802843; 
- Wed, 24 Jul 2024 08:10:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGyxSI6cUcCxkhAJsaDL9ICcJE3N85OseofsD6pcaK9bk1vOFNkRanI/SO5/CSiyzUqPOc4Ug==
+X-Received: by 2002:a05:6e02:17ce:b0:397:2dcd:80e5 with SMTP id
+ e9e14a558f8ab-39a194d8668mr30164495ab.27.1721833804746; 
+ Wed, 24 Jul 2024 08:10:04 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.10.02
+ e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.10.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:10:02 -0700 (PDT)
+ Wed, 24 Jul 2024 08:10:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH 29/35] global_data: Put phys_addr fields near the top
-Date: Wed, 24 Jul 2024 09:09:16 -0600
-Message-Id: <20240724150922.2343249-30-sjg@chromium.org>
+Subject: [PATCH 31/35] global_data: Move pointer members together
+Date: Wed, 24 Jul 2024 09:09:18 -0600
+Message-Id: <20240724150922.2343249-32-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240724150922.2343249-1-sjg@chromium.org>
 References: <20240724150922.2343249-1-sjg@chromium.org>
@@ -90,55 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Put these fields near the top and together, since they have the same
+Collect the pointer members near the top of global_data to help with
 alignment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/asm-generic/global_data.h | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ include/asm-generic/global_data.h | 38 +++++++++++++++----------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
 
 diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 368b19ffb60..82c74dee161 100644
+index 005c79c6a7d..f6d1ee1d57a 100644
 --- a/include/asm-generic/global_data.h
 +++ b/include/asm-generic/global_data.h
-@@ -48,6 +48,14 @@ struct global_data {
+@@ -42,6 +42,25 @@ struct global_data {
+ 	 * @bd: board information
  	 */
- 	struct board_f *boardf;
- #endif
+ 	struct bd_info *bd;
 +	/**
-+	 * @ram_size: RAM size in bytes
++	 * @new_gd: pointer to relocated global data
 +	 */
-+	phys_size_t ram_size;
++	struct global_data *new_gd;
 +	/**
-+	 * @ram_top: top address of RAM used by U-Boot
++	 * @fdt_blob: U-Boot's own device tree, NULL if none
 +	 */
-+	phys_addr_t ram_top;
++	const void *fdt_blob;
++	/**
++	 * @jt: jump table
++	 *
++	 * The jump table contains pointers to exported functions. A pointer to
++	 * the jump table is passed to standalone applications.
++	 */
++	struct jt_funcs *jt;
++	/**
++	 * @cur_serial_dev: current serial device
++	 */
++	struct udevice *cur_serial_dev;
+ #ifndef CONFIG_SPL_BUILD
  	/**
- 	 * @flags: global data flags
- 	 *
-@@ -101,10 +109,6 @@ struct global_data {
- 	 * @ram_base: base address of RAM used by U-Boot
+ 	 * @boardf: information only used before relocation
+@@ -130,33 +149,14 @@ struct global_data {
+ 	 * @env_load_prio: priority of the loaded environment
  	 */
- 	unsigned long ram_base;
+ 	char env_load_prio;
 -	/**
--	 * @ram_top: top address of RAM used by U-Boot
+-	 * @new_gd: pointer to relocated global data
 -	 */
--	phys_addr_t ram_top;
+-	struct global_data *new_gd;
+-	/**
+-	 * @fdt_blob: U-Boot's own device tree, NULL if none
+-	 */
+-	const void *fdt_blob;
  	/**
- 	 * @relocaddr: start address of U-Boot in RAM
- 	 *
-@@ -114,10 +118,6 @@ struct global_data {
- 	 * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
+ 	 * @fdt_src: Source of FDT
  	 */
- 	unsigned long relocaddr;
+ 	enum fdt_source_t fdt_src;
 -	/**
--	 * @ram_size: RAM size in bytes
+-	 * @jt: jump table
+-	 *
+-	 * The jump table contains pointers to exported functions. A pointer to
+-	 * the jump table is passed to standalone applications.
 -	 */
--	phys_size_t ram_size;
+-	struct jt_funcs *jt;
  	/**
- 	 * @irq_sp: IRQ stack pointer
+ 	 * @env_buf: buffer for env_get() before reloc
+ 	 */
+ 	char env_buf[32];
+-	/**
+-	 * @cur_serial_dev: current serial device
+-	 */
+-	struct udevice *cur_serial_dev;
+ 	/**
+ 	 * @arch: architecture-specific data
  	 */
 -- 
 2.34.1
