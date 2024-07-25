@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22214C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 16:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5700DC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 16:32:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30E28879AF;
-	Thu, 25 Jul 2024 18:25:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D0CAE879AF;
+	Thu, 25 Jul 2024 18:31:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d4FVx+/5";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="lBHv9rsu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06B8887C86; Thu, 25 Jul 2024 18:25:38 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37420879AF; Thu, 25 Jul 2024 18:31:58 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D293B87876
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 18:25:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17E1486463
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 18:31:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5d5bb03fe42so22856eaf.3
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 09:25:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721924734; x=1722529534; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Y52DJLxoR0hdWhVFwnOyiwe22qaA3uwhzlu0HpqZH48=;
- b=d4FVx+/5Y9fXUr50IIONKkm3PdemfyF/sKJFWH8TaGky+mAxq/XLhI99N+poxxIVWX
- 4DhX71YxxQ1GkUsofeZTiyQ6i7CPjJv02nMpDvbkYGDazW/4DV+g99KhLA3rKmKHA9nw
- zaE8lvN/4elWufbwxSISqBBhJAOkeKN92B1Ic=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721924734; x=1722529534;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y52DJLxoR0hdWhVFwnOyiwe22qaA3uwhzlu0HpqZH48=;
- b=vlPmc8kDhNgQXzbAb4JssUglKZR1aNilvqiPy+6yRPQ94CDcAEl2Sl8Ytvcm64uy9a
- NuJmCuDv4bwscCSDpApWuIDFfPILlFEZ4pfWx26JTYNwRaOoUN7WcYh25APUa/t1m8Wd
- UUnrmjOv1OYABZ+CDCwPqIM1RacbnhniKut9JtePfnDxrYWMbLDcF1j1sgTpyDxaxOLc
- mB/JZoCe+j5rWnocYGiRd7kOIHV6ksre/M2TSxefMwRIO9C1ilDlskX+tVSh7EWDERlf
- +DVWNm8BGfN8raViAamxcFoCAK3mXeD4wz1jiDxiUe8He6TTwwduvEbPcpyDa0rip/9d
- eh4g==
-X-Gm-Message-State: AOJu0YwQKolcrVjgFpo2fa0TEttmIGevohyFRsONJLRlMWD7yeOrgUpD
- xhGGCN5QzN4MvD6FbAu0074Wwk9NkSdCGqoz4jMRW7OxzxfSBSL+mDlgBUCq9qk=
-X-Google-Smtp-Source: AGHT+IEr2Pp5ZE4Cy8koJw9gCnyml+Xh/kD0bdU/9/ESTGZzUFv5TWNQSWoSNxuCRAwIeDDKPZFbHA==
-X-Received: by 2002:a05:6820:308f:b0:5c4:2c2a:2358 with SMTP id
- 006d021491bc7-5d5adcf4ac4mr4213897eaf.6.1721924734524; 
- Thu, 25 Jul 2024 09:25:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
- [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d5b36943b4sm189865eaf.41.2024.07.25.09.25.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 09:25:33 -0700 (PDT)
-Date: Thu, 25 Jul 2024 10:25:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v5 16/20] configs: add qemu_arm64_lwip_defconfig
-Message-ID: <20240725162531.GX989285@bill-the-cat>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <dcb78f4958be3ad322168ccac6214991af44c884.1721910373.git.jerome.forissier@linaro.org>
- <20240725155806.GV989285@bill-the-cat>
- <5d3859cb-f1c5-4f43-9223-ba1ce021937f@linaro.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1721925114; x=1722529914; i=xypron.glpk@gmx.de;
+ bh=Ob2UHPMrNOtNH4LlkCjciskiK80Q5vQHV3aEOZWSHVA=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=lBHv9rsu/qHcO9lqBvKdxSGb2TInHFQmj+VX6HThB2jHpXXihTm9r2sbi5wc5FPd
+ 4826LEVgODbrrSAJL6c30kDDOqNmRJfsDvQ90+vpvYJn2M1W2/daKFuuCHLdYzqsS
+ mJGmJ/ZlGE0LSQCcis/XSN+qWAWO2dsBEQwfII45Zt8kITh1aPIhkYg1AHw1OYZ+f
+ 0fJHS4JQkltlpGEGmu9VpofTg1sHjpWj2ND7OP4HGVrdzIyKMb3Jua/lAifCQjxhs
+ zNJfVoIfKtOOT/z2Y+aJnY8+vrjZGpwqyibftyWD+3WPcycpCYSys2r55gZictgH6
+ r3XqGyi0peWT8X/3sQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mjj8D-1rr2mY3wWR-00nkyn; Thu, 25
+ Jul 2024 18:31:54 +0200
+Message-ID: <e4e7e085-aacc-4c2e-99dc-924a1ef22c46@gmx.de>
+Date: Thu, 25 Jul 2024 18:31:53 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="55L7ZuZccBWQKapz"
-Content-Disposition: inline
-In-Reply-To: <5d3859cb-f1c5-4f43-9223-ba1ce021937f@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/6] efi: Show the location of the bounce buffer
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240725135629.3505072-1-sjg@chromium.org>
+ <20240725135629.3505072-7-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240725135629.3505072-7-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+EuSaHnYCJG13TbFkExUQEs3oUO0QX9ea+1bH7eezB+neyCia3A
+ IMGcNTRZSj6HT+Spv/nI6jgcg27yLT+0iRt2KkWY/yKPLy+EfKqEg4HdkRcEPSkhZe1ruVy
+ 0QoJRy1KvwQ8YT6Av9NMSWDUasnquzk62S9dlK+wq88OEYL09X9xhpPY+VP5yaRvmaMlqJC
+ ka93024Czka21hiqCQiiA==
+UI-OutboundReport: notjunk:1;M01:P0:N/c4c6VlzC4=;E3o3MyY6t3mMqxnI9Ebc3aRxMec
+ g6r0zmsPS0+OWhqqtU2n83ibr1f84k7vuQio7JeBpGdmeT7kIrrWL+NNsfsu9xizRTITOKfmS
+ 7y7qY+SUE9mI4asBsa/S1XJ6wp/JZ/Ppv7Lns+8cA0p+qpH6VrftipGMUE5EfHPRrw1+9jJ4B
+ 5AnNZmdqgN/R0LXSJgam3wdWq5K7IWbxh4nR8j7C/d2W3g1eksClQsYIhQc/VISWS6NseQgQV
+ BILYmEIsVf10tofVdqY3xZFkYQaxR6P/2O3AYn15alFTnm74NZ+Rwp1Ry+L4114Jxk2HubNql
+ /daX8obbvuk2unuPR9EuyrSiGVkOUPSkkqS0inZoUbJaDd2wtGKZC6TWPoyN+KA7bqlIrwCEl
+ +T/ECC6QvwrQ43+PLhwll05kR/ZoUwwjGWMNPTY05HzlehBtf3oq8uBDE4Zv8Ka/V1yx7kBPI
+ 5rSUxbm/VhspH3wSqK/dcn6IG62za9paLtbv5Pjybr7zRR+zOZ1Hl2D4UllTjp4q5KX/qM/cS
+ 4c3vKGFUl7ZuRwUOO4akfUpiF/8KhT7lr8KH96o34kHgKEKdtsw/54VCUdrX2/AW9tjr9HGGT
+ 06YLrDhBwagPXrHBi4tgMWPXPU2wY7QKg4mUeYmCKZ4mIUVM79UlxgTBpPhMmXdam04ADW7jb
+ dge7zPnZ10gDBLgI/4AI1Ov9FetvZJf0WUzzKnjnGVFvkNfy7cU7N4hQUBQNdu9luggkjf5g+
+ e6LZ3oZHajg8izQ06p4Km39BJBHfga6M3I4cySHz3u2xCJJXF8oZkwslAw4n8er6hcJxptEjv
+ G5ZTl7N+NPJZAamOFNoHXk8g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,70 +93,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 25.07.24 15:56, Simon Glass wrote:
+> The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago. It is not
+> clear whether it is still needed, but 24 boards (lx2160ardb_tfa_stmm,
+> lx2162aqds_tfa_SECURE_BOOT and the like) use it.
+>
+> This feature uses EFI page allocation to create a 64MB buffer 'in space'
+> without any knowledge of where boards intend to load their images. This
+> may result in image corruption or other problems.
 
---55L7ZuZccBWQKapz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is what Sughosh's LMB series in addressing.
 
-On Thu, Jul 25, 2024 at 06:10:48PM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 7/25/24 17:58, Tom Rini wrote:
-> > On Thu, Jul 25, 2024 at 02:57:37PM +0200, Jerome Forissier wrote:
-> >=20
-> >> Add qemu_arm64_lwip_defconfig which #include's qemu_arm64_defconfig and
-> >> selects NET_LWIP instead of NET. This config has all the supported net
-> >> commands enabled.
-> >>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> ---
-> >>  configs/qemu_arm64_lwip_defconfig | 5 +++++
-> >>  1 file changed, 5 insertions(+)
-> >>  create mode 100644 configs/qemu_arm64_lwip_defconfig
-> >>
-> >> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lw=
-ip_defconfig
-> >> new file mode 100644
-> >> index 00000000000..1afef04d7a0
-> >> --- /dev/null
-> >> +++ b/configs/qemu_arm64_lwip_defconfig
-> >> @@ -0,0 +1,5 @@
-> >> +#include <configs/qemu_arm64_defconfig>
-> >> +CONFIG_NET_LWIP=3Dy
-> >> +CONFIG_CMD_DNS=3Dy
-> >> +CONFIG_CMD_WGET=3Dy
-> >> +CONFIG_EFI_HTTP_BOOT=3Dy
-> >=20
-> > This doesn't work,
->=20
-> How so? I've used "make qemu_arm64_lwip_defconfig" hundreds of time to bu=
-ild for
-> arm64 QEMU :o
+With CONFIG_SYS_MALLOC_LEN=3D0x202000 for lx2160ardb_tfa_stmm we cannot
+move the buffer to malloc(). I don't understand why
+CONFIG_SYS_MALLOC_LEN is so small.
 
-Yes, but buildman (and CI) are in a chicken-and-egg situation without a
-few more details in the new defconfig, sadly.
+>
+> For example, if the feature is enabled on qemu_arm64 it puts the EFI
+> bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
+> 1088MB. The kernel is probably smaller than 27MB but the buffer does
+> overlap the ramdisk.
+>
+> The solution is probably to use BOUNCE_BUFFER instead, with the EFI
+> version being dropped. For now, show the address of the EFI bounce
+> buffer so people have a better chance to detect the problem.
+>
+> Note: I avoided converting this #ifdef to use IS_ENABLED() since I hope
+> that the feature may be removed.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>   lib/efi_loader/efi_bootbin.c | 8 ++++++++
+>   1 file changed, 8 insertions(+)
+>
+> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> index 07c8fca68cc..53e5e429d2e 100644
+> --- a/lib/efi_loader/efi_bootbin.c
+> +++ b/lib/efi_loader/efi_bootbin.c
+> @@ -211,6 +211,14 @@ efi_status_t efi_binary_run(void *image, size_t siz=
+e, void *fdt)
+>   		return -1;
+>   	}
+>
+> +#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> +	/*
+> +	 * Add a warning about this buffer, since it may conflict with other
+> +	 * things
+> +	 */
+> +	printf("EFI bounce buffer at %p\n", efi_bounce_buffer);
+> +#endif
 
---=20
-Tom
+Does this sound like a warning to you?
 
---55L7ZuZccBWQKapz
-Content-Type: application/pgp-signature; name="signature.asc"
+There is nothing that a user can reasonably do when seeing this message
+while the board is booting via one of the boot methods. So we should not
+write it.
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaifHsACgkQFHw5/5Y0
-tyxYhAv8DtnAli7AEl3CgWLTX9rw4TQy2LJWgXsMlTlLsQz5tGCamHjpQIJVZ8uX
-Ew7oSSnqzNujDz06cafL2jBz5Rv+pwmkbZEdOScNlCu/2GC3SFzBVSG5Q+v/k9+p
-IZrd4j3yBfI0TJBCxE4xbHxuA5QLj4xcJgXZut7aU3BqGVr7d23REvtk9IvgFT/F
-xHmUbwX+a0P5NG+6zaOFd7YbHXHj7ugevdf6loVhW8Wq8cjnMNyThrNMd5Dy8EuZ
-7tysaV5rnlC/kyRtt7CzuEQT0BBB+ahtpDbE1AXr6Du5HoLkP2VSaIn3aQcRnNrU
-F88ew0fg+ZCRvd6BCSmhiyYH3ijX9Uvwx5JgBho87SgmHU9otCU7J6LVM4WEoQhL
-2Ws1UFyWe6er74R0AZ6ajn1CilpKGtNMExyUxiPeipYytfrz5KJbwPBn+/9YUxyX
-RBbv+ZSZA0nRZRLIWwy6VIQwZUM+P4z6rbcOc5mOzNaQvkpzUbDNGDvoFW9NZlZi
-y/oFZEDa
-=aRVi
------END PGP SIGNATURE-----
+Heinrich
 
---55L7ZuZccBWQKapz--
+
+> +
+>   	ret =3D efi_install_fdt(fdt);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+
