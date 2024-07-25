@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A26BAC3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 12:59:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E2DC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 12:59:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F88B87C86;
-	Thu, 25 Jul 2024 14:59:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1ECBB88263;
+	Thu, 25 Jul 2024 14:59:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NsN8ZHxW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ie7zh1JW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC69E87C86; Thu, 25 Jul 2024 14:59:02 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id C33E588263; Thu, 25 Jul 2024 14:59:03 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8503787FFB
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 14:59:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94BAF87919
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 14:59:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2ef2c56da6cso1323151fa.1
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 05:59:00 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4272738eb9eso6913655e9.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 05:59:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721912340; x=1722517140; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721912341; x=1722517141; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lGWTOXqNdRIperYSS8DoFfsaCh1i2R1ngqFOlmQG2xQ=;
- b=NsN8ZHxWrmbvsuMSdcm5VbWa1guocNPr4TmknNewO2s2q6oy4r4i+aTyem3/y6z0AU
- HfUEkY9I/IiTZlgTRwxvuHLYZsYEd7wRkSYb/N4iizsOzkhjasaW8uYjAD2yUT/TC3ou
- kwRYHftQ62UnCGh5iiaM1zQaIWfK0TLXA8FvUmGT4WZMMas6rn4mgw/WWWPtR3vfXwU6
- L04XPiiOAhdlkyRA3F2uGoqVW0gyp5+IDboDmcjsFbJrsPwdcSzfkKACXFnPvdFBgDvW
- 5RpsX3+OiS4jhyhSudFQ+/A4HPxlGmReqSRz8y6MZEseU4haJ6p7aTPRhe0NC0jH7rLD
- og5A==
+ bh=5ObdJLDoM2TCUQzyM64NPNPwq1f4gb1V8LUAS/4Ap9I=;
+ b=ie7zh1JWgbRm9wqIKizfu+i9Sr7ELS07LNDOxRpC/41hqsriXKgzFRXMo0285Dde0e
+ Gn5SD0Cncq6T4+pC2BmHCkSlFrx2/S+DLYtyxZGtxFbHpOGZuLBtzs6aQS8VYgg9QasE
+ xUQ8NkTNofD1+NemeCqPBPViTnx3Ep4Ykzg3x0eiUckaq+2X01hpSO/FF1uJZN6UkQXL
+ NE9SdijZC5n2qy1h2p6Zefz5qodYQDI5Jd8Z4vhg+Q6lmng3XNSvs2nXZAU+C77h8pA1
+ suWpaZo/HxdlCWFtYX1fjzrzELz+AE9dz+3L6z1wIzmbkzHbrKY8vliyrGbTQ/xg9tmy
+ dsRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721912340; x=1722517140;
+ d=1e100.net; s=20230601; t=1721912341; x=1722517141;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lGWTOXqNdRIperYSS8DoFfsaCh1i2R1ngqFOlmQG2xQ=;
- b=Fd2J2KZqJvlWBacWQqmN53fyM36Yb/d4bZyj3rWhXrI5FGb0W2lHGMmZF781zxB45z
- Ww+hBJWghQPd14ULF7l11U3lOl2EhYBMlAWjnozcVQbQuJBBXkudmqRGCWcqORschvbR
- VHf7N2Xh2PzGSqjntW935Zy/wtVtfzytxFbao+PkQ0jc4xLX+YwAk46lvQIGsddiDvKB
- A8tWhcYjj+m7bb/SFlwdMhUcqinApRk8vOFcPvbWeppx/GoRCePp8nly8zkoAOwhexqB
- jwB8SSSyRO8l0mB+3d+EvLred0cM7rrN/ez2mJ5yzyqb8pv4vnCFWAu6N4uAvrRSI3G8
- DJUg==
-X-Gm-Message-State: AOJu0YwpXHJnA05Rs6MKKi6W+daQCqqYC3g0c9lxc3VD1bjuEhh48+Gv
- 2URDsNfiCKkP0bb+UAgfC6klmafwDQSGrjoosxuVrfrgWV5V8u4RRE0OF1Vb58WLgcMQ4lUb6JZ
- cauK8/A==
-X-Google-Smtp-Source: AGHT+IHl+mT6+gO19PIDBgxTQAPV87BkWPnX2sigobZ5XjPl5M2+HtiTfxccTAXTB0fiCfuy3qGzoQ==
-X-Received: by 2002:a2e:9990:0:b0:2ef:2b08:1742 with SMTP id
- 38308e7fff4ca-2f03dbf3baamr11951911fa.48.1721912339550; 
- Thu, 25 Jul 2024 05:58:59 -0700 (PDT)
+ bh=5ObdJLDoM2TCUQzyM64NPNPwq1f4gb1V8LUAS/4Ap9I=;
+ b=rCeAiM3sdldUoSaXIMeyi45xEZxYom/T8er3NJebMv+BiGyD6m9ScLmcS2ghF/TPyw
+ 2SOgcedaP45MBGLMJq8ANwvCApg9z0sec6idZY/JDjHK6Giq+FBAkLR1zp8jPS7zF0yp
+ +wXMpAPuyaIRyPvkL2Y+ZsqEeobWlklYy/J94DAcCcN7HKsLKM8712wRlWX/uKEEDE75
+ uduf4yPB06Ui6uTmItMD3oqdSLciRl38P1fE3tv2x99nMUo6b+UTk1shNhjY/2mn2zFu
+ FHFS3AZUu5fefR1W2OIusH6Kf34zMi/zdgbzH6Asva/CDyhr9EbkKyeg5ikimnY9IBIH
+ 6+Gg==
+X-Gm-Message-State: AOJu0YzVl1j1IBfPiMMMSxehaGdQkVeWrDiPsn1rSFJxwqZYc+N7YgtY
+ hCrbvNRmMH0dBRnrzV51C8EvGs2MKuZ4e0YPgbMnUVHQzVOpqSLy6Qkw0mx2EuZA6J2pJYajdkl
+ fWLDiew==
+X-Google-Smtp-Source: AGHT+IGTfbY10Wa3Fow0zF0DKbaDY+QQasPKEUTsawCiN1JdZcxZtEUw71I0cXTZ9YMGT0Hg/oSFGA==
+X-Received: by 2002:a05:600c:1d96:b0:426:5983:ed0a with SMTP id
+ 5b1f17b1804b1-4280573cb8cmr13779645e9.30.1721912340865; 
+ Thu, 25 Jul 2024 05:59:00 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:a701:ef5f:d613:3e14])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4280573fd83sm34765205e9.19.2024.07.25.05.58.58
+ 5b1f17b1804b1-4280573fd83sm34765205e9.19.2024.07.25.05.59.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 05:58:59 -0700 (PDT)
+ Thu, 25 Jul 2024 05:59:00 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v5 11/20] net-lwip: add dns command
-Date: Thu, 25 Jul 2024 14:57:32 +0200
-Message-Id: <418eacfeff8442106d3df8a5bf787fb5eb6fbf09.1721910373.git.jerome.forissier@linaro.org>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Subject: [PATCH v5 12/20] net: split cmd/net.c into cmd/net.c and
+ cmd/net-common.c
+Date: Thu, 25 Jul 2024 14:57:33 +0200
+Message-Id: <f28efa0115c71e97fbef0bd1a6628e087cd210c1.1721910373.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1721910373.git.jerome.forissier@linaro.org>
 References: <cover.1721910373.git.jerome.forissier@linaro.org>
@@ -101,220 +100,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add CMD_DNS when NET_LWIP is enabled to provide the dns command using
-lwIP.
+Extract some code from cmd/net.c that will be useful in a subsequent
+commit to implement wget with NET_LWIP.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- cmd/Kconfig        |  11 ++--
- cmd/net-lwip.c     |   8 +++
- include/net-lwip.h |   1 +
- net/lwip/Makefile  |   1 +
- net/lwip/dns.c     | 127 +++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 143 insertions(+), 5 deletions(-)
- create mode 100644 net/lwip/dns.c
+ cmd/Makefile     |   5 ++-
+ cmd/net-common.c | 109 ++++++++++++++++++++++++++++++++++++++++++++
+ cmd/net.c        | 115 -----------------------------------------------
+ 3 files changed, 113 insertions(+), 116 deletions(-)
+ create mode 100644 cmd/net-common.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 21188a763cf..a862b6415dd 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2034,11 +2034,6 @@ config CMD_SNTP
- 	help
- 	  Synchronize RTC via network
- 
--config CMD_DNS
--	bool "dns"
--	help
--	  Lookup the IP of a hostname
--
- config CMD_LINK_LOCAL
- 	bool "linklocal"
- 	select LIB_RAND
-@@ -2093,6 +2088,12 @@ config CMD_DHCP
- 	help
- 	  Boot image via network using DHCP/TFTP protocol
- 
-+config CMD_DNS
-+	bool "dns"
-+	select PROT_DNS_LWIP if NET_LWIP
-+	help
-+	  Lookup the IP of a hostname
-+
- config CMD_PING
- 	bool "ping"
- 	select PROT_RAW_LWIP if NET_LWIP
-diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index feed719beef..c021da6a674 100644
---- a/cmd/net-lwip.c
-+++ b/cmd/net-lwip.c
-@@ -27,3 +27,11 @@ U_BOOT_CMD(
- 	"[loadAddress] [[hostIPaddr:]bootfilename]"
- );
- #endif
-+
-+#if defined(CONFIG_CMD_DNS)
-+U_BOOT_CMD(
-+	dns,	3,	1,	do_dns,
-+	"lookup the IP of a hostname",
-+	"hostname [envvar]"
-+);
-+#endif
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index 58640c04a7f..cb60537f9f3 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -13,6 +13,7 @@ struct netif *net_lwip_get_netif(void);
- int net_lwip_rx(struct udevice *udev, struct netif *netif);
- 
- int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
- #endif /* __NET_LWIP_H__ */
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index b5af37a9b18..645d8a8c457 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -2,5 +2,6 @@ ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
- 
- obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
- obj-$(CONFIG_CMD_DHCP) += dhcp.o
-+obj-$(CONFIG_CMD_DNS) += dns.o
- obj-$(CONFIG_CMD_PING) += ping.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+diff --git a/cmd/Makefile b/cmd/Makefile
+index fe733cf6ba9..2c3de45a074 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -130,7 +130,10 @@ obj-$(CONFIG_CMD_NAND) += nand.o
+ ifdef CONFIG_CMD_NET
+ obj-$(CONFIG_NET) += net.o
+ obj-$(CONFIG_NET_LWIP) += net-lwip.o
+-CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
++obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
++lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
++CFLAGS_net-lwip.o := $(lwip-includes)
++CFLAGS_net-common.o := $(lwip-includes)
+ endif
+ obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
+ obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+diff --git a/cmd/net-common.c b/cmd/net-common.c
 new file mode 100644
-index 00000000000..4b937feaee1
+index 00000000000..1c9fb83b896
 --- /dev/null
-+++ b/net/lwip/dns.c
-@@ -0,0 +1,127 @@
++++ b/cmd/net-common.c
+@@ -0,0 +1,109 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2024 Linaro Ltd. */
++/*
++ * (C) Copyright 2000
++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++ */
 +
 +#include <command.h>
-+#include <console.h>
-+#include <lwip/dns.h>
-+#include <lwip/timeouts.h>
++#include <dm/device.h>
++#include <dm/uclass.h>
 +#include <net.h>
-+#include <time.h>
++#include <linux/compat.h>
++#include <linux/ethtool.h>
 +
-+#define DNS_RESEND_MS 1000
-+#define DNS_TIMEOUT_MS 10000
-+
-+struct dns_cb_arg {
-+	ip_addr_t host_ipaddr;
-+	const char *var;
-+	bool done;
-+};
-+
-+static void do_dns_tmr(void *arg)
++static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 +{
-+	dns_tmr();
++	const struct udevice *current = eth_get_dev();
++	unsigned char env_enetaddr[ARP_HLEN];
++	const struct udevice *dev;
++	struct uclass *uc;
++
++	uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
++		eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
++		printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
++		       current == dev ? "active" : "");
++	}
++	return CMD_RET_SUCCESS;
 +}
 +
-+static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
++static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 +{
-+	struct dns_cb_arg *dns_cb_arg = arg;
-+	char *ipstr = ip4addr_ntoa(ipaddr);
++	int nstats, err, i, off;
++	struct udevice *dev;
++	u64 *values;
++	u8 *strings;
 +
-+	dns_cb_arg->done = true;
++	if (argc < 2)
++		return CMD_RET_USAGE;
 +
-+	if (!ipaddr) {
-+		printf("DNS: host not found\n");
-+		dns_cb_arg->host_ipaddr.addr = 0;
-+		return;
-+	}
-+
-+	if (dns_cb_arg->var)
-+		env_set(dns_cb_arg->var, ipstr);
-+
-+	printf("%s\n", ipstr);
-+}
-+
-+static int dns_loop(struct udevice *udev, const char *name, const char *var)
-+{
-+	struct dns_cb_arg dns_cb_arg = { };
-+	bool has_server = false;
-+	struct netif *netif;
-+	ip_addr_t ipaddr;
-+	ip_addr_t ns;
-+	ulong start;
-+	char *nsenv;
-+	int ret;
-+
-+	dns_cb_arg.var = var;
-+
-+	netif = net_lwip_new_netif(udev);
-+	if (!netif)
-+		return -1;
-+
-+	dns_init();
-+
-+	nsenv = env_get("dnsip");
-+	if (nsenv && ipaddr_aton(nsenv, &ns)) {
-+		dns_setserver(0, &ns);
-+		has_server = true;
-+	}
-+
-+	nsenv = env_get("dnsip2");
-+	if (nsenv && ipaddr_aton(nsenv, &ns)) {
-+		dns_setserver(1, &ns);
-+		has_server = true;
-+	}
-+
-+	if (!has_server) {
-+		log_err("No valid name server (dnsip/dnsip2)\n");
-+		net_lwip_remove_netif(netif);
++	err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
++	if (err) {
++		printf("Could not find device %s\n", argv[1]);
 +		return CMD_RET_FAILURE;
 +	}
 +
-+	dns_cb_arg.done = false;
-+
-+	ret = dns_gethostbyname(name, &ipaddr, dns_cb, &dns_cb_arg);
-+
-+	if (ret == ERR_OK) {
-+		dns_cb(name, &ipaddr, &dns_cb_arg);
-+	} else if (ret == ERR_INPROGRESS) {
-+		start = get_timer(0);
-+		sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
-+		do {
-+			net_lwip_rx(udev, netif);
-+			if (dns_cb_arg.done)
-+				break;
-+			sys_check_timeouts();
-+			if (ctrlc()) {
-+				printf("\nAbort\n");
-+				break;
-+			}
-+		} while (get_timer(start) < DNS_TIMEOUT_MS);
-+		sys_untimeout(do_dns_tmr, NULL);
++	if (!eth_get_ops(dev)->get_sset_count ||
++	    !eth_get_ops(dev)->get_strings ||
++	    !eth_get_ops(dev)->get_stats) {
++		printf("Driver does not implement stats dump!\n");
++		return CMD_RET_FAILURE;
 +	}
 +
-+	net_lwip_remove_netif(netif);
++	nstats = eth_get_ops(dev)->get_sset_count(dev);
++	strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
++	if (!strings)
++		return CMD_RET_FAILURE;
 +
-+	if (dns_cb_arg.done && dns_cb_arg.host_ipaddr.addr != 0)
-+		return CMD_RET_SUCCESS;
++	values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
++	if (!values)
++		goto err_free_strings;
++
++	eth_get_ops(dev)->get_strings(dev, strings);
++	eth_get_ops(dev)->get_stats(dev, values);
++
++	off = 0;
++	for (i = 0; i < nstats; i++) {
++		printf("  %s: %llu\n", &strings[off], values[i]);
++		off += ETH_GSTRING_LEN;
++	};
++
++	kfree(strings);
++	kfree(values);
++
++	return CMD_RET_SUCCESS;
++
++err_free_strings:
++	kfree(strings);
 +
 +	return CMD_RET_FAILURE;
 +}
 +
-+int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++static struct cmd_tbl cmd_net[] = {
++	U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
++	U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
++};
++
++static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 +{
-+	char *name;
-+	char *var = NULL;
++	struct cmd_tbl *cp;
 +
-+	if (argc == 1 || argc > 3)
++	cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
++
++	/* Drop the net command */
++	argc--;
++	argv++;
++
++	if (!cp || argc > cp->maxargs)
 +		return CMD_RET_USAGE;
++	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
++		return CMD_RET_SUCCESS;
 +
-+	name = argv[1];
-+
-+	if (argc == 3)
-+		var = argv[2];
-+
-+	eth_set_current();
-+
-+	return dns_loop(eth_get_dev(), name, var);
++	return cp->cmd(cmdtp, flag, argc, argv);
 +}
++
++U_BOOT_CMD(
++	net, 3, 1, do_net,
++	"NET sub-system",
++	"list - list available devices\n"
++	"stats <device> - dump statistics for specified device\n"
++);
+diff --git a/cmd/net.c b/cmd/net.c
+index b206ff58e68..ad5aaf9245e 100644
+--- a/cmd/net.c
++++ b/cmd/net.c
+@@ -675,118 +675,3 @@ U_BOOT_CMD(
+ );
+ 
+ #endif  /* CONFIG_CMD_LINK_LOCAL */
+-
+-static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	const struct udevice *current = eth_get_dev();
+-	unsigned char env_enetaddr[ARP_HLEN];
+-	const struct udevice *dev;
+-	struct uclass *uc;
+-
+-	uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+-		eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+-		printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+-		       current == dev ? "active" : "");
+-	}
+-	return CMD_RET_SUCCESS;
+-}
+-
+-static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	int nstats, err, i, off;
+-	struct udevice *dev;
+-	u64 *values;
+-	u8 *strings;
+-
+-	if (argc < 2)
+-		return CMD_RET_USAGE;
+-
+-	err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
+-	if (err) {
+-		printf("Could not find device %s\n", argv[1]);
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	if (!eth_get_ops(dev)->get_sset_count ||
+-	    !eth_get_ops(dev)->get_strings ||
+-	    !eth_get_ops(dev)->get_stats) {
+-		printf("Driver does not implement stats dump!\n");
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	nstats = eth_get_ops(dev)->get_sset_count(dev);
+-	strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
+-	if (!strings)
+-		return CMD_RET_FAILURE;
+-
+-	values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
+-	if (!values)
+-		goto err_free_strings;
+-
+-	eth_get_ops(dev)->get_strings(dev, strings);
+-	eth_get_ops(dev)->get_stats(dev, values);
+-
+-	off = 0;
+-	for (i = 0; i < nstats; i++) {
+-		printf("  %s: %llu\n", &strings[off], values[i]);
+-		off += ETH_GSTRING_LEN;
+-	};
+-
+-	return CMD_RET_SUCCESS;
+-
+-err_free_strings:
+-	kfree(strings);
+-
+-	return CMD_RET_FAILURE;
+-}
+-
+-static struct cmd_tbl cmd_net[] = {
+-	U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
+-	U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
+-};
+-
+-static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	struct cmd_tbl *cp;
+-
+-	cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
+-
+-	/* Drop the net command */
+-	argc--;
+-	argv++;
+-
+-	if (!cp || argc > cp->maxargs)
+-		return CMD_RET_USAGE;
+-	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
+-		return CMD_RET_SUCCESS;
+-
+-	return cp->cmd(cmdtp, flag, argc, argv);
+-}
+-
+-U_BOOT_CMD(
+-	net, 3, 1, do_net,
+-	"NET sub-system",
+-	"list - list available devices\n"
+-	"stats <device> - dump statistics for specified device\n"
+-);
+-
+-#if defined(CONFIG_CMD_NCSI)
+-static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+-{
+-	if (!phy_interface_is_ncsi() || !ncsi_active()) {
+-		printf("Device not configured for NC-SI\n");
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	if (net_loop(NCSI) < 0)
+-		return CMD_RET_FAILURE;
+-
+-	return CMD_RET_SUCCESS;
+-}
+-
+-U_BOOT_CMD(
+-	ncsi,	1,	1,	do_ncsi,
+-	"Configure attached NIC via NC-SI",
+-	""
+-);
+-#endif  /* CONFIG_CMD_NCSI */
 -- 
 2.40.1
 
