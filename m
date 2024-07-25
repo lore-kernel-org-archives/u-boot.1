@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A34C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 17:15:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA0CC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 17:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5425F88365;
+	by phobos.denx.de (Postfix) with ESMTP id B9E3888395;
 	Thu, 25 Jul 2024 19:14:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="lM/IbLiI";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="ITXeMiMB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD457881C1; Thu, 25 Jul 2024 17:32:31 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 4925888100; Thu, 25 Jul 2024 17:32:33 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EB9C87E23
+ by phobos.denx.de (Postfix) with ESMTPS id EF9EC882E6
  for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 17:32:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3683178b226so644051f8f.1
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-36844375001so604525f8f.0
  for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 08:32:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1721921548; x=1722526348;
@@ -35,48 +35,48 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=acZK1tg4Ja1m+QHkZYLbmpxbLdAKqfb13cIarcwj1c0=;
- b=lM/IbLiIyYRr5+rQX1OA/U3rbmcSAbpwz6R3+VtN+MU+Y3SXkTKRdIOFzNAXfkof93
- /4xlXqstWt76o3OX4YL6m9xg4etYjEc1s5koMNNnDu3cSLvnNyysyDBSBvMduUQm8Kn8
- +Rpy8xGo3foLY5Vt08Vwwag1i1mJI7+HitbjafhZoHyesJ5AZ1F41qvIttAX/bJ7rBX4
- ERv9dt8gz0648Ywn2QeTrP6OLUxHivXhmnG9627A1KDArllYvhNxCM9dBgX5G4KlY98C
- lbyGiePVLZ5DnS2cDXNam9vGRmF0gNhjTDlZovYMDn4Dh5nBn1bnUtaaSqDyTVny+naQ
- 2yJA==
+ bh=eTIIwnKIn6tCwlDIS8k2B4LnNUMLkIT2IPRCe+2muaM=;
+ b=ITXeMiMBWrS2zlFldHlS/xXtbHHIrRLbgIMLXZ7K4bzXOQLUnnbiGnKGAa/BWhupOo
+ mtYqkpYi5N3LInAUp6UuSyNp/L6ZggndRmOreEIr6y22VRebz3FNOqXxau0E9OE/Ws8N
+ jkMzrwViBelCJqz1X95MhzHXq6GD6POYORdVdEJGZ5etJdXHgiGk9lratHrOljHUAJpa
+ id++4anSQiwUNa4ndGo7sa0SdaG17lZ2H5+2yc7NHMHXfixpeJLRLQ+aehLFGSFUsaF+
+ 8igUlVHers4La/M6tSfgKlB+Su8h0ewOis31DTU8tPKSbM2M5gTf21dF+k6Lm78wEiba
+ j6QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721921548; x=1722526348;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=acZK1tg4Ja1m+QHkZYLbmpxbLdAKqfb13cIarcwj1c0=;
- b=sDyC4ginevs8dSRFwqVULqSz/QBV6S+pbsyCD4eN9hEVHpE+ad+caxBgnJI+JG9tHT
- 2I0T1T2CeqCalcM/eenEFBsrXlAxO58zZV2AtFjjN1aQfn3nQeYnBPN3tSsdqoODcEQt
- jCkPUJeGJH1s8uZvJvHqlIh16tVFRMt2eCeEJHrPwxStHOh88oka/eEEw7gXUM+j2mVf
- cERekqcdK7CWsmeCFPNmAskIJMhma7OAfjvoKS7p5hEmBmwYoGrG1G3XT17PzJHLmnci
- 7gIQPV2wXIdq6dzS7tvMpIwM3Nt3jPbjp7bNEbkjghgSCebegqrDIt57kDPcm2DHre4d
- Xisw==
+ bh=eTIIwnKIn6tCwlDIS8k2B4LnNUMLkIT2IPRCe+2muaM=;
+ b=IAjZmOfGHIgcvbpkCbJhdJ+YgsVkrbB/2eNfkgAJWtJceltfV9l6JvsXIEJrvZ75U/
+ rD0dNOOW7TeTnOx+elyMhgyTJze2dvwHWveQygq/3XzYwRCXX8Uw5bhqOJdTd4VoCL+5
+ AXYMI08PCdVMcRdB3RD44q1LKwnKSJlG5eQmupmkQAyQoANNDCLNac6QUw5frwkkHFrp
+ ljc8z0Wgc+QRb0lGKgZL8qdT4aaUIhthOwTU7SGcKOMnmLUSX+vrInQM1qS5OwR0JtTo
+ VU5OZuPe/Y6Bd6+LT9d32zxk5zxtPbV8f5BxMcHe6wv6voM8vdPZCeE8n92Y1EgU2W5K
+ y1Aw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVl6JM7Cid9nWxdlhdXIPNlzl6xcyidYSCXyP9GcgmAM0xmJ+qsZ3b7ucIFjDaY10SiStCNwyv5NLrxSgI6qm0JAvt3zw==
-X-Gm-Message-State: AOJu0YwqL9mQfEYPgwIKTu6jzrqu9sOU2gYbWHPQQgW0y7KC55TyoNKF
- y8mJW8LOU8QGXUQVbqOBy3+FioxEMVqljcQfkwM+MxCYgmYLMcpY6nzDVWfvU2U=
-X-Google-Smtp-Source: AGHT+IHq5VPRLX+tT3ljNgWruv1YFrPRB4i4vRSErjk7mgakY+kZMJVFjD5itBLCxZK1rDEngAV90Q==
-X-Received: by 2002:adf:e744:0:b0:368:6562:9024 with SMTP id
- ffacd0b85a97d-36b3638a0b1mr1646405f8f.18.1721921547934; 
- Thu, 25 Jul 2024 08:32:27 -0700 (PDT)
+ AJvYcCXL8FVdBYCzCv29hRjb09cHL0Q2xznB1qs+aWW9nVlQiH6O429mmqdhLSdtZNh6y+EyxYpFIVTtCh0zo5E5iwPb0nQNoA==
+X-Gm-Message-State: AOJu0YxUN3e/SstzeQC8UiJD8w0DycVRK97WV/3pQZgkmAM4mKijnyzs
+ 5vBcLHXo8e2ohgwQ0jUazrxscdnmqXu6pN1xOPhHDqk8YBd/lVaMQE3WILFS55U=
+X-Google-Smtp-Source: AGHT+IE3jp1B9buMFGkGzKn0LCUMmKgEVqKQvK7YqjOkYhW09cGkHh48+6dL+7172Qi2DjiaFGlUBg==
+X-Received: by 2002:a5d:64c4:0:b0:367:8876:68e6 with SMTP id
+ ffacd0b85a97d-36b31a41978mr2982159f8f.48.1721921548535; 
+ Thu, 25 Jul 2024 08:32:28 -0700 (PDT)
 Received: from localhost.localdomain ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-36b36861b54sm2530805f8f.95.2024.07.25.08.32.27
+ ffacd0b85a97d-36b36861b54sm2530805f8f.95.2024.07.25.08.32.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 08:32:27 -0700 (PDT)
+ Thu, 25 Jul 2024 08:32:28 -0700 (PDT)
 From: Zixun LI <admin@hifiphile.com>
 To: Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
 Cc: Zixun LI <admin@hifiphile.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v4 4/7] usb: gadget: atmel: Move usba_udc_pdata() with other
- static functions
-Date: Thu, 25 Jul 2024 17:31:58 +0200
-Message-ID: <20240725153204.358925-5-admin@hifiphile.com>
+Subject: [PATCH v4 5/7] usb: gadget: atmel: Rename atmel_usba_start()/_stop()
+ to usba_udc_enable()/_disable()
+Date: Thu, 25 Jul 2024 17:31:59 +0200
+Message-ID: <20240725153204.358925-6-admin@hifiphile.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240725153204.358925-1-admin@hifiphile.com>
 References: <20240725153204.358925-1-admin@hifiphile.com>
@@ -99,111 +99,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To make all static functions in the top, no functional change.
+Rename atmel_usba_start() / atmel_usba_stop() to usba_udc_enable()
+/ usba_udc_disable(), remove atmel_ prefix to be inline with other
+functions. Also avoid confusion with DM start() / stop() functions.
 
 Signed-off-by: Zixun LI <admin@hifiphile.com>
 ---
- drivers/usb/gadget/atmel_usba_udc.c | 80 ++++++++++++++---------------
- 1 file changed, 40 insertions(+), 40 deletions(-)
+ drivers/usb/gadget/atmel_usba_udc.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-index 2e3d8f36a2..a3d24501ba 100644
+index a3d24501ba..ea9ad7585e 100644
 --- a/drivers/usb/gadget/atmel_usba_udc.c
 +++ b/drivers/usb/gadget/atmel_usba_udc.c
-@@ -1179,6 +1179,46 @@ static int atmel_usba_stop(struct usba_udc *udc)
+@@ -1153,7 +1153,7 @@ static int usba_udc_irq(struct usba_udc *udc)
  	return 0;
  }
  
-+static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
-+				      struct usba_udc *udc)
-+{
-+	struct usba_ep *eps;
-+	int i;
-+
-+	eps = malloc(sizeof(struct usba_ep) * pdata->num_ep);
-+	if (!eps) {
-+		log_err("failed to alloc eps\n");
-+		return NULL;
-+	}
-+
-+	udc->gadget.ep0 = &eps[0].ep;
-+
-+	INIT_LIST_HEAD(&udc->gadget.ep_list);
-+	INIT_LIST_HEAD(&eps[0].ep.ep_list);
-+
-+	for (i = 0; i < pdata->num_ep; i++) {
-+		struct usba_ep *ep = &eps[i];
-+
-+		ep->ep_regs = udc->regs + USBA_EPT_BASE(i);
-+		ep->dma_regs = udc->regs + USBA_DMA_BASE(i);
-+		ep->fifo = udc->fifo + USBA_FIFO_BASE(i);
-+		ep->ep.ops = &usba_ep_ops;
-+		ep->ep.name = pdata->ep[i].name;
-+		ep->ep.maxpacket = pdata->ep[i].fifo_size;
-+		ep->fifo_size = ep->ep.maxpacket;
-+		ep->udc = udc;
-+		INIT_LIST_HEAD(&ep->queue);
-+		ep->nr_banks = pdata->ep[i].nr_banks;
-+		ep->index = pdata->ep[i].index;
-+		ep->can_dma = pdata->ep[i].can_dma;
-+		ep->can_isoc = pdata->ep[i].can_isoc;
-+		if (i)
-+			list_add_tail(&ep->ep.ep_list, &udc->gadget.ep_list);
-+	};
-+
-+	return eps;
-+}
-+
- static struct usba_udc controller = {
- 	.regs = (unsigned *)ATMEL_BASE_UDPHS,
- 	.fifo = (unsigned *)ATMEL_BASE_UDPHS_FIFO,
-@@ -1244,46 +1284,6 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
- 	return 0;
- }
- 
--static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
--				      struct usba_udc *udc)
--{
--	struct usba_ep *eps;
--	int i;
--
--	eps = malloc(sizeof(struct usba_ep) * pdata->num_ep);
--	if (!eps) {
--		log_err("failed to alloc eps\n");
--		return NULL;
--	}
--
--	udc->gadget.ep0 = &eps[0].ep;
--
--	INIT_LIST_HEAD(&udc->gadget.ep_list);
--	INIT_LIST_HEAD(&eps[0].ep.ep_list);
--
--	for (i = 0; i < pdata->num_ep; i++) {
--		struct usba_ep *ep = &eps[i];
--
--		ep->ep_regs = udc->regs + USBA_EPT_BASE(i);
--		ep->dma_regs = udc->regs + USBA_DMA_BASE(i);
--		ep->fifo = udc->fifo + USBA_FIFO_BASE(i);
--		ep->ep.ops = &usba_ep_ops;
--		ep->ep.name = pdata->ep[i].name;
--		ep->ep.maxpacket = pdata->ep[i].fifo_size;
--		ep->fifo_size = ep->ep.maxpacket;
--		ep->udc = udc;
--		INIT_LIST_HEAD(&ep->queue);
--		ep->nr_banks = pdata->ep[i].nr_banks;
--		ep->index = pdata->ep[i].index;
--		ep->can_dma = pdata->ep[i].can_dma;
--		ep->can_isoc = pdata->ep[i].can_isoc;
--		if (i)
--			list_add_tail(&ep->ep.ep_list, &udc->gadget.ep_list);
--	};
--
--	return eps;
--}
--
- int usba_udc_probe(struct usba_platform_data *pdata)
+-static int atmel_usba_start(struct usba_udc *udc)
++static int usba_udc_enable(struct usba_udc *udc)
  {
- 	struct usba_udc *udc;
+ 	udc->devstatus = 1 << USB_DEVICE_SELF_POWERED;
+ 
+@@ -1168,7 +1168,7 @@ static int atmel_usba_start(struct usba_udc *udc)
+ 	return 0;
+ }
+ 
+-static int atmel_usba_stop(struct usba_udc *udc)
++static int usba_udc_disable(struct usba_udc *udc)
+ {
+ 	udc->gadget.speed = USB_SPEED_UNKNOWN;
+ 	reset_all_endpoints(udc);
+@@ -1253,7 +1253,7 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+ 		return -EBUSY;
+ 	}
+ 
+-	atmel_usba_start(udc);
++	usba_udc_enable(udc);
+ 
+ 	udc->driver = driver;
+ 
+@@ -1279,7 +1279,7 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+ 	driver->unbind(&udc->gadget);
+ 	udc->driver = NULL;
+ 
+-	atmel_usba_stop(udc);
++	usba_udc_disable(udc);
+ 
+ 	return 0;
+ }
 -- 
 2.45.2
 
