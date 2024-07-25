@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A3F5C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:38:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA316C3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:38:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C27D786FB1;
-	Thu, 25 Jul 2024 11:38:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 34961882EF;
+	Thu, 25 Jul 2024 11:38:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aydoi4gJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VVaxkl8D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDC6887919; Thu, 25 Jul 2024 11:38:45 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 20A37880D1; Thu, 25 Jul 2024 11:38:51 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE8EA86D4C
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:38:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D460587EDC
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46P9cfAT122238;
- Thu, 25 Jul 2024 04:38:41 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46P9ckgF108841;
+ Thu, 25 Jul 2024 04:38:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721900321;
- bh=lQywY5RWqO9wqypphTrXLCgK1H6mFlR6eGWLP4pF5R4=;
+ s=ti-com-17Q1; t=1721900326;
+ bh=NBBetsHXTWDKTHgKLNQBPnhIupTeMLkV5eGlXYmS1MI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=aydoi4gJSBcyeJg/AQfXpniLUo0TldWJ/HjUsezcVPk9FcabAwwVOgt5yrLBBHPAW
- gVhh1om/Z4KXgm2UGenZRS7BdLa2HaaH4yCmAHC1a6egwvDE0Z/tz4oeL8yvPGbmMo
- YIAf9qtc4yiMQuKptxmIuWjdLsivyVIBVUsLLyMQ=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46P9cfUp021106
+ b=VVaxkl8DdDASjLij1CooRQmrcXokSAIWKf9E8YMvBef8sdu4msUAOwND0mg+6ntLy
+ e/n1E/tYzQcY6y1GjbxFvzuk2qjXzYvNUrwPbmjQ9dmFXVtRLx6sa6dHRs5CJ+A2zS
+ 1J80/2gLcZHMqHEDBdauLHExehcq4/groDfE74dQ=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46P9ckYf000881
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Jul 2024 04:38:41 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 25 Jul 2024 04:38:46 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Jul 2024 04:38:41 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 04:38:45 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Jul 2024 04:38:41 -0500
+ Frontend Transport; Thu, 25 Jul 2024 04:38:45 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46P9ad8S066876;
- Thu, 25 Jul 2024 04:38:37 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46P9ad8T066876;
+ Thu, 25 Jul 2024 04:38:41 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>, Nishant Menon <nm@ti.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
@@ -59,9 +59,9 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
  <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V7 1/7] MAINTAINERS: Include the TI docs under ARM TI
-Date: Thu, 25 Jul 2024 15:05:41 +0530
-Message-ID: <20240725093546.4193107-2-d-gole@ti.com>
+Subject: [PATCH V7 2/7] doc: ti: k3: Add TIFS Stub documentation
+Date: Thu, 25 Jul 2024 15:05:42 +0530
+Message-ID: <20240725093546.4193107-3-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240725093546.4193107-1-d-gole@ti.com>
 References: <20240725093546.4193107-1-d-gole@ti.com>
@@ -85,25 +85,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add entry for the TI boards documentation under ARM TI
+* Add documentation to briefly explain the role of TIFS Stub in relevant
+  K3 SoC's.
+* Shed light on why TIFS Stub isn't package with the DM firmware itself.
+* Modify the platform docs wherever the TIFS Stub documentation applies.
+* Also, refactor and add a few new labels to help split the firmware
+  documentation chunks. This will make it easier to include them one by
+  one wherever applicable
 
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ doc/board/ti/am62ax_sk.rst        |  4 +++
+ doc/board/ti/am62px_sk.rst        |  4 +++
+ doc/board/ti/am62x_sk.rst         |  4 +++
+ doc/board/ti/k3.rst               | 51 +++++++++++++++++++++----------
+ doc/board/toradex/verdin-am62.rst |  4 +++
+ 5 files changed, 51 insertions(+), 16 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index a6e47e8a2179..d9af2aac6251 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -732,6 +732,7 @@ F:	arch/arm/mach-omap2/
- F:	arch/arm/include/asm/arch-omap*/
- F:	arch/arm/include/asm/ti-common/
- F:	board/ti/
-+F:	doc/board/ti/
- F:	drivers/dma/ti*
- F:	drivers/dma/ti*/
- F:	drivers/firmware/ti_sci.*
+diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
+index 60726b6652ce..72fa5a8d8cdd 100644
+--- a/doc/board/ti/am62ax_sk.rst
++++ b/doc/board/ti/am62ax_sk.rst
+@@ -60,6 +60,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_tifsstub
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index c80b50681176..bcef6653cb92 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -68,6 +68,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_tifsstub
++
+ Build procedure:
+ ----------------
+ 
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index 2a25e84f6c97..e2a848d159ff 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -59,6 +59,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_tifsstub
++
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 67b066a07d3a..c3513f0aee20 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -182,25 +182,44 @@ online
+ 
+ .. note::
+ 
+-  The TI Firmware required for functionality of the system can be
+-  one of the following combination (see platform specific boot diagram for
+-  further information as to which component runs on which processor):
+-
+-  * **TIFS** - TI Foundational Security Firmware - Consists of purely firmware
+-    meant to run on the security enclave.
+-  * **DM** - Device Management firmware also called TI System Control Interface
+-    server (TISCI Server) - This component purely plays the role of managing
+-    device resources such as power, clock, interrupts, dma etc. This firmware
+-    runs on a dedicated or multi-use microcontroller outside the security
+-    enclave.
+-
+- OR
+-
+-  * **SYSFW** - System firmware - consists of both TIFS and DM both running on
+-    the security enclave.
++  The TI Firmwares required for functionality of the system are (see
++  platform specific boot diagram for further information as to which
++  component runs on which processor):
+ 
+ .. k3_rst_include_end_boot_sources
+ 
++.. k3_rst_include_start_boot_firmwares
++
++* **TIFS** - TI Foundational Security Firmware - Consists of purely firmware
++  meant to run on the security enclave.
++* **DM** - Device Management firmware also called TI System Control Interface
++  server (TISCI Server) - This component purely plays the role of managing
++  device resources such as power, clock, interrupts, dma etc. This firmware
++  runs on a dedicated or multi-use microcontroller outside the security
++  enclave.
++
++.. k3_rst_include_end_boot_firmwares
++.. k3_rst_include_start_tifsstub
++
++* **TIFS Stub** - The TIFS stub is a small piece of binary designed to help
++  restore the required security context and resume the TIFS firmware when
++  the system resumes from low-power modes such as suspend-to-RAM/Deep
++  Sleep. This stub uses the same encryption and customer key signing model
++  as TIFS and is loaded into the ATCM (Tightly Coupled Memory 'A' of the
++  DM R5) during DM startup. Due to the independent certificate signing
++  process, the stub is maintained separately from DM.
++
++.. k3_rst_include_end_tifsstub
++
++OR
++
++.. k3_rst_include_start_boot_firmwares_sysfw
++
++* **SYSFW** - System firmware - consists of both TIFS and DM both running on
++  the security enclave.
++
++.. k3_rst_include_end_boot_firmwares_sysfw
++
+ Build Procedure
+ ---------------
+ 
+diff --git a/doc/board/toradex/verdin-am62.rst b/doc/board/toradex/verdin-am62.rst
+index e8d902732883..93912adc896d 100644
+--- a/doc/board/toradex/verdin-am62.rst
++++ b/doc/board/toradex/verdin-am62.rst
+@@ -29,6 +29,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_tifsstub
++
+ Build procedure:
+ ----------------
+ 
 -- 
 2.34.1
 
