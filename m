@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69F20C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:55:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA93C3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:55:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A85A588580;
-	Thu, 25 Jul 2024 22:55:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CD52885BF;
+	Thu, 25 Jul 2024 22:55:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="vBL4rxLf";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="tp9L1VlW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DD7288297; Thu, 25 Jul 2024 21:47:30 +0200 (CEST)
+ id 4ED848692C; Thu, 25 Jul 2024 21:47:30 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A806882EF
+ by phobos.denx.de (Postfix) with ESMTPS id 7A69988360
  for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 21:47:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id A4C00120009;
- Thu, 25 Jul 2024 22:47:25 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru A4C00120009
+ by mx1.sberdevices.ru (Postfix) with ESMTP id EB06212001A;
+ Thu, 25 Jul 2024 22:47:26 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru EB06212001A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1721936845;
- bh=yel7jkLdkPnr7ZtrMHkILNiQYxSe/sCv6CzytFRizWo=;
+ s=mail; t=1721936846;
+ bh=ivyr9F72MuO1A+TFxaElxl2tjs8hO+yvVQF0dqQiwTA=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=vBL4rxLf6bolv/arSYXiPRpse/eeldhXKemBaYCj9JaPBEnytVerz6zEcFZsavp9W
- qJshpwKV9aYXvYeKeBAcRi+iLi0MWGPntjYzJUogfldu/pNhytpQENCYw0m4S4lh5+
- as2dhnOY6JnTemaHZ8nOwEpy3k2sFAN6edDP9RqXSWyy91C0nXuXpjWQadJEdyiw/e
- vOr1aRopfmSegQ+x8S6Tz+V3ysGowDhwfjtMqcRlYXIyg02FuLP3o0OXG3UL5hBo0G
- G29hoPOSfmEz7SEr5TzsT+FvTVuceLxrrnFre6E0/cC1/V66ZKWWqeYlnxKqQzXcWS
- vsi290EbIwggA==
+ b=tp9L1VlWwcUDECulD9QTc+qiXqoqD3u852faKru6jAj0VTUe8JfCPXtY8KM6YFgqQ
+ KLq5G7z7ydunRFcQSr8bSWsrieJP16MFISdg+pvSDaGN53LHjXoDILkHWzA9zHZejd
+ X2Mnr3W5xyG95xY3mOLoDSNrQLxFp6txCFrn1E1ZEcDtAQFXnjXbydZVBaL3vHNFlk
+ 068h1cEzzo4IUv5B+TDqCQx/Zn9eTpOu9V9yD+2qXCPbyV6BBE1Ljg0+1DCKgfI/9F
+ Efaz8I5jCxXQKU1CKbi277AU+Gi0HjSBMPMW8TOX9r9ukAKhcRWjN0ibbmt+/T5WWo
+ UlAyqzxZIKzzA==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
  [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 25 Jul 2024 22:47:25 +0300 (MSK)
+ Thu, 25 Jul 2024 22:47:26 +0300 (MSK)
 Received: from CAB-WSD-L081021.sberdevices.ru (100.64.160.123) by
  p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 25 Jul 2024 22:47:25 +0300
+ 15.2.1118.40; Thu, 25 Jul 2024 22:47:26 +0300
 From: Dmitry Rokosov <ddrokosov@salutedevices.com>
 To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>,
  <semen.protsenko@linaro.org>, <trini@konsulko.com>,
@@ -56,10 +56,9 @@ To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>,
  <avromanov@salutedevices.com>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>, 
  Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: [PATCH v1 2/4] cmd: ab: introduce 'ab_dump' command to print BCB
- block content
-Date: Thu, 25 Jul 2024 22:47:02 +0300
-Message-ID: <20240725194716.32232-3-ddrokosov@salutedevices.com>
+Subject: [PATCH v1 4/4] common: android_ab: fix slot suffix for abc block
+Date: Thu, 25 Jul 2024 22:47:04 +0300
+Message-ID: <20240725194716.32232-5-ddrokosov@salutedevices.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240725194716.32232-1-ddrokosov@salutedevices.com>
 References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
@@ -79,15 +78,15 @@ X-KSMG-AntiSpam-Status: not_detected
 X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
- 186c4d603b899ccfd4883d230c53f273b80e467f,
- {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
- 127.0.0.199:7.1.2; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ 186c4d603b899ccfd4883d230c53f273b80e467f, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, source.android.com:5.0.1,7.1.1;
+ 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ salutedevices.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
  100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
+X-KSMG-AntiPhishing: Clean, bases: 2024/07/25 18:54:00
+X-KSMG-LinksScanning: Clean, bases: 2024/07/25 18:54:00
 X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
  bases: 2024/07/25 17:13:00 #26148857
 X-KSMG-AntiVirus-Status: Clean, skipped
@@ -108,183 +107,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It's really helpful to have the ability to dump BCB block for debugging
-A/B logic on the board supported this partition schema.
+To align with the official Android BCB (Boot Control Block)
+specifications, it's important to note that the slot_suffix should start
+with an underscore symbol.
 
-Command 'ab_dump' prints all fields of bootloader_control struct
-including slot_metadata for all presented slots.
+For a comprehensive understanding of the expected slot_suffix format in
+userspace, please refer to the provided reference [1].
 
-Output example:
-=====
-> board# ab_dump ubi 0#misc
-> Read 512 bytes from volume misc to 000000000bf51900
-> Bootloader Control: 	[misc]
-> Active Slot: 		_a
-> Magic Number: 		0x42414342
-> Version: 		1
-> Number of Slots: 	2
-> Recovery Tries Remaining: 7
-> CRC: 			0x61378F6F (Valid)
->
-> Slot[0] Metadata:
-> 	- Priority: 		15
-> 	- Tries Remaining: 	4
-> 	- Successful Boot: 	0
-> 	- Verity Corrupted: 	0
->
-> Slot[1] Metadata:
-> 	- Priority: 		15
-> 	- Tries Remaining: 	5
-> 	- Successful Boot: 	0
-> 	- Verity Corrupted: 	0
-====
+Links:
+[1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
 
 Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 ---
- boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++
- cmd/ab_select.c      | 30 +++++++++++++++++++
- include/android_ab.h |  9 ++++++
- 3 files changed, 107 insertions(+)
+ boot/android_ab.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/boot/android_ab.c b/boot/android_ab.c
-index 1e5aa81b7503..359cc1a00428 100644
+index 359cc1a00428..45c154b10f1a 100644
 --- a/boot/android_ab.c
 +++ b/boot/android_ab.c
-@@ -363,3 +363,71 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+@@ -53,7 +53,7 @@ static int ab_control_default(struct bootloader_control *abc)
+ 	if (!abc)
+ 		return -EFAULT;
  
- 	return slot;
- }
-+
-+int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
-+{
-+	struct bootloader_control *abc;
-+	u32 crc32_le;
-+	int i, ret;
-+	struct slot_metadata *slot;
-+
-+	if (!dev_desc || !part_info) {
-+		log_err("ANDROID: Empty device descriptor or partition info\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
-+	if (ret < 0) {
-+		log_err("ANDROID: Cannot create bcb from disk %d\n", ret);
-+		return ret;
-+	}
-+
-+	if (abc->magic != BOOT_CTRL_MAGIC) {
-+		log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
-+		ret = -ENODATA;
-+		goto error;
-+	}
-+
-+	if (abc->version > BOOT_CTRL_VERSION) {
-+		log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
-+			abc->version);
-+		ret = -ENODATA;
-+		goto error;
-+	}
-+
-+	if (abc->nb_slot > ARRAY_SIZE(abc->slot_info)) {
-+		log_err("ANDROID: Wrong number of slots %u, expected %zu\n",
-+			abc->nb_slot, ARRAY_SIZE(abc->slot_info));
-+		ret = -ENODATA;
-+		goto error;
-+	}
-+
-+	printf("Bootloader Control: \t[%s]\n", part_info->name);
-+	printf("Active Slot: \t\t%s\n", abc->slot_suffix);
-+	printf("Magic Number: \t\t0x%X\n", abc->magic);
-+	printf("Version: \t\t%u\n", abc->version);
-+	printf("Number of Slots: \t%u\n", abc->nb_slot);
-+	printf("Recovery Tries Remaining: %u\n", abc->recovery_tries_remaining);
-+
-+	printf("CRC: \t\t\t0x%.8X", abc->crc32_le);
-+
-+	crc32_le = ab_control_compute_crc(abc);
-+	if (abc->crc32_le != crc32_le)
-+		printf(" (Invalid, Expected: \t0x%.8X)\n", crc32_le);
-+	else
-+		printf(" (Valid)\n");
-+
-+	for (i = 0; i < abc->nb_slot; ++i) {
-+		slot = &abc->slot_info[i];
-+		printf("\nSlot[%d] Metadata:\n", i);
-+		printf("\t- Priority: \t\t%u\n", slot->priority);
-+		printf("\t- Tries Remaining: \t%u\n", slot->tries_remaining);
-+		printf("\t- Successful Boot: \t%u\n", slot->successful_boot);
-+		printf("\t- Verity Corrupted: \t%u\n", slot->verity_corrupted);
-+	}
-+
-+error:
-+	free(abc);
-+
-+	return ret;
-+}
-diff --git a/cmd/ab_select.c b/cmd/ab_select.c
-index 9e2f74573c22..1d34150ceea9 100644
---- a/cmd/ab_select.c
-+++ b/cmd/ab_select.c
-@@ -51,6 +51,31 @@ static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
-+static int do_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
-+		      char *const argv[])
-+{
-+	int ret;
-+	struct blk_desc *dev_desc;
-+	struct disk_partition part_info;
-+
-+	if (argc < 3)
-+		return CMD_RET_USAGE;
-+
-+	if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
-+						 &dev_desc, &part_info,
-+						 false) < 0) {
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	ret = ab_dump_abc(dev_desc, &part_info);
-+	if (ret < 0) {
-+		printf("Cannot dump ABC data, error %d.\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
- U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
- 	   "Select the slot used to boot from and register the boot attempt.",
- 	   "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
-@@ -66,3 +91,8 @@ U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
- 	   "    - If '--no-dec' is set, the number of tries remaining will not\n"
- 	   "      decremented for the selected boot slot\n"
- );
-+
-+U_BOOT_CMD(ab_dump, 3, 0, do_ab_dump,
-+	   "Dump boot_control information from specific partition.",
-+	   "<interface> <dev[:part|#part_name]>\n"
-+);
-diff --git a/include/android_ab.h b/include/android_ab.h
-index 1fee7582b90a..e53bf7eb6a02 100644
---- a/include/android_ab.h
-+++ b/include/android_ab.h
-@@ -33,4 +33,13 @@ struct disk_partition;
- int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
-                    bool dec_tries);
- 
-+/**
-+ * Dump ABC information for specific partition.
-+ *
-+ * @param[in] dev_desc Device description pointer
-+ * @param[in] part_info Partition information
-+ * Return: 0 on success, or a negative on error
-+ */
-+int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info);
-+
- #endif /* __ANDROID_AB_H */
+-	memcpy(abc->slot_suffix, "a\0\0\0", 4);
++	memcpy(abc->slot_suffix, "_a\0\0", 4);
+ 	abc->magic = BOOT_CTRL_MAGIC;
+ 	abc->version = BOOT_CTRL_VERSION;
+ 	abc->nb_slot = NUM_SLOTS;
+@@ -319,7 +319,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+ 		 * or the device tree.
+ 		 */
+ 		memset(slot_suffix, 0, sizeof(slot_suffix));
+-		slot_suffix[0] = BOOT_SLOT_NAME(slot);
++		slot_suffix[0] = '_';
++		slot_suffix[1] = BOOT_SLOT_NAME(slot);
+ 		if (memcmp(abc->slot_suffix, slot_suffix,
+ 			   sizeof(slot_suffix))) {
+ 			memcpy(abc->slot_suffix, slot_suffix,
 -- 
 2.43.0
 
