@@ -4,42 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AACF3C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA36C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:33:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C118876EA;
+	by phobos.denx.de (Postfix) with ESMTP id 8F63A87C86;
 	Thu, 25 Jul 2024 11:32:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B09E8752A; Thu, 25 Jul 2024 11:32:50 +0200 (CEST)
+ id 657DA8752A; Thu, 25 Jul 2024 11:32:50 +0200 (CEST)
 Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D44B686D4C
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:32:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88F0E86E35
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:32:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
 Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 8B49E2005D9;
- Thu, 25 Jul 2024 11:32:47 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 50AC220058A;
+ Thu, 25 Jul 2024 11:32:48 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 50FC4200604;
- Thu, 25 Jul 2024 11:32:47 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 20BDB20058E;
+ Thu, 25 Jul 2024 11:32:48 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- 631341802183; Thu, 25 Jul 2024 17:32:46 +0800 (+08)
+ 34659183ACAF; Thu, 25 Jul 2024 17:32:47 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv2 0/9] Add a subcommand 'release' to cmd/cpu.c
-Date: Thu, 25 Jul 2024 17:53:22 +0800
-Message-Id: <20240725095331.14245-1-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv2 1/9] cpu: add release_core callback
+Date: Thu, 25 Jul 2024 17:53:23 +0800
+Message-Id: <20240725095331.14245-2-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20240725095331.14245-1-Zhiqiang.Hou@nxp.com>
+References: <20240725095331.14245-1-Zhiqiang.Hou@nxp.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,45 +60,71 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-This patch set is to add a subcommand 'release' to the 'cpu' command
-in cmd/cpu.c, making the command is able to release a core to run
-baremetal and RTOS applications.
+Add a new callback release_core to the cpu_ops, which is used to
+release a CPU core to run baremetal or RTOS application on a SoC
+with multiple CPU cores.
 
-And enabled the 'cpu' command and imx CPU driver for i.MX 8M series
-EVK boards and i.MX 93 EVK board.
-
-dependence:
-https://patchwork.ozlabs.org/project/uboot/patch/20240725083655.24486-1-Zhiqiang.Hou@nxp.com/
-
-Hou Zhiqiang (9):
-  cpu: add release_core callback
-  cpu: sandbox: implement release_core callback
-  test: cpu: add test for release CPU core.
-  cpu: imx: implement release_core callback
-  cpu: imx: fix the CPU type field width
-  cpu: imx: Add i.MX 8M series SoCs
-  cmd: cpu: add release subcommand
-  configs: imx8m: enable the 'cpu' command
-  configs: imx93: enable the 'cpu' command
-
+Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
 V2:
- - Implemented release_core() in sandbox and added test for the new API.
- - Increased the CPU type mask in i.MX CPU driver.
- - Added i.MX 8M series SoCs in i.MX CPU driver
+ - No change.
 
- cmd/cpu.c                         | 44 +++++++++++++++++++++++++++++--
- configs/imx8mm_evk_defconfig      |  3 +++
- configs/imx8mn_evk_defconfig      |  3 +++
- configs/imx8mp_evk_defconfig      |  3 +++
- configs/imx93_11x11_evk_defconfig |  1 +
- drivers/cpu/cpu-uclass.c          | 10 +++++++
- drivers/cpu/cpu_sandbox.c         |  6 +++++
- drivers/cpu/imx8_cpu.c            | 34 ++++++++++++++++++++++--
- include/cpu.h                     | 15 +++++++++++
- test/dm/cpu.c                     |  2 ++
- 10 files changed, 117 insertions(+), 4 deletions(-)
+ drivers/cpu/cpu-uclass.c | 10 ++++++++++
+ include/cpu.h            | 15 +++++++++++++++
+ 2 files changed, 25 insertions(+)
 
+diff --git a/drivers/cpu/cpu-uclass.c b/drivers/cpu/cpu-uclass.c
+index 16f8f2e5219..2c8e46c05e3 100644
+--- a/drivers/cpu/cpu-uclass.c
++++ b/drivers/cpu/cpu-uclass.c
+@@ -104,6 +104,16 @@ int cpu_get_vendor(const struct udevice *dev, char *buf, int size)
+ 	return ops->get_vendor(dev, buf, size);
+ }
+ 
++int cpu_release_core(const struct udevice *dev, phys_addr_t addr)
++{
++	struct cpu_ops *ops = cpu_get_ops(dev);
++
++	if (!ops->release_core)
++		return -ENOSYS;
++
++	return ops->release_core(dev, addr);
++}
++
+ U_BOOT_DRIVER(cpu_bus) = {
+ 	.name	= "cpu_bus",
+ 	.id	= UCLASS_SIMPLE_BUS,
+diff --git a/include/cpu.h b/include/cpu.h
+index 2077ff30634..0018910d61f 100644
+--- a/include/cpu.h
++++ b/include/cpu.h
+@@ -102,6 +102,15 @@ struct cpu_ops {
+ 	 *         if not.
+ 	 */
+ 	int (*is_current)(struct udevice *dev);
++
++	/**
++	 * release_core() - Relase a CPU core to the given address to run application
++	 *
++	 * @dev:	Device to check (UCLASS_CPU)
++	 * @addr:	Address to relese the CPU core
++	 * @return 0 if OK, -ve on error
++	 */
++	int (*release_core)(const struct udevice *dev, phys_addr_t addr);
+ };
+ 
+ #define cpu_get_ops(dev)        ((struct cpu_ops *)(dev)->driver->ops)
+@@ -164,4 +173,10 @@ int cpu_is_current(struct udevice *cpu);
+  */
+ struct udevice *cpu_get_current_dev(void);
+ 
++/**
++ * cpu_release_core() - Relase a CPU core to the given address to run application
++ *
++ * @return 0 if OK, -ve on error
++ */
++int cpu_release_core(const struct udevice *dev, phys_addr_t addr);
+ #endif
 -- 
 2.43.0
 
