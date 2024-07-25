@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1E0CC3DA61
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 02:41:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48244C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 04:30:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE4F6889CB;
-	Thu, 25 Jul 2024 04:41:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 518F4889CB;
+	Thu, 25 Jul 2024 06:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LjDZETX0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YoP23G3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FC8888998; Thu, 25 Jul 2024 04:41:29 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id B9C4A889D6; Thu, 25 Jul 2024 06:30:15 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D53A889CB
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 04:41:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A0258899D
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 06:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-65f9708c50dso4320857b3.2
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 19:41:26 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-66ca536621cso5540447b3.3
+ for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 21:30:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721875286; x=1722480086; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721881812; x=1722486612; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KqaM/RmH0FgGS5DTcCfPw6sy2ss3RVfRBbMzaRh21Nk=;
- b=LjDZETX0nngFOeiujk8o+SGOL3c3YuA7PZtB+tFs4lE/XED2210PGZG2RZYgeEYV/t
- trD+VmBpRGlRik8iaWjFDSyNSOPv0438UIXW7oHt5Tox1Uhhwb8l/ywIV6eZZk8Tiowv
- ubBvD8hJJxYSV1fbUxpxDK8z+lwUyXdnTiYyVl+JTifL5LT2q0hCYh83pDrhdGO90VnB
- rxY6TIO2n6Ew/0WPYVfDy1o0qp5zoTmPTHdBEtMMagF4RmsvWF6fT+cYczP0K6rxFdwW
- F4r26jeZf7Cd2rsX47oLKMnz/QxGaWugAvJFzyTDAA9+2F+pPZAPlr7SSekd4EitFGFa
- QXPQ==
+ bh=HT0yY3HxoRKoBnmqSSbefGyWGFKj0CYHVkp9EEvRR/M=;
+ b=YoP23G3HfNElDfisS/qYer3SZ06XrxICqoPc8aau02Sg55evhUYUCYYZ3ODABC4TOZ
+ 0f7e9K+K1eAnJSfdqDXCbwBiGkzw945E2mWmocDC29PtmwWu+ypAM2TZtQpT9AFkWCv4
+ +no20XF1VEX6Qy+eMIQKtDj7UskGTICg5rXfDlHvT8Lw9LkAa45bzqMTDhIVRx6Xy5Vv
+ e3T/T5MaZ9lxlaElGwRcC4E2fHWmPZ+H3fO6Nn5peQpAu9wpn7qXCUTGm2aAyt5AwPQh
+ wYd5cLtPzT9n3m+RR8JPN1q6xjLCVqsuJh+ISoLtNZjXM4df/NsfXxISqsi76ghyzu67
+ 4ZFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721875286; x=1722480086;
+ d=1e100.net; s=20230601; t=1721881812; x=1722486612;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KqaM/RmH0FgGS5DTcCfPw6sy2ss3RVfRBbMzaRh21Nk=;
- b=uE1JDxrGqkULc/MbIao8f2lxHPPQQyPrQznjooSL6Lcg1ISKSIKFtmxgARj8+/4iYb
- zk+2wVtW24v3dPaIlCq25hZxnU0pIYCxTCkkJ9aupUjABY6S0y/Gk00j/NJ1zmhEKSFk
- Z8qOMiHr3WJ6O3NtfHUS9lbbvTHTrfmhASE3TJaMdJOCeYTlmuIaeg7kU12ryekJQHUk
- fFIqk1gZ4NSODz1syPtScugRruRA0Z8kDe3fNyFBdKyJqclbPaOUSXnhTgWyUc/F+waG
- tKSsYqQYIqeacgMC6Ni3MjiTWptMy17hvt2ICg0ZmgpfgX1PL7lWAXaHy70um3vWdArU
- EPzQ==
+ bh=HT0yY3HxoRKoBnmqSSbefGyWGFKj0CYHVkp9EEvRR/M=;
+ b=m8ER6E5rQBRDJkVy837mPkpQEFjCHqK76Roc4fqpR69l+GU5aLYfq1+10QvRzoeXsx
+ 5PlRlBBqkkM7ctNwWtiPx/e2HU9V0WAEo140Htg8JLBURK24dVCao3H+qdowgt8IMlrr
+ 8+CM+myf5aOQSf0MrY6/Kh+ax4cJqAekjbaLuikfOBxWGcGAa/EC1jz721IG3OQj6E+Q
+ X7QwtnRYRVYS+JY7PcgcfFHPS6PQFPbcq9bglY34ZOsIrbQJujVTm6/N0fpl2eQD1PX/
+ mw2LVD6qngB8nLZiMr+iDSE25DzjomfwpB8Yhyn8AF38OnjZIBowRHmRrSDFZthw08sh
+ cdsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVve0kQ4Bq24+fqk2qBwd7xH1qP1wtvAWTNruewNVf/cn3GuhvxSpSyaUT5SqEKKiLGg4qQvNfL+WzPlomZ2aEfGD3PlQ==
-X-Gm-Message-State: AOJu0YyERRbm7L3mKJUlHuqk2VeQZGWTSE6g41xuuWYuXlAgjZ2VwprW
- txjohpqNwG3ZjVGq5qgI83HU90yHWOHhy6ErTjM/VzHQaEYBLOvhoeVnVi9SlFxA3MxmhaYP0x1
- aHs/S66N3Ef1AN3Ml1HfJoKPmBnX3VFoN/k9QAQ==
-X-Google-Smtp-Source: AGHT+IEm/7+bLJHoQssMBTE2AcH/Al2uk9Wa3VA+MmYVdh2PNiXNKevS5CgoK9HoCK8WgSuYG/53iJh/Znw35C7c6N0=
-X-Received: by 2002:a81:9485:0:b0:65f:851d:8fb with SMTP id
- 00721157ae682-675124f3029mr16627637b3.19.1721875285785; Wed, 24 Jul 2024
- 19:41:25 -0700 (PDT)
+ AJvYcCWOUBb9lC1Xu+QPSRoCzfBSbEHgX/ZYdCdXiAIseKjWTZAKnkQwsswzzHt3BFX70PkXyXbPvgDWFrTr/gpKNpWu8CxFFg==
+X-Gm-Message-State: AOJu0YykmexaQOpGaxh8LnwA3QfAIuDaaCxvi5JKCo+cCNjGyHkRc/Ml
+ mSnVmfPIvy2zKUDNv4lNtrheCRjzQkzZ8zs/Cxiwahv65h6WhCtBIS41OPymXXNd83wO7T8DWJi
+ RI/FXoXpntPSU/1eh0Kc0Ytn3bQV63BQj9YlCww==
+X-Google-Smtp-Source: AGHT+IG/n+OAz+8DMUGDed3UATUXTj58aGHJ45TOhsOBFfvxAXQ9rJGf6esdFSeLEFCg5nT1y9Y9R7fSTWJ4mmfmicM=
+X-Received: by 2002:a05:690c:4b93:b0:62c:dcb2:a75b with SMTP id
+ 00721157ae682-675157de209mr20247577b3.38.1721881811777; Wed, 24 Jul 2024
+ 21:30:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240705071419.11521-1-michael@amarulasolutions.com>
- <CAPLW+4n0j+5Sz7jrAVZx068Vxy2GQVFBCcA0ovsPL-ip0R0WLw@mail.gmail.com>
- <CAOf5uwk8xjgsrVysDgEeOsr6uR5u=LYP3N2s67eBf5eqqtS_MQ@mail.gmail.com>
- <CAOf5uw=5QVsWe0thmTPjUyKFTKo98YsQZosTm0803hVGhZRZmw@mail.gmail.com>
-In-Reply-To: <CAOf5uw=5QVsWe0thmTPjUyKFTKo98YsQZosTm0803hVGhZRZmw@mail.gmail.com>
+References: <20240722175740.6985-1-semen.protsenko@linaro.org>
+In-Reply-To: <20240722175740.6985-1-semen.protsenko@linaro.org>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Wed, 24 Jul 2024 21:41:14 -0500
-Message-ID: <CAPLW+4kHuTeCo8XBmEZeH3PzZ_jx2X0b7ypc1Mr2Vuaz_J0XBg@mail.gmail.com>
-Subject: Re: [PATCH V2] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
- present for gate and mux
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, linux-amarula@amarulasolutions.com,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Wed, 24 Jul 2024 23:30:00 -0500
+Message-ID: <CAPLW+4mR1BPE5YX2dUvOekEQvqoh1asb9abD9EVMxHJV8DcdtA@mail.gmail.com>
+Subject: Re: [PATCH v3 00/38] mmc: dw_mmc: Enable eMMC on E850-96 board
+To: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Yang Xiwen <forbidden405@outlook.com>, 
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de, 
+ uboot-snps-arc@synopsys.com, Minkyu Kang <promsoft@gmail.com>, 
+ Minkyu Kang <mk7.kang@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,90 +99,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 24, 2024 at 4:44=E2=80=AFAM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
+Hi Jaehoon,
 
-[snip]
-
-> > Ok , so you suggest to have something like in the core
->
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index 8faf5a56e1..a309108dd4 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -467,8 +467,14 @@ ulong clk_get_rate(struct clk *clk)
->                 return 0;
->         ops =3D clk_dev_ops(clk->dev);
->
-> -       if (!ops->get_rate)
-> -               return -ENOSYS;
-> +       if (!ops->get_rate) {
-> +               parent =3D clk_get_parent(clk);
-> +               if (!clk_is_valid(parent))
-> +                       return -ENOSYS;
-> +               ops =3D clk_dev_ops(parent->dev);
-> +               if (!ops->get_rate)
-> +                       return -ENOSYS;
-> +       }
->
->         return ops->get_rate(clk);
->  }
->
-> You suggest to remove get_rate, set_rate function in mux and gate and
-> use some propagation in the core, am I right?
-
-Something like that, yes. But maybe instead of
-
-    if (!ops->get_rate)
-
-use something like:
-
-    while (!ops->get_rate)
-
-like I did in my patch [1] for clk_set_rate(). That while loop is
-needed to handle cases when there are multiple clocks without
-.get_rate() operation connected together (like mux or gate clocks). So
-you'd have to iterate them all up the tree to find some DIV clock
-which actually has .get_rate() defined.
-
-But at the moment I'm more concerned about .set_rate() propagation of
-course, which is really needed for my E850-96 MMC enablement series
-[2], which has already been pending on the review for a while.
-
-[1] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
-[2] https://lists.denx.de/pipermail/u-boot/2024-July/559602.html
-
-[snip]
-
-> > > implementations simple and brings the propagation logic to the actual
-> > > clk API (clk_set_rate()), which in turn is able to cover all possible
-> > > cases: even if some new clock types are implemented later, they will
-> > > be covered already. That also reduces some code duplication and makes
-> > > it easier to control that behavior in a centralized manner. The patch
-> > > with the discussed implementation was already submitted a while ago
-> > > [2], and still pending on the review.
-> >
-> > I have seen it and because I'm extending the clk framework a bit more [=
-1]
-> > I was thinking about a more complete approach. Nothing against your
-> > patch, but just
-> > I have observed in my use case (display) that I need more from the
-> > clock framework we have
-> >
-
-I see. Do you think it'd possible for you to use my patch for
-clk_set_rate() propagation for your case, and base your patches (for
-CLK_OPS_PARENT_ENABLE, etc) on top of that? Will it cover your
-requirements?
-
-Would be also nice to hear what maintainers think about that :)
+Can you please check this series, and if it looks good, apply it?
 
 Thanks!
 
-> > Michael
-> >
-> > [1] https://patchwork.amarulasolutions.com/patch/3291/
-> >
-> > >
-
-[snip]
+On Mon, Jul 22, 2024 at 12:57=E2=80=AFPM Sam Protsenko
+<semen.protsenko@linaro.org> wrote:
+>
+> Bring 64-bit support to dw_mmc core and Exynos dw_mmc drivers, and
+> enable it on E850-96 board. Additionally do some related cleanups and
+> device tree updates.
+>
+> 64-bit version of DesignWare MMC can be often found on modern ARM64
+> chips. It's different from its older 32-bit version (which is already
+> implemented in U-Boot): some new registers were added, existing
+> register addresses are changed, DMA descriptor table is different, etc.
+> Next Exynos chips are known to have 64-bit DW MMC block:
+>
+>   - Exynos3475
+>   - Exynos5433
+>   - Exynos7420
+>   - Exynos7570
+>   - Exynos7580
+>   - Exynos7870
+>   - Exynos7872
+>   - Exynos7880
+>   - Exynos7885
+>   - Exynos7890
+>   - Exynos850 (Exynos3830)
+>
+> Exynos DW MMC driver was updated too: ARM64 Exynos chips implement their
+> clock drivers using CCF framework, pinmux configuration is done at
+> startup in DM capable pinctrl drivers, device tree properties were
+> changed w.r.t. their upstream (Linux kernel) counterparts. CLKSEL
+> register address is also different on 64-bit Exynos platforms.
+>
+> The patch series was tested on E850-96 board by running mainline Linux
+> kernel with Debian rootfs from eMMC ("boot" partition) with these
+> commands:
+>
+> 8<-------------------------------------------------------------------->8
+> env set fdtaddr 0x8a000000
+> env set bootaddr 0x94000000
+> env set boot_kerneladdr 0x94000800
+> part start mmc 0 boot boot_start
+> part size mmc 0 boot boot_size
+> mmc read $bootaddr $boot_start $boot_size
+> abootimg addr $bootaddr
+> abootimg get dtb --index=3D0 dtb_start dtb_size
+> cp.b $dtb_start $fdtaddr $dtb_size
+> fdt addr $fdtaddr 0x100000
+> cp.b $boot_kerneladdr $loadaddr 2aaaa00
+> env set bootargs console=3DttySAC0,115200n8 printk.devkmsg=3Don \
+>                  root=3D/dev/mmcblk0p12 rootwait rw
+> booti $loadaddr - $fdtaddr
+> 8<-------------------------------------------------------------------->8
+>
+> For E850-96 eMMC to function properly in DDR mode, the pending patch [1]
+> has to be applied. Otherwise it won't be possible for exynos_dw_mmc
+> driver to change CIU clock rate from 200 MHz up to 400 MHz, and MMC will
+> fall back to SDR mode, which makes eMMC throughput twice as slower. With
+> patch [1] applied, 'mmc info' reports this:
+>
+>     Bus Speed: 52000000
+>     Mode: MMC DDR52 (52MHz)
+>
+> and 'clk dump' shows CIU clock rate to be ~400 MHz (after first mmc
+> operation, e.g. 'part start' or 'mmc read'):
+>
+>     399750000    gout_mmc_embd_sdclkin
+>
+> Which makes sense, because dw_mmc requests to set CCLKIN =3D 52 MHz (with
+> DDR/8-bit mode), and exynos_dw_mmc tries to set CIU clock rate to:
+>
+>     SDCLKIN =3D 2 * ciu_div * CCLKIN =3D 2 * 4 * 52 MHz =3D 416 MHz,
+>
+> and the closest possible value the clock driver can set is 399.75 MHz,
+> which works just fine.
+>
+> For Exynos4 and Exynos5 (ARM32) boards, this patch series was only build
+> tested (manually and with buildman). The build is clean (no errors or
+> warnings), but I don't have any Exynos4/Exynos5 boards at my disposal,
+> so I can't actually verify MMC operation there.
+>
+> Changes in v3:
+>   - Rebased all patches on top of the most recent master, which in turn
+>     dropped next patches:
+>     - [PATCH v2 1/40] mmc: dw_mmc: Remove common.h
+>     - [PATCH v2 33/40] mmc: exynos_dw_mmc: Remove common.h
+>
+> Changes in v2:
+>   - Rebased on top of the most recent U-Boot/master
+>   - Added pending R-b tags from the mailing list
+>   - Addressed the comment from Quentin about CONFIG_IS_ENABLED() not
+>     playing nice in SPL case:
+>     1. Dropped [PATCH 35/42]
+>        ("mmc: exynos_dw_mmc: Use CONFIG_IS_ENABLED() to check config
+>         options")
+>     2. Dropped [PATCH 14/42]
+>        ("mmc: dw_mmc: Use CONFIG_IS_ENABLED() to check config options")
+>     3. Got rid of all other CONFIG_IS_ENABLED() changes (used #ifdef for
+>        now)
+>   - Addressed the comment from Quentin about incorrect logic for divider
+>     update in [PATCH 06/40]
+>   - Guarded exynos_dwmmc_of_to_plat() with #ifded CONFIG_DM_MMC in
+>     [PATCH 22/40]
+>   - Added list of Exynos chips implementing 64-bit IDMAC descriptor (in
+>     [PATCH 00/40])
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
+>
+> Sam Protsenko (38):
+>   mmc: dw_mmc: Remove unused version field from struct dwmci_host
+>   mmc: dw_mmc: Move struct idmac to dw_mmc.c
+>   mmc: dw_mmc: Extract waiting for data busy into a separate routine
+>   mmc: dw_mmc: Extract FIFO init into a separate routine
+>   mmc: dw_mmc: Extract divider update to a separate function
+>   mmc: dw_mmc: Extract FIFO data transfer into a separate routine
+>   mmc: dw_mmc: Extract DMA transfer handling code into a separate
+>     routine
+>   mmc: dw_mmc: Extract setting the DMA descriptor into a separate
+>     routine
+>   mmc: dw_mmc: Improve 32-bit IDMAC descriptor namings
+>   mmc: dw_mmc: Add support for 64-bit IDMAC
+>   mmc: dw_mmc: Replace fifoth_val property with fifo-depth
+>   mmc: dw_mmc: Fix kernel-doc comments in dwmmc.h
+>   mmc: dw_mmc: Improve coding style
+>   arm: dts: exynos: Add upstream DW MMC properties to all Exynos dts
+>   dt-bindings: exynos: Update bindings doc for DW MMC controller
+>   arm: exynos: Add header guard for dwmmc.h
+>   mmc: exynos_dw_mmc: Fix obtaining the base address of controller
+>   mmc: exynos_dw_mmc: Fix getting private data in
+>     exynos_dwmci_board_init()
+>   mmc: exynos_dw_mmc: Don't call pinmux functions on ARM64 chips
+>   mmc: exynos_dw_mmc: Obtain and use CIU clock via CCF API
+>   mmc: exynos_dw_mmc: Use .of_to_plat for device tree parsing
+>   mmc: exynos_dw_mmc: Convert to use livetree API
+>   mmc: exynos_dw_mmc: Read upstream SDR timing properties
+>   mmc: exynos_dw_mmc: Abstract CLKSEL register
+>   mmc: exynos_dw_mmc: Refactor fixed CIU clock divider
+>   mmc: exynos_dw_mmc: Read common bus-width property
+>   mmc: exynos_dw_mmc: Read common clock-frequency property
+>   mmc: exynos_dw_mmc: Move quirks from struct dwmci_host to chip data
+>   mmc: exynos_dw_mmc: Read and use DDR timing when available
+>   mmc: exynos_dw_mmc: Set requested freq in get_mmc_clk() callback
+>   mmc: exynos_dw_mmc: Add support for ARM64 Exynos chips
+>   mmc: exynos_dw_mmc: Pull all init code into probe function
+>   mmc: exynos_dw_mmc: Don't call dwmci_setup_cfg() after add_dwmci()
+>   mmc: exynos_dw_mmc: Use dev->name as driver's displayed name
+>   mmc: exynos_dw_mmc: Improve coding style
+>   arm: dts: exynos: Remove outdated DW MMC properties in all Exynos dts
+>   configs: e850-96: Enable MMC
+>   doc: samsung: Mention enabled eMMC in E850-96 board doc
+>
+>  arch/arm/dts/exynos4210-origen.dts         |   3 +-
+>  arch/arm/dts/exynos4210-trats.dts          |   6 +-
+>  arch/arm/dts/exynos4210-universal_c210.dts |   6 +-
+>  arch/arm/dts/exynos4412-odroid.dts         |  14 +-
+>  arch/arm/dts/exynos4412-trats2.dts         |  20 +-
+>  arch/arm/dts/exynos5250-arndale.dts        |  10 +-
+>  arch/arm/dts/exynos5250-smdk5250.dts       |  13 +-
+>  arch/arm/dts/exynos5250-snow.dts           |  13 +-
+>  arch/arm/dts/exynos5250-spring.dts         |   7 +-
+>  arch/arm/dts/exynos5420-smdk5420.dts       |  13 +-
+>  arch/arm/dts/exynos5422-odroidxu3.dts      |   4 +-
+>  arch/arm/dts/exynos54xx.dtsi               |  13 +-
+>  arch/arm/mach-exynos/include/mach/dwmmc.h  |  40 +-
+>  configs/e850-96_defconfig                  |  10 +-
+>  doc/board/samsung/e850-96.rst              |   5 +-
+>  doc/device-tree-bindings/exynos/dwmmc.txt  |  46 +-
+>  drivers/mmc/ca_dw_mmc.c                    |   2 +-
+>  drivers/mmc/dw_mmc.c                       | 549 +++++++++++++--------
+>  drivers/mmc/exynos_dw_mmc.c                | 357 +++++++++-----
+>  drivers/mmc/ftsdc010_mci.h                 |   1 -
+>  drivers/mmc/hi6220_dw_mmc.c                |   7 +-
+>  drivers/mmc/nexell_dw_mmc.c                |   5 +-
+>  drivers/mmc/rockchip_dw_mmc.c              |   5 +-
+>  drivers/mmc/s5p_sdhci.c                    |   2 +-
+>  drivers/mmc/snps_dw_mmc.c                  |   6 +-
+>  drivers/mmc/socfpga_dw_mmc.c               |   4 +-
+>  include/dwmmc.h                            | 242 +++++----
+>  27 files changed, 868 insertions(+), 535 deletions(-)
+>
+> --
+> 2.39.2
+>
