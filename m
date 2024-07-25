@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EDDCC3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 13:59:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7313C3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 13:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9530087876;
-	Thu, 25 Jul 2024 15:58:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A81898800C;
+	Thu, 25 Jul 2024 15:58:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KajGlmkE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QNBuaCtT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10EEE88100; Thu, 25 Jul 2024 15:58:48 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id ECD1C8800C; Thu, 25 Jul 2024 15:58:48 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A98C488005
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:58:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D41D8800C
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:58:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-81f861f369aso5165139f.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 06:58:45 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-397a363cb13so2280545ab.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 06:58:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721915924; x=1722520724; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721915925; x=1722520725; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jA8VuDCpru8Rx5PCfnkHZeIZFni9PnGGtPIg+SsUSWQ=;
- b=KajGlmkEfhcYtUAkJWcBnVsR/5fbgvJQapTndCgah/4awS4if8MW3jRQ6FEWzBl5xt
- 3ppfHmwrd/xXNzrm/jMoryhSvkJGc4t7fUgRgpjO2Ld55mQrYPJik9bIkKXrGij3Weap
- xCu70RXunv6+QQe1x9pPnfa6C2V3yHKNM+3nk=
+ bh=fIdmBLn2Ybd0gEEoreWdkuyTyQhsJdtw0zRwYHNzaEo=;
+ b=QNBuaCtTHwWkZrhtBC5X9Dplkf0xps2kUPqJDXJTSdSuevRZeNYY/3x+m+hPFQGcY/
+ wemVTJ1tizZGUEAQ9LhTneDdqaVGpKEZl1Q8GntIXffgGKsz/e7nVhhAQKpjtPcDLUqI
+ m2yvra1nNOKf7iFSTH9mjw8bCnhCkeMN52yi0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721915924; x=1722520724;
+ d=1e100.net; s=20230601; t=1721915925; x=1722520725;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jA8VuDCpru8Rx5PCfnkHZeIZFni9PnGGtPIg+SsUSWQ=;
- b=DBAqgNzSh5pqQprIu8CdrPPZAdaUU/RNaYQS9vyOg0r660iRPnCxCJxVZGnCOMABAz
- O351Y30EFnbUAgJruN4vx5n4BNGgJ+v/YE3FhkFde69I4ZV2ziOiYNl7NSehfOXyaNAe
- aOyP7RBeyW3HU8rrJTyJ/B7gV3Qx2fWwafb1TltN9eX07eKk9DGx3ba/ezDo39mLNTK+
- t5H77RtysUs93envquZGpTe5vM5P5fIq4XueG6gZ7WBYRxoVEyJ4PWcyUtIVNorOafZC
- g2ktA1P9IDoaegi0N7LmaOYOfljAqBdEcQl0lixRG0wr/kU9PrCh4NWCUfypFW8zDfQM
- xZOQ==
-X-Gm-Message-State: AOJu0YzsDm5qCVXmdP4VqqtGXnUWslm/k6l7XXQZtAyNLxIAs48+kfcO
- vhGANy5cV1qzt0lM3Ff8lsO6GiSKDGrrsCjc12lg/2dnkGivSdTifjC/rXJmTg+atuuJX47E9kk
+ bh=fIdmBLn2Ybd0gEEoreWdkuyTyQhsJdtw0zRwYHNzaEo=;
+ b=KcHbNwY4g3W6lbZYM8+AyJV126j76/x2LHEZdPmKHD14kGY0KcZhxXU6yld868YMTE
+ O9SGemWOQ9A1pcA+zq7Amofqmr7yKKHdIdHE/9sBNzV32pnMxhjZCPuH4q7lUUfjADvN
+ 6BBJBthVWBohs78EQs0I6i4rPfzSXVEdOEvetyrmJIwWYcyY0noWqBL8xpP9v0re4dMi
+ 3L2Q/tdV8Lb/kWGzmjdKaghCVRSThynWFmE5A8TPMBs0FseYutmBK5C4KB1H1JYnqsgY
+ UI7afJ+ZBnya7sSKqZ7wjV1CEvRvARdKk2HD0CNjTDnKegubzNSyv4camRdo/sJKrTKW
+ l/Kg==
+X-Gm-Message-State: AOJu0Yy48k09yCXTog2+PwcRS5kLforkocozRZtgtPMN8hfA00phG8Mg
+ qYPVYiU/GY/k6S/2e4ggJ2Ol+sq0NUDpt7en52Ta+cLK5ZTudOODsm5IckJJudgVJpMcdwSCUXw
  =
-X-Google-Smtp-Source: AGHT+IHt/5oY8VW2oyYREaKAH9DlMoxXn5rpSMhr2BdzxeON8Uh7myrPicngOh/MftDOJhKs5SPmeQ==
-X-Received: by 2002:a05:6e02:1547:b0:375:bb80:d78e with SMTP id
- e9e14a558f8ab-39a21932a78mr23899165ab.6.1721915924056; 
+X-Google-Smtp-Source: AGHT+IHiJQWWAmLdxxYvpB9bbXb6sUqK3OSTWSm8fMAIdkUP1TvAsxbgH1ewoua06knxTk1UJvBfLw==
+X-Received: by 2002:a05:6e02:1aaa:b0:37a:a9f0:f263 with SMTP id
+ e9e14a558f8ab-39a23fad7aamr29558645ab.20.1721915924934; 
  Thu, 25 Jul 2024 06:58:44 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a23105f6bsm6015445ab.76.2024.07.25.06.58.43
+ e9e14a558f8ab-39a23105f6bsm6015445ab.76.2024.07.25.06.58.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 06:58:43 -0700 (PDT)
+ Thu, 25 Jul 2024 06:58:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>
-Subject: [PATCH 2/6] efi: Convert device_path allocation to use malloc()
-Date: Thu, 25 Jul 2024 07:56:25 -0600
-Message-Id: <20240725135629.3505072-3-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Joao Marcos Costa <jmcosta944@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH 3/6] efi: Allow monitoring of page allocations
+Date: Thu, 25 Jul 2024 07:56:26 -0600
+Message-Id: <20240725135629.3505072-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240725135629.3505072-1-sjg@chromium.org>
 References: <20240725135629.3505072-1-sjg@chromium.org>
@@ -91,185 +95,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently this calls efi_alloc() which reserves a page for each
-allocation and this can overwrite memory that will be used for reading
-images.
+Some confusion has set in over which memory-allocation method to use in
+EFI-related code, particularly for the pool allocator. Most of the time,
+malloc() is used, which is correct.
 
-Switch the code to use malloc(), as with other parts of EFI, such as
-efi_add_protocol().
+However in some cases the page allocator is used. This means that some
+EFI information is sitting 'in space', outside of the malloc() and not
+allocated by lmb. This can cause problems if an image happens to be
+loaded at the same address.
+
+From what I can tell, there is currently no checking of this, but it
+seems to be a real bug.
+
+Add a way to control whether allocations are permitted, to help debug
+these sorts of issues.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/efi_loader/efi_device_path.c         | 43 ++++++++++++------------
- lib/efi_loader/efi_device_path_to_text.c |  2 +-
- 2 files changed, 22 insertions(+), 23 deletions(-)
+ include/efi_loader.h         | 24 +++++++++++++++++++
+ lib/efi_loader/efi_bootbin.c |  2 ++
+ lib/efi_loader/efi_memory.c  | 46 ++++++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_setup.c   |  7 ++++++
+ 4 files changed, 79 insertions(+)
 
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index 0f684590f22..47038e8e585 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -262,7 +262,7 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
- 	if (!dp)
- 		return NULL;
- 
--	ndp = efi_alloc(sz);
-+	ndp = malloc(sz);
- 	if (!ndp)
- 		return NULL;
- 	memcpy(ndp, dp, sz);
-@@ -315,7 +315,7 @@ efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
- 			end_size = 2 * sizeof(END);
- 		else
- 			end_size = sizeof(END);
--		p = efi_alloc(sz1 + sz2 + end_size);
-+		p = malloc(sz1 + sz2 + end_size);
- 		if (!p)
- 			return NULL;
- 		ret = p;
-@@ -347,7 +347,7 @@ struct efi_device_path *efi_dp_append_node(const struct efi_device_path *dp,
- 		ret = efi_dp_dup(dp);
- 	} else if (!dp) {
- 		size_t sz = node->length;
--		void *p = efi_alloc(sz + sizeof(END));
-+		void *p = malloc(sz + sizeof(END));
- 		if (!p)
- 			return NULL;
- 		memcpy(p, node, sz);
-@@ -356,7 +356,7 @@ struct efi_device_path *efi_dp_append_node(const struct efi_device_path *dp,
- 	} else {
- 		/* both dp and node are non-null */
- 		size_t sz = efi_dp_size(dp);
--		void *p = efi_alloc(sz + node->length + sizeof(END));
-+		void *p = malloc(sz + node->length + sizeof(END));
- 		if (!p)
- 			return NULL;
- 		memcpy(p, dp, sz);
-@@ -377,7 +377,7 @@ struct efi_device_path *efi_dp_create_device_node(const u8 type,
- 	if (length < sizeof(struct efi_device_path))
- 		return NULL;
- 
--	ret = efi_alloc(length);
-+	ret = malloc(length);
- 	if (!ret)
- 		return ret;
- 	ret->type = type;
-@@ -399,7 +399,7 @@ struct efi_device_path *efi_dp_append_instance(
- 		return efi_dp_dup(dpi);
- 	sz = efi_dp_size(dp);
- 	szi = efi_dp_instance_size(dpi);
--	p = efi_alloc(sz + szi + 2 * sizeof(END));
-+	p = malloc(sz + szi + 2 * sizeof(END));
- 	if (!p)
- 		return NULL;
- 	ret = p;
-@@ -424,7 +424,7 @@ struct efi_device_path *efi_dp_get_next_instance(struct efi_device_path **dp,
- 	if (!dp || !*dp)
- 		return NULL;
- 	sz = efi_dp_instance_size(*dp);
--	p = efi_alloc(sz + sizeof(END));
-+	p = malloc(sz + sizeof(END));
- 	if (!p)
- 		return NULL;
- 	memcpy(p, *dp, sz + sizeof(END));
-@@ -825,11 +825,11 @@ struct efi_device_path *efi_dp_from_part(struct blk_desc *desc, int part)
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index f2e5063a970..187078adf55 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -797,6 +797,30 @@ int efi_disk_probe(void *ctx, struct event *event);
+ int efi_disk_remove(void *ctx, struct event *event);
+ /* Called by board init to initialize the EFI memory map */
+ int efi_memory_init(void);
++
++/**
++ * enum efi_alloc_action - action to take when EFI does a page allocation
++ *
++ * @EFIAA_FAIL: Fail the allocation and print an error
++ * @EFIAA_WARN: Allow the allocation but print a warning
++ * @EFIAA_ALLOW: Allow the allocation with no message
++ */
++enum efi_alloc_action {
++	EFIAA_FAIL,
++	EFIAA_WARN,
++	EFIAA_ALLOW,
++};
++
++/**
++ * efi_set_alloc() - Set behaviour on page allocation
++ *
++ * This is useful for debugging use of the page allocator when malloc() should
++ * be used instead
++ *
++ * @allow: true to allow EFI to allocate pages, false to fail the allocation
++ */
++void efi_set_alloc(enum efi_alloc_action action);
++
+ /* Adds new or overrides configuration table entry to the system table */
+ efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
+ /* Sets up a loaded image */
+diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+index a87006b3c0e..07c8fca68cc 100644
+--- a/lib/efi_loader/efi_bootbin.c
++++ b/lib/efi_loader/efi_bootbin.c
+@@ -201,6 +201,8 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
  {
- 	void *buf, *start;
+ 	efi_status_t ret;
  
--	start = buf = efi_alloc(dp_part_size(desc, part) + sizeof(END));
--	if (!buf)
-+	start = malloc(dp_part_size(desc, part) + sizeof(END));
-+	if (!start)
- 		return NULL;
++	efi_set_alloc(EFIAA_ALLOW);
++
+ 	/* Initialize EFI drivers */
+ 	ret = efi_init_obj_list();
+ 	if (ret != EFI_SUCCESS) {
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 12cf23fa3fa..087f4c88cdf 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -24,6 +24,43 @@ DECLARE_GLOBAL_DATA_PTR;
+ /* Magic number identifying memory allocated from pool */
+ #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
  
--	buf = dp_part_fill(buf, desc, part);
-+	buf = dp_part_fill(start, desc, part);
++/*
++ * This is true if EFI is permitted to allocate pages in memory. When false,
++ * such allocations will fail. This is useful for debugging page allocations
++ * which should in fact use malloc().
++ *
++ * This defaults to EFIAA_FAIL until set.
++ */
++static enum efi_alloc_action alloc_action;
++
++void efi_set_alloc(enum efi_alloc_action action)
++{
++	alloc_action = action;
++}
++
++/**
++ * efi_bad_alloc() - Indicate that an allocation is not allowed
++ *
++ * Set a breakpoint on this function to locate the bad allocation in the call
++ * stack
++ */
++static void efi_bad_alloc(void)
++{
++	log_err("EFI: alloc not allowed\n");
++}
++
++static bool check_allowed(void)
++{
++	if (alloc_action == EFIAA_FAIL) {
++		efi_bad_alloc();
++		return false;
++	} else if (alloc_action == EFIAA_WARN) {
++		log_warning("EFI: suspicious alloc detected\n");
++	}
++
++	return true;
++}
++
+ efi_uintn_t efi_memory_map_key;
  
- 	*((struct efi_device_path *)buf) = END;
+ struct efi_mem_list {
+@@ -501,6 +538,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 	efi_status_t ret;
+ 	uint64_t addr;
  
-@@ -852,7 +852,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part)
- 		dpsize = sizeof(struct efi_device_path_cdrom_path);
- 	else
- 		dpsize = sizeof(struct efi_device_path_hard_drive_path);
--	buf = efi_alloc(dpsize);
-+	buf = malloc(dpsize);
++	if (!check_allowed())
++		return EFI_UNSUPPORTED;
++
+ 	/* Check import parameters */
+ 	if (memory_type >= EFI_PERSISTENT_MEMORY_TYPE &&
+ 	    memory_type <= 0x6FFFFFFF)
+@@ -649,6 +689,9 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+ 	u64 num_pages = efi_size_in_pages(size +
+ 					  sizeof(struct efi_pool_allocation));
  
- 	if (buf)
- 		dp_part_node(buf, desc, part);
-@@ -912,7 +912,7 @@ struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
- 	if (fpsize > U16_MAX)
- 		return NULL;
++	if (!check_allowed())
++		return EFI_UNSUPPORTED;
++
+ 	if (!buffer)
+ 		return EFI_INVALID_PARAMETER;
  
--	buf = efi_alloc(dpsize + fpsize + sizeof(END));
-+	buf = malloc(dpsize + fpsize + sizeof(END));
- 	if (!buf)
- 		return NULL;
+@@ -952,6 +995,9 @@ int efi_memory_init(void)
+ 	/* Request a 32bit 64MB bounce buffer region */
+ 	uint64_t efi_bounce_buffer_addr = 0xffffffff;
  
-@@ -940,7 +940,7 @@ struct efi_device_path *efi_dp_from_uart(void)
- 	struct efi_device_path_uart *uart;
- 	size_t dpsize = dp_size(dm_root()) + sizeof(*uart) + sizeof(END);
++	/* this is the earliest page allocation, so allow it */
++	efi_set_alloc(EFIAA_ALLOW);
++
+ 	if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
+ 			       (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
+ 			       &efi_bounce_buffer_addr) != EFI_SUCCESS)
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index a610e032d2f..27e24c2f223 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -193,6 +193,13 @@ int efi_init_early(void)
+ 	/* Allow unaligned memory access */
+ 	allow_unaligned();
  
--	buf = efi_alloc(dpsize);
-+	buf = malloc(dpsize);
- 	if (!buf)
- 		return NULL;
- 	pos = dp_fill(buf, dm_root());
-@@ -963,11 +963,11 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
- 
- 	dpsize += dp_size(eth_get_dev());
- 
--	start = buf = efi_alloc(dpsize + sizeof(END));
--	if (!buf)
-+	start = malloc(dpsize + sizeof(END));
-+	if (!start)
- 		return NULL;
- 
--	buf = dp_fill(buf, eth_get_dev());
-+	buf = dp_fill(start, eth_get_dev());
- 
- 	*((struct efi_device_path *)buf) = END;
- 
-@@ -980,22 +980,21 @@ struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
- 					uint64_t end_address)
- {
- 	struct efi_device_path_memory *mdp;
--	void *buf, *start;
-+	void *start;
- 
--	start = buf = efi_alloc(sizeof(*mdp) + sizeof(END));
--	if (!buf)
-+	start = malloc(sizeof(*mdp) + sizeof(END));
-+	if (!start)
- 		return NULL;
- 
--	mdp = buf;
-+	mdp = start;
- 	mdp->dp.type = DEVICE_PATH_TYPE_HARDWARE_DEVICE;
- 	mdp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MEMORY;
- 	mdp->dp.length = sizeof(*mdp);
- 	mdp->memory_type = memory_type;
- 	mdp->start_address = start_address;
- 	mdp->end_address = end_address;
--	buf = &mdp[1];
- 
--	*((struct efi_device_path *)buf) = END;
-+	*((struct efi_device_path *)&mdp[1]) = END;
- 
- 	return start;
- }
-diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
-index 0c7b30a26e7..4192581ac45 100644
---- a/lib/efi_loader/efi_device_path_to_text.c
-+++ b/lib/efi_loader/efi_device_path_to_text.c
-@@ -33,7 +33,7 @@ static u16 *efi_str_to_u16(char *str)
- 	u16 *out, *dst;
- 
- 	len = sizeof(u16) * (utf8_utf16_strlen(str) + 1);
--	out = efi_alloc(len);
-+	out = malloc(len);
- 	if (!out)
- 		return NULL;
- 	dst = out;
++	/*
++	 * For now, allow EFI to allocate memory outside the malloc() region.
++	 * Once these bugs are fixed, this can be changed to EFIAA_FAIL, with
++	 * the allocations being allowed only when the EFI system is booting.
++	 */
++	efi_set_alloc(EFIAA_ALLOW);
++
+ 	/* Initialize root node */
+ 	ret = efi_root_node_register();
+ 	if (ret != EFI_SUCCESS)
 -- 
 2.34.1
 
