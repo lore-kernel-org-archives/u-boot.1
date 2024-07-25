@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B4AC3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D5CBC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 534EC8869E;
+	by phobos.denx.de (Postfix) with ESMTP id A9106885C5;
 	Thu, 25 Jul 2024 22:45:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qvyb4ty1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aqPF2H4f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DC6E8851E; Thu, 25 Jul 2024 22:45:38 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 14EA888548; Thu, 25 Jul 2024 22:45:38 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88CA188548
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 22:45:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5FDB88599
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 22:45:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3db157cb959so187236b6e.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:45:34 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3d92e1bc90dso112946b6e.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721940333; x=1722545133; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721940332; x=1722545132; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kYqZyVAHZrNM0H2n8OxL4kFCb9lPiM+vnuEfsBZOrHI=;
- b=qvyb4ty13rY7yZGqEeH4d2bSFUWLthM7b6TnzojuOBtczdYRtfxq5ZY3FnVEhXvZf0
- VsD/EKhmEb47oa5NvZbSxsvN16qbIafjUmDlrcrHXgMeoTodmHecWXJwb/y+90m8phfM
- BY7lDjG0W5g8vXGgsbsBGWLVNBpQ624RX4QSbROok5qWWC+ha0iPFtdd/06ACRs9iIMn
- r9ECnzkCFun1d5BW0G99Nqd8Kxj36uiHmNRablhzCgTfXdyQr63pFaKbfc03vEslVDxE
- p15P89k9l4cCiC+RHRc6tLIWlKz4jd6P99mCmmAHAc+Gbtte8ovOHgaTy/ZcOm+aDVwA
- mQnw==
+ bh=7O+j1XkcM7xvkRySBd00VSnTG+7noLEDlPYfT97OsBI=;
+ b=aqPF2H4fI67GF9IYDZX2EdJRh/4TecHkdlIsOEAAVKwVMCTKUJSsLj7WVlK+Dc08mF
+ iZXSKUCfsMkfAbcQFpjQ4bu+px2h+TMBEs6HAN7euziuao1/E3M223pe1LKgRqlUm54E
+ g900X1nFgHFDAYxiJHFp+vARWTLo05wWdNsygCXIvnd1u/8U9Swx4RYd4TK+GIYmjh7s
+ u/yDcEJi5CETd+afpp0j6k+S5jHIkgcNSVK0tTUjPrch2VpRmHKZUAfZpkUzFKVQ58k8
+ 7gH/PDDwnmFx1t6YywOZt7YCuBa4YVFgY+bRmdVXFvB+cuSv7JjNYeT23q3mr6SnliyU
+ 4hRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721940333; x=1722545133;
+ d=1e100.net; s=20230601; t=1721940332; x=1722545132;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kYqZyVAHZrNM0H2n8OxL4kFCb9lPiM+vnuEfsBZOrHI=;
- b=uIXQNhQVoNU4pSh7mlV8A4EP5pC/FoDIE/e+RLaGOlakiWf+useY//hAQLZABTUvkI
- 4D3Kc+lMN3Ck3Unz1HC34FLpIYIcdv3j5jjkgmLJZta09SPPlhAIhTHGIgkQ22eaLMmw
- ZePi/HuAVPf3Fh5/YT2aibinVRWZg5fxUGIGhHk2WTlxlbb2IJrRo6zsHlrJ8Z2NvBj0
- Qn97n2xVRdszzhsTMReIEu49N8RhCzL3khjlC0z99nI7qGsHvL6Iu7PbZb9uovVayT5O
- j9exdM+zt1ueKUWg3rVkq+lgL4lkq8ybqdZaBMf5UyDrUhPLBOHk07fIpSj3pT2ORKh+
- MlIA==
+ bh=7O+j1XkcM7xvkRySBd00VSnTG+7noLEDlPYfT97OsBI=;
+ b=iEZwqQ9exbQmgJAw7w9eEp1JOtDiIJfmkw7JHxQ+UyqsDSNUbiHjaq7oLfYirTD/Ad
+ iCxVfDQqo3UC251P4IXO/p61rBaMIB2wiYEja79QZpv5uQFbZ8r+IKhS/geLyqNGvzLo
+ jc4/zGjAdOCZAod26vhZkCWJ00YiICp7a5j06Jxi9vmPccI1XSA8j2JKE9Sj9frVdVV0
+ Kxl/yQYsEoY109tvPy0ymDy8/Ix6qSJzGiFMrIuqbz2i+IYiC997ihtFEgQdyKEn2oC2
+ bEzUH7JXZzvchgOV76X1XUMg2W6HThTEHW0PQdMSxQCdRPB97S6iRZn3CvYDpYE0Hshc
+ Hi8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVn10Xqkof8D6YQuJKK01nwiMCsUX+hmkbcNzn7EGtG/886rx1gPfazVOn/QI4XOa4DgjWoJiVxiFUnUzCyCkj5x3D8g==
-X-Gm-Message-State: AOJu0Ywz5vee3YbkpxyOderO7Y7ve96yqTbcFFzZB+3vkErTVcDN56/5
- Dja4Fd7jtg5VJtVxwo6uITSp+lMP/At0Wep69+6aw7sBLc+fWfL01ZEK5RWc7dM=
-X-Google-Smtp-Source: AGHT+IGRz5paOhuZ/XUDz86SzNj5aU2Cr2fD84q+sBaVUJQn7AZNWWXrxSH8u+r2/MtWvp0aDpn+qw==
-X-Received: by 2002:a05:6808:222a:b0:3d6:317b:a95c with SMTP id
- 5614622812f47-3db14157118mr3798997b6e.38.1721940333288; 
- Thu, 25 Jul 2024 13:45:33 -0700 (PDT)
+ AJvYcCVLu/8Y5liEiECOF3RTmKVG5bmiKG++hIHr7/DjK4//RISgf4Rcf+XqrIkO/fERZdmxVDnuPitUlBhvIE5G5t0gj1SDhQ==
+X-Gm-Message-State: AOJu0YxhSBxYt8MGPIYiq5EWb1qWealWdgaiB6pNRUKek9n5jQQd4qrm
+ zh3ml8SlRaIOvSS8ktrhFPBP8A+QYUTOtWdefitSR8ERgVMUcJdondvWX3nSfEE=
+X-Google-Smtp-Source: AGHT+IEzmqL+aXj9//U1kpL53B++QJ9fKSHfMImKKCzqz8wWweFwKCpkIkf7wWv1PAX1+SVAkuNw6Q==
+X-Received: by 2002:a05:6808:2012:b0:3d9:4221:606b with SMTP id
+ 5614622812f47-3db10c2fa4amr1461521b6e.8.1721940332421; 
+ Thu, 25 Jul 2024 13:45:32 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3db133fc6d4sm437317b6e.7.2024.07.25.13.45.32
+ 5614622812f47-3db13520c1esm436442b6e.40.2024.07.25.13.45.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 13:45:33 -0700 (PDT)
+ Thu, 25 Jul 2024 13:45:32 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Jaehoon Chung <jh80.chung@samsung.com>
 Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>,
@@ -78,9 +78,10 @@ Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v4 16/38] arm: exynos: Add header guard for dwmmc.h
-Date: Thu, 25 Jul 2024 15:44:58 -0500
-Message-Id: <20240725204520.18134-17-semen.protsenko@linaro.org>
+Subject: [PATCH v4 15/38] dt-bindings: exynos: Update bindings doc for DW MMC
+ controller
+Date: Thu, 25 Jul 2024 15:44:57 -0500
+Message-Id: <20240725204520.18134-16-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240725204520.18134-1-semen.protsenko@linaro.org>
 References: <20240725204520.18134-1-semen.protsenko@linaro.org>
@@ -102,9 +103,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing header guard to prevent possible build errors.
+Update the bindings doc for Exynos DW MMC block to follow the upstream
+example and reflect the latest changes made in corresponding Linux
+kernel bindings.
 
-Fixes: 77b55e8cfcee ("ARM: exynos: move SoC sources to mach-exynos")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
 Changes in v4:
@@ -116,29 +118,81 @@ Changes in v3:
 Changes in v2:
   - (none)
 
- arch/arm/mach-exynos/include/mach/dwmmc.h | 5 +++++
- 1 file changed, 5 insertions(+)
+ doc/device-tree-bindings/exynos/dwmmc.txt | 46 +++++++++++++----------
+ 1 file changed, 27 insertions(+), 19 deletions(-)
 
-diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
-index 59c28ed54c58..811e9a04c6e3 100644
---- a/arch/arm/mach-exynos/include/mach/dwmmc.h
-+++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
-@@ -4,6 +4,9 @@
-  * Jaehoon Chung <jh80.chung@samsung.com>
-  */
+diff --git a/doc/device-tree-bindings/exynos/dwmmc.txt b/doc/device-tree-bindings/exynos/dwmmc.txt
+index 694d1959162c..d90792be8599 100644
+--- a/doc/device-tree-bindings/exynos/dwmmc.txt
++++ b/doc/device-tree-bindings/exynos/dwmmc.txt
+@@ -12,7 +12,9 @@ SOC specific and Board specific properties are channel specific.
+ Required SoC Specific Properties:
  
-+#ifndef __ASM_ARM_ARCH_DWMMC_H
-+#define __ASM_ARM_ARCH_DWMMC_H
+ - compatible: should be
+-	- samsung,exynos-dwmmc: for exynos platforms
++	- samsung,exynos4412-dw-mshc: for Exynos4 platforms
++	- samsung,exynos-dwmmc: for Exynos5 platforms
++	- samsung,exynos7-dw-mshc-smu: for Exynos7 platforms (with SMU block)
+ 
+ - reg: physical base address of the controller and length of memory mapped
+ 	region.
+@@ -23,32 +25,38 @@ Required Board Specific Properties:
+ 
+ - #address-cells: should be 1.
+ - #size-cells: should be 0.
+-- samsung,bus-width: The width of the bus used to interface the devices
++- bus-width: The width of the bus used to interface the devices
+ 	supported by DWC_mobile_storage (SD-MMC/EMMC/SDIO).
+ 	. Typically the bus width is 4 or 8.
+-- samsung,timing: The timing values to be written into the
+-	Drv/sample clock selection register of corresponding channel.
+-	. It is comprised of 3 values corresponding to the 3 fileds
+-	  'SelClk_sample', 'SelClk_drv' and 'DIVRATIO' of CLKSEL register.
+-	. SelClk_sample: Select sample clock among 8 shifted clocks.
+-	. SelClk_drv: Select drv clock among 8 shifted clocks.
+-	. DIVRATIO: Clock Divide ratio select.
+-	. The above 3 values are used by the clock phase shifter.
++- samsung,dw-mshc-ciu-div: The divider value for the card interface unit (ciu)
++	clock (0..7).
++- samsung,dw-mshc-sdr-timing: The timing values for single data rate (SDR) mode
++	operation.
++	. First value is CIU clock phase shift value for TX mode (0..7).
++	. Second value is CIU clock phase shift value for RX mode (0..7).
++- samsung,dw-mshc-ddr-timing: The timing values for double data rate (DDR) mode
++	operation. If missing, values from samsung,dw-mshc-sdr-timing are used.
++	. First value is CIU clock phase shift value for TX mode (0..7).
++	. Second value is CIU clock phase shift value for RX mode (0..7).
+ 
+ Example:
+ 
+ mmc@12200000 {
+-	samsung,bus-width = <8>;
+-	samsung,timing = <1 3 3>;
+-	samsung,removable = <1>;
+-}
++	bus-width = <8>;
++	non-removable;
++	samsung,dw-mshc-ciu-div = <3>;
++	samsung,dw-mshc-sdr-timing = <1 3>;
++	samsung,dw-mshc-ddr-timing = <0 2>;
++};
 +
- #define DWMCI_CLKSEL		0x09C
- #define DWMCI_SET_SAMPLE_CLK(x)	(x)
- #define DWMCI_SET_DRV_CLK(x)	((x) << 16)
-@@ -25,3 +28,5 @@
- /* CLKSEL Register */
- #define DWMCI_DIVRATIO_BIT		24
- #define DWMCI_DIVRATIO_MASK		0x7
-+
-+#endif /* __ASM_ARM_ARCH_DWMMC_H */
+ In the above example,
+ 	. The bus width is 8
+-	. Timing is comprised of 3 values as explained below
++	. Divider value for CLKSEL register is 3. The CIU clock rate will be
++	  calculated as SDCLKIN / (3 + 1).
++	. SDR and DDR timings are comprised of 2 values as explained below
+ 		1 - SelClk_sample
+ 		3 - SelClk_drv
+-		3 - DIVRATIO
+-	. The 'removable' flag indicates whether the the particilar device
++	. The 'non-removable' flag indicates whether the particular device
+ 	  cannot be removed (always present) or it is a removable device.
+-		1 - Indicates that the device is removable.
+-		0 - Indicates that the device cannot be removed.
++		Flag is present - Indicates that the device cannot be removed.
++		Flag is not present - Indicates that the device is removable.
 -- 
 2.39.2
 
