@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2122C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 15:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B6FC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 16:03:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A808488027;
-	Thu, 25 Jul 2024 17:58:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 897CF87C38;
+	Thu, 25 Jul 2024 18:03:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P6XMn3wk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Iw/IiuZD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE5C4879AF; Thu, 25 Jul 2024 17:58:20 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7DE7D87C7E; Thu, 25 Jul 2024 18:03:00 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC2A287EDC
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 17:58:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9520D879AF
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 18:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5d5aecbe0a9so12305eaf.1
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 08:58:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721923096; x=1722527896; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zP0w8H3kysWU01Fwil6otTPbYVmaAL+0XHoTwpduKf0=;
- b=P6XMn3wkLkAlcfY2nclfSH0qNHqq5W/TZqAZZnaOYzjxqO+gszbpLY2w5Z2vNGyjy7
- FHNxiprPaLsPG7AiYK/uTFRDiDtqAS4DoMsH2A+ELyc4fVDi1fE66zGnYmKNgTjwmdqC
- 28ECHEP4j7kZqpdSDxvAz2z5YO6b89rG93cCo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721923096; x=1722527896;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zP0w8H3kysWU01Fwil6otTPbYVmaAL+0XHoTwpduKf0=;
- b=NRgBGwROcLjMJZ16yNlnmmbJi44t35SL+OKkBbhTcvdVsy04XPDwtbfL+mhR9V1cjz
- 4wKLyahs9YuWyMZR5Ntqg2+hU6zeeCwsGYJplLW0zyv7XvIKsGG3Zqb9fLSCq9HejqkX
- eEvdypiIW7kF3pJ4Px/E0bqjRT59MbWSmWC8wBy54/pfGp8iW4iNzkyy9GpmDii8NEcA
- A7k+EZw/2CzuGwKL/W9n/5zqlv4VUaz1BPyKbri6xLSaXAXhRqClLFrgeQG309OYHy59
- p3icqKIBYbWt79mbxH3v1QDMVJGw1h2y0RaWe6xvrdB+G5bIWkeb1wNFXJzAux6JAkOA
- kMIA==
-X-Gm-Message-State: AOJu0Yyx7SFsVs82pDQbnB1BfjiKP2L5NYKrwoqFcbF5qcB+7SXQDXlu
- 4LooOBdlDbgEYDUPoBCGFlcJzWTuG13Fbhu2ZU5wDTMazejIAIRb2fNtMZ7uMUu+1ah3pSgQ3hF
- shBXHeC0iIOk4DAuVtNhvOiZiXd6X4yh0EoJa
-X-Google-Smtp-Source: AGHT+IFn17LxWnJw4J8mtWSbJ8eZTDxoWAreR7QFc65n3QJ7w2KTXjzzZKtbXyt6vk1liF5H8Oyr3fLYEUcvqH93Ox4=
-X-Received: by 2002:a05:6358:52cc:b0:19f:2c7e:a226 with SMTP id
- e5c5f4694b2df-1acfb893b16mr280429255d.5.1721923096394; Thu, 25 Jul 2024
- 08:58:16 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1721923377; x=1722528177; i=xypron.glpk@gmx.de;
+ bh=t2VDALz3+trI54z1vTIbe6AqwabN63zDQb6ITudIU7g=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Iw/IiuZDhybV/a3XaBMOry0m9wnv3bEnazixOCnFMvW7PZYvg9IFHZJ/Sjh/59z0
+ LIcZ428HAKCf2ny/ULwrdVvdZMDSG0Lq8/VfawmF5VqAJocI+/6x1fC1m9r+uMRWW
+ lDB5z4VBYhcC9cNPRR0DAgzhWas2uhKBxS1d5dJV9oN/VoB4X9dPY7uyXgu91ME+1
+ YVZmh0+qzswnt4pMrZqseHXqiJ7qsJodhYYAM9wGUFQ0nj1ubQZwLEOfmW29I9Ubf
+ 9GunOEL2755SXs8ctBWWV41YlIY9+Fssx7dm7gck7wQq7g6mNA92dGlIVq7RDw0u6
+ 1yfefQQ66LUtt889bg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M42jK-1sX0vg3q5I-00CnGY; Thu, 25
+ Jul 2024 18:02:56 +0200
+Message-ID: <ee3b019a-a0cf-4029-8bce-22515fbb48d6@gmx.de>
+Date: Thu, 25 Jul 2024 18:02:56 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] doc: Show more information in efi index
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20240725135629.3505072-1-sjg@chromium.org>
- <CAC_iWjK4gn8GkUb7khSQFMC+LqPN4PQZLxqJK+gZE_TLnMfUKQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjK4gn8GkUb7khSQFMC+LqPN4PQZLxqJK+gZE_TLnMfUKQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jul 2024 09:58:06 -0600
-Message-ID: <CAFLszTjnAc_zp8MXT5g7FbWRrHcVzq6PGf-1pYzCH6sJveOd0w@mail.gmail.com>
-Subject: Re: [PATCH 0/6] efi: Start tidying up memory management
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Raymond Mao <raymond.mao@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ <20240725135629.3505072-2-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240725135629.3505072-2-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:yvaJKB6lbX0chcPZir/gGrc4khqqMHGF4WCeH1CQfP6Xvf7XFep
+ AX0OMqb/HsBOAnSQcPJdbl8sr1DQlQMpUOG1rrqa3IliBK86NaQ/jw9PxIRsawAAFh1sxgl
+ LraucAv6v6Zl3XXRmzIhMd8iOaW2IDg0GzJ+i44KNL4UvG0bX+99S7peITzpSjeRnl/rain
+ v2J2riWkaIvsm04joAtgQ==
+UI-OutboundReport: notjunk:1;M01:P0:Pd8G7rWEVVk=;BN1DlouBsgIiotgUTFUK8E8AH4W
+ b3VCB0Fq+fiNkputbk8cPFoGKBL2n6nGXGNOJRtrBcjXWVrv8SOZjbSpok3z4m2/CfD8o6SHc
+ z/0mQl7LK319xa/zmo/1PFUICUHAXqpXb7ib0xuyIgiKvzz+vU/VwlDhNo+/jebE/vMrDEHgd
+ NhBiyRBMLxiYBBAzuZVqpOAAR/ncAgx5FGJWog93C24i+Nwd/aY22ufYGaSga1mZN1RGP1St6
+ SbpeE9LY0EzOJgTxPRrt1n4vO89mEMTOcmNB1KW1l9/BR0s+rAtWbU36i31hrBLJgOmt4SamJ
+ BZJh40vPHbEpDSRVa0sItAprKiTY/gHS8t8UQt45s8InixDpqTbR+z4shx5j6cDAZK7cShxki
+ Ct5RiwmMNh+q8k1NOOUV0r02tk1AGeig5IUyOK1+KzbxVuztQHp2dS8rIqH7PIaYmeB9L9UbY
+ /viHBs0+HdzYl3/wStKRpeemPuqT2PlOaFENIk+0hLtBECdo7t4wtuXJgE7/itmW4cIQEM3Fn
+ tWyyjyVti+DGETuKs8jFztjpEGSBGikl953g7Sz0rrkcOnQcicFimtgXb+gtlYWQY4rvZpEo4
+ 27Mk10IAD76c/q8S8vzqB//Xy0E2wey5J/yuKfsmFBVTJqL06SuRANcGFOuOe+0VbtmAwswiX
+ xvKoCnXZ3qkibdmBLbQ2c921kj1i3VfLjqN8Ag5FGWmSnEOBBeImJ8UxyGUJf5gr/QdnpUkin
+ PwGZM1sw/vxlv4JfNOopX9fJNNjiBsFJkTt2EXEtlzovOJB+3JtgSJLzmLVB1vl5KLN7oau2D
+ KptAEoYqHxrS85Hfg0GprW2A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,92 +92,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-On Thu, Jul 25, 2024, 08:26 Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
-
-> Hi Simon
+On 25.07.24 15:56, Simon Glass wrote:
+> The index is much more helpful if it shows the next level of headings.
+> Update tt.
 >
-> On Thu, 25 Jul 2024 at 16:58, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > We have been discussing the state of EFI memory management for some
-> > years so I thought it might be best to send a short series showing some
-> > of the issues we have talked about.
-> >
-> > This one just deals with memory allocation. It provides a way to detect
-> > EFI 'page allocations' when U-Boot' malloc() should be used. It should
-> > help us to clean up this area of U-Boot.
-> >
-> > It also updates EFI to use U-Boot memory allocation for the pool. Most
-> > functions use that anyway and it is much more efficient. It also avoids
-> > allocating things 'in space' in conflict with the loaded images.
-> >
-> > This series also includes a little patch to show more information in
-> > the index for the EFI pages.
-> >
-> > Note that this series is independent from Sugosh's lmb series[1],
-> > although I believe it will point the way to simplifying some of the
-> > later patches in that series.
-> >
-> > Overall, some issues which should be resolved are:
-> > - allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
-> >   efi_dp_dup() does not (this series makes a start)
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> The EFI memory allocations and mappings are described in the EFI spec.
-> Look at chapter 7.2 Memory Allocation Services. This patchset breaks
-> various aspects of the spec, since the metadata needed for the EFI
-> memory map is not kept from malloc. The reason efi_add_protocol() uses
-> calloc, is that this is memory used from our internal implementation
-> of the protocol linked list -- IOW how to search and identify
-> protocols that we add in a list and not UEFI boot or runtime services.
-
-
-Er, yes, I am aware of that chapter:-)
-
-Can you please be more specific about which various aspects this will break?
-
-Also please let me know if you have comments on any of the patches.
-
-Regards,
-Simon
-
-
-> Thanks
-> /Ilias
+>   doc/develop/uefi/index.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
+> diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+> index e26b1fbe05c..44540e8a537 100644
+> --- a/doc/develop/uefi/index.rst
+> +++ b/doc/develop/uefi/index.rst
+> @@ -8,7 +8,7 @@ compliant software like Linux, GRUB, and iPXE. Furthermo=
+re U-Boot itself
+>   can be run an UEFI payload.
 >
-> > - change efi_bl_init() to register events later, when the devices are
-> >   actually used
-> > - rather than efi_set_bootdev(), provide a bootstd way to take note of
-> >   the device images came from and allow EFI to query that when needed
-> > - EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
-> >
-> > Minor questions on my mind:
-> > - is unaligned access useful? Is there a performance penalty?
-> > - API confusion about whether something is an address or a pointer
-> >
-> > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=416441
-> >
-> >
-> > Simon Glass (6):
-> >   doc: Show more information in efi index
-> >   efi: Convert device_path allocation to use malloc()
-> >   efi: Allow monitoring of page allocations
-> >   efi: Avoid pool allocation in efi_get_memory_map_alloc()
-> >   efi: Use malloc() for the EFI pool
-> >   efi: Show the location of the bounce buffer
-> >
-> >  doc/develop/uefi/index.rst               |   2 +-
-> >  include/efi_loader.h                     |  24 ++++
-> >  lib/efi_loader/efi_bootbin.c             |  10 ++
-> >  lib/efi_loader/efi_device_path.c         |  43 ++++---
-> >  lib/efi_loader/efi_device_path_to_text.c |   2 +-
-> >  lib/efi_loader/efi_memory.c              | 148 +++++++++++------------
-> >  lib/efi_loader/efi_setup.c               |   7 ++
-> >  7 files changed, 133 insertions(+), 103 deletions(-)
-> >
-> > --
-> > 2.34.1
-> >
+>   .. toctree::
+> -   :maxdepth: 2
+> +   :maxdepth: 3
 >
+>      uefi.rst
+>      u-boot_on_efi.rst
+
+What we really need to do is moving usage documentation like
+
+* Executing a UEFI binary
+* Launching a UEFI binary from a FIT image
+* Run on VirtualBox (x86_64)
+
+to pages in /usage instead of having these as sections in uefi.rst and
+u-boot_on_efi.rst.
+
+Best regards
+
+Heinrich
