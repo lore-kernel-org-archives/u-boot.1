@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14B1C3DA70
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D3AEC3DA70
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:33:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45FB78862E;
+	by phobos.denx.de (Postfix) with ESMTP id AAEB88842C;
 	Fri, 26 Jul 2024 01:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HgvMb88/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dlBoYPJc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF011884AC; Fri, 26 Jul 2024 01:32:41 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 91CD9884BE; Fri, 26 Jul 2024 01:32:42 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DD118842C
+ by phobos.denx.de (Postfix) with ESMTPS id F2CB7884C5
  for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5d5aeaa9751so280204eaf.1
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-65f8626780aso14934597b3.3
  for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721950358; x=1722555158; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721950359; x=1722555159; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gjmNa/I/KK0DpGyGSJ2xzxN7PeQSr/ziBpkxzZIWJYA=;
- b=HgvMb88/aMAIX7CS4i8bPxFmPyrWAqUhNrUfGNsglyhRXSjGTmZzz+tDI150jodIPU
- r2bbgTTdrDmeP/jbJgdp0mlzkRAU8+KDXxauhnyB7LwhY+vbQWbnpv/ZszeHlDzWxjK9
- bDTsqj5QfxDRyxp3PzjYQBtRFs8+C0sCQtasw=
+ bh=MRUY/nsj+LCTxtQQ8MbKX/IVm3a4nKZ0jt5OLsea03Q=;
+ b=dlBoYPJcse0zJumAJeAOz7LDU0L+eVSbssQc3YVnoENGNuufhtWPbGQWibdD4GJ5lP
+ ds8TszyC/PyXoD4Abpxdew9sDGS9HP1Y76lM9SJXElViSKF9lBwaICG6/Cl8WVtJq/gf
+ 8XLsPUkZmhV6ZkmWLFkge1uaAJmEiIKkWgSwY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721950358; x=1722555158;
+ d=1e100.net; s=20230601; t=1721950359; x=1722555159;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gjmNa/I/KK0DpGyGSJ2xzxN7PeQSr/ziBpkxzZIWJYA=;
- b=eiLQoBiDQWL8LJ2whGitoe6K8qaazprHIM4xM51YGLRSAGqeuZE/uRRriUoq2ET0OZ
- H/eFLs7NuJlaj+JmUSaSAjXcSSpXyhoISESomA70i3twygmqyFmwHjHUt0KQc4tbhJut
- 20oQaMD7QaG7j/zEwyy+sd1/YSG1qJmMfH+bBK45jr+qgg4RH6nueR1WMJX/UJykhYt+
- riKzSDR+ttRB+lJauNNC9kxNxXJZXmsjsmyoMs2+LZBC6HjQ0vnQtOt9Eef9BPQgWKi7
- E3tp9lbQB5D1sbsSvTMd1TxjlPwmOf9UikUkUBE/hbtOqzCpSTD/pIm5pUWs+MeHmFcH
- 5vng==
-X-Gm-Message-State: AOJu0YwcK75jniK1tXkoOPXPzwfLqwY0nU2to0xLKnTHQ78POYM7TJoQ
- JiLKquTv8imS+izPH3pFcdRwCXOMGqj/0s+YglO/hUiZ2s9unz+JhSdTydjdmatbkRRHbdsOXCU
- ShJdBsy5rsK7YYBv3JPG9jto8bL3VmiYctSfP
-X-Google-Smtp-Source: AGHT+IERxnJrq7QBdavY2oLtA+36q887o9U2BFR1ND6Tz35xvmOF4bXdHkX2OWxQwVlkOspfH0qJzGTy0lux6E7LzCQ=
-X-Received: by 2002:a05:6218:260a:b0:1ac:f722:4d2 with SMTP id
- e5c5f4694b2df-1acf887dd11mr581365855d.18.1721950357814; Thu, 25 Jul 2024
- 16:32:37 -0700 (PDT)
+ bh=MRUY/nsj+LCTxtQQ8MbKX/IVm3a4nKZ0jt5OLsea03Q=;
+ b=Lb3hNWaEroUW3SGbT9ZFo1ZS4v/0ru8db7Cos6fiF6DE9boO++5X9GqmqY6PV/u3lY
+ r2lEpZv4hW1u/m7iOczW7C+0Q77SMoYtiXF8WnY68DFOGLPyqUdvljvBpBEQ2dJD3Kqi
+ Nyk7jIyTPWUUp2TJ89MzI7JAYnTJx6i9ETKdC5JMjBgK3HEyDJE4MEsFP/34inLZgT9W
+ qbvFy+v+gT4Eq1zwZGlBBUK04tq7pt0FqwhLcPScTKD7th8iMwOTW/wJLQTh5NM5zPY3
+ 6Cb968sj/qOOnC5JDmYMlIr7SLCdn7nBrtHR8sJfKF3F8c4qi+EGlrQWUywiC3ckjhAO
+ E5jA==
+X-Gm-Message-State: AOJu0Yy1hKoq9ofnbEpqYhjkOqFzNEsVtycczQkvGk9KtGkZpN/A0R0q
+ 8nwiuydsWpu6hjizIevNvG7JnciVz4VeZhlNiMznseVo+IBnDDHhis9gZJ+F1UPEnKjw1+s+LiN
+ leQp8nNhc3+a1Ig0/kctmcUqXt2XiGs0oPCGW
+X-Google-Smtp-Source: AGHT+IHnutacuI+T+jLzPPCmuWRPCTGxWQcJvTu6D5YKsRemSy/YzN7U0h47Myi2fWQC0iHLGKVEUc4MOZw8GmnBnck=
+X-Received: by 2002:a0d:f5c7:0:b0:64a:79f6:2f2d with SMTP id
+ 00721157ae682-675b9b60514mr36186687b3.31.1721950358766; Thu, 25 Jul 2024
+ 16:32:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-17-sughosh.ganu@linaro.org>
-In-Reply-To: <20240724060224.3071065-17-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-18-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-18-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
 Date: Thu, 25 Jul 2024 17:32:27 -0600
-Message-ID: <CAFLszThWjpz47RRhAbrYqu47NnYs3ZtXWe-hE5ABw9dokyQ46g@mail.gmail.com>
-Subject: Re: [PATCH 16/40] lmb: allow lmb module to be used in SPL
+Message-ID: <CAFLszTgrxZBkOgcrq0cwtrGs7UdFsqxH9srg0rBmxLfummg9qw@mail.gmail.com>
+Subject: Re: [PATCH 17/40] lmb: introduce a function to add memory to the lmb
+ memory map
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -94,31 +95,107 @@ Hi Sughosh,
 
 On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> With the introduction of separate config symbols for the SPL phase of
-> U-Boot, the condition checks need to be tweaked so that platforms that
-> enable the LMB module in SPL are also able to call the LMB API's. Use
-> the appropriate condition checks to achieve this.
+> Introduce a function lmb_add_memory() to add available memory to the
+> LMB memory map. Call this function during board init once the LMB data
+> structures have been initialised.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since rfc:
-> * Replace conditional compilation of lmb code to an if
->   (CONFIG_IS_ENABLED()) in store_block() and tftp_init_load_addr().
+> Changes since rfc: None
 >
->  board/xilinx/common/board.c |  2 +-
->  boot/bootm.c                |  4 ++--
->  boot/image-board.c          |  2 +-
->  fs/fs.c                     |  4 ++--
->  lib/Makefile                |  2 +-
->  net/tftp.c                  | 40 ++++++++++++++++++-------------------
->  net/wget.c                  |  4 ++--
->  7 files changed, 29 insertions(+), 29 deletions(-)
+>  include/lmb.h | 12 ++++++++++++
+>  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 54 insertions(+)
+>
+> diff --git a/include/lmb.h b/include/lmb.h
+> index a308796d58..77e2a23c0d 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -40,6 +40,18 @@ struct lmb_region {
+>  void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
+>  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+>                                 void *fdt_blob);
+> +
+> +/**
+> + * lmb_add_memory() - Add memory range for LMB allocations
+> + *
+> + * Add the entire available memory range to the pool of memory that
+> + * can be used by the LMB module for allocations.
+> + *
+> + * Return: None
+> + *
+> + */
+> +void lmb_add_memory(void);
+> +
+>  long lmb_add(phys_addr_t base, phys_size_t size);
+>  long lmb_reserve(phys_addr_t base, phys_size_t size);
+>  /**
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 88352e9a25..db0874371a 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -239,6 +239,46 @@ void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
+>         lmb_reserve_common(fdt_blob);
+>  }
+>
+> +/**
+> + * lmb_add_memory() - Add memory range for LMB allocations
+> + *
+> + * Add the entire available memory range to the pool of memory that
+> + * can be used by the LMB module for allocations.
+> + *
+> + * This can be overridden for specific boards/architectures.
 
-Same question as previous patch...do any platforms need lmb in SPL?
+Why is this needed? I'm really not a fan of weak functions...it often
+means we should have a proper API for it.
 
-The cover letter says "The LMB module is enabled by default for the
-main U-Boot image, while it needs to be enabled for SPL." but I don't
-really understand that.
+> + *
+> + * Return: None
+> + *
+> + */
+> +__weak void lmb_add_memory(void)
+> +{
+> +       int i;
+> +       phys_size_t size;
+> +       phys_addr_t rgn_top;
+> +       u64 ram_top = gd->ram_top;
+> +       struct bd_info *bd = gd->bd;
+> +
+> +       /* Assume a 4GB ram_top if not defined */
+> +       if (!ram_top)
+> +               ram_top = 0x100000000ULL;
+> +
+> +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> +               size = bd->bi_dram[i].size;
+> +               if (size) {
+> +                       if (bd->bi_dram[i].start > ram_top)
+> +                               continue;
+> +
+> +                       rgn_top = bd->bi_dram[i].start +
+> +                               bd->bi_dram[i].size;
+> +
+> +                       if (rgn_top > ram_top)
+> +                               size -= rgn_top - ram_top;
+> +
+> +                       lmb_add(bd->bi_dram[i].start, size);
+> +               }
+> +       }
+> +}
+> +
+>  /* Initialize the struct, add memory and call arch/board reserve functions */
+>  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+>                                 void *fdt_blob)
+> @@ -728,5 +768,7 @@ int lmb_mem_regions_init(void)
+>                 return -1;
+>         }
+>
+> +       lmb_add_memory();
+> +
+>         return 0;
+>  }
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
