@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D584C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 12:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40B2AC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 12:58:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0800887E3F;
-	Thu, 25 Jul 2024 14:58:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 692DA86E85;
+	Thu, 25 Jul 2024 14:58:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H9AVoQZS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D09c+jev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 330A787D8C; Thu, 25 Jul 2024 14:58:28 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 56E778800C; Thu, 25 Jul 2024 14:58:30 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7902986D4C
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 14:58:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2DA887C86
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 14:58:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4257d5fc9b7so8989435e9.2
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 05:58:25 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4280854e236so3034665e9.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 05:58:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721912305; x=1722517105; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/G6IwvlYEHqL0/IiCFWZksTZp0bXY7okRowYIbnekUY=;
- b=H9AVoQZSjZH56zHWrKYh3jECd1rfQCI6BYQ6iBDeORVCcuMFYGEhVNJNW4OdjiIvvT
- QyC+Bgz2hRCByl47yZt/rnlldeIgH2S45ZtoPAE9bSpVrCdpjffO2jCN3E6Wu4uCuRSc
- VwK7Q0o4jM6c29g29TWlFctwhiDknR9jL627YNI2Xd0ppKpyOaEFqsQRmiuLu0QsilwN
- 9u/nonHWx5w3WrCxR6ikaqyoMr/RcTuv2p4qsV0tQ8whOT9bQ55O9PslgXuEEhNRojEb
- Szc7zS7vMdBFL6GWEMOV/PRowyQo9aM1fmSFxWEBN+L/up2Nlml3VP5RPyYpHtL7GaR/
- 2cHQ==
+ d=linaro.org; s=google; t=1721912306; x=1722517106; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OtxPpdu/icEAGpLxXdEVvUaRpUbIJuvBVSjL04hPKX8=;
+ b=D09c+jevNCjLFmbKnsJppBwnkX1x/d7LUCKnkUVgBA4s61mJUQCxEG03kmXzN8xb04
+ NkCTPlihm61OfM946G9BIOlQ+muYqN+svQk/TVAHIHVCafozcO48+aaljMYz3CWRyoKK
+ DMDPJyvLnyCIvEt1joHO4CnX1z8OOxFCFIPc3eauVYQ0n9PdF6T2nIng33gwNM5Y/Kbg
+ k50YBtCAHZHsYuxapDUH1UOqTOTAiooqSIXkUFbC5cNw1mLh/jrNDK6yxldChGm8xxb+
+ xx1oXEcpg8HIvXAnBk8s63Q2fCp7KLYys0KnE7CkJmgasTHMhCijBHjIPsuWcQ4tupD+
+ ieQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721912305; x=1722517105;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/G6IwvlYEHqL0/IiCFWZksTZp0bXY7okRowYIbnekUY=;
- b=NjKSQ6ixRS1jhC7Vk40pV83EEhZZApNZrDyR8hKVen08SGwExSVfZ6FdSP8xnVTv1X
- YkyV7Cf+fFyJqCrG2hyI7iqnlBCrwdxB52AJVguLlpC5GyVgEnGT6CVJLEipUepbMWDb
- c60XqjZ1kC1M04A+NqA3JBdkLNCGxyhpRqwEP1S6FvMINlB2hpdaF9GJHkQYL3Kehfvh
- ugMCTLWIPYGXLM6zYLhQN2OE9MzsOPQkfCBugGyyLnKxAdbDkOft6vobZDDrZ46/R9TP
- Vpz1XoBD6SzhhlWB7cr7wCAu0/mPD7K2dNqRJNIOLXsTiAMPp1sGdp1qUQb7Hjf8V8L4
- axuA==
-X-Gm-Message-State: AOJu0YwCLO6g+UkpZzXbwhjqvCAJNtJW8GKaOzMBpQW6VtVLYoVdFDwB
- JtoPz3qHhhboEdO8DeiGt+czGivuFHLMmBrsjVPJqSUgD4m55Im+1QBBPfyxCP9jHUCf3Uy9WEX
- HvnA=
-X-Google-Smtp-Source: AGHT+IHbYZnNMdVSgolsaInZJXamxldGwLxPGveW6sFKDQ4erD3uCQeYC4n66dyhpCKq7tcA5o1kTA==
-X-Received: by 2002:a05:600c:5703:b0:426:6bf9:608d with SMTP id
- 5b1f17b1804b1-42806b86ef9mr16390365e9.12.1721912304510; 
- Thu, 25 Jul 2024 05:58:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721912306; x=1722517106;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OtxPpdu/icEAGpLxXdEVvUaRpUbIJuvBVSjL04hPKX8=;
+ b=DxNERq9VVau2qooodesaIur0FhEfEi7UF9enGmVdZiX0uCKNvJLifypGvAgZ+qiZ+E
+ D5fGxE/aw+Aw1tytwBQTJHDWZDW8zflyxShaHf7SWqyUJi+snL2ngJtlTzrBPZAmg7GJ
+ /xIJDlMxgCA2UcaztFUuj2hSrN9dqCYG5wjlzPw6umEqasOAH4LPwAsIZRL5P7U4LdRU
+ wN79RZ+S/FsX1itpT3VYg6icJrsSisbkjHIVCQ2ooa8dFXlnauTr6YoVF1SMQUjfnf5z
+ AkknumjqjqhzGEljP2oVMVLtm1apTg/os+GdQdUaleNFG6kePYscITCI6KQp74KIkygJ
+ XOqg==
+X-Gm-Message-State: AOJu0YwraygtXSK27i71wqo2Vao8/KNzvcqA/BD9bdfG0BEqveFIaqAX
+ VRQDtStX4G9+PpS7KJFjg5JDlf+JgzrPyqyCpUWRCiTAG/B5ca+MJ46eIflIHPnwjae8g2CiFJb
+ X6FZ5KA==
+X-Google-Smtp-Source: AGHT+IHOpDzTgYN28GnXeKRJyOavDUdUYUGlpX2DMR9mrWg3OEw4rELKwp/3IKdK+LIhlJ8CRACQqQ==
+X-Received: by 2002:a05:600c:35c6:b0:426:67f0:b4eb with SMTP id
+ 5b1f17b1804b1-428055041a8mr16169825e9.2.1721912305630; 
+ Thu, 25 Jul 2024 05:58:25 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:a701:ef5f:d613:3e14])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-4280573fd83sm34765205e9.19.2024.07.25.05.58.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 05:58:24 -0700 (PDT)
+ Thu, 25 Jul 2024 05:58:25 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH v5 00/20] Introduce the lwIP network stack
-Date: Thu, 25 Jul 2024 14:57:21 +0200
-Message-Id: <cover.1721910373.git.jerome.forissier@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Angelo Dureghello <angelo@kernel-space.org>,
+ TsiChung Liew <Tsi-Chung.Liew@nxp.com>, Stefan Roese <sr@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Jason Liu <jason.hui.liu@nxp.com>,
+ William Zhang <william.zhang@broadcom.com>
+Subject: [PATCH v5 01/20] flash: prefix error codes with FL_
+Date: Thu, 25 Jul 2024 14:57:22 +0200
+Message-Id: <1b22bbc08cb0841256283114db7ae117d97c0155.1721910373.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <cover.1721910373.git.jerome.forissier@linaro.org>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,394 +99,440 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
-stack [2] [3] as an alternative to the current implementation in net/,
-selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-reasons for doing so are:
-- Make the support of HTTPS in the wget command easier. Javier T. and
-Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-so. With that it becomes possible to fetch and launch a distro installer
-such as Debian etc. using a secure, authenticated connection directly
-from the U-Boot shell. Several use cases:
-  * Authentication: prevent MITM attack (third party replacing the
-binary with a different one)
-  * Confidentiality: prevent third parties from grabbing a copy of the
-image as it is being downloaded
-  * Allow connection to servers that do not support plain HTTP anymore
-(this is becoming more and more common on the Internet these days)
-- Possibly benefit from additional features implemented in lwIP
-- Less code to maintain in U-Boot
+Prefix the flash status codes (ERR_*) with FL_ in order to avoid clashes
+with third-party libraries. Case in point: including the lwIP library
+header file <lwip/err.h> which defines err_enum_t as an enum with values
+being ERR_*.
 
-Prior to applying this series, the lwIP stack needs to be added as a
-Git subtree with the following command:
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ board/cobra5272/flash.c           | 26 +++++++++---------
+ board/freescale/m5253demo/flash.c |  6 ++---
+ common/flash.c                    | 44 +++++++++++++++----------------
+ drivers/mtd/cfi_flash.c           | 36 ++++++++++++-------------
+ include/flash.h                   | 20 +++++++-------
+ 5 files changed, 66 insertions(+), 66 deletions(-)
 
- $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-
-Notes:
-
-1. A number of features are currently incompatible with NET_LWIP: SANDBOX,
-DFU_TFTP, FASTBOOT, SPL_NET. All make assumptions on how the network
-stack is implemented and/or pull sybols that are not trivially exported
-from lwIP. Some interface rework may be needed.
-
-2. Due to the above and in order to provide some level of testing, a new QEMU
-configuration is introduced (qemu_arm64_lwip_defconfig) which is the same
-as qemu_arm64_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
-Tests are added to test/py/tests/test_net.py for that configuration.
-
-3. The default QEMU networking doesn't work with NET_LWIP. wget
-pauses and resets the connection. Wireshark shows [TCP Window Full] and
-[TCP ZeroWindow]. Wen using an emulated e1000 however all is fine
-(that is "-nic tap,model=e1000" on the QEMU command line, with a bridge
-configured on the host).
-
-Changes in v5:
-
-- Rebased on next
-- Refactor Kconfig options to avoid duplicates
-- Library functions use a more consistent naming (dhcp_loop(),
-ping_loop() etc.) and take a struct udevice * parameter (Heinrich S.)
-- Do not use net_process_receive_packet() for input anymore. Instead of
-calling eth_rx() which would invoke net_process_receive_packet(), we
-call a new net_lwip_rx(udev) function which invokes the device recv()
-and pushes the packets up the lwIP stack. Thus everything is tied to
-a udevice now. (Heinrich S.)
-- Add "configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=y"
-(Tom R.)
-- tftp: unify display with legacy command: add throughput, 65 hashes per
-line, one every 10 blocks received (Tom R.)
-- Moved net-lwip/* to net/lwip/* (Simon G.)
-- Rename static function low_level_output() to linkoutput() since it is
-the name used in the lwIP netif struct.
-- Fixed off-by-one in parse_url() which could cause wget to fail when
-passed a URL with a host name (as opposed to a URL with an IP address).
-- Improved TFTP performance by adding support for the blksize option
-(patches "lwip: tftp: add support of blksize option to client" and
-"net-lwip: add TFTP_BLOCKSIZE) (Tom R.)
-- Add an optional port number to the tftp command for easier testing
-(syntax: tftp [[ip:[port:]]filename])
-- wget: display an "unsupported URI" error if uri is not http://
-(Jon H.)
-- Adjusted the lwIP TCP options in lib/lwip/u-boot/lwipopts.h for
-better performance, in particular TCP_WND.
-- Add "net: fec_mxc_init(): do not ignore return status of fec_open()"
-- Set the proper environment variables when DHCP succeeds (ipaddr%d
-etc.) and read the proper ones for the given device in new_netif(),
-allowing correct behavior when several adapters are available (tested
-on i.MX8M Plus).
-- Fix an alignment issue with outgoing packets (see the linkoutput()
-function). With that the i.MX8M Plus ENET1 interface works properly.
-(reported by Tim H.).
-- Add review tags
-
-Changes in v4:
-
-- Fixed the DHCP algorithm which was missing a sys_timeout() call in
-the "fine timer" callback. This should close the issue that Tom R.
-reported with his Raspberry Pi 3 (it does fix it on mine).
-- The DHCP exchange timeout is increased from 2 to 10 seconds
-- The DHCP exchange can be interrupted with Ctrl-C.
-- "net: introduce alternative implementation as net-lwip/": rework
-dependencies. A few symbols have 'depends on !NET_LWIP' and in addition
-'NET_LWIP depends on !SANDBOX'. Sandbox, DSA and fastboot are
-unsupported, because they are deeply welded to the current stack.
-- All network commands (dns, ping, tftp and wget):
-  * Get rid of global variables (Ilias A.)
-  * Use printf() rather than log_info()
-- "net-lwip: add ping command": use packet count instead of
-timeout, fix code style (Ilias A.)
-- Add "net: split cmd/net.c into cmd/net.c and cmd/net-common.c"
-extracted from the wget patch (Ilias A.).
-- Add "net: split include/net.h into net{,-common,-legacy,-lwip}.h"
-(Ilias A.)
-- Add "flash: prefix error codes with FL_" which is required to
-avoid name clashes when splitting net.h
-- Reworked the initialization of the lwIP stack. One and only
-one network interface (struct netif) is added for the duration
-of the command that uses that interface. That's commit "net-lwip:
-add DHCP support and dhcp commmand".
-- Drop "test: dm: dsa, eth: disable tests when CONFIG_NET_LWIP=y",
-not needed now that NET_LWIP depend on !SANDBOX.
-- qemu_arm64_lwip_defconfig now enables CMD_DNS and CMD_WGET (so
-that all the supported network commands are available).
-
-Changes in v3:
-
-- Make NET_LWIP a Kconfig choice in patch "net: introduce alternative
-implementation as net-lwip/" (Tom R.)
-- Drop the patch introducing lwIP as a Git subtree and document the git
-command in the cover letter instead (Tom R.)
-- "net-lwip: add TFTP support and tftpboot command": use the same
-"Bytes transferred =" message as in the legacy implementation (Tom R.,
-Maxim U.)
-- Drop "test/py: net: add _lwip variants of dhcp, ping and tftpboot
-tests" which is not needed anymore.
-- Add missing kfree() calls in cmd/net-common.c and fix the parsing of
-decimal address in net-lwip/wget.c (patch "net-lwip: add wget command")
-(Maxim U.)
-- "net-lwip: add ping command": drop the ICMP payload (Ilias A.). Set
-the sequence number to zero when entering ping_loop().
-
-Changes in v2:
-
-** Address comments from Ilias A.
-
-- "net-lwip: add wget command"
-Implement the wget_with_dns() function to do most of the wget work and
-call it from do_wget(). This allows to simplify patch "net-lwip: add
-support for EFI_HTTP_BOOT".
-
-- "net-lwip: import net command from cmd/net.c"
-Move a few functions from cmd/net.c to a new file cmd/net-common.c
-rather than duplicating then in cmd/net-lwip.c.
-
-- "net-lwip: add support for EFI_HTTP_BOOT"
-Since wget_with_dns() is now implemented in "net-lwip: add wget command",
-just enable the wget command when the lwIP stack is enabled and
-EFI_HTTP_BOOT is requested.
-
-** Address comments from Tom R.
-
-- "net-lwip: add DHCP support and dhcp commmand",
-  "net-lwip: add TFTP support and tftpboot command",
-  "net-lwip: add ping command",
-  "net-lwip: add dns command",
-  "net-lwip: add wget command"
-Do not introduce new CMD_XXX_LWIP symbols and use existing CMD_XXX
-instead.
-
-- "configs: add qemu_arm64_lwip_defconfig"
-Use #include <configs/qemu_arm64_defconfig>.
-
-- "net-lwip: import lwIP library under lib/lwip"
-Patch removed and replaced by the introduction of a Git subtree:
-"Squashed 'lib/lwip/lwip/' content from commit 0a0452b2c3".
-
-Note that I have not yet addressed your comments on "test: dm: dsa,
-eth: disable tests when CONFIG_NET_LWIP=y"). I need some more time
-for that and I think running CI on this v2 will help better understand
-what is needed for v3.
-
-** Miscellaneous improvements
-
-- "net: introduce alternative implementation as net-lwip/":
-
-* Make DFU_OVER_TFTP not DFU_TFTP incompatible with NET_LWIP. It seems
-quite natural to supplement "depends on NET" with "&& !NET_LWIP".
-* Make PROT_*_LWIP not visible by removing the Kconfig prompt.
-
-[1] https://lore.kernel.org/all/20231127125726.3735-1-maxim.uvarov@linaro.org/
-[2] https://www.nongnu.org/lwip/
-[3] https://en.wikipedia.org/wiki/LwIP
-
-CC: Javier Tia <javier.tia@linaro.org>
-CC: Raymond Mao <raymond.mao@linaro.org>
-
-Jerome Forissier (19):
-  flash: prefix error codes with FL_
-  net: introduce alternative implementation as net-lwip/
-  configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=y
-  net: fec_mxc_init(): do not ignore return status of fec_open()
-  net: split include/net.h into net{,-common,-legacy,-lwip}.h
-  net: eth-uclass: add function eth_start_udev()
-  net-lwip: build lwIP
-  net-lwip: add DHCP support and dhcp commmand
-  net-lwip: add TFTP support and tftpboot command
-  net-lwip: add ping command
-  net-lwip: add dns command
-  net: split cmd/net.c into cmd/net.c and cmd/net-common.c
-  net-lwip: add wget command
-  cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
-  configs: add qemu_arm64_lwip_defconfig
-  lwip: tftp: add support of blksize option to client
-  net-lwip: add TFTP_BLOCKSIZE
-  CI: add qemu_arm64_lwip to the test matrix
-  MAINTAINERS: net-lwip: add myself as a maintainer
-
-Jonathan Humphreys (1):
-  net-lwip: lwIP wget supports user defined port in the uri, so allow
-    it.
-
- .azure-pipelines.yml                          |   7 +
- Kconfig                                       |  26 +
- MAINTAINERS                                   |  11 +
- Makefile                                      |   4 +-
- board/cobra5272/flash.c                       |  26 +-
- board/freescale/m5253demo/flash.c             |   6 +-
- boot/Kconfig                                  |   3 +-
- cmd/Kconfig                                   |  84 +-
- cmd/Makefile                                  |   9 +-
- cmd/bdinfo.c                                  |   5 +-
- cmd/elf.c                                     |   2 +-
- cmd/net-common.c                              | 109 ++
- cmd/net-lwip.c                                |  45 +
- cmd/net.c                                     | 115 ---
- common/Kconfig                                |   2 +-
- common/board_r.c                              |   4 +-
- common/flash.c                                |  44 +-
- common/spl/Kconfig                            |   1 +
- common/usb_kbd.c                              |   2 +-
- configs/LicheePi_Zero_defconfig               |   2 +-
- configs/M5249EVB_defconfig                    |   2 +-
- configs/am335x_pdu001_defconfig               |   2 +-
- configs/am62ax_evm_r5_defconfig               |   2 +-
- configs/am62px_evm_r5_defconfig               |   2 +-
- configs/am62x_beagleplay_r5_defconfig         |   2 +-
- configs/amcore_defconfig                      |   2 +-
- configs/anbernic-rgxx3-rk3566_defconfig       |   2 +-
- configs/ap143_defconfig                       |   2 +-
- configs/ap152_defconfig                       |   2 +-
- configs/apple_m1_defconfig                    |   2 +-
- configs/astro_mcf5373l_defconfig              |   2 +-
- configs/at91sam9rlek_dataflash_defconfig      |   2 +-
- configs/at91sam9rlek_mmc_defconfig            |   2 +-
- configs/at91sam9rlek_nandflash_defconfig      |   2 +-
- configs/bcm7260_defconfig                     |   2 +-
- configs/bcm7445_defconfig                     |   2 +-
- configs/bcm968380gerg_ram_defconfig           |   2 +-
- configs/bcmns_defconfig                       |   2 +-
- configs/chromebook_samus_tpl_defconfig        |   2 +-
- configs/cortina_presidio-asic-base_defconfig  |   2 +-
- configs/cortina_presidio-asic-pnand_defconfig |   2 +-
- configs/durian_defconfig                      |   2 +-
- configs/e850-96_defconfig                     |   2 +-
- configs/ea-lpc3250devkitv2_defconfig          |   2 +-
- configs/efi-x86_app32_defconfig               |   2 +-
- configs/efi-x86_app64_defconfig               |   2 +-
- configs/emsdp_defconfig                       |   2 +-
- configs/evb-px5_defconfig                     |   2 +-
- configs/generic-rk3568_defconfig              |   2 +-
- configs/generic-rk3588_defconfig              |   2 +-
- configs/hc2910_2aghd05_defconfig              |   2 +-
- configs/igep00x0_defconfig                    |   2 +-
- configs/imx6q_bosch_acc_defconfig             |   2 +-
- configs/imx6ulz_smm_m2_defconfig              |   2 +-
- configs/iot_devkit_defconfig                  |   2 +-
- configs/legoev3_defconfig                     |   2 +-
- configs/mk808_defconfig                       |   2 +-
- configs/mx23evk_defconfig                     |   2 +-
- configs/mx28evk_defconfig                     |   2 +-
- configs/mx6memcal_defconfig                   |   2 +-
- configs/mx6ulz_14x14_evk_defconfig            |   2 +-
- configs/mx7ulp_com_defconfig                  |   2 +-
- configs/mx7ulp_evk_defconfig                  |   2 +-
- configs/mx7ulp_evk_plugin_defconfig           |   2 +-
- configs/netgear_cg3100d_ram_defconfig         |   2 +-
- configs/nsim_700_defconfig                    |   2 +-
- configs/nsim_700be_defconfig                  |   2 +-
- configs/nsim_hs38be_defconfig                 |   2 +-
- configs/openpiton_riscv64_defconfig           |   2 +-
- configs/openpiton_riscv64_spl_defconfig       |   2 +-
- configs/origen_defconfig                      |   2 +-
- configs/pe2201_defconfig                      |   2 +-
- configs/pinecube_defconfig                    |   2 +-
- configs/pm9261_defconfig                      |   2 +-
- configs/qemu_arm64_lwip_defconfig             |   5 +
- configs/s5p4418_nanopi2_defconfig             |   2 +-
- configs/s5p_goni_defconfig                    |   2 +-
- configs/s5pc210_universal_defconfig           |   2 +-
- configs/sama5d27_giantboard_defconfig         |   2 +-
- configs/sama5d29_curiosity_mmc1_defconfig     |   2 +-
- configs/sama5d29_curiosity_mmc_defconfig      |   2 +-
- .../sama5d29_curiosity_qspiflash_defconfig    |   2 +-
- configs/sama7g54_curiosity_mmc_defconfig      |   2 +-
- .../sama7g54_curiosity_nandflash_defconfig    |   2 +-
- .../sama7g54_curiosity_qspiflash_defconfig    |   2 +-
- configs/sipeed_maix_bitm_defconfig            |   2 +-
- configs/sipeed_maix_smode_defconfig           |   2 +-
- configs/stemmy_defconfig                      |   2 +-
- configs/stm32f429-discovery_defconfig         |   2 +-
- configs/stm32f429-evaluation_defconfig        |   2 +-
- configs/stm32f469-discovery_defconfig         |   2 +-
- configs/stm32h743-disco_defconfig             |   2 +-
- configs/stm32h743-eval_defconfig              |   2 +-
- configs/stm32h750-art-pi_defconfig            |   2 +-
- configs/stm32mp25_defconfig                   |   2 +-
- configs/stmark2_defconfig                     |   2 +-
- configs/th1520_lpi4a_defconfig                |   2 +-
- configs/thunderx_88xx_defconfig               |   2 +-
- configs/tools-only_defconfig                  |   2 +-
- configs/topic_miami_defconfig                 |   2 +-
- configs/topic_miamilite_defconfig             |   2 +-
- configs/topic_miamiplus_defconfig             |   2 +-
- configs/total_compute_defconfig               |   2 +-
- configs/trats2_defconfig                      |   2 +-
- configs/trats_defconfig                       |   2 +-
- configs/xenguest_arm64_defconfig              |   2 +-
- configs/xenguest_arm64_virtio_defconfig       |   2 +-
- configs/xilinx_versal_mini_defconfig          |   2 +-
- configs/xilinx_versal_mini_emmc0_defconfig    |   2 +-
- configs/xilinx_versal_mini_emmc1_defconfig    |   2 +-
- configs/xilinx_versal_mini_ospi_defconfig     |   2 +-
- configs/xilinx_versal_mini_qspi_defconfig     |   2 +-
- configs/xilinx_versal_net_mini_defconfig      |   2 +-
- configs/xilinx_versal_net_mini_emmc_defconfig |   2 +-
- configs/xilinx_versal_net_mini_ospi_defconfig |   2 +-
- configs/xilinx_versal_net_mini_qspi_defconfig |   2 +-
- configs/xilinx_zynqmp_mini_defconfig          |   2 +-
- configs/xilinx_zynqmp_mini_emmc0_defconfig    |   2 +-
- configs/xilinx_zynqmp_mini_emmc1_defconfig    |   2 +-
- configs/xilinx_zynqmp_mini_nand_defconfig     |   2 +-
- .../xilinx_zynqmp_mini_nand_single_defconfig  |   2 +-
- configs/xilinx_zynqmp_mini_qspi_defconfig     |   2 +-
- configs/zynq_cse_nand_defconfig               |   2 +-
- configs/zynq_cse_nor_defconfig                |   2 +-
- configs/zynq_cse_qspi_defconfig               |   2 +-
- drivers/dfu/Kconfig                           |   1 +
- drivers/fastboot/Kconfig                      |   1 +
- drivers/mtd/cfi_flash.c                       |  36 +-
- drivers/net/Kconfig                           |   3 +-
- drivers/net/fec_mxc.c                         |   3 +-
- drivers/net/phy/Kconfig                       |   2 +-
- drivers/usb/gadget/Kconfig                    |   2 +-
- include/flash.h                               |  20 +-
- include/net-common.h                          | 413 ++++++++
- include/net-legacy.h                          | 635 ++++++++++++
- include/net-lwip.h                            |  37 +
- include/net.h                                 | 944 +-----------------
- lib/Makefile                                  |   2 +
- lib/lwip/Makefile                             |  55 +
- lib/lwip/lwip/src/apps/tftp/tftp.c            |  94 +-
- .../lwip/src/include/lwip/apps/tftp_client.h  |   1 +
- lib/lwip/u-boot/arch/cc.h                     |  43 +
- lib/lwip/u-boot/arch/sys_arch.h               |   0
- lib/lwip/u-boot/limits.h                      |   0
- lib/lwip/u-boot/lwipopts.h                    | 157 +++
- net/Kconfig                                   |  49 +-
- net/Makefile                                  |  19 +-
- net/eth-uclass.c                              |  38 +-
- net/lwip/Kconfig                              |  34 +
- net/lwip/Makefile                             |   8 +
- net/lwip/dhcp.c                               | 136 +++
- net/lwip/dns.c                                | 127 +++
- net/lwip/eth_internal.h                       |  35 +
- net/lwip/net-lwip.c                           | 292 ++++++
- net/lwip/ping.c                               | 177 ++++
- net/lwip/tftp.c                               | 276 +++++
- net/lwip/wget.c                               | 272 +++++
- 157 files changed, 3311 insertions(+), 1321 deletions(-)
- create mode 100644 cmd/net-common.c
- create mode 100644 cmd/net-lwip.c
- create mode 100644 configs/qemu_arm64_lwip_defconfig
- create mode 100644 include/net-common.h
- create mode 100644 include/net-legacy.h
- create mode 100644 include/net-lwip.h
- create mode 100644 lib/lwip/Makefile
- create mode 100644 lib/lwip/u-boot/arch/cc.h
- create mode 100644 lib/lwip/u-boot/arch/sys_arch.h
- create mode 100644 lib/lwip/u-boot/limits.h
- create mode 100644 lib/lwip/u-boot/lwipopts.h
- create mode 100644 net/lwip/Kconfig
- create mode 100644 net/lwip/Makefile
- create mode 100644 net/lwip/dhcp.c
- create mode 100644 net/lwip/dns.c
- create mode 100644 net/lwip/eth_internal.h
- create mode 100644 net/lwip/net-lwip.c
- create mode 100644 net/lwip/ping.c
- create mode 100644 net/lwip/tftp.c
- create mode 100644 net/lwip/wget.c
-
+diff --git a/board/cobra5272/flash.c b/board/cobra5272/flash.c
+index 157b71da85e..f2f8d027f6e 100644
+--- a/board/cobra5272/flash.c
++++ b/board/cobra5272/flash.c
+@@ -138,22 +138,22 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ {
+ 	ulong result;
+ 	int iflag, cflag, prot, sect;
+-	int rc = ERR_OK;
++	int rc = FL_ERR_OK;
+ 	int chip1;
+ 	ulong start;
+ 
+ 	/* first look for protection bits */
+ 
+ 	if (info->flash_id == FLASH_UNKNOWN)
+-		return ERR_UNKNOWN_FLASH_TYPE;
++		return FL_ERR_UNKNOWN_FLASH_TYPE;
+ 
+ 	if ((s_first < 0) || (s_first > s_last)) {
+-		return ERR_INVAL;
++		return FL_ERR_INVAL;
+ 	}
+ 
+ 	if ((info->flash_id & FLASH_VENDMASK) !=
+ 	    (AMD_MANUFACT & FLASH_VENDMASK)) {
+-		return ERR_UNKNOWN_FLASH_VENDOR;
++		return FL_ERR_UNKNOWN_FLASH_VENDOR;
+ 	}
+ 
+ 	prot = 0;
+@@ -163,7 +163,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ 		}
+ 	}
+ 	if (prot)
+-		return ERR_PROTECTED;
++		return FL_ERR_PROTECTED;
+ 
+ 	/*
+ 	 * Disable interrupts which might cause a timeout
+@@ -220,11 +220,11 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ 			MEM_FLASH_ADDR1 = CMD_READ_ARRAY;
+ 
+ 			if (chip1 == ERR) {
+-				rc = ERR_PROG_ERROR;
++				rc = FL_ERR_PROG_ERROR;
+ 				goto outahere;
+ 			}
+ 			if (chip1 == TMO) {
+-				rc = ERR_TIMEOUT;
++				rc = FL_ERR_TIMEOUT;
+ 				goto outahere;
+ 			}
+ 
+@@ -255,7 +255,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ {
+ 	volatile u16 *addr = (volatile u16 *) dest;
+ 	ulong result;
+-	int rc = ERR_OK;
++	int rc = FL_ERR_OK;
+ 	int cflag, iflag;
+ 	int chip1;
+ 	ulong start;
+@@ -265,7 +265,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ 	 */
+ 	result = *addr;
+ 	if ((result & data) != data)
+-		return ERR_NOT_ERASED;
++		return FL_ERR_NOT_ERASED;
+ 
+ 
+ 	/*
+@@ -306,7 +306,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ 	*addr = CMD_READ_ARRAY;
+ 
+ 	if (chip1 == ERR || *addr != data)
+-		rc = ERR_PROG_ERROR;
++		rc = FL_ERR_PROG_ERROR;
+ 
+ 	if (iflag)
+ 		enable_interrupts();
+@@ -325,13 +325,13 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 
+ 	if (addr & 1) {
+ 		printf ("unaligned destination not supported\n");
+-		return ERR_ALIGN;
++		return FL_ERR_ALIGN;
+ 	}
+ 
+ #if 0
+ 	if (cnt & 1) {
+ 		printf ("odd transfer sizes not supported\n");
+-		return ERR_ALIGN;
++		return FL_ERR_ALIGN;
+ 	}
+ #endif
+ 
+@@ -369,5 +369,5 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		cnt -= 1;
+ 	}
+ 
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+diff --git a/board/freescale/m5253demo/flash.c b/board/freescale/m5253demo/flash.c
+index 334518a4bc9..ab5d2ebff64 100644
+--- a/board/freescale/m5253demo/flash.c
++++ b/board/freescale/m5253demo/flash.c
+@@ -72,7 +72,7 @@ int flash_get_offsets(ulong base, flash_info_t * info)
+ 		}
+ 	}
+ 
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ void flash_print_info(flash_info_t * info)
+@@ -369,9 +369,9 @@ int write_buff(flash_info_t * info, uchar * src, ulong addr, ulong cnt)
+ 	}
+ 
+ 	if (cnt == 0)
+-		return ERR_OK;
++		return FL_ERR_OK;
+ 
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ /*-----------------------------------------------------------------------
+diff --git a/common/flash.c b/common/flash.c
+index 24ddc8bee72..a64e51a9b5a 100644
+--- a/common/flash.c
++++ b/common/flash.c
+@@ -110,13 +110,13 @@ addr2info(ulong addr)
+  * Make sure all target addresses are within Flash bounds,
+  * and no protected sectors are hit.
+  * Returns:
+- * ERR_OK          0 - OK
+- * ERR_TIMEOUT     1 - write timeout
+- * ERR_NOT_ERASED  2 - Flash not erased
+- * ERR_PROTECTED   4 - target range includes protected sectors
+- * ERR_INVAL       8 - target address not in Flash memory
+- * ERR_ALIGN       16 - target address not aligned on boundary
+- *			(only some targets require alignment)
++ * FL_ERR_OK          0 - OK
++ * FL_ERR_TIMEOUT     1 - write timeout
++ * FL_ERR_NOT_ERASED  2 - Flash not erased
++ * FL_ERR_PROTECTED   4 - target range includes protected sectors
++ * FL_ERR_INVAL       8 - target address not in Flash memory
++ * FL_ERR_ALIGN       16 - target address not aligned on boundary
++ *			   (only some targets require alignment)
+  */
+ int
+ flash_write(char *src, ulong addr, ulong cnt)
+@@ -131,11 +131,11 @@ flash_write(char *src, ulong addr, ulong cnt)
+ 	__maybe_unused ulong cnt_orig = cnt;
+ 
+ 	if (cnt == 0) {
+-		return (ERR_OK);
++		return (FL_ERR_OK);
+ 	}
+ 
+ 	if (!info_first || !info_last) {
+-		return (ERR_INVAL);
++		return (FL_ERR_INVAL);
+ 	}
+ 
+ 	for (info = info_first; info <= info_last; ++info) {
+@@ -146,7 +146,7 @@ flash_write(char *src, ulong addr, ulong cnt)
+ 
+ 			if ((end >= info->start[i]) && (addr < e_addr) &&
+ 			    (info->protect[i] != 0) ) {
+-				return (ERR_PROTECTED);
++				return (FL_ERR_PROTECTED);
+ 			}
+ 		}
+ 	}
+@@ -169,11 +169,11 @@ flash_write(char *src, ulong addr, ulong cnt)
+ #if defined(CONFIG_FLASH_VERIFY)
+ 	if (memcmp(src_orig, addr_orig, cnt_orig)) {
+ 		printf("\nVerify failed!\n");
+-		return ERR_PROG_ERROR;
++		return FL_ERR_PROG_ERROR;
+ 	}
+ #endif /* CONFIG_SYS_FLASH_VERIFY_AFTER_WRITE */
+ 
+-	return (ERR_OK);
++	return (FL_ERR_OK);
+ }
+ 
+ /*-----------------------------------------------------------------------
+@@ -182,33 +182,33 @@ flash_write(char *src, ulong addr, ulong cnt)
+ void flash_perror(int err)
+ {
+ 	switch (err) {
+-	case ERR_OK:
++	case FL_ERR_OK:
+ 		break;
+-	case ERR_TIMEOUT:
++	case FL_ERR_TIMEOUT:
+ 		puts ("Timeout writing to Flash\n");
+ 		break;
+-	case ERR_NOT_ERASED:
++	case FL_ERR_NOT_ERASED:
+ 		puts ("Flash not Erased\n");
+ 		break;
+-	case ERR_PROTECTED:
++	case FL_ERR_PROTECTED:
+ 		puts ("Can't write to protected Flash sectors\n");
+ 		break;
+-	case ERR_INVAL:
++	case FL_ERR_INVAL:
+ 		puts ("Outside available Flash\n");
+ 		break;
+-	case ERR_ALIGN:
++	case FL_ERR_ALIGN:
+ 		puts ("Start and/or end address not on sector boundary\n");
+ 		break;
+-	case ERR_UNKNOWN_FLASH_VENDOR:
++	case FL_ERR_UNKNOWN_FLASH_VENDOR:
+ 		puts ("Unknown Vendor of Flash\n");
+ 		break;
+-	case ERR_UNKNOWN_FLASH_TYPE:
++	case FL_ERR_UNKNOWN_FLASH_TYPE:
+ 		puts ("Unknown Type of Flash\n");
+ 		break;
+-	case ERR_PROG_ERROR:
++	case FL_ERR_PROG_ERROR:
+ 		puts ("General Flash Programming Error\n");
+ 		break;
+-	case ERR_ABORTED:
++	case FL_ERR_ABORTED:
+ 		puts("Flash Programming Aborted\n");
+ 		break;
+ 	default:
+diff --git a/drivers/mtd/cfi_flash.c b/drivers/mtd/cfi_flash.c
+index a7826e81c17..e50502824ac 100644
+--- a/drivers/mtd/cfi_flash.c
++++ b/drivers/mtd/cfi_flash.c
+@@ -593,11 +593,11 @@ static int flash_status_check(flash_info_t *info, flash_sect_t sector,
+ 			       flash_read_long(info, sector, 0));
+ 			flash_write_cmd(info, sector, 0, info->cmd_reset);
+ 			udelay(1);
+-			return ERR_TIMEOUT;
++			return FL_ERR_TIMEOUT;
+ 		}
+ 		udelay(1);		/* also triggers watchdog */
+ 	}
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ /*-----------------------------------------------------------------------
+@@ -616,9 +616,9 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
+ 	case CFI_CMDSET_INTEL_PROG_REGIONS:
+ 	case CFI_CMDSET_INTEL_EXTENDED:
+ 	case CFI_CMDSET_INTEL_STANDARD:
+-		if (retcode == ERR_OK &&
++		if (retcode == FL_ERR_OK &&
+ 		    !flash_isset(info, sector, 0, FLASH_STATUS_DONE)) {
+-			retcode = ERR_INVAL;
++			retcode = FL_ERR_INVAL;
+ 			printf("Flash %s error at address %lx\n", prompt,
+ 			       info->start[sector]);
+ 			if (flash_isset(info, sector, 0, FLASH_STATUS_ECLBS |
+@@ -627,14 +627,14 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
+ 			} else if (flash_isset(info, sector, 0,
+ 						FLASH_STATUS_ECLBS)) {
+ 				puts("Block Erase Error.\n");
+-				retcode = ERR_NOT_ERASED;
++				retcode = FL_ERR_NOT_ERASED;
+ 			} else if (flash_isset(info, sector, 0,
+ 						FLASH_STATUS_PSLBS)) {
+ 				puts("Locking Error\n");
+ 			}
+ 			if (flash_isset(info, sector, 0, FLASH_STATUS_DPS)) {
+ 				puts("Block locked.\n");
+-				retcode = ERR_PROTECTED;
++				retcode = FL_ERR_PROTECTED;
+ 			}
+ 			if (flash_isset(info, sector, 0, FLASH_STATUS_VPENS))
+ 				puts("Vpp Low Error.\n");
+@@ -702,12 +702,12 @@ static int flash_status_poll(flash_info_t *info, void *src, void *dst,
+ 		if (get_timer(start) > tout) {
+ 			printf("Flash %s timeout at address %lx data %lx\n",
+ 			       prompt, (ulong)dst, (ulong)flash_read8(dst));
+-			return ERR_TIMEOUT;
++			return FL_ERR_TIMEOUT;
+ 		}
+ 		udelay(1);		/* also triggers watchdog */
+ 	}
+ #endif /* CONFIG_SYS_CFI_FLASH_STATUS_POLL */
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ /*-----------------------------------------------------------------------
+@@ -810,7 +810,7 @@ static int flash_write_cfiword(flash_info_t *info, ulong dest, cfiword_t cword)
+ 		break;
+ 	}
+ 	if (!flag)
+-		return ERR_NOT_ERASED;
++		return FL_ERR_NOT_ERASED;
+ 
+ 	/* Disable interrupts which might cause a timeout here */
+ 	flag = disable_interrupts();
+@@ -899,7 +899,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 		shift = 3;
+ 		break;
+ 	default:
+-		retcode = ERR_INVAL;
++		retcode = FL_ERR_INVAL;
+ 		goto out_unmap;
+ 	}
+ 
+@@ -930,7 +930,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 		}
+ 	}
+ 	if (!flag) {
+-		retcode = ERR_NOT_ERASED;
++		retcode = FL_ERR_NOT_ERASED;
+ 		goto out_unmap;
+ 	}
+ 
+@@ -950,7 +950,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 		retcode = flash_status_check(info, sector,
+ 					     info->buffer_write_tout,
+ 					     "write to buffer");
+-		if (retcode == ERR_OK) {
++		if (retcode == FL_ERR_OK) {
+ 			/* reduce the number of loops by the width of
+ 			 * the port
+ 			 */
+@@ -975,7 +975,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 					src += 8, dst += 8;
+ 					break;
+ 				default:
+-					retcode = ERR_INVAL;
++					retcode = FL_ERR_INVAL;
+ 					goto out_unmap;
+ 				}
+ 			}
+@@ -1025,7 +1025,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 			}
+ 			break;
+ 		default:
+-			retcode = ERR_INVAL;
++			retcode = FL_ERR_INVAL;
+ 			goto out_unmap;
+ 		}
+ 
+@@ -1043,7 +1043,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 
+ 	default:
+ 		debug("Unknown Command Set\n");
+-		retcode = ERR_INVAL;
++		retcode = FL_ERR_INVAL;
+ 		break;
+ 	}
+ 
+@@ -1389,7 +1389,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		if (i > cnt)
+ 			i = cnt;
+ 		rc = flash_write_cfibuffer(info, wp, src, i);
+-		if (rc != ERR_OK)
++		if (rc != FL_ERR_OK)
+ 			return rc;
+ 		i -= i & (info->portwidth - 1);
+ 		wp += i;
+@@ -1398,7 +1398,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		FLASH_SHOW_PROGRESS(scale, dots, digit, i);
+ 		/* Only check every once in a while */
+ 		if ((cnt & 0xFFFF) < buffered_size && ctrlc())
+-			return ERR_ABORTED;
++			return FL_ERR_ABORTED;
+ 	}
+ #else
+ 	while (cnt >= info->portwidth) {
+@@ -1413,7 +1413,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		FLASH_SHOW_PROGRESS(scale, dots, digit, info->portwidth);
+ 		/* Only check every once in a while */
+ 		if ((cnt & 0xFFFF) < info->portwidth && ctrlc())
+-			return ERR_ABORTED;
++			return FL_ERR_ABORTED;
+ 	}
+ #endif /* CONFIG_SYS_FLASH_USE_BUFFER_WRITE */
+ 
+diff --git a/include/flash.h b/include/flash.h
+index 0f736977411..ebf8881b0e3 100644
+--- a/include/flash.h
++++ b/include/flash.h
+@@ -127,16 +127,16 @@ void flash_perror(int err);
+ /*-----------------------------------------------------------------------
+  * return codes from flash_write():
+  */
+-#define ERR_OK				0
+-#define ERR_TIMEOUT			1
+-#define ERR_NOT_ERASED			2
+-#define ERR_PROTECTED			4
+-#define ERR_INVAL			8
+-#define ERR_ALIGN			16
+-#define ERR_UNKNOWN_FLASH_VENDOR	32
+-#define ERR_UNKNOWN_FLASH_TYPE		64
+-#define ERR_PROG_ERROR			128
+-#define ERR_ABORTED			256
++#define FL_ERR_OK			0
++#define FL_ERR_TIMEOUT			1
++#define FL_ERR_NOT_ERASED		2
++#define FL_ERR_PROTECTED		4
++#define FL_ERR_INVAL			8
++#define FL_ERR_ALIGN			16
++#define FL_ERR_UNKNOWN_FLASH_VENDOR	32
++#define FL_ERR_UNKNOWN_FLASH_TYPE	64
++#define FL_ERR_PROG_ERROR		128
++#define FL_ERR_ABORTED			256
+ 
+ /*-----------------------------------------------------------------------
+  * Protection Flags for flash_protect():
 -- 
 2.40.1
 
