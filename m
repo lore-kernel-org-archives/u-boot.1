@@ -4,213 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D07F6C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 13:17:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9518EC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 13:28:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 551B886E35;
-	Thu, 25 Jul 2024 15:17:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E2958692C;
+	Thu, 25 Jul 2024 15:28:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gU7wo4tE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I83M26Oe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BCB48692C; Thu, 25 Jul 2024 15:17:02 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20606.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::606])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 741BB87C86; Thu, 25 Jul 2024 14:58:31 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37F1986E35
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:16:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1388987E64
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 14:58:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zK1WYy1C1yyKbneBdxWWAPNXhUFfgDHgJvUWZ0VhybOuKG7xzlNVXltsrPsMBW7+H2Xq686rCnnwwlU/zR9SgpWQjtlGtUxjNK+/Emuk854xnuYToAZDk28RfbywfzszZwqkvkaKv1GrkVPGox5qXlOVGpgXxfs7AB4OKwEanp8YYHAyTMoyZaIguZMrKZIf6xBL5f8QU+d9MmvyUpPNOm3ZgB7ubO3OAR9Ng/dLCL8JE/z2Bo5kAv61xwVkEIOlD8x+xiO//bX6uXeE0H/K2pVQkG5eCkPkkKOLdEAW4imLTXN6AqInA5NnE/KscM32+shLLTr8sj4jQ5C+5GMhSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6HJ90KjsUOOi5Mt7JpdofWgWOCpwGLSluIr1GUcvyZw=;
- b=r8oPFkPUWjfRm2ByqX6onL0NlxEIuT58bUaqaXJT08Wc0pbx281Xecpu+Wy2gBQjbyLt9JnwyzXR7gn+bLMggZjb01T6reIq6X7qFYgNkLAbCGhUah3bWawljWIiGCd+xVxcRWSEgQ4Ec7AxglGdzJSRicAMdzuCmwWij86mpm0alSR16LT43R96AVvXQrFds/PkQzBSO6OVyywbgivRpZe9zLphkTFHqUUdLhSSywn6uYld/Ub5wDGrpaZ1Wfgdmk90Bd7RA1M1wn71dI80lvekAaANlNP6pn8s2NS9/JfZ3q6zyQTe6c6pmkGdgrmyh7n3tXpCfofPhoZz96Ozag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6HJ90KjsUOOi5Mt7JpdofWgWOCpwGLSluIr1GUcvyZw=;
- b=gU7wo4tEYS69I+7bBBrfxvkoNgnFpfKoZmhWCamtZ+cbFZhAKRCPTLSLqHmer1VQwWPUHcnduwXXyIOiHHPepkS2Afdha18ZzRIo8l2GTfp238FxIaFeTX4cHsmRChNYCRVucIzeFOPOuWjhybxW6GfA9dERuSqjz1k6mRZ8JVg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by SA1PR12MB5637.namprd12.prod.outlook.com (2603:10b6:806:228::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.28; Thu, 25 Jul
- 2024 13:16:55 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.7784.020; Thu, 25 Jul 2024
- 13:16:54 +0000
-Message-ID: <5ddc17a7-4c80-4b45-b1e6-4ec8e0f62e08@amd.com>
-Date: Thu, 25 Jul 2024 15:16:37 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/40] lib: Convert str_to_list() to use alist
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Huan Wang <alison.wang@nxp.com>, Angelo Dureghello
- <angelo@kernel-space.org>, Daniel Schwierzeck
- <daniel.schwierzeck@gmail.com>, Thomas Chou <thomas@wytron.com.tw>,
- Rick Chen <rick@andestech.com>, Max Filippov <jcmvbkbc@gmail.com>
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-5-sughosh.ganu@linaro.org>
- <20240724205418.GM989285@bill-the-cat>
- <CADg8p95EwPkVH4Lo2+9O8QeSrE90xLpUQXYEngK+YEr+YiJ=qA@mail.gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <CADg8p95EwPkVH4Lo2+9O8QeSrE90xLpUQXYEngK+YEr+YiJ=qA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0161.eurprd09.prod.outlook.com
- (2603:10a6:800:120::15) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-42808071810so3532615e9.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 05:58:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721912308; x=1722517108; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lB3rahTvnV9A+Xg0qOR2oAh0gjklWazck+YMw5Z0HnE=;
+ b=I83M26OeoUjros4kPfbZGUcs1SY1OeiwLQs37n0n++VEnOXPPjFYW6ylrXGGQHpB6S
+ ++UBydPa1YctA6XeF6hf0egWWBjR1DKWGluK8eBtH7L8X2LbSqFB+/y0VzhW9vhpJ5jn
+ csl73jqCXB5SRNfo7L34YzT/44dCG3eYjl1iyOAplzgHzybSrru5TI+yc64hTw+JrhiO
+ x5H9O5s4y65zgmHboO1edgSl93mDbY/odCaEzA0cThsU+AfhFxSYidlqFcnEZCajK/dK
+ vLYmYYK4AyY8937JLD2fSIWxhRXq8rAYUF9K2GAY3tvnn5wH2Mh0sz63EHRj/E7RbtVH
+ XP3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721912308; x=1722517108;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lB3rahTvnV9A+Xg0qOR2oAh0gjklWazck+YMw5Z0HnE=;
+ b=Z3crm615mN+w3wRfJWVX/SbRaHnIL3Y/rPz3i7HP1kkI8ImFx+4IgSzIz9dD4+ov9o
+ u9LYQBgR34ZA7FxVtACBhGJ47vev17n8UMYjcbDKjYYq04Nwe/scehsnIAqQmwKiMKrG
+ MPLFRuf+n7QZHhOce2cq3vswbhhr8F7Ah6nJ8DGcHf321CCvS25JhTBmA0VAFBhxolWK
+ 1NMZz4gRAn4oGA0J+O+7TXU7WvHKshduLB7Gp03BdGG1opu2PUW4Kru4YZ4g19AK3zhd
+ nak2xPal/hczk1hJXXsihtXpumNpTiVVfTtdkQsi+6zLJOMFOMudqoh375TrXOOfl2/P
+ 0YUQ==
+X-Gm-Message-State: AOJu0YyNQnSZj+j2OpY8qZs3N2iVWBjjMFZYihmnEdnvrB3qjoE/xxk+
+ T8fPSbWGFVFzmWg6SBzacwhrIk6Gb+CD7T5qUuGTWCKZV+CGnzjlswFii2LJxNIVTFdFoL5pzaC
+ ObKi/dQ==
+X-Google-Smtp-Source: AGHT+IEEEOJHwU/6sFMDbxZTGK9oT8M18H4sonEh9pbWthz8lUeJz6zlFE8+Zr4rk4S6dNtjQhVHZw==
+X-Received: by 2002:a7b:ce89:0:b0:425:7c5f:1bac with SMTP id
+ 5b1f17b1804b1-42806ba5f04mr15290625e9.21.1721912307822; 
+ Thu, 25 Jul 2024 05:58:27 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:a701:ef5f:d613:3e14])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4280573fd83sm34765205e9.19.2024.07.25.05.58.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jul 2024 05:58:27 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bo Gan <ganboing@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>,
+ John Keeping <jkeeping@inmusicbrands.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Stefan Roese <sr@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Bin Meng <bmeng@tinylab.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Ion Agorria <ion@agorria.com>, Yang Xiwen <forbidden405@outlook.com>,
+ Boon Khai Ng <boon.khai.ng@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Baruch Siach <baruch@tkos.co.il>
+Subject: [PATCH v5 02/20] net: introduce alternative implementation as
+ net-lwip/
+Date: Thu, 25 Jul 2024 14:57:23 +0200
+Message-Id: <a88252b5c961ee28a98653751bae627ab3349668.1721910373.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <cover.1721910373.git.jerome.forissier@linaro.org>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA1PR12MB5637:EE_
-X-MS-Office365-Filtering-Correlation-Id: bae5ff6a-8d10-4d81-9534-08dcacac0da6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q1ZncE9NV2JMNkVsTSsxSGc2RFlFUmQ2WmlERC9qclJ2T0lxUFk5VkJudENZ?=
- =?utf-8?B?Z3pIK1pGenhPWDdROFZpVmN2cEQrOUpzOWhSTmhLekRzV2dtSGJWWkgwdWhG?=
- =?utf-8?B?VmpWd09Md3BZU1JMczV6cnFLaHhSVnMzeC9GMy8zcWI3TmlxZGk4Y2Z0MnVz?=
- =?utf-8?B?a0RGaytUR1plOXZlZ2VCUmo3Zkhsa2hKd0NYNU5EWmFWS3lzWDFvbWVvS2o1?=
- =?utf-8?B?bnhiYmFnUmJ3a0dCV3I5NXY0SHhCc2NaQ2UvY0IvcW5Yd3A5MmMxSkhObGlX?=
- =?utf-8?B?T05YMENSVDNab3hJMHVucWhFWnVJQVVrU3BTdVdITFAzd3BmQnl1K1ZxRVUr?=
- =?utf-8?B?TUpyMWxCMjU2b0xYT25kODFVZjdkbEgyRFZnZzQrY1pEZ2Z5ZllrN2F2WDRJ?=
- =?utf-8?B?RXpGcjM5RGVPQS9rbkRNbHp3NkZVb09lSzgrZFBTYWVlOFZLZWFPZVFWRmRL?=
- =?utf-8?B?dlF3RVl2SW1IeGpkbmJKMzFoNlh6bVFySVEwSVFzMmw5dFBXU3ZoUU43UG1N?=
- =?utf-8?B?VGJXcUJTTE1hdmZDeWRYZWhhRStQbDJ2YmpSNFpTTENlaE90M3U1RHNaRUZW?=
- =?utf-8?B?MlhvL3MzRHBKd09pQnVXYWVXcmxoamRPQ0hFTDhQUTFsaVFDc1ZsOHNxeU5J?=
- =?utf-8?B?UG1UOHhNSGpMKzNHTHZUbGNzQ1hSMFNWQUxqTHFoQk9ncE9VektyYVd1cHNM?=
- =?utf-8?B?WHI1SUV0OFhMK2FmSklrL2MwaU1haFNaeWQxU24ySUp5bUpjTWJqK3RtOXZp?=
- =?utf-8?B?TXZyQVFtZVlSS1RzVWVDSGVuRndIbHkxUXRQMlhlOXYrVnNrMElOMGdHamNL?=
- =?utf-8?B?a084ZFhWSlhKN09yTkxMMnIrVWh3cUFkTHc3TTBpWG52RlFpQlJwRWlncCtQ?=
- =?utf-8?B?WWQrMGFwdWxOSE5CYmZkdzFockF2cnViUG9VQnNYd1R5MTVURkFSeWE4b1ZM?=
- =?utf-8?B?WGpHNWk4NXhJY0ZQZmh2bXhtOVErZVdMOWJwSzczRHlkaW1ZdFpuVGl1U2V0?=
- =?utf-8?B?ZnRlWks4Y2EwY1pEVFdldUxQOUVZL0VrR3BFcDZlNER0YklmUlcyT1pySFBr?=
- =?utf-8?B?aDByZk5QRlB0Uk43eVhiLzFaY3d5R2V4TVp1UmVHMDVsSUtKZThHUldXTlor?=
- =?utf-8?B?SUNGMkE5MXgwcHphTDRTSFJ3WEc4Vm1vOFhremQ3NzdKcXJYT09MM3c5UTNH?=
- =?utf-8?B?T3JNaHZqRTB6cHNaeHZRYUlCZWpyMStCQksrS3BGeFRxbFJKMHVqNjJpSC9I?=
- =?utf-8?B?NTdVa0ZDNytvZDNnc2NueFJEL25DanZuWjJwQmpnRENFem12K1grVG9ieklh?=
- =?utf-8?B?NjVyUy80amVoVVlEaVJEU0FQMWtkT25EVUU3UzI3Uis5by9pMVpvdEtmbzVE?=
- =?utf-8?B?NWVxWTJPWW42WFpCM1ozRDVuQ1h4TGRWL1ViQUl4UDNDUmNwdkM0bFZzZ0R1?=
- =?utf-8?B?dWJuOUlkbE95VVQ4bnloc2c3b0hmWHNvUXU2ak1pLzlDNmk4Wms4TitVVlda?=
- =?utf-8?B?WkRsdjBaTDFqR1dnVTBEZklaVUYrWFRaTEM4WTRuRC9MYVBJZ3FrUHBpR2xu?=
- =?utf-8?B?dEorN2U2OXc4SmwzQlJvZTRtSExhZFV0OS84OG95RjlGbTZwWU56MFlBMEVE?=
- =?utf-8?B?UXY4WGtyMjBDVWc4Kzg3YWdtc2JEalRqRDVyeXFsTVpPRlpxRWVmWkpucWdw?=
- =?utf-8?B?RHRoWnlheGxHMy93M3hlVlh2d1p2S0RiZmo3ZSs2Vnk0cks4a0svVmg1aVY2?=
- =?utf-8?B?QWUwRWxmeUNqdVIrU2JJU0ZOa2szQUlxL3o3WmVpalM5TUVlT2ZRMUNDRXh2?=
- =?utf-8?B?eVN0amlKWW45aWkzNFByQT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Rm1TMnlrUlYzczhPVThhQVE5TUJUMGJFS1dxOGh5QUsyZEV5SmZUS0JwMG9D?=
- =?utf-8?B?Q0dya2xYTFBNU3pmQWdaVTVxNFV0N0VzRFlvZFJUODVuMThnUHp6S3FoYU91?=
- =?utf-8?B?V1NqdWs4bWlCaWNrZ1AwbUswQTN4MXRQUDVXWjVFUFFVMHd1eXU5c0dwc0ZF?=
- =?utf-8?B?T0hZcENSRHZ0R01vc3VuWDlFWjV2S3VTSjlmTGMwMmVPQkpla0JFT1pDbVQw?=
- =?utf-8?B?cFBGb1NTL1djRG5neVg3Vno5a0pCSEJMUmVZdEY1NVpVU3M4Y0ZUY3ZLTmNy?=
- =?utf-8?B?eXVIZTVENmRJSHlXNzNkZkJqV3Z4czZzRVB2UDVrN0EvQ1FhMFNqbXZiZzY4?=
- =?utf-8?B?bkVxeEFDcUgzcThoMm1oUk9ERUU1VGVOUUtRNHFjbHRJcEtpWC8yOEltTnBM?=
- =?utf-8?B?aFkxZ1h1bzVnU1lHTHl3d2Y3a2N4VXhEaElhZEVZRlVESTFSL1Q1ejZ3U21P?=
- =?utf-8?B?SS9kNHNwQi85cFc4bnBteU5kUHdzaklIb3JDVE10S0ticDZtZWttZDZSWjhN?=
- =?utf-8?B?UU14Rmhsc29mdnM0T0ZuRDNyd3FDZ2pZcExLMnYxKzBzR2NhdEVlUW5tSXdv?=
- =?utf-8?B?SUpUSHkzdW1wQ1crN0xmYkdNRnovUDVlV0J0WW90dmNTMWFuNlZ4SjQ4NitV?=
- =?utf-8?B?dTFCNWx2L05NOXpUc1pPZlJDbnZhdk0rRGk2cFBENlhHUFh3aW9lME5wbXli?=
- =?utf-8?B?Sk9KKzcyTkd3VDRITVo3SmJDYjBlQ0MzRG9sRGhtc2pCOHJxZmpCWExDTEo5?=
- =?utf-8?B?WHNDK3ZNb29xOXViamgyUG9BRWpPTzdQUVRkNm9Rd285REZaM2xCcXpRdUtK?=
- =?utf-8?B?QU1ZQlo1OW9pUmpEenB4ajVqekZvMHo4clVUSjg1Tnl3dGttbmkxM3kvZlNW?=
- =?utf-8?B?OGZhSlV0cUxxWlVhS2ZEbEZOMndtQTAwZFo3WVpaamNBYytBSVIvekR6cFdw?=
- =?utf-8?B?UDRya21aL1hEODc3Z2JsdmNJNEM0RkFnay94OTQ1V1FkQXFSQ3Z1VDUvMEI0?=
- =?utf-8?B?eDFlUThndHZWY3laZFRaUFE1OFlteWxIME1JU3ljL0p2NlJHZVRYNTZKRWZ4?=
- =?utf-8?B?N0JDVjZ5bUEyT1haT0FTbitVdnU4SXdyNERLVzNWckVEckE2dndiRnowU2tB?=
- =?utf-8?B?UjNYNFV2V3dpeXhrUzI4dXJzSUJoTmptZ2JlRzBZL01SVGp0clg3MTdyOVUz?=
- =?utf-8?B?dGFUOSs4bUljTElndW1nbW9Vcy9ORnZuTDQ3b0lyUlAreHZTUDlLSXFOUGRG?=
- =?utf-8?B?a1pLUmFiSXlMQmZMd2I5OUdBUjFSeVdpMVpXdXMvRE4yLzg2Mm1pNjcwRHRP?=
- =?utf-8?B?NjN0a2VNZk1pT1BkeWVuR0k5SDNqdmYzK05NRVh1ZnBpWDQvSVo1dmNzdkpR?=
- =?utf-8?B?Q1BWZk9ibjRWVTgwVys3eEpacXZuc2E3SUVyaVgxWEx5V1lXNTlMUzdaQ2Uy?=
- =?utf-8?B?eXp4MGhlTVh0cEVqSmM4WFZyVGFBTTFZcTZLUC8vRmxDOS9PWmE3WVF4UUlF?=
- =?utf-8?B?cHVSWFlHNERwTmkrVDFVVWJNbjNUNlJ5Z1VURW1ROTBidGIvdTlNblhNcjhU?=
- =?utf-8?B?bnpldldhODBPOVBPRFJac0U5dHJxMEc5Z01WNHo0cHNnVjZCWHh0ck10eS92?=
- =?utf-8?B?aGE3bVY5Zk1ERWlXdWdFNHBrZWNiTFFjMkNkenUzWFRFc0FUZXdPM0xpbHZG?=
- =?utf-8?B?RUQyN1RsVmgzdjdEQWdEUlMyZlRWcXZpY2JEQStZN2g2RS9pNlNoQUNqdDN5?=
- =?utf-8?B?Nk9vQ0FRNStxUUd4RzFxOTU5MFIzU3pRcVNLZ2ZKK29jQkZHcGt0dW9IRk1v?=
- =?utf-8?B?QnpKQmpjY0FHVGF3R2E5TkZzRzRJY1RGUDNLOVAyZ0xsLzh3aXBVbHg0UVdM?=
- =?utf-8?B?c0gwSjBBOHg4T3kzdUw3a2JVV0JyOFZHdjc0MmRxMFJ1QTY5MlYxRGRZNUth?=
- =?utf-8?B?Y0VNVkZ0TkptQUVLWXBFb0NaQVJMWCtETFp0SXFGaUMrOGJ3OWhoV2IxNmRw?=
- =?utf-8?B?TlpXRlhaM2FHanpidSszRGI5dXZldURrU1VWb2t3N2F4K3hEa0tQcVVadmd3?=
- =?utf-8?B?U2FSMmVvWnVGWlpNWWh3UXBuZ2szb2RDUG5kbUZKTUZIRXJhNHJ3ZUFWNkl2?=
- =?utf-8?Q?PhVhsS+nicRlKrMCIq03kQBJt?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bae5ff6a-8d10-4d81-9534-08dcacac0da6
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2024 13:16:54.5558 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9pZ/x3cldAlHpCSgO7ub9VNGoaSDHtSsMq5kQ53H8FVe1zTJd9REseT/pQkEzkRI
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5637
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 25 Jul 2024 15:28:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -227,46 +124,285 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Prepare the introduction of the lwIP (lightweight IP) TCP/IP stack by
+adding a new net/lwip/ directory and the NET_LWIP symbol. Network
+support is either NO_NET, NET (legacy stack) or NET_LWIP. Subsequent
+commits will introduce the lwIP code, re-work the NETDEVICE integration
+and port some of the NET commands and features to lwIP.
 
+SPL_NET cannot be enabled when NET_LWIP=y. SPL_NET pulls some symbols
+that are part of NET (such as arp_init(), arp_timeout_check(),
+arp_receive(), net_arp_wait_packet_ip()). lwIP support in SPL may be
+added later.
 
-On 7/25/24 14:54, Sughosh Ganu wrote:
-> On Thu, 25 Jul 2024 at 02:24, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
->>
->>> From: Simon Glass <sjg@chromium.org>
->>>
->>> Use this new data structure in the utility function.
->>>
->>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->>> ---
->>>   lib/strto.c | 35 +++++++++++++++++++----------------
->>>   1 file changed, 19 insertions(+), 16 deletions(-)
->>
->> This is rather big growth when we didn't already have realloc:
->> 05: lib: Convert str_to_list() to use alist
->>     aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
->>              xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
->>                 u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
->>                   function                                   old     new   delta
->>                   realloc                                      -    1120   +1120
->>                   alist_ensure_ptr                             -     140    +140
->>                   alist_expand_to                              -     136    +136
->>                   alist_init                                   -     108    +108
->>                   alist_uninit_move_ptr                        -      76     +76
->>                   alist_add_ptr                                -      72     +72
->>                   alist_uninit                                 -      48     +48
->>                   str_to_list                                204     232     +28
->>
-> 
-> I am working on an implementation of lmb maps using lists. The list
-> nodes are then allocated with calloc, which I believe is included in
-> most of the board images. We can then compare the size impact with the
-> two implementations (alist vs list). Thanks.
+Similarly, DFU_TFTP and FASTBOOT are not compatible with NET_LWIP
+because of dependencies on net_loop(), tftp_timeout_ms,
+tftp_timeout_count_max and other NET things. Let's add a dependency on
+!NET_LWIP for now.
 
-Inside LMB code it should be fine for us because as I wrote we are disabling LMB 
-in these mini configurations.
+As for SANDBOX, NET_LWIP cannot be used either because of strong
+assumptions on the network stack. Make NET_LWIP depend on !SANDBOX so
+that the NET_LWIP alternative is not visible in make menuconfig when
+sandbox_defconfig is used.
 
-Thanks,
-Michal
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ Kconfig                    | 26 ++++++++++++++++++++++++++
+ common/Kconfig             |  2 +-
+ common/spl/Kconfig         |  1 +
+ drivers/dfu/Kconfig        |  1 +
+ drivers/fastboot/Kconfig   |  1 +
+ drivers/net/Kconfig        |  1 +
+ drivers/net/phy/Kconfig    |  2 +-
+ drivers/usb/gadget/Kconfig |  2 +-
+ net/Kconfig                | 29 +++++++++++++++--------------
+ net/Makefile               |  4 ++++
+ net/lwip/Kconfig           | 36 ++++++++++++++++++++++++++++++++++++
+ 11 files changed, 88 insertions(+), 17 deletions(-)
+ create mode 100644 net/lwip/Kconfig
+
+diff --git a/Kconfig b/Kconfig
+index 82df59f176e..61bc6529617 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -745,6 +745,32 @@ source "dts/Kconfig"
+ 
+ source "env/Kconfig"
+ 
++choice
++	prompt "Networking stack"
++	default NET
++
++config NO_NET
++	bool "No networking support"
++
++config NET
++	bool "Legacy U-Boot networking stack"
++	imply NETDEVICES
++
++config NET_LWIP
++	bool "Use lwIP for networking stack"
++	imply NETDEVICES
++	depends on !SANDBOX
++	help
++	  Include networking support based on the lwIP (lightweight IP)
++	  TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
++	  the default U-Boot network stack and applications located in net/
++	  and enabled via CONFIG_NET as well as other pieces of code that
++	  depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
++	  Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
++	  exclusive.
++
++endchoice
++
+ source "net/Kconfig"
+ 
+ source "drivers/Kconfig"
+diff --git a/common/Kconfig b/common/Kconfig
+index 4bb9f08977a..1daa495080a 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -424,7 +424,7 @@ config LOGF_FUNC_PAD
+ 
+ config LOG_SYSLOG
+ 	bool "Log output to syslog server"
+-	depends on NET
++	depends on NET || NET_LWIP
+ 	help
+ 	  Enables a log driver which broadcasts log records via UDP port 514
+ 	  to syslog servers.
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index af43b5f5d3c..2731849841a 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1063,6 +1063,7 @@ config SPL_DM_SPI_FLASH
+ 
+ config SPL_NET
+ 	bool "Support networking"
++	depends on !NET_LWIP
+ 	help
+ 	  Enable support for network devices (such as Ethernet) in SPL.
+ 	  This permits SPL to load U-Boot over a network link rather than
+diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+index 971204758aa..d034b501360 100644
+--- a/drivers/dfu/Kconfig
++++ b/drivers/dfu/Kconfig
+@@ -20,6 +20,7 @@ config DFU_WRITE_ALT
+ config DFU_TFTP
+ 	bool "DFU via TFTP"
+ 	depends on NETDEVICES
++	depends on !NET_LWIP
+ 	select UPDATE_COMMON
+ 	select DFU_OVER_TFTP
+ 	help
+diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+index 70207573de2..1eb460f5a02 100644
+--- a/drivers/fastboot/Kconfig
++++ b/drivers/fastboot/Kconfig
+@@ -1,5 +1,6 @@
+ menu "Fastboot support"
+ 	depends on CMDLINE
++	depends on !NET_LWIP
+ 
+ config FASTBOOT
+ 	bool
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index b4ff033afa9..d332f712a7c 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -48,6 +48,7 @@ config DM_DSA
+ 	bool "Enable Driver Model for DSA switches"
+ 	depends on DM_MDIO
+ 	depends on PHY_FIXED
++	depends on !NET_LWIP
+ 	help
+ 	  Enable driver model for DSA switches
+ 
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 73064b2af68..75986162914 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -11,7 +11,7 @@ config MV88E6352_SWITCH
+ 
+ menuconfig PHYLIB
+ 	bool "Ethernet PHY (physical media interface) support"
+-	depends on NET
++	depends on NET || NET_LWIP
+ 	help
+ 	  Enable Ethernet PHY (physical media interface) support.
+ 
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 4621a6fd5e6..03fe3bca197 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -224,7 +224,7 @@ endif # USB_GADGET_DOWNLOAD
+ 
+ config USB_ETHER
+ 	bool "USB Ethernet Gadget"
+-	depends on NET
++	depends on NET || NET_LWIP
+ 	default y if ARCH_SUNXI && USB_MUSB_GADGET
+ 	help
+ 	  Creates an Ethernet network device through a USB peripheral
+diff --git a/net/Kconfig b/net/Kconfig
+index 5dff6336293..952690d677d 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -2,11 +2,6 @@
+ # Network configuration
+ #
+ 
+-menuconfig NET
+-	bool "Networking support"
+-	default y
+-	imply NETDEVICES
+-
+ if NET
+ 
+ config ARP_TIMEOUT
+@@ -26,15 +21,6 @@ config PROT_UDP
+ 	  Enable a generic udp framework that allows defining a custom
+ 	  handler for udp protocol.
+ 
+-config BOOTDEV_ETH
+-	bool "Enable bootdev for ethernet"
+-	depends on BOOTSTD
+-	default y
+-	help
+-	  Provide a bootdev for ethernet so that is it possible to boot
+-	  an operationg system over the network, using the PXE (Preboot
+-	  Execution Environment) protocol.
+-
+ config BOOTP_SEND_HOSTNAME
+ 	bool "Send hostname to DNS server"
+ 	help
+@@ -255,6 +241,19 @@ config IPV6
+ 
+ endif   # if NET
+ 
++source "net/lwip/Kconfig"
++
++if NET || NET_LWIP
++
++config BOOTDEV_ETH
++	bool "Enable bootdev for ethernet"
++	depends on BOOTSTD
++	default y
++	help
++	  Provide a bootdev for ethernet so that is it possible to boot
++	  an operating system over the network, using the PXE (Preboot
++	  Execution Environment) protocol.
++
+ config SYS_RX_ETH_BUFFER
+ 	int "Number of receive packet buffers"
+ 	default 4
+@@ -263,3 +262,5 @@ config SYS_RX_ETH_BUFFER
+ 	  controllers it is recommended to set this value to 8 or even higher,
+ 	  since all buffers can be full shortly after enabling the interface on
+ 	  high Ethernet traffic.
++
++endif   # if NET || NET_LWIP
+diff --git a/net/Makefile b/net/Makefile
+index 64ab7ec740a..70eec8caf0d 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -5,6 +5,8 @@
+ 
+ #ccflags-y += -DDEBUG
+ 
++ifeq ($(CONFIG_NET),y)
++
+ obj-$(CONFIG_NET)      += arp.o
+ obj-$(CONFIG_CMD_BOOTP) += bootp.o
+ obj-$(CONFIG_CMD_CDP)  += cdp.o
+@@ -38,3 +40,5 @@ obj-$(CONFIG_CMD_WGET) += wget.o
+ # sprintf(buf, index ? "foo%d" : "foo", index)
+ # and this is intentional usage.
+ CFLAGS_eth_common.o += -Wno-format-extra-args
++
++endif
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+new file mode 100644
+index 00000000000..0a6bcb41369
+--- /dev/null
++++ b/net/lwip/Kconfig
+@@ -0,0 +1,36 @@
++#
++# Network configuration (with lwIP stack)
++#
++
++config LWIP_DEBUG
++	bool "Enable debug traces in the lwIP library"
++
++config LWIP_ASSERT
++	bool "Enable assertions in the lwIP library"
++
++config PROT_DHCP_LWIP
++	bool "DHCP support in lwIP"
++	depends on PROT_UDP_LWIP
++	help
++	  Enable support for the DHCP protocol in lwIP.
++
++config PROT_DNS_LWIP
++	bool
++	depends on PROT_UDP_LWIP
++
++config PROT_RAW_LWIP
++	bool
++
++config PROT_TCP_LWIP
++	bool
++
++config PROT_TCP_SACK_LWIP
++	bool "TCP SACK support"
++	depends on PROT_TCP_LWIP
++	default y
++	help
++	  TCP protocol with selective acknowledgements. Improves
++	  file transfer speed in wget.
++
++config PROT_UDP_LWIP
++	bool
+-- 
+2.40.1
+
