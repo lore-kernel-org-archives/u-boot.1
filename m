@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C90C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 10:18:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0BAC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 10:21:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF44A8789F;
-	Thu, 25 Jul 2024 12:18:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B2E4F8789F;
+	Thu, 25 Jul 2024 12:21:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SMlDS6jc";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="kJ3yuVfd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EF9887903; Thu, 25 Jul 2024 12:18:23 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id A4DB18789F; Thu, 25 Jul 2024 12:21:21 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B9F87876
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 12:18:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71E1287876
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 12:21:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7a264a24ea7so481931a12.3
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 03:18:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a7aabb71bb2so53565966b.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 03:21:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721902699; x=1722507499; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xYTkPUN+ecAuWniIVJFQMKyh/AAbd3cPwNdVeNn6mdE=;
- b=SMlDS6jcKBoOhP2VmCsNooEsCCYsBsV7A+GIfxAjs0FYAi2KiuHE94kpd0InmzWocG
- QZFW6dUKn2il0py/5NzikOXeXPrA0qSTHc3wWYiZxdxZI/sNwxt5+7iNCMed02MCU4E3
- HyXahAOj494jqO4J6LHo9fdoxfAA9lE9jPrJJNBHqyO+RMHV+6B5FTCCw+T58Djgd9yt
- 09Yw2rF70B+KjdDAmVFdxTIB1mQZZLSLaQAH8iJqfa8s23VcSTWocBPHdJLpI157uPsr
- w1YXDugRkEAbTb5d7YIk34ETPmtMKlnnhKNpASYmgXH1YI885tbYa8Bq+fY2FGxooVhO
- fzDQ==
+ d=amarulasolutions.com; s=google; t=1721902879; x=1722507679;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wcY+4ClMWxwyv3ckJ3IB+pSuwqm7XmDh6q1odwUsSFc=;
+ b=kJ3yuVfdF/td1FNod/YKGS2oigKCkwwEs2wAJg5YjAs0Z5xVwjz707iFpKWMxG0ap2
+ XvcQVr5Fffkmoi5c2jAbTB41cmx6xXZBsseOK7a8c36Zme/YcSyH/QR7ZB1bmbKVpu3H
+ 1MsS7uKUOkfZ5O7hOEVSdyj/bqyzT2lSm4/+M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721902699; x=1722507499;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xYTkPUN+ecAuWniIVJFQMKyh/AAbd3cPwNdVeNn6mdE=;
- b=ILhNN8ekOF3aGl9emZO+fA+rmrQnv/CIQhzwKjbtOlO6srNOK1kbQWzWch9R7ufsy0
- hp6W7bA6/Km7oSAKUqupm+1K/W0Re4kjOfxrNjnwYl2S2sd9nhWp37MY3GjmgygbxV5m
- UV62xl9LXoXJgBpR+K3GB5uu66ZI4diKpN1zepzOtBpxfpBSKB0qnDn9a490oNZiEPU5
- ny6h8zWB8TZuYhLVnLYBFQa/q0N7JTJVwUrzUEqDv1d7OrwetUZU3Ez1LE9Ybeev9G11
- WCUOVHHC6P8UjnzPiHpQL8quyc+3DN8vEiZfV3NeBzbTFnnGehDDFWgeztSXgA5Gf0Un
- kpYg==
+ d=1e100.net; s=20230601; t=1721902879; x=1722507679;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wcY+4ClMWxwyv3ckJ3IB+pSuwqm7XmDh6q1odwUsSFc=;
+ b=Qg+9wXSkyQUARhrKmwVgBfTrMiuOJQ8IRPM3UBS0J/oDzNXs4ZzHzQ+l1dPZuFDRyV
+ x9CYmMNpydPm789/2G/F7W90dx41XtTvIRHW8GHvf6vYKlgjiIvx/769MJ7AK0veZacj
+ OvnCyC2IIevGA5M0XvkcmXEwbbUsmbJWmdlAI7ljBG2fp4H5HpglNUh9Mb0+aXCqJXvf
+ LSONvsI+wOI8b+XUj+iVmuCHqUWFDGoAaDOGN0kp9sRA9VhRpgAOPYJ5nI/Gaf2rzdxz
+ Rw4Zj5pUqsdiBXxPQLx1rZTAUOvq4U9FXyb+umIoE/Abt/17T4rJSNDM9CyJUyW2R49W
+ MrLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3ms0BAEJ9KBKLpuV27iSeBEhA0sRQciaScYhf+y3UJb+VMAsBkwfYlIYQ3vqzrXMMqi8ERXRSCHEJNi/SZTmbe59AOA==
-X-Gm-Message-State: AOJu0Yzab83ADJJ6s8+XjXj2P+CpueEow59gR9gwv6zBPPUorqC3OCpP
- 85AOa9/iURRYrYmw/bvNV5UnjDue1lUiHofmpVxqfhQ7s40IRrAYviN84h8e4NYmXBK+eFsKy3M
- x3LxT1hMIvB2GN1cTsihZjAZtj4pEwZhnfJMh9g==
-X-Google-Smtp-Source: AGHT+IFg3Sh2mjJTOxKurdCwP5vCU0jrhnAmolMxBoZZ6mvakFB0beDiCxR1AzG9LcGcm0hQPNIY2S3jiuy8YDJiDZ4=
-X-Received: by 2002:a17:90b:4c0b:b0:2cb:4bed:ed35 with SMTP id
- 98e67ed59e1d1-2cf2ec157c5mr1360549a91.41.1721902699275; Thu, 25 Jul 2024
- 03:18:19 -0700 (PDT)
+ AJvYcCW0ztZ5VxBqso7dgQJvgnLg+Ae9rvREOUt4/9iE54BcjM5T829zFmgbnj035eV47wAZos8wASahadfFiwljDDRE8ym0OQ==
+X-Gm-Message-State: AOJu0YySM6GwyFhdRQp4pTk1HMMiIy1NTUBAh5bZbmVjSXdV24wEd3AA
+ 6gxcUpKfDnE+cguxl2RZuKVdBbthxaV3s+mAyY6bOX4aT4qtbS7/Kwd3xmxverl1/MIiFe3wGMz
+ 3gB4VRUq4cu4JV6V16aZbyQ1PLMBFGQdm2fzQZA==
+X-Google-Smtp-Source: AGHT+IFEt97ycjCV8oLJlG6Mx79RtY270J88uQoLAjSzp9KkosnvbDTy6QrFe3YHv3zSTQv1peKW9KW4U2Ch5YGOZ2E=
+X-Received: by 2002:a17:906:7950:b0:a7a:8e98:890d with SMTP id
+ a640c23a62f3a-a7acb3eedd3mr119159666b.16.1721902878677; Thu, 25 Jul 2024
+ 03:21:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
- <20240719-b4-dynamic-uuid-v5-10-8a83de3fe3dc@linaro.org>
-In-Reply-To: <20240719-b4-dynamic-uuid-v5-10-8a83de3fe3dc@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 25 Jul 2024 13:17:43 +0300
-Message-ID: <CAC_iWjLqNvMmaYCPovbox9UEakQmiEQwyPsNvfrZesjkc_NbFA@mail.gmail.com>
-Subject: Re: [PATCH v5 10/11] test: lib/uuid: add unit tests for dynamic UUIDs
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+References: <20240725073707.26040-1-Zhiqiang.Hou@nxp.com>
+ <CAOf5uwm-kedmeH7at0F5+zfuJ9218NwRSJjA4_vjTGvpsJ7msA@mail.gmail.com>
+ <DB9PR04MB9236ACC9C613982795A9E5AC84AB2@DB9PR04MB9236.eurprd04.prod.outlook.com>
+ <CAOf5uw=nNter1RSuxvaXZ0NFkoOkqAKyQs2_97Ap4W5KhXSQmA@mail.gmail.com>
+ <DB9PR04MB9236322AD261E061C1DB573484AB2@DB9PR04MB9236.eurprd04.prod.outlook.com>
+In-Reply-To: <DB9PR04MB9236322AD261E061C1DB573484AB2@DB9PR04MB9236.eurprd04.prod.outlook.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 25 Jul 2024 12:21:07 +0200
+Message-ID: <CAOf5uwkQF5P1EknEauK6j=jB39LNeMEzvZ7secN6tb4K1pmt2Q@mail.gmail.com>
+Subject: Re: [PATCH] clk: fix ccf_clk_get_rate
+To: "Z.Q. Hou" <zhiqiang.hou@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "trini@konsulko.com" <trini@konsulko.com>, "lukma@denx.de" <lukma@denx.de>, 
+ "seanga2@gmail.com" <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,127 +94,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Jul 2024 at 15:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+Hi
+
+On Thu, Jul 25, 2024 at 11:58=E2=80=AFAM Z.Q. Hou <zhiqiang.hou@nxp.com> wr=
+ote:
 >
-> Add some basic unit tests to validate that the UUID generation behaves
-> as expected. This matches the implementation in efi_loader for sandbox
-> and a Qualcomm board and should catch any regressions.
+> Hi Michael,
 >
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  test/lib/uuid.c | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 82 insertions(+)
+> > -----Original Message-----
+> > From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+> > Sent: Thursday, July 25, 2024 5:26 PM
+> > To: Z.Q. Hou <zhiqiang.hou@nxp.com>; Simon Glass <sjg@chromium.org>
+> > Cc: u-boot@lists.denx.de; trini@konsulko.com; lukma@denx.de;
+> > seanga2@gmail.com
+> > Subject: Re: [PATCH] clk: fix ccf_clk_get_rate
+> >
+> > Hi
+> >
+> > On Thu, Jul 25, 2024 at 10:53=E2=80=AFAM Z.Q. Hou <zhiqiang.hou@nxp.com=
+> wrote:
+> > >
+> > > Hi Michael,
+> > >
+> > > > -----Original Message-----
+> > > > From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+> > > > Sent: Thursday, July 25, 2024 3:32 PM
+> > > > To: Z.Q. Hou <zhiqiang.hou@nxp.com>
+> > > > Cc: u-boot@lists.denx.de; trini@konsulko.com; lukma@denx.de;
+> > > > seanga2@gmail.com
+> > > > Subject: Re: [PATCH] clk: fix ccf_clk_get_rate
+> > > >
+> > > > Hi
+> > > >
+> > > > On Thu, Jul 25, 2024 at 9:16=E2=80=AFAM Zhiqiang Hou <Zhiqiang.Hou@=
+nxp.com>
+> > > > wrote:
+> > > > >
+> > > > > From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+> > > > >
+> > > > > As the type of return value is 'ulong', when clk_get_by_id()
+> > > > > failed, it should return 0 to indicate the get_rate operation doe=
+sn't
+> > succeed.
+> > > > >
+> > > >
+> > > > I understand your point here but the clk_get_rate that can call the
+> > > > ccf clk_get_rate can already return -ENOSYS.
+> > >
+> > > will also fix it.
+> > >
+> >
+> > Is there any usage of the error set on the latest bit of the clock? We =
+need to
+> > be sure that this is correct use accross the uboot. The clk-uclass defi=
+ne the
+> > error that can return
 >
-> diff --git a/test/lib/uuid.c b/test/lib/uuid.c
-> index 9629d378c329..2c6cfd42ddc3 100644
-> --- a/test/lib/uuid.c
-> +++ b/test/lib/uuid.c
-> @@ -7,15 +7,20 @@
->   * Authors:
->   *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
->   */
+> The problem is this function's return value is 'ulong', if use the error =
+set, the caller will treat it as a good value instead of a error number. Th=
+ere are several APIs have the same problem.
 >
-> +#include <charset.h>
->  #include <u-boot/uuid.h>
->  #include <test/lib.h>
->  #include <test/test.h>
->  #include <test/ut.h>
+> 2 methods to fix it:
+> 1. keep the API's prototype, and use '0' to indicate error condition, but=
+ a real '0' return value is also considered as error.
+> 2. Change the return type to like 'long long int', and use a negative err=
+or number to indicate error condition. Need to update the check of return v=
+alue for all the callers.
 >
-> +#include <efi.h>
-> +
->  /* test UUID */
->  #define TEST_SVC_UUID  "ed32d533-4209-99e6-2d72-cdd998a79cc0"
-> +/* U-Boot default fw image namespace */
-> +#define DEFAULT_FW_IMAGE_NAMESPACE "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
->
->  #define UUID_SIZE 16
->
->  /* The UUID binary data (little-endian format) */
-> @@ -37,4 +42,81 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
->         return 0;
->  }
->
->  LIB_TEST(lib_test_uuid_to_le, 0);
-> +
-> +struct dynamic_uuid_test_data {
-> +       const char *compatible;
-> +       const u16 *images[4];
-> +       const char *expected_uuids[4];
-> +};
-> +
-> +static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
-> +                                     const struct dynamic_uuid_test_data *data)
-> +{
-> +       struct uuid namespace;
-> +       int j;
-> +
-> +       ut_assertok(uuid_str_to_bin(DEFAULT_FW_IMAGE_NAMESPACE, (unsigned char *)&namespace,
-> +                                   UUID_STR_FORMAT_GUID));
-> +
-> +       for (j = 0; data->images[j]; j++) {
-> +               const char *expected_uuid = data->expected_uuids[j];
-> +               const u16 *image = data->images[j];
-> +               efi_guid_t uuid;
-> +               char uuid_str[37];
-> +
-> +               gen_v5_guid(&namespace, &uuid,
-> +                           data->compatible, strlen(data->compatible),
-> +                           image, u16_strlen(image) * sizeof(uint16_t),
-> +                           NULL);
-> +               uuid_bin_to_str((unsigned char *)&uuid, uuid_str, UUID_STR_FORMAT_GUID);
-> +
-> +               ut_asserteq_str(expected_uuid, uuid_str);
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int lib_test_dynamic_uuid(struct unit_test_state *uts)
-> +{
-> +       int ret, i;
-> +       const struct dynamic_uuid_test_data test_data[] = {
-> +               {
-> +                       .compatible = "sandbox",
-> +                       .images = {
-> +                               u"SANDBOX-UBOOT",
-> +                               u"SANDBOX-UBOOT-ENV",
-> +                               u"SANDBOX-FIT",
-> +                               NULL,
-> +                       },
-> +                       .expected_uuids = {
-> +                               "985f2937-7c2e-5e9a-8a5e-8e063312964b",
-> +                               "9e339473-c2eb-530a-a69b-0cd6bbbed40e",
-> +                               "46610520-469e-59dc-a8dd-c11832b877ea",
-> +                               NULL,
-> +                       }
-> +               },
-> +               {
-> +                       .compatible = "qcom,qrb4210-rb2",
-> +                       .images = {
-> +                               u"QUALCOMM-UBOOT",
-> +                               NULL,
-> +                       },
-> +                       .expected_uuids = {
-> +                               "d5021fac-8dd0-5ed7-90c2-763c304aaf86",
-> +                               NULL,
-> +                       }
-> +               },
-> +       };
-> +
-> +       for (i = 0; i < ARRAY_SIZE(test_data); i++) {
-> +               ret = lib_test_dynamic_uuid_case(uts, &test_data[i]);
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +LIB_TEST(lib_test_dynamic_uuid, 0);
-> +
->
-> --
-> 2.45.2
+> Any suggestion?
 >
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+unit test suggest that error condition are evaluated so we have 32 bit
+on arm of unsigned long so we can not
+map all the positive clock
+
+rate =3D clk_set_rate(clk, 80000000);
+ut_asserteq(rate, -ENOSYS);
+
+Now, can we have a clock greater then 2Ghz if yes this not work always
+on 32 bit, then the macro
+IS_ERR_VALUE should help on clk return
+
+Michael
+
+
+
+
+> Thanks,
+> Zhiqiang
+
+
+
+--
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
