@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2024FC3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F8BC3DA70
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:35:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 737E188580;
+	by phobos.denx.de (Postfix) with ESMTP id C972588609;
 	Fri, 26 Jul 2024 01:32:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mny1wvid";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b4cuCqpO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73E948855B; Fri, 26 Jul 2024 01:32:53 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 42D97886AF; Fri, 26 Jul 2024 01:32:54 +0200 (CEST)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B6D88453
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2C4B88606
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3d6301e7279so274575b6e.3
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:46 -0700 (PDT)
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-44ff7bdb5a6so96791cf.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721950365; x=1722555165; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721950367; x=1722555167; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MaX0nsbQzzbw5f1KOj4BqUeuOy8Qk7O3FdotxeYksX0=;
- b=mny1wvidaeA5/tYyLoBMwfXwzsVsA5lJ6Iq762oCEwUuKfxmCUwZjDu/AMMafdxMRF
- dTnbaNNzNUcVYF/7/SekiGlmVpNm0hb1HZ2uoXLqhRBNwfXL79iWGxhx8h9QmQnLUqE+
- 5Eb60aH+8fsIkTgfRkBxN9D+yax8KXlJzKT5A=
+ bh=8WVFY6dnOm+6yqa8EszY/mlEge5uZPY6Ptjz4St/VbQ=;
+ b=b4cuCqpOvqCMXZMavEaZPHsEWNqhTE8/ZMH/s/vziXsOmLfxfY67VY9PnhxoPSV3vi
+ 1K6RPH2QKbPIfPIR27Q4ZZkCMz/shJmH4pkvQS/7aGgxPe87s1GgnaMjR69otc+e+Y1j
+ Rnn64VOQZCJ5L9ASn5kskkBHaWfRjZh6oPnuM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721950365; x=1722555165;
+ d=1e100.net; s=20230601; t=1721950367; x=1722555167;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MaX0nsbQzzbw5f1KOj4BqUeuOy8Qk7O3FdotxeYksX0=;
- b=qh7ysK/nAPHP/J4Sl0dHYnXqSgFmEpIZ2p9p91nz8vtWiEney2ejZrT4+O4KYj3e1Q
- e8pBVHt3ImChsFFnzPVWb11lNeuC8ic8mAUbfxaBwnZZLZ/z9XSgV+4vOYfWTQQyYjBv
- ko0N468GlAuC6IRt9QRQNLYj8ZA8J1mzgduiZOLItAQpbHUyUGF7uzZ2BS32LeMGBIzG
- C8z/3Hpnz9ZdRhVWgMHCePG3Wh2X3HRYRDdrwFMeC96ZIka305OKBYGtPKk1489EMred
- 6rZM+lMpzIeHYF03oSbnESHjS2OkWm4TnTlflBYwbixd0v/5SgNQc9XgH19p1WH2lNXM
- L3Ig==
-X-Gm-Message-State: AOJu0Yz5einU3zpfK3rMwZUWnkMCrtxZsmA9Gs7DW+7mnIs624Ws998H
- mNY5ER1VDkL1funyybJoP4jCAG3U6Uk0Fd4Ce9/SNXjc/yXzevvv8jtvuAc9S99asvFSWgB9l0g
- sGTfL1vZpRzzbcMW0as8dJEMxi8uRDxru1cp9
-X-Google-Smtp-Source: AGHT+IHBZBdX/M9oAG984phzzg8iVUNK/FAmHpyG08RF7SvvJvYyLqGhvAPNiumkAA4cPuyYPjR8Sk4TQD9c0AQDm5U=
-X-Received: by 2002:a05:6358:6486:b0:19f:5a42:d2bd with SMTP id
- e5c5f4694b2df-1acfb98751bmr375063155d.22.1721950365249; Thu, 25 Jul 2024
- 16:32:45 -0700 (PDT)
+ bh=8WVFY6dnOm+6yqa8EszY/mlEge5uZPY6Ptjz4St/VbQ=;
+ b=D3XpMbQ5bo2beiKYJCGClj9n90hep4Q2hSsrYu0OM+XDIvPh6y89Rm4tN91suXzULk
+ 7TWi6Td/IuURjIAygUeUjXhvVC7cOKdKBMxteRC2zFVgf/rGn1usjErY6M52Rn6UbT46
+ rJxpFhT9rf2QMmBLGVfqBmWEWk+ZSyuX3u3Ga+aCRasqBRF48Lu9EWHTphe9A0YVuNgs
+ Plt5rVdR7Gh3guXlHHDLyqNAukCoX6I0w/VD4Z3P8GZwN3zFBf1XTLzWIh+02nnEOge5
+ 3kwlkUPQYFQ18AMQMLc0gRcpduz8Hjz6ZJpyFsFdtB8oqpryG73vzZ9K7GPKT+Aqq7DM
+ 4skg==
+X-Gm-Message-State: AOJu0Yy3tlhPhKiv2rymxi2B+MwP0xvxGhxdi2n3j3sIMZJ7xts81ywf
+ 0/eoNufULEWG6KOgBwQ+5r9bdBMkxh+VdRj8+d10CBEZXrJCTAPtsYRZyuWiuxIOicQgtH9Do7l
+ 9IwxwbVK1PjvAGFVWaNvQdIMZiNXsZ5mTJOSe
+X-Google-Smtp-Source: AGHT+IHVAvPfrPv6GXP7RAVo2hKUtfMbi8aFKPp/JYppn6vjHy0SXk/8dtR5ycGgCCfqje9bfXFUambl5WI4I3Al4qk=
+X-Received: by 2002:a05:6214:246f:b0:6b5:4865:948f with SMTP id
+ 6a1803df08f44-6bb4071023cmr40227176d6.27.1721950367530; Thu, 25 Jul 2024
+ 16:32:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-28-sughosh.ganu@linaro.org>
-In-Reply-To: <20240724060224.3071065-28-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-34-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-34-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jul 2024 17:32:34 -0600
-Message-ID: <CAFLszTiKg2kw1HGcCqcyWgjMsXmSCGKAtOzKStduNEvUR=iZSg@mail.gmail.com>
-Subject: Re: [PATCH 27/40] spl: sandbox: initialise the ram banksize in spl
+Date: Thu, 25 Jul 2024 17:32:36 -0600
+Message-ID: <CAFLszTg1nywmyXRJ2Dgsg97Mfbps7P37jDD72dNafo0wHF3RZQ@mail.gmail.com>
+Subject: Re: [PATCH 33/40] test: cedit: use allocated address for reading file
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -94,54 +94,21 @@ Hi Sughosh,
 
 On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Initialise the ram bank information for sandbox in SPL. This is needed
-> for initialising the LMB memory map as part of the platform init.
-
-I don't understand what is going on here...you are moving code into a
-function and should explain why.
-
+> Instead of a randomly selected address, use an LMB allocated one for
+> reading the file into memory. With the LMB map now being persistent
+> and global, the address used for reading the file might be already
+> allocated as non-overwritable, resulting in a failure. Get a valid
+> address from LMB and then read the file to that address.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since rfc: New patch
+> Changes since rfc: None
 >
->  arch/sandbox/cpu/spl.c | 13 +++++++++----
->  1 file changed, 9 insertions(+), 4 deletions(-)
+>  test/boot/cedit.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-> index 9ad9da686c..22cd916685 100644
-> --- a/arch/sandbox/cpu/spl.c
-> +++ b/arch/sandbox/cpu/spl.c
-> @@ -121,6 +121,15 @@ static int load_from_image(struct spl_image_info *spl_image,
->  }
->  SPL_LOAD_IMAGE_METHOD("sandbox_image", 7, BOOT_DEVICE_BOARD, load_from_image);
->
-> +int dram_init_banksize(void)
-> +{
-> +       /* These are necessary so TFTP can use LMBs to check its load address */
-> +       gd->bd->bi_dram[0].start = gd->ram_base;
-> +       gd->bd->bi_dram[0].size = get_effective_memsize();
-> +
-> +       return 0;
-> +}
-> +
->  void spl_board_init(void)
->  {
->         struct sandbox_state *state = state_get_current();
-> @@ -128,10 +137,6 @@ void spl_board_init(void)
->         if (!CONFIG_IS_ENABLED(UNIT_TEST))
->                 return;
->
-> -       /* These are necessary so TFTP can use LMBs to check its load address */
-> -       gd->bd->bi_dram[0].start = gd->ram_base;
-> -       gd->bd->bi_dram[0].size = get_effective_memsize();
-> -
->         if (state->run_unittests) {
->                 struct unit_test *tests = UNIT_TEST_ALL_START();
->                 const int count = UNIT_TEST_ALL_COUNT();
-> --
-> 2.34.1
->
+
+No, we should not start putting lmb into tests like this.
 
 Regards,
 Simon
