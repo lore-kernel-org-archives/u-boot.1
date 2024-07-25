@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B746CC3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 14:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C60C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 14:49:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F337287CEB;
-	Thu, 25 Jul 2024 16:48:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C38887EDC;
+	Thu, 25 Jul 2024 16:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="innAtiJW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jCmh892t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F17D187E23; Thu, 25 Jul 2024 16:48:22 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id B739387E23; Thu, 25 Jul 2024 16:49:55 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCCBC8789F
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:48:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 946FF879AF
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:49:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-708cf5138b6so690433a34.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 07:48:20 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-70936061d0dso257594a34.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 07:49:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721918899; x=1722523699; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721918992; x=1722523792; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bcfSEo+PY02ryCG163BT9hjSkE4Iem0osi2xURz7dVg=;
- b=innAtiJW8k9FBNpkVGL22VHBaixHM6KIlC3bgWjd6FC0zZFh2oU0/rqOfPlt8K/ZNF
- /A53it5ta6is3Y0cEkVQ0dF+mG7aoR6JisckYivM+fjytpYZWuwIXO38h67R10FdMDu1
- xEfjWPFLhcv+l6RDzlTEW/9pAxl7oeSZ553sk=
+ bh=w6jCxtVuBtR3fv+2ZszYT7f9j/hY4uHjQ5qqzSnNpjc=;
+ b=jCmh892tdY1W5BRmjNbeNUxAXxQNToTEcTn2RWMC/bFGof4zav/8GwTRcxqGZ0RSX+
+ xO6P3hek1YmfFLKxXrnB3IbC0NRWzt9Ac4t7KpH5HFqT6KdaaG+qxfKKpF4IWjZDeVWE
+ LmTxnQhvIqtM58ZTgtoJB1q/UYMj0gm2nSAKM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721918899; x=1722523699;
+ d=1e100.net; s=20230601; t=1721918992; x=1722523792;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bcfSEo+PY02ryCG163BT9hjSkE4Iem0osi2xURz7dVg=;
- b=rmm5QPRGQMYwwtvDgZY9GAfBFJ0S3V9Kw29pYZ3OIfAGAQipOVITE9RWwl5D9X0mQb
- FJjlBKo1ijVhbFZYUB97E50y40dKlRGrCLyuHhrr1QlyQw4vsmUS3tvQym2HCXbn+gmD
- TxOCTa6sN2Vsc+Cy8rgyesNYzzsG1KVG7FotT3Ealg4SWL69TTxflgXH6qkiiINWFeFB
- lQKvKBkxbMWZ9V6e26ykpWuwT9YPYWW7MdetkqSpqpRWTFV8rqBY6HLlO9/TDqQJ9STx
- EGnyN7k/oOCDvczWqBGhhnt1s0g6TsMt6+0kXLfT1g9USEqDN+uJ5mhYruWLDl99NUfl
- SIwg==
+ bh=w6jCxtVuBtR3fv+2ZszYT7f9j/hY4uHjQ5qqzSnNpjc=;
+ b=QqL8JKj7H5sByrmZHsoFFlmv6fx49qGZPUvUVX9UkOnd/nwVQpAngSNQ0rjKvxyNnE
+ XLK3opLDHVXCl/0PY+DOSqERHA0hGzDdKl92ttDfsEF+iUat9/LCcnUAGSvpX1U6MIjL
+ IB3U3dESWnDCkiAT/E4052Q7VKifCnz+lO7Xkq70PopBMoIwOA/BJQbjJ6eJCGWJgZW3
+ 9RC2vSQEiTDRvQ9roug6YUJpL7iFYI8eiEDuowEgSBBUsOtTreGh8tXeJtbUKJnzKHTr
+ gvfgzglA14KCa1WPC40ZodYn0qdaDCUKeLZ9JfdsfgFnjq7/bHkE3pdcHFMQ3t2yOnBj
+ OhLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVW50i123rZimHlnzm7sRUZ+4O0tiIziU6RLD6hkq41QXxm2vAjUu1jUCCp3cYV3vhZ0Qf3qLRsMs5TGgNcSM1BjTC6qA==
-X-Gm-Message-State: AOJu0YwoLG/Pca3AicFeirqM6Dm5awYFyvQ4x05V63yVuotie1RniRuj
- 8grNWvNJkPkAxGp5jE1hYSjB38JvlhIZphHTYftaOfuAOd5LbFwmQNGFmmF8UQo=
-X-Google-Smtp-Source: AGHT+IH8AyAykLl1Liu3kuAQJ5AedsE62oawpHshQqVYFru4REJdGFAkl0HkYw7+lCeW9Aqk6QphoQ==
-X-Received: by 2002:a05:6830:611b:b0:703:6a3e:d3ca with SMTP id
- 46e09a7af769-709324c4446mr2594197a34.26.1721918899480; 
- Thu, 25 Jul 2024 07:48:19 -0700 (PDT)
+ AJvYcCX4PztBg8pbeROI7fjorp+dKsIIZ9u44Gqjr97IvPwWXFL2Kqml86gYFzD8JcQPuLKD5NSqTQJcbgqf1uh/Yjn8Zk9N5A==
+X-Gm-Message-State: AOJu0Ywj9tzTBiwYRiWdv1++bPW759+zxNGchncn5TrFh75iU2zjhh03
+ vnCBM4GX0rtZwkBgUXUWNEzjvsFFMroFul58REzbqEynBJ936yVLGhsVMN5zPXM=
+X-Google-Smtp-Source: AGHT+IH3bNqunuSb84wbrmRG5c4uBLcUm9mYFbLLVZYbUK29o7dITrUeOxtDQ6AVk7fFig5zvi4wCg==
+X-Received: by 2002:a05:6830:b96:b0:703:68d0:a267 with SMTP id
+ 46e09a7af769-709321146c5mr2751626a34.3.1721918992295; 
+ Thu, 25 Jul 2024 07:49:52 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
  [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70930719164sm326171a34.31.2024.07.25.07.48.18
+ 46e09a7af769-709307088c2sm325062a34.24.2024.07.25.07.49.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 07:48:19 -0700 (PDT)
-Date: Thu, 25 Jul 2024 08:48:16 -0600
+ Thu, 25 Jul 2024 07:49:51 -0700 (PDT)
+Date: Thu, 25 Jul 2024 08:49:48 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+To: Michal Simek <michal.simek@amd.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
  Mark Kettenis <mark.kettenis@xs4all.nl>,
- Michal Simek <michal.simek@amd.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Huan Wang <alison.wang@nxp.com>,
@@ -78,17 +77,16 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>
 Subject: Re: [PATCH 04/40] lib: Convert str_to_list() to use alist
-Message-ID: <20240725144816.GT989285@bill-the-cat>
+Message-ID: <20240725144948.GU989285@bill-the-cat>
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
  <20240724060224.3071065-5-sughosh.ganu@linaro.org>
  <20240724205418.GM989285@bill-the-cat>
- <CADg8p95EwPkVH4Lo2+9O8QeSrE90xLpUQXYEngK+YEr+YiJ=qA@mail.gmail.com>
- <CAFLszTiYt6hPf7YuR5wqr6WjoX1BSKrNtKGdx66qD_g5L9hF7w@mail.gmail.com>
+ <b81b9431-4681-432b-ba24-3e24e7e1cb85@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CfNrZXjMuyoewSgj"
+ protocol="application/pgp-signature"; boundary="g+s10Gp1ozEKMXcs"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiYt6hPf7YuR5wqr6WjoX1BSKrNtKGdx66qD_g5L9hF7w@mail.gmail.com>
+In-Reply-To: <b81b9431-4681-432b-ba24-3e24e7e1cb85@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,98 +105,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---CfNrZXjMuyoewSgj
+--g+s10Gp1ozEKMXcs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 25, 2024 at 07:59:52AM -0600, Simon Glass wrote:
-> Hi Sughosh,
+On Thu, Jul 25, 2024 at 08:13:38AM +0200, Michal Simek wrote:
 >=20
-> On Thu, 25 Jul 2024 at 06:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
-e:
-> >
-> > On Thu, 25 Jul 2024 at 02:24, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
-> > >
-> > > > From: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > Use this new data structure in the utility function.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > >  lib/strto.c | 35 +++++++++++++++++++----------------
-> > > >  1 file changed, 19 insertions(+), 16 deletions(-)
-> > >
-> > > This is rather big growth when we didn't already have realloc:
-> > > 05: lib: Convert str_to_list() to use alist
-> > >    aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
-> > >             xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
-> > >                u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
-> > >                  function                                   old     n=
-ew   delta
-> > >                  realloc                                      -    11=
-20   +1120
-> > >                  alist_ensure_ptr                             -     1=
-40    +140
-> > >                  alist_expand_to                              -     1=
-36    +136
-> > >                  alist_init                                   -     1=
-08    +108
-> > >                  alist_uninit_move_ptr                        -      =
-76     +76
-> > >                  alist_add_ptr                                -      =
-72     +72
-> > >                  alist_uninit                                 -      =
-48     +48
-> > >                  str_to_list                                204     2=
-32     +28
-> > >
-> >
-> > I am working on an implementation of lmb maps using lists. The list
-> > nodes are then allocated with calloc, which I believe is included in
-> > most of the board images. We can then compare the size impact with the
-> > two implementations (alist vs list). Thanks.
 >=20
-> This is for use with EFI,
-
-Am I missing some context? The LMB rework is because what we have today
-doesn't work all that well for what we need in a modern system (and with
-modern security concious eyes on the code) with EFI_LOADER=3Dn.
-
-> which is very large, so I doubt it is worth
-> it. The alist code is simpler to work with and will be used in UPL and
-> likely some other areas.
+> On 7/24/24 22:54, Tom Rini wrote:
+> > On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
+> >=20
+> > > From: Simon Glass <sjg@chromium.org>
+> > >=20
+> > > Use this new data structure in the utility function.
+> > >=20
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >   lib/strto.c | 35 +++++++++++++++++++----------------
+> > >   1 file changed, 19 insertions(+), 16 deletions(-)
+> >=20
+> > This is rather big growth when we didn't already have realloc:
+> > 05: lib: Convert str_to_list() to use alist
+> >     aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
+> >              xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
+> >                 u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
+> >                   function                                   old     ne=
+w   delta
+> >                   realloc                                      -    112=
+0   +1120
+> >                   alist_ensure_ptr                             -     14=
+0    +140
+> >                   alist_expand_to                              -     13=
+6    +136
+> >                   alist_init                                   -     10=
+8    +108
+> >                   alist_uninit_move_ptr                        -      7=
+6     +76
+> >                   alist_add_ptr                                -      7=
+2     +72
+> >                   alist_uninit                                 -      4=
+8     +48
+> >                   str_to_list                                204     23=
+2     +28
+> >=20
 >=20
-> We could provide a variant which uses malloc()/free() instead of
-> realloc(), as I mentioned/ The impact then would be very small.
+> this is definitely not acceptable. This mini configuration is running out=
+ of
+> OCM and we are already pretty close to limit.
+>=20
+> What's the reason for this change? I can't see any explanation in commit =
+message.
 
-Switching to malloc/free instead might be fine as well, yes. Aside from
-the realloc growth most platforms are at a minor size shrink. If we
-address realloc then we get something more functional and smaller. This
-should make everyone happy.
+It was more clearly explained in the cover thread for when Simon posted
+alist. This conversion was an example, so dropping it from the lmb
+rework series is fine.
 
 --=20
 Tom
 
---CfNrZXjMuyoewSgj
+--g+s10Gp1ozEKMXcs
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaiZawACgkQFHw5/5Y0
-tyyIHAv9GmUEtjreQtcAD/oKlu3Uf7j+zQvOTCz5COhlp2uY9z1Jb6KjtyofJJDP
-ECiXMdvnpCSgKBdPrTPbuxK+JoOs/0qzcjdW5uVU2ohC9crlKSGBu3EyOzdDJ2B1
-zXQk1wN5inbCKNxkdf5nLRBswU6obCUwlUtdL2Y5+VilzwN456cKdI7bEO8GhzvP
-66ynlgo/9BHhLrFiikJN/8RhaTkMzyZzNz/spF2CnAtycsXWVvKIvAbWv+0u/C1h
-W2l9JMC2y11EETDezbg149czyX6hPw5szmqma1itVbMV05DE5BrRmqAXHsg2IXKN
-d81PVNqyPLVE8STBTlzs3QUEjSmkwg7OyfcM7Rd0+NLOSXwr1Ut63Rz0ujaQUClZ
-NYmCYS8rX3AOUCMtlmTxEqL13iN2t+AzhFiW0uinFGudlap85MGIYoOV5CIDMKbp
-1hiWCn3y5Kw/arvfVxmmX81zury8JyBd89u7yZ5WIGePQJaUh1TsqdsA8JHqOEcQ
-hg6TOPoU
-=rCJI
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaiZgwACgkQFHw5/5Y0
+tyw8EAv/bmJiJ+J75XJ1fQrUQymL0kAMKCJAsCxQiIe5Nyy1DKOttxrBzcQSe1l2
+uRVSkf5gClP9StfyNqstqVw2pGo4+dOxg42esUFw5G3563aAcPmV+Ix5LvN8N9ov
+lLuT9gfSC7PH7V0uJhTNJN+smYNZ1cVoL1AmKh0ERHrFx8gln2tQn79wYEVLl5nx
+emxB3Q6fuwjjDt2CDr0SfpLvgnVnbDAG3/WGXLku0YpfI7H2pafjK/2sjYsL9tFX
+qrTfG9JG9ZKqpuOeeyCGUkqIfIfMktRvxpJI0emBcoCo43c84fOJ2iWIArYDq9rf
+wG5EzNguarickwztx1TeOqehGxYii+ge9Rtz4xNVo/N2POSNlXW6Cntgr5JUO3HQ
+v6m5RS7g4hsnAMfHYaADHvZXH1kxDoQ3rnk7Lk3VDga2+tKx66Oa6gS8HPw6hIeR
+yrHznGW2U+8bo/njJM9J3CmEPr4Iu2557eulUzw4aJPKc0uCJDK+HoKGrsdHWLE4
+/ZmPctET
+=qXWu
 -----END PGP SIGNATURE-----
 
---CfNrZXjMuyoewSgj--
+--g+s10Gp1ozEKMXcs--
