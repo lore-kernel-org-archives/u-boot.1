@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72D3C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:45:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E40D8C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E9BF883A4;
+	by phobos.denx.de (Postfix) with ESMTP id E74C58842C;
 	Thu, 25 Jul 2024 22:45:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZZtJxiKU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W3gS8CO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D3BF88385; Thu, 25 Jul 2024 22:45:26 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id AD63288365; Thu, 25 Jul 2024 22:45:26 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7171988363
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 22:45:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21CE888370
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 22:45:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-2610623f445so466467fac.1
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:45:23 -0700 (PDT)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5d5af7ae388so130898eaf.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:45:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721940322; x=1722545122; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721940323; x=1722545123; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zje1NFV9nziFyD0oks5YEJm/m5MnJAqw0VsMOyG/zQQ=;
- b=ZZtJxiKUzSdfGOh+JnszPaLw6yLn1YrNABGpbzgGgH+/rOUQnv/wbgsbY0Qof55sOo
- A12Mcw4bFkkofiOT2oAMaLhNh/0roDtiWwMG1izQvqhTxRvGBhEQf61gUhSyvESdyYJw
- 59nS+f+COmGQjQck6pglpBwh5xDyg6VUZ+WfRjYufLrqMheDB4CGnScVJ0JRU8rwne/3
- YqxOBbLWspEvwmXUderzGnaOAB/ZdCHIvPRzJy5FFW1+sGhJdhjapuv2S7Z4vzcu9YIs
- 2xOHTXW+FLZK+Ji6Nz2+TCLIU4cmULb15jhmPYuXzB6iW3sxyRkqlJDeAFaBJqfCi+OK
- cXoQ==
+ bh=epxP9uFws1EL9nsnErzdeDit6llhPxNdDYaSskV6G/g=;
+ b=W3gS8CO+wg9EnnOqnowry7yN+XRcj2YOND6Uk23K9fxu0mg0lNT4WMDcWWSMkDBGa1
+ 58e5p5gy/wn524CqQeNZ9e6Q0APrgTIymW8WFs6Kc3BMN1oF8TTJmAl9RP1phc3wV9c2
+ ldoNSpiDKXivgQZpns3PAUQBsZ60gXee02tDqjBYv/yFjwk2zwuH6g+IBknEhIR3/ibW
+ fcJnJdNUzxIc4Mk7h6P6HB8wWP0kdL0g5hKwIhSYKZhX/ZVKYHzn2DuzNRIpLhdL87V/
+ c0tISG+czwyhnzFbTTSPa+AYaZw2jJo1E8JhYBwQSRkGiSW8sm3cVGwXLdEzxGLOGX0a
+ Z14w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721940322; x=1722545122;
+ d=1e100.net; s=20230601; t=1721940323; x=1722545123;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zje1NFV9nziFyD0oks5YEJm/m5MnJAqw0VsMOyG/zQQ=;
- b=FU8tgmaraAi3gibIgQSbe7fT0VE2k2ilFSHAgZ7PvctvCCU32rCELOXi+8mEdXJsTZ
- PAYwAh+P5uFY0cV4ZdAbYw2/sNFaCQ6Iylq1STm0s7FqeDbDEPq1FASJgh+eEvrWTsM1
- /toLVGhaii+Y5suhz05jSIP0dOgEGmPPSmAJrAw34KAFLqgzQVkNHywbjoM3tNtbtLfn
- 7l5l8JIAEFWWIdRIdo2aFp2RCl5plQ4gUQiSgUWvvH0m3fs4yC+ATdB4RPZJGB/0dARV
- eI2Mi1dP5Hx9MLktgo2z8gkqwYnf025skVT34HRDke7Vxm26S2mTLIcBgVmlLdhngV1u
- UASA==
+ bh=epxP9uFws1EL9nsnErzdeDit6llhPxNdDYaSskV6G/g=;
+ b=ZP9uY0bd9K7kTkGRg0EMfD9pQLt2l6kmKoboGAza+NGiezT0XXN1qo/bCaoTgnVCH9
+ aoWYrHJdI9ssCzQ1G1L168sMtB6sLSBGU079iChbeVwEnDtB56qgmoORAQWAmtFIcgpF
+ h/4JdDMVBrNK0ajY2gx5t7ZuyYPdWYcS1xLfu1qaWYu2+bCEJbduKHNJr9iVhDwbU0yP
+ /jJXycLcDV8GgIdjYuWR6ptQQEb4I09ofmWukr8yzMiufTr8ilai/BNPhwWknuQ5xz/C
+ W9+98pxMbKaNC3PRJlhRPO9WfV/lY+z9Fu7qMGCAnD7GQgoaXByMsEmV/7BeReH2dfWg
+ +wsg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOeomP9bvJU/WbUICc03Y4QHkGYvhIHg+02itqSitLkGhtC1YkcKcNQLbqg295bP2EZxfQHwcaM21SRA2SiU6V4Kogsw==
-X-Gm-Message-State: AOJu0YzKxIp1l5p9dwzGYfe3ag1gjHBWodWsY7df/s9tp7TukJyZeofj
- 06vdeLyMmUC1SEBDdYqbWWqhcfzMM3t9MRcdanDlRfRP8VrvAECiXzp1xrFEZrs=
-X-Google-Smtp-Source: AGHT+IFa7OsOGjUXM/at64+pwx7ERbd06MXhAJHtdU5dbWRtHmxh2ow8CRc6VA5FiCWWhCiYuCXl8A==
-X-Received: by 2002:a05:6871:813:b0:260:eb3a:1bc with SMTP id
- 586e51a60fabf-266ede1179amr4183243fac.41.1721940322088; 
+ AJvYcCX8yWuLidkgULsq3BeNT/mvTfHgH8RZtutUyVKWckx1vyFq66oXYjEqA2VAtmOxvBaXPIoDyPs2Cq6lXD50jULUc/uTTA==
+X-Gm-Message-State: AOJu0YwnzYoqWnMrglojcKM0faYWOIJYxerzBhKNekJCzFaICKU1iTMY
+ 6vuzZleab1ZSJMHSGDjSuIEFRYkDCLhWqqN+5Xt52rd3VRgFbs4QxGFJOr4LkeU=
+X-Google-Smtp-Source: AGHT+IFoeC7zQYTlg1eHVXN1CKKBmCFgtc7JSgyrNq2ShqkP7XWvbsX+5HLMj8BUdcJnIAogcnaaWA==
+X-Received: by 2002:a05:6870:289b:b0:25e:ba6f:a93f with SMTP id
+ 586e51a60fabf-2648e8d17a1mr3563888fac.13.1721940322841; 
  Thu, 25 Jul 2024 13:45:22 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2653e7c8aa6sm417228fac.32.2024.07.25.13.45.21
+ 46e09a7af769-70930795a43sm457531a34.80.2024.07.25.13.45.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 13:45:21 -0700 (PDT)
+ Thu, 25 Jul 2024 13:45:22 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Jaehoon Chung <jh80.chung@samsung.com>
 Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>,
@@ -78,10 +78,9 @@ Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v4 01/38] mmc: dw_mmc: Remove unused version field from struct
- dwmci_host
-Date: Thu, 25 Jul 2024 15:44:43 -0500
-Message-Id: <20240725204520.18134-2-semen.protsenko@linaro.org>
+Subject: [PATCH v4 02/38] mmc: dw_mmc: Move struct idmac to dw_mmc.c
+Date: Thu, 25 Jul 2024 15:44:44 -0500
+Message-Id: <20240725204520.18134-3-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240725204520.18134-1-semen.protsenko@linaro.org>
 References: <20240725204520.18134-1-semen.protsenko@linaro.org>
@@ -103,7 +102,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nobody seems to use it, so just remove it.
+struct idmac is only used in dw_mmc.c, so move it there from dwmmc.h to
+avoid cluttering the interface in the header.
 
 No functional change.
 
@@ -119,21 +119,46 @@ Changes in v3:
 Changes in v2:
   - Added R-b tag from Quentin
 
- include/dwmmc.h | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/mmc/dw_mmc.c | 7 +++++++
+ include/dwmmc.h      | 7 -------
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
+diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+index f4ecd7422cef..45665e517068 100644
+--- a/drivers/mmc/dw_mmc.c
++++ b/drivers/mmc/dw_mmc.c
+@@ -20,6 +20,13 @@
+ 
+ #define PAGE_SIZE 4096
+ 
++struct dwmci_idmac {
++	u32 flags;
++	u32 cnt;
++	u32 addr;
++	u32 next_addr;
++} __aligned(ARCH_DMA_MINALIGN);
++
+ static int dwmci_wait_reset(struct dwmci_host *host, u32 value)
+ {
+ 	unsigned long timeout = 1000;
 diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 136a95b8cdb6..39024fb38aaa 100644
+index 39024fb38aaa..7e4acf096dce 100644
 --- a/include/dwmmc.h
 +++ b/include/dwmmc.h
-@@ -163,7 +163,6 @@ struct dwmci_host {
- 	void *ioaddr;
- 	unsigned int quirks;
- 	unsigned int caps;
--	unsigned int version;
- 	unsigned int clock;
- 	unsigned int bus_hz;
- 	unsigned int div;
+@@ -198,13 +198,6 @@ struct dwmci_host {
+ 	bool fifo_mode;
+ };
+ 
+-struct dwmci_idmac {
+-	u32 flags;
+-	u32 cnt;
+-	u32 addr;
+-	u32 next_addr;
+-} __aligned(ARCH_DMA_MINALIGN);
+-
+ static inline void dwmci_writel(struct dwmci_host *host, int reg, u32 val)
+ {
+ 	writel(val, host->ioaddr + reg);
 -- 
 2.39.2
 
