@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A10C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E965C3DA70
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:34:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53586886DB;
+	by phobos.denx.de (Postfix) with ESMTP id B1FD1886E6;
 	Fri, 26 Jul 2024 01:32:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XRbgGunS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xg4qFZCh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6115C884CA; Fri, 26 Jul 2024 01:32:50 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 7923B884CA; Fri, 26 Jul 2024 01:32:50 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 062E98851E
+ by phobos.denx.de (Postfix) with ESMTPS id C9FAC88580
  for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5d5846f7985so231067eaf.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:44 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-5d5846f7985so231072eaf.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1721950364; x=1722555164; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QuIH7m7cDNCf6c7QyMdMtHgi9fE3LnoRLofF0JMfo5A=;
- b=XRbgGunSE9+t4Ym3bznJZQVlkzP04xz0+QH7Im3pB/p6tCiyUx8KCO+vYr/CfmfkyF
- 20tqJbFDadm26ta9xGiG8dJc5ml2ommIAEjFDfqv9MtZWQzaZVdUlAXcIma/zRafmLW4
- GgBVSd7WJ8H+hH1wVxwoAIHLI7o+8JldZCk3s=
+ bh=AobJFHJRvrQEB0sZ7WH1SjOVayQBaT/Uy+pwzWABHbA=;
+ b=Xg4qFZChKF9QGuDqiF9pBt99C1qWzhjm6R3k8BOkd6nyUu5vGHif8IjswBF0hxkVzp
+ TB5NI55cEVhgHPBkyBLKDJ1sWj97V4KCgRI8ki8UYaczDSqMKGLCkdhwitKsDz4zL0uK
+ sZGe+Sd/KvJUVbwoFaSJIgPSgjKAGzB1sED7c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1721950364; x=1722555164;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QuIH7m7cDNCf6c7QyMdMtHgi9fE3LnoRLofF0JMfo5A=;
- b=oOS0YKm5UCxAqStQXX8o4Vn02bCq9zlzq7+EclFAIAfx7JMOXdxHKdp7cMnpWM/pUM
- P8NF/p0w2nKV8pGhqXisP2hwyE7+iG0hWGzDirzq0vXNVESdcrXm5vGqhH/QfK1OVsWb
- 7FVFYi+y7A4WEI0Hg74wcWR5Y5JD1sIee5CgXM/AXoISKwzo7g/FihYmPydtFvd7Sks6
- 7WJwMyBdh+xNixEy8ICEdupkdotGnM9MU/WzliWPj+CrWpTf430FBJNOwXS//mvflldP
- edb1uiBlUAIEaezZ7d9DFTjQYNsHx5jrSIhMqGVy5d+eRqct0dJWAnJwZrNy86ZFk9JP
- pv9w==
-X-Gm-Message-State: AOJu0YykamYHwL+XsB8GKnvbCXoGaVaKPQXvz2jT8VSdtUMoMPokZGEe
- 58x3/xi+NowNYjV5wX1oyabkVo1kcPFbxGG3by0NbXbrb6vUtdlSeT9KDFtzV6wMXbzMBZKSF0s
- NdjKKlHKxVlhaD9tFw1VNHKpo12OFK/CayYYW
-X-Google-Smtp-Source: AGHT+IHjWVSQ5PsuGotLwMlmfeLlQ/1UBAUTXweig5dRgiQp9knR3SkzOd4DnioDgqYu1/xwpO1lj5pvMABMr/8X+GA=
-X-Received: by 2002:a05:6358:3a13:b0:1aa:bc42:eb01 with SMTP id
- e5c5f4694b2df-1acf886fcb1mr514620655d.7.1721950363669; Thu, 25 Jul 2024
- 16:32:43 -0700 (PDT)
+ bh=AobJFHJRvrQEB0sZ7WH1SjOVayQBaT/Uy+pwzWABHbA=;
+ b=IdFNe7b12CAUd9+2wXl3GmtRxMJwN7Rwu1aQ0+FZhSF0NjNCVA8hk5YjEQ7nqdprWv
+ GVrq2EW19u3f45mUaSdgiDeGRKAuIu20FM82qg560/WYJ7mjsizN9hMsHqsgId1sRSeT
+ inokQqFpzqgcK+pCV38liH0AjBrluNHy7U8bHs4P8YCJlsTyl7uW8lBCyOLlCKL61WDh
+ KyMQSuKyDhl2xP1gX9iAtVLiiVtQhp3oCh7iORnkm+NMCvnWZAhBrZy8hWftShpF41CM
+ d1BzRaOoqpJ5HZLzcmt+PgtTBpUv5A3pIqUbD+CICumFQGdmh/0EMFFloCdAXmDAYuLq
+ 77dQ==
+X-Gm-Message-State: AOJu0Ywxby5djOmD2KyeNSvGNmtVxw07zikLnmM5A2tsWxbCB3xSsaWy
+ qN/eaMGJQJsyo5jmccujnqSliEo5hb+IBYEX+8xklx+Xfy/8YlaNCXC6kJLSKVIDXJEgu4U0aiy
+ 0SykVYD26mS/nspu0EqzbE3rCZMjfSPMgSxLE
+X-Google-Smtp-Source: AGHT+IGaYA+z83X5Iu5pmTQUfju0yIlEaoQac1poVyz5sINXRYMJ5gi92MGNP7ernGWSRkwat7acQI2u4I1XMcb5PSc=
+X-Received: by 2002:a05:6358:248b:b0:1ab:9820:857f with SMTP id
+ e5c5f4694b2df-1acf8891965mr602338155d.18.1721950364502; Thu, 25 Jul 2024
+ 16:32:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-26-sughosh.ganu@linaro.org>
-In-Reply-To: <20240724060224.3071065-26-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-27-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-27-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jul 2024 17:32:32 -0600
-Message-ID: <CAFLszTg+5teQs4m++hX2wEDh1O7wTjPSK-2ogceFv1R=N_dz-A@mail.gmail.com>
-Subject: Re: [PATCH 25/40] sandbox: move the TCG event log to the start of ram
- memory
+Date: Thu, 25 Jul 2024 17:32:33 -0600
+Message-ID: <CAFLszTiqSN0pja51fy_o=ij-QJoe=vdoN-BSnSYAq61z_FTwTA@mail.gmail.com>
+Subject: Re: [PATCH 26/40] spl: call spl_board_init() at the end of the spl
+ init sequence
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -91,50 +91,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
 On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The TCG event log buffer is being set at the end of ram memory. This
-> region of memory is to be reserved as LMB_NOMAP memory in the LMB
-> memory map. The current location of this buffer overlaps with the
-> memory region reserved for the U-Boot image, which is at the top of
-> the usable memory. This worked earlier as the LMB memory map was not
-> global but caller specific, but fails now because of the overlap. Move
-> the TCG event log buffer to the start of the ram memory region
-> instead.
+> The spl_board_init() function on sandbox invokes the unit
+> tests. Invoking the tests should be done once the rest of the system
+> has been initialised. Call the spl_board_init() function at the very
+> end, once the rest of the initilisation functions have been called,
+> including the setting up of the LMB memory map.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since rfc: New patch
 >
->  arch/sandbox/dts/test.dts | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-> index 5fb5eac862..1e1e9eaeb5 100644
-> --- a/arch/sandbox/dts/test.dts
-> +++ b/arch/sandbox/dts/test.dts
-> @@ -78,7 +78,7 @@
->
->                 event_log: tcg_event_log {
->                         no-map;
-> -                       reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
-> +                       reg = <(CFG_SYS_SDRAM_BASE + 0x1000) 0x2000>;
->                 };
->         };
->
-> --
-> 2.34.1
->
+>  common/spl/spl.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 
-It looks like this will conflict.
-
-Please check and update the memory map at the end of
-doc/arch/sandbox/sandbox.rst
-
-Separate from this patch, I really think the TCG event log should go
-in a bloblist. I can have a crack at that if you like.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
