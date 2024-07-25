@@ -4,214 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C46C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 15:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CBCAC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 15:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAE7E87919;
-	Thu, 25 Jul 2024 17:33:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7338287C86;
+	Thu, 25 Jul 2024 17:50:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Kyc9qBuv";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nzat+YVS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F06A787919; Thu, 25 Jul 2024 17:33:33 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::624])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AEC6087F19; Thu, 25 Jul 2024 17:49:58 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9339E87919
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 17:33:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A58787C86
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 17:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S3WjQAdsSMDQOAz9xNdWWFcxvCnl7nwOgNNT6l+4zUNtmATDi1pVBCoMmqKq1jsJfBSiJX1d0LYAY9cF4j0W+aVI+/TN4P6i9AhZCfbFO9/+/XJCKr46eYaZvUboG2v/TogQ35b84nNnu23DMwAuPuHip8CEves+irMaMn7HENat3zBBxBZG7fF5+U0qV2DU+2lNBO8iVX1FAdu2qQOGz56BfmSfXwThy/L6q+FXKoAnsQ4dou0BlMimr2pvul0Y13GsVpHw0TZPXtqgl+atX1V4V+5lwyl8yQANSg4aTKkFFZ3izsGPPz7DvqjxyvtRQwO40wc6VH2oWDJPdqiJ2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kb7XoEiqSjLLof0wCDgr3AXQX+CvFq2MfWuh3cdssWQ=;
- b=W7r8RALJ/CiVY7gG9RzpK3KJUnyftqObceG4rfZyZ10B1qNc1QjOBUj0c1d+ISiRuGEVr7U57LgAAEgTjlAN8V4yPaHoHKIykrFtz7ZqUrF7fO+dZCGDHWvkXsDf194wOnHJx4AiTXGb4ouPIENiQ6DMRFGQ3S4ltUPGtWwITqRKE99DMHkuLMiIg5cBzzqe6dIr9TIQ6mZF7/mc28Tlmw0D9+UuueGsMOwRR3TXdbUkN0Rj5owBFKtWug9w/JTZLoqX4XVPFBf0Ctc9g2L8CZ6sCK1tKaKeDw4AbgPwXUn5S80DUm54nBQERz0bvnXc5jzZtTnnok7xlv7DK8DiQw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kb7XoEiqSjLLof0wCDgr3AXQX+CvFq2MfWuh3cdssWQ=;
- b=Kyc9qBuva5KdOZ/TzUVrz0RMgR4DrzRdFrMELhnPW3ARB6JffzgQ7pxx0e3Wi0IjA2KtjGbHxmH4Sjn0tNkqlTyIK9Gi/IxmGJRTGNayQEHqTxOOH232qwlZsvowxNleKae8bf+ImyruQHRHDoMqe10dZRyRvt50IOQdJ8AA3jQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CY5PR12MB6405.namprd12.prod.outlook.com (2603:10b6:930:3e::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.28; Thu, 25 Jul
- 2024 15:33:27 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.7784.020; Thu, 25 Jul 2024
- 15:33:27 +0000
-Message-ID: <4121b642-5eac-4c0e-a1f0-af1b6b89e6c9@amd.com>
-Date: Thu, 25 Jul 2024 17:33:10 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/40] lib: Convert str_to_list() to use alist
-To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Huan Wang <alison.wang@nxp.com>, Angelo Dureghello
- <angelo@kernel-space.org>, Daniel Schwierzeck
- <daniel.schwierzeck@gmail.com>, Thomas Chou <thomas@wytron.com.tw>,
- Rick Chen <rick@andestech.com>, Max Filippov <jcmvbkbc@gmail.com>
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-5-sughosh.ganu@linaro.org>
- <20240724205418.GM989285@bill-the-cat>
- <b81b9431-4681-432b-ba24-3e24e7e1cb85@amd.com>
- <20240725144948.GU989285@bill-the-cat>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240725144948.GU989285@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0185.eurprd09.prod.outlook.com
- (2603:10a6:800:120::39) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1721922594; x=1722527394; i=xypron.glpk@gmx.de;
+ bh=vek8wp5XkRX/N3UnjtHPG6dBTYkX9CZ00iKbMG9V8Hk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=nzat+YVSJJjZmPxrDT86T3Qdqucvfuu2yYGL1q2++MOQ7Gql3ViiJuHOUdOzgOKn
+ mPycRZLeMoT/j6aP34mrISmeP2wLGbNXQ+nVpcOrq/EflG4QfYXs5T6ymEKf4fqv4
+ eKvnOnUfTS6j94wLnr3LeRDIVCjCpi0/AzRfav8v2ZBtFV/zvpTc0fxSVQOF16VRd
+ YVgUDMLn/2h+Q/1pFbQiF4eHYik3jZJ4KkhbO3CrlAJm8kFAcu4Ypin9dAX7aG2wB
+ iG4zTJ1+Ga/O44oIxcPcNsf3MfNA4nLL3cqW9+JWuhPryE0hLY7lE5RkYyiWztWmU
+ yb1MxrBWHo8fiZhsyA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N6KYl-1sDVxz1vXV-00xF00; Thu, 25
+ Jul 2024 17:49:54 +0200
+Message-ID: <72e02ed6-f8c3-4caa-8ae6-2cef00a2ddd2@gmx.de>
+Date: Thu, 25 Jul 2024 17:49:49 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CY5PR12MB6405:EE_
-X-MS-Office365-Filtering-Correlation-Id: 449719bd-7a0c-4ec6-3113-08dcacbf2101
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dS80YnE2Qy9OZkFwQXA2Y2tYOUVQcjZqNE1OK2UyOTJvOFdIdmppZ3IrbFBo?=
- =?utf-8?B?R0JoL2dwUjFtYVpXaSsrSkp6V3VkZjBESEw2UnQ5bTVFSXJXTkRIVDc2b0dE?=
- =?utf-8?B?MkN4aGhYRjkxTFE5aGlNWEZNMjZBa244ODZOZDU3SjNYWkxReXdkbXZvQ2pw?=
- =?utf-8?B?bVZMcWtpU0plWlVWWjRhbVJ2WUVGaHlMUjFocW84Z1gyQXl4QzdiR3NhQ004?=
- =?utf-8?B?S1E0SXlNQjRJRk5NTWdJL0I2Ym5VbEVMS1NiRExQa0lHaWxBTDhZeW42WmZl?=
- =?utf-8?B?elAzbG1ZYUdWKzdMa2NzMXFXS1RrVnpxcWN6a0daZmhvVVhsV0V1eWhYSndR?=
- =?utf-8?B?RWV3aXZEUlZBVlFCcW1mOE8rNUs4ZmN3Tldza05waGpQOUgwMElhK016WTRO?=
- =?utf-8?B?M1NhNENNOGEwZ09HTHRpY1dYd0t0Y1pncFgxWnFiOUJuelVzNm9PcFpadzkr?=
- =?utf-8?B?WEc5bGlaa3pZNlM1SzhvaFdOTUdZWWk0M0xkZStzVUEwRGhaY1UveVY1NTlU?=
- =?utf-8?B?ZXB5dXFNK1oxUDZLM0JwMGxnZ3ZoR1QxLy9SMlJRa0lCeUVwVlBkVVVGTW1V?=
- =?utf-8?B?TWpRRndtWCtHM1pGSkNSWUwvU2hhYS9iOFgrYWJ5R2ZIRmV1djBRVnpsT2kz?=
- =?utf-8?B?dnl5ZXdCU0U3NFdPYXVYYnJvZytGZXJGaSt3YTY3cmhPT2RpMERTWWtkRmNY?=
- =?utf-8?B?NVJ6aGthRVUyUDFBeDFSbnM3ODcyc1puYWovMU9xUDZiVTFuVENSZG9MUnRj?=
- =?utf-8?B?TXJiRzhvVzFPL0FTUXQyRjhBNHVXamFEU0V0YmV6cFpHQStsK1RXTXpoc0JE?=
- =?utf-8?B?OG1kV3VMNUMyM0dWdnJheVpXUmlTWXBQZndmVHVueXFJN1BZM2hpVHFZK0Y3?=
- =?utf-8?B?NmRlMEN0ZmJESW5qZTY3TGVXVXNrUEF0U3JqSWdpbFRnOGJVVWMrZFlFOUhB?=
- =?utf-8?B?dTNBZGg5RytMMWJJa0hVa0FnNTVnU0tDdFE2azJWamV3K1ZaOTZVdzNRakRG?=
- =?utf-8?B?NHcrTFgvTmVUVTRrNDgwc2d2MmdNN21CY1JyMzhYdVhaRHdWUzZKTnQ1Smt4?=
- =?utf-8?B?bVoxbGNvNkFjVGpTTmdNR3hUdFFKVHZsblc0QXJjdGVCYkJWU2haN0gwMG9m?=
- =?utf-8?B?a3FoYkNLY0x2K1MrQVNFT29HN0JwQ01BbzUraG1iOHFIVHpIUGNuK3d6djEy?=
- =?utf-8?B?dWxOZ2Q4K0c3Rmw2alMrRkNQZmJDaTVZWGIwTUJJNUZ3a2pTcEZtRGZ0WVNy?=
- =?utf-8?B?K25sMHJ1dm13WWgwbUZzL0JCK01RWHNicWFpOWkxSXM3N3NBU1BBQk9FemNQ?=
- =?utf-8?B?dlZNNkFMN1ZpdC9oTlBOOHpUSzJoZGNUaFBmVnliUnBPVGdScTVIUDhRTVFh?=
- =?utf-8?B?ZTdoZmVaK0xkcVlFRHkrNXBxZEhXZmk0Wkdua0tpanQ1dldUZ1BlTVFzMDNS?=
- =?utf-8?B?dzdWenZ2RU92MG0xSzA3UWpJbzlSWXBzc2wrM1NKV3V2eDRHb3dIYkpyOGls?=
- =?utf-8?B?SFA2UkJaWURBT0RuLzVKd1FBK0dKT2N5di9ySG1xZWc5MnpKUHdHMEJjV0s0?=
- =?utf-8?B?aEVYSzZKQmE4QmJsL01hbDNaUkNUZDUwVm5HdkZLQzBMV0tQbkU3c055SlNo?=
- =?utf-8?B?MGlkZ0JhNFdhcENvNjVwbkl5QUgxSkl3Y0cxbHNwaHJlSzhaVTZ6cmJkUUZS?=
- =?utf-8?B?THVGVFl6akZuMTdkRVRab1Rtem9Ia2JVTGtHcWlpZStZckkwNG02bDY2QlFB?=
- =?utf-8?B?Zk1JcWFJS1BvanZPVEFVNW9xczZJQXgyMmFvUzVYdURuQys5WkVWa1gxckxL?=
- =?utf-8?B?RmdlcngwS1ZjWWxJVGdSUT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L3J5a2FHVW5IQkxSUEJpQXNtVFFCdldFLzlsNTQycFdEa0ppRDIrTC9rNFFn?=
- =?utf-8?B?cjhLaFhudzU0aVpxUWNNUzR2RlhsWVRGclo4YWx4elp5ZXJ3UUkzTHFwNmVx?=
- =?utf-8?B?alY2Q0U5S0prNXpUQzRiWU1KeWVJZDNFeG94VS9peFNYdGc0V3BUYnR0aDF2?=
- =?utf-8?B?Tm5PZ3E0Y1hCYWpNQ050Y2ZpU054b2ZHUXJzdzRySkNPbGNNZUlkaXpVdjh4?=
- =?utf-8?B?Ti9zZXM5NzlkZlNqanhsZUdLNjJPeVJQYVVVRTlyL0pNZDRZRUJqVk45ZDdp?=
- =?utf-8?B?dFE5anppWFhqMmtkbTJMRVdGOWduK3AwZmVIR0NrMW5sZTc1YUFRUEQzK2RN?=
- =?utf-8?B?SjluZ1RzTnA5eHgvTHJMdU5hRm5TM0dOcGxIZG1LNmN0UHBLMkNHUWpQQ2NE?=
- =?utf-8?B?WkgxdXNXK200RDFVWGlBTXNIY0JqcUZiMm5XUG5oQ3JNWHF2UGUxcFVERk81?=
- =?utf-8?B?citlUDU4ZVFxM1Vxc09aeGYxcXlIVUQvVWRDSlRxNVBLVWVlWDFpV2ZsSis3?=
- =?utf-8?B?U3ZxZG4wN0E4ZzRiMVNKQ21xRXBnRU11dWQyRzNYMm1rZ1l2anQwclpEL2s0?=
- =?utf-8?B?V045ZmlzWDREa1ZtRjV3MGw5SlNXeEtOYkZhZGdiWGNPSE1wbXNtV1FQbGtR?=
- =?utf-8?B?SERpTlZueHM1TjdMVEY2Q3NzRFhZOFVRQUU0anhCZmpnWjRCbURlNkQvZkJy?=
- =?utf-8?B?RTBzODNqSEt2VU1GRnVrUkw3MEpNSXBBOW5NdTYyS1l1SmdOQzJzeDR5VkRs?=
- =?utf-8?B?d0dvMkxHb2FBcDY5NjNGL3kwSmRxaGduVHFOTnhweEFjMTJGdjRnWURCcmUy?=
- =?utf-8?B?cjJBc3ZHK1pFOGlmM3dnbVZ4cHMza0U3czllR3VKZFNtYjBmL0VIR2Nwbk9M?=
- =?utf-8?B?cVV0ZVc1UmRpb09LTXZwYkI3MFBBRFIySGdMa0hjU1RWOE1ENlQ5bzVIWlJw?=
- =?utf-8?B?OERTdlJ1MDJpMjEvbHp3Z2tJSVRYVnJTU1pwd3VVM1dQckMyWlVSemdsRTJP?=
- =?utf-8?B?d1NEQytUVUNlSUtWaGZDR25QbGhwbjR4SXFHZVArc0kwc3VESENYMWkvSHht?=
- =?utf-8?B?TE9yWTdDVW5LSmQvbjMrd05YdS9sRk9DT3NDdGs0MnQwQlVrZmtCSmpTeTc4?=
- =?utf-8?B?K2tFRnEyQkMwQXRVeWtSMWE2U28yZTVxV0tNdklObHM0RUFvTkcydVUzOXZ0?=
- =?utf-8?B?Q3Y4MGRJTHFBS1ovejNWL2huWGhaamVWeHpxbGRXWFYzdHkxSHZoSTNFaGM2?=
- =?utf-8?B?RUlPUlZuSENKZnlaY0FNRXcrYUJZMUtVMXoxaWszdmRUYlhrNFFSem9BS0lw?=
- =?utf-8?B?QllzNGZYZ1Y0cmhzRUJRQlozbnhNSHBxY0NLSTU0dHhaSkNwck95dXpOdkor?=
- =?utf-8?B?UzFpN1lwQ1dnd2dqYTI3eHBqT01DckZPc2VFVjVZL1IzNkgwL2ZsUE8zVDZU?=
- =?utf-8?B?NG81VFg3RnU2bWF0RDBnaXVyYXFlWnk2QWZ1aHpUS01FbWhHOWtVZkxCeG55?=
- =?utf-8?B?dnQrSTU1MURValU3YTIxbUpuRmdNeE9jMlhQZmdmRG8zc05TbGVXb2JmTHh4?=
- =?utf-8?B?a0VBSHhWM2N4bmpJcGFzWmc2QU9LVUpLQlY0MjErTVptN1h2VUtoK1k0NnBt?=
- =?utf-8?B?ZWlZUkJWcnkzWFhEZ0wzTkkxeTl5T2liYTNVS1pRdW1mbStEd1NpRU1MeUIr?=
- =?utf-8?B?a1JGaWx3ejQ0K25od0E0OW5pazFINldsOGpjQ0IzaHl1cnhURGljZWZFMjB3?=
- =?utf-8?B?RFJVYmx4ek9aK1hjSlVrUXNFYkpqMVZGK052OVUrZTZTdk9VcFE2Sm83cnVY?=
- =?utf-8?B?NTN3cktzaVdsMnFPK0JyQlZQS1Bwb3RrS0tSSGdsY2VvRlRpbDJUZ1FsZ0NY?=
- =?utf-8?B?MnNoNERwbm5SSk1pUnpHaVJWT0dScVJlRlFFRnI4UWlIY1pKRHFvTXlhdXNa?=
- =?utf-8?B?bWZuejdIRUo0MnBpOWpOaXBSTG5QYmZxK1FBV29hazZWYzIrZ3RmTit2R2pQ?=
- =?utf-8?B?WUUxWHk3N0RtOWhMejZkMWpQRTJQSVVESVlPZS9PeERQbWhEUzZ1YVE1cjYx?=
- =?utf-8?B?VE02N21qM20wb21IelhMbTh4LzdOdlpzUG1pQ0RkVU1LM0l5SVJCR0dwS3p0?=
- =?utf-8?Q?LLNzvepnBYPzPBesiour4UbR7?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 449719bd-7a0c-4ec6-3113-08dcacbf2101
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jul 2024 15:33:27.4681 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PrZXx64GJKKYbPPBnssTLP6YtESD6i9XqwRjXCZmf667tQ9IdYvXV0vOWf8ukKKl
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6405
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240725135629.3505072-1-sjg@chromium.org>
+ <20240725135629.3505072-6-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240725135629.3505072-6-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+5Qe4L9UMF5g/np+RFk8gaMbEqcYvBHL7xFxkHOtHxEnK1g0XXf
+ 6rmOTJHWptD82+T5tehi0pQgW5NL52Nseu+1Ns9tYPyzZknLSQqvgqVNG0uOr7actEbvW7e
+ +EzDLLMSNahta+GxxbkzzEbibUGUMvshAgdda/69PL1p1dOGDtr5P/dQpEbutI3iqFE+gPv
+ Q1yQVnf8Vu9vyUsSYf1eA==
+UI-OutboundReport: notjunk:1;M01:P0:ETEdLeHnTj8=;8y87WaFZju2o5ZTGX5jZVEdAVWy
+ D8Z8wRBTcHXkeUucY28k/GbuTlTJye4MejieHZb+9folh559Gg0pL+XHcGwd7Q0nVFw3D901g
+ S4ZfykXZ9CKaJV8d2z/FVuFZsUCIw7VvDkNaOB1zA/XWk8u7zF3XQfKvlbe8Qo5owXvo7AEYn
+ KjEJHlEcvC+vVaxnBU1ZnoUhHh+xqMsVJkYQd+1dPRBYhiRiI/jkPeby8RU1iN4P44M+BN1Cd
+ s9D9B1MpXftVuW0l+SxAV1oGqyb6gGYZKJl8qYKEwhvSppSpQnJ2b+TxOy9v0IBwa1rpbrBA8
+ kyfNYpw77xOVmFxN1caug6iAxvj1hsLRwFfbnQGq3jgXKNfSU+2tVI64G/ry/JhY1galLOr9z
+ XuxZ6iXRtNpcjH10NDwLULiev8tfpquYBD/RHB2EdrIrfxlYpzxegn7acvw9pP8v73YLBBbgY
+ 0CnaHxuSAuS/Ip9tnfaOz1O9qL1O6p84ooz8jhxfg90awDQRuncCdlE6mhBtzj1Bu1TovFaKm
+ cRTsPNl2r76ERcWgwxzLrFd0eB5FKlv3BEbtAL5Jfc4px2Nwy+iQY5zJGVVYVk1COSRfK84k6
+ iahk//LPOyALsRkFmsYlGI3nbj/u0DWS4cU2mvDlgqx3JOD2gAltsXas1Fc46HhWkriOJzlc5
+ q4as1EThg7MG7Fkvdm244XineqZZzkXRHR3HAS1s2YQsfjbgyxOtbE2FD9QNIU9xfAlwmKQ94
+ MzESzId1u2sIrPNnTv88NPPwDj2oJw3NEyJbnMTdlSsTPSkZFZFVBzSmPdrEoM7NNq6GUQOP+
+ OKH1p2DtNYslwug+QODo6tmQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -228,52 +92,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 25.07.24 15:56, Simon Glass wrote:
+> This API call is intended for allocating small amounts of memory,
+> similar to malloc(). The current implementation rounds up to whole pages
+> which can waste large amounts of memory. It also implements its own
+> malloc()-style header on each block.
+>
+> Use U-Boot's built-in malloc() instead, to avoid these problems:
+>
+> - it should normally be large enough for pool allocations
+> - if it isn't we can enforce a minimum size for boards which use
+>    EFI_LOADER
+> - the existing mechanism may create an unwatned entry in the memory map
+> - it is used for most EFI allocations already
+>
+> One side effect is that this seems to be showing up some bugs in the
+> EFI code, since the malloc() pool becomes corrupted with some tests.
+> This has likely crept in due to the very large gaps between allocations
+> (around 4KB), which provides a lot of leeway when the allocation size is
+> too small. Work around this by increasing the size for now, until these
+> (presumed) bugs are located.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>   lib/efi_loader/efi_memory.c | 93 ++++++++-----------------------------
+>   1 file changed, 19 insertions(+), 74 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 2945f5648c7..fabe9e3a87a 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -80,45 +80,6 @@ static LIST_HEAD(efi_mem);
+>   void *efi_bounce_buffer;
+>   #endif
+>
+> -/**
+> - * struct efi_pool_allocation - memory block allocated from pool
+> - *
+> - * @num_pages:	number of pages allocated
+> - * @checksum:	checksum
+> - * @data:	allocated pool memory
+> - *
+> - * U-Boot services each UEFI AllocatePool() request as a separate
+> - * (multiple) page allocation. We have to track the number of pages
+> - * to be able to free the correct amount later.
+> - *
+> - * The checksum calculated in function checksum() is used in FreePool()=
+ to avoid
+> - * freeing memory not allocated by AllocatePool() and duplicate freeing=
+.
+> - *
+> - * EFI requires 8 byte alignment for pool allocations, so we can
+> - * prepend each allocation with these header fields.
+> - */
+> -struct efi_pool_allocation {
+> -	u64 num_pages;
+> -	u64 checksum;
+> -	char data[] __aligned(ARCH_DMA_MINALIGN);
+> -};
+> -
+> -/**
+> - * checksum() - calculate checksum for memory allocated from pool
+> - *
+> - * @alloc:	allocation header
+> - * Return:	checksum, always non-zero
+> - */
+> -static u64 checksum(struct efi_pool_allocation *alloc)
+> -{
+> -	u64 addr =3D (uintptr_t)alloc;
+> -	u64 ret =3D (addr >> 32) ^ (addr << 32) ^ alloc->num_pages ^
+> -		  EFI_ALLOC_POOL_MAGIC;
+> -	if (!ret)
+> -		++ret;
+> -	return ret;
+> -}
+> -
+>   /**
+>    * efi_mem_cmp() - comparator function for sorting memory map
+>    *
+> @@ -681,13 +642,10 @@ void *efi_alloc_aligned_pages(u64 len, int memory_=
+type, size_t align)
+>    * @buffer:	allocated memory
+>    * Return:	status code
+>    */
+> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uint=
+n_t size, void **buffer)
+> +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uint=
+n_t size,
+> +			       void **buffer)
+>   {
+> -	efi_status_t r;
+> -	u64 addr;
+> -	struct efi_pool_allocation *alloc;
+> -	u64 num_pages =3D efi_size_in_pages(size +
+> -					  sizeof(struct efi_pool_allocation));
+> +	void *ptr;
+>
+>   	if (!check_allowed())
+>   		return EFI_UNSUPPORTED;
+> @@ -700,16 +658,21 @@ efi_status_t efi_allocate_pool(enum efi_memory_typ=
+e pool_type, efi_uintn_t size,
+>   		return EFI_SUCCESS;
+>   	}
 
+Unfortunately this patch does not match the UEFI specification:
 
-On 7/25/24 16:49, Tom Rini wrote:
-> On Thu, Jul 25, 2024 at 08:13:38AM +0200, Michal Simek wrote:
->>
->>
->> On 7/24/24 22:54, Tom Rini wrote:
->>> On Wed, Jul 24, 2024 at 11:31:48AM +0530, Sughosh Ganu wrote:
->>>
->>>> From: Simon Glass <sjg@chromium.org>
->>>>
->>>> Use this new data structure in the utility function.
->>>>
->>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->>>> ---
->>>>    lib/strto.c | 35 +++++++++++++++++++----------------
->>>>    1 file changed, 19 insertions(+), 16 deletions(-)
->>>
->>> This is rather big growth when we didn't already have realloc:
->>> 05: lib: Convert str_to_list() to use alist
->>>      aarch64: (for 1/1 boards) all +1765.0 rodata +37.0 text +1728.0
->>>               xilinx_versal_mini_emmc0: all +1765 rodata +37 text +1728
->>>                  u-boot: add: 7/0, grow: 1/0 bytes: 1728/0 (1728)
->>>                    function                                   old     new   delta
->>>                    realloc                                      -    1120   +1120
->>>                    alist_ensure_ptr                             -     140    +140
->>>                    alist_expand_to                              -     136    +136
->>>                    alist_init                                   -     108    +108
->>>                    alist_uninit_move_ptr                        -      76     +76
->>>                    alist_add_ptr                                -      72     +72
->>>                    alist_uninit                                 -      48     +48
->>>                    str_to_list                                204     232     +28
->>>
->>
->> this is definitely not acceptable. This mini configuration is running out of
->> OCM and we are already pretty close to limit.
->>
->> What's the reason for this change? I can't see any explanation in commit message.
-> 
-> It was more clearly explained in the cover thread for when Simon posted
-> alist. This conversion was an example, so dropping it from the lmb
-> rework series is fine.
+Two different memory types cannot reside in the same memory page. You
+have to keep track of the memory type of each allocated memory page and
+report it in GetMemoryMap().
 
-Perfect. We will also extend our configurations to have limit setup.
+The specification is available https://uefi.org/specifications.
 
-Thanks,
-Michal
+>
+> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
+> -			       &addr);
+> -	if (r =3D=3D EFI_SUCCESS) {
+> -		alloc =3D (struct efi_pool_allocation *)(uintptr_t)addr;
+> -		alloc->num_pages =3D num_pages;
+> -		alloc->checksum =3D checksum(alloc);
+> -		*buffer =3D alloc->data;
+> -	}
+> +	/*
+> +	 * Some tests crash on qemu_arm etc. if the correct size is allocated.
+> +	 * Adding 0x10 seems to fix test_efi_selftest_device_tree
+> +	 * Increasing it to 0x20 seems to fix test_efi_selftest_base except
+> +	 * for riscv64 (in CI only). But 0x100 fixes CI too.
+> +	 *
+> +	 * This workaround can be dropped once these problems are resolved
+> +	 */
+> +	ptr =3D memalign(8, size + 0x100);
+
+We were using ARCH_DMA_MINALIGN before this patch.
+
+If we are overwriting allocated memory, we must fix that instead of
+increasing size. Do you have a git tag showing the problem?
+
+Best regards
+
+Heinrich
+
+> +	if (!ptr)
+> +		return EFI_OUT_OF_RESOURCES;
+> +
+> +	*buffer =3D ptr;
+>
+> -	return r;
+> +	return EFI_SUCCESS;
+>   }
+>
+>   /**
+> @@ -742,30 +705,12 @@ void *efi_alloc(size_t size)
+>    */
+>   efi_status_t efi_free_pool(void *buffer)
+>   {
+> -	efi_status_t ret;
+> -	struct efi_pool_allocation *alloc;
+> -
+>   	if (!buffer)
+>   		return EFI_INVALID_PARAMETER;
+>
+> -	ret =3D efi_check_allocated((uintptr_t)buffer, true);
+> -	if (ret !=3D EFI_SUCCESS)
+> -		return ret;
+> -
+> -	alloc =3D container_of(buffer, struct efi_pool_allocation, data);
+> -
+> -	/* Check that this memory was allocated by efi_allocate_pool() */
+> -	if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+> -	    alloc->checksum !=3D checksum(alloc)) {
+> -		printf("%s: illegal free 0x%p\n", __func__, buffer);
+> -		return EFI_INVALID_PARAMETER;
+> -	}
+> -	/* Avoid double free */
+> -	alloc->checksum =3D 0;
+> -
+> -	ret =3D efi_free_pages((uintptr_t)alloc, alloc->num_pages);
+> +	free(buffer);
+>
+> -	return ret;
+> +	return EFI_SUCCESS;
+>   }
+>
+>   /**
 
