@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03710C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 17:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D70C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 17:22:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 703D388005;
-	Thu, 25 Jul 2024 19:16:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4BF588005;
+	Thu, 25 Jul 2024 19:22:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c2USTcni";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q4aa5MAf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82824880DE; Thu, 25 Jul 2024 19:16:29 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 38130880A7; Thu, 25 Jul 2024 19:22:27 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BEDF88263
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 19:16:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE60287FFB
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 19:22:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7035d5eec5aso62135a34.1
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 10:16:26 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3daf0e73a59so28936b6e.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 10:22:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721927785; x=1722532585; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1721928143; x=1722532943; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SU2NJ4ZTMkvGo8YhfAzQcQ548Ftp8osuh8PqgICkJFI=;
- b=c2USTcniY6wQyy425/CrB06f332UvupsRX+8tHa8u02FjXJtVxYERmm/1ahnReUS6s
- yB9FUfZOJQQspHsofb6fe8gXdHTzUBs47nOpjLElereagxZsvxkgfLVWoVlqcZ+m+xOY
- Z+K2xADY7bKhxGFbla7CZXJwcdbvkFiNKca24=
+ bh=XycwNiD4Fg5wK6HvHaXCVPKUSgBWCaFo+lGJ5mVe0Fc=;
+ b=Q4aa5MAfcTE/RY5dX+P7PKPE61qJKxaIQQ0Jid9MY8mnI3smz8ExivPLY2h4+bSExF
+ mAilX940Chi/9znUm76hrSjV4rP/AYpNRWqVfNdCS0XX48xlYxPr8QSIEUHHkFokst39
+ l8RIQFNetPfg/noP8sPIkxQXEFyaqiSbESLL0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721927785; x=1722532585;
+ d=1e100.net; s=20230601; t=1721928143; x=1722532943;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SU2NJ4ZTMkvGo8YhfAzQcQ548Ftp8osuh8PqgICkJFI=;
- b=TuSBZ9Q2ohNse8Tt6cMWMqEt0KM6AtyRAciOqdoHTc0iSf6JZ96/DC+juanvRy6wKA
- 150LXZ7TcQwYUUqcsQcSsuiHjKeavCY8qQoeRtGJPtnxers2ZlYnMPd/o5GblP3+nTKU
- kovzFB23AKbnRs+3H8SllPuYutHkrs0s3RYEbybBd3ZBkgjU2YO+SW8dlf35OBEcgdk3
- NyiyzztSBk4MrbK9v9XT29pboNnG/YxwG+XEiWxyhOYnmxofJ5TuL8xBH177ApvioAgh
- 0HKXinxG8FdnPY0gOSjxlyBdC2BlyLQnko9ISnxjsQi1Kmi+D5/ZEbA6XgFNZqITq98f
- scKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZehLbgVWqEOchPALkYZwiVkrfwp1SXQhjtv7CCl2M/5qHKjr+P4Uoqcwziey/+6bux/4a3chKdb/whwitz1ciwTw7PA==
-X-Gm-Message-State: AOJu0YwTMy6gRWIU6Jw09V4XYfjOszfbJbQjisYRFkK4XR8J4AN3ngnD
- Ym8goaYDGM7w+MtA6rIoLA7Bm5L001VI0E5BIr7EmMOYPG23RWzBELFaDBBspzE=
-X-Google-Smtp-Source: AGHT+IH9RwLjOuHoC+DXq8VGFS07NyaUIADISK/5Mzk6LFJAxE1/OpjeIT60YOW1GJai14KkgtC8AQ==
-X-Received: by 2002:a05:6870:8186:b0:261:a26:9319 with SMTP id
- 586e51a60fabf-266cc39cef2mr2642896fac.24.1721927785153; 
- Thu, 25 Jul 2024 10:16:25 -0700 (PDT)
+ bh=XycwNiD4Fg5wK6HvHaXCVPKUSgBWCaFo+lGJ5mVe0Fc=;
+ b=bZ2jAL5Izl+TyYlti47tHOs/hzOpTglzBT1cq0a6HFuCa+QUmYLb7WCMztZh0U+NNO
+ CZg7aJKJNkTy3oYm7Y/hGmZqLQqI2oWB1RFw20U1NiLsP+bkLbB6eOiMi5LIV4oHbHQv
+ GqRfyoBfBKqx8bIxLdPqcLzvCB6081WpfPNcyc0YU444OKu1vS7ujxcwqJQBi2uSkDcy
+ BA8jt7/dnwGpUXA0CyXzo5KSJnd+X8W9oA8ChGv6wgIL4NV5WtSFGh0Maz10lVAyP90S
+ CWG2Wdl7IpLTDO5jOsLSEDeFbAwZKSF60WabZc4IWKx7mX9hfDFH2RRDf6P4wHyNeU7I
+ gCZw==
+X-Gm-Message-State: AOJu0YyLFtWVbJeDMESkaxebXHq++VfoiABWwwKwi8Y+Wje1wY5PMfGM
+ rbORTHM3JU3nCly8R0SgZ8uQ3HugUO/lFwzMm3lOVtWCkCFI5v8w6i4UdICqbM4=
+X-Google-Smtp-Source: AGHT+IFOfDW06jxwfdwFN/Pv+BA2gLuz41Vcy4PHeAmSygtpKYsnGN2kcEl5BnGHBuaBdlYzwUzx9w==
+X-Received: by 2002:a05:6808:309e:b0:3d9:dabc:7b7d with SMTP id
+ 5614622812f47-3db10ca418emr1933501b6e.15.1721928143394; 
+ Thu, 25 Jul 2024 10:22:23 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
  [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2653e7d4ef5sm351089fac.34.2024.07.25.10.16.24
+ 5614622812f47-3db132b2788sm372770b6e.0.2024.07.25.10.22.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 10:16:24 -0700 (PDT)
-Date: Thu, 25 Jul 2024 11:16:22 -0600
+ Thu, 25 Jul 2024 10:22:23 -0700 (PDT)
+Date: Thu, 25 Jul 2024 11:22:20 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dmitrii Merkurev <dimorinny@google.com>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20240725171622.GZ989285@bill-the-cat>
-References: <20240723141844.GF989285@bill-the-cat>
- <87ttgf5emw.fsf@baylibre.com>
- <5329b5b4-b54d-4c4d-aedc-c21c3da5f9ee@gmx.de>
- <87o76n5d1a.fsf@baylibre.com>
- <A6FA1C43-24E9-4738-9AE0-E0E67E71CA65@gmx.de>
- <20240724224027.GP989285@bill-the-cat>
- <87ikwt523y.fsf@baylibre.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
+Message-ID: <20240725172220.GA989285@bill-the-cat>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fSDZl0ZrEWZjbOJ2"
+ protocol="application/pgp-signature"; boundary="jxg1ZR++V3+UEIka"
 Content-Disposition: inline
-In-Reply-To: <87ikwt523y.fsf@baylibre.com>
+In-Reply-To: <cover.1721910373.git.jerome.forissier@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,51 +92,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fSDZl0ZrEWZjbOJ2
+--jxg1ZR++V3+UEIka
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 25, 2024 at 10:04:33AM +0200, Mattijs Korpershoek wrote:
-> On mer., juil. 24, 2024 at 16:40, Tom Rini <trini@konsulko.com> wrote:
->=20
-> [...]
->=20
-> >> >
-> >> >Ok, so does that mean that you agree that this code is safe and we do=
-n't
-> >> >need any further action to fix it?
-> >>=20
-> >> No fix needed.
-> >>=20
-> >> Tom just needs to nark it in Coverity as "intended".
-> >
-> > Thanks. I'll copy/paste the explanation in and close it next time I'm
-> > over there.
->=20
-> I've done it already, added a lore link to this thread as justification.
+On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
 
-Thanks!
+> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
+/IP
+> stack [2] [3] as an alternative to the current implementation in net/,
+> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> reasons for doing so are:
+> - Make the support of HTTPS in the wget command easier. Javier T. and
+> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> so. With that it becomes possible to fetch and launch a distro installer
+> such as Debian etc. using a secure, authenticated connection directly
+> from the U-Boot shell. Several use cases:
+>   * Authentication: prevent MITM attack (third party replacing the
+> binary with a different one)
+>   * Confidentiality: prevent third parties from grabbing a copy of the
+> image as it is being downloaded
+>   * Allow connection to servers that do not support plain HTTP anymore
+> (this is becoming more and more common on the Internet these days)
+> - Possibly benefit from additional features implemented in lwIP
+> - Less code to maintain in U-Boot
+>=20
+> Prior to applying this series, the lwIP stack needs to be added as a
+> Git subtree with the following command:
+>=20
+>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.=
+gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+
+This is better than v4, and on the hardware platforms I could build and
+boot on (which was most of mine except the am62x_beagleplay), the tests
+ran and completed, including the tftp+boot a Linux kernel.
+
+The bad news is CI blows up, a lot:
+https://source.denx.de/u-boot/u-boot/-/pipelines/21764
+And:
+https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/bui=
+ld/builds/9014/logs/106
+which is another Kconfig dependency problem. I don't _think_ I
+introduced that, but since this wasn't against top of tree, I had to
+apply the cmd/Kconfig patch manually.
+
+I have my world build running still and may have more comments based on
+that.
 
 --=20
 Tom
 
---fSDZl0ZrEWZjbOJ2
+--jxg1ZR++V3+UEIka
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaiiGYACgkQFHw5/5Y0
-tyzy/Av+IxavwVxS6oXH4YyyOUtla1MedFX4n/V3XHYPzHF9yel86oGUV02th52S
-9IrD7qo6MA8ALiL1RiUX+UoZaxRTc+Pm0uEadUgGz8bODxIVcJqXj2FZm9lVNH5u
-QdZeEGfIOSE5qfHMrLvHlNBKKZAKh1Jx9Cw0GoNy6oZ3WoTz3c7lqFXXWUyVV3an
-5rlCTeunuZ5BVQmONM/ilqmC3ffwldUg0+MPI6d8j0JWaHId7k/PLGHlv7gqlDJp
-oGyEoBxu2ZKlyhR6LIhVQwWG8JfYRGL6zykaah6f4Z6mcGXkywvFDKlRZ4idDkKa
-0++j3AxM5c1aH77dlcifXCN3Hz4S4twgt8j+VWmATocjPC5tdgPUSazraKAoRxzD
-MAnMKzx82LJh1tR2RzhAoiZMSxzSEbeq+gciKsygBxKBMMmwpN3jIXPheKuSZRLD
-q4EIhH2DU1FAagUhsSOMig4n3uAoG42syYy5bS1qINu1vi3dRsG2E7XjXcsTDZIE
-gKqP7V7Y
-=X15I
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaiicwACgkQFHw5/5Y0
+tyzoCAwAt8glx5HbaCjBlfCpMp9Sm78Jb1Sjzoxbfu6I1VObi2VLFvNxNRkV+1o2
+jTz6ZFBDIBa1GbJb/9vjevsaoUOyvzPDaUL/knDAe3zyXoNJlRwfUWWQpakgXga9
+3NWxGZyO+4KyZH69mF+nqDtJazV/dkYSNeKA5TnEw6CurosugJog9Nf470DYc0BG
+aBUFqTeJO8qRFD7JhwYucTWLCTCeDcQ+Lw4DtC/N0IwYdVxgpALxs+lDshqfgVsK
+AiogLFdqdBKsoWo5xAQQDNb6X6MvD8xAUyjX/PS8nVahQQX9HWFB1SiBaXuz0DRK
+RA7QisjEu0dTBXgu8fBY89Q202nAJvrxhMhRPcftKxi6b3TK13QHoHv5soWHZKDw
+sHVrg9F2edyzLnmHtxXSoYkRuOWRyZW7Qx9v1i/HqCYzZ6BGV18AYt7lt+OyLdGF
+7ZZLb5ICtxrT0f6gDiJyRpdpbki3OZp2iuG4aDIQKFCRJtPGX4hCWCsU8mZcru85
+x9mYljpY
+=y0zh
 -----END PGP SIGNATURE-----
 
---fSDZl0ZrEWZjbOJ2--
+--jxg1ZR++V3+UEIka--
