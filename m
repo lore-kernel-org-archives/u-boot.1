@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FC0C3DA70
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:32:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72DCC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 191EA884AC;
+	by phobos.denx.de (Postfix) with ESMTP id 78EF5885E4;
 	Fri, 26 Jul 2024 01:32:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dmKZxM/j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSJilhFU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECDD98841E; Fri, 26 Jul 2024 01:32:39 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 9173988453; Fri, 26 Jul 2024 01:32:40 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA8AC884E2
+ by phobos.denx.de (Postfix) with ESMTPS id D6F9F8851E
  for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7a1da7cafccso5502885a.3
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b796667348so933406d6.0
  for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721950356; x=1722555156; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721950357; x=1722555157; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=emg4TvXoGBI/Oyu3czhdV7w848y+VetrTIEm5tWn3yQ=;
- b=dmKZxM/jTkymlMXsrtP/dVhDW2+bqEy7xRUESTTTTDv4GRt/zZJjsQPUw2gWTF9hPF
- X8S/rmXV5gL7JrOvmNYhox3biGd/As+n11mGeRzwVxJvl6XuLPnxFKP+iS0I66T4zNpX
- 44+4mSKZJqc23m1ZirCWfaac8ejTS+RJM6Lqg=
+ bh=FO9G7xBTi2jnTRygPSZnGQ1/dZxwnGfKobwPzg1FjYE=;
+ b=KSJilhFU4iCnUBa28AMJnVMAF/c2RCNobaX2ZZimZkhq4ZWZn7fYZXgHeGGq6KfnFz
+ 2lnANtokVt9ag44rtKNb6ypIYoIalkYgXE0IKR+f/jruMxWaX0GeS2Ba6ccdzkIPsa2X
+ TV8d4Xv9sjzrpuiwmxqzAmj9y/Y2U4Ot19ZhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721950356; x=1722555156;
+ d=1e100.net; s=20230601; t=1721950357; x=1722555157;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=emg4TvXoGBI/Oyu3czhdV7w848y+VetrTIEm5tWn3yQ=;
- b=lb4+KIcvkS9bAnUC4FOolzLbNA7gqZI31gfeWP7ppvG6m2Wtaqt4mlYgxLz3h1Jui4
- pR+mMBLadkyIesRZt0TE1tMZmoAhaRlnlsgzapcrVnDLR7lPy/mxs9hMSS4svQPmziDQ
- WzoyMKVRHrZrAcfxkgJXaUls83hiJZ6AVhZRooVWwc/IGEztjoirmiO5pkD/gH3MZj4p
- QakeUvsaKGASwGTn6UQFoSZRNB83Y0AA6wPv7CoLFxqxNKhF5UBI2LwXCmNQUN9d54Mq
- EUi9cOfsDH8bH+8D+vZKDG3f7mREKVI4/+Pa+Td6VNedlMcF0hOJ7vBfiokwLx1jjv04
- +FOQ==
-X-Gm-Message-State: AOJu0YxO3nEWdxmEtHdNqckGTb/5CeOY1+/Y/WWc0AUkzyotR+7AsY1v
- gw5ktadYZx7Zz1A9yA8gkclSLAt0ic1gqce6Hb3QRY586znngyhz3n47xn/Z7VCJ1Atj8FkjUQ1
- fA6NiG2Ba3KjmQ4Nz9qYDqwMoJ7FFVmGZ9F1Y
-X-Google-Smtp-Source: AGHT+IF+xe00Ge/6+8ChZyEBAbGtrUU7/ZMxc69RrADo5pIIhHFRUszCHfD6vOIZ0RiiJT+05o1/CL9HUW03gQ/o3nA=
-X-Received: by 2002:ad4:5c8a:0:b0:6b5:d90d:ea3c with SMTP id
- 6a1803df08f44-6bb406d2da9mr45421386d6.3.1721950356588; Thu, 25 Jul 2024
+ bh=FO9G7xBTi2jnTRygPSZnGQ1/dZxwnGfKobwPzg1FjYE=;
+ b=Lwj/xb9ErYUX/5CyiaIXAOGFfg4sj3klCp2Aeo0y0oXH4YYuysJ+qe35l4qi8s/9Ba
+ dM79OXeDMC4aoVTarHGPJzKloYGqesHgMZqYBFdSdlicI7Ryq2l6os6CmR/R1aBpAO6a
+ vlYiBb13EBgNRJF5z22gCXL5acgszcGuAWh/bpM0gOF/MneQnfFi/4bo8j3e8c46S641
+ fDOQn24Rw35pM5wumbPAOouNa1VMTlwzitIyl7KgXI7jnP2xuPPCHNkqpEgHI/NhK1TX
+ orCKMEcn32nigqO0APmJU17aQw74EGaVQx20SPQSGMX15jm/x1T9WLW2d9+0QJpjAF1u
+ NMpw==
+X-Gm-Message-State: AOJu0Yzp33hGBXImWgwgdTgwlukXqXJrGOJqGddtxx2IP8G2YDGAyRnl
+ +SZvvjktExBtsRkgsW4at4ZXUs1/sFdhY3LHdVfADW+YL3jYEVgr/p9m1nqFvvChDRQkD+bnoKK
+ B3bi793AgOwOb+TTqsXB8JCDDawkkWdE/M9Sv
+X-Google-Smtp-Source: AGHT+IHw5NmzS6eUNx5lu8VneAa6cfQVdr6KNG51Q9TKaTaVFWfJOgbheY+wlevAfy20qp6NPSVY+SQ2aYFcFCUZ/ds=
+X-Received: by 2002:a05:6214:29c9:b0:6b5:81ac:6b84 with SMTP id
+ 6a1803df08f44-6bb3c8cd4e3mr82661036d6.14.1721950356792; Thu, 25 Jul 2024
  16:32:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-12-sughosh.ganu@linaro.org>
-In-Reply-To: <20240724060224.3071065-12-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-16-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-16-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jul 2024 17:32:25 -0600
-Message-ID: <CAFLszTi+zHHQErpBx+_6g5OP7xX1soWAUDLLzvtv1O7SSO-P+w@mail.gmail.com>
-Subject: Re: [PATCH 11/40] lmb: make LMB memory map persistent and global
+Date: Thu, 25 Jul 2024 17:32:26 -0600
+Message-ID: <CAFLszTjocf-85dbHDXO25GdHfmXeVsavYmyEvRc8wOS2jq31Pw@mail.gmail.com>
+Subject: Re: [PATCH 15/40] lmb: config: add lmb config symbols for SPL
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -92,67 +92,24 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Wed, 24 Jul 2024 at 00:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The current LMB API's for allocating and reserving memory use a
-> per-caller based memory view. Memory allocated by a caller can then be
-> overwritten by another caller. Make these allocations and reservations
-> persistent using the alloced list data structure.
->
-> Two alloced lists are declared -- one for the available(free) memory,
-> and one for the used memory. Once full, the list can then be extended
-> at runtime.
+> Add separate config symbols for enabling the LMB module for the SPL
+> phase. The LMB module implementation now relies on alloced list data
+> structure which requires heap area to be present. Add specific config
+> symbol for the SPL phase of U-Boot so that this can be enabled on
+> platforms which support a heap in SPL.
+
+Could you please add here why we need lmb in SPL? If I missed an
+email, please can you point to it?
+
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since rfc:
-> * Squash patches 9 - 11, 13  from the rfc v2 series into a single
->   patch to make it bisectable.
+> Changes since rfc: None
 >
->  arch/arc/lib/cache.c                 |   4 +-
->  arch/arm/lib/stack.c                 |   4 +-
->  arch/arm/mach-apple/board.c          |  17 +-
->  arch/arm/mach-snapdragon/board.c     |  17 +-
->  arch/arm/mach-stm32mp/dram_init.c    |   8 +-
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
->  arch/m68k/lib/bootm.c                |   7 +-
->  arch/microblaze/lib/bootm.c          |   4 +-
->  arch/mips/lib/bootm.c                |  11 +-
->  arch/nios2/lib/bootm.c               |   4 +-
->  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
->  arch/powerpc/include/asm/mp.h        |   4 +-
->  arch/powerpc/lib/bootm.c             |  14 +-
->  arch/riscv/lib/bootm.c               |   4 +-
->  arch/sh/lib/bootm.c                  |   4 +-
->  arch/x86/lib/bootm.c                 |   4 +-
->  arch/xtensa/lib/bootm.c              |   4 +-
->  board/xilinx/common/board.c          |   8 +-
->  boot/bootm.c                         |  26 +-
->  boot/bootm_os.c                      |   5 +-
->  boot/image-board.c                   |  34 +--
->  boot/image-fdt.c                     |  36 ++-
->  cmd/bdinfo.c                         |   6 +-
->  cmd/booti.c                          |   2 +-
->  cmd/bootz.c                          |   2 +-
->  cmd/elf.c                            |   2 +-
->  cmd/load.c                           |   7 +-
->  drivers/iommu/apple_dart.c           |   8 +-
->  drivers/iommu/sandbox_iommu.c        |  16 +-
->  fs/fs.c                              |   7 +-
->  include/image.h                      |  28 +-
->  include/lmb.h                        | 114 +++-----
->  lib/efi_loader/efi_dt_fixup.c        |   2 +-
->  lib/efi_loader/efi_helper.c          |   2 +-
->  lib/lmb.c                            | 395 +++++++++++++++------------
->  net/tftp.c                           |   5 +-
->  net/wget.c                           |   5 +-
->  test/cmd/bdinfo.c                    |   2 +-
->  test/lib/lmb.c                       | 205 ++++++--------
->  39 files changed, 477 insertions(+), 560 deletions(-)
-
-I might have missed it, but I didn't see a response to my comment on
-the previous patch. I think we should have the lmb state in a struct
-so that sandbox tests can reset it as needed.
+>  lib/Kconfig | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
 
 Regards,
-Simon
+SImon
