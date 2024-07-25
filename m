@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 328ACC3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 13:58:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DCFC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 13:58:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B801787E30;
-	Thu, 25 Jul 2024 15:58:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 353F588005;
+	Thu, 25 Jul 2024 15:58:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QgFvN4in";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DcxfwjTd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70F7787E3F; Thu, 25 Jul 2024 15:58:43 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id E6E3B880A7; Thu, 25 Jul 2024 15:58:46 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3FDD86463
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:58:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C082787E64
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:58:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-39948831566so2294815ab.3
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 06:58:40 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-396ce435923so1775735ab.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 06:58:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721915919; x=1722520719; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=shegv2CHqFhk9CZevUaG0CX7Kssw4jRD2XNsFny/ehE=;
- b=QgFvN4inceGJv/5PdhpopZZ3bXS/GYa+uNkYfB5hxfl0JVyLB6Rjbp5W+7IHs462DB
- FLyzcr4bWss7rVZsGGX6hNnyfw0vCDdIv9pcK50ERB2odQ2u4Bgp+lSkR2IVQTx3T9FV
- Ekt9tvBk2ILz24OJLMvu2KZm+RAIJQIsgYHdQ=
+ d=chromium.org; s=google; t=1721915923; x=1722520723; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FMdTt56qvbA9ZfN/+kEWtlC9UyqBy5KqzuRja3qeRxs=;
+ b=DcxfwjTdbVTaYu02cb3ZlD2cVgazKNQObLNH0vOqDlkvDS7lpJx8IyBoORzW7giWi6
+ b7baCCPDahpEoiiusC2m4QNsRs7O/qQa+Ncz1nfx7gT+aD1h/suhjb9y7B1v/Jb5fdQL
+ bQNAvxXxfm//zvHxNed4bME4VvR8/jfdlfZw0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721915919; x=1722520719;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=shegv2CHqFhk9CZevUaG0CX7Kssw4jRD2XNsFny/ehE=;
- b=qrPx5sW2V3Zl1XlgL4HiuNmooxdgPwgBFqnhmpdsH2+JqNRjFAM3I3UdBinEpWom8S
- KPRYRbohBMb5JsaMdLjZTzeMMHHIfZIH9uVIg15moEj1eJuYdP61OXHkIn3l2bK/DYyy
- 0m4QXgZdvplnNVULCon4/R3r3rbl34XTaM0aSdWp5O/btuEBS7xUeFLF1u0K4+DiaB+Z
- gJAzeev5wyWOAlImcq3NUCxbPDBYdhvYSHDfT/ZxggsSHtzhcLy0aCvCRzuMfPnosSBZ
- pxtO8kJ+y1Hhe7+UE6I/RqVDb23IfBNFMq+v2AzeKu/6cQY+y4GI/zFnsxWzf5tG05vX
- s2ow==
-X-Gm-Message-State: AOJu0YwQhqKnDB6+pONB9ziw+iqITxWgOu1Hs2PbHvdEJGrxNEMWIYcX
- UNd82FJMj0O/VektIwQBRVcAuD5cIElbBz9Z9YK4nOetiM1fLdHmMYHOya3TpRrd5SxDiLYGSxI
+ d=1e100.net; s=20230601; t=1721915923; x=1722520723;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FMdTt56qvbA9ZfN/+kEWtlC9UyqBy5KqzuRja3qeRxs=;
+ b=XVzZjNL2nLnneOoatei1ph4RJDhk1mRhcflixeXoW0Oqg8KMleuFhh55wJXjlcSQ/A
+ CNOeZb/3kxwXrDi3TFXEiBo3G65MXD4xGpAfWriGn7s5Kh8qQQbZNDZQKj0NABYxuiOy
+ STgcgV0HZK4Qqi+pVyqFNWOd6fPgwwNhJKAHzK14Qjq4lkhYsPEpUYvkMkre8sSh6ucU
+ uiwih/elYgxVYtmjdJF1V0RfHQtTrgxyBKmqlsspGFf8bBfu9xuCq9ocJKyeVKTQE8ML
+ GgEGaXS05wiJn3aQZxM0v9rE8wWjIYKFKwsJ+OVFuNMzxGYideekofPAgQqLkoielisr
+ WLtQ==
+X-Gm-Message-State: AOJu0YyAughXWydKC48QN3IzoZiPLYt/MczqEFNJAh31hHO9ErmDbMW1
+ 4HdXDUqo9ft2a+2Egj5XJ7domVG2Nb4wCou05kp/AgLrvf3C5Ve9YLIlqFukJDStziNBZf+Smi8
  =
-X-Google-Smtp-Source: AGHT+IEZ8Pzua+Cgj2k2jzeUt6CMXbt7s6nA+RWPHnu6Q0KfrzWQhqL/xXv6wS/9vOihLxF2abicPA==
-X-Received: by 2002:a05:6e02:20e2:b0:396:5af7:64d1 with SMTP id
- e9e14a558f8ab-39a2400fcd9mr26387975ab.18.1721915919568; 
- Thu, 25 Jul 2024 06:58:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFLMp0gKqa7BJUGNCxPyASL4xUOW19O/XdIXQ1CtPeX1lbYG++2IEvMKEuo+oXkCldmLEv4pg==
+X-Received: by 2002:a05:6e02:12e6:b0:398:a9b3:d6b1 with SMTP id
+ e9e14a558f8ab-39a2197a944mr23734655ab.12.1721915923422; 
+ Thu, 25 Jul 2024 06:58:43 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a23105f6bsm6015445ab.76.2024.07.25.06.58.38
+ e9e14a558f8ab-39a23105f6bsm6015445ab.76.2024.07.25.06.58.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 06:58:39 -0700 (PDT)
+ Thu, 25 Jul 2024 06:58:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Joao Marcos Costa <jmcosta944@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH 0/6] efi: Start tidying up memory management
-Date: Thu, 25 Jul 2024 07:56:23 -0600
-Message-Id: <20240725135629.3505072-1-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/6] doc: Show more information in efi index
+Date: Thu, 25 Jul 2024 07:56:24 -0600
+Message-Id: <20240725135629.3505072-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240725135629.3505072-1-sjg@chromium.org>
+References: <20240725135629.3505072-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,58 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have been discussing the state of EFI memory management for some
-years so I thought it might be best to send a short series showing some
-of the issues we have talked about.
+The index is much more helpful if it shows the next level of headings.
+Update tt.
 
-This one just deals with memory allocation. It provides a way to detect
-EFI 'page allocations' when U-Boot' malloc() should be used. It should
-help us to clean up this area of U-Boot.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-It also updates EFI to use U-Boot memory allocation for the pool. Most
-functions use that anyway and it is much more efficient. It also avoids
-allocating things 'in space' in conflict with the loaded images.
+ doc/develop/uefi/index.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This series also includes a little patch to show more information in
-the index for the EFI pages.
-
-Note that this series is independent from Sugosh's lmb series[1],
-although I believe it will point the way to simplifying some of the
-later patches in that series.
-
-Overall, some issues which should be resolved are:
-- allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
-  efi_dp_dup() does not (this series makes a start)
-- change efi_bl_init() to register events later, when the devices are
-  actually used
-- rather than efi_set_bootdev(), provide a bootstd way to take note of
-  the device images came from and allow EFI to query that when needed
-- EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
-
-Minor questions on my mind:
-- is unaligned access useful? Is there a performance penalty?
-- API confusion about whether something is an address or a pointer
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=416441
-
-
-Simon Glass (6):
-  doc: Show more information in efi index
-  efi: Convert device_path allocation to use malloc()
-  efi: Allow monitoring of page allocations
-  efi: Avoid pool allocation in efi_get_memory_map_alloc()
-  efi: Use malloc() for the EFI pool
-  efi: Show the location of the bounce buffer
-
- doc/develop/uefi/index.rst               |   2 +-
- include/efi_loader.h                     |  24 ++++
- lib/efi_loader/efi_bootbin.c             |  10 ++
- lib/efi_loader/efi_device_path.c         |  43 ++++---
- lib/efi_loader/efi_device_path_to_text.c |   2 +-
- lib/efi_loader/efi_memory.c              | 148 +++++++++++------------
- lib/efi_loader/efi_setup.c               |   7 ++
- 7 files changed, 133 insertions(+), 103 deletions(-)
-
+diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+index e26b1fbe05c..44540e8a537 100644
+--- a/doc/develop/uefi/index.rst
++++ b/doc/develop/uefi/index.rst
+@@ -8,7 +8,7 @@ compliant software like Linux, GRUB, and iPXE. Furthermore U-Boot itself
+ can be run an UEFI payload.
+ 
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 3
+ 
+    uefi.rst
+    u-boot_on_efi.rst
 -- 
 2.34.1
 
