@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4414C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 11:58:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10CB6C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 11:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B9FF87C38;
-	Thu, 25 Jul 2024 13:58:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 946CA8789F;
+	Thu, 25 Jul 2024 13:59:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="owbEjahS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mveNAV33";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84A5887C80; Thu, 25 Jul 2024 13:58:29 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id C73AD8708B; Thu, 25 Jul 2024 13:59:41 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA79D879AF
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:58:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B57E187C38
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:59:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46PBwOqO019703;
- Thu, 25 Jul 2024 06:58:24 -0500
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46PBxa0c008479;
+ Thu, 25 Jul 2024 06:59:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721908704;
- bh=JSfJW933XJLlSKxtgb0tSHvIl8tFnSNwPRDD0h6WmXQ=;
+ s=ti-com-17Q1; t=1721908776;
+ bh=6oyo++KwrkC1LFjR39l6TR+1i9XnZbL+Opm+mAEiV2Q=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=owbEjahSqrakkRgt1ge4ouUBTDyDWd7vLIw2bY9f9DZpLBiiQnBvtHd1opZIPiHmt
- lddryXsCt5Zpr6lPt5PVIfILsTD5cf3vqfcfwsjw7c+YJFROReoq+iF9dbZWLUiYNH
- MD2SLKQEN7qbu7QE3GXHfokcia1kg/47cEQG/tAk=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46PBwOKG117683
+ b=mveNAV33xKrDKz4pRn6+K0YClExj6M+Nt2/4g4zn7LzPPo0eK2xZMWsZiNY3J32Z6
+ Yv7xCTxTf0P93/nGSFvcRrKcZXKXQzITMpNOHvtx/0NtLCxZ5EEMkR89zyZRrlEG9k
+ YjW5FbyPW2K1CrtTrn3U/wy/i8Vqk/MP8Pu5G/wk=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46PBxala118166
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Jul 2024 06:58:24 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 25 Jul 2024 06:59:36 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Jul 2024 06:58:24 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 06:59:36 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Jul 2024 06:58:23 -0500
+ Frontend Transport; Thu, 25 Jul 2024 06:59:36 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46PBwO4X103013;
- Thu, 25 Jul 2024 06:58:24 -0500
-Date: Thu, 25 Jul 2024 06:58:23 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46PBxa2D104606;
+ Thu, 25 Jul 2024 06:59:36 -0500
+Date: Thu, 25 Jul 2024 06:59:36 -0500
 From: Nishanth Menon <nm@ti.com>
-To: Dhruva Gole <d-gole@ti.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>
+To: Dhruva Gole <d-gole@ti.com>
 CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
  <n-francis@ti.com>, <c-shilwant@ti.com>,
  <m-chawdhry@ti.com>, <vigneshr@ti.com>,
@@ -61,15 +60,15 @@ CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
  <sebin.francis@ti.com>,
  Wadim Egorov <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>
-Subject: Re: [PATCH V7 3/7] doc: board: ti: Update to use the new boot
- firmware labels
-Message-ID: <20240725115823.o3rf7uupilp4ki4k@unwanted>
+Subject: Re: [PATCH V7 4/7] doc: ti: am62*: Mention TIFS Stub in img fmts and
+ boot flow
+Message-ID: <20240725115936.lrxzueooqowaeiw3@germinate>
 References: <20240725093546.4193107-1-d-gole@ti.com>
- <20240725093546.4193107-4-d-gole@ti.com>
+ <20240725093546.4193107-5-d-gole@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240725093546.4193107-4-d-gole@ti.com>
+In-Reply-To: <20240725093546.4193107-5-d-gole@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,24 +87,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 15:05-20240725, Dhruva Gole wrote:
-> Use the new boot_firmwares labels that help make documentation more
-> specific as to which firmwares are used in which devices
+> Since AM62x, AM62P and AM62A all use similar boot flows and their low
+> power mode s/w ARCH is also similar in the way that they make use of the
+> TIFS Stub, update their documentation to show where TIFS Stub is.
 > 
 > Signed-off-by: Dhruva Gole <d-gole@ti.com>
 > ---
->  doc/board/beagle/j721e_beagleboneai64.rst | 4 ++++
->  doc/board/phytec/phycore-am62x.rst        | 4 ++++
->  doc/board/phytec/phycore-am64x.rst        | 4 ++++
+>  doc/board/ti/am62ax_sk.rst                 |    4 +-
+>  doc/board/ti/am62px_sk.rst                 |    4 +-
+>  doc/board/ti/am62x_sk.rst                  |    4 +-
+>  doc/board/ti/img/boot_diagram_am62.svg     | 1983 ++++++++++++++++++++
+>  doc/board/ti/img/tifsstub_dm_tispl.bin.svg |  353 ++++
+>  5 files changed, 2342 insertions(+), 6 deletions(-)
+>  create mode 100644 doc/board/ti/img/boot_diagram_am62.svg
+>  create mode 100644 doc/board/ti/img/tifsstub_dm_tispl.bin.svg
+> 
 
-Francesco, do you care about getting this in doc/board/toradex/verdin-am62.rst ?
+Reviewed-by: Nishanth Menon <nm@ti.com>
 
->  doc/board/ti/am64x_evm.rst                | 4 ++++
->  doc/board/ti/am65x_evm.rst                | 4 ++++
->  doc/board/ti/j7200_evm.rst                | 4 ++++
->  doc/board/ti/j721e_evm.rst                | 4 ++++
->  doc/board/ti/j721s2_evm.rst               | 4 ++++
->  doc/board/ti/j722s_evm.rst                | 4 ++++
->  doc/board/ti/j784s4_evm.rst               | 4 ++++
 -- 
 Regards,
 Nishanth Menon
