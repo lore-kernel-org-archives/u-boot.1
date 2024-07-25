@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72DCC3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14B1C3DA70
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 23:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78EF5885E4;
-	Fri, 26 Jul 2024 01:32:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45FB78862E;
+	Fri, 26 Jul 2024 01:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSJilhFU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HgvMb88/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9173988453; Fri, 26 Jul 2024 01:32:40 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id EF011884AC; Fri, 26 Jul 2024 01:32:41 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6F9F8851E
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DD118842C
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6b796667348so933406d6.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:37 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-5d5aeaa9751so280204eaf.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 16:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721950357; x=1722555157; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721950358; x=1722555158; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FO9G7xBTi2jnTRygPSZnGQ1/dZxwnGfKobwPzg1FjYE=;
- b=KSJilhFU4iCnUBa28AMJnVMAF/c2RCNobaX2ZZimZkhq4ZWZn7fYZXgHeGGq6KfnFz
- 2lnANtokVt9ag44rtKNb6ypIYoIalkYgXE0IKR+f/jruMxWaX0GeS2Ba6ccdzkIPsa2X
- TV8d4Xv9sjzrpuiwmxqzAmj9y/Y2U4Ot19ZhI=
+ bh=gjmNa/I/KK0DpGyGSJ2xzxN7PeQSr/ziBpkxzZIWJYA=;
+ b=HgvMb88/aMAIX7CS4i8bPxFmPyrWAqUhNrUfGNsglyhRXSjGTmZzz+tDI150jodIPU
+ r2bbgTTdrDmeP/jbJgdp0mlzkRAU8+KDXxauhnyB7LwhY+vbQWbnpv/ZszeHlDzWxjK9
+ bDTsqj5QfxDRyxp3PzjYQBtRFs8+C0sCQtasw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721950357; x=1722555157;
+ d=1e100.net; s=20230601; t=1721950358; x=1722555158;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FO9G7xBTi2jnTRygPSZnGQ1/dZxwnGfKobwPzg1FjYE=;
- b=Lwj/xb9ErYUX/5CyiaIXAOGFfg4sj3klCp2Aeo0y0oXH4YYuysJ+qe35l4qi8s/9Ba
- dM79OXeDMC4aoVTarHGPJzKloYGqesHgMZqYBFdSdlicI7Ryq2l6os6CmR/R1aBpAO6a
- vlYiBb13EBgNRJF5z22gCXL5acgszcGuAWh/bpM0gOF/MneQnfFi/4bo8j3e8c46S641
- fDOQn24Rw35pM5wumbPAOouNa1VMTlwzitIyl7KgXI7jnP2xuPPCHNkqpEgHI/NhK1TX
- orCKMEcn32nigqO0APmJU17aQw74EGaVQx20SPQSGMX15jm/x1T9WLW2d9+0QJpjAF1u
- NMpw==
-X-Gm-Message-State: AOJu0Yzp33hGBXImWgwgdTgwlukXqXJrGOJqGddtxx2IP8G2YDGAyRnl
- +SZvvjktExBtsRkgsW4at4ZXUs1/sFdhY3LHdVfADW+YL3jYEVgr/p9m1nqFvvChDRQkD+bnoKK
- B3bi793AgOwOb+TTqsXB8JCDDawkkWdE/M9Sv
-X-Google-Smtp-Source: AGHT+IHw5NmzS6eUNx5lu8VneAa6cfQVdr6KNG51Q9TKaTaVFWfJOgbheY+wlevAfy20qp6NPSVY+SQ2aYFcFCUZ/ds=
-X-Received: by 2002:a05:6214:29c9:b0:6b5:81ac:6b84 with SMTP id
- 6a1803df08f44-6bb3c8cd4e3mr82661036d6.14.1721950356792; Thu, 25 Jul 2024
- 16:32:36 -0700 (PDT)
+ bh=gjmNa/I/KK0DpGyGSJ2xzxN7PeQSr/ziBpkxzZIWJYA=;
+ b=eiLQoBiDQWL8LJ2whGitoe6K8qaazprHIM4xM51YGLRSAGqeuZE/uRRriUoq2ET0OZ
+ H/eFLs7NuJlaj+JmUSaSAjXcSSpXyhoISESomA70i3twygmqyFmwHjHUt0KQc4tbhJut
+ 20oQaMD7QaG7j/zEwyy+sd1/YSG1qJmMfH+bBK45jr+qgg4RH6nueR1WMJX/UJykhYt+
+ riKzSDR+ttRB+lJauNNC9kxNxXJZXmsjsmyoMs2+LZBC6HjQ0vnQtOt9Eef9BPQgWKi7
+ E3tp9lbQB5D1sbsSvTMd1TxjlPwmOf9UikUkUBE/hbtOqzCpSTD/pIm5pUWs+MeHmFcH
+ 5vng==
+X-Gm-Message-State: AOJu0YwcK75jniK1tXkoOPXPzwfLqwY0nU2to0xLKnTHQ78POYM7TJoQ
+ JiLKquTv8imS+izPH3pFcdRwCXOMGqj/0s+YglO/hUiZ2s9unz+JhSdTydjdmatbkRRHbdsOXCU
+ ShJdBsy5rsK7YYBv3JPG9jto8bL3VmiYctSfP
+X-Google-Smtp-Source: AGHT+IERxnJrq7QBdavY2oLtA+36q887o9U2BFR1ND6Tz35xvmOF4bXdHkX2OWxQwVlkOspfH0qJzGTy0lux6E7LzCQ=
+X-Received: by 2002:a05:6218:260a:b0:1ac:f722:4d2 with SMTP id
+ e5c5f4694b2df-1acf887dd11mr581365855d.18.1721950357814; Thu, 25 Jul 2024
+ 16:32:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-16-sughosh.ganu@linaro.org>
-In-Reply-To: <20240724060224.3071065-16-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-17-sughosh.ganu@linaro.org>
+In-Reply-To: <20240724060224.3071065-17-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jul 2024 17:32:26 -0600
-Message-ID: <CAFLszTjocf-85dbHDXO25GdHfmXeVsavYmyEvRc8wOS2jq31Pw@mail.gmail.com>
-Subject: Re: [PATCH 15/40] lmb: config: add lmb config symbols for SPL
+Date: Thu, 25 Jul 2024 17:32:27 -0600
+Message-ID: <CAFLszThWjpz47RRhAbrYqu47NnYs3ZtXWe-hE5ABw9dokyQ46g@mail.gmail.com>
+Subject: Re: [PATCH 16/40] lmb: allow lmb module to be used in SPL
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -94,22 +94,31 @@ Hi Sughosh,
 
 On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Add separate config symbols for enabling the LMB module for the SPL
-> phase. The LMB module implementation now relies on alloced list data
-> structure which requires heap area to be present. Add specific config
-> symbol for the SPL phase of U-Boot so that this can be enabled on
-> platforms which support a heap in SPL.
-
-Could you please add here why we need lmb in SPL? If I missed an
-email, please can you point to it?
-
+> With the introduction of separate config symbols for the SPL phase of
+> U-Boot, the condition checks need to be tweaked so that platforms that
+> enable the LMB module in SPL are also able to call the LMB API's. Use
+> the appropriate condition checks to achieve this.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since rfc: None
+> Changes since rfc:
+> * Replace conditional compilation of lmb code to an if
+>   (CONFIG_IS_ENABLED()) in store_block() and tftp_init_load_addr().
 >
->  lib/Kconfig | 12 +++++++++++-
->  1 file changed, 11 insertions(+), 1 deletion(-)
+>  board/xilinx/common/board.c |  2 +-
+>  boot/bootm.c                |  4 ++--
+>  boot/image-board.c          |  2 +-
+>  fs/fs.c                     |  4 ++--
+>  lib/Makefile                |  2 +-
+>  net/tftp.c                  | 40 ++++++++++++++++++-------------------
+>  net/wget.c                  |  4 ++--
+>  7 files changed, 29 insertions(+), 29 deletions(-)
+
+Same question as previous patch...do any platforms need lmb in SPL?
+
+The cover letter says "The LMB module is enabled by default for the
+main U-Boot image, while it needs to be enabled for SPL." but I don't
+really understand that.
 
 Regards,
-SImon
+Simon
