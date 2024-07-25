@@ -4,83 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89CC8C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 17:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCB6AC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 17:15:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 923AA8842C;
-	Thu, 25 Jul 2024 19:14:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C368884A7;
+	Thu, 25 Jul 2024 19:14:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="I6c+PgDp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GLqg5vLb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E2E287876; Thu, 25 Jul 2024 17:32:37 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id D2EFA87C7E; Thu, 25 Jul 2024 18:18:03 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32A5388381
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 17:32:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9461687F19
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 18:17:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-426717a2d12so6440505e9.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 08:32:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5c6924f2383so18322eaf.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 09:17:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1721921550; x=1722526350;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n255v6jqyaXolKYLbvtAuQ3r6A44BL1KxoeAojqH3j0=;
- b=I6c+PgDp2CyvjC7uSTmKKsTEPxE3d9KDmAQCUY4adpie7gQkfQQH8rLQAbbeTeoO+J
- CKHdK9gSu+LOR9n9kaR7Dsn7ZRFGEtRkWIYV22OGFH+8YNi9B8+fG1/Yw419tlYL2yc/
- 0wV0OVRR6XMYyvMJDopMy3wfshw5/lh+jC4G8inqonxWXn5Ug2S9hQe/iTV+aFugxA22
- k3i0UYnzwwTIR+NUjph0JKqJd2UmBaQm5osrMbLqWbfldwKvRLetyRLaClXYO2voR+At
- 9Pk4kpNIQPkKkgwVGiJLWkcVRpeUcydhsvMxkLKAyUHrkDAgFPlHPvnGTS4P4wsj9FYc
- FxTQ==
+ d=konsulko.com; s=google; t=1721924278; x=1722529078; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3DhfC/oz7LptIyc3/DZ6SuqKwA/FBohMYf+yI/kEY6Q=;
+ b=GLqg5vLbWdpGRI0PlH6EKXi1JSR3umAyAC9Lp1Xf9XWpVGUsC+2EsGDai6YZkpunb5
+ E3bprOHFsKPvfv0hn/I2AtAZOwqJC8JhBxl0ZKmOSyfrWmeKDoU5w/U1G95klyfJClQw
+ 6cuB36u68w3Rro8d25sL7zq+sUtY6gZEZkL7w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721921550; x=1722526350;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=n255v6jqyaXolKYLbvtAuQ3r6A44BL1KxoeAojqH3j0=;
- b=gOMPmVrp/espf+2pgK8WUm+jZvyxt3MKqpPU0+HqtWwSqYdMapxusMSdAzoYxLxPjy
- tbDZ719qOvnuVPUB5QS7RUgtl36J82XxE721/4worOLZTKR4js9g7YCoj/QJwfKBfkMr
- 8EH7DgLft4H3unpIch9oZZQ6ymECJnRIVrJ48zi7QIPj0877gknQQwyTt+aXCrBuOhST
- INVqZCuTlwuZdRSRhovFfVXH1pHid8AY0kTsUelL/bX2r17//L8UXOnKVFXD84IFLmFj
- 0ZAqF2wLEfI8k6f9o/Qg217jCByJPMZDD0tpIRT/g/VkAW9BzJm2qmO89itXCnZsQbkY
- tUCw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVvxTevsRLvk5X2iEri4BPWwX/QGqf4plVZcPvTM4H0QSAdFCZvEc88vG3RZbNG6K2TkEjxoGYi19A7LG99d56gPBcTvw==
-X-Gm-Message-State: AOJu0Ywl2OcaL69B7SJ2NIVLUEOgPyADWwYv5MOVRubw2EttChlwY0n6
- 3TBzLk0BhHhXsV6EXCiCGWzDoCDPXlxrWVMv0lF/3vvvTrmq2JVdMGaMaXXyLO8=
-X-Google-Smtp-Source: AGHT+IG6Caj3dJ4M/ai8+pqUL8j1CBCkgBsWynwdfv68bdFC+sQdwb0iMjva5PNv78xSyR+bW1XRzg==
-X-Received: by 2002:a05:600c:35ca:b0:426:63bc:f031 with SMTP id
- 5b1f17b1804b1-42803adbfcdmr20502205e9.1.1721921550488; 
- Thu, 25 Jul 2024 08:32:30 -0700 (PDT)
-Received: from localhost.localdomain ([78.199.60.143])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-36b36861b54sm2530805f8f.95.2024.07.25.08.32.29
+ d=1e100.net; s=20230601; t=1721924278; x=1722529078;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3DhfC/oz7LptIyc3/DZ6SuqKwA/FBohMYf+yI/kEY6Q=;
+ b=GTRbbGqZgicMsQgD2euMNfG3JtQp1ya5DhppFLbYFvl+pu9l/mXR8yhQD7ChO9hWa/
+ NYmkNqHJdmQ31iZZTshQSfZTvwNwcSynReo0HhOTPspJDbO5jKuvBp1F8bVx2CVGLZvX
+ PX20HYp/VzYDL7139rP95NzBUzIVAWggsKHqYcLZE7BfZ0NxkhXPQrGIF7cviRJ+Afq7
+ lW+Q796iWtijtKiKtea6jm48AbKQGGjON4eMPEg928EsSgbdB8j7DSbDpdntb+Ef6XjL
+ WwtcmaAr7/SsQLcFN7ahxYKXdR34jPK4C2H6H7UK/a3yKIhJsmhTnixLmp0k2o0ysy/g
+ u88A==
+X-Gm-Message-State: AOJu0YwkTeR5j9GiBdMZwnLTmqhvrvlAZMFI92oLdamzKtlXiQ15Tdz5
+ 1eiYhYJBCU/ZqPThP1Zp3M0pf+dDOqMY5ApsSbe7dqiomwM+OhrsTlEkpdjC9tA=
+X-Google-Smtp-Source: AGHT+IGbamAvTx3uULuuV98FsxGiU6tHfaLmZbqcurovlTeomCFS+aNpt/lu2KgRV+uUd+haVSh8pA==
+X-Received: by 2002:a05:6820:1f08:b0:5d5:b6d2:4749 with SMTP id
+ 006d021491bc7-5d5b6d2492bmr2662533eaf.8.1721924278176; 
+ Thu, 25 Jul 2024 09:17:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
+ [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5d5b346e0c3sm190187eaf.3.2024.07.25.09.17.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 08:32:29 -0700 (PDT)
-From: Zixun LI <admin@hifiphile.com>
-To: Lukasz Majewski <lukma@denx.de>,
+ Thu, 25 Jul 2024 09:17:57 -0700 (PDT)
+Date: Thu, 25 Jul 2024 10:17:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Zixun LI <admin@hifiphile.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v4 7/7] usb: gadget: atmel: Add DM_USB_GADGET support
-Date: Thu, 25 Jul 2024 17:32:01 +0200
-Message-ID: <20240725153204.358925-8-admin@hifiphile.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240725153204.358925-1-admin@hifiphile.com>
-References: <20240725153204.358925-1-admin@hifiphile.com>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bo Gan <ganboing@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>,
+ John Keeping <jkeeping@inmusicbrands.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Stefan Roese <sr@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Bin Meng <bmeng@tinylab.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Ion Agorria <ion@agorria.com>, Yang Xiwen <forbidden405@outlook.com>,
+ Boon Khai Ng <boon.khai.ng@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Baruch Siach <baruch@tkos.co.il>
+Subject: Re: [PATCH v5 02/20] net: introduce alternative implementation as
+ net-lwip/
+Message-ID: <20240725161754.GW989285@bill-the-cat>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
+ <a88252b5c961ee28a98653751bae627ab3349668.1721910373.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="z5i+vH7gBI5MiADc"
+Content-Disposition: inline
+In-Reply-To: <a88252b5c961ee28a98653751bae627ab3349668.1721910373.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Thu, 25 Jul 2024 19:14:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,242 +120,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add driver model support by using the uclass UCLASS_USB_GADGET_GENERIC.
 
-Disable local usb_gadget_register_driver()/usb_gadget_unregister_driver()
-implementation which is implemented in udc-core.c when DM_USB_GADGET
-is enabled.
+--z5i+vH7gBI5MiADc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Replace dm_usb_gadget_handle_interrupts() with handle_interrupts ops
-when DM_USB_GADGET is enabled.
+On Thu, Jul 25, 2024 at 02:57:23PM +0200, Jerome Forissier wrote:
 
-Disable legacy struct usba_udc controller as controller point is extracted
-from udevice private data with DM.
+> Prepare the introduction of the lwIP (lightweight IP) TCP/IP stack by
+> adding a new net/lwip/ directory and the NET_LWIP symbol. Network
+> support is either NO_NET, NET (legacy stack) or NET_LWIP. Subsequent
+> commits will introduce the lwIP code, re-work the NETDEVICE integration
+> and port some of the NET commands and features to lwIP.
+>=20
+> SPL_NET cannot be enabled when NET_LWIP=3Dy. SPL_NET pulls some symbols
+> that are part of NET (such as arp_init(), arp_timeout_check(),
+> arp_receive(), net_arp_wait_packet_ip()). lwIP support in SPL may be
+> added later.
+>=20
+> Similarly, DFU_TFTP and FASTBOOT are not compatible with NET_LWIP
+> because of dependencies on net_loop(), tftp_timeout_ms,
+> tftp_timeout_count_max and other NET things. Let's add a dependency on
+> !NET_LWIP for now.
+>=20
+> As for SANDBOX, NET_LWIP cannot be used either because of strong
+> assumptions on the network stack. Make NET_LWIP depend on !SANDBOX so
+> that the NET_LWIP alternative is not visible in make menuconfig when
+> sandbox_defconfig is used.
+>=20
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+[snip]
 
-Disable legacy usba_udc_probe() to avoid conflict with DM when it's
-enabled.
+Here in net/Kconfig you do..
+> +if NET || NET_LWIP
+> +
+> +config BOOTDEV_ETH
+> +	bool "Enable bootdev for ethernet"
+> +	depends on BOOTSTD
+> +	default y
+> +	help
+> +	  Provide a bootdev for ethernet so that is it possible to boot
+> +	  an operating system over the network, using the PXE (Preboot
+> +	  Execution Environment) protocol.
+> +
+>  config SYS_RX_ETH_BUFFER
+>  	int "Number of receive packet buffers"
+>  	default 4
 
-Compared to Linux driver only supported devices' DT bindings are included
-(sorted as Linux driver)
+But we must have SYS_RX_ETH_BUFFER defined even in the NO_NET case as
+otherwise previously <net.h> and now <net-common.h> cannot be used, and
+untying that is another big mess. We include <net.h> in common areas for
+function prototypes where their usage is guarded. But we use PKTBUFSRX
+in some structs that aren't guarded. Trying to build for example for
+am62x_beagleplay_r5 with this series blows up in a lot of places.
 
-Signed-off-by: Zixun LI <admin@hifiphile.com>
----
- drivers/usb/gadget/atmel_usba_udc.c | 144 ++++++++++++++++++++++++++++
- drivers/usb/gadget/atmel_usba_udc.h |   3 +
- include/linux/usb/atmel_usba_udc.h  |   2 +
- 3 files changed, 149 insertions(+)
+--=20
+Tom
 
-diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-index a7b96449f8..a77037a709 100644
---- a/drivers/usb/gadget/atmel_usba_udc.c
-+++ b/drivers/usb/gadget/atmel_usba_udc.c
-@@ -7,10 +7,14 @@
-  *			   Bo Shen <voice.shen@atmel.com>
-  */
- 
-+#include <clk.h>
-+#include <dm.h>
- #include <log.h>
- #include <malloc.h>
- #include <asm/gpio.h>
- #include <asm/hardware.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
- #include <linux/bitops.h>
- #include <linux/errno.h>
- #include <linux/list.h>
-@@ -18,6 +22,14 @@
- #include <linux/usb/gadget.h>
- #include <linux/usb/atmel_usba_udc.h>
- 
-+#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-+#include <mach/atmel_usba_udc.h>
-+
-+static int usba_udc_start(struct usb_gadget *gadget,
-+			  struct usb_gadget_driver *driver);
-+static int usba_udc_stop(struct usb_gadget *gadget);
-+#endif /* CONFIG_IS_ENABLED(DM_USB_GADGET) */
-+
- #include "atmel_usba_udc.h"
- 
- static int vbus_is_present(struct usba_udc *udc)
-@@ -528,6 +540,10 @@ static const struct usb_gadget_ops usba_udc_ops = {
- 	.wakeup			= usba_udc_wakeup,
- 	.set_selfpowered	= usba_udc_set_selfpowered,
- 	.pullup			= usba_udc_pullup,
-+#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-+	.udc_start		= usba_udc_start,
-+	.udc_stop		= usba_udc_stop,
-+#endif
- };
- 
- static struct usb_endpoint_descriptor usba_ep0_desc = {
-@@ -1237,6 +1253,7 @@ static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
- 	return eps;
- }
- 
-+#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
- static struct usba_udc controller = {
- 	.regs = (unsigned *)ATMEL_BASE_UDPHS,
- 	.fifo = (unsigned *)ATMEL_BASE_UDPHS_FIFO,
-@@ -1312,3 +1329,130 @@ int usba_udc_probe(struct usba_platform_data *pdata)
- 
- 	return 0;
- }
-+
-+#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-+struct usba_priv_data {
-+	struct clk_bulk		clks;
-+	struct usba_udc		udc;
-+};
-+
-+static int usba_udc_start(struct usb_gadget *gadget,
-+			  struct usb_gadget_driver *driver)
-+{
-+	struct usba_udc *udc = to_usba_udc(gadget);
-+
-+	usba_udc_enable(udc);
-+
-+	udc->driver = driver;
-+	return 0;
-+}
-+
-+static int usba_udc_stop(struct usb_gadget *gadget)
-+{
-+	struct usba_udc *udc = to_usba_udc(gadget);
-+
-+	udc->driver = NULL;
-+
-+	usba_udc_disable(udc);
-+	return 0;
-+}
-+
-+static int usba_udc_clk_init(struct udevice *dev, struct clk_bulk *clks)
-+{
-+	int ret;
-+
-+	ret = clk_get_bulk(dev, clks);
-+	if (ret == -ENOSYS)
-+		return 0;
-+
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable_bulk(clks);
-+	if (ret) {
-+		clk_release_bulk(clks);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int usba_udc_probe(struct udevice *dev)
-+{
-+	struct usba_priv_data *priv = dev_get_priv(dev);
-+	struct usba_udc *udc = &priv->udc;
-+	int ret;
-+
-+	udc->fifo = (void __iomem *)dev_remap_addr_index(dev, FIFO_IOMEM_ID);
-+	if (!udc->fifo)
-+		return -EINVAL;
-+
-+	udc->regs = (void __iomem *)dev_remap_addr_index(dev, CTRL_IOMEM_ID);
-+	if (!udc->regs)
-+		return -EINVAL;
-+
-+	ret = usba_udc_clk_init(dev, &priv->clks);
-+	if (ret)
-+		return ret;
-+
-+	udc->usba_ep = usba_udc_pdata(&pdata, udc);
-+
-+	udc->gadget.ops = &usba_udc_ops;
-+	udc->gadget.speed = USB_SPEED_HIGH,
-+	udc->gadget.is_dualspeed = 1,
-+	udc->gadget.name = "atmel_usba_udc",
-+
-+	ret = usb_add_gadget_udc((struct device *)dev, &udc->gadget);
-+	if (ret)
-+		goto err;
-+
-+	return 0;
-+err:
-+	free(udc->usba_ep);
-+
-+	clk_release_bulk(&priv->clks);
-+
-+	return ret;
-+}
-+
-+static int usba_udc_remove(struct udevice *dev)
-+{
-+	struct usba_priv_data *priv = dev_get_priv(dev);
-+
-+	usb_del_gadget_udc(&priv->udc.gadget);
-+
-+	free(priv->udc.usba_ep);
-+
-+	clk_release_bulk(&priv->clks);
-+
-+	return dm_scan_fdt_dev(dev);
-+}
-+
-+static int usba_udc_handle_interrupts(struct udevice *dev)
-+{
-+	struct usba_priv_data *priv = dev_get_priv(dev);
-+
-+	return usba_udc_irq(&priv->udc);
-+}
-+
-+static const struct usb_gadget_generic_ops usba_udc_gadget_ops = {
-+	.handle_interrupts	= usba_udc_handle_interrupts,
-+};
-+
-+static const struct udevice_id usba_udc_ids[] = {
-+	{ .compatible = "atmel,at91sam9rl-udc" },
-+	{ .compatible = "atmel,at91sam9g45-udc" },
-+	{ .compatible = "atmel,sama5d3-udc" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(atmel_usba_udc) = {
-+	.name	= "atmel_usba_udc",
-+	.id	= UCLASS_USB_GADGET_GENERIC,
-+	.of_match = usba_udc_ids,
-+	.ops = &usba_udc_gadget_ops,
-+	.probe = usba_udc_probe,
-+	.remove = usba_udc_remove,
-+	.priv_auto = sizeof(struct usba_priv_data),
-+};
-+#endif /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-diff --git a/drivers/usb/gadget/atmel_usba_udc.h b/drivers/usb/gadget/atmel_usba_udc.h
-index f6cb48c1cf..7f5e98f6c4 100644
---- a/drivers/usb/gadget/atmel_usba_udc.h
-+++ b/drivers/usb/gadget/atmel_usba_udc.h
-@@ -211,6 +211,9 @@
- #define EP0_EPT_SIZE		USBA_EPT_SIZE_64
- #define EP0_NR_BANKS		1
- 
-+#define FIFO_IOMEM_ID	0
-+#define CTRL_IOMEM_ID	1
-+
- #define DBG_ERR		0x0001	/* report all error returns */
- #define DBG_HW		0x0002	/* debug hardware initialization */
- #define DBG_GADGET	0x0004	/* calls to/from gadget driver */
-diff --git a/include/linux/usb/atmel_usba_udc.h b/include/linux/usb/atmel_usba_udc.h
-index c1c810759c..37c4f21849 100644
---- a/include/linux/usb/atmel_usba_udc.h
-+++ b/include/linux/usb/atmel_usba_udc.h
-@@ -20,6 +20,8 @@ struct usba_platform_data {
- 	struct usba_ep_data	*ep;
- };
- 
-+#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
- extern int usba_udc_probe(struct usba_platform_data *pdata);
-+#endif
- 
- #endif /* __LINUX_USB_USBA_H */
--- 
-2.45.2
+--z5i+vH7gBI5MiADc
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaieqsACgkQFHw5/5Y0
+tyyeKwv9H/d/5b+6HR3GhTx1ZLtM+ciMCqG93IveKZio5dWi2vxvqrjiVJQ0/FOj
+chK2/IUihlx8ZwWIm5aFDeA8Kd5xddoElaRSAIh0bAjtc6VY9yF8BKpQBjU2pN0W
+XBhHVb04B5mbFW7LSxpA7rD2GyG50ECtjnXsM01uF6iedati9M9aAZKY0wZD25+v
+lbZ3uBekzioPh4iFM9lrTOOp7/klmSY+OHkLhifDPTP3l4dQ+6FHOsQcg3ukygM9
+xhBVJU8HAfrPiRG4qYaLtpYxtipeMYY6Pb6MXa+PbJeBu+4WWqA6k9o4+Z5P3sei
+dvdMMv/lHx5EuJwqQDtX20SehIAe4XvX3OnSGVZbWZsghpArEDo0GTPlRRfvUd0A
+Xq3g5tCP6hgBofqZQ2zenbc+clBPjoj+oaKCmeQi0IzuxIrUAfJG0akB+Ag+FgDB
+W/UUJ87e+iiP4vFoq5WBUhlUQ2b4qs/lUkSQM3hKAoF8c6cSw6DHtVAyk9Cx5RTP
+c8PO/OWW
+=XVzF
+-----END PGP SIGNATURE-----
+
+--z5i+vH7gBI5MiADc--
