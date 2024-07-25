@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C44C3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DFDFC3DA49
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 949DE88464;
-	Thu, 25 Jul 2024 11:39:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 095ED8858C;
+	Thu, 25 Jul 2024 11:39:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kYjHi9WE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bTWJRRYw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63A0E881C1; Thu, 25 Jul 2024 11:39:05 +0200 (CEST)
+ id 16E868853E; Thu, 25 Jul 2024 11:39:10 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF96882BE
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:39:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEBA986D4C
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:39:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46P9d0kb071785;
- Thu, 25 Jul 2024 04:39:00 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46P9d4fx071797;
+ Thu, 25 Jul 2024 04:39:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1721900340;
- bh=kxqEt0smn7Pk7OJ2KohMr6ksKS6tr0XpAzeVtyZpLCY=;
+ s=ti-com-17Q1; t=1721900344;
+ bh=He6tc0WeqJv9dsQ5OcCKs1MqgHggonWR4vSD4arXRVQ=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=kYjHi9WEhND0qNDIf5eI+CqJk4uA6n5Vwwg4OYGVgrz50JGcq/IpWalOLfpqL081J
- fl3XdFzPcAEJIry7to+lmO/PTluSp7fPv8o+a2hh4E/Unm/vxGGM42dVOPpKJZn5nF
- S4DaTJXGGUyyFAC5wRsmWyc4EKwBIFPKavjy5yX0=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46P9d0g4079315
+ b=bTWJRRYwrCt/QNp6ziS7KG3SaRn/48bIFsEj8QmXW5T+GuhNncTtgpV2K1ARIvb0x
+ X3VRLded+bydxFq0i0tJryc4e4zLi7f46fn8vE53YsZOzGfIzCCKqZy9XW9KeU57Kj
+ xCZ+95ODk0NL9mlp0vxioZ/tDDgl6nnQDyWni9Y0=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46P9d4tQ001064
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Jul 2024 04:39:00 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 25 Jul 2024 04:39:04 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Jul 2024 04:38:59 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 04:39:04 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Jul 2024 04:38:59 -0500
+ Frontend Transport; Thu, 25 Jul 2024 04:39:04 -0500
 Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46P9ad8W066876;
- Thu, 25 Jul 2024 04:38:55 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46P9ad8X066876;
+ Thu, 25 Jul 2024 04:39:00 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>, Nishant Menon <nm@ti.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
@@ -59,9 +59,10 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
  <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V7 5/7] arm: dts: k3-am625-beagleplay: Package TIFS Stub
-Date: Thu, 25 Jul 2024 15:05:45 +0530
-Message-ID: <20240725093546.4193107-6-d-gole@ti.com>
+Subject: [PATCH V7 6/7] doc: beagle: am62x_beagleplay: Document the use of
+ TIFS Stub
+Date: Thu, 25 Jul 2024 15:05:46 +0530
+Message-ID: <20240725093546.4193107-7-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240725093546.4193107-1-d-gole@ti.com>
 References: <20240725093546.4193107-1-d-gole@ti.com>
@@ -85,79 +86,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for packaging the TIFS Stub as it's required for basic Low
-Power Modes like Deep Sleep.
-The reason it is packaged using binman and not inherently as part of the
-DM firmware is because for HS devices, customer owns the customer key
-and only customer has access to it.
-DM is release by TI, Since TI doesn't have access to the customer key it
-cannot have a component that is signed by customer key.
-Hence, it's left as part of binman to be signed and packaged.
+* Include the actual common documentation about the TIFS Stub and role
+  it plays to enable Low Power Modes in the platform.
+* Add the AM62x boot flow to show at which point the TIFS Stub actually
+  gets loaded.
+* Mention the TIFS Stub in the TISPL image format.
 
-Acked-by: Neha Malcom Francis <n-francis@ti.com>
 Signed-off-by: Dhruva Gole <d-gole@ti.com>
 ---
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 33 +++++++++++++++++++-
- 1 file changed, 32 insertions(+), 1 deletion(-)
+ doc/board/beagle/am62x_beagleplay.rst | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index 467cac68d0f6..a067b0ba3543 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -78,6 +78,23 @@
- 		};
- 	};
+diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
+index 01f04beb55aa..bc71aabaac3e 100644
+--- a/doc/board/beagle/am62x_beagleplay.rst
++++ b/doc/board/beagle/am62x_beagleplay.rst
+@@ -23,7 +23,7 @@ Boot Flow:
+ ----------
+ Below is the pictorial representation of boot flow:
  
-+	tifsstub-gp {
-+		filename = "tifsstub.bin_gp";
-+		ti-secure-rom {
-+			content = <&tifsstub_gp>;
-+			core = "secure";
-+			load = <0x60000>;
-+			sw-rev = <CONFIG_K3_X509_SWRV>;
-+			keyfile = "ti-degenerate-key.pem";
-+			tifsstub;
-+		};
-+		tifsstub_gp: tifsstub-gp.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+	};
-+
- 	ti-spl_unsigned {
- 		filename = "tispl.bin_unsigned";
- 		symlink = "tispl.bin";
-@@ -115,6 +132,19 @@
- 					};
- 				};
+-.. image:: ../ti/img/boot_diagram_k3_current.svg
++.. image:: ../ti/img/boot_diagram_am62.svg
+   :alt: Boot flow diagram
  
-+				tifsstub-gp {
-+					description = "tifsstub";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
+ - On this platform, 'TI Foundational Security' (TIFS) functions as the
+@@ -38,6 +38,10 @@ Sources:
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_tifsstub
 +
- 				dm {
- 					description = "DM binary";
- 					type = "firmware";
-@@ -158,7 +188,8 @@
- 				conf-0 {
- 					description = "k3-am625-beagleplay";
- 					firmware = "atf";
--					loadables = "tee", "dm", "spl";
-+					loadables = "tee", "dm", "spl",
-+					"tifsstub-gp";
- 					fdt = "fdt-0";
- 				};
- 			};
+ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+@@ -86,7 +90,7 @@ Image formats
+ 
+ - tispl.bin
+ 
+-.. image:: ../ti/img/dm_tispl.bin.svg
++.. image:: ../ti/img/tifsstub_dm_tispl.bin.svg
+   :alt: tispl.bin image format
+ 
+ Additional hardware for U-Boot development
 -- 
 2.34.1
 
