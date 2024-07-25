@@ -4,72 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28A8C3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:41:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43A0C3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:46:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C81E86FB1;
-	Thu, 25 Jul 2024 11:41:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 3544F87876;
+	Thu, 25 Jul 2024 11:46:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="GI3bYTUg";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J9iLvOrv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C650787E64; Thu, 25 Jul 2024 11:41:41 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00561876EA; Thu, 25 Jul 2024 11:46:31 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75745866EE
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:41:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8E7D086E35
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:46:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a7ac469e4c4so60796966b.0
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 02:41:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1721900499; x=1722505299;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=favh8M4n2AkUF/UmM2nwJU8h0tKz5jFs0zDkWyo5PoI=;
- b=GI3bYTUgwkm+2GpTxNXZP2jNB/AC5pB0eUGYB8T09awoYgXuuH4vkQxeN4ZiCJ7IDV
- 8JmgXV65o1BMKhh/2tqKa/U8ThVWDTFdqUcZXMPBRUtPmIrGhQldfsczo4dAq+zkbNPp
- Ge41p07tO1DGR0vXFwnu6/KmduqCkEeABRMzg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721900499; x=1722505299;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=favh8M4n2AkUF/UmM2nwJU8h0tKz5jFs0zDkWyo5PoI=;
- b=jtR0mwz7aes9L8nuHYrG1TpFlG9z+QdPN3WXg/dfh5HQ4pDE7vEEKqHonvlCajpZk1
- 5SpTFSwzOjtFa/uEID9XmFuadhRZzc5Q2MrTUupnV77/3K20ACVOhYg5PuwF+PXxCkV+
- je2SB4CsoKDcYPrtGaKkXm2YtH+roFN6cpFAd3b936wrzCWvS0MrphEWcfioGblK3was
- a5QjJjHO2Qi1nC74u52k1ImUK0B6mMBZCGkYaAa6GEjCbP2C0zRTQ4gVD9iV960MhX3D
- idI9/BQ+Du3/fv0SBKrIK5inYQgqfs0oEHfHWua/tswEEL9Sea55e8a3Tl706DGUTXcn
- C8xg==
-X-Gm-Message-State: AOJu0Yx0GBjmU6WSXdRlE3s9nJABXUaDHwxmEYnjZJ3gIndI/rzNK1Q0
- FU0GimRWeFycG3BKiTHgfwrG9KlSh5GRsXjffqTgHYfCDdU81ZPDGiVfstz6790kYWT5VGf/g9I
- llmoSQtZ7SkKx4QOeVQPoSG2YQeNeTIpPUKAIgw==
-X-Google-Smtp-Source: AGHT+IE4o0kRmmqT3ApXtBivqloTjS6U+/sVvrgJOUaghJW6f6XHHWU24btkfNueeuEdHCkb+EBP09euzYF27FmDBe4=
-X-Received: by 2002:a17:907:6d13:b0:a7a:acae:3419 with SMTP id
- a640c23a62f3a-a7ab3162321mr470902566b.28.1721900498915; Thu, 25 Jul 2024
- 02:41:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=fa7d=OZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1721900778;
+ bh=OByK4hGp+aWKwNXxXa9LUEjCntiDT5hnQbPT9ObN2LM=;
+ b=J9iLvOrvvQ7Hb7RKp/bd4NS5+2C6kPpVwrh8leJxl6rYsKsSyGaB/1D4jKRC+lzp9uzmxXnJn
+ 7k4pIHyoOTfvtBDpGYA2kBIU+v0AgQkSCuT3OPLN9mgAumKuJNeP5iqcVmVZg8W/Kv0PeL+rTqS
+ 31bZe0RcYqrR/zU3BudNajewKoo/mnAxIVRCwTINAKhOByTwG5lRWE7NhyapTz+gW1hNJGyrq+k
+ 8YtwCwGCPaR8fiv+jHVyyo9NauiGzmesoSn0nV+xW6H9MhIopyxU4Wb+M689/VboMsZ5/2FW/jY
+ eFb/NMJrA+Twq68JE4SEPLgMF6tJEbbWAykS1kmlEkcg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, Jonas
+ Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/2] rockchip: Remove files that can be included from
+ dts/upstream
+Date: Thu, 25 Jul 2024 09:46:02 +0000
+Message-ID: <20240725094609.3113632-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240721214552.63965-2-zli@ogga.fr>
- <59a891ca-1f02-4ffa-8727-0934025d88c5@microchip.com>
-In-Reply-To: <59a891ca-1f02-4ffa-8727-0934025d88c5@microchip.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 25 Jul 2024 11:41:28 +0200
-Message-ID: <CAOf5uwnP7gGDakGHL1cFSyJQefJ=DG+a5tORU3B8-a7q9+gBiA@mail.gmail.com>
-Subject: Re: [PATCH v2] mtd: nand: raw: atmel: Use ONFI ECC params if available
-To: Balamanikandan.Gunasundar@microchip.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66a21ee6fa07ff5ac5ecd3ca
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,83 +69,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Most Rockchip aarch64 targets have now migrated to use OF_UPSTREAM,
+however a few of the old dtsi and dt-bindings files still remain.
 
-On Thu, Jul 25, 2024 at 11:36=E2=80=AFAM
-<Balamanikandan.Gunasundar@microchip.com> wrote:
->
-> Acked-by: Balamanikandan Gunasundar
-> <balamanikandan.gunasundar@microchip.com>
->
-> On 22/07/24 3:15 am, Zixun LI wrote:
-> > [Some people who received this message don't often get email from admin=
-@hifiphile.com. Learn why this is important at https://aka.ms/LearnAboutSen=
-derIdentification ]
-> >
-> > EXTERNAL EMAIL: Do not click links or open attachments unless you know =
-the content is safe
-> >
-> > When ECC parameters are not specified in DT, first try ONFI ECC paramet=
-ers
-> > before fallback to maximum strength.
-> >
-> > It's the Linux driver behavior since the driver rewriting in f88fc12.
-> >
-> >  From then 2 nand system refactors have been done in 6a1b66d6 and 53576=
-c7b,
-> > chip->ecc_strength_ds and chip->ecc_step_ds became
-> > nanddev_get_ecc_requirements(). U-Boot didn't follow the refactor and
-> > always use these 2 fields.
-> >
-> > v2: Fix formatting, add upstream commit hash.
-> >
-> > Signed-off-by: Zixun LI <zli@ogga.fr>
-> > ---
-> >   drivers/mtd/nand/raw/atmel/nand-controller.c | 4 ++++
-> >   1 file changed, 4 insertions(+)
-> >
-> > diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd=
-/nand/raw/atmel/nand-controller.c
-> > index ee4ec6da58..817fab4ca3 100644
-> > --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > @@ -1029,11 +1029,15 @@ static int atmel_nand_pmecc_init(struct nand_ch=
-ip *chip)
-> >                  req.ecc.strength =3D ATMEL_PMECC_MAXIMIZE_ECC_STRENGTH=
-;
-> >          else if (chip->ecc.strength)
-> >                  req.ecc.strength =3D chip->ecc.strength;
-> > +       else if (chip->ecc_strength_ds)
-> > +               req.ecc.strength =3D chip->ecc_strength_ds;
-> >          else
-> >                  req.ecc.strength =3D ATMEL_PMECC_MAXIMIZE_ECC_STRENGTH=
-;
-> >
-> >          if (chip->ecc.size)
-> >                  req.ecc.sectorsize =3D chip->ecc.size;
-> > +       else if (chip->ecc_step_ds)
-> > +               req.ecc.sectorsize =3D chip->ecc_step_ds;
-> >          else
-> >                  req.ecc.sectorsize =3D ATMEL_PMECC_SECTOR_SIZE_AUTO;
-> >
-> > --
-> > 2.45.2
-> >
->
+This series remove remaining dtsi and header files that can be included
+directly from dts/upstream.
 
-Feel free to apply on microchip uboot branch if you are on hurry
+No changes is expected with this series.
 
-Michael
+Jonas Karlman (2):
+  rockchip: px30/rk3326: Use soc dtsi files from dts/upstream
+  rockchip: Use files from dts/upstream
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+ arch/arm/dts/px30-firefly.dts                |    4 +
+ arch/arm/dts/px30-u-boot.dtsi                |    4 +
+ arch/arm/dts/px30.dtsi                       | 2415 ------------------
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi   |    4 +
+ arch/arm/dts/rk3326.dtsi                     |   15 -
+ arch/arm/dts/rockchip-pinconf.dtsi           |  344 ---
+ include/dt-bindings/clock/px30-cru.h         |  389 ---
+ include/dt-bindings/clock/rockchip,rk808.h   |   11 -
+ include/dt-bindings/power/px30-power.h       |   27 -
+ include/dt-bindings/soc/rockchip,boot-mode.h |   16 -
+ include/dt-bindings/soc/rockchip,vop2.h      |   18 -
+ 11 files changed, 12 insertions(+), 3235 deletions(-)
+ delete mode 100644 arch/arm/dts/px30.dtsi
+ delete mode 100644 arch/arm/dts/rk3326.dtsi
+ delete mode 100644 arch/arm/dts/rockchip-pinconf.dtsi
+ delete mode 100644 include/dt-bindings/clock/px30-cru.h
+ delete mode 100644 include/dt-bindings/clock/rockchip,rk808.h
+ delete mode 100644 include/dt-bindings/power/px30-power.h
+ delete mode 100644 include/dt-bindings/soc/rockchip,boot-mode.h
+ delete mode 100644 include/dt-bindings/soc/rockchip,vop2.h
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+-- 
+2.45.2
+
